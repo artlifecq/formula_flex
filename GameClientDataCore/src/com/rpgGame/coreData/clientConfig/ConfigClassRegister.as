@@ -96,6 +96,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_cheats_node:String = "data.Q_cheats_node";
 		/**  资源副本数据库	副本类型 （1真气,2装备,3经验）	背景图													 */
 		public static const Q_daily_zone:String = "data.Q_daily_zone";
+		/**  每日副本刷怪配置表						 */
+		public static const Q_dailyzone_monster:String = "data.Q_dailyzone_monster";
 		/**  复活界面配置表				 */
 		public static const Q_die:String = "data.Q_die";
 		/**  继承消耗表			 */
@@ -150,6 +152,10 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_notify:String = "data.Q_notify";
 		/**  阵营关系				 */
 		public static const Q_relation:String = "data.Q_relation";
+		/**  2	0	1	热销道具		3		500	0	1	100	202	2	0 */
+		public static const Q_shop:String = "data.Q_shop";
+		/**  购买界面其他途径提示数据库				 */
+		public static const Q_source:String = "data.Q_source";
 		/**  tipsid	标题	描述 */
 		public static const Q_tipsinfo:String = "data.Q_tipsinfo";
 		/**  窗口链接				 */
@@ -261,6 +267,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_mission_segment", com.rpgGame.coreData.clientConfig.Q_mission_segment);
 			regClass("data.Q_notify", com.rpgGame.coreData.clientConfig.Q_notify);
 			regClass("data.Q_relation", com.rpgGame.coreData.clientConfig.Q_relation);
+			regClass("data.Q_source", com.rpgGame.coreData.clientConfig.Q_source);
 			regClass("data.Q_tipsinfo", com.rpgGame.coreData.clientConfig.Q_tipsinfo);
 			regClass("data.Q_windowInfo", com.rpgGame.coreData.clientConfig.Q_windowInfo);
 			regClass("data.Q_zone", com.rpgGame.coreData.clientConfig.Q_zone);

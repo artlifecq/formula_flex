@@ -1,12 +1,14 @@
 package com.rpgGame.appModule.role
 {
 	import com.rpgGame.app.manager.MenuManager;
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.goods.ItemUseManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.ItemSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
+	import com.rpgGame.app.utils.BreatheTweenUtil;
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.app.view.uiComponent.menu.Menu;
@@ -14,15 +16,21 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.appModule.bag.ItemSplitPanel;
 	import com.rpgGame.appModule.common.GoodsContainerPanel;
 	import com.rpgGame.appModule.common.itemRender.GridItemRender;
+	import com.rpgGame.appModule.shop.BackpackShopExt;
+	import com.rpgGame.appModule.shop.ItemSellAlertExtPanelExt;
 	import com.rpgGame.appModule.storage.StoragePanel;
+	import com.rpgGame.core.controller.MouseCursorController;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.core.utils.GameColorUtil;
+	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.SpriteStat;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
+	import com.rpgGame.coreData.enum.MouseCursorEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
@@ -35,6 +43,8 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.coreData.type.item.GridBGType;
 	
 	import flash.geom.Point;
+	import flash.ui.Mouse;
+	import flash.ui.MouseCursor;
 	import flash.utils.clearInterval;
 	import flash.utils.setInterval;
 	
@@ -74,7 +84,7 @@ package com.rpgGame.appModule.role
 		private var toStorageGridInfo:GridInfo;
 		private var cdTime:uint;
 		private var leftCD:int;
-		
+		private var _shopPanel:BackpackShopExt;
 		public function PacksView(skin:juese_Skin)
 		{
 			_skin=skin;
@@ -118,6 +128,7 @@ package com.rpgGame.appModule.role
 			_skin.lst_pack.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
 			
 			_skin.lst_pack.padding=3;
+			Mgr.shopMgr.sellItemCall=ItemSellAlertExtPanelExt.showAlert;
 		}
 		
 		
@@ -330,11 +341,12 @@ package com.rpgGame.appModule.role
 		 */		
 		protected function onTouchGrid( grid:DragDropItem ):void
 		{
+			var item:ClientItemInfo = grid.gridInfo.data as ClientItemInfo;
 			if(toStorage){//存到仓库去
 				if(grid.gridInfo.data==null){
 					return;
 				}
-				var item:ClientItemInfo = grid.gridInfo.data as ClientItemInfo;
+				
 				ItemSender.bagToStore(item.itemInfo.itemId,-1);
 				return;
 			}
@@ -343,6 +355,19 @@ package com.rpgGame.appModule.role
 			if(GoodsContainerPanel.isFaceMoving)//移动状态
 			{
 				goodsContainer.onFaceMoveSuccess(grid.gridInfo );
+				return;
+			}
+			if (item&&Mouse.cursor == MouseCursorEnum.SELL) 
+			{
+				if (item.qItem.q_sell==1) 
+				{
+					ItemSellAlertExtPanelExt.showAlert(grid.gridInfo.data as ClientItemInfo);
+				}
+				else
+				{
+					NoticeManager.mouseFollowNotify("该物品无法出售");
+				}
+				
 				return;
 			}
 			Menu.GetInstance().hide();
@@ -496,6 +521,11 @@ package com.rpgGame.appModule.role
 				refreshPackGrid();
 			}			
 			_skin.lst_pack.scrollToDisplayIndex(getScrollIndex(info));
+			//切换页
+			if (!info&&Mouse.cursor == MouseCursorEnum.SELL) 
+			{
+				enterOrLeaveSellMode(false);
+			}
 		}		
 		
 		private function getScrollIndex(itemInfo:ClientItemInfo):int
@@ -513,11 +543,24 @@ package com.rpgGame.appModule.role
 			}
 			return -1;
 		}
-		
+		private function enterOrLeaveSellMode(bool:Boolean):void
+		{
+			if (bool) 
+			{
+				MouseCursorController.showSell();
+				BreatheTweenUtil.add(_skin.imgBg,GameColorUtil.COLOR_YELLOW,15);
+			}
+			else
+			{
+				MouseCursorController.exitSellMode();
+				BreatheTweenUtil.remove(_skin.imgBg);
+			}
+		}
 		internal function onTouchTarget(target : DisplayObject):Boolean
 		{
 			switch (target) {
 				case _skin.btn_chushou:
+					enterOrLeaveSellMode(Mouse.cursor != MouseCursorEnum.SELL);
 					return true;
 				case _skin.btn_zhengli:
 					if(leftCD!=0){
@@ -541,6 +584,9 @@ package com.rpgGame.appModule.role
 					storagePanel.y=75;
 					return true;
 				case _skin.btn_shangdian:
+					shopPanel.x=225;
+					shopPanel.y=75;
+					this._skin.container.addChild(shopPanel);
 					return true;
 				case _skin.btn_paimaihang:
 					return true;
@@ -581,6 +627,24 @@ package com.rpgGame.appModule.role
 			
 			storagePanel.hide();
 			itemSplitPanel.hide();
+			if (_shopPanel) 
+			{
+				MCUtil.removeSelf(_shopPanel);
+			}
+			if (Mouse.cursor == MouseCursorEnum.SELL) 
+			{
+				enterOrLeaveSellMode(false);
+			}
 		}
+
+		public function get shopPanel():BackpackShopExt
+		{
+			if (!_shopPanel) 
+			{
+				_shopPanel=new BackpackShopExt();
+			}
+			return _shopPanel;
+		}
+
 	}
 }

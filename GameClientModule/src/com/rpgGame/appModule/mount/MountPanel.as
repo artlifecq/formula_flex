@@ -6,6 +6,7 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.appModule.shop.ItemGetAdvisePanelExt;
 	import com.rpgGame.appModule.systemset.TouchToState;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.manager.StarlingLayerManager;
@@ -37,7 +38,7 @@ package com.rpgGame.appModule.mount
 		private var _mountupContent:MountUpExpConent;
 		private var _mountShowData:MountShowData;
 		private var _extraItemList:Vector.<ExtraButton>;
-		private var _shopPane:MountShowPane;
+		//private var _shopPane:MountShowPane;
 		private var _touchState:TouchToState;
 		public function MountPanel():void
 		{
@@ -181,17 +182,18 @@ package com.rpgGame.appModule.mount
 		}
 		private function showShopPane():void
 		{
-			if(_shopPane!=null&&_shopPane.parent!=null)
-				return ;
-			if(_shopPane==null)
-			{
-				_shopPane = new MountShowPane();
-				_shopPane.addEventListener(Event.REMOVED,panleremoveFormSatgeHander);
-			}
-			this.parent.addChild(_shopPane);
-			_shopPane.updataItem(_mountShowData.upLevelItem);
+//			if(_shopPane!=null&&_shopPane.parent!=null)
+//				return ;
+//			if(_shopPane==null)
+//			{
+//				_shopPane = new MountShowPane();
+//				_shopPane.addEventListener(Event.REMOVED,panleremoveFormSatgeHander);
+//			}
+//			this.parent.addChild(_shopPane);
+//			_shopPane.updataItem(_mountShowData.upLevelItem);
 			//			changePaneHander();
-			onStageResize(_stage.stageWidth,_stage.stageHeight);
+			ItemGetAdvisePanelExt.showBuyItem(_mountShowData.upLevelItem.qItem.q_id,this);
+			onStageResize(_stage.stageWidth-ItemGetAdvisePanelExt.ins.width,_stage.stageHeight);
 		}
 		private function panleremoveFormSatgeHander():void
 		{
@@ -201,17 +203,17 @@ package com.rpgGame.appModule.mount
 		{
 			var gap:int = 20;
 			var w:int = this.width;
-			if(_shopPane!=null&&_shopPane.isAddToStage)
-			{
-				w +=gap+_shopPane.width;
-			}
+//			if(_shopPane!=null&&_shopPane.isAddToStage)
+//			{
+//				w +=gap+_shopPane.width;
+//			}
 			this.x =(sw - w)/2;
 			this.y =(sh - this.height)/2;
-			if(_shopPane!=null&&_shopPane.isAddToStage)
-			{
-				_shopPane.x = this.width+this.x +gap;
-				_shopPane.y = (sh - _shopPane.height)/2;
-			}
+//			if(_shopPane!=null&&_shopPane.isAddToStage)
+//			{
+//				_shopPane.x = this.width+this.x +gap;
+//				_shopPane.y = (sh - _shopPane.height)/2;
+//			}
 		}
 		private function initEvent():void
 		{
@@ -297,13 +299,14 @@ package com.rpgGame.appModule.mount
 		
 		override public function hide():void
 		{
-			if(_shopPane!=null)
-			{
-				_shopPane.removeEventListener(Event.REMOVED,panleremoveFormSatgeHander);
-				if(_shopPane.parent!=null)
-					_shopPane.parent.removeChild(_shopPane,true);
-				_shopPane = null;
-			}
+//			if(_shopPane!=null)
+//			{
+//				_shopPane.removeEventListener(Event.REMOVED,panleremoveFormSatgeHander);
+//				if(_shopPane.parent!=null)
+//					_shopPane.parent.removeChild(_shopPane,true);
+//				_shopPane = null;
+//			}
+			ItemGetAdvisePanelExt.remove(this);
 			removeEvent();
 			super.hide();
 		}

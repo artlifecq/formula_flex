@@ -28,7 +28,7 @@ package org.mokylin.skin.app.beibao
 	import org.mokylin.skin.component.progress.progress_role2_Skin;
 	import org.mokylin.skin.component.tabbar.TabBarSkin_pack;
 	import org.mokylin.skin.component.uinumber.UINumberSkin_miaoshang;
-	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli;
+	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow2;
 
 	/**
 	 * @private
@@ -44,7 +44,7 @@ package org.mokylin.skin.app.beibao
 
 		public var LoveIcon:feathers.controls.UIAsset;
 
-		public var Num_zhandouli:feathers.controls.UINumber;
+		public var NumZhanli:feathers.controls.UINumber;
 
 		public var btn_cangku:feathers.controls.Button;
 
@@ -75,6 +75,8 @@ package org.mokylin.skin.app.beibao
 		public var icon_yingzibang:feathers.controls.UIAsset;
 
 		public var icon_yuanbao:feathers.controls.UIAsset;
+
+		public var imgBg:feathers.controls.UIAsset;
 
 		public var lbl_baojijiacheng:feathers.controls.Label;
 
@@ -238,17 +240,18 @@ package org.mokylin.skin.app.beibao
 			return temp;
 		}
 
-		private function Num_zhandouli_i():feathers.controls.UINumber
+		private function NumZhanli_i():feathers.controls.UINumber
 		{
 			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
-			Num_zhandouli = temp;
-			temp.name = "Num_zhandouli";
-			temp.gap = -3;
-			temp.height = 25;
-			temp.number = 021222;
-			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli;
-			temp.width = 147;
-			temp.x = 128;
+			NumZhanli = temp;
+			temp.name = "NumZhanli";
+			temp.gap = -13;
+			temp.height = 33;
+			temp.label = "1364364";
+			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow2;
+			temp.width = 148;
+			temp.x = 130;
+			temp.y = -1;
 			return temp;
 		}
 
@@ -525,7 +528,7 @@ package org.mokylin.skin.app.beibao
 			temp.name = "footMsg";
 			temp.x = 237;
 			temp.y = 488;
-			temp.elementsContent = [__juese_Skin_UIAsset4_i(),__juese_Skin_UIAsset5_i(),ui_zhandou_i(),Num_zhandouli_i()];
+			temp.elementsContent = [__juese_Skin_UIAsset4_i(),__juese_Skin_UIAsset5_i(),ui_zhandou_i(),NumZhanli_i()];
 			return temp;
 		}
 
@@ -581,6 +584,19 @@ package org.mokylin.skin.app.beibao
 			temp.name = "icon_yuanbao";
 			temp.styleName = "ui/common/tubiao/yuanbao_24.png";
 			temp.x = 133;
+			temp.y = 27;
+			return temp;
+		}
+
+		private function imgBg_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			imgBg = temp;
+			temp.name = "imgBg";
+			temp.height = 316;
+			temp.styleName = "ui/common/background/neikuang_2.png";
+			temp.width = 339;
+			temp.x = 2;
 			temp.y = 27;
 			return temp;
 		}
@@ -906,7 +922,7 @@ package org.mokylin.skin.app.beibao
 			temp.name = "packs";
 			temp.x = 590;
 			temp.y = 73;
-			temp.elementsContent = [__juese_Skin_UIAsset7_i(),__juese_Skin_UIAsset8_i(),__juese_Skin_UIAsset9_i(),__juese_Skin_UIAsset10_i(),__juese_Skin_UIAsset11_i(),tab_pack_i(),money_i(),Icons_i(),lst_pack_i()];
+			temp.elementsContent = [__juese_Skin_UIAsset7_i(),__juese_Skin_UIAsset8_i(),__juese_Skin_UIAsset9_i(),__juese_Skin_UIAsset10_i(),__juese_Skin_UIAsset11_i(),tab_pack_i(),money_i(),Icons_i(),imgBg_i(),lst_pack_i()];
 			return temp;
 		}
 
@@ -1388,9 +1404,9 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ui_zhandou = temp;
 			temp.name = "ui_zhandou";
-			temp.styleName = "ui/common/zhandouli2.png";
-			temp.x = 76;
-			temp.y = 1;
+			temp.styleName = "ui/common/zdl2.png";
+			temp.x = 59;
+			temp.y = -11;
 			return temp;
 		}
 

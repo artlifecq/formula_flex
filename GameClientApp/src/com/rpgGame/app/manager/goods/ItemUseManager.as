@@ -285,12 +285,12 @@ package com.rpgGame.app.manager.goods
 				return;
 			}
 			
-			//满足此条件则为卖出
-			if (AppManager.isAppInScene(AppConstant.SHOP_PANEL) && Mouse.cursor == MouseCursorEnum.SELL)
-			{
-				SmallShopItemManager.reqSellGoods(item);
-				return;
-			}
+//			//满足此条件则为卖出
+//			if (AppManager.isAppInScene(AppConstant.SHOP_PANEL) && Mouse.cursor == MouseCursorEnum.SELL)
+//			{
+//				//SmallShopItemManager.reqSellGoods(item);
+//				return;
+//			}
 			
 			if (!canUse(item))
 			{

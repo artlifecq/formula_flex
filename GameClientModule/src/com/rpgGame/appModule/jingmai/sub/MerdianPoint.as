@@ -82,13 +82,32 @@ package com.rpgGame.appModule.jingmai.sub
 		private var imgQuan:UIAsset;
 		private function setIcoBg(isUnLock:Boolean):void
 		{
-			if (!isUnLock||imgQuan!=null) 
+			var config:Q_meridian=MeridianCfg.getMeridianCfg(acupointId);
+			if (0==config.q_showtype)
 			{
-				return;
+				if (!isUnLock||imgQuan!=null) 
+				{
+					return;
+				}
+				imgQuan=new UIAsset();
+				imgQuan.styleName="ui/app/beibao/tu/quan/4.png";
+				MCUtil.addBefore(imgPoint,imgQuan,_imgIcon);
 			}
-			imgQuan=new UIAsset();
-			imgQuan.styleName="ui/app/beibao/tu/quan/4.png";
-			MCUtil.addBefore(imgPoint,imgQuan,_imgIcon);
+			
+		}
+		private function setStoneBg():void
+		{
+			var config:Q_meridian=MeridianCfg.getMeridianCfg(acupointId);
+			if (1==config.q_showtype) 
+			{
+				var url:String="ui/app/beibao/icons/icon_bg/"+config.q_stone_type+".png";
+				if (imgPoint.styleName!=url) 
+				{
+					imgPoint.styleName=url;
+					imgPoint.width=29;
+					imgPoint.height=29;
+				}
+			}
 		}
 		private function setLineLink(useTween:Boolean):void
 		{
@@ -113,12 +132,13 @@ package com.rpgGame.appModule.jingmai.sub
 			if (canActive) 
 			{
 				this.labAtt.visible=true;
-				setIcoUrl("ui/app/beibao/icons/icon/bianshi/"+config.q_huponameurl+".png",30,32);
+				
 				hasBetter=(config.q_need_level<=MainRoleManager.actorInfo.totalStat.level)&&Mgr.meridianMgr.getBetterStone(config.q_stone_type,_data.stone.length>0?_data.stone[0]:null).length>0;
 				//没镶嵌石头置灰
 				if (_data.stone.length==0) 
 				{
 					//setIconFilter(true);
+					setIcoUrl("");
 					needFilter=true;
 					labAtt.text="0";
 					if (hasBetter) 
@@ -133,6 +153,7 @@ package com.rpgGame.appModule.jingmai.sub
 				else 
 				{
 					var stoneLv:int=ItemConfig.getItemLevelNum(_data.stone[0].itemModelId);
+					setIcoUrl("ui/app/beibao/icons/icon/bianshi/"+config.q_stone_type+"_"+stoneLv+".png",30,32);
 					labAtt.text=stoneLv+"";
 					if (hasBetter) 
 					{
@@ -185,7 +206,7 @@ package com.rpgGame.appModule.jingmai.sub
 				if (canActive) 
 				{
 				
-					setIcoUrl("ui/app/beibao/icons/icon/bianshi/"+config.q_huponameurl+".png",30,32);
+					setIcoUrl("ui/app/beibao/icons/icon/bianshi/"+config.q_huponameurl+".png",28,28);
 					//setIconFilter(true);
 					needFilter=true;
 					//判断能否升级
@@ -245,6 +266,7 @@ package com.rpgGame.appModule.jingmai.sub
 			{
 				this._acupointId=data.MeridId+"_"+data.acuPointId+"_"+data.level;
 			}
+			setStoneBg();
 			var config:Q_meridian=MeridianCfg.getMeridianCfg(acupointId);
 			this._careAcuId=config.q_need_meridian_id;
 			if (config.q_showtype==0) 
@@ -255,6 +277,7 @@ package com.rpgGame.appModule.jingmai.sub
 			{
 				showSubJX(config,useTween);
 			}
+			
 		}
 		private function setIconFilter(bool:Boolean):void
 		{

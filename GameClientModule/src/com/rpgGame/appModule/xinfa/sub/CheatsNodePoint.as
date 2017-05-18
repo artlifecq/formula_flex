@@ -104,15 +104,31 @@ package  com.rpgGame.appModule.xinfa.sub
 		private var imgQuan:UIAsset;
 		private function setIcoBg(isUnLock:Boolean):void
 		{
-			if (!isUnLock||imgQuan!=null) 
+			if (0==_data.getNodeType()) 
 			{
-				return;
+				if (!isUnLock||imgQuan!=null) 
+				{
+					return;
+				}
+				imgQuan=new UIAsset();
+				imgQuan.styleName="ui/app/beibao/tu/quan/"+CheatsCfg.getCheats(_data.cheatsId).q_default+".png";
+				MCUtil.addBefore(imgPoint,imgQuan,_imgIcon);
 			}
-			imgQuan=new UIAsset();
-			imgQuan.styleName="ui/app/beibao/tu/quan/"+CheatsCfg.getCheats(_data.cheatsId).q_default+".png";
-			MCUtil.addBefore(imgPoint,imgQuan,_imgIcon);
+			
 		}
-		
+		private function setStoneBg():void
+		{
+			if (1==_data.getNodeType()) 
+			{
+				var url:String="ui/app/beibao/icons/icon_bg/"+_data.getConfig().q_stone_type+".png";
+				if (imgPoint.styleName!=url) 
+				{
+					imgPoint.styleName=url;
+					imgPoint.width=29;
+					imgPoint.height=29;
+				}
+			}
+		}
 		private function showSubJX(config:Q_cheats_node,useTween:Boolean):void
 		{
 		
@@ -123,7 +139,7 @@ package  com.rpgGame.appModule.xinfa.sub
 			if (hasUnlock) 
 			{
 				this.labAtt.visible=true;
-				setIcoUrl("ui/app/beibao/icons/icon/bianshi/"+config.q_huponameurl+".png",30,32);
+				//setIcoUrl("ui/app/beibao/icons/icon/bianshi/"+config.q_huponameurl+".png",30,32);
 				hasBetter=Mgr.meridianMgr.getBetterStone(config.q_stone_type,_data.getStone()).length>0;
 				//没镶嵌石头置灰
 				if (_data.getStone()==null) 
@@ -138,10 +154,12 @@ package  com.rpgGame.appModule.xinfa.sub
 					{
 						labAtt.color=GameColorUtil.COLOR_GRAY;
 					}
+					setIcoUrl("");
 				}
 				else 
 				{
 					var stoneLv:int=ItemConfig.getItemLevelNum(_data.getStone().itemModelId);
+					setIcoUrl("ui/app/beibao/icons/icon/bianshi/"+config.q_stone_type+"_"+stoneLv+".png",30,32);
 					labAtt.text=stoneLv+"";
 					if (hasBetter) 
 					{
@@ -188,7 +206,7 @@ package  com.rpgGame.appModule.xinfa.sub
 			var hasUnlock:Boolean=Mgr.cheatsMgr.getNodeIsUnlock(_data);
 			if (hasUnlock) 
 			{
-				setIcoUrl("ui/app/beibao/icons/icon/bianshi/"+config.q_huponameurl+".png",30,32);
+				setIcoUrl("ui/app/beibao/icons/icon/bianshi/"+config.q_huponameurl+".png",28,28);
 				//setIconFilter(true);
 				//判断能否升级
 				labAtt.text=data.curLevel.toString();
@@ -219,7 +237,7 @@ package  com.rpgGame.appModule.xinfa.sub
 			{
 				return;
 			}
-			
+			setStoneBg();
 			var config:Q_cheats_node=_data.getConfig();
 			this._careAcuId=config.q_need_node_id;
 			if (config.q_type==0) 
@@ -230,6 +248,7 @@ package  com.rpgGame.appModule.xinfa.sub
 			{
 				showSubJX(config,useTween);
 			}
+			
 		}
 		private function setIconFilter(bool:Boolean):void
 		{
