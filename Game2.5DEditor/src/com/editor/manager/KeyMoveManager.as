@@ -251,6 +251,13 @@ package com.editor.manager
 				object.x = position.x;
 				object.y = position.y;
 				object.z = position.z;
+				
+				var dx : Number = directionPosX * speed;
+				var dz : Number = directionPosZ * speed;
+				var dy : Number = directionPosY * speed;
+				camera.moveRight(dx);
+				camera.moveForward(dz);
+				camera.moveUp(dy);
 			}
 			else if (CameraController.mode == CameraModeEnum.FIXED_TARGET_LOOK_AT_TARGET || CameraController.mode == CameraModeEnum.DIRECT_CAMERA)
 			{

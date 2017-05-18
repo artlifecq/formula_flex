@@ -103,6 +103,7 @@ package com.game.engine2D
 			_current = this;
 			_view = view;
 			_cameraOrthographicLens = new CameraOrthographicLens(1000);
+			_cameraOrthographicLens.viewportScale = 1.1;
 			
 			//场景引擎配置
 			sceneConfig = new SceneConfig($width,$height);
