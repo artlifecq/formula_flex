@@ -226,7 +226,7 @@ package com.rpgGame.app.utils
 			grid.clear();
 			
 			var size:int = grid.iconSize;
-			grid.showQuality( -1 );
+//			grid.showQuality( -1 );
 			grid.faceInfo = data;
 			grid.setIconResName( ClientConfig.getSkillIcon( data.icoName, size ) );
 			grid.setIsShowCdTm( true );

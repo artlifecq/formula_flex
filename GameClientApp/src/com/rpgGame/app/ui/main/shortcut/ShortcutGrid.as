@@ -83,7 +83,7 @@ package com.rpgGame.app.ui.main.shortcut
 			addChild(imgAutoUse);
 			imgAutoUse.x = 4;
 			imgAutoUse.y = 4;
-			imgAutoUse.styleName = ClientConfig.getSpellAutoIco();
+//			imgAutoUse.styleName = ClientConfig.getSpellAutoIco();//先注释掉不用自动释放
 			setIsShowCdTm(true);
 			effectSk=new Inter3DContainer();
 			effectSk.x = _iconSize/2+6;
