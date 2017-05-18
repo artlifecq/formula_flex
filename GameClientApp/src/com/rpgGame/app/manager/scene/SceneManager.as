@@ -489,7 +489,25 @@ package com.rpgGame.app.manager.scene
 			}
 			return objList;
 		}
-
+		/**返回场景采集物*/
+		public static function getSceneCollectList(sceneName : String = GameScene3DType.MAIN_SCENE) : Vector.<SceneRole>
+		{
+			var objList : Vector.<SceneRole> = new Vector.<SceneRole>();
+			//
+			var scene : GameScene3D = getScene(sceneName);
+			if (scene)
+			{
+				var charList : Vector.<BaseRole> = scene.sceneRoleList;
+				for each (var baseObj : SceneRole in charList)
+				{
+					if (baseObj && baseObj.usable && baseObj.type == SceneCharType.COLLECT)
+					{
+						objList.push(baseObj);
+					}
+				}
+			}
+			return objList;
+		}
 		/**
 		 * 根据怪物配置id获取场景中的怪物列表
 		 * @param modelId

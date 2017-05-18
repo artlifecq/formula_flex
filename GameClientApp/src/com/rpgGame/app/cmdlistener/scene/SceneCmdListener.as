@@ -42,10 +42,13 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.coreData.cfg.AttachEffectCfgData;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.Attach_effect;
 	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
+	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
+	import com.rpgGame.coreData.info.collect.CollectObjcetInfo;
 	import com.rpgGame.coreData.info.map.EnumMapUnitType;
 	import com.rpgGame.coreData.info.move.RoleMoveInfo;
 	import com.rpgGame.coreData.info.task.target.TaskFollowEscortInfo;
@@ -55,6 +58,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.role.RoleType;
+	import com.rpgGame.coreData.role.SceneCollectData;
 	import com.rpgGame.coreData.role.SceneDropGoodsData;
 	import com.rpgGame.coreData.role.SceneDropGoodsItem;
 	import com.rpgGame.coreData.role.TrapInfo;
@@ -701,21 +705,41 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function addMonster(buffer : ByteArray) : void
 		{
-			var data : MonsterData = new MonsterData(RoleType.TYPE_MONSTER);
-			
 			var info : MonsterInfo = new MonsterInfo();
 			info.read(buffer);
+			var qData : Q_monster = MonsterDataManager.getData(info.modelId);
+			if(qData!=null&&qData.q_monster_type==5)//如果是采集物 去走采集物创建流程
+			{
+				var collectData : SceneCollectData = new SceneCollectData();
+				collectData.serverID = info.monsterId;
+				collectData.id = info.monsterId.ToGID();
+				collectData.modelID = info.modelId;
+				collectData.sceneID = info.mapModelId;
+				collectData.name = info.monsterName;
+				collectData.avatarRes = qData.q_body_res;
+				collectData.sizeScale = qData.q_scale > 0 ? (qData.q_scale * 0.01) : 1;
+				collectData.direction = qData.q_direction;
+				collectData.x = info.position.x;
+				collectData.y = info.position.y;
+				collectData.isDynamicCreate =true;
+				SceneRoleManager.getInstance().createCollect(collectData);
+			}
+			else//走怪物和npc创建流程
+			{
 			
-			data.serverID = info.monsterId;
-			data.id = info.monsterId.ToGID();
-			data.modelID = info.modelId;
+				var data : MonsterData = new MonsterData(RoleType.TYPE_MONSTER);
+				data.serverID = info.monsterId;
+				data.id = info.monsterId.ToGID();
+				data.modelID = info.modelId;
+				RoleData.readMonster(data,info);
+				var sceneRole : SceneRole =SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
+				addTaskmark(sceneRole);
+				
+				GameLog.addShow("添加怪物客户端id：" + data.id);
+				GameLog.addShow("添加怪物服务器id：" + data.serverID.ToString());
+			}
 			
-			RoleData.readMonster(data,info);
-			var sceneRole : SceneRole =SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
-			addTaskmark(sceneRole);
 			
-			GameLog.addShow("添加怪物客户端id：" + data.id);
-			GameLog.addShow("添加怪物服务器id：" + data.serverID.ToString());
 		}
 		
 		/**任务npc投诉挂问号*/
