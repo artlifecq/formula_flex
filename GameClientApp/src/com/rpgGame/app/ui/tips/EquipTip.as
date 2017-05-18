@@ -293,14 +293,14 @@ package com.rpgGame.app.ui.tips
 			curY=curY+label.height+5;
 			createLine(10,curY,260);
 			
-			name=HtmlTextUtil.getTextColor(0x8B8D7B,"售价:");
-			value=HtmlTextUtil.getTextColor(0x5CB006,"     "+_itemInfo.qItem.q_sell_price.toString());
+			name=HtmlTextUtil.getTextColor(0x8B8D7B,"回收价格:");
+			value=HtmlTextUtil.getTextColor(0x5CB006,"      "+_itemInfo.qItem.q_sell_price.toString());
 			_itemTip.container.addChild(yinIcon);
 			label=createLabel(name,value);
 			curY=curY+5
 			label.x=10;
 			label.y=curY;
-			yinIcon.x=50;
+			yinIcon.x=80;
 			yinIcon.y=curY-5;
 			
 //			curY+=yinIcon.y+yinIcon.height+10;

@@ -9,15 +9,21 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
+	import com.rpgGame.coreData.clientConfig.Q_item;
+	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.task.PrizeInfo;
 	
+	import flash.events.MouseEvent;
 	import flash.geom.Point;
+	import flash.ui.Mouse;
 	
 	import feathers.controls.UIAsset;
 	
 	import gs.TweenLite;
 	import gs.easing.Quad;
 	
+	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 	
@@ -26,6 +32,20 @@ package com.rpgGame.app.manager
 		//道具滑动进包队列
 		private static var _tweenHT:HandleThread = new HandleThread();
 		
+		
+		public static function flyItemToBag(itemId:int):void
+		{
+			var qItem:Q_item=ItemConfig.getQItemByID(itemId);
+			if (qItem) 
+			{
+				var iconFace:UIAsset = new UIAsset();
+				iconFace.x=Starling.current.nativeStage.mouseX;
+				iconFace.y=Starling.current.nativeStage.mouseY;
+				iconFace.styleName =ClientConfig.getItemIcon(qItem.q_icon+"",IcoSizeEnum.ICON_48);
+				addTweenHT(null,iconFace,null);
+			}
+			
+		}
 		/**
 		 * 物品缓动进包裹 
 		 * @param info
