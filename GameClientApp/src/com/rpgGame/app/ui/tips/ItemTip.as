@@ -227,12 +227,12 @@ package com.rpgGame.app.ui.tips
 			createLine(10,curY,280);
 			curY+=10;
 			
-			name=HtmlTextUtil.getTextColor(nameColor,"售价:");
-			value=HtmlTextUtil.getTextColor(valueColor2,"     "+_itemInfo.qItem.q_sell_price.toString());
+			name=HtmlTextUtil.getTextColor(nameColor,"回收价格:");
+			value=HtmlTextUtil.getTextColor(valueColor2,"      "+_itemInfo.qItem.q_sell_price.toString());
 			_itemTip.container.addChild(yinIcon);
 			
 			label=createLabel(name,value);
-			yinIcon.x=50;
+			yinIcon.x=80;
 			yinIcon.y=curY-5;
 			_itemTip.bg.height=curY+25;
 		}

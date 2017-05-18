@@ -7,27 +7,28 @@ package com.rpgGame.coreData.clientConfig
 	* 【**不可手动修改此类**】，
 	*	
 	* 【任何修改都将被生成工具覆盖，如需修改请直接修改具体的config文件】
-	* @author fly.AutoUICreater
-	* @modifier L.L.M.Sunny
-	* 修改时间：2015-7-2 上午10:05:12
+	* @author NEIL
 	* 
 	*/
 	public class ActivityBarInfo
 	{
-		 /**  类型 */
+		 /**  LUNJIAN */
 		public var key:String;
-		 /**  图标排序(升序排列) */
+		 /**    */
 		public var order:int;
-		 /**  类型对应的名字 */
+		 /**  论剑 */
 		public var title:String;
+		 /**  论剑tipReady */
 		public var tipReady:String;
+		 /**  论剑message */
 		public var message:String;
+		 /**  论剑tipRuning */
 		public var tipRuning:String;
-		 /**  开启时间[可选] */
+		 /**    */
 		public var openTime:int;
-		 /**  持续时间[可选] */
+		 /**    */
 		public var duration:int;
-		 /**  预告时间[可选] */
+		 /**    */
 		public var openTimeAdvance:int;
 
 	}

@@ -12,8 +12,6 @@ package com.rpgGame.app.state.role.control
 	
 	import flash.utils.getQualifiedClassName;
 	
-	import away3d.animators.transitions.CrossfadeTransition;
-	
 	import gs.TweenLite;
 
 	public class FlyUpState extends BuffState

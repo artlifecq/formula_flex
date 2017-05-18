@@ -117,5 +117,8 @@ package com.rpgGame.coreData.cfg.item
 		 */
 		public static const IHT_USE:int =rEnum.next;
 		
+		/** 随身商店 **/
+		public static const BACKPACK_SHOP : int = rEnum.next;
+		
 	}
 }

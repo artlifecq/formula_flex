@@ -19,6 +19,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.jianghu.lunjian.LunJian_Skin;
 	
+	import starling.display.DisplayObject;
 	import starling.events.Event;
 	
 	/**
@@ -45,14 +46,13 @@ package com.rpgGame.appModule.dungeon.lunjian
 		private function initView():void
 		{
 			_skin.list_map.itemRendererType = NpcMapItemRender;
-			pageContainer=new PageContainerUI(3,_skin.btnPrev,_skin.btnNext);
+			pageContainer=new PageContainerUI(3,_skin.btnP,_skin.btnN);
 			pageContainer.itemRendererType=LunJianItemRender;
 			pageContainer.x=_skin.list_map.x+_skin.list_map.width+5;
 			pageContainer.y=_skin.list_map.y;
 			
-			_skin.container.addChild(pageContainer);
-			_skin.container.addChild(_skin.btnPrev);
-			_skin.container.addChild(_skin.btnNext);
+			var index:int=_skin.container.getChildIndex(_skin.btnP);
+			_skin.container.addChildAt(pageContainer,index);
 			
 			npcDatas=new ListCollection();
 			diffMap=new  HashMap(); 
@@ -72,6 +72,11 @@ package com.rpgGame.appModule.dungeon.lunjian
 			
 			mapDatas=new ListCollection(mapList);
 			_skin.list_map.dataProvider=mapDatas;
+		}
+		
+		override protected function onTouchTarget(target:DisplayObject):void
+		{
+			super.onTouchTarget(target);
 		}
 		
 		private function sortMaps(dataA:SceneData,dataB:SceneData):int
@@ -170,6 +175,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 				npcDatas.addItem(data);
 			}
 			npcDatas.updateAll();
+			pageContainer.currentPage=1;
 		}
 		
 		override public function hide():void

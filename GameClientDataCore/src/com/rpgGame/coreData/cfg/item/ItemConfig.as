@@ -159,7 +159,7 @@ package com.rpgGame.coreData.cfg.item
 		{
 			var cloor:uint = getItemQualityColor(cfgId);
 			var itemName:String = getItemName(cfgId);
-			return TextFormatUtil.getColorSizeText(itemName,cloor,12);
+			return TextFormatUtil.getColorSizeText(itemName,cloor,14);
 		}
 		
 		/** 物品品质颜色 */

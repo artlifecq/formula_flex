@@ -1,17 +1,18 @@
 package com.rpgGame.app.sender
 {
-	import com.rpgGame.app.utils.ReqLockUtil;
+	import com.rpgGame.netData.shop.bean.ShopItemInfo;
+	import com.rpgGame.netData.shop.message.CSBuyItemMessage;
+	import com.rpgGame.netData.shop.message.CSRebuyListMessage;
+	import com.rpgGame.netData.shop.message.CSRebuyMessage;
+	import com.rpgGame.netData.shop.message.CSSellItemMessage;
+	import com.rpgGame.netData.shop.message.CSSellItemsMessage;
 	
-	import app.cmd.ShopModuleMessages;
-	
-	import org.game.netCore.connection.SocketConnection_protoBuffer;
-	
-	import utils.TimerServer;
+	import org.game.netCore.connection.SocketConnection;
+	import org.game.netCore.data.long;
 
 	/**
 	 *商店系统
-	 * @author lpp
-	 * ModuleID==7
+	 * @author yfl
 	 */
 	public class ShopSender extends BaseSender
 	{
@@ -19,132 +20,66 @@ package com.rpgGame.app.sender
 		{
 			super();
 		}
-		
 		/**
-		 * 请求打开NPC 
-		 * @param npcId
-		 * @param listIndex 功能列表索引
 		 * 
-		 */		
-		public static function reqOpenNpcShop(shopId:int):void
+		 * @param _shopType 商店类型
+		 * @param shopvo 商品信息
+		 * @param num 数量
+		 * @param costType 货币类型
+		 * @param _discountItemid 是否使用折扣卡
+		 */        
+		public static function ReqBuyItem(shopvo:ShopItemInfo, num:int, _discountItemid:long = null):void
 		{
-//			if( ReqLockUtil.isReqLocked( ShopModuleMessages.C2S_OPEN_NPC_SHOP ) )
-//				return;
-//			ReqLockUtil.lockReq( ShopModuleMessages.C2S_OPEN_NPC_SHOP, 5 * 1000 );
-			
-			_bytes.clear();
-			_bytes.writeVarint32(shopId);
-			SocketConnection_protoBuffer.send(ShopModuleMessages.C2S_OPEN_NPC_SHOP,_bytes);
-		}
-		
-		/**
-		 * 请求回购物品
-		 * @param buyBackId
-		 * @param gridId
-		 * 
-		 */		
-		public static function reqBuyBackGoods(buyBackId:int, gridId:int ):void
-		{
-//			if( ReqLockUtil.isReqLocked( ShopModuleMessages.C2S_BUY_BACK_GOODS ) )
-//				return;
-//			ReqLockUtil.lockReq( ShopModuleMessages.C2S_BUY_BACK_GOODS, 5 * 1000 );
-			
-			_bytes.clear();
-			_bytes.writeVarint32(buyBackId);
-			_bytes.writeVarint32(gridId);
-			SocketConnection_protoBuffer.send(ShopModuleMessages.C2S_BUY_BACK_GOODS,_bytes);
-		}
-		
-		/**
-		 * 卖出物品发送C2S_SELL_GOODS，附带以下信息
-		 * byte 卖出物品的位置(背包中)
-		 */	
-		public static  function reqSellGoods( gridid:int ):void
-		{
-			_bytes.clear();
-			_bytes.writeByte(gridid);
-			SocketConnection_protoBuffer.send(ShopModuleMessages.C2S_SELL_GOODS, _bytes);
-		}
-		
-		/**
-		 * 购买商店物品，发送C2S_BUY_SHOP_GOODS消息，附带以下信息
-		 * varint32 shopId (从ShopProto中读取)
-		 * varint32 tabIndex (从ShopProto中读取)
-		 * varint32 goodsIndex 从0开始
-		 * varint32 count
-		 * varint64 npcId(有则传，无则不用传)
-		 */
-		public static function reqBuyGoods(shopId:int, tabIndex:int, goodsIndex:int, count:int, npcId:int=0):void
-		{
-//			if( ReqLockUtil.isReqLocked( ShopModuleMessages.C2S_BUY_SHOP_GOODS ) )
-//				return;
-//			ReqLockUtil.lockReq( ShopModuleMessages.C2S_BUY_SHOP_GOODS, 5 * 1000 );
-			
-			_bytes.clear();
-			_bytes.writeVarint32(shopId);
-			_bytes.writeVarint32(tabIndex);
-			_bytes.writeVarint32(goodsIndex);
-			_bytes.writeVarint32(count);
-			
-			if(npcId > 0)
-			{
-				_bytes.writeVarint64(npcId);
-			}
-			SocketConnection_protoBuffer.send(ShopModuleMessages.C2S_BUY_SHOP_GOODS, _bytes);
-		}
-		
-		
-		/**
-		 * 购买商店物品，发送C2S_BUY_JINZI_SHOP_GOODS消息，附带以下信息
-		 * byte 消费类型 0-银两 1-绑金  2-金子
-		 * varint32 goodsId
-		 * varint32 count
-		 */
-		public static function reqBuyJinziShopGoods( type:int, goodsId:int, count:int ):void
-		{
-//			if( ReqLockUtil.isReqLocked( ShopModuleMessages.C2S_BUY_JINZI_SHOP_GOODS ) )
-//				return;
-//			ReqLockUtil.lockReq( ShopModuleMessages.C2S_BUY_JINZI_SHOP_GOODS, 5 * 1000 );
-			
-			_bytes.clear();
-			_bytes.writeByte(type);
-			_bytes.writeVarint32(goodsId);
-			_bytes.writeVarint32(count);
-			SocketConnection_protoBuffer.send(ShopModuleMessages.C2S_BUY_JINZI_SHOP_GOODS, _bytes);
-		}
-		
-		/**
-		 * 装备修理
-		 * varint32  容器类型
-		 * varint32 装备位置
-		 * varint32 装备id，防止错误
-		 * bool 使用银两替代绑银
-		 */
-		public static function reqRepairGoods( containerId:int, index:int, goodsId:int, usebind:Boolean=true):void
-		{
-			_bytes.clear();
-			_bytes.writeByte(containerId);
-			_bytes.writeVarint32(index);
-			_bytes.writeVarint32(goodsId);
-			_bytes.writeBoolean(usebind);
-			SocketConnection_protoBuffer.send(ShopModuleMessages.C2S_REPAIR_GOODS, _bytes);
-		}
-		
-		/**
-		 * 装备修理all所有
-		 *
-		 * bool 使用银两替代绑银
-		 */
-		public static function reqRepairGoodsAll(usebind:Boolean=true):void
-		{
-			//请求间隔
-			if(!TimerServer.hasPassedTime(ShopModuleMessages.C2S_REPAIR_GOODS_ALL, 5 * 1000))
-			{
+			if (shopvo == null)
 				return;
-			}
-			_bytes.clear();
-			_bytes.writeBoolean(usebind);
-			SocketConnection_protoBuffer.send(ShopModuleMessages.C2S_REPAIR_GOODS_ALL, _bytes);
+			var msg:CSBuyItemMessage = new CSBuyItemMessage();
+			msg.shopItemId = shopvo.shopItemId;
+			msg.num = num;
+			msg.shopItemId = shopvo.shopItemId;
+			
+			
+			SocketConnection.send(msg);
+			//			Mgr.musicMgr.playSoundCom(117);
+		}
+		
+		/**
+		 * 请求卖物品
+		 * 
+		 */
+		public static function ReqSellItem(itemId : long): void{
+			var msg : CSSellItemMessage = new CSSellItemMessage();
+			msg.itemId = itemId;
+			SocketConnection.send(msg);
+			//			Mgr.musicMgr.playSoundCom(115);
+		}
+		/**
+		 * 批量卖物品 
+		 * @param items
+		 * 
+		 */		
+		public static function ReqSellItems( items:Vector.<long> ):void
+		{
+			var msg:CSSellItemsMessage = new CSSellItemsMessage();
+			msg.itemId = items;
+			SocketConnection.send(msg);
+			//			Mgr.musicMgr.playSoundCom(115);
+		}
+		
+		public static function ReqRebuyList(): void
+		{
+			var msg : CSRebuyListMessage = new CSRebuyListMessage();
+			SocketConnection.send(msg);
+		}
+		
+		/**
+		 * 回购物品
+		 * @param itemId
+		 */		
+		public static function ReqRebuyItem(itemId : long): void
+		{
+			var msg : CSRebuyMessage = new CSRebuyMessage();
+			msg.itemId = itemId;
+			SocketConnection.send(msg);
 		}
 	}
 }

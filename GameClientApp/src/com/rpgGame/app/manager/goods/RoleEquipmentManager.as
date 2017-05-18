@@ -178,14 +178,7 @@ package com.rpgGame.app.manager.goods
 		
 		public function getRepairAllMoney():int
 		{
-			var items:Array = getAllItem();
-			var money:int;
-			for each(var equip:EquipInfo in items)
-			{
-				if(!equip)continue;
-				money += equip.used_durability*ShopCfgData.buyBackCapacity*ShopCfgData.durabilityRepairCost;
-			}
-			return money;
+			return 0;
 		}
 		
 		public static function equipIsWearing(equip:ClientItemInfo):Boolean

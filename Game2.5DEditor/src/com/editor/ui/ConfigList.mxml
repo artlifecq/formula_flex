@@ -26,9 +26,9 @@
 			import com.editor.manager.DataStructuresManager;
 			import com.editor.manager.SceneManager;
 			import com.editor.utils.FileUtil;
-
+			
 			import mx.collections.ArrayCollection;
-
+			
 			import org.client.mainCore.manager.EventManager;
 
 			[Bindable]
@@ -79,7 +79,8 @@
 				currSceneCheck.visible = (sceneField != null);
 				var majorKeyField : TabelFieldData = tabel.majorKeyField;
 				var idFieldName : String = majorKeyField ? majorKeyField.mFieldName : "id";
-				var nameFieldName : String = "name";
+				var nameField : TabelFieldData = tabel.getField(TabelFieldData.NAME_FIELD);
+				var nameFieldName : String = nameField ? nameField.mFieldName : "name";;
 				if (idFieldName == nameFieldName)
 					idFieldName = "id";
 

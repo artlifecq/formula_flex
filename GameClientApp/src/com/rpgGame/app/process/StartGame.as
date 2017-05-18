@@ -155,8 +155,8 @@ package com.rpgGame.app.process
 
                 CONFIG::Debug {
 					Stage3DLayerManager.stage.addEventListener(KeyboardEvent.KEY_UP,onShowFrameState);
-//                    initMM();
-//					showFrameState();
+                    initMM();
+					showFrameState();
                 }
 			}
 
@@ -169,24 +169,29 @@ package com.rpgGame.app.process
 		{
 			if(e.shiftKey&&e.keyCode==Keyboard.D)
 			{
-				isShow = !isShow;
-				if(isShow)
-				{
-					StatsUtil.showAwayStats(Stage3DLayerManager.stage,Stage3DLayerManager.stage3DProxy);
+				CONFIG::Debug {
+					isShow = !isShow;
+					if(isShow)
+					{
+						StatsUtil.showAwayStats(Stage3DLayerManager.stage,Stage3DLayerManager.stage3DProxy);
+					}
+					else
+					{
+						StatsUtil.hideAwayStats();
+					}
+					LayerManager.showOrHideMM();
+					ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
 				}
-				else
-				{
-					StatsUtil.hideAwayStats();
-				}
-				showFrameState();
 			}
 		}
 		
 		private function showFrameState():void
 		{
-			
-			LayerManager.showOrHideMM();
-			ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
+			CONFIG::Debug {
+				StatsUtil.showAwayStats(Stage3DLayerManager.stage,Stage3DLayerManager.stage3DProxy);
+				LayerManager.showOrHideMM();
+				ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
+			}			
             // 屏蔽未捕获信息
 //            Log.logCallBack = GameLog.logItem;
 		}
@@ -234,19 +239,6 @@ package com.rpgGame.app.process
             CONFIG::netDebug {
                 NetDebug.LOG("[StarGame] 开始游戏");
             }
-				
-			//buff测试，过段时间删除 
-//			MainRoleManager.actorInfo.buffList = new Vector.<BuffInfo>();
-//			for (var i : int = 1; i < 30; i++)
-//			{
-//				var buff : BuffInfo = new BuffInfo(MainRoleManager.actorID);
-//				buff.curtStackCount = 2;
-//				buff.cfgId = i;
-//				buff.disappearTime = SystemTimeManager.curtTm + buff.totalTime;
-//				//EventManager.dispatchEvent(BuffEvent.ADD_BUFF, buff);
-//				MainRoleManager.actorInfo.buffList.push(buff);
-//			}
-//			EventManager.dispatchEvent(BuffEvent.UPDATE_BUFF, MainRoleManager.actorID);
 		}
 
 		private function initMM() : void

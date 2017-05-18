@@ -191,14 +191,17 @@ package com.editor.manager
 			}
 		}
 
-		public function cancelSelect() : void
+		public function cancelSelect() : Boolean
 		{
+            var rs : Boolean = false;
 			if (selectedFlag)
 			{
 				selectedFlag.selected = false;
 				selectedFlag = null;
+                rs = true;
 			}
 			_selectedGroup = null;
+            return rs;
 		}
 
 		private function selectFlagByData(data : ConfigData) : Boolean

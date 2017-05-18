@@ -1,5 +1,6 @@
 package com.rpgGame.app.utils
 {
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.goods.RoleEquipmentManager;
 	import com.rpgGame.app.manager.mount.MountEquipmentManager;
 	import com.rpgGame.app.manager.mount.MountManager;
@@ -149,7 +150,18 @@ package com.rpgGame.app.utils
 				default:
 					break;
 			}
-			
+			//随身商店里面的要判断等级
+			if (itemInfo.containerID==ItemContainerID.BACKPACK_SHOP) 
+			{
+				if (itemInfo.qItem.q_level>MainRoleManager.actorInfo.totalStat.level) 
+				{
+					grid.setJobState(AssetUrl.EQUIP_JOB_NO);
+				}
+				else
+				{
+					grid.setJobState(null);
+				}
+			}
 			if( isTips )
 			{
 				switch( itemInfo.type )
@@ -226,7 +238,7 @@ package com.rpgGame.app.utils
 			grid.clear();
 			
 			var size:int = grid.iconSize;
-			grid.showQuality( -1 );
+//			grid.showQuality( -1 );
 			grid.faceInfo = data;
 			grid.setIconResName( ClientConfig.getSkillIcon( data.icoName, size ) );
 			grid.setIsShowCdTm( true );

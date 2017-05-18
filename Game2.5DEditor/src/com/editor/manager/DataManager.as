@@ -365,12 +365,12 @@ package com.editor.manager
 				}
 				else if (fieldName == "miniMapRes")
 				{
-					var miniMapName : String = GlobalConfig.getMiniMapFileName((data as EditorClientMapData).mMiniMapRes);
+					var miniMapName : String = GlobalConfig.getMiniMapFileName(/*(data as EditorClientMapData).mMapRes, */(data as EditorClientMapData).mMiniMapRes);
 					SceneManager.getInstance().mainScene.loadMiniMap(mapName, miniMapName, (data as EditorClientMapData).miniMapRect, SceneManager.getInstance().onMiniMapComplete);
 				}
 				else if (fieldName == "radarMapRes")
 				{
-					var radarMapName : String = GlobalConfig.getRadarMapFileName((data as EditorClientMapData).mRadarMapRes);
+					var radarMapName : String = GlobalConfig.getRadarMapFileName(/*(data as EditorClientMapData).mMapRes,*/ (data as EditorClientMapData).mRadarMapRes);
 					SceneManager.getInstance().mainScene.loadRadarMap(mapName, radarMapName, (data as EditorClientMapData).radarMapRect, SceneManager.getInstance().onRadarMapComplete);
 				}
 				EventManager.dispatchEvent(MapEvent.MINI_MAP_CORRECT_CHANGE);
@@ -606,7 +606,7 @@ package com.editor.manager
 				configDesc.selectedData = null;
 				EventManager.dispatchEvent(ConfigListEvent.PULL_CONFIG_LIST, tabel.name);
 			}
-			SceneManager.getInstance().clearSelected();
+			//SceneManager.getInstance().clearSelected();
 		}
 
 		public function dataValidate(dataField : String, data : ConfigData) : Object

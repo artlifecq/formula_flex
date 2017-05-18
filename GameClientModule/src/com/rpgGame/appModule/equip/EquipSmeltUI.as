@@ -706,7 +706,11 @@ package com.rpgGame.appModule.equip
 		
 		private function isSmelt(info:EquipInfo):Boolean
 		{
-			return true;//目前全部都可以洗炼
+			var job:int=MainRoleManager.actorInfo.job;
+			if(info.qItem.q_job==job){
+				return true;
+			}
+			return false;
 		}
 	}
 }

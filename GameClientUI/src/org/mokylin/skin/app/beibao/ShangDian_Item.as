@@ -21,6 +21,8 @@ package org.mokylin.skin.app.beibao
 
 		public var btnOver:feathers.controls.Button;
 
+		public var imgPrice:feathers.controls.UIAsset;
+
 		public var lbName:feathers.controls.Label;
 
 		public var lbNum:feathers.controls.Label;
@@ -36,7 +38,7 @@ package org.mokylin.skin.app.beibao
 			this.currentState = "normal";
 			this.height = 59;
 			this.width = 162;
-			this.elementsContent = [__ShangDian_Item_UIAsset1_i(),btnOver_i(),Icon_i(),lbName_i(),__ShangDian_Item_UIAsset2_i(),lbNum_i()];
+			this.elementsContent = [__ShangDian_Item_UIAsset1_i(),btnOver_i(),Icon_i(),lbName_i(),imgPrice_i(),lbNum_i()];
 			
 			states = {
 			};
@@ -69,17 +71,6 @@ package org.mokylin.skin.app.beibao
 			return temp;
 		}
 
-		private function __ShangDian_Item_UIAsset2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.touchable = false;
-			temp.touchGroup = true;
-			temp.styleName = "ui/common/tubiao/yuanbao_24.png";
-			temp.x = 68;
-			temp.y = 31;
-			return temp;
-		}
-
 		private function btnOver_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
@@ -90,6 +81,19 @@ package org.mokylin.skin.app.beibao
 			temp.width = 162;
 			temp.x = 0;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function imgPrice_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			imgPrice = temp;
+			temp.name = "imgPrice";
+			temp.touchable = false;
+			temp.touchGroup = true;
+			temp.styleName = "ui/common/tubiao/yuanbao_24.png";
+			temp.x = 59;
+			temp.y = 31;
 			return temp;
 		}
 
@@ -119,8 +123,8 @@ package org.mokylin.skin.app.beibao
 			temp.text = "x100";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 62;
-			temp.x = 92;
+			temp.width = 73;
+			temp.x = 85;
 			temp.y = 34;
 			return temp;
 		}

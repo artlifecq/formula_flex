@@ -71,7 +71,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.text = "解锁等级：";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 54;
+			temp.x = 56;
 			temp.y = 273;
 			return temp;
 		}
@@ -82,7 +82,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.text = "推荐战力：";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 54;
+			temp.x = 56;
 			temp.y = 252;
 			return temp;
 		}
@@ -93,7 +93,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.text = "当前难度：";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 54;
+			temp.x = 56;
 			temp.y = 296;
 			return temp;
 		}
@@ -101,9 +101,9 @@ package org.mokylin.skin.app.jianghu.lunjian
 		private function __LunJian_TiaoZhanItem_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/jianghu/lunjian/bgk.png";
+			temp.styleName = "ui/big_bg/jianghu/lunjian/bgk.png";
 			temp.x = 0;
-			temp.y = 1;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -111,7 +111,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/jianghu/lunjian/zezao.png";
-			temp.x = 15;
+			temp.x = 17;
 			temp.y = 250;
 			return temp;
 		}
@@ -122,7 +122,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			btnTiaozhan = temp;
 			temp.name = "btnTiaozhan";
 			temp.styleClass = org.mokylin.skin.app.jianghu.button.ButtonTiaozhan;
-			temp.x = 63;
+			temp.x = 65;
 			temp.y = 329;
 			return temp;
 		}
@@ -137,7 +137,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 82;
-			temp.x = 129;
+			temp.x = 131;
 			temp.y = 273;
 			return temp;
 		}
@@ -153,7 +153,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 131;
-			temp.x = 48;
+			temp.x = 50;
 			temp.y = 16;
 			return temp;
 		}
@@ -168,7 +168,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 88;
-			temp.x = 126;
+			temp.x = 128;
 			temp.y = 251;
 			return temp;
 		}
@@ -182,7 +182,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.height = 17;
 			temp.styleClass = org.mokylin.skin.app.jianghu.mc.UIMovieClipNandu;
 			temp.width = 32;
-			temp.x = 134;
+			temp.x = 136;
 			temp.y = 298;
 			return temp;
 		}
@@ -193,7 +193,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			modeBg = temp;
 			temp.name = "modeBg";
 			temp.styleName = "ui/app/jianghu/lunjian/beijing1.jpg";
-			temp.x = 16;
+			temp.x = 18;
 			temp.y = 42;
 			return temp;
 		}
@@ -205,7 +205,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.name = "modeCont";
 			temp.height = 200;
 			temp.width = 200;
-			temp.x = 16;
+			temp.x = 18;
 			temp.y = 42;
 			return temp;
 		}
@@ -219,7 +219,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			var skin:StateSkin = new org.mokylin.skin.app.jianghu.lunjian.LunJian_Nandu()
 			temp.skin = skin
 			temp.width = 70;
-			temp.x = 153;
+			temp.x = 155;
 			temp.y = 370;
 			return temp;
 		}
@@ -233,7 +233,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			var skin:StateSkin = new org.mokylin.skin.app.jianghu.lunjian.LunJian_Nandu()
 			temp.skin = skin
 			temp.width = 70;
-			temp.x = 10;
+			temp.x = 12;
 			temp.y = 370;
 			return temp;
 		}
@@ -247,7 +247,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			var skin:StateSkin = new org.mokylin.skin.app.jianghu.lunjian.LunJian_Nandu()
 			temp.skin = skin
 			temp.width = 70;
-			temp.x = 82;
+			temp.x = 84;
 			temp.y = 370;
 			return temp;
 		}
@@ -258,7 +258,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			uiOK = temp;
 			temp.name = "uiOK";
 			temp.styleName = "ui/app/jianghu/lunjian/ytz.png";
-			temp.x = 174;
+			temp.x = 168;
 			temp.y = 0;
 			return temp;
 		}

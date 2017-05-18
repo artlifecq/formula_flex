@@ -61,7 +61,7 @@ package com.rpgGame.app.manager.goods
 		protected var CUR_TYPE:uint;
 		protected var isSellItem:Boolean = false;//是否在出售
 		/** 与当前等级最接近的药 **/
-		private var _drugShopInfo:ShopItemData = null;
+	//	private var _drugShopInfo:ShopItemData = null;
 		/** 所有药品id **/
 		private var _drugList:Array = [];
 		
@@ -1018,7 +1018,7 @@ package com.rpgGame.app.manager.goods
 		}
 		
 		/** 查找当前背包中最合适的药品，品质优先，品质相同的等级优先 **/
-		private function searchSuitDrugItem( isAutoBuy:Boolean ):ClientItemInfo
+		/*private function searchSuitDrugItem( isAutoBuy:Boolean ):ClientItemInfo
 		{
 			var itemInfoList:Array = _goodsList;
 			var returnItem:ClientItemInfo;
