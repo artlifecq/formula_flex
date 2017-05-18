@@ -8,6 +8,7 @@ package com.rpgGame.appModule.dungeon.multy
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.ZoneCfgData;
 	import com.rpgGame.coreData.cfg.ZoneMultyCfgData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
@@ -53,6 +54,7 @@ package com.rpgGame.appModule.dungeon.multy
 			_skin=skin.skin as FuBen_DuoRen_Skin;
 			initScroll();
 			creatDungeonItem();
+			creatGlobalReward();
 			//changeItem(0);
 			//setSite();
 			
@@ -111,6 +113,7 @@ package com.rpgGame.appModule.dungeon.multy
 			//setInitSelect()
 			setGray();
 			setPassRewardText();
+			
 		}
 		/**创建列表*/
 		private function creatDungeonItem():void
@@ -243,7 +246,50 @@ package com.rpgGame.appModule.dungeon.multy
 				if(multyData==null)break;
 				item.lbNum.text=currCount+"/"+multyData.q_front+"通关奖励：";
 			}
+			
+			var allpass:int=GlobalSheetData.getSettingInfo(515).q_int_value;
+			_skin.lbTiaozhan.text="每日挑战"+allpass+"次可领取（"+currCount+"/"+allpass+"）：";
+			
 		}
+		
+		/**设置全局奖励文字*/
+		private function creatGlobalReward():void
+		{
+			if(GlobalSheetData.getSettingInfo(515)==null||GlobalSheetData.getSettingInfo(516)==null) return;
+			var reward:Array=JSONUtil.decode(GlobalSheetData.getSettingInfo(516).q_string_value);
+			if(reward==null||reward.length==0)return;
+			var i:int;
+			for(i=0;i<8;i++)
+			{
+				_skin["reward_ico_"+i].visible=false;
+			}
+			var item:Q_item;
+			var ico:IconCDFace; 
+			for(i=0;i<reward.length;i++)
+			{
+				if(i<8&&reward[i]!=null)
+				{
+					item=ItemConfig.getQItemByID(reward[i].mod);
+					if(item!=null)
+					{
+						ico=new IconCDFace(IcoSizeEnum.ICON_36);
+						ico.showCD=false;
+						ico.x=_skin["reward_ico_"+i].x+6;
+						ico.y=_skin["reward_ico_"+i].y+6;
+						ico.setIconResName(ClientConfig.getItemIcon(item.q_icon.toString(),IcoSizeEnum.ICON_36));
+						TaskUtil.setItemTips(ico,item,reward[i].num);
+						_skin["reward_ico_"+i].visible=true;
+						_skin.reward_ico_list.addChild(ico);
+					}
+				}
+			}
+			
+			
+		}
+		
+		
+		
+		
 		/**展开元素*/
 		private function unSelectItem(item:FuBen_DuoRen_Item):void
 		{
@@ -281,7 +327,7 @@ package com.rpgGame.appModule.dungeon.multy
 			scrollBack.height=skinList.length*95+34;
 			scrollBox.addChild(scrollBack);
 		}
-		/**创建当个元素*/
+		/**创建单个元素*/
 		private function getItemSkin(id:int):SkinnableContainer
 		{
 			var zid:int=ZoneMultyCfgData.getZoneIdByID(id);
@@ -306,30 +352,23 @@ package com.rpgGame.appModule.dungeon.multy
 			temp.lbNum.text="";
 			var ico:IconCDFace; 
 			var item:Q_item;
-			var passReward:Array;
-			passReward=JSONUtil.decode(multyData.q_pass_reward);
-			if(passReward&&passReward.length>0)
+			
+			var reward:Object=JSONUtil.decode(multyData.q_pass_reward);
+			if(reward!=null)
 			{
-				for(i=0;i<passReward.length;i++)
+				item=ItemConfig.getQItemByID(reward.mod);
+				if(item!=null)
 				{
-					if(passReward[i]!=null&&passReward[i].show==1)
-					{
-						item=ItemConfig.getQItemByID(passReward[i].mod);
-						if(item!=null)
-						{
-							ico=new IconCDFace(IcoSizeEnum.ICON_48);
-							ico.showCD=false;
-							ico.x=temp.pass_ico.x;
-							ico.y=temp.pass_ico.y;
-							ico.setIconResName(ClientConfig.getItemIcon(item.q_icon.toString(),IcoSizeEnum.ICON_48));
-							TaskUtil.setItemTips(ico,item,passReward[i].num);
-							temp.pass_group.addChild(ico);
-							break;
-						}
-					}
+					ico=new IconCDFace(IcoSizeEnum.ICON_48);
+					ico.showCD=false;
+					ico.x=temp.pass_ico.x;
+					ico.y=temp.pass_ico.y;
+					ico.setIconResName(ClientConfig.getItemIcon(item.q_icon.toString(),IcoSizeEnum.ICON_48));
+					TaskUtil.setItemTips(ico,item,reward.num);
+					temp.pass_group.addChild(ico);
 				}
 			}
-			passReward=JSONUtil.decode(multyData.q_prob_reward);
+			var passReward:Array=JSONUtil.decode(multyData.q_prob_reward);
 			for(i=0;i<8;i++)
 			{
 				temp["prob_ioc_"+i].visible=false;
@@ -339,7 +378,7 @@ package com.rpgGame.appModule.dungeon.multy
 				add=0;
 				for(i=0;i<passReward.length;i++)
 				{
-					if(i<8&&passReward[i]!=null&&passReward[i].show==1)
+					if(i<8&&passReward[i]!=null)
 					{
 						item=ItemConfig.getQItemByID(passReward[i].mod);
 						if(item!=null)

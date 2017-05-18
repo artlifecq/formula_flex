@@ -1,5 +1,6 @@
 package com.rpgGame.coreData.role
 {
+	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.info.collect.CollectObjcetInfo;
 
 	/**
@@ -14,6 +15,8 @@ package com.rpgGame.coreData.role
 		public var collectType : int; //类型ID
 		public var sceneID : int; //所属场景ID
 		public var avatarRes : String;
+		public var modelID : uint;
+		
 		/**
 		 * 是否动态创建
 		 */

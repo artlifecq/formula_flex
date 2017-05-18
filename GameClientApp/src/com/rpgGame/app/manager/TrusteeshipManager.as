@@ -226,9 +226,15 @@ package com.rpgGame.app.manager
 
 		public function stopAll() : void
 		{
-			/*if (!_isFightActorRunning && !_isAutoFightRunning&&!_isFightTargetRunning)
-				return;*/
 			stop();
+			if (!_isFightActorRunning && !_isAutoFightRunning&&!_isFightTargetRunning)
+				return;
+			MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE);
+			if (MainRoleManager.actor.stateMachine.isPrewarWaiting)
+				MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_PREWAR);
+			else
+				MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE);
+			
 		}
 
 		private function stop() : void
@@ -248,11 +254,7 @@ package com.rpgGame.app.manager
 			TweenLite.killDelayedCallsTo(onDelayedUnbroken);
 			TweenLite.killDelayedCallsTo(actorFight);
 			_isFightSelect=false;
-			MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE);
-			if (MainRoleManager.actor.stateMachine.isPrewarWaiting)
-				MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_PREWAR);
-			else
-				MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE);
+			
 		}
 
 		public function get isAutoFightRunning() : Boolean
@@ -308,7 +310,7 @@ package com.rpgGame.app.manager
 		
 		private function onUpdate(force : Boolean = false) : void
 		{
-			if(testStopKey)return;///测试用命令控制
+			if(testStopKey&&!_isFightTargetRunning)return;///测试用命令控制  选择的怪可自动杀
 			if (!_isFightActorRunning && !_isAutoFightRunning&&!_isFightTargetRunning)
 				return;
 			if (_isBroken)
@@ -430,7 +432,7 @@ package com.rpgGame.app.manager
 		}
 		
 		
-		private var testStopKey:Boolean=false;
+		private var testStopKey:Boolean=true;
 		public function testStop():void
 		{
 			testStopKey=!testStopKey;
