@@ -140,6 +140,8 @@ package com.rpgGame.app.manager.task
 		private var _techSta:int=0;
 		private function techState():void
 		{
+			if(testStopKey)
+				return;
 			if(!TaskMissionManager.haveMainTask)
 				return;
 			if(MainRoleManager.actorInfo.totalStat.level>AUTOLVE)
@@ -251,8 +253,11 @@ package com.rpgGame.app.manager.task
 			else
 			{
 				AUTOLVE=level;
+				
 			}
+			testStopKey=false;
 		}
+		private var testStopKey:Boolean=true;
 		
 	}
 }

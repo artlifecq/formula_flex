@@ -9,8 +9,10 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.stall.StallManager;
 	import com.rpgGame.app.manager.task.TaskManager;
+	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.manager.task.TouZhuManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.sender.TaskSender;
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
 	import com.rpgGame.core.app.AppConstant;
@@ -69,7 +71,7 @@ package com.rpgGame.app.manager
 					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveNpc);
 					break;
 				case SceneCharType.COLLECT:
-					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveCollect);
+					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveCollect,null,null,onCollect);
 					break;
 				case SceneCharType.DROP_GOODS:
 					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveDropGoods,null,null,onDropGoods);
@@ -158,13 +160,7 @@ package com.rpgGame.app.manager
 			var monsterData : MonsterData = role.data as MonsterData;
 			if (monsterData == null)
 				return;
-			
-			
 			EventManager.dispatchEvent(TaskEvent.TASK_CLICK_NPC,monsterData.modelID,monsterData.serverID);//交任务用------YT
-			
-			
-			
-			
 			
 		}
 		
@@ -187,26 +183,36 @@ package com.rpgGame.app.manager
 			
 			
 		}
-
 		/**
 		 * 采集物
 		 * @param ref
-		 *
 		 */
 		private static function onArriveCollect(ref : WalkMoveStateReference) : void
 		{
 			var role : SceneRole = ref.data as SceneRole;
+			onCollect(role);
+		}
+		/**
+		 * 采集物
+		 *
+		 */
+		private static function onCollect(role : SceneRole) : void
+		{
 			if (role == null || !role.usable)
 				return;
-
 			var actor : SceneRole = MainRoleManager.actor;
 			var dist : int = MathUtil.getDistanceNoSqrt(actor.x, actor.z, role.x, role.z);
 			var collectData : SceneCollectData = role.data as SceneCollectData;
 			var farDistance : int = 300;
 			if (dist < farDistance * farDistance)
 			{
-				var taskId : int = TaskManager.getTaskIdHasCollectObj(collectData.collectType);
-				TaskManager.collectItemTask(taskId, collectData.id, collectData.collectType, collectData.sceneID, collectData.x, collectData.y);
+				if(TaskMissionManager.isGatherItem(collectData.modelID))//如果是任务采集物就采集
+				{
+					TaskSender.sendStartGatherMessage(collectData.serverID);
+				}
+				
+				//var taskId : int = TaskManager.getTaskIdHasCollectObj(collectData.collectType);
+				///TaskManager.collectItemTask(taskId, collectData.id, collectData.collectType, collectData.sceneID, collectData.x, collectData.y);
 			}
 		}
 
