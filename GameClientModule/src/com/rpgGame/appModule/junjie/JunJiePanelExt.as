@@ -61,8 +61,6 @@ package com.rpgGame.appModule.junjie
 		
 		private var changeList:Array;
 		
-		private var tween:TweenMax;
-		
 		public function JunJiePanelExt()
 		{
 			_skin=new JunJie_Skin();
@@ -335,7 +333,10 @@ package com.rpgGame.appModule.junjie
 		private function showSelectItem():void
 		{
 			//展示称号
-			if(_chenhaoEft!=null) _chenhaoEft.dispose();
+			if(_chenhaoEft!=null)
+			{
+				_chenhaoEft.dispose();
+			}
 			var effName:String=JunJieData.getEffById(_nowSelectItem.info.modelId);
 			_chenhaoEft=_chenhaoEftContaner.playInter3DAt(ClientConfig.getEffect(effName),120,35,0);
 			showTiaoJian();	
