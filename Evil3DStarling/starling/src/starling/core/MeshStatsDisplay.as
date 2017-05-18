@@ -100,11 +100,6 @@ package starling.core
 			{
 				var mesh:DisplayObject = container.getChildAt(i);
 				
-				if(mesh.layerBatchId == int.MAX_VALUE)
-				{
-					continue;
-				}
-				
 				if(mesh is DisplayObjectContainer)
 				{
 					drawTriangles(mesh as DisplayObjectContainer, mesh.visible && parentVisible && mesh.alpha > 0.0, mesh.scaleX, mesh.scaleY);

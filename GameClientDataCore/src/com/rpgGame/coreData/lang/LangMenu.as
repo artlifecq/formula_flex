@@ -96,7 +96,7 @@ package com.rpgGame.coreData.lang
 		public static const GET_ITEM:String = "GET_ITEM";
 		 /**  批量 */
 		public static const BATCH_ITM:String = "BATCH_ITM";
-		/**  快速到达 */
+		 /**  快速到达 */
 		public static const MOVE_TO_HERO:String = "MOVE_TO_HERO";
 
 	}

@@ -153,11 +153,9 @@ package com.rpgGame.app.process
 				GlobalSettingManager.init();
 				//
 
-                CONFIG::Debug {
-					Stage3DLayerManager.stage.addEventListener(KeyboardEvent.KEY_UP,onShowFrameState);
-                    initMM();
-					showFrameState();
-                }
+				Stage3DLayerManager.stage.addEventListener(KeyboardEvent.KEY_UP,onShowFrameState);
+				initMM();
+				showFrameState();
 			}
 
 			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE, onSwitchCmp);
@@ -179,9 +177,9 @@ package com.rpgGame.app.process
 					{
 						StatsUtil.hideAwayStats();
 					}
-					LayerManager.showOrHideMM();
-					ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
 				}
+				LayerManager.showOrHideMM();
+				ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
 			}
 		}
 		
@@ -189,9 +187,9 @@ package com.rpgGame.app.process
 		{
 			CONFIG::Debug {
 				StatsUtil.showAwayStats(Stage3DLayerManager.stage,Stage3DLayerManager.stage3DProxy);
-				LayerManager.showOrHideMM();
-				ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
 			}			
+			LayerManager.showOrHideMM();
+			ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
             // 屏蔽未捕获信息
 //            Log.logCallBack = GameLog.logItem;
 		}

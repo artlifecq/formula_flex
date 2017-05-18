@@ -17,7 +17,6 @@ package com.game.engine2D
 	import com.game.engine2D.scene.render.RenderSet;
 	import com.game.engine2D.scene.render.RenderUnit;
 	import com.game.engine2D.tools.SceneCache;
-	import com.game.engine2D.utils.MaterialUtils;
 	import com.game.engine2D.vo.BaseObj;
 	import com.game.engine2D.vo.ShowContainer;
 	import com.game.engine3D.config.GlobalConfig;
@@ -104,6 +103,7 @@ package com.game.engine2D
 			_current = this;
 			_view = view;
 			_cameraOrthographicLens = new CameraOrthographicLens(1000);
+			_cameraOrthographicLens.viewportScale = 1.1;
 			
 			//场景引擎配置
 			sceneConfig = new SceneConfig($width,$height);

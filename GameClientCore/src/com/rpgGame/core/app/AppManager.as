@@ -1,5 +1,8 @@
 package com.rpgGame.core.app
 {
+	import com.rpgGame.coreData.cfg.WindowInfoData;
+	import com.rpgGame.coreData.clientConfig.Q_windowInfo;
+	
 	import feathers.themes.GuiTheme;
 	
 	import org.client.mainCore.ds.HashMap;
@@ -367,5 +370,18 @@ package com.rpgGame.core.app
 			appPanel.show();
 		}
 		
+		/**
+		 * 跳转面板
+		 * 
+		 * @author 甘能文 2017-5-17
+		 * */
+		public static function showAppById(windid:int,...args):void
+		{
+			var winInfo:Q_windowInfo = WindowInfoData.getInfobyId(windid);
+			if(winInfo!=null&&winInfo.q_islink==1)
+			{
+				AppManager.showApp(winInfo.q_windCodeId,winInfo.q_arg);
+			}
+		}
 	}
 }

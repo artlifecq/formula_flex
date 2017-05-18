@@ -627,7 +627,7 @@ package starling.rendering
                 numVertices = _numVertices - vertexID;
 
             if (numVertices > 0)
-					buffer.uploadFromDomainMemory(_rawData, 0, vertexID, numVertices);
+					buffer.fullUploadFromDomainMemory(_rawData, 0, vertexID);
         }
 
         [Inline]

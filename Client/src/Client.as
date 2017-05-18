@@ -39,7 +39,7 @@ package
 	 * 创建时间：2015-6-2 上午10:15:32
 	 *
 	 */
-	[SWF(width = "1600", height = "900", backgroundColor = "0x000000", frameRate = "60", quality = "LOW")]
+	[SWF(width = "1600", height = "1000", backgroundColor = "0x000000", frameRate = "60", quality = "LOW")]
 	public class Client extends Sprite
 	{
 		public var versionMap : Object = null;

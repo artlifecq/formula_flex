@@ -65,6 +65,9 @@ package com.rpgGame.coreData.type
 		
 		/**战魂**/
 		public static const FIGHTSOUL:String = "FightSoul";
+		
+		/**军阶**/
+		public static const JUNJIE:String = "JunJie";
 
 		/**任务问号**/
 		public static const TASKMARK : String = "taskMark";
