@@ -39,7 +39,7 @@ package com.editor.manager
 	public class AppManager
 	{
 		//www.devil3d.com
-		public static const UPDATE_URL : String = "http://168.168.1.142/samba/Game3DEditor_update/update.xml";
+		public static const UPDATE_URL : String = "http://168.168.1.142/samba/Game25DEditor_update/update.xml";
 
 		public function AppManager()
 		{
@@ -125,7 +125,7 @@ package com.editor.manager
 			}
 			else
 			{
-				var batCode : String = "start \"3D游戏编辑器重启中...\" \"" + File.applicationDirectory.nativePath + File.separator + "3D游戏编辑器.exe\"";
+				var batCode : String = "start \"2.5D游戏编辑器重启中...\" \"" + File.applicationDirectory.nativePath + File.separator + "2.5D游戏编辑器.exe\"";
 				var file : File = File.applicationStorageDirectory.resolvePath("reboot.bat");
 				FileUtil.writeToFile(file.nativePath, batCode, "ANSI");
 				file.openWithDefaultApplication();
@@ -160,11 +160,11 @@ package com.editor.manager
                 Scene.scene.reSize(LayerManager.stage.stageWidth, LayerManager.stage.stageHeight);
             }
 
-			var scene : ScenePanel = (AppManager.getInstance().appRoot as Game3DEditor).sceneView;
+			var scene : ScenePanel = (AppManager.getInstance().appRoot as Game25DEditor).sceneView;
 			var gp : Point = scene.parent.localToGlobal(new Point(scene.x, scene.y));
 			Stage3DLayerManager.resizeView(0, 0, AppManager.getInstance().appRoot.width, AppManager.getInstance().appRoot.height, gp.x, AppManager.getInstance().appRoot.width - scene.width, gp.y, 0);
             
-			var previewScene : PreviewScenePanel = (AppManager.getInstance().appRoot as Game3DEditor).previewSceneView;
+			var previewScene : PreviewScenePanel = (AppManager.getInstance().appRoot as Game25DEditor).previewSceneView;
 			gp = previewScene.parent.localToGlobal(new Point(previewScene.x, previewScene.y));
 			Stage3DLayerManager.resizeScreenView(previewScene.width, previewScene.height, gp.x, 0, gp.y, 0);
 		}

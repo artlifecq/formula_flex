@@ -104,7 +104,8 @@
 				EditorCameraManager.updateProperty();
 				SceneRoleManager.getInstance().updatePreviewState();
 				//EditorCameraManager.initCamera(SceneManager.getInstance().mainScene.camera, SceneManager.getInstance().mainScene.cameraTarget);
-				EditorCameraManager.initCamera(SceneManager.getInstance().view3D.camera, SceneManager.getInstance().scene.cameraTarget);
+//				EditorCameraManager.initCamera(SceneManager.getInstance().view3D.camera, SceneManager.getInstance().scene.cameraTarget);
+				EditorCameraManager.initCamera(SceneManager.getInstance().mainScene.camera, SceneManager.getInstance().scene.cameraTarget);
 				GlobalSettingManager.init();
 				stage.nativeWindow.maximize();
 

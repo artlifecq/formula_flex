@@ -28,7 +28,6 @@ package feathers.controls.renderers
 		{
 			super();
 			_isToggle = false;//此类已经实现了isSelected功能，所以不再需要TapToSelect类来管理
-			optimizeLayerBatch = false;//Button本身作为一个复杂容器使用时关闭此选项
 		}
 		
 		override public function get height():Number
