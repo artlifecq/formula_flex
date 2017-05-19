@@ -54,7 +54,7 @@
             EventManager.addEvent(ActivityEvent.OPEN_ACTIVITY, onOpenActivityGroup);
             EventManager.addEvent(ActivityEvent.CLOSE_ACTIVITY, onCloseActivityGroup);
 //            skinConfig["Taoni"] = [ActivityTaoNiButton, ButtonTaoni];
-            skinConfig[ActivityType.LUNJIAN] = [ActivityButton, ButtonLunjian];
+            skinConfig[102] = [ActivityButton, ButtonLunjian];
 //            skinConfig["Maze"] = [ActivityMazeButton, ButtonMaze];
 //            skinConfig["BaZhenTu"] = [ActivityBaZhenTuButton, ButtonBazhentu];
 //            skinConfig["YuMaChang"] = [ActivityYuMaChangButton, ButtonYuMaChang];
@@ -80,14 +80,14 @@
 //            skinConfig["DiaoDui"] = [ActivityDiaoDuiButton, ButtonDiaodui];
 			
 			
-            var activityInfos:Array = ActivityBarCfgData.list;
+           /* var activityInfos:Array = ActivityBarCfgData.list;
 			var i:int = 0;
             while (i < activityInfos.length)
             {
                 info = activityInfos[i] as ActivityBarInfo;
                 addActivityButtonBase(info);
                 i++;
-            }
+            }*/
             updatePosition();
         }
 
@@ -175,18 +175,47 @@
                     return;
             }
         }
-
-        private function onOpenActivityGroup(activityType:String, openTime:*=0, duration:int=0, openTimeAdvance:int=0, data:Object=null):void
+		
+		private function getBtn(id:int):ActivityButtonBase
+		{
+			var data:ActivityBarInfo=ActivityBarCfgData.getActivityBarInfo(id);
+			if(!data){
+				return null;
+			}
+			var btnType:int=id;
+			var skinCls:Class;
+			var btnCls:Class;
+			var btn:ActivityButtonBase = null;
+			if (skinConfig[btnType] == undefined)
+			{
+				return null;
+			}
+			skinCls = (skinConfig[btnType][1] as Class);
+			btnCls = skinConfig[btnType][0] as Class;
+			if (!btnCls)
+			{
+				btnCls = ActivityButton;
+			}
+			btn = new btnCls() as ActivityButtonBase;
+			btn.visible = false;
+			btn.type = btnType;
+			btn.order = data.order;
+			btn.title = data.name;
+			btn.setTips(null, data.name, data.name);
+			btn.skin = skinCls;
+			//					btn.setTimeData(data.openTime, data.duration, data.openTimeAdvance);
+			btn.onClick = onButtonClick;
+			return btn;
+		}
+		
+        private function onOpenActivityGroup(id:int):void
         {
-            var btn:ActivityButtonBase = getActivityType(activityType);
-            if (btn != null)
-            {
-                TweenLite.killTweensOf(btn);
-				btn.onActivityData(data);
-				btn.setTimeData(openTime, duration, openTimeAdvance);
-				btn.debugInfo();
-                onTimeTick(true);
-            }
+			var btn:ActivityButtonBase=getBtn(id);
+			if(btn){
+				this.addChild(btn);
+				buttonList.push(btn);
+			}
+			updatePosition();
         }
 
         private function onCloseActivityGroup(activityType:String):void
@@ -201,44 +230,6 @@
             }
         }
 
-        private function addActivityButtonBase(data:ActivityBarInfo):void
-        {
-            var btnType:String;
-            var skinCls:Class;
-            var btnCls:Class;
-            var btn:ActivityButtonBase = null;
-            if (data != null)
-            {
-				btnType = data.key;
-                if (!(ActivityBarManager.buttonDics[btnType] is ActivityButtonBase))
-                {
-                    if (skinConfig[btnType] == undefined)
-                    {
-                        trace("#######错误提示：添加的活动类型（" + data.key + "--" + data.title + "）没有关联图标皮肤，请在setup中进行关联！#######"); //not popped
-                        return;
-                    }
-					skinCls = (skinConfig[btnType][1] as Class);
-					btnCls = skinConfig[btnType][0] as Class;
-                    if (!btnCls)
-                    {
-						btnCls = ActivityButton;
-                    }
-					btn = new btnCls() as ActivityButtonBase;
-					btn.visible = false;
-					btn.type = btnType;
-					btn.order = data.order;
-					btn.title = data.title;
-					btn.setTips(null, data.tipReady, data.tipRuning);
-					btn.skin = skinCls;
-					btn.setTimeData(data.openTime, data.duration, data.openTimeAdvance);
-					btn.onClick = onButtonClick;
-                    addChild(btn);
-                    buttonList.push(btn);
-                    ActivityBarManager.buttonDics[btnType] = btn;
-                }
-            }
-        }
-
         private function getActivityType(activityType:String):ActivityButtonBase
         {
             return ActivityBarManager.buttonDics[activityType] as ActivityButtonBase;
@@ -246,53 +237,7 @@
 
         private function updatePosition():void
         {
-            var _local6:int;
-            var _local8:int;
-            var _local10:int;
-            var btn:ActivityButtonBase = null;
-            var _local7:int;
-            var _local9:int;
-            var _local4:Boolean;
-            var _local11:int;
-            buttonList.sortOn("order", 16);
-            var _local2:int = -20;
-            var _local3:int;
-            var _local5:uint = (360 / (83 + _local2));
-            _local6 = 0;
-            _local8 = 0;
-            _local10 = 0;
-            while (_local10 < buttonList.length)
-            {
-				btn = (buttonList[_local10] as ActivityButtonBase);
-                if (btn.visible != false)
-                {
-                    _local7 = 0;
-                    _local9 = 0;
-                    _local7 = ((360 - ((_local6 + 1) * (83 + _local2))) - 5);
-                    _local9 = (_local8 * (80 + _local3));
-                    if ((++_local6 % _local5) == 0)
-                    {
-                        _local6 = 0;
-                        _local8++;
-                    }
-                    _local4 = false;
-                    _local11 = Point.distance(new Point(btn.x, btn.y), new Point(_local7, _local9));
-                    if (((_local4) && ((_local11 > (83 / 2)))))
-                    {
-                        TweenLite.killTweensOf(btn);
-                        TweenLite.to(btn, 0.2, {
-                            "x":_local7,
-                            "y":_local9
-                        });
-                    }
-                    else
-                    {
-						btn.x = _local7;
-						btn.y = _local9;
-                    }
-                }
-                _local10++;
-            }
+            buttonList.sortOn(["row","order"], 16);
         }
 
         override protected function onShow():void

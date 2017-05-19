@@ -62,16 +62,16 @@ package com.rpgGame.app.manager.hud
 		{
 //			var _local1:RacingMiscData = RacingCfgData.miscData;
 //			EventManager.dispatchEvent(ActivityEvent.OPEN_ACTIVITY, "Racing", _local1.timeData, _local1.duration, _local1.prepareDuration);
-			EventManager.dispatchEvent(ActivityEvent.OPEN_ACTIVITY, "Maze", MazeCfgData.timeData, MazeCfgData.duration, MazeCfgData.prepareTime);
+			EventManager.dispatchEvent(ActivityEvent.OPEN_ACTIVITY, 102);
 //			EventManager.dispatchEvent(ActivityEvent.OPEN_ACTIVITY, "BaZhenTu", BaZhenTuManager.expMultipleStartInTodayTime, BaZhenTuManager.baZhenDuration, BaZhenTuManager.baZhenDuration);
-			ActivityButtonBoss.init();
+//			ActivityButtonBoss.init();
 //			YuMaQiShouManager.showActivityBtn();
 //			YuMaQiShouManager.onCheckQiShouYuanOpenTime();
 //			ShiLianManager.init();
 //			BecomeKingManager.init();
-			EventManager.dispatchEvent(ActivityEvent.OPEN_ACTIVITY, "LunTan", SystemTimeManager.curtTm);
+//			EventManager.dispatchEvent(ActivityEvent.OPEN_ACTIVITY, "LunTan", SystemTimeManager.curtTm);
 //			EventManager.dispatchEvent(ActivityEvent.OPEN_ACTIVITY, "HotSpring", HotSpringManager.timeData, HotSpringManager.durationTime);
-			EventManager.dispatchEvent(ActivityEvent.OPEN_ACTIVITY, "SevenLogin", SystemTimeManager.curtTm, 0, 0);
+//			EventManager.dispatchEvent(ActivityEvent.OPEN_ACTIVITY, "SevenLogin", SystemTimeManager.curtTm, 0, 0);
 			EventManager.dispatchEvent(WelfareEvent.GET_STATUS_CHANGED);
 //			setNotice("Racing", _local1.timeData, LanguageConfig.getText("NOTICE_START_HINT"), 300000);
 		}

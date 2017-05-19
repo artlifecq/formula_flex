@@ -20,7 +20,7 @@
     public class ActivityButtonBase extends SkinUI 
     {
 
-        public var type:String;
+        public var type:int;
         public var order:uint;
         public var onClick:Function;
         private var _title:String;
