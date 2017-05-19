@@ -18,6 +18,25 @@ package com.rpgGame.core.events
 		 */
 		public static const UPDATE_LUNJIAN_TIME:int = UNIQUEID.NEXT;
 		
+		/**
+		 *更新日常副本时间
+		 */
+		public static const UPDATE_DAILYZONE_TIME:int = UNIQUEID.NEXT;
+		
+		/**
+		 *更新日常副本信息 
+		 */
+		public static const UPDATE_DAILYZONE_INFO:int = UNIQUEID.NEXT;
+		
+		/**
+		 *更新副本波次信息
+		 */
+		public static const UPDATA_WAVE_INFO:int = UNIQUEID.NEXT;
+		
+		/**
+		 *更新副本结束信息 
+		 */
+		public static const UPDATA_DAILYZONE_ENDINFO:int = UNIQUEID.NEXT;
 		public function DungeonEvent()
 		{
 		}

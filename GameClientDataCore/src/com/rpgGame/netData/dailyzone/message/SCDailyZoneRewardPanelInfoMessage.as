@@ -1,5 +1,4 @@
 package com.rpgGame.netData.dailyzone.message{
-	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -12,30 +11,32 @@ package com.rpgGame.netData.dailyzone.message{
 	 * 副本结算面板
 	 */
 	public class SCDailyZoneRewardPanelInfoMessage extends Message {
-	
+		
+		//每日副本ID
+		private var _dailyZoneId: int;
+		
+		//1首通
+		private var _firstPass: int;
+		
 		//0失败,1成功
 		private var _success: int;
 		
 		//获得星数
 		private var _star: int;
 		
-		//奖励物品列表
-		private var _itemInfoList: Vector.<com.rpgGame.netData.backpack.bean.ItemInfo> = new Vector.<com.rpgGame.netData.backpack.bean.ItemInfo>();
 		
 		/**
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
-			var i: int = 0;
+			//每日副本ID
+			writeInt(_dailyZoneId);
+			//1首通
+			writeByte(_firstPass);
 			//0失败,1成功
 			writeByte(_success);
 			//获得星数
 			writeByte(_star);
-			//奖励物品列表
-			writeShort(_itemInfoList.length);
-			for (i = 0; i < _itemInfoList.length; i++) {
-				writeBean(_itemInfoList[i]);
-			}
 			return true;
 		}
 		
@@ -43,16 +44,14 @@ package com.rpgGame.netData.dailyzone.message{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
-			var i: int = 0;
+			//每日副本ID
+			_dailyZoneId = readInt();
+			//1首通
+			_firstPass = readByte();
 			//0失败,1成功
 			_success = readByte();
 			//获得星数
 			_star = readByte();
-			//奖励物品列表
-			var itemInfoList_length : int = readShort();
-			for (i = 0; i < itemInfoList_length; i++) {
-				_itemInfoList[i] = readBean(com.rpgGame.netData.backpack.bean.ItemInfo) as com.rpgGame.netData.backpack.bean.ItemInfo;
-			}
 			return true;
 		}
 		
@@ -62,6 +61,36 @@ package com.rpgGame.netData.dailyzone.message{
 		 */
 		override public function getId(): int {
 			return 400104;
+		}
+		
+		/**
+		 * get 每日副本ID
+		 * @return 
+		 */
+		public function get dailyZoneId(): int{
+			return _dailyZoneId;
+		}
+		
+		/**
+		 * set 每日副本ID
+		 */
+		public function set dailyZoneId(value: int): void{
+			this._dailyZoneId = value;
+		}
+		
+		/**
+		 * get 1首通
+		 * @return 
+		 */
+		public function get firstPass(): int{
+			return _firstPass;
+		}
+		
+		/**
+		 * set 1首通
+		 */
+		public function set firstPass(value: int): void{
+			this._firstPass = value;
 		}
 		
 		/**
@@ -92,21 +121,6 @@ package com.rpgGame.netData.dailyzone.message{
 		 */
 		public function set star(value: int): void{
 			this._star = value;
-		}
-		
-		/**
-		 * get 奖励物品列表
-		 * @return 
-		 */
-		public function get itemInfoList(): Vector.<com.rpgGame.netData.backpack.bean.ItemInfo>{
-			return _itemInfoList;
-		}
-		
-		/**
-		 * set 奖励物品列表
-		 */
-		public function set itemInfoList(value: Vector.<com.rpgGame.netData.backpack.bean.ItemInfo>): void{
-			this._itemInfoList = value;
 		}
 		
 	}

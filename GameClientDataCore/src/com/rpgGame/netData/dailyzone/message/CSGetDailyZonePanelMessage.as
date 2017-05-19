@@ -1,5 +1,4 @@
 package com.rpgGame.netData.dailyzone.message{
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -9,20 +8,15 @@ package com.rpgGame.netData.dailyzone.message{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * 副本计时
+	 * 通用副本请求面板消息
 	 */
-	public class SCDailyZoneTimeInfoMessage extends Message {
-		
-		//结束时间
-		private var _endTime: long;
-		
+	public class CSGetDailyZonePanelMessage extends Message {
+	
 		
 		/**
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
-			//结束时间
-			writeLong(_endTime);
 			return true;
 		}
 		
@@ -30,8 +24,6 @@ package com.rpgGame.netData.dailyzone.message{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
-			//结束时间
-			_endTime = readLong();
 			return true;
 		}
 		
@@ -40,22 +32,7 @@ package com.rpgGame.netData.dailyzone.message{
 		 * @return 
 		 */
 		override public function getId(): int {
-			return 400103;
-		}
-		
-		/**
-		 * get 结束时间
-		 * @return 
-		 */
-		public function get endTime(): long{
-			return _endTime;
-		}
-		
-		/**
-		 * set 结束时间
-		 */
-		public function set endTime(value: long): void{
-			this._endTime = value;
+			return 400202;
 		}
 		
 	}
