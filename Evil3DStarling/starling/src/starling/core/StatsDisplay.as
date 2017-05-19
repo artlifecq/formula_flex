@@ -107,7 +107,6 @@ package starling.core
             addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
             addEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
 			
-			_layerBatchId = int.MAX_VALUE;
 			this.y = 216;
         }
         
