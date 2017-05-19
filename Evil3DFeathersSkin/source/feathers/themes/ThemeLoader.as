@@ -95,7 +95,7 @@ package feathers.themes
 			} 
 			catch(error:Error) 
 			{
-				throw new Error("ThemeLoader  Error! Repeated requests or invalid file：",  ld.url );
+				throw new Error("ThemeLoader  Error! Repeated requests or invalid file："+ld.url );
 				return;
 			}
 		

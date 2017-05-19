@@ -12,24 +12,18 @@ package com.rpgGame.coreData.clientConfig
 	*/
 	public class ActivityBarInfo
 	{
-		 /**  LUNJIAN */
-		public var key:String;
+		 /**    */
+		public var id:int;
+		 /**    */
+		public var row:int;
 		 /**    */
 		public var order:int;
-		 /**  论剑 */
-		public var title:String;
-		 /**  论剑tipReady */
-		public var tipReady:String;
-		 /**  论剑message */
-		public var message:String;
-		 /**  论剑tipRuning */
-		public var tipRuning:String;
 		 /**    */
-		public var openTime:int;
+		public var name:String;
 		 /**    */
-		public var duration:int;
+		public var showEft:int;
 		 /**    */
-		public var openTimeAdvance:int;
+		public var inZone:int;
 
 	}
 }

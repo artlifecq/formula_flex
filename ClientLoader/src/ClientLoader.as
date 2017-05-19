@@ -29,7 +29,7 @@ package
 	 * 修改时间：2016-3-31 上午10:15:32
 	 *
 	 */
-	[SWF(width = "1600", height = "900", backgroundColor = "0x000000", frameRate = "60", quality = "LOW")]
+	[SWF(width = "1600", height = "1000", backgroundColor = "0x000000", frameRate = "60", quality = "LOW")]
 	public class ClientLoader extends Sprite
 	{
 		/** 加载的主程序地址 **/
@@ -60,6 +60,8 @@ package
 		 * 微端桥接
 		 */
 		public var GlobalBridge : Class = null;
+		
+		private var _key:String = "12,66,78";
 
 		public function ClientLoader()
 		{
@@ -216,6 +218,29 @@ package
 			trace("\r版本文件加载完成...");
 			//
 			startLoadClient();
+		}
+		
+		private function decodeFun(bytes:ByteArray):void
+		{
+			if (_isRelease)
+			{
+				bytes.uncompress();
+				var key:String = bytes.readUTF();
+				if (key == _key)
+				{
+					bytes.position = 10;
+					var by:ByteArray = new ByteArray();
+					bytes.readBytes(by);
+					bytes.clear();
+					bytes = by;
+				}
+				else
+				{
+					bytes.clear();
+					bytes = null;
+				}
+				trace("客户端文件加载完成...,解密开始..." + bytes.length);
+			}
 		}
 
 		private function startLoadClient() : void
