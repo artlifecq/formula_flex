@@ -29,13 +29,13 @@ package com.rpgGame.app.ui.main.dungeon
 		public function updateValue(id:int,value:int):void
 		{
 			_list.put(id,value);
-			var count:int = 0;
-			var keys:Array = _list.values();
-			for each(var key:* in keys)
+			var total:int = 0;
+			var valus:Array = _list.values();
+			for each(var count:int in valus)
 			{
-				count += _list.get(keys);
+				total += count;
 			}
-			currentCount = count;
+			currentCount = total;
 		}
 		private var _qdailyZoneData:Q_dailyzone_monster;
 		private var _monsterCfg:Q_monster;

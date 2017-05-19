@@ -26,16 +26,12 @@ package com.rpgGame.coreData.clientConfig
 		public var q_count_type:String;
 		 /**  总波数 */
 		public var q_wave_total:int;
-		 /**  经验 */
-		public var q_rewards_exp:int;
-		 /**  金币 */
-		public var q_rewards_money:int;
-		 /**  通关奖励 */
+		 /**  通关奖励（实际发奖励的时候用，在结算面板那里显示） */
 		public var q_rewards_show:String;
 		 /**  首通奖励展示 */
 		public var q_special_rewards_show:String;
-		 /**  概率掉落 */
-		public var q_ranom_drop:String;
+		 /**  前端面板展示奖励（供前端在进入副本面板展示，因为有些面板不会展示经验和金币的奖励） */
+		public var q_rewards_client:String;
 		 /**  限时时间（秒） */
 		public var q_zone_time:int;
 		 /**  免费进入次数 */

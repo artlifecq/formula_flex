@@ -173,7 +173,7 @@ package com.rpgGame.app.ui.main.dungeon
 				FaceUtil.SetItemGrid(_rewardIcons[i],ItemUtil.convertClientItemInfo(item), true);
 			}
 			_skin.uiKill.visible = false;
-			var arr:Array = _data.q_star_condition.split(",");
+			var arr:Array = JSONUtil.decode( _data.q_star_condition);
 			_lastList = new Array();
 			for each(var str:String  in arr)
 			{

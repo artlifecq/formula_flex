@@ -21,18 +21,6 @@ package org.mokylin.skin.app.fuben
 
 		public var btnPrev:feathers.controls.Button;
 
-		public var ico_1:feathers.controls.UIAsset;
-
-		public var ico_2:feathers.controls.UIAsset;
-
-		public var ico_3:feathers.controls.UIAsset;
-
-		public var ico_4:feathers.controls.UIAsset;
-
-		public var ico_5:feathers.controls.UIAsset;
-
-		public var ico_6:feathers.controls.UIAsset;
-
 		public var list:feathers.controls.List;
 
 
@@ -46,7 +34,7 @@ package org.mokylin.skin.app.fuben
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [__FuBen_ZhenQi_Skin_UIAsset1_i(),__FuBen_ZhenQi_Skin_UIAsset2_i(),btnNext_i(),btnPrev_i(),__FuBen_ZhenQi_Skin_UIAsset3_i(),ico_1_i(),ico_2_i(),ico_3_i(),ico_4_i(),ico_5_i(),ico_6_i(),list_i()];
+			this.elementsContent = [__FuBen_ZhenQi_Skin_UIAsset1_i(),__FuBen_ZhenQi_Skin_UIAsset2_i(),btnNext_i(),btnPrev_i(),__FuBen_ZhenQi_Skin_UIAsset3_i(),list_i()];
 			
 			states = {
 			};
@@ -106,72 +94,6 @@ package org.mokylin.skin.app.fuben
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jiantou;
 			temp.x = 53;
 			temp.y = 238;
-			return temp;
-		}
-
-		private function ico_1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_1 = temp;
-			temp.name = "ico_1";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/48.png";
-			temp.x = 293;
-			temp.y = 507;
-			return temp;
-		}
-
-		private function ico_2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_2 = temp;
-			temp.name = "ico_2";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/48.png";
-			temp.x = 354;
-			temp.y = 507;
-			return temp;
-		}
-
-		private function ico_3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_3 = temp;
-			temp.name = "ico_3";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/48.png";
-			temp.x = 415;
-			temp.y = 507;
-			return temp;
-		}
-
-		private function ico_4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_4 = temp;
-			temp.name = "ico_4";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/48.png";
-			temp.x = 475;
-			temp.y = 507;
-			return temp;
-		}
-
-		private function ico_5_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_5 = temp;
-			temp.name = "ico_5";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/48.png";
-			temp.x = 536;
-			temp.y = 507;
-			return temp;
-		}
-
-		private function ico_6_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_6 = temp;
-			temp.name = "ico_6";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/48.png";
-			temp.x = 597;
-			temp.y = 507;
 			return temp;
 		}
 

@@ -3,19 +3,26 @@ package com.rpgGame.app.manager
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.coreData.SpriteStat;
+	import com.rpgGame.coreData.UNIQUEID;
 	import com.rpgGame.coreData.cfg.DailyZoneCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_daily_zone;
+	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
+	import com.rpgGame.coreData.info.alert.AlertSetInfo;
+	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.netData.dailyzone.bean.DailyZonePanelInfo;
 	import com.rpgGame.netData.dailyzone.message.CSBuyCountInfoMessage;
 	import com.rpgGame.netData.dailyzone.message.CSGetDailyZonePanelMessage;
 	import com.rpgGame.netData.zone.message.ReqZoneCommonEnterMessage;
 	
+	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.connection.SocketConnection;
 
 	public class DailyZoneDataManager
 	{
+		public static var UPDATEDAILYZONEINFO:int = UNIQUEID.NEXT;
 		private static var _instance:DailyZoneDataManager;
 		public static function instance():DailyZoneDataManager
 		{
@@ -38,6 +45,7 @@ package com.rpgGame.app.manager
 			{
 				_allList.put(info.dailyzoneId,info);
 			}
+			EventManager.dispatchEvent(UPDATEDAILYZONEINFO);
 		}
 		
 		public function getInfoById(id:int):DailyZonePanelInfo
@@ -54,13 +62,22 @@ package com.rpgGame.app.manager
 			
 			if(info.canBuyCount<=0)
 			{
-				NoticeManager.showNotifyById(4002);
+				NoticeManager.showNotifyById(21000);
 				return ;
 			}
 			if(isSure)
 			{
-				
+				var alertSet : AlertSetInfo = new AlertSetInfo(LangAlertInfo.BuyCombatCount, info.price);
+				GameAlert.showAlert(alertSet,alertCb,info);
 			}else{
+				srueBuyInfo(true,info);
+			}
+		}
+		
+		private function alertCb(art:GameAlert,info:DailyZonePanelInfo):void
+		{
+			if(art.clickType == AlertClickTypeEnum.TYPE_SURE)
+			{
 				srueBuyInfo(true,info);
 			}
 		}
@@ -70,7 +87,7 @@ package com.rpgGame.app.manager
 			if(!res)
 				return;
 			var stat:SpriteStat=MainRoleManager.actorInfo.totalStat;
-			if(info.price<stat.getResData(CharAttributeType.RES_GOLD))
+			if(info.price>stat.getResData(CharAttributeType.RES_GOLD))
 			{
 				NoticeManager.showNotifyById(2008);
 				return ;

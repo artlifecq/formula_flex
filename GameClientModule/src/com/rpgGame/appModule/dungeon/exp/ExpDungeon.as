@@ -9,6 +9,7 @@ package com.rpgGame.appModule.dungeon.exp
 	import com.rpgGame.coreData.clientConfig.Q_daily_zone;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ItemUtil;
+	import com.rpgGame.coreData.type.item.GridBGType;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.dailyzone.bean.DailyZonePanelInfo;
 	
@@ -29,18 +30,24 @@ package com.rpgGame.appModule.dungeon.exp
 			_skin = _uiskin as FuBen_JingYan_Skin;
 			var list:Array = DailyZoneCfgData.getTypeList(3);
 			var data:Q_daily_zone = list[0] as Q_daily_zone;
-			var itemInfos:Object = JSONUtil.decode( data.q_special_rewards_show);
+			
+			
+			var itemInfos:Array = JSON.parse(data.q_special_rewards_show) as Array;
+			var length:int = itemInfos.length;
+			var startX:Number = 475 - (60*length)/2;
 			var item:ItemInfo;
 			var icon:IconCDFace;
-			for(var i:int = 0;i<6;i++)
+			for(var i:int = 0;i<length;i++)
 			{
-				if(!itemInfos.hasOwnProperty(i))
-					break;
+				var grid:IconCDFace = new IconCDFace(IcoSizeEnum.ICON_48);
+				grid.setBg( GridBGType.GRID_SIZE_48,1 );
+				grid.bgImage.styleName = "ui/common/gezikuang/tubiaodikuang/48.png";
+				_skin.container.addChild(grid);
+				grid.x = startX+60*i;
+				grid.y = 507;
 				item = new ItemInfo();
 				item.itemModelId = itemInfos[i]["mod"];
-				item.num = itemInfos[i]["num"];
-				icon = FaceUtil.creatIconCDFaceByUIAsset(_skin["ico_"+(i+1)],IcoSizeEnum.ICON_48,1,5,5)
-				FaceUtil.SetItemGrid(icon,ItemUtil.convertClientItemInfo(item), true);
+				FaceUtil.SetItemGrid(grid,ItemUtil.convertClientItemInfo(item), true);
 			}
 			
 			_dailyZoneInfo = DailyZoneDataManager.instance().getInfoById(data.q_id);
@@ -52,6 +59,9 @@ package com.rpgGame.appModule.dungeon.exp
 			{
 				case _skin.btnEnter:
 					DailyZoneDataManager.instance().requestCombat(_dailyZoneInfo);
+					break;
+				case _skin.btnAdd:
+					DailyZoneDataManager.instance().buyCount(_dailyZoneInfo,true);
 					break;
 			}
 		}

@@ -5,6 +5,7 @@ package org.mokylin.skin.app.fuben
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import org.mokylin.skin.component.button.ButtonSkin_jia;
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
 
 	/**
@@ -17,19 +18,9 @@ package org.mokylin.skin.app.fuben
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var btnAdd:feathers.controls.Button;
+
 		public var btnEnter:feathers.controls.Button;
-
-		public var ico_1:feathers.controls.UIAsset;
-
-		public var ico_2:feathers.controls.UIAsset;
-
-		public var ico_3:feathers.controls.UIAsset;
-
-		public var ico_4:feathers.controls.UIAsset;
-
-		public var ico_5:feathers.controls.UIAsset;
-
-		public var ico_6:feathers.controls.UIAsset;
 
 		public var lbGoumai:feathers.controls.Label;
 
@@ -48,7 +39,7 @@ package org.mokylin.skin.app.fuben
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [__FuBen_JingYan_Skin_UIAsset1_i(),__FuBen_JingYan_Skin_UIAsset2_i(),__FuBen_JingYan_Skin_UIAsset3_i(),ico_1_i(),ico_2_i(),ico_3_i(),ico_4_i(),ico_5_i(),ico_6_i(),lbTips_i(),lbShengyu_i(),lbGoumai_i(),btnEnter_i()];
+			this.elementsContent = [__FuBen_JingYan_Skin_UIAsset1_i(),__FuBen_JingYan_Skin_UIAsset2_i(),__FuBen_JingYan_Skin_UIAsset3_i(),lbTips_i(),lbShengyu_i(),lbGoumai_i(),btnEnter_i(),btnAdd_i()];
 			
 			states = {
 			};
@@ -88,6 +79,17 @@ package org.mokylin.skin.app.fuben
 			return temp;
 		}
 
+		private function btnAdd_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btnAdd = temp;
+			temp.name = "btnAdd";
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jia;
+			temp.x = 146;
+			temp.y = 497;
+			return temp;
+		}
+
 		private function btnEnter_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
@@ -100,72 +102,6 @@ package org.mokylin.skin.app.fuben
 			temp.width = 79;
 			temp.x = 813;
 			temp.y = 513;
-			return temp;
-		}
-
-		private function ico_1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_1 = temp;
-			temp.name = "ico_1";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/48.png";
-			temp.x = 293;
-			temp.y = 507;
-			return temp;
-		}
-
-		private function ico_2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_2 = temp;
-			temp.name = "ico_2";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/48.png";
-			temp.x = 354;
-			temp.y = 507;
-			return temp;
-		}
-
-		private function ico_3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_3 = temp;
-			temp.name = "ico_3";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/48.png";
-			temp.x = 415;
-			temp.y = 507;
-			return temp;
-		}
-
-		private function ico_4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_4 = temp;
-			temp.name = "ico_4";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/48.png";
-			temp.x = 475;
-			temp.y = 507;
-			return temp;
-		}
-
-		private function ico_5_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_5 = temp;
-			temp.name = "ico_5";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/48.png";
-			temp.x = 536;
-			temp.y = 507;
-			return temp;
-		}
-
-		private function ico_6_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_6 = temp;
-			temp.name = "ico_6";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/48.png";
-			temp.x = 597;
-			temp.y = 507;
 			return temp;
 		}
 
@@ -203,7 +139,8 @@ package org.mokylin.skin.app.fuben
 			lbTips = temp;
 			temp.name = "lbTips";
 			temp.height = 86;
-			temp.text = "副本提示：";
+			temp.htmlText = "副本提示：<br>1. 当前一波敌人全部死亡后会刷新出下一波怪物，请在限定时间内迅速击杀，杀敌越多，奖励越丰厚。<br>2. 副本会根据您的等级和杀敌数量给予银两奖励。<br>3. 您可购买额外的挑战次数，购买次数与VIP等级相关。";
+			temp.leading = 8;
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 889;

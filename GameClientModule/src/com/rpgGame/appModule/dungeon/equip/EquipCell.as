@@ -66,21 +66,13 @@ package com.rpgGame.appModule.dungeon.equip
 			_skin.uiBg.styleName = "ui/big_bg/fuben/zhenqi/"+data.q_bgicon+".jpg";
 			_skin.numZhanli.number = data.q_combat;
 			
-			var itemInfos:Object = JSONUtil.decode( data.q_special_rewards_show);
-			var item:ItemInfo = new ItemInfo();
-			item.itemModelId = itemInfos[0]["mod"];
-			item.num = itemInfos[0]["num"];
-			FaceUtil.SetItemGrid(_fistIcon,ItemUtil.convertClientItemInfo(item), true);
+			var itemInfos:Array = ItemUtil.jsonParseItemClientList(data.q_special_rewards_show);
+			FaceUtil.SetItemGrid(_fistIcon,itemInfos[0], true);
 			
-			itemInfos = JSONUtil.decode( data.q_rewards_show);
+			itemInfos = ItemUtil.jsonParseItemClientList(data.q_rewards_show);
 			for(var i:int = 0;i<_rewardIcons.length;i++)
 			{
-				if(!itemInfos.hasOwnProperty(i))
-					break;
-				item = new ItemInfo();
-				item.itemModelId = itemInfos[i]["mod"];
-				item.num = itemInfos[i]["num"];
-				FaceUtil.SetItemGrid(_rewardIcons[i],ItemUtil.convertClientItemInfo(item), true);
+				FaceUtil.SetItemGrid(_rewardIcons[i],itemInfos[i], true);
 			}
 			_skin.lastCombatCount.visible = false;
 			if(_dailyZoneInfo==null)
