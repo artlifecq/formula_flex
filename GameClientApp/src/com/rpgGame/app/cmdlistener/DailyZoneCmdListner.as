@@ -42,8 +42,7 @@ package com.rpgGame.app.cmdlistener
 		
 		private function getSCDailyZoneTimeInfoMessage(msg:SCDailyZoneTimeInfoMessage):void
 		{
-			if(msg.success ==1)
-				EventManager.dispatchEvent(DungeonEvent.UPDATE_DAILYZONE_TIME,msg.remainTime);
+			EventManager.dispatchEvent(DungeonEvent.UPDATE_DAILYZONE_TIME,msg.endTime.fValue);
 		}
 		
 		private function getSCDailyZoneRewardPanelInfoMessage(msg:SCDailyZoneRewardPanelInfoMessage):void

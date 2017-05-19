@@ -5,8 +5,8 @@ package org.mokylin.skin.app.zuoqi
 	import feathers.controls.Group;
 	import feathers.controls.Label;
 	import feathers.controls.Radio;
+	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
-	import feathers.controls.TextInput;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
 	import org.mokylin.skin.component.button.ButtonSkin_jia;
@@ -14,7 +14,6 @@ package org.mokylin.skin.app.zuoqi
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
 	import org.mokylin.skin.component.button.ButtonSkin_putong3;
 	import org.mokylin.skin.component.radio.RadioButtonSkin_1;
-	import org.mokylin.skin.component.text.textInput3_Skin;
 
 	/**
 	 * @private
@@ -26,15 +25,11 @@ package org.mokylin.skin.app.zuoqi
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var benfuqianwang:feathers.controls.Button;
-
-		public var benfuzudui:feathers.controls.Label;
-
 		public var bg:feathers.controls.UIAsset;
 
-		public var bizhong:feathers.controls.Group;
+		public var bg0:feathers.controls.UIAsset;
 
-		public var bossqianwang:feathers.controls.Button;
+		public var bizhong:feathers.controls.Group;
 
 		public var btnClose:feathers.controls.Button;
 
@@ -50,25 +45,27 @@ package org.mokylin.skin.app.zuoqi
 
 		public var btn_yuanbao:feathers.controls.Radio;
 
+		public var gBindGold:feathers.controls.Group;
+
+		public var gGetPath:feathers.controls.Group;
+
+		public var gGold:feathers.controls.Group;
+
 		public var grp_danjia:feathers.controls.Group;
 
 		public var grp_diejia:feathers.controls.Group;
 
-		public var input_txt:feathers.controls.TextInput;
-
 		public var itembg:feathers.controls.UIAsset;
 
 		public var itemname:feathers.controls.Label;
-
-		public var kuafuqianwang:feathers.controls.Button;
-
-		public var kuafuzudui:feathers.controls.Label;
 
 		public var lab_lijin:feathers.controls.Label;
 
 		public var lab_num:feathers.controls.Label;
 
 		public var lab_yuanbao:feathers.controls.Label;
+
+		public var lbBuyNum:feathers.controls.Label;
 
 		public var lijin:feathers.controls.UIAsset;
 
@@ -77,8 +74,6 @@ package org.mokylin.skin.app.zuoqi
 		public var num_danjia:feathers.controls.Label;
 
 		public var num_zuida:feathers.controls.Label;
-
-		public var shijieboss:feathers.controls.Label;
 
 		public var shuliang:feathers.controls.Group;
 
@@ -97,7 +92,7 @@ package org.mokylin.skin.app.zuoqi
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [bg_i(),__huoquSkin_UIAsset1_i(),btnClose_i(),btn_goumai_i(),btn_chongzhi_i(),zongjia_i(),bizhong_i(),shuliang_i(),__huoquSkin_UIAsset4_i(),benfuzudui_i(),benfuqianwang_i(),kuafuzudui_i(),kuafuqianwang_i(),shijieboss_i(),bossqianwang_i(),titleDisplay_i(),itembg_i(),grp_diejia_i(),grp_danjia_i(),itemname_i()];
+			this.elementsContent = [bg_i(),__huoquSkin_UIAsset1_i(),__huoquSkin_UIAsset2_i(),btnClose_i(),btn_goumai_i(),btn_chongzhi_i(),zongjia_i(),bizhong_i(),shuliang_i(),__huoquSkin_UIAsset5_i(),gGetPath_i(),titleDisplay_i(),itembg_i(),grp_diejia_i(),grp_danjia_i(),itemname_i()];
 			
 			states = {
 			};
@@ -172,31 +167,40 @@ package org.mokylin.skin.app.zuoqi
 		private function __huoquSkin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zuoqi/qitalujing.png";
-			temp.x = 82;
-			temp.y = 385;
+			temp.styleName = "ui/big_bg/zuoqi/bg1.png";
+			temp.x = 9;
+			temp.y = 37;
 			return temp;
 		}
 
 		private function __huoquSkin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/tubiao/yuanbao_24.png";
-			temp.x = 108;
-			temp.y = 0;
+			temp.styleName = "ui/app/zuoqi/qitalujing.png";
+			temp.x = 82;
+			temp.y = 385;
 			return temp;
 		}
 
 		private function __huoquSkin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/tubiao/lijin_24.png";
-			temp.x = 108;
-			temp.y = 29;
+			temp.styleName = "ui/common/tubiao/yuanbao_24.png";
+			temp.x = 35;
+			temp.y = 0;
 			return temp;
 		}
 
 		private function __huoquSkin_UIAsset4_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/common/tubiao/lijin_24.png";
+			temp.x = 35;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function __huoquSkin_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zuoqi/shangdianhuode.png";
@@ -205,7 +209,7 @@ package org.mokylin.skin.app.zuoqi
 			return temp;
 		}
 
-		private function __huoquSkin_UIAsset5_i():feathers.controls.UIAsset
+		private function __huoquSkin_UIAsset6_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/common/tubiao/yuanbao_24.png";
@@ -214,7 +218,7 @@ package org.mokylin.skin.app.zuoqi
 			return temp;
 		}
 
-		private function __huoquSkin_UIAsset6_i():feathers.controls.UIAsset
+		private function __huoquSkin_UIAsset7_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/common/tubiao/lijin_24.png";
@@ -224,35 +228,15 @@ package org.mokylin.skin.app.zuoqi
 			return temp;
 		}
 
-		private function benfuqianwang_i():feathers.controls.Button
+		private function bg0_i():feathers.controls.UIAsset
 		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			benfuqianwang = temp;
-			temp.name = "benfuqianwang";
-			temp.bold = false;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.label = "前往";
-			temp.leading = 1;
-			temp.fontSize = 14;
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong3;
-			temp.color = 0xCFC6AE;
-			temp.width = 61;
-			temp.x = 228;
-			temp.y = 413;
-			return temp;
-		}
-
-		private function benfuzudui_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			benfuzudui = temp;
-			temp.name = "benfuzudui";
-			temp.text = "本服组队副本";
-			temp.color = 0x5CB006;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.underline = true;
-			temp.x = 53;
-			temp.y = 416;
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg0 = temp;
+			temp.name = "bg0";
+			temp.styleName = "ui/component/text/input_bg.png";
+			temp.width = 56;
+			temp.x = 96;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -276,25 +260,7 @@ package org.mokylin.skin.app.zuoqi
 			temp.name = "bizhong";
 			temp.x = 53;
 			temp.y = 207;
-			temp.elementsContent = [__huoquSkin_Label2_i(),btn_yuanbao_i(),btn_dianquan_i(),__huoquSkin_UIAsset2_i(),__huoquSkin_UIAsset3_i(),lab_yuanbao_i(),lab_lijin_i()];
-			return temp;
-		}
-
-		private function bossqianwang_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			bossqianwang = temp;
-			temp.name = "bossqianwang";
-			temp.bold = false;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.label = "前往";
-			temp.leading = 1;
-			temp.fontSize = 14;
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong3;
-			temp.color = 0xCFC6AE;
-			temp.width = 61;
-			temp.x = 228;
-			temp.y = 465;
+			temp.elementsContent = [__huoquSkin_Label2_i(),gGold_i(),gBindGold_i()];
 			return temp;
 		}
 
@@ -332,8 +298,8 @@ package org.mokylin.skin.app.zuoqi
 			temp.isSelected = true;
 			temp.styleClass = org.mokylin.skin.component.radio.RadioButtonSkin_1;
 			temp.width = 20;
-			temp.x = 73;
-			temp.y = 30;
+			temp.x = 0;
+			temp.y = 1;
 			return temp;
 		}
 
@@ -382,8 +348,43 @@ package org.mokylin.skin.app.zuoqi
 			temp.isSelected = true;
 			temp.styleClass = org.mokylin.skin.component.radio.RadioButtonSkin_1;
 			temp.width = 20;
-			temp.x = 73;
+			temp.x = 0;
 			temp.y = 3;
+			return temp;
+		}
+
+		private function gBindGold_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			gBindGold = temp;
+			temp.name = "gBindGold";
+			temp.x = 73;
+			temp.y = 29;
+			temp.elementsContent = [btn_dianquan_i(),__huoquSkin_UIAsset4_i(),lab_lijin_i()];
+			return temp;
+		}
+
+		private function gGetPath_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			gGetPath = temp;
+			temp.name = "gGetPath";
+			temp.height = 100;
+			temp.width = 237;
+			temp.x = 53;
+			temp.y = 413;
+			temp.elementsContent = [];
+			return temp;
+		}
+
+		private function gGold_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			gGold = temp;
+			temp.name = "gGold";
+			temp.x = 73;
+			temp.y = 0;
+			temp.elementsContent = [btn_yuanbao_i(),__huoquSkin_UIAsset3_i(),lab_yuanbao_i()];
 			return temp;
 		}
 
@@ -394,7 +395,7 @@ package org.mokylin.skin.app.zuoqi
 			temp.name = "grp_danjia";
 			temp.x = 134;
 			temp.y = 97;
-			temp.elementsContent = [__huoquSkin_Label5_i(),num_danjia_i(),__huoquSkin_UIAsset5_i(),__huoquSkin_UIAsset6_i()];
+			temp.elementsContent = [__huoquSkin_Label5_i(),num_danjia_i(),__huoquSkin_UIAsset6_i(),__huoquSkin_UIAsset7_i()];
 			return temp;
 		}
 
@@ -406,19 +407,6 @@ package org.mokylin.skin.app.zuoqi
 			temp.x = 134;
 			temp.y = 122;
 			temp.elementsContent = [__huoquSkin_Label4_i(),num_zuida_i()];
-			return temp;
-		}
-
-		private function input_txt_i():feathers.controls.TextInput
-		{
-			var temp:feathers.controls.TextInput = new feathers.controls.TextInput();
-			input_txt = temp;
-			temp.name = "input_txt";
-			temp.styleClass = org.mokylin.skin.component.text.textInput3_Skin;
-			temp.textAlign = "center";
-			temp.width = 76;
-			temp.x = 85;
-			temp.y = 0;
 			return temp;
 		}
 
@@ -446,38 +434,6 @@ package org.mokylin.skin.app.zuoqi
 			return temp;
 		}
 
-		private function kuafuqianwang_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			kuafuqianwang = temp;
-			temp.name = "kuafuqianwang";
-			temp.bold = false;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.label = "前往";
-			temp.leading = 1;
-			temp.fontSize = 14;
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong3;
-			temp.color = 0xCFC6AE;
-			temp.width = 61;
-			temp.x = 228;
-			temp.y = 439;
-			return temp;
-		}
-
-		private function kuafuzudui_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			kuafuzudui = temp;
-			temp.name = "kuafuzudui";
-			temp.text = "跨服组队副本";
-			temp.color = 0x5CB006;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.underline = true;
-			temp.x = 53;
-			temp.y = 443;
-			return temp;
-		}
-
 		private function lab_lijin_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -486,8 +442,8 @@ package org.mokylin.skin.app.zuoqi
 			temp.text = "礼金";
 			temp.color = 0xE1D4A9;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 139;
-			temp.y = 31;
+			temp.x = 66;
+			temp.y = 2;
 			return temp;
 		}
 
@@ -514,7 +470,23 @@ package org.mokylin.skin.app.zuoqi
 			temp.text = "元宝";
 			temp.color = 0xE1D4A9;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 139;
+			temp.x = 66;
+			temp.y = 4;
+			return temp;
+		}
+
+		private function lbBuyNum_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbBuyNum = temp;
+			temp.name = "lbBuyNum";
+			temp.height = 21;
+			temp.text = "1000";
+			temp.textAlign = "center";
+			temp.color = 0xBEA757;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 53;
+			temp.x = 97;
 			temp.y = 4;
 			return temp;
 		}
@@ -525,7 +497,6 @@ package org.mokylin.skin.app.zuoqi
 			lijin = temp;
 			temp.name = "lijin";
 			temp.styleName = "ui/common/tubiao/lijin_24.png";
-			temp.visible = false;
 			temp.x = 71;
 			temp.y = 0;
 			return temp;
@@ -576,20 +547,6 @@ package org.mokylin.skin.app.zuoqi
 			return temp;
 		}
 
-		private function shijieboss_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			shijieboss = temp;
-			temp.name = "shijieboss";
-			temp.text = "世界BOSS礼包";
-			temp.color = 0x5CB006;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.underline = true;
-			temp.x = 53;
-			temp.y = 470;
-			return temp;
-		}
-
 		private function shuliang_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
@@ -597,7 +554,7 @@ package org.mokylin.skin.app.zuoqi
 			temp.name = "shuliang";
 			temp.x = 53;
 			temp.y = 171;
-			temp.elementsContent = [max_i(),__huoquSkin_Label3_i(),input_txt_i(),btn_jian_i(),btn_jia_i()];
+			temp.elementsContent = [max_i(),__huoquSkin_Label3_i(),btn_jian_i(),btn_jia_i(),bg0_i(),lbBuyNum_i()];
 			return temp;
 		}
 

@@ -64,7 +64,7 @@ package com.rpgGame.appModule.dungeon.genuine
 				
 				var itemInfos:Object = JSONUtil.decode( q_data.q_rewards_show);
 				var item:ItemInfo;
-				for(var i:int = 0;i<length;i++)
+				for(var i:int = 0;i<_rewardIcons.length;i++)
 				{
 					item = new ItemInfo();
 					item.itemModelId = itemInfos[i]["mod"];

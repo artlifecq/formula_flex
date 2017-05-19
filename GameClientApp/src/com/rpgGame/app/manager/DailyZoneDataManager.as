@@ -4,6 +4,8 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.coreData.SpriteStat;
+	import com.rpgGame.coreData.cfg.DailyZoneCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_daily_zone;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.netData.dailyzone.bean.DailyZonePanelInfo;
 	import com.rpgGame.netData.dailyzone.message.CSBuyCountInfoMessage;
@@ -82,7 +84,9 @@ package com.rpgGame.app.manager
 		public function requestCombat(info:DailyZonePanelInfo):void
 		{
 			var msg:ReqZoneCommonEnterMessage = new ReqZoneCommonEnterMessage();
-			msg.extradata = info.dailyzoneId;
+			var q_data:Q_daily_zone = DailyZoneCfgData.getZoneCfg(info.dailyzoneId);
+			msg.zoneModelid = q_data.q_zone_id;
+			msg.extradata = q_data.q_id;
 			SocketConnection.send(msg);
 		}
 	}

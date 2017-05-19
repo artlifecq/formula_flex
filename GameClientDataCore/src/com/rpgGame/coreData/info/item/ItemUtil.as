@@ -6,6 +6,7 @@ package com.rpgGame.coreData.info.item
 	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.info.task.PrizeInfo;
+	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.ShopType;
 	import com.rpgGame.coreData.type.item.ItemQualityType;
 	import com.rpgGame.coreData.utils.ProtoParseToInfo;
@@ -350,6 +351,34 @@ package com.rpgGame.coreData.info.item
 			var obj:Object=JSON.parse(str);
 			return obj as Array;
 			
+		}
+		
+		public static function getResURL(resType:int):String
+		{
+			switch(resType)
+			{
+				case CharAttributeType.RES_GOLD:
+				{
+					return "ui/common/tubiao/yuanbao_24.png";
+					break;
+				}
+				case CharAttributeType.RES_BIND_GOLD:
+				{
+					return "ui/common/tubiao/lijin_24.png";
+					break;
+				}
+				case CharAttributeType.RES_MONEY:
+				{
+					return "ui/common/tubiao/yinzi_24.png";
+					break;
+				}
+				case CharAttributeType.RES_BIND_MONEY:
+				{
+					return "ui/common/tubiao/yinzib_24.png";
+					break;
+				}
+			}
+			return "";
 		}
 	}
 }

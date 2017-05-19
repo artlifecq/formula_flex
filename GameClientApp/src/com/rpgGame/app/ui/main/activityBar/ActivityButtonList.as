@@ -13,13 +13,14 @@
     import com.rpgGame.coreData.cfg.ActivityBarCfgData;
     import com.rpgGame.coreData.clientConfig.ActivityBarInfo;
     import com.rpgGame.coreData.type.activity.ActivityOpenStateType;
+    import com.rpgGame.coreData.type.activity.ActivityType;
     
     import flash.geom.Point;
     
     import gs.TweenLite;
     
     import org.client.mainCore.manager.EventManager;
-    import org.mokylin.skin.mainui.activityBar.button.ButtonRacing;
+    import org.mokylin.skin.mainui.activityBar.button.ButtonLunjian;
     
     import utils.TimerServer;
 
@@ -53,7 +54,7 @@
             EventManager.addEvent(ActivityEvent.OPEN_ACTIVITY, onOpenActivityGroup);
             EventManager.addEvent(ActivityEvent.CLOSE_ACTIVITY, onCloseActivityGroup);
 //            skinConfig["Taoni"] = [ActivityTaoNiButton, ButtonTaoni];
-            skinConfig["Racing"] = [ActivityButton, ButtonRacing];
+            skinConfig[ActivityType.LUNJIAN] = [ActivityButton, ButtonLunjian];
 //            skinConfig["Maze"] = [ActivityMazeButton, ButtonMaze];
 //            skinConfig["BaZhenTu"] = [ActivityBaZhenTuButton, ButtonBazhentu];
 //            skinConfig["YuMaChang"] = [ActivityYuMaChangButton, ButtonYuMaChang];
@@ -79,15 +80,15 @@
 //            skinConfig["DiaoDui"] = [ActivityDiaoDuiButton, ButtonDiaodui];
 			
 			
-//            var activityInfos:Array = ActivityBarCfgData.list;
-//			var i:int = 0;
-//            while (i < activityInfos.length)
-//            {
-//                info = activityInfos[i] as ActivityBarInfo;
-//                addActivityButtonBase(info);
-//                i++;
-//            }
-//            updatePosition();
+            var activityInfos:Array = ActivityBarCfgData.list;
+			var i:int = 0;
+            while (i < activityInfos.length)
+            {
+                info = activityInfos[i] as ActivityBarInfo;
+                addActivityButtonBase(info);
+                i++;
+            }
+            updatePosition();
         }
 
         private function onButtonClick(button:ActivityButtonBase):void
@@ -95,9 +96,9 @@
             trace("点击了：" + button.title);
             switch (button.type)
             {
-//                case "Taoni":
-//                    CountryTaoNiManager.walkToActivityScene();
-//                    return;
+                case ActivityType.LUNJIAN:
+                    AppManager.showApp(AppConstant.SWORD_PANL);
+                    return;
 //                case "HotSpring":
 //                    HotSpringManager.walkToActivityNpc();
 //                    return;

@@ -2,18 +2,21 @@ package com.rpgGame.app.ui.main.taskbar
 {
 	import com.rpgGame.app.fight.spell.CastSpellHelper;
 	import com.rpgGame.app.manager.TrusteeshipManager;
+	import com.rpgGame.app.manager.WalkToRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.TaskSender;
+	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.role.MonsterData;
+	import com.rpgGame.coreData.role.SceneCollectData;
 	import com.rpgGame.coreData.type.TaskType;
 
 	public class TaskControl
@@ -180,22 +183,18 @@ package com.rpgGame.app.ui.main.taskbar
 		/**采集寻路完成开始采集了*/
 		public static function startGather(modeid :int):void
 		{
-			var list : Vector.<SceneRole> =SceneManager.getSceneRoleList();
+			var list : Vector.<SceneRole> =SceneManager.getSceneCollectList();
 			list.sort(CastSpellHelper.onSortNearestRole);
-			var moustList: Vector.<MonsterData>=new Vector.<MonsterData>();
-			var monsterData : MonsterData
+			var collectData : SceneCollectData;
 			for each(var rdata:SceneRole in list)
 			{
 				if(rdata!=null&&rdata.data!=null)
 				{
-					monsterData=rdata.data as MonsterData;
-					if(monsterData!=null)
+					collectData = rdata.data as SceneCollectData;
+					if(collectData!=null&&collectData.modelID==modeid)
 					{
-						if(monsterData.modelID==modeid)
-						{
-							TaskSender.sendStartGatherMessage(monsterData.serverID);
-							return;
-						}
+						WalkToRoleManager.walkToRole(rdata);
+						return;
 					}
 				}
 				

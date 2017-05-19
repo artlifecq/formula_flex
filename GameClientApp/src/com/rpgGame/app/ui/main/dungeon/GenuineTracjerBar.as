@@ -74,9 +74,9 @@ package com.rpgGame.app.ui.main.dungeon
 				return ;
 			cell.updateValue(currentWaveId,killerCount);
 		}
-		private function updatedailyZoneTime(lastTime:int):void
+		private function updatedailyZoneTime(lastTime:Number):void
 		{
-			_endTime = lastTime;
+			_endTime = lastTime/1000;
 			currentStateEnd();
 			Starling.juggler.add(this);
 		}
@@ -107,7 +107,7 @@ package com.rpgGame.app.ui.main.dungeon
 					_currentDisTime = _data.q_zone_time- _lastList[3];
 					break;
 				default:
-					stopTimer();
+						stopTimer();
 					break;
 			}
 		}
@@ -162,7 +162,7 @@ package com.rpgGame.app.ui.main.dungeon
 				_skin.ui_head.styleName = "ui/mainui/fubenzhuizong/richangfuben/zhuangbeifuben.png";
 			}
 			var itemInfos:Object = JSONUtil.decode( _data.q_special_rewards_show);
-			var item:ItemInfo = JSONUtil.decode( _data.q_rewards_show);
+			var item:ItemInfo;
 			for(var i:int = 0;i<_rewardIcons.length;i++)
 			{
 				if(!itemInfos.hasOwnProperty(i))
@@ -173,7 +173,12 @@ package com.rpgGame.app.ui.main.dungeon
 				FaceUtil.SetItemGrid(_rewardIcons[i],ItemUtil.convertClientItemInfo(item), true);
 			}
 			_skin.uiKill.visible = false;
-			_lastList = _data.q_star_condition.split(",");
+			var arr:Array = _data.q_star_condition.split(",");
+			_lastList = new Array();
+			for each(var str:String  in arr)
+			{
+				_lastList.push(int(str));
+			}
 		}
 		override protected function onHide():void
 		{

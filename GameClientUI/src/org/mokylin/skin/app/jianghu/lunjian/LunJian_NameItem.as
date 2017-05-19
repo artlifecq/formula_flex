@@ -40,10 +40,9 @@ package org.mokylin.skin.app.jianghu.lunjian
 			this.width = 146;
 			this.elementsContent = [__LunJian_NameItem_UIAsset1_i(),selectedBtn_i(),lbName_i(),lbLevel_i(),numBg_i(),lbNum_i()];
 			
-			
 			states = {
 			};
-			skinNames={"enabled":"org.mokylin.skin.app.jianghu.lunjian.NameItemSelect"};
+			skinNames={};
 		}
 
 

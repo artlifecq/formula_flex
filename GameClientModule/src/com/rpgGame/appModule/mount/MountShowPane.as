@@ -33,7 +33,7 @@ package com.rpgGame.appModule.mount
 			_numeric.addEventListener(Event.CHANGE,valueChangeHandler);
 			_numeric.minValue = 1;
 			_numeric.maxFun = getMaxNum;
-			_numeric.setSkinInfo(_skin.btn_jian,_skin.btn_jia,_skin.max,_skin.input_txt);
+			//_numeric.setSkinInfo(_skin.btn_jian,_skin.btn_jia,_skin.max,_skin.input_txt);
 		}
 		
 		private function valueChangeHandler():void

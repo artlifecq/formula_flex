@@ -238,6 +238,9 @@ package com.rpgGame.app.cmdlistener.engine
 					}else if(role.type==SceneCharType.DROP_GOODS){//掉落物
 						WalkToRoleManager.walkToRole(role);
 					}
+					else if(role.type==SceneCharType.COLLECT){//采集物
+						WalkToRoleManager.walkToRole(role);
+					}
 					else 
 					{
 						var modeState : int = FightManager.getFightRoleState(currTarget as SceneRole);

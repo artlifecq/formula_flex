@@ -121,7 +121,7 @@ package com.rpgGame.appModule.dungeon.equip
 				_skin.lastCombatCount.visible = false;
 			}else{
 				_skin.lastCombatCount.visible = true;
-				_skin.btnEnter.visible = (_dailyZoneInfo.remainCount==0);
+				_skin.btnEnter.visible = (_dailyZoneInfo.remainCount>0);
 				_skin.lbNum.text = _dailyZoneInfo.remainCount.toString();
 			}
 		}

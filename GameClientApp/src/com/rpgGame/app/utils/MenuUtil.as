@@ -136,7 +136,7 @@ package com.rpgGame.app.utils
 				switch (type)
 				{
 					case LangMenu.SELL:
-//						ItemSender.reqSellGoods(item.index);
+						Mgr.shopMgr.readySellItem(item);
 						break;
 					case LangMenu.MOVE:
 						EventManager.dispatchEvent(ItemEvent.ITEM_PRE_MOVE, data);

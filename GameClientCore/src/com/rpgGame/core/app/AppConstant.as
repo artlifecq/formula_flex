@@ -385,6 +385,9 @@ package com.rpgGame.core.app
 		public static var SYSTEMSET_PANEL:String = createAppInfo("systemset.SystemsetingPanel","systemSet");
 		/**经脉**/
 		public static var JINGMAI_STONE:String = createAppInfo("jingmai.sub.NoStoneNoticePanelExt","beibao");
-		
+		/**商城**/
+		public static var MALL_PANEL:String = createAppInfo("shop.MallMainPanelExt","shangcheng");
+		/**售卖道具**/
+		public static var ITEM_SELL_PANEL:String = createAppInfo("shop.ItemSellAlertExtPanelExt");
 	}
 }

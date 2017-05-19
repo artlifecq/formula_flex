@@ -55,9 +55,9 @@ package com.rpgGame.app.ui.main.dungeon
 			_waveInfo[currentWaveId] = killerCount;
 			refeashInfo();
 		}
-		private function updatedailyZoneTime(lastTime:int):void
+		private function updatedailyZoneTime(lastTime:Number):void
 		{
-			_endTime = lastTime;
+			_endTime = lastTime/1000;
 			
 			Starling.juggler.add(this);
 		}

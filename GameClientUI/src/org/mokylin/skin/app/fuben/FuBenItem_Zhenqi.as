@@ -143,10 +143,9 @@ package org.mokylin.skin.app.fuben
 			temp.label = "挑 战";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
 			temp.color = 0xCFC6AE;
-			temp.visible = false;
 			temp.width = 79;
-			temp.x = 58;
-			temp.y = 335;
+			temp.x = 56;
+			temp.y = 311;
 			return temp;
 		}
 
@@ -160,8 +159,8 @@ package org.mokylin.skin.app.fuben
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
 			temp.color = 0xCFC6AE;
 			temp.width = 79;
-			temp.x = 58;
-			temp.y = 300;
+			temp.x = 57;
+			temp.y = 311;
 			return temp;
 		}
 
@@ -259,7 +258,7 @@ package org.mokylin.skin.app.fuben
 			lastCombatCount = temp;
 			temp.name = "lastCombatCount";
 			temp.x = 57;
-			temp.y = 336;
+			temp.y = 354;
 			temp.elementsContent = [__FuBenItem_Zhenqi_Label1_i(),lbNum_i()];
 			return temp;
 		}
@@ -398,7 +397,7 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiOk = temp;
 			temp.name = "uiOk";
-			temp.styleName = "ui/app/fuben/yinzhang.png";
+			temp.styleName = "ui/common/yilingqu.png";
 			temp.x = 45;
 			temp.y = 70;
 			return temp;

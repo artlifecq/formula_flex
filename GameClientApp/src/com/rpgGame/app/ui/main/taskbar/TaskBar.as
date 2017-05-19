@@ -173,11 +173,7 @@ package com.rpgGame.app.ui.main.taskbar
 		/**点击npc寻路完成*/
 		private function taskNpc(npcId:int,serverID:long):void
 		{
-			if(TaskMissionManager.isGatherItem(npcId))//如果是采集物就采集
-			{
-				TaskSender.sendStartGatherMessage(serverID);
-			}
-			else if(TaskMissionManager.isMainTaskNpc(npcId))//如果是任务NPC就打开面板
+			if(TaskMissionManager.isMainTaskNpc(npcId))//如果是任务NPC就打开面板
 			{
 				TaskControl.showLeadPanel();
 			}
