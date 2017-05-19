@@ -81,9 +81,12 @@ package com.editor.manager
 //			CameraFrontController.LOCK_DISTANCE = 90000;
 //            CameraFrontController.startControl(Stage3DLayerManager.stage);
 //            CameraFrontController.sceneCamera = Scene.scene.sceneCamera;
+			
 			CameraController.initcontroller(camera, target, SceneRoleManager.getInstance().targetPlayer);
-			CameraController.initLockOnControl(0, 0, 89, 5000, true, true, true, 100, 15000, -89, 89, true, 100,onMouseWheelFunc);
+			CameraController.initLockOnControl(0, 0, 90, 5000, true, false, false, 100, 15000, -90, 90, false, 100,onMouseWheelFunc);
 			CameraController.switchToLockOnControl();
+			camera.moveUp(500);
+			camera.moveLeft(500);
 			
 			///以下是针对2d地图特殊处理，暂时写到这里
             CameraController.lockedOnPlayerController.mouseLeftControlable = false;
@@ -104,8 +107,14 @@ package com.editor.manager
 		public static var dragging:Boolean = false;
 		public static var hasMoved:Boolean = false;
 		private static var click:Point = new Point();
+		
+		private static var num:uint = 1;
+		
 		private static function loop(e:Event) : void
 		{
+//			num++;
+//			EditorCameraManager.camera.moveUp(num);
+//			EditorCameraManager.camera.moveLeft(num);
 			if (dragging)
 			{
 				var dx:Number = (Stage3DLayerManager.stage.mouseX - click.x) * (proHeight/1000);
@@ -153,12 +162,12 @@ package com.editor.manager
 
 		public static function updateProperty() : void
 		{
-			/*if(EditorCameraManager.camera && EditorCameraManager.camera.lens is OrthographicLens)
+			if(EditorCameraManager.camera && EditorCameraManager.camera.lens is OrthographicLens)
 			{
-				trace("aaaaa camera");
+//				trace("aaaaa camera");
 				(EditorCameraManager.camera.lens as OrthographicLens).projectionHeight = 8000;
 			}
-            return;*/
+//            return;
 			var info : FuncTagInfo = FuncTagManager.getInstance().currSelectedFuncTag;
 			if (_isFreeMode || info.featureType == FeaturesType.TRAIL_TYPE)
 			{
@@ -180,7 +189,7 @@ package com.editor.manager
 					SceneRoleManager.getInstance().targetPlayer.clingGroundCalculate = SceneManager.getInstance().mainScene.clingGround;
 					if (!SceneManager.getInstance().mainScene.isLoading)
 					{
-						CameraController.lockedOnPlayerController.checkBlock = true;
+						CameraController.lockedOnPlayerController.checkBlock = false;
 					}
 				}
 			}

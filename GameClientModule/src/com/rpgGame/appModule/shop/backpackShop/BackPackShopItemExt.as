@@ -49,7 +49,7 @@ package com.rpgGame.appModule.shop.backpackShop
 			}
 			else
 			{
-				Mgr.shopMgr.rebuyItem(_data as ItemInfo);
+				Mgr.shopMgr.rebuyItem(_data.item as ItemInfo);
 			}
 		}
 		
@@ -63,7 +63,7 @@ package com.rpgGame.appModule.shop.backpackShop
 			}
 			else
 			{
-				showRebuyItem(_data as ItemInfo)
+				showRebuyItem(_data.item as ItemInfo)
 			}
 		}
 		private function showSellItem(vo:ShopItemVo):void

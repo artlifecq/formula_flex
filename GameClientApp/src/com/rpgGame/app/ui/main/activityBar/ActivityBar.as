@@ -5,9 +5,7 @@
     import com.rpgGame.core.manager.tips.TargetTipsMaker;
     import com.rpgGame.core.manager.tips.TipTargetManager;
     import com.rpgGame.core.ui.SkinUI;
-    import com.rpgGame.coreData.cfg.ActivityBarCfgData;
     import com.rpgGame.coreData.cfg.LanguageConfig;
-    import com.rpgGame.coreData.clientConfig.ActivityBarInfo;
     
     import feathers.controls.Button;
     
@@ -97,18 +95,6 @@
                 return;
             }
             tweenToOpen();
-        }
-
-        private function showArrow(type:String):void
-        {
-            var info:ActivityBarInfo = ActivityBarCfgData.getActivityBarInfo(type);
-            if (info != null)
-            {
-//                _skin.arrowImg.visible = true;
-//                _skin.labMessage.visible = true;
-//                _skin.labMessage.htmlText = info.message;
-            }
-            trace("活动类型：》》》》》》》》》》》》》》" + info.message);
         }
 
         private function showNewMessageEffect():void
