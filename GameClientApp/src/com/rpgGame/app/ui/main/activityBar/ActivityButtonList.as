@@ -96,7 +96,7 @@
             trace("点击了：" + button.title);
             switch (button.type)
             {
-                case ActivityType.LUNJIAN:
+                case 102:
                     AppManager.showApp(AppConstant.SWORD_PANL);
                     return;
 //                case "HotSpring":
