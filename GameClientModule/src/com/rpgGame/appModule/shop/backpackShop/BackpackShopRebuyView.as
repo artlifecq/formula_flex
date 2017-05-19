@@ -60,7 +60,22 @@ package com.rpgGame.appModule.shop.backpackShop
 			// TODO Auto-generated method stub
 			var msg:SCRebuyItemInfosMessage=event.data;
 			imgNone.visible=msg.items.length==0;
-			this.list.dataProvider=new ListCollection(msg.items);
+			var objList:Array=[];
+			var len:int=msg.items.length;
+			for (var i:int = 0; i <len; i++) 
+			{
+				var tmp:Object=new Object();
+				tmp.item=msg.items[i];
+				tmp.time=uint(msg.timeKeys[i]);
+				objList.push(tmp);
+			}
+			
+			objList.sortOn("time",Array.DESCENDING);
+			this.list.dataProvider=new ListCollection(objList);
+		}
+		private function sort():void
+		{
+			
 		}
 		public function onHide():void
 		{
