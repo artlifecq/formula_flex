@@ -282,6 +282,7 @@ package
 			//			ProcessStateMachine.getInstance().pushProcess(new GetMainPlayerInfo());
 			ProcessStateMachine.getInstance().pushProcess(new EnterGame());
 			ProcessStateMachine.getInstance().pushProcess(new LoadPublicUIAssets());
+//			ProcessStateMachine.getInstance().pushProcess(new LoadMouseAssets());
 			ProcessStateMachine.getInstance().pushProcess(new LoadEmbedFonts());
 		}
 		
@@ -333,8 +334,8 @@ package
 			pg.addPreProcess(ProcessState.STATE_CREATE_CHAR, 0.2);
 			pg.addPreProcess(ProcessState.STATE_LOAD_DLL, 0.2, 0.3, true);
 			pg.addPreProcess(ProcessState.STATE_LOAD_PUBLIC_UI_ASSETS, 0.3, 0.35, true);
-			pg.addPreProcess(ProcessState.STATE_LOAD_MOUSE_ASSETS, 0.35, 0.4, true);
-			pg.addPreProcess(ProcessState.STATE_LOAD_FONTS, 0.4, 0.55, true);
+//			pg.addPreProcess(ProcessState.STATE_LOAD_MOUSE_ASSETS, 0.35, 0.4, true);
+			pg.addPreProcess(ProcessState.STATE_LOAD_FONTS, 0.35, 0.55, true);
 			ProcessStateMachine.getInstance().addPreGroup(pg);
 			
 			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_ENTER_GAME);
