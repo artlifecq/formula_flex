@@ -42,6 +42,12 @@ package com.client.process
 		 * 进入游戏
 		 */
 		public static const STATE_ENTER_GAME : String = "STATE_ENTER_GAME";
+		
+		public static const STATE_LOAD_PUBLIC_UI_ASSETS:String = "STATE_LOAD_PUBLIC_UI_ASSETS";
+		
+		public static const STATE_LOAD_MOUSE_ASSETS:String = "STATE_LOAD_MOUSE_ASSETS";
+		
+		public static const STATE_LOAD_FONTS:String = "STATE_LOAD_FONTS";
 
 		public function ProcessState()
 		{

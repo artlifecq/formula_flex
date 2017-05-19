@@ -9,9 +9,6 @@ package com.rpgGame.app
 	import com.rpgGame.app.manager.ReconnectManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.process.LoadConfigData;
-	import com.rpgGame.app.process.LoadEmbedFonts;
-	import com.rpgGame.app.process.LoadPngxUIAssets;
-	import com.rpgGame.app.process.LoadPublicUIAssets;
 	import com.rpgGame.app.process.LocalConfigData;
 	import com.rpgGame.app.process.ProcessState;
 	import com.rpgGame.app.process.StartGame;
@@ -105,9 +102,9 @@ package com.rpgGame.app
 
 		private function initProcess() : void
 		{
-			ProcessStateMachine.getInstance().pushProcess(new LoadPublicUIAssets());
-			ProcessStateMachine.getInstance().pushProcess(new LoadPngxUIAssets());
-			ProcessStateMachine.getInstance().pushProcess(new LoadEmbedFonts());
+//			ProcessStateMachine.getInstance().pushProcess(new LoadPublicUIAssets());
+//			ProcessStateMachine.getInstance().pushProcess(new LoadPngxUIAssets());
+//			ProcessStateMachine.getInstance().pushProcess(new LoadEmbedFonts());
 			ProcessStateMachine.getInstance().pushProcess(new LoadConfigData());
             if (ClientConfig.isSingle) 
 			{
@@ -119,17 +116,17 @@ package com.rpgGame.app
 
 		private function runProcess() : void
 		{
-			SceneSwitchCmdListener.fromPercent = 0.55;
+			SceneSwitchCmdListener.fromPercent = 0.6;
 			SceneSwitchCmdListener.toPercent = 1;
-			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOAD_PUBLIC_UI_ASSETS, 0.3, 0.35);
-			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOAD_PNGX_UI_ASSETS, 0.35, 0.4)
-			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOAD_FONTS, 0.4, 0.45);
-			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOAD_CONFIG_DATA, 0.45, 0.5);
+//			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOAD_PUBLIC_UI_ASSETS, 0.3, 0.35);
+//			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOAD_PNGX_UI_ASSETS, 0.35, 0.4)
+//			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOAD_FONTS, 0.4, 0.45);
+			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOAD_CONFIG_DATA, 0.55, 0.6);
 			if (ClientConfig.isSingle) 
 			{
-				ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOCAL_CONFIG_DATA, 0.5, 0.5);
+				ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOCAL_CONFIG_DATA, 0.6, 0.6);
 			}
-			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_START_GAME, 0.5);
+			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_START_GAME, 0.6);
 			ProcessStateMachine.getInstance().run();
 		}
 
@@ -140,9 +137,9 @@ package com.rpgGame.app
 		public function reEnterGame() : void
 		{
 			GameLog.addShow("重新进入游戏...");
-			SceneSwitchCmdListener.fromPercent = 0.5;
+			SceneSwitchCmdListener.fromPercent = 0.6;
 			SceneSwitchCmdListener.toPercent = 1;
-			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_START_GAME, 0.5);
+			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_START_GAME, 0.6);
 			ProcessStateMachine.getInstance().run();
 		}
 	}
