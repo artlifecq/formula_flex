@@ -69,6 +69,9 @@ package com.rpgGame.appModule.dungeon
 		override public function hide():void
 		{
 			super.hide();
+			if(_currentUI){
+				_currentUI.hide();
+			}
 		}
 	}
 }
