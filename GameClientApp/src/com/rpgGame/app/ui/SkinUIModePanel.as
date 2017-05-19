@@ -59,5 +59,10 @@ package com.rpgGame.app.ui
 		{
 			
 		}
+		
+		public function hide():void
+		{
+			
+		}
 	}
 }

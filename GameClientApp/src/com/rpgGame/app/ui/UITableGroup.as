@@ -31,6 +31,8 @@ package com.rpgGame.app.ui
 //			trace(_tabBar.selectedIndex);
 			if(_tabBar.selectedItem==null)
 				return ;
+			if(_currentmodepanle!=null)
+				_currentmodepanle.hide();
 			_currentmodepanle = _tabBar.selectedItem as SkinUIModePanel;
 			if(_currentmodepanle!=null)
 			{

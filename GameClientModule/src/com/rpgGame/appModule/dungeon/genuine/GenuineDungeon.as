@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.dungeon.genuine
 {
 	import com.rpgGame.app.manager.DailyZoneDataManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.SkinUIModePanel;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
@@ -17,7 +18,6 @@ package com.rpgGame.appModule.dungeon.genuine
 	import feathers.data.ListCollection;
 	import feathers.layout.HorizontalLayout;
 	
-	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.fuben.FuBen_ZhenQi_Skin;
 	
 	import starling.display.DisplayObject;
@@ -86,6 +86,11 @@ package com.rpgGame.appModule.dungeon.genuine
 			_skin.btnNext.visible = (index <1);
 			_skin.btnPrev.visible = (index >0);
 			_skin.list.scrollToPageIndex(index,0);
+		}
+		
+		override public function get isOpen():Boolean
+		{
+			return MainRoleManager.actorInfo.totalStat.level>=50;
 		}
 	}
 }

@@ -1,7 +1,7 @@
 package com.rpgGame.appModule.dungeon.exp
 {
-	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.DailyZoneDataManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.SkinUIModePanel;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
@@ -13,6 +13,7 @@ package com.rpgGame.appModule.dungeon.exp
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.dailyzone.bean.DailyZonePanelInfo;
 	
+	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.fuben.FuBen_JingYan_Skin;
 	
 	import starling.display.DisplayObject;
@@ -51,6 +52,17 @@ package com.rpgGame.appModule.dungeon.exp
 			}
 			
 			_dailyZoneInfo = DailyZoneDataManager.instance().getInfoById(data.q_id);
+			EventManager.addEvent(DailyZoneDataManager.UPDATEDAILYZONEINFO,refeashValue);
+			refeashValue();
+		}
+		
+		private function refeashValue():void
+		{
+			if(_dailyZoneInfo==null)
+				return ;
+			_dailyZoneInfo = DailyZoneDataManager.instance().getInfoById(_dailyZoneInfo.dailyzoneId);
+			_skin.lbShengyu.text = "今日剩余次数："+_dailyZoneInfo.remainCount;
+			_skin.lbGoumai.text = "剩余购买次数："+_dailyZoneInfo.canBuyCount;
 		}
 		
 		override public function onTouchTarget(target:DisplayObject):void
@@ -65,6 +77,14 @@ package com.rpgGame.appModule.dungeon.exp
 					break;
 			}
 		}
+		override public function get isOpen():Boolean
+		{
+			return MainRoleManager.actorInfo.totalStat.level>=60;
+		}
 		
+		override public function hide():void
+		{
+			EventManager.removeEvent(DailyZoneDataManager.UPDATEDAILYZONEINFO,refeashValue);
+		}
 	}
 }

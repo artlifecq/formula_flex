@@ -111,5 +111,10 @@ package com.rpgGame.appModule.dungeon.equip
 		{
 			return MainRoleManager.actorInfo.totalStat.level>=50;
 		}
+		
+		override public function hide():void
+		{
+			EventManager.removeEvent(DailyZoneDataManager.UPDATEDAILYZONEINFO,refeashValue);
+		}
 	}
 }
