@@ -60,7 +60,7 @@ package com.rpgGame.appModule.dungeon.genuine
 			var itemInfos:Array = ItemUtil.jsonParseItemClientList(data.q_special_rewards_show);
 			FaceUtil.SetItemGrid(_fistIcon,itemInfos[0], true);
 			
-			itemInfos = ItemUtil.jsonParseItemClientList(data.q_rewards_show);
+			itemInfos = ItemUtil.jsonParseItemClientList(data.q_rewards_client);
 			for(var i:int = 0;i<_rewardIcons.length;i++)
 			{
 				FaceUtil.SetItemGrid(_rewardIcons[i],itemInfos[i], true);
