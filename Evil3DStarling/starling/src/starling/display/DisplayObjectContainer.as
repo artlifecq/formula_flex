@@ -98,9 +98,6 @@ package starling.display
             for (var i:int=_children.length-1; i>=0; --i)
                 _children[i].dispose();
 			
-			_optimizeChildren = null;
-			_layerBatchs = null;
-			
             super.dispose();
         }
         
@@ -145,7 +142,6 @@ package starling.display
                         else           child.dispatchEventWith(Event.ADDED_TO_STAGE);
                     }
                 }
-				_layerDirty = true;
                 return child;
             }
             else
@@ -185,7 +181,6 @@ package starling.display
                 index = _children.indexOf(child); // index might have changed by event handler
                 if (index >= 0) _children.splice(index, 1);
                 if (dispose) child.dispose();
-				_layerDirty = true;
                 return child;
             }
             else
@@ -245,7 +240,6 @@ package starling.display
 
             _children.splice(oldIndex, 1);
             _children.splice(index, 0, child);
-			_layerDirty = true;
             setRequiresRedraw();
         }
         
@@ -265,7 +259,6 @@ package starling.display
             var child2:DisplayObject = getChildAt(index2);
             _children[index1] = child2;
             _children[index2] = child1;
-			_layerDirty = true;
             setRequiresRedraw();
         }
         
@@ -276,7 +269,6 @@ package starling.display
             sSortBuffer.length = _children.length;
             mergeSort(_children, compareFunction, 0, _children.length, sSortBuffer);
             sSortBuffer.length = 0;
-			_layerDirty = true;
             setRequiresRedraw();
         }
         
@@ -358,65 +350,6 @@ package starling.display
             return null;
         }
 		
-		/**
-		 * 
-		 */		
-		protected function optimizeRenderLayer():void
-		{
-			if(_layerDirty)
-			{
-				var batch:Vector.<DisplayObject>;
-				
-				/**clear cache**/
-				if(!_layerBatchs)_layerBatchs = [];
-				if(!_optimizeChildren)
-					_optimizeChildren = new Vector.<DisplayObject>();
-				
-				for each(batch in _layerBatchs)
-				{
-					batch.length = 0
-				}
-				_optimizeChildren.length = 0;
-				
-				/**optimize sort**/
-				var numChildren:int = _children.length;
-				for (var i:int=0; i<numChildren; ++i)
-				{
-					var child:DisplayObject = _children[i];
-					batch = _layerBatchs[child.layerBatchId];
-					if(!batch) _layerBatchs[child.layerBatchId] = batch = new Vector.<DisplayObject>();
-					batch.push(child);
-				}
-				
-				for each(batch  in _layerBatchs)
-				{
-					_optimizeChildren = _optimizeChildren.concat( batch );
-				}
-				
-				_layerDirty = false;
-			}
-		}
-		
-		private  function get canLayerBatch():Boolean
-		{
-			var numChildren:int = _children.length;
-			var child:DisplayObject;
-			var batchNum:int;
-			for (var i:int=0; i<numChildren; ++i)
-			{
-				child = _children[i];
-				if(child.layerBatchId > 0)
-				{
-					batchNum++;
-					if(batchNum >= 2)
-					{
-						return true;
-					}
-				}
-			}
-			return false;
-		}
-        
         /** @inheritDoc */
         public override function render(painter:Painter):void
         {
@@ -426,19 +359,11 @@ package starling.display
             var cacheEnabled:Boolean = frameID !=0;
             var selfOrParentChanged:Boolean = _lastParentOrSelfChangeFrameID == frameID;
 			
-			var temp:Vector.<DisplayObject> = _children;
-			if(_layerDirty && _optimizeLayerBatch && numChildren > 1 && canLayerBatch)
-			{
-				if(_layerDirty)optimizeRenderLayer();
-				temp = _optimizeChildren || _children;
-				numChildren = temp.length;
-			}
-			
 			painter.pushState();
 			
             for (var i:int=0; i<numChildren; ++i)
             {
-				var child:DisplayObject = temp[i];
+				var child:DisplayObject = _children[i];
 
                 if (child._hasVisibleArea)
                 {
@@ -606,20 +531,6 @@ package starling.display
 				}
 			}
 		}
-		
-		public function get optimizeLayerBatch():Boolean{return _optimizeLayerBatch}
-		public function set optimizeLayerBatch(value:Boolean):void
-		{
-			_optimizeLayerBatch = value;
-		}
-		
-		private var _optimizeChildren:Vector.<DisplayObject>;
-		
-		private var _optimizeLayerBatch:Boolean = true;
-		
-		private var _layerDirty:Boolean;
-		
-		private var _layerBatchs:Array;
 		
 		CONFIG::Mesh2D_Trace
 			{

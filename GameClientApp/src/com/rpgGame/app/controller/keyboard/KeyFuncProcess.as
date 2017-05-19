@@ -46,21 +46,6 @@ package com.rpgGame.app.controller.keyboard
 					break;
 				case "2": //Z 自动挂机   挂机改到A去了
 					
-					for(var i:int=0;i<SceneManager.clientMapData.areaDatas.length;i++)
-					{
-						var areadata:ClientMapAreaData=SceneManager.clientMapData.areaDatas[i];
-						var point:Point=new Point(MainRoleManager.actor.x,MainRoleManager.actor.z);
-						//areadata.type
-						/*for(var j:int=0;j<areadata.points.length;j++)
-						{
-							
-						}*/
-						
-						
-					}
-					
-					
-					
 					
 					break;
 				case "65": //A 自动挂机   挂机改到A去了

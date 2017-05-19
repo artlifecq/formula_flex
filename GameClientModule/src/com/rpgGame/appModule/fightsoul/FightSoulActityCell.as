@@ -38,11 +38,12 @@ package com.rpgGame.appModule.fightsoul
 				NoticeManager.showNotifyById(4010);
 				return ;
 			}
-			var winInfo:Q_windowInfo = WindowInfoData.getInfobyId(path.q_winId);
-			if(winInfo.q_islink==1)
-			{
-				AppManager.showApp(winInfo.q_windCodeId,winInfo.q_arg);
-			}
+			AppManager.showAppById(path.q_winId);
+//			var winInfo:Q_windowInfo = WindowInfoData.getInfobyId(path.q_winId);
+//			if(winInfo.q_islink==1)
+//			{
+//				AppManager.showApp(winInfo.q_windCodeId,winInfo.q_arg);
+//			}
 		}
 		override protected function commitData():void
 		{

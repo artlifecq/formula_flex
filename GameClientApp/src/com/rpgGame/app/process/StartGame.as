@@ -153,11 +153,9 @@ package com.rpgGame.app.process
 				GlobalSettingManager.init();
 				//
 
-                CONFIG::Debug {
-					Stage3DLayerManager.stage.addEventListener(KeyboardEvent.KEY_UP,onShowFrameState);
-                    initMM();
-					showFrameState();
-                }
+				Stage3DLayerManager.stage.addEventListener(KeyboardEvent.KEY_UP,onShowFrameState);
+				initMM();
+				showFrameState();
 			}
 
 			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE, onSwitchCmp);
@@ -169,14 +167,16 @@ package com.rpgGame.app.process
 		{
 			if(e.shiftKey&&e.keyCode==Keyboard.D)
 			{
-				isShow = !isShow;
-				if(isShow)
-				{
-					StatsUtil.showAwayStats(Stage3DLayerManager.stage,Stage3DLayerManager.stage3DProxy);
-				}
-				else
-				{
-					StatsUtil.hideAwayStats();
+				CONFIG::Debug {
+					isShow = !isShow;
+					if(isShow)
+					{
+						StatsUtil.showAwayStats(Stage3DLayerManager.stage,Stage3DLayerManager.stage3DProxy);
+					}
+					else
+					{
+						StatsUtil.hideAwayStats();
+					}
 				}
 				LayerManager.showOrHideMM();
 				ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
@@ -185,7 +185,9 @@ package com.rpgGame.app.process
 		
 		private function showFrameState():void
 		{
-			StatsUtil.showAwayStats(Stage3DLayerManager.stage,Stage3DLayerManager.stage3DProxy);
+			CONFIG::Debug {
+				StatsUtil.showAwayStats(Stage3DLayerManager.stage,Stage3DLayerManager.stage3DProxy);
+			}			
 			LayerManager.showOrHideMM();
 			ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
             // 屏蔽未捕获信息

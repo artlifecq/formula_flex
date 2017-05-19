@@ -118,7 +118,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_dark_fog:int;
 		 /**  掉落金币是否可多倍（0可以，1不可以） */
 		public var q_fortune:int;
-		 /**  副本类型(1剧情副本，2通天塔，3赤惯妖星，4魔域，5虚空之门，6帮会副本，7组队副本，8皇城等特殊副本，9VIP地图,10跨服10v10，11守护结界,12魔界中原，13争夺花魁，14万灵血战，15万人乱战,18通天) */
+		 /**  副本类型(1论剑2:多人副本3：真气副本4：装备副本5：经验副本) */
 		public var q_mapzone_type:int;
 		 /**  跳跃连接点 */
 		public var q_jump_link:String;
