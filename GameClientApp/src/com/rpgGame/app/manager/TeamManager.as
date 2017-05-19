@@ -88,7 +88,7 @@ package com.rpgGame.app.manager
 		 */		
 		public function get isTeamFull():Boolean
 		{
-			return _teamInfo != null && _teamInfo.memberinfo.length >= 4;
+			return _teamInfo != null && _teamInfo.memberinfo.length >= MAXMEMBER;
 		}
 		public function get hasTeam():Boolean
 		{
