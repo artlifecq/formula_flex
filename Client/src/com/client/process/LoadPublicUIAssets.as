@@ -69,7 +69,7 @@ package com.client.process
 			ResLoadingView.instance.percent = percent;
 		}
 
-		private function onFinish(loader : ThemeLoader) : void
+		private function onFinish() : void
 		{
 			GameLog.addShow("公共UI素材加载完成...");
 			completeProcess();

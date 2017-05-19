@@ -282,7 +282,6 @@ package
 			//			ProcessStateMachine.getInstance().pushProcess(new GetMainPlayerInfo());
 			ProcessStateMachine.getInstance().pushProcess(new EnterGame());
 			ProcessStateMachine.getInstance().pushProcess(new LoadPublicUIAssets());
-			ProcessStateMachine.getInstance().pushProcess(new LoadMouseAssets());
 			ProcessStateMachine.getInstance().pushProcess(new LoadEmbedFonts());
 		}
 		
