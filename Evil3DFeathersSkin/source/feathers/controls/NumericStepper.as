@@ -11,6 +11,8 @@ package feathers.controls
 	import flash.ui.Keyboard;
 	import flash.utils.Timer;
 	
+	import away3d.events.Event;
+	
 	import feathers.core.FeathersControl;
 	import feathers.core.IAdvancedNativeFocusOwner;
 	import feathers.core.ITextBaselineControl;
@@ -23,7 +25,6 @@ package feathers.controls
 	import feathers.utils.math.roundToPrecision;
 	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
 	import starling.events.KeyboardEvent;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
@@ -47,9 +48,9 @@ package feathers.controls
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.CHANGE
+	 * @eventType away3d.events.Event.CHANGE
 	 */
-	[Event(name="change",type="starling.events.Event")]
+	[Event(name="change",type="away3d.events.Event")]
 
 	/**
 	 * Select a value between a minimum and a maximum by using increment and

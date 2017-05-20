@@ -15,6 +15,7 @@ package starling.core
     import flash.utils.getTimer;
     
     import away3d.debug.LogPanel;
+    import away3d.events.Event;
     
     import starling.debug.StarlingLogPanel;
     import starling.display.Button;
@@ -22,7 +23,6 @@ package starling.core
     import starling.display.Quad;
     import starling.display.Sprite;
     import starling.events.EnterFrameEvent;
-    import starling.events.Event;
     import starling.rendering.Painter;
     import starling.styles.MeshStyle;
     import starling.text.BitmapFont;

@@ -7,15 +7,16 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.utils.touch
 {
-	import feathers.events.FeathersEventType;
-
 	import flash.geom.Point;
 	import flash.utils.getTimer;
-
+	
+	import away3d.events.Event;
+	
+	import feathers.events.FeathersEventType;
+	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 	import starling.display.Stage;
-	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;

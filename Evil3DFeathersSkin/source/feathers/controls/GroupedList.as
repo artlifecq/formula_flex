@@ -7,6 +7,11 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.controls
 {
+	import flash.geom.Point;
+	import flash.ui.Keyboard;
+	
+	import away3d.events.Event;
+	
 	import feathers.controls.renderers.DefaultGroupedListHeaderOrFooterRenderer;
 	import feathers.controls.renderers.DefaultGroupedListItemRenderer;
 	import feathers.controls.renderers.IGroupedListFooterRenderer;
@@ -23,11 +28,7 @@ package feathers.controls
 	import feathers.layout.VerticalAlign;
 	import feathers.layout.VerticalLayout;
 	import feathers.skins.IStyleProvider;
-
-	import flash.geom.Point;
-	import flash.ui.Keyboard;
-
-	import starling.events.Event;
+	
 	import starling.events.KeyboardEvent;
 	import starling.utils.Pool;
 
@@ -49,9 +50,9 @@ package feathers.controls
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.CHANGE
+	 * @eventType away3d.events.Event.CHANGE
 	 */
-	[Event(name="change",type="starling.events.Event")]
+	[Event(name="change",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the the user taps or clicks an item renderer in the list.
@@ -74,9 +75,9 @@ package feathers.controls
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.TRIGGERED
+	 * @eventType away3d.events.Event.TRIGGERED
 	 */
-	[Event(name="triggered",type="starling.events.Event")]
+	[Event(name="triggered",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when an item renderer is added to the list. When the layout is
@@ -101,7 +102,7 @@ package feathers.controls
 	 *
 	 * @eventType feathers.events.FeathersEventType.RENDERER_ADD
 	 */
-	[Event(name="rendererAdd",type="starling.events.Event")]
+	[Event(name="rendererAdd",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when an item renderer is removed from the list. When the layout is
@@ -126,7 +127,7 @@ package feathers.controls
 	 *
 	 * @eventType feathers.events.FeathersEventType.RENDERER_REMOVE
 	 */
-	[Event(name="rendererRemove",type="starling.events.Event")]
+	[Event(name="rendererRemove",type="away3d.events.Event")]
 
 	/**
 	 * Displays a list of items divided into groups or sections. Takes a

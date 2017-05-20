@@ -31,7 +31,7 @@ package feathers.media
 	 *
 	 * @eventType feathers.events.MediaPlayerEventType.SOUND_TRANSFORM_CHANGE
 	 */
-	[Event(name="soundTransformChange",type="starling.events.Event")]
+	[Event(name="soundTransformChange",type="away3d.events.Event")]
 
 	/**
 	 * An interface for media players that play audio content.

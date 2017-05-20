@@ -2,8 +2,7 @@ package feathers.controls
 {
 	import flash.text.TextFormat;
 	
-	import away3d.debug.Debug;
-	import away3d.entities.Mesh;
+	import away3d.events.Event;
 	
 	import feathers.controls.text.Fontter;
 	import feathers.layout.AnchorLayout;
@@ -11,11 +10,9 @@ package feathers.controls
 	import feathers.layout.ILayoutDisplayObject;
 	import feathers.layout.IVirtualLayout;
 	import feathers.layout.ViewPortBounds;
-	import feathers.themes.GuiThemeStyle;
 	
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
-	import starling.events.Event;
 	
 	import utils.UIStateSetHelper;
 

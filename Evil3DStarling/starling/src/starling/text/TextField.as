@@ -16,14 +16,15 @@ package starling.text
     import flash.geom.Rectangle;
     import flash.text.StyleSheet;
     import flash.utils.Dictionary;
-
+    
+    import away3d.events.Event;
+    
     import starling.core.Starling;
     import starling.display.DisplayObject;
     import starling.display.DisplayObjectContainer;
     import starling.display.MeshBatch;
     import starling.display.Quad;
     import starling.display.Sprite;
-    import starling.events.Event;
     import starling.rendering.Painter;
     import starling.styles.MeshStyle;
     import starling.utils.RectangleUtil;

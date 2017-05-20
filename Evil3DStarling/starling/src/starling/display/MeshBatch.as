@@ -12,7 +12,6 @@ package starling.display
 {
     import flash.geom.Matrix;
     
-    import starling.events.Event;
     import starling.rendering.IndexData;
     import starling.rendering.MeshEffect;
     import starling.rendering.Painter;

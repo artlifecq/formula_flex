@@ -14,7 +14,7 @@ package feathers.motion.transitions
 	import starling.animation.Tween;
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
-	import starling.events.Event;
+	import away3d.events.Event;
 
 	/**
 	 * Slides new screens from the left or right depending on the old and new

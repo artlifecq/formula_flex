@@ -16,7 +16,7 @@ package feathers.media
 
 	import starling.display.MeshBatch;
 	import starling.display.Quad;
-	import starling.events.Event;
+	import away3d.events.Event;
 
 	/**
 	 * A visualization of the audio spectrum of the runtime's currently playing

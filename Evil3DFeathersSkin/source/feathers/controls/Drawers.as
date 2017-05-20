@@ -7,6 +7,14 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.controls
 {
+	import flash.events.KeyboardEvent;
+	import flash.geom.Point;
+	import flash.ui.Keyboard;
+	import flash.utils.getTimer;
+	
+	import away3d.events.Event;
+	import away3d.events.EventDispatcher;
+	
 	import feathers.controls.supportClasses.BaseScreenNavigator;
 	import feathers.core.FeathersControl;
 	import feathers.core.IFeathersControl;
@@ -19,12 +27,7 @@ package feathers.controls
 	import feathers.system.DeviceCapabilities;
 	import feathers.utils.display.getDisplayObjectDepthFromStage;
 	import feathers.utils.math.roundToNearest;
-
-	import flash.events.KeyboardEvent;
-	import flash.geom.Point;
-	import flash.ui.Keyboard;
-	import flash.utils.getTimer;
-
+	
 	import starling.animation.Transitions;
 	import starling.animation.Tween;
 	import starling.core.Starling;
@@ -32,8 +35,6 @@ package feathers.controls
 	import starling.display.DisplayObjectContainer;
 	import starling.display.Quad;
 	import starling.display.Stage;
-	import starling.events.Event;
-	import starling.events.EventDispatcher;
 	import starling.events.ResizeEvent;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
@@ -61,7 +62,7 @@ package feathers.controls
 	 * @eventType feathers.events.FeathersEventType.BEGIN_INTERACTION
 	 * @see #event:endInteraction feathers.events.FeathersEventType.END_INTERACTION
 	 */
-	[Event(name="beginInteraction",type="starling.events.Event")]
+	[Event(name="beginInteraction",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the user stops dragging the content to open or close a
@@ -86,7 +87,7 @@ package feathers.controls
 	 * @eventType feathers.events.FeathersEventType.END_INTERACTION
 	 * @see #event:beginInteraction feathers.events.FeathersEventType.BEGIN_INTERACTION
 	 */
-	[Event(name="endInteraction",type="starling.events.Event")]
+	[Event(name="endInteraction",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when a drawer has completed opening. The <code>data</code>
@@ -107,10 +108,10 @@ package feathers.controls
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.OPEN
-	 * @see #event:close starling.events.Event.CLOSE
+	 * @eventType away3d.events.Event.OPEN
+	 * @see #event:close away3d.events.Event.CLOSE
 	 */
-	[Event(name="open",type="starling.events.Event")]
+	[Event(name="open",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when a drawer has completed closing. The <code>data</code>
@@ -131,10 +132,10 @@ package feathers.controls
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.CLOSE
-	 * @see #event:open starling.events.Event.OPEN
+	 * @eventType away3d.events.Event.CLOSE
+	 * @see #event:open away3d.events.Event.OPEN
 	 */
-	[Event(name="close",type="starling.events.Event")]
+	[Event(name="close",type="away3d.events.Event")]
 
 	/**
 	 * A container that displays primary content in the center surrounded by

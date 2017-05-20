@@ -10,11 +10,11 @@ package feathers.controls.color
 	import feathers.controls.TextInput;
 	import feathers.events.FeathersEventType;
 
-	import starling.events.Event;
+	import away3d.events.Event;
 	import starling.utils.Color;
 
-	[Event(name="change",type="starling.events.Event")]
-	[Event(name="update",type="starling.events.Event")]
+	[Event(name="change",type="away3d.events.Event")]
+	[Event(name="update",type="away3d.events.Event")]
 
 	/**
 	 * A specialized <code>TextInput</code> that displays a hexadecimal color

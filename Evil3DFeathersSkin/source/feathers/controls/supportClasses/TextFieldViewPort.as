@@ -19,6 +19,8 @@ package feathers.controls.supportClasses
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.text.Fontter;
 	import feathers.core.FeathersControl;
 	import feathers.utils.geom.matrixToRotation;
@@ -27,7 +29,6 @@ package feathers.controls.supportClasses
 	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
-	import starling.events.Event;
 	import starling.rendering.Painter;
 	import starling.utils.MatrixUtil;
 	import starling.utils.Pool;

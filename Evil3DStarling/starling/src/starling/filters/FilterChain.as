@@ -10,7 +10,7 @@
 
 package starling.filters
 {
-    import starling.events.Event;
+    import away3d.events.Event;
     import starling.rendering.Painter;
     import starling.textures.IStarlingTexture;
     import starling.utils.Padding;

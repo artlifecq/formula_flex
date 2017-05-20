@@ -7,14 +7,15 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.layout
 {
+	import away3d.events.Event;
+	import away3d.events.EventDispatcher;
+	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
-	import starling.events.EventDispatcher;
 
 	/**
 	 * @inheritDoc
 	 */
-	[Event(name="change",type="starling.events.Event")]
+	[Event(name="change",type="away3d.events.Event")]
 
 	/**
 	 * Extra, optional data used by an <code>AnchorLayout</code> instance to

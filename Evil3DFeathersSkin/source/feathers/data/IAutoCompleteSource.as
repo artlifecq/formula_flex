@@ -28,9 +28,9 @@ package feathers.data
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.COMPLETE
+	 * @eventType away3d.events.Event.COMPLETE
 	 */
-	[Event(name="complete",type="starling.events.Event")]
+	[Event(name="complete",type="away3d.events.Event")]
 
 	/**
 	 * A source of items to display in the pop-up list of an

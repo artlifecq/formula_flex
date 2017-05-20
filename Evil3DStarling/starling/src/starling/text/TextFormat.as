@@ -11,13 +11,14 @@
 package starling.text
 {
     import flash.text.TextFormat;
-
-    import starling.events.Event;
-    import starling.events.EventDispatcher;
+    
+    import away3d.events.Event;
+    import away3d.events.EventDispatcher;
+    
     import starling.utils.Align;
 
     /** Dispatched when any property of the instance changes. */
-    [Event(name="change", type="starling.events.Event")]
+    [Event(name="change", type="away3d.events.Event")]
 
     /** The TextFormat class represents character formatting information. It is used by the
      *  TextField and BitmapFont classes to characterize the way the glyphs will be rendered.

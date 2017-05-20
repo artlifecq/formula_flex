@@ -13,8 +13,9 @@ package starling.display
     import flash.geom.Rectangle;
     import flash.ui.Mouse;
     import flash.ui.MouseCursor;
-
-    import starling.events.Event;
+    
+    import away3d.events.Event;
+    
     import starling.events.Touch;
     import starling.events.TouchEvent;
     import starling.events.TouchPhase;
@@ -24,7 +25,7 @@ package starling.display
     import starling.textures.IStarlingTexture;
 
     /** Dispatched when the user triggers the button. Bubbles. */
-    [Event(name="triggered", type="starling.events.Event")]
+    [Event(name="triggered", type="away3d.events.Event")]
     
     /** A simple button composed of an image and, optionally, text.
      *  
