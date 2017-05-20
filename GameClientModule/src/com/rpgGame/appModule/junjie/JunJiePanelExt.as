@@ -350,9 +350,8 @@ package com.rpgGame.appModule.junjie
 		{
 			var has:HashMap=JunJieUtil.getShuXingJiaCheng(_nowSelectItem.lv);
 			var pow:int=FightValueUtil.calFightPowerByHash(has,MainRoleManager.actorInfo.job);
-			var nowpow:int=Mgr.junjieMgr.power;
-			if(pow>nowpow){
-				_skin.num_lv.label="x"+(pow-nowpow);
+			if(_nowSelectItem.lv>Mgr.junjieMgr.getActivationLv()&&pow>0){
+				_skin.num_lv.label="x"+pow;
 				_skin.num_lv.visible=true;
 				_skin.uiUp.visible=true;
 			}else{
