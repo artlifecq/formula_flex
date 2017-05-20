@@ -23,6 +23,8 @@ package org.mokylin.skin.app.beibao.zhangong
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var bar_cont:feathers.controls.SkinnableContainer;
+
 		public var btnDao:feathers.controls.Button;
 
 		public var btnUp:feathers.controls.Button;
@@ -64,7 +66,7 @@ package org.mokylin.skin.app.beibao.zhangong
 			this.currentState = "normal";
 			this.height = 192;
 			this.width = 210;
-			this.elementsContent = [uiBg_i(),skBoss_i(),__BossItem_Skin_UIAsset1_i(),__BossItem_Skin_UIAsset2_i(),__BossItem_Skin_UIAsset3_i(),pro_bar_i(),lbNum_i(),conver_i(),lbLevelNext_i(),lbLevelCurrent_i(),btnDao_i(),lbName_i(),btnUp_i(),uiDian_i(),uiUp_i(),lbNumUp_i(),uiName_i(),numZhanli_i()];
+			this.elementsContent = [uiBg_i(),skBoss_i(),__BossItem_Skin_UIAsset1_i(),__BossItem_Skin_UIAsset2_i(),__BossItem_Skin_UIAsset3_i(),pro_bar_i(),bar_cont_i(),lbNum_i(),conver_i(),lbLevelNext_i(),lbLevelCurrent_i(),btnDao_i(),lbName_i(),btnUp_i(),uiDian_i(),uiUp_i(),lbNumUp_i(),uiName_i(),numZhanli_i()];
 			
 			states = {
 			};
@@ -100,6 +102,18 @@ package org.mokylin.skin.app.beibao.zhangong
 			temp.width = 99;
 			temp.x = 57;
 			temp.y = 152;
+			return temp;
+		}
+
+		private function bar_cont_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			bar_cont = temp;
+			temp.name = "bar_cont";
+			temp.height = 9;
+			temp.width = 85;
+			temp.x = 64;
+			temp.y = 154;
 			return temp;
 		}
 
