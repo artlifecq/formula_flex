@@ -72,7 +72,9 @@ package com.rpgGame.appModule.dungeon.lunjian
 			
 			_skin.container.scale=0.1;
 			_skin.container.alpha=0;
-			
+			leftTime=10;
+			TimerServer.addLoop(updateTime,1000);
+			updateTime();
 			TweenLite.to(_skin.container,1,{scale:1,alpha:1,onComplete:tweenComplete});
 		}
 		
@@ -87,9 +89,6 @@ package com.rpgGame.appModule.dungeon.lunjian
 		
 		private function tweenComplete():void
 		{
-			leftTime=10;
-			TimerServer.addLoop(updateTime,1000);
-			_skin.lbTime.text=leftTime+"秒后自动退出";
 			if(eftRender){
 				eftRender.play(0);
 			}
@@ -97,8 +96,8 @@ package com.rpgGame.appModule.dungeon.lunjian
 		
 		private function updateTime():void
 		{
-			leftTime--;
 			_skin.lbTime.text=leftTime+"秒后自动退出";
+			leftTime--;
 			if(leftTime<0){
 				TimerServer.remove(updateTime);
 				this.onHide();

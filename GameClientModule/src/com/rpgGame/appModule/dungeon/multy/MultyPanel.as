@@ -1,6 +1,10 @@
 package com.rpgGame.appModule.dungeon.multy
 {
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.app.ui.UITableGroup;
+	import com.rpgGame.appModule.dungeon.equip.EquipDungeon;
+	import com.rpgGame.appModule.dungeon.exp.ExpDungeon;
+	import com.rpgGame.appModule.dungeon.genuine.GenuineDungeon;
 	
 	import org.mokylin.skin.app.fuben.FuBen_Skin;
 	
@@ -15,18 +19,25 @@ package com.rpgGame.appModule.dungeon.multy
 	public class MultyPanel  extends SkinUIPanel
 	{
 		private var _skin :FuBen_Skin;
-		private var _multyView:MultyView;
+		private var _table:UITableGroup;
 		public function MultyPanel()
 		{
 			_skin=new FuBen_Skin();
 			super(_skin);
-			_multyView=new MultyView(_skin.duoren_skin);
+			initView();
+		}
+		private function initView():void
+		{
+			_table = new UITableGroup(_skin.tab_fuben,_skin.duoren_skin);
+			_table.addModePane(new MultyView());
+			_table.addModePane(new EquipDungeon());
+			_table.addModePane(new GenuineDungeon());
+			_table.addModePane(new ExpDungeon());
 		}
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
-			changeTab();
-			_multyView.showView();
+			_table.refeash(0);
 		}
 		
 		override public function hide():void 
@@ -36,14 +47,10 @@ package com.rpgGame.appModule.dungeon.multy
 		override protected function onTouchTarget(target:DisplayObject):void 
 		{
 			super.onTouchTarget(target);
-			_multyView.onTouchTarget(target);
-			
+			_table.crrentModePanle.onTouchTarget(target);
+//			_multyView.onTouchTarget(target);
 		}
 		
-		private function changeTab() : void 
-		{
-			_skin.tab_fuben.selectedIndex=1;
-		}
 		
 		
 		

@@ -1020,9 +1020,6 @@ package starling.display
 		//---------------------------------------------------------------------------
 		private var _touchAcross:Boolean;//zhuzhongmao
 		
-		protected var _layerBatchId:int;//渲染批次, 按批次排列先后顺序，有助于减少drawcall被打断次数
-		public function get layerBatchId():int{return _layerBatchId}
-		
 		/** zhuzhongmao 鼠标穿透 */
 		public function get touchAcross():Boolean { return _touchAcross; }
 		public function set touchAcross(value:Boolean):void { _touchAcross = value; }

@@ -97,13 +97,13 @@ package com.rpgGame.app.graphics
 			if (_nameBar != null) //名字位置
 			{
 				_nameBar.x = int(-_nameBar.realWidth * 0.5);
-				_nameBar.y = int(-40 - _nameBar.realHeight);
+				_nameBar.y = int(-15 - _nameBar.realHeight);
 			}
 			
 			if(_back != null)
 			{
 				_back.x = int(-_back.realWidth * 0.5);
-				_back.y = int(-40 - _back.realHeight);
+				_back.y = int(-15 - _back.realHeight);
 			}
 			
 			//-------------------更新显示隐藏状态

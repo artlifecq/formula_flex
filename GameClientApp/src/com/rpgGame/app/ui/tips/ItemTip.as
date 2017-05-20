@@ -4,6 +4,7 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
@@ -223,17 +224,25 @@ package com.rpgGame.app.ui.tips
 				curY+=22;
 			}
 		
-			
-			createLine(10,curY,280);
-			curY+=10;
-			
-			name=HtmlTextUtil.getTextColor(nameColor,"回收价格:");
-			value=HtmlTextUtil.getTextColor(valueColor2,"      "+_itemInfo.qItem.q_sell_price.toString());
-			_itemTip.container.addChild(yinIcon);
-			
-			label=createLabel(name,value);
-			yinIcon.x=80;
-			yinIcon.y=curY-5;
+			if (_itemInfo.qItem.q_sell==1) 
+			{
+				createLine(10,curY,280);
+				curY+=10;
+				
+				name=HtmlTextUtil.getTextColor(nameColor,"回收价格:");
+				value=HtmlTextUtil.getTextColor(valueColor2,"      "+_itemInfo.qItem.q_sell_price.toString());
+				_itemTip.container.addChild(yinIcon);
+				
+				label=createLabel(name,value);
+				yinIcon.x=80;
+				yinIcon.y=curY-5;
+			}
+			else
+			{
+				MCUtil.removeSelf(yinIcon);
+				curY-=20;
+			}
+		
 			_itemTip.bg.height=curY+25;
 		}
 		

@@ -5,21 +5,27 @@ package
 	import com.client.manager.BGMManager;
 	import com.client.process.CreateChar;
 	import com.client.process.EnterGame;
-//	import com.client.process.GetMainPlayerInfo;
 	import com.client.process.LoadDll;
+	import com.client.process.LoadEmbedFonts;
 	import com.client.process.LoadMaskWorld;
+	import com.client.process.LoadMouseAssets;
+	import com.client.process.LoadPublicUIAssets;
 	import com.client.process.LoginInput;
 	import com.client.process.ProcessState;
 	import com.client.process.SelectDeveloper;
 	import com.client.process.ServerConnect;
 	import com.client.utils.ClientUrlManager;
+	import com.client.view.TipsInfoView2D;
+	import com.game.engine3D.controller.CameraController;
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.game.engine3D.process.ProcessGroup;
 	import com.game.engine3D.process.ProcessStateMachine;
+	import com.game.engine3D.utils.StatsUtil;
 	import com.gameClient.alert.AlertPanel;
 	import com.gameClient.log.GameLog;
 	import com.gameClient.log.GameLogView;
 	import com.gameClient.utils.VersionUtils;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	
 	import flash.display.Sprite;
 	import flash.events.ContextMenuEvent;
@@ -30,7 +36,11 @@ package
 	import flash.system.Capabilities;
 	import flash.ui.ContextMenuItem;
 	
+	import away3d.Away3D;
 	import away3d.loaders.parsers.Parsers;
+	import away3d.log.Log;
+	
+	import gs.TweenLite;
 	
 	/**
 	 *
@@ -39,7 +49,7 @@ package
 	 * 创建时间：2015-6-2 上午10:15:32
 	 *
 	 */
-	[SWF(width = "1600", height = "900", backgroundColor = "0x000000", frameRate = "60", quality = "LOW")]
+	[SWF(width = "1600", height = "1000", backgroundColor = "0x000000", frameRate = "60", quality = "LOW")]
 	public class GameClientAIR extends Sprite
 	{
 		public var versionMap : Object = null;
@@ -114,23 +124,151 @@ package
 			BGMManager.setup();
 			//引擎设置
 			EngineSetting.init();
-//			StarlingLayerManager.setup(root.stage, root.stage, stage3DLayerSetupComplete, 1, 10, CameraController.forceStopPanning);
-			Stage3DLayerManager.setup(this.stage, this.stage, stage3DLayerSetupComplete,null,null, 1, 10, null);
+			
+			GameLog.enableTrace = !ClientConfig.isRelease;
+			//			ErrorReporter.init();
+			//			StarlingLayerManager.setup(root.stage, root.stage, stage3DLayerSetupComplete, 1, 10, CameraController.forceStopPanning);
+//			Stage3DLayerManager.setup(this.stage, this.stage, stage3DLayerSetupComplete,null,null, 1, 10, null);
+			
+			try
+			{
+				if (ClientConfig.isDebug)
+				{
+					Stage3DLayerManager.errorChecking = true;
+					Away3D.REQUEST_HIGHEST_PROFILE = false;
+					Stage3DLayerManager.setup(this.stage, this.stage, stage3DLayerSetupComplete, stage3DLayerSetupError, stage3DLayerUserDisabledError, 1, 10, CameraController.forceStopPanning, onMemoryTooHighed, true,"standardConstrained");
+				}
+				else
+				{
+					Away3D.REQUEST_HIGHEST_PROFILE = true;
+					Stage3DLayerManager.setup(this.stage, this.stage, stage3DLayerSetupComplete, stage3DLayerSetupError, stage3DLayerUserDisabledError, 1, 10, CameraController.forceStopPanning, onMemoryTooHighed);
+				}
+			}
+			catch(error:Error)
+			{
+				stage3DLayerSetupError();
+			}
 		}
 		
-		private function stage3DLayerSetupComplete() : void
+		private function stage3DLayerSetupComplete():void
 		{
-			Parsers.enableAllBundled();
-			Stage3DLayerManager.screenAntiAlias = 2;
-			Stage3DLayerManager.viewAntiAlias = 2;
-			Stage3DLayerManager.startRender();
-			Stage3DLayerManager.starlingLayer.setLayer("alert", 9);
-			Stage3DLayerManager.starlingLayer.setLayer("loading", 8);
-			Stage3DLayerManager.starlingLayer.setLayer("login", 7);
-			
-			GameLog.addShow("profile type：" + Stage3DLayerManager.stage3DProxy.profile);
-			//
-			runProcess();
+			//			LogUtils.log3D(Stage3DLayerManager.stage3DProxy.profile, Stage3DLayerManager.stage3DProxy.stage3D, "ylzt_cc", null, true, stage);
+			var _local1:String = Stage3DLayerManager.stage3DProxy.driverInfo.toLocaleLowerCase();
+			if (_local1.indexOf("software") != -1)
+			{
+				Log.error("stage3DLayerSetupComplete：硬件加速开启失败，请更新系统显卡驱动程序，或是升级显卡。");
+				if (ClientConfig.isWeiDuan || !ClientConfig.isRelease)
+				{
+					TipsInfoView2D.showAlert2D("硬件加速开启失败，请更新系统显卡驱动程序，或是升级显卡。");
+				}
+				else
+				{
+					TipsInfoView2D.showAlert2D("硬件加速开启失败，请更新系统显卡程序，或点击确定下载微端进入游戏。", onDownWeiDuan);
+				}
+			}
+			else
+			{
+				if (Away3D.profileLevel < 3)
+				{
+					Log.error("stage3DLayerSetupComplete：系统显卡配置太低，请升级显卡。");
+					if (ClientConfig.isWeiDuan || !ClientConfig.isRelease)
+					{
+						TipsInfoView2D.showAlert2D("系统显卡配置太低，请升级显卡。");
+					}
+					else
+					{
+						TipsInfoView2D.showAlert2D("系统显卡配置太低，请升级显卡，或点击确定下载微端进入游戏。", onDownWeiDuan);
+					}
+				}
+				else
+				{	
+					GameLog.addShow("profile type：" + Stage3DLayerManager.stage3DProxy.profile);
+					
+					Parsers.enableAllBundled();
+					Stage3DLayerManager.screenAntiAlias = 2;
+					Stage3DLayerManager.viewAntiAlias = 2;
+					Stage3DLayerManager.startRender();
+					Stage3DLayerManager.starlingLayer.setLayer("alert", 9);
+					Stage3DLayerManager.starlingLayer.setLayer("loading", 8);
+					Stage3DLayerManager.starlingLayer.setLayer("login", 7);
+					if (ClientConfig.isDebug)
+					{
+						StatsUtil.showAwayStats(Stage3DLayerManager.stage, Stage3DLayerManager.stage3DProxy);
+					}
+					showCheckInfo();
+					runProcess();
+				}
+			}
+		}
+		
+		private function stage3DLayerSetupError():void
+		{
+			Log.error("stage3DLayerSetupError：硬件加速开启失败，请更新系统显卡驱动程序，或是升级显卡。");
+			if (Stage3DLayerManager.stage3DProxy)
+			{
+				//				LogUtils.log3D(Stage3DLayerManager.stage3DProxy.profile, Stage3DLayerManager.stage3DProxy.stage3D, "ylzt_cc", null, true, stage);
+			}
+			GameLog.addShow("stage3DLayerSetupError");
+			if (ClientConfig.isWeiDuan || !ClientConfig.isRelease)
+			{
+				TipsInfoView2D.showAlert2D("硬件加速开启失败，请更新系统显卡驱动程序，或是升级显卡。");
+			}
+			else
+			{
+				TipsInfoView2D.showAlert2D.showAlert("硬件加速开启失败，请更新系统显卡程序，或点击确定下载微端进入游戏。", onDownWeiDuan);
+			}
+		}
+		
+		private function onDownWeiDuan():void
+		{
+		}
+		
+		private function stage3DLayerUserDisabledError():void
+		{
+			GameLog.addShow("stage3DLayerUserDisabledError");
+		}
+		
+		private function onMemoryTooHighed():void
+		{
+			TipsInfoView2D.showAlert2D("检测到您的浏览器内存碎掉了，请重启浏览器再进入游戏。");
+		}
+		
+		private function showCheckInfo():void
+		{
+			var isShow:Boolean = showPlayerInfo();
+			if (!isShow)
+			{
+				showKernelInfo();
+			}
+		}
+		
+		private function showPlayerInfo():Boolean
+		{
+			if (ClientConfig.isRelease && !ClientConfig.isDebug && Capabilities.isDebugger)
+			{
+				TipsInfoView2D.showAlert2D("您当前的Flash插件是debug版本，游戏性能较低，为了您能有更好的游戏体验，请安装release版本的插件。", onShowPlayerOkFunc);
+				return true;
+			}
+			return false;
+		}
+		
+		private function onShowPlayerOkFunc():void
+		{
+			TweenLite.delayedCall(0.2, showKernelInfo);
+		}
+		
+		private function showKernelInfo():void
+		{
+		}
+		
+		private function showDriverInfo():void
+		{
+			var info:String = "";
+			if (!ClientConfig.isWeiDuan && Stage3DLayerManager.isOpenGL && Stage3DLayerManager.isStandardConstrained)
+			{
+				info = "尊敬的用户，我们检测到当前游戏性能较低，为了您能有更好的游戏体验，建议您使用IE浏览器登录或是打开浏览器的【兼容模式】运行游戏，您也可以点击【下载微端】使用微端进入游戏。";
+				TipsInfoView2D.showAlert2D(info);
+			}
 		}
 		
 		private function initProcess() : void
@@ -141,8 +279,11 @@ package
 			ProcessStateMachine.getInstance().pushProcess(new ServerConnect());
 			ProcessStateMachine.getInstance().pushProcess(new CreateChar());
 			ProcessStateMachine.getInstance().pushProcess(new LoadDll());
-//			ProcessStateMachine.getInstance().pushProcess(new GetMainPlayerInfo());
+			//			ProcessStateMachine.getInstance().pushProcess(new GetMainPlayerInfo());
 			ProcessStateMachine.getInstance().pushProcess(new EnterGame());
+			ProcessStateMachine.getInstance().pushProcess(new LoadPublicUIAssets());
+//			ProcessStateMachine.getInstance().pushProcess(new LoadMouseAssets());
+			ProcessStateMachine.getInstance().pushProcess(new LoadEmbedFonts());
 		}
 		
 		private function getWebParams() : void
@@ -184,17 +325,25 @@ package
 			}
 			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOAD_MASK_WORLD, 0, 0.1);
 			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_SERVER_CONNECT, 0.1, 0.2);
-			var pg : ProcessGroup = new ProcessGroup();
+			//			var pg : ProcessGroup = new ProcessGroup();
+			//			pg.addPreProcess(ProcessState.STATE_CREATE_CHAR, 0.2);
+			//			pg.addPreProcess(ProcessState.STATE_LOAD_DLL, 0.2, 0.3);
+			//			ProcessStateMachine.getInstance().addPreGroup(pg);
+			
+			var pg:ProcessGroup = new ProcessGroup();
 			pg.addPreProcess(ProcessState.STATE_CREATE_CHAR, 0.2);
-			pg.addPreProcess(ProcessState.STATE_LOAD_DLL, 0.2, 0.3);
+			pg.addPreProcess(ProcessState.STATE_LOAD_DLL, 0.2, 0.3, true);
+			pg.addPreProcess(ProcessState.STATE_LOAD_PUBLIC_UI_ASSETS, 0.3, 0.35, true);
+//			pg.addPreProcess(ProcessState.STATE_LOAD_MOUSE_ASSETS, 0.35, 0.4, true);
+			pg.addPreProcess(ProcessState.STATE_LOAD_FONTS, 0.35, 0.55, true);
 			ProcessStateMachine.getInstance().addPreGroup(pg);
-//			ProcessStateMachine.getInstance().addPreProcess(ProcessState.GET_MAINPLAYER_INFO, 0.8, 0.9);
+			
 			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_ENTER_GAME);
 			ProcessStateMachine.getInstance().run();
 			
 			if (!ClientGlobal.isRelease)
 			{
-//				MonsterDebugger.initialize(stage);
+				//				MonsterDebugger.initialize(stage);
 			}
 		}
 		

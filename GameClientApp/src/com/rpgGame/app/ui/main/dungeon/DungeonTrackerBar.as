@@ -1,14 +1,12 @@
 package com.rpgGame.app.ui.main.dungeon
 {
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.core.events.DungeonEvent;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.map.EnumMapType;
 	import com.rpgGame.coreData.info.map.SceneData;
 	
 	import org.client.mainCore.ds.HashMap;
-	import org.client.mainCore.manager.EventManager;
 	
 	/**
 	 *副本追踪
@@ -35,7 +33,9 @@ package com.rpgGame.app.ui.main.dungeon
 			uiClsMap=new HashMap();
 			uiClsMap.add(EnumMapType.MAP_TYPE_LUNJIAN,LunJianTrackerUI);
 			uiClsMap.add(EnumMapType.MAP_TYPE_MULTY,MultyTrackerUI);
-			
+			uiClsMap.add(EnumMapType.MAP_TYPE_Genuine,GenuineTracjerBar);
+			uiClsMap.add(EnumMapType.MAP_TYPE_EQUIP,GenuineTracjerBar);
+			uiClsMap.add(EnumMapType.MAP_TYPE_EXP,ExpTracjerBar);
 		}
 		
 		override protected function onShow() : void
@@ -43,12 +43,10 @@ package com.rpgGame.app.ui.main.dungeon
 			var mapId:int=MainRoleManager.actorInfo.mapID;
 			var sceneData:SceneData=MapDataManager.getMapInfo(mapId);
 			var cls:Class=uiClsMap.getValue(sceneData.mapType);
-			/*if(cls!=null)
-			{
-				currentUI= new cls();
-				this.addChild(currentUI);
-			}*/
-			currentUI= new MultyTrackerUI();
+			if(!cls){
+				return;
+			}
+			currentUI= new cls();
 			this.addChild(currentUI);
 		}
 		

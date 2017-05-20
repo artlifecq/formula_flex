@@ -54,7 +54,6 @@ package com.editor.manager
 	import away3d.containers.View3D;
 	import away3d.events.Event;
 	import away3d.pathFinding.DistrictWithPath;
-	import away3d.pathFinding.HeightMapHelper;
 	import away3d.tools.utils.Bounds;
 	
 	import org.client.mainCore.manager.EventManager;
