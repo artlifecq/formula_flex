@@ -6,7 +6,6 @@ package com.rpgGame.appModule.junjie
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.display3D.InterAvatar3D;
 	import com.rpgGame.app.manager.Mgr;
-	import com.rpgGame.app.manager.ZhanGongManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -19,7 +18,6 @@ package com.rpgGame.appModule.junjie
 	import com.rpgGame.coreData.cfg.JunJieData;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.role.RoleData;
-	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.coreData.utils.JunJieUtil;
@@ -30,8 +28,6 @@ package com.rpgGame.appModule.junjie
 	
 	import gs.TimelineLite;
 	import gs.TweenLite;
-	import gs.TweenMax;
-	import gs.easing.Expo;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.beibao.junjie.JunJie_Skin;
@@ -48,6 +44,7 @@ package com.rpgGame.appModule.junjie
 		private var _junjieItemList:Vector.<JunJieItem>;
 		private var _huangqinguoqiItem:JunJieItem;
 		private var _nowSelectItem:JunJieItem;
+		private var _nowShowLevel:int=0;
 		
 		private var _shuxingItemList:Vector.<ShuXingItem>;
 		private var _tiaojianItemList:Vector.<TiaoJianItem>;
@@ -148,6 +145,7 @@ package com.rpgGame.appModule.junjie
 			super.onHide();
 			closeEvent();
 			_nowSelectItem=null;
+			_nowShowLevel=0;
 		}
 		
 		private function initEvent():void
@@ -395,6 +393,23 @@ package com.rpgGame.appModule.junjie
 			else _skin.btnNext.visible=true;
 		}
 		
+		//修正列表选取项
+		private function updateItemShow():void
+		{
+			if(_nowShowLevel!=0)
+			{
+				if(_nowSelectItem.info.modelId!=_nowShowLevel) _nowSelectItem.setBtnState(false);
+				for(var i:int=0;i<_junjieItemList.length;i++)
+				{
+					if(_nowShowLevel==_junjieItemList[i].info.modelId)
+					{
+						_nowSelectItem=_junjieItemList[i];
+						_nowSelectItem.setBtnState(true);
+					}
+				}
+			}
+		}
+		
 		private function upHandler(e:Event):void
 		{
 			if(_showFirstLv>1)
@@ -402,6 +417,7 @@ package com.rpgGame.appModule.junjie
 				_showFirstLv--;
 				updateBtnState();
 				showItemList(_showFirstLv);
+				updateItemShow();
 			}
 		}
 		
@@ -412,6 +428,7 @@ package com.rpgGame.appModule.junjie
 				_showFirstLv++;
 				updateBtnState();
 				showItemList(_showFirstLv);
+				updateItemShow();
 			}
 		}
 		
@@ -452,8 +469,13 @@ package com.rpgGame.appModule.junjie
 				return;
 			}
 			else
+			{
+				_nowSelectItem.setBtnState(false);
 				_nowSelectItem=item;
+				_nowSelectItem.setBtnState(true);
+			}
 			
+			_nowShowLevel=_nowSelectItem.info.modelId;
 			showSelectItem();
 			//			}
 		}	
