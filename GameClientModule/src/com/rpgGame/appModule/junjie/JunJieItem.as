@@ -126,7 +126,7 @@ package com.rpgGame.appModule.junjie
 					_skin.btnCont.styleClass = org.mokylin.skin.app.beibao.junjie.button.Button9jie;
 					_skin.icons.styleName = "ui/app/beibao/junjie/icon/icon2.png";
 					_skin.icons.x=35;
-					_skin.icons.y=17;
+					_skin.icons.y=25;
 					break;
 			}
 		}

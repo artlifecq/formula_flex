@@ -535,9 +535,10 @@ package com.rpgGame.appModule.equip
 		//判断是否可以被继承
 		private function isCanInheritanceTo(info:EquipInfo):Boolean
 		{
+			var job:int=MainRoleManager.actorInfo.job;
 			if(_targetEquipInfo!=null)
 			{
-				if(info.qItem.q_kind==_targetEquipInfo.qItem.q_kind&&(info.strengthLevel>_targetEquipInfo.strengthLevel||
+				if((info.qItem.q_job==job||info.qItem.q_job==0)&&info.qItem.q_kind==_targetEquipInfo.qItem.q_kind&&(info.strengthLevel>_targetEquipInfo.strengthLevel||
 					info.polishLevel>_targetEquipInfo.polishLevel||info.smeltAtt1!=0||info.smeltAtt2!=0))
 				{
 					return true;
