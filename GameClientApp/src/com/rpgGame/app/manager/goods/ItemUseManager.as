@@ -1,9 +1,7 @@
 package com.rpgGame.app.manager.goods
 {
-	import com.rpgGame.app.manager.SmallShopItemManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.mount.MountEquipmentManager;
-	import com.rpgGame.app.manager.mount.MountManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.ItemSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
@@ -11,19 +9,14 @@ package com.rpgGame.app.manager.goods
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.coreData.cfg.ChatCfgData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
-	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
-	import com.rpgGame.coreData.enum.MouseCursorEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ComboItemInfo;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.coreData.role.HeroData;
 	
-	import flash.ui.Mouse;
-	
 	import app.message.GoodsType;
-	import app.message.NormalUsableDataProto.NormalEfficacy;
 	
 	import org.client.mainCore.ds.HashMap;
 

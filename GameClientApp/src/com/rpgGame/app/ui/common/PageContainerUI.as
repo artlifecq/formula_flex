@@ -8,7 +8,7 @@ package com.rpgGame.app.ui.common
 	import feathers.events.CollectionEventType;
 	import feathers.layout.TiledRowsLayout;
 	
-	import starling.events.Event;
+	import away3d.events.Event;
 
 	/**
 	 *翻页ui

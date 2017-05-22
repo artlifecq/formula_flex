@@ -10,7 +10,6 @@ package com.rpgGame.app.ui.menu
 	
 	import starling.core.Starling;
 	import starling.display.Sprite;
-	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;

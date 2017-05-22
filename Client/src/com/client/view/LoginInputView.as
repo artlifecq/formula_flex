@@ -2,18 +2,20 @@ package com.client.view
 {
 	import com.client.ui.alert.GameAlert;
 	import com.game.engine3D.utils.DisplayUtil;
-
+	
 	import flash.display.Stage;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	import flash.net.SharedObject;
 	import flash.ui.Keyboard;
-
+	
+	import away3d.events.Event;
+	
 	import feathers.events.FeathersEventType;
-
+	
 	import org.mokylin.skin.signIn.SignInSkin;
-
+	
 	import starling.core.Starling;
 	import starling.display.DisplayObjectContainer;
 	import starling.display.Sprite;
@@ -51,7 +53,7 @@ package com.client.view
 			initItem();
 
 			onStageResize();
-			_stage.addEventListener(Event.RESIZE, onStageResize);
+			_stage.addEventListener(flash.events.Event.RESIZE, onStageResize);
 			_stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
 			this.addEventListener(starling.events.TouchEvent.TOUCH, onTouch);
 
@@ -62,7 +64,7 @@ package com.client.view
 			_signInSkin.passWordText.addEventListener(FeathersEventType.FOCUS_OUT, onTextFocusOut);
 		}
 
-		private function onTextFocusIn(e : starling.events.Event) : void
+		private function onTextFocusIn(e : away3d.events.Event) : void
 		{
 			if (e.target == _signInSkin.userNameText)
 				_signInSkin.userNameTips.visible = false;
@@ -70,7 +72,7 @@ package com.client.view
 				_signInSkin.passWordTips.visible = false;
 		}
 
-		private function onTextFocusOut(e : starling.events.Event) : void
+		private function onTextFocusOut(e : away3d.events.Event) : void
 		{
 			if (e.target == _signInSkin.userNameText)
 			{
@@ -84,7 +86,7 @@ package com.client.view
 			}
 		}
 
-		private function onStageResize(event : Event = null) : void
+		private function onStageResize(event : flash.events.Event = null) : void
 		{
 			x = int((_stage.stageWidth - _signInSkin.bgImage.width) * 0.5);
 			y = int((_stage.stageHeight - _signInSkin.bgImage.height) * 0.5);
@@ -181,7 +183,7 @@ package com.client.view
 			this.removeEventListener(starling.events.TouchEvent.TOUCH, onTouch);
 			if (_stage)
 			{
-				_stage.removeEventListener(Event.RESIZE, onStageResize);
+				_stage.removeEventListener(flash.events.Event.RESIZE, onStageResize);
 				_stage.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
 				_stage = null;
 			}
