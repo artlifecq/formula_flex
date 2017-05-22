@@ -54,38 +54,17 @@ package com.rpgGame.app.state.ai
 			var role : SceneRole = findAttackableTarget();
 			if (role)
 			{
-				/*if(TrusteeshipManager.getInstance().isAutoFightRunning)
-				{
-					SceneRoleSelectManager.selectedRole = role;
-				}
-				else if(TrusteeshipManager.getInstance().isFightActorRunning)
-				{
-					SceneRoleSelectManager.selectedRole = role;
-				}*/
+				
 				SceneRoleSelectManager.selectedRole = role;
 				TrusteeshipManager.getInstance().setRoleList(role);
 				var monsterData : MonsterData = role.data as MonsterData;
 				transition(AIStateType.AI_NONE);
-				
-				/*if (SceneRoleSelectManager.selectedRole == role)
-				{
-					var targerPos : Vector3D = role.position;
-					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 200, null, onArrive);
-				}*/
 			}
 		}
 
 		private function findAttackableTarget() : SceneRole
 		{
 			var role:SceneRole;
-			/*if(TaskAutoManager.getInstance().isTaskRunning)
-			{
-				role=findNearestMonster(true);
-			}
-			else
-			{
-				role=findNearestMonster(false);
-			}*/
 			role=findNearestMonster(false);
 			return role;
 		}

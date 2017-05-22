@@ -215,7 +215,6 @@ package com.rpgGame.app.manager
 			TweenLite.killDelayedCallsTo(onDelayedUnbroken);
 			TweenLite.killDelayedCallsTo(actorFight);
 			EventManager.dispatchEvent(TaskEvent.AUTO_FIGHT_STOP);
-			_isFightSelect=false;
 			_isAutoFightRunning = false;
 			if (_isFightActorRunning||_isFightTargetRunning)
 				return;
@@ -227,26 +226,15 @@ package com.rpgGame.app.manager
 		{
 			if (!_isFightActorRunning && !_isAutoFightRunning&&!_isFightTargetRunning)
 				return;
-			stop();
+			stopFightTarget();
+			stopAutoFight();
+			
 		}
 
 		private function stop() : void
 		{
-			_isBroken = false;
-			TweenLite.killDelayedCallsTo(onDelayedUnbroken);
-			_isAutoFightRunning = false;
-			_isFightActorRunning = false;
-			_isFightTargetRunning = false;
-			if (_targetRoles)
-			{
-				_targetRoles.length = 0;
-				_targetRoles = null;
-			}
 			_gTimer.reset();
 			_gTimer.stop();
-			TweenLite.killDelayedCallsTo(onDelayedUnbroken);
-			TweenLite.killDelayedCallsTo(actorFight);
-			_isFightSelect=false;
 			MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE);
 			if (MainRoleManager.actor.stateMachine.isPrewarWaiting)
 				MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_PREWAR);
