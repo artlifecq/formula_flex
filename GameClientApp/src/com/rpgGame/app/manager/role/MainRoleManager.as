@@ -6,6 +6,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.app.manager.GameCameraManager;
 	import com.rpgGame.app.manager.ShortcutsManger;
 	import com.rpgGame.app.manager.TrusteeshipManager;
+	import com.rpgGame.app.manager.ctrl.ControlAutoPick;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.task.GatherAutoManager;
 	import com.rpgGame.app.manager.task.MiXinManager;
@@ -38,7 +39,7 @@ package com.rpgGame.app.manager.role
 		/**主角*/
 		private static var _actor : SceneRole;
 		private static var _actroInfo : HeroData;
-
+		
 		public function MainRoleManager()
 		{
 		}
@@ -162,6 +163,7 @@ package com.rpgGame.app.manager.role
                     _actor, 
                     data.totalStat.getResData(CharAttributeType.RES_JING_ZHENG), 
                     0);
+				
 			}
 		}
 
@@ -249,6 +251,8 @@ package com.rpgGame.app.manager.role
 //			}
 			return false;
 		}
+
+	
 		
 	}
 }

@@ -6,6 +6,7 @@ package com.rpgGame.app.utils
 	import com.rpgGame.core.utils.PKModeUtil;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.country.CountryNameCfgData;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.HeadBloodStateType;
@@ -124,6 +125,10 @@ package com.rpgGame.app.utils
 				{
 					return StaticValue.COLOR_CODE_13;
 				}
+			}
+			if (SceneCharType.DROP_GOODS==_role.type) 
+			{
+				return ItemConfig.getItemQualityColor(int(_role.data.qitem.q_id));
 			}
 			if (_role.type != SceneCharType.PLAYER)
 				return StaticValue.COLOR_CODE_1;

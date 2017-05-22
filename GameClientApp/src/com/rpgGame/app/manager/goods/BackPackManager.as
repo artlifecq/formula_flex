@@ -353,6 +353,21 @@ package com.rpgGame.app.manager.goods
 			return null;
 		}
 		
+		/**返回物品*/
+		public function getItemsById(id:int):Vector.<ClientItemInfo>
+		{
+			var ret:Vector.<ClientItemInfo>=new Vector.<ClientItemInfo>();
+			var itemInfoList:Array = _goodsList;
+			for each(var item:ClientItemInfo in itemInfoList)
+			{
+				if(item!=null&&item.qItem.q_id==id)
+				{
+					ret.push(item);
+				}
+				
+			}
+			return ret;
+		}
 		
 	}
 }

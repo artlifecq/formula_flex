@@ -46,40 +46,42 @@ package com.rpgGame.app.manager
 		{
 		}
 
-		public static function walkToRole(role : SceneRole) : void
+		public static function walkToRole(role : SceneRole) : Boolean
 		{
 			if (!role || !role.usable)
-				return;
+				return false;
+			var ret:Boolean=false;
 			var targerPos : Vector3D = role.position.clone();
             targerPos.y = targerPos.z;
             targerPos.z = 0;
 			switch (role.type)
 			{
 				case SceneCharType.PLAYER:
-					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role);
+					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role);
 					break;
 				case SceneCharType.MONSTER:
-					wakMonster(role,targerPos);
+					ret=wakMonster(role,targerPos);
 					break;
 				case SceneCharType.LIANG_CANG:
-					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveMonster);
+					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveMonster);
 					break;
 				case SceneCharType.NPC:
-					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveNpc);
+					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveNpc);
 					break;
 				case SceneCharType.PROTECT_NPC:
-					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveNpc);
+					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveNpc);
 					break;
 				case SceneCharType.COLLECT:
-					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveCollect,null,null,onCollect);
+					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveCollect,null,null,onCollect);
 					break;
 				case SceneCharType.DROP_GOODS:
-					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveDropGoods,null,null,onDropGoods);
+					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 150, role, onArriveDropGoods,null,null,onDropGoods);
 					break;
 				case SceneCharType.STALL:
-					RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onWalkToStall);
+					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onWalkToStall);
 					break;
 			}
+			return ret;
 		}
 		
 		private static function onWalkToStall(ref : WalkMoveStateReference):void

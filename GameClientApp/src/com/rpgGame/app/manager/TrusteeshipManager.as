@@ -2,6 +2,7 @@ package com.rpgGame.app.manager
 {
 	import com.game.mainCore.core.timer.GameTimer;
 	import com.rpgGame.app.fight.spell.CastSpellHelper;
+	import com.rpgGame.app.manager.ctrl.ControlAutoPick;
 	import com.rpgGame.app.manager.fight.FightManager;
 	import com.rpgGame.app.manager.fightsoul.FightSoulManager;
 	import com.rpgGame.app.manager.input.KeyMoveManager;
@@ -58,6 +59,7 @@ package com.rpgGame.app.manager
 		private var _stateMachine : AIStateMachine;
 		private var _targetRoles : Vector.<SceneRole>;
 		private var ACTORTIME:int=4;
+		private var _autoPickCtrl:ControlAutoPick;
 		public function TrusteeshipManager()
 		{
 			_gTimer = new GameTimer("TrusteeshipManager", 500, 0, onUpdate);
@@ -76,8 +78,13 @@ package com.rpgGame.app.manager
 		public function setup(role : SceneRole) : void
 		{
 			_stateMachine = new AIStateMachine(role);
+			_autoPickCtrl=new ControlAutoPick(role);
 		}
-		
+		public  function get autoPickCtrl():ControlAutoPick
+		{
+			return _autoPickCtrl;
+		}
+
 		
 		private var _isFightSelect:Boolean=false;
 		/**玩家被攻击*/
@@ -315,6 +322,12 @@ package com.rpgGame.app.manager
 				return;
 			if (_isBroken)
 				return;
+//			_autoPickCtrl.TryAutoPickItem();
+//			if (_autoPickCtrl.isPicking) 
+//			{
+//				stopFightTarget();
+//				return;
+//			}
 			/*if (_isFightTargetRunning && _targetRoles)
 			{
 				var isCompleted : Boolean = true;

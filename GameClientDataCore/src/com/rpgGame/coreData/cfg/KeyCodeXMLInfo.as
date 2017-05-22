@@ -73,6 +73,7 @@ package com.rpgGame.coreData.cfg
 					<key funcID="52" code="27" name="ESC" dataID="0" type="2" />
 					<key funcID="51" code="9" name="TAB" dataID="" type="2" />
 					<key funcID="65" code="65" name="A" dataID="0" type="2"/>
+					<key funcID="66" code="192" name="~" dataID="0" type="2"/>
 					<!--数字 快捷键 -->
 					<!-- 加号 -->
 					<key funcID="59" code="187" name="=" dataID="0" type="2" />
@@ -82,7 +83,7 @@ package com.rpgGame.coreData.cfg
 					<!-- 特殊快捷键 -->
 					<key funcID="226" code="17" name="CTRL" dataID="" type="" />
 					<key funcID="227" code="16" name="SHIFT" dataID="" type="2" />
-					<key funcID="50" code="192" name="BO" dataID="" type="5" />
+					<key funcID="50" code="18" name="ALT" dataID="" type="5" />
 					<key funcID="53" code="35" name="END" dataID="" type="1" />
 					<key funcID="54" code="36" name="HOME" dataID="" type="1" />
 					<key funcID="55" code="188" name="," dataID="" type="" />

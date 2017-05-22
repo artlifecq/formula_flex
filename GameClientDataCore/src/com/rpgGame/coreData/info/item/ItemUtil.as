@@ -380,5 +380,28 @@ package com.rpgGame.coreData.info.item
 			}
 			return "";
 		}
+		
+		public static function IsCurrency(type:int):Boolean
+		{
+			return GoodsType.MONEY==type;
+		}
+		public static function IsEquip(type:int):Boolean
+		{
+			return GoodsType.EQUIPMENT==type|| GoodsType.EQUIPMENT1==type||GoodsType.EQUIPMENT2==type;
+		}
+		/**药品**/
+		public static function IsMedical(type:int):Boolean
+		{
+			return GoodsType.MEDICINE==type;
+		}
+		
+		public static function IsMaterial(type:int):Boolean
+		{
+			return GoodsType.MATERIAL_ADVANCE==type||GoodsType.MATERIAL_COMBO==type;
+		}
+		public static function IsTaskItem(type:int):Boolean
+		{
+			return GoodsType.TASK==type;
+		}
 	}
 }

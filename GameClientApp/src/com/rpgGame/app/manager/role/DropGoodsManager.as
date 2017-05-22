@@ -170,5 +170,19 @@ package com.rpgGame.app.manager.role
 			else
 				return null;
 		}
+		public function getAllSceneItems():Array
+		{
+			var arr:Array=[];
+			var scanerole:SceneRole
+			for(var key:Number in _goods)
+			{
+				scanerole= SceneManager.getScene().getSceneObjByID(SceneDropGoodsData(_goods[key]).id, SceneCharType.DROP_GOODS) as SceneRole;
+				if(scanerole!=null)
+				{
+					arr.push(scanerole);
+				}
+			}
+			return arr;
+		}
 	}
 }
