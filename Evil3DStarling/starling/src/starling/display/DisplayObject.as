@@ -22,6 +22,7 @@ package starling.display
     
     import away3d.events.Event;
     import away3d.events.EventDispatcher;
+    import away3d.events.IEventBubble;
     
     import starling.core.Starling;
     import starling.core.starling_internal;
@@ -118,7 +119,7 @@ package starling.display
      *  @see starling.filters.FragmentFilter
      *  @see starling.styles.MeshStyle
      */
-    public class DisplayObject extends EventDispatcher
+    public class DisplayObject extends EventDispatcher implements IEventBubble
     {
         // private members
         
@@ -1025,6 +1026,15 @@ package starling.display
 		/** zhuzhongmao 鼠标穿透 */
 		public function get touchAcross():Boolean { return _touchAcross; }
 		public function set touchAcross(value:Boolean):void { _touchAcross = value; }
+		
 		//---------------------------------------------------------------------------
+		public function get eventParent():IEventBubble {
+			return _parent;
+		}
+		
+		public function get eventScene():IEventBubble {
+			return null;
+		}
+		
     }
 }

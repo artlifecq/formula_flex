@@ -1,6 +1,6 @@
 package com.game.engine2D.interfaces
 {
-	import starling.events.Event;
+	import away3d.events.Event;
 
 	public interface IEventDispatcher
 	{

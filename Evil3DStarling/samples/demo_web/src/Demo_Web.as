@@ -7,7 +7,6 @@ package
     import flash.system.System;
     import flash.utils.setTimeout;
     
-    import away3d.core.managers.Stage3DManager;
     import away3d.core.managers.Stage3DProxy;
     import away3d.debug.AwayStats;
     import away3d.events.Stage3DEvent;
@@ -55,7 +54,9 @@ package
 
             Starling.multitouchEnabled = true; // for Multitouch Scene
 
-			_stage3DProxy = Stage3DManager.getInstance(stage).getFreeStage3DProxy();
+			_stage3DProxy = Stage3DProxy.initEngine(stage);
+			_stage3DProxy.width = stage.stageWidth;
+			_stage3DProxy.height = stage.stageHeight;
 			_stage3DProxy.antiAlias = 0;
 			_stage3DProxy.color = stage.color;
 			_stage3DProxy.addEventListener(Stage3DEvent.CONTEXT3D_CREATED, onContextCreated);

@@ -175,8 +175,11 @@ package feathers.utils.keyboard
 		 */
 		protected function target_focusOutHandler(event:Event):void
 		{
-			this._target.stage.removeEventListener(KeyboardEvent.KEY_DOWN, stage_keyDownHandler);
-			this._target.stage.removeEventListener(KeyboardEvent.KEY_UP, stage_keyUpHandler);
+			if (this._target.stage)
+			{
+				this._target.stage.removeEventListener(KeyboardEvent.KEY_DOWN, stage_keyDownHandler);
+				this._target.stage.removeEventListener(KeyboardEvent.KEY_UP, stage_keyUpHandler);
+			}
 		}
 
 		/**
@@ -186,6 +189,8 @@ package feathers.utils.keyboard
 		{
 			this._target.stage.removeEventListener(KeyboardEvent.KEY_DOWN, stage_keyDownHandler);
 			this._target.stage.removeEventListener(KeyboardEvent.KEY_UP, stage_keyUpHandler);
+			this._target.removeEventListener(FeathersEventType.FOCUS_IN, target_focusInHandler);
+			this._target.removeEventListener(FeathersEventType.FOCUS_OUT, target_focusOutHandler);
 		}
 
 		/**

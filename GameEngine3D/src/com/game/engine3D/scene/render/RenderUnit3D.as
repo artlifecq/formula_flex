@@ -215,10 +215,10 @@ package com.game.engine3D.scene.render
 		 */
 		private var _playCount : int = 0;
 
-		private var _waitAddUnitList : Vector.<RenderUnitChild>;
+//		private var _waitAddUnitList : Vector.<RenderUnitChild>;
 		private var _currChildUnitList : Vector.<RenderUnitChild>;
 
-		protected var _compositeAMesh : CompositeMesh;
+		protected var _compositeMesh : CompositeMesh;
 		
 		private var _methodDatas : Vector.<MethodData>;
 		//private var _boneChildrenByName : Dictionary;
@@ -226,7 +226,7 @@ package com.game.engine3D.scene.render
 		//暂时不用了，过段时间删掉。
 		private var _depthCompareMode : String = Context3DCompareMode.LESS_EQUAL;
 		private var _pickDummy : Mesh;
-		private var _registeredCamera : Camera3D;
+//		private var _registeredCamera : Camera3D;
 		private var _allowCameraAnimator : Boolean;
 		private var _playInited : Boolean;
 		private var _forceLoad : Boolean;
@@ -261,7 +261,7 @@ package com.game.engine3D.scene.render
 		public function RenderUnit3D(rpd : RenderParamData3D,is25D:Boolean=false)
 		{
 			super([rpd,is25D]);
-			_waitAddUnitList = new Vector.<RenderUnitChild>();
+//			_waitAddUnitList = new Vector.<RenderUnitChild>();
 			_currChildUnitList = new Vector.<RenderUnitChild>();
 			_methodDatas = new Vector.<MethodData>();
 		}
@@ -744,7 +744,7 @@ package com.game.engine3D.scene.render
 			if (!_renderUnitData)
 				return;
 			_hasSkeletonAnimator = _renderUnitData.hasSkeletonAnimator;
-			_drawElements = _renderUnitData.meshElements;
+			_drawElements = _renderUnitData.drawElements;
 			_animatorElements = _renderUnitData.animatorElements;
 			_baseVirtualElements = _renderUnitData.baseVirutalElements;
 			_meshes = _renderUnitData.meshes;
@@ -1666,32 +1666,34 @@ package com.game.engine3D.scene.render
 		{
 			if (!_allowCameraAnimator)
 				return;
-			if (_registeredCamera)
-				return;
+//			if (_registeredCamera)
+//				return;
 			if (!_graphicDis || !_graphicDis.scene || !_graphicDis.scene.view || !_graphicDis.scene.view.camera)
 				return;
-			_registeredCamera = _graphicDis.scene.view.camera;
-//			if (_renderUnitData && _renderUnitData.camera3DAnimators)
-//			{
-//				for each (var animator : iCamera3DAnimator in _renderUnitData.camera3DAnimators)
-//				{
+//			_registeredCamera = _graphicDis.scene.view.camera;
+			if (_renderUnitData && _renderUnitData.camera3DAnimators)
+			{
+				for each (var animator : AnimatorBase in _renderUnitData.camera3DAnimators)
+				{
 //					_registeredCamera.registerCameraAnimator(animator);
-//				}
-//			}
+					animator.visible = true;
+				}
+			}
 		}
 
 		private function unregisterCameraAnimator() : void
 		{
-			if (!_registeredCamera)
-				return;
-//			if (_renderUnitData && _renderUnitData.camera3DAnimators)
-//			{
-//				for each (var animator : iCamera3DAnimator in _renderUnitData.camera3DAnimators)
-//				{
-//					_registeredCamera.unregisterCameraAnimator(animator);
-//				}
-//			}
-			_registeredCamera = null;
+			//			if (!_registeredCamera)
+			//				return;
+			if (_renderUnitData && _renderUnitData.camera3DAnimators)
+			{
+				for each (var animator : AnimatorBase in _renderUnitData.camera3DAnimators)
+				{
+					//_registeredCamera.unregisterCameraAnimator(animator);
+					animator.visible = false;
+				}
+			}
+			//			_registeredCamera = null;
 		}
 
 		private function validateGraphic() : void
@@ -2291,7 +2293,7 @@ package com.game.engine3D.scene.render
 						if (element is Mesh)
 						{
 							childData.renderUnit._renderResourceData.isSkinMesh = true;
-							childData.renderUnit._compositeAMesh = compositeMesh;
+							childData.renderUnit._compositeMesh = compositeMesh;
 							compositeMesh.addUnit(Mesh(element));
 							if (ru != this)
 							{
@@ -2831,7 +2833,7 @@ package com.game.engine3D.scene.render
 			_pickDummyBindBone = null;
 			_defalutStatus = null;
 			_secondStatusGetter = null;
-			_compositeAMesh = null;
+			_compositeMesh = null;
 			_repeat = 0;
 			_lifecycle = 0;
 			_playCount = 0;
@@ -3047,15 +3049,15 @@ package com.game.engine3D.scene.render
 						element.hookingJointName = null;
 						_graphicDis.addChild(element);
 					}
-					if (_compositeAMesh && (element is Mesh))
+					if (_compositeMesh && (element is Mesh))
 					{
-						var index : int = _compositeAMesh.getUnitIndex(Mesh(element));
+						var index : int = _compositeMesh.getUnitIndex(Mesh(element));
 						if (index > -1)
-							_compositeAMesh.removeUnitByIndex(index);
+							_compositeMesh.removeUnitByIndex(index);
 					}
 				}
 			}
-			_compositeAMesh = null;
+			_compositeMesh = null;
 		}
 
 //		public function restoreAllChildUnitToParent(parent : ObjectContainer3D = null) : void
@@ -3086,15 +3088,15 @@ package com.game.engine3D.scene.render
 //						element.hookingJointName = null;
 //						_graphicDis.addChild(element);
 //					}
-//					if (_compositeAMesh && (element is Mesh))
+//					if (_compositeMesh && (element is Mesh))
 //					{
-//						var index : int = _compositeAMesh.getUnitIndex(Mesh(element));
+//						var index : int = _compositeMesh.getUnitIndex(Mesh(element));
 //						if (index > -1)
-//							_compositeAMesh.removeUnitByIndex(index);
+//							_compositeMesh.removeUnitByIndex(index);
 //					}
 //				}
 //			}
-//			_compositeAMesh = null;
+//			_compositeMesh = null;
 //			this.parent = parent;
 //		}
 
@@ -3562,9 +3564,9 @@ package com.game.engine3D.scene.render
 							callStop();
 						}
 					}
-                    if (_playing && _registeredCamera && _registeredCamera.camera3DAnimators.length > 0) {
-                        CameraFrontController.screenVibration();
-                    }
+//                    if (_playing && _registeredCamera && _registeredCamera.camera3DAnimators.length > 0) {
+//                        CameraFrontController.screenVibration();
+//                    }
 					
 				}
 			}
@@ -3629,13 +3631,13 @@ package com.game.engine3D.scene.render
 			{
 				for each (var element : ObjectContainer3D in _drawElements)
 				{
-					if (_compositeAMesh)
+					if (_compositeMesh)
 					{
 						if (element is Mesh)
 						{
-							var index : int = _compositeAMesh.getUnitIndex(Mesh(element));
+							var index : int = _compositeMesh.getUnitIndex(Mesh(element));
 							if (index > -1)
-								_compositeAMesh.removeUnitByIndex(index);
+								_compositeMesh.removeUnitByIndex(index);
 						}
 					}
 					if (element.parent)
@@ -3646,7 +3648,7 @@ package com.game.engine3D.scene.render
 				}
 				_drawElements = null;
 			}
-			_compositeAMesh = null;
+			_compositeMesh = null;
 			if (_meshes)
 			{
 				for each (var mesh : Mesh in _meshes)
@@ -3942,9 +3944,9 @@ package com.game.engine3D.scene.render
 			}
 		}
 
-		public function get compositeAMesh():CompositeMesh
+		public function get compositeMesh():CompositeMesh
 		{
-			return _compositeAMesh;
+			return _compositeMesh;
 		}
 	}
 }

@@ -28,6 +28,7 @@ package com.game.engine2D
 	
 	import flash.display.Sprite;
 	import flash.geom.Point;
+	import flash.utils.Dictionary;
 	
 	import away3d.containers.ObjectContainer3D;
 	import away3d.containers.View3D;
@@ -40,8 +41,6 @@ package com.game.engine2D
 	import away3d.lights.LightBase;
 	
 	import gs.TweenLite;
-	
-	import org.client.mainCore.ds.DHash;
 	
 	import starling.core.Starling;
 	import starling.display.Sprite;
@@ -496,11 +495,14 @@ package com.game.engine2D
 		public function drawSmallMap():void
 		{
 			var mapTexture:AsyncMapTexture = mapConfig.smallMapTexture;
-			if (mapConfig && mapTexture){
-				if (mapTexture.loadComplete){
+			if (mapConfig && mapTexture)
+			{
+				if (mapTexture.loadComplete)
+				{
 					onLoaderComplete(null);
 				}
-				else{
+				else
+				{
 					mapTexture.addEventListener(Event.COMPLETE, onLoaderComplete);
 				}
 			}
@@ -518,13 +520,13 @@ package com.game.engine2D
 		//***********************************************通过RenderUnit查找角色***********************************************************
 		public function getSceneObjByAp(ap:RenderUnit):BaseObj
 		{
-			var len:int = sceneRenderLayer.baseObjList.length;
+			var len:int = sceneRenderLayer.Debnug_call_GetBaseObjList().length;
 			var bo:BaseObj;
 			var list:Array = [];
 			if (!ap)return null;
 			while(len-->0)
 			{
-				bo = sceneRenderLayer.baseObjList[len];
+				bo = sceneRenderLayer.Debnug_call_GetBaseObjList()[len];
 				if(bo)
 				{
 					if(bo is SceneCharacter)
@@ -563,8 +565,13 @@ package com.game.engine2D
 		}
 		
 		//***********************************************创建|添加\移除\查找角色***********************************************************
-		private var _sceneObjMap:DHash = new DHash();
+		//		private var _sceneObjMap:DHash = new DHash();
+		private var _sceneObjTypeDic:Dictionary = new Dictionary();
+		
+		private var _isSceneCharListUpdate:Boolean = false;
 		private var _sceneCharacterList:Vector.<SceneCharacter> = new Vector.<SceneCharacter>;
+		
+		private var _isRenderUntiListUpdate:Boolean = false;
 		private var _renderUnitList:Vector.<RenderUnit> = new Vector.<RenderUnit>;
 		/**
 		 * @private
@@ -572,11 +579,44 @@ package com.game.engine2D
 		 */
 		public function get sceneCharacterList():Vector.<SceneCharacter>
 		{
+			if(_isSceneCharListUpdate)
+			{
+				_isSceneCharListUpdate = false;
+				_sceneCharacterList.length = 0;
+				var vec:Vector.<BaseObj> = sceneRenderLayer.Debnug_call_GetBaseObjList();
+				var len:int = vec.length;
+				var bo:BaseObj;
+				while(len-->0)
+				{
+					bo = vec[len];
+					if(bo && bo is SceneCharacter)
+					{
+						_sceneCharacterList.push(bo); 
+					}
+				}
+			}
 			return _sceneCharacterList;
 		}
 		
 		public function get renderUnitList():Vector.<RenderUnit>
 		{
+			if(_isRenderUntiListUpdate)
+			{
+				_isRenderUntiListUpdate = false;
+				
+				_renderUnitList.length = 0;
+				var vec:Vector.<BaseObj> = sceneRenderLayer.Debnug_call_GetBaseObjList();
+				var len:int = vec.length;
+				var bo:BaseObj;
+				while(len-->0)
+				{
+					bo = vec[len];
+					if(bo && bo is RenderUnit)
+					{
+						_renderUnitList.push(bo); 
+					}
+				}
+			}
 			return _renderUnitList;
 		}
 		
@@ -586,7 +626,18 @@ package com.game.engine2D
 		 */
 		public function get sceneObjList():Vector.<BaseObj>
 		{
-			return sceneRenderLayer.baseObjList;
+			return sceneRenderLayer.Debnug_call_GetBaseObjList();
+		}
+		
+		private function getDicByType(type:String):Dictionary
+		{
+			var dic:Dictionary = _sceneObjTypeDic[type];
+			if(dic == null)
+			{
+				dic = new Dictionary();
+				_sceneObjTypeDic[type] = dic;
+			}
+			return dic;
 		}
 		
 		/**
@@ -600,23 +651,37 @@ package com.game.engine2D
 			var index:int;
 			if ($bo is SceneCharacter)
 			{
-				index = _sceneCharacterList.indexOf($bo as SceneCharacter);
-				if (index == -1)//别重复添加...日...会死人的...
-				{
-					_sceneCharacterList.push($bo as SceneCharacter);
-				}
+				_isSceneCharListUpdate = true;
 			}
 			////////////////////////////////////////////
 			if ($bo is RenderUnit)
 			{
-				index = _renderUnitList.indexOf($bo as RenderUnit);
-				if (index == -1)//别重复添加...日...会死人的...
-				{
-					_renderUnitList.push($bo as RenderUnit);
-				}
+				_isRenderUntiListUpdate = true;
 			}
 			//需要添加的对象和key的对应关系唯一
-			_sceneObjMap.addForValue($bo,$bo.id + "_" + $bo.type);
+			//			_sceneObjMap.addForValue($bo,$bo.id + "_" + $bo.type);
+			addSceneObjDic($bo);
+		}
+		
+		
+		private function getSceneObjInDic(id:Number, type:String):BaseObj
+		{
+			var dic:Dictionary = getDicByType(type);
+			return dic[id];
+		}
+		
+		private function addSceneObjDic($bo:BaseObj):void
+		{
+			
+			var dic:Dictionary = getDicByType($bo.type);
+			dic[$bo.id] = $bo;
+		}
+		
+		private function removeSceneObjDic(id:Number, type:String):void
+		{
+			
+			var dic:Dictionary = getDicByType(type);
+			delete dic[id];
 		}
 		
 		/**
@@ -631,31 +696,23 @@ package com.game.engine2D
 			{
 				return;
 			}
-			sceneRenderLayer.removeBaseObj($bo, $recycle);
 			//
 			var index:int = -1;
 			if ($bo is SceneCharacter)
 			{
-				index = _sceneCharacterList.indexOf($bo as SceneCharacter);
-				if (index != -1)
-				{
-					_sceneCharacterList.splice(index,1);
-				}
+				//				trace("-------------------name:"  + ($bo as SceneCharacter).name);
+				_isSceneCharListUpdate = true;
+			}
+			if ($bo)
+			{
+				removeSceneObjDic($bo.id, $bo.type)
 			}
 			//
 			if ($bo is RenderUnit)
 			{
-				index = _renderUnitList.indexOf($bo as RenderUnit);
-				if (index != -1)
-				{
-					_renderUnitList.splice(index,1);
-				}
+				_isRenderUntiListUpdate = true;
 			}
-			
-			if ($bo)
-			{
-				_sceneObjMap.removeForValue($bo);
-			}
+			sceneRenderLayer.removeBaseObj($bo, $recycle);
 		}
 		
 		/**
@@ -699,19 +756,16 @@ package com.game.engine2D
 		 */
 		public function removeSceneObjByID($id:Number, $type:String, $recycle:Boolean=true):void
 		{
-			sceneRenderLayer.removeBaseObjByID($id, $type, $recycle);
-			//
-			var $bo:BaseObj = _sceneObjMap.getValue($id + "_" +$type);
+			//			var $bo:BaseObj = _sceneObjMap.getValue($id + "_" +$type);
+			var $bo:BaseObj = getSceneObjInDic($id ,$type);
 			if ($bo is SceneCharacter)
 			{
-				var index:int = _sceneCharacterList.indexOf($bo as SceneCharacter);
-				if (index != -1)
-				{
-					_sceneCharacterList.splice(index,1);
-				}
+				_isSceneCharListUpdate = true;
 			}
 			//
-			_sceneObjMap.removeForKey($id + "_" +$type);
+			//			_sceneObjMap.removeForKey($id + "_" +$type);
+			removeSceneObjDic($id,$type);
+			sceneRenderLayer.removeBaseObjByID($id, $type, $recycle);
 		}
 		/**
 		 * 从场景中查找角色
@@ -720,14 +774,17 @@ package com.game.engine2D
 		 */
 		public function getSceneObjByID($id:Number, $type:String):BaseObj
 		{
-			var bo:BaseObj = _sceneObjMap.getValue($id + "_" +$type);
+			//			var bo:BaseObj = _sceneObjMap.getValue($id + "_" +$type);
+			var bo:BaseObj = getSceneObjInDic($id ,$type);
+			
 			if (bo && bo.usable)//不可用的,还它要的引用干毛?
 			{
 				return bo;
 			}
 			else//不可用的,干掉,干掉,干掉!!!
 			{
-				_sceneObjMap.removeForKey($id + "_" +$type);
+				//				_sceneObjMap.removeForKey($id + "_" +$type);
+				removeSceneObjByID($id, $type);
 			}
 			return null;
 		}
@@ -768,12 +825,22 @@ package com.game.engine2D
 			if (sceneZoneMapLayer)
 				sceneZoneMapLayer.dispose();
 			//换装
-			var list:Array = _sceneObjMap.getValues();
-			for(var i:int=list.length - 1;i >= 0;i--)
+			//			var list:Array = _sceneObjMap.getValues();
+			//			for(var i:int=list.length - 1;i >= 0;i--)
+			//			{
+			//				var bObj:BaseObj = list[i];
+			//				removeSceneObj(bObj);
+			//			}
+			
+			for each (var type:int in _sceneObjTypeDic) 
 			{
-				var bObj:BaseObj = list[i];
-				removeSceneObj(bObj);
+				var dic:Dictionary = _sceneObjTypeDic[type];
+				dic = new Dictionary();
 			}
+			
+			_sceneCharacterList.length = 0;
+			_isSceneCharListUpdate = true;
+			_renderUnitList.length = 0;
 			if (sceneRenderLayer)
 				sceneRenderLayer.dispose();
 			if (_scene3d)

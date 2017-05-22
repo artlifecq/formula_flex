@@ -52,7 +52,7 @@ package com.game.engine2D
 		 * 用于绑定角色复杂数据的动态类 
 		 */		
 		private var _userData:Object;
-
+		
 		/**
 		 * @private 
 		 * 换装
@@ -61,19 +61,19 @@ package com.game.engine2D
 		{
 			return _renderSet;
 		}
-
+		
 		public function get avatar3D():RenderSet3D
 		{
 			if (_avatar3D)
 				return _avatar3D.avatar;
 			return null;
 		}
-
+		
 		public function get character3D():SceneCharacter3D
 		{
 			return _avatar3D;
 		}
-
+		
 		/**
 		 * 用于绑定角色复杂数据的动态类 
 		 */		
@@ -364,16 +364,18 @@ package com.game.engine2D
 		override public function set finalShowY(value:Number):void
 		{
 			super.finalShowY = value;
-			var $baseObj:BaseObj3D;
-			var offset:Number = value << 7;//value*128
+			var $baseObj3d:BaseObj3D;
+			var $baseObj:BaseObj;
+			var offset:Number = value << 7;
 			for (var i:int = _baseObj3DList.length - 1; i >= 0 ; i--) 
 			{
-				$baseObj = _baseObj3DList[i];
-				$baseObj.zOffset = offset;
+				$baseObj3d = _baseObj3DList[i];
+				$baseObj3d.zOffset = offset + $baseObj3d.depth;
 			}
 			for (i = _baseObjList.length - 1; i >= 0 ; i--) 
 			{
-				_baseObjList[i].finalShowY = value;
+				$baseObj = _baseObjList[i];
+				$baseObj.finalShowY = value + $baseObj.depth;
 			}
 		}
 		
@@ -511,7 +513,7 @@ package com.game.engine2D
 				_shadow.y = this.y+GlobalConfig2D.shadowOffsetY;
 			}
 		}
-
+		
 		override public function set mouseEnabled(value:Boolean):void
 		{
 			if(_mouseEnabled != value)
@@ -614,12 +616,15 @@ package com.game.engine2D
 			if (hasAvatar3D)
 			{
 				_avatar3D = SceneCharacter3D.create(type,id);
+				_avatar3D.canRemoved = canRemoved;
 				_avatar3D.parentChar = this;
+				_avatar3D.avatar.useLight = true;
 			}
 			if (scene)
 			{
-				if (_avatar3D)
-					scene.gameScene3d.addSceneObj(_avatar3D,_graphicDis);
+				if (_avatar3D){
+					scene.gameScene3d.addSceneObj(_avatar3D,_graphicDis,false,false);
+				}
 				scene.sceneHeadLayer.addChild(_headBindableContainer);
 				scene.sceneNameLayer.addChild(_headNameContainer);
 			}
@@ -761,7 +766,7 @@ package com.game.engine2D
 		}
 		
 		//--------------------------------------------------------------------------------------------------------------------------------
-
+		
 		//-----------------------------------------------------------其它BaseObj-----------------------------------------------------------
 		protected var _baseObj3DList:Vector.<BaseObj3D> = new Vector.<BaseObj3D>();
 		public function get numBaseObj3D():uint
@@ -801,7 +806,7 @@ package com.game.engine2D
 				RenderUnit3D($baseObj).setErrorCallBack(removeBaseObj3D);
 				RenderUnit3D($baseObj).setPlayCompleteCallBack(removeBaseObj3D);
 			}
-			$baseObj.zOffset = this.finalShowY<<7;
+			$baseObj.zOffset = this.finalShowY<<7 + $baseObj.depth;
 		}
 		
 		public function removeAllBaseObj3D():void
@@ -820,7 +825,7 @@ package com.game.engine2D
 				removeBaseObj3DAt(index);
 			}
 		}
-
+		
 		public function removeBaseObj3DAt(index:int):void
 		{
 			if(index >= 0 && index < _baseObj3DList.length)
@@ -895,7 +900,6 @@ package com.game.engine2D
 			if (_avatar3D)
 			{
 				scene.gameScene3d.removeSceneObj(_avatar3D);
-				SceneCharacter3D.recycle(_avatar3D);
 			}
 			
 			//=============================================================================
@@ -934,7 +938,7 @@ package com.game.engine2D
 				_displayObjList.length = 0;
 			}
 			_baseObjList.length = 0;
-
+			
 			if(_shadow!=null)
 			{
 				if(_shadow.parent!=null)
@@ -1104,7 +1108,7 @@ package com.game.engine2D
 			return 0;
 		}
 		
-
+		
 		/**
 		 * 对整个换装的每一项执行函数
 		 * @param $fun 第一个参数是参数sceneCharacter, 第二个参数是RenderUnit
@@ -1114,7 +1118,7 @@ package com.game.engine2D
 		{
 			avatar.forEachRenderUnit($fun,this);
 		}
-
+		
 		public function forEachAvatar3DAps($fun:Function):void
 		{
 			if (_avatar3D)
@@ -1153,7 +1157,7 @@ package com.game.engine2D
 					bo.run(gTime);//更新换装 
 				}
 			}
-
+			
 			if(_baseObj3DList)
 			{
 				for(i=0;i<_baseObj3DList.length;i++)
@@ -1174,5 +1178,14 @@ package com.game.engine2D
 				_renderSet.isMainChar = value;
 			}
 		}
+		
+		override public function set canRemoved(value:Boolean):void
+		{
+			super.canRemoved = value;
+			if (_avatar3D)
+				_avatar3D.canRemoved = value;
+		}
+		
+		
 	}
 }

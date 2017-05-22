@@ -17,8 +17,6 @@ package com.game.engine3D.utils
 	
 	import away3d.arcane;
 	import away3d.core.managers.Stage3DProxy;
-	import away3d.core.managers.TextureManager;
-	import away3d.premium.heap.HeapAllocator;
 
 	/**
 	 *

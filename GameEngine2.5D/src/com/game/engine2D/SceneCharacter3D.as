@@ -30,7 +30,7 @@ package com.game.engine2D
 		{
 			_parentChar = value;
 		}
-
+		
 		public function get castsShadows():Boolean
 		{
 			return _castsShadows;
@@ -41,7 +41,7 @@ package com.game.engine2D
 			_castsShadows = value;
 			this.avatar.castsShadows = value;
 		}
-
+		
 		public function get planarRenderLayer():uint
 		{
 			return _planarRenderLayer;
@@ -100,6 +100,12 @@ package com.game.engine2D
 			_parentChar = null;
 			_statusType = null;
 			super.dispose();
+		}
+		
+		/**销毁显示对象 */
+		override public function destroy() : void
+		{
+			recycle(this);
 		}
 		
 		public static function create(type : String, id : Number) : SceneCharacter3D

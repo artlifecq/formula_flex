@@ -1568,18 +1568,18 @@ package com.game.engine2D.scene.render
 			var bound:AxisAlignedBoundingBox = pm.worldBounds as AxisAlignedBoundingBox;
 			var max:Vector3D = bound.max;
 			var min:Vector3D = bound.min;
-			var entityNode:EntityNode = pm.getEntityPartitionNode();
-			var bNodeStr:String = "null";
-			if (pm.scene)
-			{
-				var bNode:Boolean = pm.scene.view.arcane::entityCollector.enterNode(entityNode,pm.scene.view);
-				bNodeStr = String(bNode);
-			}
-			return "-B:" + bNode + 
-				"-BMax:" + int(max.x) +","+ int(max.y) + ","+ int(max.z) +
+			//			var entityNode:EntityNode = pm.getEntityPartitionNode();
+			//			var bNodeStr:String = "null";
+			//			if (pm.scene)
+			//			{
+			//				var bNode:Boolean = pm.scene.view.arcane::entityCollector.enterNode(entityNode,pm.scene.view);
+			//				bNodeStr = String(bNode);
+			//			}
+			//			return //"-B:" + bNode + 
+			return 	"-BMax:" + int(max.x) +","+ int(max.y) + ","+ int(max.z) +
 				"-BMin:" + int(min.x) +","+ int(min.y) + ","+ int(min.z) +
 				"-H:"+int(bound.halfExtentsX)+"-"+int(bound.halfExtentsY)+"-"+int(bound.halfExtentsZ)+
-				"-RF:" + entityNode.readyForRender()+
+				//				"-RF:" + entityNode.readyForRender()+
 //				"-R:" + pm.renderStatus + 
 				"-F:" + pm.parent +"," + pm.width +
 				"-P:" + p.x + "," + p.y + "," + p.z+

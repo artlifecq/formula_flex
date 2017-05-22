@@ -15,7 +15,7 @@ package com.game.engine2D.scene.render.ui
 	
 	import starling.display.DisplayObjectContainer;
 	import starling.display.Sprite;
-
+	
 	/**
 	 * @private
 	 * 换装
@@ -46,7 +46,7 @@ package com.game.engine2D.scene.render.ui
 				}
 			}
 		}
-		 
+		
 		/**
 		 * 是否在可视范围内 
 		 * @param value
@@ -162,7 +162,7 @@ package com.game.engine2D.scene.render.ui
 		{
 			if(_graphicDis)
 			{
-//				_graphicDis.transform.colorTransform = value;
+				//				_graphicDis.transform.colorTransform = value;
 			}
 		}
 		
@@ -228,7 +228,7 @@ package com.game.engine2D.scene.render.ui
 		/**
 		 * 隐藏的换装类型
 		 */	
-		private var _hideRenderUnitTypes:Vector.<String> = new Vector.<String>;
+		//		private var _hideRenderUnitTypes:Vector.<String> = new Vector.<String>;
 		/**
 		 * 隐藏的换装ID类型
 		 */	
@@ -242,64 +242,6 @@ package com.game.engine2D.scene.render.ui
 		private const _bitmapFilters:Array = [];
 		/**应用滤镜数组*/
 		public function get bitmapFilters():Array{return _bitmapFilters};
-		
-		/**添加滤镜*/
-//		public function addFilter($bf:BitmapFilter):void
-//		{
-//			if($bf)
-//			{
-//				for each(var ru:UIRenderUnit in _renderUnitList)
-//				{
-//					var index:int = _bitmapFilters.indexOf($bf);
-//					if(index != -1)
-//					{
-//						_bitmapFilters.splice(index,1);
-//					}
-//					_bitmapFilters.push($bf);
-//					if(ru && ru.usable)
-//					{
-//						ru.addFilter($bf);
-//					}
-//				}
-//			}
-//		}
-		
-//		/**移除滤镜*/
-//		public function removeFilter($bf:BitmapFilter):void
-//		{
-//			for each(var ru:UIRenderUnit in _renderUnitList)
-//			{
-//				var index:int = _bitmapFilters.indexOf($bf);
-//				if(index!=-1)
-//				{
-//					_bitmapFilters.splice(index,1);
-//				}
-//				if(ru && ru.usable)
-//				{
-//					ru.removeFilter($bf);
-//				}
-//			}
-//		}
-//		
-//		/**清除所有滤镜*/
-//		public function removeAllFilters():void
-//		{
-//			_bitmapFilters.length = 0;
-//			if(_graphicDis)
-//			{
-//				_graphicDis.filter = null;
-//			}
-//			var ap:UIRenderUnit;
-//			var len:int = _renderUnitList.length;
-//			while(len-->0)
-//			{
-//				ap = _renderUnitList[len];
-//				if(ap)
-//				{
-//					ap.removeAllFilters();
-//				}
-//			}
-//		}
 		
 		/*** 设置阴影偏移量x */	
 		public function set shadowOffsetX(value:Number):void
@@ -409,15 +351,14 @@ package com.game.engine2D.scene.render.ui
 			//回收所有换装
 			removeAllRenderUnits();
 			
-			_hideRenderUnitTypes.length = 0;
+			//			_hideRenderUnitTypes.length = 0;
 			_hideRenderUnitIds.length = 0;
 			_renderUnitList.length = 0;
 			
 			_parent = null;
-
+			
 			rotation = 0;
 			alpha = 1;
-//			removeAllFilters();
 			
 			if (_graphicDis)
 			{
@@ -626,7 +567,7 @@ package com.game.engine2D.scene.render.ui
 			//创建一个新的
 			var ap:UIRenderUnit = UIRenderUnit.create($apd);
 			ap.parent = _graphicDis as Sprite;
-			ap.visible = (_hideRenderUnitTypes.indexOf(ap.type)==-1 && _hideRenderUnitIds.indexOf(ap.id)==-1);//判断可见性
+			//			ap.visible = (_hideRenderUnitTypes.indexOf(ap.type)==-1 && _hideRenderUnitIds.indexOf(ap.id)==-1);//判断可见性
 			ap.isDrawShadow = _isDrawShadow;
 			ap.isInViewDistance = _isInViewDistance;
 			ap.updateNow = true;//注意这个!!!!!!!!
@@ -660,12 +601,12 @@ package com.game.engine2D.scene.render.ui
 				var index:int = _renderUnitList.indexOf($renderUnit);
 				if(index != -1)
 				{
-//					needSort = true;
+					//					needSort = true;
 					//从数组中移除
 					_renderUnitList.splice(index,1);
 					//执行remove回调,回收renderUnit
 					UIRenderUnit.recycle($renderUnit);
-//					$renderUnit.dispose();
+					//					$renderUnit.dispose();
 					$renderUnit = null;
 				}
 			}
@@ -689,13 +630,10 @@ package com.game.engine2D.scene.render.ui
 					var index:int = _renderUnitList.indexOf(ap);
 					if(index != -1)
 					{
-//						needSort = true;
-						//从数组中移除
 						_renderUnitList.splice(index,1);
 					}
 					//执行remove回调,回收renderUnit
 					UIRenderUnit.recycle(ap);
-//					ap.dispose();
 					ap = null;
 					break;//注意此处break
 				}
@@ -719,12 +657,8 @@ package com.game.engine2D.scene.render.ui
 				ap = _renderUnitList[len];
 				if(ap.type == $renderUnitType)
 				{
-//					needSort = true;
-					//从数组中移除
 					_renderUnitList.splice(len,1);
-					//执行remove回调,回收renderUnit
 					UIRenderUnit.recycle(ap);
-//					ap.dispose();
 					ap = null;
 				}
 			}
@@ -740,9 +674,7 @@ package com.game.engine2D.scene.render.ui
 			while(_renderUnitList.length)
 			{
 				ap = _renderUnitList.pop();
-				//执行remove回调,回收renderUnit
 				UIRenderUnit.recycle(ap);
-//				ap.dispose();
 				ap = null;
 			}
 		}
@@ -814,63 +746,63 @@ package com.game.engine2D.scene.render.ui
 				ap.visible = false;
 			}
 		}
-		/**
-		 * 查看某类型的换装是否可显示
-		 *  @param $id
-		 */
-		public function getTypeRenderUnitsVisible($type:String):Boolean
-		{
-			return _hideRenderUnitTypes.indexOf($type) == -1;
-		}
-		/**
-		 * 显示某类型换装
-		 *  @param $type
-		 */
-		public function showRenderUnitsByType($type:String):void
-		{
-			//从记录数组中移除 
-			var index:int = _hideRenderUnitTypes.indexOf($type);
-			if(index!=-1)
-			{
-				_hideRenderUnitTypes.splice(index,1);
-			}
-			
-			//执行显示
-			var ap:UIRenderUnit;
-			var len:int = _renderUnitList.length;
-			while(len-->0)
-			{
-				ap = _renderUnitList[len];
-				if(ap.type == $type)
-				{
-					ap.visible = true;
-				}
-			}
-		}
-		/**
-		 * 隐藏某类型换装
-		 *  @param $type
-		 */
-		public function hideRenderUnitsByType($type:String):void
-		{
-			//添加进记录数组
-			if(_hideRenderUnitTypes.indexOf($type)==-1)
-			{
-				_hideRenderUnitTypes.push($type);
-			}
-			
-			//执行隐藏
-			var ap:UIRenderUnit;
-			var len:int = _renderUnitList.length;
-			while(len-->0)
-			{
-				ap = _renderUnitList[len];
-				if(ap.type == $type)
-				{
-					ap.visible = false;
-				}
-			}
-		}
+		//		/**
+		//		 * 查看某类型的换装是否可显示
+		//		 *  @param $id
+		//		 */
+		//		public function getTypeRenderUnitsVisible($type:String):Boolean
+		//		{
+		//			return _hideRenderUnitTypes.indexOf($type) == -1;
+		//		}
+		//		/**
+		//		 * 显示某类型换装
+		//		 *  @param $type
+		//		 */
+		//		public function showRenderUnitsByType($type:String):void
+		//		{
+		//			//从记录数组中移除 
+		//			var index:int = _hideRenderUnitTypes.indexOf($type);
+		//			if(index!=-1)
+		//			{
+		//				_hideRenderUnitTypes.splice(index,1);
+		//			}
+		//			
+		//			//执行显示
+		//			var ap:UIRenderUnit;
+		//			var len:int = _renderUnitList.length;
+		//			while(len-->0)
+		//			{
+		//				ap = _renderUnitList[len];
+		//				if(ap.type == $type)
+		//				{
+		//					ap.visible = true;
+		//				}
+		//			}
+		//		}
+		//		/**
+		//		 * 隐藏某类型换装
+		//		 *  @param $type
+		//		 */
+		//		public function hideRenderUnitsByType($type:String):void
+		//		{
+		//			//添加进记录数组
+		//			if(_hideRenderUnitTypes.indexOf($type)==-1)
+		//			{
+		//				_hideRenderUnitTypes.push($type);
+		//			}
+		//			
+		//			//执行隐藏
+		//			var ap:UIRenderUnit;
+		//			var len:int = _renderUnitList.length;
+		//			while(len-->0)
+		//			{
+		//				ap = _renderUnitList[len];
+		//				if(ap.type == $type)
+		//				{
+		//					ap.visible = false;
+		//				}
+		//			}
+		//		}
 		
 		override public function set isDrawShadow(value:Boolean):void
 		{
@@ -884,7 +816,7 @@ package com.game.engine2D.scene.render.ui
 				ap.isDrawShadow = value;
 			}
 		}
-	
+		
 		//运行相关
 		//-----------------------------------------------------------------------------------------------------------
 		/**
