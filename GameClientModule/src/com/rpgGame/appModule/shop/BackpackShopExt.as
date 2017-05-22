@@ -16,7 +16,7 @@ package com.rpgGame.appModule.shop
 	 * @author yfl
 	 * 
 	 */	
-	public class BackpackShopExt extends SkinUI
+	public class BackpackShopExt extends SkinUIPanel
 	{
 		private var _skin:ShangDian_Skin;
 		private var _shopView:BackpackShopView;
@@ -86,6 +86,10 @@ package com.rpgGame.appModule.shop
 			{
 				Object(_curView).onHide();
 			}
+			
+		}
+		override protected function onStageResize(sw : int, sh : int) : void
+		{
 			
 		}
 	}
