@@ -28,6 +28,7 @@ package com.game.engine2D.core
 //				return _atfByteTexture.isDefaultTexture;
 //			return true;
 //		}
+
 		
 		public function get textureReady():Boolean
 		{

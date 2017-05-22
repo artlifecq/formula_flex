@@ -30,7 +30,7 @@ package com.game.engine2D
 		{
 			_parentChar = value;
 		}
-		
+
 		public function get castsShadows():Boolean
 		{
 			return _castsShadows;
@@ -41,7 +41,7 @@ package com.game.engine2D
 			_castsShadows = value;
 			this.avatar.castsShadows = value;
 		}
-		
+
 		public function get planarRenderLayer():uint
 		{
 			return _planarRenderLayer;

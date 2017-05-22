@@ -3058,6 +3058,7 @@ package com.game.engine3D.scene.render
 				}
 			}
 			_compositeMesh = null;
+
 		}
 
 //		public function restoreAllChildUnitToParent(parent : ObjectContainer3D = null) : void
