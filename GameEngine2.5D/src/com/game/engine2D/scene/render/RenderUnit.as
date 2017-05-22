@@ -114,12 +114,12 @@ package com.game.engine2D.scene.render
 			{
 				if (null == currentApData)
 					return 0;
-				
+
 				_hitTestY = - currentApData.ty;
 			}
 			return _hitTestY;
 		}
-		
+
 		/**本换装部件在场景中 的 显示位置(外部设置无效,只用来读取)*/
 		override final public function get showPos():Point
 		{
@@ -383,14 +383,14 @@ package com.game.engine2D.scene.render
 		{
 			if (_needRender == value)
 				return;
-			
+
 			super.needRender = value;
 			if (!value)
 				return;
-			
+
 			if(!_visible)//如果为false,就不管...
 				return;
-			
+
 			var ruStatus:RenderUnitStatus = _currentRenderUnitStatus || _defaultRenderUnitStatus;
 			if(ruStatus == null && _currentStatus != 0)//
 			{
@@ -670,7 +670,7 @@ package com.game.engine2D.scene.render
 				return null;
 			}
 		}
-		
+
 		/**
 		 * @private 
 		 * 绘制用的资源BD
@@ -701,7 +701,7 @@ package com.game.engine2D.scene.render
 			_blendMode = value;
 			/*if(_graphicDis)
 			{
-			_graphicDis.blendMode = _blendMode;
+				_graphicDis.blendMode = _blendMode;
 			}*/
 		}
 		
@@ -847,7 +847,7 @@ package com.game.engine2D.scene.render
 		 * 
 		 */	
 		public function getFullSourchPath():String{return _currentFullSourchPath;}
-		
+
 		/**
 		 * @private 
 		 * 当前换装部件的当前状态的原始数据(与_currentFullSourchPath区别， _currentRenderUnitStatus只有在资源加载完毕才会有)
@@ -858,7 +858,7 @@ package com.game.engine2D.scene.render
 		 * 当前帧数(从0开始到totalFrame-1)
 		 */
 		private var _currentFrame:int = 0;
-		
+
 		/**
 		 * 当前播放帧(0到totalFrame-1)
 		 */
@@ -1026,7 +1026,7 @@ package com.game.engine2D.scene.render
 		 * 注意此值应该为一个大于0的值！！！不能设置为0.
 		 * */
 		public var speed:Number = 1;
-		
+
 		//当前播放信息**********************************************************************
 		/**
 		 * @private 
@@ -1205,7 +1205,7 @@ package com.game.engine2D.scene.render
 				RenderUnitLoader.loadRenderUnit(this, _currentStatus);
 			} 
 		}
-		
+	
 		/**
 		 * 设置角度
 		 * @param $angle
@@ -1313,7 +1313,7 @@ package com.game.engine2D.scene.render
 				//改变标识
 				inSleep = true;
 			}
-			
+
 			//睡眠变化
 			if(_oldData.inSleep != inSleep)
 			{
@@ -1443,7 +1443,7 @@ package com.game.engine2D.scene.render
 						_cutRect.y = -currentApData.ty;
 						_cutRect.width = _drawSourceTexture.width;
 						_cutRect.height = _drawSourceTexture.height;
-						
+
 						_hitTestX = int.MIN_VALUE;
 						_hitTestY = int.MIN_VALUE;
 						//
@@ -1459,7 +1459,7 @@ package com.game.engine2D.scene.render
 					_cutRect.height = _defaultRenderTexture.height;
 					isNeedDraw = true;
 				}
-				
+
 				//拷贝
 				if(isNeedDraw)
 				{
@@ -1560,7 +1560,7 @@ package com.game.engine2D.scene.render
 		{
 			EventManager.dispatchEvent("Game_log",msg);
 		}
-		
+
 		public function addDebugLogMsg(isTrace:Boolean = false):String
 		{
 			var p:Vector3D = _graphicDis.scenePosition;
@@ -1568,19 +1568,19 @@ package com.game.engine2D.scene.render
 			var bound:AxisAlignedBoundingBox = pm.worldBounds as AxisAlignedBoundingBox;
 			var max:Vector3D = bound.max;
 			var min:Vector3D = bound.min;
-			var entityNode:EntityNode = pm.getEntityPartitionNode();
-			var bNodeStr:String = "null";
-			if (pm.scene)
-			{
-				var bNode:Boolean = pm.scene.view.arcane::entityCollector.enterNode(entityNode,pm.scene.view);
-				bNodeStr = String(bNode);
-			}
-			return "-B:" + bNode + 
-				"-BMax:" + int(max.x) +","+ int(max.y) + ","+ int(max.z) +
+//			var entityNode:EntityNode = pm.getEntityPartitionNode();
+//			var bNodeStr:String = "null";
+//			if (pm.scene)
+//			{
+//				var bNode:Boolean = pm.scene.view.arcane::entityCollector.enterNode(entityNode,pm.scene.view);
+//				bNodeStr = String(bNode);
+//			}
+//			return //"-B:" + bNode + 
+			return 	"-BMax:" + int(max.x) +","+ int(max.y) + ","+ int(max.z) +
 				"-BMin:" + int(min.x) +","+ int(min.y) + ","+ int(min.z) +
 				"-H:"+int(bound.halfExtentsX)+"-"+int(bound.halfExtentsY)+"-"+int(bound.halfExtentsZ)+
-				"-RF:" + entityNode.readyForRender()+
-//				"-R:" + pm.renderStatus + 
+//				"-RF:" + entityNode.readyForRender()+
+				"-R:" + pm.renderStatus + 
 				"-F:" + pm.parent +"," + pm.width +
 				"-P:" + p.x + "," + p.y + "," + p.z+
 				"-S:" + pm.scaleX + "," + pm.scaleY + "," + pm.scaleZ+
@@ -1723,7 +1723,7 @@ package com.game.engine2D.scene.render
 			_forceEnableBlendMode = false;
 			
 			_cutRect.setEmpty();
-			
+
 			_shadowOffsetX = 0;
 			_shadowOffsetY = 0;
 			_totalFrame = 0;
@@ -1795,7 +1795,7 @@ package com.game.engine2D.scene.render
 				disposeDrawSourceTextureMaterial();
 			super.dispose();
 		}
-		
+
 		/**
 		 * @private 
 		 * 重置

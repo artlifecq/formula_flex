@@ -7,6 +7,8 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.skins
 {
+	import away3d.events.Event;
+	
 	import feathers.core.IFeathersControl;
 	import feathers.core.IMeasureDisplayObject;
 	import feathers.core.IStateContext;
@@ -15,8 +17,6 @@ package feathers.skins
 	import feathers.events.FeathersEventType;
 	
 	import starling.display.Image;
-	import starling.events.Event;
-	import starling.textures.IStarlingTexture;
 	import starling.textures.IStarlingTexture;
 
 	/**

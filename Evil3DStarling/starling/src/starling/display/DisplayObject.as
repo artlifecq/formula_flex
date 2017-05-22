@@ -10,7 +10,6 @@
 
 package starling.display
 {
-    import flash.errors.IllegalOperationError;
     import flash.geom.Matrix;
     import flash.geom.Matrix3D;
     import flash.geom.Point;
@@ -21,12 +20,16 @@ package starling.display
     import flash.ui.MouseCursor;
     import flash.utils.getQualifiedClassName;
     
+    import away3d.events.Event;
+    import away3d.events.EventDispatcher;
+    import away3d.events.IEventBubble;
+    
     import starling.core.Starling;
     import starling.core.starling_internal;
     import starling.errors.AbstractClassError;
     import starling.errors.AbstractMethodError;
-    import starling.events.Event;
-    import starling.events.EventDispatcher;
+    import starling.events.EnterFrameEvent;
+    import starling.events.KeyboardEvent;
     import starling.events.TouchEvent;
     import starling.filters.FragmentFilter;
     import starling.rendering.BatchToken;
@@ -39,16 +42,16 @@ package starling.display
     use namespace starling_internal;
 
     /** Dispatched when an object is added to a parent. */
-    [Event(name="added", type="starling.events.Event")]
+    [Event(name="added", type="away3d.events.Event")]
     
     /** Dispatched when an object is connected to the stage (directly or indirectly). */
-    [Event(name="addedToStage", type="starling.events.Event")]
+    [Event(name="addedToStage", type="away3d.events.Event")]
     
     /** Dispatched when an object is removed from its parent. */
-    [Event(name="removed", type="starling.events.Event")]
+    [Event(name="removed", type="away3d.events.Event")]
     
     /** Dispatched when an object is removed from the stage and won't be rendered any longer. */ 
-    [Event(name="removedFromStage", type="starling.events.Event")]
+    [Event(name="removedFromStage", type="away3d.events.Event")]
     
     /** Dispatched once every frame on every object that is connected to the stage. */ 
     [Event(name="enterFrame", type="starling.events.EnterFrameEvent")]
@@ -116,7 +119,7 @@ package starling.display
      *  @see starling.filters.FragmentFilter
      *  @see starling.styles.MeshStyle
      */
-    public class DisplayObject extends EventDispatcher
+    public class DisplayObject extends EventDispatcher implements IEventBubble
     {
         // private members
         
@@ -1023,6 +1026,15 @@ package starling.display
 		/** zhuzhongmao 鼠标穿透 */
 		public function get touchAcross():Boolean { return _touchAcross; }
 		public function set touchAcross(value:Boolean):void { _touchAcross = value; }
+		
 		//---------------------------------------------------------------------------
+		public function get eventParent():IEventBubble {
+			return _parent;
+		}
+		
+		public function get eventScene():IEventBubble {
+			return null;
+		}
+		
     }
 }

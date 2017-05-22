@@ -7,6 +7,10 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.controls
 {
+	import flash.utils.Dictionary;
+	
+	import away3d.events.Event;
+	
 	import feathers.core.FeathersControl;
 	import feathers.core.PropertyProxy;
 	import feathers.data.ListCollection;
@@ -23,11 +27,8 @@ package feathers.controls
 	import feathers.layout.VerticalLayout;
 	import feathers.layout.ViewPortBounds;
 	import feathers.skins.IStyleProvider;
-
-	import flash.utils.Dictionary;
-
+	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
 
 	/**
 	 * Dispatched when one of the buttons is triggered. The <code>data</code>
@@ -65,9 +66,9 @@ package feathers.controls
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.TRIGGERED
+	 * @eventType away3d.events.Event.TRIGGERED
 	 */
-	[Event(name="triggered", type="starling.events.Event")]
+	[Event(name="triggered", type="away3d.events.Event")]
 
 	/**
 	 * A set of related buttons with layout, customized using a data provider.

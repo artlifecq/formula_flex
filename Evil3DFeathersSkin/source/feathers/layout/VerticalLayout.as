@@ -7,17 +7,18 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.layout
 {
+	import flash.errors.IllegalOperationError;
+	import flash.geom.Point;
+	
+	import away3d.events.Event;
+	import away3d.events.EventDispatcher;
+	
 	import feathers.core.IFeathersControl;
 	import feathers.core.IMeasureDisplayObject;
 	import feathers.core.IValidating;
-
-	import flash.errors.IllegalOperationError;
-	import flash.geom.Point;
-
+	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
-	import starling.events.Event;
-	import starling.events.EventDispatcher;
 
 	/**
 	 * Dispatched when a property of the layout changes, indicating that a
@@ -38,9 +39,9 @@ package feathers.layout
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.CHANGE
+	 * @eventType away3d.events.Event.CHANGE
 	 */
-	[Event(name="change",type="starling.events.Event")]
+	[Event(name="change",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the layout would like to adjust the container's scroll
@@ -66,9 +67,9 @@ package feathers.layout
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.SCROLL
+	 * @eventType away3d.events.Event.SCROLL
 	 */
-	[Event(name="scroll",type="starling.events.Event")]
+	[Event(name="scroll",type="away3d.events.Event")]
 
 	/**
 	 * Positions items from top to bottom in a single column.

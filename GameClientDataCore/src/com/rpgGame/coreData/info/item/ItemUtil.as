@@ -353,6 +353,20 @@ package com.rpgGame.coreData.info.item
 			
 		}
 		
+		public static function jsonParseItemClientList(str:String):Array
+		{
+			var lists:Array = jsonParse2ObjList(str);
+			var item:ItemInfo;
+			for(var index:int = 0;index<lists.length;index++)
+			{
+				item = new ItemInfo();
+				item.itemModelId = lists[index]["mod"];
+				item.num = lists[index]["num"];
+				lists[index] = ItemUtil.convertClientItemInfo(item);
+			}
+			return lists;
+		}
+		
 		public static function getResURL(resType:int):String
 		{
 			switch(resType)

@@ -18,18 +18,21 @@ package starling.display
     import flash.geom.Point;
     import flash.geom.Rectangle;
     import flash.geom.Vector3D;
-
+    
+    import away3d.arcane;
+    import away3d.events.Event;
+    
     import starling.core.Starling;
     import starling.core.starling_internal;
     import starling.events.EnterFrameEvent;
-    import starling.events.Event;
+    import starling.events.ResizeEvent;
     import starling.filters.FragmentFilter;
     import starling.rendering.Painter;
     import starling.rendering.RenderState;
-    import starling.utils.MatrixUtil;
     import starling.utils.RectangleUtil;
 
     use namespace starling_internal;
+	use namespace arcane;
     
     /** Dispatched when the Flash container is resized. */
     [Event(name="resize", type="starling.events.ResizeEvent")]

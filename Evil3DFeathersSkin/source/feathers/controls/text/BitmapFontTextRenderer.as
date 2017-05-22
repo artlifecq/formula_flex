@@ -21,7 +21,7 @@ package feathers.controls.text
 	
 	import starling.display.Image;
 	import starling.display.MeshBatch;
-	import starling.events.Event;
+	import away3d.events.Event;
 	import starling.rendering.Painter;
 	import starling.text.BitmapChar;
 	import starling.text.BitmapFont;

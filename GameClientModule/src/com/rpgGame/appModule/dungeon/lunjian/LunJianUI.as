@@ -137,8 +137,8 @@ package com.rpgGame.appModule.dungeon.lunjian
 				var info:NpcMapItemData=datas[i];
 				info.leftNum=getLeftNum(info.sceneData);
 			}
-			_skin.list_map.selectedItem=mapDatas.getItemAt(0);
-			_skin.list_map.dataProvider.updateAll();
+			_skin.list_map.selectedIndex=0;
+			_skin.list_map.dataProvider.updateItemAt(0);
 		}
 		
 		private function getLeftNum(sceneData:SceneData):int

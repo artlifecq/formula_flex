@@ -85,8 +85,6 @@ package com.editor.manager
 			CameraController.initcontroller(camera, target, SceneRoleManager.getInstance().targetPlayer);
 			CameraController.initLockOnControl(0, 0, 90, 5000, true, false, false, 100, 15000, -90, 90, false, 100,onMouseWheelFunc);
 			CameraController.switchToLockOnControl();
-			camera.moveUp(500);
-			camera.moveLeft(500);
 			
 			///以下是针对2d地图特殊处理，暂时写到这里
             CameraController.lockedOnPlayerController.mouseLeftControlable = false;

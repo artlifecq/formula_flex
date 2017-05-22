@@ -27,7 +27,7 @@ package feathers.core
 	 *
 	 * @eventType feathers.events.FeathersEventType.FOCUS_IN
 	 */
-	[Event(name="focusIn",type="starling.events.Event")]
+	[Event(name="focusIn",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the display object loses focus.
@@ -49,7 +49,7 @@ package feathers.core
 	 *
 	 * @eventType feathers.events.FeathersEventType.FOCUS_OUT
 	 */
-	[Event(name="focusOut",type="starling.events.Event")]
+	[Event(name="focusOut",type="away3d.events.Event")]
 
 	/**
 	 * A component that can receive focus if a focus manager is enabled.

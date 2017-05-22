@@ -20,7 +20,7 @@ package com.game.engine2D.scene.layers
 	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
-	import starling.events.EventDispatcher;
+	import away3d.events.EventDispatcher;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;

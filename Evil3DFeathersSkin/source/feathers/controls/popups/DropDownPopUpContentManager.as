@@ -7,7 +7,14 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.controls.popups
 {
-	import feathers.controls.popups.IPopUpContentManager;
+	import flash.errors.IllegalOperationError;
+	import flash.events.KeyboardEvent;
+	import flash.geom.Rectangle;
+	import flash.ui.Keyboard;
+	
+	import away3d.events.Event;
+	import away3d.events.EventDispatcher;
+	
 	import feathers.core.IFeathersControl;
 	import feathers.core.IValidating;
 	import feathers.core.PopUpManager;
@@ -17,23 +24,14 @@ package feathers.controls.popups
 	import feathers.layout.RelativePosition;
 	import feathers.utils.display.getDisplayObjectDepthFromStage;
 	import feathers.utils.display.stageToStarling;
-
-	import flash.errors.IllegalOperationError;
-	import flash.events.KeyboardEvent;
-	import flash.geom.Rectangle;
-	import flash.ui.Keyboard;
-
+	
 	import starling.animation.Transitions;
-
 	import starling.animation.Tween;
-
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 	import starling.display.Quad;
 	import starling.display.Stage;
-	import starling.events.Event;
-	import starling.events.EventDispatcher;
 	import starling.events.ResizeEvent;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
@@ -57,9 +55,9 @@ package feathers.controls.popups
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.OPEN
+	 * @eventType away3d.events.Event.OPEN
 	 */
-	[Event(name="open",type="starling.events.Event")]
+	[Event(name="open",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the pop-up content closes.
@@ -79,9 +77,9 @@ package feathers.controls.popups
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.CLOSE
+	 * @eventType away3d.events.Event.CLOSE
 	 */
-	[Event(name="close",type="starling.events.Event")]
+	[Event(name="close",type="away3d.events.Event")]
 
 	/**
 	 * Displays pop-up content as a desktop-style drop-down.

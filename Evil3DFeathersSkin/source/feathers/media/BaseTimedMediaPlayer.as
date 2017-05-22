@@ -33,7 +33,7 @@ package feathers.media
 	 *
 	 * @eventType feathers.events.MediaPlayerEventType.TOTAL_TIME_CHANGE
 	 */
-	[Event(name="totalTimeChange",type="starling.events.Event")]
+	[Event(name="totalTimeChange",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the media player's current playhead time changes.
@@ -57,7 +57,7 @@ package feathers.media
 	 *
 	 * @eventType feathers.events.MediaPlayerEventType.CURRENT_TIME_CHANGE
 	 */
-	[Event(name="currentTimeChange",type="starling.events.Event")]
+	[Event(name="currentTimeChange",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the media player's playback state changes, such as when
@@ -82,7 +82,7 @@ package feathers.media
 	 *
 	 * @eventType feathers.events.MediaPlayerEventType.PLAYBACK_STATE_CHANGE
 	 */
-	[Event(name="playbackStageChange",type="starling.events.Event")]
+	[Event(name="playbackStageChange",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the media completes playback because the current time has
@@ -103,9 +103,9 @@ package feathers.media
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.COMPLETE
+	 * @eventType away3d.events.Event.COMPLETE
 	 */
-	[Event(name="complete",type="starling.events.Event")]
+	[Event(name="complete",type="away3d.events.Event")]
 
 	/**
 	 * An abstract superclass for media players that should implement the

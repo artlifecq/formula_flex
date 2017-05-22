@@ -10,7 +10,8 @@ package feathers.controls
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.text.TextFormatAlign;
-	import flash.ui.Keyboard;
+	
+	import away3d.events.Event;
 	
 	import feathers.controls.text.Fontter;
 	import feathers.core.FeathersControl;
@@ -34,8 +35,6 @@ package feathers.controls
 	import feathers.utils.touch.LongPress;
 	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
-	import starling.events.KeyboardEvent;
 	import starling.rendering.Painter;
 
 	/**
@@ -71,7 +70,7 @@ package feathers.controls
 	 * @see #isLongPressEnabled
 	 * @see #longPressDuration
 	 */
-	[Event(name="longPress",type="starling.events.Event")]
+	[Event(name="longPress",type="away3d.events.Event")]
 
 	/**
 	 * A push button control that may be triggered when pressed and released.

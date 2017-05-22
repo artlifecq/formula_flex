@@ -10,17 +10,37 @@ package com.editor.data
 	 */
 	public class InternalTabelID
 	{
+		/**
+		 * avatar表ID
+		 */		
 		public static const AvatarFileResConfigID : int = 1000000001;
+		/**
+		 * 特效表ID 
+		 */		
 		public static const EffectResConfigID : int = 1000000002;
+		/**
+		 * 地图数据表ID 
+		 */		
 		public static const MapDataConfigID : int = 1000000003;
+		/**
+		 *  
+		 */		
 		public static const MapFileResConfigID : int = 1000000004;
+		
 		public static const MapDataAreaConfigID : int = 1000000005;
+		
 		public static const SoundResConfigID : int = 1000000006;
+		
 		public static const EffectAnimationConfigID : int = 1000000007;
+		
 		public static const MapTimeOfTheDayConfigID : int = 1000000008;
+		
 		public static const MapCameraPropertyConfigID : int = 1000000009;
+		
 		public static const MapCameraBokehDepthConfigID : int = 1000000010;
+		
 		public static const GlobalSettingConfigID : int = 1000000019;
+		
 		public static const AvatarResConfigID : int = 1000000020;
 
 		public static const XXXStoryConfigID : int = 1000200000;

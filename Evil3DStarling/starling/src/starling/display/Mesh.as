@@ -15,10 +15,10 @@ package starling.display
     import flash.geom.Rectangle;
     import flash.utils.Dictionary;
     
+    import away3d.events.Event;
     import away3d.log.Log;
     
     import starling.core.starling_internal;
-    import starling.events.Event;
     import starling.geom.Polygon;
     import starling.rendering.IndexData;
     import starling.rendering.Painter;
@@ -84,7 +84,7 @@ package starling.display
 					}
 					mesh2dTraceMap[mesh2DTracedContinaerID]++;
 					
-					this.addEventListener(starling.events.Event.ADDED_TO_STAGE, onMeshAddedToStage);
+					this.addEventListener(away3d.events.Event.ADDED_TO_STAGE, onMeshAddedToStage);
 				}
         }
 		
@@ -95,7 +95,7 @@ package starling.display
 				 * 一旦被添加到舞台，则此id将变为最新依附的追踪容器id(id>0)
 				 */				
 				protected var mesh2DTracedContinaerID:int;
-				private function onMeshAddedToStage(e:starling.events.Event):void
+				private function onMeshAddedToStage(e:away3d.events.Event):void
 				{
 					var oldTracedId:int = this.mesh2DTracedContinaerID;
 					if(oldTracedId < 1)
@@ -178,7 +178,7 @@ package starling.display
 				_indexData.clear();
 				CONFIG::Mesh2D_Trace
 					{
-						this.removeEventListener(starling.events.Event.ADDED_TO_STAGE, onMeshAddedToStage);
+						this.removeEventListener(away3d.events.Event.ADDED_TO_STAGE, onMeshAddedToStage);
 						mesh2dTraceMap[mesh2DTracedContinaerID]--;
 					}
 			}

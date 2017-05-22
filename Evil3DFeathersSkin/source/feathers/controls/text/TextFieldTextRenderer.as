@@ -20,7 +20,7 @@ package feathers.controls.text
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
 	
-	import away3d.debug.Debug;
+	import away3d.events.Event;
 	
 	import feathers.core.FeathersControl;
 	import feathers.core.IStateContext;
@@ -30,7 +30,6 @@ package feathers.controls.text
 	import feathers.events.FeathersEventType;
 	import feathers.layout.VerticalAlign;
 	import feathers.skins.IStyleProvider;
-	import feathers.themes.GuiTheme;
 	import feathers.utils.filter.NativeFilterPool;
 	import feathers.utils.geom.matrixToScaleX;
 	import feathers.utils.geom.matrixToScaleY;
@@ -38,7 +37,6 @@ package feathers.controls.text
 	
 	import starling.core.Starling;
 	import starling.display.Image;
-	import starling.events.Event;
 	import starling.rendering.Painter;
 	import starling.textures.ConcreteTexture;
 	import starling.textures.IStarlingTexture;
@@ -106,7 +104,6 @@ package feathers.controls.text
 		{
 			super();
 			this.isQuickHitAreaEnabled = true;
-			this._enableTextBatchRender = GuiTheme.ENABLE_TEXT_BATCH_RENDER;
 		}
 
 		/**
@@ -2031,15 +2028,9 @@ package feathers.controls.text
 						//get texture cache
 						var  filterId:String = Fontter.getFilterId(_nativeFilters);
 						_textureKey = _textFormat.font+"_"+_textFormat.size+"_"+_textFormat.color+"_"+filterId+"_"+_text;
-						if(!_enableTextBatchRender)
-						{
-							newTexture = TextureFactory.empty(bitmapData.width, bitmapData.height,
-								false, false);
-							newTexture.root.uploadBitmapData(bitmapData);
-						}else
-						{
-							newTexture = GuiTheme.ins.creatBatchRenderTextTexture(_textureKey, bitmapData);
-						}
+						newTexture = TextureFactory.empty(bitmapData.width, bitmapData.height,
+							false, false);
+						newTexture.root.uploadBitmapData(bitmapData);
 						CONFIG::Debug
 							{
 								newTexture.key = _textureKey;
@@ -2079,7 +2070,7 @@ package feathers.controls.text
 						{
 							var existingTexture:IStarlingTexture = snapshot.texture;
 							_textureKey = _textFormat.font+"_"+_textFormat.size+"_"+_textFormat.color+"_"+filterId+"_"+_text;
-							if(!_enableTextBatchRender && existingTexture != null)
+							if(existingTexture != null)
 							{
 								//this is faster, if we haven't resized the bitmapdata
 								existingTexture.root.uploadBitmapData(bitmapData);
@@ -2089,10 +2080,6 @@ package feathers.controls.text
 									{
 										existingTexture.key = _textureKey;
 									}
-							}else{
-								var texture:IStarlingTexture = GuiTheme.ins.creatBatchRenderTextTexture(_textureKey, bitmapData);
-								snapshot.texture = texture;
-								if(existingTexture && existingTexture !=texture)existingTexture.dispose();
 							}
 							
 							this.textSnapshot.setRequiresRedraw();
@@ -2126,7 +2113,7 @@ package feathers.controls.text
 				totalBitmapHeight = this._snapshotHeight;
 			}
 			while(totalBitmapWidth > 0)
-			if(!_enableTextBatchRender)bitmapData.dispose();
+				bitmapData.dispose();
 			if(this.textSnapshots)
 			{
 				var snapshotCount:int = this.textSnapshots.length;
@@ -2172,6 +2159,5 @@ package feathers.controls.text
 		
 		//------------------------------evil3d-------------------------/
 		private var _textureKey:String;
-		private var _enableTextBatchRender:Boolean;
 	}
 }

@@ -104,7 +104,8 @@ package com.rpgGame.coreData.cfg
 
 		private static var _lang : String = "cn";
 		private static var _isRelease : Boolean;
-
+		private static var _isDebug : Boolean;
+		public static var miniDownloadUrl:String;
 		/**
 		 * 单机版本
 		 */
@@ -759,6 +760,11 @@ package com.rpgGame.coreData.cfg
 		public static function get isRelease() : Boolean
 		{
 			return _isRelease;
+		}
+		
+		public static function get isDebug():Boolean
+		{
+			return _isDebug;
 		}
 
 		/** 平台的用户名*/

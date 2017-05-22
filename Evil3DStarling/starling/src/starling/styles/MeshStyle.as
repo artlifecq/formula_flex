@@ -13,10 +13,12 @@ package starling.styles
     import flash.geom.Matrix;
     import flash.geom.Point;
     
+    import away3d.events.Event;
+    import away3d.events.EventDispatcher;
+    
     import starling.core.starling_internal;
     import starling.display.Mesh;
-    import starling.events.Event;
-    import starling.events.EventDispatcher;
+    import starling.events.EnterFrameEvent;
     import starling.rendering.IndexData;
     import starling.rendering.MeshEffect;
     import starling.rendering.RenderState;

@@ -13,6 +13,7 @@ package feathers.controls
 	import flash.text.TextFormat;
 	import flash.utils.Dictionary;
 	
+	import away3d.events.Event;
 	import away3d.log.Log;
 	
 	import feathers.controls.text.Fontter;
@@ -27,11 +28,8 @@ package feathers.controls
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
-	import starling.display.Image;
 	import starling.display.Quad;
 	import starling.display.Shape;
-	import starling.events.Event;
-	import starling.rendering.LayerBatchID;
 	import starling.rendering.Painter;
 	import starling.styles.IMeshStyle;
 	import starling.styles.MeshStyle;
@@ -433,13 +431,7 @@ public class Label extends DisplayObjectContainer implements IMeshStyle, ILayout
 		}
 		
 		var disposeBmd:Boolean = bitmapData != _helperBitmapData;
-		if(GuiTheme.ENABLE_TEXT_BATCH_RENDER)
-		{
-			texture = GuiTheme.ins.creatBatchRenderTextTexture(_textureKey, bitmapData, clip, false, disposeBmd);
-		}else
-		{
-			texture = TextureFactory.fromBitmapDataByMemoryItem(bitmapData, false, false, "bgra", disposeBmd, clip);
-		}
+		texture = TextureFactory.fromBitmapDataByMemoryItem(bitmapData, false, false, "bgra", disposeBmd, clip);
 		
 		if (_image == null) 
 		{

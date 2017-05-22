@@ -23,7 +23,7 @@ package com.rpgGame.core.controller
 		public static function setup() : void
 		{
 			_isSetup = true;
-			_folder = "ui/pngx/mouse/";
+			_folder = "ui/alphapng/mouse/";
 
 			registerCursor(MouseCursorEnum.NORMAL, "normal_up", new Point(0, 0));
 			registerCursor(MouseCursorEnum.TALK, "talk_up", new Point(0, 0), 3, 3);

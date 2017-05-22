@@ -16,14 +16,15 @@ package starling.filters
     import flash.geom.Rectangle;
     
     import away3d.core.managers.Stage3DProxy;
+    import away3d.events.Event;
+    import away3d.events.EventDispatcher;
     import away3d.events.Stage3DEvent;
     
     import starling.core.Starling;
     import starling.core.starling_internal;
     import starling.display.DisplayObject;
     import starling.display.Stage;
-    import starling.events.Event;
-    import starling.events.EventDispatcher;
+    import starling.events.EnterFrameEvent;
     import starling.rendering.FilterEffect;
     import starling.rendering.IndexData;
     import starling.rendering.Painter;
@@ -36,7 +37,7 @@ package starling.filters
     import starling.utils.RectangleUtil;
 
     /** Dispatched when the settings change in a way that requires a redraw. */
-    [Event(name="change", type="starling.events.Event")]
+    [Event(name="change", type="away3d.events.Event")]
 
     /** Dispatched every frame on filters assigned to display objects connected to the stage. */
     [Event(name="enterFrame", type="starling.events.EnterFrameEvent")]

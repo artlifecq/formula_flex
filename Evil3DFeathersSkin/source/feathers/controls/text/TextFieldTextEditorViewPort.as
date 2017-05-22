@@ -7,21 +7,20 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.controls.text
 {
-	import feathers.controls.Scroller;
-	import feathers.skins.IStyleProvider;
-	import feathers.utils.display.stageToStarling;
-	import feathers.utils.geom.matrixToRotation;
-	import feathers.utils.geom.matrixToScaleX;
-	import feathers.utils.geom.matrixToScaleY;
-	import feathers.utils.math.roundToNearest;
-
 	import flash.events.Event;
 	import flash.events.FocusEvent;
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import flash.text.TextField;
-
+	
+	import feathers.controls.Scroller;
+	import feathers.skins.IStyleProvider;
+	import feathers.utils.geom.matrixToRotation;
+	import feathers.utils.geom.matrixToScaleX;
+	import feathers.utils.geom.matrixToScaleY;
+	import feathers.utils.math.roundToNearest;
+	
 	import starling.core.Starling;
 	import starling.utils.MatrixUtil;
 	import starling.utils.Pool;

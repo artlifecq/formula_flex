@@ -364,16 +364,18 @@ package com.game.engine2D
 		override public function set finalShowY(value:Number):void
 		{
 			super.finalShowY = value;
-			var $baseObj:BaseObj3D;
-			var offset:Number = value << 7;//value*128
+			var $baseObj3d:BaseObj3D;
+			var $baseObj:BaseObj;
+			var offset:Number = value << 7;
 			for (var i:int = _baseObj3DList.length - 1; i >= 0 ; i--) 
 			{
-				$baseObj = _baseObj3DList[i];
-				$baseObj.zOffset = offset;
+				$baseObj3d = _baseObj3DList[i];
+				$baseObj3d.zOffset = offset + $baseObj3d.depth;
 			}
 			for (i = _baseObjList.length - 1; i >= 0 ; i--) 
 			{
-				_baseObjList[i].finalShowY = value;
+				$baseObj = _baseObjList[i];
+				$baseObj.finalShowY = value + $baseObj.depth;
 			}
 		}
 		
@@ -614,12 +616,15 @@ package com.game.engine2D
 			if (hasAvatar3D)
 			{
 				_avatar3D = SceneCharacter3D.create(type,id);
+				_avatar3D.canRemoved = canRemoved;
 				_avatar3D.parentChar = this;
+				_avatar3D.avatar.useLight = true;
 			}
 			if (scene)
 			{
-				if (_avatar3D)
-					scene.gameScene3d.addSceneObj(_avatar3D,_graphicDis);
+				if (_avatar3D){
+					scene.gameScene3d.addSceneObj(_avatar3D,_graphicDis,false,false);
+				}
 				scene.sceneHeadLayer.addChild(_headBindableContainer);
 				scene.sceneNameLayer.addChild(_headNameContainer);
 			}
@@ -801,7 +806,7 @@ package com.game.engine2D
 				RenderUnit3D($baseObj).setErrorCallBack(removeBaseObj3D);
 				RenderUnit3D($baseObj).setPlayCompleteCallBack(removeBaseObj3D);
 			}
-			$baseObj.zOffset = this.finalShowY<<7;
+			$baseObj.zOffset = this.finalShowY<<7 + $baseObj.depth;
 		}
 		
 		public function removeAllBaseObj3D():void
@@ -895,7 +900,6 @@ package com.game.engine2D
 			if (_avatar3D)
 			{
 				scene.gameScene3d.removeSceneObj(_avatar3D);
-				SceneCharacter3D.recycle(_avatar3D);
 			}
 			
 			//=============================================================================
@@ -1174,5 +1178,14 @@ package com.game.engine2D
 				_renderSet.isMainChar = value;
 			}
 		}
+		
+		override public function set canRemoved(value:Boolean):void
+		{
+			super.canRemoved = value;
+			if (_avatar3D)
+				_avatar3D.canRemoved = value;
+		}
+		
+		
 	}
 }

@@ -15,8 +15,8 @@ package feathers.data
 	import flash.net.URLLoaderDataFormat;
 	import flash.net.URLRequest;
 
-	import starling.events.Event;
-	import starling.events.EventDispatcher;
+	import away3d.events.Event;
+	import away3d.events.EventDispatcher;
 
 	/**
 	 * Dispatched when the suggestions finish loading.
@@ -37,9 +37,9 @@ package feathers.data
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.COMPLETE
+	 * @eventType away3d.events.Event.COMPLETE
 	 */
-	[Event(name="complete",type="starling.events.Event")]
+	[Event(name="complete",type="away3d.events.Event")]
 
 	/**
 	 * Creates a list of suggestions for an <code>AutoComplete</code> component
@@ -241,7 +241,7 @@ package feathers.data
 			{
 				suggestions.data = parseResultFunction(resultText);
 			}
-			this.dispatchEventWith(starling.events.Event.COMPLETE, false, suggestions);
+			this.dispatchEventWith(away3d.events.Event.COMPLETE, false, suggestions);
 		}
 
 
@@ -267,7 +267,7 @@ package feathers.data
 			else
 			{
 				suggestions.removeAll();
-				this.dispatchEventWith(starling.events.Event.COMPLETE, false, suggestions);
+				this.dispatchEventWith(away3d.events.Event.COMPLETE, false, suggestions);
 			}
 		}
 
@@ -279,7 +279,7 @@ package feathers.data
 			var result:ListCollection = this._savedSuggestionsCollection;
 			result.removeAll();
 			this._savedSuggestionsCollection = null;
-			this.dispatchEventWith(starling.events.Event.COMPLETE, false, result);
+			this.dispatchEventWith(away3d.events.Event.COMPLETE, false, result);
 		}
 
 	}
