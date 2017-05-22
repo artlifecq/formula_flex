@@ -40,7 +40,8 @@ package com.rpgGame.coreData.cfg
 		private static function short(a1:int,a2:int):int
 		{
 			if(a1>a2) return 1;
-			else return 0;
+			else if(a1<a2) return -1;
+			return 0;
 		}
 		
 		/**
@@ -56,6 +57,7 @@ package com.rpgGame.coreData.cfg
 					list.push(info.q_type);
 				}
 			}
+			list.sort(short);
 			_maxNum=list.length;
 			list=getListByYeQian(list,index);
 			return list;

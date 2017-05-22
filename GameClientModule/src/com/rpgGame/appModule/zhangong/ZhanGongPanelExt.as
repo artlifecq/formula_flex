@@ -131,8 +131,7 @@ package com.rpgGame.appModule.zhangong
 		{
 			if(yeqian>0)
 			{
-				yeqian--;
-				updateBtnState();
+				yeqian--;			
 				showBossItem(_nowSelectMapItem.level,yeqian);
 			}
 		}
@@ -142,7 +141,6 @@ package com.rpgGame.appModule.zhangong
 			if(yeqian<maxNum)
 			{
 				yeqian++;
-				updateBtnState();
 				showBossItem(_nowSelectMapItem.level,yeqian);
 			}
 		}
@@ -151,7 +149,7 @@ package com.rpgGame.appModule.zhangong
 		{
 			if(yeqian==0) _skin.btnPrev.visible=false;
 			else  _skin.btnPrev.visible=true;
-			if(yeqian>=maxNum) _skin.btnNext.visible=false;
+			if((yeqian+1)>=maxNum) _skin.btnNext.visible=false;
 			else _skin.btnNext.visible=true;
 		}
 		
@@ -241,13 +239,13 @@ package com.rpgGame.appModule.zhangong
 		private function showBossItemByLv(lv:int):void
 		{
 			yeqian=0;
-			maxNum=ZhanGongData.getMaxYeQian();		
 			showBossItem(lv,yeqian);
 		}
 		
 		private function showBossItem(lv:int,yeqian:int):void
 		{
 			var list:Vector.<int>=ZhanGongData.getBossItemTypeList(lv,yeqian);
+			maxNum=ZhanGongData.getMaxYeQian();		
 			updateBtnState();
 			for(var i:int=0;i<_bossItemList.length;i++)
 			{
