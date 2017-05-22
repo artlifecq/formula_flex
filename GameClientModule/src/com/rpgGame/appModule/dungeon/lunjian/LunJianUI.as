@@ -174,7 +174,6 @@ package com.rpgGame.appModule.dungeon.lunjian
 				}
 				npcDatas.addItem(data);
 			}
-			npcDatas.updateAll();
 			pageContainer.currentPage=1;
 		}
 		
