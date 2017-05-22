@@ -53,6 +53,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 			_skin.selectedBtn.downSkin=btnSkin.__NameItemSelect_UIAsset1;
 		}
 		
+		
 		override protected function commitData():void
 		{
 			if(_skin&&this.owner){

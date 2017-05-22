@@ -82,12 +82,12 @@ package com.rpgGame.app.manager.scene
 //			CountryWarPrepareManager.setup();
 
 //			MazeManager.firstEnterScene();
-//			ActivityBarManager.setup();
+			MainUIManager.showMainUI();
+			ActivityBarManager.setup();
 			SocietySender.reqGetSelfFamilyInfo();
 
 			MapUnitDataManager.setup();
 
-			MainUIManager.showMainUI();
 //			CountryTaoNiManager.setup();
 		}
 

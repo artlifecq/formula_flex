@@ -81,7 +81,8 @@ package com.rpgGame.appModule.zhangong
 			_skin.uiBg.addChild(_avatarContainer);
 			
 			_progressBar=new AwdProgressBar(_skin.pro_bar,"ui_zhangongtexiao");
-			_skin.container.addChild(_progressBar);
+			_progressBar.x=_progressBar.y=0;
+			_skin.bar_cont.addChild(_progressBar);
 			_skin.lbNumUp.visible=false;
 			_skin.uiUp.visible=false;
 			//			_skin.container.addChild(_avatarContainer);

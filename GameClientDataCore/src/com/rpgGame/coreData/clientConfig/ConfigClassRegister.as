@@ -128,7 +128,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_horse_skills:String = "data.Q_horse_skills";
 		/**  2物品基本信息数据库																																																																																						 */
 		public static const Q_item:String = "data.Q_item";
-		/**  军阶数据表					 */
+		/**  军阶数据表				 */
 		public static const Q_junjie:String = "data.Q_junjie";
 		/**  绝学开放表							 */
 		public static const Q_lostskill_open:String = "data.Q_lostskill_open";

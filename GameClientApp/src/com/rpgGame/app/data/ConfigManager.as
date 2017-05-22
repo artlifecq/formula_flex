@@ -23,6 +23,8 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.ClientSceneRoleCfgData;
 	import com.rpgGame.coreData.cfg.ClientTriggerCfgData;
 	import com.rpgGame.coreData.cfg.DaTiCfgData;
+	import com.rpgGame.coreData.cfg.DailyZoneCfgData;
+	import com.rpgGame.coreData.cfg.DailyZoneMonsterCfgData;
 	import com.rpgGame.coreData.cfg.DieCfgData;
 	import com.rpgGame.coreData.cfg.FaceCfgData;
 	import com.rpgGame.coreData.cfg.FightsoulData;
@@ -275,9 +277,11 @@ package com.rpgGame.app.data
 			ZoneMultyCfgData.setup(dic[ConfigClassRegister.Q_zone_multy]);//多人副本
 			TriggerCfgData.setup(dic[ConfigClassRegister.Q_trigger]);//触发区域
 			SceneEffectCfgData.setup(dic[ConfigClassRegister.Q_map_effect]);
-			
+			DailyZoneCfgData.setup(dic[ConfigClassRegister.Q_daily_zone]);//日常副本
+			DailyZoneMonsterCfgData.setup(dic[ConfigClassRegister.Q_dailyzone_monster]);//日常刷怪数据
 			//道具获取路径
 			SourceGetCfg.setup(dic[ConfigClassRegister.Q_source]);//多人副本
+			
 			//功能开启
 			//ClientFunctionOpenCfgData.setup(dic["data.ClientFunctionOpen"]);
 		}
