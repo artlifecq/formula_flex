@@ -189,10 +189,9 @@ package com.rpgGame.app.manager
 
 		public function stopFightTarget() : void
 		{
-			/*if (!_isFightActorRunning&&!_isFightTargetRunning)
-				return;*/
+			if (!_isFightActorRunning&&!_isFightTargetRunning)
+				return;
 			_isBroken = false;
-			SceneRoleSelectManager.selectedRole =null;
 			TweenLite.killDelayedCallsTo(onDelayedUnbroken);
 			TweenLite.killDelayedCallsTo(actorFight);
 			_isFightSelect=false;
@@ -210,8 +209,8 @@ package com.rpgGame.app.manager
 
 		public function stopAutoFight() : void
 		{
-			/*if (!_isAutoFightRunning)
-				return;*/
+			if (!_isAutoFightRunning)
+				return;
 			_isBroken = false;
 			TweenLite.killDelayedCallsTo(onDelayedUnbroken);
 			TweenLite.killDelayedCallsTo(actorFight);
@@ -226,15 +225,9 @@ package com.rpgGame.app.manager
 
 		public function stopAll() : void
 		{
-			stop();
 			if (!_isFightActorRunning && !_isAutoFightRunning&&!_isFightTargetRunning)
 				return;
-			MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE);
-			if (MainRoleManager.actor.stateMachine.isPrewarWaiting)
-				MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_PREWAR);
-			else
-				MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE);
-			
+			stop();
 		}
 
 		private function stop() : void
@@ -254,6 +247,11 @@ package com.rpgGame.app.manager
 			TweenLite.killDelayedCallsTo(onDelayedUnbroken);
 			TweenLite.killDelayedCallsTo(actorFight);
 			_isFightSelect=false;
+			MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE);
+			if (MainRoleManager.actor.stateMachine.isPrewarWaiting)
+				MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_PREWAR);
+			else
+				MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE);
 			
 		}
 
@@ -432,7 +430,7 @@ package com.rpgGame.app.manager
 		}
 		
 		
-		private var testStopKey:Boolean=true;
+		private var testStopKey:Boolean=false;
 		public function testStop():void
 		{
 			testStopKey=!testStopKey;

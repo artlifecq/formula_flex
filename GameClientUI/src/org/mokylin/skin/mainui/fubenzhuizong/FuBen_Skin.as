@@ -30,6 +30,14 @@ package org.mokylin.skin.mainui.fubenzhuizong
 
 		public var head_right:feathers.controls.UIAsset;
 
+		public var killbut_0:feathers.controls.SkinnableContainer;
+
+		public var killbut_1:feathers.controls.SkinnableContainer;
+
+		public var killbut_2:feathers.controls.SkinnableContainer;
+
+		public var lbHeadName:feathers.controls.Label;
+
 		public var lbMiaoshu:feathers.controls.Label;
 
 		public var sec_ico1_0:feathers.controls.UIAsset;
@@ -66,12 +74,6 @@ package org.mokylin.skin.mainui.fubenzhuizong
 
 		public var sec_info:feathers.controls.Label;
 
-		public var sec_killbut1_1:feathers.controls.SkinnableContainer;
-
-		public var sec_killbut1_2:feathers.controls.SkinnableContainer;
-
-		public var sec_killbut1_3:feathers.controls.SkinnableContainer;
-
 		public var sec_navi1:feathers.controls.Label;
 
 		public var sec_navi2:feathers.controls.UIAsset;
@@ -85,8 +87,6 @@ package org.mokylin.skin.mainui.fubenzhuizong
 		public var uiXiangxi:feathers.controls.UIAsset;
 
 		public var ui_bg:feathers.controls.UIAsset;
-
-		public var ui_head:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -146,7 +146,9 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			head_left = temp;
 			temp.name = "head_left";
+			temp.height = 10;
 			temp.styleName = "ui/mainui/fubenzhuizong/zs.png";
+			temp.width = 45;
 			temp.x = 40;
 			temp.y = 12;
 			return temp;
@@ -157,10 +159,70 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			head_right = temp;
 			temp.name = "head_right";
+			temp.height = 10;
 			temp.scaleX = -1;
 			temp.styleName = "ui/mainui/fubenzhuizong/zs.png";
+			temp.width = 45;
 			temp.x = 213;
 			temp.y = 12;
+			return temp;
+		}
+
+		private function killbut_0_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			killbut_0 = temp;
+			temp.name = "killbut_0";
+			temp.height = 20;
+			var skin:StateSkin = new org.mokylin.skin.mainui.renwu.Renwu_Item2()
+			temp.skin = skin
+			temp.width = 169;
+			temp.x = 50;
+			temp.y = 79;
+			return temp;
+		}
+
+		private function killbut_1_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			killbut_1 = temp;
+			temp.name = "killbut_1";
+			temp.height = 20;
+			var skin:StateSkin = new org.mokylin.skin.mainui.renwu.Renwu_Item2()
+			temp.skin = skin
+			temp.width = 169;
+			temp.x = 50;
+			temp.y = 101;
+			return temp;
+		}
+
+		private function killbut_2_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			killbut_2 = temp;
+			temp.name = "killbut_2";
+			temp.height = 20;
+			var skin:StateSkin = new org.mokylin.skin.mainui.renwu.Renwu_Item2()
+			temp.skin = skin
+			temp.width = 169;
+			temp.x = 50;
+			temp.y = 123;
+			return temp;
+		}
+
+		private function lbHeadName_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbHeadName = temp;
+			temp.name = "lbHeadName";
+			temp.fontSize = 16;
+			temp.text = "机关密室";
+			temp.textAlign = "center";
+			temp.color = 0xFFF2B7;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlue"];
+			temp.width = 205;
+			temp.x = 27;
+			temp.y = 6;
 			return temp;
 		}
 
@@ -172,6 +234,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.text = "此处为当前阶段的剧情描述文字，";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 215;
 			temp.x = 21;
 			temp.y = 58;
 			return temp;
@@ -369,48 +432,6 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			return temp;
 		}
 
-		private function sec_killbut1_1_i():feathers.controls.SkinnableContainer
-		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			sec_killbut1_1 = temp;
-			temp.name = "sec_killbut1_1";
-			temp.height = 20;
-			var skin:StateSkin = new org.mokylin.skin.mainui.renwu.Renwu_Item2()
-			temp.skin = skin
-			temp.width = 169;
-			temp.x = 50;
-			temp.y = 79;
-			return temp;
-		}
-
-		private function sec_killbut1_2_i():feathers.controls.SkinnableContainer
-		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			sec_killbut1_2 = temp;
-			temp.name = "sec_killbut1_2";
-			temp.height = 20;
-			var skin:StateSkin = new org.mokylin.skin.mainui.renwu.Renwu_Item2()
-			temp.skin = skin
-			temp.width = 169;
-			temp.x = 50;
-			temp.y = 101;
-			return temp;
-		}
-
-		private function sec_killbut1_3_i():feathers.controls.SkinnableContainer
-		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			sec_killbut1_3 = temp;
-			temp.name = "sec_killbut1_3";
-			temp.height = 20;
-			var skin:StateSkin = new org.mokylin.skin.mainui.renwu.Renwu_Item2()
-			temp.skin = skin
-			temp.width = 169;
-			temp.x = 50;
-			temp.y = 123;
-			return temp;
-		}
-
 		private function sec_navi1_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -452,6 +473,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			sec_subbut1 = temp;
 			temp.name = "sec_subbut1";
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.height = 36;
 			temp.label = "领取奖励";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
 			temp.color = 0xE1D4A9;
@@ -469,7 +491,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.width = 253;
 			temp.x = 0;
 			temp.y = 0;
-			temp.elementsContent = [ui_bg_i(),__FuBen_Skin_UIAsset1_i(),ui_head_i(),head_left_i(),head_right_i(),uiXiangxi_i(),sec_navi1_i(),sec_killbut1_1_i(),sec_killbut1_2_i(),sec_killbut1_3_i(),sec_ico1_0_i(),sec_ico1_1_i(),sec_ico1_2_i(),sec_ico1_3_i(),sec_ico1_4_i(),sec_ico1_5_i(),sec_ico1_6_i(),sec_ico1_7_i(),sec_ico2_0_i(),sec_ico2_1_i(),sec_ico2_2_i(),sec_ico2_3_i(),sec_ico2_4_i(),sec_ico2_5_i(),sec_ico2_6_i(),sec_ico2_7_i(),sec_subbut1_i(),sec_info_i(),sec_navi2_i(),sec_navi3_i(),lbMiaoshu_i()];
+			temp.elementsContent = [ui_bg_i(),__FuBen_Skin_UIAsset1_i(),lbHeadName_i(),head_left_i(),head_right_i(),uiXiangxi_i(),sec_navi1_i(),killbut_0_i(),killbut_1_i(),killbut_2_i(),sec_ico1_0_i(),sec_ico1_1_i(),sec_ico1_2_i(),sec_ico1_3_i(),sec_ico1_4_i(),sec_ico1_5_i(),sec_ico1_6_i(),sec_ico1_7_i(),sec_ico2_0_i(),sec_ico2_1_i(),sec_ico2_2_i(),sec_ico2_3_i(),sec_ico2_4_i(),sec_ico2_5_i(),sec_ico2_6_i(),sec_ico2_7_i(),sec_subbut1_i(),sec_info_i(),sec_navi2_i(),sec_navi3_i(),lbMiaoshu_i()];
 			return temp;
 		}
 
@@ -494,17 +516,6 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.width = 253;
 			temp.x = 0;
 			temp.y = 0;
-			return temp;
-		}
-
-		private function ui_head_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ui_head = temp;
-			temp.name = "ui_head";
-			temp.styleName = "ui/mainui/fubenzhuizong/fuben/jgms.png";
-			temp.x = 91;
-			temp.y = 5;
 			return temp;
 		}
 

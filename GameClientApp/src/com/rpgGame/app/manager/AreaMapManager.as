@@ -2,14 +2,17 @@ package com.rpgGame.app.manager
 {
 	import com.game.engine3D.core.AreaMap;
 	import com.game.engine3D.vo.AreaMapData;
+	import com.game.engine3D.vo.MapPointSet;
 	import com.game.engine3D.vo.map.ClientMapAreaData;
 	import com.game.engine3D.vo.map.MapAreaTypeEnum;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.task.TaskInfoDecoder;
+	import com.rpgGame.coreData.cfg.AreaCfgData;
 	import com.rpgGame.coreData.cfg.ClientAreaCfgData;
 	import com.rpgGame.coreData.cfg.ClientTriggerCfgData;
+	import com.rpgGame.coreData.cfg.TriggerCfgData;
 	import com.rpgGame.coreData.clientConfig.ClientArea;
 	import com.rpgGame.coreData.clientConfig.ClientTrigger;
 	import com.rpgGame.coreData.enum.AreaMapTypeEnum;
@@ -150,10 +153,14 @@ package com.rpgGame.app.manager
 		{
 			var otherAreaMap : AreaMap = SceneManager.getScene().getAreaMap(EnumAreaMapType.OTHER_AREA);
 			var mapID : int = SceneSwitchManager.currentMapId;
-			var triggerList : Vector.<ClientTrigger> = ClientTriggerCfgData.getSceneTriggerList(mapID);
+			var triggerList : Vector.<ClientTrigger> = TriggerCfgData.getTriggerAreas(mapID);
+			//var triggerList : Vector.<ClientTrigger> = ClientTriggerCfgData.getSceneTriggerList(mapID);
 			for each (var trigger : ClientTrigger in triggerList)
 			{
-				if (trigger.targetType == EnumClientTriggerType.AREA_TRIGGER)
+				var areaMapData : AreaMapData = new AreaMapData(AreaCfgData.getAreaPointsByID(trigger.areaId), AreaMapTypeEnum.TRIGGER_AREA_PROPERTY, trigger.id, trigger);
+				otherAreaMap.addFlag(areaMapData);
+				
+				/*if (trigger.targetType == EnumClientTriggerType.AREA_TRIGGER)
 				{
 					var area : ClientArea = ClientAreaCfgData.getData(trigger.areaId);
 					if (area)
@@ -171,8 +178,28 @@ package com.rpgGame.app.manager
 						var areaMapData : AreaMapData = new AreaMapData(polygon, AreaMapTypeEnum.TRIGGER_AREA_PROPERTY, trigger.id, trigger);
 						otherAreaMap.addFlag(areaMapData);
 					}
-				}
+				}*/
 			}
+		}
+		
+		/**
+		 *  添加动态阻挡区域
+		 *
+		 */
+		public static function addDynamicObstacleArea(aid:int) : void
+		{
+			var obstacleArea : ClientMapAreaData = AreaCfgData.getDynamicObstacleAreas(aid);
+			if(!obstacleArea)return;
+			var mapPointSets : Vector.<MapPointSet> = new Vector.<MapPointSet>();
+			mapPointSets.push(new MapPointSet("MapDataDynamicObstacleArea" + obstacleArea.id, obstacleArea.getVector2Ds()));
+			SceneManager.getScene().sceneMapLayer.addObstaclePoints(mapPointSets);
+		}
+		/**
+		 *  删除动态阻挡区域
+		 */
+		public static function removeDynamicObstacleArea(aid:int) : void
+		{
+			SceneManager.getScene().sceneMapLayer.removeObstaclePoints(["MapDataDynamicObstacleArea" + aid]);
 		}
 
 		/**
