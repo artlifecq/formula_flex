@@ -21,7 +21,7 @@ package com.rpgGame.appModule.systemset
 	
 	import org.mokylin.skin.app.systemSet.guajiset_Skin;
 	
-	import starling.events.Event;
+	import away3d.events.Event;
 
 	public class HookSetingView extends BasePaneView
 	{

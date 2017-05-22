@@ -12,7 +12,7 @@ package com.rpgGame.appModule.skill.lostskill
 	
 	import org.mokylin.skin.app.wuxue.juexue.Juexue_jihuo;
 	
-	import starling.events.Event;
+	import away3d.events.Event;
 
 	public class LostSpellActivate
 	{

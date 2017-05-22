@@ -8,7 +8,7 @@ package  com.rpgGame.appModule.social.team
 	import org.mokylin.skin.app.shejiao.zudui.ZuiDuiSkin;
 	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
+	import away3d.events.Event;
 	
 
 	

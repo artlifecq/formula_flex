@@ -14,7 +14,7 @@ package com.rpgGame.appModule.systemset
 	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
-	import starling.events.Event;
+	import away3d.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -129,7 +129,7 @@ import feathers.controls.SkinnableContainer;
 
 import org.mokylin.skin.app.systemSet.WupinSelect_Skin;
 
-import starling.events.Event;
+import away3d.events.Event;
 
 class GetItemPaneView extends BasePaneView
 {

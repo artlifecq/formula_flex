@@ -46,7 +46,7 @@ package com.rpgGame.appModule.equip
 	import org.mokylin.skin.app.zhuangbei.hecheng.HeCheng_Skin;
 	import org.mokylin.skin.component.list.ListSkin1;
 	
-	import starling.events.Event;
+	import away3d.events.Event;
 	
 	/**
 	 *装备合成

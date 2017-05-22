@@ -61,7 +61,7 @@ package com.rpgGame.appModule.role
 	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
 	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
+	import away3d.events.Event;
 
 	/**
 	 *背包部分 

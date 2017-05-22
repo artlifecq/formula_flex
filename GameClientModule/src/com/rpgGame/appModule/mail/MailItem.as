@@ -11,7 +11,7 @@ package com.rpgGame.appModule.mail
 	import org.mokylin.skin.app.mail.Mail_Item;
 	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
+	import away3d.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;

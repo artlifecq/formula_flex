@@ -38,7 +38,7 @@ package com.rpgGame.appModule.fightsoul
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
-	import starling.events.Event;
+	import away3d.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchPhase;
 	

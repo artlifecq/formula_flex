@@ -29,7 +29,7 @@ package com.rpgGame.appModule.shop
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
-	import starling.events.Event;
+	import away3d.events.Event;
 	
 	public class MallMainPanelExt extends SkinUIPanel
 	{

@@ -39,8 +39,8 @@ package com.game.engine2D.vo
 		private var _depth:int = 0;
 		private var _parentBaseObj:BaseObj = null;
 		private var _uvDirty:Boolean = true;
-		private var _positionDirty:Boolean = true;
-		private var _pos:Vector3D = new Vector3D();//上层用的x,y值
+//		private var _positionDirty:Boolean = true;
+//		private var _pos:Vector3D = new Vector3D();//上层用的x,y值
 		private var _posValue:Vector3D = new Vector3D();//实际用的x,y值
 		private var _posScale:Point = new Point(1,1);//实际用的scaleX,scaleY值
 		private var _posGeometryScale:Point = new Point(1,1);//PlaneFrameGeometry scaleX,scaleY值
