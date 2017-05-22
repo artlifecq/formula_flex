@@ -13,12 +13,10 @@
     import com.rpgGame.coreData.cfg.ActivityBarCfgData;
     import com.rpgGame.coreData.clientConfig.ActivityBarInfo;
     import com.rpgGame.coreData.type.activity.ActivityOpenStateType;
-    import com.rpgGame.coreData.type.activity.ActivityType;
-    
-    import flash.geom.Point;
     
     import gs.TweenLite;
     
+    import org.client.mainCore.ds.HashMap;
     import org.client.mainCore.manager.EventManager;
     import org.mokylin.skin.mainui.activityBar.button.ButtonLunjian;
     
@@ -33,16 +31,15 @@
         private const GRID_HEIGHT:uint = 80;
         private const ALIGN:String = "right";
 
-        private var buttonList:Array;
         private var skinConfig:Object;
+		private var rowMap:HashMap;
 
         public function ActivityButtonList()
         {
-            buttonList = [];
             skinConfig = {};
             super();
             graphics.clear();
-            graphics.beginFill(0, 0);
+            graphics.beginFill(0, 0.5);
             graphics.drawRect(0, 0, 360, 85);
             graphics.endFill();
             setup();
@@ -51,6 +48,7 @@
         private function setup():void
         {
             var info:ActivityBarInfo;
+			rowMap=new HashMap();
             EventManager.addEvent(ActivityEvent.OPEN_ACTIVITY, onOpenActivityGroup);
             EventManager.addEvent(ActivityEvent.CLOSE_ACTIVITY, onCloseActivityGroup);
 //            skinConfig["Taoni"] = [ActivityTaoNiButton, ButtonTaoni];
@@ -88,7 +86,7 @@
                 addActivityButtonBase(info);
                 i++;
             }*/
-            updatePosition();
+            updatePositionAll();
         }
 
         private function onButtonClick(button:ActivityButtonBase):void
@@ -197,10 +195,10 @@
 				btnCls = ActivityButton;
 			}
 			btn = new btnCls() as ActivityButtonBase;
-			btn.visible = false;
 			btn.type = btnType;
 			btn.order = data.order;
 			btn.title = data.name;
+			btn.row=data.row;
 			btn.setTips(null, data.name, data.name);
 			btn.skin = skinCls;
 			//					btn.setTimeData(data.openTime, data.duration, data.openTimeAdvance);
@@ -213,11 +211,34 @@
 			var btn:ActivityButtonBase=getBtn(id);
 			if(btn){
 				this.addChild(btn);
-				buttonList.push(btn);
+				var list:Array=rowMap.getValue(btn.row);
+				if(!list){
+					list=[];
+					rowMap.add(btn.row,list);
+				}
+				list.push(btn);
+				updatePositionList(list);
 			}
-			updatePosition();
         }
-
+		
+		private function updatePositionList(list:Array):void
+		{
+			var len:int;
+			var btn:ActivityButtonBase;
+			var rowY:int;
+			list.sortOn(["row","order"], Array.NUMERIC);
+			len=list.length;
+			if(len>0){
+				btn=list[0];
+				rowY=btn.row*SIZE_HEIGHT;
+			}
+			for(var i:int=0;i<len;i++){
+				btn=list[i];
+				btn.y=rowY;
+				btn.x=SIZE_WIDTH-GRID_WIDTH;
+			}
+		}
+		
         private function onCloseActivityGroup(activityType:String):void
         {
             var btn:ActivityButtonBase = getActivityType(activityType);
@@ -226,7 +247,6 @@
                 trace("活动关闭:" + btn.title);
                 TweenLite.killTweensOf(btn);
 				btn.clearTime();
-                updatePosition();
             }
         }
 
@@ -235,68 +255,42 @@
             return ActivityBarManager.buttonDics[activityType] as ActivityButtonBase;
         }
 
-        private function updatePosition():void
+        private function updatePositionAll():void
         {
-            buttonList.sortOn(["row","order"], 16);
+			var allRows:Array=rowMap.getValues();
+			var num:int=allRows.length;
+			var len:int;
+			var btn:ActivityButtonBase;
+			var rowY:int;
+			for(var i:int=0;i<num;i++){
+				var list:Array=allRows[i];
+				list.sortOn(["row","order"], Array.NUMERIC);
+				len=list.length;
+				if(len>0){
+					btn=list[0];
+					rowY=btn.row*SIZE_HEIGHT;
+				}
+				for(var j:int=0;j<len;j++){
+					btn=list[i];
+					btn.y=rowY;
+					btn.x=SIZE_WIDTH-GRID_WIDTH;
+				}
+			}
         }
 
         override protected function onShow():void
         {
-            TimerServer.addLoop(onTimeTick, 1000);
-            onTimeTick();
+			
         }
 
         override protected function onHide():void
         {
-            TimerServer.remove(onTimeTick);
         }
 
-        private function onTimeTick(onChange:Boolean=false):void
-        {
-            var _local3:int;
-            var _local2:ActivityButtonBase = null;
-            var _local5:int;
-            var _local4:Number = SystemTimeManager.curtTm;
-            _local3 = 0;
-            while (_local3 < buttonList.length)
-            {
-                _local2 = (buttonList[_local3] as ActivityButtonBase);
-                _local5 = _local2.updateTime(_local4);
-                if (_local5 == ActivityOpenStateType.CLOSE)
-                {
-                    if (_local2.visible != false)
-                    {
-                        onChange = true;
-                        _local2.visible = false;
-                        _local2.onActivityClose();
-                        trace("活动关闭:" + _local2.title);
-                    }
-                }
-                else
-                {
-                    if (_local2.visible != true)
-                    {
-                        if (_local2.checkCanOpen())
-                        {
-                            onChange = true;
-                            _local2.visible = true;
-                            _local2.onActivityOpen();
-                            trace("活动开启:" + _local2.title);
-                        }
-                    }
-                }
-                _local3++;
-            }
-            if (onChange == true)
-            {
-                EventManager.dispatchEvent(ActivityEvent.SHOW_NEW_ACTIVITY_BUTTON, _local2.type);
-                updatePosition();
-            }
-        }
 
         public function playEffect():void
         {
-            var i:int = 0;
+            /*var i:int = 0;
 			var btn:ActivityButtonBase = null;
             while (i < buttonList.length)
             {
@@ -306,12 +300,12 @@
 					btn.playEffect();
                 }
                 i++;
-            }
+            }*/
         }
 
         public function stopEffect():void
         {
-            var i:int = 0;
+           /* var i:int = 0;
             var btn:ActivityButtonBase = null;
             while (i < buttonList.length)
             {
@@ -321,7 +315,7 @@
 					btn.stopEffect();
                 }
                 i++;
-            }
+            }*/
         }
     }
 }

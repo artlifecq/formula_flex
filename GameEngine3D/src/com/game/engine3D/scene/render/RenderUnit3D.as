@@ -1380,7 +1380,7 @@ package com.game.engine3D.scene.render
 									if (activeStatus)
 									{
 										(currAnimator as SkeletonAnimator).play(activeStatus, _animationTransitionTime, offsetTime);
-										trace("====================================\t"+currAnimator.name + "\t动作：\t" + activeStatus);
+//										trace("====================================\t"+currAnimator.name + "\t动作：\t" + activeStatus);
 									}
 									else
 									{
