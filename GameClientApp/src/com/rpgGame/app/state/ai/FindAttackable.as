@@ -81,7 +81,15 @@ package com.rpgGame.app.state.ai
 				if (role &&monsterData&& role.usable && monsterData.monsterData.q_monster_type>=1&&monsterData.monsterData.q_monster_type<=3&& !role.stateMachine.isDeadState)//if (role && role.usable && role.isInViewDistance && !role.stateMachine.isDeadState)
 				{
 					var dist:int = Point.distance(new Point(MainRoleManager.actor.x,MainRoleManager.actor.z),new Point(role.x,role.z));
-					var max:int=int(SystemSetManager.getinstance().getValueByIndex(SystemSetManager.SYSTEMSET_HOOK_TYPE)*50);
+					var max:int=int.MAX_VALUE
+					if(TrusteeshipManager.getInstance().findDist==0)
+					{
+						max=TrusteeshipManager.getInstance().findDist*50;
+					}
+					else
+					{
+						max=int(SystemSetManager.getinstance().getValueByIndex(SystemSetManager.SYSTEMSET_HOOK_TYPE)*50);
+					}
 					if(dist<=max&&dist<currDist)
 					{
 						var modeState : int = FightManager.getFightRoleState(role);
