@@ -253,7 +253,7 @@ package com.rpgGame.app.data
 			TaskMissionCfgData.setupReword(dic[ConfigClassRegister.Q_mission_reword]);
 			TaskMissionCfgData.setupSegment(dic[ConfigClassRegister.Q_mission_segment]);
 			
-			ActivityBarCfgData.setup(dic[ConfigClassRegister.ActivityBarInfo]);
+			//ActivityBarCfgData.setup(dic[ConfigClassRegister.ActivityBarInfo]);
 
 			//心法
 			CheatsCfg.setup(dic[ConfigClassRegister.Q_cheats]);
