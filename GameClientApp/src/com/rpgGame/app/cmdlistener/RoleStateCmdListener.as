@@ -122,7 +122,7 @@ package com.rpgGame.app.cmdlistener
 			else if (flagObj is ClientTrigger)
 			{
 				var trigger : ClientTrigger = flagObj as ClientTrigger;
-				ClientTriggerManager.triggerById(trigger.id);
+				ClientTriggerManager.ClientBytrigger(trigger.id);
 			}
 
 			var dist : int = 0;

@@ -31,7 +31,9 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.MazeEvent;
 	import com.rpgGame.core.manager.BGMManager;
+	import com.rpgGame.coreData.cfg.AreaCfgData;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.TriggerCfgData;
 	import com.rpgGame.coreData.cfg.country.CountryNameCfgData;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.map.EnumMapType;
@@ -485,17 +487,21 @@ package com.rpgGame.app.manager.scene
             }
             if (SceneManager.clientMapData)
             {
-                var obstacleAreas : Vector.<ClientMapAreaData> = SceneManager.clientMapData.getObstacleAreas();
-                var mapPointSets : Vector.<MapPointSet> = new Vector.<MapPointSet>();
-                for each (var areaData : ClientMapAreaData in obstacleAreas)
-                {
-                    mapPointSets.push(new MapPointSet("MapDataObstacleArea" + areaData.id, areaData.getVector3Ds()));
-                }
-                onLoadSceneCmpParam.sceneMapLayer.addObstaclePoints(mapPointSets);
-                AreaMapManager.updateCameraAreaMap();
-                SceneTimeOfTheDayManager.initScene(SceneManager.clientMapData.timeOfTheDayData, onLoadSceneCmpParam);
-                
-                BGMManager.playMusic(SceneManager.clientMapData.bgSoundRes);
+				//var obstacleAreas : Vector.<ClientMapAreaData> = SceneManager.clientMapData.getObstacleAreas();
+				var obstacleAreas : Vector.<ClientMapAreaData> = AreaCfgData.getObstacleAreas(curtMapID);
+               if(obstacleAreas!=null&&obstacleAreas.length>0)
+			   {
+				   var mapPointSets : Vector.<MapPointSet> = new Vector.<MapPointSet>();
+				   for each (var areaData : ClientMapAreaData in obstacleAreas)
+				   {
+					   mapPointSets.push(new MapPointSet("MapDataObstacleArea" + areaData.id, areaData.getVector2Ds()));
+				   }
+				   onLoadSceneCmpParam.sceneMapLayer.addObstaclePoints(mapPointSets);
+			   }
+			   AreaMapManager.updateCameraAreaMap();
+			   SceneTimeOfTheDayManager.initScene(SceneManager.clientMapData.timeOfTheDayData, onLoadSceneCmpParam);
+			   
+			   BGMManager.playMusic(SceneManager.clientMapData.bgSoundRes);
             }
             
             if (SceneManager.clientMapData)

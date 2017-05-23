@@ -74,12 +74,11 @@ package com.rpgGame.app.manager.task
 		
 		public function startTaskAuto(tar:int=0) : void
 		{
+			testStopKey=false;
 			_stateMachine.transition(AIStateType.AI_NONE);
 			_taskTarget=tar;
 			changeSub();
-			TrusteeshipManager.getInstance().stopAutoFight();
-			TrusteeshipManager.getInstance().stopFightTarget();
-			
+			TrusteeshipManager.getInstance().stopAll();
 			if(!_isTaskRunning)
 			{
 				_isTaskRunning = true;
@@ -104,8 +103,7 @@ package com.rpgGame.app.manager.task
 		}
 		public function stopTaskAuto() : void
 		{
-			TrusteeshipManager.getInstance().stopAutoFight();
-			TrusteeshipManager.getInstance().stopFightTarget();
+			TrusteeshipManager.getInstance().stopAll();
 			GatherAutoManager.getInstance().stopGatherAuto();
 			/*if (!_isTaskRunning)
 				return;*/
@@ -195,34 +193,11 @@ package com.rpgGame.app.manager.task
 			{
 				//taskFlishArr[_taskTarget]=true;
 				changeSub();
-				TrusteeshipManager.getInstance().stopAutoFight();
-				TrusteeshipManager.getInstance().stopFightTarget();
+				TrusteeshipManager.getInstance().stopAll();
 				GatherAutoManager.getInstance().stopGatherAuto();
 				SceneRoleSelectManager.selectedRole=null;
 				_stateMachine.transition(AIStateType.AI_NONE);
 			}
-			
-			
-			/*var i:int,length:int;
-			length=TaskMissionManager.getMainTaskSubNum();
-			for(i=0;i<length;i++)
-			{
-				if(TaskMissionManager.getMainTaskSubIsFinish(i)&&!taskFlishArr[i])
-				{
-					taskFlishArr[i]=true;
-					changeSub();
-					TrusteeshipManager.getInstance().stopAutoFight();
-					TrusteeshipManager.getInstance().stopFightTarget();
-					_stateMachine.transition(AIStateType.AI_NONE);
-					
-				}
-			}*/
-			/*if(TaskMissionManager.getMainTaskIsFinish())
-			{
-				TrusteeshipManager.getInstance().stopAutoFight();
-				TrusteeshipManager.getInstance().stopFightTarget();
-				_stateMachine.transition(AIStateType.AI_NONE);
-			}*/
 			
 		}
 		

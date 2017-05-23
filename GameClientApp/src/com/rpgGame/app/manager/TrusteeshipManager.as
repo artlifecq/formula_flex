@@ -57,6 +57,7 @@ package com.rpgGame.app.manager
 		private var _isLeftDown:Boolean=false;
 		private var _stateMachine : AIStateMachine;
 		private var _targetRoles : Vector.<SceneRole>;
+		private var _findDist:int=0;
 		private var ACTORTIME:int=4;
 		public function TrusteeshipManager()
 		{
@@ -189,10 +190,9 @@ package com.rpgGame.app.manager
 
 		public function stopFightTarget() : void
 		{
-			/*if (!_isFightActorRunning&&!_isFightTargetRunning)
-				return;*/
+			if (!_isFightActorRunning&&!_isFightTargetRunning)
+				return;
 			_isBroken = false;
-			SceneRoleSelectManager.selectedRole =null;
 			TweenLite.killDelayedCallsTo(onDelayedUnbroken);
 			TweenLite.killDelayedCallsTo(actorFight);
 			_isFightSelect=false;
@@ -210,13 +210,12 @@ package com.rpgGame.app.manager
 
 		public function stopAutoFight() : void
 		{
-			/*if (!_isAutoFightRunning)
-				return;*/
+			if (!_isAutoFightRunning)
+				return;
 			_isBroken = false;
 			TweenLite.killDelayedCallsTo(onDelayedUnbroken);
 			TweenLite.killDelayedCallsTo(actorFight);
 			EventManager.dispatchEvent(TaskEvent.AUTO_FIGHT_STOP);
-			_isFightSelect=false;
 			_isAutoFightRunning = false;
 			if (_isFightActorRunning||_isFightTargetRunning)
 				return;
@@ -226,34 +225,22 @@ package com.rpgGame.app.manager
 
 		public function stopAll() : void
 		{
-			stop();
 			if (!_isFightActorRunning && !_isAutoFightRunning&&!_isFightTargetRunning)
 				return;
-			MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE);
-			if (MainRoleManager.actor.stateMachine.isPrewarWaiting)
-				MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_PREWAR);
-			else
-				MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE);
+			stopFightTarget();
+			stopAutoFight();
 			
 		}
 
 		private function stop() : void
 		{
-			_isBroken = false;
-			TweenLite.killDelayedCallsTo(onDelayedUnbroken);
-			_isAutoFightRunning = false;
-			_isFightActorRunning = false;
-			_isFightTargetRunning = false;
-			if (_targetRoles)
-			{
-				_targetRoles.length = 0;
-				_targetRoles = null;
-			}
 			_gTimer.reset();
 			_gTimer.stop();
-			TweenLite.killDelayedCallsTo(onDelayedUnbroken);
-			TweenLite.killDelayedCallsTo(actorFight);
-			_isFightSelect=false;
+			MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE);
+			if (MainRoleManager.actor.stateMachine.isPrewarWaiting)
+				MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_PREWAR);
+			else
+				MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE);
 			
 		}
 
@@ -430,13 +417,27 @@ package com.rpgGame.app.manager
 		{
 			_isLeftDown = value;
 		}
+		/**寻怪范围*/
+		public function get findDist():int
+		{
+			return _findDist;
+		}
+		
+		public function set findDist(value:int):void
+		{
+			_findDist = value;
+		}
 		
 		
-		private var testStopKey:Boolean=true;
+		
+		
+		private var testStopKey:Boolean=false;
 		public function testStop():void
 		{
 			testStopKey=!testStopKey;
 		}
+
+		
 		
 
 	}

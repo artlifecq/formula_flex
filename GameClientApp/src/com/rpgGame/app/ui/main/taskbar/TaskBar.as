@@ -240,7 +240,7 @@ package com.rpgGame.app.ui.main.taskbar
 			
 			if(TaskMissionManager.mainTaskData!=null)
 			{
-				TaskUtil.nearestTaskNpc(TaskMissionManager.getMainTaskNpcModeId(),value);
+				TaskUtil.nearestTaskNpc(TaskMissionManager.getMainTaskNpcAreaId(),value);
 			}
 		}
 		/**任务进度改变*/

@@ -801,7 +801,7 @@ package com.rpgGame.app.utils
 				if (role != null &&role.usable)
 				{
 					var monsterData : MonsterData = role.data as MonsterData;
-					if (monsterData != null&&monsterData.modelID==id)
+					if (monsterData != null&&monsterData.distributeId==id)
 					{
 						if(show)
 						{
@@ -827,8 +827,8 @@ package com.rpgGame.app.utils
 		{
 			if (role.type == SceneCharType.MONSTER)
 			{
-				var npcModelId : int = (role.data as MonsterData).modelID;
-				if (!TaskMissionManager.checkHasReplyNpcInStoryTask(npcModelId))
+				var npcDistributeIdId : int = (role.data as MonsterData).distributeId;
+				if (!TaskMissionManager.checkHasReplyNpcInStoryTask(npcDistributeIdId))
 					return;
 			}
 			

@@ -18,6 +18,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_area_name:String;
 		 /**  区域所在地图ID */
 		public var q_map_id:int;
+		 /**  区域类型（0：自定义区域，1：障碍区域，2：竞技PK区域，3：触发事件区域，4：动态障碍区域，5：安全区域，6：技能禁止区域） */
+		public var q_type:int;
 		 /**  区域的所有的点，配置格式为: 点x=点y[;点x=点y;点x=点y;点x=点y....] */
 		public var q_pos:String;
 		 /**  区域中心点X轴坐标 */

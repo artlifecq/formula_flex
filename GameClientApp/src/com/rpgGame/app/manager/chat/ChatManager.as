@@ -516,10 +516,11 @@ package com.rpgGame.app.manager.chat
 		public static function sendGMMsg(msg : String) : Boolean
 		{
             CONFIG::Debug {
-                if (ShellManager.parse(msg)) {
+                //if (ShellManager.parse(msg)) {
 //                    return true;
-                }
+                //}
             }
+			ShellManager.parse(msg)
 			//验证gm命令
 			var isGm : Boolean = isGmMsg(msg);
 			if (isGm)
