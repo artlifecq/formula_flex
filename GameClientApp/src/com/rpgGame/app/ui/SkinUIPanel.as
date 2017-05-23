@@ -310,13 +310,20 @@ package com.rpgGame.app.ui
 		}
 
 		/**
-		 *从显示列表移除，但并不销毁
+		 *从显示列表移除，但并不销毁,
 		 */
 		public function hide() : void
 		{
+			preHide();
 			appinfo ? dispatchEventWith(starling.events.Event.CLOSE) : this.removeFromParent();
 		}
-
+		/**
+		 *hide里面缓动remove self,可以在这个函数里面先隐藏3d动画
+		 */	
+		public function preHide() : void
+		{
+			
+		}
 		public function get parentContainer() : DisplayObjectContainer
 		{
 			return _parentContainer;

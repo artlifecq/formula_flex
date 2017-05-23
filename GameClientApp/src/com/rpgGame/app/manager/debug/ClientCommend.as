@@ -4,7 +4,10 @@ package   com.rpgGame.app.manager.debug
 	import com.game.engine3D.utils.StatsUtil;
 	import com.game.mainCore.core.manager.LayerManager;
 	import com.gameClient.utils.HashMap;
+	import com.rpgGame.app.fight.spell.SkillAddPop;
 	import com.rpgGame.app.manager.Mgr;
+	import com.rpgGame.app.manager.pop.UIPopManager;
+	import com.rpgGame.netData.skill.bean.SkillInfo;
 	
 	import org.game.netCore.net.MessageMgr;
 
@@ -44,9 +47,14 @@ package   com.rpgGame.app.manager.debug
 			{
 				Mgr.vipMgr.vipLv=arg[0];
 			});
-			commandList.put( ".buy", function (...arg):void
+			commandList.put( ".skill", function (...arg):void
 			{
-				
+				var skill:SkillInfo=new SkillInfo();
+				skill.skillModelId=arg[0];
+				skill.skillLevel=1;
+				skill.skillChildLv=1;
+				skill.skillExp=2;
+				UIPopManager.showAlonePopUI(SkillAddPop,skill);
 			});
 		}
 		

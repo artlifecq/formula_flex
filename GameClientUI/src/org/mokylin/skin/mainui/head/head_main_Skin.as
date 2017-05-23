@@ -4,15 +4,16 @@ package org.mokylin.skin.mainui.head
 	import feathers.controls.Button;
 	import feathers.controls.Group;
 	import feathers.controls.Label;
+	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import feathers.controls.UINumber;
 	import org.mokylin.skin.component.uinumber.UINumberSkin_zhujuezhandouli;
+	import org.mokylin.skin.mainui.head.Head_Select;
 	import org.mokylin.skin.mainui.head.button.ButtonSkin_banghui;
 	import org.mokylin.skin.mainui.head.button.ButtonSkin_duiwu;
 	import org.mokylin.skin.mainui.head.button.ButtonSkin_heping;
 	import org.mokylin.skin.mainui.head.button.ButtonSkin_quanti;
-	import org.mokylin.skin.mainui.head.button.ButtonSkin_shane;
 
 	/**
 	 * @private
@@ -30,6 +31,8 @@ package org.mokylin.skin.mainui.head
 
 		public var UI_yijia:feathers.controls.UIAsset;
 
+		public var banghui:feathers.controls.SkinnableContainer;
+
 		public var btn_banghui:feathers.controls.Button;
 
 		public var btn_duiwu:feathers.controls.Button;
@@ -38,11 +41,17 @@ package org.mokylin.skin.mainui.head
 
 		public var btn_quanti:feathers.controls.Button;
 
-		public var btn_shane:feathers.controls.Button;
+		public var duiwu:feathers.controls.SkinnableContainer;
 
 		public var grp_mode:feathers.controls.Group;
 
+		public var grp_select:feathers.controls.Group;
+
 		public var grp_zhiye:feathers.controls.Group;
+
+		public var heping:feathers.controls.SkinnableContainer;
+
+		public var quanti:feathers.controls.SkinnableContainer;
 
 		public var role_name:feathers.controls.Label;
 
@@ -57,9 +66,9 @@ package org.mokylin.skin.mainui.head
 			super();
 			
 			this.currentState = "normal";
-			this.height = 102;
-			this.width = 283;
-			this.elementsContent = [__head_main_Skin_UIAsset1_i(),__head_main_Skin_UIAsset2_i(),role_zhandouli_i(),role_name_i(),grp_zhiye_i(),grp_mode_i()];
+			this.height = 220;
+			this.width = 435;
+			this.elementsContent = [__head_main_Skin_UIAsset1_i(),__head_main_Skin_UIAsset2_i(),role_zhandouli_i(),role_name_i(),grp_zhiye_i(),grp_mode_i(),grp_select_i()];
 			
 			states = {
 			};
@@ -110,7 +119,7 @@ package org.mokylin.skin.mainui.head
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 98;
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.styleName = "ui/mainui/head/zhujuetouxiangkuang.png";
 			temp.width = 281;
 			temp.x = 2;
@@ -124,6 +133,31 @@ package org.mokylin.skin.mainui.head
 			temp.styleName = "ui/mainui/head/zhandouli.png";
 			temp.x = 101;
 			temp.y = 28;
+			return temp;
+		}
+
+		private function __head_main_Skin_UIAsset8_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.height = 122;
+			temp.styleName = "ui/common/tips/tips_2.png";
+			temp.width = 344;
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function banghui_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			banghui = temp;
+			temp.name = "banghui";
+			temp.height = 24;
+			var skin:StateSkin = new org.mokylin.skin.mainui.head.Head_Select()
+			temp.skin = skin
+			temp.width = 332;
+			temp.x = 5;
+			temp.y = 61;
 			return temp;
 		}
 
@@ -174,15 +208,17 @@ package org.mokylin.skin.mainui.head
 			return temp;
 		}
 
-		private function btn_shane_i():feathers.controls.Button
+		private function duiwu_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_shane = temp;
-			temp.name = "btn_shane";
-			temp.styleClass = org.mokylin.skin.mainui.head.button.ButtonSkin_shane;
-			temp.visible = false;
-			temp.x = 0;
-			temp.y = 0;
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			duiwu = temp;
+			temp.name = "duiwu";
+			temp.height = 24;
+			var skin:StateSkin = new org.mokylin.skin.mainui.head.Head_Select()
+			temp.skin = skin
+			temp.width = 332;
+			temp.x = 5;
+			temp.y = 33;
 			return temp;
 		}
 
@@ -191,9 +227,22 @@ package org.mokylin.skin.mainui.head
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grp_mode = temp;
 			temp.name = "grp_mode";
-			temp.x = 73;
+			temp.x = 74;
 			temp.y = 80;
-			temp.elementsContent = [btn_heping_i(),btn_banghui_i(),btn_duiwu_i(),btn_quanti_i(),btn_shane_i()];
+			temp.elementsContent = [btn_heping_i(),btn_banghui_i(),btn_duiwu_i(),btn_quanti_i()];
+			return temp;
+		}
+
+		private function grp_select_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			grp_select = temp;
+			temp.name = "grp_select";
+			temp.height = 122;
+			temp.width = 344;
+			temp.x = 91;
+			temp.y = 98;
+			temp.elementsContent = [__head_main_Skin_UIAsset8_i(),heping_i(),duiwu_i(),banghui_i(),quanti_i()];
 			return temp;
 		}
 
@@ -205,6 +254,34 @@ package org.mokylin.skin.mainui.head
 			temp.x = 0;
 			temp.y = 12;
 			temp.elementsContent = [UI_bingjia_i(),UI_mojia_i(),UI_yijia_i()];
+			return temp;
+		}
+
+		private function heping_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			heping = temp;
+			temp.name = "heping";
+			temp.height = 24;
+			var skin:StateSkin = new org.mokylin.skin.mainui.head.Head_Select()
+			temp.skin = skin
+			temp.width = 332;
+			temp.x = 5;
+			temp.y = 6;
+			return temp;
+		}
+
+		private function quanti_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			quanti = temp;
+			temp.name = "quanti";
+			temp.height = 24;
+			var skin:StateSkin = new org.mokylin.skin.mainui.head.Head_Select()
+			temp.skin = skin
+			temp.width = 332;
+			temp.x = 5;
+			temp.y = 88;
 			return temp;
 		}
 

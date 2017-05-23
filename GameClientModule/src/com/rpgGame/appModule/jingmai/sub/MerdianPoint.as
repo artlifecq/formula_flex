@@ -1,8 +1,6 @@
 package com.rpgGame.appModule.jingmai.sub
 {
-	import com.game.engine3D.config.GlobalConfig;
 	import com.game.engine3D.display.Inter3DContainer;
-	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
@@ -15,12 +13,10 @@ package com.rpgGame.appModule.jingmai.sub
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.utils.GameColorUtil;
 	import com.rpgGame.core.utils.MCUtil;
-	import com.rpgGame.core.view.ui.hint.FloatingText;
 	import com.rpgGame.core.view.ui.tip.vo.BaseTipsInfo;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
-	import com.rpgGame.coreData.cfg.cheats.CheatsCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.meridian.MeridianCfg;
 	import com.rpgGame.coreData.clientConfig.Q_global;
@@ -31,20 +27,14 @@ package com.rpgGame.appModule.jingmai.sub
 	import com.rpgGame.coreData.utils.FilterUtil;
 	import com.rpgGame.netData.meridian.bean.AcuPointInfo;
 	
-	import flash.utils.setInterval;
-	
 	import feathers.controls.Label;
 	import feathers.controls.UIAsset;
 	import feathers.controls.UIMovieClip;
 	
-	import gs.TweenMax;
-	
 	import org.game.netCore.data.long;
-	import org.mokylin.skin.app.beibao.jingmai.mc.UIMovieClipJingmai;
 	import org.mokylin.skin.app.beibao.mc.UIMovieClipBianshi_guang;
 	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
 	import starling.filters.FragmentFilter;
 
 	public class MerdianPoint implements IStoneSelector
