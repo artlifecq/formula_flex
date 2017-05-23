@@ -8,6 +8,7 @@ package com.rpgGame.appModule.skill
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.SkillLvLDataManager;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.clientConfig.Q_skill_ignore;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
@@ -188,9 +189,9 @@ package com.rpgGame.appModule.skill
 			if(playerLv>myLv){
 				GrayFilter.gray(skin.btn_shengji);
 				skin.btn_shengji.touchable=false;
-				playerStr=HtmlTextUtil.getTextColor(0xd02525,playerLv.toString()+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT21));
+				playerStr=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,playerLv.toString()+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT21));
 			}else{
-				playerStr=HtmlTextUtil.getTextColor(0x6BCC08,playerLv.toString()+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT21));
+				playerStr=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN1,playerLv.toString()+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT21));
 			}
 			
 			skin.lb_renwudengji.htmlText=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT10),playerStr);
@@ -222,9 +223,9 @@ package com.rpgGame.appModule.skill
 			}
 			var des:String="";
 			if(value<=value1){
-				des=HtmlTextUtil.getTextColor(0x55BD15,value1+"/"+value);
+				des=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN1,value1+"/"+value);
 			}else{
-				des=HtmlTextUtil.getTextColor(0xd02525,value1+"/"+value);
+				des=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,value1+"/"+value);
 				GrayFilter.gray(skin.btn_shengji);
 				skin.btn_shengji.touchable=false;
 			}
