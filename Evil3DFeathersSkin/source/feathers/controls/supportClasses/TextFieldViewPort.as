@@ -821,10 +821,6 @@ package feathers.controls.supportClasses
 
 		override public function render(painter:Painter):void
 		{
-			//this component is an overlay above Starling, and it should be
-			//excluded from the render cache
-			painter.excludeFromCache(this);
-
 			var starling:Starling = this.stage !== null ? this.stage.starling : Starling.current;
 			var starlingViewPort:Rectangle = starling.viewPort;
 			var matrix:Matrix = Pool.getMatrix();

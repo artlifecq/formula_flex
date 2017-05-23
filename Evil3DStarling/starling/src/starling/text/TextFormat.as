@@ -110,7 +110,11 @@ package starling.text
 
             return out;
         }
-
+		
+		public function toString() : String {
+			return "" + _font + _size + _color + _bold + _italic + _underline + _horizontalAlign + _kerning + _leading + _letterSpacing;
+		}
+		
         /** The name of the font. TrueType fonts will be looked up from embedded fonts and
          *  system fonts; bitmap fonts must be registered at the TextField class first.
          *  Beware: If you loaded an embedded font at runtime, you must call

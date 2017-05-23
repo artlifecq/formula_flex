@@ -27,6 +27,7 @@ package starling.text
     import starling.display.Sprite;
     import starling.rendering.Painter;
     import starling.styles.MeshStyle;
+    import starling.textures.DynamicTextTextureManager;
     import starling.utils.RectangleUtil;
     import starling.utils.SystemUtil;
 
@@ -102,6 +103,7 @@ package starling.text
         private var _border:DisplayObjectContainer;
         private var _meshBatch:MeshBatch;
         private var _style:MeshStyle;
+		private var _enableTextBatch:Boolean;
 
         // helper objects
         private static var sMatrix:Matrix = new Matrix();
@@ -118,6 +120,7 @@ package starling.text
             _text = text ? text : "";
             _hitArea = new Rectangle(0, 0, width, height);
             _requiresRecomposition = true;
+			_enableTextBatch = DynamicTextTextureManager.ENABLE_TEXT_BATCH;
             _compositor = sDefaultCompositor;
             _options = new TextOptions();
 
@@ -130,6 +133,17 @@ package starling.text
             addChild(_meshBatch);
         }
         
+		public function get enableTextBatch():Boolean {
+			return _enableTextBatch;
+		}
+
+		public function set enableTextBatch(value:Boolean):void {
+			_enableTextBatch = value;
+			if (_compositor) {
+				_compositor.enableTextBatch = value;
+			}
+		}
+
         /** Disposes the underlying texture data. */
         public override function dispose():void
         {
@@ -164,6 +178,7 @@ package starling.text
                 }
 
                 _compositor = compositor ? compositor : sDefaultCompositor;
+				_compositor.enableTextBatch = _enableTextBatch;
 
                 updateText();
                 updateBorder();

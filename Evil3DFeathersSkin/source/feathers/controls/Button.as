@@ -30,6 +30,7 @@ package feathers.controls
 	import feathers.layout.RelativePosition;
 	import feathers.layout.VerticalAlign;
 	import feathers.skins.IStyleProvider;
+	import feathers.themes.GuiTheme;
 	import feathers.utils.keyboard.KeyToTrigger;
 	import feathers.utils.skins.resetFluidChildDimensionsForMeasurement;
 	import feathers.utils.touch.LongPress;
@@ -410,12 +411,15 @@ package feathers.controls
 		 */
 		public static var globalStyleProvider:IStyleProvider;
 		
+		private var _enableTextBatch : Boolean;
+		
 		/**
 		 * Constructor.
 		 */
 		public function Button()
 		{
 			super();
+			_enableTextBatch = GuiTheme.ENABLE_TEXT_BATCH;
 		}
 
 		/**
@@ -447,6 +451,17 @@ package feathers.controls
 		 * <p>For internal use in subclasses.</p>
 		 */
 		protected var currentIcon:DisplayObject;
+
+		public function get enableTextBatch():Boolean {
+			return _enableTextBatch;
+		}
+
+		public function set enableTextBatch(value:Boolean):void {
+			_enableTextBatch = value;
+			if (this.labelTextRenderer) {
+				this.labelTextRenderer.enableTextBatch = value;
+			}
+		}
 
 		/**
 		 * @private
@@ -2638,6 +2653,7 @@ package feathers.controls
 			{
 				var factory:Function = this._labelFactory != null ? this._labelFactory : FeathersControl.defaultTextRendererFactory;
 				this.labelTextRenderer = ITextRenderer(factory());
+				this.labelTextRenderer.enableTextBatch = _enableTextBatch;
 				var labelStyleName:String = this._customLabelStyleName != null ? this._customLabelStyleName : this.labelStyleName;
 				this.labelTextRenderer.styleNameList.add(labelStyleName);
 				if(this.labelTextRenderer is IStateObserver)

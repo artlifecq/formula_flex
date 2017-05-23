@@ -161,8 +161,6 @@ package com.rpgGame.app.cmdlistener.scene
 			
             SocketConnection.addCmdListener(103110, onResChangePKStateMessage);
 			
-			
-			
 //			SocketConnection.addCmdListener(SceneModuleMessages.S2C_TRIGGER_CLIENT_EVENT, onTriggerClientEvent);
 			
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

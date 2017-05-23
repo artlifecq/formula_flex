@@ -228,8 +228,10 @@ package com.game.engine3D.manager
 				view.visible = true;
 				
 				if (_viewCount != 0)
+				{
 					view.layeredView = true;
-				
+				}
+				trace(GlobalConfig.use2DMap);
 				//guoqing.wen add
 				view.entityCollector.collectPlanarShadow = GlobalConfig.use2DMap;
 				view.lodEnabled = !GlobalConfig.use2DMap;

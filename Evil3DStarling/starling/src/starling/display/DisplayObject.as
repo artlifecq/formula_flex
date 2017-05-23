@@ -32,7 +32,6 @@ package starling.display
     import starling.events.KeyboardEvent;
     import starling.events.TouchEvent;
     import starling.filters.FragmentFilter;
-    import starling.rendering.BatchToken;
     import starling.rendering.Painter;
     import starling.utils.Align;
     import starling.utils.MathUtil;
@@ -146,11 +145,7 @@ package starling.display
         // internal members (for fast access on rendering)
 
         /** @private */ internal var _parent:DisplayObjectContainer;
-        /** @private */ internal var _lastParentOrSelfChangeFrameID:uint;
-        /** @private */ internal var _lastChildChangeFrameID:uint;
-        /** @private */ internal var _tokenFrameID:uint;
-        /** @private */ internal var _pushToken:BatchToken = new BatchToken();
-        /** @private */ internal var _popToken:BatchToken = new BatchToken();
+		/** @private */ internal var _requiresRedraw:Boolean;
         /** @private */ internal var _hasVisibleArea:Boolean;
         /** @private */ internal var _filter:FragmentFilter;
         /** @private */ internal var _mask:DisplayObject;
@@ -183,6 +178,7 @@ package starling.display
             _visible = _touchable = _hasVisibleArea = true;
             _blendMode = BlendMode.AUTO;
             _transformationMatrix = new Matrix();
+			_requiresRedraw = true;
         }
         
         /** Disposes all resources of the display object. 
@@ -420,17 +416,18 @@ package starling.display
          */
         public function setRequiresRedraw():void
         {
-            var parent:DisplayObject = _parent || _maskee;
-            var frameID:int = Starling.frameID;
-
-            _lastParentOrSelfChangeFrameID = frameID;
             _hasVisibleArea = _alpha  != 0.0 && _visible && _maskee == null &&
                               _scaleX != 0.0 && _scaleY != 0.0;
 
-            while (parent && parent._lastChildChangeFrameID != frameID)
+			if(_filter)
+				_filter._cacheRequested = true;
+			var parent:DisplayObject = _parent || _maskee;
+            while (parent && !parent._requiresRedraw)
             {
-                parent._lastChildChangeFrameID = frameID;
-                parent = parent._parent || parent._maskee;
+				parent._requiresRedraw  = true;
+				if(parent.filter)
+					parent.filter._cacheRequested = true;
+				parent = parent._parent || parent._maskee;
             }
         }
 
@@ -439,25 +436,7 @@ package starling.display
          *  since it was last rendered. */
         public function get requiresRedraw():Boolean
         {
-            var frameID:uint = Starling.frameID;
-
-            return _lastParentOrSelfChangeFrameID == frameID ||
-                   _lastChildChangeFrameID == frameID;
-        }
-
-        /** @private Makes sure the object is not drawn from cache in the next frame.
-         *  This method is meant to be called only from <code>Painter.finishFrame()</code>,
-         *  since it requires rendering to be concluded. */
-        starling_internal function excludeFromCache():void
-        {
-            var object:DisplayObject = this;
-            var max:uint = 0xffffffff;
-
-            while (object && object._tokenFrameID != max)
-            {
-                object._tokenFrameID = max;
-                object = object._parent;
-            }
+            return _requiresRedraw;
         }
 
         // helpers

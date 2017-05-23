@@ -12,7 +12,7 @@ package
     import away3d.events.Stage3DEvent;
     
     import starling.core.Starling;
-    import starling.events.Event;
+    import away3d.events.Event;
     import starling.utils.AssetManager;
     
     import utils.ProgressBar;
@@ -69,7 +69,7 @@ package
 			_starling.simulateMultitouch = true;
 			_starling.skipUnchangedFrames = true;
 			_starling.enableErrorChecking = Capabilities.isDebugger;
-			_starling.addEventListener(starling.events.Event.ROOT_CREATED, function():void
+			_starling.addEventListener(away3d.events.Event.ROOT_CREATED, function():void
 			{
 				loadAssets(startGame);
 			});

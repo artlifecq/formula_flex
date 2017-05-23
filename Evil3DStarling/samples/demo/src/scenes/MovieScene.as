@@ -4,7 +4,7 @@ package scenes
 
     import starling.core.Starling;
     import starling.display.MovieClip;
-    import starling.events.Event;
+    import away3d.events.Event;
     import starling.textures.IStarlingTexture;
 
     public class MovieScene extends Scene

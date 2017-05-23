@@ -53,8 +53,8 @@ package starling.display
     public class Mesh extends DisplayObject implements IMeshStyle
     {
         /** @private */ internal var _style:MeshStyle;
-        /** @private */ internal var _vertexData:VertexData;
-        /** @private */ internal var _indexData:IndexData;
+        /** @private */ starling_internal var _vertexData:VertexData;
+        /** @private */ starling_internal var _indexData:IndexData;
         /** @private */ internal var _pixelSnapping:Boolean;
 
         private static var sDefaultStyle:Class = MeshStyle;

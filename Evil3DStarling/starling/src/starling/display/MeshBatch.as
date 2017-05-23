@@ -12,6 +12,7 @@ package starling.display
 {
     import flash.geom.Matrix;
     
+    import starling.core.starling_internal;
     import starling.rendering.IndexData;
     import starling.rendering.MeshEffect;
     import starling.rendering.Painter;
@@ -20,6 +21,7 @@ package starling.display
     import starling.utils.MatrixUtil;
     import starling.utils.MeshSubset;
 
+	use namespace starling_internal;
     /** Combines a number of meshes to one display object and renders them efficiently.
      *
      *  <p>The most basic tangible (non-container) display object in Starling is the Mesh.
@@ -250,8 +252,6 @@ package starling.display
             {
                 painter.finishMeshBatch();
                 painter.drawCount += 1;
-                painter.prepareToDraw();
-                painter.excludeFromCache(this);
 
                 if (_useSharedBuffer || _vertexSyncRequired) 
 					syncVertexBuffer();
@@ -260,7 +260,7 @@ package starling.display
 					syncIndexBuffer();
 
                 _style.updateEffect(_effect, painter.state);
-                _effect.render(0, _indexData.numTriangles);
+				painter.renderEffect(_effect, _indexData.numTriangles);
             }
         }
 

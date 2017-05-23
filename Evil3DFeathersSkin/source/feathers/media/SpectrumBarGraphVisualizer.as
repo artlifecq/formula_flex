@@ -38,7 +38,7 @@ package feathers.media
 		/**
 		 * @private
 		 */
-		protected static var HELPER_QUAD:Quad = new Quad(1, 1);
+		protected static var HELPER_QUAD:Quad;
 		
 		/**
 		 * @private
@@ -50,6 +50,9 @@ package feathers.media
 		 */
 		public function SpectrumBarGraphVisualizer()
 		{
+			if(!HELPER_QUAD)
+				HELPER_QUAD = new Quad(1, 1);
+			
 			this.isQuickHitAreaEnabled = true;
 		}
 

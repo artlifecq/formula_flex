@@ -203,7 +203,6 @@ package starling.core
             // display is always rendered with exactly two draw calls. That is taken into account
             // when showing the drawCount value (see 'ignore self' comment above)
 
-            painter.excludeFromCache(this);
             painter.finishMeshBatch();
             super.render(painter);
         }

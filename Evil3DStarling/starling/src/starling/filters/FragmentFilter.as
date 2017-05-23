@@ -36,6 +36,8 @@ package starling.filters
     import starling.utils.Pool;
     import starling.utils.RectangleUtil;
 
+	use namespace starling_internal;
+	
     /** Dispatched when the settings change in a way that requires a redraw. */
     [Event(name="change", type="away3d.events.Event")]
 
@@ -101,7 +103,7 @@ package starling.filters
     {
         private var _quad:FilterQuad;
         private var _target:DisplayObject;
-        private var _effect:FilterEffect;
+        protected var _effect:FilterEffect;
         private var _vertexData:VertexData;
         private var _indexData:IndexData;
         private var _padding:Padding;
@@ -110,8 +112,8 @@ package starling.filters
         private var _antiAliasing:int;
         private var _textureFormat:String;
         private var _alwaysDrawToBackBuffer:Boolean;
-        private var _cacheRequested:Boolean;
-        private var _cached:Boolean;
+		starling_internal var _cacheRequested:Boolean;
+        private var _cached:Boolean = true;
 
         // helpers
 		private static var sMatrix3D:Matrix3D = new Matrix3D();
@@ -157,18 +159,8 @@ package starling.filters
          */
         public function render(painter:Painter):void
         {
-			CONFIG::Starling_Debug
-				{
-					if(!Starling.current.showFilters)return;
-				}
-			
             if (_target == null)
                 throw new IllegalOperationError("Cannot render filter without target");
-			
-			CONFIG::Starling_Debug
-			{
-				trace("[Starling]FragmentFilter render", _target.name, _textureFormat, _helper ?_helper.targetBounds.toString() : "");
-			}
 			
             if (!_cached || _cacheRequested)
             {
@@ -206,7 +198,6 @@ package starling.filters
                 // (2) we don't want lower layers (CompositeFilter!) to shine through.
 
                 drawLastPassToBackBuffer = painter.state.alpha == 1.0;
-                painter.excludeFromCache(_target);
             }
 
             if (_target == Starling.current.root)
@@ -252,11 +243,9 @@ package starling.filters
             _resolution = 1.0; // applied via '_helper.textureScale' already;
                                // only 'child'-filters use resolution directly (in 'process')
 
-            var wasCacheEnabled:Boolean = painter.cacheEnabled;
             var input:IStarlingTexture = _helper.getTexture();
             var output:IStarlingTexture;
 
-            painter.cacheEnabled = false; // -> what follows should not be cached
             painter.pushState();
             painter.state.alpha = 1.0;
             painter.state.clipRect = null;
@@ -272,7 +261,6 @@ package starling.filters
             output = process(painter, _helper, input); // -> feed 'input' to actual filter code
 
             painter.popState();
-            painter.cacheEnabled = wasCacheEnabled; // -> cache again
 
             if (output) // indirect rendering
             {
@@ -314,10 +302,6 @@ package starling.filters
                                 input0:IStarlingTexture=null, input1:IStarlingTexture=null,
                                 input2:IStarlingTexture=null, input3:IStarlingTexture=null):IStarlingTexture
         {
-			CONFIG::Starling_Debug
-				{
-					if(!Starling.current.showFilters)return null;
-				}
 				
             var effect:FilterEffect = this.effect;
             var output:IStarlingTexture = helper.getTexture();
@@ -344,7 +328,7 @@ package starling.filters
             }
 
             painter.state.renderTarget = renderTarget;
-            painter.prepareToDraw();
+           
             painter.drawCount += 1;
 
             TextureHelper.setupVertexPositions(input0,vertexData, 0, "position", bounds);
@@ -354,7 +338,7 @@ package starling.filters
             effect.mvpMatrix3D = projectionMatrix;
             effect.uploadVertexData(vertexData);
             effect.uploadIndexData(indexData);
-            effect.render(0, indexData.numTriangles);
+			painter.renderEffect(effect, indexData.numTriangles);
 
             return output;
         }

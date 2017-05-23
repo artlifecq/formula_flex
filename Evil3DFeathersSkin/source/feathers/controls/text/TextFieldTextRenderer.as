@@ -39,6 +39,7 @@ package feathers.controls.text
 	import starling.display.Image;
 	import starling.rendering.Painter;
 	import starling.textures.ConcreteTexture;
+	import starling.textures.DynamicTextTextureManager;
 	import starling.textures.IStarlingTexture;
 	import starling.textures.TextureFactory;
 	import starling.utils.MathUtil;
@@ -96,7 +97,7 @@ package feathers.controls.text
 		 * @see feathers.core.FeathersControl#styleProvider
 		 */
 		public static var globalStyleProvider:IStyleProvider;
-
+		
 		/**
 		 * Constructor.
 		 */
@@ -261,6 +262,21 @@ package feathers.controls.text
 			}
 			this._isHTML = value;
 			this.invalidate(INVALIDATION_FLAG_DATA);
+		}
+		
+		protected var _enableTextBatch : Boolean;
+		
+		public function get enableTextBatch():Boolean {
+			return _enableTextBatch;
+		}
+		
+		/**
+		 * 是否启用动态合并文字功能 
+		 * @param value
+		 * 
+		 */		
+		public function set enableTextBatch(value:Boolean):void {
+			_enableTextBatch = value;
 		}
 
 		/**
@@ -2019,6 +2035,7 @@ package feathers.controls.text
 					
 					bitmapData = this.drawTextFieldRegionToBitmapData(xPosition, yPosition,
 						currentBitmapWidth, currentBitmapHeight, bitmapData);
+					
 					var newTexture:IStarlingTexture;
 					if(!this.textSnapshot || this._needsNewTexture)
 					{
@@ -2028,9 +2045,13 @@ package feathers.controls.text
 						//get texture cache
 						var  filterId:String = Fontter.getFilterId(_nativeFilters);
 						_textureKey = _textFormat.font+"_"+_textFormat.size+"_"+_textFormat.color+"_"+filterId+"_"+_text;
-						newTexture = TextureFactory.empty(bitmapData.width, bitmapData.height,
-							false, false);
-						newTexture.root.uploadBitmapData(bitmapData);
+						if (_enableTextBatch) {
+//							newTexture = DynamicTextTextureManager.instance.createSubTexture(_textureKey, bitmapData, false);
+						}
+						if (newTexture == null) {
+							newTexture = TextureFactory.empty(bitmapData.width, bitmapData.height, false, false);
+							newTexture.root.uploadBitmapData(bitmapData);
+						}
 						CONFIG::Debug
 							{
 								newTexture.key = _textureKey;
@@ -2063,23 +2084,30 @@ package feathers.controls.text
 					{
 						if(this._needsNewTexture)
 						{
-							snapshot.texture.dispose();
-							snapshot.texture = newTexture;
+							if (snapshot.texture != newTexture) {
+								snapshot.texture.dispose();
+								snapshot.texture = newTexture;
+							}
 						}
 						else
 						{
 							var existingTexture:IStarlingTexture = snapshot.texture;
 							_textureKey = _textFormat.font+"_"+_textFormat.size+"_"+_textFormat.color+"_"+filterId+"_"+_text;
+							
 							if(existingTexture != null)
 							{
-								//this is faster, if we haven't resized the bitmapdata
-								existingTexture.root.uploadBitmapData(bitmapData);
-								//however, the image won't be notified that its
-								//texture has changed, so we need to do it manually
-								CONFIG::Debug
-									{
+								if (_enableTextBatch) {
+//									DynamicTextTextureManager.instance.uploadSubTexture(_textureKey, bitmapData);
+								} else {
+									//this is faster, if we haven't resized the bitmapdata
+									existingTexture.root.uploadBitmapData(bitmapData);
+									//however, the image won't be notified that its
+									//texture has changed, so we need to do it manually
+									CONFIG::Debug {
 										existingTexture.key = _textureKey;
-									}
+									};
+								}
+								
 							}
 							
 							this.textSnapshot.setRequiresRedraw();
@@ -2114,6 +2142,7 @@ package feathers.controls.text
 			}
 			while(totalBitmapWidth > 0)
 				bitmapData.dispose();
+				
 			if(this.textSnapshots)
 			{
 				var snapshotCount:int = this.textSnapshots.length;
