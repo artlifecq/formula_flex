@@ -7,6 +7,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.manager.role.SceneRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.sender.StoryDungeonSender;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
@@ -83,7 +84,42 @@ package com.rpgGame.app.manager
 //				triggerPlotDialog(_plotDialogTrigger);
 //			}
 		}
+		/**收到服务器触发消息*/
+		public static function serverTrigger(triggerId : int):void
+		{
+			_isTrigging[triggerId]=true;
+			var triggerData : ClientTrigger = TriggerCfgData.getClientTrigger(triggerId);
+			if (triggerData)
+			{
+				if(triggerData.obstacleArea!="")
+				{
+					triggerCreateObstacle(triggerData);
+				}
+				if(triggerData.sceneEffectIds!="")
+				{
+					triggerCreateSceneEffect(triggerData);
+				}
+				
+				/*switch (triggerData.triggerType)
+				{
+					case TriggerTypeEnum.SCENE_OBSTACLE: //触发生成动态阻挡 
+						
+						break;
+					case TriggerTypeEnum.ADD_MONSTER: //刷怪 
+						
+						break;
+					case TriggerTypeEnum.PLOT_DIALOG: //触发剧情对话 
+						
+						break;
+					case TriggerTypeEnum.SCENE_ROLE: //生成场景物 
+						break;
+				}*/
 
+			}
+			
+			
+		}
+		/**客户端触发*/
 		public static function triggerById(triggerId : int, roleId : Number = 0) : Boolean
 		{
 			if (_isTrigging[triggerId])
@@ -107,9 +143,10 @@ package com.rpgGame.app.manager
 						}
 					}
 				}
+				DungeonSender.reqTrigger(triggerData.id);///通知服务器 触发消息
+				//_isTrigging[triggerId] = true;
 				
 				
-				_isTrigging[triggerId] = true;
 				
 				/*var sceneData : SceneData = MapDataManager.currentScene;
 				if (sceneData.isStoryDungeonScene)
@@ -120,31 +157,9 @@ package com.rpgGame.app.manager
 					}
 				}*/
 
-				switch (triggerData.triggerType)
+				/*switch (triggerData.triggerType)
 				{
-					case TriggerTypeEnum.SCENE_OBSTACLE: //触发生成动态阻挡 
-						if(triggerData.obstacleArea!="")
-						{
-							triggerCreateObstacle(triggerData);
-						}
-						if(triggerData.sceneEffectIds!="")
-						{
-							triggerCreateSceneEffect(triggerData);
-						}
-						//
-						
-						
-						break;
-					case TriggerTypeEnum.ADD_MONSTER: //刷怪 
-						
-						break;
-					case TriggerTypeEnum.PLOT_DIALOG: //触发剧情对话 
-						
-						break;
-					case TriggerTypeEnum.SCENE_ROLE: //生成场景物 
-						
-						break;
-					/*case EnumClientTriggerType.SCENE_BORN_EFFECT: //触发生成场景特效 
+					case EnumClientTriggerType.SCENE_BORN_EFFECT: //触发生成场景特效 
 						triggerCreateSceneEffect(triggerData);
 						break;
 					case EnumClientTriggerType.PLOT_DIALOG: //触发剧情对话 
@@ -161,10 +176,10 @@ package com.rpgGame.app.manager
 						break;
 					case EnumClientTriggerType.BUBBLE_DIALOG: //冒泡对话 
 						triggerBubbleDialog(triggerData, roleId);
-						break;*/
-				}
-
-				if (triggerData.chainTriggerId > 0)
+						break;
+				}*/
+				/*-------------延迟触发------------------*/
+				/*if (triggerData.chainTriggerId > 0)
 				{
 					if (triggerData.chainTriggerDelay > 0)
 					{
@@ -174,7 +189,7 @@ package com.rpgGame.app.manager
 					{
 						triggerById(triggerData.chainTriggerId);
 					}
-				}
+				}*/
 			}
 			return true;
 		}

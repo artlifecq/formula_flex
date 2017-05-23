@@ -6,6 +6,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.lunjian.message.SCLunJianPanelInfosMessage;
 	import com.rpgGame.netData.lunjian.message.SCLunJianResultMessage;
 	import com.rpgGame.netData.lunjian.message.SCLunJianTimeMessage;
+	import com.rpgGame.netData.zone.message.SCClientTriggerValiedMessage;
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
@@ -28,7 +29,7 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(227501, onSCLunJianPanelInfosMessage );
 			SocketConnection.addCmdListener(227502, onSCLunJianTimeStartMessage );
 			SocketConnection.addCmdListener(227503, onSCLunJianResultMessage );
-			
+			SocketConnection.addCmdListener(155136, onSCClientTriggerValiedMessage );
 			finish();
 		}
 		
@@ -50,5 +51,13 @@ package com.rpgGame.app.cmdlistener
 		{
 			EventManager.dispatchEvent(DungeonEvent.UPDATE_LUNJIAN_PANEL,msg.lunJianInfos);
 		}
+		private function onSCClientTriggerValiedMessage(msg:SCClientTriggerValiedMessage):void
+		{
+			
+		}
+		
+		
+		
+		
 	}
 }
