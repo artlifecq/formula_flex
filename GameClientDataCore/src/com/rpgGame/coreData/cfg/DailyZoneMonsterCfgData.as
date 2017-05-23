@@ -47,6 +47,11 @@ package com.rpgGame.coreData.cfg
 				typelist.push(info);
 			}
 			
+			
+			for each(var key:int in _typeList)
+			{
+				(_typeList[key] as Array).sortOn(Array.NUMERIC,"q_wave");
+			}
 		}
 		
 		public static function getZoneCfg(id:int):Q_dailyzone_monster

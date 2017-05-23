@@ -2,6 +2,8 @@ package com.rpgGame.app.ui.main.dungeon
 {
 	import com.gameClient.utils.HashMap;
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.manager.SystemSetManager;
+	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.sender.DungeonSender;
@@ -59,6 +61,7 @@ package com.rpgGame.app.ui.main.dungeon
 			EventManager.addEvent(DungeonEvent.UPDATE_DAILYZONE_TIME,updatedailyZoneTime);
 			EventManager.addEvent(DungeonEvent.UPDATA_WAVE_INFO,updateWaveInfoHandler);
 			EventManager.addEvent(DungeonEvent.UPDATA_DAILYZONE_ENDINFO,updateEndInfo);
+			SystemSetManager.getinstance().setValueByIndex(SystemSetManager.SYSTEMSET_HOOK_TYPE,25);
 			UIPopManager.showAlonePopUI(DungeonFightPop);
 		}
 		
@@ -161,7 +164,7 @@ package com.rpgGame.app.ui.main.dungeon
 			}else if(_data.q_combat_type ==2){
 				_skin.ui_head.styleName = "ui/mainui/fubenzhuizong/richangfuben/zhuangbeifuben.png";
 			}
-			var itemInfos:Object = JSONUtil.decode( _data.q_special_rewards_show);
+			var itemInfos:Object = JSONUtil.decode( _data.q_rewards_client);
 			var item:ItemInfo;
 			for(var i:int = 0;i<_rewardIcons.length;i++)
 			{
@@ -179,6 +182,10 @@ package com.rpgGame.app.ui.main.dungeon
 			{
 				_lastList.push(int(str));
 			}
+			_endTime = SystemTimeManager.curtTm/1000+_data.q_zone_time;
+			currentStateEnd();
+			advanceTime(0);
+			TrusteeshipManager.getInstance().startAutoFight();
 		}
 		override protected function onHide():void
 		{

@@ -1,17 +1,16 @@
 package com.rpgGame.appModule.dungeon.equip
 {
-	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.DailyZoneDataManager;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.coreData.clientConfig.Q_daily_zone;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ItemUtil;
-	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.dailyzone.bean.DailyZonePanelInfo;
 	
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	
+	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.fuben.FuBenItem_Zhenqi;
 	
 	import starling.events.Event;
@@ -34,11 +33,12 @@ package com.rpgGame.appModule.dungeon.equip
 			_skin.uiJiangli.styleName = "ui/app/fuben/gailvdiaoluo.png"
 			_fistIcon = FaceUtil.creatIconCDFaceByUIAsset(_skin.iconFirst,IcoSizeEnum.ICON_64,1,5,5);
 			_rewardIcons = new Vector.<IconCDFace>();
-			_rewardIcons.push(FaceUtil.creatIconCDFaceByUIAsset(_skin.icon_1,IcoSizeEnum.ICON_42,1,5,5));
-			_rewardIcons.push(FaceUtil.creatIconCDFaceByUIAsset(_skin.icon_2,IcoSizeEnum.ICON_42,1,5,5));
-			_rewardIcons.push(FaceUtil.creatIconCDFaceByUIAsset(_skin.icon_3,IcoSizeEnum.ICON_42,1,5,5));
+			_rewardIcons.push(FaceUtil.creatIconCDFaceByUIAsset(_skin.icon_1,IcoSizeEnum.ICON_48,1,5,5));
+			_rewardIcons.push(FaceUtil.creatIconCDFaceByUIAsset(_skin.icon_2,IcoSizeEnum.ICON_48,1,5,5));
+			_rewardIcons.push(FaceUtil.creatIconCDFaceByUIAsset(_skin.icon_3,IcoSizeEnum.ICON_48,1,5,5));
 			_skin.btnEnter.addEventListener(Event.TRIGGERED,triggeredHandler);
 			_skin.btnReset.addEventListener(Event.TRIGGERED,resetHandler);
+			EventManager.removeEvent(DailyZoneDataManager.UPDATEDAILYZONEINFO,commitData);
 		}
 		private function resetHandler(e:Event):void
 		{
@@ -107,7 +107,7 @@ package com.rpgGame.appModule.dungeon.equip
 		}
 		private function refeashCombatState():void
 		{
-			if(_dailyZoneInfo==null)
+			if(_dailyZoneInfo==null||_dailyZoneInfo.remainCount==0)
 			{
 				_skin.btnEnter.visible = false;
 				_skin.lastCombatCount.visible = false;
@@ -128,7 +128,11 @@ package com.rpgGame.appModule.dungeon.equip
 				_skin.uiLevel.visible = false;
 			}
 		}
-		
+		override public function dispose():void
+		{
+			super.dispose();
+			EventManager.removeEvent(DailyZoneDataManager.UPDATEDAILYZONEINFO,commitData);
+		}
 		override public function get height():Number
 		{
 			return _skin.height;

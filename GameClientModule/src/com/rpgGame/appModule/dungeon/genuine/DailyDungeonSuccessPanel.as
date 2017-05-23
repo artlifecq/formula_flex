@@ -4,8 +4,6 @@ package com.rpgGame.appModule.dungeon.genuine
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
-	import com.rpgGame.coreData.cfg.DailyZoneCfgData;
-	import com.rpgGame.coreData.clientConfig.Q_daily_zone;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.type.item.GridBGType;
@@ -64,8 +62,18 @@ package com.rpgGame.appModule.dungeon.genuine
 			
 
 			var itemlist:Vector.<ItemInfo> = msg.itemInfoList;
-			
 			var length:int = itemlist.length;
+			for(var j:int = 0;j<length;j++)
+			{
+				if(itemlist[i].itemModelId==2)
+				{
+					_skin.lbzhenqi.text = itemlist[i].num.toString();
+					itemlist.splice(i,1);
+					break;
+				}
+			}
+			
+			length = itemlist.length;
 			var startX:Number = (_skin.width-70*length)/2-12;
 			_rewardIcons =new Vector.<IconCDFace>();
 			for(var i:int = 0;i<length;i++)

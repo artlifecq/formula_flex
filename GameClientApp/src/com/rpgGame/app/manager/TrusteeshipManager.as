@@ -432,7 +432,7 @@ package com.rpgGame.app.manager
 		}
 		
 		
-		private var testStopKey:Boolean=true;
+		private var testStopKey:Boolean=false;
 		public function testStop():void
 		{
 			testStopKey=!testStopKey;

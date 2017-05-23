@@ -12,6 +12,7 @@ package com.rpgGame.appModule.dungeon.genuine
 	
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	
+	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.fuben.FuBenItem_Zhenqi;
 	
 	import starling.events.Event;
@@ -33,10 +34,12 @@ package com.rpgGame.appModule.dungeon.genuine
 			this.setSize(_skin.width,_skin.height);
 			_fistIcon = FaceUtil.creatIconCDFaceByUIAsset(_skin.iconFirst,IcoSizeEnum.ICON_64,1,5,5);
 			_rewardIcons = new Vector.<IconCDFace>();
-			_rewardIcons.push(FaceUtil.creatIconCDFaceByUIAsset(_skin.icon_1,IcoSizeEnum.ICON_42,1,5,5));
-			_rewardIcons.push(FaceUtil.creatIconCDFaceByUIAsset(_skin.icon_2,IcoSizeEnum.ICON_42,1,5,5));
-			_rewardIcons.push(FaceUtil.creatIconCDFaceByUIAsset(_skin.icon_3,IcoSizeEnum.ICON_42,1,5,5));
+			_rewardIcons.push(FaceUtil.creatIconCDFaceByUIAsset(_skin.icon_1,IcoSizeEnum.ICON_48,1,5,5));
+			_rewardIcons.push(FaceUtil.creatIconCDFaceByUIAsset(_skin.icon_2,IcoSizeEnum.ICON_48,1,5,5));
+			_rewardIcons.push(FaceUtil.creatIconCDFaceByUIAsset(_skin.icon_3,IcoSizeEnum.ICON_48,1,5,5));
 			_skin.btnEnter.addEventListener(Event.TRIGGERED,triggeredHandler);
+			_skin.btnReset.addEventListener(Event.TRIGGERED,triggeredHandler);
+			EventManager.addEvent(DailyZoneDataManager.UPDATEDAILYZONEINFO,commitData);
 		}
 		private function triggeredHandler(e:Event):void
 		{
@@ -59,6 +62,7 @@ package com.rpgGame.appModule.dungeon.genuine
 			
 			var itemInfos:Array = ItemUtil.jsonParseItemClientList(data.q_special_rewards_show);
 			FaceUtil.SetItemGrid(_fistIcon,itemInfos[0], true);
+			
 			
 			itemInfos = ItemUtil.jsonParseItemClientList(data.q_rewards_client);
 			for(var i:int = 0;i<_rewardIcons.length;i++)
@@ -98,7 +102,7 @@ package com.rpgGame.appModule.dungeon.genuine
 		}
 		private function refeashCombatState():void
 		{
-			if(_dailyZoneInfo==null)
+			if(_dailyZoneInfo==null||_dailyZoneInfo.remainCount==0)
 			{
 				_skin.btnEnter.visible = false;
 				_skin.lastCombatCount.visible = false;
@@ -118,6 +122,12 @@ package com.rpgGame.appModule.dungeon.genuine
 			}else{
 				_skin.uiLevel.visible = false;
 			}
+		}
+		
+		override public function dispose():void
+		{
+			super.dispose();
+			EventManager.removeEvent(DailyZoneDataManager.UPDATEDAILYZONEINFO,commitData);
 		}
 		
 		override public function get height():Number
