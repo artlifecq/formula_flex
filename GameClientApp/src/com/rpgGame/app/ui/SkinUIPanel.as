@@ -17,6 +17,7 @@ package com.rpgGame.app.ui
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
+	import away3d.events.Event;
 
 	/**
 	 *基于skinState配置的app面板基类,
@@ -314,7 +315,7 @@ package com.rpgGame.app.ui
 		 */
 		public function hide() : void
 		{
-			appinfo ? dispatchEventWith(starling.events.Event.CLOSE) : this.removeFromParent();
+			appinfo ? dispatchEventWith(Event.CLOSE) : this.removeFromParent();
 		}
 
 		public function get parentContainer() : DisplayObjectContainer

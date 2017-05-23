@@ -88,7 +88,11 @@ package starling.textures
             if (atlasXml)
                 parseAtlasXml(atlasXml);
         }
-        
+
+		public function get subTextures():Dictionary {
+			return _subTextures;
+		}
+
         /** Disposes the atlas texture. */
         public function dispose():void
         {
@@ -129,7 +133,7 @@ package starling.textures
         }
         
         /** Retrieves a SubTexture by name. Returns <code>null</code> if it is not found. */
-        public function getTexture(name:String):IStarlingTexture
+        public function getTexture(name:String):SubTexture
         {
             return _subTextures[name];
         }
@@ -189,8 +193,12 @@ package starling.textures
         public function addRegion(name:String, region:Rectangle,
                                   rotated:Boolean=false):void
         {
-			_subTextures[name] = new SubTexture(_atlasTexture, region, false, rotated);
-			_subTextures[name].key = name;
+			if (_subTextures[name]) {
+				_subTextures[name].updateTexture(_atlasTexture, region, false, rotated);
+			} else {
+				_subTextures[name] = new SubTexture(_atlasTexture, region, false, rotated);
+				_subTextures[name].key = name;
+			}
 			
             _subTextureNames = null;
         }

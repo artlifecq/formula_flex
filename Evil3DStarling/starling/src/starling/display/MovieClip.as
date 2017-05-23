@@ -15,11 +15,11 @@ package starling.display
     import flash.media.SoundTransform;
 
     import starling.animation.IAnimatable;
-    import starling.events.Event;
+    import away3d.events.Event;
     import starling.textures.IStarlingTexture;
 
     /** Dispatched whenever the movie has displayed its last frame. */
-    [Event(name="complete", type="starling.events.Event")]
+    [Event(name="complete", type="away3d.events.Event")]
 
     /** A MovieClip is a simple way to display an animation depicted by a list of textures.
      *  

@@ -156,7 +156,8 @@ package com.editor.manager
 
 		public function viewResize() : void
 		{
-            if (Scene.scene) {
+            if (Scene.scene)
+			{
                 Scene.scene.reSize(LayerManager.stage.stageWidth, LayerManager.stage.stageHeight);
             }
 

@@ -11,9 +11,9 @@ package feathers.controls.color
 	import feathers.skins.IStyleProvider;
 
 	import starling.display.Quad;
-	import starling.events.Event;
+	import away3d.events.Event;
 
-	[Event(name="change",type="starling.events.Event")]
+	[Event(name="change",type="away3d.events.Event")]
 
 	/**
 	 * A button that displays a color that may be used for building color

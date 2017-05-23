@@ -10,6 +10,8 @@
 
 package starling.events
 {
+	import away3d.events.Event;
+
     /** A KeyboardEvent is dispatched in response to user input through a keyboard.
      * 
      *  <p>This is Starling's version of the Flash KeyboardEvent class. It contains the same 

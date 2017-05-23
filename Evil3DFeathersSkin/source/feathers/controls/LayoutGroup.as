@@ -7,6 +7,10 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.controls
 {
+	import flash.geom.Point;
+	
+	import away3d.events.Event;
+	
 	import feathers.core.FeathersControl;
 	import feathers.core.IFeathersControl;
 	import feathers.core.IMeasureDisplayObject;
@@ -20,14 +24,11 @@ package feathers.controls
 	import feathers.skins.IStyleProvider;
 	import feathers.utils.display.stageToStarling;
 	import feathers.utils.skins.resetFluidChildDimensionsForMeasurement;
-
-	import flash.geom.Point;
-
+	
 	import starling.core.Starling;
 	import starling.core.starling_internal;
 	import starling.display.DisplayObject;
 	import starling.display.Quad;
-	import starling.events.Event;
 	import starling.filters.FragmentFilter;
 	import starling.rendering.Painter;
 

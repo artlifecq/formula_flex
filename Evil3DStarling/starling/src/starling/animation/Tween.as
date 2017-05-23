@@ -11,9 +11,10 @@
 
 package starling.animation
 {
+    import away3d.events.Event;
+    import away3d.events.EventDispatcher;
+    
     import starling.core.starling_internal;
-    import starling.events.Event;
-    import starling.events.EventDispatcher;
     import starling.utils.Color;
 
     /** A Tween animates numeric properties of objects. It uses different transition functions

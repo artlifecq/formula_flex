@@ -7,13 +7,13 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.media
 {
+	import flash.media.SoundTransform;
+	
+	import away3d.events.Event;
+	
 	import feathers.controls.Slider;
 	import feathers.events.MediaPlayerEventType;
 	import feathers.skins.IStyleProvider;
-
-	import flash.media.SoundTransform;
-
-	import starling.events.Event;
 
 	/**
 	 * A specialized slider that controls the volume of a media player that

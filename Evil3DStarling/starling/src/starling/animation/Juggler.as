@@ -11,10 +11,11 @@
 package starling.animation
 {
     import flash.utils.Dictionary;
-
+    
+    import away3d.events.Event;
+    import away3d.events.EventDispatcher;
+    
     import starling.core.starling_internal;
-    import starling.events.Event;
-    import starling.events.EventDispatcher;
 
     /** The Juggler takes objects that implement IAnimatable (like Tweens) and executes them.
      * 

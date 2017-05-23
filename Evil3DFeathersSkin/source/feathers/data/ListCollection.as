@@ -7,10 +7,10 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.data
 {
+	import away3d.events.Event;
+	import away3d.events.EventDispatcher;
+	
 	import feathers.events.CollectionEventType;
-
-	import starling.events.Event;
-	import starling.events.EventDispatcher;
 
 	/**
 	 * Dispatched when the underlying data source changes and the ui will
@@ -31,9 +31,9 @@ package feathers.data
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.CHANGE
+	 * @eventType away3d.events.Event.CHANGE
 	 */
-	[Event(name="change",type="starling.events.Event")]
+	[Event(name="change",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the collection has changed drastically, such as when
@@ -56,7 +56,7 @@ package feathers.data
 	 *
 	 * @eventType feathers.events.CollectionEventType.RESET
 	 */
-	[Event(name="reset",type="starling.events.Event")]
+	[Event(name="reset",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when an item is added to the collection.
@@ -79,7 +79,7 @@ package feathers.data
 	 *
 	 * @eventType feathers.events.CollectionEventType.ADD_ITEM
 	 */
-	[Event(name="addItem",type="starling.events.Event")]
+	[Event(name="addItem",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when an item is removed from the collection.
@@ -102,7 +102,7 @@ package feathers.data
 	 *
 	 * @eventType feathers.events.CollectionEventType.REMOVE_ITEM
 	 */
-	[Event(name="removeItem",type="starling.events.Event")]
+	[Event(name="removeItem",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when an item is replaced in the collection.
@@ -125,7 +125,7 @@ package feathers.data
 	 *
 	 * @eventType feathers.events.CollectionEventType.REPLACE_ITEM
 	 */
-	[Event(name="replaceItem",type="starling.events.Event")]
+	[Event(name="replaceItem",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the <code>updateItemAt()</code> function is called on the
@@ -151,7 +151,7 @@ package feathers.data
 	 *
 	 * @eventType feathers.events.CollectionEventType.UPDATE_ITEM
 	 */
-	[Event(name="updateItem",type="starling.events.Event")]
+	[Event(name="updateItem",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the <code>updateAll()</code> function is called on the
@@ -176,7 +176,7 @@ package feathers.data
 	 *
 	 * @eventType feathers.events.CollectionEventType.UPDATE_ALL
 	 */
-	[Event(name="updateAll",type="starling.events.Event")]
+	[Event(name="updateAll",type="away3d.events.Event")]
 
 	/**
 	 * Wraps a data source with a common API for use with UI controls, like

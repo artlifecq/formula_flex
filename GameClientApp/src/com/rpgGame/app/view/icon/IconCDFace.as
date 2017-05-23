@@ -18,7 +18,7 @@ package com.rpgGame.app.view.icon
 	
 	import org.client.mainCore.manager.EventManager;
 	
-	import starling.events.Event;
+	import away3d.events.Event;
 	import starling.text.TextField;
 	import starling.text.TextFormat;
 

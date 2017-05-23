@@ -1,7 +1,5 @@
 package com.rpgGame.coreData
 {
-	
-
 	/**
 	 * 此类不需要加入性能统计 
 	 */	

@@ -7,6 +7,10 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.controls
 {
+	import flash.ui.Keyboard;
+	
+	import away3d.events.Event;
+	
 	import feathers.core.IValidating;
 	import feathers.data.ListCollection;
 	import feathers.events.FeathersEventType;
@@ -15,11 +19,8 @@ package feathers.controls
 	import feathers.layout.ISpinnerLayout;
 	import feathers.layout.VerticalSpinnerLayout;
 	import feathers.skins.IStyleProvider;
-
-	import flash.ui.Keyboard;
-
+	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
 	import starling.events.KeyboardEvent;
 
 	/**

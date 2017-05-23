@@ -7,6 +7,11 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.controls.supportClasses
 {
+	import flash.errors.IllegalOperationError;
+	import flash.utils.getDefinitionByName;
+	
+	import away3d.events.Event;
+	
 	import feathers.controls.AutoSizeMode;
 	import feathers.controls.IScreen;
 	import feathers.core.FeathersControl;
@@ -15,15 +20,11 @@ package feathers.controls.supportClasses
 	import feathers.core.IValidating;
 	import feathers.events.FeathersEventType;
 	import feathers.utils.skins.resetFluidChildDimensionsForMeasurement;
-
-	import flash.errors.IllegalOperationError;
-	import flash.utils.getDefinitionByName;
-
+	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 	import starling.display.Quad;
 	import starling.errors.AbstractMethodError;
-	import starling.events.Event;
 
 	/**
 	 * Dispatched when the active screen changes.
@@ -43,9 +44,9 @@ package feathers.controls.supportClasses
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.CHANGE
+	 * @eventType away3d.events.Event.CHANGE
 	 */
-	[Event(name="change",type="starling.events.Event")]
+	[Event(name="change",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the current screen is removed and there is no active
@@ -68,7 +69,7 @@ package feathers.controls.supportClasses
 	 *
 	 * @eventType feathers.events.FeathersEventType.CLEAR
 	 */
-	[Event(name="clear",type="starling.events.Event")]
+	[Event(name="clear",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the transition between screens begins.
@@ -90,7 +91,7 @@ package feathers.controls.supportClasses
 	 *
 	 * @eventType feathers.events.FeathersEventType.TRANSITION_START
 	 */
-	[Event(name="transitionStart",type="starling.events.Event")]
+	[Event(name="transitionStart",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the transition between screens has completed.
@@ -112,7 +113,7 @@ package feathers.controls.supportClasses
 	 *
 	 * @eventType feathers.events.FeathersEventType.TRANSITION_COMPLETE
 	 */
-	[Event(name="transitionComplete",type="starling.events.Event")]
+	[Event(name="transitionComplete",type="away3d.events.Event")]
 
 	/**
 	 * A base class for screen navigator components that isn't meant to be

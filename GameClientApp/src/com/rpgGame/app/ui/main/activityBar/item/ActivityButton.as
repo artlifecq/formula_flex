@@ -1,6 +1,7 @@
 ﻿package com.rpgGame.app.ui.main.activityBar.item
 {
     import org.mokylin.skin.mainui.activityBar.ActivityButtonSkin;
+    
     import starling.display.DisplayObject;
 
     public class ActivityButton extends ActivityButtonBase 
@@ -32,7 +33,7 @@
 
         override protected function onTouchTarget(target:DisplayObject):void
         {
-            var _local2 = this;
+            var _local2:ActivityButtonBase = this;
             super.onTouchTarget(target);
             switch (target)
             {

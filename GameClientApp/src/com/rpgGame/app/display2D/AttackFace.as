@@ -10,7 +10,6 @@ package com.rpgGame.app.display2D
 	
 	import starling.display.Image;
 	import starling.display.Sprite;
-	import starling.events.Event;
 	import starling.textures.IStarlingTexture;
 	
 	/**

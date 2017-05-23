@@ -26,7 +26,7 @@ package com.rpgGame.app.ui.main.shortcut
 	import starling.animation.Transitions;
 	import starling.core.Starling;
 	import starling.display.Image;
-	import starling.events.Event;
+	import away3d.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;

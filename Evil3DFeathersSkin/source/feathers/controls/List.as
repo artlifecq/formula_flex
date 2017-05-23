@@ -10,6 +10,8 @@ package feathers.controls
 	import flash.geom.Point;
 	import flash.ui.Keyboard;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.controls.supportClasses.ListDataViewPort;
@@ -26,7 +28,6 @@ package feathers.controls
 	import feathers.skins.IStyleProvider;
 	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
 	import starling.events.KeyboardEvent;
 	import starling.utils.Pool;
 	
@@ -50,9 +51,9 @@ package feathers.controls
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.CHANGE
+	 * @eventType away3d.events.Event.CHANGE
 	 */
-	[Event(name="change",type="starling.events.Event")]
+	[Event(name="change",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the the user taps or clicks an item renderer in the list.
@@ -75,9 +76,9 @@ package feathers.controls
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.TRIGGERED
+	 * @eventType away3d.events.Event.TRIGGERED
 	 */
-	[Event(name="triggered",type="starling.events.Event")]
+	[Event(name="triggered",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when an item renderer is added to the list. When the layout is
@@ -102,7 +103,7 @@ package feathers.controls
 	 *
 	 * @eventType feathers.events.FeathersEventType.RENDERER_ADD
 	 */
-	[Event(name="rendererAdd",type="starling.events.Event")]
+	[Event(name="rendererAdd",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when an item renderer is removed from the list. When the layout is
@@ -127,7 +128,7 @@ package feathers.controls
 	 *
 	 * @eventType feathers.events.FeathersEventType.RENDERER_REMOVE
 	 */
-	[Event(name="rendererRemove",type="starling.events.Event")]
+	[Event(name="rendererRemove",type="away3d.events.Event")]
 
 	/**
 	 * Displays a one-dimensional list of items. Supports scrolling, custom

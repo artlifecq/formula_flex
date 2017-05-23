@@ -34,7 +34,7 @@ package starling.core
     import starling.animation.Juggler;
     import starling.display.DisplayObject;
     import starling.display.Stage;
-    import starling.events.EventDispatcher;
+    import away3d.events.EventDispatcher;
     import starling.events.ResizeEvent;
     import starling.events.TouchPhase;
     import starling.events.TouchProcessor;
@@ -44,17 +44,17 @@ package starling.core
     import starling.utils.SystemUtil;
 
     /** Dispatched when a new render context is created. The 'data' property references the context. */
-    [Event(name="context3DCreate", type="starling.events.Event")]
+    [Event(name="context3DCreate", type="away3d.events.Event")]
     
     /** Dispatched when the root class has been created. The 'data' property references that object. */
-    [Event(name="rootCreated", type="starling.events.Event")]
+    [Event(name="rootCreated", type="away3d.events.Event")]
     
     /** Dispatched when a fatal error is encountered. The 'data' property contains an error string. */
-    [Event(name="fatalError", type="starling.events.Event")]
+    [Event(name="fatalError", type="away3d.events.Event")]
 
     /** Dispatched when the display list is about to be rendered. This event provides the last
      *  opportunity to make changes before the display list is rendered. */
-    [Event(name="render", type="starling.events.Event")]
+    [Event(name="render", type="away3d.events.Event")]
 
     /** The Starling class represents the core of the Starling framework.
      *
@@ -347,7 +347,7 @@ package starling.core
                 if (_root == null) throw new Error("Invalid root class: " + _rootClass);
                 _stage.addChildAt(_root, 0);
 
-                dispatchEventWith(starling.events.Event.ROOT_CREATED, false, _root);
+                dispatchEventWith(away3d.events.Event.ROOT_CREATED, false, _root);
             }
         }
 
@@ -406,7 +406,7 @@ package starling.core
 
 			_stage3DProxy.clearGPUStatus();
 			
-            dispatchEventWith(starling.events.Event.RENDER);
+            dispatchEventWith(away3d.events.Event.RENDER);
 
             var scaleX:Number = _viewPort.width  / _stage3DProxy.width;
             var scaleY:Number = _viewPort.height / _stage3DProxy.height;
@@ -773,7 +773,7 @@ package starling.core
             if (context == null)
             {
                 // Starling is not yet ready - we postpone this until it's initialized.
-                addEventListener(starling.events.Event.ROOT_CREATED, onRootCreated);
+                addEventListener(away3d.events.Event.ROOT_CREATED, onRootCreated);
             }
             else
             {
@@ -802,7 +802,7 @@ package starling.core
             function onRootCreated():void
             {
                 if (_showStats) showStatsAt(horizontalAlign, verticalAlign, scale);
-                removeEventListener(starling.events.Event.ROOT_CREATED, onRootCreated);
+                removeEventListener(away3d.events.Event.ROOT_CREATED, onRootCreated);
             }
         }
         

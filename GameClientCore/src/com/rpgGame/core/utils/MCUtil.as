@@ -8,9 +8,6 @@ package  com.rpgGame.core.utils
 	import flash.utils.setInterval;
 	
 	import feathers.controls.Label;
-	import feathers.controls.List;
-	
-	import org.mokylin.skin.component.list.ListSkin1;
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;

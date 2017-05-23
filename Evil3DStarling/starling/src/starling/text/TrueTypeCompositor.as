@@ -17,6 +17,7 @@ package starling.text
     import starling.display.MeshBatch;
     import starling.display.Quad;
     import starling.textures.IStarlingTexture;
+    import starling.textures.DynamicTextTextureManager;
     import starling.textures.TextureFactory;
     import starling.textures.TextureHelper;
     import starling.utils.Align;
@@ -36,6 +37,8 @@ package starling.text
         private static var sNativeTextField:flash.text.TextField = new flash.text.TextField();
         private static var sNativeFormat:flash.text.TextFormat = new flash.text.TextFormat();
 
+		private var _enableTextBatch : Boolean;
+		
         /** Creates a new TrueTypeCompositor instance. */
         public function TrueTypeCompositor()
         { 
@@ -46,7 +49,15 @@ package starling.text
         /** @inheritDoc */
         public function dispose():void
         {}
-
+		
+		public function get enableTextBatch():Boolean {
+			return _enableTextBatch;
+		}
+		
+		public function set enableTextBatch(value:Boolean):void {
+			_enableTextBatch = value;
+		}
+		
         /** @inheritDoc */
         public function fillMeshBatch(meshBatch:MeshBatch, width:Number, height:Number, text:String,
                                       format:TextFormat, options:TextOptions=null):void
@@ -56,9 +67,14 @@ package starling.text
             var texture:IStarlingTexture;
             var textureFormat:String = options.textureFormat;
             var bitmapData:BitmapDataEx = renderText(width, height, text, format, options);
-
-            texture = TextureFactory.fromBitmapData(bitmapData, false, false);
-
+			
+			if (_enableTextBatch) {
+				texture = DynamicTextTextureManager.instance.createSubTexture(format.toString(), bitmapData, true);
+			} 
+			if (texture == null) {
+				texture = TextureFactory.fromBitmapData(bitmapData, false, false);
+			}
+			
             sHelperQuad.texture = texture;
             sHelperQuad.readjustSize();
 

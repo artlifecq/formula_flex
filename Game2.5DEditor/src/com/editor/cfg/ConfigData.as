@@ -27,6 +27,9 @@ package com.editor.cfg
 		private var _id : int = 0;
 		private var _name : String = "";
 		public var tabelName : String = "";
+		/**
+		 * 表的key字段 
+		 */		
 		public var majorKey : String = "";
 		private var _properties : Dictionary;
 		private var _priorityOrderProperties : Array;

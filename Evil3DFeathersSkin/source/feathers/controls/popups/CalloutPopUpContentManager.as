@@ -7,13 +7,14 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.controls.popups
 {
-	import feathers.controls.Callout;
-
 	import flash.errors.IllegalOperationError;
-
+	
+	import away3d.events.Event;
+	import away3d.events.EventDispatcher;
+	
+	import feathers.controls.Callout;
+	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
-	import starling.events.EventDispatcher;
 
 	/**
 	 * Dispatched when the pop-up content opens.
@@ -33,9 +34,9 @@ package feathers.controls.popups
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.OPEN
+	 * @eventType away3d.events.Event.OPEN
 	 */
-	[Event(name="open",type="starling.events.Event")]
+	[Event(name="open",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the pop-up content closes.
@@ -55,9 +56,9 @@ package feathers.controls.popups
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.CLOSE
+	 * @eventType away3d.events.Event.CLOSE
 	 */
-	[Event(name="close",type="starling.events.Event")]
+	[Event(name="close",type="away3d.events.Event")]
 
 	/**
 	 * Displays pop-up content (such as the List in a PickerList) in a Callout.

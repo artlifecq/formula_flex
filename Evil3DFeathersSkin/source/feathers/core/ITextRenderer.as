@@ -57,5 +57,14 @@ package feathers.core
 		 * possible).
 		 */
 		function measureText(result:Point = null):Point;
+		
+		function get enableTextBatch() : Boolean;
+		
+		/**
+		 * 是否启用文字动态合并 
+		 * @param value
+		 * 
+		 */		
+		function set enableTextBatch(value : Boolean) : void;
 	}
 }

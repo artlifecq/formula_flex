@@ -7,7 +7,7 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.dragDrop
 {
-	import starling.events.Event;
+	import away3d.events.Event;
 
 	/**
 	 * Dispatched when the drag and drop manager begins the drag.

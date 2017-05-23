@@ -9,10 +9,10 @@ package feathers.events
 {
 	/**
 	 * Event <code>type</code> constants for collections. This class is
-	 * not a subclass of <code>starling.events.Event</code> because these
+	 * not a subclass of <code>away3d.events.Event</code> because these
 	 * constants are meant to be used with <code>dispatchEventWith()</code> and
 	 * take advantage of the Starling's event object pooling. The object passed
-	 * to an event listener will be of type <code>starling.events.Event</code>.
+	 * to an event listener will be of type <code>away3d.events.Event</code>.
 	 *
 	 * <listing version="3.0">
 	 * function listener( event:Event ):void

@@ -185,18 +185,18 @@ package starling.textures
          */
         public function drawBundled(drawingBlock:Function, antiAliasing:int=0):void
         {
+			Starling.painter.nextFrame();
             renderBundled(drawingBlock, null, null, 1.0, antiAliasing);
+			Starling.painter.finishFrame();
         }
         
         private function render(object:DisplayObject, matrix:Matrix=null, alpha:Number=1.0):void
         {
             var painter:Painter = Starling.painter;
             var state:RenderState = painter.state;
-            var wasCacheEnabled:Boolean = painter.cacheEnabled;
             var filter:FragmentFilter = object.filter;
             var mask:DisplayObject = object.mask;
 
-            painter.cacheEnabled = false;
             painter.pushState();
 
             state.alpha = object.alpha * alpha;
@@ -215,7 +215,6 @@ package starling.textures
             if (mask)   painter.eraseMask(mask);
 
             painter.popState();
-            painter.cacheEnabled = wasCacheEnabled;
         }
         
         private function renderBundled(renderBlock:Function, object:DisplayObject=null,

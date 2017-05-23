@@ -312,7 +312,7 @@ package com.rpgGame.app.manager.shell
 					render.visible = true;
 					break;
 				case RenderUnitType.BODY:
-					render.compositeAMesh.layerType = layerType;
+					render.compositeMesh.layerType = layerType;
 					break;
 			}
 		}
@@ -329,8 +329,8 @@ package com.rpgGame.app.manager.shell
 					render.visible = false;
 					break;
 				case RenderUnitType.BODY:
-					layerType = render.compositeAMesh.layerType;
-					render.compositeAMesh.layerType = 0;
+					layerType = render.compositeMesh.layerType;
+					render.compositeMesh.layerType = 0;
 					break;
 			}
 		}

@@ -15,7 +15,7 @@ package com.rpgGame.appModule.shop.backpackShop
 	import org.mokylin.skin.app.beibao.ShangDian_Skin;
 	
 	import starling.display.Sprite;
-	import starling.events.Event;
+	import away3d.events.Event;
 
 	public class BackpackShopView extends Sprite
 	{
