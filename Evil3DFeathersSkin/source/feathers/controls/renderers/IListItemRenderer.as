@@ -30,9 +30,9 @@ package feathers.controls.renderers
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.TRIGGERED
+	 * @eventType away3d.events.Event.TRIGGERED
 	 */
-	[Event(name="triggered",type="starling.events.Event")]
+	[Event(name="triggered",type="away3d.events.Event")]
 
 	/**
 	 * Interface to implement a renderer for a list item.

@@ -39,7 +39,7 @@ package feathers.controls
 	import starling.display.Image;
 	import starling.display.Quad;
 	import starling.events.EnterFrameEvent;
-	import starling.events.Event;
+	import away3d.events.Event;
 	import starling.textures.IStarlingTexture;
 	import starling.textures.TextureFactory;
 	import starling.utils.RectangleUtil;
@@ -65,9 +65,9 @@ package feathers.controls
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.COMPLETE
+	 * @eventType away3d.events.Event.COMPLETE
 	 */
-	[Event(name="complete",type="starling.events.Event")]
+	[Event(name="complete",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched periodically as the source loads, if the source is a URL. This
@@ -91,7 +91,7 @@ package feathers.controls
 	 *
 	 * @eventType feathers.events.FeathersEventType.PROGRESS
 	 */
-	[Event(name="progress",type="starling.events.Event")]
+	[Event(name="progress",type="away3d.events.Event")]
 
 	/**
 	 * DEPRECATED: Replaced by <code>Event.IO_ERROR</code> and
@@ -107,7 +107,7 @@ package feathers.controls
 	 * @see #event:ioError
 	 * @see #event:securityError
 	 */
-	[Event(name="error",type="starling.events.Event")]
+	[Event(name="error",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched if an IO error occurs while loading the source content.
@@ -128,9 +128,9 @@ package feathers.controls
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.IO_ERROR
+	 * @eventType away3d.events.Event.IO_ERROR
 	 */
-	[Event(name="ioError",type="starling.events.Event")]
+	[Event(name="ioError",type="	away3d.events.Event")]
 
 	/**
 	 * Dispatched if a security error occurs while loading the source content.
@@ -151,9 +151,9 @@ package feathers.controls
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.SECURITY_ERROR
+	 * @eventType away3d.events.Event.SECURITY_ERROR
 	 */
-	[Event(name="securityError",type="starling.events.Event")]
+	[Event(name="securityError",type="away3d.events.Event")]
 
 	/**
 	 * Displays an image, either from an existing <code>IStarlingTexture</code> object or
@@ -1903,7 +1903,7 @@ package feathers.controls
 				this._isRestoringTexture = false;
 				this._isLoaded = true;
 				this.refreshCurrentTexture();
-				this.dispatchEventWith(starling.events.Event.COMPLETE);
+				this.dispatchEventWith(away3d.events.Event.COMPLETE);
 				return true;
 			}
 			return false;
@@ -1983,7 +1983,7 @@ package feathers.controls
 			this._isRestoringTexture = false;
 			this._isLoaded = true;
 			this.invalidate(INVALIDATION_FLAG_DATA);
-			this.dispatchEventWith(starling.events.Event.COMPLETE);
+			this.dispatchEventWith(away3d.events.Event.COMPLETE);
 		}
 
 		/**
@@ -2039,7 +2039,7 @@ package feathers.controls
 			this._isRestoringTexture = false;
 			this._isLoaded = true;
 			this.invalidate(INVALIDATION_FLAG_DATA);
-			this.dispatchEventWith(starling.events.Event.COMPLETE);
+			this.dispatchEventWith(away3d.events.Event.COMPLETE);
 		}
 
 		/**
@@ -2059,7 +2059,7 @@ package feathers.controls
 			{
 				throw new IllegalOperationError("Cannot add loader to delayed texture queue more than once.");
 			}
-			this.addEventListener(starling.events.Event.REMOVED_FROM_STAGE, imageLoader_removedFromStageHandler);
+			this.addEventListener(away3d.events.Event.REMOVED_FROM_STAGE, imageLoader_removedFromStageHandler);
 			this._isInTextureQueue = true;
 			if(textureQueueTail)
 			{
@@ -2089,7 +2089,7 @@ package feathers.controls
 			this._textureQueuePrevious = null;
 			this._textureQueueNext = null;
 			this._isInTextureQueue = false;
-			this.removeEventListener(starling.events.Event.REMOVED_FROM_STAGE, imageLoader_removedFromStageHandler);
+			this.removeEventListener(away3d.events.Event.REMOVED_FROM_STAGE, imageLoader_removedFromStageHandler);
 			this.removeEventListener(EnterFrameEvent.ENTER_FRAME, processTextureQueue_enterFrameHandler);
 			if(previous)
 			{
@@ -2184,14 +2184,14 @@ package feathers.controls
 				otherLoader._textureFormat = format;
 				otherLoader._scaleFactor = scaleFactor;
 				otherLoader.validate();
-				otherLoader.addEventListener(starling.events.Event.COMPLETE, onRestore_onComplete);
+				otherLoader.addEventListener(away3d.events.Event.COMPLETE, onRestore_onComplete);
 			};
 		}
 
 		/**
 		 * @private
 		 */
-		protected function onRestore_onComplete(event:starling.events.Event):void
+		protected function onRestore_onComplete(event:away3d.events.Event):void
 		{
 			var otherLoader:ImageLoader = ImageLoader(event.currentTarget);
 			otherLoader._isTextureOwner = false;
@@ -2227,7 +2227,7 @@ package feathers.controls
 		/**
 		 * @private
 		 */
-		protected function imageLoader_removedFromStageHandler(event:starling.events.Event):void
+		protected function imageLoader_removedFromStageHandler(event:away3d.events.Event):void
 		{
 			if(this._isInTextureQueue)
 			{
@@ -2286,7 +2286,7 @@ package feathers.controls
 			this.cleanupTexture();
 			this.invalidate(INVALIDATION_FLAG_DATA);
 			this.dispatchEventWith(FeathersEventType.ERROR, false, event);
-			this.dispatchEventWith(starling.events.Event.IO_ERROR, false, event);
+			this.dispatchEventWith(away3d.events.Event.IO_ERROR, false, event);
 		}
 
 		/**
@@ -2298,7 +2298,7 @@ package feathers.controls
 			this.cleanupTexture();
 			this.invalidate(INVALIDATION_FLAG_DATA);
 			this.dispatchEventWith(FeathersEventType.ERROR, false, event);
-			this.dispatchEventWith(starling.events.Event.SECURITY_ERROR, false, event);
+			this.dispatchEventWith(away3d.events.Event.SECURITY_ERROR, false, event);
 		}
 
 		/**
@@ -2345,7 +2345,7 @@ package feathers.controls
 			this.cleanupTexture();
 			this.invalidate(INVALIDATION_FLAG_DATA);
 			this.dispatchEventWith(FeathersEventType.ERROR, false, event);
-			this.dispatchEventWith(starling.events.Event.IO_ERROR, false, event);
+			this.dispatchEventWith(away3d.events.Event.IO_ERROR, false, event);
 		}
 
 		/**
@@ -2357,7 +2357,7 @@ package feathers.controls
 			this.cleanupTexture();
 			this.invalidate(INVALIDATION_FLAG_DATA);
 			this.dispatchEventWith(FeathersEventType.ERROR, false, event);
-			this.dispatchEventWith(starling.events.Event.SECURITY_ERROR, false, event);
+			this.dispatchEventWith(away3d.events.Event.SECURITY_ERROR, false, event);
 		}
 	}
 }

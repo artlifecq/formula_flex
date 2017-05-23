@@ -9,6 +9,8 @@ package feathers.controls
 {
 	import flash.geom.Point;
 	
+	import away3d.events.Event;
+	
 	import feathers.core.FeathersControl;
 	import feathers.core.IFeathersControl;
 	import feathers.core.IMeasureDisplayObject;
@@ -21,11 +23,9 @@ package feathers.controls
 	import feathers.utils.touch.TapToTrigger;
 	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
-	import starling.rendering.LayerBatchID;
 
 	/**
 	 * Dispatched when the the user taps or clicks the button. The touch must
@@ -48,9 +48,9 @@ package feathers.controls
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.TRIGGERED
+	 * @eventType away3d.events.Event.TRIGGERED
 	 */
-	[Event(name="triggered",type="starling.events.Event")]
+	[Event(name="triggered",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the display object's state changes.
@@ -74,7 +74,7 @@ package feathers.controls
 	 *
 	 * @see #currentState
 	 */
-	[Event(name="stateChange",type="starling.events.Event")]
+	[Event(name="stateChange",type="away3d.events.Event")]
 	
 	/**
 	 * A simple button control with states, but no content, that is useful for

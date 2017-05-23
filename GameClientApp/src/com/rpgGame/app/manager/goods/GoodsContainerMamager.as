@@ -8,15 +8,12 @@ package com.rpgGame.app.manager.goods
 	import com.rpgGame.app.manager.mount.MountIntensifyManager;
 	import com.rpgGame.app.manager.mount.MountSlotManager;
 	import com.rpgGame.app.manager.mount.MountSpellsManager;
-	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.sender.ItemSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.core.events.ItemEvent;
-	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.clientConfig.Q_item;
-	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.enum.item.ItemChangeType;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
@@ -25,7 +22,6 @@ package com.rpgGame.app.manager.goods
 	import com.rpgGame.coreData.info.item.UpgradeItemData;
 	import com.rpgGame.coreData.info.item.UpgradeItemInfo;
 	import com.rpgGame.coreData.info.item.UpgradeItemListVo;
-	import com.rpgGame.coreData.info.shop.ShopItemData;
 	import com.rpgGame.coreData.info.upgrade.UpgradeGoodsInfo;
 	import com.rpgGame.coreData.info.upgrade.UpgradeProtoInfo;
 	import com.rpgGame.coreData.lang.LangAlertInfo;

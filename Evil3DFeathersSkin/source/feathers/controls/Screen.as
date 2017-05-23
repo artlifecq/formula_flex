@@ -15,7 +15,7 @@ package feathers.controls
 	import flash.ui.Keyboard;
 
 	import starling.core.Starling;
-	import starling.events.Event;
+	import away3d.events.Event;
 
 	/**
 	 * Dispatched when the transition animation begins as the screen is shown
@@ -38,7 +38,7 @@ package feathers.controls
 	 *
 	 * @eventType feathers.events.FeathersEventType.TRANSITION_IN_START
 	 */
-	[Event(name="transitionInStart",type="starling.events.Event")]
+	[Event(name="transitionInStart",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the transition animation finishes as the screen is shown
@@ -61,7 +61,7 @@ package feathers.controls
 	 *
 	 * @eventType feathers.events.FeathersEventType.TRANSITION_IN_COMPLETE
 	 */
-	[Event(name="transitionInComplete",type="starling.events.Event")]
+	[Event(name="transitionInComplete",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the transition animation begins as a different screen is
@@ -84,7 +84,7 @@ package feathers.controls
 	 *
 	 * @eventType feathers.events.FeathersEventType.TRANSITION_OUT_START
 	 */
-	[Event(name="transitionOutStart",type="starling.events.Event")]
+	[Event(name="transitionOutStart",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the transition animation finishes as a different screen
@@ -107,7 +107,7 @@ package feathers.controls
 	 *
 	 * @eventType feathers.events.FeathersEventType.TRANSITION_OUT_COMPLETE
 	 */
-	[Event(name="transitionOutComplete",type="starling.events.Event")]
+	[Event(name="transitionOutComplete",type="away3d.events.Event")]
 
 	/**
 	 * A basic screen to be displayed by <code>ScreenNavigator</code>. Provides

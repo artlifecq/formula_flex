@@ -7,15 +7,16 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.core
 {
-	import feathers.events.FeathersEventType;
-
 	import flash.utils.Dictionary;
-
+	
+	import away3d.events.Event;
+	
+	import feathers.events.FeathersEventType;
+	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 	import starling.display.Quad;
 	import starling.display.Stage;
-	import starling.events.Event;
 	import starling.events.ResizeEvent;
 
 	/**

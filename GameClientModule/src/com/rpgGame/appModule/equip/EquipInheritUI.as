@@ -58,7 +58,7 @@ package com.rpgGame.appModule.equip
 	import org.mokylin.skin.app.zhuangbei.qianghua.TitileHead;
 	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
+	import away3d.events.Event;
 	
 	/**
 	 *装备继承

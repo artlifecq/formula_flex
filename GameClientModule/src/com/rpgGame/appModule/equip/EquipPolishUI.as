@@ -66,7 +66,7 @@ package com.rpgGame.appModule.equip
 	import org.mokylin.skin.app.zhuangbei.zuomo.Zuomo_Skin;
 	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
+	import away3d.events.Event;
 	
 	/**
 	 *装备琢磨

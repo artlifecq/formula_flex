@@ -22,7 +22,7 @@ package feathers.controls
 	import flash.globalization.DateTimeStyle;
 	import flash.globalization.LocaleID;
 
-	import starling.events.Event;
+	import away3d.events.Event;
 
 	/**
 	 * Dispatched when the spinner's value changes.
@@ -42,9 +42,9 @@ package feathers.controls
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.CHANGE
+	 * @eventType away3d.events.Event.CHANGE
 	 */
-	[Event(name="change",type="starling.events.Event")]
+	[Event(name="change",type="away3d.events.Event")]
 
 	/**
 	 * A set of <code>SpinnerList</code> components that allow you to select the

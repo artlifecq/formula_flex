@@ -10,9 +10,10 @@
 
 package starling.animation
 {
+    import away3d.events.Event;
+    import away3d.events.EventDispatcher;
+    
     import starling.core.starling_internal;
-    import starling.events.Event;
-    import starling.events.EventDispatcher;
 
     /** A DelayedCall allows you to execute a method after a certain time has passed. Since it 
      *  implements the IAnimatable interface, it can be added to a juggler. In most cases, you 

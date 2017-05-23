@@ -51,6 +51,7 @@ package com.game.engine2D.core
 			return !_bpgParsed;
 		}
 		
+
 //		override public function get isDefaultTexture():Boolean
 //		{
 //			return _bpgParsed;

@@ -200,6 +200,13 @@ package com.editor.manager
 			_currMapName = null;
 		}
 
+		/**
+		 * 进入场景 
+		 * @param mapName
+		 * @param mapData
+		 * @param mapId
+		 * 
+		 */		
 		public function enterScene(mapName : String, mapData : EditorClientMapData, mapId : int = 0) : void
 		{
 			if (_mapId != mapId)

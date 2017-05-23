@@ -11,6 +11,9 @@ package feathers.controls
 	import flash.text.TextFormatAlign;
 	import flash.ui.Keyboard;
 	
+	import away3d.events.Event;
+	import away3d.events.EventDispatcher;
+	
 	import feathers.controls.popups.CalloutPopUpContentManager;
 	import feathers.controls.popups.IPersistentPopUpContentManager;
 	import feathers.controls.popups.IPopUpContentManager;
@@ -28,8 +31,6 @@ package feathers.controls
 	
 	import starling.core.Starling;
 	import starling.display.DisplayObjectContainer;
-	import starling.events.Event;
-	import starling.events.EventDispatcher;
 	import starling.events.KeyboardEvent;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
@@ -53,9 +54,9 @@ package feathers.controls
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.OPEN
+	 * @eventType away3d.events.Event.OPEN
 	 */
-	[Event(name="open",type="starling.events.Event")]
+	[Event(name="open",type="away3d.events.Event")]
 	
 	/**
 	 * Dispatched when the pop-up list is closed.
@@ -75,9 +76,9 @@ package feathers.controls
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.CLOSE
+	 * @eventType away3d.events.Event.CLOSE
 	 */
-	[Event(name="close",type="starling.events.Event")]
+	[Event(name="close",type="away3d.events.Event")]
 	
 	/**
 	 * Dispatched when the selected item changes.
@@ -97,9 +98,9 @@ package feathers.controls
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.CHANGE
+	 * @eventType away3d.events.Event.CHANGE
 	 */
-	[Event(name="change",type="starling.events.Event")]
+	[Event(name="change",type="away3d.events.Event")]
 	
 	/**
 	 * Displays a button that may be triggered to display a pop-up list.

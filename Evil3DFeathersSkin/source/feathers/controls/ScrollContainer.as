@@ -7,8 +7,9 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.controls
 {
+	import away3d.events.Event;
+	
 	import feathers.controls.supportClasses.LayoutViewPort;
-	import feathers.core.IFeathersControl;
 	import feathers.core.IFocusContainer;
 	import feathers.events.FeathersEventType;
 	import feathers.layout.ILayout;
@@ -16,11 +17,10 @@ package feathers.controls
 	import feathers.layout.IVirtualLayout;
 	import feathers.skins.IStyleProvider;
 	import feathers.utils.display.stageToStarling;
-
+	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
-	import starling.events.Event;
 
 	/**
 	 * Dispatched when the container is scrolled.
@@ -40,9 +40,9 @@ package feathers.controls
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.SCROLL
+	 * @eventType away3d.events.Event.SCROLL
 	 */
-	[Event(name="change",type="starling.events.Event")]
+	[Event(name="change",type="away3d.events.Event")]
 
 	/**
 	 * A generic container that supports layout, scrolling, and a background

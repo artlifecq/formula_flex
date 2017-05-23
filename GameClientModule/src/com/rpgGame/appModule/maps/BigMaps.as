@@ -5,17 +5,12 @@ package com.rpgGame.appModule.maps
 	import com.game.engine3D.vo.MapTextureLoader;
 	import com.game.engine3D.vo.SceneMapData;
 	import com.game.engine3D.vo.map.ClientMapData;
-	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.map.MapUnitDataManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.scene.SceneRole;
-
-	import com.rpgGame.app.state.role.RoleStateUtil;
-	import com.rpgGame.core.utils.MCUtil;
-
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.map.MapTeamMemberInfo;

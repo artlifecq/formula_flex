@@ -20,13 +20,12 @@ package starling.textures
     import flash.utils.getTimer;
     
     import away3d.core.managers.Stage3DProxy;
+    import away3d.events.Event;
     import away3d.events.Stage3DEvent;
     import away3d.log.Log;
     import away3d.textures.ATFData;
     import away3d.textures.AsyncTexture2D;
     import away3d.textures.BGRAData;
-    
-    import starling.events.Event;
 
     /** A ConcreteTexture wraps a Stage3D texture object, storing the properties of the texture
      *  and providing utility methods for data upload, etc.

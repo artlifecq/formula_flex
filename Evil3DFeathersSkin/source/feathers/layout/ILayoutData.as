@@ -27,7 +27,7 @@ package feathers.layout
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 */
-	[Event(name="change",type="starling.events.Event")]
+	[Event(name="change",type="away3d.events.Event")]
 
 	/**
 	 * Extra data used by layout algorithms.

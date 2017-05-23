@@ -10,7 +10,7 @@ package
     import starling.display.Button;
     import starling.display.Image;
     import starling.display.Sprite;
-    import starling.events.Event;
+    import away3d.events.Event;
     import starling.events.KeyboardEvent;
     import starling.utils.AssetManager;
 

@@ -15,8 +15,8 @@ package starling.textures
     import flash.geom.Rectangle;
     
     import away3d.core.managers.Stage3DProxy;
+    import away3d.events.Event;
     import away3d.events.EventDispatcher;
-    import away3d.textures.TextureProxyBase;
     
     import starling.core.starling_internal;
 
@@ -135,18 +135,24 @@ package starling.textures
         /** Disposes the parent texture if this texture owns it. */
         public function dispose():void
         {
-			if(_referencedMeshCount > 0)
+			if (_referencedMeshCount > 0)
 				_referencedMeshCount--;
 			
-			if(_isDynamic)
+			if (_isDynamic) {
+				if (hasEventListener(Event.DISPOSED)) {
+					dispatchEventWith(Event.DISPOSED);
+				}
 				return;
+			}
 			
-			if(_referencedMeshCount < 1)
-			{
-				if(!_disposed)
+			if (_referencedMeshCount < 1) {
+				if (!_disposed) {
 					totalSubTexture--;
-				_disposed = true;
-				if (_ownsParent) _parent.dispose();
+					if (_ownsParent) {
+						_parent.dispose();
+					}
+					_disposed = true;
+				}
 			}
         }
 		

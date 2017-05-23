@@ -7,6 +7,13 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.controls
 {
+	import flash.events.KeyboardEvent;
+	import flash.ui.Keyboard;
+	import flash.utils.getTimer;
+	
+	import away3d.events.Event;
+	import away3d.events.EventDispatcher;
+	
 	import feathers.controls.popups.DropDownPopUpContentManager;
 	import feathers.controls.popups.IPopUpContentManager;
 	import feathers.core.PropertyProxy;
@@ -15,14 +22,8 @@ package feathers.controls
 	import feathers.events.FeathersEventType;
 	import feathers.skins.IStyleProvider;
 	import feathers.utils.display.stageToStarling;
-
-	import flash.events.KeyboardEvent;
-	import flash.ui.Keyboard;
-	import flash.utils.getTimer;
-
+	
 	import starling.core.Starling;
-	import starling.events.Event;
-	import starling.events.EventDispatcher;
 	import starling.events.KeyboardEvent;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
@@ -46,9 +47,9 @@ package feathers.controls
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.OPEN
+	 * @eventType away3d.events.Event.OPEN
 	 */
-	[Event(name="open",type="starling.events.Event")]
+	[Event(name="open",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the pop-up list is closed.
@@ -68,9 +69,9 @@ package feathers.controls
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.CLOSE
+	 * @eventType away3d.events.Event.CLOSE
 	 */
-	[Event(name="close",type="starling.events.Event")]
+	[Event(name="close",type="away3d.events.Event")]
 
 	/**
 	 * A text input that provides a pop-up list with suggestions as you type.

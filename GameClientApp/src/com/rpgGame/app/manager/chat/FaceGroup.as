@@ -12,7 +12,7 @@ package com.rpgGame.app.manager.chat
 	import org.mokylin.skin.mainui.chat.FaceGroupSkin;
 	
 	import starling.core.Starling;
-	import starling.events.Event;
+	import away3d.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;

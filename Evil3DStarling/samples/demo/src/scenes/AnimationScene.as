@@ -5,7 +5,7 @@ package scenes
     import starling.core.Starling;
     import starling.display.Button;
     import starling.display.Image;
-    import starling.events.Event;
+    import away3d.events.Event;
     import starling.text.TextField;
     import starling.utils.Color;
     import starling.utils.deg2rad;

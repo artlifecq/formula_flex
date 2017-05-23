@@ -67,7 +67,7 @@ package com.rpgGame.appModule.equip
 	import org.mokylin.skin.app.zhuangbei.qianghua.Zhuangbei_QianghuaSkin;
 	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
+	import away3d.events.Event;
 	
 	/**
 	 *装备强化

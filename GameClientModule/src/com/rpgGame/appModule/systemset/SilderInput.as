@@ -4,8 +4,8 @@ package com.rpgGame.appModule.systemset
 	import feathers.controls.TextInput;
 	import feathers.events.FeathersEventType;
 	
-	import starling.events.Event;
-	import starling.events.EventDispatcher;
+	import away3d.events.Event;
+	import away3d.events.EventDispatcher;
 
 	public class SilderInput extends EventDispatcher
 	{

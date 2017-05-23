@@ -10,11 +10,16 @@
 
 package starling.events
 {
+    import away3d.arcane;
+    import away3d.events.Event;
+    import away3d.events.EventDispatcher;
+    
     import starling.core.starling_internal;
     import starling.display.DisplayObject;
 
     use namespace starling_internal;
-    
+	use namespace arcane;
+	
     /** A TouchEvent is triggered either by touch or mouse input.  
      *  
      *  <p>In Starling, both touch events and mouse events are handled through the same class: 
@@ -185,7 +190,6 @@ package starling.events
                 var chainLength:int = bubbles ? chain.length : 1;
                 var previousTarget:EventDispatcher = target;
                 setTarget(chain[0] as EventDispatcher);
-                
                 for (var i:int=0; i<chainLength; ++i)
                 {
                     var chainElement:EventDispatcher = chain[i] as EventDispatcher;
@@ -196,7 +200,6 @@ package starling.events
                         if (stopPropagation) break;
                     }
                 }
-                
                 setTarget(previousTarget);
             }
         }
