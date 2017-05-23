@@ -21,7 +21,7 @@ package com.rpgGame.app.manager.role
 	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.data.long;
 	
-	import starling.events.Event;
+	import away3d.events.Event;
 
 	/**
 	 * 掉落物管理器 

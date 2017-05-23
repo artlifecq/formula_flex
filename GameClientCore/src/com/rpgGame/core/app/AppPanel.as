@@ -20,8 +20,8 @@ package com.rpgGame.core.app
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 	import starling.display.Sprite;
-	import starling.events.Event;
-	import starling.events.EventDispatcher;
+	import away3d.events.Event;
+	import away3d.events.EventDispatcher;
 
 	/**
 	 *   app面板

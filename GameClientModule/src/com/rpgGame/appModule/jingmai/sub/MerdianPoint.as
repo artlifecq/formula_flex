@@ -35,6 +35,7 @@ package com.rpgGame.appModule.jingmai.sub
 	import org.mokylin.skin.app.beibao.mc.UIMovieClipBianshi_guang;
 	
 	import starling.display.DisplayObject;
+	import away3d.events.Event;
 	import starling.filters.FragmentFilter;
 
 	public class MerdianPoint implements IStoneSelector

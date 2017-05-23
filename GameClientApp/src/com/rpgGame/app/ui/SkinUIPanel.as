@@ -17,6 +17,7 @@ package com.rpgGame.app.ui
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
+	import away3d.events.Event;
 
 	/**
 	 *基于skinState配置的app面板基类,
@@ -315,10 +316,10 @@ package com.rpgGame.app.ui
 		public function hide() : void
 		{
 			preHide();
-			appinfo ? dispatchEventWith(starling.events.Event.CLOSE) : this.removeFromParent();
+			appinfo ? dispatchEventWith(Event.CLOSE) : this.removeFromParent();
 		}
 		/**
-		 *hide里面缓动remove self,可以在这个函数里面先隐藏3d动画
+		 *hide里面缓动remove self,可以在这个函数里面先隐藏3d动画//
 		 */	
 		public function preHide() : void
 		{

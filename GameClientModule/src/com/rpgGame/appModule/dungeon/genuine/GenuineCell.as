@@ -14,7 +14,7 @@ package com.rpgGame.appModule.dungeon.genuine
 	
 	import org.mokylin.skin.app.fuben.FuBenItem_Zhenqi;
 	
-	import starling.events.Event;
+	import away3d.events.Event;
 	
 	public class GenuineCell extends DefaultListItemRenderer
 	{

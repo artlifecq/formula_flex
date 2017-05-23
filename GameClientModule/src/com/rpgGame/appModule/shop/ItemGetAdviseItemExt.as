@@ -5,7 +5,7 @@ package com.rpgGame.appModule.shop
 	
 	import org.mokylin.skin.app.zuoqi.huoquItemSkin;
 	
-	import starling.events.Event;
+	import away3d.events.Event;
 	
 	public class ItemGetAdviseItemExt extends SkinUI
 	{

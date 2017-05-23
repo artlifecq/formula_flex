@@ -60,7 +60,7 @@ package com.rpgGame.appModule.xinfa
 	import org.mokylin.skin.app.beibao.Xinfa.btnGruop_Skin;
 	import org.mokylin.skin.app.beibao.Xinfa.xinfa_Skin;
 	
-	import starling.events.Event;
+	import away3d.events.Event;
 
 	public class XinFaView
 	{

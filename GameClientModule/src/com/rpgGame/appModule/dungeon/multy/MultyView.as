@@ -32,7 +32,7 @@ package com.rpgGame.appModule.dungeon.multy
 	import starling.display.DisplayObject;
 	import starling.display.Shape;
 	import starling.display.Sprite;
-	import starling.events.Event;
+	import away3d.events.Event;
 
 	public class MultyView extends SkinUIModePanel
 	{

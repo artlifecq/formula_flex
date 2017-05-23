@@ -12,7 +12,7 @@ package com.rpgGame.appModule.skill
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
-	import starling.events.Event;
+	import away3d.events.Event;
 	
 	/**
 	 *武学面板 

@@ -65,7 +65,7 @@ package com.rpgGame.appModule.role
 	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
-	import starling.events.Event;
+	import away3d.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
