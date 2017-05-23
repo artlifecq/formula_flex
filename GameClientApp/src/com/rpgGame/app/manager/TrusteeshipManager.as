@@ -57,6 +57,7 @@ package com.rpgGame.app.manager
 		private var _isLeftDown:Boolean=false;
 		private var _stateMachine : AIStateMachine;
 		private var _targetRoles : Vector.<SceneRole>;
+		private var _findDist:int=0;
 		private var ACTORTIME:int=4;
 		public function TrusteeshipManager()
 		{
@@ -416,6 +417,18 @@ package com.rpgGame.app.manager
 		{
 			_isLeftDown = value;
 		}
+		/**寻怪范围*/
+		public function get findDist():int
+		{
+			return _findDist;
+		}
+		
+		public function set findDist(value:int):void
+		{
+			_findDist = value;
+		}
+		
+		
 		
 		
 		private var testStopKey:Boolean=false;
@@ -423,6 +436,8 @@ package com.rpgGame.app.manager
 		{
 			testStopKey=!testStopKey;
 		}
+
+		
 		
 
 	}
