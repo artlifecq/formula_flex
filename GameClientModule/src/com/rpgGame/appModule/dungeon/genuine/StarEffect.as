@@ -8,7 +8,7 @@ package com.rpgGame.appModule.dungeon.genuine
 	import feathers.controls.UIAsset;
 	
 	import starling.display.DisplayObjectContainer;
-	import starling.events.Event;
+	import away3d.events.Event;
 
 	public class StarEffect extends Inter3DContainer
 	{

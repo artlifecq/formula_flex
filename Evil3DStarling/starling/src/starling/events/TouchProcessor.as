@@ -14,11 +14,15 @@ package starling.events
     import flash.geom.Point;
     import flash.utils.getDefinitionByName;
     
+    import away3d.arcane;
     import away3d.core.managers.Stage3DProxy;
+    import away3d.events.Event;
     
     import starling.core.Starling;
     import starling.display.DisplayObject;
     import starling.display.Stage;
+	
+	use namespace arcane;
 
     /** The TouchProcessor is used to convert mouse and touch events of the conventional
      *  Flash stage to Starling's TouchEvents.
@@ -377,7 +381,7 @@ package starling.events
                 if (!Stage3DProxy.getInstance().recoverFromDisposal())
                     createTouchMarker();
                 else
-                    target.addEventListener(starling.events.Event.CONTEXT3D_CREATE, createTouchMarker);
+                    target.addEventListener(away3d.events.Event.CONTEXT3D_CREATE, createTouchMarker);
             }
             else if (!value && _touchMarker)
             {                
@@ -387,7 +391,7 @@ package starling.events
 
             function createTouchMarker():void
             {
-                target.removeEventListener(starling.events.Event.CONTEXT3D_CREATE, createTouchMarker);
+                target.removeEventListener(away3d.events.Event.CONTEXT3D_CREATE, createTouchMarker);
 
                 if (_touchMarker == null)
                 {

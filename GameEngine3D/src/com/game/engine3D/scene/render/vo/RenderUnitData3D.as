@@ -46,7 +46,7 @@ package com.game.engine3D.scene.render.vo
 	{
 		private var _type : String;
 		private var _id : Number;
-		private var _meshElements : Vector.<ObjectContainer3D>;
+		private var _drawElements : Vector.<ObjectContainer3D>;
 		private var _animatorElements : Vector.<CompositeMesh>;
 		private var _baseVirtualElements : Vector.<ObjectContainer3D>;
 		private var _meshes : Vector.<Mesh>;
@@ -110,7 +110,7 @@ package com.game.engine3D.scene.render.vo
 			_sparticleMeshes = new Vector.<SparticleMesh>();
 			_camera3DAnimators = new Vector.<iCamera3DAnimator>();
 			
-			_meshElements = resData.cloneMeshElements();
+			_drawElements = resData.cloneMeshElements();
 			_animatorElements = resData.cloneAnimatorElements();
 			_baseVirtualElements = resData.cloneBaseVirtualElements();
 			
@@ -158,11 +158,11 @@ package com.game.engine3D.scene.render.vo
 				_materialLightPickerMap[materialName] = lightPicker;
 			}
 			
-			if (_meshElements)
+			if (_drawElements)
 			{
-				for each (var meshElement : ObjectContainer3D in _meshElements)
+				for each (var drawElement : ObjectContainer3D in _drawElements)
 				{
-					addRootElement(meshElement);
+					addRootElement(drawElement);
 				}
 			}
 			if (_animatorElements)
@@ -432,15 +432,15 @@ package com.game.engine3D.scene.render.vo
 					}
 				}
 			}
-			if (_meshElements)
+			if (_drawElements)
 			{
-				for each (var meshElement : ObjectContainer3D in _meshElements)
+				for each (var drawElement : ObjectContainer3D in _drawElements)
 				{
-					if (meshElement.name == name)
+					if (drawElement.name == name)
 					{
-						return meshElement;
+						return drawElement;
 					}
-					child = getChild(meshElement, name);
+					child = getChild(drawElement, name);
 					if (child)
 					{
 						return child;
@@ -510,21 +510,21 @@ package com.game.engine3D.scene.render.vo
 					}
 				}
 			}
-			if (_meshElements)
+			if (_drawElements)
 			{
-				for each (var meshElement : Mesh in _meshElements)
+				for each (var drawElement : Mesh in _drawElements)
 				{
 					animator = null;
-					if (meshElement is IAnimatorOwner)
+					if (drawElement is IAnimatorOwner)
 					{
-						animator = (meshElement as IAnimatorOwner).animator;
+						animator = (drawElement as IAnimatorOwner).animator;
 					}
 					if (animator is SkeletonAnimator)
 					{
-						index = meshElement.getBoneIndex(name);
+						index = drawElement.getBoneIndex(name);
 						if (index >= 0)
 						{
-							bone = meshElement.getBone(index);
+							bone = drawElement.getBone(index);
 							return bone;
 						}
 					}
@@ -533,9 +533,9 @@ package com.game.engine3D.scene.render.vo
 			return null;
 		}
 		
-		public function get meshElements() : Vector.<ObjectContainer3D>
+		public function get drawElements() : Vector.<ObjectContainer3D>
 		{
-			return _meshElements;
+			return _drawElements;
 		}
 		
 		public function get effectMethods() : Vector.<EffectMethodBase>
@@ -592,12 +592,12 @@ package com.game.engine3D.scene.render.vo
 						return animatElement.animator.animationSet.hasAnimation(name);
 				}
 			}
-			if (_meshElements)
+			if (_drawElements)
 			{
-				for each (var meshElement : ObjectContainer3D in _meshElements)
+				for each (var drawElement : ObjectContainer3D in _drawElements)
 				{
-					if (meshElement is IAnimatorOwner && (meshElement as IAnimatorOwner).animator && (meshElement as IAnimatorOwner).animator.animationSet)
-						return (meshElement as IAnimatorOwner).animator.animationSet.hasAnimation(name);
+					if (drawElement is IAnimatorOwner && (drawElement as IAnimatorOwner).animator && (drawElement as IAnimatorOwner).animator.animationSet)
+						return (drawElement as IAnimatorOwner).animator.animationSet.hasAnimation(name);
 				}
 			}
 			return false;
@@ -618,13 +618,13 @@ package com.game.engine3D.scene.render.vo
 					}
 				}
 			}
-			if (_meshElements)
+			if (_drawElements)
 			{
-				for each (var meshElement : ObjectContainer3D in _meshElements)
+				for each (var drawElement : ObjectContainer3D in _drawElements)
 				{
-					if (meshElement is IAnimatorOwner && (meshElement as IAnimatorOwner).animator)
+					if (drawElement is IAnimatorOwner && (drawElement as IAnimatorOwner).animator)
 					{
-						animationSet = (meshElement as IAnimatorOwner).animator.animationSet as AnimationSetBase;
+						animationSet = (drawElement as IAnimatorOwner).animator.animationSet as AnimationSetBase;
 						if (animationSet)
 							return animationSet.animations;
 					}
@@ -643,12 +643,12 @@ package com.game.engine3D.scene.render.vo
 						return animatElement.animator.animationSet.getAnimation(name);
 				}
 			}
-			if (_meshElements)
+			if (_drawElements)
 			{
-				for each (var meshElement : ObjectContainer3D in _meshElements)
+				for each (var drawElement : ObjectContainer3D in _drawElements)
 				{
-					if (meshElement is IAnimatorOwner && (meshElement as IAnimatorOwner).animator && (meshElement as IAnimatorOwner).animator.animationSet)
-						return (meshElement as IAnimatorOwner).animator.animationSet.getAnimation(name);
+					if (drawElement is IAnimatorOwner && (drawElement as IAnimatorOwner).animator && (drawElement as IAnimatorOwner).animator.animationSet)
+						return (drawElement as IAnimatorOwner).animator.animationSet.getAnimation(name);
 				}
 			}
 			return null;
@@ -672,17 +672,17 @@ package com.game.engine3D.scene.render.vo
 					}
 				}
 			}
-			if (_meshElements)
+			if (_drawElements)
 			{
-				for each (var meshElement : ObjectContainer3D in _meshElements)
+				for each (var drawElement : ObjectContainer3D in _drawElements)
 				{
-					if (meshElement is IAnimatorOwner && (meshElement as IAnimatorOwner).animator)
+					if (drawElement is IAnimatorOwner && (drawElement as IAnimatorOwner).animator)
 					{
-						if (!(meshElement as IAnimatorOwner).animator.animationSet || !(meshElement as IAnimatorOwner).animator.animationSet.hasAnimation(name))
+						if (!(drawElement as IAnimatorOwner).animator.animationSet || !(drawElement as IAnimatorOwner).animator.animationSet.hasAnimation(name))
 						{
-							return (meshElement as IAnimatorOwner).animator.duration;
+							return (drawElement as IAnimatorOwner).animator.duration;
 						}
-						node = (meshElement as IAnimatorOwner).animator.animationSet.getAnimation(name); // SkeletonClipNode;
+						node = (drawElement as IAnimatorOwner).animator.animationSet.getAnimation(name); // SkeletonClipNode;
 						return node.duration;
 					}
 				}
@@ -708,15 +708,15 @@ package com.game.engine3D.scene.render.vo
 					}
 				}
 			}
-			if (_meshElements)
+			if (_drawElements)
 			{
-				for each (var meshElement : ObjectContainer3D in _meshElements)
+				for each (var drawElement : ObjectContainer3D in _drawElements)
 				{
-					if (meshElement is IAnimatorOwner && (meshElement as IAnimatorOwner).animator)
+					if (drawElement is IAnimatorOwner && (drawElement as IAnimatorOwner).animator)
 					{
-						if (!(meshElement as IAnimatorOwner).animator.animationSet || !(meshElement as IAnimatorOwner).animator.animationSet.hasAnimation(name))
+						if (!(drawElement as IAnimatorOwner).animator.animationSet || !(drawElement as IAnimatorOwner).animator.animationSet.hasAnimation(name))
 							return null;
-						node = (meshElement as IAnimatorOwner).animator.animationSet.getAnimation(name); // SkeletonClipNode;
+						node = (drawElement as IAnimatorOwner).animator.animationSet.getAnimation(name); // SkeletonClipNode;
 						if (node && node.extras && node.extras.hasOwnProperty(fieldName))
 							return node.extras[fieldName];
 						return null;
@@ -1493,19 +1493,19 @@ package com.game.engine3D.scene.render.vo
 				_animatorElements.length = 0;
 				_animatorElements = null;
 			}
-			if (_meshElements)
+			if (_drawElements)
 			{
-				for each (var meshElement : ObjectContainer3D in _meshElements)
+				for each (var drawElement : ObjectContainer3D in _drawElements)
 				{
-					meshElement.hookingJointName = null;
-					if (meshElement.parent)
+					drawElement.hookingJointName = null;
+					if (drawElement.parent)
 					{
-						meshElement.parent.removeChild(meshElement);
+						drawElement.parent.removeChild(drawElement);
 					}
-					meshElement.dispose();
+					drawElement.dispose();
 				}
-				_meshElements.length = 0;
-				_meshElements = null;
+				_drawElements.length = 0;
+				_drawElements = null;
 			}
 			if (_meshes)
 			{

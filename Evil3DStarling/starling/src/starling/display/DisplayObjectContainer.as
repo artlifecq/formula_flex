@@ -16,15 +16,17 @@ package starling.display
     import flash.system.Capabilities;
     import flash.utils.getQualifiedClassName;
     
+    import away3d.arcane;
+    import away3d.events.Event;
+    
     import starling.core.starling_internal;
     import starling.errors.AbstractClassError;
-    import starling.events.Event;
     import starling.filters.FragmentFilter;
-    import starling.rendering.BatchToken;
     import starling.rendering.Painter;
     import starling.utils.MatrixUtil;
 
     use namespace starling_internal;
+	use namespace arcane;
     
     /**
      *  A DisplayObjectContainer represents a collection of display objects.
@@ -76,7 +78,6 @@ package starling.display
 		private static var sHelperMaskPoint:Point = new Point();
         private static var sBroadcastListeners:Vector.<DisplayObject> = new <DisplayObject>[];
         private static var sSortBuffer:Vector.<DisplayObject> = new <DisplayObject>[];
-        private static var sCacheToken:BatchToken = new BatchToken();
         
         // construction
         
@@ -354,10 +355,8 @@ package starling.display
         public override function render(painter:Painter):void
         {
 			var numChildren:int = _children.length;
-            var frameID:uint = painter.frameID;
-			
-            var cacheEnabled:Boolean = frameID !=0;
-            var selfOrParentChanged:Boolean = _lastParentOrSelfChangeFrameID == frameID;
+			if(numChildren==0)
+				return;
 			
 			painter.pushState();
 			
@@ -370,41 +369,18 @@ package starling.display
 					if (i != 0)
 						painter.restoreState();
 					
-                    if (selfOrParentChanged)
-                        child._lastParentOrSelfChangeFrameID = frameID;
+                    var filter:FragmentFilter = child._filter;
+                    var mask:DisplayObject    = child._mask;
 
-                    if (child._lastParentOrSelfChangeFrameID != frameID &&
-                        child._lastChildChangeFrameID != frameID &&
-                        child._tokenFrameID == frameID - 1 && cacheEnabled)
-                    {
-                        painter.fillToken(sCacheToken);
-                        painter.drawFromCache(child._pushToken, child._popToken);
-                        painter.fillToken(child._popToken);
+                    painter.setStateTo(child.transformationMatrix, child.alpha, child.blendMode);
 
-                        child._pushToken.copyFrom(sCacheToken);
-                    }
-                    else
-                    {
-                        var pushToken:BatchToken  = cacheEnabled ? child._pushToken : null;
-                        var popToken:BatchToken   = cacheEnabled ? child._popToken  : null;
-                        var filter:FragmentFilter = child._filter;
-                        var mask:DisplayObject    = child._mask;
+                    if (mask) painter.drawMask(mask, child);
 
-                        painter.fillToken(pushToken);
-                        painter.setStateTo(child.transformationMatrix, child.alpha, child.blendMode);
+                    if (filter) filter.render(painter);
+                    else        child.render(painter);
 
-                        if (mask) painter.drawMask(mask, child);
+                    if (mask) painter.eraseMask(mask, child);
 
-                        if (filter) filter.render(painter);
-                        else        child.render(painter);
-
-                        if (mask) painter.eraseMask(mask, child);
-
-                        painter.fillToken(popToken);
-                    }
-
-                    if (cacheEnabled)
-                        child._tokenFrameID = frameID;
                 }
             }
 			

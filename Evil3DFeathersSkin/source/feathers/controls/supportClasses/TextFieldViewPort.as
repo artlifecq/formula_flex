@@ -19,6 +19,8 @@ package feathers.controls.supportClasses
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.text.Fontter;
 	import feathers.core.FeathersControl;
 	import feathers.utils.geom.matrixToRotation;
@@ -27,7 +29,6 @@ package feathers.controls.supportClasses
 	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
-	import starling.events.Event;
 	import starling.rendering.Painter;
 	import starling.utils.MatrixUtil;
 	import starling.utils.Pool;
@@ -820,10 +821,6 @@ package feathers.controls.supportClasses
 
 		override public function render(painter:Painter):void
 		{
-			//this component is an overlay above Starling, and it should be
-			//excluded from the render cache
-			painter.excludeFromCache(this);
-
 			var starling:Starling = this.stage !== null ? this.stage.starling : Starling.current;
 			var starlingViewPort:Rectangle = starling.viewPort;
 			var matrix:Matrix = Pool.getMatrix();

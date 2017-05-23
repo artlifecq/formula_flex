@@ -7,6 +7,8 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.controls
 {
+	import away3d.events.Event;
+	
 	import feathers.core.IGroupedToggle;
 	import feathers.core.PropertyProxy;
 	import feathers.core.ToggleGroup;
@@ -14,9 +16,8 @@ package feathers.controls
 	import feathers.skins.IStyleProvider;
 	import feathers.utils.keyboard.KeyToSelect;
 	import feathers.utils.touch.TapToSelect;
-
+	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
 
 	/**
 	 * Dispatched when the button is selected or deselected either
@@ -40,12 +41,12 @@ package feathers.controls
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.CHANGE
+	 * @eventType away3d.events.Event.CHANGE
 	 *
 	 * @see #isSelected
 	 * @see #isToggle
 	 */
-	[Event(name="change",type="starling.events.Event")]
+	[Event(name="change",type="away3d.events.Event")]
 
 	/**
 	 * A button that may be selected and deselected when triggered.

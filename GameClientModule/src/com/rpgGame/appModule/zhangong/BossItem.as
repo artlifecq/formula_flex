@@ -49,7 +49,7 @@ package com.rpgGame.appModule.zhangong
 	import org.mokylin.skin.app.beibao.zhangong.BossItem_Skin;
 	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
+	import away3d.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;

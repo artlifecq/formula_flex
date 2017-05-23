@@ -20,7 +20,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 	import org.mokylin.skin.app.jianghu.lunjian.LunJian_Skin;
 	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
+	import away3d.events.Event;
 	
 	/**
 	 *

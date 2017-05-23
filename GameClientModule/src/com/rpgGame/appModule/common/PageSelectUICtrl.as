@@ -5,7 +5,7 @@ package com.rpgGame.appModule.common
 	import feathers.controls.Button;
 	import feathers.controls.Label;
 	
-	import starling.events.Event;
+	import away3d.events.Event;
 
 	/**
 	 * 翻页控制

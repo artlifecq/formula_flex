@@ -1,6 +1,6 @@
 package feathers.controls
 {
-	import starling.events.Event;
+	import away3d.events.Event;
 	
 	/**
 	 * 可换肤面板
@@ -65,7 +65,7 @@ package feathers.controls
 		
 		protected function onCloseBtnTrigge(event:Event):void
 		{
-			dispatchEventWith(starling.events.Event.CLOSE);
+			dispatchEventWith(away3d.events.Event.CLOSE);
 		}
 		
 		override public function dispose():void

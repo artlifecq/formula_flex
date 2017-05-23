@@ -29,7 +29,7 @@ package com.rpgGame.appModule.zhangong
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.beibao.zhangong.ZhanGong_Skin;
 	
-	import starling.events.Event;
+	import away3d.events.Event;
 	
 	public class ZhanGongPanelExt extends ViewUI
 	{

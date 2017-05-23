@@ -2,6 +2,8 @@ package feathers.controls
 {
 	import flash.geom.Rectangle;
 	
+	import away3d.events.Event;
+	
 	import feathers.core.FeathersControl;
 	import feathers.display.RepeatScale9Image;
 	import feathers.textures.RepeatScale9Textures;
@@ -9,7 +11,6 @@ package feathers.controls
 	
 	import starling.display.DisplayObject;
 	import starling.display.Image;
-	import starling.events.Event;
 	import starling.styles.IMeshStyle;
 	import starling.styles.MeshStyle;
 	import starling.textures.IStarlingTexture;
@@ -58,7 +59,7 @@ package feathers.controls
 		 *  设置皮肤
 		 * @param value String
 		 * 1. 已存在纹理集里的key
-		 * 2. 外部url,动态加载,加载完成后将发送Starling.events.Event(Event.COMPLETE)事件
+		 * 2. 外部url,动态加载,加载完成后将发送away3d.events.Event(Event.COMPLETE)事件
 		 * 
 		 */		
 		override public function set styleName(value:String):void

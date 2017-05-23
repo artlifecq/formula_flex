@@ -27,7 +27,7 @@ package com.rpgGame.appModule.skill
 	
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
-	import starling.events.Event;
+	import away3d.events.Event;
 	import starling.events.TouchEvent;
 
 	/**

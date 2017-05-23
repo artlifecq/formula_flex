@@ -10,11 +10,11 @@
 
 package starling.utils
 {
-    import starling.events.Event;
-    import starling.events.EventDispatcher;
+    import away3d.events.Event;
+    import away3d.events.EventDispatcher;
 
     /** Dispatched when any property of the instance changes. */
-    [Event(name="change", type="starling.events.Event")]
+    [Event(name="change", type="away3d.events.Event")]
 
     /** The padding class stores one number for each of four directions,
      *  thus describing the padding around a 2D object. */

@@ -22,7 +22,7 @@ package feathers.controls
 
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
-	import starling.events.Event;
+	import away3d.events.Event;
 	import starling.rendering.Painter;
 	import starling.utils.MatrixUtil;
 	import starling.utils.Pool;
@@ -46,12 +46,12 @@ package feathers.controls
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.COMPLETE
+	 * @eventType away3d.events.Event.COMPLETE
 	 *
 	 * @see #loadURL()
 	 * @see #loadString()
 	 */
-	[Event(name="complete",type="starling.events.Event")]
+	[Event(name="complete",type="away3d.events.Event")]
 
 	/**
 	 * Indicates that the <code>location</code> property has changed.
@@ -75,7 +75,7 @@ package feathers.controls
 	 * 
 	 * @eventType feathers.events.FeathersEventType.LOCATION_CHANGE
 	 */
-	[Event(name="locationChange",type="starling.events.Event")]
+	[Event(name="locationChange",type="away3d.events.Event")]
 
 	/**
 	 * Indicates that an error occurred in the <code>StageWebView</code>.
@@ -98,7 +98,7 @@ package feathers.controls
 	 *
 	 * @eventType feathers.events.FeathersEventType.ERROR
 	 */
-	[Event(name="error",type="starling.events.Event")]
+	[Event(name="error",type="away3d.events.Event")]
 
 	/**
 	 * A Feathers component that displays a web browser in Adobe AIR, using the

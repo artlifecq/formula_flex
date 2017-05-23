@@ -7,6 +7,12 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.controls
 {
+	import flash.events.TimerEvent;
+	import flash.geom.Point;
+	import flash.utils.Timer;
+	
+	import away3d.events.Event;
+	
 	import feathers.core.FeathersControl;
 	import feathers.core.IFeathersControl;
 	import feathers.core.IFocusDisplayObject;
@@ -18,14 +24,9 @@ package feathers.controls
 	import feathers.skins.IStyleProvider;
 	import feathers.utils.math.clamp;
 	import feathers.utils.math.roundToNearest;
-
-	import flash.events.TimerEvent;
-	import flash.geom.Point;
-	import flash.utils.Timer;
-
+	
 	import starling.display.DisplayObject;
 	import starling.display.Quad;
-	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -48,9 +49,9 @@ package feathers.controls
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.CHANGE
+	 * @eventType away3d.events.Event.CHANGE
 	 */
-	[Event(name="change",type="starling.events.Event")]
+	[Event(name="change",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the user starts dragging the scroll bar's thumb.
@@ -72,7 +73,7 @@ package feathers.controls
 	 *
 	 * @eventType feathers.events.FeathersEventType.BEGIN_INTERACTION
 	 */
-	[Event(name="beginInteraction",type="starling.events.Event")]
+	[Event(name="beginInteraction",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the user stops dragging the scroll bar's thumb.
@@ -94,7 +95,7 @@ package feathers.controls
 	 *
 	 * @eventType feathers.events.FeathersEventType.END_INTERACTION
 	 */
-	[Event(name="endInteraction",type="starling.events.Event")]
+	[Event(name="endInteraction",type="away3d.events.Event")]
 
 	/**
 	 * Select a value between a minimum and a maximum by dragging a thumb over

@@ -5,7 +5,7 @@ package com.rpgGame.app.ui
 	import feathers.controls.ToggleButton;
 	import feathers.data.ListCollection;
 	
-	import starling.events.Event;
+	import away3d.events.Event;
 
 	public class UITableGroup
 	{

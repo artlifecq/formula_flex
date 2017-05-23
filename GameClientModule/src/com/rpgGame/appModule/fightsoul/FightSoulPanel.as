@@ -35,7 +35,7 @@ package com.rpgGame.appModule.fightsoul
 	import org.mokylin.skin.app.zhanhun.Zhanhun_Skin;
 	
 	import starling.display.DisplayObjectContainer;
-	import starling.events.Event;
+	import away3d.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchPhase;
 	

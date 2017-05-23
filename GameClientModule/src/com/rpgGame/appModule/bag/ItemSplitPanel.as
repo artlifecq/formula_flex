@@ -15,7 +15,7 @@ package com.rpgGame.appModule.bag
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
-	import starling.events.Event;
+	import away3d.events.Event;
 	
 	/**
 	 *物品拆分面板 

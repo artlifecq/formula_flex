@@ -3,12 +3,13 @@ package feathers.controls.renderers
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.ButtonState;
 	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
-	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;

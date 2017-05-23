@@ -11,7 +11,6 @@ package com.rpgGame.app.ui.main.head
 	import com.rpgGame.core.events.LookEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.ui.SkinUI;
-	import com.rpgGame.core.view.uiComponent.face.cd.CDDataManager;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.enum.face.FaceTypeEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
@@ -30,7 +29,6 @@ package com.rpgGame.app.ui.main.head
 	import org.mokylin.skin.mainui.head.head_max_Skin;
 	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
 	
 	/**
 	 *玩家头像 

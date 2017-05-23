@@ -4,7 +4,7 @@ package com.game.engine2D.interfaces
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
-	import starling.events.Event;
+	import away3d.events.Event;
 
 	public interface IDisplayObject
 	{

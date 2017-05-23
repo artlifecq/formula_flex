@@ -111,7 +111,6 @@ package starling.rendering
         private var _format:VertexDataFormat;
         private var _attributes:Vector.<VertexDataAttribute>;
         private var _numAttributes:int;
-        private var _premultipliedAlpha:Boolean;
         private var _tinted:Boolean;
 
         private var _posOffset:int;  // in bytes
@@ -159,7 +158,6 @@ package starling.rendering
             _colOffset = _format.hasAttribute("color")    ? _format.getOffset("color")    : 0;
             _vertexSize = _format.vertexSize;
             _numVertices = 0;
-            _premultipliedAlpha = true;
 			
 			_rawData = HeapAllocator.malloc(initialCapacity * _vertexSize, MemoryItemTypes.STARLING);
 			if(!_rawData)
@@ -183,7 +181,6 @@ package starling.rendering
 			if(_numVertices>0)
 				clone._rawData.writeMemoryItem(0, _rawData, 0, _numVertices*_vertexSize);
             clone._numVertices = _numVertices;
-            clone._premultipliedAlpha = _premultipliedAlpha;
             clone._tinted = _tinted;
             return clone;
         }
@@ -334,7 +331,7 @@ package starling.rendering
         {
             var offset:int = attrName == "color" ? _colOffset : getAttribute(attrName).offset;
             var rgba:uint = switchEndian(VertexDataHelper.getUnsignedInt(_rawData, vertexID * _vertexSize + offset));
-            if (_premultipliedAlpha) rgba = unmultiplyAlpha(rgba);
+            rgba = unmultiplyAlpha(rgba);
             return (rgba >> 8) & 0xffffff;
         }
 
@@ -446,36 +443,6 @@ package starling.rendering
             return out;
         }
 
-        /** Indicates if color attributes should be stored premultiplied with the alpha value.
-         *  Changing this value does <strong>not</strong> modify any existing color data.
-         *  If you want that, use the <code>setPremultipliedAlpha</code> method instead.
-         *  @default true */
-        public function get premultipliedAlpha():Boolean { return _premultipliedAlpha; }
-        public function set premultipliedAlpha(value:Boolean):void
-        {
-            setPremultipliedAlpha(value, false);
-        }
-
-        /** Changes the way alpha and color values are stored. Optionally updates all existing
-         *  vertices. */
-        public function setPremultipliedAlpha(value:Boolean, updateData:Boolean):void
-        {
-            if (updateData && value != _premultipliedAlpha)
-            {
-                for (var i:int=0; i<_numAttributes; ++i)
-                {
-                    var attribute:VertexDataAttribute = _attributes[i];
-                    if (attribute.isColor)
-                    {
-                        var pos:int = attribute.offset;
-                       VertexDataHelper.setPremultipliedAlphaHelper(_rawData, pos, _numVertices, _vertexSize, value, updateData);
-                    }
-                }
-            }
-
-            _premultipliedAlpha = value;
-        }
-
         /** Updates the <code>tinted</code> property from the actual color data. This might make
          *  sense after copying part of a tinted VertexData instance to another, since not each
          *  color value is checked in the process. An instance is tinted if any vertices have a
@@ -529,7 +496,7 @@ package starling.rendering
             var offset:int = attrName == "color" ? _colOffset : getAttribute(attrName).offset;
             var pos:int = vertexID * _vertexSize + offset;
 
-			VertexDataHelper.scaleAlphasHelper(_rawData, pos, numVertices, _vertexSize, factor, _premultipliedAlpha);
+			VertexDataHelper.scaleAlphasHelper(_rawData, pos, numVertices, _vertexSize, factor);
         }
 
         /** Writes the given RGB and alpha values to the specified vertices. */
@@ -551,13 +518,13 @@ package starling.rendering
             if (rgba == 0xffffffff && numVertices == _numVertices) _tinted = false;
             else if (rgba != 0xffffffff) _tinted = true;
 
-            if (_premultipliedAlpha && alpha != 1.0) rgba = premultiplyAlpha(rgba);
+            if (alpha != 1.0) 
+				rgba = premultiplyAlpha(rgba);
 
-			VertexDataHelper.setUnsignedInt(_rawData, vertexID * _vertexSize + offset, switchEndian(rgba));
-
+			rgba = switchEndian(rgba);
             while (pos < endPos)
             {
-				VertexDataHelper.setUnsignedInt(_rawData, pos, switchEndian(rgba));
+				VertexDataHelper.setUnsignedInt(_rawData, pos, rgba);
                 pos += _vertexSize;
             }
         }

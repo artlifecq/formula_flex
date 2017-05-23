@@ -1,6 +1,5 @@
 package com.rpgGame.app.ui.main.shortcut
 {
-	import com.rpgGame.app.sender.ItemSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
@@ -9,7 +8,6 @@ package com.rpgGame.app.ui.main.shortcut
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
-	import com.rpgGame.coreData.lang.LangMAILUI;
 	import com.rpgGame.coreData.lang.LangMAIL_UI;
 	import com.rpgGame.coreData.type.EnumFunctionMessageBarIcoType;
 	

@@ -7,6 +7,14 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.controls
 {
+	import flash.display.Stage;
+	import flash.display.StageDisplayState;
+	import flash.events.FullScreenEvent;
+	import flash.geom.Point;
+	import flash.system.Capabilities;
+	
+	import away3d.events.Event;
+	
 	import feathers.core.FeathersControl;
 	import feathers.core.IFeathersControl;
 	import feathers.core.IMeasureDisplayObject;
@@ -22,16 +30,9 @@ package feathers.controls
 	import feathers.skins.IStyleProvider;
 	import feathers.system.DeviceCapabilities;
 	import feathers.utils.skins.resetFluidChildDimensionsForMeasurement;
-
-	import flash.display.Stage;
-	import flash.display.StageDisplayState;
-	import flash.events.FullScreenEvent;
-	import flash.geom.Point;
-	import flash.system.Capabilities;
-
+	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
-	import starling.events.Event;
 	import starling.utils.Pool;
 
 	/**

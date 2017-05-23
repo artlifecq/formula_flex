@@ -280,7 +280,7 @@ package com.game.engine2D.scene.render
 		/**
 		 * 隐藏的换装类型
 		 */	
-		private var _hideRenderUnitTypes:Vector.<String> = new Vector.<String>;
+		//		private var _hideRenderUnitTypes:Vector.<String> = new Vector.<String>;
 		/**
 		 * 隐藏的换装ID类型
 		 */	
@@ -397,7 +397,7 @@ package com.game.engine2D.scene.render
 			//回收所有换装
 			removeAllRenderUnits();
 			
-			_hideRenderUnitTypes.length = 0;
+			//			_hideRenderUnitTypes.length = 0;
 			_hideRenderUnitIds.length = 0;
 			_renderUnitList.length = 0;
 			
@@ -596,7 +596,7 @@ package com.game.engine2D.scene.render
 			//创建一个新的
 			var ap:RenderUnit = RenderUnit.create($apd);
 			ap.parent = _graphicDis;
-			ap.visible = (_hideRenderUnitTypes.indexOf(ap.type)==-1 && _hideRenderUnitIds.indexOf(ap.id)==-1);//判断可见性
+			//			ap.visible = (_hideRenderUnitTypes.indexOf(ap.type)==-1 && _hideRenderUnitIds.indexOf(ap.id)==-1);//判断可见性
 			ap.isDrawShadow = _isDrawShadow;
 			ap.isInViewDistance = _isInViewDistance;
 			ap.updateNow = true;//注意这个!!!!!!!!
@@ -780,63 +780,63 @@ package com.game.engine2D.scene.render
 				ap.visible = false;
 			}
 		}
-		/**
-		 * 查看某类型的换装是否可显示
-		 *  @param $id
-		 */
-		public function getTypeRenderUnitsVisible($type:String):Boolean
-		{
-			return _hideRenderUnitTypes.indexOf($type) == -1;
-		}
-		/**
-		 * 显示某类型换装
-		 *  @param $type
-		 */
-		public function showRenderUnitsByType($type:String):void
-		{
-			//从记录数组中移除 
-			var index:int = _hideRenderUnitTypes.indexOf($type);
-			if(index!=-1)
-			{
-				_hideRenderUnitTypes.splice(index,1);
-			}
-			
-			//执行显示
-			var ap:RenderUnit;
-			var len:int = _renderUnitList.length;
-			while(len-->0)
-			{
-				ap = _renderUnitList[len];
-				if(ap.type == $type)
-				{
-					ap.visible = true;
-				}
-			}
-		}
-		/**
-		 * 隐藏某类型换装
-		 *  @param $type
-		 */
-		public function hideRenderUnitsByType($type:String):void
-		{
-			//添加进记录数组
-			if(_hideRenderUnitTypes.indexOf($type)==-1)
-			{
-				_hideRenderUnitTypes.push($type);
-			}
-			
-			//执行隐藏
-			var ap:RenderUnit;
-			var len:int = _renderUnitList.length;
-			while(len-->0)
-			{
-				ap = _renderUnitList[len];
-				if(ap.type == $type)
-				{
-					ap.visible = false;
-				}
-			}
-		}
+		//		/**
+		//		 * 查看某类型的换装是否可显示
+		//		 *  @param $id
+		//		 */
+		//		public function getTypeRenderUnitsVisible($type:String):Boolean
+		//		{
+		//			return _hideRenderUnitTypes.indexOf($type) == -1;
+		//		}
+		//		/**
+		//		 * 显示某类型换装
+		//		 *  @param $type
+		//		 */
+		//		public function showRenderUnitsByType($type:String):void
+		//		{
+		//			//从记录数组中移除 
+		//			var index:int = _hideRenderUnitTypes.indexOf($type);
+		//			if(index!=-1)
+		//			{
+		//				_hideRenderUnitTypes.splice(index,1);
+		//			}
+		//			
+		//			//执行显示
+		//			var ap:RenderUnit;
+		//			var len:int = _renderUnitList.length;
+		//			while(len-->0)
+		//			{
+		//				ap = _renderUnitList[len];
+		//				if(ap.type == $type)
+		//				{
+		//					ap.visible = true;
+		//				}
+		//			}
+		//		}
+		//		/**
+		//		 * 隐藏某类型换装
+		//		 *  @param $type
+		//		 */
+		//		public function hideRenderUnitsByType($type:String):void
+		//		{
+		//			//添加进记录数组
+		//			if(_hideRenderUnitTypes.indexOf($type)==-1)
+		//			{
+		//				_hideRenderUnitTypes.push($type);
+		//			}
+		//			
+		//			//执行隐藏
+		//			var ap:RenderUnit;
+		//			var len:int = _renderUnitList.length;
+		//			while(len-->0)
+		//			{
+		//				ap = _renderUnitList[len];
+		//				if(ap.type == $type)
+		//				{
+		//					ap.visible = false;
+		//				}
+		//			}
+		//		}
 		
 		override public function set planarRenderLayer(value:uint):void
 		{

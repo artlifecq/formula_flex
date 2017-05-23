@@ -113,6 +113,9 @@ package starling.rendering
         private var _indexBuffer:IndexBuffer3DProxy;
         private var _indexBufferSize:int;  // in number of indices
         private var _indexBufferUsesQuadLayout:Boolean;
+		
+		private var _explicitVertexBuffer:VertexBuffer3DProxy;
+		private var _explicitIndexBuffer:IndexBuffer3DProxy;
 
         private var _mvpMatrix3D:Matrix3D;
         private var _onRestore:Function;
@@ -343,18 +346,23 @@ package starling.rendering
         public function set mvpMatrix3D(value:Matrix3D):void { _mvpMatrix3D.copyFrom(value); }
 
         /** The internally used index buffer used on rendering. */
-        protected function get indexBuffer():IndexBuffer3DProxy { return _indexBuffer; }
-
-        /** The current size of the index buffer (in number of indices). */
-        protected function get indexBufferSize():int { return _indexBufferSize; }
+        protected function get indexBuffer():IndexBuffer3DProxy 
+		{ 
+			if(_explicitIndexBuffer)
+				return _explicitIndexBuffer;
+			else
+				return _indexBuffer; 
+		}
 
         /** The internally used vertex buffer used on rendering. */
-        protected function get vertexBuffer():VertexBuffer3DProxy { return _vertexBuffer; }
+        protected function get vertexBuffer():VertexBuffer3DProxy 
+		{
+			if(_explicitVertexBuffer)
+				return _explicitVertexBuffer;
+			else
+				return _vertexBuffer; 
+		}
         
-        /** The current size of the vertex buffer (in blocks of 32 bits). */
-        protected function get vertexBufferSize():int { return _vertexBufferSize; }
-		
-		
 
 		protected function get programVariantName():uint
 		{
@@ -367,5 +375,27 @@ package starling.rendering
 		{
 			return (programBaseName << 24) | programVariantName;
 		}
+
+		public function get explicitIndexBuffer():IndexBuffer3DProxy
+		{
+			return _explicitIndexBuffer;
+		}
+
+		public function set explicitIndexBuffer(value:IndexBuffer3DProxy):void
+		{
+			_explicitIndexBuffer = value;
+		}
+
+		public function get explicitVertexBuffer():VertexBuffer3DProxy
+		{
+			return _explicitVertexBuffer;
+		}
+
+		public function set explicitVertexBuffer(value:VertexBuffer3DProxy):void
+		{
+			_explicitVertexBuffer = value;
+		}
+
+
     }
 }

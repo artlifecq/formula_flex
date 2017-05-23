@@ -5,7 +5,7 @@ package com.rpgGame.app.ui.main.smallmap
 	import feathers.controls.UIAsset;
 	
 	import starling.display.Sprite;
-	import starling.events.Event;
+	import away3d.events.Event;
 
 	/**
 	 * 小地图上的点
