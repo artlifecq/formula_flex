@@ -529,7 +529,7 @@ package com.rpgGame.appModule.equip
 				_hechengNum--;
 				updateShowNum();
 			}else{
-				NoticeManager.showNotifyById(2010);
+				NoticeManager.showNotifyById(2012);
 			}
 		}
 		

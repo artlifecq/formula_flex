@@ -1270,7 +1270,6 @@ package feathers.controls
 			{
 				this._focusManager.focus = this.list;
 				this.stage.addEventListener(KeyboardEvent.KEY_UP, stage_keyUpHandler);
-				this.list.addEventListener(FeathersEventType.FOCUS_OUT, list_focusOutHandler);
 			}
 		}
 		
@@ -1608,8 +1607,6 @@ package feathers.controls
 			this.list.styleNameList.add(listStyleName);
 			this.list.itemRendererProperties.width = this.width;
 			this.list.addEventListener(Event.CHANGE, list_changeHandler);
-			this.list.addEventListener(Event.SELECT, list_selectedItemHandler);
-			this.list.addEventListener(TouchEvent.TOUCH, list_touchHandler);
 			this.list.addEventListener(Event.REMOVED_FROM_STAGE, list_removedFromStageHandler);
 		}
 		
@@ -1874,6 +1871,7 @@ package feathers.controls
 		 */
 		protected function list_changeHandler(event:Event):void
 		{
+			this.closeList();
 			if(this._ignoreSelectionChanges ||
 				this._popUpContentManager is IPersistentPopUpContentManager)
 			{
@@ -1910,42 +1908,9 @@ package feathers.controls
 			if(this._focusManager)
 			{
 				this.list.stage.removeEventListener(KeyboardEvent.KEY_UP, stage_keyUpHandler);
-				this.list.removeEventListener(FeathersEventType.FOCUS_OUT, list_focusOutHandler);
 			}
 		}
 		
-		/**
-		 * @private
-		 */
-		protected function list_focusOutHandler(event:Event):void
-		{
-			if(!this._popUpContentManager.isOpen)
-			{
-				return;
-			}
-			this.closeList();
-		}
-		
-		protected function list_selectedItemHandler(event:Event):void
-		{
-			dispatchEventWith(Event.SELECT, false, selectedItem);
-		}
-		
-		/**
-		 * @private
-		 */
-		protected function list_touchHandler(event:TouchEvent):void
-		{
-			var touch:Touch = event.getTouch(this.list);
-			if(touch === null)
-			{
-				return;
-			}
-			if(touch.phase === TouchPhase.ENDED)
-			{
-				this.closeList();
-			}
-		}
 		
 		/**
 		 * @private
