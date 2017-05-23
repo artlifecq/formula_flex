@@ -14,11 +14,14 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.cfg.ClientDialogCfgData;
 	import com.rpgGame.coreData.cfg.ClientSceneEffectCfgData;
 	import com.rpgGame.coreData.cfg.ClientTriggerCfgData;
+	import com.rpgGame.coreData.cfg.SceneEffectCfgData;
+	import com.rpgGame.coreData.cfg.TriggerCfgData;
 	import com.rpgGame.coreData.cfg.collect.CollectCfgData;
 	import com.rpgGame.coreData.clientConfig.ClientDialog;
 	import com.rpgGame.coreData.clientConfig.ClientSceneEffect;
 	import com.rpgGame.coreData.clientConfig.ClientTrigger;
 	import com.rpgGame.coreData.enum.EnumClientTriggerType;
+	import com.rpgGame.coreData.enum.TriggerTypeEnum;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.collect.CollectObjcetInfo;
 	import com.rpgGame.coreData.info.map.SceneData;
@@ -87,23 +90,61 @@ package com.rpgGame.app.manager
 			{
 				return false;
 			}
-			var triggerData : ClientTrigger = ClientTriggerCfgData.getData(triggerId);
+			
+			
+			var triggerData : ClientTrigger = TriggerCfgData.getClientTrigger(triggerId);
 			if (triggerData)
 			{
+				if(triggerData.preTrigger!="")//判定触发前置条件
+				{
+					var preTri:Array=triggerData.preTrigger.split(",");
+					for each (var trid : String in preTri)
+					{
+						var tid:int=int(trid);
+						if (!_isTrigging[tid])
+						{
+							return false;
+						}
+					}
+				}
+				
+				
 				_isTrigging[triggerId] = true;
-
-				var sceneData : SceneData = MapDataManager.currentScene;
+				
+				/*var sceneData : SceneData = MapDataManager.currentScene;
 				if (sceneData.isStoryDungeonScene)
 				{
 					if (triggerData.serverTriggerId > 0)
 					{
 						StoryDungeonSender.runEvent(triggerData.serverTriggerId);
 					}
-				}
+				}*/
 
 				switch (triggerData.triggerType)
 				{
-					case EnumClientTriggerType.SCENE_BORN_EFFECT: //触发生成场景特效 
+					case TriggerTypeEnum.SCENE_OBSTACLE: //触发生成动态阻挡 
+						if(triggerData.obstacleArea!="")
+						{
+							triggerCreateObstacle(triggerData);
+						}
+						if(triggerData.sceneEffectIds!="")
+						{
+							triggerCreateSceneEffect(triggerData);
+						}
+						//
+						
+						
+						break;
+					case TriggerTypeEnum.ADD_MONSTER: //刷怪 
+						
+						break;
+					case TriggerTypeEnum.PLOT_DIALOG: //触发剧情对话 
+						
+						break;
+					case TriggerTypeEnum.SCENE_ROLE: //生成场景物 
+						
+						break;
+					/*case EnumClientTriggerType.SCENE_BORN_EFFECT: //触发生成场景特效 
 						triggerCreateSceneEffect(triggerData);
 						break;
 					case EnumClientTriggerType.PLOT_DIALOG: //触发剧情对话 
@@ -120,7 +161,7 @@ package com.rpgGame.app.manager
 						break;
 					case EnumClientTriggerType.BUBBLE_DIALOG: //冒泡对话 
 						triggerBubbleDialog(triggerData, roleId);
-						break;
+						break;*/
 				}
 
 				if (triggerData.chainTriggerId > 0)
@@ -258,7 +299,24 @@ package com.rpgGame.app.manager
 				}
 			}
 		}
-
+		/**创建阻挡区域*/
+		private static function triggerCreateObstacle(triggerData : ClientTrigger) : void
+		{
+			_createEffectTrigger = triggerData;
+			if (_createEffectTrigger)
+			{
+				var currMapId : int = MainRoleManager.actorInfo.mapID;
+				if (_createEffectTrigger.sceneId == currMapId)
+				{
+					var sceneEffectIds : Array = _createEffectTrigger.obstacleArea.split(",");
+					for each (var sceneEffectId : String in sceneEffectIds)
+					{
+						AreaMapManager.addDynamicObstacleArea(int(sceneEffectId));
+					}
+				}
+			}
+		}
+		/**创建场景特效*/
 		private static function triggerCreateSceneEffect(triggerData : ClientTrigger) : void
 		{
 			_createEffectTrigger = triggerData;
@@ -267,10 +325,12 @@ package com.rpgGame.app.manager
 				var currMapId : int = MainRoleManager.actorInfo.mapID;
 				if (_createEffectTrigger.sceneId == currMapId)
 				{
-					var sceneEffectIds : Array = _createEffectTrigger.sceneEffectIds.split(";");
+					var sceneEffectIds : Array = _createEffectTrigger.sceneEffectIds.split(",");
+					//var sceneEffectIds : Array =["1"];
 					for each (var sceneEffectId : String in sceneEffectIds)
 					{
-						var effectData : ClientSceneEffect = ClientSceneEffectCfgData.getData(int(sceneEffectId));
+						var effectData : ClientSceneEffect = SceneEffectCfgData.getData(int(sceneEffectId));
+						
 						if (effectData && effectData.sceneID == currMapId)
 						{
 							createSceneEffect(effectData);
@@ -472,7 +532,7 @@ package com.rpgGame.app.manager
 			{
 				if (_createEffectTrigger.sceneId == currMapId)
 				{
-					var sceneEffectIds : Array = _createEffectTrigger.sceneEffectIds.split(";");
+					var sceneEffectIds : Array = _createEffectTrigger.sceneEffectIds.split(",");
 					for each (var sceneEffectId : String in sceneEffectIds)
 					{
 						var effectData : ClientSceneEffect = ClientSceneEffectCfgData.getData(int(sceneEffectId));

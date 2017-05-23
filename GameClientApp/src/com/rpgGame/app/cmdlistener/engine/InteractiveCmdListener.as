@@ -136,8 +136,7 @@ package com.rpgGame.app.cmdlistener.engine
             CONFIG::netDebug {
                 NetDebug.LOG("MapDown");
             }
-			TrusteeshipManager.getInstance().stopAll();///////////////点击地面终止挂机
-			TaskAutoManager.getInstance().stopTaskAuto();
+			TaskAutoManager.getInstance().stopTaskAuto();///////////////点击地面终止任务和挂机
 			EventManager.dispatchEvent(TaskEvent.AUTO_TASK_STOP);
 			TrusteeshipManager.getInstance().isLeftDown=true;
 			this._isLeftDown = true;

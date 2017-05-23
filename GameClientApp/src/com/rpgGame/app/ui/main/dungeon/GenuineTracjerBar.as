@@ -61,7 +61,7 @@ package com.rpgGame.app.ui.main.dungeon
 			EventManager.addEvent(DungeonEvent.UPDATE_DAILYZONE_TIME,updatedailyZoneTime);
 			EventManager.addEvent(DungeonEvent.UPDATA_WAVE_INFO,updateWaveInfoHandler);
 			EventManager.addEvent(DungeonEvent.UPDATA_DAILYZONE_ENDINFO,updateEndInfo);
-			SystemSetManager.getinstance().setValueByIndex(SystemSetManager.SYSTEMSET_HOOK_TYPE,25);
+			TrusteeshipManager.getInstance().findDist = 10000;
 			UIPopManager.showAlonePopUI(DungeonFightPop);
 		}
 		
@@ -195,6 +195,7 @@ package com.rpgGame.app.ui.main.dungeon
 			EventManager.removeEvent(DungeonEvent.UPDATA_WAVE_INFO,updateWaveInfoHandler);
 			EventManager.removeEvent(DungeonEvent.UPDATA_DAILYZONE_ENDINFO,updateEndInfo);
 			_skin.targetcontent.removeChildren(0,-1,true);
+			TrusteeshipManager.getInstance().findDist = 0;
 			_listCell = null;
 		}
 		

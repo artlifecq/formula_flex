@@ -50,6 +50,8 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
+	import flash.geom.Vector3D;
+	
 	import app.message.StallTypeDataProto;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -562,16 +564,16 @@ package com.rpgGame.app.manager.role
 			//如果场景中存在此类型此ID的角色，则移除之
 			removeSceneRoleByIdAndType(id, type);
 			var rud : RenderParamData3D = new RenderParamData3D(id, type, ClientConfig.getEffect(data.effectRes));
-			
-			var effectRu : RenderUnit3D = RenderUnit3D.create(rud);
+			var effectRu : RenderUnit3D = RenderUnit3D.create(rud,true);
 			effectRu.repeat = 0;
 			effectRu.mouseEnable = true;
-			effectRu.setGroundXY(x, y);
+			effectRu.play(0);
+			effectRu.visible = true;
 			effectRu.setScale(data.sizeScale > 0 ? (data.sizeScale * 0.01) : 1);
 			effectRu.rotationY = data.direction;
+			effectRu.setGroundXY(x, y);
 			effectRu.data = data;
 			SceneManager.addSceneObjToScene(effectRu, true, false, false);
-			effectRu.play(0);
 			return effectRu;
 		}
 		
