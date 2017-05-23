@@ -489,16 +489,19 @@ package com.rpgGame.app.manager.scene
             {
 				//var obstacleAreas : Vector.<ClientMapAreaData> = SceneManager.clientMapData.getObstacleAreas();
 				var obstacleAreas : Vector.<ClientMapAreaData> = AreaCfgData.getObstacleAreas(curtMapID);
-                var mapPointSets : Vector.<MapPointSet> = new Vector.<MapPointSet>();
-                for each (var areaData : ClientMapAreaData in obstacleAreas)
-                {
-                    mapPointSets.push(new MapPointSet("MapDataObstacleArea" + areaData.id, areaData.getVector2Ds()));
-                }
-                onLoadSceneCmpParam.sceneMapLayer.addObstaclePoints(mapPointSets);
-                AreaMapManager.updateCameraAreaMap();
-                SceneTimeOfTheDayManager.initScene(SceneManager.clientMapData.timeOfTheDayData, onLoadSceneCmpParam);
-                
-                BGMManager.playMusic(SceneManager.clientMapData.bgSoundRes);
+               if(obstacleAreas!=null&&obstacleAreas.length>0)
+			   {
+				   var mapPointSets : Vector.<MapPointSet> = new Vector.<MapPointSet>();
+				   for each (var areaData : ClientMapAreaData in obstacleAreas)
+				   {
+					   mapPointSets.push(new MapPointSet("MapDataObstacleArea" + areaData.id, areaData.getVector2Ds()));
+				   }
+				   onLoadSceneCmpParam.sceneMapLayer.addObstaclePoints(mapPointSets);
+			   }
+			   AreaMapManager.updateCameraAreaMap();
+			   SceneTimeOfTheDayManager.initScene(SceneManager.clientMapData.timeOfTheDayData, onLoadSceneCmpParam);
+			   
+			   BGMManager.playMusic(SceneManager.clientMapData.bgSoundRes);
             }
             
             if (SceneManager.clientMapData)

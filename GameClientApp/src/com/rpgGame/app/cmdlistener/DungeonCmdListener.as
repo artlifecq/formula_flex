@@ -1,5 +1,6 @@
 package com.rpgGame.app.cmdlistener
 {
+	import com.rpgGame.app.manager.ClientTriggerManager;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.DungeonEvent;
@@ -53,7 +54,7 @@ package com.rpgGame.app.cmdlistener
 		}
 		private function onSCClientTriggerValiedMessage(msg:SCClientTriggerValiedMessage):void
 		{
-			
+			ClientTriggerManager.serverTrigger(msg.triggerId);
 		}
 		
 		

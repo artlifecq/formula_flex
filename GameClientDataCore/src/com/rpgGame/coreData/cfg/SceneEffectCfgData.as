@@ -5,7 +5,7 @@ package com.rpgGame.coreData.cfg
 	import com.rpgGame.coreData.clientConfig.ClientTrigger;
 	import com.rpgGame.coreData.clientConfig.Q_area;
 	import com.rpgGame.coreData.clientConfig.Q_map_effect;
-	import com.rpgGame.coreData.clientConfig.Q_trigger;
+	import com.rpgGame.coreData.clientConfig.Q_map_trigger;
 	
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;

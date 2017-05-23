@@ -91,18 +91,28 @@ package com.rpgGame.app.manager
 			var triggerData : ClientTrigger = TriggerCfgData.getClientTrigger(triggerId);
 			if (triggerData)
 			{
-				if(triggerData.obstacleArea!="")
+				if(triggerData.obstacleArea!=null&&triggerData.obstacleArea.length>0)
 				{
 					triggerCreateObstacle(triggerData);
 				}
-				if(triggerData.sceneEffectIds!="")
+				if(triggerData.sceneEffectIds!=null&&triggerData.sceneEffectIds.length>0)
 				{
 					triggerCreateSceneEffect(triggerData);
 				}
-				
+				if(triggerData.obstacleAreaRemove!=null&&triggerData.obstacleAreaRemove.length>0)
+				{
+					triggerClearObstacle(triggerData);
+				}
+				if(triggerData.sceneEffectRemove!=null&&triggerData.sceneEffectRemove.length>0)
+				{
+					triggerClearSceneEffect(triggerData);
+				}
 				/*switch (triggerData.triggerType)
 				{
-					case TriggerTypeEnum.SCENE_OBSTACLE: //触发生成动态阻挡 
+					case TriggerTypeEnum.SCENE_ADD_OBSTACLE: //触发生成动态阻挡 
+						
+						break;
+					case TriggerTypeEnum.SCENE_REMOVE_OBSTACLE: //移除阻挡
 						
 						break;
 					case TriggerTypeEnum.ADD_MONSTER: //刷怪 
@@ -120,6 +130,32 @@ package com.rpgGame.app.manager
 			
 		}
 		/**客户端触发*/
+		public static function ClientBytrigger(triggerId : int) : void
+		{
+			if (_isTrigging[triggerId])
+			{
+				return;
+			}
+			
+			var triggerData : ClientTrigger = TriggerCfgData.getClientTrigger(triggerId);
+			if (triggerData)
+			{
+				if(triggerData.preTrigger!=null)//判定触发前置条件
+				{
+					var preTri:Array=triggerData.preTrigger;
+					for each (var trid : int in preTri)
+					{
+						var tid:int=trid;
+						if (!_isTrigging[tid])
+						{
+							return;
+						}
+					}
+				}
+				DungeonSender.reqTrigger(triggerData.id);///通知服务器 触发消息
+			}
+		}
+		/**客户端触发*/
 		public static function triggerById(triggerId : int, roleId : Number = 0) : Boolean
 		{
 			if (_isTrigging[triggerId])
@@ -127,69 +163,54 @@ package com.rpgGame.app.manager
 				return false;
 			}
 			
+			_isTrigging[triggerId] = true;
 			
 			var triggerData : ClientTrigger = TriggerCfgData.getClientTrigger(triggerId);
-			if (triggerData)
+			if (triggerData==null)
 			{
-				if(triggerData.preTrigger!="")//判定触发前置条件
+				return false;
+			}
+			var sceneData : SceneData = MapDataManager.currentScene;
+			if (sceneData.isStoryDungeonScene)
+			{
+				if (triggerData.serverTriggerId > 0)
 				{
-					var preTri:Array=triggerData.preTrigger.split(",");
-					for each (var trid : String in preTri)
-					{
-						var tid:int=int(trid);
-						if (!_isTrigging[tid])
-						{
-							return false;
-						}
-					}
+					StoryDungeonSender.runEvent(triggerData.serverTriggerId);
 				}
-				DungeonSender.reqTrigger(triggerData.id);///通知服务器 触发消息
-				//_isTrigging[triggerId] = true;
-				
-				
-				
-				/*var sceneData : SceneData = MapDataManager.currentScene;
-				if (sceneData.isStoryDungeonScene)
+			}
+			
+			switch (triggerData.triggerType)
+			{
+				case EnumClientTriggerType.SCENE_BORN_EFFECT: //触发生成场景特效 
+					triggerCreateSceneEffect(triggerData);
+					break;
+				case EnumClientTriggerType.PLOT_DIALOG: //触发剧情对话 
+					triggerPlotDialog(triggerData);
+					break;
+				case EnumClientTriggerType.ADD_NPC: //触发添加NPC 
+					triggerAddNpc(triggerData);
+					break;
+				case EnumClientTriggerType.REMOVE_NPC: //触发移除NPC 
+					triggerRemoveNpc(triggerData);
+					break;
+				case EnumClientTriggerType.SCENE_BORN_COLLECT: //触发生成场景采集物 
+					triggerCreateSceneCollect(triggerData);
+					break;
+				case EnumClientTriggerType.BUBBLE_DIALOG: //冒泡对话 
+					triggerBubbleDialog(triggerData, roleId);
+					break;
+			}
+			/*------------延迟触发------------------*/
+			if (triggerData.chainTriggerId > 0)
+			{
+				if (triggerData.chainTriggerDelay > 0)
 				{
-					if (triggerData.serverTriggerId > 0)
-					{
-						StoryDungeonSender.runEvent(triggerData.serverTriggerId);
-					}
-				}*/
-
-				/*switch (triggerData.triggerType)
+					TweenLite.delayedCall(triggerData.chainTriggerDelay * 0.001, triggerById, [triggerData.chainTriggerId]);
+				}
+				else
 				{
-					case EnumClientTriggerType.SCENE_BORN_EFFECT: //触发生成场景特效 
-						triggerCreateSceneEffect(triggerData);
-						break;
-					case EnumClientTriggerType.PLOT_DIALOG: //触发剧情对话 
-						triggerPlotDialog(triggerData);
-						break;
-					case EnumClientTriggerType.ADD_NPC: //触发添加NPC 
-						triggerAddNpc(triggerData);
-						break;
-					case EnumClientTriggerType.REMOVE_NPC: //触发移除NPC 
-						triggerRemoveNpc(triggerData);
-						break;
-					case EnumClientTriggerType.SCENE_BORN_COLLECT: //触发生成场景采集物 
-						triggerCreateSceneCollect(triggerData);
-						break;
-					case EnumClientTriggerType.BUBBLE_DIALOG: //冒泡对话 
-						triggerBubbleDialog(triggerData, roleId);
-						break;
-				}*/
-				/*-------------延迟触发------------------*/
-				/*if (triggerData.chainTriggerId > 0)
-				{
-					if (triggerData.chainTriggerDelay > 0)
-					{
-						TweenLite.delayedCall(triggerData.chainTriggerDelay * 0.001, triggerById, [triggerData.chainTriggerId]);
-					}
-					else
-					{
-						triggerById(triggerData.chainTriggerId);
-					}
-				}*/
+					triggerById(triggerData.chainTriggerId);
+				}
 			}
 			return true;
 		}
@@ -286,7 +307,7 @@ package com.rpgGame.app.manager
 				}
 			}
 		}
-
+		
 		private static function createSceneEffect(effectData : ClientSceneEffect) : void
 		{
 			var bornPosArr : Array = effectData.bornPos.split(";");
@@ -299,7 +320,17 @@ package com.rpgGame.app.manager
 				SceneRoleManager.getInstance().createSceneEffect(effectData, i + 1, SceneCharType.SCENE_EFFECT + "_" + effectData.id, x, y);
 			}
 		}
-
+		private static function removeSceneEffect(effectData : ClientSceneEffect) : void
+		{
+			var bornPosArr : Array = effectData.bornPos.split(";");
+			var len : int = bornPosArr.length;
+			for (var i : int = 0; i < len; i++)
+			{
+				SceneRoleManager.getInstance().removeSceneEffect( i + 1, SceneCharType.SCENE_EFFECT + "_" + effectData.id);
+			}
+		}
+		
+		
 		public static function addTriggerCollectEffect(role : SceneRole) : void
 		{
 			if (!_gatherGoodsTrigger)
@@ -323,14 +354,32 @@ package com.rpgGame.app.manager
 				var currMapId : int = MainRoleManager.actorInfo.mapID;
 				if (_createEffectTrigger.sceneId == currMapId)
 				{
-					var sceneEffectIds : Array = _createEffectTrigger.obstacleArea.split(",");
-					for each (var sceneEffectId : String in sceneEffectIds)
+					var sceneEffectIds : Array = _createEffectTrigger.obstacleArea;
+					for each (var sceneEffectId : int in sceneEffectIds)
 					{
-						AreaMapManager.addDynamicObstacleArea(int(sceneEffectId));
+						AreaMapManager.addDynamicObstacleArea(sceneEffectId);
 					}
 				}
 			}
 		}
+		/**清除阻挡区域*/
+		private static function triggerClearObstacle(triggerData : ClientTrigger) : void
+		{
+			_createEffectTrigger = triggerData;
+			if (_createEffectTrigger)
+			{
+				var currMapId : int = MainRoleManager.actorInfo.mapID;
+				if (_createEffectTrigger.sceneId == currMapId)
+				{
+					var sceneEffectIds : Array = _createEffectTrigger.obstacleArea;
+					for each (var sceneEffectId : int in sceneEffectIds)
+					{
+						AreaMapManager.removeDynamicObstacleArea(sceneEffectId);
+					}
+				}
+			}
+		}
+		
 		/**创建场景特效*/
 		private static function triggerCreateSceneEffect(triggerData : ClientTrigger) : void
 		{
@@ -340,11 +389,10 @@ package com.rpgGame.app.manager
 				var currMapId : int = MainRoleManager.actorInfo.mapID;
 				if (_createEffectTrigger.sceneId == currMapId)
 				{
-					var sceneEffectIds : Array = _createEffectTrigger.sceneEffectIds.split(",");
-					//var sceneEffectIds : Array =["1"];
-					for each (var sceneEffectId : String in sceneEffectIds)
+					var sceneEffectIds : Array = _createEffectTrigger.sceneEffectIds;
+					for each (var sceneEffectId : int in sceneEffectIds)
 					{
-						var effectData : ClientSceneEffect = SceneEffectCfgData.getData(int(sceneEffectId));
+						var effectData : ClientSceneEffect = SceneEffectCfgData.getData(sceneEffectId);
 						
 						if (effectData && effectData.sceneID == currMapId)
 						{
@@ -354,7 +402,28 @@ package com.rpgGame.app.manager
 				}
 			}
 		}
-
+		/**清除场景特效*/
+		private static function triggerClearSceneEffect(triggerData : ClientTrigger) : void
+		{
+			_createEffectTrigger = triggerData;
+			if (_createEffectTrigger)
+			{
+				var currMapId : int = MainRoleManager.actorInfo.mapID;
+				if (_createEffectTrigger.sceneId == currMapId)
+				{
+					var sceneEffectIds : Array = _createEffectTrigger.sceneEffectIds;
+					for each (var sceneEffectId : int in sceneEffectIds)
+					{
+						var effectData : ClientSceneEffect = SceneEffectCfgData.getData(sceneEffectId);
+						
+						if (effectData && effectData.sceneID == currMapId)
+						{
+							removeSceneEffect(effectData);
+						}
+					}
+				}
+			}
+		}
 		private static function triggerCreateSceneCollect(triggerData : ClientTrigger) : void
 		{
 			_createCollectTrigger = triggerData;
@@ -547,10 +616,10 @@ package com.rpgGame.app.manager
 			{
 				if (_createEffectTrigger.sceneId == currMapId)
 				{
-					var sceneEffectIds : Array = _createEffectTrigger.sceneEffectIds.split(",");
-					for each (var sceneEffectId : String in sceneEffectIds)
+					var sceneEffectIds : Array = _createEffectTrigger.sceneEffectIds;
+					for each (var sceneEffectId : int in sceneEffectIds)
 					{
-						var effectData : ClientSceneEffect = ClientSceneEffectCfgData.getData(int(sceneEffectId));
+						var effectData : ClientSceneEffect = ClientSceneEffectCfgData.getData(sceneEffectId);
 						if (effectData)
 						{
 							SceneManager.getScene().removeSceneObjByType(SceneCharType.SCENE_EFFECT + "_" + effectData.id);
