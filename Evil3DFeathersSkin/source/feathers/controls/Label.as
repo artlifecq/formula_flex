@@ -34,7 +34,6 @@ package feathers.controls
 	import starling.styles.IMeshStyle;
 	import starling.styles.MeshStyle;
 	import starling.text.TextFieldAutoSize;
-	import starling.textures.DynamicTextTextureManager;
 	import starling.textures.IStarlingTexture;
 	import starling.textures.TextureFactory;
 	import starling.utils.Pool;

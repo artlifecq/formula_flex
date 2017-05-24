@@ -92,7 +92,6 @@ package com.editor.manager
 		private var _previewMap : Boolean;
         
 		private var _xyzMode : int = HeightMapHelperProxy.MODE_XY;
-//        private var _xyzMode : int = HeightMapHelper.MODE_XY;
 
 		public function SceneManager()
 		{
@@ -299,7 +298,7 @@ package com.editor.manager
 		private function enterSceneSuccessed(scene : GameScene3D) : void
 		{
             var role : SceneRole = SceneRoleManager.getInstance().targetPlayer;
-            role.setGroundXY(2700, -1400);
+            role.setGroundXY(5000, -4000);
             //role.avatar.lightPicker = this.mainScene.entityLightPicker;
 
 			DataStructuresManager.getInstance().dispatchSceneIdChangeEvent();
@@ -727,7 +726,8 @@ package com.editor.manager
 			return _mapData;
 		}
 		
-		public static function containerBounds(oC:ObjectContainer3D, sceneBased:Boolean = true) : Vector.<Number> {
+		public static function containerBounds(oC:ObjectContainer3D, sceneBased:Boolean = true) : Vector.<Number> 
+		{
 			Bounds.getObjectContainerBounds(oC, sceneBased);
 			return Vector.<Number>([Bounds.minX, Bounds.minY, Bounds.minZ, Bounds.maxX, Bounds.maxY, Bounds.maxZ]);
 		}

@@ -177,36 +177,6 @@ package com.game.engine3D.controller
 				return;
 			}
 			stopControl();
-			/*if (_mode > 0)
-			{
-				if (_mode == CameraModeEnum.DIRECT_CAMERA)
-				{
-					_target.transform = _camera.transform;
-					_target.moveForward(lockedOnPlayerController.distance);
-					if (_targetObj)
-					{
-						_targetObj.x = _target.x;
-						_targetObj.y = _target.y;
-						_targetObj.z = _target.z;
-					}
-				}
-				if (_mode != CameraModeEnum.LOCK_ON_TARGET)
-				{
-					if (_targetObj)
-					{
-						_targetObj.y -= lockedOnPlayerController.offsetY;
-					}
-					else
-					{
-						_target.y -= lockedOnPlayerController.offsetY;
-					}
-				}
-				var vec3D : Vector3D = _target.position.clone();
-				var subVector : Vector3D = _camera.position.subtract(vec3D);
-				lockedOnPlayerController.distance = subVector.length;
-				lockedOnPlayerController.yDeg = Math.asin(subVector.y / lockedOnPlayerController.distance) * MathConsts.RADIANS_TO_DEGREES;
-				lockedOnPlayerController.xDeg = Math.atan2(subVector.x, subVector.z) * MathConsts.RADIANS_TO_DEGREES + 180;
-			}*/
 
 			lockedOnPlayerController.lookAtObject = _target;
 			lockedOnPlayerController.targetObject = _camera;
