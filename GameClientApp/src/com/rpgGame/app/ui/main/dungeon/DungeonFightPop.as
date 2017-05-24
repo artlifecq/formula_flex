@@ -41,5 +41,9 @@ package com.rpgGame.app.ui.main.dungeon
 			this._skin.container.x=(sw-this._skin.width)/2;
 			this._skin.container.y=(sh-this._skin.height)/2;
 		}
+		override protected function onHide():void
+		{
+			this.dispose();
+		}
 	}
 }

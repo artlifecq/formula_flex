@@ -4,13 +4,11 @@ package org.mokylin.skin.mainui.fubenzhuizong
 	import feathers.controls.Button;
 	import feathers.controls.Group;
 	import feathers.controls.Label;
-	import feathers.controls.ProgressBar;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
 	import org.mokylin.skin.component.button.ButtonSkin_shouhui;
 	import org.mokylin.skin.component.button.ButtonSkin_zhankai;
-	import org.mokylin.skin.component.progress.progress_jindutiao;
 
 	/**
 	 * @private
@@ -26,15 +24,9 @@ package org.mokylin.skin.mainui.fubenzhuizong
 
 		public var btn_open:feathers.controls.Button;
 
-		public var killInfo:feathers.controls.Label;
-
 		public var killName:feathers.controls.Label;
 
 		public var killNum:feathers.controls.Label;
-
-		public var lbNum:feathers.controls.Label;
-
-		public var pro_bar:feathers.controls.ProgressBar;
 
 		public var scroll_box:feathers.controls.Group;
 
@@ -137,18 +129,9 @@ package org.mokylin.skin.mainui.fubenzhuizong
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/mainui/fubenzhuizong/richangfuben/tiaozhanmubiao.png";
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __JingYan_Skin_UIAsset6_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/component/progress/jindutiao/jdtbg.png";
-			temp.width = 192;
-			temp.x = 16;
-			temp.y = 133;
+			temp.width = 70;
+			temp.x = 76;
+			temp.y = 1;
 			return temp;
 		}
 
@@ -171,20 +154,6 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_zhankai;
 			temp.x = 234;
 			temp.y = 0;
-			return temp;
-		}
-
-		private function killInfo_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			killInfo = temp;
-			temp.name = "killInfo";
-			temp.htmlText = "三星通关需击杀<font color='#6bcc08'>99</font>只怪";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 164;
-			temp.x = 37;
-			temp.y = 109;
 			return temp;
 		}
 
@@ -216,35 +185,6 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			return temp;
 		}
 
-		private function lbNum_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbNum = temp;
-			temp.name = "lbNum";
-			temp.fontSize = 12;
-			temp.text = "85/99";
-			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 74;
-			temp.x = 78;
-			temp.y = 132;
-			return temp;
-		}
-
-		private function pro_bar_i():feathers.controls.ProgressBar
-		{
-			var temp:feathers.controls.ProgressBar = new feathers.controls.ProgressBar();
-			pro_bar = temp;
-			temp.name = "pro_bar";
-			temp.styleClass = org.mokylin.skin.component.progress.progress_jindutiao;
-			temp.value = 40;
-			temp.width = 178;
-			temp.x = 23;
-			temp.y = 135;
-			return temp;
-		}
-
 		private function scroll_box_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
@@ -254,7 +194,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.width = 234;
 			temp.x = 12;
 			temp.y = 37;
-			temp.elementsContent = [__JingYan_Skin_UIAsset5_i(),sec_subbut1_i(),sec_time_i(),killName_i(),killNum_i(),killInfo_i(),sec_ico1_0_i(),__JingYan_Skin_UIAsset6_i(),pro_bar_i(),lbNum_i(),__JingYan_Skin_Label1_i(),__JingYan_Skin_Label2_i()];
+			temp.elementsContent = [__JingYan_Skin_UIAsset5_i(),sec_subbut1_i(),sec_time_i(),killName_i(),killNum_i(),sec_ico1_0_i(),__JingYan_Skin_Label1_i(),__JingYan_Skin_Label2_i()];
 			return temp;
 		}
 
