@@ -89,7 +89,7 @@ package com.rpgGame.app.manager
 			var stat:SpriteStat=MainRoleManager.actorInfo.totalStat;
 			if(info.price>stat.getResData(CharAttributeType.RES_GOLD))
 			{
-				NoticeManager.showNotifyById(2008);
+				NoticeManager.showNotifyById(21005);
 				return ;
 			}
 			

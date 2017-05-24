@@ -2,7 +2,6 @@
 {
     import com.rpgGame.app.manager.chat.NoticeManager;
     import com.rpgGame.app.manager.hud.ActivityBarManager;
-    import com.rpgGame.app.manager.time.SystemTimeManager;
     import com.rpgGame.app.ui.main.activityBar.item.ActivityButton;
     import com.rpgGame.app.ui.main.activityBar.item.ActivityButtonBase;
     import com.rpgGame.core.app.AppConstant;
@@ -10,17 +9,14 @@
     import com.rpgGame.core.events.ActivityEvent;
     import com.rpgGame.core.events.country.CountryEvent;
     import com.rpgGame.core.ui.SkinUI;
-    import com.rpgGame.coreData.cfg.ActivityBarCfgData;
-    import com.rpgGame.coreData.clientConfig.ActivityBarInfo;
-    import com.rpgGame.coreData.type.activity.ActivityOpenStateType;
+    import com.rpgGame.coreData.cfg.FuncionBarCfgData;
+    import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
     
     import gs.TweenLite;
     
     import org.client.mainCore.ds.HashMap;
     import org.client.mainCore.manager.EventManager;
     import org.mokylin.skin.mainui.activityBar.button.ButtonLunjian;
-    
-    import utils.TimerServer;
 
     public class ActivityButtonList extends SkinUI 
     {
@@ -47,7 +43,7 @@
 
         private function setup():void
         {
-            var info:ActivityBarInfo;
+            var info:FunctionBarInfo;
 			rowMap=new HashMap();
             EventManager.addEvent(ActivityEvent.OPEN_ACTIVITY, onOpenActivityGroup);
             EventManager.addEvent(ActivityEvent.CLOSE_ACTIVITY, onCloseActivityGroup);
@@ -176,7 +172,7 @@
 		
 		private function getBtn(id:int):ActivityButtonBase
 		{
-			var data:ActivityBarInfo=ActivityBarCfgData.getActivityBarInfo(id);
+			var data:FunctionBarInfo=FuncionBarCfgData.getActivityBarInfo(id);
 			if(!data){
 				return null;
 			}

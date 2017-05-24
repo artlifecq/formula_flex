@@ -1,38 +1,20 @@
 package com.rpgGame.coreData.clientConfig
-	
 {
-	
 	import flash.net.registerClassAlias;
-	
 	import org.client.mainCore.ds.HashMap;
-	
 	/**
-	 
-	 * 
-	 
-	 *  根据模块config 文件设置自动生成的代码
-	 
-	 *	
-	 
-	 * 【**不可手动修改此类**】，
-	 
-	 *	
-	 
-	 * 【任何修改都将被生成工具覆盖，如需修改请直接修改具体的config文件】
-	 
-	 * @author NEIL
-	 
-	 */
-	
+	* 
+	*  根据模块config 文件设置自动生成的代码
+	*	
+	* 【**不可手动修改此类**】，
+	*	
+	* 【任何修改都将被生成工具覆盖，如需修改请直接修改具体的config文件】
+	* @author NEIL
+	*/
 	public class ConfigClassRegister
-		
 	{
-		
 		private static var _classMap:HashMap = new HashMap();
-		
-		/**  功能ID	功能行	排序值	功能名	是否显示特效	副本是否显示 */
-		public static const ActivityBarInfo:String = "data.ActivityBarInfo";
-		/**  名称备注	资源路径#资源路径	动画名称#动画名称	碰撞隐藏节点#碰撞隐藏节点，用;分割多个节点	消散时间#消散时间	前轴围绕半径#前轴围绕半径	前轴围绕角速度#前轴围绕角速度（度/秒）	收敛次数#收敛次数	围绕半径#围绕半径	围绕角速度#围绕角速度（度/秒） */
+				/**  名称备注	资源路径#资源路径	动画名称#动画名称	碰撞隐藏节点#碰撞隐藏节点，用;分割多个节点	消散时间#消散时间	前轴围绕半径#前轴围绕半径	前轴围绕角速度#前轴围绕角速度（度/秒）	收敛次数#收敛次数	围绕半径#围绕半径	围绕角速度#围绕角速度（度/秒） */
 		public static const EffectAnimation:String = "data.animat.EffectAnimation";
 		/**  客户端区域数据			 */
 		public static const ClientArea:String = "data.ClientArea";
@@ -50,10 +32,10 @@ package com.rpgGame.coreData.clientConfig
 		public static const ClientSceneRole:String = "data.ClientSceneRole";
 		/**  客户端触发数据															 */
 		public static const ClientTrigger:String = "data.ClientTrigger";
-		/**  data.Config */
-		public static const Config:String = "data.Config";
 		/**  客户端表情配置					 */
 		public static const FaceInfo:String = "data.FaceInfo";
+		/**  活动条信息表											 */
+		public static const FunctionBarInfo:String = "data.FunctionBarInfo";
 		/**  游戏音乐配置表							 */
 		public static const GameSoundInfo:String = "data.GameSoundInfo";
 		/**  设置的主键#设置的主键，不重复就行	设置备注#设置备注	玻璃效果颜色#玻璃效果颜色	摄像机Y偏移#摄像机Y偏移	摄像机转角#摄像机转角	摄像机仰角#摄像机仰角	摄像机最小仰角#摄像机最小仰角	摄像机最大仰角#摄像机最大仰角	摄像机距离#摄像机距离	摄像机拖拽速度#摄像机鼠标拖拽速度	摄像机最小距离#摄像机最小距离	摄像机最大距离#摄像机最大距离	摄像机滚轮速度#摄像机鼠标滚轮速度	摄像机远裁切#摄像机远裁切	智能摄像机最小距离#智能摄像机最小距离	跳跃高度#跳跃高度	二级跳跃高度#二级跳跃高度	跳跃速率#跳跃速率	二级跳跃速率#二级跳跃速率	跳跃结束时间#跳跃结束时间	二级跳跃结束时间#二级跳跃结束时间	跳跃打断时间#跳跃打断时间	二级跳跃打断时间#二级跳跃打断时间	二级跳跃概率#二级跳跃概率（0~100）	跳跃开始时间#跳跃开始时间	二级跳跃开始时间#二级跳跃开始时间	死亡效果类型#死亡效果类型	外发光强度#外发光强度	外发光大小#外发光大小	外发光品质#外发光品质	外发光敌方颜色#外发光敌方颜色	外发光友方颜色#外发光友方颜色	外发光中立方颜色#外发光中立方颜色	半身像偏移#半身像偏移	头像偏移#头像偏移	Boss头像偏移#Boss头像偏移 */
@@ -64,7 +46,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const HintInfo:String = "data.HintInfo";
 		/**  消息提示类型配置表																													 */
 		public static const HintTypeSetInfo:String = "data.HintTypeSetInfo";
-		/**  <<<<<<< .mine */
+		/**  区域数据库						 */
 		public static const Q_area:String = "data.map.Q_area";
 		/**  							本列取消，安全区改为刷格方式						本列取消																																										 */
 		public static const Q_map:String = "data.map.Q_map";
@@ -170,6 +152,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_mission_section:String = "data.Q_mission_section";
 		/**  任务对话配置表(1-20000为主线任务对应的对话id，20001-30000是支线任务对话id)			 */
 		public static const Q_mission_segment:String = "data.Q_mission_segment";
+		/**  功能开放表									 */
+		public static const Q_newfunc:String = "data.Q_newfunc";
 		/**  通知列表			 */
 		public static const Q_notify:String = "data.Q_notify";
 		/**  阵营关系				 */
@@ -218,13 +202,9 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_summon:String = "data.spell.Q_summon";
 		/**  属性的名字（针对不同的地方可以有不同的配置）	 */
 		public static const SpriteStatNameInfo:String = "data.SpriteStatNameInfo";
-		
-		
+
 		public static function setup():void
-			
 		{
-			
-			regClass("data.ActivityBarInfo", com.rpgGame.coreData.clientConfig.ActivityBarInfo);
 			regClass("data.animat.EffectAnimation", com.rpgGame.coreData.clientConfig.EffectAnimation);
 			regClass("data.ClientArea", com.rpgGame.coreData.clientConfig.ClientArea);
 			regClass("data.ClientBuff", com.rpgGame.coreData.clientConfig.ClientBuff);
@@ -234,9 +214,8 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.ClientSceneNPC", com.rpgGame.coreData.clientConfig.ClientSceneNPC);
 			regClass("data.ClientSceneRole", com.rpgGame.coreData.clientConfig.ClientSceneRole);
 			regClass("data.ClientTrigger", com.rpgGame.coreData.clientConfig.ClientTrigger);
-			regClass("data.Config", com.rpgGame.coreData.clientConfig.Config);
-			regClass("data.Config", com.rpgGame.coreData.clientConfig.Config);
 			regClass("data.FaceInfo", com.rpgGame.coreData.clientConfig.FaceInfo);
+			regClass("data.FunctionBarInfo", com.rpgGame.coreData.clientConfig.FunctionBarInfo);
 			regClass("data.GameSoundInfo", com.rpgGame.coreData.clientConfig.GameSoundInfo);
 			regClass("data.GlobalSetting", com.rpgGame.coreData.clientConfig.GlobalSetting);
 			regClass("data.GmInfo", com.rpgGame.coreData.clientConfig.GmInfo);
@@ -295,6 +274,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_mission_reword", com.rpgGame.coreData.clientConfig.Q_mission_reword);
 			regClass("data.Q_mission_section", com.rpgGame.coreData.clientConfig.Q_mission_section);
 			regClass("data.Q_mission_segment", com.rpgGame.coreData.clientConfig.Q_mission_segment);
+			regClass("data.Q_newfunc", com.rpgGame.coreData.clientConfig.Q_newfunc);
 			regClass("data.Q_notify", com.rpgGame.coreData.clientConfig.Q_notify);
 			regClass("data.Q_relation", com.rpgGame.coreData.clientConfig.Q_relation);
 			regClass("data.Q_shop", com.rpgGame.coreData.clientConfig.Q_shop);
@@ -319,29 +299,17 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.spell.Q_SpellEffect", com.rpgGame.coreData.clientConfig.Q_SpellEffect);
 			regClass("data.spell.Q_summon", com.rpgGame.coreData.clientConfig.Q_summon);
 			regClass("data.SpriteStatNameInfo", com.rpgGame.coreData.clientConfig.SpriteStatNameInfo);
-			
-			
-		}
-		
-		private static function regClass(name:String, cls:Class):void
-			
-		{
-			
-			_classMap.add(name,cls);
-			
-			registerClassAlias(name, cls);
-			
-		}
-		
-		public static function getClass(name:String):Class
-			
-		{
-			
-			return _classMap.getValue(name);
-			
-		}
-		
-	}
-	
-}
 
+		}
+		private static function regClass(name:String, cls:Class):void
+		{
+			_classMap.add(name,cls);
+			registerClassAlias(name, cls);
+		}
+		public static function getClass(name:String):Class
+		{
+			return _classMap.getValue(name);
+		}
+	}
+}
+		

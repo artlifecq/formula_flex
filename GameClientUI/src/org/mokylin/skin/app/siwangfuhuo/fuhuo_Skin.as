@@ -2,12 +2,10 @@ package org.mokylin.skin.app.siwangfuhuo
 {
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
-	import feathers.controls.Group;
 	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.app.siwangfuhuo.button.ButtonSkin_jiantou;
 	import org.mokylin.skin.common.Erji_panelbg_Skin;
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
@@ -28,17 +26,11 @@ package org.mokylin.skin.app.siwangfuhuo
 
 		public var btn_goumai:feathers.controls.Button;
 
-		public var btn_next:feathers.controls.Button;
-
-		public var btn_prev:feathers.controls.Button;
-
 		public var btn_yuandi:feathers.controls.Button;
 
 		public var lbl_msg:feathers.controls.Label;
 
 		public var lbl_time:feathers.controls.Label;
-
-		public var openGrp:feathers.controls.Group;
 
 
 		//==========================================================================
@@ -49,7 +41,9 @@ package org.mokylin.skin.app.siwangfuhuo
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [bg_i(),__fuhuo_Skin_UIAsset3_i(),__fuhuo_Skin_UIAsset4_i(),__fuhuo_Skin_UIAsset5_i(),lbl_msg_i(),lbl_time_i(),btn_prev_i(),btn_next_i(),btn_fuhuodian_i(),btn_yuandi_i(),btn_goumai_i(),openGrp_i()];
+			this.height = 415;
+			this.width = 670;
+			this.elementsContent = [bg_i(),__fuhuo_Skin_UIAsset3_i(),__fuhuo_Skin_UIAsset4_i(),__fuhuo_Skin_UIAsset5_i(),lbl_msg_i(),lbl_time_i(),btn_fuhuodian_i(),btn_yuandi_i(),btn_goumai_i()];
 			
 			states = {
 			};
@@ -113,6 +107,7 @@ package org.mokylin.skin.app.siwangfuhuo
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.label = "返回复活点复活";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
+			temp.color = 0xE1D4A9;
 			temp.width = 129;
 			temp.x = 396;
 			temp.y = 359;
@@ -127,32 +122,10 @@ package org.mokylin.skin.app.siwangfuhuo
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.label = "购买还魂丹";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
+			temp.color = 0xE1D4A9;
 			temp.width = 101;
 			temp.x = 209;
 			temp.y = 360;
-			return temp;
-		}
-
-		private function btn_next_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_next = temp;
-			temp.name = "btn_next";
-			temp.styleClass = org.mokylin.skin.app.siwangfuhuo.button.ButtonSkin_jiantou;
-			temp.x = 625;
-			temp.y = 217;
-			return temp;
-		}
-
-		private function btn_prev_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_prev = temp;
-			temp.name = "btn_prev";
-			temp.scaleX = -1;
-			temp.styleClass = org.mokylin.skin.app.siwangfuhuo.button.ButtonSkin_jiantou;
-			temp.x = 43;
-			temp.y = 217;
 			return temp;
 		}
 
@@ -164,6 +137,7 @@ package org.mokylin.skin.app.siwangfuhuo
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.label = "使用还魂丹原地复活";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
+			temp.color = 0xE1D4A9;
 			temp.width = 151;
 			temp.x = 49;
 			temp.y = 360;
@@ -194,18 +168,6 @@ package org.mokylin.skin.app.siwangfuhuo
 			temp.width = 96;
 			temp.x = 533;
 			temp.y = 368;
-			return temp;
-		}
-
-		private function openGrp_i():feathers.controls.Group
-		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
-			openGrp = temp;
-			temp.name = "openGrp";
-			temp.height = 200;
-			temp.width = 577;
-			temp.x = 46;
-			temp.y = 141;
 			return temp;
 		}
 

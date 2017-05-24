@@ -4,7 +4,6 @@ package com.rpgGame.app.data
 	import com.rpgGame.app.manager.friend.FriendManager;
 	import com.rpgGame.app.manager.goods.GoodsContainerMamager;
 	import com.rpgGame.app.manager.mount.HorseExtraItemInfo;
-	import com.rpgGame.coreData.cfg.ActivityBarCfgData;
 	import com.rpgGame.coreData.cfg.AddSpriteStatCfgData;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.AreaCfgData;
@@ -30,6 +29,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.FightsoulModeData;
 	import com.rpgGame.coreData.cfg.FightsoulPathData;
 	import com.rpgGame.coreData.cfg.FriendCfgData;
+	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
 	import com.rpgGame.coreData.cfg.GCDCfgData;
 	import com.rpgGame.coreData.cfg.GlobalSettingCfgData;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
@@ -46,6 +46,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.LunJianCfg;
 	import com.rpgGame.coreData.cfg.MailCfgData;
 	import com.rpgGame.coreData.cfg.MazeCfgData;
+	import com.rpgGame.coreData.cfg.NewFuncCfgData;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.RaceCfgData;
 	import com.rpgGame.coreData.cfg.RelationCfgData;
@@ -256,8 +257,9 @@ package com.rpgGame.app.data
 			TaskMissionCfgData.setupReword(dic[ConfigClassRegister.Q_mission_reword]);
 			TaskMissionCfgData.setupSegment(dic[ConfigClassRegister.Q_mission_segment]);
 			
-			ActivityBarCfgData.setup(dic[ConfigClassRegister.ActivityBarInfo]);
-
+			//窗口信息配置
+			FuncionBarCfgData.setup(dic[ConfigClassRegister.FunctionBarInfo]);
+			NewFuncCfgData.setup(dic[ConfigClassRegister.Q_newfunc]);
 			//心法
 			CheatsCfg.setup(dic[ConfigClassRegister.Q_cheats]);
 			CheatsNodeCfg.setup(dic[ConfigClassRegister.Q_cheats_node]);
