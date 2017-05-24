@@ -6,6 +6,7 @@
 	import com.rpgGame.app.cmdlistener.BuffCmdListener;
 	import com.rpgGame.app.cmdlistener.ChatCmdListener;
 	import com.rpgGame.app.cmdlistener.CheatsCmdListerner;
+	import com.rpgGame.app.cmdlistener.CrossCmdListener;
 	import com.rpgGame.app.cmdlistener.DaTiCmdListener;
 	import com.rpgGame.app.cmdlistener.DailyZoneCmdListner;
 	import com.rpgGame.app.cmdlistener.DungeonCmdListener;
@@ -147,6 +148,7 @@
 			register("CheatsCmdListerner",CheatsCmdListerner);
 			register("RollCmdListener",RollCmdListener);//roll掉落
 			register("DungeonCmdListener",DungeonCmdListener);
+			register("CrossCmdListener",CrossCmdListener);
 			register("DailyZoneCmdListner",DailyZoneCmdListner);//日常副本
 		}
 	}

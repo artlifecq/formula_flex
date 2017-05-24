@@ -71,7 +71,9 @@ package org.mokylin.skin.app.wuxue.juexue
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [__Juexue_Skin_UIAsset2_i(),__Juexue_Skin_UIAsset3_i(),grp_bg_i(),grp_btn_i(),btn_shuoming_i(),sk_jihuo_i(),sk_shengji_i(),mc_name_i()];
+			this.height = 587;
+			this.width = 947;
+			this.elementsContent = [__Juexue_Skin_UIAsset1_i(),__Juexue_Skin_UIAsset2_i(),grp_bg_i(),grp_btn_i(),btn_shuoming_i(),sk_jihuo_i(),sk_shengji_i(),mc_name_i()];
 			
 			states = {
 			};
@@ -82,7 +84,7 @@ package org.mokylin.skin.app.wuxue.juexue
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __Juexue_Skin_UIAsset2_i():feathers.controls.UIAsset
+		private function __Juexue_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 445;
@@ -93,7 +95,7 @@ package org.mokylin.skin.app.wuxue.juexue
 			return temp;
 		}
 
-		private function __Juexue_Skin_UIAsset3_i():feathers.controls.UIAsset
+		private function __Juexue_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/wuxue/juexue/bg.png";
@@ -107,7 +109,7 @@ package org.mokylin.skin.app.wuxue.juexue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg_1 = temp;
 			temp.name = "bg_1";
-			temp.styleName = "ui/app/wuxue/juexue/bg_1.jpg";
+			temp.styleName = "ui/big_bg/wuxue/juexue/bg_1.jpg";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -118,7 +120,7 @@ package org.mokylin.skin.app.wuxue.juexue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg_2 = temp;
 			temp.name = "bg_2";
-			temp.styleName = "ui/app/wuxue/juexue/bg_2.jpg";
+			temp.styleName = "ui/big_bg/wuxue/juexue/bg_2.jpg";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -129,7 +131,7 @@ package org.mokylin.skin.app.wuxue.juexue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg_3 = temp;
 			temp.name = "bg_3";
-			temp.styleName = "ui/app/wuxue/juexue/bg_3.jpg";
+			temp.styleName = "ui/big_bg/wuxue/juexue/bg_3.jpg";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -140,7 +142,7 @@ package org.mokylin.skin.app.wuxue.juexue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg_4 = temp;
 			temp.name = "bg_4";
-			temp.styleName = "ui/app/wuxue/juexue/bg_4.jpg";
+			temp.styleName = "ui/big_bg/wuxue/juexue/bg_4.jpg";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -151,7 +153,7 @@ package org.mokylin.skin.app.wuxue.juexue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg_5 = temp;
 			temp.name = "bg_5";
-			temp.styleName = "ui/app/wuxue/juexue/bg_5.jpg";
+			temp.styleName = "ui/big_bg/wuxue/juexue/bg_5.jpg";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -162,7 +164,7 @@ package org.mokylin.skin.app.wuxue.juexue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg_6 = temp;
 			temp.name = "bg_6";
-			temp.styleName = "ui/app/wuxue/juexue/bg_6.jpg";
+			temp.styleName = "ui/big_bg/wuxue/juexue/bg_6.jpg";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -173,7 +175,7 @@ package org.mokylin.skin.app.wuxue.juexue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg_7 = temp;
 			temp.name = "bg_7";
-			temp.styleName = "ui/app/wuxue/juexue/bg_7.jpg";
+			temp.styleName = "ui/big_bg/wuxue/juexue/bg_7.jpg";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

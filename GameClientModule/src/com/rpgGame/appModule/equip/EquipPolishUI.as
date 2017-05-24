@@ -204,7 +204,9 @@ package com.rpgGame.appModule.equip
 			if(targetEquipInfo){
 				_goodsContainerTarget.setGrayForData(targetEquipInfo,false);
 				if(isUse(targetEquipInfo)){//是消耗品
-					_goodsContainerUse.setGrayForData(targetEquipInfo,false);
+					useEquips.push(targetEquipInfo);
+					useEquips.sort(sortForUse);
+					_goodsContainerUse.refleshGridsByDatas(useEquips);
 				}
 				targetEquipInfo=null;
 			}
@@ -444,9 +446,9 @@ package com.rpgGame.appModule.equip
 			var gridInfo:GridInfo=targetGrid.gridInfo;
 			if(targetEquipInfo){
 				_goodsContainerTarget.setGrayForData(targetEquipInfo,false);
-				if(isUse(targetEquipInfo)){
+			/*	if(isUse(targetEquipInfo)){
 					_goodsContainerUse.setGrayForData(targetEquipInfo,false);
-				}
+				}*/
 			}
 			
 			cancelAllUse();
@@ -466,7 +468,9 @@ package com.rpgGame.appModule.equip
 			tweenEquip=TweenMax.to(_targetEquip,1,{x:612,y:177,ease:Expo.easeOut});
 			
 			if(isUse(targetEquipInfo)){
-				_goodsContainerUse.setGrayForData(targetEquipInfo,true);
+//				_goodsContainerUse.setGrayForData(targetEquipInfo,true);
+				deleteItems(useEquips,targetEquipInfo);
+				_goodsContainerUse.refleshGridsByDatas(useEquips);
 			}
 			
 			addExp=0;

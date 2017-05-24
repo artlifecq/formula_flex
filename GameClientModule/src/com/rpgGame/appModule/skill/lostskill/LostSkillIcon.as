@@ -30,7 +30,7 @@ package com.rpgGame.appModule.skill.lostskill
 			TipTargetManager.show( _skin.btn_over, TargetTipsMaker.makeTips( TipType.LOSTSKILL_TIP, _data));
 			_skin.icons.styleName = "ui/app/wuxue/juexue/icon/"+_data.q_icon+".png";
 			_skin.qiyong.touchable = false;
-			_skin.lb_name.touchable = false;
+//			_skin.lb_name.touchable = false;
 			_skin.lb_weijihuo.touchable = false;
 			_skin.qiyong.touchable = false;
 			_skin.lb_weijihuo.touchable = false;
@@ -40,16 +40,16 @@ package com.rpgGame.appModule.skill.lostskill
 		{
 			_stateinfo = LostSkillManager.instance().getSkillStateInfoById(_data.q_id);
 			_skin.qiyong.visible = _data.q_id == LostSkillManager.instance().curSkillId;
-			_skin.lb_name.text = _data.q_name;
+//			_skin.lb_name.text = _data.q_name;
 			if(_stateinfo ==null)
 			{
 				_skin.lb_weijihuo.visible = true;
 				GrayFilter.gray(_skin.icons);
-				GrayFilter.gray(_skin.lb_name);
+//				GrayFilter.gray(_skin.lb_name);
 			}else{
 				_skin.lb_weijihuo.visible = false;
 				_skin.icons.filter = null;
-				_skin.lb_name.filter = null;
+//				_skin.lb_name.filter = null;
 			}
 			
 		}

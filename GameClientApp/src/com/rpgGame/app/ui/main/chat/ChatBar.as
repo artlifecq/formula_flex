@@ -11,6 +11,7 @@ package com.rpgGame.app.ui.main.chat {
     import com.rpgGame.app.richText.RichTextCustomUtil;
     import com.rpgGame.app.richText.component.RichTextArea3D;
     import com.rpgGame.app.scene.SceneRole;
+    import com.rpgGame.app.sender.CrossSender;
     import com.rpgGame.app.ui.main.chat.laba.VipChatCanvas;
     import com.rpgGame.core.app.AppConstant;
     import com.rpgGame.core.app.AppManager;
@@ -32,6 +33,8 @@ package com.rpgGame.app.ui.main.chat {
     import flash.text.TextFormatAlign;
     import flash.ui.Keyboard;
     
+    import away3d.events.Event;
+    
     import feathers.controls.Button;
     import feathers.controls.Scroller;
     import feathers.controls.text.Fontter;
@@ -44,7 +47,6 @@ package com.rpgGame.app.ui.main.chat {
     
     import starling.core.Starling;
     import starling.display.DisplayObject;
-    import away3d.events.Event;
     import starling.events.KeyboardEvent;
     import starling.events.Touch;
     import starling.events.TouchEvent;
@@ -618,6 +620,9 @@ package com.rpgGame.app.ui.main.chat {
         
         private function sendMsg() : void 
 		{
+			
+			CrossSender.reqEnterCrossInfo(0);
+//			return;
 			//死亡面板测试
 //			FightFaceHelper.showHurtText(MainRoleManager.actor,MainRoleManager.actor,EnumHurtType.SPELL_HURT_TYPE_CRIT,5000);
 //			FightFaceHelper.showHurtText(MainRoleManager.actor,MainRoleManager.actor,EnumHurtType.SPELL_HURT_TYPE_NORMAL,8000);
