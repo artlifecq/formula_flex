@@ -33,7 +33,7 @@ package com.rpgGame.app.ui.main.head {
             this._skin.btn_duiwu.visible = false;
             this._skin.btn_heping.visible = true;
             this._skin.btn_quanti.visible = false;
-            this._skin.btn_shane.visible = false;
+           // this._skin.btn_shane.visible = false;
 			_headImg=new UIAsset();
 			_headImg.x=18;
 			_headImg.y=4;
@@ -91,7 +91,7 @@ package com.rpgGame.app.ui.main.head {
                 case this._skin.btn_duiwu:
                 case this._skin.btn_heping:
                 case this._skin.btn_quanti:
-                case this._skin.btn_shane:
+               // case this._skin.btn_shane:
                     this.showPKMode(target);
                     break;
                 case this._headImg:

@@ -1,7 +1,7 @@
 package org.mokylin.skin.app.beibao.junjie
 {
-	import feathers.controls.Radio;
 	import feathers.controls.StateSkin;
+	import feathers.controls.ToggleButton;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.app.beibao.junjie.button.Button1jie;
 
@@ -15,7 +15,7 @@ package org.mokylin.skin.app.beibao.junjie
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var btnCont:feathers.controls.Radio;
+		public var btnCont:feathers.controls.ToggleButton;
 
 		public var icons:feathers.controls.UIAsset;
 
@@ -39,9 +39,9 @@ package org.mokylin.skin.app.beibao.junjie
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function btnCont_i():feathers.controls.Radio
+		private function btnCont_i():feathers.controls.ToggleButton
 		{
-			var temp:feathers.controls.Radio = new feathers.controls.Radio();
+			var temp:feathers.controls.ToggleButton = new feathers.controls.ToggleButton();
 			btnCont = temp;
 			temp.name = "btnCont";
 			temp.styleClass = org.mokylin.skin.app.beibao.junjie.button.Button1jie;

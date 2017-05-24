@@ -4,6 +4,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.app.manager.AreaMapManager;
 	import com.rpgGame.app.manager.CharAttributeManager;
 	import com.rpgGame.app.manager.GameCameraManager;
+	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.ShortcutsManger;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.ctrl.ControlAutoPick;
@@ -90,7 +91,7 @@ package com.rpgGame.app.manager.role
 		{
 			//角色信息
 			HeroData.setUserLoginInfo(actorInfo, heroInfo);
-
+			PKMamager.setPkMode(heroInfo.pkType);
 //			if(heroProto.goodsContainerModuleObj)
 //			{
 //				//背包信息

@@ -9,13 +9,18 @@ package com.rpgGame.app.graphics
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.JunJieData;
 	import com.rpgGame.coreData.cfg.StaticValue;
+	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.FaceInfo;
+	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.role.HeroData;
+	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.AttachDisplayType;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.coreData.utils.JunJieUtil;
+	
+	import app.message.MonsterDataProto.MonsterType;
 	
 	import feathers.controls.UIAsset;
 	import feathers.controls.UIMovieClip;
@@ -136,6 +141,7 @@ package com.rpgGame.app.graphics
 					addAndUpdateGuildName();
 					addAndUpdateOfficeName();
 					//addAndUpdateFamilyName();//暂无家族
+					addAndUpdateLV();
 					break;
 				case SceneCharType.NPC:
 				case SceneCharType.PROTECT_NPC:
@@ -151,6 +157,7 @@ package com.rpgGame.app.graphics
 				case SceneCharType.ZHAN_CHE:
 					addAndUpdateHP();
 					addAndUpdateName();
+					addAndUpdateLV();
 					break;
 				case SceneCharType.DROP_GOODS:
 					addAndUpdateName();
@@ -201,13 +208,11 @@ package com.rpgGame.app.graphics
 			}
 			else if (_role.type == SceneCharType.MONSTER) //怪物，全显示或者全隐藏
 			{
-				/*	var monster:Q_monster=MonsterDataManager.getData((_role.data as MonsterData).modelID);
+				var monster:Q_monster=MonsterDataManager.getData((_role.data as MonsterData).modelID);
+				var isNormal:Boolean=monster.q_monster_type==MonsterType.NORMAL;
 				//普通怪在战斗状态显示血条
-				if(monster.q_monster_type==MonsterType.NORMAL&&(_isSelected||(_role.stateMachine&&(_role.stateMachine.isAttacking||_role.stateMachine.isHiting)))){
-				showAndHideElement(_bloodBar, true);
-				}*/
-				
-				showAndHideElement(_nameBar, _isSelected && nameVisible);
+			
+				showAndHideElement(_nameBar, isNormal&&_isSelected && nameVisible);
 			}
 			else if (_role.type == SceneCharType.DROP_GOODS) //掉落物，全显示或者全隐藏
 			{
@@ -268,7 +273,7 @@ package com.rpgGame.app.graphics
 					
 					//选中显示
 					//showAndHideElement( _bloodBar, _isSelected );
-					//					showAndHideElement(_bloodBar, true);
+					showAndHideElement(_bloodBar, true);
 					showAndHideElement(_guildNameBar, _isSelected && !_isCamouflage);
 					showAndHideElement(_familNameBar, _isSelected && !_isCamouflage);
 				}
@@ -445,7 +450,31 @@ package com.rpgGame.app.graphics
 			//更新一下数据
 			_bloodBar.update(_bloodPercent);
 		}
-		
+		/**
+		 * 添加且更新血条
+		 */
+		private function addAndUpdateLV() : void
+		{
+			if (_role.type != SceneCharType.PLAYER&&_role.type!=SceneCharType.MONSTER)
+				return;
+			
+			if (_bloodBar == null)
+			{
+				//原来没有血条添加一个
+				_bloodBar = HeadBloodBar.create(_role);
+				//				_bloodBar.state = HeadBloodUtil.getRoleBloodState( _role );
+				//				this.addChild(_bloodBar); //更新一下容器，从临时的到模型真正容器
+			}
+			//更新一下数据
+			if (_role.type==SceneCharType.PLAYER) 
+			{
+				_bloodBar.updateLevel((_role.data as HeroData).totalStat.level);
+			}
+			else
+			{
+				_bloodBar.updateLevel((_role.data as MonsterData).monsterData.q_level);
+			}
+		}
 		/**
 		 * 设置血条状态，由HeadBloodStateType枚举
 		 * @param value
@@ -465,7 +494,7 @@ package com.rpgGame.app.graphics
 				return;
 			
 			_bloodPercent = value;
-			if (_bloodBar)
+			if (_bloodBar&&_bloodBar.stage)
 			{
 				_bloodBar.update(_bloodPercent);
 				if(showBloodTween){
@@ -477,6 +506,22 @@ package com.rpgGame.app.graphics
 			if (_isSelected)
 			{
 				EventManager.dispatchEvent(UPDATE_HEAD_FIGHT_INFO, _role, _bloodPercent);
+			}
+		}
+		public function set level(value : int) : void
+		{
+			
+			if (_bloodBar)
+			{
+				_bloodBar.updateLevel(value);
+			}
+		}
+		public function checkBloodState() : void
+		{
+			
+			if (_bloodBar)
+			{
+				_bloodBar.checkState();
 			}
 		}
 		//---------------------------------------------
@@ -1077,6 +1122,14 @@ package com.rpgGame.app.graphics
 		
 		public function showBloodBar():void
 		{
+			//精英或者boss不显示小学条
+			if (_role.type == SceneCharType.MONSTER) 
+			{
+				if ((_role.data as MonsterData).monsterData.q_monster_type!=MonsterType.NORMAL) 
+				{
+					return;
+				}
+			}
 			this.addChildAt(_bloodBar,0);
 			if(showBloodTween){
 				showBloodTween.kill();

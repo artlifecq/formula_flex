@@ -55,7 +55,11 @@ package com.rpgGame.app.graphics
 			dispose();
 		}
 		
-		
+		public function setSzie(w:Number,h:Number):void
+		{
+			_skin.width = w;
+			_skin.height = h;
+		}
 		
 		public function instanceDispose() : void
 		{

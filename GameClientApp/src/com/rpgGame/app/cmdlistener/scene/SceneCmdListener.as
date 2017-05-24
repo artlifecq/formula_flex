@@ -10,6 +10,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.manager.CharAttributeManager;
 	import com.rpgGame.app.manager.ClientTriggerManager;
 	import com.rpgGame.app.manager.GameCameraManager;
+	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.RankManager;
 	import com.rpgGame.app.manager.ReliveManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
@@ -215,6 +216,11 @@ package com.rpgGame.app.cmdlistener.scene
 			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;
 			if(role){
 				(role.data as HeroData).pkMode=msg.pkState;
+			}
+			//主玩家
+			if (role==MainRoleManager.actor) 
+			{
+				PKMamager.setPkMode(msg.pkState);
 			}
 		}
 		

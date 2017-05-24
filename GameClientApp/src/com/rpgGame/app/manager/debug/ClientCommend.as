@@ -5,6 +5,8 @@ package   com.rpgGame.app.manager.debug
 	import com.game.mainCore.core.manager.LayerManager;
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.Mgr;
+	import com.rpgGame.app.manager.PKMamager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	
 	import org.game.netCore.net.MessageMgr;
 
@@ -44,8 +46,10 @@ package   com.rpgGame.app.manager.debug
 			{
 				Mgr.vipMgr.vipLv=arg[0];
 			});
-			commandList.put( ".buy", function (...arg):void
+			commandList.put( ".pk", function (...arg):void
 			{
+				MainRoleManager.actorInfo.pkMode=arg[0];
+				PKMamager.setPkMode(arg[0]);
 				
 			});
 		}

@@ -2,9 +2,9 @@ package com.rpgGame.appModule.dungeon.multy
 {
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.ui.SkinUIModePanel;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
-	import com.rpgGame.appModule.fightsoul.PropView;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
@@ -20,25 +20,21 @@ package com.rpgGame.appModule.dungeon.multy
 	
 	import feathers.controls.Button;
 	import feathers.controls.Group;
-	import feathers.controls.List;
 	import feathers.controls.ScrollContainer;
 	import feathers.controls.Scroller;
 	import feathers.controls.SkinnableContainer;
-	import feathers.controls.StateSkin;
 	import feathers.events.FeathersEventType;
 	import feathers.utils.filter.GrayFilter;
 	
 	import org.mokylin.skin.app.fuben.FuBen_DuoRen_Item;
 	import org.mokylin.skin.app.fuben.FuBen_DuoRen_Skin;
-	import org.mokylin.skin.app.maps.mapItems;
-	import org.mokylin.skin.component.list.ListSkin1;
 	
 	import starling.display.DisplayObject;
 	import starling.display.Shape;
 	import starling.display.Sprite;
 	import starling.events.Event;
 
-	public class MultyView
+	public class MultyView extends SkinUIModePanel
 	{
 		private var _skin:FuBen_DuoRen_Skin;
 		private var scroll_Bar :ScrollContainer;
@@ -49,16 +45,17 @@ package com.rpgGame.appModule.dungeon.multy
 		private var selectId:int=-1;
 		
 		private var currCount:int=3;
-		public function MultyView(skin:SkinnableContainer)
+		public function MultyView():void
 		{
-			_skin=skin.skin as FuBen_DuoRen_Skin;
+			super(FuBen_DuoRen_Skin,"多人副本",1);
+		}
+		
+		override protected function initialize():void
+		{
+			_skin = _uiskin as FuBen_DuoRen_Skin;
 			initScroll();
 			creatDungeonItem();
 			creatGlobalReward();
-			//changeItem(0);
-			//setSite();
-			
-			//_skin.btnEnter.addEventListener(FeathersEventType.STATE_CHANGE,buttonTouchHandler);
 		}
 		
 		private function initScroll():void
@@ -77,7 +74,7 @@ package com.rpgGame.appModule.dungeon.multy
 			scroll_Bar.addChild(scrollBox);
 			
 		}
-		public function onTouchTarget(target:DisplayObject):void
+		override public function onTouchTarget(target:DisplayObject):void
 		{
 			switch (target) {
 				case _skin.btnEnter:
@@ -108,7 +105,7 @@ package com.rpgGame.appModule.dungeon.multy
 		{
 			
 		}
-		public function showView():void
+		override public function showView():void
 		{
 			//setInitSelect()
 			setGray();

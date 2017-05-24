@@ -182,6 +182,8 @@ package com.rpgGame.coreData.lang
 		public static const LUNJIAN_FIGHT_MIN:String = "LUNJIAN_FIGHT_MIN";
 		 /**  此装备具有锻造属性！是否仍然作为材料消耗？ */
 		public static const EQUIP_USE_TIPS:String = "EQUIP_USE_TIPS";
+		 /**  花费<font color='0xffff00'>$元宝</font>可购买1次挑战次数 */
+		public static const BuyCombatCount:String = "BuyCombatCount";
 
 	}
 }

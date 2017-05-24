@@ -8,7 +8,10 @@ package com.rpgGame.app.graphics
 	import com.rpgGame.coreData.type.AttachDisplayType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
+	import flash.geom.Rectangle;
+	
 	import app.message.GoodsType;
+	
 
 	public class DropItemHeadFace extends BaseHeadFace
 	{
@@ -111,13 +114,15 @@ package com.rpgGame.app.graphics
 			if (_nameBar != null) //名字位置
 			{
 				_nameBar.x = int(-_nameBar.realWidth * 0.5);
-				_nameBar.y = int(-15 - _nameBar.realHeight);
+				_nameBar.y = int(-10 - _nameBar.realHeight);
 			}
 			
 			if(_back != null)
 			{
-				_back.x = int(-_back.width * 0.5);
-				_back.y = int(-15 - _back.realHeight);
+				var range:Rectangle = _nameBar.measureText();
+				_back.setSzie(range.width+40,21);
+				_back.x = int(-_back.realWidth * 0.5);
+				_back.y = int(-10 - _back.realHeight);
 			}
 			
 			//-------------------更新显示隐藏状态
