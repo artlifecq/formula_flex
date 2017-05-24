@@ -191,7 +191,7 @@ package com.rpgGame.app.manager
 			var obstacleArea : ClientMapAreaData = AreaCfgData.getDynamicObstacleAreas(aid);
 			if(!obstacleArea)return;
 			var mapPointSets : Vector.<MapPointSet> = new Vector.<MapPointSet>();
-			mapPointSets.push(new MapPointSet("MapDataDynamicObstacleArea" + obstacleArea.id, obstacleArea.getVector2Ds()));
+			mapPointSets.push(new MapPointSet("MapDataDynamicObstacleArea" + aid, obstacleArea.getVector2Ds()));
 			SceneManager.getScene().sceneMapLayer.addObstaclePoints(mapPointSets);
 		}
 		/**

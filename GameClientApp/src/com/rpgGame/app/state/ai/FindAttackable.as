@@ -82,7 +82,7 @@ package com.rpgGame.app.state.ai
 				{
 					var dist:int = Point.distance(new Point(MainRoleManager.actor.x,MainRoleManager.actor.z),new Point(role.x,role.z));
 					var max:int=int.MAX_VALUE
-					if(TrusteeshipManager.getInstance().findDist==0)
+					if(TrusteeshipManager.getInstance().findDist>0)
 					{
 						max=TrusteeshipManager.getInstance().findDist*50;
 					}

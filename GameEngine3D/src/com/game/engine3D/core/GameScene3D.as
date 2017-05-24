@@ -38,6 +38,7 @@ package com.game.engine3D.core
 	import away3d.materials.lightpickers.StaticLightPicker;
 	import away3d.materials.methods.FogMethod;
 	import away3d.materials.methods.ShadingMethodBase;
+	import away3d.utils.SoundUtil;
 	
 	import gs.TweenLite;
 	
@@ -194,6 +195,8 @@ package com.game.engine3D.core
 			_heatFilter = new HeatFilter3D();
 			_glowFilter = new GlowFilter3D();
 			resetViewFilters();
+			
+//			SoundUtil.soundReference = getCameraTarget();
 		}
 		
 		public function get isLoading() : Boolean

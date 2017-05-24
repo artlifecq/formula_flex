@@ -26,7 +26,7 @@ package com.rpgGame.app.ui.roll
 	
 	import starling.animation.IAnimatable;
 	import starling.core.Starling;
-	import starling.events.Event;
+	import away3d.events.Event;
 	
 	public class RollPane extends SkinUI implements IAnimatable
 	{

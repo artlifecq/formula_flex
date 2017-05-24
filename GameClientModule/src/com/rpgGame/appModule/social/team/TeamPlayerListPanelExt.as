@@ -21,7 +21,7 @@ package  com.rpgGame.appModule.social.team
 	
 	import org.mokylin.skin.app.shejiao.zudui.Zudui_wanjia;
 	
-	import starling.events.Event;
+	import away3d.events.Event;
 	
 
 

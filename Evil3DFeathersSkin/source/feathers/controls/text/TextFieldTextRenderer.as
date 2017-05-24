@@ -20,7 +20,7 @@ package feathers.controls.text
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
 	
-	import away3d.debug.Debug;
+	import away3d.events.Event;
 	
 	import feathers.core.FeathersControl;
 	import feathers.core.IStateContext;
@@ -30,7 +30,6 @@ package feathers.controls.text
 	import feathers.events.FeathersEventType;
 	import feathers.layout.VerticalAlign;
 	import feathers.skins.IStyleProvider;
-	import feathers.themes.GuiTheme;
 	import feathers.utils.filter.NativeFilterPool;
 	import feathers.utils.geom.matrixToScaleX;
 	import feathers.utils.geom.matrixToScaleY;
@@ -38,9 +37,9 @@ package feathers.controls.text
 	
 	import starling.core.Starling;
 	import starling.display.Image;
-	import starling.events.Event;
 	import starling.rendering.Painter;
 	import starling.textures.ConcreteTexture;
+	import starling.textures.DynamicTextTextureManager;
 	import starling.textures.IStarlingTexture;
 	import starling.textures.TextureFactory;
 	import starling.utils.MathUtil;
@@ -98,7 +97,7 @@ package feathers.controls.text
 		 * @see feathers.core.FeathersControl#styleProvider
 		 */
 		public static var globalStyleProvider:IStyleProvider;
-
+		
 		/**
 		 * Constructor.
 		 */
@@ -106,7 +105,6 @@ package feathers.controls.text
 		{
 			super();
 			this.isQuickHitAreaEnabled = true;
-			this._enableTextBatchRender = GuiTheme.ENABLE_TEXT_BATCH_RENDER;
 		}
 
 		/**
@@ -264,6 +262,21 @@ package feathers.controls.text
 			}
 			this._isHTML = value;
 			this.invalidate(INVALIDATION_FLAG_DATA);
+		}
+		
+		protected var _enableTextBatch : Boolean;
+		
+		public function get enableTextBatch():Boolean {
+			return _enableTextBatch;
+		}
+		
+		/**
+		 * 是否启用动态合并文字功能 
+		 * @param value
+		 * 
+		 */		
+		public function set enableTextBatch(value:Boolean):void {
+			_enableTextBatch = value;
 		}
 
 		/**
@@ -2022,6 +2035,7 @@ package feathers.controls.text
 					
 					bitmapData = this.drawTextFieldRegionToBitmapData(xPosition, yPosition,
 						currentBitmapWidth, currentBitmapHeight, bitmapData);
+					
 					var newTexture:IStarlingTexture;
 					if(!this.textSnapshot || this._needsNewTexture)
 					{
@@ -2031,14 +2045,12 @@ package feathers.controls.text
 						//get texture cache
 						var  filterId:String = Fontter.getFilterId(_nativeFilters);
 						_textureKey = _textFormat.font+"_"+_textFormat.size+"_"+_textFormat.color+"_"+filterId+"_"+_text;
-						if(!_enableTextBatchRender)
-						{
-							newTexture = TextureFactory.empty(bitmapData.width, bitmapData.height,
-								false, false);
+						if (_enableTextBatch) {
+//							newTexture = DynamicTextTextureManager.instance.createSubTexture(_textureKey, bitmapData, false);
+						}
+						if (newTexture == null) {
+							newTexture = TextureFactory.empty(bitmapData.width, bitmapData.height, false, false);
 							newTexture.root.uploadBitmapData(bitmapData);
-						}else
-						{
-							newTexture = GuiTheme.ins.creatBatchRenderTextTexture(_textureKey, bitmapData);
 						}
 						CONFIG::Debug
 							{
@@ -2072,27 +2084,30 @@ package feathers.controls.text
 					{
 						if(this._needsNewTexture)
 						{
-							snapshot.texture.dispose();
-							snapshot.texture = newTexture;
+							if (snapshot.texture != newTexture) {
+								snapshot.texture.dispose();
+								snapshot.texture = newTexture;
+							}
 						}
 						else
 						{
 							var existingTexture:IStarlingTexture = snapshot.texture;
 							_textureKey = _textFormat.font+"_"+_textFormat.size+"_"+_textFormat.color+"_"+filterId+"_"+_text;
-							if(!_enableTextBatchRender && existingTexture != null)
+							
+							if(existingTexture != null)
 							{
-								//this is faster, if we haven't resized the bitmapdata
-								existingTexture.root.uploadBitmapData(bitmapData);
-								//however, the image won't be notified that its
-								//texture has changed, so we need to do it manually
-								CONFIG::Debug
-									{
+								if (_enableTextBatch) {
+//									DynamicTextTextureManager.instance.uploadSubTexture(_textureKey, bitmapData);
+								} else {
+									//this is faster, if we haven't resized the bitmapdata
+									existingTexture.root.uploadBitmapData(bitmapData);
+									//however, the image won't be notified that its
+									//texture has changed, so we need to do it manually
+									CONFIG::Debug {
 										existingTexture.key = _textureKey;
-									}
-							}else{
-								var texture:IStarlingTexture = GuiTheme.ins.creatBatchRenderTextTexture(_textureKey, bitmapData);
-								snapshot.texture = texture;
-								if(existingTexture && existingTexture !=texture)existingTexture.dispose();
+									};
+								}
+								
 							}
 							
 							this.textSnapshot.setRequiresRedraw();
@@ -2126,7 +2141,8 @@ package feathers.controls.text
 				totalBitmapHeight = this._snapshotHeight;
 			}
 			while(totalBitmapWidth > 0)
-			if(!_enableTextBatchRender)bitmapData.dispose();
+				bitmapData.dispose();
+				
 			if(this.textSnapshots)
 			{
 				var snapshotCount:int = this.textSnapshots.length;
@@ -2172,6 +2188,5 @@ package feathers.controls.text
 		
 		//------------------------------evil3d-------------------------/
 		private var _textureKey:String;
-		private var _enableTextBatchRender:Boolean;
 	}
 }

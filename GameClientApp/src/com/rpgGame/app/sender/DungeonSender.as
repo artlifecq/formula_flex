@@ -1,6 +1,7 @@
 package com.rpgGame.app.sender
 {
 	import com.rpgGame.netData.lunjian.message.CSLunJianPanelInfosMessage;
+	import com.rpgGame.netData.zone.message.CSClientTriggerValiedMessage;
 	import com.rpgGame.netData.zone.message.ReqZoneCommonEnterMessage;
 	import com.rpgGame.netData.zone.message.ReqZoneCommonQuitMessage;
 	
@@ -49,5 +50,18 @@ package com.rpgGame.app.sender
 			var msg:CSLunJianPanelInfosMessage=new CSLunJianPanelInfosMessage();
 			SocketConnection.send(msg);
 		}
+		
+		
+		/**
+		 *发送触发信息
+		 * 
+		 */
+		public static function reqTrigger(trid:int):void
+		{
+			var msg:CSClientTriggerValiedMessage=new CSClientTriggerValiedMessage();
+			msg.triggerId=trid;
+			SocketConnection.send(msg);
+		}
+		
 	}
 }

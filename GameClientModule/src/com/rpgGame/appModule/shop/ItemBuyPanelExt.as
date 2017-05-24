@@ -27,7 +27,7 @@ package com.rpgGame.appModule.shop
 	import org.mokylin.skin.app.shangcheng.Tankuang_Shangpin;
 	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
+	import away3d.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;

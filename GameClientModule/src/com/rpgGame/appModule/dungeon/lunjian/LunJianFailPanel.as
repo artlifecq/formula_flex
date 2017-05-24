@@ -57,8 +57,9 @@ package com.rpgGame.appModule.dungeon.lunjian
 		{
 			leftTime--;
 			_skin.lbTime.text=leftTime+"秒后自动退出";
-			if(leftTime<0){
+			if(leftTime<=0){
 				TimerServer.remove(updateTime);
+				DungeonSender.reqQuitDungeon();
 				this.onHide();
 			}
 		}

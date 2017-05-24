@@ -19,7 +19,7 @@ package feathers.media
 	import flash.media.SoundTransform;
 	import flash.net.URLRequest;
 
-	import starling.events.Event;
+	import away3d.events.Event;
 
 	/**
 	 * Dispatched when the MP3 ID3 metadata becomes available on the
@@ -46,7 +46,7 @@ package feathers.media
 	 *
 	 * @eventType feathers.events.MediaPlayerEventType.METADATA_RECEIVED
 	 */
-	[Event(name="metadataReceived",type="starling.events.Event")]
+	[Event(name="metadataReceived",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched periodically when a media player's content is loading to
@@ -75,7 +75,7 @@ package feathers.media
 	 *
 	 * @eventType feathers.events.MediaPlayerEventType.LOAD_PROGRESS
 	 */
-	[Event(name="loadProgress",type="starling.events.Event")]
+	[Event(name="loadProgress",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when a media player's content is fully loaded and it
@@ -100,7 +100,7 @@ package feathers.media
 	 *
 	 * @eventType feathers.events.MediaPlayerEventType.LOAD_COMPLETE
 	 */
-	[Event(name="loadComplete",type="starling.events.Event")]
+	[Event(name="loadComplete",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the <code>flash.media.Sound</code> object dispatches
@@ -124,9 +124,9 @@ package feathers.media
 	 *
 	 * @see http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/media/Sound.html#event:ioError flash.media.Sound: flash.events.IOErrorEvent.IO_ERROR
 	 *
-	 * @eventType starling.events.Event.IO_ERROR
+	 * @eventType away3d.events.Event.IO_ERROR
 	 */
-	[Event(name="ioError",type="starling.events.Event")]
+	[Event(name="ioError",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the <code>flash.media.Sound</code> object dispatches
@@ -150,9 +150,9 @@ package feathers.media
 	 *
 	 * @see http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/media/Sound.html#event:securityError flash.media.Sound: flash.events.SecurityErrorEvent.SECURITY_ERROR
 	 *
-	 * @eventType starling.events.Event.SECURITY_ERROR
+	 * @eventType away3d.events.Event.SECURITY_ERROR
 	 */
-	[Event(name="securityError",type="starling.events.Event")]
+	[Event(name="securityError",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the media player's sound transform changes.
@@ -176,7 +176,7 @@ package feathers.media
 	 *
 	 * @eventType feathers.events.MediaPlayerEventType.SOUND_TRANSFORM_CHANGE
 	 */
-	[Event(name="soundTransformChange",type="starling.events.Event")]
+	[Event(name="soundTransformChange",type="away3d.events.Event")]
 
 	/**
 	 * Controls playback of audio with a <code>flash.media.Sound</code> object.

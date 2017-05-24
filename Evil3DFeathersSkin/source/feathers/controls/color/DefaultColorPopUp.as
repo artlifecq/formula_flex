@@ -13,10 +13,10 @@ package feathers.controls.color
 	import feathers.skins.IStyleProvider;
 
 	import starling.display.DisplayObject;
-	import starling.events.Event;
+	import away3d.events.Event;
 
-	[Event(name="update",type="starling.events.Event")]
-	[Event(name="change",type="starling.events.Event")]
+	[Event(name="update",type="away3d.events.Event")]
+	[Event(name="change",type="away3d.events.Event")]
 
 	public class DefaultColorPopUp extends LayoutGroup implements IColorControl
 	{

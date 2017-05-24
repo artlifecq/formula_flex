@@ -6,16 +6,17 @@ package com.rpgGame.appModule.dungeon.genuine
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.coreData.clientConfig.Q_daily_zone;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.dailyzone.bean.DailyZonePanelInfo;
+	
+	import away3d.events.Event;
 	
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.fuben.FuBenItem_Zhenqi;
-	
-	import starling.events.Event;
 	
 	public class GenuineCell extends DefaultListItemRenderer
 	{
@@ -67,9 +68,12 @@ package com.rpgGame.appModule.dungeon.genuine
 			itemInfos = ItemUtil.jsonParseItemClientList(data.q_rewards_client);
 			for(var i:int = 0;i<_rewardIcons.length;i++)
 			{
+				ClientItemInfo(itemInfos[i]).count = 0;
 				FaceUtil.SetItemGrid(_rewardIcons[i],itemInfos[i], true);
 			}
-			_skin.lastCombatCount.visible = false;
+			_skin.resetgroup.visible = false;
+			_skin.combatgroup.visible = false;
+			_skin.uiTishi.visible = false;
 			if(_dailyZoneInfo==null)
 			{
 				_skin.grpXinL.visible = false;
@@ -91,11 +95,9 @@ package com.rpgGame.appModule.dungeon.genuine
 		{
 			if(_dailyZoneInfo==null||_dailyZoneInfo.remainCount>0)
 			{
-				_skin.btnReset.visible = false;
-				_skin.coustgroup.visible = false;
+				_skin.resetgroup.visible = false;
 			}else{
-				_skin.btnReset.visible = true;
-				_skin.coustgroup.visible = true;
+				_skin.resetgroup.visible = true;
 				_skin.lbYuanbao.text = _dailyZoneInfo.price.toString();
 			}
 			
@@ -105,9 +107,9 @@ package com.rpgGame.appModule.dungeon.genuine
 			if(_dailyZoneInfo==null||_dailyZoneInfo.remainCount==0)
 			{
 				_skin.btnEnter.visible = false;
-				_skin.lastCombatCount.visible = false;
+				_skin.combatgroup.visible = false;
 			}else{
-				_skin.lastCombatCount.visible = true;
+				_skin.combatgroup.visible = true;
 				_skin.btnEnter.visible = (_dailyZoneInfo.remainCount>0);
 				_skin.lbNum.text = _dailyZoneInfo.remainCount.toString();
 			}

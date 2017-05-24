@@ -25,5 +25,14 @@ package starling.text
 
         /** Frees all resources allocated by the compositor. */
         function dispose():void;
+		
+		function get enableTextBatch() : Boolean;
+		
+		/**
+		 * 是否启用文字合并功能 
+		 * @param value
+		 * 
+		 */		
+		function set enableTextBatch(value : Boolean) : void;
     }
 }

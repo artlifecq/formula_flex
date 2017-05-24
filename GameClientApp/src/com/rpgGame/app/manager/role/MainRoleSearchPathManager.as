@@ -261,7 +261,8 @@ package com.rpgGame.app.manager.role
 					}
 					else
 					{
-						RoleStateUtil.walkToPos(MainRoleManager.actor, pos, searchMapData.spacing, _data);
+						//RoleStateUtil.walkToPos(MainRoleManager.actor, pos, searchMapData.spacing, _data);
+						RoleStateUtil.walkToPos(MainRoleManager.actor, pos, 10, _data);
 					}
 					//RoleStateUtil.walk(MainRoleManager.actor, searchMapData.posX, searchMapData.posY, searchMapData.spacing, _data);
 				}

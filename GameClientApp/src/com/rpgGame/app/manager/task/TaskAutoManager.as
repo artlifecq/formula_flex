@@ -74,6 +74,7 @@ package com.rpgGame.app.manager.task
 		
 		public function startTaskAuto(tar:int=0) : void
 		{
+			testStopKey=false;
 			_stateMachine.transition(AIStateType.AI_NONE);
 			_taskTarget=tar;
 			changeSub();
@@ -194,7 +195,7 @@ package com.rpgGame.app.manager.task
 				changeSub();
 				TrusteeshipManager.getInstance().stopAll();
 				GatherAutoManager.getInstance().stopGatherAuto();
-				//SceneRoleSelectManager.selectedRole=null;
+				SceneRoleSelectManager.selectedRole=null;
 				_stateMachine.transition(AIStateType.AI_NONE);
 			}
 			
@@ -231,7 +232,7 @@ package com.rpgGame.app.manager.task
 			}
 			testStopKey=false;
 		}
-		private var testStopKey:Boolean=false;
+		private var testStopKey:Boolean=true;
 		
 	}
 }

@@ -36,6 +36,8 @@
 		 * 全部属性=基础属性+可被洗属性
 		 */
 		public var totalStat : SpriteStat;
+		/**分布Id 刷新id表*/
+		public var distributeId: int;
 		/**
 		 * 被分配属性,可以被洗掉
 		 */

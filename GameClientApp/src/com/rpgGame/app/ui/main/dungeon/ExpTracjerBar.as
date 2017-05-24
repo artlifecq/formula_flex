@@ -103,9 +103,6 @@ package com.rpgGame.app.ui.main.dungeon
 			}
 			_skin.killName.text = wave.toString()+"/"+_totalWaveCount;
 			_skin.killNum.text = count.toString()+"/"+_totalMonsterCount;
-			var percent:Number = count/_totalMonsterCount;
-			_skin.pro_bar.value = _skin.pro_bar.maximum*percent;
-			_skin.lbNum.text = count.toString()+"/"+_totalMonsterCount;
 		}
 		override protected function onHide():void
 		{

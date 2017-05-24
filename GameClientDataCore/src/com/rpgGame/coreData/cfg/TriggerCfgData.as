@@ -5,7 +5,7 @@ package com.rpgGame.coreData.cfg
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.coreData.clientConfig.ClientTrigger;
 	import com.rpgGame.coreData.clientConfig.Q_area;
-	import com.rpgGame.coreData.clientConfig.Q_trigger;
+	import com.rpgGame.coreData.clientConfig.Q_map_trigger;
 	import com.rpgGame.coreData.clientConfig.Q_zone_multy;
 	
 	import flash.utils.ByteArray;
@@ -30,26 +30,30 @@ package com.rpgGame.coreData.cfg
 			var areaData:ClientMapAreaData;
 			var qarea:Q_area;
 			var triger:ClientTrigger;
-			for each(var info :Q_trigger in arr) {
+			for each(var info :Q_map_trigger in arr) {
 				_dataDic[info.q_id] = info;
+				
+				triger=new ClientTrigger();
+				triger.id=info.q_id;
+				triger.name=info.q_name
+				
+				triger.zoneId=info.q_zone_Id;
+				triger.triggerType=info.q_trigger_type;
+				triger.areaId=info.q_trigger_area_id;
+				triger.preTrigger=JSONUtil.decode(info.q_pre_trigger);
+				triger.obstacleArea=JSONUtil.decode(info.q_area_id);
+				triger.sceneEffectIds=JSONUtil.decode(info.q_effectIds);
+				triger.obstacleAreaRemove=JSONUtil.decode(info.q_area_remove_id);
+				triger.sceneEffectRemove=JSONUtil.decode(info.q_remove_effectIds);
 				if(info.q_trigger_type==1)
 				{
 					qarea=AreaCfgData.getAreaByID(info.q_trigger_area_id);
 					if (qarea)
 					{
-						triger=new ClientTrigger();
-						triger.id=info.q_id;
-						triger.name=info.q_name
-						triger.triggerType=info.q_trigger_type;
-						triger.areaId=info.q_trigger_area_id;
-						triger.preTrigger=info.q_pre_trigger;
-						triger.obstacleArea=info.q_area_id;
-						triger.sceneEffectIds=info.q_effectIds;
 						triger.sceneId=qarea.q_map_id;
-						//
-						_trigers.push(triger);
 					}
 				}
+				_trigers.push(triger);
 				
 			}
 		}

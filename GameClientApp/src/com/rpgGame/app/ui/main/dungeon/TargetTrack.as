@@ -1,5 +1,8 @@
 package com.rpgGame.app.ui.main.dungeon
 {
+	import com.rpgGame.app.manager.TrusteeshipManager;
+	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
+	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.core.events.DungeonEvent;
 	import com.rpgGame.coreData.cfg.DailyZoneMonsterCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_dailyzone_monster;
@@ -48,20 +51,9 @@ package com.rpgGame.app.ui.main.dungeon
 			if(cell==null)
 				return ;
 			cell.updateValue(currentWaveId,killerCount);
-			if(!cell.isComplete)
-				return ;
-			runTargetbyIndex(_allList.indexOf(cell.qdailyZoneData)+1);
 		}
 		
-		public function runTargetbyIndex(index:int):void
-		{
-			if(index<0||index>=_allList.length)
-			{
-				return ;
-			}
-			var qd:Q_dailyzone_monster = _allList[index];
-			
-		}
+		
 		public function onHide():void
 		{
 			EventManager.removeEvent(DungeonEvent.UPDATA_WAVE_INFO,updateWaveInfoHandler);

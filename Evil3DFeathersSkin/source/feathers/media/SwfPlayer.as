@@ -10,6 +10,7 @@ package feathers.media
 	import flash.system.ApplicationDomain;
 	import flash.system.LoaderContext;
 	import flash.utils.ByteArray;
+	import flash.utils.getTimer;
 	
 	import away3d.loaders.multi.MultiLoadData;
 	import away3d.loaders.multi.MultiUrlLoadManager;
@@ -20,7 +21,7 @@ package feathers.media
 	import starling.core.Starling;
 	import starling.display.DisplayObjectContainer;
 	import starling.display.Image;
-	import starling.events.Event;
+	import away3d.events.Event;
 	import starling.rendering.Painter;
 	import starling.textures.IStarlingTexture;
 	import starling.textures.TextureFactory;
@@ -59,6 +60,7 @@ package feathers.media
 		
 		private var _repeat:int = 0;
 		private var _repeatCompleteTimes:int = 0;
+		public var frameRate:int = 25;
 		
 		
 		/**
@@ -235,7 +237,7 @@ package feathers.media
 		private function startRenderFrame():void
 		{
 			if(_showMode != "inter")return;
-			TimerServer.addLoop(renderNextFrame, 1000/25);
+			TimerServer.addLoop(renderNextFrame, 1000/frameRate);
 			_isPlaying = true;
 		}
 		

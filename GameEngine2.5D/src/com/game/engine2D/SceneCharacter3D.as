@@ -102,6 +102,12 @@ package com.game.engine2D
 			super.dispose();
 		}
 		
+		/**销毁显示对象 */
+		override public function destroy() : void
+		{
+			recycle(this);
+		}
+		
 		public static function create(type : String, id : Number) : SceneCharacter3D
 		{
 			_cnt++;

@@ -576,6 +576,14 @@ package com.rpgGame.app.manager.role
 			SceneManager.addSceneObjToScene(effectRu, true, false, false);
 			return effectRu;
 		}
+		/**
+		 * 移除场景特效
+		 */
+		public function removeSceneEffect(id : int, type : String) : void
+		{
+			removeSceneRoleByIdAndType(id, type);
+		}
+		
 		
 		/**
 		 * 角色离开视野

@@ -13,10 +13,12 @@ package starling.styles
     import flash.geom.Matrix;
     import flash.geom.Point;
     
+    import away3d.events.Event;
+    import away3d.events.EventDispatcher;
+    
     import starling.core.starling_internal;
     import starling.display.Mesh;
-    import starling.events.Event;
-    import starling.events.EventDispatcher;
+    import starling.events.EnterFrameEvent;
     import starling.rendering.IndexData;
     import starling.rendering.MeshEffect;
     import starling.rendering.RenderState;
@@ -388,6 +390,9 @@ package starling.styles
         public function get texture():IStarlingTexture { return _texture; }
         public function set texture(value:IStarlingTexture):void
         {
+			// 无法解决的隐晦BUG
+			// 如果texture为subtexture，并且subtexture的root发生了改变，那么这里不再进行_textureBase以及uv的更新，将会造成无法合并的操作
+			// 如果subtexture的区域发生了改变，uv值是上一个texture的local uv,无法映射到新的texture。
             if (value != _texture)
             {
                 if (value)

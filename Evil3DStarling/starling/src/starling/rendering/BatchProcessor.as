@@ -26,7 +26,6 @@ package starling.rendering
         private var _currentBatch:MeshBatch;
         private var _currentStyleType:Class;
         private var _onBatchComplete:Function;
-        private var _cacheToken:BatchToken;
 
         // helper objects
         private static var sMeshSubset:MeshSubset = new MeshSubset();
@@ -36,7 +35,6 @@ package starling.rendering
         {
             _batches = new <MeshBatch>[];
             _batchPool = new BatchPool();
-            _cacheToken = new BatchToken();
         }
 
         /** Disposes all batches (including those in the reusable pool). */
@@ -89,7 +87,6 @@ package starling.rendering
                     _currentStyleType = mesh.style.type;
                     _currentBatch = _batchPool.get(_currentStyleType);
                     _currentBatch.blendMode = state ? state.blendMode : mesh.blendMode;
-                    _cacheToken.setTo(_batches.length);
                     _batches[_batches.length] = _currentBatch;
                 }
 
@@ -97,8 +94,6 @@ package starling.rendering
                 var alpha:Number  = state ? state._alpha : 1.0;
 
                 _currentBatch.addMesh(mesh, matrix, alpha, subset, ignoreTransformations);
-                _cacheToken.vertexID += subset.numVertices;
-                _cacheToken.indexID  += subset.numIndices;
             }
         }
 
@@ -129,7 +124,6 @@ package starling.rendering
             _batches.length = 0;
             _currentBatch = null;
             _currentStyleType = null;
-            _cacheToken.reset();
         }
 
         /** Returns the batch at a certain index. */
@@ -149,15 +143,6 @@ package starling.rendering
             _batchPool.purgeUnactivated();
         }
 
-        /** Sets all properties of the given token so that it describes the current position
-         *  within this instance. */
-        public function fillToken(token:BatchToken):BatchToken
-        {
-            token.batchID  = _cacheToken.batchID;
-            token.vertexID = _cacheToken.vertexID;
-            token.indexID  = _cacheToken.indexID;
-            return token;
-        }
 
         /** The number of batches currently stored in the BatchProcessor. */
         public function get numBatches():int { return _batches.length; }

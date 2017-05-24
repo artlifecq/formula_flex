@@ -117,17 +117,18 @@ package com.game.engine3D.controller
 
 		/**
 		 * 初始化和重置控制器
+		 * @param $camera 控制的镜头对象，传空会用Stage3DLayerManager.camera
 		 * @param $target 镜头跟随的目标（显示对象）
 		 * @param $targetObj 镜头跟随的目标（数据对象，比如sceneRole）
 		 * @param $listenerTarget 侦听鼠标事件的对象，传空会用舞台侦听
-		 * @param $camera 控制的镜头对象，传空会用Stage3DLayerManager.camera
 		 *
 		 */
 		public static function initcontroller($camera : Camera3D, $target : ObjectContainer3D, $targetObj : BaseObj3D = null, $listenerTarget : InteractiveObject = null) : void
 		{
+			_camera = $camera;
 			_target = $target;
 			_targetObj = $targetObj;
-			_camera = $camera;
+			
 			_listenerTarget = $listenerTarget ? $listenerTarget : Stage3DLayerManager.stage;
 		}
 

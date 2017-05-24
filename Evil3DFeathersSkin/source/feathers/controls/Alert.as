@@ -7,6 +7,8 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.controls
 {
+	import away3d.events.Event;
+	
 	import feathers.core.FeathersControl;
 	import feathers.core.IFeathersControl;
 	import feathers.core.IMeasureDisplayObject;
@@ -20,9 +22,8 @@ package feathers.controls
 	import feathers.layout.VerticalLayout;
 	import feathers.skins.IStyleProvider;
 	import feathers.utils.skins.resetFluidChildDimensionsForMeasurement;
-
+	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
 
 	[Exclude(name="layout",kind="property")]
 	[Exclude(name="footer",kind="property")]
@@ -53,9 +54,9 @@ package feathers.controls
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.CLOSE
+	 * @eventType away3d.events.Event.CLOSE
 	 */
-	[Event(name="close",type="starling.events.Event")]
+	[Event(name="close",type="away3d.events.Event")]
 
 	/**
 	 * Displays a message in a modal pop-up with a title and a set of buttons.

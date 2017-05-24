@@ -37,7 +37,7 @@ package com.rpgGame.core.view.uiComponent.face.cd
 				polygon360[angle] = new Polygon(getPolygonVertex(angle, MASK_RADIUS,MASK_RADIUS));
 			}
 			var polygon:Polygon =  polygon360[angle];
-			canvas.beginFill(0,0.5);
+			canvas.beginFill(0,0.8);
 			canvas.drawPolygon(polygon);
 			canvas.endFill();
 		}

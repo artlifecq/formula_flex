@@ -62,7 +62,7 @@ package com.rpgGame.appModule.equip
 	import org.mokylin.skin.app.zhuangbei.xilian.Xilian_Skin;
 	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
+	import away3d.events.Event;
 	
 	/**
 	 *装备洗练

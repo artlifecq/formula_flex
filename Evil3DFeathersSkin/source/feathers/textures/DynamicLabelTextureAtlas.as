@@ -210,7 +210,7 @@ package feathers.textures
 				}
 			
 			var outOfLimit:Boolean = clipRect.height > SINGLE_HEIGHT || clipRect.width > MAX_SIZE;
-			if(!outOfLimit && (GuiTheme.ENABLE_TEXT_BATCH_RENDER || isBitmpaFont))
+			if(!outOfLimit && isBitmpaFont)
 			{
 				if(!clipRect.equals(bitmapData.rect))//clip
 				{

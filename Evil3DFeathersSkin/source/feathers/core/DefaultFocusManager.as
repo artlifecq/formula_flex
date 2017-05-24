@@ -7,10 +7,6 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.core
 {
-	import feathers.controls.supportClasses.LayoutViewPort;
-	import feathers.events.FeathersEventType;
-	import feathers.utils.display.stageToStarling;
-
 	import flash.display.InteractiveObject;
 	import flash.display.Stage;
 	import flash.errors.IllegalOperationError;
@@ -18,11 +14,16 @@ package feathers.core
 	import flash.events.IEventDispatcher;
 	import flash.ui.Keyboard;
 	import flash.utils.Dictionary;
-
+	
+	import away3d.events.Event;
+	
+	import feathers.controls.supportClasses.LayoutViewPort;
+	import feathers.events.FeathersEventType;
+	import feathers.utils.display.stageToStarling;
+	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
-	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;

@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.dungeon.exp
 {
 	import com.rpgGame.app.manager.DailyZoneDataManager;
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.SkinUIModePanel;
 	import com.rpgGame.app.utils.FaceUtil;
@@ -63,6 +64,10 @@ package com.rpgGame.appModule.dungeon.exp
 			_dailyZoneInfo = DailyZoneDataManager.instance().getInfoById(_dailyZoneInfo.dailyzoneId);
 			_skin.lbShengyu.text = "今日剩余次数："+_dailyZoneInfo.remainCount;
 			_skin.lbGoumai.text = "剩余购买次数："+_dailyZoneInfo.canBuyCount;
+			if(_dailyZoneInfo.remainCount<=0)
+				_skin.lbShengyu.color = 0xd02525;
+			else
+				_skin.lbShengyu.color = 0xBEA757;
 		}
 		
 		override public function onTouchTarget(target:DisplayObject):void
@@ -70,7 +75,12 @@ package com.rpgGame.appModule.dungeon.exp
 			switch(target)
 			{
 				case _skin.btnEnter:
-					DailyZoneDataManager.instance().requestCombat(_dailyZoneInfo);
+					if(_dailyZoneInfo.remainCount>0)
+						DailyZoneDataManager.instance().requestCombat(_dailyZoneInfo);
+					else if(_dailyZoneInfo.canBuyCount>0)
+						DailyZoneDataManager.instance().buyCount(_dailyZoneInfo,true);
+					else
+						NoticeManager.showNotifyById(21004);
 					break;
 				case _skin.btnAdd:
 					DailyZoneDataManager.instance().buyCount(_dailyZoneInfo,true);

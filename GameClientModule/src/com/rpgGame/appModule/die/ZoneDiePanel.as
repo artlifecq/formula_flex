@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.die
 {
+	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	
 	import org.mokylin.skin.app.siwangfuhuo.TiaoZhanShiBai_Skin;
@@ -30,6 +31,7 @@ package com.rpgGame.appModule.die
 			super.onTouchTarget(target);
 			if(target == _skin.btn_ok)
 			{
+				DungeonSender.reqQuitDungeon();
 				this.hide();
 			}
 		}

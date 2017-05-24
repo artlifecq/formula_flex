@@ -16,17 +16,13 @@ package com.rpgGame.appModule.die
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
 	
-	import feathers.utils.filter.GrayFilter;
-	
 	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.siwangfuhuo.fuhuo_Skin;
-	import org.mokylin.skin.common.Erji_panelbg_Skin;
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
-	import starling.display.Sprite;
 	
 	/**
 	 *死亡面板 

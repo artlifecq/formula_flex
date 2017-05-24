@@ -4,6 +4,8 @@ package com.rpgGame.appModule.die
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.clientConfig.Q_die;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.UIAsset;
 	import feathers.controls.UIMovieClip;
 	import feathers.controls.renderers.DefaultListItemRenderer;

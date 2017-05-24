@@ -33,7 +33,7 @@ package game.rpgGame.login.view
 	
 	import starling.core.Starling;
 	import starling.display.DisplayObjectContainer;
-	import starling.events.Event;
+	import away3d.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -187,8 +187,8 @@ package game.rpgGame.login.view
 		private function initEvent():void
 		{
 			_stage.addEventListener(flash.events.Event.RESIZE, onStageResize);
-			sexGroup.addEventListener(starling.events.Event.CHANGE, updateAvatar );
-			jobGroup.addEventListener(starling.events.Event.CHANGE, jobChangeHandler );
+			sexGroup.addEventListener(away3d.events.Event.CHANGE, updateAvatar );
+			jobGroup.addEventListener(away3d.events.Event.CHANGE, jobChangeHandler );
 			
 			this.addEventListener(starling.events.TouchEvent.TOUCH, onTouch);
 		}
@@ -239,7 +239,7 @@ package game.rpgGame.login.view
 			_skin.text_input.text = RandomNick.randomNick(sexGroup.selectedIndex==0);			
 		}
 		
-		private function jobChangeHandler(e:starling.events.Event=null):void
+		private function jobChangeHandler(e:away3d.events.Event=null):void
 		{
 			if(jobGroup.selectedIndex==0){
 				_skin.btn_woman.touchable=false;
@@ -343,7 +343,7 @@ package game.rpgGame.login.view
 			
 		}
 		
-		private function updateAvatar(e:starling.events.Event=null) : void 
+		private function updateAvatar(e:away3d.events.Event=null) : void 
 		{
 			this._avatarData.avatarInfo.clear();
 			this._avatar.setRoleData(this._avatarData);
@@ -384,8 +384,8 @@ package game.rpgGame.login.view
 			
 			this.removeEventListener(starling.events.TouchEvent.TOUCH, onTouch);
 			
-			sexGroup.addEventListener(starling.events.Event.CHANGE, updateAvatar );
-			jobGroup.addEventListener(starling.events.Event.CHANGE, jobChangeHandler );
+			sexGroup.addEventListener(away3d.events.Event.CHANGE, updateAvatar );
+			jobGroup.addEventListener(away3d.events.Event.CHANGE, jobChangeHandler );
 			
 			if (parent)
 				parent.removeChild(this);

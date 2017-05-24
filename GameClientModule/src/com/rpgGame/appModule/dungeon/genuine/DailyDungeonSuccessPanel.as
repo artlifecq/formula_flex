@@ -14,7 +14,7 @@ package com.rpgGame.appModule.dungeon.genuine
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
-	import starling.events.Event;
+	import away3d.events.Event;
 	
 	import utils.TimerServer;
 	
@@ -59,21 +59,10 @@ package com.rpgGame.appModule.dungeon.genuine
 			playEffect(msg.star);
 			_skin.lbJingyan.text =msg.exp.toString();
 			_skin.lbTongqian.text = msg.money.toString();
-			
+			_skin.lbzhenqi.text = msg.zhenqi.toString();
 
 			var itemlist:Vector.<ItemInfo> = msg.itemInfoList;
 			var length:int = itemlist.length;
-			for(var j:int = 0;j<length;j++)
-			{
-				if(itemlist[i].itemModelId==2)
-				{
-					_skin.lbzhenqi.text = itemlist[i].num.toString();
-					itemlist.splice(i,1);
-					break;
-				}
-			}
-			
-			length = itemlist.length;
 			var startX:Number = (_skin.width-70*length)/2-12;
 			_rewardIcons =new Vector.<IconCDFace>();
 			for(var i:int = 0;i<length;i++)

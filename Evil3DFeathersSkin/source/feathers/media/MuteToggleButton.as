@@ -7,6 +7,11 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.media
 {
+	import flash.media.SoundTransform;
+	
+	import away3d.events.Event;
+	import away3d.events.EventDispatcher;
+	
 	import feathers.controls.ToggleButton;
 	import feathers.controls.popups.DropDownPopUpContentManager;
 	import feathers.controls.popups.IPopUpContentManager;
@@ -14,11 +19,7 @@ package feathers.media
 	import feathers.events.MediaPlayerEventType;
 	import feathers.layout.Direction;
 	import feathers.skins.IStyleProvider;
-
-	import flash.media.SoundTransform;
-
-	import starling.events.Event;
-	import starling.events.EventDispatcher;
+	
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -41,9 +42,9 @@ package feathers.media
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.OPEN
+	 * @eventType away3d.events.Event.OPEN
 	 */
-	[Event(name="open",type="starling.events.Event")]
+	[Event(name="open",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the pop-up volume slider is closed.
@@ -63,9 +64,9 @@ package feathers.media
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.CLOSE
+	 * @eventType away3d.events.Event.CLOSE
 	 */
-	[Event(name="close",type="starling.events.Event")]
+	[Event(name="close",type="away3d.events.Event")]
 
 	/**
 	 * A specialized toggle button that controls whether a media player's volume

@@ -29,7 +29,7 @@ package com.rpgGame.app.ui.main.smallmap
     import feathers.controls.text.Fontter;
     
     import starling.display.Sprite;
-    import starling.events.Event;
+    import away3d.events.Event;
     import starling.text.TextFieldAutoSize;
 
     

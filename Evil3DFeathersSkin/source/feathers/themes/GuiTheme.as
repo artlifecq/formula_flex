@@ -1,4 +1,5 @@
 package feathers.themes{
+
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display3D.Context3DTextureFormat;
@@ -10,7 +11,6 @@ package feathers.themes{
 	import flash.utils.Dictionary;
 	import flash.utils.getDefinitionByName;
 	
-	import away3d.debug.Debug;
 	import away3d.enum.LoadPriorityType;
 	import away3d.events.Event;
 	import away3d.log.Log;
@@ -104,6 +104,8 @@ package feathers.themes{
 		public static var BUTTON_TRIGGER_KEY:uint = Keyboard.SPACE;
 		public static var BUTTON_CANCEL_KEY:uint = Keyboard.ESCAPE;
 		
+		private static var _enabelTextBatch : Boolean = false;
+		
 		/**
 		 *当平铺超过这个数时将偿试使用GPU填充,会增加一次drawCall
 		 */	
@@ -167,23 +169,24 @@ package feathers.themes{
 		private static var CREAT_GRAY_IMG_PIXES:int = 0;
 		
 		/**
-		 *文本批次渲染,打开此开关会影响文本贴图的生成方式以及文本控件深度
-		 */	
-		private static var _enable_text_batch_render:Boolean;
-		public static function set ENABLE_TEXT_BATCH_RENDER(value:Boolean):void
-		{
-			//Log.debug("文本批次渲染:"+(value ? "开" : "关"));
-			//_enable_text_batch_render = value;
-		}
-		public static function get ENABLE_TEXT_BATCH_RENDER():Boolean
-		{
-			return _enable_text_batch_render;
-		}
-		
-		/**
 		 *自定义的纹理集key所包含的subKeys
 		 */		
 		private var customTexturesKeyMap:Dictionary;
+
+		/**
+		 * 是否开启文本的动态合并。
+		 */
+		public static function get ENABLE_TEXT_BATCH():Boolean {
+			return _enabelTextBatch;
+		}
+
+		/**
+		 * @private
+		 */
+		public static function set ENABLE_TEXT_BATCH(value:Boolean):void {
+			_enabelTextBatch = value;
+		}
+
 		public static var decodeURL:Function;
 		
 		private static var _ins:GuiTheme;
@@ -1111,14 +1114,6 @@ package feathers.themes{
 			}else{
 				url = RES_ROOT+key;
 			}
-			
-			//url = checkAddExtensionName(url);
-			
-/*			if(decodeURL != null)
-			{
-				url = decodeURL(url);
-			}*/
-			
 			key = nanoKey(key);
 			
 			var iStarlingTexture:IStarlingTexture = getTexture(key);
@@ -1169,6 +1164,34 @@ package feathers.themes{
 					{
 						texture.key = url;
 					}
+			}
+		}
+		
+		public function cancleLoadAsset(key:String, onComplete:Function):void
+		{
+			if(isErrorStr(key))
+			{
+				return;
+			}
+			var url:String = key;
+			if(key.indexOf(RES_ROOT) != -1)
+			{
+				url = key;
+			}else{
+				url = RES_ROOT+key;
+			}
+			var callbacks:Array = loadingAssets[url];
+			if(callbacks)
+			{
+				var len:int = callbacks.length;
+				while(len-->0)
+				{
+					var fun:Function = callbacks[len]
+					if(fun == onComplete)
+					{
+						callbacks.splice(len);
+					}
+				}
 			}
 		}
 		

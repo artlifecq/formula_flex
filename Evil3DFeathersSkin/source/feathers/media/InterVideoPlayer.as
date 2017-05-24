@@ -13,7 +13,7 @@ package feathers.media
 	import starling.core.Starling;
 	import starling.display.DisplayObjectContainer;
 	import starling.display.Image;
-	import starling.events.Event;
+	import away3d.events.Event;
 	import starling.rendering.Painter;
 	import starling.textures.IStarlingTexture;
 	import starling.textures.TextureFactory;

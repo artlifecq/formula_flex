@@ -8,11 +8,12 @@ accordance with the terms of the accompanying license agreement.
 package feathers.events
 {
 	import flash.utils.Dictionary;
-
+	
+	import away3d.events.Event;
+	import away3d.events.EventDispatcher;
+	
 	import starling.display.DisplayObject;
 	import starling.display.Stage;
-	import starling.events.Event;
-	import starling.events.EventDispatcher;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -21,9 +22,9 @@ package feathers.events
 	 * Dispatched when a touch ID is claimed or a claim is removed. The
 	 * <code>data</code> property is the touch ID.
 	 *
-	 * @eventType starling.events.Event.CHANGE
+	 * @eventType away3d.events.Event.CHANGE
 	 */
-	[Event(name="change",type="starling.events.Event")]
+	[Event(name="change",type="away3d.events.Event")]
 
 	/**
 	 * Allows a component to claim exclusive access to a touch to avoid

@@ -11,7 +11,9 @@
 package starling.events
 {
     import flash.geom.Point;
-
+    
+    import away3d.events.EventDispatcher;
+    
     import starling.display.DisplayObject;
     import starling.utils.StringUtil;
 

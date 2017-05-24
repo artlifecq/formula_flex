@@ -6,20 +6,24 @@ package com.rpgGame.coreData.enum
 		/**
 		 * 生成动态阻挡
 		 */
-		public static const SCENE_OBSTACLE : int = 1;
+		public static const SCENE_ADD_OBSTACLE : int = 1;
+		/**
+		 *移除动态阻挡
+		 */
+		public static const SCENE_REMOVE_OBSTACLE : int = 2;
 		/**
 		 * 刷怪
 		 */
-		public static const ADD_MONSTER : int = 1;
+		public static const ADD_MONSTER : int = 3;
 		
 		/**
 		 * 触发剧情对话
 		 */
-		public static const PLOT_DIALOG : int = 3;
+		public static const PLOT_DIALOG : int = 4;
 		/**
 		 * 生成场景物
 		 */
-		public static const SCENE_ROLE: int = 4;
+		public static const SCENE_ROLE: int = 5;
 		
 		
 		public function TriggerTypeEnum()

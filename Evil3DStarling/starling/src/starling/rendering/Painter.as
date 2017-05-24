@@ -23,6 +23,7 @@ package starling.rendering
     import flash.geom.Vector3D;
     import flash.utils.Dictionary;
     
+    import away3d.Away3D;
     import away3d.core.managers.Stage3DProxy;
     import away3d.enum.StencilMask;
     import away3d.events.Stage3DEvent;
@@ -30,6 +31,7 @@ package starling.rendering
     import starling.core.starling_internal;
     import starling.display.BlendMode;
     import starling.display.DisplayObject;
+    import starling.display.Interoperation3DContainer;
     import starling.display.MaskMode;
     import starling.display.Mesh;
     import starling.display.MeshBatch;
@@ -41,7 +43,6 @@ package starling.rendering
     import starling.utils.Pool;
     import starling.utils.RectangleUtil;
     import starling.utils.RenderUtil;
-    import starling.utils.SystemUtil;
 
     use namespace starling_internal;
 
@@ -89,12 +90,9 @@ package starling.rendering
         private var _enableErrorChecking:Boolean;
         private var _stencilReferenceValues:Dictionary;
         private var _clipRectStack:Vector.<Rectangle>;
-        private var _batchCacheExclusions:Vector.<DisplayObject>;
 
         private var _batchProcessor:BatchProcessor;
-        private var _batchProcessorCurr:BatchProcessor; // current  processor
-        private var _batchProcessorPrev:BatchProcessor; // previous processor (cache)
-        private var _batchProcessorSpec:BatchProcessor; // special  processor (no cache)
+		private var _deferredRenderer:DeferredRenderer;
 
         private var _actualRenderTarget:TextureBase;
         private var _actualRenderTargetOptions:uint;
@@ -105,7 +103,7 @@ package starling.rendering
         private var _backBufferHeight:Number;
         private var _backBufferScaleFactor:Number;
 
-        private var _state:RenderState;
+		starling_internal var _state:RenderState;
         private var _stateStack:Vector.<RenderState>;
         private var _stateStackPos:int;
         private var _stateStackLength:int;
@@ -135,17 +133,10 @@ package starling.rendering
             _stencilReferenceValues = new Dictionary(true);
             _clipRectStack = new <Rectangle>[];
 
-            _batchProcessorCurr = new BatchProcessor();
-            _batchProcessorCurr.onBatchComplete = drawBatch;
-
-            _batchProcessorPrev = new BatchProcessor();
-            _batchProcessorPrev.onBatchComplete = drawBatch;
-
-            _batchProcessorSpec = new BatchProcessor();
-            _batchProcessorSpec.onBatchComplete = drawBatch;
-
-            _batchProcessor = _batchProcessorCurr;
-            _batchCacheExclusions = new Vector.<DisplayObject>();
+            _batchProcessor = new BatchProcessor();
+			_batchProcessor.onBatchComplete = drawBatch;
+			
+			_deferredRenderer = new DeferredRenderer(this);
 
             _state = new RenderState(stage3DProxy);
             _state.onDrawRequired = finishMeshBatch;
@@ -163,9 +154,8 @@ package starling.rendering
          *  the render context. */
         public function dispose():void
         {
-            _batchProcessorCurr.dispose();
-            _batchProcessorPrev.dispose();
-            _batchProcessorSpec.dispose();
+			_batchProcessor.dispose();
+			_deferredRenderer.dispose();
         }
 
         private function onContextCreated(event:Object):void
@@ -211,12 +201,11 @@ package starling.rendering
          *  the render cache. That way, you can later reference this location to render a subset of
          *  the cache.</p>
          */
-        public function pushState(token:BatchToken=null):void
+        public function pushState():void
         {
             _stateStackPos++;
 
             if (_stateStackLength < _stateStackPos + 1) _stateStack[_stateStackLength++] = new RenderState(_stage3DProxy);
-            if (token) _batchProcessor.fillToken(token);
 
             _stateStack[_stateStackPos].copyFrom(_state);
         }
@@ -244,7 +233,7 @@ package starling.rendering
          *  the render cache. That way, you can later reference this location to render a subset of
          *  the cache.</p>
          */
-        public function popState(token:BatchToken=null):void
+        public function popState():void
         {
             if (_stateStackPos < 0)
                 throw new IllegalOperationError("Cannot pop empty state stack");
@@ -252,7 +241,6 @@ package starling.rendering
             _state.copyFrom(_stateStack[_stateStackPos]); // -> might cause 'finishMeshBatch'
             _stateStackPos--;
 
-            if (token) _batchProcessor.fillToken(token);
         }
 		
 		/** Restores the render state that was last pushed to the stack, but does NOT remove
@@ -265,13 +253,6 @@ package starling.rendering
 			_state.copyFrom(_stateStack[_stateStackPos]); // -> might cause 'finishMeshBatch'
 		}
 		
-		/** Updates all properties of the given token so that it describes the current position
-		 *  within the render cache. */
-		public function fillToken(token:BatchToken):void
-		{
-			if (token) _batchProcessor.fillToken(token);
-		}
-
 
         // masks
 
@@ -305,18 +286,22 @@ package starling.rendering
             }
             else
             {
-                _context.setStencilActions(Context3DTriangleFace.FRONT_AND_BACK,
-					Context3DCompareMode.EQUAL, Context3DStencilAction.INCREMENT_SATURATE);
+				if(Away3D.USE_DEFERRED_FOR_2D)
+					_deferredRenderer.setStencilActions(Context3DTriangleFace.FRONT_AND_BACK, Context3DCompareMode.EQUAL, Context3DStencilAction.INCREMENT_SATURATE);
+				else
+					_context.setStencilActions(Context3DTriangleFace.FRONT_AND_BACK, Context3DCompareMode.EQUAL, Context3DStencilAction.INCREMENT_SATURATE);
 
                 renderMask(mask);
                 stencilReferenceValue++;
 
 				var compareMode:String = mask.maskMode == MaskMode.ERASE ?  Context3DCompareMode.GREATER :  Context3DCompareMode.EQUAL;
-                _context.setStencilActions(Context3DTriangleFace.FRONT_AND_BACK,
-					compareMode, Context3DStencilAction.KEEP);
+				
+				if(Away3D.USE_DEFERRED_FOR_2D)
+					_deferredRenderer.setStencilActions(Context3DTriangleFace.FRONT_AND_BACK, compareMode, Context3DStencilAction.KEEP);
+				else
+					_context.setStencilActions(Context3DTriangleFace.FRONT_AND_BACK, compareMode, Context3DStencilAction.KEEP);
             }
 
-            excludeFromCache(maskee);
         }
 
         /** Draws a display object into the stencil buffer, decrementing the
@@ -341,24 +326,28 @@ package starling.rendering
             {
 				var isMaskEraseMode:Boolean = mask.maskMode == MaskMode.ERASE;
 				var compareMode:String = isMaskEraseMode ?  Context3DCompareMode.GREATER :  Context3DCompareMode.EQUAL;
-                _context.setStencilActions(Context3DTriangleFace.FRONT_AND_BACK,
-					compareMode, Context3DStencilAction.DECREMENT_SATURATE);
+				
+				if(Away3D.USE_DEFERRED_FOR_2D)
+					_deferredRenderer.setStencilActions(Context3DTriangleFace.FRONT_AND_BACK, compareMode, Context3DStencilAction.DECREMENT_SATURATE);
+				else
+                	_context.setStencilActions(Context3DTriangleFace.FRONT_AND_BACK, compareMode, Context3DStencilAction.DECREMENT_SATURATE);
 
                 renderMask(mask);
                 stencilReferenceValue--;
 
 				compareMode = isMaskEraseMode ?  Context3DCompareMode.LESS_EQUAL :  Context3DCompareMode.EQUAL;
-                _context.setStencilActions(Context3DTriangleFace.FRONT_AND_BACK,
-					compareMode, Context3DStencilAction.KEEP);
+				
+				if(Away3D.USE_DEFERRED_FOR_2D)
+					_deferredRenderer.setStencilActions(Context3DTriangleFace.FRONT_AND_BACK, compareMode, Context3DStencilAction.KEEP);
+				else
+					_context.setStencilActions(Context3DTriangleFace.FRONT_AND_BACK, compareMode, Context3DStencilAction.KEEP);
             }
         }
 
         private function renderMask(mask:DisplayObject):void
         {
-            var wasCacheEnabled:Boolean = cacheEnabled;
 
             pushState();
-            cacheEnabled = false;
             _state.alpha = 0.0;
 
             var matrix:Matrix = null;
@@ -380,7 +369,6 @@ package starling.rendering
             mask.render(this);
             finishMeshBatch();
 
-            cacheEnabled = wasCacheEnabled;
             popState();
         }
 
@@ -447,39 +435,64 @@ package starling.rendering
          */
         public function batchMesh(mesh:Mesh, subset:MeshSubset=null):void
         {
-            _batchProcessor.addMesh(mesh, _state, subset);
+			if(Away3D.USE_DEFERRED_FOR_2D)
+				_deferredRenderer.addMesh(mesh);
+			else
+				_batchProcessor.addMesh(mesh, _state, subset);
         }
+		
+		
+		public function renderEffect(effect:Effect, numTriangles:int):void
+		{
+			if(Away3D.USE_DEFERRED_FOR_2D)
+			{
+				_deferredRenderer.addEffect(effect, numTriangles);
+			}
+			else
+			{
+				prepareToDraw();
+				effect.render(0, numTriangles);
+			}
+		}
+		
+		public function renderInter3D(inter3D:Interoperation3DContainer):void
+		{
+			if(Away3D.USE_DEFERRED_FOR_2D)
+			{
+				_deferredRenderer.addInter3D(inter3D);
+			}
+			else
+			{
+				inter3D.doRender();
+			}
+		}
 
         /** Finishes the current mesh batch and prepares the next one. */
         public function finishMeshBatch():void
         {
-            _batchProcessor.finishBatch();
+			if(Away3D.USE_DEFERRED_FOR_2D)
+				_deferredRenderer.breakBatch();
+			else
+            	_batchProcessor.finishBatch();
         }
 
         /** Completes all unfinished batches, cleanup procedures. */
         public function finishFrame():void
         {
-            if (_frameID %  99 == 0) _batchProcessorCurr.trim(); // odd number -> alternating processors
-            if (_frameID % 150 == 0) _batchProcessorSpec.trim();
-
-            _batchProcessor.finishBatch();
-            _batchProcessor = _batchProcessorSpec; // no cache between frames
-            processCacheExclusions();
+			if(Away3D.USE_DEFERRED_FOR_2D)
+			{
+				_deferredRenderer.deferredRender();
+				_deferredRenderer.clear();
+			}
+			else
+            	_batchProcessor.finishBatch();
         }
 
-        private function processCacheExclusions():void
-        {
-            var i:int, length:int = _batchCacheExclusions.length;
-            for (i=0; i<length; ++i) _batchCacheExclusions[i].excludeFromCache();
-            _batchCacheExclusions.length = 0;
-        }
-		
 		public function clearForInteroperation():void
 		{
 			_actualBlendMode = null;
 			_actualCulling = null;
 			_context.setDepthTest(false, Context3DCompareMode.ALWAYS);
-			stencilReferenceValue = stencilReferenceValue;
 			_context.setStencilActions(Context3DTriangleFace.FRONT_AND_BACK,
 				Context3DCompareMode.EQUAL, Context3DStencilAction.KEEP);
 		}
@@ -488,10 +501,10 @@ package starling.rendering
          *  clipping rectangle, and draw count. Furthermore, depth testing is disabled. */
         public function nextFrame():void
         {
-            // update batch processors
-            _batchProcessor = swapBatchProcessors();
-            _batchProcessor.clear();
-            _batchProcessorSpec.clear();
+			if(Away3D.USE_DEFERRED_FOR_2D)
+				_deferredRenderer.clear();
+			else
+				_batchProcessor.clear();
 
             // enforce reset of basic context settings
             _actualBlendMode = null;
@@ -506,75 +519,6 @@ package starling.rendering
             _state.reset();
         }
 
-        private function swapBatchProcessors():BatchProcessor
-        {
-            var tmp:BatchProcessor = _batchProcessorPrev;
-            _batchProcessorPrev = _batchProcessorCurr;
-            return _batchProcessorCurr = tmp;
-        }
-
-        /** Draws all meshes from the render cache between <code>startToken</code> and
-         *  (but not including) <code>endToken</code>. The render cache contains all meshes
-         *  rendered in the previous frame. */
-        public function drawFromCache(startToken:BatchToken, endToken:BatchToken):void
-        {
-            var meshBatch:MeshBatch;
-            var subset:MeshSubset = sMeshSubset;
-
-            if (!startToken.equals(endToken))
-            {
-                pushState();
-
-				var endTokenID:int = endToken.batchID;
-                for (var i:int = startToken.batchID; i <= endTokenID; ++i)
-                {
-                    meshBatch = _batchProcessorPrev.getBatchAt(i);
-                    subset.setTo(); // resets subset
-					
-					// todo: 查到bug之后就应该移除
-					if(meshBatch.isDisposed)
-						throw new Error("drawFromCache , meshBatch is disposed!!!!!");
-
-					if(!meshBatch)continue; //this should not occur
-					
-                    if (i == startToken.batchID)
-                    {
-                        subset.vertexID = startToken.vertexID;
-                        subset.indexID  = startToken.indexID;
-                        subset.numVertices = meshBatch.numVertices - subset.vertexID;
-                        subset.numIndices  = meshBatch.numIndices  - subset.indexID;
-                    }
-
-                    if (i == endToken.batchID)
-                    {
-                        subset.numVertices = endToken.vertexID - subset.vertexID;
-                        subset.numIndices  = endToken.indexID  - subset.indexID;
-                    }
-
-                    if (subset.numVertices)
-                    {
-                        _state.alpha = 1.0;
-                        _state.blendMode = meshBatch.blendMode;
-                        _batchProcessor.addMesh(meshBatch, _state, subset, true);
-                    }
-                }
-
-                popState();
-            }
-        }
-
-        /** Prevents the object from being drawn from the render cache in the next frame.
-         *  Different to <code>setRequiresRedraw()</code>, this does not indicate that the object
-         *  has changed in any way, but just that it doesn't support being drawn from cache.
-         *
-         *  <p>Note that when a container is excluded from the render cache, its children will
-         *  still be cached! This just means that batching is interrupted at this object when
-         *  the display tree is traversed.</p>
-         */
-        public function excludeFromCache(object:DisplayObject):void
-        {
-            if (object) _batchCacheExclusions[_batchCacheExclusions.length] = object;
-        }
 
         private function drawBatch(meshBatch:MeshBatch):void
         {
@@ -729,27 +673,10 @@ package starling.rendering
             var key:Object = _state.renderTarget ? _state.renderTargetBase : this;
             _stencilReferenceValues[key] = value;
 
-            if (_stage3DProxy.recoverFromDisposal())
-                _context.setStencilReferenceValue(value, StencilMask.STARLING_USED_MASK, StencilMask.STARLING_USED_MASK);
-        }
-
-        /** Indicates if the render cache is enabled. Normally, this should be left at the default;
-         *  however, some custom rendering logic might require to change this property temporarily.
-         *  Also note that the cache is automatically reactivated each frame, right before the
-         *  render process.
-         *
-         *  @default true
-         */
-        public function get cacheEnabled():Boolean { return _batchProcessor == _batchProcessorCurr; }
-        public function set cacheEnabled(value:Boolean):void
-        {
-            if (value != cacheEnabled)
-            {
-                finishMeshBatch();
-
-                if (value) _batchProcessor = _batchProcessorCurr;
-                else       _batchProcessor = _batchProcessorSpec;
-            }
+			if(Away3D.USE_DEFERRED_FOR_2D)
+				_deferredRenderer.setStencilReferenceValue(value, StencilMask.STARLING_USED_MASK, StencilMask.STARLING_USED_MASK);
+			else
+				_context.setStencilReferenceValue(value, StencilMask.STARLING_USED_MASK, StencilMask.STARLING_USED_MASK);
         }
 
         /** The current render state, containing some of the context settings, projection- and
@@ -774,7 +701,7 @@ package starling.rendering
         public function set frameID(value:uint):void { _frameID = value; }
         public function get frameID():uint
         {
-            return _batchProcessor == _batchProcessorCurr ? _frameID : 0;
+            return _frameID;
         }
 
         /** The size (in points) that represents one pixel in the back buffer. */

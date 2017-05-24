@@ -7,15 +7,16 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.layout
 {
-	import feathers.core.IFeathersControl;
-	import feathers.core.IValidating;
-
 	import flash.errors.IllegalOperationError;
 	import flash.geom.Point;
-
+	
+	import away3d.events.Event;
+	import away3d.events.EventDispatcher;
+	
+	import feathers.core.IFeathersControl;
+	import feathers.core.IValidating;
+	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
-	import starling.events.EventDispatcher;
 
 	/**
 	 * Dispatched when a property of the layout changes, indicating that a
@@ -36,9 +37,9 @@ package feathers.layout
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.CHANGE
+	 * @eventType away3d.events.Event.CHANGE
 	 */
-	[Event(name="change",type="starling.events.Event")]
+	[Event(name="change",type="away3d.events.Event")]
 
 	/**
 	 * For use with the <code>SpinnerList</code> component, positions items from

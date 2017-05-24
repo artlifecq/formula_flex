@@ -1,8 +1,6 @@
 package com.rpgGame.app.ui.main.dungeon
 {
-	import com.gameClient.utils.HashMap;
 	import com.gameClient.utils.JSONUtil;
-	import com.rpgGame.app.manager.SystemSetManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
@@ -12,9 +10,7 @@ package com.rpgGame.app.ui.main.dungeon
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.events.DungeonEvent;
 	import com.rpgGame.coreData.cfg.DailyZoneCfgData;
-	import com.rpgGame.coreData.cfg.DailyZoneMonsterCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_daily_zone;
-	import com.rpgGame.coreData.clientConfig.Q_dailyzone_monster;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
@@ -160,7 +156,6 @@ package com.rpgGame.app.ui.main.dungeon
 					break;
 				item = new ItemInfo();
 				item.itemModelId = itemInfos[i]["mod"];
-				item.num = itemInfos[i]["num"];
 				FaceUtil.SetItemGrid(_rewardIcons[i],ItemUtil.convertClientItemInfo(item), true);
 			}
 			_skin.uiKill.visible = false;

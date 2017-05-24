@@ -7,8 +7,8 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.core
 {
-	import starling.events.Event;
-	import starling.events.EventDispatcher;
+	import away3d.events.Event;
+	import away3d.events.EventDispatcher;
 
 	/**
 	 * Dispatched when a token is added, removed, or toggled or if all tokens
@@ -29,9 +29,9 @@ package feathers.core
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.CHANGE
+	 * @eventType away3d.events.Event.CHANGE
 	 */
-	[Event(name="change",type="starling.events.Event")]
+	[Event(name="change",type="away3d.events.Event")]
 
 	/**
 	 * A list of space-delimited tokens. Obviously, since they are delimited by

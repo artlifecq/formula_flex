@@ -83,7 +83,6 @@ package com.rpgGame.coreData.cfg
 		/**根据id返回 动态阻挡点*/
 		public static function getDynamicObstacleAreas(aid:int) : ClientMapAreaData
 		{
-			var areaSet : Vector.<ClientMapAreaData> = new Vector.<ClientMapAreaData>();
 			for each (var areaData : ClientMapAreaData in _arras)
 			{
 				if (areaData.id==aid&&areaData.type ==MapAreaTypeEnum.DYNAMIC_OBSTACLE)

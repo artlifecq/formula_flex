@@ -2,6 +2,8 @@ package com.rpgGame.appModule.die
 {
 	import com.rpgGame.coreData.cfg.DieCfgData;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.Button;
 	import feathers.controls.Scroller;
 	import feathers.data.ListCollection;
@@ -10,7 +12,6 @@ package com.rpgGame.appModule.die
 	import org.mokylin.skin.app.siwangfuhuo.ContentListSkin;
 	
 	import starling.display.Sprite;
-	import starling.events.Event;
 	
 	public class ContentList extends Sprite
 	{
