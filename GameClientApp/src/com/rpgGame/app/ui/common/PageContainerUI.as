@@ -5,7 +5,6 @@ package com.rpgGame.app.ui.common
 	import feathers.controls.Button;
 	import feathers.controls.LayoutGroup;
 	import feathers.data.ListCollection;
-	import feathers.events.CollectionEventType;
 	import feathers.layout.TiledRowsLayout;
 	
 	import away3d.events.Event;
@@ -112,38 +111,7 @@ package com.rpgGame.app.ui.common
 			if(_dataProvider==value){
 				return;
 			}
-			if(this._dataProvider)
-			{
-				this._dataProvider.removeEventListener(CollectionEventType.ADD_ITEM, itemHandler);
-				this._dataProvider.removeEventListener(CollectionEventType.REMOVE_ITEM, itemHandler);
-				this._dataProvider.removeEventListener(CollectionEventType.REPLACE_ITEM, itemHandler);
-				this._dataProvider.removeEventListener(CollectionEventType.RESET, resetHandler);
-				this._dataProvider.removeEventListener(Event.CHANGE, changeHandler);
-			}
 			this._dataProvider = value;
-			if(this._dataProvider)
-			{
-				this._dataProvider.addEventListener(CollectionEventType.ADD_ITEM, itemHandler);
-				this._dataProvider.addEventListener(CollectionEventType.REMOVE_ITEM, itemHandler);
-				this._dataProvider.addEventListener(CollectionEventType.REPLACE_ITEM, itemHandler);
-				this._dataProvider.addEventListener(CollectionEventType.RESET, resetHandler);
-				this._dataProvider.addEventListener(Event.CHANGE, changeHandler);
-			}
-			updateItemView();
-		}
-		
-		private function itemHandler(event:Event, index:int):void
-		{
-			updateItemView();
-		}
-		
-		private function changeHandler(event:Event):void
-		{
-			updateItemView();
-		}
-		
-		private function resetHandler(event:Event):void
-		{
 			updateItemView();
 		}
 		
@@ -172,14 +140,6 @@ package com.rpgGame.app.ui.common
 		override public function dispose():void
 		{
 			super.dispose();
-			if(this._dataProvider)
-			{
-				this._dataProvider.removeEventListener(CollectionEventType.ADD_ITEM, itemHandler);
-				this._dataProvider.removeEventListener(CollectionEventType.REMOVE_ITEM, itemHandler);
-				this._dataProvider.removeEventListener(CollectionEventType.REPLACE_ITEM, itemHandler);
-				this._dataProvider.removeEventListener(CollectionEventType.RESET, resetHandler);
-				this._dataProvider.removeEventListener(Event.CHANGE, changeHandler);
-			}
 			_preBtn.removeEventListener(Event.TRIGGERED,onPre);
 			_nextBtn.removeEventListener(Event.TRIGGERED,onNext);
 		}

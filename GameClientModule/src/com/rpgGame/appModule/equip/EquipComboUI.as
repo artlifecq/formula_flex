@@ -21,6 +21,8 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.HeChengData;
+	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.TipsCfgData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
@@ -28,6 +30,7 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ComboItemInfo;
+	import com.rpgGame.coreData.lang.LangUI;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.equip.message.ResEquipOperateResultMessage;
@@ -502,21 +505,14 @@ package com.rpgGame.appModule.equip
 		private function getTitleText(title:String):String
 		{
 			var des:String="";
-//			var userGold:int=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_GOLD);
-//			var userMoney:int=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
-		/*	if(_useGold*_hechengNum!=0&&_useGold*_hechengNum<=userGold){
-				des=HtmlTextUtil.getTextColor(0x55BD15,(_useGold*_hechengNum).toString()+"元宝");//绿色
-			}else if(_useGold*_hechengNum!=0&&_useGold*_hechengNum>userGold){
-				des=HtmlTextUtil.getTextColor(0xd02525,(_useGold*_hechengNum).toString()+"元宝");//红色
-			}*/
 			if(!_nowSelect){
 				return "";
 			}
 			var needMoney:int=_nowSelect.q_money*_hechengNum;
 			if(needMoney<=userMoney){
-				des+=HtmlTextUtil.getTextColor(0x55BD15,(needMoney).toString()+"银两");//绿色
+				des+=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN1,needMoney+LanguageConfig.getText(LangUI.UI_TEXT17));//绿色
 			}else if(needMoney>userMoney){
-				des+=HtmlTextUtil.getTextColor(0xd02525,(needMoney).toString()+"银两");//红色
+				des+=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,needMoney+LanguageConfig.getText(LangUI.UI_TEXT17));//红色
 			}
 			return title+":"+des;
 		}
@@ -529,7 +525,7 @@ package com.rpgGame.appModule.equip
 				_hechengNum--;
 				updateShowNum();
 			}else{
-				NoticeManager.showNotifyById(2010);
+				NoticeManager.showNotifyById(2012);
 			}
 		}
 		
