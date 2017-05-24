@@ -41,7 +41,7 @@ package org.mokylin.skin.common
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.left = 0;
 			temp.right = 0;
-			temp.styleName = "ui/app/wuxue/biaotilan.png";
+			temp.styleName = "ui/common/titilebg/Item_bg2.png";
 			temp.y = 0;
 			return temp;
 		}

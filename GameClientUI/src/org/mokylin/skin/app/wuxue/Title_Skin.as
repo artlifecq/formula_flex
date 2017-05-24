@@ -41,7 +41,7 @@ package org.mokylin.skin.app.wuxue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.left = 0;
 			temp.right = 0;
-			temp.styleName = "ui/app/wuxue/biaotilan.png";
+			temp.styleName = "ui/common/titilebg/Item_bg2.png";
 			temp.y = 0;
 			return temp;
 		}
@@ -53,7 +53,7 @@ package org.mokylin.skin.app.wuxue
 			temp.name = "labelDisplay";
 			temp.bold = true;
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.left = 29;
 			temp.letterSpacing = -1;
 			temp.text = "职业技能";

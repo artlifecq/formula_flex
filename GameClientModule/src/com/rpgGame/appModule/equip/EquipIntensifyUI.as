@@ -229,7 +229,10 @@ package com.rpgGame.appModule.equip
 			if(targetEquipInfo){
 				_goodsContainerTarget.setGrayForData(targetEquipInfo,false);
 				if(isUse(targetEquipInfo)){//是消耗品
-					_goodsContainerUse.setGrayForData(targetEquipInfo,false);
+//					_goodsContainerUse.setGrayForData(targetEquipInfo,false);
+					useEquips.push(targetEquipInfo);
+					useEquips.sort(sortForUse);
+					_goodsContainerUse.refleshGridsByDatas(useEquips);
 				}
 				targetEquipInfo=null;
 			}
@@ -359,9 +362,9 @@ package com.rpgGame.appModule.equip
 			var gridInfo:GridInfo=grid.gridInfo;
 			if(targetEquipInfo){
 				_goodsContainerTarget.setGrayForData(targetEquipInfo,false);
-				if(isUse(targetEquipInfo)){
+			/*	if(isUse(targetEquipInfo)){
 					_goodsContainerUse.setGrayForData(targetEquipInfo,false);
-				}
+				}*/
 			}
 			cancelAllUse();
 			
@@ -381,7 +384,9 @@ package com.rpgGame.appModule.equip
 			tweenEquip=TweenMax.to(_targetEquip,1,{x:610,y:130,ease:Expo.easeOut});
 			
 			if(isUse(targetEquipInfo)){
-				_goodsContainerUse.setGrayForData(targetEquipInfo,true);
+//				_goodsContainerUse.setGrayForData(targetEquipInfo,true);
+				deleteItems(useEquips,targetEquipInfo);
+				_goodsContainerUse.refleshGridsByDatas(useEquips);
 			}
 			currCfg=EquipStrengthCfg.getStrengthCfg(targetEquipInfo.qItem.q_kind,targetEquipInfo.qItem.q_job,targetEquipInfo.strengthLevel);
 			addExp=0;
@@ -395,6 +400,7 @@ package com.rpgGame.appModule.equip
 			
 			updateView();
 		}
+		
 		
 		private function deleteItems(arr:Vector.<ClientItemInfo>,item:ClientItemInfo):void
 		{

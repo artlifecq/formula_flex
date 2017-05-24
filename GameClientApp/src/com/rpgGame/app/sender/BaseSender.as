@@ -4,7 +4,9 @@ package com.rpgGame.app.sender
 	
 	import flash.utils.ByteArray;
 	
+	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.connection.SocketConnection_protoBuffer;
+	import org.game.netCore.net.Message;
 	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
@@ -61,6 +63,16 @@ package com.rpgGame.app.sender
 //			}
 			
 			SocketConnection_protoBuffer.send(cmdID,data);
+		}
+		
+		/**
+		 *发送消息 
+		 * @param msg
+		 * 
+		 */
+		protected static function sendMsg(msg:Message):void
+		{
+			SocketConnection.send(msg);
 		}
 		
 	}
