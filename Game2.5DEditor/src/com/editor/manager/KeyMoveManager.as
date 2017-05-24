@@ -159,7 +159,7 @@ package com.editor.manager
 				return;
 			}
             
-            var object : SceneRole = SceneRoleManager.getInstance().targetPlayer;
+            var object : Object = SceneRoleManager.getInstance().targetPlayer;
             var walkRole : SceneRole = SceneRoleManager.getInstance().targetPlayer;
             var reallyRole : SceneRole = SceneRoleManager.getInstance().targetPlayer.getCamouflageEntity() as SceneRole || walkRole;
             var moveSpeed : int = speed;
@@ -170,7 +170,7 @@ package com.editor.manager
 			var directionPosY : int = 0;
 			if (CameraController.mode == CameraModeEnum.DIRECT_CAMERA || CameraController.mode == CameraModeEnum.FIXED_TARGET_LOOK_AT_TARGET)
 			{
-//				object = SceneManager.getInstance().mainScene.camera;
+				object = SceneManager.getInstance().mainScene.camera;
 			}
 
 			if (_forwardWalk)
@@ -267,7 +267,9 @@ package com.editor.manager
 				camera.moveRight(dx);
 				camera.moveForward(dz);
 				camera.moveUp(dy);
-			} else {
+			} 
+			else
+			{
                 // game 2d
                 position = object.position.clone();
                 position.setTo(position.x + _offsetPos.x * speed, position.y + directionPosY * speed, position.z + _offsetPos.z * speed);

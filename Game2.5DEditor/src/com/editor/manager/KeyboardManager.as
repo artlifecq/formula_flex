@@ -86,21 +86,21 @@ package com.editor.manager
 					TrailManager.getInstance().togglePlay();
 				}
 			}
-			else if (e.keyCode == 187)
+			else if (e.keyCode == 187)//=+
 			{
 				plus = true;
 				TrailEditOperate.clickPlusKey();
 			}
-			else if (e.keyCode == 189)
+			else if (e.keyCode == 189)//-_
 			{
 				minus = true;
 				TrailEditOperate.clickMinusKey();
 			}
-			else if (e.keyCode == 17)
+			else if (e.keyCode == 17)//control
 			{
 				ctrl = true;
 			}
-			else if (e.keyCode == 46)
+			else if (e.keyCode == 46)//delete
 			{
 
 			}

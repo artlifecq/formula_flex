@@ -1,7 +1,7 @@
 package com.game.engine2D.interfaces
 {
 	import away3d.events.Event;
-
+	
 	public interface IEventDispatcher
 	{
 		function addEventListener(type:String, listener:Function):void
@@ -9,6 +9,6 @@ package com.game.engine2D.interfaces
 		function removeEventListeners(type:String=null):void
 		function dispatchEvent(event:Event):void
 		function dispatchEventWith(type:String, bubbles:Boolean=false, data:Object=null):void
-		function hasEventListener(type:String, listener:Function = null):Boolean
+		function hasEventListener(type:String):Boolean
 	}
 }

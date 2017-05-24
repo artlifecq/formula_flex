@@ -83,7 +83,7 @@ package com.editor.manager
 //            CameraFrontController.sceneCamera = Scene.scene.sceneCamera;
 			
 			CameraController.initcontroller(camera, target, SceneRoleManager.getInstance().targetPlayer);
-			CameraController.initLockOnControl(0, 0, 90, 5000, true, false, false, 100, 15000, -90, 90, false, 100,onMouseWheelFunc);
+			CameraController.initLockOnControl(0, 0, 89, 5000, true, true, true, 100, 15000, -89, 89, true, 100,onMouseWheelFunc);
 			CameraController.switchToLockOnControl();
 			
 			///以下是针对2d地图特殊处理，暂时写到这里
@@ -138,7 +138,7 @@ package com.editor.manager
 			dragging = true;				
 			hasMoved = false;
 			
-//			focusTarget(EditorCameraManager.target);
+			focusTarget(EditorCameraManager.target);
 		}
 		
 		private static function onMouseUp(event : MouseEvent) : void
@@ -161,11 +161,7 @@ package com.editor.manager
 		public static function updateProperty() : void
 		{
 			if(EditorCameraManager.camera && EditorCameraManager.camera.lens is OrthographicLens)
-			{
-//				trace("aaaaa camera");
-				(EditorCameraManager.camera.lens as OrthographicLens).projectionHeight = 8000;
-			}
-//            return;
+				(EditorCameraManager.camera.lens as OrthographicLens).projectionHeight = 5000;
 			var info : FuncTagInfo = FuncTagManager.getInstance().currSelectedFuncTag;
 			if (_isFreeMode || info.featureType == FeaturesType.TRAIL_TYPE)
 			{
@@ -222,47 +218,47 @@ package com.editor.manager
 			}
 			else
 			{
-				//if (cameraPropertyData && cameraPropertyData.mCameraMinDistance > 0)
-				//	CameraController.lockedOnPlayerController.minDist = cameraPropertyData.mCameraMinDistance;
-				//else if (setting)
-				//	CameraController.lockedOnPlayerController.minDist = setting.mCameraMinDistance;
+				if (cameraPropertyData && cameraPropertyData.mCameraMinDistance > 0)
+					CameraController.lockedOnPlayerController.minDist = cameraPropertyData.mCameraMinDistance;
+				else if (setting)
+					CameraController.lockedOnPlayerController.minDist = setting.mCameraMinDistance;
 
-				//if (cameraPropertyData && cameraPropertyData.mCameraMaxDistance > 0)
-				//	CameraController.lockedOnPlayerController.maxDist = cameraPropertyData.mCameraMaxDistance;
-				//else if (setting)
-				//	CameraController.lockedOnPlayerController.maxDist = setting.mCameraMaxDistance;
+				if (cameraPropertyData && cameraPropertyData.mCameraMaxDistance > 0)
+					CameraController.lockedOnPlayerController.maxDist = cameraPropertyData.mCameraMaxDistance;
+				else if (setting)
+					CameraController.lockedOnPlayerController.maxDist = setting.mCameraMaxDistance;
 
-				//if (cameraPropertyData && cameraPropertyData.mCameraDistance > 0)
-				//	CameraController.lockedOnPlayerController.distance = cameraPropertyData.mCameraDistance;
-				//else if (setting)
-				//	CameraController.lockedOnPlayerController.distance = setting.mCameraDistance;
+				if (cameraPropertyData && cameraPropertyData.mCameraDistance > 0)
+					CameraController.lockedOnPlayerController.distance = cameraPropertyData.mCameraDistance;
+				else if (setting)
+					CameraController.lockedOnPlayerController.distance = setting.mCameraDistance;
 
-				//if (cameraPropertyData && cameraPropertyData.mCameraXDeg > 0)
-				//	CameraController.lockedOnPlayerController.xDeg = cameraPropertyData.mCameraXDeg;
-				//else if (setting)
-				//	CameraController.lockedOnPlayerController.xDeg = setting.mCameraXDeg;
+				if (cameraPropertyData && cameraPropertyData.mCameraXDeg > 0)
+					CameraController.lockedOnPlayerController.xDeg = cameraPropertyData.mCameraXDeg;
+				else if (setting)
+					CameraController.lockedOnPlayerController.xDeg = setting.mCameraXDeg;
 
-				//if (cameraPropertyData && cameraPropertyData.mCameraYDeg > 0)
-				//	CameraController.lockedOnPlayerController.yDeg = cameraPropertyData.mCameraYDeg;
-				//else if (setting)
-				//	CameraController.lockedOnPlayerController.yDeg = setting.mCameraYDeg;
+				if (cameraPropertyData && cameraPropertyData.mCameraYDeg > 0)
+					CameraController.lockedOnPlayerController.yDeg = cameraPropertyData.mCameraYDeg;
+				else if (setting)
+					CameraController.lockedOnPlayerController.yDeg = setting.mCameraYDeg;
 
-				//if (cameraPropertyData && cameraPropertyData.mCameraMinTiltAngle > 0)
-				//	CameraController.lockedOnPlayerController.minTiltAngle = cameraPropertyData.mCameraMinTiltAngle;
-				//else if (setting)
-				//	CameraController.lockedOnPlayerController.minTiltAngle = setting.mCameraMinTiltAngle;
+				if (cameraPropertyData && cameraPropertyData.mCameraMinTiltAngle > 0)
+					CameraController.lockedOnPlayerController.minTiltAngle = cameraPropertyData.mCameraMinTiltAngle;
+				else if (setting)
+					CameraController.lockedOnPlayerController.minTiltAngle = setting.mCameraMinTiltAngle;
 
-				//if (cameraPropertyData && cameraPropertyData.mCameraMaxTiltAngle > 0)
-				//	CameraController.lockedOnPlayerController.maxTiltAngle = cameraPropertyData.mCameraMaxTiltAngle;
-				//else if (setting)
-				//	CameraController.lockedOnPlayerController.maxTiltAngle = setting.mCameraMaxTiltAngle;
+				if (cameraPropertyData && cameraPropertyData.mCameraMaxTiltAngle > 0)
+					CameraController.lockedOnPlayerController.maxTiltAngle = cameraPropertyData.mCameraMaxTiltAngle;
+				else if (setting)
+					CameraController.lockedOnPlayerController.maxTiltAngle = setting.mCameraMaxTiltAngle;
 
 				if (setting)
 				{
-					//CameraController.lockedOnPlayerController.minDistance = setting.mCameraBlockMinDistance;
-					//CameraController.lockedOnPlayerController.mouseRightSpeed = setting.mCameraMouseDragSpeed;
-					//CameraController.lockedOnPlayerController.mouseWheelSpeed = setting.mCameraMouseWheelSpeed;
-					//CameraController.lockedOnPlayerController.offsetY = setting.mCameraOffsetY;
+					CameraController.lockedOnPlayerController.minDistance = setting.mCameraBlockMinDistance;
+					CameraController.lockedOnPlayerController.mouseRightSpeed = setting.mCameraMouseDragSpeed;
+					CameraController.lockedOnPlayerController.mouseWheelSpeed = setting.mCameraMouseWheelSpeed;
+					CameraController.lockedOnPlayerController.offsetY = setting.mCameraOffsetY;
 				}
 			}
 			var scene : GameScene3D = SceneManager.getInstance().mainScene;
@@ -270,16 +266,16 @@ package com.editor.manager
 			{
 				if (SceneManager.getInstance().mapId == 0)
 				{
-					//scene.cameraNear = scene.sceneMapLayer.cameraNear;//-100000;//scene.sceneMapLayer.cameraNear;
-					//scene.cameraFar = scene.sceneMapLayer.cameraFar;//200000;//scene.sceneMapLayer.cameraFar;
+					scene.cameraNear = scene.sceneMapLayer.cameraNear;
+					scene.cameraFar = scene.sceneMapLayer.cameraFar;
 				}
 				else
 				{
-					//scene.cameraNear = 100;
-					//scene.cameraFar = 10000000;
+					scene.cameraNear = 300;
+					scene.cameraFar = 10000000;
 				}
 			}
-			//updateCameraBokehDepth();
+			updateCameraBokehDepth();
 		}
 
 		public static function updateCameraBokehDepth() : void
@@ -387,9 +383,9 @@ package com.editor.manager
 			center.x /= 2;
 			center.y /= 2;
 			center.z /= 2;
-			center = center.add(bmin);		
+			center = center.add(bmin);	
 			
-			TweenMax.to(EditorCameraManager.camera.position, 0.5, {x:center.x, y:center.y, z:center.z});
+//			TweenMax.to(EditorCameraManager.camera.position, 0.5, {x:500, y:500, z:center.z});
 		}
 	}
 }
