@@ -60,8 +60,8 @@ package com.rpgGame.appModule.dungeon.lunjian
 			leftTime--;
 
 			_skin.lbTime.text=leftTime+LanguageConfig.getText(LangUI.UI_TEXT33);
-			if(leftTime<0){
-
+			if(leftTime<0)
+			{
 				TimerServer.remove(updateTime);
 				DungeonSender.reqQuitDungeon();
 				this.onHide();
