@@ -19,14 +19,11 @@ package com.editor.manager
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
-	import flash.geom.Vector3D;
 	
 	import away3d.cameras.Camera3D;
 	import away3d.cameras.lenses.OrthographicLens;
 	import away3d.containers.ObjectContainer3D;
 	import away3d.filters.RingDepthOfFieldFilter3D;
-	
-	import gs.TweenMax;
 	
 	import org.client.mainCore.manager.EventManager;
 
@@ -42,7 +39,6 @@ package com.editor.manager
 		private static var _mouseRightSpeed : Number = 0.8;
 		private static var _mouseWheelSpeed : Number = 5;
 		private static var camera:Camera3D;
-		private static var target:ObjectContainer3D;
 		
 		public static function zoomFunction(x:Number):Number
 		{
@@ -68,17 +64,16 @@ package com.editor.manager
 			}
 			
 			lens.projectionHeight = proHeight;
-//			trace("projectionHeight\t"+ lens.projectionHeight + "\tdis\t"+dis);
 		}
 
 		public static function initCamera(camera : Camera3D, target : ObjectContainer3D) : void
 		{
 			EditorCameraManager.camera = camera;
-			EditorCameraManager.target = target;
+			
 			cameraMode = CameraModeEnum.LOCK_ON_TARGET;
 
 			CameraController.initcontroller(camera, target, SceneRoleManager.getInstance().targetPlayer);
-			CameraController.initLockOnControl(0, 0, 89, 5000, true, true, true, 100, 15000, -89, 89, true, 100,onMouseWheelFunc);
+			CameraController.initLockOnControl(0, 0, 0, 5000, true, true, true, 100, 15000, -89, 89, true, 100,onMouseWheelFunc);
 			CameraController.switchToLockOnControl();
 			
 			///以下是针对2d地图特殊处理，暂时写到这里
@@ -259,7 +254,7 @@ package com.editor.manager
 				}
 				else
 				{
-					scene.cameraNear = 300;
+					scene.cameraNear = 100;
 					scene.cameraFar = 10000000;
 				}
 			}

@@ -52,13 +52,13 @@ package com.editor.manager
 		private var _leftWalk : Boolean;
 		private var _up : Boolean;
 		private var _down : Boolean;
-		private var _keyMoving : Boolean;
+		private var _keepMoving : Boolean;
 
 		private var _offsetPos : Vector3D = new Vector3D();
 
 		public function KeyMoveManager()
 		{
-			_keyMoving = false;
+			_keepMoving = false;
 			//暂时一开始就启动
 			Tick.addCallback(onTick);
 		}
@@ -142,12 +142,12 @@ package com.editor.manager
 		{
 			if (!_forwardWalk && !_backwardWalk && !_leftWalk && !_rightWalk && !_up && !_down)
 			{
-				if (_keyMoving)
+				if (_keepMoving)
 				{
 					var idleActRef : PlayActionStateReference = SceneRoleManager.getInstance().targetPlayer.stateMachine.getReference(PlayActionStateReference) as PlayActionStateReference;
 					idleActRef.setParams(RoleActionType.IDLE);
 					SceneRoleManager.getInstance().targetPlayer.stateMachine.transition(RoleStateType.ACTION_PLAY_ACTION, idleActRef);
-					_keyMoving = false;
+					_keepMoving = false;
 				}
 				return;
 			}
@@ -240,7 +240,7 @@ package com.editor.manager
 
 				if (object == SceneRoleManager.getInstance().targetPlayer)
 				{
-					if (!_keyMoving)
+					if (!_keepMoving)
 					{
                         runActRef = SceneRoleManager.getInstance().targetPlayer.stateMachine.getReference(PlayActionStateReference) as PlayActionStateReference;
 						runActRef.setParams(RoleActionType.RUN);
@@ -267,7 +267,7 @@ package com.editor.manager
                 // game 2d
                 position = object.position.clone();
                 position.setTo(position.x + _offsetPos.x * speed, position.y + directionPosY * speed, position.z + _offsetPos.z * speed);
-                if (!_keyMoving)
+                if (!_keepMoving)
                 {
                     runActRef = object.stateMachine.getReference(PlayActionStateReference) as PlayActionStateReference;
                     runActRef.setParams(RoleActionType.RUN);
@@ -279,7 +279,7 @@ package com.editor.manager
                 //object.y = position.y;
                 object.z = position.z;
             }
-			_keyMoving = true;
+			_keepMoving = true;
 		}
 	}
 }
