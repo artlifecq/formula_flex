@@ -67,6 +67,10 @@ package com.rpgGame.app.ui.main.dungeon
 			var now:int = SystemTimeManager.curtTm/1000;
 			var dis:int = _endTime-now;
 			_skin.sec_time.text = "副本倒计时："+TimeUtil.format3TimeType(dis);
+			if(dis<=30)
+				_skin.sec_time.color = 0xd02525;
+			else
+				_skin.sec_time.color = 0xe8c958;
 			if(dis<=0)
 			{
 				stopTimer();
@@ -99,9 +103,6 @@ package com.rpgGame.app.ui.main.dungeon
 			}
 			_skin.killName.text = wave.toString()+"/"+_totalWaveCount;
 			_skin.killNum.text = count.toString()+"/"+_totalMonsterCount;
-			var percent:Number = count/_totalMonsterCount;
-			_skin.pro_bar.value = _skin.pro_bar.maximum*percent;
-			_skin.lbNum.text = count.toString()+"/"+_totalMonsterCount;
 		}
 		override protected function onHide():void
 		{

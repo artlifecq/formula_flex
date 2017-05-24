@@ -27,7 +27,7 @@ package com.rpgGame.app.manager
 	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
-
+	
 	/**
 	 *
 	 * 战斗托管管理器
@@ -38,7 +38,7 @@ package com.rpgGame.app.manager
 	public class TrusteeshipManager
 	{
 		private static var _instance : TrusteeshipManager;
-
+		
 		public static function getInstance() : TrusteeshipManager
 		{
 			if (!_instance)
@@ -47,7 +47,7 @@ package com.rpgGame.app.manager
 			}
 			return _instance;
 		}
-
+		
 		private var _gTimer : GameTimer;
 		private var _isFightActorRunning : Boolean;
 		private var _isAutoFightRunning : Boolean;
@@ -73,7 +73,7 @@ package com.rpgGame.app.manager
 			
 			
 		}
-
+		
 		public function setup(role : SceneRole) : void
 		{
 			_stateMachine = new AIStateMachine(role);
@@ -126,7 +126,7 @@ package com.rpgGame.app.manager
 				_isFightTargetRunning=true;
 				startFightRole(selectedRole);
 			}
-		
+			
 		}
 		
 		public function startFightRole(targetRole : SceneRole= null) : void
@@ -151,7 +151,7 @@ package com.rpgGame.app.manager
 			_stateMachine.transition(AIStateType.AI_NONE);
 			onUpdate(true);
 		}
-
+		
 		public function startAutoFight() : void
 		{
 			stopFightTarget();
@@ -173,7 +173,7 @@ package com.rpgGame.app.manager
 			_isAutoFhist=true;
 			onUpdate(true);
 		}
-
+		
 		public function broken() : void
 		{
 			if (!_isFightActorRunning && !_isAutoFightRunning&&!_isFightTargetRunning)
@@ -182,12 +182,12 @@ package com.rpgGame.app.manager
 			TweenLite.killDelayedCallsTo(onDelayedUnbroken);
 			TweenLite.delayedCall(0.5, onDelayedUnbroken);
 		}
-
+		
 		private function onDelayedUnbroken() : void
 		{
 			_isBroken = false;
 		}
-
+		
 		public function stopFightTarget() : void
 		{
 			if (!_isFightActorRunning&&!_isFightTargetRunning)
@@ -207,7 +207,7 @@ package com.rpgGame.app.manager
 				return;
 			stop();
 		}
-
+		
 		public function stopAutoFight() : void
 		{
 			if (!_isAutoFightRunning)
@@ -222,7 +222,7 @@ package com.rpgGame.app.manager
 			stop();
 			
 		}
-
+		
 		public function stopAll() : void
 		{
 			if (!_isFightActorRunning && !_isAutoFightRunning&&!_isFightTargetRunning)
@@ -231,7 +231,7 @@ package com.rpgGame.app.manager
 			stopAutoFight();
 			
 		}
-
+		
 		private function stop() : void
 		{
 			_gTimer.reset();
@@ -243,7 +243,7 @@ package com.rpgGame.app.manager
 				MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE);
 			
 		}
-
+		
 		public function get isAutoFightRunning() : Boolean
 		{
 			return _isAutoFightRunning;
@@ -252,12 +252,12 @@ package com.rpgGame.app.manager
 		{
 			return _isFightActorRunning;
 		}
-
+		
 		public function getActiveSpellList() : Vector.<Q_skill_model>
 		{
 			return ((_stateMachine.owner as SceneRole).data as RoleData).spellList.getAutoSpellList();
 		}
-
+		
 		public function getRoleList() : Vector.<SceneRole>
 		{
 			return _targetRoles;
@@ -304,19 +304,19 @@ package com.rpgGame.app.manager
 				return;
 			/*if (_isFightTargetRunning && _targetRoles)
 			{
-				var isCompleted : Boolean = true;
-				for each (var role : SceneRole in _targetRoles)
-				{
-					if (role.usable && role.isInViewDistance && !role.stateMachine.isDeadState)
-						isCompleted = false;
-				}
-				if (isCompleted)
-				{
-					_targetRoles.length = 0;
-					_targetRoles = null;
-					stopFightTarget();
-					return;
-				}
+			var isCompleted : Boolean = true;
+			for each (var role : SceneRole in _targetRoles)
+			{
+			if (role.usable && role.isInViewDistance && !role.stateMachine.isDeadState)
+			isCompleted = false;
+			}
+			if (isCompleted)
+			{
+			_targetRoles.length = 0;
+			_targetRoles = null;
+			stopFightTarget();
+			return;
+			}
 			}*/
 			setAiState(force);
 			
@@ -335,7 +335,7 @@ package com.rpgGame.app.manager
 				_stateMachine.transition(AIStateType.ATTACK_WALK, null, force);
 				_stateMachine.transition(AIStateType.ATTACK_TARGET, null, force);
 			}
-			
+				
 			else if(_isFightActorRunning)
 			{
 				_stateMachine.transition(AIStateType.USE_ITEM, null, force);
@@ -378,27 +378,27 @@ package com.rpgGame.app.manager
 			/*var configCDTime : int = skill.q_cd; //配置的CD时间
 			TweenLite.delayedCall(configCDTime/1000, startFightSoulFight);*/
 		}
-
+		
 		public function get isAutoFhist():Boolean
 		{
 			return _isAutoFhist;
 		}
-
+		
 		public function set isAutoFhist(value:Boolean):void
 		{
 			_isAutoFhist = value;
 		}
-
+		
 		public function get isFightActorRunning():Boolean
 		{
 			return _isFightActorRunning;
 		}
-
+		
 		public function set isFightActorRunning(value:Boolean):void
 		{
 			_isFightActorRunning = value;
 		}
-
+		
 		public function get isAuto():Boolean
 		{
 			if(_isFightActorRunning||_isAutoFightRunning||_isFightTargetRunning)
@@ -407,12 +407,12 @@ package com.rpgGame.app.manager
 			}
 			return false;
 		}
-
+		
 		public function get isLeftDown():Boolean
 		{
 			return _isLeftDown;
 		}
-
+		
 		public function set isLeftDown(value:Boolean):void
 		{
 			_isLeftDown = value;
@@ -436,9 +436,9 @@ package com.rpgGame.app.manager
 		{
 			testStopKey=!testStopKey;
 		}
-
 		
 		
-
+		
+		
 	}
 }

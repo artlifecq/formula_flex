@@ -63,15 +63,6 @@
             return true;
         }
 
-        public static function getClientFunctionOpenLevel(funcKey:String):int
-        {
-            var level:int = MainRoleManager.actorInfo.totalStat.level;
-            var item:ClientFunctionOpen = ClientFunctionOpenCfgData.getDataByKey(funcKey);
-            if (item)
-            {
-                return item.openLevel;
-            }
-            return 0;
-        }
+       
     }
 }

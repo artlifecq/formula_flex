@@ -21,11 +21,11 @@ package org.mokylin.skin.app.wuxue.juexue
 
 		public var icons:feathers.controls.UIAsset;
 
-		public var lb_name:feathers.controls.Label;
-
 		public var lb_weijihuo:feathers.controls.Label;
 
 		public var qiyong:feathers.controls.UIAsset;
+
+		public var uiName:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -38,7 +38,7 @@ package org.mokylin.skin.app.wuxue.juexue
 			this.currentState = "normal";
 			this.height = 106;
 			this.width = 94;
-			this.elementsContent = [btn_over_i(),icons_i(),lb_weijihuo_i(),lb_name_i(),qiyong_i()];
+			this.elementsContent = [btn_over_i(),icons_i(),lb_weijihuo_i(),qiyong_i(),uiName_i()];
 			
 			states = {
 			};
@@ -75,23 +75,6 @@ package org.mokylin.skin.app.wuxue.juexue
 			return temp;
 		}
 
-		private function lb_name_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lb_name = temp;
-			temp.name = "lb_name";
-			temp.touchable = false;
-			temp.touchGroup = false;
-			temp.text = "飞升九天";
-			temp.textAlign = "center";
-			temp.color = 0xE3D9BF;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreeni"];
-			temp.width = 73;
-			temp.x = 5;
-			temp.y = 88;
-			return temp;
-		}
-
 		private function lb_weijihuo_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -105,7 +88,7 @@ package org.mokylin.skin.app.wuxue.juexue
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreeni"];
 			temp.width = 50;
 			temp.x = 18;
-			temp.y = 70;
+			temp.y = 69;
 			return temp;
 		}
 
@@ -119,6 +102,17 @@ package org.mokylin.skin.app.wuxue.juexue
 			temp.styleName = "ui/app/wuxue/juexue/qiyong.png";
 			temp.x = 56;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function uiName_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiName = temp;
+			temp.name = "uiName";
+			temp.styleName = "ui/app/wuxue/juexue/name/fsjt_xiao.png";
+			temp.x = 11;
+			temp.y = 83;
 			return temp;
 		}
 
