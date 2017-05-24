@@ -92,7 +92,6 @@ package com.editor.manager
 		private var _previewMap : Boolean;
         
 		private var _xyzMode : int = HeightMapHelperProxy.MODE_XY;
-//        private var _xyzMode : int = HeightMapHelper.MODE_XY;
 
 		public function SceneManager()
 		{

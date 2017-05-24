@@ -4,6 +4,7 @@ package com.editor.manager
 	import com.editor.cfg.GlobalSettingConfig;
 	import com.editor.data.ConfigDesc;
 	import com.editor.data.InternalTabelName;
+	import com.editor.data.RoleActionType;
 	import com.editor.data.RoleData;
 	import com.editor.data.RoleStateType;
 	import com.editor.data.TabelData;
@@ -144,7 +145,7 @@ package com.editor.manager
 				if (_keyMoving)
 				{
 					var idleActRef : PlayActionStateReference = SceneRoleManager.getInstance().targetPlayer.stateMachine.getReference(PlayActionStateReference) as PlayActionStateReference;
-					idleActRef.setParams("idle");
+					idleActRef.setParams(RoleActionType.IDLE);
 					SceneRoleManager.getInstance().targetPlayer.stateMachine.transition(RoleStateType.ACTION_PLAY_ACTION, idleActRef);
 					_keyMoving = false;
 				}
@@ -242,7 +243,7 @@ package com.editor.manager
 					if (!_keyMoving)
 					{
                         runActRef = SceneRoleManager.getInstance().targetPlayer.stateMachine.getReference(PlayActionStateReference) as PlayActionStateReference;
-						runActRef.setParams("run");
+						runActRef.setParams(RoleActionType.RUN);
 						SceneRoleManager.getInstance().targetPlayer.stateMachine.transition(RoleStateType.ACTION_PLAY_ACTION, runActRef);
 					}
 					SceneRoleManager.getInstance().targetPlayer.faceToGround(position.x, position.z, 0);
@@ -251,13 +252,6 @@ package com.editor.manager
 				object.x = position.x;
 				object.y = position.y;
 				object.z = position.z;
-				
-				var dx1 : Number = directionPosX * speed;
-				var dz1 : Number = directionPosZ * speed;
-				var dy1 : Number = directionPosY * speed;
-				camera.moveRight(dx1);
-				camera.moveForward(dz1);
-				camera.moveUp(dy1);
 			}
 			else if (CameraController.mode == CameraModeEnum.FIXED_TARGET_LOOK_AT_TARGET || CameraController.mode == CameraModeEnum.DIRECT_CAMERA)
 			{
@@ -276,7 +270,7 @@ package com.editor.manager
                 if (!_keyMoving)
                 {
                     runActRef = object.stateMachine.getReference(PlayActionStateReference) as PlayActionStateReference;
-                    runActRef.setParams("run");
+                    runActRef.setParams(RoleActionType.RUN);
                     object.stateMachine.transition(RoleStateType.ACTION_PLAY_ACTION, runActRef);
                     SceneRoleManager.getInstance().targetPlayer.faceToGround(position.x, position.z, 0);
                 }
