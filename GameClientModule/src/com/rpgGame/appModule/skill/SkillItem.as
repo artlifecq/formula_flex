@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.skill
 {
+	import com.game.engine3D.display.InterObject3D;
 	import com.rpgGame.app.manager.SpellManager;
 	import com.rpgGame.app.view.icon.BgIcon;
 	import com.rpgGame.core.events.SpellEvent;
@@ -39,6 +40,8 @@ package com.rpgGame.appModule.skill
 		private var _skillCfg:Q_skill_model;
 		private var _selected:Boolean;
 		private var _icon:BgIcon;
+
+		private var eft:InterObject3D;
 		
 		public function SkillItem()
 		{
@@ -131,29 +134,16 @@ package com.rpgGame.appModule.skill
 			TipTargetManager.show( this, TargetTipsMaker.makeTips( TipType.SPELL_TIP, cfg.q_skillID));
 		}
 		
-		public function onTouchItem(e:TouchEvent):void
-		{
-			if(_selected){
-				return;
-			}
-			var t:Touch=e.getTouch(_skin.select_btn);
-			if(!t){
-				_skin.select_btn.alpha=0;
-				return;
-			}
-			t=e.getTouch(_skin.select_btn,TouchPhase.HOVER);
-			if(t){
-				_skin.select_btn.alpha=0.5;
-			}
-		}
-		
 		public function set selected(value:Boolean):void
 		{
 			_selected=value;
 			if(value){
-				_skin.select_btn.alpha=1;
+				eft=this.playInter3DAt(ClientConfig.getEffect("ui_zhuanquan"),120,30,0);
 			}else{
-				_skin.select_btn.alpha=0;
+				if(eft){
+					eft.stop();
+					eft.removeFromParent(true);
+				}
 			}
 		}
 			

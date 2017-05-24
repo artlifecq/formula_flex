@@ -68,7 +68,7 @@ package org.mokylin.skin.app.wuxue.juexue
 			icons = temp;
 			temp.name = "icons";
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.styleName = "ui/app/wuxue/juexue/icon/bingfengsudong.png";
 			temp.x = 18;
 			temp.y = 16;
@@ -81,7 +81,7 @@ package org.mokylin.skin.app.wuxue.juexue
 			lb_weijihuo = temp;
 			temp.name = "lb_weijihuo";
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.text = "未激活";
 			temp.textAlign = "center";
 			temp.color = 0x6F6F6D;
@@ -98,7 +98,7 @@ package org.mokylin.skin.app.wuxue.juexue
 			qiyong = temp;
 			temp.name = "qiyong";
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.styleName = "ui/app/wuxue/juexue/qiyong.png";
 			temp.x = 56;
 			temp.y = 0;

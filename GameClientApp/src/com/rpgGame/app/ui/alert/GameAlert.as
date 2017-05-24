@@ -207,6 +207,7 @@ package com.rpgGame.app.ui.alert
 		
 		private static function layoutAlert(gameAlert:GameAlert):void
 		{
+			
 		}		
 		
 		private static var showAlertMap : HashMap = new HashMap();

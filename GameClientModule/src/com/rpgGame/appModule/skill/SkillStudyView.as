@@ -16,18 +16,19 @@ package com.rpgGame.appModule.skill
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.controls.ScrollPolicy;
 	
 	import org.client.mainCore.manager.EventManager;
-	import org.mokylin.skin.app.wuxue.jineng.JinengTitle_Skin;
 	import org.mokylin.skin.app.wuxue.jineng.jineng_Skin;
 	import org.mokylin.skin.app.wuxue.jineng.jineng_jinjie;
 	import org.mokylin.skin.app.wuxue.jineng.jineng_shengji;
+	import org.mokylin.skin.common.Title_Skin;
 	
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
-	import away3d.events.Event;
 	import starling.events.TouchEvent;
 
 	/**
@@ -40,8 +41,8 @@ package com.rpgGame.appModule.skill
 		private var _skin:jineng_Skin;
 		private var _skillContainer:Sprite;
 		
-		private var _jobTitle1:JinengTitle_Skin;
-		private var _jobTitle2:JinengTitle_Skin;
+		private var _jobTitle1:Title_Skin;
+		private var _jobTitle2:Title_Skin;
 		private var _jobTl1:Sprite;
 		private var _jobTl2:Sprite;
 		private var _lastSp:Sprite;
@@ -72,8 +73,8 @@ package com.rpgGame.appModule.skill
 			this._skin.vs_bar.horizontalScrollPolicy=ScrollPolicy.OFF;
 			
 			
-			_jobTitle1=new JinengTitle_Skin();
-			_jobTitle2=new JinengTitle_Skin();
+			_jobTitle1=new Title_Skin();
+			_jobTitle2=new Title_Skin();
 			_jobTitle2.labelDisplay.text=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT13);
 			_jobTl1=_jobTitle1.toSprite();
 			_jobTl2=_jobTitle2.toSprite();
@@ -144,21 +145,6 @@ package com.rpgGame.appModule.skill
 			this._skin.vs_bar.addChild(_skillContainer);
 		}
 		
-		private function onTouch(e:TouchEvent):void
-		{
-			var i:int,num:int,item:SkillItem;
-			num=basicItems.length;
-			for(i=0;i<num;i++){
-				item=basicItems[i];
-				item.onTouchItem(e);
-			}
-			num=otherItems.length;
-			for(i=0;i<num;i++){
-				item=otherItems[i];
-				item.onTouchItem(e);
-			}
-		}
-		
 		private function updateSkillList():void
 		{
 			var list:Vector.<Q_skill_model>=SpellDataManager.getBasicSkills(MainRoleManager.actorInfo.job);//基本职业技能
@@ -215,7 +201,6 @@ package com.rpgGame.appModule.skill
 			EventManager.removeEvent(MainPlayerEvent.STAT_CHANGE,updateChange);
 			EventManager.removeEvent(SpellEvent.SPELL_UPGRADE,spellUpgrade);
 			EventManager.removeEvent(SpellEvent.SPELL_RISE,spellRise);
-			_panel.removeEventListener(starling.events.TouchEvent.TOUCH, onTouch);
 			skillUpgrade.onHide();
 			skillRise.onHide();
 		}
@@ -232,7 +217,6 @@ package com.rpgGame.appModule.skill
 			EventManager.addEvent(MainPlayerEvent.STAT_CHANGE,updateChange);
 			EventManager.addEvent(SpellEvent.SPELL_UPGRADE,spellUpgrade);
 			EventManager.addEvent(SpellEvent.SPELL_RISE,spellRise);
-			_panel.addEventListener(starling.events.TouchEvent.TOUCH, onTouch);
 		}
 		
 		private function addItem(itemInfo : ClientItemInfo) : void
