@@ -67,6 +67,10 @@ package com.rpgGame.app.ui.main.dungeon
 			var now:int = SystemTimeManager.curtTm/1000;
 			var dis:int = _endTime-now;
 			_skin.sec_time.text = "副本倒计时："+TimeUtil.format3TimeType(dis);
+			if(dis<=30)
+				_skin.sec_time.color = 0xd02525;
+			else
+				_skin.sec_time.color = 0xe8c958;
 			if(dis<=0)
 			{
 				stopTimer();

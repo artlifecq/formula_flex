@@ -30,7 +30,7 @@ package com.rpgGame.app.ui.main.dungeon
 	{
 		private var _skin:ZhenQi_Skin;
 		private var _dailyZoneId:int;
-		private var _listCell:HashMap;
+		private var _targetTrack:TargetTrack;
 		private var _rewardIcons:Vector.<IconCDFace>;
 		private var _data:Q_daily_zone;
 		private var _endTime:int;
@@ -59,7 +59,6 @@ package com.rpgGame.app.ui.main.dungeon
 		{
 			EventManager.addEvent(DungeonEvent.UPDATE_DAILYZONE_INFO,updatedailyZoneInfo);
 			EventManager.addEvent(DungeonEvent.UPDATE_DAILYZONE_TIME,updatedailyZoneTime);
-			EventManager.addEvent(DungeonEvent.UPDATA_WAVE_INFO,updateWaveInfoHandler);
 			EventManager.addEvent(DungeonEvent.UPDATA_DAILYZONE_ENDINFO,updateEndInfo);
 			TrusteeshipManager.getInstance().findDist = 10000;
 			UIPopManager.showAlonePopUI(DungeonFightPop);
@@ -69,13 +68,6 @@ package com.rpgGame.app.ui.main.dungeon
 		{
 			_skin.uiKill.visible = (success==1);
 			stopTimer();
-		}
-		private function updateWaveInfoHandler(currentWaveId:int,killerCount:int):void
-		{		
-			var cell:KillInfoCell = _listCell.getValue(currentWaveId);
-			if(cell==null)
-				return ;
-			cell.updateValue(currentWaveId,killerCount);
 		}
 		private function updatedailyZoneTime(lastTime:Number):void
 		{
@@ -119,6 +111,10 @@ package com.rpgGame.app.ui.main.dungeon
 			var now:int = SystemTimeManager.curtTm/1000;
 			var dis:int = _endTime-now;
 			_skin.sec_time.text = "副本倒计时："+TimeUtil.format3TimeType(dis);
+			if(dis<=30)
+				_skin.sec_time.color = 0xd02525;
+			else
+				_skin.sec_time.color = 0xe8c958;
 			dis = _currentDisTime-now+_currentStartTime;
 			if(_currentStar ==3)
 			{
@@ -128,6 +124,11 @@ package com.rpgGame.app.ui.main.dungeon
 			}else{
 				_skin.sec_time2.text = "一星通关倒计时："+TimeUtil.format3TimeType(dis);
 			}
+			
+			if(dis<=30)
+				_skin.sec_time2.color = 0xd02525;
+			else
+				_skin.sec_time2.color = 0xe8c958;
 			var percent:Number = dis/_currentDisTime;
 			if(percent<0)
 			{
@@ -143,20 +144,7 @@ package com.rpgGame.app.ui.main.dungeon
 		private function updatedailyZoneInfo(dailyZoneId:int):void
 		{
 			_dailyZoneId = dailyZoneId;
-			var allList:Array = DailyZoneMonsterCfgData.getTypeList(dailyZoneId);
-			_listCell = new HashMap();
-			var index:int = 0;
-			for each(var md:Q_dailyzone_monster in allList)
-			{
-				var cell:KillInfoCell = new KillInfoCell();
-				cell.qdailyZoneData = md;
-				_skin.targetcontent.addChild(cell);
-				cell.x = 5;
-				cell.y = 20*index;
-				index++;
-				_listCell.put(md.q_id,cell);
-			}
-			
+			_targetTrack = new TargetTrack(_skin.targetcontent,_dailyZoneId,5);
 			_data = DailyZoneCfgData.getZoneCfg(dailyZoneId);
 			if(_data.q_combat_type ==1)
 			{
@@ -192,11 +180,11 @@ package com.rpgGame.app.ui.main.dungeon
 			stopTimer();
 			EventManager.removeEvent(DungeonEvent.UPDATE_DAILYZONE_INFO,updatedailyZoneInfo);
 			EventManager.removeEvent(DungeonEvent.UPDATE_DAILYZONE_TIME,updatedailyZoneTime);
-			EventManager.removeEvent(DungeonEvent.UPDATA_WAVE_INFO,updateWaveInfoHandler);
 			EventManager.removeEvent(DungeonEvent.UPDATA_DAILYZONE_ENDINFO,updateEndInfo);
 			_skin.targetcontent.removeChildren(0,-1,true);
 			TrusteeshipManager.getInstance().findDist = 0;
-			_listCell = null;
+			_targetTrack.onHide();
+			_targetTrack = null;
 		}
 		
 		private function stopTimer():void

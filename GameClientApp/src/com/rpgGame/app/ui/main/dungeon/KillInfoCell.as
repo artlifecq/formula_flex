@@ -67,7 +67,11 @@ package com.rpgGame.app.ui.main.dungeon
 			_currentCount = value;
 			this.invalidate(INVALIDATION_FLAG_DATA);
 		}
-
+		
+		public function get isComplete():Boolean
+		{
+			return _currentCount>=_qdailyZoneData.q_monsterNum;
+		}
 		
 		override protected function draw():void
 		{
@@ -77,7 +81,7 @@ package com.rpgGame.app.ui.main.dungeon
 				if(_monsterCfg==null)
 					_monsterCfg = MonsterDataManager.getData(_qdailyZoneData.q_monsterId);
 				_skin.labelDisplay.htmlText="击杀:"+_monsterCfg.q_name+"("+_currentCount+"/"+_qdailyZoneData.q_monsterNum+")";
-				if(_currentCount>=_qdailyZoneData.q_monsterNum)
+				if(isComplete)
 				{
 					_skin.labelDisplay.color = 0x8b8d7b;
 				}else if(_monsterCfg.q_monster_type ==3){

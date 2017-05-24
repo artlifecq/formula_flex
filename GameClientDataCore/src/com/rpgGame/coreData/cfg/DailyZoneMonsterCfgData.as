@@ -49,10 +49,10 @@ package com.rpgGame.coreData.cfg
 			}
 			
 			
-			for(var key:int in _typeList)
+			for(var key:* in _typeList)
 			{
 				typelist= _typeList[key] as Array;
-				_typeList[key] = typelist.sortOn(Array.NUMERIC,"q_wave");
+				_typeList[key] = typelist.sortOn("q_wave",Array.NUMERIC);
 			}
 		}
 		

@@ -45,12 +45,11 @@ package com.rpgGame.appModule.die
 		private var openTime:int;
 
 		private var timer:Timer;
-		private var openMask:Sprite;
 
 		private var currentSeeIndex:int;
 		private var maxSeeIndex:int;
 		private var tween:TweenLite;
-		
+		private var _listContent:ContentList;
 		private const FUHUO_ID:int=300;
 		
 		public function DiePanel()
@@ -59,15 +58,10 @@ package com.rpgGame.appModule.die
 			timer=new Timer(1000);
 			super(_skin);
 			
-			(_skin.bg.skin as Erji_panelbg_Skin).btnClose.visible=false;
-			openMask=new Sprite();
-			openMask.graphics.graphics.beginFill(0);
-			openMask.graphics.drawRect(0,0,this._skin.openGrp.width,this._skin.openGrp.height);
-			openMask.graphics.endFill();
-			openMask.x=this._skin.openGrp.x;
-			openMask.y=this._skin.openGrp.y;
-			this._skin.openGrp.mask=openMask;
-			this._skin.container.addChild(openMask);
+			_listContent = new ContentList(600,205);
+			this.addChild(_listContent);
+			_listContent.x = 50;
+			_listContent.y = 150;
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
@@ -82,7 +76,7 @@ package com.rpgGame.appModule.die
 				TimeUtil.changeTime(date.seconds)+")";
 			openNum=DieCfgData.allOpenList.length;
 			openTime=disMsg.autoTime;
-			items=new Vector.<DieToItem>();
+			/*items=new Vector.<DieToItem>();
 			for(var i:int=0;i<5;i++){
 				items.push(new DieToItem());
 				this._skin.openGrp.addChild(items[i]);
@@ -93,11 +87,10 @@ package com.rpgGame.appModule.die
 					items[i].update(null);
 				}
 			}
-			showItem=items[4];
+			showItem=items[4];*/
 			
 			maxSeeIndex=openNum-4;
 			currentSeeIndex=0;
-			updateSeeItem(true,false);
 			
 			timer.reset();
 			if(openTime>0){
@@ -153,7 +146,7 @@ package com.rpgGame.appModule.die
 					SceneSender.reqReviveRole();
 					this.hide();
 					break;
-				case _skin.btn_prev:
+				/*case _skin.btn_prev:
 					if(tween){
 						tween.complete();
 					}
@@ -166,7 +159,7 @@ package com.rpgGame.appModule.die
 					}
 					currentSeeIndex--;
 					updateSeeItem(true);
-					break;
+					break;*/
 			}
 		}
 		
@@ -183,7 +176,7 @@ package com.rpgGame.appModule.die
 //			this.hide();
 		}
 		
-		private function updateSeeItem(isNext:Boolean,showAni:Boolean=true):void
+		/*private function updateSeeItem(isNext:Boolean,showAni:Boolean=true):void
 		{
 			_skin.btn_prev.visible=true;
 			_skin.btn_next.visible=true;
@@ -218,6 +211,6 @@ package com.rpgGame.appModule.die
 			}
 			tween.kill();
 			tween=null;
-		}
+		}*/
 	}
 }
