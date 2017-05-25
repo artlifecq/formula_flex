@@ -4,12 +4,17 @@ package   com.rpgGame.app.manager.debug
 	import com.game.engine3D.utils.StatsUtil;
 	import com.game.mainCore.core.manager.LayerManager;
 	import com.gameClient.utils.HashMap;
+	import com.rpgGame.app.fight.spell.SkillAddPop;
+	import com.rpgGame.app.fight.spell.SpellHitHelper;
 	import com.rpgGame.app.manager.Mgr;
+	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
+	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.netData.skill.bean.SkillInfo;
 	
 	import org.client.mainCore.ds.HashMap;
-	import org.client.mainCore.manager.EventCenterManager;
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.net.MessageMgr;
 

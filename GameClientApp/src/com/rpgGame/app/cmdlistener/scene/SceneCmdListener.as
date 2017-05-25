@@ -12,6 +12,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.manager.GameCameraManager;
 	import com.rpgGame.app.manager.MainUIManager;
 	import com.rpgGame.app.manager.Mgr;
+	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.RankManager;
 	import com.rpgGame.app.manager.ReliveManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;

@@ -16,6 +16,7 @@ package com.rpgGame.appModule.bag
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
+	import com.rpgGame.app.ui.common.NumSelectUICtrl;
 	
 	/**
 	 *物品批量使用面板 

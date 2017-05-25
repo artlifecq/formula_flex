@@ -4,11 +4,12 @@ package  com.rpgGame.app.ui.common
 	
 	import flash.utils.getTimer;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.Button;
 	import feathers.controls.Label;
 	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
