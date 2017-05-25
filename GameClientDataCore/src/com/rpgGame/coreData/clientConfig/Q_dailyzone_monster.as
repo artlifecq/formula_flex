@@ -18,6 +18,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_wave:int;
 		 /**   每日副本ID */
 		public var q_daily_zoneId:int;
+		 /**  难度等级(副本之间难度不冲突,没有区分默认0) */
+		public var q_diff_level:int;
 		 /**  怪物的ID */
 		public var q_monsterId:int;
 		 /**  怪物的数量(相同怪物数量) */

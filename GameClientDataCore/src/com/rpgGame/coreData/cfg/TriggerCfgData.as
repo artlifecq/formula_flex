@@ -85,7 +85,21 @@ package com.rpgGame.coreData.cfg
 			}
 			return triggerList;
 		}
-		
+		/**返回副本触发区域列表*/
+		public static function getTriggerInZone(zid:int):Vector.<ClientTrigger>
+		{
+			var triggerList:Vector.<ClientTrigger>=new Vector.<ClientTrigger>();
+			
+			for each(var info :ClientTrigger in _trigers)
+			{
+				if(info.zoneId==zid)
+				{
+					triggerList.push(info);
+				}
+				
+			}
+			return triggerList;
+		}
 		
 	}
 }

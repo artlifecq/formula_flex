@@ -37,6 +37,41 @@ package com.rpgGame.core.events
 		 *更新副本结束信息 
 		 */
 		public static const UPDATA_DAILYZONE_ENDINFO:int = UNIQUEID.NEXT;
+		
+		/**
+		 *进入副本
+		 */
+		public static const ENTER_ZONE:int = UNIQUEID.NEXT;
+		/**
+		 *退出副本
+		 */
+		public static const OUT_ZONE:int = UNIQUEID.NEXT;
+		/**
+		 *副本状态信息
+		 */
+		public static const ZONE_STAGE_CHANGE:int = UNIQUEID.NEXT;
+		/**
+		 *副本时间
+		 */
+		public static const ZONE_REMAIN_TIME:int = UNIQUEID.NEXT;
+		/**
+		 *击杀列表
+		 */
+		public static const ZONE_SKILL_INFOS:int = UNIQUEID.NEXT;
+		/**
+		 *击杀单个
+		 */
+		public static const ZONE_SKILL_INFO:int = UNIQUEID.NEXT;
+		/**
+		 *触发列表
+		 */
+		public static const ZONE_CUR_TRIGGER:int = UNIQUEID.NEXT;
+		/**
+		 *准备退出副本
+		 */
+		public static const ZONE_OUT_RESULT:int = UNIQUEID.NEXT;
+		
+		
 		public function DungeonEvent()
 		{
 		}

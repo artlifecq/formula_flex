@@ -581,7 +581,11 @@ package com.rpgGame.app.manager.role
 		 */
 		public function removeSceneEffect(id : int, type : String) : void
 		{
-			removeSceneRoleByIdAndType(id, type);
+			var role : RenderUnit3D = SceneManager.getScene().getSceneObjByID(id, type) as RenderUnit3D;
+			if (role && role.usable)
+			{
+				SceneManager.removeSceneObjFromScene(role);
+			}
 		}
 		
 		
