@@ -12,6 +12,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.role.MonsterData;
+	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -108,6 +109,17 @@ package com.rpgGame.app.manager
 					}
 				}
 			}
+		}
+		
+		public static function isMyMonster(monster:SceneRole):Boolean
+		{
+			if (!monster||SceneCharType.MONSTER!=monster.type) 
+			{
+				return false;
+			}
+		
+			
+			return (monster.data as RoleData).ownerId==MainRoleManager.actorInfo.id;
 		}
 	}
 }

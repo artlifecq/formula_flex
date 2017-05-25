@@ -4,6 +4,7 @@ package com.rpgGame.app.graphics
 	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.rpgGame.app.display2D.AttackFace;
+	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.utils.HeadBloodUtil;
 	import com.rpgGame.coreData.cfg.ClientConfig;
@@ -211,8 +212,11 @@ package com.rpgGame.app.graphics
 				var monster:Q_monster=MonsterDataManager.getData((_role.data as MonsterData).modelID);
 				var isNormal:Boolean=monster.q_monster_type==MonsterType.NORMAL;
 				//普通怪在战斗状态显示血条
-			
-				showAndHideElement(_nameBar, isNormal&&_isSelected && nameVisible);
+				//我的召唤怪要显示
+				var isMyMonster:Boolean=PKMamager.isMyMonster(_role);
+				showAndHideElement(_bloodBar, isMyMonster);
+				
+				showAndHideElement(_nameBar, isMyMonster||(isNormal&&_isSelected && nameVisible));
 			}
 			else if (_role.type == SceneCharType.DROP_GOODS) //掉落物，全显示或者全隐藏
 			{
@@ -1127,7 +1131,11 @@ package com.rpgGame.app.graphics
 			{
 				if ((_role.data as MonsterData).monsterData.q_monster_type!=MonsterType.NORMAL) 
 				{
-					return;
+					if (!PKMamager.isMyMonster(_role)) 
+					{
+						return;
+					}
+					
 				}
 			}
 			this.addChildAt(_bloodBar,0);

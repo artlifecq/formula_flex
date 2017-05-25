@@ -10,6 +10,7 @@ package  com.rpgGame.core.utils
 	import feathers.controls.Label;
 	import feathers.controls.List;
 	
+	import org.client.mainCore.ds.HashMap;
 	import org.mokylin.skin.component.list.ListSkin1;
 	
 	import starling.display.DisplayObject;
@@ -364,7 +365,7 @@ package  com.rpgGame.core.utils
 		 * @param srcHash
 		 * 
 		 */		
-		public static function mergeValueHashMap(dstHash:HashMap,srcHash:HashMap):void
+		public static function mergeValueHashMap(dstHash:com.gameClient.utils.HashMap,srcHash:com.gameClient.utils.HashMap):void
 		{
 			if (!dstHash||!srcHash) 
 			{
@@ -378,6 +379,52 @@ package  com.rpgGame.core.utils
 				vald=dstHash.getValue(key);
 				vals=srcHash.getValue(key);
 				dstHash.put(key,vald+vals);
+			}
+			
+		}
+		/**
+		 *合并hashmap,注意值只能相减
+		 * @param dstHash
+		 * @param srcHash
+		 * 
+		 */		
+		public static function subtractionValueHashMap(dstHash:com.gameClient.utils.HashMap,srcHash:com.gameClient.utils.HashMap):void
+		{
+			if (!dstHash||!srcHash) 
+			{
+				return;
+			}
+			var keys:Array=srcHash.keys();
+			var vald:int=0;
+			var vals:int=0;
+			for each (var key:* in keys) 
+			{
+				vald=dstHash.getValue(key);
+				vals=srcHash.getValue(key);
+				dstHash.put(key,vald-vals);
+			}
+			
+		}
+		/**
+		 *合并hashmap,注意值只能相减
+		 * @param dstHash
+		 * @param srcHash
+		 * 
+		 */		
+		public static function subtractionValueHashMap2(dstHash:org.client.mainCore.ds.HashMap,srcHash:org.client.mainCore.ds.HashMap):void
+		{
+			if (!dstHash||!srcHash) 
+			{
+				return;
+			}
+			var keys:Array=srcHash.keys();
+			var vald:int=0;
+			var vals:int=0;
+			for each (var key:* in keys) 
+			{
+				vald=dstHash.getValue(key);
+				vals=srcHash.getValue(key);
+				dstHash.add(key,vald-vals);
 			}
 			
 		}

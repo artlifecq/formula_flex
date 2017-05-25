@@ -223,8 +223,17 @@ package com.rpgGame.app.fight.spell
 			{
 				atkor.headFace.show();
 			}
+			if (!bool) 
+			{
+				FightFaceHelper.showHurtText(atkor, hurter, hurtType, hurtAmount);
+			}
+			else
+			{
+				FightFaceHelper.showHurtTextNew(atkor, hurter, hurtType, hurtAmount);
+			}
 			//飘血飘字,等技能完成后再调整
-			FightFaceHelper.showHurtText(atkor, hurter, hurtType, hurtAmount);
+			
 		}
+		public static var bool:Boolean=false;
 	}
 }

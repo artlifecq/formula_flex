@@ -105,13 +105,14 @@ package org.mokylin.skin.mainui.head
 			lbLevel = temp;
 			temp.name = "lbLevel";
 			temp.bold = false;
+			temp.height = 16;
 			temp.fontSize = 12;
-			temp.text = "12";
+			temp.text = "999";
 			temp.textAlign = "center";
 			temp.color = 0xE1D4A9;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 20;
-			temp.x = 5;
+			temp.width = 28;
+			temp.x = 2;
 			temp.y = 8;
 			return temp;
 		}

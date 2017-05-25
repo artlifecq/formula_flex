@@ -4,10 +4,13 @@ package   com.rpgGame.app.manager.debug
 	import com.game.engine3D.utils.StatsUtil;
 	import com.game.mainCore.core.manager.LayerManager;
 	import com.gameClient.utils.HashMap;
+	import com.rpgGame.app.fight.spell.SpellHitHelper;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.PKMamager;
+	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	
+	import org.client.mainCore.ds.HashMap;
 	import org.game.netCore.net.MessageMgr;
 
 	
@@ -25,7 +28,7 @@ package   com.rpgGame.app.manager.debug
 			_isDevelop=MessageMgr.Ins.ip.indexOf("192.168")!=-1
 		}
 		
-		private  var commandList:HashMap = new HashMap();
+		private  var commandList:com.gameClient.utils.HashMap = new com.gameClient.utils.HashMap();
 		private  var docommandList:Vector.<String> = new Vector.<String>;
 		
 
@@ -51,6 +54,24 @@ package   com.rpgGame.app.manager.debug
 				MainRoleManager.actorInfo.pkMode=arg[0];
 				PKMamager.setPkMode(arg[0]);
 				
+			});
+			commandList.put( ".fight", function (...arg):void
+			{
+				
+				SpellHitHelper.bool=!SpellHitHelper.bool;
+			});
+			commandList.put( ".attr", function (...arg):void
+			{
+				
+				var hash:org.client.mainCore.ds.HashMap=new org.client.mainCore.ds.HashMap();
+				hash.add(1,1000);
+				hash.add(2,2000);
+				hash.add(3,-1000);
+				hash.add(4,-2023);
+				hash.add(10,1333);
+				hash.add(15,14444);
+				hash.add(16,-302222);
+				FightFaceHelper.showPlayerBaseAttrChange(hash);
 			});
 		}
 		
