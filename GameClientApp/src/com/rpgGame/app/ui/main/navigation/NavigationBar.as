@@ -1,5 +1,6 @@
 package com.rpgGame.app.ui.main.navigation {
     import com.rpgGame.app.sender.ItemSender;
+    import com.rpgGame.app.ui.alert.GameAlert;
     import com.rpgGame.core.app.AppConstant;
     import com.rpgGame.core.app.AppManager;
     import com.rpgGame.core.events.ItemEvent;
@@ -8,6 +9,7 @@ package com.rpgGame.app.ui.main.navigation {
     import com.rpgGame.core.ui.SkinUI;
     import com.rpgGame.coreData.cfg.ClientConfig;
     import com.rpgGame.coreData.cfg.item.ItemContainerID;
+    import com.rpgGame.coreData.lang.LangAlertInfo;
     
     import flash.geom.Point;
     
@@ -98,6 +100,7 @@ package com.rpgGame.app.ui.main.navigation {
                 case this._skin.btn_beibao:
                 case this._skin.btn_juese:
                     AppManager.showApp(AppConstant.ROLE_PANEL);
+					GameAlert.showAlertUtil(LangAlertInfo.LUNJIAN_FIGHT_MIN);
                     break;
                 case this._skin.btn_wuxue:
 

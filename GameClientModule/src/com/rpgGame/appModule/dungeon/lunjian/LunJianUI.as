@@ -20,7 +20,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 	import org.mokylin.skin.app.jianghu.lunjian.LunJian_Skin;
 	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
+	import away3d.events.Event;
 	
 	/**
 	 *
@@ -137,8 +137,8 @@ package com.rpgGame.appModule.dungeon.lunjian
 				var info:NpcMapItemData=datas[i];
 				info.leftNum=getLeftNum(info.sceneData);
 			}
-			_skin.list_map.selectedIndex=0;
-			_skin.list_map.dataProvider.updateItemAt(0);
+//			_skin.list_map.selectedIndex=0;
+			_skin.list_map.dataProvider.updateItemAt(_skin.list_map.selectedIndex);
 		}
 		
 		private function getLeftNum(sceneData:SceneData):int
@@ -174,7 +174,6 @@ package com.rpgGame.appModule.dungeon.lunjian
 				}
 				npcDatas.addItem(data);
 			}
-			npcDatas.updateAll();
 			pageContainer.currentPage=1;
 		}
 		

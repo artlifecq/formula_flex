@@ -15,7 +15,7 @@ package com.rpgGame.appModule.shop
 	import org.mokylin.skin.app.shangcheng.ChuShou_Skin;
 	
 	import starling.display.DisplayObjectContainer;
-	import starling.events.Event;
+	import away3d.events.Event;
 	
 	public class ItemSellAlertExtPanelExt extends SkinUIPanel
 	{

@@ -162,8 +162,6 @@ package com.rpgGame.app.cmdlistener.scene
 			
             SocketConnection.addCmdListener(103110, onResChangePKStateMessage);
 			
-			
-			
 //			SocketConnection.addCmdListener(SceneModuleMessages.S2C_TRIGGER_CLIENT_EVENT, onTriggerClientEvent);
 			
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -714,13 +712,17 @@ package com.rpgGame.app.cmdlistener.scene
 			var info : MonsterInfo = new MonsterInfo();
 			info.read(buffer);
 			var qData : Q_monster = MonsterDataManager.getData(info.modelId);
-			if(qData!=null&&qData.q_monster_type==5)//如果是采集物 去走采集物创建流程
+			var data : MonsterData;
+			var sceneRole : SceneRole;
+			if(qData==null)return;
+			if(qData.q_monster_type==5)//如果是采集物 去走采集物创建流程
 			{
 				var collectData : SceneCollectData = new SceneCollectData();
 				collectData.serverID = info.monsterId;
 				collectData.id = info.monsterId.ToGID();
 				collectData.modelID = info.modelId;
 				collectData.sceneID = info.mapModelId;
+				collectData.distributeId=info.distributeId;
 				collectData.name = info.monsterName;
 				collectData.avatarRes = qData.q_body_res;
 				collectData.sizeScale = qData.q_scale > 0 ? (qData.q_scale * 0.01) : 1;
@@ -730,16 +732,31 @@ package com.rpgGame.app.cmdlistener.scene
 				collectData.isDynamicCreate =true;
 				SceneRoleManager.getInstance().createCollect(collectData);
 			}
-			else//走怪物和npc创建流程
+			else if(qData.q_monster_type==4)//npc创建流程       对应 改的东西太多了 先保留
 			{
-			
-				var data : MonsterData = new MonsterData(RoleType.TYPE_MONSTER);
+				
+				data = new MonsterData(RoleType.TYPE_MONSTER);
 				data.serverID = info.monsterId;
 				data.id = info.monsterId.ToGID();
 				data.modelID = info.modelId;
+				data.distributeId=info.distributeId;
 				RoleData.readMonster(data,info);
-				var sceneRole : SceneRole =SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
+				sceneRole =SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
 				addTaskmark(sceneRole);
+				
+				GameLog.addShow("添加NPC客户端id：" + data.id);
+				GameLog.addShow("添加NPC服务器id：" + data.serverID.ToString());
+			}
+			else//走怪物创建流程
+			{
+			
+				data = new MonsterData(RoleType.TYPE_MONSTER);
+				data.serverID = info.monsterId;
+				data.id = info.monsterId.ToGID();
+				data.modelID = info.modelId;
+				data.distributeId=info.distributeId;
+				RoleData.readMonster(data,info);
+				sceneRole =SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
 				
 				GameLog.addShow("添加怪物客户端id：" + data.id);
 				GameLog.addShow("添加怪物服务器id：" + data.serverID.ToString());

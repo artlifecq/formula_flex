@@ -149,21 +149,15 @@ package starling.textures
 		}
 		
 		/** Retrieves a SubTexture by name. Returns <code>null</code> if it is not found. */
-		override public function getTexture(name:String):IStarlingTexture
+		override public function getTexture(name:String):SubTexture
 		{
 			if(!_uploaded)
 			{
 				trace("LabelTextureAtlas have not upload", name);
 				return null;
 			}
-				
 			
 			return _subTextures[name];
-		}
-		
-		public function get subTextures():Dictionary
-		{
-			return _subTextures;
 		}
 		
 		public function get isUploaded():Boolean

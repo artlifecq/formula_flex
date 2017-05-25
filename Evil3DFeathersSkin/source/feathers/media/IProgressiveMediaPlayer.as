@@ -34,7 +34,7 @@ package feathers.media
 	 * 
 	 * @eventType feathers.events.MediaPlayerEventType.LOAD_PROGRESS
 	 */
-	[Event(name="loadProgress",type="starling.events.Event")]
+	[Event(name="loadProgress",type="away3d.events.Event")]
 
 	/**
 	 * A media player that loads its content progressively.

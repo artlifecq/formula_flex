@@ -14,7 +14,7 @@ package feathers.media
 	import flash.media.SoundChannel;
 
 	import starling.display.Quad;
-	import starling.events.Event;
+	import away3d.events.Event;
 
 	/**
 	 * A visualization of the left and right peaks of the

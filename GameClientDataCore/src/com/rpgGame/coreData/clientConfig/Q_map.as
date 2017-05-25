@@ -12,10 +12,10 @@ package com.rpgGame.coreData.clientConfig
 	*/
 	public class Q_map
 	{
-		 /**  地图中文名 */
-		public var q_map_name:String;
 		 /**  地图ID */
 		public var q_map_id:int;
+		 /**  地图中文名 */
+		public var q_map_name:String;
 		 /**  地图资源路径 */
 		public var q_mapres:String;
 		 /**  地图宽度 */

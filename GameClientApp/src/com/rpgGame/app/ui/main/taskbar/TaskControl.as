@@ -76,7 +76,7 @@ package com.rpgGame.app.ui.main.taskbar
 		/**目标按钮任务处理*/
 		public static function killWalkBut(type:int,num:int,key:int):void
 		{
-			if(type==TaskType.MAINTYPE_MAINTASK&&MainRoleManager.actorInfo.totalStat.level<=TaskAutoManager.AUTOLVE)//
+			if(key==1&&type==TaskType.MAINTYPE_MAINTASK&&MainRoleManager.actorInfo.totalStat.level<=TaskAutoManager.AUTOLVE)//
 			{
 				TaskAutoManager.getInstance().startTaskAuto(num);
 				return;

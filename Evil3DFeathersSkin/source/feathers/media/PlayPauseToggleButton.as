@@ -7,11 +7,11 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.media
 {
+	import away3d.events.Event;
+	
 	import feathers.controls.ToggleButton;
 	import feathers.events.MediaPlayerEventType;
 	import feathers.skins.IStyleProvider;
-
-	import starling.events.Event;
 
 	/**
 	 * A specialized toggle button that controls whether a media player is

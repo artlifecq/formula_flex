@@ -372,7 +372,7 @@ package com.rpgGame.app.manager.scene
 				AreaMapManager.updateEscortAreaMap();
 				AreaMapManager.updateExplorationAreaMap();
 				AreaMapManager.updateMapDataAreaMap();
-//				AreaMapManager.updateTriggerAreaMap();
+				AreaMapManager.updateTriggerAreaMap();
 			}
 		}
 

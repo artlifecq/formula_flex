@@ -7,6 +7,11 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.controls
 {
+	import flash.geom.Point;
+	import flash.ui.Keyboard;
+	
+	import away3d.events.Event;
+	
 	import feathers.core.FeathersControl;
 	import feathers.core.IFeathersControl;
 	import feathers.core.IFocusDisplayObject;
@@ -18,16 +23,12 @@ package feathers.controls
 	import feathers.core.PropertyProxy;
 	import feathers.skins.IStyleProvider;
 	import feathers.system.DeviceCapabilities;
-
-	import flash.geom.Point;
-	import flash.ui.Keyboard;
-
+	
 	import starling.animation.Transitions;
 	import starling.animation.Tween;
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.display.Quad;
-	import starling.events.Event;
 	import starling.events.KeyboardEvent;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
@@ -37,7 +38,7 @@ package feathers.controls
 	/**
 	 * @copy feathers.core.IToggle#event:change
 	 */
-	[Event(name="change",type="starling.events.Event")]
+	[Event(name="change",type="away3d.events.Event")]
 
 	/**
 	 * Similar to a light switch with on and off states. Generally considered an

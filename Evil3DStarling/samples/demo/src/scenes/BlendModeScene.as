@@ -3,7 +3,7 @@ package scenes
     import starling.display.BlendMode;
     import starling.display.Button;
     import starling.display.Image;
-    import starling.events.Event;
+    import away3d.events.Event;
     import starling.text.TextField;
 
     import utils.MenuButton;

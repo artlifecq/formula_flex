@@ -163,9 +163,12 @@
 				var tabel : TabelData = DataStructuresManager.getInstance().getTabel(tabelName);
 				var configDesc : ConfigDesc = tabel.getConfigDesc();
 				var cfg : ConfigData = ConfigData.create(configDesc, null, null, tabel.dataConstructor, true);
-				if (DataManager.getInstance().createDataSetParams(_funcInfo, cfg)) {
+				if (DataManager.getInstance().createDataSetParams(_funcInfo, cfg)) 
+				{
 				    pullData();
-                } else {
+                } 
+				else 
+				{
                     ConfigData.remove(configDesc, cfg.id);
                 }
 			}

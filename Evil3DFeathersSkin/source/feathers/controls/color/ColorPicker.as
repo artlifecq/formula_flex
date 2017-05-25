@@ -7,6 +7,10 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.controls.color
 {
+	import flash.ui.Keyboard;
+	
+	import away3d.events.Event;
+	
 	import feathers.controls.popups.BottomDrawerPopUpContentManager;
 	import feathers.controls.popups.CalloutPopUpContentManager;
 	import feathers.controls.popups.DropDownPopUpContentManager;
@@ -17,13 +21,12 @@ package feathers.controls.color
 	import feathers.events.FeathersEventType;
 	import feathers.skins.IStyleProvider;
 	import feathers.system.DeviceCapabilities;
-
-	import flash.ui.Keyboard;
-
+	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
-	import starling.events.Event;
-	import starling.events.EventDispatcher;
+	import away3d.events.Event;
+	import away3d.events.EventDispatcher;
+	
 	import starling.events.KeyboardEvent;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;

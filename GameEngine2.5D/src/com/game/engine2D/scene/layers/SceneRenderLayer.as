@@ -29,7 +29,7 @@ package com.game.engine2D.scene.layers
 		 * @private
 		 * 场景所有角色集合
 		 */
-		public function get baseObjList():Vector.<BaseObj>
+		public function Debnug_call_GetBaseObjList():Vector.<BaseObj>
 		{
 			return _baseObjList;
 		}

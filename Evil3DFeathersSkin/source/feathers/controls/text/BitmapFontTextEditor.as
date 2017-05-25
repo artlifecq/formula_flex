@@ -28,7 +28,7 @@ package feathers.controls.text
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.display.Quad;
-	import starling.events.Event;
+	import away3d.events.Event;
 	import starling.events.KeyboardEvent;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
@@ -55,7 +55,7 @@ package feathers.controls.text
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 */
-	[Event(name="change",type="starling.events.Event")]
+	[Event(name="change",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the user presses the Enter key while the editor has
@@ -78,7 +78,7 @@ package feathers.controls.text
 	 *
 	 * @eventType feathers.events.FeathersEventType.ENTER
 	 */
-	[Event(name="enter",type="starling.events.Event")]
+	[Event(name="enter",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the text editor receives focus.
@@ -100,7 +100,7 @@ package feathers.controls.text
 	 *
 	 * @eventType feathers.events.FeathersEventType.FOCUS_IN
 	 */
-	[Event(name="focusIn",type="starling.events.Event")]
+	[Event(name="focusIn",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the text editor loses focus.
@@ -122,7 +122,7 @@ package feathers.controls.text
 	 *
 	 * @eventType feathers.events.FeathersEventType.FOCUS_OUT
 	 */
-	[Event(name="focusOut",type="starling.events.Event")]
+	[Event(name="focusOut",type="away3d.events.Event")]
 
 	/**
 	 * Text that may be edited at runtime by the user with the
@@ -479,7 +479,7 @@ package feathers.controls.text
 			{
 				this.selectRange(this._selectionBeginIndex, textLength);
 			}
-			this.dispatchEventWith(starling.events.Event.CHANGE);
+			this.dispatchEventWith(away3d.events.Event.CHANGE);
 		}
 
 		/**
@@ -677,7 +677,7 @@ package feathers.controls.text
 			this._selectionSkin.visible = false;
 			this.stage.removeEventListener(TouchEvent.TOUCH, stage_touchHandler);
 			this.stage.removeEventListener(KeyboardEvent.KEY_DOWN, stage_keyDownHandler);
-			this.removeEventListener(starling.events.Event.ENTER_FRAME, hasFocus_enterFrameHandler);
+			this.removeEventListener(away3d.events.Event.ENTER_FRAME, hasFocus_enterFrameHandler);
 			var starling:Starling = this.stage !== null ? this.stage.starling : Starling.current;
 			var nativeStage:Stage = starling.nativeStage;
 			if(nativeStage.focus === this._nativeFocus)
@@ -907,7 +907,7 @@ package feathers.controls.text
 			//that the focus manager can see, it's not being used anyway.
 			this._hasFocus = true;
 			this.stage.addEventListener(KeyboardEvent.KEY_DOWN, stage_keyDownHandler);
-			this.addEventListener(starling.events.Event.ENTER_FRAME, hasFocus_enterFrameHandler);
+			this.addEventListener(away3d.events.Event.ENTER_FRAME, hasFocus_enterFrameHandler);
 			this.dispatchEventWith(FeathersEventType.FOCUS_IN);
 		}
 
@@ -1169,7 +1169,7 @@ package feathers.controls.text
 		/**
 		 * @private
 		 */
-		protected function hasFocus_enterFrameHandler(event:starling.events.Event):void
+		protected function hasFocus_enterFrameHandler(event:away3d.events.Event):void
 		{
 			var target:DisplayObject = this;
 			do

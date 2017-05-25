@@ -19,6 +19,8 @@ package org.mokylin.skin.app.fuben
 			super();
 			
 			this.currentState = "normal";
+			this.height = 129;
+			this.width = 386;
 			this.elementsContent = [__FuBen_TiaoZhanKaiShi_UIAsset1_i()];
 			
 			states = {

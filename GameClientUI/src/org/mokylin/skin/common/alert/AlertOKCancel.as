@@ -8,6 +8,7 @@ package org.mokylin.skin.common.alert
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
+	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 	import org.mokylin.skin.component.check.CheckBoxSkin_1;
 
 	/**
@@ -34,8 +35,6 @@ package org.mokylin.skin.common.alert
 
 		public var title:feathers.controls.Label;
 
-		public var txt_bg:feathers.controls.UIAsset;
-
 
 		//==========================================================================
 		//                                定义构造函数
@@ -45,9 +44,9 @@ package org.mokylin.skin.common.alert
 			super();
 			
 			this.currentState = "normal";
-			this.height = 279;
-			this.width = 355;
-			this.elementsContent = [bg_i(),txt_bg_i(),title_i(),btnClose_i(),btnOk_i(),btnCancel_i(),cboxTip_i(),lbTip_i()];
+			this.height = 265;
+			this.width = 331;
+			this.elementsContent = [bg_i(),__AlertOKCancel_UIAsset1_i(),title_i(),btnClose_i(),btnOk_i(),btnCancel_i(),cboxTip_i(),lbTip_i()];
 			
 			states = {
 			};
@@ -58,14 +57,23 @@ package org.mokylin.skin.common.alert
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
+		private function __AlertOKCancel_UIAsset1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/common/background/erji_bg.jpg";
+			temp.x = 11;
+			temp.y = 42;
+			return temp;
+		}
+
 		private function bg_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 283;
+			temp.height = 265;
 			temp.styleName = "ui/common/background/erji_kuang.png";
-			temp.width = 356;
+			temp.width = 331;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -80,8 +88,8 @@ package org.mokylin.skin.common.alert
 			temp.label = "取 消";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
 			temp.width = 95;
-			temp.x = 205;
-			temp.y = 229;
+			temp.x = 187;
+			temp.y = 215;
 			return temp;
 		}
 
@@ -91,7 +99,7 @@ package org.mokylin.skin.common.alert
 			btnClose = temp;
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.x = 301;
+			temp.x = 297;
 			temp.y = 7;
 			return temp;
 		}
@@ -103,10 +111,10 @@ package org.mokylin.skin.common.alert
 			temp.name = "btnOk";
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.label = "拆 分";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
-			temp.width = 95;
-			temp.x = 74;
-			temp.y = 229;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
+			temp.width = 88;
+			temp.x = 56;
+			temp.y = 217;
 			return temp;
 		}
 
@@ -117,8 +125,8 @@ package org.mokylin.skin.common.alert
 			temp.name = "cboxTip";
 			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
 			temp.width = 202;
-			temp.x = 94;
-			temp.y = 198;
+			temp.x = 71;
+			temp.y = 175;
 			return temp;
 		}
 
@@ -127,14 +135,14 @@ package org.mokylin.skin.common.alert
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbTip = temp;
 			temp.name = "lbTip";
-			temp.height = 141;
+			temp.height = 124;
 			temp.leading = 2;
 			temp.letterSpacing = 0;
 			temp.text = "标签";
 			temp.color = 0xcfc6ae;
-			temp.width = 311;
-			temp.x = 20;
-			temp.y = 46;
+			temp.width = 293;
+			temp.x = 18;
+			temp.y = 49;
 			return temp;
 		}
 
@@ -148,24 +156,11 @@ package org.mokylin.skin.common.alert
 			temp.fontSize = 16;
 			temp.text = "提 示";
 			temp.textAlign = "center";
-			temp.color = 0xb8ad80;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 267;
-			temp.x = 30;
+			temp.color = 0xDDE2B1;
+			temp.nativeFilters = Fontter.filterObj[""];
+			temp.width = 240;
+			temp.x = 48;
 			temp.y = 11;
-			return temp;
-		}
-
-		private function txt_bg_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			txt_bg = temp;
-			temp.name = "txt_bg";
-			temp.height = 151;
-			temp.styleName = "ui/common/background/neikuang_2.png";
-			temp.width = 323;
-			temp.x = 16;
-			temp.y = 41;
 			return temp;
 		}
 

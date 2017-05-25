@@ -40,6 +40,8 @@ package org.mokylin.skin.app.siwangfuhuo
 			super();
 			
 			this.currentState = "normal";
+			this.height = 190;
+			this.width = 141;
 			this.elementsContent = [btn_i(),lbl_name_i(),mc_star1_i(),mc_star2_i(),mc_star3_i(),mc_star4_i(),mc_star5_i()];
 			
 			states = {

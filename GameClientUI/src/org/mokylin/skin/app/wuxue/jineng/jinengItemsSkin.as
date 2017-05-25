@@ -1,12 +1,10 @@
 package org.mokylin.skin.app.wuxue.jineng
 {
 	import feathers.controls.text.Fontter;
-	import feathers.controls.Button;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import feathers.controls.UIMovieClip;
-	import org.mokylin.skin.app.wuxue.jineng.button.ItemBtnSkin;
 	import org.mokylin.skin.app.wuxue.jineng.mc.dengjiSkin;
 
 	/**
@@ -22,8 +20,6 @@ package org.mokylin.skin.app.wuxue.jineng
 		public var Icon:feathers.controls.UIAsset;
 
 		public var mc_dengjie:feathers.controls.UIMovieClip;
-
-		public var select_btn:feathers.controls.Button;
 
 		public var tips:feathers.controls.UIAsset;
 
@@ -48,7 +44,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			this.currentState = "normal";
 			this.height = 59;
 			this.width = 241;
-			this.elementsContent = [__jinengItemsSkin_UIAsset1_i(),select_btn_i(),Icon_i(),txt_Name_i(),txt_Inacitve_i(),txt_xianzhi_i(),txt_Acitve_i(),txt_level_i(),tips_i(),mc_dengjie_i()];
+			this.elementsContent = [__jinengItemsSkin_UIAsset1_i(),Icon_i(),txt_Name_i(),txt_Inacitve_i(),txt_xianzhi_i(),txt_Acitve_i(),txt_level_i(),tips_i(),mc_dengjie_i()];
 			
 			states = {
 			};
@@ -92,19 +88,6 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.width = 10;
 			temp.x = 43;
 			temp.y = 38;
-			return temp;
-		}
-
-		private function select_btn_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			select_btn = temp;
-			temp.name = "select_btn";
-			temp.height = 59;
-			temp.styleClass = org.mokylin.skin.app.wuxue.jineng.button.ItemBtnSkin;
-			temp.width = 241;
-			temp.x = 0;
-			temp.y = 0;
 			return temp;
 		}
 

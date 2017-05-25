@@ -14,7 +14,7 @@ package feathers.layout
 	 *
 	 * @eventType feathers.events.FeathersEventType.LAYOUT_DATA_CHANGE
 	 */
-	[Event(name="layoutDataChange",type="starling.events.Event")]
+	[Event(name="layoutDataChange",type="away3d.events.Event")]
 
 	/**
 	 * A display object that may be associated with extra data for use with

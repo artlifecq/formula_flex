@@ -7,7 +7,7 @@ package com.rpgGame.app.ui
 	import starling.core.Starling;
 	import starling.display.Shape;
 	import starling.display.Sprite;
-	import starling.events.Event;
+	import away3d.events.Event;
 
 	/**
 	 * 模态单例

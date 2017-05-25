@@ -14,10 +14,8 @@ package feathers.controls.text
 	import flash.events.KeyboardEvent;
 	import flash.events.SoftKeyboardEvent;
 	import flash.geom.Matrix;
-	import flash.geom.Matrix3D;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
-	import flash.geom.Vector3D;
 	import flash.text.AntiAliasType;
 	import flash.text.GridFitType;
 	import flash.text.TextField;
@@ -26,6 +24,8 @@ package feathers.controls.text
 	import flash.text.TextFormat;
 	import flash.text.TextFormatAlign;
 	import flash.ui.Keyboard;
+	
+	import away3d.events.Event;
 	
 	import feathers.core.FeathersControl;
 	import feathers.core.FocusManager;
@@ -43,7 +43,6 @@ package feathers.controls.text
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.display.Image;
-	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -73,7 +72,7 @@ package feathers.controls.text
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 */
-	[Event(name="change",type="starling.events.Event")]
+	[Event(name="change",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the user presses the Enter key while the editor has focus.
@@ -95,7 +94,7 @@ package feathers.controls.text
 	 *
 	 * @eventType feathers.events.FeathersEventType.ENTER
 	 */
-	[Event(name="enter",type="starling.events.Event")]
+	[Event(name="enter",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the text editor receives focus.
@@ -117,7 +116,7 @@ package feathers.controls.text
 	 *
 	 * @eventType feathers.events.FeathersEventType.FOCUS_IN
 	 */
-	[Event(name="focusIn",type="starling.events.Event")]
+	[Event(name="focusIn",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the text editor loses focus.
@@ -139,7 +138,7 @@ package feathers.controls.text
 	 *
 	 * @eventType feathers.events.FeathersEventType.FOCUS_OUT
 	 */
-	[Event(name="focusOut",type="starling.events.Event")]
+	[Event(name="focusOut",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the soft keyboard is activated. Not all text editors will
@@ -162,7 +161,7 @@ package feathers.controls.text
 	 *
 	 * @eventType feathers.events.FeathersEventType.SOFT_KEYBOARD_ACTIVATE
 	 */
-	[Event(name="softKeyboardActivate",type="starling.events.Event")]
+	[Event(name="softKeyboardActivate",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the soft keyboard is deactivated. Not all text editors
@@ -185,7 +184,7 @@ package feathers.controls.text
 	 *
 	 * @eventType feathers.events.FeathersEventType.SOFT_KEYBOARD_DEACTIVATE
 	 */
-	[Event(name="softKeyboardDeactivate",type="starling.events.Event")]
+	[Event(name="softKeyboardDeactivate",type="away3d.events.Event")]
 
 	/**
 	 * Text that may be edited at runtime by the user with the
@@ -2494,8 +2493,7 @@ package feathers.controls.text
 			event.stopImmediatePropagation();
 			
 			// Dispatch a cancelable version of this event.
-			var newEvent:starling.events.Event =
-				new starling.events.Event(FeathersEventType.TEXT_INPUT, false, event.text);
+			var newEvent:Event = new Event(FeathersEventType.TEXT_INPUT, false, event.text);
 			dispatchEvent(newEvent);
 		}
 

@@ -91,7 +91,7 @@ package com.client.process
 		{
 			if (Capabilities.isDebugger)
 			{
-				GameAlert.show("您当前的播放器是Debug版本，所有表现和数据不能用作性能参考！", "提示", onShowDebugPlayerFunc, onShowDebugPlayerFunc);
+//				GameAlert.show("您当前的播放器是Debug版本，所有表现和数据不能用作性能参考！", "提示", onShowDebugPlayerFunc, onShowDebugPlayerFunc);
 				return true;
 			}
 			return false;

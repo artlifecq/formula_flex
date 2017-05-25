@@ -52,7 +52,7 @@ package org.mokylin.skin.app.wuxue
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.styleName = "ui/app/wuxue/wuxue.png";
 			temp.x = 441;
 			temp.y = 11;
@@ -109,7 +109,6 @@ package org.mokylin.skin.app.wuxue
 			temp.height = 587;
 			var skin:StateSkin = new org.mokylin.skin.app.wuxue.juexue.Juexue_Skin()
 			temp.skin = skin
-			temp.visible = false;
 			temp.width = 947;
 			temp.x = 0;
 			temp.y = 0;

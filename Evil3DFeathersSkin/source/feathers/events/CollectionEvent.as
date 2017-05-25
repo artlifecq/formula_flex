@@ -1,6 +1,6 @@
 package feathers.events
 {
-	import starling.events.Event;
+	import away3d.events.Event;
 	
 	/**
 	 * 集合类型数据改变事件

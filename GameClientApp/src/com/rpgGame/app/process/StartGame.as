@@ -71,6 +71,8 @@ package com.rpgGame.app.process
     import org.client.mainCore.bean.BeanManager;
     import org.client.mainCore.manager.EventManager;
     import org.client.mainCore.utils.Tick;
+    
+    import starling.core.Starling;
 
 	/**
 	 *
@@ -180,6 +182,7 @@ package com.rpgGame.app.process
 				}
 				LayerManager.showOrHideMM();
 				ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
+				Starling.current.showStats=!Starling.current.showStats;
 			}
 		}
 		

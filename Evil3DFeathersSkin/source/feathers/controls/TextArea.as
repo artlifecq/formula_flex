@@ -8,10 +8,11 @@ accordance with the terms of the accompanying license agreement.
 package feathers.controls
 {
 	import flash.geom.Point;
-	import flash.text.TextFormat;
 	import flash.text.TextFormatAlign;
 	import flash.ui.Mouse;
 	import flash.ui.MouseCursor;
+	
+	import away3d.events.Event;
 	
 	import feathers.controls.text.Fontter;
 	import feathers.controls.text.ITextEditorViewPort;
@@ -29,12 +30,10 @@ package feathers.controls
 	import feathers.utils.filter.NativeFilterPool;
 	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
 	import starling.events.KeyboardEvent;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
-	import starling.rendering.LayerBatchID;
 	import starling.utils.Pool;
 
 	/**
@@ -55,9 +54,9 @@ package feathers.controls
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.CHANGE
+	 * @eventType away3d.events.Event.CHANGE
 	 */
-	[Event(name="change",type="starling.events.Event")]
+	[Event(name="change",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the display object's state changes.
@@ -81,7 +80,7 @@ package feathers.controls
 	 *
 	 * @see #currentState
 	 */
-	[Event(name="stateChange",type="starling.events.Event")]
+	[Event(name="stateChange",type="away3d.events.Event")]
 
 	/**
 	 * A text entry control that allows users to enter and edit multiple lines

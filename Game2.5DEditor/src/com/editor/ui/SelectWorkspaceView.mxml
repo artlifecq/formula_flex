@@ -123,8 +123,8 @@
 				 x="109"
 				 y="25"
 				 width="301"
-				 chromeColor="#FFFFFF"
-				 contentBackgroundColor="#333333"
+				 chromeColor="#FF0000"
+				 contentBackgroundColor="#FFFFFF"
 				 editable="false"/>
 	<s:Button x="418"
 			  y="26"

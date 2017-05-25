@@ -8,11 +8,12 @@ accordance with the terms of the accompanying license agreement.
 package feathers.utils.touch
 {
 	import flash.geom.Point;
-
+	
+	import away3d.events.Event;
+	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 	import starling.display.Stage;
-	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -44,7 +45,7 @@ package feathers.utils.touch
 	 * <code>Event.TRIGGERED</code> should be dispatched before
 	 * <code>Event.CHANGE</code>.</p>
 	 * 
-	 * @see http://doc.starling-framework.org/current/starling/events/Event.html#TRIGGERED starling.events.Event.TRIGGERED
+	 * @see http://doc.starling-framework.org/current/starling/events/Event.html#TRIGGERED away3d.events.Event.TRIGGERED
 	 * @see feathers.utils.touch.TapToSelect
 	 * @see feathers.utils.touch.LongPress
 	 */

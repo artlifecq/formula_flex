@@ -7,6 +7,8 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.controls
 {
+	import away3d.events.Event;
+	
 	import feathers.core.IFeathersControl;
 	import feathers.core.IFocusExtras;
 	import feathers.core.IMeasureDisplayObject;
@@ -15,9 +17,8 @@ package feathers.controls
 	import feathers.events.FeathersEventType;
 	import feathers.skins.IStyleProvider;
 	import feathers.utils.skins.resetFluidChildDimensionsForMeasurement;
-
+	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
 
 	/**
 	 * A container with layout, optional scrolling, a header, and an optional

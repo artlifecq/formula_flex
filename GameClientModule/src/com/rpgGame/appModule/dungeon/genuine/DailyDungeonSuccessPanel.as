@@ -4,8 +4,6 @@ package com.rpgGame.appModule.dungeon.genuine
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
-	import com.rpgGame.coreData.cfg.DailyZoneCfgData;
-	import com.rpgGame.coreData.clientConfig.Q_daily_zone;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.type.item.GridBGType;
@@ -16,7 +14,7 @@ package com.rpgGame.appModule.dungeon.genuine
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
-	import starling.events.Event;
+	import away3d.events.Event;
 	
 	import utils.TimerServer;
 	
@@ -61,10 +59,9 @@ package com.rpgGame.appModule.dungeon.genuine
 			playEffect(msg.star);
 			_skin.lbJingyan.text =msg.exp.toString();
 			_skin.lbTongqian.text = msg.money.toString();
-			
+			_skin.lbzhenqi.text = msg.zhenqi.toString();
 
 			var itemlist:Vector.<ItemInfo> = msg.itemInfoList;
-			
 			var length:int = itemlist.length;
 			var startX:Number = (_skin.width-70*length)/2-12;
 			_rewardIcons =new Vector.<IconCDFace>();

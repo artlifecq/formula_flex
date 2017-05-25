@@ -11,13 +11,14 @@
 package starling.text
 {
     import flash.text.TextFormat;
-
-    import starling.events.Event;
-    import starling.events.EventDispatcher;
+    
+    import away3d.events.Event;
+    import away3d.events.EventDispatcher;
+    
     import starling.utils.Align;
 
     /** Dispatched when any property of the instance changes. */
-    [Event(name="change", type="starling.events.Event")]
+    [Event(name="change", type="away3d.events.Event")]
 
     /** The TextFormat class represents character formatting information. It is used by the
      *  TextField and BitmapFont classes to characterize the way the glyphs will be rendered.
@@ -109,7 +110,11 @@ package starling.text
 
             return out;
         }
-
+		
+		public function toString() : String {
+			return "" + _font + _size + _color + _bold + _italic + _underline + _horizontalAlign + _kerning + _leading + _letterSpacing;
+		}
+		
         /** The name of the font. TrueType fonts will be looked up from embedded fonts and
          *  system fonts; bitmap fonts must be registered at the TextField class first.
          *  Beware: If you loaded an embedded font at runtime, you must call

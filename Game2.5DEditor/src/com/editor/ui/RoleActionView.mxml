@@ -169,7 +169,7 @@
 					{
 						for each (var animation : AnimationNodeBase in animations)
 						{
-							if (animationNames.indexOf(animation.name) == -1 && !RoleActionType.isMountActionType(animation.name))
+							if (animationNames.indexOf(animation.name) == -1 && !RoleActionType.getActionType(animation.name))
 							{
 								data = new ConfigData();
 								data.name = animation.name;

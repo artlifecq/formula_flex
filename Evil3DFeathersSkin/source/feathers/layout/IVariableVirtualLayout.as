@@ -33,9 +33,9 @@ package feathers.layout
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.SCROLL
+	 * @eventType away3d.events.Event.SCROLL
 	 */
-	[Event(name="scroll",type="starling.events.Event")]
+	[Event(name="scroll",type="away3d.events.Event")]
 
 	/**
 	 * A virtual layout that supports variable item dimensions.

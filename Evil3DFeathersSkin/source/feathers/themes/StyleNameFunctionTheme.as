@@ -7,14 +7,15 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.themes
 {
+	import away3d.events.EventDispatcher;
+	
 	import feathers.core.IFeathersControl;
 	import feathers.skins.ConditionalStyleProvider;
 	import feathers.skins.IStyleProvider;
 	import feathers.skins.StyleNameFunctionStyleProvider;
 	import feathers.skins.StyleProviderRegistry;
-
+	
 	import starling.core.Starling;
-	import starling.events.EventDispatcher;
 
 	/**
 	 * Base class for themes that pass a <code>StyleNameFunctionStyleProvider</code>

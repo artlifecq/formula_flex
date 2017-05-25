@@ -7,14 +7,15 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.utils.keyboard
 {
+	import flash.ui.Keyboard;
+	
+	import away3d.events.Event;
+	
 	import feathers.core.IFocusDisplayObject;
 	import feathers.core.IToggle;
 	import feathers.events.FeathersEventType;
-
-	import flash.ui.Keyboard;
-
+	
 	import starling.display.Stage;
-	import starling.events.Event;
 	import starling.events.KeyboardEvent;
 
 	/**

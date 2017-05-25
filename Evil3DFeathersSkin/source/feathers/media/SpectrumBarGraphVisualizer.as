@@ -16,7 +16,7 @@ package feathers.media
 
 	import starling.display.MeshBatch;
 	import starling.display.Quad;
-	import starling.events.Event;
+	import away3d.events.Event;
 
 	/**
 	 * A visualization of the audio spectrum of the runtime's currently playing
@@ -38,7 +38,7 @@ package feathers.media
 		/**
 		 * @private
 		 */
-		protected static var HELPER_QUAD:Quad = new Quad(1, 1);
+		protected static var HELPER_QUAD:Quad;
 		
 		/**
 		 * @private
@@ -50,6 +50,9 @@ package feathers.media
 		 */
 		public function SpectrumBarGraphVisualizer()
 		{
+			if(!HELPER_QUAD)
+				HELPER_QUAD = new Quad(1, 1);
+			
 			this.isQuickHitAreaEnabled = true;
 		}
 

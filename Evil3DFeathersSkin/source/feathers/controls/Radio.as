@@ -9,12 +9,12 @@ package feathers.controls
 {
 	import flash.errors.IllegalOperationError;
 	import flash.utils.Dictionary;
+	
+	import away3d.events.Event;
+	
 	import feathers.core.IGroupedToggle;
 	import feathers.core.ToggleGroup;
 	import feathers.skins.IStyleProvider;
-
-
-	import starling.events.Event;
 
 	[Exclude(name="isToggle",kind="property")]
 

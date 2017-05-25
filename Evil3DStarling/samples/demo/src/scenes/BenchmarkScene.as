@@ -6,7 +6,7 @@ package scenes
     import starling.display.Image;
     import starling.display.Sprite;
     import starling.events.EnterFrameEvent;
-    import starling.events.Event;
+    import away3d.events.Event;
     import starling.text.BitmapFont;
     import starling.text.TextField;
     import starling.text.TextFormat;

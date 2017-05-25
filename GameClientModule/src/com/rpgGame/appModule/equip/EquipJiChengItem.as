@@ -5,6 +5,8 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.BuffStateDataManager;
+	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.item.EquipPolishCfg;
 	import com.rpgGame.coreData.cfg.item.EquipStrengthCfg;
 	import com.rpgGame.coreData.cfg.item.EquipWashAttCfg;
@@ -12,9 +14,9 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.coreData.clientConfig.Q_buff;
 	import com.rpgGame.coreData.clientConfig.Q_equip_polish;
 	import com.rpgGame.coreData.clientConfig.Q_equip_strength;
-	import com.rpgGame.coreData.clientConfig.Q_equip_wash;
 	import com.rpgGame.coreData.clientConfig.Q_equip_wash_attr;
 	import com.rpgGame.coreData.info.item.EquipInfo;
+	import com.rpgGame.coreData.lang.LangUI;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
@@ -54,15 +56,15 @@ package com.rpgGame.appModule.equip
 			switch(_type)
 			{
 				case 0:
-					_skin.rdo_type.label="选择强化继承";
-					_skin.labelDisplay.htmlText="强化等级:"+HtmlTextUtil.getTextColor(0x5DBD37,"0");
+					_skin.rdo_type.label=LanguageConfig.getText(LangUI.UI_TEXT18);
+					_skin.labelDisplay.htmlText=LanguageConfig.getText(LangUI.UI_TEXT21)+HtmlTextUtil.getTextColor(0x5DBD37,"0");
 					break;
 				case 1:
-					_skin.rdo_type.label="选择琢磨继承";
-					_skin.labelDisplay.htmlText="琢磨等级:"+HtmlTextUtil.getTextColor(0x5DBD37,"0");
+					_skin.rdo_type.label=LanguageConfig.getText(LangUI.UI_TEXT19);
+					_skin.labelDisplay.htmlText=LanguageConfig.getText(LangUI.UI_TEXT22)+HtmlTextUtil.getTextColor(0x5DBD37,"0");
 					break;
 				case 2:
-					_skin.rdo_type.label="选择洗炼继承:";
+					_skin.rdo_type.label=LanguageConfig.getText(LangUI.UI_TEXT20);
 					_skin.labelDisplay.htmlText="";
 					break;
 			}
@@ -101,7 +103,7 @@ package com.rpgGame.appModule.equip
 					values2=maps2.values();
 					if(useInfo.strengthLevel>0&&values2!=null)
 					{
-						_skin.labelDisplay.htmlText="强化等级:"+HtmlTextUtil.getTextColor(0xcfc6ae,tragetInfo.strengthLevel.toString())+HtmlTextUtil.getTextColor(0x5DBD37,"(+"+((useInfo.strengthLevel-tragetInfo.strengthLevel)+")"));
+						_skin.labelDisplay.htmlText=LanguageConfig.getText(LangUI.UI_TEXT22)+HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,tragetInfo.strengthLevel.toString())+HtmlTextUtil.getTextColor(0x5DBD37,"(+"+((useInfo.strengthLevel-tragetInfo.strengthLevel)+")"));
 						for(var i:int=0;i<values2.length;i++)
 						{
 							if(i<values1.length&&values2[i]-values1[i]>0)
@@ -109,7 +111,7 @@ package com.rpgGame.appModule.equip
 								lab=new Label;
 								lab.color = 0x8B8D7B;
 								lab.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-								lab.htmlText=CharAttributeType.getCNName(keys[i])+HtmlTextUtil.getTextColor(0xcfc6ae,values1[i])+HtmlTextUtil.getTextColor(0x5DBD37,"(+"+(values2[i]-values1[i])+")");
+								lab.htmlText=CharAttributeType.getCNName(keys[i])+HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,values1[i])+HtmlTextUtil.getTextColor(0x5DBD37,"(+"+(values2[i]-values1[i])+")");
 								_labList.push(lab);
 								_labContainer.addChild(lab);
 							}
@@ -118,7 +120,7 @@ package com.rpgGame.appModule.equip
 								lab=new Label;
 								lab.color = 0x8B8D7B;
 								lab.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-								lab.htmlText=CharAttributeType.getCNName(keys[i])+HtmlTextUtil.getTextColor(0xcfc6ae,"0")+HtmlTextUtil.getTextColor(0x5DBD37,"(+"+values2[i]+")");
+								lab.htmlText=CharAttributeType.getCNName(keys[i])+HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,"0")+HtmlTextUtil.getTextColor(0x5DBD37,"(+"+values2[i]+")");
 								_labList.push(lab);
 								_labContainer.addChild(lab);
 							}
@@ -128,11 +130,11 @@ package com.rpgGame.appModule.equip
 					}
 					else
 					{
-						_skin.labelDisplay.htmlText="强化等级:"+HtmlTextUtil.getTextColor(0xcfc6ae,tragetInfo.strengthLevel.toString());
+						_skin.labelDisplay.htmlText=LanguageConfig.getText(LangUI.UI_TEXT22)+HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,tragetInfo.strengthLevel.toString());
 						lab=new Label;
 						lab.color = 0xd02525; //红色
 						lab.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-						lab.htmlText="继承消耗装备的强化等级低于继承结果装备";
+						lab.htmlText=LanguageConfig.getText(LangUI.UI_TEXT23);
 						_labList.push(lab);
 						_labContainer.addChild(lab);
 						TouchableUtil.gray(_skin.rdo_type);
@@ -152,11 +154,11 @@ package com.rpgGame.appModule.equip
 					var num:int=use_Promote-traget_Promote;
 					if(num>0)
 					{
-						_skin.labelDisplay.htmlText="琢磨等级:"+HtmlTextUtil.getTextColor(0xcfc6ae,tragetInfo.polishLevel.toString())+HtmlTextUtil.getTextColor(0x5DBD37,"(+"+((useInfo.polishLevel-tragetInfo.polishLevel)+")"));
+						_skin.labelDisplay.htmlText=LanguageConfig.getText(LangUI.UI_TEXT21)+HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,tragetInfo.polishLevel.toString())+HtmlTextUtil.getTextColor(0x5DBD37,"(+"+((useInfo.polishLevel-tragetInfo.polishLevel)+")"));
 						lab=new Label;
 						lab.color = 0x8B8D7B;
 						lab.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-						lab.htmlText="装备属性提升："+HtmlTextUtil.getTextColor(0xcfc6ae,Number((traget_Promote/100).toFixed(1))+"%")+HtmlTextUtil.getTextColor(0x5DBD37,"(+"+Number((num/100).toFixed(1))+"%)");
+						lab.htmlText=LanguageConfig.getText(LangUI.UI_TEXT24)+HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,Number((traget_Promote/100).toFixed(1))+"%")+HtmlTextUtil.getTextColor(0x5DBD37,"(+"+Number((num/100).toFixed(1))+"%)");
 						_labList.push(lab);
 						_labContainer.addChild(lab);
 						TouchableUtil.ungray(_skin.rdo_type);
@@ -164,11 +166,11 @@ package com.rpgGame.appModule.equip
 					}
 					else
 					{
-						_skin.labelDisplay.htmlText="琢磨等级:"+HtmlTextUtil.getTextColor(0xcfc6ae,tragetInfo.polishLevel.toString());
+						_skin.labelDisplay.htmlText=LanguageConfig.getText(LangUI.UI_TEXT21)+HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,tragetInfo.polishLevel.toString());
 						lab=new Label;
 						lab.color = 0xd02525;
 						lab.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-						lab.htmlText="继承消耗装备的琢磨等级低于继承结果装备";
+						lab.htmlText=LanguageConfig.getText(LangUI.UI_TEXT25);
 						_labList.push(lab);
 						_labContainer.addChild(lab);
 						TouchableUtil.gray(_skin.rdo_type);
@@ -192,7 +194,7 @@ package com.rpgGame.appModule.equip
 								lab=new Label;
 								lab.color = 0x8B8D7B;
 								lab.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-								lab.htmlText=CharAttributeType.getCNName(keys[i])+":"+HtmlTextUtil.getTextColor(0xcfc6ae,values1[i]);
+								lab.htmlText=CharAttributeType.getCNName(keys[i])+":"+HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,values1[i]);
 								_labList.push(lab);
 								_labContainer.addChild(lab);
 							}
@@ -203,7 +205,7 @@ package com.rpgGame.appModule.equip
 							lab=new Label;
 							lab.color = 0x8B8D7B;
 							lab.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-							lab.htmlText=q_buff.q_buff_name+":"+HtmlTextUtil.getTextColor(0xcfc6ae,q_buff.q_description);
+							lab.htmlText=q_buff.q_buff_name+":"+HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,q_buff.q_description);
 							_labList.push(lab);
 							_labContainer.addChild(lab);
 						}
@@ -224,7 +226,7 @@ package com.rpgGame.appModule.equip
 								lab=new Label;
 								lab.color = 0x8B8D7B;
 								lab.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-								lab.htmlText=CharAttributeType.getCNName(keys[i])+":"+HtmlTextUtil.getTextColor(0xcfc6ae,values1[i]);
+								lab.htmlText=CharAttributeType.getCNName(keys[i])+":"+HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,values1[i]);
 								_labList.push(lab);
 								_labContainer.addChild(lab);
 							}
@@ -235,7 +237,7 @@ package com.rpgGame.appModule.equip
 							lab=new Label;
 							lab.color = 0x8B8D7B;
 							lab.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-							lab.htmlText=q_buff.q_buff_name+":"+HtmlTextUtil.getTextColor(0xcfc6ae,q_buff.q_description);
+							lab.htmlText=q_buff.q_buff_name+":"+HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,q_buff.q_description);
 							_labList.push(lab);
 							_labContainer.addChild(lab);
 						}
@@ -259,10 +261,10 @@ package com.rpgGame.appModule.equip
 			switch(_type)
 			{
 				case 0:
-					_skin.labelDisplay.htmlText="强化等级:"+HtmlTextUtil.getTextColor(0x5DBD37,"0");
+					_skin.labelDisplay.htmlText=LanguageConfig.getText(LangUI.UI_TEXT22)+HtmlTextUtil.getTextColor(0x5DBD37,"0");
 					break;
 				case 1:
-					_skin.labelDisplay.htmlText="琢磨等级:"+HtmlTextUtil.getTextColor(0x5DBD37,"0");
+					_skin.labelDisplay.htmlText=LanguageConfig.getText(LangUI.UI_TEXT21)+HtmlTextUtil.getTextColor(0x5DBD37,"0");
 					break;
 				case 2:
 					_skin.labelDisplay.htmlText="";

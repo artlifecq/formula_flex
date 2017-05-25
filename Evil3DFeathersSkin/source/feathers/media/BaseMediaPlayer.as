@@ -13,7 +13,7 @@ package feathers.media
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 	import starling.errors.AbstractClassError;
-	import starling.events.Event;
+	import away3d.events.Event;
 
 	/**
 	 * An abstract superclass for media players that should implement the

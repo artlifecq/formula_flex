@@ -63,12 +63,8 @@ package com.rpgGame.appModule.role
 	import org.mokylin.skin.app.beibao.juese_Skin;
 	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
 	
-	import starling.core.Starling;
 	import starling.display.DisplayObject;
-	import starling.events.Event;
-	import starling.events.Touch;
-	import starling.events.TouchEvent;
-	import starling.events.TouchPhase;
+	import away3d.events.Event;
 
 	/**
 	 *背包部分 
@@ -110,8 +106,7 @@ package com.rpgGame.appModule.role
 				[GoodsType.MEDICINE],
 				[GoodsType.MATERIAL_COMBO,GoodsType.MATERIAL_ADVANCE], 
 				[GoodsType.CHAT,GoodsType.GIFT,GoodsType.PROPERTY,GoodsType.BUFF,GoodsType.TRANSFER,GoodsType.RESURGENCE,
-				GoodsType.TASK,GoodsType.MOUNT,GoodsType.TITLE,GoodsType.DUNGOEN,GoodsType.MERIDIANSTONE,GoodsType.PK,GoodsType.SPECIAL,
-				GoodsType.SKILL_BOOK_MOUNT,GoodsType.SKILL_BOOK_HERO]
+				GoodsType.TASK,GoodsType.MOUNT,GoodsType.TITLE,GoodsType.DUNGOEN,GoodsType.MERIDIANSTONE]
 				];
 			
 			toStorageGridInfo=new GridInfo(ItemContainerID.Storage,-1);
