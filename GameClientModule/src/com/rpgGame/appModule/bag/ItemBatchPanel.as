@@ -4,6 +4,7 @@ package com.rpgGame.appModule.bag
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.DragDropItem;
+	import com.rpgGame.appModule.common.NumSelectUICtrl;
 	import com.rpgGame.appModule.common.itemRender.GridItemRender;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
@@ -15,7 +16,6 @@ package com.rpgGame.appModule.bag
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
-	import starling.events.Event;
 	
 	/**
 	 *物品批量使用面板 
@@ -30,15 +30,16 @@ package com.rpgGame.appModule.bag
 		private var currentNum:int;
 		
 		private var _iconFace:DragDropItem;
-		
+		private var numCtrl:NumSelectUICtrl;
 		public function ItemBatchPanel()
 		{
 			_skin=new piliangshiyong();
 			var render:GridItemRender = new GridItemRender(IcoSizeEnum.ICON_64,GridBGType.GRID_SIZE_64);
 			_iconFace=render.getGrid();
 			_iconFace.gridInfo=new GridInfo(0,0);
-			_skin.input_txt.restrict="0-9";
+			//_skin.input_txt.restrict="0-9";
 			super(_skin);
+			numCtrl=new NumSelectUICtrl(_skin.btn_max,_skin.btn_min,_skin.btn_all,_skin.lbBuyNum,1,1,dataChange);
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void 
@@ -50,16 +51,20 @@ package com.rpgGame.appModule.bag
 			
 			clientItemInfo=data as ClientItemInfo;
 			currentNum=clientItemInfo.itemInfo.num;
-			_skin.input_txt.addEventListener(Event.CHANGE,onChangeNum);
+			numCtrl.updateMax(currentNum,currentNum);
+			//_skin.input_txt.addEventListener(Event.CHANGE,onChangeNum);
 			updateDisplay();
 		}
 		
 		override public function hide():void
 		{
 			super.hide();
-			_skin.input_txt.removeEventListener(Event.CHANGE,onChangeNum);
+			//_skin.input_txt.removeEventListener(Event.CHANGE,onChangeNum);
 		}
-		
+		private function dataChange(val:int):void
+		{
+			this.currentNum=val;
+		}
 		private function updateDisplay():void
 		{
 			_skin.lbl_name.color=ItemConfig.getItemQualityColor(clientItemInfo.cfgId);
@@ -71,9 +76,10 @@ package com.rpgGame.appModule.bag
 			_iconFace.setIconPoint(6,5);
 			_iconFace.selectImgVisible=false;
 			_skin.container.addChild(_iconFace);
-			_skin.input_txt.text=currentNum.toString();
+			//_skin.input_txt.text=currentNum.toString();
 			if(clientItemInfo.binded){
 				_skin.isLock.text="[已绑定]";
+				_skin.isLock.visible=true;
 			}else{
 				if(clientItemInfo.qItem.q_bind==0){
 					_skin.isLock.visible=false;
@@ -85,14 +91,18 @@ package com.rpgGame.appModule.bag
 			}
 		}
 		
-		private function onChangeNum(e:Event):void
+//		private function onChangeNum(e:Event):void
+//		{
+//			currentNum=int(_skin.input_txt.text);
+//			currentNum=currentNum<=0?1:currentNum;
+//			currentNum=currentNum>=clientItemInfo.itemInfo.num?clientItemInfo.itemInfo.num:currentNum;
+//			_skin.input_txt.text=currentNum.toString();
+//		}
+		override protected function onHide():void
 		{
-			currentNum=int(_skin.input_txt.text);
-			currentNum=currentNum<=0?1:currentNum;
-			currentNum=currentNum>=clientItemInfo.itemInfo.num?clientItemInfo.itemInfo.num:currentNum;
-			_skin.input_txt.text=currentNum.toString();
+			super.onHide();
+			_iconFace.clear();
 		}
-		
 		override protected function onStageResize(sw : int, sh : int) : void
 		{
 			
@@ -102,16 +112,16 @@ package com.rpgGame.appModule.bag
 			super.onTouchTarget(target);
 			
 			switch (target) {
-				case _skin.btn_min:
-					currentNum--;
-					currentNum=currentNum<1?1:currentNum;
-					_skin.input_txt.text=currentNum.toString();
-					break;
-				case _skin.btn_max:
-					currentNum++;
-					currentNum=currentNum>clientItemInfo.itemInfo.num?clientItemInfo.itemInfo.num:currentNum;
-					_skin.input_txt.text=currentNum.toString();
-					break;
+//				case _skin.btn_min:
+//					currentNum--;
+//					currentNum=currentNum<1?1:currentNum;
+//					_skin.input_txt.text=currentNum.toString();
+//					break;
+//				case _skin.btn_max:
+//					currentNum++;
+//					currentNum=currentNum>clientItemInfo.itemInfo.num?clientItemInfo.itemInfo.num:currentNum;
+//					_skin.input_txt.text=currentNum.toString();
+//					break;
 				case _skin.btn_ok:
 					ItemUseManager.useItem(clientItemInfo,currentNum);
 					this.hide();

@@ -9,8 +9,11 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.core.events.MainPlayerEvent;
 	
 	import org.client.mainCore.ds.HashMap;
+	import org.client.mainCore.manager.EventCenterManager;
+	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.net.MessageMgr;
 
 	
@@ -72,6 +75,14 @@ package   com.rpgGame.app.manager.debug
 				hash.add(15,14444);
 				hash.add(16,-302222);
 				FightFaceHelper.showPlayerBaseAttrChange(hash);
+			});
+			commandList.put( ".lvup", function (...arg):void
+			{
+				var data:Object={};
+				data.sys=arg[0];
+				data.desc=arg[1];
+				data.btnText=arg[2];
+				EventManager.dispatchEvent(MainPlayerEvent.SYS_CAN_LEVEL_UP,data);
 			});
 		}
 		

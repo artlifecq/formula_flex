@@ -210,6 +210,7 @@
 		
         private function onOpenActivityGroup(id:int):void
         {
+			return;
 			var btn:ActivityButtonBase=getBtn(id);
 			if(btn){
 				this.addChild(btn);

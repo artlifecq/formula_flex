@@ -234,6 +234,6 @@ package com.rpgGame.app.fight.spell
 			//飘血飘字,等技能完成后再调整
 			
 		}
-		public static var bool:Boolean=false;
+		public static var bool:Boolean=true;
 	}
 }

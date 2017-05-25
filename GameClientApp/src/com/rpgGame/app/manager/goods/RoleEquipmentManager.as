@@ -126,9 +126,33 @@ package com.rpgGame.app.manager.goods
 			}
 			return pos;
 		}
-		
+		public function getEquipByPos(pos:int):EquipInfo
+		{
+			var items:Array = getAllItem();
+			for each (var equ:ClientItemInfo in items) 
+			{
+				if (!equ) 
+				{
+					continue;
+				}
+				if (equ.qItem.q_kind==pos) 
+				{
+					return equ as EquipInfo;
+				}
+			}
+			return null;
+		}
+		public function isBetterEquipCompareWithEquiped(item:ClientItemInfo):Boolean
+		{
+			var equ:EquipInfo=getEquipByPos(item.qItem.q_kind);
+			if (!equ||equ.itemInfo.fightPower<item.itemInfo.fightPower) 
+			{
+				return true;
+			}
+			return false;
+		}
 		/**
-		 * 是否比身上穿的要好 
+		 * 是否比身上穿的要好 ?没看懂，用上面的吧
 		 * @param item
 		 * @return 
 		 * 
