@@ -10,7 +10,8 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.manager.CharAttributeManager;
 	import com.rpgGame.app.manager.ClientTriggerManager;
 	import com.rpgGame.app.manager.GameCameraManager;
-	import com.rpgGame.app.manager.PKMamager;
+	import com.rpgGame.app.manager.MainUIManager;
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.RankManager;
 	import com.rpgGame.app.manager.ReliveManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
@@ -32,6 +33,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.state.role.control.StopWalkMoveStateReference;
 	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
 	import com.rpgGame.app.task.TaskInfoDecoder;
+	import com.rpgGame.app.ui.main.MainGUI;
 	import com.rpgGame.app.utils.ReqLockUtil;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.core.app.AppConstant;

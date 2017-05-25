@@ -141,20 +141,21 @@ package com.rpgGame.app.manager.hint
 		 */
 		public function addMouseFollowTip(type : int, value : String) : void
 		{
-			var hintBox : HintBaseBox = _hintMap.getValue(type);
-			
-			if (hintBox)
-			{
-				hintBox.addHint(value);
-				var posX:Number=Number(hintBox.hintTypeSet.posX);
-				var posY:Number=Number(hintBox.hintTypeSet.posY);
-				if (posX == 0 && posY == 0)
-				if (hintBox.hintTypeSet && posX == 0 && posY == 0)
-				{
-					hintBox.x = int(Starling.current.nativeStage.mouseX); //int(Starling.current.nativeStage.mouseX - (hintBox.width / 2));
-					hintBox.y = Math.max(0,int(Starling.current.nativeStage.mouseY - hintBox.height));
-				}
-			}
+			FloatingText.showUp(value);
+//			var hintBox : HintBaseBox = _hintMap.getValue(type);
+//			
+//			if (hintBox)
+//			{
+//				hintBox.addHint(value);
+//				var posX:Number=Number(hintBox.hintTypeSet.posX);
+//				var posY:Number=Number(hintBox.hintTypeSet.posY);
+//				if (posX == 0 && posY == 0)
+//				if (hintBox.hintTypeSet && posX == 0 && posY == 0)
+//				{
+//					hintBox.x = int(Starling.current.nativeStage.mouseX); //int(Starling.current.nativeStage.mouseX - (hintBox.width / 2));
+//					hintBox.y = Math.max(0,int(Starling.current.nativeStage.mouseY - hintBox.height));
+//				}
+//			}
 		}
 		//----------------------------------------
 	}

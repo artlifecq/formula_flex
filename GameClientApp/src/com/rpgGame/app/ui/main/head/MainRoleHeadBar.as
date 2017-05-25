@@ -1,20 +1,25 @@
 package com.rpgGame.app.ui.main.head {
     import com.game.engine3D.display.Inter3DContainer;
     import com.game.engine3D.display.InterObject3D;
+    import com.rpgGame.app.manager.PKMamager;
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.manager.role.SceneRoleSelectManager;
     import com.rpgGame.core.events.MainPlayerEvent;
     import com.rpgGame.core.ui.SkinUI;
     import com.rpgGame.coreData.cfg.ClientConfig;
+    import com.rpgGame.coreData.enum.EnumPKMode;
     import com.rpgGame.coreData.enum.JobEnum;
     import com.rpgGame.coreData.role.HeroData;
     import com.rpgGame.coreData.type.AssetUrl;
     import com.rpgGame.coreData.type.CharAttributeType;
     import com.rpgGame.coreData.type.EffectUrl;
+    import com.rpgGame.coreData.type.PKModeType;
     
+    import feathers.controls.SkinnableContainer;
     import feathers.controls.UIAsset;
     
     import org.client.mainCore.manager.EventManager;
+    import org.mokylin.skin.mainui.head.Head_Select;
     import org.mokylin.skin.mainui.head.head_main_Skin;
     
     import starling.display.DisplayObject;
@@ -25,7 +30,7 @@ package com.rpgGame.app.ui.main.head {
 		private var _zhandouliEftContaner:Inter3DContainer;
 		private var _zhandouliEft:InterObject3D;
 		private var _headImg:UIAsset;
-
+		private var _pkBtns:Array;
         public function MainRoleHeadBar() {
             this._skin = new head_main_Skin();
             super(this._skin);
@@ -33,7 +38,6 @@ package com.rpgGame.app.ui.main.head {
             this._skin.btn_duiwu.visible = false;
             this._skin.btn_heping.visible = true;
             this._skin.btn_quanti.visible = false;
-           // this._skin.btn_shane.visible = false;
 			_headImg=new UIAsset();
 			_headImg.x=18;
 			_headImg.y=4;
@@ -44,9 +48,69 @@ package com.rpgGame.app.ui.main.head {
             // event
 			
 			EventManager.addEvent(MainPlayerEvent.STAT_CHANGE,updateFight);//基本属性改变
+			EventManager.addEvent(MainPlayerEvent.PK_MODE_CHANGE,onPKModelChange);
 			updateAll();
+			initPK();
         }
 		
+		private function onPKModelChange():void
+		{
+			// TODO Auto Generated method stub
+			setPKMode(MainRoleManager.actor.data.pkMode);
+		}
+		private function initPK():void
+		{
+			_pkBtns=[_skin.btn_heping,_skin.btn_duiwu,_skin.btn_banghui,_skin.btn_quanti];//刚好和pk模式对应
+			setPkCellData(_skin.heping,PKModeType.PEACE);
+			setPkCellData(_skin.duiwu,PKModeType.TEAM);
+			setPkCellData(_skin.banghui,PKModeType.GUILD);
+			setPkCellData(_skin.quanti,PKModeType.ALL);
+			onPKModelChange();
+			this._skin.grp_select.visible=false;
+		}
+		private function setPkCellData(s:SkinnableContainer,pk:int):void
+		{
+			var str:String;
+			var text:String="";
+			//s.touchGroup=true;
+			switch(pk)
+			{
+				case PKModeType.PEACE:
+				{
+					str="ui/mainui/head/button/skin_heping/up.png";
+					text="【和平模式】您的攻击不会对任何玩家造成伤害"
+					break;
+				}
+				case PKModeType.TEAM:
+				{
+					str="ui/mainui/head/button/skin_duiwu/up.png";
+					text="【组队模式】您的攻击不会误伤同队伍玩家"
+					break;
+			
+				}
+				case PKModeType.GUILD:
+				{
+					str="ui/mainui/head/button/skin_banghui/up.png";
+					text="【帮会模式】您的攻击不会误伤同帮会玩家"
+					break;
+				}
+				case PKModeType.ALL:
+				{
+					str="ui/mainui/head/button/skin_quanti/up.png";
+					text="【全体模式】您的攻击会对任何玩家造成伤害"
+					break;
+				}
+				default:
+				{
+				
+					str="ui/mainui/head/button/skin_heping/up.png";
+					text="【和平模式】您的攻击不会对任何玩家造成伤害"
+					break;
+				}
+			}
+			(s.skin as Head_Select).Icon_heping.styleName=str;
+			(s.skin as Head_Select).labelDisplay.text=text;
+		}
 		private function updateFight():void
 		{
 			var info:HeroData=MainRoleManager.actorInfo;
@@ -91,7 +155,6 @@ package com.rpgGame.app.ui.main.head {
                 case this._skin.btn_duiwu:
                 case this._skin.btn_heping:
                 case this._skin.btn_quanti:
-               // case this._skin.btn_shane:
                     this.showPKMode(target);
                     break;
                 case this._headImg:
@@ -100,12 +163,46 @@ package com.rpgGame.app.ui.main.head {
                         SceneRoleSelectManager.selectedRole = MainRoleManager.actor;
                     }
                     break;
+				default:
+				{
+					switch(target.parent)
+					{
+						case this._skin.heping:
+							reqChangePkMode(PKModeType.PEACE);
+							break;
+						case this._skin.duiwu:
+							reqChangePkMode(PKModeType.TEAM);
+							break;
+						case this._skin.banghui:
+							reqChangePkMode(PKModeType.GUILD);
+							break;
+						case this._skin.quanti:
+							reqChangePkMode(PKModeType.ALL);
+							break;
+					}
+				}
+				//pk
+			
             }
         }
         
+		private function reqChangePkMode(pk:int):void
+		{
+			this._skin.grp_select.visible=false;
+			PKMamager.HeroSetPKMode(pk);
+		}
         // private
-        private function showPKMode(target : DisplayObject) : void {
-            
+        private function showPKMode(target : DisplayObject) : void 
+		{
+			this._skin.grp_select.visible=!this._skin.grp_select.visible;
         }
+		public function setPKMode(pk:int):void
+		{
+			var len:int=_pkBtns.length;
+			for (var i:int = 0; i < len; i++) 
+			{
+				_pkBtns[i].visible=pk==i;
+			}
+		}
     }
 }

@@ -4,12 +4,9 @@ package   com.rpgGame.app.manager.debug
 	import com.game.engine3D.utils.StatsUtil;
 	import com.game.mainCore.core.manager.LayerManager;
 	import com.gameClient.utils.HashMap;
-	import com.rpgGame.app.fight.spell.SpellHitHelper;
 	import com.rpgGame.app.manager.Mgr;
-	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.core.events.MainPlayerEvent;
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventCenterManager;
@@ -83,6 +80,15 @@ package   com.rpgGame.app.manager.debug
 				data.desc=arg[1];
 				data.btnText=arg[2];
 				EventManager.dispatchEvent(MainPlayerEvent.SYS_CAN_LEVEL_UP,data);
+			});
+			commandList.put( ".skill", function (...arg):void
+			{
+				var skill:SkillInfo=new SkillInfo();
+				skill.skillModelId=arg[0];
+				skill.skillLevel=1;
+				skill.skillChildLv=1;
+				skill.skillExp=2;
+				UIPopManager.showAlonePopUI(SkillAddPop,skill);
 			});
 		}
 		
