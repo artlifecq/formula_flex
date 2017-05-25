@@ -81,7 +81,7 @@ package com.rpgGame.app.ui.main.dungeon
 		{
 			_dailyZoneId = dailyZoneId;
 			_data = DailyZoneCfgData.getZoneCfg(dailyZoneId);
-			var allLength:Array = DailyZoneMonsterCfgData.getTypeList(_data.q_zone_id);
+			var allLength:Array = DailyZoneMonsterCfgData.getTypeList(_data.q_zone_id,_data.q_id);
 			
 			for each(var md:Q_dailyzone_monster in allLength)
 			{
