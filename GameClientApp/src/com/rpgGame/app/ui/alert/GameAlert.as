@@ -144,7 +144,6 @@ package com.rpgGame.app.ui.alert
 		{
 			var alertSet : AlertSetInfo = new AlertSetInfo();
 			alertSet.setAlertInfo(key,args);
-			alertSet.alertInfo.align="center"
 			return showAlert(alertSet,clickCallBack);
 		}
 

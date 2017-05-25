@@ -100,7 +100,6 @@ package com.rpgGame.app.ui.main.navigation {
                 case this._skin.btn_beibao:
                 case this._skin.btn_juese:
                     AppManager.showApp(AppConstant.ROLE_PANEL);
-					GameAlert.showAlertUtil(LangAlertInfo.LUNJIAN_FIGHT_MIN);
                     break;
                 case this._skin.btn_wuxue:
 
