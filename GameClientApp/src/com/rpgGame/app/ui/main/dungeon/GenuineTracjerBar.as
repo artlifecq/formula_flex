@@ -141,7 +141,7 @@ package com.rpgGame.app.ui.main.dungeon
 		{
 			_dailyZoneId = dailyZoneId;
 			_data = DailyZoneCfgData.getZoneCfg(dailyZoneId);
-			_targetTrack = new TargetTrack(_skin.targetcontent,_data.q_zone_id,5);
+			_targetTrack = new TargetTrack(_skin.targetcontent,_data.q_zone_id,_data.q_id,5);
 			if(_data.q_combat_type ==1)
 			{
 				_skin.ui_head.styleName = "ui/mainui/fubenzhuizong/richangfuben/zhenqifuben.png";
