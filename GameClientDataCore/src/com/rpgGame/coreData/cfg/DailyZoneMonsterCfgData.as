@@ -65,5 +65,8 @@ package com.rpgGame.coreData.cfg
 		{
 			return _typeList[type];
 		}
+		
+		
+		
 	}
 }

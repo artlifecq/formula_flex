@@ -48,7 +48,7 @@ package com.game.engine3D.vo
 		{
 			if (_vertexList)
 			{
-				_vertexList.length = 0;
+				//_vertexList.length = 0;
 				_vertexList = null;
 			}
 			_type = 0;

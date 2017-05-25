@@ -1092,11 +1092,10 @@ package org.game.netCore.net
 		protected function corsscloseHandler(event:Event):void
 		{
 			clearCorssSocket();
-			dispatchEvent( new NetEvent( CLIENT_FAILD_TO_SERVER, event.toString() ) );
-			AlertPanel.showMsg("服务器连接断开", null, false);
+//			dispatchEvent( new NetEvent( CLIENT_FAILD_TO_SERVER, event.toString() ) );
+//			AlertPanel.showMsg("服务器连接断开", null, false);
 			//			
 			//			if( !Mgr.pubLoginMgr.isCrossState )
-			{
 				//				Mgr.mainApp.cacheAsBitmap = true;
 				//				Mgr.sceneMgr.removeEvent();
 				//				Mgr.mainApp.filters = [ FilterUtil.getGrayFilter() ];
@@ -1120,7 +1119,6 @@ package org.game.netCore.net
 				//						);
 				//					}
 				//				}
-			}
 		}
 		
 		protected function crossEcurityErrorHandler(event:SecurityErrorEvent):void

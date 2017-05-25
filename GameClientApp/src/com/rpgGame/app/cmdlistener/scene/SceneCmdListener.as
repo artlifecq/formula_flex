@@ -999,9 +999,7 @@ package com.rpgGame.app.cmdlistener.scene
 			{
 				role.mouseEnable = true;
 			}
-			
-			TrusteeshipManager.getInstance().stopAll();//死亡复活终止挂机
-			TaskAutoManager.getInstance().stopTaskAuto();
+			TaskAutoManager.getInstance().stopAll();//死亡复活终止挂机
         }
 		
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
