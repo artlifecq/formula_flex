@@ -49,7 +49,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [__jineng_Skin_UIAsset2_i(),__jineng_Skin_UIAsset3_i(),__jineng_Skin_Label1_i(),pro_zhenqi_i(),lb_zhenqi_i(),vs_bar_i(),__jineng_Skin_UIAsset6_i(),shengji_i(),jinjie_i(),tab_zizhi_i()];
+			this.elementsContent = [__jineng_Skin_UIAsset1_i(),__jineng_Skin_Label1_i(),pro_zhenqi_i(),lb_zhenqi_i(),vs_bar_i(),__jineng_Skin_UIAsset5_i(),shengji_i(),jinjie_i(),tab_zizhi_i()];
 			
 			states = {
 			};
@@ -85,31 +85,22 @@ package org.mokylin.skin.app.wuxue.jineng
 			return temp;
 		}
 
-		private function __jineng_Skin_UIAsset2_i():feathers.controls.UIAsset
+		private function __jineng_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/wuxue/jineng/bg_zuo.png";
+			temp.height = 447;
+			temp.styleName = "ui/big_bg/wuxue/jineng/bg_zuo.png";
+			temp.width = 531;
 			temp.x = 20;
 			temp.y = 74;
 			return temp;
 		}
 
-		private function __jineng_Skin_UIAsset3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.touchable = false;
-			temp.touchGroup = true;
-			temp.styleName = "ui/app/wuxue/wuxue.png";
-			temp.x = 441;
-			temp.y = 11;
-			return temp;
-		}
-
-		private function __jineng_Skin_UIAsset6_i():feathers.controls.UIAsset
+		private function __jineng_Skin_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 422;
-			temp.styleName = "ui/app/wuxue/jineng/bg_you.png";
+			temp.styleName = "ui/big_bg/wuxue/jineng/bg_you.png";
 			temp.x = 570;
 			temp.y = 101;
 			return temp;

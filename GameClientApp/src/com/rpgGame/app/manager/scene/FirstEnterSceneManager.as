@@ -91,5 +91,10 @@ package com.rpgGame.app.manager.scene
 		{
 			return _isEnterScene;
 		}
+		
+		public static function set isEnterScene(value:Boolean) : void
+		{
+			 _isEnterScene=value;
+		}
 	}
 }

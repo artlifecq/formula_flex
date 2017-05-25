@@ -39,7 +39,6 @@ package feathers.controls.text
 	import starling.display.Image;
 	import starling.rendering.Painter;
 	import starling.textures.ConcreteTexture;
-	import starling.textures.DynamicTextTextureManager;
 	import starling.textures.IStarlingTexture;
 	import starling.textures.TextureFactory;
 	import starling.utils.MathUtil;

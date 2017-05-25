@@ -149,7 +149,7 @@ package com.editor.manager
 			_targetPlayer = role;
 			
 			var data : RoleData = new RoleData();
-			data.name = "";
+			data.name = "向导角色";
 			data.avatarInfo.setBodyResID(DEFAULT_BODY_RES_ID, DEFAULT_BODY_ANIMATOR_ID);
 			data.sizeScale = 1;
 			role.data = data;

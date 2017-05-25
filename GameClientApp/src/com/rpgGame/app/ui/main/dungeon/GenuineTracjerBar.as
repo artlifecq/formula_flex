@@ -1,7 +1,7 @@
 package com.rpgGame.app.ui.main.dungeon
 {
-	import com.gameClient.utils.HashMap;
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.sender.DungeonSender;
@@ -10,9 +10,7 @@ package com.rpgGame.app.ui.main.dungeon
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.events.DungeonEvent;
 	import com.rpgGame.coreData.cfg.DailyZoneCfgData;
-	import com.rpgGame.coreData.cfg.DailyZoneMonsterCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_daily_zone;
-	import com.rpgGame.coreData.clientConfig.Q_dailyzone_monster;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
@@ -28,7 +26,7 @@ package com.rpgGame.app.ui.main.dungeon
 	{
 		private var _skin:ZhenQi_Skin;
 		private var _dailyZoneId:int;
-		private var _listCell:HashMap;
+		private var _targetTrack:TargetTrack;
 		private var _rewardIcons:Vector.<IconCDFace>;
 		private var _data:Q_daily_zone;
 		private var _endTime:int;
@@ -57,8 +55,8 @@ package com.rpgGame.app.ui.main.dungeon
 		{
 			EventManager.addEvent(DungeonEvent.UPDATE_DAILYZONE_INFO,updatedailyZoneInfo);
 			EventManager.addEvent(DungeonEvent.UPDATE_DAILYZONE_TIME,updatedailyZoneTime);
-			EventManager.addEvent(DungeonEvent.UPDATA_WAVE_INFO,updateWaveInfoHandler);
 			EventManager.addEvent(DungeonEvent.UPDATA_DAILYZONE_ENDINFO,updateEndInfo);
+			TrusteeshipManager.getInstance().findDist = 10000;
 			UIPopManager.showAlonePopUI(DungeonFightPop);
 		}
 		
@@ -66,13 +64,6 @@ package com.rpgGame.app.ui.main.dungeon
 		{
 			_skin.uiKill.visible = (success==1);
 			stopTimer();
-		}
-		private function updateWaveInfoHandler(currentWaveId:int,killerCount:int):void
-		{		
-			var cell:KillInfoCell = _listCell.getValue(currentWaveId);
-			if(cell==null)
-				return ;
-			cell.updateValue(currentWaveId,killerCount);
 		}
 		private function updatedailyZoneTime(lastTime:Number):void
 		{
@@ -116,6 +107,10 @@ package com.rpgGame.app.ui.main.dungeon
 			var now:int = SystemTimeManager.curtTm/1000;
 			var dis:int = _endTime-now;
 			_skin.sec_time.text = "副本倒计时："+TimeUtil.format3TimeType(dis);
+			if(dis<=30)
+				_skin.sec_time.color = 0xd02525;
+			else
+				_skin.sec_time.color = 0xe8c958;
 			dis = _currentDisTime-now+_currentStartTime;
 			if(_currentStar ==3)
 			{
@@ -125,6 +120,11 @@ package com.rpgGame.app.ui.main.dungeon
 			}else{
 				_skin.sec_time2.text = "一星通关倒计时："+TimeUtil.format3TimeType(dis);
 			}
+			
+			if(dis<=30)
+				_skin.sec_time2.color = 0xd02525;
+			else
+				_skin.sec_time2.color = 0xe8c958;
 			var percent:Number = dis/_currentDisTime;
 			if(percent<0)
 			{
@@ -140,28 +140,15 @@ package com.rpgGame.app.ui.main.dungeon
 		private function updatedailyZoneInfo(dailyZoneId:int):void
 		{
 			_dailyZoneId = dailyZoneId;
-			var allList:Array = DailyZoneMonsterCfgData.getTypeList(dailyZoneId);
-			_listCell = new HashMap();
-			var index:int = 0;
-			for each(var md:Q_dailyzone_monster in allList)
-			{
-				var cell:KillInfoCell = new KillInfoCell();
-				cell.qdailyZoneData = md;
-				_skin.targetcontent.addChild(cell);
-				cell.x = 5;
-				cell.y = 20*index;
-				index++;
-				_listCell.put(md.q_id,cell);
-			}
-			
 			_data = DailyZoneCfgData.getZoneCfg(dailyZoneId);
+			_targetTrack = new TargetTrack(_skin.targetcontent,_data.q_zone_id,5);
 			if(_data.q_combat_type ==1)
 			{
 				_skin.ui_head.styleName = "ui/mainui/fubenzhuizong/richangfuben/zhenqifuben.png";
 			}else if(_data.q_combat_type ==2){
 				_skin.ui_head.styleName = "ui/mainui/fubenzhuizong/richangfuben/zhuangbeifuben.png";
 			}
-			var itemInfos:Object = JSONUtil.decode( _data.q_special_rewards_show);
+			var itemInfos:Object = JSONUtil.decode( _data.q_rewards_client);
 			var item:ItemInfo;
 			for(var i:int = 0;i<_rewardIcons.length;i++)
 			{
@@ -169,7 +156,6 @@ package com.rpgGame.app.ui.main.dungeon
 					break;
 				item = new ItemInfo();
 				item.itemModelId = itemInfos[i]["mod"];
-				item.num = itemInfos[i]["num"];
 				FaceUtil.SetItemGrid(_rewardIcons[i],ItemUtil.convertClientItemInfo(item), true);
 			}
 			_skin.uiKill.visible = false;
@@ -179,16 +165,21 @@ package com.rpgGame.app.ui.main.dungeon
 			{
 				_lastList.push(int(str));
 			}
+			_endTime = SystemTimeManager.curtTm/1000+_data.q_zone_time;
+			currentStateEnd();
+			advanceTime(0);
+			TrusteeshipManager.getInstance().startAutoFight();
 		}
 		override protected function onHide():void
 		{
 			stopTimer();
 			EventManager.removeEvent(DungeonEvent.UPDATE_DAILYZONE_INFO,updatedailyZoneInfo);
 			EventManager.removeEvent(DungeonEvent.UPDATE_DAILYZONE_TIME,updatedailyZoneTime);
-			EventManager.removeEvent(DungeonEvent.UPDATA_WAVE_INFO,updateWaveInfoHandler);
 			EventManager.removeEvent(DungeonEvent.UPDATA_DAILYZONE_ENDINFO,updateEndInfo);
 			_skin.targetcontent.removeChildren(0,-1,true);
-			_listCell = null;
+			TrusteeshipManager.getInstance().findDist = 0;
+			_targetTrack.onHide();
+			_targetTrack = null;
 		}
 		
 		private function stopTimer():void

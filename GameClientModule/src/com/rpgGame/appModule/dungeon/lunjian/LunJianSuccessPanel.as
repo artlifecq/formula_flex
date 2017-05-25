@@ -8,10 +8,12 @@ package com.rpgGame.appModule.dungeon.lunjian
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.LunJianCfg;
 	import com.rpgGame.coreData.clientConfig.Q_lunjian;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.lang.LangUI;
 	
 	import gs.TweenLite;
 	
@@ -96,7 +98,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 		
 		private function updateTime():void
 		{
-			_skin.lbTime.text=leftTime+"秒后自动退出";
+			_skin.lbTime.text=leftTime+LanguageConfig.getText(LangUI.UI_TEXT33);
 			leftTime--;
 			if(leftTime<0){
 				TimerServer.remove(updateTime);

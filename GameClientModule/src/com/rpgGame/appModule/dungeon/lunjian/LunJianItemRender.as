@@ -12,6 +12,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 	import com.rpgGame.app.utils.RoleFaceMaskEffectUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.LunJianCfg;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
@@ -191,8 +192,8 @@ package com.rpgGame.appModule.dungeon.lunjian
 					rewardList[itemData.diff].uiBg.visible=true;
 					GrayFilter.unGray(_skin.btnTiaozhan);
 				}else{
-					_skin.lbLevel.text="无";
-					_skin.lbZhanli.text="无";
+					_skin.lbLevel.text=LanguageConfig.getText(LangUI.UI_TEXT34);
+					_skin.lbZhanli.text=LanguageConfig.getText(LangUI.UI_TEXT34);
 					_skin.mc_nandu.visible=false;
 					GrayFilter.gray(_skin.btnTiaozhan);
 				}

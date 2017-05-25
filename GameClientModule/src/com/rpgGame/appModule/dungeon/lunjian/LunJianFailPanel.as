@@ -2,6 +2,8 @@ package com.rpgGame.appModule.dungeon.lunjian
 {
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.lang.LangUI;
 	
 	import gs.TweenLite;
 	
@@ -50,15 +52,17 @@ package com.rpgGame.appModule.dungeon.lunjian
 		{
 			leftTime=10;
 			TimerServer.addLoop(updateTime,1000);
-			_skin.lbTime.text=leftTime+"秒后自动退出";
+			_skin.lbTime.text=leftTime+LanguageConfig.getText(LangUI.UI_TEXT33);
 		}
 		
 		private function updateTime():void
 		{
 			leftTime--;
-			_skin.lbTime.text=leftTime+"秒后自动退出";
+
+			_skin.lbTime.text=leftTime+LanguageConfig.getText(LangUI.UI_TEXT33);
 			if(leftTime<0){
 				TimerServer.remove(updateTime);
+				DungeonSender.reqQuitDungeon();
 				this.onHide();
 			}
 		}

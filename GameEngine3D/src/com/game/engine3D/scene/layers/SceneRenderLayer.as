@@ -447,32 +447,33 @@ package com.game.engine3D.scene.layers
 							if (_currOtherRenderLimitNum > _maxOtherRenderLimitNum)
 								inViewDistance = false;
 						}
-						if (baseObj.attachLimitable)
-						{
-							for each (var attachType : String in baseObj.attachLimitable)
-							{
-								var attachVisible : Boolean = true;
-								if (_maxAttachLimitNumByType[attachType] != null)
-								{
-									var maxAttachLimitNum : int = _maxAttachLimitNumByType[attachType];
-									if (maxAttachLimitNum > -1)
-									{
-										var currAttachLimitNum : int = _currAttachLimitNumByType[attachType];
-										currAttachLimitNum++;
-										_currAttachLimitNumByType[attachType] = currAttachLimitNum;
-										if (currAttachLimitNum > maxAttachLimitNum)
-											attachVisible = false;
-									}
-								}
-								baseObj.internalAttachVisible(attachType, attachVisible);
-							}
-						}
 					}
+					baseObj.isInViewDistance = inViewDistance;
 					if (inViewDistance)
 					{
 						_renderObjCnt++;
 					}
-					baseObj.isInViewDistance = inViewDistance;
+					if (baseObj.attachLimitable)
+					{
+						for each (var attachType : String in baseObj.attachLimitable)
+						{
+							var attachVisible : Boolean = true;
+							if (_maxAttachLimitNumByType[attachType] != null)
+							{
+								var maxAttachLimitNum : int = _maxAttachLimitNumByType[attachType];
+								if (maxAttachLimitNum > -1)
+								{
+									var currAttachLimitNum : int = _currAttachLimitNumByType[attachType];
+									currAttachLimitNum++;
+									_currAttachLimitNumByType[attachType] = currAttachLimitNum;
+									if (currAttachLimitNum > maxAttachLimitNum)
+										attachVisible = false;
+								}
+							}
+							baseObj.internalAttachVisible(attachType, attachVisible);
+						}
+					}
+					
 					if(baseObj.enableMask && _scene3D.sceneMapLayer.district)
 					{
 						var isInMask:Boolean = _scene3D.sceneMapLayer.district.isPointInMask(baseObj.graphicDis.position);

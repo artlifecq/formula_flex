@@ -137,7 +137,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 82;
-			temp.x = 131;
+			temp.x = 128;
 			temp.y = 273;
 			return temp;
 		}
@@ -182,7 +182,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.height = 17;
 			temp.styleClass = org.mokylin.skin.app.jianghu.mc.UIMovieClipNandu;
 			temp.width = 32;
-			temp.x = 136;
+			temp.x = 128;
 			temp.y = 298;
 			return temp;
 		}

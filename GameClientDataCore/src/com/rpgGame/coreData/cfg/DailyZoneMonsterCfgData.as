@@ -35,10 +35,11 @@ package com.rpgGame.coreData.cfg
 			var arr : Array = data.readObject();
 			var num:int=arr.length;
 			var info:Q_dailyzone_monster;
+			var typelist:Array;
 			for(var i:int=0;i<num;i++){
 				info=arr[i];
 				allMap.add(info.q_id,info);
-				var typelist:Array = _typeList[info.q_daily_zoneId];
+				typelist = _typeList[info.q_daily_zoneId];
 				if(typelist==null)
 				{
 					typelist = new Array();
@@ -47,6 +48,12 @@ package com.rpgGame.coreData.cfg
 				typelist.push(info);
 			}
 			
+			
+			for(var key:* in _typeList)
+			{
+				typelist= _typeList[key] as Array;
+				_typeList[key] = typelist.sortOn("q_wave",Array.NUMERIC);
+			}
 		}
 		
 		public static function getZoneCfg(id:int):Q_dailyzone_monster

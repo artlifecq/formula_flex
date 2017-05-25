@@ -87,6 +87,11 @@ package com.rpgGame.core.app
 		 *死亡复活 
 		 */
 		public static var DIE_PANEL:String = createAppInfo( "die.DiePanel","siwangfuhuo");
+		
+		/**
+		 *副本死亡 
+		 */
+		public static var ZONEDIE_PANEL:String = createAppInfo( "die.ZoneDiePanel","siwangfuhuo");
 		/**
 		 *武学面板 
 		 */
