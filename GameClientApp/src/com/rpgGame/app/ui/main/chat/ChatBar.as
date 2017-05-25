@@ -43,6 +43,7 @@ package com.rpgGame.app.ui.main.chat {
     import gs.TweenLite;
     
     import org.client.mainCore.manager.EventManager;
+    import org.game.netCore.net.MessageMgr;
     import org.mokylin.skin.mainui.chat.chat_Skin;
     
     import starling.core.Starling;
@@ -620,8 +621,11 @@ package com.rpgGame.app.ui.main.chat {
         
         private function sendMsg() : void 
 		{
-			
-			CrossSender.reqEnterCrossInfo(0);
+			if(MessageMgr.Ins.isCrossSocket){
+				CrossSender.reqQuitCrossFight();
+			}else{
+				CrossSender.reqEnterCrossInfo(0);
+			}
 //			return;
 			//死亡面板测试
 //			FightFaceHelper.showHurtText(MainRoleManager.actor,MainRoleManager.actor,EnumHurtType.SPELL_HURT_TYPE_CRIT,5000);

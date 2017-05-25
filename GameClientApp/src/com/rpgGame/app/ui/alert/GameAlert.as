@@ -144,6 +144,7 @@ package com.rpgGame.app.ui.alert
 		{
 			var alertSet : AlertSetInfo = new AlertSetInfo();
 			alertSet.setAlertInfo(key,args);
+			alertSet.alertInfo.align="center"
 			return showAlert(alertSet,clickCallBack);
 		}
 
@@ -190,6 +191,7 @@ package com.rpgGame.app.ui.alert
 				gameAlert.lbTip.textAlign=alertInfo.align;
 				gameAlert.lbTip.wordWrap=true;
 				gameAlert.lbTip.htmlText=alertInfo.value;
+				gameAlert.lbTip.y=50+(125-gameAlert.lbTip.textHeight)>>1;
 			}
 			if (gameAlert.title)
 				gameAlert.title.htmlText = alertInfo.title;
