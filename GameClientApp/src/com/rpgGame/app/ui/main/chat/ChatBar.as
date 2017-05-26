@@ -38,11 +38,13 @@ package com.rpgGame.app.ui.main.chat {
 	import feathers.controls.text.Fontter;
 	import feathers.core.ToggleGroup;
 	import feathers.events.FeathersEventType;
+	import feathers.themes.GuiThemeStyle;
 	
 	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.net.MessageMgr;
+	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
 	import org.mokylin.skin.mainui.chat.chat_Skin;
 	
 	import starling.core.Starling;
@@ -156,6 +158,7 @@ package com.rpgGame.app.ui.main.chat {
 			this._skin.vscrollbar.scrollBarDisplayMode = Scroller.SCROLL_BAR_DISPLAY_MODE_FIXED;
 			this._skin.vscrollbar.addChild(this._chatText);
 			this._skin.vscrollbar.width = this._initBgWidth - this._initVScollerX;
+			GuiThemeStyle.setScrollerStyle(this._skin.vscrollbar, org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack);
 			this._chatText.setSize(this._skin.vscrollbar.width - this._chatText.x -10, 0);
 			
 			this._inputText = new RichTextArea3D(this._skin.inputbg.width, this._skin.inputbg.height, ColorUtils.getDefaultStrokeFilter());
