@@ -611,12 +611,12 @@ package com.rpgGame.app.manager
 							}
 							if (index > -1)
 							{
-								sceneRole.dialogFace.addWordFrame(RenderUnitType.HAIR, RenderUnitID.HAIR,contents[index], clientDialog.duration);
+								sceneRole.dialogFace.addWordFrame(RenderUnitType.BODY, RenderUnitID.BODY,contents[index], clientDialog.duration);
 							}
 						}
 						else
 						{
-							sceneRole.dialogFace.addWordFrame(RenderUnitType.HAIR, RenderUnitID.HAIR,contents[0], clientDialog.duration);
+							sceneRole.dialogFace.addWordFrame(RenderUnitType.BODY, RenderUnitID.BODY,contents[0], clientDialog.duration);
 						}
 					}
 				}
@@ -656,13 +656,13 @@ package com.rpgGame.app.manager
 						var sceneRoles : Vector.<SceneRole> = SceneManager.getSceneRolesByModelId(clientDialog.npcModelId);
 						for each (sceneRole in sceneRoles)
 						{
-							sceneRole.dialogFace.addWordFrame(RenderUnitType.HAIR, RenderUnitID.HAIR,clientDialog.content, clientDialog.duration);
+							sceneRole.dialogFace.addWordFrame(RenderUnitType.BODY, RenderUnitID.BODY,clientDialog.content, clientDialog.duration);
 						}
 					}
 					else
 					{
 						sceneRole = MainRoleManager.actor;
-						sceneRole.dialogFace.addWordFrame(RenderUnitType.HAIR, RenderUnitID.HAIR,clientDialog.content, clientDialog.duration);
+						sceneRole.dialogFace.addWordFrame(RenderUnitType.BODY, RenderUnitID.BODY,clientDialog.content, clientDialog.duration);
 					}
 				}
 				else

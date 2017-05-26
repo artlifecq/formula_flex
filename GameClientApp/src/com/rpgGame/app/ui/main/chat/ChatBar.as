@@ -47,7 +47,6 @@ package com.rpgGame.app.ui.main.chat {
 	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
-	import starling.events.Event;
 	import starling.events.KeyboardEvent;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;

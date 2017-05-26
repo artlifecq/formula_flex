@@ -207,7 +207,7 @@ package com.rpgGame.app.graphics
 			recycle(this);
 		}
 		
-		public function addWordFrame(renderUnitType:String, renderUnitId:int, message:String, delay:Number=5000, boneName:String="c_0_name_01", autoRecycle:Boolean=false):void
+		public function addWordFrame(renderUnitType:String, renderUnitId:int, message:String, delay:Number=5000, boneName:String=BoneNameEnum.c_0_name_01, autoRecycle:Boolean=false):void
 		{
 			var camouflage : SceneRole = null;
 			var camouflageDialogFace : BubbleDialogFace;
