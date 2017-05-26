@@ -1,6 +1,8 @@
 ﻿package com.rpgGame.app.richText.component
 {
 	import com.rpgGame.app.richText.RichTextCustomUnitType;
+	import com.rpgGame.app.ui.main.chat.ChatUtil;
+	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import flash.display.BitmapData;
 	import flash.events.Event;
@@ -44,6 +46,7 @@
 		
 		public static var onMouseClickUnit:Function;
 		public static var onMouseMoveUnit:Function;
+		public static var onMouseOverUnit:Function;
 		public static var onMouseOutUnit:Function;
 		public static var updateUnitDisplayObjFunc:Function;
 		
@@ -69,7 +72,7 @@
 		private var _isEditable:Boolean;
 		private var _isInputFocus:Boolean;
 		private var _byteA:ByteArray;
-
+		
 		private var wordWrapTxt:TextField;
 		
 		public function RichTextArea3D( $w:int, $h:int = 0, filters:Array = null ) 
@@ -92,7 +95,8 @@
 			{
 				_textField.filters = filters;
 			}
-			_textField.wordWrap = false;
+			_textField.wordWrap = true;
+			_textField.multiline=true;
 			_textField.defaultTextFormat = _defaultFormat;
 			_textField.thickness = Fontter.DEFAULT_THICKNESS;
 			_textField.embedFonts = true;
@@ -187,7 +191,7 @@
 			}
 			else
 			{
-				var info:String = _textField.htmlText + autoWordWrap($str);;
+				var info:String = _textField.htmlText + $str;//autoWordWrap($str);
 				_textField.htmlText = info;
 			}
 			convert();

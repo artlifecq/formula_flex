@@ -103,7 +103,7 @@ package com.rpgGame.coreData.type
 		/** 头像医家**/
 		public static const HEAD_ICON_4:String = "ui/mainui/head/touxiang/yijia/zhujue.png";
 		/** 喇叭图标 **/
-		public static const LA_BA_ICON:String = "ui/common/version_3/B_bujian/la_ba.png";
+		public static const LA_BA_ICON:String = "ui/mainui/chat/di_laba.png";
 		/** 上升箭头 **/
 		public static const ADD_ICON:String = "ui/common/icon/jiantou_add.png";
 		/** 下降箭头 **/

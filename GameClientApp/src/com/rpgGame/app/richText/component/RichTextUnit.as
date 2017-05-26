@@ -39,12 +39,12 @@ package com.rpgGame.app.richText.component
 		public var onLoaded:Function
 		
 		public var displayObj:DisplayObject;
-
+		
 		public function get unitData():RichTextUnitData
 		{
 			return _unitData;
 		}
-
+		
 		public function setUnitData(value:RichTextUnitData):void
 		{
 			_unitData = value;
@@ -60,7 +60,7 @@ package com.rpgGame.app.richText.component
 				}
 			}
 		}
-
+		
 		public function RichTextUnit()
 		{
 			super();
@@ -86,7 +86,8 @@ package com.rpgGame.app.richText.component
 				onMouseOut();
 				return;
 			}
-			
+			else onMouseOver();
+					
 			touch = e.getTouch( displayObj, TouchPhase.HOVER ); 
 			if( touch != null )
 			{
@@ -109,6 +110,17 @@ package com.rpgGame.app.richText.component
 			if(RichTextArea3D.onMouseClickUnit != null)
 			{
 				RichTextArea3D.onMouseClickUnit(this);
+			}
+		}
+		
+		/**
+		 * 鼠标移入事件
+		 * */
+		private function onMouseOver():void
+		{
+			if(RichTextArea3D.onMouseOverUnit != null)
+			{
+				RichTextArea3D.onMouseOverUnit(this);
 			}
 		}
 		
