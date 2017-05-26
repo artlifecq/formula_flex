@@ -325,14 +325,18 @@ package com.rpgGame.appModule.equip
 					if(targetEquipInfo.smeltAtt1!=oldAtt1&&oldAtt1!=0){//刷新
 						getItemSkin(_skin.Item1).lb_name.htmlText=CharAttributeType.getWashAttDes(targetEquipInfo.smeltAtt1);//新的
 						getItemSkin(_skin.Item1).lb_name0.htmlText=CharAttributeType.getWashAttDes(oldAtt1);//老的
-						target=getItemSkin(_skin.Item1).lb_name;
+						/*target=getItemSkin(_skin.Item1).lb_name;
 						TweenMax.fromTo(target,1,{x:-200,alpha:0},{x:1,alpha:1,ease:Expo.easeOut});
 						target=getItemSkin(_skin.Item1).lb_name0;
-						TweenMax.fromTo(target,1,{x:1,alpha:1},{x:200,alpha:0,ease:Expo.easeOut});
+						TweenMax.fromTo(target,1,{x:1,alpha:1},{x:200,alpha:0,ease:Expo.easeOut});*/
 					}else{
 						getItemSkin(_skin.Item1).lb_name.htmlText=CharAttributeType.getWashAttDes(targetEquipInfo.smeltAtt1);
 						getItemSkin(_skin.Item1).lb_name0.htmlText="";
 					}
+					target=getItemSkin(_skin.Item1).lb_name;
+					TweenMax.fromTo(target,1,{x:-200,alpha:0},{x:1,alpha:1,ease:Expo.easeOut});
+					target=getItemSkin(_skin.Item1).lb_name0;
+					TweenMax.fromTo(target,1,{x:1,alpha:1},{x:200,alpha:0,ease:Expo.easeOut});
 					getItemSkin(_skin.Item1).chk_suoding.isSelected=_sharedObject.data[targetEquipInfo.itemInfo.itemId.ToGID()+"_1"];
 					if(getItemSkin(_skin.Item1).chk_suoding.isSelected){
 						needMon=10;
@@ -344,15 +348,18 @@ package com.rpgGame.appModule.equip
 					if(targetEquipInfo.smeltAtt2!=oldAtt2&&oldAtt2!=0){//刷新
 						getItemSkin(_skin.Item2).lb_name.htmlText=CharAttributeType.getWashAttDes(targetEquipInfo.smeltAtt2);//新的
 						getItemSkin(_skin.Item2).lb_name0.htmlText=CharAttributeType.getWashAttDes(oldAtt2);//老的
-						target=getItemSkin(_skin.Item2).lb_name;
+					/*	target=getItemSkin(_skin.Item2).lb_name;
 						TweenMax.fromTo(target,1,{x:-200,alpha:0},{x:1,alpha:1,ease:Expo.easeOut});
 						target=getItemSkin(_skin.Item2).lb_name0;
-						TweenMax.fromTo(target,1,{x:1,alpha:1},{x:200,alpha:0,ease:Expo.easeOut});
+						TweenMax.fromTo(target,1,{x:1,alpha:1},{x:200,alpha:0,ease:Expo.easeOut});*/
 					}else{
 						getItemSkin(_skin.Item2).lb_name.htmlText=CharAttributeType.getWashAttDes(targetEquipInfo.smeltAtt2);
 						getItemSkin(_skin.Item2).lb_name0.htmlText="";
 					}
-					
+					target=getItemSkin(_skin.Item2).lb_name;
+					TweenMax.fromTo(target,1,{x:-200,alpha:0},{x:1,alpha:1,ease:Expo.easeOut});
+					target=getItemSkin(_skin.Item2).lb_name0;
+					TweenMax.fromTo(target,1,{x:1,alpha:1},{x:200,alpha:0,ease:Expo.easeOut});
 					getItemSkin(_skin.Item2).chk_suoding.isSelected=_sharedObject.data[targetEquipInfo.itemInfo.itemId.ToGID()+"_2"];
 					if(getItemSkin(_skin.Item2).chk_suoding.isSelected){
 						needMon=10;

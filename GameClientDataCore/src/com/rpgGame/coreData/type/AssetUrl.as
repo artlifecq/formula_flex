@@ -33,15 +33,15 @@ package com.rpgGame.coreData.type
 		public static const EQUIP_WARING_64 : String = "ui/common/grid/equip/yizhuang_da.png";
 		
 		/**icon上职业不符合**/
-		public static const EQUIP_JOB_NO : String = "ui/common/grid/normal/jz.png";
+		public static const EQUIP_JOB_NO : String = "ui/common/tubiao/jz.png";
 		/**icon上战斗力提升**/
-		public static const EQUIP_JOB_UP : String = "ui/common/grid/normal/jobup.png";
+		public static const EQUIP_JOB_UP : String = "ui/common/tubiao/jobup.png";
 		/**icon上战斗力下降**/
-		public static const EQUIP_JOB_DOWN : String = "ui/common/grid/normal/jobdown.png";
+		public static const EQUIP_JOB_DOWN : String = "ui/common/tubiao/jobdown.png";
 		/**icon上绑字 42 * 42**/
-		public static const EQUIP_BIND_42 : String = "ui/common/grid/normal/suo_xiao.png";
+		public static const EQUIP_BIND_42 : String = "ui/common/tubiao/suo_xiao.png";
 		/**icon上绑字 46* 46**/
-		public static const EQUIP_BIND_64 : String = "ui/common/grid/normal/suo_da.png";
+		public static const EQUIP_BIND_64 : String = "ui/common/tubiao/suo_da.png";
 		
 		/**
 		 *装备阶数 
