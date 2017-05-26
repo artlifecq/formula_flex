@@ -31,6 +31,8 @@ package com.rpgGame.app.ui.main.chat {
 	import flash.text.TextFormatAlign;
 	import flash.ui.Keyboard;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.Button;
 	import feathers.controls.Scroller;
 	import feathers.controls.text.Fontter;

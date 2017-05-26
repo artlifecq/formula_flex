@@ -124,7 +124,7 @@ package com.rpgGame.appModule.junjie
 			this._avatarData.avatarInfo.weaponEffectID = MainRoleManager.actorInfo.avatarInfo.weaponEffectID;
 			this._avatarData.avatarInfo.weaponEffectScale = MainRoleManager.actorInfo.avatarInfo.weaponEffectScale;
 			this._avatar.setRoleData(this._avatarData);
-			this._avatar.curRole.setScale(1.7);	
+			this._avatar.curRole.setScale(1.5);	
 			this._avatar.curRole.stateMachine.transition(RoleStateType.ACTION_SHOW);
 		}
 		
