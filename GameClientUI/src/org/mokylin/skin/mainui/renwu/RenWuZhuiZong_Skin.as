@@ -9,6 +9,7 @@ package org.mokylin.skin.mainui.renwu
 	import feathers.controls.UIAsset;
 	import feathers.controls.ScrollContainer;
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
+	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 	import org.mokylin.skin.component.button.ButtonSkin_shouhui;
 	import org.mokylin.skin.component.button.ButtonSkin_zhankai;
 	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_chat;
@@ -25,6 +26,8 @@ package org.mokylin.skin.mainui.renwu
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var btnContinue:feathers.controls.Button;
+
 		public var btn_close:feathers.controls.Button;
 
 		public var btn_open:feathers.controls.Button;
@@ -129,6 +132,8 @@ package org.mokylin.skin.mainui.renwu
 
 		public var ui_head:feathers.controls.UIAsset;
 
+		public var uibg:feathers.controls.UIAsset;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -154,20 +159,24 @@ package org.mokylin.skin.mainui.renwu
 		private function __RenWuZhuiZong_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 335;
-			temp.styleName = "ui/mainui/renwu/bg.png";
-			temp.width = 253;
+			temp.styleName = "ui/mainui/renwu/hengtiao.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
 
-		private function __RenWuZhuiZong_Skin_UIAsset2_i():feathers.controls.UIAsset
+		private function btnContinue_i():feathers.controls.Button
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/mainui/renwu/hengtiao.png";
-			temp.x = 0;
-			temp.y = 0;
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btnContinue = temp;
+			temp.name = "btnContinue";
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.label = "继续任务";
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
+			temp.color = 0xCFC6AE;
+			temp.width = 127;
+			temp.x = 59;
+			temp.y = 345;
 			return temp;
 		}
 
@@ -408,11 +417,10 @@ package org.mokylin.skin.mainui.renwu
 			primary_box = temp;
 			temp.name = "primary_box";
 			temp.height = 335;
-			temp.visible = false;
 			temp.width = 253;
 			temp.x = 0;
 			temp.y = 0;
-			temp.elementsContent = [pri_title_i(),pri_navi1_i(),pri_probar_i(),pri_navi2_i(),pri_txt_i(),pri_navi3_i(),pri_killbut1_i(),pri_killbut2_i(),pri_killbut3_i(),pri_ico0_i(),pri_ico1_i(),pri_ico2_i(),pri_ico3_i(),pri_ico4_i(),pri_ico5_i()];
+			temp.elementsContent = [pri_title_i(),pri_navi1_i(),pri_probar_i(),pri_navi2_i(),pri_txt_i(),pri_navi3_i(),pri_killbut1_i(),pri_killbut2_i(),pri_killbut3_i(),pri_ico0_i(),pri_ico1_i(),pri_ico2_i(),pri_ico3_i(),pri_ico4_i(),pri_ico5_i(),btnContinue_i()];
 			return temp;
 		}
 
@@ -785,6 +793,7 @@ package org.mokylin.skin.mainui.renwu
 			secondary_box = temp;
 			temp.name = "secondary_box";
 			temp.height = 335;
+			temp.visible = false;
 			temp.width = 253;
 			temp.x = 0;
 			temp.y = 0;
@@ -801,7 +810,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.width = 253;
 			temp.x = 0;
 			temp.y = 0;
-			temp.elementsContent = [__RenWuZhuiZong_Skin_UIAsset1_i(),__RenWuZhuiZong_Skin_UIAsset2_i(),primary_box_i(),secondary_box_i()];
+			temp.elementsContent = [uibg_i(),__RenWuZhuiZong_Skin_UIAsset1_i(),primary_box_i(),secondary_box_i()];
 			return temp;
 		}
 
@@ -822,6 +831,19 @@ package org.mokylin.skin.mainui.renwu
 			temp.styleName = "ui/mainui/renwu/rwzz.png";
 			temp.x = 37;
 			temp.y = 5;
+			return temp;
+		}
+
+		private function uibg_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uibg = temp;
+			temp.name = "uibg";
+			temp.height = 335;
+			temp.styleName = "ui/mainui/renwu/bg.png";
+			temp.width = 253;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 

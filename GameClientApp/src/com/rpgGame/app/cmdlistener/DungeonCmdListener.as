@@ -1,5 +1,6 @@
 package com.rpgGame.app.cmdlistener
 {
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.ClientTriggerManager;
 	import com.rpgGame.app.manager.DungeonManager;
 	import com.rpgGame.core.app.AppConstant;
@@ -71,7 +72,7 @@ package com.rpgGame.app.cmdlistener
 			EventManager.dispatchEvent(DungeonEvent.UPDATE_LUNJIAN_PANEL,msg.lunJianInfos);
 		}
 		private function onSCClientTriggerValiedMessage(msg:SCClientTriggerValiedMessage):void
-		{
+		{//L.l("onSCClientTriggerValiedMessage:");
 			ClientTriggerManager.serverTrigger(msg.triggerId);
 		}
 		private function onSCEnterZoneMessage(msg:SCEnterZoneMessage):void
@@ -87,7 +88,7 @@ package com.rpgGame.app.cmdlistener
 		}
 		
 		private function onSCZoneStageChangeMessage(msg:SCZoneStageChangeMessage):void
-		{//L.l("SCZoneStageChangeMessage");
+		{//L.l("SCZoneStageChangeMessage:"+msg.zoneModelId+":"+msg.stage+":"+msg.wave);
 			DungeonManager.curryZoneId=msg.zoneModelId;
 			DungeonManager.zoneStage=msg.stage;
 			DungeonManager.zoneWave=msg.wave;
@@ -100,17 +101,17 @@ package com.rpgGame.app.cmdlistener
 			EventManager.dispatchEvent(DungeonEvent.ZONE_REMAIN_TIME);
 		}
 		private function onSCKillInfosMessage(msg:SCKillInfosMessage):void
-		{//L.l("SCKillInfosMessage");
+		{//L.l("SCKillInfosMessage:");
 			DungeonManager.killInfos=msg.infos;
 			EventManager.dispatchEvent(DungeonEvent.ZONE_SKILL_INFOS);
 		}
 		private function onSCKillInfoMessage(msg:SCKillInfoMessage):void
-		{//L.l("SCKillInfoMessage");
+		{//L.l("SCKillInfoMessage:"+msg.info.monsterModelId);
 			DungeonManager.changeKillInfos(msg.info);
 			EventManager.dispatchEvent(DungeonEvent.ZONE_SKILL_INFO);
 		}
 		private function onSCCurTriggerMessage(msg:SCCurTriggerMessage):void
-		{//L.l("SCCurTriggerMessage");
+		{//L.l("SCCurTriggerMessage:");
 			ClientTriggerManager.triggerInit(msg.curTriggerIds);
 			EventManager.dispatchEvent(DungeonEvent.ZONE_CUR_TRIGGER);
 		}

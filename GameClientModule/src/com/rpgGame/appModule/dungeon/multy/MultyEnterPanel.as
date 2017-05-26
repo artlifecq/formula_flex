@@ -40,7 +40,7 @@ package com.rpgGame.appModule.dungeon.multy
 			switch (target) {
 				case _skin.btn_ok:
 					this.hide();
-					AppManager.showApp(AppConstant.MULTYSURE_PANL);
+					AppManager.showApp(AppConstant.MULTY_ENTERTIME_PANL);
 					break;
 				case _skin.btn_cancel:
 					this.hide();
