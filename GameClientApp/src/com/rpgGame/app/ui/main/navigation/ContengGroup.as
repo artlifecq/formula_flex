@@ -17,15 +17,6 @@ package com.rpgGame.app.ui.main.navigation
 			_helph = h;
 			super();
 		}
-		
-		override protected function initialize():void
-		{
-			/*var layout:HorizontalLayout = new HorizontalLayout();
-			layout.gap = 5;
-			this.layout = layout;*/
-			_buttonList = new Vector.<MainButtonBases>();
-		}
-		
 		private var _openState:Boolean;
 
 		public function set openState(value:Boolean):void
@@ -44,25 +35,17 @@ package com.rpgGame.app.ui.main.navigation
 			}
 		}
 		
-		public function addButton(button:MainButtonBases,index:int):void
+		public function reset():void
+		{
+			_buttonList = new Vector.<MainButtonBases>();
+		}
+		public function addButton(button:MainButtonBases):void
 		{
 			if(button==null)
 				return ;
 			if(_buttonList.indexOf(button)>=0)
 				return ;
-			index = Math.min(index,_buttonList.length);
-			_buttonList.splice(index,0,button);
-			this.invalidate(INVALIDATION_FLAG_POSTION);
-		}
-		
-		public function removeButton(button:MainButtonBases):void
-		{
-			if(button==null)
-				return ;
-			if(_buttonList.indexOf(button)<0)
-				return ;
-			var index:int = _buttonList.indexOf(button);
-			_buttonList.splice(index,1);
+			_buttonList.push(button);
 			this.invalidate(INVALIDATION_FLAG_POSTION);
 		}
 		
@@ -70,7 +53,7 @@ package com.rpgGame.app.ui.main.navigation
 		{
 			if(!this.isInitialized)
 				return ;
-			trace("动画啊十大阿斯顿发生发大水发达省份的");
+			
 		}
 		public function checkHaveButton(info:FunctionBarInfo):Boolean
 		{
@@ -88,16 +71,21 @@ package com.rpgGame.app.ui.main.navigation
 		{
 			this.removeChildren();
 			var itemCount:int =this._buttonList.length;
-			for(var i:int = 0; i < itemCount; i++)
+			var postion:int = 0;
+			var item:MainButtonBases
+			for(var i:int = 0; i <itemCount; i++)
 			{
-				var item:MainButtonBases = _buttonList[i];
-				
+				item= _buttonList[i];
+				item.validate();
+				item.x = postion;
+				item.y = _helph-item.height;
+				postion+= item.width;
+				this.addChildAt(item,i);
 			}
-			/*if(_openState)
-				this.x = -width-_helpw;
-			else
-				this.x = 0;
-			this.y = _helph  - height;*/
+			this.setSize(postion,_helph);
+			this.y = _helph  - height;
+			if(_openState)
+				this.x = -this.width;
 		}
 	}
 }

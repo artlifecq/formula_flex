@@ -33,27 +33,26 @@ package com.rpgGame.app.ui.main.navigation {
             
 			_content = new ContengGroup(_skin.width,_skin.height);
 			this.addChildAt(_content,0);
+			this.setState(true);
 			EventManager.addEvent(MainPlayerEvent.STAT_CHANGE,refeashButton);
 			refeashButton();
-			this.setState(true);
         }
 		
 		private function refeashButton():void
 		{
 			if(_lastLevel == MainRoleManager.actorInfo.totalStat.level)
 				return ;
-			_lastLevel == MainRoleManager.actorInfo.totalStat.level
+			_lastLevel == MainRoleManager.actorInfo.totalStat.level;
 			var buttoninfos:Array = FuncionBarCfgData.getInfoListbyType(0);
 			var length:int = buttoninfos.length;
 			var index:int = 0;
+			_content.reset();
 			for(var i:int =0;i<length;i++)
 			{
 				var button:MainButtonBases = MainButtonBases.getButtonBuyInfo(buttoninfos[i]);
-				if(button.canOpen())
+				if(button!=null&&button.canOpen())
 				{
 					_content.addButton(button);
-				}else{
-					_content.removeButton(button);
 				}
 			}
 		}
