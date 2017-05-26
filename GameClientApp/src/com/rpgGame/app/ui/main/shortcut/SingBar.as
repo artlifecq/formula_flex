@@ -1,6 +1,7 @@
 package com.rpgGame.app.ui.main.shortcut
 {
 	import com.rpgGame.core.events.SkillEvent;
+	import com.rpgGame.core.events.UserMoveEvent;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	
@@ -28,6 +29,7 @@ package com.rpgGame.app.ui.main.shortcut
 		private var barLoac:Number;
 		private var widnthLoac:Number;
 		private var singTime:Number;
+		private var isSinging:Boolean=false;
 		public function SingBar()
 		{
 			initBar();
@@ -65,6 +67,7 @@ package com.rpgGame.app.ui.main.shortcut
 			EventManager.addEvent(SkillEvent.SKILL_ATTACK,slillAttack);//技能开始吟唱
 			EventManager.addEvent(SkillEvent.SKILL_CANCEL,slillCancel);//技能被打断，取消吟唱
 			EventManager.addEvent(SkillEvent.SKILL_RESULT,slillCancel);//技能释放成功，吟唱没完的话也取消吟唱
+			EventManager.addEvent(UserMoveEvent.MOVE_START, slillCancel);//人物移动，取消吟唱
 			
 			EventManager.addEvent(SkillEvent.SING_START,startSing);
 			EventManager.addEvent(SkillEvent.SING_STOP,onCompFun);
@@ -77,27 +80,37 @@ package com.rpgGame.app.ui.main.shortcut
 			{
 				onCompFun();//开始新的吟唱先取消现在的吟唱
 				//setSkillName(skillData.q_skillName);
-				startSing(skillData.q_singing_time,skillData.q_skillName);
+				startSing(skillData.q_singing_time,skillData.q_skillName,1);
 			}
 			
 		}
-		private function slillCancel(kid:int):void
+		private function slillCancel(kid:int=0):void
 		{
 			onCompFun();
 		}
 		
 		
-		/**开始吟唱*/
-		private function startSing(time:int,name:String):void
+		/**开始吟唱 type为类型 1：从右到左，2：从左到右*/
+		private function startSing(time:int,name:String,type:int=1):void
 		{
+			isSinging=true;
 			setSkillName(name);
 			singTime=time*0.001;
 			this.visible=true;
-			_skin.bar.x=barLoac;
-			barMask.width=widnthLoac;
-			TweenMax.to(barMask,singTime,{width:0,ease:Linear.easeNone,onUpdate :onUpFun,onComplete :onCompFun});
-			TweenMax.to(_skin.bar,singTime,{x:_skin.bar_scroll.x,ease:Linear.easeNone});
-			
+			if(type==1)
+			{
+				_skin.bar.x=barLoac;
+				barMask.width=widnthLoac;
+				TweenMax.to(barMask,singTime,{width:0,ease:Linear.easeNone,onUpdate :onUpFun,onComplete :onCompFun});
+				TweenMax.to(_skin.bar,singTime,{x:_skin.bar_scroll.x,ease:Linear.easeNone});
+			}
+			else
+			{
+				_skin.bar.x=_skin.bar_scroll.x;
+				barMask.width=0;
+				TweenMax.to(barMask,singTime,{width:widnthLoac,ease:Linear.easeNone,onUpdate :onUpFun,onComplete :onCompFun});
+				TweenMax.to(_skin.bar,singTime,{x:barLoac,ease:Linear.easeNone});
+			}
 		}
 		
 		
@@ -114,6 +127,8 @@ package com.rpgGame.app.ui.main.shortcut
 		/**取消当前的吟唱*/
 		private function onCompFun():void
 		{
+			if(!isSinging)return;
+			isSinging=false;
 			_skin.bar.x=barLoac;
 			barMask.width=widnthLoac;
 			this.visible=false;

@@ -1,8 +1,10 @@
 package com.rpgGame.app.ui.main.chat.laba
 {
 	import com.rpgGame.coreData.info.chat.ChatInfo;
+	import com.rpgGame.netData.chat.message.ResChatMessage;
 	
 	import feathers.controls.Group;
+	import feathers.controls.UIAsset;
 	
 	import starling.display.Sprite;
 	
@@ -22,10 +24,12 @@ package com.rpgGame.app.ui.main.chat.laba
 		private var chuanyinList:Array = [];
 		
 		private var _skin:Group;
+		private var _bg:UIAsset; 
 		
-		public function VipChatCanvas(skin:Group)
+		public function VipChatCanvas(skin:Group,bg:UIAsset)
 		{
 			_skin=skin;
+			_bg=bg;
 			init();
 		}
 		
@@ -41,7 +45,7 @@ package com.rpgGame.app.ui.main.chat.laba
 			_skin.visible=display;
 		}
 		
-		public function addOneChuanYin(info:ChatInfo):void
+		public function addOneChuanYin(info:ResChatMessage):void  // info:ChatInfo
 		{
 			var vipChatInfoItem:VipChatInfoItem;
 			var len:int = chuanyinList.length;
@@ -56,12 +60,12 @@ package com.rpgGame.app.ui.main.chat.laba
 				vipChatInfoItem = getOneChuanYinItem(info);
 			}
 			vipChatInfoItem.setData(info);
-			vipChatInfoItem.y = -vipChatInfoItem.height;
+			vipChatInfoItem.y = vipChatInfoItem.height;
 			vipChatInfoItem.x = 0;
 			vipChatInfoItem.show();
-			toOffsetPos(vipChatInfoItem.y);
-			chuanyinList.push(vipChatInfoItem);
+			chuanyinList.push(vipChatInfoItem);		
 			chuanyinCup.addChild(vipChatInfoItem);
+			toOffsetPos(vipChatInfoItem.y);		
 		}
 		
 		private function toOffsetPos(offsetY:int):void
@@ -74,12 +78,16 @@ package com.rpgGame.app.ui.main.chat.laba
 				for (cIndex = 0; cIndex < len; cIndex++)
 				{
 					vipChatInfoItem = chuanyinList[cIndex];
-					vipChatInfoItem.toOffsetPos(offsetY);
+					if(vipChatInfoItem)
+					{
+						vipChatInfoItem.toOffsetPos(offsetY);						
+					}
 				}
 			}
+			setbgWith();
 		}
 		
-		private function getOneChuanYinItem(info:ChatInfo):VipChatInfoItem
+		private function getOneChuanYinItem(info:ResChatMessage):VipChatInfoItem  //info:ChatInfo
 		{
 			var item:VipChatInfoItem;
 			if (_chuanyinPool.length > 0)
@@ -101,9 +109,32 @@ package com.rpgGame.app.ui.main.chat.laba
 				chuanyinCup.removeChild(item);
 				chuanyinList.splice(index, 1);
 				_chuanyinPool.push(item);
+				setbgWith();
 				return true;
 			}
+			displayVIPChat(false);
 			return false
 		}
+		
+		private function setbgWith():void
+		{
+			var hight:int=0;
+			if(chuanyinList!=null&&chuanyinList.length>0)
+			{
+				for(var i:int=0;i<chuanyinList.length;i++)
+				{
+					hight+=(chuanyinList[i] as VipChatInfoItem).height;
+				}
+				hight=hight+(chuanyinList.length-1)*2;
+				_bg.setSize(_bg.width,hight+5);
+				_bg.y=-hight+11;
+			}
+			else
+			{
+				displayVIPChat(false);
+			}
+			
+		}
+		
 	}
 }

@@ -16,21 +16,23 @@ package com.rpgGame.app.ui.main.dungeon
 	{
 		private var _content:DisplayObjectContainer;
 		private var _dailyZoneId:int;
+		private var _level:int;
 		private var _offx:int;
 		private var _offy:int;
 		private var _listCell:HashMap;
 		private var _allList:Array;
-		public function TargetTrack(content:DisplayObjectContainer,id:int,offx:int = 0,offy:int=0):void
+		public function TargetTrack(content:DisplayObjectContainer,id:int,level:int,offx:int = 0,offy:int=0):void
 		{
 			_content = content;
 			_dailyZoneId = id;
+			_level = level;
 			_offx = offx;
 			_offy = offy;
 			initView();
 		}
 		private function initView():void
 		{
-			_allList = DailyZoneMonsterCfgData.getTypeList(_dailyZoneId);
+			_allList = DailyZoneMonsterCfgData.getTypeList(_dailyZoneId,_level);
 			_listCell = new HashMap();
 			var index:int = 0;
 			for each(var md:Q_dailyzone_monster in _allList)
