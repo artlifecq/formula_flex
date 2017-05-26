@@ -209,6 +209,14 @@ package com.editor.manager
 				tempVec.scaleBy(directionPosX);
 				_offsetPos.incrementBy(tempVec);
 			}
+			
+//			if (directionPosY != 0)
+//			{
+//				tempVec = camera.upVector;
+//				tempVec.normalize();
+//				tempVec.scaleBy(directionPosY);
+//				_offsetPos.incrementBy(tempVec);
+//			}
 
 			if (directionPosZ != 0)
 			{
@@ -250,7 +258,7 @@ package com.editor.manager
 				}
 
 				object.x = position.x;
-				object.y = position.y;
+				object.y = position.z;
 				object.z = position.z;
 			}
 			else if (CameraController.mode == CameraModeEnum.FIXED_TARGET_LOOK_AT_TARGET || CameraController.mode == CameraModeEnum.DIRECT_CAMERA)

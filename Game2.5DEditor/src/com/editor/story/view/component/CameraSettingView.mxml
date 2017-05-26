@@ -88,12 +88,12 @@
 
 			private function hLockClickHandler(event : MouseEvent) : void
 			{
-				CameraController.lockedOnPlayerController.xDegControlable = !hLock.selected;
+//				CameraController.lockedOnPlayerController.xDegControlable = !hLock.selected;
 			}
 
 			private function vLockClickHandler(event : MouseEvent) : void
 			{
-				CameraController.lockedOnPlayerController.yDegControlable = !vLock.selected;
+//				CameraController.lockedOnPlayerController.yDegControlable = !vLock.selected;
 			}
 
 			protected function timeOfTheDayRatioSlider_changeHandler(event : Event) : void
@@ -103,7 +103,7 @@
 
 			protected function freeMode_clickHandler(event : MouseEvent) : void
 			{
-				EditorCameraManager.isFreeMode = freeMode.selected;
+//				EditorCameraManager.isFreeMode = freeMode.selected;
 			}
 		]]>
 	</fx:Script>
@@ -175,7 +175,7 @@
 				   liveDragging="true"
 				   mouseFocusEnabled="false"
 				   change="mouseRightSpeedSlider_changeHandler();"/>
-		<s:CheckBox id="hLock"
+		<!--<s:CheckBox id="hLock"
 					label="锁定水平" color="#ffffff"
 					click="hLockClickHandler(event)">
 			<s:filters>
@@ -207,7 +207,7 @@
 							  quality="1">
 				</s:GlowFilter>
 			</s:filters>
-		</s:CheckBox>
+		</s:CheckBox>-->
 		<s:Label text="场景天色系数" color="#ffffff">
 			<s:filters>
 				<s:GlowFilter color="0"
