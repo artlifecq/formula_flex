@@ -27,6 +27,12 @@ package com.rpgGame.app.ui.main.buttons
 		 */
 		private static const APP_ROOT:String="com.rpgGame.app.ui.main.buttons";
 		private var _info:FunctionBarInfo;
+
+		public function get info():FunctionBarInfo
+		{
+			return _info;
+		}
+
 		public function MainButtonBases(info:FunctionBarInfo):void
 		{
 			_info = info;

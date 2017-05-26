@@ -1,9 +1,7 @@
 package org.mokylin.skin.mainui.navigation
 {
 	import feathers.controls.Button;
-	import feathers.controls.Group;
 	import feathers.controls.StateSkin;
-	import feathers.layout.HorizontalLayout;
 	import org.mokylin.skin.component.button.ButtonSkin_shouhui;
 	import org.mokylin.skin.component.button.ButtonSkin_zhankai;
 
@@ -21,8 +19,6 @@ package org.mokylin.skin.mainui.navigation
 
 		public var btn_open:feathers.controls.Button;
 
-		public var btns:feathers.controls.Group;
-
 
 		//==========================================================================
 		//                                定义构造函数
@@ -33,8 +29,8 @@ package org.mokylin.skin.mainui.navigation
 			
 			this.currentState = "normal";
 			this.height = 70;
-			this.width = 428;
-			this.elementsContent = [btns_i(),btn_close_i(),btn_open_i()];
+			this.width = 20;
+			this.elementsContent = [btn_close_i(),btn_open_i()];
 			
 			states = {
 			};
@@ -45,21 +41,13 @@ package org.mokylin.skin.mainui.navigation
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __navigation_main_Skin_HorizontalLayout1_i():feathers.layout.HorizontalLayout
-		{
-			var temp:feathers.layout.HorizontalLayout = new feathers.layout.HorizontalLayout();
-			temp.gap = -4;
-			temp.verticalAlign = "middle";
-			return temp;
-		}
-
 		private function btn_close_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_close = temp;
 			temp.name = "btn_close";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_shouhui;
-			temp.x = 402;
+			temp.x = 0;
 			temp.y = 23;
 			return temp;
 		}
@@ -70,22 +58,8 @@ package org.mokylin.skin.mainui.navigation
 			btn_open = temp;
 			temp.name = "btn_open";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_zhankai;
-			temp.x = 402;
+			temp.x = 0;
 			temp.y = 23;
-			return temp;
-		}
-
-		private function btns_i():feathers.controls.Group
-		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
-			btns = temp;
-			temp.name = "btns";
-			temp.height = 70;
-			temp.width = 429;
-			temp.x = -1;
-			temp.y = 0;
-			temp.layout = __navigation_main_Skin_HorizontalLayout1_i();
-			temp.elementsContent = [];
 			return temp;
 		}
 

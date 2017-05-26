@@ -25,30 +25,35 @@ package com.rpgGame.app.ui.main.navigation {
         private var _normalN1W : int;
         private var _gapN1X : int;
         private var _lastLevel:int;
+		private var _content:ContengGroup;
+		
         public function NavigationBar() {
             this._skin = new navigation_main_Skin();
             super(this._skin);
             
-            this._gapN1X = this._skin.btns.x;
-			this._skin.btns.parent.setChildIndex(this._skin.btns,0);
+			_content = new ContengGroup(_skin.width,_skin.height);
+			this.addChildAt(_content,0);
+			EventManager.addEvent(MainPlayerEvent.STAT_CHANGE,refeashButton);
+			refeashButton();
 			this.setState(true);
-			EventManager.addEvent(MainPlayerEvent.STAT_CHANGE,createButton);
-			createButton();
         }
 		
-		private function createButton():void
+		private function refeashButton():void
 		{
 			if(_lastLevel == MainRoleManager.actorInfo.totalStat.level)
 				return ;
 			_lastLevel == MainRoleManager.actorInfo.totalStat.level
 			var buttoninfos:Array = FuncionBarCfgData.getInfoListbyType(0);
-			this._skin.btns.removeChildren();
-			for each(var info:FunctionBarInfo in buttoninfos)
+			var length:int = buttoninfos.length;
+			var index:int = 0;
+			for(var i:int =0;i<length;i++)
 			{
-				var button:MainButtonBases = MainButtonBases.getButtonBuyInfo(info);
-				if(button!=null&&button.canOpen())
+				var button:MainButtonBases = MainButtonBases.getButtonBuyInfo(buttoninfos[i]);
+				if(button.canOpen())
 				{
-					this._skin.btns.addChild(button);
+					_content.addButton(button);
+				}else{
+					_content.removeButton(button);
 				}
 			}
 		}
@@ -78,22 +83,27 @@ package com.rpgGame.app.ui.main.navigation {
             if (this._tween) {
                 this._tween.kill();
             }
-            var targetX : int = 0;
-            if (isOpen) {
-                targetX = this._gapN1X;
-            } else {
-                targetX = this.width + this._gapN1X;
-            }
-            CONFIG::netDebug {
-                NetDebug.LOG("[NavigationNar] [setState] isOpen:" + isOpen + ", targetX:" + targetX);
-            }
-            this._tween = TweenLite.to(this._skin.btns, 0.5, {x : targetX,ease:Expo.easeIn});
+			_content.openState = isOpen;
+            
+			if(_content.isInitialized)
+			{
+				var targetX : int = 0;
+				if (!isOpen) {
+					targetX = this.width;
+				} else {
+					targetX = -this._content.width;
+				}
+				CONFIG::netDebug {
+					NetDebug.LOG("[NavigationNar] [setState] isOpen:" + isOpen + ", targetX:" + targetX);
+				}
+				this._tween = TweenLite.to(_content, 0.5, {x : targetX,ease:Expo.easeIn});
+			}	
             this._skin.btn_close.visible = isOpen;
             this._skin.btn_open.visible = !isOpen;
         }
 		public function getBtnGlobalPos(btnName : String) : Point
 		{
-			var display:DisplayObject = _skin.btns.getChildByName(btnName);
+			var display:DisplayObject = _content.getChildByName(btnName);
 			return display.localToGlobal(new Point(0,0));
 		}
     }
