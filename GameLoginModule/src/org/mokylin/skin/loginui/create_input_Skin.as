@@ -63,6 +63,7 @@ package org.mokylin.skin.loginui
 			temp.right = 59;
 			temp.fontSize = 16;
 			temp.text = "输入角色名称";
+			temp.textAlign = "center";
 			temp.color = 0x757575;
 			temp.top = 9;
 			return temp;

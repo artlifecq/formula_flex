@@ -2,6 +2,7 @@ package com.rpgGame.app.manager
 {
 	import com.game.engine3D.utils.MathUtil;
 	import com.rpgGame.app.graphics.StallHeadFace;
+	import com.rpgGame.app.manager.ctrl.ControlAutoPick;
 	import com.rpgGame.app.manager.fight.FightManager;
 	import com.rpgGame.app.manager.mount.MountManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -75,7 +76,7 @@ package com.rpgGame.app.manager
 					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveCollect,null,null,onCollect);
 					break;
 				case SceneCharType.DROP_GOODS:
-					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 150, role, onArriveDropGoods,null,null,onDropGoods);
+					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, ControlAutoPick.AUTO_DIRECT_SEND_PICK, role, onArriveDropGoods,null,null,onDropGoods);
 					break;
 				case SceneCharType.STALL:
 					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onWalkToStall);
@@ -228,6 +229,8 @@ package com.rpgGame.app.manager
 			var role : SceneRole = ref.data as SceneRole;
 			if (role == null || !role.usable)
 				return;
+			
+			TrusteeshipManager.getInstance().autoPickCtrl.isArrivePk=true;
 			var actor : SceneRole = MainRoleManager.actor;
 			var dist : int = MathUtil.getDistanceNoSqrt(actor.x, actor.z, role.x, role.z);
 			var dropGoodsData : SceneDropGoodsData = role.data as SceneDropGoodsData;

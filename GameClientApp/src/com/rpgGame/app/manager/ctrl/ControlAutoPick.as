@@ -42,7 +42,9 @@ package  com.rpgGame.app.manager.ctrl
 		// 这个目前就让主玩家有吧
 		private var _mainplayer :SceneRole = null;
 		private var _isPicking :Boolean = false;
-		
+		//比如距离109需要寻路，寻路到距离物品100地方，相当于走9个距离，但是寻路修正坐标小于10就会返回false，用这个标记告诉自动战斗不进行
+		private var _isArrivePk:Boolean=false;
+	
 		// 当前准备拾取的掉落物品GID
 		private var _curPickX:int = 0;
 		private var _curPickY:int = 0;
@@ -64,6 +66,23 @@ package  com.rpgGame.app.manager.ctrl
 		private var _autoPickTryTime :int = 0;
 		// 刷新扔掉道具列表
 		private var _refreshThrowItemTime :int = 0;
+
+		/**
+		 * 
+		 */
+		public function get isArrivePk():Boolean
+		{
+			return _isArrivePk;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set isArrivePk(value:Boolean):void
+		{
+			_isArrivePk = value;
+		}
+
 		public function clearState():void
 		{
 			_curPickingItem = 0;
@@ -312,10 +331,12 @@ package  com.rpgGame.app.manager.ctrl
 					_curPickX =itemPt.x;
 					_curPickY = itemPt.y;
 					SetPickingState( true );
+					return true;
 				}
 				else
 				{
 					SetPickingState( false );
+					return false;
 				}
 			}
 			
@@ -388,6 +409,21 @@ package  com.rpgGame.app.manager.ctrl
 		 */
 		public function TryAutoPickItem():Boolean
 		{
+			if (_isPicking) 
+			{
+				return true;
+			}
+			_isArrivePk=false;
+			var isMoving:Boolean=_mainplayer.stateMachine.isRunning||_mainplayer.stateMachine.isWalking||_mainplayer.stateMachine.isWalkMoving;
+			if (isMoving)
+			{
+				return false;
+			}
+			var isFighting:Boolean=_mainplayer.stateMachine.isAttacking||_mainplayer.stateMachine.isAttackHarding;
+			if (isFighting) 
+			{
+				return false;
+			}
 			if ( _autoPickTryTime == 0 )
 				_autoPickTryTime =getTimer();
 			var diff :int = getTimer() - _autoPickTryTime;
@@ -399,11 +435,7 @@ package  com.rpgGame.app.manager.ctrl
 				RefreshThrowList();
 				_refreshThrowItemTime = 0;
 			}
-			var isMoving:Boolean=_mainplayer.stateMachine.isRunning;
-			if (isMoving&& _isPicking )
-			{
-				return false;
-			}
+			
 						
 			if ( _mainplayer.stateMachine.isJumping || _mainplayer.stateMachine.isDead )
 			{
@@ -493,7 +525,7 @@ package  com.rpgGame.app.manager.ctrl
 		}
 		private function checkEquipPick(qItem:Q_item):Boolean
 		{
-			if (!qItem||ItemUtil.IsEquip(qItem.q_type)) 
+			if (!qItem||!ItemUtil.IsEquip(qItem.q_type)) 
 			{
 				return false;
 			}
@@ -538,22 +570,37 @@ package  com.rpgGame.app.manager.ctrl
 				return -2;
 			
 		
+			if (ItemUtil.IsCurrency( itemm.q_type )) 
+			{
+				if ( !SystemSetManager.getinstance().getBooleanByIndex(SystemSetManager.SYSTEMSET_AUOT_GET_MONEY) )//ItemUtil.isCurrency() )
+				{
+					return -1;
+				}
+			}
 			
-			if ( !SystemSetManager.getinstance().getBooleanByIndex(SystemSetManager.SYSTEMSET_AUOT_GET_MONEY) && ItemUtil.IsCurrency( itemm.q_type ) )//ItemUtil.isCurrency() )
+			else if ( ItemUtil.IsEquip( itemm.q_type ) )
 			{
-				return -1;
+				if (!checkEquipPick(itemm)) 
+				{
+					return -1;
+				}
+				
 			}
-			else if ( !checkEquipPick(itemm)&& ItemUtil.IsEquip( itemm.q_type ) )
+			else if (ItemUtil.IsMedical( itemm.q_type ) )
 			{
-				return -1;
+				if ( !SystemSetManager.getinstance().getBooleanByIndex(SystemSetManager.SYSTEMSET_AUOT_GET_DRUGS) ) 
+				{
+					return -1;
+				}
+				
 			}
-			else if ( !SystemSetManager.getinstance().getBooleanByIndex(SystemSetManager.SYSTEMSET_AUOT_GET_DRUGS) && ItemUtil.IsMedical( itemm.q_type ) )
+			else if ( ItemUtil.IsMaterial( itemm.q_type ) )
 			{
-				return -1;
-			}
-			else if ( !SystemSetManager.getinstance().getBooleanByIndex(SystemSetManager.SYSTEMSET_AUOT_GET_MATERIAL) && ItemUtil.IsMaterial( itemm.q_type ) )
-			{
-				return -1;
+				if ( !SystemSetManager.getinstance().getBooleanByIndex(SystemSetManager.SYSTEMSET_AUOT_GET_MATERIAL)) 
+				{
+					return -1;
+				}
+				
 			}
 			else if (  ItemUtil.IsTaskItem( itemm.q_type ) )
 			{

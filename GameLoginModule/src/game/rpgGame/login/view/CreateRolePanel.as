@@ -2,18 +2,24 @@ package game.rpgGame.login.view
 {
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.utils.DisplayUtil;
+	import com.game.mainCore.core.timer.GameTimer;
 	import com.gameClient.alert.AlertPanel;
 	
 	import flash.display.Stage;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
+	import flash.utils.getTimer;
 	import flash.utils.setTimeout;
+	
+	import away3d.events.Event;
 	
 	import feathers.controls.Button;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.TextInput;
 	import feathers.core.ToggleGroup;
+	import feathers.themes.GuiTheme;
+	import feathers.themes.GuiThemeStyle;
 	
 	import game.rpgGame.login.ClientConfig;
 	import game.rpgGame.login.data.AvatarInfo;
@@ -33,7 +39,6 @@ package game.rpgGame.login.view
 	
 	import starling.core.Starling;
 	import starling.display.DisplayObjectContainer;
-	import away3d.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -74,17 +79,23 @@ package game.rpgGame.login.view
 
 		private var testJob:feathers.controls.TextInput;
 
-		private var testBtn:Button;
-		private var randomTween:TweenLite;
 		
+		private var gameTimer:GameTimer;
+		private const TIME_OUT:int=30*1000;
+		private var endTime:int=0;
+		private var sexGroupInitX:int=0;
 		public function CreateRolePanel(parent:DisplayObjectContainer,onCreateCharFunc:Function)
 		{
 			parent.addChild(this);
 			_skin=new create_role_Skin();
 			_skin.toSprite(this);
 			toCreate=onCreateCharFunc;
+			//不晓得为啥textinput设置不了，皮肤不起效果
+//			_skin.text_input.textAlign="center";
+			_skin.text_input.fontSize=16;
+//			_skin.text_input.color=0xcfc6ae;
 			
-			_skin.num_saizi.gotoAndStop(0);
+			sexGroupInitX=_skin.grp_sex.x;
 			sexGroup=new ToggleGroup();
 			sexGroup.addItem(_skin.btn_man);
 			sexGroup.addItem(_skin.btn_woman);
@@ -109,81 +120,49 @@ package game.rpgGame.login.view
 			
 			
 			_stage = Starling.current.nativeStage;
-
-			initEvent();
+			var tx:int=_skin.grp_sex.x+_skin.grp_sex.width;
+			var ty:int=_skin.grp_sex.y+_skin.grp_sex.height/2;
 			
+			_skin.grp_sex.pivotX=_skin.grp_sex.width;
+			_skin.grp_sex.pivotY=_skin.grp_sex.height/2;
+			
+			_skin.grp_sex.x=tx;
+			_skin.grp_sex.y=ty;
+			
+			jobGroup.selectedIndex=int(Math.random()*3);
+			//墨家在随机男女
+			if (jobGroup.selectedIndex==2) 
+			{
+				sexGroup.selectedIndex=int(Math.random()*2);
+			}
+			initEvent();
 			onStageResize();
 			onRandomName();
-			jobChangeHandler();
+		
 //			testCreateRole();
-			testModelUI();
+			//testModelUI();
+			gameTimer=new GameTimer("CreateRolePanel",1000,0,onTimer);
+			gameTimer.start();
+			jobChangeHandler();
 		}
 		
-		private function testModelUI():void
+		private function onTimer():void
 		{
-			testBtn=new Button();
-			testBtn.styleClass=ButtonSkin_shaizi;
-			testBtn.x=1500;
-			testBtn.y=670;
-			testBtn.toolTip="创建测试模型（测试按钮）";
-			
-			testJob = new feathers.controls.TextInput();
-			testJob.height = 42;
-			testJob.styleClass = org.mokylin.skin.loginui.create_input_Skin;
-			testJob.width = 50;
-			testJob.prompt="职业";
-			testJob.x = testBtn.x-testJob.width-10;
-			testJob.y = 670;
-			testJob.restrict="0-9";
-			
-			testBtn.visible=false;
-			testJob.visible=false;
-			
-			_skin.container.addChild(testBtn);
-			_skin.container.addChild(testJob);
-			testBtn.addEventListener(starling.events.TouchEvent.TOUCH, onTouchTest);
-			_stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
-		}		
-		
-		protected function onKeyDown(event:KeyboardEvent):void
-		{
-			if (event.keyCode == Keyboard.TAB)
+			// TODO Auto Generated method stub
+			var left:int=(endTime-getTimer())/1000;
+			if (left>0) 
 			{
-				testBtn.visible=!testBtn.visible;
-				testJob.visible=!testJob.visible;
+				_skin.labTime.text=left+"秒后进入游戏"
+			}
+			else
+			{
+				gameTimer.stop();
+				autoSend2Create();
 			}
 		}
+	
 		
-		private function onTouchTest(e : TouchEvent) : void
-		{
-			var t : Touch = e.getTouch(this, TouchPhase.ENDED);			
-			if (t != null && t.target != null)
-			{
-				_createRoleData=new CreateRoleData();
-				_createRoleData.nickName=RandomNick.randomNick(true);
-				_createRoleData.sex=1;
-				var job:int=int(testJob.text);
-				if(job==0){
-					AlertPanel.showMsg("错误的职业！");
-					return
-				}
-				_createRoleData.job=job; 
-				toCreate(_createRoleData);
-			}
-		}
-		
-		private function testCreateRole():void
-		{
-			_createRoleData=new CreateRoleData();
-			_createRoleData.nickName=RandomNick.randomNick(true);
-			_createRoleData.sex=1;
-			_createRoleData.job=0;
-			
-			setTimeout(function ():void{
-				toCreate(_createRoleData);
-			},5000);
-		}
-		
+
 		private function initEvent():void
 		{
 			_stage.addEventListener(flash.events.Event.RESIZE, onStageResize);
@@ -199,20 +178,22 @@ package game.rpgGame.login.view
 			var t : Touch = e.getTouch(this, TouchPhase.ENDED);
 			if (t != null && t.target != null)
 			{
-				if (t.target ==_skin.num_saizi){
-					if(randomTween){
-						return;
-					}
-					_skin.num_saizi.gotoAndPlay(2);
-					randomTween=TweenLite.delayedCall(1+Math.random()*0.5,toRandom);
-				}else if(t.target==_skin.btn_create){
+				if (t.target ==_skin.btn_random)
+				{
+					toRandom();
+					
+				}else if(t.target==_skin.btn_create)
+				{
 					_createRoleData=new CreateRoleData();
 					var sexIndex:int;
-					if(jobGroup.selectedIndex==0){
+					if(jobGroup.selectedIndex==0)
+					{
 						sexIndex=0;
-					}else if(jobGroup.selectedIndex==1){
+					}else if(jobGroup.selectedIndex==1)
+					{
 						sexIndex=1;
-					}else{
+					}else
+					{
 						sexIndex=sexGroup.selectedIndex;
 					}
 					
@@ -220,25 +201,59 @@ package game.rpgGame.login.view
 					_createRoleData.sex=sexIndex+1;
 					_createRoleData.job=jobTyps[jobGroup.selectedIndex][sexIndex];
 					toCreate(_createRoleData);
+					_skin.btn_create.touchable=false;
 				}else if(t.target==_skin.roleZone){
 					_avatar.role.stateMachine.transition(RoleStateType.ACTION_SHOW);
 				}
 			}
 		}
-		
-		private function toRandom():void
+		private function autoSend2Create():void
 		{
-			randomTween.kill();
-			randomTween=null;
-			_skin.num_saizi.stop();
-			onRandomName();			
+			_createRoleData=new CreateRoleData();
+			var sexIndex:int;
+			if(jobGroup.selectedIndex==0){
+				sexIndex=0;
+			}else if(jobGroup.selectedIndex==1){
+				sexIndex=1;
+			}else{
+				sexIndex=sexGroup.selectedIndex;
+			}
+			
+			_createRoleData.nickName=_skin.text_input.text ;
+			_createRoleData.sex=sexIndex+1;
+			_createRoleData.job=jobTyps[jobGroup.selectedIndex][sexIndex];
+			toCreate(_createRoleData);
+			_skin.btn_create.touchable=false;
 		}
-		
+		private function resetTime():void
+		{
+			endTime=getTimer()+TIME_OUT;
+			onTimer();
+			if (!gameTimer.running) 
+			{
+				gameTimer.start();
+			}
+		}
+		private var lastTime:int;
+		public function toRandom():void
+		{
+			if (getTimer()-lastTime<100) 
+			{
+				return;
+			}
+			lastTime=getTimer();
+			onRandomName();
+			resetTime();
+		}
+		public function resetBtn():void
+		{
+			_skin.btn_create.touchable=true;
+		}
 		private function onRandomName():void
 		{
 			_skin.text_input.text = RandomNick.randomNick(sexGroup.selectedIndex==0);			
 		}
-		
+	
 		private function jobChangeHandler(e:away3d.events.Event=null):void
 		{
 			if(jobGroup.selectedIndex==0){
@@ -255,15 +270,28 @@ package game.rpgGame.login.view
 			updateAvatar();
 			
 			displaySexGrp();
+			resetTime();
 		}
 		
 		private function displaySexGrp():void
 		{
-			if(jobGroup.selectedIndex!=2){
-				TweenLite.to(_skin.grp_sex,0.4,{x:1380,y:472,alpha:0,ease: Bounce.easeIn});
-			}else{
-				TweenLite.to(_skin.grp_sex,0.4,{x:1268,y:472,alpha:1,ease: Bounce.easeOut});
-				sexGroup.selectedIndex=0;
+			
+			if(jobGroup.selectedIndex!=2)
+			{
+				if (_skin.grp_sex.scale!=0) 
+				{
+					TweenLite.to(_skin.grp_sex,0.4,{scale:0,alpha:0});
+				}
+				
+			}else
+			{
+				if (_skin.grp_sex.scale!=1) 
+				{
+					TweenLite.to(_skin.grp_sex,0.4,{scale:1,alpha:1,ease: Bounce.easeOut});
+					sexGroup.selectedIndex=0;
+				}
+			
+				
 			}
 		}
 		
@@ -276,8 +304,9 @@ package game.rpgGame.login.view
 		
 		private function onStageResize(e : flash.events.Event = null) : void
 		{
-			this.x=(_stage.stageWidth-this.width)>>1;
-			this.y=(_stage.stageHeight-this.height)>>1;
+			this.x=(_stage.stageWidth-this._skin.imgbg.width)>>1;
+			this.y=(_stage.stageHeight-this._skin.imgbg.height)>>1;
+			
 		}
 		
 		private function initAvatar():void
@@ -293,7 +322,7 @@ package game.rpgGame.login.view
 			
 			initAvatarInfo();
 			
-			updateAvatar();
+			//updateAvatar();
 		}
 		
 		private function initAvatarInfo():void
@@ -366,16 +395,12 @@ package game.rpgGame.login.view
 			
 			this._avatar.setRoleData(this._avatarData);
 			this._avatar.role.setScale(3);
+			this._avatar.role.rotationX=0;
+			resetTime();
 		}
 		
 		public function destroy() : void
 		{
-			if(testBtn){
-				_stage.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
-				testBtn.removeEventListener(starling.events.TouchEvent.TOUCH, onTouchTest);
-			}
-			
-			
 			if (_stage)
 			{
 				_stage.removeEventListener(flash.events.Event.RESIZE, onStageResize);
@@ -390,6 +415,8 @@ package game.rpgGame.login.view
 			if (parent)
 				parent.removeChild(this);
 			DisplayUtil.disposeDisplayContainer(this);
+			gameTimer.destroy();
+			gameTimer=null;
 		}
 	}
 }

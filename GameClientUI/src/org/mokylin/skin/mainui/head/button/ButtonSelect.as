@@ -32,13 +32,6 @@ package org.mokylin.skin.mainui.head.button
 			this.elementsContent = [];
 			
 			states = {
-				up:[
-					{target:"labelDisplay",
-						name:"bottom",
-						value:0
-					}
-				]
-				,
 				init:[
 						{target:"labelDisplay",
 							name:"textAlign",

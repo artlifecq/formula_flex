@@ -309,12 +309,16 @@ package com.rpgGame.app.manager
 				return;
 			if (_isBroken)
 				return;
-//			_autoPickCtrl.TryAutoPickItem();
-//			if (_autoPickCtrl.isPicking) 
-//			{
-//				stopFightTarget();
-//				return;
-//			}
+			
+			if (_autoPickCtrl.isPicking||autoPickCtrl.TryAutoPickItem()) 
+			{
+				//stopFightTarget();
+				return;
+			}
+			if (_autoPickCtrl.isArrivePk) 
+			{
+				return;
+			}
 			/*if (_isFightTargetRunning && _targetRoles)
 			{
 			var isCompleted : Boolean = true;

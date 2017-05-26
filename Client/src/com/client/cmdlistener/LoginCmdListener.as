@@ -1,6 +1,7 @@
 package com.client.cmdlistener
 {
 	import com.client.ClientGlobal;
+	import com.client.EnumErrorConst;
 	import com.client.ui.alert.GameAlert;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.netData.login.message.ResCreateCharacterMessage;
@@ -92,31 +93,7 @@ package com.client.cmdlistener
 		
 		public static function RecvErrorMessage(msg:ResErrorMessage):void
 		{
-			var str:String="创建角色错误";
-			switch(msg.reason)
-			{
-				case 10202:
-				{
-					str="名字不能少于两个汉字";
-					break;
-				}
-				case 10203:
-				{
-					str="名字长度不能大于6个汉字";
-					break;
-				}
-				case 10204:
-				{
-					str="名字已被使用";
-					break;
-				}
-				case 10205:
-				case 10206:
-				{
-					str="名字包含非法字符";
-					break;
-				}
-			}
+			var str:String=EnumErrorConst.getErrorStr(msg.reason);
 			showErrorMessage(str);
 			if (onCreateCharFailHandler != null)
 			{

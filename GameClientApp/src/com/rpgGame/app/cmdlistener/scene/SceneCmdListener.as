@@ -222,6 +222,7 @@ package com.rpgGame.app.cmdlistener.scene
 			if (role==MainRoleManager.actor) 
 			{
 				PKMamager.setPkMode(msg.pkState);
+				EventManager.dispatchEvent(MainPlayerEvent.PK_MODE_CHANGE);
 			}
 		}
 		

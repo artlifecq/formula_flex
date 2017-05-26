@@ -2,7 +2,7 @@ package com.rpgGame.app.state.role.control
 {
 	import com.rpgGame.core.state.role.control.ControlState;
 	import com.rpgGame.coreData.type.RoleStateType;
-
+	
 	import gs.TweenLite;
 
 	/**
@@ -21,7 +21,11 @@ package com.rpgGame.app.state.role.control
 		{
 			super(RoleStateType.CONTROL_CAST_SPELL_LOCK);
 		}
-
+		override public function enter():void
+		{
+			super.enter();
+			trace("CastSpellLockState");
+		}
 		override public function execute() : void
 		{
 			if (_machine && !_machine.isDisposed)

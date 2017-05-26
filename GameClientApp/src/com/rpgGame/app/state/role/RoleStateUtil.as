@@ -4,6 +4,7 @@ package com.rpgGame.app.state.role
 	import com.game.engine3D.utils.MathUtil;
 	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
+	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneCursorHelper;
@@ -304,7 +305,10 @@ package com.rpgGame.app.state.role
 			if ((ref.owner as SceneRole).isMainChar || (ref.owner as SceneRole).isMainCamouflage)
 			{
 				if (!ref.isServerStop)
+				{
 					SceneSender.SendPlayerStopMessage(); //告诉服务器，停止移动。
+					TrusteeshipManager.getInstance().autoPickCtrl.SetPickingState(false);
+				}
 			}
 		}
 
