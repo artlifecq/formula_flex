@@ -34,6 +34,9 @@ package com.rpgGame.coreData.clientConfig
 		public var sceneEffectRemove:Array;
 		/**  移除区域阻挡ID列表20103,20104 */
 		public var obstacleAreaRemove:Array;
+		/**  重置触发区域20103,20104 */
+		public var resetTriggers:Array;
+		
 		
 		public var isTrigging:Boolean=false;
 		

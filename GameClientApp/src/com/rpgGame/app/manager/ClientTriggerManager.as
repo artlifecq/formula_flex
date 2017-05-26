@@ -86,7 +86,7 @@ package com.rpgGame.app.manager
 		}
 		/**收到服务器触发消息*/
 		public static function serverTrigger(triggerId : int):void
-		{
+		{L.l("服务器返回触发："+triggerId);
 			_isTrigging[triggerId]=true;
 			TweenLite.killDelayedCallsTo(onTiggerkey);
 			var triggerData : ClientTrigger = TriggerCfgData.getClientTrigger(triggerId);
@@ -109,6 +109,12 @@ package com.rpgGame.app.manager
 				{
 					triggerClearSceneEffect(triggerData);
 				}
+				if(triggerData.resetTriggers!=null&&triggerData.resetTriggers.length>0)
+				{
+					clearTigerList(triggerData.resetTriggers);
+					
+				}
+				
 				/*switch (triggerData.triggerType)
 				{
 					case TriggerTypeEnum.SCENE_ADD_OBSTACLE: //触发生成动态阻挡 
@@ -186,6 +192,14 @@ package com.rpgGame.app.manager
 							}
 						}
 					}
+					/*if(triggerData.resetTriggers!=null&&triggerData.resetTriggers.length>0)
+					{
+						for(j=0;j<triggerData.resetTriggers.length;j++)
+						{
+							clearTigerByZone(triggerData.resetTriggers[j]);
+						}
+						
+					}*/
 				}
 			}
 			
@@ -214,6 +228,7 @@ package com.rpgGame.app.manager
 		public static function ClientBytrigger(triggerId : int) : void
 		{
 			if (_isTrigging[triggerId])return;
+			L.l("客户端发送触发："+triggerId);
 			_isTrigging[triggerId]=true;
 			TweenLite.killDelayedCallsTo(onTiggerkey);
 			
@@ -254,7 +269,19 @@ package com.rpgGame.app.manager
 				triger.isTrigging=false;
 			}
 		}
-		
+		private static function clearTigerList(triggers:Array) : void
+		{
+			var triger:ClientTrigger;
+			for(var i:int=0;i<triggers.length;i++)
+			{
+				triger=TriggerCfgData.getClientTrigger(triggers[i]);
+				if(triger)
+				{
+					_isTrigging[triger.id]=false;
+					triger.isTrigging=false;
+				}
+			}
+		}
 		
 		
 		

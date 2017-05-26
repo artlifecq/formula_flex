@@ -125,8 +125,11 @@ package com.rpgGame.core.app
 		/**
 		 *多人副本倒计时面板
 		 */
-		public static var MULTYSURE_PANL:String = createAppInfo( "dungeon.multy.MultySurePanel");
-		
+		public static var MULTY_ENTERTIME_PANL:String = createAppInfo( "dungeon.multy.MultyEnterTimePanel");
+		/**
+		 *多人副本退出倒计时面板
+		 */
+		public static var MULTY_EXITTIME_PANL:String = createAppInfo( "dungeon.multy.MultyExitTimePanel");
 		
 		/**
 		 *装备面板
