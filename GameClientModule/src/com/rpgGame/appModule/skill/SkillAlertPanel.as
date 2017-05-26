@@ -6,6 +6,7 @@ package com.rpgGame.appModule.skill
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.SkillLvLDataManager;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.clientConfig.Q_skill_ignore;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.lang.LangSpell;
@@ -105,7 +106,7 @@ package com.rpgGame.appModule.skill
 			}
 			
 			var des:String=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT14);
-			des=des.replace("$",HtmlTextUtil.getTextColor(0x25931b,String(_skillInfo.skillChildLv+upNum-1)));
+			des=des.replace("$",HtmlTextUtil.getTextColor(StaticValue.Q_GREEN,String(_skillInfo.skillChildLv+upNum-1)));
 			
 			_skin.lb1.htmlText=des;
 			

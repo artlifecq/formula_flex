@@ -9,7 +9,7 @@ package com.rpgGame.appModule.shop
 	import org.mokylin.skin.app.beibao.ShangDian_Skin;
 	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
+	import away3d.events.Event;
 
 	/**
 	 *随身商店 

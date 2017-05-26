@@ -33,7 +33,7 @@ package com.rpgGame.appModule.jingmai
 	
 	import starling.display.DisplayObjectContainer;
 	import starling.display.Sprite;
-	import starling.events.Event;
+	import away3d.events.Event;
 
 	public class MeridianView
 	{

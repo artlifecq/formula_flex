@@ -1,6 +1,6 @@
 package feathers.controls
 {
-	import starling.events.Event;
+	import away3d.events.Event;
 	
 	/**
 	 * 翻页组件，页码被翻动后会发出change事件

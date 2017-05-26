@@ -7,6 +7,12 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.controls.renderers
 {
+	import flash.events.TimerEvent;
+	import flash.geom.Point;
+	import flash.utils.Timer;
+	
+	import away3d.events.Event;
+	
 	import feathers.controls.ButtonState;
 	import feathers.controls.ImageLoader;
 	import feathers.controls.ItemRendererLayoutOrder;
@@ -25,13 +31,8 @@ package feathers.controls.renderers
 	import feathers.layout.RelativePosition;
 	import feathers.layout.VerticalAlign;
 	import feathers.utils.skins.resetFluidChildDimensionsForMeasurement;
-
-	import flash.events.TimerEvent;
-	import flash.geom.Point;
-	import flash.utils.Timer;
-
+	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;

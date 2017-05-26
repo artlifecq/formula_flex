@@ -11,6 +11,7 @@ package com.rpgGame.app.ui.main.chat {
 	import com.rpgGame.app.richText.RichTextCustomUtil;
 	import com.rpgGame.app.richText.component.RichTextArea3D;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.sender.CrossSender;
 	import com.rpgGame.app.ui.main.chat.laba.VipChatCanvas;
 	import com.rpgGame.core.events.ChatEvent;
 	import com.rpgGame.core.events.SceneInteractiveEvent;
@@ -39,6 +40,7 @@ package com.rpgGame.app.ui.main.chat {
 	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
+	import org.game.netCore.net.MessageMgr;
 	import org.mokylin.skin.mainui.chat.chat_Skin;
 	
 	import starling.core.Starling;
@@ -717,6 +719,12 @@ package com.rpgGame.app.ui.main.chat {
 		
 		private function sendMsg() : void 
 		{
+			if(MessageMgr.Ins.isCrossSocket){
+				CrossSender.reqQuitCrossFight();
+			}else{
+				CrossSender.reqEnterCrossInfo(0);	
+			}
+			//			return;
 			//死亡面板测试
 			//			FightFaceHelper.showHurtText(MainRoleManager.actor,MainRoleManager.actor,EnumHurtType.SPELL_HURT_TYPE_CRIT,5000);
 			//			FightFaceHelper.showHurtText(MainRoleManager.actor,MainRoleManager.actor,EnumHurtType.SPELL_HURT_TYPE_NORMAL,8000);

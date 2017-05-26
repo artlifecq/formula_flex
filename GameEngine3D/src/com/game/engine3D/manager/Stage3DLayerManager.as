@@ -39,7 +39,6 @@ package com.game.engine3D.manager
 	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
-	import starling.events.Event;
 	
 	use namespace arcane;
 	
@@ -229,18 +228,20 @@ package com.game.engine3D.manager
 				view.visible = true;
 				
 				if (_viewCount != 0)
+				{
 					view.layeredView = true;
-				
+				}
+				//trace(GlobalConfig.use2DMap);
 				//guoqing.wen add
-				view.entityCollector.collectPlanarShadow = GlobalConfig.use2DMap;
-				view.lodEnabled = !GlobalConfig.use2DMap;
+				view.entityCollector.collectPlanarShadow =true /*GlobalConfig.use2DMap*/;
+				view.lodEnabled = false/*!GlobalConfig.use2DMap*/;
 				
 				_views.push(view);
 			}
 			if (_starlingLayerCount > 0)
 			{
 				_starlingView2D = new Starling(StarlingLayer, _stage, _stage3DProxy);
-				_starlingView2D.addEventListener(starling.events.Event.ROOT_CREATED, starlingViewCreated);
+				_starlingView2D.addEventListener(away3d.events.Event.ROOT_CREATED, starlingViewCreated);
 				_starlingView2D.start();
 			}
 			
@@ -274,9 +275,9 @@ package com.game.engine3D.manager
 			}
 		}
 		
-		private static function starlingViewCreated(e : starling.events.Event) : void
+		private static function starlingViewCreated(e : away3d.events.Event) : void
 		{
-			_starlingView2D.removeEventListener(starling.events.Event.ROOT_CREATED, starlingViewCreated);
+			_starlingView2D.removeEventListener(away3d.events.Event.ROOT_CREATED, starlingViewCreated);
 			_starlingLayer = _starlingView2D.root as StarlingLayer;
 			_starlingLayer.initLayer(_starlingLayerCount);
 			stage3DCreated();

@@ -14,7 +14,7 @@ package feathers.controls
 	import feathers.skins.IStyleProvider;
 
 	import starling.display.DisplayObject;
-	import starling.events.Event;
+	import away3d.events.Event;
 
 	/**
 	 * A tabbed container.

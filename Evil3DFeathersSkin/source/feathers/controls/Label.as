@@ -13,6 +13,7 @@ package feathers.controls
 	import flash.text.TextFormat;
 	import flash.utils.Dictionary;
 	
+	import away3d.events.Event;
 	import away3d.log.Log;
 	
 	import feathers.controls.text.Fontter;
@@ -27,11 +28,8 @@ package feathers.controls
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
-	import starling.display.Image;
 	import starling.display.Quad;
 	import starling.display.Shape;
-	import starling.events.Event;
-	import starling.rendering.LayerBatchID;
 	import starling.rendering.Painter;
 	import starling.styles.IMeshStyle;
 	import starling.styles.MeshStyle;
@@ -137,6 +135,7 @@ public class Label extends DisplayObjectContainer implements IMeshStyle, ILayout
 	private var _textureKey:String;
 	private var _charImages:Vector.<Quad>;
 	private var _isDisposed:Boolean;
+	private var _enableTextBatch:Boolean;
 	
 	private static const MAX_WIDTH:int = 1980;
 	private static const MAX_HEIGHT:int = 800;
@@ -162,6 +161,7 @@ public class Label extends DisplayObjectContainer implements IMeshStyle, ILayout
 		_hitArea = new Rectangle(0, 0, minWidth, minHeight);//label container size
 		_textBounds = new Rectangle();//textfiled size
 		_text = "";
+		_enableTextBatch = GuiTheme.ENABLE_TEXT_BATCH;
 		
 		_horizontalAlign = HorizontalAlign.LEFT;
 		_verticalAlign = VerticalAlign.TOP;
@@ -170,6 +170,19 @@ public class Label extends DisplayObjectContainer implements IMeshStyle, ILayout
 		touchGroup = true;
 	}
 	
+	public function get enableTextBatch():Boolean {
+		return _enableTextBatch;
+	}
+	
+	/**
+	 * 是否开启文本动态合并策略 
+	 * @param value
+	 * 
+	 */	
+	public function set enableTextBatch(value:Boolean):void {
+		_enableTextBatch = value;
+	}
+
 	/**
 	 * 垂直对齐方式,支持VerticalAlign.TOP,VerticalAlign.BOTTOM,VerticalAlign.MIDDLE和VerticalAlign.JUSTIFY(两端对齐);
 	 * 默认值：VerticalAlign.TOP。
@@ -433,11 +446,11 @@ public class Label extends DisplayObjectContainer implements IMeshStyle, ILayout
 		}
 		
 		var disposeBmd:Boolean = bitmapData != _helperBitmapData;
-		if(GuiTheme.ENABLE_TEXT_BATCH_RENDER)
-		{
-			texture = GuiTheme.ins.creatBatchRenderTextTexture(_textureKey, bitmapData, clip, false, disposeBmd);
-		}else
-		{
+		
+		if (_enableTextBatch) {
+//			texture = DynamicTextTextureManager.instance.createSubTexture(_textureKey, bitmapData, disposeBmd, clip);
+		} 
+		if (texture == null) {
 			texture = TextureFactory.fromBitmapDataByMemoryItem(bitmapData, false, false, "bgra", disposeBmd, clip);
 		}
 		
@@ -1484,13 +1497,16 @@ public class Label extends DisplayObjectContainer implements IMeshStyle, ILayout
 					startX += _fontSize + letterSpacing;
 				}
 				
-				image = _charImages[i]; 
-				_charImages[i] = null;
-				if(image)
+				if (i < _charImages.length)
 				{
-					image.removeFromParent();
-					Pool.putQuad(image);
+					image = _charImages[i]; 
+					if(image)
+					{
+						image.removeFromParent();
+						Pool.putQuad(image);
+					}
 				}
+				_charImages[i] = null;
 				continue;
 			}
 			

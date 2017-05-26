@@ -2,7 +2,7 @@ package com.rpgGame.core.view.ui.tip.vo
 {
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	
-	import starling.events.EventDispatcher;
+	import away3d.events.EventDispatcher;
 	
 	/**
 	 * 文本TIPS的数据类

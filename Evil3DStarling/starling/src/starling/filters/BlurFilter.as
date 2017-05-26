@@ -31,23 +31,42 @@ package starling.filters
          *      <li>etc.</li>
          *  </ul>
          */
+		
+		private var horizontalEffect:BlurEffect;
+		private var verticalEffect:BlurEffect;
+		
         public function BlurFilter(blurX:Number=1.0, blurY:Number=1.0, resolution:Number=1.0)
         {
             _blurX = blurX;
             _blurY = blurY;
             this.resolution = resolution;
+			
+			horizontalEffect = this.effect as BlurEffect;
+			verticalEffect = createEffect() as BlurEffect;
+			
+			horizontalEffect.direction = BlurEffect.HORIZONTAL;
+			verticalEffect.direction = BlurEffect.VERTICAL;
         }
+		
+		override public function dispose():void
+		{
+			if(horizontalEffect)
+				horizontalEffect.dispose();
+			if(verticalEffect)
+				verticalEffect.dispose();
+			horizontalEffect = verticalEffect = null;
+			_effect = null;
+		}
 
         /** @private */
         override public function process(painter:Painter, helper:FilterHelper,
                                          input0:IStarlingTexture = null, input1:IStarlingTexture = null,
                                          input2:IStarlingTexture = null, input3:IStarlingTexture = null):IStarlingTexture
         {
-            var effect:BlurEffect = this.effect as BlurEffect;
-
+			_effect = horizontalEffect;
             if (_blurX == 0 && _blurY == 0)
             {
-                effect.strength = 0;
+				horizontalEffect.strength = 0;
                 return super.process(painter, helper, input0);
             }
 
@@ -56,26 +75,26 @@ package starling.filters
             var outTexture:IStarlingTexture = input0;
             var inTexture:IStarlingTexture;
 
-            effect.direction = BlurEffect.HORIZONTAL;
+			horizontalEffect.direction = BlurEffect.HORIZONTAL;
 
             while (blurX > 0)
             {
-                effect.strength = Math.min(1.0, blurX);
+				horizontalEffect.strength = Math.min(1.0, blurX);
 
-                blurX -= effect.strength;
+                blurX -= horizontalEffect.strength;
                 inTexture = outTexture;
                 outTexture = super.process(painter, helper, inTexture);
 
                 if (inTexture != input0) helper.putTexture(inTexture);
             }
 
-            effect.direction = BlurEffect.VERTICAL;
+			_effect = verticalEffect;
 
             while (blurY > 0)
             {
-                effect.strength = Math.min(1.0, blurY);
+				verticalEffect.strength = Math.min(1.0, blurY);
 
-                blurY -= effect.strength;
+                blurY -= verticalEffect.strength;
                 inTexture = outTexture;
                 outTexture = super.process(painter, helper, inTexture);
 

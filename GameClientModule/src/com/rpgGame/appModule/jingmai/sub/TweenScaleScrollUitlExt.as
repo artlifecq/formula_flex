@@ -7,7 +7,7 @@ package com.rpgGame.appModule.jingmai.sub
 	import gs.TweenMax;
 	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
+	import away3d.events.Event;
 	
 	public class TweenScaleScrollUitlExt extends TweenScrollUtil
 	{

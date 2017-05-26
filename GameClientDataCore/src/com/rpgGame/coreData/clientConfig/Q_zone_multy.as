@@ -22,8 +22,12 @@ package com.rpgGame.coreData.clientConfig
 		public var q_count:int;
 		 /**  通关前几次会获得通关奖励 */
 		public var q_front:int;
-		 /**  通关奖励 */
+		 /**  挑战时间（毫秒） */
+		public var q_time:int;
+		 /**  通关奖励(一个，在入口面板显示) */
 		public var q_pass_reward:String;
+		 /**  通关奖励(多个，追踪面板显示) */
+		public var q_all_reward:String;
 		 /**  概率掉落物品 */
 		public var q_prob_reward:String;
 

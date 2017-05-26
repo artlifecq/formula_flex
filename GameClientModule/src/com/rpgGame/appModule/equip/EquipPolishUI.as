@@ -26,6 +26,7 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.TipsCfgData;
 	import com.rpgGame.coreData.cfg.item.EquipPolishCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
@@ -65,7 +66,7 @@ package com.rpgGame.appModule.equip
 	import org.mokylin.skin.app.zhuangbei.zuomo.Zuomo_Skin;
 	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
+	import away3d.events.Event;
 	
 	/**
 	 *装备琢磨
@@ -203,7 +204,9 @@ package com.rpgGame.appModule.equip
 			if(targetEquipInfo){
 				_goodsContainerTarget.setGrayForData(targetEquipInfo,false);
 				if(isUse(targetEquipInfo)){//是消耗品
-					_goodsContainerUse.setGrayForData(targetEquipInfo,false);
+					useEquips.push(targetEquipInfo);
+					useEquips.sort(sortForUse);
+					_goodsContainerUse.refleshGridsByDatas(useEquips);
 				}
 				targetEquipInfo=null;
 			}
@@ -443,9 +446,9 @@ package com.rpgGame.appModule.equip
 			var gridInfo:GridInfo=targetGrid.gridInfo;
 			if(targetEquipInfo){
 				_goodsContainerTarget.setGrayForData(targetEquipInfo,false);
-				if(isUse(targetEquipInfo)){
+			/*	if(isUse(targetEquipInfo)){
 					_goodsContainerUse.setGrayForData(targetEquipInfo,false);
-				}
+				}*/
 			}
 			
 			cancelAllUse();
@@ -465,7 +468,9 @@ package com.rpgGame.appModule.equip
 			tweenEquip=TweenMax.to(_targetEquip,1,{x:612,y:177,ease:Expo.easeOut});
 			
 			if(isUse(targetEquipInfo)){
-				_goodsContainerUse.setGrayForData(targetEquipInfo,true);
+//				_goodsContainerUse.setGrayForData(targetEquipInfo,true);
+				deleteItems(useEquips,targetEquipInfo);
+				_goodsContainerUse.refleshGridsByDatas(useEquips);
 			}
 			
 			addExp=0;
@@ -551,9 +556,9 @@ package com.rpgGame.appModule.equip
 			}
 			var des:String="";
 			if(value<=value1){
-				des=noSlip?HtmlTextUtil.getTextColor(0x55BD15,value):HtmlTextUtil.getTextColor(0x55BD15,value+"/"+value1);//绿色
+				des=noSlip?HtmlTextUtil.getTextColor(StaticValue.UI_GREEN1,value):HtmlTextUtil.getTextColor(StaticValue.UI_GREEN1,value+"/"+value1);//绿色
 			}else{
-				des=noSlip?HtmlTextUtil.getTextColor(0xd02525,value):HtmlTextUtil.getTextColor(0xd02525,value+"/"+value1);//红色
+				des=noSlip?HtmlTextUtil.getTextColor(StaticValue.UI_RED1,value):HtmlTextUtil.getTextColor(StaticValue.UI_RED1,value+"/"+value1);//红色
 			}
 			return title+":"+des;
 		}

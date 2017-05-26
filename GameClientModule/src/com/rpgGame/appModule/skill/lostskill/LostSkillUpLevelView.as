@@ -27,7 +27,7 @@ package com.rpgGame.appModule.skill.lostskill
 	import org.mokylin.skin.app.wuxue.juexue.Item_shuxing;
 	import org.mokylin.skin.app.wuxue.juexue.Juxue_Shengji;
 	
-	import starling.events.Event;
+	import away3d.events.Event;
 
 	public class LostSkillUpLevelView
 	{

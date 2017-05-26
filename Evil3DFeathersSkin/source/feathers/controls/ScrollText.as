@@ -12,11 +12,11 @@ package feathers.controls
 	import flash.text.StyleSheet;
 	import flash.text.TextFormat;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.supportClasses.TextFieldViewPort;
 	import feathers.controls.text.Fontter;
 	import feathers.skins.IStyleProvider;
-	
-	import starling.events.Event;
 
 	/**
 	 * Dispatched when an anchor (<code>&lt;a&gt;</code>) element in the HTML
@@ -47,11 +47,11 @@ package feathers.controls
 	 *     trace( event.data ); //hello
 	 * }</listing>
 	 *
-	 * @eventType starling.events.Event.TRIGGERED
+	 * @eventType away3d.events.Event.TRIGGERED
 	 *
 	 * @see http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/events/TextEvent.html#LINK flash.events.TextEvent.LINK
 	 */
-	[Event(name="triggered",type="starling.events.Event")]
+	[Event(name="triggered",type="away3d.events.Event")]
 
 	/**
 	 * Displays long passages of text in a scrollable container using the

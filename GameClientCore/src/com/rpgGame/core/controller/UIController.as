@@ -6,7 +6,7 @@ package com.rpgGame.core.controller
 	import org.client.mainCore.ds.HashMap;
 	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
+	import away3d.events.Event;
 
 	/**
 	 *

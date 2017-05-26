@@ -31,7 +31,7 @@ package feathers.media
 	 *
 	 * @eventType feathers.events.MediaPlayerEventType.DIMENSIONS_CHANGE
 	 */
-	[Event(name="dimensionsChange",type="starling.events.Event")]
+	[Event(name="dimensionsChange",type="away3d.events.Event")]
 
 	/**
 	 * An interface media players that play video content.

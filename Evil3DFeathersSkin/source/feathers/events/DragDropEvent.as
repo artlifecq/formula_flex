@@ -9,7 +9,7 @@ package feathers.events
 {
 	import feathers.dragDrop.DragData;
 
-	import starling.events.Event;
+	import away3d.events.Event;
 
 	/**
 	 * Events used by the <code>DragDropManager</code>.

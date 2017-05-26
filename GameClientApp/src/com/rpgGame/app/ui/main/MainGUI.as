@@ -55,7 +55,7 @@ package com.rpgGame.app.ui.main
 	import starling.core.Starling;
 	import starling.display.Sprite;
 	import starling.display.Stage;
-	import starling.events.Event;
+	import away3d.events.Event;
 	
 	import utils.TimerServer;
 	

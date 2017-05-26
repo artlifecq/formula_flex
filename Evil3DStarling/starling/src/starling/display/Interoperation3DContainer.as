@@ -10,7 +10,6 @@ package starling.display
 	import away3d.core.managers.Stage3DProxy;
 	import away3d.core.traverse.EntityCollector;
 	
-	import starling.core.Starling;
 	import starling.rendering.Painter;
 	import starling.utils.RectangleUtil;
 	
@@ -28,6 +27,8 @@ package starling.display
 		private static var _stageViewPort:Rectangle = new Rectangle();
 		private static var _intersectionRect:Rectangle = new Rectangle();
 		private static var _globalScisssorRect:Rectangle = new Rectangle();
+		
+		private var _painter:Painter;
 		
 		public function Interoperation3DContainer(view3D:View3D)
 		{
@@ -84,21 +85,16 @@ package starling.display
 		
 		public override function render(painter:Painter):void
 		{
-			painter.finishMeshBatch();
-			painter.pushState();
-			
-			painter.excludeFromCache(this);
-			painter.popState();
+			_painter = painter;
 			
 			localToGlobal(_localPoint,_globalPoint);
 			_root.y = _view3D.height - _globalPoint.y;
 			_root.x = _globalPoint.x;
 			
 			var stage3DProxy:Stage3DProxy = _view3D.stage3DProxy;
-			stage3DProxy.clearGPUStatus();
-			stage3DProxy.clearDepthAndStencilBuffer();
 			_entityCollector.camera = _view3D.camera;
 			_entityCollector.clear();
+			
 			CONFIG::Scene_Entity_Collect_Debug
 				{
 					var time:int = getTimer();
@@ -111,13 +107,30 @@ package starling.display
 					trace("traversePartitions in Interoperation3DContainer::render : " + (getTimer() - time) + "ms");
 				}
 
+			if(_entityCollector._entities.length > 0)
+			{
+				_painter.finishMeshBatch();
+				_painter.renderInter3D(this);
+				_painter.stencilReferenceValue = _painter.stencilReferenceValue;
+			}
+			else
+				_entityCollector.cleanUp();
+			
+			
+		}
+		
+		public function doRender():void
+		{
+			var stage3DProxy:Stage3DProxy = _view3D.stage3DProxy;
+			stage3DProxy.clearGPUStatus();
+			stage3DProxy.clearDepthAndStencilBuffer();
+			
 			if(_scisssorRect)
 			{
 				_stageViewPort.setTo(0, 0, stage3DProxy.width, stage3DProxy.height);
 				_globalScisssorRect.setTo(_globalPoint.x +_scisssorRect.x , _globalPoint.y+_scisssorRect.y, _scisssorRect.width, _scisssorRect.height);
 				var intersectionRect:Rectangle = RectangleUtil.intersect(_globalScisssorRect, _stageViewPort, _intersectionRect);
 			}
-			
 			if(!_scisssorRect)
 			{
 				_view3D.renderer.render(_entityCollector, _view3D, null, null);
@@ -125,11 +138,11 @@ package starling.display
 				_view3D.renderer.render(_entityCollector, _view3D, null, intersectionRect);
 			}
 			_entityCollector.cleanUp();
-			
 			//还原starling渲染属性
 			stage3DProxy.clearDepthAndStencilBuffer();
-			painter.clearForInteroperation();
+			_painter.clearForInteroperation();
 		}
+		
 		protected function get root3D():ObjectContainer3D
 		{
 			return _root;

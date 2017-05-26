@@ -12,7 +12,7 @@ package com.rpgGame.app.ui.tips
 	
 	import org.mokylin.skin.app.tips.BaseTipsSkin;
 	
-	import starling.events.Event;
+	import away3d.events.Event;
 	import starling.text.TextFieldAutoSize;
 	
 	import utils.StringUtil;

@@ -26,7 +26,7 @@ package com.rpgGame.appModule.social.team
 	
 	import org.mokylin.skin.app.shejiao.zudui.Duiwu_usSkin;
 	
-	import starling.events.Event;
+	import away3d.events.Event;
 
 	
 	public class MyTeamPanelExt extends SkinUI

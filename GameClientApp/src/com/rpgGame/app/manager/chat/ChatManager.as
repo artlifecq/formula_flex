@@ -568,8 +568,8 @@ package com.rpgGame.app.manager.chat
 					//                    return true;
 				}
 			}
-				//验证gm命令
-				var isGm : Boolean = isGmMsg(msg);
+			//验证gm命令
+			var isGm : Boolean = isGmMsg(msg);
 			if (isGm)
 			{
 				GmSender.sendMsg(getGmContent(msg));

@@ -15,7 +15,7 @@ package com.game.engine2D.scene.render.ui2D
 	import gs.TweenLite;
 	
 	import org.client.mainCore.utils.DisplayUtil;
-
+	
 	/**
 	 * @private
 	 * 换装
@@ -46,7 +46,7 @@ package com.game.engine2D.scene.render.ui2D
 				}
 			}
 		}
-		 
+		
 		/**
 		 * 是否在可视范围内 
 		 * @param value
@@ -228,7 +228,7 @@ package com.game.engine2D.scene.render.ui2D
 		/**
 		 * 隐藏的换装类型
 		 */	
-		private var _hideRenderUnitTypes:Vector.<String> = new Vector.<String>;
+		//		private var _hideRenderUnitTypes:Vector.<String> = new Vector.<String>;
 		/**
 		 * 隐藏的换装ID类型
 		 */	
@@ -346,31 +346,31 @@ package com.game.engine2D.scene.render.ui2D
 		}
 		
 		//鼠标感应区*********************************************************************************************************
-//		private var _mouseRect:Rectangle;
+		//		private var _mouseRect:Rectangle;
 		/**
 		 * @private
 		 * 扩展鼠标感应区
 		 */	
-//		internal function unionMouseRect($rect:Rectangle):void
-//		{
-//			if(mouseRect!=null)
-//			{
-//				mouseRect = mouseRect.union($rect);
-//			}
-//			else
-//			{
-//				mouseRect = $rect.clone();
-//			}
-
-//			graphicSp.graphics.clear();
-//			graphicSp.graphics.lineStyle(1,0xff0000);
-//			graphicSp.graphics.drawRect(0,0,mouseRect.width,mouseRect.height);
-//			graphicSp.graphics.endFill();
-//			
-//			DisplayObjectContainer(_graphicDis).addChild(graphicSp);
-//			graphicSp.x = mouseRect.x;
-//			graphicSp.y = mouseRect.y;
-//		}
+		//		internal function unionMouseRect($rect:Rectangle):void
+		//		{
+		//			if(mouseRect!=null)
+		//			{
+		//				mouseRect = mouseRect.union($rect);
+		//			}
+		//			else
+		//			{
+		//				mouseRect = $rect.clone();
+		//			}
+		
+		//			graphicSp.graphics.clear();
+		//			graphicSp.graphics.lineStyle(1,0xff0000);
+		//			graphicSp.graphics.drawRect(0,0,mouseRect.width,mouseRect.height);
+		//			graphicSp.graphics.endFill();
+		//			
+		//			DisplayObjectContainer(_graphicDis).addChild(graphicSp);
+		//			graphicSp.x = mouseRect.x;
+		//			graphicSp.y = mouseRect.y;
+		//		}
 		
 		public function UIRenderSet2D()
 		{
@@ -435,13 +435,13 @@ package com.game.engine2D.scene.render.ui2D
 			//回收所有换装
 			removeAllRenderUnits();
 			
-			_hideRenderUnitTypes.length = 0;
+			//			_hideRenderUnitTypes.length = 0;
 			_hideRenderUnitIds.length = 0;
 			_renderUnitList.length = 0;
 			
 			_parent = null;
-//			mouseRect = null;
-
+			//			mouseRect = null;
+			
 			rotation = 0;
 			alpha = 1;
 			removeAllFilters();
@@ -651,7 +651,7 @@ package com.game.engine2D.scene.render.ui2D
 			//创建一个新的
 			var ap:UIRenderUnit2D = UIRenderUnit2D.create($apd);
 			ap.parent = _graphicDis as DisplayObjectContainer;
-			ap.visible = (_hideRenderUnitTypes.indexOf(ap.type)==-1 && _hideRenderUnitIds.indexOf(ap.id)==-1);//判断可见性
+			//			ap.visible = (_hideRenderUnitTypes.indexOf(ap.type)==-1 && _hideRenderUnitIds.indexOf(ap.id)==-1);//判断可见性
 			ap.isDrawShadow = _isDrawShadow;
 			ap.isInViewDistance = _isInViewDistance;
 			ap.updateNow = true;//注意这个!!!!!!!!
@@ -832,64 +832,63 @@ package com.game.engine2D.scene.render.ui2D
 				ap.visible = false;
 			}
 		}
-		/**
-		 * 查看某类型的换装是否可显示
-		 *  @param $id
-		 */
-		public function getTypeRenderUnitsVisible($type:String):Boolean
-		{
-			return _hideRenderUnitTypes.indexOf($type) == -1;
-		}
-		/**
-		 * 显示某类型换装
-		 *  @param $type
-		 */
-		public function showRenderUnitsByType($type:String):void
-		{
-			//从记录数组中移除 
-			var index:int = _hideRenderUnitTypes.indexOf($type);
-			if(index!=-1)
-			{
-				_hideRenderUnitTypes.splice(index,1);
-			}
-			
-			//执行显示
-			var ap:UIRenderUnit2D;
-			var len:int = _renderUnitList.length;
-			while(len-->0)
-			{
-				ap = _renderUnitList[len];
-				if(ap.type == $type)
-				{
-					ap.visible = true;
-				}
-			}
-		}
-		/**
-		 * 隐藏某类型换装
-		 *  @param $type
-		 */
-		public function hideRenderUnitsByType($type:String):void
-		{
-			//添加进记录数组
-			if(_hideRenderUnitTypes.indexOf($type)==-1)
-			{
-				_hideRenderUnitTypes.push($type);
-			}
-			
-			//执行隐藏
-			var ap:UIRenderUnit2D;
-			var len:int = _renderUnitList.length;
-			while(len-->0)
-			{
-				ap = _renderUnitList[len];
-				if(ap.type == $type)
-				{
-					ap.visible = false;
-				}
-			}
-		}
-		
+		//		/**
+		//		 * 查看某类型的换装是否可显示
+		//		 *  @param $id
+		//		 */
+		//		public function getTypeRenderUnitsVisible($type:String):Boolean
+		//		{
+		//			return _hideRenderUnitTypes.indexOf($type) == -1;
+		//		}
+		//		/**
+		//		 * 显示某类型换装
+		//		 *  @param $type
+		//		 */
+		//		public function showRenderUnitsByType($type:String):void
+		//		{
+		//			//从记录数组中移除 
+		//			var index:int = _hideRenderUnitTypes.indexOf($type);
+		//			if(index!=-1)
+		//			{
+		//				_hideRenderUnitTypes.splice(index,1);
+		//			}
+		//			
+		//			//执行显示
+		//			var ap:UIRenderUnit2D;
+		//			var len:int = _renderUnitList.length;
+		//			while(len-->0)
+		//			{
+		//				ap = _renderUnitList[len];
+		//				if(ap.type == $type)
+		//				{
+		//					ap.visible = true;
+		//				}
+		//			}
+		//		}
+		//		/**
+		//		 * 隐藏某类型换装
+		//		 *  @param $type
+		//		 */
+		//		public function hideRenderUnitsByType($type:String):void
+		//		{
+		//			//添加进记录数组
+		//			if(_hideRenderUnitTypes.indexOf($type)==-1)
+		//			{
+		//				_hideRenderUnitTypes.push($type);
+		//			}
+		//			
+		//			//执行隐藏
+		//			var ap:UIRenderUnit2D;
+		//			var len:int = _renderUnitList.length;
+		//			while(len-->0)
+		//			{
+		//				ap = _renderUnitList[len];
+		//				if(ap.type == $type)
+		//				{
+		//					ap.visible = false;
+		//				}
+		//			}
+		//		}
 		override public function set isDrawShadow(value:Boolean):void
 		{
 			_isDrawShadow = value;
@@ -902,7 +901,7 @@ package com.game.engine2D.scene.render.ui2D
 				ap.isDrawShadow = value;
 			}
 		}
-	
+		
 		//运行相关
 		//-----------------------------------------------------------------------------------------------------------
 		/**
@@ -977,43 +976,43 @@ package com.game.engine2D.scene.render.ui2D
 		}
 		
 		protected var _needSort:Boolean = true;
-//		/**
-//		 *向主换换装BD，之后更新换装
-//		 * @param $target 画向的目标
-//		 */
-//		override public function draw($target:IBitmapDrawable):void
-//		{
-//			//深度排序
-//			if(_needSort)
-//			{
-//				_UIRenderUnit2Ds.sort(depthSort);
-//				_needSort = false;
-//			}
-//			//绘制 并 更新各个换装部件
-//			var ap:UIRenderUnit2D;
-//			var len:int = _UIRenderUnit2Ds.length;
-//			var shadowIndex:uint = 0;
-//			while(len-->0)
-//			{
-//				ap = _UIRenderUnit2Ds[len];
-//				if(ap)
-//				{
-//					ap.depthIndex = len+_shadowIndex;
-//					ap.draw($target);//绘制 并 更新各个换装部件
-//					//
-//					if(ap.depthHasChg)
-//					{
-//						_needSort = true;
-//						ap.depthHasChg = false;
-//					}
-//					if(ap.enableShadow && ap.isDrawShadow)
-//					{
-//						shadowIndex++;
-//					}
-//				}
-//			}
-//			_shadowIndex = _shadow?1:shadowIndex;
-//		}
+		//		/**
+		//		 *向主换换装BD，之后更新换装
+		//		 * @param $target 画向的目标
+		//		 */
+		//		override public function draw($target:IBitmapDrawable):void
+		//		{
+		//			//深度排序
+		//			if(_needSort)
+		//			{
+		//				_UIRenderUnit2Ds.sort(depthSort);
+		//				_needSort = false;
+		//			}
+		//			//绘制 并 更新各个换装部件
+		//			var ap:UIRenderUnit2D;
+		//			var len:int = _UIRenderUnit2Ds.length;
+		//			var shadowIndex:uint = 0;
+		//			while(len-->0)
+		//			{
+		//				ap = _UIRenderUnit2Ds[len];
+		//				if(ap)
+		//				{
+		//					ap.depthIndex = len+_shadowIndex;
+		//					ap.draw($target);//绘制 并 更新各个换装部件
+		//					//
+		//					if(ap.depthHasChg)
+		//					{
+		//						_needSort = true;
+		//						ap.depthHasChg = false;
+		//					}
+		//					if(ap.enableShadow && ap.isDrawShadow)
+		//					{
+		//						shadowIndex++;
+		//					}
+		//				}
+		//			}
+		//			_shadowIndex = _shadow?1:shadowIndex;
+		//		}
 		
 		private function depthSort(apA:UIRenderUnit2D,apB:UIRenderUnit2D):int
 		{

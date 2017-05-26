@@ -23,6 +23,9 @@ package com.rpgGame.netData.map.bean{
 		//怪物模板Id
 		private var _modelId: int;
 		
+		//分布Id
+		private var _distributeId: int;
+		
 		//怪物名字
 		private var _monsterName: String;
 		
@@ -71,6 +74,8 @@ package com.rpgGame.netData.map.bean{
 			writeLong(_monsterId);
 			//怪物模板Id
 			writeInt(_modelId);
+			//分布Id
+			writeInt(_distributeId);
 			//怪物名字
 			writeString(_monsterName);
 			//怪物资源造型
@@ -116,6 +121,8 @@ package com.rpgGame.netData.map.bean{
 			_monsterId = readLong();
 			//怪物模板Id
 			_modelId = readInt();
+			//分布Id
+			_distributeId = readInt();
 			//怪物名字
 			_monsterName = readString();
 			//怪物资源造型
@@ -181,6 +188,21 @@ package com.rpgGame.netData.map.bean{
 		 */
 		public function set modelId(value: int): void{
 			this._modelId = value;
+		}
+		
+		/**
+		 * get 分布Id
+		 * @return 
+		 */
+		public function get distributeId(): int{
+			return _distributeId;
+		}
+		
+		/**
+		 * set 分布Id
+		 */
+		public function set distributeId(value: int): void{
+			this._distributeId = value;
 		}
 		
 		/**

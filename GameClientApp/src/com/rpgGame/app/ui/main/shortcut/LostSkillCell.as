@@ -17,7 +17,7 @@ package com.rpgGame.app.ui.main.shortcut
 	import feathers.utils.filter.GrayFilter;
 	
 	import starling.display.Image;
-	import starling.events.Event;
+	import away3d.events.Event;
 
 	public class LostSkillCell
 	{

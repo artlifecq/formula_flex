@@ -1,12 +1,10 @@
 ﻿package com.rpgGame.app.ui.main.activityBar.item
 {
-    import feathers.controls.UIAsset;
-    import feathers.controls.Label;
-    import feathers.controls.text.Fontter;
     import com.rpgGame.app.manager.FunctionOpenManager;
-    import com.rpgGame.app.manager.shiLian.ShiLianManager;
-    import org.client.mainCore.manager.EventManager;
-    import com.rpgGame.core.events.shiLian.ShiLianEvent;
+    
+    import feathers.controls.Label;
+    import feathers.controls.UIAsset;
+    import feathers.controls.text.Fontter;
 
 	/**
 	 * 试练活动 
@@ -58,9 +56,9 @@
             {
 //                _local2 = (_local2 + ShiLianManager.shouHuLeftTimes);
             }
-            var _local1 = (_local2 > 0);
+            var _local1:Boolean = _local2 > 0;
             imgIcon.visible = _local1;
-            lbNum.text = ((_local1) ? (_local2 + "") : "");
+            lbNum.text = _local1 ? _local2 + "" : "";
             if (_local1)
             {
                 this.playEffect();

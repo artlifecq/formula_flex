@@ -38,7 +38,7 @@ package com.rpgGame.app.ui.main.dungeon
 		override protected function onStageResize(sw : int, sh : int) : void
 		{
 			this.x = sw - this._stateSkin.width;
-			this.y = (sh- this._stateSkin.height)>>1;
+			this.y = 273;
 		}
 		
 		private function setBoxState(state:Boolean):void

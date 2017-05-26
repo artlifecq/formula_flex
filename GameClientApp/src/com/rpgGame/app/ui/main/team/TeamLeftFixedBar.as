@@ -14,7 +14,7 @@ package  com.rpgGame.app.ui.main.team
 	
 	import org.mokylin.skin.mainui.duiwu.DuiWu_Skin;
 	
-	import starling.events.Event;
+	import away3d.events.Event;
 	
 	public class TeamLeftFixedBar extends SkinUI
 	{

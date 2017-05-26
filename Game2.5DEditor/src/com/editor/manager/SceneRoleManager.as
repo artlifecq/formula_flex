@@ -48,10 +48,21 @@ package com.editor.manager
 		}
 
 		private var _previewEntity : SceneRole;
+		
 		private var _unitTestEntity : SceneRole;
+		
 		private var _scenePreviewEntity : SceneRole;
+		
+		/**
+		 * 场景中的主角，用来做向导用的 
+		 */		
 		private var _targetPlayer : SceneRole;
 
+		/**
+		 * 右上角小窗口的角色，用来预览avatar，半身像的 
+		 * @return 
+		 * 
+		 */		
 		public function get previewEntity() : SceneRole
 		{
 			return _previewEntity;
@@ -82,6 +93,9 @@ package com.editor.manager
 			_scenePreviewEntity.position = pos;
 		}
 
+		/**
+		 * 场景中的主角，用来做向导用的 
+		 */
 		public function get targetPlayer() : SceneRole
 		{
 			return _targetPlayer;
@@ -125,15 +139,18 @@ package com.editor.manager
 		}
 
 		public static const DEFAULT_BODY_RES_ID : String = "pc/body/binjia_skin";//"cameraFocus/player"; //"jiruqianlong/jrql_finish_awd";//"cameraFocus/chushi";
+		public static const DEFAULT_BODY_ANIMATOR_ID : String = "pc/body/binjia_animat";
 
 		private function createCameraTarget() : void
 		{
 			var role : SceneRole = SceneRole.create(SceneCharType.PLAYER, 0);
             role.isMainChar = true;
+			
 			_targetPlayer = role;
+			
 			var data : RoleData = new RoleData();
-			data.name = "";
-			data.avatarInfo.setBodyResID(DEFAULT_BODY_RES_ID, null);
+			data.name = "向导角色";
+			data.avatarInfo.setBodyResID(DEFAULT_BODY_RES_ID, DEFAULT_BODY_ANIMATOR_ID);
 			data.sizeScale = 1;
 			role.data = data;
 			role.canRemoved = false;

@@ -51,7 +51,7 @@ package com.game.engine2D.vo
 		{
 			_posScale.x = val;
 		}
-		
+
 		override public function set scaleY(val:Number):void
 		{
 			_posScale.y = val;
@@ -125,7 +125,7 @@ package com.game.engine2D.vo
 		{
 			super.y = -val;
 		}
-		
+
 		public function reSet($parameters:Array):void
 		{
 			this.x = this.y = this.z = 0;

@@ -6,6 +6,8 @@ package com.rpgGame.app.graphics
 	import com.rpgGame.coreData.role.SceneDropGoodsData;
 	import com.rpgGame.coreData.type.AttachDisplayType;
 	import com.rpgGame.coreData.type.SceneCharType;
+	
+	import flash.geom.Rectangle;
 
 	public class DropItemHeadFace extends BaseHeadFace
 	{
@@ -87,8 +89,8 @@ package com.rpgGame.app.graphics
 		override protected function updateShowAndHide() : void
 		{
 			var nameVisible:Boolean = (_dropdata.qitem.q_showDrop_name==1);
-			showAndHideElement(_nameBar, _isSelected || nameVisible);
 			showAndHideElement(_back, _isSelected || nameVisible);
+			showAndHideElement(_nameBar, _isSelected || nameVisible);
 			addBackandUpdataState();
 		}
 		override protected function updateAllBarPosition() : void
@@ -97,13 +99,15 @@ package com.rpgGame.app.graphics
 			if (_nameBar != null) //名字位置
 			{
 				_nameBar.x = int(-_nameBar.realWidth * 0.5);
-				_nameBar.y = int(-15 - _nameBar.realHeight);
+				_nameBar.y = int(-10 - _nameBar.realHeight);
 			}
 			
 			if(_back != null)
 			{
+				var range:Rectangle = _nameBar.measureText();
+				_back.setSzie(range.width+40,21);
 				_back.x = int(-_back.realWidth * 0.5);
-				_back.y = int(-15 - _back.realHeight);
+				_back.y = int(-10 - _back.realHeight);
 			}
 			
 			//-------------------更新显示隐藏状态

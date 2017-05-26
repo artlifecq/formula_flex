@@ -4,8 +4,6 @@ package com.rpgGame.appModule.dungeon.genuine
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
-	import com.rpgGame.coreData.cfg.DailyZoneCfgData;
-	import com.rpgGame.coreData.clientConfig.Q_daily_zone;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.type.item.GridBGType;
@@ -16,7 +14,7 @@ package com.rpgGame.appModule.dungeon.genuine
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
-	import starling.events.Event;
+	import away3d.events.Event;
 	
 	import utils.TimerServer;
 	
@@ -59,29 +57,11 @@ package com.rpgGame.appModule.dungeon.genuine
 			}
 			_skin.lbTime.visible = false;
 			playEffect(msg.star);
-			var q_data:Q_daily_zone = DailyZoneCfgData.getZoneCfg(msg.dailyZoneId);
+			_skin.lbJingyan.text =msg.exp.toString();
+			_skin.lbTongqian.text = msg.money.toString();
+			_skin.lbzhenqi.text = msg.zhenqi.toString();
 
-			var itemlist:Array ;
-			if(msg.firstPass==1)
-				itemlist= ItemUtil.jsonParseItemClientList(q_data.q_special_rewards_show); 
-			else
-				itemlist = new Array();
-			var lists:Array = ItemUtil.jsonParse2ObjList(q_data.q_rewards_show);
-			var item:ItemInfo;
-			for(var index:int = 0;index<lists.length;index++)
-			{
-				if(lists[index]["mod"] == 1)
-				{
-					_skin.lbJingyan.text =lists[index]["num"];
-				}else if(lists[index]["mod"] == 4){
-					_skin.lbJingyan.text =lists[index]["num"];
-				}else{
-					item = new ItemInfo();
-					item.itemModelId = lists[index]["mod"];
-					item.num = lists[index]["num"];
-					itemlist.push(ItemUtil.convertClientItemInfo(item));
-				}
-			}
+			var itemlist:Vector.<ItemInfo> = msg.itemInfoList;
 			var length:int = itemlist.length;
 			var startX:Number = (_skin.width-70*length)/2-12;
 			_rewardIcons =new Vector.<IconCDFace>();
@@ -93,7 +73,7 @@ package com.rpgGame.appModule.dungeon.genuine
 				this.addChild(grid);
 				grid.x = startX+70*i;
 				grid.y = 347;
-				FaceUtil.SetItemGrid(grid,itemlist[i], true);
+				FaceUtil.SetItemGrid(grid,ItemUtil.convertClientItemInfo(itemlist[i]), true);
 				_rewardIcons.push(grid);
 			}
 			
@@ -143,7 +123,7 @@ package com.rpgGame.appModule.dungeon.genuine
 		{
 			leftTime--;
 			_skin.lbTime.text=leftTime+"秒后自动退出";
-			if(leftTime<0){
+			if(leftTime<=0){
 				TimerServer.remove(updateTime);
 				DungeonSender.reqQuitDungeon();
 				this.onHide();

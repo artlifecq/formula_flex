@@ -355,7 +355,7 @@ package com.rpgGame.app.manager.task
 		/**是否是主线任务回复npc*/
 		public static function isMainTaskNpc(mid:int):Boolean
 		{
-			if(mainTaskData!=null&&MonsterDataManager.getMonsterModeidByAreaid(mainTaskData.q_finish_npc)==mid)
+			if(mainTaskData!=null&&mainTaskData.q_finish_npc==mid)
 			{
 				return true
 			}
@@ -682,7 +682,7 @@ package com.rpgGame.app.manager.task
 		{
 			if (_mainTaskData)
 			{
-				if (getMainTaskNpcModeId() == npcId)
+				if (getMainTaskNpcAreaId() == npcId)
 				{
 					return true;
 				}

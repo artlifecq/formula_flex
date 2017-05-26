@@ -28,7 +28,7 @@
 	import starling.display.Image;
 	import starling.display.Shape;
 	import starling.display.Sprite;
-	import starling.events.Event;
+	import away3d.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -129,7 +129,7 @@
 			_textField.htmlText = $str;
 			if(_isEditable)
 			{
-				this.dispatchEvent(new starling.events.Event(starling.events.Event.CHANGE));
+				this.dispatchEvent(new away3d.events.Event(away3d.events.Event.CHANGE));
 			}
 			convert();
 		}
@@ -187,7 +187,7 @@
 				cursorIndex += $str.length;
 				_textField.setSelection(cursorIndex,cursorIndex);
 				getCurrentCursorInfo(_cursorInfo);
-				this.dispatchEvent(new starling.events.Event(starling.events.Event.CHANGE));
+				this.dispatchEvent(new away3d.events.Event(away3d.events.Event.CHANGE));
 			}
 			else
 			{
@@ -439,7 +439,7 @@
 		
 		private function onFocusIn(event:FocusEvent):void
 		{
-			this.dispatchEvent(new starling.events.Event(FeathersEventType.FOCUS_IN));
+			this.dispatchEvent(new away3d.events.Event(FeathersEventType.FOCUS_IN));
 		}
 		
 		private function onFocusOut(event:FocusEvent = null):void
@@ -461,7 +461,7 @@
 				addChildAt( _textImage, 0 );
 			}
 			reDrawTextField();
-			this.dispatchEvent(new starling.events.Event(FeathersEventType.FOCUS_OUT));
+			this.dispatchEvent(new away3d.events.Event(FeathersEventType.FOCUS_OUT));
 		}
 		
 		private function onResize(event:flash.events.Event = null):void
@@ -521,7 +521,7 @@
 			}
 			reDrawTextField();
 			_cursorInfo = currentTextInfo;
-			this.dispatchEvent(new starling.events.Event(starling.events.Event.CHANGE));
+			this.dispatchEvent(new away3d.events.Event(away3d.events.Event.CHANGE));
 		}
 		
 		private function convert():void

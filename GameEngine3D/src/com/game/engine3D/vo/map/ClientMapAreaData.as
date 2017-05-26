@@ -16,6 +16,7 @@ package com.game.engine3D.vo.map
 		private var _version : int = 0;
 		
 		public var id : int = 0;
+		public var mapid : int = 0;
 		public var type : int = 0;
 		public var cameraXDeg : int = 0;
 		public var cameraYDeg : int = 0;
@@ -208,7 +209,15 @@ package com.game.engine3D.vo.map
 			}
 			return vector3Ds;
 		}
-		
+		public function getVector2Ds() : Vector.<Vector3D>
+		{
+			var vector3Ds : Vector.<Vector3D> = new Vector.<Vector3D>();
+			for each (var p : Point in points)
+			{
+				vector3Ds.push(new Vector3D(p.x,  p.y,0));
+			}
+			return vector3Ds;
+		}
 		public function getForbidSpells() : Array
 		{
 			return _forbidSpellTypes;

@@ -14,6 +14,8 @@ package feathers.core
 	
 	import avmplus.getQualifiedClassName;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.text.TextFieldTextEditor;
 	import feathers.controls.text.TextFieldTextRenderer;
 	import feathers.events.FeathersEventType;
@@ -28,7 +30,6 @@ package feathers.core
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
-	import starling.events.Event;
 	import starling.utils.MatrixUtil;
 	import starling.utils.Pool;
 
@@ -53,7 +54,7 @@ package feathers.core
 	 *
 	 * @eventType feathers.events.FeathersEventType.INITIALIZE
 	 */
-	[Event(name="initialize",type="starling.events.Event")]
+	[Event(name="initialize",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched after the component has validated for the first time. Both
@@ -77,7 +78,7 @@ package feathers.core
 	 *
 	 * @eventType feathers.events.FeathersEventType.CREATION_COMPLETE
 	 */
-	[Event(name="creationComplete",type="starling.events.Event")]
+	[Event(name="creationComplete",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the width or height of the control changes.
@@ -97,9 +98,9 @@ package feathers.core
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.RESIZE
+	 * @eventType away3d.events.Event.RESIZE
 	 */
-	[Event(name="resize",type="starling.events.Event")]
+	[Event(name="resize",type="away3d.events.Event")]
 
 	/**
 	 * Base class for all UI controls. Implements invalidation and sets up some

@@ -27,7 +27,7 @@ package feathers.core
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 */
-	[Event(name="change",type="starling.events.Event")]
+	[Event(name="change",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the user presses the Enter key while the editor has focus.
@@ -49,7 +49,7 @@ package feathers.core
 	 *
 	 * @eventType feathers.events.FeathersEventType.ENTER
 	 */
-	[Event(name="enter",type="starling.events.Event")]
+	[Event(name="enter",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the text editor receives focus.
@@ -71,7 +71,7 @@ package feathers.core
 	 *
 	 * @eventType feathers.events.FeathersEventType.FOCUS_IN
 	 */
-	[Event(name="focusIn",type="starling.events.Event")]
+	[Event(name="focusIn",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the text editor loses focus.
@@ -93,7 +93,7 @@ package feathers.core
 	 *
 	 * @eventType feathers.events.FeathersEventType.FOCUS_OUT
 	 */
-	[Event(name="focusOut",type="starling.events.Event")]
+	[Event(name="focusOut",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the soft keyboard is activated. Not all text editors will
@@ -116,7 +116,7 @@ package feathers.core
 	 *
 	 * @eventType feathers.events.FeathersEventType.SOFT_KEYBOARD_ACTIVATE
 	 */
-	[Event(name="softKeyboardActivate",type="starling.events.Event")]
+	[Event(name="softKeyboardActivate",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the soft keyboard is deactivated. Not all text editors
@@ -139,7 +139,7 @@ package feathers.core
 	 *
 	 * @eventType feathers.events.FeathersEventType.SOFT_KEYBOARD_DEACTIVATE
 	 */
-	[Event(name="softKeyboardDectivate",type="starling.events.Event")]
+	[Event(name="softKeyboardDectivate",type="away3d.events.Event")]
 
 	/**
 	 * Handles the editing of text.

@@ -2,6 +2,7 @@ package com.rpgGame.appModule.dungeon.multy
 {
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.ui.SkinUIModePanel;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
@@ -18,6 +19,8 @@ package com.rpgGame.appModule.dungeon.multy
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.Button;
 	import feathers.controls.Group;
 	import feathers.controls.ScrollContainer;
@@ -32,7 +35,6 @@ package com.rpgGame.appModule.dungeon.multy
 	import starling.display.DisplayObject;
 	import starling.display.Shape;
 	import starling.display.Sprite;
-	import starling.events.Event;
 
 	public class MultyView extends SkinUIModePanel
 	{
@@ -95,7 +97,8 @@ package com.rpgGame.appModule.dungeon.multy
 			if(zoneData==null||multyData==null)return;
 			if(MainRoleManager.actorInfo.totalStat.level>=zoneData.q_level)
 			{
-				AppManager.showApp(AppConstant.MULTYENTER_PANL);
+				//AppManager.showApp(AppConstant.MULTYENTER_PANL);
+				DungeonSender.reqEnterDungeon(zoneData.q_id);
 			}
 			
 			

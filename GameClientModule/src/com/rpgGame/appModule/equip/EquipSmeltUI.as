@@ -24,6 +24,7 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.TipsCfgData;
 	import com.rpgGame.coreData.cfg.item.EquipWashCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
@@ -62,7 +63,7 @@ package com.rpgGame.appModule.equip
 	import org.mokylin.skin.app.zhuangbei.xilian.Xilian_Skin;
 	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
+	import away3d.events.Event;
 	
 	/**
 	 *装备洗练
@@ -130,7 +131,7 @@ package com.rpgGame.appModule.equip
 			_skin.container.addChild(_skin.lb_num);
 			_useItem.x=730;
 			_useItem.y=130;
-			_skin.lb_cailiao.text="获取途径";
+			_skin.lb_cailiao.text=LanguageConfig.getText(LangUI.UI_TEXT26);
 			
 			useItemInfo=new ClientItemInfo();
 			useItemInfo.itemInfo=new ItemInfo();
@@ -210,13 +211,13 @@ package com.rpgGame.appModule.equip
 					if(getItemSkin(_skin.Item1).chk_suoding.isSelected){
 						getItemSkin(_skin.Item2).chk_suoding.isSelected=!getItemSkin(_skin.Item1).chk_suoding.isSelected;
 					}
-					_leftSkin.lb_yinzi.text=getTitleText("消耗元宝",needMon,userMon);
+					_leftSkin.lb_yinzi.text=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT27),needMon,userMon);
 					break;
 				case _skin.Item2.skin["chk_suoding"]:
 					if(getItemSkin(_skin.Item2).chk_suoding.isSelected){
 						getItemSkin(_skin.Item1).chk_suoding.isSelected=!getItemSkin(_skin.Item2).chk_suoding.isSelected;
 					}
-					_leftSkin.lb_yinzi.text=getTitleText(LanguageConfig.getText("消耗元宝"),needMon,userMon);
+					_leftSkin.lb_yinzi.text=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT27),needMon,userMon);
 					break;
 				case _skin.lb_cailiao:
 					_getPanel.show(useItemInfo.cfgId,"",this._skin.container)
@@ -231,11 +232,11 @@ package com.rpgGame.appModule.equip
 		private function onWash():void
 		{
 			if(!targetEquipInfo){
-				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, "请放入洗炼装备");
+				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, LanguageConfig.getText(LangUI.UI_TEXT28));
 				return;
 			}
 			if(useItemInfo.count<washCfg.q_item_num){
-				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, "洗炼材料不足");
+				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, LanguageConfig.getText(LangUI.UI_TEXT29));
 				return;
 			}
 			
@@ -252,9 +253,9 @@ package com.rpgGame.appModule.equip
 			
 			if(needMon!=0&&!noAlertWash){
 				 var alertOk:AlertSetInfo=new AlertSetInfo(LangUI.UI_TEXT3);//强化成功
-				alertOk.alertInfo.value="本次洗炼消耗元宝:"+needMon;
+				alertOk.alertInfo.value=LanguageConfig.getText(LangUI.UI_TEXT30)+needMon;
 				alertOk.isShowCBox=true;
-				alertOk.alertInfo.checkText="不再提示!";
+				alertOk.alertInfo.checkText=LanguageConfig.getText(LangUI.UI_TEXT31);
 				alertOk.alertInfo.align="left";
 				GameAlert.showAlert(alertOk,onAlert,[type]);
 				return;
@@ -361,7 +362,7 @@ package com.rpgGame.appModule.equip
 				}
 				
 //				_useItem.setSubString(useItemInfo.count+"/"+washCfg.q_item_num);
-				_skin.lb_cailiao.text="获取途径";
+				_skin.lb_cailiao.text=LanguageConfig.getText(LangUI.UI_TEXT26);
 				_useItem.countText.text="";
 				_skin.lb_item1.color=ItemConfig.getItemQualityColor(targetEquipInfo.cfgId);
 				_skin.lb_item2.color=ItemConfig.getItemQualityColor(useItemInfo.cfgId);
@@ -369,12 +370,12 @@ package com.rpgGame.appModule.equip
 				_skin.lb_item2.text=useItemInfo.name;
 				_skin.lb_num.text=useItemInfo.count+"/"+washCfg.q_item_num;
 				if(useItemInfo.count<washCfg.q_item_num){
-					_skin.lb_num.color=0xd02525;
+					_skin.lb_num.color=StaticValue.UI_RED1;
 				}else{
-					_skin.lb_num.color=0x25931b;
+					_skin.lb_num.color=StaticValue.Q_GREEN;
 				}
 				
-				_leftSkin.lb_yinzi.text=getTitleText(LanguageConfig.getText("消耗元宝"),needMon,userMon);
+				_leftSkin.lb_yinzi.text=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT27),needMon,userMon);
 				
 			}else{
 				changeAttState(_skin.Item1,false);
@@ -383,7 +384,7 @@ package com.rpgGame.appModule.equip
 				_skin.lb_item1.text="";
 				_skin.lb_item2.text="";
 				_skin.lb_cailiao.text="";
-				_leftSkin.lb_yinzi.text=getTitleText("消耗元宝",0);
+				_leftSkin.lb_yinzi.text=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT27),0);
 			}
 			
 			_goodsContainerTarget.dataProvider.updateAll();
@@ -401,16 +402,16 @@ package com.rpgGame.appModule.equip
 			}
 			var des:String="";
 			if(value<=value1){
-				des=noSlip?HtmlTextUtil.getTextColor(0x55BD15,value):HtmlTextUtil.getTextColor(0x55BD15,value+"/"+value1);//绿色
+				des=noSlip?HtmlTextUtil.getTextColor(StaticValue.UI_GREEN1,value):HtmlTextUtil.getTextColor(StaticValue.UI_GREEN1,value+"/"+value1);//绿色
 			}else{
-				des=noSlip?HtmlTextUtil.getTextColor(0xd02525,value):HtmlTextUtil.getTextColor(0xd02525,value+"/"+value1);//红色
+				des=noSlip?HtmlTextUtil.getTextColor(StaticValue.UI_RED1,value):HtmlTextUtil.getTextColor(StaticValue.UI_RED1,value+"/"+value1);//红色
 			}
 			return title+":"+des;
 		}
 		
 		private function changeAttState(Item:SkinnableContainer,state:Boolean):void
 		{
-				getItemSkin(Item).lb_name.text="属性:";
+				getItemSkin(Item).lb_name.text=LanguageConfig.getText(LangUI.UI_TEXT32);
 				getItemSkin(Item).chk_suoding.isSelected=state;
 				getItemSkin(Item).chk_suoding.visible=state;
 				getItemSkin(Item).lb_yuanbao.visible=state;

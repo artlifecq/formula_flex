@@ -22,7 +22,7 @@ package com.rpgGame.appModule.mail
 	import org.mokylin.skin.app.mail.MailReceive_Skin;
 	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
+	import away3d.events.Event;
 	
 	/**邮件系统*/
 	public class MailPanelExt extends SkinUIPanel

@@ -50,6 +50,8 @@ package com.rpgGame.app.cmdlistener
 			EventManager.dispatchEvent(DungeonEvent.UPDATA_DAILYZONE_ENDINFO,msg.success,msg.star);
 			if(msg.success==1){
 				AppManager.showApp(AppConstant.DAILY_DUNGEON_SUCCESS,msg);
+			}else if(msg.success == -1){
+				AppManager.showApp(AppConstant.ZONEDIE_PANEL);
 			}else{
 				AppManager.showApp(AppConstant.SWORD_RESULT_FAIL);
 			}

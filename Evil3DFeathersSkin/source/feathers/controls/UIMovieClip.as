@@ -9,7 +9,7 @@ package feathers.controls
 	import feathers.themes.GuiThemeStyle;
 	import feathers.themes.ThemeLoader;
 	
-	import starling.events.Event;
+	import away3d.events.Event;
 	import starling.textures.IStarlingTexture;
 	
 	import utils.TimerServer;
@@ -51,8 +51,8 @@ package feathers.controls
 		public function UIMovieClip()
 		{
 			_frameTime = 1000/_fps;
-			this.addEventListener(starling.events.Event.ADDED_TO_STAGE, onAddedToStage);
-			this.addEventListener(starling.events.Event.REMOVED_FROM_STAGE, onRemoveFromStage);
+			this.addEventListener(away3d.events.Event.ADDED_TO_STAGE, onAddedToStage);
+			this.addEventListener(away3d.events.Event.REMOVED_FROM_STAGE, onRemoveFromStage);
 		}
 		
 		/**
@@ -112,7 +112,7 @@ package feathers.controls
 		 *  设置皮肤
 		 * @param value String
 		 * 1. 已存在纹理集里的key
-		 * 2. 外部url,动态加载,加载完成后将发送Starling.events.Event(Event.COMPLETE)事件
+		 * 2. 外部url,动态加载,加载完成后将发送away3d.events.Event(Event.COMPLETE)事件
 		 * 
 		 */	
 		private var _mcStyle:String;
@@ -181,7 +181,7 @@ package feathers.controls
 				checkLoad();
 			}else
 			{
-				this.addEventListener(starling.events.Event.ADDED_TO_STAGE, onAddedToStage);
+				this.addEventListener(away3d.events.Event.ADDED_TO_STAGE, onAddedToStage);
 			}
 		}
 		
@@ -264,7 +264,7 @@ package feathers.controls
 		{
 			_isLoaded = true;
 			if(_isPlaying || (_autoPlay && stage != null))play();
-			this.dispatchEventWith(starling.events.Event.COMPLETE);
+			this.dispatchEventWith(away3d.events.Event.COMPLETE);
 		}
 		
 		private function onThemeLoaded(loader:ThemeLoader):void
@@ -484,8 +484,8 @@ package feathers.controls
 			stop();
 			TimerServer.remove(_loadNow);
 			
-			this.removeEventListener(starling.events.Event.ADDED_TO_STAGE, onAddedToStage);
-			this.removeEventListener(starling.events.Event.REMOVED_FROM_STAGE, onRemoveFromStage);
+			this.removeEventListener(away3d.events.Event.ADDED_TO_STAGE, onAddedToStage);
+			this.removeEventListener(away3d.events.Event.REMOVED_FROM_STAGE, onRemoveFromStage);
 			
 			_frameLabels = null;
 			_frameStyles = null;
