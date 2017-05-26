@@ -28,7 +28,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_trigger_area_id:int;
 		 /**  怪物触发ID(只支持状态触发) */
 		public var q_monsterId:int;
-		 /**  怪物触发状态(0进入战斗状态，1退出战斗状态) */
+		 /**  怪物触发状态(1进入战斗状态，2退出战斗状态) */
 		public var q_monsterState:int;
 		 /**  生成区域阻挡ID列表20103,20104 */
 		public var q_area_id:String;
@@ -48,6 +48,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_x:int;
 		 /**  传送Y坐标 */
 		public var q_y:int;
+		 /**  重置触发ID列表 */
+		public var q_reset_triggers:String;
 
 	}
 }
