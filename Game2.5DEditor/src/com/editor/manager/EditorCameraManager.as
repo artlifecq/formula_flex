@@ -248,13 +248,13 @@ package com.editor.manager
 			{
 				if (SceneManager.getInstance().mapId == 0)
 				{
-					scene.cameraNear = scene.sceneMapLayer.cameraNear;
-					scene.cameraFar = scene.sceneMapLayer.cameraFar;
+					scene.cameraNear = -100000;
+					scene.cameraFar = 100000;
 				}
 				else
 				{
-					scene.cameraNear = 100;
-					scene.cameraFar = 10000000;
+					scene.cameraNear = -100000;
+					scene.cameraFar = 100000;
 				}
 			}
 			updateCameraBokehDepth();
