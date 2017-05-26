@@ -5,16 +5,16 @@ package com.rpgGame.coreData.cfg
 	import flash.utils.ByteArray;
 	
 	import org.client.mainCore.ds.HashMap;
-
+	
 	public class ActivityBarCfgData
 	{
-
+		
 		private static var _map:HashMap;
-
+		
 		public function ActivityBarCfgData()
 		{
 		}
-
+		
 		public static function setup( byte:ByteArray ):void
 		{
 			var _list:Array = byte.readObject();
@@ -24,7 +24,7 @@ package com.rpgGame.coreData.cfg
 				_map.add( info.id, info );
 			}
 		}
-
+		
 		/**
 		 * 根据功能id获取活动条的信息
 		 * @param id

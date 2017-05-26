@@ -3,10 +3,12 @@ package com.rpgGame.app.ui.main.chat
 	import com.rpgGame.app.manager.chat.ChatManager;
 	import com.rpgGame.app.richText.component.RichTextArea3D;
 	import com.rpgGame.core.events.ChatEvent;
+	import com.rpgGame.core.events.HintEvent;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
 	import com.rpgGame.coreData.utils.ColorUtils;
 	import com.rpgGame.netData.chat.message.ResChatMessage;
+	import com.rpgGame.netData.player.message.SCNoticeMessage;
 	
 	import flash.text.TextFormat;
 	import flash.text.TextFormatAlign;
@@ -83,7 +85,7 @@ package com.rpgGame.app.ui.main.chat
 				_msgTxt.appendRichText( ChatUtil.getHTMLSystemMsg( _currentMsg[i]));
 			}
 		}
-
+		
 		private function initType():void
 		{
 			_isShowAll=true;
@@ -93,6 +95,7 @@ package com.rpgGame.app.ui.main.chat
 		private function initEvent():void
 		{
 			EventManager.addEvent(ChatEvent.SEND_SUCCESS, onSendSuccess);
+			EventManager.addEvent(HintEvent.BATTLE_HINT,onNoticeMessage);
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void 
@@ -100,22 +103,22 @@ package com.rpgGame.app.ui.main.chat
 			CONFIG::netDebug {
 				NetDebug.LOG("[ChatBar] [onTouchTarget] targetName:" + target.name);
 			}
-			
-			switch (target) {
-				case this._skin.btn_jia:
-					changeShowStage();
-					break;
-				case this._skin.btn_jian:
-					changeShowStage();
-					break;
-				case this._skin.btn_xiangxi:
-					if(detailPanel.parent){
-						detailPanel.hide();
-						return;
-					}
-					detailPanel.show();
-					break;
-			}
+				
+				switch (target) {
+					case this._skin.btn_jia:
+						changeShowStage();
+						break;
+					case this._skin.btn_jian:
+						changeShowStage();
+						break;
+					case this._skin.btn_xiangxi:
+						if(detailPanel.parent){
+							detailPanel.hide();
+							return;
+						}
+						detailPanel.show();
+						break;
+				}
 		}
 		
 		private function changeShowStage():void
@@ -159,6 +162,11 @@ package com.rpgGame.app.ui.main.chat
 				ChatManager.recordSystemHearsayMsg(info);
 				showChatMsg( info );	
 			}
+		}
+		
+		private function onNoticeMessage(msg:SCNoticeMessage):void
+		{
+			
 		}
 		
 		private function showChatMsg( info:ResChatMessage ):void
