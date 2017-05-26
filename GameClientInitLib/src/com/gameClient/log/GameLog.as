@@ -1,6 +1,7 @@
 package com.gameClient.log
 {
-    import away3d.log.LogItem;
+	import away3d.log.LogItem;
+    
     
 	public class GameLog
 	{

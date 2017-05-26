@@ -1,7 +1,14 @@
 package com.rpgGame.app.ui.main.chat
 {
+	import com.rpgGame.app.manager.chat.ChatGoodsManager;
+	import com.rpgGame.app.manager.chat.ChatManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.richText.RichTextCustomLinkType;
+	import com.rpgGame.app.richText.RichTextCustomUtil;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.StaticValue;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.lang.LangChat;
 	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
 	import com.rpgGame.coreData.type.chat.EnumChatTabsType;
@@ -9,19 +16,24 @@ package com.rpgGame.app.ui.main.chat
 	import com.rpgGame.netData.chat.message.ResChatMessage;
 	
 	import flash.utils.ByteArray;
-
+	
 	public class ChatUtil
 	{
-
+		
 		/**
 		 * 在聊天框里显示
 		 * @param channel
 		 * @return
 		 *
 		 */
-		public static function getChatMessageByChannel(channel : int,message:String) : String
+		public static function getChatMessageByChannel(channel : int,name:String,message:String) : String
 		{
-			return HtmlTextUtil.getTextColor(getChannelColor(channel), "【" + ChatUtil.getChannelTitle(channel) + "】" + message);
+			switch(channel)
+			{
+				case EnumChatChannelType.CHAT_CHANNEL_LABA:
+					return HtmlTextUtil.getTextColor(0xf7ff15,"【" + ChatUtil.getChannelTitle(channel) + "】"+HtmlTextUtil.underLine(name)+": ")+HtmlTextUtil.getTextColor(0xd7d7d7,message);
+			}
+			return "";//HtmlTextUtil.getTextColor(getChannelColor(channel), "【" + ChatUtil.getChannelTitle(channel) + "】" + message);
 		}
 		
 		/**
@@ -32,9 +44,74 @@ package com.rpgGame.app.ui.main.chat
 		 */
 		public static function getHTMLChatMessage(msgInfo:ResChatMessage):String
 		{
-			var chatHtml:String="【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+HtmlTextUtil.underLine(msgInfo.name)+": "+msgInfo.chatText;
-			chatHtml=HtmlTextUtil.getTextColor(getChannelColor(msgInfo.type),chatHtml);
-			return chatHtml;
+			var str:String=replaceItemShow(msgInfo);
+			
+			switch(msgInfo.type)
+			{
+				case EnumChatChannelType.CHAT_CHANNEL_SYSTEM:				
+					return HtmlTextUtil.getTextColor(0xFFFFFF,"【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+HtmlTextUtil.underLine(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.ToGID()))+": ")+HtmlTextUtil.getTextColor(0xFFFFFF,str);
+					
+				case EnumChatChannelType.CHAT_CHANNEL_WORLD:				
+					return HtmlTextUtil.getTextColor(0xdfb612,"【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+HtmlTextUtil.underLine(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.ToGID()))+": ")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
+					
+				case EnumChatChannelType.CHAT_CHANNEL_NORMAL:
+					return HtmlTextUtil.getTextColor(0xcdcb9d,"【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+HtmlTextUtil.underLine(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.ToGID()))+": ")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
+					
+				case EnumChatChannelType.CHAT_CHANNEL_PARTY:
+					return HtmlTextUtil.getTextColor(0x18b2cf,"【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+HtmlTextUtil.underLine(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.ToGID()))+": ")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
+					
+				case EnumChatChannelType.CHAT_CHANNEL_TEAM:
+					return HtmlTextUtil.getTextColor(0x2dcfab,"【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+HtmlTextUtil.underLine(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.ToGID()))+": ")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
+					
+				case EnumChatChannelType.CHAT_CHANNEL_LABA:
+					return HtmlTextUtil.getTextColor(0xf7ff15,"【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+HtmlTextUtil.underLine(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.ToGID()))+": ")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
+					
+				case EnumChatChannelType.CHAT_CHANNEL_KUA_FU:
+					return HtmlTextUtil.getTextColor(0xFFFFFF,"【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+HtmlTextUtil.underLine(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.ToGID()))+": ")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
+					
+				case EnumChatChannelType.CHAT_CHANNEL_SILIAO:
+				{
+					if(msgInfo.playerId.ToGID()==MainRoleManager.actorID)
+					{
+						return HtmlTextUtil.getTextColor(0xe58bff,"【" + ChatUtil.getChannelTitle(msgInfo.type) + "】")+HtmlTextUtil.getTextColor(0xFFFFFF,"你对")+HtmlTextUtil.getTextColor(0xe58bff,HtmlTextUtil.underLine(replacePlayerShow(ChatManager.currentSiLiaoTargetName,0xFFFFFF,msgInfo.playerId.ToGID())))+HtmlTextUtil.getTextColor(0xFFFFFF,"说 : ")+HtmlTextUtil.getTextColor(0xe58bff,str);
+					}
+					else
+						return HtmlTextUtil.getTextColor(0xe58bff,"【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+HtmlTextUtil.underLine(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.ToGID())))+HtmlTextUtil.getTextColor(0xFFFFFF,"对你说 : ")+HtmlTextUtil.getTextColor(0xe58bff,str);
+				}
+					
+				case EnumChatChannelType.CHAT_CHANNEL_NOTICE:
+					return HtmlTextUtil.getTextColor(0xFFFFFF,"【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+HtmlTextUtil.underLine(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.ToGID()))+": ")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
+					
+				case EnumChatChannelType.CHAT_CHANNEL_HEARSAY:
+					return HtmlTextUtil.getTextColor(0xFFFFFF,"【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+HtmlTextUtil.underLine(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.ToGID()))+": ")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
+			}
+			return "";
+		}
+		
+		public static function replacePlayerShow(name:String,color:*,uiseId:Number):String
+		{
+			var str:String=name;
+			str = RichTextCustomUtil.getTextLinkCode(name,color,RichTextCustomLinkType.ROLE_NAME_TYPE,uiseId.toString());
+			return str;
+		}
+		
+		public static function replaceItemShow(info:ResChatMessage):String
+		{
+			var str:String=info.chatText;
+			if(info.extraResInfo.itemInfos!=null){
+				for(var i:int=0;i<info.extraResInfo.itemInfos.length;i++)
+				{
+					var cinfo:ClientItemInfo=  ItemUtil.convertClientItemInfo(info.extraResInfo.itemInfos[i].itemInfos);
+					if(cinfo)
+					{
+						var key:String = ChatGoodsManager.addItemInfo(cinfo);
+						var goodsCode:String = RichTextCustomUtil.getItemCode(key,cinfo.name,cinfo.quality);
+						str=str.replace(ChatManager.MSG_GOODS_CODE,goodsCode);
+					}
+				}
+			}
+			
+			return str;
 		}
 		
 		public static function getHTMLSystemMsg(msgInfo:ResChatMessage):String
@@ -43,7 +120,7 @@ package com.rpgGame.app.ui.main.chat
 			chatHtml=HtmlTextUtil.getTextColor(getChannelColor(msgInfo.type),chatHtml);
 			return chatHtml;
 		}
-
+		
 		public static function getChannelColor(channelType : int) : uint
 		{
 			switch (channelType)
@@ -71,7 +148,7 @@ package com.rpgGame.app.ui.main.chat
 			}
 			return StaticValue.COLOR_CODE_1;
 		}
-
+		
 		/**
 		 * 根据聊天页签类型获得页签名称
 		 * @param channelType
@@ -143,13 +220,13 @@ package com.rpgGame.app.ui.main.chat
 			}
 			return info;
 		}
-
+		
 		public static function getCheckTitle(channelType : int):String
 		{
 			var info : String = "接收" + getChannelTitle(channelType) + "频道信息";
 			return info;
 		}
-
+		
 		//---------------------------------------------------------------
 		/**
 		 * 去除头尾空白
@@ -163,7 +240,7 @@ package com.rpgGame.app.ui.main.chat
 			var r2 : RegExp = /\s*$/g;
 			return str.replace(r1, "").replace(r2, "");
 		}
-
+		
 		/**
 		 * 搜索中不能有空格，最大14个字节
 		 * @param str
@@ -200,7 +277,7 @@ package com.rpgGame.app.ui.main.chat
 			}
 			return info;
 		}
-
+		
 		/**
 		 * 得到限定字符长度的字符
 		 * @param _info
@@ -211,7 +288,7 @@ package com.rpgGame.app.ui.main.chat
 		public static function getStrByByteLen(_info : String, maxlen : int = 96) : String
 		{
 			_info = trim(_info);
-
+			
 			var info : String = "";
 			var len : int = _info.length;
 			for (var i : int = 0; i < len; i++)
@@ -224,7 +301,7 @@ package com.rpgGame.app.ui.main.chat
 			}
 			return info;
 		}
-
+		
 		/**
 		 * 得到字符串的字节长度
 		 * @param	info
@@ -234,7 +311,7 @@ package com.rpgGame.app.ui.main.chat
 		{
 			return toByteArray(info).length;
 		}
-
+		
 		/**
 		 * 将字符串长度
 		 * @param	info
