@@ -51,9 +51,11 @@ package com.rpgGame.appModule.dungeon.multy
 		{
 			super(FuBen_DuoRen_Skin,"多人副本",1);
 		}
-		
+		private var key:Boolean=false;//临时加的key
 		override protected function initialize():void
 		{
+			if(key)return;
+			key=true;
 			_skin = _uiskin as FuBen_DuoRen_Skin;
 			initScroll();
 			creatDungeonItem();
@@ -97,7 +99,7 @@ package com.rpgGame.appModule.dungeon.multy
 			if(zoneData==null||multyData==null)return;
 			if(MainRoleManager.actorInfo.totalStat.level>=zoneData.q_level)
 			{
-				//AppManager.showApp(AppConstant.MULTYENTER_PANL);
+				//AppManager.showApp(AppConstant.MULTY_ENTERTIME_PANL);
 				DungeonSender.reqEnterDungeon(zoneData.q_id);
 			}
 			
@@ -181,7 +183,7 @@ package com.rpgGame.appModule.dungeon.multy
 			var multyData:Q_zone_multy=ZoneMultyCfgData.getZoneMultyByID(zid);
 			if(zoneData==null||multyData==null)return;
 			//
-			_skin.uiName.styleName="ui/dungeon/"+multyData.q_resurl+"/name.png";
+			_skin.uiName.styleName="ui/app/fuben/duorenfuben/fuben_name/"+multyData.q_resurl+"/name.png";
 			_skin._info_text.htmlText=zoneData.q_desc;
 			_skin.lbRenshu.htmlText=zoneData.q_min_num+"-"+zoneData.q_max_num;
 			_skin.lbDengji.htmlText=MainRoleManager.actorInfo.totalStat.level>=zoneData.q_level?zoneData.q_level.toString():"<font color='#e1201c'>"+zoneData.q_level+"</font>";
@@ -345,10 +347,10 @@ package com.rpgGame.appModule.dungeon.multy
 			temp.btnSelect.name="select_"+id+"_"+zid;
 			temp.btnSelect.visible=true;
 			temp.grpIcon.visible=false;
-			temp.uiName1.styleName="ui/dungeon/"+multyData.q_resurl+"/up.png";
-			temp.uiName2.styleName="ui/dungeon/"+multyData.q_resurl+"/select.png";
-			temp.imgBg_out.styleName="ui/dungeon/"+multyData.q_resurl+"/up.jpg";
-			temp.imgBg_select.styleName="ui/dungeon/"+multyData.q_resurl+"/select.jpg";
+			temp.uiName1.styleName="ui/app/fuben/duorenfuben/fuben_name/"+multyData.q_resurl+"/up.png";
+			temp.uiName2.styleName="ui/app/fuben/duorenfuben/fuben_name/"+multyData.q_resurl+"/select.png";
+			temp.imgBg_out.styleName="ui/big_bg/fuben/duorenfuben/fuben_bg/"+multyData.q_resurl+"/up.jpg";
+			temp.imgBg_select.styleName="ui/big_bg/fuben/duorenfuben/fuben_bg/"+multyData.q_resurl+"/select.jpg";
 			temp.lbNum.text="";
 			var ico:IconCDFace; 
 			var item:Q_item;

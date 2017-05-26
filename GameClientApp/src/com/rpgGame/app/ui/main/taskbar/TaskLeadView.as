@@ -70,7 +70,7 @@ package com.rpgGame.app.ui.main.taskbar
 			skinList.push(_skin.pri_killbut3);
 			skinList.push(_skin.pri_ico0);
 			skinList.push(_skin.pri_ico3);
-			
+			skinList.push(_skin.btnContinue);
 			titleLable=_skin.pri_title;
 			navi1Lable=_skin.pri_navi1;
 			navi2Lable=_skin.pri_navi2;
@@ -264,6 +264,9 @@ package com.rpgGame.app.ui.main.taskbar
 					count=i;
 				}
 			}
+			_skin.uibg.height=_skin.btnContinue.y+37;
+			
+			
 			for(i=0;i<3;i++)
 			{
 				if(icoBgList[i].visible==true)

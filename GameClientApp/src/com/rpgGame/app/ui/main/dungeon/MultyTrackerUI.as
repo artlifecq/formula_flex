@@ -9,6 +9,8 @@ package com.rpgGame.app.ui.main.dungeon
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.DungeonEvent;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.DailyZoneMonsterCfgData;
@@ -93,6 +95,7 @@ package com.rpgGame.app.ui.main.dungeon
 					break;
 				case "sec_subbut1":
 					DungeonSender.zoneOutToGame();
+					//setOutResult();
 					break;
 			}
 			
@@ -141,7 +144,7 @@ package com.rpgGame.app.ui.main.dungeon
 			EventManager.addEvent(DungeonEvent.ZONE_REMAIN_TIME,setTime);//副本时间
 			EventManager.addEvent(DungeonEvent.ZONE_SKILL_INFOS,setKillInfo);//击杀列表
 			EventManager.addEvent(DungeonEvent.ZONE_SKILL_INFO,setKillInfo);//击杀列表
-			
+			EventManager.addEvent(DungeonEvent.ZONE_OUT_RESULT,setOutResult);//击杀列表
 		}
 		private function enterZone():void
 		{
@@ -168,6 +171,7 @@ package com.rpgGame.app.ui.main.dungeon
 		{
 			enterZone();
 			setTageText();
+			setUisite();
 		}
 		private function setTitle():void
 		{
@@ -220,7 +224,7 @@ package com.rpgGame.app.ui.main.dungeon
 				}
 			}
 			
-			
+			setUisite();
 		}
 		/**设置任务目标内容*/
 		public function setGoalInfo(type:int,describe:String,finisstr:String,subList:Vector.<TaskSubRateInfo>,txtButList:Vector.<SkinnableContainer>):void
@@ -349,6 +353,10 @@ package com.rpgGame.app.ui.main.dungeon
 				TimerServer.remove(updateTime);
 			}
 		}
+		private function setOutResult():void
+		{
+			AppManager.showApp(AppConstant.MULTY_EXITTIME_PANL);
+		}
 		
 		/**设置UI位置*/
 		private function setUisite():void
@@ -420,7 +428,7 @@ package com.rpgGame.app.ui.main.dungeon
 			skinList.push(_skin.sec_subbut1);
 			var i:int;
 			killButList=new Vector.<SkinnableContainer>();
-			for(i=0;i<4;i++)
+			for(i=0;i<5;i++)
 			{
 				killButList.push(_skin["killbut_"+i]);
 			}

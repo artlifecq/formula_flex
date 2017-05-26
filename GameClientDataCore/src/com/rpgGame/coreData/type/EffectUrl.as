@@ -25,7 +25,7 @@ package com.rpgGame.coreData.type
 		
 		
 		/**小地图寻路终点特效**/
-		public static const XUN_LU_END_POINT_EFFECT : String = "ui_xunlu";
+		public static const XUN_LU_END_POINT_EFFECT : String = "dianji";
 		/**完成任务特效**/
 		public static const COMPLETE_TASK_EFFECT : String = "ui_renwushuaxin";
 		/**切场景特效**/

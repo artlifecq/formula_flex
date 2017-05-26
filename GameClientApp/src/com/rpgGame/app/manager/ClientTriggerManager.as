@@ -109,6 +109,12 @@ package com.rpgGame.app.manager
 				{
 					triggerClearSceneEffect(triggerData);
 				}
+				if(triggerData.resetTriggers!=null&&triggerData.resetTriggers.length>0)
+				{
+					clearTigerList(triggerData.resetTriggers);
+					
+				}
+				
 				/*switch (triggerData.triggerType)
 				{
 					case TriggerTypeEnum.SCENE_ADD_OBSTACLE: //触发生成动态阻挡 
@@ -186,6 +192,14 @@ package com.rpgGame.app.manager
 							}
 						}
 					}
+					/*if(triggerData.resetTriggers!=null&&triggerData.resetTriggers.length>0)
+					{
+						for(j=0;j<triggerData.resetTriggers.length;j++)
+						{
+							clearTigerByZone(triggerData.resetTriggers[j]);
+						}
+						
+					}*/
 				}
 			}
 			
@@ -254,7 +268,19 @@ package com.rpgGame.app.manager
 				triger.isTrigging=false;
 			}
 		}
-		
+		private static function clearTigerList(triggers:Array) : void
+		{
+			var triger:ClientTrigger;
+			for(var i:int=0;i<triggers.length;i++)
+			{
+				triger=TriggerCfgData.getClientTrigger(triggers[i]);
+				if(triger)
+				{
+					_isTrigging[triger.id]=false;
+					triger.isTrigging=false;
+				}
+			}
+		}
 		
 		
 		
@@ -584,12 +610,12 @@ package com.rpgGame.app.manager
 							}
 							if (index > -1)
 							{
-								sceneRole.dialogFace.addWordFrame(RenderUnitType.HAIR, RenderUnitID.HAIR,contents[index], clientDialog.duration);
+								sceneRole.dialogFace.addWordFrame(RenderUnitType.BODY, RenderUnitID.BODY,contents[index], clientDialog.duration);
 							}
 						}
 						else
 						{
-							sceneRole.dialogFace.addWordFrame(RenderUnitType.HAIR, RenderUnitID.HAIR,contents[0], clientDialog.duration);
+							sceneRole.dialogFace.addWordFrame(RenderUnitType.BODY, RenderUnitID.BODY,contents[0], clientDialog.duration);
 						}
 					}
 				}
@@ -629,13 +655,13 @@ package com.rpgGame.app.manager
 						var sceneRoles : Vector.<SceneRole> = SceneManager.getSceneRolesByModelId(clientDialog.npcModelId);
 						for each (sceneRole in sceneRoles)
 						{
-							sceneRole.dialogFace.addWordFrame(RenderUnitType.HAIR, RenderUnitID.HAIR,clientDialog.content, clientDialog.duration);
+							sceneRole.dialogFace.addWordFrame(RenderUnitType.BODY, RenderUnitID.BODY,clientDialog.content, clientDialog.duration);
 						}
 					}
 					else
 					{
 						sceneRole = MainRoleManager.actor;
-						sceneRole.dialogFace.addWordFrame(RenderUnitType.HAIR, RenderUnitID.HAIR,clientDialog.content, clientDialog.duration);
+						sceneRole.dialogFace.addWordFrame(RenderUnitType.BODY, RenderUnitID.BODY,clientDialog.content, clientDialog.duration);
 					}
 				}
 				else

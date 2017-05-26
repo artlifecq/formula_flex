@@ -45,6 +45,8 @@ package com.rpgGame.coreData.cfg
 				triger.sceneEffectIds=JSONUtil.decode(info.q_effectIds);
 				triger.obstacleAreaRemove=JSONUtil.decode(info.q_area_remove_id);
 				triger.sceneEffectRemove=JSONUtil.decode(info.q_remove_effectIds);
+				triger.resetTriggers=JSONUtil.decode(info.q_reset_triggers);
+				
 				if(info.q_trigger_type==1)
 				{
 					qarea=AreaCfgData.getAreaByID(info.q_trigger_area_id);
