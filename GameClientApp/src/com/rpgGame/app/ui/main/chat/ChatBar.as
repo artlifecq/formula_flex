@@ -13,7 +13,10 @@ package com.rpgGame.app.ui.main.chat {
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.CrossSender;
 	import com.rpgGame.app.ui.main.chat.laba.VipChatCanvas;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.ChatEvent;
+	import com.rpgGame.core.events.LookEvent;
 	import com.rpgGame.core.events.SceneInteractiveEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
@@ -22,9 +25,11 @@ package com.rpgGame.app.ui.main.chat {
 	import com.rpgGame.coreData.clientConfig.FaceInfo;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
 	import com.rpgGame.coreData.utils.ColorUtils;
 	import com.rpgGame.netData.chat.message.ResChatMessage;
+	import com.rpgGame.netData.player.bean.OthersInfo;
 	
 	import flash.geom.Point;
 	import flash.text.TextFormat;
@@ -47,7 +52,6 @@ package com.rpgGame.app.ui.main.chat {
 	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
-	import starling.events.Event;
 	import starling.events.KeyboardEvent;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
@@ -132,8 +136,7 @@ package com.rpgGame.app.ui.main.chat {
 			
 			this._initVScollerY = this._skin.vscrollbar.y;
 			this._initVScollerX = this._skin.vscrollbar.x;
-			this._initBgY = this._skin.bg.y;
-			setGroubState(false);
+			this._initBgY = this._skin.bg.y;		
 			
 			var defaultFormat : TextFormat = new TextFormat(Fontter.FONT_Hei);
 			defaultFormat.color = 0xded8c7;
@@ -189,6 +192,7 @@ package com.rpgGame.app.ui.main.chat {
 			initChatChannel();
 			initTabBar();
 			initEvent();
+			setGroubState(false);
 		}
 		
 		private function initEvent():void
@@ -197,6 +201,7 @@ package com.rpgGame.app.ui.main.chat {
 			
 			EventManager.addEvent(ChatEvent.SWITCH_PRIVATE_CHANNEL,onSwitchPrivateChannel);
 			EventManager.addEvent(ChatEvent.SEND_SUCCESS, onSendSuccess);
+			EventManager.addEvent(LookEvent.ROLE_INFO,showRole);
 			
 			this._inputText.addEventListener(FeathersEventType.FOCUS_OUT,onFocueOut);			
 			this.addEventListener(TouchEvent.TOUCH, this.onTouchEventHandler);
@@ -317,11 +322,11 @@ package com.rpgGame.app.ui.main.chat {
 		
 		private function onSwitchPrivateChannel(targetID:Number, targetName:String):void
 		{
-			changeCurrChannel(EnumChatChannelType.CHAT_CHANNEL_SILIAO);
+			changeCurrChannel(4);
 			
 			ChatManager.currentSiLiaoTargetID = targetID;
 			ChatManager.currentSiLiaoTargetName = targetName;
-			var siLiaoTag:String ="你对 " + targetName +  " 说: ";			
+			var siLiaoTag:String ="你对" + targetName +  "说 :";			
 			this._inputText.setFocus();
 			this._inputText.text=siLiaoTag;
 			setGroubState(true);
@@ -486,7 +491,6 @@ package com.rpgGame.app.ui.main.chat {
 			for(var i:int=0;i<num;i++){
 				_channelBtns[i].visible=false;
 			}
-			
 			_channelBtns[type].visible=true;
 			_curSendChannel=CHANNEL_TYPES[type];
 		}	
@@ -562,10 +566,12 @@ package com.rpgGame.app.ui.main.chat {
 			if(bool){
 				_skin.bg.alpha=1;
 				_skin.btn_scale.alpha=1;
+				
 			}else {
 				_skin.bg.alpha=0;
 				_skin.btn_scale.alpha=0;
 			}
+			_inputText.visible=bool;
 			_skin.btn_lock.visible=bool;
 			_skin.btn_face.visible=bool;
 			_skin.btn_location.visible=bool;
@@ -780,6 +786,22 @@ package com.rpgGame.app.ui.main.chat {
 				}
 					this._skin.vscrollbar.scrollToPosition(0, scrollerPos, 0.3);
 			}
+		}
+		
+		private function showRole(info:OthersInfo):void
+		{
+			var _roleData:HeroData=new HeroData();
+			_roleData.totalStat.setData(info.attributeList);
+			_roleData.totalStat.setResDatas(info.resourceData);
+			_roleData.sex=info.sex;
+			_roleData.job=info.job;
+			_roleData.societyName=info.guildName;
+			
+			_roleData.maxExp=info.maxExp.fValue;
+			_roleData.maxZhenqi=info.maxZhenQi.fValue;
+			_roleData.curExp=info.exp.fValue;
+			var data:Object={roleData:_roleData,info:info};
+			AppManager.showApp(AppConstant.PLAYERINFO_PANEL,data);
 		}
 	}
 }
