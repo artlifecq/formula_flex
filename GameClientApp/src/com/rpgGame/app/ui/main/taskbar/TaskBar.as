@@ -223,7 +223,7 @@ package com.rpgGame.app.ui.main.taskbar
 				}
 				else
 				{
-					TaskAutoManager.getInstance().stopTaskAuto();
+					TaskAutoManager.getInstance().stopAll();
 				}
 			}
 			

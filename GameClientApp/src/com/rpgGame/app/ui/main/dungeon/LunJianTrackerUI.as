@@ -47,6 +47,9 @@ package com.rpgGame.app.ui.main.dungeon
 		private function getLunJianTime(ljid:int,remainTime:int):void
 		{
 			var cfg:Q_lunjian=LunJianCfg.getCfgByID(ljid);
+			if(!cfg){
+				return;
+			}
 			var monsterCfg:Q_monster=MonsterDataManager.getData(cfg.q_npc);
 			_skin.killName.text="击杀:"+monsterCfg.q_name;
 			_skin.sec_info.text="注意倒计时结束时未击败对手或者挑战过程中死亡都视为挑战失败!";

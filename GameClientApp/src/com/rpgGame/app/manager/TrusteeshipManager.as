@@ -190,12 +190,15 @@ package com.rpgGame.app.manager
 		
 		public function stopFightTarget() : void
 		{
+			if(_isFightSelect)
+			{
+				TweenLite.killDelayedCallsTo(actorFight);
+				_isFightSelect=false;
+			}
 			if (!_isFightActorRunning&&!_isFightTargetRunning)
 				return;
 			_isBroken = false;
 			TweenLite.killDelayedCallsTo(onDelayedUnbroken);
-			TweenLite.killDelayedCallsTo(actorFight);
-			_isFightSelect=false;
 			_isFightActorRunning = false;
 			_isFightTargetRunning= false;
 			if (_targetRoles)
@@ -210,6 +213,11 @@ package com.rpgGame.app.manager
 		
 		public function stopAutoFight() : void
 		{
+			if(_isFightSelect)
+			{
+				TweenLite.killDelayedCallsTo(actorFight);
+				_isFightSelect=false;
+			}
 			if (!_isAutoFightRunning)
 				return;
 			_isBroken = false;

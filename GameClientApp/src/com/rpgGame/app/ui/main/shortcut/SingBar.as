@@ -77,7 +77,7 @@ package com.rpgGame.app.ui.main.shortcut
 			{
 				onCompFun();//开始新的吟唱先取消现在的吟唱
 				//setSkillName(skillData.q_skillName);
-				startSing(skillData.q_singing_time,skillData.q_skillName);
+				startSing(skillData.q_singing_time,skillData.q_skillName,1);
 			}
 			
 		}
@@ -87,17 +87,26 @@ package com.rpgGame.app.ui.main.shortcut
 		}
 		
 		
-		/**开始吟唱*/
-		private function startSing(time:int,name:String):void
+		/**开始吟唱 type为类型 1：从右到左，2：从左到右*/
+		private function startSing(time:int,name:String,type:int=1):void
 		{
 			setSkillName(name);
 			singTime=time*0.001;
 			this.visible=true;
-			_skin.bar.x=barLoac;
-			barMask.width=widnthLoac;
-			TweenMax.to(barMask,singTime,{width:0,ease:Linear.easeNone,onUpdate :onUpFun,onComplete :onCompFun});
-			TweenMax.to(_skin.bar,singTime,{x:_skin.bar_scroll.x,ease:Linear.easeNone});
-			
+			if(type==1)
+			{
+				_skin.bar.x=barLoac;
+				barMask.width=widnthLoac;
+				TweenMax.to(barMask,singTime,{width:0,ease:Linear.easeNone,onUpdate :onUpFun,onComplete :onCompFun});
+				TweenMax.to(_skin.bar,singTime,{x:_skin.bar_scroll.x,ease:Linear.easeNone});
+			}
+			else
+			{
+				_skin.bar.x=_skin.bar_scroll.x;
+				barMask.width=0;
+				TweenMax.to(barMask,singTime,{width:widnthLoac,ease:Linear.easeNone,onUpdate :onUpFun,onComplete :onCompFun});
+				TweenMax.to(_skin.bar,singTime,{x:barLoac,ease:Linear.easeNone});
+			}
 		}
 		
 		

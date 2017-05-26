@@ -14,10 +14,12 @@ package com.rpgGame.appModule.dungeon.equip
 	import away3d.events.Event;
 	
 	import feathers.controls.ButtonState;
+	import feathers.controls.UIMovieClip;
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.fuben.FuBenItem_Zhenqi;
+	import org.mokylin.skin.app.fuben.mc.UIMovieClipKetiaozhan;
 	
 	import starling.display.DisplayObject;
 	
@@ -73,6 +75,8 @@ package com.rpgGame.appModule.dungeon.equip
 			}else if(this._currentState == ButtonState.UP){
 				_skin.combatgroup.visible = false;
 				display.visible = true;
+				if(_effect!=null)
+					_effect.play();
 			}
 		}
 		private function resetHandler(e:Event):void
@@ -132,7 +136,7 @@ package com.rpgGame.appModule.dungeon.equip
 			refeashCombatState();
 			refeashBuyState();
 		}
-		private var _effect:Inter3DContainer;
+		private var _effect:UIMovieClip;
 		private function updatabuttonState():void
 		{
 			if(_dailyZoneInfo==null)
@@ -158,10 +162,11 @@ package com.rpgGame.appModule.dungeon.equip
 				_skin.uiTishi.visible = false;
 				if(_effect==null)
 				{
-					_effect = new Inter3DContainer();
-					_effect.playInter3DAt(ClientConfig.getEffect("ui_tiaozhan"),0,0,0);
-					_effect.x = 60;
-					_effect.y = 350;
+					_effect = new UIMovieClip();
+					_effect.autoPlay = true;
+					_effect.styleClass = UIMovieClipKetiaozhan;
+					_effect.x = 0;
+					_effect.y = 280;
 					this.addChild(_effect);
 				}
 			}
@@ -204,7 +209,7 @@ package com.rpgGame.appModule.dungeon.equip
 			super.dispose();
 			if(_effect!=null)
 			{
-				_effect.stopRender3D();
+				_effect.stop();
 				this.removeChild(_effect,true);
 				_effect = null;
 			}

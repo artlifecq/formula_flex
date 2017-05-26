@@ -1,5 +1,6 @@
 package com.rpgGame.app.ui.main.dungeon
 {
+	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.sender.DungeonSender;
@@ -80,7 +81,7 @@ package com.rpgGame.app.ui.main.dungeon
 		{
 			_dailyZoneId = dailyZoneId;
 			_data = DailyZoneCfgData.getZoneCfg(dailyZoneId);
-			var allLength:Array = DailyZoneMonsterCfgData.getTypeList(dailyZoneId);
+			var allLength:Array = DailyZoneMonsterCfgData.getTypeList(_data.q_zone_id,_data.q_id);
 			
 			for each(var md:Q_dailyzone_monster in allLength)
 			{
@@ -90,6 +91,9 @@ package com.rpgGame.app.ui.main.dungeon
 			
 			_waveInfo = new Dictionary();
 			refeashInfo();
+			_endTime = SystemTimeManager.curtTm/1000+_data.q_zone_time;
+			advanceTime(0);
+			TrusteeshipManager.getInstance().startAutoFight();
 		}
 		
 		private function refeashInfo():void

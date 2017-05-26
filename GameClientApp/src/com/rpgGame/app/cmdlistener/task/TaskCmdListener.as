@@ -109,7 +109,7 @@ package com.rpgGame.app.cmdlistener.task
 		{
 			if(msg!=null)
 			{
-				EventManager.dispatchEvent(SkillEvent.SING_START,msg.costtime,"采集中");
+				EventManager.dispatchEvent(SkillEvent.SING_START,msg.costtime,"采集中",2);
 				CollectManager.show("caiji",msg.costtime,null);
 			}
 		}

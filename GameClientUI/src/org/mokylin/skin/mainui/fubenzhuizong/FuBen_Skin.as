@@ -36,6 +36,8 @@ package org.mokylin.skin.mainui.fubenzhuizong
 
 		public var killbut_2:feathers.controls.SkinnableContainer;
 
+		public var killbut_3:feathers.controls.SkinnableContainer;
+
 		public var lbHeadName:feathers.controls.Label;
 
 		public var lbMiaoshu:feathers.controls.Label;
@@ -207,6 +209,20 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.width = 169;
 			temp.x = 50;
 			temp.y = 123;
+			return temp;
+		}
+
+		private function killbut_3_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			killbut_3 = temp;
+			temp.name = "killbut_3";
+			temp.height = 20;
+			var skin:StateSkin = new org.mokylin.skin.mainui.renwu.Renwu_Item2()
+			temp.skin = skin
+			temp.width = 169;
+			temp.x = 50;
+			temp.y = 128;
 			return temp;
 		}
 
@@ -474,7 +490,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.name = "sec_subbut1";
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.height = 36;
-			temp.label = "领取奖励";
+			temp.label = "退出副本";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
 			temp.color = 0xE1D4A9;
 			temp.x = 81;
@@ -491,7 +507,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.width = 253;
 			temp.x = 0;
 			temp.y = 0;
-			temp.elementsContent = [ui_bg_i(),__FuBen_Skin_UIAsset1_i(),lbHeadName_i(),head_left_i(),head_right_i(),uiXiangxi_i(),sec_navi1_i(),killbut_0_i(),killbut_1_i(),killbut_2_i(),sec_ico1_0_i(),sec_ico1_1_i(),sec_ico1_2_i(),sec_ico1_3_i(),sec_ico1_4_i(),sec_ico1_5_i(),sec_ico1_6_i(),sec_ico1_7_i(),sec_ico2_0_i(),sec_ico2_1_i(),sec_ico2_2_i(),sec_ico2_3_i(),sec_ico2_4_i(),sec_ico2_5_i(),sec_ico2_6_i(),sec_ico2_7_i(),sec_subbut1_i(),sec_info_i(),sec_navi2_i(),sec_navi3_i(),lbMiaoshu_i()];
+			temp.elementsContent = [ui_bg_i(),__FuBen_Skin_UIAsset1_i(),lbHeadName_i(),head_left_i(),head_right_i(),uiXiangxi_i(),sec_navi1_i(),killbut_0_i(),killbut_1_i(),killbut_2_i(),killbut_3_i(),sec_ico1_0_i(),sec_ico1_1_i(),sec_ico1_2_i(),sec_ico1_3_i(),sec_ico1_4_i(),sec_ico1_5_i(),sec_ico1_6_i(),sec_ico1_7_i(),sec_ico2_0_i(),sec_ico2_1_i(),sec_ico2_2_i(),sec_ico2_3_i(),sec_ico2_4_i(),sec_ico2_5_i(),sec_ico2_6_i(),sec_ico2_7_i(),sec_subbut1_i(),sec_info_i(),sec_navi2_i(),sec_navi3_i(),lbMiaoshu_i()];
 			return temp;
 		}
 
