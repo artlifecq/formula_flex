@@ -1,6 +1,9 @@
 package com.rpgGame.app.cmdlistener
 {
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.LookEvent;
+	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.netData.player.message.ResOthersPlayerInfoMessage;
 	
 	import org.client.mainCore.bean.BaseBean;
