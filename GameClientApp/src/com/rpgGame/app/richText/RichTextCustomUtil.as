@@ -97,11 +97,14 @@ package com.rpgGame.app.richText
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.cfg.FaceCfgData;
 	import com.rpgGame.coreData.clientConfig.FaceInfo;
+	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.type.AssetUrl;
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.type.item.ItemQualityType;
+	
+	import flash.geom.Point;
 	
 	import app.message.GoodsType;
 	
@@ -109,6 +112,8 @@ package com.rpgGame.app.richText
 	import feathers.controls.UIAsset;
 	import feathers.controls.UIMovieClip;
 	import feathers.controls.text.Fontter;
+	
+	import org.game.netCore.data.long;
 	
 	import starling.text.TextFieldAutoSize;
 	
@@ -240,13 +245,15 @@ package com.rpgGame.app.richText
 				case RichTextCustomLinkType.ROLE_NAME_TYPE:
 					//获取人物名;
 					//trace( "点击打开这个人的属性面板，id：",data.id," 英雄名字：",data.data1 );
-					var userID : Number = Number(unitData.linkData);
-					if (MainRoleManager.isSelf(userID))
+					var userID : String = unitData.linkData;
+					var uise:Number=(new long(userID)).ToGID();
+					if (MainRoleManager.isSelf(uise))
 					{
 						return;
 					}
+					//					var poswr:Point = unit.displayObj.parent.localToGlobal(new Point(unit.displayObj.x+2,unit.displayObj.y));
 					var userName : String = unitData.label;
-					var menus : Array = MenuUtil.getPlayerTargetMenu(userID, true);
+					var menus : Array = MenuUtil.getPlayerTargetMenu(uise, true);
 					MenuManager.showMenu(menus, [userID, userName], -1, -1, 80);
 					break;
 				case RichTextCustomLinkType.POSITION_TYPE:
@@ -261,11 +268,11 @@ package com.rpgGame.app.richText
 					MainRoleSearchPathManager.walkToScene(flypos[0], flypos[1], flypos[2], null, 200);
 					break;
 				case RichTextCustomLinkType.ITEM_SHOW_TYPE:
-					//					var info:ClientItemInfo=ChatManager.getShowItemInfo(unitData);
-					//					if(info is EquipInfo)//.type==GoodsType.EQUIPMENT||info.type==GoodsType.EQUIPMENT1||info.type==GoodsType.EQUIPMENT2
-					//						TipTargetManager.show( unit.displayObj, TargetTipsMaker.makeTips( TipType.EQUIP_TIP, info ,true) );
-					//					else
-					//						TipTargetManager.show( unit.displayObj, TargetTipsMaker.makeTips( TipType.ITEM_TIP, info ,true) );
+					var info:ClientItemInfo=ChatManager.getShowItemInfo(unitData);
+					if(info is EquipInfo)//.type==GoodsType.EQUIPMENT||info.type==GoodsType.EQUIPMENT1||info.type==GoodsType.EQUIPMENT2
+						TipTargetManager.show( unit.displayObj, TargetTipsMaker.makeTips( TipType.EQUIP_TIP, info ,true) );
+					else
+						TipTargetManager.show( unit.displayObj, TargetTipsMaker.makeTips( TipType.ITEM_TIP, info ,true) );
 					break;
 				case RichTextCustomLinkType.TASK_NPC_NAME_TYPE:
 					var npcId : int = parseInt(unitData.linkData); //任务，npc的id

@@ -77,7 +77,6 @@ package org.mokylin.skin.app.zhuangbei.xilian
 			lb_name0 = temp;
 			temp.name = "lb_name0";
 			temp.height = 19;
-			temp.text = "属性文本";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 340;
@@ -92,7 +91,6 @@ package org.mokylin.skin.app.zhuangbei.xilian
 			lb_name = temp;
 			temp.name = "lb_name";
 			temp.height = 19;
-			temp.text = "属性文本";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 340;

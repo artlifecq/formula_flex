@@ -717,7 +717,7 @@ package com.rpgGame.app.cmdlistener.scene
 				collectData.modelID = info.modelId;
 				collectData.sceneID = info.mapModelId;
 				collectData.distributeId=info.distributeId;
-				collectData.name = info.monsterName;
+				collectData.name = qData.q_name;
 				collectData.avatarRes = qData.q_body_res;
 				collectData.sizeScale = qData.q_scale > 0 ? (qData.q_scale * 0.01) : 1;
 				collectData.direction = qData.q_direction;
