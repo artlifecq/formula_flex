@@ -87,6 +87,11 @@ package com.rpgGame.core.app
 		 *死亡复活 
 		 */
 		public static var DIE_PANEL:String = createAppInfo( "die.DiePanel","siwangfuhuo");
+		
+		/**
+		 *副本死亡 
+		 */
+		public static var ZONEDIE_PANEL:String = createAppInfo( "die.ZoneDiePanel","siwangfuhuo");
 		/**
 		 *武学面板 
 		 */
@@ -120,8 +125,11 @@ package com.rpgGame.core.app
 		/**
 		 *多人副本倒计时面板
 		 */
-		public static var MULTYSURE_PANL:String = createAppInfo( "dungeon.multy.MultySurePanel");
-		
+		public static var MULTY_ENTERTIME_PANL:String = createAppInfo( "dungeon.multy.MultyEnterTimePanel");
+		/**
+		 *多人副本退出倒计时面板
+		 */
+		public static var MULTY_EXITTIME_PANL:String = createAppInfo( "dungeon.multy.MultyExitTimePanel");
 		
 		/**
 		 *装备面板

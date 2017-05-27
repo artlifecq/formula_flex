@@ -31,7 +31,7 @@ package feathers.core
 	 *
 	 * @eventType feathers.events.FeathersEventType.INITIALIZE
 	 */
-	[Event(name="initialize",type="starling.events.Event")]
+	[Event(name="initialize",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched after the component has validated for the first time. Both
@@ -55,7 +55,7 @@ package feathers.core
 	 *
 	 * @eventType feathers.events.FeathersEventType.CREATION_COMPLETE
 	 */
-	[Event(name="creationComplete",type="starling.events.Event")]
+	[Event(name="creationComplete",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the width or height of the control changes.
@@ -77,7 +77,7 @@ package feathers.core
 	 *
 	 * @eventType feathers.events.FeathersEventType.RESIZE
 	 */
-	[Event(name="resize",type="starling.events.Event")]
+	[Event(name="resize",type="away3d.events.Event")]
 
 	/**
 	 * Basic interface for Feathers UI controls. A Feathers control must also

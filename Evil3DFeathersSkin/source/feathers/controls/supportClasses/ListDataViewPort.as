@@ -11,6 +11,9 @@ package feathers.controls.supportClasses
 	import flash.geom.Point;
 	import flash.utils.Dictionary;
 	
+	import away3d.events.Event;
+	import away3d.events.EventDispatcher;
+	
 	import feathers.controls.List;
 	import feathers.controls.Scroller;
 	import feathers.controls.renderers.IListItemRenderer;
@@ -29,8 +32,6 @@ package feathers.controls.supportClasses
 	import feathers.layout.ViewPortBounds;
 	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
-	import starling.events.EventDispatcher;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;

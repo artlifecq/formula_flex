@@ -13,6 +13,8 @@ package feathers.controls
 	import flash.ui.Keyboard;
 	import flash.utils.getTimer;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.supportClasses.IViewPort;
 	import feathers.core.FeathersControl;
 	import feathers.core.IFeathersControl;
@@ -25,7 +27,6 @@ package feathers.controls
 	import feathers.layout.Direction;
 	import feathers.layout.RelativePosition;
 	import feathers.system.DeviceCapabilities;
-	import feathers.utils.display.stageToStarling;
 	import feathers.utils.math.roundDownToNearest;
 	import feathers.utils.math.roundToNearest;
 	import feathers.utils.math.roundUpToNearest;
@@ -36,7 +37,6 @@ package feathers.controls
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.display.Quad;
-	import starling.events.Event;
 	import starling.events.KeyboardEvent;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
@@ -66,11 +66,11 @@ package feathers.controls
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.SCROLL
+	 * @eventType away3d.events.Event.SCROLL
 	 * @see #event:scrollStart feathers.events.FeathersEventType.SCROLL_START
 	 * @see #event:scrollComplete feathers.events.FeathersEventType.SCROLL_COMPLETE
 	 */
-	[Event(name="scroll",type="starling.events.Event")]
+	[Event(name="scroll",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the scroller starts scrolling in either direction
@@ -101,7 +101,7 @@ package feathers.controls
 	 * @see #event:scrollComplete feathers.events.FeathersEventType.SCROLL_COMPLETE
 	 * @see #event:scroll feathers.events.FeathersEventType.SCROLL
 	 */
-	[Event(name="scrollStart",type="starling.events.Event")]
+	[Event(name="scrollStart",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the scroller finishes scrolling in either direction
@@ -134,7 +134,7 @@ package feathers.controls
 	 * @see #event:scrollStart feathers.events.FeathersEventType.SCROLL_START
 	 * @see #event:scroll feathers.events.FeathersEventType.SCROLL
 	 */
-	[Event(name="scrollComplete",type="starling.events.Event")]
+	[Event(name="scrollComplete",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the user starts dragging the scroller when
@@ -166,7 +166,7 @@ package feathers.controls
 	 * @see #event:endInteraction feathers.events.FeathersEventType.END_INTERACTION
 	 * @see #event:scroll feathers.events.FeathersEventType.SCROLL
 	 */
-	[Event(name="beginInteraction",type="starling.events.Event")]
+	[Event(name="beginInteraction",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the user stops dragging the scroller when
@@ -200,7 +200,7 @@ package feathers.controls
 	 * @see #event:beginInteraction feathers.events.FeathersEventType.BEGIN_INTERACTION
 	 * @see #event:scroll feathers.events.FeathersEventType.SCROLL
 	 */
-	[Event(name="endInteraction",type="starling.events.Event")]
+	[Event(name="endInteraction",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the component receives focus.
@@ -222,7 +222,7 @@ package feathers.controls
 	 *
 	 * @eventType feathers.events.FeathersEventType.FOCUS_IN
 	 */
-	[Event(name="focusIn",type="starling.events.Event")]
+	[Event(name="focusIn",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when the component loses focus.
@@ -244,7 +244,7 @@ package feathers.controls
 	 *
 	 * @eventType feathers.events.FeathersEventType.FOCUS_OUT
 	 */
-	[Event(name="focusOut",type="starling.events.Event")]
+	[Event(name="focusOut",type="away3d.events.Event")]
 
 	/**
 	 * Allows horizontal and vertical scrolling of a <em>view port</em>. Not

@@ -104,7 +104,15 @@ package starling.text
             
             parseFontXml(fontXml);
         }
-        
+		
+		public function get enableTextBatch():Boolean {
+			return false;
+		}
+		
+		public function set enableTextBatch(value : Boolean):void {
+			
+		}
+		
         /** Disposes the texture of the bitmap font. */
         public function dispose():void
         {

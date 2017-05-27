@@ -17,8 +17,6 @@ package com.rpgGame.app.sender
 	import com.rpgGame.netData.player.message.ReqLocalReviveMessage;
 	import com.rpgGame.netData.player.message.ReqReviveMessage;
 	import com.rpgGame.netData.structs.Position;
-	import com.rpgGame.netData.zone.message.ReqZoneCommonEnterMessage;
-	import com.rpgGame.netData.zone.message.ReqZoneCommonQuitMessage;
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
@@ -29,6 +27,7 @@ package com.rpgGame.app.sender
 	import org.game.netCore.connection.SocketConnection_protoBuffer;
 	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
+	import org.game.netCore.net.MessageMgr;
 
 	/**
 	 * 场景消息
@@ -42,6 +41,7 @@ package com.rpgGame.app.sender
 			if(!FirstEnterSceneManager.isEnterScene)
 			{
 				msg = new ReqLoadFinishMessage();
+				FirstEnterSceneManager.setup();
 			}
 			else
 			{

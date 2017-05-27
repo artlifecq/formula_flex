@@ -1,6 +1,8 @@
 ﻿package com.rpgGame.app.richText.component
 {
 	import com.rpgGame.app.richText.RichTextCustomUnitType;
+	import com.rpgGame.app.ui.main.chat.ChatUtil;
+	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import flash.display.BitmapData;
 	import flash.events.Event;
@@ -26,7 +28,7 @@
 	import starling.display.Image;
 	import starling.display.Shape;
 	import starling.display.Sprite;
-	import starling.events.Event;
+	import away3d.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -44,6 +46,7 @@
 		
 		public static var onMouseClickUnit:Function;
 		public static var onMouseMoveUnit:Function;
+		public static var onMouseOverUnit:Function;
 		public static var onMouseOutUnit:Function;
 		public static var updateUnitDisplayObjFunc:Function;
 		
@@ -69,7 +72,7 @@
 		private var _isEditable:Boolean;
 		private var _isInputFocus:Boolean;
 		private var _byteA:ByteArray;
-
+		
 		private var wordWrapTxt:TextField;
 		
 		public function RichTextArea3D( $w:int, $h:int = 0, filters:Array = null ) 
@@ -92,7 +95,8 @@
 			{
 				_textField.filters = filters;
 			}
-			_textField.wordWrap = false;
+			_textField.wordWrap = true;
+			_textField.multiline=true;
 			_textField.defaultTextFormat = _defaultFormat;
 			_textField.thickness = Fontter.DEFAULT_THICKNESS;
 			_textField.embedFonts = true;
@@ -125,7 +129,7 @@
 			_textField.htmlText = $str;
 			if(_isEditable)
 			{
-				this.dispatchEvent(new starling.events.Event(starling.events.Event.CHANGE));
+				this.dispatchEvent(new away3d.events.Event(away3d.events.Event.CHANGE));
 			}
 			convert();
 		}
@@ -183,11 +187,11 @@
 				cursorIndex += $str.length;
 				_textField.setSelection(cursorIndex,cursorIndex);
 				getCurrentCursorInfo(_cursorInfo);
-				this.dispatchEvent(new starling.events.Event(starling.events.Event.CHANGE));
+				this.dispatchEvent(new away3d.events.Event(away3d.events.Event.CHANGE));
 			}
 			else
 			{
-				var info:String = _textField.htmlText + autoWordWrap($str);;
+				var info:String = _textField.htmlText + $str;//autoWordWrap($str);
 				_textField.htmlText = info;
 			}
 			convert();
@@ -435,7 +439,7 @@
 		
 		private function onFocusIn(event:FocusEvent):void
 		{
-			this.dispatchEvent(new starling.events.Event(FeathersEventType.FOCUS_IN));
+			this.dispatchEvent(new away3d.events.Event(FeathersEventType.FOCUS_IN));
 		}
 		
 		private function onFocusOut(event:FocusEvent = null):void
@@ -457,7 +461,7 @@
 				addChildAt( _textImage, 0 );
 			}
 			reDrawTextField();
-			this.dispatchEvent(new starling.events.Event(FeathersEventType.FOCUS_OUT));
+			this.dispatchEvent(new away3d.events.Event(FeathersEventType.FOCUS_OUT));
 		}
 		
 		private function onResize(event:flash.events.Event = null):void
@@ -517,7 +521,7 @@
 			}
 			reDrawTextField();
 			_cursorInfo = currentTextInfo;
-			this.dispatchEvent(new starling.events.Event(starling.events.Event.CHANGE));
+			this.dispatchEvent(new away3d.events.Event(away3d.events.Event.CHANGE));
 		}
 		
 		private function convert():void

@@ -15,7 +15,7 @@ package com.rpgGame.app.manager
 	import gs.TweenLite;
 	
 	import starling.core.Starling;
-	import starling.events.Event;
+	import away3d.events.Event;
 	
 	/**
 	 * @author Guodong.Zhang

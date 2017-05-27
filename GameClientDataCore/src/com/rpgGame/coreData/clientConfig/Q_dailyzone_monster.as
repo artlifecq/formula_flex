@@ -18,6 +18,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_wave:int;
 		 /**   每日副本ID */
 		public var q_daily_zoneId:int;
+		 /**  难度等级(副本之间难度不冲突,没有区分默认0) */
+		public var q_diff_level:int;
 		 /**  怪物的ID */
 		public var q_monsterId:int;
 		 /**  怪物的数量(相同怪物数量) */
@@ -30,6 +32,14 @@ package com.rpgGame.coreData.clientConfig
 		public var q_x:int;
 		 /**  怪物出生点Y */
 		public var q_y:int;
+		 /**  阶段 */
+		public var q_stage:int;
+		 /**  玩家移动X坐标 */
+		public var q_move_x:int;
+		 /**  玩家移动Y坐标 */
+		public var q_move_y:int;
+		 /**  追踪面板文字 */
+		public var q_desc:String;
 
 	}
 }

@@ -10,6 +10,8 @@ package feathers.controls
 	import flash.ui.Keyboard;
 	import flash.utils.Dictionary;
 	
+	import away3d.events.Event;
+	
 	import feathers.core.FeathersControl;
 	import feathers.core.IFocusDisplayObject;
 	import feathers.core.PropertyProxy;
@@ -28,7 +30,6 @@ package feathers.controls
 	import feathers.skins.IStyleProvider;
 	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
 	import starling.events.KeyboardEvent;
 
 	/**
@@ -49,9 +50,9 @@ package feathers.controls
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.CHANGE
+	 * @eventType away3d.events.Event.CHANGE
 	 */
-	[Event(name="change",type="starling.events.Event")]
+	[Event(name="change",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched when one of the tabs is triggered. The <code>data</code>
@@ -89,9 +90,9 @@ package feathers.controls
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.TRIGGERED
+	 * @eventType away3d.events.Event.TRIGGERED
 	 */
-	[Event(name="triggered", type="starling.events.Event")]
+	[Event(name="triggered", type="away3d.events.Event")]
 
 	/**
 	 * A line of tabs (vertical or horizontal), where one may be selected at a

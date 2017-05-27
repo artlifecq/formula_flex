@@ -6,6 +6,7 @@ package com.rpgGame.app.manager.role
 	import com.game.engine3D.vo.map.ClientMapAreaData;
 	import com.game.engine3D.vo.map.ClientMapAreaGridData;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
+	import com.rpgGame.app.graphics.BubbleDialogFace;
 	import com.rpgGame.app.graphics.DropItemHeadFace;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.graphics.StallHeadFace;
@@ -50,6 +51,8 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
+	import flash.geom.Vector3D;
+	
 	import app.message.StallTypeDataProto;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -82,7 +85,7 @@ package com.rpgGame.app.manager.role
 		public function SceneRoleManager()
 		{
 			EventManager.addEvent(MainPlayerEvent.PK_MODE_CHANGE, onPkModeChange);
-            EventManager.addEvent(RoleEvent.UPDATE_NEEDLE, onUpdateNeedle);
+			EventManager.addEvent(RoleEvent.UPDATE_NEEDLE, onUpdateNeedle);
 			EventManager.addEvent(YunBiaoEvent.UPDATE_BIAOCHE_NAME, updateBiaoName);
 		}
 		
@@ -110,7 +113,7 @@ package com.rpgGame.app.manager.role
 			role.name = data.name;
 			data.bodyRadius = radiusForHero;
 			role.headFace = HeadFace.create(role);
-			
+			role.dialogFace=BubbleDialogFace.create(role);
 			//执行主换装更新
 			AvatarManager.callEquipmentChange(role, false, false, false);
 			
@@ -133,10 +136,10 @@ package com.rpgGame.app.manager.role
 			role.setGroundXY(data.x, data.y);
 			role.rotationY = (270 + data.direction) % 360;
 			SceneManager.addSceneObjToScene(role, true, true, renderLimitable);
-            // 在换装时还未把role添加到场景 添加的buff无效
-            if (data.buffList.length > 0) {
-                role.buffSet.updateBuffEffects();
-            }
+			// 在换装时还未把role添加到场景 添加的buff无效
+			if (data.buffList.length > 0) {
+				role.buffSet.updateBuffEffects();
+			}
 			
 			if (role.headFace is HeadFace)
 				(role.headFace as HeadFace).updateTitle(data.junjieLv);
@@ -189,11 +192,11 @@ package com.rpgGame.app.manager.role
 			role.name = data.name = roleNameStr;
 			role.ownerIsMainChar = (data.ownerId == MainRoleManager.actorID);
 			data.avatarInfo.setBodyResID(bornData ? bornData.q_body_res : "", null);
-//			var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(bornData ? bornData.q_body_res : "");
+			//			var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(bornData ? bornData.q_body_res : "");
 			if (bornData.q_animation>0)
 			{
 				data.avatarInfo.bodyEffectID = AnimationDataManager.getData(bornData.q_animation).role_res;
-//				data.avatarInfo.effectResID = AnimationDataManager.getData(bornData.q_animation).role_res;
+				//				data.avatarInfo.effectResID = AnimationDataManager.getData(bornData.q_animation).role_res;
 			}
 			data.sizeScale = (bornData && bornData.q_scale > 0) ? (bornData.q_scale * 0.01) : 1;
 			//			data.totalStat.level = bornData ? bornData.q_grade : 0;
@@ -503,6 +506,8 @@ package com.rpgGame.app.manager.role
 			role.data = data;
 			role.name = data.name;
 			role.headFace = HeadFace.create(role);
+			//role.headFace.show();
+			//role.headFace.showHead();
 			data.avatarInfo.setBodyResID(data.avatarRes, null);
 			var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(data.avatarRes);
 			if (avatarResConfig)
@@ -517,7 +522,7 @@ package com.rpgGame.app.manager.role
 			role.setScale(data.sizeScale);
 			role.setGroundXY(data.x, data.y);
 			role.rotationY = data.direction;
-			SceneManager.addSceneObjToScene(role, true, false, false);
+			SceneManager.addSceneObjToScene(role, true, true, false);
 			ClientTriggerManager.addTriggerCollectEffect(role);
 		}
 		
@@ -562,18 +567,30 @@ package com.rpgGame.app.manager.role
 			//如果场景中存在此类型此ID的角色，则移除之
 			removeSceneRoleByIdAndType(id, type);
 			var rud : RenderParamData3D = new RenderParamData3D(id, type, ClientConfig.getEffect(data.effectRes));
-			
-			var effectRu : RenderUnit3D = RenderUnit3D.create(rud);
+			var effectRu : RenderUnit3D = RenderUnit3D.create(rud,true);
 			effectRu.repeat = 0;
 			effectRu.mouseEnable = true;
-			effectRu.setGroundXY(x, y);
+			effectRu.play(0);
+			effectRu.visible = true;
 			effectRu.setScale(data.sizeScale > 0 ? (data.sizeScale * 0.01) : 1);
 			effectRu.rotationY = data.direction;
+			effectRu.setGroundXY(x, y);
 			effectRu.data = data;
 			SceneManager.addSceneObjToScene(effectRu, true, false, false);
-			effectRu.play(0);
 			return effectRu;
 		}
+		/**
+		 * 移除场景特效
+		 */
+		public function removeSceneEffect(id : int, type : String) : void
+		{
+			var role : RenderUnit3D = SceneManager.getScene().getSceneObjByID(id, type) as RenderUnit3D;
+			if (role && role.usable)
+			{
+				SceneManager.removeSceneObjFromScene(role);
+			}
+		}
+		
 		
 		/**
 		 * 角色离开视野
@@ -605,29 +622,29 @@ package com.rpgGame.app.manager.role
 				SceneManager.removeSceneObjFromScene(role);
 			}
 		}
-        
-        private static const needleRoleX : Array = [0, -20, 20, -40, 40];
-        private static const needleRoleY : Array = [0, -20, -20, -40, -40];
-        public function onUpdateNeedle(role : SceneRole, newVal : int, oldVal : int) : void {
-            if (!(role.data is HeroData)) {
-                return;
-            }
-            if (JobEnum.ROLE_4_TYPE != (role.data as HeroData).job) {
-                return;
-            }
-            var i : int = 0;
-            for (i = newVal; i < oldVal; ++i) {
-                role.avatar.removeRenderUnitByID(RenderUnitType.NEEDLEEFFECT, i);
-            }
-            for (i = oldVal; i < newVal; ++i) {
-                SpellAnimationHelper.addTargetEffect(role, i, RenderUnitType.NEEDLEEFFECT, "tx_role_mieshijinzhen_01_5", BoneNameEnum.c_crossbow, 0);
-            }
-            for (i = 0; i < newVal; ++i) {
-                var unit : RenderUnit3D = role.avatar.getRenderUnitByID(RenderUnitType.NEEDLEEFFECT, i);
-                unit.x = needleRoleX[i];
-                unit.y = needleRoleY[i];
-                unit.z = 0;
-            }
-        }
+		
+		private static const needleRoleX : Array = [0, -20, 20, -40, 40];
+		private static const needleRoleY : Array = [0, -20, -20, -40, -40];
+		public function onUpdateNeedle(role : SceneRole, newVal : int, oldVal : int) : void {
+			if (!(role.data is HeroData)) {
+				return;
+			}
+			if (JobEnum.ROLE_4_TYPE != (role.data as HeroData).job) {
+				return;
+			}
+			var i : int = 0;
+			for (i = newVal; i < oldVal; ++i) {
+				role.avatar.removeRenderUnitByID(RenderUnitType.NEEDLEEFFECT, i);
+			}
+			for (i = oldVal; i < newVal; ++i) {
+				SpellAnimationHelper.addTargetEffect(role, i, RenderUnitType.NEEDLEEFFECT, "tx_role_mieshijinzhen_01_5", BoneNameEnum.c_crossbow, 0);
+			}
+			for (i = 0; i < newVal; ++i) {
+				var unit : RenderUnit3D = role.avatar.getRenderUnitByID(RenderUnitType.NEEDLEEFFECT, i);
+				unit.x = needleRoleX[i];
+				unit.y = needleRoleY[i];
+				unit.z = 0;
+			}
+		}
 	}
 }

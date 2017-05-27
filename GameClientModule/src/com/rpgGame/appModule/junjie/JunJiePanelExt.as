@@ -32,7 +32,7 @@ package com.rpgGame.appModule.junjie
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.beibao.junjie.JunJie_Skin;
 	
-	import starling.events.Event;
+	import away3d.events.Event;
 	
 	public class JunJiePanelExt extends ViewUI
 	{
@@ -124,7 +124,7 @@ package com.rpgGame.appModule.junjie
 			this._avatarData.avatarInfo.weaponEffectID = MainRoleManager.actorInfo.avatarInfo.weaponEffectID;
 			this._avatarData.avatarInfo.weaponEffectScale = MainRoleManager.actorInfo.avatarInfo.weaponEffectScale;
 			this._avatar.setRoleData(this._avatarData);
-			this._avatar.curRole.setScale(1.7);	
+			this._avatar.curRole.setScale(1.5);	
 			this._avatar.curRole.stateMachine.transition(RoleStateType.ACTION_SHOW);
 		}
 		
@@ -336,7 +336,7 @@ package com.rpgGame.appModule.junjie
 				_chenhaoEft.dispose();
 			}
 			var effName:String=JunJieData.getEffById(_nowSelectItem.info.modelId);
-			_chenhaoEft=_chenhaoEftContaner.playInter3DAt(ClientConfig.getEffect(effName),120,35,0);
+			_chenhaoEft=_chenhaoEftContaner.playInter3DAt(ClientConfig.getEffect(effName),120,20,0);
 			showTiaoJian();	
 			contrastAttr();		
 			updateWanChengDuShow();

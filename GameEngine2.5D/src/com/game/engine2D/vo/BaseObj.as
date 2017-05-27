@@ -31,12 +31,12 @@ package com.game.engine2D.vo{
 		{
 			return _isMainChar;
 		}
-
+		
 		public function set isMainChar(value:Boolean):void
 		{
 			_isMainChar = value;
 		}
-
+		
 		/**
 		 * 唯一ID
 		 */		
@@ -64,10 +64,24 @@ package com.game.engine2D.vo{
 		 */	
 		public var disposing:Boolean = false;
 		private var _usable:Boolean = false;
+		private var _canRemoved:Boolean = true;
+		
 		/**
 		 * 是否可以移除和回收
-		 */	
-		public var canRemoved:Boolean = true;
+		 */
+		public function get canRemoved():Boolean
+		{
+			return _canRemoved;
+		}
+		
+		/**
+		 * @private
+		 */
+		public function set canRemoved(value:Boolean):void
+		{
+			_canRemoved = value;
+		}
+		
 		
 		protected var _isMainChar:Boolean;
 		
@@ -113,7 +127,7 @@ package com.game.engine2D.vo{
 				updateNow = true;
 			}
 		}
-
+		
 		protected var _z:Number = 0;
 		/**显示位置Z*/
 		final public function get z():Number
@@ -204,7 +218,7 @@ package com.game.engine2D.vo{
 		{
 			_smooth = value;
 		}
-
+		
 		protected var _depthEnable:Boolean = true;
 		final public function get depthEnable():Boolean
 		{
@@ -674,7 +688,7 @@ package com.game.engine2D.vo{
 		{
 			return _usable;
 		}
-
+		
 		/**
 		 * @private
 		 */

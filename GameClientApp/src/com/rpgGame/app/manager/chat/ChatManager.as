@@ -1,44 +1,54 @@
 package com.rpgGame.app.manager.chat
 {
-    import com.gameClient.utils.StringFilter;
-    import com.rpgGame.app.manager.goods.BackPackManager;
-    import com.rpgGame.app.manager.role.MainRoleManager;
-    import com.rpgGame.app.manager.shell.ShellManager;
-    import com.rpgGame.app.manager.time.SystemTimeManager;
-    import com.rpgGame.app.richText.RichTextCustomLinkType;
-    import com.rpgGame.app.richText.RichTextCustomUtil;
-    import com.rpgGame.app.richText.component.RichTextConfig;
-    import com.rpgGame.app.richText.component.RichTextUnitData;
-    import com.rpgGame.app.sender.ChatSender;
-    import com.rpgGame.app.sender.GmSender;
-    import com.rpgGame.app.ui.main.chat.ChatUtil;
-    import com.rpgGame.core.events.ChatEvent;
-    import com.rpgGame.coreData.cfg.ChatCfgData;
-    import com.rpgGame.coreData.cfg.LanguageConfig;
-    import com.rpgGame.coreData.cfg.country.CountryNameCfgData;
-    import com.rpgGame.coreData.cfg.item.ItemConfig;
-    import com.rpgGame.coreData.configEnum.EnumHintInfo;
-    import com.rpgGame.coreData.info.chat.ChatInfo;
-    import com.rpgGame.coreData.info.item.ClientItemInfo;
-    import com.rpgGame.coreData.info.item.GetShowItemVo;
-    import com.rpgGame.coreData.info.item.ItemUtil;
-    import com.rpgGame.coreData.type.chat.EnumChatChannelType;
-    import com.rpgGame.coreData.type.chat.EnumChatTabsType;
-    import com.rpgGame.netData.backpack.bean.ItemInfo;
-    import com.rpgGame.netData.chat.bean.HyperInfo;
-    import com.rpgGame.netData.chat.message.ResChatMessage;
-    
-    import flash.utils.Dictionary;
-    
-    import app.client_proto.ChatSetTabProtoC;
-    import app.message.GoodsProto;
-    import app.message.ChatContentProto.PosInfoProto;
-    
-    import feathers.data.ListCollection;
-    
-    import org.client.mainCore.ds.HashMap;
-    import org.client.mainCore.manager.EventManager;
-
+	import com.game.engine3D.vo.BaseObj3D;
+	import com.gameClient.utils.StringFilter;
+	import com.rpgGame.app.graphics.BubbleDialogFace;
+	import com.rpgGame.app.manager.goods.BackPackManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.manager.shell.ShellManager;
+	import com.rpgGame.app.manager.shop.ShopManager;
+	import com.rpgGame.app.manager.time.SystemTimeManager;
+	import com.rpgGame.app.richText.RichTextCustomLinkType;
+	import com.rpgGame.app.richText.RichTextCustomUtil;
+	import com.rpgGame.app.richText.component.RichTextConfig;
+	import com.rpgGame.app.richText.component.RichTextUnitData;
+	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.sender.ChatSender;
+	import com.rpgGame.app.sender.GmSender;
+	import com.rpgGame.app.ui.main.chat.ChatUtil;
+	import com.rpgGame.core.events.ChatEvent;
+	import com.rpgGame.coreData.cfg.ChatCfgData;
+	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.cfg.country.CountryNameCfgData;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
+	import com.rpgGame.coreData.configEnum.EnumHintInfo;
+	import com.rpgGame.coreData.enum.BoneNameEnum;
+	import com.rpgGame.coreData.info.chat.ChatInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.GetShowItemVo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
+	import com.rpgGame.coreData.type.RenderUnitID;
+	import com.rpgGame.coreData.type.RenderUnitType;
+	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
+	import com.rpgGame.coreData.type.chat.EnumChatTabsType;
+	import com.rpgGame.netData.backpack.bean.ItemInfo;
+	import com.rpgGame.netData.chat.bean.HyperInfo;
+	import com.rpgGame.netData.chat.message.ResChatMessage;
+	
+	import flash.utils.Dictionary;
+	
+	import app.client_proto.ChatSetTabProtoC;
+	import app.message.GoodsProto;
+	import app.message.ChatContentProto.PosInfoProto;
+	
+	import feathers.data.ListCollection;
+	
+	import gs.TweenLite;
+	
+	import org.client.mainCore.ds.HashMap;
+	import org.client.mainCore.manager.EventManager;
+	
 	/**
 	 * 聊天数据管理
 	 * @author zgd
@@ -53,14 +63,14 @@ package com.rpgGame.app.manager.chat
 		public static const GOOD_REGEXP : RegExp = /\[[^\]]*\]/g;
 		public static const SYSTEM_GOOD_REGEXP : RegExp = /<a.*?<\/a>/ig;
 		public static const GET_GOOD_INFO_REGEXP : RegExp = /[\w\dΑ-￥·*+°\/]+/g;
-
-
-		private static const MSG_GOODS_CODE : String = "{goods}";
+		
+		
+		public static const MSG_GOODS_CODE : String = "{goods}";
 		private static const MSG_POSITION_CODE : String = "{pos}";
-
-
+		
+		
 		private static var _chatItemHash : HashMap = new HashMap();
-
+		
 		private static var MAX_CHATSHOWITEMCACEHE : int = 300;
 		
 		
@@ -69,8 +79,11 @@ package com.rpgGame.app.manager.chat
 		private static var _systemMsg:Vector.<ResChatMessage>=new Vector.<ResChatMessage>;
 		private static var _hearsayMsg:Vector.<ResChatMessage>=new Vector.<ResChatMessage>;
 		public  static var sysHearsayMsgChange:Function;
-
+		
 		private static var _currentShowItemInsertIndex : int = 99;
+		
+		//当前选择的聊天频道
+		private static var _curSendChannel:int;
 		
 		/**
 		 * 综合频道里，设置各个频道是否显示
@@ -84,7 +97,7 @@ package com.rpgGame.app.manager.chat
 		 * 个人频道里，设置各个频道是否显示
 		 */
 		private static var _geRenChannelShowSetting : Dictionary;
-
+		
 		private static var _freeHockUsedTimes : int = 0;
 		
 		
@@ -95,7 +108,7 @@ package com.rpgGame.app.manager.chat
 		{
 			return _hearsayMsg;
 		}
-
+		
 		/**
 		 *系统消息缓存 
 		 */
@@ -103,7 +116,7 @@ package com.rpgGame.app.manager.chat
 		{
 			return _systemMsg;
 		}
-
+		
 		/**
 		 *系统和传闻消息缓存 
 		 */
@@ -111,7 +124,7 @@ package com.rpgGame.app.manager.chat
 		{
 			return _systemHearsayMsg;
 		}
-
+		
 		/**
 		 * 记录系统传闻消息 
 		 * @param msg
@@ -161,12 +174,12 @@ package com.rpgGame.app.manager.chat
 		public function ChatManager()
 		{
 		}
-
+		
 		public static function addChatLaBaUse(usedTimes : int) : void
 		{
 			_freeHockUsedTimes++;
 		}
-
+		
 		public static function checkChannelShowInTab(channel:int,tab:int):Boolean
 		{
 			switch(tab)
@@ -203,7 +216,7 @@ package com.rpgGame.app.manager.chat
 			}
 			return false;
 		}
-
+		
 		/**
 		 * 判断此频道信息是否在社会里显示
 		 * @param channel
@@ -242,7 +255,7 @@ package com.rpgGame.app.manager.chat
 		}
 		
 		
-
+		
 		/**
 		 * 判断此频道信息是否在自定义1里显示
 		 * @param channel
@@ -295,7 +308,7 @@ package com.rpgGame.app.manager.chat
 			}
 			_allChannelShowSetting[channel] = isShow;
 		}
-
+		
 		private static function initAllChannelShowDic() : void
 		{
 			_allChannelShowSetting = new Dictionary();
@@ -339,7 +352,7 @@ package com.rpgGame.app.manager.chat
 			EventManager.dispatchEvent(ChatEvent.GET_NEW_NORMAL_DATA, chatInfo);
 			NoticeManager.mouseFollowNotify(chatInfo.speech);
 		}
-
+		
 		//-----------------------------------------
 		/**
 		 * 聊天消息发送成功, 解析本地的聊天输入信息,显示在聊天框
@@ -373,7 +386,7 @@ package com.rpgGame.app.manager.chat
 					chatInfo.realShowName = countryName + senderNameStr + ":";
 			}
 			var realShowMsg : String = chatInfo.speech;
-
+			
 			if (chatInfo.chatGoods != null)
 			{
 				var itemArr : Array = [];
@@ -388,10 +401,10 @@ package com.rpgGame.app.manager.chat
 					itemCode = RichTextCustomUtil.getItemCode(key, ItemConfig.getItemName(chatGoods.itemModelId), ItemConfig.getItemQuality(chatGoods.itemModelId));
 					itemArr.push(itemCode);
 				}
-
+				
 				realShowMsg = replaceStr(chatInfo.speech, itemArr, MSG_GOODS_CODE);
 			}
-
+			
 			if (chatInfo.posInfo != null)
 			{
 				var positionCode : String = RichTextCustomUtil.getPositionCode(chatInfo.posInfo.sceneId, chatInfo.posInfo.sceneX, chatInfo.posInfo.sceneY, chatInfo.posInfo.sceneLine, chatInfo.posInfo.sceneCountry);
@@ -399,29 +412,29 @@ package com.rpgGame.app.manager.chat
 			}
 			chatInfo.realShowMsg = realShowMsg;
 		}
-
+		
 		private static function replaceStr(str : String, args : Array, replaseSye : String) : String
 		{
 			if (args == null)
 				return str;
-
+			
 			if (str == null)
 				return str;
-
+			
 			var i : int;
 			var len : int = args.length;
 			for (i = 0; i < len; i++)
 			{
 				str = str.replace(replaseSye, args[i]);
 			}
-
+			
 			return str;
 		}
-
+		
 		//--------------------------------------------------
 		private static var _chatCoolDown : Vector.<Number> = new Vector.<Number>(20);
 		private static var _chatTimeMap:HashMap = new HashMap();
-
+		
 		/**
 		 * 判断是否可以聊天，不能发送太频繁
 		 * @param	type
@@ -442,7 +455,7 @@ package com.rpgGame.app.manager.chat
 			}
 			return true;
 		}
-
+		
 		public static function saveCDInfo(channel:int):void
 		{
 			var ctime : Number = SystemTimeManager.curtTm;
@@ -468,7 +481,7 @@ package com.rpgGame.app.manager.chat
 		public static var currentSiLiaoTargetName:String;
 		private static var _showGoodsList : Array = [];
 		private static var _posInfoProto : PosInfoProto;
-
+		
 		/**
 		 *
 		 * @param content
@@ -482,31 +495,66 @@ package com.rpgGame.app.manager.chat
 		{
 			if (content == "") //空白不发送
 			{
-				NoticeManager.mouseFollowNotify("请先输入你想说的话再发送");
+				NoticeManager.mouseFollowNotify("无法发送空消息");
 				return;
 			}
-
+			
 			if (channel == EnumChatChannelType.CHAT_CHANNEL_LABA)
 			{
 				var itemInfo : ClientItemInfo = BackPackManager.instance.getFirstCanUseItemByCfgId(ChatCfgData.paidChatGoodsID);
 				if (itemInfo == null)
 				{
+//					ShopManager.ins.  //弹出后买面板
 					NoticeManager.showHint(EnumHintInfo.CHAT_CHANNEL_NO_LABA_ITEM, [ItemConfig.getItemName(ChatCfgData.paidChatGoodsID)]);
 					return;
 				}
 			}
+			
+			if(channel == EnumChatChannelType.CHAT_CHANNEL_SILIAO)
+			{
+				content=parsingRrivateText(content);
+				targetName=ChatManager.currentSiLiaoTargetName;
+			}
+			
 			if (!checkChatLevelEnable(channel))
 				return;
 			if (!checkChatCDEnd(channel))
 				return;
-
+			
 			var newContent : String = setShowGoodFormat(content,channel); //解析里面所有的物品
+			hyperInfos=assemblyItem();
 			var sendMsgStr : String = newContent;
 			sendMsgStr = StringFilter.match(sendMsgStr, "*"); //发送前就把敏感字去掉
-			ChatSender.cs_sendChat(sendMsgStr, channel, targetName, hyperInfos);
-
+			ChatSender.cs_sendChat(sendMsgStr, channel, targetName, hyperInfos);	
 		}
-
+		
+		/**
+		 * 解析私聊消息
+		 * */
+		public static function parsingRrivateText(content : String):String
+		{
+			if(content==null||content=="") return "";
+			var name:String;
+			var cont:String;
+			var starIndex:int=content.indexOf("你");
+			var endIndex:int=content.indexOf(":");
+			var stars:String;
+			var ends:String;
+			stars=content.substring(starIndex,2);
+			ends=content.substring(endIndex-2,endIndex+1);
+			if(stars=="你对"&&ends=="说 :")
+			{
+				name=content.substring(starIndex+2,endIndex-2);
+				cont=content.substring(endIndex+1);
+				ChatManager.currentSiLiaoTargetName=name;
+			}
+			else
+			{
+				if(ChatManager.currentSiLiaoTargetName!=null) return content;
+			}
+			return cont;
+		}
+		
 		/**
 		 * 发送GM命令
 		 * @param msg
@@ -515,11 +563,11 @@ package com.rpgGame.app.manager.chat
 		 */
 		public static function sendGMMsg(msg : String) : Boolean
 		{
-            CONFIG::Debug {
-                if (ShellManager.parse(msg)) {
-//                    return true;
-                }
-            }
+			CONFIG::Debug {
+				if (ShellManager.parse(msg)) {
+					//                    return true;
+				}
+			}
 			//验证gm命令
 			var isGm : Boolean = isGmMsg(msg);
 			if (isGm)
@@ -529,21 +577,21 @@ package com.rpgGame.app.manager.chat
 			}
 			return false;
 		}
-
+		
 		private static function isGmMsg(msg : String) : Boolean
 		{
 			if (msg.indexOf("&") != -1)
 				return true;
 			return false;
 		}
-
+		
 		private static function getGmContent(msg : String) : String
 		{
 			if (isGmMsg(msg))
 				return msg.substring(msg.indexOf("/") + 1, msg.length);
 			return msg;
 		}
-
+		
 		/**
 		 * 解析文本中的物品
 		 * 要修改
@@ -553,27 +601,27 @@ package com.rpgGame.app.manager.chat
 		{
 			_showGoodsList.length = 0;
 			_posInfoProto = null;
-
+			
 			var separator : String = RichTextConfig.SEPARATOR;
 			var info : String;
 			var data : Array = msgStr.split(separator);
 			var len : int = data.length;
 			if (len <= 0)
 				return msgStr;
-
+			
 			var unitData:RichTextUnitData;
 			for (var i : int = 1; i < len; i += 2)
 			{
 				info = data[i];
-
+				
 				unitData = RichTextConfig.getUnitData(RichTextConfig.SEPARATOR + info + RichTextConfig.SEPARATOR);
-
+				
 				if (unitData.linkType == RichTextCustomLinkType.ITEM_SHOW_TYPE)
 				{
 					data[i] = MSG_GOODS_CODE;
-					_showGoodsList.push(getShowItemProto(unitData));
+					_showGoodsList.push(getShowItemInfo(unitData));
 				}
-
+				
 				if (unitData.linkType == RichTextCustomLinkType.POSITION_FLY_TYPE)
 				{
 					data[i] = MSG_POSITION_CODE;
@@ -584,7 +632,7 @@ package com.rpgGame.app.manager.chat
 					data[i] = addColorToPositionData(unitData,channel);
 				}
 			}
-
+			
 			var newStr : String = "";
 			for (i = 0; i < len; i++)
 			{
@@ -592,7 +640,26 @@ package com.rpgGame.app.manager.chat
 			}
 			return newStr;
 		}
-
+		
+		/**
+		 * 组装物品消息
+		 * */
+		private static function assemblyItem():Vector.<HyperInfo>
+		{
+			var hypList:Vector.<HyperInfo>=new Vector.<HyperInfo>();
+			if(_showGoodsList==null||_showGoodsList.length==0) return hypList;
+			for(var i:int=0;i<_showGoodsList.length;i++)
+			{
+				var itemInfo:ClientItemInfo=_showGoodsList[i] as ClientItemInfo;
+				var hyp:HyperInfo=new HyperInfo();
+				hyp.hyperType=3;
+				hyp.index=i;
+				hyp.params=itemInfo.itemInfo.itemId.ToString();
+				hypList.push(hyp);
+			}
+			return hypList;
+		}
+		
 		private static function updatePositonInfo(specialMsg:RichTextUnitData) : void
 		{
 			var pos : Array = specialMsg.linkData.split(",");
@@ -603,10 +670,10 @@ package com.rpgGame.app.manager.chat
 			_posInfoProto.sceneLine = pos[3];
 			_posInfoProto.sceneCountry = pos[4];
 		}
-
+		
 		private static function addColorToPositionData(specialMsg:RichTextUnitData, channel:int):String
 		{
-			var labelColor:uint = ChatUtil.getChannelColor(channel);
+			var labelColor:uint = 0x55bb17;//ChatUtil.getChannelColor(channel);
 			return RichTextCustomUtil.getTextLinkCode(specialMsg.label,labelColor,specialMsg.linkType,specialMsg.linkData);
 		}
 		
@@ -631,12 +698,12 @@ package com.rpgGame.app.manager.chat
 		 */
 		private static function getShowItemProto(specialMsg:RichTextUnitData) : GoodsProto
 		{
-//			var itemInfo:ItemInfo  = getShowItemInfo(specialMsg);
-//			return itemInfo.proto;
+			//			var itemInfo:ItemInfo  = getShowItemInfo(specialMsg);
+			//			return itemInfo.proto;
 			return null;
 		}
-
-
+		
+		
 		/**
 		 * 是否能发送
 		 * @param $sendMsgStr
@@ -653,10 +720,10 @@ package com.rpgGame.app.manager.chat
 			}
 			return true;
 		}
-
-
+		
+		
 		//-----------------------------------------------------------
-
+		
 		/**
 		 * 显示一条消息在指定频道
 		 * @param msg
@@ -668,17 +735,17 @@ package com.rpgGame.app.manager.chat
 			var info : ChatInfo = new ChatInfo();
 			info.realShowMsg = msg;
 			info.channel = channel;
-
+			
 			ChatDataManager.GetInstance().putChatData(info);
-
+			
 			EventManager.dispatchEvent(ChatEvent.GET_NEW_NORMAL_DATA, info);
 		}
-
-
-
-
+		
+		
+		
+		
 		//-----------------------------------------------------------
-
+		
 		/**
 		 * 聊天应该显示的页签
 		 * @return
@@ -729,7 +796,88 @@ package com.rpgGame.app.manager.chat
 			tabBarData.data = tabTitle;
 			return tabBarData;
 		}
-
-
+		
+		private static var _zongheHearsayMsg:Vector.<ResChatMessage>=new Vector.<ResChatMessage>;
+		private static var _shejiaoHearsayMsg:Vector.<ResChatMessage>=new Vector.<ResChatMessage>;
+		private static var _gerenHearsayMsg:Vector.<ResChatMessage>=new Vector.<ResChatMessage>;
+		
+		public static function get zongheHearsayMsg():Vector.<ResChatMessage>
+		{
+			return _zongheHearsayMsg;
+		}
+		
+		public static function get shejiaoHearsayMsg():Vector.<ResChatMessage>
+		{
+			return _shejiaoHearsayMsg;
+		}
+		
+		public static function get gerenHearsayMsg():Vector.<ResChatMessage>
+		{
+			return _gerenHearsayMsg;
+		}
+		
+		/**
+		 * 记录综合消息 
+		 * @param msg
+		 * 
+		 */
+		private static function recordZongHeMsg(msg:ResChatMessage):void
+		{
+			if(_zongheHearsayMsg.length>=MAX_CHATSHOWITEMCACEHE){
+				_zongheHearsayMsg.shift();
+			}
+			_zongheHearsayMsg.push(msg);
+		}
+		
+		/**
+		 * 记录社交消息 
+		 * @param msg
+		 * 
+		 */
+		private static function recordSheJiaoMsg(msg:ResChatMessage):void
+		{
+			if(_shejiaoHearsayMsg.length>=MAX_CHATSHOWITEMCACEHE){
+				_shejiaoHearsayMsg.shift();
+			}
+			_shejiaoHearsayMsg.push(msg);
+		}
+		
+		/**
+		 * 记录个人消息 
+		 * @param msg
+		 * 
+		 */
+		private static function recordGeRenMsg(msg:ResChatMessage):void
+		{
+			if(_gerenHearsayMsg.length>=MAX_CHATSHOWITEMCACEHE){
+				_gerenHearsayMsg.shift();
+			}
+			_gerenHearsayMsg.push(msg);
+		}
+		
+		/**
+		 * 收到服务端信息
+		 * */
+		public static function onResChatMessage(msg:ResChatMessage):void
+		{
+			if(isShowInAll(msg.type)) recordZongHeMsg(msg);
+			if(isShowInSheHui(msg.type)) recordSheJiaoMsg(msg);
+			if(isShowInGeRen(msg.type)) recordGeRenMsg(msg);		
+			EventManager.dispatchEvent(ChatEvent.SEND_SUCCESS,msg);
+			if((msg.type==EnumChatChannelType.CHAT_CHANNEL_NORMAL||
+				msg.type==EnumChatChannelType.CHAT_CHANNEL_TEAM||msg.type==EnumChatChannelType.CHAT_CHANNEL_WORLD)){
+				playDialog(msg);
+			}
+		}	
+		
+		private static function playDialog(msg:ResChatMessage):void
+		{
+			var str:String=ChatUtil.replaceItemShow(msg);
+			if(msg.playerId.ToGID()==MainRoleManager.actorID)
+				var sceneRole:SceneRole=MainRoleManager.actor;
+			else sceneRole=SceneManager.getSceneObjByID(msg.playerId.ToGID())as SceneRole;
+			if(sceneRole)
+				sceneRole.dialogFace.addWordFrame(RenderUnitType.BODY, RenderUnitID.BODY,str, 12000);
+		}
 	}
 }

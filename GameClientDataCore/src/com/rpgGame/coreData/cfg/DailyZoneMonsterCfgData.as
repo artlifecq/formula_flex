@@ -35,18 +35,31 @@ package com.rpgGame.coreData.cfg
 			var arr : Array = data.readObject();
 			var num:int=arr.length;
 			var info:Q_dailyzone_monster;
+			var typelist:Array;
 			for(var i:int=0;i<num;i++){
 				info=arr[i];
 				allMap.add(info.q_id,info);
-				var typelist:Array = _typeList[info.q_daily_zoneId];
+				var key1:String = getKey(info.q_daily_zoneId,info.q_diff_level);
+				typelist = _typeList[key1];
 				if(typelist==null)
 				{
 					typelist = new Array();
-					_typeList[info.q_daily_zoneId] = typelist;
+					_typeList[key1] = typelist;
 				}
 				typelist.push(info);
 			}
 			
+			
+			for(var key:* in _typeList)
+			{
+				typelist= _typeList[key] as Array;
+				_typeList[key] = typelist.sortOn("q_wave",Array.NUMERIC);
+			}
+		}
+		
+		private static function getKey(type:int,level:int):String
+		{
+			return type.toString()+"_"+level.toString();
 		}
 		
 		public static function getZoneCfg(id:int):Q_dailyzone_monster
@@ -54,9 +67,13 @@ package com.rpgGame.coreData.cfg
 			return allMap.getValue(id);
 		}
 		
-		public static function getTypeList(type:int):Array
+		public static function getTypeList(type:int,level:int = 0):Array
 		{
-			return _typeList[type];
+			var key1:String = getKey(type,level);
+			return _typeList[key1];
 		}
+		
+		
+		
 	}
 }

@@ -1,5 +1,6 @@
 package com.rpgGame.app.ui.main.dungeon
 {
+	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.sender.DungeonSender;
@@ -67,6 +68,10 @@ package com.rpgGame.app.ui.main.dungeon
 			var now:int = SystemTimeManager.curtTm/1000;
 			var dis:int = _endTime-now;
 			_skin.sec_time.text = "副本倒计时："+TimeUtil.format3TimeType(dis);
+			if(dis<=30)
+				_skin.sec_time.color = 0xd02525;
+			else
+				_skin.sec_time.color = 0xe8c958;
 			if(dis<=0)
 			{
 				stopTimer();
@@ -76,7 +81,7 @@ package com.rpgGame.app.ui.main.dungeon
 		{
 			_dailyZoneId = dailyZoneId;
 			_data = DailyZoneCfgData.getZoneCfg(dailyZoneId);
-			var allLength:Array = DailyZoneMonsterCfgData.getTypeList(dailyZoneId);
+			var allLength:Array = DailyZoneMonsterCfgData.getTypeList(_data.q_zone_id,_data.q_id);
 			
 			for each(var md:Q_dailyzone_monster in allLength)
 			{
@@ -86,6 +91,9 @@ package com.rpgGame.app.ui.main.dungeon
 			
 			_waveInfo = new Dictionary();
 			refeashInfo();
+			_endTime = SystemTimeManager.curtTm/1000+_data.q_zone_time;
+			advanceTime(0);
+			TrusteeshipManager.getInstance().startAutoFight();
 		}
 		
 		private function refeashInfo():void
@@ -99,9 +107,6 @@ package com.rpgGame.app.ui.main.dungeon
 			}
 			_skin.killName.text = wave.toString()+"/"+_totalWaveCount;
 			_skin.killNum.text = count.toString()+"/"+_totalMonsterCount;
-			var percent:Number = count/_totalMonsterCount;
-			_skin.pro_bar.value = _skin.pro_bar.maximum*percent;
-			_skin.lbNum.text = count.toString()+"/"+_totalMonsterCount;
 		}
 		override protected function onHide():void
 		{

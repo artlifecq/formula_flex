@@ -99,7 +99,7 @@ package starling.rendering
         }
 
         /** Duplicates all properties of another instance on the current instance. */
-        public function copyFrom(renderState:RenderState):void
+        public function copyFrom(renderState:RenderState, ignoreModelViewMatrix:Boolean = false):void
         {
             if (_onDrawRequired != null)
             {
@@ -120,7 +120,9 @@ package starling.rendering
             _blendMode = renderState._blendMode;
             _renderTarget = renderState._renderTarget;
             _miscOptions = renderState._miscOptions;
-            _modelviewMatrix.copyFrom(renderState._modelviewMatrix);
+			
+			if(!ignoreModelViewMatrix)
+            	_modelviewMatrix.copyFrom(renderState._modelviewMatrix);
 
             if (_projectionMatrix3DRev != renderState._projectionMatrix3DRev)
             {

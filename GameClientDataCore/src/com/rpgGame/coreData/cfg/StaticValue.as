@@ -72,6 +72,7 @@ package com.rpgGame.coreData.cfg
 		 * 绿色
 		 */
 		public static const UI_GREEN:uint=0x55bd15;
+		public static const UI_GREEN1:uint=0x6BCC08;
 		/**
 		 *黄 
 		 */
@@ -81,6 +82,10 @@ package com.rpgGame.coreData.cfg
 		 */
 		public static const UI_YELLOW1:uint=0xcfc6ae;
 		/**
+		 *黄色2
+		 */
+		public static const UI_YELLOW2:uint=0xc9b722;
+		/**
 		 *普通文本
 		 */
 		public static const UI_NORMAL:uint=0x8b8d7b;
@@ -89,6 +94,10 @@ package com.rpgGame.coreData.cfg
 		 *特殊文本蓝
 		 */
 		public static const UI_SPECIAL_BLUE:uint=0x2482b4;
+		/**
+		 *红1
+		 */
+		public static const UI_RED1:uint=0xD23735;
 		/**
 		 *特殊文本红
 		 */

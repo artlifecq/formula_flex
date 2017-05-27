@@ -21,6 +21,7 @@
     {
 
         public var type:int;
+		public var row:int;
         public var order:uint;
         public var onClick:Function;
         private var _title:String;

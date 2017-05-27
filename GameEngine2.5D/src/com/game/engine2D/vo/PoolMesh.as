@@ -121,7 +121,7 @@ package com.game.engine2D.vo
 				colorTransform.redOffset = 0;
 			}
 		}
-		
+
 		public function get alpha():Number
 		{
 			return _alpha;
@@ -169,12 +169,12 @@ package com.game.engine2D.vo
 		{
 			return super.scaleX;
 		}
-		
+
 		public function get object3DScaleZ():Number
 		{
 			return super.scaleZ;
 		}
-		
+
 		public function get object3DScaleY():Number
 		{
 			return super.scaleY;
@@ -184,7 +184,7 @@ package com.game.engine2D.vo
 		{
 			_posScale.x = val;
 		}
-		
+
 		override public function set scaleY(val:Number):void
 		{
 			_posScale.y = val;

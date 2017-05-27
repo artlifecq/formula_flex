@@ -11,7 +11,7 @@ package feathers.controls.renderers
 	import feathers.controls.LayoutGroup;
 	import feathers.skins.IStyleProvider;
 
-	import starling.events.Event;
+	import away3d.events.Event;
 
 	/**
 	 * Based on <code>LayoutGroup</code>, this component is meant as a base

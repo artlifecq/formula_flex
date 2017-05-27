@@ -8,7 +8,7 @@ package com.rpgGame.app.view.uiComponent.menu
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
-	import starling.events.Event;
+	import away3d.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -97,7 +97,7 @@ package com.rpgGame.app.view.uiComponent.menu
 			StarlingLayerManager.hintUILayer.addChild( this );
 			this.addEventListener(Event.REMOVED_FROM_STAGE,onHide);
 			
-			TweenUtil.MenuShowAndHide( this, 0, 0, 1, showEnd );
+			TweenUtil.MenuShowAndHide( this, 1, 0, 1, showEnd );
 			if(lastBindHider != bindHideDisplay)
 			{
 				if(lastBindHider != null)unBind();

@@ -294,7 +294,7 @@ package com.editor.manager
 			else if (data is EditorClientMapData)
 			{
 				mapData = data as EditorClientMapData;
-				mapData.name = mapData.name + "_" + (new Date()).getTime();
+				mapData.name = mapData.name + "_new_scene";
 				SceneManager.getInstance().enterScene(mapData.name, mapData);
 			}
 

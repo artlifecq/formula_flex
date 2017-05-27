@@ -21,6 +21,9 @@ package com.rpgGame.netData.dailyzone.message{
 		//银两
 		private var _money: int;
 		
+		//真气
+		private var _zhenqi: int;
+		
 		//0失败,1成功
 		private var _success: int;
 		
@@ -42,6 +45,8 @@ package com.rpgGame.netData.dailyzone.message{
 			writeInt(_exp);
 			//银两
 			writeInt(_money);
+			//真气
+			writeInt(_zhenqi);
 			//0失败,1成功
 			writeByte(_success);
 			//获得星数
@@ -63,6 +68,8 @@ package com.rpgGame.netData.dailyzone.message{
 			_exp = readInt();
 			//银两
 			_money = readInt();
+			//真气
+			_zhenqi = readInt();
 			//0失败,1成功
 			_success = readByte();
 			//获得星数
@@ -121,6 +128,21 @@ package com.rpgGame.netData.dailyzone.message{
 		 */
 		public function set money(value: int): void{
 			this._money = value;
+		}
+		
+		/**
+		 * get 真气
+		 * @return 
+		 */
+		public function get zhenqi(): int{
+			return _zhenqi;
+		}
+		
+		/**
+		 * set 真气
+		 */
+		public function set zhenqi(value: int): void{
+			this._zhenqi = value;
 		}
 		
 		/**

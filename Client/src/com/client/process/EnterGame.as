@@ -67,7 +67,8 @@ package com.client.process
 			var userInfo : Object = {auth: ClientGlobal.auth, sign: ClientGlobal.sign};
 			//由于登录和资源是异步的，所以需要登录成功并且资源全部加载好之后才可以进游戏，
 			var entryClass : Class = getDefinitionByName(MAINENTRY_PATH) as Class;
-			ClientGlobal.mainEntry = new entryClass();
+			var main:Object=new entryClass();
+			ClientGlobal.mainEntry = main;
 			ClientGlobal.mainEntry.loadingActual = ResLoadingView;
 			ClientGlobal.mainEntry.setup(ClientGlobal, userInfo);
 
@@ -91,7 +92,7 @@ package com.client.process
 		{
 			if (Capabilities.isDebugger)
 			{
-				GameAlert.show("您当前的播放器是Debug版本，所有表现和数据不能用作性能参考！", "提示", onShowDebugPlayerFunc, onShowDebugPlayerFunc);
+//				GameAlert.show("您当前的播放器是Debug版本，所有表现和数据不能用作性能参考！", "提示", onShowDebugPlayerFunc, onShowDebugPlayerFunc);
 				return true;
 			}
 			return false;

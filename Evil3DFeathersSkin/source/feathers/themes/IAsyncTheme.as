@@ -34,9 +34,9 @@ package feathers.themes
 	 * 
 	 * @see #isCompleteForStarling()
 	 *
-	 * @eventType starling.events.Event.COMPLETE
+	 * @eventType away3d.events.Event.COMPLETE
 	 */
-	[Event(name="complete",type="starling.events.Event")]
+	[Event(name="complete",type="away3d.events.Event")]
 
 	/**
 	 * A theme that uses an asynchronous loading mechanism (such as the Starling
@@ -53,7 +53,7 @@ package feathers.themes
 		 * Indicates if the assets have been loaded and the theme has been
 		 * initialized for a specific Starling instance.
 		 * 
-		 * @see #event:complete starling.events.Event.COMPLETE
+		 * @see #event:complete away3d.events.Event.COMPLETE
 		 */
 		function isCompleteForStarling(starling:Starling):Boolean;
 	}

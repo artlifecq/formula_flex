@@ -61,9 +61,9 @@ package com.rpgGame.app.state.role.control
 					render.alpha = 1;
 					break;
 				case RenderUnitType.BODY:
-					if(render.compositeAMesh)
+					if(render.compositeMesh)
 					{
-						render.compositeAMesh.layerType = layerType;
+						render.compositeMesh.layerType = layerType;
 					}
 					break;
 			}
@@ -88,10 +88,10 @@ package com.rpgGame.app.state.role.control
 					render.alpha = 0;
 					break;
 				case RenderUnitType.BODY:
-					if(render.compositeAMesh)
+					if(render.compositeMesh)
 					{
-						layerType = render.compositeAMesh.layerType;
-						render.compositeAMesh.layerType = 0;
+						layerType = render.compositeMesh.layerType;
+						render.compositeMesh.layerType = 0;
 					}
 					break;
 			}

@@ -11,6 +11,8 @@
 package starling.events
 {
     import flash.geom.Point;
+    
+    import away3d.events.Event;
 
     /** A ResizeEvent is dispatched by the stage when the size of the Flash container changes.
      *  Use it to update the Starling viewport and the stage size.

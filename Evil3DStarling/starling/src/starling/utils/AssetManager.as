@@ -37,8 +37,8 @@ package starling.utils
     import away3d.tools.utils.TextureUtils;
     
     import starling.core.Starling;
-    import starling.events.Event;
-    import starling.events.EventDispatcher;
+    import away3d.events.Event;
+    import away3d.events.EventDispatcher;
     import starling.text.BitmapFont;
     import starling.text.TextField;
     import starling.textures.IStarlingTexture;
@@ -47,19 +47,19 @@ package starling.utils
     import starling.textures.TextureOptions;
 
     /** Dispatched when all textures have been restored after a context loss. */
-    [Event(name="texturesRestored", type="starling.events.Event")]
+    [Event(name="texturesRestored", type="away3d.events.Event")]
     
     /** Dispatched when an URLLoader fails with an IO_ERROR while processing the queue.
      *  The 'data' property of the Event contains the URL-String that could not be loaded. */
-    [Event(name="ioError", type="starling.events.Event")]
+    [Event(name="ioError", type="away3d.events.Event")]
 
     /** Dispatched when an URLLoader fails with a SECURITY_ERROR while processing the queue.
      *  The 'data' property of the Event contains the URL-String that could not be loaded. */
-    [Event(name="securityError", type="starling.events.Event")]
+    [Event(name="securityError", type="away3d.events.Event")]
 
     /** Dispatched when an XML or JSON file couldn't be parsed.
      *  The 'data' property of the Event contains the name of the asset that could not be parsed. */
-    [Event(name="parseError", type="starling.events.Event")]
+    [Event(name="parseError", type="away3d.events.Event")]
 
     /** The AssetManager handles loading and accessing a variety of asset types. You can 
      *  add assets directly (via the 'add...' methods) or asynchronously via a queue. This allows

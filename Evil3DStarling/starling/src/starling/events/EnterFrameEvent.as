@@ -10,6 +10,8 @@
 
 package starling.events
 {
+	import away3d.events.Event;
+
     /** An EnterFrameEvent is triggered once per frame and is dispatched to all objects in the
      *  display tree.
      *

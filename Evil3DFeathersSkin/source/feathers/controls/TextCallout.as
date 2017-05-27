@@ -7,14 +7,14 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.controls
 {
+	import flash.ui.Keyboard;
+	
 	import feathers.core.FeathersControl;
 	import feathers.core.ITextRenderer;
 	import feathers.core.IToolTip;
 	import feathers.core.PopUpManager;
 	import feathers.skins.IStyleProvider;
-
-	import flash.ui.Keyboard;
-
+	
 	import starling.display.DisplayObject;
 	import starling.events.EnterFrameEvent;
 
@@ -38,9 +38,9 @@ package feathers.controls
 	 *   listening for the event.</td></tr>
 	 * </table>
 	 *
-	 * @eventType starling.events.Event.CLOSE
+	 * @eventType away3d.events.Event.CLOSE
 	 */
-	[Event(name="close",type="starling.events.Event")]
+	[Event(name="close",type="away3d.events.Event")]
 	
 	/**
 	 * A special <code>Callout</code> designed to display text.

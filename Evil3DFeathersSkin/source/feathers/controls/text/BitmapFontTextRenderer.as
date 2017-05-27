@@ -10,6 +10,8 @@ package feathers.controls.text
 	import flash.geom.Point;
 	import flash.text.TextFormatAlign;
 	
+	import away3d.events.Event;
+	
 	import feathers.core.FeathersControl;
 	import feathers.core.IStateContext;
 	import feathers.core.IStateObserver;
@@ -21,7 +23,6 @@ package feathers.controls.text
 	
 	import starling.display.Image;
 	import starling.display.MeshBatch;
-	import starling.events.Event;
 	import starling.rendering.Painter;
 	import starling.text.BitmapChar;
 	import starling.text.BitmapFont;
@@ -128,7 +129,15 @@ package feathers.controls.text
 			}
 			this.isQuickHitAreaEnabled = true;
 		}
-
+		
+		public function get enableTextBatch():Boolean {
+			return false;
+		}
+		
+		public function set enableTextBatch(value:Boolean):void {
+			
+		}
+				
 		/**
 		 * @private
 		 */

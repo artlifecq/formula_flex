@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.dungeon.multy
 {
+	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
@@ -38,7 +39,8 @@ package com.rpgGame.appModule.dungeon.multy
 			
 			switch (target) {
 				case _skin.btn_ok:
-					AppManager.showApp(AppConstant.MULTYSURE_PANL);
+					this.hide();
+					AppManager.showApp(AppConstant.MULTY_ENTERTIME_PANL);
 					break;
 				case _skin.btn_cancel:
 					this.hide();
@@ -46,6 +48,7 @@ package com.rpgGame.appModule.dungeon.multy
 			}
 			
 		}
+		
 		
 		
 	}

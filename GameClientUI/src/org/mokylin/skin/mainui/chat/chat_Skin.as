@@ -2,14 +2,11 @@ package org.mokylin.skin.mainui.chat
 {
 	import feathers.controls.Button;
 	import feathers.controls.Group;
-	import feathers.controls.ScrollContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.ToggleButton;
 	import feathers.controls.UIAsset;
-	
+	import feathers.controls.ScrollContainer;
 	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_chat;
-	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
-	import org.mokylin.skin.mainui.chat.pingdaoItems;
 	import org.mokylin.skin.mainui.chat.button.ButtonChat_banghui;
 	import org.mokylin.skin.mainui.chat.button.ButtonChat_biaoqiang;
 	import org.mokylin.skin.mainui.chat.button.ButtonChat_dangqian;
@@ -26,6 +23,7 @@ package org.mokylin.skin.mainui.chat
 	import org.mokylin.skin.mainui.chat.button.ButtonChat_suo;
 	import org.mokylin.skin.mainui.chat.button.ButtonChat_zhankai;
 	import org.mokylin.skin.mainui.chat.button.ButtonChat_zonghe;
+	import org.mokylin.skin.mainui.chat.pingdaoItems;
 
 	/**
 	 * @private
@@ -55,7 +53,7 @@ package org.mokylin.skin.mainui.chat
 
 		public var btn_location:feathers.controls.Button;
 
-		public var btn_lock:feathers.controls.Button;
+		public var btn_lock:feathers.controls.ToggleButton;
 
 		public var btn_open:feathers.controls.Button;
 
@@ -115,7 +113,7 @@ package org.mokylin.skin.mainui.chat
 			
 			this.currentState = "normal";
 			this.height = 335;
-			this.width = 364;
+			this.width = 366;
 			this.elementsContent = [grp_txt_i(),grp_top_i(),btn_lock_i(),grp_buttom_i(),lb_tishi_i(),grp_laba_i(),grp_select_i()];
 			
 			states = {
@@ -127,15 +125,6 @@ package org.mokylin.skin.mainui.chat
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __chat_Skin_UIAsset2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/mainui/chat/laba.png";
-			temp.x = 5;
-			temp.y = 5;
-			return temp;
-		}
-
 		private function bg_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -143,7 +132,7 @@ package org.mokylin.skin.mainui.chat
 			temp.name = "bg";
 			temp.height = 282;
 			temp.styleName = "ui/mainui/chat/di.png";
-			temp.width = 364;
+			temp.width = 366;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -242,9 +231,9 @@ package org.mokylin.skin.mainui.chat
 			return temp;
 		}
 
-		private function btn_lock_i():feathers.controls.Button
+		private function btn_lock_i():feathers.controls.ToggleButton
 		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
+			var temp:feathers.controls.ToggleButton = new feathers.controls.ToggleButton();
 			btn_lock = temp;
 			temp.name = "btn_lock";
 			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_suo;
@@ -365,7 +354,7 @@ package org.mokylin.skin.mainui.chat
 			temp.name = "grp_laba_bg";
 			temp.height = 28;
 			temp.styleName = "ui/mainui/chat/di_laba.png";
-			temp.width = 362;
+			temp.width = 364;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -376,9 +365,9 @@ package org.mokylin.skin.mainui.chat
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grp_laba = temp;
 			temp.name = "grp_laba";
-			temp.x = 2;
+			temp.x = 1;
 			temp.y = 0;
-			temp.elementsContent = [grp_laba_bg_i(),__chat_Skin_UIAsset2_i()];
+			temp.elementsContent = [grp_laba_bg_i()];
 			return temp;
 		}
 
@@ -542,7 +531,7 @@ package org.mokylin.skin.mainui.chat
 			vscrollbar = temp;
 			temp.name = "vscrollbar";
 			temp.height = 225;
-			temp.styleClass = org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
+			temp.styleClass = org.mokylin.skin.component.scrollbar.ScrollBarSkin_chat;
 			temp.x = 347;
 			temp.y = 27;
 			return temp;

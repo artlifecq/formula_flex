@@ -9,7 +9,7 @@ package feathers.controls
 	import feathers.layout.ILayoutDisplayObject;
 	
 	import starling.display.Canvas;
-	import starling.events.Event;
+	import away3d.events.Event;
 	import starling.rendering.Painter;
 	
 	/**

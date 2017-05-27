@@ -12,6 +12,7 @@ package org.game.netCore.net
 	import flash.events.SecurityErrorEvent;
 	import flash.external.ExternalInterface;
 	import flash.net.Socket;
+	import flash.system.Security;
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 	import flash.utils.getTimer;
@@ -31,6 +32,15 @@ package org.game.netCore.net
 		public static const CLIENT_CONNECT_TO_SERVER:String = "client_connect_to_server";
 		/** 客户端连接服务器失败 **/
 		public static const CLIENT_FAILD_TO_SERVER:String = "client_faild_to_server";
+		
+		/**
+		 *跨服连接成功 
+		 */
+		public static const CROSS_CONNECT_OK:String = "cross_connect_ok";
+		/**
+		 *跨服连接失败 
+		 */
+		public static const CROSS_CONNECT_ERROR:String = "cross_connect_error";
 		
 		/** 单例对象 **/
 		private static var _inst:MessageMgr;
@@ -88,6 +98,8 @@ package org.game.netCore.net
 		
 		private var crossSocket:Socket;
 		public var isCrossSocket:Boolean = false;
+		public var crossTimes:int;
+		
 		
 		public var ip:String;
 		public var port:int;
@@ -433,27 +445,27 @@ package org.game.netCore.net
 		private function checkUseCrossServer( msg:Message ):int
 		{
 			var isCross:int = 0;
-			//			if( isCrossSocket )
-			//			{
-			//				var msgId:int = msg.getId();
-			//				if( sendCrossHash.get( msgId ) )
-			//					isCross = sendCrossHash.get( msgId );
-			//				if( msgId == 112201 )
-			//				{
-			//					var type:int = (msg as ReqChatMessage).type;
-			//					if( type == EnumChatChannelType.PRIVATE )
-			//						isCross = 2;
-			//					else if( type == EnumChatChannelType.NORMAL )
-			//						isCross = 1;
-			//				}
-			//				else if( msgId == 108203 )
-			//				{
-			//					var item:Item = Mgr.backpackMgr.getItemById( (msg as ReqUseItemMessage).itemId );
-			//					var q_item:Q_item = Mgr.gameDataMgr.getItemModel( item.itemModelId );
-			//					if( ItemUtil.isMedical( q_item.q_type ) || q_item.q_type == EnumItemType.ADDBUFF )
-			//						isCross = 1;
-			//				}
-			//			}
+			if( isCrossSocket )
+			{
+				var msgId:int = msg.getId();
+				if( sendCrossHash.get( msgId ) )
+					isCross = sendCrossHash.get( msgId );
+				/*if( msgId == 112201 )
+				{
+					var type:int = (msg as ReqChatMessage).type;
+					if( type == EnumChatChannelType.PRIVATE )
+						isCross = 2;
+					else if( type == EnumChatChannelType.NORMAL )
+						isCross = 1;
+				}
+				else if( msgId == 108203 )
+				{
+					var item:Item = Mgr.backpackMgr.getItemById( (msg as ReqUseItemMessage).itemId );
+					var q_item:Q_item = Mgr.gameDataMgr.getItemModel( item.itemModelId );
+					if( ItemUtil.isMedical( q_item.q_type ) || q_item.q_type == EnumItemType.ADDBUFF )
+						isCross = 1;
+				}*/
+			}
 			return isCross;
 		}
 		
@@ -674,6 +686,9 @@ package org.game.netCore.net
 		public var PROXY_SERVER_USER:String = "zt";
 		/** 代理服务器密码 **/
 		public var PROXY_SERVER_PWD:String = "moloong";
+		private var crossIP:String;
+		private var crossPort:int;
+		private var crossSSLPort:int;
 		/**
 		 * 创建套接字并连接 
 		 */		
@@ -1053,32 +1068,34 @@ package org.game.netCore.net
 		 * 开始跨服连接 
 		 * 
 		 */
-		public function connectCrossServer():void
+		public function connectCrossServer(crossIP:String,crossPort:int,crossSSLPort:int):void
 		{
 			if (crossSocket == null)
 			{
-				//				var policyPath:String = "xmlsocket://" + Mgr.crossMgr.crossIP + ":" +  Mgr.crossMgr.crossSSLPort;
-				//				Security.loadPolicyFile( policyPath );
-				//				Mgr.logMgr.addClientLog("连接跨服服务器:" + Mgr.crossMgr.crossIP + ":" +  Mgr.crossMgr.crossPort );
-				//				crossSocket = new Socket();
-				//				crossSocket.timeout = 10000;
-				//				crossSocket.addEventListener(Event.CONNECT, corssconnectHandler);
-				//				crossSocket.addEventListener(IOErrorEvent.IO_ERROR, corssioErrorHandler);
-				//				crossSocket.addEventListener(SecurityErrorEvent.SECURITY_ERROR, corsssecurityErrorHandler);
-				//				crossSocket.addEventListener(Event.CLOSE, corsscloseHandler, false, 0, true );
-				//				crossSocket.addEventListener(ProgressEvent.SOCKET_DATA, recvCross);
+				var policyPath:String = "xmlsocket://" + crossIP + ":" +  crossSSLPort;
+				Security.loadPolicyFile( policyPath );
+				GameLog.addShow("连接跨服服务器:" + crossIP + ":" +  crossPort );
+				crossSocket = new Socket();
+				crossSocket.timeout = 10000;
+				crossSocket.addEventListener(Event.CONNECT, crossconnectHandler);
+				crossSocket.addEventListener(IOErrorEvent.IO_ERROR, crossioErrorHandler);
+				crossSocket.addEventListener(SecurityErrorEvent.SECURITY_ERROR, crossEcurityErrorHandler);
+				crossSocket.addEventListener(Event.CLOSE, corsscloseHandler, false, 0, true );
+				crossSocket.addEventListener(ProgressEvent.SOCKET_DATA, recvCross);
 			}
-			
-			//crossSocket.connect( Mgr.crossMgr.crossIP, Mgr.crossMgr.crossPort);
+			this.crossIP=crossIP;
+			this.crossPort=crossPort;
+			this.crossSSLPort=crossSSLPort;
+			crossSocket.connect( crossIP, crossPort);
 		}
 		
 		protected function corsscloseHandler(event:Event):void
 		{
 			clearCorssSocket();
-			//			dispatchEvent(new Event(PubLoginMgr.CROSS_CONNECT_ERROR));
+//			dispatchEvent( new NetEvent( CLIENT_FAILD_TO_SERVER, event.toString() ) );
+//			AlertPanel.showMsg("服务器连接断开", null, false);
 			//			
 			//			if( !Mgr.pubLoginMgr.isCrossState )
-			{
 				//				Mgr.mainApp.cacheAsBitmap = true;
 				//				Mgr.sceneMgr.removeEvent();
 				//				Mgr.mainApp.filters = [ FilterUtil.getGrayFilter() ];
@@ -1102,55 +1119,51 @@ package org.game.netCore.net
 				//						);
 				//					}
 				//				}
+		}
+		
+		protected function crossEcurityErrorHandler(event:SecurityErrorEvent):void
+		{
+			GameLog.addShow("安全错误 跨服断开" );
+			clearCorssSocket();
+			if( crossTimes > 0 )
+			{
+				GameLog.addShow("跨服连接失败次数倒数:" + crossTimes + '   ' + event.text);
+				crossTimes--;
+				connectCrossServer(crossIP,crossPort,crossSSLPort);
+			}
+			else
+			{
+				var str:String = "【SecurityError】";
+				str += "\n端口：" + crossPort;
+				str += "\n安全端口：" + crossSSLPort;
+				str += "\nIP：" +crossIP;
+				AlertPanel.showMsg( str );
+				dispatchEvent(new Event(CROSS_CONNECT_ERROR));
 			}
 		}
 		
-		protected function corsssecurityErrorHandler(event:SecurityErrorEvent):void
+		protected function crossioErrorHandler(event:IOErrorEvent):void
 		{
-			//			Mgr.logMgr.addClientLog("安全错误 跨服断开" );
-			////			AlertPanel.showMsg( event.text );
-			//			clearCorssSocket();
-			//			if( Mgr.crossMgr.crossTimes > 0 )
-			//			{
-			//				Mgr.logMgr.addClientLog("跨服连接失败次数倒数:" + Mgr.crossMgr.crossTimes + '   ' + event.text);
-			//				Mgr.crossMgr.crossTimes--;
-			//				connectCrossServer();
-			//			}
-			//			else
-			//			{
-			//				var str:String = "【SecurityError】";
-			//				str += "\n端口：" + Mgr.crossMgr.crossPort;
-			//				str += "\n安全端口：" + Mgr.crossMgr.crossSSLPort;
-			//				str += "\nIP：" +Mgr.crossMgr.crossIP;
-			//				AlertPanel.showMsg( str );
-			//				dispatchEvent(new Event(CrossMgr.CROSS_CONNECT_ERROR));
-			//			}
+			GameLog.addShow("io错误 跨服断开"); 
+			clearCorssSocket();
+			if( crossTimes > 0 )
+			{
+				GameLog.addShow("跨服连接失败次数倒数:" + crossTimes + '   ' + event.text);
+				crossTimes--;
+				connectCrossServer(crossIP,crossPort,crossSSLPort);
+			}
+			else
+			{
+				dispatchEvent(new Event(CROSS_CONNECT_ERROR));
+			}
 		}
 		
-		protected function corssioErrorHandler(event:IOErrorEvent):void
+		protected function crossconnectHandler(event:Event):void
 		{
-			//			Mgr.logMgr.addClientLog("io错误 跨服断开"); 
-			//			clearCorssSocket();
-			//			if( Mgr.crossMgr.crossTimes > 0 )
-			//			{
-			//				Mgr.logMgr.addClientLog("跨服连接失败次数倒数:" + Mgr.crossMgr.crossTimes + '   ' + event.text);
-			//				Mgr.crossMgr.crossTimes--;
-			//				connectCrossServer();
-			//			}
-			//			else
-			//			{
-			//				dispatchEvent(new Event(CrossMgr.CROSS_CONNECT_ERROR));
-			//			}
-		}
-		
-		protected function corssconnectHandler(event:Event):void
-		{
-			//			Mgr.logMgr.addClientLog("连接跨服服务器成功" );
-			//			isCrossSocket = true;
-			//			_crossMsgNum = 0;
-			//			Mgr.mainApp.resetServerTimeCheck();
-			//			Mgr.mainApp.filters = null;
-			//			dispatchEvent(new Event(CrossMgr.CROSS_CONNECT_OK));
+			GameLog.addShow("连接跨服服务器成功" );
+			isCrossSocket = true;
+			_crossMsgNum = 0;
+			dispatchEvent(new Event(CROSS_CONNECT_OK));
 		}		
 		
 		public function clearOrgSocket():void
@@ -1172,12 +1185,13 @@ package org.game.netCore.net
 		
 		public function clearCorssSocket():void
 		{
+			crossTimes=3;
 			if (crossSocket != null)
 			{
 				crossSocket.close();
-				crossSocket.removeEventListener(Event.CONNECT, corssconnectHandler);
-				crossSocket.removeEventListener(IOErrorEvent.IO_ERROR, corssioErrorHandler);
-				crossSocket.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, corsssecurityErrorHandler);
+				crossSocket.removeEventListener(Event.CONNECT, crossconnectHandler);
+				crossSocket.removeEventListener(IOErrorEvent.IO_ERROR, crossioErrorHandler);
+				crossSocket.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, crossEcurityErrorHandler);
 				crossSocket.removeEventListener(Event.CLOSE, corsscloseHandler);
 				crossSocket.removeEventListener(ProgressEvent.SOCKET_DATA, recvCross);
 				crossSocket = null;

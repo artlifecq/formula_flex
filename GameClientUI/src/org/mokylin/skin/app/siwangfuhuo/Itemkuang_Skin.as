@@ -18,6 +18,8 @@ package org.mokylin.skin.app.siwangfuhuo
 			super();
 			
 			this.currentState = "down";
+			this.height = 190;
+			this.width = 141;
 			this.elementsContent = [];
 			
 			states = {

@@ -1,8 +1,10 @@
 package com.rpgGame.app.sender
 {
 	import com.rpgGame.netData.lunjian.message.CSLunJianPanelInfosMessage;
+	import com.rpgGame.netData.zone.message.CSClientTriggerValiedMessage;
 	import com.rpgGame.netData.zone.message.ReqZoneCommonEnterMessage;
 	import com.rpgGame.netData.zone.message.ReqZoneCommonQuitMessage;
+	import com.rpgGame.netData.zone.message.ReqZoneOutToGameMessage;
 	
 	import org.game.netCore.connection.SocketConnection;
 
@@ -39,6 +41,16 @@ package com.rpgGame.app.sender
 			var msg:ReqZoneCommonQuitMessage=new ReqZoneCommonQuitMessage();
 			SocketConnection.send(msg);
 		}
+		/**
+		 *请求退出副本 
+		 * 
+		 */
+		public static function zoneOutToGame():void
+		{
+			var msg:ReqZoneOutToGameMessage=new ReqZoneOutToGameMessage();
+			SocketConnection.send(msg);
+		}
+		
 		
 		/**
 		 *请求论剑信息 
@@ -49,5 +61,18 @@ package com.rpgGame.app.sender
 			var msg:CSLunJianPanelInfosMessage=new CSLunJianPanelInfosMessage();
 			SocketConnection.send(msg);
 		}
+		
+		
+		/**
+		 *发送触发信息
+		 * 
+		 */
+		public static function reqTrigger(trid:int):void
+		{
+			var msg:CSClientTriggerValiedMessage=new CSClientTriggerValiedMessage();
+			msg.triggerId=trid;
+			SocketConnection.send(msg);
+		}
+		
 	}
 }

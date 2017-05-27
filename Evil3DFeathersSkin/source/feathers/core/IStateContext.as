@@ -27,7 +27,7 @@ package feathers.core
 	 *
 	 * @eventType feathers.events.FeathersEventType.STATE_CHANGE
 	 */
-	[Event(name="stateChange",type="starling.events.Event")]
+	[Event(name="stateChange",type="away3d.events.Event")]
 
 	/**
 	 * An object with multiple states.

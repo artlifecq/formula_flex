@@ -26,7 +26,7 @@ package org.mokylin.skin.mainui.chat.button
 		{
 			super();
 			
-			this.currentState = "down";
+			this.currentState = "upAndSelected";
 			this.elementsContent = [];
 			
 			states = {
@@ -47,7 +47,12 @@ package org.mokylin.skin.mainui.chat.button
 						}
 					]
 			};
-			skinNames={"down":"ui/mainui/chat/button/chat_suo/down.png", "hover":"ui/mainui/chat/button/chat_suo/over.png", "up":"ui/mainui/chat/button/chat_suo/up.png"};
+			skinNames={"down":"ui/mainui/chat/button/chat_suo/down.png",
+			"downAndSelected":"ui/mainui/chat/button/chat_suo/select_down.png",
+			"hover":"ui/mainui/chat/button/chat_suo/over.png",
+			"overAndSelected":"ui/mainui/chat/button/chat_suo/select_over.png",
+			"up":"ui/mainui/chat/button/chat_suo/up.png",
+			"upAndSelected":"ui/mainui/chat/button/chat_suo/select.png"};
 		}
 
 

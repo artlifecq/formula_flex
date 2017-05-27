@@ -1,5 +1,6 @@
 package com.rpgGame.app.ui.main.navigation {
     import com.rpgGame.app.sender.ItemSender;
+    import com.rpgGame.app.ui.alert.GameAlert;
     import com.rpgGame.core.app.AppConstant;
     import com.rpgGame.core.app.AppManager;
     import com.rpgGame.core.events.ItemEvent;
@@ -8,6 +9,7 @@ package com.rpgGame.app.ui.main.navigation {
     import com.rpgGame.core.ui.SkinUI;
     import com.rpgGame.coreData.cfg.ClientConfig;
     import com.rpgGame.coreData.cfg.item.ItemContainerID;
+    import com.rpgGame.coreData.lang.LangAlertInfo;
     
     import flash.geom.Point;
     
@@ -44,12 +46,11 @@ package com.rpgGame.app.ui.main.navigation {
 			if (!ClientConfig.isBanShu)
 			{
 				TipTargetManager.show(_skin.btn_zhanhun, TargetTipsMaker.makeSimpleTextTips("战魂<br/>快捷键：C"));
-				TipTargetManager.show(_skin.btn_juese, TargetTipsMaker.makeSimpleTextTips("角色<br/>快捷键：C"));
-				TipTargetManager.show(_skin.btn_beibao, TargetTipsMaker.makeSimpleTextTips("背包<br/>快捷键：B"));
+				TipTargetManager.show(_skin.btn_renwu, TargetTipsMaker.makeSimpleTextTips("角色<br/>快捷键：C"));
 				TipTargetManager.show(_skin.btn_zuoqi, TargetTipsMaker.makeSimpleTextTips("坐骑<br/>快捷键：V"));
 				TipTargetManager.show(_skin.btn_zhuangbei, TargetTipsMaker.makeSimpleTextTips("装备<br/>快捷键：P"));
 				TipTargetManager.show(_skin.btn_wuxue, TargetTipsMaker.makeSimpleTextTips("武学<br/>快捷键：J"));
-				TipTargetManager.show(_skin.btn_banghui, TargetTipsMaker.makeSimpleTextTips("帮会<br/>快捷键：O"));
+				TipTargetManager.show(_skin.btn_shejiao, TargetTipsMaker.makeSimpleTextTips("帮会<br/>快捷键：O"));
 				TipTargetManager.show(_skin.btn_shangcheng, TargetTipsMaker.makeSimpleTextTips("商城<br/>快捷键：O"));
 			}
 			
@@ -95,8 +96,8 @@ package com.rpgGame.app.ui.main.navigation {
                     // 关闭
                     this.setState(false);
                     break;
-                case this._skin.btn_beibao:
-                case this._skin.btn_juese:
+                case this._skin.btn_renwu:
+					
                     AppManager.showApp(AppConstant.ROLE_PANEL);
                     break;
                 case this._skin.btn_wuxue:
@@ -112,7 +113,7 @@ package com.rpgGame.app.ui.main.navigation {
 				case _skin.btn_zuoqi:
 					AppManager.showApp(AppConstant.MOUNT_PANEL);
 					break;
-				case this._skin.btn_banghui:
+				case this._skin.btn_shejiao:
 					AppManager.showApp(AppConstant.SOCIAL_PANEL);
 					break;
 				case this._skin.btn_shangcheng:

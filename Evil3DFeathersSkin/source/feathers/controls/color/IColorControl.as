@@ -13,7 +13,7 @@ package feathers.controls.color
 	/**
 	 * Dispatched when the <code>color</code> property changes.
 	 */
-	[Event(name="change",type="starling.events.Event")]
+	[Event(name="change",type="away3d.events.Event")]
 
 	/**
 	 * Dispatched to preview a potential new color value that has not been
@@ -21,7 +21,7 @@ package feathers.controls.color
 	 * <code>Event.UPDATE</code> may be dispatched to preview the color. The
 	 * event's <code>data</code> property contains the preview color value.
 	 */
-	[Event(name="update",type="starling.events.Event")]
+	[Event(name="update",type="away3d.events.Event")]
 
 	/**
 	 * A Feathers component that displays, and possibly, selects a color.

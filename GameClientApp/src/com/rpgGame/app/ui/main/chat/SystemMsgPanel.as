@@ -17,7 +17,7 @@ package com.rpgGame.app.ui.main.chat
 	import org.mokylin.skin.common.panel_ziriSkin;
 	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
+	import away3d.events.Event;
 	
 	/**
 	 *系统消息面板 

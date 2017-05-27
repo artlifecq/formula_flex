@@ -7,15 +7,16 @@ accordance with the terms of the accompanying license agreement.
 */
 package feathers.media
 {
+	import away3d.events.Event;
+	
 	import feathers.controls.Slider;
 	import feathers.core.IValidating;
 	import feathers.events.FeathersEventType;
 	import feathers.events.MediaPlayerEventType;
 	import feathers.layout.Direction;
 	import feathers.skins.IStyleProvider;
-
+	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
 
 	/**
 	 * A specialized slider that displays and controls the current position of

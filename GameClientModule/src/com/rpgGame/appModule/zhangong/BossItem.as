@@ -4,14 +4,15 @@ package com.rpgGame.appModule.zhangong
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.display3D.InterAvatar3D;
+	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.ZhanGongManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.sender.ZhanGongSender;
-	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.ui.common.CenterEftPop;
+	import com.rpgGame.app.utils.MenuUtil;
 	import com.rpgGame.app.utils.RoleFaceMaskEffectUtil;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.ZhanGongEvent;
@@ -30,9 +31,6 @@ package com.rpgGame.appModule.zhangong
 	import com.rpgGame.coreData.clientConfig.Q_meritorious;
 	import com.rpgGame.coreData.clientConfig.Q_meritorious_monster;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
-	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
-	import com.rpgGame.coreData.info.alert.AlertSetInfo;
-	import com.rpgGame.coreData.lang.LangUI;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleType;
 	import com.rpgGame.coreData.type.AvatarMaskType;
@@ -43,13 +41,14 @@ package com.rpgGame.appModule.zhangong
 	
 	import flash.geom.Point;
 	
+	import away3d.events.Event;
+	
 	import feathers.utils.filter.GrayFilter;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.beibao.zhangong.BossItem_Skin;
 	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;

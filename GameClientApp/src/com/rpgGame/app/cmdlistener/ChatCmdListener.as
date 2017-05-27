@@ -50,12 +50,12 @@ package com.rpgGame.app.cmdlistener
 		
 		override public function start():void
 		{
-//			SocketConnection.addCmdListener(ChatModuleMessages.S2C_GOODS_INFO_REPLY, onGetItemInfo);
-//			SocketConnection.addCmdListener(ChatModuleMessages.S2C_GOODS_INFO_REPLY_ERROR, onGetItemInfoError);
+			//			SocketConnection.addCmdListener(ChatModuleMessages.S2C_GOODS_INFO_REPLY, onGetItemInfo);
+			//			SocketConnection.addCmdListener(ChatModuleMessages.S2C_GOODS_INFO_REPLY_ERROR, onGetItemInfoError);
 			
 			SocketConnection.addCmdListener(112101, onResChatMessage );
 			
-//			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_COUNTRY_CHAT_SUCCESS, Delegate.create(onGetSendSuccess,EnumChatChannelType.CHAT_CHANNEL_COUNTRY));
+			//			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_COUNTRY_CHAT_SUCCESS, Delegate.create(onGetSendSuccess,EnumChatChannelType.CHAT_CHANNEL_COUNTRY));
 			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_COUNTRY_CHAT_FAIL, onSendWorldFaile);
 			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_COUNTRY_CHAT_BROADCAST, getCountryBroadCast);
 			
@@ -90,7 +90,7 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_GET_CHAT_HISTORY_FAIL, onGetChatRecordFaile);
 			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_GET_CHAT_HISTORY_RESULT, onGetChatRecordBack);
 			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_THEY_LEFT_MSG_WHEN_YOU_OFFLINE, getSomeOffLineMsg);
-		
+			
 			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_TEAM_CHAT_FAIL, onSendTeamFaile);
 			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_TEAM_CHAT_SUCCESS, Delegate.create(onGetSendSuccess,EnumChatChannelType.CHAT_CHANNEL_TEAM));
 			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_TEAM_CHAT_BROADCAST, getTeamBroadCast);
@@ -99,7 +99,7 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_BROADCAST_MOOD_FAIL, onBroadcastMoodFail);
 			
 			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_FAMILY_CHAT_FAIL, onSendFamilyFaile);
-//			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_FAMILY_CHAT_SUCCESS, Delegate.create(onGetSendSuccess,EnumChatChannelType.CHAT_CHANNEL_FAMILY));
+			//			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_FAMILY_CHAT_SUCCESS, Delegate.create(onGetSendSuccess,EnumChatChannelType.CHAT_CHANNEL_FAMILY));
 			SocketConnection_protoBuffer.addCmdListener(ChatModuleMessages.S2C_FAMILY_CHAT_BROADCAST, getFamilyBroadCast);
 			
 			finish();
@@ -107,7 +107,7 @@ package com.rpgGame.app.cmdlistener
 		
 		private function onResChatMessage(msg:ResChatMessage):void
 		{
-			EventManager.dispatchEvent(ChatEvent.SEND_SUCCESS,msg);
+			ChatManager.onResChatMessage(msg);
 		}
 		
 		/**
@@ -217,7 +217,7 @@ package com.rpgGame.app.cmdlistener
 		 */
 		private function getCountryBroadCast(buffer:ByteBuffer):void
 		{
-//			showGetChatMessage(EnumChatChannelType.CHAT_CHANNEL_COUNTRY, getChatProto(buffer));
+			//			showGetChatMessage(EnumChatChannelType.CHAT_CHANNEL_COUNTRY, getChatProto(buffer));
 		}
 		
 		/**
@@ -373,20 +373,20 @@ package com.rpgGame.app.cmdlistener
 			chatInfo.talkTime = talkTime;
 			if(chatInfo)
 			{
-				chatInfo.talkTime = talkTime;
-				chatInfo.realShowMsg = chatInfo.speech;
-				chatInfo.realShowName = chatInfo.name;
-				ChatWindowManager.addPrivateChatData(chatInfo.id,chatInfo,false,false,true);
-				ChatWindowManager.addWindowChatTargetId(chatInfo.id);
-				var isPrivateWindowShowing:Boolean = false;//ChatWindowPanel.isShowing();
-				if(isPrivateWindowShowing)
-				{
-					EventManager.dispatchEvent(ChatEvent.GET_NEW_WHISPER_DATA,chatInfo);
-				}
-				else
-				{
-					EventManager.dispatchEvent(FunctionMessageBarEvent.FUNCTION_MESSAGE_BAR_SHOW_TYPE, EnumFunctionMessageBarIcoType.CHAT_TYPE);
-				}
+			chatInfo.talkTime = talkTime;
+			chatInfo.realShowMsg = chatInfo.speech;
+			chatInfo.realShowName = chatInfo.name;
+			ChatWindowManager.addPrivateChatData(chatInfo.id,chatInfo,false,false,true);
+			ChatWindowManager.addWindowChatTargetId(chatInfo.id);
+			var isPrivateWindowShowing:Boolean = false;//ChatWindowPanel.isShowing();
+			if(isPrivateWindowShowing)
+			{
+			EventManager.dispatchEvent(ChatEvent.GET_NEW_WHISPER_DATA,chatInfo);
+			}
+			else
+			{
+			EventManager.dispatchEvent(FunctionMessageBarEvent.FUNCTION_MESSAGE_BAR_SHOW_TYPE, EnumFunctionMessageBarIcoType.CHAT_TYPE);
+			}
 			}*/
 		}
 		
@@ -548,7 +548,7 @@ package com.rpgGame.app.cmdlistener
 				ChatWindowManager.addPrivateChatOfflineData(id,name,level);
 				ChatWindowManager.addWindowChatTargetId(id);
 				showIcon = true;
-//				ChatSender.requestChatRecord(id);
+				//				ChatSender.requestChatRecord(id);
 			}
 			if(showIcon)
 			{
@@ -563,7 +563,7 @@ package com.rpgGame.app.cmdlistener
 		 */
 		private function onGetUnionChatBroadCast(buffer:ByteBuffer):void
 		{
-//			showGetChatMessage(EnumChatChannelType.CHAT_CHANNEL_COUNTRY, getChatProto(buffer) );
+			//			showGetChatMessage(EnumChatChannelType.CHAT_CHANNEL_COUNTRY, getChatProto(buffer) );
 		}
 		
 		private function showGetChatMessage(channel:int, chatMessage:ChatContentProto):void
@@ -572,14 +572,14 @@ package com.rpgGame.app.cmdlistener
 			//不显示黑名单聊天内容
 			if(FriendManager.checkIsBlackList(chatInfo.id))
 			{
-				return;
+			return;
 			}
 			
 			ChatManager.parseReceivedChatMsg( chatInfo );
 			//私聊添加最近联系人
 			if(channel == EnumChatChannelType.CHAT_CHANNEL_SILIAO || channel == EnumChatChannelType.CHAT_CHANNEL_WINDOW)
 			{
-				FriendManager.addTalkInfo(chatInfo.id,chatInfo.name);
+			FriendManager.addTalkInfo(chatInfo.id,chatInfo.name);
 			}
 			ChatDataManager.GetInstance().putChatData( chatInfo );
 			
@@ -711,10 +711,10 @@ package com.rpgGame.app.cmdlistener
 			}
 			privateChaterVo.hasMoreRecord = haveMore;
 			
-//			if(ChatWindowPanel.isShowing())
-//			{
-//				ChatWindowPanel.instance.freshRecore(chaterID,true);
-//			}
+			//			if(ChatWindowPanel.isShowing())
+			//			{
+			//				ChatWindowPanel.instance.freshRecore(chaterID,true);
+			//			}
 		}
 		
 		/**
@@ -779,25 +779,25 @@ package com.rpgGame.app.cmdlistener
 			switch(type)
 			{
 				case 1:
-//					NoticeManager.showHint( EnumHintInfo.CHAT_TEAM_CHAT_FAIL1 );
+					//					NoticeManager.showHint( EnumHintInfo.CHAT_TEAM_CHAT_FAIL1 );
 					break;
 				case 2:
-//					NoticeManager.showHint( EnumHintInfo.CHAT_TEAM_CHAT_FAIL2 );
+					//					NoticeManager.showHint( EnumHintInfo.CHAT_TEAM_CHAT_FAIL2 );
 					break;
 				case 3:
-//					NoticeManager.showHint( EnumHintInfo.CHAT_TEAM_CHAT_FAIL3 );
+					//					NoticeManager.showHint( EnumHintInfo.CHAT_TEAM_CHAT_FAIL3 );
 					break;
 				case 4:
-//					NoticeManager.showHint( EnumHintInfo.CHAT_TEAM_CHAT_FAIL4 );
+					//					NoticeManager.showHint( EnumHintInfo.CHAT_TEAM_CHAT_FAIL4 );
 					break;
 				case 5:
-//					NoticeManager.showHint( EnumHintInfo.CHAT_TEAM_CHAT_FAIL5 );
+					//					NoticeManager.showHint( EnumHintInfo.CHAT_TEAM_CHAT_FAIL5 );
 					break;
 				case 6:
-//					NoticeManager.showHint( EnumHintInfo.CHAT_TEAM_CHAT_FAIL6 );
+					//					NoticeManager.showHint( EnumHintInfo.CHAT_TEAM_CHAT_FAIL6 );
 					break;
 				case 7:
-//					NoticeManager.showHint( EnumHintInfo.CHAT_TEAM_CHAT_FAIL7 );
+					//					NoticeManager.showHint( EnumHintInfo.CHAT_TEAM_CHAT_FAIL7 );
 					break;
 			}
 		}
@@ -809,7 +809,7 @@ package com.rpgGame.app.cmdlistener
 		 */
 		private function getFamilyBroadCast(buffer:ByteBuffer):void
 		{
-//			showGetChatMessage(EnumChatChannelType.CHAT_CHANNEL_FAMILY,getChatProto(buffer));
+			//			showGetChatMessage(EnumChatChannelType.CHAT_CHANNEL_FAMILY,getChatProto(buffer));
 		}
 		
 		/** 解析聊天附带 chatMessage proto */
@@ -839,13 +839,13 @@ package com.rpgGame.app.cmdlistener
 			
 			chatInfo.posInfo = chatMsgProto.posInfo;
 			
-//			chatInfo.isKingGuild = chatMsgProto.isWangCityMaster;
-//			chatInfo.isEmperorGuild = chatMsgProto.isHuangCityMaster;
-//			chatInfo.cityMasterType = chatMsgProto.cityMasterType;
+			//			chatInfo.isKingGuild = chatMsgProto.isWangCityMaster;
+			//			chatInfo.isEmperorGuild = chatMsgProto.isHuangCityMaster;
+			//			chatInfo.cityMasterType = chatMsgProto.cityMasterType;
 			
 			chatInfo.isGM = chatMsgProto.isGm;
 			chatInfo.vipLevel = chatMsgProto.vipLevel;
-				
+			
 			return chatInfo;
 		}
 		

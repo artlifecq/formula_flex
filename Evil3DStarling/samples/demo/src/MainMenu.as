@@ -1,7 +1,7 @@
 package
 {
     import flash.utils.getQualifiedClassName;
-
+    
     import scenes.AnimationScene;
     import scenes.BenchmarkScene;
     import scenes.BlendModeScene;
@@ -10,11 +10,10 @@ package
     import scenes.MaskScene;
     import scenes.MovieScene;
     import scenes.RenderTextureScene;
-    import scenes.Sprite3DScene;
     import scenes.TextScene;
     import scenes.TextureScene;
     import scenes.TouchScene;
-
+    
     import starling.core.Starling;
     import starling.display.Button;
     import starling.display.Image;
@@ -23,7 +22,7 @@ package
     import starling.events.TouchPhase;
     import starling.text.TextField;
     import starling.utils.Align;
-
+    
     import utils.MenuButton;
 
     public class MainMenu extends Sprite
@@ -49,8 +48,7 @@ package
                 ["Blend Modes", BlendModeScene],
                 ["Render Texture", RenderTextureScene],
                 ["Benchmark", BenchmarkScene],
-                ["Masks", MaskScene],
-                ["Sprite 3D", Sprite3DScene]
+                ["Masks", MaskScene]
             ];
             
             var count:int = 0;

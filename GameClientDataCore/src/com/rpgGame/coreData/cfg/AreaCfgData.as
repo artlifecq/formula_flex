@@ -1,5 +1,7 @@
 package com.rpgGame.coreData.cfg
 {
+    import com.game.engine3D.vo.map.ClientMapAreaData;
+    import com.game.engine3D.vo.map.MapAreaTypeEnum;
     import com.rpgGame.coreData.clientConfig.Q_area;
     
     import flash.geom.Point;
@@ -14,11 +16,11 @@ package com.rpgGame.coreData.cfg
         
         private static var _dataDic : Dictionary = new Dictionary();
         private static var _posDic : Dictionary = new Dictionary();
-
+		private static var _arras:Vector.<ClientMapAreaData>=new Vector.<ClientMapAreaData>();
         public static function setup(data : ByteArray) : void {
             var arr : Array = data.readObject();
 			
-			
+			var areaData:ClientMapAreaData;
             for each(var info : Q_area in arr) {
                 _dataDic[info.q_area_id] = info;
                 var points : Vector.<Point> = new Vector.<Point>();
@@ -31,6 +33,17 @@ package com.rpgGame.coreData.cfg
                     points.push(new Point(int(xy[0]), int(xy[1])));
                 }
                 _posDic[info.q_area_id] = points;
+				
+				
+				if(info.q_type!=0)///加入不同类型区域数据      0是传送门 不用处理         ---yt
+				{
+					areaData=new ClientMapAreaData();
+					areaData.id=info.q_area_id;
+					areaData.mapid=info.q_map_id;
+					areaData.type=info.q_type;
+					areaData.points=points;
+					_arras.push(areaData);
+				}
             }
 			
 			
@@ -53,5 +66,33 @@ package com.rpgGame.coreData.cfg
         public static function getAreaPointsByID(id : uint) : Vector.<Point> {
             return _posDic[id];
         }
+		
+		/**根据地图id返回阻挡点*/
+		public static function getObstacleAreas(mid:int) : Vector.<ClientMapAreaData>
+		{
+			var areaSet : Vector.<ClientMapAreaData> = new Vector.<ClientMapAreaData>();
+			for each (var areaData : ClientMapAreaData in _arras)
+			{
+				if (areaData.mapid==mid&&areaData.type ==MapAreaTypeEnum.OBSTACLE)
+				{
+					areaSet.push(areaData);
+				}
+			}
+			return areaSet;
+		}
+		/**根据id返回 动态阻挡点*/
+		public static function getDynamicObstacleAreas(aid:int) : ClientMapAreaData
+		{
+			for each (var areaData : ClientMapAreaData in _arras)
+			{
+				if (areaData.id==aid&&areaData.type ==MapAreaTypeEnum.DYNAMIC_OBSTACLE)
+				{
+					return areaData;
+				}
+			}
+			return null;
+		}
+		
+		
     }
 }

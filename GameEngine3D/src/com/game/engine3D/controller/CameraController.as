@@ -117,17 +117,18 @@ package com.game.engine3D.controller
 
 		/**
 		 * 初始化和重置控制器
+		 * @param $camera 控制的镜头对象，传空会用Stage3DLayerManager.camera
 		 * @param $target 镜头跟随的目标（显示对象）
 		 * @param $targetObj 镜头跟随的目标（数据对象，比如sceneRole）
 		 * @param $listenerTarget 侦听鼠标事件的对象，传空会用舞台侦听
-		 * @param $camera 控制的镜头对象，传空会用Stage3DLayerManager.camera
 		 *
 		 */
 		public static function initcontroller($camera : Camera3D, $target : ObjectContainer3D, $targetObj : BaseObj3D = null, $listenerTarget : InteractiveObject = null) : void
 		{
+			_camera = $camera;
 			_target = $target;
 			_targetObj = $targetObj;
-			_camera = $camera;
+			
 			_listenerTarget = $listenerTarget ? $listenerTarget : Stage3DLayerManager.stage;
 		}
 
@@ -176,36 +177,6 @@ package com.game.engine3D.controller
 				return;
 			}
 			stopControl();
-			/*if (_mode > 0)
-			{
-				if (_mode == CameraModeEnum.DIRECT_CAMERA)
-				{
-					_target.transform = _camera.transform;
-					_target.moveForward(lockedOnPlayerController.distance);
-					if (_targetObj)
-					{
-						_targetObj.x = _target.x;
-						_targetObj.y = _target.y;
-						_targetObj.z = _target.z;
-					}
-				}
-				if (_mode != CameraModeEnum.LOCK_ON_TARGET)
-				{
-					if (_targetObj)
-					{
-						_targetObj.y -= lockedOnPlayerController.offsetY;
-					}
-					else
-					{
-						_target.y -= lockedOnPlayerController.offsetY;
-					}
-				}
-				var vec3D : Vector3D = _target.position.clone();
-				var subVector : Vector3D = _camera.position.subtract(vec3D);
-				lockedOnPlayerController.distance = subVector.length;
-				lockedOnPlayerController.yDeg = Math.asin(subVector.y / lockedOnPlayerController.distance) * MathConsts.RADIANS_TO_DEGREES;
-				lockedOnPlayerController.xDeg = Math.atan2(subVector.x, subVector.z) * MathConsts.RADIANS_TO_DEGREES + 180;
-			}*/
 
 			lockedOnPlayerController.lookAtObject = _target;
 			lockedOnPlayerController.targetObject = _camera;

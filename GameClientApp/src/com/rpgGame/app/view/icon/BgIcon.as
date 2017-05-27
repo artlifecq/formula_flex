@@ -72,8 +72,7 @@ package com.rpgGame.app.view.icon
 		public function BgIcon( $iconSize:int = IcoSizeEnum.SIZE_40 )
 		{
 			super( $iconSize );
-		
-			setSelectedImgSize($iconSize);
+//			setSelectedImgSize($iconSize);
 		}
 		
 		/**
@@ -87,6 +86,12 @@ package com.rpgGame.app.view.icon
 		public function setUIRoot():void
 		{
 			
+		}
+		
+		override public function setIconResName( iconResURL:String ):void
+		{
+			super.setIconResName(iconResURL);
+			setSelectedImgSize(iconSize);
 		}
 		
 		/**
@@ -105,9 +110,9 @@ package com.rpgGame.app.view.icon
 			{
 				_qualityImage = new UIAsset();
 			}
+			setSelectedImgSize(iconSize);
 			_qualityImage.styleName = ClientConfig.getQualityBg( _qualityId ,iconSize);
 			_qualityImage.visible=true;			
-			
 			if(qualityID>Quality.YELLOW){
 				showQualityEft();
 			}else{
@@ -335,14 +340,11 @@ package com.rpgGame.app.view.icon
 		 */		
 		private function setSelectImg( value:String ):void
 		{
-			if( "" == value )
+			if( "" == value)
 			{
 				clearSelectImage();
 				return;
 			}
-			
-			if( _selectRes == value )
-				return;
 			
 			_selectRes = value;
 			
@@ -354,8 +356,11 @@ package com.rpgGame.app.view.icon
 				addEventListener( TouchEvent.TOUCH, onTouchSelect );
 			}
 		
-			
-			_selectImage.styleName = ClientConfig.getSelectBg( _selectRes );
+			if(_qualityId!=-1){
+				_selectImage.styleName = ClientConfig.getSelectBg( _selectRes )+"_"+this._qualityId+ClientConfig.eName_PNG;
+			}else{
+				_selectImage.styleName = ClientConfig.getSelectBg( _selectRes )+"_"+0+ClientConfig.eName_PNG;
+			}
 			
 			sortLayer();
 		}
@@ -370,7 +375,7 @@ package com.rpgGame.app.view.icon
 			isShow = value;
 		}
 		
-		public function setSelectedImgSize(size:int):void
+		private function setSelectedImgSize(size:int):void
 		{
 			setSelectImg(String(size));
 		}

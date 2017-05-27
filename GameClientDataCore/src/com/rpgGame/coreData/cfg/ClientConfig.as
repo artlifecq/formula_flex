@@ -369,7 +369,7 @@ package com.rpgGame.coreData.cfg
 
 		public static function getSelectBg(type : String) : String
 		{
-			var url : String = "ui/common/grid/select/" + type + eName_PNG;
+			var url : String = "ui/common/grid/select/" + type;
 			return baseDir + resURL + url;
 		}
 

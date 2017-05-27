@@ -4,7 +4,6 @@ package com.rpgGame.app.data
 	import com.rpgGame.app.manager.friend.FriendManager;
 	import com.rpgGame.app.manager.goods.GoodsContainerMamager;
 	import com.rpgGame.app.manager.mount.HorseExtraItemInfo;
-	import com.rpgGame.coreData.cfg.ActivityBarCfgData;
 	import com.rpgGame.coreData.cfg.AddSpriteStatCfgData;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.AreaCfgData;
@@ -17,7 +16,6 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.ClientAreaCfgData;
 	import com.rpgGame.coreData.cfg.ClientBuffCfgData;
 	import com.rpgGame.coreData.cfg.ClientDialogCfgData;
-	import com.rpgGame.coreData.cfg.ClientFunctionOpenCfgData;
 	import com.rpgGame.coreData.cfg.ClientSceneEffectCfgData;
 	import com.rpgGame.coreData.cfg.ClientSceneNpcCfgData;
 	import com.rpgGame.coreData.cfg.ClientSceneRoleCfgData;
@@ -31,6 +29,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.FightsoulModeData;
 	import com.rpgGame.coreData.cfg.FightsoulPathData;
 	import com.rpgGame.coreData.cfg.FriendCfgData;
+	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
 	import com.rpgGame.coreData.cfg.GCDCfgData;
 	import com.rpgGame.coreData.cfg.GlobalSettingCfgData;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
@@ -47,10 +46,12 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.LunJianCfg;
 	import com.rpgGame.coreData.cfg.MailCfgData;
 	import com.rpgGame.coreData.cfg.MazeCfgData;
+	import com.rpgGame.coreData.cfg.NewFuncCfgData;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.RaceCfgData;
 	import com.rpgGame.coreData.cfg.RelationCfgData;
 	import com.rpgGame.coreData.cfg.ReliveCfgData;
+	import com.rpgGame.coreData.cfg.SceneEffectCfgData;
 	import com.rpgGame.coreData.cfg.ShopCfgData;
 	import com.rpgGame.coreData.cfg.SkillLvLDataManager;
 	import com.rpgGame.coreData.cfg.SourceGetCfg;
@@ -61,6 +62,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.TaxCfgData;
 	import com.rpgGame.coreData.cfg.TipsCfgData;
 	import com.rpgGame.coreData.cfg.TransCfgData;
+	import com.rpgGame.coreData.cfg.TriggerCfgData;
 	import com.rpgGame.coreData.cfg.WindowInfoData;
 	import com.rpgGame.coreData.cfg.ZhanGongData;
 	import com.rpgGame.coreData.cfg.ZhanGongMonsterData;
@@ -202,12 +204,12 @@ package com.rpgGame.app.data
 			DieCfgData.setup(dic[ConfigClassRegister.Q_die]);
 			GCDCfgData.setup(dic[ConfigClassRegister.Q_GCD]);
 			SkillLvLDataManager.setup(dic[ConfigClassRegister.Q_skill_ignore]);
-
+			
 			EquipStrengthCfg.setup(dic[ConfigClassRegister.Q_equip_strength]);
 			EquipPolishCfg.setup(dic[ConfigClassRegister.Q_equip_polish]);
 			EquipWashCfg.setup(dic[ConfigClassRegister.Q_equip_wash]);
 			EquipWashAttCfg.setup(dic[ConfigClassRegister.Q_equip_wash_attr]);
-//			CountryUnionStatCfgData.setup(null); //待解决
+			//			CountryUnionStatCfgData.setup(null); //待解决
 			MeridianCfg.setup(dic[ConfigClassRegister.Q_meridian]);
 			
 			////////////////////////////////////////////////////////////////////////
@@ -255,16 +257,17 @@ package com.rpgGame.app.data
 			TaskMissionCfgData.setupReword(dic[ConfigClassRegister.Q_mission_reword]);
 			TaskMissionCfgData.setupSegment(dic[ConfigClassRegister.Q_mission_segment]);
 			
-			ActivityBarCfgData.setup(dic[ConfigClassRegister.ActivityBarInfo]);
-
+			//窗口信息配置
+			FuncionBarCfgData.setup(dic[ConfigClassRegister.FunctionBarInfo]);
+			NewFuncCfgData.setup(dic[ConfigClassRegister.Q_newfunc]);
 			//心法
 			CheatsCfg.setup(dic[ConfigClassRegister.Q_cheats]);
 			CheatsNodeCfg.setup(dic[ConfigClassRegister.Q_cheats_node]);
-
+			
 			TaskMissionCfgData.setupSection(dic[ConfigClassRegister.Q_mission_section]);
 			//坐骑数据
 			HorseConfigData.setConfig(dic[ConfigClassRegister.Q_horse]);
-//			HorseSpellData.setConfig(dic[ConfigClassRegister.Q_horse_skills]);
+			//			HorseSpellData.setConfig(dic[ConfigClassRegister.Q_horse_skills]);
 			HorseExtraItemInfo.createInfo();
 			HorseSpellData.setConfig(dic[ConfigClassRegister.Q_horse_skills]);
 			HorseExtraItemInfo.createInfo();
@@ -273,6 +276,8 @@ package com.rpgGame.app.data
 			ZoneCfgData.setup(dic[ConfigClassRegister.Q_zone]);
 			LunJianCfg.setup(dic[ConfigClassRegister.Q_lunjian]);
 			ZoneMultyCfgData.setup(dic[ConfigClassRegister.Q_zone_multy]);//多人副本
+			TriggerCfgData.setup(dic[ConfigClassRegister.Q_map_trigger]);//触发区域
+			SceneEffectCfgData.setup(dic[ConfigClassRegister.Q_map_effect]);
 			DailyZoneCfgData.setup(dic[ConfigClassRegister.Q_daily_zone]);//日常副本
 			DailyZoneMonsterCfgData.setup(dic[ConfigClassRegister.Q_dailyzone_monster]);//日常刷怪数据
 			//道具获取路径

@@ -1,11 +1,8 @@
 package com.rpgGame.app.manager.scene
 {
-	import com.rpgGame.app.manager.DaTiManager;
 	import com.rpgGame.app.manager.DailyResetManager;
 	import com.rpgGame.app.manager.MainUIManager;
 	import com.rpgGame.app.manager.MenuManager;
-	import com.rpgGame.app.manager.TeamManager;
-	import com.rpgGame.app.manager.activity.ActivityBarManager;
 	import com.rpgGame.app.manager.collect.CollectManager;
 	import com.rpgGame.app.manager.hud.ActivityBarManager;
 	import com.rpgGame.app.manager.map.MapUnitDataManager;
@@ -14,7 +11,6 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.app.manager.task.TouJingManager;
 	import com.rpgGame.app.manager.task.TouZhuManager;
 	import com.rpgGame.app.sender.SocietySender;
-	import com.rpgGame.app.ui.main.shortcut.ShortcutMessageBar;
 	import com.rpgGame.core.app.AppMergeManager;
 	import com.rpgGame.core.controller.MouseCursorController;
 	import com.rpgGame.core.events.FunctionMessageBarEvent;
@@ -94,6 +90,11 @@ package com.rpgGame.app.manager.scene
 		public static function get isEnterScene() : Boolean
 		{
 			return _isEnterScene;
+		}
+		
+		public static function set isEnterScene(value:Boolean) : void
+		{
+			 _isEnterScene=value;
 		}
 	}
 }

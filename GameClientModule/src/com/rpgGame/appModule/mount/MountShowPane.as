@@ -13,7 +13,7 @@ package com.rpgGame.appModule.mount
 	import org.mokylin.skin.app.zuoqi.huoquSkin;
 	
 	import starling.display.DisplayObject;
-	import starling.events.Event;
+	import away3d.events.Event;
 	
 	public class MountShowPane extends SkinUIPanel
 	{

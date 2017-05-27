@@ -8,10 +8,8 @@ package com.rpgGame.app.utils
 	import com.rpgGame.app.manager.friend.FriendManager;
 	import com.rpgGame.app.manager.goods.ItemUseManager;
 	import com.rpgGame.app.manager.guild.GuildManager;
-	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.society.SocietyManager;
 	import com.rpgGame.app.manager.trade.TradeManager;
-	import com.rpgGame.app.sender.ItemSender;
 	import com.rpgGame.app.sender.LookSender;
 	import com.rpgGame.app.sender.TeamSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
@@ -19,14 +17,12 @@ package com.rpgGame.app.utils
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.ChatEvent;
 	import com.rpgGame.core.events.ItemEvent;
-	import com.rpgGame.core.events.TeamEvent;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.society.SocietyStaticConfigData;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
 	import com.rpgGame.coreData.info.society.SocietyMemberData;
-	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.coreData.lang.LangMenu;
 	import com.rpgGame.coreData.lang.LangMisc;
 	import com.rpgGame.coreData.lang.LangTeam;
@@ -35,12 +31,12 @@ package com.rpgGame.app.utils
 	import flash.desktop.Clipboard;
 	import flash.desktop.ClipboardFormats;
 	
-	import app.message.TeamDropAllocateType;
 	import app.message.AllFamilyOfficerDatasProto.FamilyOfficerDataProto;
 	import app.message.GuildOfficerDatasProto.GuildOfficerDataProto;
 	
 	import org.client.mainCore.manager.EventManager;
-
+	import org.game.netCore.data.long;
+	
 	/**
 	 * 弹出菜单
 	 * @author luguozheng
@@ -48,7 +44,7 @@ package com.rpgGame.app.utils
 	 */
 	public class MenuUtil
 	{
-
+		
 		public static function getPlayerTargetMenu(targetID:Number,fromChat:Boolean = false):Array
 		{
 			var selfMemberData : SocietyMemberData = SocietyManager.getSelfMemberData();
@@ -60,30 +56,30 @@ package com.rpgGame.app.utils
 				menus.push(LangMenu.SI_LIAO);
 			}
 			menus.push(LangMenu.LOOK_HERO);
-			if(!FriendManager.checkIsFriend(targetID))
-			{
-				menus.push(LangMenu.ADD_FRIEND);
-			}
-//			if(!TeamManager.isInTeam(targetID))
-//			{
-				//这个需要一直显示 
-				menus.push(LangMenu.INVITE_TEAM);
-//			}
-			menus.push(LangMenu.TRADE);
+			//			if(!FriendManager.checkIsFriend(targetID))
+			//			{
+			//				menus.push(LangMenu.ADD_FRIEND);
+			//			}
+			//			if(!TeamManager.isInTeam(targetID))
+			//			{
+			//这个需要一直显示 
+			menus.push(LangMenu.INVITE_TEAM);
+			//			}
+			//			menus.push(LangMenu.TRADE);
 			if(!fromChat)
 			{
 				menus.push(LangMenu.SI_LIAO);
 			}
-			menus.push(LangMenu.DUI_HUA);
-			if (officerDataProto && officerDataProto.canInviteOther) // 能否邀请他人，或者回复申请
-			{
-				menus.push(LangMenu.INVITE_JOIN_SOCIETY);
-			}
-			if(guildOfficeDataProto && guildOfficeDataProto.canInviteOtherFamily)//能否邀请他人加入帮派
-			{
-				menus.push(LangMenu.INVITE_JOIN_GUILD);
-			}
-			menus.push(LangMenu.SEND_MAIL, LangMenu.COPY_THE_NAME, LangMenu.BLACK_FRIEND);
+			//			menus.push(LangMenu.DUI_HUA);
+			//			if (officerDataProto && officerDataProto.canInviteOther) // 能否邀请他人，或者回复申请
+			//			{
+			//				menus.push(LangMenu.INVITE_JOIN_SOCIETY);
+			//			}
+			//			if(guildOfficeDataProto && guildOfficeDataProto.canInviteOtherFamily)//能否邀请他人加入帮派
+			//			{
+			//				menus.push(LangMenu.INVITE_JOIN_GUILD);
+			//			}
+			//			menus.push(LangMenu.SEND_MAIL, LangMenu.COPY_THE_NAME, LangMenu.BLACK_FRIEND);
 			return menus;
 		}
 		
@@ -91,7 +87,7 @@ package com.rpgGame.app.utils
 		 * 在这个表里，res\config\lang\cn\ui_text\Misc.txt   MENU_CONFIG
 		 */
 		private static var menuConfig : Array;
-
+		
 		/**
 		 * 得到这个菜单的名字
 		 * @param type   MenuType
@@ -102,7 +98,7 @@ package com.rpgGame.app.utils
 		{
 			return LanguageConfig.getText(type);
 		}
-
+		
 		/**
 		 * 这个功能是否要显示
 		 * @param type
@@ -113,7 +109,7 @@ package com.rpgGame.app.utils
 		{
 			return true;
 		}
-
+		
 		/**
 		 * 根据类型来分别处理对应功能
 		 * 基本上就两个东西上才会用到弹出菜单
@@ -126,10 +122,10 @@ package com.rpgGame.app.utils
 		public static function doMenu(type : String) : void
 		{
 			var data : Object = MenuManager.curData;
-
+			
 			if (data == null)
 				return;
-
+			
 			if (data is ClientItemInfo)
 			{
 				var item : ClientItemInfo = data as ClientItemInfo;
@@ -173,19 +169,20 @@ package com.rpgGame.app.utils
 				}
 				return ;
 			}
-
+			
 			var datas : Array = data as Array;
 			var heroId : * = datas[0];
 			var heroName : String = datas[1];
-
+			
 			switch (type)
 			{
 				case LangMenu.LOOK_HERO://查看玩家信息
-//					LookSender.reqLook(heroId,true);
-					Mgr.teamMgr.loopPlayer(heroId);
+					LookSender.lookOtherPlayer(new long(heroId));
+					//					LookSender.reqLook(heroId,true);
+					//					Mgr.teamMgr.loopPlayer(heroId);
 					break;
 				case LangMenu.INVITE_JOIN_SOCIETY://邀请加入帮派
-					SocietyManager.reqInviteJoin(heroId);
+					//					SocietyManager.reqInviteJoin(heroId);
 					break;
 				case LangMenu.SEND_MAIL://发送邮件
 				case LangMenu.INVITE_JOIN_GUILD:
@@ -222,11 +219,11 @@ package com.rpgGame.app.utils
 					TeamSender.ReqKickTeam(heroId);
 					break;
 				case LangMenu.LEAVE_TEAM://离开队伍
-//					if( TeamManager.isTeamLeader( MainRoleManager.actorID ) )//自己是队长
-//						onAgreeLeaveTeam();
-//					else
-//						GameAlert.showAlertUtil(LangAlertInfo.TEAM_LEAVE_TEAM,leaveTeamClick);
-//					break;
+					//					if( TeamManager.isTeamLeader( MainRoleManager.actorID ) )//自己是队长
+					//						onAgreeLeaveTeam();
+					//					else
+					//						GameAlert.showAlertUtil(LangAlertInfo.TEAM_LEAVE_TEAM,leaveTeamClick);
+					//					break;
 				case LangMenu.INVITE_TEAM_VOICE://邀请队伍语音
 					NoticeManager.showNotify( LangTeam.TEAM_FAIL_TIP );
 					break;
@@ -237,7 +234,8 @@ package com.rpgGame.app.utils
 					EventManager.dispatchEvent(ChatEvent.SWITCH_PRIVATE_CHANNEL,heroId,heroName);
 					break;
 				case LangMenu.INVITE_TEAM://组队
-					//TeamManager.invitePlayerJionMyTeam( heroId );
+					Mgr.teamMgr.InvitePlayerJoinTeam(heroId);
+					//					TeamManager.InvitePlayerJoinTeam( heroId );
 					break;
 				case LangMenu.PLAY://切磋
 					NoticeManager.showNotify( LangTeam.TEAM_FAIL_TIP );
@@ -247,35 +245,35 @@ package com.rpgGame.app.utils
 					Clipboard.generalClipboard.setData(ClipboardFormats.TEXT_FORMAT,heroName,false);
 					break;
 				case LangMenu.TEAM_EXP_MEAN_MODE://经验平均分配
-//					TeamManager.expIndex = 0;
-//					TeamManager.sendSetTeamExpAllocate( false );
-//					EventManager.dispatchEvent( TeamEvent.TEAM_EXP_MODE );
+					//					TeamManager.expIndex = 0;
+					//					TeamManager.sendSetTeamExpAllocate( false );
+					//					EventManager.dispatchEvent( TeamEvent.TEAM_EXP_MODE );
 					break;
 				case LangMenu.TEAM_EXP_HURT_MODE://经验按伤害分配
-//					TeamManager.expIndex = 1;
-//					TeamManager.sendSetTeamExpAllocate( true );
-//					EventManager.dispatchEvent( TeamEvent.TEAM_EXP_MODE );
+					//					TeamManager.expIndex = 1;
+					//					TeamManager.sendSetTeamExpAllocate( true );
+					//					EventManager.dispatchEvent( TeamEvent.TEAM_EXP_MODE );
 					break;
 				case LangMenu.TEAM_PICK_UP_MODE://轮流拾取
-//					TeamManager.pickupIndex = 0;
-//					TeamManager.sendSetTeamDropAllocate( TeamDropAllocateType.TURN );
-//					EventManager.dispatchEvent( TeamEvent.TEAM_PICK_UP_MODE );
+					//					TeamManager.pickupIndex = 0;
+					//					TeamManager.sendSetTeamDropAllocate( TeamDropAllocateType.TURN );
+					//					EventManager.dispatchEvent( TeamEvent.TEAM_PICK_UP_MODE );
 					break;
 				case LangMenu.TEAM_KILLER_MODE://猎杀者拾取
-//					TeamManager.pickupIndex = 1;
-//					TeamManager.sendSetTeamDropAllocate( TeamDropAllocateType.KILLER );
-//					EventManager.dispatchEvent( TeamEvent.TEAM_PICK_UP_MODE );
+					//					TeamManager.pickupIndex = 1;
+					//					TeamManager.sendSetTeamDropAllocate( TeamDropAllocateType.KILLER );
+					//					EventManager.dispatchEvent( TeamEvent.TEAM_PICK_UP_MODE );
 					break;
 				case LangMenu.TEAM_FEED_PICK_UP_MODE://自由拾取
-//					TeamManager.pickupIndex = 2;
-//					TeamManager.sendSetTeamDropAllocate( TeamDropAllocateType.FREE );
-//					EventManager.dispatchEvent( TeamEvent.TEAM_PICK_UP_MODE );
+					//					TeamManager.pickupIndex = 2;
+					//					TeamManager.sendSetTeamDropAllocate( TeamDropAllocateType.FREE );
+					//					EventManager.dispatchEvent( TeamEvent.TEAM_PICK_UP_MODE );
 					break;
 				case LangMenu.DUI_HUA://对话
 					if(FriendManager.checkIsFriend(heroId))
 					{
 						ChatWindowManager.addWindowChatTargetId(heroId,heroName);
-//						ChatWindowPanel.instance.showChatWindow(heroId);
+						//						ChatWindowPanel.instance.showChatWindow(heroId);
 					}
 					else
 					{

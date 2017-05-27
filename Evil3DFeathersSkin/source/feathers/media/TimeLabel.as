@@ -13,7 +13,7 @@ package feathers.media
 
 	import flash.geom.Point;
 
-	import starling.events.Event;
+	import away3d.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
