@@ -3,14 +3,12 @@ package org.mokylin.skin.mainui.duiwu
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
 	import feathers.controls.Label;
-	import feathers.controls.List;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.component.list.ListSkin1;
-	import org.mokylin.skin.mainui.duiwu.button.ButtonShang;
+	import org.mokylin.skin.component.button.ButtonSkin_shouhui;
+	import org.mokylin.skin.component.button.ButtonSkin_zhankai;
 	import org.mokylin.skin.mainui.duiwu.button.ButtonTuianniu;
-	import org.mokylin.skin.mainui.duiwu.button.ButtonXia;
 
 	/**
 	 * @private
@@ -24,13 +22,11 @@ package org.mokylin.skin.mainui.duiwu
 		//==========================================================================
 		public var btnExit:feathers.controls.Button;
 
-		public var btn_down:feathers.controls.Button;
+		public var btn_close:feathers.controls.Button;
 
-		public var btn_up:feathers.controls.Button;
+		public var btn_open:feathers.controls.Button;
 
 		public var lbNum:feathers.controls.Label;
-
-		public var list_head:feathers.controls.List;
 
 
 		//==========================================================================
@@ -41,7 +37,8 @@ package org.mokylin.skin.mainui.duiwu
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [__DuiWu_Skin_UIAsset1_i(),__DuiWu_Skin_UIAsset2_i(),lbNum_i(),btn_up_i(),btn_down_i(),list_head_i(),btnExit_i()];
+			this.height = 123;
+			this.elementsContent = [__DuiWu_Skin_UIAsset1_i(),__DuiWu_Skin_UIAsset2_i(),lbNum_i(),btnExit_i(),btn_open_i(),btn_close_i()];
 			
 			states = {
 			};
@@ -65,7 +62,7 @@ package org.mokylin.skin.mainui.duiwu
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/mainui/duiwu/duiwu.png";
-			temp.x = 53;
+			temp.x = 25;
 			temp.y = 5;
 			return temp;
 		}
@@ -76,30 +73,31 @@ package org.mokylin.skin.mainui.duiwu
 			btnExit = temp;
 			temp.name = "btnExit";
 			temp.styleClass = org.mokylin.skin.mainui.duiwu.button.ButtonTuianniu;
-			temp.x = 8;
-			temp.y = 2;
+			temp.x = 0;
+			temp.y = -38;
 			return temp;
 		}
 
-		private function btn_down_i():feathers.controls.Button
+		private function btn_close_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_down = temp;
-			temp.name = "btn_down";
-			temp.styleClass = org.mokylin.skin.mainui.duiwu.button.ButtonXia;
-			temp.x = 211;
-			temp.y = 2;
+			btn_close = temp;
+			temp.name = "btn_close";
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_shouhui;
+			temp.visible = false;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
-		private function btn_up_i():feathers.controls.Button
+		private function btn_open_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_up = temp;
-			temp.name = "btn_up";
-			temp.styleClass = org.mokylin.skin.mainui.duiwu.button.ButtonShang;
-			temp.x = 211;
-			temp.y = 2;
+			btn_open = temp;
+			temp.name = "btn_open";
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_zhankai;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -110,24 +108,11 @@ package org.mokylin.skin.mainui.duiwu
 			temp.name = "lbNum";
 			temp.text = "1/4";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 35;
-			temp.x = 156;
+			temp.x = 159;
 			temp.y = 8;
-			return temp;
-		}
-
-		private function list_head_i():feathers.controls.List
-		{
-			var temp:feathers.controls.List = new feathers.controls.List();
-			list_head = temp;
-			temp.name = "list_head";
-			temp.height = 124;
-			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
-			temp.width = 244;
-			temp.x = 1;
-			temp.y = 32;
 			return temp;
 		}
 
