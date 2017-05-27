@@ -135,7 +135,7 @@ package com.rpgGame.app.manager
 				shortData.type = shorts.t;
 				shortData.shortcutPos = shorts.k;
 				shortData.id = shorts.mid;
-
+				shortData.itemBind=shorts.bind;
 				shortcutsDataMap.add(shortData.shortcutPos, shortData);
 			}
 		}
@@ -148,14 +148,14 @@ package com.rpgGame.app.manager
 		 * @param id
 		 *
 		 */
-		public function setShortData(gridPos : int, type : int, id : int, saveToServer:Boolean = true) : void
+		public function setShortData(gridPos : int, type : int, id : int, saveToServer:Boolean = true,itemBind:int=0) : void
 		{
 			var shortcutsData : ShortcutsData = new ShortcutsData();
 
 			shortcutsData.shortcutPos = gridPos;
 			shortcutsData.type = type;
 			shortcutsData.id = id;
-
+			shortcutsData.itemBind=itemBind;
 			//把这个快捷数据保存下来
 			addShortcutsData(shortcutsData,saveToServer);
 		}
@@ -283,7 +283,7 @@ package com.rpgGame.app.manager
 
 				case ShortcutsTypeEnum.ITEM_TYPE:
 					//使用这个物品，走物品流程
-					BackPackManager.instance.useItem(shortData.id, 1);
+					BackPackManager.instance.useItem(shortData.id, shortData.itemBind);
 					return true;
 			}
 			

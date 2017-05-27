@@ -138,6 +138,9 @@ package com.rpgGame.appModule.dungeon.lunjian
 				info.leftNum=getLeftNum(info.sceneData);
 			}
 //			_skin.list_map.selectedIndex=0;
+			if(_skin.list_map.selectedIndex==-1){
+				_skin.list_map.selectedIndex=0;
+			}
 			_skin.list_map.dataProvider.updateItemAt(_skin.list_map.selectedIndex);
 		}
 		

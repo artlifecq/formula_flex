@@ -27,5 +27,9 @@ package com.rpgGame.coreData.cfg
 		{
 			return _lists;
 		}
+		public static function isLostSkill(buffId:int):Boolean
+		{
+			return getModeInfoById(buffId)!=null;
+		}
 	}
 }

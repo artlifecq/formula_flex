@@ -64,7 +64,6 @@ package com.rpgGame.appModule.role
 			_otherInfo=data.info as OthersInfo;
 			packsView.onHide();
 			refresh();
-			_parentContainer.addChild(this);
 			attConstrastView.show(_roleData);
 			basicView.show(_roleData);
 			avatarView.show(_roleData,_otherInfo.equips);

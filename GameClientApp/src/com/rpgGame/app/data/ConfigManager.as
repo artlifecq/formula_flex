@@ -19,7 +19,6 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.ClientSceneEffectCfgData;
 	import com.rpgGame.coreData.cfg.ClientSceneNpcCfgData;
 	import com.rpgGame.coreData.cfg.ClientSceneRoleCfgData;
-	import com.rpgGame.coreData.cfg.ClientTriggerCfgData;
 	import com.rpgGame.coreData.cfg.DaTiCfgData;
 	import com.rpgGame.coreData.cfg.DailyZoneCfgData;
 	import com.rpgGame.coreData.cfg.DailyZoneMonsterCfgData;
@@ -52,7 +51,6 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.RelationCfgData;
 	import com.rpgGame.coreData.cfg.ReliveCfgData;
 	import com.rpgGame.coreData.cfg.SceneEffectCfgData;
-	import com.rpgGame.coreData.cfg.ShopCfgData;
 	import com.rpgGame.coreData.cfg.SkillLvLDataManager;
 	import com.rpgGame.coreData.cfg.SourceGetCfg;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
@@ -159,7 +157,6 @@ package com.rpgGame.app.data
 			ClientSceneNpcCfgData.setup(dic[ConfigClassRegister.ClientSceneNPC]);
 			ClientSceneEffectCfgData.setup(dic[ConfigClassRegister.ClientSceneEffect]);
 			ClientSceneRoleCfgData.setup(dic[ConfigClassRegister.ClientSceneRole]);
-			ClientTriggerCfgData.setup(dic[ConfigClassRegister.ClientTrigger]);
 			ClientAreaCfgData.setup(dic[ConfigClassRegister.ClientArea]);
 			ClientDialogCfgData.setup(dic[ConfigClassRegister.ClientDialog]);
 			GmConfig.setup(dic[ConfigClassRegister.GmInfo]);

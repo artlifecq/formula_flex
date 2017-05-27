@@ -51,7 +51,7 @@ package org.mokylin.skin.mainui.head
 			super();
 			
 			this.currentState = "normal";
-			this.height = 92;
+			this.height = 97;
 			this.width = 506;
 			this.elementsContent = [__Head_boss_UIAsset1_i(),grp_xueyiao_i(),lbl_name_i(),uim_xuetiao_i(),zhan_bg_i(),uim_zhandouli_i(),lbl_num_i()];
 			
@@ -75,9 +75,9 @@ package org.mokylin.skin.mainui.head
 		private function __Head_boss_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/mainui/head/boss/3_sanji.png";
+			temp.styleName = "ui/mainui/head/boss/bossxuetiao.png";
 			temp.x = 0;
-			temp.y = 13;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -86,8 +86,8 @@ package org.mokylin.skin.mainui.head
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grp_xueyiao = temp;
 			temp.name = "grp_xueyiao";
-			temp.x = 34;
-			temp.y = 25;
+			temp.x = 80;
+			temp.y = 30;
 			temp.elementsContent = [xuetiao_zi_i(),xuetiao_lan_i(),xuetiao_lv_i(),xuetiao_cheng_i(),xuetiao_hong_i()];
 			return temp;
 		}
@@ -105,7 +105,7 @@ package org.mokylin.skin.mainui.head
 			temp.color = 0xC3C198;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack2"];
 			temp.width = 213;
-			temp.x = 147;
+			temp.x = 157;
 			temp.y = 0;
 			return temp;
 		}
@@ -117,9 +117,11 @@ package org.mokylin.skin.mainui.head
 			temp.name = "lbl_num";
 			temp.text = "标签";
 			temp.textAlign = "center";
-			temp.width = 433;
-			temp.x = 34;
-			temp.y = 25;
+			temp.color = 0xE1D4A9;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 363;
+			temp.x = 78;
+			temp.y = 29;
 			return temp;
 		}
 
@@ -150,7 +152,7 @@ package org.mokylin.skin.mainui.head
 			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhujuezhandouli;
 			temp.width = 109;
 			temp.x = 397;
-			temp.y = 60;
+			temp.y = 65;
 			return temp;
 		}
 
@@ -159,7 +161,7 @@ package org.mokylin.skin.mainui.head
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			xuetiao_cheng = temp;
 			temp.name = "xuetiao_cheng";
-			temp.styleName = "ui/mainui/head/boss/huangse.png";
+			temp.styleName = "ui/mainui/head/boss/xuetiaohuang.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -170,7 +172,7 @@ package org.mokylin.skin.mainui.head
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			xuetiao_hong = temp;
 			temp.name = "xuetiao_hong";
-			temp.styleName = "ui/mainui/head/boss/hongse.png";
+			temp.styleName = "ui/mainui/head/boss/xuetiaohong.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -181,7 +183,7 @@ package org.mokylin.skin.mainui.head
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			xuetiao_lan = temp;
 			temp.name = "xuetiao_lan";
-			temp.styleName = "ui/mainui/head/boss/lanse.png";
+			temp.styleName = "ui/mainui/head/boss/xuetiaolan.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -192,7 +194,7 @@ package org.mokylin.skin.mainui.head
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			xuetiao_lv = temp;
 			temp.name = "xuetiao_lv";
-			temp.styleName = "ui/mainui/head/boss/lvse.png";
+			temp.styleName = "ui/mainui/head/boss/xuetiaolv.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -203,7 +205,7 @@ package org.mokylin.skin.mainui.head
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			xuetiao_zi = temp;
 			temp.name = "xuetiao_zi";
-			temp.styleName = "ui/mainui/head/boss/zise.png";
+			temp.styleName = "ui/mainui/head/boss/xuetiaozi.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -216,7 +218,7 @@ package org.mokylin.skin.mainui.head
 			temp.name = "zhan_bg";
 			temp.styleName = "ui/mainui/head/zhandi.png";
 			temp.x = 360;
-			temp.y = 43;
+			temp.y = 48;
 			return temp;
 		}
 

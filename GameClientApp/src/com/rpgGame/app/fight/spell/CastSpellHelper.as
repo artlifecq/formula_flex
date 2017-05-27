@@ -10,7 +10,9 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.app.manager.ShortcutsManger;
 	import com.rpgGame.app.manager.SkillCDManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
+	import com.rpgGame.app.manager.chat.ChatManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.ctrl.ControlAutoFightSelectSkill;
 	import com.rpgGame.app.manager.fight.FightManager;
 	import com.rpgGame.app.manager.input.KeyMoveManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -46,6 +48,7 @@ package com.rpgGame.app.fight.spell
 	
 	import gameEngine2D.PolyUtil;
 	
+	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.data.long;
 	import org.game.netCore.net_protobuff.ByteBuffer;
@@ -1279,12 +1282,21 @@ package com.rpgGame.app.fight.spell
 		
 			var castSpell : Q_skill_model = null;
 			var spellData : Q_skill_model;
-			var spellList:Vector.<Q_skill_model>=MainRoleManager.actorInfo.spellList.getSortSpellList();
+			
 			var i : int = 0;
-			var len : int = spellList.length;
+			
+			var ctrl:ControlAutoFightSelectSkill=TrusteeshipManager.getInstance().autoSkillCtrl;
+			var len : int = ctrl.skillNum;
+			var skillId:int=0;
 			for(i=0;i<len;i++)
 			{
-				spellData=spellList[i];
+				skillId=ctrl.getNextSkillId();
+				//没学习过
+				if (MainRoleManager.actorInfo.spellList.getSkillInfo(skillId)==null) 
+				{
+					continue;
+				}
+				spellData=MainRoleManager.actorInfo.spellList.getSpell(skillId);
 				if (spellData && !SkillCDManager.getInstance().getSkillHasCDTime(spellData)&&getspellIsOK(spellData))
 				{
 					castSpell = spellData;
@@ -1320,6 +1332,7 @@ package com.rpgGame.app.fight.spell
 			{
 				castSpell=MainRoleManager.actorInfo.spellList.getFirstSpell();
 			}
+			//ChatManager.addMsgInChat("释放技能："+castSpell.q_skillID,0);
 			return castSpell;
 		}
 		

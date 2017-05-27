@@ -17,7 +17,7 @@ package com.rpgGame.netData.player.bean{
 	 * 他人详细信息
 	 */
 	public class OthersInfo extends Bean {
-	
+		
 		//角色Id
 		private var _personId: long;
 		
@@ -30,8 +30,26 @@ package com.rpgGame.netData.player.bean{
 		//职业
 		private var _job: int;
 		
-		//性别 0女 1男
+		//玩家性别 1男 2女
 		private var _sex: int;
+		
+		//阶段
+		private var _body: int;
+		
+		//衣服套装
+		private var _cloths: int;
+		
+		//头发
+		private var _hair: int;
+		
+		//主武器
+		private var _weapon: int;
+		
+		//副武器
+		private var _second_weapon: int;
+		
+		//坐骑
+		private var _mount: int;
 		
 		//战斗力
 		private var _fightpower: int;
@@ -69,8 +87,20 @@ package com.rpgGame.netData.player.bean{
 			writeShort(_level);
 			//职业
 			writeByte(_job);
-			//性别 0女 1男
+			//玩家性别 1男 2女
 			writeByte(_sex);
+			//阶段
+			writeByte(_body);
+			//衣服套装
+			writeInt(_cloths);
+			//头发
+			writeInt(_hair);
+			//主武器
+			writeInt(_weapon);
+			//副武器
+			writeInt(_second_weapon);
+			//坐骑
+			writeInt(_mount);
 			//战斗力
 			writeInt(_fightpower);
 			//vip等级
@@ -113,8 +143,20 @@ package com.rpgGame.netData.player.bean{
 			_level = readShort();
 			//职业
 			_job = readByte();
-			//性别 0女 1男
+			//玩家性别 1男 2女
 			_sex = readByte();
+			//阶段
+			_body = readByte();
+			//衣服套装
+			_cloths = readInt();
+			//头发
+			_hair = readInt();
+			//主武器
+			_weapon = readInt();
+			//副武器
+			_second_weapon = readInt();
+			//坐骑
+			_mount = readInt();
 			//战斗力
 			_fightpower = readInt();
 			//vip等级
@@ -206,7 +248,7 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * get 性别 0女 1男
+		 * get 玩家性别 1男 2女
 		 * @return 
 		 */
 		public function get sex(): int{
@@ -214,10 +256,100 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * set 性别 0女 1男
+		 * set 玩家性别 1男 2女
 		 */
 		public function set sex(value: int): void{
 			this._sex = value;
+		}
+		
+		/**
+		 * get 阶段
+		 * @return 
+		 */
+		public function get body(): int{
+			return _body;
+		}
+		
+		/**
+		 * set 阶段
+		 */
+		public function set body(value: int): void{
+			this._body = value;
+		}
+		
+		/**
+		 * get 衣服套装
+		 * @return 
+		 */
+		public function get cloths(): int{
+			return _cloths;
+		}
+		
+		/**
+		 * set 衣服套装
+		 */
+		public function set cloths(value: int): void{
+			this._cloths = value;
+		}
+		
+		/**
+		 * get 头发
+		 * @return 
+		 */
+		public function get hair(): int{
+			return _hair;
+		}
+		
+		/**
+		 * set 头发
+		 */
+		public function set hair(value: int): void{
+			this._hair = value;
+		}
+		
+		/**
+		 * get 主武器
+		 * @return 
+		 */
+		public function get weapon(): int{
+			return _weapon;
+		}
+		
+		/**
+		 * set 主武器
+		 */
+		public function set weapon(value: int): void{
+			this._weapon = value;
+		}
+		
+		/**
+		 * get 副武器
+		 * @return 
+		 */
+		public function get second_weapon(): int{
+			return _second_weapon;
+		}
+		
+		/**
+		 * set 副武器
+		 */
+		public function set second_weapon(value: int): void{
+			this._second_weapon = value;
+		}
+		
+		/**
+		 * get 坐骑
+		 * @return 
+		 */
+		public function get mount(): int{
+			return _mount;
+		}
+		
+		/**
+		 * set 坐骑
+		 */
+		public function set mount(value: int): void{
+			this._mount = value;
 		}
 		
 		/**
