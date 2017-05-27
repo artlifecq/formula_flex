@@ -57,8 +57,7 @@ package com.rpgGame.app.ui.main.shortcut
 		private var labTxt : NumberBitmap; 
 		/**技能id*/
 		private var skillID:int;
-		/**角色职业*/
-		private var playerJod:int;
+		private var _playerJod:int;
 		/**技能CD时间*/
 		private var cdtime:int;
 		/**技能消耗资源*/
@@ -462,7 +461,10 @@ package com.rpgGame.app.ui.main.shortcut
 				//showJingzhenNumber();
 			}
 		}
-		
+		public function setEffect2Top():void
+		{
+			this.setChildIndex(effectSk,this.numChildren);
+		}
 		private var readyEffectJod:int=-1;//当前cd技能框的职业，相同时不用重新生成技能
 		/**设置各职业转框特效*/
 		public function setEffect():void
@@ -628,6 +630,20 @@ package com.rpgGame.app.ui.main.shortcut
 				labTxt.numberText =$txt;	
 			}
 					
+		}
+
+		/**角色职业*/
+		public function get playerJod():int
+		{
+			return _playerJod;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set playerJod(value:int):void
+		{
+			_playerJod = value;
 		}
 	
 		

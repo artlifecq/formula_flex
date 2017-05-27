@@ -81,7 +81,7 @@ package com.rpgGame.app.manager
 			var vo :ShortcutsData;
 			for each ( vo in values ) 
 			{
-				data.push( {t :vo.type , mid :vo.id , k :vo.shortcutPos} );
+				data.push( {t :vo.type , mid :vo.id , k :vo.shortcutPos,bind:vo.itemBind} );
 			}
 			HeroMiscSender.reqSetClientCustomTag(EnumCustomTagType.SHORTCUT_CONFIG , JSONUtil.encode( data ));
 		}

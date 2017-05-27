@@ -26,10 +26,10 @@ package com.rpgGame.app.ui.main.shortcut
 		private var _shortcutBar : ShortcutBar;
 		private const GRID_COUNT : int = 8;
 
-		private const SHORTCUTS_KEY : Array = ["1", "2", "3", "4","Q", "W", "E", "R"];
+		private const SHORTCUTS_KEY : Array = ["1", "2", "3", "4","Q", "W", "E", "R","F1"];
 
 		private var _gridVect : Vector.<ShortcutGrid>;
-
+		private var _gridF1:ShortcutGrid;
 		public function ShortcutSkillBar(shortcutBar : ShortcutBar)
 		{
 			_shortcutBar = shortcutBar;
@@ -68,6 +68,26 @@ package com.rpgGame.app.ui.main.shortcut
 			EventManager.addEvent(ItemEvent.ITEM_INPUT_SHORTCUT, autoInputItemToShortcutGrid);
 			EventManager.addEvent(SpellEvent.SPELL_UPDATE_SHORTCUTS, onClearSpell);
 			EventManager.addEvent(SpellEvent.SPELL_KEY_RELEASE, onKeySkill);
+			EventManager.addEvent(ItemEvent.ITEM_INIT,onItemInit);
+		}
+		
+		private function onItemInit(contianer:int):void
+		{
+			// TODO Auto Generated method stub
+			if (ItemContainerID.BackPack==contianer) 
+			{
+				var shortcutData:ShortcutsData=ShortcutsManger.getInstance().getShortcutsDataByPos(GRID_COUNT);
+				if (shortcutData == null||shortcutData.type!=ShortcutsTypeEnum.ITEM_TYPE)
+					return;
+				var itemInfo : ClientItemInfo =BackPackManager.instance.getItemById(shortcutData.id);
+				itemInfo.count = BackPackManager.instance.getItemCount(shortcutData.id);
+				FaceUtil.SetItemGrid(_gridF1, itemInfo);
+				_gridF1.isEnabled = itemInfo.count > 0;
+				_gridF1.playerJod=MainRoleManager.actorInfo.job;
+				_gridF1.setEffect();
+				_gridF1.setIsShowCdTm(true);
+				_gridF1.setEffect2Top();
+			}
 		}
 		
 		private function onKeySkill(index:int):void
@@ -103,6 +123,21 @@ package com.rpgGame.app.ui.main.shortcut
 				_gridVect.push(cd);
 //				cd.showShortCutText(SHORTCUTS_KEY[i]);
 			}
+			//f1
+			
+			_gridF1=new ShortcutGrid(_shortcutBar,size);
+			_gridF1.width = _gridF1.height = size;
+			
+			_gridF1.dragAble = true;
+			gridInfo = new GridInfo(ItemContainerID.Shortcut, GRID_COUNT);
+			_gridF1.gridInfo = gridInfo;
+			_gridF1.onTouchEndCallBack = onTouchGrid;
+			_gridF1.rightMouseClickFun = onRightMouseClick;
+			_gridF1.x = 194;
+			_gridF1.y =-64;
+			_gridF1.setBg(GridBGType.GRID_SIZE_48);
+			this.addChild(_gridF1);
+			_gridVect.push(_gridF1);
 		}
 		
 		//---------------------------------------
@@ -233,10 +268,18 @@ package com.rpgGame.app.ui.main.shortcut
 					break;
 
 				case ShortcutsTypeEnum.ITEM_TYPE:
-					var itemInfo : ClientItemInfo = new ClientItemInfo( shortData.id);
-					itemInfo.count = BackPackManager.instance.getItemCount(shortData.id);
-					FaceUtil.SetItemGrid(grid, itemInfo);
-					grid.isEnabled = itemInfo.count > 0;
+					var itemInfo : ClientItemInfo = BackPackManager.instance.getItemById( shortData.id);
+					if (itemInfo) 
+					{
+						itemInfo.count = BackPackManager.instance.getItemCount(shortData.id);
+						FaceUtil.SetItemGrid(grid, itemInfo);
+						grid.isEnabled = itemInfo.count > 0;
+						grid.playerJod=MainRoleManager.actorInfo.job;
+						grid.setEffect();
+						grid.setIsShowCdTm(true);
+						grid.setEffect2Top();
+					}
+					//背包初始化了在设置
 					break;
 			}
 		}
@@ -253,6 +296,16 @@ package com.rpgGame.app.ui.main.shortcut
 		 */
 		private function onDragDrop(dragSourceGridInfo : GridInfo, targetGridInfo : GridInfo) : void
 		{
+			//如果是物品要判断能否拖入
+			if (ItemContainerID.BackPack==dragSourceGridInfo.containerID) 
+			{
+				var item:ClientItemInfo=dragSourceGridInfo.data as ClientItemInfo;
+				if (!item||item.qItem.q_shortcut!=1) 
+				{
+					return;
+				}
+				//
+			}
 			if (dragSourceGridInfo != null && dragSourceGridInfo.containerID == ItemContainerID.Shortcut)
 			{
 				//拖动是从快捷栏开始的
@@ -308,6 +361,11 @@ package com.rpgGame.app.ui.main.shortcut
 				case ItemContainerID.BackPack:
 					shortType = ShortcutsTypeEnum.ITEM_TYPE;
 					realId = dragSourceGridInfo.data.cfgId;
+					//只能拖动到f1键位
+					if (targetGridInfo.index!=8) 
+					{
+						return;
+					}
 					break;
 				case ItemContainerID.Spell:
 					shortType = ShortcutsTypeEnum.SKILL_TYPE;
@@ -329,8 +387,13 @@ package com.rpgGame.app.ui.main.shortcut
 				//---------------------------
 				updateGrid(oldShort.shortcutPos);
 			}
-
-			ShortcutsManger.getInstance().setShortData(targetGridInfo.index, shortType, realId);
+			var bind:int=0;
+			if (shortType==ShortcutsTypeEnum.ITEM_TYPE) 
+			{
+				bind=(dragSourceGridInfo.data as ClientItemInfo).itemInfo.isbind;
+			}
+				
+			ShortcutsManger.getInstance().setShortData(targetGridInfo.index, shortType, realId,true,bind);
 			//---------------------------
 			updateGrid(targetGridInfo.index);
 		}

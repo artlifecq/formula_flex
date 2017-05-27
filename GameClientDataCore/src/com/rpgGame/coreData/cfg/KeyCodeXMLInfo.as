@@ -35,6 +35,7 @@ package com.rpgGame.coreData.cfg
 					<key funcID="6" code="87" name="W" dataID="" type="3" />
 					<key funcID="7" code="69" name="E" dataID="" type="3" />
 					<key funcID="8" code="82" name="R" dataID="" type="3" />
+					<key funcID="9" code="112" name="F1" dataID="" type="3" />
 <!-- 移动快捷键 
 					<key funcID="1" code="87" name="W" dataID="0" type="4"/>
 					
