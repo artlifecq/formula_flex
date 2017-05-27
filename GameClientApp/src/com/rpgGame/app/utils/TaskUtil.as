@@ -852,51 +852,54 @@ package com.rpgGame.app.utils
 		/**设置任务目标内容*/
 		public static  function setGotargetInfo(type:int,describe:String,finisstr:String,subList:Vector.<TaskSubRateInfo>,txtButList:Vector.<SkinnableContainer>):void
 		{
-			var finiStr:Array;
-			var informationList:Array=finisstr.split(";");
-			var i:int,j:int,length:int;
-			length=informationList.length;
-			for(i=0;i<length;i++)
+			var text:String="";
+			if(type==TaskType.SUB_CONVERSATION)
 			{
-				if(informationList[i]&&informationList[i]!="")
+				text=TaskMissionCfgData.getTaskDescribe(type,describe,TaskMissionManager.getMainTaskNpcModeId());
+				setGotargetLabelText(type,txtButList[0],text);
+			}
+			else
+			{
+				var finiStr:Array;
+				var informationList:Array=finisstr.split(";");
+				var i:int,j:int,length:int;
+				length=informationList.length;
+				for(i=0;i<length;i++)
 				{
-					var text:String="";
-					var modeid:int=0;
-					var count:int=0,finish:int;
-					var modeArr:Array=informationList[i].split(",");
-					if(modeArr.length==2)
+					if(informationList[i]&&informationList[i]!="")
 					{
-						modeid=int(modeArr[0]);
-						finish=int(modeArr[1]);
-					}
-					if(subList[i]!=null)
-					{
-						modeid=subList[i].modelId;
-						count=subList[i].num;
-					}
-					if(modeid!=0)
-					{
-						text=TaskMissionCfgData.getTaskDescribe(type,describe,modeid);
 						
+						var modeid:int=0;
+						var count:int=0,finish:int;
+						var modeArr:Array=informationList[i].split(",");
+						if(modeArr.length==2)
+						{
+							modeid=int(modeArr[0]);
+							finish=int(modeArr[1]);
+						}
+						if(subList[i]!=null)
+						{
+							modeid=subList[i].modelId;
+							count=subList[i].num;
+						}
+						if(modeid!=0)
+						{
+							text=TaskMissionCfgData.getTaskDescribe(type,describe,modeid);
 							
-					}
-					
-					
-					if(type!=TaskType.SUB_CONVERSATION)
-					{
+							
+						}
+						
 						text+="<font color='#cfc6ae'>("+count+"/"+finish+")</font>";
+						
+						setGotargetLabelText(type,txtButList[i],text);
+						
+						
 					}
-					if(count==finish)
-					{
-						//text+="(已完成)";
-					}
-					
-					setGotargetLabelText(type,txtButList[i],text);
-					
 					
 				}
-				
+			
 			}
+			
 			
 			
 		}
