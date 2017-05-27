@@ -8,9 +8,9 @@ package com.rpgGame.coreData.cfg
 
 	public class ChatCfgData
 	{
-		public static const MAX_CHAR_LENGTH:int = 50;
+		public static const MAX_CHAR_LENGTH:int = 60;
 		/**付费喇叭所需的物品id**/
-		public static var paidChatGoodsID:int = 0;
+		public static var paidChatGoodsID:int = 701;
 		private static var chatLevelVect:HashMap = new HashMap();
 		private static var durationVect:HashMap = new HashMap();
 		/**心情广播时间间隔*/

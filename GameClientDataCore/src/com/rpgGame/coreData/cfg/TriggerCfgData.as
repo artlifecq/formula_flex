@@ -45,6 +45,8 @@ package com.rpgGame.coreData.cfg
 				triger.sceneEffectIds=JSONUtil.decode(info.q_effectIds);
 				triger.obstacleAreaRemove=JSONUtil.decode(info.q_area_remove_id);
 				triger.sceneEffectRemove=JSONUtil.decode(info.q_remove_effectIds);
+				triger.resetTriggers=JSONUtil.decode(info.q_reset_triggers);
+				
 				if(info.q_trigger_type==1)
 				{
 					qarea=AreaCfgData.getAreaByID(info.q_trigger_area_id);
@@ -85,7 +87,21 @@ package com.rpgGame.coreData.cfg
 			}
 			return triggerList;
 		}
-		
+		/**返回副本触发区域列表*/
+		public static function getTriggerInZone(zid:int):Vector.<ClientTrigger>
+		{
+			var triggerList:Vector.<ClientTrigger>=new Vector.<ClientTrigger>();
+			
+			for each(var info :ClientTrigger in _trigers)
+			{
+				if(info.zoneId==zid)
+				{
+					triggerList.push(info);
+				}
+				
+			}
+			return triggerList;
+		}
 		
 	}
 }

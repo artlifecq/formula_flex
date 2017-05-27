@@ -16,7 +16,9 @@ package com.rpgGame.app.ui.main.taskbar
 	import feathers.controls.Scroller;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.UIAsset;
+	import feathers.themes.GuiThemeStyle;
 	
+	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
 	import org.mokylin.skin.mainui.renwu.RenWuZhuiZong_Skin;
 	import org.mokylin.skin.mainui.renwu.Renwu_Item;
 	
@@ -195,7 +197,7 @@ package com.rpgGame.app.ui.main.taskbar
 			scrollBack.graphics.endFill();
 			scrollBack.visible=false;
 			scrollBox.addChild(scrollBack);
-			
+			GuiThemeStyle.setScrollerStyle(scrollBar, org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack);
 			
 			
 			

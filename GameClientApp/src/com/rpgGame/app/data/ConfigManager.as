@@ -204,12 +204,12 @@ package com.rpgGame.app.data
 			DieCfgData.setup(dic[ConfigClassRegister.Q_die]);
 			GCDCfgData.setup(dic[ConfigClassRegister.Q_GCD]);
 			SkillLvLDataManager.setup(dic[ConfigClassRegister.Q_skill_ignore]);
-
+			
 			EquipStrengthCfg.setup(dic[ConfigClassRegister.Q_equip_strength]);
 			EquipPolishCfg.setup(dic[ConfigClassRegister.Q_equip_polish]);
 			EquipWashCfg.setup(dic[ConfigClassRegister.Q_equip_wash]);
 			EquipWashAttCfg.setup(dic[ConfigClassRegister.Q_equip_wash_attr]);
-//			CountryUnionStatCfgData.setup(null); //待解决
+			//			CountryUnionStatCfgData.setup(null); //待解决
 			MeridianCfg.setup(dic[ConfigClassRegister.Q_meridian]);
 			
 			////////////////////////////////////////////////////////////////////////
@@ -263,11 +263,11 @@ package com.rpgGame.app.data
 			//心法
 			CheatsCfg.setup(dic[ConfigClassRegister.Q_cheats]);
 			CheatsNodeCfg.setup(dic[ConfigClassRegister.Q_cheats_node]);
-
+			
 			TaskMissionCfgData.setupSection(dic[ConfigClassRegister.Q_mission_section]);
 			//坐骑数据
 			HorseConfigData.setConfig(dic[ConfigClassRegister.Q_horse]);
-//			HorseSpellData.setConfig(dic[ConfigClassRegister.Q_horse_skills]);
+			//			HorseSpellData.setConfig(dic[ConfigClassRegister.Q_horse_skills]);
 			HorseExtraItemInfo.createInfo();
 			HorseSpellData.setConfig(dic[ConfigClassRegister.Q_horse_skills]);
 			HorseExtraItemInfo.createInfo();

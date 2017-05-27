@@ -5,6 +5,7 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.ui.main.activityBar.ActivityBar;
 	import com.rpgGame.app.ui.main.buff.BuffBar;
+	import com.rpgGame.app.ui.main.buttons.MainButtonBases;
 	import com.rpgGame.app.ui.main.chat.ChatBar;
 	import com.rpgGame.app.ui.main.chat.SystemMsgBar;
 	import com.rpgGame.app.ui.main.dungeon.DungeonTrackerBar;
@@ -21,10 +22,8 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.app.ui.main.team.TeamLeftFixedBar;
 	import com.rpgGame.app.ui.main.top.ExpBar;
 	import com.rpgGame.app.ui.main.top.TopBar;
-	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppDispather;
 	import com.rpgGame.core.app.AppEvent;
-	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.SceneInteractiveEvent;
@@ -34,7 +33,6 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.info.MapDataManager;
-	import com.rpgGame.coreData.info.map.EnumMapType;
 	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.coreData.lang.LangYuMaQiShou;
@@ -46,6 +44,8 @@ package com.rpgGame.app.ui.main
 	
 	import app.message.MonsterDataProto.MonsterType;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.UIAsset;
 	
 	import gs.TweenLite;
@@ -55,7 +55,6 @@ package com.rpgGame.app.ui.main
 	import starling.core.Starling;
 	import starling.display.Sprite;
 	import starling.display.Stage;
-	import away3d.events.Event;
 	
 	import utils.TimerServer;
 	
@@ -73,11 +72,11 @@ package com.rpgGame.app.ui.main
 		
 		private const SHOW_BLOOD_TIPS:Number=0.2;
 		
-        // 头部
-        private var _topBar : TopBar;
-        private var _expBar : ExpBar;
-        // 人物头像
-        private var _headBar : MainRoleHeadBar;
+		// 头部
+		private var _topBar : TopBar;
+		private var _expBar : ExpBar;
+		// 人物头像
+		private var _headBar : MainRoleHeadBar;
 		
 		/**
 		 *玩家头像 
@@ -90,14 +89,14 @@ package com.rpgGame.app.ui.main
 		private var _eliteHead:MonsterEliteBar;
 		private var _normalHead:MonsterNormalBar;
 		
-        // 小地图
-        private var _smallMapBar : SmallMapBar;
-        // 快捷栏
-        private var _shortcutBar : ShortcutBar;
-        // 导航栏
-        private var _navigationBar : NavigationBar;
-        // 聊天框
-        private var _chatBar : ChatBar;
+		// 小地图
+		private var _smallMapBar : SmallMapBar;
+		// 快捷栏
+		private var _shortcutBar : ShortcutBar;
+		// 导航栏
+		private var _navigationBar : NavigationBar;
+		// 聊天框
+		private var _chatBar : ChatBar;
 		//系统消息条
 		private var _systemMsgBar:SystemMsgBar;
 		//任务追踪栏
@@ -111,28 +110,28 @@ package com.rpgGame.app.ui.main
 		
 		private var _lowBloodBg:UIAsset;
 		
-//		/** 主工具栏 **/
-//		private var _mainBar : ShortcutBar;
-//		/** 人物头像栏 **/
-//		private var _headBar : MainRoleHeadBar;
-//		/** 当前选中的英雄头像栏 **/
-//		private var _selectRoleHeadBar : SelectRoleHeadBar;
-//		/** 小地图 **/
-//		private var _miniMapBar : MiniMapBar;
-//		/** 任务栏 **/
-//		private var _taskBar : TaskBar;
-//		/** 聊天栏 **/
-//		private var _chatBar : ChatBar;
+		//		/** 主工具栏 **/
+		//		private var _mainBar : ShortcutBar;
+		//		/** 人物头像栏 **/
+		//		private var _headBar : MainRoleHeadBar;
+		//		/** 当前选中的英雄头像栏 **/
+		//		private var _selectRoleHeadBar : SelectRoleHeadBar;
+		//		/** 小地图 **/
+		//		private var _miniMapBar : MiniMapBar;
+		//		/** 任务栏 **/
+		//		private var _taskBar : TaskBar;
+		//		/** 聊天栏 **/
+		//		private var _chatBar : ChatBar;
 		/** 活动栏 **/
 		private var _activityBar : ActivityBar;
-//		/** 右边的进度提示 **/
-//		private var _hintBattleBar : HintBattleBar;
-//		/** 夺经、刺探、运镖追踪栏 **/
-//		private var _taskTrackPanel : TaskEventTrackPanel;
-//		/** 队伍队员列表 **/
-//		private var _teamBar : TeamBar;
-//		/** 御马场活动界面 **/
-//		private var _yuMaChangActivityBar:HurtRankPanel;
+		//		/** 右边的进度提示 **/
+		//		private var _hintBattleBar : HintBattleBar;
+		//		/** 夺经、刺探、运镖追踪栏 **/
+		//		private var _taskTrackPanel : TaskEventTrackPanel;
+		//		/** 队伍队员列表 **/
+		//		private var _teamBar : TeamBar;
+		//		/** 御马场活动界面 **/
+		//		private var _yuMaChangActivityBar:HurtRankPanel;
 		/** cd时间 **/
 		private var _cdTime : int = TIME;
 		private var selectedRole:SceneRole;
@@ -147,7 +146,7 @@ package com.rpgGame.app.ui.main
 		{
 			return _shortcutBar;
 		}
-
+		
 		/**
 		 * 初始化
 		 *
@@ -157,7 +156,7 @@ package com.rpgGame.app.ui.main
 			nativeStage = Starling.current.nativeStage;
 			nativeStage.addEventListener(Event.RESIZE, onStageResize);
 			starlingStage = Starling.current.stage;
-			
+			MainButtonBases.init();
 			initBar();
 			//isShowEventTrackPanel();
 			registerEvent();
@@ -169,26 +168,26 @@ package com.rpgGame.app.ui.main
 		 */
 		private function initBar() : void
 		{
-            this._topBar = new TopBar();
+			this._topBar = new TopBar();
 			_expBar=new ExpBar();
-            this.addChild(this._expBar);
+			this.addChild(this._expBar);
 			_topBar.y=5;
-            this.addChild(this._topBar);
-            this._headBar = new MainRoleHeadBar();
-            this.addChild(this._headBar);
-            this._smallMapBar = new SmallMapBar();
-            this.addChild(this._smallMapBar);
+			this.addChild(this._topBar);
+			this._headBar = new MainRoleHeadBar();
+			this.addChild(this._headBar);
+			this._smallMapBar = new SmallMapBar();
+			this.addChild(this._smallMapBar);
 			this._navigationBar = new NavigationBar();
 			this.addChild(this._navigationBar);
-            this._shortcutBar = new ShortcutBar();
-            this.addChild(this._shortcutBar);
-            this._chatBar = new ChatBar();
-            this.addChild(this._chatBar);
+			this._shortcutBar = new ShortcutBar();
+			this.addChild(this._shortcutBar);
+			this._chatBar = new ChatBar();
+			this.addChild(this._chatBar);
 			this._systemMsgBar=new SystemMsgBar();
-
+//			this.addChild(this._systemMsgBar);
 			this._taskBar=new TaskBar();
 			_dungeonTrackerBar=new DungeonTrackerBar();
-
+			
 			
 			
 			_buffBar=new BuffBar();
@@ -206,39 +205,39 @@ package com.rpgGame.app.ui.main
 			onSwitchCmp();
 			this._teamFixedBar=new TeamLeftFixedBar();
 			this.addChild(_teamFixedBar);
-//			_chatBar = new ChatBar();
-//			addChild(_chatBar);
-//			
-//			_selectRoleHeadBar = new SelectRoleHeadBar();
-//			_selectRoleHeadBar.defaultParent = this;
-//			
-//			_miniMapBar = new MiniMapBar();
-//			addChild(_miniMapBar);
-//			
-//			_taskBar = new TaskBar();
-//			addChild(_taskBar);
-//			
+			//			_chatBar = new ChatBar();
+			//			addChild(_chatBar);
+			//			
+			//			_selectRoleHeadBar = new SelectRoleHeadBar();
+			//			_selectRoleHeadBar.defaultParent = this;
+			//			
+			//			_miniMapBar = new MiniMapBar();
+			//			addChild(_miniMapBar);
+			//			
+			//			_taskBar = new TaskBar();
+			//			addChild(_taskBar);
+			//			
 			_activityBar = new ActivityBar();
 			addChild(_activityBar);
-//			
-//			_hintBattleBar = new HintBattleBar();
-//			addChild(_hintBattleBar);
-//			
-//			_teamBar = new TeamBar();
-//			addChild(_teamBar);
-//			
-//			_headBar = new MainRoleHeadBar();
-//			addChild(_headBar);
-//			
-//			_mainBar = new ShortcutBar();
-//			addChild(_mainBar);
-//			
-//			_taskTrackPanel = new TaskEventTrackPanel();
-//			addChild(_taskTrackPanel);
-//			
-//			_yuMaChangActivityBar = new HurtRankPanel();
-//			addChild(_yuMaChangActivityBar);
-//			_yuMaChangActivityBar.hide();
+			//			
+			//			_hintBattleBar = new HintBattleBar();
+			//			addChild(_hintBattleBar);
+			//			
+			//			_teamBar = new TeamBar();
+			//			addChild(_teamBar);
+			//			
+			//			_headBar = new MainRoleHeadBar();
+			//			addChild(_headBar);
+			//			
+			//			_mainBar = new ShortcutBar();
+			//			addChild(_mainBar);
+			//			
+			//			_taskTrackPanel = new TaskEventTrackPanel();
+			//			addChild(_taskTrackPanel);
+			//			
+			//			_yuMaChangActivityBar = new HurtRankPanel();
+			//			addChild(_yuMaChangActivityBar);
+			//			_yuMaChangActivityBar.hide();
 		}
 		
 		/**
@@ -247,22 +246,22 @@ package com.rpgGame.app.ui.main
 		 */
 		private function registerEvent() : void
 		{
-		    //EventManager.addEvent(TouJingEvent.TOUJING_ACCEPT_TASK, isShowEventTrackPanel);
-		    //EventManager.addEvent(TouJingEvent.MIXIN_ACCEPT_TASK, isShowEventTrackPanel);
-		    //EventManager.addEvent(YunBiaoEvent.ACCEPT_BIAO, isShowEventTrackPanel);
-		    //
-		    //EventManager.addEvent(TouJingEvent.TOUJING_COMPLETE, isShowEventTrackPanel);
-		    //EventManager.addEvent(YunBiaoEvent.COMPLETED_BIAO, isShowEventTrackPanel);
-		    //EventManager.addEvent(YunBiaoEvent.BIAO_DISAPPER, isShowEventTrackPanel);
-		    //EventManager.addEvent(YunBiaoEvent.CHECK_ON_LOGIN_BIAO, isShowEventTrackPanel);
-		    //
-		    //EventManager.addEvent(TaskEvent.MIXIN_COMPLETED_SUCCES, isShowEventTrackPanel);
-		    //EventManager.addEvent(TaskEvent.MIXIN_GIVEUP_SUCCES, updateGiveUpTask);
+			//EventManager.addEvent(TouJingEvent.TOUJING_ACCEPT_TASK, isShowEventTrackPanel);
+			//EventManager.addEvent(TouJingEvent.MIXIN_ACCEPT_TASK, isShowEventTrackPanel);
+			//EventManager.addEvent(YunBiaoEvent.ACCEPT_BIAO, isShowEventTrackPanel);
+			//
+			//EventManager.addEvent(TouJingEvent.TOUJING_COMPLETE, isShowEventTrackPanel);
+			//EventManager.addEvent(YunBiaoEvent.COMPLETED_BIAO, isShowEventTrackPanel);
+			//EventManager.addEvent(YunBiaoEvent.BIAO_DISAPPER, isShowEventTrackPanel);
+			//EventManager.addEvent(YunBiaoEvent.CHECK_ON_LOGIN_BIAO, isShowEventTrackPanel);
+			//
+			//EventManager.addEvent(TaskEvent.MIXIN_COMPLETED_SUCCES, isShowEventTrackPanel);
+			//EventManager.addEvent(TaskEvent.MIXIN_GIVEUP_SUCCES, updateGiveUpTask);
 			AppDispather.instance.addEventListener(AppEvent.APP_LOAD_ERROR,onAppLoadError);
 			
-		    //EventManager.addEvent(YuMaQiShouEvent.YU_MA_QI_SHOU_ACTIVITY_BEGIN_EVENT, onOpenPanel);
-		    //EventManager.addEvent(YuMaQiShouEvent.YU_MA_QI_SHOU_ACTIVITY_BEGIN_END_EVENT, onClosePanel);
-		    //EventManager.addEvent(RankEvent.PLUNDER_HURT_RANK_CHANGE, updateRankInfo);
+			//EventManager.addEvent(YuMaQiShouEvent.YU_MA_QI_SHOU_ACTIVITY_BEGIN_EVENT, onOpenPanel);
+			//EventManager.addEvent(YuMaQiShouEvent.YU_MA_QI_SHOU_ACTIVITY_BEGIN_END_EVENT, onClosePanel);
+			//EventManager.addEvent(RankEvent.PLUNDER_HURT_RANK_CHANGE, updateRankInfo);
 			
 			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE, onSwitchCmp);
 			
@@ -377,7 +376,7 @@ package com.rpgGame.app.ui.main
 			{
 				TimerServer.remove(updateTime);
 				_cdTime = TIME;
-//				_yuMaChangActivityBar.hide();
+				//				_yuMaChangActivityBar.hide();
 			}
 		}
 		
@@ -387,13 +386,13 @@ package com.rpgGame.app.ui.main
 		 */		
 		private function updateRankInfo():void
 		{
-//			_yuMaChangActivityBar.show();
-//			if (TouJingManager.hasTouJingTask() || MiXinManager.hasMixinTask() || YunBiaoManager.hasBiao) //是否偷经任务或者是密信任务
-//			{
-//				_taskTrackPanel.onHide();
-//			}
-//			_taskBar.onHide();
-//			_hintBattleBar.visible = false;
+			//			_yuMaChangActivityBar.show();
+			//			if (TouJingManager.hasTouJingTask() || MiXinManager.hasMixinTask() || YunBiaoManager.hasBiao) //是否偷经任务或者是密信任务
+			//			{
+			//				_taskTrackPanel.onHide();
+			//			}
+			//			_taskBar.onHide();
+			//			_hintBattleBar.visible = false;
 		}
 		
 		/**
@@ -414,36 +413,36 @@ package com.rpgGame.app.ui.main
 			}
 			
 			
-//			if( YuMaQiShouManager.isInBiMaWenActivity() )//在御马场场景，并且在后动时间内
-//			{
-//				_yuMaChangActivityBar.show();
-//				if (TouJingManager.hasTouJingTask() || MiXinManager.hasMixinTask() || YunBiaoManager.hasBiao) //是否偷经任务或者是密信任务
-//				{
-//					_taskTrackPanel.onHide();
-//				}
-//				_taskBar.onHide();
-//				_hintBattleBar.visible = false;
-//			}
-//			else if( YuMaQiShouManager.isInYuMaChangScene() )//活动关闭了，但是还在御马场场景
-//			{
-//				_yuMaChangActivityBar.hide();
-//				if (TouJingManager.hasTouJingTask() || MiXinManager.hasMixinTask() || YunBiaoManager.hasBiao) //是否偷经任务或者是密信任务
-//				{
-//					_taskTrackPanel.onHide();
-//				}
-//				_taskBar.onHide();
-//				_hintBattleBar.visible = false;
-//			}
-//			else
-//			{
-//				_yuMaChangActivityBar.hide();
-//				if (TouJingManager.hasTouJingTask() || MiXinManager.hasMixinTask() || YunBiaoManager.hasBiao) //是否偷经任务或者是密信任务
-//				{
-//					_taskTrackPanel.onShow();
-//				}
-//				_taskBar.onShow();
-//				_hintBattleBar.visible = true;
-//			}
+			//			if( YuMaQiShouManager.isInBiMaWenActivity() )//在御马场场景，并且在后动时间内
+			//			{
+			//				_yuMaChangActivityBar.show();
+			//				if (TouJingManager.hasTouJingTask() || MiXinManager.hasMixinTask() || YunBiaoManager.hasBiao) //是否偷经任务或者是密信任务
+			//				{
+			//					_taskTrackPanel.onHide();
+			//				}
+			//				_taskBar.onHide();
+			//				_hintBattleBar.visible = false;
+			//			}
+			//			else if( YuMaQiShouManager.isInYuMaChangScene() )//活动关闭了，但是还在御马场场景
+			//			{
+			//				_yuMaChangActivityBar.hide();
+			//				if (TouJingManager.hasTouJingTask() || MiXinManager.hasMixinTask() || YunBiaoManager.hasBiao) //是否偷经任务或者是密信任务
+			//				{
+			//					_taskTrackPanel.onHide();
+			//				}
+			//				_taskBar.onHide();
+			//				_hintBattleBar.visible = false;
+			//			}
+			//			else
+			//			{
+			//				_yuMaChangActivityBar.hide();
+			//				if (TouJingManager.hasTouJingTask() || MiXinManager.hasMixinTask() || YunBiaoManager.hasBiao) //是否偷经任务或者是密信任务
+			//				{
+			//					_taskTrackPanel.onShow();
+			//				}
+			//				_taskBar.onShow();
+			//				_hintBattleBar.visible = true;
+			//			}
 		}
 		
 		private function onStageResize(e : *) : void
@@ -463,20 +462,20 @@ package com.rpgGame.app.ui.main
 		
 		private function resize(sWidth : int, sHeight : int) : void
 		{
-            this._topBar.resize(sWidth, sHeight);
-            this._headBar.resize(sWidth, sHeight);
-            this._smallMapBar.resize(sWidth, sHeight);
-            this._shortcutBar.resize(sWidth, sHeight);
-            this._navigationBar.resize(sWidth, sHeight);
-            this._chatBar.resize(sWidth, sHeight);
+			this._topBar.resize(sWidth, sHeight);
+			this._headBar.resize(sWidth, sHeight);
+			this._smallMapBar.resize(sWidth, sHeight);
+			this._shortcutBar.resize(sWidth, sHeight);
+			this._navigationBar.resize(sWidth, sHeight);
+			this._chatBar.resize(sWidth, sHeight);
 			this._expBar.resize(sWidth, sHeight);
 			this._systemMsgBar.resize(sWidth, sHeight);
 			this._playerHead.resize(sWidth, sHeight);
-
+			
 			if(_taskBar.parent){
 				this._taskBar.resize(sWidth, sHeight);
 			}
-
+			
 			this._bossHead.resize(sWidth, sHeight);
 			this._eliteHead.resize(sWidth, sHeight);
 			this._normalHead.resize(sWidth, sHeight);
@@ -485,18 +484,18 @@ package com.rpgGame.app.ui.main
 			_lowBloodBg.width=sWidth;
 			_lowBloodBg.height=sHeight;
 			
-//			_mainBar.resize(sWidth, sHeight);
-//			_headBar.resize(sWidth, sHeight);
-//			_selectRoleHeadBar.resize(sWidth, sHeight);
-//			_miniMapBar.resize(sWidth, sHeight);
-//			_taskBar.resize(sWidth, sHeight);
-//			_chatBar.resize(sWidth, sHeight);
+			//			_mainBar.resize(sWidth, sHeight);
+			//			_headBar.resize(sWidth, sHeight);
+			//			_selectRoleHeadBar.resize(sWidth, sHeight);
+			//			_miniMapBar.resize(sWidth, sHeight);
+			//			_taskBar.resize(sWidth, sHeight);
+			//			_chatBar.resize(sWidth, sHeight);
 			_activityBar.resize(sWidth, sHeight);
-//			_hintBattleBar.resize(sWidth, sHeight);
-//			_teamBar.resize(sWidth, sHeight);
-//			_taskTrackPanel.resize(sWidth, _taskBar.y + _taskBar.height);
+			//			_hintBattleBar.resize(sWidth, sHeight);
+			//			_teamBar.resize(sWidth, sHeight);
+			//			_taskTrackPanel.resize(sWidth, _taskBar.y + _taskBar.height);
 			ShortcutMessageBar.instence.resize(sWidth, sHeight);
-//			_yuMaChangActivityBar.resize(sWidth, _taskBar.y);
+			//			_yuMaChangActivityBar.resize(sWidth, _taskBar.y);
 		}
 		
 		public function getBtnGlobalPos(btnName : String) : Point

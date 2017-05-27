@@ -1,10 +1,19 @@
 package com.rpgGame.app.ui.main.dungeon
 {
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.manager.DungeonManager;
+	import com.rpgGame.app.manager.TrusteeshipManager;
+	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
+	import com.rpgGame.app.manager.scene.SceneSwitchManager;
+	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.core.events.DungeonEvent;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.DailyZoneMonsterCfgData;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.LunJianCfg;
 	import com.rpgGame.coreData.cfg.ZoneCfgData;
@@ -12,6 +21,7 @@ package com.rpgGame.app.ui.main.dungeon
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_dailyzone_monster;
 	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.clientConfig.Q_lunjian;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
@@ -20,10 +30,12 @@ package com.rpgGame.app.ui.main.dungeon
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.type.TaskType;
 	import com.rpgGame.netData.task.bean.TaskSubRateInfo;
+	import com.rpgGame.netData.zone.bean.KillMonsterInfo;
 	
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.UIAsset;
 	
+	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.mainui.fubenzhuizong.FuBen_Skin;
 	import org.mokylin.skin.mainui.renwu.Renwu_Item;
 	import org.mokylin.skin.mainui.renwu.Renwu_Item2;
@@ -53,19 +65,11 @@ package com.rpgGame.app.ui.main.dungeon
 			_skin=new FuBen_Skin();
 			super(_skin);
 			init();
+			addEvent();
 		}
 		override protected function onShow() : void
-		{
-			var zid:int=7001;
-			if(zoneId!=zid)
-			{
-				zoneId=zid;
-				setTitle()
-				setReword();
-				setUisite();
-				setTime();
-			}
-			
+		{//L.l("onShow");
+			enterZone();
 			
 		}
 		override protected function onHide():void
@@ -76,83 +80,152 @@ package com.rpgGame.app.ui.main.dungeon
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
 			super.onTouchTarget(target);
+			switch(target.name){
+				case "killbut_0":
+					touchBut(0);
+					break;
+				case "killbut_1":
+					touchBut(1);
+					break;
+				case "killbut_2":
+					touchBut(2);
+					break;
+				case "killbut_3":
+					touchBut(3);
+					break;
+				case "sec_subbut1":
+					DungeonSender.zoneOutToGame();
+					//setOutResult();
+					break;
+			}
+			
 			
 		}
-		private function init():void
+		private function touchBut(id:int):void
 		{
-			
-			skinList=new Array();
-			skinList.push(_skin.sec_navi1);
-			skinList.push(_skin.lbMiaoshu);
-			skinList.push(_skin.killbut_0);
-			skinList.push(_skin.killbut_1);
-			skinList.push(_skin.killbut_2);
-			skinList.push(_skin.sec_navi2);
-			skinList.push(_skin.sec_ico1_0);
-			skinList.push(_skin.sec_ico1_4);
-			skinList.push(_skin.sec_navi3);
-			skinList.push(_skin.sec_ico2_0);
-			skinList.push(_skin.sec_ico2_4);
-			skinList.push(_skin.sec_info);
-			skinList.push(_skin.sec_subbut1);
 			var i:int;
-			killButList=new Vector.<SkinnableContainer>();
-			for(i=0;i<3;i++)
+			var killList:Vector.<KillMonsterInfo>=DungeonManager.killInfos;
+			var qzm:Q_dailyzone_monster;
+			if(killList&&id<killList.length)
 			{
-				killButList.push(_skin["killbut_"+i]);
+				qzm=DailyZoneMonsterCfgData.getZoneCfg(killList[id].monsterModelId);
+				if(qzm)
+				{
+					MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, qzm.q_move_x,-qzm.q_move_y,startFight, 100,null,startFight);
+				}
 			}
-
-			var ico:IconCDFace;
-			icoBg1List=new Vector.<UIAsset>();
-			for(i=0;i<8;i++)
+		}
+		/**寻路完成开始杀怪*/
+		private function startFight(value:*):void
+		{
+			TrusteeshipManager.getInstance().startAutoFight();
+		}
+		private function initShow():void
+		{
+			_skin.lbHeadName.text="";
+			_skin.sec_navi1.htmlText="";
+			_skin.lbMiaoshu.htmlText="";
+			_skin.sec_info.text="";
+			for(var i:int=0;i<icoBg1List.length;i++)
 			{
-				icoBg1List.push(_skin["sec_ico1_"+i]);
-			}
-			ico1List=new Vector.<IconCDFace>();
-			for(i=0;i<icoBg1List.length;i++)
-			{
-				ico=new IconCDFace(IcoSizeEnum.ICON_48);
-				ico.showCD=false;
-				ico.x=icoBg1List[i].x-6;
-				ico.y=icoBg1List[i].y-6;
-				ico.visible=false;
 				icoBg1List[i].visible=false;
-				ico1List.push(ico);
-				_skin.task_box.addChild(ico);
-			}
-			icoBg2List=new Vector.<UIAsset>();
-			for(i=0;i<8;i++)
-			{
-				icoBg2List.push(_skin["sec_ico2_"+i]);
-			}
-			ico2List=new Vector.<IconCDFace>();
-			for(i=0;i<icoBg2List.length;i++)
-			{
-				ico=new IconCDFace(IcoSizeEnum.ICON_48);
-				ico.showCD=false;
-				ico.x=icoBg2List[i].x-6;
-				ico.y=icoBg2List[i].y-6;
-				ico.visible=false;
+				ico1List[i].visible=false;
 				icoBg2List[i].visible=false;
-				ico2List.push(ico);
-				_skin.task_box.addChild(ico);
+				ico2List[i].visible=false;
+			}
+		}
+		
+		
+		private function addEvent():void
+		{
+			EventManager.addEvent(DungeonEvent.ENTER_ZONE,enterZone);//进入副本
+			EventManager.addEvent(DungeonEvent.OUT_ZONE,outZone);//退出
+			EventManager.addEvent(DungeonEvent.ZONE_STAGE_CHANGE,setTageChange);//副本状态
+			EventManager.addEvent(DungeonEvent.ZONE_REMAIN_TIME,setTime);//副本时间
+			EventManager.addEvent(DungeonEvent.ZONE_SKILL_INFOS,setKillInfo);//击杀列表
+			EventManager.addEvent(DungeonEvent.ZONE_SKILL_INFO,setKillInfo);//击杀列表
+			EventManager.addEvent(DungeonEvent.ZONE_OUT_RESULT,setOutResult);//击杀列表
+		}
+		private function enterZone():void
+		{
+			//initShow();
+			if(DungeonManager.curryZoneId==0||zoneId==DungeonManager.curryZoneId)
+			{
+				return;
 			}
 			
-			killButList[1].visible=false;
-			killButList[2].visible=false;
+			zoneId=DungeonManager.curryZoneId;
+			setTitle();
+			setReword();
+			setTageText();
+			setKillInfo();
+			setTime();
+			setUisite();
+		}
+		private function outZone():void
+		{
+			_skin.task_box.visible=false;
+			DungeonManager.curryZoneId=0;
+		}
+		private function setTageChange():void
+		{
+			enterZone();
+			setTageText();
+			setUisite();
 		}
 		private function setTitle():void
 		{
 			var zoneData:Q_zone=ZoneCfgData.getZoneCfg(zoneId);
 			if(zoneData==null)return;
 			_skin.lbHeadName.text=zoneData.q_name;
-			_skin.sec_navi1.htmlText="[阶段1]";
-			_skin.lbMiaoshu.htmlText="此处为当前阶段的剧情描述文字此处为当前阶段的剧情描述文字";
-			
 			_skin.head_left.x=(_skin.lbHeadName.x+_skin.lbHeadName.width/2-_skin.lbHeadName.textWidth/2-_skin.head_left.width-7);
 			_skin.head_right.x=(_skin.lbHeadName.x+_skin.lbHeadName.width/2+_skin.lbHeadName.textWidth/2+_skin.head_left.width+7);
 		}
 		
+		private function setTageText():void
+		{//L.l("[阶段"+DungeonManager.zoneStage);
+			
+			
+			if(DungeonManager.zoneStage==0)
+			{
+				_skin.sec_navi1.visible=false;
+				_skin.lbMiaoshu.visible=false;
+				return;
+			}
+			_skin.sec_navi1.htmlText="[阶段"+DungeonManager.zoneStage+"]";
+			_skin.lbMiaoshu.htmlText=DungeonManager.getZoneStageDesc();
+			_skin.sec_navi1.visible=true;
+			_skin.lbMiaoshu.visible=true;
+			
+		}
+		private function setKillInfo():void
+		{
+			var i:int=0;
+			for(i=0;i<killButList.length;i++)
+			{
+				killButList[i].visible=false;
+			}
+			//getMonsterModeidByAreaid
+			var killList:Vector.<KillMonsterInfo>=DungeonManager.killInfos;
+			var rItme:Renwu_Item2;
+			var qzm:Q_dailyzone_monster;
+			if(killList&&killList.length>0)
+			{
+				for(i=0;i<killList.length;i++)
+				{
+					qzm=DailyZoneMonsterCfgData.getZoneCfg(killList[i].monsterModelId);
+					if(qzm&&i<killButList.length)
+					{
+						rItme=killButList[i].skin as Renwu_Item2;
+						rItme.labelDisplay.htmlText="击杀：<u>"+MonsterDataManager.getMonsterName(qzm.q_monsterId)+"</u><font color='#cfc6ae'>("+killList[i].count+"/"+qzm.q_monsterNum+")</font>";
+						killButList[i].visible=true;
+					}
+					
+				}
+			}
+			
+			setUisite();
+		}
 		/**设置任务目标内容*/
 		public function setGoalInfo(type:int,describe:String,finisstr:String,subList:Vector.<TaskSubRateInfo>,txtButList:Vector.<SkinnableContainer>):void
 		{
@@ -261,12 +334,13 @@ package com.rpgGame.app.ui.main.dungeon
 		
 		private function setTime():void
 		{
-			var rTime:int=1600000;
-			if(remainTime<0){
+			var rTime:int=DungeonManager.remainTime;
+			if(rTime<=0){
 				_skin.sec_info.text="未开始挑战!";
 			}else{
 				remainTime=rTime/1000;
 				_skin.sec_info.text="副本剩余时间："+TimeUtil.format3TimeType(remainTime);
+				TimerServer.remove(updateTime);
 				TimerServer.addLoop(updateTime,1000);
 			}
 		}
@@ -278,6 +352,10 @@ package com.rpgGame.app.ui.main.dungeon
 			if(remainTime==0){
 				TimerServer.remove(updateTime);
 			}
+		}
+		private function setOutResult():void
+		{
+			AppManager.showApp(AppConstant.MULTY_EXITTIME_PANL);
 		}
 		
 		/**设置UI位置*/
@@ -331,6 +409,70 @@ package com.rpgGame.app.ui.main.dungeon
 			
 			
 		}
-		
+		private function init():void
+		{
+			
+			skinList=new Array();
+			skinList.push(_skin.sec_navi1);
+			skinList.push(_skin.lbMiaoshu);
+			skinList.push(_skin.killbut_0);
+			skinList.push(_skin.killbut_1);
+			skinList.push(_skin.killbut_2);
+			skinList.push(_skin.sec_navi2);
+			skinList.push(_skin.sec_ico1_0);
+			skinList.push(_skin.sec_ico1_4);
+			skinList.push(_skin.sec_navi3);
+			skinList.push(_skin.sec_ico2_0);
+			skinList.push(_skin.sec_ico2_4);
+			skinList.push(_skin.sec_info);
+			skinList.push(_skin.sec_subbut1);
+			var i:int;
+			killButList=new Vector.<SkinnableContainer>();
+			for(i=0;i<5;i++)
+			{
+				killButList.push(_skin["killbut_"+i]);
+			}
+			
+			var ico:IconCDFace;
+			icoBg1List=new Vector.<UIAsset>();
+			for(i=0;i<8;i++)
+			{
+				icoBg1List.push(_skin["sec_ico1_"+i]);
+			}
+			ico1List=new Vector.<IconCDFace>();
+			for(i=0;i<icoBg1List.length;i++)
+			{
+				ico=new IconCDFace(IcoSizeEnum.ICON_48);
+				ico.showCD=false;
+				ico.x=icoBg1List[i].x-6;
+				ico.y=icoBg1List[i].y-6;
+				ico.visible=false;
+				icoBg1List[i].visible=false;
+				ico1List.push(ico);
+				_skin.task_box.addChild(ico);
+			}
+			icoBg2List=new Vector.<UIAsset>();
+			for(i=0;i<8;i++)
+			{
+				icoBg2List.push(_skin["sec_ico2_"+i]);
+			}
+			ico2List=new Vector.<IconCDFace>();
+			for(i=0;i<icoBg2List.length;i++)
+			{
+				ico=new IconCDFace(IcoSizeEnum.ICON_48);
+				ico.showCD=false;
+				ico.x=icoBg2List[i].x-6;
+				ico.y=icoBg2List[i].y-6;
+				ico.visible=false;
+				icoBg2List[i].visible=false;
+				ico2List.push(ico);
+				_skin.task_box.addChild(ico);
+			}
+			
+			killButList[1].visible=false;
+			killButList[2].visible=false;
+			setUisite();
+			
+		}
 	}
 }

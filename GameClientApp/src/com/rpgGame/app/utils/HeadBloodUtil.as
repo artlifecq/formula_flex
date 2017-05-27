@@ -187,9 +187,13 @@ package com.rpgGame.app.utils
 				if (monster)
 					return _role.name + "[" + monster.totalStat.level + "级]";
 			}
+			if (_role.type == SceneCharType.COLLECT)
+			{
+					return _role.name;
+			}
 			if (_role.type != SceneCharType.PLAYER)
 				return _role.name;
-
+			
 			var heroData : HeroData = _role.data as HeroData;
 			if (heroData == null)
 				return _role.name;

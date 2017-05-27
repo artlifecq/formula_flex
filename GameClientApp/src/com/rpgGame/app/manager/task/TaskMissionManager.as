@@ -292,6 +292,10 @@ package com.rpgGame.app.manager.task
 		/**判断主线任务是否完成*/
 		public static function getMainTaskIsFinish():Boolean
 		{
+			if(mainTaskData.q_mission_type==TaskType.SUB_CONVERSATION)
+			{
+				return true;
+			}
 			return getTaskIsFinish(mainTaskInfo,mainTaskData);
 		}
 		
@@ -301,6 +305,10 @@ package com.rpgGame.app.manager.task
 			
 			if(mainTaskData!=null&&mainTaskInfo!=null)
 			{
+				if(mainTaskData.q_mission_type==TaskType.SUB_CONVERSATION)
+				{
+					return true;
+				}
 				var information:String=mainTaskData.q_finish_information_str;
 				var informationList:Array=information.split(";");
 				if(informationList.length>num)

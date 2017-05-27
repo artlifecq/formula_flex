@@ -11,6 +11,7 @@ package com.client.cmdlistener
 	import com.rpgGame.netData.player.message.ResMyPlayerInfoMessage;
 	
 	import org.game.netCore.connection.SocketConnection;
+	import org.game.netCore.net.MessageMgr;
 
 	/**
 	 *
@@ -57,8 +58,6 @@ package com.client.cmdlistener
 		
 		public static function RecvMyPlayerInfoMessage(msg:ResMyPlayerInfoMessage):void
 		{
-			GameLog.addShow("收到主玩家消息");
-			
 			ClientGlobal.loginData = msg.myPlayerInfo;
 			if (onLoginSuccessHandler != null)
 			{
@@ -70,6 +69,13 @@ package com.client.cmdlistener
 			{
 				onGetMyPlayerInfoHandler();
 				onGetMyPlayerInfoHandler = null;
+			}
+			
+			if(MessageMgr.Ins.isCrossSocket){//跨服登陆
+				GameLog.addShow("收到跨服收到主玩家消息");
+				ClientGlobal.mainEntry.toCrossMap();
+			}else{
+				GameLog.addShow("收到主玩家消息");
 			}
 		}
 		

@@ -12,8 +12,6 @@ package com.rpgGame.appModule.die
 	
 	import org.mokylin.skin.app.siwangfuhuo.tuijianItems_Skin;
 	
-	import starling.events.Event;
-	
 	public class DieToitemCell extends DefaultListItemRenderer
 	{
 		public function DieToitemCell():void

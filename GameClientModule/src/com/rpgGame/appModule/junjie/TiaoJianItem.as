@@ -68,14 +68,15 @@ package com.rpgGame.appModule.junjie
 		
 		private function showTiaojian():void
 		{
-			_skin.lbName.text=JunJieUtil.getStrByTiaoJianType(_info.type);
 			_skin.lbNum.text=_info.currentValue+"/"+_info.maxValue;
 			if(_info.currentValue>=_info.maxValue){
+				_skin.lbName.text=JunJieUtil.getStrByTiaoJianType(_info.type);
 				_skin.lbWancheng.color=0x5CB006;
 				_skin.lbWancheng.text="已完成";
 				_iswancheng=true;
 			}
 			else{
+				_skin.lbName.text=JunJieUtil.getStrByTiaoJianType(_info.type)+" >>";
 				_skin.lbWancheng.color=0xd02525;
 				_skin.lbWancheng.text="未完成";
 				_iswancheng=false;

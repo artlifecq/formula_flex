@@ -136,7 +136,7 @@ package com.rpgGame.app.cmdlistener.engine
             CONFIG::netDebug {
                 NetDebug.LOG("MapDown");
             }
-			TaskAutoManager.getInstance().stopTaskAuto();///////////////点击地面终止任务和挂机
+			TaskAutoManager.getInstance().stopAll();///////////////点击地面终止任务和挂机
 			EventManager.dispatchEvent(TaskEvent.AUTO_TASK_STOP);
 			TrusteeshipManager.getInstance().isLeftDown=true;
 			this._isLeftDown = true;
@@ -210,8 +210,7 @@ package com.rpgGame.app.cmdlistener.engine
                         (currTarget as SceneRole).usable + ", pos:" +
                         (currTarget as SceneRole).position + "] isDoubleClick:" + isDoubleClick);
                     }
-					TrusteeshipManager.getInstance().stopAll();  ///////////////点击场景元素终止挂机
-					TaskAutoManager.getInstance().stopTaskAuto();
+					TaskAutoManager.getInstance().stopAll();///////////////点击场景元素终止挂机
 					EventManager.dispatchEvent(TaskEvent.AUTO_TASK_STOP);
                     var role:SceneRole = currTarget as SceneRole;
 					var sceneRole : SceneRole = currTarget as SceneRole;

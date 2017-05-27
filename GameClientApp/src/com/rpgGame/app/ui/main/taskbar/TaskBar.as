@@ -1,5 +1,6 @@
 package com.rpgGame.app.ui.main.taskbar
 {
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.sender.TaskSender;
@@ -9,6 +10,7 @@ package com.rpgGame.app.ui.main.taskbar
 	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.core.events.UserMoveEvent;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.type.TaskType;
 	
 	import gs.TweenMax;
@@ -129,6 +131,11 @@ package com.rpgGame.app.ui.main.taskbar
 					case _skin.sec_subbut2:
 						receiveRewordBut(2);
 						break;
+					case _skin.btnContinue:
+						TaskControl.killWalkBut(1,0,1);
+						break;
+					
+					
 				}
 		}
 		
@@ -223,7 +230,7 @@ package com.rpgGame.app.ui.main.taskbar
 				}
 				else
 				{
-					TaskAutoManager.getInstance().stopTaskAuto();
+					TaskAutoManager.getInstance().stopAll();
 				}
 			}
 			
@@ -290,7 +297,7 @@ package com.rpgGame.app.ui.main.taskbar
 		}
 		private function setViewShow():void
 		{
-			if(TaskMissionManager.isOnlyMainTask)//只有主线//if(TaskMissionManager.isOnlyDailyTask)//只有主线
+			if(TaskMissionManager.isOnlyMainTask&&MainRoleManager.actorInfo.totalStat.level<=TaskAutoManager.AUTOLVE)//只有主线且等级小于新手期
 			{
 				leadCont.show(true);
 				loopCont.show(false);

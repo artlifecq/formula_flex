@@ -8,7 +8,6 @@ package
 	import com.client.process.LoadDll;
 	import com.client.process.LoadEmbedFonts;
 	import com.client.process.LoadMaskWorld;
-	import com.client.process.LoadMouseAssets;
 	import com.client.process.LoadPublicUIAssets;
 	import com.client.process.LoginInput;
 	import com.client.process.ProcessState;
