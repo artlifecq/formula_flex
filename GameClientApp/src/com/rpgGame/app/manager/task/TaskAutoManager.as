@@ -101,12 +101,18 @@ package com.rpgGame.app.manager.task
 		{
 			_isBroken = false;
 		}
+		public function stopAll() : void
+		{
+			TrusteeshipManager.getInstance().stopAll();
+			GatherAutoManager.getInstance().stopGatherAuto();
+			stopTaskAuto();
+		}
 		public function stopTaskAuto() : void
 		{
 			TrusteeshipManager.getInstance().stopAll();
 			GatherAutoManager.getInstance().stopGatherAuto();
-			/*if (!_isTaskRunning)
-				return;*/
+			if (!_isTaskRunning)
+			return;
 			_isBroken = false;
 			_isTaskRunning = false;
 			TweenLite.killDelayedCallsTo(onDelayedUnbroken);

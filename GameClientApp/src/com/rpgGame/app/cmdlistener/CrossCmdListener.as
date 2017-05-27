@@ -23,7 +23,6 @@ package com.rpgGame.app.cmdlistener
 		override public function start():void
 		{
 			SocketConnection.addCmdListener(250101, onResChangeServerGameToClient );
-			
 			finish();
 		}
 		

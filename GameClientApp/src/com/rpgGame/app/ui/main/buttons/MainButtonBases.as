@@ -1,5 +1,6 @@
 package com.rpgGame.app.ui.main.buttons
 {
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
@@ -94,7 +95,7 @@ package com.rpgGame.app.ui.main.buttons
 		
 		public function canOpen():Boolean
 		{
-			return getOpenLevelByFunBarInfo(_info)<MainRoleManager.actorInfo.totalStat.level;
+			return FunctionOpenManager.getOpenLevelByFunBarInfo(_info);
 		}
 		
 		private static var _classMap:HashMap;
@@ -104,13 +105,12 @@ package com.rpgGame.app.ui.main.buttons
 			_initializeMap = new HashMap();
 			_classMap = new  HashMap();
 			regClass(1,"MainButton_Role");
-			regClass(2,"MainButton_Bag");
-			regClass(3,"MainButton_Mount");
-			regClass(4,"MainButton_Equip");
+			regClass(2,"MainButton_Mount");
+			regClass(3,"MainButton_Equip");
+			regClass(4,"MainButton_Kongfu");
 			regClass(5,"MainButton_Fightsoul");
-			regClass(6,"MainButton_Kongfu");
-			regClass(7,"MainButton_Gang");
-			regClass(8,"MainButton_Shop");
+			regClass(6,"MainButton_Gang");
+			regClass(7,"MainButton_Shop");
 		}
 		private static function regClass(id:int,cls:String):void
 		{
@@ -119,30 +119,25 @@ package com.rpgGame.app.ui.main.buttons
 		
 		public static function getButtonBuyInfo(info:FunctionBarInfo):MainButtonBases
 		{
-			var heroinfo:HeroData=MainRoleManager.actorInfo;
-			if(getOpenLevelByFunBarInfo(info)>heroinfo.totalStat.level)
+			var level:int = FunctionOpenManager.getOpenLevelByFunBarInfo(info);
+			if(!FunctionOpenManager.checkOpenByLevel(level))
 				return null;
 			var button:MainButtonBases = _initializeMap.getValue(info.id);
 			if(button == null)
 			{
-				var cls : Class = ApplicationDomain.currentDomain.getDefinition(APP_ROOT+"."+_classMap.getValue(info.id)) as Class;
+				var clsName:String = _classMap.getValue(info.id)
+				var cls : Class = ApplicationDomain.currentDomain.getDefinition(APP_ROOT+"."+clsName) as Class;
 				button = new cls(info);
+				button.name = clsName;
 				_initializeMap.add(info.id,button);
 			}
 			return button;
 		}
 		
-		public static function getOpenLevelByFunBarInfo(info:FunctionBarInfo):int
+		public static function getButtonName(id:int):String
 		{
-			var list:Array = NewFuncCfgData.getListById(info.id);
-			if(list==null)
-				return 0;
-			var value:int = int.MAX_VALUE;
-			for each(var func:Q_newfunc in list)
-			{
-				value = Math.min(func.q_level,value);
-			}
-			return value;
+			return _classMap.getValue(id);
 		}
+		
 	}
 }

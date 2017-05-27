@@ -5,7 +5,6 @@ package com.rpgGame.coreData.utils
 	import com.rpgGame.coreData.cfg.JunJieData;
 	import com.rpgGame.coreData.clientConfig.Q_att_values;
 	import com.rpgGame.coreData.clientConfig.Q_junjie;
-	import com.rpgGame.coreData.type.EffectUrl;
 	
 	public class JunJieUtil
 	{
@@ -28,7 +27,7 @@ package com.rpgGame.coreData.utils
 				case 1: return "人物等级达到";
 				case 2: return "战斗力达到";
 				case 3: return "技能累计升级";
-				case 4: return "装备强化总等级";
+				case 4: return "参与强化总等级";
 				case 5: return "坐骑等级";
 				case 6: return "经脉等级";
 				case 7: return "装备琢磨等级";

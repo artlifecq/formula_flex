@@ -67,7 +67,8 @@ package com.client.process
 			var userInfo : Object = {auth: ClientGlobal.auth, sign: ClientGlobal.sign};
 			//由于登录和资源是异步的，所以需要登录成功并且资源全部加载好之后才可以进游戏，
 			var entryClass : Class = getDefinitionByName(MAINENTRY_PATH) as Class;
-			ClientGlobal.mainEntry = new entryClass();
+			var main:Object=new entryClass();
+			ClientGlobal.mainEntry = main;
 			ClientGlobal.mainEntry.loadingActual = ResLoadingView;
 			ClientGlobal.mainEntry.setup(ClientGlobal, userInfo);
 

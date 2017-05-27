@@ -8,6 +8,8 @@ package com.rpgGame.app
 	import com.rpgGame.app.cmdlistener.scene.SceneSwitchCmdListener;
 	import com.rpgGame.app.manager.ReconnectManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.scene.FirstEnterSceneManager;
+	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.process.LoadConfigData;
 	import com.rpgGame.app.process.LocalConfigData;
 	import com.rpgGame.app.process.ProcessState;
@@ -36,6 +38,7 @@ package com.rpgGame.app
 		private var _root : Sprite;
 		public var loadingActual : Class = null;
 		private var _isRelease : Boolean = false;
+		private var clientGlb:Class;
 
 		/**
 		 * 开启游戏
@@ -43,6 +46,7 @@ package com.rpgGame.app
 		 */
 		public function setup(clientGlobal : Class, userLoginInfo : Object) : void
 		{
+			clientGlb=clientGlobal;
 			var decode : Function = clientGlobal.decodeFun;
 			var param : Object = clientGlobal.urlParmar;
 			_root = clientGlobal.root;
@@ -130,6 +134,7 @@ package com.rpgGame.app
 			ProcessStateMachine.getInstance().run();
 		}
 
+		
 		/**
 		 * 被client调用，连上服务器的时候 
 		 * 
@@ -141,6 +146,18 @@ package com.rpgGame.app
 			SceneSwitchCmdListener.toPercent = 1;
 			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_START_GAME, 0.6);
 			ProcessStateMachine.getInstance().run();
+		}
+		
+		/**
+		 *去跨服地图 
+		 * 
+		 */
+		public function toCrossMap():void
+		{
+			var loginData : MyPlayerInfo = clientGlb.loginData;
+			MainRoleManager.actorInfo.preMapID=MainRoleManager.actorInfo.mapID;
+			MainRoleManager.setLoginData(loginData);
+			SceneSwitchManager.changeMap();
 		}
 	}
 }

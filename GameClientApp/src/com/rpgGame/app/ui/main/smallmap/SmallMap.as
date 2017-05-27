@@ -481,8 +481,8 @@ package com.rpgGame.app.ui.main.smallmap
             if (_xunluPointEffect)
             {
                 _xunluPointEffect.clear();
-                //_rootUI.removeChild3D(_xunluPointEffect);
-                //_xunluPointEffect = null;
+                _rootUI.removeChild3D(_xunluPointEffect);
+                _xunluPointEffect = null;
             }
             _lastPointPos.setTo(0, 0);
         }

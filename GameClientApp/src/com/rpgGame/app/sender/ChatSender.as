@@ -6,7 +6,7 @@ package com.rpgGame.app.sender
 	
 	import org.game.netCore.connection.SocketConnection;
 	
-
+	
 	/**
 	 * 聊天发送
 	 * @author dik
@@ -14,7 +14,7 @@ package com.rpgGame.app.sender
 	 */
 	public class ChatSender extends BaseSender
 	{
-
+		
 		public static function cs_sendChat(chatText:String,type:int,targetName:String = null,hyperInfos:Vector.<HyperInfo>=null):void
 		{
 			var msg:ReqChatMessage=new ReqChatMessage();
@@ -22,6 +22,7 @@ package com.rpgGame.app.sender
 			msg.type=type;
 			var extraReqInfo:ExtraReqInfo=new ExtraReqInfo();
 			extraReqInfo.targetPlayerName=targetName;
+			extraReqInfo.hyperInfos=hyperInfos;
 			msg.extraReqInfo=extraReqInfo;
 			
 			SocketConnection.send(msg);

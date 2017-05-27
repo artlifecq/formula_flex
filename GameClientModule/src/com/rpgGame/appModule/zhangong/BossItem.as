@@ -10,7 +10,6 @@ package com.rpgGame.appModule.zhangong
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.sender.ZhanGongSender;
-	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.ui.common.CenterEftPop;
 	import com.rpgGame.app.utils.RoleFaceMaskEffectUtil;
 	import com.rpgGame.core.events.MainPlayerEvent;
@@ -30,9 +29,6 @@ package com.rpgGame.appModule.zhangong
 	import com.rpgGame.coreData.clientConfig.Q_meritorious;
 	import com.rpgGame.coreData.clientConfig.Q_meritorious_monster;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
-	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
-	import com.rpgGame.coreData.info.alert.AlertSetInfo;
-	import com.rpgGame.coreData.lang.LangUI;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleType;
 	import com.rpgGame.coreData.type.AvatarMaskType;
