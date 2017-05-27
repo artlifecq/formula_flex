@@ -100,7 +100,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 		{
 			_skin.lbTime.text=leftTime+LanguageConfig.getText(LangUI.UI_TEXT33);
 			leftTime--;
-			if(leftTime<0){
+			if(leftTime<=0){
 				TimerServer.remove(updateTime);
 				this.onHide();
 			}

@@ -14,13 +14,13 @@ package com.rpgGame.coreData.clientConfig
 	{
 		 /**  功能ID */
 		public var id:int;
-		 /**  按钮区域（0:功能区域，1：活动区域） */
+		 /**  按钮区域(0:功能区域,1:活动区域) */
 		public var type:int;
 		 /**  功能行 */
 		public var row:int;
 		 /**  排序值 */
 		public var order:int;
-		 /**  是否显示table(0：默认显示，1:不显示） */
+		 /**  是否显示table(0:默认显示,1:不显示) */
 		public var show_tab:int;
 		 /**  功能名 */
 		public var name:String;
@@ -30,9 +30,9 @@ package com.rpgGame.coreData.clientConfig
 		public var showEft:int;
 		 /**  特效名称 */
 		public var effect_name:String;
-		 /**  副本是否显示(场景类型，默认全部展示) */
+		 /**  副本是否显示(1:场景类型,0:全部展示) */
 		public var mapType:String;
-		 /**  事件类型（1：窗口） */
+		 /**  事件类型(1:窗口) */
 		public var clickType:int;
 		 /**  窗口参数 */
 		public var clickarg:String;
