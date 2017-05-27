@@ -136,6 +136,11 @@ package  com.rpgGame.app.manager.ctrl
 			}
 			else if (owerId!=myId) 
 			{
+				//策划要求可以见队友的
+				if (Mgr.teamMgr.isInMyTeam(data.goodsDatas.ownerId)) 
+				{
+					return false;
+				}
 				return true;
 			}
 			return false;

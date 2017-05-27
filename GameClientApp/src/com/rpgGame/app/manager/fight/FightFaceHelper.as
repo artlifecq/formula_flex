@@ -34,6 +34,7 @@ package com.rpgGame.app.manager.fight
 	import org.client.mainCore.ds.HashMap;
 	
 	import starling.display.DisplayObject;
+	import starling.display.Sprite;
 
 	/**
 	 * 飘字管理
@@ -74,17 +75,15 @@ package com.rpgGame.app.manager.fight
 		public static const NUMBER_NPC_CRIT : String = "skin_baoji/";
 		/** 战斗-目标飘字 战魂**/
 		public static const NUMBER_NPC_ZHANHUN : String = "skin_zhanhun/";
+		/** 战斗-目标飘字 战魂**/
+		public static const NUMBER_FIGHT_XISHOU : String = "skin_xishou/";
 		
-		/** 战斗-自身飘字 受伤 (红色) **/
-		public static const NUMBER_PC_HIT : String = "pc_hit/";
-		/** 战斗-自身飘字 受暴击(暗红色) **/
-		public static const NUMBER_PC_HITCRIT : String = "pc_hitcrit/";
+	
+
 		/** 战斗-自身飘字 回蓝（深蓝色） **/
-		public static const NUMBER_PC_MPREC : String = "pc_mprec/";
-		/** 其他飘字 武勋增加（深黄色）**/
-		public static const NUMBER_PC_EXPLOIT : String = "pc_exploit/";
-		/** 其他飘字 特殊经验加成（紫色）**/
-		public static const NUMBER_PC_EXPSPEC : String = "pc_expspec/";
+		public static const NUMBER_PC_MPREC : String = NUMBER_BULE;
+	
+
 		/** 加号 **/
 		public static const NUMBER_JIA : String = "jia";
 		/** 减号 **/
@@ -173,7 +172,7 @@ package com.rpgGame.app.manager.fight
 		 * @param atkor 场景角色
 		 * @param hurter 受伤害的角色
 		 * @param hurtType 飘字类型 【 0. 普通. 1. 闪避, 2. 暴击, 3. 重击, 4. 跳闪，5.无敌，6.物理免疫，7.魔法免疫，8.反弹，9.目标吸收伤害，10.角色吸收伤害 】
-		 * @param hurtAmount 伤害数值
+		 * @param hurtAmount 伤害数值 大于0加血，小于0伤害
 		 *
 		 */
 		public static function showHurtTextNew(atkor : SceneRole, hurter : SceneRole, hurtType : uint, hurtAmount : int) : void
@@ -183,11 +182,18 @@ package com.rpgGame.app.manager.fight
 			
 			var mainPlayer : SceneRole = MainRoleManager.actor; //主角
 			var typeRes : String=""; //得到攻击效果的指定类型的URL
-			var isUsefulBmp : Boolean = true; //是否正面效果，相对主角自己而言的
+			
 			var numberType : String ; //飘字数字颜色类型
+			var tweenFun : Function; //飘字回调
+			//加血咯
+			if (hurtAmount>0) 
+			{
+				numberType=NUMBER_PC_HPREC;
+				tweenFun=SpellResultTweenUtil.TweenZhiLiao1;
+			}
 			var tweenDis : int;
 			var dirVec : Vector3D;
-			var tweenFun : Function; //飘字回调
+		
 		
 			
 			var num:int=EnumHurtType.SPELL_HURT_TYPES.length;
@@ -203,33 +209,18 @@ package com.rpgGame.app.manager.fight
 						case EnumHurtType.SPELL_HURT_TYPE_INVINCIBLE: 
 						case EnumHurtType.SPELL_HURT_TYPE_NORMAL: 
 							typeRes = "";
-							isUsefulBmp = hurter.isMainChar;
-						
-							numberType = NUMBER_NPC_HIT;
-							if(isUsefulBmp){
-								numberType=NUMBER_PC_HPSUB;
-								tweenFun=SpellResultTweenUtil.TweenDiaoXue;
-							}
-							if (atkor.id == MainRoleManager.actorID||hurter.id == MainRoleManager.actorID) 
+							//掉血
+							if (hurtAmount<0) 
 							{
-								if( hurtAmount> 0){
-									typeRes=getFightURlByAttType(EnumHurtType.ADDHP, true);
-								
-									var sc:SceneRole;
-									if(atkor.id == MainRoleManager.actorID)
-									{
-										sc=SceneManager.getSceneObjByID(hurter.id) as SceneRole;
-									}else
-									{
-										sc=MainRoleManager.actor;
-									}
-									tweenFun=SpellResultTweenUtil.TweenHurt
-									//showQueueAttackFace(sc, typeRes, NUMBER_PC_HPREC, hurtAmount, scaleAgo, scaleLater, null, null, null, null, tweenUp);//回血
-									showQueueAttackFaceNew(atkor,hurter,hurter.headFace,typeRes,numberType,hurtAmount,null,null,tweenFun);//回血
-									return;
+								numberType = NUMBER_NPC_HIT;
+								tweenFun=SpellResultTweenUtil.TweenHurt;
+								//我自己掉血
+								if (hurter.isMainChar) 
+								{
+									numberType=NUMBER_PC_HPSUB;
+									tweenFun=SpellResultTweenUtil.TweenDiaoXue;
 								}
-							}	
-							
+							}			
 							break;
 						case EnumHurtType.SPELL_HURT_TYPE_MISS: //闪避
 							typeRes = ROOT+USESFUL_EFFECT+"weimingzhong.png";
@@ -246,6 +237,10 @@ package com.rpgGame.app.manager.fight
 							tweenFun=SpellResultTweenUtil.TweenZhanHun;
 							numberType = NUMBER_NPC_ZHANHUN;
 							break;
+						case EnumHurtType.SPELL_HURT_TYPE_ABSORB:
+							typeRes = ROOT+USESFUL_EFFECT+"xishou.png";
+							tweenFun=SpellResultTweenUtil.TweenXiShou;
+							numberType =NUMBER_FIGHT_XISHOU;
 						default:
 							CONFIG::Debug {
 							var loginfo:String = "未处理的伤害类型:"+type;
@@ -286,7 +281,15 @@ package com.rpgGame.app.manager.fight
 					if (showFace) //主角或主角所属角色受伤害/攻击...
 					{
 						
-						showAttackFaceNew(atkor,hurter,hurter.headFace,typeRes,numberType,hurtAmount,null,null,tweenFun);
+						if (hurtAmount>0) 
+						{
+							showAttackFaceNew(hurter,atkor,atkor.headFace,typeRes,numberType,hurtAmount,null,null,tweenFun);
+						}
+						else
+						{
+							showAttackFaceNew(atkor,hurter,hurter.headFace,typeRes,numberType,hurtAmount,null,null,tweenFun);
+						}
+						
 						//				}
 						if(hurter.data.id!=MainRoleManager.actorID)
 						{
@@ -674,15 +677,16 @@ package com.rpgGame.app.manager.fight
 				return;
 			}
 			//$displayObjectContainer.addChild(attackFace);
+			var layer:Sprite=StarlingLayerManager.headFaceLayer;
 			StarlingLayerManager.headFaceLayer.addChild(attackFace);
 			
 			if (null != $tweenFun)
 			{
-				var start:Point=new Point(attacker.headFace.x,attacker.headFace.y);
+				var start:Point=new Point(attacker.headFace.x+40,attacker.headFace.y+100);
 				var end:Point=null
 				if (hurter) 
 				{
-					end=new Point(hurter.headFace.x,hurter.headFace.y);
+					end=new Point(hurter.headFace.x+40,hurter.headFace.y+100);
 				}
 				
 				$tweenFun(attackFace,start,end, $onComplete);

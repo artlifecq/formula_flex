@@ -266,7 +266,7 @@ package com.rpgGame.app.display2D
 				image.readjustSize();
 				addChild( image );
 				//经验类不缩放
-				if(normalNum>2&&_numberRes!=FightFaceHelper.NUMBER_PC_EXP&&_numberRes!=FightFaceHelper.NUMBER_PC_EXPSPEC){
+				if(normalNum>2&&_numberRes!=FightFaceHelper.NUMBER_PC_EXP){
 					image.scale=0.8;
 					image.x = (image.width - gap) * i + tX - 5 + _specialOffsetPos.x+10;
 				}else{

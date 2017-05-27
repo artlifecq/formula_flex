@@ -112,7 +112,7 @@
 			calEndPos(start,end,160,true);
 			//trace(endPos.x,endPos.y)
 			var myTimeline:TimelineLite;
-			myTimeline = new TimelineLite({onComplete:callBack,onCompleteParams:[showobj],autoRemoveChildren:true});
+			myTimeline = new TimelineLite({delay:timeDelay,onComplete:callBack,onCompleteParams:[showobj],autoRemoveChildren:true});
 			myTimeline.append(new TweenLite(showobj, 0.25, {x:endPos.x,y:endPos.y,ease:Quart.easeOut}));//,ease:Expo.easeOut
 			myTimeline.addLabel("alpha1", 0);
 			myTimeline.insert(new TweenLite(showobj, 0.2, {alpha:1,scaleX:0.9,scaleY:0.9}), "alpha1");
@@ -135,7 +135,7 @@
 			showobj.scaleX=showobj.scaleY=0.7;
 			var i:int=getAttrChangeIndex();
 			var myTimeline:TimelineLite;
-			myTimeline = new TimelineLite({delay:0,onComplete:callBack,onCompleteParams:[showobj]});
+			myTimeline = new TimelineLite({delay:timeDelay,onComplete:callBack,onCompleteParams:[showobj]});
 			myTimeline.append(new TweenLite(showobj, 0.7, {y:start.y-130,ease:Quart.easeOut}));//,ease:Expo.easeOut
 			myTimeline.addLabel("alpha1", 0);
 			myTimeline.addLabel("alpha0", 0.5);
@@ -178,7 +178,7 @@
 			}
 			
 			var myTimeline:TimelineLite;
-			myTimeline = new TimelineLite({delay:0,onComplete:callBack,onCompleteParams:[showobj]});
+			myTimeline = new TimelineLite({delay:timeDelay,onComplete:callBack,onCompleteParams:[showobj]});
 			myTimeline.append(new TweenLite(showobj, 0.7, {x:endPos.x,y:endPos.y,ease:Expo.easeOut}));//,ease:Expo.easeOut
 			myTimeline.addLabel("alpha1", 0);
 			//myTimeline.addLabel("alpha0", 0.6);
@@ -203,7 +203,7 @@
 			var pmY:String=calYPM(start,end);
 			calEndPos(start,end,70);
 			var myTimeline:TimelineLite;
-			myTimeline = new TimelineLite({delay:0,onComplete:callBack,onCompleteParams:[showobj]});
+			myTimeline = new TimelineLite({delay:timeDelay,onComplete:callBack,onCompleteParams:[showobj]});
 			myTimeline.append(new TweenLite(showobj, 0.7, {x:start.x+60,ease:Expo.easeOut}));
 			myTimeline.addLabel("alpha1", 0);
 			myTimeline.addLabel("alpha0", 0.4);
@@ -228,7 +228,7 @@
 			var pmY:String=calYPM(start,end);
 			calEndPos(start,end,70);
 			var myTimeline:TimelineLite;
-			myTimeline = new TimelineLite({delay:0,onComplete:callBack,onCompleteParams:[showobj]});
+			myTimeline = new TimelineLite({delay:timeDelay,onComplete:callBack,onCompleteParams:[showobj]});
 			myTimeline.append(new TweenLite(showobj, 0.7, {y:end.y-80,ease:Expo.easeOut}));
 			myTimeline.addLabel("alpha1", 0);
 			myTimeline.addLabel("alpha0", 0.5);
@@ -250,7 +250,7 @@
 			showobj.y=start.y;
 			showobj.alpha=0;
 			showobj.scaleX=showobj.scaleY=0.35;
-			myTimeline = new TimelineLite({delay:0,onComplete:callBack,onCompleteParams:[showobj]});
+			myTimeline = new TimelineLite({delay:timeDelay,onComplete:callBack,onCompleteParams:[showobj]});
 			myTimeline.append(new TweenLite(showobj, 0.70, {y:start.y-140,ease:Sine.easeOut}));
 			myTimeline.addLabel("alpha1", 0);
 			myTimeline.addLabel("alpha0", 0.3);
@@ -275,7 +275,7 @@
 			showobj.y=start.y-100;
 			showobj.alpha=0;
 			showobj.scaleX=showobj.scaleY=0.55;
-			myTimeline = new TimelineLite({delay:0,onComplete:callBack,onCompleteParams:[showobj]});
+			myTimeline = new TimelineLite({delay:timeDelay,onComplete:callBack,onCompleteParams:[showobj]});
 			myTimeline.append(new TweenLite(showobj, 0.70, {x:start.x,ease:Sine.easeOut}));
 			myTimeline.addLabel("alpha1", 0);
 			myTimeline.addLabel("alpha0", 0.3);
@@ -301,7 +301,7 @@
 			var pmY:String=calYPM(start,end);
 			calEndPos(start,end,70);
 			var myTimeline:TimelineLite;
-			myTimeline = new TimelineLite({delay:0,onComplete:callBack,onCompleteParams:[showobj]});
+			myTimeline = new TimelineLite({delay:timeDelay,onComplete:callBack,onCompleteParams:[showobj]});
 			myTimeline.append(new TweenLite(showobj, 0.7, {y:end.y-90,ease:Linear.easeOut}));
 			myTimeline.addLabel("alpha1", 0);
 			myTimeline.addLabel("alpha0", 0.4);
@@ -324,7 +324,7 @@
 			
 		
 			var myTimeline:TimelineLite;
-			myTimeline = new TimelineLite({delay:0,onComplete:callBack,onCompleteParams:[showobj]});
+			myTimeline = new TimelineLite({delay:timeDelay,onComplete:callBack,onCompleteParams:[showobj]});
 			myTimeline.append(new TweenLite(showobj, 0.7, {y:start.y-90,ease:Linear.easeNone}));
 			myTimeline.addLabel("alpha1", 0);
 			myTimeline.addLabel("alpha0", 0.4);
@@ -347,7 +347,7 @@
 			showobj.y=start.y+20;
 			showobj.alpha=0;
 			showobj.scaleX=showobj.scaleY=0.6;
-			myTimeline = new TimelineLite({delay:0,onComplete:callBack,onCompleteParams:[showobj]});
+			myTimeline = new TimelineLite({delay:timeDelay,onComplete:callBack,onCompleteParams:[showobj]});
 			var _dir:int=1;
 			if(_dir==0)
 			{
@@ -380,7 +380,7 @@
 			showobj.y=start.y+20;
 			showobj.alpha=0;
 			showobj.scaleX=showobj.scaleY=0.35;
-			myTimeline = new TimelineLite({delay:0,onComplete:callBack,onCompleteParams:[showobj]});
+			myTimeline = new TimelineLite({delay:timeDelay,onComplete:callBack,onCompleteParams:[showobj]});
 			myTimeline.append(new TweenLite(showobj, 0.7, {y:start.y-140,ease:Sine.easeOut}));
 			myTimeline.addLabel("alpha1", 0);
 			myTimeline.addLabel("alpha0", 0.3);
@@ -406,7 +406,7 @@
 			showobj.y=start.y-90;
 			showobj.alpha=0;
 			showobj.scaleX=showobj.scaleY=0.65;
-			myTimeline = new TimelineLite({delay:0,onComplete:callBack,onCompleteParams:[showobj]});
+			myTimeline = new TimelineLite({delay:timeDelay,onComplete:callBack,onCompleteParams:[showobj]});
 			myTimeline.append(new TweenLite(showobj, 0.7, {x:start.x,ease:Sine.easeOut}));
 			myTimeline.addLabel("alpha1", 0);
 			myTimeline.addLabel("alpha0", 0.4);
@@ -433,7 +433,7 @@
 			showobj.y=start.y-50;
 			showobj.alpha=0;
 			showobj.scaleX=showobj.scaleY=0.65;
-			myTimeline = new TimelineLite({delay:0,onComplete:callBack,onCompleteParams:[showobj]});
+			myTimeline = new TimelineLite({delay:timeDelay,onComplete:callBack,onCompleteParams:[showobj]});
 			myTimeline.append(new TweenLite(showobj, 0.7, {x:start.x+40,ease:Expo.easeOut}));
 			myTimeline.addLabel("alpha1", 0);
 			myTimeline.insert(new TweenLite(showobj, 0.2, {alpha:1,scaleX:0.7,scaleY:0.7,ease:Expo.easeOut}), "alpha1");
@@ -455,16 +455,16 @@
 			showobj.scaleX=showobj.scaleY=0.8;
 			
 			var myTimeline:TimelineLite;
-			myTimeline = new TimelineLite({delay:0,onComplete:callBack,onCompleteParams:[showobj]});
+			myTimeline = new TimelineLite({delay:timeDelay,onComplete:callBack,onCompleteParams:[showobj]});
 			myTimeline.append(new TweenLite(showobj, 0.7, {x:start.x-90,ease:Linear.easeOut}));
 			myTimeline.addLabel("alpha1", 0);
 			myTimeline.addLabel("alpha0", 0.4);
 			myTimeline.insert(new TweenLite(showobj, 0.3, {alpha:1,y:start.y-140,scaleX:1.0,scaleY:1.0,ease:Expo.easeOut}), "alpha1");
 			myTimeline.insert(new TweenLite(showobj, 0.3, {alpha:0,y:start.y-110,scaleX:0.9,scaleY:0.9,ease:Sine.easeIn}), "alpha0");//,ease:Sine.easeIn
 		}
-		private function getDelayNum():Number
+		private static function get timeDelay():Number
 		{
-			return 0.05*getDelayNum();
+			return 0.05*getAttrChangeIndex();
 		}
 		private static var lastTime:int;
 		private static var index:int;
@@ -497,7 +497,7 @@
 			showobj.alpha=0.0;
 			showobj.scaleX=showobj.scaleY=0.7;
 			var myTimeline:TimelineLite;
-			myTimeline = new TimelineLite({delay:0.05*i,onComplete:callBack,onCompleteParams:[showobj]});
+			myTimeline = new TimelineLite({delay:i*0.05,onComplete:callBack,onCompleteParams:[showobj]});
 			
 			myTimeline.append(new TweenLite(showobj, 0.3, {alpha:1,x:start.x+70,y:start.y+35*i,scaleX:1.0,scaleY:1.0,ease:Circ.easeOut}));
 			//myTimeline.addLabel("alpha1", 0);

@@ -52,7 +52,10 @@ package  com.rpgGame.appModule.social
 				sub=SUB_TEAM;
 				showSubPanel(sub);
 			}
-			
+			else
+			{
+				showSubPanel(sub);
+			}
 		}
 		public function showSubPanel(subType:String):void
 		{
