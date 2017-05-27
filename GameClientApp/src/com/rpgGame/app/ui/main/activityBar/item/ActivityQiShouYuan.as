@@ -4,9 +4,9 @@
 
     public class ActivityQiShouYuan extends ActivityButton 
     {
-        override public function checkCanOpen():Boolean
+       /* override public function checkCanOpen():Boolean
         {
             return FunctionOpenManager.clientFunctionIsOpen("QI_SHOU_YUAN");
-        }
+        }*/
     }
 }

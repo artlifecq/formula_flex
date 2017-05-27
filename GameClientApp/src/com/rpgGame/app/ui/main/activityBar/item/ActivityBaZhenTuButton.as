@@ -14,9 +14,9 @@
             return true;
         }
 
-        override public function checkCanOpen():Boolean
+        /*override public function checkCanOpen():Boolean
         {
             return FunctionOpenManager.clientFunctionIsOpen("BA_ZHEN_TU");
-        }
+        }*/
     }
 }
