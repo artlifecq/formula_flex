@@ -133,7 +133,7 @@
 			showobj.y=start.y-50;
 			showobj.alpha=0;
 			showobj.scaleX=showobj.scaleY=0.7;
-			
+			var i:int=getAttrChangeIndex();
 			var myTimeline:TimelineLite;
 			myTimeline = new TimelineLite({delay:0,onComplete:callBack,onCompleteParams:[showobj]});
 			myTimeline.append(new TweenLite(showobj, 0.7, {y:start.y-130,ease:Quart.easeOut}));//,ease:Expo.easeOut
@@ -461,6 +461,10 @@
 			myTimeline.addLabel("alpha0", 0.4);
 			myTimeline.insert(new TweenLite(showobj, 0.3, {alpha:1,y:start.y-140,scaleX:1.0,scaleY:1.0,ease:Expo.easeOut}), "alpha1");
 			myTimeline.insert(new TweenLite(showobj, 0.3, {alpha:0,y:start.y-110,scaleX:0.9,scaleY:0.9,ease:Sine.easeIn}), "alpha0");//,ease:Sine.easeIn
+		}
+		private function getDelayNum():Number
+		{
+			return 0.05*getDelayNum();
 		}
 		private static var lastTime:int;
 		private static var index:int;
