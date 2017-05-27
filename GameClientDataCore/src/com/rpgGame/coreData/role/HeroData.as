@@ -98,7 +98,7 @@ package com.rpgGame.coreData.role
 		 */
 		public var mount:int;
 		
-		public var pkType:int;
+		
 		
 		/**
 		 *武器资源id
@@ -302,7 +302,7 @@ package com.rpgGame.coreData.role
 			data.mount = info.mount;
 			data.pkMode = info.pkType;
 			data.relation = info.relation;
-			data.pkType = info.pkType;
+			
 			data.weapon = info.weapon;
 			data.deputyWeapon = info.second_weapon;
 			data.junjieLv=info.junJieId;

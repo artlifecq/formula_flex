@@ -4,12 +4,15 @@ package com.rpgGame.app.graphics
 	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.utils.HeadBloodUtil;
-	
-	import flash.utils.getTimer;
+	import com.rpgGame.coreData.type.HeadBloodStateType;
+	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	
+	import gs.TweenMax;
+	
+	import org.mokylin.skin.mainui.head.Head_Juese;
 	import org.mokylin.skin.mainui.head.guai_head_mini;
 	
 	import starling.display.BlendMode;
@@ -29,14 +32,27 @@ package com.rpgGame.app.graphics
 	public class HeadBloodBar extends Sprite implements IInstancePoolClass
 	{
 		private static var headBloodBarPool : InstancePool = new InstancePool("HeadBloodBar", 300);
-		
+		/**因为怪物的血条皮肤不一样**/
+		private static var monsterBloodBarPool : InstancePool = new InstancePool("monsterHeadBloodBar", 300);
 		/**
 		 * 生成一个HeadBloodBar
 		 */
 		public static function create($role : SceneRole) : HeadBloodBar
 		{
 			//利用池生成HeadBloodBar
-			return headBloodBarPool.createObj(HeadBloodBar, $role) as HeadBloodBar;
+			var bar:HeadBloodBar;
+			if(SceneCharType.MONSTER==$role.type)
+			{
+				bar=monsterBloodBarPool.createObj(HeadBloodBar, $role,true) as HeadBloodBar;
+				
+			}
+			else
+			{
+				bar=headBloodBarPool.createObj(HeadBloodBar, $role,false) as HeadBloodBar;
+			}
+			
+			bar.state=HeadBloodUtil.getRoleBloodBarState($role);
+			return bar;
 		}
 		
 		/**
@@ -46,21 +62,25 @@ package com.rpgGame.app.graphics
 		 */
 		public static function recycle(bar : HeadBloodBar) : void
 		{
-			//利用池回收HeadBloodBar
-			headBloodBarPool.disposeObj(bar);
+			if (bar._isMonster) 
+			{
+				monsterBloodBarPool.disposeObj(bar);
+			}
+			else
+			{
+				//利用池回收HeadBloodBar
+				headBloodBarPool.disposeObj(bar);
+			}
+			
 		}
 		
-		private var WIDTH : uint = 114;
+		private var WIDTH : uint = 123;
 		private var BLOOD_WIDTH : uint = 79;
-		private var BLOOD_HEIGHT : uint = 6;
-		/**部件类型**/
-		private var _partType : uint;
-		/**血条颜色**/
-		private var _color : uint = 0xFF0000;
-		/**血条**/
-		private var _hpBar : DisplayObject;
-		/**血条背景**/
-		private var _hpBackgroundBar : DisplayObject;
+		private var BLOOD_HEIGHT : uint = 9;
+	
+	
+		private var tw:TweenMax;
+		private var _isMonster:Boolean;
 		/**上次的百分比**/
 		private var _lastPercent : Number;
 		/**状态文本，如：国战中的——攻方，守方**/
@@ -68,36 +88,49 @@ package com.rpgGame.app.graphics
 		/** 状态 参考：HeadBloodStateType **/
 		private var _state : uint;
 		
-		private var _hpSkinClass : StateSkin;
+		private var _hpSkinClass : Object;
 		
 		private var _role : SceneRole;
 		
 		private var _isDestroyed : Boolean;
 		private var _isDisposed : Boolean;
+		private var color:uint;
 		
-		public function HeadBloodBar($role : SceneRole)
+		
+		public function HeadBloodBar($role : SceneRole,monster:Boolean)
 		{
 			super();
 			_isDestroyed = false;
-			
+			_isMonster=monster;
 			_role = $role;
 			
-			_hpSkinClass = new guai_head_mini();
-			_hpSkinClass.toSprite(this);
-			
-			_hpSkinClass.width=WIDTH;
-			
-			_hpBackgroundBar = createBarBackground();
-			_hpBar = createBar();
-			if(_hpSkinClass){
-				_hpBackgroundBar.width=WIDTH;
-				_hpBar.width=WIDTH;
+			if (!_isMonster) 
+			{
+				_hpSkinClass = new Head_Juese();
 			}
-			WIDTH = _hpBackgroundBar.width;
-			BLOOD_WIDTH = _hpBar.width;
-			BLOOD_HEIGHT = _hpBar.height;
-			touchGroup = touchable = false;
-			touchAcross = _hpBackgroundBar.touchAcross = _hpBar.touchAcross = true;
+			else
+			{
+				_hpSkinClass=new guai_head_mini();
+			}
+			_hpSkinClass.toSprite(this);
+			if (!_isMonster) 
+			{
+				_hpSkinClass.lbLevel.visible=false;
+			}
+			
+			//_hpSkinClass.width=WIDTH;
+			
+//			_hpBackgroundBar = createBarBackground();
+//			_hpBar = createBar();
+//			if(_hpSkinClass){
+//				_hpBackgroundBar.width=WIDTH;
+//				_hpBar.width=WIDTH;
+//			}
+//			WIDTH = _hpBackgroundBar.width;
+//			BLOOD_WIDTH = _hpBar.width;
+//			BLOOD_HEIGHT = _hpBar.height;
+//			touchGroup = touchable = false;
+//			touchAcross = _hpBackgroundBar.touchAcross = _hpBar.touchAcross = true;
 			
 			reSet(null);
 		}
@@ -107,32 +140,7 @@ package com.rpgGame.app.graphics
 			_isDisposed = false;
 		}
 		
-		private function createBarBackground() : DisplayObject
-		{
-			if (_hpSkinClass)
-			{
-				return _hpSkinClass["bg"];
-			}
-			
-			var bg : Quad = new Quad(WIDTH, BLOOD_HEIGHT, 0x000000);
-			bg.blendMode = BlendMode.NONE;
-			addChild(bg);
-			return bg;
-		}
 		
-		private function createBar() : DisplayObject
-		{
-			if (_hpSkinClass)
-			{
-				//				return IHeadHPBar(_hpSkinClass).hpBar;
-				return _hpSkinClass["bar"];
-			}
-			var bar : Quad = new Quad(WIDTH - 2, BLOOD_HEIGHT - 2, 0xff0000);
-			bar.blendMode = BlendMode.NONE;
-			bar.x = bar.y = 1;
-			addChild(bar);
-			return bar;
-		}
 		
 		/**
 		 * 设置状态信息			无特殊情况不用此方法，直接设置 state
@@ -175,40 +183,29 @@ package com.rpgGame.app.graphics
 			color = arr[0];
 			updateStateText(arr[1]);
 			
-			if (_hpBar is Quad)
-				Quad(_hpBar).color = color;
-			else if (_hpBar is UIAsset)
+			_hpSkinClass.bar.styleName = HeadBloodUtil.getBarStyleName(_state);
+			if (!_isMonster) 
 			{
-				(_hpBar as UIAsset).styleName = HeadBloodUtil.getBarStyleName(_state);
+				_hpSkinClass.uiQuan.styleName=HeadBloodUtil.getHPIconStyleName(_state);
+				_hpSkinClass.lbLevel.visible=HeadBloodStateType.NPC!=_state;
 			}
+			
 		}
 		
 		public function get state() : uint
 		{
 			return _state;
 		}
-		
-		public function get color() : uint
-		{
-			return _color;
-		}
-		
-		public function set color(value : uint) : void
-		{
-			_color = value;
-		}
+	
 		
 		public function get realWidth() : uint
 		{
-			return WIDTH;
+			return _hpSkinClass.width;
 		}
 		
 		public function get realHeight() : uint
 		{
-			if (_stateText == null)
-				return BLOOD_HEIGHT;
-			
-			return _stateText.height + BLOOD_HEIGHT;
+			return _hpSkinClass.height;
 		}
 		
 		public function get textHeight() : uint
@@ -219,15 +216,7 @@ package com.rpgGame.app.graphics
 			return _stateText.height;
 		}
 		
-		public function set partType(value : uint) : void
-		{
-			_partType = value;
-		}
 		
-		public function get partType() : uint
-		{
-			return _partType;
-		}
 		
 		/**
 		 * 更新血条
@@ -244,28 +233,49 @@ package com.rpgGame.app.graphics
 			
 			if (value < 0)
 				value = 0;
+			//_hpSkinClass.bar.scaleX = value;
+			if (tw) 
+			{
+				tw.kill();
+			}
+			tw=TweenMax.to(_hpSkinClass.bar,0.5,{scaleX:value,onComplete:onTweenComplete});
 			
-			if (_hpBar is Quad)
-				Quad(_hpBar).color = _color;
-			
-			_hpBar.scaleX = value;
 			_lastPercent = value;
 		}
-		
+		public function updateLevel(lv:int):void
+		{
+			if (!_isMonster) 
+			{
+				_hpSkinClass.lbLevel.text=lv+"";
+			}
+			
+		}
+		private function onTweenComplete():void
+		{
+			tw=null;
+		}
 		public function instanceDestroy() : void
 		{
 			instanceDispose();
 			dispose();
 			_isDestroyed = true;
+			_role=null;
 		}
 		
 		public function instanceDispose() : void
 		{
 			if (parent != null)
 				parent.removeChild(this);
+			_role=null;
 			_isDisposed = true;
 		}
-		
+		public function checkState():void
+		{
+			if (!_isDisposed) 
+			{
+				state=HeadBloodUtil.getRoleBloodBarState(_role);
+			}
+		}
 		public function get isDestroyed():Boolean
 		{
 			return _isDestroyed;

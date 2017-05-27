@@ -99,7 +99,7 @@ package org.mokylin.skin.mainui.shortcut
 			this.currentState = "normal";
 			this.height = 127;
 			this.width = 809;
-			this.elementsContent = [right_nengliang_i(),right_jintiao_i(),right_nengliangMask_i(),mask_blue_i(),left_xuecao_i(),left_xuecaoMask_i(),mask_red_i(),__shortcut_Skin_UIAsset1_i(),__shortcut_Skin_UIAsset2_i(),Icons_i(),juexuegroup_i(),fangun_i(),grp_buff_i(),jingzhen_yijia_i()];
+			this.elementsContent = [right_nengliang_i(),right_jintiao_i(),right_nengliangMask_i(),mask_blue_i(),left_xuecao_i(),left_xuecaoMask_i(),mask_red_i(),__shortcut_Skin_UIAsset1_i(),__shortcut_Skin_UIAsset2_i(),Icons_i(),juexuegroup_i(),fangun_i(),jingzhen_yijia_i()];
 			
 			states = {
 			};
@@ -119,7 +119,7 @@ package org.mokylin.skin.mainui.shortcut
 			temp.width = 451;
 			temp.x = 179;
 			temp.y = 58;
-			temp.elementsContent = [dian1_i(),dian2_i(),dian3_i(),dian4_i(),dian5_i(),dian6_i(),dian7_i(),dian8_i(),__shortcut_Skin_Label1_i(),__shortcut_Skin_Label2_i(),__shortcut_Skin_Label3_i(),__shortcut_Skin_Label4_i(),__shortcut_Skin_Label5_i(),__shortcut_Skin_Label6_i(),__shortcut_Skin_Label7_i(),__shortcut_Skin_Label8_i()];
+			temp.elementsContent = [dian1_i(),dian2_i(),dian3_i(),dian4_i(),dian5_i(),dian6_i(),dian7_i(),dian8_i(),__shortcut_Skin_Label1_i(),__shortcut_Skin_Label2_i(),__shortcut_Skin_Label3_i(),__shortcut_Skin_Label4_i(),__shortcut_Skin_Label5_i(),__shortcut_Skin_Label6_i(),__shortcut_Skin_Label7_i(),__shortcut_Skin_Label8_i(),grp_buff_i()];
 			return temp;
 		}
 
@@ -247,8 +247,8 @@ package org.mokylin.skin.mainui.shortcut
 			temp.color = 0xB8B2A4;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack2"];
 			temp.width = 17;
-			temp.x = 160;
-			temp.y = 38;
+			temp.x = 1;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -256,7 +256,7 @@ package org.mokylin.skin.mainui.shortcut
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.styleName = "ui/mainui/shortcut/dikuang.png";
 			temp.x = 0;
 			temp.y = 35;
@@ -275,18 +275,9 @@ package org.mokylin.skin.mainui.shortcut
 		private function __shortcut_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/mainui/shortcut/yaoshuikuang.png";
-			temp.x = 143;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __shortcut_Skin_UIAsset4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/mainui/shortcut/tishiyuandi.png";
-			temp.x = 159;
-			temp.y = 37;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -462,9 +453,9 @@ package org.mokylin.skin.mainui.shortcut
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grp_buff = temp;
 			temp.name = "grp_buff";
-			temp.x = 236;
-			temp.y = 0;
-			temp.elementsContent = [__shortcut_Skin_UIAsset3_i(),__shortcut_Skin_UIAsset4_i(),__shortcut_Skin_Label9_i()];
+			temp.x = 217;
+			temp.y = -20;
+			temp.elementsContent = [__shortcut_Skin_UIAsset3_i(),__shortcut_Skin_Label9_i()];
 			return temp;
 		}
 

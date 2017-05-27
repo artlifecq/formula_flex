@@ -40,7 +40,7 @@ package org.mokylin.skin.mainui.head
 			
 			this.currentState = "normal";
 			this.height = 92;
-			this.width = 409;
+			this.width = 434;
 			this.elementsContent = [__Head_middle_UIAsset1_i(),xuetiao_hong_i(),lbl_name_i(),grp_buff_i(),zhan_bg_i(),uim_zhandouli_i(),lbl_num_i()];
 			
 			states = {
@@ -55,9 +55,9 @@ package org.mokylin.skin.mainui.head
 		private function __Head_middle_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/mainui/head/middle/2_erji.png";
+			temp.styleName = "ui/mainui/head/middle/jingyingxuetiao.png";
 			temp.x = 0;
-			temp.y = 13;
+			temp.y = 5;
 			return temp;
 		}
 
@@ -84,7 +84,7 @@ package org.mokylin.skin.mainui.head
 			temp.color = 0xC3C198;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack2"];
 			temp.width = 234;
-			temp.x = 76;
+			temp.x = 106;
 			temp.y = 0;
 			return temp;
 		}
@@ -96,8 +96,10 @@ package org.mokylin.skin.mainui.head
 			temp.name = "lbl_num";
 			temp.text = "标签";
 			temp.textAlign = "center";
+			temp.color = 0xE1D4A9;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 355;
-			temp.x = 15;
+			temp.x = 46;
 			temp.y = 25;
 			return temp;
 		}
@@ -112,7 +114,7 @@ package org.mokylin.skin.mainui.head
 			temp.label = "6521478";
 			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhujuezhandouli;
 			temp.width = 109;
-			temp.x = 300;
+			temp.x = 316;
 			temp.y = 60;
 			return temp;
 		}
@@ -122,8 +124,8 @@ package org.mokylin.skin.mainui.head
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			xuetiao_hong = temp;
 			temp.name = "xuetiao_hong";
-			temp.styleName = "ui/mainui/head/middle/hongse_2.png";
-			temp.x = 13;
+			temp.styleName = "ui/mainui/head/boss/xuetiaohong.png";
+			temp.x = 46;
 			temp.y = 26;
 			return temp;
 		}
@@ -134,7 +136,7 @@ package org.mokylin.skin.mainui.head
 			zhan_bg = temp;
 			temp.name = "zhan_bg";
 			temp.styleName = "ui/mainui/head/zhandi.png";
-			temp.x = 263;
+			temp.x = 279;
 			temp.y = 43;
 			return temp;
 		}

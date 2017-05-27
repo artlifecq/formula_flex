@@ -109,6 +109,14 @@ package com.rpgGame.app.manager
 				return false;
 			return _captain.memberId.EqualTo(playerId);
 		}
+		public function isInMyTeam(playerId:long):Boolean
+		{
+			if (!hasTeam) 
+			{
+				return false;
+			}
+			return _teamMemberMap.containsKey(playerId.ToGID());
+		}
 		/**
 		 * 
 		 * @param type 2 组队 1好友

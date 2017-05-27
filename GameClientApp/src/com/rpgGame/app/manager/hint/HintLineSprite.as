@@ -27,7 +27,7 @@ package com.rpgGame.app.manager.hint
 	public class HintLineSprite extends Sprite
 	{
 		private var _itemBg : UIAsset;
-		private var _label : Label;
+		protected var _label : Label;
 		private var closeBtn : Button;
 		private var _hintTypeSet : HintTypeSetInfo;
 		private var _bgMarginTop : int;
