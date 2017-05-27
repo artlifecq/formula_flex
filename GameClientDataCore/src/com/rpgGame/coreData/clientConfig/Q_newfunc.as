@@ -28,6 +28,10 @@ package com.rpgGame.coreData.clientConfig
 		public var q_need_taskid:int;
 		 /**  表现形式（0为不弹，1为弹出，2弹出tips框，3箭头指引） */
 		public var q_show_panel:int;
+		 /**  新功能开启图标 */
+		public var q_openIcon:String;
+		 /**  新功能开启名称图片 */
+		public var q_open_name:String;
 		 /**  功能描述（支持html） */
 		public var q_info:String;
 		 /**  图片路径 */
