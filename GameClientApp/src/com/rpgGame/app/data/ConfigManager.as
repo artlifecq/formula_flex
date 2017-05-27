@@ -159,7 +159,7 @@ package com.rpgGame.app.data
 			ClientSceneNpcCfgData.setup(dic[ConfigClassRegister.ClientSceneNPC]);
 			ClientSceneEffectCfgData.setup(dic[ConfigClassRegister.ClientSceneEffect]);
 			ClientSceneRoleCfgData.setup(dic[ConfigClassRegister.ClientSceneRole]);
-			ClientTriggerCfgData.setup(dic[ConfigClassRegister.ClientTrigger]);
+			//ClientTriggerCfgData.setup(dic[ConfigClassRegister.ClientTrigger]);
 			ClientAreaCfgData.setup(dic[ConfigClassRegister.ClientArea]);
 			ClientDialogCfgData.setup(dic[ConfigClassRegister.ClientDialog]);
 			GmConfig.setup(dic[ConfigClassRegister.GmInfo]);
