@@ -2,6 +2,8 @@ package com.rpgGame.app.manager
 {
 	import com.game.mainCore.core.timer.GameTimer;
 	import com.rpgGame.app.fight.spell.CastSpellHelper;
+	import com.rpgGame.app.manager.ctrl.ControlAutoFightSelectSkill;
+	import com.rpgGame.app.manager.ctrl.ControlAutoPick;
 	import com.rpgGame.app.manager.fight.FightManager;
 	import com.rpgGame.app.manager.fightsoul.FightSoulManager;
 	import com.rpgGame.app.manager.input.KeyMoveManager;
@@ -59,6 +61,8 @@ package com.rpgGame.app.manager
 		private var _targetRoles : Vector.<SceneRole>;
 		private var _findDist:int=0;
 		private var ACTORTIME:int=4;
+		private var _autoPickCtrl:ControlAutoPick;
+		private var _autoSkillCtrl:ControlAutoFightSelectSkill;
 		public function TrusteeshipManager()
 		{
 			_gTimer = new GameTimer("TrusteeshipManager", 500, 0, onUpdate);
@@ -77,8 +81,14 @@ package com.rpgGame.app.manager
 		public function setup(role : SceneRole) : void
 		{
 			_stateMachine = new AIStateMachine(role);
+			_autoPickCtrl=new ControlAutoPick(role);
+			_autoSkillCtrl=new ControlAutoFightSelectSkill(role);
 		}
-		
+		public  function get autoPickCtrl():ControlAutoPick
+		{
+			return _autoPickCtrl;
+		}
+
 		
 		private var _isFightSelect:Boolean=false;
 		/**玩家被攻击*/
@@ -310,6 +320,16 @@ package com.rpgGame.app.manager
 				return;
 			if (_isBroken)
 				return;
+			
+			if (_autoPickCtrl.isPicking||autoPickCtrl.TryAutoPickItem()) 
+			{
+				//stopFightTarget();
+				return;
+			}
+			if (_autoPickCtrl.isArrivePk) 
+			{
+				return;
+			}
 			/*if (_isFightTargetRunning && _targetRoles)
 			{
 			var isCompleted : Boolean = true;
@@ -443,6 +463,11 @@ package com.rpgGame.app.manager
 		public function testStop():void
 		{
 			testStopKey=!testStopKey;
+		}
+
+		public function get autoSkillCtrl():ControlAutoFightSelectSkill
+		{
+			return _autoSkillCtrl;
 		}
 		
 		

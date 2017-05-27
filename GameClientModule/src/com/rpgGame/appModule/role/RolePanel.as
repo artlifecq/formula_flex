@@ -31,7 +31,7 @@ package com.rpgGame.appModule.role
 		protected var _skin : beibao_Skin;
 		
 		
-		private var _subRole:SubRolePanel;
+		protected var _subRole:SubRolePanel;
 		private var _subMeridian:MeridianMainPanelExt;
 		private var _subZhanGong:ZhanGongPanelExt;
 		private var _subJunJie:JunJiePanelExt;
@@ -55,9 +55,11 @@ package com.rpgGame.appModule.role
 		{
 			super.show(data, openTable, parentContiner);
 			var sub:String=openTable;
-			if (sub==""&&_curSub==null) 
+			if (sub==""||_curSub==null) 
 			{
 				sub=SUB_ROLE;
+				showSubPanel(sub);
+			}else{
 				showSubPanel(sub);
 			}
 			
@@ -110,6 +112,24 @@ package com.rpgGame.appModule.role
 			(_curSub as DisplayObject).x=0;
 			(_curSub as DisplayObject).y=0;
 			this.addChildAt(_curSub as DisplayObject,1);
+		}
+		
+		protected function set isSeeOther(value:Boolean):void
+		{
+			var daohang:daohang_Skin=_skin.daohang.skin as daohang_Skin;
+			var i:int;
+			if(value){
+				for(i=0;i<daohang.elementsContent.length;i++){
+					if(daohang.elementsContent[i]!=daohang.btn_juese){
+						daohang.elementsContent[i].visible=false;
+					}
+				}
+			}else{
+				for(i=0;i<daohang.elementsContent.length;i++){
+					daohang.elementsContent[i].visible=true;
+				}
+			}
+				
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void

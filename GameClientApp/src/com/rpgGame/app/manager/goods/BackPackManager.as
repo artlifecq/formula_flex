@@ -6,6 +6,8 @@ package com.rpgGame.app.manager.goods
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.alert.AutoDressAlert;
 	import com.rpgGame.app.ui.alert.GameAlert;
+	import com.rpgGame.app.ui.alert.ItemNoticePanel;
+	import com.rpgGame.app.ui.alert.SomeSystemNoticePanel;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
@@ -44,8 +46,9 @@ package com.rpgGame.app.manager.goods
 		public function BackPackManager()
 		{
 			super(ItemContainerID.BackPack)
-			EventManager.addEvent(ItemEvent.ITEM_GETED_NEW_ITEM, onGetedNewItem);
+			//EventManager.addEvent(ItemEvent.ITEM_GETED_NEW_ITEM, onGetedNewItem);
 			EventManager.addEvent(ItemEvent.ITEM_DROPED,deleteItemByDrop);
+			SomeSystemNoticePanel.addEvent();
 		}
 		
 		
@@ -171,7 +174,11 @@ package com.rpgGame.app.manager.goods
 
 			ItemUseManager.useItemByIndex(itemInfo.index, count);
 		}
-
+		override public function addItemInfo(info:ClientItemInfo):void
+		{
+			super.addItemInfo(info);
+			onGetedNewItem(info);
+		}
 		/**
 		 *获取一件新物品
 		 * @param info
@@ -179,9 +186,19 @@ package com.rpgGame.app.manager.goods
 		 */
 		public function onGetedNewItem(info : ClientItemInfo) : void
 		{
+			//弹新物品提示
+			if (info.qItem.q_use_prompt!=0&&info.itemInfo.num>=info.qItem.q_use_prompt) 
+			{
+				if (!ItemNoticePanel.checkInBlack(info.qItem.q_id)) 
+				{
+					ItemNoticePanel.show(info);
+				}
+			}
 			switch (info.type)
 			{
 				case GoodsType.EQUIPMENT:
+				case GoodsType.EQUIPMENT1:
+				case GoodsType.EQUIPMENT2:
 					var equip : EquipInfo = info as EquipInfo;
 					/*var dressEquips:Array = GoodsContainerMamager.getMrg(ItemContainerID.Role).getItemsByType(equip.equipType);
 					var i:int = dressEquips ? dressEquips.length : 0;
@@ -197,7 +214,7 @@ package com.rpgGame.app.manager.goods
 						}
 						i--;
 					}*/
-					if (RoleEquipmentManager.instance.isBetterEquip(equip) || MountEquipmentManager.instance.isBetterEquip(equip)) //人物装备、坐骑装备
+					if (RoleEquipmentManager.instance.isBetterEquipCompareWithEquiped(equip)) //人物装备、坐骑装备
 					{
 						AutoDressAlert.show(equip, autoDressEquip);
 					}
@@ -353,6 +370,21 @@ package com.rpgGame.app.manager.goods
 			return null;
 		}
 		
+		/**返回物品*/
+		public function getItemsById(id:int):Vector.<ClientItemInfo>
+		{
+			var ret:Vector.<ClientItemInfo>=new Vector.<ClientItemInfo>();
+			var itemInfoList:Array = _goodsList;
+			for each(var item:ClientItemInfo in itemInfoList)
+			{
+				if(item!=null&&item.qItem.q_id==id)
+				{
+					ret.push(item);
+				}
+				
+			}
+			return ret;
+		}
 		
 	}
 }

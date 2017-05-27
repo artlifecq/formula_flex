@@ -1,5 +1,8 @@
 package com.rpgGame.appModule.role
 {
+	import com.game.engine3D.events.SceneEvent;
+	import com.game.engine3D.events.SceneEventAction3D;
+	import com.game.mainCore.core.manager.LayerManager;
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
@@ -548,11 +551,25 @@ package com.rpgGame.appModule.role
 			{
 				MouseCursorController.showSell();
 				BreatheTweenUtil.add(_skin.imgBg,GameColorUtil.COLOR_YELLOW,15);
+				if (!EventManager.hasEvent(SceneEvent.INTERACTIVE,onSceneTouch)) 
+				{
+					EventManager.addEvent(SceneEvent.INTERACTIVE,onSceneTouch);
+				}
+				
 			}
 			else
 			{
 				MouseCursorController.exitSellMode();
 				BreatheTweenUtil.remove(_skin.imgBg);
+				EventManager.removeEvent(SceneEvent.INTERACTIVE,onSceneTouch);
+			}
+		}
+		private function onSceneTouch(...arg):void
+		{
+			var type:String=arg[0];
+			if ( SceneEventAction3D.SCENE_MAP_MOUSE_DOWN==type) 
+			{
+				enterOrLeaveSellMode(false);
 			}
 		}
 		internal function onTouchTarget(target : DisplayObject):Boolean
@@ -583,9 +600,15 @@ package com.rpgGame.appModule.role
 					storagePanel.y=75;
 					return true;
 				case _skin.btn_shangdian:
+					if (shopPanel.parent) 
+					{
+						shopPanel.hide();
+						return true;
+					}
 					shopPanel.x=225;
 					shopPanel.y=75;
-					this._skin.container.addChild(shopPanel);
+					//this._skin.container.addChild(shopPanel);
+					shopPanel.show(null,"",this._skin.container);
 					return true;
 				case _skin.btn_paimaihang:
 					return true;

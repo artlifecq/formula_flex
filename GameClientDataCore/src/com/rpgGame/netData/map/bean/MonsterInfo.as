@@ -16,7 +16,7 @@ package com.rpgGame.netData.map.bean{
 	 * 怪物信息类
 	 */
 	public class MonsterInfo extends Bean {
-	
+		
 		//怪物Id
 		private var _monsterId: long;
 		

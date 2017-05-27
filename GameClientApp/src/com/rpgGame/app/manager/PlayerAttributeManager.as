@@ -2,6 +2,7 @@ package com.rpgGame.app.manager
 {
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.SpriteStat;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.netData.player.bean.AttributeItem;
@@ -32,17 +33,35 @@ package com.rpgGame.app.manager
 			var oldMap:HashMap = oldStat.getCloneMap();
 			var newMap:HashMap = newStat.getCloneMap();
 			
-			showChangeAttribute( CharAttributeType.MAX_HP, oldMap, newMap );
-			showChangeAttribute( CharAttributeType.MAX_MP, oldMap, newMap );
-//			showChangeAttribute( CharAttributeType.PHYSICAL_ATTACK_LOWER, oldMap, newMap );
-			showChangeAttribute( CharAttributeType.WAI_GONG, oldMap, newMap );
-			showChangeAttribute( CharAttributeType.PHYSICAL_DEFENCE, oldMap, newMap );
-//			showChangeAttribute( CharAttributeType.MAGICAL_ATTACK_LOWER, oldMap, newMap );
-			showChangeAttribute( CharAttributeType.NEI_GONG, oldMap, newMap );
-			showChangeAttribute( CharAttributeType.MAGICAL_DEFENCE, oldMap, newMap );
-			showChangeAttribute( CharAttributeType.HIT, oldMap, newMap );
-			showChangeAttribute( CharAttributeType.CRIT, oldMap, newMap );
-			showChangeAttribute( CharAttributeType.SPEED, oldMap, newMap );
+			var change:HashMap=new HashMap();
+			var keys:Array=newMap.keys();
+			var len:int=keys.length;
+			var newV:int;
+			var oldV:int;
+			var key:int;
+			for (var i:int = 0; i < len; i++) 
+			{
+				key=keys[i];
+				newV=newMap.getValue(key);
+				oldV=oldMap.getValue(key);
+				if (newV==oldV) 
+				{
+					continue;
+				}
+				change.add(key,newV-oldV);
+			}
+			FightFaceHelper.showPlayerBaseAttrChange(change);
+//			showChangeAttribute( CharAttributeType.MAX_HP, oldMap, newMap );
+//			showChangeAttribute( CharAttributeType.MAX_MP, oldMap, newMap );
+////			showChangeAttribute( CharAttributeType.PHYSICAL_ATTACK_LOWER, oldMap, newMap );
+//			showChangeAttribute( CharAttributeType.WAI_GONG, oldMap, newMap );
+//			showChangeAttribute( CharAttributeType.PHYSICAL_DEFENCE, oldMap, newMap );
+////			showChangeAttribute( CharAttributeType.MAGICAL_ATTACK_LOWER, oldMap, newMap );
+//			showChangeAttribute( CharAttributeType.NEI_GONG, oldMap, newMap );
+//			showChangeAttribute( CharAttributeType.MAGICAL_DEFENCE, oldMap, newMap );
+//			showChangeAttribute( CharAttributeType.HIT, oldMap, newMap );
+//			showChangeAttribute( CharAttributeType.CRIT, oldMap, newMap );
+//			showChangeAttribute( CharAttributeType.SPEED, oldMap, newMap );
 		}
 		
 		private static function showChangeAttribute( spType:int, oldMap:HashMap, newMap:HashMap ):void

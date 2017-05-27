@@ -8,6 +8,7 @@ package com.client
 	import flash.display.StageAlign;
 	import flash.display.StageQuality;
 	import flash.display.StageScaleMode;
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.system.IME;
 	import flash.text.TextField;
@@ -112,8 +113,16 @@ package com.client
 			IME.enabled = false;
 			_stage.addEventListener(MouseEvent.MOUSE_DOWN, onDisabledIME);
 			_stage.addEventListener(MouseEvent.RIGHT_MOUSE_DOWN, onDisabledIME);
+			//
+			//_stage.addEventListener(Event.RESIZE,onStageResize);
 		}
-
+		
+		protected static function onStageResize(event:Event):void
+		{
+			// TODO Auto-generated method stub
+			trace("resize");
+		}
+		
 		private static function onDisabledIME(event : MouseEvent) : void
 		{
 			if (IME.isSupported)

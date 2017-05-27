@@ -38,6 +38,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_x:int;
 		 /**  进入地图的默认坐标y */
 		public var q_y:int;
+		 /**  在副本死亡是，禁止弹出通用死亡面板 1 禁止 */
+		public var q_show_die_panel:int;
 		 /**  对应q_mapid字段每个地图的最大波数 */
 		public var q_max_wave:String;
 		 /**  副本面板描述 */

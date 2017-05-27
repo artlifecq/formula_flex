@@ -76,6 +76,8 @@ package com.rpgGame.app.manager
 					case CharAttributeType.PK:
 						HeroData(data).pkMode = attributeValue;
 						break;
+					case CharAttributeType.LV:
+						updateBloodLV(data);
 					default:
 //						data.spriteStat.addStatValue();
 						break;
@@ -119,6 +121,15 @@ package com.rpgGame.app.manager
 				{
 					EventManager.dispatchEvent(SceneCharacterEvent.SCENE_CHAR_DATA_UPDATE, role);
 				}
+			}
+		}
+		private static function updateBloodLV(data : RoleData) : void
+		{
+			var role : SceneRole = SceneManager.getSceneObjByID(data.id) as SceneRole;
+			if (role)
+			{
+				if (role.headFace is HeadFace)
+					(role.headFace as HeadFace).level = (data.totalStat.level);
 			}
 		}
 

@@ -62,11 +62,19 @@ package
 			RandomNick.setup(lastNameStr.split(","), flagNameStr.split(","), maleNameStr.split(","), femaleNameStr.split(","));
 		}
 		
-		public function onCreateHeroFail(msg : String) : void
+		public function onCreateHeroFail(msg : *) : void
 		{
 //			_creatCharacterPanel.setInfo(msg);
+			createErr();
 		}
-		
+		public function createErr():void
+		{
+			if (_creatCharacterPanel) 
+			{
+				_creatCharacterPanel.toRandom();
+				_creatCharacterPanel.resetBtn();
+			}
+		}
 		/**
 		 * 创建角色
 		 * @param e
