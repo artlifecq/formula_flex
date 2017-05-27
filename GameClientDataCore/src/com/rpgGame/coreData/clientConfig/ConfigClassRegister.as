@@ -30,8 +30,6 @@ package com.rpgGame.coreData.clientConfig
 		public static const ClientSceneNPC:String = "data.ClientSceneNPC";
 		/**  客户端在场景中的特效						 */
 		public static const ClientSceneRole:String = "data.ClientSceneRole";
-		/**  客户端触发数据															 */
-		public static const ClientTrigger:String = "data.ClientTrigger";
 		/**  客户端表情配置					 */
 		public static const FaceInfo:String = "data.FaceInfo";
 		/**  功能开放表											 */
@@ -213,7 +211,6 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.ClientSceneEffect", com.rpgGame.coreData.clientConfig.ClientSceneEffect);
 			regClass("data.ClientSceneNPC", com.rpgGame.coreData.clientConfig.ClientSceneNPC);
 			regClass("data.ClientSceneRole", com.rpgGame.coreData.clientConfig.ClientSceneRole);
-			regClass("data.ClientTrigger", com.rpgGame.coreData.clientConfig.ClientTrigger);
 			regClass("data.FaceInfo", com.rpgGame.coreData.clientConfig.FaceInfo);
 			regClass("data.FunctionBarInfo", com.rpgGame.coreData.clientConfig.FunctionBarInfo);
 			regClass("data.GameSoundInfo", com.rpgGame.coreData.clientConfig.GameSoundInfo);

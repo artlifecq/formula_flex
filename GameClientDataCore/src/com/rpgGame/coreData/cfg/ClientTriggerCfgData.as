@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.cfg
 {
-	import com.rpgGame.coreData.clientConfig.ClientTrigger;
+	import com.rpgGame.app.manager.ClientTrigger;
 
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
