@@ -4,7 +4,10 @@
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.coreData.cfg.ClientFunctionOpenCfgData;
     import com.rpgGame.coreData.cfg.LevelCfgData;
+    import com.rpgGame.coreData.cfg.NewFuncCfgData;
     import com.rpgGame.coreData.clientConfig.ClientFunctionOpen;
+    import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
+    import com.rpgGame.coreData.clientConfig.Q_newfunc;
     
     import org.client.mainCore.ds.HashMap;
 
@@ -63,6 +66,30 @@
             return true;
         }
 
-       
+		public static function checkOpenByLevel(level:int):Boolean
+		{
+			return level<=MainRoleManager.actorInfo.totalStat.level;
+		}
+		
+		public static function getOpenLevelByFunBarInfo(info:FunctionBarInfo):int
+		{
+			var list:Array = NewFuncCfgData.getListById(info.id);
+			if(list==null)
+				return 0;
+			var value:int = int.MAX_VALUE;
+			for each(var func:Q_newfunc in list)
+			{
+				value = Math.min(func.q_level,value);
+			}
+			return value;
+		}
+		
+		public static function checkOpenBuyFunId(id:int):Boolean
+		{
+			var func:Q_newfunc = NewFuncCfgData.getdataById(id);
+			if(func == null)
+				return false;
+			return checkOpenByLevel(func.q_level);
+		}
     }
 }

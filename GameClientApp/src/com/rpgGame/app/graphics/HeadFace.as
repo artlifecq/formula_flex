@@ -209,6 +209,10 @@ package com.rpgGame.app.graphics
 				
 				showAndHideElement(_nameBar, _isSelected && nameVisible);
 			}
+			else if (_role.type == SceneCharType.COLLECT) //采集物显示名称
+			{
+				showAndHideElement(_nameBar, true);
+			}
 			else if (_role.type == SceneCharType.DROP_GOODS) //掉落物，全显示或者全隐藏
 			{
 				/*	var monster:Q_monster=MonsterDataManager.getData((_role.data as MonsterData).modelID);
