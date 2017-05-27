@@ -86,7 +86,7 @@ package com.rpgGame.app.manager
 		}
 		/**收到服务器触发消息*/
 		public static function serverTrigger(triggerId : int):void
-		{//L.l("服务器返回触发："+triggerId);
+		{
 			_isTrigging[triggerId]=true;
 			TweenLite.killDelayedCallsTo(onTiggerkey);
 			var triggerData : ClientTrigger = TriggerCfgData.getClientTrigger(triggerId);
@@ -228,7 +228,6 @@ package com.rpgGame.app.manager
 		public static function ClientBytrigger(triggerId : int) : void
 		{
 			if (_isTrigging[triggerId])return;
-			//L.l("客户端发送触发："+triggerId);
 			_isTrigging[triggerId]=true;
 			TweenLite.killDelayedCallsTo(onTiggerkey);
 			
@@ -611,12 +610,12 @@ package com.rpgGame.app.manager
 							}
 							if (index > -1)
 							{
-								sceneRole.dialogFace.addWordFrame(RenderUnitType.HAIR, RenderUnitID.HAIR,contents[index], clientDialog.duration);
+								sceneRole.dialogFace.addWordFrame(RenderUnitType.BODY, RenderUnitID.BODY,contents[index], clientDialog.duration);
 							}
 						}
 						else
 						{
-							sceneRole.dialogFace.addWordFrame(RenderUnitType.HAIR, RenderUnitID.HAIR,contents[0], clientDialog.duration);
+							sceneRole.dialogFace.addWordFrame(RenderUnitType.BODY, RenderUnitID.BODY,contents[0], clientDialog.duration);
 						}
 					}
 				}
@@ -656,13 +655,13 @@ package com.rpgGame.app.manager
 						var sceneRoles : Vector.<SceneRole> = SceneManager.getSceneRolesByModelId(clientDialog.npcModelId);
 						for each (sceneRole in sceneRoles)
 						{
-							sceneRole.dialogFace.addWordFrame(RenderUnitType.HAIR, RenderUnitID.HAIR,clientDialog.content, clientDialog.duration);
+							sceneRole.dialogFace.addWordFrame(RenderUnitType.BODY, RenderUnitID.BODY,clientDialog.content, clientDialog.duration);
 						}
 					}
 					else
 					{
 						sceneRole = MainRoleManager.actor;
-						sceneRole.dialogFace.addWordFrame(RenderUnitType.HAIR, RenderUnitID.HAIR,clientDialog.content, clientDialog.duration);
+						sceneRole.dialogFace.addWordFrame(RenderUnitType.BODY, RenderUnitID.BODY,clientDialog.content, clientDialog.duration);
 					}
 				}
 				else

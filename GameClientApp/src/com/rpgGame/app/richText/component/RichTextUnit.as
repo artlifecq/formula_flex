@@ -86,7 +86,7 @@ package com.rpgGame.app.richText.component
 				onMouseOut();
 				return;
 			}
-			else onMouseOver();
+//			else onMouseOver();
 					
 			touch = e.getTouch( displayObj, TouchPhase.HOVER ); 
 			if( touch != null )

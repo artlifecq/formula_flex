@@ -2,6 +2,7 @@ package com.rpgGame.app.ui.alert
 {
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.core.manager.StarlingLayerManager;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.enum.AlertTypeEnum;
 	import com.rpgGame.coreData.info.alert.AlertInfo;
@@ -184,13 +185,13 @@ package com.rpgGame.app.ui.alert
 				gameAlert.cboxTip.visible = alertSet.isShowCBox;
 				gameAlert.cboxTip.isSelected = false;
 				gameAlert.cboxTip.label=alertInfo.checkText?alertInfo.checkText:"下次不再确认";
+				gameAlert.cboxTip.color=StaticValue.UI_GREEN;
 			}
 			if (gameAlert.lbTip)
 			{
 				gameAlert.lbTip.textAlign=alertInfo.align;
 				gameAlert.lbTip.wordWrap=true;
 				gameAlert.lbTip.htmlText=alertInfo.value;
-				gameAlert.lbTip.y=50+(125-gameAlert.lbTip.textHeight)>>1;
 			}
 			if (gameAlert.title)
 				gameAlert.title.htmlText = alertInfo.title;
@@ -208,7 +209,14 @@ package com.rpgGame.app.ui.alert
 		
 		private static function layoutAlert(gameAlert:GameAlert):void
 		{
-			
+			if (gameAlert.cboxTip)
+			{gameAlert.cboxTip.getChildAt(2);
+				gameAlert.cboxTip.x=(330-26-gameAlert.cboxTip.getChildAt(2).width)/2;
+			}
+			if(gameAlert.lbTip){
+				gameAlert.lbTip.y=50+(125-gameAlert.lbTip.textHeight)/2;
+				gameAlert.lbTip.x=(330-gameAlert.lbTip.textWidth)/2
+			}
 		}		
 		
 		private static var showAlertMap : HashMap = new HashMap();
