@@ -258,7 +258,8 @@ package com.editor.manager
 				}
 
 				object.x = position.x;
-				object.y = position.z;
+				object.y = 10000;
+//				object.y = position.z;
 				object.z = position.z;
 			}
 			else if (CameraController.mode == CameraModeEnum.FIXED_TARGET_LOOK_AT_TARGET || CameraController.mode == CameraModeEnum.DIRECT_CAMERA)
