@@ -42,6 +42,8 @@ package
 	
 	import gs.TweenLite;
 	
+	import utils.StringUtil;
+	
 	/**
 	 *
 	 * 程序文档类
@@ -273,7 +275,9 @@ package
 		
 		private function initProcess() : void
 		{
-			ProcessStateMachine.getInstance().pushProcess(new SelectDeveloper());
+            if (null == ClientGlobal.loginIP || 0 == StringUtil.trim(ClientGlobal.loginIP).length) {
+                ProcessStateMachine.getInstance().pushProcess(new SelectDeveloper());
+            }
 			ProcessStateMachine.getInstance().pushProcess(new LoginInput());
 			ProcessStateMachine.getInstance().pushProcess(new LoadMaskWorld());
 			ProcessStateMachine.getInstance().pushProcess(new ServerConnect());
