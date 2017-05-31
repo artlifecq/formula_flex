@@ -10,6 +10,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.manager.CharAttributeManager;
 	import com.rpgGame.app.manager.ClientTriggerManager;
 	import com.rpgGame.app.manager.GameCameraManager;
+	import com.rpgGame.app.manager.LostSkillManager;
 	import com.rpgGame.app.manager.MainUIManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.PKMamager;
@@ -94,6 +95,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.netData.map.message.ResWeaponChangeMessage;
 	import com.rpgGame.netData.map.message.SCAttachStateChangeMessage;
 	import com.rpgGame.netData.map.message.SCSceneObjMoveMessage;
+	import com.rpgGame.netData.monster.message.ResMonsterDieMessage;
 	import com.rpgGame.netData.player.message.BroadcastPlayerAttriChangeMessage;
 	import com.rpgGame.netData.player.message.ResChangePKStateMessage;
 	import com.rpgGame.netData.player.message.ResPlayerDieMessage;
@@ -164,7 +166,7 @@ package com.rpgGame.app.cmdlistener.scene
             SocketConnection.addCmdListener(101151, onRecvSCAttachStateChangeMessage);
 			
             SocketConnection.addCmdListener(103110, onResChangePKStateMessage);
-			
+			SocketConnection.addCmdListener(114108, onResMonterDieMessage);
 //			SocketConnection.addCmdListener(SceneModuleMessages.S2C_TRIGGER_CLIENT_EVENT, onTriggerClientEvent);
 			
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -210,6 +212,12 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			
 			finish();
+		}
+		
+		private function onResMonterDieMessage(msg:ResMonsterDieMessage):void
+		{
+			// TODO Auto Generated method stub
+			//LostSkillManager.instance().checkExpNotice(msg.killer);
 		}
 		
 		private function onResChangePKStateMessage(msg:ResChangePKStateMessage):void

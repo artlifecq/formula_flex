@@ -136,11 +136,11 @@
 			var i:int=getAttrChangeIndex();
 			var myTimeline:TimelineLite;
 			myTimeline = new TimelineLite({delay:timeDelay,onComplete:callBack,onCompleteParams:[showobj]});
-			myTimeline.append(new TweenLite(showobj, 0.7, {y:start.y-130,ease:Quart.easeOut}));//,ease:Expo.easeOut
+			myTimeline.append(new TweenLite(showobj, 0.7, {y:start.y-150,ease:Quart.easeOut}));//,ease:Expo.easeOut
 			myTimeline.addLabel("alpha1", 0);
 			myTimeline.addLabel("alpha0", 0.5);
 			myTimeline.insert(new TweenLite(showobj, 0.3, {alpha:1,scaleX:1,scaleY:1}), "alpha1");
-			myTimeline.insert(new TweenLite(showobj, 0.2, {alpha:0,y:start.y-150,scaleX:0.65,scaleY:0.65}), "alpha0");//,scaleX:0.5,scaleY:0.5
+			myTimeline.insert(new TweenLite(showobj, 0.2, {alpha:0,y:start.y-170,scaleX:0.65,scaleY:0.65}), "alpha0");//,scaleX:0.5,scaleY:0.5
 		}
 		//伤害
 		public static function TweenHurt(showobj:DisplayObject,start:Point, end:Point,callBack:Function):void
@@ -448,7 +448,7 @@
 				return;
 			}
 			
-		
+			start.x-=50;
 			showobj.x=start.x;
 			showobj.y=start.y-80;
 			showobj.alpha=0;

@@ -8,6 +8,7 @@ package com.rpgGame.app.manager.fight
 	import com.rpgGame.app.display2D.AttackFace;
 	import com.rpgGame.app.fight.spell.SpellResultTweenUtil;
 	import com.rpgGame.app.graphics.HeadFace;
+	import com.rpgGame.app.manager.LostSkillManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
@@ -32,6 +33,7 @@ package com.rpgGame.app.manager.fight
 	import gs.easing.Linear;
 	
 	import org.client.mainCore.ds.HashMap;
+	import org.game.netCore.data.long;
 	
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
@@ -195,10 +197,11 @@ package com.rpgGame.app.manager.fight
 			var dirVec : Vector3D;
 		
 		
-			
+			var extAtf:AttackFace=null;
 			var num:int=EnumHurtType.SPELL_HURT_TYPES.length;
 			for(var i:int=0;i<num;i++)
 			{
+				extAtf=null;
 				var type:uint=EnumHurtType.SPELL_HURT_TYPES[i];
 				var result:uint=type&hurtType;
 				if(result!=0||hurtType==0)
@@ -220,7 +223,12 @@ package com.rpgGame.app.manager.fight
 									numberType=NUMBER_PC_HPSUB;
 									tweenFun=SpellResultTweenUtil.TweenDiaoXue;
 								}
-							}			
+							}
+							extAtf=LostSkillManager.instance().hasBossHurtAddAtf(hurter.data.serverID,atkor.data.serverID,hurtAmount);
+							if (!extAtf) 
+							{
+								extAtf=LostSkillManager.instance().hasAttackPlayerAddAtf(hurter.data.serverID,atkor.data.serverID,hurtAmount);
+							}
 							break;
 						case EnumHurtType.SPELL_HURT_TYPE_MISS: //闪避
 							typeRes = ROOT+USESFUL_EFFECT+"weimingzhong.png";
@@ -231,6 +239,11 @@ package com.rpgGame.app.manager.fight
 							typeRes = ROOT+USESFUL_EFFECT+"bao_ji_piao_zi.png";
 							tweenFun=SpellResultTweenUtil.TweenCirt;
 							numberType = NUMBER_NPC_CRIT;
+							extAtf=LostSkillManager.instance().hasBossHurtAddAtf(hurter.data.serverID,atkor.data.serverID,hurtAmount);
+							if (!extAtf) 
+							{
+								extAtf=LostSkillManager.instance().hasAttackPlayerAddAtf(hurter.data.serverID,atkor.data.serverID,hurtAmount);
+							}
 							break;
 						case EnumHurtType.SPELL_ZHANHUN:
 							typeRes = ROOT+USESFUL_EFFECT+"zhanhun.png";
@@ -241,6 +254,7 @@ package com.rpgGame.app.manager.fight
 							typeRes = ROOT+USESFUL_EFFECT+"xishou.png";
 							tweenFun=SpellResultTweenUtil.TweenXiShou;
 							numberType =NUMBER_FIGHT_XISHOU;
+							
 						default:
 							CONFIG::Debug {
 							var loginfo:String = "未处理的伤害类型:"+type;
@@ -283,11 +297,11 @@ package com.rpgGame.app.manager.fight
 						
 						if (hurtAmount>0) 
 						{
-							showAttackFaceNew(hurter,atkor,atkor.headFace,typeRes,numberType,hurtAmount,null,null,tweenFun);
+							showAttackFaceNew(hurter,atkor,atkor.headFace,typeRes,numberType,hurtAmount,null,null,tweenFun,extAtf);
 						}
 						else
 						{
-							showAttackFaceNew(atkor,hurter,hurter.headFace,typeRes,numberType,hurtAmount,null,null,tweenFun);
+							showAttackFaceNew(atkor,hurter,hurter.headFace,typeRes,numberType,hurtAmount,null,null,tweenFun,extAtf);
 						}
 						
 						//				}
@@ -496,19 +510,20 @@ package com.rpgGame.app.manager.fight
 			face.x=-face.width/2;
 		}
 		//主要绝学
-		public static function showBuffNameEffect(buff:Q_buff,attacker:SceneRole):void
+		public static function showBuffNameEffect(buff:int,attackerId:long,value:int=0):void
 		{
-			if (!buff) 
-			{
-				return;
-			}
-			var qSkill:Q_lostskill_open=LostSkillData.getModeInfoById(buff.q_buff_id);
+			var qSkill:Q_lostskill_open=LostSkillData.getModeInfoById(buff);
 			if (!qSkill) 
 			{
 				return;
 			}
+			var attacker:SceneRole=SceneManager.getSceneObjByID(attackerId.ToGID()) as SceneRole;
+			if (!attacker) 
+			{
+				return;
+			}
 			var typeRes:String = ROOT+USESFUL_EFFECT+qSkill.q_icon+".png";
-			showQueueAttackFaceNew(attacker,null,attacker.headFace, typeRes, "", 0,  null, null,SpellResultTweenUtil.TweenHead)
+			showQueueAttackFaceNew(attacker,null,attacker.headFace, typeRes, NUMBER_PURPLE1, value,  null, null,SpellResultTweenUtil.TweenHead)
 		}
 		/**
 		 *这个主要是角色战斗力相关属性 
@@ -540,7 +555,7 @@ package com.rpgGame.app.manager.fight
 		 * @param count
 		 *
 		 */
-		public static function showAttChange(type : String, count : int) : void
+		public static function showAttChange(type : String, count : int,show:int=0) : void
 		{
 			
 			var typeRes : String = getFightURlByAttType(type, true);
@@ -549,8 +564,13 @@ package com.rpgGame.app.manager.fight
 			{
 				case EnumHurtType.ADDHP: //回血
 					numberColor=NUMBER_PC_HPREC;
-			
-					showQueueAttackFaceNew(MainRoleManager.actor,null,MainRoleManager.actor.headFace, typeRes, numberColor, count,  null, null,SpellResultTweenUtil.TweenZhiLiao1)
+					var extAtf:AttackFace=null;
+					if (show==2) 
+					{
+						extAtf=LostSkillManager.instance().hasXiQuHpAtf((MainRoleManager.actor.data as RoleData).serverID,0);
+					}
+					
+					showQueueAttackFaceNew(MainRoleManager.actor,null,MainRoleManager.actor.headFace, typeRes, numberColor, count,  null, null,SpellResultTweenUtil.TweenZhiLiao1,extAtf)
 				//	showQueueAttackFace(MainRoleManager.actor, typeRes, numberColor, count, scaleAgo, scaleLater, null, null, null, null, tweenUp);
 					return;
 				case EnumHurtType.ADDMP: //回蓝
@@ -560,8 +580,9 @@ package com.rpgGame.app.manager.fight
 				case EnumHurtType.EXP: //经验
 					numberColor = NUMBER_PC_EXP;
 				
+					var exdata:AttackFace=LostSkillManager.instance().hasExpAddAtf(MainRoleManager.actorInfo.serverID,count);
 					//showQueueAttackFace(MainRoleManager.actor, typeRes, numberColor, count, scaleAgo, scaleLater, null, null, null, null, tweenUp);
-					showQueueAttackFaceNew(MainRoleManager.actor,null,MainRoleManager.actor.headFace, typeRes, numberColor, count,  null, null,SpellResultTweenUtil.TweenExp);
+					showQueueAttackFaceNew(MainRoleManager.actor,null,MainRoleManager.actor.headFace, typeRes, numberColor, count,  null, null,SpellResultTweenUtil.TweenExp,exdata);
 					return;
 				default:
 					break;
@@ -651,15 +672,15 @@ package com.rpgGame.app.manager.fight
 			attackFace.touchGroup = false;
 			tweenFromSceneChar(showContainer, attackFace, $from, $end, $scaleAgo, $scaleLater, $tweenFun, isLeftShow, onAtackFaceComplete);
 		}
-		public static function showQueueAttackFaceNew(attacker:SceneRole,hurter:SceneRole,showContainer : *, typeRes : String = "", numberRes : String = "", $attackValue : * = 0, $specialType : String = null, $specialPos : Point = null, $tweenFun : Function = null,$queueTm : uint = 50) : void
+		public static function showQueueAttackFaceNew(attacker:SceneRole,hurter:SceneRole,showContainer : *, typeRes : String = "", numberRes : String = "", $attackValue : * = 0, $specialType : String = null, $specialPos : Point = null, $tweenFun : Function = null,extendData:Object=null,$queueTm : uint = 50) : void
 		{
-			_queueThread.push(showAttackFaceNew, [attacker, hurter, showContainer,typeRes,numberRes, $attackValue, $specialType, $specialPos, $tweenFun], $queueTm);
+			_queueThread.push(showAttackFaceNew, [attacker, hurter, showContainer,typeRes,numberRes, $attackValue, $specialType, $specialPos, $tweenFun,extendData], $queueTm);
 		}
-		public static function showAttackFaceNew(attacker:SceneRole,hurter:SceneRole,showContainer : *, typeRes : String = "", numberRes : String = "", $attackValue : * = 0, $specialType : String = null, $specialPos : Point = null, $tweenFun : Function = null) : void
+		public static function showAttackFaceNew(attacker:SceneRole,hurter:SceneRole,showContainer : *, typeRes : String = "", numberRes : String = "", $attackValue : * = 0, $specialType : String = null, $specialPos : Point = null, $tweenFun : Function = null,extendData:Object=null) : void
 		{
 			if (showContainer == null)
 				return;
-			var attackFace : AttackFace = AttackFace.createAttackFace(typeRes, numberRes, $attackValue, $specialType, $specialPos);
+			var attackFace : AttackFace = AttackFace.createAttackFace(typeRes, numberRes, $attackValue, $specialType, $specialPos,extendData);
 			attackFace.touchAcross = true;
 			attackFace.touchable = false;
 			attackFace.touchGroup = false;
