@@ -1,10 +1,14 @@
 package com.rpgGame.app.ui.main.chat
 {
 	import com.rpgGame.app.manager.chat.ChatManager;
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.richText.component.RichTextArea3D;
 	import com.rpgGame.core.events.ChatEvent;
 	import com.rpgGame.core.events.HintEvent;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_notify;
 	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
 	import com.rpgGame.coreData.utils.ColorUtils;
 	import com.rpgGame.netData.chat.message.ResChatMessage;
@@ -59,7 +63,7 @@ package com.rpgGame.app.ui.main.chat
 			_msgTxt=new RichTextArea3D(_skin.bg.width,_skin.bg.height, ColorUtils.getDefaultStrokeFilter());
 			this._msgTxt.wordWrap = true;
 			this._msgTxt.multiline = true;
-			_skin.bg.addChild(_msgTxt);
+			_skin.container.addChild(_msgTxt);
 			_allMsg=new Vector.<ResChatMessage>();
 			_sysMsg=new Vector.<ResChatMessage>();
 			
@@ -164,23 +168,28 @@ package com.rpgGame.app.ui.main.chat
 			}
 		}
 		
-		private function onNoticeMessage(msg:SCNoticeMessage):void
+		private function onNoticeMessage(arr:Array):void
 		{
-			
+			var pingdao:int=parseInt(arr[0])==3?EnumChatChannelType.CHAT_CHANNEL_SYSTEM:EnumChatChannelType.CHAT_CHANNEL_HEARSAY;
+			var text:String=arr[1];
+			var msg1:ResChatMessage=new ResChatMessage();
+			msg1.type=pingdao;
+			msg1.chatText=text;
+			onSendSuccess(msg1);
 		}
 		
 		private function showChatMsg( info:ResChatMessage ):void
 		{
-			if(_isShowAll){
-				_allMsg.push(info);
-				currentMsg=_allMsg;
-				if(info.type==EnumChatChannelType.CHAT_CHANNEL_SYSTEM){
-					_sysMsg.push(info);
-				}
-			}else if(info.type==EnumChatChannelType.CHAT_CHANNEL_SYSTEM){
+			//			if(_isShowAll){
+			_allMsg.push(info);
+			currentMsg=_allMsg;
+			if(info.type==EnumChatChannelType.CHAT_CHANNEL_SYSTEM){
 				_sysMsg.push(info);
-				currentMsg=_sysMsg;
 			}
+			//			}else if(info.type==EnumChatChannelType.CHAT_CHANNEL_SYSTEM){
+			//				_sysMsg.push(info);
+			//				currentMsg=_sysMsg;
+			//			}
 		}
 		
 		public function resize(w : int, h : int) : void {

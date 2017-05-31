@@ -20,6 +20,7 @@ package com.rpgGame.app.manager.chat
 	import com.rpgGame.core.events.ChatEvent;
 	import com.rpgGame.coreData.cfg.ChatCfgData;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.country.CountryNameCfgData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
@@ -495,7 +496,8 @@ package com.rpgGame.app.manager.chat
 		{
 			if (content == "") //空白不发送
 			{
-				NoticeManager.mouseFollowNotify("无法发送空消息");
+				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(22010));
+				//	NoticeManager.mouseFollowNotify("无法发送空消息");
 				return;
 			}
 			
@@ -504,8 +506,8 @@ package com.rpgGame.app.manager.chat
 				var itemInfo : ClientItemInfo = BackPackManager.instance.getFirstCanUseItemByCfgId(ChatCfgData.paidChatGoodsID);
 				if (itemInfo == null)
 				{
-//					ShopManager.ins.  //弹出后买面板
-					NoticeManager.showHint(EnumHintInfo.CHAT_CHANNEL_NO_LABA_ITEM, [ItemConfig.getItemName(ChatCfgData.paidChatGoodsID)]);
+					//	ShopManager.ins.  //弹出后买面板
+					NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(22003));
 					return;
 				}
 			}
@@ -568,8 +570,8 @@ package com.rpgGame.app.manager.chat
 					//                    return true;
 				}
 			}
-			//验证gm命令
-			var isGm : Boolean = isGmMsg(msg);
+				//验证gm命令
+				var isGm : Boolean = isGmMsg(msg);
 			if (isGm)
 			{
 				GmSender.sendMsg(getGmContent(msg));

@@ -87,7 +87,7 @@ package com.rpgGame.app.richText.component
 				return;
 			}
 //			else onMouseOver();
-					
+			
 			touch = e.getTouch( displayObj, TouchPhase.HOVER ); 
 			if( touch != null )
 			{

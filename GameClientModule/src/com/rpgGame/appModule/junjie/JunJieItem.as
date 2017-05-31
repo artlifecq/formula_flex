@@ -3,6 +3,7 @@ package com.rpgGame.appModule.junjie
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.core.events.JunJieEvent;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.coreData.cfg.JunJieData;
 	import com.rpgGame.netData.junjie.bean.JunJieInfo;
 	
 	import feathers.utils.filter.GrayFilter;
@@ -146,11 +147,14 @@ package com.rpgGame.appModule.junjie
 		
 		private function updatePanelState():void
 		{
-			if(_lv>Mgr.junjieMgr.getActivationLv())
+			if(_lv!=JunJieData.getMaxLv())
 			{
-				GrayFilter.gray(this);
+				if(_lv>Mgr.junjieMgr.getActivationLv()+1)
+				{
+					GrayFilter.gray(this);
+				}
+				else this.filter=null;	
 			}
-			else this.filter=null;	
 		}
 		
 		public function updateInfo():void

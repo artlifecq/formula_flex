@@ -22,6 +22,7 @@ package com.rpgGame.app.ui.main.chat {
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.ChatCfgData;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.clientConfig.FaceInfo;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
@@ -325,41 +326,15 @@ package com.rpgGame.app.ui.main.chat {
 		
 		private function onSwitchPrivateChannel(targetID:Number, targetName:String):void
 		{
-			changeCurrChannel(4);
-			
-			ChatManager.currentSiLiaoTargetID = targetID;
-			ChatManager.currentSiLiaoTargetName = targetName;
-			var siLiaoTag:String ="你对" + targetName +  "说 :";			
-			this._inputText.setFocus();
-			this._inputText.text=siLiaoTag;
-			setGroubState(true);
-		}
-		
-		
-		private function mouseOut():void
-		{
-			if( this._skin.btn_open.visible){
-				return;
+			if(changeCurrChannel(4))
+			{
+				ChatManager.currentSiLiaoTargetID = targetID;
+				ChatManager.currentSiLiaoTargetName = targetName;
+				var siLiaoTag:String ="你对" + targetName +  "说 :";			
+				this._inputText.setFocus();
+				this._inputText.text=siLiaoTag;
+				setGroubState(true);
 			}
-			_skin.grp_buttom.visible=false;
-			_skin.grp_top.visible=false;
-			_skin.btn_lock.visible=false;
-			_skin.lb_tishi.visible=false;
-			_skin.grp_laba.visible=false;
-			_skin.btn_scale.visible=false;
-			_skin.grp_select.visible=false;
-			hideSelectChannel();
-		}
-		
-		private function mouseOver():void
-		{
-			_skin.grp_buttom.visible=true;
-			_skin.grp_top.visible=true;
-			_skin.btn_lock.visible=true;
-			_skin.lb_tishi.visible=true;
-			_skin.grp_laba.visible=true;
-			_skin.btn_scale.visible=true;
-			_skin.grp_select.visible=true;
 		}
 		
 		private function initChatChannel():void
@@ -488,15 +463,53 @@ package com.rpgGame.app.ui.main.chat {
 		 * @param type
 		 * 
 		 */
-		private function changeCurrChannel(type:int):void
+		private function changeCurrChannel(type:int):Boolean
 		{
-			var num:int=_channelBtns.length;
-			for(var i:int=0;i<num;i++){
-				_channelBtns[i].visible=false;
+			if(isCanSelect(type))
+			{
+				var num:int=_channelBtns.length;
+				for(var i:int=0;i<num;i++){
+					_channelBtns[i].visible=false;
+				}
+				_channelBtns[type].visible=true;
+				_curSendChannel=CHANNEL_TYPES[type];
+				return true;
 			}
-			_channelBtns[type].visible=true;
-			_curSendChannel=CHANNEL_TYPES[type];
+			return false;
 		}	
+		
+		private function isCanSelect(type:int):Boolean
+		{
+			var pingdao:int=parseInt(CHANNEL_TYPES[type]);
+			switch(pingdao)
+			{
+				case EnumChatChannelType.CHAT_CHANNEL_WORLD:
+					if(MainRoleManager.actorInfo.totalStat.level>=50) return true;
+					else {
+						NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, "50级开放世界聊天");
+						return false;
+					}
+				case EnumChatChannelType.CHAT_CHANNEL_LABA:
+					if(MainRoleManager.actorInfo.totalStat.level>=50) return true;
+					else {
+						NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, "50级开放喇叭");
+						return false;
+					}
+				case EnumChatChannelType.CHAT_CHANNEL_SILIAO:
+					if(MainRoleManager.actorInfo.totalStat.level>=60) return true;
+					else {
+						NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, "60级开放私聊");
+						return false;
+					}
+				case EnumChatChannelType.CHAT_CHANNEL_KUA_FU:
+					if(MainRoleManager.actorInfo.totalStat.level>=90) return true;
+					else {
+						NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, "90级开放跨服聊天");
+						return false;
+					}
+			}
+			return true;
+		}
 		
 		private function toggleSelectChannel():void
 		{
