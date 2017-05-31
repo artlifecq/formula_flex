@@ -56,6 +56,7 @@ package com.client
 //				GuiTheme.defaultTextureFormat = TextureFormatEnum.BPG;
 			}
 			Away3D.PLANAR_STENCIL_AVAILABLE = true;
+			GuiTheme.ENABLE_TEXT_BATCH = true;
 //			Away3D.USE_ATF_FOR_TEXTURES = true;
 		}
 
