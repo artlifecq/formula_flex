@@ -145,6 +145,10 @@ package com.rpgGame.app.controller.keyboard
 					break;
 				case "60": //- 
 					break;
+				case "66":
+					//MainRoleManager.autoPickCtrl.DoShortcutPick();
+					TrusteeshipManager.getInstance().autoPickCtrl.DoShortcutPick();
+					break;
 			}
 		}
 

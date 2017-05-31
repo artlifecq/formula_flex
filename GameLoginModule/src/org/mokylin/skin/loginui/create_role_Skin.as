@@ -1,5 +1,6 @@
 package org.mokylin.skin.loginui
 {
+	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
 	import feathers.controls.Group;
 	import feathers.controls.Label;
@@ -8,14 +9,13 @@ package org.mokylin.skin.loginui
 	import feathers.controls.StateSkin;
 	import feathers.controls.TextInput;
 	import feathers.controls.UIAsset;
-	import feathers.controls.UIMovieClip;
 	import org.mokylin.skin.loginui.button.ButtonSkin_bingjia;
 	import org.mokylin.skin.loginui.button.ButtonSkin_create;
 	import org.mokylin.skin.loginui.button.ButtonSkin_mojia;
 	import org.mokylin.skin.loginui.button.ButtonSkin_sex;
+	import org.mokylin.skin.loginui.button.ButtonSkin_shaizi;
 	import org.mokylin.skin.loginui.button.ButtonSkin_yijia;
 	import org.mokylin.skin.loginui.create_input_Skin;
-	import org.mokylin.skin.loginui.mc.UIMovieClipSaizi;
 	import org.mokylin.skin.loginui.select_binjia_Skin;
 	import org.mokylin.skin.loginui.select_mojia_Skin;
 	import org.mokylin.skin.loginui.select_yijia_Skin;
@@ -38,6 +38,8 @@ package org.mokylin.skin.loginui
 
 		public var btn_mojia:feathers.controls.Radio;
 
+		public var btn_random:feathers.controls.Button;
+
 		public var btn_woman:feathers.controls.Radio;
 
 		public var btn_yijia:feathers.controls.Radio;
@@ -52,7 +54,9 @@ package org.mokylin.skin.loginui
 
 		public var grp_sex:feathers.controls.Group;
 
-		public var num_saizi:feathers.controls.UIMovieClip;
+		public var imgbg:feathers.controls.UIAsset;
+
+		public var labTime:feathers.controls.Label;
 
 		public var nv_bg:feathers.controls.UIAsset;
 
@@ -69,9 +73,9 @@ package org.mokylin.skin.loginui
 			super();
 			
 			this.currentState = "normal";
-			this.height = 900;
-			this.width = 1600;
-			this.elementsContent = [__create_role_Skin_UIAsset1_i(),nv_bg_i(),btn_bingjia_i(),btn_yijia_i(),btn_mojia_i(),grp_sex_i(),__create_role_Skin_Group1_i(),grp_input_i(),btn_create_i(),__create_role_Skin_UIAsset6_i(),cont_mojia_i(),cont_yijia_i(),cont_binjia_i(),roleZone_i()];
+			this.height = 1149;
+			this.width = 1920;
+			this.elementsContent = [imgbg_i(),nv_bg_i(),btn_bingjia_i(),btn_yijia_i(),btn_mojia_i(),grp_sex_i(),__create_role_Skin_Group1_i(),grp_input_i(),btn_create_i(),cont_mojia_i(),cont_yijia_i(),cont_binjia_i(),roleZone_i(),labTime_i()];
 			
 			states = {
 			};
@@ -85,9 +89,10 @@ package org.mokylin.skin.loginui
 		private function __create_role_Skin_Group1_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
-			temp.x = 1166;
-			temp.y = 15;
-			temp.elementsContent = [__create_role_Skin_UIAsset4_i(),__create_role_Skin_UIAsset5_i()];
+			temp.width = 152;
+			temp.x = 1482;
+			temp.y = 135;
+			temp.elementsContent = [__create_role_Skin_UIAsset3_i(),__create_role_Skin_UIAsset4_i()];
 			return temp;
 		}
 
@@ -114,22 +119,13 @@ package org.mokylin.skin.loginui
 		private function __create_role_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/big_bg/denglu_beijing.jpg";
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __create_role_Skin_UIAsset2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/loginui/zhishi.png";
 			temp.x = 68;
 			temp.y = 26;
 			return temp;
 		}
 
-		private function __create_role_Skin_UIAsset3_i():feathers.controls.UIAsset
+		private function __create_role_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/loginui/zhishi_1.png";
@@ -138,7 +134,7 @@ package org.mokylin.skin.loginui
 			return temp;
 		}
 
-		private function __create_role_Skin_UIAsset4_i():feathers.controls.UIAsset
+		private function __create_role_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 26;
@@ -148,21 +144,12 @@ package org.mokylin.skin.loginui
 			return temp;
 		}
 
-		private function __create_role_Skin_UIAsset5_i():feathers.controls.UIAsset
+		private function __create_role_Skin_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/loginui/xuanzezhiye.png";
 			temp.x = 11;
 			temp.y = 3;
-			return temp;
-		}
-
-		private function __create_role_Skin_UIAsset6_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/loginui/di.png";
-			temp.x = 156;
-			temp.y = 35;
 			return temp;
 		}
 
@@ -172,11 +159,11 @@ package org.mokylin.skin.loginui
 			btn_bingjia = temp;
 			temp.name = "btn_bingjia";
 			temp.groupName = "rdo_select";
-			temp.height = 159;
+			temp.height = 160;
 			temp.styleClass = org.mokylin.skin.loginui.button.ButtonSkin_bingjia;
-			temp.width = 151;
-			temp.x = 1363;
-			temp.y = 65;
+			temp.width = 152;
+			temp.x = 1678;
+			temp.y = 185;
 			return temp;
 		}
 
@@ -185,11 +172,11 @@ package org.mokylin.skin.loginui
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_create = temp;
 			temp.name = "btn_create";
-			temp.height = 78;
+			temp.height = 85;
 			temp.styleClass = org.mokylin.skin.loginui.button.ButtonSkin_create;
-			temp.width = 270;
-			temp.x = 1276;
-			temp.y = 785;
+			temp.width = 375;
+			temp.x = 1543;
+			temp.y = 929;
 			return temp;
 		}
 
@@ -214,11 +201,24 @@ package org.mokylin.skin.loginui
 			btn_mojia = temp;
 			temp.name = "btn_mojia";
 			temp.groupName = "rdo_select";
-			temp.height = 159;
+			temp.height = 160;
 			temp.styleClass = org.mokylin.skin.loginui.button.ButtonSkin_mojia;
-			temp.width = 151;
-			temp.x = 1363;
-			temp.y = 484;
+			temp.width = 152;
+			temp.x = 1678;
+			temp.y = 605;
+			return temp;
+		}
+
+		private function btn_random_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btn_random = temp;
+			temp.name = "btn_random";
+			temp.height = 34;
+			temp.styleClass = org.mokylin.skin.loginui.button.ButtonSkin_shaizi;
+			temp.width = 34;
+			temp.x = 238;
+			temp.y = 2;
 			return temp;
 		}
 
@@ -243,11 +243,11 @@ package org.mokylin.skin.loginui
 			btn_yijia = temp;
 			temp.name = "btn_yijia";
 			temp.groupName = "rdo_select";
-			temp.height = 159;
+			temp.height = 160;
 			temp.styleClass = org.mokylin.skin.loginui.button.ButtonSkin_yijia;
-			temp.width = 151;
-			temp.x = 1363;
-			temp.y = 285;
+			temp.width = 152;
+			temp.x = 1678;
+			temp.y = 405;
 			return temp;
 		}
 
@@ -260,8 +260,8 @@ package org.mokylin.skin.loginui
 			var skin:StateSkin = new org.mokylin.skin.loginui.select_binjia_Skin()
 			temp.skin = skin
 			temp.width = 306;
-			temp.x = 75;
-			temp.y = 17;
+			temp.x = 84;
+			temp.y = 56;
 			return temp;
 		}
 
@@ -274,8 +274,8 @@ package org.mokylin.skin.loginui
 			var skin:StateSkin = new org.mokylin.skin.loginui.select_mojia_Skin()
 			temp.skin = skin
 			temp.width = 306;
-			temp.x = 75;
-			temp.y = 17;
+			temp.x = 84;
+			temp.y = 56;
 			return temp;
 		}
 
@@ -288,8 +288,8 @@ package org.mokylin.skin.loginui
 			var skin:StateSkin = new org.mokylin.skin.loginui.select_yijia_Skin()
 			temp.skin = skin
 			temp.width = 306;
-			temp.x = 75;
-			temp.y = 17;
+			temp.x = 84;
+			temp.y = 56;
 			return temp;
 		}
 
@@ -298,9 +298,10 @@ package org.mokylin.skin.loginui
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grp_input = temp;
 			temp.name = "grp_input";
-			temp.x = 1275;
-			temp.y = 741;
-			temp.elementsContent = [text_input_i(),num_saizi_i()];
+			temp.height = 52;
+			temp.x = 1590;
+			temp.y = 861;
+			temp.elementsContent = [text_input_i(),btn_random_i()];
 			return temp;
 		}
 
@@ -309,24 +310,38 @@ package org.mokylin.skin.loginui
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grp_sex = temp;
 			temp.name = "grp_sex";
-			temp.height = 221;
-			temp.x = 1268;
-			temp.y = 472;
-			temp.elementsContent = [__create_role_Skin_UIAsset2_i(),__create_role_Skin_UIAsset3_i(),btn_man_i(),btn_woman_i(),__create_role_Skin_Label1_i(),__create_role_Skin_Label2_i()];
+			temp.height = 222;
+			temp.x = 1584;
+			temp.y = 593;
+			temp.elementsContent = [__create_role_Skin_UIAsset1_i(),__create_role_Skin_UIAsset2_i(),btn_man_i(),btn_woman_i(),__create_role_Skin_Label1_i(),__create_role_Skin_Label2_i()];
 			return temp;
 		}
 
-		private function num_saizi_i():feathers.controls.UIMovieClip
+		private function imgbg_i():feathers.controls.UIAsset
 		{
-			var temp:feathers.controls.UIMovieClip = new feathers.controls.UIMovieClip();
-			num_saizi = temp;
-			temp.name = "num_saizi";
-			temp.autoPlay = false;
-			temp.height = 64;
-			temp.styleClass = org.mokylin.skin.loginui.mc.UIMovieClipSaizi;
-			temp.width = 64;
-			temp.x = 220;
-			temp.y = -13;
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			imgbg = temp;
+			temp.name = "imgbg";
+			temp.height = 1149;
+			temp.styleName = "ui/big_bg/denglu_beijing.jpg";
+			temp.width = 1920;
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function labTime_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			labTime = temp;
+			temp.name = "labTime";
+			temp.fontSize = 16;
+			temp.text = "30秒后进入游戏";
+			temp.textAlign = "center";
+			temp.color = 0xC21515;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.x = 1663;
+			temp.y = 1030;
 			return temp;
 		}
 
@@ -335,11 +350,11 @@ package org.mokylin.skin.loginui
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			nv_bg = temp;
 			temp.name = "nv_bg";
-			temp.height = 903;
+			temp.height = 904;
 			temp.styleName = "ui/loginui/bg.png";
-			temp.width = 459;
-			temp.x = 1142;
-			temp.y = 0;
+			temp.width = 460;
+			temp.x = 1458;
+			temp.y = 121;
 			return temp;
 		}
 
@@ -352,8 +367,8 @@ package org.mokylin.skin.loginui
 			temp.height = 716;
 			temp.styleName = "ui/loginui/IDkuang.png";
 			temp.width = 776;
-			temp.x = 410;
-			temp.y = 131;
+			temp.x = 564;
+			temp.y = 170;
 			return temp;
 		}
 
@@ -364,6 +379,9 @@ package org.mokylin.skin.loginui
 			temp.name = "text_input";
 			temp.height = 42;
 			temp.styleClass = org.mokylin.skin.loginui.create_input_Skin;
+			temp.textAlign = "center";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 276;
 			temp.x = 0;
 			temp.y = 0;

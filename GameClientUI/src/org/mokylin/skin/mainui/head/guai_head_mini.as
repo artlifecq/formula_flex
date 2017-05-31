@@ -1,5 +1,6 @@
 package org.mokylin.skin.mainui.head
 {
+	import feathers.controls.Group;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 
@@ -26,9 +27,9 @@ package org.mokylin.skin.mainui.head
 			super();
 			
 			this.currentState = "normal";
-			this.height = 6;
-			this.width = 63;
-			this.elementsContent = [bg_i(),bar_i()];
+			this.height = 21;
+			this.width = 109;
+			this.elementsContent = [bg_i(),bar_i(),__guai_head_mini_Group1_i()];
 			
 			states = {
 			};
@@ -39,15 +40,59 @@ package org.mokylin.skin.mainui.head
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
+		private function __guai_head_mini_Group1_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			temp.x = 30;
+			temp.y = 3;
+			temp.elementsContent = [__guai_head_mini_UIAsset1_i(),__guai_head_mini_UIAsset2_i(),__guai_head_mini_UIAsset3_i(),__guai_head_mini_UIAsset4_i()];
+			return temp;
+		}
+
+		private function __guai_head_mini_UIAsset1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/mainui/head/juese/xuetiaofenge.png";
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function __guai_head_mini_UIAsset2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/mainui/head/juese/xuetiaofenge.png";
+			temp.x = 16;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function __guai_head_mini_UIAsset3_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/mainui/head/juese/xuetiaofenge.png";
+			temp.x = 32;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function __guai_head_mini_UIAsset4_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/mainui/head/juese/xuetiaofenge.png";
+			temp.x = 48;
+			temp.y = 0;
+			return temp;
+		}
+
 		private function bar_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bar = temp;
 			temp.name = "bar";
-			temp.left = 1;
-			temp.right = 1;
-			temp.styleName = "ui/mainui/head/mini/xuetiao_bar.png";
-			temp.y = 1;
+			temp.styleName = "ui/mainui/head/juese/juesexuetiao3.png";
+			temp.x = 15;
+			temp.y = 4;
 			return temp;
 		}
 
@@ -56,9 +101,8 @@ package org.mokylin.skin.mainui.head
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg = temp;
 			temp.name = "bg";
-			temp.left = 0;
-			temp.right = 0;
-			temp.styleName = "ui/mainui/head/mini/xuetiao_bg.png";
+			temp.styleName = "ui/mainui/head/mini/xuetiao_bg2.png";
+			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}

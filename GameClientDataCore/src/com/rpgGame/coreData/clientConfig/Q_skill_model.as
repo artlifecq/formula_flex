@@ -32,7 +32,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_skillopen_desc:String;
 		 /**  技能升级属性对应字段(0伤害加深 1召唤物百分比秒伤 2仇恨值 3血量上限比例 4秒伤值百分比+秒伤值 5伤害加深百分比+血量上限值 6血量上限百分比+血量值 ) */
 		public var q_skill_attr_type:int;
-		 /**  职业技能(1:兵家 2：墨家男3：墨家女 4：医家 0：不分职业-公共技能) */
+		 /**  职业技能(1:兵家 2：墨家男3：墨家女 4：医家 0：不分职业-公共技能 6:怪物类不显示用) */
 		public var q_job:int;
 		 /**  技能阶数(不能超过255) */
 		public var q_grade:int;
@@ -66,6 +66,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_target:int;
 		 /**  作用目标上限 */
 		public var q_target_max:int;
+		 /**  作用目标类型(0怪物和玩家，1怪物，2玩家) */
+		public var q_target_type:int;
 		 /**  技能表现类型（服务端区分） 0.常规类型 2.召唤类型  4有位移类型,5灭世金针6多段伤害,3矩形辐射递进伤害 */
 		public var q_skill_type:int;
 		 /**  使用方式（1主动技能，2被动技能） */
@@ -142,6 +144,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_fly_cancel:int;
 		 /**  弹道指定目标点，指定目标点则只会在指定点发出弹道（0不指定，1指定） */
 		public var q_fly_pos:int;
+		 /**  弹道数量优先还是敌对单位数量优先(0伤害数量优先，1弹道数量优先) */
+		public var q_fly_dam_prior:int;
 		 /**  自动战斗技能优先级 从1开始 0表示不会被ai用到 越大越高 */
 		public var q_ai_sort:int;
 		 /**  施法距离限制（自身与目标之间的距离）（单位：格子）,地面行走魔法表示行走距离(小于等于3：判定为近战攻击（处理音效）大于3：判定为远程攻击（处理音效）)   0表示无限距离，客户端会减掉1格 */

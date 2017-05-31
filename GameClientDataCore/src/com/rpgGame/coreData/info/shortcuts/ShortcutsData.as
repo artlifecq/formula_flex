@@ -10,6 +10,7 @@ package com.rpgGame.coreData.info.shortcuts
 		/** 快捷键 **/
 		public var shortcutPos : int = -1;
 
+		public var itemBind:int;
 		public function ShortcutsData()
 		{
 		}

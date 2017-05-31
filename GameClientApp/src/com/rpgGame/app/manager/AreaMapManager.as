@@ -14,7 +14,6 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.cfg.ClientTriggerCfgData;
 	import com.rpgGame.coreData.cfg.TriggerCfgData;
 	import com.rpgGame.coreData.clientConfig.ClientArea;
-	import com.rpgGame.coreData.clientConfig.ClientTrigger;
 	import com.rpgGame.coreData.enum.AreaMapTypeEnum;
 	import com.rpgGame.coreData.enum.EnumAreaMapType;
 	import com.rpgGame.coreData.enum.EnumClientTriggerType;
@@ -23,6 +22,7 @@ package com.rpgGame.app.manager
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
+	import com.rpgGame.coreData.cfg.ClientTrigger;
 
 	/**
 	 *
