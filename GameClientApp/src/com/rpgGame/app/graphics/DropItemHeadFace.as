@@ -3,11 +3,15 @@ package com.rpgGame.app.graphics
 	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.utils.HeadBloodUtil;
+	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.role.SceneDropGoodsData;
 	import com.rpgGame.coreData.type.AttachDisplayType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import flash.geom.Rectangle;
+	
+	import app.message.GoodsType;
+	
 
 	public class DropItemHeadFace extends BaseHeadFace
 	{
@@ -68,8 +72,18 @@ package com.rpgGame.app.graphics
 				this.addChild(_nameBar); //更新一下容器，从临时的到模型真正容器
 			}
 			var nameColor : uint = HeadBloodUtil.getRoleNameColor(_role);
-			_nameBar.setName(HeadBloodUtil.getRoleName(_role));
+			var qItem:Q_item=_role.data.qitem;
+			var str:String="";
+			if (qItem&&qItem.q_type==GoodsType.MONEY) 
+			{
+				str=_role.data.goodsDatas.num+"";
+			}
+			_nameBar.setName(str+HeadBloodUtil.getRoleName(_role));
 			_nameBar.setColor(nameColor);
+			if (_back) 
+			{
+				_back.width=_nameBar.textWidth+2;
+			}
 		}
 		private function addBackandUpdataState():void
 		{
@@ -91,6 +105,7 @@ package com.rpgGame.app.graphics
 			var nameVisible:Boolean = (_dropdata.qitem.q_showDrop_name==1);
 			showAndHideElement(_back, _isSelected || nameVisible);
 			showAndHideElement(_nameBar, _isSelected || nameVisible);
+		
 			addBackandUpdataState();
 		}
 		override protected function updateAllBarPosition() : void

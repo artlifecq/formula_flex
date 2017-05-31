@@ -30,10 +30,10 @@ package com.rpgGame.appModule.shop.backpackShop
 			this._type=t;
 			_skin=new ShangDian_Item();
 			super(_skin);
-			_grid=new IconCDFace(IcoSizeEnum.ICON_36);
+			_grid=new IconCDFace(IcoSizeEnum.ICON_42);
 			_skin.Icon.addChild(_grid);
-			_grid.x=9;
-			_grid.y=9;
+			_grid.x=6;
+			_grid.y=6;
 			_skin.Icon.touchGroup=false;
 			_skin.Icon.touchable=true;
 		}
@@ -70,6 +70,7 @@ package com.rpgGame.appModule.shop.backpackShop
 		{
 			_skin.lbName.htmlText=ItemConfig.getItemNameWithQualityColor(vo.data.item.mod);
 			var itemInfo:ClientItemInfo=new ClientItemInfo(vo.data.item.mod);
+			
 			itemInfo.count=vo.data.item.num;
 			itemInfo.setContainerId(ItemContainerID.BACKPACK_SHOP);
 			FaceUtil.SetItemGrid(_grid,itemInfo);
@@ -80,6 +81,7 @@ package com.rpgGame.appModule.shop.backpackShop
 		{
 			_skin.lbName.htmlText=ItemConfig.getItemNameWithQualityColor(item.itemModelId);
 			var itemInfo:ClientItemInfo=new ClientItemInfo(item.itemModelId);
+			itemInfo.itemInfo=item;
 			itemInfo.count=item.num;
 			itemInfo.setContainerId(ItemContainerID.BACKPACK_SHOP);
 			FaceUtil.SetItemGrid(_grid,itemInfo);

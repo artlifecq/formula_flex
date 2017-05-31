@@ -22,6 +22,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_tran_source_area_id:int;
 		 /**  传送目的地区域 */
 		public var q_tran_dest_area_id:int;
+		 /**  通用传送点根据职业匹配 */
+		public var q_tran_dest_area_by_job:String;
 		 /**  传送点造型资源编号 */
 		public var q_tran_res:String;
 		 /**  传送点资源X坐标 */

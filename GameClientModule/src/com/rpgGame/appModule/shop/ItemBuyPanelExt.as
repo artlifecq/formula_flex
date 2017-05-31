@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.shop
 {
 	import com.game.mainCore.core.timer.GameTimer;
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -13,8 +14,10 @@ package com.rpgGame.appModule.shop
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.utils.GameColorUtil;
+	import com.rpgGame.coreData.cfg.SourceGetCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_item;
+	import com.rpgGame.coreData.clientConfig.Q_source;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
@@ -23,11 +26,12 @@ package com.rpgGame.appModule.shop
 	
 	import flash.utils.getTimer;
 	
+	import away3d.events.Event;
+	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.shangcheng.Tankuang_Shangpin;
 	
 	import starling.display.DisplayObject;
-	import away3d.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -255,6 +259,20 @@ package com.rpgGame.appModule.shop
 			}
 			_ins.setData(vo);
 			StarlingLayerManager.topUILayer.addChild(_ins);
+		}
+		public static function buyItemByModelId(itemMod:int):void
+		{
+			var qSource:Q_source=SourceGetCfg.getSource(itemMod);
+			if (!qSource) 
+			{
+				return ;
+			}
+			var shopItems:Array=Mgr.shopMgr.getMallItemShopVo(itemMod,qSource.q_shoptype,JSONUtil.decode(qSource.q_sub_shop_type));
+			if (shopItems==null||shopItems.length==0) 
+			{
+				return;
+			}
+			buyItem(shopItems[0]);
 		}
 		private function setData(vo:ShopItemVo):void
 		{

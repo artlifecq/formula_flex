@@ -4,6 +4,7 @@ package com.rpgGame.app.state.role
 	import com.game.engine3D.utils.MathUtil;
 	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
+	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneCursorHelper;
@@ -123,10 +124,10 @@ package com.rpgGame.app.state.role
 		 *@param noWalk 寻路路径小不用寻路，也返回方法 返回 role   任务上用到 ---------yt
 		 */
 		public static function walkToPos(role : SceneRole, pos : Vector3D, spacing : int = 0, data : Object = null, 
-										 onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null,noWalk:Function=null) : void
+										 onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null,noWalk:Function=null) : Boolean
 		{
 			if (!role || !role.usable)
-				return;
+				return false;
 			
 			var dist:int = Point.distance(new Point(role.position.x,role.position.z),new Point(pos.x,pos.y));
 			if(dist <= spacing)
@@ -137,7 +138,7 @@ package com.rpgGame.app.state.role
 					noWalk(data);
 				}
 				
-				return;
+				return false;
 			}
 			
 			if (role.isMainChar || role.isMainCamouflage)
@@ -145,11 +146,11 @@ package com.rpgGame.app.state.role
 				var nowTime : int = getTimer();
 				if (nowTime - RoleStateUtil.lastWalkTime < RoleStateUtil.WALK_DELAY)
 				{
-					return;
+					return false;
 				}
 				SceneCursorHelper.getInstance().hideCursor();
 			}
-			doWalkTo(role, pos, spacing, data,onArrive, onThrough, onUpdate);
+			return doWalkTo(role, pos, spacing, data,onArrive, onThrough, onUpdate);
 			
 		}
 		private static var _timeOutId:uint;
@@ -304,7 +305,10 @@ package com.rpgGame.app.state.role
 			if ((ref.owner as SceneRole).isMainChar || (ref.owner as SceneRole).isMainCamouflage)
 			{
 				if (!ref.isServerStop)
+				{
 					SceneSender.SendPlayerStopMessage(); //告诉服务器，停止移动。
+					TrusteeshipManager.getInstance().autoPickCtrl.SetPickingState(false);
+				}
 			}
 		}
 

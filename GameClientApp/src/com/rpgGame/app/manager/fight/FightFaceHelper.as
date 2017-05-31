@@ -1,16 +1,24 @@
 package com.rpgGame.app.manager.fight
 {
+	import com.game.engine2D.scene.SceneCamera;
 	import com.game.engine3D.controller.CameraController;
 	import com.game.mainCore.libCore.handle.HandleThread;
 	import com.gameClient.alert.AlertPanel;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.display2D.AttackFace;
+	import com.rpgGame.app.fight.spell.SpellResultTweenUtil;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.core.manager.StarlingLayerManager;
+	import com.rpgGame.coreData.cfg.LostSkillData;
+	import com.rpgGame.coreData.clientConfig.Q_buff;
+	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
+	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.EnumHurtType;
+	import com.rpgGame.netData.player.bean.AttributeItem;
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
@@ -22,6 +30,8 @@ package com.rpgGame.app.manager.fight
 	import gs.easing.Cubic;
 	import gs.easing.Elastic;
 	import gs.easing.Linear;
+	
+	import org.client.mainCore.ds.HashMap;
 	
 	import starling.display.DisplayObject;
 
@@ -46,6 +56,12 @@ package com.rpgGame.app.manager.fight
 		/** 无用，反面特效，其实就是图片是红色的**/
 		public static const ATTRIBUTE_HARMFUL_EFFECT : String = "attribute_effect/harmful_effect/";
 		//-----------------------数字------------------------------------------//
+		/** usesful 数字**/
+		public static const ATTRIBUTE_USESFUL_NUM : String = "attribute_effect/usesful_effect/num/";
+		/** harmful字**/
+		public static const ATTRIBUTE_HARMFUL_NUM : String = "attribute_effect/harmful_effect/num/";
+		
+		
 		/** 战斗-目标飘字 受伤**/
 		public static const NUMBER_NPC_HIT : String = "skin_shanghai/";
 		/** 战斗-自身飘字 回血**/
@@ -56,7 +72,8 @@ package com.rpgGame.app.manager.fight
 		public static const NUMBER_PC_EXP : String = "skin_jingyan/";
 		/** 战斗-目标飘字 受暴击**/
 		public static const NUMBER_NPC_CRIT : String = "skin_baoji/";
-		
+		/** 战斗-目标飘字 战魂**/
+		public static const NUMBER_NPC_ZHANHUN : String = "skin_zhanhun/";
 		
 		/** 战斗-自身飘字 受伤 (红色) **/
 		public static const NUMBER_PC_HIT : String = "pc_hit/";
@@ -75,7 +92,10 @@ package com.rpgGame.app.manager.fight
 		/** 飘字队列 **/
 		private static var _queueThread : HandleThread = new HandleThread(null, true, 20);
 
+		
 		//-----------------------下面是旧版的飘字（暂时留着，整理完新版的再干掉）--------------------------------------------------------------------//
+		
+		
 		/** 蓝 数字**/
 		public static const NUMBER_BULE : String = "bule1_num/";
 		/** 金 数字**/
@@ -95,6 +115,20 @@ package com.rpgGame.app.manager.fight
 		/** 黄2 数字**/
 		public static const NUMBER_YELLOW2 : String = "yellow2_num/";
 
+		
+		/**
+		 *伤害类型 
+		 */
+		public static const TWEEN_FUNCS:Array=[SpellResultTweenUtil.TweenHurt,
+																		  SpellResultTweenUtil.TweenShanBi,
+																		  SpellResultTweenUtil.TweenHits,
+																		  SpellResultTweenUtil.TweenCirt,
+																		  SpellResultTweenUtil.TweenCirt,
+																		  SpellResultTweenUtil.TweenCirt,
+																		  SpellResultTweenUtil.TweenCirt,
+																		  SpellResultTweenUtil.TweenCirt,
+																		  SpellResultTweenUtil.TweenCirt,
+																		  SpellResultTweenUtil.TweenCirt];
 		/**
 		 * 得到攻击效果的指定类型的URL
 		 * @param hurtType 伤害类型
@@ -134,7 +168,142 @@ package com.rpgGame.app.manager.fight
 			return ROOT + numberType + number + ".png";
 		}
 
+		/**
+		 * 伤害飘字
+		 * @param atkor 场景角色
+		 * @param hurter 受伤害的角色
+		 * @param hurtType 飘字类型 【 0. 普通. 1. 闪避, 2. 暴击, 3. 重击, 4. 跳闪，5.无敌，6.物理免疫，7.魔法免疫，8.反弹，9.目标吸收伤害，10.角色吸收伤害 】
+		 * @param hurtAmount 伤害数值
+		 *
+		 */
+		public static function showHurtTextNew(atkor : SceneRole, hurter : SceneRole, hurtType : uint, hurtAmount : int) : void
+		{
+			if (hurter == null)
+				return;
+			
+			var mainPlayer : SceneRole = MainRoleManager.actor; //主角
+			var typeRes : String=""; //得到攻击效果的指定类型的URL
+			var isUsefulBmp : Boolean = true; //是否正面效果，相对主角自己而言的
+			var numberType : String ; //飘字数字颜色类型
+			var tweenDis : int;
+			var dirVec : Vector3D;
+			var tweenFun : Function; //飘字回调
 		
+			
+			var num:int=EnumHurtType.SPELL_HURT_TYPES.length;
+			for(var i:int=0;i<num;i++)
+			{
+				var type:uint=EnumHurtType.SPELL_HURT_TYPES[i];
+				var result:uint=type&hurtType;
+				if(result!=0||hurtType==0)
+				{
+					switch (type)
+					{
+						case EnumHurtType.SPELL_HURT_TYPE_REBOUND:
+						case EnumHurtType.SPELL_HURT_TYPE_INVINCIBLE: 
+						case EnumHurtType.SPELL_HURT_TYPE_NORMAL: 
+							typeRes = "";
+							isUsefulBmp = hurter.isMainChar;
+						
+							numberType = NUMBER_NPC_HIT;
+							if(isUsefulBmp){
+								numberType=NUMBER_PC_HPSUB;
+								tweenFun=SpellResultTweenUtil.TweenDiaoXue;
+							}
+							if (atkor.id == MainRoleManager.actorID||hurter.id == MainRoleManager.actorID) 
+							{
+								if( hurtAmount> 0){
+									typeRes=getFightURlByAttType(EnumHurtType.ADDHP, true);
+								
+									var sc:SceneRole;
+									if(atkor.id == MainRoleManager.actorID)
+									{
+										sc=SceneManager.getSceneObjByID(hurter.id) as SceneRole;
+									}else
+									{
+										sc=MainRoleManager.actor;
+									}
+									tweenFun=SpellResultTweenUtil.TweenHurt
+									//showQueueAttackFace(sc, typeRes, NUMBER_PC_HPREC, hurtAmount, scaleAgo, scaleLater, null, null, null, null, tweenUp);//回血
+									showQueueAttackFaceNew(atkor,hurter,hurter.headFace,typeRes,numberType,hurtAmount,null,null,tweenFun);//回血
+									return;
+								}
+							}	
+							
+							break;
+						case EnumHurtType.SPELL_HURT_TYPE_MISS: //闪避
+							typeRes = ROOT+USESFUL_EFFECT+"weimingzhong.png";
+					
+							tweenFun=SpellResultTweenUtil.TweenShanBi;
+							break;
+						case EnumHurtType.SPELL_HURT_TYPE_CRIT: //暴击
+							typeRes = ROOT+USESFUL_EFFECT+"bao_ji_piao_zi.png";
+							tweenFun=SpellResultTweenUtil.TweenCirt;
+							numberType = NUMBER_NPC_CRIT;
+							break;
+						case EnumHurtType.SPELL_ZHANHUN:
+							typeRes = ROOT+USESFUL_EFFECT+"zhanhun.png";
+							tweenFun=SpellResultTweenUtil.TweenZhanHun;
+							numberType = NUMBER_NPC_ZHANHUN;
+							break;
+						default:
+							CONFIG::Debug {
+							var loginfo:String = "未处理的伤害类型:"+type;
+							GameLog.addError(loginfo);
+							AlertPanel.showMsg( loginfo, null );
+						}
+							break;
+					}
+					
+					if(!tweenFun)
+					{
+						tweenFun = SpellResultTweenUtil.TweenHurt;
+					}
+					var showFace:Boolean = false;
+					var roleData:RoleData;
+					if(atkor && atkor.usable)
+					{
+						roleData = atkor.data as RoleData;
+						if(roleData)
+						{
+							if(roleData.id == MainRoleManager.actorID || roleData.ownerId == MainRoleManager.actorID)
+							{
+								showFace = true;
+							}
+						}
+					}
+					if(hurter && hurter.usable)
+					{
+						roleData = hurter.data as RoleData;
+						if(roleData)
+						{
+							if(roleData.id == MainRoleManager.actorID || roleData.ownerId == MainRoleManager.actorID)
+							{
+								showFace = true;
+							}
+						}
+					}
+					if (showFace) //主角或主角所属角色受伤害/攻击...
+					{
+						
+						showAttackFaceNew(atkor,hurter,hurter.headFace,typeRes,numberType,hurtAmount,null,null,tweenFun);
+						//				}
+						if(hurter.data.id!=MainRoleManager.actorID)
+						{
+							var headFace:HeadFace=hurter.headFace as HeadFace;
+							if(headFace && !hurter.stateMachine.isDeadState)
+							{
+								headFace.showBloodBar();
+							}
+						}
+					}
+				}
+				if(hurtType==0&&type==0)
+				{
+					break;
+				}
+			}
+		}
 		/**
 		 * 伤害飘字
 		 * @param atkor 场景角色
@@ -323,7 +492,45 @@ package com.rpgGame.app.manager.fight
 		{
 			face.x=-face.width/2;
 		}
-
+		//主要绝学
+		public static function showBuffNameEffect(buff:Q_buff,attacker:SceneRole):void
+		{
+			if (!buff) 
+			{
+				return;
+			}
+			var qSkill:Q_lostskill_open=LostSkillData.getModeInfoById(buff.q_buff_id);
+			if (!qSkill) 
+			{
+				return;
+			}
+			var typeRes:String = ROOT+USESFUL_EFFECT+qSkill.q_icon+".png";
+			showQueueAttackFaceNew(attacker,null,attacker.headFace, typeRes, "", 0,  null, null,SpellResultTweenUtil.TweenHead)
+		}
+		/**
+		 *这个主要是角色战斗力相关属性 
+		 * @param list
+		 * 
+		 */		
+		public static function showPlayerBaseAttrChange(hash:HashMap):void
+		{
+			var keys:Array=hash.keys();
+			keys.sort();
+			var len:int=keys.length;
+			var key:int=0;
+			var val:int=0;
+			var typeRes : String = "";
+			var numberColor : String = "";
+			for (var i:int = 0; i <len; i++) 
+			{
+				key=keys[i];
+				val=hash.getValue(key);
+				typeRes=getAttributeUrl(key,val>0);
+				numberColor=val>0?ATTRIBUTE_USESFUL_NUM:ATTRIBUTE_HARMFUL_NUM;
+				showQueueAttackFaceNew(MainRoleManager.actor,null,MainRoleManager.actor.headFace, typeRes, numberColor, val,  null, null,SpellResultTweenUtil.TweenAttrChange)
+			}
+			
+		}
 		/**
 		 * 显示属性改变
 		 * @param type
@@ -332,31 +539,32 @@ package com.rpgGame.app.manager.fight
 		 */
 		public static function showAttChange(type : String, count : int) : void
 		{
-			var scaleAgo : Number = 1;
-			var scaleLater : Number = 0.33;
+			
 			var typeRes : String = getFightURlByAttType(type, true);
 			var numberColor : String = "";
 			switch (type)
 			{
 				case EnumHurtType.ADDHP: //回血
 					numberColor=NUMBER_PC_HPREC;
-					scaleAgo=1;
-					scaleLater=1;
-					showQueueAttackFace(MainRoleManager.actor, typeRes, numberColor, count, scaleAgo, scaleLater, null, null, null, null, tweenUp);
+			
+					showQueueAttackFaceNew(MainRoleManager.actor,null,MainRoleManager.actor.headFace, typeRes, numberColor, count,  null, null,SpellResultTweenUtil.TweenZhiLiao1)
+				//	showQueueAttackFace(MainRoleManager.actor, typeRes, numberColor, count, scaleAgo, scaleLater, null, null, null, null, tweenUp);
 					return;
 				case EnumHurtType.ADDMP: //回蓝
 					numberColor = NUMBER_PC_MPREC;
-					break;
+					showQueueAttackFaceNew(MainRoleManager.actor,null,MainRoleManager.actor.headFace, typeRes, numberColor, count,  null, null,SpellResultTweenUtil.TweenZhiLiao2)
+					return;
 				case EnumHurtType.EXP: //经验
 					numberColor = NUMBER_PC_EXP;
-					scaleAgo=1;
-					scaleLater=1;
-					showQueueAttackFace(MainRoleManager.actor, typeRes, numberColor, count, scaleAgo, scaleLater, null, null, null, null, tweenUp);
+				
+					//showQueueAttackFace(MainRoleManager.actor, typeRes, numberColor, count, scaleAgo, scaleLater, null, null, null, null, tweenUp);
+					showQueueAttackFaceNew(MainRoleManager.actor,null,MainRoleManager.actor.headFace, typeRes, numberColor, count,  null, null,SpellResultTweenUtil.TweenExp);
 					return;
 				default:
 					break;
 			}
-			showQueueAttackFace(MainRoleManager.actor, typeRes, numberColor, count, scaleAgo, scaleLater, null, null, null, null, tweenTypeRoleHurt);
+			showQueueAttackFaceNew(MainRoleManager.actor,null,MainRoleManager.actor.headFace, typeRes, numberColor, count,  null, null,SpellResultTweenUtil.TweenExp);
+			//showQueueAttackFace(MainRoleManager.actor, typeRes, numberColor, count, scaleAgo, scaleLater, null, null, null, null, tweenTypeRoleHurt);
 		}
 		
 		public static function tweenTypeRoleMiss(attackFace : DisplayObject, $displayObjectContainer:*, $from : Point, $end : Point, $scaleAgo : Number, $scaleLater : Number, isLeftShow : Boolean = false, onComplete : Function = null) : void
@@ -440,7 +648,46 @@ package com.rpgGame.app.manager.fight
 			attackFace.touchGroup = false;
 			tweenFromSceneChar(showContainer, attackFace, $from, $end, $scaleAgo, $scaleLater, $tweenFun, isLeftShow, onAtackFaceComplete);
 		}
-
+		public static function showQueueAttackFaceNew(attacker:SceneRole,hurter:SceneRole,showContainer : *, typeRes : String = "", numberRes : String = "", $attackValue : * = 0, $specialType : String = null, $specialPos : Point = null, $tweenFun : Function = null,$queueTm : uint = 50) : void
+		{
+			_queueThread.push(showAttackFaceNew, [attacker, hurter, showContainer,typeRes,numberRes, $attackValue, $specialType, $specialPos, $tweenFun], $queueTm);
+		}
+		public static function showAttackFaceNew(attacker:SceneRole,hurter:SceneRole,showContainer : *, typeRes : String = "", numberRes : String = "", $attackValue : * = 0, $specialType : String = null, $specialPos : Point = null, $tweenFun : Function = null) : void
+		{
+			if (showContainer == null)
+				return;
+			var attackFace : AttackFace = AttackFace.createAttackFace(typeRes, numberRes, $attackValue, $specialType, $specialPos);
+			attackFace.touchAcross = true;
+			attackFace.touchable = false;
+			attackFace.touchGroup = false;
+			tweenFromSceneCharNew(attacker,hurter,showContainer, attackFace, $tweenFun, onAtackFaceComplete);
+		}
+		private static function tweenFromSceneCharNew(attacker:SceneRole,hurter:SceneRole,showContainer : *, $displayObject : AttackFace, $tweenFun : Function = null, $onComplete : Function = null) : void
+		{
+			tweenFromNew(attacker,hurter,showContainer, $displayObject, $tweenFun,$onComplete);
+		}
+		private static function tweenFromNew(attacker:SceneRole,hurter:SceneRole,$displayObjectContainer : *, attackFace : AttackFace,$tweenFun : Function = null,$onComplete : Function = null) : void
+		{
+			if (null == $displayObjectContainer)
+			{
+				$onComplete(attackFace); // 动画就算不播放，也要调用完成函数
+				return;
+			}
+			//$displayObjectContainer.addChild(attackFace);
+			StarlingLayerManager.headFaceLayer.addChild(attackFace);
+			
+			if (null != $tweenFun)
+			{
+				var start:Point=new Point(attacker.headFace.x,attacker.headFace.y);
+				var end:Point=null
+				if (hurter) 
+				{
+					end=new Point(hurter.headFace.x,hurter.headFace.y);
+				}
+				
+				$tweenFun(attackFace,start,end, $onComplete);
+			}
+		}
 		/**
 		 *
 		 * @param $sc 开始飘字的场景对象

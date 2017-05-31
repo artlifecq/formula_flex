@@ -205,7 +205,6 @@ package com.rpgGame.app.ui.main.chat {
 			
 			EventManager.addEvent(ChatEvent.SWITCH_PRIVATE_CHANNEL,onSwitchPrivateChannel);
 			EventManager.addEvent(ChatEvent.SEND_SUCCESS, onSendSuccess);
-			EventManager.addEvent(LookEvent.ROLE_INFO,showRole);
 			
 			this._inputText.addEventListener(FeathersEventType.FOCUS_OUT,onFocueOut);			
 			this.addEventListener(TouchEvent.TOUCH, this.onTouchEventHandler);
@@ -802,22 +801,6 @@ package com.rpgGame.app.ui.main.chat {
 				}
 					this._skin.vscrollbar.scrollToPosition(0, scrollerPos, 0.3);
 			}
-		}
-		
-		private function showRole(info:OthersInfo):void
-		{
-			var _roleData:HeroData=new HeroData();
-			_roleData.totalStat.setData(info.attributeList);
-			_roleData.totalStat.setResDatas(info.resourceData);
-			_roleData.sex=info.sex;
-			_roleData.job=info.job;
-			_roleData.societyName=info.guildName;
-			
-			_roleData.maxExp=info.maxExp.fValue;
-			_roleData.maxZhenqi=info.maxZhenQi.fValue;
-			_roleData.curExp=info.exp.fValue;
-			var data:Object={roleData:_roleData,info:info};
-			AppManager.showApp(AppConstant.PLAYERINFO_PANEL,data);
 		}
 	}
 }

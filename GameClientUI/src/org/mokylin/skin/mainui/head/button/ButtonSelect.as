@@ -26,7 +26,7 @@ package org.mokylin.skin.mainui.head.button
 		{
 			super();
 			
-			this.currentState = "down";
+			this.currentState = "up";
 			this.height = 24;
 			this.width = 332;
 			this.elementsContent = [];
@@ -49,7 +49,7 @@ package org.mokylin.skin.mainui.head.button
 						}
 					]
 			};
-			skinNames={"down":"ui/mainui/head/di.png", "hover":"ui/mainui/head/di.png", "up":"ui/mainui/head/di.png"};
+			skinNames={"down":"ui/mainui/head/di.png", "hover":"ui/mainui/head/di.png", "up":"ui/common/hover/xuanqukuang2_alpha.png"};
 		}
 
 

@@ -8,21 +8,41 @@ package com.rpgGame.coreData.cfg
 
 	public class FuncionBarCfgData
 	{
+
 		private static var _map:HashMap;
+		private static var _maptypeList:HashMap;
 		public function FuncionBarCfgData()
 		{
 		}
-		
+
 		public static function setup( byte:ByteArray ):void
 		{
 			var _list:Array = byte.readObject();
 			_map = new HashMap();
+			_maptypeList = new HashMap();
+			var list:Array;
 			for each ( var info:FunctionBarInfo in _list )
 			{
 				_map.add( info.id, info );
+				list = _maptypeList.getValue(info.type);
+				if(list==null)
+				{
+					list = new Array();
+					_maptypeList.add(info.type,list);
+				}
+				list.push(info);
+			}
+			
+			var keys:Array = _maptypeList.keys();
+			for(var i:int = 0;i<keys.length;i++)
+			{
+				var key:int = keys[i];
+				list = _maptypeList.getValue(key);
+				_maptypeList.add( key, list.sortOn("order", Array.NUMERIC));
 			}
 		}
 		
+
 		/**
 		 * 根据功能id获取活动条的信息
 		 * @param id
@@ -31,6 +51,17 @@ package com.rpgGame.coreData.cfg
 		public static function getActivityBarInfo( id:int ):FunctionBarInfo
 		{
 			return _map.getValue( id ) as FunctionBarInfo;
+		}
+		
+		/**
+		 * 根据区域获取窗口信息列表  0:功能区域，1：活动区域
+		 * @param type
+		 * @return 
+		 * 
+		 */
+		public static function getInfoListbyType(type:int):Array
+		{
+			return _maptypeList.getValue(type);
 		}
 	}
 }

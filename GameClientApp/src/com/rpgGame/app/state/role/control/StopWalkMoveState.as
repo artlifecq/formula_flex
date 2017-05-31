@@ -21,7 +21,11 @@ package com.rpgGame.app.state.role.control
 		{
 			super(RoleStateType.CONTROL_STOP_WALK_MOVE);
 		}
-
+		override public function enter():void
+		{
+			super.enter();
+			trace("StopWalkMoveState");
+		}
 		override public function execute() : void
 		{
 			super.execute();

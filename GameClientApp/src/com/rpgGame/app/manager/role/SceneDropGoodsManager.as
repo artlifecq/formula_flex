@@ -1,5 +1,6 @@
 package com.rpgGame.app.manager.role
 {
+	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
@@ -12,7 +13,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.role.SceneDropGoodsData;
 	import com.rpgGame.coreData.role.SceneDropGoodsItem;
 	import com.rpgGame.coreData.type.SceneCharType;
-
+	
 	import org.client.mainCore.manager.EventManager;
 
 	/**
@@ -44,6 +45,7 @@ package com.rpgGame.app.manager.role
 			{
 				SceneSender.requestPickUpGoodsInfo(dropGoodsData.goodsDatas.dropGoodsId);
 //				dropGoodsDatasInit(dropGoodsData);
+				TrusteeshipManager.getInstance().autoPickCtrl.SetPickingState(false);
 			}
 			else
 			{

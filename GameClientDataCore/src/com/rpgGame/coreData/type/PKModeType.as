@@ -20,10 +20,10 @@ package com.rpgGame.coreData.type
         
         /** 未知PK模式(默认) */
         public static const UNKNOWN:int = 0;
-		/** 国家模式 */		
-		public static const COUNTRY:int = 2;
-		/** 盟国模式 */
-		public static const ALLIANCE:int = 3;
+//		/** 国家模式 */		
+//		public static const COUNTRY:int = 2;
+//		/** 盟国模式 */
+//		public static const ALLIANCE:int = 3;
 		/** 家族模式 */
 		public static const FAMILY:int = 7;
 		/** 跨服模式 */

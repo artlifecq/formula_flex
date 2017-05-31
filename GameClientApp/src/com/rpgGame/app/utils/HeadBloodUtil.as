@@ -6,8 +6,10 @@ package com.rpgGame.app.utils
 	import com.rpgGame.core.utils.PKModeUtil;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.country.CountryNameCfgData;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
+	import com.rpgGame.coreData.role.RoleType;
 	import com.rpgGame.coreData.type.HeadBloodStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
@@ -37,7 +39,7 @@ package com.rpgGame.app.utils
 				case HeadBloodStateType.MAIN_CHAR:
 					color = StaticValue.COLOR_CODE_14;
 					break;
-				case HeadBloodStateType.MONSTER:
+				case HeadBloodStateType.ENEMY:
 					color = StaticValue.COLOR_CODE_13;
 					break;
 				case HeadBloodStateType.TEAM:
@@ -65,30 +67,62 @@ package com.rpgGame.app.utils
 			switch (state)
 			{
 				case HeadBloodStateType.MAIN_CHAR:
-					return "ui/mainui/head/line/xue_lv.png";
-					break;
+					return "ui/mainui/head/juese/juesexuetiao.png";
+				case HeadBloodStateType.ENEMY:
+					return "ui/mainui/head/juese/juesexuetiao3.png";
+				case HeadBloodStateType.TEAM:
+				case HeadBloodStateType.NPC:
+					return "ui/mainui/head/juese/juesexuetiao2.png";
 			}
-			return "ui/mainui/head/line/xue.png";
+			return "ui/mainui/head/juese/juesexuetiao.png";
+		}
+		public static function getHPIconStyleName(state:uint):String
+		{
+			switch (state)
+			{
+				case HeadBloodStateType.MAIN_CHAR:
+					return "ui/mainui/head/juese/q_lv.png";
+				case HeadBloodStateType.ENEMY:
+					return "ui/mainui/head/juese/q_hong.png";
+				case HeadBloodStateType.TEAM:
+				case HeadBloodStateType.NPC:
+					return "ui/mainui/head/juese/q_lan.png";
+			}
+			return "ui/mainui/head/juese/q_lv.png";
 		}
 		
-		/**
-		 * 得到模型血条颜色
-		 * @param _role
-		 * @return
-		 *
-		 */
-		public static function getRoleBloodState(_role : SceneRole) : int
+
+		public static function getRoleBloodBarState(_role : SceneRole):int
 		{
-			if (_role == null)
-				return HeadBloodStateType.MONSTER;
-
-			if (_role.isMainChar)
+			if (_role.isMainChar) 
+			{
 				return HeadBloodStateType.MAIN_CHAR;
-
-			return HeadBloodStateType.MONSTER;
+			}
+			else if (SceneCharType.MONSTER==_role.type ) 
+			{
+				if (FightManager.getFightRoleState(_role)==FightManager.FIGHT_ROLE_STATE_CAN_NOT_FIGHT) 
+				{
+					return HeadBloodStateType.TEAM;
+				}
+				return HeadBloodStateType.ENEMY;
+			}
+			else if (SceneCharType.NPC==_role.type) 
+			{
+				return HeadBloodStateType.NPC;
+			}
+			else if (SceneCharType.PLAYER==_role.type) 
+			{
+				if (FightManager.getFightRoleState(_role)!=FightManager.FIGHT_ROLE_STATE_CAN_NOT_FIGHT) 
+				{
+					return HeadBloodStateType.ENEMY;
+				}
+				else
+				{
+					return HeadBloodStateType.TEAM;
+				}
+			}
+			return HeadBloodStateType.TEAM;
 		}
-
-
 
 		public static function getRoleNameColor(_role : SceneRole) : uint
 		{
@@ -125,6 +159,10 @@ package com.rpgGame.app.utils
 					return StaticValue.COLOR_CODE_13;
 				}
 			}
+			if (SceneCharType.DROP_GOODS==_role.type) 
+			{
+				return ItemConfig.getItemQualityColor(int(_role.data.qitem.q_id));
+			}
 			if (_role.type != SceneCharType.PLAYER)
 				return StaticValue.COLOR_CODE_1;
 
@@ -149,9 +187,13 @@ package com.rpgGame.app.utils
 				if (monster)
 					return _role.name + "[" + monster.totalStat.level + "级]";
 			}
+			if (_role.type == SceneCharType.COLLECT)
+			{
+					return _role.name;
+			}
 			if (_role.type != SceneCharType.PLAYER)
 				return _role.name;
-
+			
 			var heroData : HeroData = _role.data as HeroData;
 			if (heroData == null)
 				return _role.name;

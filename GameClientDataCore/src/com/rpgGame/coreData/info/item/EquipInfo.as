@@ -151,7 +151,10 @@ package com.rpgGame.coreData.info.item
 		{
 			return ItemConfig.getItemType(cfgId);
 		}
-		
+		public function get equipPos():int
+		{
+			return ItemConfig.getQItemByID(cfgId).q_kind;
+		}
 		override public function clone():ClientItemInfo
 		{
 			var equipInfo : EquipInfo = new EquipInfo();

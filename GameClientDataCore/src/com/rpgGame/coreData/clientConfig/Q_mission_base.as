@@ -28,15 +28,15 @@ package com.rpgGame.coreData.clientConfig
 		public var q_mission_mainType:int;
 		 /**  自动接取的下一个任务ID 0是没有 */
 		public var q_next_task:int;
-		 /**  任务接取条件1??玩家等级（填0 表示没有等级条件限制） */
+		 /**  任务接取条件1——玩家等级（填0 表示没有等级条件限制） */
 		public var q_needLevel:int;
-		 /**  任务接取条件2??前置任务id（前置任务完成时才可接取该任务，填0表示没有前置任务） */
+		 /**  任务接取条件2——前置任务id（前置任务完成时才可接取该任务，填0表示没有前置任务） */
 		public var q_needMission:String;
 		 /**  任务子类型（1为对话类型，2杀怪数量，3杀怪获得道具，4采集获取道具,5使用道具完成任务,6挑战副本）2/4/6类型任务均需自动完成及接取 */
 		public var q_mission_type:int;
 		 /**  任务完成条件,数值类（该字段未用到） */
 		public var q_finish_information_int:int;
-		 /**  任务完成条件,字符串类型(道具ID或者怪物ID,数量)(1001,1;1002,1)（副本ID，次数）对话填npcid */
+		 /**  任务完成条件,字符串类型(道具ID或者怪物ID,数量)(1001,1;1002,1)（副本ID，次数）对话填npc档案ID */
 		public var q_finish_information_str:String;
 		 /**  完成任务npc 没有npc为0 */
 		public var q_finish_npc:int;
@@ -92,9 +92,9 @@ package com.rpgGame.coreData.clientConfig
 		public var q_accept_more:int;
 		 /**  是否显示任务奖励(1是 0否) */
 		public var q_is_show_rewards:int;
-		 /**  是否自动完成 */
+		 /**  是否自动完成(0 手动   1 自动) */
 		public var q_self_motion:int;
-		 /**  是否自动接取下一个（后端自动接取） */
+		 /**  是否自动接取下一个（后端自动接取）(0 否  1 是) */
 		public var q_auto_next:int;
 		 /**  是否自动跑（0自动继续任务，1跑到指定位置打怪） */
 		public var q_auto_run:int;

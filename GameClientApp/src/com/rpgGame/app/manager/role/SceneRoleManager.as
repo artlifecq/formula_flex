@@ -506,7 +506,8 @@ package com.rpgGame.app.manager.role
 			role.data = data;
 			role.name = data.name;
 			role.headFace = HeadFace.create(role);
-			
+			//role.headFace.show();
+			//role.headFace.showHead();
 			data.avatarInfo.setBodyResID(data.avatarRes, null);
 			var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(data.avatarRes);
 			if (avatarResConfig)

@@ -71,14 +71,26 @@ package com.game.engine3D.display
 			var unit:RenderUnit3D=sr3D.addRenderUnitWith(data, 0, onPlayComplete,addEft);
 			function addEft(render:RenderUnit3D):void
 			{
-				unit.stop();
-				unit.stopRender();
-				sr3D.stop();
-				sr3D.stopEffect();
+				if(render)
+				{
+					render.stop();
+					render.stopRender();
+					sr3D.stop();
+					sr3D.stopEffect();
+					
+				}
 				if(addComplete!=null)
 				{
 					addComplete(render);
 				}
+				
+			}
+			if(unit)
+			{
+				unit.stop();
+				unit.stopRender();
+				sr3D.stop();
+				sr3D.stopEffect();
 				
 			}
 			addChild3D(sr3D);

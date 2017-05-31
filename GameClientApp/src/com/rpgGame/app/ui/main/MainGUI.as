@@ -5,6 +5,7 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.ui.main.activityBar.ActivityBar;
 	import com.rpgGame.app.ui.main.buff.BuffBar;
+	import com.rpgGame.app.ui.main.buttons.MainButtonBases;
 	import com.rpgGame.app.ui.main.chat.ChatBar;
 	import com.rpgGame.app.ui.main.chat.SystemMsgBar;
 	import com.rpgGame.app.ui.main.dungeon.DungeonTrackerBar;
@@ -21,10 +22,8 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.app.ui.main.team.TeamLeftFixedBar;
 	import com.rpgGame.app.ui.main.top.ExpBar;
 	import com.rpgGame.app.ui.main.top.TopBar;
-	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppDispather;
 	import com.rpgGame.core.app.AppEvent;
-	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.SceneInteractiveEvent;
@@ -34,7 +33,6 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.info.MapDataManager;
-	import com.rpgGame.coreData.info.map.EnumMapType;
 	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.coreData.lang.LangYuMaQiShou;
@@ -46,6 +44,8 @@ package com.rpgGame.app.ui.main
 	
 	import app.message.MonsterDataProto.MonsterType;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.UIAsset;
 	
 	import gs.TweenLite;
@@ -55,7 +55,6 @@ package com.rpgGame.app.ui.main
 	import starling.core.Starling;
 	import starling.display.Sprite;
 	import starling.display.Stage;
-	import away3d.events.Event;
 	
 	import utils.TimerServer;
 	
@@ -157,7 +156,7 @@ package com.rpgGame.app.ui.main
 			nativeStage = Starling.current.nativeStage;
 			nativeStage.addEventListener(Event.RESIZE, onStageResize);
 			starlingStage = Starling.current.stage;
-			
+			MainButtonBases.init();
 			initBar();
 			//isShowEventTrackPanel();
 			registerEvent();
@@ -308,10 +307,11 @@ package com.rpgGame.app.ui.main
 			this.removeChild(_eliteHead);
 			this.removeChild(_normalHead);
 			selectedRole=role;
-			if (role==MainRoleManager.actor) {
-				// 选中自己是不显示
-				return;
-			}
+			//可以选中自己
+//            if (role==MainRoleManager.actor) {
+//                // 选中自己是不显示
+//                return;
+//            }
 			if(!role){
 				return;
 			}
