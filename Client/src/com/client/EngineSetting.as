@@ -53,7 +53,7 @@ package com.client
 			Away3D.USE_TEXTURES_BPG_FORMAT = ClientGlobal.useBpgFormat;
 			if (ClientGlobal.uiCompressed)
 			{
-				GuiTheme.defaultTextureFormat = TextureFormatEnum.BPG;
+//				GuiTheme.defaultTextureFormat = TextureFormatEnum.BPG;
 			}
 			Away3D.PLANAR_STENCIL_AVAILABLE = true;
 //			Away3D.USE_ATF_FOR_TEXTURES = true;
