@@ -30,6 +30,9 @@ package com.rpgGame.coreData.type
 		public static const SPELL_COMBO : uint = 0x00000100;
 		
 		
+		
+		public static const SPELL_ZHANHUN:uint= 0x00000200;
+		
 		/**
 		 *伤害类型 
 		 */

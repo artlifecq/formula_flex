@@ -42,6 +42,8 @@ package
 	
 	import gs.TweenLite;
 	
+	import utils.StringUtil;
+	
 	/**
 	 *
 	 * 程序文档类
@@ -49,7 +51,7 @@ package
 	 * 创建时间：2015-6-2 上午10:15:32
 	 *
 	 */
-	[SWF(width = "1600", height = "1000", backgroundColor = "0x000000", frameRate = "60", quality = "LOW")]
+	[SWF( backgroundColor = "0x000000", frameRate = "60", quality = "LOW")]
 	public class Client extends Sprite
 	{
 		public var versionMap : Object = null;
@@ -128,7 +130,7 @@ package
 			GameLog.enableTrace = !ClientConfig.isRelease;
 //			ErrorReporter.init();
 			//			StarlingLayerManager.setup(root.stage, root.stage, stage3DLayerSetupComplete, 1, 10, CameraController.forceStopPanning);
-			Stage3DLayerManager.setup(this.stage, this.stage, stage3DLayerSetupComplete,null,null, 1, 10, null);
+			//Stage3DLayerManager.setup(this.stage, this.stage, stage3DLayerSetupComplete,null,null, 1, 10, null);
 			
 			try
 			{
@@ -273,7 +275,9 @@ package
 		
 		private function initProcess() : void
 		{
-			ProcessStateMachine.getInstance().pushProcess(new SelectDeveloper());
+            if (null == ClientGlobal.loginIP || 0 == StringUtil.trim(ClientGlobal.loginIP).length) {
+                ProcessStateMachine.getInstance().pushProcess(new SelectDeveloper());
+            }
 			ProcessStateMachine.getInstance().pushProcess(new LoginInput());
 			ProcessStateMachine.getInstance().pushProcess(new LoadMaskWorld());
 			ProcessStateMachine.getInstance().pushProcess(new ServerConnect());

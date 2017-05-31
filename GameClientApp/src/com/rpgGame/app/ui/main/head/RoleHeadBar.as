@@ -1,6 +1,7 @@
 package com.rpgGame.app.ui.main.head
 {
 	import com.rpgGame.app.manager.Mgr;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.LookSender;
@@ -74,6 +75,7 @@ package com.rpgGame.app.ui.main.head
 			this.alpha=0.5;
 			tween=	TweenLite.to(this, 0.5, {x:283,y:42,alpha:1, ease:Bounce.easeOut,onComplete:onTween});
 			initEvent();
+			_skin.grp_more.visible=_roleData.id!=MainRoleManager.actorInfo.id;
 		}
 		
 		private function updateBuff():void

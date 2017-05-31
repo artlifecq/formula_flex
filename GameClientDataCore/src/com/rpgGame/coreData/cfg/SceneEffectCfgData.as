@@ -2,7 +2,7 @@ package com.rpgGame.coreData.cfg
 {
 	import com.game.engine3D.vo.map.ClientMapAreaData;
 	import com.rpgGame.coreData.clientConfig.ClientSceneEffect;
-	import com.rpgGame.coreData.clientConfig.ClientTrigger;
+	import com.rpgGame.app.manager.ClientTrigger;
 	import com.rpgGame.coreData.clientConfig.Q_area;
 	import com.rpgGame.coreData.clientConfig.Q_map_effect;
 	import com.rpgGame.coreData.clientConfig.Q_map_trigger;

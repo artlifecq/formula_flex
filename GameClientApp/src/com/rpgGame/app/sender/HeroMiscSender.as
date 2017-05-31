@@ -3,6 +3,7 @@ package com.rpgGame.app.sender
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.netData.client.bean.CustomTaginfo;
 	import com.rpgGame.netData.client.message.ReqClientCustomTagSetMessage;
+	import com.rpgGame.netData.player.message.ReqChangePKStateMessage;
 	
 	import app.cmd.HeroMiscModuleMessages;
 	
@@ -42,9 +43,9 @@ package com.rpgGame.app.sender
 		
 		public static function reqChangePKMode(pkMode:uint):void
 		{
-			_bytes.clear();
-			_bytes.writeVarint32(pkMode);
-			SocketConnection_protoBuffer.send(HeroMiscModuleMessages.C2S_CHANGE_PK_MODE,_bytes);
+			var msg:ReqChangePKStateMessage=new ReqChangePKStateMessage();
+			msg.pkState=pkMode;
+			SocketConnection.send(msg);
 		}
 		
 		public static function autoChgPkMode():void

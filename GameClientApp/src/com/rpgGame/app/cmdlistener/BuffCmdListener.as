@@ -2,9 +2,11 @@ package com.rpgGame.app.cmdlistener
 {
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.BuffCdManager;
+	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.coreData.cfg.LostSkillData;
 	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.netData.buff.message.ResAddBuffMessage;
 	import com.rpgGame.netData.buff.message.ResBuffInfoMessage;
@@ -93,6 +95,10 @@ package com.rpgGame.app.cmdlistener
 				buffData.srcRole = srcObj;
 				tarObj.buffSet.addBuff(buffData);
 				BuffCdManager.playBuffCd(buffData);
+				if (LostSkillData.isLostSkill(buffData.buffData.q_buff_id)) 
+				{
+					FightFaceHelper.showBuffNameEffect(buffData.buffData,tarObj);
+				}
 				
 				GameLog.addShow("*************************增加一条buff，buffID为： \t" + msg.buff.buffId.ToGID() + "\t当前时间：\t" + getTimer());
 			}
