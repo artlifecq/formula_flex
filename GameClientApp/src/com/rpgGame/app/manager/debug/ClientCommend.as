@@ -11,6 +11,7 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.role.SceneRoleManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
 	
@@ -94,6 +95,10 @@ package   com.rpgGame.app.manager.debug
 				skill.skillChildLv=1;
 				skill.skillExp=2;
 				UIPopManager.showAlonePopUI(SkillAddPop,skill);
+			});
+			commandList.put( ".jz", function (...arg):void
+			{
+				SceneRoleManager.getInstance().onUpdateNeedle(MainRoleManager.actor,arg[0],arg[1]);
 			});
 		}
 		
