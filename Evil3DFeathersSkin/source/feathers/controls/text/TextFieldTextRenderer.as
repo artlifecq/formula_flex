@@ -39,6 +39,7 @@ package feathers.controls.text
 	import starling.display.Image;
 	import starling.rendering.Painter;
 	import starling.textures.ConcreteTexture;
+	import starling.textures.DynamicTextTextureManager;
 	import starling.textures.IStarlingTexture;
 	import starling.textures.TextureFactory;
 	import starling.utils.MathUtil;
@@ -2045,7 +2046,7 @@ package feathers.controls.text
 						var  filterId:String = Fontter.getFilterId(_nativeFilters);
 						_textureKey = _textFormat.font+"_"+_textFormat.size+"_"+_textFormat.color+"_"+filterId+"_"+_text;
 						if (_enableTextBatch) {
-//							newTexture = DynamicTextTextureManager.instance.createSubTexture(_textureKey, bitmapData, false);
+							newTexture = DynamicTextTextureManager.instance.createSubTexture(_textureKey, bitmapData, false);
 						}
 						if (newTexture == null) {
 							newTexture = TextureFactory.empty(bitmapData.width, bitmapData.height, false, false);
@@ -2096,7 +2097,7 @@ package feathers.controls.text
 							if(existingTexture != null)
 							{
 								if (_enableTextBatch) {
-//									DynamicTextTextureManager.instance.uploadSubTexture(_textureKey, bitmapData);
+									DynamicTextTextureManager.instance.uploadSubTexture(_textureKey, bitmapData);
 								} else {
 									//this is faster, if we haven't resized the bitmapdata
 									existingTexture.root.uploadBitmapData(bitmapData);
