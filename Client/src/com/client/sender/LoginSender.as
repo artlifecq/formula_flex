@@ -58,9 +58,9 @@ package com.client.sender
 		{
 			var msg:ReqLoginMessage = new ReqLoginMessage();
 			msg.name = ClientGlobal.loginName;
-			msg.serverId = 1;
 			msg.password = ClientGlobal.loginKey;
-			msg.agent = "37";
+            msg.serverId = ClientGlobal.loginAreaId;
+			msg.agent = ClientGlobal.agent;
 			msg.win_width = ClientGlobal.stage.width;
 			msg.win_high = ClientGlobal.stage.height;
 			SocketConnection.send(msg);

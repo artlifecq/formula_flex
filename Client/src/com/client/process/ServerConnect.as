@@ -275,14 +275,7 @@ package com.client.process
 			{
 				sendTGW(ClientGlobal.loginIP, ClientGlobal.loginPort);
 			}
-			if (!ClientGlobal.loginKey)
-			{
-				LoginSender.SendLoginMessage();
-			}
-			else
-			{
-				
-			}
+            LoginSender.SendLoginMessage();
 			GameLog.addShow("连接socket成功,发送登录消息", ClientGlobal.loginName, ClientGlobal.loginKey);
 		}
 
@@ -293,8 +286,6 @@ package com.client.process
 		private function sendReLogin() : void
 		{
 			LoginCmdListener.onLoginSuccessHandler = onLoginSuccessHandler;
-			var auth : String = ClientGlobal.auth;
-			var sign : String = ClientGlobal.sign;
 		}
 
 		/**

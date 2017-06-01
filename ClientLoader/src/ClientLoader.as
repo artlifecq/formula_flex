@@ -39,23 +39,43 @@ package
 		private var _urlParmar : Object = null;
 		private var _clientPathUrl : String = CLIENTSWF_PATH;
 		private var _versionPath : String = "version#/version.swf";
-		/** 资源根目录*/
-		private var _baseDir : String = "../";
 
 		private var _decodeFun : Function;
 		private var _versionMap : Object = null;
+        
+        private var _useVersion : Boolean = false;
+        private var _isJson : Boolean = false;
+        private var _useBpgFormat : Boolean = true;
+        
+        // web params
+        /** 资源根目录*/
+        private var _baseDir : String = "../";
+        /** 客服端版本号*/
 		private var _clientVersion : String = "";
 		/** loader版本号*/
 		private var _loaderVersion : String = "";
+        /** 是否是正式版*/
 		private var _isRelease : Boolean = true;
-		private var _useVersion : Boolean = false;
-		private var _useBpgFormat : Boolean = true;
-		private var _isJson : Boolean = true;
+        /** 是否稳定版本*/
+        private var _isStable : Boolean = true;
+        /** 是否是版署版*/
+        private var _isVersionDepartment : Boolean = false;
+        /** 服务器ip*/
 		private var _server : String = "";
+        /** 服务器port*/
 		private var _port : uint = 0;
+        /** 服务器区服*/
+        private var _areaId : uint = 1;
+        /** 服务器policyPort*/
 		private var _policyPort : uint = 0;
-		/** 是否稳定版本*/
-		private var _isStable : Boolean = false;
+        /** 平台代理*/
+        private var _agent : String = "";
+        /** 登录用户名*/
+        private var _loginName : String = "";
+        /** 登录用户Key*/
+        private var _loginKey : String = "";
+        /** 登录时间(s)*/
+        private var _loginTime : uint = 0;
 		/**
 		 * 微端桥接
 		 */
@@ -117,13 +137,19 @@ package
 			{
 				_urlParmar = ExternalInterface.call("config");
 				_baseDir = _urlParmar["baseDir"] || "../";
-				_clientVersion = _urlParmar["client_version"] || "";
-				_loaderVersion = _urlParmar["loader_version"] || "";
+				_clientVersion = _urlParmar["clientVersion"] || "";
+				_loaderVersion = _urlParmar["loaderVersion"] || "";
 				_isRelease = _urlParmar["isDebug"] != "true";
 				_isStable = _urlParmar["isStable"] == "true";
-				_server = _urlParmar["server"];
-				_port = uint(_urlParmar["port"]);
-				_policyPort = uint(_urlParmar["policyPort"]);
+                _isVersionDepartment = _urlParmar["isVersionDepartment"] == "true";
+				_server = _urlParmar["serverIp"];
+				_port = uint(_urlParmar["serverPort"]);
+                _areaId = uint(_urlParmar["serverAreaId"]);
+				_policyPort = uint(_urlParmar["serverPolicyPort"]);
+                _loginName = _urlParmar["auth"];
+                _loginKey = _urlParmar["sign"];
+                _loginTime = uint(_urlParmar["time"]);
+                _agent = _urlParmar["agent"];
 			}
 
 			if (_loaderVersion)
@@ -158,7 +184,7 @@ package
 			stage.focus = stage;
 			IME.enabled = false;
 			//
-			this.stage.addEventListener(MouseEvent.RIGHT_CLICK, onRightMosClick);
+			//this.stage.addEventListener(MouseEvent.RIGHT_CLICK, onRightMosClick);
 		}
 
 		private function onRightMosClick(e : MouseEvent) : void
@@ -214,9 +240,6 @@ package
 			bytes.uncompress();
 			bytes.endian = Endian.LITTLE_ENDIAN;
 			_versionMap = readVersionsFromBuf(bytes);
-			//
-			trace("\r版本文件加载完成...");
-			//
 			startLoadClient();
 		}
 		
@@ -239,7 +262,6 @@ package
 					bytes.clear();
 					bytes = null;
 				}
-				trace("客户端文件加载完成...,解密开始..." + bytes.length);
 			}
 		}
 
@@ -249,7 +271,6 @@ package
 			loadingStream.addEventListener(Event.COMPLETE, onClientLoadCmp);
 			loadingStream.addEventListener(IOErrorEvent.IO_ERROR, onClientIoError);
 			loadingStream.addEventListener(ProgressEvent.PROGRESS, onClientLoadingPrg);
-			//
 			var clientPath : String = _decodeFun != null ? _clientPathUrl.replace(".swf", ".ml") : _clientPathUrl;
 			var url : String = "";
 			if (_loaderVersion)
@@ -261,11 +282,7 @@ package
 			{
 				url = clientPath + "?" + Math.random().toFixed(5);
 			}
-			trace(clientPath);
-
 			loadingStream.load(new URLRequest(url));
-			//
-			trace("加载客户端swf:" + url);
 		}
 
 		private function onFirstLoadingPrg(event : ProgressEvent) : void
@@ -304,17 +321,12 @@ package
 			loadingStream.readBytes(bytes, 0, loadingStream.bytesAvailable);
 			if (_decodeFun != null)
 				bytes = _decodeFun(bytes);
-			//
-			trace("客户端文件加载完成...,解密开始..." + bytes.length);
-			//
 			var loader : Loader = new Loader();
 			loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onClientLoaded);
 			loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, onIoError);
-			//
 			var context : LoaderContext = new LoaderContext();
 			context.allowCodeImport = true;
 			loader.loadBytes(bytes, context);
-			//
 			loadingStream.close();
 			loadingStream = null;
 		}
@@ -326,18 +338,27 @@ package
 			loaderInfo.removeEventListener(IOErrorEvent.IO_ERROR, onIoError);
 			//
 			var client : DisplayObject = loaderInfo.content;
+            client["useVersion"] = _useVersion;
+            client["versionMap"] = _versionMap;
+            client["urlParmar"] = _urlParmar;
+            client["useBpgFormat"] = _useBpgFormat;
+            client["GlobalBridge"] = GlobalBridge;
+            
+            // web params
 			client["baseDir"] = _baseDir;
 			client["isRelease"] = _isRelease;
 			client["isStable"] = _isStable;
-			client["useVersion"] = _useVersion;
-			client["versionMap"] = _versionMap;
-			client["urlParmar"] = _urlParmar;
+            client["isBanShu"] = _isVersionDepartment;
 			client["server"] = _server;
 			client["port"] = _port;
+            client["areaId"] = _areaId;
 			client["policyPort"] = _policyPort;
 			client["version"] = _clientVersion;
-			client["useBpgFormat"] = _useBpgFormat;
-			client["GlobalBridge"] = GlobalBridge;
+            client["arent"] = _agent;
+            client["loginName"] = _loginName;
+            client["loginKey"] = _loginKey;
+            client["loginTime"] = _loginTime;
+            
 			this.stage.addChild(client);
 			//
 			loaderInfo.loader.unload();
@@ -348,8 +369,6 @@ package
 				_loadingView.dispose();
 				_loadingView = null;
 			}
-			//
-			trace("客户端swf加载完成...");
 		}
 
 		private function readString(buf : ByteArray) : String

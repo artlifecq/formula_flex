@@ -8,7 +8,6 @@ package
 	import com.client.process.LoadDll;
 	import com.client.process.LoadEmbedFonts;
 	import com.client.process.LoadMaskWorld;
-	import com.client.process.LoadMouseAssets;
 	import com.client.process.LoadPublicUIAssets;
 	import com.client.process.LoginInput;
 	import com.client.process.ProcessState;
@@ -66,6 +65,12 @@ package
 		public var server : String = "";
 		public var port : uint = 0;
 		public var policyPort : uint = 0;
+        public var areaId : uint = 1;
+        public var agent : String = "";
+        public var loginName : String = "";
+        public var loginKey : String = "";
+        public var loginTime : uint = 0;
+        
 		/**
 		 * 微端桥接
 		 */
@@ -95,6 +100,11 @@ package
 			ClientGlobal.loginIP = server;
 			ClientGlobal.loginPort = port;
 			ClientGlobal.policyPort = policyPort > 0 ? policyPort : ClientGlobal.policyPort;
+            ClientGlobal.loginAreaId = areaId;
+            ClientGlobal.loginName = loginName;
+            ClientGlobal.loginKey = loginKey;
+            ClientGlobal.loginTime = loginTime;
+            ClientGlobal.agent = agent;
 			ClientGlobal.isRelease = isRelease;
 			ClientGlobal.useBpgFormat = useBpgFormat;
 			ClientGlobal.useVersion = useVersion;
@@ -108,7 +118,7 @@ package
 			GameLogView.init(this.stage, [189, 190, 191]);//-_	189  .>	190  /?	191
 			AlertPanel.initStage(this.stage);
 			//
-			getWebParams();
+			//getWebParams();
 			GameLog.addShow("版本号：" + version);
 			GameLog.addShow("客户端版本：" + versionInfo);
 			GameLog.addShow("Player Version:" + (Capabilities.isDebugger ? "Debug" : "Release") + " " + Capabilities.version);
@@ -303,9 +313,9 @@ package
 				GameLog.addShow("++++++++++++++++++++");
 				ClientGlobal.loginName = ClientGlobal.urlParmar["auth"];
 				ClientGlobal.loginKey = ClientGlobal.urlParmar["sign"];
-				ClientGlobal.useWorker = ClientGlobal.urlParmar["useWorker"] == "true";
+				//ClientGlobal.useWorker = ClientGlobal.urlParmar["useWorker"] == "true";
 				ClientGlobal.baseDir = ClientGlobal.urlParmar["baseDir"] || "../";
-				ClientGlobal.debugConfig = ClientGlobal.urlParmar["debugConfig"];
+				//ClientGlobal.debugConfig = ClientGlobal.urlParmar["debugConfig"];
 			}
 		}
 		
