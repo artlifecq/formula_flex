@@ -137,7 +137,7 @@ package com.rpgGame.app.cmdlistener.engine
                 NetDebug.LOG("MapDown");
             }
 			TaskAutoManager.getInstance().stopAll();///////////////点击地面终止任务和挂机
-			EventManager.dispatchEvent(TaskEvent.AUTO_TASK_STOP);
+			
 			TrusteeshipManager.getInstance().isLeftDown=true;
 			this._isLeftDown = true;
 			if (CameraController.lockedOnPlayerController.ispanning)
@@ -211,7 +211,6 @@ package com.rpgGame.app.cmdlistener.engine
                         (currTarget as SceneRole).position + "] isDoubleClick:" + isDoubleClick);
                     }
 					TaskAutoManager.getInstance().stopAll();///////////////点击场景元素终止挂机
-					EventManager.dispatchEvent(TaskEvent.AUTO_TASK_STOP);
                     var role:SceneRole = currTarget as SceneRole;
 					var sceneRole : SceneRole = currTarget as SceneRole;
 					if (sceneRole.type == SceneCharType.TRANS) //传送门

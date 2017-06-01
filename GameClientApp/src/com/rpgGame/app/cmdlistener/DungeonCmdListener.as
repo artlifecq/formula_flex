@@ -3,9 +3,12 @@ package com.rpgGame.app.cmdlistener
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.ClientTriggerManager;
 	import com.rpgGame.app.manager.DungeonManager;
+	import com.rpgGame.app.manager.TrusteeshipManager;
+	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.DungeonEvent;
+	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.netData.lunjian.message.SCLunJianPanelInfosMessage;
 	import com.rpgGame.netData.lunjian.message.SCLunJianResultMessage;
 	import com.rpgGame.netData.lunjian.message.SCLunJianTimeMessage;
@@ -72,23 +75,26 @@ package com.rpgGame.app.cmdlistener
 			EventManager.dispatchEvent(DungeonEvent.UPDATE_LUNJIAN_PANEL,msg.lunJianInfos);
 		}
 		private function onSCClientTriggerValiedMessage(msg:SCClientTriggerValiedMessage):void
-		{//L.l("onSCClientTriggerValiedMessage:");
+		{L.l("服务器#触发:"+msg.triggerId);
 			ClientTriggerManager.serverTrigger(msg.triggerId);
 		}
 		private function onSCEnterZoneMessage(msg:SCEnterZoneMessage):void
-		{//L.l("SCEnterZoneMessage");
+		{L.l("服务器#进入");
 			DungeonManager.curryZoneId=msg.zoneId;
 			ClientTriggerManager.clearTigerByZone(msg.zoneId);
 			EventManager.dispatchEvent(DungeonEvent.ENTER_ZONE);
 			
 		}
 		private function onSCOutZoneMessage(msg:SCOutZoneMessage):void
-		{//L.l("SCEnterZoneMessage");
+		{L.l("服务器#退出");
+			TrusteeshipManager.getInstance().findDist=0;
+			TrusteeshipManager.getInstance().stopAll();
+			EventManager.dispatchEvent(TaskEvent.AUTO_WALK_STOP);
 			EventManager.dispatchEvent(DungeonEvent.OUT_ZONE);
 		}
 		
 		private function onSCZoneStageChangeMessage(msg:SCZoneStageChangeMessage):void
-		{//L.l("SCZoneStageChangeMessage:"+msg.zoneModelId+":"+msg.stage+":"+msg.wave);
+		{L.l("服务器#阶段变化:"+msg.zoneModelId+":"+msg.stage+":"+msg.wave);
 			DungeonManager.curryZoneId=msg.zoneModelId;
 			DungeonManager.zoneStage=msg.stage;
 			DungeonManager.zoneWave=msg.wave;
@@ -96,27 +102,27 @@ package com.rpgGame.app.cmdlistener
 			
 		}
 		private function onSCRemainTimeMessage(msg:SCRemainTimeMessage):void
-		{//L.l("SCRemainTimeMessage");
+		{L.l("服务器#时间:"+msg.remainTime);
 			DungeonManager.remainTime=msg.remainTime;
 			EventManager.dispatchEvent(DungeonEvent.ZONE_REMAIN_TIME);
 		}
 		private function onSCKillInfosMessage(msg:SCKillInfosMessage):void
-		{//L.l("SCKillInfosMessage:");
+		{L.l("服务器#击杀列表:"+msg.infos.length);
 			DungeonManager.killInfos=msg.infos;
 			EventManager.dispatchEvent(DungeonEvent.ZONE_SKILL_INFOS);
 		}
 		private function onSCKillInfoMessage(msg:SCKillInfoMessage):void
-		{//L.l("SCKillInfoMessage:"+msg.info.monsterModelId);
+		{L.l("服务器#击杀单个:"+msg.info.monsterModelId);
 			DungeonManager.changeKillInfos(msg.info);
 			EventManager.dispatchEvent(DungeonEvent.ZONE_SKILL_INFO);
 		}
 		private function onSCCurTriggerMessage(msg:SCCurTriggerMessage):void
-		{//L.l("SCCurTriggerMessage:");
+		{L.l("服务器#初始化触发:"+msg.curTriggerIds.length);
 			ClientTriggerManager.triggerInit(msg.curTriggerIds);
 			EventManager.dispatchEvent(DungeonEvent.ZONE_CUR_TRIGGER);
 		}
 		private function onSCMultiZoneResultMessage(msg:SCMultiZoneResultMessage):void
-		{//L.l("SCMultiZoneResultMessage");
+		{L.l("服务器#准备退出:");
 			EventManager.dispatchEvent(DungeonEvent.ZONE_OUT_RESULT);
 		}
 		

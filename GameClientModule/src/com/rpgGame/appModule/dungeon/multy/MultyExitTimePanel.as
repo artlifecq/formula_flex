@@ -50,7 +50,6 @@ package com.rpgGame.appModule.dungeon.multy
 			_skin.numTime.label=remainTime.toString();
 			if(remainTime==0){
 				hide();
-				DungeonSender.zoneOutToGame();
 				TimerServer.remove(updateTime);
 			}
 		}

@@ -210,8 +210,8 @@ package com.rpgGame.app.ui.alert
 		private static function layoutAlert(gameAlert:GameAlert):void
 		{
 			if (gameAlert.cboxTip)
-			{gameAlert.cboxTip.getChildAt(2);
-				gameAlert.cboxTip.x=(330-26-gameAlert.cboxTip.getChildAt(2).width)/2;
+			{//gameAlert.cboxTip.getChildAt(2);
+				//gameAlert.cboxTip.x=(330-26-gameAlert.cboxTip.getChildAt(2).width)/2;
 			}
 			if(gameAlert.lbTip){
 				gameAlert.lbTip.y=50+(125-gameAlert.lbTip.textHeight)/2;

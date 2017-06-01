@@ -145,13 +145,13 @@ package com.rpgGame.app.manager.role
 			TrusteeshipManager.getInstance().stopAll();
 			var role : SceneRole = MainRoleManager.actor;
 			var position : Vector3D = new Vector3D(posx, posy, 0);
-			EventManager.dispatchEvent(TaskEvent.AUTO_TASK_START);
+			EventManager.dispatchEvent(TaskEvent.AUTO_WALK_START);
 			walkToScenePos(role, targetSceneId, position,function(ref :WalkMoveStateReference):void{
 				if(onArrive!=null)
 				{
 					onArrive(ref.data);
 				}
-				EventManager.dispatchEvent(TaskEvent.AUTO_TASK_STOP);
+				EventManager.dispatchEvent(TaskEvent.AUTO_WALK_STOP);
 			}, spacing, data,noWalk);
 		}
 
@@ -284,6 +284,7 @@ package com.rpgGame.app.manager.role
 		 */
 		public static function clearAutoFindPath() : void
 		{
+			EventManager.dispatchEvent(TaskEvent.AUTO_WALK_STOP);
 			TweenLite.killDelayedCallsTo(onNextScene);
 			_scMoveCallBack = null;
 			_isAutoFinding = false;

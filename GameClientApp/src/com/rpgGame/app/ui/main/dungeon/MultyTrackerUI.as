@@ -3,9 +3,11 @@ package com.rpgGame.app.ui.main.dungeon
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.DungeonManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
+	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.sender.DungeonSender;
+	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
@@ -27,10 +29,15 @@ package com.rpgGame.app.ui.main.dungeon
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.clientConfig.Q_zone;
 	import com.rpgGame.coreData.clientConfig.Q_zone_multy;
+	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
+	import com.rpgGame.coreData.info.alert.AlertSetInfo;
+	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.coreData.type.TaskType;
 	import com.rpgGame.netData.task.bean.TaskSubRateInfo;
 	import com.rpgGame.netData.zone.bean.KillMonsterInfo;
+	
+	import flash.geom.Point;
 	
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.UIAsset;
@@ -60,6 +67,7 @@ package com.rpgGame.app.ui.main.dungeon
 		private var killButList:Vector.<SkinnableContainer>;
 		private var zoneId:int=0;
 		private var remainTime:int;
+		private var alertOk:AlertSetInfo;
 		public function MultyTrackerUI()
 		{
 			_skin=new FuBen_Skin();
@@ -68,9 +76,9 @@ package com.rpgGame.app.ui.main.dungeon
 			addEvent();
 		}
 		override protected function onShow() : void
-		{//L.l("onShow");
+		{L.l("地图加载完成");
 			enterZone();
-			
+			UIPopManager.showAlonePopUI(DungeonFightPop);
 		}
 		override protected function onHide():void
 		{
@@ -80,22 +88,25 @@ package com.rpgGame.app.ui.main.dungeon
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
 			super.onTouchTarget(target);
-			switch(target.name){
-				case "killbut_0":
+			switch(target){
+				case Renwu_Item2(_skin.killbut_0.skin).labelDisplay:
 					touchBut(0);
 					break;
-				case "killbut_1":
+				case Renwu_Item2(_skin.killbut_1.skin).labelDisplay:
 					touchBut(1);
 					break;
-				case "killbut_2":
+				case Renwu_Item2(_skin.killbut_2.skin).labelDisplay:
 					touchBut(2);
 					break;
-				case "killbut_3":
+				case Renwu_Item2(_skin.killbut_3.skin).labelDisplay:
 					touchBut(3);
 					break;
-				case "sec_subbut1":
-					DungeonSender.zoneOutToGame();
-					//setOutResult();
+				case Renwu_Item2(_skin.killbut_4.skin).labelDisplay:
+					touchBut(4);
+					break;
+				case _skin.sec_subbut1:
+					
+					zoneOutToGame();
 					break;
 			}
 			
@@ -103,17 +114,7 @@ package com.rpgGame.app.ui.main.dungeon
 		}
 		private function touchBut(id:int):void
 		{
-			var i:int;
-			var killList:Vector.<KillMonsterInfo>=DungeonManager.killInfos;
-			var qzm:Q_dailyzone_monster;
-			if(killList&&id<killList.length)
-			{
-				qzm=DailyZoneMonsterCfgData.getZoneCfg(killList[id].monsterModelId);
-				if(qzm)
-				{
-					MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, qzm.q_move_x,-qzm.q_move_y,startFight, 100,null,startFight);
-				}
-			}
+			walkWave(DungeonManager.getStageWave(id));
 		}
 		/**寻路完成开始杀怪*/
 		private function startFight(value:*):void
@@ -172,6 +173,24 @@ package com.rpgGame.app.ui.main.dungeon
 			enterZone();
 			setTageText();
 			setUisite();
+			autoWalk();
+		}
+		private function autoWalk():void
+		{
+			walkWave(DungeonManager.zoneWave);
+		}
+		private function walkWave(id:int):void
+		{
+			var pos:Point=DungeonManager.getStagePos(id);
+			if(pos)
+			{
+				MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, pos.x, pos.y,finishWalk, 100,null,finishWalk);
+			}
+		}
+		private function finishWalk(data:Object):void
+		{
+			TrusteeshipManager.getInstance().findDist=1000;
+			TrusteeshipManager.getInstance().startAutoFight();
 		}
 		private function setTitle():void
 		{
@@ -358,6 +377,18 @@ package com.rpgGame.app.ui.main.dungeon
 			AppManager.showApp(AppConstant.MULTY_EXITTIME_PANL);
 		}
 		
+		private function zoneOutToGame():void
+		{
+			GameAlert.showAlert(alertOk,onAlert);
+		}
+		private function onAlert(gameAlert:GameAlert):void
+		{
+			if(gameAlert.clickType==AlertClickTypeEnum.TYPE_SURE)
+			{
+				DungeonSender.zoneOutToGame();
+			}
+			
+		}
 		/**设置UI位置*/
 		private function setUisite():void
 		{
@@ -418,6 +449,8 @@ package com.rpgGame.app.ui.main.dungeon
 			skinList.push(_skin.killbut_0);
 			skinList.push(_skin.killbut_1);
 			skinList.push(_skin.killbut_2);
+			skinList.push(_skin.killbut_3);
+			skinList.push(_skin.killbut_4);
 			skinList.push(_skin.sec_navi2);
 			skinList.push(_skin.sec_ico1_0);
 			skinList.push(_skin.sec_ico1_4);
@@ -468,11 +501,8 @@ package com.rpgGame.app.ui.main.dungeon
 				ico2List.push(ico);
 				_skin.task_box.addChild(ico);
 			}
-			
-			killButList[1].visible=false;
-			killButList[2].visible=false;
 			setUisite();
-			
+			alertOk=new AlertSetInfo(LangAlertInfo.ZONE_EXIT_SURE);
 		}
 	}
 }
