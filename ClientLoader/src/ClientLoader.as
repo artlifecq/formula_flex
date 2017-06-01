@@ -354,7 +354,7 @@ package
             client["areaId"] = _areaId;
 			client["policyPort"] = _policyPort;
 			client["version"] = _clientVersion;
-            client["arent"] = _agent;
+            client["agent"] = _agent;
             client["loginName"] = _loginName;
             client["loginKey"] = _loginKey;
             client["loginTime"] = _loginTime;
