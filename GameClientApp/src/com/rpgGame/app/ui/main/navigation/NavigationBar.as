@@ -4,7 +4,6 @@ package com.rpgGame.app.ui.main.navigation {
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
-	import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
 	
 	import flash.geom.Point;
 	
@@ -34,7 +33,7 @@ package com.rpgGame.app.ui.main.navigation {
 			_content = new ContengGroup(_skin.width,_skin.height);
 			this.addChildAt(_content,0);
 			this.setState(true);
-			EventManager.addEvent(MainPlayerEvent.STAT_CHANGE,refeashButton);
+			EventManager.addEvent(MainPlayerEvent.LEVEL_CHANGE,refeashButton);
 			refeashButton();
 		}
 		

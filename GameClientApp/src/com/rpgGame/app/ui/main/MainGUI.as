@@ -1,5 +1,6 @@
 package com.rpgGame.app.ui.main
 {
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.ui.alert.GameAlert;
@@ -158,6 +159,7 @@ package com.rpgGame.app.ui.main
 			starlingStage = Starling.current.stage;
 			MainButtonBases.init();
 			initBar();
+			FunctionOpenManager.openNoticeByLevel(MainRoleManager.actorInfo.totalStat.level);
 			//isShowEventTrackPanel();
 			registerEvent();
 		}

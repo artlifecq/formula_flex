@@ -21,6 +21,7 @@ package com.rpgGame.app.ui.main.buttons
 		
 		override protected function onShow():void
 		{
+			super.onShow();
 			EventManager.addEvent(ItemEvent.LEFT_GRID_CHANG,showLeftGridState);
 			showLeftGridState(0);
 		}

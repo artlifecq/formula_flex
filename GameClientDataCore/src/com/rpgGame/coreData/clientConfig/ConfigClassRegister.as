@@ -30,11 +30,9 @@ package com.rpgGame.coreData.clientConfig
 		public static const ClientSceneNPC:String = "data.ClientSceneNPC";
 		/**  客户端在场景中的特效						 */
 		public static const ClientSceneRole:String = "data.ClientSceneRole";
-		/**  客户端触发数据															 */
-		public static const ClientTrigger:String = "data.ClientTrigger";
 		/**  客户端表情配置					 */
 		public static const FaceInfo:String = "data.FaceInfo";
-		/**  功能开放表											 */
+		/**  窗口链接信息表											 */
 		public static const FunctionBarInfo:String = "data.FunctionBarInfo";
 		/**  游戏音乐配置表							 */
 		public static const GameSoundInfo:String = "data.GameSoundInfo";
@@ -118,6 +116,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_fightsoul_mode:String = "data.Q_fightsoul_mode";
 		/**  战魂升级数据			 */
 		public static const Q_fightsoul_path:String = "data.Q_fightsoul_path";
+		/**  功能开放表					 */
+		public static const Q_funcNotice:String = "data.Q_funcNotice";
 		/**  全局变量表		 */
 		public static const Q_global:String = "data.Q_global";
 		/**  道具合成表									 */
@@ -213,7 +213,6 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.ClientSceneEffect", com.rpgGame.coreData.clientConfig.ClientSceneEffect);
 			regClass("data.ClientSceneNPC", com.rpgGame.coreData.clientConfig.ClientSceneNPC);
 			regClass("data.ClientSceneRole", com.rpgGame.coreData.clientConfig.ClientSceneRole);
-			regClass("data.ClientTrigger", com.rpgGame.coreData.clientConfig.ClientTrigger);
 			regClass("data.FaceInfo", com.rpgGame.coreData.clientConfig.FaceInfo);
 			regClass("data.FunctionBarInfo", com.rpgGame.coreData.clientConfig.FunctionBarInfo);
 			regClass("data.GameSoundInfo", com.rpgGame.coreData.clientConfig.GameSoundInfo);
@@ -257,6 +256,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_fightsoul", com.rpgGame.coreData.clientConfig.Q_fightsoul);
 			regClass("data.Q_fightsoul_mode", com.rpgGame.coreData.clientConfig.Q_fightsoul_mode);
 			regClass("data.Q_fightsoul_path", com.rpgGame.coreData.clientConfig.Q_fightsoul_path);
+			regClass("data.Q_funcNotice", com.rpgGame.coreData.clientConfig.Q_funcNotice);
 			regClass("data.Q_global", com.rpgGame.coreData.clientConfig.Q_global);
 			regClass("data.Q_hecheng", com.rpgGame.coreData.clientConfig.Q_hecheng);
 			regClass("data.Q_horse", com.rpgGame.coreData.clientConfig.Q_horse);

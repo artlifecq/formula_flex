@@ -146,6 +146,7 @@ package com.rpgGame.core.app
 		 */
 		public static var OPEN_FUNCTION:String = createAppInfo( "open.OpenPanel","xingongneng");
 		
+		public static var NOTIVE_FUNCTION:String = createAppInfo( "open.NoticePanel","xingongneng");
 		
 		/**世界地图**/
 		public static var WORLD_MAP_PANEL:String = createAppInfo( "worldMap.WorldMapPanel" ,"worldmap");

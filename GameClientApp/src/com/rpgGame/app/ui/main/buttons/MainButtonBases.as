@@ -1,16 +1,14 @@
 package com.rpgGame.app.ui.main.buttons
 {
 	import com.rpgGame.app.manager.FunctionOpenManager;
-	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
-	import com.rpgGame.coreData.cfg.NewFuncCfgData;
+	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
 	import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
-	import com.rpgGame.coreData.clientConfig.Q_newfunc;
-	import com.rpgGame.coreData.role.HeroData;
 	
+	import flash.geom.Point;
 	import flash.system.ApplicationDomain;
 	
 	import away3d.events.Event;
@@ -28,7 +26,20 @@ package com.rpgGame.app.ui.main.buttons
 		 */
 		private static const APP_ROOT:String="com.rpgGame.app.ui.main.buttons";
 		private var _info:FunctionBarInfo;
+		
+		private var _needPlayFirstAm:Boolean = false;
 
+		public function get needPlayFirstAm():Boolean
+		{
+			return _needPlayFirstAm;
+		}
+
+		public function set needPlayFirstAm(value:Boolean):void
+		{
+			_needPlayFirstAm = value;
+		}
+
+		
 		public function get info():FunctionBarInfo
 		{
 			return _info;
@@ -48,7 +59,24 @@ package com.rpgGame.app.ui.main.buttons
 		
 		protected function onShow():void
 		{
-			
+			this.visible = !_needPlayFirstAm;
+		}
+		
+		
+		override public function get width():Number
+		{
+			if(needPlayFirstAm)
+				return 0;
+			else
+				return super.width;
+		}
+		
+		override public function get height():Number
+		{
+			if(needPlayFirstAm)
+				return 0;
+			else
+				return super.height;
 		}
 		
 		override protected function feathersControl_removedFromStageHandler(event:Event):void
@@ -138,6 +166,10 @@ package com.rpgGame.app.ui.main.buttons
 		{
 			return _classMap.getValue(id);
 		}
+		
+		
+		
+		
 		
 	}
 }
