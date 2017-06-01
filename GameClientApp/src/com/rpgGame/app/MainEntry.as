@@ -52,15 +52,14 @@ package com.rpgGame.app
 			_root = clientGlobal.root;
 			_isRelease = clientGlobal.isRelease;
 			//初始化配置类
-			ClientConfig.setup(param, 0, _isRelease, clientGlobal.uiCompressed);
-			LanguageConfig.parseData(clientGlobal.maskWorldDic);
-			ClientConfig.decode = decode;
-            GameLog.addShow("MainEntry::ClientConfig.baseDir:" + clientGlobal.baseDir);
-			ClientConfig.baseDir = clientGlobal.baseDir;
-			ClientConfig.resURL = clientGlobal.resURL;
-			ClientConfig.isSingle = clientGlobal.isSingle;
-			ClientConfig.isBanShu = clientGlobal.isBanShu;
-			ClientConfig.isStable = clientGlobal.isStable;
+//			ClientConfig.setup(param, 0, _isRelease, clientGlobal.uiCompressed);
+//			LanguageConfig.parseData(clientGlobal.maskWorldDic);
+//			ClientConfig.decode = decode;
+//			ClientConfig.baseDir = clientGlobal.baseDir;
+//			ClientConfig.resURL = clientGlobal.resURL;
+//			ClientConfig.isSingle = clientGlobal.isSingle;
+//			ClientConfig.isBanShu = clientGlobal.isBanShu;
+//			ClientConfig.isStable = clientGlobal.isStable;
 			LayerManager.setup(_root);
 			ProjectManager.setup(_root, _root.stage);
 			PopUpManager.container = LayerManager.topLevel;

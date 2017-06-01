@@ -37,9 +37,6 @@ package com.client.process
 		override public function startProcess() : void
 		{
 			super.startProcess();
-//            CONFIG::netDebug {
-//                NetDebug.init("192.168.56.101", 10000);
-//            }
 			_url = ClientConfig.getUI(UI_ASSETS);
 			GameLog.addShow("开始加载公共UI素材...", _url);
 

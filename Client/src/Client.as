@@ -25,6 +25,7 @@ package
 	import com.gameClient.log.GameLogView;
 	import com.gameClient.utils.VersionUtils;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.LanguageConfig;
 	
 	import flash.display.Sprite;
 	import flash.events.ContextMenuEvent;
@@ -66,7 +67,7 @@ package
 		public var port : uint = 0;
 		public var policyPort : uint = 0;
         public var areaId : uint = 1;
-        public var agent : String = "";
+        public var agent : String = "37";
         public var loginName : String = "";
         public var loginKey : String = "";
         public var loginTime : uint = 0;
@@ -96,6 +97,7 @@ package
 		protected function onAddToStg(event : Event) : void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, onAddToStg);
+            ClientGlobal.urlParmar = urlParmar || loaderInfo.parameters;
 			ClientGlobal.baseDir = baseDir;
 			ClientGlobal.loginIP = server;
 			ClientGlobal.loginPort = port;
@@ -114,6 +116,15 @@ package
 			ClientGlobal.isBanShu = isBanShu;
 			ClientGlobal.isStable = isStable;
 			ClientGlobal.GlobalBridge = GlobalBridge;
+            
+            //初始化配置类
+            ClientConfig.setup(ClientGlobal.urlParmar, 0, ClientGlobal.isRelease, ClientGlobal.uiCompressed);
+            ClientConfig.decode = ClientGlobal.decodeFun;
+            ClientConfig.baseDir = ClientGlobal.baseDir;
+            ClientConfig.resURL = ClientGlobal.resURL;
+            ClientConfig.isSingle = ClientGlobal.isSingle;
+            ClientConfig.isBanShu = ClientGlobal.isBanShu;
+            ClientConfig.isStable = ClientGlobal.isStable;
 			
 			GameLogView.init(this.stage, [189, 190, 191]);//-_	189  .>	190  /?	191
 			AlertPanel.initStage(this.stage);
