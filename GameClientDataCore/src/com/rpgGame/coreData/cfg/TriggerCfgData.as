@@ -3,7 +3,6 @@ package com.rpgGame.coreData.cfg
 	import com.game.engine3D.vo.map.ClientMapAreaData;
 	import com.game.engine3D.vo.map.MapAreaTypeEnum;
 	import com.gameClient.utils.JSONUtil;
-	import com.rpgGame.coreData.clientConfig.ClientTrigger;
 	import com.rpgGame.coreData.clientConfig.Q_area;
 	import com.rpgGame.coreData.clientConfig.Q_map_trigger;
 	import com.rpgGame.coreData.clientConfig.Q_zone_multy;

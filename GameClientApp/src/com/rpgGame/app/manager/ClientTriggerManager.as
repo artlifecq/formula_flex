@@ -20,7 +20,6 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.cfg.collect.CollectCfgData;
 	import com.rpgGame.coreData.clientConfig.ClientDialog;
 	import com.rpgGame.coreData.clientConfig.ClientSceneEffect;
-	import com.rpgGame.coreData.clientConfig.ClientTrigger;
 	import com.rpgGame.coreData.enum.EnumClientTriggerType;
 	import com.rpgGame.coreData.enum.TriggerTypeEnum;
 	import com.rpgGame.coreData.info.MapDataManager;
@@ -42,6 +41,7 @@ package com.rpgGame.app.manager
 	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
+	import com.rpgGame.coreData.cfg.ClientTrigger;
 
 	/**
 	 *

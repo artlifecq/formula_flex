@@ -23,6 +23,9 @@ package gameEngine2D {
 			}
 			if (!PathFinderUtil.isPointInSide(district, targetPos)) {
 				var newTargetPos : Vector3D = getSegmentIntersect(district, position, targetPos);
+                if (null == newTargetPos) {
+                    newTargetPos = targetPos.clone();
+                }
 				if (null == newTargetPos) {
 					return null;
 				}
@@ -45,20 +48,26 @@ package gameEngine2D {
 		}
 		
 		public static function getSegmentIntersect(district : DistrictWithPath, start : Vector3D, end : Vector3D) : Vector3D {
-			var allPolygon : Vector.<PointsSet> = district.internalPointsSets;
+//			var allPolygon : Vector.<PointsSet> = district.internalPointsSets;
 			var allIntersect : Vector.<Vector3D> = new Vector.<Vector3D>();
-			for each(var polygon : PointsSet in allPolygon) {
-				if (!polygon.isClosed) {
-					continue;
-				}
-				if (PointsSetType.BLOCK != polygon.type) {
-					continue;
-				}
-				var points : Vector.<Vector3D> = getSegmentIntersect0(district, start, end, polygon);
-				if (points.length > 0) {
-					for each(var point : Vector3D in points) {
-						allIntersect.push(point);
-					}
+//			for each(var polygon : PointsSet in allPolygon) {
+//				if (!polygon.isClosed) {
+//					continue;
+//				}
+//				if (PointsSetType.BLOCK != polygon.type) {
+//					continue;
+//				}
+//				var points : Vector.<Vector3D> = getSegmentIntersect0(district, start, end, polygon);
+//				if (points.length > 0) {
+//					for each(var point : Vector3D in points) {
+//						allIntersect.push(point);
+//					}
+//				}
+//			}
+            var points : Vector.<Vector3D> = getSegmentIntersect0(district, start, end, district.boundPointsSet);
+			if (points.length > 0) {
+				for each(var point : Vector3D in points) {
+					allIntersect.push(point);
 				}
 			}
 			allIntersect.sort(function (a : Vector3D, b : Vector3D) : Number {

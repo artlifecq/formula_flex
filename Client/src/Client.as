@@ -42,6 +42,8 @@ package
 	
 	import gs.TweenLite;
 	
+	import utils.StringUtil;
+	
 	/**
 	 *
 	 * 程序文档类
@@ -185,8 +187,8 @@ package
 					GameLog.addShow("profile type：" + Stage3DLayerManager.stage3DProxy.profile);
 					
 					Parsers.enableAllBundled();
-					Stage3DLayerManager.screenAntiAlias = 2;
-					Stage3DLayerManager.viewAntiAlias = 2;
+					Stage3DLayerManager.screenAntiAlias = 0;
+					Stage3DLayerManager.viewAntiAlias = 0;
 					Stage3DLayerManager.startRender();
 					Stage3DLayerManager.starlingLayer.setLayer("alert", 9);
 					Stage3DLayerManager.starlingLayer.setLayer("loading", 8);
@@ -273,7 +275,9 @@ package
 		
 		private function initProcess() : void
 		{
-			ProcessStateMachine.getInstance().pushProcess(new SelectDeveloper());
+            if (null == ClientGlobal.loginIP || 0 == StringUtil.trim(ClientGlobal.loginIP).length) {
+                ProcessStateMachine.getInstance().pushProcess(new SelectDeveloper());
+            }
 			ProcessStateMachine.getInstance().pushProcess(new LoginInput());
 			ProcessStateMachine.getInstance().pushProcess(new LoadMaskWorld());
 			ProcessStateMachine.getInstance().pushProcess(new ServerConnect());
