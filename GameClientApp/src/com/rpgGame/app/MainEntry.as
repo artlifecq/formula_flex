@@ -55,6 +55,7 @@ package com.rpgGame.app
 			ClientConfig.setup(param, 0, _isRelease, clientGlobal.uiCompressed);
 			LanguageConfig.parseData(clientGlobal.maskWorldDic);
 			ClientConfig.decode = decode;
+            GameLog.addShow("MainEntry::ClientConfig.baseDir:" + clientGlobal.baseDir);
 			ClientConfig.baseDir = clientGlobal.baseDir;
 			ClientConfig.resURL = clientGlobal.resURL;
 			ClientConfig.isSingle = clientGlobal.isSingle;
