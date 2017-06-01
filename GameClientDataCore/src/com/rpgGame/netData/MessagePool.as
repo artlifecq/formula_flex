@@ -97,9 +97,11 @@ package com.rpgGame.netData{
 	import com.rpgGame.netData.drop.handler.ResDropRollItemInfoHandler;
 	import com.rpgGame.netData.drop.handler.ResDropRollResultInfoHandler;
 	import com.rpgGame.netData.drop.handler.ResGetRollItemHandler;
+	import com.rpgGame.netData.drop.handler.SCChangeMasterHandler;
 	import com.rpgGame.netData.drop.message.ResDropRollItemInfoMessage;
 	import com.rpgGame.netData.drop.message.ResDropRollResultInfoMessage;
 	import com.rpgGame.netData.drop.message.ResGetRollItemMessage;
+	import com.rpgGame.netData.drop.message.SCChangeMasterMessage;
 	import com.rpgGame.netData.equip.handler.ResBuTianShenShiKindInfoHandler;
 	import com.rpgGame.netData.equip.handler.ResEquipInfoHandler;
 	import com.rpgGame.netData.equip.handler.ResEquipOperateResultHandler;
@@ -710,6 +712,16 @@ package com.rpgGame.netData{
 	import com.rpgGame.netData.zhangong.handler.SCMeritoriousUpgradeResultHandler;
 	import com.rpgGame.netData.zhangong.message.SCMeritoriousInfoListMessage;
 	import com.rpgGame.netData.zhangong.message.SCMeritoriousUpgradeResultMessage;
+	import com.rpgGame.netData.zhengba.handler.SCChallengeDataHandler;
+	import com.rpgGame.netData.zhengba.handler.SCChallengeResultHandler;
+	import com.rpgGame.netData.zhengba.handler.SCDrawAwardResultHandler;
+	import com.rpgGame.netData.zhengba.handler.SCOpenArardPanelHandler;
+	import com.rpgGame.netData.zhengba.handler.SCUpdateZhengBaDataHandler;
+	import com.rpgGame.netData.zhengba.message.SCChallengeDataMessage;
+	import com.rpgGame.netData.zhengba.message.SCChallengeResultMessage;
+	import com.rpgGame.netData.zhengba.message.SCDrawAwardResultMessage;
+	import com.rpgGame.netData.zhengba.message.SCOpenArardPanelMessage;
+	import com.rpgGame.netData.zhengba.message.SCUpdateZhengBaDataMessage;
 	import com.rpgGame.netData.zone.handler.ResBattleZoneBOSSinfoToClientHandler;
 	import com.rpgGame.netData.zone.handler.ResBattleZoneClearanceToClientHandler;
 	import com.rpgGame.netData.zone.handler.ResBattleZoneObtainToClientHandler;
@@ -738,7 +750,6 @@ package com.rpgGame.netData{
 	import com.rpgGame.netData.zone.handler.SCOutZoneHandler;
 	import com.rpgGame.netData.zone.handler.SCRemainTimeHandler;
 	import com.rpgGame.netData.zone.handler.SCZoneStageChangeHandler;
-	import com.rpgGame.netData.zone.message.ReqZoneOutToGameMessage;
 	import com.rpgGame.netData.zone.message.ResBattleZoneBOSSinfoToClientMessage;
 	import com.rpgGame.netData.zone.message.ResBattleZoneClearanceToClientMessage;
 	import com.rpgGame.netData.zone.message.ResBattleZoneObtainToClientMessage;
@@ -1018,6 +1029,11 @@ package com.rpgGame.netData{
 			register(126103, SCJunJieActivateResultMessage, SCJunJieActivateResultHandler);
 			register(126104, SCJunJieInfoUpdateListMessage, SCJunJieInfoUpdateListHandler);
 			register(126105, SCUpdateRoundMessage, SCUpdateRoundHandler);
+			register(127102, SCChallengeDataMessage, SCChallengeDataHandler);
+			register(127104, SCChallengeResultMessage, SCChallengeResultHandler);
+			register(127106, SCDrawAwardResultMessage, SCDrawAwardResultHandler);
+			register(127107, SCUpdateZhengBaDataMessage, SCUpdateZhengBaDataHandler);
+			register(127109, SCOpenArardPanelMessage, SCOpenArardPanelHandler);
 			register(137201, ResCardToClientMessage, ResCardToClientHandler);
 			register(141101, ResToplistToClientMessage, ResToplistToClientHandler);
 			register(141102, ResListLeaderToClientMessage, ResListLeaderToClientHandler);
@@ -1114,6 +1130,7 @@ package com.rpgGame.netData{
 			register(210101, ResDropRollItemInfoMessage, ResDropRollItemInfoHandler);
 			register(210102, ResDropRollResultInfoMessage, ResDropRollResultInfoHandler);
 			register(210103, ResGetRollItemMessage, ResGetRollItemHandler);
+			register(210104, SCChangeMasterMessage, SCChangeMasterHandler);
 			register(212101, ResPrestigeInfoMessage, ResPrestigeInfoHandler);
 			register(213101, ResFatePanleInfoMessage, ResFatePanleInfoHandler);
 			register(213102, ResFateInfoMessage, ResFateInfoHandler);

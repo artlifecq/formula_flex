@@ -16,12 +16,12 @@ package com.rpgGame.app.manager.role
 	
 	import flash.utils.Dictionary;
 	
+	import away3d.events.Event;
+	
 	import feathers.core.PopUpManager;
 	
 	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.data.long;
-	
-	import away3d.events.Event;
 
 	/**
 	 * 掉落物管理器 
@@ -183,6 +183,16 @@ package com.rpgGame.app.manager.role
 				}
 			}
 			return arr;
+		}
+		
+		public  function changeSceneItemMaster(uniqueId:long, ownerId:long):void
+		{
+			// TODO Auto Generated method stub
+			var item:SceneRole= SceneManager.getScene().getSceneObjByID(uniqueId.ToGID(),SceneCharType.DROP_GOODS) as SceneRole;
+			if (item) 
+			{
+				(item.data  as SceneDropGoodsData).ownerId=ownerId.ToGID();
+			}
 		}
 	}
 }
