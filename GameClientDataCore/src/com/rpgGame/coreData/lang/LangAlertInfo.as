@@ -184,6 +184,9 @@ package com.rpgGame.coreData.lang
 		public static const EQUIP_USE_TIPS:String = "EQUIP_USE_TIPS";
 		 /**  花费<font color='0xffff00'>$元宝</font>可购买1次挑战次数 */
 		public static const BuyCombatCount:String = "BuyCombatCount";
+		
+		/**  副本退出二次确认 */
+		public static const ZONE_EXIT_SURE:String = "ZONE_EXIT_SURE";
 
 	}
 }

@@ -1,11 +1,14 @@
 package com.rpgGame.coreData.cfg.task
 {
+	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_mission_base;
 	import com.rpgGame.coreData.clientConfig.Q_mission_reword;
 	import com.rpgGame.coreData.clientConfig.Q_mission_section;
 	import com.rpgGame.coreData.clientConfig.Q_mission_segment;
+	import com.rpgGame.coreData.enum.JobEnum;
 	
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
@@ -87,7 +90,7 @@ package com.rpgGame.coreData.cfg.task
 			
 		}
 		/**根据任务ID获取奖励物品列表*/
-		public static function getRewordById(id : int) :Array 
+		public static function getRewordById(id : int,job:int) :Array 
 		{
 			/*var task:Q_mission_base=getTaskByID(id);
 			var reword:Q_mission_reword;
@@ -97,15 +100,37 @@ package com.rpgGame.coreData.cfg.task
 			}*/
 			
 			var reword:Q_mission_reword=getRewordByID(id);
-			if(reword!=null&&reword.q_reward!="")
+			if(reword!=null)
 			{
 				var reObj:Array;
-				var reo:Object=JSON.parse(reword.q_reward);
-				if(reo!=null)
+				var reo:Object;
+				if(job==JobEnum.ROLE_1_TYPE&&reword.q_reward!="")
 				{
-					reObj=reo as Array;
+					reo=JSONUtil.decode(reword.q_reward);
+					if(reo!=null)
+					{
+						reObj=reo as Array;
+						return reObj;
+					}
 				}
-				return reObj;
+				else if((job==JobEnum.ROLE_2_TYPE||job==JobEnum.ROLE_3_TYPE)&&reword.q_reward_2!="")
+				{
+					reo=JSONUtil.decode(reword.q_reward_2);
+					if(reo!=null)
+					{
+						reObj=reo as Array;
+						return reObj;
+					}
+				}
+				else if(job==JobEnum.ROLE_4_TYPE&&reword.q_reward_1!="")
+				{
+					reo=JSONUtil.decode(reword.q_reward_1);
+					if(reo!=null)
+					{
+						reObj=reo as Array;
+						return reObj;
+					}
+				}
 			}
 			return null;
 		}
