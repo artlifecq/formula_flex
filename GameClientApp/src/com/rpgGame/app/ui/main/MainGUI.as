@@ -400,7 +400,7 @@ package com.rpgGame.app.ui.main
 		 * 
 		 */		
 		private function onSwitchCmp() : void
-		{//L.l("地图加载完成");
+		{L.l("地图加载完成");
 			var mapId:int=MainRoleManager.actorInfo.mapID;
 			var sceneData:SceneData=MapDataManager.getMapInfo(mapId);
 			var mapCfg:Q_map=sceneData.getData();

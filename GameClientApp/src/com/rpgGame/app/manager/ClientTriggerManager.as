@@ -437,7 +437,7 @@ package com.rpgGame.app.manager
 		}
 		
 		private static function createSceneEffect(effectData : ClientSceneEffect) : void
-		{//L.l("添加火墙："+effectData.id);
+		{L.l("添加火墙："+effectData.id);
 			var bornPosArr : Array = effectData.bornPos.split(";");
 			var len : int = bornPosArr.length;
 			for (var i : int = 0; i < len; i++)
@@ -449,7 +449,7 @@ package com.rpgGame.app.manager
 			}
 		}
 		private static function removeSceneEffect(effectData : ClientSceneEffect) : void
-		{//L.l("删除火墙："+effectData.id);
+		{L.l("删除火墙："+effectData.id);
 			var bornPosArr : Array = effectData.bornPos.split(";");
 			var len : int = bornPosArr.length;
 			for (var i : int = 0; i < len; i++)
