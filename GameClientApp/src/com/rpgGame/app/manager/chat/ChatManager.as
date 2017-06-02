@@ -63,7 +63,7 @@ package com.rpgGame.app.manager.chat
 		
 		private static var _chatItemHash : HashMap = new HashMap();
 		
-		private static var MAX_CHATSHOWITEMCACEHE : int = 300;
+		public static var MAX_CHATSHOWITEMCACEHE : int = 300;
 		
 		
 		
@@ -135,7 +135,7 @@ package com.rpgGame.app.manager.chat
 			}
 			
 			if(sysHearsayMsgChange){
-				sysHearsayMsgChange();
+				sysHearsayMsgChange(msg);
 			}
 		}
 		

@@ -16,6 +16,8 @@ package com.rpgGame.app.ui.main.chat
 	
 	import feathers.controls.Scroller;
 	import feathers.controls.text.Fontter;
+	import feathers.data.ListCollection;
+	import feathers.layout.VerticalLayout;
 	
 	import gs.TweenLite;
 	
@@ -33,7 +35,6 @@ package com.rpgGame.app.ui.main.chat
 	{
 		private var _skin : panel_ziriSkin;
 		
-		private var _msgTxt:RichTextArea3D;
 		private var _showDatas:Vector.<ResChatMessage>;
 
 		private var bgW:int;
@@ -51,13 +52,18 @@ package com.rpgGame.app.ui.main.chat
 		private function initEvent():void
 		{
 			_skin.tab_zizhi.addEventListener(Event.SELECT,onSelected);
-			ChatManager.sysHearsayMsgChange=onSelected;
+			ChatManager.sysHearsayMsgChange=onSendSuccess;
 		}
 		
 		private function onSendSuccess(info:ResChatMessage):void
 		{
 			if(info.type==EnumChatChannelType.CHAT_CHANNEL_HEARSAY||info.type==EnumChatChannelType.CHAT_CHANNEL_SYSTEM){
-				onSelected(null);
+				_skin.msg_list.dataProvider.addItem(info);
+				if (_skin.msg_list.dataProvider.length > ChatManager.MAX_CHATSHOWITEMCACEHE)
+				{
+					_skin.msg_list.dataProvider.removeItemAt(0);
+				}
+				_skin.msg_list.scrollToBottom(0);
 			}
 		}
 		
@@ -79,7 +85,7 @@ package com.rpgGame.app.ui.main.chat
 		
 		private function updateTxt():void
 		{
-			if(getTimer()-preTime<1000){
+			if(getTimer()-preTime<300){
 				if(updateTween){
 					updateTween.kill();
 				}
@@ -87,22 +93,13 @@ package com.rpgGame.app.ui.main.chat
 				return;
 			}
 			updateTween=null;
-			_msgTxt.clear();
-			this._msgTxt.setSize(bgW, 0);
+			_skin.msg_list.dataProvider.removeAll();
 			var num:int=_showDatas.length;
-			var msg:String="";
 			for(var i:int=0;i<num;i++){
-				msg+=ChatUtil.getHTMLSystemMsg( _showDatas[i])+"\n";
+				_skin.msg_list.dataProvider.addItem( _showDatas[i]);
 			}
-			_msgTxt.appendRichText(msg );
-			updateScroller();
 			preTime=getTimer();
-		}
-		
-		private function updateScroller() : void {
-			this._skin.scroll_Bar.addChild(this._msgTxt);
-			var scrollerPos : int = Math.max(0, this._msgTxt.height - this._skin.scroll_Bar.height);
-			this._skin.scroll_Bar.scrollToPosition(0, scrollerPos, 0.3);
+			_skin.msg_list.scrollToBottom(0);
 		}
 		
 		private function initView():void
@@ -116,23 +113,18 @@ package com.rpgGame.app.ui.main.chat
 			
 			bgW=310;
 			
-			this._msgTxt = new RichTextArea3D(bgW, 0, ColorUtils.getDefaultStrokeFilter());
-			this._msgTxt.setConfig(RichTextCustomUtil.cloneChatUnitConfigVec());
-			this._msgTxt.wordWrap = true;
-			this._msgTxt.multiline = true;
-			this._msgTxt.defaultTextFormat = defaultFormat;
-			this._msgTxt.text = "";
-			this._msgTxt.x = 0;
-			
-			this._skin.scroll_Bar.verticalScrollBarPosition = Scroller.VERTICAL_SCROLL_BAR_POSITION_RIGHT;
-			this._skin.scroll_Bar.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
-			this._skin.scroll_Bar.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
-			this._skin.scroll_Bar.scrollBarDisplayMode = Scroller.SCROLL_BAR_DISPLAY_MODE_FIXED;
-			this._skin.scroll_Bar.addChild(this._msgTxt);
-			this._skin.scroll_Bar.width = bgW;
-			this._skin.scroll_Bar.height =466;
-			this._skin.scroll_Bar.x=13;
-			
+			_skin.msg_list.verticalScrollBarPosition = "right";
+			_skin.msg_list.horizontalScrollPolicy = "off";
+			_skin.msg_list.verticalScrollPolicy = "on";
+			_skin.msg_list.scrollBarDisplayMode = "fixed";
+			SystemMsgItemRender.WIDTH=298;
+			_skin.msg_list.itemRendererType = SystemMsgItemRender;
+			_skin.msg_list.dataProvider = new ListCollection();
+			var layout:VerticalLayout = new VerticalLayout();
+			layout.useVirtualLayout = true;
+			layout.gap = 1;
+			layout.hasVariableItemDimensions = true;
+			_skin.msg_list.layout = layout;
 			this._skin.titleDisplay.y=12;
 		}
 		
@@ -152,7 +144,7 @@ package com.rpgGame.app.ui.main.chat
 		override protected function onTouchTarget(target : DisplayObject) : void {
 			super.onTouchTarget(target);
 			switch (target) {
-				case this._skin.btn_close:
+				case this._skin.btnClose:
 					this.hide();
 					break;
 			}

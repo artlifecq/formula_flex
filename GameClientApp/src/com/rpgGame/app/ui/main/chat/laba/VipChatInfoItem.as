@@ -46,7 +46,7 @@ package com.rpgGame.app.ui.main.chat.laba
 			defaultFormat.color = 0xded8c7;
 			defaultFormat.size = 14;
 			_richText = new RichTextArea3D( 430, 70,ColorUtils.getDefaultStrokeFilter() );
-			_richText.setConfig(RichTextCustomUtil.cloneChatUnitConfigVec());
+			_richText.setConfig(RichTextCustomUtil.getChatUnitConfigVec());
 			_richText.x = 23;
 			_richText.y = 0;
 			_richText.wordWrap = true;
@@ -69,30 +69,12 @@ package com.rpgGame.app.ui.main.chat.laba
 		public function setData(info:ResChatMessage):void //info:ChatInfo
 		{
 			var userName:String = info.name;//info.realShowName;
-			var message:String = ChatUtil.replaceItemShow(info);//RichTextConfig.replaceUnitCodeToLabel(info.realShowMsg);
 			var showStr:String = ChatUtil.getChatMessageByChannel(info.type,info.name,info.chatText);//ChatUtil.getChatMessageByChannel(info.channel, userName + message);
 			updateShow(showStr);
 			var rec:Rectangle = _richText.textfield.getCharBoundaries(0);
 			var $_txtLineMetrics:TextLineMetrics = _richText.textfield.getLineMetrics(_richText.textfield.getLineIndexOfChar(0));
 			_ico.y = $_txtLineMetrics.height - $_txtLineMetrics.descent - 12;
 			_totalHeight = _richText.textHeight;
-			var len:int = message.length;
-			//			for(var i:int = 0; i < len; i++)
-			//			{
-			//				var addCount:int = 1;
-			//				var character:String = message.charAt(i);
-			//				if(character == "#")
-			//				{
-			//					addCount = 3;
-			//				}
-			//				var tempMessage:String = message.substr(0,i+addCount);
-			//				showStr = ChatUtil.getChatMessageByChannel(info.channel, userName + tempMessage);
-			//				TweenLite.delayedCall(0.1*i,updateShow,[showStr]);
-			//				if(character == "#")
-			//				{
-			//					i += 2;
-			//				}
-			//			}
 			playShowEffect();
 		}
 		
@@ -157,7 +139,7 @@ package com.rpgGame.app.ui.main.chat.laba
 		{
 			TweenLite.killTweensOf(this);
 			resetTimeOut();
-			_richText.clear();
+			_richText.reset();
 		}
 	}
 }

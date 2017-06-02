@@ -14,5 +14,7 @@ package com.rpgGame.app.richText
 		public static const MOVIECLIP:String = "movieClip";
 		/**图片**/
 		public static const IMAGE:String = "image";
+		/**按钮**/
+		public static const BUTTON:String = "button";
 	}
 }

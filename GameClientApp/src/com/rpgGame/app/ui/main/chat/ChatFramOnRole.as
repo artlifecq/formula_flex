@@ -27,7 +27,7 @@ package com.rpgGame.app.ui.main.chat
 			defaultFormat.size = 14;
 			defaultFormat.leading = 8;
 			_richText = new RichTextArea3D(200, 100, ColorUtils.getDefaultStrokeFilter());
-			_richText.setConfig(RichTextCustomUtil.cloneChatUnitConfigVec());
+			_richText.setConfig(RichTextCustomUtil.getChatUnitConfigVec());
 			_richText.x = PAD;
 			_richText.y = PAD;
 			_richText.wordWrap = true;
