@@ -58,14 +58,14 @@ package com.rpgGame.appModule.role
 			if (sub==""||_curSub==null) 
 			{
 				sub=SUB_ROLE;
-				showSubPanel(sub);
+				showSubPanel(sub);			
 			}else{
 				showSubPanel(sub);
-			}
-			
+			}			
 		}
 		public function showSubPanel(subType:String):void
 		{
+			setBtnState(subType);
 			var sub:SkinUI;
 			switch(subType)
 			{
@@ -114,6 +114,43 @@ package com.rpgGame.appModule.role
 			this.addChildAt(_curSub as DisplayObject,1);
 		}
 		
+		protected function setBtnState(subType:String):void
+		{
+			switch(subType)
+			{
+				case SUB_ROLE:
+				{
+					(_skin.daohang.skin as daohang_Skin).btn_juese.isSelected=true;
+					break;
+				}
+				case SUB_MERIDIAN:
+				{
+					(_skin.daohang.skin as daohang_Skin).btn_jingmai.isSelected=true;
+					break;
+				}
+				case SUB_ZHANGONG:
+				{
+					(_skin.daohang.skin as daohang_Skin).btn_zhangong.isSelected=true;
+					break;
+				}
+				case SUB_XINFA:
+				{
+					(_skin.daohang.skin as daohang_Skin).btn_xinfa.isSelected=true;
+					break;
+				}
+				case SUB_JUNJIE:
+				{
+					(_skin.daohang.skin as daohang_Skin).btn_junjie.isSelected=true;
+					break;
+				}
+				default:
+				{
+					(_skin.daohang.skin as daohang_Skin).btn_juese.isSelected=true;
+					break;
+				}
+			}
+		}
+		
 		protected function set isSeeOther(value:Boolean):void
 		{
 			var daohang:daohang_Skin=_skin.daohang.skin as daohang_Skin;
@@ -129,7 +166,7 @@ package com.rpgGame.appModule.role
 					daohang.elementsContent[i].visible=true;
 				}
 			}
-				
+			
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void

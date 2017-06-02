@@ -22,6 +22,7 @@ package
 	import com.game.engine3D.process.ProcessStateMachine;
 	import com.game.engine3D.utils.StatsUtil;
 	import com.gameClient.alert.AlertPanel;
+	import com.gameClient.alert.ReconnectionPanelExt;
 	import com.gameClient.log.GameLog;
 	import com.gameClient.log.GameLogView;
 	import com.gameClient.utils.VersionUtils;
@@ -107,6 +108,7 @@ package
 			
 			GameLogView.init(this.stage, [189, 190, 191]);//-_	189  .>	190  /?	191
 			AlertPanel.initStage(this.stage);
+			ReconnectionPanelExt.initStage(this.stage);
 			//
 			getWebParams();
 			GameLog.addShow("版本号：" + version);

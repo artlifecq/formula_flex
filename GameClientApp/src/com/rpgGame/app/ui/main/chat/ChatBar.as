@@ -242,6 +242,7 @@ package com.rpgGame.app.ui.main.chat {
 			var goodsCode:String = RichTextCustomUtil.getItemCode(key,item.name,item.quality);
 			_inputText.appendRichText(goodsCode);
 			_inputText.setFocus();
+			_inputText.selectRange(_inputText.textWidth,_inputText.textWidth);
 			setGroubState(true);
 		}
 		
@@ -301,7 +302,7 @@ package com.rpgGame.app.ui.main.chat {
 		private function updateShowMsg():void
 		{
 			_chatText.clear();
-			updateScroller();
+//			updateScroller();
 			var msgs:Vector.<ResChatMessage>;
 			switch(_curShowTab)
 			{
@@ -315,7 +316,7 @@ package com.rpgGame.app.ui.main.chat {
 					msgs=ChatManager.gerenHearsayMsg;
 					break;
 			}
-			if(msgs==null) return;
+			if(msgs==null||msgs.length==0) return;
 			for(var i:int=0;i<msgs.length;i++)
 			{
 				showChatMsg(msgs[i]);
@@ -332,6 +333,7 @@ package com.rpgGame.app.ui.main.chat {
 				var siLiaoTag:String ="你对" + targetName +  "说 :";			
 				this._inputText.setFocus();
 				this._inputText.text=siLiaoTag;
+				_inputText.selectRange(_inputText.textWidth,_inputText.textWidth);
 				setGroubState(true);
 			}
 		}

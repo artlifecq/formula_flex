@@ -1,9 +1,14 @@
 package com.rpgGame.appModule.junjie
 {
+	import com.game.engine3D.display.Inter3DContainer;
+	import com.game.engine3D.display.InterObject3D;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.core.events.JunJieEvent;
+	import com.rpgGame.core.ui.AwdProgressBar;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.JunJieData;
+	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.netData.junjie.bean.JunJieInfo;
 	
 	import feathers.utils.filter.GrayFilter;
@@ -30,6 +35,8 @@ package com.rpgGame.appModule.junjie
 		
 		private var _lv:int=0;
 		private var _info:JunJieInfo;
+		private var _huangQinGuoQiContaner:Inter3DContainer;
+		private var _huangQinGuoQiEft:InterObject3D;
 		public function JunJieItem()
 		{
 			_skin=new JunJie_Item();
@@ -128,6 +135,11 @@ package com.rpgGame.appModule.junjie
 					_skin.icons.styleName = "ui/app/beibao/junjie/icon/icon2.png";
 					_skin.icons.x=35;
 					_skin.icons.y=25;
+					_huangQinGuoQiContaner=new Inter3DContainer();
+					_skin.container.addChild(_huangQinGuoQiContaner);
+					_huangQinGuoQiContaner.x=10;
+					_huangQinGuoQiContaner.y=82;
+					_huangQinGuoQiEft= _huangQinGuoQiContaner.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_HUANGQINGUOQI),0,0,0);
 					break;
 			}
 		}

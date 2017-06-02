@@ -162,10 +162,10 @@ package com.rpgGame.app.ui.main.chat
 		private function onSendSuccess( info:ResChatMessage):void
 		{
 			//只显示系统和传闻
-			if(info.type==EnumChatChannelType.CHAT_CHANNEL_HEARSAY||info.type==EnumChatChannelType.CHAT_CHANNEL_SYSTEM){
-				ChatManager.recordSystemHearsayMsg(info);
-				showChatMsg( info );	
-			}
+//			if(info.type==EnumChatChannelType.CHAT_CHANNEL_HEARSAY||info.type==EnumChatChannelType.CHAT_CHANNEL_SYSTEM){
+//				ChatManager.recordSystemHearsayMsg(info);
+//				showChatMsg( info );	
+//			}
 		}
 		
 		private function onNoticeMessage(arr:Array):void
