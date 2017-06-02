@@ -933,7 +933,7 @@ package com.rpgGame.app.utils
 		/**设置奖励物品*/
 		public static function setRewordInfo(rid:int,icoList:Vector.<IconCDFace>,icoBgList:Vector.<UIAsset>,show:Boolean=false):void
 		{
-			var rewordList:Array=TaskMissionCfgData.getRewordById(rid);
+			var rewordList:Array=TaskMissionCfgData.getRewordById(rid,MainRoleManager.actorInfo.job);
 			if(rewordList==null)return;
 			var item:Q_item;
 			var i:int,length:int,idd:int;

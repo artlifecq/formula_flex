@@ -202,9 +202,9 @@ package com.rpgGame.app.ui.main.taskbar
 		{
 			leadCont.hideInfo();
 			loopCont.hideTaskView(type);
-			setViewShow();
-			leadCont.leadTaskView();
-			loopCont.loopTaskView();
+			//setViewShow();
+			//leadCont.leadTaskView();
+			//loopCont.loopTaskView();
 			if(type==TaskType.MAINTYPE_MAINTASK)
 			{
 				effetCont.playFinishEffect();

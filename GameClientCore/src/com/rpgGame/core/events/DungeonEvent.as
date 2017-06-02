@@ -70,6 +70,11 @@ package com.rpgGame.core.events
 		 *准备退出副本
 		 */
 		public static const ZONE_OUT_RESULT:int = UNIQUEID.NEXT;
+		/**
+		 *通关奖励
+		 */
+		public static const ZONE_REWARD:int = UNIQUEID.NEXT;
+		
 		
 		
 		public function DungeonEvent()
