@@ -10,14 +10,19 @@ package com.rpgGame.app.ui.main.chat
 	
 	import flash.text.TextFormat;
 	import flash.text.TextFormatAlign;
+	import flash.utils.getTimer;
+	
+	import away3d.events.Event;
 	
 	import feathers.controls.Scroller;
 	import feathers.controls.text.Fontter;
 	
+	import gs.TweenLite;
+	
 	import org.mokylin.skin.common.panel_ziriSkin;
 	
 	import starling.display.DisplayObject;
-	import away3d.events.Event;
+	import starling.display.DisplayObjectContainer;
 	
 	/**
 	 *系统消息面板 
@@ -32,6 +37,8 @@ package com.rpgGame.app.ui.main.chat
 		private var _showDatas:Vector.<ResChatMessage>;
 
 		private var bgW:int;
+		private var preTime:int;
+		private var updateTween:TweenLite;
 		
 		public function SystemMsgPanel()
 		{
@@ -39,7 +46,6 @@ package com.rpgGame.app.ui.main.chat
 			super(this._skin);
 			
 			initView();
-			initEvent();
 		}
 		
 		private function initEvent():void
@@ -73,13 +79,24 @@ package com.rpgGame.app.ui.main.chat
 		
 		private function updateTxt():void
 		{
+			if(getTimer()-preTime<1000){
+				if(updateTween){
+					updateTween.kill();
+				}
+				updateTween=TweenLite.delayedCall(1,updateTxt);
+				return;
+			}
+			updateTween=null;
 			_msgTxt.clear();
 			this._msgTxt.setSize(bgW, 0);
 			var num:int=_showDatas.length;
+			var msg:String="";
 			for(var i:int=0;i<num;i++){
-				_msgTxt.appendRichText( ChatUtil.getHTMLSystemMsg( _showDatas[i]));
+				msg+=ChatUtil.getHTMLSystemMsg( _showDatas[i])+"\n";
 			}
+			_msgTxt.appendRichText(msg );
 			updateScroller();
+			preTime=getTimer();
 		}
 		
 		private function updateScroller() : void {
@@ -115,9 +132,21 @@ package com.rpgGame.app.ui.main.chat
 			this._skin.scroll_Bar.width = bgW;
 			this._skin.scroll_Bar.height =466;
 			this._skin.scroll_Bar.x=13;
-			this._msgTxt.setSize(bgW, 0);
 			
 			this._skin.titleDisplay.y=12;
+		}
+		
+		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
+		{
+			super.show(data,openTable,parentContiner);
+			initEvent();
+		}
+		
+		override public function hide():void
+		{
+			super.hide();
+			_skin.tab_zizhi.removeEventListener(Event.SELECT,onSelected);
+			ChatManager.sysHearsayMsgChange=null;
 		}
 		
 		override protected function onTouchTarget(target : DisplayObject) : void {

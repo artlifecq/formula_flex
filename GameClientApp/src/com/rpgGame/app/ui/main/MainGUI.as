@@ -184,7 +184,7 @@ package com.rpgGame.app.ui.main
 			this._chatBar = new ChatBar();
 			this.addChild(this._chatBar);
 			this._systemMsgBar=new SystemMsgBar();
-//			this.addChild(this._systemMsgBar);
+			this.addChild(this._systemMsgBar);
 			this._taskBar=new TaskBar();
 			_dungeonTrackerBar=new DungeonTrackerBar();
 			

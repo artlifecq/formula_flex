@@ -2,9 +2,7 @@ package com.rpgGame.app.ui.main.chat.laba
 {
 	import com.rpgGame.app.richText.RichTextCustomUtil;
 	import com.rpgGame.app.richText.component.RichTextArea3D;
-	import com.rpgGame.app.richText.component.RichTextConfig;
 	import com.rpgGame.app.ui.main.chat.ChatUtil;
-	import com.rpgGame.coreData.info.chat.ChatInfo;
 	import com.rpgGame.coreData.type.AssetUrl;
 	import com.rpgGame.coreData.utils.ColorUtils;
 	import com.rpgGame.netData.chat.message.ResChatMessage;

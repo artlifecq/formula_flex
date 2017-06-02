@@ -1,13 +1,9 @@
 package com.rpgGame.app.manager.chat
 {
-	import com.game.engine3D.vo.BaseObj3D;
 	import com.gameClient.utils.StringFilter;
-	import com.rpgGame.app.graphics.BubbleDialogFace;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
-	import com.rpgGame.app.manager.shell.ShellManager;
-	import com.rpgGame.app.manager.shop.ShopManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.richText.RichTextCustomLinkType;
 	import com.rpgGame.app.richText.RichTextCustomUtil;
@@ -23,10 +19,8 @@ package com.rpgGame.app.manager.chat
 	import com.rpgGame.coreData.cfg.country.CountryNameCfgData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
-	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.info.chat.ChatInfo;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
-	import com.rpgGame.coreData.info.item.GetShowItemVo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
@@ -43,8 +37,6 @@ package com.rpgGame.app.manager.chat
 	import app.message.ChatContentProto.PosInfoProto;
 	
 	import feathers.data.ListCollection;
-	
-	import gs.TweenLite;
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
@@ -132,6 +124,9 @@ package com.rpgGame.app.manager.chat
 		 */
 		public static function recordSystemHearsayMsg(msg:ResChatMessage):void
 		{
+			if(_systemHearsayMsg.length>=MAX_CHATSHOWITEMCACEHE){
+				_systemHearsayMsg.shift();
+			}
 			_systemHearsayMsg.push(msg);
 			if(msg.type==EnumChatChannelType.CHAT_CHANNEL_SYSTEM){
 				recordSystemMsg(msg);

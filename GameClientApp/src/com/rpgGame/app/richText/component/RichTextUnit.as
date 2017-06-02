@@ -148,6 +148,8 @@ package com.rpgGame.app.richText.component
 			}
 		}		
 		
+		
+		
 		//------------------------------------------------
 		/**
 		 * 销毁
@@ -159,6 +161,10 @@ package com.rpgGame.app.richText.component
 			
 			if( displayObj != null)
 			{
+				if (RichTextArea3D.onGetBackDisplayObjWhenUnitDispose != null)
+				{
+					RichTextArea3D.onGetBackDisplayObjWhenUnitDispose(displayObj);
+				}
 				displayObj.removeEventListener(TouchEvent.TOUCH, onTouch );
 				if(displayObj.parent != null)
 				{

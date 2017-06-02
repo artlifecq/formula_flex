@@ -65,7 +65,6 @@ package com.rpgGame.app.ui.main.chat
 			super.dispose();
 			if (_richText)
 			{
-				_richText.clear();
 				_richText.removeFromParent();
 				_richText.dispose();
 				_richText = null;

@@ -15,8 +15,6 @@ package com.rpgGame.app.ui.main.chat
 	
 	import feathers.controls.text.Fontter;
 	
-	import gameEngine2D.NetDebug;
-	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.mainui.systemMsg.systemMsgSkin;
 	
@@ -78,12 +76,13 @@ package com.rpgGame.app.ui.main.chat
 			if(num>0){
 				_currentMsg.splice(0,num);
 			}
-			
 			_msgTxt.clear();
 			num=_currentMsg.length;
+			var msg:String="";
 			for(var i:int=0;i<num;i++){
-				_msgTxt.appendRichText( ChatUtil.getHTMLSystemMsg( _currentMsg[i]));
+				msg+=ChatUtil.getHTMLSystemMsg( _currentMsg[i])+"\n";
 			}
+			_msgTxt.appendRichText(msg);
 		}
 		
 		private function initType():void

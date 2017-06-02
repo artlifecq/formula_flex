@@ -1,8 +1,6 @@
 ﻿package com.rpgGame.app.richText.component
 {
 	import com.rpgGame.app.richText.RichTextCustomUnitType;
-	import com.rpgGame.app.ui.main.chat.ChatUtil;
-	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import flash.display.BitmapData;
 	import flash.events.Event;
@@ -20,6 +18,8 @@
 	import flash.utils.ByteArray;
 	import flash.utils.setTimeout;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.Label;
 	import feathers.controls.text.Fontter;
 	import feathers.events.FeathersEventType;
@@ -28,7 +28,6 @@
 	import starling.display.Image;
 	import starling.display.Shape;
 	import starling.display.Sprite;
-	import away3d.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -49,6 +48,7 @@
 		public static var onMouseOverUnit:Function;
 		public static var onMouseOutUnit:Function;
 		public static var updateUnitDisplayObjFunc:Function;
+		public static var onGetBackDisplayObjWhenUnitDispose:Function;
 		
 		private const PLACEHOLDER:String = "　";
 		private const SEPARATOR:String = "[@6dn@]";

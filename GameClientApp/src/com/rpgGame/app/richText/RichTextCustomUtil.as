@@ -80,13 +80,15 @@ RichTextCustomUtil.updateRichUnit
 package com.rpgGame.app.richText
 {
 	import com.rpgGame.app.manager.MenuManager;
-	import com.rpgGame.app.manager.chat.ChatGoodsManager;
 	import com.rpgGame.app.manager.chat.ChatManager;
 	import com.rpgGame.app.manager.chat.FaceLoadManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.richText.component.RichTextArea3D;
 	import com.rpgGame.app.richText.component.RichTextConfig;
+	import com.rpgGame.app.richText.component.RichTextLabelPool;
+	import com.rpgGame.app.richText.component.RichTextUIAssetPool;
+	import com.rpgGame.app.richText.component.RichTextUIMovieClipPool;
 	import com.rpgGame.app.richText.component.RichTextUnit;
 	import com.rpgGame.app.richText.component.RichTextUnitConfigData;
 	import com.rpgGame.app.richText.component.RichTextUnitData;
@@ -97,16 +99,11 @@ package com.rpgGame.app.richText
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.cfg.FaceCfgData;
 	import com.rpgGame.coreData.clientConfig.FaceInfo;
-	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.type.AssetUrl;
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.type.item.ItemQualityType;
-	
-	import flash.geom.Point;
-	
-	import app.message.GoodsType;
 	
 	import feathers.controls.Label;
 	import feathers.controls.UIAsset;
@@ -115,6 +112,7 @@ package com.rpgGame.app.richText
 	
 	import org.game.netCore.data.long;
 	
+	import starling.display.DisplayObject;
 	import starling.text.TextFieldAutoSize;
 	
 	/**
@@ -132,9 +130,37 @@ package com.rpgGame.app.richText
 		RichTextArea3D.onMouseOverUnit = onMouseOver;
 		RichTextArea3D.onMouseOutUnit = onMouseOut;
 		RichTextArea3D.updateUnitDisplayObjFunc = updateRichUnit;
+		RichTextArea3D.onGetBackDisplayObjWhenUnitDispose = getBackDisplayObjWhenUnitDispose;
 		
 		/**聊天所需富文本单元配置列表*/
 		private static var _chatUnitConfigVect : Vector.<RichTextUnitConfigData>;
+		
+		
+		private static function getBackDisplayObjWhenUnitDispose(displayObj:DisplayObject):void
+		{
+			if ((displayObj is Label))
+			{
+				RichTextLabelPool.putToPool((displayObj as Label));
+			}
+			else
+			{
+				if ((displayObj is UIMovieClip))
+				{
+					RichTextUIMovieClipPool.putToPool((displayObj as UIMovieClip));
+				}
+				else
+				{
+					if ((displayObj is UIAsset))
+					{
+						RichTextUIAssetPool.putToPool((displayObj as UIAsset));
+					}
+					else
+					{
+						throw (new Error("未处理富文本对象"));
+					};
+				};
+			};
+		}
 		
 		/**
 		 * 克隆聊天所需富文本单元配置列表
@@ -415,7 +441,7 @@ package com.rpgGame.app.richText
 			var movieClip : UIMovieClip = unit.displayObj as UIMovieClip;
 			if (movieClip == null)
 			{
-				movieClip = new UIMovieClip();
+				movieClip = RichTextUIMovieClipPool.getFromPool();
 				movieClip.autoPlay = true;
 				movieClip.frameRate = 6;
 				unit.displayObj = movieClip;
@@ -435,7 +461,7 @@ package com.rpgGame.app.richText
 			var image : UIAsset = unit.displayObj as UIAsset;
 			if (image == null)
 			{
-				image = new UIAsset();
+				image = RichTextUIAssetPool.getFromPool();
 				unit.displayObj = image;
 			}
 			image.onImageLoaded = unit.onDisplayObjLoaded;
@@ -453,7 +479,7 @@ package com.rpgGame.app.richText
 			var label : String = "<u>" + unit.unitData.label + "</u>";
 			if (textField == null)
 			{
-				textField = new Label();
+				textField = RichTextLabelPool.getFromPool();
 				textField.autoSize = TextFieldAutoSize.HORIZONTAL;
 				textField.fontSize = unit.unitData.labelSize;
 				textField.isHtmlText = true;
