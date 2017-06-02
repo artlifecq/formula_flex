@@ -80,7 +80,7 @@ package com.client.sender
             msg.localref = "";
             msg.reserva1 = "";
             msg.reserva2 = "";
-            msg.logintype = "";
+            msg.logintype = "1";
             msg.agentPlusdata = "";
             msg.agentColdatas = "";
             msg.adregtime = "";
