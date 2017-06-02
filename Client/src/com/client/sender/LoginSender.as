@@ -3,6 +3,7 @@ package com.client.sender
 	import com.client.ClientGlobal;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.netData.login.message.ReqCreateCharacterMessage;
+	import com.rpgGame.netData.login.message.ReqLoginForPlatformMessage;
 	import com.rpgGame.netData.login.message.ReqLoginMessage;
 	
 	import org.game.netCore.connection.SocketConnection;
@@ -65,5 +66,27 @@ package com.client.sender
 			msg.win_high = ClientGlobal.stage.height;
 			SocketConnection.send(msg);
 		}
+        
+        public static function SendPlatformLoginMessage():void
+        {
+            var msg:ReqLoginForPlatformMessage = new ReqLoginForPlatformMessage();
+            msg.serverId = ClientGlobal.loginAreaId + "";
+            msg.username = ClientGlobal.loginName;
+            msg.agent = ClientGlobal.agent;
+            msg.ad = "";
+            msg.time = ClientGlobal.loginTime + "";
+            msg.isadult = "1";
+            msg.sign = ClientGlobal.loginKey;
+            msg.localref = "";
+            msg.reserva1 = "";
+            msg.reserva2 = "";
+            msg.logintype = "";
+            msg.agentPlusdata = "";
+            msg.agentColdatas = "";
+            msg.adregtime = "";
+            msg.win_width = ClientGlobal.stage.width;
+            msg.win_high = ClientGlobal.stage.height;
+            SocketConnection.send(msg);
+        }
 	}
 }

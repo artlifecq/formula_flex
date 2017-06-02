@@ -27,6 +27,7 @@ package com.client.process
 	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
+	import org.client.mainCore.utils.StringUtil;
 	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.connection.SocketConnection_protoBuffer;
 	import org.game.netCore.event.NetEvent;
@@ -275,7 +276,12 @@ package com.client.process
 			{
 				sendTGW(ClientGlobal.loginIP, ClientGlobal.loginPort);
 			}
-            LoginSender.SendLoginMessage();
+            if (null == ClientGlobal.loginKey || 0 == ClientGlobal.loginKey.length) {
+                LoginSender.SendLoginMessage();
+            } else {
+                LoginSender.SendPlatformLoginMessage();
+            }
+            
 			GameLog.addShow("连接socket成功,发送登录消息", ClientGlobal.loginName, ClientGlobal.loginKey);
 		}
 
