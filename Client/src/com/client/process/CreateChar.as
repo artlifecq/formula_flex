@@ -137,6 +137,7 @@ package com.client.process
 			GameLog.addShow("解析创建角色程序完成...");
 			_createRoleLoader.contentLoaderInfo.removeEventListener(Event.COMPLETE, onLoaderComplete);
 			_createRoleLoader.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR, onIoError);
+            _createRoleLoader.content["baseDir"] = ClientGlobal.baseDir;
 			var setConfigFun : Function = _createRoleLoader.content["setConfig"];
 			setConfigFun(ClientGlobal.maskWorldDic);
 			ClientGlobal.stage.addChild(_createRoleLoader.content);
@@ -144,7 +145,6 @@ package com.client.process
 			_onCreateHeroFail = _createRoleLoader.content["onCreateHeroFail"];
 			_createRoleLoader.content["sendRegisterRole"] = onCreateRoleComplete;
 			_createRoleLoader.content["showInfoAlert"] = onShowInfoAlert;
-            _createRoleLoader.content["baseDir"] = ClientGlobal.baseDir;
 			setProcessPercent(1);
 			ResLoadingView.instance.hide();
 		}
