@@ -1,6 +1,7 @@
 package
 {
 	import com.game.engine3D.manager.Stage3DLayerManager;
+	import com.gameClient.log.GameLog;
 	
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -23,6 +24,7 @@ package
 		/** 发送选择玩家的回调 **/
 		public var sendRegisterRole : Function;
 		public var showInfoAlert : Function;
+        public var baseDir : String;
 		
 		public function Login()
 		{
@@ -36,6 +38,8 @@ package
 		 */
 		private function onAddToStatge(event : Event) : void
 		{
+            ClientConfig.baseDir = baseDir;
+            GameLog.addShow("Login::onAddToStatge::baseDir=" + ClientConfig.baseDir);
 			removeEventListener(Event.ADDED_TO_STAGE, onAddToStatge);
 			
 			_creatCharacterPanel=new CreateRolePanel(Stage3DLayerManager.starlingLayer.getLayer("login"),onCreateChar);
@@ -62,10 +66,6 @@ package
 			
 			RandomNick.setup(lastNameStr.split(","), flagNameStr.split(","), maleNameStr.split(","), femaleNameStr.split(","));
 		}
-        
-        public function set baseDir(baseDir : String) : void {
-            ClientConfig.baseDir = baseDir;
-        }
 		
 		public function onCreateHeroFail(msg : *) : void
 		{
