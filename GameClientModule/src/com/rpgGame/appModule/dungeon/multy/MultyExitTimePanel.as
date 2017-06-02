@@ -33,7 +33,7 @@ package com.rpgGame.appModule.dungeon.multy
 		private var remainTime:int;
 		private function setTime():void
 		{
-			var rTime:int=10;
+			var rTime:int=int(DungeonManager.outTime/1000);
 			if(rTime<=0){
 				_skin.numTime.label="0";
 			}else{

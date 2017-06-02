@@ -42,6 +42,8 @@ package com.rpgGame.app.ui.main.dungeon
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.UIAsset;
 	
+	import gs.TweenLite;
+	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.mainui.fubenzhuizong.FuBen_Skin;
 	import org.mokylin.skin.mainui.renwu.Renwu_Item;
@@ -73,16 +75,17 @@ package com.rpgGame.app.ui.main.dungeon
 			_skin=new FuBen_Skin();
 			super(_skin);
 			init();
-			addEvent();
+			
 		}
 		override protected function onShow() : void
-		{L.l("地图加载完成");
+		{
+			addEvent();
 			enterZone();
-			UIPopManager.showAlonePopUI(DungeonFightPop);
+			
 		}
 		override protected function onHide():void
 		{
-			
+			removeEvent();
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -114,7 +117,8 @@ package com.rpgGame.app.ui.main.dungeon
 		}
 		private function touchBut(id:int):void
 		{
-			walkWave(DungeonManager.getStageWave(id));
+			//walkWave(DungeonManager.getStageWave(id));
+			walkWave(id);
 		}
 		/**寻路完成开始杀怪*/
 		private function startFight(value:*):void
@@ -147,6 +151,19 @@ package com.rpgGame.app.ui.main.dungeon
 			EventManager.addEvent(DungeonEvent.ZONE_SKILL_INFO,setKillInfo);//击杀列表
 			EventManager.addEvent(DungeonEvent.ZONE_OUT_RESULT,setOutResult);//击杀列表
 		}
+		private function removeEvent():void
+		{
+			EventManager.removeEvent(DungeonEvent.ENTER_ZONE,enterZone);//进入副本
+			EventManager.removeEvent(DungeonEvent.OUT_ZONE,outZone);//退出
+			EventManager.removeEvent(DungeonEvent.ZONE_STAGE_CHANGE,setTageChange);//副本状态
+			EventManager.removeEvent(DungeonEvent.ZONE_REMAIN_TIME,setTime);//副本时间
+			EventManager.removeEvent(DungeonEvent.ZONE_SKILL_INFOS,setKillInfo);//击杀列表
+			EventManager.removeEvent(DungeonEvent.ZONE_SKILL_INFO,setKillInfo);//击杀列表
+			EventManager.removeEvent(DungeonEvent.ZONE_OUT_RESULT,setOutResult);//击杀列表
+			TimerServer.remove(updateTime);
+			TweenLite.killDelayedCallsTo(walkTo);
+		}
+		
 		private function enterZone():void
 		{
 			//initShow();
@@ -162,11 +179,15 @@ package com.rpgGame.app.ui.main.dungeon
 			setKillInfo();
 			setTime();
 			setUisite();
+			if(DungeonManager.zoneStage==1)
+			{
+				UIPopManager.showAlonePopUI(DungeonFightPop);
+			}
+			
 		}
 		private function outZone():void
 		{
 			_skin.task_box.visible=false;
-			DungeonManager.curryZoneId=0;
 		}
 		private function setTageChange():void
 		{
@@ -177,13 +198,20 @@ package com.rpgGame.app.ui.main.dungeon
 		}
 		private function autoWalk():void
 		{
-			walkWave(DungeonManager.zoneWave);
+			TweenLite.killDelayedCallsTo(walkTo);
+			TweenLite.delayedCall(1, walkTo);
 		}
+		private function walkTo():void
+		{
+			walkWave(DungeonManager.getKillNoAllID());
+		}
+		
 		private function walkWave(id:int):void
 		{
+			TweenLite.killDelayedCallsTo(walkTo);
 			var pos:Point=DungeonManager.getStagePos(id);
 			if(pos)
-			{
+			{//L.l("寻路到："+pos.x+":"+ pos.y);
 				MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, pos.x, pos.y,finishWalk, 100,null,finishWalk);
 			}
 		}
@@ -374,7 +402,8 @@ package com.rpgGame.app.ui.main.dungeon
 		}
 		private function setOutResult():void
 		{
-			AppManager.showApp(AppConstant.MULTY_EXITTIME_PANL);
+			//AppManager.showApp(AppConstant.MULTY_EXITTIME_PANL);
+			//AppManager.showApp(AppConstant.SWORD_RESULT_FAIL);
 		}
 		
 		private function zoneOutToGame():void

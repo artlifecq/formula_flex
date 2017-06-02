@@ -14,8 +14,12 @@ package com.rpgGame.coreData.clientConfig
 	{
 		 /**  任务奖励id（任务主id(10000-19999）主线;（20000-29999）支线;（30000-39999）环式基础;40000-49999）环式额外） */
 		public var q_reward_id:int;
-		 /**  奖励（JsoN）  mod:物品编号 num：数量 show:是否在追踪面板显示 */
+		 /**  (兵家)奖励（JsoN）  mod:物品编号 num：数量 show:是否在追踪面板显示 */
 		public var q_reward:String;
+		 /**  医家奖励 */
+		public var q_reward_1:String;
+		 /**  墨家奖励 */
+		public var q_reward_2:String;
 
 	}
 }
