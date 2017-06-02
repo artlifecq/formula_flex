@@ -47,7 +47,7 @@
 					continue;
 				if(data.q_notivelevel > level)
 					continue;
-				if(data.q_level < level)
+				if(data.q_level <= level)
 					continue;
 				
 				if(found==null)
