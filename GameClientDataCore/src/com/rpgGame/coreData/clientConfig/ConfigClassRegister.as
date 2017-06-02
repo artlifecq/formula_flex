@@ -32,7 +32,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const ClientSceneRole:String = "data.ClientSceneRole";
 		/**  客户端表情配置					 */
 		public static const FaceInfo:String = "data.FaceInfo";
-		/**  功能开放表											 */
+		/**  窗口链接信息表											 */
 		public static const FunctionBarInfo:String = "data.FunctionBarInfo";
 		/**  游戏音乐配置表							 */
 		public static const GameSoundInfo:String = "data.GameSoundInfo";
@@ -150,7 +150,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_mission_section:String = "data.Q_mission_section";
 		/**  任务对话配置表(1-20000为主线任务对应的对话id，20001-30000是支线任务对话id)			 */
 		public static const Q_mission_segment:String = "data.Q_mission_segment";
-		/**  功能开放表											 */
+		/**  功能开放表														 */
 		public static const Q_newfunc:String = "data.Q_newfunc";
 		/**  通知列表			 */
 		public static const Q_notify:String = "data.Q_notify";
