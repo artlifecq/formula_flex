@@ -2,6 +2,7 @@ package com.rpgGame.app.ui.main.shortcut
 {
 	import com.game.engine3D.display.EffectObject3D;
 	import com.game.engine3D.display.Inter3DContainer;
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.LostSkillManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -17,6 +18,8 @@ package com.rpgGame.app.ui.main.shortcut
 	
 	import flash.geom.Point;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.Button;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -26,7 +29,6 @@ package com.rpgGame.app.ui.main.shortcut
 	import starling.animation.Transitions;
 	import starling.core.Starling;
 	import starling.display.Image;
-	import away3d.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;

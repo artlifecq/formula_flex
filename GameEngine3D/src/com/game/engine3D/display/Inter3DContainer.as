@@ -96,9 +96,12 @@ package com.game.engine3D.display
 			addChild3D(sr3D);
 			return sr3D;
 		}
-		public function addChild3D(child : InterObject3D) : void
+		public function addChild3D(child : InterObject3D,index:int = -1) : void
 		{
-			this.addChild(child);
+			if(index<0)
+				this.addChild(child);
+			else
+				this.addChildAt(child,index);
 			if (!_inter3DObjs)
 			{
 				_inter3DObjs = new Vector.<InterObject3D>();

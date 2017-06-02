@@ -65,6 +65,8 @@ package com.rpgGame.coreData.type
 		
 		/**战魂**/
 		public static const FIGHTSOUL:String = "FightSoul";
+		/**战魂特效**/
+		public static const FIGHTSOUL_EFFECT:String = "FightSoul_effect";
 		
 		/**军阶**/
 		public static const JUNJIE:String = "JunJie";

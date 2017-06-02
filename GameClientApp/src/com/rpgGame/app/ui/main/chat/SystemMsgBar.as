@@ -1,16 +1,10 @@
 package com.rpgGame.app.ui.main.chat
 {
 	import com.rpgGame.app.manager.chat.ChatManager;
-	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.richText.component.RichTextArea3D;
 	import com.rpgGame.core.events.ChatEvent;
 	import com.rpgGame.core.events.HintEvent;
 	import com.rpgGame.core.ui.SkinUI;
-	import com.rpgGame.coreData.cfg.LanguageConfig;
-	import com.rpgGame.coreData.cfg.NotifyCfgData;
-	import com.rpgGame.coreData.clientConfig.Q_notify;
 	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
-	import com.rpgGame.coreData.utils.ColorUtils;
 	import com.rpgGame.netData.chat.message.ResChatMessage;
 	import com.rpgGame.netData.player.message.SCNoticeMessage;
 	
@@ -18,8 +12,8 @@ package com.rpgGame.app.ui.main.chat
 	import flash.text.TextFormatAlign;
 	
 	import feathers.controls.text.Fontter;
-	
-	import gameEngine2D.NetDebug;
+	import feathers.data.ListCollection;
+	import feathers.layout.VerticalLayout;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.mainui.systemMsg.systemMsgSkin;
@@ -36,7 +30,6 @@ package com.rpgGame.app.ui.main.chat
 	{
 		
 		private var _skin : systemMsgSkin;
-		private var _msgTxt:RichTextArea3D;
 		
 		private var _isShowAll:Boolean;
 		private var _currentMsg:Vector.<ResChatMessage>;
@@ -60,10 +53,20 @@ package com.rpgGame.app.ui.main.chat
 			defaultFormat.align = TextFormatAlign.LEFT;
 			defaultFormat.letterSpacing = 1;
 			defaultFormat.leading = 5;
-			_msgTxt=new RichTextArea3D(_skin.bg.width,_skin.bg.height, ColorUtils.getDefaultStrokeFilter());
-			this._msgTxt.wordWrap = true;
-			this._msgTxt.multiline = true;
-			_skin.container.addChild(_msgTxt);
+			
+			_skin.msg_list.verticalScrollBarPosition = "right";
+			_skin.msg_list.horizontalScrollPolicy = "off";
+			_skin.msg_list.verticalScrollPolicy = "on";
+			_skin.msg_list.scrollBarDisplayMode = "fixed";
+			SystemMsgItemRender.WIDTH=_skin.bg.width-20;
+			_skin.msg_list.itemRendererType = SystemMsgItemRender;
+			_skin.msg_list.dataProvider = new ListCollection();
+			var layout:VerticalLayout = new VerticalLayout();
+			layout.useVirtualLayout = true;
+			layout.gap = 1;
+			layout.hasVariableItemDimensions = true;
+			_skin.msg_list.layout = layout;
+			
 			_allMsg=new Vector.<ResChatMessage>();
 			_sysMsg=new Vector.<ResChatMessage>();
 			
@@ -82,12 +85,13 @@ package com.rpgGame.app.ui.main.chat
 			if(num>0){
 				_currentMsg.splice(0,num);
 			}
-			
-			_msgTxt.clear();
+			_skin.msg_list.dataProvider.removeAll();
 			num=_currentMsg.length;
+			var msg:String="";
 			for(var i:int=0;i<num;i++){
-				_msgTxt.appendRichText( ChatUtil.getHTMLSystemMsg( _currentMsg[i]));
+				_skin.msg_list.dataProvider.addItem(_currentMsg[i]);
 			}
+			_skin.msg_list.scrollToBottom(0);
 		}
 		
 		private function initType():void
@@ -131,7 +135,6 @@ package com.rpgGame.app.ui.main.chat
 			if(_isShowAll){
 				_skin.bg.width=320;
 				_skin.bg.height=200;
-				
 				_skin.btn_jia.visible=false;
 				_skin.btn_jian.visible=true;
 				maxMsgNum=11;
@@ -144,15 +147,15 @@ package com.rpgGame.app.ui.main.chat
 				maxMsgNum=7;
 				currentMsg=_sysMsg;
 			}
-			
+			_skin.msg_list.width=_skin.bg.width;
+			_skin.msg_list.height=_skin.bg.height-30;
 			_skin.btn_xiangxi.x=_skin.bg.width-74;
 			_skin.btn_xiangxi.y=_skin.bg.height-26;
 			_skin.btn_jia.x=_skin.bg.width-24;
 			_skin.btn_jia.y=_skin.bg.height-26;
 			_skin.btn_jian.x=_skin.bg.width-24;
 			_skin.btn_jian.y=_skin.bg.height-26;
-			
-			_msgTxt.setSize(_skin.bg.width,_skin.bg.height-26);
+			SystemMsgItemRender.WIDTH=_skin.bg.width-20;
 			
 			if(stageW!=0&&stageH!=0){
 				resize(stageW,stageH);
@@ -162,34 +165,29 @@ package com.rpgGame.app.ui.main.chat
 		private function onSendSuccess( info:ResChatMessage):void
 		{
 			//只显示系统和传闻
-//			if(info.type==EnumChatChannelType.CHAT_CHANNEL_HEARSAY||info.type==EnumChatChannelType.CHAT_CHANNEL_SYSTEM){
-//				ChatManager.recordSystemHearsayMsg(info);
-//				showChatMsg( info );	
-//			}
+			if(info.type==EnumChatChannelType.CHAT_CHANNEL_HEARSAY||info.type==EnumChatChannelType.CHAT_CHANNEL_SYSTEM){
+				ChatManager.recordSystemHearsayMsg(info);
+				showChatMsg( info );	
+			}
 		}
 		
-		private function onNoticeMessage(arr:Array):void
+		private function onNoticeMessage(msg:SCNoticeMessage):void
 		{
-			var pingdao:int=parseInt(arr[0])==3?EnumChatChannelType.CHAT_CHANNEL_SYSTEM:EnumChatChannelType.CHAT_CHANNEL_HEARSAY;
-			var text:String=arr[1];
-			var msg1:ResChatMessage=new ResChatMessage();
-			msg1.type=pingdao;
-			msg1.chatText=text;
-			onSendSuccess(msg1);
+			
 		}
 		
 		private function showChatMsg( info:ResChatMessage ):void
 		{
-			//			if(_isShowAll){
-			_allMsg.push(info);
-			currentMsg=_allMsg;
-			if(info.type==EnumChatChannelType.CHAT_CHANNEL_SYSTEM){
+			if(_isShowAll){
+				_allMsg.push(info);
+				currentMsg=_allMsg;
+				if(info.type==EnumChatChannelType.CHAT_CHANNEL_SYSTEM){
+					_sysMsg.push(info);
+				}
+			}else if(info.type==EnumChatChannelType.CHAT_CHANNEL_SYSTEM){
 				_sysMsg.push(info);
+				currentMsg=_sysMsg;
 			}
-			//			}else if(info.type==EnumChatChannelType.CHAT_CHANNEL_SYSTEM){
-			//				_sysMsg.push(info);
-			//				currentMsg=_sysMsg;
-			//			}
 		}
 		
 		public function resize(w : int, h : int) : void {

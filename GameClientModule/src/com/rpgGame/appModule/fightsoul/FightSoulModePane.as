@@ -34,16 +34,17 @@ package com.rpgGame.appModule.fightsoul
 				RenderUnit3D.recycle(_effect);
 			
 			var modeinfo:Q_fightsoul_mode = FightsoulModeData.getModeInfoById(_level);
-			var data : RenderParamData3D = new RenderParamData3D(0, "mode", ClientConfig.getAvatar("monster/"+modeinfo.q_mode));
+			var data : RenderParamData3D =  new RenderParamData3D(0, "effect", ClientConfig.getEffect(modeinfo.q_effect));
 			_mode = this.addRenderUnitWith(data, 0, onAddEftComplete);
-			data= new RenderParamData3D(0, "effect", ClientConfig.getEffect(modeinfo.q_effect));
-			_effect = this.addRenderUnitWith(data, 0, onAddEftComplete);
+			data=new RenderParamData3D(0, "mode", ClientConfig.getFightSoul(modeinfo.q_mode));
+  			_effect = this.addRenderUnitWith(data, 0, onAddEftComplete);
 		}
 		
 		private function onAddEftComplete(sr3D:InterObject3D,renderUint:RenderUnit3D):void
 		{
 			renderUint.removeAddedCallBack(onAddEftComplete);
-			renderUint.scaleX=renderUint.scaleY=0.6;
+			renderUint.scaleX=renderUint.scaleY=1;
+			renderUint.y = 120;
 		}
 	}
 }

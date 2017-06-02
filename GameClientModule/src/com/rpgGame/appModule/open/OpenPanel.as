@@ -1,0 +1,106 @@
+package com.rpgGame.appModule.open
+{
+	import com.game.engine3D.display.InterObject3D;
+	import com.game.engine3D.scene.render.RenderUnit3D;
+	import com.game.engine3D.scene.render.vo.RenderParamData3D;
+	import com.rpgGame.app.manager.ItemActionManager;
+	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.app.ui.main.buttons.IOpen;
+	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
+	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
+	import com.rpgGame.coreData.cfg.NewFuncCfgData;
+	import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
+	import com.rpgGame.coreData.clientConfig.Q_newfunc;
+	
+	import flash.geom.Point;
+	
+	import feathers.controls.UIAsset;
+	
+	import gs.easing.Sine;
+	
+	import org.mokylin.skin.app.xingongneng.KaiQi_Skin;
+	
+	import starling.display.DisplayObjectContainer;
+	
+	public class OpenPanel extends SkinUIPanel
+	{
+		private var _skin:KaiQi_Skin;
+		private var _qdata:Q_newfunc;
+		private var _button:IOpen;
+		private var _needCreate:Boolean= true;
+		private var _idlist:Vector.<int>;
+		public function OpenPanel():void
+		{
+			_skin = new KaiQi_Skin();
+			super(_skin);
+			this.escExcuteAble = false;
+//			initView();
+		}
+		
+		private function initView():void
+		{
+			var effect:InterObject3D = new InterObject3D();
+			var data : RenderParamData3D = new RenderParamData3D(0, "effect_ui", ClientConfig.getEffect("tx_xingongnengkaiqi"));
+			data.forceLoad=true;//ui上的3d特效强制加载
+			effect.addRenderUnitWith(data, 1,onPlayComplete);
+			this.addChild3D(effect,0);
+			effect.x = this.width/2;
+			effect.y = 95;
+//			_unit.setPlayCompleteCallBack(onPlayComplete);
+		}
+		private function onPlayComplete(sr3D : InterObject3D):void
+		{
+			this.removeChild(sr3D);
+			runFly();
+		}
+		
+		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
+		{
+			super.show(data,openTable,parentContiner);
+			_idlist = data as Vector.<int>;
+			refeashView();
+		}
+		
+		private function refeashView():void
+		{
+			if(_idlist==null||_idlist.length<=0)
+			{
+				return ;
+			}else{
+				initView();
+			}
+			_needCreate = false;
+			_qdata = NewFuncCfgData.getdataById(_idlist.pop());
+			var info:FunctionBarInfo = FuncionBarCfgData.getActivityBarInfo(_qdata.q_main_id);
+			_button= MainButtonManager.getButtonBuyInfo(info);
+			_skin.Icons.styleName = "ui/app/xingongneng/icon/"+_qdata.q_openIcon+"/145.png";
+			_skin.uiName.styleName = "ui/app/xingongneng/icon/"+_qdata.q_openIcon+"/name.png";
+		}
+		protected function runFly():void
+		{
+			var startPos:Point = _skin.Icons.localToGlobal(new Point(0,0));
+			var icon:UIAsset = new UIAsset();
+			icon.x = startPos.x;
+			icon.y = startPos.y;
+			icon.styleName = _skin.Icons.styleName;
+			var endpos:Point = _button.localToGlobal(new Point(0,0));
+			var timeobj:Object = {x:endpos.x - 5, y:endpos.y,scaleX:0.1,scaleY:0.1,ease:Sine.easeInOut};
+			ItemActionManager.addTweenDisplay(endpos,icon,timeobj,onTweenFlyComplete);
+		}
+		private function onTweenFlyComplete():void
+		{
+			_needCreate = true;
+			if(_idlist.length<=0)
+				this.hide();
+			else
+				refeashView();
+		}
+		
+		override public function hide():void
+		{
+			_needCreate = true;
+			super.hide();
+		}
+	}
+}

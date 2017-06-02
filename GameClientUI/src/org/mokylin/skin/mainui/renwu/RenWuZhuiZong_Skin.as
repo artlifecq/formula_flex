@@ -176,7 +176,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.color = 0xCFC6AE;
 			temp.width = 127;
 			temp.x = 59;
-			temp.y = 345;
+			temp.y = 296;
 			return temp;
 		}
 

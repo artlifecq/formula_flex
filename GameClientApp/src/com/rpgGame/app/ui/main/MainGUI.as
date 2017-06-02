@@ -1,11 +1,12 @@
 package com.rpgGame.app.ui.main
 {
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.ui.main.activityBar.ActivityBar;
 	import com.rpgGame.app.ui.main.buff.BuffBar;
-	import com.rpgGame.app.ui.main.buttons.MainButtonBases;
+	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
 	import com.rpgGame.app.ui.main.chat.ChatBar;
 	import com.rpgGame.app.ui.main.chat.SystemMsgBar;
 	import com.rpgGame.app.ui.main.dungeon.DungeonTrackerBar;
@@ -156,8 +157,9 @@ package com.rpgGame.app.ui.main
 			nativeStage = Starling.current.nativeStage;
 			nativeStage.addEventListener(Event.RESIZE, onStageResize);
 			starlingStage = Starling.current.stage;
-			MainButtonBases.init();
+			MainButtonManager.init();
 			initBar();
+			FunctionOpenManager.openNoticeByLevel(MainRoleManager.actorInfo.totalStat.level);
 			//isShowEventTrackPanel();
 			registerEvent();
 		}
@@ -400,7 +402,7 @@ package com.rpgGame.app.ui.main
 		 * 
 		 */		
 		private function onSwitchCmp() : void
-		{
+		{//L.l("地图加载完成");
 			var mapId:int=MainRoleManager.actorInfo.mapID;
 			var sceneData:SceneData=MapDataManager.getMapInfo(mapId);
 			var mapCfg:Q_map=sceneData.getData();
