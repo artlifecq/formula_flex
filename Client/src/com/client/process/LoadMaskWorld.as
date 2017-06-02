@@ -5,7 +5,8 @@ package com.client.process
 	import com.game.engine3D.process.BaseProcess;
 	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.StringFilter;
-
+	import com.rpgGame.coreData.cfg.LanguageConfig;
+	
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
 	import flash.events.ProgressEvent;
@@ -66,6 +67,7 @@ package com.client.process
 			byteArray.uncompress();
 			var config : Dictionary = byteArray.readObject();
 			ClientGlobal.maskWorldDic = config;
+            LanguageConfig.parseData(config);
 			var lang : Object = config["MASK_WORLD"];
 			StringFilter.init(lang ? lang.value : "");
 			_stream.close();
