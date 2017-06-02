@@ -49,7 +49,7 @@ package com.rpgGame.core.manager.tips
 			_tipParserClasses = new Dictionary();
 			StarlingLayerManager.tipUILayer.addChild(_tipContiner);
 		}
-	
+		
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//////////////////////                                         public
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -120,7 +120,7 @@ package com.rpgGame.core.manager.tips
 			
 			if($pos.x + _currentSowTips.width > Starling.current.stage.stageWidth)
 			{
-				$pos.x = $pos.x - _currentSowTips.width - OffsetX;
+				$pos.x = $pos.x - _currentSowTips.width - ($pos.x + _currentSowTips.width-Starling.current.stage.stageWidth) ;
 			}
 			if($pos.y + _currentSowTips.height > Starling.current.stage.stageHeight)
 			{

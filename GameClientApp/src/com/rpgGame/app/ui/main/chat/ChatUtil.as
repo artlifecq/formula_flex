@@ -16,10 +16,10 @@ package com.rpgGame.app.ui.main.chat
 	import com.rpgGame.netData.chat.message.ResChatMessage;
 	
 	import flash.utils.ByteArray;
-
+	
 	public class ChatUtil
 	{
-
+		
 		/**
 		 * 在聊天框里显示
 		 * @param channel
@@ -38,8 +38,8 @@ package com.rpgGame.app.ui.main.chat
 					chanelImageName = "shi_jie";
 					break;
 				/*case EnumChatChannelType.CHAT_CHANNEL_COUNTRY:
-					chanelImageName = "guo_jia";
-					break;*/
+				chanelImageName = "guo_jia";
+				break;*/
 				case EnumChatChannelType.CHAT_CHANNEL_NORMAL:
 					chanelImageName = "pu_tong";
 					break;
@@ -49,45 +49,45 @@ package com.rpgGame.app.ui.main.chat
 				case EnumChatChannelType.CHAT_CHANNEL_TEAM:
 					chanelImageName = "dui_wu";
 					break;
-			/*	case EnumChatChannelType.CHAT_CHANNEL_FAMILY:
-					chanelImageName = "jia_zhu";
-					break;*/
+				/*	case EnumChatChannelType.CHAT_CHANNEL_FAMILY:
+				chanelImageName = "jia_zhu";
+				break;*/
 				case EnumChatChannelType.CHAT_CHANNEL_LABA:
 					chanelImageName = "la_ba";
 					break;
 				case EnumChatChannelType.CHAT_CHANNEL_KUA_FU:
 					chanelImageName = "kua_fu";
 					break;
-			/*	case EnumChatChannelType.CHAT_CHANNEL_MENG_GUO:
-					chanelImageName = "meng_guo";
-					break;*/
+				/*	case EnumChatChannelType.CHAT_CHANNEL_MENG_GUO:
+				chanelImageName = "meng_guo";
+				break;*/
 				case EnumChatChannelType.CHAT_CHANNEL_SILIAO:
 					chanelImageName = "si_liao";
 					break;
 			}
 			var channelImageUrl:String = "ui/mainui/chat/chanel/" + chanelImageName + ".png";
 			var channelImageCode:String = RichTextCustomUtil.getImageLinkCode(channelImageUrl,null,null,2);
-//			return HtmlTextUtil.getTextColor(getChannelColor(channel), "【" + ChatUtil.getChannelTitle(channel) + "】" + message);
+			//			return HtmlTextUtil.getTextColor(getChannelColor(channel), "【" + ChatUtil.getChannelTitle(channel) + "】" + message);
 			return HtmlTextUtil.getTextColor(0xf7ff15,"【" + ChatUtil.getChannelTitle(channel) + "】"+HtmlTextUtil.underLine(name)+": ")+HtmlTextUtil.getTextColor(0xd7d7d7,message);
-//			return channelImageCode + HtmlTextUtil.getTextColor(getChannelColor(channel), message);
+			//			return channelImageCode + HtmlTextUtil.getTextColor(getChannelColor(channel), message);
 		}
-
+		
 		public static function getHTMLSystemMsg(msgInfo:ResChatMessage):String
 		{
 			var chatHtml:String="【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+msgInfo.chatText;
 			chatHtml=HtmlTextUtil.getTextColor(getChannelColor(msgInfo.type),chatHtml);
 			return chatHtml;
 		}
-
+		
 		public static function getChannelColor(channelType : int) : uint
 		{
 			switch (channelType)
 			{
 				/*case EnumChatChannelType.CHAT_CHANNEL_SYSTEM:
-					return StaticValue.CHAT_XI_TONG_COLOR;*/
+				return StaticValue.CHAT_XI_TONG_COLOR;*/
 				case EnumChatChannelType.CHAT_CHANNEL_WORLD:
 					return StaticValue.CHAT_SHI_JIE_COLOR;
-				/*case EnumChatChannelType.CHAT_CHANNEL_COUNTRY:
+					/*case EnumChatChannelType.CHAT_CHANNEL_COUNTRY:
 					return StaticValue.CHAT_GUO_JIA_COLOR;*/
 				case EnumChatChannelType.CHAT_CHANNEL_NORMAL:
 					return StaticValue.CHAT_PU_TONG_COLOR;
@@ -95,20 +95,20 @@ package com.rpgGame.app.ui.main.chat
 					return StaticValue.CHAT_BANG_PAI_COLOR;
 				case EnumChatChannelType.CHAT_CHANNEL_TEAM:
 					return StaticValue.CHAT_DUI_WU_COLOR;
-			/*	case EnumChatChannelType.CHAT_CHANNEL_FAMILY:
+					/*	case EnumChatChannelType.CHAT_CHANNEL_FAMILY:
 					return StaticValue.CHAT_JIA_ZU_COLOR;*/
 				case EnumChatChannelType.CHAT_CHANNEL_LABA:
 					return StaticValue.CHAT_LA_BA_COLOR;
 				case EnumChatChannelType.CHAT_CHANNEL_KUA_FU:
 					return StaticValue.CHAT_KUA_FU_COLOR;
-				/*case EnumChatChannelType.CHAT_CHANNEL_MENG_GUO:
+					/*case EnumChatChannelType.CHAT_CHANNEL_MENG_GUO:
 					return StaticValue.CHAT_MENG_GUO_COLOR;*/
 				case EnumChatChannelType.CHAT_CHANNEL_SILIAO:
 					return StaticValue.CHAT_SI_LIAO_COLOR;
 			}
 			return StaticValue.COLOR_CODE_1;
 		}
-
+		
 		/**
 		 * 根据聊天页签类型获得页签名称
 		 * @param channelType
@@ -153,9 +153,9 @@ package com.rpgGame.app.ui.main.chat
 				case EnumChatChannelType.CHAT_CHANNEL_WORLD:
 					info = LanguageConfig.getText(LangChat.CHAT_CHANNEL_WORLD);
 					break;
-			/*	case EnumChatChannelType.CHAT_CHANNEL_COUNTRY:
-					info = LanguageConfig.getText(LangChat.CHAT_CHANNEL_ALLY);
-					break;*/
+				/*	case EnumChatChannelType.CHAT_CHANNEL_COUNTRY:
+				info = LanguageConfig.getText(LangChat.CHAT_CHANNEL_ALLY);
+				break;*/
 				case EnumChatChannelType.CHAT_CHANNEL_NORMAL:
 					info = LanguageConfig.getText(LangChat.CHAT_CHANNEL_NORMAL);
 					break;
@@ -168,31 +168,31 @@ package com.rpgGame.app.ui.main.chat
 				case EnumChatChannelType.CHAT_CHANNEL_LABA:
 					info = LanguageConfig.getText(LangChat.CHAT_CHANNEL_LABA);
 					break;
-			/*	case EnumChatChannelType.CHAT_CHANNEL_FAMILY:
-					info = "家族";
-					break;*/
+				/*	case EnumChatChannelType.CHAT_CHANNEL_FAMILY:
+				info = "家族";
+				break;*/
 				case EnumChatChannelType.CHAT_CHANNEL_SILIAO:
 					info = "私聊";
 					break;
 				case EnumChatChannelType.CHAT_CHANNEL_KUA_FU:
 					info = "跨服";
 					break;
-			/*	case EnumChatChannelType.CHAT_CHANNEL_MENG_GUO:
-					info = "盟国";
-					break;
+				/*	case EnumChatChannelType.CHAT_CHANNEL_MENG_GUO:
+				info = "盟国";
+				break;
 				case EnumChatChannelType.CHAT_CHANNEL_WINDOW:
-					info = LanguageConfig.getText(LangChat.CHAT_CHANNEL_WINDOW);
-					break;*/
+				info = LanguageConfig.getText(LangChat.CHAT_CHANNEL_WINDOW);
+				break;*/
 			}
 			return info;
 		}
-
+		
 		public static function getCheckTitle(channelType : int):String
 		{
 			var info : String = "接收" + getChannelTitle(channelType) + "频道信息";
 			return info;
 		}
-
+		
 		//---------------------------------------------------------------
 		/**
 		 * 去除头尾空白
@@ -206,7 +206,7 @@ package com.rpgGame.app.ui.main.chat
 			var r2 : RegExp = /\s*$/g;
 			return str.replace(r1, "").replace(r2, "");
 		}
-
+		
 		/**
 		 * 搜索中不能有空格，最大14个字节
 		 * @param str
@@ -243,7 +243,7 @@ package com.rpgGame.app.ui.main.chat
 			}
 			return info;
 		}
-
+		
 		/**
 		 * 得到限定字符长度的字符
 		 * @param _info
@@ -254,7 +254,7 @@ package com.rpgGame.app.ui.main.chat
 		public static function getStrByByteLen(_info : String, maxlen : int = 96) : String
 		{
 			_info = trim(_info);
-
+			
 			var info : String = "";
 			var len : int = _info.length;
 			for (var i : int = 0; i < len; i++)
@@ -267,7 +267,7 @@ package com.rpgGame.app.ui.main.chat
 			}
 			return info;
 		}
-
+		
 		/**
 		 * 得到字符串的字节长度
 		 * @param	info
@@ -277,7 +277,7 @@ package com.rpgGame.app.ui.main.chat
 		{
 			return toByteArray(info).length;
 		}
-
+		
 		/**
 		 * 将字符串长度
 		 * @param	info

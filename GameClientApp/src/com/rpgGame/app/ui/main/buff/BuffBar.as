@@ -63,7 +63,8 @@ package com.rpgGame.app.ui.main.buff
 			this.addChild(debuffSp);
 			for(var i:int=0;i<num;i++){
 				var data:BuffData=buffList[i];
-				createIcon(data);
+				if(data._data.q_effect_time!=-1)
+					createIcon(data);
 			}
 		}
 		
@@ -132,7 +133,7 @@ package com.rpgGame.app.ui.main.buff
 		}
 		private function removeBuff(buffData:BuffData):void
 		{
-			if(buffData.roleId!=roleId){
+			if(buffData.roleId!=roleId||buffData._data.q_effect_time==-1){
 				return;
 			}
 			removeForDatas(buffData);
@@ -148,7 +149,7 @@ package com.rpgGame.app.ui.main.buff
 				{
 					icon=badBuffs[i];
 					if(icon.buffData.buffData.q_buff_id==buffData.buffData.q_buff_id){
-                        icon.dispose();
+						icon.dispose();
 						badBuffs.splice(i,1);
 						debuffSp.removeChild(icon);
 						break;
@@ -161,7 +162,7 @@ package com.rpgGame.app.ui.main.buff
 				{
 					icon=goodBuffs[i];
 					if(icon.buffData.buffData.q_buff_id==buffData.buffData.q_buff_id){
-                        icon.dispose();
+						icon.dispose();
 						goodBuffs.splice(i,1);
 						buffSp.removeChild(icon);
 						break;
@@ -174,63 +175,63 @@ package com.rpgGame.app.ui.main.buff
 			/*num=datas.length;
 			var changW:int;
 			if(datas==goodBuffs){
-				changW=gridW;
+			changW=gridW;
 			}else{
-				changW=-1*gridW;
+			changW=-1*gridW;
 			}
 			
 			while(i<num){
-				icon=datas[i];
-				icon.x+=changW;
-				i++;
+			icon=datas[i];
+			icon.x+=changW;
+			i++;
 			}*/
 		}
 		/*private function removeBuff(buffData:BuffData):void
 		{
-			if(buffData.roleId!=roleId){
-				return;
-			}
-			if(buffData.buffData.q_effect_type==2){//负面
-				removeForDatas(buffData,badBuffs);
-			}else{
-				removeForDatas(buffData,goodBuffs);
-			}
+		if(buffData.roleId!=roleId){
+		return;
+		}
+		if(buffData.buffData.q_effect_type==2){//负面
+		removeForDatas(buffData,badBuffs);
+		}else{
+		removeForDatas(buffData,goodBuffs);
+		}
 		}
 		
 		private function removeForDatas(data:BuffData,datas:Vector.<BuffIcon>):void
 		{
-			var icon:BuffIcon;
-			var num:int=datas.length;
-			for  (var i:int=0;i<num;i++) 
-			{
-				icon=datas[i];
-				if(icon.buffData.buffData.q_buff_id==data.buffData.q_buff_id){
-					datas.splice(i,1);
-					
-					//icon.dispose();
-					
-					
-					break;
-				}
-			}
-			num=datas.length;
-			var changW:int;
-			if(datas==goodBuffs){
-				changW=gridW;
-			}else{
-				changW=-1*gridW;
-			}
-			
-			while(i<num){
-				icon=datas[i];
-				icon.x+=changW;
-				i++;
-			}
+		var icon:BuffIcon;
+		var num:int=datas.length;
+		for  (var i:int=0;i<num;i++) 
+		{
+		icon=datas[i];
+		if(icon.buffData.buffData.q_buff_id==data.buffData.q_buff_id){
+		datas.splice(i,1);
+		
+		//icon.dispose();
+		
+		
+		break;
+		}
+		}
+		num=datas.length;
+		var changW:int;
+		if(datas==goodBuffs){
+		changW=gridW;
+		}else{
+		changW=-1*gridW;
+		}
+		
+		while(i<num){
+		icon=datas[i];
+		icon.x+=changW;
+		i++;
+		}
 		}*/
 		
 		private function addBuff(buffData:BuffData):void
 		{
-			if(buffData.roleId!=roleId){
+			if(buffData.roleId!=roleId||buffData._data.q_effect_time==-1){
 				return;
 			}
 			

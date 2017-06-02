@@ -128,7 +128,7 @@ package org.mokylin.skin.loading
 			temp.bold = false;
 			temp.height = 26;
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.touchable = false;
 			temp.fontSize = 14;
 			temp.text = "补充协议";

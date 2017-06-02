@@ -72,6 +72,7 @@ package com.rpgGame.appModule.junjie
 			_pointXArr=[68,49,36,32,34];
 			initView();
 			initAvatar();
+			_skin.conTiaojian.x=_skin.conTiaojian.x-14;
 			_skin.uiUp.visible=false;
 			_skin.num_lv.visible=false;		
 		}
