@@ -10,10 +10,6 @@ package com.rpgGame.app.ui.main.buttons
 	public class MainButton_Gang extends MainButtonBases
 	{
 		private var _helpPoint:Point;
-		public function MainButton_Gang(info:FunctionBarInfo)
-		{
-			super(info);
-		}
 		override protected function initialize():void
 		{
 			this.styleClass = ButtonSkin_shejiao;

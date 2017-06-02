@@ -68,6 +68,7 @@ package com.rpgGame.coreData.type
 		
 		/**战魂**/
 		public static const FIGHTSOUL : int = rEnum.next;
+		public static const FIGHTSOUL_EFFECT:int = rEnum.next;
 		
 		/**军阶**/
 		public static const JUNJIE : int = rEnum.next;
