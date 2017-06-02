@@ -7,6 +7,7 @@ package com.rpgGame.app.ui.main.buttons
 	import org.client.mainCore.ds.HashMap;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonFubendating;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonLunjian;
+	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_renwu;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_shangcheng;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_shejiao;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_wuxue;
@@ -22,7 +23,7 @@ package com.rpgGame.app.ui.main.buttons
 		{
 			_initializeMap = new HashMap();
 			_classMap = new  HashMap();
-			regClass(1,MainButtonBases,ButtonSkin_zhanhun);
+			regClass(1,MainButtonBases,ButtonSkin_renwu);
 			regClass(2,MainButton_Mount,ButtonSkin_zuoqi);
 			regClass(3,MainButton_Equip,ButtonSkin_zhuangbei);
 			regClass(4,MainButtonBases,ButtonSkin_wuxue);

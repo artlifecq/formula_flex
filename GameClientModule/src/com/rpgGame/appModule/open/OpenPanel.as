@@ -58,9 +58,7 @@ package com.rpgGame.appModule.open
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
-			
 			_idlist = data as Vector.<int>;
-			
 			refeashView();
 		}
 		
