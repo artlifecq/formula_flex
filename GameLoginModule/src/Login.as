@@ -6,6 +6,7 @@ package
 	import flash.events.Event;
 	import flash.utils.Dictionary;
 	
+	import game.rpgGame.login.ClientConfig;
 	import game.rpgGame.login.data.CreateRoleData;
 	import game.rpgGame.login.util.RandomNick;
 	import game.rpgGame.login.view.CreateRolePanel;
@@ -61,6 +62,10 @@ package
 			
 			RandomNick.setup(lastNameStr.split(","), flagNameStr.split(","), maleNameStr.split(","), femaleNameStr.split(","));
 		}
+        
+        public function set baseDir(baseDir : String) : void {
+            ClientConfig.baseDir = baseDir;
+        }
 		
 		public function onCreateHeroFail(msg : *) : void
 		{
