@@ -187,6 +187,7 @@ package com.rpgGame.appModule.equip
 			_exisList.push(_skin.exist2);
 			_exisList.push(_skin.exist3);
 			_skin.container.addChild(icon);
+			_skin.container.addChild(_skin.equip_num);
 			
 			for(var i:int=0;i<CAILIAO_NUM;i++)
 			{
@@ -356,7 +357,7 @@ package com.rpgGame.appModule.equip
 			
 			_skin.equip_name.color=ItemConfig.getItemQualityColor(_nowSelect.q_item_id);
 			_skin.equip_name.text=itemInfo.name;
-			
+			_skin.equip_num.text=_skin.input_txt.text;
 			setCaiLiaoData();
 		}
 		
@@ -402,6 +403,7 @@ package com.rpgGame.appModule.equip
 		{
 			_skin.input_txt.text=_hechengNum.toString();
 			_skin.lb_msg.htmlText=getTitleText("合成消耗");
+			_skin.equip_num.text=_skin.input_txt.text;
 		}
 		
 		private function initEvent():void
