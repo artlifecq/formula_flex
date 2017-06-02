@@ -144,6 +144,7 @@ package com.client.process
 			_onCreateHeroFail = _createRoleLoader.content["onCreateHeroFail"];
 			_createRoleLoader.content["sendRegisterRole"] = onCreateRoleComplete;
 			_createRoleLoader.content["showInfoAlert"] = onShowInfoAlert;
+            _createRoleLoader.content["baseDir"] = ClientGlobal.baseDir;
 			setProcessPercent(1);
 			ResLoadingView.instance.hide();
 		}
