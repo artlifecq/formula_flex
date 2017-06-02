@@ -29,7 +29,6 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.FightsoulPathData;
 	import com.rpgGame.coreData.cfg.FriendCfgData;
 	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
-	import com.rpgGame.coreData.cfg.FunctionNoticeCfgData;
 	import com.rpgGame.coreData.cfg.GCDCfgData;
 	import com.rpgGame.coreData.cfg.GlobalSettingCfgData;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
@@ -258,7 +257,6 @@ package com.rpgGame.app.data
 			//窗口信息配置
 			FuncionBarCfgData.setup(dic[ConfigClassRegister.FunctionBarInfo]);
 			NewFuncCfgData.setup(dic[ConfigClassRegister.Q_newfunc]);
-			FunctionNoticeCfgData.setup(dic[ConfigClassRegister.Q_funcNotice]);
 			//心法
 			CheatsCfg.setup(dic[ConfigClassRegister.Q_cheats]);
 			CheatsNodeCfg.setup(dic[ConfigClassRegister.Q_cheats_node]);

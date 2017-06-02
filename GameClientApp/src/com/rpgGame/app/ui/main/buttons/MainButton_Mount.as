@@ -1,23 +1,11 @@
 package com.rpgGame.app.ui.main.buttons
 {
 	import com.rpgGame.core.events.ItemEvent;
-	import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
 	
 	import org.client.mainCore.manager.EventManager;
-	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_zuoqi;
 	
 	public class MainButton_Mount extends MainButtonBases
 	{
-		public function MainButton_Mount(info:FunctionBarInfo):void
-		{
-			super(info);
-		}
-		
-		override protected function initialize():void
-		{
-			this.styleClass = ButtonSkin_zuoqi;
-			super.initialize();
-		}
 		
 		override protected function onShow():void
 		{

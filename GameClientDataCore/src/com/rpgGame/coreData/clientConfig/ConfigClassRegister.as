@@ -116,8 +116,6 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_fightsoul_mode:String = "data.Q_fightsoul_mode";
 		/**  战魂升级数据			 */
 		public static const Q_fightsoul_path:String = "data.Q_fightsoul_path";
-		/**  功能开放表					 */
-		public static const Q_funcNotice:String = "data.Q_funcNotice";
 		/**  全局变量表		 */
 		public static const Q_global:String = "data.Q_global";
 		/**  道具合成表									 */
@@ -152,7 +150,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_mission_section:String = "data.Q_mission_section";
 		/**  任务对话配置表(1-20000为主线任务对应的对话id，20001-30000是支线任务对话id)			 */
 		public static const Q_mission_segment:String = "data.Q_mission_segment";
-		/**  功能开放表											 */
+		/**  功能开放表														 */
 		public static const Q_newfunc:String = "data.Q_newfunc";
 		/**  通知列表			 */
 		public static const Q_notify:String = "data.Q_notify";
@@ -256,7 +254,6 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_fightsoul", com.rpgGame.coreData.clientConfig.Q_fightsoul);
 			regClass("data.Q_fightsoul_mode", com.rpgGame.coreData.clientConfig.Q_fightsoul_mode);
 			regClass("data.Q_fightsoul_path", com.rpgGame.coreData.clientConfig.Q_fightsoul_path);
-			regClass("data.Q_funcNotice", com.rpgGame.coreData.clientConfig.Q_funcNotice);
 			regClass("data.Q_global", com.rpgGame.coreData.clientConfig.Q_global);
 			regClass("data.Q_hecheng", com.rpgGame.coreData.clientConfig.Q_hecheng);
 			regClass("data.Q_horse", com.rpgGame.coreData.clientConfig.Q_horse);

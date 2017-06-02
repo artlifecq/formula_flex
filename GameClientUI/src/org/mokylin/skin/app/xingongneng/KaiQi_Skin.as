@@ -15,8 +15,6 @@ package org.mokylin.skin.app.xingongneng
 		//==========================================================================
 		public var Icons:feathers.controls.UIAsset;
 
-		public var uiEffect:feathers.controls.UIAsset;
-
 		public var uiName:feathers.controls.UIAsset;
 
 
@@ -30,7 +28,7 @@ package org.mokylin.skin.app.xingongneng
 			this.currentState = "normal";
 			this.height = 262;
 			this.width = 243;
-			this.elementsContent = [uiEffect_i(),__KaiQi_Skin_UIAsset1_i(),uiName_i(),Icons_i()];
+			this.elementsContent = [uiName_i(),Icons_i()];
 			
 			states = {
 			};
@@ -52,34 +50,13 @@ package org.mokylin.skin.app.xingongneng
 			return temp;
 		}
 
-		private function __KaiQi_Skin_UIAsset1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/xingongneng/bg.png";
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function uiEffect_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			uiEffect = temp;
-			temp.name = "uiEffect";
-			temp.height = 10;
-			temp.width = 10;
-			temp.x = 116;
-			temp.y = 81;
-			return temp;
-		}
-
 		private function uiName_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiName = temp;
 			temp.name = "uiName";
+			temp.horizontalCenter = 4.5;
 			temp.styleName = "ui/app/xingongneng/junjie.png";
-			temp.x = 89;
 			temp.y = 151;
 			return temp;
 		}

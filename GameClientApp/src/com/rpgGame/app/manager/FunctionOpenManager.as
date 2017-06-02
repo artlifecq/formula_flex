@@ -1,14 +1,10 @@
 ﻿package com.rpgGame.app.manager
 {
     import com.rpgGame.app.manager.role.MainRoleManager;
-    import com.rpgGame.app.ui.main.buttons.MainButtonBases;
     import com.rpgGame.core.app.AppConstant;
     import com.rpgGame.core.app.AppManager;
-    import com.rpgGame.coreData.cfg.FuncionBarCfgData;
-    import com.rpgGame.coreData.cfg.FunctionNoticeCfgData;
     import com.rpgGame.coreData.cfg.NewFuncCfgData;
     import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
-    import com.rpgGame.coreData.clientConfig.Q_funcNotice;
     import com.rpgGame.coreData.clientConfig.Q_newfunc;
     
     import org.client.mainCore.ds.HashMap;
@@ -39,23 +35,24 @@
 		
 		public static function openNoticeByLevel(level:int):void
 		{
-			var arr:Array = FunctionNoticeCfgData.list;
-			var length:int = arr.length;
-			var found:Q_funcNotice; 
+			var map:HashMap = NewFuncCfgData.map;
+			var infos:Array = map.getValues();
+			var length:int = infos.length;
+			var found:Q_newfunc; 
 
 			for(var i:int = 0;i<length;i++)
 			{
-				var data:Q_funcNotice = arr[i];
-				if(data.q_level > level)
+				var data:Q_newfunc = infos[i];
+				if(data.q_notivelevel <= 0)
 					continue;
-				var info1 :Q_newfunc = NewFuncCfgData.getdataById(data.q_newfunId);
-				if(info1.q_level <= level)
+				if(data.q_notivelevel > level)
 					continue;
-				if(data.q_level >= info1.q_level)
+				if(data.q_level < level)
 					continue;
+				
 				if(found==null)
 					found = data;
-				else if(found.q_id<info1.q_id){
+				else if(found.q_id<data.q_id){
 					found = data;
 				}
 			}
@@ -96,6 +93,16 @@
 			if(func == null)
 				return false;
 			return checkOpenByLevel(func.q_level);
+		}
+		
+		public static function openModeByInfo(info:FunctionBarInfo):void
+		{
+			if(info.clickarg=="")
+				return ;
+			if(info.clickType==1)
+			{
+				AppManager.showApp(info.clickarg);
+			}
 		}
     }
 }

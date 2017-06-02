@@ -1,6 +1,8 @@
 package com.rpgGame.app.ui.main.navigation {
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.ui.main.buttons.IOpen;
 	import com.rpgGame.app.ui.main.buttons.MainButtonBases;
+	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
@@ -48,7 +50,7 @@ package com.rpgGame.app.ui.main.navigation {
 			_content.reset();
 			for(var i:int =0;i<length;i++)
 			{
-				var button:MainButtonBases = MainButtonBases.getButtonBuyInfo(buttoninfos[i]);
+				var button:IOpen = MainButtonManager.getButtonBuyInfo(buttoninfos[i]);
 				if(button!=null&&button.canOpen())
 				{
 					_content.addButton(button);

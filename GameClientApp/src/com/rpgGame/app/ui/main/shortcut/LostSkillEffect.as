@@ -122,8 +122,6 @@ package com.rpgGame.app.ui.main.shortcut
 		}
 		private function buttonClickHandler(e:Event):void
 		{
-			FunctionOpenManager.openFunctionById(10);
-			return ;
 			if(_effect!=null)
 			{
 				_effect.stopEffect();

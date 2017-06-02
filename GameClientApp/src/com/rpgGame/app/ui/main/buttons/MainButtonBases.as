@@ -5,27 +5,31 @@ package com.rpgGame.app.ui.main.buttons
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
-	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
 	import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
-	
-	import flash.geom.Point;
-	import flash.system.ApplicationDomain;
 	
 	import away3d.events.Event;
 	
 	import feathers.controls.Button;
 	
-	import org.client.mainCore.ds.HashMap;
-	
 	import starling.display.ButtonState;
 	
-	public class MainButtonBases extends Button
+	public class MainButtonBases extends Button implements IOpen
 	{
-		/**
-		 * 模块代码包路径
-		 */
-		private static const APP_ROOT:String="com.rpgGame.app.ui.main.buttons";
 		private var _info:FunctionBarInfo;
+		public function get info():FunctionBarInfo
+		{
+			return _info;
+		}
+		
+		public function set info(value:FunctionBarInfo):void
+		{
+			_info = value;
+		}
+		
+		public function canOpen():Boolean
+		{
+			return FunctionOpenManager.getOpenLevelByFunBarInfo(_info);
+		}
 		
 		private var _needPlayFirstAm:Boolean = false;
 
@@ -39,15 +43,8 @@ package com.rpgGame.app.ui.main.buttons
 			_needPlayFirstAm = value;
 		}
 
-		
-		public function get info():FunctionBarInfo
+		public function MainButtonBases():void
 		{
-			return _info;
-		}
-
-		public function MainButtonBases(info:FunctionBarInfo):void
-		{
-			_info = info;
 			super();
 		}
 		
@@ -113,63 +110,8 @@ package com.rpgGame.app.ui.main.buttons
 		
 		protected function triggeredHanadler():void
 		{
-			if(_info.clickarg=="")
-				return ;
-			if(_info.clickType==1)
-			{
-				AppManager.showApp(_info.clickarg);
-			}
+			FunctionOpenManager.openModeByInfo(_info);
 		}
-		
-		public function canOpen():Boolean
-		{
-			return FunctionOpenManager.getOpenLevelByFunBarInfo(_info);
-		}
-		
-		private static var _classMap:HashMap;
-		private static var _initializeMap:HashMap;
-		public static function init():void
-		{
-			_initializeMap = new HashMap();
-			_classMap = new  HashMap();
-			regClass(1,"MainButton_Role");
-			regClass(2,"MainButton_Mount");
-			regClass(3,"MainButton_Equip");
-			regClass(4,"MainButton_Kongfu");
-			regClass(5,"MainButton_Fightsoul");
-			regClass(6,"MainButton_Gang");
-			regClass(7,"MainButton_Shop");
-		}
-		private static function regClass(id:int,cls:String):void
-		{
-			_classMap.add(id,cls);
-		}
-		
-		public static function getButtonBuyInfo(info:FunctionBarInfo):MainButtonBases
-		{
-			var level:int = FunctionOpenManager.getOpenLevelByFunBarInfo(info);
-			if(!FunctionOpenManager.checkOpenByLevel(level))
-				return null;
-			var button:MainButtonBases = _initializeMap.getValue(info.id);
-			if(button == null)
-			{
-				var clsName:String = _classMap.getValue(info.id)
-				var cls : Class = ApplicationDomain.currentDomain.getDefinition(APP_ROOT+"."+clsName) as Class;
-				button = new cls(info);
-				button.name = clsName;
-				_initializeMap.add(info.id,button);
-			}
-			return button;
-		}
-		
-		public static function getButtonName(id:int):String
-		{
-			return _classMap.getValue(id);
-		}
-		
-		
-		
-		
 		
 	}
 }

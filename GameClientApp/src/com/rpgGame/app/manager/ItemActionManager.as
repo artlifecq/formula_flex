@@ -6,7 +6,7 @@ package com.rpgGame.app.manager
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.mainCore.core.manager.LayerManager;
 	import com.game.mainCore.libCore.handle.HandleThread;
-	import com.rpgGame.app.ui.main.buttons.MainButtonBases;
+	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
@@ -141,7 +141,7 @@ package com.rpgGame.app.manager
 		
 		private static function getBackPackBtnPos():Point
 		{
-			return MainUIManager.getBtnGolbalPos(MainButtonBases.getButtonName(1));
+			return MainUIManager.getBtnGolbalPos(MainButtonManager.getButtonName(1));
 		}
 		
 		public static function tweenPrizeInfoToBag(prize:PrizeInfo,startPos:Point = null,onCompFunc:Function = null):void
