@@ -211,7 +211,7 @@ package com.rpgGame.app.ui.main.dungeon
 			TweenLite.killDelayedCallsTo(walkTo);
 			var pos:Point=DungeonManager.getStagePos(id);
 			if(pos)
-			{L.l("寻路到："+pos.x+":"+ pos.y);
+			{//L.l("寻路到："+pos.x+":"+ pos.y);
 				MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, pos.x, pos.y,finishWalk, 100,null,finishWalk);
 			}
 		}
@@ -230,7 +230,7 @@ package com.rpgGame.app.ui.main.dungeon
 		}
 		
 		private function setTageText():void
-		{L.l("[阶段"+DungeonManager.zoneStage);
+		{//L.l("[阶段"+DungeonManager.zoneStage);
 			
 			
 			if(DungeonManager.zoneStage==0)
