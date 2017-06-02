@@ -51,6 +51,8 @@ package com.rpgGame.appModule.equip
 	import app.message.EquipOperateType;
 	import app.message.GoodsType;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.List;
 	import feathers.controls.Scroller;
 	import feathers.data.ListCollection;
@@ -66,7 +68,6 @@ package com.rpgGame.appModule.equip
 	import org.mokylin.skin.app.zhuangbei.zuomo.Zuomo_Skin;
 	
 	import starling.display.DisplayObject;
-	import away3d.events.Event;
 	
 	/**
 	 *装备琢磨
@@ -446,9 +447,11 @@ package com.rpgGame.appModule.equip
 			var gridInfo:GridInfo=targetGrid.gridInfo;
 			if(targetEquipInfo){
 				_goodsContainerTarget.setGrayForData(targetEquipInfo,false);
-			/*	if(isUse(targetEquipInfo)){
-					_goodsContainerUse.setGrayForData(targetEquipInfo,false);
-				}*/
+				if(isUse(targetEquipInfo)){
+					useEquips.push(targetEquipInfo);
+					useEquips.sort(sortForUse);
+					_goodsContainerUse.refleshGridsByDatas(useEquips);
+				}
 			}
 			
 			cancelAllUse();

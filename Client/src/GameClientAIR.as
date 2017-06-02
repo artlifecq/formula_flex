@@ -63,6 +63,11 @@ package
 		public var server : String = "";
 		public var port : uint = 0;
 		public var policyPort : uint = 0;
+        public var areaId : uint = 1;
+        public var agent : String = "37";
+        public var loginName : String = "";
+        public var loginKey : String = "";
+        public var loginTime : uint = 0;
 		/**
 		 * 微端桥接
 		 */
@@ -92,6 +97,11 @@ package
 			ClientGlobal.loginIP = server;
 			ClientGlobal.loginPort = port;
 			ClientGlobal.policyPort = policyPort > 0 ? policyPort : ClientGlobal.policyPort;
+            ClientGlobal.loginAreaId = areaId;
+            ClientGlobal.loginName = loginName;
+            ClientGlobal.loginKey = loginKey;
+            ClientGlobal.loginTime = loginTime;
+            ClientGlobal.agent = agent;
 			ClientGlobal.isRelease = isRelease;
 			ClientGlobal.useBpgFormat = useBpgFormat;
 			ClientGlobal.useVersion = useVersion;
@@ -101,6 +111,15 @@ package
 			ClientGlobal.isBanShu = isBanShu;
 			ClientGlobal.isStable = isStable;
 			ClientGlobal.GlobalBridge = GlobalBridge;
+            
+            //初始化配置类
+            ClientConfig.setup(ClientGlobal.urlParmar, 0, ClientGlobal.isRelease, ClientGlobal.uiCompressed);
+            ClientConfig.decode = ClientGlobal.decodeFun;
+            ClientConfig.baseDir = ClientGlobal.baseDir;
+            ClientConfig.resURL = ClientGlobal.resURL;
+            ClientConfig.isSingle = ClientGlobal.isSingle;
+            ClientConfig.isBanShu = ClientGlobal.isBanShu;
+            ClientConfig.isStable = ClientGlobal.isStable;
 			
 			GameLogView.init(this.stage, [189, 190, 191]);//-_	189  .>	190  /?	191
 			AlertPanel.initStage(this.stage);
@@ -184,8 +203,8 @@ package
 					GameLog.addShow("profile type：" + Stage3DLayerManager.stage3DProxy.profile);
 					
 					Parsers.enableAllBundled();
-					Stage3DLayerManager.screenAntiAlias = 2;
-					Stage3DLayerManager.viewAntiAlias = 2;
+					Stage3DLayerManager.screenAntiAlias = 0;
+					Stage3DLayerManager.viewAntiAlias = 0;
 					Stage3DLayerManager.startRender();
 					Stage3DLayerManager.starlingLayer.setLayer("alert", 9);
 					Stage3DLayerManager.starlingLayer.setLayer("loading", 8);
