@@ -132,7 +132,7 @@ package com.rpgGame.app.cmdlistener
 		
 		/*——————————————————————————多人副本————————————————————————————————————————————*/
 		private function onSCClientTriggerValiedMessage(msg:SCClientTriggerValiedMessage):void
-		{//L.l("服务器#触发:"+msg.triggerId);
+		{////L.l("服务器#触发:"+msg.triggerId);
 			ClientTriggerManager.serverTrigger(msg.triggerId);
 		}
 		private function onSCEnterZoneMessage(msg:SCEnterZoneMessage):void
