@@ -240,6 +240,7 @@ package com.rpgGame.appModule.dungeon.multy
 		/**执灰列表*/
 		private function setGray():void
 		{
+			if(itemList==null)return;
 			var name:Array;
 			var zid:int,selectlevel:int,selectid:int;
 			var zoneData:Q_zone,multyData:Q_zone_multy;
