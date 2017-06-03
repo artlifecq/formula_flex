@@ -12,6 +12,9 @@ package com.rpgGame.netData.zone.message{
 	 */
 	public class SCMultiZoneResultMessage extends Message {
 	
+		//0失败1成功
+		private var _success: int;
+		
 		//退出副本倒计时时间
 		private var _outTime: int;
 		
@@ -20,6 +23,8 @@ package com.rpgGame.netData.zone.message{
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
+			//0失败1成功
+			writeByte(_success);
 			//退出副本倒计时时间
 			writeInt(_outTime);
 			return true;
@@ -29,6 +34,8 @@ package com.rpgGame.netData.zone.message{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
+			//0失败1成功
+			_success = readByte();
 			//退出副本倒计时时间
 			_outTime = readInt();
 			return true;
@@ -40,6 +47,21 @@ package com.rpgGame.netData.zone.message{
 		 */
 		override public function getId(): int {
 			return 155144;
+		}
+		
+		/**
+		 * get 0失败1成功
+		 * @return 
+		 */
+		public function get success(): int{
+			return _success;
+		}
+		
+		/**
+		 * set 0失败1成功
+		 */
+		public function set success(value: int): void{
+			this._success = value;
 		}
 		
 		/**

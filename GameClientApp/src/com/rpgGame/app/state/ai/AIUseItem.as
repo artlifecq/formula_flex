@@ -22,9 +22,6 @@ package com.rpgGame.app.state.ai
 		override public function execute() : void
 		{
 			super.execute();
-			///return;
-			//L.l("使用物品");
-			//L.l("AIUseItem");
 			if(isUseDead())
 			{
 				

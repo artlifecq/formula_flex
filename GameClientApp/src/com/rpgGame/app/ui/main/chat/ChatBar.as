@@ -13,10 +13,7 @@ package com.rpgGame.app.ui.main.chat {
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.CrossSender;
 	import com.rpgGame.app.ui.main.chat.laba.VipChatCanvas;
-	import com.rpgGame.core.app.AppConstant;
-	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.ChatEvent;
-	import com.rpgGame.core.events.LookEvent;
 	import com.rpgGame.core.events.SceneInteractiveEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
@@ -25,11 +22,9 @@ package com.rpgGame.app.ui.main.chat {
 	import com.rpgGame.coreData.clientConfig.FaceInfo;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
-	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
 	import com.rpgGame.coreData.utils.ColorUtils;
 	import com.rpgGame.netData.chat.message.ResChatMessage;
-	import com.rpgGame.netData.player.bean.OthersInfo;
 	
 	import flash.geom.Point;
 	import flash.text.TextFormat;
@@ -39,17 +34,16 @@ package com.rpgGame.app.ui.main.chat {
 	import away3d.events.Event;
 	
 	import feathers.controls.Button;
-	import feathers.controls.Scroller;
 	import feathers.controls.text.Fontter;
 	import feathers.core.ToggleGroup;
+	import feathers.data.ListCollection;
 	import feathers.events.FeathersEventType;
-	import feathers.themes.GuiThemeStyle;
+	import feathers.layout.VerticalLayout;
 	
 	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.net.MessageMgr;
-	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
 	import org.mokylin.skin.mainui.chat.chat_Skin;
 	
 	import starling.core.Starling;
@@ -92,8 +86,6 @@ package com.rpgGame.app.ui.main.chat {
 		private var _initGroupButtomRightX : int;
 		private var _initGroupTopY : int;
 		private var _initBgY : int;
-		private var _initVScollerY : int;
-		private var _initVScollerX : int;
 		
 		
 		private var _curWidth : int;
@@ -102,8 +94,6 @@ package com.rpgGame.app.ui.main.chat {
 		private var _isAdjustSize : Boolean;
 		private var _tween : TweenLite;
 		
-		// 聊天内容显示框
-		private var _chatText : RichTextArea3D;
 		// 聊天输入框
 		private var _inputText : RichTextArea3D;
 		
@@ -131,13 +121,20 @@ package com.rpgGame.app.ui.main.chat {
 			this._initVScollerWidth =_initBgWidth;
 			this._initInputBgWidth = this._skin.inputbg.width;
 			this._initSendX = this._skin.btn_send.x;
-			//            this._initGroupButtomRightX = this._skin.grp_buttomR.x;
 			this._initGroupTopY = this._skin.grp_top.y;
 			
-			this._skin.vscrollbar.x=0;
+			_skin.chat_list.verticalScrollBarPosition = "right";
+			_skin.chat_list.horizontalScrollPolicy = "off";
+			_skin.chat_list.verticalScrollPolicy = "on";
+			_skin.chat_list.scrollBarDisplayMode = "fixed";
+			_skin.chat_list.itemRendererType = ChatBarItemRender;
+			_skin.chat_list.dataProvider = new ListCollection();
+			var layout:VerticalLayout = new VerticalLayout();
+			layout.useVirtualLayout = true;
+			layout.gap = 1;
+			layout.hasVariableItemDimensions = true;
+			_skin.chat_list.layout = layout;
 			
-			this._initVScollerY = this._skin.vscrollbar.y;
-			this._initVScollerX = this._skin.vscrollbar.x;
 			this._initBgY = this._skin.bg.y;		
 			
 			var defaultFormat : TextFormat = new TextFormat(Fontter.FONT_Hei);
@@ -146,24 +143,6 @@ package com.rpgGame.app.ui.main.chat {
 			defaultFormat.align = TextFormatAlign.LEFT;
 			defaultFormat.letterSpacing = 1;
 			defaultFormat.leading = 5;
-			
-			this._chatText = new RichTextArea3D(this._initBgWidth, 0, ColorUtils.getDefaultStrokeFilter());
-			this._chatText.setConfig(RichTextCustomUtil.cloneChatUnitConfigVec());
-			this._chatText.wordWrap = true;
-			this._chatText.multiline = true;
-			this._chatText.defaultTextFormat = defaultFormat;
-			this._chatText.text = "";
-			this._chatText.x = 0;//this._skin.vscrollbar.width;
-			
-			//			this._skin.vscrollbar.styleClass=org.mokylin.skin.component.list.ListSkin1;
-			this._skin.vscrollbar.verticalScrollBarPosition = Scroller.VERTICAL_SCROLL_BAR_POSITION_RIGHT;
-			this._skin.vscrollbar.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
-			this._skin.vscrollbar.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
-			this._skin.vscrollbar.scrollBarDisplayMode = Scroller.SCROLL_BAR_DISPLAY_MODE_FIXED;
-			this._skin.vscrollbar.addChild(this._chatText);
-			this._skin.vscrollbar.width = this._initBgWidth - this._initVScollerX;
-			GuiThemeStyle.setScrollerStyle(this._skin.vscrollbar, org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack);
-			this._chatText.setSize(this._skin.vscrollbar.width - this._chatText.x -10, 0);
 			
 			this._inputText = new RichTextArea3D(this._skin.inputbg.width, this._skin.inputbg.height, ColorUtils.getDefaultStrokeFilter());
 			this._inputText.maxChars = ChatCfgData.MAX_CHAR_LENGTH;
@@ -290,8 +269,13 @@ package com.rpgGame.app.ui.main.chat {
 		 */		
 		private function showChatMsg( info:ResChatMessage ):void
 		{
-			_chatText.appendRichText( ChatUtil.getHTMLChatMessage( info) );
-			updateScroller();
+			_skin.chat_list.dataProvider.addItem(info);
+			if (_skin.chat_list.dataProvider.length > ChatManager.MAX_CHATSHOWITEMCACEHE)
+			{
+				_skin.chat_list.dataProvider.removeItemAt(0);
+			}
+			scrollToBottom();
+			//			_skin.chat_list.dataProvider.updateAll();
 		}
 		
 		/**
@@ -299,8 +283,7 @@ package com.rpgGame.app.ui.main.chat {
 		 * */
 		private function updateShowMsg():void
 		{
-			_chatText.clear();
-			updateScroller();
+			_skin.chat_list.dataProvider.removeAll();
 			var msgs:Vector.<ResChatMessage>;
 			switch(_curShowTab)
 			{
@@ -317,9 +300,14 @@ package com.rpgGame.app.ui.main.chat {
 			if(msgs==null) return;
 			for(var i:int=0;i<msgs.length;i++)
 			{
-				showChatMsg(msgs[i]);
+				_skin.chat_list.dataProvider.addItem(msgs[i]);
 			}
-			updateScroller();
+			scrollToBottom();
+		}
+		
+		private function scrollToBottom() : void
+		{
+			_skin.chat_list.scrollToBottom(0);
 		}
 		
 		private function onSwitchPrivateChannel(targetID:Number, targetName:String):void
@@ -676,22 +664,13 @@ package com.rpgGame.app.ui.main.chat {
 			
 			this._skin.bg.width = this._initBgWidth + dx;
 			this._skin.bg.height = this._initBgHeight - dy;
-			this._skin.vscrollbar.width = this._initBgWidth + dx - this._initVScollerX;
 			this._skin.bg.y = this._initBgY + dy;
-			this._skin.vscrollbar.y = this._initVScollerY + dy;
-			this._chatText.setSize(this._skin.vscrollbar.width - this._chatText.x -10, 0);
-			
-			//            this._skin.grp_buttomR.x = this._initGroupButtomRightX + dx;
 			this._skin.grp_top.y = this._initGroupTopY + dy;
 			
 			this._skin.inputbg.width = this._initInputBgWidth + dx;
 			this._inputText.setSize(this._skin.inputbg.width, this._skin.inputbg.height);
-			this._skin.vscrollbar.height =this._skin.bg.height-this._inputText.height*2-5;
 			this._skin.btn_send.x = this._initSendX + dx;
-			
 			this._curWidth = this._skin.bg.width;
-			
-			
 			
 			this._skin.btn_open.x=this._skin.btn_send.x+this._skin.btn_send.width;
 			this._skin.btn_face.x=this._skin.btn_send.x-this._skin.btn_face.width-3;
@@ -704,7 +683,9 @@ package com.rpgGame.app.ui.main.chat {
 			this._skin.grp_laba.y=this._skin.grp_top.y-53;
 			this._skin.grp_laba_bg.width=this._skin.bg.width;
 			
-			this.updateScroller();
+			this._skin.chat_list.width= this._skin.bg.width;
+			this._skin.chat_list.height=this._skin.bg.height-30;
+			this._skin.chat_list.y=this._skin.grp_top.y+30;
 		}
 		
 		private function setOpenOrClose(isOpen : Boolean) : void {
@@ -779,14 +760,14 @@ package com.rpgGame.app.ui.main.chat {
 		}
 		
 		private function updateScroller() : void {
-			this._skin.vscrollbar.addChild(this._chatText);
+			//			this._skin.vscrollbar.addChild(this._chatText);
 			if(!iskeepOrto)
 			{
-				var scrollerPos : int = Math.max(0, this._chatText.height - this._skin.vscrollbar.height);
+				//				var scrollerPos : int = Math.max(0, this._chatText.height - this._skin.vscrollbar.height);
 				CONFIG::netDebug {
 					NetDebug.LOG("[ChatBar] [UpdateScroller] scrollerPos:" + scrollerPos + ", height:" + this._chatText.height + ", x:" + this._chatText.x);
 				}
-					this._skin.vscrollbar.scrollToPosition(0, scrollerPos, 0.3);
+					//					this._skin.vscrollbar.scrollToPosition(0, scrollerPos, 0.3);
 			}
 		}
 	}

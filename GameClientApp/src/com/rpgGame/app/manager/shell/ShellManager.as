@@ -129,6 +129,7 @@ package com.rpgGame.app.manager.shell
             this._funcs["getView".toLowerCase()] = this.getView;
 			this._funcs["&tasklevel".toLowerCase()] = this.testTaskLevel;
 			this._funcs["&autofight".toLowerCase()] = this.testStopFight;
+			this._funcs["&showDistrictWireframe".toLowerCase()] = this.showDistrictWireframe;
         }
 		
 		private function testRibbon():void
@@ -892,6 +893,10 @@ package com.rpgGame.app.manager.shell
 		} 
 		private function testStopFight(level:int=-1) : void {
 			TrusteeshipManager.getInstance().testStop();
+		}
+		
+		private function showDistrictWireframe() : void {
+			SceneManager.getScene().sceneMapLayer.showDistrictWireframe = true;
 		}
 		
 		

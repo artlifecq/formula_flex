@@ -7,6 +7,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.manager.ClientSettingManager;
 	import com.rpgGame.app.manager.FangChenMiManager;
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.PlayerAttributeManager;
 	import com.rpgGame.app.manager.ShortcutsManger;
 	import com.rpgGame.app.manager.chat.NoticeManager;
@@ -220,6 +221,7 @@ package com.rpgGame.app.cmdlistener
 			PlayerAttributeManager.showSpriteStatChg(MainRoleManager.actorInfo.totalStat.statArr, msg.attributeChangeList);
 			//
 			MainRoleManager.actorInfo.totalStat.setData(msg.attributeChangeList);
+			
 			//MainManager.actorInfo.atkSpeed = 1;//100 / (100 + spriteStatProto.attackSpeed);
 			//EventManager.dispatchEvent(UserEvent.USER_MAIN_FIGHT_ATTRIBUTE_CHANGE);
 			EventManager.dispatchEvent(MainPlayerEvent.STAT_CHANGE);

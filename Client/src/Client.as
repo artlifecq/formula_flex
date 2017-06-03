@@ -8,7 +8,6 @@ package
 	import com.client.process.LoadDll;
 	import com.client.process.LoadEmbedFonts;
 	import com.client.process.LoadMaskWorld;
-	import com.client.process.LoadMouseAssets;
 	import com.client.process.LoadPublicUIAssets;
 	import com.client.process.LoginInput;
 	import com.client.process.ProcessState;
@@ -22,10 +21,12 @@ package
 	import com.game.engine3D.process.ProcessStateMachine;
 	import com.game.engine3D.utils.StatsUtil;
 	import com.gameClient.alert.AlertPanel;
+	import com.gameClient.alert.ReconnectionPanelExt;
 	import com.gameClient.log.GameLog;
 	import com.gameClient.log.GameLogView;
 	import com.gameClient.utils.VersionUtils;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.LanguageConfig;
 	
 	import flash.display.Sprite;
 	import flash.events.ContextMenuEvent;
@@ -66,6 +67,12 @@ package
 		public var server : String = "";
 		public var port : uint = 0;
 		public var policyPort : uint = 0;
+        public var areaId : uint = 1;
+        public var agent : String = "37";
+        public var loginName : String = "";
+        public var loginKey : String = "";
+        public var loginTime : uint = 0;
+        
 		/**
 		 * 微端桥接
 		 */
@@ -91,10 +98,16 @@ package
 		protected function onAddToStg(event : Event) : void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, onAddToStg);
+            ClientGlobal.urlParmar = urlParmar || loaderInfo.parameters;
 			ClientGlobal.baseDir = baseDir;
 			ClientGlobal.loginIP = server;
 			ClientGlobal.loginPort = port;
 			ClientGlobal.policyPort = policyPort > 0 ? policyPort : ClientGlobal.policyPort;
+            ClientGlobal.loginAreaId = areaId;
+            ClientGlobal.loginName = loginName;
+            ClientGlobal.loginKey = loginKey;
+            ClientGlobal.loginTime = loginTime;
+            ClientGlobal.agent = agent;
 			ClientGlobal.isRelease = isRelease;
 			ClientGlobal.useBpgFormat = useBpgFormat;
 			ClientGlobal.useVersion = useVersion;
@@ -104,11 +117,21 @@ package
 			ClientGlobal.isBanShu = isBanShu;
 			ClientGlobal.isStable = isStable;
 			ClientGlobal.GlobalBridge = GlobalBridge;
+            
+            //初始化配置类
+            ClientConfig.setup(ClientGlobal.urlParmar, 0, ClientGlobal.isRelease, ClientGlobal.uiCompressed);
+            ClientConfig.decode = ClientGlobal.decodeFun;
+            ClientConfig.baseDir = ClientGlobal.baseDir;
+            ClientConfig.resURL = ClientGlobal.resURL;
+            ClientConfig.isSingle = ClientGlobal.isSingle;
+            ClientConfig.isBanShu = ClientGlobal.isBanShu;
+            ClientConfig.isStable = ClientGlobal.isStable;
 			
 			GameLogView.init(this.stage, [189, 190, 191]);//-_	189  .>	190  /?	191
 			AlertPanel.initStage(this.stage);
+			ReconnectionPanelExt.initStage(this.stage);
 			//
-			getWebParams();
+			//getWebParams();
 			GameLog.addShow("版本号：" + version);
 			GameLog.addShow("客户端版本：" + versionInfo);
 			GameLog.addShow("Player Version:" + (Capabilities.isDebugger ? "Debug" : "Release") + " " + Capabilities.version);
@@ -303,9 +326,9 @@ package
 				GameLog.addShow("++++++++++++++++++++");
 				ClientGlobal.loginName = ClientGlobal.urlParmar["auth"];
 				ClientGlobal.loginKey = ClientGlobal.urlParmar["sign"];
-				ClientGlobal.useWorker = ClientGlobal.urlParmar["useWorker"] == "true";
+				//ClientGlobal.useWorker = ClientGlobal.urlParmar["useWorker"] == "true";
 				ClientGlobal.baseDir = ClientGlobal.urlParmar["baseDir"] || "../";
-				ClientGlobal.debugConfig = ClientGlobal.urlParmar["debugConfig"];
+				//ClientGlobal.debugConfig = ClientGlobal.urlParmar["debugConfig"];
 			}
 		}
 		

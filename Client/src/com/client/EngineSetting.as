@@ -87,7 +87,7 @@ package com.client
 			GuiTheme.decodeURL = VersionUtils.getVersionPath;
 //			GuiTheme.useWorkerLoadTextureBytes = true;
 			GuiTheme.useCompressedTexture = false; //ClientGlobal.uiCompressed;
-			GuiTheme.ENABLE_TEXT_BATCH = true;
+//			GuiTheme.ENABLE_TEXT_BATCH = true;
 			GuiTheme.ATFX_ROOT_PATH = "../res/ui/big_bg";
 		}
 	}

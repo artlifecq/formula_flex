@@ -190,7 +190,10 @@ package com.rpgGame.coreData.type
 		 */
 		public static const UI_JINJIE_UNLOCK:String="ui_jinengkuang_shanguang";
 
-		
+		/**
+		 * 皇亲国戚特效
+		 * */	
+		public static const UI_HUANGQINGUOQI:String="ui_huangqinguoqi";
 		
 		/**顶部经验条特效*/
 		public static const UI_JINGYANTIAO_JINDUHUANG:String="ui_jingyantiaojinduhuang";

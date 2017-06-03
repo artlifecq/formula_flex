@@ -4,13 +4,13 @@ package org.mokylin.skin.common
 	import feathers.data.ListCollection;
 	import feathers.controls.Button;
 	import feathers.controls.Label;
+	import feathers.controls.List;
 	import feathers.controls.StateSkin;
 	import feathers.controls.TabBar;
 	import feathers.controls.UIAsset;
-	import feathers.controls.ScrollContainer;
 	import feathers.layout.HorizontalLayout;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
-	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
+	import org.mokylin.skin.component.list.ListSkin1;
 	import org.mokylin.skin.component.tabbar.TabBarSkin_pack;
 
 	/**
@@ -25,9 +25,9 @@ package org.mokylin.skin.common
 		//==========================================================================
 		public var bg:feathers.controls.UIAsset;
 
-		public var btn_close:feathers.controls.Button;
+		public var btnClose:feathers.controls.Button;
 
-		public var scroll_Bar:feathers.controls.ScrollContainer;
+		public var msg_list:feathers.controls.List;
 
 		public var tab_zizhi:feathers.controls.TabBar;
 
@@ -42,7 +42,7 @@ package org.mokylin.skin.common
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [bg_i(),titleDisplay_i(),btn_close_i(),__panel_ziriSkin_UIAsset1_i(),scroll_Bar_i(),tab_zizhi_i()];
+			this.elementsContent = [bg_i(),titleDisplay_i(),btnClose_i(),__panel_ziriSkin_UIAsset1_i(),tab_zizhi_i(),msg_list_i()];
 			
 			states = {
 			};
@@ -91,25 +91,26 @@ package org.mokylin.skin.common
 			return temp;
 		}
 
-		private function btn_close_i():feathers.controls.Button
+		private function btnClose_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_close = temp;
-			temp.name = "btn_close";
+			btnClose = temp;
+			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
 			temp.x = 302;
 			temp.y = 6;
 			return temp;
 		}
 
-		private function scroll_Bar_i():feathers.controls.ScrollContainer
+		private function msg_list_i():feathers.controls.List
 		{
-			var temp:feathers.controls.ScrollContainer = new feathers.controls.ScrollContainer();
-			scroll_Bar = temp;
-			temp.name = "scroll_Bar";
-			temp.height = 466;
-			temp.styleClass = org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
-			temp.x = 303;
+			var temp:feathers.controls.List = new feathers.controls.List();
+			msg_list = temp;
+			temp.name = "msg_list";
+			temp.height = 474;
+			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
+			temp.width = 308;
+			temp.x = 18;
 			temp.y = 76;
 			return temp;
 		}
@@ -136,7 +137,7 @@ package org.mokylin.skin.common
 			temp.bold = true;
 			temp.height = 26;
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.fontSize = 16;
 			temp.text = "日志记录";
 			temp.textAlign = "center";

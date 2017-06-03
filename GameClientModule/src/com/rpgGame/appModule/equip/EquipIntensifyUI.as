@@ -362,9 +362,11 @@ package com.rpgGame.appModule.equip
 			var gridInfo:GridInfo=grid.gridInfo;
 			if(targetEquipInfo){
 				_goodsContainerTarget.setGrayForData(targetEquipInfo,false);
-			/*	if(isUse(targetEquipInfo)){
-					_goodsContainerUse.setGrayForData(targetEquipInfo,false);
-				}*/
+				if(isUse(targetEquipInfo)){
+					useEquips.push(targetEquipInfo);
+					useEquips.sort(sortForUse);
+					_goodsContainerUse.refleshGridsByDatas(useEquips);
+				}
 			}
 			cancelAllUse();
 			
