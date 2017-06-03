@@ -34,7 +34,7 @@ package com.client.view
 			_exitFun = exitFun;
 			_panelSkin = new PkTipsPanelSkin();
 			_panelSkin.toSprite(this);
-			_panelSkin.lbTip.text = "《御龙在天WEB》是3D大型泛国战网页游戏，其宏大的战争玩法将包含不同阵营国家之间的PK内容，未满20周岁或无法接受此设计的玩家，请勿进入游戏！";
+			_panelSkin.lbTip.text = "《寻秦记》是大型3D网页游戏，其强大的战斗玩法及pk模式丰富多彩，未满20周岁或无法接受此设计的玩家，请勿进入游戏！";
 		}
 
 		public function show() : void

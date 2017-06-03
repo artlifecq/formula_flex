@@ -258,7 +258,6 @@ package com.editor.manager
 				}
 
 				object.x = position.x;
-				object.y = 10000;
 //				object.y = position.z;
 				object.z = position.z;
 			}
