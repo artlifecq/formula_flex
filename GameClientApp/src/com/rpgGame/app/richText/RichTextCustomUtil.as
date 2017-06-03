@@ -95,6 +95,8 @@ package com.rpgGame.app.richText
 	import com.rpgGame.app.richText.component.RichTextUnitData;
 	import com.rpgGame.app.utils.MenuUtil;
 	import com.rpgGame.app.utils.TaskUtil;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipManager;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
@@ -288,6 +290,8 @@ package com.rpgGame.app.richText
 					{
 						return;
 					}
+					var lng:long=new long();
+					
 					//					var poswr:Point = unit.displayObj.parent.localToGlobal(new Point(unit.displayObj.x+2,unit.displayObj.y));
 					var userName : String = unitData.label;
 					var menus : Array = MenuUtil.getPlayerTargetMenu(uise, true);
@@ -310,6 +314,9 @@ package com.rpgGame.app.richText
 						TipTargetManager.show( unit.displayObj, TargetTipsMaker.makeTips( TipType.EQUIP_TIP, info ,true) );
 					else
 						TipTargetManager.show( unit.displayObj, TargetTipsMaker.makeTips( TipType.ITEM_TIP, info ,true) );
+					break;
+				case RichTextCustomLinkType.JINJIE_SHOW_TYPE:
+					AppManager.showAppNoHide(AppConstant.MOUNT_PANEL);	
 					break;
 				case RichTextCustomLinkType.TASK_NPC_NAME_TYPE:
 					var npcId : int = parseInt(unitData.linkData); //任务，npc的id
@@ -367,7 +374,18 @@ package com.rpgGame.app.richText
 		 */
 		public static function onDoubleClick(unit : RichTextUnit) : void
 		{
-
+			//			var unitData : RichTextUnitData = unit.unitData;
+			//			switch (unitData.linkType)
+			//			{
+			//				case RichTextCustomLinkType.ITEM_SHOW_TYPE:
+			//					TipTargetManager.remove( unit.displayObj );
+			//					var info:ClientItemInfo=ChatManager.getShowItemInfo(unitData);
+			//					if(info is EquipInfo)
+			//						TipTargetManager.show( unit.displayObj, TargetTipsMaker.makeTips( TipType.EQUIP_TIP, info ,true) );
+			//					else
+			//						TipTargetManager.show( unit.displayObj, TargetTipsMaker.makeTips( TipType.ITEM_TIP, info ,true) );
+			//					break;
+			//			}
 		}
 
 		/**
@@ -379,6 +397,8 @@ package com.rpgGame.app.richText
 			var unitData : RichTextUnitData = unit.unitData;
 			if (unitData.type == RichTextCustomUnitType.LINK && (unitData.linkType == RichTextCustomLinkType.ITEM_SHOW_TYPE || unitData.linkType == RichTextCustomLinkType.TITLE_TYPE || unitData.linkType == RichTextCustomLinkType.SHOW_MOUNT_TYPE))
 			{
+				TipTargetManager.remove( unit.displayObj );
+				//				TipManager.remove();
 				TipManager.remove();
 			}
 		}

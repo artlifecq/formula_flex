@@ -137,6 +137,7 @@ package com.client.process
 			GameLog.addShow("解析创建角色程序完成...");
 			_createRoleLoader.contentLoaderInfo.removeEventListener(Event.COMPLETE, onLoaderComplete);
 			_createRoleLoader.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR, onIoError);
+            _createRoleLoader.content["baseDir"] = ClientGlobal.baseDir;
 			var setConfigFun : Function = _createRoleLoader.content["setConfig"];
 			setConfigFun(ClientGlobal.maskWorldDic);
 			ClientGlobal.stage.addChild(_createRoleLoader.content);

@@ -275,7 +275,7 @@ package com.rpgGame.app.ui.main.chat {
 				_skin.chat_list.dataProvider.removeItemAt(0);
 			}
 			scrollToBottom();
-//			_skin.chat_list.dataProvider.updateAll();
+			//			_skin.chat_list.dataProvider.updateAll();
 		}
 		
 		/**
@@ -760,14 +760,14 @@ package com.rpgGame.app.ui.main.chat {
 		}
 		
 		private function updateScroller() : void {
-//			this._skin.vscrollbar.addChild(this._chatText);
+			//			this._skin.vscrollbar.addChild(this._chatText);
 			if(!iskeepOrto)
 			{
-//				var scrollerPos : int = Math.max(0, this._chatText.height - this._skin.vscrollbar.height);
+				//				var scrollerPos : int = Math.max(0, this._chatText.height - this._skin.vscrollbar.height);
 				CONFIG::netDebug {
 					NetDebug.LOG("[ChatBar] [UpdateScroller] scrollerPos:" + scrollerPos + ", height:" + this._chatText.height + ", x:" + this._chatText.x);
 				}
-//					this._skin.vscrollbar.scrollToPosition(0, scrollerPos, 0.3);
+					//					this._skin.vscrollbar.scrollToPosition(0, scrollerPos, 0.3);
 			}
 		}
 	}

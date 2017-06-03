@@ -54,7 +54,7 @@ package org.mokylin.skin.mainui.map
 			this.currentState = "normal";
 			this.height = 243;
 			this.width = 244;
-			this.elementsContent = [grp_cont_i(),btnClose_i(),btnOpen_i(),btnWord_i(),btnM_i(),btnIncrease_i(),btnDecrease_i()];
+			this.elementsContent = [grp_cont_i(),btnClose_i(),btnOpen_i(),btnWord_i(),btnIncrease_i(),btnDecrease_i()];
 			
 			states = {
 			};
@@ -105,8 +105,8 @@ package org.mokylin.skin.mainui.map
 			temp.height = 32;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_shouhui;
 			temp.width = 20;
-			temp.x = 216;
-			temp.y = 0;
+			temp.x = 224;
+			temp.y = -1;
 			return temp;
 		}
 
@@ -157,8 +157,8 @@ package org.mokylin.skin.mainui.map
 			temp.height = 32;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_zhankai;
 			temp.width = 20;
-			temp.x = 216;
-			temp.y = 0;
+			temp.x = 224;
+			temp.y = -1;
 			return temp;
 		}
 
@@ -182,7 +182,7 @@ package org.mokylin.skin.mainui.map
 			temp.name = "grp_cont";
 			temp.x = 0;
 			temp.y = 0;
-			temp.elementsContent = [UIMap_i(),__map_Skin_UIAsset1_i(),__map_Skin_UIAsset2_i(),lbName_i(),lbLocation_i()];
+			temp.elementsContent = [UIMap_i(),__map_Skin_UIAsset1_i(),__map_Skin_UIAsset2_i(),lbName_i(),lbLocation_i(),btnM_i()];
 			return temp;
 		}
 
