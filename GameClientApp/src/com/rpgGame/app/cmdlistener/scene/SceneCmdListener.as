@@ -315,6 +315,7 @@ package com.rpgGame.app.cmdlistener.scene
 			playerData.sceneSequence = 0;
 			
 			EventManager.dispatchEvent(MapEvent.MAP_SWITCH_COMPLETE);
+			FunctionOpenManager.openNoticeByLevel(playerData.totalStat.level);
 			
 			//			CountryWarChengMenManager.checkChengMenStatus();
 			

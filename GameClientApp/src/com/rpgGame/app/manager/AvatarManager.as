@@ -716,7 +716,7 @@ package com.rpgGame.app.manager
 			{
 				if (rpd_body)
 				{
-					ru = role.avatar.addRenderUnitToChild(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.st_zero, fightsoul);
+					ru = role.avatar.addRenderUnitToChild(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_body_02, fightsoul);
 				}
 				if (ru)
 				{
