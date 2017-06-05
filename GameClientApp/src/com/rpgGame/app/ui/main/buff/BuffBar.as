@@ -94,10 +94,10 @@ package com.rpgGame.app.ui.main.buff
 			if(data.buffData.q_icon_show==0||isCreate(data)){
 				return;
 			}
-			var icon:BuffIcon=new BuffIcon(IcoSizeEnum.ICON_36);
+			var icon:BuffIcon=new BuffIcon(IcoSizeEnum.ICON_36,true);
 			icon.buffData=data;
 			icon.setUrlBg("ui/mainui/shortcut/buffkuang.png");
-			//icon.setBg(GridBGType.GRID_SIZE_44);
+			//			icon.setBg(GridBGType.GRID_SIZE_44);
 			var xx:int;
 			var length:int,line:int,row:int;
 			var i:int,j:int;

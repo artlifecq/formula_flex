@@ -30,6 +30,9 @@ package com.rpgGame.netData.login.message{
 		//窗口宽像素
 		private var _win_width: int;
 		
+		//重连
+		private var _relogin: int;
+		
 		
 		/**
 		 * 写入字节缓存
@@ -47,6 +50,8 @@ package com.rpgGame.netData.login.message{
 			writeInt(_win_high);
 			//窗口宽像素
 			writeInt(_win_width);
+			//重连
+			writeByte(_relogin);
 			return true;
 		}
 		
@@ -66,6 +71,8 @@ package com.rpgGame.netData.login.message{
 			_win_high = readInt();
 			//窗口宽像素
 			_win_width = readInt();
+			//重连
+			_relogin = readByte();
 			return true;
 		}
 		
@@ -165,6 +172,21 @@ package com.rpgGame.netData.login.message{
 		 */
 		public function set win_width(value: int): void{
 			this._win_width = value;
+		}
+		
+		/**
+		 * get 重连
+		 * @return 
+		 */
+		public function get relogin(): int{
+			return _relogin;
+		}
+		
+		/**
+		 * set 重连
+		 */
+		public function set relogin(value: int): void{
+			this._relogin = value;
 		}
 		
 	}

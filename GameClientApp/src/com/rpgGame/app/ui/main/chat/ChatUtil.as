@@ -74,7 +74,8 @@ package com.rpgGame.app.ui.main.chat
 		
 		public static function getHTMLSystemMsg(msgInfo:ResChatMessage):String
 		{
-			var chatHtml:String="【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+msgInfo.chatText;
+			var str:String=replaceItemShow(msgInfo);
+			var chatHtml:String="【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+str;
 			chatHtml=HtmlTextUtil.getTextColor(getChannelColor(msgInfo.type),chatHtml);
 			return chatHtml;
 		}

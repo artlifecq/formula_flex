@@ -72,7 +72,7 @@ package com.rpgGame.app.view.icon
 		public function BgIcon( $iconSize:int = IcoSizeEnum.SIZE_40 )
 		{
 			super( $iconSize );
-//			setSelectedImgSize($iconSize);
+			//			setSelectedImgSize($iconSize);
 		}
 		
 		/**
@@ -82,16 +82,17 @@ package com.rpgGame.app.view.icon
 		{
 			_alwayShowCount = value;
 		}
-
+		
 		public function setUIRoot():void
 		{
 			
 		}
 		
-		override public function setIconResName( iconResURL:String ):void
+		override public function setIconResName( iconResURL:String , isSetSelect:Boolean=true):void
 		{
 			super.setIconResName(iconResURL);
-			setSelectedImgSize(iconSize);
+			if(isSetSelect)
+				setSelectedImgSize(iconSize);
 		}
 		
 		/**
@@ -101,10 +102,10 @@ package com.rpgGame.app.view.icon
 		public function showQuality( qualityID:int ):void
 		{
 			_qualityId = qualityID;
-		/*	if( _qualityId <= 0 )
+			/*	if( _qualityId <= 0 )
 			{
-				hideQuality();
-				return;
+			hideQuality();
+			return;
 			}*/
 			if(_qualityImage == null)
 			{
@@ -139,12 +140,12 @@ package com.rpgGame.app.view.icon
 			}
 			_qualityEft.frameRate=20;
 			_qualityEft.autoPlay=true;
-//			var scaleV:Number=(90/64);
+			//			var scaleV:Number=(90/64);
 			_qualityEft.width=_iconSize;
 			_qualityEft.height=_iconSize;
-//			var xy:Number=-1*(_iconSize/64)*(90-64)/2
-//			_qualityEft.x=xy;
-//			_qualityEft.y=xy;
+			//			var xy:Number=-1*(_iconSize/64)*(90-64)/2
+			//			_qualityEft.x=xy;
+			//			_qualityEft.y=xy;
 		}		
 		
 		/** 隐藏品质框 */		
@@ -207,8 +208,8 @@ package com.rpgGame.app.view.icon
 		}
 		protected function setIsShowLockAsset(value:Boolean,isBind:Boolean):void
 		{
-//			if(isShowLockAsset == value)
-//				return;
+			//			if(isShowLockAsset == value)
+			//				return;
 			isShowLockAsset = value;
 			var styleName:String ;
 			if(isBind)
@@ -249,10 +250,10 @@ package com.rpgGame.app.view.icon
 				return;
 			switch(_iconSize)
 			{
-//				case  IcoSizeEnum.SIZE_36:
-//					_lockAsset.x = 0;
-//					_lockAsset.y = 0;
-//					break;
+				//				case  IcoSizeEnum.SIZE_36:
+				//					_lockAsset.x = 0;
+				//					_lockAsset.y = 0;
+				//					break;
 				case  IcoSizeEnum.SIZE_40:
 					_lockAsset.x = 0;
 					_lockAsset.y = 0;
@@ -355,13 +356,12 @@ package com.rpgGame.app.view.icon
 				_selectImage.visible = false;
 				addEventListener( TouchEvent.TOUCH, onTouchSelect );
 			}
-		
+			
 			if(_qualityId!=-1){
 				_selectImage.styleName = ClientConfig.getSelectBg( _selectRes )+"_"+this._qualityId+ClientConfig.eName_PNG;
 			}else{
 				_selectImage.styleName = ClientConfig.getSelectBg( _selectRes )+"_"+0+ClientConfig.eName_PNG;
-			}
-			
+			}			
 			sortLayer();
 		}
 		
