@@ -5,7 +5,7 @@ package com.rpgGame.app.ui
 	import feathers.controls.StateSkin;
 	
 	import starling.display.DisplayObject;
-
+	
 	public class SkinUIModePanel
 	{
 		protected var _uiskin:StateSkin;
