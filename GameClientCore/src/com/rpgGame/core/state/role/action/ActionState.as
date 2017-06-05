@@ -41,6 +41,7 @@ package com.rpgGame.core.state.role.action
 					this.type == RoleStateType.ACTION_BEAT_BACK ||
 					this.type == RoleStateType.ACTION_COLLECT ||
 					this.type == RoleStateType.ACTION_PLAY_ACTION ||
+					this.type == RoleStateType.ACTION_ATTACK_UI ||
 					this.type == RoleStateType.ACTION_TRAIL) {
 				} else {
 					var role : BaseRole = _machine.owner as BaseRole;
@@ -63,7 +64,8 @@ package com.rpgGame.core.state.role.action
 					this.type == RoleStateType.ACTION_BEAT_BACK ||
 					this.type == RoleStateType.ACTION_COLLECT ||
 					this.type == RoleStateType.ACTION_PLAY_ACTION ||
-					this.type == RoleStateType.ACTION_TRAIL) {
+					this.type == RoleStateType.ACTION_TRAIL||
+					this.type == RoleStateType.ACTION_ATTACK_UI) {
 				} else {
 					var role : BaseRole = _machine.owner as BaseRole;
 					GameLog.add("[ActionState] roleName:" + role.name + " changeBaseVirtualParent(false) state:" + this.type);

@@ -15,13 +15,13 @@ package  com.rpgGame.appModule.social.team
 	import flash.utils.getTimer;
 	import flash.utils.setTimeout;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.List;
 	import feathers.controls.Scroller;
 	import feathers.data.ListCollection;
 	
 	import org.mokylin.skin.app.shejiao.zudui.Zudui_wanjia;
-	
-	import away3d.events.Event;
 	
 
 
@@ -87,11 +87,13 @@ package  com.rpgGame.appModule.social.team
 			update();
 			timer.start();
 			onTimer();
+			TeamSender.ReqOpenOrCloseTeamPanel(2,0);
 		}
 		override protected function onHide():void
 		{
 			super.onHide();
 			timer.stop();
+			TeamSender.ReqOpenOrCloseTeamPanel(2,1);
 		}
 		private function doRefresh(isAuto:Boolean):void
 		{

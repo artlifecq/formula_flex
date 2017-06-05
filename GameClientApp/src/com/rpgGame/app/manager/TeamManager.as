@@ -1,11 +1,14 @@
 package com.rpgGame.app.manager
 {
+	import com.game.engine3D.utils.MathUtil;
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.friend.FriendManager;
 	import com.rpgGame.app.manager.map.MapUnitDataManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
+	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.TeamSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.ui.alert.GameAlertExt;
@@ -93,6 +96,40 @@ package com.rpgGame.app.manager
 		public function get hasTeam():Boolean
 		{
 			return _teamInfo!=null&&!_teamInfo.teamId.IsZero();
+		}
+		public function getNearstTeammerber():SceneRole
+		{
+			if (!hasTeam) 
+			{
+				return null;
+			}
+			var ret:SceneRole;
+			var minDis:int=int.MAX_VALUE;
+			var tmp:SceneRole;
+			var dis:int=0;
+			for each(var mem:TeamMemberInfo in teamInfo.memberinfo)
+			{
+				if (mem.isonline==0) 
+				{
+					continue;
+				}
+				tmp=SceneManager.getSceneObjByID(mem.memberId.ToGID()) as SceneRole;
+				if (!tmp) 
+				{
+					continue;
+				}
+				if (tmp.isMainChar) 
+				{
+					continue;
+				}
+				dis=MathUtil.getDistanceNoSqrt(tmp.pos.x,tmp.pos.y,MainRoleManager.actor.pos.x,MainRoleManager.actor.pos.y);
+				if (dis<minDis) 
+				{
+					minDis=dis;
+					ret=tmp;
+				}
+			}
+			return ret;
 		}
 		/**
 		 * 是否队长

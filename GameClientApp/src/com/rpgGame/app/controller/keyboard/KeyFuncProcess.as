@@ -67,19 +67,15 @@ package com.rpgGame.app.controller.keyboard
 					AppManager.showApp(AppConstant.BIGMAP_PANEL);
 					break;
 				case "4": //B 背包
-					if (!ClientConfig.isBanShu)
 						AppManager.showApp(AppConstant.ROLE_PANEL);
 					break;
 				case "5": //C 人物
-					if (!ClientConfig.isBanShu)
 						AppManager.showApp(AppConstant.ROLE_PANEL);
 					break;
 				case "6": //V 坐骑
-					if (!ClientConfig.isBanShu)
 						AppManager.showApp(AppConstant.MOUNT_PANEL);
 					break;
 				case "7": //L 任务
-					if (!ClientConfig.isBanShu)
 						AppManager.showApp(AppConstant.TASK_PANEL);
 					break;
 				case "8": //F 好友
@@ -97,7 +93,6 @@ package com.rpgGame.app.controller.keyboard
 //						AppManager.showApp(AppConstant.FRIEND_PANEL);
 					break;
 				case "9": //P 队伍
-					if (!ClientConfig.isBanShu)
 						AppManager.showApp(AppConstant.EQUIP_PANL);
 					break;
 				case "10": //O 商城
@@ -106,11 +101,9 @@ package com.rpgGame.app.controller.keyboard
 					AppManager.showApp(AppConstant.SYSTEMSET_PANEL);
 					break;
 				case "11": //J 社会
-					if (!ClientConfig.isBanShu)
 						AppManager.showApp(AppConstant.COUNTRY_PANEL);
 					break;
 				case "12": //Q 装备
-					if (!ClientConfig.isBanShu)
 						AppManager.showApp(AppConstant.EQUIP_CHANGE);
 					break;
 				case "14": //E
@@ -126,7 +119,6 @@ package com.rpgGame.app.controller.keyboard
 					//resizeChatPanel();
 					break;
 				case "29": //T 坐骑上下马
-					if (!ClientConfig.isBanShu)
 //						MountManager.setMountRide();
 						HorseManager.instance().setHouseRide();
 					break;

@@ -3,6 +3,7 @@ package com.rpgGame.app.sender
 	import com.rpgGame.app.ctrl.ControlCoolDown;
 	import com.rpgGame.app.ctrl.EnumCustomCoolDown;
 	import com.rpgGame.app.manager.Mgr;
+	import com.rpgGame.netData.team.message.CSOpenOrClosePanelTypeMessage;
 	import com.rpgGame.netData.team.message.ReqApplyGameSelectMessage;
 	import com.rpgGame.netData.team.message.ReqAppointGameMessage;
 	import com.rpgGame.netData.team.message.ReqAppointGameSelectMessage;
@@ -194,6 +195,19 @@ package com.rpgGame.app.sender
 			{
 				ControlCoolDown.AddCustomCoolDownTime( EnumCustomCoolDown.TEAM_SEARCH_TEAM , 30000);
 			}
+			
+		}
+		/**
+		 * 搜索附近队伍
+		 * @param content
+		 */		
+		public static  function ReqOpenOrCloseTeamPanel( panel:int,open:int ):void
+		{
+			var msg:CSOpenOrClosePanelTypeMessage = new CSOpenOrClosePanelTypeMessage();
+			msg.panelType = panel;
+			msg.operatingType=open;
+			SocketConnection.send(msg);
+			
 			
 		}
 	}

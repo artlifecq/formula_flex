@@ -113,15 +113,29 @@ package  com.rpgGame.app.ui.main.team
 			{
 			
 				var len:int=teamInfo.memberinfo.length;
+				var arr:Array=[];
+				for (var j:int = 0; j < len; j++) 
+				{
+					if (teamInfo.memberinfo[j].memberId.EqualTo(MainRoleManager.actorInfo.serverID)) 
+					{
+						arr.unshift(teamInfo.memberinfo[j]);
+					}
+					else
+					{
+						arr.push(teamInfo.memberinfo[j]);
+					}
+				}
+				
 				for (var i:int = 0; i < 5; i++) 
 				{
-					setCellData(cellList[i],(i<len)?teamInfo.memberinfo[i]:null);
+					setCellData(cellList[i],(i<len)?arr[i]:null);
 				}
 				this._skin.lbNum.text=teamInfo.memberinfo.length+"/"+TeamManager.MAXMEMBER;
 				//只有自己
 			}
 			
 		}
+		
 		private function setCellData(cell:TeamBarListItemExt,data:TeamMemberInfo):void
 		{
 			if (data) 
