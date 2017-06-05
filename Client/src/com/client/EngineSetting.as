@@ -50,10 +50,10 @@ package com.client
 //			Away3D.MIPMAP_WITH_BITMAPDATA = false;
 		
 			//这里是御龙新的设置，暂时还没有确定好是否适合我们，暂时注释掉
-//			Away3D.PARSE_JPG_IN_WORKER = !ClientConfig.useAtfFormat && !ClientConfig.useBpgFormat;
-//			Away3D.PARSE_PNG_IN_WORKER = !ClientConfig.useAtfFormat && !ClientConfig.useBpgFormat;
-//			Away3D.USE_ATF_FOR_TEXTURES = ClientConfig.useAtfFormat;
-//			Away3D.ATF_ASYNC_UPLOAD = ClientConfig.useAtfFormat;
+			Away3D.PARSE_JPG_IN_WORKER = !ClientConfig.useAtfFormat && !ClientConfig.useBpgFormat;
+			Away3D.PARSE_PNG_IN_WORKER = !ClientConfig.useAtfFormat && !ClientConfig.useBpgFormat;
+			Away3D.USE_ATF_FOR_TEXTURES = ClientConfig.useAtfFormat;
+			Away3D.ATF_ASYNC_UPLOAD = ClientConfig.useAtfFormat;
 			Away3D.ENABLE_SOUND_PAN = true;
 			
 			Away3D.PARSE_JPG_IN_WORKER = true;

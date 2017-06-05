@@ -60,6 +60,7 @@ package com.rpgGame.app.scene
 		protected var _fightChange : Boolean = false;
 		public var mapAreaTypes : Array = [];
 		public var isWheel : Boolean = false;
+		public var isSwimming:Boolean = false;
 		
 		public function SceneRole(type : String, id : Number)
 		{
@@ -154,7 +155,7 @@ package com.rpgGame.app.scene
 				_headFace.isCamouflage = true;
 			
 			//设置成伪装者的时候需要隐藏血纹场景模型
-			setXueWenVisible(false);
+			setFightSoulRoleVisible(false);
 		}
 		
 		override protected function onRemoveCamouflageEntity() : void
@@ -162,7 +163,7 @@ package com.rpgGame.app.scene
 			super.onRemoveCamouflageEntity();
 			if (_headFace)
 				_headFace.isCamouflage = false;
-			setXueWenVisible(true);
+			setFightSoulRoleVisible(true);
 		}
 		
 		override public function dispose() : void
@@ -202,11 +203,11 @@ package com.rpgGame.app.scene
 			_fightChange = value;
 		}
 		
-		private function setXueWenVisible(flag : Boolean) : void
+		private function setFightSoulRoleVisible(flag : Boolean) : void
 		{
-			if (this.data is HeroData && this.data.xueWen > 0)
+			if (this.data is HeroData && (this.data as HeroData).fightSoulLevel > 0)
 			{
-				var role : SceneRole = SceneManager.getScene().getSceneObjByID(this.id, SceneCharType.XUE_WEN) as SceneRole;
+				var role : SceneRole = SceneManager.getScene().getSceneObjByID(this.id, SceneCharType.FIGHT_SOUL) as SceneRole;
 				if (role)
 				{
 					role.visible = flag;

@@ -110,7 +110,7 @@ package com.game.engine2D.vo
 			return _isDestroyed;
 		}
 		
-		public function get isDisposed():Boolean
+		override public function get isDisposed():Boolean
 		{
 			return _isDisposed;
 		}

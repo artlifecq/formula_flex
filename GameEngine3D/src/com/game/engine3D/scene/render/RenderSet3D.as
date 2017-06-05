@@ -1163,6 +1163,12 @@ package com.game.engine3D.scene.render
 			}
 		}
 
+		/**
+		 * 创建某个渲染单元的快照 
+		 * @param renderUnitType
+		 * @param id
+		 * 
+		 */		
 		public function buildSyncInfo(renderUnitType : String, id : int) : void
 		{
 			var ru : RenderUnit3D = getRenderUnitByID(renderUnitType, id);
@@ -1173,6 +1179,12 @@ package com.game.engine3D.scene.render
 				_syncInfos[renderUnitType + "_" + id] = info;
 		}
 
+		/**
+		 * 执行某个渲染单元的快照 
+		 * @param renderUnitType
+		 * @param id
+		 * 
+		 */		
 		public function applySyncInfo(renderUnitType : String, id : int) : void
 		{
 			var key : String = renderUnitType + "_" + id;

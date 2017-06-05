@@ -1,6 +1,5 @@
 package com.game.engine3D.scene.render
 {
-	import com.game.engine2D.controller.CameraFrontController;
 	import com.game.engine3D.config.GlobalConfig;
 	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.game.engine3D.core.poolObject.PoolContainer3D;
@@ -2918,6 +2917,7 @@ package com.game.engine3D.scene.render
 		}
 
 		/**
+		 * 执行这个渲染单元的快照
 		 * 提交同步快照。@L.L.M.Sunny
 		 * @param info
 		 *
