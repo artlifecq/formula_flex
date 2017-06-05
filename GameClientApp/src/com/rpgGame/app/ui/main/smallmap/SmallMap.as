@@ -349,9 +349,9 @@ package com.rpgGame.app.ui.main.smallmap
 //            }
 //            else
 //            {
-				absMaxWidth = sceneMapData.clientMapData.boundMaxX;
-				absMaxHeight = sceneMapData.clientMapData.boundMaxY;
                 var senceData : SceneData = MapDataManager.getMapInfo(_currentMapId);
+                absMaxWidth = senceData.mapConfig.width;//sceneMapData.clientMapData.boundMaxX;
+                absMaxHeight = senceData.mapConfig.height;//sceneMapData.clientMapData.boundMaxY;
                 var mapUrl : String = ClientConfig.getMap(senceData.map);
                 var mapName : String = ClientConfig.getMapName(senceData.map);
                 if (isRadarMap)
