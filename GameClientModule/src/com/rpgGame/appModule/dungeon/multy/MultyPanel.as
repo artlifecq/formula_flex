@@ -1,53 +1,42 @@
 package com.rpgGame.appModule.dungeon.multy
 {
-	import com.rpgGame.app.ui.SkinUIPanel;
-	import com.rpgGame.app.ui.UITableGroup;
+	import com.rpgGame.app.ui.TabBarPanel;
+	import com.rpgGame.app.ui.tab.FuncTabBar;
 	import com.rpgGame.appModule.dungeon.equip.EquipDungeon;
 	import com.rpgGame.appModule.dungeon.exp.ExpDungeon;
 	import com.rpgGame.appModule.dungeon.genuine.GenuineDungeon;
+	import com.rpgGame.coreData.enum.EmFunctionID;
 	
 	import org.mokylin.skin.app.fuben.FuBen_Skin;
+	import org.mokylin.skin.component.tabbar.TabBarSkin_pack;
 	
 	import starling.display.DisplayObject;
-	import starling.display.DisplayObjectContainer;
 
 
 	/**
 	 * 多人副本弹出面板
 	 * @author YT
 	 */	
-	public class MultyPanel  extends SkinUIPanel
+	public class MultyPanel  extends TabBarPanel
 	{
 		private var _skin :FuBen_Skin;
-		private var _table:UITableGroup;
+		private var _tabBar:FuncTabBar;
 		public function MultyPanel()
 		{
 			_skin=new FuBen_Skin();
 			super(_skin);
-			initView();
 		}
-		private function initView():void
+		override protected function initTabBarDatas():void
 		{
-			_table = new UITableGroup(_skin.tab_fuben,_skin.duoren_skin);
-			_table.addModePane(new MultyView());
-			_table.addModePane(new EquipDungeon());
-			_table.addModePane(new GenuineDungeon());
-			_table.addModePane(new ExpDungeon());
-		}
-		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
-		{
-			super.show(data,openTable,parentContiner);
-			_table.refeash(0);
+			addTabDatas(TabBarSkin_pack,MultyView,EmFunctionID.EM_DUORENFUBEN);
+			addTabDatas(TabBarSkin_pack,EquipDungeon,EmFunctionID.EM_ZHUANGBEIFUBEN);
+			addTabDatas(TabBarSkin_pack,GenuineDungeon,EmFunctionID.EM_ZHENGQIFUBEN);
+			addTabDatas(TabBarSkin_pack,ExpDungeon,EmFunctionID.EM_JINGYANFUBEN);
 		}
 		
-		override public function hide():void 
-		{
-			super.hide();
-		}
 		override protected function onTouchTarget(target:DisplayObject):void 
 		{
 			super.onTouchTarget(target);
-			_table.crrentModePanle.onTouchTarget(target);
 //			_multyView.onTouchTarget(target);
 		}
 		

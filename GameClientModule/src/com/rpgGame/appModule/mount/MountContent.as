@@ -9,7 +9,7 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.coreData.cfg.HorseConfigData;
 	import com.rpgGame.coreData.clientConfig.Q_horse;
 	
-	import org.mokylin.skin.app.zuoqi.Zuoqi_Skin;
+	import org.mokylin.skin.app.zuoqi.ZuoqiCont_Skin;
 	
 	import starling.animation.IAnimatable;
 	import starling.core.Starling;
@@ -18,13 +18,13 @@ package com.rpgGame.appModule.mount
 	{
 		private var _isSHowNext:Boolean;
 		private var _curShowHorse:int = 0;
-		private var _skin:Zuoqi_Skin;
+		private var _skin:ZuoqiCont_Skin;
 		private var _curtentInter3D:InterObject3D;
 		private var _nextInter3D:InterObject3D;
 		private var _amationInfos:Vector.<TargetAmationInfo>;
 		private static const TotalTime:Number = 0.3;
 		private static var _passTime:Number = 0;
-		public function MountContent(skin:Zuoqi_Skin):void
+		public function MountContent(skin:ZuoqiCont_Skin):void
 		{
 			_skin = skin;
 			super();
