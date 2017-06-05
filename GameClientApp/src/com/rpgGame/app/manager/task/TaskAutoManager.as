@@ -10,6 +10,8 @@ package com.rpgGame.app.manager.task
 	import com.rpgGame.core.app.AppEvent;
 	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
+	import com.rpgGame.coreData.info.MapDataManager;
+	import com.rpgGame.coreData.info.map.EnumMapType;
 	import com.rpgGame.coreData.type.AIStateType;
 	import com.rpgGame.coreData.type.TaskType;
 	
@@ -106,6 +108,7 @@ package com.rpgGame.app.manager.task
 			TrusteeshipManager.getInstance().stopAll();
 			GatherAutoManager.getInstance().stopGatherAuto();
 			stopTaskAuto();
+			//EventManager.dispatchEvent(TaskEvent.AUTO_WALK_STOP);
 		}
 		public function stopTaskAuto() : void
 		{
@@ -149,6 +152,8 @@ package com.rpgGame.app.manager.task
 			if(!TaskMissionManager.haveMainTask)
 				return;
 			if(MainRoleManager.actorInfo.totalStat.level>AUTOLVE)
+				return;
+			if(MapDataManager.getMapInfo(MainRoleManager.actorInfo.mapID).mapType!=EnumMapType.MAP_TYPE_NORMAL)
 				return;
 			if(MainRoleManager.actor.stateMachine.isIdle)
 			{

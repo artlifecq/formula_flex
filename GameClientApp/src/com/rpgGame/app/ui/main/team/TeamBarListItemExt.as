@@ -14,6 +14,7 @@ package   com.rpgGame.app.ui.main.team
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.BuffStateDataManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.clientConfig.Q_buff;
 	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
@@ -29,9 +30,9 @@ package   com.rpgGame.app.ui.main.team
 	import org.mokylin.skin.mainui.head.head_min_Skin;
 	
 	import starling.display.DisplayObject;
-
-
-
+	
+	
+	
 	
 	public class TeamBarListItemExt extends SkinUI
 	{
@@ -204,12 +205,16 @@ package   com.rpgGame.app.ui.main.team
 				var len:int=buff.length;
 				for (var i:int = 0; i < len; i++) 
 				{
-					var icon:BgIcon=new BgIcon(IcoSizeEnum.ICON_24);
-					icon.setIconResName(ClientConfig.getBuffIcon(BuffStateDataManager.getData(buff[i]).q_icon, IcoSizeEnum.ICON_24 ));
-					icon.x=_skin.role_buffer.x+i*26;
-					icon.y=_skin.role_buffer.y;
-					this.addChild(icon);
-					buffIcon.push(icon);
+					var q_buff:Q_buff=BuffStateDataManager.getData(buff[i]);
+					if(q_buff.q_effect_type==2)
+					{
+						var icon:BgIcon=new BgIcon(IcoSizeEnum.ICON_24);				
+						icon.setIconResName(ClientConfig.getBuffIcon(q_buff.q_icon, IcoSizeEnum.ICON_24 ));
+						icon.x=_skin.role_buffer.x+i*26;
+						icon.y=_skin.role_buffer.y;
+						this.addChild(icon);
+						buffIcon.push(icon);
+					}
 				}
 			}
 		}

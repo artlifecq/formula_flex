@@ -21,6 +21,7 @@ package
 	import com.game.engine3D.process.ProcessStateMachine;
 	import com.game.engine3D.utils.StatsUtil;
 	import com.gameClient.alert.AlertPanel;
+	import com.gameClient.alert.ReconnectionPanelExt;
 	import com.gameClient.log.GameLog;
 	import com.gameClient.log.GameLogView;
 	import com.gameClient.utils.VersionUtils;
@@ -123,6 +124,7 @@ package
 			
 			GameLogView.init(this.stage, [189, 190, 191]);//-_	189  .>	190  /?	191
 			AlertPanel.initStage(this.stage);
+			ReconnectionPanelExt.initStage(this.stage);
 			//
 			getWebParams();
 			GameLog.addShow("版本号：" + version);
@@ -203,8 +205,8 @@ package
 					GameLog.addShow("profile type：" + Stage3DLayerManager.stage3DProxy.profile);
 					
 					Parsers.enableAllBundled();
-					Stage3DLayerManager.screenAntiAlias = 2;
-					Stage3DLayerManager.viewAntiAlias = 2;
+					Stage3DLayerManager.screenAntiAlias = 0;
+					Stage3DLayerManager.viewAntiAlias = 0;
 					Stage3DLayerManager.startRender();
 					Stage3DLayerManager.starlingLayer.setLayer("alert", 9);
 					Stage3DLayerManager.starlingLayer.setLayer("loading", 8);

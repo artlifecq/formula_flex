@@ -30,6 +30,9 @@ package com.rpgGame.app.richText.component
 		private static const KEY_LINK_TYPE:String = "4";
 		private static const KEY_LINK_DATA:String = "5";
 		private static const KEY_OFFSET_Y:String = "6";
+		private static const KEY_WIDTH:String = "7";
+		private static const KEY_UN_UNDERLINE:String = "8";
+		private static const KEY_DOUBLE_CLICK:String = "9";
 		
 		/**
 		 * 获取富文本对象代码
@@ -40,10 +43,13 @@ package com.rpgGame.app.richText.component
 		 * @param linkType 链接的数据类型
 		 * @param linkData 链接的数据
 		 * @param offsetY 此单元y坐标偏移量，单位：像素，负数向上，正数向下
+		 * @param tWidth 指定宽
+		 * @param tUnderLine 是否有下划线，true为有，false为无
+		 * @param tDoubleClick 是否支持双击，true为支持，false为不支持
 		 * @return 
 		 * 
 		 */
-		public static function getCode(unitType:String, res:String, label:String = null, labelColor:Number = -1, linkType:String = null, linkData:String = null, offsetY:int = 0) : String
+		public static function getCode(unitType:String, res:String, label:String = null, labelColor:Number = -1, linkType:String = null, linkData:String = null, offsetY:int = 0,tWidth:int = 0,tUnderLine:Boolean = true,tDoubleClick:Boolean = false) : String
 		{
 			var code:String = "ω";
 			code += KEY_UNIT_TYPE +":" + unitType;
@@ -69,6 +75,19 @@ package com.rpgGame.app.richText.component
 				code += ";" + KEY_OFFSET_Y + ":" + offsetY.toString();
 			}
 			
+			if(tWidth != 0)
+			{
+				code += ";" + KEY_WIDTH + ":" + tWidth.toString();
+			}
+			
+			if(!tUnderLine)
+			{
+				code += ";" + KEY_UN_UNDERLINE + ":1";
+			}
+			if(tDoubleClick)
+			{
+				code += ";" + KEY_DOUBLE_CLICK + ":1";
+			}
 			code += "ω";
 			return code;
 		}
@@ -112,7 +131,7 @@ package com.rpgGame.app.richText.component
 				return null;
 			}
 			var info:String = unitCode.substring(1, unitCode.length - 1);
-			var data : RichTextUnitData = new RichTextUnitData();
+			var data : RichTextUnitData = RichTextUnitData.getFromPool();
 			data.code = unitCode;
 			var arr:Array = info.split(";");
 			var len:int = arr.length;
@@ -152,6 +171,18 @@ package com.rpgGame.app.richText.component
 				else if(key == KEY_OFFSET_Y)
 				{
 					data.offsetY = parseInt(value);
+				}
+				else if(key == KEY_WIDTH)
+				{
+					data.width = parseInt(value);
+				}
+				else if(key == KEY_UN_UNDERLINE)
+				{
+					data.underLine = !(value == "1");
+				}
+				else if(key == KEY_DOUBLE_CLICK)
+				{
+					data.doubleClick = (value == "1");
 				}
 			}
 			return data;

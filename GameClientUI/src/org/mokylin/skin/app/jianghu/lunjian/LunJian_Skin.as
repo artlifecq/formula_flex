@@ -7,6 +7,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 	import feathers.controls.UIAsset;
 	import feathers.layout.VerticalLayout;
 	import org.mokylin.skin.component.button.ButtonSkin_jiantou2;
+	import org.mokylin.skin.component.button.ButtonSkin_shuoming2;
 	import org.mokylin.skin.component.list.ListSkin1;
 
 	/**
@@ -23,6 +24,8 @@ package org.mokylin.skin.app.jianghu.lunjian
 
 		public var btnP:feathers.controls.Button;
 
+		public var btnShuoming:feathers.controls.Button;
+
 		public var list_map:feathers.controls.List;
 
 
@@ -36,7 +39,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [__LunJian_Skin_UIAsset2_i(),list_map_i(),__LunJian_Skin_UIAsset3_i(),btnP_i(),btnN_i()];
+			this.elementsContent = [__LunJian_Skin_UIAsset2_i(),list_map_i(),__LunJian_Skin_UIAsset3_i(),btnP_i(),btnN_i(),btnShuoming_i()];
 			
 			states = {
 			};
@@ -93,6 +96,17 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jiantou2;
 			temp.x = 215;
 			temp.y = 289;
+			return temp;
+		}
+
+		private function btnShuoming_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btnShuoming = temp;
+			temp.name = "btnShuoming";
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_shuoming2;
+			temp.x = 21;
+			temp.y = 39;
 			return temp;
 		}
 

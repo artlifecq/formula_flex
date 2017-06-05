@@ -9,13 +9,15 @@ package com.rpgGame.app.richText.component
 	 */
 	public class RichTextCursorInfo
 	{
-		public var cursorIndex:int;
+		public var selectionBeginIndex:int;
+		public var selectionEndIndex:int;
 		public var firstPartLength:int;
 		public var lastPartLength:int;
 		
 		public function reset():void
 		{
-			cursorIndex = 0;
+			selectionBeginIndex = 0;
+			selectionEndIndex = 0;
 			firstPartLength = 0;
 			lastPartLength = 0;
 		}

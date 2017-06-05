@@ -1,5 +1,6 @@
 package org.mokylin.skin.signIn
 {
+	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
 	import feathers.controls.Check;
 	import feathers.controls.Label;
@@ -48,8 +49,8 @@ package org.mokylin.skin.signIn
 			super();
 			
 			this.currentState = "normal";
-			this.height = 924;
-			this.width = 1643;
+			this.height = 1080;
+			this.width = 1920;
 			this.elementsContent = [bgImage_i(),userNameText_i(),passWordText_i(),loginBtn_i(),__SignInSkin_Button1_i(),__SignInSkin_Label1_i(),infoTxt_i(),bottomInfo_i(),rememberBox_i(),passWordTips_i(),userNameTips_i()];
 			
 			states = {
@@ -67,8 +68,8 @@ package org.mokylin.skin.signIn
 			temp.height = 18;
 			temp.styleClass = org.mokylin.skin.signIn.button.ButtonWen_hao;
 			temp.width = 12;
-			temp.x = 1055;
-			temp.y = 542;
+			temp.x = 1165;
+			temp.y = 562;
 			return temp;
 		}
 
@@ -77,10 +78,11 @@ package org.mokylin.skin.signIn
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.height = 24;
 			temp.text = "忘记密码";
-			temp.color = 0xf9f0cc;
+			temp.color = 0xE1D4A9;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 100;
-			temp.x = 1075;
-			temp.y = 540;
+			temp.x = 1185;
+			temp.y = 560;
 			return temp;
 		}
 
@@ -89,9 +91,9 @@ package org.mokylin.skin.signIn
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bgImage = temp;
 			temp.name = "bgImage";
-			temp.height = 924;
-			temp.styleName = "ui/signIn/di.jpg";
-			temp.width = 1643;
+			temp.height = 1080;
+			temp.styleName = "ui/signIn/di.png";
+			temp.width = 1920;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -107,8 +109,8 @@ package org.mokylin.skin.signIn
 			temp.textAlign = "center";
 			temp.color = 0x333a40;
 			temp.width = 850;
-			temp.x = 396;
-			temp.y = 895;
+			temp.x = 487;
+			temp.y = 1047;
 			return temp;
 		}
 
@@ -121,10 +123,11 @@ package org.mokylin.skin.signIn
 			temp.fontSize = 14;
 			temp.text = "正在请求登录，请稍等...";
 			temp.textAlign = "center";
-			temp.color = 0xF9F0CC;
+			temp.color = 0xE1D4A9;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 400;
-			temp.x = 655;
-			temp.y = 720;
+			temp.x = 765;
+			temp.y = 740;
 			return temp;
 		}
 
@@ -136,8 +139,8 @@ package org.mokylin.skin.signIn
 			temp.height = 68;
 			temp.styleClass = org.mokylin.skin.signIn.button.ButtonDeng_lu;
 			temp.width = 227;
-			temp.x = 740;
-			temp.y = 620;
+			temp.x = 850;
+			temp.y = 640;
 			return temp;
 		}
 
@@ -151,8 +154,8 @@ package org.mokylin.skin.signIn
 			temp.styleClass = org.mokylin.skin.signIn.InputTextSkin;
 			temp.color = 0xFFFFFF;
 			temp.width = 355;
-			temp.x = 675;
-			temp.y = 530;
+			temp.x = 785;
+			temp.y = 550;
 			return temp;
 		}
 
@@ -168,8 +171,8 @@ package org.mokylin.skin.signIn
 			temp.textAlign = "left";
 			temp.color = 0x4A4744;
 			temp.width = 263;
-			temp.x = 685;
-			temp.y = 536;
+			temp.x = 795;
+			temp.y = 556;
 			return temp;
 		}
 
@@ -178,12 +181,13 @@ package org.mokylin.skin.signIn
 			var temp:feathers.controls.Check = new feathers.controls.Check();
 			rememberBox = temp;
 			temp.name = "rememberBox";
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "记住账号";
 			temp.styleClass = org.mokylin.skin.signIn.CheckBoxSkin;
-			temp.color = 0xf9f0cc;
+			temp.color = 0xE1D4A9;
 			temp.width = 80;
-			temp.x = 1050;
-			temp.y = 490;
+			temp.x = 1160;
+			temp.y = 510;
 			return temp;
 		}
 
@@ -197,8 +201,8 @@ package org.mokylin.skin.signIn
 			temp.styleClass = org.mokylin.skin.signIn.InputTextSkin;
 			temp.color = 0xFFFFFF;
 			temp.width = 355;
-			temp.x = 675;
-			temp.y = 480;
+			temp.x = 785;
+			temp.y = 500;
 			return temp;
 		}
 
@@ -214,8 +218,8 @@ package org.mokylin.skin.signIn
 			temp.textAlign = "left";
 			temp.color = 0x4A4744;
 			temp.width = 263;
-			temp.x = 685;
-			temp.y = 486;
+			temp.x = 795;
+			temp.y = 506;
 			return temp;
 		}
 
