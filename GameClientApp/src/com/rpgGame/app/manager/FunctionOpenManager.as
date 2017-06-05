@@ -3,40 +3,71 @@
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.core.app.AppConstant;
     import com.rpgGame.core.app.AppManager;
+    import com.rpgGame.core.events.FunctionOpenEvent;
+    import com.rpgGame.coreData.UNIQUEID;
+    import com.rpgGame.coreData.cfg.FuncionBarCfgData;
     import com.rpgGame.coreData.cfg.NewFuncCfgData;
     import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
     import com.rpgGame.coreData.clientConfig.Q_newfunc;
     
     import org.client.mainCore.ds.HashMap;
+    import org.client.mainCore.manager.EventManager;
 
     public class FunctionOpenManager 
     {
         public static var funcBits:Object = null;
         private static var _statusMap:HashMap = new HashMap();
 		
-		public static function openFunctionByLevel(level:int):void
+		/**
+		 * 检查已经开启的新功能,并通知消息 
+		 * @param level
+		 * @param isdispatch
+		 * 
+		 */
+		public static function openFunctionByLevel(level:int,isdispatch:Boolean):void
 		{
-			var map:HashMap = NewFuncCfgData.map;
-			var infos:Array = map.getValues();
+			var infos:Array = NewFuncCfgData.alldata();
 			var itemlist:Vector.<int> = new Vector.<int>();
 			for each(var info :Q_newfunc in infos)
 			{
-				if(info.q_level == level)
-					itemlist.push(info.q_id);
+				if(info.q_level > level)
+					continue;
+				if(_statusMap.getValue(info.q_id)!=null)
+					continue;
+				_statusMap.add(info.q_id,info);
+				itemlist.push(info.q_id);
 			}
-			if(itemlist.length>0)
-				AppManager.showAppNoHide(AppConstant.OPEN_FUNCTION,itemlist);
-			else
-				AppManager.hideApp(AppConstant.OPEN_FUNCTION);
-			
+			if(isdispatch)
+			{
+				if(itemlist.length>0)
+					AppManager.showAppNoHide(AppConstant.OPEN_FUNCTION,itemlist);
+				else
+					AppManager.hideApp(AppConstant.OPEN_FUNCTION);
+				EventManager.dispatchEvent(FunctionOpenEvent.FUNCTIONOPENID,itemlist);
+			}
 			openNoticeByLevel(level);
 		}
 		
 		
+		/**
+		 * 检查功能是否开启 
+		 * @param id
+		 * @return 
+		 * 
+		 */
+		public static function functionIsOpen(id:int):Boolean
+		{
+			return _statusMap.getValue(id) as Q_newfunc != null;
+		}
+		
+		/**
+		 * 功能预告设置 
+		 * @param level
+		 * 
+		 */
 		public static function openNoticeByLevel(level:int):void
 		{
-			var map:HashMap = NewFuncCfgData.map;
-			var infos:Array = map.getValues();
+			var infos:Array = NewFuncCfgData.alldata();
 			var length:int = infos.length;
 			var found:Q_newfunc; 
 
@@ -47,7 +78,7 @@
 					continue;
 				if(data.q_notivelevel > level)
 					continue;
-				if(data.q_level < level)
+				if(data.q_level <= level)
 					continue;
 				
 				if(found==null)
@@ -95,13 +126,37 @@
 			return checkOpenByLevel(func.q_level);
 		}
 		
-		public static function openModeByInfo(info:FunctionBarInfo):void
+		
+		/**
+		 * 打开功能面板 
+		 * @param info
+		 * @return 
+		 * 
+		 */
+		public static function openFunctionId(info:Q_newfunc,data:Object = null):void
+		{
+			if(info==null)
+				return ;
+			if(!openFunctionById(info.q_id))
+			{
+				return ;
+			}
+			var modeInfo:FunctionBarInfo = FuncionBarCfgData.getActivityBarInfo(info.q_main_id);
+			openModeByInfo(modeInfo,info.q_id.toString(),data);
+		}
+		
+		/**
+		 * 打开面板
+		 * @param info
+		 * 
+		 */
+		public static function openModeByInfo(info:FunctionBarInfo,id:String= "",data:Object = null):void
 		{
 			if(info.clickarg=="")
 				return ;
 			if(info.clickType==1)
 			{
-				AppManager.showApp(info.clickarg);
+				AppManager.showApp(info.clickarg,data,id);
 			}
 		}
     }

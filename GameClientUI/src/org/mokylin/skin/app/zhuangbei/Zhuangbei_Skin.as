@@ -2,8 +2,8 @@ package org.mokylin.skin.app.zhuangbei
 {
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
+	import feathers.controls.TabBar;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.app.zhuangbei.Zhuangbei_daohang;
 	import org.mokylin.skin.common.yiji_panelbg2_Skin;
 
 	/**
@@ -18,7 +18,7 @@ package org.mokylin.skin.app.zhuangbei
 		//==========================================================================
 		public var bg:feathers.controls.SkinnableContainer;
 
-		public var daohang:feathers.controls.SkinnableContainer;
+		public var tabBar:feathers.controls.TabBar;
 
 
 		//==========================================================================
@@ -31,7 +31,7 @@ package org.mokylin.skin.app.zhuangbei
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [bg_i(),__Zhuangbei_Skin_UIAsset1_i(),daohang_i(),__Zhuangbei_Skin_UIAsset2_i()];
+			this.elementsContent = [bg_i(),__Zhuangbei_Skin_UIAsset1_i(),tabBar_i(),__Zhuangbei_Skin_UIAsset2_i()];
 			
 			states = {
 			};
@@ -56,6 +56,8 @@ package org.mokylin.skin.app.zhuangbei
 		private function __Zhuangbei_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.touchable = false;
+			temp.touchGroup = true;
 			temp.styleName = "ui/app/zhuangbei/qianghua/titile.png";
 			temp.x = 447;
 			temp.y = 13;
@@ -76,17 +78,15 @@ package org.mokylin.skin.app.zhuangbei
 			return temp;
 		}
 
-		private function daohang_i():feathers.controls.SkinnableContainer
+		private function tabBar_i():feathers.controls.TabBar
 		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			daohang = temp;
-			temp.name = "daohang";
-			temp.height = 50;
-			var skin:StateSkin = new org.mokylin.skin.app.zhuangbei.Zhuangbei_daohang()
-			temp.skin = skin
-			temp.width = 722;
-			temp.x = 26;
-			temp.y = 524;
+			var temp:feathers.controls.TabBar = new feathers.controls.TabBar();
+			tabBar = temp;
+			temp.name = "tabBar";
+			temp.height = 49;
+			temp.width = 713;
+			temp.x = 40;
+			temp.y = 527;
 			return temp;
 		}
 

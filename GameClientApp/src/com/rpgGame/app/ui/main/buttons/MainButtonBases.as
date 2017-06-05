@@ -1,7 +1,6 @@
 package com.rpgGame.app.ui.main.buttons
 {
 	import com.rpgGame.app.manager.FunctionOpenManager;
-	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
@@ -10,6 +9,10 @@ package com.rpgGame.app.ui.main.buttons
 	import away3d.events.Event;
 	
 	import feathers.controls.Button;
+	
+	import gs.TweenLite;
+	import gs.TweenMax;
+	import gs.easing.Bounce;
 	
 	import starling.display.ButtonState;
 	
@@ -105,6 +108,7 @@ package com.rpgGame.app.ui.main.buttons
 			if(state == ButtonState.DOWN)
 			{
 				triggeredHanadler();
+//				run();
 			}
 		}
 		
@@ -113,5 +117,22 @@ package com.rpgGame.app.ui.main.buttons
 			FunctionOpenManager.openModeByInfo(_info);
 		}
 		
+		private var _tweenmax:TweenMax;
+		public function runAnimation():void
+		{
+			if(_tweenmax!=null)
+			{
+				_tweenmax.restart();
+				return ;
+			}
+			var lasty:Number = this.y;
+			_tweenmax = TweenMax.to(this,0.1,{repeat:5,y:lasty-10,onComplete:onTweenFlyComplete,onCompleteParams:[this,lasty]});
+		}
+		
+		private function onTweenFlyComplete(display:IOpen,lastY:Number):void
+		{
+			_tweenmax = null;
+			display.y = lastY;
+		}
 	}
 }

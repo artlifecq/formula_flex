@@ -792,6 +792,7 @@ package org.game.netCore.net
 						if ( message == null )
 						{
 							GameLog.addError( "客户端缺少消息 " + id + "上一个消息:" + _lastMsgID );
+							AlertPanel.showMsg("客户端缺少消息 " + id + "上一个消息:" + _lastMsgID, null );
 							isPass = true;
 						}
 						else

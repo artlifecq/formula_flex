@@ -135,7 +135,7 @@ package com.rpgGame.appModule.equip.combo
 				}
 				qianSkin.selectedBtn.isSelected=isSelected;
 				qianSkin.selectedBtn.defaultIcon=null;
-				if(this.owner.selectedItem.data is DetailNodeInfo==false){
+				if(this.owner.selectedItem&&this.owner.selectedItem.data is DetailNodeInfo==false){
 					qianSkin.selectedBtn.toggleGroup.selectedIndex=-1;
 				}
 			}

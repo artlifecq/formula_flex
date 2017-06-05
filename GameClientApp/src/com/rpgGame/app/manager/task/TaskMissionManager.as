@@ -1,6 +1,7 @@
 package com.rpgGame.app.manager.task
 {
 	import com.adobe.serialization.json.JSON;
+	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;

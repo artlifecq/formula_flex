@@ -2,9 +2,9 @@ package com.rpgGame.appModule.bag
 {
 	import com.rpgGame.app.manager.goods.ItemUseManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.app.ui.common.NumSelectUICtrl;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.DragDropItem;
-	import com.rpgGame.appModule.common.NumSelectUICtrl;
 	import com.rpgGame.appModule.common.itemRender.GridItemRender;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
@@ -16,7 +16,6 @@ package com.rpgGame.appModule.bag
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
-	import com.rpgGame.app.ui.common.NumSelectUICtrl;
 	
 	/**
 	 *物品批量使用面板 
