@@ -105,9 +105,9 @@ package com.rpgGame.app.manager
 			//穿“效果方法类型特效”
 			updateMethodTypeEffect(role);
 			//穿 "战魂"
-			updataFightSoul(role);
+//			updataFightSoul(role);
 			//穿 "战魂"
-			updataFightSoulEffect(role);
+//			updataFightSoulEffect(role);
 			if (role.avatar.hasIDRenderUnit(RenderUnitType.MOUNT, RenderUnitID.MOUNT))
 			{
 				//将body头顶的绑点子部件转到坐骑上

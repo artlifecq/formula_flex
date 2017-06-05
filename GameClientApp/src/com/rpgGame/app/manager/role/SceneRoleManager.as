@@ -27,12 +27,15 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.core.events.role.RoleEvent;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.FightsoulData;
+	import com.rpgGame.coreData.cfg.FightsoulModeData;
 	import com.rpgGame.coreData.cfg.StallCfgData;
 	import com.rpgGame.coreData.cfg.country.CountryWarCfgData;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.res.AvatarResConfigSetData;
 	import com.rpgGame.coreData.clientConfig.AvatarResConfig;
 	import com.rpgGame.coreData.clientConfig.ClientSceneEffect;
+	import com.rpgGame.coreData.clientConfig.Q_fightsoul_mode;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.enum.JobEnum;
@@ -613,8 +616,9 @@ package com.rpgGame.app.manager.role
 			roleData.id = owner.id;
 			roleData.name = "";
 			var fightSoulLevel:int = (owner.data as HeroData).fightSoulLevel;
-			roleData.avatarInfo.setBodyResID("blood/an_cj_blood_" + fightSoulLevel, null);
-			roleData.avatarInfo.bodyEffectID = "tx_cj_blood_" + fightSoulLevel;
+			var model:Q_fightsoul_mode = FightsoulModeData.getModeInfoById(fightSoulLevel);
+			roleData.avatarInfo.setBodyResID("pc/fightsoul/"+model.q_mode,null);
+			roleData.avatarInfo.bodyEffectID = model.q_effect;
 			fightSoulRole.ownerIsMainChar = (owner.id == MainRoleManager.actorID);
 			fightSoulRole.data = roleData;
 			fightSoulRole.mouseEnable = false;
@@ -624,7 +628,7 @@ package com.rpgGame.app.manager.role
 			}
 			AvatarManager.updateAvatar(fightSoulRole);
 			fightSoulRole.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true);
-			fightSoulRole.setScale(1);
+			fightSoulRole.setScale(model.q_sceneScale/100);
 			fightSoulRole.setGroundXY((owner.x + 100), owner.y);
 			fightSoulRole.rotationY = owner.rotationY;
 			SceneManager.addSceneObjToScene(fightSoulRole, false);
