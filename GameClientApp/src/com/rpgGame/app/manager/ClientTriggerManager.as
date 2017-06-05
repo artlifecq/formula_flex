@@ -383,7 +383,7 @@ package com.rpgGame.app.manager
 		public static function deathTrigger(target : SceneRole) : void
 		{
 			var sceneData : SceneData = MapDataManager.currentScene;
-			if (sceneData.isStoryDungeonScene)
+			if (sceneData&&sceneData.isStoryDungeonScene)
 			{
 				var currMapId : int = MainRoleManager.actorInfo.mapID;
 				if (target && target.usable)

@@ -146,7 +146,20 @@ package com.rpgGame.app.scene
 			handlerRoleState(buffData);
 			EventManager.dispatchEvent(BuffEvent.ADD_BUFF, buffData);
 		}
-		
+		public function hasBuff(modelId:int):Boolean
+		{
+			var buffList : Vector.<BuffData> = (_role.data as RoleData).buffList;
+			if (!buffList)
+				return false;
+			for each (var currData : BuffData in buffList)
+			{
+				if (currData.buffData.q_buff_id ==modelId)
+				{
+					return true;
+				}
+			}
+			return false;
+		}
 		/**
 		 * 根据后台的buffID删除buff 
 		 * @param buffID

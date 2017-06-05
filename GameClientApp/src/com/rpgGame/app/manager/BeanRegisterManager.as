@@ -17,6 +17,7 @@
 	import com.rpgGame.app.cmdlistener.GuildCmdListener;
 	import com.rpgGame.app.cmdlistener.HeroMiscCmdListener;
 	import com.rpgGame.app.cmdlistener.HeroSearchCmdListener;
+	import com.rpgGame.app.cmdlistener.JJBattleCmdListener;
 	import com.rpgGame.app.cmdlistener.JunJieContainerCmdListener;
 	import com.rpgGame.app.cmdlistener.LookCmdListener;
 	import com.rpgGame.app.cmdlistener.LostSkillCmdListener;
@@ -150,6 +151,7 @@
 			register("DungeonCmdListener",DungeonCmdListener);
 			register("CrossCmdListener",CrossCmdListener);
 			register("DailyZoneCmdListner",DailyZoneCmdListner);//日常副本
+			register("JJBattleCmdListener", JJBattleCmdListener); //模块号7
 		}
 	}
 }

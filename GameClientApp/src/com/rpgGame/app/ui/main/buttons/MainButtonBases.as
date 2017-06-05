@@ -92,7 +92,7 @@ package com.rpgGame.app.ui.main.buttons
 		
 		override protected function initialize():void
 		{
-			if (!ClientConfig.isBanShu&&_info.tips!="")
+			if (/*!ClientConfig.isBanShu&&*/_info.tips!="")
 			{
 				TipTargetManager.show(this, TargetTipsMaker.makeSimpleTextTips(_info.tips));
 			}

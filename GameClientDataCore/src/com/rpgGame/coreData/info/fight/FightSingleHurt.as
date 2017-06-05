@@ -9,7 +9,7 @@ package com.rpgGame.coreData.info.fight
 	{
 		/**伤害类型 0. 普通. 1. 闪避, 2. 暴击, 3. 跳闪   4. 免疫	5.吸收**/
 		private var _hurtType:int;
-		/**本次打击伤害了它多少血**/
+		/**本次打击伤害了它多少血，服务器加血发的负数，伤害是正数，客户端刚好相反**/
 		private var _hurtAmount:int;
 		
 		private var _roleID:Number;

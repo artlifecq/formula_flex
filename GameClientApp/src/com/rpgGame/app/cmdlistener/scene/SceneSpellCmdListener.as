@@ -10,6 +10,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.fight.spell.SpellHitHelper;
 	import com.rpgGame.app.fight.spell.SpellResultInfo;
 	import com.rpgGame.app.manager.CharAttributeManager;
+	import com.rpgGame.app.manager.LostSkillManager;
 	import com.rpgGame.app.manager.SkillCDManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
@@ -134,7 +135,11 @@ package com.rpgGame.app.cmdlistener.scene
 			{
 				EventManager.dispatchEvent(SkillEvent.SKILL_ATTACK,skillId);
 			}
-			
+			//大招
+			if (skillId==1008||skillId==2008||skillId==3008) 
+			{
+				LostSkillManager.instance().checkBigSkill(msg.personId);
+			}
 			
 			
 		}
@@ -197,8 +202,7 @@ package com.rpgGame.app.cmdlistener.scene
 			{
 				EventManager.dispatchEvent(SkillEvent.SKILL_RESULT,skillData.q_skillID);
 			}
-			
-			
+		
 		}
 		
 		private function effectCharAttribute(info : SpellResultInfo) : void

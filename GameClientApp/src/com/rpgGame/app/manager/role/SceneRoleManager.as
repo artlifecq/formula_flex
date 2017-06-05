@@ -58,6 +58,10 @@ package com.rpgGame.app.manager.role
 	
 	import app.message.StallTypeDataProto;
 	
+	import gs.TweenMax;
+	import gs.easing.Circ;
+	import gs.easing.Sine;
+	
 	import org.client.mainCore.manager.EventManager;
 	
 	/**
@@ -667,6 +671,7 @@ package com.rpgGame.app.manager.role
 		
 		private static const needleRoleX : Array = [0, -20, 20, -40, 40];
 		private static const needleRoleY : Array = [0, -20, -20, -40, -40];
+		
 		public function onUpdateNeedle(role : SceneRole, newVal : int, oldVal : int) : void {
 			if (!(role.data is HeroData)) {
 				return;
@@ -674,19 +679,42 @@ package com.rpgGame.app.manager.role
 			if (JobEnum.ROLE_4_TYPE != (role.data as HeroData).job) {
 				return;
 			}
+			if (newVal==oldVal) 
+			{
+				return;
+			}
 			var i : int = 0;
-			for (i = newVal; i < oldVal; ++i) {
-				role.avatar.removeRenderUnitByID(RenderUnitType.NEEDLEEFFECT, i);
+			var tmp:RenderUnit3D
+			if (newVal>oldVal) 
+			{
+				var add:int=newVal-oldVal;
+				for (i = 0; i < add;i++) 
+				{
+					tmp=SpellAnimationHelper.addTargetEffect(role, oldVal+i, RenderUnitType.NEEDLEEFFECT, "tx_role_mieshijinzhen_01_5", BoneNameEnum.c_crossbow, 0);
+					tmp.x = needleRoleX[oldVal+i];
+					tmp.y =0;
+					tmp.z = 0;
+					var data:Object={y:needleRoleY[oldVal+i]-30,delay:i*0.3,ease:Sine.easeInOut};
+					data["yoyo"] = true;
+					data["repeat"] = -1;
+					TweenMax.to(tmp,1.5,data);
+				}
 			}
-			for (i = oldVal; i < newVal; ++i) {
-				SpellAnimationHelper.addTargetEffect(role, i, RenderUnitType.NEEDLEEFFECT, "tx_role_mieshijinzhen_01_5", BoneNameEnum.c_crossbow, 0);
+			else
+			{
+				var dec:int=oldVal-newVal;	
+				for (i = 0; i < dec; ++i) 
+				{
+					tmp=role.avatar.removeRenderUnitByID(RenderUnitType.NEEDLEEFFECT, oldVal-1-i);
+					TweenMax.killTweensOf(tmp);
+				}
+				for (i = 0; i < newVal; ++i) 
+				{
+					tmp=role.avatar.getRenderUnitByID(RenderUnitType.NEEDLEEFFECT,i);
+					tmp.x = needleRoleX[i];
+				}
 			}
-			for (i = 0; i < newVal; ++i) {
-				var unit : RenderUnit3D = role.avatar.getRenderUnitByID(RenderUnitType.NEEDLEEFFECT, i);
-				unit.x = needleRoleX[i];
-				unit.y = needleRoleY[i];
-				unit.z = 0;
-			}
+			
 		}
 	}
 }

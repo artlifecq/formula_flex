@@ -58,7 +58,7 @@ package com.rpgGame.app.manager
 						offset=data.totalStat.hp-oldValue;
 						if (data.id == MainRoleManager.actorID && offset > 0&&showEffet==1) //自己看到就好了
 						{
-							FightFaceHelper.showAttChange(EnumHurtType.ADDHP, offset);
+							FightFaceHelper.showAttChange(EnumHurtType.ADDHP, offset,showEffet);
 						}
 						break;
 					case CharAttributeType.MAX_HP:
