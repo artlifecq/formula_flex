@@ -17,10 +17,10 @@ package com.rpgGame.app.controller.keyboard
 
 		public static function exec(info : KeyInfo) : void
 		{
-			if (ClientConfig.isBanShu)
+			/*if (ClientConfig.isBanShu)
 			{
 				return;
-			}
+			}*/
 			var dataID : uint = info.dataID;
 			var funcID : String = info.funcS;
 			var isNet : Boolean = true;
