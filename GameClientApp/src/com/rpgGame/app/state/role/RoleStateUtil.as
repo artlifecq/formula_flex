@@ -166,7 +166,7 @@ package com.rpgGame.app.state.role
 			if (walkRole.stateMachine.isAttackHarding)
 			{
 				_timeOutNum++;
-				if(_timeOutNum<=10)
+				if(_timeOutNum<=20)
 				{
 					_timeOutId=setTimeout(function():void{doWalkTo(role, pos, spacing, data,onArrive, onThrough, onUpdate);},500);
 					return true;
