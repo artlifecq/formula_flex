@@ -22,6 +22,10 @@ package org.mokylin.skin.app.activety.zonghe
 		//==========================================================================
 		public var ListItem:feathers.controls.List;
 
+		public var activeBg:feathers.controls.UIAsset;
+
+		public var activeName:feathers.controls.UIAsset;
+
 		public var icon1:feathers.controls.UIAsset;
 
 		public var icon2:feathers.controls.UIAsset;
@@ -43,7 +47,7 @@ package org.mokylin.skin.app.activety.zonghe
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [__ActivetyAll_Skin_UIAsset1_i(),__ActivetyAll_Skin_UIAsset2_i(),ListItem_i(),__ActivetyAll_Skin_UIAsset3_i(),__ActivetyAll_Skin_UIAsset4_i(),__ActivetyAll_Skin_UIAsset5_i(),__ActivetyAll_Skin_UIAsset6_i(),__ActivetyAll_Skin_UIAsset7_i(),__ActivetyAll_Skin_UIAsset8_i(),lbMsg_i(),__ActivetyAll_Skin_Button1_i(),__ActivetyAll_Skin_UIAsset9_i(),icon1_i(),icon2_i(),icon3_i(),icon4_i()];
+			this.elementsContent = [__ActivetyAll_Skin_UIAsset1_i(),__ActivetyAll_Skin_UIAsset2_i(),ListItem_i(),activeBg_i(),activeName_i(),__ActivetyAll_Skin_UIAsset3_i(),__ActivetyAll_Skin_UIAsset4_i(),__ActivetyAll_Skin_UIAsset5_i(),__ActivetyAll_Skin_UIAsset6_i(),lbMsg_i(),__ActivetyAll_Skin_Button1_i(),__ActivetyAll_Skin_UIAsset7_i(),icon1_i(),icon2_i(),icon3_i(),icon4_i()];
 			
 			states = {
 			};
@@ -105,31 +109,13 @@ package org.mokylin.skin.app.activety.zonghe
 		private function __ActivetyAll_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/activety/zonghe/bg.jpg";
-			temp.x = 629;
-			temp.y = 78;
-			return temp;
-		}
-
-		private function __ActivetyAll_Skin_UIAsset4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/activety/zonghe/active_name/dfdj.png";
-			temp.x = 725;
-			temp.y = 81;
-			return temp;
-		}
-
-		private function __ActivetyAll_Skin_UIAsset5_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/activety/zonghe/xzt.png";
 			temp.x = 628;
 			temp.y = 276;
 			return temp;
 		}
 
-		private function __ActivetyAll_Skin_UIAsset6_i():feathers.controls.UIAsset
+		private function __ActivetyAll_Skin_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/activety/zonghe/xzt.png";
@@ -138,7 +124,7 @@ package org.mokylin.skin.app.activety.zonghe
 			return temp;
 		}
 
-		private function __ActivetyAll_Skin_UIAsset7_i():feathers.controls.UIAsset
+		private function __ActivetyAll_Skin_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/activety/zonghe/hdjl.png";
@@ -147,7 +133,7 @@ package org.mokylin.skin.app.activety.zonghe
 			return temp;
 		}
 
-		private function __ActivetyAll_Skin_UIAsset8_i():feathers.controls.UIAsset
+		private function __ActivetyAll_Skin_UIAsset6_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/activety/zonghe/hdsm.png";
@@ -156,7 +142,7 @@ package org.mokylin.skin.app.activety.zonghe
 			return temp;
 		}
 
-		private function __ActivetyAll_Skin_UIAsset9_i():feathers.controls.UIAsset
+		private function __ActivetyAll_Skin_UIAsset7_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 76;
@@ -164,6 +150,28 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.width = 298;
 			temp.x = 631;
 			temp.y = 304;
+			return temp;
+		}
+
+		private function activeBg_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			activeBg = temp;
+			temp.name = "activeBg";
+			temp.styleName = "ui/big_bg/activety/des/1.jpg";
+			temp.x = 629;
+			temp.y = 78;
+			return temp;
+		}
+
+		private function activeName_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			activeName = temp;
+			temp.name = "activeName";
+			temp.styleName = "ui/app/activety/zonghe/active_name/1.png";
+			temp.x = 725;
+			temp.y = 81;
 			return temp;
 		}
 

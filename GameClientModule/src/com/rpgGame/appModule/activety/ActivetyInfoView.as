@@ -7,6 +7,7 @@ package com.rpgGame.appModule.activety
 	
 	import away3d.events.Event;
 	
+	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.data.ListCollection;
 	
 	import org.mokylin.skin.app.activety.zonghe.ActivetyAll_Skin;
@@ -30,10 +31,13 @@ package com.rpgGame.appModule.activety
 		private function initView():void
 		{
 			_skin.ListItem.itemRendererType=ActivetyItemRender;
+			_skin.ListItem.scrollBarDisplayMode = ScrollBarDisplayMode.ALWAYS_VISIBLE;
 			_activeData=new ListCollection();
 			var list:Vector.<Q_special_activities>=ActivetyCfgData.getActivetyListByType(ActivityEnum.ZONGHE_ACT);
 			for(var i:int=0;i<list.length;i++){
-				_activeData.addItem(list[i]);
+				var info:ActiveInfo=new ActiveInfo();
+				info.cfg=list[i];
+				_activeData.addItem(info);
 			}
 			_skin.ListItem.dataProvider=_activeData;
 		}
@@ -45,7 +49,13 @@ package com.rpgGame.appModule.activety
 		
 		private function onChange(e:Event):void
 		{
-			
+			var info:ActiveInfo=_skin.ListItem.selectedItem as ActiveInfo;
+			if(!info){
+				return;
+			}
+			_skin.activeName.styleName="ui/app/activety/zonghe/active_name/"+info.cfg.q_activity_id+".png";
+			_skin.activeBg.styleName="ui/big_bg/activety/des/"+info.cfg.q_activity_id+".png";
+			_skin.lbMsg.htmlText=info.cfg.q_text;
 		}
 		
 		override public function hide():void

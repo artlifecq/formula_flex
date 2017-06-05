@@ -1,10 +1,14 @@
 package com.rpgGame.appModule.activety
 {
+	import com.rpgGame.coreData.clientConfig.Q_special_activities;
+	
+	import away3d.events.Event;
+	
 	import feathers.controls.renderers.DefaultListItemRenderer;
+	import feathers.events.FeathersEventType;
 	
 	import org.mokylin.skin.app.activety.ActiveItemSelecteSkin;
 	import org.mokylin.skin.app.activety.zonghe.Active_Item;
-	import org.mokylin.skin.app.jianghu.lunjian.NameItemSelect;
 	
 	import starling.display.DisplayObject;
 	
@@ -30,12 +34,15 @@ package com.rpgGame.appModule.activety
 			}
 		}
 		
+		override public function get height():Number
+		{
+			return _skin.height;
+		}
+		
 		override protected function initialize():void
 		{
 			_skin=new Active_Item();
 			_skin.toSprite(this);
-			
-			_skin.selectedBtn.defaultIcon=null;
 			
 			var btnSkin:ActiveItemSelecteSkin=new ActiveItemSelecteSkin();
 			_skin.selectedBtn.upSkin=btnSkin.__ActiveItemSelecteSkin_UIAsset2;
@@ -49,7 +56,28 @@ package com.rpgGame.appModule.activety
 		override protected function commitData():void
 		{
 			if(_skin&&this.owner){
+				if(_skin.selectedBtn.defaultIcon){
+					_skin.selectedBtn.defaultIcon=null;
+				}
 				_skin.selectedBtn.isSelected=this.owner.selectedItem==data;
+				var info:ActiveInfo=_data as ActiveInfo;
+				if(!info){
+					return;
+				}
+				_skin.uiName.styleName="ui/app/activety/zonghe/active_name/"+info.cfg.q_activity_id+".png";
+				_skin.uiBg.styleName="ui/big_bg/activety/item/"+info.cfg.q_activity_id+".png";
+				_skin.lbMsg.htmlText=info.cfg.q_desc;
+				switch(info.state){
+					case 0:
+						_skin.uiJinxing.styleName="ui/common/wkq.png";
+						break;
+					case 1:
+						_skin.uiJinxing.styleName="ui/common/yjs.png";
+						break;
+					default:
+						_skin.uiJinxing.styleName="ui/common/jxz.png";
+						break;
+				}
 			}
 		}
 	}

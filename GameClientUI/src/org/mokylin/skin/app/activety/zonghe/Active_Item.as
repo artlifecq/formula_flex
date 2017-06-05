@@ -54,6 +54,7 @@ package org.mokylin.skin.app.activety.zonghe
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbMsg = temp;
 			temp.name = "lbMsg";
+			temp.height = 39;
 			temp.htmlText = "每周一，周三，周六，周日<br>21:00-21:30";
 			temp.touchable = false;
 			temp.touchGroup = true;
@@ -85,7 +86,7 @@ package org.mokylin.skin.app.activety.zonghe
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiBg = temp;
 			temp.name = "uiBg";
-			temp.styleName = "ui/app/activety/zonghe/active_name/dfdj_bg.png";
+			temp.styleName = "ui/big_bg/activety/item/1.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -111,7 +112,7 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.name = "uiName";
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/app/activety/zonghe/active_name/dfdj.png";
+			temp.styleName = "ui/app/activety/zonghe/active_name/1.png";
 			temp.x = 22;
 			temp.y = 19;
 			return temp;
