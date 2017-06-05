@@ -1,8 +1,11 @@
 package com.rpgGame.app.ui.tab
 {
 	import com.rpgGame.app.manager.FunctionOpenManager;
+	import com.rpgGame.core.events.FunctionOpenEvent;
 	
 	import feathers.controls.TabBar;
+	
+	import org.client.mainCore.manager.EventManager;
 	
 	/**
 	 *功能开启切换条 
@@ -20,11 +23,40 @@ package com.rpgGame.app.ui.tab
 		{
 			updateTabData();
 			super.show(data,openTable);
+			EventManager.addEvent(FunctionOpenEvent.FUNCTIONOPENID,onOpenFunc);
+		}
+		
+		private function onOpenFunc(ids:Vector.<int>):void
+		{
+			var num2:int=ids.length;
+			var tabKey:String;
+			for(var i:int=0;i<num2;i++){
+				tabKey=ids[i].toString();
+				if(isHoldFunc(tabKey)){
+					if(FunctionOpenManager.functionIsOpen(ids[i])){//已经开启了
+						setTabDataWithTabKey(tabKey);
+					}
+				}
+			}
+		}
+		
+		private function isHoldFunc(tabKey:String):Boolean
+		{
+			var num:int=_allDatas.length;
+			var item:UITabBarData;
+			for(var i:int=0;i<num;i++){
+				item=_allDatas[i];
+				if(item.tabKey==tabKey){
+					return true;
+				}
+			}
+			return false;
 		}
 		
 		override public function hide():void
 		{
 			super.hide();
+			EventManager.removeEvent(FunctionOpenEvent.FUNCTIONOPENID,onOpenFunc);
 		}
 		
 		private function updateTabData():void
