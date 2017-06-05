@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.type
 {
-
+	
 	public class EffectUrl
 	{
 		/////选角色特效//////
@@ -59,7 +59,7 @@ package com.rpgGame.coreData.type
 		 *蓝血条遮挡
 		 */
 		public static const XUE_TIAO_LAN1 : String = "ui_xuetiaolan_01";
-
+		
 		/**偷经0 白**/
 		public static const SCRIPTURES0 : String = "tx_duojin_bai";
 		/**偷经1 绿**/
@@ -72,7 +72,7 @@ package com.rpgGame.coreData.type
 		public static const SCRIPTURES4 : String = "tx_duojin_cheng";
 		/**偷经5 灰色**/
 		public static const SCRIPTURES5 : String = "tx_duojin_hui";
-
+		
 		/**鸡毛信0 白**/
 		public static const EFFECTUIL_JIMAOXIN_BAI : String = "tx_jimaoxin_bai";
 		/**鸡毛信1 绿**/
@@ -83,7 +83,7 @@ package com.rpgGame.coreData.type
 		public static const EFFECTUIL_JIMAOXIN_ZI : String = "tx_jimaoxin_zi";
 		/**鸡毛信4 橙**/
 		public static const EFFECTUIL_JIMAOXIN_CHENG : String = "tx_jimaoxin_cheng";
-
+		
 		/**合成**/
 		public static const EQUIP_COMBINE : String = "ui_zhuangbei_hecheng";
 		/**材料合成中间**/
@@ -120,7 +120,7 @@ package com.rpgGame.coreData.type
 		public static const EQUIP_GENERAL_MATERIAL_SELECT : String = "ui_gaizao_xuanzhong";
 		/**嘲讽动画特效**/
 		public static const TAUNT_ANIMATION_RES : String = "tx_suit_knife2_310_zhenjingbaili_buff";
-
+		
 		public static const TIAN_XIA_ZHI_SHI_SELECT : String = "ui_liubianxing";
 		/** 密信轮盘奖励特效光圈 **/
 		public static const ROULETEE_EFFECT : String = "ui_sibianxing_001";
@@ -134,14 +134,14 @@ package com.rpgGame.coreData.type
 		public static const RELIVE_PAO_DE_KUAI : String = "tx_fuhuo-paodekuai";
 		/**普通复活**/
 		public static const RELIVE_NORMAL : String = "tx_fuhuo";
-
+		
 		/**坐骑强化/转化**/
 		public static const MOUNT_REFINE : String = "ui_zuoqiqianghua";
 		/**坐骑强化成功**/
 		public static const MOUNT_REFINE_COMPLETE : String = "ui_zuoqiqianghuachenggong";
 		/**坐骑强化失败**/
 		public static const MOUNT_REFINE_FAIL : String = "ui_qianghua_qianghuashibai";
-
+		
 		/**坐骑学习技能 准备动画特效**/
 		public static const MOUNT_SPELL_EFFECT : String = "ui_zuoqi_shu";
 		/**坐骑学习技能1**/
@@ -156,10 +156,10 @@ package com.rpgGame.coreData.type
 		public static const MOUNT_SPELL_EFFECT5 : String = "ui_zuoqi_lingwu5";
 		/**坐骑学习技能**/
 		public static const MOUNT_SPELL_EFFECT6 : String = "ui_zuoqi_lingwu6";
-
+		
 		/**活动图标转圈特效*/
 		public static const ACTIVITY_ICON_EFFECT : String = "ui_zhuanquan";
-
+		
 		/**投保镖局特效**/
 		public static const BIAO_JU_EFFECT : String = "tx_duojin_cheng";
 		/**帮派升级特效**/
@@ -189,7 +189,7 @@ package com.rpgGame.coreData.type
 		 *进阶解锁 
 		 */
 		public static const UI_JINJIE_UNLOCK:String="ui_jinengkuang_shanguang";
-
+		
 		/**
 		 * 皇亲国戚特效
 		 * */	
@@ -207,6 +207,11 @@ package com.rpgGame.coreData.type
 		public static const UI_JINENGKUANG_SHANGUANG:String="ui_jinengkuang_shanguang";
 		public static const UI_TANU_MJ:String="ui_tanu_mj";
 		public static const UI_MERIDIAN_LEVELUP:String="ui_jingmaiyuan_baodian";
+		
+		/**增益BUFFCD框*/
+		public static const BUFF_ZENGYI:String="ui_buff_ty_1";
+		/**减益BUFFCD框*/
+		public static const BUFF_JIANYI:String="ui_buff_ty";
 		
 		/**任务特效*/
 		public static const UI_WANCHENGRENWU:String="ui_wanchengrenwu";

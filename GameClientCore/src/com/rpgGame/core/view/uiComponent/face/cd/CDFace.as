@@ -303,7 +303,7 @@ package com.rpgGame.core.view.uiComponent.face.cd
 		{
 			if (_tmTxt)
 			{
-				_tmTxt.numberText = (($cdTotal - $now) * 0.001).toFixed(1);		
+				_tmTxt.numberText = (($cdTotal - $now) * 0.001).toFixed(0);		
 			}
 				
 		}
