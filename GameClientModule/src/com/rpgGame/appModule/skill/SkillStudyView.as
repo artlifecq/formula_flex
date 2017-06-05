@@ -53,11 +53,9 @@ package com.rpgGame.appModule.skill
 
 		private var basicItems:Vector.<SkillItem>;
 		private var otherItems:Vector.<SkillItem>;
-		private var _panel:SkinUIPanel;
 		
-		public function SkillStudyView(panel:SkinUIPanel)
+		public function SkillStudyView()
 		{
-			_panel=panel;
 			_skin=new jineng_Skin();
 			super(_skin);
 			initView();
@@ -78,8 +76,8 @@ package com.rpgGame.appModule.skill
 			_jobTl2=_jobTitle2.toSprite();
 			_skillContainer.addChild(_jobTl1);
 			_skillContainer.addChild(_jobTl2);
-			skillUpgrade=new SkillUpgradeView(_skin.shengji.skin as jineng_shengji,_panel);
-			skillRise=new SkillRiseView(_skin.jinjie.skin as jineng_jinjie,_panel);
+			skillUpgrade=new SkillUpgradeView(_skin.shengji.skin as jineng_shengji,this);
+			skillRise=new SkillRiseView(_skin.jinjie.skin as jineng_jinjie,this);
 			
 			var skillNum:int;
 			var job:int=MainRoleManager.actorInfo.job;
@@ -178,18 +176,18 @@ package com.rpgGame.appModule.skill
 			skillRise.update(selectedItem.skillCfg,selectedItem.skillInfo);
 		}
 		
-		public function onTouchTarget(target:DisplayObject):Boolean
+		override protected function onTouchTarget(target:DisplayObject):void
 		{
+			super.onTouchTarget(target);
 			if(skillUpgrade.onTouchTarget(target)){
-				return true;
+				return
 			}
 			if(skillRise.onTouchTarget(target)){
-				return true;
+				return
 			}
-			return false;
 		}
 		
-		public function onHide():void
+		override public function hide():void
 		{
 			_skin.tab_zizhi.removeEventListener(Event.CHANGE, onTab);
 			EventManager.removeEvent(SpellEvent.SELECTE_SPELL,selecteSpell);
@@ -203,7 +201,7 @@ package com.rpgGame.appModule.skill
 			skillRise.onHide();
 		}
 		
-		public function onShow():void
+		override public function show(data:Object=null):void
 		{
 			updateZhenqi();
 			updateSkillList();

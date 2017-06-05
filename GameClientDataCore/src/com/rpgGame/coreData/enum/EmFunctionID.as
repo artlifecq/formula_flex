@@ -46,5 +46,9 @@ package com.rpgGame.coreData.enum
 		public static const EM_ZHENGQIFUBEN:String="312";
 		/** 经验副本 **/
 		public static const EM_JINGYANFUBEN:String="313";
+		/** 巅峰对决 **/
+		public static const EM_DIANFENGDUIJUE:String="320";
+		/** 竞技争霸 **/
+		public static const EM_JINGJIZHENGBA:String="321";
 	}
 }

@@ -89,7 +89,7 @@ package com.rpgGame.appModule.zhangong
 			}
 		}
 		
-		override protected function onShow():void
+		override public function show(data:Object=null):void
 		{
 			super.onShow();
 			initEvent();
@@ -98,9 +98,8 @@ package com.rpgGame.appModule.zhangong
 				showMapItemByIndex(0);
 		}
 		
-		override protected function onHide():void
+		override public function hide():void
 		{
-			super.onHide();
 			clearEvent();
 		}
 		

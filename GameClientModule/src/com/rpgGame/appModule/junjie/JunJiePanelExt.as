@@ -129,9 +129,8 @@ package com.rpgGame.appModule.junjie
 			this._avatar.curRole.stateMachine.transition(RoleStateType.ACTION_SHOW);
 		}
 		
-		override protected function onShow():void
+		override public function show(data:Object=null):void
 		{
-			super.onShow();
 			initEvent();
 			showNowJunJieLvAtt();
 			_showFirstLv=1;
@@ -141,9 +140,8 @@ package com.rpgGame.appModule.junjie
 			
 		}
 		
-		override protected function onHide():void
+		override public function hide():void
 		{
-			super.onHide();
 			closeEvent();
 			_nowSelectItem=null;
 			_nowShowLevel=0;

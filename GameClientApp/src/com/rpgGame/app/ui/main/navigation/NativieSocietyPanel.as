@@ -32,34 +32,38 @@ package com.rpgGame.app.ui.main.navigation
 		private var _fixPosy:Number;
 		override protected function onShow():void
 		{
+			var height:Number = 40;
 			if(FunctionOpenManager.functionIsOpen(EmFunctionID.EM_BANGHUI))
 			{
 				if(_skin.btn_n1.parent==null)
 				{
 					_skin.grpBtn_nv.addChild(_skin.btn_n1);
 				}
+				height = 66;
 			}else{
 				if(_skin.btn_n1.parent!=null)
 				{
 					_skin.grpBtn_nv.removeChild(_skin.btn_n1);
 				}
 			}
-			
 			if(FunctionOpenManager.functionIsOpen(EmFunctionID.EM_ZUDUI))
 			{
 				if(_skin.btn_n1.parent==null)
 				{
 					_skin.grpBtn_nv.addChild(_skin.btn_n2);
 				}
+				
 			}else{
 				if(_skin.btn_n1.parent!=null)
 				{
 					_skin.grpBtn_nv.removeChild(_skin.btn_n2);
 				}
+				
 			}
-			
+//			this.height = height;
+			_skin.nv_bg.height = height;
 			this.x = _fixPosx -this.width/2;
-			this.y = _fixPosy - this.height;
+			this.y = _fixPosy - height;
 		}
 		
 		override protected function onTouchTarget(target : DisplayObject) : void

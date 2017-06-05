@@ -51,9 +51,9 @@ package com.rpgGame.app.ui
 		
 		/**
 		 * 添加tab数据
-		 * @param tabStyle
-		 * @param viewStyle
-		 * @param funcKey
+		 * @param tabStyle 标签按钮样式
+		 * @param viewStyle 标签对应视图
+		 * @param funcKey 标签对应功能键
 		 * 
 		 */
 		protected function addTabDatas(tabStyle:Class,viewStyle:Class,funcKey:String):void
