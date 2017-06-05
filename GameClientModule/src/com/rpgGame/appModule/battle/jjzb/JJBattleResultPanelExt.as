@@ -47,6 +47,21 @@ package com.rpgGame.appModule.battle.jjzb
 			}
 			EventManager.dispatchEvent(JJBattleEvent.GOBACK);
 		}
+		override protected function onStageResize(sw:int, sh:int):void
+		{
+			this.x =(sw - 469)/2;
+			this.y =(sh - 479)/2;
+		}
+		override public function set x(value:Number):void
+		{
+			trace("x "+value);
+			super.x=value;	
+		}
+		override public function set y(value:Number):void
+		{
+			trace(" y "+value);
+			super.y=value;	
+		}
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
