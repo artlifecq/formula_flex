@@ -137,28 +137,7 @@ package com.rpgGame.appModule.dungeon.multy
 		/**创建列表*/
 		private function creatDungeonItem():void
 		{
-			/*var relist:Array=ZoneMultyCfgData.getMultyIdList();
-			if(relist==null)return;
-			skinList=new Vector.<SkinnableContainer>();
-			itemList=new Vector.<FuBen_DuoRen_Item>();
-			passRewardIcon=new Vector.<IconCDFace>();
-			passRewardList=new Dictionary();
-			var skin:SkinnableContainer;
-			var item:FuBen_DuoRen_Item;
-			var i:int;
-			for(i=0;i<relist.length;i++)
-			{
-				skin=getItemSkin(i);
-				if(skin!=null)
-				{
-					item=skin.skin as FuBen_DuoRen_Item
-					skinList.push(skin);
-					itemList.push(item);
-					scrollBox.addChild(skin);
-					cloSelectItem(item);
-					item.btnSelect.addEventListener(FeathersEventType.STATE_CHANGE,buttonTouchHandler);
-				}
-			}*/
+			
 			var panelInfos: Vector.<MultiZonePanelInfo>=DungeonManager.panelInfos;
 			if(panelInfos==null||panelInfos.length==0)return;
 			
