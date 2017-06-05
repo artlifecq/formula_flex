@@ -2,7 +2,6 @@ package com.rpgGame.appModule.skill
 {
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.rpgGame.app.manager.LostSkillManager;
-	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.appModule.skill.lostskill.LostSkillIcon;
 	import com.rpgGame.appModule.skill.lostskill.LostSkillModePane;
@@ -31,16 +30,14 @@ package com.rpgGame.appModule.skill
 	public class LostSkillView extends ViewUI
 	{
 		private var _skin:Juexue_Skin;
-		private var _panel:SkinUIPanel;
 		private var _skillIconList:Vector.<LostSkillIcon>;
 		private var _radioGroup:ToggleGroup;
 		private var _activit:LostSpellActivate;
 		private var _updataLevel:LostSkillUpLevelView;
 		private var _bgList:Vector.<UIAsset>;
 		private var _lostSkillModePane:LostSkillModePane;
-		public function LostSkillView(panel:SkinUIPanel)
+		public function LostSkillView()
 		{
-			_panel=panel;
 			_skin=new Juexue_Skin();
 			super(_skin);
 			initView();
@@ -90,7 +87,7 @@ package com.rpgGame.appModule.skill
 			TipTargetManager.show( _skin.btn_shuoming,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(22)));
 		}
 		
-		public function onShow():void
+		override public function show(data:Object=null):void
 		{
 			refeashIconsList();
 			selecteChangeHandler();
@@ -98,7 +95,7 @@ package com.rpgGame.appModule.skill
 			EventManager.addEvent(LostSkillManager.LostSkill_ChangeSkillState,changeStateHandler);
 			EventManager.addEvent(LostSkillManager.LostSkill_UpLevelSkillId,selecteChangeHandler);
 		}
-		public function onHide():void
+		override public function hide():void
 		{
 			EventManager.removeEvent(LostSkillManager.LostSkill_ChangeSkillId,changeStateHandler);
 			EventManager.removeEvent(LostSkillManager.LostSkill_ChangeSkillState,changeStateHandler);

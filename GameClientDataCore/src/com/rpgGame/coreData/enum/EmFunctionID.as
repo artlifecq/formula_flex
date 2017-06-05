@@ -11,7 +11,7 @@ package com.rpgGame.coreData.enum
 		/** 战功 **/
 		public static const EM_ZHANGONG:String=" 4";
 		/** 军阶 **/
-		public static const Em_JUNJIE:String=" 5";
+		public static const EM_JUNJIE:String=" 5";
 		/** 坐骑 **/
 		public static const EM_ZUOQI:String=" 10";
 		/** 强化 **/
