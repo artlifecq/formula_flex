@@ -35,7 +35,7 @@
 
         public static function init():void
         {
-            if (FunctionOpenManager.checkOpenBuyFunId(48))
+            if (FunctionOpenManager.checkOpenBuyFunId("48"))
             {
                 showIcon();
             }

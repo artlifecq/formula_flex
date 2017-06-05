@@ -5,6 +5,7 @@ package com.rpgGame.app.ui.main.navigation
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.coreData.enum.EmFunctionID;
 	
 	import away3d.events.Event;
 	
@@ -31,7 +32,7 @@ package com.rpgGame.app.ui.main.navigation
 		private var _fixPosy:Number;
 		override protected function onShow():void
 		{
-			if(FunctionOpenManager.checkOpenBuyFunId(51))
+			if(FunctionOpenManager.functionIsOpen(EmFunctionID.EM_BANGHUI))
 			{
 				if(_skin.btn_n1.parent==null)
 				{
@@ -44,7 +45,7 @@ package com.rpgGame.app.ui.main.navigation
 				}
 			}
 			
-			if(FunctionOpenManager.checkOpenBuyFunId(50))
+			if(FunctionOpenManager.functionIsOpen(EmFunctionID.EM_ZUDUI))
 			{
 				if(_skin.btn_n1.parent==null)
 				{

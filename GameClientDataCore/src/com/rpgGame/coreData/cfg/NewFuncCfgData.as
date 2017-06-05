@@ -34,7 +34,7 @@ package com.rpgGame.coreData.cfg
 			}
 		}
 		
-		public static function getdataById(id:int):Q_newfunc
+		public static function getdataById(id:String):Q_newfunc
 		{
 			return _map.getValue(id) as Q_newfunc;
 		}
