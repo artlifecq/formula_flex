@@ -14,6 +14,8 @@
     import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
     import com.rpgGame.coreData.type.activity.ActivityOpenStateType;
     
+    import gs.TweenMax;
+    
     import org.client.mainCore.manager.EventManager;
     
     import starling.display.DisplayObject;
@@ -296,5 +298,23 @@
         {
             return true;
         }
+		
+		private var _tweenmax:TweenMax;
+		public function runAnimation():void
+		{
+			if(_tweenmax!=null)
+			{
+				_tweenmax.restart();
+				return ;
+			}
+			var lasty:Number = this.y;
+			_tweenmax = TweenMax.to(this,0.1,{repeat:5,y:lasty-10,onComplete:onTweenFlyComplete,onCompleteParams:[this,lasty]});
+		}
+		
+		private function onTweenFlyComplete(display:IOpen,lastY:Number):void
+		{
+			_tweenmax = null;
+			display.y = lastY;
+		}
     }
 }

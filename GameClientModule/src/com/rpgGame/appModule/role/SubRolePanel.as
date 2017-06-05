@@ -2,7 +2,7 @@ package com.rpgGame.appModule.role
 {
 	import com.rpgGame.app.manager.goods.ItemManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.netData.player.bean.OthersInfo;
 	
@@ -11,7 +11,7 @@ package com.rpgGame.appModule.role
 	import starling.display.DisplayObject;
 	import starling.events.TouchEvent;
 	
-	public class SubRolePanel extends SkinUI 
+	public class SubRolePanel extends ViewUI 
 	{
 		private var _otherInfo:OthersInfo;
 		protected var basicView:BasicRoleView;
@@ -25,11 +25,15 @@ package com.rpgGame.appModule.role
 			initView();
 		}
 		
-		override protected function onShow():void
+		override public function show(data:Object=null):void
 		{
-			_roleData=MainRoleManager.actorInfo;
-			attConstrastView.onHide();
-			ItemManager.getBackEquip(initItem);
+			if(data&&data.roleData&&data.info){
+				showCompareData(data);	
+			}else{
+				_roleData=MainRoleManager.actorInfo;
+				attConstrastView.onHide();
+				ItemManager.getBackEquip(initItem);
+			}
 		}
 		
 		private function initItem():void
@@ -38,9 +42,9 @@ package com.rpgGame.appModule.role
 			basicView.show(_roleData);
 			avatarView.show(_roleData);			
 		}
-		override protected function onHide():void
+		
+		override  public function hide():void
 		{
-			super.onHide();
 			basicView.onHide();
 			avatarView.onHide();
 			packsView.onHide();
@@ -58,7 +62,7 @@ package com.rpgGame.appModule.role
 			super.onTouch(e);
 			avatarView.onTouch(e);
 		}
-		public function showCompareData(data:*):void
+		private function showCompareData(data:*):void
 		{
 			_roleData=data.roleData as HeroData;
 			_otherInfo=data.info as OthersInfo;
