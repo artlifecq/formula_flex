@@ -1,6 +1,6 @@
 package com.client.view
 {
-	import com.client.ClientGlobal;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -11,8 +11,6 @@ package com.client.view
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFieldType;
 	import flash.text.TextFormat;
-	
-	import feathers.controls.List;
 
 	/**
 	 *
@@ -73,7 +71,7 @@ package com.client.view
 			var txt : TextField = new TextField();
 			txt.defaultTextFormat = new TextFormat("SimSun", 12, 0x9999999);
 			txt.text = "Player Version:  " + (Capabilities.isDebugger ? "Debug" : "Release") + " " + Capabilities.version + //
-				"\n" + "Game Version:  " + ClientGlobal.versionInfo;
+				"\n" + "Game Version:  " + ClientConfig.versionInfo;
 			txt.width = txt.textWidth + 20;
 			txt.selectable = false;
 			txt.x = (600 - txt.width) / 2;

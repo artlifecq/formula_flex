@@ -18,6 +18,7 @@ package com.rpgGame.app.state.role.action
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
+	import away3d.enum.LoadPriorityType;
 	import away3d.materials.methods.CorrodeMethod;
 	
 	import gs.TweenLite;
@@ -268,7 +269,7 @@ package com.rpgGame.app.state.role.action
 							if (RoleStateUtil.deathStateEffectType == RoleStateUtil.DEATH_STATE_EFFECT_CORRODE)
 							{
 								if (!_corrodeMethodData)
-									GlobalTexture.addTexture(ClientConfig.getDynTexture("corrode"),0, onCorrodeTextureComplete);
+									GlobalTexture.addTexture(ClientConfig.getDynTexture("corrode"),LoadPriorityType.LEVEL_TEXTURE, onCorrodeTextureComplete);
 								_corrodeTween = TweenLite.delayedCall(totalTime * 0.001, onRoleDiedDelay);
 							}
 							else

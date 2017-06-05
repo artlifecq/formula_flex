@@ -16,6 +16,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.yunBiao.YunBiaoManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.scene.animator.FightSoulFollowAnimator;
 	import com.rpgGame.app.state.role.action.PlayActionStateReference;
 	import com.rpgGame.app.state.role.control.RidingStateReference;
 	import com.rpgGame.app.ui.alert.GameAlert;
@@ -40,6 +41,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleData;
+	import com.rpgGame.coreData.role.RoleType;
 	import com.rpgGame.coreData.role.SceneCollectData;
 	import com.rpgGame.coreData.role.SceneDropGoodsData;
 	import com.rpgGame.coreData.role.SceneTranportData;
@@ -50,8 +52,6 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.type.RoleActionType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
-	
-	import flash.geom.Vector3D;
 	
 	import app.message.StallTypeDataProto;
 	
@@ -139,6 +139,10 @@ package com.rpgGame.app.manager.role
 			// 在换装时还未把role添加到场景 添加的buff无效
 			if (data.buffList.length > 0) {
 				role.buffSet.updateBuffEffects();
+			}
+			if (data.fightSoulLevel > 0)
+			{
+				createFightSoulRole(role);
 			}
 			
 			if (role.headFace is HeadFace)
@@ -589,6 +593,40 @@ package com.rpgGame.app.manager.role
 			{
 				SceneManager.removeSceneObjFromScene(role);
 			}
+		}
+		
+		public function createFightSoulRole(owner:SceneRole):SceneRole
+		{
+			var fightSoulFollowAnimator:FightSoulFollowAnimator = null;
+			var fightSoulRole:SceneRole = (SceneManager.getScene().getSceneObjByID(owner.id, SceneCharType.FIGHT_SOUL) as SceneRole);
+			if (fightSoulRole)
+			{
+				return fightSoulRole;
+			}
+			fightSoulRole = SceneRole.create(SceneCharType.FIGHT_SOUL, owner.id);
+			var roleData:RoleData = new RoleData(RoleType.TYPE_FIGHT_SOUL);
+			roleData.ownerId = owner.id;
+			roleData.id = owner.id;
+			roleData.name = "";
+			var fightSoulLevel:int = (owner.data as HeroData).fightSoulLevel;
+			roleData.avatarInfo.setBodyResID("blood/an_cj_blood_" + fightSoulLevel, null);
+			roleData.avatarInfo.bodyEffectID = "tx_cj_blood_" + fightSoulLevel;
+			fightSoulRole.ownerIsMainChar = (owner.id == MainRoleManager.actorID);
+			fightSoulRole.data = roleData;
+			fightSoulRole.mouseEnable = false;
+			if (owner.isMainChar)
+			{
+				fightSoulRole.canRemoved = false;
+			}
+			AvatarManager.updateAvatar(fightSoulRole);
+			fightSoulRole.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true);
+			fightSoulRole.setScale(1);
+			fightSoulRole.setGroundXY((owner.x + 100), owner.y);
+			fightSoulRole.rotationY = owner.rotationY;
+			SceneManager.addSceneObjToScene(fightSoulRole, false);
+			fightSoulFollowAnimator = new FightSoulFollowAnimator(fightSoulRole);
+			owner.setRenderAnimator(fightSoulFollowAnimator);
+			return fightSoulRole;
 		}
 		
 		

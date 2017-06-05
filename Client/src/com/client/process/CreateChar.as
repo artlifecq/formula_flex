@@ -1,6 +1,5 @@
 package com.client.process
 {
-	import com.client.ClientGlobal;
 	import com.client.cmdlistener.LoginCmdListener;
 	import com.client.sender.LoginSender;
 	import com.client.ui.alert.GameAlert;
@@ -11,6 +10,7 @@ package com.client.process
 	import com.game.engine3D.process.BaseProcess;
 	import com.game.engine3D.process.ProcessStateMachine;
 	import com.gameClient.log.GameLog;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.netData.login.message.ResErrorMessage;
 	import com.rpgGame.netData.player.bean.MyPlayerInfo;
 	
@@ -63,7 +63,7 @@ package com.client.process
 		override public function startProcess() : void
 		{
 			super.startProcess();
-			if (ClientGlobal.hasHero)
+			if (ClientConfig.hasHero)
 			{
 				GameLog.addShow("已有角色，继续进入游戏");
 				toPercent = 0.2;
@@ -73,12 +73,12 @@ package com.client.process
 			{
 				GameLog.addShow("还未创建角色，进入创建角色");
 
-				_needShowPkTipsView = ClientGlobal.isBanShu;
+				_needShowPkTipsView = ClientConfig.isBanShu;
 				ResLoadingView.instance.show();
 				ResLoadingView.instance.title = "加载创建角色资源...";
 
 				_themeLoader = new ThemeLoader();
-				_themeLoader.load(ClientGlobal.getLoginuiResUrl(), onResLoaded, onProgress, onResError);
+				_themeLoader.load(ClientConfig.getLoginuiResUrl(), onResLoaded, onProgress, onResError);
 			}
 		}
 
@@ -102,8 +102,8 @@ package com.client.process
 
 		private function onResError(ld : MultiLoadData, e : Event) : void
 		{
-			ResLoadingView.instance.title = "创建角色资源加载错误：" + ClientGlobal.getLoginuiResUrl();
-			GameLog.addShow("创建角色资源加载错误：" + ClientGlobal.getLoginuiResUrl());
+			ResLoadingView.instance.title = "创建角色资源加载错误：" + ClientConfig.getLoginuiResUrl();
+			GameLog.addShow("创建角色资源加载错误：" + ClientConfig.getLoginuiResUrl());
 		}
 
 		override public function processHandler(percent : Number) : void
@@ -116,9 +116,9 @@ package com.client.process
 			var urlLoader : URLLoader = e.currentTarget as URLLoader;
 			urlLoader.removeEventListener(Event.COMPLETE, showCreateChar);
 			var bytes : ByteArray = urlLoader.data;
-			if (ClientGlobal.decodeFun != null)
+			if (ClientConfig.decodeFun != null)
 			{
-				bytes = ClientGlobal.decodeFun(bytes);
+				bytes = ClientConfig.decodeFun(bytes);
 			}
 			//
 			_createRoleLoader = new Loader();
@@ -137,10 +137,10 @@ package com.client.process
 			GameLog.addShow("解析创建角色程序完成...");
 			_createRoleLoader.contentLoaderInfo.removeEventListener(Event.COMPLETE, onLoaderComplete);
 			_createRoleLoader.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR, onIoError);
-            _createRoleLoader.content["baseDir"] = ClientGlobal.baseDir;
+            _createRoleLoader.content["baseDir"] = ClientConfig.baseDir;
 			var setConfigFun : Function = _createRoleLoader.content["setConfig"];
-			setConfigFun(ClientGlobal.maskWorldDic);
-			ClientGlobal.stage.addChild(_createRoleLoader.content);
+			setConfigFun(ClientConfig.maskWorldDic);
+			ClientConfig.stage.addChild(_createRoleLoader.content);
 
 			_onCreateHeroFail = _createRoleLoader.content["onCreateHeroFail"];
 			_createRoleLoader.content["sendRegisterRole"] = onCreateRoleComplete;
@@ -190,10 +190,10 @@ package com.client.process
 		{
 			LoginCmdListener.onCreateCharSuccessHandler = onCreateCharSuccessHandler;
 			LoginCmdListener.onCreateCharFailHandler = onCreateCharFailHandler;
-			if (ClientGlobal.isSingle)
+			if (ClientConfig.isSingle)
 			{
-				ClientGlobal.loginData = new MyPlayerInfo();
-				ClientGlobal.loginData.name = _nickName;
+				ClientConfig.loginData = new MyPlayerInfo();
+				ClientConfig.loginData.name = _nickName;
 				onCreateCharSuccessHandler();
 				return;
 			}

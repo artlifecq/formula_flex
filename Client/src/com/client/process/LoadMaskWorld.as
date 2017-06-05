@@ -1,10 +1,10 @@
 package com.client.process
 {
-	import com.client.ClientGlobal;
 	import com.client.view.loading.ResLoadingView;
 	import com.game.engine3D.process.BaseProcess;
 	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.StringFilter;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	
 	import flash.events.Event;
@@ -47,12 +47,12 @@ package com.client.process
 			ResLoadingView.instance.show();
 			ResLoadingView.instance.title = "加载基础配置...";
 
-			GameLog.addShow("加载屏蔽字库 : " + ClientGlobal.getLangUrl());
+			GameLog.addShow("加载屏蔽字库 : " + ClientConfig.getLangUrl());
 			_stream = new URLStream();
 			_stream.addEventListener(Event.COMPLETE, onLangTextComplete);
 			_stream.addEventListener(IOErrorEvent.IO_ERROR, onIoError);
 			_stream.addEventListener(ProgressEvent.PROGRESS, onMaxkWorldResProgress);
-			_stream.load(new URLRequest(ClientGlobal.getLangUrl()));
+			_stream.load(new URLRequest(ClientConfig.getLangUrl()));
 		}
 
 		protected function onLangTextComplete(event : Event) : void
@@ -60,13 +60,13 @@ package com.client.process
 			GameLog.addShow("加载屏蔽字库完成...");
 			var byteArray : ByteArray = new ByteArray();
 			_stream.readBytes(byteArray);
-			if (ClientGlobal.isRelease && ClientGlobal.decodeFun != null)
+			if (ClientConfig.isRelease && ClientConfig.decodeFun != null)
 			{
-				byteArray = ClientGlobal.decodeFun(byteArray);
+				byteArray = ClientConfig.decodeFun(byteArray);
 			}
 			byteArray.uncompress();
 			var config : Dictionary = byteArray.readObject();
-			ClientGlobal.maskWorldDic = config;
+			ClientConfig.maskWorldDic = config;
             LanguageConfig.parseData(config);
 			var lang : Object = config["MASK_WORLD"];
 			StringFilter.init(lang ? lang.value : "");
@@ -93,8 +93,8 @@ package com.client.process
 
 		private function onIoError(e : IOErrorEvent) : void
 		{
-			ResLoadingView.instance.title = "屏蔽字库加载错误：" + ClientGlobal.getLangUrl();
-			GameLog.addShow("屏蔽字库加载错误：" + ClientGlobal.getLangUrl());
+			ResLoadingView.instance.title = "屏蔽字库加载错误：" + ClientConfig.getLangUrl();
+			GameLog.addShow("屏蔽字库加载错误：" + ClientConfig.getLangUrl());
 		}
 
 		override public function dispose() : void
