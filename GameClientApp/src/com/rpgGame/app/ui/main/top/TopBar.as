@@ -2,6 +2,7 @@ package com.rpgGame.app.ui.main.top {
 	import com.app.media.AudioInterface;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.sound.TSoundManager;
+	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.SystemTimeEvent;
@@ -10,6 +11,8 @@ package com.rpgGame.app.ui.main.top {
 	import com.rpgGame.core.manager.sound.SimpleMp3Player;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.netData.login.message.ResHeartMessage;
+	
+	import flash.utils.getTimer;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.mainui.top.top_Right_Skin;
@@ -62,6 +65,12 @@ package com.rpgGame.app.ui.main.top {
 			var hour:String=date.hours>9?date.hours.toString():"0"+date.hours;
 			var fen:String=date.minutes>9?date.minutes.toString():"0"+date.minutes;
 			_skin.txt_times.text=hour+":"+fen;
+			
+			//显示延迟格
+			var delay:Number=msg.time.fValue-SystemTimeManager.delayTiemByServer;
+			if(delay<=100) trace("网络正常: "+delay);
+			else if(delay>100&&delay<=200) trace("网络良好 "+delay);
+			else trace("网络一般 "+delay);
 		}
 		
 		public function resize(w : int, h : int) : void {
