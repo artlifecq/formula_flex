@@ -20,9 +20,6 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.app.manager.input.InputManger;
 	import com.rpgGame.app.manager.map.MapUnitDataManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.manager.role.SceneRoleManager;
-	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
-	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskManager;
 	import com.rpgGame.app.map.BaseMapProcess;
 	import com.rpgGame.app.sender.SceneSender;
@@ -51,10 +48,7 @@ package com.rpgGame.app.manager.scene
 	import app.message.MazeDungeonProto;
 	import app.message.SceneProto;
 	
-	import gs.TweenLite;
-	
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.connection.SocketConnection_protoBuffer;
 	
 	/**
@@ -75,10 +69,12 @@ package com.rpgGame.app.manager.scene
 		 *  * <font color=#00><b>currentMapId全局变量一次赋值直接调用，无需查询</b></font></br>
 		 * */
 		public static var currentMapId : uint = 0;
+		
 		/**
 		 *是否去跨服地图; 
 		 */
 		public static var isToCrossMap:Boolean;
+		
 		private static var _isChangeSceneComplete : Boolean = false;
 		private static var _mapRes : String = null;
 		setup();
@@ -355,105 +351,13 @@ package com.rpgGame.app.manager.scene
 			return 0;
 		}
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		private static function clearScene():void
-		{
-			//GamePerformsManager.pause();
-			MapUnitDataManager.clear();
-			SceneRoleSelectManager.selectedRole=null;
-			ClientTriggerManager.sceneClear();
-			//PlotManager.getInstance().stopPlot();
-			SceneCameraLensEffectManager.sceneClear();
-			TaskManager.storyTaskInfo = null;
-			//SceneRoleManager.clearDungeonMonLevel();
-			MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
-			MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true);
-			SocketConnection.excuteAll();
-			InputManger.getInstance().closeOperate();
-			SceneManager.getScene().clearAreaMap(1);
-			SceneManager.getScene().removeAllSceneObj();
-			TaskAutoManager.getInstance().stopAll();
-			TrusteeshipManager.getInstance().stopAll();
-			//SceneDropGoodsManager.stopAutoPick();
-			TweenLite.killDelayedCallsTo(onDelaySwitchScene);
-		}
-		private static var _mapName:String; 
-		private static function onDelaySwitchScene(mapInfo:SceneData):void
-		{
-			clearScene();
-			SceneTimeOfTheDayManager.clear();
-			SceneManager.getScene().clear();
-			EventManager.dispatchEvent(MapEvent.MAP_LOAD_START);
-			EventManager.dispatchEvent(MapEvent.MAP_SWITCH_START);
-			if (ClientConfig.isSingle)
-			{
-				if (mapInfo)
-				{
-					MainRoleManager.actorInfo.x = 2700;
-					MainRoleManager.actorInfo.y = 1400;
-					_mapRes = mapInfo.map;
-				}
-			}
-			else
-			{
-				if (mapInfo)
-				{
-					_mapRes = mapInfo.map;
-				}
-				else
-				{
-					ResLoadingView.instance.title = "地图" + mapInfo.sceneId + "数据不存在";
-				}
-			}
-			if (_mapRes)
-			{
-				var mapUrl : String = ClientConfig.getMap(_mapRes);
-				var mapName : String = ClientConfig.getMapName(_mapRes);
-				var mapDataName : String = ClientConfig.getMapDataName();
-				CONFIG::netDebug {
-					NetDebug.LOG("[SceneSwitchManager] [ChangeMap] mapID:" + mapID + " mapUrl:" + mapUrl + " mapName:" + mapName + " mapDataName:" + mapDataName);
-				}
-					
-					if(false)
-					{
-						SceneManager.getScene().switchScene(mapUrl + "/" +mapName, enterSceneSuccessed);
-					}
-					else
-					{
-						change2dMap();
-					}
-			}
-			
-			
-		}
-		
 		/**
 		 * 初次登录和切场景成功后的通用逻辑
 		 */
 		public static function changeMap(isReal3D:Boolean = false) : void
 		{
 			GameLog.addShow("开始切换场景...");
-			_isChangeSceneComplete = false;
-			var mapID : int = MainRoleManager.actorInfo.mapID;
-			var mapInfo : SceneData = MapDataManager.getMapInfo(mapID); //获取地图配置数据
-			MapDataManager.currentScene = mapInfo;
-			var _local3:SceneData = MapDataManager.getMapInfo(currentMapId);
-			var _local1:SceneData = MapDataManager.getMapInfo(MainRoleManager.actorInfo.mapID);
-			if (((((_local1) && (_local3))) && ((_local1.map == _local3.map))))
-			{
-				clearScene();
-				EventManager.dispatchEvent(MapEvent.MAP_SWITCH_START);
-				sendSceneLoaded();
-			}
-			else
-			{
-				EventManager.dispatchEvent(MapEvent.MAP_LOAD_START);
-				TweenLite.killDelayedCallsTo(onDelaySwitchScene);
-				TweenLite.delayedCall(0.2, onDelaySwitchScene, [_local1]);
-			};
-			currentMapId = MainRoleManager.actorInfo.mapID;
-			
-			
-			/*MapUnitDataManager.clear();
+			MapUnitDataManager.clear();
 			ClientTriggerManager.sceneClear();
 			SceneCameraLensEffectManager.sceneClear();
 			TaskManager.storyTaskInfo = null;
@@ -461,10 +365,10 @@ package com.rpgGame.app.manager.scene
 			MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true);
 			var mapID : int = MainRoleManager.actorInfo.mapID;
 			if (1 == mapID) {
-			mapID = 1001;
-			MainRoleManager.actorInfo.mapID = 1001;
+				mapID = 1001;
+				MainRoleManager.actorInfo.mapID = 1001;
 			}
-			
+			_isChangeSceneComplete = false;
 			SocketConnection_protoBuffer.excuteAll();
 			InputManger.getInstance().closeOperate(); //关闭用户输入
 			SceneManager.getScene().clearAreaMap(1);
@@ -472,164 +376,78 @@ package com.rpgGame.app.manager.scene
 			TrusteeshipManager.getInstance().stopAll();
 			
 			CONFIG::netDebug {
-			NetDebug.LOG("[SceneSwitchManager] [ChangeMap] sceneID:" + currentMapId + ", mapID:" + mapID);
+				NetDebug.LOG("[SceneSwitchManager] [ChangeMap] sceneID:" + currentMapId + ", mapID:" + mapID);
 			}
-			var currMapInfo : SceneData = MapDataManager.getMapInfo(currentMapId); //获取地图配置数据
+				var currMapInfo : SceneData = MapDataManager.getMapInfo(currentMapId); //获取地图配置数据
 			var mapInfo : SceneData = MapDataManager.getMapInfo(mapID); //获取地图配置数据
 			CONFIG::netDebug {
-			if (null == mapInfo) {
-			NetDebug.LOG("[SceneSwitchManager] [ChangeMap] mapID:" + mapID + " config data not exists");
-			} else {
-			NetDebug.LOG("[SceneSwitchManager] [ChangeMap] mapID:" + mapID + " config data exists");
+				if (null == mapInfo) {
+					NetDebug.LOG("[SceneSwitchManager] [ChangeMap] mapID:" + mapID + " config data not exists");
+				} else {
+					NetDebug.LOG("[SceneSwitchManager] [ChangeMap] mapID:" + mapID + " config data exists");
+				}
 			}
-			}
-			MapDataManager.currentScene = mapInfo;
+				MapDataManager.currentScene = mapInfo;
 			if (mapInfo && currMapInfo && (mapInfo.map == currMapInfo.map))
 			{
-			EventManager.dispatchEvent(MapEvent.MAP_SWITCH_START);
-			sendSceneLoaded();
+				EventManager.dispatchEvent(MapEvent.MAP_SWITCH_START);
+				sendSceneLoaded();
 			}
 			else
 			{
-			SceneTimeOfTheDayManager.clear();
-			SceneManager.getScene().clear();
-			EventManager.dispatchEvent(MapEvent.MAP_LOAD_START);
-			EventManager.dispatchEvent(MapEvent.MAP_SWITCH_START);
-			if (ClientConfig.isSingle)
-			{
-			if (mapInfo)
-			{
-			MainRoleManager.actorInfo.x = 2700;
-			MainRoleManager.actorInfo.y = 1400;
-			_mapRes = mapInfo.map;
+				SceneTimeOfTheDayManager.clear();
+				SceneManager.getScene().clear();
+				EventManager.dispatchEvent(MapEvent.MAP_LOAD_START);
+				EventManager.dispatchEvent(MapEvent.MAP_SWITCH_START);
+				if (ClientConfig.isSingle)
+				{
+					/*var cfg : Q_map = ClientSceneCfgData.getSceneInfo(mapID);
+					CONFIG::netDebug {
+					if (null == cfg) {
+					NetDebug.LOG("[SceneSwitchManager] [ChangeMap] mapID:" + mapID + " client scene config data not exists");
+					} else {
+					NetDebug.LOG("[SceneSwitchManager] [ChangeMap] mapID:" + mapID + " client scene config data exists");
+					}
+					}*/
+					if (mapInfo)
+					{
+						MainRoleManager.actorInfo.x = 2700;
+						MainRoleManager.actorInfo.y = 1400;
+						_mapRes = mapInfo.map;
+					}
+				}
+				else
+				{
+					if (mapInfo)
+					{
+						_mapRes = mapInfo.map;
+					}
+					else
+					{
+						ResLoadingView.instance.title = "地图" + mapID + "数据不存在";
+					}
+				}
+				if (_mapRes)
+				{
+					var mapUrl : String = ClientConfig.getMap(_mapRes);
+					var mapName : String = ClientConfig.getMapName(_mapRes);
+					var mapDataName : String = ClientConfig.getMapDataName();
+					CONFIG::netDebug {
+						NetDebug.LOG("[SceneSwitchManager] [ChangeMap] mapID:" + mapID + " mapUrl:" + mapUrl + " mapName:" + mapName + " mapDataName:" + mapDataName);
+					}
+						
+						if(isReal3D)
+						{
+							SceneManager.getScene().switchScene(mapUrl + "/" +mapName, enterSceneSuccessed);
+						}
+						else
+						{
+							change2dMap();
+						}
+				}
 			}
-			}
-			else
-			{
-			if (mapInfo)
-			{
-			_mapRes = mapInfo.map;
-			}
-			else
-			{
-			ResLoadingView.instance.title = "地图" + mapID + "数据不存在";
-			}
-			}
-			if (_mapRes)
-			{
-			var mapUrl : String = ClientConfig.getMap(_mapRes);
-			var mapName : String = ClientConfig.getMapName(_mapRes);
-			var mapDataName : String = ClientConfig.getMapDataName();
-			CONFIG::netDebug {
-			NetDebug.LOG("[SceneSwitchManager] [ChangeMap] mapID:" + mapID + " mapUrl:" + mapUrl + " mapName:" + mapName + " mapDataName:" + mapDataName);
-			}
-			
-			if(isReal3D)
-			{
-			SceneManager.getScene().switchScene(mapUrl + "/" +mapName, enterSceneSuccessed);
-			}
-			else
-			{
-			change2dMap();
-			}
-			}
-			}
-			currentMapId = mapID;*/
+			currentMapId = mapID;
 		}
-		//		public static function changeMap(isReal3D:Boolean = false) : void
-		//		{
-		//			GameLog.addShow("开始切换场景...");
-		//			MapUnitDataManager.clear();
-		//			ClientTriggerManager.sceneClear();
-		//			SceneCameraLensEffectManager.sceneClear();
-		//			TaskManager.storyTaskInfo = null;
-		//			MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
-		//			MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true);
-		//			var mapID : int = MainRoleManager.actorInfo.mapID;
-		//            if (1 == mapID) {
-		//                mapID = 1001;
-		//                MainRoleManager.actorInfo.mapID = 1001;
-		//            }
-		//			_isChangeSceneComplete = false;
-		//			SocketConnection_protoBuffer.excuteAll();
-		//			InputManger.getInstance().closeOperate(); //关闭用户输入
-		//			SceneManager.getScene().clearAreaMap(1);
-		//			SceneManager.getScene().removeAllSceneObj();
-		//			TrusteeshipManager.getInstance().stopAll();
-		//			
-		//            CONFIG::netDebug {
-		//                NetDebug.LOG("[SceneSwitchManager] [ChangeMap] sceneID:" + currentMapId + ", mapID:" + mapID);
-		//            }
-		//			var currMapInfo : SceneData = MapDataManager.getMapInfo(currentMapId); //获取地图配置数据
-		//			var mapInfo : SceneData = MapDataManager.getMapInfo(mapID); //获取地图配置数据
-		//            CONFIG::netDebug {
-		//                if (null == mapInfo) {
-		//                    NetDebug.LOG("[SceneSwitchManager] [ChangeMap] mapID:" + mapID + " config data not exists");
-		//                } else {
-		//                    NetDebug.LOG("[SceneSwitchManager] [ChangeMap] mapID:" + mapID + " config data exists");
-		//                }
-		//            }
-		//			MapDataManager.currentScene = mapInfo;
-		//			if (mapInfo && currMapInfo && (mapInfo.map == currMapInfo.map))
-		//			{
-		//				EventManager.dispatchEvent(MapEvent.MAP_SWITCH_START);
-		//				sendSceneLoaded();
-		//			}
-		//			else
-		//			{
-		//				SceneTimeOfTheDayManager.clear();
-		//				SceneManager.getScene().clear();
-		//				EventManager.dispatchEvent(MapEvent.MAP_LOAD_START);
-		//				EventManager.dispatchEvent(MapEvent.MAP_SWITCH_START);
-		//				if (ClientConfig.isSingle)
-		//				{
-		//					/*var cfg : Q_map = ClientSceneCfgData.getSceneInfo(mapID);
-		//                    CONFIG::netDebug {
-		//                        if (null == cfg) {
-		//                            NetDebug.LOG("[SceneSwitchManager] [ChangeMap] mapID:" + mapID + " client scene config data not exists");
-		//                        } else {
-		//                            NetDebug.LOG("[SceneSwitchManager] [ChangeMap] mapID:" + mapID + " client scene config data exists");
-		//                        }
-		//                    }*/
-		//					if (mapInfo)
-		//					{
-		//						MainRoleManager.actorInfo.x = 2700;
-		//						MainRoleManager.actorInfo.y = 1400;
-		//						_mapRes = mapInfo.map;
-		//					}
-		//				}
-		//				else
-		//				{
-		//					if (mapInfo)
-		//					{
-		//						_mapRes = mapInfo.map;
-		//					}
-		//					else
-		//					{
-		//						ResLoadingView.instance.title = "地图" + mapID + "数据不存在";
-		//					}
-		//				}
-		//				if (_mapRes)
-		//				{
-		//					var mapUrl : String = ClientConfig.getMap(_mapRes);
-		//					var mapName : String = ClientConfig.getMapName(_mapRes);
-		//					var mapDataName : String = ClientConfig.getMapDataName();
-		//                    CONFIG::netDebug {
-		//                        NetDebug.LOG("[SceneSwitchManager] [ChangeMap] mapID:" + mapID + " mapUrl:" + mapUrl + " mapName:" + mapName + " mapDataName:" + mapDataName);
-		//                    }
-		//					
-		//					if(isReal3D)
-		//					{
-		//						SceneManager.getScene().switchScene(mapUrl + "/" +mapName, enterSceneSuccessed);
-		//					}
-		//					else
-		//					{
-		//						change2dMap();
-		//					}
-		//				}
-		//			}
-		//			currentMapId = mapID;
-		//		}
 		
 		private static function enterSceneSuccessed(scene : GameScene3D) : void
 		{
@@ -683,7 +501,7 @@ package com.rpgGame.app.manager.scene
 					{
 						mapPointSets.push(new MapPointSet("MapDataObstacleArea" + areaData.id, areaData.getVector2Ds()));
 					}
-					//onLoadSceneCmpParam.sceneMapLayer.addObstaclePoints(mapPointSets);
+					onLoadSceneCmpParam.sceneMapLayer.addObstaclePoints(mapPointSets);
 				}
 				AreaMapManager.updateCameraAreaMap();
 				SceneTimeOfTheDayManager.initScene(SceneManager.clientMapData.timeOfTheDayData, onLoadSceneCmpParam);
