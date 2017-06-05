@@ -2,6 +2,8 @@ package com.rpgGame.app.ui
 {
 	import com.rpgGame.app.ui.tab.FuncTabBar;
 	import com.rpgGame.app.ui.tab.UITabBarData;
+	import com.rpgGame.coreData.cfg.NewFuncCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_newfunc;
 	
 	import feathers.controls.StateSkin;
 	
@@ -58,6 +60,11 @@ package com.rpgGame.app.ui
 		{
 			var item:UITabBarData=new UITabBarData(tabStyle,viewStyle);
 			item.tabKey=funcKey;
+			var fundata:Q_newfunc = NewFuncCfgData.getdataById(item.tabKey);
+			if(fundata!=null)
+			{
+				item.text = fundata.q_string_name;
+			}
 			_tabDatas.push(item);
 		}
 	}

@@ -2,8 +2,8 @@ package org.mokylin.skin.app.shejiao
 {
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
+	import feathers.controls.TabBar;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.app.shejiao.Shejiao_Daohang;
 	import org.mokylin.skin.common.yiji_panelbg2_Skin;
 
 	/**
@@ -18,7 +18,7 @@ package org.mokylin.skin.app.shejiao
 		//==========================================================================
 		public var bg:feathers.controls.SkinnableContainer;
 
-		public var daohang:feathers.controls.SkinnableContainer;
+		public var tabBar:feathers.controls.TabBar;
 
 
 		//==========================================================================
@@ -29,7 +29,7 @@ package org.mokylin.skin.app.shejiao
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [bg_i(),__Shejiao_Skin_UIAsset1_i(),__Shejiao_Skin_UIAsset2_i(),daohang_i()];
+			this.elementsContent = [bg_i(),__Shejiao_Skin_UIAsset1_i(),__Shejiao_Skin_UIAsset2_i(),tabBar_i()];
 			
 			states = {
 			};
@@ -55,7 +55,7 @@ package org.mokylin.skin.app.shejiao
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
-			temp.touchGroup = true;
+			temp.touchGroup = false;
 			temp.styleName = "ui/app/shejiao/shejiao.png";
 			temp.x = 447;
 			temp.y = 13;
@@ -76,17 +76,15 @@ package org.mokylin.skin.app.shejiao
 			return temp;
 		}
 
-		private function daohang_i():feathers.controls.SkinnableContainer
+		private function tabBar_i():feathers.controls.TabBar
 		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			daohang = temp;
-			temp.name = "daohang";
-			temp.height = 50;
-			var skin:StateSkin = new org.mokylin.skin.app.shejiao.Shejiao_Daohang()
-			temp.skin = skin
-			temp.width = 722;
-			temp.x = 26;
-			temp.y = 524;
+			var temp:feathers.controls.TabBar = new feathers.controls.TabBar();
+			tabBar = temp;
+			temp.name = "tabBar";
+			temp.height = 49;
+			temp.width = 713;
+			temp.x = 40;
+			temp.y = 527;
 			return temp;
 		}
 

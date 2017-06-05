@@ -1,18 +1,20 @@
 package  com.rpgGame.appModule.social.team
 {
 	import com.rpgGame.app.manager.Mgr;
+	import com.rpgGame.app.ui.TabBarPanel;
+	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.core.events.TeamEvent;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.MCUtil;
 	
+	import away3d.events.Event;
+	
 	import org.mokylin.skin.app.shejiao.zudui.ZuiDuiSkin;
 	
 	import starling.display.DisplayObject;
-	import away3d.events.Event;
 	
 
-	
-	public class TeamMainPanelExt extends SkinUI
+	public class TeamMainPanelExt extends ViewUI
 	{
 		public static const SUB_MY_TEAM:String="team_sub_myteam";
 		public static const SUB_NEAR_TEAM:String="team_sub_nearteam";

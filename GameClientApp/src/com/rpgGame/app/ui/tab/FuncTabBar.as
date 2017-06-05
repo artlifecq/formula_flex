@@ -2,6 +2,8 @@ package com.rpgGame.app.ui.tab
 {
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.core.events.FunctionOpenEvent;
+	import com.rpgGame.coreData.cfg.NewFuncCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_newfunc;
 	
 	import feathers.controls.TabBar;
 	
@@ -26,7 +28,7 @@ package com.rpgGame.app.ui.tab
 			EventManager.addEvent(FunctionOpenEvent.FUNCTIONOPENID,onOpenFunc);
 		}
 		
-		private function onOpenFunc(ids:Vector.<int>):void
+		private function onOpenFunc(ids:Vector.<String>):void
 		{
 			var num2:int=ids.length;
 			var tabKey:String;
@@ -70,11 +72,9 @@ package com.rpgGame.app.ui.tab
 		{
 			var num:int=_allDatas.length;
 			var item:UITabBarData;
-			var funcID:int;
 			for(var i:int=0;i<num;i++){
 				item=_allDatas[i];
-				funcID=int(item.tabKey);
-				if(FunctionOpenManager.functionIsOpen(funcID)){//已经开启了
+				if(FunctionOpenManager.functionIsOpen(item.tabKey)){//已经开启了
 					setTabDataWithTabKey(item.tabKey);
 				}
 			}
