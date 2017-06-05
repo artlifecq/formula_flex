@@ -2,8 +2,8 @@ package org.mokylin.skin.app.beibao
 {
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
+	import feathers.controls.TabBar;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.app.beibao.daohang_Skin;
 	import org.mokylin.skin.common.yiji_panelbg_Skin;
 
 	/**
@@ -18,7 +18,7 @@ package org.mokylin.skin.app.beibao
 		//==========================================================================
 		public var bg:feathers.controls.SkinnableContainer;
 
-		public var daohang:feathers.controls.SkinnableContainer;
+		public var tabBar:feathers.controls.TabBar;
 
 
 		//==========================================================================
@@ -31,7 +31,7 @@ package org.mokylin.skin.app.beibao
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [bg_i(),daohang_i(),__beibao_Skin_UIAsset1_i()];
+			this.elementsContent = [bg_i(),__beibao_Skin_UIAsset1_i(),tabBar_i()];
 			
 			states = {
 			};
@@ -67,17 +67,15 @@ package org.mokylin.skin.app.beibao
 			return temp;
 		}
 
-		private function daohang_i():feathers.controls.SkinnableContainer
+		private function tabBar_i():feathers.controls.TabBar
 		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			daohang = temp;
-			temp.name = "daohang";
-			temp.height = 50;
-			var skin:StateSkin = new org.mokylin.skin.app.beibao.daohang_Skin()
-			temp.skin = skin
-			temp.width = 141;
-			temp.x = 20;
-			temp.y = 528;
+			var temp:feathers.controls.TabBar = new feathers.controls.TabBar();
+			tabBar = temp;
+			temp.name = "tabBar";
+			temp.height = 49;
+			temp.width = 887;
+			temp.x = 38;
+			temp.y = 527;
 			return temp;
 		}
 

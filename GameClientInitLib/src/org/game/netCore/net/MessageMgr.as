@@ -32,7 +32,9 @@ package org.game.netCore.net
 		/** 客户端成功连接服务器 **/
 		public static const CLIENT_CONNECT_TO_SERVER:String = "client_connect_to_server";
 		/** 客户端连接服务器失败 **/
-		public static const CLIENT_FAILD_TO_SERVER:String = "client_faild_to_server";
+		public static const CLIENT_FAILD_TO_SERVER:String = "client_faild_to_server";	
+		/**客服端断线*/
+		public static const CLIENT_DROPS_TO_SERVER:String = "client_drops_to_server";
 		
 		/**
 		 *跨服连接成功 
@@ -271,7 +273,7 @@ package org.game.netCore.net
 		 */
 		public function Connect($host:String, $port:int):void 
 		{
-//			Security.allowDomain( "*" );
+			//			Security.allowDomain( "*" );
 			
 			ip = $host;
 			port = $port;
@@ -305,8 +307,8 @@ package org.game.netCore.net
 			
 			trace( "GAME_SERVER_IP:" + this.ip + ":" + this.port + " " + SANDBOX_PORT + "     GameConfig.gameline " + GAME_LINE );
 			
-//			var policyPath:String = "xmlsocket://" + this.ip + ":" + SANDBOX_PORT;
-//			Security.loadPolicyFile( policyPath );
+			//			var policyPath:String = "xmlsocket://" + this.ip + ":" + SANDBOX_PORT;
+			//			Security.loadPolicyFile( policyPath );
 			createSocketAndConnect();
 			
 			//			var portchecker:PortChecker = new PortChecker();
@@ -453,18 +455,18 @@ package org.game.netCore.net
 					isCross = sendCrossHash.get( msgId );
 				/*if( msgId == 112201 )
 				{
-					var type:int = (msg as ReqChatMessage).type;
-					if( type == EnumChatChannelType.PRIVATE )
-						isCross = 2;
-					else if( type == EnumChatChannelType.NORMAL )
-						isCross = 1;
+				var type:int = (msg as ReqChatMessage).type;
+				if( type == EnumChatChannelType.PRIVATE )
+				isCross = 2;
+				else if( type == EnumChatChannelType.NORMAL )
+				isCross = 1;
 				}
 				else if( msgId == 108203 )
 				{
-					var item:Item = Mgr.backpackMgr.getItemById( (msg as ReqUseItemMessage).itemId );
-					var q_item:Q_item = Mgr.gameDataMgr.getItemModel( item.itemModelId );
-					if( ItemUtil.isMedical( q_item.q_type ) || q_item.q_type == EnumItemType.ADDBUFF )
-						isCross = 1;
+				var item:Item = Mgr.backpackMgr.getItemById( (msg as ReqUseItemMessage).itemId );
+				var q_item:Q_item = Mgr.gameDataMgr.getItemModel( item.itemModelId );
+				if( ItemUtil.isMedical( q_item.q_type ) || q_item.q_type == EnumItemType.ADDBUFF )
+				isCross = 1;
 				}*/
 			}
 			return isCross;
@@ -660,10 +662,10 @@ package org.game.netCore.net
 				{
 					if ( !isReplace )
 					{
-//						ReconnectPanexlExt.singleton.showPanel(30, "【连接close】");
+						//						ReconnectPanexlExt.singleton.showPanel(30, "【连接close】");
 						//暂时弹框 没filter了
-//						AlertPanel.showMsg("服务器连接断开", null, false);
-						ReconnectionPanelExt.showPanel(null,"提示","掉线时不会获得任何收益的喔","自动重连",5);
+						//												AlertPanel.showMsg("服务器连接断开", null, false);
+						dispatchEvent( new NetEvent( CLIENT_DROPS_TO_SERVER) );
 					}
 					else
 					{
@@ -790,6 +792,7 @@ package org.game.netCore.net
 						if ( message == null )
 						{
 							GameLog.addError( "客户端缺少消息 " + id + "上一个消息:" + _lastMsgID );
+							AlertPanel.showMsg("客户端缺少消息 " + id + "上一个消息:" + _lastMsgID, null );
 							isPass = true;
 						}
 						else
@@ -1094,33 +1097,33 @@ package org.game.netCore.net
 		protected function corsscloseHandler(event:Event):void
 		{
 			clearCorssSocket();
-//			dispatchEvent( new NetEvent( CLIENT_FAILD_TO_SERVER, event.toString() ) );
-//			AlertPanel.showMsg("服务器连接断开", null, false);
+			//			dispatchEvent( new NetEvent( CLIENT_FAILD_TO_SERVER, event.toString() ) );
+			//			AlertPanel.showMsg("服务器连接断开", null, false);
 			//			
 			//			if( !Mgr.pubLoginMgr.isCrossState )
-				//				Mgr.mainApp.cacheAsBitmap = true;
-				//				Mgr.sceneMgr.removeEvent();
-				//				Mgr.mainApp.filters = [ FilterUtil.getGrayFilter() ];
-				//				
-				//				dispatchEvent( new NetEvent( CLIENT_FAILD_TO_SERVER, event.toString() ) );
-				//				if ( !_isReconnect )
-				//				{
-				//					if ( !Mgr.messageMgr.isReplace )
-				//					{
-				////						ReconnectPanexlExt.singleton.showPanel(30, "【连接close】");
-				//					}
-				//					else
-				//					{
-				//						AlertPanel.showMsg( TextUtil.changeDateToDateStr( new Date() ) 
-				//							+ "您的账号在IP:[" 
-				//							+ _replaceIP 
-				//							+ "]处登录上线了", 
-				//							Mgr.layerMgr.alertLayer, 
-				//							false, 
-				//							flushPage 
-				//						);
-				//					}
-				//				}
+			//				Mgr.mainApp.cacheAsBitmap = true;
+			//				Mgr.sceneMgr.removeEvent();
+			//				Mgr.mainApp.filters = [ FilterUtil.getGrayFilter() ];
+			//				
+			//				dispatchEvent( new NetEvent( CLIENT_FAILD_TO_SERVER, event.toString() ) );
+			//				if ( !_isReconnect )
+			//				{
+			//					if ( !Mgr.messageMgr.isReplace )
+			//					{
+			////						ReconnectPanexlExt.singleton.showPanel(30, "【连接close】");
+			//					}
+			//					else
+			//					{
+			//						AlertPanel.showMsg( TextUtil.changeDateToDateStr( new Date() ) 
+			//							+ "您的账号在IP:[" 
+			//							+ _replaceIP 
+			//							+ "]处登录上线了", 
+			//							Mgr.layerMgr.alertLayer, 
+			//							false, 
+			//							flushPage 
+			//						);
+			//					}
+			//				}
 		}
 		
 		protected function crossEcurityErrorHandler(event:SecurityErrorEvent):void

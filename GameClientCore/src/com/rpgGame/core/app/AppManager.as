@@ -1,5 +1,6 @@
 package com.rpgGame.core.app
 {
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.coreData.cfg.WindowInfoData;
 	import com.rpgGame.coreData.clientConfig.Q_windowInfo;
 	

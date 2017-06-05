@@ -220,9 +220,17 @@ package com.rpgGame.app.manager.goods
 			return false;
 		}
 		
+		public static function isEquip(type:int):Boolean
+		{
+			if(type==GoodsType.EQUIPMENT||type==GoodsType.EQUIPMENT1||GoodsType.EQUIPMENT2){
+				return true;
+			}
+			return false;
+		}
+		
 		public static function canPutOnEquipAt(item:ClientItemInfo, pos:int, tip:Boolean=true):Boolean
 		{
-			if(!item || item.type != GoodsType.EQUIPMENT || !instance.isEquipSuitablePos(item, pos))
+			if(!item || !isEquip(item.type) || !instance.isEquipSuitablePos(item, pos))
 			{
 				if(tip)NoticeManager.showHint(EnumHintInfo.EQUIPMENT_ERROR_POS);
 				return false;

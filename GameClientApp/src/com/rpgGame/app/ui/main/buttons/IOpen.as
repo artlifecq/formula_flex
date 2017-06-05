@@ -9,6 +9,7 @@ package com.rpgGame.app.ui.main.buttons
 		function get info():FunctionBarInfo;
 		function set info(value:FunctionBarInfo):void;
 		function canOpen():Boolean;
-		function set styleClass(value:Class):void
+		function set styleClass(value:Class):void;
+		function runAnimation():void;
 	}
 }

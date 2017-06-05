@@ -3,6 +3,7 @@ package com.rpgGame.app.sender
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.scene.FirstEnterSceneManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.utils.ReqLockUtil;
 	import com.rpgGame.coreData.info.item.UpgradeItemListVo;
 	import com.rpgGame.coreData.type.CostItemType;
@@ -37,10 +38,9 @@ package com.rpgGame.app.sender
 		public static function SendLoadFinishMessage():void
 		{
 			var msg:Message;
-			if(!FirstEnterSceneManager.isEnterScene)
+			if(!FirstEnterSceneManager.isEnterScene||SceneSwitchManager.isToCrossMap)
 			{
 				msg = new ReqLoadFinishMessage();
-				FirstEnterSceneManager.setup();
 			}
 			else
 			{

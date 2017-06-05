@@ -1,6 +1,9 @@
 package com.rpgGame.appModule.role
 {
+	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.netData.player.bean.OthersInfo;
+	
+	import org.mokylin.skin.app.beibao.button.ButtonJuese;
 	
 	import starling.display.DisplayObjectContainer;
 
@@ -17,11 +20,14 @@ package com.rpgGame.appModule.role
 			super();
 		}
 		
+		override protected function initTabBarDatas():void
+		{
+			addTabDatas(ButtonJuese,SubRolePanel,EmFunctionID.EM_ROLE);
+		}
+		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void 
 		{
-			super.show(data,SUB_ROLE,parentContiner);
-			isSeeOther=true;
-			_subRole.showCompareData(data);
+			super.show(data,EmFunctionID.EM_ROLE,parentContiner);
 		}
 	}
 }

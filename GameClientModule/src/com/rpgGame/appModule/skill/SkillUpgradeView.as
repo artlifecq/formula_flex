@@ -2,8 +2,8 @@ package com.rpgGame.appModule.skill
 {
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.SpellSender;
-	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.view.icon.BgIcon;
+	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.SkillLvLDataManager;
@@ -37,10 +37,10 @@ package com.rpgGame.appModule.skill
 		private var cfg:Q_skill_model;
 		
 		private var alertPanel:SkillAlertPanel;
-		private var _panel:SkinUIPanel;
+		private var _panel:SkinUI;
 		private var _selectedInfo:SkillInfo;
 		
-		public function SkillUpgradeView(_skin:jineng_shengji,panel:SkinUIPanel)
+		public function SkillUpgradeView(_skin:jineng_shengji,panel:SkinUI)
 		{
 			_panel=panel;
 			_icon=new BgIcon(IcoSizeEnum.ICON_48);

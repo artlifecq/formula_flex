@@ -124,7 +124,6 @@ package
 			
 			GameLogView.init(this.stage, [189, 190, 191]);//-_	189  .>	190  /?	191
 			AlertPanel.initStage(this.stage);
-			ReconnectionPanelExt.initStage(this.stage);
 			//
 			getWebParams();
 			GameLog.addShow("版本号：" + version);

@@ -10,11 +10,10 @@ package com.rpgGame.coreData.cfg
 	{
 		private static var _map:HashMap;
 
-		public static function get map():HashMap
+		public static function alldata():Array
 		{
-			return _map;
+			return _map.getValues();
 		}
-
 		private static var _typelists:HashMap;
 		public static function setup( byte:ByteArray ):void
 		{
