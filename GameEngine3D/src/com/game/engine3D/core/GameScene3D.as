@@ -1071,7 +1071,7 @@ package com.game.engine3D.core
 				
 				if (_mainChar)
 				{
-					_mainChar.addSyncInfo(new BaseObjSyncInfo(getCameraTarget(), true));
+					_mainChar.addSyncInfo(new BaseObjSyncInfo(getCameraTarget(), true));//这个是用来把镜头的虚拟对象与主角关联起来，实现同步
 					
 					_mainCharSyncPosLight = _sceneMapLayer.getObj(MAIN_CHAR_SYNC_POS_LIGHT_NAME) as LightBase;
 					if (_mainCharSyncPosLight)
