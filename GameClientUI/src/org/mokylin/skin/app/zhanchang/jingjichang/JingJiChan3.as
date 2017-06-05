@@ -31,6 +31,12 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 
 		public var icon1:feathers.controls.UIAsset;
 
+		public var imgMing:feathers.controls.UIAsset;
+
+		public var imgYiwai:feathers.controls.UIAsset;
+
+		public var labReward:feathers.controls.Label;
+
 		public var lbHuosheng:feathers.controls.Label;
 
 		public var lbRongyu:feathers.controls.Label;
@@ -50,7 +56,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [__JingJiChan3_UIAsset2_i(),__JingJiChan3_Label1_i(),__JingJiChan3_UIAsset3_i(),__JingJiChan3_UIAsset4_i(),ListItem_i(),__JingJiChan3_UIAsset5_i(),__JingJiChan3_UIAsset6_i(),__JingJiChan3_UIAsset7_i(),__JingJiChan3_UIAsset8_i(),__JingJiChan3_UIAsset9_i(),__JingJiChan3_UIAsset10_i(),__JingJiChan3_UIAsset11_i(),__JingJiChan3_UIAsset12_i(),__JingJiChan3_UIAsset13_i(),__JingJiChan3_UIAsset14_i(),numZhanli_i(),__JingJiChan3_Label2_i(),lbHuosheng_i(),lbShibai_i(),lbRongyu_i(),icon1_i(),btnBack_i(),btnOK_i()];
+			this.elementsContent = [__JingJiChan3_UIAsset2_i(),labReward_i(),__JingJiChan3_UIAsset3_i(),__JingJiChan3_UIAsset4_i(),ListItem_i(),__JingJiChan3_UIAsset5_i(),__JingJiChan3_UIAsset6_i(),__JingJiChan3_UIAsset7_i(),__JingJiChan3_UIAsset8_i(),__JingJiChan3_UIAsset9_i(),__JingJiChan3_UIAsset10_i(),__JingJiChan3_UIAsset11_i(),__JingJiChan3_UIAsset12_i(),imgYiwai_i(),imgMing_i(),numZhanli_i(),__JingJiChan3_Label1_i(),lbHuosheng_i(),lbShibai_i(),lbRongyu_i(),icon1_i(),btnBack_i(),btnOK_i()];
 			
 			states = {
 			};
@@ -75,17 +81,6 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 		}
 
 		private function __JingJiChan3_Label1_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "可领取奖励";
-			temp.color = 0x5CB006;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 705;
-			temp.y = 552;
-			return temp;
-		}
-
-		private function __JingJiChan3_Label2_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.height = 53;
@@ -123,24 +118,6 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.styleName = "ui/app/zhanchang/jingjichang/paimingjiangli.png";
 			temp.x = 569;
 			temp.y = 403;
-			return temp;
-		}
-
-		private function __JingJiChan3_UIAsset13_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhanchang/jingjichang/yiwai.png";
-			temp.x = 765;
-			temp.y = 151;
-			return temp;
-		}
-
-		private function __JingJiChan3_UIAsset14_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhanchang/jingjichang/ming2.png";
-			temp.x = 738;
-			temp.y = 151;
 			return temp;
 		}
 
@@ -221,7 +198,9 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnBack = temp;
 			temp.name = "btnBack";
+			temp.height = 21;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close3;
+			temp.width = 21;
 			temp.x = 905;
 			temp.y = 81;
 			return temp;
@@ -246,6 +225,41 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.styleName = "ui/common/grid/normal/64.png";
 			temp.x = 561;
 			temp.y = 439;
+			return temp;
+		}
+
+		private function imgMing_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			imgMing = temp;
+			temp.name = "imgMing";
+			temp.styleName = "ui/app/zhanchang/jingjichang/ming2.png";
+			temp.x = 738;
+			temp.y = 151;
+			return temp;
+		}
+
+		private function imgYiwai_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			imgYiwai = temp;
+			temp.name = "imgYiwai";
+			temp.styleName = "ui/app/zhanchang/jingjichang/yiwai.png";
+			temp.x = 765;
+			temp.y = 151;
+			return temp;
+		}
+
+		private function labReward_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			labReward = temp;
+			temp.name = "labReward";
+			temp.text = "可领取奖励";
+			temp.color = 0x5CB006;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 705;
+			temp.y = 552;
 			return temp;
 		}
 
@@ -300,7 +314,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.height = 25;
 			temp.label = "2000";
 			temp.styleClass = org.mokylin.skin.app.zhanchang.uinumber.UINumberNumber3;
-			temp.width = 103;
+			temp.width = 76;
 			temp.x = 665;
 			temp.y = 151;
 			return temp;

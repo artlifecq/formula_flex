@@ -2,10 +2,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 {
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Label;
-	import feathers.controls.List;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.component.list.ListSkin1;
 
 	/**
 	 * @private
@@ -17,9 +15,11 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var ListItem:feathers.controls.List;
+		public var imgBg:feathers.controls.UIAsset;
 
 		public var labTitle:feathers.controls.Label;
+
+		public var labTitle0:feathers.controls.Label;
 
 		public var uiDown:feathers.controls.UIAsset;
 
@@ -34,9 +34,9 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			super();
 			
 			this.currentState = "normal";
-			this.height = 24;
+			this.height = 27;
 			this.width = 276;
-			this.elementsContent = [__JingJiPaiMing_UIAsset1_i(),uiDown_i(),uiUp_i(),labTitle_i(),ListItem_i()];
+			this.elementsContent = [imgBg_i(),uiDown_i(),uiUp_i(),labTitle_i(),labTitle0_i()];
 			
 			states = {
 			};
@@ -47,27 +47,31 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function ListItem_i():feathers.controls.List
+		private function imgBg_i():feathers.controls.UIAsset
 		{
-			var temp:feathers.controls.List = new feathers.controls.List();
-			ListItem = temp;
-			temp.name = "ListItem";
-			temp.height = 188;
-			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			imgBg = temp;
+			temp.name = "imgBg";
+			temp.height = 27;
+			temp.styleName = "ui/app/zhanchang/jingjichang/kuang.png";
 			temp.width = 276;
-			temp.x = 0;
-			temp.y = 25;
 			return temp;
 		}
 
-		private function __JingJiPaiMing_UIAsset1_i():feathers.controls.UIAsset
+		private function labTitle0_i():feathers.controls.Label
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.bottom = 0;
-			temp.left = 0;
-			temp.right = 0;
-			temp.styleName = "ui/app/zhanchang/jingjichang/kuang.png";
-			temp.top = 0;
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			labTitle0 = temp;
+			temp.name = "labTitle0";
+			temp.height = 72;
+			temp.leading = 2;
+			temp.letterSpacing = 0;
+			temp.text = "您成功击败羽林校尉，排名升至1460";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 260;
+			temp.x = 5;
+			temp.y = 19;
 			return temp;
 		}
 
@@ -79,8 +83,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.text = "您成功击败羽林校尉，排名升至1460";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 238;
-			temp.x = 17;
+			temp.width = 247;
+			temp.x = 5;
 			temp.y = 3;
 			return temp;
 		}
@@ -102,7 +106,6 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			uiUp = temp;
 			temp.name = "uiUp";
 			temp.styleName = "ui/app/zhanchang/jingjichang/shang.png";
-			temp.visible = false;
 			temp.x = 258;
 			temp.y = 9;
 			return temp;

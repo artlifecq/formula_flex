@@ -1,5 +1,6 @@
 package org.mokylin.skin.app.zhanchang.jingjichang
 {
+	import feathers.controls.Group;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import feathers.controls.UINumber;
@@ -15,6 +16,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var gRank:feathers.controls.Group;
+
 		public var icon1:feathers.controls.UIAsset;
 
 		public var imgHat:feathers.controls.UIAsset;
@@ -36,7 +39,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			this.currentState = "normal";
 			this.height = 74;
 			this.width = 483;
-			this.elementsContent = [__PaiMingItem_UIAsset1_i(),imgHat_i(),uiL1_i(),uiL2_i(),numLevel_i(),icon1_i()];
+			this.elementsContent = [__PaiMingItem_UIAsset1_i(),imgHat_i(),gRank_i(),icon1_i()];
 			
 			states = {
 			};
@@ -53,6 +56,17 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.styleName = "ui/app/zhanchang/jingjichang/tiaokuang.png";
 			temp.x = 0;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function gRank_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			gRank = temp;
+			temp.name = "gRank";
+			temp.x = 25;
+			temp.y = 49;
+			temp.elementsContent = [uiL1_i(),uiL2_i(),numLevel_i()];
 			return temp;
 		}
 
@@ -87,8 +101,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.label = "1";
 			temp.styleClass = org.mokylin.skin.app.zhanchang.uinumber.UINumberNumber2;
 			temp.width = 27;
-			temp.x = 43;
-			temp.y = 49;
+			temp.x = 18;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -98,8 +112,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			uiL1 = temp;
 			temp.name = "uiL1";
 			temp.styleName = "ui/app/zhanchang/jingjichang/di.png";
-			temp.x = 25;
-			temp.y = 49;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -109,8 +123,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			uiL2 = temp;
 			temp.name = "uiL2";
 			temp.styleName = "ui/app/zhanchang/jingjichang/ming.png";
-			temp.x = 50;
-			temp.y = 49;
+			temp.x = 25;
+			temp.y = 0;
 			return temp;
 		}
 

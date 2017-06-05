@@ -1,5 +1,6 @@
 package com.rpgGame.app.sender
 {
+	import com.rpgGame.netData.zhengba.message.CSBuyTimeOrPowerMessage;
 	import com.rpgGame.netData.zhengba.message.CSChallengeDataMessage;
 	import com.rpgGame.netData.zhengba.message.CSDrawAwardMessage;
 	import com.rpgGame.netData.zhengba.message.CSOpenArardPanelMessage;
@@ -14,6 +15,12 @@ package com.rpgGame.app.sender
 		{
 			super();
 		}
+		public static function reqBuyTimeOrPower(type:int):void
+		{
+			var msg:CSBuyTimeOrPowerMessage=new CSBuyTimeOrPowerMessage();
+			msg.type=type;
+			SocketConnection.send(msg);
+		}
 		public static function reqChallegeRankData(type:int):void
 		{
 			var msg:CSChallengeDataMessage=new CSChallengeDataMessage();
@@ -26,10 +33,11 @@ package com.rpgGame.app.sender
 		
 			SocketConnection.send(msg);
 		}
-		public static function reqStartFight(player:long):void
+		public static function reqStartFight(player:long,type:int):void
 		{
 			var msg:CSStartChallengeMessage=new CSStartChallengeMessage();
 			msg.targetId=player;
+			msg.type=type;
 			SocketConnection.send(msg);
 		}
 		public static function reqRewardPanelData():void

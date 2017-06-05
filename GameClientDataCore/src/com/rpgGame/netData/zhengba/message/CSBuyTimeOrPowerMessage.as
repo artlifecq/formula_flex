@@ -1,5 +1,4 @@
 package com.rpgGame.netData.zhengba.message{
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -9,14 +8,11 @@ package com.rpgGame.netData.zhengba.message{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * 开始争霸
+	 * 购买挑战次数或战斗力
 	 */
-	public class CSStartChallengeMessage extends Message {
+	public class CSBuyTimeOrPowerMessage extends Message {
 	
-		//挑战目标id
-		private var _targetId: long;
-		
-		//1 正常数据     2 挑战 前三 名
+		//1 购买次数  2 购买战斗力
 		private var _type: int;
 		
 		
@@ -24,9 +20,7 @@ package com.rpgGame.netData.zhengba.message{
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
-			//挑战目标id
-			writeLong(_targetId);
-			//1 正常数据     2 挑战 前三 名
+			//1 购买次数  2 购买战斗力
 			writeInt(_type);
 			return true;
 		}
@@ -35,9 +29,7 @@ package com.rpgGame.netData.zhengba.message{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
-			//挑战目标id
-			_targetId = readLong();
-			//1 正常数据     2 挑战 前三 名
+			//1 购买次数  2 购买战斗力
 			_type = readInt();
 			return true;
 		}
@@ -47,26 +39,11 @@ package com.rpgGame.netData.zhengba.message{
 		 * @return 
 		 */
 		override public function getId(): int {
-			return 127103;
+			return 127110;
 		}
 		
 		/**
-		 * get 挑战目标id
-		 * @return 
-		 */
-		public function get targetId(): long{
-			return _targetId;
-		}
-		
-		/**
-		 * set 挑战目标id
-		 */
-		public function set targetId(value: long): void{
-			this._targetId = value;
-		}
-		
-		/**
-		 * get 1 正常数据     2 挑战 前三 名
+		 * get 1 购买次数  2 购买战斗力
 		 * @return 
 		 */
 		public function get type(): int{
@@ -74,7 +51,7 @@ package com.rpgGame.netData.zhengba.message{
 		}
 		
 		/**
-		 * set 1 正常数据     2 挑战 前三 名
+		 * set 1 购买次数  2 购买战斗力
 		 */
 		public function set type(value: int): void{
 			this._type = value;

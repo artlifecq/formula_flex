@@ -1,6 +1,6 @@
 package com.rpgGame.netData.zhengba.message{
-	import com.rpgGame.netData.zhengba.bean.PlayerBriefInfo;
 	import com.rpgGame.netData.zhengba.bean.ZhengBaData;
+	import com.rpgGame.netData.zhengba.bean.ZhengBaBriefInfo;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -21,7 +21,7 @@ package com.rpgGame.netData.zhengba.message{
 		private var _type: int;
 		
 		//挑战集合
-		private var _playerBriefInfos: Vector.<PlayerBriefInfo> = new Vector.<PlayerBriefInfo>();
+		private var _zhengBaBriefInfo: Vector.<ZhengBaBriefInfo> = new Vector.<ZhengBaBriefInfo>();
 		
 		/**
 		 * 写入字节缓存
@@ -33,9 +33,9 @@ package com.rpgGame.netData.zhengba.message{
 			//1 正常数据     2 挑战 前三 名
 			writeInt(_type);
 			//挑战集合
-			writeShort(_playerBriefInfos.length);
-			for (i = 0; i < _playerBriefInfos.length; i++) {
-				writeBean(_playerBriefInfos[i]);
+			writeShort(_zhengBaBriefInfo.length);
+			for (i = 0; i < _zhengBaBriefInfo.length; i++) {
+				writeBean(_zhengBaBriefInfo[i]);
 			}
 			return true;
 		}
@@ -50,9 +50,9 @@ package com.rpgGame.netData.zhengba.message{
 			//1 正常数据     2 挑战 前三 名
 			_type = readInt();
 			//挑战集合
-			var playerBriefInfos_length : int = readShort();
-			for (i = 0; i < playerBriefInfos_length; i++) {
-				_playerBriefInfos[i] = readBean(PlayerBriefInfo) as PlayerBriefInfo;
+			var zhengBaBriefInfo_length : int = readShort();
+			for (i = 0; i < zhengBaBriefInfo_length; i++) {
+				_zhengBaBriefInfo[i] = readBean(ZhengBaBriefInfo) as ZhengBaBriefInfo;
 			}
 			return true;
 		}
@@ -99,15 +99,15 @@ package com.rpgGame.netData.zhengba.message{
 		 * get 挑战集合
 		 * @return 
 		 */
-		public function get playerBriefInfos(): Vector.<PlayerBriefInfo>{
-			return _playerBriefInfos;
+		public function get zhengBaBriefInfo(): Vector.<ZhengBaBriefInfo>{
+			return _zhengBaBriefInfo;
 		}
 		
 		/**
 		 * set 挑战集合
 		 */
-		public function set playerBriefInfos(value: Vector.<PlayerBriefInfo>): void{
-			this._playerBriefInfos = value;
+		public function set zhengBaBriefInfo(value: Vector.<ZhengBaBriefInfo>): void{
+			this._zhengBaBriefInfo = value;
 		}
 		
 	}

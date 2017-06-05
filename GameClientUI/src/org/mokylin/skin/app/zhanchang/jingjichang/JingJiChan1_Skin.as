@@ -8,6 +8,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import feathers.controls.UINumber;
+	import org.mokylin.skin.app.zhanchang.ZhangCheng_Scene;
 	import org.mokylin.skin.app.zhanchang.button.ButtonFanhui;
 	import org.mokylin.skin.app.zhanchang.button.ButtonJiangli;
 	import org.mokylin.skin.app.zhanchang.button.ButtonTiaozhan;
@@ -41,7 +42,11 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 
 		public var lbTime:feathers.controls.Label;
 
+		public var lbTime0:feathers.controls.Label;
+
 		public var numZhanli:feathers.controls.UINumber;
+
+		public var skinBattke:feathers.controls.SkinnableContainer;
 
 		public var skinInfo:feathers.controls.SkinnableContainer;
 
@@ -70,7 +75,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [__JingJiChan1_Skin_UIAsset2_i(),gNormal_i(),gTop_i(),skinInfo_i(),lbTime_i(),__JingJiChan1_Skin_Label1_i(),numZhanli_i(),btnTiaoZhan_i(),btnBack_i(),btnJiangli_i(),item_msg_i()];
+			this.elementsContent = [__JingJiChan1_Skin_UIAsset2_i(),gNormal_i(),gTop_i(),skinInfo_i(),lbTime_i(),__JingJiChan1_Skin_Label1_i(),numZhanli_i(),btnTiaoZhan_i(),btnBack_i(),btnJiangli_i(),item_msg_i(),skinBattke_i(),lbTime0_i()];
 			
 			states = {
 			};
@@ -170,6 +175,20 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			return temp;
 		}
 
+		private function lbTime0_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbTime0 = temp;
+			temp.name = "lbTime0";
+			temp.text = "每日24点";
+			temp.color = 0x5CB006;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 117;
+			temp.x = 199;
+			temp.y = 548;
+			return temp;
+		}
+
 		private function lbTime_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -178,7 +197,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.text = "挑战刷新时间：";
 			temp.color = 0xBEA757;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 184;
+			temp.width = 117;
 			temp.x = 100;
 			temp.y = 548;
 			return temp;
@@ -196,6 +215,21 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.width = 122;
 			temp.x = 777;
 			temp.y = 542;
+			return temp;
+		}
+
+		private function skinBattke_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			skinBattke = temp;
+			temp.name = "skinBattke";
+			temp.height = 512;
+			var skin:StateSkin = new org.mokylin.skin.app.zhanchang.ZhangCheng_Scene()
+			temp.skin = skin
+			temp.visible = false;
+			temp.width = 922;
+			temp.x = 14;
+			temp.y = 69;
 			return temp;
 		}
 
@@ -320,8 +354,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			var skin:StateSkin = new org.mokylin.skin.app.zhanchang.jingjichang.RoleItem2()
 			temp.skin = skin
 			temp.width = 187;
-			temp.x = 254;
-			temp.y = 0;
+			temp.x = 260;
+			temp.y = -15;
 			return temp;
 		}
 

@@ -64,7 +64,7 @@ package com.rpgGame.appModule.battle
 			}
 			_curView=sub;
 			this.addChild(_curView);
-			Object(_curView).onShow();
+			
 		}
 		override public function show(data:*=null, openTable:String="0", parentContiner:DisplayObjectContainer=null):void 
 		{

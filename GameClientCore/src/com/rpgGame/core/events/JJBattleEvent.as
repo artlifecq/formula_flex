@@ -14,17 +14,22 @@ package com.rpgGame.core.events
 		 */		
 		public static const GET_PANEL_DATA:int=UNIQUEID.NEXT;
 		/**
-		 *挑战日志 
+		 *可挑战玩家数据
 		 */		
-		public static const GET_LOG_DATA:int=UNIQUEID.NEXT;
+		public static const GET_FIGHTERS_DATA:int=UNIQUEID.NEXT;
 		/**
 		 *奖励数据 
 		 */		
-		public static const GET_REWARD_DATA:int=UNIQUEID.NEXT;
+		public static const GET_REWARD_PANEL_DATA:int=UNIQUEID.NEXT;
 		/**
 		 *战斗结果 
 		 */		
 		public static const GET_FIGHT_RESULT:int=UNIQUEID.NEXT;
+		
+		/**
+		 *获取奖励结果
+		 */		
+		public static const GET_REWARD_RESULT:int=UNIQUEID.NEXT;
 		
 	}
 }

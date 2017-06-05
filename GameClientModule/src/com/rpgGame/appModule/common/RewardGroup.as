@@ -61,6 +61,7 @@ package com.rpgGame.appModule.common
 		private var pool:Vector.<Object>=new Vector.<Object>();
 		private var initW:int;
 		private var initH:int;
+		private var _data:Vector.<ClientItemInfo>;
 		public function RewardGroup(g:UIAsset,ali:int=ALIN_LEFT,cellNum:int=10,dx:int=2,dy:int=2)
 		{
 			super();
@@ -82,11 +83,13 @@ package com.rpgGame.appModule.common
 		public function setReward(items:Vector.<ClientItemInfo>):void
 		{
 			clear();
+			_data=items;
 			var len:int=items.length;
 			var obj:Object;
 			for (var i:int = 0; i < len; i++) 
 			{
 				obj=getIcon();
+				icons.push(obj);
 				FaceUtil.SetItemGrid(obj.icon,items[i]);
 			}
 			layout();
@@ -121,6 +124,9 @@ package com.rpgGame.appModule.common
 				dis=icons[i].bg;
 				tmpX=(i%cellMaxNum)*(initW+dX);
 				tmpY=int(i/cellMaxNum)*(initH+dY);	
+				
+				dis.x=tmpX;
+				dis.y=tmpY;
 				this.addChild(dis);
 			}
 			
@@ -137,6 +143,8 @@ package com.rpgGame.appModule.common
 				dis=icons[i].bg;
 				tmpX=maxX-(i%cellMaxNum)*(initW+dX);
 				tmpY=int(i/cellMaxNum)*(initH+dY);	
+				dis.x=tmpX;
+				dis.y=tmpY;
 				this.addChild(dis);
 			}
 		}
@@ -162,6 +170,8 @@ package com.rpgGame.appModule.common
 				now=last-(i%center)*mul;
 				tmpX=add+(now)*(initW+dX);
 				tmpY=int(i/cellMaxNum)*(initH+dY);	
+				dis.x=tmpX;
+				dis.y=tmpY;
 				mul*=-1;
 				last=now;
 				this.addChild(dis);
@@ -175,6 +185,7 @@ package com.rpgGame.appModule.common
 				MCUtil.removeSelf(icon.bg);
 				pool.push(icon);
 			}
+			icons.length=0;
 		}
 		private function getIcon():Object
 		{
@@ -184,6 +195,7 @@ package com.rpgGame.appModule.common
 			}
 			var icon:IconCDFace;
 			var bg:UIAsset=MCUtil.cloneUIAssert(grid);
+			bg.touchGroup=false;
 			var size:int=W2S[bg.width];
 			if (size==0) 
 			{
@@ -192,13 +204,19 @@ package com.rpgGame.appModule.common
 			icon=new IconCDFace(size);
 			bg.addChild(icon);
 		
-			icon.x=(bg.width-size)/2;
-			icon.y=(bg.height-size)/2;
+//			icon.x=(bg.width-size)/2;
+//			icon.y=(bg.height-size)/2;
 			
 			var obj:Object={};
 			obj.bg=bg;
 			obj.icon=icon;
 			return obj;
 		}
+
+		public function get data():Vector.<ClientItemInfo>
+		{
+			return _data;
+		}
+
 	}
 }

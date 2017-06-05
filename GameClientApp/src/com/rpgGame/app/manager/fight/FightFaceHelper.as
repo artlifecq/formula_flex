@@ -799,7 +799,7 @@ package com.rpgGame.app.manager.fight
 		 * @param $displayObject
 		 *
 		 */
-		private static function onAtackFaceComplete($displayObject : DisplayObject) : void
+		public static function onAtackFaceComplete($displayObject : DisplayObject) : void
 		{
 			var attackFace : AttackFace = $displayObject as AttackFace;
 			if (null == attackFace)

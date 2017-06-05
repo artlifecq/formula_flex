@@ -214,9 +214,10 @@ package com.rpgGame.app.graphics
 				//普通怪在战斗状态显示血条
 				//我的召唤怪要显示
 				var isMyMonster:Boolean=PKMamager.isMyMonster(_role);
+				var isNpc:Boolean=monster.q_monster_type==MonsterType.NPC;
 				showAndHideElement(_bloodBar, isMyMonster);
 				
-				showAndHideElement(_nameBar, isMyMonster||(isNormal&&_isSelected && nameVisible));
+				showAndHideElement(_nameBar, isNpc||isMyMonster||(isNormal&&_isSelected && nameVisible));
 			}
 			else if (_role.type == SceneCharType.COLLECT) //采集物显示名称
 			{

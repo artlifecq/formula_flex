@@ -11,6 +11,8 @@ package com.rpgGame.coreData.enum
 		
 		public static const SHOP_BACKPACK:int=1;
 		
+		public static const SHOP_SW:int=2;
+		
 		
 		
 		
@@ -35,5 +37,7 @@ package com.rpgGame.coreData.enum
 		
 		//背包商店常用道具
 		public static const BKSHOP_NORMAL:int=5;
+		
+		public static const SWSHOP_NORMAL:int=6;
 	}
 }

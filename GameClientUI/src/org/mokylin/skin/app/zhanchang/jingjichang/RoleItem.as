@@ -17,6 +17,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var imgCon:feathers.controls.UIAsset;
+
 		public var lbLevel:feathers.controls.Label;
 
 		public var lbName:feathers.controls.Label;
@@ -24,8 +26,6 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 		public var numZhanli:feathers.controls.UINumber;
 
 		public var uiGuan:feathers.controls.UIAsset;
-
-		public var uiTiaoZhan:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -37,7 +37,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			
 			this.currentState = "normal";
 			this.width = 176;
-			this.elementsContent = [__RoleItem_UIAsset1_i(),__RoleItem_UIAsset2_i(),uiGuan_i(),lbLevel_i(),lbName_i(),numZhanli_i(),__RoleItem_UIAsset3_i(),uiTiaoZhan_i()];
+			this.elementsContent = [__RoleItem_UIAsset1_i(),imgCon_i(),uiGuan_i(),lbLevel_i(),lbName_i(),numZhanli_i(),__RoleItem_UIAsset2_i()];
 			
 			states = {
 			};
@@ -60,19 +60,21 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 		private function __RoleItem_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/common/zhandouli.png";
+			temp.x = 24;
+			temp.y = 358;
+			return temp;
+		}
+
+		private function imgCon_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			imgCon = temp;
+			temp.name = "imgCon";
 			temp.height = 316;
 			temp.width = 150;
 			temp.x = 12;
 			temp.y = 0;
-			return temp;
-		}
-
-		private function __RoleItem_UIAsset3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/zhandouli.png";
-			temp.x = 24;
-			temp.y = 358;
 			return temp;
 		}
 
@@ -86,7 +88,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.color = 0xBEA757;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 72;
-			temp.x = 78;
+			temp.x = 65;
 			temp.y = 318;
 			return temp;
 		}
@@ -102,7 +104,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 100;
-			temp.x = 43;
+			temp.x = 46;
 			temp.y = 337;
 			return temp;
 		}
@@ -128,19 +130,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			uiGuan = temp;
 			temp.name = "uiGuan";
 			temp.styleName = "ui/app/zhanchang/jingjichang/1.png";
-			temp.x = 57;
+			temp.x = 44;
 			temp.y = 315;
-			return temp;
-		}
-
-		private function uiTiaoZhan_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			uiTiaoZhan = temp;
-			temp.name = "uiTiaoZhan";
-			temp.styleName = "ui/app/zhanchang/jingjichang/tiaozhan.png";
-			temp.x = 66;
-			temp.y = 214;
 			return temp;
 		}
 

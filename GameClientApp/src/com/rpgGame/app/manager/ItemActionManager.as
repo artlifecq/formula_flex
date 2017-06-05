@@ -18,6 +18,7 @@ package com.rpgGame.app.manager
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.ui.Mouse;
+	import flash.utils.setTimeout;
 	
 	import feathers.controls.UIAsset;
 	
@@ -46,6 +47,18 @@ package com.rpgGame.app.manager
 				addTweenHT(null,iconFace,null);
 			}
 			
+		}
+		public static function flyItemsToBag(itemsIdArr:Array):void
+		{
+			if (itemsIdArr==null||itemsIdArr.length==0) 
+			{
+				return;
+			}
+			var len:int=itemsIdArr.length;
+			for (var i:int = 0; i <len; i++) 
+			{
+				setTimeout(flyItemToBag,0.2*i,itemsIdArr[i]);
+			}
 		}
 		/**
 		 * 物品缓动进包裹 

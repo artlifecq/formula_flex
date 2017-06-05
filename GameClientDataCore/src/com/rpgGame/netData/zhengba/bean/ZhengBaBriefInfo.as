@@ -1,6 +1,7 @@
 package com.rpgGame.netData.zhengba.bean{
 	import com.rpgGame.netData.player.bean.PlayerAppearanceInfo;
 	
+	import org.game.netCore.data.long;
 	
 	import org.game.netCore.net.Bean;
 	
@@ -13,8 +14,11 @@ package com.rpgGame.netData.zhengba.bean{
 	 * 
 	 * 基本信息
 	 */
-	public class PlayerBriefInfo extends Bean {
+	public class ZhengBaBriefInfo extends Bean {
 	
+		//玩家id
+		private var _playerId: long;
+		
 		//玩家外观
 		private var _playerAppearanceInfo: com.rpgGame.netData.player.bean.PlayerAppearanceInfo;
 		
@@ -31,6 +35,8 @@ package com.rpgGame.netData.zhengba.bean{
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
+			//玩家id
+			writeLong(_playerId);
 			//玩家外观
 			writeBean(_playerAppearanceInfo);
 			//玩家名字
@@ -46,6 +52,8 @@ package com.rpgGame.netData.zhengba.bean{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
+			//玩家id
+			_playerId = readLong();
 			//玩家外观
 			_playerAppearanceInfo = readBean(com.rpgGame.netData.player.bean.PlayerAppearanceInfo) as com.rpgGame.netData.player.bean.PlayerAppearanceInfo;
 			//玩家名字
@@ -55,6 +63,21 @@ package com.rpgGame.netData.zhengba.bean{
 			//战斗力
 			_fightPower = readInt();
 			return true;
+		}
+		
+		/**
+		 * get 玩家id
+		 * @return 
+		 */
+		public function get playerId(): long{
+			return _playerId;
+		}
+		
+		/**
+		 * set 玩家id
+		 */
+		public function set playerId(value: long): void{
+			this._playerId = value;
 		}
 		
 		/**
