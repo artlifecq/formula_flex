@@ -4,6 +4,7 @@ package com.rpgGame.app.manager.fightsoul
 	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.role.SceneRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.UNIQUEID;
 	import com.rpgGame.coreData.cfg.FightsoulData;
@@ -47,6 +48,20 @@ package com.rpgGame.app.manager.fightsoul
 			updataSceneMode();
 			updataSKill();
 		}
+		
+		public static function updateRoleAvatar(owner:SceneRole):void
+		{
+			var fightSoulLevel:int;
+			var fightSoulRole:SceneRole = SceneRoleManager.getInstance().createFightSoulRole(owner);
+			if (fightSoulRole)
+			{
+				fightSoulLevel = (owner.data as HeroData).fightSoulLevel;
+				fightSoulRole.data.avatarInfo.setBodyResID(("blood/an_cj_blood_" + fightSoulLevel), null);
+				fightSoulRole.data.avatarInfo.setBodyEffectResIDs = "tx_cj_blood_" + fightSoulLevel;
+				AvatarManager.updateAvatar(fightSoulRole);
+			}
+		}
+
 		
 		private var _rewards:Vector.<ClientItemInfo>;
 		public function get RewardInfos():Vector.<ClientItemInfo>
