@@ -15,6 +15,7 @@ package com.rpgGame.app.ui.main.chat
 	import away3d.events.Event;
 	
 	import feathers.controls.Scroller;
+	import feathers.controls.ToggleButton;
 	import feathers.controls.text.Fontter;
 	import feathers.data.ListCollection;
 	import feathers.layout.VerticalLayout;
@@ -36,7 +37,7 @@ package com.rpgGame.app.ui.main.chat
 		private var _skin : panel_ziriSkin;
 		
 		private var _showDatas:Vector.<ResChatMessage>;
-
+		
 		private var bgW:int;
 		private var preTime:int;
 		private var updateTween:TweenLite;
@@ -131,7 +132,10 @@ package com.rpgGame.app.ui.main.chat
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
-			initEvent();
+			initEvent();	
+			_skin.tab_zizhi.selectedIndex=0;
+			_showDatas=ChatManager.systemHearsayMsg;
+			updateTxt();
 		}
 		
 		override public function hide():void

@@ -25,6 +25,10 @@ package com.rpgGame.coreData.enum.item
 		
 		//寻秦记用以下尺寸
 		/**
+		 *16icon 
+		 */
+		public static const ICON_16:int=16;
+		/**
 		 *36icon 
 		 */
 		public static const ICON_24:int=24;
