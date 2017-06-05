@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.skill
 {
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.app.ui.TabBarPanel;
 	import com.rpgGame.app.ui.tab.FuncTabBar;
 	import com.rpgGame.app.ui.tab.UITabBarData;
 	import com.rpgGame.coreData.enum.EmFunctionID;
@@ -17,7 +18,7 @@ package com.rpgGame.appModule.skill
 	 * @author dik
 	 * 
 	 */
-	public class SkillPanel extends SkinUIPanel
+	public class SkillPanel extends TabBarPanel
 	{
 		private var _skin:Wuxue_Skin;
 		
@@ -30,34 +31,12 @@ package com.rpgGame.appModule.skill
 		{
 			_skin=new Wuxue_Skin();
 			super(_skin);
-			initView();
 		}
 		
-		private function initView():void
+		override protected function initTabBarDatas():void
 		{
-			var tabDatas:Vector.<UITabBarData>=new Vector.<UITabBarData>();
-			var num:int=_tabStyles.length;
-			for (var i:int = 0; i <num; i++) 
-			{
-				var item:UITabBarData=new UITabBarData(_tabStyles[i],_viewStyles[i]);
-				item.tabKey=_funcId[i];//标签键为功能id
-				tabDatas.push(item);
-			}
-			
-			_tabBar=new FuncTabBar(_skin.tabBar,tabDatas);
-		}
-		
-		
-		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
-		{
-			super.show(data,openTable,parentContiner);
-			_tabBar.show(data,openTable);
-		}
-		
-		override public function hide():void
-		{
-			super.hide();
-			_tabBar.hide();
+			addTabDatas(ButtonJineng,SkillStudyView,EmFunctionID.EM_JINENG);
+			addTabDatas(ButtonJuexue,LostSkillView,EmFunctionID.EM_JUEXUE);
 		}
 	}
 }

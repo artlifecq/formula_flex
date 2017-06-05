@@ -28,7 +28,7 @@ package com.rpgGame.appModule.open
 		private var _qdata:Q_newfunc;
 		private var _button:IOpen;
 		private var _needCreate:Boolean= true;
-		private var _idlist:Vector.<int>;
+		private var _idlist:Vector.<String>;
 		public function OpenPanel():void
 		{
 			_skin = new KaiQi_Skin();
@@ -57,7 +57,7 @@ package com.rpgGame.appModule.open
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
-			_idlist = data as Vector.<int>;
+			_idlist = data as Vector.<String>;
 			refeashView();
 		}
 		

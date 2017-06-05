@@ -19,22 +19,6 @@ package com.rpgGame.app.ui.tab
 		public function FuncTabBar(tab:TabBar, datas:Vector.<UITabBarData>)
 		{
 			super(tab, datas);
-			init();
-		}
-		
-		private function init():void
-		{
-			var num:int=_allDatas.length;
-			var item:UITabBarData;
-			var funcID:int;
-			for(var i:int=0;i<num;i++){
-				item=_allDatas[i];
-				var fundata:Q_newfunc = NewFuncCfgData.getdataById(item.tabKey);
-				if(fundata!=null)
-				{
-					item.text = fundata.q_string_name;
-				}
-			}
 		}
 		
 		override public function show(data:*=null, openTable:String="0"):void

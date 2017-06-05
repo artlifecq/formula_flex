@@ -4,6 +4,7 @@ package com.rpgGame.appModule.dungeon.exp
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.SkinUIModePanel;
+	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.coreData.cfg.DailyZoneCfgData;
@@ -19,17 +20,18 @@ package com.rpgGame.appModule.dungeon.exp
 	
 	import starling.display.DisplayObject;
 
-	public class ExpDungeon extends SkinUIModePanel
+	public class ExpDungeon extends ViewUI
 	{
 		private var _skin:FuBen_JingYan_Skin;
 		private var _dailyZoneInfo:DailyZonePanelInfo;
 		public function ExpDungeon():void
 		{
-			super(FuBen_JingYan_Skin, "经验副本", 1);
+			_skin=new FuBen_JingYan_Skin();
+			super(_skin);
+			initialize();
 		}
-		override protected function initialize():void
+		protected function initialize():void
 		{
-			_skin = _uiskin as FuBen_JingYan_Skin;
 			var list:Array = DailyZoneCfgData.getTypeList(3);
 			var data:Q_daily_zone = list[0] as Q_daily_zone;
 			
@@ -70,7 +72,7 @@ package com.rpgGame.appModule.dungeon.exp
 				_skin.lbShengyu.color = 0xBEA757;
 		}
 		
-		override public function onTouchTarget(target:DisplayObject):void
+		override protected function onTouchTarget(target:DisplayObject):void
 		{
 			switch(target)
 			{
@@ -87,11 +89,6 @@ package com.rpgGame.appModule.dungeon.exp
 					break;
 			}
 		}
-		override public function get isOpen():Boolean
-		{
-			return MainRoleManager.actorInfo.totalStat.level>=60;
-		}
-		
 		override public function hide():void
 		{
 			EventManager.removeEvent(DailyZoneDataManager.UPDATEDAILYZONEINFO,refeashValue);

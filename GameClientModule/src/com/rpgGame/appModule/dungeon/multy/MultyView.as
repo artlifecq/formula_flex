@@ -6,6 +6,7 @@ package com.rpgGame.appModule.dungeon.multy
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.ui.SkinUIModePanel;
+	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.app.AppConstant;
@@ -46,7 +47,7 @@ package com.rpgGame.appModule.dungeon.multy
 	import starling.display.Shape;
 	import starling.display.Sprite;
 
-	public class MultyView extends SkinUIModePanel
+	public class MultyView extends ViewUI
 	{
 		private var _skin:FuBen_DuoRen_Skin;
 		private var scroll_Bar :ScrollContainer;
@@ -61,14 +62,13 @@ package com.rpgGame.appModule.dungeon.multy
 		//private var currCount:int=3;
 		public function MultyView():void
 		{
-			super(FuBen_DuoRen_Skin,"多人副本",1);
+			_skin = new FuBen_DuoRen_Skin();
+			super(_skin);
+			initialize();
 		}
 		private var key:Boolean=false;//临时加的key
-		override protected function initialize():void
+		protected function initialize():void
 		{
-			if(key)return;
-			key=true;
-			_skin = _uiskin as FuBen_DuoRen_Skin;
 			initScroll();
 			creatDungeonItem();
 			creatGlobalReward();
@@ -90,7 +90,7 @@ package com.rpgGame.appModule.dungeon.multy
 			scroll_Bar.addChild(scrollBox);
 			
 		}
-		override public function onTouchTarget(target:DisplayObject):void
+		override protected function onTouchTarget(target:DisplayObject):void
 		{
 			switch (target) {
 				case _skin.btnEnter:
@@ -122,7 +122,7 @@ package com.rpgGame.appModule.dungeon.multy
 		{
 			
 		}
-		override public function showView():void
+		override public function show(data:Object=null):void
 		{
 			setGray();
 			setPassRewardText();

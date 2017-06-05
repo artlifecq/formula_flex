@@ -30,9 +30,9 @@
 			var itemlist:Vector.<String> = new Vector.<String>();
 			for each(var info :Q_newfunc in infos)
 			{
-				if(info.q_level > level)
-					continue;
 				if(_statusMap.getValue(info.q_id)!=null)
+					continue;
+				if(info.q_level > level)
 					continue;
 				_statusMap.add(info.q_id,info);
 				itemlist.push(info.q_id);
@@ -40,7 +40,7 @@
 			if(isdispatch)
 			{
 				if(itemlist.length>0)
-					AppManager.showAppNoHide(AppConstant.OPEN_FUNCTION,itemlist);
+					AppManager.showAppNoHide(AppConstant.OPEN_FUNCTION,itemlist.concat());
 				else
 					AppManager.hideApp(AppConstant.OPEN_FUNCTION);
 				EventManager.dispatchEvent(FunctionOpenEvent.FUNCTIONOPENID,itemlist);
