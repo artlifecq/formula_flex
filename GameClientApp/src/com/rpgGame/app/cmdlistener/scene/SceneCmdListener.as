@@ -732,7 +732,6 @@ package com.rpgGame.app.cmdlistener.scene
 			}
 			else if(qData.q_monster_type==4)//npc创建流程       对应 改的东西太多了 先保留
 			{
-				GameLog.addShow("~~~~~~~~~~~~~~~~~~npc创建:"+info.distributeId);
 				data = new MonsterData(RoleType.TYPE_MONSTER);
 				data.serverID = info.monsterId;
 				data.id = info.monsterId.ToGID();
