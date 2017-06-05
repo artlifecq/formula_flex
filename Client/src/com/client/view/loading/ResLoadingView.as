@@ -1,8 +1,8 @@
 package com.client.view.loading
 {
-	import com.client.ClientGlobal;
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.gameClient.log.GameLog;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	
 	import flash.display.MovieClip;
 	import flash.display.Stage;
@@ -10,8 +10,6 @@ package com.client.view.loading
 	import flash.filters.BitmapFilterQuality;
 	import flash.filters.GlowFilter;
 	import flash.text.TextField;
-	
-	import mx.core.mx_internal;
 	
 	import away3d.loaders.multi.MultiLoadData;
 	
@@ -71,7 +69,7 @@ package com.client.view.loading
 			_loadingMC = _firstLoadMc["mc"];
 			
 			_themeLoader = new ThemeLoader();
-			_themeLoader.load(ClientGlobal.getLoadingResUrl(), onResLoaded, null, onResError);
+			_themeLoader.load(ClientConfig.getLoadingResUrl(), onResLoaded, null, onResError);
 		}
 		
 		private function onResLoaded(loader : ThemeLoader) : void
@@ -88,7 +86,7 @@ package com.client.view.loading
 			bar.barLine.mask=sp;
 			bar.container.addChild(sp);
 			_resLoadingViewSkin.toSprite(_container);
-			/*		if (ClientGlobal.isBanShu)
+			/*		if (ClientConfig.isBanShu)
 			{
 			_resLoadingViewSkin.healthInfoGroup.visible = true;
 			_resLoadingViewSkin.healthInfoTxt1.nativeFilters = getDefaultStrokeFilter();
@@ -111,7 +109,7 @@ package com.client.view.loading
 		
 		private function onResError(ld : MultiLoadData, e : Event) : void
 		{
-			GameLog.addShow("========资源加载进度界面资源加载错误：" + ClientGlobal.getLoadingResUrl());
+			GameLog.addShow("========资源加载进度界面资源加载错误：" + ClientConfig.getLoadingResUrl());
 		}
 		
 		private function removeFirstLoadMc() : void

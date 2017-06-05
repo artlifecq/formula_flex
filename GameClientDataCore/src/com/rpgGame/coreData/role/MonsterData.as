@@ -39,9 +39,9 @@ package com.rpgGame.coreData.role
 		public var immuneDeadBeat : Boolean = false;
 		public var ownerName : String = "";
 
-		public function MonsterData(type : int) : void
+		public function MonsterData(type : int, priority:int=100) : void
 		{
-			super(type);
+			super(type,priority);
 		}
 
 		public function get monsterData() : Q_monster

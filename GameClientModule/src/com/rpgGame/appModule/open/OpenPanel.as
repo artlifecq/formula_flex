@@ -20,6 +20,7 @@ package com.rpgGame.appModule.open
 	
 	import org.mokylin.skin.app.xingongneng.KaiQi_Skin;
 	
+	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 	
 	public class OpenPanel extends SkinUIPanel
@@ -28,7 +29,8 @@ package com.rpgGame.appModule.open
 		private var _qdata:Q_newfunc;
 		private var _button:IOpen;
 		private var _needCreate:Boolean= true;
-		private var _idlist:Vector.<int>;
+		private var _idlist:Vector.<String>;
+		private var _effect:InterObject3D;
 		public function OpenPanel():void
 		{
 			_skin = new KaiQi_Skin();
@@ -40,27 +42,37 @@ package com.rpgGame.appModule.open
 		private function initView():void
 		{
 			this.visible = true;
-			var effect:InterObject3D = new InterObject3D();
+			_effect = new InterObject3D();
 			var data : RenderParamData3D = new RenderParamData3D(0, "effect_ui", ClientConfig.getEffect("tx_xingongnengkaiqi"));
 			data.forceLoad=true;//ui上的3d特效强制加载
-			effect.addRenderUnitWith(data, 1,onPlayComplete);
-			this.addChild3D(effect,0);
-			effect.x = this.width/2;
-			effect.y = 95;
+			_effect.addRenderUnitWith(data, 1,onPlayComplete);
+			this.addChild3D(_effect,0);
+			_effect.x = this.width/2;
+			_effect.y = 95;
 		}
 		private function onPlayComplete(sr3D : InterObject3D):void
 		{
 			this.removeChild(sr3D);
+			_effect = null;
 			runFly();
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
-			_idlist = data as Vector.<int>;
+			_idlist = data as Vector.<String>;
 			refeashView();
 		}
 		
+		override protected function onTouchTarget(target:DisplayObject):void
+		{
+			if(_effect!=null)
+			{
+				_effect.stop();
+				_effect = null;
+			}
+			runFly();
+		}
 		private function refeashView():void
 		{
 			if(_idlist==null||_idlist.length<=0)

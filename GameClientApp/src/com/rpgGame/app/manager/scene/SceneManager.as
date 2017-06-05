@@ -16,6 +16,7 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.task.TouJingManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.cfg.ClientSceneNpcCfgData;
@@ -70,6 +71,8 @@ package com.rpgGame.app.manager.scene
 		 * 场景中的可视范围 
 		 */		
 		private static var _viewDistance : int = 4000;
+		
+		private static var _serverHeroCount:int = 0;
 
 		public static function setup() : void
 		{
@@ -731,6 +734,21 @@ package com.rpgGame.app.manager.scene
 				}
 			}
 			return null;
+		}
+		
+		public static function get serverHeroCount():int
+		{
+			return _serverHeroCount;
+		}
+		
+		public static function set serverHeroCount(value:int):void
+		{
+			if (_serverHeroCount == value)
+			{
+				return;
+			}
+			_serverHeroCount = value;
+//			SceneSender.sceneChangeViewRange(_serverHeroCount);
 		}
 		
 		private static var _scene:Scene;

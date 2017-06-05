@@ -201,6 +201,18 @@ package com.rpgGame.app.manager
 		{//L.l("删除阻挡区域："+aid);//return;
 			SceneManager.getScene().sceneMapLayer.removeObstaclePoints(["MapDataDynamicObstacleArea" + aid]);
 		}
+		
+		public static function getRoleInMapDataSwimArea(role:SceneRole):ClientMapAreaData
+		{
+			var _local4:AreaMap = SceneManager.getScene().getAreaMap(4);
+			var _local3:AreaMapData = _local4.getFlag(role.x, role.z);
+			var _local2:Object = _local3 ? _local3.data : null;
+			if (_local2 is ClientMapAreaData && ClientMapAreaData(_local2).type == 9)
+			{
+				return ClientMapAreaData(_local2);
+			}
+			return null;
+		}
 
 		/**
 		 * 更新地图数据区域图

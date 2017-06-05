@@ -61,7 +61,7 @@ package com.rpgGame.coreData.type
 		/** 客户端NPC 22 */
 		public static const CLIENT_NPC : String = rEnum.next.toString();
 
-		public static const XUE_WEN : String = rEnum.next.toString();
+		public static const FIGHT_SOUL : String = rEnum.next.toString();
 		
 		public static const BORN_EFFECT:String = rEnum.next.toString();
 		

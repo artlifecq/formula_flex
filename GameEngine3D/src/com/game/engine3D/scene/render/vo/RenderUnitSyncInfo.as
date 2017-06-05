@@ -9,9 +9,21 @@ package com.game.engine3D.scene.render.vo
 	 */
 	public class RenderUnitSyncInfo
 	{
+		/**
+		 * 动作名称 
+		 */		
 		private var _status : String;
+		/**
+		 * 播放速率 
+		 */		
 		private var _animateSpeed : Number;
+		/**
+		 * 是否是播放中 
+		 */		
 		private var _playing : Boolean;
+		/**
+		 * 当前播放时间 
+		 */		
 		private var _time : int;
 
 		public function RenderUnitSyncInfo(status : String, animateSpeed : Number, playing : Boolean, time : int)
