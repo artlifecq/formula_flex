@@ -1,6 +1,7 @@
 package com.rpgGame.app.manager.task
 {
 	import com.adobe.serialization.json.JSON;
+	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
@@ -363,6 +364,8 @@ package com.rpgGame.app.manager.task
 		/**是否是主线任务回复npc*/
 		public static function isMainTaskNpc(mid:int):Boolean
 		{
+			GameLog.addShow("isMainTaskNpc-mid"+mid);
+			GameLog.addShow("isMainTaskNpc-q_finish_npc"+mainTaskData.q_finish_npc);
 			if(mainTaskData!=null&&mainTaskData.q_finish_npc==mid)
 			{
 				return true
