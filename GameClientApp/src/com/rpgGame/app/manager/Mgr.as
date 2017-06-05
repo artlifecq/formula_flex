@@ -34,6 +34,9 @@ package com.rpgGame.app.manager
 		{
 			return VipManager.ins;
 		}
-		
+		public static function get jjBattleMgr():JJBattleManager
+		{
+			return JJBattleManager.ins;
+		}
 	}
 }

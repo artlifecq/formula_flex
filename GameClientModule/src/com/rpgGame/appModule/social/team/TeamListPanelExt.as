@@ -86,11 +86,13 @@ package  com.rpgGame.appModule.social.team
 			 update();
 			 timer.start();
 			 onTimer();
+			 TeamSender.ReqOpenOrCloseTeamPanel(1,0);
 		 }
 		 override protected function onHide():void
 		 {
 			 super.onHide();
 			 timer.stop();
+			 TeamSender.ReqOpenOrCloseTeamPanel(1,1);
 		 }
 		private function registerListeners():void
 		{

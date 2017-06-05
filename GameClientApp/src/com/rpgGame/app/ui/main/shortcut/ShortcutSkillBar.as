@@ -80,6 +80,10 @@ package com.rpgGame.app.ui.main.shortcut
 				if (shortcutData == null||shortcutData.type!=ShortcutsTypeEnum.ITEM_TYPE)
 					return;
 				var itemInfo : ClientItemInfo =BackPackManager.instance.getItemById(shortcutData.id);
+				if (!itemInfo) 
+				{
+					itemInfo=new ClientItemInfo(shortcutData.id);
+				}
 				itemInfo.count = BackPackManager.instance.getItemCount(shortcutData.id);
 				FaceUtil.SetItemGrid(_gridF1, itemInfo);
 				_gridF1.isEnabled = itemInfo.count > 0;
@@ -121,7 +125,8 @@ package com.rpgGame.app.ui.main.shortcut
 				cd.setBg(GridBGType.GRID_SIZE_48);
 				addChild(cd);
 				_gridVect.push(cd);
-//				cd.showShortCutText(SHORTCUTS_KEY[i]);
+				//
+ 			 //cd.showShortCutText(SHORTCUTS_KEY[i]);
 			}
 			//f1
 			
@@ -269,6 +274,10 @@ package com.rpgGame.app.ui.main.shortcut
 
 				case ShortcutsTypeEnum.ITEM_TYPE:
 					var itemInfo : ClientItemInfo = BackPackManager.instance.getItemById( shortData.id);
+					if (!itemInfo) 
+					{
+						itemInfo=new ClientItemInfo(shortData.id);
+					}
 					if (itemInfo) 
 					{
 						itemInfo.count = BackPackManager.instance.getItemCount(shortData.id);

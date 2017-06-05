@@ -55,6 +55,11 @@ package com.rpgGame.app.display2D
 		/** 特殊类型会有组合(例如暴击...) **/
 		private var _specialType:String;
 		
+		private var _extendsData:AttackFace;
+		
+		
+		private var startX:int=0;
+		
 		/**
 		 *  
 		 * @param $typeRes
@@ -64,10 +69,10 @@ package com.rpgGame.app.display2D
 		 * @param $specialOffsetPos
 		 * 
 		 */		
-		public function AttackFace( $typeRes:String = "", $numberRes:String = "",  $value:* = 0, $specialType:String=null, $specialOffsetPos:Point = null )
+		public function AttackFace( $typeRes:String = "", $numberRes:String = "",  $value:* = 0, $specialType:String=null, $specialOffsetPos:Point = null,extendData:Object=null)
 		{
 			_specialOffsetPos = $specialOffsetPos || new Point();
-			reSet([  $typeRes, $numberRes, $value, $specialType,_specialOffsetPos]);
+			reSet([  $typeRes, $numberRes, $value, $specialType,_specialOffsetPos,extendData]);
 		}
 		
 		
@@ -87,10 +92,10 @@ package com.rpgGame.app.display2D
 		 * @return AttackFace
 		 * 
 		 */		
-		public static function createAttackFace( $typeRes:String = "", $numberRes:String = "", $value:*=0, $specialType:String=null, $specialOffsetPos:Point=null):AttackFace
+		public static function createAttackFace( $typeRes:String = "", $numberRes:String = "", $value:*=0, $specialType:String=null, $specialOffsetPos:Point=null,extendData:Object=null):AttackFace
 		{
 			//利用池生成AttackFace
-			return attackFacePool.createObj(AttackFace, $typeRes, $numberRes, $value, $specialType, $specialOffsetPos) as AttackFace;
+			return attackFacePool.createObj(AttackFace, $typeRes, $numberRes, $value, $specialType, $specialOffsetPos,extendData) as AttackFace;
 		}
 		/**
 		 * @private
@@ -137,6 +142,12 @@ package com.rpgGame.app.display2D
 			_qianwanBmpStarling=null;
 			_yiBmpStarling=null;
 			_shiyiBmpStarling=null;
+			if (_extendsData) 
+			{
+				_extendsData.dispose();
+				_extendsData=null;
+			}
+			
 		}
 		
 		/**
@@ -152,17 +163,26 @@ package com.rpgGame.app.display2D
 			_specialType = $parameters[3];
 			_specialOffsetPos = $parameters[4] || new Point();
 //			easeFun = Linear.easeOut; 
+			_extendsData=$parameters[5];
+			
 			addTitle();
 			addNumber();
+			
 		}
-		
-		
 		/**
 		 * 文字
 		 * 
 		 */		
 		public function addTitle():void
 		{
+			startX=0;
+			if (_extendsData) 
+			{
+				startX=_extendsData.width+2;
+				_extendsData.x=0;
+				_extendsData.y=0;
+				this.addChild(_extendsData);
+			}
 			if( _typeRes == "" )
 			{
 				if( _txtBmpStarling != null )
@@ -173,7 +193,7 @@ package com.rpgGame.app.display2D
 				return;
 			}
 			
-			var tX:Number = 0;
+			
 			var texture:IStarlingTexture = GuiTheme.ins.getTexture( _typeRes );
 			if( texture == null )
 			{
@@ -195,7 +215,9 @@ package com.rpgGame.app.display2D
 			_txtBmpStarling.touchable = false;
 			
 			_txtBmpStarling.y = -_txtBmpStarling.height * 0.5;
-			tX = _txtBmpStarling.width;
+			//tX = _txtBmpStarling.width;
+			_txtBmpStarling.x=startX;
+			startX+=_txtBmpStarling.width;
 		}
 		
 		/**
@@ -214,12 +236,11 @@ package com.rpgGame.app.display2D
 			if( GuiTheme.ins == null )
 				return;
 			
-			var tX:Number = 0;
+			var tX:Number = startX;
 			var texture:IStarlingTexture;
 			var gap:Number = 5;
 			
-			if( _txtBmpStarling != null )
-				tX = _txtBmpStarling.width;
+			
 			
 			var bmpUrl:String;
 			if(_value > 0)
@@ -250,6 +271,7 @@ package com.rpgGame.app.display2D
 			var image:Image;
 			var nStr:String;
 			var normalNum:int=0;
+			var numX:int;
 			for( var i:uint=0; i < numStr.length ; i++ )
 			{
 				normalNum++;
@@ -266,16 +288,18 @@ package com.rpgGame.app.display2D
 				image.readjustSize();
 				addChild( image );
 				//经验类不缩放
-				if(normalNum>2&&_numberRes!=FightFaceHelper.NUMBER_PC_EXP&&_numberRes!=FightFaceHelper.NUMBER_PC_EXPSPEC){
+				if(normalNum>2&&_numberRes!=FightFaceHelper.NUMBER_PC_EXP){
 					image.scale=0.8;
 					image.x = (image.width - gap) * i + tX - 5 + _specialOffsetPos.x+10;
 				}else{
 					image.x = (image.width - gap) * i + tX - 5 + _specialOffsetPos.x;
 				}
+				numX=image.x+image.width;
 				image.touchAcross = true;
 				image.touchable = false;
 				image.y = - image.height * 0.5 + _specialOffsetPos.y;
 			}
+		
 		}
 		
 		/**
