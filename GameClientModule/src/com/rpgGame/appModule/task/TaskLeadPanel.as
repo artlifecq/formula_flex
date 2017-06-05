@@ -2,6 +2,7 @@ package com.rpgGame.appModule.task
 {
 
 	import com.game.mainCore.core.timer.GameTimer;
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.sender.TaskSender;
@@ -124,7 +125,7 @@ package com.rpgGame.appModule.task
 			}
 		}
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void 
-		{
+		{GameLog.addShow("TaskLeadPanel--show");
 			super.show(data, openTable, parentContiner);
 			if(!initKey)
 			{
@@ -141,7 +142,7 @@ package com.rpgGame.appModule.task
 			this.y=(sh-this.height)/2+21;
 		}
 		override public function hide():void 
-		{
+		{GameLog.addShow("TaskLeadPanel--hide");
 			super.hide();
 			timer.stop();
 			currtimer=TIMERDATA_1;
