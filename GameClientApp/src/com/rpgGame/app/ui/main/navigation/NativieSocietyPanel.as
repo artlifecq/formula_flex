@@ -72,7 +72,7 @@ package com.rpgGame.app.ui.main.navigation
 			switch(target)
 			{
 				case _skin.btn_n2:
-					AppManager.showApp(AppConstant.SOCIAL_PANEL,"","social_team_panel");
+					AppManager.showApp(AppConstant.SOCIAL_PANEL);
 					break;
 			}
 			close();

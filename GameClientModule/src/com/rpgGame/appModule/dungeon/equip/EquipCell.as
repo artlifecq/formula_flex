@@ -103,7 +103,7 @@ package com.rpgGame.appModule.dungeon.equip
 			var data:Q_daily_zone = this.data as Q_daily_zone;
 			_dailyZoneInfo = DailyZoneDataManager.instance().getInfoById(data.q_id);
 			_skin.uiName.styleName = "ui/app/fuben/mc/zhuangbei/"+data.q_limit_level+".png";
-			_skin.uiBg.styleName = "ui/big_bg/fuben/zhenqi/"+data.q_bgicon+".jpg";
+			_skin.uiBg.styleName = "ui/big_bg/fuben/zhuangbei/"+data.q_bgicon+".jpg";
 			_skin.numZhanli.number = data.q_combat;
 			
 			var itemInfos:Array = ItemUtil.jsonParseItemClientList(data.q_special_rewards_show);
