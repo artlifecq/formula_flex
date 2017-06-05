@@ -10,7 +10,7 @@ package com.rpgGame.coreData.cfg
 	{
 		private static var _map:HashMap;
 
-		public static function get alldata():Array
+		public static function alldata():Array
 		{
 			return _map.getValues();
 		}

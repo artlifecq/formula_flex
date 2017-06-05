@@ -67,8 +67,7 @@
 		 */
 		public static function openNoticeByLevel(level:int):void
 		{
-			var map:HashMap = NewFuncCfgData.alldata();
-			var infos:Array = map.getValues();
+			var infos:Array = NewFuncCfgData.alldata();
 			var length:int = infos.length;
 			var found:Q_newfunc; 
 
