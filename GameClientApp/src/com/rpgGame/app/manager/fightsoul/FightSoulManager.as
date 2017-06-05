@@ -4,11 +4,11 @@ package com.rpgGame.app.manager.fightsoul
 	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.role.SceneRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.UNIQUEID;
 	import com.rpgGame.coreData.cfg.FightsoulData;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
-	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_fightsoul;
@@ -197,8 +197,8 @@ package com.rpgGame.app.manager.fightsoul
 				return;
 			}
 			var heroData : HeroData = player.data as HeroData; 
-			heroData.fightSoulLevel =1;// _fightSoulInfo.curModelLv;
-			AvatarManager.callEquipmentChange(player);
+			heroData.fightSoulLevel =_fightSoulInfo.curModelLv;
+			SceneRoleManager.getInstance().createHero(heroData, true);
 		}
 		private var _skillData:Q_skill_model;
 		public function getSpellData():Q_skill_model
