@@ -112,7 +112,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_equip_wash_attr:String = "data.Q_equip_wash_attr";
 		/**  战魂升级数据						 */
 		public static const Q_fightsoul:String = "data.Q_fightsoul";
-		/**  战魂模型数据		 */
+		/**  战魂模型数据					 */
 		public static const Q_fightsoul_mode:String = "data.Q_fightsoul_mode";
 		/**  战魂升级数据			 */
 		public static const Q_fightsoul_path:String = "data.Q_fightsoul_path";
@@ -144,7 +144,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_meritorious_monster:String = "data.Q_meritorious_monster";
 		/**  任务表(所有任务都这里)																																										 */
 		public static const Q_mission_base:String = "data.Q_mission_base";
-		/**  任务奖励配置表	 */
+		/**  任务奖励配置表			 */
 		public static const Q_mission_reword:String = "data.Q_mission_reword";
 		/**  ??				 */
 		public static const Q_mission_section:String = "data.Q_mission_section";
@@ -160,6 +160,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_shop:String = "data.Q_shop";
 		/**  购买界面其他途径提示数据库				 */
 		public static const Q_source:String = "data.Q_source";
+		/**  活动配置表																		 */
+		public static const Q_special_activities:String = "data.Q_special_activities";
 		/**  tipsid	标题	描述 */
 		public static const Q_tipsinfo:String = "data.Q_tipsinfo";
 		/**  窗口链接				 */
@@ -276,6 +278,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_relation", com.rpgGame.coreData.clientConfig.Q_relation);
 			regClass("data.Q_shop", com.rpgGame.coreData.clientConfig.Q_shop);
 			regClass("data.Q_source", com.rpgGame.coreData.clientConfig.Q_source);
+			regClass("data.Q_special_activities", com.rpgGame.coreData.clientConfig.Q_special_activities);
 			regClass("data.Q_tipsinfo", com.rpgGame.coreData.clientConfig.Q_tipsinfo);
 			regClass("data.Q_windowInfo", com.rpgGame.coreData.clientConfig.Q_windowInfo);
 			regClass("data.Q_zone", com.rpgGame.coreData.clientConfig.Q_zone);
