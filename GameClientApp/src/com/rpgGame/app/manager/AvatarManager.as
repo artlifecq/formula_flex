@@ -735,14 +735,14 @@ package com.rpgGame.app.manager
 					ru.useFog = true;
 					role.avatar.applySyncInfo(RenderUnitType.FIGHTSOUL_EFFECT, RenderUnitID.FIGHTSOUL_EFFECT);
 					ru.play(0);
-					ru.rotationX = 90;
+//					ru.rotationX = 90;
 //					ru.y = 120;
 //					ru.setRenderAnimator(new FightSoulAnimator());
 				}
 			}
 			else
 			{
-				role.avatar.removeRenderUnitByID(RenderUnitType.FIGHTSOUL, RenderUnitID.FIGHTSOUL);
+				role.avatar.removeRenderUnitByID(RenderUnitType.FIGHTSOUL_EFFECT, RenderUnitID.FIGHTSOUL_EFFECT);
 			}
 		}
 		private static function updataFightSoul(role : SceneRole) : void
