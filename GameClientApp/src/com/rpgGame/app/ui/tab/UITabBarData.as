@@ -14,19 +14,21 @@ package com.rpgGame.app.ui.tab
 		/**
 		 *按钮皮肤 
 		 */
-		public var tabClass:Class;
+		public var tabStyle:Class;
 		/**
 		 *标签皮肤 
 		 */
-		public var viewClass:Class;
+		public var viewStyle:Class;
 		/**
 		 *标签键
 		 */
 		public var tabKey:String;
 		
 		
-		public function UITabBarData()
+		public function UITabBarData(tabStyle:Class,viewStyle:Class)
 		{
+			this.tabStyle=tabStyle;
+			this.viewStyle=viewStyle;
 		}
 	}
 }

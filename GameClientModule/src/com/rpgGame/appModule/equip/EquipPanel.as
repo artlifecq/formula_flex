@@ -21,6 +21,11 @@ package com.rpgGame.appModule.equip
 	 */
 	public class EquipPanel extends SkinUIPanel
 	{
+		private var _tabStyles:Array=[ButtonQianghua,ButtonZuomo,ButtonXilian,ButtonJicheng,ButtonHecheng];
+		private var _viewStyles:Array=[EquipIntensifyUI,EquipPolishUI,EquipSmeltUI,EquipInheritUI,EquipComboUI];
+		private var _funcId:Array=[EmFunctionID.EM_QIANGHUA,EmFunctionID.EM_ZUOMO,EmFunctionID.EM_XILIAN,
+			EmFunctionID.EM_JICHENG,EmFunctionID.EM_HECHENG];
+		
 		private var _skin:Zhuangbei_Skin;
 		private var _tabBar:UITabBar;
 		
@@ -33,24 +38,16 @@ package com.rpgGame.appModule.equip
 		
 		private function initUI():void
 		{
-			var _tabClass:Array=[ButtonQianghua,ButtonZuomo,ButtonXilian,ButtonJicheng,ButtonHecheng];
-			var _viewClass:Array=[EquipIntensifyUI,EquipPolishUI,EquipSmeltUI,EquipInheritUI,EquipComboUI];
-			var funcId:Array=[EmFunctionID.EM_QIANGHUA,EmFunctionID.EM_ZUOMO,EmFunctionID.EM_XILIAN,EmFunctionID.EM_JICHENG,
-				EmFunctionID.EM_HECHENG];
 			var tabDatas:Vector.<UITabBarData>=new Vector.<UITabBarData>();
-			var num:int=_tabClass.length;
+			var num:int=_tabStyles.length;
 			for (var i:int = 0; i <num; i++) 
 			{
-				var item:UITabBarData=new UITabBarData();
-				item.tabClass=_tabClass[i];
-				item.viewClass=_viewClass[i];
-				item.tabKey=funcId[i];//标签键为功能id
+				var item:UITabBarData=new UITabBarData(_tabStyles[i],_viewStyles[i]);
+				item.tabKey=_funcId[i];//标签键为功能id
 				tabDatas.push(item);
 			}
 			
 			_tabBar=new UITabBar(_skin.tabBar,tabDatas);
-			//检查已经开启的功能组装数据，
-			//监听新功能开启重组数据；
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void

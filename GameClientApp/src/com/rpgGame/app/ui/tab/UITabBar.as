@@ -1,13 +1,10 @@
 package com.rpgGame.app.ui.tab
 {
-	import com.rpgGame.core.ui.SkinUI;
-	
 	import flash.events.Event;
 	
 	import feathers.controls.TabBar;
 	import feathers.controls.ToggleButton;
 	import feathers.data.ListCollection;
-	import feathers.events.FeathersEventType;
 	
 	import org.client.mainCore.ds.HashMap;
 	
@@ -20,12 +17,12 @@ package com.rpgGame.app.ui.tab
 	 */
 	public class UITabBar
 	{
-		private var _tabBar:TabBar;
+		protected var _tabBar:TabBar;
 		private var _container:DisplayObjectContainer;
 		private var _currentView:ViewUI;
 		private var _tabViewMap:HashMap;
-		private var _data:*;
-		private var _allDatas:Vector.<UITabBarData>;
+		protected var _data:*;
+		protected var _allDatas:Vector.<UITabBarData>;//所有的tab数据
 		
 		/**
 		 * 
@@ -36,26 +33,13 @@ package com.rpgGame.app.ui.tab
 		public function UITabBar(tab:TabBar,datas:Vector.<UITabBarData>)
 		{
 			_tabBar=tab;
-			_allDatas=datas;
 			_container=_tabBar.parent;
 			_tabViewMap=new HashMap();
+			_allDatas=datas;
 			if(!tab.dataProvider){
 				tab.dataProvider=new ListCollection();
 			}
-			tab.dataProvider.removeAll();
-			var num:int=datas.length;
-			for(var i:int=0;i<num;i++){
-				tab.dataProvider.addItem(datas[i]);
-			}
 			_tabBar.tabInitializer = onTabInitializer;
-			_tabBar.addEventListener(FeathersEventType.INITIALIZE,onInitialize);
-		}
-		
-		private function onInitialize():void
-		{
-			_tabBar.removeEventListener(FeathersEventType.INITIALIZE,onInitialize);
-			_tabBar.selectedIndex=0;
-			selectChangeHandler();
 		}
 		
 		private function onTabInitializer(tab:ToggleButton, item:UITabBarData ):void
@@ -63,30 +47,48 @@ package com.rpgGame.app.ui.tab
 			if(item.text){
 				tab.label = item.text;
 			}
-			if(item.tabClass){
-				tab.styleClass=item.tabClass;
+			if(item.tabStyle){
+				tab.styleClass=item.tabStyle;
 			}
 		}
 		
 		public function show(data:*=null, openTable:String="0"):void
 		{
+			if(openTable.length==0){//没给就给个默认的
+				openTable=_allDatas[0].tabKey;
+			}
 			_tabBar.addEventListener(Event.CHANGE,selectChangeHandler);
 			this._data=data;
-			_tabBar.selectedIndex=getTabIndex(openTable);
+			_tabBar.selectedIndex=setTabDataWithTabKey(openTable);
 			selectChangeHandler();
 		}
 		
-		private function getTabIndex(key:String):int
+		/**
+		 *根据tabKey设置数据 
+		 * @param key
+		 * 
+		 */
+		protected function setTabDataWithTabKey(key:String):int
 		{
 			var num:int=_tabBar.dataProvider.length;
+			var i:int=0;
 			var item:UITabBarData;
-			for(var i:int=0;i<num;i++){
+			for(i=0;i<num;i++){
 				item=_tabBar.dataProvider.getItemAt(i) as UITabBarData;
-				if(item.tabKey==key){
+				if(item.tabKey==key){//已经在数据组里面了
 					return i;
 				}
 			}
-			return 0;
+			
+			num=_allDatas.length;
+			for(i=0;i<num;i++){
+				item=_allDatas[i];
+				if(item.tabKey==key){
+					_tabBar.dataProvider.addItemAt(item,i);
+					return i;
+				}
+			}
+			return -1;
 		}
 		
 		private function selectChangeHandler():void
@@ -96,11 +98,14 @@ package com.rpgGame.app.ui.tab
 			if(_currentView){
 				_currentView.removeFromParent();
 			}
-			var view:ViewUI=_tabViewMap.getValue(item.viewClass);
-			var cls:Class=item.viewClass;
+			if(!item){
+				return;
+			}
+			var view:ViewUI=_tabViewMap.getValue(item.viewStyle);
+			var cls:Class=item.viewStyle;
 			if(!view){
 				view=new cls();
-				_tabViewMap.add(item.viewClass,view);
+				_tabViewMap.add(item.viewStyle,view);
 			}
 			_currentView=view;
 			_container.addChild(_currentView);
