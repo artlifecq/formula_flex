@@ -3,6 +3,7 @@ package com.rpgGame.appModule.skill
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.rpgGame.app.manager.LostSkillManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.appModule.skill.lostskill.LostSkillIcon;
 	import com.rpgGame.appModule.skill.lostskill.LostSkillModePane;
 	import com.rpgGame.appModule.skill.lostskill.LostSkillUpLevelView;
@@ -15,6 +16,8 @@ package com.rpgGame.appModule.skill
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.netData.lostSkill.bean.SkillStateInfo;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.Radio;
 	import feathers.controls.UIAsset;
 	import feathers.core.ToggleGroup;
@@ -24,10 +27,8 @@ package com.rpgGame.appModule.skill
 	import org.mokylin.skin.app.wuxue.juexue.Juexue_Skin;
 	import org.mokylin.skin.app.wuxue.juexue.Juexue_jihuo;
 	import org.mokylin.skin.app.wuxue.juexue.Juxue_Shengji;
-	
-	import away3d.events.Event;
 
-	public class LostSkillView
+	public class LostSkillView extends ViewUI
 	{
 		private var _skin:Juexue_Skin;
 		private var _panel:SkinUIPanel;
@@ -37,10 +38,11 @@ package com.rpgGame.appModule.skill
 		private var _updataLevel:LostSkillUpLevelView;
 		private var _bgList:Vector.<UIAsset>;
 		private var _lostSkillModePane:LostSkillModePane;
-		public function LostSkillView(skin:Juexue_Skin,panel:SkinUIPanel)
+		public function LostSkillView(panel:SkinUIPanel)
 		{
 			_panel=panel;
-			_skin=skin;
+			_skin=new Juexue_Skin();
+			super(_skin);
 			initView();
 		}
 		private function initView():void
