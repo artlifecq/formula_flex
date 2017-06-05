@@ -1,6 +1,6 @@
 package com.client.process
 {
-	import com.client.ClientGlobal;
+	import com.client.ClientConfig;
 	import com.client.cmdlistener.LoginCmdListener;
 	import com.client.view.loading.ResLoadingView;
 	import com.game.engine3D.process.BaseProcess;
@@ -28,9 +28,9 @@ package com.client.process
 		{
 //			SenderReferenceSet.start();
 			completeProcess();
-			if (ClientGlobal.mainEntry)
+			if (ClientConfig.mainEntry)
 			{
-				ClientGlobal.mainEntry.reEnterGame();
+				ClientConfig.mainEntry.reEnterGame();
 			}
 		}
 		

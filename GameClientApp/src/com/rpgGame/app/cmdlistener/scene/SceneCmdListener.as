@@ -104,6 +104,8 @@ package com.rpgGame.app.cmdlistener.scene
 	import app.cmd.TaskModuleMessages;
 	import app.message.GoodsProto;
 	
+	import away3d.enum.LoadPriorityType;
+	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.connection.SocketConnection;
@@ -670,7 +672,7 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function onAddHero(buffer : ByteArray) : void
 		{
-			var data : HeroData = new HeroData();
+			var data : HeroData = new HeroData(LoadPriorityType.LEVEL_CUSTOM_2);
 			
 			var info:PlayerInfo = new PlayerInfo();
 			info.read(buffer);
@@ -794,7 +796,7 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function addNpc(buffer : ByteArray) : void
 		{
-			var data : MonsterData = new MonsterData(RoleType.TYPE_NPC);
+			var data : MonsterData = new MonsterData(RoleType.TYPE_NPC,LoadPriorityType.LEVEL_CUSTOM_1);
 			
 			var info : NpcInfo = new NpcInfo();
 			data.serverID = info.npcId;

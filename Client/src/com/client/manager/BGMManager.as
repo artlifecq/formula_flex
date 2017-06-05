@@ -4,7 +4,7 @@ package com.client.manager
 	import com.app.media.AudioInfo;
 	import com.app.media.AudioInterface;
 	import com.client.AudioConfigType;
-	import com.client.ClientGlobal;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 
 	/**
 	 * 游戏音乐管理器
@@ -33,7 +33,7 @@ package com.client.manager
 
 		public static function playMusic(fileName : String) : void
 		{
-			var url : String = ClientGlobal.getSound(fileName);
+			var url : String = ClientConfig.getSound(fileName);
 			var info : AudioInfo = new AudioInfo(url);
 			info.fadeInTime = 500;
 			info.fadeOutTime = 500;
@@ -43,7 +43,7 @@ package com.client.manager
 
 		public static function playUIEffectSound(fileName : String) : void
 		{
-			var url : String = ClientGlobal.getSound(fileName);
+			var url : String = ClientConfig.getSound(fileName);
 			var info : AudioInfo = new AudioInfo(url);
 			info.fadeInTime = 0;
 			info.fadeOutTime = 0;

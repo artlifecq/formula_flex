@@ -1,6 +1,6 @@
 package
 {
-	import com.client.ClientGlobal;
+	import com.client.ClientConfig;
 	import com.client.EngineSetting;
 	import com.client.manager.BGMManager;
 	import com.client.process.CreateChar;
@@ -98,34 +98,34 @@ package
 		protected function onAddToStg(event : Event) : void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, onAddToStg);
-            ClientGlobal.urlParmar = urlParmar || loaderInfo.parameters;
-			ClientGlobal.baseDir = baseDir;
-			ClientGlobal.loginIP = server;
-			ClientGlobal.loginPort = port;
-			ClientGlobal.policyPort = policyPort > 0 ? policyPort : ClientGlobal.policyPort;
-            ClientGlobal.loginAreaId = areaId;
-            ClientGlobal.loginName = loginName;
-            ClientGlobal.loginKey = loginKey;
-            ClientGlobal.loginTime = loginTime;
-            ClientGlobal.agent = agent;
-			ClientGlobal.isRelease = isRelease;
-			ClientGlobal.useBpgFormat = useBpgFormat;
-			ClientGlobal.useVersion = useVersion;
-			ClientGlobal.version = version;
-			ClientGlobal.versionInfo = versionInfo;
-			ClientGlobal.uiCompressed = uiCompressed;
-			ClientGlobal.isBanShu = isBanShu;
-			ClientGlobal.isStable = isStable;
-			ClientGlobal.GlobalBridge = GlobalBridge;
+            ClientConfig.urlParmar = urlParmar || loaderInfo.parameters;
+			ClientConfig.baseDir = baseDir;
+			ClientConfig.loginIP = server;
+			ClientConfig.loginPort = port;
+			ClientConfig.policyPort = policyPort > 0 ? policyPort : ClientConfig.policyPort;
+            ClientConfig.loginAreaId = areaId;
+            ClientConfig.loginName = loginName;
+            ClientConfig.loginKey = loginKey;
+            ClientConfig.loginTime = loginTime;
+            ClientConfig.agent = agent;
+			ClientConfig.isRelease = isRelease;
+			ClientConfig.useBpgFormat = useBpgFormat;
+			ClientConfig.useVersion = useVersion;
+			ClientConfig.version = version;
+			ClientConfig.versionInfo = versionInfo;
+			ClientConfig.uiCompressed = uiCompressed;
+			ClientConfig.isBanShu = isBanShu;
+			ClientConfig.isStable = isStable;
+			ClientConfig.GlobalBridge = GlobalBridge;
             
             //初始化配置类
-            ClientConfig.setup(ClientGlobal.urlParmar, 0, ClientGlobal.isRelease, ClientGlobal.uiCompressed);
-            ClientConfig.decode = ClientGlobal.decodeFun;
-            ClientConfig.baseDir = ClientGlobal.baseDir;
-            ClientConfig.resURL = ClientGlobal.resURL;
-            ClientConfig.isSingle = ClientGlobal.isSingle;
-            ClientConfig.isBanShu = ClientGlobal.isBanShu;
-            ClientConfig.isStable = ClientGlobal.isStable;
+            ClientConfig.setup(ClientConfig.urlParmar, 0, ClientConfig.isRelease, ClientConfig.uiCompressed);
+            ClientConfig.decode = ClientConfig.decodeFun;
+            ClientConfig.baseDir = ClientConfig.baseDir;
+            ClientConfig.resURL = ClientConfig.resURL;
+            ClientConfig.isSingle = ClientConfig.isSingle;
+            ClientConfig.isBanShu = ClientConfig.isBanShu;
+            ClientConfig.isStable = ClientConfig.isStable;
 			
 			GameLogView.init(this.stage, [189, 190, 191]);//-_	189  .>	190  /?	191
 			AlertPanel.initStage(this.stage);
@@ -135,13 +135,13 @@ package
 			GameLog.addShow("客户端版本：" + versionInfo);
 			GameLog.addShow("Player Version:" + (Capabilities.isDebugger ? "Debug" : "Release") + " " + Capabilities.version);
 			GameLog.addShow("OS:" + Capabilities.os);
-			GameLog.addShow("是否发行版本：" + ClientGlobal.isRelease);
-			GameLog.addShow("是否使用BPG：" + ClientGlobal.useBpgFormat);
-			GameLog.addShow("UI是否压缩：" + ClientGlobal.uiCompressed);
+			GameLog.addShow("是否发行版本：" + ClientConfig.isRelease);
+			GameLog.addShow("是否使用BPG：" + ClientConfig.useBpgFormat);
+			GameLog.addShow("UI是否压缩：" + ClientConfig.uiCompressed);
 			//
-			ClientGlobal.setup(this);
-			ClientUrlManager.setup(ClientGlobal.baseDir, version, ClientGlobal.decodeFun);
-			VersionUtils.setup(versionMap, baseDir, (version && version.length > 0) ? version : Math.random().toFixed(5), ClientGlobal.useVersion);
+			ClientConfig.init(this);
+			ClientUrlManager.setup(ClientConfig.baseDir, version, ClientConfig.decodeFun);
+			VersionUtils.setup(versionMap, baseDir, (version && version.length > 0) ? version : Math.random().toFixed(5), ClientConfig.useVersion);
 			
 			initProcess();
 			//initMenu();
@@ -297,7 +297,7 @@ package
 		
 		private function initProcess() : void
 		{
-            if (null == ClientGlobal.loginIP || 0 == StringUtil.trim(ClientGlobal.loginIP).length) {
+            if (null == ClientConfig.loginIP || 0 == StringUtil.trim(ClientConfig.loginIP).length) {
                 ProcessStateMachine.getInstance().pushProcess(new SelectDeveloper());
             }
 			ProcessStateMachine.getInstance().pushProcess(new LoginInput());
@@ -316,18 +316,18 @@ package
 		{
 			if (ExternalInterface.available)
 			{
-				ClientGlobal.urlParmar = urlParmar || loaderInfo.parameters;
+				ClientConfig.urlParmar = urlParmar || loaderInfo.parameters;
 				GameLog.addShow("++++++++++++++++++++");
-				for (var key : String in ClientGlobal.urlParmar)
+				for (var key : String in ClientConfig.urlParmar)
 				{
-					GameLog.addShow(key + ":" + ClientGlobal.urlParmar[key]);
+					GameLog.addShow(key + ":" + ClientConfig.urlParmar[key]);
 				}
 				GameLog.addShow("++++++++++++++++++++");
-				ClientGlobal.loginName = ClientGlobal.urlParmar["auth"];
-				ClientGlobal.loginKey = ClientGlobal.urlParmar["sign"];
-				//ClientGlobal.useWorker = ClientGlobal.urlParmar["useWorker"] == "true";
-				ClientGlobal.baseDir = ClientGlobal.urlParmar["baseDir"] || "../";
-				//ClientGlobal.debugConfig = ClientGlobal.urlParmar["debugConfig"];
+				ClientConfig.loginName = ClientConfig.urlParmar["auth"];
+				ClientConfig.loginKey = ClientConfig.urlParmar["sign"];
+				//ClientConfig.useWorker = ClientConfig.urlParmar["useWorker"] == "true";
+				ClientConfig.baseDir = ClientConfig.urlParmar["baseDir"] || "../";
+				//ClientConfig.debugConfig = ClientConfig.urlParmar["debugConfig"];
 			}
 		}
 		
@@ -339,13 +339,13 @@ package
 		
 		private function runProcess() : void
 		{
-			GameLog.addShow(ClientGlobal.loginIP, ClientGlobal.loginPort, ClientGlobal.loginName, ClientGlobal.loginKey, ClientGlobal.isRelease);
+			GameLog.addShow(ClientConfig.loginIP, ClientConfig.loginPort, ClientConfig.loginName, ClientConfig.loginKey, ClientConfig.isRelease);
 			//
-			if (!ClientGlobal.loginIP)
+			if (!ClientConfig.loginIP)
 			{
 				ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_SELECT_DEVELOPER);
 			}
-			if (!ClientGlobal.loginName)
+			if (!ClientConfig.loginName)
 			{
 				ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_LOGIN_INPUT);
 			}
@@ -367,7 +367,7 @@ package
 			ProcessStateMachine.getInstance().addPreProcess(ProcessState.STATE_ENTER_GAME);
 			ProcessStateMachine.getInstance().run();
 			
-			if (!ClientGlobal.isRelease)
+			if (!ClientConfig.isRelease)
 			{
 				//				MonsterDebugger.initialize(stage);
 			}

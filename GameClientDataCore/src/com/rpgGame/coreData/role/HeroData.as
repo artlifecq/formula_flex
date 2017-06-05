@@ -126,9 +126,9 @@ package com.rpgGame.coreData.role
 		
 		public var loginDay:int = 0;
 		
-		public function HeroData()
+		public function HeroData(priority:int=100)
 		{
-			super(RoleType.TYPE_HERO);
+			super(RoleType.TYPE_HERO,priority);
 			spellList = new ActiveSpellList();
 			amountInfo = new AmountInfo();
 			mounModuletData = new MountModuleObjClientData();

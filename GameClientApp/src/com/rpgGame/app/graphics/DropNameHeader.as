@@ -86,7 +86,7 @@ package com.rpgGame.app.graphics
 			return false;
 		}
 		
-		public function get isDisposed():Boolean
+		override public function get isDisposed():Boolean
 		{
 			// TODO Auto Generated method stub
 			return false;

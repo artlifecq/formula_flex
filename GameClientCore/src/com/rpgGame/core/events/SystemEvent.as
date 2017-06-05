@@ -14,5 +14,6 @@ package com.rpgGame.core.events
 		
 		public static const SYS_TIME:int = UNIQUEID.NEXT;
 		public static const SYS_SET:int = UNIQUEID.NEXT;//系统设置
+		public static const DISPLAY_SET_UP_CHANGE:int = UNIQUEID.NEXT;
 	}
 }
