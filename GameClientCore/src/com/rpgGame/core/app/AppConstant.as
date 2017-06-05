@@ -404,5 +404,13 @@ package com.rpgGame.core.app
 		public static var MALL_PANEL:String = createAppInfo("shop.MallMainPanelExt","shangcheng");
 		/**售卖道具**/
 		public static var ITEM_SELL_PANEL:String = createAppInfo("shop.ItemSellAlertExtPanelExt");
+		
+		/**战场**/
+		public static var BATTLE_MAIN_PANEL:String = createAppInfo("battle.BattleMainPanelExt","zhanchang");
+		
+		/**战场**/
+		public static var BATTLE_RESULT_PANEL:String = createAppInfo("battle.jjzb.JJBattleResultPanelExt","zhanchang");
+		/**战场**/
+		public static var BATTLE_SHOP_PANEL:String = createAppInfo("shop.BattleShopPanelExt","zhanchang");
 	}
 }

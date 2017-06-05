@@ -24,5 +24,23 @@ package com.rpgGame.coreData.cfg
 		{
 			return _dataDic[key];
 		}
+		public static function getIntValue(key : int) : int
+		{
+			var tmp:Q_global=getSettingInfo(key);
+			if (tmp) 
+			{
+				return tmp.q_int_value;
+			}
+			return 0;
+		}
+		public static function getStrValue(key : int) : String
+		{
+			var tmp:Q_global=getSettingInfo(key);
+			if (tmp) 
+			{
+				return tmp.q_string_value;
+			}
+			return "";
+		}
 	}
 }

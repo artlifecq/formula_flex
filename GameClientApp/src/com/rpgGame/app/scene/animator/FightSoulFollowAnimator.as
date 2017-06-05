@@ -78,7 +78,7 @@ package com.rpgGame.app.scene.animator
 				return;
 			}
 			_preTime = curTime;
-			var scenePos:Vector3D = _owner.getChildScenePositionByName(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_head_01);
+			var scenePos:Vector3D = _owner.getChildScenePositionByName(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_name_01);
 			if (scenePos)
 			{
 				_local3 = MathUtil.getDxByAngle(50, (_owner.rotationY + 180));

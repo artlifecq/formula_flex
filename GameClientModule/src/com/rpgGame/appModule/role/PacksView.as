@@ -11,6 +11,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.ItemSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
+	import com.rpgGame.app.ui.alert.GameAlertExt;
 	import com.rpgGame.app.utils.BreatheTweenUtil;
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.app.view.icon.IconCDFace;
@@ -53,6 +54,8 @@ package com.rpgGame.appModule.role
 	
 	import app.message.GoodsType;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.controls.Scroller;
 	import feathers.data.ListCollection;
@@ -64,7 +67,6 @@ package com.rpgGame.appModule.role
 	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
 	
 	import starling.display.DisplayObject;
-	import away3d.events.Event;
 
 	/**
 	 *背包部分 
@@ -442,8 +444,9 @@ package com.rpgGame.appModule.role
 		private function preDiscard(info:ClientItemInfo):void
 		{
 			if(info.qItem.q_drop_confirm==1){//需要二次确认
-				var alertSet:AlertSetInfo=new AlertSetInfo(LangQ_BackPack.ITEM_dropItemToScene_3);
-				GameAlert.showAlert(alertSet,okDiscard,info);
+//				var alertSet:AlertSetInfo=new AlertSetInfo(LangQ_BackPack.ITEM_dropItemToScene_3);
+//				GameAlert.showAlert(alertSet,okDiscard,info);
+				GameAlertExt.show("这件物品看起来还不错哦！你确定要丢弃吗？",okDiscard,[info]);
 
 			}else{
 				if(info.qItem.q_drop==0){//不可丢弃
@@ -454,11 +457,11 @@ package com.rpgGame.appModule.role
 			}
 		}
 		
-		private function okDiscard(gameAlert:GameAlert,info:ClientItemInfo):void
+		private function okDiscard(info:ClientItemInfo):void
 		{
-			if(gameAlert.clickType==AlertClickTypeEnum.TYPE_SURE){
+			//if(gameAlert.clickType==AlertClickTypeEnum.TYPE_SURE){
 				ItemSender.discardItem(info);
-			}
+			//}
 		}
 		
 		private function preBatch(info:ClientItemInfo):void
