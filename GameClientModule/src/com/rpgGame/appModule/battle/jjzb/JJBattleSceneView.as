@@ -74,8 +74,13 @@ package com.rpgGame.appModule.battle.jjzb
 		public function hide():void
 		{
 			this._scene.visible=false;
+			
+			if (_ai.forceOver==false) 
+			{
+				onFightOver();
+				_ai.stop();
+			}
 			clearData();
-			_ai.stop();
 		}
 		private function clearData():void
 		{

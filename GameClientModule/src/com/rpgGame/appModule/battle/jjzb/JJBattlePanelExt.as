@@ -46,7 +46,7 @@ package com.rpgGame.appModule.battle.jjzb
 		private var _curSub:ISubBattleView;
 		private var _rewardPanel:JJBattleRewardPanelExt;
 		private var _costArr:Array;
-		private var _lastState:int;
+		private var _lastState:int=-1;
 		public function JJBattlePanelExt()
 		{
 			_skin=new JingJiChan1_Skin();
@@ -202,6 +202,7 @@ package com.rpgGame.appModule.battle.jjzb
 			EventManager.addEvent(JJBattleEvent.GET_PANEL_DATA,onGetPanelData);
 			EventManager.addEvent(JJBattleEvent.GET_FIGHTERS_DATA,onGetFighters);
 			EventManager.addEvent(JJBattleEvent.GET_FIGHT_RESULT,onGetFightResult);
+			EventManager.addEvent(JJBattleEvent.GOBACK,goBack);
 			if (_showState==2) 
 			{
 				_showState=_lastState;
@@ -218,7 +219,14 @@ package com.rpgGame.appModule.battle.jjzb
 			//_fightView.show();
 			_fightView.setData(arg[0]);
 		}
-		
+		public function goBack():void
+		{
+			if (_lastState!=-1) 
+			{
+				_showState=_lastState;
+				updateShowState();
+			}
+		}
 		private function onGetFighters(...arg):void
 		{
 			// TODO Auto Generated method stub
@@ -283,6 +291,7 @@ package com.rpgGame.appModule.battle.jjzb
 			EventManager.removeEvent(JJBattleEvent.GET_PANEL_DATA,onGetPanelData);
 			EventManager.removeEvent(JJBattleEvent.GET_FIGHTERS_DATA,onGetFighters);
 			EventManager.removeEvent(JJBattleEvent.GET_FIGHT_RESULT,onGetFightResult);
+			EventManager.removeEvent(JJBattleEvent.GOBACK,goBack);
 			_curSub.hide();
 			if (_isShowLog) 
 			{

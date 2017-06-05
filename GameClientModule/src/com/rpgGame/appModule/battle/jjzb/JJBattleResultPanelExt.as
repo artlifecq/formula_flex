@@ -3,6 +3,7 @@ package com.rpgGame.appModule.battle.jjzb
 	import com.game.engine2D.config.staticdata.CharAngleType;
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.core.events.JJBattleEvent;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.netData.zhengba.bean.AwardItemInfo;
 	
@@ -12,6 +13,7 @@ package com.rpgGame.appModule.battle.jjzb
 	
 	import feathers.controls.UINumber;
 	
+	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.zhanchang.TiaoZhanJieSuan_Shengli;
 	
 	import starling.display.DisplayObjectContainer;
@@ -43,6 +45,7 @@ package com.rpgGame.appModule.battle.jjzb
 			{
 				_fightScene.hide();
 			}
+			EventManager.dispatchEvent(JJBattleEvent.GOBACK);
 		}
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{

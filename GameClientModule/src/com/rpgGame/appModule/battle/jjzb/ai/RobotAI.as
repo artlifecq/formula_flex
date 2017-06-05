@@ -41,7 +41,7 @@ package com.rpgGame.appModule.battle.jjzb.ai
 		private var _loserActionArr:Array;
 		private var _round:int;
 		private var _endCount:int=0;
-		private var _forceOver:Boolean=false;
+		private var _forceOver:Boolean=true;
 		private var _contianer:DisplayObjectContainer;
 		private var _hpLeft:SkinnableContainer;
 		private var _hpRight:SkinnableContainer;
@@ -93,6 +93,7 @@ package com.rpgGame.appModule.battle.jjzb.ai
 		}
 		public function setLeftPlayer(winer:RoleModelShow,loser:RoleModelShow,winHp:int,loseHp:int,round:int,isLeft:Boolean):void
 		{
+			_forceOver=false;
 			_winerIsLeft=isLeft;
 			_round=round;
 			_winer=winer;
@@ -392,10 +393,16 @@ package com.rpgGame.appModule.battle.jjzb.ai
 				_winerActionArr=null;
 				_loserActionArr=null;
 				_round=0;
-				_forceOver=false;
+				_forceOver=true;
 			}
 			
 		}
+
+		public function get forceOver():Boolean
+		{
+			return _forceOver;
+		}
+
 	}
 }
 class AttackResult

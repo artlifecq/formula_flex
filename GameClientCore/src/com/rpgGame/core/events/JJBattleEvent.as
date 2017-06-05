@@ -31,5 +31,11 @@ package com.rpgGame.core.events
 		 */		
 		public static const GET_REWARD_RESULT:int=UNIQUEID.NEXT;
 		
+		/**
+		 *获取奖励结果
+		 */		
+		public static const GOBACK:int=UNIQUEID.NEXT;
+		
+		
 	}
 }
