@@ -1,20 +1,19 @@
 package com.rpgGame.appModule.mount
 {
 	import com.rpgGame.app.manager.mount.MountShowData;
-	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.utils.FightValueUtil;
 	
 	import org.mokylin.skin.app.zuoqi.Shuxing_Item;
-	import org.mokylin.skin.app.zuoqi.Zuoqi_Skin;
+	import org.mokylin.skin.app.zuoqi.ZuoqiCont_Skin;
 
 	public class MountProps
 	{
 		private var _currentPower:int;
 		private var _nextPower:int;
 		private var _propList:Vector.<MountPropView>;
-		private var _skin:Zuoqi_Skin;
+		private var _skin:ZuoqiCont_Skin;
 		private var _mountShowData:MountShowData;
-		public function MountProps(skin:Zuoqi_Skin):void
+		public function MountProps(skin:ZuoqiCont_Skin):void
 		{
 			_skin = skin;
 			super();
@@ -62,7 +61,7 @@ package com.rpgGame.appModule.mount
 			}else{
 				_nextPower = 0;
 			}
-			_skin.num_zhandouli.number = Math.floor(_currentPower+_nextPower*_mountShowData.percent);
+			_skin.NumZhanli.number = Math.floor(_currentPower+_nextPower*_mountShowData.percent);
 			_foundIndex = 0;
 			_disProps = _mountShowData.disProps;
 			for each(var view:MountPropView in _propList)

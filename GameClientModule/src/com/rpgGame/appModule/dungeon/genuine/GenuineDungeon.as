@@ -3,6 +3,7 @@ package com.rpgGame.appModule.dungeon.genuine
 	import com.rpgGame.app.manager.DailyZoneDataManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.SkinUIModePanel;
+	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.coreData.cfg.DailyZoneCfgData;
@@ -22,19 +23,20 @@ package com.rpgGame.appModule.dungeon.genuine
 	
 	import starling.display.DisplayObject;
 	
-	public class GenuineDungeon extends SkinUIModePanel
+	public class GenuineDungeon extends ViewUI
 	{
 		private var _skin:FuBen_ZhenQi_Skin;
 		private var _curentIndex:int;
 		private var _dailyZoneInfo:DailyZonePanelInfo;
 		public function GenuineDungeon():void
 		{
-			super(FuBen_ZhenQi_Skin, "真气副本", 1);
+			_skin = new FuBen_ZhenQi_Skin();
+			super(_skin);
+			initialize();
 		}
 		
-		override protected function initialize():void
+		protected function initialize():void
 		{
-			_skin = _uiskin as FuBen_ZhenQi_Skin;
 			_skin.list.itemRendererType =GenuineCell;
 			_skin.list.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			_skin.list.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
@@ -68,8 +70,9 @@ package com.rpgGame.appModule.dungeon.genuine
 			}
 			
 		}
-		override public function onTouchTarget(target:DisplayObject):void
+		override protected function onTouchTarget(target:DisplayObject):void
 		{
+			super.onTouchTarget(target);
 			switch(target)
 			{
 				case _skin.btnNext:
@@ -86,11 +89,6 @@ package com.rpgGame.appModule.dungeon.genuine
 			_skin.btnNext.visible = (index <1);
 			_skin.btnPrev.visible = (index >0);
 			_skin.list.scrollToPageIndex(index,0);
-		}
-		
-		override public function get isOpen():Boolean
-		{
-			return MainRoleManager.actorInfo.totalStat.level>=50;
 		}
 	}
 }

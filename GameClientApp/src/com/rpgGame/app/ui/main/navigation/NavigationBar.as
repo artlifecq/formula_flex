@@ -1,9 +1,8 @@
 package com.rpgGame.app.ui.main.navigation {
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.main.buttons.IOpen;
-	import com.rpgGame.app.ui.main.buttons.MainButtonBases;
 	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
-	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.core.events.FunctionOpenEvent;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
 	
@@ -35,15 +34,12 @@ package com.rpgGame.app.ui.main.navigation {
 			_content = new ContengGroup(_skin.width,_skin.height);
 			this.addChildAt(_content,0);
 			this.setState(true);
-			EventManager.addEvent(MainPlayerEvent.LEVEL_CHANGE,refeashButton);
+			EventManager.addEvent(FunctionOpenEvent.FUNCTIONOPENID,refeashButton);
 			refeashButton();
 		}
 		
-		private function refeashButton():void
+		private function refeashButton(data:*=null):void
 		{
-			if(_lastLevel == MainRoleManager.actorInfo.totalStat.level)
-				return ;
-			_lastLevel == MainRoleManager.actorInfo.totalStat.level;
 			var buttoninfos:Array = FuncionBarCfgData.getInfoListbyType(0);
 			var length:int = buttoninfos.length;
 			var index:int = 0;
