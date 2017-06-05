@@ -433,6 +433,9 @@ package com.rpgGame.app.manager.scene
 		{
 			GameLog.addShow("开始切换场景...");
 			_isChangeSceneComplete = false;
+			var mapID : int = MainRoleManager.actorInfo.mapID;
+			var mapInfo : SceneData = MapDataManager.getMapInfo(mapID); //获取地图配置数据
+			MapDataManager.currentScene = mapInfo;
 			var _local3:SceneData = MapDataManager.getMapInfo(currentMapId);
 			var _local1:SceneData = MapDataManager.getMapInfo(MainRoleManager.actorInfo.mapID);
 			if (((((_local1) && (_local3))) && ((_local1.map == _local3.map))))
