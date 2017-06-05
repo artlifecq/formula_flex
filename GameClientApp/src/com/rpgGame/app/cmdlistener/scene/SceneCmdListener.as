@@ -871,7 +871,7 @@ package com.rpgGame.app.cmdlistener.scene
 				}
 				else if (msg.attributeChange.type==CharAttributeType.LV) 
 				{
-					FunctionOpenManager.openFunctionByLevel(msg.attributeChange.value);
+					FunctionOpenManager.openFunctionByLevel(msg.attributeChange.value,true);
 					EventManager.dispatchEvent(MainPlayerEvent.LEVEL_CHANGE);
 				}
 //				ReliveManager.autoHideRelive();

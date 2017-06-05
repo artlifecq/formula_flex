@@ -3,6 +3,7 @@ package com.rpgGame.app.manager.role
 	import com.game.engine3D.config.GlobalConfig;
 	import com.rpgGame.app.manager.AreaMapManager;
 	import com.rpgGame.app.manager.CharAttributeManager;
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.GameCameraManager;
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.ShortcutsManger;
@@ -83,7 +84,6 @@ package com.rpgGame.app.manager.role
 			var heroName : String = heroInfo.name;
 			//角色信息
 			HeroData.setUserSingleInfo(actorInfo, heroName);
-		
 			ShortcutsManger.getInstance().replaceToTempSpells(HeroData.spellArrs);
 		}
 
@@ -92,6 +92,7 @@ package com.rpgGame.app.manager.role
 			//角色信息
 			HeroData.setUserLoginInfo(actorInfo, heroInfo);
 			PKMamager.setPkMode(heroInfo.pkType);
+//			FunctionOpenManager.openFunctionByLevel(actorInfo.totalStat.level,false);
 //			if(heroProto.goodsContainerModuleObj)
 //			{
 //				//背包信息
@@ -159,6 +160,8 @@ package com.rpgGame.app.manager.role
 				{
 //					_actor.headFace.addTaskIco(AssetUrl.JIMAOXIN);
 				}
+				
+				FunctionOpenManager.openFunctionByLevel(data.totalStat.level,false);
                 
                 EventManager.dispatchEvent(RoleEvent.UPDATE_NEEDLE, 
                     _actor, 

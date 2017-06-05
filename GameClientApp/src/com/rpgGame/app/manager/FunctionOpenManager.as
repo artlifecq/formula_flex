@@ -3,35 +3,57 @@
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.core.app.AppConstant;
     import com.rpgGame.core.app.AppManager;
+    import com.rpgGame.coreData.UNIQUEID;
     import com.rpgGame.coreData.cfg.NewFuncCfgData;
     import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
     import com.rpgGame.coreData.clientConfig.Q_newfunc;
     
     import org.client.mainCore.ds.HashMap;
+    import org.client.mainCore.manager.EventManager;
 
     public class FunctionOpenManager 
     {
+		public static const FUNCTIONOPENID:int = UNIQUEID.NEXT;
         public static var funcBits:Object = null;
         private static var _statusMap:HashMap = new HashMap();
 		
-		public static function openFunctionByLevel(level:int):void
+		public static function openFunctionByLevel(level:int,isdisable:Boolean):void
 		{
 			var map:HashMap = NewFuncCfgData.map;
 			var infos:Array = map.getValues();
 			var itemlist:Vector.<int> = new Vector.<int>();
 			for each(var info :Q_newfunc in infos)
 			{
-				if(info.q_level == level)
-					itemlist.push(info.q_id);
+				if(info.q_level > level)
+					continue;
+				if(_statusMap.getValue(info.q_id)!=null)
+					continue;
+				_statusMap.add(info.q_id,info);
+				itemlist.push(info.q_id);
 			}
-			if(itemlist.length>0)
-				AppManager.showAppNoHide(AppConstant.OPEN_FUNCTION,itemlist);
-			else
-				AppManager.hideApp(AppConstant.OPEN_FUNCTION);
+			if(isdisable)
+			{
+				if(itemlist.length>0)
+					AppManager.showAppNoHide(AppConstant.OPEN_FUNCTION,itemlist);
+				else
+					AppManager.hideApp(AppConstant.OPEN_FUNCTION);
+			}
 			
 			openNoticeByLevel(level);
+			EventManager.dispatchEvent(FUNCTIONOPENID,itemlist);
 		}
 		
+		
+		/**
+		 * 检查功能是否开启 
+		 * @param id
+		 * @return 
+		 * 
+		 */
+		public static function functionIsOpen(id:int):Boolean
+		{
+			return _statusMap.getValue(id) as Q_newfunc != null;
+		}
 		
 		public static function openNoticeByLevel(level:int):void
 		{

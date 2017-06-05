@@ -716,7 +716,7 @@ package com.rpgGame.app.manager
 			{
 				if (rpd_body)
 				{
-					ru = role.avatar.addRenderUnitToChild(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_body_02, fightsoul);
+					ru = role.avatar.addRenderUnitToChild(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_body_01, fightsoul);
 				}
 				if (ru)
 				{
@@ -735,8 +735,9 @@ package com.rpgGame.app.manager
 					ru.useFog = true;
 					role.avatar.applySyncInfo(RenderUnitType.FIGHTSOUL_EFFECT, RenderUnitID.FIGHTSOUL_EFFECT);
 					ru.play(0);
-					ru.y = 120;
-					ru.setRenderAnimator(new FightSoulAnimator());
+					ru.rotationX = 90;
+//					ru.y = 120;
+//					ru.setRenderAnimator(new FightSoulAnimator());
 				}
 			}
 			else
