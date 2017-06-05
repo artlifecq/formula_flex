@@ -51,7 +51,9 @@ package com.rpgGame.appModule.fightsoul
 			this._showAvatarData.avatarInfo.setBodyResID("pc/fightsoul/"+modeinfo.q_mode,null);
 			this._showAvatarData.avatarInfo.fightSoulefffectID =modeinfo.q_effect;
 			this.setRoleData(this._showAvatarData);
-			this.curRole.setScale(1.7);	
+			
+			this.curRole.setScale(modeinfo.q_panleScale/100);
+			this.curRole.z = modeinfo.q_panleY;
 		}
 		
 		private function onAddEftComplete(sr3D:InterObject3D,renderUint:RenderUnit3D):void

@@ -1,18 +1,14 @@
 ﻿package com.rpgGame.app.ui.main.activityBar
 {
-    import com.rpgGame.app.manager.chat.NoticeManager;
     import com.rpgGame.app.manager.hud.ActivityBarManager;
-    import com.rpgGame.app.ui.main.activityBar.item.ActivityButton;
     import com.rpgGame.app.ui.main.activityBar.item.ActivityButtonBase;
     import com.rpgGame.app.ui.main.buttons.IOpen;
     import com.rpgGame.app.ui.main.buttons.MainButtonManager;
-    import com.rpgGame.core.app.AppConstant;
-    import com.rpgGame.core.app.AppManager;
     import com.rpgGame.core.events.ActivityEvent;
-    import com.rpgGame.core.events.country.CountryEvent;
+    import com.rpgGame.core.events.FunctionOpenEvent;
+    import com.rpgGame.core.events.MainPlayerEvent;
     import com.rpgGame.core.ui.SkinUI;
     import com.rpgGame.coreData.cfg.FuncionBarCfgData;
-    import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
     
     import gs.TweenLite;
     
@@ -41,6 +37,7 @@
         {
             EventManager.addEvent(ActivityEvent.OPEN_ACTIVITY, updatePositionAll);
             EventManager.addEvent(ActivityEvent.CLOSE_ACTIVITY, updatePositionAll);
+			EventManager.addEvent(FunctionOpenEvent.FUNCTIONOPENID,updatePositionAll);
             updatePositionAll(0);
         }
 		
@@ -63,7 +60,7 @@
 		private static const TYPE:int = 1;
         private function updatePositionAll(data:*):void
         {
-//			this.removeChildren();
+			this.removeChildren();
 			var rows:Array = FuncionBarCfgData.getinfoRows(TYPE);
 			var length:int = rows.length;
 			var button:IOpen;

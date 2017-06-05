@@ -27,12 +27,12 @@
 		public static function openFunctionByLevel(level:int,isdispatch:Boolean):void
 		{
 			var infos:Array = NewFuncCfgData.alldata();
-			var itemlist:Vector.<int> = new Vector.<int>();
+			var itemlist:Vector.<String> = new Vector.<String>();
 			for each(var info :Q_newfunc in infos)
 			{
-				if(info.q_level > level)
-					continue;
 				if(_statusMap.getValue(info.q_id)!=null)
+					continue;
+				if(info.q_level > level)
 					continue;
 				_statusMap.add(info.q_id,info);
 				itemlist.push(info.q_id);
@@ -40,7 +40,7 @@
 			if(isdispatch)
 			{
 				if(itemlist.length>0)
-					AppManager.showAppNoHide(AppConstant.OPEN_FUNCTION,itemlist);
+					AppManager.showAppNoHide(AppConstant.OPEN_FUNCTION,itemlist.concat());
 				else
 					AppManager.hideApp(AppConstant.OPEN_FUNCTION);
 				EventManager.dispatchEvent(FunctionOpenEvent.FUNCTIONOPENID,itemlist);
@@ -55,7 +55,7 @@
 		 * @return 
 		 * 
 		 */
-		public static function functionIsOpen(id:int):Boolean
+		public static function functionIsOpen(id:String):Boolean
 		{
 			return _statusMap.getValue(id) as Q_newfunc != null;
 		}
@@ -95,7 +95,7 @@
 			}
 		}
 		
-		public static function openFunctionById(id:int):void
+		public static function openFunctionById(id:String):void
 		{
 			AppManager.showApp(AppConstant.OPEN_FUNCTION,id);
 		}
@@ -118,7 +118,7 @@
 			return value;
 		}
 		
-		public static function checkOpenBuyFunId(id:int):Boolean
+		public static function checkOpenBuyFunId(id:String):Boolean
 		{
 			var func:Q_newfunc = NewFuncCfgData.getdataById(id);
 			if(func == null)

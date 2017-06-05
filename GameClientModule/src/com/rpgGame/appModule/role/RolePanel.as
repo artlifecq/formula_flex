@@ -38,7 +38,7 @@ package com.rpgGame.appModule.role
 			addTabDatas(ButtonJingmai,MeridianMainPanelExt,EmFunctionID.EM_MERIDIAN);
 			addTabDatas(ButtonXinfa,XinFaMainPanelExt,EmFunctionID.EM_XINFA);
 			addTabDatas(ButtonZhangong,ZhanGongPanelExt,EmFunctionID.EM_ZHANGONG);
-			addTabDatas(ButtonJunjie,JunJiePanelExt,EmFunctionID.EM_JUNJIE);
+			addTabDatas(ButtonJunjie,JunJiePanelExt,EmFunctionID.Em_JUNJIE);
 		}
 	}
 }

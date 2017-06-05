@@ -38,6 +38,8 @@ package com.rpgGame.app.ui.tab
 			_allDatas=datas;
 			if(!tab.dataProvider){
 				tab.dataProvider=new ListCollection();
+			}else{
+				tab.dataProvider.removeAll();
 			}
 			_tabBar.tabInitializer = onTabInitializer;
 		}
@@ -102,8 +104,8 @@ package com.rpgGame.app.ui.tab
 				return;
 			}
 			var view:ViewUI=_tabViewMap.getValue(item.viewStyle);
-			var cls:Class=item.viewStyle;
 			if(!view){
+				var cls:Class=item.viewStyle;
 				view=new cls();
 				_tabViewMap.add(item.viewStyle,view);
 			}

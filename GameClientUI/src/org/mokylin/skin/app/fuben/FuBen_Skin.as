@@ -6,7 +6,6 @@ package org.mokylin.skin.app.fuben
 	import feathers.controls.TabBar;
 	import feathers.controls.UIAsset;
 	import feathers.layout.HorizontalLayout;
-	import org.mokylin.skin.app.fuben.FuBen_DuoRen_Skin;
 	import org.mokylin.skin.common.yiji_panelbg2_Skin;
 	import org.mokylin.skin.component.tabbar.TabBarSkin_pack;
 
@@ -22,9 +21,7 @@ package org.mokylin.skin.app.fuben
 		//==========================================================================
 		public var bg:feathers.controls.SkinnableContainer;
 
-		public var duoren_skin:feathers.controls.SkinnableContainer;
-
-		public var tab_fuben:feathers.controls.TabBar;
+		public var tabBar:feathers.controls.TabBar;
 
 
 		//==========================================================================
@@ -37,7 +34,7 @@ package org.mokylin.skin.app.fuben
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [bg_i(),__FuBen_Skin_UIAsset1_i(),__FuBen_Skin_UIAsset2_i(),tab_fuben_i(),duoren_skin_i()];
+			this.elementsContent = [bg_i(),__FuBen_Skin_UIAsset1_i(),__FuBen_Skin_UIAsset2_i(),tabBar_i()];
 			
 			states = {
 			};
@@ -77,7 +74,7 @@ package org.mokylin.skin.app.fuben
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
-			temp.touchGroup = true;
+			temp.touchGroup = false;
 			temp.styleName = "ui/app/fuben/fuben.png";
 			temp.x = 447;
 			temp.y = 13;
@@ -98,25 +95,11 @@ package org.mokylin.skin.app.fuben
 			return temp;
 		}
 
-		private function duoren_skin_i():feathers.controls.SkinnableContainer
-		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			duoren_skin = temp;
-			temp.name = "duoren_skin";
-			temp.height = 583;
-			var skin:StateSkin = new org.mokylin.skin.app.fuben.FuBen_DuoRen_Skin()
-			temp.skin = skin
-			temp.width = 942;
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function tab_fuben_i():feathers.controls.TabBar
+		private function tabBar_i():feathers.controls.TabBar
 		{
 			var temp:feathers.controls.TabBar = new feathers.controls.TabBar();
-			tab_fuben = temp;
-			temp.name = "tab_fuben";
+			tabBar = temp;
+			temp.name = "tabBar";
 			temp.btnWidth = 98;
 			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_pack;
 			temp.x = 21;
