@@ -125,9 +125,36 @@ package com.rpgGame.app.manager.goods
 			}
 			return pos;
 		}
-		
+		public function getEquipByPos(pos:int):EquipInfo
+		{
+			var items:Array = getAllItem();
+			for each (var equ:ClientItemInfo in items) 
+			{
+				if (!equ) 
+				{
+					continue;
+				}
+				if (equ.qItem.q_kind==pos) 
+				{
+					return equ as EquipInfo;
+				}
+			}
+			return null;
+		}
+		public function isBetterEquipCompareWithEquiped(item:ClientItemInfo):Boolean
+		{
+			if((item.qItem.q_job==0||item.qItem.q_job==MainRoleManager.actorInfo.job)&&item.qItem.q_level<=MainRoleManager.actorInfo.totalStat.level)
+			{
+				var equ:EquipInfo=getEquipByPos(item.qItem.q_kind);
+				if (!equ||equ.itemInfo.fightPower<item.itemInfo.fightPower) 
+				{
+					return true;
+				}
+			}
+			return false;
+		}
 		/**
-		 * 是否比身上穿的要好 
+		 * 是否比身上穿的要好 ?没看懂，用上面的吧
 		 * @param item
 		 * @return 
 		 * 
@@ -167,11 +194,11 @@ package com.rpgGame.app.manager.goods
 			super.setItemByIndex(index, info);
 			/*if(info != null)
 			{
-				MainRoleManager.actorInfo.equipInfo.add(index, info);
-				EventManager.dispatchEvent(ItemEvent.ITEM_WEARED_PERSON_EQUIP, info);
+			MainRoleManager.actorInfo.equipInfo.add(index, info);
+			EventManager.dispatchEvent(ItemEvent.ITEM_WEARED_PERSON_EQUIP, info);
 			}else{
-				info = MainRoleManager.actorInfo.equipInfo.remove(index) as ClientItemInfo;
-				EventManager.dispatchEvent(ItemEvent.ITEM_TOOK_OFF_PERSON_EQUIP, info);
+			info = MainRoleManager.actorInfo.equipInfo.remove(index) as ClientItemInfo;
+			EventManager.dispatchEvent(ItemEvent.ITEM_TOOK_OFF_PERSON_EQUIP, info);
 			}*/
 		}
 		
@@ -208,10 +235,10 @@ package com.rpgGame.app.manager.goods
 				if(tip)NoticeManager.showHint(EnumHintInfo.EQUIPMENT_ERROR_SEX, [SexType.getName(sex)]);
 				return false;
 			}
-		/*	if(!isSuitRace(race))
+			/*	if(!isSuitRace(race))
 			{
-				if(tip)NoticeManager.showHint(EnumHintInfo.EQUIPMENT_ERROR_RACE, [RaceUtil.getRaceTitle(race)]);
-				return false;
+			if(tip)NoticeManager.showHint(EnumHintInfo.EQUIPMENT_ERROR_RACE, [RaceUtil.getRaceTitle(race)]);
+			return false;
 			}*/
 			var lv:int = ItemConfig.getItemRequireLevel(item.cfgId);
 			if(lv > MainRoleManager.actorInfo.totalStat.level)

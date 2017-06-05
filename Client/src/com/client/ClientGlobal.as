@@ -8,6 +8,7 @@ package com.client
 	import flash.display.StageAlign;
 	import flash.display.StageQuality;
 	import flash.display.StageScaleMode;
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.system.IME;
 	import flash.text.TextField;
@@ -26,7 +27,10 @@ package com.client
 		public static var urlParmar : Object;
 		public static var loginIP : String;
 		public static var loginPort : uint = 0;
+        public static var loginAreaId : uint = 1;
+        public static var loginTime : uint = 0;
 		public static var policyPort : uint = 8002; //9374;
+        public static var agent : String = "";
 
 		/**
 		 * 是否是发布版本
@@ -65,8 +69,8 @@ package com.client
 		/** 资源根目录*/
 		public static var baseDir : String = "../";
 		public static var resURL : String = "res/";
-		public static var auth : String;
-		public static var sign : String;
+		//public static var auth : String;
+		//public static var sign : String;
 		public static var version : String;
 		public static var versionInfo : String;
 		/** 登陆方式，0-内部 1-web 2-微端*/
@@ -112,8 +116,16 @@ package com.client
 			IME.enabled = false;
 			_stage.addEventListener(MouseEvent.MOUSE_DOWN, onDisabledIME);
 			_stage.addEventListener(MouseEvent.RIGHT_MOUSE_DOWN, onDisabledIME);
+			//
+			//_stage.addEventListener(Event.RESIZE,onStageResize);
 		}
-
+		
+		protected static function onStageResize(event:Event):void
+		{
+			// TODO Auto-generated method stub
+			trace("resize");
+		}
+		
 		private static function onDisabledIME(event : MouseEvent) : void
 		{
 			if (IME.isSupported)

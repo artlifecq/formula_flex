@@ -8,7 +8,7 @@ package com.client.process
 	import com.game.engine3D.process.BaseProcess;
 	import com.game.engine3D.process.ProcessStateMachine;
 	import com.gameClient.log.GameLog;
-
+	
 	import flash.events.Event;
 	import flash.events.ProgressEvent;
 	import flash.events.TextEvent;

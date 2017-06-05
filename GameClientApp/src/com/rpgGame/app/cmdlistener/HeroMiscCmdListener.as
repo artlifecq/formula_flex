@@ -7,6 +7,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.manager.ClientSettingManager;
 	import com.rpgGame.app.manager.FangChenMiManager;
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.PlayerAttributeManager;
 	import com.rpgGame.app.manager.ShortcutsManger;
 	import com.rpgGame.app.manager.chat.NoticeManager;
@@ -32,6 +33,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.netData.client.message.ResClientCustomTagMessage;
+	import com.rpgGame.netData.player.bean.AttributeItem;
 	import com.rpgGame.netData.player.message.ResPersonalNoticeMessage;
 	import com.rpgGame.netData.player.message.ResPlayerAddExpMessage;
 	import com.rpgGame.netData.player.message.ResPlayerAttributesChangeMessage;
@@ -219,6 +221,7 @@ package com.rpgGame.app.cmdlistener
 			PlayerAttributeManager.showSpriteStatChg(MainRoleManager.actorInfo.totalStat.statArr, msg.attributeChangeList);
 			//
 			MainRoleManager.actorInfo.totalStat.setData(msg.attributeChangeList);
+			
 			//MainManager.actorInfo.atkSpeed = 1;//100 / (100 + spriteStatProto.attackSpeed);
 			//EventManager.dispatchEvent(UserEvent.USER_MAIN_FIGHT_ATTRIBUTE_CHANGE);
 			EventManager.dispatchEvent(MainPlayerEvent.STAT_CHANGE);
@@ -231,6 +234,11 @@ package com.rpgGame.app.cmdlistener
 			//如果这个协议，改变的属性，包括hp，mp，maxhp，maxmp的话，就要在下面还要写一段逻辑，来更新角色的血条。因为现在还不确定，是不是这样的，所以，暂时先不写。等以后，真正
 			//用上的时候，检查下这里，再补上代码吧！
 			// code!!!
+//			for each (var attr:AttributeItem in msg.attributeChangeList) 
+//			{
+//				FightFaceHelper.showAttChange(attr.type,attr.value);
+//			}
+			
 		}
 		
 		private function RecvResSkillInfosMessage(msg:ResSkillInfosMessage):void

@@ -191,7 +191,8 @@ package com.rpgGame.app.process
 			CONFIG::Debug {
 				StatsUtil.showAwayStats(Stage3DLayerManager.stage,Stage3DLayerManager.stage3DProxy);
 			}			
-			LayerManager.showOrHideMM();
+//			LayerManager.showOrHideMM();
+				Starling.current.showStats=true;
 			ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
             // 屏蔽未捕获信息
 //            Log.logCallBack = GameLog.logItem;

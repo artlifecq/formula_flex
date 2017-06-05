@@ -1580,7 +1580,7 @@ package com.game.engine2D.scene.render
 				"-BMin:" + int(min.x) +","+ int(min.y) + ","+ int(min.z) +
 				"-H:"+int(bound.halfExtentsX)+"-"+int(bound.halfExtentsY)+"-"+int(bound.halfExtentsZ)+
 //				"-RF:" + entityNode.readyForRender()+
-//				"-R:" + pm.renderStatus + 
+				//"-R:" + pm.renderStatus + 
 				"-F:" + pm.parent +"," + pm.width +
 				"-P:" + p.x + "," + p.y + "," + p.z+
 				"-S:" + pm.scaleX + "," + pm.scaleY + "," + pm.scaleZ+

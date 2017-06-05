@@ -1,10 +1,8 @@
 package com.rpgGame.coreData.cfg
 {
-	import com.rpgGame.coreData.clientConfig.ClientTrigger;
-
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
-
+	
 	import org.client.mainCore.ds.HashMap;
 
 	/**

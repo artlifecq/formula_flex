@@ -34,6 +34,7 @@ package feathers.controls
 	import starling.styles.IMeshStyle;
 	import starling.styles.MeshStyle;
 	import starling.text.TextFieldAutoSize;
+	import starling.textures.DynamicTextTextureManager;
 	import starling.textures.IStarlingTexture;
 	import starling.textures.TextureFactory;
 	import starling.utils.Pool;
@@ -448,7 +449,7 @@ public class Label extends DisplayObjectContainer implements IMeshStyle, ILayout
 		var disposeBmd:Boolean = bitmapData != _helperBitmapData;
 		
 		if (_enableTextBatch) {
-//			texture = DynamicTextTextureManager.instance.createSubTexture(_textureKey, bitmapData, disposeBmd, clip);
+			texture = DynamicTextTextureManager.instance.createSubTexture(_textureKey, bitmapData, disposeBmd, clip);
 		} 
 		if (texture == null) {
 			texture = TextureFactory.fromBitmapDataByMemoryItem(bitmapData, false, false, "bgra", disposeBmd, clip);

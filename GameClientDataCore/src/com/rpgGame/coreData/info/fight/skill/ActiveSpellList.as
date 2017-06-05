@@ -148,7 +148,10 @@ package com.rpgGame.coreData.info.fight.skill
 		{
 			return _spellMap.getValues();
 		}
-
+		public function getSpellMap():HashMap
+		{
+			return _spellMap;
+		}
 		/**
 		 * 得到所有的主动技能
 		 * @return

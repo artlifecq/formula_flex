@@ -1,15 +1,10 @@
 package  com.rpgGame.appModule.xinfa.sub
 {
-	import com.game.engine2D.scene.render.ui.UIImage;
-	import com.game.engine3D.config.GlobalConfig;
 	import com.game.engine3D.display.Inter3DContainer;
-	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.CheatsSender;
-	import com.rpgGame.app.sender.MeridianSender;
 	import com.rpgGame.appModule.jingmai.MeridianStoneSelectPanelExt;
 	import com.rpgGame.appModule.jingmai.sub.IStoneSelector;
 	import com.rpgGame.appModule.jingmai.sub.MeridianMapLine;
@@ -19,14 +14,11 @@ package  com.rpgGame.appModule.xinfa.sub
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.utils.GameColorUtil;
 	import com.rpgGame.core.utils.MCUtil;
-	import com.rpgGame.core.view.ui.hint.FloatingText;
 	import com.rpgGame.core.view.ui.tip.vo.BaseTipsInfo;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
-	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.cheats.CheatsCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
-	import com.rpgGame.coreData.cfg.meridian.MeridianCfg;
 	import com.rpgGame.coreData.clientConfig.Q_cheats_node;
 	import com.rpgGame.coreData.clientConfig.Q_global;
 	import com.rpgGame.coreData.info.cheats.CheatsNodeVo;

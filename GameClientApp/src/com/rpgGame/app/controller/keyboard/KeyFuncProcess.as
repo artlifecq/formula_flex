@@ -16,7 +16,9 @@ package com.rpgGame.app.controller.keyboard
 	import com.rpgGame.core.manager.EscActionManager;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.key.KeyInfo;
+	import com.rpgGame.coreData.info.map.EnumMapType;
 	
 	import flash.geom.Point;
 	import flash.utils.getTimer;
@@ -81,7 +83,16 @@ package com.rpgGame.app.controller.keyboard
 						AppManager.showApp(AppConstant.TASK_PANEL);
 					break;
 				case "8": //F 好友
-					AppManager.showApp(AppConstant.MULTY_PANL);
+					if (AppManager.isAppInScene(AppConstant.MULTY_PANL))
+					{
+						AppManager.hideApp(AppConstant.MULTY_PANL);
+					}
+					else if(MapDataManager.getMapInfo(MainRoleManager.actorInfo.mapID).mapType==EnumMapType.MAP_TYPE_NORMAL)
+					{
+						AppManager.showApp(AppConstant.MULTY_PANL);
+					}
+						
+					
 //					if (!ClientConfig.isBanShu)
 //						AppManager.showApp(AppConstant.FRIEND_PANEL);
 					break;
@@ -144,6 +155,10 @@ package com.rpgGame.app.controller.keyboard
 				case "59": //+  
 					break;
 				case "60": //- 
+					break;
+				case "66":
+					//MainRoleManager.autoPickCtrl.DoShortcutPick();
+					TrusteeshipManager.getInstance().autoPickCtrl.DoShortcutPick();
 					break;
 			}
 		}

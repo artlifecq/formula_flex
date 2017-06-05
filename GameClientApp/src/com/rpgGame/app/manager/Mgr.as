@@ -34,5 +34,6 @@ package com.rpgGame.app.manager
 		{
 			return VipManager.ins;
 		}
+		
 	}
 }

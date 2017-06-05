@@ -1,5 +1,6 @@
 package com.rpgGame.app.manager.fight
 {
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.TeamManager;
 	import com.rpgGame.app.manager.friend.FriendManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -95,15 +96,26 @@ package com.rpgGame.app.manager.fight
                 }
                 if (SceneCharType.PLAYER == role.type) {
                     // 是玩家
-                    checkPlayer:switch (MainRoleManager.actorInfo.pkMode) {
+                    checkPlayer:
+						var pkMode:int=MainRoleManager.actorInfo.pkMode;
+						switch (pkMode) {
                         case PKModeType.ALL:
                             // 全体
                             modeState = FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
                             break;
                         case PKModeType.TEAM:
-                            // 队伍
-                            // TODO 现在没有队伍故可攻击
-                            modeState = FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
+                            // 队伍,肯定有组队
+							if (Mgr.teamMgr.isInMyTeam(roleInfo.serverID)) 
+							{
+								// TODO 现在没有队伍故可攻击
+								modeState = FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
+							}
+							else
+							{
+								// TODO 现在没有队伍故可攻击
+								modeState = FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
+							}
+                           
                             break;
                         case PKModeType.GUILD:
                             // 帮派

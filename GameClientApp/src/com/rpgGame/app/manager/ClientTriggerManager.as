@@ -20,7 +20,6 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.cfg.collect.CollectCfgData;
 	import com.rpgGame.coreData.clientConfig.ClientDialog;
 	import com.rpgGame.coreData.clientConfig.ClientSceneEffect;
-	import com.rpgGame.coreData.clientConfig.ClientTrigger;
 	import com.rpgGame.coreData.enum.EnumClientTriggerType;
 	import com.rpgGame.coreData.enum.TriggerTypeEnum;
 	import com.rpgGame.coreData.info.MapDataManager;
@@ -42,6 +41,7 @@ package com.rpgGame.app.manager
 	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
+	import com.rpgGame.coreData.cfg.ClientTrigger;
 
 	/**
 	 *
@@ -437,7 +437,7 @@ package com.rpgGame.app.manager
 		}
 		
 		private static function createSceneEffect(effectData : ClientSceneEffect) : void
-		{
+		{//L.l("添加火墙："+effectData.id);
 			var bornPosArr : Array = effectData.bornPos.split(";");
 			var len : int = bornPosArr.length;
 			for (var i : int = 0; i < len; i++)
@@ -449,7 +449,7 @@ package com.rpgGame.app.manager
 			}
 		}
 		private static function removeSceneEffect(effectData : ClientSceneEffect) : void
-		{
+		{//L.l("删除火墙："+effectData.id);
 			var bornPosArr : Array = effectData.bornPos.split(";");
 			var len : int = bornPosArr.length;
 			for (var i : int = 0; i < len; i++)
@@ -476,34 +476,24 @@ package com.rpgGame.app.manager
 		/**创建阻挡区域*/
 		private static function triggerCreateObstacle(triggerData : ClientTrigger) : void
 		{
-			_createEffectTrigger = triggerData;
-			if (_createEffectTrigger)
+			if (triggerData)
 			{
-				var currMapId : int = MainRoleManager.actorInfo.mapID;
-				if (_createEffectTrigger.sceneId == currMapId)
+				var sceneEffectIds : Array = triggerData.obstacleArea;
+				for each (var sceneEffectId : int in sceneEffectIds)
 				{
-					var sceneEffectIds : Array = _createEffectTrigger.obstacleArea;
-					for each (var sceneEffectId : int in sceneEffectIds)
-					{
-						AreaMapManager.addDynamicObstacleArea(sceneEffectId);
-					}
+					AreaMapManager.addDynamicObstacleArea(sceneEffectId);
 				}
 			}
 		}
 		/**清除阻挡区域*/
 		private static function triggerClearObstacle(triggerData : ClientTrigger) : void
 		{
-			_createEffectTrigger = triggerData;
-			if (_createEffectTrigger)
+			if (triggerData)
 			{
-				var currMapId : int = MainRoleManager.actorInfo.mapID;
-				if (_createEffectTrigger.sceneId == currMapId)
+				var sceneEffectIds : Array = triggerData.obstacleAreaRemove;
+				for each (var sceneEffectId : int in sceneEffectIds)
 				{
-					var sceneEffectIds : Array = _createEffectTrigger.obstacleAreaRemove;
-					for each (var sceneEffectId : int in sceneEffectIds)
-					{
-						AreaMapManager.removeDynamicObstacleArea(sceneEffectId);
-					}
+					AreaMapManager.removeDynamicObstacleArea(sceneEffectId);
 				}
 			}
 		}
@@ -511,21 +501,15 @@ package com.rpgGame.app.manager
 		/**创建场景特效*/
 		private static function triggerCreateSceneEffect(triggerData : ClientTrigger) : void
 		{
-			_createEffectTrigger = triggerData;
-			if (_createEffectTrigger)
+			if (triggerData)
 			{
-				var currMapId : int = MainRoleManager.actorInfo.mapID;
-				if (_createEffectTrigger.sceneId == currMapId)
+				var sceneEffectIds : Array = triggerData.sceneEffectIds;
+				for each (var sceneEffectId : int in sceneEffectIds)
 				{
-					var sceneEffectIds : Array = _createEffectTrigger.sceneEffectIds;
-					for each (var sceneEffectId : int in sceneEffectIds)
+					var effectData : ClientSceneEffect = SceneEffectCfgData.getData(sceneEffectId);
+					if (effectData)
 					{
-						var effectData : ClientSceneEffect = SceneEffectCfgData.getData(sceneEffectId);
-						
-						if (effectData && effectData.sceneID == currMapId)
-						{
-							createSceneEffect(effectData);
-						}
+						createSceneEffect(effectData);
 					}
 				}
 			}
@@ -533,21 +517,15 @@ package com.rpgGame.app.manager
 		/**清除场景特效*/
 		private static function triggerClearSceneEffect(triggerData : ClientTrigger) : void
 		{
-			_createEffectTrigger = triggerData;
-			if (_createEffectTrigger)
+			if (triggerData)
 			{
-				var currMapId : int = MainRoleManager.actorInfo.mapID;
-				if (_createEffectTrigger.sceneId == currMapId)
+				var sceneEffectIds : Array = triggerData.sceneEffectRemove;
+				for each (var sceneEffectId : int in sceneEffectIds)
 				{
-					var sceneEffectIds : Array = _createEffectTrigger.sceneEffectRemove;
-					for each (var sceneEffectId : int in sceneEffectIds)
+					var effectData : ClientSceneEffect = SceneEffectCfgData.getData(sceneEffectId);
+					if (effectData)
 					{
-						var effectData : ClientSceneEffect = SceneEffectCfgData.getData(sceneEffectId);
-						
-						if (effectData)
-						{
-							removeSceneEffect(effectData);
-						}
+						removeSceneEffect(effectData);
 					}
 				}
 			}

@@ -1,13 +1,10 @@
 package com.rpgGame.app.manager.chat
 {
-	import com.game.engine3D.vo.BaseObj3D;
 	import com.gameClient.utils.StringFilter;
-	import com.rpgGame.app.graphics.BubbleDialogFace;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.shell.ShellManager;
-	import com.rpgGame.app.manager.shop.ShopManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.richText.RichTextCustomLinkType;
 	import com.rpgGame.app.richText.RichTextCustomUtil;
@@ -20,13 +17,12 @@ package com.rpgGame.app.manager.chat
 	import com.rpgGame.core.events.ChatEvent;
 	import com.rpgGame.coreData.cfg.ChatCfgData;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.country.CountryNameCfgData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
-	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.info.chat.ChatInfo;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
-	import com.rpgGame.coreData.info.item.GetShowItemVo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
@@ -43,8 +39,6 @@ package com.rpgGame.app.manager.chat
 	import app.message.ChatContentProto.PosInfoProto;
 	
 	import feathers.data.ListCollection;
-	
-	import gs.TweenLite;
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
@@ -71,7 +65,7 @@ package com.rpgGame.app.manager.chat
 		
 		private static var _chatItemHash : HashMap = new HashMap();
 		
-		private static var MAX_CHATSHOWITEMCACEHE : int = 300;
+		public static var MAX_CHATSHOWITEMCACEHE : int = 300;
 		
 		
 		
@@ -132,6 +126,9 @@ package com.rpgGame.app.manager.chat
 		 */
 		public static function recordSystemHearsayMsg(msg:ResChatMessage):void
 		{
+			if(_systemHearsayMsg.length>=MAX_CHATSHOWITEMCACEHE){
+				_systemHearsayMsg.shift();
+			}
 			_systemHearsayMsg.push(msg);
 			if(msg.type==EnumChatChannelType.CHAT_CHANNEL_SYSTEM){
 				recordSystemMsg(msg);
@@ -140,7 +137,7 @@ package com.rpgGame.app.manager.chat
 			}
 			
 			if(sysHearsayMsgChange){
-				sysHearsayMsgChange();
+				sysHearsayMsgChange(msg);
 			}
 		}
 		
@@ -495,7 +492,8 @@ package com.rpgGame.app.manager.chat
 		{
 			if (content == "") //空白不发送
 			{
-				NoticeManager.mouseFollowNotify("无法发送空消息");
+				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(22010));
+				//	NoticeManager.mouseFollowNotify("无法发送空消息");
 				return;
 			}
 			
@@ -504,8 +502,8 @@ package com.rpgGame.app.manager.chat
 				var itemInfo : ClientItemInfo = BackPackManager.instance.getFirstCanUseItemByCfgId(ChatCfgData.paidChatGoodsID);
 				if (itemInfo == null)
 				{
-//					ShopManager.ins.  //弹出后买面板
-					NoticeManager.showHint(EnumHintInfo.CHAT_CHANNEL_NO_LABA_ITEM, [ItemConfig.getItemName(ChatCfgData.paidChatGoodsID)]);
+					//	ShopManager.ins.  //弹出后买面板
+					NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(22003));
 					return;
 				}
 			}
@@ -568,8 +566,8 @@ package com.rpgGame.app.manager.chat
 					//                    return true;
 				}
 			}
-			//验证gm命令
-			var isGm : Boolean = isGmMsg(msg);
+				//验证gm命令
+				var isGm : Boolean = isGmMsg(msg);
 			if (isGm)
 			{
 				GmSender.sendMsg(getGmContent(msg));

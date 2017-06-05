@@ -29,24 +29,42 @@ package org.mokylin.skin.mainui.navigation
 			
 			this.currentState = "down";
 			this.width = 51;
-			this.elementsContent = [labelDisplay_i(),iconDisplay_i()];
+			this.height = 20;
+			this.elementsContent = [];
 			
 			states = {
 				hover:[
 						{target:"labelDisplay",
 							name:"color",
-							value:0xdfcaad
+							value:0xbbab91
 						}
 					]
 				,
 				up:[
 						{target:"labelDisplay",
 							name:"color",
-							value:0x908371
+							value:0x7e7669
+						}
+					]
+				,
+				init:[
+						{target:"labelDisplay",
+							name:"textAlign",
+							value:"center"
+						}
+						,
+						{target:"labelDisplay",
+							name:"color",
+							value:0x7e7669
+						}
+						,
+						{target:"labelDisplay",
+							name:"nativeFilters",
+							value:Fontter.filterObj["labelFilterBlack"]
 						}
 					]
 			};
-			skinNames={};
+			skinNames={"down":"ui/mainui/navigation/zhishi.png", "hover":"ui/mainui/navigation/zhishi.png"};
 		}
 
 
@@ -66,12 +84,11 @@ package org.mokylin.skin.mainui.navigation
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			labelDisplay = temp;
 			temp.name = "labelDisplay";
-			temp.bottom = 0;
+			temp.height = 20;
+			temp.text = "";
 			temp.textAlign = "center";
-			temp.color = 0x908371;
+			temp.color = 0x7e7669;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.top = 0;
-			temp.verticalAlign = "middle";
 			temp.width = 41;
 			temp.x = 10;
 			return temp;

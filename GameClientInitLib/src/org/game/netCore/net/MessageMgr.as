@@ -1,6 +1,7 @@
 package org.game.netCore.net
 {
 	import com.gameClient.alert.AlertPanel;
+	import com.gameClient.alert.ReconnectionPanelExt;
 	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.DebugUtil;
 	import com.gameClient.utils.HashMap;
@@ -659,9 +660,10 @@ package org.game.netCore.net
 				{
 					if ( !isReplace )
 					{
-						//ReconnectPanexlExt.singleton.showPanel(30, "【连接close】");
+//						ReconnectPanexlExt.singleton.showPanel(30, "【连接close】");
 						//暂时弹框 没filter了
-						AlertPanel.showMsg("服务器连接断开", null, false);
+//						AlertPanel.showMsg("服务器连接断开", null, false);
+						ReconnectionPanelExt.showPanel(null,"提示","掉线时不会获得任何收益的喔","自动重连",5);
 					}
 					else
 					{
@@ -788,6 +790,7 @@ package org.game.netCore.net
 						if ( message == null )
 						{
 							GameLog.addError( "客户端缺少消息 " + id + "上一个消息:" + _lastMsgID );
+							AlertPanel.showMsg("客户端缺少消息 " + id + "上一个消息:" + _lastMsgID, null );
 							isPass = true;
 						}
 						else

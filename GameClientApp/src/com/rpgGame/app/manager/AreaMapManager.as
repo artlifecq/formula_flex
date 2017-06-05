@@ -14,7 +14,6 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.cfg.ClientTriggerCfgData;
 	import com.rpgGame.coreData.cfg.TriggerCfgData;
 	import com.rpgGame.coreData.clientConfig.ClientArea;
-	import com.rpgGame.coreData.clientConfig.ClientTrigger;
 	import com.rpgGame.coreData.enum.AreaMapTypeEnum;
 	import com.rpgGame.coreData.enum.EnumAreaMapType;
 	import com.rpgGame.coreData.enum.EnumClientTriggerType;
@@ -23,6 +22,7 @@ package com.rpgGame.app.manager
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
+	import com.rpgGame.coreData.cfg.ClientTrigger;
 
 	/**
 	 *
@@ -187,7 +187,7 @@ package com.rpgGame.app.manager
 		 *
 		 */
 		public static function addDynamicObstacleArea(aid:int) : void
-		{
+		{//L.l("添加阻挡区域："+aid);//return;
 			var obstacleArea : ClientMapAreaData = AreaCfgData.getDynamicObstacleAreas(aid);
 			if(!obstacleArea)return;
 			var mapPointSets : Vector.<MapPointSet> = new Vector.<MapPointSet>();
@@ -198,7 +198,7 @@ package com.rpgGame.app.manager
 		 *  删除动态阻挡区域
 		 */
 		public static function removeDynamicObstacleArea(aid:int) : void
-		{
+		{//L.l("删除阻挡区域："+aid);//return;
 			SceneManager.getScene().sceneMapLayer.removeObstaclePoints(["MapDataDynamicObstacleArea" + aid]);
 		}
 

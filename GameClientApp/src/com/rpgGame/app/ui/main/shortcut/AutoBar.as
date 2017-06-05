@@ -73,8 +73,8 @@ package com.rpgGame.app.ui.main.shortcut
 			EventManager.addEvent(TaskEvent.AUTO_FIGHT_START,fightEffctPlay);
 			EventManager.addEvent(TaskEvent.AUTO_FIGHT_STOP,fightEffctStop);
 			
-			EventManager.addEvent(TaskEvent.AUTO_TASK_START,taskEffctPlay);
-			EventManager.addEvent(TaskEvent.AUTO_TASK_STOP,taskEffctStop);
+			EventManager.addEvent(TaskEvent.AUTO_WALK_START,taskEffctPlay);
+			EventManager.addEvent(TaskEvent.AUTO_WALK_STOP,taskEffctStop);
 		}
 		
 		public function setAutoFight():void

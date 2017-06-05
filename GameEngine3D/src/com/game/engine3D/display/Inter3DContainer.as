@@ -71,22 +71,37 @@ package com.game.engine3D.display
 			var unit:RenderUnit3D=sr3D.addRenderUnitWith(data, 0, onPlayComplete,addEft);
 			function addEft(render:RenderUnit3D):void
 			{
-				unit.stop();
-				unit.stopRender();
-				sr3D.stop();
-				sr3D.stopEffect();
+				if(render)
+				{
+					render.stop();
+					render.stopRender();
+					sr3D.stop();
+					sr3D.stopEffect();
+					
+				}
 				if(addComplete!=null)
 				{
 					addComplete(render);
 				}
 				
 			}
+			if(unit)
+			{
+				unit.stop();
+				unit.stopRender();
+				sr3D.stop();
+				sr3D.stopEffect();
+				
+			}
 			addChild3D(sr3D);
 			return sr3D;
 		}
-		public function addChild3D(child : InterObject3D) : void
+		public function addChild3D(child : InterObject3D,index:int = -1) : void
 		{
-			this.addChild(child);
+			if(index<0)
+				this.addChild(child);
+			else
+				this.addChildAt(child,index);
 			if (!_inter3DObjs)
 			{
 				_inter3DObjs = new Vector.<InterObject3D>();

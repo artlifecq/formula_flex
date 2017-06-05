@@ -1,6 +1,11 @@
 package   com.rpgGame.app.ui.main.team
 {
 	import com.rpgGame.app.manager.Mgr;
+	import com.rpgGame.app.manager.hint.FloatingText;
+	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
+	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.view.icon.BgIcon;
 	import com.rpgGame.core.events.TeamEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
@@ -9,22 +14,25 @@ package   com.rpgGame.app.ui.main.team
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.BuffStateDataManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.clientConfig.Q_buff;
 	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.type.AssetUrl;
-	import com.rpgGame.coreData.utils.FilterUtil;
 	import com.rpgGame.netData.team.bean.TeamMemberBriefInfo;
 	import com.rpgGame.netData.team.bean.TeamMemberInfo;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.UIAsset;
-	import feathers.utils.filter.GrayFilter;
 	
 	import org.mokylin.skin.mainui.head.head_min_Skin;
-
-
-
+	
+	import starling.display.DisplayObject;
+	
+	
+	
 	
 	public class TeamBarListItemExt extends SkinUI
 	{
@@ -49,7 +57,61 @@ package   com.rpgGame.app.ui.main.team
 			TipTargetManager.show(this,TargetTipsMaker.makeSimplePropChangeTextTips(str,tipData));
 			Mgr.teamMgr.addEventListener(TeamEvent.TEAM_MEM_ATTR_CHANGE,onTeamAttrChange);
 			MCUtil.removeSelf(_skin.role_buffer);
+			
+			
 		}	
+		override protected function onTouchTarget(target:DisplayObject):void
+		{
+			super.onTouchTarget(target);
+			switch(target)
+			{
+				case _skin.btn_cha:
+				{
+					onView();
+					break;
+				}
+					
+				default:
+				{
+					onSelectPlayer();
+					break;
+				}
+			}
+		}
+		private function onView():void
+		{
+			// TODO Auto Generated method stub
+			if (_data) 
+			{
+				Mgr.teamMgr.loopPlayer(_data.memberId);
+			}
+		}
+		private function onSelectPlayer():void
+		{
+			if (_data) 
+			{
+				var role:SceneRole=SceneManager.getSceneObjByID(_data.memberId.ToGID()) as SceneRole;
+				if (role) 
+				{
+					if (role!=SceneRoleSelectManager.selectedRole) 
+					{
+						SceneRoleSelectManager.selectedRole=role;
+					}
+				}
+				else
+				{
+					var state:int=Mgr.teamMgr.getNearState(_data.memberId);
+					if (state==1) 
+					{
+						FloatingText.showUp("该玩家离你太远");
+					}
+					else if (state==2) 
+					{
+						FloatingText.showUp("该玩家已下线");
+					}
+				}
+			}
+		}
 		private function onTeamAttrChange(event:TeamEvent):void
 		{
 			if (!_data) 
@@ -74,7 +136,7 @@ package   com.rpgGame.app.ui.main.team
 		public function setData(team:*):void
 		{
 			this._data=team as TeamMemberInfo;
-		
+			_skin.btn_cha.visible=!_data.memberId.EqualTo(MainRoleManager.actorInfo.serverID);
 			var job:int=data.appearanceInfo.job;
 			_skin.UI_bing.visible=job==JobEnum.ROLE_1_TYPE;
 			_skin.UI_yi.visible=job==JobEnum.ROLE_4_TYPE;
@@ -143,12 +205,16 @@ package   com.rpgGame.app.ui.main.team
 				var len:int=buff.length;
 				for (var i:int = 0; i < len; i++) 
 				{
-					var icon:BgIcon=new BgIcon(IcoSizeEnum.ICON_24);
-					icon.setIconResName(ClientConfig.getBuffIcon(BuffStateDataManager.getData(buff[i]).q_icon, IcoSizeEnum.ICON_24 ));
-					icon.x=_skin.role_buffer.x+i*26;
-					icon.y=_skin.role_buffer.y;
-					this.addChild(icon);
-					buffIcon.push(icon);
+					var q_buff:Q_buff=BuffStateDataManager.getData(buff[i]);
+					if(q_buff.q_effect_type==2)
+					{
+						var icon:BgIcon=new BgIcon(IcoSizeEnum.ICON_24);				
+						icon.setIconResName(ClientConfig.getBuffIcon(q_buff.q_icon, IcoSizeEnum.ICON_24 ));
+						icon.x=_skin.role_buffer.x+i*26;
+						icon.y=_skin.role_buffer.y;
+						this.addChild(icon);
+						buffIcon.push(icon);
+					}
 				}
 			}
 		}
@@ -163,6 +229,11 @@ package   com.rpgGame.app.ui.main.team
 			_data=null;
 			TipTargetManager.remove(this);
 			Mgr.teamMgr.removeEventListener(TeamEvent.TEAM_MEM_ATTR_CHANGE,onTeamAttrChange);
+			clearAllBuff();
+		}
+		public function clearData():void
+		{
+			_data=null;
 			clearAllBuff();
 		}
 		private function clearAllBuff():void

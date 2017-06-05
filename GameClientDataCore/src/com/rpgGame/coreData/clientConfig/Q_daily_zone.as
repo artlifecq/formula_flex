@@ -42,7 +42,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_combat:int;
 		 /**  星数判定条件[条件(1表示杀怪总数2表示剩余时间),1星值,2星值,3星值] 如：[1,10,20,30]表示 杀怪总数 1星10只，2星达到20只，3星达到30只  [2,10,20,30]表示副本剩余时间 1星10秒，2星20秒，3星30秒  各取区间. */
 		public var q_star_condition:String;
-		 /**  扩展字段 */
+		 /**  扩展字段(1.经验副本根据玩家等级) */
 		public var q_other:String;
 
 	}

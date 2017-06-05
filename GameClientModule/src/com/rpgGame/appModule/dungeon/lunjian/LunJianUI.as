@@ -3,15 +3,17 @@ package com.rpgGame.appModule.dungeon.lunjian
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.ui.common.PageContainerUI;
 	import com.rpgGame.appModule.common.ViewUI;
-	import com.rpgGame.appModule.dungeon.lunjian.LunJianItemData;
-	import com.rpgGame.appModule.dungeon.lunjian.LunJianItemRender;
-	import com.rpgGame.appModule.dungeon.lunjian.NpcMapItemData;
-	import com.rpgGame.appModule.dungeon.lunjian.NpcMapItemRender;
 	import com.rpgGame.core.events.DungeonEvent;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.cfg.LunJianCfg;
+	import com.rpgGame.coreData.cfg.TipsCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_lunjian;
 	import com.rpgGame.coreData.info.map.SceneData;
+	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.netData.lunjian.bean.LunJianInfo;
+	
+	import away3d.events.Event;
 	
 	import feathers.data.ListCollection;
 	
@@ -20,10 +22,9 @@ package com.rpgGame.appModule.dungeon.lunjian
 	import org.mokylin.skin.app.jianghu.lunjian.LunJian_Skin;
 	
 	import starling.display.DisplayObject;
-	import away3d.events.Event;
 	
 	/**
-	 *
+	 *论剑界面
 	 *@author dik
 	 *2017-5-3上午11:56:28
 	 */
@@ -111,6 +112,8 @@ package com.rpgGame.appModule.dungeon.lunjian
 		{
 			EventManager.addEvent(DungeonEvent.UPDATE_LUNJIAN_PANEL,onGetLunJianDatas);
 			_skin.list_map.addEventListener(Event.CHANGE,onChangeSelectedMap);
+			
+			TipTargetManager.show( _skin.btnShuoming,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(28)));
 		}
 		
 		private function onChangeSelectedMap(e:Event):void
@@ -138,6 +141,9 @@ package com.rpgGame.appModule.dungeon.lunjian
 				info.leftNum=getLeftNum(info.sceneData);
 			}
 //			_skin.list_map.selectedIndex=0;
+			if(_skin.list_map.selectedIndex==-1){
+				_skin.list_map.selectedIndex=0;
+			}
 			_skin.list_map.dataProvider.updateItemAt(_skin.list_map.selectedIndex);
 		}
 		
@@ -182,6 +188,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 			super.hide();
 			EventManager.removeEvent(DungeonEvent.UPDATE_LUNJIAN_PANEL,onGetLunJianDatas);
 			_skin.list_map.removeEventListener(Event.CHANGE,onChangeSelectedMap);
+			TipTargetManager.remove(_skin.btnShuoming);
 		}			
 	}
 }

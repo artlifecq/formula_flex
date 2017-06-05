@@ -1,11 +1,13 @@
 package org.mokylin.skin.mainui.head
 {
 	import feathers.controls.text.Fontter;
+	import feathers.controls.Button;
 	import feathers.controls.Group;
 	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import org.mokylin.skin.mainui.head.button.ButtonSkin_cha;
 	import org.mokylin.skin.mainui.head.npc_xuecao2;
 
 	/**
@@ -23,6 +25,8 @@ package org.mokylin.skin.mainui.head
 		public var UI_mo:feathers.controls.UIAsset;
 
 		public var UI_yi:feathers.controls.UIAsset;
+
+		public var btn_cha:feathers.controls.Button;
 
 		public var grp_zhiye:feathers.controls.Group;
 
@@ -44,8 +48,8 @@ package org.mokylin.skin.mainui.head
 			
 			this.currentState = "normal";
 			this.height = 56;
-			this.width = 217;
-			this.elementsContent = [__head_min_Skin_UIAsset1_i(),grp_zhiye_i(),qizi_i(),role_buffer_i(),role_name_i(),xuecao_bar_i()];
+			this.width = 243;
+			this.elementsContent = [__head_min_Skin_UIAsset1_i(),grp_zhiye_i(),qizi_i(),role_buffer_i(),role_name_i(),xuecao_bar_i(),btn_cha_i()];
 			
 			states = {
 			};
@@ -101,6 +105,17 @@ package org.mokylin.skin.mainui.head
 			temp.width = 210;
 			temp.x = 7;
 			temp.y = 5;
+			return temp;
+		}
+
+		private function btn_cha_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btn_cha = temp;
+			temp.name = "btn_cha";
+			temp.styleClass = org.mokylin.skin.mainui.head.button.ButtonSkin_cha;
+			temp.x = 214;
+			temp.y = 2;
 			return temp;
 		}
 

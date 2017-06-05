@@ -313,7 +313,7 @@ package com.rpgGame.app.cmdlistener.engine
 					KeyFuncProcess.exec(info,true);
 					break;
 				case KeyCodeType.SKILL:
-					TrusteeshipManager.getInstance().stopFightTarget();//放技能就停止被动战斗
+					
 					info.funcS = info.funcID.toString();
 					KeySpellProcess.exec(info);
 					break;

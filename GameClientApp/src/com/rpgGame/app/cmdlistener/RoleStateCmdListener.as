@@ -22,7 +22,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.core.events.SceneCharacterEvent;
 	import com.rpgGame.core.events.SceneInteractiveEvent;
 	import com.rpgGame.core.events.UserMoveEvent;
-	import com.rpgGame.coreData.clientConfig.ClientTrigger;
+	import com.rpgGame.coreData.cfg.ClientTrigger;
 	import com.rpgGame.coreData.enum.EnumAreaMapType;
 	import com.rpgGame.coreData.info.task.target.TaskAreaExplorationInfo;
 	import com.rpgGame.coreData.info.task.target.TaskFollowEscortInfo;

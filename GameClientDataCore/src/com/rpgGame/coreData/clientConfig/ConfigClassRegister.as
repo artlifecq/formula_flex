@@ -30,11 +30,9 @@ package com.rpgGame.coreData.clientConfig
 		public static const ClientSceneNPC:String = "data.ClientSceneNPC";
 		/**  客户端在场景中的特效						 */
 		public static const ClientSceneRole:String = "data.ClientSceneRole";
-		/**  客户端触发数据															 */
-		public static const ClientTrigger:String = "data.ClientTrigger";
 		/**  客户端表情配置					 */
 		public static const FaceInfo:String = "data.FaceInfo";
-		/**  活动条信息表											 */
+		/**  窗口链接信息表											 */
 		public static const FunctionBarInfo:String = "data.FunctionBarInfo";
 		/**  游戏音乐配置表							 */
 		public static const GameSoundInfo:String = "data.GameSoundInfo";
@@ -52,7 +50,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_map:String = "data.map.Q_map";
 		/**  场景特效动态生成表						 */
 		public static const Q_map_effect:String = "data.map.Q_map_effect";
-		/**  地图传送点数据库											 */
+		/**  地图传送点数据库												 */
 		public static const Q_map_transfer:String = "data.map.Q_map_transfer";
 		/**  场景音效配置信息					 */
 		public static const SceneSoundInfo:String = "data.map.SceneSoundInfo";
@@ -98,7 +96,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_cheats_node:String = "data.Q_cheats_node";
 		/**  资源副本数据库	副本类型 （1真气,2装备,3经验）	背景图													 */
 		public static const Q_daily_zone:String = "data.Q_daily_zone";
-		/**  每日副本刷怪配置表												 */
+		/**  每日副本刷怪配置表													 */
 		public static const Q_dailyzone_monster:String = "data.Q_dailyzone_monster";
 		/**  复活界面配置表				 */
 		public static const Q_die:String = "data.Q_die";
@@ -136,7 +134,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_lostskill_up:String = "data.Q_lostskill_up";
 		/**  论剑配置表											 */
 		public static const Q_lunjian:String = "data.Q_lunjian";
-		/**  副本触发表											 */
+		/**  副本触发表																		 */
 		public static const Q_map_trigger:String = "data.Q_map_trigger";
 		/**  经脉冲穴数据库																 */
 		public static const Q_meridian:String = "data.Q_meridian";
@@ -152,7 +150,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_mission_section:String = "data.Q_mission_section";
 		/**  任务对话配置表(1-20000为主线任务对应的对话id，20001-30000是支线任务对话id)			 */
 		public static const Q_mission_segment:String = "data.Q_mission_segment";
-		/**  功能开放表									 */
+		/**  功能开放表														 */
 		public static const Q_newfunc:String = "data.Q_newfunc";
 		/**  通知列表			 */
 		public static const Q_notify:String = "data.Q_notify";
@@ -166,9 +164,9 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_tipsinfo:String = "data.Q_tipsinfo";
 		/**  窗口链接				 */
 		public static const Q_windowInfo:String = "data.Q_windowInfo";
-		/**  副本数据表														 */
+		/**  副本数据表															 */
 		public static const Q_zone:String = "data.Q_zone";
-		/**  多人副本数据表							 */
+		/**  多人副本数据表								 */
 		public static const Q_zone_multy:String = "data.Q_zone_multy";
 		/**  职业对应的名字		 */
 		public static const RaceNameInfo:String = "data.RaceNameInfo";
@@ -213,7 +211,6 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.ClientSceneEffect", com.rpgGame.coreData.clientConfig.ClientSceneEffect);
 			regClass("data.ClientSceneNPC", com.rpgGame.coreData.clientConfig.ClientSceneNPC);
 			regClass("data.ClientSceneRole", com.rpgGame.coreData.clientConfig.ClientSceneRole);
-			regClass("data.ClientTrigger", com.rpgGame.coreData.clientConfig.ClientTrigger);
 			regClass("data.FaceInfo", com.rpgGame.coreData.clientConfig.FaceInfo);
 			regClass("data.FunctionBarInfo", com.rpgGame.coreData.clientConfig.FunctionBarInfo);
 			regClass("data.GameSoundInfo", com.rpgGame.coreData.clientConfig.GameSoundInfo);

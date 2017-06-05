@@ -31,7 +31,7 @@ package com.rpgGame.appModule.role
 		protected var _skin : beibao_Skin;
 		
 		
-		private var _subRole:SubRolePanel;
+		protected var _subRole:SubRolePanel;
 		private var _subMeridian:MeridianMainPanelExt;
 		private var _subZhanGong:ZhanGongPanelExt;
 		private var _subJunJie:JunJiePanelExt;
@@ -55,15 +55,17 @@ package com.rpgGame.appModule.role
 		{
 			super.show(data, openTable, parentContiner);
 			var sub:String=openTable;
-			if (sub==""&&_curSub==null) 
+			if (sub==""||_curSub==null) 
 			{
 				sub=SUB_ROLE;
+				showSubPanel(sub);			
+			}else{
 				showSubPanel(sub);
-			}
-			
+			}			
 		}
 		public function showSubPanel(subType:String):void
 		{
+			setBtnState(subType);
 			var sub:SkinUI;
 			switch(subType)
 			{
@@ -110,6 +112,61 @@ package com.rpgGame.appModule.role
 			(_curSub as DisplayObject).x=0;
 			(_curSub as DisplayObject).y=0;
 			this.addChildAt(_curSub as DisplayObject,1);
+		}
+		
+		protected function setBtnState(subType:String):void
+		{
+			switch(subType)
+			{
+				case SUB_ROLE:
+				{
+					(_skin.daohang.skin as daohang_Skin).btn_juese.isSelected=true;
+					break;
+				}
+				case SUB_MERIDIAN:
+				{
+					(_skin.daohang.skin as daohang_Skin).btn_jingmai.isSelected=true;
+					break;
+				}
+				case SUB_ZHANGONG:
+				{
+					(_skin.daohang.skin as daohang_Skin).btn_zhangong.isSelected=true;
+					break;
+				}
+				case SUB_XINFA:
+				{
+					(_skin.daohang.skin as daohang_Skin).btn_xinfa.isSelected=true;
+					break;
+				}
+				case SUB_JUNJIE:
+				{
+					(_skin.daohang.skin as daohang_Skin).btn_junjie.isSelected=true;
+					break;
+				}
+				default:
+				{
+					(_skin.daohang.skin as daohang_Skin).btn_juese.isSelected=true;
+					break;
+				}
+			}
+		}
+		
+		protected function set isSeeOther(value:Boolean):void
+		{
+			var daohang:daohang_Skin=_skin.daohang.skin as daohang_Skin;
+			var i:int;
+			if(value){
+				for(i=0;i<daohang.elementsContent.length;i++){
+					if(daohang.elementsContent[i]!=daohang.btn_juese){
+						daohang.elementsContent[i].visible=false;
+					}
+				}
+			}else{
+				for(i=0;i<daohang.elementsContent.length;i++){
+					daohang.elementsContent[i].visible=true;
+				}
+			}
+			
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void

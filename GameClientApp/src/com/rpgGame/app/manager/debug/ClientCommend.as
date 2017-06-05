@@ -4,8 +4,18 @@ package   com.rpgGame.app.manager.debug
 	import com.game.engine3D.utils.StatsUtil;
 	import com.game.mainCore.core.manager.LayerManager;
 	import com.gameClient.utils.HashMap;
+	import com.rpgGame.app.fight.spell.SkillAddPop;
+	import com.rpgGame.app.fight.spell.SpellHitHelper;
 	import com.rpgGame.app.manager.Mgr;
+	import com.rpgGame.app.manager.PKMamager;
+	import com.rpgGame.app.manager.fight.FightFaceHelper;
+	import com.rpgGame.app.manager.pop.UIPopManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.netData.skill.bean.SkillInfo;
 	
+	import org.client.mainCore.ds.HashMap;
+	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.net.MessageMgr;
 
 	
@@ -23,7 +33,7 @@ package   com.rpgGame.app.manager.debug
 			_isDevelop=MessageMgr.Ins.ip.indexOf("192.168")!=-1
 		}
 		
-		private  var commandList:HashMap = new HashMap();
+		private  var commandList:com.gameClient.utils.HashMap = new com.gameClient.utils.HashMap();
 		private  var docommandList:Vector.<String> = new Vector.<String>;
 		
 
@@ -44,9 +54,46 @@ package   com.rpgGame.app.manager.debug
 			{
 				Mgr.vipMgr.vipLv=arg[0];
 			});
-			commandList.put( ".buy", function (...arg):void
+			commandList.put( ".pk", function (...arg):void
+			{
+				MainRoleManager.actorInfo.pkMode=arg[0];
+				PKMamager.setPkMode(arg[0]);
+				
+			});
+			commandList.put( ".fight", function (...arg):void
 			{
 				
+				SpellHitHelper.bool=!SpellHitHelper.bool;
+			});
+			commandList.put( ".attr", function (...arg):void
+			{
+				
+				var hash:org.client.mainCore.ds.HashMap=new org.client.mainCore.ds.HashMap();
+				hash.add(1,1000);
+				hash.add(2,2000);
+				hash.add(3,-1000);
+				hash.add(4,-2023);
+				hash.add(10,1333);
+				hash.add(15,14444);
+				hash.add(16,-302222);
+				FightFaceHelper.showPlayerBaseAttrChange(hash);
+			});
+			commandList.put( ".lvup", function (...arg):void
+			{
+				var data:Object={};
+				data.sys=arg[0];
+				data.desc=arg[1];
+				data.btnText=arg[2];
+				EventManager.dispatchEvent(MainPlayerEvent.SYS_CAN_LEVEL_UP,data);
+			});
+			commandList.put( ".skill", function (...arg):void
+			{
+				var skill:SkillInfo=new SkillInfo();
+				skill.skillModelId=arg[0];
+				skill.skillLevel=1;
+				skill.skillChildLv=1;
+				skill.skillExp=2;
+				UIPopManager.showAlonePopUI(SkillAddPop,skill);
 			});
 		}
 		

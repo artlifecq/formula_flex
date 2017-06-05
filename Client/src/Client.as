@@ -8,7 +8,6 @@ package
 	import com.client.process.LoadDll;
 	import com.client.process.LoadEmbedFonts;
 	import com.client.process.LoadMaskWorld;
-	import com.client.process.LoadMouseAssets;
 	import com.client.process.LoadPublicUIAssets;
 	import com.client.process.LoginInput;
 	import com.client.process.ProcessState;
@@ -22,10 +21,12 @@ package
 	import com.game.engine3D.process.ProcessStateMachine;
 	import com.game.engine3D.utils.StatsUtil;
 	import com.gameClient.alert.AlertPanel;
+	import com.gameClient.alert.ReconnectionPanelExt;
 	import com.gameClient.log.GameLog;
 	import com.gameClient.log.GameLogView;
 	import com.gameClient.utils.VersionUtils;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.LanguageConfig;
 	
 	import flash.display.Sprite;
 	import flash.events.ContextMenuEvent;
@@ -42,6 +43,8 @@ package
 	
 	import gs.TweenLite;
 	
+	import utils.StringUtil;
+	
 	/**
 	 *
 	 * 程序文档类
@@ -49,7 +52,7 @@ package
 	 * 创建时间：2015-6-2 上午10:15:32
 	 *
 	 */
-	[SWF(width = "1600", height = "1000", backgroundColor = "0x000000", frameRate = "60", quality = "LOW")]
+	[SWF( backgroundColor = "0x000000", frameRate = "60", quality = "LOW")]
 	public class Client extends Sprite
 	{
 		public var versionMap : Object = null;
@@ -64,6 +67,12 @@ package
 		public var server : String = "";
 		public var port : uint = 0;
 		public var policyPort : uint = 0;
+        public var areaId : uint = 1;
+        public var agent : String = "37";
+        public var loginName : String = "";
+        public var loginKey : String = "";
+        public var loginTime : uint = 0;
+        
 		/**
 		 * 微端桥接
 		 */
@@ -89,10 +98,16 @@ package
 		protected function onAddToStg(event : Event) : void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, onAddToStg);
+            ClientGlobal.urlParmar = urlParmar || loaderInfo.parameters;
 			ClientGlobal.baseDir = baseDir;
 			ClientGlobal.loginIP = server;
 			ClientGlobal.loginPort = port;
 			ClientGlobal.policyPort = policyPort > 0 ? policyPort : ClientGlobal.policyPort;
+            ClientGlobal.loginAreaId = areaId;
+            ClientGlobal.loginName = loginName;
+            ClientGlobal.loginKey = loginKey;
+            ClientGlobal.loginTime = loginTime;
+            ClientGlobal.agent = agent;
 			ClientGlobal.isRelease = isRelease;
 			ClientGlobal.useBpgFormat = useBpgFormat;
 			ClientGlobal.useVersion = useVersion;
@@ -102,11 +117,21 @@ package
 			ClientGlobal.isBanShu = isBanShu;
 			ClientGlobal.isStable = isStable;
 			ClientGlobal.GlobalBridge = GlobalBridge;
+            
+            //初始化配置类
+            ClientConfig.setup(ClientGlobal.urlParmar, 0, ClientGlobal.isRelease, ClientGlobal.uiCompressed);
+            ClientConfig.decode = ClientGlobal.decodeFun;
+            ClientConfig.baseDir = ClientGlobal.baseDir;
+            ClientConfig.resURL = ClientGlobal.resURL;
+            ClientConfig.isSingle = ClientGlobal.isSingle;
+            ClientConfig.isBanShu = ClientGlobal.isBanShu;
+            ClientConfig.isStable = ClientGlobal.isStable;
 			
 			GameLogView.init(this.stage, [189, 190, 191]);//-_	189  .>	190  /?	191
 			AlertPanel.initStage(this.stage);
+			ReconnectionPanelExt.initStage(this.stage);
 			//
-			getWebParams();
+			//getWebParams();
 			GameLog.addShow("版本号：" + version);
 			GameLog.addShow("客户端版本：" + versionInfo);
 			GameLog.addShow("Player Version:" + (Capabilities.isDebugger ? "Debug" : "Release") + " " + Capabilities.version);
@@ -128,7 +153,7 @@ package
 			GameLog.enableTrace = !ClientConfig.isRelease;
 //			ErrorReporter.init();
 			//			StarlingLayerManager.setup(root.stage, root.stage, stage3DLayerSetupComplete, 1, 10, CameraController.forceStopPanning);
-			Stage3DLayerManager.setup(this.stage, this.stage, stage3DLayerSetupComplete,null,null, 1, 10, null);
+			//Stage3DLayerManager.setup(this.stage, this.stage, stage3DLayerSetupComplete,null,null, 1, 10, null);
 			
 			try
 			{
@@ -185,8 +210,8 @@ package
 					GameLog.addShow("profile type：" + Stage3DLayerManager.stage3DProxy.profile);
 					
 					Parsers.enableAllBundled();
-					Stage3DLayerManager.screenAntiAlias = 2;
-					Stage3DLayerManager.viewAntiAlias = 2;
+					Stage3DLayerManager.screenAntiAlias = 0;
+					Stage3DLayerManager.viewAntiAlias = 0;
 					Stage3DLayerManager.startRender();
 					Stage3DLayerManager.starlingLayer.setLayer("alert", 9);
 					Stage3DLayerManager.starlingLayer.setLayer("loading", 8);
@@ -273,7 +298,9 @@ package
 		
 		private function initProcess() : void
 		{
-			ProcessStateMachine.getInstance().pushProcess(new SelectDeveloper());
+            if (null == ClientGlobal.loginIP || 0 == StringUtil.trim(ClientGlobal.loginIP).length) {
+                ProcessStateMachine.getInstance().pushProcess(new SelectDeveloper());
+            }
 			ProcessStateMachine.getInstance().pushProcess(new LoginInput());
 			ProcessStateMachine.getInstance().pushProcess(new LoadMaskWorld());
 			ProcessStateMachine.getInstance().pushProcess(new ServerConnect());
@@ -299,9 +326,9 @@ package
 				GameLog.addShow("++++++++++++++++++++");
 				ClientGlobal.loginName = ClientGlobal.urlParmar["auth"];
 				ClientGlobal.loginKey = ClientGlobal.urlParmar["sign"];
-				ClientGlobal.useWorker = ClientGlobal.urlParmar["useWorker"] == "true";
+				//ClientGlobal.useWorker = ClientGlobal.urlParmar["useWorker"] == "true";
 				ClientGlobal.baseDir = ClientGlobal.urlParmar["baseDir"] || "../";
-				ClientGlobal.debugConfig = ClientGlobal.urlParmar["debugConfig"];
+				//ClientGlobal.debugConfig = ClientGlobal.urlParmar["debugConfig"];
 			}
 		}
 		

@@ -1,4 +1,4 @@
-package com.rpgGame.netData.buff.bean{
+ï»¿package com.rpgGame.netData.buff.bean{
 	import com.rpgGame.netData.buff.bean.BuffParameter;
 	
 	import org.game.netCore.data.long;
@@ -12,52 +12,52 @@ package com.rpgGame.netData.buff.bean{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * buffĞÅÏ¢Àà
+	 * buffä¿¡æ¯ç±»
 	 */
 	public class BuffInfo extends Bean {
 	
-		//buffÎ¨Ò»Id
+		//buffå”¯ä¸€Id
 		private var _buffId: long;
 		
-		//buffÄ£°åId
+		//buffæ¨¡æ¿Id
 		private var _buffModelId: int;
 		
-		//µş¼Ó²ãÊı
+		//å åŠ å±‚æ•°
 		private var _overlay: int;
 		
-		//³ÖĞøÊ±¼ä
+		//æŒç»­æ—¶é—´
 		private var _totalTime: long;
 		
-		//³ÖĞøÊ£ÓàÊ±¼ä
+		//æŒç»­å‰©ä½™æ—¶é—´
 		private var _remainTime: long;
 		
-		//Öµ¼Ó³É
+		//å€¼åŠ æˆ
 		private var _value: int;
 		
-		//±ÈÀı¼Ó³É
+		//æ¯”ä¾‹åŠ æˆ
 		private var _percent: int;
 		
-		//²ÎÊı
+		//å‚æ•°
 		private var _buffParameter: Vector.<BuffParameter> = new Vector.<BuffParameter>();
 		/**
-		 * Ğ´Èë×Ö½Ú»º´æ
+		 * å†™å…¥å­—èŠ‚ç¼“å­˜
 		 */
 		override protected function writing(): Boolean{
-			//buffÎ¨Ò»Id
+			//buffå”¯ä¸€Id
 			writeLong(_buffId);
-			//buffÄ£°åId
+			//buffæ¨¡æ¿Id
 			writeInt(_buffModelId);
-			//µş¼Ó²ãÊı
+			//å åŠ å±‚æ•°
 			writeInt(_overlay);
-			//³ÖĞøÊ±¼ä
+			//æŒç»­æ—¶é—´
 			writeLong(_totalTime);
-			//³ÖĞøÊ£ÓàÊ±¼ä
+			//æŒç»­å‰©ä½™æ—¶é—´
 			writeLong(_remainTime);
-			//Öµ¼Ó³É
+			//å€¼åŠ æˆ
 			writeInt(_value);
-			//±ÈÀı¼Ó³É
+			//æ¯”ä¾‹åŠ æˆ
 			writeInt(_percent);
-			//²ÎÊı
+			//å‚æ•°
 			writeShort(_buffParameter.length);
 			for (var i: int = 0; i < _buffParameter.length; i++) {
 				writeBean(_buffParameter[i]);
@@ -66,24 +66,24 @@ package com.rpgGame.netData.buff.bean{
 		}
 		
 		/**
-		 * ¶ÁÈ¡×Ö½Ú»º´æ
+		 * è¯»å–å­—èŠ‚ç¼“å­˜
 		 */
 		override protected function reading(): Boolean{
-			//buffÎ¨Ò»Id
+			//buffå”¯ä¸€Id
 			_buffId = readLong();
-			//buffÄ£°åId
+			//buffæ¨¡æ¿Id
 			_buffModelId = readInt();
-			//µş¼Ó²ãÊı
+			//å åŠ å±‚æ•°
 			_overlay = readInt();
-			//³ÖĞøÊ±¼ä
+			//æŒç»­æ—¶é—´
 			_totalTime = readLong();
-			//³ÖĞøÊ£ÓàÊ±¼ä
+			//æŒç»­å‰©ä½™æ—¶é—´
 			_remainTime = readLong();
-			//Öµ¼Ó³É
+			//å€¼åŠ æˆ
 			_value = readInt();
-			//±ÈÀı¼Ó³É
+			//æ¯”ä¾‹åŠ æˆ
 			_percent = readInt();
-			//²ÎÊı
+			//å‚æ•°
 			var buffParameter_length : int = readShort();
 			for (var i: int = 0; i < buffParameter_length; i++) {
 				_buffParameter[i] = readBean(BuffParameter) as BuffParameter;
@@ -92,7 +92,7 @@ package com.rpgGame.netData.buff.bean{
 		}
 		
 		/**
-		 * get buffÎ¨Ò»Id
+		 * get buffå”¯ä¸€Id
 		 * @return 
 		 */
 		public function get buffId(): long{
@@ -100,14 +100,14 @@ package com.rpgGame.netData.buff.bean{
 		}
 		
 		/**
-		 * set buffÎ¨Ò»Id
+		 * set buffå”¯ä¸€Id
 		 */
 		public function set buffId(value: long): void{
 			this._buffId = value;
 		}
 		
 		/**
-		 * get buffÄ£°åId
+		 * get buffæ¨¡æ¿Id
 		 * @return 
 		 */
 		public function get buffModelId(): int{
@@ -115,14 +115,14 @@ package com.rpgGame.netData.buff.bean{
 		}
 		
 		/**
-		 * set buffÄ£°åId
+		 * set buffæ¨¡æ¿Id
 		 */
 		public function set buffModelId(value: int): void{
 			this._buffModelId = value;
 		}
 		
 		/**
-		 * get µş¼Ó²ãÊı
+		 * get å åŠ å±‚æ•°
 		 * @return 
 		 */
 		public function get overlay(): int{
@@ -130,14 +130,14 @@ package com.rpgGame.netData.buff.bean{
 		}
 		
 		/**
-		 * set µş¼Ó²ãÊı
+		 * set å åŠ å±‚æ•°
 		 */
 		public function set overlay(value: int): void{
 			this._overlay = value;
 		}
 		
 		/**
-		 * get ³ÖĞøÊ±¼ä
+		 * get æŒç»­æ—¶é—´
 		 * @return 
 		 */
 		public function get totalTime(): long{
@@ -145,14 +145,14 @@ package com.rpgGame.netData.buff.bean{
 		}
 		
 		/**
-		 * set ³ÖĞøÊ±¼ä
+		 * set æŒç»­æ—¶é—´
 		 */
 		public function set totalTime(value: long): void{
 			this._totalTime = value;
 		}
 		
 		/**
-		 * get ³ÖĞøÊ£ÓàÊ±¼ä
+		 * get æŒç»­å‰©ä½™æ—¶é—´
 		 * @return 
 		 */
 		public function get remainTime(): long{
@@ -160,14 +160,14 @@ package com.rpgGame.netData.buff.bean{
 		}
 		
 		/**
-		 * set ³ÖĞøÊ£ÓàÊ±¼ä
+		 * set æŒç»­å‰©ä½™æ—¶é—´
 		 */
 		public function set remainTime(value: long): void{
 			this._remainTime = value;
 		}
 		
 		/**
-		 * get Öµ¼Ó³É
+		 * get å€¼åŠ æˆ
 		 * @return 
 		 */
 		public function get value(): int{
@@ -175,14 +175,14 @@ package com.rpgGame.netData.buff.bean{
 		}
 		
 		/**
-		 * set Öµ¼Ó³É
+		 * set å€¼åŠ æˆ
 		 */
 		public function set value(value: int): void{
 			this._value = value;
 		}
 		
 		/**
-		 * get ±ÈÀı¼Ó³É
+		 * get æ¯”ä¾‹åŠ æˆ
 		 * @return 
 		 */
 		public function get percent(): int{
@@ -190,14 +190,14 @@ package com.rpgGame.netData.buff.bean{
 		}
 		
 		/**
-		 * set ±ÈÀı¼Ó³É
+		 * set æ¯”ä¾‹åŠ æˆ
 		 */
 		public function set percent(value: int): void{
 			this._percent = value;
 		}
 		
 		/**
-		 * get ²ÎÊı
+		 * get å‚æ•°
 		 * @return 
 		 */
 		public function get buffParameter(): Vector.<BuffParameter>{
@@ -205,7 +205,7 @@ package com.rpgGame.netData.buff.bean{
 		}
 		
 		/**
-		 * set ²ÎÊı
+		 * set å‚æ•°
 		 */
 		public function set buffParameter(value: Vector.<BuffParameter>): void{
 			this._buffParameter = value;

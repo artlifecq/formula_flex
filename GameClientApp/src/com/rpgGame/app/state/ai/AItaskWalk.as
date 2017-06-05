@@ -23,7 +23,6 @@ package com.rpgGame.app.state.ai
 		override public function execute() : void
 		{
 			super.execute();
-			//L.l("~~~~AItaskWalk---execute");
 			if(TaskMissionManager.getMainTaskIsFinish())
 			{
 				if(TaskMissionManager.getMainTaskHaveNpc())

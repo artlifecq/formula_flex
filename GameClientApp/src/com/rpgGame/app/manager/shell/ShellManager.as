@@ -135,6 +135,7 @@ package com.rpgGame.app.manager.shell
             
             // cross
             this._funcs["enterCross".toLowerCase()] = this.enterCross;
+			this._funcs["&showDistrictWireframe".toLowerCase()] = this.showDistrictWireframe;
         }
 		
 		private function testRibbon():void
@@ -904,6 +905,11 @@ package com.rpgGame.app.manager.shell
             var  message : ReqEnterCrossClientToGameMessage = new ReqEnterCrossClientToGameMessage();
             SocketConnection.send(message);
         }
+		private function showDistrictWireframe() : void {
+			SceneManager.getScene().sceneMapLayer.showDistrictWireframe = true;
+		}
+		
+		
 		
         private function handler(command : String, ...params) : Boolean {
             var func : Function = this._funcs[command.toLowerCase()];

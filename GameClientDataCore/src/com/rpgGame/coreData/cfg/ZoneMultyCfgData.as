@@ -55,7 +55,7 @@ package com.rpgGame.coreData.cfg
 			{
 				return relist[id];
 			}
-			return -1;
+			return 0;
 		}
 		
 		

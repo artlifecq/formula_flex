@@ -11,9 +11,9 @@ package com.rpgGame.core.utils
 			{
 				case PKModeType.PEACE:
 					return "和平";
-				case PKModeType.COUNTRY:
-					return "国家";
-				case PKModeType.ALLIANCE:
+//				case PKModeType.COUNTRY:
+//					return "国家";
+//				case PKModeType.ALLIANCE:
 					return "盟国";
 				case PKModeType.ALL:
 					return "全体";
@@ -38,10 +38,10 @@ package com.rpgGame.core.utils
 			{
 				case PKModeType.PEACE:
 					return "和平模式";
-				case PKModeType.COUNTRY:
-					return "国家模式";
-				case PKModeType.ALLIANCE:
-					return "盟国模式";
+//				case PKModeType.COUNTRY:
+//					return "国家模式";
+//				case PKModeType.ALLIANCE:
+//					return "盟国模式";
 				case PKModeType.ALL:
 					return "全体模式";
 				case PKModeType.TEAM:
@@ -65,9 +65,9 @@ package com.rpgGame.core.utils
 			{
 				case PKModeType.PEACE:
 					return StaticValue.PEACE;
-				case PKModeType.COUNTRY:
-					return StaticValue.COUNTRY;
-				case PKModeType.ALLIANCE:
+//				case PKModeType.COUNTRY:
+//					return StaticValue.COUNTRY;
+//				case PKModeType.ALLIANCE:
 					return StaticValue.ALLIANCE;
 				case PKModeType.ALL:
 					return StaticValue.ALL;
@@ -92,10 +92,10 @@ package com.rpgGame.core.utils
 			{
 				case PKModeType.PEACE:
 					return "【和平模式】你的攻击不会对其他玩家造成伤害";
-				case PKModeType.COUNTRY:
-					return "【国家模式】你的攻击不会对本国同胞造成伤害";
-				case PKModeType.ALLIANCE:
-					return "【盟国模式】你的攻击不会对本国、盟国同胞造成伤害";
+//				case PKModeType.COUNTRY:
+//					return "【国家模式】你的攻击不会对本国同胞造成伤害";
+//				case PKModeType.ALLIANCE:
+//					return "【盟国模式】你的攻击不会对本国、盟国同胞造成伤害";
 				case PKModeType.ALL:
 					return "【全体模式】你的攻击会对所有玩家造成伤害";
 				case PKModeType.TEAM:

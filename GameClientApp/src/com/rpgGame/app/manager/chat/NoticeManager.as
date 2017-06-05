@@ -15,7 +15,7 @@ package com.rpgGame.app.manager.chat
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import org.client.mainCore.manager.EventManager;
-
+	
 	/**
 	 *提示消息管理器
 	 * @author carver
@@ -62,7 +62,9 @@ package com.rpgGame.app.manager.chat
 		public static const CHAT_CHANNEL_WINDOW : int = 18;
 		/** 19聊天框 子类型,系统频道 */
 		public static const CHAT_CHANAEL_SYSTEM : int = 19;
-
+		/** 右下，传闻 */
+		public static const BATTLE_CHUANWEN : int = 20;
+		
 		/**红 错误**/
 		public static const ERROR_RED : uint = rEnum.ENUM_START();
 		/**黄 警告**/
@@ -71,13 +73,13 @@ package com.rpgGame.app.manager.chat
 		public static const ERROR_GREEN : uint = rEnum.next;
 		/**白 普通**/
 		public static const ERROR_WHITE : uint = rEnum.next;
-
+		
 		public static function initChatInfo() : void
 		{
 			var msgStr : String = "\n抵制不良游戏,拒绝盗版游戏,\n注意自我保护,谨防受骗上当,\n适度游戏益脑,沉迷游戏伤身,\n合理安排时间,享受健康生活。"
 			chatSystemNotify(msgStr);
 		}
-
+		
 		/**
 		 * 显示要提示信息
 		 * @param hintKey		配置KEY
@@ -92,7 +94,7 @@ package com.rpgGame.app.manager.chat
 				TopTipManager.getInstance().addMouseFollowTip(MOUSE_FOLLOW_TIP, hintKey + ":没有配置");
 				return;
 			}
-
+			
 			var msg : String;
 			switch (hintInfo.error)
 			{
@@ -112,22 +114,22 @@ package com.rpgGame.app.manager.chat
 					msg = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_1, hintInfo.info);
 					break;
 			}
-
+			
 			notify(hintInfo.type, msg, textArgs);
 		}
 		
 		/*
 		public static function showNotifyById(id:int,textArgs : Array = null):void
 		{
-			var cfg:Q_notify=NotifyCfgData.getNotifyByID(id);
-			if(!cfg){
-				notify(MOUSE_FOLLOW_TIP, "未配置的提示:"+id);
-				return;
-			}
-			notify(int(cfg.q_show_type), cfg.q_content,textArgs);
+		var cfg:Q_notify=NotifyCfgData.getNotifyByID(id);
+		if(!cfg){
+		notify(MOUSE_FOLLOW_TIP, "未配置的提示:"+id);
+		return;
+		}
+		notify(int(cfg.q_show_type), cfg.q_content,textArgs);
 		}*/
 		
-
+		
 		/**
 		 * 这个是老的接口（以后要干掉）；
 		 * 显示一个提示，强烈推荐统一用这个方法！！！
@@ -146,7 +148,7 @@ package com.rpgGame.app.manager.chat
 			{
 				trace(1);
 			}
-				
+			
 			var type : String = language.type;
 			var showTimes : int = language.showTimes;
 			if (type == "" || type == null)
@@ -201,7 +203,7 @@ package com.rpgGame.app.manager.chat
 				notify(MOUSE_FOLLOW_TIP, "未定义的配置通知信息ID:"+id);
 			}
 		}
-
+		
 		/**
 		 * 快捷的 鼠标跟踪提示
 		 * @param $msg
@@ -212,12 +214,12 @@ package com.rpgGame.app.manager.chat
 		{
 			notify(MOUSE_FOLLOW_TIP, $msg, textArgs);
 		}
-
+		
 		public static function systemSwitchNotify($msg : String, textArgs : Array = null) : void
 		{
 			notify(SYSTEM_SWITCH, $msg, textArgs);
 		}
-
+		
 		public static function chatSystemNotify($msg : String, textArgs : Array = null) : void
 		{
 			notify(CHAT_SYSTEM, $msg, textArgs);
@@ -255,12 +257,12 @@ package com.rpgGame.app.manager.chat
 			{
 				$msg = LanguageConfig.replaceStr($msg, textArgs);
 			}
-
+			
 			if (showTimes <= 0)
 			{
 				showTimes = 1;
 			}
-
+			
 			for (var i : int = 0; i < showTimes; i++)
 			{
 				switch ($type)
@@ -271,8 +273,9 @@ package com.rpgGame.app.manager.chat
 					case WINDOW_CENTER:
 						TopTipManager.getInstance().addHintByType($type, $msg);
 						break;
-					case BATTLE_HINT:
-						EventManager.dispatchEvent(HintEvent.BATTLE_HINT, $msg);
+					case BATTLE_HINT:		
+					case	BATTLE_CHUANWEN:
+						EventManager.dispatchEvent(HintEvent.BATTLE_HINT, [$type,$msg]);
 						break;
 					case CHAT_SYSTEM:
 						ChatManager.addMsgInChat($msg, EnumChatChannelType.CHAT_CHANNEL_SYSTEM);
@@ -283,18 +286,18 @@ package com.rpgGame.app.manager.chat
 					case SERVER:
 						//服务器
 						break;
-//				case SYSTEM_SWITCH_CENTER:
-//					TopTipManager.getInstance().addSystemSwitchCenterTip( $msg );
-//					break;
-//				case CENTER:
-//					TopTipManager.getInstance().addCenterTip( $msg );
-//					break;
-//				case SYSTEM_TOP:
-//					TopTipManager.getInstance().addTopTip( $msg );
-//					break;
-//				case ALERT:
-//					GameAlert.show($msg);
-//					break;
+					//				case SYSTEM_SWITCH_CENTER:
+					//					TopTipManager.getInstance().addSystemSwitchCenterTip( $msg );
+					//					break;
+					//				case CENTER:
+					//					TopTipManager.getInstance().addCenterTip( $msg );
+					//					break;
+					//				case SYSTEM_TOP:
+					//					TopTipManager.getInstance().addTopTip( $msg );
+					//					break;
+					//				case ALERT:
+					//					GameAlert.show($msg);
+					//					break;
 					case CHAT_CHANNEL_ALL: //10聊天框 子类型,综合全部频道
 						ChatManager.addMsgInChat($msg, EnumChatTabsType.TABS_ALL);
 						break;

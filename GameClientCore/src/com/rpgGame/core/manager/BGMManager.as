@@ -3,8 +3,9 @@ package com.rpgGame.core.manager
 	import com.app.events.AudioEvent;
 	import com.app.media.AudioInfo;
 	import com.app.media.AudioInterface;
+	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
-
+	
 	/**
 	 * 游戏音乐管理器
 	 * @author Seven.C
@@ -14,13 +15,14 @@ package com.rpgGame.core.manager
 	 */
 	public class BGMManager
 	{
+		private static var _isPlay:Boolean=true;
 		public function BGMManager()
 		{
 		}
-
+		
 		public static function playMusic(fileName : String) : void
 		{
-			if (!fileName)
+			if (!fileName||!_isPlay)
 			{
 				AudioInterface.track(AudioConfigType.MUSIC_CHANNEL).stop(true);
 				return;
@@ -32,9 +34,10 @@ package com.rpgGame.core.manager
 			info.loop = 0;
 			AudioInterface.track(AudioConfigType.MUSIC_CHANNEL).playAudio(info);
 		}
-
+		
 		public static function playUIEffectSound(fileName : String) : void
 		{
+			if(!_isPlay) return;
 			var url : String = ClientConfig.getSound(fileName);
 			var info : AudioInfo = new AudioInfo(url);
 			info.fadeInTime = 0;
@@ -42,42 +45,46 @@ package com.rpgGame.core.manager
 			info.loop = 1;
 			AudioInterface.track(AudioConfigType.UI_EFFECT_CHANNEL).playAudio(info);
 		}
-
+		
+		public static function setMusicIsPlay(bool:Boolean):void
+		{
+			_isPlay=bool;
+		}
 		//开始播放一个节点
 		private static function onSubStartPlayHandler(evt : AudioEvent) : void
 		{
 			//trace(evt.data, "play");
 		}
-
+		
 		//重复播放一个节点时
 		private static function onSubRepeatHandler(evt : AudioEvent) : void
 		{
 			//trace(evt.data, "repeat");
 		}
-
+		
 		//节点播放完成
 		private static function onSubCompleteHandler(evt : AudioEvent) : void
 		{
 			//trace(evt.data, "complete");
 		}
-
+		
 		//指定节点播放完成后发送的事件消息
 		private static function onSendMsgHandler(evt : AudioEvent) : void
 		{
 			//trace(evt.data, "get msg");
 		}
-
+		
 		//整首音乐准备重复播放
 		private static function onSoundLoopCompleteHandler(evt : AudioEvent) : void
 		{
 			//trace(evt.data, "will repeat");
 		}
-
+		
 		//整首音乐播放完成
 		private static function onAllCompleteHandler(evt : AudioEvent) : void
 		{
 			//trace(evt.data, "play end");
 		}
-
+		
 	}
 }

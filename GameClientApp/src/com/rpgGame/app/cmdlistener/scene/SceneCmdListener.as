@@ -1,15 +1,15 @@
 package com.rpgGame.app.cmdlistener.scene
 {
-	import com.game.engine2D.config.staticdata.CharAngleType;
 	import com.game.engine3D.scene.render.RenderUnit3D;
-	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.engine3D.vo.BaseObj3D;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.manager.CharAttributeManager;
 	import com.rpgGame.app.manager.ClientTriggerManager;
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.GameCameraManager;
+	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.RankManager;
 	import com.rpgGame.app.manager.ReliveManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
@@ -40,7 +40,6 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.core.events.UserMoveEvent;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.AttachEffectCfgData;
-	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.Attach_effect;
@@ -48,7 +47,6 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
-	import com.rpgGame.coreData.info.collect.CollectObjcetInfo;
 	import com.rpgGame.coreData.info.map.EnumMapUnitType;
 	import com.rpgGame.coreData.info.move.RoleMoveInfo;
 	import com.rpgGame.coreData.info.task.target.TaskFollowEscortInfo;
@@ -98,7 +96,6 @@ package com.rpgGame.app.cmdlistener.scene
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	import flash.utils.ByteArray;
-	import flash.utils.getTimer;
 	
 	import app.cmd.NpcModuleMessages;
 	import app.cmd.SceneModuleMessages;
@@ -213,6 +210,12 @@ package com.rpgGame.app.cmdlistener.scene
 			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;
 			if(role){
 				(role.data as HeroData).pkMode=msg.pkState;
+			}
+			//主玩家
+			if (role==MainRoleManager.actor) 
+			{
+				PKMamager.setPkMode(msg.pkState);
+				EventManager.dispatchEvent(MainPlayerEvent.PK_MODE_CHANGE);
 			}
 		}
 		
@@ -867,6 +870,7 @@ package com.rpgGame.app.cmdlistener.scene
 				}
 				else if (msg.attributeChange.type==CharAttributeType.LV) 
 				{
+					FunctionOpenManager.openFunctionByLevel(msg.attributeChange.value);
 					EventManager.dispatchEvent(MainPlayerEvent.LEVEL_CHANGE);
 				}
 //				ReliveManager.autoHideRelive();

@@ -11,6 +11,7 @@ package com.client.process
 	import com.game.engine3D.process.BaseProcess;
 	import com.game.engine3D.process.ProcessStateMachine;
 	import com.gameClient.log.GameLog;
+	import com.rpgGame.netData.login.message.ResErrorMessage;
 	import com.rpgGame.netData.player.bean.MyPlayerInfo;
 	
 	import flash.display.Loader;
@@ -136,6 +137,7 @@ package com.client.process
 			GameLog.addShow("解析创建角色程序完成...");
 			_createRoleLoader.contentLoaderInfo.removeEventListener(Event.COMPLETE, onLoaderComplete);
 			_createRoleLoader.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR, onIoError);
+            _createRoleLoader.content["baseDir"] = ClientGlobal.baseDir;
 			var setConfigFun : Function = _createRoleLoader.content["setConfig"];
 			setConfigFun(ClientGlobal.maskWorldDic);
 			ClientGlobal.stage.addChild(_createRoleLoader.content);
@@ -195,7 +197,7 @@ package com.client.process
 				onCreateCharSuccessHandler();
 				return;
 			}
-			onCreateCharFailHandler("正在请求创建角色，请稍等...");
+			//onCreateCharFailHandler("正在请求创建角色，请稍等...");
 			GameLog.addShow("请求服务器创建新角色");
 			LoginSender.register(_sex, _nickName, _job);
 		}
@@ -223,7 +225,7 @@ package com.client.process
 			completeProcess();
 		}
 
-		private function onCreateCharFailHandler(msg : String) : void
+		private function onCreateCharFailHandler(msg : ResErrorMessage) : void
 		{
 			if (_onCreateHeroFail != null)
 			{

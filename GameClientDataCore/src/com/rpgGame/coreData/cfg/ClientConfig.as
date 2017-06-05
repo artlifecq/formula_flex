@@ -349,7 +349,12 @@ package com.rpgGame.coreData.cfg
 			var url : String = "avatar/" + textureName;
 			return baseDir + resURL + url;
 		}
-
+		
+		public static function getFightSoul(avatarName : String) : String
+		{
+			var url : String = "avatar/pc/fightsoul/" + avatarName + eName_AWD;
+			return baseDir + resURL + url;
+		}
 		/**
 		 * 获取effect资源路径
 		 * @return
