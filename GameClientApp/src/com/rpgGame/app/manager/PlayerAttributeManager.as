@@ -4,6 +4,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.SpriteStat;
+	import com.rpgGame.coreData.info.stat.StatData;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.netData.player.bean.AttributeItem;
 	
@@ -39,11 +40,28 @@ package com.rpgGame.app.manager
 			var newV:int;
 			var oldV:int;
 			var key:int;
+			var tmp:StatData;
 			for (var i:int = 0; i < len; i++) 
 			{
 				key=keys[i];
-				newV=newMap.getValue(key);
-				oldV=oldMap.getValue(key);
+				if (CharAttributeType.FIGHTING==key||CharAttributeType.HURT_SEC==key) 
+				{
+					continue;
+				}
+				
+				tmp=newMap.getValue(key);
+				newV=0;
+				if (tmp) 
+				{
+					newV=tmp.value;
+				}
+				tmp=oldMap.getValue(key);
+				oldV=0;
+				if (tmp) 
+				{
+					oldV=tmp.value;
+				}
+				
 				if (newV==oldV) 
 				{
 					continue;

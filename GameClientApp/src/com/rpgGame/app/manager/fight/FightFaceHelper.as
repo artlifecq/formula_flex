@@ -231,9 +231,18 @@ package com.rpgGame.app.manager.fight
 							}
 							break;
 						case EnumHurtType.SPELL_HURT_TYPE_MISS: //闪避
-							typeRes = ROOT+USESFUL_EFFECT+"weimingzhong.png";
-					
-							tweenFun=SpellResultTweenUtil.TweenShanBi;
+							//
+							if (atkor.isMainChar) 
+							{
+								typeRes = ROOT+USESFUL_EFFECT+"weimingzhong.png";
+								tweenFun=SpellResultTweenUtil.TweenHits;
+							}
+							else if (hurter.isMainChar) 
+							{
+								typeRes = ROOT+USESFUL_EFFECT+"shanbi.png";
+								tweenFun=SpellResultTweenUtil.TweenShanBi;
+							}
+						
 							break;
 						case EnumHurtType.SPELL_HURT_TYPE_CRIT: //暴击
 							typeRes = ROOT+USESFUL_EFFECT+"bao_ji_piao_zi.png";
