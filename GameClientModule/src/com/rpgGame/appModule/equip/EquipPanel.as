@@ -1,14 +1,17 @@
 package com.rpgGame.appModule.equip
 {
 	import com.rpgGame.app.ui.SkinUIPanel;
-	import com.rpgGame.appModule.common.ViewUI;
-	
-	import feathers.controls.Radio;
+	import com.rpgGame.app.ui.tab.UITabBar;
+	import com.rpgGame.app.ui.tab.UITabBarData;
+	import com.rpgGame.coreData.enum.EmFunctionID;
 	
 	import org.mokylin.skin.app.zhuangbei.Zhuangbei_Skin;
-	import org.mokylin.skin.app.zhuangbei.Zhuangbei_daohang;
+	import org.mokylin.skin.app.zhuangbei.button.ButtonHecheng;
+	import org.mokylin.skin.app.zhuangbei.button.ButtonJicheng;
+	import org.mokylin.skin.app.zhuangbei.button.ButtonQianghua;
+	import org.mokylin.skin.app.zhuangbei.button.ButtonXilian;
+	import org.mokylin.skin.app.zhuangbei.button.ButtonZuomo;
 	
-	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 	
 	/**
@@ -19,11 +22,7 @@ package com.rpgGame.appModule.equip
 	public class EquipPanel extends SkinUIPanel
 	{
 		private var _skin:Zhuangbei_Skin;
-		private var _tabSkin:Zhuangbei_daohang;
-		private var tabUIs:Vector.<ViewUI>;
-		private var tabBtn:Vector.<Radio>;
-		
-		private var _currentUI:ViewUI;
+		private var _tabBar:UITabBar;
 		
 		public function EquipPanel()
 		{
@@ -32,70 +31,38 @@ package com.rpgGame.appModule.equip
 			initUI();
 		}
 		
-		private function set currentUI(value:ViewUI):void
-		{
-			if(_currentUI){
-				_currentUI.removeFromParent();
-			}
-			_currentUI = value;
-			this.addChild(_currentUI);
-			if(_data){
-				_currentUI.show(_data.data);
-			}else{
-				_currentUI.show();
-			}
-		}
-		
 		private function initUI():void
 		{
-			_tabSkin=_skin.daohang.skin as Zhuangbei_daohang;
-			tabBtn=new Vector.<Radio>();
-			tabBtn.push(_tabSkin.btn_jineng);
-			tabBtn.push(_tabSkin.btn_zuomo);
-			tabBtn.push(_tabSkin.btn_xilian);
-			tabBtn.push(_tabSkin.btn_jicheng);
-			tabBtn.push(_tabSkin.btn_hecheng);
+			var _tabClass:Array=[ButtonQianghua,ButtonZuomo,ButtonXilian,ButtonJicheng,ButtonHecheng];
+			var _viewClass:Array=[EquipIntensifyUI,EquipPolishUI,EquipSmeltUI,EquipInheritUI,EquipComboUI];
+			var funcId:Array=[EmFunctionID.EM_QIANGHUA,EmFunctionID.EM_ZUOMO,EmFunctionID.EM_XILIAN,EmFunctionID.EM_JICHENG,
+				EmFunctionID.EM_HECHENG];
+			var tabDatas:Vector.<UITabBarData>=new Vector.<UITabBarData>();
+			var num:int=_tabClass.length;
+			for (var i:int = 0; i <num; i++) 
+			{
+				var item:UITabBarData=new UITabBarData();
+				item.tabClass=_tabClass[i];
+				item.viewClass=_viewClass[i];
+				item.tabKey=funcId[i];//标签键为功能id
+				tabDatas.push(item);
+			}
 			
-			tabUIs=new Vector.<ViewUI>();
-			tabUIs.push(new EquipIntensifyUI());
-			tabUIs.push(new EquipPolishUI());
-			tabUIs.push(new EquipSmeltUI());
-			tabUIs.push(new EquipInheritUI());
-			tabUIs.push(new EquipComboUI());
+			_tabBar=new UITabBar(_skin.tabBar,tabDatas);
+			//检查已经开启的功能组装数据，
+			//监听新功能开启重组数据；
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
-			if(!data){
-				onTouchTarget(_tabSkin.btn_jineng);
-			}else{
-				showTab(data.tab);
-			}
+			_tabBar.show(data,openTable);
 		}
 		
 		override public function hide():void
 		{
 			super.hide();
-			_currentUI.hide();
-		}
-		
-		override protected function onTouchTarget(target:DisplayObject):void
-		{
-			super.onTouchTarget(target);
-			if(target is Radio){
-				var index:int=tabBtn.indexOf(target as Radio);
-				if(index==-1) return;
-				showTab(index);
-			}
-		}
-		
-		private function showTab(index:int):void
-		{
-			tabBtn[index].isSelected=true;
-			if(index!=-1){
-				currentUI=tabUIs[index];
-			}			
+			_tabBar.hide();
 		}
 	}
 }

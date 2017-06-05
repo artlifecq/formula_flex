@@ -123,7 +123,7 @@ package com.rpgGame.app.manager.goods
 		{
 			var dstPos : int;
 
-			if(item.type == GoodsType.EQUIPMENT)//人物面板在舞台，并且类型是装备
+			if(RoleEquipmentManager.isEquip(item.type))//人物面板在舞台，并且类型是装备
 			{
 				if(item.qItem.q_job!=MainRoleManager.actorInfo.job){
 					NoticeManager.showNotifyById(12009);
@@ -149,7 +149,7 @@ package com.rpgGame.app.manager.goods
 				}
 				return;
 			}
-			else if (item.type == GoodsType.EQUIPMENT) //是装备类型
+			else if (RoleEquipmentManager.isEquip(item.type)) //是装备类型
 			{
 				//坐骑装备
 				if (MountEquipmentManager.instance.isMountEquipType(item))

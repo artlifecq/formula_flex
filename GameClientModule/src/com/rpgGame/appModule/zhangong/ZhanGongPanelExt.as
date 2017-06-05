@@ -3,18 +3,17 @@ package com.rpgGame.appModule.zhangong
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.ZhanGongManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.FightValueUtil;
-	import com.rpgGame.appModule.common.ViewUI;
 	import com.rpgGame.appModule.zhangong.render.BossItemSelectCellRender;
 	import com.rpgGame.appModule.zhangong.render.MapItemSelectCellRender;
 	import com.rpgGame.core.events.ZhanGongEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
-	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.ZhanGongData;
-	import com.rpgGame.coreData.cfg.cheats.CheatsCfg;
-	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.netData.zhangong.message.SCMeritoriousUpgradeResultMessage;
+	
+	import away3d.events.Event;
 	
 	import feathers.controls.List;
 	import feathers.controls.ScrollBarDisplayMode;
@@ -28,8 +27,6 @@ package com.rpgGame.appModule.zhangong
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.beibao.zhangong.ZhanGong_Skin;
-	
-	import away3d.events.Event;
 	
 	public class ZhanGongPanelExt extends ViewUI
 	{
