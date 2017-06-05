@@ -29,7 +29,7 @@ package com.rpgGame.core.app
 		 * @author 卢国征 2015-5-22
 		 */			
 		public static function showApp( appName:String, data:Object = null, openTable:String = "", parentContiner:DisplayObjectContainer = null ):void
-		{GameLog.addShow("showApp-1");
+		{
 			var appInfo:AppInfo = AppConstant.getAppinfoByAppName( appName );
 			preTurnModule( appInfo, data, openTable, parentContiner, false, true );
 		}
@@ -318,7 +318,7 @@ package com.rpgGame.core.app
 		 * @author 卢国征 2015-5-22
 		 */		
 		private static function preTurnModule( appInfo:AppInfo, data:Object, openTable:String, parentContiner:DisplayObjectContainer, isCloseAll:Boolean, isAutoHide:Boolean ):void
-		{GameLog.addShow("showApp-2");
+		{
 			if( AppOpenUtil.isCanOpenApp(appInfo.appName,data,openTable) )
 				turnModule( appInfo, data, openTable, parentContiner, isCloseAll, isAutoHide );
 		}
@@ -332,25 +332,25 @@ package com.rpgGame.core.app
 		 * @author 卢国征 2015-5-22
 		 */		
 		private static function turnModule( appInfo:AppInfo, data:Object, openTable:String, parentContiner:DisplayObjectContainer, isCloseAll:Boolean, isAutoHide:Boolean ):void
-		{GameLog.addShow("showApp-3");
+		{
 			if( appInfo != null )
 			{
 				var moduleName:String = appInfo.appName;
 				var appPanel:AppPanel = _moduleMap.getValue( moduleName );
 				if(appPanel)
-				{GameLog.addShow("showApp-4");
+				{
 					if(appPanel.isShowing() && isAutoHide)
-					{GameLog.addShow("showApp-6");
+					{
 						appPanel.hide();
 					}
 					else
-					{GameLog.addShow("showApp-7");
+					{
 						appPanel.init( data, openTable, parentContiner );
 						toShowApp( appPanel, isCloseAll );
 					}
 				}
 				else
-				{GameLog.addShow("showApp-5");
+				{
 					appPanel = new AppPanel( appInfo );
 					appPanel.depth = _moduleMap.length;
 					_moduleMap.add( moduleName, appPanel );
@@ -367,7 +367,7 @@ package com.rpgGame.core.app
 		 * @author 卢国征 2015-5-22
 		 */		
 		private static function toShowApp( appPanel:AppPanel, isCloseAll:Boolean ):void
-		{GameLog.addShow("showApp-8");
+		{
 			appPanel.show();
 		}
 		
@@ -377,7 +377,7 @@ package com.rpgGame.core.app
 		 * @author 甘能文 2017-5-17
 		 * */
 		public static function showAppById(windid:int,...args):void
-		{GameLog.addShow("showApp-9");
+		{
 			var winInfo:Q_windowInfo = WindowInfoData.getInfobyId(windid);
 			if(winInfo!=null&&winInfo.q_islink==1)
 			{
