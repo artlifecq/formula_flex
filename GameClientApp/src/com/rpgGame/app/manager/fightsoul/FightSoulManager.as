@@ -1,10 +1,10 @@
 package com.rpgGame.app.manager.fightsoul
 {
 	import com.gameClient.utils.JSONUtil;
-	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleManager;
+	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.UNIQUEID;
 	import com.rpgGame.coreData.cfg.FightsoulData;
@@ -16,6 +16,7 @@ package com.rpgGame.app.manager.fightsoul
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.role.HeroData;
+	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.fightsoul.bean.FightSoulInfo;
 	import com.rpgGame.netData.fightsoul.bean.TypeValue;
@@ -198,7 +199,8 @@ package com.rpgGame.app.manager.fightsoul
 			}
 			var heroData : HeroData = player.data as HeroData; 
 			heroData.fightSoulLevel =_fightSoulInfo.curModelLv;
-			SceneRoleManager.getInstance().createHero(heroData, true);
+			var role : SceneRole = SceneManager.getScene().getSceneObjByID(heroData.id, SceneCharType.PLAYER) as SceneRole;
+			SceneRoleManager.getInstance().createFightSoulRole(role);
 		}
 		private var _skillData:Q_skill_model;
 		public function getSpellData():Q_skill_model
