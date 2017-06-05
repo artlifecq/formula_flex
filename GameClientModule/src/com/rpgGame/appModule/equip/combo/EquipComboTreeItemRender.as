@@ -129,10 +129,13 @@ package com.rpgGame.appModule.equip.combo
 				qianSkin.lb_Dispaly.text=ItemConfig.getItemName(itemId)+"("+max+")";
 				qianSkin.bg1.visible=detailInfo.data.q_subson_type%2==0;
 				qianSkin.bg2.visible=!qianSkin.bg1.visible;
-				var isSelected:Boolean=this.owner.selectedItem.data==node.data;
+				var isSelected:Boolean
+				if(this.owner&&this.owner.selectedItem){
+					isSelected=this.owner.selectedItem.data==node.data;
+				}
 				qianSkin.selectedBtn.isSelected=isSelected;
 				qianSkin.selectedBtn.defaultIcon=null;
-				if(this.owner.selectedItem.data is DetailNodeInfo==false){
+				if(this.owner.selectedItem&&this.owner.selectedItem.data is DetailNodeInfo==false){
 					qianSkin.selectedBtn.toggleGroup.selectedIndex=-1;
 				}
 			}

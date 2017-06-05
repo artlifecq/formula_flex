@@ -2,10 +2,8 @@ package org.mokylin.skin.app.wuxue
 {
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
+	import feathers.controls.TabBar;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.app.wuxue.Wuxue_Daohang;
-	import org.mokylin.skin.app.wuxue.jineng.jineng_Skin;
-	import org.mokylin.skin.app.wuxue.juexue.Juexue_Skin;
 	import org.mokylin.skin.common.yiji_panelbg_Skin;
 
 	/**
@@ -20,11 +18,7 @@ package org.mokylin.skin.app.wuxue
 		//==========================================================================
 		public var bg:feathers.controls.SkinnableContainer;
 
-		public var daohang:feathers.controls.SkinnableContainer;
-
-		public var jineng:feathers.controls.SkinnableContainer;
-
-		public var juexue:feathers.controls.SkinnableContainer;
+		public var tabBar:feathers.controls.TabBar;
 
 
 		//==========================================================================
@@ -37,7 +31,7 @@ package org.mokylin.skin.app.wuxue
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [bg_i(),daohang_i(),jineng_i(),juexue_i(),__Wuxue_Skin_UIAsset1_i()];
+			this.elementsContent = [bg_i(),tabBar_i(),__Wuxue_Skin_UIAsset1_i()];
 			
 			states = {
 			};
@@ -73,45 +67,15 @@ package org.mokylin.skin.app.wuxue
 			return temp;
 		}
 
-		private function daohang_i():feathers.controls.SkinnableContainer
+		private function tabBar_i():feathers.controls.TabBar
 		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			daohang = temp;
-			temp.name = "daohang";
-			temp.height = 50;
-			var skin:StateSkin = new org.mokylin.skin.app.wuxue.Wuxue_Daohang()
-			temp.skin = skin
-			temp.width = 283;
-			temp.x = 20;
-			temp.y = 528;
-			return temp;
-		}
-
-		private function jineng_i():feathers.controls.SkinnableContainer
-		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			jineng = temp;
-			temp.name = "jineng";
-			temp.height = 587;
-			var skin:StateSkin = new org.mokylin.skin.app.wuxue.jineng.jineng_Skin()
-			temp.skin = skin
-			temp.width = 947;
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function juexue_i():feathers.controls.SkinnableContainer
-		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			juexue = temp;
-			temp.name = "juexue";
-			temp.height = 587;
-			var skin:StateSkin = new org.mokylin.skin.app.wuxue.juexue.Juexue_Skin()
-			temp.skin = skin
-			temp.width = 947;
-			temp.x = 0;
-			temp.y = 0;
+			var temp:feathers.controls.TabBar = new feathers.controls.TabBar();
+			tabBar = temp;
+			temp.name = "tabBar";
+			temp.height = 49;
+			temp.width = 713;
+			temp.x = 23;
+			temp.y = 531;
 			return temp;
 		}
 

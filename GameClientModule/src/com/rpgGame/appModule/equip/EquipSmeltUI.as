@@ -10,12 +10,12 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.app.sender.ItemSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.ui.common.CenterEftPop;
+	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.app.view.icon.IconCDFace;
-	import com.rpgGame.appModule.bag.ItemGetPathPanel;
+	import com	.rpgGame.appModule.bag.ItemGetPathPanel;
 	import com.rpgGame.appModule.common.GoodsContainerPanel;
-	import com.rpgGame.appModule.common.ViewUI;
 	import com.rpgGame.appModule.common.itemRender.GridItemRender;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
@@ -50,6 +50,8 @@ package com.rpgGame.appModule.equip
 	
 	import app.message.GoodsType;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	
@@ -63,7 +65,6 @@ package com.rpgGame.appModule.equip
 	import org.mokylin.skin.app.zhuangbei.xilian.Xilian_Skin;
 	
 	import starling.display.DisplayObject;
-	import away3d.events.Event;
 	
 	/**
 	 *装备洗练
@@ -252,7 +253,7 @@ package com.rpgGame.appModule.equip
 			isLockRefresh=true;
 			
 			if(needMon!=0&&!noAlertWash){
-				 var alertOk:AlertSetInfo=new AlertSetInfo(LangUI.UI_TEXT3);//强化成功
+				 var alertOk:AlertSetInfo=new AlertSetInfo(LangUI.UI_TEXT30);//强化成功
 				alertOk.alertInfo.value=LanguageConfig.getText(LangUI.UI_TEXT30)+needMon;
 				alertOk.isShowCBox=true;
 				alertOk.alertInfo.checkText=LanguageConfig.getText(LangUI.UI_TEXT31);
@@ -325,18 +326,22 @@ package com.rpgGame.appModule.equip
 					if(targetEquipInfo.smeltAtt1!=oldAtt1&&oldAtt1!=0){//刷新
 						getItemSkin(_skin.Item1).lb_name.htmlText=CharAttributeType.getWashAttDes(targetEquipInfo.smeltAtt1);//新的
 						getItemSkin(_skin.Item1).lb_name0.htmlText=CharAttributeType.getWashAttDes(oldAtt1);//老的
-						/*target=getItemSkin(_skin.Item1).lb_name;
+						target=getItemSkin(_skin.Item1).lb_name;
 						TweenMax.fromTo(target,1,{x:-200,alpha:0},{x:1,alpha:1,ease:Expo.easeOut});
 						target=getItemSkin(_skin.Item1).lb_name0;
-						TweenMax.fromTo(target,1,{x:1,alpha:1},{x:200,alpha:0,ease:Expo.easeOut});*/
+						TweenMax.fromTo(target,1,{x:1,alpha:1},{x:200,alpha:0,ease:Expo.easeOut});
 					}else{
-						getItemSkin(_skin.Item1).lb_name.htmlText=CharAttributeType.getWashAttDes(targetEquipInfo.smeltAtt1);
-						getItemSkin(_skin.Item1).lb_name0.htmlText="";
+						if(targetEquipInfo.smeltAtt1==oldAtt1){//洗出的是老属性
+							getItemSkin(_skin.Item1).lb_name.htmlText=getItemSkin(_skin.Item1).lb_name0.htmlText=CharAttributeType.getWashAttDes(targetEquipInfo.smeltAtt1);
+							target=getItemSkin(_skin.Item1).lb_name;
+							TweenMax.fromTo(target,1,{x:-200,alpha:0},{x:1,alpha:1,ease:Expo.easeOut});
+							target=getItemSkin(_skin.Item1).lb_name0;
+							TweenMax.fromTo(target,1,{x:1,alpha:1},{x:200,alpha:0,ease:Expo.easeOut});
+						}else{
+							getItemSkin(_skin.Item1).lb_name.htmlText=CharAttributeType.getWashAttDes(targetEquipInfo.smeltAtt1);
+							getItemSkin(_skin.Item1).lb_name0.htmlText="";
+						}
 					}
-					target=getItemSkin(_skin.Item1).lb_name;
-					TweenMax.fromTo(target,1,{x:-200,alpha:0},{x:1,alpha:1,ease:Expo.easeOut});
-					target=getItemSkin(_skin.Item1).lb_name0;
-					TweenMax.fromTo(target,1,{x:1,alpha:1},{x:200,alpha:0,ease:Expo.easeOut});
 					getItemSkin(_skin.Item1).chk_suoding.isSelected=_sharedObject.data[targetEquipInfo.itemInfo.itemId.ToGID()+"_1"];
 					if(getItemSkin(_skin.Item1).chk_suoding.isSelected){
 						needMon=10;
@@ -348,18 +353,22 @@ package com.rpgGame.appModule.equip
 					if(targetEquipInfo.smeltAtt2!=oldAtt2&&oldAtt2!=0){//刷新
 						getItemSkin(_skin.Item2).lb_name.htmlText=CharAttributeType.getWashAttDes(targetEquipInfo.smeltAtt2);//新的
 						getItemSkin(_skin.Item2).lb_name0.htmlText=CharAttributeType.getWashAttDes(oldAtt2);//老的
-					/*	target=getItemSkin(_skin.Item2).lb_name;
+						target=getItemSkin(_skin.Item2).lb_name;
 						TweenMax.fromTo(target,1,{x:-200,alpha:0},{x:1,alpha:1,ease:Expo.easeOut});
 						target=getItemSkin(_skin.Item2).lb_name0;
-						TweenMax.fromTo(target,1,{x:1,alpha:1},{x:200,alpha:0,ease:Expo.easeOut});*/
+						TweenMax.fromTo(target,1,{x:1,alpha:1},{x:200,alpha:0,ease:Expo.easeOut});
 					}else{
-						getItemSkin(_skin.Item2).lb_name.htmlText=CharAttributeType.getWashAttDes(targetEquipInfo.smeltAtt2);
-						getItemSkin(_skin.Item2).lb_name0.htmlText="";
+						if(targetEquipInfo.smeltAtt2==oldAtt2){//洗出的是老属性)
+							getItemSkin(_skin.Item2).lb_name.htmlText=getItemSkin(_skin.Item2).lb_name0.htmlText=CharAttributeType.getWashAttDes(targetEquipInfo.smeltAtt2);
+						}else{
+							getItemSkin(_skin.Item2).lb_name.htmlText=CharAttributeType.getWashAttDes(targetEquipInfo.smeltAtt2);
+							getItemSkin(_skin.Item2).lb_name0.htmlText="";
+						}
 					}
-					target=getItemSkin(_skin.Item2).lb_name;
+				/*	target=getItemSkin(_skin.Item2).lb_name;
 					TweenMax.fromTo(target,1,{x:-200,alpha:0},{x:1,alpha:1,ease:Expo.easeOut});
 					target=getItemSkin(_skin.Item2).lb_name0;
-					TweenMax.fromTo(target,1,{x:1,alpha:1},{x:200,alpha:0,ease:Expo.easeOut});
+					TweenMax.fromTo(target,1,{x:1,alpha:1},{x:200,alpha:0,ease:Expo.easeOut});*/
 					getItemSkin(_skin.Item2).chk_suoding.isSelected=_sharedObject.data[targetEquipInfo.itemInfo.itemId.ToGID()+"_2"];
 					if(getItemSkin(_skin.Item2).chk_suoding.isSelected){
 						needMon=10;
@@ -479,6 +488,9 @@ package com.rpgGame.appModule.equip
 			EventManager.removeEvent(ItemEvent.ITEM_REMOVE_LIST,onRemoveFreshItems);
 			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);//金钱变化
 			TipTargetManager.remove( _skin.btn_shuoming);
+			oldAtt1=oldAtt2=0;
+			
+			GameAlert.closeAlert(LangUI.UI_TEXT30);
 		}
 		
 		private function onRemoveFreshItems(list:Vector.<ClientItemInfo>):void

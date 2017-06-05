@@ -48,9 +48,17 @@ package app.message {
 		 */
 		public static const PROPERTY:int = 10;
 		/**
+		 *称号
+		 */
+		public static const NAMES:int = 14;
+		/**
 		 *buff
 		 */
 		public static const BUFF:int = 15;
+		/**
+		 *强化
+		 */
+		public static const STRENGTH:int = 16;
 		/**
 		 *传送
 		 */

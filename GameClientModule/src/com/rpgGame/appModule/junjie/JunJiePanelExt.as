@@ -11,8 +11,8 @@ package com.rpgGame.appModule.junjie
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.JunJieSender;
 	import com.rpgGame.app.ui.common.CenterEftPop;
+	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.FightValueUtil;
-	import com.rpgGame.appModule.common.ViewUI;
 	import com.rpgGame.core.events.JunJieEvent;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.JunJieData;
@@ -24,6 +24,8 @@ package com.rpgGame.appModule.junjie
 	
 	import flash.geom.Point;
 	
+	import away3d.events.Event;
+	
 	import feathers.utils.filter.GrayFilter;
 	
 	import gs.TimelineLite;
@@ -31,8 +33,6 @@ package com.rpgGame.appModule.junjie
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.beibao.junjie.JunJie_Skin;
-	
-	import away3d.events.Event;
 	
 	public class JunJiePanelExt extends ViewUI
 	{
@@ -72,6 +72,7 @@ package com.rpgGame.appModule.junjie
 			_pointXArr=[68,49,36,32,34];
 			initView();
 			initAvatar();
+			_skin.conTiaojian.x=_skin.conTiaojian.x-14;
 			_skin.uiUp.visible=false;
 			_skin.num_lv.visible=false;		
 		}
@@ -128,9 +129,8 @@ package com.rpgGame.appModule.junjie
 			this._avatar.curRole.stateMachine.transition(RoleStateType.ACTION_SHOW);
 		}
 		
-		override protected function onShow():void
+		override public function show(data:Object=null):void
 		{
-			super.onShow();
 			initEvent();
 			showNowJunJieLvAtt();
 			_showFirstLv=1;
@@ -140,9 +140,8 @@ package com.rpgGame.appModule.junjie
 			
 		}
 		
-		override protected function onHide():void
+		override public function hide():void
 		{
-			super.onHide();
 			closeEvent();
 			_nowSelectItem=null;
 			_nowShowLevel=0;

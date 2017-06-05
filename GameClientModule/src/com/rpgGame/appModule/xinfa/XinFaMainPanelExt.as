@@ -1,12 +1,10 @@
 package com.rpgGame.appModule.xinfa
 {
-	import com.rpgGame.core.ui.SkinUI;
-	
-	import feathers.controls.StateSkin;
+	import com.rpgGame.app.ui.tab.ViewUI;
 	
 	import org.mokylin.skin.app.beibao.Xinfa.xinfa_Skin;
 	
-	public class XinFaMainPanelExt extends SkinUI
+	public class XinFaMainPanelExt extends ViewUI
 	{
 		private var _skin:xinfa_Skin;
 		private var _view:XinFaView;
@@ -16,14 +14,12 @@ package com.rpgGame.appModule.xinfa
 			super(_skin);
 			_view=new XinFaView(_skin);
 		}
-		override protected function onShow():void
+		override public function show(data:Object=null):void
 		{
-			super.onShow();
 			_view.onShow();
 		}
-		override protected function onHide():void
+		override public function hide():void
 		{
-			super.onHide();
 			_view.onHide();
 		}
 	}

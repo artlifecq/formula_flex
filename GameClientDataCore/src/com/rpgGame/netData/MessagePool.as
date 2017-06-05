@@ -722,9 +722,6 @@ package com.rpgGame.netData{
 	import com.rpgGame.netData.zhengba.message.SCDrawAwardResultMessage;
 	import com.rpgGame.netData.zhengba.message.SCOpenArardPanelMessage;
 	import com.rpgGame.netData.zhengba.message.SCUpdateZhengBaDataMessage;
-	import com.rpgGame.netData.zone.handler.ResBattleZoneBOSSinfoToClientHandler;
-	import com.rpgGame.netData.zone.handler.ResBattleZoneClearanceToClientHandler;
-	import com.rpgGame.netData.zone.handler.ResBattleZoneObtainToClientHandler;
 	import com.rpgGame.netData.zone.handler.ResBossGuideInfoHandler;
 	import com.rpgGame.netData.zone.handler.ResJiaoChangInfoHandler;
 	import com.rpgGame.netData.zone.handler.ResJiaoChangResultInfoHandler;
@@ -746,13 +743,13 @@ package com.rpgGame.netData{
 	import com.rpgGame.netData.zone.handler.SCEnterZoneHandler;
 	import com.rpgGame.netData.zone.handler.SCKillInfoHandler;
 	import com.rpgGame.netData.zone.handler.SCKillInfosHandler;
+	import com.rpgGame.netData.zone.handler.SCMultiZonePanelInfosHandler;
+	import com.rpgGame.netData.zone.handler.SCMultiZonePanelSingleInfoHandler;
 	import com.rpgGame.netData.zone.handler.SCMultiZoneResultHandler;
+	import com.rpgGame.netData.zone.handler.SCMultiZoneRewardHandler;
 	import com.rpgGame.netData.zone.handler.SCOutZoneHandler;
 	import com.rpgGame.netData.zone.handler.SCRemainTimeHandler;
 	import com.rpgGame.netData.zone.handler.SCZoneStageChangeHandler;
-	import com.rpgGame.netData.zone.message.ResBattleZoneBOSSinfoToClientMessage;
-	import com.rpgGame.netData.zone.message.ResBattleZoneClearanceToClientMessage;
-	import com.rpgGame.netData.zone.message.ResBattleZoneObtainToClientMessage;
 	import com.rpgGame.netData.zone.message.ResBossGuideInfoMessage;
 	import com.rpgGame.netData.zone.message.ResJiaoChangInfoMessage;
 	import com.rpgGame.netData.zone.message.ResJiaoChangResultInfoMessage;
@@ -774,7 +771,10 @@ package com.rpgGame.netData{
 	import com.rpgGame.netData.zone.message.SCEnterZoneMessage;
 	import com.rpgGame.netData.zone.message.SCKillInfoMessage;
 	import com.rpgGame.netData.zone.message.SCKillInfosMessage;
+	import com.rpgGame.netData.zone.message.SCMultiZonePanelInfosMessage;
+	import com.rpgGame.netData.zone.message.SCMultiZonePanelSingleInfoMessage;
 	import com.rpgGame.netData.zone.message.SCMultiZoneResultMessage;
+	import com.rpgGame.netData.zone.message.SCMultiZoneRewardMessage;
 	import com.rpgGame.netData.zone.message.SCOutZoneMessage;
 	import com.rpgGame.netData.zone.message.SCRemainTimeMessage;
 	import com.rpgGame.netData.zone.message.SCZoneStageChangeMessage;
@@ -1069,9 +1069,6 @@ package com.rpgGame.netData{
 			register(154101, ResSendSignInfoToClientMessage, ResSendSignInfoToClientHandler);
 			register(154102, ResSendSignResultToClientMessage, ResSendSignResultToClientHandler);
 			register(154103, ResSignSumAwardResultToClientMessage, ResSignSumAwardResultToClientHandler);
-			register(155101, ResBattleZoneObtainToClientMessage, ResBattleZoneObtainToClientHandler);
-			register(155102, ResBattleZoneBOSSinfoToClientMessage, ResBattleZoneBOSSinfoToClientHandler);
-			register(155103, ResBattleZoneClearanceToClientMessage, ResBattleZoneClearanceToClientHandler);
 			register(155104, ResZoneFailureToClientMessage, ResZoneFailureToClientHandler);
 			register(155105, ResZoneCommonPanelInfoMessage, ResZoneCommonPanelInfoHandler);
 			register(155106, ResZoneCommonTrackInfoMessage, ResZoneCommonTrackInfoHandler);
@@ -1097,6 +1094,9 @@ package com.rpgGame.netData{
 			register(155142, SCKillInfoMessage, SCKillInfoHandler);
 			register(155143, SCCurTriggerMessage, SCCurTriggerHandler);
 			register(155144, SCMultiZoneResultMessage, SCMultiZoneResultHandler);
+			register(155145, SCMultiZoneRewardMessage, SCMultiZoneRewardHandler);
+			register(155146, SCMultiZonePanelInfosMessage, SCMultiZonePanelInfosHandler);
+			register(155147, SCMultiZonePanelSingleInfoMessage, SCMultiZonePanelSingleInfoHandler);
 			register(160101, ResHuntItemAddMessageMessage, ResHuntItemAddMessageHandler);
 			register(160102, ResHuntItemChangeMessage, ResHuntItemChangeHandler);
 			register(160103, ResHuntItemRemoveMessage, ResHuntItemRemoveHandler);

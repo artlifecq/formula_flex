@@ -69,6 +69,11 @@ package com.rpgGame.app.manager.scene
 		 *  * <font color=#00><b>currentMapId全局变量一次赋值直接调用，无需查询</b></font></br>
 		 * */
 		public static var currentMapId : uint = 0;
+		
+		/**
+		 *是否去跨服地图; 
+		 */
+		public static var isToCrossMap:Boolean;
 
 		private static var _isChangeSceneComplete : Boolean = false;
 		private static var _mapRes : String = null;
@@ -572,6 +577,10 @@ package com.rpgGame.app.manager.scene
 
 		private static function onSwitchCmp() : void
 		{
+			if(SceneSwitchManager.isToCrossMap){//前往跨服地图成功切换状态
+				SceneSwitchManager.isToCrossMap=false;
+			}
+			
 			_isChangeSceneComplete = true;
 			generateSceneEntities();
 			MainRoleManager.updateActorStatus(); //更新主角状态

@@ -143,10 +143,13 @@ package com.rpgGame.app.manager.goods
 		}
 		public function isBetterEquipCompareWithEquiped(item:ClientItemInfo):Boolean
 		{
-			var equ:EquipInfo=getEquipByPos(item.qItem.q_kind);
-			if (!equ||equ.itemInfo.fightPower<item.itemInfo.fightPower) 
+			if((item.qItem.q_job==0||item.qItem.q_job==MainRoleManager.actorInfo.job)&&item.qItem.q_level<=MainRoleManager.actorInfo.totalStat.level)
 			{
-				return true;
+				var equ:EquipInfo=getEquipByPos(item.qItem.q_kind);
+				if (!equ||equ.itemInfo.fightPower<item.itemInfo.fightPower) 
+				{
+					return true;
+				}
 			}
 			return false;
 		}
@@ -191,11 +194,11 @@ package com.rpgGame.app.manager.goods
 			super.setItemByIndex(index, info);
 			/*if(info != null)
 			{
-				MainRoleManager.actorInfo.equipInfo.add(index, info);
-				EventManager.dispatchEvent(ItemEvent.ITEM_WEARED_PERSON_EQUIP, info);
+			MainRoleManager.actorInfo.equipInfo.add(index, info);
+			EventManager.dispatchEvent(ItemEvent.ITEM_WEARED_PERSON_EQUIP, info);
 			}else{
-				info = MainRoleManager.actorInfo.equipInfo.remove(index) as ClientItemInfo;
-				EventManager.dispatchEvent(ItemEvent.ITEM_TOOK_OFF_PERSON_EQUIP, info);
+			info = MainRoleManager.actorInfo.equipInfo.remove(index) as ClientItemInfo;
+			EventManager.dispatchEvent(ItemEvent.ITEM_TOOK_OFF_PERSON_EQUIP, info);
 			}*/
 		}
 		
@@ -217,9 +220,17 @@ package com.rpgGame.app.manager.goods
 			return false;
 		}
 		
+		public static function isEquip(type:int):Boolean
+		{
+			if(type==GoodsType.EQUIPMENT||type==GoodsType.EQUIPMENT1||GoodsType.EQUIPMENT2){
+				return true;
+			}
+			return false;
+		}
+		
 		public static function canPutOnEquipAt(item:ClientItemInfo, pos:int, tip:Boolean=true):Boolean
 		{
-			if(!item || item.type != GoodsType.EQUIPMENT || !instance.isEquipSuitablePos(item, pos))
+			if(!item || !isEquip(item.type) || !instance.isEquipSuitablePos(item, pos))
 			{
 				if(tip)NoticeManager.showHint(EnumHintInfo.EQUIPMENT_ERROR_POS);
 				return false;
@@ -232,10 +243,10 @@ package com.rpgGame.app.manager.goods
 				if(tip)NoticeManager.showHint(EnumHintInfo.EQUIPMENT_ERROR_SEX, [SexType.getName(sex)]);
 				return false;
 			}
-		/*	if(!isSuitRace(race))
+			/*	if(!isSuitRace(race))
 			{
-				if(tip)NoticeManager.showHint(EnumHintInfo.EQUIPMENT_ERROR_RACE, [RaceUtil.getRaceTitle(race)]);
-				return false;
+			if(tip)NoticeManager.showHint(EnumHintInfo.EQUIPMENT_ERROR_RACE, [RaceUtil.getRaceTitle(race)]);
+			return false;
 			}*/
 			var lv:int = ItemConfig.getItemRequireLevel(item.cfgId);
 			if(lv > MainRoleManager.actorInfo.totalStat.level)

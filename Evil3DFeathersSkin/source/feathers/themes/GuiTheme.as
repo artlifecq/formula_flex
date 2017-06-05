@@ -337,6 +337,7 @@ package feathers.themes{
 			}
 			if(!button.styleName)button.styleName = styleName;
 			button.defaultSkin = creatImageSkin(styleName, false, button.defaultSkin as ImageSkin);
+			button.defaultIcon = creatImageSkin(styleName, true, button.defaultIcon as ImageSkin);
 			button.stateToLabelPropertiesFunction = updateButtonLabelState;
 		}
 		

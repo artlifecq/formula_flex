@@ -9,9 +9,9 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.app.sender.ItemSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.ui.common.CenterEftPop;
+	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.appModule.common.GoodsContainerPanel;
-	import com.rpgGame.appModule.common.ViewUI;
 	import com.rpgGame.appModule.common.itemRender.GridItemRender;
 	import com.rpgGame.appModule.common.itemRender.SkinItem;
 	import com.rpgGame.appModule.common.itemRender.SkinItemRender;
@@ -50,6 +50,8 @@ package com.rpgGame.appModule.equip
 	import app.message.EquipOperateType;
 	import app.message.GoodsType;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.List;
 	import feathers.controls.Scroller;
 	import feathers.controls.SkinnableContainer;
@@ -67,7 +69,6 @@ package com.rpgGame.appModule.equip
 	import org.mokylin.skin.app.zhuangbei.qianghua.Zhuangbei_QianghuaSkin;
 	
 	import starling.display.DisplayObject;
-	import away3d.events.Event;
 	
 	/**
 	 *装备强化
@@ -362,9 +363,11 @@ package com.rpgGame.appModule.equip
 			var gridInfo:GridInfo=grid.gridInfo;
 			if(targetEquipInfo){
 				_goodsContainerTarget.setGrayForData(targetEquipInfo,false);
-			/*	if(isUse(targetEquipInfo)){
-					_goodsContainerUse.setGrayForData(targetEquipInfo,false);
-				}*/
+				if(isUse(targetEquipInfo)){
+					useEquips.push(targetEquipInfo);
+					useEquips.sort(sortForUse);
+					_goodsContainerUse.refleshGridsByDatas(useEquips);
+				}
 			}
 			cancelAllUse();
 			

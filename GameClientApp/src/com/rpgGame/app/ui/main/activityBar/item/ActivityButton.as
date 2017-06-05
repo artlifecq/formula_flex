@@ -1,5 +1,7 @@
 ﻿package com.rpgGame.app.ui.main.activityBar.item
 {
+    import com.rpgGame.app.manager.FunctionOpenManager;
+    
     import org.mokylin.skin.mainui.activityBar.ActivityButtonSkin;
     
     import starling.display.DisplayObject;
@@ -14,9 +16,10 @@
             ui = new ActivityButtonSkin();
             super(ui);
             ui.txtTitle.isHtmlText = true;
+			ui.txtTitle.text = "";
         }
 
-        override public function set skin(cl:Class):void
+        override public function set styleClass(cl:Class):void
         {
             ui.btnBar.styleClass = cl;
         }
@@ -39,10 +42,7 @@
             {
                 case ui.btnBar:
                     onButtonClick();
-                    if (onClick != null)
-                    {
-                        onClick(_local2);
-                    }
+					FunctionOpenManager.openModeByInfo(info);
                     return;
             }
         }

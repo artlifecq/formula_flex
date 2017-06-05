@@ -64,7 +64,7 @@ package com.rpgGame.app.view.icon
 		 * @param iconResURL url地址
 		 * 
 		 */		
-		public function setIconResName( iconResURL:String ):void
+		public function setIconResName( iconResURL:String , isSetSelect:Boolean=true):void
 		{
 			if( _iconResURL == iconResURL )
 				return;

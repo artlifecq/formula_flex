@@ -1,5 +1,6 @@
 package com.rpgGame.app.ui.main.taskbar
 {
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
@@ -202,9 +203,9 @@ package com.rpgGame.app.ui.main.taskbar
 		{
 			leadCont.hideInfo();
 			loopCont.hideTaskView(type);
-			setViewShow();
-			leadCont.leadTaskView();
-			loopCont.loopTaskView();
+			//setViewShow();
+			//leadCont.leadTaskView();
+			//loopCont.loopTaskView();
 			if(type==TaskType.MAINTYPE_MAINTASK)
 			{
 				effetCont.playFinishEffect();

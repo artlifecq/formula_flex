@@ -6,7 +6,7 @@ package com.rpgGame.app.manager
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.mainCore.core.manager.LayerManager;
 	import com.game.mainCore.libCore.handle.HandleThread;
-	import com.rpgGame.app.ui.main.buttons.MainButtonBases;
+	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
@@ -15,9 +15,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.task.PrizeInfo;
 	
-	import flash.events.MouseEvent;
 	import flash.geom.Point;
-	import flash.ui.Mouse;
 	import flash.utils.setTimeout;
 	
 	import feathers.controls.UIAsset;
@@ -107,9 +105,22 @@ package com.rpgGame.app.manager
 			addTweenHT(null,content,onCmpFun,time);
 		}
 		
-		private static function addTweenHT(endPos:Point,display:DisplayObject,onCmpFun:Function = null, time:Number = 0.6, interval:Number = 200):void
+		public static function addTweenHT(endPos:Point,display:DisplayObject,onCmpFun:Function = null, time:Number = 0.6, interval:Number = 200):void
 		{
 			_tweenHT.push(executeTween,[endPos,display,onCmpFun,time], interval);
+		}
+		
+		public static function addTweenDisplay(endPos:Point,display:DisplayObject,timeObj:Object,onCmpFun:Function = null, time:Number = 0.6, interval:Number = 200):void
+		{
+			_tweenHT.push(__executeTween,[endPos,display,timeObj,onCmpFun,time], interval);
+		}
+		
+		private static function __executeTween($endPos:Point,$display:DisplayObject,timeObj:Object,onCmpFun:Function = null,time:Number = 0.6):void
+		{
+			partner.addChild($display);
+			timeObj.onComplete = onTweenFlyComplete;
+			timeObj.onCompleteParams = [$display,onCmpFun];
+			TweenLite.to($display, time, timeObj);
 		}
 		
 		private static function executeTween($endPos:Point,$display:DisplayObject,onCmpFun:Function = null,time:Number = 0.6):void
@@ -120,7 +131,7 @@ package com.rpgGame.app.manager
 				$endPos = getBackPackBtnPos();
 			}
 			partner.addChild($display);
-			TweenLite.to($display, time, {x:$endPos.x - 5, y:$endPos.y,onComplete:onTweenFlyComplete,onCompleteParams:[$display,onCmpFun],ease:Quad.easeIn});
+			TweenLite.to($display, time, {x:$endPos.x - 5, y:$endPos.y,onComplete:onTweenFlyComplete,onCompleteParams:[$display,onCmpFun],ease:Quad.easeOut});
 		}
 		
 	
@@ -143,7 +154,7 @@ package com.rpgGame.app.manager
 		
 		private static function getBackPackBtnPos():Point
 		{
-			return MainUIManager.getBtnGolbalPos(MainButtonBases.getButtonName(1));
+			return MainUIManager.getBtnGolbalPos(MainButtonManager.getButtonName(1));
 		}
 		
 		public static function tweenPrizeInfoToBag(prize:PrizeInfo,startPos:Point = null,onCompFunc:Function = null):void

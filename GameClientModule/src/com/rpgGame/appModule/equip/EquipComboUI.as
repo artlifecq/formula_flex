@@ -8,9 +8,9 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.ItemSender;
 	import com.rpgGame.app.ui.common.CenterEftPop;
+	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
-	import com.rpgGame.appModule.common.ViewUI;
 	import com.rpgGame.appModule.equip.combo.DetailNodeInfo;
 	import com.rpgGame.appModule.equip.combo.EquipComboTreeItemRender;
 	import com.rpgGame.appModule.equip.combo.MainNodeInfo;
@@ -37,6 +37,8 @@ package com.rpgGame.appModule.equip
 	
 	import app.message.EquipOperateType;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.controls.UIAsset;
 	import feathers.data.ListCollection;
@@ -48,8 +50,6 @@ package com.rpgGame.appModule.equip
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.zhuangbei.hecheng.HeCheng_Skin;
 	import org.mokylin.skin.component.list.ListSkin1;
-	
-	import away3d.events.Event;
 	
 	/**
 	 *装备合成
@@ -187,6 +187,7 @@ package com.rpgGame.appModule.equip
 			_exisList.push(_skin.exist2);
 			_exisList.push(_skin.exist3);
 			_skin.container.addChild(icon);
+			_skin.container.addChild(_skin.equip_num);
 			
 			for(var i:int=0;i<CAILIAO_NUM;i++)
 			{
@@ -356,7 +357,7 @@ package com.rpgGame.appModule.equip
 			
 			_skin.equip_name.color=ItemConfig.getItemQualityColor(_nowSelect.q_item_id);
 			_skin.equip_name.text=itemInfo.name;
-			
+			_skin.equip_num.text=_skin.input_txt.text;
 			setCaiLiaoData();
 		}
 		
@@ -402,6 +403,7 @@ package com.rpgGame.appModule.equip
 		{
 			_skin.input_txt.text=_hechengNum.toString();
 			_skin.lb_msg.htmlText=getTitleText("合成消耗");
+			_skin.equip_num.text=_skin.input_txt.text;
 		}
 		
 		private function initEvent():void

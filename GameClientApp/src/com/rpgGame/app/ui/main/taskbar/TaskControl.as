@@ -1,5 +1,6 @@
 package com.rpgGame.app.ui.main.taskbar
 {
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.fight.spell.CastSpellHelper;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.WalkToRoleManager;
@@ -40,7 +41,7 @@ package com.rpgGame.app.ui.main.taskbar
 		public static var panlIsopen:Boolean=false;
 		public static function showLeadPanel():void
 		{
-			if (!ClientConfig.isBanShu&&!AppManager.isAppInScene(AppConstant.TASK_LEAD_PANEL))
+			if (!AppManager.isAppInScene(AppConstant.TASK_LEAD_PANEL))
 			{
 				AppManager.showApp(AppConstant.TASK_LEAD_PANEL);
 				panlIsopen=true;

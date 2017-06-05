@@ -94,7 +94,7 @@ package com.rpgGame.app.utils
 
 		public static function getRoleBloodBarState(_role : SceneRole):int
 		{
-			if (_role.isMainChar) 
+			if (_role&&_role.isMainChar) 
 			{
 				return HeadBloodStateType.MAIN_CHAR;
 			}

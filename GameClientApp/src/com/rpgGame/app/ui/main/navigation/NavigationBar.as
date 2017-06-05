@@ -1,10 +1,11 @@
 package com.rpgGame.app.ui.main.navigation {
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.ui.main.buttons.IOpen;
 	import com.rpgGame.app.ui.main.buttons.MainButtonBases;
+	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
-	import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
 	
 	import flash.geom.Point;
 	
@@ -34,7 +35,7 @@ package com.rpgGame.app.ui.main.navigation {
 			_content = new ContengGroup(_skin.width,_skin.height);
 			this.addChildAt(_content,0);
 			this.setState(true);
-			EventManager.addEvent(MainPlayerEvent.STAT_CHANGE,refeashButton);
+			EventManager.addEvent(MainPlayerEvent.LEVEL_CHANGE,refeashButton);
 			refeashButton();
 		}
 		
@@ -49,7 +50,7 @@ package com.rpgGame.app.ui.main.navigation {
 			_content.reset();
 			for(var i:int =0;i<length;i++)
 			{
-				var button:MainButtonBases = MainButtonBases.getButtonBuyInfo(buttoninfos[i]);
+				var button:IOpen = MainButtonManager.getButtonBuyInfo(buttoninfos[i]);
 				if(button!=null&&button.canOpen())
 				{
 					_content.addButton(button);

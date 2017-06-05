@@ -1,7 +1,9 @@
 ﻿package com.rpgGame.app.ui.main.activityBar.item
 {
     import com.game.engine3D.display.InterObject3D;
+    import com.rpgGame.app.manager.FunctionOpenManager;
     import com.rpgGame.app.manager.time.SystemTimeManager;
+    import com.rpgGame.app.ui.main.buttons.IOpen;
     import com.rpgGame.app.utils.TimeData;
     import com.rpgGame.app.utils.TimeUtil;
     import com.rpgGame.core.events.ActivityEvent;
@@ -9,21 +11,20 @@
     import com.rpgGame.core.manager.tips.TipTargetManager;
     import com.rpgGame.core.ui.SkinUI;
     import com.rpgGame.coreData.cfg.ClientConfig;
+    import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
     import com.rpgGame.coreData.type.activity.ActivityOpenStateType;
     
-    import feathers.controls.StateSkin;
+    import gs.TweenMax;
     
     import org.client.mainCore.manager.EventManager;
     
     import starling.display.DisplayObject;
 
-    public class ActivityButtonBase extends SkinUI 
+    public class ActivityButtonBase extends SkinUI implements IOpen
     {
-
         public var type:int;
 		public var row:int;
         public var order:uint;
-        public var onClick:Function;
         private var _title:String;
         protected var tipReady:String;
         protected var tipRuning:String;
@@ -36,11 +37,31 @@
         private var _runing:Boolean;
         private var _effect3D:InterObject3D;
 
-        public function ActivityButtonBase(skin:StateSkin=null)
+        public function ActivityButtonBase(skin)
         {
             super(skin);
         }
-
+		
+		private var _info:FunctionBarInfo;
+		public function get info():FunctionBarInfo
+		{
+			return _info;
+		}
+		
+		public function set info(value:FunctionBarInfo):void
+		{
+			_info = value;
+		}
+		
+		public function canOpen():Boolean
+		{
+			return FunctionOpenManager.getOpenLevelByFunBarInfo(_info);
+		}
+		
+		public function set styleClass(cl:Class):void
+		{
+			
+		}
         public function get openTimeData():TimeData
         {
             return _openTimeData;
@@ -49,7 +70,7 @@
         public function set skin(cl:Class):void
         {
         }
-
+		
         public function get runing():Boolean
         {
             return _runing;
@@ -277,5 +298,23 @@
         {
             return true;
         }
+		
+		private var _tweenmax:TweenMax;
+		public function runAnimation():void
+		{
+			if(_tweenmax!=null)
+			{
+				_tweenmax.restart();
+				return ;
+			}
+			var lasty:Number = this.y;
+			_tweenmax = TweenMax.to(this,0.1,{repeat:5,y:lasty-10,onComplete:onTweenFlyComplete,onCompleteParams:[this,lasty]});
+		}
+		
+		private function onTweenFlyComplete(display:IOpen,lastY:Number):void
+		{
+			_tweenmax = null;
+			display.y = lastY;
+		}
     }
 }

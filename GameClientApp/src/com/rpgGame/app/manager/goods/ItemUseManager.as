@@ -123,7 +123,7 @@ package com.rpgGame.app.manager.goods
 		{
 			var dstPos : int;
 
-			if(item.type == GoodsType.EQUIPMENT)//人物面板在舞台，并且类型是装备
+			if(RoleEquipmentManager.isEquip(item.type))//人物面板在舞台，并且类型是装备
 			{
 				if(item.qItem.q_job!=MainRoleManager.actorInfo.job){
 					NoticeManager.showNotifyById(12009);
@@ -149,7 +149,7 @@ package com.rpgGame.app.manager.goods
 				}
 				return;
 			}
-			else if (item.type == GoodsType.EQUIPMENT) //是装备类型
+			else if (RoleEquipmentManager.isEquip(item.type)) //是装备类型
 			{
 				//坐骑装备
 				if (MountEquipmentManager.instance.isMountEquipType(item))
@@ -293,34 +293,11 @@ package com.rpgGame.app.manager.goods
 			switch (item.type)
 			{
 				case GoodsType.EQUIPMENT:
+				case GoodsType.EQUIPMENT1:
+				case GoodsType.EQUIPMENT2:
 					useEquip(item);
 					return;
-				/*case GoodsType.TRANSPORTATION:
-				{
-					useTransBook(item);
-					return;
-				}
-				case GoodsType.NORMAL:
-				{
-					useNormalItem(item, count);
-					return;
-				}
-				case GoodsType.PANEL:
-				{
-					openPanel(item.cfgId);
-					return;
-				}
-				case GoodsType.SEAL:
-				{
-//					CrownManager.openCrownPanel();
-					return;
-				}*/
-				case GoodsType.MEDICINE:
-				{
-//					AppManager.showApp(AppConstant.MOUNT_PANEL);
-					break;
-				}
-				case GoodsType.MATERIAL_ADVANCE:
+				case GoodsType.MATERIAL_ADVANCE://进阶材料
 				{
 					AppManager.showApp(AppConstant.MOUNT_PANEL);
 					break;
@@ -332,37 +309,22 @@ package com.rpgGame.app.manager.goods
 					AppManager.showAppNoHide(AppConstant.EQUIP_PANL,{tab:4,data:info});
 					return;
 				}
-//				case GoodsType.JINZI_PACKAGE:
-//				{
-//					//ItemByYuanbaoManager.showGoods( item );
-//					return;
-//					break;
-//				}
-			/*	case GoodsType.SPELL_BOOK:
-				{
-					SpellManager.learnOrUpdateSpellByType(ItemCfgData.getSpellBookType(item.cfgId), true);
+				case GoodsType.CHAT:
 					return;
-				}
-				case GoodsType.BEAST_CARD: //兽牌
-				{
-					break;
-				}
-				case GoodsType.SUMMON_TOKEN:
-				{
-					SocietyManager.useFamilyLeaderToken(item);
+				case GoodsType.TRANSFER:
 					return;
-				}
-				case GoodsType.FEED://坐骑饲料
-				case GoodsType.MOUNT_EXP://坐骑经验丹
-				{
-					AppManager.showAppNoHide( AppConstant.MOUNT_PANEL, { tab:0, tabChild:2, itemInfo:item } );
+				case GoodsType.TASK:
 					return;
-				}
-				case GoodsType.DUAN_GU_DAN://坐骑锻骨丹
-				{
-					AppManager.showAppNoHide( AppConstant.MOUNT_PANEL, { tab:1, itemInfo:item } );
+				case GoodsType.BUFF:
 					return;
-				}*/
+				case GoodsType.NAMES:
+					return;
+				case GoodsType.STRENGTH:
+					return;
+				case GoodsType.MOUNT:
+					return;
+				case GoodsType.MERIDIANSTONE:
+					return;
 			}
 			
 			/*switch(item.getNormalUsableType)

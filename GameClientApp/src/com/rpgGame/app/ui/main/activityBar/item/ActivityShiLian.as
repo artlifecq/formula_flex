@@ -44,15 +44,15 @@
         private function updateHintNum():void
         {
             var _local2:int;
-            if (FunctionOpenManager.functionIsOpen(50))
+            if (FunctionOpenManager.checkOpenBuyFunId(50))
             {
 //                _local2 = (_local2 + ShiLianManager.yiJiEnterTimes);
             }
-            if (FunctionOpenManager.functionIsOpen(49))
+            if (FunctionOpenManager.checkOpenBuyFunId(49))
             {
 //                _local2 = (_local2 + ShiLianManager.mingJiangLeftTimes);
             }
-            if (FunctionOpenManager.functionIsOpen(54))
+            if (FunctionOpenManager.checkOpenBuyFunId(54))
             {
 //                _local2 = (_local2 + ShiLianManager.shouHuLeftTimes);
             }

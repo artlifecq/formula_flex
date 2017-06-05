@@ -1,16 +1,19 @@
 package com.rpgGame.app.ui.main.navigation
 {
+	import com.rpgGame.app.ui.main.buttons.IOpen;
 	import com.rpgGame.app.ui.main.buttons.MainButtonBases;
 	import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
 	
 	import feathers.core.FeathersControl;
+	
+	import starling.display.DisplayObject;
 	
 	internal class ContengGroup extends FeathersControl
 	{
 		public static const INVALIDATION_FLAG_POSTION:String = "position";
 		private var _helpw:Number;
 		private var _helph:Number;
-		private var _buttonList:Vector.<MainButtonBases>;
+		private var _buttonList:Vector.<IOpen>;
 		public function ContengGroup(w:Number,h:Number):void
 		{
 			_helpw = w;
@@ -37,9 +40,9 @@ package com.rpgGame.app.ui.main.navigation
 		
 		public function reset():void
 		{
-			_buttonList = new Vector.<MainButtonBases>();
+			_buttonList = new Vector.<IOpen>();
 		}
-		public function addButton(button:MainButtonBases):void
+		public function addButton(button:IOpen):void
 		{
 			if(button==null)
 				return ;
@@ -72,15 +75,16 @@ package com.rpgGame.app.ui.main.navigation
 			this.removeChildren();
 			var itemCount:int =this._buttonList.length;
 			var postion:int = 0;
-			var item:MainButtonBases
+			var item:IOpen
 			for(var i:int = 0; i <itemCount; i++)
 			{
 				item= _buttonList[i];
-				item.validate();
+				if(item is FeathersControl)
+					(item as FeathersControl).validate();
 				item.x = postion;
 				item.y = _helph-item.height;
 				postion+= item.width;
-				this.addChildAt(item,i);
+				this.addChildAt(item as DisplayObject,i);
 			}
 			this.setSize(postion,_helph);
 			this.y = _helph  - height;

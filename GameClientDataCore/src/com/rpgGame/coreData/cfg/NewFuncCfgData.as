@@ -9,6 +9,11 @@ package com.rpgGame.coreData.cfg
 	public class NewFuncCfgData
 	{
 		private static var _map:HashMap;
+
+		public static function alldata():Array
+		{
+			return _map.getValues();
+		}
 		private static var _typelists:HashMap;
 		public static function setup( byte:ByteArray ):void
 		{

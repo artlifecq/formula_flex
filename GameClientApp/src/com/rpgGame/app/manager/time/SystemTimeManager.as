@@ -2,9 +2,13 @@ package com.rpgGame.app.manager.time
 {
 	import com.game.mainCore.core.timer.GameTimer;
 	import com.rpgGame.app.sender.MiscSender;
+	import com.rpgGame.core.events.SystemEvent;
+	import com.rpgGame.core.events.SystemTimeEvent;
 	import com.rpgGame.netData.login.message.ResHeartMessage;
 	
 	import flash.utils.getTimer;
+	
+	import org.client.mainCore.manager.EventManager;
 	
 	public class SystemTimeManager
 	{
@@ -18,6 +22,7 @@ package com.rpgGame.app.manager.time
 		// 服务器时间毫秒
 		private static var _serverTime:Number;
 		private static var _gTimer:GameTimer;
+		private static var _delayTiemByServer:Number;
 		/**
 		 * 心跳信息 
 		 * @param event
@@ -29,7 +34,7 @@ package com.rpgGame.app.manager.time
 			
 			if (_serverTimeCheck != 0)
 			{
-				time = _serverTimeCheck + _clientTimeCheck;
+			time = _serverTimeCheck + _clientTimeCheck;
 			}*/
 			MiscSender.reqHeartAndServerTime(getTimer());
 			
@@ -50,6 +55,7 @@ package com.rpgGame.app.manager.time
 			{
 				time = _serverTimeCheck + _clientTimeCheck;
 			}
+			_delayTiemByServer=curtTm;
 			MiscSender.reqHeartAndServerTime(time);
 		}
 		
@@ -70,9 +76,10 @@ package com.rpgGame.app.manager.time
 			{
 				_serverTimeCheck = msg.time2;//当前服务器启动多长时间  --- 毫秒
 				_clientTimeCheck = 1;
-
+				
 				_clientTimePass = ( new Date() ).getTime();
 			}
+			EventManager.dispatchEvent(SystemTimeEvent.SEVER_TIMR,msg);
 		}
 		
 		public static function get serverTimeCheck():int
@@ -88,7 +95,7 @@ package com.rpgGame.app.manager.time
 			if(curtTm >= todayOverTime)
 			{
 				SetNextDayTime(curtTm);
-//				dispatchEvent( new LoginEvent( LoginEvent.START_NEW_DAY ));
+				//				dispatchEvent( new LoginEvent( LoginEvent.START_NEW_DAY ));
 			}
 		}
 		
@@ -103,6 +110,11 @@ package com.rpgGame.app.manager.time
 		public static function get curtTm():Number
 		{
 			return _serverTime + getTimer();
+		}
+		
+		public static function get delayTiemByServer():Number
+		{
+			return _delayTiemByServer;
 		}
 		
 		public static function get sysDateTimeStr():String

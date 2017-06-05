@@ -1,18 +1,15 @@
 package com.rpgGame.app.cmdlistener.scene
 {
-	import com.game.engine2D.config.staticdata.CharAngleType;
 	import com.game.engine3D.scene.render.RenderUnit3D;
-	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.engine3D.vo.BaseObj3D;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.manager.CharAttributeManager;
 	import com.rpgGame.app.manager.ClientTriggerManager;
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.GameCameraManager;
 	import com.rpgGame.app.manager.LostSkillManager;
-	import com.rpgGame.app.manager.MainUIManager;
-	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.RankManager;
 	import com.rpgGame.app.manager.ReliveManager;
@@ -35,7 +32,6 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.state.role.control.StopWalkMoveStateReference;
 	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
 	import com.rpgGame.app.task.TaskInfoDecoder;
-	import com.rpgGame.app.ui.main.MainGUI;
 	import com.rpgGame.app.utils.ReqLockUtil;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.core.app.AppConstant;
@@ -45,7 +41,6 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.core.events.UserMoveEvent;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.AttachEffectCfgData;
-	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.Attach_effect;
@@ -53,7 +48,6 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
-	import com.rpgGame.coreData.info.collect.CollectObjcetInfo;
 	import com.rpgGame.coreData.info.map.EnumMapUnitType;
 	import com.rpgGame.coreData.info.move.RoleMoveInfo;
 	import com.rpgGame.coreData.info.task.target.TaskFollowEscortInfo;
@@ -104,7 +98,6 @@ package com.rpgGame.app.cmdlistener.scene
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	import flash.utils.ByteArray;
-	import flash.utils.getTimer;
 	
 	import app.cmd.NpcModuleMessages;
 	import app.cmd.SceneModuleMessages;
@@ -330,6 +323,7 @@ package com.rpgGame.app.cmdlistener.scene
 			playerData.sceneSequence = 0;
 			
 			EventManager.dispatchEvent(MapEvent.MAP_SWITCH_COMPLETE);
+			FunctionOpenManager.openNoticeByLevel(playerData.totalStat.level);
 			
 			//			CountryWarChengMenManager.checkChengMenStatus();
 			
@@ -459,7 +453,7 @@ package com.rpgGame.app.cmdlistener.scene
 				else
 					camouflageEntity.stateMachine.transition(RoleStateType.ACTION_IDLE);
 			}
-			//NoticeManager.showNotify("英雄移动失败");
+			NoticeManager.showNotify("英雄移动失败");
 		}
 		
 		/**
@@ -746,7 +740,6 @@ package com.rpgGame.app.cmdlistener.scene
 			}
 			else if(qData.q_monster_type==4)//npc创建流程       对应 改的东西太多了 先保留
 			{
-				
 				data = new MonsterData(RoleType.TYPE_MONSTER);
 				data.serverID = info.monsterId;
 				data.id = info.monsterId.ToGID();
@@ -885,6 +878,7 @@ package com.rpgGame.app.cmdlistener.scene
 				}
 				else if (msg.attributeChange.type==CharAttributeType.LV) 
 				{
+					FunctionOpenManager.openFunctionByLevel(msg.attributeChange.value,true);
 					EventManager.dispatchEvent(MainPlayerEvent.LEVEL_CHANGE);
 				}
 //				ReliveManager.autoHideRelive();

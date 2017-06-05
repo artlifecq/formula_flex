@@ -9,6 +9,7 @@ package com.rpgGame.appModule.skill
 	import com.rpgGame.app.view.icon.BgIcon;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
@@ -49,9 +50,9 @@ package com.rpgGame.appModule.skill
 		private var _riseIcon:BgIcon;
 		private var labelList:Vector.<Label>;
 		private var cacheLb:Vector.<Label>;
-		private var _panel:SkinUIPanel;
+		private var _panel:SkinUI;
 		
-		public function SkillRiseView(_skin:jineng_jinjie,panel:SkinUIPanel)
+		public function SkillRiseView(_skin:jineng_jinjie,panel:SkinUI)
 		{
 			_panel=panel;
 			_icon=new BgIcon(IcoSizeEnum.ICON_48);

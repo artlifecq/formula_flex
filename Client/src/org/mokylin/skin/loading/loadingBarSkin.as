@@ -29,7 +29,7 @@ package org.mokylin.skin.loading
 			
 			this.currentState = "normal";
 			this.width = 720;
-			this.elementsContent = [load_bg_i(),barLine_i(),__loadingBarSkin_UIAsset2_i(),__loadingBarSkin_UIAsset3_i()];
+			this.elementsContent = [load_bg_i(),barLine_i(),__loadingBarSkin_UIAsset2_i()];
 			
 			states = {
 			};
@@ -43,20 +43,10 @@ package org.mokylin.skin.loading
 		private function __loadingBarSkin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 31;
-			temp.left = 0;
-			temp.styleName = "ui/loading/huawen_1.png";
-			temp.top = 0;
-			return temp;
-		}
-
-		private function __loadingBarSkin_UIAsset3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 31;
-			temp.right = 0;
-			temp.styleName = "ui/loading/huawen_2.png";
-			temp.top = 0;
+			temp.styleName = "ui/loading/kuang.png";
+			temp.width = 720;
+			temp.x = 0;
+			temp.y = 1;
 			return temp;
 		}
 
