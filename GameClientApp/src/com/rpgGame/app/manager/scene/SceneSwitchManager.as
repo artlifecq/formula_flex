@@ -75,7 +75,10 @@ package com.rpgGame.app.manager.scene
 		 *  * <font color=#00><b>currentMapId全局变量一次赋值直接调用，无需查询</b></font></br>
 		 * */
 		public static var currentMapId : uint = 0;
-		
+		/**
+		 *是否去跨服地图; 
+		 */
+		public static var isToCrossMap:Boolean;
 		private static var _isChangeSceneComplete : Boolean = false;
 		private static var _mapRes : String = null;
 		setup();
@@ -376,49 +379,6 @@ package com.rpgGame.app.manager.scene
 		private static var _mapName:String; 
 		private static function onDelaySwitchScene(mapInfo:SceneData):void
 		{
-			//var _local2 = null;
-			//var _local3 = null;
-			//Stage3DLayerManager.frameRate = 60;
-			//			clearScene();
-			//			//CameraController.lockedOnPlayerController.checkBlock = false;
-			//			SceneTimeOfTheDayManager.clear();
-			//			SceneManager.getScene().clear();
-			//			EventManager.dispatchEvent(MapEvent.MAP_SWITCH_START);
-			//			_mapName = null;
-			//			if (ClientConfig.isSingle)
-			//			{
-			//				/*_local2 = ClientSceneCfgData.getSceneInfo(mapInfo.sceneId);
-			//				if (_local2)
-			//				{
-			//					MainRoleManager.actorInfo.x = _local2.enter_x;
-			//					MainRoleManager.actorInfo.y = _local2.enter_y;
-			//					_mapName = _local2.map_name_resource;
-			//				};*/
-			//			}
-			//			else
-			//			{
-			//				if (mapInfo)
-			//				{
-			//					_mapName = mapInfo.map;
-			//				}
-			//				else
-			//				{
-			//					ResLoadingView.instance.title = (("地图" + mapInfo.sceneId) + "数据不存在");
-			//				};
-			//			};
-			//			if (_mapName)
-			//			{
-			//				if (!FirstEnterSceneManager.isEnterScene)
-			//				{
-			//					//LoginSender.loadProgress(75);
-			//				};
-			//				//_local3 = ClientConfig.getMapDataPath(_mapName);
-			//				//SceneManager.getScene().loadMapData(_mapName, _local3, onMapDataComplete);
-			//				
-			//				
-			//				
-			//			};
-			/////////////////////////////////
 			clearScene();
 			SceneTimeOfTheDayManager.clear();
 			SceneManager.getScene().clear();
@@ -462,6 +422,7 @@ package com.rpgGame.app.manager.scene
 						change2dMap();
 					}
 			}
+			
 			
 		}
 		
@@ -795,6 +756,10 @@ package com.rpgGame.app.manager.scene
 		
 		private static function onSwitchCmp() : void
 		{
+			if(SceneSwitchManager.isToCrossMap){//前往跨服地图成功切换状态
+				SceneSwitchManager.isToCrossMap=false;
+			}
+			
 			_isChangeSceneComplete = true;
 			generateSceneEntities();
 			MainRoleManager.updateActorStatus(); //更新主角状态
