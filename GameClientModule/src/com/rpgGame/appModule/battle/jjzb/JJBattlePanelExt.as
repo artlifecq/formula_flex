@@ -3,10 +3,10 @@ package com.rpgGame.appModule.battle.jjzb
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.ui.alert.GameCheckAlertExt;
+	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.JJBattleEvent;
-	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.GameColorUtil;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
@@ -16,10 +16,6 @@ package com.rpgGame.appModule.battle.jjzb
 	
 	import away3d.events.Event;
 	
-	import feathers.controls.renderers.DefaultListItemRenderer;
-	import feathers.controls.renderers.IListItemRenderer;
-	import feathers.data.ListCollection;
-	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.zhanchang.jingjichang.JingJiChan1_Skin;
 	import org.mokylin.skin.app.zhanchang.jingjichang.JingJiPaiMing;
@@ -27,7 +23,7 @@ package com.rpgGame.appModule.battle.jjzb
 	
 	import starling.display.DisplayObject;
 	
-	public class JJBattlePanelExt extends SkinUI
+	public class JJBattlePanelExt extends ViewUI
 	{
 		private var _skin:JingJiChan1_Skin;
 		private var _normalView:SubNormalView;

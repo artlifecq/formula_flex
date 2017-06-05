@@ -21,7 +21,7 @@ package org.mokylin.skin.app.zhanchang
 		//==========================================================================
 		public var bg:feathers.controls.SkinnableContainer;
 
-		public var tab_bar:feathers.controls.TabBar;
+		public var tabBar:feathers.controls.TabBar;
 
 
 		//==========================================================================
@@ -34,7 +34,7 @@ package org.mokylin.skin.app.zhanchang
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [bg_i(),__ZhanChang_Skin_UIAsset1_i(),__ZhanChang_Skin_UIAsset2_i(),tab_bar_i()];
+			this.elementsContent = [bg_i(),__ZhanChang_Skin_UIAsset1_i(),__ZhanChang_Skin_UIAsset2_i(),tabBar_i()];
 			
 			states = {
 			};
@@ -95,11 +95,11 @@ package org.mokylin.skin.app.zhanchang
 			return temp;
 		}
 
-		private function tab_bar_i():feathers.controls.TabBar
+		private function tabBar_i():feathers.controls.TabBar
 		{
 			var temp:feathers.controls.TabBar = new feathers.controls.TabBar();
-			tab_bar = temp;
-			temp.name = "tab_bar";
+			tabBar = temp;
+			temp.name = "tabBar";
 			temp.btnWidth = 77;
 			temp.touchable = false;
 			temp.touchGroup = true;
