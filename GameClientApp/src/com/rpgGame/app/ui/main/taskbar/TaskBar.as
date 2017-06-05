@@ -182,7 +182,7 @@ package com.rpgGame.app.ui.main.taskbar
 		private function taskNpc(npcId:int,serverID:long):void
 		{GameLog.addShow("点击npc寻路完成");//L.l
 			if(TaskMissionManager.isMainTaskNpc(npcId))//如果是任务NPC就打开面板
-			{
+			{GameLog.addShow("showLeadPanel");
 				TaskControl.showLeadPanel();
 			}
 			
