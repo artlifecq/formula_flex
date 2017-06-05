@@ -86,7 +86,7 @@ package com.rpgGame.app.manager
 		}
 		/**收到服务器触发消息*/
 		public static function serverTrigger(triggerId : int):void
-		{L.l("收到服务器触发消息"+triggerId);
+		{
 			_isTrigging[triggerId]=true;
 			TweenLite.killDelayedCallsTo(onTiggerkey);
 			var triggerData : ClientTrigger = TriggerCfgData.getClientTrigger(triggerId);
