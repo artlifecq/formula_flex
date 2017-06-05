@@ -462,7 +462,6 @@ package com.game.engine3D.scene.layers
 
 		public function addObstaclePoints(mapPointSets : Vector.<MapPointSet>, onMeshComplete : Function = null) : void
 		{//L.l("添加固定阻挡区域：");
-			return;
 			if (!mapPointSets || mapPointSets.length == 0)
 				return;
 			_nevMeshReady = false;
