@@ -51,13 +51,13 @@ package
         /** 资源根目录*/
         private var _baseDir : String = "../";
         /** 客服端版本号*/
-		private var _clientVersion : String = "";
+		private var _clientVersion : String = null;
 		/** loader版本号*/
 		private var _loaderVersion : String = "";
         /** 是否是正式版*/
-		private var _isRelease : Boolean = true;
+		private var _isRelease : Boolean = false;
         /** 是否稳定版本*/
-        private var _isStable : Boolean = true;
+        private var _isStable : Boolean = false;
         /** 是否是版署版*/
         private var _isVersionDepartment : Boolean = false;
         /** 服务器ip*/
@@ -69,7 +69,7 @@ package
         /** 服务器policyPort*/
 		private var _policyPort : uint = 0;
         /** 平台代理*/
-        private var _agent : String = "";
+        private var _agent : String = "37";
         /** 登录用户名*/
         private var _loginName : String = "";
         /** 登录用户Key*/
@@ -136,20 +136,51 @@ package
 			if (ExternalInterface.available)
 			{
 				_urlParmar = ExternalInterface.call("config");
-				_baseDir = _urlParmar["baseDir"] || "../";
-				_clientVersion = _urlParmar["clientVersion"] || "";
-				_loaderVersion = _urlParmar["loaderVersion"] || "";
-				_isRelease = _urlParmar["isDebug"] != "true";
-				_isStable = _urlParmar["isStable"] == "true";
-                _isVersionDepartment = _urlParmar["isVersionDepartment"] == "true";
-				_server = _urlParmar["serverIp"];
-				_port = uint(_urlParmar["serverPort"]);
-                _areaId = uint(_urlParmar["serverAreaId"]);
-				_policyPort = uint(_urlParmar["serverPolicyPort"]);
-                _loginName = _urlParmar["auth"];
-                _loginKey = _urlParmar["sign"];
-                _loginTime = uint(_urlParmar["time"]);
-                _agent = _urlParmar["agent"];
+                if (null == _urlParmar) {
+                    return;
+                }
+                if (_urlParmar["baseDir"]) {
+                    _baseDir = _urlParmar["baseDir"];
+                }
+                if (_urlParmar["clientVersion"]) {
+                    _clientVersion = _urlParmar["clientVersion"];
+                }
+                if (_urlParmar["loaderVersion"]) {
+                    _loaderVersion = _urlParmar["loaderVersion"];
+                }
+                if (_urlParmar["isDebug"]) {
+                    _isRelease = _urlParmar["isDebug"] != "true";
+                }
+                if (_urlParmar["isStable"]) {
+                    _isStable = _urlParmar["isStable"] == "true";
+                }
+                if (_urlParmar["isVersionDepartment"]) {
+                    _isVersionDepartment = _urlParmar["isVersionDepartment"] == "true";
+                }
+                if (_urlParmar["serverIp"]) {
+                    _server = _urlParmar["serverIp"];
+                }
+                if (_urlParmar["serverPort"]) {
+                    _port = uint(_urlParmar["serverPort"]);
+                }
+                if (_urlParmar["serverAreaId"]) {
+                    _areaId = uint(_urlParmar["serverAreaId"]);
+                }
+                if (_urlParmar["serverPolicyPort"]) {
+                    _policyPort = uint(_urlParmar["serverPolicyPort"]);
+                }
+                if (_urlParmar["auth"]) {
+                    _loginName = _urlParmar["auth"];
+                }
+                if (_urlParmar["sign"]) {
+                    _loginKey = _urlParmar["sign"];
+                }
+                if (_urlParmar["time"]) {
+                    _loginTime = uint(_urlParmar["time"]);
+                }
+                if (_urlParmar["agent"]) {
+                    _agent = _urlParmar["agent"];
+                }
 			}
 
 			if (_loaderVersion)
