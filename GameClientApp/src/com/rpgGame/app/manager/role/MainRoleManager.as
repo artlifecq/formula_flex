@@ -53,7 +53,7 @@ package com.rpgGame.app.manager.role
 		 */
 		public static function get actorInfo() : HeroData
 		{
-			_actroInfo = _actroInfo || new HeroData();
+			_actroInfo = _actroInfo || new HeroData(LoadPriorityType.LEVEL_CUSTOM_0);
 			return _actroInfo;
 		}
 		
