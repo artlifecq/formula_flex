@@ -743,6 +743,14 @@ package com.game.engine3D.scene.render.vo
 			}
 		}
 
+		/**
+		 * 得到渲染单元在场景中的位置 
+		 * @param renderUnitType
+		 * @param id
+		 * @param name
+		 * @return 
+		 * 
+		 */		
 		public function getChildScenePositionByName(renderUnitType : String, id : int, name : String) : Vector3D
 		{
 			if (!_renderSet)
@@ -817,6 +825,15 @@ package com.game.engine3D.scene.render.vo
 			return null;
 		}
 
+		
+		/**
+		 * 得到渲染单元在屏幕的位置 
+		 * @param renderUnitType
+		 * @param id
+		 * @param name
+		 * @return 
+		 * 
+		 */		
 		public function getChildScreenPositionByName(renderUnitType : String, id : int, name : String) : Point
 		{
 			var view : View3D = _graphicDis.scene.view;

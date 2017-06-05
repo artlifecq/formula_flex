@@ -42,6 +42,8 @@ package com.rpgGame.app.manager
 	
 	import flash.geom.Vector3D;
 	
+	import away3d.enum.LoadPriorityType;
+	
 	import org.client.mainCore.manager.EventManager;
 	
 	/**
@@ -201,7 +203,8 @@ package com.rpgGame.app.manager
 					var mountRu : RenderUnit3D = role.avatar.getRenderUnitByID(RenderUnitType.MOUNT, RenderUnitID.MOUNT, true);
 					if (mountRu)
 					{
-						role.addSimpleShadow(ClientConfig.getDynAlphaTexture("shadow"),0, mountRu.radius * simpleShadowBaseScale);
+						role.addSimpleShadow(ClientConfig.getDynAlphaTexture("shadow"),LoadPriorityType.LEVEL_TEXTURE, mountRu.radius * simpleShadowBaseScale);
+						return;
 					}
 				}
 				else
@@ -209,7 +212,8 @@ package com.rpgGame.app.manager
 					var bodyRu : RenderUnit3D = role.avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY, true);
 					if (bodyRu)
 					{
-						role.addSimpleShadow(ClientConfig.getDynAlphaTexture("shadow"),0, bodyRu.radius * simpleShadowBaseScale);
+						role.addSimpleShadow(ClientConfig.getDynAlphaTexture("shadow"),LoadPriorityType.LEVEL_TEXTURE, bodyRu.radius * simpleShadowBaseScale);
+						return;
 					}
 				}
 			}
@@ -716,7 +720,7 @@ package com.rpgGame.app.manager
 			{
 				if (rpd_body)
 				{
-					ru = role.avatar.addRenderUnitToChild(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.st_zero, fightsoul);
+					ru = role.avatar.addRenderUnitToChild(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_body_01, fightsoul);
 				}
 				if (ru)
 				{
@@ -735,13 +739,14 @@ package com.rpgGame.app.manager
 					ru.useFog = true;
 					role.avatar.applySyncInfo(RenderUnitType.FIGHTSOUL_EFFECT, RenderUnitID.FIGHTSOUL_EFFECT);
 					ru.play(0);
-					ru.y = 120;
-					ru.setRenderAnimator(new FightSoulAnimator());
+//					ru.rotationX = 90;
+//					ru.y = 120;
+//					ru.setRenderAnimator(new FightSoulAnimator());
 				}
 			}
 			else
 			{
-				role.avatar.removeRenderUnitByID(RenderUnitType.FIGHTSOUL, RenderUnitID.FIGHTSOUL);
+				role.avatar.removeRenderUnitByID(RenderUnitType.FIGHTSOUL_EFFECT, RenderUnitID.FIGHTSOUL_EFFECT);
 			}
 		}
 		private static function updataFightSoul(role : SceneRole) : void

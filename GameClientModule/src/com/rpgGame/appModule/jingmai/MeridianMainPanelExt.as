@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.jingmai
 {
+	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.core.ui.SkinUI;
 	
 	import org.mokylin.skin.app.beibao.jingmai.Jingmai_Skin;
@@ -11,7 +12,7 @@ package com.rpgGame.appModule.jingmai
 	 * @author yfl
 	 * 
 	 */	
-	public class MeridianMainPanelExt extends SkinUI 
+	public class MeridianMainPanelExt extends ViewUI 
 	{
 		private var _skin:Jingmai_Skin;
 		private var _view:MeridianView;
@@ -59,17 +60,16 @@ package com.rpgGame.appModule.jingmai
 			
 		}
 		
-		override protected function onHide():void
+		override public function hide():void
 		{
-			super.onHide();
+			super.hide();
 			if (_view) 
 			{
 				_view.onHide();
 			}
 		}
-		override protected function onShow():void
+		override public function show(data:Object=null):void
 		{
-			super.onShow();
 			if (_view) 
 			{
 				_view.onShow();

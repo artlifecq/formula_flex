@@ -13,7 +13,7 @@ package com.rpgGame.coreData.clientConfig
 	public class Q_newfunc
 	{
 		 /**  编号id */
-		public var q_id:int;
+		public var q_id:String;
 		 /**  功能名字 */
 		public var q_string_name:String;
 		 /**  按钮皮肤 */

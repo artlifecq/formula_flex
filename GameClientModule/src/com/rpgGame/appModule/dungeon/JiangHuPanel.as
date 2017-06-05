@@ -1,7 +1,7 @@
 package com.rpgGame.appModule.dungeon
 {
 	import com.rpgGame.app.ui.SkinUIPanel;
-	import com.rpgGame.appModule.common.ViewUI;
+	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.appModule.dungeon.lunjian.LunJianUI;
 	
 	import org.mokylin.skin.app.jianghu.JiangHu_Skin;
