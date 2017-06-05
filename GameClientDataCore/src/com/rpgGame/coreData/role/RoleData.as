@@ -118,11 +118,11 @@
 		 * @param type 角色类型
 		 *
 		 */
-		public function RoleData(type : int)
+		public function RoleData(type : int, priority:int=100)
 		{
 			_type = type;
 			_fixDirection = false;
-			avatarInfo = new AvatarInfo();
+			avatarInfo = new AvatarInfo(priority);
 			totalStat = new SpriteStat();
 			otherList = new ActiveSpellList();
 //			spriteStat = new SpriteStat();

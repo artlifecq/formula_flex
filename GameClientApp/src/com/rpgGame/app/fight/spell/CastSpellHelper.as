@@ -7,6 +7,7 @@ package com.rpgGame.app.fight.spell
 	import com.game.engine3D.utils.PathFinderUtil;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.AreaMapManager;
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.ShortcutsManger;
 	import com.rpgGame.app.manager.SkillCDManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
@@ -30,6 +31,7 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_SpellEffect;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
+	import com.rpgGame.coreData.enum.EnumSkillId;
 	import com.rpgGame.coreData.lang.LangQ_NoticeInfo;
 	import com.rpgGame.coreData.role.BaseEntityData;
 	import com.rpgGame.coreData.role.HeroData;
@@ -363,7 +365,42 @@ package com.rpgGame.app.fight.spell
 			var state : int = setSpellTarget(castInfo, ignoreLock);
 			return state;
 		}
-
+		private static function findTarget2Cure(skill:Q_skill_model):SceneRole
+		{
+			var select:SceneRole=SceneRoleSelectManager.selectedRole;
+			var model:int;
+			if (select!=null) 
+			{
+				if (SceneCharType.PLAYER==select.type) 
+				{
+					//自己当然可以
+					if (select.isMainChar) 
+					{
+						return select;
+					}
+					model=FightManager.getFightRoleState(select, skill);
+					//不能攻击的模式才能加血
+					if (FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY!=model) 
+					{
+						return select;
+					}
+				}
+			}
+			//选了目标的情况，但是目标不满住条件
+			if (Mgr.teamMgr.hasTeam) 
+			{
+				var nearstTeam:SceneRole=Mgr.teamMgr.getNearstTeammerber();
+				if (nearstTeam!=null) 
+				{
+					model=FightManager.getFightRoleState(nearstTeam, skill);
+					if (FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY!=model)
+					{
+						return nearstTeam;
+					}
+				}
+			}
+			return MainRoleManager.actor;
+		}
 		/**
 		 * 获取技能目标,返回一个目标或者点
 		 * @param spellData
@@ -411,8 +448,15 @@ package com.rpgGame.app.fight.spell
                     releasePos = new Point(selfPos.x, selfPos.y);
                     break;
                 }
+				
                 releaseRange = releaseRange - DEVIATION_RANGE;
                 releaseRange = releaseRange < 0 ? 0 : releaseRange;
+				//医家加血
+				if (EnumSkillId.SKILL_3005==spellData.q_skillID||EnumSkillId.SKILL_3007==spellData.q_skillID)
+				{
+					lockTarget=findTarget2Cure(spellData);
+					break;
+				}
                 var distance : int = spellData.q_search_range * spellData.q_search_range;
                 var enemy_list : Vector.<SceneRole> = _roleList ? _roleList : SceneManager.getSceneRoleList();
                 enemy_list.sort(onSortNearestRole);
@@ -1088,31 +1132,35 @@ package com.rpgGame.app.fight.spell
             if (0 == skillInfo.q_auto_lock) {
                 return null;
             }
-            find:for each (var role : SceneRole in list) {
-                if (MainRoleManager.actor == role) {
-                    // 自己
-                    continue;
-                }
-                if (!role || !role.usable || !role.isInViewDistance) {
-                    continue;
-                }
-                if (isDie != role.stateMachine.isDeadState) {
-                    continue;
-                }
-                if (0 != distance && distance != int.MAX_VALUE) {
-                    var disA : Number = MathUtil.getDistanceNoSqrt(MainRoleManager.actor.x, MainRoleManager.actor.z, role.x, role.z);
-                    if (disA > distance) {
-                        continue;
-                    }
-                }
-                
-                if (0 == skillInfo.q_check_relation) {
-                    return role;
-                }
-                modeState = FightManager.getFightRoleState(role, skillInfo);
-                if (FightManager.FIGHT_ROLE_STATE_CAN_NOT_FIGHT == modeState) {
-                    continue;
-                }
+            find:
+				
+				for each (var role : SceneRole in list)
+				{
+					if (MainRoleManager.actor == role) {
+						// 自己
+						continue;
+					}
+					if (!role || !role.usable || !role.isInViewDistance) {
+						continue;
+					}
+					if (isDie != role.stateMachine.isDeadState) {
+						continue;
+					}
+					if (0 != distance && distance != int.MAX_VALUE) {
+						var disA : Number = MathUtil.getDistanceNoSqrt(MainRoleManager.actor.x, MainRoleManager.actor.z, role.x, role.z);
+						if (disA > distance) {
+							continue;
+						}
+					}
+					
+					if (0 == skillInfo.q_check_relation) {
+						return role;
+					}
+					modeState = FightManager.getFightRoleState(role, skillInfo);
+					if (FightManager.FIGHT_ROLE_STATE_CAN_NOT_FIGHT == modeState)
+					{
+						continue;
+					}
                 return role;
                 break;
             }

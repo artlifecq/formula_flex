@@ -391,6 +391,11 @@ package com.rpgGame.coreData.info.item
 					return "ui/common/tubiao/yinzib_24.png";
 					break;
 				}
+				case CharAttributeType.RES_PRESTIGE:
+				{
+					return "ui/common/tubiao/shengwang.png";
+					break;
+				}
 			}
 			return "";
 		}

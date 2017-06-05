@@ -42,6 +42,8 @@ package com.rpgGame.app.manager
 	
 	import flash.geom.Vector3D;
 	
+	import away3d.enum.LoadPriorityType;
+	
 	import org.client.mainCore.manager.EventManager;
 	
 	/**
@@ -103,9 +105,9 @@ package com.rpgGame.app.manager
 			//穿“效果方法类型特效”
 			updateMethodTypeEffect(role);
 			//穿 "战魂"
-			updataFightSoul(role);
+//			updataFightSoul(role);
 			//穿 "战魂"
-			updataFightSoulEffect(role);
+//			updataFightSoulEffect(role);
 			if (role.avatar.hasIDRenderUnit(RenderUnitType.MOUNT, RenderUnitID.MOUNT))
 			{
 				//将body头顶的绑点子部件转到坐骑上
@@ -201,7 +203,8 @@ package com.rpgGame.app.manager
 					var mountRu : RenderUnit3D = role.avatar.getRenderUnitByID(RenderUnitType.MOUNT, RenderUnitID.MOUNT, true);
 					if (mountRu)
 					{
-						role.addSimpleShadow(ClientConfig.getDynAlphaTexture("shadow"),0, mountRu.radius * simpleShadowBaseScale);
+						role.addSimpleShadow(ClientConfig.getDynAlphaTexture("shadow"),LoadPriorityType.LEVEL_TEXTURE, mountRu.radius * simpleShadowBaseScale);
+						return;
 					}
 				}
 				else
@@ -209,7 +212,8 @@ package com.rpgGame.app.manager
 					var bodyRu : RenderUnit3D = role.avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY, true);
 					if (bodyRu)
 					{
-						role.addSimpleShadow(ClientConfig.getDynAlphaTexture("shadow"),0, bodyRu.radius * simpleShadowBaseScale);
+						role.addSimpleShadow(ClientConfig.getDynAlphaTexture("shadow"),LoadPriorityType.LEVEL_TEXTURE, bodyRu.radius * simpleShadowBaseScale);
+						return;
 					}
 				}
 			}

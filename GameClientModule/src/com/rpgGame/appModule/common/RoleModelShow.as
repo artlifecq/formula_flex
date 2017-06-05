@@ -28,18 +28,20 @@ package com.rpgGame.appModule.common
 	public class RoleModelShow extends Inter3DContainer
 	{
 		private var _avatar:InterAvatar3D;
+		private var _data:PlayerAppearanceInfo;
 		public function RoleModelShow()
 		{
 			super();
 			
 		}
-		public function setData(appearanceInfo:PlayerAppearanceInfo,scaleRole:Number):void
+		public function setData(appearanceInfo:PlayerAppearanceInfo,scaleRole:Number=1.0):void
 		{
 			if (!avatar) 
 			{
 				_avatar=new InterAvatar3D();
 				this.addChild3D(avatar);
 			}
+			_data=appearanceInfo;
 			var _showAvatarData:RoleData = new RoleData(0);
 			
 			var animatResID : String = null;
@@ -169,6 +171,12 @@ package com.rpgGame.appModule.common
 		{
 			return _avatar;
 		}
+
+		public function get data():PlayerAppearanceInfo
+		{
+			return _data;
+		}
+
 
 	}
 }

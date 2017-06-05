@@ -28,7 +28,6 @@ package com.rpgGame.app.sender
 	import org.game.netCore.connection.SocketConnection_protoBuffer;
 	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
-	import org.game.netCore.net.MessageMgr;
 
 	/**
 	 * 场景消息

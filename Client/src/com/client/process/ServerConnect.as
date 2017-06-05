@@ -1,17 +1,15 @@
 package com.client.process
 {
-	import com.client.ClientGlobal;
 	import com.client.cmdlistener.LoginCmdListener;
-	import com.client.sender.HeartSender;
 	import com.client.sender.LoginSender;
 	import com.client.ui.alert.GameAlert;
 	import com.client.ui.alert.ReconnectionPanelExt;
 	import com.client.view.loading.ResLoadingView;
 	import com.game.engine3D.process.BaseProcess;
 	import com.game.engine3D.process.ProcessStateMachine;
-	import com.game.engine3D.vo.SenderReferenceSet;
 	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.adobe.Base64;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.netData.MessagePool;
 	
 	import flash.events.Event;
@@ -28,7 +26,6 @@ package com.client.process
 	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
-	import org.client.mainCore.utils.StringUtil;
 	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.connection.SocketConnection_protoBuffer;
 	import org.game.netCore.event.NetEvent;
@@ -86,9 +83,9 @@ package com.client.process
 				GameLog.addShow("连接socket");
 			}
 			
-			if (ClientGlobal.loginIP == "0.0.0.0")
+			if (ClientConfig.loginIP == "0.0.0.0")
 			{
-				ClientGlobal.isSingle = true;
+				ClientConfig.isSingle = true;
 				completeProcess();
 				return;
 			}
@@ -106,7 +103,7 @@ package com.client.process
 				Security.allowInsecureDomain("*");
 			}
 			//
-			var policyFileUrl : String = "xmlsocket://" + ClientGlobal.loginIP + ":" + ClientGlobal.policyPort;
+			var policyFileUrl : String = "xmlsocket://" + ClientConfig.loginIP + ":" + ClientConfig.policyPort;
 			Security.loadPolicyFile(policyFileUrl);
 			//
 			GameLog.addShow("加载跨域文件 : ", policyFileUrl);
@@ -135,7 +132,7 @@ package com.client.process
 		{
 			SocketConnection.messageMgr.addEventListener(MessageMgr.CLIENT_CONNECT_TO_SERVER, socketConnectHandle);
 			SocketConnection.messageMgr.addEventListener(MessageMgr.CLIENT_FAILD_TO_SERVER, socketConnectFailHandle);
-			SocketConnection.messageMgr.Connect(ClientGlobal.loginIP, ClientGlobal.loginPort);
+			SocketConnection.messageMgr.Connect(ClientConfig.loginIP, ClientConfig.loginPort);
 			//
 			_retryConnectCnt = 0;
 			if (!_retryTimer)
@@ -183,9 +180,9 @@ package com.client.process
 		{
 			/*SenderReferenceSet.start();
 			completeProcess();
-			if (ClientGlobal.mainEntry)
+			if (ClientConfig.mainEntry)
 			{
-			ClientGlobal.mainEntry.reEnterGame();
+			ClientConfig.mainEntry.reEnterGame();
 			}*/
 			GameLog.addShow("登录成功了...",this);
 			completeProcess();
@@ -272,19 +269,19 @@ package com.client.process
 		private function sendLogin() : void
 		{
 			LoginCmdListener.onLoginSuccessHandler = onLoginSuccessHandler;
-			var oid : int = getOid(ClientGlobal.loginName);
+			var oid : int = getOid(ClientConfig.loginName);
 			GameLog.addShow("oid:" + oid);
 			if (oid == _tencentOid)
 			{
-				sendTGW(ClientGlobal.loginIP, ClientGlobal.loginPort);
+				sendTGW(ClientConfig.loginIP, ClientConfig.loginPort);
 			}
-			if (null == ClientGlobal.loginKey || 0 == ClientGlobal.loginKey.length) {
+			if (null == ClientConfig.loginKey || 0 == ClientConfig.loginKey.length) {
 				LoginSender.SendLoginMessage();
 			} else {
 				LoginSender.SendPlatformLoginMessage();
 			}
 			
-			GameLog.addShow("连接socket成功,发送登录消息", ClientGlobal.loginName, ClientGlobal.loginKey);
+			GameLog.addShow("连接socket成功,发送登录消息", ClientConfig.loginName, ClientConfig.loginKey);
 		}
 		
 		/**
@@ -332,9 +329,9 @@ package com.client.process
 		private function onRetryConnect(evt : TimerEvent = null) : void
 		{
 			_retryConnectCnt++;
-			GameLog.addShow("连接Socket，第" + _retryConnectCnt + "次尝试: ", ClientGlobal.loginIP, ClientGlobal.loginPort);
+			GameLog.addShow("连接Socket，第" + _retryConnectCnt + "次尝试: ", ClientConfig.loginIP, ClientConfig.loginPort);
 			//
-			SocketConnection_protoBuffer.mainSocket.connect(ClientGlobal.loginIP, ClientGlobal.loginPort);
+			SocketConnection_protoBuffer.mainSocket.connect(ClientConfig.loginIP, ClientConfig.loginPort);
 			if (_retryConnectCnt > 60)
 			{
 				showErrorMessage("服务器连接不上，继续尝试重新连接中，请检查您的网络环境！");
@@ -369,7 +366,7 @@ package com.client.process
 		
 		private function updateSoundTransFrom() : void
 		{
-			ClientGlobal.stage.addEventListener(Event.ENTER_FRAME, onSoundTransFromEnterFrame);
+			ClientConfig.stage.addEventListener(Event.ENTER_FRAME, onSoundTransFromEnterFrame);
 		}
 		
 		protected function onSoundTransFromEnterFrame(event : Event) : void
@@ -381,7 +378,7 @@ package com.client.process
 			}
 			else
 			{
-				ClientGlobal.stage.removeEventListener(Event.ENTER_FRAME, onSoundTransFromEnterFrame);
+				ClientConfig.stage.removeEventListener(Event.ENTER_FRAME, onSoundTransFromEnterFrame);
 			}
 		}
 		

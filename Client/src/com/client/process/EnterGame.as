@@ -1,12 +1,12 @@
 package com.client.process
 {
-	import com.client.ClientGlobal;
 	import com.client.cmdlistener.LoginCmdListener;
 	import com.client.ui.alert.GameAlert;
 	import com.client.view.loading.ResLoadingView;
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.game.engine3D.process.BaseProcess;
 	import com.gameClient.log.GameLog;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	
 	import flash.system.Capabilities;
 	import flash.utils.getDefinitionByName;
@@ -37,7 +37,7 @@ package com.client.process
 		override public function startProcess() : void
 		{
 			super.startProcess();
-			if(ClientGlobal.loginData)
+			if(ClientConfig.loginData)
 			{
 				GameLog.addShow("已有角色的数据了，可以进入游戏了");
 				completeProcess();
@@ -53,7 +53,7 @@ package com.client.process
 		
 		private function  onGetMyPlayerInfoHandler():void
 		{
-			if(ClientGlobal.loginData)
+			if(ClientConfig.loginData)
 			{
 				GameLog.addShow("已有角色的数据了，可以进入游戏了");
 				completeProcess();
@@ -64,15 +64,15 @@ package com.client.process
 		private function initEntry() : void
 		{
 			GameLog.addShow("进入游戏");
-			var userInfo : Object = {loginName: ClientGlobal.loginName, loginKey: ClientGlobal.loginKey};
+			var userInfo : Object = {loginName: ClientConfig.loginName, loginKey: ClientConfig.loginKey};
 			//由于登录和资源是异步的，所以需要登录成功并且资源全部加载好之后才可以进游戏，
 			var entryClass : Class = getDefinitionByName(MAINENTRY_PATH) as Class;
 			var main:Object=new entryClass();
-			ClientGlobal.mainEntry = main;
-			ClientGlobal.mainEntry.loadingActual = ResLoadingView;
-			ClientGlobal.mainEntry.setup(ClientGlobal, userInfo);
+			ClientConfig.mainEntry = main;
+			ClientConfig.mainEntry.loadingActual = ResLoadingView;
+			ClientConfig.mainEntry.setup(ClientConfig, userInfo);
 
-			if (!ClientGlobal.isRelease)
+			if (!ClientConfig.isRelease)
 			{
 				tryShowDebugInfo(); 
 			}

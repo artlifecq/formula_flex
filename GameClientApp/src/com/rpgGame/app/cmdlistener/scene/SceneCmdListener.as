@@ -9,6 +9,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.manager.ClientTriggerManager;
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.GameCameraManager;
+	import com.rpgGame.app.manager.LostSkillManager;
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.RankManager;
 	import com.rpgGame.app.manager.ReliveManager;
@@ -88,6 +89,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.netData.map.message.ResWeaponChangeMessage;
 	import com.rpgGame.netData.map.message.SCAttachStateChangeMessage;
 	import com.rpgGame.netData.map.message.SCSceneObjMoveMessage;
+	import com.rpgGame.netData.monster.message.ResMonsterDieMessage;
 	import com.rpgGame.netData.player.message.BroadcastPlayerAttriChangeMessage;
 	import com.rpgGame.netData.player.message.ResChangePKStateMessage;
 	import com.rpgGame.netData.player.message.ResPlayerDieMessage;
@@ -103,6 +105,8 @@ package com.rpgGame.app.cmdlistener.scene
 	import app.cmd.StoryModuleMessages;
 	import app.cmd.TaskModuleMessages;
 	import app.message.GoodsProto;
+	
+	import away3d.enum.LoadPriorityType;
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
@@ -157,7 +161,7 @@ package com.rpgGame.app.cmdlistener.scene
             SocketConnection.addCmdListener(101151, onRecvSCAttachStateChangeMessage);
 			
             SocketConnection.addCmdListener(103110, onResChangePKStateMessage);
-			
+			SocketConnection.addCmdListener(114108, onResMonterDieMessage);
 //			SocketConnection.addCmdListener(SceneModuleMessages.S2C_TRIGGER_CLIENT_EVENT, onTriggerClientEvent);
 			
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -203,6 +207,12 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			
 			finish();
+		}
+		
+		private function onResMonterDieMessage(msg:ResMonsterDieMessage):void
+		{
+			// TODO Auto Generated method stub
+			//LostSkillManager.instance().checkExpNotice(msg.killer);
 		}
 		
 		private function onResChangePKStateMessage(msg:ResChangePKStateMessage):void
@@ -670,7 +680,7 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function onAddHero(buffer : ByteArray) : void
 		{
-			var data : HeroData = new HeroData();
+			var data : HeroData = new HeroData(LoadPriorityType.LEVEL_CUSTOM_2);
 			
 			var info:PlayerInfo = new PlayerInfo();
 			info.read(buffer);
@@ -794,7 +804,7 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function addNpc(buffer : ByteArray) : void
 		{
-			var data : MonsterData = new MonsterData(RoleType.TYPE_NPC);
+			var data : MonsterData = new MonsterData(RoleType.TYPE_NPC,LoadPriorityType.LEVEL_CUSTOM_1);
 			
 			var info : NpcInfo = new NpcInfo();
 			data.serverID = info.npcId;

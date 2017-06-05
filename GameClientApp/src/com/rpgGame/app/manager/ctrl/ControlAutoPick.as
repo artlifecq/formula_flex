@@ -136,6 +136,11 @@ package  com.rpgGame.app.manager.ctrl
 			}
 			else if (owerId!=myId) 
 			{
+				//策划要求可以见队友的
+				if (Mgr.teamMgr.isInMyTeam(data.goodsDatas.ownerId)) 
+				{
+					return false;
+				}
 				return true;
 			}
 			return false;
@@ -535,7 +540,7 @@ package  com.rpgGame.app.manager.ctrl
 				return false;
 			}
 			var pickJobIndex:int=SystemSetManager.getinstance().getValueByIndex(SystemSetManager.SYSTEMSET_AUOT_GET_ZHIYE);
-			var pickJob:int=JOBARR[pickJob];
+			var pickJob:int=JOBARR[pickJobIndex];
 			if (pickJob!=JobEnum.ROLE_0_TYPE&&pickJob!=qItem.q_job) 
 			{
 				return false;

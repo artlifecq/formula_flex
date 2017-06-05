@@ -156,11 +156,11 @@ package com.rpgGame.app.view.icon
 					//EventManager.dispatchEvent(ItemEvent.ITEM_PRE_MOVE, faceInfo);
 					//return;
 					
-					if(KeyboardMananger.isKeyDown(Keyboard.CONTROL))
-					{
-						EventManager.dispatchEvent(ItemEvent.ITEM_PRE_SPLITE, faceInfo);
-						return;
-					}
+//					if(KeyboardMananger.isKeyDown(Keyboard.CONTROL))
+//					{
+//						EventManager.dispatchEvent(ItemEvent.ITEM_PRE_SPLITE, faceInfo);
+//						return;
+//					}
 				
 					var pos:Point = this.parent.localToGlobal(new Point(this.x, this.y));
 					_touchOffX =  this.iconSize/2;

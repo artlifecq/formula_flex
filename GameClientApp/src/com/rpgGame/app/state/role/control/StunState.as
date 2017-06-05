@@ -1,5 +1,6 @@
 package com.rpgGame.app.state.role.control
 {
+	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.coreData.type.RoleStateType;
 	
 	import flash.utils.getQualifiedClassName;
@@ -32,6 +33,10 @@ package com.rpgGame.app.state.role.control
 					else
 						throw new Error("场景角色眩晕状态引用必须是StunStateReference类型！");
 				}
+				if ((_machine as RoleStateMachine).isPrewarWaiting)
+					transition(RoleStateType.ACTION_PREWAR);
+				else
+					transition(RoleStateType.ACTION_IDLE);
 			}
 		}
 		

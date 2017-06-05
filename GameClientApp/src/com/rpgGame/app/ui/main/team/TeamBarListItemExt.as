@@ -208,8 +208,8 @@ package   com.rpgGame.app.ui.main.team
 					var q_buff:Q_buff=BuffStateDataManager.getData(buff[i]);
 					if(q_buff.q_effect_type==2)
 					{
-						var icon:BgIcon=new BgIcon(IcoSizeEnum.ICON_24);				
-						icon.setIconResName(ClientConfig.getBuffIcon(q_buff.q_icon, IcoSizeEnum.ICON_24 ));
+						var icon:BgIcon=new BgIcon(IcoSizeEnum.ICON_16);				
+						icon.setIconResName(ClientConfig.getBuffIcon(q_buff.q_icon, IcoSizeEnum.ICON_16 ));
 						icon.x=_skin.role_buffer.x+i*26;
 						icon.y=_skin.role_buffer.y;
 						this.addChild(icon);

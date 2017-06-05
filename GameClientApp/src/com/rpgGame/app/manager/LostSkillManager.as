@@ -1,20 +1,34 @@
 package com.rpgGame.app.manager
 {
+	import com.rpgGame.app.display2D.AttackFace;
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.ui.common.CenterEftPop;
 	import com.rpgGame.coreData.UNIQUEID;
+	import com.rpgGame.coreData.cfg.LostSkillData;
+	import com.rpgGame.coreData.cfg.LostSkillUpData;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_up;
+	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.CharAttributeType;
+	import com.rpgGame.coreData.type.SceneCharType;
+	import com.rpgGame.netData.fight.message.ResAttackResultMessage;
 	import com.rpgGame.netData.lostSkill.bean.SkillStateInfo;
 	import com.rpgGame.netData.lostSkill.message.CSActivitSkillMessage;
 	import com.rpgGame.netData.lostSkill.message.CSChangeSkillMessage;
 	
+	import flash.utils.getTimer;
+	
+	import app.message.MonsterDataProto.MonsterType;
+	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.connection.SocketConnection;
+	import org.game.netCore.data.long;
 
 	public class LostSkillManager
 	{
@@ -124,15 +138,24 @@ package com.rpgGame.app.manager
 				case 2:
 				case 6:
 				case 7:
-					return up.q_value/100;
+					return up.q_value/100000;
 				case 3:
 				case 5:
-					return up.q_value/1000; 
+					return up.q_value; 
 				default:
 					return up.q_value;
 			}
 		}
-		
+		public function getSkillValueByInfo(skillState:SkillStateInfo):Number
+		{
+			if (!skillState) 
+			{
+				return 0;
+			}
+			var qLost:Q_lostskill_open=LostSkillData.getModeInfoById(skillState.skillId);
+			var up:Q_lostskill_up=LostSkillUpData.getDatabyIdAndLevel(skillState.skillId,skillState.level);
+			return getSkillValue(qLost,up);
+		}
 		public function get openLevel():int
 		{
 			return 30;
@@ -140,6 +163,125 @@ package com.rpgGame.app.manager
 			
 		public function LostSkillManager()
 		{
+		}
+		
+		public function checkExpNotice(heroId:long):void
+		{
+			var need:Boolean=needShowNotice(6001,heroId);
+			if (need) 
+			{
+				FightFaceHelper.showBuffNameEffect(6001,heroId);
+			}
+		}
+		public function hasExpAddAtf(heroId:long,value:int):AttackFace
+		{
+			var need:Boolean=needShowNotice(6001,heroId);
+			if (need) 
+			{
+				//var tmp:int=value*getSkillValueByInfo(getSkillStateInfoById(6001));
+				var atf:AttackFace=AttackFace.createAttackFace(getEffectNameUrl(6001),FightFaceHelper.NUMBER_PURPLE1,0);
+				return atf;
+			}
+			return null;
+		}
+		public function getEffectNameUrl(id:int):String
+		{
+			var qSkill:Q_lostskill_open=LostSkillData.getModeInfoById(id);
+			if (!qSkill) 
+			{
+				return "";
+			}
+			var typeRes:String = FightFaceHelper.ROOT+FightFaceHelper.USESFUL_EFFECT+qSkill.q_icon+".png";
+			return typeRes;
+		}
+		public function hasBossHurtAddAtf(bossId:long,heroId:long,value:int):AttackFace
+		{
+			var target:SceneRole=SceneManager.getSceneObjByID(bossId.ToGID()) as SceneRole;
+			if (!target||SceneCharType.MONSTER!=target.type) 
+			{
+				return null;
+			}
+			if ((target.data as MonsterData).monsterData.q_monster_type!=MonsterType.BOSS) 
+			{
+				return null;
+			}
+			var need:Boolean=needShowNotice(6002,heroId);
+			if (need) 
+			{
+				//var tmp:int=value*getSkillValueByInfo(getSkillStateInfoById(6002));
+				var atf:AttackFace=AttackFace.createAttackFace(getEffectNameUrl(6002),FightFaceHelper.NUMBER_PURPLE1,0);
+				return atf;
+			}
+			return null;
+		}
+
+		public function checkRoll3Complete():void
+		{
+			var heroId:long=MainRoleManager.actorInfo.serverID;
+			var need:Boolean=needShowNotice(6003,heroId);
+			if (need) 
+			{
+				FightFaceHelper.showBuffNameEffect(6003,heroId);
+			}
+		}
+		public function checkHideSelf(heroId:long):void
+		{
+			var need:Boolean=needShowNotice(6004,heroId);
+			if (need) 
+			{
+				
+			//	var tmp:int=getSkillValueByInfo(getSkillStateInfoById(6004));
+				FightFaceHelper.showBuffNameEffect(6004,heroId,0);
+			}
+		}
+		public function checkBigSkill(heroId:long):void
+		{
+			var need:Boolean=needShowNotice(6005,heroId);
+			if (need) 
+			{
+				
+				FightFaceHelper.showBuffNameEffect(6005,heroId);
+			}
+		}
+		public function hasAttackPlayerAddAtf(bossId:long,heroId:long,value:int):AttackFace
+		{
+			var target:SceneRole=SceneManager.getSceneObjByID(bossId.ToGID()) as SceneRole;
+			if (!target||SceneCharType.PLAYER!=target.type) 
+			{
+				return null;
+			}
+			var need:Boolean=needShowNotice(6006,heroId);
+			if (need) 
+			{
+				//var tmp:int=value*getSkillValueByInfo(getSkillStateInfoById(6006));
+				var atf:AttackFace=AttackFace.createAttackFace(getEffectNameUrl(6006),FightFaceHelper.NUMBER_PURPLE1,0);
+				return atf;
+			}
+			return null;
+		}
+	
+		public function hasXiQuHpAtf(heroId:long,value:int):AttackFace
+		{
+			var need:Boolean=needShowNotice(6007,heroId);
+			if (need) 
+			{
+				var tmp:int=value*getSkillValueByInfo(getSkillStateInfoById(6007));
+				var atf:AttackFace=AttackFace.createAttackFace(getEffectNameUrl(6007),FightFaceHelper.NUMBER_PURPLE1,tmp);
+				return atf;
+			}
+			return null;
+		}
+		private function needShowNotice(buffId:int,hero:long):Boolean
+		{
+			var role:SceneRole=SceneManager.getSceneObjByID(hero.ToGID()) as SceneRole;
+			if (role&&SceneCharType.PLAYER==role.type) 
+			{
+				if (role.buffSet.hasBuff(buffId)) 
+				{
+					return true;
+				}
+			}
+			return false;
 		}
 	}
 }

@@ -182,7 +182,7 @@ package com.rpgGame.app.process
 				}
 				LayerManager.showOrHideMM();
 				ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
-				Starling.current.showStats=!Starling.current.showStats;
+//				Starling.current.showStats=!Starling.current.showStats;
 			}
 		}
 		
@@ -192,7 +192,7 @@ package com.rpgGame.app.process
 				StatsUtil.showAwayStats(Stage3DLayerManager.stage,Stage3DLayerManager.stage3DProxy);
 			}			
 //			LayerManager.showOrHideMM();
-				Starling.current.showStats=true;
+//				Starling.current.showStats=true;
 			ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
             // 屏蔽未捕获信息
 //            Log.logCallBack = GameLog.logItem;

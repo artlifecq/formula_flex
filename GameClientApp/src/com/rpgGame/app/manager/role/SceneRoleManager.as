@@ -16,6 +16,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.yunBiao.YunBiaoManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.scene.animator.FightSoulFollowAnimator;
 	import com.rpgGame.app.state.role.action.PlayActionStateReference;
 	import com.rpgGame.app.state.role.control.RidingStateReference;
 	import com.rpgGame.app.ui.alert.GameAlert;
@@ -26,12 +27,15 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.core.events.role.RoleEvent;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.FightsoulData;
+	import com.rpgGame.coreData.cfg.FightsoulModeData;
 	import com.rpgGame.coreData.cfg.StallCfgData;
 	import com.rpgGame.coreData.cfg.country.CountryWarCfgData;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.res.AvatarResConfigSetData;
 	import com.rpgGame.coreData.clientConfig.AvatarResConfig;
 	import com.rpgGame.coreData.clientConfig.ClientSceneEffect;
+	import com.rpgGame.coreData.clientConfig.Q_fightsoul_mode;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.enum.JobEnum;
@@ -40,6 +44,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleData;
+	import com.rpgGame.coreData.role.RoleType;
 	import com.rpgGame.coreData.role.SceneCollectData;
 	import com.rpgGame.coreData.role.SceneDropGoodsData;
 	import com.rpgGame.coreData.role.SceneTranportData;
@@ -51,9 +56,11 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
-	import flash.geom.Vector3D;
-	
 	import app.message.StallTypeDataProto;
+	
+	import gs.TweenMax;
+	import gs.easing.Circ;
+	import gs.easing.Sine;
 	
 	import org.client.mainCore.manager.EventManager;
 	
@@ -139,6 +146,10 @@ package com.rpgGame.app.manager.role
 			// 在换装时还未把role添加到场景 添加的buff无效
 			if (data.buffList.length > 0) {
 				role.buffSet.updateBuffEffects();
+			}
+			if (data.fightSoulLevel > 0)
+			{
+				createFightSoulRole(role);
 			}
 			
 			if (role.headFace is HeadFace)
@@ -591,6 +602,41 @@ package com.rpgGame.app.manager.role
 			}
 		}
 		
+		public function createFightSoulRole(owner:SceneRole):SceneRole
+		{
+			var fightSoulFollowAnimator:FightSoulFollowAnimator = null;
+			var fightSoulRole:SceneRole = (SceneManager.getScene().getSceneObjByID(owner.id, SceneCharType.FIGHT_SOUL) as SceneRole);
+			if (fightSoulRole)
+			{
+				return fightSoulRole;
+			}
+			fightSoulRole = SceneRole.create(SceneCharType.FIGHT_SOUL, owner.id);
+			var roleData:RoleData = new RoleData(RoleType.TYPE_FIGHT_SOUL);
+			roleData.ownerId = owner.id;
+			roleData.id = owner.id;
+			roleData.name = "";
+			var fightSoulLevel:int = (owner.data as HeroData).fightSoulLevel;
+			var model:Q_fightsoul_mode = FightsoulModeData.getModeInfoById(fightSoulLevel);
+			roleData.avatarInfo.setBodyResID("pc/fightsoul/"+model.q_mode,null);
+			roleData.avatarInfo.bodyEffectID = model.q_effect;
+			fightSoulRole.ownerIsMainChar = (owner.id == MainRoleManager.actorID);
+			fightSoulRole.data = roleData;
+			fightSoulRole.mouseEnable = false;
+			if (owner.isMainChar)
+			{
+				fightSoulRole.canRemoved = false;
+			}
+			AvatarManager.updateAvatar(fightSoulRole);
+			fightSoulRole.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true);
+			fightSoulRole.setScale(model.q_sceneScale/100);
+			fightSoulRole.setGroundXY((owner.x + 100), owner.y);
+			fightSoulRole.rotationY = owner.rotationY;
+			SceneManager.addSceneObjToScene(fightSoulRole, false);
+			fightSoulFollowAnimator = new FightSoulFollowAnimator(fightSoulRole);
+			owner.setRenderAnimator(fightSoulFollowAnimator);
+			return fightSoulRole;
+		}
+		
 		
 		/**
 		 * 角色离开视野
@@ -625,6 +671,7 @@ package com.rpgGame.app.manager.role
 		
 		private static const needleRoleX : Array = [0, -20, 20, -40, 40];
 		private static const needleRoleY : Array = [0, -20, -20, -40, -40];
+		
 		public function onUpdateNeedle(role : SceneRole, newVal : int, oldVal : int) : void {
 			if (!(role.data is HeroData)) {
 				return;
@@ -632,19 +679,42 @@ package com.rpgGame.app.manager.role
 			if (JobEnum.ROLE_4_TYPE != (role.data as HeroData).job) {
 				return;
 			}
+			if (newVal==oldVal) 
+			{
+				return;
+			}
 			var i : int = 0;
-			for (i = newVal; i < oldVal; ++i) {
-				role.avatar.removeRenderUnitByID(RenderUnitType.NEEDLEEFFECT, i);
+			var tmp:RenderUnit3D
+			if (newVal>oldVal) 
+			{
+				var add:int=newVal-oldVal;
+				for (i = 0; i < add;i++) 
+				{
+					tmp=SpellAnimationHelper.addTargetEffect(role, oldVal+i, RenderUnitType.NEEDLEEFFECT, "tx_role_mieshijinzhen_01_5", BoneNameEnum.c_crossbow, 0);
+					tmp.x = needleRoleX[oldVal+i];
+					tmp.y =0;
+					tmp.z = 0;
+					var data:Object={y:needleRoleY[oldVal+i]-30,delay:i*0.3,ease:Sine.easeInOut};
+					data["yoyo"] = true;
+					data["repeat"] = -1;
+					TweenMax.to(tmp,1.5,data);
+				}
 			}
-			for (i = oldVal; i < newVal; ++i) {
-				SpellAnimationHelper.addTargetEffect(role, i, RenderUnitType.NEEDLEEFFECT, "tx_role_mieshijinzhen_01_5", BoneNameEnum.c_crossbow, 0);
+			else
+			{
+				var dec:int=oldVal-newVal;	
+				for (i = 0; i < dec; ++i) 
+				{
+					tmp=role.avatar.removeRenderUnitByID(RenderUnitType.NEEDLEEFFECT, oldVal-1-i);
+					TweenMax.killTweensOf(tmp);
+				}
+				for (i = 0; i < newVal; ++i) 
+				{
+					tmp=role.avatar.getRenderUnitByID(RenderUnitType.NEEDLEEFFECT,i);
+					tmp.x = needleRoleX[i];
+				}
 			}
-			for (i = 0; i < newVal; ++i) {
-				var unit : RenderUnit3D = role.avatar.getRenderUnitByID(RenderUnitType.NEEDLEEFFECT, i);
-				unit.x = needleRoleX[i];
-				unit.y = needleRoleY[i];
-				unit.z = 0;
-			}
+			
 		}
 	}
 }

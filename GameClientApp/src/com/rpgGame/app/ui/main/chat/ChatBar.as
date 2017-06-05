@@ -661,7 +661,17 @@ package com.rpgGame.app.ui.main.chat {
 				if (this._inputText.isInputFocus) {
 					switch (e.keyCode) {
 						case Keyboard.ENTER:
-							this.sendMsg();
+							if(_inputText.text!=null&&"" != this._inputText.text)
+								this.sendMsg();
+							else{
+								if(!_ismouseIn){
+									_inputText.removeFocus();
+									setGroubState(false);
+								}
+								else{
+									_inputText.removeFocus();
+								}
+							}
 							break;
 						case Keyboard.UP:
 							break;

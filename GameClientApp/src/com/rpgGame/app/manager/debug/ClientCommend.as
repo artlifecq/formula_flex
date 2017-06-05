@@ -3,6 +3,7 @@ package   com.rpgGame.app.manager.debug
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.game.engine3D.utils.StatsUtil;
 	import com.game.mainCore.core.manager.LayerManager;
+	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.fight.spell.SkillAddPop;
 	import com.rpgGame.app.fight.spell.SpellHitHelper;
@@ -11,6 +12,9 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.role.SceneRoleManager;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
 	
@@ -94,6 +98,18 @@ package   com.rpgGame.app.manager.debug
 				skill.skillChildLv=1;
 				skill.skillExp=2;
 				UIPopManager.showAlonePopUI(SkillAddPop,skill);
+			});
+			commandList.put( ".jz", function (...arg):void
+			{
+				SceneRoleManager.getInstance().onUpdateNeedle(MainRoleManager.actor,arg[0],arg[1]);
+			});
+			commandList.put( ".bat", function (...arg):void
+			{
+				AppManager.showApp(AppConstant.BATTLE_MAIN_PANEL,null,"1");
+			});
+			commandList.put( ".log", function (...arg):void
+			{
+				GameLog.enableTrace=false;
 			});
 		}
 		
