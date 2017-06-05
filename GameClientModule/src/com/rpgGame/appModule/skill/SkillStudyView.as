@@ -3,6 +3,7 @@ package com.rpgGame.appModule.skill
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.SpellEvent;
@@ -29,14 +30,13 @@ package com.rpgGame.appModule.skill
 	
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
-	import starling.events.TouchEvent;
 
 	/**
 	 *技能学习 
 	 * @author dik
 	 * 
 	 */
-	public class SkillStudyView
+	public class SkillStudyView extends ViewUI
 	{
 		private var _skin:jineng_Skin;
 		private var _skillContainer:Sprite;
@@ -50,15 +50,16 @@ package com.rpgGame.appModule.skill
 		
 		private var skillUpgrade:SkillUpgradeView;
 		private var skillRise:SkillRiseView;
-		private var _panel:SkinUIPanel;
 
 		private var basicItems:Vector.<SkillItem>;
 		private var otherItems:Vector.<SkillItem>;
+		private var _panel:SkinUIPanel;
 		
-		public function SkillStudyView(skin:jineng_Skin,panel:SkinUIPanel)
+		public function SkillStudyView(panel:SkinUIPanel)
 		{
 			_panel=panel;
-			_skin=skin;
+			_skin=new jineng_Skin();
+			super(_skin);
 			initView();
 		}
 		
@@ -68,10 +69,7 @@ package com.rpgGame.appModule.skill
 			this._skin.vs_bar.width=550;
 			this._skin.vs_bar.x=20;
 			this._skin.vs_bar.scrollBarDisplayMode = ScrollBarDisplayMode.ALWAYS_VISIBLE;
-//			this._skin.vs_bar.verticalScrollBarPosition =RelativePosition.RIGHT;
-//			this._skin.vs_bar.verticalScrollPolicy = ScrollPolicy.OFF;
 			this._skin.vs_bar.horizontalScrollPolicy=ScrollPolicy.OFF;
-			
 			
 			_jobTitle1=new Title_Skin();
 			_jobTitle2=new Title_Skin();
