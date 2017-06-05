@@ -1,7 +1,7 @@
 package com.rpgGame.appModule.equip
 {
 	import com.rpgGame.app.ui.SkinUIPanel;
-	import com.rpgGame.app.ui.tab.UITabBar;
+	import com.rpgGame.app.ui.tab.FuncTabBar;
 	import com.rpgGame.app.ui.tab.UITabBarData;
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	
@@ -27,7 +27,7 @@ package com.rpgGame.appModule.equip
 			EmFunctionID.EM_JICHENG,EmFunctionID.EM_HECHENG];
 		
 		private var _skin:Zhuangbei_Skin;
-		private var _tabBar:UITabBar;
+		private var _tabBar:FuncTabBar;
 		
 		public function EquipPanel()
 		{
@@ -47,7 +47,7 @@ package com.rpgGame.appModule.equip
 				tabDatas.push(item);
 			}
 			
-			_tabBar=new UITabBar(_skin.tabBar,tabDatas);
+			_tabBar=new FuncTabBar(_skin.tabBar,tabDatas);
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void

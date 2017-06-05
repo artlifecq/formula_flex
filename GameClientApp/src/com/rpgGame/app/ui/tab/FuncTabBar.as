@@ -42,7 +42,7 @@ package com.rpgGame.app.ui.tab
 			for(var i:int=0;i<num;i++){
 				item=_allDatas[i];
 				funcID=int(item.tabKey);
-				if(FunctionOpenManager.checkOpenBuyFunId(funcID)){//已经开启了
+				if(FunctionOpenManager.functionIsOpen(funcID)){//已经开启了
 					setTabDataWithTabKey(item.tabKey);
 				}
 			}
