@@ -75,7 +75,7 @@ package com.rpgGame.app.manager.scene
 		 *  * <font color=#00><b>currentMapId全局变量一次赋值直接调用，无需查询</b></font></br>
 		 * */
 		public static var currentMapId : uint = 0;
-		
+		public static var isToCrossMap:Boolean=false;
 		private static var _isChangeSceneComplete : Boolean = false;
 		private static var _mapRes : String = null;
 		setup();

@@ -136,6 +136,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			lbName = temp;
 			temp.name = "lbName";
 			temp.text = "【320000】角色名六个字";
+			temp.textAlign = "center";
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 172;
