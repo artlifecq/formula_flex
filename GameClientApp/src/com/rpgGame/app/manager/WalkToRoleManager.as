@@ -1,6 +1,7 @@
 package com.rpgGame.app.manager
 {
 	import com.game.engine3D.utils.MathUtil;
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.graphics.StallHeadFace;
 	import com.rpgGame.app.manager.ctrl.ControlAutoPick;
 	import com.rpgGame.app.manager.fight.FightManager;

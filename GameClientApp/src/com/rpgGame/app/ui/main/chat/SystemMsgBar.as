@@ -87,7 +87,6 @@ package com.rpgGame.app.ui.main.chat
 			}
 			_skin.msg_list.dataProvider.removeAll();
 			num=_currentMsg.length;
-			var msg:String="";
 			for(var i:int=0;i<num;i++){
 				_skin.msg_list.dataProvider.addItem(_currentMsg[i]);
 			}
@@ -178,16 +177,16 @@ package com.rpgGame.app.ui.main.chat
 		
 		private function showChatMsg( info:ResChatMessage ):void
 		{
-			if(_isShowAll){
+//			if(_isShowAll){
 				_allMsg.push(info);
 				currentMsg=_allMsg;
 				if(info.type==EnumChatChannelType.CHAT_CHANNEL_SYSTEM){
 					_sysMsg.push(info);
 				}
-			}else if(info.type==EnumChatChannelType.CHAT_CHANNEL_SYSTEM){
-				_sysMsg.push(info);
-				currentMsg=_sysMsg;
-			}
+//			}else if(info.type==EnumChatChannelType.CHAT_CHANNEL_SYSTEM){
+//				_sysMsg.push(info);
+//				currentMsg=_sysMsg;
+//			}
 		}
 		
 		public function resize(w : int, h : int) : void {

@@ -73,7 +73,7 @@ package com.rpgGame.app.ui.main.chat
 			var info:ResChatMessage=this._data as ResChatMessage;
 			if(info && this._owner)
 			{
-				_richText.text = ChatUtil.getChatMessageByChannel(info.type,info.name,info.chatText);
+				_richText.text = ChatUtil.getHTMLChatMessage(info);//getChatMessageByChannel(info.type,info.name,info.chatText);
 				_richText.setSize(WIDTH);
 				this.width = _richText.width;
 			}
