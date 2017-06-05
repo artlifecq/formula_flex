@@ -42,7 +42,7 @@ package com.client
 			initFeathers();
 		}
 
-		private static function initAway3D() : void
+		public static function initAway3D() : void
 		{
 			AwayStats.alertLogPanelOnError = ClientConfig.isDebug;
 			Away3D.LOAD_FILE_WITH_LIB = true;
@@ -60,8 +60,8 @@ package com.client
 			Away3D.PARSE_PNG_IN_WORKER = true;
 
 			MultiUrlLoadManager.getUrlWithVersion = VersionUtils.getVersionPath;
-			Away3D.USE_TEXTURES_BPG_FORMAT = ClientGlobal.useBpgFormat;
-			if (ClientGlobal.uiCompressed)
+			Away3D.USE_TEXTURES_BPG_FORMAT = ClientConfig.useBpgFormat;
+			if (ClientConfig.uiCompressed)
 			{
 //				GuiTheme.defaultTextureFormat = TextureFormatEnum.BPG;
 			}
@@ -83,10 +83,10 @@ package com.client
 
 		private static function initFeathers() : void
 		{
-			GuiTheme.RES_ROOT = ClientGlobal.baseDir + ClientGlobal.resURL;
+			GuiTheme.RES_ROOT = ClientConfig.baseDir + ClientConfig.resURL;
 			GuiTheme.decodeURL = VersionUtils.getVersionPath;
 //			GuiTheme.useWorkerLoadTextureBytes = true;
-			GuiTheme.useCompressedTexture = false; //ClientGlobal.uiCompressed;
+			GuiTheme.useCompressedTexture = false; //ClientConfig.uiCompressed;
 //			GuiTheme.ENABLE_TEXT_BATCH = true;
 			GuiTheme.ATFX_ROOT_PATH = "../res/ui/big_bg";
 		}

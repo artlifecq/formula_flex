@@ -8,7 +8,6 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.ShortcutsManger;
 	import com.rpgGame.app.manager.TrusteeshipManager;
-	import com.rpgGame.app.manager.ctrl.ControlAutoPick;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.task.GatherAutoManager;
 	import com.rpgGame.app.manager.task.MiXinManager;
@@ -26,6 +25,8 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.netData.player.bean.MyPlayerInfo;
 	
 	import flash.geom.Vector3D;
+	
+	import away3d.enum.LoadPriorityType;
 	
 	import org.client.mainCore.manager.EventManager;
 
