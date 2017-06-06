@@ -82,7 +82,7 @@ package com.rpgGame.app.manager
 		{
 			_stateMachine = new AIStateMachine(role);
 			_autoPickCtrl=new ControlAutoPick(role);
-			_autoSkillCtrl=new ControlAutoFightSelectSkill(role);
+			_autoSkillCtrl=new ControlAutoFightSelectSkill(role,(role.data as HeroData).job);
 		}
 		public  function get autoPickCtrl():ControlAutoPick
 		{

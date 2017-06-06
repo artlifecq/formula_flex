@@ -9,6 +9,7 @@ package  com.rpgGame.core.utils
 	
 	import feathers.controls.Label;
 	import feathers.controls.List;
+	import feathers.controls.UIAsset;
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.mokylin.skin.component.list.ListSkin1;
@@ -439,6 +440,17 @@ package  com.rpgGame.core.utils
 			temp.width = lab.width;
 			temp.x = lab.x;
 			temp.y = lab.y;
+			return temp;
+		}
+		
+		public static function cloneUIAssert(ui:UIAsset):UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			
+			temp.name = ui.name;
+			temp.styleName =ui.styleName;
+			temp.x = ui.x;
+			temp.y = ui.y;
 			return temp;
 		}
 	}

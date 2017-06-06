@@ -44,18 +44,18 @@
         private function updateHintNum():void
         {
             var _local2:int;
-            if (FunctionOpenManager.checkOpenBuyFunId(50))
+           /* if (FunctionOpenManager.checkOpenBuyFunId(50))
             {
-//                _local2 = (_local2 + ShiLianManager.yiJiEnterTimes);
+                _local2 = (_local2 + ShiLianManager.yiJiEnterTimes);
             }
             if (FunctionOpenManager.checkOpenBuyFunId(49))
             {
-//                _local2 = (_local2 + ShiLianManager.mingJiangLeftTimes);
+                _local2 = (_local2 + ShiLianManager.mingJiangLeftTimes);
             }
             if (FunctionOpenManager.checkOpenBuyFunId(54))
             {
-//                _local2 = (_local2 + ShiLianManager.shouHuLeftTimes);
-            }
+                _local2 = (_local2 + ShiLianManager.shouHuLeftTimes);
+            }*/
             var _local1:Boolean = _local2 > 0;
             imgIcon.visible = _local1;
             lbNum.text = _local1 ? _local2 + "" : "";

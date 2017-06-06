@@ -71,6 +71,8 @@
 		 * 客户端NPC  15
 		 */		
 		public static const CLIENT_NPC : int = rEnum.next;
+		
+		public static const TYPE_FIGHT_SOUL:int = rEnum.next;
 
 		public function RoleType()
 		{

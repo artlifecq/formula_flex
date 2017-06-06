@@ -5,6 +5,7 @@ package com.rpgGame.app.ui.main.navigation
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.coreData.enum.EmFunctionID;
 	
 	import away3d.events.Event;
 	
@@ -31,34 +32,38 @@ package com.rpgGame.app.ui.main.navigation
 		private var _fixPosy:Number;
 		override protected function onShow():void
 		{
-			if(FunctionOpenManager.checkOpenBuyFunId(51))
+			var height:Number = 40;
+			if(FunctionOpenManager.functionIsOpen(EmFunctionID.EM_BANGHUI))
 			{
 				if(_skin.btn_n1.parent==null)
 				{
 					_skin.grpBtn_nv.addChild(_skin.btn_n1);
 				}
+				height = 66;
 			}else{
 				if(_skin.btn_n1.parent!=null)
 				{
 					_skin.grpBtn_nv.removeChild(_skin.btn_n1);
 				}
 			}
-			
-			if(FunctionOpenManager.checkOpenBuyFunId(50))
+			if(FunctionOpenManager.functionIsOpen(EmFunctionID.EM_ZUDUI))
 			{
 				if(_skin.btn_n1.parent==null)
 				{
 					_skin.grpBtn_nv.addChild(_skin.btn_n2);
 				}
+				
 			}else{
 				if(_skin.btn_n1.parent!=null)
 				{
 					_skin.grpBtn_nv.removeChild(_skin.btn_n2);
 				}
+				
 			}
-			
+//			this.height = height;
+			_skin.nv_bg.height = height;
 			this.x = _fixPosx -this.width/2;
-			this.y = _fixPosy - this.height;
+			this.y = _fixPosy - height;
 		}
 		
 		override protected function onTouchTarget(target : DisplayObject) : void
@@ -67,7 +72,7 @@ package com.rpgGame.app.ui.main.navigation
 			switch(target)
 			{
 				case _skin.btn_n2:
-					AppManager.showApp(AppConstant.SOCIAL_PANEL,"","social_team_panel");
+					AppManager.showApp(AppConstant.SOCIAL_PANEL);
 					break;
 			}
 			close();

@@ -1,6 +1,5 @@
 package com.client.process
 {
-	import com.client.ClientGlobal;
 	import com.client.manager.BGMManager;
 	import com.client.view.LoginInputView;
 	import com.client.view.loading.ResLoadingView;
@@ -8,9 +7,9 @@ package com.client.process
 	import com.game.engine3D.process.BaseProcess;
 	import com.game.engine3D.process.ProcessStateMachine;
 	import com.gameClient.log.GameLog;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	
 	import flash.events.Event;
-	import flash.events.ProgressEvent;
 	
 	import away3d.loaders.multi.MultiLoadData;
 	
@@ -47,7 +46,7 @@ package com.client.process
 			ResLoadingView.instance.title = "加载登录资源...";
 
 			_themeLoader = new ThemeLoader();
-			_themeLoader.load(ClientGlobal.getSignInResUrl(), onResLoaded, onProgress, onResError);
+			_themeLoader.load(ClientConfig.getSignInResUrl(), onResLoaded, onProgress, onResError);
 		}
 
 		private function onResLoaded(loader : ThemeLoader) : void
@@ -76,8 +75,8 @@ package com.client.process
 
 		private function onResError(ld : MultiLoadData, e : Event) : void
 		{
-			ResLoadingView.instance.title = "登录资源加载错误：" + ClientGlobal.getSignInResUrl();
-			GameLog.addShow("登录资源加载错误：" + ClientGlobal.getSignInResUrl());
+			ResLoadingView.instance.title = "登录资源加载错误：" + ClientConfig.getSignInResUrl();
+			GameLog.addShow("登录资源加载错误：" + ClientConfig.getSignInResUrl());
 		}
 
 		override public function processHandler(percent : Number) : void
@@ -87,7 +86,7 @@ package com.client.process
 
 		private function onLogin(acc : String, psw : String) : void
 		{
-			ClientGlobal.loginName = acc;
+			ClientConfig.loginName = acc;
 			GameLog.addShow("开始登录服务器...");
 			completeProcess();
 		}

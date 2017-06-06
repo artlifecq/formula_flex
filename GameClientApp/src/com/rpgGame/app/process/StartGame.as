@@ -146,7 +146,7 @@ package com.rpgGame.app.process
 			if (!isProcessed)
 			{
 				tipsSetup();
-				//FirstEnterSceneManager.setup();//监听场景切换完成事件（仅是第一次进入游戏的第一个进入场景），初始化游戏所有公共的模块
+				FirstEnterSceneManager.setup();//监听场景切换完成事件（仅是第一次进入游戏的第一个进入场景），初始化游戏所有公共的模块
 				SceneManager.setup();//初始化场景，new 场景
 				SceneCameraLensEffectManager.setup();//镜头特效初始化
 				ClientTriggerManager.setup();
@@ -182,7 +182,7 @@ package com.rpgGame.app.process
 				}
 				LayerManager.showOrHideMM();
 				ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
-				Starling.current.showStats=!Starling.current.showStats;
+//				Starling.current.showStats=!Starling.current.showStats;
 			}
 		}
 		
@@ -192,7 +192,7 @@ package com.rpgGame.app.process
 				StatsUtil.showAwayStats(Stage3DLayerManager.stage,Stage3DLayerManager.stage3DProxy);
 			}			
 //			LayerManager.showOrHideMM();
-				Starling.current.showStats=true;
+//				Starling.current.showStats=true;
 			ConsoleDesk.showOrHide(Stage3DLayerManager.stage);
             // 屏蔽未捕获信息
 //            Log.logCallBack = GameLog.logItem;

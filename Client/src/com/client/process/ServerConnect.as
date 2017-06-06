@@ -1,16 +1,15 @@
 package com.client.process
 {
-	import com.client.ClientGlobal;
 	import com.client.cmdlistener.LoginCmdListener;
-	import com.client.sender.HeartSender;
 	import com.client.sender.LoginSender;
 	import com.client.ui.alert.GameAlert;
+	import com.client.ui.alert.ReconnectionPanelExt;
 	import com.client.view.loading.ResLoadingView;
 	import com.game.engine3D.process.BaseProcess;
 	import com.game.engine3D.process.ProcessStateMachine;
-	import com.game.engine3D.vo.SenderReferenceSet;
 	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.adobe.Base64;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.netData.MessagePool;
 	
 	import flash.events.Event;
@@ -27,12 +26,11 @@ package com.client.process
 	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
-	import org.client.mainCore.utils.StringUtil;
 	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.connection.SocketConnection_protoBuffer;
 	import org.game.netCore.event.NetEvent;
 	import org.game.netCore.net.MessageMgr;
-
+	
 	/**
 	 *
 	 * 服务器连接
@@ -44,31 +42,32 @@ package com.client.process
 	{
 		private static var _allowReconnect : Boolean = true;
 		private static var _errMsg : String = "";
-
+		
 		public static function stopReconnect(errMsg : String) : void
 		{
 			_errMsg = errMsg;
 			_allowReconnect = false;
 		}
-
+		
 		private var _retryTimer : Timer;
 		private var _retryConnectCnt : uint = 0;
 		/** 腾讯oid*/
 		private var _tencentOid : int = 199;
 		private var _connectDelay : int = 0;
-
+		
 		public function ServerConnect()
 		{
 			super();
 			_connectDelay = 0;
 			EventManager.addEvent("SERVER_RECONNECT", closeSocket);
+			SocketConnection.messageMgr.addEventListener(MessageMgr.CLIENT_DROPS_TO_SERVER, socketDropsHandle);
 		}
-
+		
 		override public function getState() : String
 		{
 			return ProcessState.STATE_SERVER_CONNECT;
 		}
-
+		
 		override public function startProcess() : void
 		{
 			super.startProcess();
@@ -83,10 +82,10 @@ package com.client.process
 				ResLoadingView.instance.title = "正在连接服务器...";
 				GameLog.addShow("连接socket");
 			}
-
-			if (ClientGlobal.loginIP == "0.0.0.0")
+			
+			if (ClientConfig.loginIP == "0.0.0.0")
 			{
-				ClientGlobal.isSingle = true;
+				ClientConfig.isSingle = true;
 				completeProcess();
 				return;
 			}
@@ -104,12 +103,12 @@ package com.client.process
 				Security.allowInsecureDomain("*");
 			}
 			//
-			var policyFileUrl : String = "xmlsocket://" + ClientGlobal.loginIP + ":" + ClientGlobal.policyPort;
+			var policyFileUrl : String = "xmlsocket://" + ClientConfig.loginIP + ":" + ClientConfig.policyPort;
 			Security.loadPolicyFile(policyFileUrl);
 			//
 			GameLog.addShow("加载跨域文件 : ", policyFileUrl);
 		}
-
+		
 		private function connect() : void
 		{
 			_allowReconnect = true;
@@ -128,12 +127,12 @@ package com.client.process
 				onConnect();
 			}
 		}
-
+		
 		private function onConnect() : void
 		{
 			SocketConnection.messageMgr.addEventListener(MessageMgr.CLIENT_CONNECT_TO_SERVER, socketConnectHandle);
 			SocketConnection.messageMgr.addEventListener(MessageMgr.CLIENT_FAILD_TO_SERVER, socketConnectFailHandle);
-			SocketConnection.messageMgr.Connect(ClientGlobal.loginIP, ClientGlobal.loginPort);
+			SocketConnection.messageMgr.Connect(ClientConfig.loginIP, ClientConfig.loginPort);
 			//
 			_retryConnectCnt = 0;
 			if (!_retryTimer)
@@ -144,7 +143,7 @@ package com.client.process
 			_retryTimer.reset();
 			_retryTimer.start();
 		}
-
+		
 		protected function socketConnectHandle(event:NetEvent):void
 		{
 			_allowReconnect = true;
@@ -166,7 +165,7 @@ package com.client.process
 			}
 			else
 			{
-//				HeartSender.start();
+				//				HeartSender.start();
 				LoginCmdListener.start();
 				sendLogin();
 			}
@@ -176,24 +175,24 @@ package com.client.process
 		{
 			closeSocket(500, "错误");
 		}
-
+		
 		private function onLoginSuccessHandler() : void
 		{
 			/*SenderReferenceSet.start();
 			completeProcess();
-			if (ClientGlobal.mainEntry)
+			if (ClientConfig.mainEntry)
 			{
-				ClientGlobal.mainEntry.reEnterGame();
+			ClientConfig.mainEntry.reEnterGame();
 			}*/
 			GameLog.addShow("登录成功了...",this);
 			completeProcess();
 		}
-
+		
 		private function closeSocket(deley : int, msg : String) : void
 		{
 			_connectDelay = deley;
 			GameLog.addShow("服务器连接" + msg);
-//			SenderReferenceSet.stop();
+			//			SenderReferenceSet.stop();
 			//
 			if (_retryTimer)
 			{
@@ -214,7 +213,7 @@ package com.client.process
 				GameAlert.show("服务器连接" + msg + "，原因：" + _errMsg + "，请刷新后重新登录。", "提示", onOkFunc);
 			}
 		}
-
+		
 		/**
 		 * 服务器关闭连接
 		 * @param e
@@ -224,7 +223,7 @@ package com.client.process
 		{
 			closeSocket(500, "断开");
 		}
-
+		
 		/**
 		 * 服务器连接错误
 		 * @param e
@@ -234,7 +233,7 @@ package com.client.process
 		{
 			closeSocket(500, "错误");
 		}
-
+		
 		private function reconnect() : void
 		{
 			if (isProcessing)
@@ -250,7 +249,7 @@ package com.client.process
 				}
 			}
 		}
-
+		
 		private function getOid(key : String) : int
 		{
 			var parseStar : String = Base64.decode(key);
@@ -270,21 +269,21 @@ package com.client.process
 		private function sendLogin() : void
 		{
 			LoginCmdListener.onLoginSuccessHandler = onLoginSuccessHandler;
-			var oid : int = getOid(ClientGlobal.loginName);
+			var oid : int = getOid(ClientConfig.loginName);
 			GameLog.addShow("oid:" + oid);
 			if (oid == _tencentOid)
 			{
-				sendTGW(ClientGlobal.loginIP, ClientGlobal.loginPort);
+				sendTGW(ClientConfig.loginIP, ClientConfig.loginPort);
 			}
-            if (null == ClientGlobal.loginKey || 0 == ClientGlobal.loginKey.length) {
-                LoginSender.SendLoginMessage();
-            } else {
-                LoginSender.SendPlatformLoginMessage();
-            }
-            
-			GameLog.addShow("连接socket成功,发送登录消息", ClientGlobal.loginName, ClientGlobal.loginKey);
+			if (null == ClientConfig.loginKey || 0 == ClientConfig.loginKey.length) {
+				LoginSender.SendLoginMessage();
+			} else {
+				LoginSender.SendPlatformLoginMessage();
+			}
+			
+			GameLog.addShow("连接socket成功,发送登录消息", ClientConfig.loginName, ClientConfig.loginKey);
 		}
-
+		
 		/**
 		 * 断线重链 
 		 * 
@@ -293,7 +292,7 @@ package com.client.process
 		{
 			LoginCmdListener.onLoginSuccessHandler = onLoginSuccessHandler;
 		}
-
+		
 		/**
 		 * 发送腾讯tgw
 		 * @param domainName
@@ -312,13 +311,13 @@ package com.client.process
 			SocketConnection_protoBuffer.mainSocket.writeBytes(data);
 			SocketConnection_protoBuffer.mainSocket.flush();
 		}
-
+		
 		private function showErrorMessage(msg : String) : void
 		{
 			GameAlert.show(msg, "提示");
 			GameLog.addShow(msg);
 		}
-
+		
 		private function onOkFunc() : void
 		{
 			if (ExternalInterface.available)
@@ -326,19 +325,19 @@ package com.client.process
 				ExternalInterface.call("reload");
 			}
 		}
-
+		
 		private function onRetryConnect(evt : TimerEvent = null) : void
 		{
 			_retryConnectCnt++;
-			GameLog.addShow("连接Socket，第" + _retryConnectCnt + "次尝试: ", ClientGlobal.loginIP, ClientGlobal.loginPort);
+			GameLog.addShow("连接Socket，第" + _retryConnectCnt + "次尝试: ", ClientConfig.loginIP, ClientConfig.loginPort);
 			//
-			SocketConnection_protoBuffer.mainSocket.connect(ClientGlobal.loginIP, ClientGlobal.loginPort);
+			SocketConnection_protoBuffer.mainSocket.connect(ClientConfig.loginIP, ClientConfig.loginPort);
 			if (_retryConnectCnt > 60)
 			{
 				showErrorMessage("服务器连接不上，继续尝试重新连接中，请检查您的网络环境！");
 			}
 		}
-
+		
 		private var _sound:Sound;
 		private var _soundTransform:SoundTransform;
 		private var _soundChannel:SoundChannel;
@@ -364,12 +363,12 @@ package com.client.process
 				GameLog.addShow("播放创角音效error");
 			}
 		}
-
+		
 		private function updateSoundTransFrom() : void
 		{
-			ClientGlobal.stage.addEventListener(Event.ENTER_FRAME, onSoundTransFromEnterFrame);
+			ClientConfig.stage.addEventListener(Event.ENTER_FRAME, onSoundTransFromEnterFrame);
 		}
-
+		
 		protected function onSoundTransFromEnterFrame(event : Event) : void
 		{
 			if (_soundTransform.volume < 0.8)
@@ -379,10 +378,15 @@ package com.client.process
 			}
 			else
 			{
-				ClientGlobal.stage.removeEventListener(Event.ENTER_FRAME, onSoundTransFromEnterFrame);
+				ClientConfig.stage.removeEventListener(Event.ENTER_FRAME, onSoundTransFromEnterFrame);
 			}
 		}
-
+		
+		private function socketDropsHandle(event:NetEvent):void
+		{
+			ReconnectionPanelExt.Show();
+		}
+		
 		override public function dispose() : void
 		{
 			super.dispose();

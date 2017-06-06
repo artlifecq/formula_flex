@@ -1,9 +1,9 @@
 package com.client.cmdlistener
 {
-	import com.client.ClientGlobal;
 	import com.client.EnumErrorConst;
 	import com.client.ui.alert.GameAlert;
 	import com.gameClient.log.GameLog;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.netData.login.message.ResCreateCharacterMessage;
 	import com.rpgGame.netData.login.message.ResErrorMessage;
 	import com.rpgGame.netData.login.message.ResHeartMessage;
@@ -58,7 +58,7 @@ package com.client.cmdlistener
 		
 		public static function RecvMyPlayerInfoMessage(msg:ResMyPlayerInfoMessage):void
 		{
-			ClientGlobal.loginData = msg.myPlayerInfo;
+			ClientConfig.loginData = msg.myPlayerInfo;
 			if (onLoginSuccessHandler != null)
 			{
 				onLoginSuccessHandler();
@@ -73,7 +73,7 @@ package com.client.cmdlistener
 			
 			if(MessageMgr.Ins.isCrossSocket){//跨服登陆
 				GameLog.addShow("收到跨服收到主玩家消息");
-				ClientGlobal.mainEntry.toCrossMap();
+				ClientConfig.mainEntry.toCrossMap();
 			}else{
 				GameLog.addShow("收到主玩家消息");
 			}
@@ -93,7 +93,7 @@ package com.client.cmdlistener
 			// 这里启动心跳吧
 			StartHeart();*/
 			GameLog.addShow("收到登录成功消息 ");
-			ClientGlobal.hasHero = true;
+			ClientConfig.hasHero = true;
 			onCreateHeroSuccess();
 		}
 		
@@ -111,7 +111,7 @@ package com.client.cmdlistener
 		public static function RecvCreateCharacterMessage(msg:ResCreateCharacterMessage):void
 		{
 			GameLog.addShow("收到需要创建角色消息,没有角色，需要创建！完成选服的流程，进入创角的流程 ");
-			ClientGlobal.hasHero = false;
+			ClientConfig.hasHero = false;
 			if (onLoginSuccessHandler != null)
 			{
 				onLoginSuccessHandler();

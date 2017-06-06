@@ -6,6 +6,7 @@ package com.rpgGame.appModule.dungeon.multy
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.ui.SkinUIModePanel;
+	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.app.AppConstant;
@@ -46,7 +47,7 @@ package com.rpgGame.appModule.dungeon.multy
 	import starling.display.Shape;
 	import starling.display.Sprite;
 
-	public class MultyView extends SkinUIModePanel
+	public class MultyView extends ViewUI
 	{
 		private var _skin:FuBen_DuoRen_Skin;
 		private var scroll_Bar :ScrollContainer;
@@ -58,17 +59,15 @@ package com.rpgGame.appModule.dungeon.multy
 		private var passRewardIcon:Vector.<IconCDFace>;
 		private var passRewardList:Dictionary;
 		private var allRewardIcon:Vector.<IconCDFace>;
-		//private var currCount:int=3;
 		public function MultyView():void
 		{
-			super(FuBen_DuoRen_Skin,"多人副本",1);
+			_skin = new FuBen_DuoRen_Skin();
+			super(_skin);
+			initialize();
 		}
 		private var key:Boolean=false;//临时加的key
-		override protected function initialize():void
+		protected function initialize():void
 		{
-			if(key)return;
-			key=true;
-			_skin = _uiskin as FuBen_DuoRen_Skin;
 			initScroll();
 			creatDungeonItem();
 			creatGlobalReward();
@@ -90,7 +89,7 @@ package com.rpgGame.appModule.dungeon.multy
 			scroll_Bar.addChild(scrollBox);
 			
 		}
-		override public function onTouchTarget(target:DisplayObject):void
+		override protected function onTouchTarget(target:DisplayObject):void
 		{
 			switch (target) {
 				case _skin.btnEnter:
@@ -122,7 +121,7 @@ package com.rpgGame.appModule.dungeon.multy
 		{
 			
 		}
-		override public function showView():void
+		override public function show(data:Object=null):void
 		{
 			setGray();
 			setPassRewardText();
@@ -137,7 +136,11 @@ package com.rpgGame.appModule.dungeon.multy
 		/**创建列表*/
 		private function creatDungeonItem():void
 		{
-			/*var relist:Array=ZoneMultyCfgData.getMultyIdList();
+			
+			//var panelInfos: Vector.<MultiZonePanelInfo>=DungeonManager.panelInfos;
+			//if(panelInfos==null||panelInfos.length==0)return;
+			
+			var relist:Array=ZoneMultyCfgData.getMultyIdList();
 			if(relist==null)return;
 			skinList=new Vector.<SkinnableContainer>();
 			itemList=new Vector.<FuBen_DuoRen_Item>();
@@ -145,35 +148,13 @@ package com.rpgGame.appModule.dungeon.multy
 			passRewardList=new Dictionary();
 			var skin:SkinnableContainer;
 			var item:FuBen_DuoRen_Item;
+			var zid:int;
 			var i:int;
 			for(i=0;i<relist.length;i++)
 			{
-				skin=getItemSkin(i);
-				if(skin!=null)
-				{
-					item=skin.skin as FuBen_DuoRen_Item
-					skinList.push(skin);
-					itemList.push(item);
-					scrollBox.addChild(skin);
-					cloSelectItem(item);
-					item.btnSelect.addEventListener(FeathersEventType.STATE_CHANGE,buttonTouchHandler);
-				}
-			}*/
-			var panelInfos: Vector.<MultiZonePanelInfo>=DungeonManager.panelInfos;
-			if(panelInfos==null||panelInfos.length==0)return;
-			
-			/*var relist:Array=ZoneMultyCfgData.getMultyIdList();
-			if(relist==null)return;*/
-			skinList=new Vector.<SkinnableContainer>();
-			itemList=new Vector.<FuBen_DuoRen_Item>();
-			passRewardIcon=new Vector.<IconCDFace>();
-			passRewardList=new Dictionary();
-			var skin:SkinnableContainer;
-			var item:FuBen_DuoRen_Item;
-			var i:int;
-			for(i=0;i<panelInfos.length;i++)
-			{
-				skin=getItemSkin(i,panelInfos[i]);
+				zid=relist[i];
+				skin=getItemSkin(i,zid);
+				
 				if(skin!=null)
 				{
 					item=skin.skin as FuBen_DuoRen_Item
@@ -227,9 +208,14 @@ package com.rpgGame.appModule.dungeon.multy
 			if(zid<=0)return;
 			var zoneData:Q_zone=ZoneCfgData.getZoneCfg(zid);
 			var multyData:Q_zone_multy=ZoneMultyCfgData.getZoneMultyByID(zid);
-			var info:MultiZonePanelInfo=DungeonManager.getPanelInfo(zid);
-			if(zoneData==null||multyData==null||info==null)return;
-			//
+			var info:MultiZonePanelInfo;
+			if(zoneData==null||multyData==null)return;
+			info=DungeonManager.getPanelInfo(zid);
+			if(info==null)
+			{
+				info=new MultiZonePanelInfo();
+				info.count=0;
+			}
 			_skin.uiName.styleName="ui/app/fuben/duorenfuben/fuben_name/"+multyData.q_resurl+"/name.png";
 			_skin._info_text.htmlText=zoneData.q_desc;
 			_skin.lbRenshu.htmlText=zoneData.q_min_num+"-"+zoneData.q_max_num;
@@ -240,6 +226,7 @@ package com.rpgGame.appModule.dungeon.multy
 		/**执灰列表*/
 		private function setGray():void
 		{
+			if(itemList==null)return;
 			var name:Array;
 			var zid:int,selectlevel:int,selectid:int;
 			var zoneData:Q_zone,multyData:Q_zone_multy;
@@ -261,8 +248,13 @@ package com.rpgGame.appModule.dungeon.multy
 					if(zid<=0)break;
 					zoneData=ZoneCfgData.getZoneCfg(zid);
 					multyData=ZoneMultyCfgData.getZoneMultyByID(zid);
+					if(zoneData==null||multyData==null)break;
 					info=DungeonManager.getPanelInfo(zid);
-					if(zoneData==null||multyData==null||info==null)break;
+					if(info==null)
+					{
+						info=new MultiZonePanelInfo();
+						info.count=0;
+					}
 					GrayFilter.unGray(passRewardList[zid]);
 					if(MainRoleManager.actorInfo.totalStat.level>=zoneData.q_level)
 					{
@@ -297,8 +289,13 @@ package com.rpgGame.appModule.dungeon.multy
 				zid=ZoneMultyCfgData.getZoneIdByID(i);
 				if(zid<=0)break;
 				multyData=ZoneMultyCfgData.getZoneMultyByID(zid);
+				if(multyData==null)break;
 				info=DungeonManager.getPanelInfo(zid);
-				if(multyData==null||info==null)break;
+				if(info==null)
+				{
+					info=new MultiZonePanelInfo();
+					info.rewardCount=0;
+				}
 				item.lbNum.text=info.rewardCount+"/"+multyData.q_front+"通关奖励：";
 			}
 			
@@ -386,9 +383,9 @@ package com.rpgGame.appModule.dungeon.multy
 			scrollBox.addChild(scrollBack);
 		}
 		/**创建单个元素*/
-		private function getItemSkin(id:int,info:MultiZonePanelInfo):SkinnableContainer
+		private function getItemSkin(id:int,zid:int):SkinnableContainer
 		{
-			var zid:int=info.zoneId;
+			//var zid:int=info.zoneId;
 			var zoneData:Q_zone=ZoneCfgData.getZoneCfg(zid);
 			var multyData:Q_zone_multy=ZoneMultyCfgData.getZoneMultyByID(zid);
 			if(zoneData==null||multyData==null)return null;

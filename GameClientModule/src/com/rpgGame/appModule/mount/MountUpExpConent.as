@@ -4,22 +4,21 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
-	import com.rpgGame.core.manager.tips.TipManager;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.clientConfig.Q_horse;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.type.TipType;
 	
-	import org.mokylin.skin.app.zuoqi.Zuoqi_Skin;
-	
 	import away3d.events.Event;
+	
+	import org.mokylin.skin.app.zuoqi.ZuoqiCont_Skin;
 
 	public class MountUpExpConent
 	{
-		private var _skin:Zuoqi_Skin;
+		private var _skin:ZuoqiCont_Skin;
 		private var _itemIconList:Vector.<IconCDFace>;
-		public function MountUpExpConent(skin:Zuoqi_Skin):void
+		public function MountUpExpConent(skin:ZuoqiCont_Skin):void
 		{
 			_skin = skin;
 			super();

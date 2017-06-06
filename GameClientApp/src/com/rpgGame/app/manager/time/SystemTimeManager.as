@@ -22,6 +22,7 @@ package com.rpgGame.app.manager.time
 		// 服务器时间毫秒
 		private static var _serverTime:Number;
 		private static var _gTimer:GameTimer;
+		private static var _delayTiemByServer:Number;
 		/**
 		 * 心跳信息 
 		 * @param event
@@ -54,6 +55,7 @@ package com.rpgGame.app.manager.time
 			{
 				time = _serverTimeCheck + _clientTimeCheck;
 			}
+			_delayTiemByServer=curtTm;
 			MiscSender.reqHeartAndServerTime(time);
 		}
 		
@@ -108,6 +110,11 @@ package com.rpgGame.app.manager.time
 		public static function get curtTm():Number
 		{
 			return _serverTime + getTimer();
+		}
+		
+		public static function get delayTiemByServer():Number
+		{
+			return _delayTiemByServer;
 		}
 		
 		public static function get sysDateTimeStr():String

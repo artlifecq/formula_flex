@@ -2,7 +2,6 @@ package com.rpgGame.appModule.role
 {
 	import com.game.engine3D.events.SceneEvent;
 	import com.game.engine3D.events.SceneEventAction3D;
-	import com.game.mainCore.core.manager.LayerManager;
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
@@ -11,6 +10,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.ItemSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
+	import com.rpgGame.app.ui.alert.GameAlertExt;
 	import com.rpgGame.app.utils.BreatheTweenUtil;
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.app.view.icon.IconCDFace;
@@ -23,6 +23,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.appModule.shop.ItemSellAlertExtPanelExt;
 	import com.rpgGame.appModule.storage.StoragePanel;
 	import com.rpgGame.core.controller.MouseCursorController;
+	import com.rpgGame.core.events.ChatEvent;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
@@ -46,12 +47,14 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.coreData.type.item.GridBGType;
 	
 	import flash.geom.Point;
+	import flash.ui.Keyboard;
 	import flash.ui.Mouse;
-	import flash.ui.MouseCursor;
 	import flash.utils.clearInterval;
 	import flash.utils.setInterval;
 	
 	import app.message.GoodsType;
+	
+	import away3d.events.Event;
 	
 	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.controls.Scroller;
@@ -64,8 +67,8 @@ package com.rpgGame.appModule.role
 	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
 	
 	import starling.display.DisplayObject;
-	import away3d.events.Event;
-
+	
+	import utils.KeyboardMananger;
 	/**
 	 *背包部分 
 	 * @author dik
@@ -106,8 +109,8 @@ package com.rpgGame.appModule.role
 				[GoodsType.MEDICINE],
 				[GoodsType.MATERIAL_COMBO,GoodsType.MATERIAL_ADVANCE], 
 				[GoodsType.CHAT,GoodsType.GIFT,GoodsType.PROPERTY,GoodsType.BUFF,GoodsType.TRANSFER,GoodsType.RESURGENCE,
-				GoodsType.TASK,GoodsType.MOUNT,GoodsType.TITLE,GoodsType.DUNGOEN,GoodsType.MERIDIANSTONE]
-				];
+					GoodsType.TASK,GoodsType.MOUNT,GoodsType.TITLE,GoodsType.DUNGOEN,GoodsType.MERIDIANSTONE]
+			];
 			
 			toStorageGridInfo=new GridInfo(ItemContainerID.Storage,-1);
 		}
@@ -125,7 +128,7 @@ package com.rpgGame.appModule.role
 			GuiThemeStyle.setScrollerStyle(_skin.lst_pack, org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack);
 			_skin.lst_pack.clipContent = true;
 			_skin.lst_pack.scrollBarDisplayMode = ScrollBarDisplayMode.ALWAYS_VISIBLE;
-//			_skin.lst_pack.verticalScrollBarPosition = Scroller.VERTICAL_SCROLL_BAR_POSITION_RIGHT;
+			//			_skin.lst_pack.verticalScrollBarPosition = Scroller.VERTICAL_SCROLL_BAR_POSITION_RIGHT;
 			_skin.lst_pack.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			_skin.lst_pack.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
 			
@@ -281,9 +284,9 @@ package com.rpgGame.appModule.role
 			if(gameAlert.clickType == AlertClickTypeEnum.TYPE_SURE)
 			{
 				BackPackManager.instance.isAlertChangeBind = gameAlert.isCheckSelected;
-		/*		var item : ClientItemInfo = srcGrid.data as ClientItemInfo;
+				/*		var item : ClientItemInfo = srcGrid.data as ClientItemInfo;
 				if(item)
-					ItemSender.reqMoveGoods(srcGrid.containerID, dstGrid.containerID, item.index, dstGrid.index);*/
+				ItemSender.reqMoveGoods(srcGrid.containerID, dstGrid.containerID, item.index, dstGrid.index);*/
 			}
 		}
 		
@@ -372,6 +375,12 @@ package com.rpgGame.appModule.role
 				
 				return;
 			}
+			
+			if(KeyboardMananger.isKeyDown(Keyboard.CONTROL))
+			{
+				EventManager.dispatchEvent(ChatEvent.SHOW_GOODS, grid.gridInfo.data);
+				return;
+			}
 			Menu.GetInstance().hide();
 			showMenu(grid);
 		}
@@ -411,7 +420,7 @@ package com.rpgGame.appModule.role
 			if(item.qItem.q_drop==0){//不可丢弃
 				outMenus.push(LangMenu.DISCARDED);
 			}
-		
+			
 			var num:int=menus.length;
 			for(var i:int=0;i<num;i++){
 				if(outMenus.indexOf(menus[i])==-1){//不是排除列表里面的
@@ -444,7 +453,10 @@ package com.rpgGame.appModule.role
 			if(info.qItem.q_drop_confirm==1){//需要二次确认
 				var alertSet:AlertSetInfo=new AlertSetInfo(LangQ_BackPack.ITEM_dropItemToScene_3);
 				GameAlert.showAlert(alertSet,okDiscard,info);
-
+				
+//				var alertSet:AlertSetInfo=new AlertSetInfo(LangQ_BackPack.ITEM_dropItemToScene_3);
+//				GameAlert.showAlert(alertSet,okDiscard,info);
+				GameAlertExt.show("这件物品看起来还不错哦！你确定要丢弃吗？",okDiscard,[info]);
 			}else{
 				if(info.qItem.q_drop==0){//不可丢弃
 					NoticeManager.showNotifyById(12010);
@@ -454,11 +466,11 @@ package com.rpgGame.appModule.role
 			}
 		}
 		
-		private function okDiscard(gameAlert:GameAlert,info:ClientItemInfo):void
+		private function okDiscard(info:ClientItemInfo):void
 		{
-			if(gameAlert.clickType==AlertClickTypeEnum.TYPE_SURE){
+			//if(gameAlert.clickType==AlertClickTypeEnum.TYPE_SURE){
 				ItemSender.discardItem(info);
-			}
+			//}
 		}
 		
 		private function preBatch(info:ClientItemInfo):void
@@ -658,7 +670,7 @@ package com.rpgGame.appModule.role
 				enterOrLeaveSellMode(false);
 			}
 		}
-
+		
 		public function get shopPanel():BackpackShopExt
 		{
 			if (!_shopPanel) 
@@ -667,6 +679,6 @@ package com.rpgGame.appModule.role
 			}
 			return _shopPanel;
 		}
-
+		
 	}
 }

@@ -211,12 +211,14 @@ package com.rpgGame.app.graphics
 			{
 				var monster:Q_monster=MonsterDataManager.getData((_role.data as MonsterData).modelID);
 				var isNormal:Boolean=monster.q_monster_type==MonsterType.NORMAL;
+				var isNPC:Boolean=monster.q_monster_type==MonsterType.NPC;
 				//普通怪在战斗状态显示血条
 				//我的召唤怪要显示
 				var isMyMonster:Boolean=PKMamager.isMyMonster(_role);
+				var isNpc:Boolean=monster.q_monster_type==MonsterType.NPC;
 				showAndHideElement(_bloodBar, isMyMonster);
 				
-				showAndHideElement(_nameBar, isMyMonster||(isNormal&&_isSelected && nameVisible));
+				showAndHideElement(_nameBar, isMyMonster||(isNormal&&_isSelected && nameVisible)||isNPC);
 			}
 			else if (_role.type == SceneCharType.COLLECT) //采集物显示名称
 			{

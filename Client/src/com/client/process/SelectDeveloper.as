@@ -1,8 +1,18 @@
 package com.client.process
 {
-	import com.client.ClientGlobal;
+	import com.client.ClientConfig;
+	import com.client.EngineSetting;
 	import com.client.view.SelectDeveloperView;
 	import com.game.engine3D.process.BaseProcess;
+	import com.gameClient.log.GameLog;
+	import com.gameClient.utils.VersionUtils;
+	import com.rpgGame.coreData.cfg.ClientConfig;
+	
+	import flash.events.Event;
+	import flash.events.IOErrorEvent;
+	import flash.net.URLRequest;
+	import flash.net.URLStream;
+	import flash.utils.ByteArray;
 
 	/**
 	 *
@@ -14,6 +24,7 @@ package com.client.process
 	public class SelectDeveloper extends BaseProcess
 	{
 		private var _devView : SelectDeveloperView;
+		private var _version:String;
 
 		public function SelectDeveloper()
 		{
@@ -29,17 +40,66 @@ package com.client.process
 		{
 			super.startProcess();
 			_devView = new SelectDeveloperView(onSelectDev);
-			_devView.x = (ClientGlobal.stage.stageWidth - _devView.width) * 0.5;
-			_devView.y = (ClientGlobal.stage.stageHeight - _devView.height) * 0.5;
-			ClientGlobal.stage.addChild(_devView);
+			_devView.x = (ClientConfig.stage.stageWidth - _devView.width) * 0.5;
+			_devView.y = (ClientConfig.stage.stageHeight - _devView.height) * 0.5;
+			ClientConfig.stage.addChild(_devView);
 		}
 
-		private function onSelectDev(ip : String, port : String) : void
+		private function onSelectDev(ip : String, port : String, version:String="") : void
 		{
-			ClientGlobal.loginIP = ip;
-			ClientGlobal.loginPort = uint(port);
+			ClientConfig.loginIP = ip;
+			ClientConfig.loginPort = uint(port);
 
+			//atf测试下
+			ClientConfig.useBpgFormat = false;
+			ClientConfig.useAtfFormat = true;
+//			EngineSetting.initAway3D();
+			
 			completeProcess();
+			
+//			if (!ClientConfig.isRelease && version)
+//			{
+//				_version = version;
+//				var versionUrl:String = "version" + _version + "/version.swf";
+//				var urlStream:URLStream = new URLStream();
+//				urlStream.addEventListener("complete", onVersionCmp);
+//				urlStream.addEventListener("ioError", onVersionIoError);
+//				versionUrl = ClientConfig.baseDir + versionUrl;
+//				urlStream.load(new URLRequest(versionUrl));
+//			}
+//			else
+//			{
+//				completeProcess();
+//			}
+		}
+		
+		private function onVersionCmp(event:Event):void
+		{
+			var urlStream:URLStream = (event.currentTarget as URLStream);
+			urlStream.removeEventListener("complete", onVersionCmp);
+			urlStream.removeEventListener("ioError", onVersionIoError);
+			var _local2:ByteArray = new ByteArray();
+			urlStream.readBytes(_local2, 0, urlStream.bytesAvailable);
+			_local2.uncompress();
+			_local2.endian = "littleEndian";
+			var _local4:Object = readVersionsFromBuf(_local2);
+			ClientConfig.version = _version;
+			ClientConfig.useBpgFormat = false;
+			ClientConfig.useAtfFormat = true;
+			EngineSetting.initAway3D();
+			VersionUtils.setup(_local4, ClientConfig.baseDir, _version);
+			completeProcess();
+		}
+		
+		private function readVersionsFromBuf(buf:ByteArray):Object
+		{
+			var _local3:String = buf.readMultiByte(buf.bytesAvailable, "utf-8");
+			return JSON.parse(_local3);
+		}
+		
+		private function onVersionIoError(event:IOErrorEvent):void
+		{
+			GameLog.addShow("版本数据加载错误...");
 		}
 
 		override public function dispose() : void

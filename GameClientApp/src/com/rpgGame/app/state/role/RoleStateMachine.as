@@ -23,6 +23,7 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.state.role.action.ShowState;
 	import com.rpgGame.app.state.role.action.TrailState;
 	import com.rpgGame.app.state.role.action.WalkState;
+	import com.rpgGame.app.state.role.action.ui.AttackUIState;
 	import com.rpgGame.app.state.role.control.AttackHardState;
 	import com.rpgGame.app.state.role.control.AvatarState;
 	import com.rpgGame.app.state.role.control.BeatMoveState;
@@ -105,6 +106,7 @@ package com.rpgGame.app.state.role
 		stateMapping[RoleStateType.ACTION_FALL] = FallState;
 		stateMapping[RoleStateType.ACTION_GETUP] = GetupState;
 		stateMapping[RoleStateType.ACTION_ATTACK] = AttackState;
+		stateMapping[RoleStateType.ACTION_ATTACK_UI] = AttackUIState;
 		stateMapping[RoleStateType.ACTION_BLINK] = BlinkState;
 		stateMapping[RoleStateType.ACTION_BEAT_BACK] = BeatBackState;
 		stateMapping[RoleStateType.ACTION_PREWAR] = PrewarState;

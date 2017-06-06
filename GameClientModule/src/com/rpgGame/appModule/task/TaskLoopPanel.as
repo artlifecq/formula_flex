@@ -37,11 +37,11 @@ package com.rpgGame.appModule.task
 		private var TwoData:int;
 		private var ThereData:int;
 		private var selectId:int=1;
+		private var initKey:Boolean=false;
 		public function TaskLoopPanel()
 		{
 			_skin=new Huanshi_Renwu();
 			super(_skin);
-			init()
 		}
 		
 		private function init():void
@@ -149,6 +149,11 @@ package com.rpgGame.appModule.task
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void 
 		{
 			super.show(data, openTable, parentContiner);
+			if(!initKey)
+			{
+				initKey=true;
+				init();
+			}
 			setView();
 			timeInit()	
 			

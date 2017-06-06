@@ -1,6 +1,7 @@
 package com.rpgGame.app.manager
 {
 	import com.game.engine3D.utils.MathUtil;
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.graphics.StallHeadFace;
 	import com.rpgGame.app.manager.ctrl.ControlAutoPick;
 	import com.rpgGame.app.manager.fight.FightManager;
@@ -234,8 +235,8 @@ package com.rpgGame.app.manager
 			var actor : SceneRole = MainRoleManager.actor;
 			var dist : int = MathUtil.getDistanceNoSqrt(actor.x, actor.z, role.x, role.z);
 			var dropGoodsData : SceneDropGoodsData = role.data as SceneDropGoodsData;
-			var farDistance : int = dropGoodsData.farDistance;
-			if (dist < farDistance * farDistance)
+			//var farDistance : int = dropGoodsData.farDistance;
+		//	if (dist < farDistance * farDistance)
 			{
 				/*if (dropGoodsData.isMount)
 					MountManager.collectMountItem(dropGoodsData.id, dropGoodsData.name);

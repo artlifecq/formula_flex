@@ -1,6 +1,5 @@
 package com.client.process
 {
-	import com.client.ClientGlobal;
 	import com.client.events.VerEvent;
 	import com.client.loader.ListStreamLoader;
 	import com.client.manager.BGMManager;
@@ -8,6 +7,7 @@ package com.client.process
 	import com.game.engine3D.process.BaseProcess;
 	import com.game.engine3D.process.ProcessStateMachine;
 	import com.gameClient.log.GameLog;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	
 	import flash.events.Event;
 	import flash.events.ProgressEvent;
@@ -48,19 +48,19 @@ package com.client.process
 		{
 			var urlList : Vector.<String> = new Vector.<String>;
 			var url : String = "entry/GameClientDll.swf";
-			if (ClientGlobal.isRelease && ClientGlobal.decodeFun != null)
+			if (ClientConfig.isRelease && ClientConfig.decodeFun != null)
 				url = url.replace(".swf", ".ml");
-			if (ClientGlobal.useVersion)
-				url = url.replace("entry", "version" + ClientGlobal.version);
+			if (ClientConfig.useVersion)
+				url = url.replace("entry", "version" + ClientConfig.version);
 
 			urlList.push(url);
-			_listLoader = new ListStreamLoader(ClientGlobal.stage);
+			_listLoader = new ListStreamLoader(ClientConfig.stage);
 			_listLoader.addEventListener(Event.OPEN, onDLLOpen);
 			_listLoader.addEventListener(ProgressEvent.PROGRESS, onLoadingProgress);
 			_listLoader.addEventListener(Event.COMPLETE, onDLLComplete);
-			_listLoader.doLoad(ClientGlobal.baseDir, urlList, ClientGlobal.useVersion, ClientGlobal.decodeFun != null);
+			_listLoader.doLoad(ClientConfig.baseDir, urlList, ClientConfig.useVersion, ClientConfig.decodeFun != null);
 			//
-			GameLog.addShow("加载代码库 : " + ClientGlobal.baseDir);
+			GameLog.addShow("加载代码库 : " + ClientConfig.baseDir);
 		}
 
 		private function onDLLOpen(e : TextEvent) : void

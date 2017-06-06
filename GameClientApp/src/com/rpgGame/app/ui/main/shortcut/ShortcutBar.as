@@ -107,8 +107,8 @@ package com.rpgGame.app.ui.main.shortcut {
 			
 			
 			refeashState();
-			if (!ClientConfig.isBanShu)
-			{				
+//			if (!ClientConfig.isBanShu)
+//			{				
 //				TipTargetManager.show(_skin.btnBackpack, TargetTipsMaker.makeSimpleTextTips("背包<br/>快捷键：B"));
 //				TipTargetManager.show(_skin.btnRole, TargetTipsMaker.makeSimpleTextTips("人物<br/>快捷键：C"));
 //				TipTargetManager.show(_skin.btnHaoYou, TargetTipsMaker.makeSimpleTextTips("好友<br/>快捷键：F"));
@@ -121,7 +121,7 @@ package com.rpgGame.app.ui.main.shortcut {
 //				TipTargetManager.show(_skin.btnChengJiu, TargetTipsMaker.makeSimpleTextTips("社会<br/>快捷键：J"));
 //				TipTargetManager.show(_skin.btnSheHui, TargetTipsMaker.makeSimpleTextTips("装备<br/>快捷键：Q"));
 //				TipTargetManager.show(_skin.btnShangDian, TargetTipsMaker.makeSimpleTextTips("商店<br/>快捷键：O"));
-			}
+//			}
 			
 			EventManager.addEvent(SocietyEvent.SOCIETY_APPROVE_CHANGE, addSheHuiTab);
 			

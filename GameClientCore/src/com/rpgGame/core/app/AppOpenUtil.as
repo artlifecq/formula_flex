@@ -26,7 +26,7 @@ package com.rpgGame.core.app
 			{
 				case AppConstant.SPELL_PANEL://技能面板
 				{
-					isOpen = !ClientConfig.isBanShu;//版属服
+					isOpen =true //!ClientConfig.isBanShu;//版属服
 				}
 			}
 			return isOpen;

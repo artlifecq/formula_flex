@@ -3,11 +3,11 @@ package com.rpgGame.app.manager.role
 	import com.game.engine3D.config.GlobalConfig;
 	import com.rpgGame.app.manager.AreaMapManager;
 	import com.rpgGame.app.manager.CharAttributeManager;
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.GameCameraManager;
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.ShortcutsManger;
 	import com.rpgGame.app.manager.TrusteeshipManager;
-	import com.rpgGame.app.manager.ctrl.ControlAutoPick;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.task.GatherAutoManager;
 	import com.rpgGame.app.manager.task.MiXinManager;
@@ -25,6 +25,8 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.netData.player.bean.MyPlayerInfo;
 	
 	import flash.geom.Vector3D;
+	
+	import away3d.enum.LoadPriorityType;
 	
 	import org.client.mainCore.manager.EventManager;
 
@@ -52,7 +54,7 @@ package com.rpgGame.app.manager.role
 		 */
 		public static function get actorInfo() : HeroData
 		{
-			_actroInfo = _actroInfo || new HeroData();
+			_actroInfo = _actroInfo || new HeroData(LoadPriorityType.LEVEL_CUSTOM_0);
 			return _actroInfo;
 		}
 		
@@ -83,7 +85,6 @@ package com.rpgGame.app.manager.role
 			var heroName : String = heroInfo.name;
 			//角色信息
 			HeroData.setUserSingleInfo(actorInfo, heroName);
-		
 			ShortcutsManger.getInstance().replaceToTempSpells(HeroData.spellArrs);
 		}
 
@@ -92,6 +93,7 @@ package com.rpgGame.app.manager.role
 			//角色信息
 			HeroData.setUserLoginInfo(actorInfo, heroInfo);
 			PKMamager.setPkMode(heroInfo.pkType);
+//			FunctionOpenManager.openFunctionByLevel(actorInfo.totalStat.level,false);
 //			if(heroProto.goodsContainerModuleObj)
 //			{
 //				//背包信息
@@ -159,6 +161,8 @@ package com.rpgGame.app.manager.role
 				{
 //					_actor.headFace.addTaskIco(AssetUrl.JIMAOXIN);
 				}
+				
+				FunctionOpenManager.openFunctionByLevel(data.totalStat.level,false);
                 
                 EventManager.dispatchEvent(RoleEvent.UPDATE_NEEDLE, 
                     _actor, 

@@ -84,7 +84,7 @@ package org.mokylin.skin.app.shejiao.zudui
 		private function __Duiwu_TanKuang_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/shejiao/zudui/yaoqing_bg.png";
+			temp.styleName = "ui/big_bg/shejiao/zudui/yaoqing_bg.png";
 			temp.x = 139;
 			temp.y = 0;
 			return temp;

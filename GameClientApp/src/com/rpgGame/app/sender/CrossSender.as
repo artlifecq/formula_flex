@@ -1,6 +1,7 @@
 package com.rpgGame.app.sender
 {
 	import com.rpgGame.app.manager.scene.FirstEnterSceneManager;
+	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.netData.cross.message.ReqEnterCrossClientToGameMessage;
 	import com.rpgGame.netData.cross.message.ReqLoginFightServerClientToFightMessage;
 	import com.rpgGame.netData.cross.message.ReqQuitClientToFightMessage;
@@ -54,7 +55,7 @@ package com.rpgGame.app.sender
 			msg.playerId=crossMsgInfo.playerId;
 			msg.userId=crossMsgInfo.userId;
 			sendMsg(msg);
-			FirstEnterSceneManager.isEnterScene=false;
+			SceneSwitchManager.isToCrossMap=true;
 		}
 		
 		/**
@@ -65,7 +66,7 @@ package com.rpgGame.app.sender
 		{
 			var msg:ReqQuitClientToFightMessage=new ReqQuitClientToFightMessage();
 			sendMsg(msg);
-			FirstEnterSceneManager.isEnterScene=true;
+			SceneSwitchManager.isToCrossMap=false;
 		}
 	}
 }

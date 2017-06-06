@@ -16,6 +16,7 @@
             ui = new ActivityButtonSkin();
             super(ui);
             ui.txtTitle.isHtmlText = true;
+			ui.txtTitle.text = "";
         }
 
         override public function set styleClass(cl:Class):void

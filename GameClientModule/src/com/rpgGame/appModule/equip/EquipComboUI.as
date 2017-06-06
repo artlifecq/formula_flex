@@ -8,9 +8,9 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.ItemSender;
 	import com.rpgGame.app.ui.common.CenterEftPop;
+	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
-	import com.rpgGame.appModule.common.ViewUI;
 	import com.rpgGame.appModule.equip.combo.DetailNodeInfo;
 	import com.rpgGame.appModule.equip.combo.EquipComboTreeItemRender;
 	import com.rpgGame.appModule.equip.combo.MainNodeInfo;
@@ -37,6 +37,8 @@ package com.rpgGame.appModule.equip
 	
 	import app.message.EquipOperateType;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.controls.UIAsset;
 	import feathers.data.ListCollection;
@@ -48,8 +50,6 @@ package com.rpgGame.appModule.equip
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.zhuangbei.hecheng.HeCheng_Skin;
 	import org.mokylin.skin.component.list.ListSkin1;
-	
-	import away3d.events.Event;
 	
 	/**
 	 *装备合成

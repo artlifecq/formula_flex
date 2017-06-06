@@ -138,6 +138,11 @@ package com.rpgGame.app.graphics
 		public function reSet($parameters : Array) : void
 		{
 			_isDisposed = false;
+			if ($parameters!=null) 
+			{
+				_role=$parameters[0];
+				_isMonster=$parameters[1];
+			}
 		}
 		
 		
@@ -281,7 +286,7 @@ package com.rpgGame.app.graphics
 			return _isDestroyed;
 		}
 		
-		public function get isDisposed():Boolean
+		override public function get isDisposed():Boolean
 		{
 			return _isDisposed;
 		}

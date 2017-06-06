@@ -69,7 +69,7 @@ package com.rpgGame.app.ui.main.chat.laba
 		public function setData(info:ResChatMessage):void //info:ChatInfo
 		{
 			var userName:String = info.name;//info.realShowName;
-			var showStr:String = ChatUtil.getChatMessageByChannel(info.type,info.name,info.chatText);//ChatUtil.getChatMessageByChannel(info.channel, userName + message);
+			var showStr:String = ChatUtil.getHTMLChatMessage(info);//ChatUtil.getChatMessageByChannel(info.type,info.name,info.chatText);//ChatUtil.getChatMessageByChannel(info.channel, userName + message);
 			updateShow(showStr);
 			var rec:Rectangle = _richText.textfield.getCharBoundaries(0);
 			var $_txtLineMetrics:TextLineMetrics = _richText.textfield.getLineMetrics(_richText.textfield.getLineIndexOfChar(0));

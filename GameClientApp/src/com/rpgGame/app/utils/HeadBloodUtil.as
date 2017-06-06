@@ -94,33 +94,38 @@ package com.rpgGame.app.utils
 
 		public static function getRoleBloodBarState(_role : SceneRole):int
 		{
-			if (_role.isMainChar) 
+			if(_role)
 			{
-				return HeadBloodStateType.MAIN_CHAR;
-			}
-			else if (SceneCharType.MONSTER==_role.type ) 
-			{
-				if (FightManager.getFightRoleState(_role)==FightManager.FIGHT_ROLE_STATE_CAN_NOT_FIGHT) 
+				if (_role.isMainChar) 
 				{
-					return HeadBloodStateType.TEAM;
+					return HeadBloodStateType.MAIN_CHAR;
 				}
-				return HeadBloodStateType.ENEMY;
-			}
-			else if (SceneCharType.NPC==_role.type) 
-			{
-				return HeadBloodStateType.NPC;
-			}
-			else if (SceneCharType.PLAYER==_role.type) 
-			{
-				if (FightManager.getFightRoleState(_role)!=FightManager.FIGHT_ROLE_STATE_CAN_NOT_FIGHT) 
+				else if (SceneCharType.MONSTER==_role.type ) 
 				{
+					if (FightManager.getFightRoleState(_role)==FightManager.FIGHT_ROLE_STATE_CAN_NOT_FIGHT) 
+					{
+						return HeadBloodStateType.TEAM;
+					}
 					return HeadBloodStateType.ENEMY;
 				}
-				else
+				else if (SceneCharType.NPC==_role.type) 
 				{
-					return HeadBloodStateType.TEAM;
+					return HeadBloodStateType.NPC;
 				}
+				else if (SceneCharType.PLAYER==_role.type) 
+				{
+					if (FightManager.getFightRoleState(_role)!=FightManager.FIGHT_ROLE_STATE_CAN_NOT_FIGHT) 
+					{
+						return HeadBloodStateType.ENEMY;
+					}
+					else
+					{
+						return HeadBloodStateType.TEAM;
+					}
+				}
+				
 			}
+			
 			return HeadBloodStateType.TEAM;
 		}
 

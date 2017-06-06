@@ -61,6 +61,8 @@ package com.rpgGame.app.manager {
 			if(_curCount ==0)
 			{
 				_beginUseTime = SystemTimeManager.curtTm - USE_TIMES;
+				//
+				LostSkillManager.instance().checkRoll3Complete();
 			}
 			EventManager.dispatchEvent(RollManager.ROLL_USE);
 			return true;

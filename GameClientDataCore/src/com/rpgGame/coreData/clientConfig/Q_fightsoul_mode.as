@@ -16,8 +16,16 @@ package com.rpgGame.coreData.clientConfig
 		public var q_id:int;
 		 /**  模型 */
 		public var q_mode:String;
-		 /**  特效 */
+		 /**  特效(攻击挂点—旋转) */
 		public var q_effect:String;
+		 /**  特效(原点骨骼—不旋转) */
+		public var q_effect1:String;
+		 /**  界面缩放比例(百分比) */
+		public var q_panleScale:int;
+		 /**  场景Y */
+		public var q_panleY:int;
+		 /**  场景缩放比例(百分比) */
+		public var q_sceneScale:int;
 
 	}
 }
