@@ -30,6 +30,8 @@ package com.rpgGame.coreData.type
 
 		/**身体特效*/
 		public static const BODY_EFFECT : String = "body_effect";
+		/**身体特效*/
+		public static const BODY_EFFECT2 : String = "body_effect2";
 
 		/**坐骑*/
 		public static const MOUNT : String = "mount";

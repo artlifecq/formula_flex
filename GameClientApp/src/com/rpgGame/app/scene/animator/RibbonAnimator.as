@@ -12,6 +12,7 @@ package com.rpgGame.app.scene.animator
 	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
+	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import flash.display.BlendMode;
 	import flash.display3D.Context3DCompareMode;
@@ -144,9 +145,12 @@ package com.rpgGame.app.scene.animator
 				var fromObj : ObjectContainer3D;
 				if(_isAttachUnit)
 				{
-					var fightsoul:RenderUnit3D = from.avatar.getRenderUnitByID(RenderUnitType.FIGHTSOUL, RenderUnitID.FIGHTSOUL);
-					if(fightsoul!=null)
-						fromObj = fightsoul.getChildByName(BoneNameEnum.c_0_body_02);
+					var fightSoulRole:SceneRole = (SceneManager.getScene().getSceneObjByID(from.id, SceneCharType.FIGHT_SOUL) as SceneRole);
+					if(fightSoulRole!=null)
+					{
+						var fightsoul:RenderUnit3D = fightSoulRole.avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY);
+						fromObj = fightsoul.getChildByName(BoneNameEnum.b_l_wq_01);
+					}	
 				}
 				else
 				{

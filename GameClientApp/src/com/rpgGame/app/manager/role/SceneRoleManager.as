@@ -618,7 +618,7 @@ package com.rpgGame.app.manager.role
 			var fightSoulLevel:int = (owner.data as HeroData).fightSoulLevel;
 			var model:Q_fightsoul_mode = FightsoulModeData.getModeInfoById(fightSoulLevel);
 			roleData.avatarInfo.setBodyResID("pc/fightsoul/"+model.q_mode,null);
-			roleData.avatarInfo.bodyEffectID = model.q_effect;
+			roleData.avatarInfo.bodyEffectID2 = model.q_effect;
 			fightSoulRole.ownerIsMainChar = (owner.id == MainRoleManager.actorID);
 			fightSoulRole.data = roleData;
 			fightSoulRole.mouseEnable = false;

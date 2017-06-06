@@ -25,6 +25,9 @@ package com.rpgGame.coreData
 		private var _bodyEffectID : String = null;
 		private var _rpd_body_effect : RenderParamData3D;
 		
+		private var _bodyEffectID2 : String = null;
+		private var _rpd_body_effect2 : RenderParamData3D;
+		
 		private var _hairResID : String = null;
 		private var _rpd_hair : RenderParamData3D;
 		
@@ -169,6 +172,25 @@ package com.rpgGame.coreData
 			{
 				_rpd_body_effect = null;
 				_bodyEffectID = null;
+			}
+		}
+		
+		public function set bodyEffectID2(value : String) : void
+		{
+			if (_bodyEffectID2 == value)
+				return;
+			_bodyEffectID2 = value;
+			if (_bodyEffectID2)
+			{
+				_rpd_body_effect2 = new RenderParamData3D(RenderUnitID.BODY_EFFECT2, RenderUnitType.BODY_EFFECT2, ClientConfig.getEffect(_bodyEffectID2));
+				_rpd_body_effect2.mouseEnable = false;
+				_rpd_body_effect2.clearSameType = false;
+				_rpd_body_effect2.priority = _priority;
+			}
+			else
+			{
+				_rpd_body_effect2 = null;
+				_bodyEffectID2 = null;
 			}
 		}
 		
@@ -450,6 +472,12 @@ package com.rpgGame.coreData
 		public function get rpd_body_effect() : RenderParamData3D
 		{
 			return _rpd_body_effect;
+		}
+		
+		/**身体特效2*/
+		public function get rpd_body_effect2() : RenderParamData3D
+		{
+			return _rpd_body_effect2;
 		}
 
 		/**武器*/
