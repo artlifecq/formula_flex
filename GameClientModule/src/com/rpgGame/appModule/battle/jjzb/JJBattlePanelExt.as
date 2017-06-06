@@ -293,6 +293,10 @@ package com.rpgGame.appModule.battle.jjzb
 			{
 				showHideBattleLog();
 			}
+			if (_rewardPanel) 
+			{
+				MCUtil.removeSelf(_rewardPanel);
+			}
 		}
 		
 	

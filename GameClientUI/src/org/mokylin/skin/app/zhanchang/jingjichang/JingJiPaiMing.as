@@ -35,7 +35,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			
 			this.currentState = "normal";
 			this.height = 27;
-			this.width = 276;
+			this.width = 330;
 			this.elementsContent = [imgBg_i(),uiDown_i(),uiUp_i(),labTitle_i(),labTitle0_i()];
 			
 			states = {
@@ -54,7 +54,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.name = "imgBg";
 			temp.height = 27;
 			temp.styleName = "ui/app/zhanchang/jingjichang/kuang.png";
-			temp.width = 276;
+			temp.width = 330;
 			return temp;
 		}
 
@@ -69,7 +69,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.text = "您成功击败羽林校尉，排名升至1460";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 260;
+			temp.width = 302;
 			temp.x = 5;
 			temp.y = 19;
 			return temp;
@@ -83,7 +83,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.text = "您成功击败羽林校尉，排名升至1460";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 247;
+			temp.width = 302;
 			temp.x = 5;
 			temp.y = 3;
 			return temp;
@@ -95,7 +95,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			uiDown = temp;
 			temp.name = "uiDown";
 			temp.styleName = "ui/app/zhanchang/jingjichang/xia.png";
-			temp.x = 258;
+			temp.x = 310;
 			temp.y = 9;
 			return temp;
 		}
@@ -106,7 +106,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			uiUp = temp;
 			temp.name = "uiUp";
 			temp.styleName = "ui/app/zhanchang/jingjichang/shang.png";
-			temp.x = 258;
+			temp.x = 310;
 			temp.y = 9;
 			return temp;
 		}

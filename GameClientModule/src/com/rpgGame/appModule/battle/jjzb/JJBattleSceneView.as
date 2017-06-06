@@ -55,6 +55,10 @@ package com.rpgGame.appModule.battle.jjzb
 		private function onFightOver():void
 		{
 			_skin.btnOver.visible=false;
+			if (AppManager.isAppInScene(AppConstant.BATTLE_RESULT_PANEL)) 
+			{
+				return;
+			}
 			AppManager.showAppNoHide(AppConstant.BATTLE_RESULT_PANEL,[_data.victoryInfo.playerId.EqualTo(MainRoleManager.actorInfo.serverID),_data.rank,_data.awardItemInfos,this]);
 		}
 		private function onOver(eve:Event):void
@@ -150,8 +154,8 @@ package com.rpgGame.appModule.battle.jjzb
 			if (_leftHeadIcon==null) 
 			{
 				_leftHeadIcon=new UIAsset();
-				_leftHeadIcon.x=21;
-				_leftHeadIcon.y=-4;
+				_leftHeadIcon.x=19;
+				_leftHeadIcon.y=-17;
 				skin.container.addChild(_leftHeadIcon);
 			}
 			switch(brief.playerAppearanceInfo.job){
@@ -176,8 +180,8 @@ package com.rpgGame.appModule.battle.jjzb
 			if (_rightHeadIcon==null) 
 			{
 				_rightHeadIcon=new UIAsset();
-				_rightHeadIcon.x=290;
-				_rightHeadIcon.y=-4;
+				_rightHeadIcon.x=324;
+				_rightHeadIcon.y=-17;
 				
 				skin.container.addChild(_rightHeadIcon);
 			}
