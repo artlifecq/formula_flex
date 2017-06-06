@@ -13,6 +13,7 @@ package com.rpgGame.app.ui.main.shortcut
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.LostSkillData;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
+	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.lang.LangUI_2;
 	import com.rpgGame.netData.lostSkill.bean.SkillStateInfo;
 	
@@ -92,7 +93,8 @@ package com.rpgGame.app.ui.main.shortcut
 				LostSkillManager.instance().changeState(state);
 			else{
 				NoticeManager.showNotifyById(7012);
-				AppManager.showApp(AppConstant.SKILL_PANL,null,"lostskill");
+//				AppManager.showApp(AppConstant.SKILL_PANL,null,"lostskill");
+				FunctionOpenManager.openAppPaneById(EmFunctionID.EM_JUEXUE);
 			}
 			playEnd();
 		}

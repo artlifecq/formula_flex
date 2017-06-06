@@ -145,6 +145,14 @@
 			openModeByInfo(modeInfo,info.q_id.toString(),data);
 		}
 		
+		public static function openAppPaneById(id:String,data:Object = null):void
+		{
+			var info:Q_newfunc = NewFuncCfgData.getdataById(id);
+			if(info==null)
+				return ;
+			openFunctionId(info,data);
+		}
+		
 		/**
 		 * 打开面板
 		 * @param info
