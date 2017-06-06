@@ -513,6 +513,7 @@ package com.rpgGame.app.graphics
 				}
 			}
 			
+			
 			if (_isSelected)
 			{
 				EventManager.dispatchEvent(UPDATE_HEAD_FIGHT_INFO, _role, _bloodPercent);

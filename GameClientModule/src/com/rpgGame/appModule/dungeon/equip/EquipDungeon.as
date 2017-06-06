@@ -34,11 +34,11 @@ package com.rpgGame.appModule.dungeon.equip
 		{
 			_skin = new FuBen_ZhuangBei_Skin();
 			super(_skin);
-			initialize();
 		}
 		
-		protected function initialize():void
+		override public function show(data:Object=null):void
 		{
+			super.show(data);
 			_skin.list.itemRendererType =EquipCell;
 			_skin.list.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			_skin.list.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
@@ -50,8 +50,8 @@ package com.rpgGame.appModule.dungeon.equip
 			_skin.list.dataProvider = new ListCollection(list);
 			_curentIndex = 0;
 			refeashList(0);
-			var data:Q_daily_zone = list[0] as Q_daily_zone;
-			_dailyZoneInfo = DailyZoneDataManager.instance().getInfoById(data.q_id);
+			var q_data:Q_daily_zone = list[0] as Q_daily_zone;
+			_dailyZoneInfo = DailyZoneDataManager.instance().getInfoById(q_data.q_id);
 			
 			
 			var qglob:Q_global = GlobalSheetData.getSettingInfo(717);
