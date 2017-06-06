@@ -1,6 +1,5 @@
 package com.client.process
 {
-	import com.client.ClientConfig;
 	import com.client.EngineSetting;
 	import com.client.view.SelectDeveloperView;
 	import com.game.engine3D.process.BaseProcess;
@@ -10,7 +9,6 @@ package com.client.process
 	
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
-	import flash.net.URLRequest;
 	import flash.net.URLStream;
 	import flash.utils.ByteArray;
 
@@ -53,7 +51,7 @@ package com.client.process
 			//atf测试下
 			ClientConfig.useBpgFormat = false;
 			ClientConfig.useAtfFormat = true;
-//			EngineSetting.initAway3D();
+			EngineSetting.initAway3D();
 			
 			completeProcess();
 			
