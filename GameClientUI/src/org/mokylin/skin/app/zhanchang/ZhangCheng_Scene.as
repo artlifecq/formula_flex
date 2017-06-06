@@ -132,7 +132,7 @@ package org.mokylin.skin.app.zhanchang
 			temp.name = "uiBuron1";
 			temp.height = 10;
 			temp.width = 10;
-			temp.x = 59;
+			temp.x = 120;
 			temp.y = 376;
 			return temp;
 		}
@@ -144,7 +144,7 @@ package org.mokylin.skin.app.zhanchang
 			temp.name = "uiBuron2";
 			temp.height = 10;
 			temp.width = 10;
-			temp.x = 839;
+			temp.x = 800;
 			temp.y = 376;
 			return temp;
 		}
