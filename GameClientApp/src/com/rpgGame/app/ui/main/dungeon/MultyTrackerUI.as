@@ -85,6 +85,7 @@ package com.rpgGame.app.ui.main.dungeon
 		}
 		override protected function onHide():void
 		{
+			super.onHide();
 			removeEvent();
 		}
 		
