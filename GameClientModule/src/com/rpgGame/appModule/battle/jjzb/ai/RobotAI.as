@@ -43,8 +43,8 @@ package com.rpgGame.appModule.battle.jjzb.ai
 		private var _endCount:int=0;
 		private var _forceOver:Boolean=true;
 		private var _contianer:DisplayObjectContainer;
-		private var _hpLeft:SkinnableContainer;
-		private var _hpRight:SkinnableContainer;
+		private var _hpLeft:UIAsset;
+		private var _hpRight:UIAsset;
 		private var _maxLeftHp:int;
 		private var _maxRightHp:int;
 		private var _nowLeftHp:int;

@@ -1,0 +1,220 @@
+package org.mokylin.skin.app.zhanchang.paihangbang
+{
+	import feathers.controls.text.Fontter;
+	import feathers.controls.Label;
+	import feathers.controls.StateSkin;
+	import feathers.controls.UIAsset;
+
+	/**
+	 * @private
+	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
+	 * @author DXMLCompilerForFeathers
+	 */
+	public class PaiHang_Item extends feathers.controls.StateSkin
+	{
+		//==========================================================================
+		//                                定义成员变量
+		//==========================================================================
+		public var bg1:feathers.controls.UIAsset;
+
+		public var bg2:feathers.controls.UIAsset;
+
+		public var bg3:feathers.controls.UIAsset;
+
+		public var lbId:feathers.controls.Label;
+
+		public var lbJiangli:feathers.controls.Label;
+
+		public var lbJifen:feathers.controls.Label;
+
+		public var lbLevel:feathers.controls.Label;
+
+		public var lbName:feathers.controls.Label;
+
+		public var uiMan:feathers.controls.UIAsset;
+
+		public var uiQuan:feathers.controls.UIAsset;
+
+		public var uiVip:feathers.controls.UIAsset;
+
+		public var uiWoman:feathers.controls.UIAsset;
+
+
+		//==========================================================================
+		//                                定义构造函数
+		//==========================================================================
+		public function PaiHang_Item()
+		{
+			super();
+			
+			this.currentState = "normal";
+			this.height = 27;
+			this.width = 386;
+			this.elementsContent = [bg1_i(),bg2_i(),bg3_i(),lbId_i(),lbName_i(),lbLevel_i(),lbJifen_i(),lbJiangli_i(),uiWoman_i(),uiMan_i(),uiVip_i(),uiQuan_i()];
+			
+			states = {
+			};
+			skinNames={};
+		}
+
+
+		//==========================================================================
+		//                                定义成员方法
+		//==========================================================================
+		private function bg1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg1 = temp;
+			temp.name = "bg1";
+			temp.styleName = "ui/app/zhanchang/paihangbang/liebiao_hui.png";
+			temp.width = 386;
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function bg2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg2 = temp;
+			temp.name = "bg2";
+			temp.styleName = "ui/app/zhanchang/paihangbang/liebiao_hei.png";
+			temp.width = 386;
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function bg3_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg3 = temp;
+			temp.name = "bg3";
+			temp.styleName = "ui/app/zhanchang/paihangbang/liebiao_zong.png";
+			temp.width = 386;
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function lbId_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbId = temp;
+			temp.name = "lbId";
+			temp.text = "1";
+			temp.textAlign = "center";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 34;
+			temp.x = 3;
+			temp.y = 4;
+			return temp;
+		}
+
+		private function lbJiangli_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbJiangli = temp;
+			temp.name = "lbJiangli";
+			temp.text = "X55";
+			temp.textAlign = "left";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 44;
+			temp.x = 340;
+			temp.y = 4;
+			return temp;
+		}
+
+		private function lbJifen_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbJifen = temp;
+			temp.name = "lbJifen";
+			temp.text = "3244";
+			temp.textAlign = "center";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 46;
+			temp.x = 250;
+			temp.y = 4;
+			return temp;
+		}
+
+		private function lbLevel_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbLevel = temp;
+			temp.name = "lbLevel";
+			temp.text = "钻石四阶";
+			temp.textAlign = "center";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 74;
+			temp.x = 173;
+			temp.y = 4;
+			return temp;
+		}
+
+		private function lbName_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbName = temp;
+			temp.name = "lbName";
+			temp.text = "玩家名六个字";
+			temp.textAlign = "left";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 90;
+			temp.x = 78;
+			temp.y = 4;
+			return temp;
+		}
+
+		private function uiMan_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiMan = temp;
+			temp.name = "uiMan";
+			temp.styleName = "ui/app/zhanchang/paihangbang/nv.png";
+			temp.x = 59;
+			temp.y = 3;
+			return temp;
+		}
+
+		private function uiQuan_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiQuan = temp;
+			temp.name = "uiQuan";
+			temp.styleName = "ui/common/tubiao/lijin_24.png";
+			temp.x = 313;
+			temp.y = 1;
+			return temp;
+		}
+
+		private function uiVip_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiVip = temp;
+			temp.name = "uiVip";
+			temp.styleName = "ui/app/zhanchang/paihangbang/vip.png";
+			temp.x = 43;
+			temp.y = 5;
+			return temp;
+		}
+
+		private function uiWoman_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiWoman = temp;
+			temp.name = "uiWoman";
+			temp.styleName = "ui/app/zhanchang/paihangbang/nan.png";
+			temp.x = 59;
+			temp.y = 3;
+			return temp;
+		}
+
+	}
+}

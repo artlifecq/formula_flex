@@ -185,7 +185,7 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icon = temp;
 			temp.name = "icon";
-			temp.styleName = "ui/app/zhanchang/dianfengduijue/icon/huangjinyijie.png";
+			temp.styleName = "ui/app/zhanchang/icon/huangjinyijie.png";
 			temp.x = 20;
 			temp.y = 89;
 			return temp;
