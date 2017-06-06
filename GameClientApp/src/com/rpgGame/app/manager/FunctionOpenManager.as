@@ -137,12 +137,20 @@
 		{
 			if(info==null)
 				return ;
-			if(!openFunctionById(info.q_id))
+			if(!functionIsOpen(info.q_id))
 			{
 				return ;
 			}
 			var modeInfo:FunctionBarInfo = FuncionBarCfgData.getActivityBarInfo(info.q_main_id);
 			openModeByInfo(modeInfo,info.q_id.toString(),data);
+		}
+		
+		public static function openAppPaneById(id:String,data:Object = null):void
+		{
+			var info:Q_newfunc = NewFuncCfgData.getdataById(id);
+			if(info==null)
+				return ;
+			openFunctionId(info,data);
 		}
 		
 		/**

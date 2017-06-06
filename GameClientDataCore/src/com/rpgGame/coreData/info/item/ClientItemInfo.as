@@ -43,7 +43,14 @@ package com.rpgGame.coreData.info.item
 			_itemInfo = value;
 			updateParameters();
 		}
-		
+		public function get num():int
+		{
+			if (_itemInfo) 
+			{
+				return _itemInfo.num;
+			}
+			return 0;
+		}
 		/**
 		 *更新参数 
 		 * 
