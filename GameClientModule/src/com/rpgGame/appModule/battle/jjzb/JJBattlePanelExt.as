@@ -297,6 +297,7 @@ package com.rpgGame.appModule.battle.jjzb
 			{
 				MCUtil.removeSelf(_rewardPanel);
 			}
+			_showState=0;
 		}
 		
 	
