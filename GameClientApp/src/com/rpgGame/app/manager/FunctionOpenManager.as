@@ -137,7 +137,7 @@
 		{
 			if(info==null)
 				return ;
-			if(!openFunctionById(info.q_id))
+			if(!functionIsOpen(info.q_id))
 			{
 				return ;
 			}

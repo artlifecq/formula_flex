@@ -1,11 +1,16 @@
 package com.rpgGame.appModule.fightsoul
 {
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.cfg.NewFuncCfgData;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.WindowInfoData;
+	import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
 	import com.rpgGame.coreData.clientConfig.Q_fightsoul_path;
+	import com.rpgGame.coreData.clientConfig.Q_newfunc;
 	import com.rpgGame.coreData.clientConfig.Q_windowInfo;
 	import com.rpgGame.coreData.lang.LangUI_2;
 	
@@ -38,20 +43,16 @@ package com.rpgGame.appModule.fightsoul
 				NoticeManager.showNotifyById(4010);
 				return ;
 			}
-			AppManager.showAppById(path.q_winId);
-//			var winInfo:Q_windowInfo = WindowInfoData.getInfobyId(path.q_winId);
-//			if(winInfo.q_islink==1)
-//			{
-//				AppManager.showApp(winInfo.q_windCodeId,winInfo.q_arg);
-//			}
+			FunctionOpenManager.openFunctionId(newFunc);
 		}
 		override protected function commitData():void
 		{
-			var winInfo:Q_windowInfo = WindowInfoData.getInfobyId(path.q_winId);
-			_skin.lb_name.text = winInfo.q_name;
+			_skin.lb_name.text = newFunc.q_string_name;
 			_skin.lb_cishu.text = pathinfoData.count.toString()+"/"+path.q_total;
 			_skin.lb_jinyan.text =LanguageConfig.getText(LangUI_2.FightSoulShowReward).replace("$",path.q_reward)
-			_skin.btn_send.visible = winInfo.q_islink==1;
+			
+			var fuc:FunctionBarInfo = FuncionBarCfgData.getActivityBarInfo(newFunc.q_main_id);
+			_skin.btn_send.visible = fuc.clickType==1;
 			if(pathinfoData.isOver)
 			{
 				GrayFilter.gray(_skin.lb_name);
@@ -70,10 +71,15 @@ package com.rpgGame.appModule.fightsoul
 		{
 			return this.data as FightSoulPathInfoData;
 		}
-		public function get path():Q_fightsoul_path
+		private function get path():Q_fightsoul_path
 		{
 			return pathinfoData.path;
 		}
+		private function get newFunc():Q_newfunc
+		{
+			return pathinfoData.newFunc;
+		}
+		
 		override public function get height():Number
 		{
 			return _skin.height;
