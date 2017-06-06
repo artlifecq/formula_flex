@@ -32,10 +32,9 @@ package com.rpgGame.appModule.dungeon.genuine
 		{
 			_skin = new FuBen_ZhenQi_Skin();
 			super(_skin);
-			initialize();
 		}
 		
-		protected function initialize():void
+		override public function show(data:Object=null):void
 		{
 			_skin.list.itemRendererType =GenuineCell;
 			_skin.list.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
