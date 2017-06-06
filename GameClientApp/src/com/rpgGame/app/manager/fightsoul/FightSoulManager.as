@@ -5,17 +5,21 @@ package com.rpgGame.app.manager.fightsoul
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleManager;
+	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.UNIQUEID;
 	import com.rpgGame.coreData.cfg.FightsoulData;
+	import com.rpgGame.coreData.cfg.FightsoulModeData;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_fightsoul;
+	import com.rpgGame.coreData.clientConfig.Q_fightsoul_mode;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.role.HeroData;
+	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.fightsoul.bean.FightSoulInfo;
 	import com.rpgGame.netData.fightsoul.bean.TypeValue;
@@ -55,8 +59,9 @@ package com.rpgGame.app.manager.fightsoul
 			if (fightSoulRole)
 			{
 				fightSoulLevel = (owner.data as HeroData).fightSoulLevel;
-				fightSoulRole.data.avatarInfo.setBodyResID(("blood/an_cj_blood_" + fightSoulLevel), null);
-				fightSoulRole.data.avatarInfo.setBodyEffectResIDs = "tx_cj_blood_" + fightSoulLevel;
+				var model:Q_fightsoul_mode = FightsoulModeData.getModeInfoById(fightSoulLevel);
+				fightSoulRole.data.avatarInfo.setBodyResID("pc/fightsoul/"+model.q_mode,null);
+				fightSoulRole.data.avatarInfo.bodyEffectID = model.q_effect;
 				AvatarManager.updateAvatar(fightSoulRole);
 			}
 		}
@@ -212,7 +217,8 @@ package com.rpgGame.app.manager.fightsoul
 			}
 			var heroData : HeroData = player.data as HeroData; 
 			heroData.fightSoulLevel =_fightSoulInfo.curModelLv;
-			SceneRoleManager.getInstance().createHero(heroData, true);
+			var role : SceneRole = SceneManager.getScene().getSceneObjByID(heroData.id, SceneCharType.PLAYER) as SceneRole;
+			updateRoleAvatar(role);
 		}
 		private var _skillData:Q_skill_model;
 		public function getSpellData():Q_skill_model
