@@ -4,7 +4,6 @@ package com.rpgGame.app.data
 	import com.rpgGame.app.manager.friend.FriendManager;
 	import com.rpgGame.app.manager.goods.GoodsContainerMamager;
 	import com.rpgGame.app.manager.mount.HorseExtraItemInfo;
-	import com.rpgGame.coreData.cfg.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.AddSpriteStatCfgData;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.AreaCfgData;
@@ -67,6 +66,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.ZhanGongMonsterData;
 	import com.rpgGame.coreData.cfg.ZoneCfgData;
 	import com.rpgGame.coreData.cfg.ZoneMultyCfgData;
+	import com.rpgGame.coreData.cfg.active.ActivetyDataManager;
 	import com.rpgGame.coreData.cfg.animat.EffectAnimationCfgData;
 	import com.rpgGame.coreData.cfg.biao.BiaoCfgData;
 	import com.rpgGame.coreData.cfg.cheats.CheatsCfg;
@@ -209,7 +209,7 @@ package com.rpgGame.app.data
 			EquipWashAttCfg.setup(dic[ConfigClassRegister.Q_equip_wash_attr]);
 			//			CountryUnionStatCfgData.setup(null); //待解决
 			MeridianCfg.setup(dic[ConfigClassRegister.Q_meridian]);
-			ActivetyCfgData.setup(dic[ConfigClassRegister.Q_special_activities]);
+			ActivetyDataManager.setup(dic[ConfigClassRegister.Q_special_activities]);
 			
 			////////////////////////////////////////////////////////////////////////
 			//

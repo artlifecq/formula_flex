@@ -1,11 +1,9 @@
 package com.rpgGame.appModule.activety
 {
-	import com.rpgGame.coreData.clientConfig.Q_special_activities;
-	
-	import away3d.events.Event;
+	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	
 	import feathers.controls.renderers.DefaultListItemRenderer;
-	import feathers.events.FeathersEventType;
+	import feathers.utils.filter.GrayFilter;
 	
 	import org.mokylin.skin.app.activety.ActiveItemSelecteSkin;
 	import org.mokylin.skin.app.activety.zonghe.Active_Item;
@@ -60,23 +58,23 @@ package com.rpgGame.appModule.activety
 					_skin.selectedBtn.defaultIcon=null;
 				}
 				_skin.selectedBtn.isSelected=this.owner.selectedItem==data;
-				var info:ActiveInfo=_data as ActiveInfo;
+				var info:ActivetyInfo=_data as ActivetyInfo;
 				if(!info){
 					return;
 				}
 				_skin.uiName.styleName="ui/app/activety/zonghe/active_name/"+info.cfg.q_activity_id+".png";
 				_skin.uiBg.styleName="ui/big_bg/activety/item/"+info.cfg.q_activity_id+".png";
 				_skin.lbMsg.htmlText=info.cfg.q_desc;
-				switch(info.state){
-					case 0:
-						_skin.uiJinxing.styleName="ui/common/wkq.png";
-						break;
-					case 1:
-						_skin.uiJinxing.styleName="ui/common/yjs.png";
-						break;
-					default:
-						_skin.uiJinxing.styleName="ui/common/jxz.png";
-						break;
+				if(info.info.joinState==0){
+					_skin.uiJinxing.visible=false;
+					GrayFilter.gray(this);
+				}else{
+					GrayFilter.unGray(this);
+					if(info.info.joinState==1){
+						_skin.uiJinxing.visible=false;
+					}else{
+						_skin.uiJinxing.visible=true;
+					}
 				}
 			}
 		}

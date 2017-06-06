@@ -767,7 +767,7 @@ package com.rpgGame.app.ui.main.chat {
 		
 		private function sendMsg() : void 
 		{
-			AppManager.showApp(AppConstant.ACTIVETY_PANL);
+//			AppManager.showApp(AppConstant.ACTIVETY_PANL);
 			
 			if("" == this._inputText.text )
 			{

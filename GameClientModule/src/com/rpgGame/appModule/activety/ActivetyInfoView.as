@@ -1,9 +1,11 @@
 package com.rpgGame.appModule.activety
 {
 	import com.rpgGame.app.ui.tab.ViewUI;
-	import com.rpgGame.coreData.cfg.ActivetyCfgData;
-	import com.rpgGame.coreData.clientConfig.Q_special_activities;
+	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.coreData.cfg.active.ActivetyDataManager;
+	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.enum.ActivityEnum;
+	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	
 	import away3d.events.Event;
 	
@@ -21,6 +23,8 @@ package com.rpgGame.appModule.activety
 	{
 		private var _skin:ActivetyAll_Skin;
 		private var _activeData:ListCollection;
+		private var rewardIcon:Vector.<IconCDFace>;
+		
 		public function ActivetyInfoView()
 		{
 			_skin=new ActivetyAll_Skin();
@@ -33,13 +37,21 @@ package com.rpgGame.appModule.activety
 			_skin.ListItem.itemRendererType=ActivetyItemRender;
 			_skin.ListItem.scrollBarDisplayMode = ScrollBarDisplayMode.ALWAYS_VISIBLE;
 			_activeData=new ListCollection();
-			var list:Vector.<Q_special_activities>=ActivetyCfgData.getActivetyListByType(ActivityEnum.ZONGHE_ACT);
+			var list:Vector.<ActivetyInfo>=ActivetyDataManager.getActiveList(ActivityEnum.ZONGHE_ACT);
 			for(var i:int=0;i<list.length;i++){
-				var info:ActiveInfo=new ActiveInfo();
-				info.cfg=list[i];
-				_activeData.addItem(info);
+				_activeData.addItem(list[i]);
 			}
 			_skin.ListItem.dataProvider=_activeData;
+			rewardIcon=new Vector.<IconCDFace>();
+			
+			var icon:IconCDFace;
+			for(i=1;i<5;i++){
+				icon=new IconCDFace(IcoSizeEnum.ICON_48);
+				rewardIcon.push(icon);
+				icon.x=_skin["icon"+i].x;
+				icon.y=_skin["icon"+i].y;
+				_skin.container.addChild(icon);
+			}
 		}
 		
 		override public function show(data:Object=null):void
@@ -49,7 +61,7 @@ package com.rpgGame.appModule.activety
 		
 		private function onChange(e:Event):void
 		{
-			var info:ActiveInfo=_skin.ListItem.selectedItem as ActiveInfo;
+			var info:ActivetyInfo=_skin.ListItem.selectedItem as ActivetyInfo;
 			if(!info){
 				return;
 			}
