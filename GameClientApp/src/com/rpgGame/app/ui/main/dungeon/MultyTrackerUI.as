@@ -326,6 +326,7 @@ package com.rpgGame.app.ui.main.dungeon
 			}
 			if(rItme!=null)
 			{
+				rItme.labelDisplay.width=300;
 				rItme.labelDisplay.htmlText=t;
 				rItme.labelDisplay.width=rItme.labelDisplay.textWidth+2;
 				but.visible=true;

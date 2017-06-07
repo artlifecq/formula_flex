@@ -921,8 +921,9 @@ package com.rpgGame.app.utils
 			}
 			if(rItme!=null)
 			{
+				rItme.labelDisplay.width=300;
 				rItme.labelDisplay.htmlText=t;
-				rItme.labelDisplay.width=rItme.labelDisplay.textWidth+5;
+				rItme.labelDisplay.width=rItme.labelDisplay.textWidth+10;
 				but.width=rItme.labelDisplay.textWidth+25;
 				but.visible=true;
 				rItme.btn_send.visible=false;
@@ -961,6 +962,7 @@ package com.rpgGame.app.utils
 		private static var isMouseOut : Boolean = true;
 		private static var outY:int=0;
 		private static var outColor:int=0;
+		private static var overClolor:int=16751616;
 		private static function onTouch(e:TouchEvent):void
 		{
 			var target : Label  = e.currentTarget as Label;
@@ -982,7 +984,7 @@ package com.rpgGame.app.utils
 				outColor=target.color;
 				isMouseOut = false;
 				target.y=outY-1;
-				target.color=16751616;
+				target.color=overClolor;
 			}
 		}
 		
