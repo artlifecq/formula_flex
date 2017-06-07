@@ -16,7 +16,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_activity_id:int;
 		 /**  活动名称 */
 		public var q_activity_name:String;
-		 /**  活动类型（0普通 1开服活动） */
+		 /**  活动类型（0综合 1开服活动） */
 		public var q_activity_type:int;
 		 /**  活动时间（[[-1],[-1],[-1],[1,3,4,5],[1200,2200],[-1]]） */
 		public var q_activity_time:String;
@@ -26,6 +26,12 @@ package com.rpgGame.coreData.clientConfig
 		public var q_activity_limit_level:int;
 		 /**  对应的活动脚本编号 */
 		public var q_activity_script_id:int;
+		 /**  提前公告时间（格式：5,4,3,2,1) */
+		public var q_announcement_time:String;
+		 /**  面板提前公告时间（提前分钟） */
+		public var q_panel_pre_time:int;
+		 /**  公告内容(【活动】开心问答,将｛@｝分钟后开始,请各位做好准备) */
+		public var q_notice:String;
 		 /**  活动名称图片资源编号 */
 		public var q_activity_page_id:int;
 		 /**  每日允许参与次数（-1无限） */
@@ -36,20 +42,16 @@ package com.rpgGame.coreData.clientConfig
 		public var q_desc:String;
 		 /**  开服后几天开放 */
 		public var q_open_day:int;
-		 /**  提示描述 */
-		public var q_tips:String;
 		 /**  展示奖励 */
-		public var q_show_item:String;
+		public var q_rewards:String;
 		 /**  日常描述 */
 		public var q_text:String;
-		 /**  主要奖励描述 */
-		public var q_main_reward_desc:String;
 		 /**  关联NPC */
 		public var q_npc:int;
 		 /**  关联副本ID */
 		public var q_zone:int;
 		 /**  是否为帮会活动（1是，0否） */
-		public var q_gang:int;
+		public var q_guide:int;
 
 	}
 }
