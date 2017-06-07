@@ -711,8 +711,9 @@ package com.rpgGame.app.manager.role
 				var dec:int=oldVal-newVal;	
 				for (i = 0; i < dec; ++i) 
 				{
-					tmp=role.avatar.removeRenderUnitByID(RenderUnitType.NEEDLEEFFECT, oldVal-1-i);
+					tmp=role.avatar.getRenderUnitByID(RenderUnitType.NEEDLEEFFECT,oldVal-1-i);
 					TweenMax.killTweensOf(tmp);
+					role.avatar.removeRenderUnit(tmp);
 				}
 				for (i = 0; i < newVal; ++i) 
 				{

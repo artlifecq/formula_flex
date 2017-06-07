@@ -27,7 +27,7 @@ package com.rpgGame.app.state.role.action
 
 		override public function execute() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				super.execute();
 				_stateReference = null;
