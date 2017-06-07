@@ -11,11 +11,9 @@ package feathers.themes{
 	import flash.utils.Dictionary;
 	import flash.utils.getDefinitionByName;
 	
-	import away3d.enum.FileFormatEnum;
 	import away3d.enum.LoadPriorityType;
 	import away3d.events.Event;
 	import away3d.log.Log;
-	import away3d.tools.utils.FileUtils;
 	import away3d.tools.utils.TextureUtils;
 	
 	import feathers.EVIL3D_FEATHERS_VERSION;
@@ -67,6 +65,12 @@ package feathers.themes{
 	 */
 	public class GuiTheme extends DefaultTheme
 	{
+		public static const UNKNOWN:int = 0;
+		public static const JPG:int = 1;
+		public static const PNG:int = 2;
+		public static const BPG:int = 3;
+		public static const ATF:int = 4;
+		
 		
 		/**
 		 * 记录纹理所在纹理集的关键字
@@ -90,7 +94,7 @@ package feathers.themes{
 		/**
 		 * 采用哪种格式的纹理,默认为不指定,由url决定
 		 * */
-		public static var defaultTextureFormat:int = FileFormatEnum.UNKNOWN;
+		public static var defaultTextureFormat:int = 0;
 		
 		/**
 		 * 指定采用ATFX格式纹理,由DIR_NAMES定义相对路径名
@@ -339,6 +343,7 @@ package feathers.themes{
 			}
 			if(!button.styleName)button.styleName = styleName;
 			button.defaultSkin = creatImageSkin(styleName, false, button.defaultSkin as ImageSkin);
+			button.defaultIcon = creatImageSkin(styleName, true, button.defaultIcon as ImageSkin);
 			button.stateToLabelPropertiesFunction = updateButtonLabelState;
 		}
 		
@@ -355,7 +360,8 @@ package feathers.themes{
 				return;
 			}
 			if(!button.styleName)button.styleName = styleName;
-			button.defaultIcon = creatImageSkin(styleName, false, button.defaultIcon as ImageSkin);
+			button.defaultSkin = creatImageSkin(styleName, false, button.defaultSkin as ImageSkin);
+			button.defaultIcon = creatImageSkin(styleName, true, button.defaultIcon as ImageSkin);
 			button.stateToLabelPropertiesFunction = updateButtonLabelState;
 		}
 		
@@ -929,6 +935,7 @@ package feathers.themes{
 			}
 			
 			var skinName:String;
+			var arr:Array=UIState.SMART_STATES;
 			for each(var state:String in UIState.SMART_STATES)
 			{
 				if(stateSkins.hasOwnProperty(state))
@@ -952,23 +959,11 @@ package feathers.themes{
 						case UIState.DOWN_AND_SELECTED:
 						case UIState.HOVER_AND_SELECTED:
 						case UIState.DISABLED_AND_SELECTED:
-							skinName = stateSkins[UIState.UP_AND_SELECTED];
-							if(isIcon)
-							{
-								skinName = splitIconSkinName(skinName);
-							}
+							skinName = stateSkins[state];
+							skinName = splitIconSkinName(skinName, isIcon);
 							if(skinName)
 							{
 								skinSelector.selectedTexture = getTexture(skinName);
-							}
-							
-							skinName = stateSkins[state];
-							if(isIcon)
-							{
-								skinName = splitIconSkinName(skinName);
-							}
-							if(skinName)
-							{
 								skinSelector.setTextureForState(state, getTexture(skinName));
 							}
 							break;
@@ -1221,20 +1216,34 @@ package feathers.themes{
 		public static function checkAddExtensionName(url:String, format:int=-1):String
 		{
 			format = format > -1 ? format : GuiTheme.defaultTextureFormat;
-			if(format != FileFormatEnum.UNKNOWN && needAddExtenName(url))
+			if(format != 0 && needAddExtenName(url))
 			{
-				var ext:String = FileUtils.getFileExtensionFromTextureFormat(format);
+				var ext:String = getTextureFileExtensionFromTextureFormat(format);
 				switch(format)
 				{
-					case FileFormatEnum.ATF:
-					case FileFormatEnum.JPG:
-					case FileFormatEnum.BPG:
+					case 4:
+					case 1:
+					case 3:
 						if(url.indexOf(ext) < 0)url += ext;
 						break;
 				}
 			}
 			return url;
 		}
+		
+		private static function getTextureFileExtensionFromTextureFormat(textureFormat:int):String
+		{
+			if(textureFormat == 2)
+				return ".png";
+			else if(textureFormat == 1)
+				return ".jpg";
+			else if(textureFormat == 4)
+				return ".atf";
+			else if(textureFormat == 3)
+				return ".bpg";
+			return "";
+		}
+
 		
 		private static function needAddExtenName(path:String):Boolean
 		{

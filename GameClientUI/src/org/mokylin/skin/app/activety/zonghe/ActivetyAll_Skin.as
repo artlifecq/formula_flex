@@ -34,6 +34,8 @@ package org.mokylin.skin.app.activety.zonghe
 
 		public var icon4:feathers.controls.UIAsset;
 
+		public var joinBtn:feathers.controls.Button;
+
 		public var lbMsg:feathers.controls.Label;
 
 
@@ -47,7 +49,7 @@ package org.mokylin.skin.app.activety.zonghe
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [__ActivetyAll_Skin_UIAsset1_i(),__ActivetyAll_Skin_UIAsset2_i(),ListItem_i(),activeBg_i(),activeName_i(),__ActivetyAll_Skin_UIAsset3_i(),__ActivetyAll_Skin_UIAsset4_i(),__ActivetyAll_Skin_UIAsset5_i(),__ActivetyAll_Skin_UIAsset6_i(),lbMsg_i(),__ActivetyAll_Skin_Button1_i(),__ActivetyAll_Skin_UIAsset7_i(),icon1_i(),icon2_i(),icon3_i(),icon4_i()];
+			this.elementsContent = [__ActivetyAll_Skin_UIAsset1_i(),__ActivetyAll_Skin_UIAsset2_i(),ListItem_i(),activeBg_i(),activeName_i(),__ActivetyAll_Skin_UIAsset3_i(),__ActivetyAll_Skin_UIAsset4_i(),__ActivetyAll_Skin_UIAsset5_i(),__ActivetyAll_Skin_UIAsset6_i(),lbMsg_i(),joinBtn_i(),__ActivetyAll_Skin_UIAsset7_i(),icon1_i(),icon2_i(),icon3_i(),icon4_i()];
 			
 			states = {
 			};
@@ -68,19 +70,6 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.width = 602;
 			temp.x = 21;
 			temp.y = 78;
-			return temp;
-		}
-
-		private function __ActivetyAll_Skin_Button1_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.label = "参加活动";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.color = 0xCFC6AE;
-			temp.width = 112;
-			temp.x = 733;
-			temp.y = 520;
 			return temp;
 		}
 
@@ -216,6 +205,21 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.styleName = "ui/common/grid/normal/48.png";
 			temp.x = 853;
 			temp.y = 315;
+			return temp;
+		}
+
+		private function joinBtn_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			joinBtn = temp;
+			temp.name = "joinBtn";
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.label = "参加活动";
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
+			temp.color = 0xCFC6AE;
+			temp.width = 112;
+			temp.x = 733;
+			temp.y = 520;
 			return temp;
 		}
 

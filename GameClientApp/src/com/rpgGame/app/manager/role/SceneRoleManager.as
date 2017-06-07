@@ -195,8 +195,6 @@ package com.rpgGame.app.manager.role
 			var bornData : Q_monster = MonsterDataManager.getData(data.modelID);
 			//设置VO
 			role.data = data;
-			role.headFace = HeadFace.create(role);
-			(role.headFace as HeadFace).bloodPercent= (data.totalStat.hp / data.totalStat.life);
 			var roleNameStr : String = (bornData ? bornData.q_name.toString() : "未知怪物");
 			if (charType == SceneCharType.NPC && data.ownerName)
 			{
@@ -204,6 +202,8 @@ package com.rpgGame.app.manager.role
 			}
 			role.name = data.name = roleNameStr;
 			role.ownerIsMainChar = (data.ownerId == MainRoleManager.actorID);
+			role.headFace = HeadFace.create(role);
+			(role.headFace as HeadFace).bloodPercent= (data.totalStat.hp / data.totalStat.life);
 			data.avatarInfo.setBodyResID(bornData ? bornData.q_body_res : "", null);
 			//			var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(bornData ? bornData.q_body_res : "");
 			if (bornData.q_animation>0)
