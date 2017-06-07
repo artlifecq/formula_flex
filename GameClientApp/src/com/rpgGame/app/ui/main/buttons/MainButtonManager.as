@@ -1,8 +1,11 @@
 package com.rpgGame.app.ui.main.buttons
 {
+	import com.game.engine3D.config.GlobalConfig;
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.ui.main.activityBar.item.ActivityButton;
 	import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
+	
+	import away3d.log.Log;
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonFubendating;
@@ -48,7 +51,12 @@ package com.rpgGame.app.ui.main.buttons
 			var button:IOpen = _initializeMap.getValue(info.id);
 			if(button == null)
 			{
-				var clsNames:Array= _classMap.getValue(info.id)
+				var clsNames:Array= _classMap.getValue(info.id);
+				if(clsNames==null)
+				{
+					Log.error(GlobalConfig.DEBUG_HEAD + " " + "[MainButtonManager]:按钮皮肤未配置" + info.id);
+					return null;
+				}
 				var cls : Class = clsNames[0] as Class;
 				button = new cls();
 				button.info = info;
