@@ -89,6 +89,7 @@ package com.rpgGame.app.ui.main.taskbar
 			for(i=0;i<killBut1List.length;i++)
 			{
 				killLabel1List.push(Renwu_Item(killBut1List[i].skin).labelDisplay);
+				TaskUtil.setTextEvet(killBut1List[i]);
 			}
 			killBut2List=new Vector.<SkinnableContainer>();
 			killBut2List.push(_skin.sec_killbut2_1);
@@ -98,6 +99,7 @@ package com.rpgGame.app.ui.main.taskbar
 			for(i=0;i<killBut2List.length;i++)
 			{
 				killLabel2List.push(Renwu_Item(killBut2List[i].skin).labelDisplay);
+				TaskUtil.setTextEvet(killBut2List[i]);
 			}
 			killBut3List=new Vector.<SkinnableContainer>();
 			killBut3List.push(_skin.sec_killbut3_1);
@@ -107,6 +109,7 @@ package com.rpgGame.app.ui.main.taskbar
 			for(i=0;i<killBut3List.length;i++)
 			{
 				killLabel3List.push(Renwu_Item(killBut3List[i].skin).labelDisplay);
+				TaskUtil.setTextEvet(killBut3List[i]);
 			}
 			
 			
