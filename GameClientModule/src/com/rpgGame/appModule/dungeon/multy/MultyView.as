@@ -111,7 +111,9 @@ package com.rpgGame.appModule.dungeon.multy
 			if(MainRoleManager.actorInfo.totalStat.level>=zoneData.q_level)
 			{
 				//AppManager.showApp(AppConstant.MULTY_ENTERTIME_PANL);
-				DungeonSender.reqEnterDungeon(zoneData.q_id);
+				DungeonSender.reqTeamMatch(zoneData.q_id);
+				
+				
 			}
 			
 			

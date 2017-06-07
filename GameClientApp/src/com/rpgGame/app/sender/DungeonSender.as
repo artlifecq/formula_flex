@@ -1,5 +1,6 @@
 package com.rpgGame.app.sender
 {
+	import com.rpgGame.netData.cross.message.CSTeamMatchMessage;
 	import com.rpgGame.netData.lunjian.message.CSLunJianPanelInfosMessage;
 	import com.rpgGame.netData.zone.message.CSClientTriggerValiedMessage;
 	import com.rpgGame.netData.zone.message.ReqZoneCommonEnterMessage;
@@ -73,6 +74,30 @@ package com.rpgGame.app.sender
 			msg.triggerId=trid;
 			SocketConnection.send(msg);
 		}
+		
+		/**
+		 *多人副本请求匹配
+		 * 
+		 */
+		public static function reqTeamMatch(zid:int):void
+		{
+			var msg:CSTeamMatchMessage=new CSTeamMatchMessage();
+			msg.zoneModelId=zid;
+			msg.matchState=1;
+			SocketConnection.send(msg);
+		}
+		/**
+		 *多人副本取消匹配
+		 * 
+		 */
+		public static function reqTeamMatchCancel(zid:int):void
+		{
+			var msg:CSTeamMatchMessage=new CSTeamMatchMessage();
+			msg.zoneModelId=zid;
+			msg.matchState=0;
+			SocketConnection.send(msg);
+		}
+		
 		
 	}
 }

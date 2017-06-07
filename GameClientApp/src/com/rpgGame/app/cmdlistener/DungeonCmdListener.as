@@ -10,6 +10,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.DungeonEvent;
 	import com.rpgGame.core.events.TaskEvent;
+	import com.rpgGame.netData.cross.message.SCCancelTeamMatchMessage;
 	import com.rpgGame.netData.dailyzone.message.SCDailyZoneIdInfoMessage;
 	import com.rpgGame.netData.dailyzone.message.SCDailyZoneMonsterCountMessage;
 	import com.rpgGame.netData.dailyzone.message.SCDailyZonePanelInfoMessage;
@@ -73,6 +74,8 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(155145, onSCMultiZoneRewardMessage );//多人副本奖励
 			SocketConnection.addCmdListener(155146, onSCMultiZonePanelInfosMessage );//面板列表
 			SocketConnection.addCmdListener(155147, onSCMultiZonePanelSingleInfoMessage );//面板列表单个
+			SocketConnection.addCmdListener(250264, onSCCancelTeamMatchMessage );//面板列表单个
+			
 			
 			finish();
 		}
@@ -218,5 +221,13 @@ package com.rpgGame.app.cmdlistener
 			DungeonManager.setPanelInfos(msg.zoneId,msg.count,msg.rewardCount);
 			
 		}
+		private function onSCCancelTeamMatchMessage(msg:SCCancelTeamMatchMessage):void
+		{L.l("服务器#匹配副本:"+msg.zoneModelId);
+			
+			
+		}
+		
+		
+		
 	}
 }
