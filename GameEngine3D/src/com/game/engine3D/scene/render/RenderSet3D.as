@@ -50,11 +50,11 @@ package com.game.engine3D.scene.render
 
 		public static function recycle(rs : RenderSet3D) : void
 		{
-			if (!rs || rs.isDisposed)
+			if (!rs || rs.isInPool)
 				return;
 			_cnt--;
 			//利用池回收
-			_pool.disposeObj(rs);
+			_pool.recycleObj(rs);
 		}
 
 		public static function get cnt() : int
@@ -422,7 +422,7 @@ package com.game.engine3D.scene.render
 			var childName : String = childData.childName;
 			var meshIndex : int = childData.meshIndex;
 			var renderUnit : RenderUnit3D = childData.renderUnit;
-			removeRenderUnit(renderUnit, false, false);
+//			removeRenderUnit(renderUnit, false, false);
 			var ru : RenderUnit3D = getRenderUnitByID(renderUnitType, renderUnitId);
 			if (ru)
 			{
@@ -487,6 +487,7 @@ package com.game.engine3D.scene.render
 			ru.blendMode = _blendMode;
 			ru.alpha = _alpha;
 			ru.zOffset = _zOffset;
+			ru.planarRenderLayer = _planarRenderLayer;
 			ru.needRun = false;
 			for each (var methodData : MethodData in _methodDatas)
 			{
@@ -699,21 +700,19 @@ package com.game.engine3D.scene.render
 		 * 移除指定ID的RenderUnit(此函数执行后,会检查主体换装，如果为空则启用默认换装)
 		 * @param $renderUnitID 换装类型
 		 */
-		public function removeRenderUnitByID(renderUnitType : String, renderUnitID : int) : RenderUnit3D
+		public function removeRenderUnitByID(renderUnitType : String, renderUnitID : int) : void
 		{
 			if (renderUnitType == null || renderUnitType == "")
-				return null; //注意这个判断
-
+				return; //注意这个判断
+			
 			//检查换装内
 			var key : String = renderUnitType + "_" + renderUnitID;
 			var ru : RenderUnit3D = _renderUnitMap[key];
 			if (ru)
 			{
-				//从表中移除
 				recycleRenderUnit(ru);
-				return ru;
+				ru = null;
 			}
-			return null;
 		}
 
 		/**
@@ -1245,8 +1244,9 @@ package com.game.engine3D.scene.render
 			}
 		}
 		
-		public function set planarRenderLayer(value : uint) : void
+		override public function set planarRenderLayer(value : uint) : void
 		{
+			super.planarRenderLayer = value;
 			for each (var ru : RenderUnit3D in _renderUnitMap)
 			{
 				ru.planarRenderLayer = value;

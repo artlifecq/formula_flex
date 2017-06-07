@@ -768,6 +768,7 @@ package com.game.engine3D.scene.layers
 		private function onParseError(ev : ParserEvent) : void
 		{
 			Log.error(GlobalConfig.DEBUG_HEAD + " " + "地图解析错误：" + _mapUrl);
+			trace(ev.message);
 			clear();
 			if (_onMapParseErrorHandler != null)
 			{

@@ -14,7 +14,6 @@ package com.game.engine2D
 		private var _statusType : String;
 		private var _parentChar : SceneCharacter;
 		private var _castsShadows : Boolean;
-		private var _planarRenderLayer : uint = 1;
 		
 		public function SceneCharacter3D(type:String, id:Number)
 		{
@@ -40,17 +39,6 @@ package com.game.engine2D
 		{
 			_castsShadows = value;
 			this.avatar.castsShadows = value;
-		}
-		
-		public function get planarRenderLayer():uint
-		{
-			return _planarRenderLayer;
-		}
-		
-		public function set planarRenderLayer(value:uint):void
-		{
-			_planarRenderLayer = value;
-			this.avatar.planarRenderLayer = value;
 		}
 		
 		override public function set logicAngle($logicAngle:uint):void
@@ -83,11 +71,11 @@ package com.game.engine2D
 		
 		override public function set zOffset(value:int):void
 		{
-//			if (_depthEnable)
-//			{
+			if (_depthEnable)
+			{
 				super.zOffset = value;
 				this.avatar.zOffset = value;
-//			}
+			}
 		}
 		
 		override public function reSet($parameters:Array):void
@@ -122,7 +110,7 @@ package com.game.engine2D
 			if (!role)
 				return;
 			_cnt--;
-			_pool.disposeObj(role);
+			_pool.recycleObj(role);
 		}
 		
 		public static function get cnt() : int

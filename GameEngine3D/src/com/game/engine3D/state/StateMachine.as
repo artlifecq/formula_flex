@@ -41,7 +41,7 @@ package com.game.engine3D.state
 			return _isDestroyed;
 		}
 		
-		public function get isDisposed() : Boolean
+		public function get isInPool() : Boolean
 		{
 			return _isDisposed;
 		}
@@ -334,7 +334,7 @@ package com.game.engine3D.state
 			destroy();
 		}
 		
-		public function instanceDispose() : void
+		public function putInPool() : void
 		{
 			dispose();
 		}

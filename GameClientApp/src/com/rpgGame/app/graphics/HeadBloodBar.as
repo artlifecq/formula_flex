@@ -64,12 +64,12 @@ package com.rpgGame.app.graphics
 		{
 			if (bar._isMonster) 
 			{
-				monsterBloodBarPool.disposeObj(bar);
+				monsterBloodBarPool.recycleObj(bar);
 			}
 			else
 			{
 				//利用池回收HeadBloodBar
-				headBloodBarPool.disposeObj(bar);
+				headBloodBarPool.recycleObj(bar);
 			}
 			
 		}
@@ -261,13 +261,13 @@ package com.rpgGame.app.graphics
 		}
 		public function instanceDestroy() : void
 		{
-			instanceDispose();
+			putInPool();
 			dispose();
 			_isDestroyed = true;
 			_role=null;
 		}
 		
-		public function instanceDispose() : void
+		public function putInPool() : void
 		{
 			if (parent != null)
 				parent.removeChild(this);
@@ -286,7 +286,7 @@ package com.rpgGame.app.graphics
 			return _isDestroyed;
 		}
 		
-		override public function get isDisposed():Boolean
+		public function get isInPool():Boolean
 		{
 			return _isDisposed;
 		}

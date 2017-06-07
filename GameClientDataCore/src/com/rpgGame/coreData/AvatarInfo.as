@@ -407,6 +407,11 @@ package com.rpgGame.coreData
 		{
 			return _bodyEffectID;
 		}
+		
+		public function get bodyEffectID2():String
+		{
+			return _bodyEffectID2;
+		}
 
 		/**武器换装资源*/
 		public function get weaponResID() : String
@@ -542,6 +547,7 @@ package com.rpgGame.coreData
             var info : AvatarInfo = new AvatarInfo();
             info._bodyAnimatResID = this._bodyAnimatResID;
             info._bodyEffectID = this._bodyEffectID;
+			info._bodyEffectID2 = this._bodyEffectID2;
             info._bodyMethodTypeEffectResID = this._bodyMethodTypeEffectResID;
             info._bodyResID = this._bodyResID;
             info._deputyWeaponEffectID = this._deputyWeaponEffectID;
@@ -554,6 +560,7 @@ package com.rpgGame.coreData
             info._mountResID = this._mountResID;
             info._rpd_body = this._rpd_body;
             info._rpd_body_effect = this._rpd_body_effect;
+			info._rpd_body_effect2 = this._rpd_body_effect2;
             info._rpd_body_method_type_effect = this._rpd_body_method_type_effect;
             info._rpd_deputy_weapon = this._rpd_deputy_weapon;
             info._rpd_deputyWeapon_effect = this._rpd_deputyWeapon_effect;

@@ -1,10 +1,8 @@
 package com.rpgGame.app.scene.animator
 {
 	import com.game.engine3D.scene.render.vo.IRenderAnimator;
-	import com.game.engine3D.utils.MathUtil;
 	import com.game.engine3D.vo.BaseObj3D;
 	import com.rpgGame.app.manager.scene.SceneManager;
-	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.type.RenderUnitID;
@@ -13,7 +11,6 @@ package com.rpgGame.app.scene.animator
 	import flash.geom.Vector3D;
 	
 	import gs.TweenLite;
-	import gs.easing.Linear;
 	
 	/**
 	 * 战魂的运动动画 

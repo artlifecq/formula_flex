@@ -62,11 +62,13 @@ package com.game.engine2D.scene.render.loader
 					//记录加载函数（只需在首次赋值）
 					xid.destroyTm = apd.destoryTm;
 					xid.autoRecycleEnable = apd.autoRecycleEnable;
+					xid.blendMode = apd.blendMode;
 					xid.loadSource(fullSourchPath,apd);//开始加载
 				}
 				else
 				{ 
 					xid.autoRecycleEnable = apd.autoRecycleEnable;
+					xid.blendMode = apd.blendMode;
 					if (xid.destroyTm < apd.destoryTm)
 						xid.destroyTm = apd.destoryTm;
 					if(xid.aps == null)//如果没有没有内容，则放到待加载的数组里

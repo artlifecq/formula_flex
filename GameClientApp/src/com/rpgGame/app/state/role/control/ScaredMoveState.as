@@ -56,7 +56,7 @@ package com.rpgGame.app.state.role.control
 		override public function leave() : void
 		{
 			super.leave();
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				_throughTime = 0;
 				//stopWalk();
@@ -66,7 +66,7 @@ package com.rpgGame.app.state.role.control
 		
 		private function end():void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				var role:SceneRole = (_machine.owner as SceneRole);
 				var distance : Number = MathUtil.getDistance(role.x, role.z, originPos.x, originPos.z);
@@ -83,7 +83,7 @@ package com.rpgGame.app.state.role.control
 		
 		private function backToOrigin():void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				_isMoving = false;
 				(_machine.owner as SceneRole).rotationY = originRotationY;
@@ -99,7 +99,7 @@ package com.rpgGame.app.state.role.control
 		
 		private function ready() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				_stateReference.ready();
 			}
@@ -123,7 +123,7 @@ package com.rpgGame.app.state.role.control
 		
 		private function arrive() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				_isMoving = false;
 				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {x: true, y: true, z: true});
@@ -138,7 +138,7 @@ package com.rpgGame.app.state.role.control
 		
 		private function stopWalk() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {x: true, y: true, z: true});
 				//执行行走被停止回调
@@ -151,7 +151,7 @@ package com.rpgGame.app.state.role.control
 		
 		private function startWalk() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				if(_stateReference.endTime - SystemTimeManager.curtTm <= THROUGH_DELAY)//时间小于300ms就不播放效果了
 				{
@@ -171,7 +171,7 @@ package com.rpgGame.app.state.role.control
 		
 		private function startMoveStep(pos : Vector3D) : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				_throughTime = getTimer();
 				//执行开始行走回调
@@ -182,7 +182,7 @@ package com.rpgGame.app.state.role.control
 		
 		private function moveStep(pos : Vector3D) : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {x: true, y: true, z: true});
 				var role:SceneRole = (_machine.owner as SceneRole);
@@ -212,7 +212,7 @@ package com.rpgGame.app.state.role.control
 		
 		private function onWalkStepUpdate() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				if (_stateReference)
 				{

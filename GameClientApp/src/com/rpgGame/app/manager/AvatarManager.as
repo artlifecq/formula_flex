@@ -6,7 +6,6 @@ package com.rpgGame.app.manager
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.engine3D.scene.render.vo.RenderUnitChild;
 	import com.game.engine3D.vo.BaseObj3D;
-	import com.rpgGame.app.manager.fightsoul.FightSoulAnimator;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateMachine;
@@ -92,8 +91,6 @@ package com.rpgGame.app.manager
 			updateMount(role);
 			//穿“主体”
 			updateBody(role);
-			//穿“主体 特效 2”
-			updateBody02(role);
 			//穿“头发”
 			updateHair(role);
 			//穿“武器”
@@ -135,7 +132,7 @@ package com.rpgGame.app.manager
 					if (role.headFace)
 					{
 						if (!mountRu.resReady)
-							role.headFace.setTemporary(); //无模型时添加血条
+							role.headFace.setBodyRender(null); //无模型时添加血条
 						else
 							role.headFace.setBodyRender(mountRu);
 					}
@@ -145,7 +142,7 @@ package com.rpgGame.app.manager
 					if (role.headFace)
 					{
 						if (!bodyRu.resReady)
-							role.headFace.setTemporary(); //无模型时添加血条
+							role.headFace.setBodyRender(null); //无模型时添加血条
 						else
 							role.headFace.setBodyRender(bodyRu);
 					}
@@ -159,7 +156,7 @@ package com.rpgGame.app.manager
 					if (role.headFace)
 					{
 						if (!effectRu.resReady)
-							role.headFace.setTemporary(); //无模型时添加血条
+							role.headFace.setBodyRender(null); //无模型时添加血条
 						else
 							role.headFace.setBodyRender(effectRu);
 					}
@@ -332,58 +329,9 @@ package com.rpgGame.app.manager
 				role.avatar.removeRenderUnitByID(RenderUnitType.BODY_EFFECT, RenderUnitID.BODY_EFFECT);
 			}
 			
-			//			role.avatar.removeRenderUnitsByType(RenderUnitType.BODY_EFFECTS);
-			//			var rpd_body_effects : Vector.<RenderParamData3D> = rpd_mount ? avatarInfo.rpd_body_on_mount_effects : avatarInfo.rpd_body_effects;
-			//			var bodyEffectBindBones : Array = rpd_mount ? avatarInfo.bodyEffectOnMountBindBones : avatarInfo.bodyEffectBindBones;
-			//			if (rpd_body_effects != null)
-			//			{
-			//				var len : int = rpd_body_effects.length;
-			//				for (var i : int = 0; i < len; i++)
-			//				{
-			//					var effectRu : RenderUnit3D = null;
-			//					var rpd_effect : RenderParamData3D = rpd_body_effects[i];
-			//					var effectBindBone : String = bodyEffectBindBones ? bodyEffectBindBones[i] : null;
-			//					if (rpd_body)
-			//					{
-			//						if (effectBindBone)
-			//						{
-			//							if (rpd_body.animatorSourchPath)
-			//							{
-			//								effectRu = role.avatar.addRenderUnitToJoint(RenderUnitType.BODY, RenderUnitID.BODY, effectBindBone, rpd_effect);
-			//							}
-			//							else
-			//							{
-			//								effectRu = role.avatar.addRenderUnitToChild(RenderUnitType.BODY, RenderUnitID.BODY, effectBindBone, rpd_effect);
-			//							}
-			//						}
-			//						else
-			//						{
-			//							effectRu = role.avatar.addRenderUnitToUnit(RenderUnitType.BODY, RenderUnitID.BODY, rpd_effect);
-			//						}
-			//					}
-			//					if (effectRu)
-			//					{
-			//						effectRu.defalutStatus = RoleActionType.IDLE;
-			//						effectRu.setAddedCallBack(partAddedCallBack, role);
-			//						effectRu.setErrorCallBack(partErrorCallBack, role);
-			//						effectRu.entityGlass = false;
-			//						effectRu.useLight = false;
-			//						effectRu.castsShadows = false;
-			//						effectRu.repeat = 0;
-			//						effectRu.play(0);
-			//					}
-			//				}
-			//			}
-		}
-		
-		private static function updateBody02(role : SceneRole) : void
-		{
-			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
 			var rpd_body_effect2 : RenderParamData3D = avatarInfo.rpd_body_effect2;
 			if (rpd_body_effect2 != null)
 			{
-				var ru : RenderUnit3D;
-				var rpd_body : RenderParamData3D = avatarInfo.rpd_body;
 				ru = role.avatar.addRenderUnitToUnit(RenderUnitType.BODY, RenderUnitID.BODY, rpd_body_effect2);
 				if (rpd_body)
 				{
@@ -412,6 +360,49 @@ package com.rpgGame.app.manager
 			{
 				role.avatar.removeRenderUnitByID(RenderUnitType.BODY_EFFECT2, RenderUnitID.BODY_EFFECT2);
 			}
+			
+//			role.avatar.removeRenderUnitsByType(RenderUnitType.BODY_EFFECTS);
+//			var rpd_body_effects : Vector.<RenderParamData3D> = rpd_mount ? avatarInfo.rpd_body_on_mount_effects : avatarInfo.rpd_body_effects;
+//			var bodyEffectBindBones : Array = rpd_mount ? avatarInfo.bodyEffectOnMountBindBones : avatarInfo.bodyEffectBindBones;
+//			if (rpd_body_effects != null)
+//			{
+//				var len : int = rpd_body_effects.length;
+//				for (var i : int = 0; i < len; i++)
+//				{
+//					var effectRu : RenderUnit3D = null;
+//					var rpd_effect : RenderParamData3D = rpd_body_effects[i];
+//					var effectBindBone : String = bodyEffectBindBones ? bodyEffectBindBones[i] : null;
+//					if (rpd_body)
+//					{
+//						if (effectBindBone)
+//						{
+//							if (rpd_body.animatorSourchPath)
+//							{
+//								effectRu = role.avatar.addRenderUnitToJoint(RenderUnitType.BODY, RenderUnitID.BODY, effectBindBone, rpd_effect);
+//							}
+//							else
+//							{
+//								effectRu = role.avatar.addRenderUnitToChild(RenderUnitType.BODY, RenderUnitID.BODY, effectBindBone, rpd_effect);
+//							}
+//						}
+//						else
+//						{
+//							effectRu = role.avatar.addRenderUnitToUnit(RenderUnitType.BODY, RenderUnitID.BODY, rpd_effect);
+//						}
+//					}
+//					if (effectRu)
+//					{
+//						effectRu.defalutStatus = RoleActionType.IDLE;
+//						effectRu.setAddedCallBack(partAddedCallBack, role);
+//						effectRu.setErrorCallBack(partErrorCallBack, role);
+//						effectRu.entityGlass = false;
+//						effectRu.useLight = false;
+//						effectRu.castsShadows = false;
+//						effectRu.repeat = 0;
+//						effectRu.play(0);
+//					}
+//				}
+//			}
 		}
 		
 		private static function updateHair(role : SceneRole) : void
@@ -784,7 +775,7 @@ package com.rpgGame.app.manager
 			//无模型时添加血条
 			if (!ru.resReady && role.headFace)
 			{
-				role.headFace.setTemporary();
+				role.headFace.setBodyRender(null);
 			}
 		}
 		

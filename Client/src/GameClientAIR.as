@@ -35,6 +35,7 @@ package
 	import flash.ui.ContextMenuItem;
 	
 	import away3d.Away3D;
+	import away3d.core.managers.Stage3DProxy;
 	import away3d.loaders.parsers.Parsers;
 	import away3d.log.Log;
 	
@@ -151,7 +152,6 @@ package
 			{
 				if (ClientConfig.isDebug)
 				{
-					Stage3DLayerManager.errorChecking = true;
 					Away3D.REQUEST_HIGHEST_PROFILE = false;
 					Stage3DLayerManager.setup(this.stage, this.stage, stage3DLayerSetupComplete, stage3DLayerSetupError, stage3DLayerUserDisabledError, 1, 10, CameraController.forceStopPanning, onMemoryTooHighed, true,"standardConstrained");
 				}
@@ -170,8 +170,8 @@ package
 		private function stage3DLayerSetupComplete():void
 		{
 			//			LogUtils.log3D(Stage3DLayerManager.stage3DProxy.profile, Stage3DLayerManager.stage3DProxy.stage3D, "ylzt_cc", null, true, stage);
-			var _local1:String = Stage3DLayerManager.stage3DProxy.driverInfo.toLocaleLowerCase();
-			if (_local1.indexOf("software") != -1)
+			var driverInfo:String = Stage3DLayerManager.stage3DProxy.driverInfo.toLocaleLowerCase();
+			if (driverInfo.indexOf("software") != -1)
 			{
 				Log.error("stage3DLayerSetupComplete：硬件加速开启失败，请更新系统显卡驱动程序，或是升级显卡。");
 				if (ClientConfig.isWeiDuan || !ClientConfig.isRelease)
@@ -199,6 +199,11 @@ package
 				}
 				else
 				{	
+					////
+					//    是否开启严格检查模式
+					////
+					Stage3DLayerManager.stage3DProxy.context3D.enableErrorChecking = true;
+					
 					GameLog.addShow("profile type：" + Stage3DLayerManager.stage3DProxy.profile);
 					
 					Parsers.enableAllBundled();

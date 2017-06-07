@@ -1,5 +1,6 @@
 package com.game.engine2D.core
 {
+	import flash.display.BlendMode;
 	import flash.utils.ByteArray;
 	
 	/**
@@ -15,6 +16,7 @@ package com.game.engine2D.core
 		public var hinderBytes:ByteArray;
 		public var enableScaleTexture:Boolean;
 		public var autoRecycleEnable:Boolean;
+		public var blendMode:String = BlendMode.LAYER;
 		public var isAsync:Boolean;
 		private var config:Object;
 		

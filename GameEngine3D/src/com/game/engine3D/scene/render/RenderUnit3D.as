@@ -41,6 +41,7 @@ package com.game.engine3D.scene.render
 	import away3d.core.math.Matrix3DUtils;
 	import away3d.core.pick.PickingColliderType;
 	import away3d.entities.CompositeMesh;
+	import away3d.entities.Entity;
 	import away3d.entities.EntityLayerType;
 	import away3d.entities.Mesh;
 	import away3d.entities.SparticleMesh;
@@ -79,11 +80,11 @@ package com.game.engine3D.scene.render
 
 		public static function recycle(ru : RenderUnit3D) : void
 		{
-			if (!ru || ru.isDisposed)
+			if (!ru || ru.isInPool)
 				return;
 			_cnt--;
 			//利用池回收RenderUnit
-			_pool.disposeObj(ru);
+			_pool.recycleObj(ru);
 		}
 
 		public static function get cnt() : int
@@ -130,7 +131,6 @@ package com.game.engine3D.scene.render
 		private var _rootObj3ds : Vector.<ObjectContainer3D>;
 		private var _childObj3ds : Vector.<ObjectContainer3D>;
 		private var _castsShadows : Boolean;
-		private var _planarRenderLayer : uint = 1;
 		private var _showBounds : Boolean;
 		
 		public var useFog : Boolean;
@@ -267,7 +267,7 @@ package com.game.engine3D.scene.render
 		
 		override public function set zOffset(value : int) : void
 		{
-			if (zOffset == value)
+			if (zOffset == value || !_depthEnable)
 				return;
 			super.zOffset = value;
 			validateZoffset();
@@ -276,7 +276,7 @@ package com.game.engine3D.scene.render
 		override public function set y(value : Number) : void
 		{
 			super.y = value;
-			if (GlobalConfig.use2DMap)
+			if (_depthEnable && GlobalConfig.use2DMap)
 				this.zOffset = GlobalConfig.get2DMapDepth(value);
 		}
 		
@@ -705,6 +705,14 @@ package com.game.engine3D.scene.render
 					mesh.castsShadows = _castsShadows;
 				}
 			}
+			if (_childObj3ds)
+			{
+				for each (var obj:ObjectContainer3D in _childObj3ds)
+				{
+					if (obj is Mesh)
+						Mesh(obj).castsShadows = _castsShadows;
+				}
+			}
 		}
 
 		public function get castsShadows() : Boolean
@@ -712,7 +720,7 @@ package com.game.engine3D.scene.render
 			return _castsShadows;
 		}
 		
-		public function set planarRenderLayer(value : uint) : void
+		override public function set planarRenderLayer(value : uint) : void
 		{
 			if (_planarRenderLayer == value)
 				return;
@@ -731,11 +739,14 @@ package com.game.engine3D.scene.render
 					mesh.planarRenderLayer = value;
 				}
 			}
-		}
-		
-		public function get planarRenderLayer() : uint
-		{
-			return _planarRenderLayer;
+			if (_childObj3ds)
+			{
+				for each (var obj:ObjectContainer3D in _childObj3ds)
+				{
+					if (obj is Entity)
+						Entity(obj).planarRenderLayer = _planarRenderLayer;
+				}
+			}
 		}
 
 		private function initRenderUnitContent() : void
@@ -751,7 +762,8 @@ package com.game.engine3D.scene.render
 			_childObj3ds = _renderUnitData.childObj3ds;
 			if (GlobalConfig.use2DMap)
 			{
-				initChildZoffset();
+//				initChildZoffset();
+				validateChildProperties();
 			}
 			if (_animatorElements)
 			{
@@ -815,7 +827,7 @@ package com.game.engine3D.scene.render
 			validateMaterialProperty();
 		}
 
-		private function initChildZoffset() : void
+		private function validateChildProperties() : void
 		{
 			var obj : ObjectContainer3D;
 			
@@ -825,12 +837,20 @@ package com.game.engine3D.scene.render
 				{
 					_zOffsetByName[obj.name] = obj.zOffset;
 				}
+				if (obj is Entity)
+				{
+					Entity(obj).planarRenderLayer = _planarRenderLayer;
+				}
 			}
 			for each (obj in _childObj3ds)
 			{
 				if (obj && !_zOffsetByName.hasOwnProperty(obj.name))
 				{
 					_zOffsetByName[obj.name] = obj.zOffset;
+				}
+				if (obj is Entity)
+				{
+					Entity(obj).planarRenderLayer = _planarRenderLayer;
 				}
 			}
 		}
@@ -1379,7 +1399,6 @@ package com.game.engine3D.scene.render
 									if (activeStatus)
 									{
 										(currAnimator as SkeletonAnimator).play(activeStatus, _animationTransitionTime, offsetTime);
-//										trace("====================================\t"+currAnimator.name + "\t动作：\t" + activeStatus);
 									}
 									else
 									{
