@@ -14,10 +14,10 @@
 		 * 只是简单地销毁，从显示列表中去掉 
 		 * 
 		 */		
-		function instanceDispose() : void;
+		function putInPool() : void;
 		function instanceDestroy() : void;
 		function reSet(parameters : Array) : void;
-		function get isDisposed() : Boolean;
+		function get isInPool() : Boolean;
 		function get isDestroyed() : Boolean;
 	}
 }

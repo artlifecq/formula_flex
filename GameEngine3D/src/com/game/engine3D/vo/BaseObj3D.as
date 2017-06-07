@@ -148,7 +148,7 @@ package com.game.engine3D.vo
 			return _isDestroyed;
 		}
 		
-		public function get isDisposed() : Boolean
+		public function get isInPool() : Boolean
 		{
 			return _isDisposed;
 		}
@@ -1355,7 +1355,7 @@ package com.game.engine3D.vo
 			destroy();
 		}
 		
-		public function instanceDispose() : void
+		public function putInPool() : void
 		{
 			dispose();
 		}
@@ -1662,6 +1662,28 @@ package com.game.engine3D.vo
 		
 		public function set staticGraphicDis(value : ObjectContainer3D) : void {
 			this._staticGraphicDis = value;
+		}
+		
+		protected var _depthEnable:Boolean = true;
+		final public function get depthEnable():Boolean
+		{
+			return _depthEnable;
+		}
+		
+		public function set depthEnable(value:Boolean):void
+		{
+			_depthEnable = value;
+		}
+		
+		protected var _planarRenderLayer : uint = 1;
+		final public function get planarRenderLayer():uint
+		{
+			return _planarRenderLayer;
+		}
+		
+		public function set planarRenderLayer(value:uint):void
+		{
+			_planarRenderLayer = value;
 		}
 	}
 }

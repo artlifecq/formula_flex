@@ -3,6 +3,8 @@ package com.game.engine2D.vo
 	import com.game.engine3D.core.poolObject.IInstancePoolClass;
 	import com.game.engine3D.core.poolObject.InstancePool;
 	
+	import flash.geom.Vector3D;
+	
 	import away3d.containers.ObjectContainer3D;
 	
 	/**
@@ -13,9 +15,7 @@ package com.game.engine2D.vo
 	public class PoolContainer extends ObjectContainer3D implements IInstancePoolClass
 	{
 		private static var _pool:InstancePool = new InstancePool("PoolContainer3D_pool", 1000);
-
 //		private var _pos:Vector3D = new Vector3D();
-
 		private var _isDisposed:Boolean = false;
 		private var _isDestroyed:Boolean;
 		
@@ -23,13 +23,13 @@ package com.game.engine2D.vo
 		{
 			super();
 		}
-
+		
 		public function get isDestroyed():Boolean
 		{
 			return _isDestroyed;
 		}
 		
-		public function get isDisposed():Boolean
+		public function get isInPool():Boolean
 		{
 			return _isDisposed;
 		}
@@ -70,7 +70,7 @@ package com.game.engine2D.vo
 			_pos.y = val >> 0;
 			super.y = -_pos.y;
 		}
-
+		
 		override public function set z(val:Number):void
 		{
 			_pos.z = val >> 0;
@@ -93,7 +93,7 @@ package com.game.engine2D.vo
 		}
 		
 		/** 进入缓存池调用 */
-		public function instanceDispose():void
+		public function putInPool():void
 		{
 			if (this.parent)
 				this.parent.removeChild(this);
@@ -108,7 +108,7 @@ package com.game.engine2D.vo
 		{
 			if ($pool && !$pool._isDisposed)
 			{
-				_pool.disposeObj($pool);
+				_pool.recycleObj($pool);
 			}
 		}
 		

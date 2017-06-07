@@ -48,7 +48,7 @@ package com.rpgGame.app.state.role.action
 
 		override public function execute() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				super.execute();
 				_stateReference = null;
@@ -75,7 +75,7 @@ package com.rpgGame.app.state.role.action
 		private function onCorrodeTextureComplete(globalTexture : GlobalTexture) : void
 		{
 			GlobalTexture.removeTextureCallBack(ClientConfig.getDynTexture("corrode"), onCorrodeTextureComplete);
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				if (globalTexture.texture)
 				{
@@ -246,7 +246,7 @@ package com.rpgGame.app.state.role.action
 		{
 			super.afterExecute();
 
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				var role : SceneRole = _machine.owner as SceneRole;
 				if (role.type == SceneCharType.BIAO_CHE || role.type == SceneCharType.FAMILY_WAR_FLAG)
@@ -296,7 +296,7 @@ package com.rpgGame.app.state.role.action
 
 		private function roleDied() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				var role : SceneRole = _machine.owner as SceneRole;
 				if(role.type != SceneCharType.PLAYER)
@@ -314,7 +314,7 @@ package com.rpgGame.app.state.role.action
 
 		private function onStopCorrode() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				stopCorrode();
 				if (_isLaunching)
@@ -330,7 +330,7 @@ package com.rpgGame.app.state.role.action
 
 		private function stopCorrode() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				if (_isLaunching)
 				{

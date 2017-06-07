@@ -10,6 +10,7 @@ package com.game.engine2D.scene.render.vo
 	import com.game.engine2D.utils.AnalysisTexture;
 	import com.game.mainCore.libCore.share.CountShareData;
 	
+	import flash.display.BlendMode;
 	import flash.events.Event;
 	import flash.net.URLLoaderDataFormat;
 	import flash.system.ApplicationDomain;
@@ -49,6 +50,8 @@ package com.game.engine2D.scene.render.vo
 		
 		public var isParserComplete:Boolean = false;
 		
+		public var blendMode:String = BlendMode.NORMAL;
+		
 		public function XmlImgData()
 		{
 			super();
@@ -79,7 +82,7 @@ package com.game.engine2D.scene.render.vo
 				_parser.onLoadComplete(completeHandler).onLoadError(errorHandler);
 				_parser.load(fullSourchPath,apd.priority);
 			}
-			else if (!MultiUrlLoadManager.isLoading(fullSourchPath))
+			else if (!MultiUrlLoadManager.isMultiple(fullSourchPath))
 			{
 				var ld:MultiLoadData = new MultiLoadData(fullSourchPath, loadSourceComplete,null,loadError,"","",
 					apd.priority,format);
@@ -141,9 +144,15 @@ package com.game.engine2D.scene.render.vo
 						pack.autoRecycleEnable = xid.autoRecycleEnable;
 						pack.isAsync = GlobalConfig2D.avatarAtfResAsync;
 						if (xid.isStarling)
+						{
 							xid.aid.initForATFStarlingDic(xid.aps,configDic,pack);
+						}
 						else
+						{
+							if (xid.blendMode != BlendMode.NORMAL)
+								pack.blendMode = xid.blendMode;
 							xid.aid.initForATFDic(xid.aps,configDic,pack);
+						}
 						xid.isParserComplete = true;
 						SceneCache.dowithWaiting(fullSourchPath, xid.aps);
 					}

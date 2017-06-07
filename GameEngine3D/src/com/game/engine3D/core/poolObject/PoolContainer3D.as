@@ -29,11 +29,11 @@ package com.game.engine3D.core.poolObject
 		
 		public static function recycle(container : PoolContainer3D) : void
 		{
-			if (!container || container.isDisposed)
+			if (!container || container.isInPool)
 				return;
 			_cnt--;
 			//利用池回收
-			_pool.disposeObj(container);
+			_pool.recycleObj(container);
 		}
 		
 		private var _isDestroyed : Boolean;
@@ -51,7 +51,7 @@ package com.game.engine3D.core.poolObject
 			return _isDestroyed;
 		}
 		
-		public function get isDisposed() : Boolean
+		public function get isInPool() : Boolean
 		{
 			return _isDisposed;
 		}
@@ -131,7 +131,7 @@ package com.game.engine3D.core.poolObject
 			destroy();
 		}
 		
-		public function instanceDispose() : void
+		public function putInPool() : void
 		{
 			dispose();
 		}
