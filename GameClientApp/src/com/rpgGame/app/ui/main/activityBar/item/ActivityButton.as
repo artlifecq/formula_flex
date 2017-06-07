@@ -1,6 +1,7 @@
 ﻿package com.rpgGame.app.ui.main.activityBar.item
 {
     import com.rpgGame.app.manager.FunctionOpenManager;
+    import com.rpgGame.app.manager.time.SystemTimeManager;
     
     import org.mokylin.skin.mainui.activityBar.ActivityButtonSkin;
     
@@ -16,7 +17,7 @@
             ui = new ActivityButtonSkin();
             super(ui);
             ui.txtTitle.isHtmlText = true;
-			ui.txtTitle.text = "";
+			this.onTextColse();
         }
 
         override public function set styleClass(cl:Class):void
@@ -55,13 +56,8 @@
         {
         }
 
-        override public function onActivityOpen():void
-        {
-        }
-
-        override public function onActivityClose():void
-        {
-        }
+        
+        
 
         override protected function onTextStart(second:int):String
         {
@@ -96,5 +92,12 @@
             ui.txtTitle.htmlText = closeTxt;
             return closeTxt;
         }
+		
+		override protected function onTextRuningTime(second:int):String
+		{
+			var closeTxt:String = super.onTextRuningTime(second);
+			ui.txtTitle.htmlText = closeTxt;
+			return closeTxt;
+		}
     }
 }
