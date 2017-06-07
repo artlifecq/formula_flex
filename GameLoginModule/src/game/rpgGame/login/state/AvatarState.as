@@ -18,7 +18,7 @@ package game.rpgGame.login.state
 
 		override public function afterExecute() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				(_machine as RoleStateMachine).updateAvatar();
 				super.afterExecute();
