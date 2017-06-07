@@ -1,6 +1,6 @@
 package com.game.engine3D.vo
 {
-
+	
 	/**
 	 *
 	 * 异常上报数据
@@ -71,10 +71,14 @@ package com.game.engine3D.vo
 		 */
 		public var driverInfo : String = "";
 		/**
+		 * 错误类型
+		 */
+		public var errorType : String = "";
+		/**
 		 * 错误信息
 		 */
 		public var errorInfo : String = "";
-
+		
 		public function ErrorReportData()
 		{
 		}

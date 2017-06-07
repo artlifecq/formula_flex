@@ -89,7 +89,7 @@ package com.rpgGame.app.state.role
 		public static function recycle(machine : RoleStateMachine) : void
 		{
 			//利用池回收RoleStateMachine
-			machinePool.disposeObj(machine);
+			machinePool.recycleObj(machine);
 		}
 		
 		private static var stateMapping : Dictionary = new Dictionary();

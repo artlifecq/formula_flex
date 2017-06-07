@@ -1,6 +1,5 @@
 package
 {
-	import com.client.ClientConfig;
 	import com.client.EngineSetting;
 	import com.client.manager.BGMManager;
 	import com.client.process.CreateChar;
@@ -21,12 +20,10 @@ package
 	import com.game.engine3D.process.ProcessStateMachine;
 	import com.game.engine3D.utils.StatsUtil;
 	import com.gameClient.alert.AlertPanel;
-	import com.gameClient.alert.ReconnectionPanelExt;
 	import com.gameClient.log.GameLog;
 	import com.gameClient.log.GameLogView;
 	import com.gameClient.utils.VersionUtils;
 	import com.rpgGame.coreData.cfg.ClientConfig;
-	import com.rpgGame.coreData.cfg.LanguageConfig;
 	
 	import flash.display.Sprite;
 	import flash.events.ContextMenuEvent;
@@ -158,7 +155,6 @@ package
 			{
 				if (ClientConfig.isDebug)
 				{
-					Stage3DLayerManager.errorChecking = true;
 					Away3D.REQUEST_HIGHEST_PROFILE = false;
 					Stage3DLayerManager.setup(this.stage, this.stage, stage3DLayerSetupComplete, stage3DLayerSetupError, stage3DLayerUserDisabledError, 1, 10, CameraController.forceStopPanning, onMemoryTooHighed, true,"standardConstrained");
 				}
@@ -177,8 +173,8 @@ package
 		private function stage3DLayerSetupComplete():void
 		{
 //			LogUtils.log3D(Stage3DLayerManager.stage3DProxy.profile, Stage3DLayerManager.stage3DProxy.stage3D, "ylzt_cc", null, true, stage);
-			var _local1:String = Stage3DLayerManager.stage3DProxy.driverInfo.toLocaleLowerCase();
-			if (_local1.indexOf("software") != -1)
+			var driverInfo:String = Stage3DLayerManager.stage3DProxy.driverInfo.toLocaleLowerCase();
+			if (driverInfo.indexOf("software") != -1)
 			{
 				Log.error("stage3DLayerSetupComplete：硬件加速开启失败，请更新系统显卡驱动程序，或是升级显卡。");
 				if (ClientConfig.isWeiDuan || !ClientConfig.isRelease)

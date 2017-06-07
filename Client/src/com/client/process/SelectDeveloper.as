@@ -51,7 +51,7 @@ package com.client.process
 			//atf测试下
 			ClientConfig.useBpgFormat = false;
 			ClientConfig.useAtfFormat = true;
-			EngineSetting.initAway3D();
+//			EngineSetting.initAway3D();
 			
 			completeProcess();
 			
@@ -76,16 +76,16 @@ package com.client.process
 			var urlStream:URLStream = (event.currentTarget as URLStream);
 			urlStream.removeEventListener("complete", onVersionCmp);
 			urlStream.removeEventListener("ioError", onVersionIoError);
-			var _local2:ByteArray = new ByteArray();
-			urlStream.readBytes(_local2, 0, urlStream.bytesAvailable);
-			_local2.uncompress();
-			_local2.endian = "littleEndian";
-			var _local4:Object = readVersionsFromBuf(_local2);
+			var by:ByteArray = new ByteArray();
+			urlStream.readBytes(by, 0, urlStream.bytesAvailable);
+			by.uncompress();
+			by.endian = "littleEndian";
+			var vMap:Object = readVersionsFromBuf(by);
 			ClientConfig.version = _version;
 			ClientConfig.useBpgFormat = false;
 			ClientConfig.useAtfFormat = true;
 			EngineSetting.initAway3D();
-			VersionUtils.setup(_local4, ClientConfig.baseDir, _version);
+			VersionUtils.setup(vMap, ClientConfig.baseDir, _version);
 			completeProcess();
 		}
 		

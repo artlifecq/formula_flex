@@ -42,7 +42,7 @@ package com.game.engine2D.vo
 			return _isDestroyed;
 		}
 		
-		public function get isDisposed():Boolean
+		public function get isInPool():Boolean
 		{
 			return _isDisposed;
 		}
@@ -51,7 +51,7 @@ package com.game.engine2D.vo
 		{
 			_posScale.x = val;
 		}
-
+		
 		override public function set scaleY(val:Number):void
 		{
 			_posScale.y = val;
@@ -125,7 +125,7 @@ package com.game.engine2D.vo
 		{
 			super.y = -val;
 		}
-
+		
 		public function reSet($parameters:Array):void
 		{
 			this.x = this.y = this.z = 0;
@@ -140,7 +140,7 @@ package com.game.engine2D.vo
 			this.dispose();
 		}
 		
-		public function instanceDispose():void
+		public function putInPool():void
 		{
 			_isDisposed = true;
 			if (parent)parent.removeChild(this);
@@ -151,7 +151,7 @@ package com.game.engine2D.vo
 		{
 			if ($pool)
 			{
-				_pool.disposeObj($pool);
+				_pool.recycleObj($pool);
 			}
 		}
 		

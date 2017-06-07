@@ -5,7 +5,6 @@ package com.rpgGame.app.graphics
 	import com.rpgGame.app.utils.HeadBloodUtil;
 	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.role.SceneDropGoodsData;
-	import com.rpgGame.coreData.type.AttachDisplayType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import flash.geom.Rectangle;
@@ -25,16 +24,6 @@ package com.rpgGame.app.graphics
 			return dropItemHeadFacePool.createObj(DropItemHeadFace, $role) as DropItemHeadFace;
 		}
 		
-		/**
-		 * @private
-		 * 回收一个HeadBloodBar
-		 * @param bar
-		 */
-		public static function recycle(bar : HeadBloodBar) : void
-		{
-			//利用池回收HeadBloodBar
-			dropItemHeadFacePool.disposeObj(bar);
-		}
 		private var _back:DropNameHeader;
 		private var _nameBar : HeadNameBar;
 		private var _dropdata:SceneDropGoodsData;
@@ -51,7 +40,7 @@ package com.rpgGame.app.graphics
 			_isSelected = false;
 			_isShow = false;
 			_isCamouflage = false;
-			setTemporary();
+			initAddBar();
 		}
 		override protected function initAddBar() : void
 		{
@@ -156,5 +145,52 @@ package com.rpgGame.app.graphics
 			updateShowAndHide();
 		}
 		
+		/**
+		 * @private
+		 * 回收一个HeadFace
+		 * @param headFace
+		 */
+		public static function recycle(dropItemHeadFace : DropItemHeadFace) : void
+		{
+			//利用池回收HeadFace
+			dropItemHeadFacePool.recycleObj(dropItemHeadFace);
+		}
+		
+		//移除背景
+		private function removeBack():void
+		{
+			if(_back)
+			{
+				_back.putInPool();
+			}
+		}
+		
+		override protected function removeBodyRender() : void
+		{
+			super.removeBodyRender();
+			bind(null, null);
+			if (_nameBar != null)
+			{
+				HeadNameBar.recycle(_nameBar);
+				_nameBar = null;
+			}
+		}
+		
+		override public function recycleSelf() : void
+		{
+			super.recycleSelf();
+			recycle(this);
+		}
+		
+		override public function putInPool() : void
+		{
+			_dropdata = null;
+			removeBack();
+			removeBodyRender();
+			_role = null;
+			_isSelected = false;
+			_isCamouflage = false;
+			super.putInPool();
+		}
 	}
 }

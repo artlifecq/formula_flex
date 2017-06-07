@@ -34,7 +34,7 @@ package com.rpgGame.app.state.role.control
 
 		override public function execute() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				super.execute();
 				_stateReference = null;
@@ -54,7 +54,7 @@ package com.rpgGame.app.state.role.control
 
 		private function doBlink(info : ReleaseSpellInfo) : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {x: true, z: true, offsetY: true});
 				TweenLite.killDelayedCallsTo(onReleaseDelayComplete);
@@ -188,7 +188,7 @@ package com.rpgGame.app.state.role.control
 
 		private function onMoveComplete() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				var targetX : int = _stateReference.targetPos.x;
 				var targetZ : int = _stateReference.targetPos.y;
@@ -221,7 +221,7 @@ package com.rpgGame.app.state.role.control
 
 		private function stopBlink() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				(_machine.owner as SceneRole).offsetY = 0;
 				var targetX : int = _stateReference.targetPos.x;

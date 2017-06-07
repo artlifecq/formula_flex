@@ -90,7 +90,7 @@ package com.game.engine2D.utils
 			return textureMaterial;
 		}
 		
-		public static function getAtfMaterialByData(data:ByteArray, path:String, autoRecycleEnable:Boolean, isAsync:Boolean):ITextureMaterial
+		public static function getAtfMaterialByData(data:ByteArray, path:String, autoRecycleEnable:Boolean, isAsync:Boolean, blendMode:String):ITextureMaterial
 		{
 			var atfTexture:ATFByteTexture = new ATFByteTexture(data,path,autoRecycleEnable,isAsync);
 			var texture:ATFTextureMaterial = new ATFTextureMaterial(atfTexture);
@@ -98,13 +98,13 @@ package com.game.engine2D.utils
 			texture.writeDepth = GlobalConfig2D.avatarHighlightEnabled?WriteDepthOption.TRUE:WriteDepthOption.FALSE;
 			texture.depthCompareMode = Context3DCompareMode.ALWAYS;
 			texture.bothSides = true;
-			texture.blendMode = BlendMode.LAYER;
+			texture.blendMode = blendMode;
 			texture.alphaThreshold = 0.05;
 			texture.name = "atf";
 			return texture;
 		}
 		
-		public static function getBpgMaterialByData(data:ByteArray, path:String, enableScaleTexture:Boolean,autoRecycleEnable:Boolean):ITextureMaterial
+		public static function getBpgMaterialByData(data:ByteArray, path:String, enableScaleTexture:Boolean,autoRecycleEnable:Boolean, blendMode:String):ITextureMaterial
 		{
 			var bpgTexture:BPGByteTexture = new BPGByteTexture(data, path, enableScaleTexture,autoRecycleEnable);
 			var texture:BPGTextureMaterial = new BPGTextureMaterial(bpgTexture);
@@ -112,7 +112,7 @@ package com.game.engine2D.utils
 			texture.writeDepth = WriteDepthOption.FALSE;
 			texture.depthCompareMode = Context3DCompareMode.ALWAYS;
 			texture.bothSides = true;
-			texture.blendMode = BlendMode.LAYER;
+			texture.blendMode = blendMode;
 			texture.alphaThreshold = 0.05;
 			texture.name = "bpg";
 			return texture;
