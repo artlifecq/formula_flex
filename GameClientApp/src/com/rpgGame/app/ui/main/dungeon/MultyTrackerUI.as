@@ -326,7 +326,9 @@ package com.rpgGame.app.ui.main.dungeon
 			}
 			if(rItme!=null)
 			{
+				rItme.labelDisplay.width=300;
 				rItme.labelDisplay.htmlText=t;
+				rItme.labelDisplay.width=rItme.labelDisplay.textWidth+2;
 				but.visible=true;
 			}
 		}
@@ -494,6 +496,8 @@ package com.rpgGame.app.ui.main.dungeon
 			for(i=0;i<5;i++)
 			{
 				killButList.push(_skin["killbut_"+i]);
+				TaskUtil.addLabelEvet(_skin["killbut_"+i].skin.labelDisplay);
+				
 			}
 			
 			var ico:IconCDFace;
