@@ -120,6 +120,7 @@ package com.rpgGame.app.manager.role
 			role.name = data.name;
 			data.bodyRadius = radiusForHero;
 			role.headFace = HeadFace.create(role);
+			(role.headFace as HeadFace).bloodPercent= (data.totalStat.hp / data.totalStat.life);
 			role.dialogFace=BubbleDialogFace.create(role);
 			//执行主换装更新
 			AvatarManager.callEquipmentChange(role, false, false, false);
@@ -195,6 +196,7 @@ package com.rpgGame.app.manager.role
 			//设置VO
 			role.data = data;
 			role.headFace = HeadFace.create(role);
+			(role.headFace as HeadFace).bloodPercent= (data.totalStat.hp / data.totalStat.life);
 			var roleNameStr : String = (bornData ? bornData.q_name.toString() : "未知怪物");
 			if (charType == SceneCharType.NPC && data.ownerName)
 			{
@@ -476,6 +478,10 @@ package com.rpgGame.app.manager.role
 		 */
 		public function createDropGoods(data : SceneDropGoodsData) : void
 		{
+			if (SceneManager.isSceneOtherRenderLimit){
+				return;
+			}
+			
 			//如果场景中存在此类型此ID的角色，则移除之
 			removeSceneRoleByIdAndType(data.id, SceneCharType.DROP_GOODS);
 			var role : SceneRole = SceneRole.create(SceneCharType.DROP_GOODS, data.id);

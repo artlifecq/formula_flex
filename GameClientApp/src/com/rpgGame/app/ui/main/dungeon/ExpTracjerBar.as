@@ -61,6 +61,9 @@ package com.rpgGame.app.ui.main.dungeon
 			_endTime = lastTime/1000;
 			
 			Starling.juggler.add(this);
+			TrusteeshipManager.getInstance().findDist=1000;
+			TrusteeshipManager.getInstance().startAutoFight();
+			
 		}
 		
 		public function advanceTime(time:Number):void

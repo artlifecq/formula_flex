@@ -13,6 +13,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleData;
+	import com.rpgGame.coreData.type.PKModeType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -43,7 +44,26 @@ package com.rpgGame.app.manager
 		{
 			EventManager.addEvent(MainPlayerEvent.PK_MODE_CHANGE, onPkModeChange);
 		}
-
+		private static function GetNextPkMode( pkmode :int ):int
+		{
+			pkmode = ( ( pkmode + 1 ) % ( PKModeType.ALL + 1 ) );
+			
+//			// 没得阵营模式
+//			if ( pkmode == EnumPKMode.PK_MODE_GROUP )
+//				pkmode = ( ( pkmode + 1 ) % ( EnumPKMode.PK_MODE_EVIL + 1 ) );
+			return pkmode;
+		}
+		
+		/**
+		 * 循环切换PK模式 
+		 * 
+		 */
+		public static function ChangeNextPkModel():void
+		{
+			var nextPkMode :int = GetNextPkMode( _curPK );
+			
+			HeroSetPKMode(nextPkMode);
+		}
 		public static function HeroSetPKMode(pkMode:int):void
 		{
 			var sceneData : SceneData = MapDataManager.currentScene;
