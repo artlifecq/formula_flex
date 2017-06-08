@@ -23,7 +23,7 @@ package com.rpgGame.app.scene.animator
 		private var _fightSoulRole:SceneRole;
 		private var _owner:SceneRole;
 		
-		private static const TotalRunTime:Number = 5000;
+		private const TotalRunTime:Number = 5000;
 //		private static const RoundConst:Number = 150;
 		
 		private var _preTime:Number;
