@@ -80,6 +80,7 @@ package com.rpgGame.appModule.mount
 			var unit : RenderUnit3D = _curtentInterEff.addRenderUnitWith(data, 0);		
 			_curtentInterEff.x=340;
 			_curtentInterEff.y=440;
+			unit.setScale(3.5);
 			unit.addUnitAtComposite(unit);
 			this.addChild3D(_curtentInterEff);
 			
@@ -109,6 +110,7 @@ package com.rpgGame.appModule.mount
 			unit = _nextInterEff.addRenderUnitWith(data, 0);
 			_nextInterEff.x=590;
 			_nextInterEff.y=370;
+			unit.setScale(2);
 			unit.addUnitAtComposite(unit);
 			this.addChild3D(_nextInterEff);
 			

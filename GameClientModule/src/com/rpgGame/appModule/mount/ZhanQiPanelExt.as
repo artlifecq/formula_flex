@@ -10,6 +10,8 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	
+	import flash.utils.setTimeout;
+	
 	import away3d.events.Event;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -85,7 +87,7 @@ package com.rpgGame.appModule.mount
 		
 		override public function hide():void
 		{
-			ItemGetAdvisePanelExt.remove(this);
+			ItemGetAdvisePanelExt.hidePanel();
 			removeEvent();
 			super.hide();
 		}
@@ -170,8 +172,10 @@ package com.rpgGame.appModule.mount
 		
 		private function refeashLevel():void
 		{
+			_zhanqiShowData.zhanqidataInfo=ZhanQiManager.instance().zhanqiDataInfo;
 			_zhanqiUpExpConent.isAutoing = false;
 			showUplevel();
+			_zhanqiUpExpConent.updataInfo(_zhanqiShowData);
 		}
 		
 		private var _uplevelSuccess:ZhanQiUpLevelSucessPanelExt;
@@ -222,6 +226,7 @@ package com.rpgGame.appModule.mount
 		
 		private function refeashExpHandler():void
 		{
+			_zhanqiShowData.zhanqidataInfo=ZhanQiManager.instance().zhanqiDataInfo;
 			_zhanqiUpExpConent.updataInfo(_zhanqiShowData);
 			_zhanqiProps.refeashPropValue();
 			_zhanqiContent.refeashMode(_zhanqiShowData.zhanqiLevel);
@@ -229,6 +234,11 @@ package com.rpgGame.appModule.mount
 			{
 				eb.refeash(_zhanqiShowData);
 			}
+			setTimeout(isAutoing,30);
+		}
+		
+		private function isAutoing():void
+		{
 			if(_zhanqiShowData.isAutoing)
 			{
 				_zhanqiUpExpConent.isAutoing =ZhanQiManager.instance().eatItemZhanQi(_zhanqiShowData)

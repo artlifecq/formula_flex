@@ -275,7 +275,7 @@ package com.rpgGame.appModule.mount
 			//					_shopPane.parent.removeChild(_shopPane,true);
 			//				_shopPane = null;
 			//			}
-			ItemGetAdvisePanelExt.remove(this);
+			ItemGetAdvisePanelExt.hidePanel();
 			removeEvent();
 			super.hide();
 		}

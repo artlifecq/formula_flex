@@ -50,6 +50,7 @@ package com.rpgGame.appModule.mount
 			
 			if(!_zhanqiShowData.isMaxLevel)
 			{
+				TipTargetManager.remove(_skin.expgroup);
 				_skin.grp_jinjie.visible = true;
 				_skin.maximg.visible = false;
 				_skin.lab_xuyaowupin.htmlText = _zhanqiShowData.upLevelItem.name+"*"+_zhanqiShowData.upLevelNeedItemCount;
@@ -86,7 +87,6 @@ package com.rpgGame.appModule.mount
 				_skin.progressbar.value = _skin.progressbar.maximum*percent;
 				_skin.progressbar_light.x = _skin.progressbar.x +_skin.progressbar.width*percent-3;
 				_skin.lab_progressbar.text = _zhanqiShowData.exp.toString()+"/"+zhanqidata.q_blessnum_limit.toString();
-				TipTargetManager.remove(_skin.expgroup);
 				TipTargetManager.show(_skin.expgroup,TargetTipsMaker.makeTips(TipType.BLESS_TIP,_zhanqiShowData));
 			}else{
 				_skin.grp_jinjie.visible = false;

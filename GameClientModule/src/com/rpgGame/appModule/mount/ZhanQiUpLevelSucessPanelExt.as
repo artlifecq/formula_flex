@@ -1,6 +1,5 @@
 package com.rpgGame.appModule.mount
 {
-	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
@@ -71,7 +70,7 @@ package com.rpgGame.appModule.mount
 			_zhanqidata.zhanqidataInfo = ZhanQiManager.instance().zhanqiDataInfo;
 			props = _zhanqidata.currentProp(null);
 			var levelPower:int = FightValueUtil.calAtrributeFightPower(props,MainRoleManager.actorInfo.job);
-//			_skin.num_zhandouli.number = levelPower;
+			_skin.userData.number = levelPower;
 			_skin.num_lv.number = levelPower - lastPower;
 		}
 		

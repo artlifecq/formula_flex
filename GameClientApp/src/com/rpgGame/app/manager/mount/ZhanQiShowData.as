@@ -2,6 +2,7 @@ package com.rpgGame.app.manager.mount
 {
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.goods.BackPackManager;
+	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.HorseConfigData;
 	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
@@ -18,7 +19,7 @@ package com.rpgGame.app.manager.mount
 	
 	import flash.utils.Dictionary;
 	
-	public class ZhanQiShowData
+	public class ZhanQiShowData extends DynamicTipData
 	{
 		private var _haveChange:Boolean = true;
 		
