@@ -44,7 +44,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 			super.onTouchTarget(target);
 			if(target==_skin.btnEixt){
 				DungeonSender.reqQuitDungeon();
-				this.onHide();
+				this.hide();
 			}
 		}
 		
@@ -64,7 +64,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 			{
 				TimerServer.remove(updateTime);
 				DungeonSender.reqQuitDungeon();
-				this.onHide();
+				this.hide();
 			}
 		}
 	}

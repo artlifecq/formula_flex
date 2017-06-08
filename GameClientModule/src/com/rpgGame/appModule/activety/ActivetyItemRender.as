@@ -59,7 +59,7 @@ package com.rpgGame.appModule.activety
 				}
 				_skin.selectedBtn.isSelected=this.owner.selectedItem==data;
 				var info:ActivetyInfo=_data as ActivetyInfo;
-				if(!info){
+				if(!info||info.info==null){
 					return;
 				}
 				_skin.uiName.styleName="ui/app/activety/zonghe/active_name/"+info.cfg.q_activity_id+".png";
