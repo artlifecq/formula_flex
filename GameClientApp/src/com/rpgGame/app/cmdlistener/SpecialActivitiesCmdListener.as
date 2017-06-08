@@ -1,7 +1,10 @@
 package com.rpgGame.app.cmdlistener
 {
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.ActivityEvent;
 	import com.rpgGame.coreData.cfg.active.ActivetyDataManager;
+	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.netData.specialactivities.bean.SpecialActivityInfo;
 	import com.rpgGame.netData.specialactivities.message.SCActivitiesNotifyListMessage;
 	import com.rpgGame.netData.specialactivities.message.SCSpecialActivitiesListMessage;
@@ -55,6 +58,8 @@ package com.rpgGame.app.cmdlistener
 		{
 			ActivetyDataManager.setActState(msg.activityId,1);
 			EventManager.dispatchEvent(ActivityEvent.UPDATE_ACTIVITY);
+			var info:ActivetyInfo=ActivetyDataManager.getActInfoById(msg.activityId); 
+			AppManager.showAppNoHide(AppConstant.ACTIVETY_OPEN,info);
 		}
 	}
 }
