@@ -7,6 +7,7 @@ package com.rpgGame.app.manager.fightsoul
 	import com.rpgGame.app.manager.role.SceneRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.scene.animator.FightSoulFollowAnimator;
 	import com.rpgGame.coreData.UNIQUEID;
 	import com.rpgGame.coreData.cfg.FightsoulData;
 	import com.rpgGame.coreData.cfg.FightsoulModeData;
@@ -63,6 +64,9 @@ package com.rpgGame.app.manager.fightsoul
 				fightSoulRole.data.avatarInfo.setBodyResID("pc/fightsoul/"+model.q_mode,null);
 				fightSoulRole.data.avatarInfo.bodyEffectID2 = model.q_effect;
 				AvatarManager.updateAvatar(fightSoulRole);
+				var fightSoulFollowAnimator:FightSoulFollowAnimator = new FightSoulFollowAnimator(fightSoulRole);
+				fightSoulFollowAnimator.radius = model.q_radius;
+				owner.setRenderAnimator(fightSoulFollowAnimator);
 			}
 		}
 
