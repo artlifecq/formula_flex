@@ -488,15 +488,18 @@ package com.rpgGame.app.view.icon
 		 */		
 		override public function clear():void
 		{
-			if( _countText && _countText.parent )
-				_countText.parent.removeChild( _countText );
+			if( _countText )
+				_countText.removeFromParent();
 			
 			if( _selectImage != null )
-				_selectImage.visible = false;
+				_selectImage.removeFromParent();
 			
-			if(_qualityImage)
-				_qualityImage.visible = false;
+			if(_bgImage){
+				_bgImage.removeFromParent();
+			}
 			clearLockAsset();
+			hideQuality();
+			
 			if(_qualityEft){
 				_qualityEft.removeFromParent();
 				_qualityEft.stop();

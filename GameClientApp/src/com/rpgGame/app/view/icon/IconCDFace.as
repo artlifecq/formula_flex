@@ -327,6 +327,10 @@ package com.rpgGame.app.view.icon
 			}
 			_faceInfo = null;
 
+			if(_shortcutKeyLab){
+				this.removeChild(_shortcutKeyLab);
+			}
+			
 			TipTargetManager.remove(this);
 			super.clear();
 		}
