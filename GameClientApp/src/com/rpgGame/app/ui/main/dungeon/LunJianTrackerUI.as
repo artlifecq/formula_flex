@@ -1,5 +1,6 @@
 package com.rpgGame.app.ui.main.dungeon
 {
+	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.utils.TimeUtil;
@@ -61,6 +62,9 @@ package com.rpgGame.app.ui.main.dungeon
 				TimerServer.addLoop(updateTime,1000);
 			}
 			setHead(cfg.q_difficult);
+			
+			TrusteeshipManager.getInstance().findDist=10000;
+			TrusteeshipManager.getInstance().startAutoFight();
 		}
 		
 		private function updateTime():void

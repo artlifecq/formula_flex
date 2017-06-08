@@ -132,6 +132,12 @@ package com.rpgGame.core.app
 		public static var MULTY_EXITTIME_PANL:String = createAppInfo( "dungeon.multy.MultyExitTimePanel");
 		
 		/**
+		 *活动面板
+		 */
+		public static var ACTIVETY_PANL:String = createAppInfo( "activety.ActivetyPanel","activety");
+		/** 活动开启 **/
+		public static var ACTIVETY_OPEN:String = createAppInfo("activety.ActOpenPanel");
+		/**
 		 *装备面板
 		 */
 		public static var EQUIP_PANL:String = createAppInfo( "equip.EquipPanel","zhuangbei");

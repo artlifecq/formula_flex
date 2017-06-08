@@ -36,7 +36,7 @@ package com.rpgGame.app.state.role.action
 
 		override public function execute() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				super.execute();
 				_collectFinish = false;
@@ -111,7 +111,7 @@ package com.rpgGame.app.state.role.action
 		override public function afterExecute() : void
 		{
 			super.afterExecute();
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				if (_totalTimeTween)
 				{
@@ -184,7 +184,7 @@ package com.rpgGame.app.state.role.action
 
 		private function onPlayCollectCmp() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				stopCollect();
 				if ((_machine as RoleStateMachine).isPrewarWaiting)

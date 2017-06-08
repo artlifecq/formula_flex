@@ -22,5 +22,7 @@ package com.game.engine2D.core
 		function addMethod(method:EffectMethodBase):void;
 		function removeMethod(method:EffectMethodBase):void;
 		function hasMethod(method:EffectMethodBase):Boolean;
+		function set blendMode(value:String):void
+		function get blendMode():String
 	}
 }

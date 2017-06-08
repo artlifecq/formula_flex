@@ -36,7 +36,7 @@ package com.rpgGame.app.graphics
 		public static function recycle(bar : HeadNameBar) : void
 		{
 			//利用池回收HeadNameBar
-			headNameBarPool.disposeObj(bar);
+			headNameBarPool.recycleObj(bar);
 		}
 
 		public function HeadNameBar()
@@ -94,12 +94,12 @@ package com.rpgGame.app.graphics
 
 		public function instanceDestroy() : void
 		{
-			instanceDispose();
+			putInPool();
 			dispose();
 			_isDestroyed = true;
 		}
 
-		public function instanceDispose() : void
+		public function putInPool() : void
 		{
 			if (parent)
 				parent.removeChild(this);
@@ -111,7 +111,7 @@ package com.rpgGame.app.graphics
 			return _isDestroyed;
 		}
 		
-		override public function get isDisposed():Boolean
+		public function get isInPool():Boolean
 		{
 			return _isDisposed;
 		}

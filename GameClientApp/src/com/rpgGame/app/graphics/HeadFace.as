@@ -61,7 +61,7 @@ package com.rpgGame.app.graphics
 		public static function recycle(headFace : HeadFace) : void
 		{
 			//利用池回收HeadFace
-			headFacePool.disposeObj(headFace);
+			headFacePool.recycleObj(headFace);
 		}
 		
 		public static const UPDATE_HEAD_FIGHT_INFO : String = "updateHeadFightInfo";
@@ -124,7 +124,9 @@ package com.rpgGame.app.graphics
 			_effectGroup = new HeadFaceEffectGroup(_role);
 			_isSelected = false;
 			_isCamouflage = false;
-			setTemporary();
+			
+			initAddBar();
+//			setTemporary();
 		}
 		//---------------------------------------------
 		//---------------------------------------------
@@ -513,6 +515,7 @@ package com.rpgGame.app.graphics
 				}
 			}
 			
+			
 			if (_isSelected)
 			{
 				EventManager.dispatchEvent(UPDATE_HEAD_FIGHT_INFO, _role, _bloodPercent);
@@ -856,7 +859,7 @@ package com.rpgGame.app.graphics
 			}
 		}
 		
-		override public function instanceDispose() : void
+		override public function putInPool() : void
 		{
 			if (_effectGroup)
 			{
@@ -871,7 +874,7 @@ package com.rpgGame.app.graphics
 			_role = null;
 			_isSelected = false;
 			_isCamouflage = false;
-			super.instanceDispose();
+			super.putInPool();
 		}
 		
 		//------------------接口----------------

@@ -62,7 +62,7 @@ package com.game.engine3D.state
 
 		public function beforeExecute(ref : StateReference) : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				if (_ref != ref)
 				{
@@ -151,13 +151,13 @@ package com.game.engine3D.state
 
 		public function transition(type : int, ref : StateReference = null, force : Boolean = false, allowQueue : Boolean = false, dumpTypes : Array = null) : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 				_machine.transition(type, ref, force, allowQueue, dumpTypes);
 		}
 
 		public function removeSelf() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 				_machine.removeState(_type);
 		}
 

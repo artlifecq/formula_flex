@@ -162,7 +162,6 @@ package com.rpgGame.netData {
 			register(109115, ResSetTeamOptionsClientMessage, ResSetTeamOptionsClientHandler);
 			register(109116, ResGenericSearchToClientMessage, ResGenericSearchToClientHandler);
 			register(109117, SCZoneTeamVoteResultMessage, SCZoneTeamVoteResultHandler);
-//			register(109118, SCZoneTeamVoteCancelMessage, SCZoneTeamVoteCancelHandler);
 			register(111101, ResGuildInfoMessage, ResGuildInfoHandler);
 			register(111102, ResGuildBriefnessInfoMessage, ResGuildBriefnessInfoHandler);
 			register(111103, ResGuildListInfoMessage, ResGuildListInfoHandler);

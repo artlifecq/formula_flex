@@ -29,6 +29,8 @@ package com.rpgGame.coreData.type
 
 		/**身体特效ID*/
 		public static const BODY_EFFECT : int = rEnum.next;
+		/**身体特效ID*/
+		public static const BODY_EFFECT2 : int = rEnum.next;
 
 		/**坐骑ID */
 		public static const MOUNT : int = rEnum.next;

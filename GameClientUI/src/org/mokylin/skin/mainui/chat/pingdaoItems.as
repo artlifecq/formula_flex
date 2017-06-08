@@ -30,9 +30,7 @@ package org.mokylin.skin.mainui.chat
 			this.currentState = "down";
 			this.height = 20;
 			this.width = 40;
-			this.elementsContent = [labelDisplay_i()];
-			__pingdaoItems_UIAsset1_i();
-			
+			this.elementsContent = [__pingdaoItems_UIAsset1_i(),labelDisplay_i()];
 			
 			states = {
 				down:[
@@ -68,7 +66,10 @@ package org.mokylin.skin.mainui.chat
 						}
 					]
 			};
-			skinNames={"down":"ui/common/tips/tips_di.png", "hover":"ui/common/tips/tips_di.png", "select":"ui/common/tips/tips_di.png"};
+			skinNames={"down":"ui/common/tips/tips_di.png",
+				"hover":"ui/common/tips/tips_di.png",
+				"select":"ui/common/tips/tips_di.png",
+				"up":"ui/common/tips/tips_di.png"};
 		}
 
 

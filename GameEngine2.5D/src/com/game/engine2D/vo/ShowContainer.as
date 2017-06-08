@@ -1,7 +1,7 @@
 package com.game.engine2D.vo
 {
-	import com.game.mainCore.libCore.pool.IPoolClass;
-	import com.game.mainCore.libCore.pool.Pool;
+	import com.game.engine3D.core.poolObject.IInstancePoolClass;
+	import com.game.engine3D.core.poolObject.InstancePool;
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
@@ -12,10 +12,12 @@ package com.game.engine2D.vo
 	 * ShowContainer缓存池 
 	 * @author guoqing.wen
 	 */
-	public class ShowContainer extends Sprite implements IPoolClass
+	public class ShowContainer extends Sprite implements IInstancePoolClass
 	{
-		static private var _pool:Pool = new Pool("ShowContainer_pool", 1000);
+		static private var _pool:InstancePool = new InstancePool("ShowContainer_pool", 1000);
 		public var containerMosEnabled:Boolean = true;
+		private var _isDestroy:Boolean = false;
+		private var _isInputPool:Boolean = false;
 		
 		public function ShowContainer()
 		{
@@ -29,6 +31,7 @@ package com.game.engine2D.vo
 			this.scale = 1;
 			this.x = 0;
 			this.y = 0;
+			this._isInputPool = false;
 		}
 		
 		public function get filters():Array
@@ -41,13 +44,39 @@ package com.game.engine2D.vo
 			
 		}
 		
+		public function instanceDestroy():void
+		{
+			_isDestroy = true;
+			super.dispose();
+		}
+		
+		public function get isDestroyed():Boolean
+		{
+			return _isDestroy;
+		}
+		
+		public function get isInPool():Boolean
+		{
+			return _isInputPool;
+		}
+		
+		public function putInPool():void
+		{
+			_isInputPool = true;
+		}
+		
+		override public function dispose():void
+		{
+			
+		}
+		
 		static public function recycle($pool:ShowContainer):void
 		{
 			if ($pool)
 			{
 				if ($pool.parent)$pool.parent.removeChild($pool);
 				removeAllChild($pool);
-				_pool.disposeObj($pool);
+				_pool.recycleObj($pool);
 			}
 		}
 		

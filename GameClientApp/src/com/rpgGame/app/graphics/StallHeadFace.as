@@ -31,7 +31,7 @@ package com.rpgGame.app.graphics
 		public static function recycle(headFace : StallHeadFace) : void
 		{
 			//利用池回收HeadFace
-			headFacePool.disposeObj(headFace);
+			headFacePool.recycleObj(headFace);
 		}
 		
 		override public function reSet($parameters : Array) : void
@@ -40,7 +40,7 @@ package com.rpgGame.app.graphics
 			_role = $parameters[0] as SceneRole;
 			_isSelected = false;
 			_isCamouflage = false;
-			setTemporary();
+			initAddBar();
 		}
 		
 		private static const LABEL_MIN_WIDTH : int = 80;
@@ -147,10 +147,10 @@ package com.rpgGame.app.graphics
 			showAndHideElement(_stallBg, true);
 		}
 		
-		override public function instanceDispose() : void
+		override public function putInPool() : void
 		{
 			_stallBg = null;
-			super.instanceDispose();
+			super.putInPool();
 		}
 		
 		override public function recycleSelf() : void

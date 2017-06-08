@@ -114,12 +114,16 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_equip_wash_attr:String = "data.Q_equip_wash_attr";
 		/**  战魂升级数据						 */
 		public static const Q_fightsoul:String = "data.Q_fightsoul";
-		/**  战魂模型数据						 */
+		/**  战魂模型数据							 */
 		public static const Q_fightsoul_mode:String = "data.Q_fightsoul_mode";
 		/**  战魂升级数据			 */
 		public static const Q_fightsoul_path:String = "data.Q_fightsoul_path";
 		/**  全局变量表		 */
 		public static const Q_global:String = "data.Q_global";
+		/**   										 */
+		public static const Q_guild:String = "data.Q_guild";
+		/**  												 */
+		public static const Q_guild_permission:String = "data.Q_guild_permission";
 		/**  道具合成表									 */
 		public static const Q_hecheng:String = "data.Q_hecheng";
 		/**  坐骑基本信息数据库																					 */
@@ -162,7 +166,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_shop:String = "data.Q_shop";
 		/**  购买界面其他途径提示数据库				 */
 		public static const Q_source:String = "data.Q_source";
-		/**  活动配置表																			 */
+		/**  活动配置表																				 */
 		public static const Q_special_activities:String = "data.Q_special_activities";
 		/**  tipsid	标题	描述 */
 		public static const Q_tipsinfo:String = "data.Q_tipsinfo";
@@ -262,6 +266,8 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_fightsoul_mode", com.rpgGame.coreData.clientConfig.Q_fightsoul_mode);
 			regClass("data.Q_fightsoul_path", com.rpgGame.coreData.clientConfig.Q_fightsoul_path);
 			regClass("data.Q_global", com.rpgGame.coreData.clientConfig.Q_global);
+			regClass("data.Q_guild", com.rpgGame.coreData.clientConfig.Q_guild);
+			regClass("data.Q_guild_permission", com.rpgGame.coreData.clientConfig.Q_guild_permission);
 			regClass("data.Q_hecheng", com.rpgGame.coreData.clientConfig.Q_hecheng);
 			regClass("data.Q_horse", com.rpgGame.coreData.clientConfig.Q_horse);
 			regClass("data.Q_horse_skills", com.rpgGame.coreData.clientConfig.Q_horse_skills);

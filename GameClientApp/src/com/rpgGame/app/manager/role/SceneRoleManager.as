@@ -121,6 +121,7 @@ package com.rpgGame.app.manager.role
 			role.name = data.name;
 			data.bodyRadius = radiusForHero;
 			role.headFace = HeadFace.create(role);
+			(role.headFace as HeadFace).bloodPercent= (data.totalStat.hp / data.totalStat.life);
 			role.dialogFace=BubbleDialogFace.create(role);
 			//执行主换装更新
 			AvatarManager.callEquipmentChange(role, false, false, false);
@@ -199,7 +200,6 @@ package com.rpgGame.app.manager.role
 			var bornData : Q_monster = MonsterDataManager.getData(data.modelID);
 			//设置VO
 			role.data = data;
-			role.headFace = HeadFace.create(role);
 			var roleNameStr : String = (bornData ? bornData.q_name.toString() : "未知怪物");
 			if (charType == SceneCharType.NPC && data.ownerName)
 			{
@@ -207,6 +207,8 @@ package com.rpgGame.app.manager.role
 			}
 			role.name = data.name = roleNameStr;
 			role.ownerIsMainChar = (data.ownerId == MainRoleManager.actorID);
+			role.headFace = HeadFace.create(role);
+			(role.headFace as HeadFace).bloodPercent= (data.totalStat.hp / data.totalStat.life);
 			data.avatarInfo.setBodyResID(bornData ? bornData.q_body_res : "", null);
 			//			var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(bornData ? bornData.q_body_res : "");
 			if (bornData.q_animation>0)
@@ -481,6 +483,10 @@ package com.rpgGame.app.manager.role
 		 */
 		public function createDropGoods(data : SceneDropGoodsData) : void
 		{
+			if (SceneManager.isSceneOtherRenderLimit){
+				return;
+			}
+			
 			//如果场景中存在此类型此ID的角色，则移除之
 			removeSceneRoleByIdAndType(data.id, SceneCharType.DROP_GOODS);
 			var role : SceneRole = SceneRole.create(SceneCharType.DROP_GOODS, data.id);
@@ -623,7 +629,7 @@ package com.rpgGame.app.manager.role
 			var fightSoulLevel:int = (owner.data as HeroData).fightSoulLevel;
 			var model:Q_fightsoul_mode = FightsoulModeData.getModeInfoById(fightSoulLevel);
 			roleData.avatarInfo.setBodyResID("pc/fightsoul/"+model.q_mode,null);
-			roleData.avatarInfo.bodyEffectID = model.q_effect;
+			roleData.avatarInfo.bodyEffectID2 = model.q_effect;
 			fightSoulRole.ownerIsMainChar = (owner.id == MainRoleManager.actorID);
 			fightSoulRole.data = roleData;
 			fightSoulRole.mouseEnable = false;
@@ -638,6 +644,7 @@ package com.rpgGame.app.manager.role
 			fightSoulRole.rotationY = owner.rotationY;
 			SceneManager.addSceneObjToScene(fightSoulRole, false);
 			fightSoulFollowAnimator = new FightSoulFollowAnimator(fightSoulRole);
+			fightSoulFollowAnimator.radius = model.q_radius;
 			owner.setRenderAnimator(fightSoulFollowAnimator);
 			return fightSoulRole;
 		}
@@ -723,8 +730,9 @@ package com.rpgGame.app.manager.role
 				var dec:int=oldVal-newVal;	
 				for (i = 0; i < dec; ++i) 
 				{
-					tmp=role.avatar.removeRenderUnitByID(RenderUnitType.NEEDLEEFFECT, oldVal-1-i);
+					tmp=role.avatar.getRenderUnitByID(RenderUnitType.NEEDLEEFFECT,oldVal-1-i);
 					TweenMax.killTweensOf(tmp);
+					role.avatar.removeRenderUnit(tmp);
 				}
 				for (i = 0; i < newVal; ++i) 
 				{

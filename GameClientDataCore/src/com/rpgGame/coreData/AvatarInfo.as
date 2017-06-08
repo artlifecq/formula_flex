@@ -25,6 +25,9 @@ package com.rpgGame.coreData
 		private var _bodyEffectID : String = null;
 		private var _rpd_body_effect : RenderParamData3D;
 		
+		private var _bodyEffectID2 : String = null;
+		private var _rpd_body_effect2 : RenderParamData3D;
+		
 		private var _hairResID : String = null;
 		private var _rpd_hair : RenderParamData3D;
 		
@@ -172,6 +175,25 @@ package com.rpgGame.coreData
 			{
 				_rpd_body_effect = null;
 				_bodyEffectID = null;
+			}
+		}
+		
+		public function set bodyEffectID2(value : String) : void
+		{
+			if (_bodyEffectID2 == value)
+				return;
+			_bodyEffectID2 = value;
+			if (_bodyEffectID2)
+			{
+				_rpd_body_effect2 = new RenderParamData3D(RenderUnitID.BODY_EFFECT2, RenderUnitType.BODY_EFFECT2, ClientConfig.getEffect(_bodyEffectID2));
+				_rpd_body_effect2.mouseEnable = false;
+				_rpd_body_effect2.clearSameType = false;
+				_rpd_body_effect2.priority = _priority;
+			}
+			else
+			{
+				_rpd_body_effect2 = null;
+				_bodyEffectID2 = null;
 			}
 		}
 		
@@ -408,6 +430,11 @@ package com.rpgGame.coreData
 			return _bodyEffectID;
 		}
 		
+		public function get bodyEffectID2():String
+		{
+			return _bodyEffectID2;
+		}
+
 		/**武器换装资源*/
 		public function get weaponResID() : String
 		{
@@ -474,6 +501,12 @@ package com.rpgGame.coreData
 			return _rpd_body_effect;
 		}
 		
+		/**身体特效2*/
+		public function get rpd_body_effect2() : RenderParamData3D
+		{
+			return _rpd_body_effect2;
+		}
+
 		/**武器*/
 		public function get rpd_weapon() : RenderParamData3D
 		{
@@ -531,35 +564,37 @@ package com.rpgGame.coreData
 			effectResID = null;
 			bodyEffectID = null;
 		}
-		
-		public function clone() : AvatarInfo {
-			var info : AvatarInfo = new AvatarInfo();
-			info._bodyAnimatResID = this._bodyAnimatResID;
-			info._bodyEffectID = this._bodyEffectID;
-			info._bodyMethodTypeEffectResID = this._bodyMethodTypeEffectResID;
-			info._bodyResID = this._bodyResID;
-			info._deputyWeaponEffectID = this._deputyWeaponEffectID;
-			info._deputyWeaponEffectOffset = this._deputyWeaponEffectOffset;
-			info._deputyWeaponEffectScale = this._deputyWeaponEffectScale;
-			info._deputyWeaponResID = this._deputyWeaponResID;
-			info._effectResID = this._effectResID;
-			info._hairResID = this._hairResID;
-			info._mountAnimatResID = this._mountAnimatResID;
-			info._mountResID = this._mountResID;
-			info._rpd_body = this._rpd_body;
-			info._rpd_body_effect = this._rpd_body_effect;
-			info._rpd_body_method_type_effect = this._rpd_body_method_type_effect;
-			info._rpd_deputy_weapon = this._rpd_deputy_weapon;
-			info._rpd_deputyWeapon_effect = this._rpd_deputyWeapon_effect;
-			info._rpd_effect = this._rpd_effect;
-			info._rpd_hair = this._rpd_hair;
-			info._rpd_mount = this._rpd_mount;
-			info._rpd_weapon = this._rpd_weapon;
-			info._rpd_weapon_effect = this._rpd_weapon_effect;
-			info._weaponEffectID = this._weaponEffectID;
-			info._weaponEffectOffset = this._weaponEffectOffset;
-			info._weaponEffectScale = this._weaponEffectScale;
-			info._weaponResID = this._weaponResID;
+        
+        public function clone() : AvatarInfo {
+            var info : AvatarInfo = new AvatarInfo();
+            info._bodyAnimatResID = this._bodyAnimatResID;
+            info._bodyEffectID = this._bodyEffectID;
+			info._bodyEffectID2 = this._bodyEffectID2;
+            info._bodyMethodTypeEffectResID = this._bodyMethodTypeEffectResID;
+            info._bodyResID = this._bodyResID;
+            info._deputyWeaponEffectID = this._deputyWeaponEffectID;
+            info._deputyWeaponEffectOffset = this._deputyWeaponEffectOffset;
+            info._deputyWeaponEffectScale = this._deputyWeaponEffectScale;
+            info._deputyWeaponResID = this._deputyWeaponResID;
+            info._effectResID = this._effectResID;
+            info._hairResID = this._hairResID;
+            info._mountAnimatResID = this._mountAnimatResID;
+            info._mountResID = this._mountResID;
+            info._rpd_body = this._rpd_body;
+            info._rpd_body_effect = this._rpd_body_effect;
+			info._rpd_body_effect2 = this._rpd_body_effect2;
+            info._rpd_body_method_type_effect = this._rpd_body_method_type_effect;
+            info._rpd_deputy_weapon = this._rpd_deputy_weapon;
+            info._rpd_deputyWeapon_effect = this._rpd_deputyWeapon_effect;
+            info._rpd_effect = this._rpd_effect;
+            info._rpd_hair = this._rpd_hair;
+            info._rpd_mount = this._rpd_mount;
+            info._rpd_weapon = this._rpd_weapon;
+            info._rpd_weapon_effect = this._rpd_weapon_effect;
+            info._weaponEffectID = this._weaponEffectID;
+            info._weaponEffectOffset = this._weaponEffectOffset;
+            info._weaponEffectScale = this._weaponEffectScale;
+            info._weaponResID = this._weaponResID;
 			info._fightsoulMode = this._fightsoulMode;
 			info._fightsoulResID = this._fightsoulResID;
 			return info;

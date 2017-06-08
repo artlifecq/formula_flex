@@ -1,6 +1,5 @@
 package  com.rpgGame.app.manager.shop
 {
-	import com.game.mainCore.core.model.AppModel;
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.GlobalFunction;
 	import com.rpgGame.app.manager.ItemActionManager;
@@ -9,14 +8,9 @@ package  com.rpgGame.app.manager.shop
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.ShopSender;
-	import com.rpgGame.app.ui.UIModel;
 	import com.rpgGame.app.ui.alert.GameAlertYellowBtnExt;
-	import com.rpgGame.appModule.common.GlobalFunction;
-	import com.rpgGame.core.app.AppConstant;
-	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.ShopEvent;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
-	import com.rpgGame.coreData.enum.EnumShopType;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.shop.ShopItemVo;
 	import com.rpgGame.coreData.info.shop.ShopVo;

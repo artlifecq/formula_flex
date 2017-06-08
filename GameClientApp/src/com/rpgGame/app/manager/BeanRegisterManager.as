@@ -29,6 +29,7 @@
 	import com.rpgGame.app.cmdlistener.RoleStateCmdListener;
 	import com.rpgGame.app.cmdlistener.RollCmdListener;
 	import com.rpgGame.app.cmdlistener.ShopCmdListener;
+	import com.rpgGame.app.cmdlistener.SpecialActivitiesCmdListener;
 	import com.rpgGame.app.cmdlistener.SpellCmdListener;
 	import com.rpgGame.app.cmdlistener.StallCmdListener;
 	import com.rpgGame.app.cmdlistener.SummonCmdListener;
@@ -154,6 +155,7 @@
 			register("CrossCmdListener",CrossCmdListener);
 			register("DailyZoneCmdListner",DailyZoneCmdListner);//日常副本
 			register("JJBattleCmdListener", JJBattleCmdListener); //模块号7
+			register("SpecialActivitiesCmdListener", SpecialActivitiesCmdListener); //模块号7
 		}
 	}
 }

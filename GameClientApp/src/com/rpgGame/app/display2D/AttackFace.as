@@ -1,7 +1,7 @@
 package com.rpgGame.app.display2D
 {
-	import com.game.mainCore.libCore.pool.IPoolClass;
-	import com.game.mainCore.libCore.pool.Pool;
+	import com.game.engine3D.core.poolObject.IInstancePoolClass;
+	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	
 	import flash.geom.Point;
@@ -16,7 +16,7 @@ package com.rpgGame.app.display2D
 	 * 伤害效果
 	 * @author Carver
 	 */
-	public class AttackFace extends Sprite implements IPoolClass
+	public class AttackFace extends Sprite implements IInstancePoolClass
 	{
 		//		public var easeFun:Function;
 		/** 特殊类型,带来的特殊坐标偏移 **/
@@ -46,7 +46,7 @@ package com.rpgGame.app.display2D
 		/** 类型,名称等.. **/
 		private var _txtBmpStarling:Image;
 		/** 打击效果池 **/
-		private static var attackFacePool:Pool = new Pool("attackFacePool",500);
+		private static var attackFacePool:InstancePool = new InstancePool("attackFacePool",500);
 		/** 类型资源 **/
 		private var _typeRes:String = "";
 		/** 数字类型 **/
@@ -60,6 +60,9 @@ package com.rpgGame.app.display2D
 		
 		private var startX:int=0;
 		
+		private var _isDestroyed:Boolean;
+		private var _isDisposed:Boolean;
+		
 		/**
 		 *  
 		 * @param $typeRes
@@ -71,10 +74,10 @@ package com.rpgGame.app.display2D
 		 */		
 		public function AttackFace( $typeRes:String = "", $numberRes:String = "",  $value:* = 0, $specialType:String=null, $specialOffsetPos:Point = null,extendData:Object=null)
 		{
+			_isDestroyed = false;
 			_specialOffsetPos = $specialOffsetPos || new Point();
 			reSet([  $typeRes, $numberRes, $value, $specialType,_specialOffsetPos,extendData]);
 		}
-		
 		
 		/** 值(可以是数字,也可以是字符串) **/
 		public function get value():*
@@ -105,49 +108,17 @@ package com.rpgGame.app.display2D
 		public static function recycleAttackFace($attFace:AttackFace):void
 		{
 			//利用池回收AttackFace
-			attackFacePool.disposeObj($attFace);
+			attackFacePool.recycleObj($attFace);
 		}
-		/**
-		 * @private
-		 * 释放
-		 */
-		override public function dispose():void
+		
+		public function get isDestroyed():Boolean
 		{
-//			super.dispose();使用对象池无须完全销毁,否则会导致底层Mesh数据丢失而不可重用
-			_typeRes = "";
-			_value = 0;
-			_specialType = null;
-			_specialOffsetPos.x = _specialOffsetPos.y = 0;
-			if( parent != null )
-				parent.removeChild(this);
-			
-			disposeText(_geBmpStarling);
-			disposeText(_shiBmpStarling);
-			disposeText(_baiBmpStarling);
-			disposeText(_qianBmpStarling);
-			disposeText(_wanBmpStarling);
-			disposeText(_shiwanBmpStarling);
-			disposeText(_baiwanBmpStarling);
-			disposeText(_qianwanBmpStarling);
-			disposeText(_yiBmpStarling);
-			disposeText(_shiyiBmpStarling);
-			
-			_geBmpStarling=null;
-			_shiBmpStarling=null;
-			_baiBmpStarling=null;
-			_qianBmpStarling=null;
-			_wanBmpStarling=null;
-			_shiwanBmpStarling=null;
-			_baiwanBmpStarling=null;
-			_qianwanBmpStarling=null;
-			_yiBmpStarling=null;
-			_shiyiBmpStarling=null;
-			if (_extendsData) 
-			{
-				_extendsData.dispose();
-				_extendsData=null;
-			}
-			
+			return _isDestroyed;
+		}
+		
+		public function get isInPool():Boolean
+		{
+			return _isDisposed;
 		}
 		
 		/**
@@ -156,6 +127,7 @@ package com.rpgGame.app.display2D
 		 */
 		public function reSet($parameters:Array):void 
 		{
+			_isDisposed = false;
 			removeChildren();
 			_typeRes = $parameters[0];
 			_numberRes =  $parameters[1];
@@ -194,7 +166,7 @@ package com.rpgGame.app.display2D
 			}
 			
 			
-			var texture:IStarlingTexture = GuiTheme.ins.getTexture( _typeRes );
+			var texture:IStarlingTexture = GuiTheme.ins.getTexture( _typeRes);
 			if( texture == null )
 			{
 				if( _txtBmpStarling != null )
@@ -385,6 +357,61 @@ package com.rpgGame.app.display2D
 				disImage.dispose();
 				disImage = null;
 			}
+		}
+		
+		/**
+		 * @private
+		 * 释放
+		 */
+		override public function dispose():void
+		{
+			disposeText(_geBmpStarling);
+			disposeText(_shiBmpStarling);
+			disposeText(_baiBmpStarling);
+			disposeText(_qianBmpStarling);
+			disposeText(_wanBmpStarling);
+			disposeText(_shiwanBmpStarling);
+			disposeText(_baiwanBmpStarling);
+			disposeText(_qianwanBmpStarling);
+			disposeText(_yiBmpStarling);
+			disposeText(_shiyiBmpStarling);
+			
+			_geBmpStarling=null;
+			_shiBmpStarling=null;
+			_baiBmpStarling=null;
+			_qianBmpStarling=null;
+			_wanBmpStarling=null;
+			_shiwanBmpStarling=null;
+			_baiwanBmpStarling=null;
+			_qianwanBmpStarling=null;
+			_yiBmpStarling=null;
+			_shiyiBmpStarling=null;
+			if (_extendsData) 
+			{
+				_extendsData.dispose();
+				_extendsData=null;
+			}
+			
+		}
+		
+		public function putInPool():void
+		{
+			//			super.dispose();使用对象池无须完全销毁,否则会导致底层Mesh数据丢失而不可重用
+			_typeRes = "";
+			_value = 0;
+			_specialType = null;
+			_specialOffsetPos.x = _specialOffsetPos.y = 0;
+			if( parent != null )
+				parent.removeChild(this);
+
+			_isDisposed = true;
+		}
+		
+		public function instanceDestroy():void
+		{
+			putInPool();
+			dispose();
+			_isDestroyed = true;
 		}
 	}
 }

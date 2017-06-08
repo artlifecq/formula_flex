@@ -79,6 +79,10 @@ package com.rpgGame.appModule.fightsoul
 				return -1;
 			else if(q1.isOver&&!q2.isOver)
 				return 1;
+			else if(q1.isOpen()&&!q2.isOpen())
+				return -1;
+			else if(!q1.isOver&&q2.isOver)
+				return 1;
 			else 
 				return 0;
 		}
@@ -172,7 +176,7 @@ package com.rpgGame.appModule.fightsoul
 				_skin.modecontent.addChild(content);
 				_fightsoul = new FightSoulModePane();
 				_fightsoul.x = 340;
-				_fightsoul.y = 400;
+//				_fightsoul.y = 800;
 				content.addChild3D(_fightsoul);
 			}
 			

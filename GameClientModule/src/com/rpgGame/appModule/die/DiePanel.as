@@ -1,14 +1,18 @@
 package com.rpgGame.appModule.die
 {
 	import com.rpgGame.app.manager.goods.BackPackManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.coreData.cfg.DieCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
+	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
+	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.lang.LangQ_BackPack;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.player.message.ResPlayerDieMessage;
@@ -47,7 +51,11 @@ package com.rpgGame.appModule.die
 		private var tween:TweenLite;
 		private var _listContent:ContentList;
 		private const FUHUO_ID:int=300;
-		
+		private var butX1:int=396;
+		private var timeX1:int=533;
+		private var butX2:int=270;
+		private var timeX2:int=407;
+		 
 		public function DiePanel()
 		{
 			_skin=new fuhuo_Skin();
@@ -97,6 +105,24 @@ package com.rpgGame.appModule.die
 			}
 			
 			EventManager.addEvent(MainPlayerEvent.REVIVE_SUCCESS,hide);
+			
+			/*---------在多人副本中改变面板-----------*/
+			var sceneData:SceneData=MapDataManager.getMapInfo(MainRoleManager.actorInfo.mapID);
+			var mapCfg:Q_map=sceneData.getData();
+			if(mapCfg.q_map_zones==1){//副本
+				_skin.btn_fuhuodian.x=butX2;
+				_skin.lbl_time.x=timeX2;
+				_skin.btn_yuandi.visible=false;
+				_skin.btn_goumai.visible=false;
+				
+			}else{
+				_skin.btn_fuhuodian.x=butX1;
+				_skin.lbl_time.x=timeX1;
+				_skin.btn_yuandi.visible=true;
+				_skin.btn_goumai.visible=true;
+			}
+			
+			
 		}
 		
 		protected function onTimer(event:TimerEvent):void

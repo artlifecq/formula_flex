@@ -41,15 +41,15 @@
 			return instance;
 		}
 		
-		public function disposeObj(instance : IInstancePoolClass) : void
+		public function recycleObj(instance : IInstancePoolClass) : void
 		{
 			if (instance == null)
 			{
 				return;
 			}
-			if (!instance.isDisposed)
+			if (!instance.isInPool)
 			{
-				instance.instanceDispose();
+				instance.putInPool();
 			}
 			if (_instanceArr.indexOf(instance) == -1)
 			{
