@@ -769,8 +769,8 @@ package com.rpgGame.app.ui.main.chat {
 		{
 //			AppManager.showApp(AppConstant.ACTIVETY_PANL);
 			
-			var info:ActivetyInfo=ActivetyDataManager.getActInfoById(1); 
-			AppManager.showAppNoHide(AppConstant.ACTIVETY_OPEN,info);
+		/*	var info:ActivetyInfo=ActivetyDataManager.getActInfoById(1); 
+			AppManager.showAppNoHide(AppConstant.ACTIVETY_OPEN,info);*/
 			
 			if("" == this._inputText.text )
 			{
