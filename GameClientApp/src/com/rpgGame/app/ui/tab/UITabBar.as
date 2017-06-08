@@ -61,7 +61,10 @@ package com.rpgGame.app.ui.tab
 			}
 			_tabBar.addEventListener(Event.CHANGE,selectChangeHandler);
 			this._data=data;
-			_tabBar.selectedIndex=setTabDataWithTabKey(openTable);
+			var index:int = setTabDataWithTabKey(openTable);
+			if(index<0)
+				index = 0;
+			_tabBar.selectedIndex=index;
 			selectChangeHandler();
 		}
 		

@@ -9,15 +9,18 @@ package com.rpgGame.app.manager.guild
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_guild;
 	import com.rpgGame.coreData.clientConfig.Q_guild_permission;
+	import com.rpgGame.coreData.enum.EnumGuildPost;
 	import com.rpgGame.coreData.lang.LangGuild;
 	import com.rpgGame.netData.guild.bean.GuildInfo;
 	import com.rpgGame.netData.guild.bean.GuildMemberInfo;
+	import com.rpgGame.netData.guild.message.ReqGuildConveneMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildCreateMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildDissolveMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildExitMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildInfoMessage;
 	import com.rpgGame.netData.guild.message.ResGuildInfoMessage;
 	
 	import org.game.netCore.connection.SocketConnection;
-	import org.game.netCore.data.long;
 
 	/**
 	 * 帮派管理类 
@@ -49,6 +52,7 @@ package com.rpgGame.app.manager.guild
 		private var _guildLevelInfo:Q_guild;
 		private var _memberList: Vector.<GuildMemberInfo>;
 		private var _haveDailyGift: int;
+		private var _chiefGuildMemberInfo:GuildMemberInfo;
 		
 		private static var _instance:GuildManager;
 		public static function instance():GuildManager
@@ -79,8 +83,9 @@ package com.rpgGame.app.manager.guild
 					if(MainRoleManager.isSelf(menberinfo.id.ToGID()))
 					{
 						_selfMemberInfo = menberinfo;
-						break;
 					}
+					if(menberinfo.memberType == EnumGuildPost.GUILDPOST_CHIEF)
+						_chiefGuildMemberInfo = menberinfo;
 				}
 			}else{
 				_selfMemberInfo = new GuildMemberInfo();
@@ -91,6 +96,10 @@ package com.rpgGame.app.manager.guild
 				_selfPermissionInfo = GuildCfgData.getPermissionInfo(_selfMemberInfo.memberType);
 			}
 		}
+		/**
+		 * 请求获得帮会信息 
+		 * 
+		 */
 		public function requestGuildInfo():void
 		{
 			SocketConnection.send(new ReqGuildInfoMessage());
@@ -220,5 +229,39 @@ package com.rpgGame.app.manager.guild
 				return false;
 			return (_guildData.city&(1<<index))>0;
 		}
+		
+		/** 获得帮主帮派成员信息 **/
+		public function get chiefGuildMemberInfo():GuildMemberInfo
+		{
+			return _chiefGuildMemberInfo;
+		}
+		
+		/** 解散帮会 **/
+		public function guildDissolve():void
+		{
+			if(_selfPermissionInfo.q_dissolve ==0)
+			{
+				return ;
+			}
+			SocketConnection.send(new ReqGuildDissolveMessage());
+		}
+		
+		/** 请求召集帮派 **/
+		public function guildConvene():void
+		{
+			if(_selfPermissionInfo.q_recrui ==0)
+			{
+				return ;
+			}
+			SocketConnection.send(new ReqGuildConveneMessage());
+		}
+		
+		/** 请求离开帮派 **/
+		public function guildExit():void
+		{
+			SocketConnection.send(new ReqGuildExitMessage());
+		}
+		
+		
 	}
 }

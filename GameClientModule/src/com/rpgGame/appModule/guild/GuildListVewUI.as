@@ -14,6 +14,11 @@ package com.rpgGame.appModule.guild
 		{
 			_skin = new BangHui_Home();
 			super(_skin);
+			initView();
+		}
+		private function initView():void
+		{
+//			_skin.lbList
 		}
 		override public function show(data:Object=null):void
 		{

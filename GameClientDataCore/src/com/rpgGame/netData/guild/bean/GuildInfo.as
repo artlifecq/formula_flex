@@ -1,4 +1,5 @@
 package com.rpgGame.netData.guild.bean{
+	import com.rpgGame.netData.player.bean.PlayerAppearanceInfo;
 	
 	import org.game.netCore.data.long;
 	
@@ -29,6 +30,9 @@ package com.rpgGame.netData.guild.bean{
 		
 		//帮主战斗力
 		private var _chiefBattle: int;
+		
+		//帮主外观信息
+		private var _chiefAvatar:PlayerAppearanceInfo;
 		
 		//成员数
 		private var _memberNum: int;
@@ -62,6 +66,8 @@ package com.rpgGame.netData.guild.bean{
 			writeString(_chiefName);
 			//帮主战斗力
 			writeInt(_chiefBattle);
+			//帮主外观信息
+			writeBean(_chiefAvatar);
 			//成员数
 			writeInt(_memberNum);
 			//帮派排名
@@ -91,6 +97,8 @@ package com.rpgGame.netData.guild.bean{
 			_chiefName = readString();
 			//帮主战斗力
 			_chiefBattle = readInt();
+			//帮主外观信息
+			_chiefAvatar = readBean(PlayerAppearanceInfo) as PlayerAppearanceInfo;
 			//成员数
 			_memberNum = readInt();
 			//帮派排名
@@ -179,6 +187,21 @@ package com.rpgGame.netData.guild.bean{
 		 */
 		public function set chiefBattle(value: int): void{
 			this._chiefBattle = value;
+		}
+		
+		/**
+		 * get 帮主外观信息
+		 * @return 
+		 */
+		public function get chiefAvatar(): PlayerAppearanceInfo{
+			return _chiefAvatar;
+		}
+		
+		/**
+		 * set 帮主外观信息
+		 */
+		public function set chiefAvatar(value:PlayerAppearanceInfo): void{
+			this._chiefAvatar = value;
 		}
 		
 		/**

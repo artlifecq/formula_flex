@@ -2,8 +2,6 @@ package com.rpgGame.app.ui.tab
 {
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.core.events.FunctionOpenEvent;
-	import com.rpgGame.coreData.cfg.NewFuncCfgData;
-	import com.rpgGame.coreData.clientConfig.Q_newfunc;
 	
 	import feathers.controls.TabBar;
 	

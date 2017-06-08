@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.guild
 {
+	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.ui.TabBarPanel;
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	
@@ -17,12 +18,18 @@ package com.rpgGame.appModule.guild
 		
 		override protected function initTabBarDatas():void
 		{
-			addTabDatas(TabBarSkin_pack,GuildInfoViewUI,EmFunctionID.EM_BANGHUI_INFO);
-			addTabDatas(TabBarSkin_pack,GuildPlayerListViewUI,EmFunctionID.EM_BANGHUI_CHENGYUAN);
-			addTabDatas(TabBarSkin_pack,GuildUPViewUI,EmFunctionID.EM_BANGHUI_UPLEVEL);
-			addTabDatas(TabBarSkin_pack,GuildPlayerListViewUI,EmFunctionID.EM_BANGHUI_SPELL);
-			addTabDatas(TabBarSkin_pack,GuildListVewUI,EmFunctionID.EM_BANGHUI_LIEBIAO);
-			addTabDatas(TabBarSkin_pack,GuildPlayerListViewUI,EmFunctionID.EM_BANGHUI_COMBAT);
+			if(GuildManager.instance().haveGuild)
+			{
+				addTabDatas(TabBarSkin_pack,GuildInfoViewUI,EmFunctionID.EM_BANGHUI_INFO);
+				addTabDatas(TabBarSkin_pack,GuildPlayerListViewUI,EmFunctionID.EM_BANGHUI_CHENGYUAN);
+				addTabDatas(TabBarSkin_pack,GuildUPViewUI,EmFunctionID.EM_BANGHUI_UPLEVEL);
+				addTabDatas(TabBarSkin_pack,GuildPlayerListViewUI,EmFunctionID.EM_BANGHUI_SPELL);
+				addTabDatas(TabBarSkin_pack,GuildListVewUI,EmFunctionID.EM_BANGHUI_LIEBIAO);
+				addTabDatas(TabBarSkin_pack,GuildPlayerListViewUI,EmFunctionID.EM_BANGHUI_COMBAT);
+			}else{
+				addTabDatas(TabBarSkin_pack,GuildListVewUI,EmFunctionID.EM_BANGHUI_LIEBIAO);
+			}
+			
 		}
 	}
 }
