@@ -21,7 +21,7 @@ package com.rpgGame.app.state.role.control
 
 		override public function execute() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				super.execute();
 				transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
@@ -40,7 +40,7 @@ package com.rpgGame.app.state.role.control
 		override public function afterLeave() : void
 		{
 			super.afterLeave();
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 //				(_machine as RoleStateMachine).actionResume();
 			}

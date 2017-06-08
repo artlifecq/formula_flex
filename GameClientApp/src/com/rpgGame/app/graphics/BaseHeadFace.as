@@ -1,8 +1,10 @@
 package com.rpgGame.app.graphics
 {
 	import com.game.engine3D.core.poolObject.IInstancePoolClass;
+	import com.game.engine3D.core.poolObject.PoolContainer3D;
 	import com.game.engine3D.scene.display.BindableSprite;
 	import com.game.engine3D.scene.render.RenderUnit3D;
+	import com.game.engine3D.vo.BaseObjSyncInfo;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
@@ -22,24 +24,39 @@ package com.rpgGame.app.graphics
 		private static var bodyBindOffset : Vector3D = new Vector3D(0, 10);
 		private static var manMountBindOffset : Vector3D = new Vector3D(0, 40);
 		private static var womanMountBindOffset : Vector3D = new Vector3D(0, 30);
-		public function BaseHeadFace()
-		{
-			super();
-			_isDestroyed = false;
-		}
+		
 		/**是否临时资源**/
 		protected var isTemporary : Boolean;
 		protected var _isCamouflage : Boolean;
 		protected var _isSelected : Boolean;
 		protected var _role : SceneRole;
-//		protected var _nameBar : HeadNameBar;
+		//		protected var _nameBar : HeadNameBar;
+		private var _bodyRu:RenderUnit3D;
+		private var _bindDis:PoolContainer3D;
 		
 		private var _isDestroyed : Boolean;
 		private var _isDisposed : Boolean;
 		
+		public function BaseHeadFace()
+		{
+			super();
+			_isDestroyed = false;
+		}
+		
+		public function get isDestroyed():Boolean
+		{
+			return _isDestroyed;
+		}
+		
+		public function get isInPool():Boolean
+		{
+			return _isDisposed;
+		}
+		
 		public function reSet(parameters : Array) : void
 		{
 			_isDisposed = false;
+			_bodyRu = null;
 		}
 		
 		public function displayVisible(attachType : String, visible : Boolean) : void
@@ -69,42 +86,116 @@ package com.rpgGame.app.graphics
 			updateShowAndHide();
 		}
 		
-		public function setBodyRender(ru : RenderUnit3D) : void
+		public function updateBind():void
 		{
-			var nameBindTarget : ObjectContainer3D = ru.getChildByName(BoneNameEnum.c_0_name_01);
-			if (nameBindTarget == null)
-				return;
-			
-			if (_role.stateMachine.isShowRiding)
+			var nameBindTarget : ObjectContainer3D = null;
+			if (!_role.parent)
 			{
-				if (_role.data is HeroData)
+				return;
+			}
+			if (_bodyRu && _role.isInScene())
+			{
+				removeBindDis();
+				nameBindTarget = _bodyRu.getChildByName(BoneNameEnum.c_0_name_01);
+				if (nameBindTarget)
 				{
-					if (HeroData(_role.data).sex)
+					if (_role.stateMachine.isShowRiding)
 					{
-						bindOffset = manMountBindOffset;
+						if (_role.data is HeroData)
+						{
+							if (HeroData(_role.data).sex)
+							{
+								bindOffset = manMountBindOffset;
+							}
+							else
+							{
+								bindOffset = womanMountBindOffset;
+							}
+						}
+						else
+						{
+							bindOffset = manMountBindOffset;
+						}
 					}
 					else
 					{
-						bindOffset = womanMountBindOffset;
+						bindOffset = bodyBindOffset;
 					}
+					bind(nameBindTarget, null);
+					isTemporary = false;
 				}
 				else
 				{
-					bindOffset = manMountBindOffset;
+					bindOffset = null;
+					bind(_role.graphicDis, null);
+					isTemporary = false;
 				}
 			}
 			else
 			{
-				bindOffset = bodyBindOffset;
+				if (!_bindDis)
+				{
+					_bindDis = PoolContainer3D.create();
+					_role.parent.addChild(_bindDis);
+					_role.addSyncInfo(new BaseObjSyncInfo(_bindDis, true));
+				}
+				bindOffset = null;
+				bind(_bindDis, null);
+				isTemporary = true;
 			}
-			
-			bind(nameBindTarget, null);
-			
 			addAllBar();
-			isTemporary = false;
 			updateAllBarPosition();
-			
 			updateTranform();
+		}
+		
+		private function removeBindDis():void
+		{
+			if (_bindDis)
+			{
+				_role.removeSyncInfo(_bindDis);
+				PoolContainer3D.recycle(_bindDis);
+				_bindDis = null;
+			}
+		}
+		
+		public function setBodyRender(ru : RenderUnit3D) : void
+		{
+			_bodyRu = ru;
+			updateBind();
+//			var nameBindTarget : ObjectContainer3D = ru.getChildByName(BoneNameEnum.c_0_name_01);
+//			if (nameBindTarget == null)
+//				return;
+//			
+//			if (_role.stateMachine.isShowRiding)
+//			{
+//				if (_role.data is HeroData)
+//				{
+//					if (HeroData(_role.data).sex)
+//					{
+//						bindOffset = manMountBindOffset;
+//					}
+//					else
+//					{
+//						bindOffset = womanMountBindOffset;
+//					}
+//				}
+//				else
+//				{
+//					bindOffset = manMountBindOffset;
+//				}
+//			}
+//			else
+//			{
+//				bindOffset = bodyBindOffset;
+//			}
+//			
+//			bind(nameBindTarget, null);
+//			
+//			addAllBar();
+//			isTemporary = false;
+//			updateAllBarPosition();
+//			
+//			updateTranform();
 		}
 		
 		protected function removeBodyRender() : void
@@ -117,18 +208,18 @@ package com.rpgGame.app.graphics
 		 * 添加临时点血条
 		 *
 		 */
-		public function setTemporary() : void
-		{
-			bind(_role.graphicDis, null);
-			
-			initAddBar();
-			
-			addAllBar();
-			isTemporary = true;
-			updateAllBarPosition();
-			
-			updateTranform();
-		}
+//		public function setTemporary() : void
+//		{
+//			bind(_role.graphicDis, null);
+//			
+//			initAddBar();
+//			
+//			addAllBar();
+//			isTemporary = true;
+//			updateAllBarPosition();
+//			
+//			updateTranform();
+//		}
 		
 		final protected function addElement(element : DisplayObject) : void
 		{
@@ -225,17 +316,20 @@ package com.rpgGame.app.graphics
 		
 		public function instanceDestroy() : void
 		{
-			instanceDispose();
+			putInPool();
 			dispose();
 			_isDestroyed = true;
 		}
 		
-		public function instanceDispose() : void
+		public function putInPool() : void
 		{
+			removeBindDis();
 			if (parent)
 			{
 				parent.removeChild(this);
 			}
+			_bodyRu = null;
+			_role = null;
 			_isDisposed = true;
 		}
 		/**
@@ -246,16 +340,5 @@ package com.rpgGame.app.graphics
 		{
 			
 		}
-		
-		public function get isDestroyed():Boolean
-		{
-			return _isDestroyed;
-		}
-		
-		override public function get isDisposed():Boolean
-		{
-			return _isDisposed;
-		}
-		
 	}
 }

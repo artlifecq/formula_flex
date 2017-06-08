@@ -79,6 +79,10 @@ package com.rpgGame.appModule.fightsoul
 				return -1;
 			else if(q1.isOver&&!q2.isOver)
 				return 1;
+			else if(q1.isOpen()&&!q2.isOpen())
+				return -1;
+			else if(!q1.isOver&&q2.isOver)
+				return 1;
 			else 
 				return 0;
 		}

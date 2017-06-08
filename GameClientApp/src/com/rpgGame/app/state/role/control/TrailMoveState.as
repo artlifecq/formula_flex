@@ -61,7 +61,7 @@ package com.rpgGame.app.state.role.control
 		override public function leave() : void
 		{
 			super.leave();
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				_throughTime = 0;
 				stopWalk();
@@ -70,7 +70,7 @@ package com.rpgGame.app.state.role.control
 
 		private function ready() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				_stateReference.ready();
 			}
@@ -104,7 +104,7 @@ package com.rpgGame.app.state.role.control
 
 		private function arrive() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {x: true, y: true, z: true});
 				transition(RoleStateType.CONTROL_STOP_WALK_MOVE);
@@ -123,7 +123,7 @@ package com.rpgGame.app.state.role.control
 
 		private function stopWalk() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {x: true, y: true, z: true});
 				//执行行走被停止回调
@@ -143,7 +143,7 @@ package com.rpgGame.app.state.role.control
 
 		private function walkByInfo() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				_lastTimeStamp = 0;
 				var pathPoints : Vector.<TrailPathPoint> = _stateReference.pathPoints;
@@ -210,7 +210,7 @@ package com.rpgGame.app.state.role.control
 
 		private function walkByPath(path : Vector.<TrailPathPoint>, timeStamps : Array = null) : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				_isMoving = true;
 				_lastEndPos = _stateReference.endPos;
@@ -229,7 +229,7 @@ package com.rpgGame.app.state.role.control
 
 		private function startMoveStep(path : Vector.<TrailPathPoint>, timeStamps : Array = null) : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				_throughTime = getTimer();
 				//执行开始行走回调
@@ -240,7 +240,7 @@ package com.rpgGame.app.state.role.control
 
 		private function moveStep(path : Vector.<TrailPathPoint>, timeStamps : Array = null) : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				if (!_isMoving)
 				{
@@ -317,7 +317,7 @@ package com.rpgGame.app.state.role.control
 
 		private function onWalkStepUpdate() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				if (!_isMoving)
 				{

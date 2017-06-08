@@ -27,14 +27,14 @@ package com.game.engine2D.vo
 		{
 			return _headAlpha;
 		}
-
+		
 		public function set headAlpha(value:Number):void
 		{
 			_headAlpha = value;
 			this.alpha = value;
 			
 		}
-
+		
 		override public function bind(bindTarget : ObjectContainer3D, syncTarget : Object = null) : void
 		{
 			if (sceneCamera)
@@ -85,7 +85,7 @@ package com.game.engine2D.vo
 			this.dispose();
 		}
 		
-		public function instanceDispose():void
+		public function putInPool():void
 		{
 			bind(null, null);
 			if (_sceneCamera)
@@ -110,7 +110,7 @@ package com.game.engine2D.vo
 			return _isDestroyed;
 		}
 		
-		override public function get isDisposed():Boolean
+		public function get isInPool():Boolean
 		{
 			return _isDisposed;
 		}
@@ -119,7 +119,7 @@ package com.game.engine2D.vo
 		{
 			if ($obj)
 			{
-				_pool.disposeObj($obj);
+				_pool.recycleObj($obj);
 			}
 		}
 		

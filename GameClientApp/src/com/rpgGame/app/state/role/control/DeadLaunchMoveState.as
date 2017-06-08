@@ -37,7 +37,7 @@ package com.rpgGame.app.state.role.control
 
 		override public function execute() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				super.execute();
 				_stateReference = null;
@@ -53,7 +53,7 @@ package com.rpgGame.app.state.role.control
 
 		private function doLaunch() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {x: true, z: true, offsetY: true});
 
@@ -94,7 +94,7 @@ package com.rpgGame.app.state.role.control
 
 		private function onMoveComplete() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				(_machine.owner as SceneRole).offsetY = 0;
 				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {x: true, z: true, offsetY: true});
@@ -123,7 +123,7 @@ package com.rpgGame.app.state.role.control
 		private function stopLaunch() : void
 		{
 			stopJump();
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {x: true, z: true, offsetY: true});
 			}
@@ -131,7 +131,7 @@ package com.rpgGame.app.state.role.control
 
 		private function stopJump() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				(_machine.owner as SceneRole).offsetY = 0;
 			}

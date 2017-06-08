@@ -54,7 +54,7 @@ package com.rpgGame.app.state.role.action.ui
 
 		override public function execute() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				super.execute();
 				_attackBroken = false;
@@ -257,7 +257,7 @@ package com.rpgGame.app.state.role.action.ui
 			super.afterExecute();
 			syncAnimation(false, _startFrameTime, speedRatio);
 
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				var totalFrameTm : uint = 0;
 				if (_statusType)
@@ -395,7 +395,7 @@ package com.rpgGame.app.state.role.action.ui
 		 */
 		private function onTotalFrameCmp() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				if (_totalFrameTween)
 				{
@@ -418,7 +418,7 @@ package com.rpgGame.app.state.role.action.ui
 		{
 			_attackBroken = true;
 			_attackFinished = true;
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				if (_breakFrameTween)
 				{

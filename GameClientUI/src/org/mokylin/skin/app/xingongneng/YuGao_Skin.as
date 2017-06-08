@@ -8,7 +8,7 @@ package org.mokylin.skin.app.xingongneng
 	import feathers.controls.UINumber;
 	import org.mokylin.skin.app.xingongneng.Pro_Level;
 	import org.mokylin.skin.app.xingongneng.number.UINumberShuzi;
-
+	
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
@@ -20,18 +20,18 @@ package org.mokylin.skin.app.xingongneng
 		//                                定义成员变量
 		//==========================================================================
 		public var Icons:feathers.controls.UIAsset;
-
+		
 		public var lbLevel:feathers.controls.Label;
-
+		
 		public var numLevel:feathers.controls.UINumber;
-
+		
 		public var proLevel:feathers.controls.ProgressBar;
-
+		
 		public var uiName:feathers.controls.UIAsset;
-
+		
 		public var uiTouxian:feathers.controls.UIAsset;
-
-
+		
+		
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
@@ -48,8 +48,8 @@ package org.mokylin.skin.app.xingongneng
 			};
 			skinNames={};
 		}
-
-
+		
+		
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
@@ -63,7 +63,7 @@ package org.mokylin.skin.app.xingongneng
 			temp.y = 10;
 			return temp;
 		}
-
+		
 		private function __YuGao_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -72,7 +72,7 @@ package org.mokylin.skin.app.xingongneng
 			temp.y = 0;
 			return temp;
 		}
-
+		
 		private function __YuGao_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -81,7 +81,7 @@ package org.mokylin.skin.app.xingongneng
 			temp.y = 85;
 			return temp;
 		}
-
+		
 		private function __YuGao_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -90,7 +90,7 @@ package org.mokylin.skin.app.xingongneng
 			temp.y = 127;
 			return temp;
 		}
-
+		
 		private function lbLevel_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -105,7 +105,7 @@ package org.mokylin.skin.app.xingongneng
 			temp.y = 129;
 			return temp;
 		}
-
+		
 		private function numLevel_i():feathers.controls.UINumber
 		{
 			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
@@ -120,7 +120,7 @@ package org.mokylin.skin.app.xingongneng
 			temp.y = 111;
 			return temp;
 		}
-
+		
 		private function proLevel_i():feathers.controls.ProgressBar
 		{
 			var temp:feathers.controls.ProgressBar = new feathers.controls.ProgressBar();
@@ -135,18 +135,18 @@ package org.mokylin.skin.app.xingongneng
 			temp.y = 133;
 			return temp;
 		}
-
+		
 		private function uiName_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiName = temp;
 			temp.name = "uiName";
-			temp.styleName = "ui/app/xingongneng/junjie1.png";
-			temp.x = 18;
-			temp.y = 82;
+			temp.styleName = "ui/app/xingongneng/icon/jingyanfuben/name1.png";
+			temp.x = 3;
+			temp.y = 75;
 			return temp;
 		}
-
+		
 		private function uiTouxian_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -157,6 +157,6 @@ package org.mokylin.skin.app.xingongneng
 			temp.y = 90;
 			return temp;
 		}
-
+		
 	}
 }

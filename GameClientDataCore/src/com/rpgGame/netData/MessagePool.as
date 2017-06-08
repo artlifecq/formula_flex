@@ -1,4 +1,4 @@
-package com.rpgGame.netData{
+package com.rpgGame.netData {
 	
 	import com.rpgGame.netData.achievement.handler.ResSendAchievementDataInfoHandler;
 	import com.rpgGame.netData.achievement.handler.ResSendFinishAchievementHandler;
@@ -612,6 +612,14 @@ package com.rpgGame.netData{
 	import com.rpgGame.netData.skill.message.ResSkillRemoveMessage;
 	import com.rpgGame.netData.skill.message.ResSkillResetEffectsidMessage;
 	import com.rpgGame.netData.skill.message.ResSkillStartLevelUpMessage;
+	import com.rpgGame.netData.specialactivities.handler.SCActivitiesNotifyListHandler;
+	import com.rpgGame.netData.specialactivities.handler.SCSpecialActivitiesListHandler;
+	import com.rpgGame.netData.specialactivities.handler.SCSpecialActivityCloseHandler;
+	import com.rpgGame.netData.specialactivities.handler.SCSpecialActivityOpenHandler;
+	import com.rpgGame.netData.specialactivities.message.SCActivitiesNotifyListMessage;
+	import com.rpgGame.netData.specialactivities.message.SCSpecialActivitiesListMessage;
+	import com.rpgGame.netData.specialactivities.message.SCSpecialActivityCloseMessage;
+	import com.rpgGame.netData.specialactivities.message.SCSpecialActivityOpenMessage;
 	import com.rpgGame.netData.stall.handler.ResChangeStallNameHandler;
 	import com.rpgGame.netData.stall.handler.ResLookStallLogHandler;
 	import com.rpgGame.netData.stall.handler.ResStallGoodsHandler;
@@ -722,6 +730,12 @@ package com.rpgGame.netData{
 	import com.rpgGame.netData.vip.message.ResVipPanelMessage;
 	import com.rpgGame.netData.vitality.handler.ResSendVitalityInfoHandler;
 	import com.rpgGame.netData.vitality.message.ResSendVitalityInfoMessage;
+	import com.rpgGame.netData.warFlag.handler.SCWarFlagAllInfoToClientHandler;
+	import com.rpgGame.netData.warFlag.handler.SCWarFlagExtraItemNumHandler;
+	import com.rpgGame.netData.warFlag.handler.SCWarFlagUpResultToClientHandler;
+	import com.rpgGame.netData.warFlag.message.SCWarFlagAllInfoToClientMessage;
+	import com.rpgGame.netData.warFlag.message.SCWarFlagExtraItemNumMessage;
+	import com.rpgGame.netData.warFlag.message.SCWarFlagUpResultToClientMessage;
 	import com.rpgGame.netData.warmark.handler.ResUpdateWarmarkHandler;
 	import com.rpgGame.netData.warmark.handler.ResWarMarkListHandler;
 	import com.rpgGame.netData.warmark.message.ResUpdateWarmarkMessage;
@@ -802,6 +816,7 @@ package com.rpgGame.netData{
 	import org.game.netCore.net.Handler;
 	import org.game.netCore.net.Message;
 	
+
 	/** 
 	 * @author Commuication Auto Maker
 	 * 
@@ -1131,6 +1146,10 @@ package com.rpgGame.netData{
 			register(160105, ResSendHuntHistoryInfoMessage, ResSendHuntHistoryInfoHandler);
 			register(160106, ResHuntPanlInfoMessage, ResHuntPanlInfoHandler);
 			register(160107, ResHuntRewardInfosMessage, ResHuntRewardInfosHandler);
+			register(162101, SCSpecialActivitiesListMessage, SCSpecialActivitiesListHandler);
+			register(162102, SCSpecialActivityOpenMessage, SCSpecialActivityOpenHandler);
+			register(162103, SCSpecialActivityCloseMessage, SCSpecialActivityCloseHandler);
+			register(162104, SCActivitiesNotifyListMessage, SCActivitiesNotifyListHandler);
 			register(181101, ResActivitiesInfoMessage, ResActivitiesInfoHandler);
 			register(181102, ResActivitiesGetRewardInfoMessage, ResActivitiesGetRewardInfoHandler);
 			register(181103, ResActivitiesRefreshMessage, ResActivitiesRefreshHandler);
@@ -1209,6 +1228,9 @@ package com.rpgGame.netData{
 			register(227502, SCLunJianTimeMessage, SCLunJianTimeHandler);
 			register(227503, SCLunJianResultMessage, SCLunJianResultHandler);
 			register(228100, ResCooldownInfoListMessage, ResCooldownInfoListHandler);
+			register(229101, SCWarFlagAllInfoToClientMessage, SCWarFlagAllInfoToClientHandler);
+			register(229105, SCWarFlagUpResultToClientMessage, SCWarFlagUpResultToClientHandler);
+			register(229106, SCWarFlagExtraItemNumMessage, SCWarFlagExtraItemNumHandler);
 			register(250101, ResChangeServerGameToClientMessage, ResChangeServerGameToClientHandler);
 			register(301101, ResClientMessageMessage, ResClientMessageHandler);
 			register(301102, ResClientCustomTagMessage, ResClientCustomTagHandler);

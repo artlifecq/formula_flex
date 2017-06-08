@@ -24,7 +24,7 @@ package com.rpgGame.app.state.role.control
 
 		override public function execute() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				super.execute();
 				if (_prewarTween)
@@ -54,7 +54,7 @@ package com.rpgGame.app.state.role.control
 		{
 			super.leave();
 			stopPrewar();
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				if ((_machine as RoleStateMachine).isPrewar)
 					transition(RoleStateType.ACTION_IDLE);

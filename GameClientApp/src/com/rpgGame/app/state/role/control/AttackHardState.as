@@ -24,7 +24,7 @@ package com.rpgGame.app.state.role.control
 		override public function execute() : void
 		{
 			super.execute();
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				TweenLite.killDelayedCallsTo(onStopHardStraight);
 				if (_ref)

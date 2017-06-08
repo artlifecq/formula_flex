@@ -33,7 +33,7 @@ package com.rpgGame.app.state.role.action
 
 		override public function execute() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				super.execute();
 				_stateReference = null;
@@ -129,7 +129,7 @@ package com.rpgGame.app.state.role.action
 			super.afterExecute();
 			syncAnimation(false, _stateReference.time);
 			
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				var totalFrameTm : uint = 0;
 				if (_statusType)
@@ -162,7 +162,7 @@ package com.rpgGame.app.state.role.action
 		 */
 		private function onTotalFrameCmp() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				if (_totalFrameTween)
 				{

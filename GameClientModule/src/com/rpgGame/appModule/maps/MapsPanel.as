@@ -13,6 +13,7 @@ package com.rpgGame.appModule.maps
 	import flash.geom.Point;
 	
 	import org.client.mainCore.manager.EventManager;
+	import org.mokylin.skin.component.text.textInput2_Skin;
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
@@ -66,11 +67,24 @@ package com.rpgGame.appModule.maps
 		override protected function onTouchTarget(target:DisplayObject):void 
 		{
 			super.onTouchTarget(target);
-			_scoll.onTouchTarget(target);
-			roleSelect(target);
 			
-			
-			
+			if(target.name==_skin.btn_go.name) 
+			{
+				var lx:int=int(textInput2_Skin(_skin.locat_x.skin).textDisplay.text);
+				var ly:int=int(textInput2_Skin(_skin.locat_y.skin).textDisplay.text);
+				lx=Math.abs(lx);
+				ly=Math.abs(ly);
+				if(lx>0&&ly>0)
+				{
+					_bigMap.roleWalk(lx,-ly);
+				}
+				
+			}
+			else
+			{
+				_scoll.onTouchTarget(target);
+				roleSelect(target);
+			}
 		}
 		
 		

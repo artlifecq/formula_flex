@@ -7,7 +7,6 @@ package com.rpgGame.appModule.open
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.clientConfig.Q_newfunc;
 	
-	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
 	import starling.display.DisplayObject;

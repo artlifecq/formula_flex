@@ -24,7 +24,7 @@ package game.rpgGame.login.state
 
 		override public function beforeEnter() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				super.beforeEnter();
 				var state : IState = _machine.getLastState(ActionState);
