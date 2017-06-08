@@ -1,6 +1,7 @@
 package com.rpgGame.app.ui.tips
 {
 	import com.rpgGame.app.manager.mount.MountShowData;
+	import com.rpgGame.app.manager.mount.ZhanQiShowData;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
 	
@@ -26,7 +27,9 @@ package com.rpgGame.app.ui.tips
 		
 		public function setTipData( data:* ):void
 		{
-			var showdata:MountShowData = data as MountShowData;
+			var showdata:*;
+			if(data is MountShowData) showdata=data as MountShowData;
+			else if(data is ZhanQiShowData) showdata=data as ZhanQiShowData;
 			_skin.lab_num.text = showdata.exp.toString();
 			if(showdata.needClearExp())
 			{

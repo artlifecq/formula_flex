@@ -220,6 +220,7 @@ package com.rpgGame.app.ui.main.chat {
 			var goodsCode:String = RichTextCustomUtil.getItemCode(key,item.name,item.quality);
 			_inputText.appendRichText(goodsCode);
 			_inputText.setFocus();
+			_inputText.textfield.setSelection(_inputText.width,_inputText.width);
 			setGroubState(true);
 		}
 		
@@ -318,6 +319,7 @@ package com.rpgGame.app.ui.main.chat {
 				var siLiaoTag:String ="你对" + targetName +  "说 :";			
 				this._inputText.setFocus();
 				this._inputText.text=siLiaoTag;
+				_inputText.textfield.setSelection(_inputText.width,_inputText.width);
 				setGroubState(true);
 			}
 		}

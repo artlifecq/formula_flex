@@ -14,6 +14,8 @@ package com.rpgGame.coreData.enum
 		public static const Em_JUNJIE:String="5";
 		/** 坐骑 **/
 		public static const EM_ZUOQI:String="10";
+		/** 战旗 **/
+		public static const EM_ZHANQI:String="11";
 		/** 强化 **/
 		public static const EM_QIANGHUA:String="20";
 		/** 琢磨 **/

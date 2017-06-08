@@ -6,5 +6,7 @@ package com.rpgGame.core.events.role
     {
         // 金针更新事件
         public static const UPDATE_NEEDLE : int = UNIQUEID.NEXT;
+		// 战旗更新事件
+		public static const UPDATE_ZHANQI : int = UNIQUEID.NEXT;
     }
 }

@@ -68,7 +68,7 @@ package com.rpgGame.appModule.mount
 			_mountdata.horsedataInfo = HorseManager.instance().horsedataInfo;
 			props = _mountdata.currentProp(null);
 			var levelPower:int = FightValueUtil.calAtrributeFightPower(props,MainRoleManager.actorInfo.job);
-			_skin.num_zhandouli.number = levelPower;
+//			_skin.num_zhandouli.number = levelPower;
 			_skin.num_lv.number = levelPower - lastPower;
 		}
 		
