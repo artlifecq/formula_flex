@@ -412,5 +412,17 @@ package com.rpgGame.core.app
 		public static var BATTLE_RESULT_PANEL:String = createAppInfo("battle.jjzb.JJBattleResultPanelExt","zhanchang");
 		/**战场**/
 		public static var BATTLE_SHOP_PANEL:String = createAppInfo("shop.BattleShopPanelExt","zhanchang");
+		
+		/**巅峰开始倒计时**/
+		public static var BATTLE_D1V1_READY_PANEL:String = createAppInfo("dfdj.D1v1ReafyPanelExt","zhanchang");
+		/**巅峰匹配倒计时**/
+		public static var BATTLE_D1V1_MATCH_PANEL:String = createAppInfo("dfdj.D1v1MatchPanelExt","zhanchang");
+		/**巅峰排行榜**/
+		public static var BATTLE_D1V1_RANK_PANEL:String = createAppInfo("dfdj.D1v1RankPanelExt","zhanchang");
+		
+		/**巅峰升级信息**/
+		public static var BATTLE_D1V1_LEVEL_UP_PANEL:String = createAppInfo("dfdj.D1v1RankPanelExt","zhanchang");
+		/**巅峰头像**/
+		public static var BATTLE_D1V1_HEAD_PANEL:String = createAppInfo("dfdj.D1v1HeadPanelExt","zhanchang");
 	}
 }

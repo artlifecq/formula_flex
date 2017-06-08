@@ -3,10 +3,8 @@ package com.rpgGame.appModule.battle.jjzb
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.ItemActionManager;
 	import com.rpgGame.app.manager.Mgr;
-	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.utils.TouchableUtil;
-	import com.rpgGame.appModule.common.RewardGroup;
-	import com.rpgGame.appModule.social.team.TeamListItemRender;
 	import com.rpgGame.core.events.JJBattleEvent;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.GameColorUtil;

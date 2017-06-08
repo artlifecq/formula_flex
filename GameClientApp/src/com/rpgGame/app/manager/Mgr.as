@@ -38,5 +38,9 @@ package com.rpgGame.app.manager
 		{
 			return JJBattleManager.ins;
 		}
+		public static function get d1v1Mgr():D1v1Manager
+		{
+			return D1v1Manager.ins;
+		}
 	}
 }
