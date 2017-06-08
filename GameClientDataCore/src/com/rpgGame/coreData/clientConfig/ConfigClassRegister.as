@@ -90,6 +90,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_att_transfer:String = "data.Q_att_transfer";
 		/**  所有属性相关的数据																														 */
 		public static const Q_att_values:String = "data.Q_att_values";
+		/**  巅峰等级段位升级表						 */
+		public static const Q_battle_rank:String = "data.Q_battle_rank";
 		/**  心法数据库												 */
 		public static const Q_cheats:String = "data.Q_cheats";
 		/**  经脉冲穴数据库																 */
@@ -112,12 +114,16 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_equip_wash_attr:String = "data.Q_equip_wash_attr";
 		/**  战魂升级数据						 */
 		public static const Q_fightsoul:String = "data.Q_fightsoul";
-		/**  战魂模型数据					 */
+		/**  战魂模型数据							 */
 		public static const Q_fightsoul_mode:String = "data.Q_fightsoul_mode";
 		/**  战魂升级数据			 */
 		public static const Q_fightsoul_path:String = "data.Q_fightsoul_path";
 		/**  全局变量表		 */
 		public static const Q_global:String = "data.Q_global";
+		/**   										 */
+		public static const Q_guild:String = "data.Q_guild";
+		/**  												 */
+		public static const Q_guild_permission:String = "data.Q_guild_permission";
 		/**  道具合成表									 */
 		public static const Q_hecheng:String = "data.Q_hecheng";
 		/**  坐骑基本信息数据库																					 */
@@ -134,7 +140,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_lostskill_up:String = "data.Q_lostskill_up";
 		/**  论剑配置表											 */
 		public static const Q_lunjian:String = "data.Q_lunjian";
-		/**  副本触发表																		 */
+		/**  副本触发表																			 */
 		public static const Q_map_trigger:String = "data.Q_map_trigger";
 		/**  经脉冲穴数据库																 */
 		public static const Q_meridian:String = "data.Q_meridian";
@@ -160,10 +166,12 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_shop:String = "data.Q_shop";
 		/**  购买界面其他途径提示数据库				 */
 		public static const Q_source:String = "data.Q_source";
-		/**  活动配置表																		 */
+		/**  活动配置表																				 */
 		public static const Q_special_activities:String = "data.Q_special_activities";
 		/**  tipsid	标题	描述 */
 		public static const Q_tipsinfo:String = "data.Q_tipsinfo";
+		/**  战旗基本信息数据库																	 */
+		public static const Q_warFlag:String = "data.Q_warFlag";
 		/**  窗口链接				 */
 		public static const Q_windowInfo:String = "data.Q_windowInfo";
 		/**  副本数据表															 */
@@ -243,6 +251,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.monster.Q_scene_monster_area", com.rpgGame.coreData.clientConfig.Q_scene_monster_area);
 			regClass("data.Q_att_transfer", com.rpgGame.coreData.clientConfig.Q_att_transfer);
 			regClass("data.Q_att_values", com.rpgGame.coreData.clientConfig.Q_att_values);
+			regClass("data.Q_battle_rank", com.rpgGame.coreData.clientConfig.Q_battle_rank);
 			regClass("data.Q_cheats", com.rpgGame.coreData.clientConfig.Q_cheats);
 			regClass("data.Q_cheats_node", com.rpgGame.coreData.clientConfig.Q_cheats_node);
 			regClass("data.Q_daily_zone", com.rpgGame.coreData.clientConfig.Q_daily_zone);
@@ -257,6 +266,8 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_fightsoul_mode", com.rpgGame.coreData.clientConfig.Q_fightsoul_mode);
 			regClass("data.Q_fightsoul_path", com.rpgGame.coreData.clientConfig.Q_fightsoul_path);
 			regClass("data.Q_global", com.rpgGame.coreData.clientConfig.Q_global);
+			regClass("data.Q_guild", com.rpgGame.coreData.clientConfig.Q_guild);
+			regClass("data.Q_guild_permission", com.rpgGame.coreData.clientConfig.Q_guild_permission);
 			regClass("data.Q_hecheng", com.rpgGame.coreData.clientConfig.Q_hecheng);
 			regClass("data.Q_horse", com.rpgGame.coreData.clientConfig.Q_horse);
 			regClass("data.Q_horse_skills", com.rpgGame.coreData.clientConfig.Q_horse_skills);
@@ -280,6 +291,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_source", com.rpgGame.coreData.clientConfig.Q_source);
 			regClass("data.Q_special_activities", com.rpgGame.coreData.clientConfig.Q_special_activities);
 			regClass("data.Q_tipsinfo", com.rpgGame.coreData.clientConfig.Q_tipsinfo);
+			regClass("data.Q_warFlag", com.rpgGame.coreData.clientConfig.Q_warFlag);
 			regClass("data.Q_windowInfo", com.rpgGame.coreData.clientConfig.Q_windowInfo);
 			regClass("data.Q_zone", com.rpgGame.coreData.clientConfig.Q_zone);
 			regClass("data.Q_zone_multy", com.rpgGame.coreData.clientConfig.Q_zone_multy);

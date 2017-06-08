@@ -72,6 +72,9 @@ package com.rpgGame.coreData.type
 		
 		/**军阶**/
 		public static const JUNJIE:String = "JunJie";
+		
+		/**战旗特效**/
+		public static const ZHANQI_EFF:String = "ZhanQi_Eff";
 
 		/**任务问号**/
 		public static const TASKMARK : String = "taskMark";
