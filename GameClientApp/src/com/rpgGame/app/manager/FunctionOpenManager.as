@@ -164,7 +164,7 @@
 				return ;
 			if(info.clickType==1)
 			{
-				AppManager.showApp(info.clickarg,data,id);
+				AppManager.showAppNoHide(info.clickarg,data,id);
 			}
 		}
     }

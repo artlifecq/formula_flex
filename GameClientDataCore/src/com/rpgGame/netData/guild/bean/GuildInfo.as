@@ -11,139 +11,69 @@ package com.rpgGame.netData.guild.bean{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * 帮会信息
+	 * 帮派信息
 	 */
 	public class GuildInfo extends Bean {
 	
-		//是否王城 1是 0否
-		private var _isImper: int;
+		//帮派Id
+		private var _id: long;
 		
-		//帮会id
-		private var _guildId: long;
+		//帮派名字
+		private var _name: String;
 		
-		//帮会名
-		private var _guildName: String;
-		
-		//帮旗造型Id
-		private var _guildFlagModelId: int;
-		
-		//帮旗等级
-		private var _guildFlagLevel: int;
-		
-		//帮旗名称
-		private var _guildFlagName: String;
-		
-		//帮旗经验
-		private var _guildFlagExp: int;
-		
-		//帮主id
-		private var _bangZhuid: long;
-		
-		//帮主名字
-		private var _bangZhuName: String;
-		
-		//帮主等级
-		private var _bangZhuLevel: int;
-		
-		//帮主是否在线
-		private var _bangZhuOnline: int;
-		
-		//帮主军衔等级
-		private var _bangZhurankLevel: int;
-		
-		//副帮主id
-		private var _viceBangZhuId: long;
-		
-		//副帮主名字
-		private var _viceBangZhuName: String;
-		
-		//副帮主等级
-		private var _viceBangZhuLevel: int;
-		
-		//副帮主军衔等级
-		private var _viceBangZhurankLevel: int;
-		
-		//副帮主是否在线
-		private var _viceBangZhuOnline: int;
-		
-		//帮会公告
-		private var _guildAnnouncement: String;
-		
-		//帮会公告最后更新时间
-		private var _guildAnnouncementTime: int;
-		
-		//成员数量
-		private var _memberNum: int;
-		
-		//成员战斗力之和
-		private var _memberFightPower: int;
-		
-		//帮会创建时间
-		private var _createTime: int;
-		
-		//帮会等级
+		//帮派等级
 		private var _level: int;
 		
-		//是否允许自动加入
-		private var _autoJoin: int;
+		//帮主名字
+		private var _chiefName: String;
 		
-		//库存金币
-		private var _guildMoney: long;
+		//帮主战斗力
+		private var _chiefBattle: int;
+		
+		//成员数
+		private var _memberNum: int;
+		
+		//帮派排名
+		private var _rank: int;
+		
+		//活跃值
+		private var _active: int;
+		
+		//帮会宣言
+		private var _note: String;
+		
+		//帮派总战力
+		private var _battle: int;
+		
+		//占领城池情况
+		private var _city: int;
 		
 		/**
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
-			//是否王城 1是 0否
-			writeByte(_isImper);
-			//帮会id
-			writeLong(_guildId);
-			//帮会名
-			writeString(_guildName);
-			//帮旗造型Id
-			writeInt(_guildFlagModelId);
-			//帮旗等级
-			writeInt(_guildFlagLevel);
-			//帮旗名称
-			writeString(_guildFlagName);
-			//帮旗经验
-			writeInt(_guildFlagExp);
-			//帮主id
-			writeLong(_bangZhuid);
-			//帮主名字
-			writeString(_bangZhuName);
-			//帮主等级
-			writeInt(_bangZhuLevel);
-			//帮主是否在线
-			writeByte(_bangZhuOnline);
-			//帮主军衔等级
-			writeInt(_bangZhurankLevel);
-			//副帮主id
-			writeLong(_viceBangZhuId);
-			//副帮主名字
-			writeString(_viceBangZhuName);
-			//副帮主等级
-			writeInt(_viceBangZhuLevel);
-			//副帮主军衔等级
-			writeInt(_viceBangZhurankLevel);
-			//副帮主是否在线
-			writeByte(_viceBangZhuOnline);
-			//帮会公告
-			writeString(_guildAnnouncement);
-			//帮会公告最后更新时间
-			writeInt(_guildAnnouncementTime);
-			//成员数量
-			writeInt(_memberNum);
-			//成员战斗力之和
-			writeInt(_memberFightPower);
-			//帮会创建时间
-			writeInt(_createTime);
-			//帮会等级
+			//帮派Id
+			writeLong(_id);
+			//帮派名字
+			writeString(_name);
+			//帮派等级
 			writeInt(_level);
-			//是否允许自动加入
-			writeByte(_autoJoin);
-			//库存金币
-			writeLong(_guildMoney);
+			//帮主名字
+			writeString(_chiefName);
+			//帮主战斗力
+			writeInt(_chiefBattle);
+			//成员数
+			writeInt(_memberNum);
+			//帮派排名
+			writeInt(_rank);
+			//活跃值
+			writeInt(_active);
+			//帮会宣言
+			writeString(_note);
+			//帮派总战力
+			writeInt(_battle);
+			//占领城池情况
+			writeInt(_city);
 			return true;
 		}
 		
@@ -151,391 +81,63 @@ package com.rpgGame.netData.guild.bean{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
-			//是否王城 1是 0否
-			_isImper = readByte();
-			//帮会id
-			_guildId = readLong();
-			//帮会名
-			_guildName = readString();
-			//帮旗造型Id
-			_guildFlagModelId = readInt();
-			//帮旗等级
-			_guildFlagLevel = readInt();
-			//帮旗名称
-			_guildFlagName = readString();
-			//帮旗经验
-			_guildFlagExp = readInt();
-			//帮主id
-			_bangZhuid = readLong();
-			//帮主名字
-			_bangZhuName = readString();
-			//帮主等级
-			_bangZhuLevel = readInt();
-			//帮主是否在线
-			_bangZhuOnline = readByte();
-			//帮主军衔等级
-			_bangZhurankLevel = readInt();
-			//副帮主id
-			_viceBangZhuId = readLong();
-			//副帮主名字
-			_viceBangZhuName = readString();
-			//副帮主等级
-			_viceBangZhuLevel = readInt();
-			//副帮主军衔等级
-			_viceBangZhurankLevel = readInt();
-			//副帮主是否在线
-			_viceBangZhuOnline = readByte();
-			//帮会公告
-			_guildAnnouncement = readString();
-			//帮会公告最后更新时间
-			_guildAnnouncementTime = readInt();
-			//成员数量
-			_memberNum = readInt();
-			//成员战斗力之和
-			_memberFightPower = readInt();
-			//帮会创建时间
-			_createTime = readInt();
-			//帮会等级
+			//帮派Id
+			_id = readLong();
+			//帮派名字
+			_name = readString();
+			//帮派等级
 			_level = readInt();
-			//是否允许自动加入
-			_autoJoin = readByte();
-			//库存金币
-			_guildMoney = readLong();
+			//帮主名字
+			_chiefName = readString();
+			//帮主战斗力
+			_chiefBattle = readInt();
+			//成员数
+			_memberNum = readInt();
+			//帮派排名
+			_rank = readInt();
+			//活跃值
+			_active = readInt();
+			//帮会宣言
+			_note = readString();
+			//帮派总战力
+			_battle = readInt();
+			//占领城池情况
+			_city = readInt();
 			return true;
 		}
 		
 		/**
-		 * get 是否王城 1是 0否
+		 * get 帮派Id
 		 * @return 
 		 */
-		public function get isImper(): int{
-			return _isImper;
+		public function get id(): long{
+			return _id;
 		}
 		
 		/**
-		 * set 是否王城 1是 0否
+		 * set 帮派Id
 		 */
-		public function set isImper(value: int): void{
-			this._isImper = value;
+		public function set id(value: long): void{
+			this._id = value;
 		}
 		
 		/**
-		 * get 帮会id
+		 * get 帮派名字
 		 * @return 
 		 */
-		public function get guildId(): long{
-			return _guildId;
+		public function get name(): String{
+			return _name;
 		}
 		
 		/**
-		 * set 帮会id
+		 * set 帮派名字
 		 */
-		public function set guildId(value: long): void{
-			this._guildId = value;
+		public function set name(value: String): void{
+			this._name = value;
 		}
 		
 		/**
-		 * get 帮会名
-		 * @return 
-		 */
-		public function get guildName(): String{
-			return _guildName;
-		}
-		
-		/**
-		 * set 帮会名
-		 */
-		public function set guildName(value: String): void{
-			this._guildName = value;
-		}
-		
-		/**
-		 * get 帮旗造型Id
-		 * @return 
-		 */
-		public function get guildFlagModelId(): int{
-			return _guildFlagModelId;
-		}
-		
-		/**
-		 * set 帮旗造型Id
-		 */
-		public function set guildFlagModelId(value: int): void{
-			this._guildFlagModelId = value;
-		}
-		
-		/**
-		 * get 帮旗等级
-		 * @return 
-		 */
-		public function get guildFlagLevel(): int{
-			return _guildFlagLevel;
-		}
-		
-		/**
-		 * set 帮旗等级
-		 */
-		public function set guildFlagLevel(value: int): void{
-			this._guildFlagLevel = value;
-		}
-		
-		/**
-		 * get 帮旗名称
-		 * @return 
-		 */
-		public function get guildFlagName(): String{
-			return _guildFlagName;
-		}
-		
-		/**
-		 * set 帮旗名称
-		 */
-		public function set guildFlagName(value: String): void{
-			this._guildFlagName = value;
-		}
-		
-		/**
-		 * get 帮旗经验
-		 * @return 
-		 */
-		public function get guildFlagExp(): int{
-			return _guildFlagExp;
-		}
-		
-		/**
-		 * set 帮旗经验
-		 */
-		public function set guildFlagExp(value: int): void{
-			this._guildFlagExp = value;
-		}
-		
-		/**
-		 * get 帮主id
-		 * @return 
-		 */
-		public function get bangZhuid(): long{
-			return _bangZhuid;
-		}
-		
-		/**
-		 * set 帮主id
-		 */
-		public function set bangZhuid(value: long): void{
-			this._bangZhuid = value;
-		}
-		
-		/**
-		 * get 帮主名字
-		 * @return 
-		 */
-		public function get bangZhuName(): String{
-			return _bangZhuName;
-		}
-		
-		/**
-		 * set 帮主名字
-		 */
-		public function set bangZhuName(value: String): void{
-			this._bangZhuName = value;
-		}
-		
-		/**
-		 * get 帮主等级
-		 * @return 
-		 */
-		public function get bangZhuLevel(): int{
-			return _bangZhuLevel;
-		}
-		
-		/**
-		 * set 帮主等级
-		 */
-		public function set bangZhuLevel(value: int): void{
-			this._bangZhuLevel = value;
-		}
-		
-		/**
-		 * get 帮主是否在线
-		 * @return 
-		 */
-		public function get bangZhuOnline(): int{
-			return _bangZhuOnline;
-		}
-		
-		/**
-		 * set 帮主是否在线
-		 */
-		public function set bangZhuOnline(value: int): void{
-			this._bangZhuOnline = value;
-		}
-		
-		/**
-		 * get 帮主军衔等级
-		 * @return 
-		 */
-		public function get bangZhurankLevel(): int{
-			return _bangZhurankLevel;
-		}
-		
-		/**
-		 * set 帮主军衔等级
-		 */
-		public function set bangZhurankLevel(value: int): void{
-			this._bangZhurankLevel = value;
-		}
-		
-		/**
-		 * get 副帮主id
-		 * @return 
-		 */
-		public function get viceBangZhuId(): long{
-			return _viceBangZhuId;
-		}
-		
-		/**
-		 * set 副帮主id
-		 */
-		public function set viceBangZhuId(value: long): void{
-			this._viceBangZhuId = value;
-		}
-		
-		/**
-		 * get 副帮主名字
-		 * @return 
-		 */
-		public function get viceBangZhuName(): String{
-			return _viceBangZhuName;
-		}
-		
-		/**
-		 * set 副帮主名字
-		 */
-		public function set viceBangZhuName(value: String): void{
-			this._viceBangZhuName = value;
-		}
-		
-		/**
-		 * get 副帮主等级
-		 * @return 
-		 */
-		public function get viceBangZhuLevel(): int{
-			return _viceBangZhuLevel;
-		}
-		
-		/**
-		 * set 副帮主等级
-		 */
-		public function set viceBangZhuLevel(value: int): void{
-			this._viceBangZhuLevel = value;
-		}
-		
-		/**
-		 * get 副帮主军衔等级
-		 * @return 
-		 */
-		public function get viceBangZhurankLevel(): int{
-			return _viceBangZhurankLevel;
-		}
-		
-		/**
-		 * set 副帮主军衔等级
-		 */
-		public function set viceBangZhurankLevel(value: int): void{
-			this._viceBangZhurankLevel = value;
-		}
-		
-		/**
-		 * get 副帮主是否在线
-		 * @return 
-		 */
-		public function get viceBangZhuOnline(): int{
-			return _viceBangZhuOnline;
-		}
-		
-		/**
-		 * set 副帮主是否在线
-		 */
-		public function set viceBangZhuOnline(value: int): void{
-			this._viceBangZhuOnline = value;
-		}
-		
-		/**
-		 * get 帮会公告
-		 * @return 
-		 */
-		public function get guildAnnouncement(): String{
-			return _guildAnnouncement;
-		}
-		
-		/**
-		 * set 帮会公告
-		 */
-		public function set guildAnnouncement(value: String): void{
-			this._guildAnnouncement = value;
-		}
-		
-		/**
-		 * get 帮会公告最后更新时间
-		 * @return 
-		 */
-		public function get guildAnnouncementTime(): int{
-			return _guildAnnouncementTime;
-		}
-		
-		/**
-		 * set 帮会公告最后更新时间
-		 */
-		public function set guildAnnouncementTime(value: int): void{
-			this._guildAnnouncementTime = value;
-		}
-		
-		/**
-		 * get 成员数量
-		 * @return 
-		 */
-		public function get memberNum(): int{
-			return _memberNum;
-		}
-		
-		/**
-		 * set 成员数量
-		 */
-		public function set memberNum(value: int): void{
-			this._memberNum = value;
-		}
-		
-		/**
-		 * get 成员战斗力之和
-		 * @return 
-		 */
-		public function get memberFightPower(): int{
-			return _memberFightPower;
-		}
-		
-		/**
-		 * set 成员战斗力之和
-		 */
-		public function set memberFightPower(value: int): void{
-			this._memberFightPower = value;
-		}
-		
-		/**
-		 * get 帮会创建时间
-		 * @return 
-		 */
-		public function get createTime(): int{
-			return _createTime;
-		}
-		
-		/**
-		 * set 帮会创建时间
-		 */
-		public function set createTime(value: int): void{
-			this._createTime = value;
-		}
-		
-		/**
-		 * get 帮会等级
+		 * get 帮派等级
 		 * @return 
 		 */
 		public function get level(): int{
@@ -543,40 +145,130 @@ package com.rpgGame.netData.guild.bean{
 		}
 		
 		/**
-		 * set 帮会等级
+		 * set 帮派等级
 		 */
 		public function set level(value: int): void{
 			this._level = value;
 		}
 		
 		/**
-		 * get 是否允许自动加入
+		 * get 帮主名字
 		 * @return 
 		 */
-		public function get autoJoin(): int{
-			return _autoJoin;
+		public function get chiefName(): String{
+			return _chiefName;
 		}
 		
 		/**
-		 * set 是否允许自动加入
+		 * set 帮主名字
 		 */
-		public function set autoJoin(value: int): void{
-			this._autoJoin = value;
+		public function set chiefName(value: String): void{
+			this._chiefName = value;
 		}
 		
 		/**
-		 * get 库存金币
+		 * get 帮主战斗力
 		 * @return 
 		 */
-		public function get guildMoney(): long{
-			return _guildMoney;
+		public function get chiefBattle(): int{
+			return _chiefBattle;
 		}
 		
 		/**
-		 * set 库存金币
+		 * set 帮主战斗力
 		 */
-		public function set guildMoney(value: long): void{
-			this._guildMoney = value;
+		public function set chiefBattle(value: int): void{
+			this._chiefBattle = value;
+		}
+		
+		/**
+		 * get 成员数
+		 * @return 
+		 */
+		public function get memberNum(): int{
+			return _memberNum;
+		}
+		
+		/**
+		 * set 成员数
+		 */
+		public function set memberNum(value: int): void{
+			this._memberNum = value;
+		}
+		
+		/**
+		 * get 帮派排名
+		 * @return 
+		 */
+		public function get rank(): int{
+			return _rank;
+		}
+		
+		/**
+		 * set 帮派排名
+		 */
+		public function set rank(value: int): void{
+			this._rank = value;
+		}
+		
+		/**
+		 * get 活跃值
+		 * @return 
+		 */
+		public function get active(): int{
+			return _active;
+		}
+		
+		/**
+		 * set 活跃值
+		 */
+		public function set active(value: int): void{
+			this._active = value;
+		}
+		
+		/**
+		 * get 帮会宣言
+		 * @return 
+		 */
+		public function get note(): String{
+			return _note;
+		}
+		
+		/**
+		 * set 帮会宣言
+		 */
+		public function set note(value: String): void{
+			this._note = value;
+		}
+		
+		/**
+		 * get 帮派总战力
+		 * @return 
+		 */
+		public function get battle(): int{
+			return _battle;
+		}
+		
+		/**
+		 * set 帮派总战力
+		 */
+		public function set battle(value: int): void{
+			this._battle = value;
+		}
+		
+		/**
+		 * get 占领城池情况
+		 * @return 
+		 */
+		public function get city(): int{
+			return _city;
+		}
+		
+		/**
+		 * set 占领城池情况
+		 */
+		public function set city(value: int): void{
+			this._city = value;
 		}
 		
 	}

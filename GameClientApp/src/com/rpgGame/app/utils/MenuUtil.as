@@ -49,7 +49,7 @@ package com.rpgGame.app.utils
 		{
 			var selfMemberData : SocietyMemberData = SocietyManager.getSelfMemberData();
 			var officerDataProto : FamilyOfficerDataProto = selfMemberData ? SocietyStaticConfigData.getFamilyOfficerDataByPos(selfMemberData.societyPos) : null;
-			var guildOfficeDataProto : GuildOfficerDataProto = GuildManager.getSelfOfficePosData();
+			var guildOfficeDataProto : GuildOfficerDataProto = GuildManager.instance.getSelfOfficePosData();
 			var menus : Array = [];
 			if(fromChat)
 			{
@@ -186,7 +186,7 @@ package com.rpgGame.app.utils
 					break;
 				case LangMenu.SEND_MAIL://发送邮件
 				case LangMenu.INVITE_JOIN_GUILD:
-					GuildManager.inviteSocietyJoinMyGuild(heroId);
+					GuildManager.instance.inviteSocietyJoinMyGuild(heroId);
 					break;
 				case LangMenu.SEND_MAIL://邀请加入帮派
 					AppManager.showAppNoHide(AppConstant.MAIL_PANEL, [MailType.SEND, heroId, heroName, LanguageConfig.getText(LangMisc.NOTHING_INFO)]);
@@ -281,13 +281,13 @@ package com.rpgGame.app.utils
 					}
 					break;
 				case LangMenu.REMOVE_VICE_LEADER:
-					GuildManager.removeViceLeader();
+					GuildManager.instance.removeViceLeader();
 					break;
 				case LangMenu.SET_UP_VICE_LEADER:
-					GuildManager.setupViceLeader();
+					GuildManager.instance.setupViceLeader();
 					break;
 				case LangMenu.KICK_GUILD:
-					GuildManager.kickFamily();
+					GuildManager.instance.kickFamily();
 					break;
 				case LangMenu.MOVE_TO_HERO:
 					Mgr.teamMgr.move2TeamMember(heroId);

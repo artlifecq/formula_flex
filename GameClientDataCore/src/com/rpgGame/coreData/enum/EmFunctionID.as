@@ -34,6 +34,18 @@ package com.rpgGame.coreData.enum
 		public static const EM_ZUDUI:String="50";
 		/** 帮会 **/
 		public static const EM_BANGHUI:String="51";
+		/** 帮会信息 **/
+		public static const EM_BANGHUI_INFO:String="52";
+		/** 帮会成员 **/
+		public static const EM_BANGHUI_CHENGYUAN:String="53";
+		/** 帮会升级 **/
+		public static const EM_BANGHUI_UPLEVEL:String="54";
+		/** 帮会技能 **/
+		public static const EM_BANGHUI_SPELL:String="55";
+		/** 帮会列表 **/
+		public static const EM_BANGHUI_LIEBIAO:String="56";
+		/** 皇城争霸 **/
+		public static const EM_BANGHUI_COMBAT:String="57";
 		/** 商城 **/
 		public static const EM_SHOP:String="60";
 		/** 论剑 **/

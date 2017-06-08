@@ -280,6 +280,9 @@ package com.rpgGame.app.data
 			//道具获取路径
 			SourceGetCfg.setup(dic[ConfigClassRegister.Q_source]);//多人副本
 			
+			GuildCfgData.setupGuildInfo(dic[ConfigClassRegister.Q_guild]);//帮会等级
+			GuildCfgData.setupGuildPermissionInfo(dic[ConfigClassRegister.Q_guild_permission]);//职务权限
+			
 			//功能开启
 			//ClientFunctionOpenCfgData.setup(dic["data.ClientFunctionOpen"]);
 		}
@@ -335,10 +338,7 @@ package com.rpgGame.app.data
 			//				MonsterDataManager.setConfig(config.monsterConfig); //怪物//NPC
 			//			}
 			
-			if (config.hasGuildConfig)
-			{
-				GuildCfgData.setup(config.guildConfig); //帮派
-			}
+			
 			//传送门
 			if (config.hasSceneTranports)
 			{
@@ -395,6 +395,7 @@ package com.rpgGame.app.data
 			MazeCfgData.setup(config.mazeConfig);
 			//摆摊
 			StallCfgData.setup(config.stallConfig);
+			
 			
 			if (config.biaoConfig)
 			{ //镖局配置

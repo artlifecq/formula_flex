@@ -151,19 +151,21 @@ package com.rpgGame.app.manager.fightsoul
 			return FightsoulData.getInfobyId(_fightSoulInfo.curModelLv);
 		}
 		
-		public function FightSoulLevelUp():void
+		public function FightSoulLevelUp():Boolean
 		{
 			if(fightSoulInfo.level == 130)
 			{
 				NoticeManager.showNotifyById(4002);
-				return ;
+				return false;
 			}
 			if(fightSoulInfo.exp<currentLeveldata.q_exp)
 			{
 				NoticeManager.showNotifyById(4003);
-				return ;
+				return false;
 			}
 			SocketConnection.send(new CSFightSoulLevelUpMessage());
+			
+			return true;
 		}
 		
 		public function chageModeLevel(level:int):void

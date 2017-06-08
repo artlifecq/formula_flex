@@ -1,7 +1,12 @@
 package com.rpgGame.coreData.cfg
 {
-	import app.message.GuildConfig;
-	import app.message.GuildMiscDataProto;
+	import com.rpgGame.coreData.clientConfig.Q_guild;
+	import com.rpgGame.coreData.clientConfig.Q_guild_permission;
+	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
+	
+	import flash.utils.ByteArray;
+	import flash.utils.Dictionary;
+	
 	import app.message.GuildLevelDatasProto.GuildLevelDataProto;
 	import app.message.GuildOfficerDatasProto.GuildOfficerDataProto;
 	
@@ -12,56 +17,51 @@ package com.rpgGame.coreData.cfg
 		public function GuildCfgData()
 		{
 		}
-		/**帮派杂项数据**/
-		public static var guildMiscData : GuildMiscDataProto;
+		
 		/**等级数据**/
-		public static var guildLevel : HashMap;
-		/**官员数据**/
-		public static var guildOfficer : HashMap;
+		private static var _guildlevel : HashMap;
 		
-		public static var createGuildNpc : Number;
-		public static function setup(data:GuildConfig):void
+		public static function setupGuildInfo( data:ByteArray ):void
 		{
-			if(!data)
-				return;
-			guildMiscData = data.miscData;
-			setGuildLevel(data.levelDatas.datas?data.levelDatas.datas:null);
-			setGuildOffice(data.hasOfficerDatas?data.officerDatas.datas:null);
-		}
-		public static function setGuildLevel(array:Array):void
-		{
-			if(!guildLevel)
-				guildLevel = new HashMap();
-			for each(var level : GuildLevelDataProto in array)
-			{
-				if(level)
-				{
-					guildLevel.add(level.level,level);
-				}
+			_guildlevel = new HashMap();
+			var arr : Array = data.readObject();
+			for each(var info :Q_guild in arr) {
+				_guildlevel.add(info.q_level,info);
 			}
 		}
 		
-		public static function getGuildLevelData(level:int):GuildLevelDataProto
+		/**
+		 * 根据等级获取帮会等级配置 
+		 * @param level
+		 * @return 
+		 * 
+		 */
+		public static function getLevelInfo(level:int):Q_guild
 		{
-			return guildLevel?guildLevel.getValue(level):null;
+			return _guildlevel.getValue(level) as Q_guild;
 		}
 		
-		public static function setGuildOffice(array:Array):void
+		private static var _guildPermission : HashMap;
+		
+		public static function setupGuildPermissionInfo( data:ByteArray ):void
 		{
-			if(!guildOfficer)
-				guildOfficer = new HashMap();
-			for each(var level : GuildOfficerDataProto in array)
-			{
-				if(level)
-				{
-					guildOfficer.add(level.pos,level);
-				}
+			_guildPermission = new HashMap();
+			var arr : Array = data.readObject();
+			for each(var info :Q_guild_permission in arr) {
+				_guildPermission.add(info.q_id,info);
 			}
 		}
 		
-		public static function getGuildOfficeData(pos:int):GuildOfficerDataProto
+		/**
+		 * 根据职务等级获取职务权限配置
+		 * @param level
+		 * @return 
+		 * 
+		 */
+		public static function getPermissionInfo(post:int):Q_guild_permission
 		{
-			return guildOfficer?guildOfficer.getValue(pos):null;
+			return _guildPermission.getValue(post) as Q_guild_permission;
 		}
+		
 	}
 }

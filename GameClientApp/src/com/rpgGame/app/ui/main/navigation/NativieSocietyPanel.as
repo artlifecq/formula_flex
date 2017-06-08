@@ -5,6 +5,8 @@ package com.rpgGame.app.ui.main.navigation
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
+	import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	
 	import away3d.events.Event;
@@ -73,6 +75,9 @@ package com.rpgGame.app.ui.main.navigation
 			{
 				case _skin.btn_n2:
 					AppManager.showApp(AppConstant.SOCIAL_PANEL);
+					break;
+				case _skin.btn_n1:
+					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_BANGHUI_INFO);
 					break;
 			}
 			close();
