@@ -16,6 +16,9 @@ package com.rpgGame.netData.team.message{
 		//投票玩家Id
 		private var _playerId: long;
 		
+		//副本ID
+		private var _zoneModelid: int;
+		
 		//投票结果(0不同意，1同意)
 		private var _result: int;
 		
@@ -26,6 +29,8 @@ package com.rpgGame.netData.team.message{
 		override protected function writing(): Boolean{
 			//投票玩家Id
 			writeLong(_playerId);
+			//副本ID
+			writeInt(_zoneModelid);
 			//投票结果(0不同意，1同意)
 			writeByte(_result);
 			return true;
@@ -37,6 +42,8 @@ package com.rpgGame.netData.team.message{
 		override protected function reading(): Boolean{
 			//投票玩家Id
 			_playerId = readLong();
+			//副本ID
+			_zoneModelid = readInt();
 			//投票结果(0不同意，1同意)
 			_result = readByte();
 			return true;
@@ -63,6 +70,21 @@ package com.rpgGame.netData.team.message{
 		 */
 		public function set playerId(value: long): void{
 			this._playerId = value;
+		}
+		
+		/**
+		 * get 副本ID
+		 * @return 
+		 */
+		public function get zoneModelid(): int{
+			return _zoneModelid;
+		}
+		
+		/**
+		 * set 副本ID
+		 */
+		public function set zoneModelid(value: int): void{
+			this._zoneModelid = value;
 		}
 		
 		/**
