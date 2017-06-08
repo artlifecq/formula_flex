@@ -64,7 +64,20 @@ package com.rpgGame.appModule.activety
 		{
 			_skin.ListItem.addEventListener(Event.CHANGE,onChange);
 			_skin.joinBtn.addEventListener(Event.TRIGGERED,onJoin);
-			_skin.ListItem.selectedIndex=0;
+			if(!data){
+				_skin.ListItem.selectedIndex=0;
+			}else{
+				var dataInfo:ActivetyInfo=data as ActivetyInfo;
+				for(var i:int=0;i<_activeData.length;i++){
+					var info:ActivetyInfo=_activeData.data[i] as ActivetyInfo;
+					if(info.cfg.q_activity_id==dataInfo.cfg.q_activity_id){
+						_skin.ListItem.selectedIndex=i;
+						_skin.ListItem.scrollToDisplayIndex(i);
+						_skin.ListItem.dataProvider.updateItemAt(i);
+						break;
+					}
+				}
+			}
 			onChange(null);
 		}
 		

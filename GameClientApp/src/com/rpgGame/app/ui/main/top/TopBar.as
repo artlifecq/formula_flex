@@ -68,9 +68,9 @@ package com.rpgGame.app.ui.main.top {
 			
 			//显示延迟格
 			var delay:Number=msg.time.fValue-SystemTimeManager.delayTiemByServer;
-			if(delay<=100) trace("网络正常: "+delay);
-			else if(delay>100&&delay<=200) trace("网络良好 "+delay);
-			else trace("网络一般 "+delay);
+			if(delay<=100) _skin.UI_net.styleName = "ui/mainui/top/signal00.png";
+			else if(delay>100&&delay<=200) _skin.UI_net.styleName = "ui/mainui/top/signal01.png";
+			else _skin.UI_net.styleName = "ui/mainui/top/signal02.png";
 		}
 		
 		public function resize(w : int, h : int) : void {

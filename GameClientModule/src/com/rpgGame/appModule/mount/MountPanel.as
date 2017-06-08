@@ -5,6 +5,7 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	
 	import org.mokylin.skin.app.zuoqi.Zuoqi_Skin;
+	import org.mokylin.skin.app.zuoqi.button.ButtonZhanqi;
 	import org.mokylin.skin.app.zuoqi.button.ButtonZuoqi;
 	
 	import starling.display.DisplayObjectContainer;
@@ -20,6 +21,7 @@ package com.rpgGame.appModule.mount
 		override protected function initTabBarDatas():void
 		{
 			addTabDatas(ButtonZuoqi,MountView,EmFunctionID.EM_ZUOQI);
+			addTabDatas(ButtonZhanqi,ZhanQiPanelExt,EmFunctionID.EM_ZHANQI);
 		}
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{

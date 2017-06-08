@@ -150,7 +150,7 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 		private function __Zuomo_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhuangbei/zuomo/bg.jpg";
+			temp.styleName = "ui/big_bg/zhuangbei/zuomo/bg.jpg";
 			temp.x = 371;
 			temp.y = 75;
 			return temp;

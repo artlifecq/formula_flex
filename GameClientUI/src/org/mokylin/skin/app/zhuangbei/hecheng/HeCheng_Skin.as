@@ -337,13 +337,13 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			equip_num = temp;
 			temp.name = "equip_num";
-			temp.text = "10";
+			temp.text = "100";
 			temp.textAlign = "right";
 			temp.color = 0xE1D4A9;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 31;
-			temp.x = 612;
-			temp.y = 229;
+			temp.width = 35;
+			temp.x = 609;
+			temp.y = 227;
 			return temp;
 		}
 

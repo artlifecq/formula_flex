@@ -4,19 +4,15 @@ package com.rpgGame.app.ui.main.buff
 	import com.rpgGame.app.view.icon.BuffIcon;
 	import com.rpgGame.core.events.BuffEvent;
 	import com.rpgGame.core.ui.SkinUI;
-	import com.rpgGame.core.view.uiComponent.face.cd.CDDataManager;
-	import com.rpgGame.coreData.clientConfig.Q_buff;
 	import com.rpgGame.coreData.enum.face.FaceTypeEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.role.RoleData;
-	import com.rpgGame.coreData.type.item.GridBGType;
 	
 	import feathers.controls.StateSkin;
 	
 	import org.client.mainCore.manager.EventManager;
 	
-	import starling.core.Starling;
 	import starling.display.Sprite;
 	
 	/**
@@ -151,7 +147,6 @@ package com.rpgGame.app.ui.main.buff
 					if(icon.buffData.buffData.q_buff_id==buffData.buffData.q_buff_id){
 						icon.dispose();
 						badBuffs.splice(i,1);
-						debuffSp.removeChild(icon);
 						break;
 					}
 				}
@@ -164,7 +159,6 @@ package com.rpgGame.app.ui.main.buff
 					if(icon.buffData.buffData.q_buff_id==buffData.buffData.q_buff_id){
 						icon.dispose();
 						goodBuffs.splice(i,1);
-						buffSp.removeChild(icon);
 						break;
 					}
 				}

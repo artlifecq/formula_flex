@@ -78,7 +78,7 @@ package org.mokylin.skin.app.zhuangbei.jicheng
 			temp.textAlign = "left";
 			temp.color = 0xCFC6AE;
 			temp.width = 154;
-			temp.x = 8;
+			temp.x = 7;
 			temp.y = 3;
 			return temp;
 		}

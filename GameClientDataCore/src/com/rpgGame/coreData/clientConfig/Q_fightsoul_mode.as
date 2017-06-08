@@ -22,10 +22,12 @@ package com.rpgGame.coreData.clientConfig
 		public var q_effect1:String;
 		 /**  界面缩放比例(百分比) */
 		public var q_panleScale:int;
-		 /**  场景Y */
+		 /**  面板Y */
 		public var q_panleY:int;
 		 /**  场景缩放比例(百分比) */
 		public var q_sceneScale:int;
+		 /**  旋转半径 */
+		public var q_radius:int;
 
 	}
 }
