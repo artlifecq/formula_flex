@@ -63,13 +63,28 @@ package com.rpgGame.app.ui.main.head {
 			_buffContainer.y=65;
 			gridW=IcoSizeEnum.ICON_24+9;
 			// event
+		
+			updateAll();
+			initPK();
+			initBuff();
+		}
+		
+		override protected function onShow():void
+		{
+			super.onShow();
 			EventManager.addEvent(BuffEvent.ADD_BUFF, addBuff);
 			EventManager.addEvent(BuffEvent.REMOVE_BUFF, removeBuff);
 			EventManager.addEvent(MainPlayerEvent.STAT_CHANGE,updateFight);//基本属性改变
 			EventManager.addEvent(MainPlayerEvent.PK_MODE_CHANGE,onPKModelChange);
-			updateAll();
-			initPK();
-			initBuff();
+		}
+		
+		override protected function onHide() : void
+		{
+			super.onHide();
+			EventManager.removeEvent(BuffEvent.ADD_BUFF, addBuff);
+			EventManager.removeEvent(BuffEvent.REMOVE_BUFF, removeBuff);
+			EventManager.removeEvent(MainPlayerEvent.STAT_CHANGE,updateFight);//基本属性改变
+			EventManager.removeEvent(MainPlayerEvent.PK_MODE_CHANGE,onPKModelChange);
 		}
 		
 		private function onPKModelChange():void
@@ -282,9 +297,9 @@ package com.rpgGame.app.ui.main.head {
 			{
 				icon=_buffList[i];
 				if(icon.buffData.buffData.q_buff_id==buffData.buffData.q_buff_id){
+					_buffContainer.removeChild(icon);
 					icon.dispose();
 					_buffList.splice(i,1);
-					_buffContainer.removeChild(icon);
 					updatePoint();
 					break;
 				}

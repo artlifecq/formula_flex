@@ -81,7 +81,7 @@ package com.rpgGame.app.ui.main.dungeon
 		{
 			addEvent();
 			enterZone();
-			
+//			GameAlert.showAlert(alertOk,onAlert);
 		}
 		override protected function onHide():void
 		{

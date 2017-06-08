@@ -70,6 +70,13 @@ package com.rpgGame.app.ui.main.smallmap {
 		override protected function onShow():void {
 			super.onShow();
 			this.showSmallMap();
+			this._smallMap.openRoad();
+		}
+		
+		override protected function onHide():void
+		{
+			super.onHide();
+			this._smallMap.closeRoad();
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void {
@@ -152,7 +159,7 @@ package com.rpgGame.app.ui.main.smallmap {
 				return;
 			}
 			this._smallMap.showMap(sceneData.sceneId);
-			this._smallMap.openRoad();
+//			this._smallMap.openRoad();
 			var npcs : Vector.<MonsterBornData> = NpcCfgData.getSceneNpcDatas(sceneData.sceneId);
 			var monsters : Array = MonsterDataManager.getSceneMonsterDatas(sceneData.sceneId);
 			var transports : Array = TransCfgData.getSceneTransportDatas(sceneData.sceneId);

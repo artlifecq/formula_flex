@@ -22,6 +22,7 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.task.TaskManager;
 	import com.rpgGame.app.map.BaseMapProcess;
+	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.ui.ResLoadingView;
 	import com.rpgGame.core.app.AppConstant;
@@ -47,6 +48,8 @@ package com.rpgGame.app.manager.scene
 	
 	import app.message.MazeDungeonProto;
 	import app.message.SceneProto;
+	
+	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.connection.SocketConnection_protoBuffer;
@@ -603,6 +606,17 @@ package com.rpgGame.app.manager.scene
 		{
 			var mapId:int=MainRoleManager.actorInfo.preMapID;
 			var sceneData:SceneData=MapDataManager.getMapInfo(mapId);
+			if(mapId==600){
+				AppManager.showApp(AppConstant.MULTY_PANL);
+				TweenLite.delayedCall(5,function():void{
+					DungeonSender.reqEnterDungeon(7001);
+				});
+				 return;
+			}else if(sceneData&&sceneData.mapType==0){
+				TweenLite.delayedCall(3,function():void{
+					DungeonSender.reqQuitDungeon();
+				});
+			}
 			if(!sceneData){
 				return;
 			}

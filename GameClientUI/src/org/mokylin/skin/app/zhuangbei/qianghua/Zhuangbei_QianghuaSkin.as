@@ -196,7 +196,7 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 		private function __Zhuangbei_QianghuaSkin_UIAsset6_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhuangbei/qianghua/bg.jpg";
+			temp.styleName = "ui/big_bg/zhuangbei/qianghua/bg.jpg";
 			temp.x = 371;
 			temp.y = 75;
 			return temp;

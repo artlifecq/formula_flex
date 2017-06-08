@@ -288,7 +288,5 @@ package com.rpgGame.app.view.icon
 		{
 			return _iconResURL;
 		}
-
-		
 	}
 }
