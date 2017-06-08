@@ -50,5 +50,7 @@ package com.rpgGame.coreData.enum
 		public static const EM_DIANFENGDUIJUE:String="320";
 		/** 竞技争霸 **/
 		public static const EM_JINGJIZHENGBA:String="321";
+		/** 活动大厅 **/
+		public static const EM_HUODONGDATING:String="322";
 	}
 }

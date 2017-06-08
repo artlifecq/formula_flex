@@ -70,12 +70,6 @@ package com.rpgGame.app.manager
 						updateMpBar(data);
 						EventManager.dispatchEvent(MainPlayerEvent.NOWMP_CHANGE, data);
 						break;
-					case CharAttributeType.PK_MODE:
-						//HeroData(data).pkMode = attributeValue;
-						break;
-					case CharAttributeType.PK:
-						HeroData(data).pkMode = attributeValue;
-						break;
 					case CharAttributeType.LV:
 						updateBloodLV(data);
 					default:

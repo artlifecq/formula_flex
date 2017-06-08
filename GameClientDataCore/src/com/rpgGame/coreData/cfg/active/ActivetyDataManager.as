@@ -19,6 +19,7 @@ package com.rpgGame.coreData.cfg.active
 		{
 		}
 		private static var _typeMap:HashMap;
+		private static var _infoMap:HashMap;
 		
 		public static function setup( data:ByteArray ):void
 		{
@@ -26,6 +27,7 @@ package com.rpgGame.coreData.cfg.active
 			var num:int=arr.length;
 			var info:Q_special_activities;
 			_typeMap=new HashMap();
+			_infoMap=new HashMap();
 			for(var i:int=0;i<num;i++){
 				info=arr[i];
 				addCfg(info);
@@ -47,7 +49,19 @@ package com.rpgGame.coreData.cfg.active
 			}
 			info=new ActivetyInfo();
 			info.cfg=cfg;
+			_infoMap.add(cfg.q_activity_id,info);
 			typeList.push(info);
+		}
+		
+		/**
+		 *根据活动id获取活动信息 
+		 * @param id
+		 * @return 
+		 * 
+		 */
+		public static function getActInfoById(id:int):ActivetyInfo
+		{
+			return _infoMap.getValue(id);
 		}
 		
 		/**
@@ -93,25 +107,6 @@ package com.rpgGame.coreData.cfg.active
 			var typeList:Vector.<ActivetyInfo>=_typeMap.getValue(info.info.activityType);
 			typeList=typeList.sort(sortListByID);
 			typeList=typeList.sort(sortListByState);
-		}
-		
-		/**
-		 *根据活动id得到活动信息 
-		 * @return 
-		 * 
-		 */
-		public static function getActInfoById(id:int):ActivetyInfo
-		{
-			var keys:Array=_typeMap.keys();
-			for each(var key:int in keys){
-				var values:Vector.<ActivetyInfo>=_typeMap.getValue(key);
-				for(var i:int=0;i<values.length;i++){
-					if(values[i].cfg.q_activity_id==id){
-						return values[i];
-					}
-				}
-			}
-			return null;
 		}
 		
 		/**
