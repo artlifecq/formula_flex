@@ -300,7 +300,7 @@ package com.rpgGame.app.manager
 			var rpd_body_effect : RenderParamData3D = avatarInfo.rpd_body_effect;
 			if (rpd_body_effect != null)
 			{
-				ru = role.avatar.addRenderUnitToUnit(RenderUnitType.BODY, RenderUnitID.BODY, rpd_body_effect);
+//				ru = role.avatar.addRenderUnitToUnit(RenderUnitType.BODY, RenderUnitID.BODY, rpd_body_effect);
 				if (rpd_body)
 				{
 					if (rpd_body.animatorSourchPath)
@@ -332,7 +332,7 @@ package com.rpgGame.app.manager
 			var rpd_body_effect2 : RenderParamData3D = avatarInfo.rpd_body_effect2;
 			if (rpd_body_effect2 != null)
 			{
-				ru = role.avatar.addRenderUnitToUnit(RenderUnitType.BODY, RenderUnitID.BODY, rpd_body_effect2);
+//				ru = role.avatar.addRenderUnitToUnit(RenderUnitType.BODY, RenderUnitID.BODY, rpd_body_effect2);
 				if (rpd_body)
 				{
 					if (rpd_body.animatorSourchPath)

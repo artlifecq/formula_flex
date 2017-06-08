@@ -1,14 +1,11 @@
 package com.rpgGame.app.scene.animator
 {
+	import com.game.engine3D.config.GlobalConfig;
 	import com.game.engine3D.scene.render.vo.IRenderAnimator;
 	import com.game.engine3D.vo.BaseObj3D;
 	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.coreData.enum.BoneNameEnum;
-	import com.rpgGame.coreData.type.RenderUnitID;
-	import com.rpgGame.coreData.type.RenderUnitType;
-	
-	import flash.geom.Vector3D;
 	
 	import gs.TweenLite;
 	
@@ -25,9 +22,11 @@ package com.rpgGame.app.scene.animator
 		
 		private var _fightSoulRole:SceneRole;
 		private var _owner:SceneRole;
-		private var _delayTime:Number = 0;
 		private static const TotalRunTime:Number = 5000;
-		private static const RoundConst:Number = 100;
+		private static const RoundConst:Number = 150;
+		
+		private var _preTime:Number;
+		private var _rotation:int;
 		
 		public function FightSoulFollowAnimator(fightSoulRole:SceneRole)
 		{
@@ -37,6 +36,7 @@ package com.rpgGame.app.scene.animator
 		public function setOwner(owner:BaseObj3D):void
 		{
 			_owner = owner as SceneRole;
+			_preTime = SystemTimeManager.curtTm;
 		}
 		
 		private function down():void
@@ -61,37 +61,45 @@ package com.rpgGame.app.scene.animator
 			SceneManager.getScene().removeSceneObj(_fightSoulRole);
 			_fightSoulRole = null;
 			_owner = null;
-			_delayTime = 0;
 		}
 		
+		private var _perTime:Number = 0;
 		public function update(gapTm:uint):void
 		{
-			var scenePos:Vector3D = _owner.getChildScenePositionByName(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_name_01);
-			if (scenePos)
+//			var curTime:Number = SystemTimeManager.curtTm;
+//			if (curTime - _preTime < 100)
+//			{
+//				return;
+//			}
+//			_preTime = curTime;
+			_perTime +=gapTm;
+			if(_perTime >= TotalRunTime)
 			{
-				/*_local3 = MathUtil.getDxByAngle(50, (_owner.rotationY + 180));
-				_local3 = _local3 + _owner.x;
-				_local4 = MathUtil.getDyByAngle(50, _owner.rotationY);
-				_local4 = _local4 + _owner.z;
-				if (Math.abs(_fightSoulRole.z - _local4) > 10 || Math.abs(_fightSoulRole.x - _local3) > 10 || Math.abs(_fightSoulRole.y + 30 - scenePos.y) > 10)
+				_perTime -= TotalRunTime;
+			}
+			var percent:Number = Math.PI * 2 * _perTime/TotalRunTime;
+			
+			_fightSoulRole.x = _owner.x + RoundConst*Math.sin(percent);
+			_fightSoulRole.z = _owner.z + Math.cos(Math.abs(GlobalConfig.mapCameraRadian)) * RoundConst*Math.cos(percent);
+			
+//			var scenePos:Vector3D = _owner.getChildScenePositionByName(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_head_01);
+//			if (scenePos)
+//			{
+				/*startX = MathUtil.getDxByAngle(DISTANCE, (_owner.rotationY + 180));
+				startX = startX + _owner.x;
+				startY = MathUtil.getDyByAngle(DISTANCE, _owner.rotationY);
+				startY = startY + _owner.z;
+				if (Math.abs(_fightSoulRole.z - startY) > 10 || Math.abs(_fightSoulRole.x - startX) > 10 || Math.abs(_fightSoulRole.y + 30 - scenePos.y) > 10)
 				{
 					TweenLite.to(_fightSoulRole, 0.5, {
-						"x":_local3,
-						"y":(scenePos.y - 30),
-						"z":_local4,
+						"x":startX,
+//						"y":(scenePos.y - DIS_HEIGHT),
+						"z":startY + 200,
 						"overwrite":1,
 						"ease":Linear.easeNone
 					});
 				}*/
-//				trace(scenePos.x,scenePos.y,scenePos.z);
-				_delayTime +=gapTm;
-				if(_delayTime>=TotalRunTime)
-					_delayTime -=TotalRunTime;
-				var percent:Number = Math.PI*2*_delayTime/TotalRunTime;
-				_fightSoulRole.x = _owner.x+RoundConst*Math.sin(percent);
-				_fightSoulRole.y +=180;
-				_fightSoulRole.z = _owner.z+RoundConst*Math.cos(percent);
-			}
+//			}
 		}	
 	}
 }
