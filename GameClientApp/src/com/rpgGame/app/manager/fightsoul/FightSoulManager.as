@@ -219,8 +219,9 @@ package com.rpgGame.app.manager.fightsoul
 			if (null == player || !player.usable) {
 				return;
 			}
+			var modle:Q_fightsoul = FightsoulData.getInfobyId(_fightSoulInfo.curModelLv);
 			var heroData : HeroData = player.data as HeroData; 
-			heroData.fightSoulLevel =_fightSoulInfo.curModelLv;
+			heroData.fightSoulLevel =modle.q_mode;
 			var role : SceneRole = SceneManager.getScene().getSceneObjByID(heroData.id, SceneCharType.PLAYER) as SceneRole;
 			updateRoleAvatar(role);
 		}
