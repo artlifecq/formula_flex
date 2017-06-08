@@ -1,7 +1,9 @@
 package com.rpgGame.app.sender
 {
+	import com.rpgGame.netData.cross.message.CSCancelTeamMatchMessage;
 	import com.rpgGame.netData.cross.message.CSTeamMatchMessage;
 	import com.rpgGame.netData.lunjian.message.CSLunJianPanelInfosMessage;
+	import com.rpgGame.netData.team.message.CSZoneTeamVoteMessage;
 	import com.rpgGame.netData.zone.message.CSClientTriggerValiedMessage;
 	import com.rpgGame.netData.zone.message.ReqZoneCommonEnterMessage;
 	import com.rpgGame.netData.zone.message.ReqZoneCommonQuitMessage;
@@ -90,11 +92,22 @@ package com.rpgGame.app.sender
 		 *多人副本取消匹配
 		 * 
 		 */
-		public static function reqTeamMatchCancel(zid:int):void
+		public static function reqCancelTeam(zid:int):void
 		{
-			var msg:CSTeamMatchMessage=new CSTeamMatchMessage();
+			var msg:CSCancelTeamMatchMessage=new CSCancelTeamMatchMessage();
 			msg.zoneModelId=zid;
-			msg.matchState=0;
+			SocketConnection.send(msg);
+		}
+		
+		/**
+		 *发起投票消息
+		 * 
+		 */
+		public static function reqTeamMatchVote(zid:int,vote:int):void
+		{
+			var msg:CSZoneTeamVoteMessage=new CSZoneTeamVoteMessage();
+			msg.zoneId=zid;
+			msg.voteValue=vote;
 			SocketConnection.send(msg);
 		}
 		

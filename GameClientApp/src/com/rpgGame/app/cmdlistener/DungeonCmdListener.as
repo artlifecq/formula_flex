@@ -4,13 +4,16 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.manager.ClientTriggerManager;
 	import com.rpgGame.app.manager.DailyZoneDataManager;
 	import com.rpgGame.app.manager.DungeonManager;
+	import com.rpgGame.app.manager.TeamManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
+	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.DungeonEvent;
 	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.netData.cross.message.SCCancelTeamMatchMessage;
+	import com.rpgGame.netData.cross.message.SCStartTeamMatchMessage;
 	import com.rpgGame.netData.dailyzone.message.SCDailyZoneIdInfoMessage;
 	import com.rpgGame.netData.dailyzone.message.SCDailyZoneMonsterCountMessage;
 	import com.rpgGame.netData.dailyzone.message.SCDailyZonePanelInfoMessage;
@@ -19,6 +22,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.lunjian.message.SCLunJianPanelInfosMessage;
 	import com.rpgGame.netData.lunjian.message.SCLunJianResultMessage;
 	import com.rpgGame.netData.lunjian.message.SCLunJianTimeMessage;
+	import com.rpgGame.netData.team.message.SCZoneTeamVoteResultMessage;
 	import com.rpgGame.netData.zone.message.SCClientTriggerValiedMessage;
 	import com.rpgGame.netData.zone.message.SCCurTriggerMessage;
 	import com.rpgGame.netData.zone.message.SCEnterZoneMessage;
@@ -74,7 +78,10 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(155145, onSCMultiZoneRewardMessage );//多人副本奖励
 			SocketConnection.addCmdListener(155146, onSCMultiZonePanelInfosMessage );//面板列表
 			SocketConnection.addCmdListener(155147, onSCMultiZonePanelSingleInfoMessage );//面板列表单个
-			SocketConnection.addCmdListener(250264, onSCCancelTeamMatchMessage );//面板列表单个
+			SocketConnection.addCmdListener(250264, onSCCancelTeamMatchMessage );//取消匹配
+			SocketConnection.addCmdListener(250265, onSCStartTeamMatchMessage );//服务器开始匹配
+			
+			SocketConnection.addCmdListener(109117, onSCZoneTeamVoteResultMessage);//队伍投票
 			
 			
 			finish();
@@ -143,7 +150,7 @@ package com.rpgGame.app.cmdlistener
 			DungeonManager.curryZoneId=msg.zoneId;
 			ClientTriggerManager.clearTigerByZone(msg.zoneId);
 			EventManager.dispatchEvent(DungeonEvent.ENTER_ZONE);
-			
+			AppManager.hideApp(AppConstant.MULTY_PANL);
 		}
 		private function onSCOutZoneMessage(msg:SCOutZoneMessage):void
 		{//L.l("服务器#退出");
@@ -221,8 +228,49 @@ package com.rpgGame.app.cmdlistener
 			DungeonManager.setPanelInfos(msg.zoneId,msg.count,msg.rewardCount);
 			
 		}
+		private const ACTIBUTID:int=105;
 		private function onSCCancelTeamMatchMessage(msg:SCCancelTeamMatchMessage):void
-		{L.l("服务器#匹配副本:"+msg.zoneModelId);
+		{//L.l("服务器#取消匹配:"+msg.zoneModelId);
+			DungeonManager.teamZid=0;
+			MainButtonManager.closeActivityButton(ACTIBUTID);
+			MainButtonManager.clearUptimeActivityButton(ACTIBUTID);
+			EventManager.dispatchEvent(DungeonEvent.ZONE_EXIT_TEAM);
+		}
+		private function onSCStartTeamMatchMessage(msg:SCStartTeamMatchMessage):void
+		{//L.l("服务器#匹配副本:"+msg.zoneModelId);
+			DungeonManager.teamZid=msg.zoneModelId;
+			MainButtonManager.openActivityButton(ACTIBUTID);
+			MainButtonManager.setUptimeActivityButton(ACTIBUTID);
+			EventManager.dispatchEvent(DungeonEvent.ZONE_ENTER_TEAM);
+		}
+		
+		
+		private function onSCZoneTeamVoteResultMessage(msg:SCZoneTeamVoteResultMessage):void
+		{//L.l("服务器#队伍投票:"+msg.zoneModelid+"=="+msg.playerId.ToGID()+"=="+msg.result);
+			
+			if(msg.result==0)
+			{
+				DungeonManager.teamZid=0;
+				AppManager.hideApp(AppConstant.MULTY_TEAM_PANL);
+			}
+			else
+			{
+				DungeonManager.createZoneTeam(msg.zoneModelid,msg.playerId,msg.result);
+				if(DungeonManager.voteList.length==TeamManager.ins.teamInfo.memberinfo.length)
+				{
+					DungeonManager.teamZid=0;
+					AppManager.hideApp(AppConstant.MULTY_TEAM_PANL);
+				}
+				else
+				{
+					if (!AppManager.isAppInScene(AppConstant.MULTY_TEAM_PANL))
+					{
+						AppManager.showApp(AppConstant.MULTY_TEAM_PANL);
+					}
+					EventManager.dispatchEvent(DungeonEvent.ZONE_TEAM_VOTE);
+				}
+			}
+			
 			
 			
 		}
