@@ -639,6 +639,7 @@ package com.rpgGame.app.manager.role
 			fightSoulRole.rotationY = owner.rotationY;
 			SceneManager.addSceneObjToScene(fightSoulRole, false);
 			fightSoulFollowAnimator = new FightSoulFollowAnimator(fightSoulRole);
+			fightSoulFollowAnimator.radius = model.q_radius;
 			owner.setRenderAnimator(fightSoulFollowAnimator);
 			return fightSoulRole;
 		}

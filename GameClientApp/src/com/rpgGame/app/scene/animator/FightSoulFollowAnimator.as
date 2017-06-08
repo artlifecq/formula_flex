@@ -22,11 +22,24 @@ package com.rpgGame.app.scene.animator
 		
 		private var _fightSoulRole:SceneRole;
 		private var _owner:SceneRole;
+		
 		private static const TotalRunTime:Number = 5000;
-		private static const RoundConst:Number = 150;
+//		private static const RoundConst:Number = 150;
 		
 		private var _preTime:Number;
-		private var _rotation:int;
+		
+		private var _radius:int;
+
+		public function get radius():int
+		{
+			return _radius;
+		}
+
+		public function set radius(value:int):void
+		{
+			_radius = value;
+		}
+
 		
 		public function FightSoulFollowAnimator(fightSoulRole:SceneRole)
 		{
@@ -79,8 +92,8 @@ package com.rpgGame.app.scene.animator
 			}
 			var percent:Number = Math.PI * 2 * _perTime/TotalRunTime;
 			
-			_fightSoulRole.x = _owner.x + RoundConst*Math.sin(percent);
-			_fightSoulRole.z = _owner.z + Math.cos(Math.abs(GlobalConfig.mapCameraRadian)) * RoundConst*Math.cos(percent);
+			_fightSoulRole.x = _owner.x + _radius*Math.sin(percent);
+			_fightSoulRole.z = _owner.z + Math.cos(Math.abs(GlobalConfig.mapCameraRadian)) * _radius*Math.cos(percent);
 			
 //			var scenePos:Vector3D = _owner.getChildScenePositionByName(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_head_01);
 //			if (scenePos)
