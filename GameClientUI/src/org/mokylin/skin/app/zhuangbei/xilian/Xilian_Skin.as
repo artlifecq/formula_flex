@@ -107,7 +107,7 @@ package org.mokylin.skin.app.zhuangbei.xilian
 		private function __Xilian_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhuangbei/xilian/bg.jpg";
+			temp.styleName = "ui/big_bg/zhuangbei/xilian/bg.jpg";
 			temp.x = 371;
 			temp.y = 75;
 			return temp;
