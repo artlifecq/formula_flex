@@ -606,17 +606,17 @@ package com.rpgGame.app.manager.scene
 		{
 			var mapId:int=MainRoleManager.actorInfo.preMapID;
 			var sceneData:SceneData=MapDataManager.getMapInfo(mapId);
-		/*	if(mapId==600){
+			if(mapId==600){
 				AppManager.showApp(AppConstant.MULTY_PANL);
-				TweenLite.delayedCall(2,function():void{
+				TweenLite.delayedCall(5,function():void{
 					DungeonSender.reqEnterDungeon(7001);
 				});
 				 return;
 			}else if(sceneData&&sceneData.mapType==0){
-				TweenLite.delayedCall(2,function():void{
+				TweenLite.delayedCall(3,function():void{
 					DungeonSender.reqQuitDungeon();
 				});
-			}*/
+			}
 			if(!sceneData){
 				return;
 			}
