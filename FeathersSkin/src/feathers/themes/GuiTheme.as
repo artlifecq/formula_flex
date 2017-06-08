@@ -376,10 +376,14 @@ package feathers.themes{
 				return;
 			}
 			if(!button.styleName)button.styleName = styleName;
-			button.defaultSkin = creatImageSkin(styleName, false, button.defaultSkin as ImageSkin);
-			if(hasIcon(styleName)){
+			
+			if(!hasIcon(styleName)){
+				button.defaultIcon = creatImageSkin(styleName, false, button.defaultIcon as ImageSkin);
+			}else{
+				button.defaultSkin = creatImageSkin(styleName, false, button.defaultSkin as ImageSkin);
 				button.defaultIcon = creatImageSkin(styleName, true, button.defaultIcon as ImageSkin);
 			}
+			
 			button.stateToLabelPropertiesFunction = updateButtonLabelState;
 		}
 		

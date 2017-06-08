@@ -62,13 +62,13 @@ package org.mokylin.skin.component.radio
 			labelDisplay = temp;
 			temp.name = "labelDisplay";
 			temp.height = 20;
+			temp.left = 21;
 			temp.text = "标签";
 			temp.textAlign = "left";
 			temp.color = 0xcfc6ae;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.verticalAlign = "middle";
 			temp.width = 115;
-			temp.x = 21;
 			temp.y = 0;
 			return temp;
 		}
