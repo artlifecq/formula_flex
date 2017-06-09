@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.activety
 {
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.sender.ActivitySender;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.FaceUtil;
@@ -16,6 +17,7 @@ package com.rpgGame.appModule.activety
 	
 	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.data.ListCollection;
+	import feathers.utils.filter.GrayFilter;
 	
 	import org.mokylin.skin.app.activety.zonghe.ActivetyAll_Skin;
 	
@@ -85,7 +87,11 @@ package com.rpgGame.appModule.activety
 		
 		private function onJoin(e:Event):void
 		{
-			ActivitySender.reqJoinAct(selectedInfo.cfg.q_activity_id);
+			if(selectedInfo.info.joinState==2){
+				ActivitySender.reqJoinAct(selectedInfo.cfg.q_activity_id);
+			}else{//活动不在进行中
+//				NoticeManager.showNotifyById();
+			}
 		}
 		
 		private function onChange(e:Event):void
@@ -104,6 +110,12 @@ package com.rpgGame.appModule.activety
 				arr=JSONUtil.decode(info.cfg.q_rewards);
 			}else{
 				arr=[];
+			}
+			
+			if(selectedInfo.info.joinState!=2){
+				GrayFilter.gray(_skin.joinBtn);
+			}else{
+				GrayFilter.unGray(_skin.joinBtn);
 			}
 			
 			var num:int=arr.length;
