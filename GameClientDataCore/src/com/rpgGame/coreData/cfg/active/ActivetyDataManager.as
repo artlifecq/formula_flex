@@ -83,12 +83,13 @@ package com.rpgGame.coreData.cfg.active
 		public static  function updateInfo(info:SpecialActivityInfo):void
 		{
 			var typeList:Vector.<ActivetyInfo>=_typeMap.getValue(info.activityType);
-//			typeList=typeList.sort(sortListByID);
+			if(!typeList){
+				return;
+			}
 			var num:int=typeList.length;
 			for(var i:int=0;i<num;i++){
 				if(typeList[i].cfg.q_activity_id==info.activityId){
 					typeList[i].info=info;
-//					typeList=typeList.sort(sortListByState);
 					return;
 				}
 			}
@@ -105,6 +106,9 @@ package com.rpgGame.coreData.cfg.active
 			var info:ActivetyInfo=getActInfoById(id);
 			info.info.joinState=state;
 			var typeList:Vector.<ActivetyInfo>=_typeMap.getValue(info.info.activityType);
+			if(!typeList){
+				return;
+			}
 			typeList=typeList.sort(sortListByID);
 			typeList=typeList.sort(sortListByState);
 		}
@@ -118,6 +122,9 @@ package com.rpgGame.coreData.cfg.active
 			var keys:Array=_typeMap.keys();
 			for each(var key:int in keys){
 				var values:Vector.<ActivetyInfo>=_typeMap.getValue(key);
+				if(!values){
+					continue;
+				}
 				values=values.sort(sortListByID);
 				values=values.sort(sortListByState);
 			}

@@ -60,7 +60,6 @@
 		private static const TYPE:int = 1;
 		private function updatePositionAll(data:*):void
 		{
-			return;
 			this.removeChildren();
 			var rows:Array = FuncionBarCfgData.getinfoRows(TYPE);
 			var length:int = rows.length;
