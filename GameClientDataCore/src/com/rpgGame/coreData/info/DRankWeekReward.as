@@ -26,5 +26,17 @@ package com.rpgGame.coreData.info
 			}
 			return true;
 		}
+		public function getRankStr():String
+		{
+			if (minRank==maxRank) 
+			{
+				return minRank+"";
+			}
+			else if (maxRank==int.MAX_VALUE) 
+			{
+				return minRank+"x";
+			}
+			return minRank+"-"+maxRank;
+		}
 	}
 }

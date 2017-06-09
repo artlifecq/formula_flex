@@ -76,7 +76,7 @@ package com.rpgGame.appModule.battle.dfdj
 			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,onStateResChange);
 			EventManager.addEvent(D1v1Event.GET_PANEL_DATA,onGetPanelData);
 			onStateResChange(CharAttributeType.RES_PRESTIGE);
-			
+			Mgr.d1v1Mgr.reqPanelData();
 		}
 		
 		private function onGetPanelData(...arg):void

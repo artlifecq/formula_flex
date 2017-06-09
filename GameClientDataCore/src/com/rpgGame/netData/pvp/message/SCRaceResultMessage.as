@@ -1,5 +1,4 @@
 package com.rpgGame.netData.pvp.message{
-	import com.rpgGame.netData.zhengba.bean.AwardItemInfo;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -16,21 +15,33 @@ package com.rpgGame.netData.pvp.message{
 		//结果  1 胜利   0 失败
 		private var _result: int;
 		
-		//奖励
-		private var _awardItemInfos: Vector.<com.rpgGame.netData.zhengba.bean.AwardItemInfo> = new Vector.<com.rpgGame.netData.zhengba.bean.AwardItemInfo>();
+		//段位等级
+		private var _level: int;
+		
+		//当前积分
+		private var _currentIntegral: int;
+		
+		//获得积分
+		private var _integral: int;
+		
+		//获得荣誉
+		private var _reputation: int;
+		
 		
 		/**
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
-			var i: int = 0;
 			//结果  1 胜利   0 失败
 			writeInt(_result);
-			//奖励
-			writeShort(_awardItemInfos.length);
-			for (i = 0; i < _awardItemInfos.length; i++) {
-				writeBean(_awardItemInfos[i]);
-			}
+			//段位等级
+			writeInt(_level);
+			//当前积分
+			writeInt(_currentIntegral);
+			//获得积分
+			writeInt(_integral);
+			//获得荣誉
+			writeInt(_reputation);
 			return true;
 		}
 		
@@ -38,14 +49,16 @@ package com.rpgGame.netData.pvp.message{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
-			var i: int = 0;
 			//结果  1 胜利   0 失败
 			_result = readInt();
-			//奖励
-			var awardItemInfos_length : int = readShort();
-			for (i = 0; i < awardItemInfos_length; i++) {
-				_awardItemInfos[i] = readBean(com.rpgGame.netData.zhengba.bean.AwardItemInfo) as com.rpgGame.netData.zhengba.bean.AwardItemInfo;
-			}
+			//段位等级
+			_level = readInt();
+			//当前积分
+			_currentIntegral = readInt();
+			//获得积分
+			_integral = readInt();
+			//获得荣誉
+			_reputation = readInt();
 			return true;
 		}
 		
@@ -73,18 +86,63 @@ package com.rpgGame.netData.pvp.message{
 		}
 		
 		/**
-		 * get 奖励
+		 * get 段位等级
 		 * @return 
 		 */
-		public function get awardItemInfos(): Vector.<com.rpgGame.netData.zhengba.bean.AwardItemInfo>{
-			return _awardItemInfos;
+		public function get level(): int{
+			return _level;
 		}
 		
 		/**
-		 * set 奖励
+		 * set 段位等级
 		 */
-		public function set awardItemInfos(value: Vector.<com.rpgGame.netData.zhengba.bean.AwardItemInfo>): void{
-			this._awardItemInfos = value;
+		public function set level(value: int): void{
+			this._level = value;
+		}
+		
+		/**
+		 * get 当前积分
+		 * @return 
+		 */
+		public function get currentIntegral(): int{
+			return _currentIntegral;
+		}
+		
+		/**
+		 * set 当前积分
+		 */
+		public function set currentIntegral(value: int): void{
+			this._currentIntegral = value;
+		}
+		
+		/**
+		 * get 获得积分
+		 * @return 
+		 */
+		public function get integral(): int{
+			return _integral;
+		}
+		
+		/**
+		 * set 获得积分
+		 */
+		public function set integral(value: int): void{
+			this._integral = value;
+		}
+		
+		/**
+		 * get 获得荣誉
+		 * @return 
+		 */
+		public function get reputation(): int{
+			return _reputation;
+		}
+		
+		/**
+		 * set 获得荣誉
+		 */
+		public function set reputation(value: int): void{
+			this._reputation = value;
 		}
 		
 	}

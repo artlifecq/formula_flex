@@ -242,5 +242,34 @@ package  com.rpgGame.app.manager.shop
 				sellItemCall(item);
 			}
 		}
+		public function getCheapestShopItemVo(shop:int):ShopItemVo
+		{
+			var shopVo:ShopVo=getShopVo(shop);
+			if (shopVo) 
+			{
+				var ret:ShopItemVo;
+				var types:Array=shopVo.shopPageTypes;
+				var typeLen:int=types.length;
+				var minPrice:int=int.MAX_VALUE;
+				for (var i:int = 0; i < typeLen; i++) 
+				{
+					var items:Array=shopVo.getPageShopItems(types[i]);
+					var itemsLen:int=items.length;
+					var vo:ShopItemVo;
+					for (var j:int = 0; j < itemsLen; j++) 
+					{
+						vo=items[j];
+						var price:int=vo.realPrice;
+						if (price<minPrice) 
+						{
+							minPrice=price;
+							ret=vo;
+						}
+					}
+				}
+				return ret;
+			}
+			return null;
+		}
 	}
 }

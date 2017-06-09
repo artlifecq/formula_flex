@@ -1,12 +1,15 @@
 package com.rpgGame.appModule.battle.dfdj
 {
 	import com.game.mainCore.core.timer.GameTimer;
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.utils.TextUtil;
+	import com.rpgGame.coreData.cfg.BattleRankCfg;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.clientConfig.Q_battle_rank;
 	import com.rpgGame.netData.pvp.message.SCRaceResultMessage;
 	
 	import flash.utils.Dictionary;
@@ -46,7 +49,13 @@ package com.rpgGame.appModule.battle.dfdj
 				_skin.imgWin.styleName="ui/app/zhanchang/jiesuan/tiaozhanshibai.png";
 				_skin.imgLabWin.styleName="ui/app/zhanchang/jiesuan/henyihan.png";
 			}
-			
+			_skin.numJifen.label=msg.integral+"";
+			_skin.numShengwang.label=msg.reputation+"";
+			var qRank:Q_battle_rank=BattleRankCfg.getRank(msg.level);
+			_skin.uiIcon.styleName=Mgr.d1v1Mgr.getRankIconUrl(msg.level,2);
+			_skin.uiLevel.styleName=Mgr.d1v1Mgr.getRankName(msg.level,true);
+			var per:Number=msg.currentIntegral/qRank.q_score;
+			_skin.proBar.value=per;
 			if (!_timer) 
 			{
 				_timer=new GameTimer("D1v1FightResultPanelExt");

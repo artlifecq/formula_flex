@@ -23,8 +23,6 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 
 		public var lbId:feathers.controls.Label;
 
-		public var lbJiangli:feathers.controls.Label;
-
 		public var lbJifen:feathers.controls.Label;
 
 		public var lbLevel:feathers.controls.Label;
@@ -32,8 +30,6 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 		public var lbName:feathers.controls.Label;
 
 		public var uiMan:feathers.controls.UIAsset;
-
-		public var uiQuan:feathers.controls.UIAsset;
 
 		public var uiVip:feathers.controls.UIAsset;
 
@@ -50,7 +46,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			this.currentState = "normal";
 			this.height = 27;
 			this.width = 386;
-			this.elementsContent = [bg1_i(),bg2_i(),bg3_i(),lbId_i(),lbName_i(),lbLevel_i(),lbJifen_i(),lbJiangli_i(),uiWoman_i(),uiMan_i(),uiVip_i(),uiQuan_i()];
+			this.elementsContent = [bg1_i(),bg2_i(),bg3_i(),lbId_i(),lbName_i(),lbLevel_i(),lbJifen_i(),uiWoman_i(),uiMan_i(),uiVip_i()];
 			
 			states = {
 			};
@@ -112,21 +108,6 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			return temp;
 		}
 
-		private function lbJiangli_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbJiangli = temp;
-			temp.name = "lbJiangli";
-			temp.text = "X55";
-			temp.textAlign = "left";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 44;
-			temp.x = 340;
-			temp.y = 4;
-			return temp;
-		}
-
 		private function lbJifen_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -137,7 +118,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 46;
-			temp.x = 250;
+			temp.x = 316;
 			temp.y = 4;
 			return temp;
 		}
@@ -152,7 +133,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 74;
-			temp.x = 173;
+			temp.x = 203;
 			temp.y = 4;
 			return temp;
 		}
@@ -167,7 +148,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 90;
-			temp.x = 78;
+			temp.x = 85;
 			temp.y = 4;
 			return temp;
 		}
@@ -178,19 +159,8 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			uiMan = temp;
 			temp.name = "uiMan";
 			temp.styleName = "ui/app/zhanchang/paihangbang/nv.png";
-			temp.x = 59;
+			temp.x = 66;
 			temp.y = 3;
-			return temp;
-		}
-
-		private function uiQuan_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			uiQuan = temp;
-			temp.name = "uiQuan";
-			temp.styleName = "ui/common/tubiao/lijin_24.png";
-			temp.x = 313;
-			temp.y = 1;
 			return temp;
 		}
 
@@ -200,7 +170,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			uiVip = temp;
 			temp.name = "uiVip";
 			temp.styleName = "ui/app/zhanchang/paihangbang/vip.png";
-			temp.x = 43;
+			temp.x = 50;
 			temp.y = 5;
 			return temp;
 		}
@@ -211,7 +181,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			uiWoman = temp;
 			temp.name = "uiWoman";
 			temp.styleName = "ui/app/zhanchang/paihangbang/nan.png";
-			temp.x = 59;
+			temp.x = 66;
 			temp.y = 3;
 			return temp;
 		}

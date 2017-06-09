@@ -20,6 +20,7 @@ package com.rpgGame.appModule.battle.dfdj
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.zhanchang.paihangbang.KuaFuPaiHang_Skin;
+	import org.mokylin.skin.app.zhanchang.paihangbang.PaiHangAlll_Skin;
 	import org.mokylin.skin.common.Flip3_Skin;
 	
 	import starling.display.DisplayObject;
@@ -34,6 +35,7 @@ package com.rpgGame.appModule.battle.dfdj
 		private const MAX_COUNT:int=9;
 		private var _roleShow:RoleModelShow;
 		private var _rightData:DianFengRankInfo;
+		private var _weekRank:D1v1WeekRewardPanelExt;
 		public function D1v1RankPanelExt()
 		{
 			_skin=new KuaFuPaiHang_Skin();
@@ -69,6 +71,8 @@ package com.rpgGame.appModule.battle.dfdj
 				tmp.visible=false;
 			}
 			TipTargetManager.show(_skin.btnMsg,TargetTipsMaker.makeTips(TipType.D1V1_RANK_REWARD_TIP,null));
+			_weekRank=new D1v1WeekRewardPanelExt(_skin.skinRank.skin as PaiHangAlll_Skin);
+		
 		}
 		private function cellCkick(cell:D1v1RankCellExt):void
 		{
@@ -124,6 +128,7 @@ package com.rpgGame.appModule.battle.dfdj
 		override protected function onShow():void
 		{
 			super.onShow();
+			_weekRank.setData();
 			ongetPanelData();
 			EventManager.addEvent(D1v1Event.GET_RANK_DATA,onGetRankData);
 			EventManager.addEvent(D1v1Event.GET_PANEL_DATA,ongetPanelData);

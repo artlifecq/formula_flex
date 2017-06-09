@@ -5,7 +5,9 @@ package com.rpgGame.app.manager
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.D1v1Event;
+	import com.rpgGame.coreData.cfg.BattleRankCfg;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
+	import com.rpgGame.coreData.clientConfig.Q_battle_rank;
 	import com.rpgGame.coreData.info.DRankWeekReward;
 	import com.rpgGame.netData.pvp.bean.DianFengDataInfo;
 	import com.rpgGame.netData.pvp.message.SCDrawDianFengAwardMessage;
@@ -43,6 +45,7 @@ package com.rpgGame.app.manager
 					tmp.minRank=obj.rank[0];
 					tmp.maxRank=obj.rank[1];
 					tmp.reward=obj.reward;
+					_weekRanks.push(tmp);
 				}
 				
 			}
@@ -83,13 +86,13 @@ package com.rpgGame.app.manager
 		public function SCReadyToLoadHandler(msg:SCReadyToLoadMessage):void
 		{
 			// TODO Auto Generated method stub
-			
+			AppManager.hideApp(AppConstant.BATTLE_D1V1_MATCH_PANEL);
 		}
 		public function SCReadyToStartHandler(msg:SCReadyToStartMessage):void
 		{
 			// TODO Auto Generated method stub
 			AppManager.showApp(AppConstant.BATTLE_D1V1_READY_PANEL,msg.delayTime);
-			AppManager.showApp(AppConstant.BATTLE_D1V1_HEAD_PANEL);
+			AppManager.showApp(AppConstant.BATTLE_D1V1_HEAD_PANEL,msg);
 		}
 		public function SCStartRaceHandler(msg:SCStartRaceMessage):void
 		{
@@ -130,6 +133,30 @@ package com.rpgGame.app.manager
 		{
 			return _data;
 		}
-
+		/**
+		 *等阶icon 
+		 * @param ranklv
+		 * @param size 0最大1，次之2最小
+		 * @return 
+		 * 
+		 */		
+		public function getRankIconUrl(ranklv:int,size:Boolean):String
+		{
+			var qRank:Q_battle_rank=BattleRankCfg.getRank(ranklv);
+			if (qRank) 
+			{
+				
+			}
+			return "";
+		}
+		
+		public function getRankName(ranklv:int,isSmall:Boolean):String
+		{
+			if (isSmall) 
+			{
+				return "ui/app/zhanchang/icon/name2/"+ranklv+".png";
+			}
+			return "ui/app/zhanchang/icon/name/"+ranklv+".png";
+		}
 	}
 }
