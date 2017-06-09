@@ -110,7 +110,7 @@ package com.rpgGame.app.manager.role
 				return;
 			}
 			
-			EscActionManager.removeAction(cancelSelectedRole);
+			EscActionManager.removeAction(clearSelect);
 			if (_selectedRole && _selectedRole.usable)
 			{
 				if (_selectedRole.headFace is HeadFace)
@@ -128,7 +128,7 @@ package com.rpgGame.app.manager.role
 					(_selectedRole.headFace as DropItemHeadFace).isSelected = true;
 				updateRoleRingEffect(_selectedRole);
 				_selectedRole.updateInteractTime();
-				EscActionManager.addAction(cancelSelectedRole);
+				EscActionManager.addAction(clearSelect);
 			}
 			else
 			{
@@ -323,7 +323,7 @@ package com.rpgGame.app.manager.role
 			}
 		}
 		
-		private static function cancelSelectedRole() : void
+		public static function clearSelect() : void
 		{
 			selectedRole = null;
 		}
