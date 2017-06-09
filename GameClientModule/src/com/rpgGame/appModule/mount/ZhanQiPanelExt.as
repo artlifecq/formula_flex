@@ -172,10 +172,9 @@ package com.rpgGame.appModule.mount
 		
 		private function refeashLevel():void
 		{
-			_zhanqiShowData.zhanqidataInfo=ZhanQiManager.instance().zhanqiDataInfo;
 			_zhanqiUpExpConent.isAutoing = false;
 			showUplevel();
-			_zhanqiUpExpConent.updataInfo(_zhanqiShowData);
+			//			_zhanqiUpExpConent.updataInfo(_zhanqiShowData);
 		}
 		
 		private var _uplevelSuccess:ZhanQiUpLevelSucessPanelExt;
@@ -226,7 +225,7 @@ package com.rpgGame.appModule.mount
 		
 		private function refeashExpHandler():void
 		{
-			_zhanqiShowData.zhanqidataInfo=ZhanQiManager.instance().zhanqiDataInfo;
+			//			_zhanqiShowData.zhanqidataInfo=ZhanQiManager.instance().zhanqiDataInfo;
 			_zhanqiUpExpConent.updataInfo(_zhanqiShowData);
 			_zhanqiProps.refeashPropValue();
 			_zhanqiContent.refeashMode(_zhanqiShowData.zhanqiLevel);
@@ -241,7 +240,7 @@ package com.rpgGame.appModule.mount
 		{
 			if(_zhanqiShowData.isAutoing)
 			{
-				_zhanqiUpExpConent.isAutoing =ZhanQiManager.instance().eatItemZhanQi(_zhanqiShowData)
+				_zhanqiUpExpConent.isAutoing =ZhanQiManager.instance().eatItemZhanQi(_zhanqiShowData);
 			}
 		}
 		

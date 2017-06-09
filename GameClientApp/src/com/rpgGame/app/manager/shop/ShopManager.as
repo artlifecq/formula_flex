@@ -10,6 +10,7 @@ package  com.rpgGame.app.manager.shop
 	import com.rpgGame.app.sender.ShopSender;
 	import com.rpgGame.app.ui.alert.GameAlertYellowBtnExt;
 	import com.rpgGame.core.events.ShopEvent;
+	import com.rpgGame.coreData.SpriteStat;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.shop.ShopItemVo;
@@ -64,6 +65,27 @@ package  com.rpgGame.app.manager.shop
 			}
 			return ret;
 		}
+		
+		/**
+		 * 判断该物品是否足够钱购买
+		 * */
+		public function isCanBuy(shopItems:Array,needNum:int=0):Boolean
+		{
+			//			var stat:SpriteStat=MainRoleManager.actorInfo.totalStat;
+			//			_skin.txt_lijin.text =stat.getResData(CharAttributeType.RES_BIND_GOLD)+"";//绑金
+			//			_skin.txt_yingzi.text = stat.getResData(CharAttributeType.RES_MONEY) +"";//银子
+			//			_skin.txt_yuanbao.text = stat.getResData(CharAttributeType.RES_GOLD)+"";//金子
+			//			_skin.txt_yingzibang.text = stat.getResData(CharAttributeType.RES_BIND_MONEY)+"";//绑银
+			var iscanbuy:Boolean;
+			for each (var item:ShopItemVo in shopItems) 
+			{
+				iscanbuy=item.data.price*needNum <= MainRoleManager.actorInfo.totalStat.getResData(item.data.priceType);
+				if(iscanbuy) return iscanbuy;
+				trace("购买道具需要的单价： " + item.data.price+"\n"+"消耗的道具类型 ："+item.data.priceType+"\n" + "身上的钱钱 ："+MainRoleManager.actorInfo.totalStat.getResData(item.data.priceType));
+			}
+			return iscanbuy;
+		}
+		
 		public function getCurrency(type:int):Number
 		{
 			if (type<=0) 
@@ -216,7 +238,7 @@ package  com.rpgGame.app.manager.shop
 						}
 					}
 					Mgr.shopMgr.ReqBuyItem(vo.data,buyNum);
-//					NoticeManager.mouseFollowNotify(ItemConfig.getItemName(priceType)+"不足");
+					//					NoticeManager.mouseFollowNotify(ItemConfig.getItemName(priceType)+"不足");
 				}
 				else
 				{
