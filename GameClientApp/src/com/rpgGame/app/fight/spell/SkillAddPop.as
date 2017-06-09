@@ -74,6 +74,13 @@ package com.rpgGame.app.fight.spell
 			timeID=setTimeout(toMis,5000);
 		}
 		
+		override protected function onHide():void
+		{
+			super.onHide();
+			icon.removeFromParent();
+			skillInfo=null;
+		}
+		
 		private function updateTime():void
 		{
 			time--;
