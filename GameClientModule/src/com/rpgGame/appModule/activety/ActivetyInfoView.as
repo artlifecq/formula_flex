@@ -66,6 +66,8 @@ package com.rpgGame.appModule.activety
 			_skin.joinBtn.addEventListener(Event.TRIGGERED,onJoin);
 			if(!data){
 				_skin.ListItem.selectedIndex=0;
+				_skin.ListItem.dataProvider.updateItemAt(0);
+				_skin.ListItem.scrollToDisplayIndex(0);
 			}else{
 				var dataInfo:ActivetyInfo=data as ActivetyInfo;
 				for(var i:int=0;i<_activeData.length;i++){
@@ -94,7 +96,7 @@ package com.rpgGame.appModule.activety
 			}
 			selectedInfo=info;
 			_skin.activeName.styleName="ui/app/activety/zonghe/active_name/"+info.cfg.q_activity_id+".png";
-			_skin.activeBg.styleName="ui/big_bg/activety/des/"+info.cfg.q_activity_id+".png";
+			_skin.activeBg.styleName="ui/big_bg/activety/des/"+info.cfg.q_activity_id+".jpg";
 			_skin.lbMsg.htmlText=info.cfg.q_text;
 			
 			var arr:Array;

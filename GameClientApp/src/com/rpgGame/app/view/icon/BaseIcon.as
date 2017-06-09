@@ -3,6 +3,8 @@ package com.rpgGame.app.view.icon
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.type.AssetUrl;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.UIAsset;
 	
 	/**
@@ -57,6 +59,27 @@ package com.rpgGame.app.view.icon
 			}
 			this.width = _iconSize;
 			this.height = _iconSize;
+			
+			this.addEventListener(Event.ADDED_TO_STAGE, __onAddedToStage);
+			this.addEventListener(Event.REMOVED_FROM_STAGE, __onRemoveFromStage);
+		}
+		
+		private function __onAddedToStage(e : Event = null) : void
+		{
+			
+		}
+		
+		private function __onRemoveFromStage(e : Event = null) : void
+		{
+			this.clear();
+			this.dispose();
+		}
+		
+		override public function dispose():void
+		{
+			super.dispose();
+			this.removeEventListener(Event.ADDED_TO_STAGE, __onAddedToStage);
+			this.removeEventListener(Event.REMOVED_FROM_STAGE, __onRemoveFromStage);
 		}
 		
 		/**
