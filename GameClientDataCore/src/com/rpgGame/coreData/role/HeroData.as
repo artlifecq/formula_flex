@@ -112,8 +112,10 @@ package com.rpgGame.coreData.role
 		
 		public var sex:int;
 		
+		/**军阶等级*/
 		public var junjieLv:int;
-		
+		/**战旗等级*/
+		public var zhanqiLv:int;
 		
 		private var _customMount : int = 0;
 		public var trailMount : String = null;
@@ -306,6 +308,7 @@ package com.rpgGame.coreData.role
 			data.weapon = info.weapon;
 			data.deputyWeapon = info.second_weapon;
 			data.junjieLv=info.junJieId;
+			data.zhanqiLv=info.warflag;
 			
 			data.totalStat.setData(info.attributes);
 			

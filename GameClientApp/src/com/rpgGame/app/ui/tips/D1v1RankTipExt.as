@@ -1,12 +1,14 @@
 package com.rpgGame.app.ui.tips
 {
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
 	import com.rpgGame.coreData.cfg.BattleRankCfg;
 	import com.rpgGame.coreData.clientConfig.Q_battle_rank;
+	import com.rpgGame.netData.pvp.bean.DianFengDataInfo;
 	
 	import feathers.controls.Label;
 	import feathers.controls.UIAsset;
@@ -40,7 +42,12 @@ package com.rpgGame.app.ui.tips
 		{
 			_rewardNext.clear();
 			_rewardNow.clear();
-			var curRank:int=1001;
+			var data1:DianFengDataInfo=Mgr.d1v1Mgr.data;
+			if (!data1) 
+			{
+				return;
+			}
+			var curRank:int=data1.level;
 			var qRank:Q_battle_rank=BattleRankCfg.getRank(curRank);
 			if (qRank) 
 			{

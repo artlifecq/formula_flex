@@ -72,7 +72,7 @@ package com.rpgGame.appModule.battle.dfdj
 			}
 			TipTargetManager.show(_skin.btnMsg,TargetTipsMaker.makeTips(TipType.D1V1_RANK_REWARD_TIP,null));
 			_weekRank=new D1v1WeekRewardPanelExt(_skin.skinRank.skin as PaiHangAlll_Skin);
-		
+			TipTargetManager.show(_skin.uiLevel,TargetTipsMaker.makeTips(TipType.D1V1_RANK_TIP,{}));
 		}
 		private function cellCkick(cell:D1v1RankCellExt):void
 		{

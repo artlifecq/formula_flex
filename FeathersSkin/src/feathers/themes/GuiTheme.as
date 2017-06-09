@@ -343,8 +343,24 @@ package feathers.themes{
 			}
 			if(!button.styleName)button.styleName = styleName;
 			button.defaultSkin = creatImageSkin(styleName, false, button.defaultSkin as ImageSkin);
-			button.defaultIcon = creatImageSkin(styleName, true, button.defaultIcon as ImageSkin);
+			if(hasIcon(styleName)){
+				button.defaultIcon = creatImageSkin(styleName, true, button.defaultIcon as ImageSkin);
+			}
 			button.stateToLabelPropertiesFunction = updateButtonLabelState;
+		}
+		
+		private function hasIcon(styleName:String):Boolean
+		{
+			var stateSkins:Object = GuiThemeStyle.getStyle(styleName);
+			if(!stateSkins)
+			{
+				return false;
+			}else {
+				var skinName:String=stateSkins[UIState.UP];
+				return skinName.indexOf(",") != -1;
+			}
+			
+			return false;
 		}
 		
 		//ToggleButton
@@ -360,8 +376,14 @@ package feathers.themes{
 				return;
 			}
 			if(!button.styleName)button.styleName = styleName;
-			button.defaultSkin = creatImageSkin(styleName, false, button.defaultSkin as ImageSkin);
-			button.defaultIcon = creatImageSkin(styleName, true, button.defaultIcon as ImageSkin);
+			
+			if(!hasIcon(styleName)){
+				button.defaultIcon = creatImageSkin(styleName, false, button.defaultIcon as ImageSkin);
+			}else{
+				button.defaultSkin = creatImageSkin(styleName, false, button.defaultSkin as ImageSkin);
+				button.defaultIcon = creatImageSkin(styleName, true, button.defaultIcon as ImageSkin);
+			}
+			
 			button.stateToLabelPropertiesFunction = updateButtonLabelState;
 		}
 		

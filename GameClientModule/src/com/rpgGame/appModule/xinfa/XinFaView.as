@@ -381,7 +381,7 @@ package com.rpgGame.appModule.xinfa
 		private function updateTxt():void
 		{
 			// TODO Auto Generated method stub
-			_skin.Num_zhandouli.number=MainRoleManager.actorInfo.totalStat.getStatValue(CharAttributeType.FIGHTING);
+			_skin.NumZhanli.number=MainRoleManager.actorInfo.totalStat.getStatValue(CharAttributeType.FIGHTING);
 		}
 		
 		private function onAddItem(itemInfo : ClientItemInfo):void

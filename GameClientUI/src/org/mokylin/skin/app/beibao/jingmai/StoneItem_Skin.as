@@ -36,7 +36,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			this.currentState = "normal";
 			this.height = 36;
 			this.width = 370;
-			this.elementsContent = [Icon_i(),lbName_i(),lbJiacheng_i(),rdo_select_i(),__StoneItem_Skin_UIAsset1_i()];
+			this.elementsContent = [Icon_i(),lbName_i(),lbJiacheng_i(),rdo_select_i(),__StoneItem_Skin_UIAsset2_i()];
 			
 			states = {
 			};
@@ -58,11 +58,10 @@ package org.mokylin.skin.app.beibao.jingmai
 			return temp;
 		}
 
-		private function __StoneItem_Skin_UIAsset1_i():feathers.controls.UIAsset
+		private function __StoneItem_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 2;
-			temp.styleName = "ui/common/tips/tips_1fengexian.png";
+			temp.styleName = "ui/common/tips/xian2.png";
 			temp.width = 369;
 			temp.x = 0;
 			temp.y = 34;

@@ -68,7 +68,7 @@ package com.rpgGame.core.utils
 				
 				val=attHash.getValue(keys[i]);
 				imgArrow=new UIAsset();
-				if (val>0) 
+				if (val>=0) 
 				{
 					imgArrow.styleName="ui/common/tubiao/tu_up.png";
 				}

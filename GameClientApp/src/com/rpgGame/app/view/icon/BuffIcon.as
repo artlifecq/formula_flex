@@ -128,13 +128,20 @@ package com.rpgGame.app.view.icon
 		{
 			if(readyEffect!=null)
 			{
+				readyEffect.removeFromParent();
 				readyEffect.dispose();
 				readyEffect=null;
+			}
+			if(effectSk){
+				effectSk.removeFromParent();
+				effectSk.dispose();
+				effectSk=null;
 			}
 		}
 		
 		override public function dispose():void
 		{
+			this.removeFromParent();
 			super.dispose();
 			clear();
 			removeEffect();

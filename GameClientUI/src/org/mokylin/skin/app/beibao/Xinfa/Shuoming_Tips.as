@@ -40,7 +40,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.color = 0xE1D4A9;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 19;
-			temp.y = 23;
+			temp.y = 19;
 			return temp;
 		}
 
@@ -51,7 +51,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.color = 0xE1D4A9;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 19;
-			temp.y = 53;
+			temp.y = 49;
 			return temp;
 		}
 
@@ -62,7 +62,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.color = 0xE1D4A9;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 19;
-			temp.y = 83;
+			temp.y = 79;
 			return temp;
 		}
 
@@ -73,7 +73,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.color = 0xE1D4A9;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 19;
-			temp.y = 113;
+			temp.y = 109;
 			return temp;
 		}
 
@@ -84,7 +84,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.color = 0xE1D4A9;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 19;
-			temp.y = 143;
+			temp.y = 139;
 			return temp;
 		}
 
@@ -95,7 +95,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.color = 0xE1D4A9;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 19;
-			temp.y = 173;
+			temp.y = 169;
 			return temp;
 		}
 
@@ -103,7 +103,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 204;
-			temp.styleName = "ui/common/tips/tips_2.png";
+			temp.styleName = "ui/common/tips/diban3.png";
 			temp.width = 437;
 			temp.x = 0;
 			temp.y = 0;

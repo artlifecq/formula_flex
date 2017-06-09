@@ -27,8 +27,9 @@ package com.rpgGame.appModule.battle.dfdj
 		{
 			_skin=new DianFeng_Skin();
 			super(_skin);
-			TargetTipsMaker.makeTips( TipType.MERIDIAN_TIP, this );
+		
 			TipTargetManager.show( _skin.btnMsg, TargetTipsMaker.makeTips( TipType.D1V1_TIP,null));
+			TipTargetManager.show(_skin.icon,TargetTipsMaker.makeTips(TipType.D1V1_RANK_TIP,{}));
 		}
 		override protected function onTouchTarget(target:DisplayObject):void
 		{

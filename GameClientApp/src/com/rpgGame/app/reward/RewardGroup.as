@@ -229,9 +229,13 @@ package  com.rpgGame.app.reward
 			}
 			icon=new IconCDFace(size);
 			bg.addChild(icon);
-		
-//			icon.x=(bg.width-size)/2;
-//			icon.y=(bg.height-size)/2;
+			//设置图片的时候有设置
+			//if (IcoSizeEnum.ICON_36==size||IcoSizeEnum.ICON_42==size) 
+//			{
+//				icon.x=(bg.width-size)/2;
+//				icon.y=(bg.height-size)/2;
+//			}
+
 			
 			var obj:Object={};
 			obj.bg=bg;

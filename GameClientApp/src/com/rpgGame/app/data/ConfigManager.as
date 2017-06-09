@@ -4,6 +4,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.app.manager.friend.FriendManager;
 	import com.rpgGame.app.manager.goods.GoodsContainerMamager;
 	import com.rpgGame.app.manager.mount.HorseExtraItemInfo;
+	import com.rpgGame.app.manager.mount.ZhanQiExtraItemInfo;
 	import com.rpgGame.coreData.cfg.AddSpriteStatCfgData;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.AreaCfgData;
@@ -65,6 +66,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.WindowInfoData;
 	import com.rpgGame.coreData.cfg.ZhanGongData;
 	import com.rpgGame.coreData.cfg.ZhanGongMonsterData;
+	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
 	import com.rpgGame.coreData.cfg.ZoneCfgData;
 	import com.rpgGame.coreData.cfg.ZoneMultyCfgData;
 	import com.rpgGame.coreData.cfg.active.ActivetyDataManager;
@@ -267,10 +269,12 @@ package com.rpgGame.app.data
 			TaskMissionCfgData.setupSection(dic[ConfigClassRegister.Q_mission_section]);
 			//坐骑数据
 			HorseConfigData.setConfig(dic[ConfigClassRegister.Q_horse]);
+			//战旗数据
+			ZhanQiConfigData.setConfig(dic[ConfigClassRegister.Q_warFlag]);
 			//			HorseSpellData.setConfig(dic[ConfigClassRegister.Q_horse_skills]);
 			HorseExtraItemInfo.createInfo();
+			ZhanQiExtraItemInfo.createInfo();
 			HorseSpellData.setConfig(dic[ConfigClassRegister.Q_horse_skills]);
-			HorseExtraItemInfo.createInfo();
 			
 			//副本相关配置
 			ZoneCfgData.setup(dic[ConfigClassRegister.Q_zone]);
