@@ -4,6 +4,7 @@ package com.rpgGame.app.manager.scene
 	import com.game.engine2D.config.MapConfig;
 	import com.game.engine2D.core.AsyncMapTexture;
 	import com.game.engine3D.core.GameScene3D;
+	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.game.engine3D.vo.MapPointSet;
 	import com.game.engine3D.vo.SceneMapData;
 	import com.game.engine3D.vo.map.ClientMapAreaData;
@@ -13,6 +14,7 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.app.manager.AreaMapManager;
 	import com.rpgGame.app.manager.ClientTriggerManager;
 	import com.rpgGame.app.manager.GameCameraManager;
+	import com.rpgGame.app.manager.GamePerformsManager;
 	import com.rpgGame.app.manager.ReliveManager;
 	import com.rpgGame.app.manager.SceneCameraLensEffectManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
@@ -20,9 +22,10 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.app.manager.input.InputManger;
 	import com.rpgGame.app.manager.map.MapUnitDataManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
+	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskManager;
 	import com.rpgGame.app.map.BaseMapProcess;
-	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.ui.ResLoadingView;
 	import com.rpgGame.core.app.AppConstant;
@@ -34,7 +37,6 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.core.manager.BGMManager;
 	import com.rpgGame.coreData.cfg.AreaCfgData;
 	import com.rpgGame.coreData.cfg.ClientConfig;
-	import com.rpgGame.coreData.cfg.TriggerCfgData;
 	import com.rpgGame.coreData.cfg.country.CountryNameCfgData;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.map.EnumMapType;
@@ -49,10 +51,7 @@ package com.rpgGame.app.manager.scene
 	import app.message.MazeDungeonProto;
 	import app.message.SceneProto;
 	
-	import gs.TweenLite;
-	
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection_protoBuffer;
 	
 	/**
 	 *
@@ -354,34 +353,51 @@ package com.rpgGame.app.manager.scene
 			return 0;
 		}
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		
+		/**
+		 *清理场景 
+		 * 
+		 */
+		private static function clearScene():void
+		{
+			GamePerformsManager.pause();
+			MapUnitDataManager.clear();
+			SceneRoleSelectManager.clearSelect();
+			ClientTriggerManager.sceneClear();
+			SceneCameraLensEffectManager.sceneClear();
+			TaskManager.storyTaskInfo=null;
+			MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
+			MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true);
+			
+			InputManger.getInstance().closeOperate();
+			
+			SceneTimeOfTheDayManager.clear();
+			SceneManager.getScene().clear();
+			SceneManager.getScene().clearAreaMap(1);
+			SceneManager.getScene().removeAllSceneObj();
+			TaskAutoManager.getInstance().stopAll();
+			TrusteeshipManager.getInstance().stopAll();
+		}
+		
 		/**
 		 * 初次登录和切场景成功后的通用逻辑
 		 */
 		public static function changeMap(isReal3D:Boolean = false) : void
 		{
 			GameLog.addShow("开始切换场景...");
-			MapUnitDataManager.clear();
-			ClientTriggerManager.sceneClear();
-			SceneCameraLensEffectManager.sceneClear();
-			TaskManager.storyTaskInfo = null;
-			MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
-			MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true);
 			var mapID : int = MainRoleManager.actorInfo.mapID;
 			if (1 == mapID) {
 				mapID = 1001;
 				MainRoleManager.actorInfo.mapID = 1001;
 			}
 			_isChangeSceneComplete = false;
-			SocketConnection_protoBuffer.excuteAll();
-			InputManger.getInstance().closeOperate(); //关闭用户输入
-			SceneManager.getScene().clearAreaMap(1);
-			SceneManager.getScene().removeAllSceneObj();
-			TrusteeshipManager.getInstance().stopAll();
 			
 			CONFIG::netDebug {
 				NetDebug.LOG("[SceneSwitchManager] [ChangeMap] sceneID:" + currentMapId + ", mapID:" + mapID);
 			}
-				var currMapInfo : SceneData = MapDataManager.getMapInfo(currentMapId); //获取地图配置数据
+				
+			var currMapInfo : SceneData = MapDataManager.getMapInfo(currentMapId); //获取地图配置数据
 			var mapInfo : SceneData = MapDataManager.getMapInfo(mapID); //获取地图配置数据
 			CONFIG::netDebug {
 				if (null == mapInfo) {
@@ -390,28 +406,19 @@ package com.rpgGame.app.manager.scene
 					NetDebug.LOG("[SceneSwitchManager] [ChangeMap] mapID:" + mapID + " config data exists");
 				}
 			}
-				MapDataManager.currentScene = mapInfo;
+			MapDataManager.currentScene = mapInfo;
+			clearScene();
+			EventManager.dispatchEvent(MapEvent.MAP_SWITCH_START);
 			if (mapInfo && currMapInfo && (mapInfo.map == currMapInfo.map))
 			{
-				EventManager.dispatchEvent(MapEvent.MAP_SWITCH_START);
 				sendSceneLoaded();
+				EventManager.dispatchEvent(MapEvent.MAP_SWITCH_START);
 			}
 			else
 			{
-				SceneTimeOfTheDayManager.clear();
-				SceneManager.getScene().clear();
 				EventManager.dispatchEvent(MapEvent.MAP_LOAD_START);
-				EventManager.dispatchEvent(MapEvent.MAP_SWITCH_START);
 				if (ClientConfig.isSingle)
 				{
-					/*var cfg : Q_map = ClientSceneCfgData.getSceneInfo(mapID);
-					CONFIG::netDebug {
-					if (null == cfg) {
-					NetDebug.LOG("[SceneSwitchManager] [ChangeMap] mapID:" + mapID + " client scene config data not exists");
-					} else {
-					NetDebug.LOG("[SceneSwitchManager] [ChangeMap] mapID:" + mapID + " client scene config data exists");
-					}
-					}*/
 					if (mapInfo)
 					{
 						MainRoleManager.actorInfo.x = 2700;
@@ -493,6 +500,7 @@ package com.rpgGame.app.manager.scene
 			if (0 != needLoadCmpCnt) {
 				return;
 			}
+			
 			if (SceneManager.clientMapData)
 			{
 				//var obstacleAreas : Vector.<ClientMapAreaData> = SceneManager.clientMapData.getObstacleAreas();
@@ -584,15 +592,20 @@ package com.rpgGame.app.manager.scene
 				SceneSwitchManager.isToCrossMap=false;
 			}
 			
+			Stage3DLayerManager.frameRate = 60;
 			_isChangeSceneComplete = true;
 			generateSceneEntities();
 			MainRoleManager.updateActorStatus(); //更新主角状态
 			GameCameraManager.updateProperty();
 			GameCameraManager.tryUseCameraProperty();
+//			updateSceneSound();
+			
+			GamePerformsManager.resume();
 			
 			//开启用户操作
 			InputManger.getInstance().openOperate();
-			TaskManager.updateMainTaskInfo();
+			TaskAutoManager.getInstance().startTaskAuto();
+			
 			
 			//检测用户死亡
 			ReliveManager.checkPlayerDie();
@@ -606,7 +619,7 @@ package com.rpgGame.app.manager.scene
 		{
 			var mapId:int=MainRoleManager.actorInfo.preMapID;
 			var sceneData:SceneData=MapDataManager.getMapInfo(mapId);
-			if(mapId==600){
+		/*	if(mapId==600){
 				AppManager.showApp(AppConstant.MULTY_PANL);
 				TweenLite.delayedCall(5,function():void{
 					DungeonSender.reqEnterDungeon(7001);
@@ -616,7 +629,7 @@ package com.rpgGame.app.manager.scene
 				TweenLite.delayedCall(3,function():void{
 					DungeonSender.reqQuitDungeon();
 				});
-			}
+			}*/
 			if(!sceneData){
 				return;
 			}

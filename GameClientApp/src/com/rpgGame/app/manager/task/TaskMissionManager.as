@@ -293,6 +293,10 @@ package com.rpgGame.app.manager.task
 		/**判断主线任务是否完成*/
 		public static function getMainTaskIsFinish():Boolean
 		{
+			if(!mainTaskData){
+				return false;
+			}
+			
 			if(mainTaskData.q_mission_type==TaskType.SUB_CONVERSATION)
 			{
 				return true;

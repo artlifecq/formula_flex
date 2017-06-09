@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.activety
 {
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.sender.ActivitySender;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.FaceUtil;
@@ -16,6 +17,7 @@ package com.rpgGame.appModule.activety
 	
 	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.data.ListCollection;
+	import feathers.utils.filter.GrayFilter;
 	
 	import org.mokylin.skin.app.activety.zonghe.ActivetyAll_Skin;
 	
@@ -66,6 +68,8 @@ package com.rpgGame.appModule.activety
 			_skin.joinBtn.addEventListener(Event.TRIGGERED,onJoin);
 			if(!data){
 				_skin.ListItem.selectedIndex=0;
+				_skin.ListItem.dataProvider.updateItemAt(0);
+				_skin.ListItem.scrollToDisplayIndex(0);
 			}else{
 				var dataInfo:ActivetyInfo=data as ActivetyInfo;
 				for(var i:int=0;i<_activeData.length;i++){
@@ -83,7 +87,11 @@ package com.rpgGame.appModule.activety
 		
 		private function onJoin(e:Event):void
 		{
-			ActivitySender.reqJoinAct(selectedInfo.cfg.q_activity_id);
+			if(selectedInfo.info.joinState==2){
+				ActivitySender.reqJoinAct(selectedInfo.cfg.q_activity_id);
+			}else{//活动不在进行中
+//				NoticeManager.showNotifyById();
+			}
 		}
 		
 		private function onChange(e:Event):void
@@ -94,7 +102,7 @@ package com.rpgGame.appModule.activety
 			}
 			selectedInfo=info;
 			_skin.activeName.styleName="ui/app/activety/zonghe/active_name/"+info.cfg.q_activity_id+".png";
-			_skin.activeBg.styleName="ui/big_bg/activety/des/"+info.cfg.q_activity_id+".png";
+			_skin.activeBg.styleName="ui/big_bg/activety/des/"+info.cfg.q_activity_id+".jpg";
 			_skin.lbMsg.htmlText=info.cfg.q_text;
 			
 			var arr:Array;
@@ -102,6 +110,12 @@ package com.rpgGame.appModule.activety
 				arr=JSONUtil.decode(info.cfg.q_rewards);
 			}else{
 				arr=[];
+			}
+			
+			if(selectedInfo.info.joinState!=2){
+				GrayFilter.gray(_skin.joinBtn);
+			}else{
+				GrayFilter.unGray(_skin.joinBtn);
 			}
 			
 			var num:int=arr.length;

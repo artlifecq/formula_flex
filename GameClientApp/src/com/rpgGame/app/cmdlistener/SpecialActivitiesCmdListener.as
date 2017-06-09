@@ -31,9 +31,14 @@ package com.rpgGame.app.cmdlistener
 			finish();
 		}
 		
+		/**
+		 *活动预告信息 
+		 * @param msg
+		 * 
+		 */
 		private function onSCActivitiesNotifyListMessage(msg:SCActivitiesNotifyListMessage):void
 		{
-			
+			//通过活动id去找该活动id对应的新功能id，然后看该新功能是够开启，然后再在活动按钮里面设置倒计时；
 		}
 		
 		private function onSCSpecialActivitiesListMessage(msg:SCSpecialActivitiesListMessage):void
