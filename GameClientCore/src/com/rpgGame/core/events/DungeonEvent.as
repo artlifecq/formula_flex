@@ -75,6 +75,23 @@ package com.rpgGame.core.events
 		 */
 		public static const ZONE_REWARD:int = UNIQUEID.NEXT;
 		
+		/**
+		 * 进入队列
+		 */
+		public static const ZONE_ENTER_TEAM:int = UNIQUEID.NEXT;
+		/**
+		 * 退出队列
+		 */
+		public static const ZONE_EXIT_TEAM:int = UNIQUEID.NEXT;
+		/**
+		 * 入队列投票
+		 */
+		public static const ZONE_TEAM_VOTE:int = UNIQUEID.NEXT;
+		/**
+		 * 计时消息
+		 */
+		public static const ZONE_TEAM_TIME:int = UNIQUEID.NEXT;
+		
 		
 		
 		public function DungeonEvent()

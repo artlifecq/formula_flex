@@ -2,7 +2,10 @@ package com.rpgGame.app.ui.main.buttons
 {
 	import com.game.engine3D.config.GlobalConfig;
 	import com.rpgGame.app.manager.FunctionOpenManager;
+	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.ui.main.activityBar.item.ActivityButton;
+	import com.rpgGame.app.ui.main.activityBar.item.MultyActivityButton;
+	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
 	import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
 	
 	import away3d.log.Log;
@@ -39,7 +42,7 @@ package com.rpgGame.app.ui.main.buttons
 			regClass(102,ActivityButton,ButtonLunjian);
 			regClass(103,ActivityButton,ButtonFubendating);
 			regClass(104,ActivityButton,ButtonFubenduilie);
-			regClass(105,MainButtonBases,ButtonFubenduilie);
+			regClass(105,MultyActivityButton,ButtonFubenduilie);
 		}
 		private static function regClass(id:int,cls:Class,skinui:Class):void
 		{
@@ -74,6 +77,68 @@ package com.rpgGame.app.ui.main.buttons
 		{
 			return id.toString();
 		}
+		
+		/**开启活动按钮by id----yt*/
+		public static function openActivityButton(id:int):void
+		{
+			var bar:FunctionBarInfo=FuncionBarCfgData.getActivityBarInfo(id);
+			if(bar)
+			{
+				var button:ActivityButton= MainButtonManager.getButtonBuyInfo(bar) as ActivityButton;
+				if(button)
+				{
+					button.onActivityOpen();
+				}
+			}
+			
+			
+		}
+		/**关闭活动按钮 byid----yt*/
+		public static function closeActivityButton(id:int):void
+		{
+			var bar:FunctionBarInfo=FuncionBarCfgData.getActivityBarInfo(id);
+			if(bar)
+			{
+				var button:ActivityButton= MainButtonManager.getButtonBuyInfo(bar) as ActivityButton;
+				if(button)
+				{
+					button.onActivityClose();
+				}
+			}
+		}
+		
+		/** 设置按钮计时 byid----yt
+		 * startTime 计时开始时间 秒
+		 * */
+		public static function setUptimeActivityButton(id:int,startTime:int=0):void
+		{
+			var bar:FunctionBarInfo=FuncionBarCfgData.getActivityBarInfo(id);
+			if(bar)
+			{
+				var button:ActivityButton= MainButtonManager.getButtonBuyInfo(bar) as ActivityButton;
+				if(button)
+				{
+					button.setTimeData(SystemTimeManager.curtTm-startTime*1000,0,0,false);
+				}
+			}
+		}
+		/** 设置按钮计时 byid----yt
+		 * 取消计时
+		 * */
+		public static function clearUptimeActivityButton(id:int):void
+		{
+			var bar:FunctionBarInfo=FuncionBarCfgData.getActivityBarInfo(id);
+			if(bar)
+			{
+				var button:ActivityButton= MainButtonManager.getButtonBuyInfo(bar) as ActivityButton;
+				if(button)
+				{
+					button.clearTime();
+				}
+			}
+		}
+		
+		
 		
 	}
 }

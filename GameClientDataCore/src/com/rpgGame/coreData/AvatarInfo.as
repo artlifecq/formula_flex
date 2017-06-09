@@ -6,7 +6,7 @@ package com.rpgGame.coreData
 	import com.rpgGame.coreData.type.RenderUnitType;
 	
 	import flash.geom.Vector3D;
-
+	
 	/**
 	 *
 	 * 换装信息
@@ -63,12 +63,15 @@ package com.rpgGame.coreData
 		
 		private var _fightsoulEffectResID:String = null;
 		private var _fightsoulEffectMode:RenderParamData3D;
-
+		
+		private var _zhanqiEffResID:String=null;
+		private var _zhanqiEffMode:RenderParamData3D;
+		
 		public function AvatarInfo(priority:int=100)
 		{
 			_priority = priority;
 		}
-
+		
 		/**衣服换装资源*/
 		public function setBodyResID(body : String, animat : String) : void
 		{
@@ -94,7 +97,7 @@ package com.rpgGame.coreData
 				_bodyAnimatResID = null;
 			}
 		}
-
+		
 		/**头发换装资源ID*/
 		public function set hairResID(value : String) : void
 		{
@@ -114,7 +117,7 @@ package com.rpgGame.coreData
 				_hairResID = null;
 			}
 		}
-
+		
 		/**武器换装特效资源ID*/
 		public function set weaponEffectID(value : String) : void
 		{
@@ -154,7 +157,7 @@ package com.rpgGame.coreData
 				_deputyWeaponEffectID = null;
 			}
 		}
-
+		
 		/**身体换装特效资源ID*/
 		public function set bodyEffectID(value : String) : void
 		{
@@ -212,7 +215,7 @@ package com.rpgGame.coreData
 				_bodyMethodTypeEffectResID = null;
 			}
 		}
-
+		
 		/**武器换装资源ID*/
 		public function set weaponResID(value : String) : void
 		{
@@ -232,7 +235,7 @@ package com.rpgGame.coreData
 				_weaponResID = null;
 			}
 		}
-
+		
 		/**副武器换装资源ID*/
 		public function set deputyWeaponResID(value : String) : void
 		{
@@ -252,7 +255,7 @@ package com.rpgGame.coreData
 				_deputyWeaponResID = null;
 			}
 		}
-
+		
 		/**坐骑换装资源ID*/
 		public function setMountResID(value : String, animat : String) : void
 		{
@@ -314,6 +317,25 @@ package com.rpgGame.coreData
 				_fightsoulEffectResID = null;
 			}
 		}
+		
+		/**战旗换装资源*/
+		public function set zhanqiSouleeffId(value:String):void
+		{
+			if(_zhanqiEffResID == value) return;
+			_zhanqiEffResID = value;
+			if(_zhanqiEffResID != null && _zhanqiEffResID != "")
+			{
+				_zhanqiEffMode = new RenderParamData3D(RenderUnitID.ZHANQI_EFFECT, RenderUnitType.ZHANQI_EFF, ClientConfig.getEffect(_zhanqiEffResID));
+				_zhanqiEffMode.mouseEnable = false;
+				_zhanqiEffMode.clearSameType = false;
+			}
+			else
+			{
+				_zhanqiEffMode = null;
+				_zhanqiEffResID = null;
+			}
+		}
+		
 		/**特效换装资源ID*/
 		public function set effectResID(value : String) : void
 		{
@@ -333,41 +355,41 @@ package com.rpgGame.coreData
 				_effectResID = null;
 			}
 		}
-
+		
 		/**衣服换装资源*/
 		public function get bodyResID() : String
 		{
 			return _bodyResID;
 		}
-
+		
 		/**头发换装资源*/
 		public function get hairResID() : String
 		{
 			return _hairResID;
 		}
-
+		
 		public function set weaponEffectScale(value : int) : void
 		{
 			_weaponEffectScale = value;
 		}
-
+		
 		/**武器换装特效缩放*/
 		public function get weaponEffectScale() : int
 		{
 			return _weaponEffectScale;
 		}
-
+		
 		public function set weaponEffectOffset(value : Vector3D) : void
 		{
 			_weaponEffectOffset = value;
 		}
-
+		
 		/**武器换装特效偏移*/
 		public function get weaponEffectOffset() : Vector3D
 		{
 			return _weaponEffectOffset;
 		}
-
+		
 		/**武器换装特效资源*/
 		public function get weaponEffectID() : String
 		{
@@ -401,7 +423,7 @@ package com.rpgGame.coreData
 		{
 			return _deputyWeaponEffectID;
 		}
-
+		
 		/**身体换装特效资源*/
 		public function get bodyEffectID() : String
 		{
@@ -418,49 +440,49 @@ package com.rpgGame.coreData
 		{
 			return _weaponResID;
 		}
-
+		
 		/**副武器换装资源*/
 		public function get deputyWeaponResID() : String
 		{
 			return _deputyWeaponResID;
 		}
-
+		
 		/**坐骑换装资源*/
 		public function get mountResID() : String
 		{
 			return _mountResID;
 		}
-
+		
 		/**特效换装资源*/
 		public function get effectResID() : String
 		{
 			return _effectResID;
 		}
-
+		
 		/**换装动画资源*/
 		public function get bodyAnimatResID() : String
 		{
 			return _bodyAnimatResID;
 		}
-
+		
 		/**坐骑换装动画资源*/
 		public function get mountAnimatResID() : String
 		{
 			return _mountAnimatResID;
 		}
-
+		
 		/**主体*/
 		public function get rpd_body() : RenderParamData3D
 		{
 			return _rpd_body;
 		}
-
+		
 		/**头发*/
 		public function get rpd_hair() : RenderParamData3D
 		{
 			return _rpd_hair;
 		}
-
+		
 		/**武器特效*/
 		public function get rpd_weapon_effect() : RenderParamData3D
 		{
@@ -472,7 +494,7 @@ package com.rpgGame.coreData
 		{
 			return _rpd_deputyWeapon_effect;
 		}
-
+		
 		/**身体特效*/
 		public function get rpd_body_effect() : RenderParamData3D
 		{
@@ -490,19 +512,19 @@ package com.rpgGame.coreData
 		{
 			return _rpd_weapon;
 		}
-
+		
 		/**副武器*/
 		public function get rpd_deputy_weapon() : RenderParamData3D
 		{
 			return _rpd_deputy_weapon;
 		}
-
+		
 		/**坐骑*/
 		public function get rpd_mount() : RenderParamData3D
 		{
 			return _rpd_mount;
 		}
-
+		
 		/**特效*/
 		public function get rpd_effect() : RenderParamData3D
 		{
@@ -575,7 +597,7 @@ package com.rpgGame.coreData
             info._weaponResID = this._weaponResID;
 			info._fightsoulMode = this._fightsoulMode;
 			info._fightsoulResID = this._fightsoulResID;
-            return info;
-        }
+			return info;
+		}
 	}
 }

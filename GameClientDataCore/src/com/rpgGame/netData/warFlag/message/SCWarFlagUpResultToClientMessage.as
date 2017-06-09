@@ -12,7 +12,7 @@ package com.rpgGame.netData.warFlag.message{
 	 */
 	public class SCWarFlagUpResultToClientMessage extends Message {
 	
-		//本次升阶是否成功(1表示成功0表示失败)
+		//本次升阶后阶数
 		private var _isSuccess: int;
 		
 		//本次升阶后的祝福值
@@ -23,7 +23,7 @@ package com.rpgGame.netData.warFlag.message{
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
-			//本次升阶是否成功(1表示成功0表示失败)
+			//本次升阶后阶数
 			writeByte(_isSuccess);
 			//本次升阶后的祝福值
 			writeInt(_exp);
@@ -34,7 +34,7 @@ package com.rpgGame.netData.warFlag.message{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
-			//本次升阶是否成功(1表示成功0表示失败)
+			//本次升阶后阶数
 			_isSuccess = readByte();
 			//本次升阶后的祝福值
 			_exp = readInt();
@@ -50,7 +50,7 @@ package com.rpgGame.netData.warFlag.message{
 		}
 		
 		/**
-		 * get 本次升阶是否成功(1表示成功0表示失败)
+		 * get 本次升阶后阶数
 		 * @return 
 		 */
 		public function get isSuccess(): int{
@@ -58,7 +58,7 @@ package com.rpgGame.netData.warFlag.message{
 		}
 		
 		/**
-		 * set 本次升阶是否成功(1表示成功0表示失败)
+		 * set 本次升阶后阶数
 		 */
 		public function set isSuccess(value: int): void{
 			this._isSuccess = value;
