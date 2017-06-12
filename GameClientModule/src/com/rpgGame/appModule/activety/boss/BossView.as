@@ -51,6 +51,9 @@ package com.rpgGame.appModule.activety.boss
 			
 			_activeData=new ListCollection();
 			var list:Vector.<ActivetyInfo>=ActivetyDataManager.getActiveList(ActivityEnum.BOSS_ACT);
+			if(!list){
+				list=new Vector.<ActivetyInfo>();
+			}
 			for(var i:int=0;i<list.length;i++){
 				_activeData.addItem(list[i]);
 			}

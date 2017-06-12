@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.activety
 {
 	import com.rpgGame.app.ui.TabBarPanel;
+	import com.rpgGame.appModule.activety.boss.BossView;
 	import com.rpgGame.appModule.activety.zonghe.ZongHeView;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.enum.ActivityEnum;
@@ -19,8 +20,8 @@ package com.rpgGame.appModule.activety
 	public class ActivetyPanel extends TabBarPanel
 	{
 		private var _skin:Activety_Skin;
-		private var _tabTypes:Array=[ActivityEnum.ZONGHE_ACT];
-		private var _funcIds:Array=[EmFunctionID.EM_HUODONGDATING];
+		private var _tabTypes:Array=[ActivityEnum.ZONGHE_ACT,ActivityEnum.BOSS_ACT];
+		private var _funcIds:Array=[EmFunctionID.EM_HUODONGDATING,EmFunctionID.EM_BOSS_ACT];
 		
 		public function ActivetyPanel()
 		{
@@ -31,6 +32,7 @@ package com.rpgGame.appModule.activety
 		override protected function initTabBarDatas():void
 		{
 			addTabDatas(TabBarSkin_pack,ZongHeView,EmFunctionID.EM_HUODONGDATING);
+			addTabDatas(TabBarSkin_pack,BossView,EmFunctionID.EM_BOSS_ACT);
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
