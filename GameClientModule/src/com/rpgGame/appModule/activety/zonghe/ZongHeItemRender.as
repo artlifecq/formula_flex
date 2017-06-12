@@ -1,4 +1,4 @@
-package com.rpgGame.appModule.activety
+package com.rpgGame.appModule.activety.zonghe
 {
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	
@@ -15,11 +15,11 @@ package com.rpgGame.appModule.activety
 	 * @author dik
 	 * 
 	 */
-	public class ActivetyItemRender extends DefaultListItemRenderer
+	public class ZongHeItemRender extends DefaultListItemRenderer
 	{
 		private var _skin:Active_Item;
 		
-		public function ActivetyItemRender()
+		public function ZongHeItemRender()
 		{
 			super();
 		}

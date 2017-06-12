@@ -1,7 +1,6 @@
-package com.rpgGame.appModule.activety
+package com.rpgGame.appModule.activety.zonghe
 {
 	import com.gameClient.utils.JSONUtil;
-	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.sender.ActivitySender;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.FaceUtil;
@@ -22,18 +21,18 @@ package com.rpgGame.appModule.activety
 	import org.mokylin.skin.app.activety.zonghe.ActivetyAll_Skin;
 	
 	/**
-	 *活动信息视图 
+	 *综合标签
 	 * @author dik
 	 * 
 	 */
-	public class ActivetyInfoView extends ViewUI
+	public class ZongHeView extends ViewUI
 	{
 		private var _skin:ActivetyAll_Skin;
 		private var _activeData:ListCollection;
 		private var rewardIcon:Vector.<IconCDFace>;
 		private var selectedInfo:ActivetyInfo;
 		
-		public function ActivetyInfoView()
+		public function ZongHeView()
 		{
 			_skin=new ActivetyAll_Skin();
 			super(_skin);
@@ -42,7 +41,7 @@ package com.rpgGame.appModule.activety
 		
 		private function initView():void
 		{
-			_skin.ListItem.itemRendererType=ActivetyItemRender;
+			_skin.ListItem.itemRendererType=ZongHeItemRender;
 			_skin.ListItem.scrollBarDisplayMode = ScrollBarDisplayMode.ALWAYS_VISIBLE;
 			_activeData=new ListCollection();
 			var list:Vector.<ActivetyInfo>=ActivetyDataManager.getActiveList(ActivityEnum.ZONGHE_ACT);
@@ -54,7 +53,7 @@ package com.rpgGame.appModule.activety
 			
 			var icon:IconCDFace;
 			for(i=1;i<5;i++){
-				icon=new IconCDFace(IcoSizeEnum.ICON_48);
+				icon=IconCDFace.getIcoFace(IcoSizeEnum.ICON_48);
 				rewardIcon.push(icon);
 				icon.x=_skin["icon"+i].x;
 				icon.y=_skin["icon"+i].y;

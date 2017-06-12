@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.activety
 {
 	import com.rpgGame.app.ui.TabBarPanel;
+	import com.rpgGame.appModule.activety.zonghe.ZongHeView;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.enum.ActivityEnum;
 	import com.rpgGame.coreData.enum.EmFunctionID;
@@ -29,7 +30,7 @@ package com.rpgGame.appModule.activety
 		
 		override protected function initTabBarDatas():void
 		{
-			addTabDatas(TabBarSkin_pack,ActivetyInfoView,EmFunctionID.EM_HUODONGDATING);
+			addTabDatas(TabBarSkin_pack,ZongHeView,EmFunctionID.EM_HUODONGDATING);
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void

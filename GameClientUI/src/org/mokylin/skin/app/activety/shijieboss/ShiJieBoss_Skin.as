@@ -1,13 +1,11 @@
-package org.mokylin.skin.app.activety.zonghe
+package org.mokylin.skin.app.activety.shijieboss
 {
 	import feathers.controls.text.Fontter;
-	import feathers.controls.Button;
 	import feathers.controls.Label;
 	import feathers.controls.List;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 	import org.mokylin.skin.component.list.ListSkin1;
 
 	/**
@@ -15,7 +13,7 @@ package org.mokylin.skin.app.activety.zonghe
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class ActivetyAll_Skin extends feathers.controls.StateSkin
+	public class ShiJieBoss_Skin extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -34,22 +32,28 @@ package org.mokylin.skin.app.activety.zonghe
 
 		public var icon4:feathers.controls.UIAsset;
 
-		public var joinBtn:feathers.controls.Button;
+		public var lbTime1:feathers.controls.Label;
 
-		public var lbMsg:feathers.controls.Label;
+		public var lbTime2:feathers.controls.Label;
+
+		public var lbTime3:feathers.controls.Label;
+
+		public var lbTime4:feathers.controls.Label;
+
+		public var lbTime5:feathers.controls.Label;
 
 
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function ActivetyAll_Skin()
+		public function ShiJieBoss_Skin()
 		{
 			super();
 			
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [__ActivetyAll_Skin_UIAsset1_i(),__ActivetyAll_Skin_UIAsset2_i(),ListItem_i(),activeBg_i(),activeName_i(),__ActivetyAll_Skin_UIAsset3_i(),__ActivetyAll_Skin_UIAsset4_i(),__ActivetyAll_Skin_UIAsset5_i(),__ActivetyAll_Skin_UIAsset6_i(),lbMsg_i(),joinBtn_i(),__ActivetyAll_Skin_UIAsset7_i(),icon1_i(),icon2_i(),icon3_i(),icon4_i()];
+			this.elementsContent = [__ShiJieBoss_Skin_UIAsset1_i(),__ShiJieBoss_Skin_UIAsset2_i(),ListItem_i(),__ShiJieBoss_Skin_UIAsset3_i(),activeBg_i(),__ShiJieBoss_Skin_UIAsset4_i(),__ShiJieBoss_Skin_Label1_i(),activeName_i(),icon1_i(),icon2_i(),icon3_i(),icon4_i(),__ShiJieBoss_Skin_Label2_i(),__ShiJieBoss_Skin_UIAsset5_i(),__ShiJieBoss_Skin_Label3_i(),lbTime1_i(),lbTime2_i(),lbTime3_i(),lbTime4_i(),lbTime5_i()];
 			
 			states = {
 			};
@@ -73,7 +77,43 @@ package org.mokylin.skin.app.activety.zonghe
 			return temp;
 		}
 
-		private function __ActivetyAll_Skin_UIAsset1_i():feathers.controls.UIAsset
+		private function __ShiJieBoss_Skin_Label1_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.text = "最后一击$";
+			temp.color = 0xBEA757;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 147;
+			temp.x = 717;
+			temp.y = 85;
+			return temp;
+		}
+
+		private function __ShiJieBoss_Skin_Label2_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.text = "(几率掉落)";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 83;
+			temp.x = 701;
+			temp.y = 438;
+			return temp;
+		}
+
+		private function __ShiJieBoss_Skin_Label3_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.text = "每日刷新时间";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 99;
+			temp.x = 641;
+			temp.y = 523;
+			return temp;
+		}
+
+		private function __ShiJieBoss_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 498;
@@ -84,7 +124,7 @@ package org.mokylin.skin.app.activety.zonghe
 			return temp;
 		}
 
-		private function __ActivetyAll_Skin_UIAsset2_i():feathers.controls.UIAsset
+		private function __ShiJieBoss_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 498;
@@ -95,50 +135,30 @@ package org.mokylin.skin.app.activety.zonghe
 			return temp;
 		}
 
-		private function __ActivetyAll_Skin_UIAsset3_i():feathers.controls.UIAsset
+		private function __ShiJieBoss_Skin_UIAsset3_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/activety/shijieboss/bg2.jpg";
+			temp.x = 628;
+			temp.y = 429;
+			return temp;
+		}
+
+		private function __ShiJieBoss_Skin_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/activety/zonghe/xzt.png";
 			temp.x = 628;
-			temp.y = 276;
+			temp.y = 405;
 			return temp;
 		}
 
-		private function __ActivetyAll_Skin_UIAsset4_i():feathers.controls.UIAsset
+		private function __ShiJieBoss_Skin_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/activety/zonghe/xzt.png";
-			temp.x = 628;
-			temp.y = 383;
-			return temp;
-		}
-
-		private function __ActivetyAll_Skin_UIAsset5_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/activety/zonghe/hdjl.png";
-			temp.x = 740;
-			temp.y = 276;
-			return temp;
-		}
-
-		private function __ActivetyAll_Skin_UIAsset6_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/activety/zonghe/hdsm.png";
-			temp.x = 740;
-			temp.y = 384;
-			return temp;
-		}
-
-		private function __ActivetyAll_Skin_UIAsset7_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 76;
-			temp.styleName = "ui/app/activety/zonghe/tubiaodi.png";
-			temp.width = 298;
-			temp.x = 631;
-			temp.y = 304;
+			temp.styleName = "ui/app/activety/shijieboss/xiedaibaowu.png";
+			temp.x = 641;
+			temp.y = 436;
 			return temp;
 		}
 
@@ -147,7 +167,7 @@ package org.mokylin.skin.app.activety.zonghe
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			activeBg = temp;
 			temp.name = "activeBg";
-			temp.styleName = "ui/big_bg/activety/zonghe/des/1.jpg";
+			temp.styleName = "ui/app/activety/shijieboss/bg.jpg";
 			temp.x = 629;
 			temp.y = 78;
 			return temp;
@@ -158,9 +178,9 @@ package org.mokylin.skin.app.activety.zonghe
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			activeName = temp;
 			temp.name = "activeName";
-			temp.styleName = "ui/app/activety/zonghe/active_name/1.png";
-			temp.x = 725;
-			temp.y = 81;
+			temp.styleName = "ui/app/activety/shijieboss/mingzi/1.png";
+			temp.x = 747;
+			temp.y = 407;
 			return temp;
 		}
 
@@ -171,7 +191,7 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.name = "icon1";
 			temp.styleName = "ui/common/grid/normal/48.png";
 			temp.x = 643;
-			temp.y = 315;
+			temp.y = 458;
 			return temp;
 		}
 
@@ -182,7 +202,7 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.name = "icon2";
 			temp.styleName = "ui/common/grid/normal/48.png";
 			temp.x = 713;
-			temp.y = 315;
+			temp.y = 458;
 			return temp;
 		}
 
@@ -193,7 +213,7 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.name = "icon3";
 			temp.styleName = "ui/common/grid/normal/48.png";
 			temp.x = 783;
-			temp.y = 315;
+			temp.y = 458;
 			return temp;
 		}
 
@@ -204,41 +224,77 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.name = "icon4";
 			temp.styleName = "ui/common/grid/normal/48.png";
 			temp.x = 853;
-			temp.y = 315;
+			temp.y = 458;
 			return temp;
 		}
 
-		private function joinBtn_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			joinBtn = temp;
-			temp.name = "joinBtn";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.label = "参加活动";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.color = 0xCFC6AE;
-			temp.width = 112;
-			temp.x = 733;
-			temp.y = 520;
-			return temp;
-		}
-
-		private function lbMsg_i():feathers.controls.Label
+		private function lbTime1_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbMsg = temp;
-			temp.name = "lbMsg";
-			temp.height = 93;
-			temp.htmlText = "1.每天前<font color='#5DBD37'>100</font>场可获得<font color='#5DBD37'>名望奖励</font><br>2.每周根据积分结算排名奖励";
-			temp.touchable = false;
-			temp.touchGroup = true;
-			temp.leading = 7;
-			temp.letterSpacing = 0;
+			lbTime1 = temp;
+			temp.name = "lbTime1";
+			temp.text = "10:10";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 297;
-			temp.x = 631;
-			temp.y = 416;
+			temp.width = 47;
+			temp.x = 642;
+			temp.y = 543;
+			return temp;
+		}
+
+		private function lbTime2_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbTime2 = temp;
+			temp.name = "lbTime2";
+			temp.text = "10:10";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 47;
+			temp.x = 701;
+			temp.y = 543;
+			return temp;
+		}
+
+		private function lbTime3_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbTime3 = temp;
+			temp.name = "lbTime3";
+			temp.text = "10:10";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 47;
+			temp.x = 759;
+			temp.y = 543;
+			return temp;
+		}
+
+		private function lbTime4_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbTime4 = temp;
+			temp.name = "lbTime4";
+			temp.text = "10:10";
+			temp.color = 0xE8C958;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 47;
+			temp.x = 818;
+			temp.y = 543;
+			return temp;
+		}
+
+		private function lbTime5_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbTime5 = temp;
+			temp.name = "lbTime5";
+			temp.text = "10:10";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 47;
+			temp.x = 876;
+			temp.y = 543;
 			return temp;
 		}
 
