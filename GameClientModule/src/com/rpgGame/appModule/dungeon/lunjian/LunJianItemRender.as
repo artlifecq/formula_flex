@@ -65,16 +65,6 @@ package com.rpgGame.appModule.dungeon.lunjian
 			rewardList.push(_skin.sk_kunnan.skin);
 			rewardList.push(_skin.sk_emeng.skin);
 			rewardIcon=new Vector.<IconCDFace>();
-			var icon:IconCDFace;
-			for(var i:int=0;i<3;i++){
-				icon=new IconCDFace(IcoSizeEnum.ICON_48);
-				rewardIcon.push(icon);
-				rewardList[i].mc_nandu.gotoAndStop((i+1).toString());
-				rewardList[i].uiBg.visible=false;
-				rewardList[i].container.addChildAt(icon,3);
-				icon.x=9;
-				icon.y=1;
-			}
 			
 			_avatarContainer=new Inter3DContainer();
 			_avatar = new InterAvatar3D();
@@ -82,8 +72,31 @@ package com.rpgGame.appModule.dungeon.lunjian
 			_avatardata=new MonsterData(RoleType.TYPE_MONSTER);
 			_avatarContainer.x=-28;
 			_skin.modeCont.addChild(_avatarContainer);
-			
+			for(var i:int=0;i<3;i++){
+				rewardList[i].mc_nandu.gotoAndStop((i+1).toString());
+				rewardList[i].uiBg.visible=false;
+			}
 			alertOk=new AlertSetInfo(LangAlertInfo.LUNJIAN_FIGHT_MIN);
+		}
+		
+		override protected function onShow():void
+		{
+			var icon:IconCDFace;
+			for(var i:int=0;i<3;i++){
+				icon=IconCDFace.getIcoFace(IcoSizeEnum.ICON_48);
+				rewardIcon.push(icon);
+				rewardList[i].container.addChildAt(icon,3);
+				icon.x=9;
+				icon.y=1;
+			}
+		}
+		
+		override protected function onHide():void
+		{
+			while(rewardIcon.length>0){
+				var icon:IconCDFace=rewardIcon.pop();
+				IconCDFace.releaseIcoFace(icon);
+			}
 		}
 		
 		

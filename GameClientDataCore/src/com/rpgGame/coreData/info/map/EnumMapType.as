@@ -31,6 +31,10 @@ package com.rpgGame.coreData.info.map
 		 * 经验副本
 		 */
 		public static const MAP_TYPE_EXP:int = rEnum.next;//5
+		/**
+		 * 世界boss
+		 */
+		public static const MAP_WORLD_BOSS:int = rEnum.next;//6
 		
 	}
 }

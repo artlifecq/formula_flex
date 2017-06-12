@@ -180,6 +180,9 @@ package com.rpgGame.app.ui.main.dungeon
 			TrusteeshipManager.getInstance().findDist = 0;
 			_targetTrack.onHide();
 			_targetTrack = null;
+			while(_rewardIcons.length>0){
+				IconCDFace.releaseIcoFace(_rewardIcons.pop());
+			}
 		}
 		
 		private function stopTimer():void

@@ -40,10 +40,6 @@ package com.rpgGame.appModule.dungeon.lunjian
 		{
 			_skin=new FuBenJieSuan2_Shengli();
 			super(_skin);
-			_icon=new IconCDFace(IcoSizeEnum.ICON_64);
-			_skin.container.addChild(_icon);
-			_icon.x=_skin.icon1.x;
-			_icon.y=_skin.icon1.y;
 			this.playInter3DAt(ClientConfig.getEffect("ui_tiaozhanshengli"),250,130,1,playComplete,addEft);
 		}
 		
@@ -70,6 +66,11 @@ package com.rpgGame.appModule.dungeon.lunjian
 			var cfg:Q_lunjian=LunJianCfg.getCfgByID(ljid);
 			var rewads:Array=JSONUtil.decode(cfg.q_rewards);
 			var itemInfo:ClientItemInfo=new ClientItemInfo(rewads[0].mod);
+			
+			_icon=IconCDFace.getIcoFace(IcoSizeEnum.ICON_64);
+			_skin.container.addChild(_icon);
+			_icon.x=_skin.icon1.x;
+			_icon.y=_skin.icon1.y;
 			FaceUtil.SetItemGrid(_icon,itemInfo);
 			
 			_skin.container.scale=0.1;
@@ -109,6 +110,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 		override protected function onHide():void
 		{
 			super.onHide();
+			IconCDFace.releaseIcoFace(_icon);
 			TimerServer.remove(updateTime);
 		}
 	}

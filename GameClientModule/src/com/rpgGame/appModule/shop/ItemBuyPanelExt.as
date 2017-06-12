@@ -57,7 +57,7 @@ package com.rpgGame.appModule.shop
 		{
 			_skin=new Tankuang_Shangpin();
 			super(_skin);
-			_grid=new IconCDFace(IcoSizeEnum.ICON_64);
+			_grid=IconCDFace.getIcoFace(IcoSizeEnum.ICON_64);
 //			_grid.x=6;
 //			_grid.y=6;
 			this._skin.icons.addChild(_grid);

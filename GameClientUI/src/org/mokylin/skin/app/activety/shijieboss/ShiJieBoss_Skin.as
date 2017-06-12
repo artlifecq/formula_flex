@@ -42,6 +42,8 @@ package org.mokylin.skin.app.activety.shijieboss
 
 		public var lbTime5:feathers.controls.Label;
 
+		public var modeCont:feathers.controls.SkinnableContainer;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -53,7 +55,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [__ShiJieBoss_Skin_UIAsset1_i(),__ShiJieBoss_Skin_UIAsset2_i(),ListItem_i(),__ShiJieBoss_Skin_UIAsset3_i(),activeBg_i(),__ShiJieBoss_Skin_UIAsset4_i(),__ShiJieBoss_Skin_Label1_i(),activeName_i(),icon1_i(),icon2_i(),icon3_i(),icon4_i(),__ShiJieBoss_Skin_Label2_i(),__ShiJieBoss_Skin_UIAsset5_i(),__ShiJieBoss_Skin_Label3_i(),lbTime1_i(),lbTime2_i(),lbTime3_i(),lbTime4_i(),lbTime5_i()];
+			this.elementsContent = [__ShiJieBoss_Skin_UIAsset1_i(),__ShiJieBoss_Skin_UIAsset2_i(),ListItem_i(),__ShiJieBoss_Skin_UIAsset3_i(),activeBg_i(),modeCont_i(),__ShiJieBoss_Skin_UIAsset4_i(),__ShiJieBoss_Skin_Label1_i(),activeName_i(),icon1_i(),icon2_i(),icon3_i(),icon4_i(),__ShiJieBoss_Skin_Label2_i(),__ShiJieBoss_Skin_UIAsset5_i(),__ShiJieBoss_Skin_Label3_i(),lbTime1_i(),lbTime2_i(),lbTime3_i(),lbTime4_i(),lbTime5_i()];
 			
 			states = {
 			};
@@ -295,6 +297,18 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.width = 47;
 			temp.x = 876;
 			temp.y = 543;
+			return temp;
+		}
+
+		private function modeCont_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			modeCont = temp;
+			temp.name = "modeCont";
+			temp.height = 323;
+			temp.width = 294;
+			temp.x = 632;
+			temp.y = 78;
 			return temp;
 		}
 

@@ -46,9 +46,6 @@ package com.rpgGame.app.ui.alert
 			skin = new AlertNewWeapon(); 
 			super(skin);
 			
-			equipIcon=new IconCDFace( IcoSizeEnum.ICON_64);
-			skin.icons.addChild(equipIcon);
-		
 			skin.icons.touchGroup=false;
 			skin.icons.touchable=true;
 			equips = [];
@@ -107,7 +104,6 @@ package com.rpgGame.app.ui.alert
 		
 		public function setEquip(equip:EquipInfo):void
 		{
-			
 			//skin.lbl_name.htmlText=ItemQualityType.getHtmlEquipQualityEvaluteName(equip.refined_times, equip.quality, equip.name, equip.evaluate);
 			skin.lbl_name.htmlText=ItemConfig.getItemName(equip.qItem.q_id);
 			skin.lbl_name.color=ItemConfig.getItemQualityColor(equip.qItem.q_id);
@@ -201,11 +197,20 @@ package com.rpgGame.app.ui.alert
 		{
 			if(_ins)_ins.removeFromParent();
 		}
+		
+		override protected function onShow():void
+		{
+			super.onShow();
+			equipIcon=IconCDFace.getIcoFace(IcoSizeEnum.ICON_64);
+			skin.icons.addChild(equipIcon);
+		}
+		
 		override protected function onHide():void
 		{
 			super.onHide();
 			gameTimer.stop();
-			equipIcon.clear();
+			IconCDFace.releaseIcoFace(equipIcon);
+			equipIcon=null;
 		}
 	}
 }

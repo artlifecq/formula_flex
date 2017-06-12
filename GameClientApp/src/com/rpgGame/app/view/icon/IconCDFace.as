@@ -12,13 +12,14 @@ package com.rpgGame.app.view.icon
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
 	
+	import away3d.events.Event;
+	
 	import feathers.dragDrop.IDragSource;
 	import feathers.dragDrop.IDropTarget;
 	import feathers.utils.filter.GrayFilter;
 	
 	import org.client.mainCore.manager.EventManager;
 	
-	import away3d.events.Event;
 	import starling.text.TextField;
 	import starling.text.TextFormat;
 
@@ -55,7 +56,6 @@ package com.rpgGame.app.view.icon
 		public function IconCDFace($iconSize : int)
 		{
 			super($iconSize);
-
 			sortLayer();
 		}
 
@@ -339,12 +339,19 @@ package com.rpgGame.app.view.icon
 
 		private static var _icoFacePool : Array = [];
 
+		/**
+		 *创建 
+		 * @param size
+		 * @return 
+		 * 
+		 */
 		public static function getIcoFace(size : int = IcoSizeEnum.SIZE_40) : IconCDFace
 		{
 			var icoFace : IconCDFace;
 			if (_icoFacePool.length > 0)
 			{
 				icoFace = _icoFacePool.pop();
+				icoFace.iconSize=size;
 			}
 			else
 			{
@@ -353,6 +360,11 @@ package com.rpgGame.app.view.icon
 			return icoFace;
 		}
 
+		/**
+		 *回收 
+		 * @param iconFace
+		 * 
+		 */
 		public static function releaseIcoFace(iconFace : IconCDFace) : void
 		{
 			if (iconFace == null)
@@ -381,7 +393,5 @@ package com.rpgGame.app.view.icon
 		{
 			_showCD = value;
 		}
-
-
 	}
 }

@@ -50,7 +50,12 @@ package com.rpgGame.appModule.activety.zonghe
 			}
 			_skin.ListItem.dataProvider=_activeData;
 			rewardIcon=new Vector.<IconCDFace>();
-			
+		}
+		
+		override public function show(data:Object=null):void
+		{
+			_skin.ListItem.addEventListener(Event.CHANGE,onChange);
+			_skin.joinBtn.addEventListener(Event.TRIGGERED,onJoin);
 			var icon:IconCDFace;
 			for(i=1;i<5;i++){
 				icon=IconCDFace.getIcoFace(IcoSizeEnum.ICON_48);
@@ -59,12 +64,7 @@ package com.rpgGame.appModule.activety.zonghe
 				icon.y=_skin["icon"+i].y;
 				_skin.container.addChild(icon);
 			}
-		}
-		
-		override public function show(data:Object=null):void
-		{
-			_skin.ListItem.addEventListener(Event.CHANGE,onChange);
-			_skin.joinBtn.addEventListener(Event.TRIGGERED,onJoin);
+			
 			if(!data){
 				_skin.ListItem.selectedIndex=0;
 				_skin.ListItem.dataProvider.updateItemAt(0);
@@ -134,6 +134,11 @@ package com.rpgGame.appModule.activety.zonghe
 		{
 			_skin.ListItem.removeEventListener(Event.CHANGE,onChange);
 			_skin.joinBtn.removeEventListener(Event.TRIGGERED,onJoin);
+			var icon:IconCDFace;
+			while(rewardIcon.length>0){
+				icon=rewardIcon.pop();
+				IconCDFace.releaseIcoFace(icon);
+			}
 		}
 	}
 }

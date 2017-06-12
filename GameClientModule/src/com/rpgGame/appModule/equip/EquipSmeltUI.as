@@ -123,9 +123,9 @@ package com.rpgGame.appModule.equip
 			_goodsContainerTarget=new GoodsContainerPanel(_leftSkin.list1,ItemContainerID.SMELT_LIST,createItemRender);
 			_goodsContainerUse=new GoodsContainerPanel(_leftSkin.list2,ItemContainerID.SMELT_USE,createItemRender);
 			
-			_targetEquip=new IconCDFace(64);
+			_targetEquip=IconCDFace.getIcoFace(64);
 			_targetEquip.selectImgVisible=false;
-			_useItem=new IconCDFace(64);
+			_useItem=IconCDFace.getIcoFace(64);
 			_useItem.selectImgVisible=false;
 			_skin.container.addChild(_targetEquip);
 			_skin.container.addChild(_useItem);

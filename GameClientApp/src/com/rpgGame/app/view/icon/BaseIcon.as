@@ -61,6 +61,22 @@ package com.rpgGame.app.view.icon
 			this.height = _iconSize;
 		}
 		
+		public function set iconSize(value:int):void
+		{
+			_iconSize = value;
+			_iconSize = _iconSize <= 0 ? IcoSizeEnum.SIZE_46 : _iconSize;
+			switch(_iconSize){
+				case IcoSizeEnum.ICON_64:
+					_iconPositionX=_iconPositionY=7;
+					break;
+				case IcoSizeEnum.ICON_48:
+					_iconPositionX=_iconPositionY=6;
+					break;
+			}
+			this.width = _iconSize;
+			this.height = _iconSize;
+		}
+
 		/**
 		 * 设置图标 
 		 * @param iconResURL url地址

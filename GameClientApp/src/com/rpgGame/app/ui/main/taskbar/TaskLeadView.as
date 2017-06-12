@@ -98,7 +98,7 @@ package com.rpgGame.app.ui.main.taskbar
 			var i:int;
 			for(i=0;i<icoBgList.length;i++)
 			{
-				var ico:IconCDFace=new IconCDFace(IcoSizeEnum.ICON_48);
+				var ico:IconCDFace=IconCDFace.getIcoFace(IcoSizeEnum.ICON_48);
 				ico.showCD=false;
 				ico.x=icoBgList[i].x-6;
 				ico.y=icoBgList[i].y-6;

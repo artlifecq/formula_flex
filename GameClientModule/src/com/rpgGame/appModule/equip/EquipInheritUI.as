@@ -172,9 +172,9 @@ package com.rpgGame.appModule.equip
 			_goodsbyPlayer=new GoodsContainerPanel(_leftSkin.list1,ItemContainerID.IHT_LIST,createItemRender);
 			_goodsbyBag=new GoodsContainerPanel(_leftSkin.list2,ItemContainerID.IHT_USE,createItemRender);
 			
-			_targetEquip=new IconCDFace(64);
+			_targetEquip=IconCDFace.getIcoFace(64);
 			_targetEquip.selectImgVisible=false;
-			_useEquip=new IconCDFace(64);
+			_useEquip=IconCDFace.getIcoFace(64);
 			_useEquip.selectImgVisible=false;
 			
 			_skin.container.addChild(_targetEquip);
