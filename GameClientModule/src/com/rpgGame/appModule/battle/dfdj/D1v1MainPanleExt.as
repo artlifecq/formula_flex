@@ -98,6 +98,7 @@ package com.rpgGame.appModule.battle.dfdj
 			_skin.icon.styleName=Mgr.d1v1Mgr.getRankIconUrl(rank,0);
 			
 			_skin.numCishu.label=data.currentNumber+"";
+			_skin.numShengwang.label=data.reputation+"";
 		}
 		
 		private function onStateResChange(type:int=0):void

@@ -217,8 +217,9 @@ package com.rpgGame.app.cmdlistener
 			
 			var beforeFight:int=MainRoleManager.actorInfo.totalStat.getStatValue(CharAttributeType.FIGHTING);
 			
+		
 			//
-			PlayerAttributeManager.showSpriteStatChg(MainRoleManager.actorInfo.totalStat.statArr, msg.attributeChangeList);
+			PlayerAttributeManager.showSpriteStatChg(MainRoleManager.actorInfo.totalStat, msg.attributeChangeList);
 			//
 			MainRoleManager.actorInfo.totalStat.setData(msg.attributeChangeList);
 			

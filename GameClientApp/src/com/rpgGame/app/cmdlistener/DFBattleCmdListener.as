@@ -37,7 +37,7 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(128109, Mgr.d1v1Mgr.SCOpenDianFengPanelHandler);
 			SocketConnection.addCmdListener(128111, Mgr.d1v1Mgr.SCOpenDianFengRankHandler);
 			SocketConnection.addCmdListener(128113, Mgr.d1v1Mgr.SCDrawDianFengAwardHandler);
-			
+			SocketConnection.addCmdListener(128115, Mgr.d1v1Mgr.SCQuitZoneResultHandler);
 			finish();
 		}
 		

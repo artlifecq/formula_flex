@@ -4,6 +4,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.sender.D1v1BattleSender;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.core.events.ActivityEvent;
 	import com.rpgGame.core.events.D1v1Event;
 	import com.rpgGame.coreData.cfg.BattleRankCfg;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
@@ -15,6 +16,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.netData.pvp.message.SCOpenDianFengPanelMessage;
 	import com.rpgGame.netData.pvp.message.SCOpenDianFengRankMessage;
 	import com.rpgGame.netData.pvp.message.SCQuitRaceResultMessage;
+	import com.rpgGame.netData.pvp.message.SCQuitZoneResultMessage;
 	import com.rpgGame.netData.pvp.message.SCRaceResultMessage;
 	import com.rpgGame.netData.pvp.message.SCReadyToLoadMessage;
 	import com.rpgGame.netData.pvp.message.SCReadyToStartMessage;
@@ -27,6 +29,7 @@ package com.rpgGame.app.manager
 		public static var ins:D1v1Manager=new D1v1Manager();
 		private var _weekRanks:Vector.<DRankWeekReward>;
 		private var _data:DianFengDataInfo;
+		
 		public function D1v1Manager()
 		{
 		}
@@ -57,8 +60,10 @@ package com.rpgGame.app.manager
 		}
 		public  function reqGetReward():void
 		{
-			D1v1BattleSender. reqGetReward();
-			
+			if (_data&&_data.drawAward==0) 
+			{
+				D1v1BattleSender. reqGetReward();
+			}
 		}
 		public  function reqPanelData():void
 		{
@@ -93,6 +98,7 @@ package com.rpgGame.app.manager
 			// TODO Auto Generated method stub
 			AppManager.showApp(AppConstant.BATTLE_D1V1_READY_PANEL,msg.delayTime);
 			AppManager.showApp(AppConstant.BATTLE_D1V1_HEAD_PANEL,msg);
+			EventManager.dispatchEvent(ActivityEvent.SHOW_HIDE_ALL,false);
 		}
 		public function SCStartRaceHandler(msg:SCStartRaceMessage):void
 		{
@@ -127,9 +133,18 @@ package com.rpgGame.app.manager
 		public function SCDrawDianFengAwardHandler(msg:SCDrawDianFengAwardMessage):void
 		{
 			// TODO Auto Generated method stub
-			
+			if (msg.result==1) 
+			{
+				EventManager.dispatchEvent(D1v1Event.GET_REWARD_RESULT);
+			}
 		}
-
+		public function SCQuitZoneResultHandler(msg:SCQuitZoneResultMessage):void
+		{
+			if (msg.result==1) 
+			{
+				EventManager.dispatchEvent(D1v1Event.QUIT_FB_RESULT);
+			}
+		}
 		public function get data():DianFengDataInfo
 		{
 			return _data;

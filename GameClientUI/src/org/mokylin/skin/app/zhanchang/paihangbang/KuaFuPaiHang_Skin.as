@@ -86,7 +86,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.label = "1364364";
 			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow2;
 			temp.width = 148;
-			temp.x = 482;
+			temp.x = 645;
 			temp.y = 536;
 			return temp;
 		}
@@ -94,7 +94,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 		private function __KuaFuPaiHang_Skin_Group1_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
-			temp.x = -142;
+			temp.x = 21;
 			temp.y = 76;
 			temp.elementsContent = [__KuaFuPaiHang_Skin_UIAsset6_i(),__KuaFuPaiHang_Skin_Label1_i(),__KuaFuPaiHang_Skin_Label2_i(),__KuaFuPaiHang_Skin_Label3_i(),__KuaFuPaiHang_Skin_Label4_i()];
 			return temp;
@@ -150,7 +150,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.text = "(今日可领取昨日的段位奖励)";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 43;
+			temp.x = 206;
 			temp.y = 477;
 			return temp;
 		}
@@ -159,7 +159,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/paihangbang/lan.png";
-			temp.x = 435;
+			temp.x = 598;
 			temp.y = 75;
 			return temp;
 		}
@@ -168,7 +168,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/paihangbang/zuoripaiwei.png";
-			temp.x = -131;
+			temp.x = 32;
 			temp.y = 487;
 			return temp;
 		}
@@ -177,7 +177,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/paihangbang/meiripaiweijiangli.png";
-			temp.x = -131;
+			temp.x = 32;
 			temp.y = 540;
 			return temp;
 		}
@@ -188,7 +188,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.height = 512;
 			temp.styleName = "ui/common/background/neikuang_1.png";
 			temp.width = 922;
-			temp.x = -149;
+			temp.x = 14;
 			temp.y = 69;
 			return temp;
 		}
@@ -199,7 +199,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.height = 502;
 			temp.styleName = "ui/common/background/neikuang_3.png";
 			temp.width = 392;
-			temp.x = -144;
+			temp.x = 19;
 			temp.y = 74;
 			return temp;
 		}
@@ -210,7 +210,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/zhanchang/paihangbang/kuafupaihangbang.png";
-			temp.x = 267;
+			temp.x = 430;
 			temp.y = 13;
 			return temp;
 		}
@@ -219,7 +219,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/paihangbang/bg1.jpg";
-			temp.x = -141;
+			temp.x = 22;
 			temp.y = 432;
 			return temp;
 		}
@@ -228,7 +228,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/paihangbang/tiao.png";
-			temp.x = -142;
+			temp.x = 21;
 			temp.y = 435;
 			return temp;
 		}
@@ -264,7 +264,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/common/zdl2.png";
-			temp.x = 411;
+			temp.x = 574;
 			temp.y = 526;
 			return temp;
 		}
@@ -278,7 +278,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			var skin:StateSkin = new org.mokylin.skin.common.yiji_panelbg2_Skin()
 			temp.skin = skin
 			temp.width = 947;
-			temp.x = -163;
+			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
@@ -289,7 +289,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			btnGlass = temp;
 			temp.name = "btnGlass";
 			temp.styleClass = org.mokylin.skin.app.zhanchang.button.ButtonFangdajing;
-			temp.x = 557;
+			temp.x = 720;
 			temp.y = 78;
 			return temp;
 		}
@@ -304,7 +304,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xCFC6AE;
 			temp.width = 80;
-			temp.x = 145;
+			temp.x = 308;
 			temp.y = 536;
 			return temp;
 		}
@@ -315,7 +315,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			btnMsg = temp;
 			temp.name = "btnMsg";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_shuoming2;
-			temp.x = 739;
+			temp.x = 902;
 			temp.y = 79;
 			return temp;
 		}
@@ -325,7 +325,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grpMy = temp;
 			temp.name = "grpMy";
-			temp.x = -142;
+			temp.x = 21;
 			temp.y = 345;
 			temp.elementsContent = [__KuaFuPaiHang_Skin_UIAsset7_i(),__KuaFuPaiHang_Skin_UIAsset8_i()];
 			return temp;
@@ -337,7 +337,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			icon2 = temp;
 			temp.name = "icon2";
 			temp.styleName = "ui/common/grid/normal/36.png";
-			temp.x = -27;
+			temp.x = 136;
 			temp.y = 527;
 			return temp;
 		}
@@ -351,7 +351,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
-			temp.x = 136;
+			temp.x = 299;
 			temp.y = 498;
 			return temp;
 		}
@@ -365,7 +365,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 90;
-			temp.x = 466;
+			temp.x = 629;
 			temp.y = 83;
 			return temp;
 		}
@@ -379,7 +379,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			var skin:StateSkin = new org.mokylin.skin.common.Flip3_Skin()
 			temp.skin = skin
 			temp.width = 146;
-			temp.x = -21;
+			temp.x = 142;
 			temp.y = 402;
 			return temp;
 		}
@@ -393,7 +393,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			var skin:StateSkin = new org.mokylin.skin.app.zhanchang.paihangbang.PaiHangAlll_Skin()
 			temp.skin = skin
 			temp.width = 339;
-			temp.x = 780;
+			temp.x = 943;
 			temp.y = 27;
 			return temp;
 		}
@@ -404,7 +404,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			uiLevelName = temp;
 			temp.name = "uiLevelName";
 			temp.styleName = "ui/app/zhanchang/icon/name2/1001.png";
-			temp.x = -43;
+			temp.x = 120;
 			temp.y = 504;
 			return temp;
 		}
@@ -415,7 +415,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			uiLevel = temp;
 			temp.name = "uiLevel";
 			temp.styleName = "ui/app/zhanchang/icon/1001_min.png";
-			temp.x = -48;
+			temp.x = 115;
 			temp.y = 458;
 			return temp;
 		}
@@ -425,8 +425,10 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiRight = temp;
 			temp.name = "uiRight";
+			temp.height = 502;
 			temp.styleName = "ui/big_bg/zhanchang/paihang_bg.jpg";
-			temp.x = 248;
+			temp.width = 520;
+			temp.x = 411;
 			temp.y = 74;
 			return temp;
 		}

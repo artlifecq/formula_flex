@@ -54,7 +54,7 @@ package com.rpgGame.appModule.battle.dfdj
 		public function setData(data:*):void
 		{
 			_data=data;
-			if (_data.rank>100) 
+			if (_data.rank>100||_data.rank<1) 
 			{
 				_skin.lbId.text="未入榜";
 			}
@@ -77,6 +77,7 @@ package com.rpgGame.appModule.battle.dfdj
 				_skin.lbLevel.text=qRank.q_subrank_name;
 			}
 			_skin.lbJifen.text=_data.currentIntegral+"";
+			this.visible=true;
 		}
 		public static function gain(index:int):D1v1RankCellExt
 		{

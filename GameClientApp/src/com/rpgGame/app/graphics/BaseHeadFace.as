@@ -5,6 +5,7 @@ package com.rpgGame.app.graphics
 	import com.game.engine3D.scene.display.BindableSprite;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.vo.BaseObjSyncInfo;
+	import com.rpgGame.app.graphics.decor.DecorCtrl;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
@@ -37,10 +38,12 @@ package com.rpgGame.app.graphics
 		private var _isDestroyed : Boolean;
 		private var _isDisposed : Boolean;
 		
+		protected var deCtrl:DecorCtrl;
 		public function BaseHeadFace()
 		{
 			super();
 			_isDestroyed = false;
+			deCtrl=new DecorCtrl(this);
 		}
 		
 		public function get isDestroyed():Boolean
@@ -229,6 +232,7 @@ package com.rpgGame.app.graphics
 			{
 				trace("!!!!!!!!addElement", (element as UIAsset).styleName);
 			}
+			//deCtrl.addTop(element);
 			this.addChild(element);
 		}
 		
@@ -240,6 +244,8 @@ package com.rpgGame.app.graphics
 			{
 				trace("!!!!!!!!removeElement", (element as UIAsset).styleName);
 			}
+			//deCtrl.removeTop(element);
+			//
 			this.removeChild(element);
 		}
 		

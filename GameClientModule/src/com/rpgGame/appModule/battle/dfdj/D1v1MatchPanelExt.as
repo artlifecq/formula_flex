@@ -45,6 +45,7 @@ package com.rpgGame.appModule.battle.dfdj
 			super.show(data,openTable,StarlingLayerManager.topUILayer);
 			_endTime=getTimer()+int(data*1000);
 			_timer.start();
+			onTimer();
 		}
 		override protected function onTouchTarget(target:DisplayObject):void
 		{

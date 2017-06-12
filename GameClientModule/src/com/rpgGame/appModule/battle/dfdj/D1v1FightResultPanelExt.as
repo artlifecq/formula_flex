@@ -2,6 +2,7 @@ package com.rpgGame.appModule.battle.dfdj
 {
 	import com.game.mainCore.core.timer.GameTimer;
 	import com.rpgGame.app.manager.Mgr;
+	import com.rpgGame.app.sender.D1v1BattleSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
@@ -102,6 +103,11 @@ package com.rpgGame.appModule.battle.dfdj
 					break;
 				}
 			}
+		}
+		override public function hide():void
+		{
+			super.hide();
+			D1v1BattleSender.reqQuitFB();
 		}
 		override protected function onHide():void
 		{

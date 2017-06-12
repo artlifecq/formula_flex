@@ -14,5 +14,9 @@ package com.rpgGame.core.events
 		public static const ACTIVITY_OPEN:int=UNIQUEID.NEXT;
 		
 		public static const ACTIVITY_FIGHT_START:int=UNIQUEID.NEXT;
+		
+		public static const QUIT_FB_RESULT:int=UNIQUEID.NEXT;
+		
+		public static const GET_REWARD_RESULT:int=UNIQUEID.NEXT;
 	}
 }

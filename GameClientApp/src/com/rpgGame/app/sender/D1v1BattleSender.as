@@ -9,6 +9,7 @@ package com.rpgGame.app.sender
 	import com.rpgGame.netData.pvp.message.CSQuitRaceMessage;
 	
 	import org.game.netCore.connection.SocketConnection;
+	import com.rpgGame.netData.pvp.message.CSQuitZoneMessage;
 
 
 	public class D1v1BattleSender extends BaseSender
@@ -16,6 +17,12 @@ package com.rpgGame.app.sender
 		public function D1v1BattleSender()
 		{
 			super();
+		}
+		public static function reqQuitFB():void
+		{
+			var msg:CSQuitZoneMessage=new CSQuitZoneMessage();
+			
+			SocketConnection.send(msg);
 		}
 		public static function reqDFMatch():void
 		{

@@ -133,7 +133,7 @@ package  com.rpgGame.app.ui.common
 		private function onDecCout(eve:Event):void
 		{
 			// TODO Auto Generated method stub
-			if (curNum>0) 
+			if (curNum>1) 
 			{
 				setcurNum(curNum-1);
 			}
@@ -223,11 +223,15 @@ package  com.rpgGame.app.ui.common
 			
 			curNum=Math.min(num,MAX_ALLOW);
 			curNum=Math.max(curNum,1);
-			this.lab.text=curNum+"";
+			this.lab.text=getText();
 			if (callBack) 
 			{
 				callBack(curNum);
 			}
+		}
+		protected function getText():String
+		{
+			return curNum+"";
 		}
 		private function onSetMax(eve:Event):void
 		{

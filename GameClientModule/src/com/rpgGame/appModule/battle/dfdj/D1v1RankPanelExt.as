@@ -28,7 +28,7 @@ package com.rpgGame.appModule.battle.dfdj
 	public class D1v1RankPanelExt extends SkinUIPanel
 	{
 		private var _skin:KuaFuPaiHang_Skin;
-		private var _numCtrl:NumSelectUICtrl;
+		private var _numCtrl:D1v1RankPageSelectCtrl;
 		private var _gReward:RewardGroup;
 		private var _myCell:D1v1RankCellExt;
 		private var _rankList:Vector.<D1v1RankCellExt>;
@@ -42,7 +42,7 @@ package com.rpgGame.appModule.battle.dfdj
 			super(_skin);
 			
 			var skinF:Flip3_Skin=_skin.skinFlip.skin as Flip3_Skin;
-			_numCtrl=new NumSelectUICtrl(skinF.btnAdd,skinF.btnDec,skinF.btnMax,skinF.btnMin,skinF.textDisplay,1,1,onPageChange);
+			_numCtrl=new D1v1RankPageSelectCtrl(skinF.btnAdd,skinF.btnDec,skinF.btnMax,skinF.btnMin,skinF.textDisplay,1,1,onPageChange);
 			_numCtrl.needSpeed=false;
 			_gReward=new RewardGroup(_skin.icon2);
 			initList();
@@ -87,11 +87,12 @@ package com.rpgGame.appModule.battle.dfdj
 			if (!_roleShow) 
 			{
 				_roleShow=new RoleModelShow();
-				_roleShow.setData(data.playerAppearanceInfo);
+				
 				_roleShow.x=_skin.uiRight.x+_skin.uiRight.width/2;
-				_roleShow.y=_skin.uiRight.y+_skin.uiRight.height/2;
+				_roleShow.y=_skin.uiRight.y+_skin.uiRight.height/2+160;
 				_skin.container.addChild(_roleShow);
 			}
+			_roleShow.setData(data.playerAppearanceInfo,1.6);
 			_skin.NumZhanli.label=data.fightPower+"";
 			_skin.lbRoleName.text=data.playerName;
 		}
@@ -183,6 +184,7 @@ package com.rpgGame.appModule.battle.dfdj
 				_numCtrl.updateMax(msg.maxPage,msg.maxPage,false);
 				var skinF:Flip3_Skin=_skin.skinFlip.skin as Flip3_Skin;
 				skinF.textDisplay.text=_numCtrl.getValue()+"/"+_numCtrl.maxCount;
+				_weekRank.setMyRank(msg.dianFengRankInfo.rank);
 			}
 		}
 		override protected function onHide():void

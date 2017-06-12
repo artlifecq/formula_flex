@@ -572,6 +572,7 @@ package com.rpgGame.app.manager.fight
 			switch (type)
 			{
 				case EnumHurtType.ADDHP: //回血
+					typeRes="";
 					numberColor=NUMBER_PC_HPREC;
 					var extAtf:AttackFace=null;
 					if (show==2) 

@@ -140,8 +140,9 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.name = "numZhanli";
 			temp.gap = -2;
 			temp.height = 25;
-			temp.label = "2000";
+			temp.label = "1";
 			temp.styleClass = org.mokylin.skin.app.zhanchang.uinumber.UINumberNumber3;
+			temp.textAlign = "center";
 			temp.width = 76;
 			temp.x = 124;
 			temp.y = 47;
