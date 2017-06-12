@@ -7,6 +7,7 @@ package   com.rpgGame.app.manager.debug
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.fight.spell.SkillAddPop;
 	import com.rpgGame.app.fight.spell.SpellHitHelper;
+	import com.rpgGame.app.manager.FangChenMiManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
@@ -16,12 +17,13 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.netData.player.message.SCNonagePromptMessage;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.net.MessageMgr;
-
+	
 	
 	/**
 	 * 客户端命令
@@ -40,7 +42,7 @@ package   com.rpgGame.app.manager.debug
 		private  var commandList:com.gameClient.utils.HashMap = new com.gameClient.utils.HashMap();
 		private  var docommandList:Vector.<String> = new Vector.<String>;
 		
-
+		
 		public  function initCommend():void 
 		{
 			commandList.put( ".hidestate", function (...arg):void
@@ -110,6 +112,12 @@ package   com.rpgGame.app.manager.debug
 			commandList.put( ".log", function (...arg):void
 			{
 				GameLog.enableTrace=false;
+			});
+			commandList.put( ".fangchenmi", function (...arg):void
+			{
+				var msg:SCNonagePromptMessage=new SCNonagePromptMessage();
+				msg.type=parseInt(arg[0]);
+				FangChenMiManager.OnSCNonagePromptMessage(msg);
 			});
 		}
 		
