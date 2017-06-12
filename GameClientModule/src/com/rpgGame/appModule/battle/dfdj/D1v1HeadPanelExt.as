@@ -54,7 +54,7 @@ package com.rpgGame.appModule.battle.dfdj
 			var left:int=(_endTime-getTimer())/1000;
 			if (left>=0) 
 			{
-				var str:String=TextUtil.SecondToHMS2(left);
+				var str:String=TextUtil.SecondToHMS2(left).replace(/ :/g,"x");
 				_skin.uiTime.label=str;
 			}
 			else
@@ -113,13 +113,13 @@ package com.rpgGame.appModule.battle.dfdj
 			if (!role)
 				return;
 			var roleData : RoleData = role.data as RoleData;
-			updateOtherHp(roleData.totalStat.hp/roleData.totalStat.getMaxValue(CharAttributeType.MAX_HP));
+			updateOtherHp(roleData.totalStat.hp/roleData.totalStat.life);
 		}
 		
 		private function myHpChange(eve:CharAttributeUpdateEvent):void
 		{
 			// TODO Auto Generated method stub
-			updateMyHp(MainRoleManager.actorInfo.totalStat.hp/MainRoleManager.actorInfo.totalStat.getMaxValue(CharAttributeType.MAX_HP));
+			updateMyHp(MainRoleManager.actorInfo.totalStat.hp/MainRoleManager.actorInfo.totalStat.life);
 		}
 		private function updateMyHp(per:Number):void
 		{

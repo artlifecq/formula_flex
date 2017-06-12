@@ -106,6 +106,7 @@ package com.rpgGame.app.manager
 			// TODO Auto Generated method stub
 			//战斗结束
 			AppManager.hideApp(AppConstant.BATTLE_D1V1_HEAD_PANEL);
+			AppManager.showApp(AppConstant.BATTLE_D1V1_RESULT_PANEL,msg);
 		}
 		public function SCQuitRaceResultHandler(msg:SCQuitRaceResultMessage):void
 		{
@@ -140,12 +141,21 @@ package com.rpgGame.app.manager
 		 * @return 
 		 * 
 		 */		
-		public function getRankIconUrl(ranklv:int,size:Boolean):String
+		public function getRankIconUrl(ranklv:int,size:int):String
 		{
 			var qRank:Q_battle_rank=BattleRankCfg.getRank(ranklv);
 			if (qRank) 
 			{
-				
+				var resId:int=1000+qRank.q_rank/1000;
+				if (0==size) 
+				{
+					return "ui/app/zhanchang/icon/"+resId+"_max.png"
+				}
+				else if (1==size) 
+				{
+					return "ui/app/zhanchang/icon/"+resId+"_min.png"
+				}
+				return "ui/app/zhanchang/icon/"+resId+"_24.png"
 			}
 			return "";
 		}

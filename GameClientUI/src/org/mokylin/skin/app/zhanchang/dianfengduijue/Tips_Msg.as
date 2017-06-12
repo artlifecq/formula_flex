@@ -65,7 +65,7 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			temp.leading = 7;
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 370;
+			temp.width = 390;
 			temp.x = 8;
 			temp.y = 49;
 			return temp;
@@ -78,7 +78,7 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			temp.name = "bg";
 			temp.height = 96;
 			temp.styleName = "ui/common/tips/tips_2.png";
-			temp.width = 389;
+			temp.width = 398;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

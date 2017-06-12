@@ -44,9 +44,12 @@ package com.rpgGame.appModule.battle.dfdj
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,StarlingLayerManager.topUILayer);
-			_endTime=getTimer()+int(data);
+			_endTime=getTimer()+int(data)*1000;
 			_timer.start();
 		}
-		
+		override protected function onHide():void
+		{
+			_timer.stop();
+		}
 	}
 }

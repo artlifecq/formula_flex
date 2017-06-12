@@ -1,9 +1,15 @@
 package com.rpgGame.appModule.battle.dfdj
 {
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.coreData.cfg.BattleRankCfg;
 	
+	import feathers.controls.SkinnableContainer;
+	
+	import org.mokylin.skin.app.zhanchang.dianfengduijue.DuanWeiList_Head;
 	import org.mokylin.skin.app.zhanchang.dianfengduijue.DuanWeiPaiHang_Skin;
+	
+	import starling.display.DisplayObject;
 	
 	public class D1v1RankConfigPanelExt extends SkinUIPanel
 	{
@@ -15,11 +21,11 @@ package com.rpgGame.appModule.battle.dfdj
 			_skin=new DuanWeiPaiHang_Skin();
 			super(_skin);
 			//写死吧只有这个id不会变
-			_skin.skinDuan1.userData=1000;
-			_skin.skinDuan1.userData=2000;
-			_skin.skinDuan1.userData=3000;
-			_skin.skinDuan1.userData=4000;
-			_skin.skinDuan1.userData=5000;
+			setLeftRankData(_skin.skinDuan1,1000);
+			setLeftRankData(_skin.skinDuan2,2000);
+			setLeftRankData(_skin.skinDuan3,3000);
+			setLeftRankData(_skin.skinDuan4,4000);
+			setLeftRankData(_skin.skinDuan5,5000);
 			
 			_cellList=new Vector.<D1v1ConfigCell>();
 			_cellList.push(new D1v1ConfigCell(_skin.skinItem1));
@@ -28,6 +34,35 @@ package com.rpgGame.appModule.battle.dfdj
 			_cellList.push(new D1v1ConfigCell(_skin.skinItem4));
 			_cellList.push(new D1v1ConfigCell(_skin.skinItem5));
 			
+		}
+		
+		private function setLeftRankData(s:SkinnableContainer,rankId:int):void
+		{
+			s.userData=rankId;
+			var tmps:DuanWeiList_Head=s.skin as DuanWeiList_Head;
+			tmps.uiIcon.styleName=Mgr.d1v1Mgr.getRankIconUrl(rankId+1,1);
+			tmps.uiName.styleName="ui/app/zhanchang/dianfengduijue/name/"+rankId/1000+".png";
+		}
+		override protected function onTouchTarget(target:DisplayObject):void
+		{
+			super.onTouchTarget(target);
+			switch(target.parent)
+			{
+				case _skin.skinDuan1:
+				case _skin.skinDuan2:
+				case _skin.skinDuan3:
+				case _skin.skinDuan4:
+				case _skin.skinDuan5:
+				{
+					showRank((target.parent as SkinnableContainer).userData)
+					break;
+				}
+					
+				default:
+				{
+					break;
+				}
+			}
 		}
 		override protected function onHide():void
 		{
@@ -52,6 +87,7 @@ package com.rpgGame.appModule.battle.dfdj
 			{
 				throw new Error("巅峰对决配置和xml长度不一致");
 			}
+			arr.sortOn("q_subrank_id");
 			var len:int=arr.length;
 			for (var i:int = 0; i < len; i++) 
 			{

@@ -436,5 +436,7 @@ package com.rpgGame.core.app
 		public static var BATTLE_D1V1_LEVEL_UP_PANEL:String = createAppInfo("battle.dfdj.D1v1RankConfigPanelExt","zhanchang");
 		/**巅峰头像**/
 		public static var BATTLE_D1V1_HEAD_PANEL:String = createAppInfo("battle.dfdj.D1v1HeadPanelExt","zhanchang");
+		/**1v1战斗结束**/
+		public static var BATTLE_D1V1_RESULT_PANEL:String = createAppInfo("battle.dfdj.D1v1FightResultPanelExt","zhanchang");
 	}
 }

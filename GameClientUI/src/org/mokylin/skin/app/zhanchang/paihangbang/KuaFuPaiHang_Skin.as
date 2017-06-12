@@ -414,7 +414,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiLevel = temp;
 			temp.name = "uiLevel";
-			temp.styleName = "ui/app/zhanchang/icon/huangjinyijie_xiao.png";
+			temp.styleName = "ui/app/zhanchang/icon/1001_min.png";
 			temp.x = -48;
 			temp.y = 458;
 			return temp;

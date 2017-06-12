@@ -9,6 +9,7 @@ package com.rpgGame.appModule.battle.dfdj
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.coreData.cfg.BattleRankCfg;
 	import com.rpgGame.coreData.clientConfig.Q_battle_rank;
 	import com.rpgGame.coreData.type.CharAttributeType;
@@ -29,7 +30,7 @@ package com.rpgGame.appModule.battle.dfdj
 			super(_skin);
 		
 			TipTargetManager.show( _skin.btnMsg, TargetTipsMaker.makeTips( TipType.D1V1_TIP,null));
-			TipTargetManager.show(_skin.icon,TargetTipsMaker.makeTips(TipType.D1V1_RANK_TIP,{}));
+			TipTargetManager.show(_skin.icon,TargetTipsMaker.makeTips(TipType.D1V1_RANK_TIP,new DynamicTipData()));
 		}
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
@@ -94,7 +95,7 @@ package com.rpgGame.appModule.battle.dfdj
 			_skin.lbDuanwei.text=score+"/"+qRank.q_score;
 			var per:Number=score/qRank.q_score;
 			_skin.Pro_duanwei.value=per*100;
-			//_skin.icon.styleName
+			_skin.icon.styleName=Mgr.d1v1Mgr.getRankIconUrl(rank,0);
 			
 			_skin.numCishu.label=data.currentNumber+"";
 		}

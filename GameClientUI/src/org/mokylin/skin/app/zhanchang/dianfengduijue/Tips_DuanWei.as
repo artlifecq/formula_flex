@@ -205,7 +205,7 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiIcon2 = temp;
 			temp.name = "uiIcon2";
-			temp.styleName = "ui/app/zhanchang/icon/huangjinyijie_24.png";
+			temp.styleName = "ui/app/zhanchang/icon/1001_24.png";
 			temp.x = 3;
 			temp.y = 0;
 			return temp;
@@ -216,7 +216,7 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiIcon = temp;
 			temp.name = "uiIcon";
-			temp.styleName = "ui/app/zhanchang/icon/huangjinyijie_24.png";
+			temp.styleName = "ui/app/zhanchang/icon/1001_24.png";
 			temp.x = 15;
 			temp.y = 37;
 			return temp;

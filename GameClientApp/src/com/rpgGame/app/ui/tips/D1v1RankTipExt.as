@@ -35,7 +35,7 @@ package com.rpgGame.app.ui.tips
 			_skin=new Tips_DuanWei();
 			super(_skin);
 			_rewardNow=new RewardGroup(_skin.icon1,RewardGroup.ALIN_LEFT,10,2,2,false);
-			_rewardNext=new RewardGroup(_skin.icon1,RewardGroup.ALIN_LEFT,10,2,2,false);
+			_rewardNext=new RewardGroup(_skin.icon2,RewardGroup.ALIN_LEFT,10,2,2,false);
 		}
 	
 		public function setTipData(data:*):void
@@ -53,7 +53,7 @@ package com.rpgGame.app.ui.tips
 			{
 				_skin.lbCurrent.text=qRank.q_subrank_name;
 				_rewardNow.setRewardByJsonStr(qRank.q_reward);
-				
+				_skin.uiIcon.styleName=Mgr.d1v1Mgr.getRankIconUrl(curRank,2);
 				var next:Q_battle_rank=BattleRankCfg.getRank(qRank.q_next_subrank);
 				if (next) 
 				{
@@ -61,6 +61,7 @@ package com.rpgGame.app.ui.tips
 					_skin.lbXiaJie.text="【下一阶段位】";
 					_skin.lbNext.text=next.q_subrank_name;
 					_rewardNext.setRewardByJsonStr(next.q_reward);
+					_skin.uiIcon2.styleName=Mgr.d1v1Mgr.getRankIconUrl(qRank.q_next_subrank,2);
 				}
 				else
 				{

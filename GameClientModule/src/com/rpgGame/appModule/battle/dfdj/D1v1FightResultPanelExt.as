@@ -54,7 +54,7 @@ package com.rpgGame.appModule.battle.dfdj
 			var qRank:Q_battle_rank=BattleRankCfg.getRank(msg.level);
 			_skin.uiIcon.styleName=Mgr.d1v1Mgr.getRankIconUrl(msg.level,2);
 			_skin.uiLevel.styleName=Mgr.d1v1Mgr.getRankName(msg.level,true);
-			var per:Number=msg.currentIntegral/qRank.q_score;
+			var per:Number=msg.currentIntegral/qRank.q_score*100;
 			_skin.proBar.value=per;
 			if (!_timer) 
 			{

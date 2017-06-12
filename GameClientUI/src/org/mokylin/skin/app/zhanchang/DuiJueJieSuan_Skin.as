@@ -272,7 +272,7 @@ package org.mokylin.skin.app.zhanchang
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiIcon = temp;
 			temp.name = "uiIcon";
-			temp.styleName = "ui/app/zhanchang/icon/huangjinyijie_24.png";
+			temp.styleName = "ui/app/zhanchang/icon/1001_24.png";
 			temp.x = 193;
 			temp.y = 263;
 			return temp;

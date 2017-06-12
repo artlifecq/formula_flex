@@ -48,7 +48,7 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiIcon = temp;
 			temp.name = "uiIcon";
-			temp.styleName = "ui/app/zhanchang/icon/huangjinyijie_xiao.png";
+			temp.styleName = "ui/app/zhanchang/icon/1001_min.png";
 			temp.x = 8;
 			temp.y = 0;
 			return temp;

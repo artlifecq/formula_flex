@@ -107,7 +107,7 @@ package org.mokylin.skin.app.zhanchang
 			temp.name = "numTime";
 			temp.gap = -6;
 			temp.height = 60;
-			temp.label = "52";
+			temp.label = "60";
 			temp.styleClass = org.mokylin.skin.app.zhanchang.uinumber.UINumberNumkuafu;
 			temp.width = 102;
 			temp.x = 158;
