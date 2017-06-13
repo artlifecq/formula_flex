@@ -113,7 +113,7 @@ package  com.rpgGame.app.graphics.decor
 		
 		public function sortLevelList():void
 		{
-			sortList.sortOn( "sortLevel", Array.NUMERIC|Array.DESCENDING ); 
+			sortList.sortOn( "sortLevel", Array.NUMERIC); 
 			layout();
 		}
 		
@@ -149,7 +149,7 @@ package  com.rpgGame.app.graphics.decor
 			offsetX = value;
 		}
 		
-		public function layout(gap:int = 4):void
+		public function layout(gap:int = 2):void
 		{
 			var i:int;
 			var length:int = sortList.length;

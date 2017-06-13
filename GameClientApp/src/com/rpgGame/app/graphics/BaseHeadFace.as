@@ -42,6 +42,9 @@ package com.rpgGame.app.graphics
 		public function BaseHeadFace()
 		{
 			super();
+//			this.graphics.beginFill(0);
+//			this.graphics.drawRect(0,0,30,30);
+//			this.graphics.endFill();
 			_isDestroyed = false;
 			deCtrl=new DecorCtrl(this);
 		}
@@ -224,7 +227,7 @@ package com.rpgGame.app.graphics
 //			updateTranform();
 //		}
 		
-		final protected function addElement(element : DisplayObject) : void
+		final protected function addElement(element : DisplayObject,sortLevel:int=-1) : void
 		{
 			if (element == null)
 				return;
@@ -232,8 +235,8 @@ package com.rpgGame.app.graphics
 			{
 				trace("!!!!!!!!addElement", (element as UIAsset).styleName);
 			}
-			//deCtrl.addTop(element);
-			this.addChild(element);
+			deCtrl.addTop(element,sortLevel);
+			//this.addChild(element);
 		}
 		
 		final protected function removeElement(element : DisplayObject) : void
@@ -244,9 +247,9 @@ package com.rpgGame.app.graphics
 			{
 				trace("!!!!!!!!removeElement", (element as UIAsset).styleName);
 			}
-			//deCtrl.removeTop(element);
+			deCtrl.removeTop(element);
 			//
-			this.removeChild(element);
+			//this.removeChild(element);
 		}
 		
 		//-----------------------------------------------------
@@ -256,13 +259,13 @@ package com.rpgGame.app.graphics
 		 * @param isShow
 		 *
 		 */
-		final protected function showAndHideElement(element : DisplayObject, isShow : Boolean) : void
+		final protected function showAndHideElement(element : DisplayObject, isShow : Boolean,sortLevel:int=-1) : void
 		{
 			if (element == null)
 				return;
 			
 			//			element.visible = isShow;
-			isShow ? addElement(element) : removeElement(element)
+			isShow ? addElement(element,sortLevel) : removeElement(element)
 		}
 		
 		/**
@@ -337,6 +340,7 @@ package com.rpgGame.app.graphics
 			_bodyRu = null;
 			_role = null;
 			_isDisposed = true;
+			deCtrl.removeAll();
 		}
 		/**
 		 * 销毁自身，需要重写 

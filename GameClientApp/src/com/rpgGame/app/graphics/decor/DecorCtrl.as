@@ -30,8 +30,10 @@ package  com.rpgGame.app.graphics.decor
 		public static const CONTAINER_WIDTH :int = 200;
 		public static const CONTAINER_HEIGHT :int = 0;
 		
-		public static const TOP_HPMP :int = 1;
-		public static const TOP_NAME :int = 2;
+		private static var SORT_VALUE:int=100;
+		
+		public static const TOP_HPMP :int = SORT_VALUE--;
+		public static const TOP_NAME :int = SORT_VALUE--;
 
 		
 		private var topLayer :SortLayer = null;
