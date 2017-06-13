@@ -93,35 +93,11 @@ package com.rpgGame.app.view.icon
 				return;
 			switch(_iconSize)
 			{
+				case IcoSizeEnum.ICON_36:
+				case IcoSizeEnum.ICON_42:
+				case IcoSizeEnum.ICON_48:
+				case IcoSizeEnum.ICON_64:
 				case  IcoSizeEnum.ICON_42:
-						_iconImage.x = 1;
-						_iconImage.y = 1;
-					break;
-				case  IcoSizeEnum.SIZE_40:
-					if( posx != 0 || posy != 0 )
-					{
-						_iconImage.x = posx;
-						_iconImage.y = posy;
-					}
-					else
-					{
-						_iconImage.x = 0;
-						_iconImage.y = 0;
-					}
-					break;
-				case  IcoSizeEnum.ICON_48:
-					if( posx != 0 || posy != 0 )
-					{
-						_iconImage.x = posx;
-						_iconImage.y = posy;
-					}
-					else
-					{
-						_iconImage.x = 0;
-						_iconImage.y = 0;
-					}
-					break;
-				case  IcoSizeEnum.ICON_64:
 					if( posx != 0 || posy != 0 )
 					{
 						_iconImage.x = posx;

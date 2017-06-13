@@ -109,6 +109,7 @@ package org.mokylin.skin.app.zhanchang
 			temp.height = 60;
 			temp.label = "60";
 			temp.styleClass = org.mokylin.skin.app.zhanchang.uinumber.UINumberNumkuafu;
+			temp.textAlign = "center";
 			temp.width = 102;
 			temp.x = 158;
 			temp.y = 45;

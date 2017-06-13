@@ -2,10 +2,12 @@
 {
 	
 	
+	import com.rpgGame.app.fight.spell.time.TimeDelay;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.core.utils.MCUtil;
 	
 	import flash.geom.Point;
+	import flash.utils.Dictionary;
 	import flash.utils.getTimer;
 	
 	import gs.TimelineLite;
@@ -16,6 +18,7 @@
 	import gs.easing.Quart;
 	import gs.easing.Sine;
 	
+	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	
 	
@@ -27,6 +30,7 @@
 		private static var startPos:Point=new Point();
 		private static var endPos:Point=new Point();
 		private static const BASE_DIS:int=200;
+		private static var _timeDic:Dictionary;
 		public function SpellResultTweenUtil()
 		{
 		}
@@ -90,6 +94,22 @@
 			}
 			return "+";
 		}
+		initTime();
+		public static function initTime():void
+		{
+			_timeDic=new Dictionary();
+			_timeDic[TweenAttrChange]=new TimeDelay("attr");
+			_timeDic[TweenCirt]=new TimeDelay("cirt");
+			_timeDic[TweenExp]=new TimeDelay("exp");
+			_timeDic[TweenHurt]=new TimeDelay("hurt");
+			_timeDic[TweenDiaoXue]=new TimeDelay("diaoxue");
+			_timeDic[TweenZhanHun]=new TimeDelay("zhanhun");
+			_timeDic[TweenZhiLiao1]=new TimeDelay("zhiliao");
+			_timeDic[TweenHits]=new TimeDelay("hit");
+			_timeDic[TweenShanBi]=new TimeDelay("shanbi");
+			_timeDic[TweenXiShou]=new TimeDelay("xishou");
+			_timeDic[TweenHead]=new TimeDelay("head");
+		}
 		//暴击
 		public static function TweenCirt(showobj:DisplayObject,start:Point, end:Point,callBack:Function):void
 		{
@@ -112,14 +132,21 @@
 			calEndPos(start,end,160,true);
 			//trace(endPos.x,endPos.y)
 			var myTimeline:TimelineLite;
-			myTimeline = new TimelineLite({delay:timeDelay,onComplete:callBack,onCompleteParams:[showobj],autoRemoveChildren:true});
+			myTimeline = new TimelineLite({delay:timeDelay(TweenCirt),onComplete:callBack,onCompleteParams:[showobj],autoRemoveChildren:true});
 			myTimeline.append(new TweenLite(showobj, 0.25, {x:endPos.x,y:endPos.y,ease:Quart.easeOut}));//,ease:Expo.easeOut
 			myTimeline.addLabel("alpha1", 0);
 			myTimeline.insert(new TweenLite(showobj, 0.2, {alpha:1,scaleX:0.9,scaleY:0.9}), "alpha1");
 			//trace(pmX+"60",showobj.x,endPos.x);
 			myTimeline.append(new TweenLite(showobj, 0.3, {delay:0.05,alpha:0,scaleX:0.85,scaleY:0.85,x:pmX+"60",y:pmY+"60",ease:Quart.easeIn}));
 		}
-
+		private  static function timeDelay(func:Function):int
+		{
+			return (_timeDic[func] as TimeDelay).timeDelay;
+		}
+		private  static function timeIndex(func:Function):int
+		{
+			return (_timeDic[func] as TimeDelay).getAttrChangeIndex();
+		}
 		//经验
 		public static function TweenExp(showobj:DisplayObject,start:Point, end:Point,callBack:Function):void
 		{
@@ -133,9 +160,9 @@
 			showobj.y=start.y-50;
 			showobj.alpha=0;
 			showobj.scaleX=showobj.scaleY=0.7;
-			var i:int=getAttrChangeIndex();
+			
 			var myTimeline:TimelineLite;
-			myTimeline = new TimelineLite({delay:timeDelay,onComplete:callBack,onCompleteParams:[showobj]});
+			myTimeline = new TimelineLite({delay:timeDelay(TweenExp),onComplete:callBack,onCompleteParams:[showobj]});
 			myTimeline.append(new TweenLite(showobj, 0.7, {y:start.y-150,ease:Quart.easeOut}));//,ease:Expo.easeOut
 			myTimeline.addLabel("alpha1", 0);
 			myTimeline.addLabel("alpha0", 0.5);
@@ -178,7 +205,7 @@
 			}
 			
 			var myTimeline:TimelineLite;
-			myTimeline = new TimelineLite({delay:timeDelay,onComplete:callBack,onCompleteParams:[showobj]});
+			myTimeline = new TimelineLite({delay:timeDelay(TweenHurt),onComplete:callBack,onCompleteParams:[showobj]});
 			myTimeline.append(new TweenLite(showobj, 0.7, {x:endPos.x,y:endPos.y,ease:Expo.easeOut}));//,ease:Expo.easeOut
 			myTimeline.addLabel("alpha1", 0);
 			//myTimeline.addLabel("alpha0", 0.6);
@@ -203,7 +230,7 @@
 			var pmY:String=calYPM(start,end);
 			calEndPos(start,end,70);
 			var myTimeline:TimelineLite;
-			myTimeline = new TimelineLite({delay:timeDelay,onComplete:callBack,onCompleteParams:[showobj]});
+			myTimeline = new TimelineLite({delay:timeDelay(TweenDiaoXue),onComplete:callBack,onCompleteParams:[showobj]});
 			myTimeline.append(new TweenLite(showobj, 0.7, {x:start.x+60,ease:Expo.easeOut}));
 			myTimeline.addLabel("alpha1", 0);
 			myTimeline.addLabel("alpha0", 0.4);
@@ -228,7 +255,7 @@
 			var pmY:String=calYPM(start,end);
 			calEndPos(start,end,70);
 			var myTimeline:TimelineLite;
-			myTimeline = new TimelineLite({delay:timeDelay,onComplete:callBack,onCompleteParams:[showobj]});
+			myTimeline = new TimelineLite({delay:timeDelay(TweenZhanHun),onComplete:callBack,onCompleteParams:[showobj]});
 			myTimeline.append(new TweenLite(showobj, 0.7, {y:end.y-80,ease:Expo.easeOut}));
 			myTimeline.addLabel("alpha1", 0);
 			myTimeline.addLabel("alpha0", 0.5);
@@ -250,7 +277,7 @@
 			showobj.y=start.y;
 			showobj.alpha=0;
 			showobj.scaleX=showobj.scaleY=0.35;
-			myTimeline = new TimelineLite({delay:timeDelay,onComplete:callBack,onCompleteParams:[showobj]});
+			myTimeline = new TimelineLite({delay:timeDelay(TweenZhiLiao1),onComplete:callBack,onCompleteParams:[showobj]});
 			myTimeline.append(new TweenLite(showobj, 0.70, {y:start.y-140,ease:Sine.easeOut}));
 			myTimeline.addLabel("alpha1", 0);
 			myTimeline.addLabel("alpha0", 0.3);
@@ -275,7 +302,7 @@
 			showobj.y=start.y-100;
 			showobj.alpha=0;
 			showobj.scaleX=showobj.scaleY=0.55;
-			myTimeline = new TimelineLite({delay:timeDelay,onComplete:callBack,onCompleteParams:[showobj]});
+			myTimeline = new TimelineLite({delay:timeDelay(TweenZhiLiao1),onComplete:callBack,onCompleteParams:[showobj]});
 			myTimeline.append(new TweenLite(showobj, 0.70, {x:start.x,ease:Sine.easeOut}));
 			myTimeline.addLabel("alpha1", 0);
 			myTimeline.addLabel("alpha0", 0.3);
@@ -301,7 +328,7 @@
 			var pmY:String=calYPM(start,end);
 			calEndPos(start,end,70);
 			var myTimeline:TimelineLite;
-			myTimeline = new TimelineLite({delay:timeDelay,onComplete:callBack,onCompleteParams:[showobj]});
+			myTimeline = new TimelineLite({delay:timeDelay(TweenHits),onComplete:callBack,onCompleteParams:[showobj]});
 			myTimeline.append(new TweenLite(showobj, 0.7, {y:end.y-90,ease:Linear.easeOut}));
 			myTimeline.addLabel("alpha1", 0);
 			myTimeline.addLabel("alpha0", 0.4);
@@ -324,7 +351,7 @@
 			
 		
 			var myTimeline:TimelineLite;
-			myTimeline = new TimelineLite({delay:timeDelay,onComplete:callBack,onCompleteParams:[showobj]});
+			myTimeline = new TimelineLite({delay:timeDelay(TweenShanBi),onComplete:callBack,onCompleteParams:[showobj]});
 			myTimeline.append(new TweenLite(showobj, 0.7, {y:start.y-90,ease:Linear.easeNone}));
 			myTimeline.addLabel("alpha1", 0);
 			myTimeline.addLabel("alpha0", 0.4);
@@ -347,7 +374,7 @@
 			showobj.y=start.y+20;
 			showobj.alpha=0;
 			showobj.scaleX=showobj.scaleY=0.6;
-			myTimeline = new TimelineLite({delay:timeDelay,onComplete:callBack,onCompleteParams:[showobj]});
+			myTimeline = new TimelineLite({delay:timeDelay(TweenXiShou),onComplete:callBack,onCompleteParams:[showobj]});
 			var _dir:int=1;
 			if(_dir==0)
 			{
@@ -380,7 +407,7 @@
 			showobj.y=start.y+20;
 			showobj.alpha=0;
 			showobj.scaleX=showobj.scaleY=0.35;
-			myTimeline = new TimelineLite({delay:timeDelay,onComplete:callBack,onCompleteParams:[showobj]});
+			myTimeline = new TimelineLite({delay:timeDelay(TweenXiShou),onComplete:callBack,onCompleteParams:[showobj]});
 			myTimeline.append(new TweenLite(showobj, 0.7, {y:start.y-140,ease:Sine.easeOut}));
 			myTimeline.addLabel("alpha1", 0);
 			myTimeline.addLabel("alpha0", 0.3);
@@ -406,7 +433,7 @@
 			showobj.y=start.y-90;
 			showobj.alpha=0;
 			showobj.scaleX=showobj.scaleY=0.65;
-			myTimeline = new TimelineLite({delay:timeDelay,onComplete:callBack,onCompleteParams:[showobj]});
+			myTimeline = new TimelineLite({delay:timeDelay(TweenXiShou),onComplete:callBack,onCompleteParams:[showobj]});
 			myTimeline.append(new TweenLite(showobj, 0.7, {x:start.x,ease:Sine.easeOut}));
 			myTimeline.addLabel("alpha1", 0);
 			myTimeline.addLabel("alpha0", 0.4);
@@ -433,7 +460,7 @@
 			showobj.y=start.y-50;
 			showobj.alpha=0;
 			showobj.scaleX=showobj.scaleY=0.65;
-			myTimeline = new TimelineLite({delay:timeDelay,onComplete:callBack,onCompleteParams:[showobj]});
+			myTimeline = new TimelineLite({delay:timeDelay(TweenXiShou),onComplete:callBack,onCompleteParams:[showobj]});
 			myTimeline.append(new TweenLite(showobj, 0.7, {x:start.x+40,ease:Expo.easeOut}));
 			myTimeline.addLabel("alpha1", 0);
 			myTimeline.insert(new TweenLite(showobj, 0.2, {alpha:1,scaleX:0.7,scaleY:0.7,ease:Expo.easeOut}), "alpha1");
@@ -455,35 +482,14 @@
 			showobj.scaleX=showobj.scaleY=0.8;
 			
 			var myTimeline:TimelineLite;
-			myTimeline = new TimelineLite({delay:timeDelay,onComplete:callBack,onCompleteParams:[showobj]});
+			myTimeline = new TimelineLite({delay:timeDelay(TweenHead),onComplete:callBack,onCompleteParams:[showobj]});
 			myTimeline.append(new TweenLite(showobj, 0.7, {x:start.x-90,ease:Linear.easeOut}));
 			myTimeline.addLabel("alpha1", 0);
 			myTimeline.addLabel("alpha0", 0.4);
 			myTimeline.insert(new TweenLite(showobj, 0.3, {alpha:1,y:start.y-140,scaleX:1.0,scaleY:1.0,ease:Expo.easeOut}), "alpha1");
 			myTimeline.insert(new TweenLite(showobj, 0.3, {alpha:0,y:start.y-110,scaleX:0.9,scaleY:0.9,ease:Sine.easeIn}), "alpha0");//,ease:Sine.easeIn
 		}
-		private static function get timeDelay():Number
-		{
-			return 0.05*getAttrChangeIndex();
-		}
-		private static var lastTime:int;
-		private static var index:int;
-		private static function getAttrChangeIndex():int
-		{
-			var now:int=getTimer();
-			if(now-lastTime>1500)
-			{
-				index=0;
-				lastTime=now;
-				return index;
-				
-			}
-			else
-			{
-				index++;
-				return index;
-			}
-		}
+		
 		//属性
 		public static function TweenAttrChange(showobj:DisplayObject,start:Point, end:Point,callBack:Function):void
 		{
@@ -491,8 +497,10 @@
 			{
 				return;
 			}
+			start.x=Starling.current.nativeStage.stageWidth/2;
+			start.y=Starling.current.nativeStage.stageHeight/2;
 			showobj.x=start.x;
-			var i:int=getAttrChangeIndex();
+			var i:int=timeIndex(TweenAttrChange);
 			showobj.y=start.y+28*i+20;
 			showobj.alpha=0.0;
 			showobj.scaleX=showobj.scaleY=0.7;

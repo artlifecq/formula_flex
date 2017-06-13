@@ -35,7 +35,18 @@ package com.rpgGame.appModule.battle.dfdj
 		public function setMyRank(rank:int):void
 		{
 			// TODO Auto Generated method stub
-			_skin.numZhanli.label=rank+"";
+			
+			if (rank>100||rank<1) 
+			{
+				_skin.grpPaihang.visible=false;
+				_skin.uiWRB.visible=true;
+			}
+			else
+			{
+				_skin.grpPaihang.visible=true;
+				_skin.numZhanli.label=rank+"";
+				_skin.uiWRB.visible=false;
+			}
 		}
 		public function setData():void
 		{

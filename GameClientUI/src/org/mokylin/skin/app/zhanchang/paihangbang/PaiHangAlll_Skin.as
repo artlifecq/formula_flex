@@ -23,7 +23,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 		//==========================================================================
 		public var bg:feathers.controls.UIAsset;
 
-		public var grpdi:feathers.controls.Group;
+		public var grpPaihang:feathers.controls.Group;
 
 		public var imgDi:feathers.controls.UIAsset;
 
@@ -35,6 +35,8 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 
 		public var title:feathers.controls.Label;
 
+		public var uiWRB:feathers.controls.UIAsset;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -45,7 +47,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			
 			this.currentState = "normal";
 			this.height = 555;
-			this.elementsContent = [bg_i(),title_i(),listItem_i(),grpdi_i()];
+			this.elementsContent = [bg_i(),title_i(),listItem_i(),__PaiHangAlll_Skin_UIAsset1_i(),__PaiHangAlll_Skin_UIAsset2_i(),grpPaihang_i(),uiWRB_i()];
 			
 			states = {
 			};
@@ -60,8 +62,8 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/paihangbang/bg2.png";
-			temp.x = 0;
-			temp.y = 0;
+			temp.x = 9;
+			temp.y = 446;
 			return temp;
 		}
 
@@ -69,8 +71,8 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/paihangbang/wodepaihang.png";
-			temp.x = 67;
-			temp.y = 11;
+			temp.x = 76;
+			temp.y = 457;
 			return temp;
 		}
 
@@ -87,14 +89,14 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			return temp;
 		}
 
-		private function grpdi_i():feathers.controls.Group
+		private function grpPaihang_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
-			grpdi = temp;
-			temp.name = "grpdi";
-			temp.x = 9;
-			temp.y = 446;
-			temp.elementsContent = [__PaiHangAlll_Skin_UIAsset1_i(),__PaiHangAlll_Skin_UIAsset2_i(),imgMing_i(),numZhanli_i(),imgDi_i()];
+			grpPaihang = temp;
+			temp.name = "grpPaihang";
+			temp.x = 107;
+			temp.y = 493;
+			temp.elementsContent = [imgMing_i(),numZhanli_i(),imgDi_i()];
 			return temp;
 		}
 
@@ -104,8 +106,8 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			imgDi = temp;
 			temp.name = "imgDi";
 			temp.styleName = "ui/app/zhanchang/jingjichang/di2.png";
-			temp.x = 98;
-			temp.y = 47;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -115,8 +117,8 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			imgMing = temp;
 			temp.name = "imgMing";
 			temp.styleName = "ui/app/zhanchang/jingjichang/ming2.png";
-			temp.x = 196;
-			temp.y = 47;
+			temp.x = 98;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -140,12 +142,12 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.name = "numZhanli";
 			temp.gap = -2;
 			temp.height = 25;
-			temp.label = "1";
+			temp.label = "2000";
 			temp.styleClass = org.mokylin.skin.app.zhanchang.uinumber.UINumberNumber3;
 			temp.textAlign = "center";
 			temp.width = 76;
-			temp.x = 124;
-			temp.y = 47;
+			temp.x = 26;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -166,6 +168,17 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.width = 240;
 			temp.x = 49;
 			temp.y = 11;
+			return temp;
+		}
+
+		private function uiWRB_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiWRB = temp;
+			temp.name = "uiWRB";
+			temp.styleName = "ui/app/zhanchang/paihangbang/weirubang.png";
+			temp.x = 130;
+			temp.y = 495;
 			return temp;
 		}
 

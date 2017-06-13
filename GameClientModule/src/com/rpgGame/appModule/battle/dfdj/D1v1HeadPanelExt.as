@@ -67,7 +67,7 @@ package com.rpgGame.appModule.battle.dfdj
 			super.show(data,openTable,StarlingLayerManager.topUILayer);
 			//两分钟
 			_endTime=getTimer()+2*60*1000;
-			var str:String=TextUtil.SecondToHMS2(2*60*1000);
+			var str:String=TextUtil.SecondToHMS2(2*60).replace(/ :/g,"x");
 			_skin.uiTime.label=str;
 			
 			var msg:SCReadyToStartMessage=data;

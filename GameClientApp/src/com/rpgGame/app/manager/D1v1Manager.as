@@ -91,7 +91,8 @@ package com.rpgGame.app.manager
 		public function SCReadyToLoadHandler(msg:SCReadyToLoadMessage):void
 		{
 			// TODO Auto Generated method stub
-			AppManager.hideApp(AppConstant.BATTLE_D1V1_MATCH_PANEL);
+			//AppManager.hideApp(AppConstant.BATTLE_D1V1_MATCH_PANEL);
+			EventManager.dispatchEvent(D1v1Event.MATCH_OK,msg.delayTime);
 		}
 		public function SCReadyToStartHandler(msg:SCReadyToStartMessage):void
 		{
@@ -143,7 +144,9 @@ package com.rpgGame.app.manager
 			if (msg.result==1) 
 			{
 				EventManager.dispatchEvent(D1v1Event.QUIT_FB_RESULT);
+				EventManager.dispatchEvent(ActivityEvent.SHOW_HIDE_ALL,true);
 			}
+			
 		}
 		public function get data():DianFengDataInfo
 		{

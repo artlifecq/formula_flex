@@ -5,9 +5,11 @@ package com.rpgGame.app.graphics
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.rpgGame.app.display2D.AttackFace;
 	import com.rpgGame.app.graphics.decor.DecorCtrl;
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.utils.HeadBloodUtil;
+	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.JunJieData;
 	import com.rpgGame.coreData.cfg.StaticValue;
@@ -110,7 +112,7 @@ package com.rpgGame.app.graphics
 		/**头顶鲜花显示的坐标*/
 		public var flowerY : int = 0;
 		private var showBloodTween:TweenLite;
-		
+		private var _teamCaptainFlag:UIAsset;
 		public function HeadFace(role : SceneRole)
 		{
 			super();
@@ -292,6 +294,7 @@ package com.rpgGame.app.graphics
 				}
 				showAndHideElement(_title, !_isCamouflage);
 				showAndHideElement(_office, !_isCamouflage);
+				updateTeamFlag(Mgr.teamMgr.isMyCaptian(HeroData(_role.data).serverID));
 			}
 			showAndHideElement(_junXianBar, _nameBar && _nameBar.parent && _nameBar.visible);
 			//			showAndHideElement(_countryNameBar, _nameBar && _nameBar.parent && _nameBar.visible);
@@ -1167,6 +1170,33 @@ package com.rpgGame.app.graphics
 				showBloodTween=null;
 			}
 			showAndHideElement(_bloodBar,false,DecorCtrl.TOP_HPMP);
+		}
+		
+		public function updateTeamFlag(bShow:Boolean):void
+		{
+			if (bShow) 
+			{
+				if (!_teamCaptainFlag) 
+				{
+					_teamCaptainFlag=new UIAsset();
+					_teamCaptainFlag.styleName="ui/mainui/head/duiyou.png";
+					_teamCaptainFlag.x=-22;
+					_teamCaptainFlag.y=6;
+				}
+				if (_bloodBar) 
+				{
+					_bloodBar.addChild(_teamCaptainFlag);
+					//deCtrl.sortTop();
+				}
+			}
+			else 
+			{
+				if (_teamCaptainFlag&&_teamCaptainFlag.parent) 
+				{
+					MCUtil.removeSelf(_teamCaptainFlag);
+				//	deCtrl.sortTop();
+				}
+			}
 		}
 	}
 }

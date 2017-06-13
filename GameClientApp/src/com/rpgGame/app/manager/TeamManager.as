@@ -1,7 +1,9 @@
 package com.rpgGame.app.manager
 {
+	import com.game.engine3D.manager.SceneMapDataManager;
 	import com.game.engine3D.utils.MathUtil;
 	import com.gameClient.utils.HashMap;
+	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.friend.FriendManager;
 	import com.rpgGame.app.manager.map.MapUnitDataManager;
@@ -169,6 +171,14 @@ package com.rpgGame.app.manager
 				return false;
 			}
 			return _teamMemberMap.containsKey(playerId.ToGID());
+		}
+		public function isMyCaptian(player:long):Boolean
+		{
+			if (!hasTeam) 
+			{
+				return false;
+			}
+			return getPlayerIsCaptain(player);
 		}
 		/**
 		 * 
@@ -350,7 +360,16 @@ package com.rpgGame.app.manager
 			SetTeamInfoMap( _teamInfo );
 			DispatchEvent( TeamEvent.GET_TEAM_INFO , _teamInfo , isCreated , isDismiss);
 			MapUnitDataManager.updataTeammate(teamInfo);
-	
+			updateTeamFlag();
+		}
+		private function updateTeamFlag():void
+		{
+			var players:Vector.<SceneRole> = SceneManager.getScenePlayerList();
+			for each (var tp:SceneRole in players) 
+			{
+				HeadFace(tp.headFace).updateTeamFlag(isMyCaptian((tp.data as HeroData).serverID));
+			}
+			
 		}
 		private var recommandTimeoutId:int;
 		private function CheckRecommandAddFriend():void

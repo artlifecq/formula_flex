@@ -1,5 +1,7 @@
 package com.rpgGame.appModule.battle.jjzb
 {
+	import com.game.engine3D.display.Inter3DContainer;
+	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -14,11 +16,13 @@ package com.rpgGame.appModule.battle.jjzb
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.utils.GameColorUtil;
 	import com.rpgGame.core.utils.MCUtil;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.enum.EnumShopType;
 	import com.rpgGame.coreData.info.shop.ShopItemVo;
 	import com.rpgGame.coreData.type.CharAttributeType;
+	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.ShopType;
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
@@ -53,6 +57,7 @@ package com.rpgGame.appModule.battle.jjzb
 		private var _rewardPanel:JJBattleRewardPanelExt;
 		private var _costArr:Array;
 		private var _lastState:int=-1;
+		private var _eff:Inter3DContainer;
 		public function JJBattlePanelExt()
 		{
 			_skin=new JingJiChan1_Skin();
@@ -282,11 +287,8 @@ package com.rpgGame.appModule.battle.jjzb
 			
 			_skin.numZhanli.label=data.rank+"";
 			
-			//未领奖
-			if (data.drawAward==0) 
-			{
-				
-			}
+		
+			showRewardEffect(data.drawAward==0);
 			var logLen:int=data.logs.length;
 			//日志
 			if (logLen>0) 
@@ -333,9 +335,34 @@ package com.rpgGame.appModule.battle.jjzb
 			}
 			_showState=0;
 			BreatheTweenUtil.remove(_infoSkin.btnDui);
+			showRewardEffect(false);
+		}
+		private function addEft(render:RenderUnit3D):void
+		{
+			render.play(0);
+		}
+		private function showRewardEffect(bool:Boolean):void
+		{
+			if (bool) 
+			{
+				if (!_eff) 
+				{
+					_eff=new Inter3DContainer();
+					_skin.btnJiangli.addChild(_eff);
+					_eff.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JJBREWARD),this._skin.btnJiangli.width/2,_skin.btnJiangli.height,0,null,addEft);
+				}
+			}
+			else
+			{
+				if (_eff) 
+				{
+					_eff.dispose();
+					MCUtil.removeSelf(_eff);
+					_eff=null;
+				}
+			}
 		}
 		
-	
 
 		public function get rewardPanel():JJBattleRewardPanelExt
 		{

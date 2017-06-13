@@ -96,9 +96,6 @@ package com.rpgGame.app.graphics
 			showAndHideElement(_nameBar, _isSelected || nameVisible);
 		
 			addBackandUpdataState();
-		}
-		override protected function updateAllBarPosition() : void
-		{
 			//玩家名字为标准位置
 			if (_nameBar != null) //名字位置
 			{
@@ -113,7 +110,9 @@ package com.rpgGame.app.graphics
 				_back.x = int(-_back.realWidth * 0.5);
 				_back.y = int(-10 - _back.realHeight);
 			}
-			
+		}
+		override protected function updateAllBarPosition() : void
+		{
 			//-------------------更新显示隐藏状态
 			updateShowAndHide();
 		}

@@ -33,7 +33,7 @@ package com.rpgGame.appModule.battle.dfdj
 			_skin=new DuiJueJieSuan_Skin();
 			super(_skin);
 			this.dragAble=false;
-			_initStr=_skin.lbTime.text;
+			_initStr="$s后自动关闭";
 		}
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
@@ -57,6 +57,7 @@ package com.rpgGame.appModule.battle.dfdj
 			_skin.uiLevel.styleName=Mgr.d1v1Mgr.getRankName(msg.level,true);
 			var per:Number=msg.currentIntegral/qRank.q_score*100;
 			_skin.proBar.value=per;
+			_skin.lbDuanwei.text=msg.currentIntegral+"/"+qRank.q_score;
 			if (!_timer) 
 			{
 				_timer=new GameTimer("D1v1FightResultPanelExt");

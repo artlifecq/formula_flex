@@ -98,12 +98,12 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbId = temp;
 			temp.name = "lbId";
-			temp.text = "未入榜";
+			temp.text = "1";
 			temp.textAlign = "center";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 46;
-			temp.x = 3;
+			temp.width = 40;
+			temp.x = 0;
 			temp.y = 4;
 			return temp;
 		}

@@ -33,6 +33,8 @@ package org.mokylin.skin.app.zhanchang
 
 		public var imgWin:feathers.controls.UIAsset;
 
+		public var lbDuanwei:feathers.controls.Label;
+
 		public var lbDuihuan:feathers.controls.Label;
 
 		public var lbTime:feathers.controls.Label;
@@ -58,7 +60,7 @@ package org.mokylin.skin.app.zhanchang
 			this.currentState = "normal";
 			this.height = 430;
 			this.width = 469;
-			this.elementsContent = [__DuiJueJieSuan_Skin_UIAsset1_i(),imgWin_i(),__DuiJueJieSuan_Skin_UIAsset2_i(),imgLabWin_i(),uiIcon_i(),uiLevel_i(),grpJifen_i(),grpEwai_i(),btnOk_i(),lbTime_i(),__DuiJueJieSuan_Skin_UIAsset5_i(),proBar_i()];
+			this.elementsContent = [__DuiJueJieSuan_Skin_UIAsset1_i(),imgWin_i(),__DuiJueJieSuan_Skin_UIAsset2_i(),imgLabWin_i(),uiIcon_i(),uiLevel_i(),grpJifen_i(),grpEwai_i(),btnOk_i(),lbTime_i(),__DuiJueJieSuan_Skin_UIAsset5_i(),proBar_i(),lbDuanwei_i()];
 			
 			states = {
 			};
@@ -194,6 +196,21 @@ package org.mokylin.skin.app.zhanchang
 			temp.styleName = "ui/app/zhanchang/jiesuan/tianzhanshengli.png";
 			temp.x = 59;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function lbDuanwei_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbDuanwei = temp;
+			temp.name = "lbDuanwei";
+			temp.text = "135/160";
+			temp.textAlign = "center";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 101;
+			temp.x = 190;
+			temp.y = 292;
 			return temp;
 		}
 

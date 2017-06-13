@@ -259,7 +259,7 @@ package com.rpgGame.app.graphics
 		 * @param isShow
 		 *
 		 */
-		final protected function showAndHideElement(element : DisplayObject, isShow : Boolean,sortLevel:int=-1) : void
+		protected function showAndHideElement(element : DisplayObject, isShow : Boolean,sortLevel:int=-1) : void
 		{
 			if (element == null)
 				return;
