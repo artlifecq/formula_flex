@@ -18,7 +18,7 @@ package com.rpgGame.netData.player.bean{
 	 * 本人玩家详细信息
 	 */
 	public class MyPlayerInfo extends Bean {
-	
+		
 		//角色Id
 		private var _personId: long;
 		
@@ -79,6 +79,9 @@ package com.rpgGame.netData.player.bean{
 		//最大真气值
 		private var _maxZhenQi: long;
 		
+		//帮派Id
+		private var _guildId: long;
+		
 		/**
 		 * 写入字节缓存
 		 */
@@ -134,6 +137,8 @@ package com.rpgGame.netData.player.bean{
 			writeLong(_maxExp);
 			//最大真气值
 			writeLong(_maxZhenQi);
+			//帮派Id
+			writeLong(_guildId);
 			return true;
 		}
 		
@@ -192,6 +197,8 @@ package com.rpgGame.netData.player.bean{
 			_maxExp = readLong();
 			//最大真气值
 			_maxZhenQi = readLong();
+			//帮派Id
+			_guildId = readLong();
 			return true;
 		}
 		
@@ -508,6 +515,21 @@ package com.rpgGame.netData.player.bean{
 		 */
 		public function set maxZhenQi(value: long): void{
 			this._maxZhenQi = value;
+		}
+		
+		/**
+		 * get 帮派Id
+		 * @return 
+		 */
+		public function get guildId(): long{
+			return _guildId;
+		}
+		
+		/**
+		 * set 帮派Id
+		 */
+		public function set guildId(value: long): void{
+			this._guildId = value;
 		}
 		
 	}

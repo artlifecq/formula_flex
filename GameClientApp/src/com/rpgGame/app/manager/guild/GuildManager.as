@@ -4,6 +4,8 @@ package com.rpgGame.app.manager.guild
 	import com.gameClient.utils.StringFilter;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.core.events.GuildEvent;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.GuildCfgData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
@@ -11,16 +13,33 @@ package com.rpgGame.app.manager.guild
 	import com.rpgGame.coreData.clientConfig.Q_guild_permission;
 	import com.rpgGame.coreData.enum.EnumGuildPost;
 	import com.rpgGame.coreData.lang.LangGuild;
+	import com.rpgGame.netData.guild.bean.GuildApplyInfo;
+	import com.rpgGame.netData.guild.bean.GuildBriefnessInfo;
 	import com.rpgGame.netData.guild.bean.GuildInfo;
 	import com.rpgGame.netData.guild.bean.GuildMemberInfo;
+	import com.rpgGame.netData.guild.message.ReqGuildApplyListMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildApplyOperationMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildAppointMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildBriefnessInfoMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildConveneMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildCreateMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildDissolveMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildDonateMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildExitMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildGetDailyGiftMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildInfoMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildJoinMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildKillMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildLevelupMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildListMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildSetAutoAcceptMessage;
 	import com.rpgGame.netData.guild.message.ResGuildInfoMessage;
+	import com.rpgGame.netData.guild.message.ResGuildListInfoMessage;
+	import com.rpgGame.netData.guild.message.ResGuildOperateResultMessage;
 	
+	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.connection.SocketConnection;
+	import org.game.netCore.data.long;
 
 	/**
 	 * 帮派管理类 
@@ -55,13 +74,12 @@ package com.rpgGame.app.manager.guild
 		private var _chiefGuildMemberInfo:GuildMemberInfo;
 		
 		private static var _instance:GuildManager;
+		private static var _opaque:int = 0;
 		public static function instance():GuildManager
 		{
 			if(_instance==null)
 			{
 				_instance = new GuildManager();
-				_instance.updataSelfInfo();
-				_instance.init();
 			}
 			return _instance;
 		}
@@ -70,6 +88,11 @@ package com.rpgGame.app.manager.guild
 			var gd:GuildInfo = new GuildInfo();
 			gd.level = 1;
 			this.updataGuildData(gd);
+		}
+		
+		public static function get opaque():int
+		{
+			return ++_opaque;
 		}
 		
 		private function updataSelfInfo():void
@@ -96,6 +119,8 @@ package com.rpgGame.app.manager.guild
 				_selfPermissionInfo = GuildCfgData.getPermissionInfo(_selfMemberInfo.memberType);
 			}
 		}
+		
+		
 		/**
 		 * 请求获得帮会信息 
 		 * 
@@ -110,6 +135,19 @@ package com.rpgGame.app.manager.guild
 			return _memberList;
 		}
 		
+		
+		public function getSortMemberListByProp(prop:String):Vector.<GuildMemberInfo>
+		{
+			var sortfun:Function = function(g1:GuildMemberInfo,g2:GuildMemberInfo):int{
+				if(g1[prop]<g2[prop])
+					return 1;
+				else if(g1[prop]>g2[prop])
+					return 1;
+				else
+					return 0;
+			}
+			return _memberList.sort(sortfun);
+		}
 		
 		public function get guildData():GuildInfo
 		{
@@ -137,10 +175,24 @@ package com.rpgGame.app.manager.guild
 			this.updataGuildData(msg.guildInfo);
 			this.updateMemberList(msg.memberList);
 			this._haveDailyGift = msg.haveDailyGift;
+			EventManager.dispatchEvent(GuildEvent.GUILD_DATA_INIT);
 		}
 		
 		public function get haveDailyGift(): int{
 			return _haveDailyGift;
+		}
+		
+		private var _currentPageInfo:ResGuildListInfoMessage
+
+		public function get currentPageInfo():ResGuildListInfoMessage
+		{
+			return _currentPageInfo;
+		}
+
+		public function setGuildListInfoMessage(msg:ResGuildListInfoMessage):void
+		{
+			_currentPageInfo= msg;
+			EventManager.dispatchEvent(GuildEvent.GET_GUILD_LIST,msg);
 		}
 		
 		private var _allcreateGuildInfo:Array;
@@ -160,8 +212,7 @@ package com.rpgGame.app.manager.guild
 		/**获取是否有帮派了**/
 		public function get haveGuild():Boolean
 		{
-			return false;
-			return guildData.name != "" &&  guildData.name != null;
+			return !ClientConfig.loginData.guildId.IsMax();
 		}
 		/**创建帮会**/
 		public function createGuild(type:int,name:String,banner:String):void
@@ -171,6 +222,8 @@ package com.rpgGame.app.manager.guild
 				NoticeManager.showNotify("帮派旗号非法。");
 				return;
 			}
+			if(banner == defaultMsg)
+				banner = " ";
 			if(name==""||name== defaultName)
 			{
 				NoticeManager.showNotify("帮会名字不能为空");
@@ -188,10 +241,10 @@ package com.rpgGame.app.manager.guild
 			}
 			
 			var item:Object = this.getcreateInfoByIndex(type);
-			var money : Number = MainRoleManager.actorInfo.amountInfo.getAmountByType(item["type"]);
+			var money : Number = MainRoleManager.actorInfo.totalStat.getResData(item["type"]);
 			if(money < item["num"])
 			{
-				NoticeManager.showNotifyById(51001,ItemConfig.getItemName(type));
+				NoticeManager.showNotifyById(51001,ItemConfig.getItemName(item["type"]));
 				return;
 			}
 			
@@ -208,15 +261,118 @@ package com.rpgGame.app.manager.guild
 			return _selfMemberInfo;
 		}
 		
-		
+		/**  发布公告 */
 		public function get canNotice():Boolean
 		{
 			if(_selfPermissionInfo==null)
 				return false;
 			return _selfPermissionInfo.q_notice == 1;
 		}
+		/**  邀请权限 */
+		public function get canInvite():Boolean
+		{
+			if(_selfPermissionInfo==null)
+				return false;
+			return _selfPermissionInfo.q_invite == 1;
+		}
 		
+		/**  召集成员 */
+		public function get canConvene():Boolean
+		{
+			if(_selfPermissionInfo==null)
+				return false;
+			return _selfPermissionInfo.q_convene == 1;
+		}
 		
+		/**  招募成员 */
+		public function get canRecrui():Boolean
+		{
+			if(_selfPermissionInfo==null)
+				return false;
+			return _selfPermissionInfo.q_recrui == 1;
+		}
+		
+		/**  同意加入 */
+		public function get canJoin():Boolean
+		{
+			if(_selfPermissionInfo==null)
+				return false;
+			return _selfPermissionInfo.q_join == 1;
+		}
+		
+		/**  拒绝加入 */
+		public function get canReject():Boolean
+		{
+			if(_selfPermissionInfo==null)
+				return false;
+			return _selfPermissionInfo.q_reject == 1;
+		}
+		
+		/**  逐出成员 */
+		public function get canExpel():Boolean
+		{
+			if(_selfPermissionInfo==null)
+				return false;
+			return _selfPermissionInfo.q_expel == 1;
+		}
+		
+		/**  升级帮派 */
+		public function get canUpgrad():Boolean
+		{
+			if(_selfPermissionInfo==null)
+				return false;
+			return _selfPermissionInfo.q_upgrad == 1;
+		}
+		
+		/**  解散帮派 */
+		public function get canDissolve():Boolean
+		{
+			if(_selfPermissionInfo==null)
+				return false;
+			return _selfPermissionInfo.q_dissolve == 1;
+		}
+		
+		/**  任命帮主 */
+		public function get canMinister():Boolean
+		{
+			if(_selfPermissionInfo==null)
+				return false;
+			return _selfPermissionInfo.q_Minister == 1;
+		}
+		
+		/**  任命副帮主 */
+		public function get canViceMinister():Boolean
+		{
+			if(_selfPermissionInfo==null)
+				return false;
+			return _selfPermissionInfo.q_viceMinister == 1;
+		}
+		
+		/**  任命长老 */
+		public function get canElder():Boolean
+		{
+			if(_selfPermissionInfo==null)
+				return false;
+			return _selfPermissionInfo.q_elder == 1;
+		}
+		
+		/**  任命普通帮众 */
+		public function get canNormal():Boolean
+		{
+			if(_selfPermissionInfo==null)
+				return false;
+			return _selfPermissionInfo.q_normal == 1;
+		}
+		
+		/**  任命统帅 */
+		public function get canLeader():Boolean
+		{
+			if(_selfPermissionInfo==null)
+				return false;
+			return _selfPermissionInfo.q_leader == 1;
+		}
+		
+		/**  帮会等级信息 */
 		public function get guildLevelInfo():Q_guild
 		{
 			return _guildLevelInfo;
@@ -239,20 +395,16 @@ package com.rpgGame.app.manager.guild
 		/** 解散帮会 **/
 		public function guildDissolve():void
 		{
-			if(_selfPermissionInfo.q_dissolve ==0)
-			{
+			if(!canDissolve)
 				return ;
-			}
 			SocketConnection.send(new ReqGuildDissolveMessage());
 		}
 		
 		/** 请求召集帮派 **/
 		public function guildConvene():void
 		{
-			if(_selfPermissionInfo.q_recrui ==0)
-			{
+			if(!canConvene)
 				return ;
-			}
 			SocketConnection.send(new ReqGuildConveneMessage());
 		}
 		
@@ -261,7 +413,208 @@ package com.rpgGame.app.manager.guild
 		{
 			SocketConnection.send(new ReqGuildExitMessage());
 		}
+		/** 获取帮派列表 **/
+		public function reqGuildList(page:int,isfull:int,opaque:int):void
+		{
+			var request:ReqGuildListMessage = new ReqGuildListMessage();
+			request.isFilterFull = isfull;
+			request.page = page;
+			request.opaque = opaque;
+			SocketConnection.send(request);
+		}
+		/** 请求加入帮派 **/
+		public function reqGuildJoin(guild:long,opaque:int):void
+		{
+			var msg:ReqGuildJoinMessage = new ReqGuildJoinMessage();
+			msg.guildId = guild;
+			msg.opaque = opaque;
+			SocketConnection.send(msg);
+		}
 		
+		/** 请求召集帮派 **/
+		public function reqGuildConvene(opaque:int):void
+		{
+			var msg:ReqGuildConveneMessage = new ReqGuildConveneMessage();
+			msg.opaque = opaque;
+			SocketConnection.send(msg);
+		}
+		
+		/**
+		 * 操作结果反馈
+		 * @param msg
+		 * 
+		 */
+		public function getGuildOperateResult(msg:ResGuildOperateResultMessage):void
+		{
+			if(msg.result ==0)
+				return ;
+			if(_killOpaque>0&&_killOpaque == msg.opaque)
+			{
+				var player:GuildMemberInfo = this.getGuildMemberInfoById(_killPlayerid.ToGID());
+				var index:int = _memberList.indexOf(player);
+				_memberList.splice(index,1);
+				EventManager.dispatchEvent(GuildEvent.GUILD_FAMILY_CHANGE);
+				_killOpaque = 0;
+			}else if(_reqapplayOpaque>0&&_reqapplayOpaque == msg.opaque){
+				this.requestGuildInfo();
+			}else{
+				EventManager.dispatchEvent(GuildEvent.GUILD_OPERATERESULT,msg);
+			}	
+		}
+		
+		/** 请求设置自动通过玩家申请模式 **/
+		public function reqGuildSetAutoAccept(value:Boolean):void
+		{
+			var type:int = value?1:0;
+			if(type == _guildData.isAutoApply)
+				return ;
+			var msg:ReqGuildSetAutoAcceptMessage = new ReqGuildSetAutoAcceptMessage();
+			msg.type = value?1:0;
+			SocketConnection.send(msg);
+		}
+		
+		private var _reqapplayOpaque:int;
+		/** 对申请者操作 **/
+		public function applyOperation(flag:int,applyId:int):Boolean
+		{
+			if(_reqapplayOpaque>0)
+				return false;
+			_reqapplayOpaque = opaque;
+			var msg:ReqGuildApplyOperationMessage = new ReqGuildApplyOperationMessage();
+			msg.flag = flag;
+			msg.applyId = applyId;
+			msg.opaque = _reqapplayOpaque;
+			SocketConnection.send(msg);
+			return true;
+		}
+		
+		private var _killOpaque:int;
+		private var _killPlayerid:long;
+		/** 请求提出成员 **/
+		public function guildKill(playerId:long):void
+		{
+			if(_killOpaque!=0)
+				return ;
+			_killOpaque = GuildManager.opaque;
+			_killPlayerid = playerId;
+			var msg:ReqGuildKillMessage = new ReqGuildKillMessage();
+			msg.playerId = playerId;
+			msg.opaque = _killOpaque;
+			SocketConnection.send(msg);
+		}
+		/** 请求任命成员 **/
+		public function guildAppoint(playerId:long,memberType:int,opaque:int):void
+		{
+			var msg:ReqGuildAppointMessage = new ReqGuildAppointMessage();
+			msg.playerId = playerId;
+			msg.memberType = memberType;
+			msg.opaque = opaque;
+			SocketConnection.send(msg);
+		}
+		/** 请求帮派升级 **/
+		public function guildLevelup(opaque:int):void
+		{
+			var msg:ReqGuildLevelupMessage = new ReqGuildLevelupMessage();
+			msg.opaque = opaque;
+			SocketConnection.send(msg);
+		}
+		/** 请求领取帮派每日礼包 **/
+		public function guildGetDailyGift(opaque:int):void
+		{
+			var msg:ReqGuildGetDailyGiftMessage = new ReqGuildGetDailyGiftMessage();
+			msg.opaque = opaque;
+			SocketConnection.send(msg);
+		}
+		/** 请求帮派捐献 **/
+		public function guildDonate(type:int,num:int,opaque:int):void
+		{
+			if(num==0)
+				return ;
+			var msg:ReqGuildDonateMessage = new ReqGuildDonateMessage();
+			msg.type = type;
+			msg.num = num;
+			msg.opaque = opaque;
+			SocketConnection.send(msg);
+		}
+		
+		/**
+		 * 根据id获取帮派信息 
+		 * @param id
+		 * @return 
+		 * 
+		 */
+		public function getGuildMemberInfoById(id:Number):GuildMemberInfo
+		{
+			var length:int = _memberList.length;
+			for(var i:int = 0;i<length;i++)
+			{
+				if(_memberList[i].id.ToGID() == id)
+				{
+					return _memberList[i];
+				}
+			}
+			return null;
+		}
+		
+		
+		/** 请求申请列表*/
+		public function reqGuildApplyListInfo():void
+		{
+			SocketConnection.send(new ReqGuildApplyListMessage());
+		}
+		
+		
+		public function setGuildApplyListInfo(list:Vector.<GuildApplyInfo>):void
+		{
+			EventManager.dispatchEvent(GuildEvent.GET_JOIN_GUILD_LIST,list);
+		}
+		
+		/** 获取帮派简介信息*/
+		public function reqGuildBriefnessInfo(guildId:long,opaque:int):void
+		{
+			var msg:ReqGuildBriefnessInfoMessage = new ReqGuildBriefnessInfoMessage();
+			msg.guildId = guildId;
+			msg.opaque = opaque;
+			SocketConnection.send(msg);
+		}
+		
+		
+		public function setResGuildBriefnessInfo(info:GuildBriefnessInfo):void
+		{
+			EventManager.dispatchEvent(GuildEvent.GUILD_INFO_CHANGE,info);
+		}
+		
+		
+		/**
+		 *根据职务类型获取帮会中已有该职务成员数量 
+		 * @param type
+		 * @return 
+		 * 
+		 */
+		public function getMemberCountByType(type:int):int
+		{
+			var count:int = 0;
+			var length:int = _memberList.length;
+			for(var i:int = 0;i<length;i++)
+			{
+				if(_memberList[i].memberType == type)
+					count++;
+			}
+			return count;
+		}
+		
+		
+		public function getLeaderCount():int
+		{
+			var count:int = 0;
+			var length:int = _memberList.length;
+			for(var i:int = 0;i<length;i++)
+			{
+				if(_memberList[i].isLeader == 1)
+					count++;
+			}
+			return count;
+		}
 		
 	}
 }

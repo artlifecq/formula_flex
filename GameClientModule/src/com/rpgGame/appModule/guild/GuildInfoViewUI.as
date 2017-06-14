@@ -3,15 +3,16 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.app.display3D.InterAvatar3D;
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.guild.GuildManager;
-	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.tab.ViewUI;
+	import com.rpgGame.appModule.common.RoleModelShow;
+	import com.rpgGame.core.events.GuildEvent;
 	import com.rpgGame.coreData.enum.EmFunctionID;
-	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.netData.guild.bean.GuildInfo;
 	import com.rpgGame.netData.guild.bean.GuildMemberInfo;
 	import com.rpgGame.netData.player.bean.PlayerAppearanceInfo;
 	
+	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.banghui.BangHui_Info;
 	
 	import starling.display.DisplayObject;
@@ -21,6 +22,7 @@ package com.rpgGame.appModule.guild
 		private var _skin:BangHui_Info;
 		private var _guildInfo:GuildInfoPanel;
 		private var _showAvatarData : RoleData;
+		private var _roleModel:RoleModelShow;
 		private var _avatar : InterAvatar3D;
 		public function GuildInfoViewUI()
 		{
@@ -40,21 +42,31 @@ package com.rpgGame.appModule.guild
 		
 		private function initAvatar():void
 		{
-			_avatar = new InterAvatar3D();
-			_avatar.x = 594;
-			_avatar.y = 478;
-			this.addChild3D(_avatar);
-			_showAvatarData = new RoleData(0);
+			_roleModel = new RoleModelShow();
+			_roleModel.x = 594;
+			_roleModel.y = 478;
+			this.addChild(_roleModel);
 		}
 		
 		override public function show(data:Object=null):void
 		{
 			super.show(data);
-			
+			EventManager.addEvent(GuildEvent.GUILD_DATA_INIT,refeashView);
+			refeashView();
+		}
+		
+		override protected function onHide():void
+		{
+			EventManager.removeEvent(GuildEvent.GUILD_DATA_INIT,refeashView);
+		}
+		
+		private function refeashView():void
+		{
+			if(guildData ==null)
+				return ;
 			refeashPanleInfo();
 			updateRole();
 		}
-		
 		
 		private function refeashPanleInfo():void
 		{
@@ -65,30 +77,12 @@ package com.rpgGame.appModule.guild
 		
 		private function updateRole():void
 		{
+			
 			var chiefAvatar:PlayerAppearanceInfo = guildData.chiefAvatar;
 			if(chiefAvatar!=null)
 			{
-				var data:HeroData = MainRoleManager.actorInfo;
-				this._showAvatarData.avatarInfo.setBodyResID(data.avatarInfo.bodyResID, data.avatarInfo.bodyAnimatResID);
-				this._showAvatarData.avatarInfo.hairResID = data.avatarInfo.hairResID;
-				this._showAvatarData.avatarInfo.weaponResID = data.avatarInfo.weaponResID;
-				this._showAvatarData.avatarInfo.weaponEffectID = data.avatarInfo.weaponEffectID;
-				this._showAvatarData.avatarInfo.weaponEffectScale = data.avatarInfo.weaponEffectScale;
-				this._showAvatarData.avatarInfo.deputyWeaponResID = data.avatarInfo.deputyWeaponResID;
-				this._showAvatarData.avatarInfo.deputyWeaponEffectID=data.avatarInfo.deputyWeaponEffectID;
-				this._showAvatarData.avatarInfo.deputyWeaponEffectScale=data.avatarInfo.deputyWeaponEffectScale;
-			}else{
-				/*this._showAvatarData.avatarInfo.setBodyResID(chiefAvatar.bodyResID, data.avatarInfo.bodyAnimatResID);
-				this._showAvatarData.avatarInfo.hairResID = data.avatarInfo.hairResID;
-				this._showAvatarData.avatarInfo.weaponResID = data.avatarInfo.weaponResID;
-				this._showAvatarData.avatarInfo.weaponEffectID = data.avatarInfo.weaponEffectID;
-				this._showAvatarData.avatarInfo.weaponEffectScale = data.avatarInfo.weaponEffectScale;
-				this._showAvatarData.avatarInfo.deputyWeaponResID = data.avatarInfo.deputyWeaponResID;
-				this._showAvatarData.avatarInfo.deputyWeaponEffectID=data.avatarInfo.deputyWeaponEffectID;
-				this._showAvatarData.avatarInfo.deputyWeaponEffectScale=data.avatarInfo.deputyWeaponEffectScale;*/
+				_roleModel.setData(chiefAvatar,1.7);
 			}
-			this._avatar.setRoleData(this._showAvatarData);
-			this._avatar.curRole.setScale(1.7);	
 		}
 		
 		

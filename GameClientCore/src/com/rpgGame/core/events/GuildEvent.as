@@ -33,5 +33,10 @@ package com.rpgGame.core.events
 		public static const GUILDCONTRIBUTIONPOINT_CHANGE : uint = UNIQUEID.NEXT;
 		/**帮派家族成员变化了**/
 		public static const GUILD_FAMILY_CHANGE : uint = UNIQUEID.NEXT;
+		/**帮派操作标识**/
+		public static const GUILD_OPERATERESULT : uint = UNIQUEID.NEXT;
+		
+		/**跟新帮派指定帮派信息**/
+		public static const GUILD_INFO_CHANGE : uint = UNIQUEID.NEXT;
 	}
 }

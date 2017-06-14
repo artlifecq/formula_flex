@@ -5,6 +5,7 @@ package org.mokylin.skin.app.banghui
 	import feathers.controls.text.TextFieldTextEditor;
 	import feathers.controls.Group;
 	import feathers.controls.Label;
+	import feathers.controls.List;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
@@ -38,6 +39,8 @@ package org.mokylin.skin.app.banghui
 
 		public var lbNum:feathers.controls.text.TextFieldTextEditor;
 
+		public var list:feathers.controls.List;
+
 		public var title:feathers.controls.Label;
 
 		public var uiNull:feathers.controls.UIAsset;
@@ -53,7 +56,7 @@ package org.mokylin.skin.app.banghui
 			this.currentState = "normal";
 			this.height = 361;
 			this.width = 580;
-			this.elementsContent = [bg_i(),__TanKuang_Shenqin_UIAsset1_i(),title_i(),btnClose_i(),grpFlip_i(),btnOk_i(),btnCancel_i(),__TanKuang_Shenqin_Group1_i(),uiNull_i()];
+			this.elementsContent = [bg_i(),__TanKuang_Shenqin_UIAsset1_i(),title_i(),btnClose_i(),grpFlip_i(),btnOk_i(),btnCancel_i(),__TanKuang_Shenqin_Group1_i(),list_i(),uiNull_i()];
 			
 			states = {
 			};
@@ -240,6 +243,18 @@ package org.mokylin.skin.app.banghui
 			temp.width = 50;
 			temp.x = 11;
 			temp.y = 2;
+			return temp;
+		}
+
+		private function list_i():feathers.controls.List
+		{
+			var temp:feathers.controls.List = new feathers.controls.List();
+			list = temp;
+			temp.name = "list";
+			temp.height = 220;
+			temp.width = 549;
+			temp.x = 16;
+			temp.y = 72;
 			return temp;
 		}
 

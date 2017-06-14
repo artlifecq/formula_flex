@@ -755,11 +755,11 @@ package com.rpgGame.app.ui.main.chat {
 		
 		private function sendMsg() : void 
 		{
-			if(MessageMgr.Ins.isCrossSocket){
+			/*if(MessageMgr.Ins.isCrossSocket){
 				CrossSender.reqQuitCrossFight();
 			}else{
 				CrossSender.reqEnterCrossInfo(0);	
-			}
+			}*/
 			//			return;
 			//死亡面板测试
 			//			FightFaceHelper.showHurtText(MainRoleManager.actor,MainRoleManager.actor,EnumHurtType.SPELL_HURT_TYPE_CRIT,5000);

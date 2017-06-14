@@ -98,6 +98,8 @@ package com.rpgGame.coreData.lang
 		public static const BATCH_ITM:String = "BATCH_ITM";
 		 /**  快速到达 */
 		public static const MOVE_TO_HERO:String = "MOVE_TO_HERO";
+		/**   任命统帅 */
+		public static const SETUP_LEADER:String = "SETUP_LEADER";
 
 	}
 }

@@ -358,6 +358,16 @@ package com.rpgGame.core.app
 		//-------------------帮派
 		/**帮会 **/
 		public static var GUILD_PANEL : String = createAppInfo("guild.GuildPanel","banghui");
+		/**帮会请求列表 **/
+		public static var GUILD_APPLAYLIST_PANEL : String = createAppInfo("guild.GuildApplyListPanle","banghui");
+		/**帮会信息 **/
+		public static var GUILD_APPLAYINFO_PANEL : String = createAppInfo("guild.GuildPorpInfoPanel","banghui");
+		/**帮会权限设置 **/
+		public static var GUILD_APPOINTED_PANEL : String = createAppInfo("guild.GuildAppointedPanel","banghui");
+		/**帮会统帅设置 **/
+		public static var GUILD_LEADER_PANEL : String = createAppInfo("guild.GuildLeaderPanle","banghui");
+		/**帮会捐献 **/
+		public static var GUILD_DONATE_PANEL : String = createAppInfo("guild.GuildDonatePanle","banghui");
 		
 		/**迷宫排行**/
 		public static var MAZE_RANK_PANEL : String = createAppInfo("maze.MazeInfoPanel","maze",PanelPosType.MIDDLE_RIGHT);

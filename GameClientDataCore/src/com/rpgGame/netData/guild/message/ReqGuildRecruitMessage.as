@@ -8,13 +8,10 @@ package com.rpgGame.netData.guild.message{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * 请求设置自动通过玩家申请模式
+	 * 请求召招募帮派
 	 */
-	public class ReqGuildSetAutoAcceptMessage extends Message {
+	public class ReqGuildRecruitMessage extends Message {
 	
-		//是否自动通过,1:是,0:否
-		private var _type: int;
-		
 		//本次操作标识
 		private var _opaque: int;
 		
@@ -23,8 +20,6 @@ package com.rpgGame.netData.guild.message{
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
-			//是否自动通过,1:是,0:否
-			writeByte(_type);
 			//本次操作标识
 			writeInt(_opaque);
 			return true;
@@ -34,8 +29,6 @@ package com.rpgGame.netData.guild.message{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
-			//是否自动通过,1:是,0:否
-			_type = readByte();
 			//本次操作标识
 			_opaque = readInt();
 			return true;
@@ -46,22 +39,7 @@ package com.rpgGame.netData.guild.message{
 		 * @return 
 		 */
 		override public function getId(): int {
-			return 111207;
-		}
-		
-		/**
-		 * get 是否自动通过,1:是,0:否
-		 * @return 
-		 */
-		public function get type(): int{
-			return _type;
-		}
-		
-		/**
-		 * set 是否自动通过,1:是,0:否
-		 */
-		public function set type(value: int): void{
-			this._type = value;
+			return 111206;
 		}
 		
 		/**

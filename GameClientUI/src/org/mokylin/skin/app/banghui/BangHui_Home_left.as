@@ -10,7 +10,7 @@ package org.mokylin.skin.app.banghui
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.app.banghui.check.CheckBoxSkin_2;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
-	
+
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
@@ -22,20 +22,20 @@ package org.mokylin.skin.app.banghui
 		//                                定义成员变量
 		//==========================================================================
 		public var btnCreate:feathers.controls.Button;
-		
+
 		public var chk1:feathers.controls.Check;
-		
+
 		public var chk2:feathers.controls.Check;
-		
+
 		public var lbName:feathers.controls.text.TextFieldTextEditor;
-		
+
 		public var lbPay1:feathers.controls.Label;
-		
+
 		public var lbPay2:feathers.controls.Label;
-		
+
 		public var lbXuanYan:feathers.controls.text.TextFieldTextEditor;
-		
-		
+
+
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
@@ -52,8 +52,8 @@ package org.mokylin.skin.app.banghui
 			};
 			skinNames={};
 		}
-		
-		
+
+
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
@@ -65,7 +65,7 @@ package org.mokylin.skin.app.banghui
 			temp.elementsContent = [__BangHui_Home_left_UIAsset4_i(),__BangHui_Home_left_UIAsset5_i(),__BangHui_Home_left_UIAsset6_i()];
 			return temp;
 		}
-		
+
 		private function __BangHui_Home_left_Group2_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
@@ -74,7 +74,7 @@ package org.mokylin.skin.app.banghui
 			temp.elementsContent = [__BangHui_Home_left_UIAsset7_i(),__BangHui_Home_left_UIAsset8_i(),__BangHui_Home_left_UIAsset9_i()];
 			return temp;
 		}
-		
+
 		private function __BangHui_Home_left_UIAsset10_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -85,7 +85,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 96;
 			return temp;
 		}
-		
+
 		private function __BangHui_Home_left_UIAsset11_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -96,7 +96,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 169;
 			return temp;
 		}
-		
+
 		private function __BangHui_Home_left_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -105,7 +105,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 0;
 			return temp;
 		}
-		
+
 		private function __BangHui_Home_left_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -114,7 +114,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 5;
 			return temp;
 		}
-		
+
 		private function __BangHui_Home_left_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -123,7 +123,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 10;
 			return temp;
 		}
-		
+
 		private function __BangHui_Home_left_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -132,7 +132,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 0;
 			return temp;
 		}
-		
+
 		private function __BangHui_Home_left_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -141,7 +141,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 4;
 			return temp;
 		}
-		
+
 		private function __BangHui_Home_left_UIAsset6_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -151,7 +151,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 4;
 			return temp;
 		}
-		
+
 		private function __BangHui_Home_left_UIAsset7_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -160,7 +160,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 0;
 			return temp;
 		}
-		
+
 		private function __BangHui_Home_left_UIAsset8_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -169,7 +169,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 4;
 			return temp;
 		}
-		
+
 		private function __BangHui_Home_left_UIAsset9_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -179,7 +179,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 4;
 			return temp;
 		}
-		
+
 		private function btnCreate_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
@@ -194,7 +194,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 418;
 			return temp;
 		}
-		
+
 		private function chk1_i():feathers.controls.Check
 		{
 			var temp:feathers.controls.Check = new feathers.controls.Check();
@@ -205,7 +205,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 330;
 			return temp;
 		}
-		
+
 		private function chk2_i():feathers.controls.Check
 		{
 			var temp:feathers.controls.Check = new feathers.controls.Check();
@@ -216,7 +216,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 372;
 			return temp;
 		}
-		
+
 		private function lbName_i():feathers.controls.text.TextFieldTextEditor
 		{
 			var temp:feathers.controls.text.TextFieldTextEditor = new feathers.controls.text.TextFieldTextEditor();
@@ -231,7 +231,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 101;
 			return temp;
 		}
-		
+
 		private function lbPay1_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -247,7 +247,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 323;
 			return temp;
 		}
-		
+
 		private function lbPay2_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -263,7 +263,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 374;
 			return temp;
 		}
-		
+
 		private function lbXuanYan_i():feathers.controls.text.TextFieldTextEditor
 		{
 			var temp:feathers.controls.text.TextFieldTextEditor = new feathers.controls.text.TextFieldTextEditor();
@@ -278,6 +278,6 @@ package org.mokylin.skin.app.banghui
 			temp.y = 175;
 			return temp;
 		}
-		
+
 	}
 }

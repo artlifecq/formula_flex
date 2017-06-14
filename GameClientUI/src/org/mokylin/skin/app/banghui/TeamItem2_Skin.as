@@ -33,6 +33,8 @@ package org.mokylin.skin.app.banghui
 
 		public var uiFirt:feathers.controls.UIAsset;
 
+		public var uiTongShuai:feathers.controls.UIAsset;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -44,7 +46,7 @@ package org.mokylin.skin.app.banghui
 			this.currentState = "normal";
 			this.height = 36;
 			this.width = 896;
-			this.elementsContent = [__TeamItem2_Skin_SkinnableContainer1_i(),uiFirt_i(),numList2_i(),lbTeamName_i(),lbZhanli_i(),lbRolenName_i(),lbZhouHuoYue_i(),lbZongHuoYue_i(),lbOnLine_i()];
+			this.elementsContent = [__TeamItem2_Skin_SkinnableContainer1_i(),uiFirt_i(),numList2_i(),lbTeamName_i(),lbZhanli_i(),lbRolenName_i(),lbZhouHuoYue_i(),lbZongHuoYue_i(),lbOnLine_i(),uiTongShuai_i()];
 			
 			states = {
 			};
@@ -179,6 +181,17 @@ package org.mokylin.skin.app.banghui
 			temp.styleName = "ui/app/banghui/huawen.png";
 			temp.x = 0;
 			temp.y = 14;
+			return temp;
+		}
+
+		private function uiTongShuai_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiTongShuai = temp;
+			temp.name = "uiTongShuai";
+			temp.styleName = "ui/app/banghui/tongshuaitubiao.png";
+			temp.x = 22;
+			temp.y = 1;
 			return temp;
 		}
 

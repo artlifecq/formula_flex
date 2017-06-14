@@ -14,18 +14,15 @@ package com.rpgGame.netData.guild.message{
 	public class ResGuildChangeGuildIdMessage extends Message {
 	
 		//帮派Id,-1:为离开帮派
-		private var _guildId: Vector.<long> = new Vector.<long>();
+		private var _guildId: long;
+		
 		
 		/**
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
-			var i: int = 0;
 			//帮派Id,-1:为离开帮派
-			writeShort(_guildId.length);
-			for (i = 0; i < _guildId.length; i++) {
-				writeLong(_guildId[i]);
-			}
+			writeLong(_guildId);
 			return true;
 		}
 		
@@ -33,12 +30,8 @@ package com.rpgGame.netData.guild.message{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
-			var i: int = 0;
 			//帮派Id,-1:为离开帮派
-			var guildId_length : int = readShort();
-			for (i = 0; i < guildId_length; i++) {
-				_guildId[i] = readLong();
-			}
+			_guildId = readLong();
 			return true;
 		}
 		
@@ -54,14 +47,14 @@ package com.rpgGame.netData.guild.message{
 		 * get 帮派Id,-1:为离开帮派
 		 * @return 
 		 */
-		public function get guildId(): Vector.<long>{
+		public function get guildId(): long{
 			return _guildId;
 		}
 		
 		/**
 		 * set 帮派Id,-1:为离开帮派
 		 */
-		public function set guildId(value: Vector.<long>): void{
+		public function set guildId(value: long): void{
 			this._guildId = value;
 		}
 		

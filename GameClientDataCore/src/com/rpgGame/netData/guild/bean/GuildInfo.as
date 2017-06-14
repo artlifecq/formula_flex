@@ -32,7 +32,7 @@ package com.rpgGame.netData.guild.bean{
 		private var _chiefBattle: int;
 		
 		//帮主外观信息
-		private var _chiefAvatar:PlayerAppearanceInfo;
+		private var _chiefAvatar: com.rpgGame.netData.player.bean.PlayerAppearanceInfo;
 		
 		//成员数
 		private var _memberNum: int;
@@ -51,6 +51,9 @@ package com.rpgGame.netData.guild.bean{
 		
 		//占领城池情况
 		private var _city: int;
+		
+		//是否自动通过申请
+		private var _isAutoApply: int;
 		
 		/**
 		 * 写入字节缓存
@@ -80,6 +83,8 @@ package com.rpgGame.netData.guild.bean{
 			writeInt(_battle);
 			//占领城池情况
 			writeInt(_city);
+			//是否自动通过申请
+			writeByte(_isAutoApply);
 			return true;
 		}
 		
@@ -98,7 +103,7 @@ package com.rpgGame.netData.guild.bean{
 			//帮主战斗力
 			_chiefBattle = readInt();
 			//帮主外观信息
-			_chiefAvatar = readBean(PlayerAppearanceInfo) as PlayerAppearanceInfo;
+			_chiefAvatar = readBean(com.rpgGame.netData.player.bean.PlayerAppearanceInfo) as com.rpgGame.netData.player.bean.PlayerAppearanceInfo;
 			//成员数
 			_memberNum = readInt();
 			//帮派排名
@@ -111,6 +116,8 @@ package com.rpgGame.netData.guild.bean{
 			_battle = readInt();
 			//占领城池情况
 			_city = readInt();
+			//是否自动通过申请
+			_isAutoApply = readByte();
 			return true;
 		}
 		
@@ -193,14 +200,14 @@ package com.rpgGame.netData.guild.bean{
 		 * get 帮主外观信息
 		 * @return 
 		 */
-		public function get chiefAvatar(): PlayerAppearanceInfo{
+		public function get chiefAvatar(): com.rpgGame.netData.player.bean.PlayerAppearanceInfo{
 			return _chiefAvatar;
 		}
 		
 		/**
 		 * set 帮主外观信息
 		 */
-		public function set chiefAvatar(value:PlayerAppearanceInfo): void{
+		public function set chiefAvatar(value: com.rpgGame.netData.player.bean.PlayerAppearanceInfo): void{
 			this._chiefAvatar = value;
 		}
 		
@@ -292,6 +299,21 @@ package com.rpgGame.netData.guild.bean{
 		 */
 		public function set city(value: int): void{
 			this._city = value;
+		}
+		
+		/**
+		 * get 是否自动通过申请
+		 * @return 
+		 */
+		public function get isAutoApply(): int{
+			return _isAutoApply;
+		}
+		
+		/**
+		 * set 是否自动通过申请
+		 */
+		public function set isAutoApply(value: int): void{
+			this._isAutoApply = value;
 		}
 		
 	}

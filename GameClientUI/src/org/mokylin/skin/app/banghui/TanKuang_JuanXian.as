@@ -5,6 +5,7 @@ package org.mokylin.skin.app.banghui
 	import feathers.controls.text.TextFieldTextEditor;
 	import feathers.controls.Group;
 	import feathers.controls.Label;
+	import feathers.controls.List;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
@@ -49,6 +50,8 @@ package org.mokylin.skin.app.banghui
 
 		public var lbNum2:feathers.controls.Label;
 
+		public var list:feathers.controls.List;
+
 		public var skinSelect1:feathers.controls.SkinnableContainer;
 
 		public var skinSelect2:feathers.controls.SkinnableContainer;
@@ -66,7 +69,7 @@ package org.mokylin.skin.app.banghui
 			this.currentState = "normal";
 			this.height = 389;
 			this.width = 556;
-			this.elementsContent = [bg_i(),__TanKuang_JuanXian_UIAsset1_i(),__TanKuang_JuanXian_UIAsset2_i(),title_i(),btnClose_i(),__TanKuang_JuanXian_Group1_i(),__TanKuang_JuanXian_Group2_i(),grpFlip_i(),icon1_i(),skinSelect1_i(),btnJuan1_i(),__TanKuang_JuanXian_Label1_i(),lbNum1_i(),icon2_i(),skinSelect2_i(),btnJuan2_i(),__TanKuang_JuanXian_Label2_i(),lbNum2_i(),lbLast_i(),__TanKuang_JuanXian_UIAsset10_i(),__TanKuang_JuanXian_Label3_i(),__TanKuang_JuanXian_Label4_i()];
+			this.elementsContent = [bg_i(),__TanKuang_JuanXian_UIAsset1_i(),__TanKuang_JuanXian_UIAsset2_i(),title_i(),btnClose_i(),__TanKuang_JuanXian_Group1_i(),__TanKuang_JuanXian_Group2_i(),list_i(),grpFlip_i(),icon1_i(),skinSelect1_i(),btnJuan1_i(),__TanKuang_JuanXian_Label1_i(),lbNum1_i(),icon2_i(),skinSelect2_i(),btnJuan2_i(),__TanKuang_JuanXian_Label2_i(),lbNum2_i(),lbLast_i(),__TanKuang_JuanXian_UIAsset10_i(),__TanKuang_JuanXian_Label3_i(),__TanKuang_JuanXian_Label4_i()];
 			
 			states = {
 			};
@@ -167,7 +170,7 @@ package org.mokylin.skin.app.banghui
 			temp.height = 301;
 			temp.styleName = "ui/app/banghui/kuang1.png";
 			temp.width = 271;
-			temp.x = 278;
+			temp.x = 280;
 			temp.y = 38;
 			return temp;
 		}
@@ -400,6 +403,18 @@ package org.mokylin.skin.app.banghui
 			temp.width = 50;
 			temp.x = 11;
 			temp.y = 2;
+			return temp;
+		}
+
+		private function list_i():feathers.controls.List
+		{
+			var temp:feathers.controls.List = new feathers.controls.List();
+			list = temp;
+			temp.name = "list";
+			temp.height = 250;
+			temp.width = 254;
+			temp.x = 18;
+			temp.y = 78;
 			return temp;
 		}
 

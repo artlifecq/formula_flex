@@ -12,5 +12,7 @@ package com.rpgGame.coreData.enum
 		public static const GUILDPOST_ELDERS:int = 4;
 		/** 帮众 **/
 		public static const GUILDPOST_OTHER:int = 5;
+		/** 统帅 **/
+		public static const GUILDPOST_LEADER:int = 6;
 	}
 }
