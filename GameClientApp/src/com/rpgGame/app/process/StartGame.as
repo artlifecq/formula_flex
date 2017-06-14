@@ -14,7 +14,6 @@ package com.rpgGame.app.process
     import com.rpgGame.app.manager.BeanRegisterManager;
     import com.rpgGame.app.manager.ClientTriggerManager;
     import com.rpgGame.app.manager.GlobalSettingManager;
-    import com.rpgGame.app.manager.RollManager;
     import com.rpgGame.app.manager.SceneCameraLensEffectManager;
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.manager.scene.FirstEnterSceneManager;
@@ -40,6 +39,7 @@ package com.rpgGame.app.process
     import com.rpgGame.app.ui.tips.OpenGridTip;
     import com.rpgGame.app.ui.tips.PKModeTip;
     import com.rpgGame.app.ui.tips.PassiveSpellTip;
+    import com.rpgGame.app.ui.tips.ShiJieBossRewardTips;
     import com.rpgGame.app.ui.tips.SocietyBuildItemTip;
     import com.rpgGame.app.ui.tips.SocietySpellTotalTip;
     import com.rpgGame.app.ui.tips.SpellTip;
@@ -53,7 +53,6 @@ package com.rpgGame.app.process
     import com.rpgGame.core.manager.tips.TipManager;
     import com.rpgGame.core.manager.tips.TipTargetManager;
     import com.rpgGame.core.utils.ConsoleDesk;
-    import com.rpgGame.core.view.ui.tip.vo.TextTipsPropChangeData;
     import com.rpgGame.coreData.cfg.ClientConfig;
     import com.rpgGame.coreData.type.TipType;
     
@@ -61,18 +60,10 @@ package com.rpgGame.app.process
     import flash.events.KeyboardEvent;
     import flash.ui.Keyboard;
     
-    import app.message.BoolArrayProto;
-    
-    import away3d.log.Log;
-    
-    import gameEngine2D.NetDebug;
-    
     import org.client.mainCore.bean.BeanEvent;
     import org.client.mainCore.bean.BeanManager;
     import org.client.mainCore.manager.EventManager;
     import org.client.mainCore.utils.Tick;
-    
-    import starling.core.Starling;
 
 	/**
 	 *
@@ -221,6 +212,7 @@ package com.rpgGame.app.process
 			TipManager.registerTipsParserClass(TipType.NORMAL_TIP, NormalTip);
 			TipManager.registerTipsParserClass(TipType.PROPCHANGE_TIP, TxtPropChangeTip);
 			TipManager.registerTipsParserClass(TipType.LOSTSKILL_TIP,LostSkillTip);
+			TipManager.registerTipsParserClass(TipType.SHIJIEBOSS_REWAD_TIP,ShiJieBossRewardTips);
 			TipManager.registerTipsParserClass(TipType.MERIDIAN_TIP,MeridainPointTip);
 
 			TipManager.registerTipsParserClass(TipType.PASSIVESKILL_TIP,PassiveSpellTip);

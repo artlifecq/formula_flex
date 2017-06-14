@@ -142,39 +142,6 @@ package com.rpgGame.app.sender
 		}
 		
 		/**
-		 * 在副本中要求离开副本, 回到进入副本前的场景/坐标.
-		 *
-		 * 必须在副本中才能请求, 请求后必须等返回
-		 *
-		 * 此消息不只是在剧情副本中才能用, 任何副本都用这条来主动离开副本
-		 *
-		 * 死亡时候发送也可以, 会满血回到进入副本前的位置
-		 *
-		 * 没有附带信息
-		 */
-		public static function requestLeaveDungeon(mapid:int=-1, pos:Point = null, params:int = 0) : void
-		{
-			if (ReqLockUtil.isReqLocked(101218))
-				return;
-			ReqLockUtil.lockReq(101218, 5 * 1000);
-			
-			var msg:ReqChangeMapCommonMessage = new ReqChangeMapCommonMessage();
-			msg.mapModel = mapid;
-			if (pos == null)
-			{
-				msg.position = new Position();
-			}
-			else
-			{
-				msg.position = Position.FromGridPoint(pos);
-			}
-			
-			msg.params = params;
-			
-			SocketConnection.send(msg);
-		}
-		
-		/**
 		 * 客户端请求跳跃. 不管是一段跳还是二段跳, 都只发跳跃的目标点(鼠标所指的点, 不管当前点是否可走以及距离,
 		 * 这些全服务器根据当时服务器上角色的坐标来计算)
 		 *
@@ -331,6 +298,16 @@ package com.rpgGame.app.sender
 			msg.itemmodelid=itemid;
 			msg.type=type;
 			SocketConnection.send(msg);
+		}
+		
+		/**
+		 *请求回到上一个场景去 
+		 * 
+		 */
+		public static function reqToPreScene():void
+		{
+			var msg:*;
+			sendMsg(msg);
 		}
 	}
 }

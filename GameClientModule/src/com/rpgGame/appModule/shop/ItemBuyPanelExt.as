@@ -4,13 +4,9 @@ package com.rpgGame.appModule.shop
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
-	import com.rpgGame.app.ui.alert.GameAlertExt;
-	import com.rpgGame.app.ui.alert.GameAlertYellowBtnExt;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
-	import com.rpgGame.appModule.common.GlobalFunction;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.utils.GameColorUtil;
@@ -22,7 +18,6 @@ package com.rpgGame.appModule.shop
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.info.shop.ShopItemVo;
-	import com.rpgGame.coreData.type.CharAttributeType;
 	
 	import flash.utils.getTimer;
 	
@@ -57,7 +52,7 @@ package com.rpgGame.appModule.shop
 		{
 			_skin=new Tankuang_Shangpin();
 			super(_skin);
-			_grid=IconCDFace.getIcoFace(IcoSizeEnum.ICON_64);
+			_grid=IconCDFace.create(IcoSizeEnum.ICON_64);
 //			_grid.x=6;
 //			_grid.y=6;
 			this._skin.icons.addChild(_grid);

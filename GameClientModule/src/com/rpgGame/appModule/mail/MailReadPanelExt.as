@@ -29,7 +29,7 @@ package com.rpgGame.appModule.mail
 			_fujianList=new Vector.<IconCDFace>();
 			for(var i:int=0;i<MAX_NUM;i++)
 			{
-				var ico:IconCDFace=IconCDFace.getIcoFace(IcoSizeEnum.ICON_48);		
+				var ico:IconCDFace=IconCDFace.create(IcoSizeEnum.ICON_48);		
 				ico.selectImgVisible=false;
 				ico.x=(int(i/6))*(ico.width+4);
 				ico.y=(int(i/6))*(ico.height+4);

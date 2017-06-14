@@ -1,7 +1,7 @@
 package com.rpgGame.appModule.activety.zonghe
 {
 	import com.gameClient.utils.JSONUtil;
-	import com.rpgGame.app.sender.ActivitySender;
+	import com.rpgGame.app.sender.SpecialActivitySender;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
@@ -58,7 +58,7 @@ package com.rpgGame.appModule.activety.zonghe
 			_skin.joinBtn.addEventListener(Event.TRIGGERED,onJoin);
 			var icon:IconCDFace;
 			for(i=1;i<5;i++){
-				icon=IconCDFace.getIcoFace(IcoSizeEnum.ICON_48);
+				icon=IconCDFace.create(IcoSizeEnum.ICON_48);
 				rewardIcon.push(icon);
 				icon.x=_skin["icon"+i].x;
 				icon.y=_skin["icon"+i].y;
@@ -73,7 +73,7 @@ package com.rpgGame.appModule.activety.zonghe
 				var dataInfo:ActivetyInfo=data as ActivetyInfo;
 				for(var i:int=0;i<_activeData.length;i++){
 					var info:ActivetyInfo=_activeData.data[i] as ActivetyInfo;
-					if(info.cfg.q_activity_id==dataInfo.cfg.q_activity_id){
+					if(info.actCfg.q_activity_id==dataInfo.actCfg.q_activity_id){
 						_skin.ListItem.selectedIndex=i;
 						_skin.ListItem.scrollToDisplayIndex(i);
 						_skin.ListItem.dataProvider.updateItemAt(i);
@@ -87,7 +87,7 @@ package com.rpgGame.appModule.activety.zonghe
 		private function onJoin(e:Event):void
 		{
 			if(selectedInfo.info.joinState==2){
-				ActivitySender.reqJoinAct(selectedInfo.cfg.q_activity_id);
+				SpecialActivitySender.reqJoinAct(selectedInfo.actCfg.q_activity_id);
 			}else{//活动不在进行中
 //				NoticeManager.showNotifyById();
 			}
@@ -100,13 +100,13 @@ package com.rpgGame.appModule.activety.zonghe
 				return;
 			}
 			selectedInfo=info;
-			_skin.activeName.styleName="ui/app/activety/zonghe/active_name/"+info.cfg.q_activity_id+".png";
-			_skin.activeBg.styleName="ui/big_bg/activety/des/"+info.cfg.q_activity_id+".jpg";
-			_skin.lbMsg.htmlText=info.cfg.q_text;
+			_skin.activeName.styleName="ui/app/activety/zonghe/active_name/"+info.actCfg.q_activity_id+".png";
+			_skin.activeBg.styleName="ui/big_bg/activety/des/"+info.actCfg.q_activity_id+".jpg";
+			_skin.lbMsg.htmlText=info.actCfg.q_text;
 			
 			var arr:Array;
-			if(info.cfg.q_rewards){
-				arr=JSONUtil.decode(info.cfg.q_rewards);
+			if(info.actCfg.q_rewards){
+				arr=JSONUtil.decode(info.actCfg.q_rewards);
 			}else{
 				arr=[];
 			}
@@ -137,7 +137,7 @@ package com.rpgGame.appModule.activety.zonghe
 			var icon:IconCDFace;
 			while(rewardIcon.length>0){
 				icon=rewardIcon.pop();
-				IconCDFace.releaseIcoFace(icon);
+				icon.destroy();
 			}
 		}
 	}

@@ -83,7 +83,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 		{
 			var icon:IconCDFace;
 			for(var i:int=0;i<3;i++){
-				icon=IconCDFace.getIcoFace(IcoSizeEnum.ICON_48);
+				icon=IconCDFace.create(IcoSizeEnum.ICON_48);
 				rewardIcon.push(icon);
 				rewardList[i].container.addChildAt(icon,3);
 				icon.x=9;
@@ -95,7 +95,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 		{
 			while(rewardIcon.length>0){
 				var icon:IconCDFace=rewardIcon.pop();
-				IconCDFace.releaseIcoFace(icon);
+				icon.destroy();
 			}
 		}
 		

@@ -30,15 +30,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 
 		public var lbHeadName:feathers.controls.Label;
 
-		public var lbTime1:feathers.controls.Label;
-
-		public var lbTime2:feathers.controls.Label;
-
-		public var lbTime3:feathers.controls.Label;
-
-		public var lbTime4:feathers.controls.Label;
-
-		public var lbTime5:feathers.controls.Label;
+		public var lbTime:feathers.controls.Label;
 
 		public var sec_ico1_0:feathers.controls.UIAsset;
 
@@ -163,72 +155,16 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			return temp;
 		}
 
-		private function lbTime1_i():feathers.controls.Label
+		private function lbTime_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbTime1 = temp;
-			temp.name = "lbTime1";
+			lbTime = temp;
+			temp.name = "lbTime";
 			temp.text = "10:10";
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 45;
+			temp.width = 236;
 			temp.x = 13;
-			temp.y = 78;
-			return temp;
-		}
-
-		private function lbTime2_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbTime2 = temp;
-			temp.name = "lbTime2";
-			temp.text = "10:10";
-			temp.color = 0x5CB006;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 45;
-			temp.x = 61;
-			temp.y = 78;
-			return temp;
-		}
-
-		private function lbTime3_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbTime3 = temp;
-			temp.name = "lbTime3";
-			temp.text = "10:10";
-			temp.color = 0x5CB006;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 45;
-			temp.x = 109;
-			temp.y = 78;
-			return temp;
-		}
-
-		private function lbTime4_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbTime4 = temp;
-			temp.name = "lbTime4";
-			temp.text = "10:10";
-			temp.color = 0x5CB006;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 45;
-			temp.x = 155;
-			temp.y = 78;
-			return temp;
-		}
-
-		private function lbTime5_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbTime5 = temp;
-			temp.name = "lbTime5";
-			temp.text = "10:10";
-			temp.color = 0x5CB006;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 45;
-			temp.x = 203;
 			temp.y = 78;
 			return temp;
 		}
@@ -359,7 +295,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.width = 253;
 			temp.x = 0;
 			temp.y = 0;
-			temp.elementsContent = [ui_bg_i(),__ShiJieBoss_Skin_UIAsset1_i(),lbHeadName_i(),head_left_i(),head_right_i(),sec_navi1_i(),sec_navi0_i(),sec_ico1_0_i(),sec_ico1_1_i(),sec_ico1_2_i(),sec_ico1_3_i(),sec_subbut1_i(),sec_subbut2_i(),sec_info_i(),lbTime1_i(),lbTime2_i(),lbTime3_i(),lbTime4_i(),lbTime5_i(),uiYiTiaoZhan_i(),uiWeiJiSha_i()];
+			temp.elementsContent = [ui_bg_i(),__ShiJieBoss_Skin_UIAsset1_i(),lbHeadName_i(),head_left_i(),head_right_i(),sec_navi1_i(),sec_navi0_i(),sec_ico1_0_i(),sec_ico1_1_i(),sec_ico1_2_i(),sec_ico1_3_i(),sec_subbut1_i(),sec_subbut2_i(),sec_info_i(),lbTime_i(),uiYiTiaoZhan_i(),uiWeiJiSha_i()];
 			return temp;
 		}
 

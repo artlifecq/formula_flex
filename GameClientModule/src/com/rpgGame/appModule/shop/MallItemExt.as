@@ -28,7 +28,7 @@ package com.rpgGame.appModule.shop
 			
 			_skin=new ShangPinItem();
 			super(_skin);
-			_grid=IconCDFace.getIcoFace(IcoSizeEnum.ICON_64);
+			_grid=IconCDFace.create(IcoSizeEnum.ICON_64);
 			_grid.x=-1;
 			_grid.y=-1;
 			this._skin.icons.addChild(_grid);

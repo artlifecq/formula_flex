@@ -67,7 +67,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 			var rewads:Array=JSONUtil.decode(cfg.q_rewards);
 			var itemInfo:ClientItemInfo=new ClientItemInfo(rewads[0].mod);
 			
-			_icon=IconCDFace.getIcoFace(IcoSizeEnum.ICON_64);
+			_icon=IconCDFace.create(IcoSizeEnum.ICON_64);
 			_skin.container.addChild(_icon);
 			_icon.x=_skin.icon1.x;
 			_icon.y=_skin.icon1.y;
@@ -110,7 +110,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 		override protected function onHide():void
 		{
 			super.onHide();
-			IconCDFace.releaseIcoFace(_icon);
+			_icon.destroy();
 			TimerServer.remove(updateTime);
 		}
 	}

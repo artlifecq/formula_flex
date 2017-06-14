@@ -128,7 +128,7 @@ package com.rpgGame.app.ui.main.taskbar
 			ico1List=new Vector.<IconCDFace>();
 			for(i=0;i<ico1BgList.length;i++)
 			{
-				ico=IconCDFace.getIcoFace(IcoSizeEnum.ICON_48);
+				ico=IconCDFace.create(IcoSizeEnum.ICON_48);
 				ico.showCD=false;
 				ico.x=ico1BgList[i].x-6;
 				ico.y=ico1BgList[i].y-6;
@@ -147,7 +147,7 @@ package com.rpgGame.app.ui.main.taskbar
 			ico2List=new Vector.<IconCDFace>();
 			for(i=0;i<ico2BgList.length;i++)
 			{
-				ico=IconCDFace.getIcoFace(IcoSizeEnum.ICON_48);
+				ico=IconCDFace.create(IcoSizeEnum.ICON_48);
 				ico.showCD=false;
 				ico.x=ico2BgList[i].x-6;
 				ico.y=ico2BgList[i].y-6;

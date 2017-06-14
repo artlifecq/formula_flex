@@ -201,7 +201,7 @@ package com.rpgGame.appModule.common
 			{
 				size=IcoSizeEnum.ICON_36;
 			}
-			icon=IconCDFace.getIcoFace(size);
+			icon=IconCDFace.create(size);
 			bg.addChild(icon);
 		
 //			icon.x=(bg.width-size)/2;

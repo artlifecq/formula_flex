@@ -2,24 +2,16 @@ package com.rpgGame.appModule.task
 {
 
 	import com.game.mainCore.core.timer.GameTimer;
-	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.sender.TaskSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
-	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
-	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
-	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
-	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.clientConfig.Q_mission_base;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
-	import com.rpgGame.coreData.info.item.ClientItemInfo;
-	import com.rpgGame.coreData.info.item.ItemUtil;
-	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.task.bean.TaskInfo;
 	
 	import feathers.controls.Button;
@@ -77,7 +69,7 @@ package com.rpgGame.appModule.task
 			var i:int;
 			for(i=0;i<icoBgList.length;i++)
 			{
-				var ico:IconCDFace=IconCDFace.getIcoFace(IcoSizeEnum.ICON_42);
+				var ico:IconCDFace=IconCDFace.create(IcoSizeEnum.ICON_42);
 				ico.showCD=false;
 				ico.x=icoBgList[i].x+6;
 				ico.y=icoBgList[i].y+6;

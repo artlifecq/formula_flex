@@ -45,6 +45,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.LostSkillUpData;
 	import com.rpgGame.coreData.cfg.LunJianCfg;
 	import com.rpgGame.coreData.cfg.MailCfgData;
+	import com.rpgGame.coreData.cfg.MapPreLoadData;
 	import com.rpgGame.coreData.cfg.MazeCfgData;
 	import com.rpgGame.coreData.cfg.NewFuncCfgData;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
@@ -69,6 +70,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.ZoneCfgData;
 	import com.rpgGame.coreData.cfg.ZoneMultyCfgData;
 	import com.rpgGame.coreData.cfg.active.ActivetyDataManager;
+	import com.rpgGame.coreData.cfg.active.WorldBossCfgData;
 	import com.rpgGame.coreData.cfg.animat.EffectAnimationCfgData;
 	import com.rpgGame.coreData.cfg.biao.BiaoCfgData;
 	import com.rpgGame.coreData.cfg.cheats.CheatsCfg;
@@ -212,6 +214,7 @@ package com.rpgGame.app.data
 			//			CountryUnionStatCfgData.setup(null); //待解决
 			MeridianCfg.setup(dic[ConfigClassRegister.Q_meridian]);
 			ActivetyDataManager.setup(dic[ConfigClassRegister.Q_special_activities]);
+			WorldBossCfgData.setup(dic[ConfigClassRegister.Q_world_boss]);
 			
 			////////////////////////////////////////////////////////////////////////
 			//
@@ -220,6 +223,7 @@ package com.rpgGame.app.data
 			///////////////////////////////////////////////////////////////////////
 			//场景相关
 			MapDataManager.setSceneConfig(dic[ConfigClassRegister.Q_map]);
+			MapPreLoadData.setup(dic[ConfigClassRegister.Q_map_preload]);
 			// 地图区域
 			AreaCfgData.setup(dic[ConfigClassRegister.Q_area]);
 			// 传送门

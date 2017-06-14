@@ -32,15 +32,9 @@ package org.mokylin.skin.app.activety.shijieboss
 
 		public var icon4:feathers.controls.UIAsset;
 
-		public var lbTime1:feathers.controls.Label;
+		public var lastSkiller:feathers.controls.Label;
 
-		public var lbTime2:feathers.controls.Label;
-
-		public var lbTime3:feathers.controls.Label;
-
-		public var lbTime4:feathers.controls.Label;
-
-		public var lbTime5:feathers.controls.Label;
+		public var lbTime:feathers.controls.Label;
 
 		public var modeCont:feathers.controls.SkinnableContainer;
 
@@ -55,7 +49,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [__ShiJieBoss_Skin_UIAsset1_i(),__ShiJieBoss_Skin_UIAsset2_i(),ListItem_i(),__ShiJieBoss_Skin_UIAsset3_i(),activeBg_i(),modeCont_i(),__ShiJieBoss_Skin_UIAsset4_i(),__ShiJieBoss_Skin_Label1_i(),activeName_i(),icon1_i(),icon2_i(),icon3_i(),icon4_i(),__ShiJieBoss_Skin_Label2_i(),__ShiJieBoss_Skin_UIAsset5_i(),__ShiJieBoss_Skin_Label3_i(),lbTime1_i(),lbTime2_i(),lbTime3_i(),lbTime4_i(),lbTime5_i()];
+			this.elementsContent = [__ShiJieBoss_Skin_UIAsset1_i(),__ShiJieBoss_Skin_UIAsset2_i(),ListItem_i(),__ShiJieBoss_Skin_UIAsset3_i(),activeBg_i(),modeCont_i(),__ShiJieBoss_Skin_UIAsset4_i(),__ShiJieBoss_Skin_UIAsset5_i(),lastSkiller_i(),activeName_i(),icon1_i(),icon2_i(),icon3_i(),icon4_i(),__ShiJieBoss_Skin_Label1_i(),__ShiJieBoss_Skin_UIAsset6_i(),__ShiJieBoss_Skin_Label2_i(),lbTime_i()];
 			
 			states = {
 			};
@@ -82,18 +76,6 @@ package org.mokylin.skin.app.activety.shijieboss
 		private function __ShiJieBoss_Skin_Label1_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "最后一击$";
-			temp.color = 0xBEA757;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 147;
-			temp.x = 717;
-			temp.y = 85;
-			return temp;
-		}
-
-		private function __ShiJieBoss_Skin_Label2_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "(几率掉落)";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
@@ -103,7 +85,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			return temp;
 		}
 
-		private function __ShiJieBoss_Skin_Label3_i():feathers.controls.Label
+		private function __ShiJieBoss_Skin_Label2_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "每日刷新时间";
@@ -158,6 +140,15 @@ package org.mokylin.skin.app.activety.shijieboss
 		private function __ShiJieBoss_Skin_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/activety/shijieboss/di.png";
+			temp.x = 667;
+			temp.y = 378;
+			return temp;
+		}
+
+		private function __ShiJieBoss_Skin_UIAsset6_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/activety/shijieboss/xiedaibaowu.png";
 			temp.x = 641;
 			temp.y = 436;
@@ -169,7 +160,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			activeBg = temp;
 			temp.name = "activeBg";
-			temp.styleName = "ui/app/activety/shijieboss/bg.jpg";
+			temp.styleName = "ui/big_bg/activety/des/14.jpg";
 			temp.x = 629;
 			temp.y = 78;
 			return temp;
@@ -180,7 +171,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			activeName = temp;
 			temp.name = "activeName";
-			temp.styleName = "ui/app/activety/shijieboss/mingzi/1.png";
+			temp.styleName = "ui/app/activety/shijieboss/mingzi/14.png";
 			temp.x = 747;
 			temp.y = 407;
 			return temp;
@@ -230,72 +221,31 @@ package org.mokylin.skin.app.activety.shijieboss
 			return temp;
 		}
 
-		private function lbTime1_i():feathers.controls.Label
+		private function lastSkiller_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbTime1 = temp;
-			temp.name = "lbTime1";
+			lastSkiller = temp;
+			temp.name = "lastSkiller";
+			temp.text = "最后一击$";
+			temp.textAlign = "center";
+			temp.color = 0xBEA757;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 183;
+			temp.x = 688;
+			temp.y = 380;
+			return temp;
+		}
+
+		private function lbTime_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbTime = temp;
+			temp.name = "lbTime";
 			temp.text = "10:10";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 47;
+			temp.width = 287;
 			temp.x = 642;
-			temp.y = 543;
-			return temp;
-		}
-
-		private function lbTime2_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbTime2 = temp;
-			temp.name = "lbTime2";
-			temp.text = "10:10";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 47;
-			temp.x = 701;
-			temp.y = 543;
-			return temp;
-		}
-
-		private function lbTime3_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbTime3 = temp;
-			temp.name = "lbTime3";
-			temp.text = "10:10";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 47;
-			temp.x = 759;
-			temp.y = 543;
-			return temp;
-		}
-
-		private function lbTime4_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbTime4 = temp;
-			temp.name = "lbTime4";
-			temp.text = "10:10";
-			temp.color = 0xE8C958;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 47;
-			temp.x = 818;
-			temp.y = 543;
-			return temp;
-		}
-
-		private function lbTime5_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbTime5 = temp;
-			temp.name = "lbTime5";
-			temp.text = "10:10";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 47;
-			temp.x = 876;
 			temp.y = 543;
 			return temp;
 		}
@@ -305,10 +255,10 @@ package org.mokylin.skin.app.activety.shijieboss
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			modeCont = temp;
 			temp.name = "modeCont";
-			temp.height = 323;
-			temp.width = 294;
-			temp.x = 632;
-			temp.y = 78;
+			temp.height = 23;
+			temp.width = 151;
+			temp.x = 775;
+			temp.y = 378;
 			return temp;
 		}
 

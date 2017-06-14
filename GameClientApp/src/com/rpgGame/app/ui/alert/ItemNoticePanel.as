@@ -137,7 +137,7 @@ package  com.rpgGame.app.ui.alert
 		override protected function onShow():void
 		{
 			super.onShow();
-			_iconFace=IconCDFace.getIcoFace(IcoSizeEnum.ICON_64);
+			_iconFace=IconCDFace.create(IcoSizeEnum.ICON_64);
 			_iconFace.x=30;
 			_iconFace.y=50;
 			_skin.container.addChild(_iconFace);
@@ -146,8 +146,7 @@ package  com.rpgGame.app.ui.alert
 		override protected function onHide():void
 		{
 			super.onHide();
-			IconCDFace.releaseIcoFace(_iconFace);
-			_iconFace=null;
+			_iconFace.destroy();
 			clientItemInfo=null;
 			currentNum=0;
 			pool.push(this);

@@ -40,7 +40,7 @@ package com.rpgGame.appModule.dungeon.genuine
 			super.hide();
 			while(gridList.length>0){
 				var icon:IconCDFace=gridList.pop();
-				IconCDFace.releaseIcoFace(icon);
+				icon.destroy();
 			}
 		}
 		
@@ -68,7 +68,7 @@ package com.rpgGame.appModule.dungeon.genuine
 			gridList=new Vector.<IconCDFace>();
 			for(var i:int = 0;i<length;i++)
 			{
-				var grid:IconCDFace = IconCDFace.getIcoFace(IcoSizeEnum.ICON_48);
+				var grid:IconCDFace = IconCDFace.create(IcoSizeEnum.ICON_48);
 				grid.setBg( GridBGType.GRID_SIZE_48,1 );
 				grid.bgImage.styleName = "ui/common/gezikuang/tubiaodikuang/48.png";
 				_skin.container.addChild(grid);

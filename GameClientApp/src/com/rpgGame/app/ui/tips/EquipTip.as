@@ -98,7 +98,7 @@ package com.rpgGame.app.ui.tips
 		
 		public function setTipData(data:*):void
 		{
-			_iconFace=IconCDFace.getIcoFace(IcoSizeEnum.ICON_64);
+			_iconFace=IconCDFace.create(IcoSizeEnum.ICON_64);
 			_iconFace.alwayShowCount=false;
 			addChild(_iconFace);
 			_iconFace.x=5;
@@ -414,7 +414,7 @@ package com.rpgGame.app.ui.tips
 		 */		
 		public function hideTips():void
 		{
-			IconCDFace.releaseIcoFace(_iconFace);
+			_iconFace.destroy();
 		}
 
 		/**

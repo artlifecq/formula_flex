@@ -37,7 +37,9 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.core.manager.BGMManager;
 	import com.rpgGame.coreData.cfg.AreaCfgData;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.MapPreLoadData;
 	import com.rpgGame.coreData.cfg.country.CountryNameCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_map_preload;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.map.EnumMapType;
 	import com.rpgGame.coreData.info.map.SceneData;
@@ -565,11 +567,10 @@ package com.rpgGame.app.manager.scene
 			{
 				//				SceneSender.sceneLoaded(SceneManager.viewDistance);老的代码
 				var mapId:int=MainRoleManager.actorInfo.mapID;
-				var sceneData:SceneData=MapDataManager.getMapInfo(mapId);
-				if(sceneData.getData().q_map_zones==1){//副本
-					var appinfo:AppInfo=AppConstant.getAppinfoByAppName(AppConstant.SWORD_RESULT_SUCCESS);
-					var loadUrl : String = ClientConfig.getUI(appinfo.resName);
-					AppLoadManager.instace().loadByUrl(loadUrl, appinfo.loadingTitle, 	onLoadComplete, onError);
+				var preInfo:Q_map_preload=MapPreLoadData.getPreLoadInfo(mapId);
+				if(preInfo){//存在需要预加载的图集
+					var loadUrl : String = ClientConfig.getUI(preInfo.q_res_name);
+					AppLoadManager.instace().loadByUrl(loadUrl, "预加载图集", 	onLoadComplete, onError);
 				}else{
 					onLoadComplete();
 				}

@@ -15,11 +15,14 @@ package com.rpgGame.netData.monster.message{
 	
 		//玩家对BOSS伤害列表
 		private var _BossDamageInfos: Vector.<BossDamageInfo> = new Vector.<BossDamageInfo>();
-		//boss的id
-		private var _monsterModelId: int;
+		//总血量
+		private var _totalHp: int;
 		
-		//总伤害
-		private var _totalDamage: int;
+		//玩家自身排名
+		private var _rank: int;
+		
+		//玩家自身造成伤害
+		private var _damage: int;
 		
 		
 		/**
@@ -32,10 +35,12 @@ package com.rpgGame.netData.monster.message{
 			for (i = 0; i < _BossDamageInfos.length; i++) {
 				writeBean(_BossDamageInfos[i]);
 			}
-			//boss的id
-			writeInt(_monsterModelId);
-			//总伤害
-			writeInt(_totalDamage);
+			//总血量
+			writeInt(_totalHp);
+			//玩家自身排名
+			writeInt(_rank);
+			//玩家自身造成伤害
+			writeInt(_damage);
 			return true;
 		}
 		
@@ -49,10 +54,12 @@ package com.rpgGame.netData.monster.message{
 			for (i = 0; i < BossDamageInfos_length; i++) {
 				_BossDamageInfos[i] = readBean(BossDamageInfo) as BossDamageInfo;
 			}
-			//boss的id
-			_monsterModelId = readInt();
-			//总伤害
-			_totalDamage = readInt();
+			//总血量
+			_totalHp = readInt();
+			//玩家自身排名
+			_rank = readInt();
+			//玩家自身造成伤害
+			_damage = readInt();
 			return true;
 		}
 		
@@ -80,33 +87,48 @@ package com.rpgGame.netData.monster.message{
 		}
 		
 		/**
-		 * get boss的id
+		 * get 总血量
 		 * @return 
 		 */
-		public function get monsterModelId(): int{
-			return _monsterModelId;
+		public function get totalHp(): int{
+			return _totalHp;
 		}
 		
 		/**
-		 * set boss的id
+		 * set 总血量
 		 */
-		public function set monsterModelId(value: int): void{
-			this._monsterModelId = value;
+		public function set totalHp(value: int): void{
+			this._totalHp = value;
 		}
 		
 		/**
-		 * get 总伤害
+		 * get 玩家自身排名
 		 * @return 
 		 */
-		public function get totalDamage(): int{
-			return _totalDamage;
+		public function get rank(): int{
+			return _rank;
 		}
 		
 		/**
-		 * set 总伤害
+		 * set 玩家自身排名
 		 */
-		public function set totalDamage(value: int): void{
-			this._totalDamage = value;
+		public function set rank(value: int): void{
+			this._rank = value;
+		}
+		
+		/**
+		 * get 玩家自身造成伤害
+		 * @return 
+		 */
+		public function get damage(): int{
+			return _damage;
+		}
+		
+		/**
+		 * set 玩家自身造成伤害
+		 */
+		public function set damage(value: int): void{
+			this._damage = value;
 		}
 		
 	}

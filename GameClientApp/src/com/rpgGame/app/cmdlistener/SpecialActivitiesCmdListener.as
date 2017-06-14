@@ -5,8 +5,11 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.core.events.ActivityEvent;
 	import com.rpgGame.coreData.cfg.active.ActivetyDataManager;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
+	import com.rpgGame.netData.monster.message.ResBossDamageInfosToClientMessage;
+	import com.rpgGame.netData.monster.message.SCWorldBossKillerNameMessage;
 	import com.rpgGame.netData.specialactivities.bean.SpecialActivityInfo;
 	import com.rpgGame.netData.specialactivities.message.SCActivitiesNotifyListMessage;
+	import com.rpgGame.netData.specialactivities.message.SCEnterActivityMessage;
 	import com.rpgGame.netData.specialactivities.message.SCSpecialActivitiesListMessage;
 	import com.rpgGame.netData.specialactivities.message.SCSpecialActivityCloseMessage;
 	import com.rpgGame.netData.specialactivities.message.SCSpecialActivityOpenMessage;
@@ -28,7 +31,26 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(162102,onSCSpecialActivityOpenMessage);
 			SocketConnection.addCmdListener(162103,onSCSpecialActivityCloseMessage);
 			SocketConnection.addCmdListener(162104,onSCActivitiesNotifyListMessage);
+			SocketConnection.addCmdListener(162105,onSCEnterActivityMessage);
+			
+			SocketConnection.addCmdListener(114119,onSCWorldBossKillerNameMessage);
+			SocketConnection.addCmdListener(114115,onResBossDamageInfosToClientMessage);
 			finish();
+		}
+		
+		private function onResBossDamageInfosToClientMessage(msg:ResBossDamageInfosToClientMessage):void
+		{
+			EventManager.dispatchEvent(ActivityEvent.UPDATE_BOSS_HURT_RANK,msg);
+		}
+		
+		private function onSCEnterActivityMessage(msg:SCEnterActivityMessage):void
+		{
+			EventManager.dispatchEvent(ActivityEvent.ENTER_ACTIVITY,msg.activity);
+		}
+		
+		private function onSCWorldBossKillerNameMessage(msg:SCWorldBossKillerNameMessage):void
+		{
+			ActivetyDataManager.updateBossKiller(msg.activityId,msg.killerName);
 		}
 		
 		/**

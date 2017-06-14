@@ -2,12 +2,15 @@ package org.mokylin.skin.app.activety.shijieboss
 {
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
+	import feathers.controls.Group;
 	import feathers.controls.Label;
+	import feathers.controls.List;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.component.button.ButtonSkin_shouhui;
 	import org.mokylin.skin.component.button.ButtonSkin_zhankai;
+	import org.mokylin.skin.component.list.ListSkin1;
 
 	/**
 	 * @private
@@ -19,9 +22,17 @@ package org.mokylin.skin.app.activety.shijieboss
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var ListItem:feathers.controls.List;
+
 		public var btn_close:feathers.controls.Button;
 
 		public var btn_open:feathers.controls.Button;
+
+		public var myHurt:feathers.controls.Label;
+
+		public var myRank:feathers.controls.Label;
+
+		public var uiIcon:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -32,9 +43,9 @@ package org.mokylin.skin.app.activety.shijieboss
 			super();
 			
 			this.currentState = "normal";
-			this.height = 383;
-			this.width = 286;
-			this.elementsContent = [__ShangHaiPaiHang_UIAsset1_i(),__ShangHaiPaiHang_UIAsset2_i(),__ShangHaiPaiHang_UIAsset3_i(),__ShangHaiPaiHang_UIAsset4_i(),btn_open_i(),btn_close_i(),__ShangHaiPaiHang_UIAsset5_i(),__ShangHaiPaiHang_Label1_i(),__ShangHaiPaiHang_Label2_i(),__ShangHaiPaiHang_UIAsset6_i()];
+			this.height = 407;
+			this.width = 302;
+			this.elementsContent = [__ShangHaiPaiHang_UIAsset1_i(),__ShangHaiPaiHang_UIAsset2_i(),__ShangHaiPaiHang_UIAsset3_i(),__ShangHaiPaiHang_UIAsset4_i(),btn_open_i(),btn_close_i(),__ShangHaiPaiHang_UIAsset5_i(),myHurt_i(),myRank_i(),uiIcon_i(),__ShangHaiPaiHang_Group1_i(),ListItem_i()];
 			
 			states = {
 			};
@@ -45,27 +56,77 @@ package org.mokylin.skin.app.activety.shijieboss
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
+		private function ListItem_i():feathers.controls.List
+		{
+			var temp:feathers.controls.List = new feathers.controls.List();
+			ListItem = temp;
+			temp.name = "ListItem";
+			temp.height = 267;
+			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
+			temp.width = 295;
+			temp.x = 4;
+			temp.y = 59;
+			return temp;
+		}
+
+		private function __ShangHaiPaiHang_Group1_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			temp.x = 0;
+			temp.y = 31;
+			temp.elementsContent = [__ShangHaiPaiHang_UIAsset6_i(),__ShangHaiPaiHang_Label1_i(),__ShangHaiPaiHang_Label2_i(),__ShangHaiPaiHang_Label3_i(),__ShangHaiPaiHang_Label4_i()];
+			return temp;
+		}
+
 		private function __ShangHaiPaiHang_Label1_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "我的伤害：$";
-			temp.color = 0xE8C958;
+			temp.text = "名次";
+			temp.textAlign = "left";
+			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 139;
-			temp.x = 8;
-			temp.y = 313;
+			temp.width = 35;
+			temp.x = 3;
+			temp.y = 4;
 			return temp;
 		}
 
 		private function __ShangHaiPaiHang_Label2_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "我的排名：$";
-			temp.color = 0xE8C958;
+			temp.text = "门派与玩家名";
+			temp.textAlign = "left";
+			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 139;
-			temp.x = 8;
-			temp.y = 333;
+			temp.width = 104;
+			temp.x = 57;
+			temp.y = 4;
+			return temp;
+		}
+
+		private function __ShangHaiPaiHang_Label3_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.text = "伤害值";
+			temp.textAlign = "left";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 60;
+			temp.x = 194;
+			temp.y = 4;
+			return temp;
+		}
+
+		private function __ShangHaiPaiHang_Label4_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.text = "奖励";
+			temp.textAlign = "left";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 32;
+			temp.x = 265;
+			temp.y = 4;
 			return temp;
 		}
 
@@ -74,7 +135,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 383;
 			temp.styleName = "ui/common/background/neikuang_3.png";
-			temp.width = 286;
+			temp.width = 302;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -84,8 +145,8 @@ package org.mokylin.skin.app.activety.shijieboss
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/activety/shijieboss/bossbg.jpg";
-			temp.x = 3;
-			temp.y = 305;
+			temp.x = 2;
+			temp.y = 330;
 			return temp;
 		}
 
@@ -111,17 +172,17 @@ package org.mokylin.skin.app.activety.shijieboss
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/activety/shijieboss/zuihoulyijiwanjia.png";
-			temp.x = 38;
-			temp.y = 356;
+			temp.x = 31;
+			temp.y = 382;
 			return temp;
 		}
 
 		private function __ShangHaiPaiHang_UIAsset6_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/tubiao/shengwang.png";
-			temp.x = 215;
-			temp.y = 320;
+			temp.styleName = "ui/app/activety/shijieboss/yeqian.png";
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -144,6 +205,45 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_zhankai;
 			temp.x = 0;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function myHurt_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			myHurt = temp;
+			temp.name = "myHurt";
+			temp.text = "我的伤害：$";
+			temp.color = 0xE8C958;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 139;
+			temp.x = 8;
+			temp.y = 339;
+			return temp;
+		}
+
+		private function myRank_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			myRank = temp;
+			temp.name = "myRank";
+			temp.text = "我的排名：$";
+			temp.color = 0xE8C958;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 139;
+			temp.x = 8;
+			temp.y = 359;
+			return temp;
+		}
+
+		private function uiIcon_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiIcon = temp;
+			temp.name = "uiIcon";
+			temp.styleName = "ui/common/tubiao/shengwang.png";
+			temp.x = 249;
+			temp.y = 379;
 			return temp;
 		}
 

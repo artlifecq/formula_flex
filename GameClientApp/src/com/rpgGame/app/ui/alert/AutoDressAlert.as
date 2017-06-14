@@ -201,7 +201,7 @@ package com.rpgGame.app.ui.alert
 		override protected function onShow():void
 		{
 			super.onShow();
-			equipIcon=IconCDFace.getIcoFace(IcoSizeEnum.ICON_64);
+			equipIcon=IconCDFace.create(IcoSizeEnum.ICON_64);
 			skin.icons.addChild(equipIcon);
 		}
 		
@@ -209,7 +209,7 @@ package com.rpgGame.app.ui.alert
 		{
 			super.onHide();
 			gameTimer.stop();
-			IconCDFace.releaseIcoFace(equipIcon);
+			equipIcon.destroy();
 			equipIcon=null;
 		}
 	}

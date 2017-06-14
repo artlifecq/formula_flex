@@ -62,9 +62,9 @@ package com.rpgGame.appModule.activety.zonghe
 				if(!info||info.info==null){
 					return;
 				}
-				_skin.uiName.styleName="ui/app/activety/zonghe/active_name/"+info.cfg.q_activity_id+".png";
-				_skin.uiBg.styleName="ui/big_bg/activety/item/"+info.cfg.q_activity_id+".png";
-				_skin.lbMsg.htmlText=info.cfg.q_desc;
+				_skin.uiName.styleName="ui/app/activety/zonghe/active_name/"+info.actCfg.q_res_id+".png";
+				_skin.uiBg.styleName="ui/big_bg/activety/item/"+info.actCfg.q_res_id+".png";
+				_skin.lbMsg.htmlText=info.actCfg.q_desc;
 				if(info.info.joinState==0){
 					_skin.uiJinxing.visible=false;
 					GrayFilter.gray(this);

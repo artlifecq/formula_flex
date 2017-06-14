@@ -5,7 +5,6 @@ package com.rpgGame.appModule.shop
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.GlobalFunction;
 	import com.rpgGame.app.manager.Mgr;
-	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.utils.TouchableUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
@@ -25,6 +24,8 @@ package com.rpgGame.appModule.shop
 	import flash.geom.Point;
 	import flash.utils.getTimer;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.StateSkin;
 	import feathers.core.ToggleGroup;
 	
@@ -33,7 +34,6 @@ package com.rpgGame.appModule.shop
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
-	import away3d.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -67,7 +67,7 @@ package com.rpgGame.appModule.shop
 		{
 			_skin=new huoquSkin();
 			super(_skin);
-			_grid=IconCDFace.getIcoFace(IcoSizeEnum.ICON_64);
+			_grid=IconCDFace.create(IcoSizeEnum.ICON_64);
 			//			_grid.x=6;
 			//			_grid.y=6;
 			this._skin.itembg.addChild(_grid);

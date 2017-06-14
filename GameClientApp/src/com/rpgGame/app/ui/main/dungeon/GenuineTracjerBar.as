@@ -181,7 +181,7 @@ package com.rpgGame.app.ui.main.dungeon
 			_targetTrack.onHide();
 			_targetTrack = null;
 			while(_rewardIcons.length>0){
-				IconCDFace.releaseIcoFace(_rewardIcons.pop());
+				_rewardIcons.pop().destroy();
 			}
 		}
 		

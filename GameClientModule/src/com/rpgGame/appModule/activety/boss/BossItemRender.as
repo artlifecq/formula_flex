@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.activety.boss
 {
+	import com.rpgGame.app.sender.SpecialActivitySender;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	
 	import feathers.controls.renderers.DefaultListItemRenderer;
@@ -27,6 +28,7 @@ package com.rpgGame.appModule.activety.boss
 		override protected function initialize():void
 		{
 			_skin=new ShiJieBoss_Item();
+			_skin.toSprite(this);
 			var btnSkin:ActiveItemSelecteSkin=new ActiveItemSelecteSkin();
 			_skin.selectedBtn.upSkin=btnSkin.__ActiveItemSelecteSkin_UIAsset2;
 			_skin.selectedBtn.hoverSkin=btnSkin.__ActiveItemSelecteSkin_UIAsset1;
@@ -39,8 +41,16 @@ package com.rpgGame.appModule.activety.boss
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
 			super.onTouchTarget(target);
-			if(target==_skin.selectedBtn){
-				_skin.selectedBtn.isSelected=true;
+			var info:ActivetyInfo=_data as ActivetyInfo;
+			switch(target){
+				case _skin.selectedBtn:
+					_skin.selectedBtn.isSelected=true;
+					break;
+				case _skin.btnEnter:
+					if(info.info){
+						SpecialActivitySender.reqJoinAct(info.info.activityId);
+					}
+					break;
 			}
 		}
 		
@@ -57,12 +67,12 @@ package com.rpgGame.appModule.activety.boss
 				}
 				_skin.selectedBtn.isSelected=this.owner.selectedItem==data;
 				var info:ActivetyInfo=_data as ActivetyInfo;
+				_skin.uiName.styleName="ui/app/activety/shijieboss/diming/"+info.actCfg.q_res_id+".png";
+				_skin.uiBg.styleName="ui/big_bg/activety/item/"+info.actCfg.q_res_id+".png";
+				_skin.lbMsg.htmlText=info.actCfg.q_desc;
 				if(!info||info.info==null){
 					return;
 				}
-				_skin.uiName.styleName="ui/app/activety/zonghe/active_name/"+info.cfg.q_activity_id+".png";
-				_skin.uiBg.styleName="ui/big_bg/activety/item/"+info.cfg.q_activity_id+".png";
-				_skin.lbMsg.htmlText=info.cfg.q_desc;
 				if(info.info.joinState==0){
 					_skin.uiJinxing.visible=false;
 					GrayFilter.gray(this);

@@ -40,6 +40,8 @@ package org.mokylin.skin.app.activety.shijieboss
 			super();
 			
 			this.currentState = "normal";
+			this.height = 71;
+			this.width = 585;
 			this.elementsContent = [uiBg_i(),selectedBtn_i(),uiName_i(),lbMsg_i(),uiJinxing_i(),btnEnter_i()];
 			
 			states = {
@@ -99,7 +101,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiBg = temp;
 			temp.name = "uiBg";
-			temp.styleName = "ui/big_bg/activety/shijieboss/item/1.png";
+			temp.styleName = "ui/big_bg/activety/item/1.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -112,7 +114,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.name = "uiJinxing";
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/common/yitiaozhan.png";
+			temp.styleName = "ui/common/yijisha2.png";
 			temp.x = 347;
 			temp.y = 16;
 			return temp;
@@ -125,7 +127,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.name = "uiName";
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/app/activety/shijieboss/diming/1.png";
+			temp.styleName = "ui/app/activety/shijieboss/diming/14.png";
 			temp.x = 22;
 			temp.y = 19;
 			return temp;

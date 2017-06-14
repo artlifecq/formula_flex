@@ -27,6 +27,7 @@ package com.rpgGame.appModule.activety
 		{
 			_skin=new Activety_Skin();
 			super(_skin);
+			_skin.tabBar.btnWidth=80;
 		}
 		
 		override protected function initTabBarDatas():void
@@ -41,7 +42,7 @@ package com.rpgGame.appModule.activety
 			if(data){
 				var info:ActivetyInfo=data as ActivetyInfo;
 				var index:int=0;
-				index=_tabTypes.indexOf(info.cfg.q_activity_type);
+				index=_tabTypes.indexOf(info.actCfg.q_activity_type);
 				if(index==-1){
 					index=0;
 				}

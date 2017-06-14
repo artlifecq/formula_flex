@@ -8,12 +8,11 @@ package com.rpgGame.coreData.cfg.active
 		/**
 		 *配置信息 
 		 */
-		public var cfg:Q_special_activities;
+		public var actCfg:Q_special_activities;
 		/**
 		 *后台数据 
 		 */
 		public var info:SpecialActivityInfo;
-		
 		public function ActivetyInfo()
 		{
 		}

@@ -298,7 +298,7 @@ package com.rpgGame.app.utils
 		 */		
 		public static function creatIconCDFaceByUIAsset(oldGrid:UIAsset, size:int=46, alpha:Number=1,iconX:int=0,iconY:int=0):IconCDFace
 		{
-			var grid:IconCDFace = IconCDFace.getIcoFace(size);
+			var grid:IconCDFace = IconCDFace.create(size);
 			var icon:String = oldGrid.styleName;
 			grid.setBg( GridBGType.GRID_SIZE_46,alpha );
 			grid.bgImage.styleName = icon;

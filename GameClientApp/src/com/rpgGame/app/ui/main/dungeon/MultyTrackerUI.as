@@ -511,7 +511,7 @@ package com.rpgGame.app.ui.main.dungeon
 			ico1List=new Vector.<IconCDFace>();
 			for(i=0;i<icoBg1List.length;i++)
 			{
-				ico=IconCDFace.getIcoFace(IcoSizeEnum.ICON_48);
+				ico=IconCDFace.create(IcoSizeEnum.ICON_48);
 				ico.showCD=false;
 				ico.x=icoBg1List[i].x-6;
 				ico.y=icoBg1List[i].y-6;
@@ -528,7 +528,7 @@ package com.rpgGame.app.ui.main.dungeon
 			ico2List=new Vector.<IconCDFace>();
 			for(i=0;i<icoBg2List.length;i++)
 			{
-				ico=IconCDFace.getIcoFace(IcoSizeEnum.ICON_48);
+				ico=IconCDFace.create(IcoSizeEnum.ICON_48);
 				ico.showCD=false;
 				ico.x=icoBg2List[i].x-6;
 				ico.y=icoBg2List[i].y-6;
@@ -558,14 +558,14 @@ package com.rpgGame.app.ui.main.dungeon
 			for(i=0;i<lenth;i++)
 			{
 				iocn=ico1List.pop();
-				IconCDFace.releaseIcoFace(iocn);
+				iocn.destroy();
 			}
 			ico1List=null;
 			lenth=ico2List.length;
 			for(i=0;i<lenth;i++)
 			{
 				iocn=ico2List.pop();
-				IconCDFace.releaseIcoFace(iocn);
+				iocn.destroy();
 			}
 			ico2List=null;
 			killButList=null;

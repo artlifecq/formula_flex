@@ -7,9 +7,9 @@ package com.rpgGame.app.sender
 	 * @author dik
 	 * 
 	 */
-	public class ActivitySender extends BaseSender
+	public class SpecialActivitySender extends BaseSender
 	{
-		public function ActivitySender()
+		public function SpecialActivitySender()
 		{
 			super();
 		}

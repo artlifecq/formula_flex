@@ -179,7 +179,7 @@ package com.rpgGame.appModule.equip
 		{
 			_cailiao=new Vector.<IconCDFace>();
 			_exisList=new Vector.<UIAsset>();
-			icon=IconCDFace.getIcoFace(IcoSizeEnum.ICON_64);
+			icon=IconCDFace.create(IcoSizeEnum.ICON_64);
 			icon.selectImgVisible=false;
 			icon.x=572;
 			icon.y=175;
@@ -191,7 +191,7 @@ package com.rpgGame.appModule.equip
 			
 			for(var i:int=0;i<CAILIAO_NUM;i++)
 			{
-				var ico:IconCDFace=IconCDFace.getIcoFace(IcoSizeEnum.ICON_48);		
+				var ico:IconCDFace=IconCDFace.create(IcoSizeEnum.ICON_48);		
 				ico.selectImgVisible=false;
 				//				ico.setIconResName(ClientConfig.getItemIcon("1001",IcoSizeEnum.ICON_48));
 				var uias:UIAsset=_skin.grp_cailiao.getChildByName("cailiao"+(i+1)) as UIAsset;

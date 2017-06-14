@@ -30,7 +30,7 @@ package com.rpgGame.appModule.shop
 			_skin=new ChuShou_Skin();
 			super(_skin);
 			this.model=true;
-			_grid=IconCDFace.getIcoFace(IcoSizeEnum.ICON_64);
+			_grid=IconCDFace.create(IcoSizeEnum.ICON_64);
 			this._skin.imgIocn.addChild(_grid);
 			this._skin.imgIocn.touchable=true;
 			this._skin.btn_ok.addEventListener(Event.TRIGGERED,onSale);
