@@ -42,5 +42,9 @@ package com.rpgGame.app.manager
 		{
 			return D1v1Manager.ins;
 		}
+		public static function get nineTowerMgr():NineTowerMgr
+		{
+			return NineTowerMgr.ins;
+		}
 	}
 }

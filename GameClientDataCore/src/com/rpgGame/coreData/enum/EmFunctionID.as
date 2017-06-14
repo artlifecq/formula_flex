@@ -54,5 +54,7 @@ package com.rpgGame.coreData.enum
 		public static const EM_JINGJIZHENGBA:String="321";
 		/** 活动大厅 **/
 		public static const EM_HUODONGDATING:String="322";
+		/** 九层妖塔 **/
+		public static const EM_TOWERS:String="325";
 	}
 }

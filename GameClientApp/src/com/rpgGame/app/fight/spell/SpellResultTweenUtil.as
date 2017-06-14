@@ -205,14 +205,14 @@
 			}
 			
 			var myTimeline:TimelineLite;
-			myTimeline = new TimelineLite({delay:timeDelay(TweenHurt),onComplete:callBack,onCompleteParams:[showobj]});
+			myTimeline = new TimelineLite({delay:0,onComplete:callBack,onCompleteParams:[showobj]});
 			myTimeline.append(new TweenLite(showobj, 0.7, {x:endPos.x,y:endPos.y,ease:Expo.easeOut}));//,ease:Expo.easeOut
 			myTimeline.addLabel("alpha1", 0);
 			//myTimeline.addLabel("alpha0", 0.6);
 			myTimeline.insert(new TweenLite(showobj, 0.4, {alpha:0.75,scaleX:0.75,scaleY:1}), "alpha1");
 			myTimeline.append(new TweenLite(showobj, 0.3, {alpha:0,x:xx,y:yy,ease:Sine.easeOut}));//,y:pSH[n].y-105,scaleX:0.82,scaleY:0.82,ease:Sine.easeOut
 		}
-		//掉血
+		//掉血，应该用end
 		public static function TweenDiaoXue(showobj:DisplayObject,start:Point, end:Point,callBack:Function):void
 		{
 			if (!showobj||!start||!end) 
@@ -220,15 +220,15 @@
 				return;
 			}
 			
-		
+			start.x=end.x;
+			start.y=end.y;
+			
 			showobj.x=start.x-60;
 			showobj.y=start.y-10;
 			showobj.alpha=0;
 			showobj.scaleX=showobj.scaleY=0.55;
 			
-			var pmX:String=calXPM(start,end);
-			var pmY:String=calYPM(start,end);
-			calEndPos(start,end,70);
+		
 			var myTimeline:TimelineLite;
 			myTimeline = new TimelineLite({delay:timeDelay(TweenDiaoXue),onComplete:callBack,onCompleteParams:[showobj]});
 			myTimeline.append(new TweenLite(showobj, 0.7, {x:start.x+60,ease:Expo.easeOut}));

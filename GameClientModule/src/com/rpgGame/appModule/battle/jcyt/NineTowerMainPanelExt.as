@@ -1,42 +1,35 @@
-package com.rpgGame.appModule.battle.dfdj
+package com.rpgGame.appModule.battle.jcyt
 {
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.ui.tab.ViewUI;
+	import com.rpgGame.app.reward.RewardGroup;
+	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
-	import com.rpgGame.core.events.D1v1Event;
 	import com.rpgGame.core.events.MainPlayerEvent;
-	import com.rpgGame.core.manager.tips.TargetTipsMaker;
-	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.core.events.NineTowerEvent;
 	import com.rpgGame.core.utils.MCUtil;
-	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
-	import com.rpgGame.coreData.cfg.BattleRankCfg;
 	import com.rpgGame.coreData.cfg.ClientConfig;
-	import com.rpgGame.coreData.clientConfig.Q_battle_rank;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.EffectUrl;
-	import com.rpgGame.coreData.type.TipType;
-	import com.rpgGame.netData.pvp.bean.DianFengDataInfo;
 	
 	import org.client.mainCore.manager.EventManager;
-	import org.mokylin.skin.app.zhanchang.dianfengduijue.DianFeng_Skin;
+	import org.mokylin.skin.app.zhanchang.jiucengyaota.JiuCengYaoTa_Skin;
 	
 	import starling.display.DisplayObject;
 	
-	public class D1v1MainPanleExt extends ViewUI
+	public class NineTowerMainPanelExt extends SkinUIPanel
 	{
-		private var _skin:DianFeng_Skin;
+		private var _skin:JiuCengYaoTa_Skin;
 		private var _eff:Inter3DContainer;
-		public function D1v1MainPanleExt()
+		private var _gReward:RewardGroup;
+		public function NineTowerMainPanelExt()
 		{
-			_skin=new DianFeng_Skin();
+			_skin=new JiuCengYaoTa_Skin();
 			super(_skin);
-		
-			TipTargetManager.show( _skin.btnMsg, TargetTipsMaker.makeTips( TipType.D1V1_TIP,null));
-			TipTargetManager.show(_skin.icon,TargetTipsMaker.makeTips(TipType.D1V1_RANK_TIP,new DynamicTipData()));
+			_gReward=new RewardGroup(_skin.icon1,0,10,-2);
 		}
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
@@ -48,7 +41,7 @@ package com.rpgGame.appModule.battle.dfdj
 					onMate();
 					break;
 				}
-				case _skin.btnChakan:
+				case _skin.lbRank:
 				{
 					onRank();
 					break;
@@ -76,35 +69,21 @@ package com.rpgGame.appModule.battle.dfdj
 		private function onMate():void
 		{
 			// TODO Auto Generated method stub
-			Mgr.d1v1Mgr.reqDFMatch();
+			
 		}
 		override protected function onShow():void
 		{
 			super.onShow();
 			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,onStateResChange);
-			EventManager.addEvent(D1v1Event.GET_PANEL_DATA,onGetPanelData);
+			EventManager.addEvent(NineTowerEvent.GET_PANEL_DATA,onGetPanelData);
 			onStateResChange(CharAttributeType.RES_PRESTIGE);
-			Mgr.d1v1Mgr.reqPanelData();
+		
 		}
 		
 		private function onGetPanelData(...arg):void
 		{
 			// TODO Auto Generated method stub
-			var data:DianFengDataInfo=Mgr.d1v1Mgr.data;
-			var rank:int=data.level;
-			var score:int=data.currentIntegral;
-			var qRank:Q_battle_rank=BattleRankCfg.getRank(rank);
-			if (!qRank) 
-			{
-				return;
-			}
-			_skin.lbDuanwei.text=score+"/"+qRank.q_score;
-			var per:Number=score/qRank.q_score;
-			_skin.Pro_duanwei.value=per*100;
-			_skin.icon.styleName=Mgr.d1v1Mgr.getRankIconUrl(rank,0);
-			
-			_skin.numCishu.label=data.currentNumber+"";
-			_skin.numShengwang.label=data.reputation+"";
+	
 			
 			var state:int=arg[0];
 			showRewardEffect(state==1);
@@ -148,6 +127,7 @@ package com.rpgGame.appModule.battle.dfdj
 			super.onHide();
 			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,onStateResChange);
 			showRewardEffect(false);
+			_gReward.clear();
 		}
 	}
 }

@@ -1,6 +1,7 @@
 package com.rpgGame.app.manager
 {
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.manager.hint.FloatingText;
 	import com.rpgGame.app.sender.D1v1BattleSender;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
@@ -9,6 +10,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.cfg.BattleRankCfg;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.clientConfig.Q_battle_rank;
+	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.info.DRankWeekReward;
 	import com.rpgGame.netData.pvp.bean.DianFengDataInfo;
 	import com.rpgGame.netData.pvp.message.SCDrawDianFengAwardMessage;
@@ -124,7 +126,7 @@ package com.rpgGame.app.manager
 		{
 			// TODO Auto Generated method stub
 			_data=msg.dianFengDataInfo;
-			EventManager.dispatchEvent(D1v1Event.GET_PANEL_DATA);
+			EventManager.dispatchEvent(D1v1Event.GET_PANEL_DATA,msg.state);
 		}
 		public function SCOpenDianFengRankHandler(msg:SCOpenDianFengRankMessage):void
 		{
@@ -185,6 +187,18 @@ package com.rpgGame.app.manager
 				return "ui/app/zhanchang/icon/name2/"+ranklv+".png";
 			}
 			return "ui/app/zhanchang/icon/name/"+ranklv+".png";
+		}
+		public function autoJoin():void
+		{
+			if (FunctionOpenManager.functionIsOpen(EmFunctionID.EM_DIANFENGDUIJUE)) 
+			{
+				reqDFMatch();
+				FunctionOpenManager.openAppPaneById(EmFunctionID.EM_DIANFENGDUIJUE);
+			}
+			else
+			{
+				FloatingText.showUp("功能未开启");
+			}
 		}
 	}
 }

@@ -168,7 +168,44 @@ package com.rpgGame.app.manager.fight
 		{
 			return ROOT + numberType + number + ".png";
 		}
-
+		/**
+		 *飘字是否主角能看见 
+		 * @param atkor
+		 * @param hurter
+		 * 
+		 */		
+		public static function isICanSeeText(atkor : SceneRole, hurter : SceneRole):Boolean
+		{
+			if (hurter==null) 
+			{
+				return false;
+			}
+			var showFace:Boolean = false;
+			var roleData:RoleData;
+			if(atkor && atkor.usable)
+			{
+				roleData = atkor.data as RoleData;
+				if(roleData)
+				{
+					if(roleData.id == MainRoleManager.actorID || roleData.ownerId == MainRoleManager.actorID)
+					{
+						showFace = true;
+					}
+				}
+			}
+			if(hurter && hurter.usable)
+			{
+				roleData = hurter.data as RoleData;
+				if(roleData)
+				{
+					if(roleData.id == MainRoleManager.actorID || roleData.ownerId == MainRoleManager.actorID)
+					{
+						showFace = true;
+					}
+				}
+			}
+			return showFace;
+		}
 		/**
 		 * 伤害飘字
 		 * @param atkor 场景角色
@@ -181,7 +218,12 @@ package com.rpgGame.app.manager.fight
 		{
 			if (hurter == null)
 				return;
-			
+			//提前判断，面得做无用功
+			var iCanSee:Boolean=isICanSeeText(atkor,hurter);
+			if (!iCanSee) 
+			{
+				return;
+			}
 			var mainPlayer : SceneRole = MainRoleManager.actor; //主角
 			var typeRes : String=""; //得到攻击效果的指定类型的URL
 			
@@ -277,50 +319,24 @@ package com.rpgGame.app.manager.fight
 					{
 						tweenFun = SpellResultTweenUtil.TweenHurt;
 					}
-					var showFace:Boolean = false;
-					var roleData:RoleData;
-					if(atkor && atkor.usable)
+					//加血
+					if (hurtAmount>0) 
 					{
-						roleData = atkor.data as RoleData;
-						if(roleData)
-						{
-							if(roleData.id == MainRoleManager.actorID || roleData.ownerId == MainRoleManager.actorID)
-							{
-								showFace = true;
-							}
-						}
+						showAttackFaceNew(hurter,atkor,atkor.headFace,typeRes,numberType,hurtAmount,null,null,tweenFun,extAtf);
 					}
-					if(hurter && hurter.usable)
+					//伤害
+					else
 					{
-						roleData = hurter.data as RoleData;
-						if(roleData)
-						{
-							if(roleData.id == MainRoleManager.actorID || roleData.ownerId == MainRoleManager.actorID)
-							{
-								showFace = true;
-							}
-						}
+						showAttackFaceNew(atkor,hurter,hurter.headFace,typeRes,numberType,hurtAmount,null,null,tweenFun,extAtf);
 					}
-					if (showFace) //主角或主角所属角色受伤害/攻击...
+					
+					//				}
+					if(hurter.data.id!=MainRoleManager.actorID)
 					{
-						
-						if (hurtAmount>0) 
+						var headFace:HeadFace=hurter.headFace as HeadFace;
+						if(headFace && !hurter.stateMachine.isDeadState)
 						{
-							showAttackFaceNew(hurter,atkor,atkor.headFace,typeRes,numberType,hurtAmount,null,null,tweenFun,extAtf);
-						}
-						else
-						{
-							showAttackFaceNew(atkor,hurter,hurter.headFace,typeRes,numberType,hurtAmount,null,null,tweenFun,extAtf);
-						}
-						
-						//				}
-						if(hurter.data.id!=MainRoleManager.actorID)
-						{
-							var headFace:HeadFace=hurter.headFace as HeadFace;
-							if(headFace && !hurter.stateMachine.isDeadState)
-							{
-								headFace.showBloodBar();
-							}
+							headFace.showBloodBar();
 						}
 					}
 				}

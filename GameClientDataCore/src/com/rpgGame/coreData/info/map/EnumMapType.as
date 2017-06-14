@@ -35,6 +35,10 @@ package com.rpgGame.coreData.info.map
 		 * 巅峰对决
 		 */
 		public static const MAP_TYPE_D1V1:int = rEnum.next;//6
+		/**
+		 * 九层妖塔
+		 */
+		public static const MAP_TYPE_TOWERS:int = rEnum.next;//7
 		
 	}
 }
