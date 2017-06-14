@@ -105,7 +105,7 @@ package com.rpgGame.coreData.cfg.active
 			}
 			var num:int=typeList.length;
 			for(var i:int=0;i<num;i++){
-				if(typeList[i].cfg.q_activity_id==info.activityId){
+				if(typeList[i].actCfg.q_activity_id==info.activityId){
 					typeList[i].info=info;
 					return;
 				}

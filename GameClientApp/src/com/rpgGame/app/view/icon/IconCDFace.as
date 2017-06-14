@@ -353,6 +353,11 @@ package com.rpgGame.app.view.icon
 			}
 			
 			TipTargetManager.remove(this);
+			super.clear();
+		}
+		
+		override public function destroy():void
+		{
 			this.removeFromParent();
 			this.x = 0;
 			this.y = 0;
@@ -362,11 +367,6 @@ package com.rpgGame.app.view.icon
 			this.touchable = true;
 			this.touchGroup = true;
 			this.setBg("");
-			super.clear();
-		}
-		
-		override public function destroy():void
-		{
 			recycle(this);
 		}
 
