@@ -143,6 +143,7 @@ package  com.rpgGame.netData
 	import com.rpgGame.netData.fight.handler.SCAttackerResultHandler;
 	import com.rpgGame.netData.fight.handler.SCBuffSkillHandler;
 	import com.rpgGame.netData.fight.handler.SCCancelSkillHandler;
+	import com.rpgGame.netData.fight.handler.SCSkillWarningInfoHandler;
 	import com.rpgGame.netData.fight.message.ResAttackBeautyMessage;
 	import com.rpgGame.netData.fight.message.ResAttackBreakSingingToClientMessage;
 	import com.rpgGame.netData.fight.message.ResAttackRangeMessage;
@@ -159,6 +160,7 @@ package  com.rpgGame.netData
 	import com.rpgGame.netData.fight.message.SCAttackerResultMessage;
 	import com.rpgGame.netData.fight.message.SCBuffSkillMessage;
 	import com.rpgGame.netData.fight.message.SCCancelSkillMessage;
+	import com.rpgGame.netData.fight.message.SCSkillWarningInfoMessage;
 	import com.rpgGame.netData.fightpower.handler.ResFightPowerToClientHandler;
 	import com.rpgGame.netData.fightpower.message.ResFightPowerToClientMessage;
 	import com.rpgGame.netData.fightsoul.handler.SCFightSoulChangeCountHandler;
@@ -798,8 +800,7 @@ package  com.rpgGame.netData
 	
 	import org.game.netCore.net.Handler;
 	import org.game.netCore.net.Message;
-	
-	
+
 	/** 
 	 * @author Commuication Auto Maker
 	 * 
@@ -887,6 +888,7 @@ package  com.rpgGame.netData
 			register(102114, SCAttackerResultMessage, SCAttackerResultHandler);
 			register(102115, SCCancelSkillMessage, SCCancelSkillHandler);
 			register(102116, SCBuffSkillMessage, SCBuffSkillHandler);
+			register(102117, SCSkillWarningInfoMessage, SCSkillWarningInfoHandler);
 			register(103101, ResMyPlayerInfoMessage, ResMyPlayerInfoHandler);
 			register(103102, ResPlayerAddExpMessage, ResPlayerAddExpHandler);
 			register(103103, ResPersonalNoticeMessage, ResPersonalNoticeHandler);
