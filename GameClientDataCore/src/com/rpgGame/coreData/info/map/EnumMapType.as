@@ -32,9 +32,6 @@ package com.rpgGame.coreData.info.map
 		 */
 		public static const MAP_TYPE_EXP:int = rEnum.next;//5
 		/**
-		 * 世界boss
-		 */
-		public static const MAP_WORLD_BOSS:int = 7;//7
 		 * 巅峰对决
 		 */
 		public static const MAP_TYPE_D1V1:int = rEnum.next;//6
@@ -42,6 +39,10 @@ package com.rpgGame.coreData.info.map
 		 * 九层妖塔
 		 */
 		public static const MAP_TYPE_TOWERS:int = rEnum.next;//7
+		/**
+		 * 世界boss
+		 */
+		public static const MAP_WORLD_BOSS:int = rEnum.next;//8
 		
 	}
 }
