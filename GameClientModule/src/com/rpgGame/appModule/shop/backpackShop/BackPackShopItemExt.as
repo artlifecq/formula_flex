@@ -30,7 +30,7 @@ package com.rpgGame.appModule.shop.backpackShop
 			this._type=t;
 			_skin=new ShangDian_Item();
 			super(_skin);
-			_grid=new IconCDFace(IcoSizeEnum.ICON_42);
+			_grid=IconCDFace.create(IcoSizeEnum.ICON_42);
 			_skin.Icon.addChild(_grid);
 			_grid.x=6;
 			_grid.y=6;

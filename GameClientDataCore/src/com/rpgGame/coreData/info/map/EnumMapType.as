@@ -39,6 +39,10 @@ package com.rpgGame.coreData.info.map
 		 * 九层妖塔
 		 */
 		public static const MAP_TYPE_TOWERS:int = rEnum.next;//7
+		/**
+		 * 世界boss
+		 */
+		public static const MAP_WORLD_BOSS:int = rEnum.next;//8
 		
 	}
 }

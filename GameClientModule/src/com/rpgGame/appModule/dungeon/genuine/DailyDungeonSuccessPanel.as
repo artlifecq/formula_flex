@@ -67,7 +67,7 @@ package com.rpgGame.appModule.dungeon.genuine
 			_rewardIcons =new Vector.<IconCDFace>();
 			for(var i:int = 0;i<length;i++)
 			{
-				var grid:IconCDFace = new IconCDFace(IcoSizeEnum.ICON_64);
+				var grid:IconCDFace = IconCDFace.create(IcoSizeEnum.ICON_64);
 				grid.setBg( GridBGType.GRID_SIZE_64,1 );
 				grid.bgImage.styleName = "ui/common/gezikuang/tubiaodikuang/64.png";
 				this.addChild(grid);
@@ -136,7 +136,7 @@ package com.rpgGame.appModule.dungeon.genuine
 			TimerServer.remove(updateTime);
 			for each(var icon:IconCDFace in _rewardIcons)
 			{
-				this.removeChild(icon,true);
+				icon.destroy();
 			}
 			_rewardIcons = null;
 		}

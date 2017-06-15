@@ -46,10 +46,12 @@ package com.rpgGame.coreData.clientConfig
 		public static const HintTypeSetInfo:String = "data.HintTypeSetInfo";
 		/**  区域数据库						 */
 		public static const Q_area:String = "data.map.Q_area";
-		/**  							本列取消，安全区改为刷格方式						本列取消																																										 */
+		/**  							本列取消，安全区改为刷格方式							本列取消																																										 */
 		public static const Q_map:String = "data.map.Q_map";
 		/**  场景特效动态生成表						 */
 		public static const Q_map_effect:String = "data.map.Q_map_effect";
+		/**  预加载资源表		 */
+		public static const Q_map_preload:String = "data.map.Q_map_preload";
 		/**  地图传送点数据库												 */
 		public static const Q_map_transfer:String = "data.map.Q_map_transfer";
 		/**  场景音效配置信息					 */
@@ -170,7 +172,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_shop:String = "data.Q_shop";
 		/**  购买界面其他途径提示数据库				 */
 		public static const Q_source:String = "data.Q_source";
-		/**  活动配置表																				 */
+		/**  活动配置表																										 */
 		public static const Q_special_activities:String = "data.Q_special_activities";
 		/**  tipsid	标题	描述 */
 		public static const Q_tipsinfo:String = "data.Q_tipsinfo";
@@ -178,6 +180,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_warFlag:String = "data.Q_warFlag";
 		/**  窗口链接				 */
 		public static const Q_windowInfo:String = "data.Q_windowInfo";
+		/**  世界BOSS活动配置					 */
+		public static const Q_world_boss:String = "data.Q_world_boss";
 		/**  副本数据表															 */
 		public static const Q_zone:String = "data.Q_zone";
 		/**  多人副本数据表								 */
@@ -237,6 +241,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.map.Q_area", com.rpgGame.coreData.clientConfig.Q_area);
 			regClass("data.map.Q_map", com.rpgGame.coreData.clientConfig.Q_map);
 			regClass("data.map.Q_map_effect", com.rpgGame.coreData.clientConfig.Q_map_effect);
+			regClass("data.map.Q_map_preload", com.rpgGame.coreData.clientConfig.Q_map_preload);
 			regClass("data.map.Q_map_transfer", com.rpgGame.coreData.clientConfig.Q_map_transfer);
 			regClass("data.map.SceneSoundInfo", com.rpgGame.coreData.clientConfig.SceneSoundInfo);
 			regClass("data.map.SceneTriggerInfo", com.rpgGame.coreData.clientConfig.SceneTriggerInfo);
@@ -301,6 +306,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_tipsinfo", com.rpgGame.coreData.clientConfig.Q_tipsinfo);
 			regClass("data.Q_warFlag", com.rpgGame.coreData.clientConfig.Q_warFlag);
 			regClass("data.Q_windowInfo", com.rpgGame.coreData.clientConfig.Q_windowInfo);
+			regClass("data.Q_world_boss", com.rpgGame.coreData.clientConfig.Q_world_boss);
 			regClass("data.Q_zone", com.rpgGame.coreData.clientConfig.Q_zone);
 			regClass("data.Q_zone_multy", com.rpgGame.coreData.clientConfig.Q_zone_multy);
 			regClass("data.RaceNameInfo", com.rpgGame.coreData.clientConfig.RaceNameInfo);

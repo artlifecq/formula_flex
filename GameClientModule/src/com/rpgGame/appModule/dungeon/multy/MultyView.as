@@ -415,7 +415,7 @@ package com.rpgGame.appModule.dungeon.multy
 					item=ItemConfig.getQItemByID(reward[i].mod);
 					if(item!=null)
 					{
-						ico=new IconCDFace(IcoSizeEnum.ICON_36);
+						ico=IconCDFace.create(IcoSizeEnum.ICON_36);
 						ico.showCD=false;
 						ico.x=_skin["reward_ico_"+i].x+6;
 						ico.y=_skin["reward_ico_"+i].y+6;
@@ -503,7 +503,7 @@ package com.rpgGame.appModule.dungeon.multy
 				item=ItemConfig.getQItemByID(reward.mod);
 				if(item!=null)
 				{
-					ico=new IconCDFace(IcoSizeEnum.ICON_48);
+					ico=IconCDFace.create(IcoSizeEnum.ICON_48);
 					ico.showCD=false;
 					ico.x=temp.pass_ico.x;
 					ico.y=temp.pass_ico.y;
@@ -530,7 +530,7 @@ package com.rpgGame.appModule.dungeon.multy
 						item=ItemConfig.getQItemByID(passReward[i].mod);
 						if(item!=null)
 						{
-							ico=new IconCDFace(IcoSizeEnum.ICON_36);
+							ico=IconCDFace.create(IcoSizeEnum.ICON_36);
 							ico.showCD=false;
 							ico.x=temp["prob_ioc_"+add].x+6;
 							ico.y=temp["prob_ioc_"+add].y+6;
