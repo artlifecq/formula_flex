@@ -149,6 +149,7 @@ package com.rpgGame.appModule.battle.dfdj
 		{
 			super.onHide();
 			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,onStateResChange);
+			EventManager.removeEvent(D1v1Event.GET_PANEL_DATA,onGetPanelData);
 			showRewardEffect(false);
 		}
 	}
