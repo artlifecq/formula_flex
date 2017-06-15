@@ -101,7 +101,7 @@ package com.rpgGame.appModule.mount
 			}
 			
 			var nextShet:Q_warFlag = ZhanQiConfigData.getZhanQiDataById(zhanqiLevel);
-			var currentName:String="tx_role_mieshijinzhen_01_5";//nextShet.q_panel_show_id.toString();
+			var currentName:String=nextShet.q_panel_show_id;
 			_curtentInterEff=new InterObject3D();
 			var data : RenderParamData3D = new RenderParamData3D(0, "effect_ui", ClientConfig.getEffect(currentName));
 			data.forceLoad=true;//ui上的3d特效强制加载

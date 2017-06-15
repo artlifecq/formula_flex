@@ -27,6 +27,7 @@ package com.game.engine2D
 	import com.game.engine3D.vo.BaseObj3D;
 	
 	import flash.display.Sprite;
+	import flash.geom.ColorTransform;
 	import flash.geom.Point;
 	import flash.utils.Dictionary;
 	
@@ -1043,6 +1044,16 @@ package com.game.engine2D
 		{
 			var value:int = Stage3DLayerManager.stage.mouseY - _scenePos.y;
 			return value;
+		}
+		
+		public function addGrayScene():void
+		{
+			_view.colorFilter.adjustSaturation(-1);
+		}
+		
+		public function removeGrayScene():void
+		{
+			_view.colorFilter.reset();
 		}
 	}
 }

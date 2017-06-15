@@ -43,12 +43,12 @@ package com.game.engine3D.scene.render
 		
 		public static function get dataShareCnt() : uint
 		{
-			return renderResourceDataShare.getAllCacheKeyList().length;
+			return renderResourceDataShare.cacheCnt;
 		}
 		
 		public static function get loaderShareCnt() : uint
 		{
-			return renderUnitLoaderShare.getAllCacheKeyList().length;
+			return renderUnitLoaderShare.cacheCnt;
 		}
 		
 		public function SceneRenderCache()

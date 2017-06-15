@@ -4,11 +4,9 @@ package com.rpgGame.app.manager.mount
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
-	import com.rpgGame.coreData.cfg.HorseConfigData;
 	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_att_values;
-	import com.rpgGame.coreData.clientConfig.Q_horse;
 	import com.rpgGame.coreData.clientConfig.Q_warFlag;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
@@ -69,7 +67,7 @@ package com.rpgGame.app.manager.mount
 		
 		public function canUpLevel():Boolean
 		{
-			return upLevelNeedItemCount<=bagHaveItemCount
+			return upLevelNeedItemCount<=bagHaveItemCount;
 		}
 		
 		private var _rewardItems:Vector.<ClientItemInfo>;
@@ -143,10 +141,10 @@ package com.rpgGame.app.manager.mount
 			}
 			_disProp = new Vector.<Number>(30,0);
 			//差距
-			var nexthousse:Q_horse = HorseConfigData.getMountDataById(zhanqiLevel+1);
-			if(nexthousse!=null)
+			var nextwarflag:Q_warFlag = ZhanQiConfigData.getZhanQiDataById(zhanqiLevel+1);
+			if(nextwarflag!=null)
 			{
-				var nextq_atts:Array = nexthousse.q_attid.split(",");
+				var nextq_atts:Array = nextwarflag.q_attid.split(",");
 				if(zhanqiJob == JobEnum.ROLE_1_TYPE)
 				{
 					adds = int(nextq_atts[0]);

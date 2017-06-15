@@ -33,6 +33,7 @@ package com.game.engine3D.scene.render
 		private var _isAsyncLoaded : Boolean;
 		private var _isUnloaded : Boolean;
 		private var _resCompleteCallBackList : Vector.<CallBackData>;
+		private var _asyncResProgressCallBackList : Vector.<CallBackData>;
 		private var _asyncResCompleteCallBackList : Vector.<CallBackData>;
 		private var _resErrorCallBackList : Vector.<CallBackData>;
 		private var _loader : Resource3DLoader;
@@ -44,7 +45,6 @@ package com.game.engine3D.scene.render
 			_isAsyncLoaded = false;
 			_isUnloaded = false;
 			_resCompleteCallBackList = new Vector.<CallBackData>();
-			_asyncResCompleteCallBackList = new Vector.<CallBackData>();
 			_resErrorCallBackList = new Vector.<CallBackData>();
 		}
 		
@@ -60,12 +60,24 @@ package com.game.engine3D.scene.render
 		
 		public function setSyncResCompleteCallBack(value : Function, args : Array = null) : void
 		{
+			_asyncResCompleteCallBackList ||= new Vector.<CallBackData>();
 			CallBackUtil.addCallBackData(_asyncResCompleteCallBackList, value, args);
 		}
 		
 		public function removeSyncResCompleteCallBack(value : Function) : void
 		{
 			CallBackUtil.removeCallBackData(_asyncResCompleteCallBackList, value);
+		}
+		
+		public function setSyncResProgressCallBack(value : Function, args : Array = null) : void
+		{
+			_asyncResProgressCallBackList ||= new Vector.<CallBackData>();
+			CallBackUtil.addCallBackData(_asyncResProgressCallBackList, value, args);
+		}
+		
+		public function removeSyncResProgressCallBack(value : Function) : void
+		{
+			CallBackUtil.removeCallBackData(_asyncResProgressCallBackList, value);
 		}
 		
 		public function setResErrorCallBack(value : Function, args : Array = null) : void
@@ -99,6 +111,8 @@ package com.game.engine3D.scene.render
 			_loader = new Resource3DLoader();
 			_loader.addEventListener(LoaderEvent.RESOURCE_COMPLETE, onResourceComplete);
 			_loader.addEventListener(LoaderEvent.ASYNC_TEXTURES_COMPLETE, onAsyncTexturesComplete);
+//			_loader.addEventListener(LoaderEvent.ASYNC_RESOURCE_PROGRESS, onAsyncResourceProgress);
+			//_loader.addEventListener(LoaderEvent.ASYNC_RESOURCE_COMPLETE, onAsyncResourceComplete);
 			_loader.addEventListener(LoaderEvent.LOAD_ERROR, onResourceLoadError);
 			_loader.addEventListener(ParserEvent.PARSE_ERROR, onResourceParseError);
 			_loader.load(_fullSourchPath, priority);
@@ -110,6 +124,8 @@ package com.game.engine3D.scene.render
 			{
 				_loader.removeEventListener(LoaderEvent.RESOURCE_COMPLETE, onResourceComplete);
 				_loader.removeEventListener(LoaderEvent.ASYNC_TEXTURES_COMPLETE, onAsyncTexturesComplete);
+//				_loader.removeEventListener(LoaderEvent.ASYNC_RESOURCE_PROGRESS, onAsyncResourceProgress);
+				//_loader.removeEventListener(LoaderEvent.ASYNC_RESOURCE_COMPLETE, onAsyncResourceComplete);
 				_loader.removeEventListener(LoaderEvent.LOAD_ERROR, onResourceLoadError);
 				_loader.removeEventListener(ParserEvent.PARSE_ERROR, onResourceParseError);
 			}
@@ -120,6 +136,18 @@ package com.game.engine3D.scene.render
 			_isLoaded = true;
 			_isLoading = false;
 			CallBackUtil.exceteCallBackData(this, _resCompleteCallBackList);
+		}
+		
+		private function onAsyncResourceComplete(e : LoaderEvent) : void
+		{
+			
+		}
+		
+		private function onAsyncResourceProgress(e : LoaderEvent) : void
+		{
+			if (_asyncResProgressCallBackList){
+//				CallBackUtil.exceteCallBackData(this, _asyncResProgressCallBackList, e.progress);
+			}
 		}
 		
 		private function onAsyncTexturesComplete(e : Event) : void
@@ -153,6 +181,10 @@ package com.game.engine3D.scene.render
 			if (_asyncResCompleteCallBackList)
 			{
 				_asyncResCompleteCallBackList.length = 0;
+			}
+			if (_asyncResProgressCallBackList)
+			{
+				_asyncResProgressCallBackList.length = 0;
 			}
 			if (_resErrorCallBackList)
 			{

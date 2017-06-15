@@ -147,6 +147,8 @@ package com.game.engine3D.scene.render
 		private var _mouseOutCallBackList : Vector.<CallBackData>;
 		private var _mouseRightUpCallBackList : Vector.<CallBackData>;
 		private var _mouseRightDownCallBackList : Vector.<CallBackData>;
+		private var _asyncResourceProgressCallBackList : Vector.<CallBackData>;
+		private var _asyncResourceCompleteCallBackList : Vector.<CallBackData>;
 		private var _resReady : Boolean = false;
 		private var _resSwitch : Boolean = false;
 		private var _animator : AnimatorBase;
@@ -260,7 +262,6 @@ package com.game.engine3D.scene.render
 		public function RenderUnit3D(rpd : RenderParamData3D,is25D:Boolean=false)
 		{
 			super([rpd,is25D]);
-//			_waitAddUnitList = new Vector.<RenderUnitChild>();
 			_currChildUnitList = new Vector.<RenderUnitChild>();
 			_methodDatas = new Vector.<MethodData>();
 		}
@@ -513,6 +514,28 @@ package com.game.engine3D.scene.render
 		public function removePlayCompleteCallBack(value : Function) : void
 		{
 			CallBackUtil.removeCallBackData(_playCompleteCallBackList, value);
+		}
+		
+		public function setAsyncResourceProgressCall(value : Function, ... args) : void
+		{
+			_asyncResourceProgressCallBackList ||= new Vector.<CallBackData>;
+			CallBackUtil.addCallBackData(_asyncResourceProgressCallBackList, value, args);
+		}
+		
+		public function removeAsyncResourceProgressCall(value : Function) : void
+		{
+			CallBackUtil.removeCallBackData(_asyncResourceProgressCallBackList, value);
+		}
+		
+		public function setAsyncResourceCompleteCall(value : Function, ... args) : void
+		{
+			_asyncResourceCompleteCallBackList ||= new Vector.<CallBackData>;
+			CallBackUtil.addCallBackData(_asyncResourceCompleteCallBackList, value, args);
+		}
+		
+		public function removeAsyncResourceCompleteCall(value : Function) : void
+		{
+			CallBackUtil.removeCallBackData(_asyncResourceCompleteCallBackList, value);
 		}
 
 		/**
@@ -1735,6 +1758,7 @@ package com.game.engine3D.scene.render
 
 		private function onValidateGraphic(resData : RenderResourceData) : void
 		{
+			CallBackUtil.exceteCallBackData(this, _asyncResourceCompleteCallBackList);
 			validateGraphic();
 		}
 
@@ -2182,17 +2206,7 @@ package com.game.engine3D.scene.render
 					removeUnitChildFromList(childData.renderUnit);
 				}
 			}
-//			_waitAddUnitList.length = 0;
 		}
-
-//		private function addWaitRenderUnitChild(childData : RenderUnitChild) : void
-//		{
-//			var index : int = _waitAddUnitList.indexOf(childData);
-//			if (index < 0)
-//			{
-//				_waitAddUnitList.push(childData);
-//			}
-//		}
 
 		private function addChildDataToList(childData : RenderUnitChild) : void
 		{
@@ -2530,17 +2544,6 @@ package com.game.engine3D.scene.render
 		{
 			if (!ru)
 				return;
-//			var childData : RenderUnitChild;
-//			var len : int = _waitAddUnitList.length;
-//			for (var i : int = len - 1; i >= 0; i--)
-//			{
-//				childData = _waitAddUnitList[i];
-//				if (childData.renderUnit == ru)
-//				{
-//					_waitAddUnitList.splice(i, 1);
-//					break;
-//				}
-//			}
 			removeUnitChildFromList(ru);
 		}
 
@@ -2685,6 +2688,7 @@ package com.game.engine3D.scene.render
 				if (_visibleNeedAsyncLoaded && !_renderResourceData.isAsyncLoaded)
 				{
 					_renderResourceData.setSyncResCompleteCallBack(onValidateGraphic);
+					_renderResourceData.setSyncResProgressCallBack(onNextSyncResProgress);
 				}
 				if (_renderResourceData.isLoaded)
 				{
@@ -2715,6 +2719,7 @@ package com.game.engine3D.scene.render
 					if (_visibleNeedAsyncLoaded && !_nextRenderResourceData.isAsyncLoaded)
 					{
 						_nextRenderResourceData.setSyncResCompleteCallBack(onNextSyncResComplete);
+						_nextRenderResourceData.setSyncResProgressCallBack(onNextSyncResProgress);
 					}
 					if (_nextRenderResourceData.isLoaded)
 					{
@@ -2735,6 +2740,12 @@ package com.game.engine3D.scene.render
 					doSetRenderParamData(_nextRenderParamData);
 				}
 			}
+		}
+		
+		private function onNextSyncResProgress(progress,resData : RenderResourceData) : void
+		{
+			if (_asyncResourceProgressCallBackList)
+				CallBackUtil.exceteCallBackData(this, _asyncResourceProgressCallBackList, progress);
 		}
 
 		private function onNextSyncResComplete(resData : RenderResourceData) : void
@@ -3442,6 +3453,10 @@ package com.game.engine3D.scene.render
 			{
 				for each (var element : ObjectContainer3D in _drawElements)
 				{
+					if(element.name.indexOf("chest") != -1 || element.name.indexOf("zero") != -1)//这里处理下策划自己加的挂点到模型里面去，干扰了模型的包围盒
+					{
+						continue;
+					}
 					var bounds : VolumeBounds = new VolumeBounds(element.minX * element.scaleX, element.minY * element.scaleY, element.minZ * element.scaleZ, //
 						element.maxX * element.scaleX, element.maxY * element.scaleY, element.maxZ * element.scaleZ);
 					return bounds;
@@ -3618,7 +3633,8 @@ package com.game.engine3D.scene.render
 			//释放缓存
 			if (_renderResourceData)
 			{
-				_renderResourceData.removeSyncResCompleteCallBack(onValidateGraphic);
+				_renderResourceData.removeSyncResProgressCallBack(onValidateGraphic);
+				_renderResourceData.removeSyncResCompleteCallBack(onNextSyncResProgress);
 				_renderResourceData.removeResCompleteCallBack(onSetRenderResourceData);
 				_renderResourceData.removeResErrorCallBack(onRenderResourceDataError);
 				//释放旧的换装
@@ -3924,6 +3940,16 @@ package com.game.engine3D.scene.render
 			if (_mouseRightDownCallBackList)
 			{
 				_mouseRightDownCallBackList.length = 0;
+			}
+			if (_asyncResourceCompleteCallBackList)
+			{
+				_asyncResourceCompleteCallBackList.length = 0;
+				_asyncResourceCompleteCallBackList = null;
+			}
+			if (_asyncResourceProgressCallBackList)
+			{
+				_asyncResourceProgressCallBackList.length = 0;
+				_asyncResourceProgressCallBackList = null;
 			}
 			unregisterEvent();
 			super.dispose();
