@@ -111,7 +111,7 @@ package com.rpgGame.appModule.activety.zonghe
 				arr=[];
 			}
 			
-			if(selectedInfo.info.joinState!=2){
+			if(!selectedInfo.info||selectedInfo.info.joinState!=2){
 				GrayFilter.gray(_skin.joinBtn);
 			}else{
 				GrayFilter.unGray(_skin.joinBtn);

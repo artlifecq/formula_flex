@@ -8,7 +8,7 @@ package com.rpgGame.coreData.info.tip
 	public class BossHurtTipsData
 	{
 		public var rewads:Array;
-		public var title:String;
+		public var titleRes:String;
 		public function BossHurtTipsData()
 		{
 		}

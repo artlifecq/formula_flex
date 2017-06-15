@@ -1,7 +1,14 @@
 package com.rpgGame.appModule.activety.boss
 {
+	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.sender.SpecialActivitySender;
+	import com.rpgGame.app.utils.TimeUtil;
+	import com.rpgGame.coreData.cfg.StaticValue;
+	import com.rpgGame.coreData.cfg.active.ActivetyDataManager;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
+	import com.rpgGame.coreData.cfg.active.BossActInfo;
+	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	import feathers.utils.filter.GrayFilter;
@@ -66,25 +73,53 @@ package com.rpgGame.appModule.activety.boss
 					_skin.selectedBtn.defaultIcon=null;
 				}
 				_skin.selectedBtn.isSelected=this.owner.selectedItem==data;
-				var info:ActivetyInfo=_data as ActivetyInfo;
+				var info:BossActInfo=_data as BossActInfo;
 				_skin.uiName.styleName="ui/app/activety/shijieboss/diming/"+info.actCfg.q_res_id+".png";
 				_skin.uiBg.styleName="ui/big_bg/activety/item/"+info.actCfg.q_res_id+".png";
-				_skin.lbMsg.htmlText=info.actCfg.q_desc;
+				_skin.lbMsg1.htmlText=info.actCfg.q_desc;
 				if(!info||info.info==null){
 					return;
 				}
-				if(info.info.joinState==0){
+				
+				if(info.info.joinState==0){//未开启
 					_skin.uiJinxing.visible=false;
-					GrayFilter.gray(this);
+					GrayFilter.gray(_skin.uiBg);
+					GrayFilter.gray(_skin.btnEnter);
 				}else{
-					GrayFilter.unGray(this);
-					if(info.info.joinState==1){
+					GrayFilter.unGray(_skin.uiBg);
+					GrayFilter.unGray(_skin.btnEnter);
+					if(info.info.joinState<3){//进行中
 						_skin.uiJinxing.visible=false;
-					}else{
+					}else{//已经击杀
 						_skin.uiJinxing.visible=true;
 					}
 				}
 			}
+			
+			var timeStr:String;
+			if(_skin.uiJinxing.visible||info.info.joinState==0){
+				var currentTime:Date=SystemTimeManager.sysDateTime;
+				var hour:int=currentTime.hours;
+				var min:int=currentTime.minutes;
+				var hm:int=int(hour.toString()+min.toString());
+				var timeList:Array=ActivetyDataManager.getTimeList(info.actCfg);
+				timeList=timeList[4];//第四个才是刷新段
+				var next:int=timeList[0];
+				var num:int=timeList.length;
+				for(var i:int=0;i<num;i++){
+					if(timeList[i]>hm){
+						next=timeList[i];
+						break;
+					}
+				}
+				timeStr="下次刷新时间:"+TimeUtil.changeIntHM2Str(next);
+				timeStr=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,timeStr);
+			}else{
+				timeStr="已刷新(未击杀)";
+				timeStr=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,timeStr);
+			}
+			
+			_skin.lbMsg2.htmlText=timeStr;
 		}
 	}
 }

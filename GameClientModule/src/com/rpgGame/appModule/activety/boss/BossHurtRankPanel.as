@@ -54,11 +54,11 @@ package com.rpgGame.appModule.activety.boss
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
-			var actId:int=data[0];
+			var actId:int=data;
 			_skin.ListItem.customData=actId;
 			var actInfo:BossActInfo=ActivetyDataManager.getActInfoById(actId) as BossActInfo;
 			_tipsSetInfo.rewads=JSONUtil.decode(actInfo.worldBossCfg.q_kill_rewards);
-			_tipsSetInfo.title="致命一击";
+			_tipsSetInfo.titleRes="ui/app/activety/shijieboss/5.png";
 			initEvent();
 		}
 		

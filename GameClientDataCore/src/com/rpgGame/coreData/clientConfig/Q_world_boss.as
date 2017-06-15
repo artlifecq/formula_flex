@@ -24,6 +24,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_rank_rewards:String;
 		 /**  最后一击奖励 */
 		public var q_kill_rewards:String;
+		 /**  面板上BOSS的展示比例 */
+		public var q_monster_scale:String;
 
 	}
 }

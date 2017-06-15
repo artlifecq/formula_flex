@@ -16,6 +16,7 @@ package com.rpgGame.app.ui.main.dungeon
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.type.activity.ActivityJoinStateEnum;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	
@@ -80,9 +81,9 @@ package com.rpgGame.app.ui.main.dungeon
 			for(var i:int=0;i<4;i++){
 				iconList.push(IconCDFace.create(IcoSizeEnum.ICON_48));
 				if(i<num){
-					var itemInfo:ClientItemInfo=new ClientItemInfo(arr[0].mod);
+					var itemInfo:ClientItemInfo=new ClientItemInfo(arr[i].mod);
 					itemInfo.itemInfo=new ItemInfo();
-					itemInfo.itemInfo.isbind=arr[0].bind;
+					itemInfo.itemInfo.isbind=arr[i].bind;
 					FaceUtil.SetItemGrid(iconList[i],itemInfo);
 				}else{
 					iconList[i].clear();
@@ -111,7 +112,7 @@ package com.rpgGame.app.ui.main.dungeon
 				}
 			}
 			
-			if(actInfo.info.joinState==2){//进行中就是未击杀
+			if(actInfo.info&&actInfo.info.joinState==ActivityJoinStateEnum.JOINING){//进行中就是未击杀
 				_skin.uiWeiJiSha.visible=true;
 				_skin.uiYiTiaoZhan.visible=false;
 				_skin.sec_info.visible=false;
@@ -152,11 +153,11 @@ package com.rpgGame.app.ui.main.dungeon
 			EventManager.addEvent(ActivityEvent.ENTER_ACTIVITY,getActId);
 		}
 		
-		private function getActId(list:Vector.<int>):void
+		private function getActId(id:int):void
 		{
 			EventManager.removeEvent(ActivityEvent.ENTER_ACTIVITY,getActId);
-			AppManager.showAppNoHide(AppConstant.ACTIVETY_BOSS_HURTRANK,list);//打开伤害排行
-			actId=list[0];
+			AppManager.showAppNoHide(AppConstant.ACTIVETY_BOSS_HURTRANK,id);//打开伤害排行
+			actId=id;
 			actInfo=ActivetyDataManager.getActInfoById(actId);
 			updateView();
 		}

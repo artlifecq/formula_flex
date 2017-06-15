@@ -21,7 +21,9 @@ package org.mokylin.skin.app.activety.shijieboss
 		//==========================================================================
 		public var btnEnter:feathers.controls.Button;
 
-		public var lbMsg:feathers.controls.Label;
+		public var lbMsg1:feathers.controls.Label;
+
+		public var lbMsg2:feathers.controls.Label;
 
 		public var selectedBtn:feathers.controls.Radio;
 
@@ -42,7 +44,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			this.currentState = "normal";
 			this.height = 71;
 			this.width = 585;
-			this.elementsContent = [uiBg_i(),selectedBtn_i(),uiName_i(),lbMsg_i(),uiJinxing_i(),btnEnter_i()];
+			this.elementsContent = [uiBg_i(),selectedBtn_i(),uiName_i(),lbMsg1_i(),lbMsg2_i(),uiJinxing_i(),btnEnter_i()];
 			
 			states = {
 			};
@@ -64,21 +66,37 @@ package org.mokylin.skin.app.activety.shijieboss
 			return temp;
 		}
 
-		private function lbMsg_i():feathers.controls.Label
+		private function lbMsg1_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbMsg = temp;
-			temp.name = "lbMsg";
-			temp.height = 39;
-			temp.htmlText = "【16-20级】 马贼首领<br>21:00-21:30";
+			lbMsg1 = temp;
+			temp.name = "lbMsg1";
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.leading = 7;
 			temp.letterSpacing = 0;
+			temp.text = "【16-20级】 马贼首领";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 155;
 			temp.y = 18;
+			return temp;
+		}
+
+		private function lbMsg2_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbMsg2 = temp;
+			temp.name = "lbMsg2";
+			temp.touchable = false;
+			temp.touchGroup = true;
+			temp.leading = 7;
+			temp.letterSpacing = 0;
+			temp.text = "21:00-21:30";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 155;
+			temp.y = 39;
 			return temp;
 		}
 

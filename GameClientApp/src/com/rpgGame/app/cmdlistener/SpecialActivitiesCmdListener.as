@@ -5,8 +5,10 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.core.events.ActivityEvent;
 	import com.rpgGame.coreData.cfg.active.ActivetyDataManager;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
+	import com.rpgGame.coreData.type.activity.ActivityJoinStateEnum;
 	import com.rpgGame.netData.monster.message.ResBossDamageInfosToClientMessage;
 	import com.rpgGame.netData.monster.message.SCWorldBossKillerNameMessage;
+	import com.rpgGame.netData.monster.message.SCWorldBossResultMessage;
 	import com.rpgGame.netData.specialactivities.bean.SpecialActivityInfo;
 	import com.rpgGame.netData.specialactivities.message.SCActivitiesNotifyListMessage;
 	import com.rpgGame.netData.specialactivities.message.SCEnterActivityMessage;
@@ -33,9 +35,15 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(162104,onSCActivitiesNotifyListMessage);
 			SocketConnection.addCmdListener(162105,onSCEnterActivityMessage);
 			
+			SocketConnection.addCmdListener(114118,onSCWorldBossResultMessage);
 			SocketConnection.addCmdListener(114119,onSCWorldBossKillerNameMessage);
 			SocketConnection.addCmdListener(114115,onResBossDamageInfosToClientMessage);
 			finish();
+		}
+		
+		private function onSCWorldBossResultMessage(msg:SCWorldBossResultMessage):void
+		{
+			
 		}
 		
 		private function onResBossDamageInfosToClientMessage(msg:ResBossDamageInfosToClientMessage):void
@@ -77,13 +85,13 @@ package com.rpgGame.app.cmdlistener
 		
 		private function onSCSpecialActivityCloseMessage(msg:SCSpecialActivityCloseMessage):void
 		{
-			ActivetyDataManager.setActState(msg.activityId,0);
+			ActivetyDataManager.setActState(msg.activityId,ActivityJoinStateEnum.CLOSE);
 			EventManager.dispatchEvent(ActivityEvent.UPDATE_ACTIVITY);
 		}
 		
 		private function onSCSpecialActivityOpenMessage(msg:SCSpecialActivityOpenMessage):void
 		{
-			ActivetyDataManager.setActState(msg.activityId,1);
+			ActivetyDataManager.setActState(msg.activityId,ActivityJoinStateEnum.OPEN);
 			EventManager.dispatchEvent(ActivityEvent.UPDATE_ACTIVITY);
 			var info:ActivetyInfo=ActivetyDataManager.getActInfoById(msg.activityId); 
 			AppManager.showAppNoHide(AppConstant.ACTIVETY_OPEN,info);

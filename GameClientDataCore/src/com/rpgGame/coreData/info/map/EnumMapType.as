@@ -34,7 +34,7 @@ package com.rpgGame.coreData.info.map
 		/**
 		 * 世界boss
 		 */
-		public static const MAP_WORLD_BOSS:int = rEnum.next;//7
+		public static const MAP_WORLD_BOSS:int = 7;//7
 		
 	}
 }

@@ -122,6 +122,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_split_count:int;
 		 /**  伤害分割间隔 */
 		public var q_split_spacing:int;
+		 /**  预警时间(单位：毫秒） */
+		public var q_warn_time:int;
 		 /**  延迟命中时间（单位：毫秒） */
 		public var q_delay_time:int;
 		 /**  飞行特效的飞行速度。 有飞行特效才能填。 有飞行特效必须填 */

@@ -13,18 +13,15 @@ package com.rpgGame.netData.specialactivities.message{
 	public class SCEnterActivityMessage extends Message {
 	
 		//活动ID
-		private var _activity: Vector.<int> = new Vector.<int>();
+		private var _activity: int;
+		
 		
 		/**
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
-			var i: int = 0;
 			//活动ID
-			writeShort(_activity.length);
-			for (i = 0; i < _activity.length; i++) {
-				writeInt(_activity[i]);
-			}
+			writeInt(_activity);
 			return true;
 		}
 		
@@ -32,12 +29,8 @@ package com.rpgGame.netData.specialactivities.message{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
-			var i: int = 0;
 			//活动ID
-			var activity_length : int = readShort();
-			for (i = 0; i < activity_length; i++) {
-				_activity[i] = readInt();
-			}
+			_activity = readInt();
 			return true;
 		}
 		
@@ -53,14 +46,14 @@ package com.rpgGame.netData.specialactivities.message{
 		 * get 活动ID
 		 * @return 
 		 */
-		public function get activity(): Vector.<int>{
+		public function get activity(): int{
 			return _activity;
 		}
 		
 		/**
 		 * set 活动ID
 		 */
-		public function set activity(value: Vector.<int>): void{
+		public function set activity(value: int): void{
 			this._activity = value;
 		}
 		

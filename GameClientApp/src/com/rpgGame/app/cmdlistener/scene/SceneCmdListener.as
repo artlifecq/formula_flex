@@ -263,7 +263,6 @@ package com.rpgGame.app.cmdlistener.scene
 		{
 			if(msg.personId.ToGID()==MainRoleManager.actor.id){
 				AppManager.showApp(AppConstant.DIE_PANEL,msg);
-				
 				EventManager.dispatchEvent(MainPlayerEvent.PLAYER_DIE);
 			}
 		}

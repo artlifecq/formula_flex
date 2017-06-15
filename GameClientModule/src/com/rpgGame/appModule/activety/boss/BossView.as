@@ -3,10 +3,12 @@ package com.rpgGame.appModule.activety.boss
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.display3D.InterAvatar3D;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.coreData.cfg.active.ActivetyDataManager;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.cfg.active.BossActInfo;
@@ -17,6 +19,7 @@ package com.rpgGame.appModule.activety.boss
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleType;
+	import com.rpgGame.coreData.type.activity.ActivityJoinStateEnum;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	
 	import away3d.events.Event;
@@ -24,6 +27,7 @@ package com.rpgGame.appModule.activety.boss
 	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.data.ListCollection;
 	
+	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.activety.shijieboss.ShiJieBoss_Skin;
 	
 	/**
@@ -41,6 +45,8 @@ package com.rpgGame.appModule.activety.boss
 		private var _avatarContainer:Inter3DContainer;
 		private var _avatardata:MonsterData;
 		private var selectedInfo:BossActInfo;
+
+		private var actList:Vector.<ActivetyInfo>;
 		
 		public function BossView()
 		{
@@ -55,12 +61,9 @@ package com.rpgGame.appModule.activety.boss
 			_skin.ListItem.scrollBarDisplayMode = ScrollBarDisplayMode.ALWAYS_VISIBLE;
 			
 			_activeData=new ListCollection();
-			var list:Vector.<ActivetyInfo>=ActivetyDataManager.getActiveList(ActivityEnum.BOSS_ACT);
-			if(!list){
-				list=new Vector.<ActivetyInfo>();
-			}
-			for(var i:int=0;i<list.length;i++){
-				_activeData.addItem(list[i]);
+			actList=ActivetyDataManager.getActiveList(ActivityEnum.BOSS_ACT);
+			for(var i:int=0;i<actList.length;i++){
+				_activeData.addItem(actList[i]);
 			}
 			_skin.ListItem.dataProvider=_activeData;
 			
@@ -80,7 +83,7 @@ package com.rpgGame.appModule.activety.boss
 			var bossCfg:Q_monster=MonsterDataManager.getData(bossId);
 			_avatardata.avatarInfo.setBodyResID(bossCfg ? bossCfg.q_body_res : "", null);
 			_avatar.setRoleData(this._avatardata);
-			this._avatar.curRole.setScale(1.7);	
+			this._avatar.curRole.setScale(Number(selectedInfo.worldBossCfg.q_monster_scale));	
 		}
 		
 		override public function show(data:Object=null):void
@@ -94,7 +97,7 @@ package com.rpgGame.appModule.activety.boss
 				_skin.container.addChild(icon);
 			}
 			initEvent();
-			
+			updateList();
 			if(!data){
 				_skin.ListItem.selectedIndex=0;
 				_skin.ListItem.dataProvider.updateItemAt(0);
@@ -117,16 +120,46 @@ package com.rpgGame.appModule.activety.boss
 		private function initEvent():void
 		{
 			_skin.ListItem.addEventListener(Event.CHANGE,onChange);
-//			EventManager.addEvent();//被击杀
+			EventManager.addEvent(MainPlayerEvent.STAT_CHANGE,updateList);
+		}
+		
+		private function updateList():void
+		{
+			for(var i:int=0;i<actList.length;i++){
+				if(actList[i].info.joinState!=ActivityJoinStateEnum.COMPLETE){
+					if(actList[i].actCfg.q_activity_limit_level>MainRoleManager.actorInfo.totalStat.level){
+						actList[i].info.joinState=ActivityJoinStateEnum.CLOSE;//未开启
+					}else{
+						actList[i].info.joinState=ActivityJoinStateEnum.JOINING;//开启
+					}
+				}
+			}
+			actList=actList.sort(sortList);
+			_activeData.removeAll();
+			for(i=0;i<actList.length;i++){
+				_activeData.addItem(actList[i]);
+			}
+			_skin.ListItem.dataProvider=_activeData;
+		}
+		
+		private function sortList(infoA:ActivetyInfo,infoB:ActivetyInfo):int
+		{
+			if(infoA.info.joinState==ActivityJoinStateEnum.JOINING&&infoB.info.joinState!=ActivityJoinStateEnum.JOINING){
+				return -1;
+			}
+			if(infoA.info.joinState!=ActivityJoinStateEnum.JOINING&&infoB.info.joinState==ActivityJoinStateEnum.JOINING){
+				return 1;
+			}
+			return 0;
 		}
 		
 		private function onChange(e:Event):void
 		{
-			var info:ActivetyInfo=_skin.ListItem.selectedItem as ActivetyInfo;
+			var info:BossActInfo=_skin.ListItem.selectedItem as BossActInfo;
 			if(!info){
 				return;
 			}
-			selectedInfo=info as BossActInfo;
+			selectedInfo=info;
 			
 			var arr:Array;
 			if(info.actCfg.q_rewards){

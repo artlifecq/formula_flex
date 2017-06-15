@@ -27,6 +27,8 @@ package org.mokylin.skin.app.activety.shijieboss
 
 		public var uiBaoxiang:feathers.controls.UIAsset;
 
+		public var uiNo:feathers.controls.UIAsset;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -37,8 +39,8 @@ package org.mokylin.skin.app.activety.shijieboss
 			
 			this.currentState = "normal";
 			this.height = 27;
-			this.width = 284;
-			this.elementsContent = [bg1_i(),bg2_i(),lbNo_i(),lbName_i(),lbKillNum_i(),uiBaoxiang_i()];
+			this.width = 298;
+			this.elementsContent = [bg1_i(),bg2_i(),lbNo_i(),lbName_i(),lbKillNum_i(),uiNo_i(),uiBaoxiang_i()];
 			
 			states = {
 			};
@@ -55,7 +57,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			bg1 = temp;
 			temp.name = "bg1";
 			temp.styleName = "ui/app/zhanchang/paihangbang/liebiao_hui.png";
-			temp.width = 284;
+			temp.width = 298;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -67,7 +69,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			bg2 = temp;
 			temp.name = "bg2";
 			temp.styleName = "ui/app/zhanchang/paihangbang/liebiao_hei.png";
-			temp.width = 288;
+			temp.width = 298;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -123,9 +125,20 @@ package org.mokylin.skin.app.activety.shijieboss
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiBaoxiang = temp;
 			temp.name = "uiBaoxiang";
-			temp.styleName = "ui/common/tubiao/shengwang.png";
-			temp.x = 256;
+			temp.styleName = "ui/app/activety/shijieboss/icon/1.png";
+			temp.x = 267;
 			temp.y = 1;
+			return temp;
+		}
+
+		private function uiNo_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiNo = temp;
+			temp.name = "uiNo";
+			temp.styleName = "ui/app/activety/shijieboss/number/1.png";
+			temp.x = 9;
+			temp.y = 4;
 			return temp;
 		}
 

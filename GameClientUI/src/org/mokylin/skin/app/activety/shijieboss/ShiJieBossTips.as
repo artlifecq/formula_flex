@@ -19,11 +19,13 @@ package org.mokylin.skin.app.activety.shijieboss
 
 		public var icon1:feathers.controls.UIAsset;
 
-		public var lbName:feathers.controls.Label;
-
 		public var lbXiaJie:feathers.controls.Label;
 
 		public var line1:feathers.controls.UIAsset;
+
+		public var uiHead:feathers.controls.UIAsset;
+
+		public var uiLiBao:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -35,7 +37,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			
 			this.currentState = "normal";
 			this.width = 298;
-			this.elementsContent = [bg_i(),lbName_i(),lbXiaJie_i(),line1_i(),icon1_i()];
+			this.elementsContent = [bg_i(),lbXiaJie_i(),line1_i(),icon1_i(),uiLiBao_i(),uiHead_i()];
 			
 			states = {
 			};
@@ -51,7 +53,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 142;
+			temp.height = 151;
 			temp.styleName = "ui/common/tips/tips_2.png";
 			temp.width = 298;
 			temp.x = 0;
@@ -64,27 +66,9 @@ package org.mokylin.skin.app.activety.shijieboss
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icon1 = temp;
 			temp.name = "icon1";
-			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 28;
-			temp.y = 72;
-			return temp;
-		}
-
-		private function lbName_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbName = temp;
-			temp.name = "lbName";
-			temp.bold = false;
-			temp.height = 19;
-			temp.fontSize = 16;
-			temp.text = "独占鳌头";
-			temp.textAlign = "center";
-			temp.color = 0xE8C958;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 226;
-			temp.x = 28;
-			temp.y = 8;
+			temp.styleName = "ui/common/grid/normal/42.png";
+			temp.x = 12;
+			temp.y = 90;
 			return temp;
 		}
 
@@ -96,8 +80,8 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.text = "【奖励】";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 9;
-			temp.y = 51;
+			temp.x = 59;
+			temp.y = 59;
 			return temp;
 		}
 
@@ -110,6 +94,28 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.width = 267;
 			temp.x = 15;
 			temp.y = 41;
+			return temp;
+		}
+
+		private function uiHead_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiHead = temp;
+			temp.name = "uiHead";
+			temp.styleName = "ui/app/activety/shijieboss/1.png";
+			temp.x = 105;
+			temp.y = 10;
+			return temp;
+		}
+
+		private function uiLiBao_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiLiBao = temp;
+			temp.name = "uiLiBao";
+			temp.styleName = "ui/app/activety/shijieboss/icon/da.png";
+			temp.x = 15;
+			temp.y = 44;
 			return temp;
 		}
 

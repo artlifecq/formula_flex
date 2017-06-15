@@ -40,10 +40,10 @@ package com.rpgGame.app.ui.tips
 				FaceUtil.SetItemGrid(icon,itemInfo);
 				row=Math.floor(i/4);
 				icon.x=15+(i%4)*60;
-				icon.y=72+row*60+5;
+				icon.y=90+row*60+5;
 			}
 			_skin.bg.height=icon.y+70;
-			_skin.lbName.text=bossHurtTipsData.title;
+			_skin.uiHead.styleName=bossHurtTipsData.titleRes;
 		}
 		
 		public function hideTips():void
