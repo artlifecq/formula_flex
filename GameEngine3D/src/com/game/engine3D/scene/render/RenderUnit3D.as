@@ -3442,6 +3442,10 @@ package com.game.engine3D.scene.render
 			{
 				for each (var element : ObjectContainer3D in _drawElements)
 				{
+					if(element.name.indexOf("chest") != -1 || element.name.indexOf("zero") != -1)//这里处理下策划自己加的挂点到模型里面去，干扰了模型的包围盒
+					{
+						continue;
+					}
 					var bounds : VolumeBounds = new VolumeBounds(element.minX * element.scaleX, element.minY * element.scaleY, element.minZ * element.scaleZ, //
 						element.maxX * element.scaleX, element.maxY * element.scaleY, element.maxZ * element.scaleZ);
 					return bounds;
