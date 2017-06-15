@@ -18,7 +18,7 @@ package  com.rpgGame.app.ui.common
 	{
 	
 		private  var MAX_ALLOW:int=999;
-		private var maxCount:int=900;
+		private var _maxCount:int=900;
 		private var price:int;
 		private var speedTime:int=1500;
 		private var now:int=0;
@@ -34,6 +34,12 @@ package  com.rpgGame.app.ui.common
 		private var btnMax:Button;
 		private var callBack:Function;
 		private var lab:Label;
+		private var btnMin:Button;
+		
+		/**
+		 *是否开启加速 ,默认开启
+		 */		
+		private var _needSpeed:Boolean=true;
 		/**
 		 *快速增减数字 
 		 * @param btnA增加按钮
@@ -41,26 +47,32 @@ package  com.rpgGame.app.ui.common
 		 * @param btnM最大按钮
 		 * @param addMax 增加最大值
 		 * @param maxValue 一键最大值
-		 * 
+		 * @param minValue 一键最最小值
 		 */		
-		public function NumSelectUICtrl(btnA:Button,btnD:Button,btnM:Button,la:Label,addMax:int,maxValue:int,changeCall:Function)
+		public function NumSelectUICtrl(btnA:Button,btnD:Button,btnMax:Button,btnMin:Button,la:Label,addMax:int,maxValue:int,changeCall:Function)
 		{
 			this.lab=la;
 			this.btnAdd=btnA;
 			this.btnDec=btnD;
-			this.btnMax=btnM;
+			this.btnMax=btnMax;
+			this.btnMin=btnMin;
 			MAX_ALLOW=addMax;
-			maxCount=maxValue;
+			_maxCount=maxValue;
 			callBack=changeCall;
 			initEvent();
-			gTimer=new GameTimer("ItemBuyPanelExt",100,0,onTime);
+			gTimer=new GameTimer("NumSelectUICtrl",100,0,onTime);
 			setcurNum(1);
 		}
-		public function updateMax(maxValue:int,addMax:int):void
+		
+		public function updateMax(maxValue:int,addMax:int,reset:Boolean=true):void
 		{
-			this.maxCount=maxValue;
+			this._maxCount=maxValue;
 			this.MAX_ALLOW=addMax;
-			setcurNum(1);
+			if (reset) 
+			{
+				setcurNum(1);
+			}
+			
 		}
 		private function onTime():void
 		{
@@ -92,8 +104,21 @@ package  com.rpgGame.app.ui.common
 			{
 				btnMax.addEventListener(Event.TRIGGERED,onSetMax);
 			}
+			if (btnMin) 
+			{
+				btnMin.addEventListener(Event.TRIGGERED,onSetMin);
+			}
 			btnDec.addEventListener(TouchEvent.TOUCH,onDecTouch);
 			btnAdd.addEventListener(TouchEvent.TOUCH,onAddTouch);
+		}
+		
+		private function onSetMin(eve:Event):void
+		{
+			// TODO Auto Generated method stub
+			if (curNum!=0) 
+			{
+				setcurNum(0);
+			}
 		}
 		
 		private function onAddCount(eve:Event):void
@@ -108,7 +133,7 @@ package  com.rpgGame.app.ui.common
 		private function onDecCout(eve:Event):void
 		{
 			// TODO Auto Generated method stub
-			if (curNum>0) 
+			if (curNum>1) 
 			{
 				setcurNum(curNum-1);
 			}
@@ -176,14 +201,21 @@ package  com.rpgGame.app.ui.common
 			addOrDec=val;
 			speedIndex=0;
 			now=getTimer()+speedTime;
-			gTimer.start();
+			if (_needSpeed) 
+			{
+				gTimer.start();
+			}
+			
 		}
 		
 		private function OnRollOut():void
 		{
 			// TODO Auto Generated method stub
 			isStart=false;
-			gTimer.stop();
+			if (_needSpeed) 
+			{
+				gTimer.stop();
+			}
 		}
 		
 		private function setcurNum(num:int):void
@@ -191,11 +223,15 @@ package  com.rpgGame.app.ui.common
 			
 			curNum=Math.min(num,MAX_ALLOW);
 			curNum=Math.max(curNum,1);
-			this.lab.text=curNum+"";
+			this.lab.text=getText();
 			if (callBack) 
 			{
 				callBack(curNum);
 			}
+		}
+		protected function getText():String
+		{
+			return curNum+"";
 		}
 		private function onSetMax(eve:Event):void
 		{
@@ -206,5 +242,26 @@ package  com.rpgGame.app.ui.common
 			}
 			
 		}
+		public function getValue():int
+		{
+			return curNum;
+		}
+
+		public function get needSpeed():Boolean
+		{
+			return _needSpeed;
+		}
+
+		public function set needSpeed(value:Boolean):void
+		{
+			_needSpeed = value;
+		}
+
+		public function get maxCount():int
+		{
+			return _maxCount;
+		}
+
+
 	}
 }

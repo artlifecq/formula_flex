@@ -203,7 +203,7 @@ package  com.rpgGame.appModule.social.team
 			{
 				return ret;
 			}
-			ret=sortSub(a.averagelv,b.averagelv,1);
+			ret=sortSub(a.avgFightPower,b.avgFightPower,1);
 			if (ret!=0) 
 			{
 				return ret;

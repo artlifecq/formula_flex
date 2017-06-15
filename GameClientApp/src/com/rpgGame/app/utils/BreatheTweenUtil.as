@@ -51,7 +51,7 @@ package com.rpgGame.app.utils
 			filter.color = _color;
 			filter.blur = 0;
 		
-			filter.alpha = 0.8;
+			//filter.alpha = 0.8;
 			object.filter = filter;
 			var data:Object = {blur:blurValue};
 //			data["glowFilter"] = {

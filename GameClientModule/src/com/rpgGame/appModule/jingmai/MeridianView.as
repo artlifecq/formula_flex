@@ -54,7 +54,7 @@ package com.rpgGame.appModule.jingmai
 			{
 				sbtn.addEventListener(Event.TRIGGERED,onTriggered);
 			}
-			_attrView=new MeridianAttrViewPanelExt(_skin.Num_zhandouli);
+			_attrView=new MeridianAttrViewPanelExt(_skin.NumZhanli);
 			_attrView.x=940;
 			_attrView.y=32;
 			_container.addChild(_attrView);

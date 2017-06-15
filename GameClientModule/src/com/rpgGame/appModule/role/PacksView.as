@@ -451,8 +451,8 @@ package com.rpgGame.appModule.role
 		private function preDiscard(info:ClientItemInfo):void
 		{
 			if(info.qItem.q_drop_confirm==1){//需要二次确认
-				var alertSet:AlertSetInfo=new AlertSetInfo(LangQ_BackPack.ITEM_dropItemToScene_3);
-				GameAlert.showAlert(alertSet,okDiscard,info);
+//				var alertSet:AlertSetInfo=new AlertSetInfo(LangQ_BackPack.ITEM_dropItemToScene_3);
+//				GameAlert.showAlert(alertSet,okDiscard,info);
 				
 //				var alertSet:AlertSetInfo=new AlertSetInfo(LangQ_BackPack.ITEM_dropItemToScene_3);
 //				GameAlert.showAlert(alertSet,okDiscard,info);

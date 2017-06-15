@@ -122,8 +122,10 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_global:String = "data.Q_global";
 		/**   										 */
 		public static const Q_guild:String = "data.Q_guild";
-		/**  												 */
+		/**  															 */
 		public static const Q_guild_permission:String = "data.Q_guild_permission";
+		/**  帮派技能表					 */
+		public static const Q_guildskill:String = "data.Q_guildskill";
 		/**  道具合成表									 */
 		public static const Q_hecheng:String = "data.Q_hecheng";
 		/**  坐骑基本信息数据库																					 */
@@ -158,6 +160,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_mission_segment:String = "data.Q_mission_segment";
 		/**  功能开放表														 */
 		public static const Q_newfunc:String = "data.Q_newfunc";
+		/**  九层妖塔							 */
+		public static const Q_nine_tower:String = "data.Q_nine_tower";
 		/**  通知列表			 */
 		public static const Q_notify:String = "data.Q_notify";
 		/**  阵营关系				 */
@@ -200,7 +204,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_GCD:String = "data.spell.Q_GCD";
 		/**  技能无视防御伤害数据库																		 */
 		public static const Q_skill_ignore:String = "data.spell.Q_skill_ignore";
-		/**  技能基本信息配置数据表																																																																																																																																								 */
+		/**  技能基本信息配置数据表																																																																																																																																									 */
 		public static const Q_skill_model:String = "data.spell.Q_skill_model";
 		/**  技能效果配置表																			 */
 		public static const Q_SpellAnimation:String = "data.spell.Q_SpellAnimation";
@@ -268,6 +272,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_global", com.rpgGame.coreData.clientConfig.Q_global);
 			regClass("data.Q_guild", com.rpgGame.coreData.clientConfig.Q_guild);
 			regClass("data.Q_guild_permission", com.rpgGame.coreData.clientConfig.Q_guild_permission);
+			regClass("data.Q_guildskill", com.rpgGame.coreData.clientConfig.Q_guildskill);
 			regClass("data.Q_hecheng", com.rpgGame.coreData.clientConfig.Q_hecheng);
 			regClass("data.Q_horse", com.rpgGame.coreData.clientConfig.Q_horse);
 			regClass("data.Q_horse_skills", com.rpgGame.coreData.clientConfig.Q_horse_skills);
@@ -285,6 +290,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_mission_section", com.rpgGame.coreData.clientConfig.Q_mission_section);
 			regClass("data.Q_mission_segment", com.rpgGame.coreData.clientConfig.Q_mission_segment);
 			regClass("data.Q_newfunc", com.rpgGame.coreData.clientConfig.Q_newfunc);
+			regClass("data.Q_nine_tower", com.rpgGame.coreData.clientConfig.Q_nine_tower);
 			regClass("data.Q_notify", com.rpgGame.coreData.clientConfig.Q_notify);
 			regClass("data.Q_relation", com.rpgGame.coreData.clientConfig.Q_relation);
 			regClass("data.Q_shop", com.rpgGame.coreData.clientConfig.Q_shop);

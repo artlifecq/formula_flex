@@ -182,20 +182,26 @@ package com.rpgGame.appModule.battle.jjzb
 				_leftHeadIcon.y=-17;
 				skin.container.addChild(_leftHeadIcon);
 			}
-			switch(brief.playerAppearanceInfo.job){
+			_leftHeadIcon.styleName=getHeadUrl(brief.playerAppearanceInfo.job);
+		}
+		private function getHeadUrl(job:int):String
+		{
+			switch(job)
+			{
 				case JobEnum.ROLE_1_TYPE:
-					_leftHeadIcon.styleName=AssetUrl.HEAD_ICON_1;
+					return AssetUrl.HEAD_ICON_1;
 					break;
 				case JobEnum.ROLE_2_TYPE:
-					_leftHeadIcon.styleName=AssetUrl.HEAD_ICON_2;
+					return AssetUrl.HEAD_ICON_2;
 					break;
 				case JobEnum.ROLE_3_TYPE:
-					_leftHeadIcon.styleName=AssetUrl.HEAD_ICON_3;
+					return AssetUrl.HEAD_ICON_3;
 					break;
 				case JobEnum.ROLE_4_TYPE:
-					_leftHeadIcon.styleName=AssetUrl.HEAD_ICON_4;
+					return AssetUrl.HEAD_ICON_4;
 					break;
 			}
+			return "";
 		}
 		private function setRightHeadData(brief:ZhengBaBriefInfo,skin:Head__Role_Right):void
 		{
@@ -209,21 +215,7 @@ package com.rpgGame.appModule.battle.jjzb
 				
 				skin.container.addChild(_rightHeadIcon);
 			}
-			switch(brief.playerAppearanceInfo.job)
-			{
-				case JobEnum.ROLE_1_TYPE:
-					_rightHeadIcon.styleName=AssetUrl.HEAD_ICON_1;
-					break;
-				case JobEnum.ROLE_2_TYPE:
-					_rightHeadIcon.styleName=AssetUrl.HEAD_ICON_2;
-					break;
-				case JobEnum.ROLE_3_TYPE:
-					_rightHeadIcon.styleName=AssetUrl.HEAD_ICON_3;
-					break;
-				case JobEnum.ROLE_4_TYPE:
-					_rightHeadIcon.styleName=AssetUrl.HEAD_ICON_4;
-					break;
-			}
+			_rightHeadIcon.styleName=getHeadUrl(brief.playerAppearanceInfo.job);
 			_rightHeadIcon.scaleX=-1;
 		}
 	}

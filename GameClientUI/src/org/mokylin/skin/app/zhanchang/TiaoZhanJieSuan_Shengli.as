@@ -156,7 +156,7 @@ package org.mokylin.skin.app.zhanchang
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xCFC6AE;
 			temp.width = 112;
-			temp.x = 175;
+			temp.x = 178.5;
 			temp.y = 428;
 			return temp;
 		}
@@ -330,7 +330,7 @@ package org.mokylin.skin.app.zhanchang
 			uiTip = temp;
 			temp.name = "uiTip";
 			temp.styleName = "ui/app/zhanchang/jiesuan/yinjiuzhuangxingkeyi.png";
-			temp.x = 109;
+			temp.x = 108;
 			temp.y = 403;
 			return temp;
 		}
