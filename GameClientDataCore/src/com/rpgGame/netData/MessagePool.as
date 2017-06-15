@@ -514,6 +514,7 @@ package  com.rpgGame.netData
 	import com.rpgGame.netData.pvp.handler.SCOpenDianFengPanelHandler;
 	import com.rpgGame.netData.pvp.handler.SCOpenDianFengRankHandler;
 	import com.rpgGame.netData.pvp.handler.SCQuitRaceResultHandler;
+	import com.rpgGame.netData.pvp.handler.SCQuitZoneResultHandler;
 	import com.rpgGame.netData.pvp.handler.SCRaceResultHandler;
 	import com.rpgGame.netData.pvp.handler.SCReadyToLoadHandler;
 	import com.rpgGame.netData.pvp.handler.SCReadyToStartHandler;
@@ -523,6 +524,7 @@ package  com.rpgGame.netData
 	import com.rpgGame.netData.pvp.message.SCOpenDianFengPanelMessage;
 	import com.rpgGame.netData.pvp.message.SCOpenDianFengRankMessage;
 	import com.rpgGame.netData.pvp.message.SCQuitRaceResultMessage;
+	import com.rpgGame.netData.pvp.message.SCQuitZoneResultMessage;
 	import com.rpgGame.netData.pvp.message.SCRaceResultMessage;
 	import com.rpgGame.netData.pvp.message.SCReadyToLoadMessage;
 	import com.rpgGame.netData.pvp.message.SCReadyToStartMessage;

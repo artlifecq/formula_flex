@@ -1,5 +1,4 @@
-package  com.rpgGame.netData.pvp.message
-{
+package com.rpgGame.netData.pvp.message{
 	import org.game.netCore.net.Message;
 	
 	/** 
