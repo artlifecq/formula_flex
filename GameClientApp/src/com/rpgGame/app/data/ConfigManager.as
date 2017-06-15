@@ -11,6 +11,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.AttFormulaConfig;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.AttachEffectCfgData;
+	import com.rpgGame.coreData.cfg.BattleRankCfg;
 	import com.rpgGame.coreData.cfg.BuffStateDataManager;
 	import com.rpgGame.coreData.cfg.ChangeModelCfgData;
 	import com.rpgGame.coreData.cfg.ChatCfgData;
@@ -235,6 +236,7 @@ package com.rpgGame.app.data
 			
 			//技能相关
 			SpellDataManager.setConfig(dic[ConfigClassRegister.Q_skill_model]);//技能总表
+			SpellDataManager.setWarningConfig(dic[ConfigClassRegister.Q_skill_warning]);//技能总表
 			SpellEffectDataManager.setConfig(dic[ConfigClassRegister.Q_SpellEffect]);//每个技能效果，具体参数配置表
 			AnimationDataManager.setConfig(dic[ConfigClassRegister.Q_SpellAnimation]);///技能特效配置表
 			//公共CD配置
@@ -292,6 +294,7 @@ package com.rpgGame.app.data
 			
 			//功能开启
 			//ClientFunctionOpenCfgData.setup(dic["data.ClientFunctionOpen"]);
+			BattleRankCfg.setup(dic[ConfigClassRegister.Q_battle_rank]);//多人副本
 		}
 		
 		/**

@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.activety
 {
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.coreData.cfg.StaticValue;
@@ -41,6 +42,15 @@ package com.rpgGame.appModule.activety
 			super.onTouchTarget(target);
 			if(target==_skin.btn_ok){
 				AppManager.showAppNoHide(actInfo.actCfg.q_notice_trans,actInfo,actInfo.actCfg.q_trans_funcID);
+				//巅峰对决特殊处理
+				if (1==actInfo.cfg.q_activity_id) 
+				{
+					Mgr.d1v1Mgr.autoJoin();
+				}
+				else
+				{
+					AppManager.showAppNoHide(actInfo.cfg.q_notice_trans,actInfo);
+				}
 				this.hide()
 			}
 		}

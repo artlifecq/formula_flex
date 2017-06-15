@@ -389,7 +389,7 @@ package com.rpgGame.app.fight.spell
 			//选了目标的情况，但是目标不满住条件
 			if (Mgr.teamMgr.hasTeam) 
 			{
-				var nearstTeam:SceneRole=Mgr.teamMgr.getNearstTeammerber();
+				var nearstTeam:SceneRole=Mgr.teamMgr.getNearstHpTeammerber();
 				if (nearstTeam!=null) 
 				{
 					model=FightManager.getFightRoleState(nearstTeam, skill);

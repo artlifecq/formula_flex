@@ -59,7 +59,7 @@ package  com.rpgGame.app.ui.alert
 			//_skin.input_txt.restrict="0-9";
 			super(_skin);
 			_skin.lbl_title.text="获得新物品";
-			numCtrl=new NumSelectUICtrl(_skin.btn_max,_skin.btn_min,_skin.btn_all,_skin.lbBuyNum,1,1,dataChange);
+			numCtrl=new NumSelectUICtrl(_skin.btn_max,_skin.btn_min,_skin.btn_all,null,_skin.lbBuyNum,1,1,dataChange);
 		}
 		
 		public static function  show(item:ClientItemInfo):void 

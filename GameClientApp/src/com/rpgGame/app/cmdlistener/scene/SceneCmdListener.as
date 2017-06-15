@@ -616,7 +616,7 @@ package com.rpgGame.app.cmdlistener.scene
             info.read(buffer);
             var cfg : Attach_effect = AttachEffectCfgData.getInfo(info.modelId);
             if (null == cfg) {
-                GameLog.add("陷阱配置不存在:" + data.modelId);
+                GameLog.add("陷阱配置不存在:" + info.modelId);
                 return;
             }
             var data : TrapInfo = new TrapInfo(info.id, info.id.ToGID(), info.modelId, info.state, info.position.x, info.position.y);

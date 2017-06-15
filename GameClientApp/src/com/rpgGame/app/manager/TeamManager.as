@@ -1,7 +1,9 @@
 package com.rpgGame.app.manager
 {
+	import com.game.engine3D.manager.SceneMapDataManager;
 	import com.game.engine3D.utils.MathUtil;
 	import com.gameClient.utils.HashMap;
+	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.friend.FriendManager;
 	import com.rpgGame.app.manager.map.MapUnitDataManager;
@@ -9,6 +11,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.sender.LookSender;
 	import com.rpgGame.app.sender.TeamSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.ui.alert.GameAlertExt;
@@ -23,6 +26,8 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
+	import com.rpgGame.coreData.role.HeroData;
+	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.EnumFunctionMessageBarIcoType;
 	import com.rpgGame.netData.team.bean.TeamInfo;
 	import com.rpgGame.netData.team.bean.TeamMemberBriefInfo;
@@ -97,16 +102,17 @@ package com.rpgGame.app.manager
 		{
 			return _teamInfo!=null&&!_teamInfo.teamId.IsZero();
 		}
-		public function getNearstTeammerber():SceneRole
+		public function getNearstHpTeammerber():SceneRole
 		{
 			if (!hasTeam) 
 			{
 				return null;
 			}
 			var ret:SceneRole;
-			var minDis:int=int.MAX_VALUE;
+			var minDis:Number=1;
 			var tmp:SceneRole;
-			var dis:int=0;
+			var hpPer:Number=0;
+			var data:HeroData;
 			for each(var mem:TeamMemberInfo in teamInfo.memberinfo)
 			{
 				if (mem.isonline==0) 
@@ -118,16 +124,28 @@ package com.rpgGame.app.manager
 				{
 					continue;
 				}
-				if (tmp.isMainChar) 
+				if (!tmp.usable||tmp.stateMachine.isDeadState) 
 				{
 					continue;
 				}
-				dis=MathUtil.getDistanceNoSqrt(tmp.pos.x,tmp.pos.y,MainRoleManager.actor.pos.x,MainRoleManager.actor.pos.y);
-				if (dis<minDis) 
+			
+//				dis=MathUtil.getDistanceNoSqrt(tmp.pos.x,tmp.pos.y,MainRoleManager.actor.pos.x,MainRoleManager.actor.pos.y);
+//				if (dis<minDis) 
+//				{
+//					minDis=dis;
+//					ret=tmp;
+//				}
+				data=tmp.data as HeroData;
+				hpPer=data.totalStat.hp/data.totalStat.getMaxValue(CharAttributeType.MAX_HP);
+				if (hpPer<minDis) 
 				{
-					minDis=dis;
+					minDis=hpPer;
 					ret=tmp;
 				}
+			}
+			if (!ret) 
+			{
+				return MainRoleManager.actor;
 			}
 			return ret;
 		}
@@ -153,6 +171,14 @@ package com.rpgGame.app.manager
 				return false;
 			}
 			return _teamMemberMap.containsKey(playerId.ToGID());
+		}
+		public function isMyCaptian(player:long):Boolean
+		{
+			if (!hasTeam) 
+			{
+				return false;
+			}
+			return getPlayerIsCaptain(player);
 		}
 		/**
 		 * 
@@ -334,7 +360,16 @@ package com.rpgGame.app.manager
 			SetTeamInfoMap( _teamInfo );
 			DispatchEvent( TeamEvent.GET_TEAM_INFO , _teamInfo , isCreated , isDismiss);
 			MapUnitDataManager.updataTeammate(teamInfo);
-	
+			updateTeamFlag();
+		}
+		private function updateTeamFlag():void
+		{
+			var players:Vector.<SceneRole> = SceneManager.getScenePlayerList();
+			for each (var tp:SceneRole in players) 
+			{
+				HeadFace(tp.headFace).updateTeamFlag(isMyCaptian((tp.data as HeroData).serverID));
+			}
+			
 		}
 		private var recommandTimeoutId:int;
 		private function CheckRecommandAddFriend():void
@@ -482,7 +517,7 @@ package com.rpgGame.app.manager
 		}
 		public function loopPlayer(playerId:long):void
 		{
-			
+			LookSender.lookOtherPlayer(playerId);
 		}
 		public function move2TeamMember(heroId:*):void
 		{

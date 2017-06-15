@@ -633,8 +633,9 @@ package com.game.engine3D.scene.render.vo
 			}
 			else
 			{
-				if (args)
-					funcArgs = args.concat(this);
+				funcArgs = args;
+				if (funcArgs)
+					funcArgs[funcArgs.length] = this;
 				else
 					funcArgs = [this];
 			}

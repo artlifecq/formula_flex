@@ -162,6 +162,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_mission_segment:String = "data.Q_mission_segment";
 		/**  功能开放表														 */
 		public static const Q_newfunc:String = "data.Q_newfunc";
+		/**  九层妖塔							 */
+		public static const Q_nine_tower:String = "data.Q_nine_tower";
 		/**  通知列表			 */
 		public static const Q_notify:String = "data.Q_notify";
 		/**  阵营关系				 */
@@ -198,6 +200,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const SocketErrorNoteInfo:String = "data.SocketErrorNoteInfo";
 		/**  对象绑定器,绑定器可绑定在玩家，怪物，地面特效等，用来加强效果和增强功能，实现功能的组合									 */
 		public static const Attach:String = "data.spell.Attach";
+		/**  	预警技能关联							 */
+		public static const Q_skill_warning:String = "data.spell.Q_skill_warning";
 		/**  地面特效			 */
 		public static const Attach_effect:String = "data.spell.Attach_effect";
 		/**  BUFF效果配置数据表																																									 */
@@ -293,6 +297,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_mission_section", com.rpgGame.coreData.clientConfig.Q_mission_section);
 			regClass("data.Q_mission_segment", com.rpgGame.coreData.clientConfig.Q_mission_segment);
 			regClass("data.Q_newfunc", com.rpgGame.coreData.clientConfig.Q_newfunc);
+			regClass("data.Q_nine_tower", com.rpgGame.coreData.clientConfig.Q_nine_tower);
 			regClass("data.Q_notify", com.rpgGame.coreData.clientConfig.Q_notify);
 			regClass("data.Q_relation", com.rpgGame.coreData.clientConfig.Q_relation);
 			regClass("data.Q_shop", com.rpgGame.coreData.clientConfig.Q_shop);
@@ -311,6 +316,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.SceneCharPatrolInfo", com.rpgGame.coreData.clientConfig.SceneCharPatrolInfo);
 			regClass("data.SocketErrorNoteInfo", com.rpgGame.coreData.clientConfig.SocketErrorNoteInfo);
 			regClass("data.spell.Attach", com.rpgGame.coreData.clientConfig.Attach);
+			regClass("data.spell.Q_skill_warning", com.rpgGame.coreData.clientConfig.Q_skill_warning);
 			regClass("data.spell.Attach_effect", com.rpgGame.coreData.clientConfig.Attach_effect);
 			regClass("data.spell.Q_buff", com.rpgGame.coreData.clientConfig.Q_buff);
 			regClass("data.spell.Q_GCD", com.rpgGame.coreData.clientConfig.Q_GCD);

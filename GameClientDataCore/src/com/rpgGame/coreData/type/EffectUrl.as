@@ -223,6 +223,9 @@ package com.rpgGame.coreData.type
 		
 		public static const UI_XINFA:String="ui_qiehuanjiemian";
 		public static const UI_JJZB:String="ui_jingjichang";
+		
+		public static const UI_JJBATTLE:String="ui_tiaozhankuishou";
+		public static const UI_JJBREWARD:String="ui_meirijingjijiangli";
 		public function EffectUrl()
 		{
 		}

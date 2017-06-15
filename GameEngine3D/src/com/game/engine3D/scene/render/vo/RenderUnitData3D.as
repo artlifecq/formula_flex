@@ -110,7 +110,7 @@ package com.game.engine3D.scene.render.vo
 			_sparticleMeshes = new Vector.<SparticleMesh>();
 			_camera3DAnimators = new Vector.<iCamera3DAnimator>();
 			
-			_drawElements = resData.cloneMeshElements();
+			_drawElements = resData.cloneDrawElements();
 			_animatorElements = resData.cloneAnimatorElements();
 			_baseVirtualElements = resData.cloneBaseVirtualElements();
 			

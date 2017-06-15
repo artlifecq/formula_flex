@@ -36,7 +36,7 @@ package com.game.engine3D.utils
 				return value;
 			}
 		}
-
+		
 		public static function getAngle(ax : Number, ay : Number, bx : Number, by : Number) : Number
 		{
 			var dx : Number = bx - ax;
@@ -45,49 +45,49 @@ package com.game.engine3D.utils
 			angle = angle % 360;
 			return angle;
 		}
-
+		
 		public static function getRadian(ax : Number, ay : Number, bx : Number, by : Number) : Number
 		{
 			var dx : Number = bx - ax;
 			var dy : Number = by - ay;
 			return Math.atan2(dy, dx);
 		}
-
+		
 		public static function angleToRadian(angle : Number) : Number
 		{
 			return angle * 0.0175;
 		}
-
+		
 		public static function getDxByAngle(value : Number, angle : Number) : Number
 		{
 			return cosd(angle) * value;
 		}
-
+		
 		public static function getDyByAngle(value : Number, angle : Number) : Number
 		{
 			return sind(angle) * value;
 		}
-
+		
 		public static function sind(angle : Number) : Number
 		{
 			return Math.sin(0.0175 * angle);
 		}
-
+		
 		public static function cosd(angle : Number) : Number
 		{
 			return Math.cos(0.0175 * angle);
 		}
-
+		
 		public static function getDistance(ax : Number, ay : Number, bx : Number, by : Number) : Number
 		{
 			return Math.sqrt(((ax - bx) * (ax - bx)) + ((ay - by) * (ay - by)));
 		}
-
+		
 		public static function getDistanceNoSqrt(ax : Number, ay : Number, bx : Number, by : Number) : Number
 		{
 			return ((ax - bx) * (ax - bx)) + ((ay - by) * (ay - by));
 		}
-
+		
 		public static function getOffsetByAngle(angle : int) : Array
 		{
 			angle = (angle + 360) % 360;
@@ -109,13 +109,13 @@ package com.game.engine3D.utils
 				return [1, -1];
 			return [0, 0];
 		}
-
+		
 		public static function containerBounds(oc : ObjectContainer3D, sceneBased : Boolean = true) : Vector.<Number>
 		{
 			Bounds.getObjectContainerBounds(oc, sceneBased);
 			return Vector.<Number>([Bounds.minX, Bounds.minY, Bounds.minZ, Bounds.maxX, Bounds.maxY, Bounds.maxZ]);
 		}
-
+		
 		public static function clockwiseSortPoints(vertexList : Vector.<Point>) : Point
 		{
 			var center : Point = getPolygonCenter(vertexList);
@@ -138,19 +138,19 @@ package com.game.engine3D.utils
 			/*var pLen : int = vertexList.length;
 			for (var i : int = 0; i < pLen - 1; i++)
 			{
-				for (var j : int = 0; j < pLen - i - 1; j++)
-				{
-					if (pointCmp(vertexList[j], vertexList[j + 1], center))
-					{
-						var tmp : Point = vertexList[j];
-						vertexList[j] = vertexList[j + 1];
-						vertexList[j + 1] = tmp;
-					}
-				}
+			for (var j : int = 0; j < pLen - i - 1; j++)
+			{
+			if (pointCmp(vertexList[j], vertexList[j + 1], center))
+			{
+			var tmp : Point = vertexList[j];
+			vertexList[j] = vertexList[j + 1];
+			vertexList[j + 1] = tmp;
+			}
+			}
 			}*/
 			return center;
 		}
-
+		
 		public static function getPolygonCenter(vertexList : Vector.<Point>) : Point
 		{
 			var center : Point = new Point();
@@ -167,7 +167,7 @@ package com.game.engine3D.utils
 			center.y = int(y / pLen);
 			return center;
 		}
-
+		
 		/**
 		 * 延伸多边形
 		 * @author L.L.M.Sunny 20161008
@@ -188,7 +188,7 @@ package com.game.engine3D.utils
 				pos.y = center.y + dy;
 			}
 		}
-
+		
 		private static function pointCmp(a : Point, b : Point, center : Point) : Boolean
 		{
 			if (a.x >= 0 && b.x < 0)
@@ -204,14 +204,14 @@ package com.game.engine3D.utils
 			var d2 : int = (b.x - center.x) * (b.x - center.y) + (b.y - center.y) * (b.y - center.y);
 			return d1 > d2;
 		}
-
+		
 		public static function pointInPolygon(vertexList : Vector.<Point>, p : Point) : Boolean
 		{
 			if (vertexList == null)
 				return false;
 			if (p.x < 0 || p.y < 0)
 				return false;
-
+			
 			var n : int = vertexList.length;
 			var i : int = 0;
 			var p1 : Point;
@@ -219,7 +219,7 @@ package com.game.engine3D.utils
 			var counter : int = 0;
 			var xinters : int = 0;
 			p1 = vertexList[0];
-
+			
 			for (i = 1; i <= n; i++)
 			{
 				p2 = vertexList[i % n];
@@ -242,7 +242,7 @@ package com.game.engine3D.utils
 			}
 			return counter % 2 != 0;
 		}
-
+		
 		public static function getPolygonBounds(vertexList : Vector.<Point>) : Array
 		{
 			if (vertexList.length > 1)
@@ -251,7 +251,7 @@ package com.game.engine3D.utils
 				var minY : int = int.MAX_VALUE;
 				var maxX : int = int.MIN_VALUE;
 				var maxY : int = int.MIN_VALUE;
-
+				
 				for each (var vp : Point in vertexList)
 				{
 					if (vp.x < minX)
@@ -267,7 +267,7 @@ package com.game.engine3D.utils
 			}
 			return null;
 		}
-
+		
 		public static function polygonToGrids(vertexList : Vector.<Point>, width : int, height : int, isInside : Boolean = false) : Array
 		{
 			var grids : Array = [];
@@ -275,19 +275,19 @@ package com.game.engine3D.utils
 			if (vertexList.length > 1)
 			{
 				var bounds : Array = getPolygonBounds(vertexList);
-
+				
 				var minX : int = bounds[0];
 				var minY : int = bounds[1];
 				var maxX : int = bounds[2];
 				var maxY : int = bounds[3];
-
+				
 				var lenX : int = maxX - minX;
 				var lenY : int = maxY - minY;
 				var stepX : int = lenX / width;
 				var stepY : int = lenY / height;
 				var halfWidth : int = width * 0.5;
 				var halfHeight : int = height * 0.5;
-
+				
 				var tempPoint : Point = new Point();
 				for (var i : int = 0; i < lenX; i += width)
 				{
@@ -335,7 +335,7 @@ package com.game.engine3D.utils
 			}
 			return grids;
 		}
-
+		
 		/**
 		 * 球面转直角
 		 * @param tilt
@@ -345,7 +345,7 @@ package com.game.engine3D.utils
 		 * @author L.L.M.Sunny 20150928
 		 *
 		 */
-		public static function sphericalToRectangular(tilt : Number, pan : Number, radius : Number) : Vector3D
+		public static function sphericalToRectangular(tilt : Number, pan : Number, radius : Number, result:Vector3D = null) : Vector3D
 		{
 			var ts : Number = Math.sin(tilt);
 			var pc : Number = Math.cos(pan);
@@ -354,69 +354,85 @@ package com.game.engine3D.utils
 			var x : Number = radius * ts * pc;
 			var y : Number = radius * ts * ps;
 			var z : Number = radius * tc;
-			return new Vector3D(x, y, z);
+			
+			result ||= new Vector3D();
+			result.setTo(x, y, z);
+			return result;
 		}
-
-		private static function projectionRotateX(ix : Number, iy : Number, iz : Number, rotate : Number) : Vector3D
+		
+		private static function projectionRotateX(ix : Number, iy : Number, iz : Number, rotate : Number, result:Vector3D = null) : Vector3D
 		{
 			var n : Number = Math.sin(rotate);
 			var m : Number = Math.cos(rotate);
 			var x : Number = ix;
 			var y : Number = iy * m - iz * n;
 			var z : Number = iy * n + iz * m;
-			return new Vector3D(x, y, z);
+			
+			result ||= new Vector3D();
+			result.setTo(x, y, z);
+			return result;
 		}
-
-		private static function backProjectionRotateX(ix : Number, iy : Number, iz : Number, rotate : Number) : Vector3D
+		
+		private static function backProjectionRotateX(ix : Number, iy : Number, iz : Number, rotate : Number, result:Vector3D = null) : Vector3D
 		{
 			var n : Number = Math.sin(rotate);
 			var m : Number = Math.cos(rotate);
 			var x : Number = ix;
 			var y : Number = (iy + iz * n / m) / (n * n / m + m);
 			var z : Number = (iz - y * n) / m;
-			return new Vector3D(x, y, z);
+			result ||= new Vector3D();
+			result.setTo(x, y, z);
+			return result;
 		}
-
-		private static function projectionRotateY(ix : Number, iy : Number, iz : Number, rotate : Number) : Vector3D
+		
+		private static function projectionRotateY(ix : Number, iy : Number, iz : Number, rotate : Number, result:Vector3D = null) : Vector3D
 		{
 			var n : Number = Math.sin(rotate);
 			var m : Number = Math.cos(rotate);
 			var x : Number = ix * m + iz * n;
 			var y : Number = iy;
 			var z : Number = iz * m - ix * n;
-			return new Vector3D(x, y, z);
+			result ||= new Vector3D();
+			result.setTo(x, y, z);
+			return result;
 		}
-
-		private static function backProjectionRotateY(ix : Number, iy : Number, iz : Number, rotate : Number) : Vector3D
+		
+		private static function backProjectionRotateY(ix : Number, iy : Number, iz : Number, rotate : Number, result:Vector3D = null) : Vector3D
 		{
 			var n : Number = Math.sin(rotate);
 			var m : Number = Math.cos(rotate);
 			var z : Number = (iz + ix * n / m) / (m + n * n / m);
 			var y : Number = iy;
 			var x : Number = (ix - z * n) / m;
-			return new Vector3D(x, y, z);
+			result ||= new Vector3D();
+			result.setTo(x, y, z);
+			return result;
 		}
-
-		private static function projectionRotateZ(ix : Number, iy : Number, iz : Number, rotate : Number) : Vector3D
+		
+		private static function projectionRotateZ(ix : Number, iy : Number, iz : Number, rotate : Number, result:Vector3D = null) : Vector3D
 		{
 			var n : Number = Math.sin(rotate);
 			var m : Number = Math.cos(rotate);
 			var x : Number = ix * m - iy * n;
 			var y : Number = ix * n + iy * m;
 			var z : Number = iz;
-			return new Vector3D(x, y, z);
+			result ||= new Vector3D();
+			result.setTo(x, y, z);
+			return result;
 		}
-
-		private static function backProjectionRotateZ(ix : Number, iy : Number, iz : Number, rotate : Number) : Vector3D
+		
+		private static function backProjectionRotateZ(ix : Number, iy : Number, iz : Number, rotate : Number, result:Vector3D = null) : Vector3D
 		{
 			var n : Number = Math.sin(rotate);
 			var m : Number = Math.cos(rotate);
 			var x : Number = (ix + iy * n / m) / (n * n / m + m);
 			var y : Number = (iy - x * n) / m;
 			var z : Number = iz;
-			return new Vector3D(x, y, z);
+			result ||= new Vector3D();
+			result.setTo(x, y, z);
+			return result;
 		}
-
+		
 		/**
 		 * 投影
 		 * @param x
@@ -430,14 +446,15 @@ package com.game.engine3D.utils
 		 */
 		public static function projection(x : Number, y : Number, tilt : Number, pan : Number, roll : Number) : Point
 		{
-			var vec : Vector3D = new Vector3D(x, y, 0);
-			vec = projectionRotateX(vec.x, vec.y, vec.z, tilt);
-			vec = projectionRotateY(vec.x, vec.y, vec.z, pan);
-			vec = projectionRotateZ(vec.x, vec.y, vec.z, roll);
+			var vec : Vector3D = Vector3DUtil.vec0;
+			vec.setTo(x, y, 0);
+			vec = projectionRotateX(x, y, 0, tilt, vec);
+			vec = projectionRotateY(vec.x, vec.y, vec.z, pan, vec);
+			vec = projectionRotateZ(vec.x, vec.y, vec.z, roll, vec);
 			var p : Point = new Point(vec.x, vec.y);
 			return p;
 		}
-
+		
 		/**
 		 * 反投影
 		 * @param x
@@ -457,22 +474,23 @@ package com.game.engine3D.utils
 			var n2 : Number = Math.sin(pan);
 			var m2 : Number = Math.cos(pan);
 			var iz : Number = (iy * n1 * m2 - ix * n2 - z) / (m1 * m2);
-			var vec : Vector3D = backProjectionRotateZ(ix, iy, iz, roll);
-			vec = backProjectionRotateY(vec.x, vec.y, vec.z, pan);
-			vec = backProjectionRotateX(vec.x, vec.y, vec.z, tilt);
+			var vec : Vector3D = Vector3DUtil.vec0;;
+			vec = backProjectionRotateZ(ix, iy, iz, roll, vec);
+			vec = backProjectionRotateY(vec.x, vec.y, vec.z, pan, vec);
+			vec = backProjectionRotateX(vec.x, vec.y, vec.z, tilt, vec);
 			var p : Point = new Point(vec.x, vec.y);
 			return p;
 		}
-
-		public static function getAnglePos(startPos : Point, angle : Number, dist : Number) : Point
+		
+		public static function getAnglePos(startPos : Point, angle : Number, dist : Number, result:Point = null) : Point
 		{
-			var pos : Point = new Point();
+			var pos : Point = result ||= new Point();
 			var radian : Number = angle / 180 * Math.PI;
 			pos.x = startPos.x + dist * Math.cos(radian);
 			pos.y = startPos.y + dist * Math.sin(radian);
 			return pos;
 		}
-
+		
 		public static function get2PosDisPos(startPos : Point, endPos : Point, dist : Number) : Point
 		{
 			var pos : Point;
@@ -494,7 +512,6 @@ package com.game.engine3D.utils
 			pos = getAnglePos(startPos, angle, dist);
 			return pos;
 		}
-		
 		
 		public static function pointInArea(vertexList : Vector.<Point>, p : Point) : Boolean
 		{

@@ -24,6 +24,8 @@ package com.rpgGame.app.manager.fight
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	
+	import away3d.containers.ObjectContainer3D;
+	
 	import gs.TimelineLite;
 	import gs.TweenLite;
 	import gs.TweenMax;
@@ -46,6 +48,14 @@ package com.rpgGame.app.manager.fight
 	 */
 	public class FightFaceHelper
 	{
+		public static var layer:FightFaceLayer=new FightFaceLayer();
+		public static function bindTarget(mainPlayer:ObjectContainer3D):void
+		{
+			layer.x=0;
+			layer.y=0;
+			StarlingLayerManager.headFaceLayer.addChildAt(layer,0);
+			layer.bind(mainPlayer);
+		}
 		/** 根路径 **/
 		public static const ROOT : String = "ui/pngx/fight/";
 		//---------------------------文字------------------------------------------//
@@ -168,7 +178,44 @@ package com.rpgGame.app.manager.fight
 		{
 			return ROOT + numberType + number + ".png";
 		}
-
+		/**
+		 *飘字是否主角能看见 
+		 * @param atkor
+		 * @param hurter
+		 * 
+		 */		
+		public static function isICanSeeText(atkor : SceneRole, hurter : SceneRole):Boolean
+		{
+			if (hurter==null) 
+			{
+				return false;
+			}
+			var showFace:Boolean = false;
+			var roleData:RoleData;
+			if(atkor && atkor.usable)
+			{
+				roleData = atkor.data as RoleData;
+				if(roleData)
+				{
+					if(roleData.id == MainRoleManager.actorID || roleData.ownerId == MainRoleManager.actorID)
+					{
+						showFace = true;
+					}
+				}
+			}
+			if(hurter && hurter.usable)
+			{
+				roleData = hurter.data as RoleData;
+				if(roleData)
+				{
+					if(roleData.id == MainRoleManager.actorID || roleData.ownerId == MainRoleManager.actorID)
+					{
+						showFace = true;
+					}
+				}
+			}
+			return showFace;
+		}
 		/**
 		 * 伤害飘字
 		 * @param atkor 场景角色
@@ -181,7 +228,12 @@ package com.rpgGame.app.manager.fight
 		{
 			if (hurter == null)
 				return;
-			
+			//提前判断，面得做无用功
+			var iCanSee:Boolean=isICanSeeText(atkor,hurter);
+			if (!iCanSee) 
+			{
+				return;
+			}
 			var mainPlayer : SceneRole = MainRoleManager.actor; //主角
 			var typeRes : String=""; //得到攻击效果的指定类型的URL
 			
@@ -277,50 +329,24 @@ package com.rpgGame.app.manager.fight
 					{
 						tweenFun = SpellResultTweenUtil.TweenHurt;
 					}
-					var showFace:Boolean = false;
-					var roleData:RoleData;
-					if(atkor && atkor.usable)
+					//加血
+					if (hurtAmount>0) 
 					{
-						roleData = atkor.data as RoleData;
-						if(roleData)
-						{
-							if(roleData.id == MainRoleManager.actorID || roleData.ownerId == MainRoleManager.actorID)
-							{
-								showFace = true;
-							}
-						}
+						showAttackFaceNew(hurter,atkor,atkor.headFace,typeRes,numberType,hurtAmount,null,null,tweenFun,extAtf);
 					}
-					if(hurter && hurter.usable)
+					//伤害
+					else
 					{
-						roleData = hurter.data as RoleData;
-						if(roleData)
-						{
-							if(roleData.id == MainRoleManager.actorID || roleData.ownerId == MainRoleManager.actorID)
-							{
-								showFace = true;
-							}
-						}
+						showAttackFaceNew(atkor,hurter,hurter.headFace,typeRes,numberType,hurtAmount,null,null,tweenFun,extAtf);
 					}
-					if (showFace) //主角或主角所属角色受伤害/攻击...
+					
+					//				}
+					if(hurter.data.id!=MainRoleManager.actorID)
 					{
-						
-						if (hurtAmount>0) 
+						var headFace:HeadFace=hurter.headFace as HeadFace;
+						if(headFace && !hurter.stateMachine.isDeadState)
 						{
-							showAttackFaceNew(hurter,atkor,atkor.headFace,typeRes,numberType,hurtAmount,null,null,tweenFun,extAtf);
-						}
-						else
-						{
-							showAttackFaceNew(atkor,hurter,hurter.headFace,typeRes,numberType,hurtAmount,null,null,tweenFun,extAtf);
-						}
-						
-						//				}
-						if(hurter.data.id!=MainRoleManager.actorID)
-						{
-							var headFace:HeadFace=hurter.headFace as HeadFace;
-							if(headFace && !hurter.stateMachine.isDeadState)
-							{
-								headFace.showBloodBar();
-							}
+							headFace.showBloodBar();
 						}
 					}
 				}
@@ -572,6 +598,7 @@ package com.rpgGame.app.manager.fight
 			switch (type)
 			{
 				case EnumHurtType.ADDHP: //回血
+					typeRes="";
 					numberColor=NUMBER_PC_HPREC;
 					var extAtf:AttackFace=null;
 					if (show==2) 
@@ -706,21 +733,45 @@ package com.rpgGame.app.manager.fight
 				$onComplete(attackFace); // 动画就算不播放，也要调用完成函数
 				return;
 			}
-			//$displayObjectContainer.addChild(attackFace);
-			var layer:Sprite=StarlingLayerManager.headFaceLayer;
-			StarlingLayerManager.headFaceLayer.addChild(attackFace);
-			
-			if (null != $tweenFun)
+			var start:Point;
+			var end:Point;
+			//走场景
+			if (SpellResultTweenUtil.TweenCirt==$tweenFun||SpellResultTweenUtil.TweenHurt==$tweenFun) 
 			{
-				var start:Point=new Point(attacker.headFace.x+40,attacker.headFace.y+100);
-				var end:Point=null
-				if (hurter) 
+				layer.addChild(attackFace);
+				if (null != $tweenFun)
 				{
-					end=new Point(hurter.headFace.x+40,hurter.headFace.y+100);
+					start=new Point(attacker.pos.x,attacker.pos.y-50);
+					end=null
+					if (hurter) 
+					{
+						end=new Point(hurter.pos.x,hurter.pos.y-50);
+					}
+					
+					$tweenFun(attackFace,start,end, $onComplete);
 				}
-				
-				$tweenFun(attackFace,start,end, $onComplete);
 			}
+			else
+			{
+				StarlingLayerManager.headFaceLayer.addChild(attackFace);
+				
+				if (null != $tweenFun)
+				{
+					start=new Point(attacker.headFace.x,attacker.headFace.y);
+					end=null
+					if (hurter) 
+					{
+						end=new Point(hurter.headFace.x,hurter.headFace.y);
+					}
+					
+					$tweenFun(attackFace,start,end, $onComplete);
+				}
+			}
+			//$displayObjectContainer.addChild(attackFace);
+//			var layer:Sprite=StarlingLayerManager.headFaceLayer;
+
+						
+						
 		}
 		/**
 		 *

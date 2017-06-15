@@ -14,7 +14,14 @@ package org.mokylin.skin.app.beibao.Xinfa
 	 */
 	public class Bianshi_Tips extends feathers.controls.StateSkin
 	{
+		//==========================================================================
+		//                                定义成员变量
+		//==========================================================================
+		public var bg:feathers.controls.UIAsset;
+
 		public var btnClose:feathers.controls.Button;
+
+		public var lb_hecheng:feathers.controls.Label;
 
 
 		//==========================================================================
@@ -25,8 +32,9 @@ package org.mokylin.skin.app.beibao.Xinfa
 			super();
 			
 			this.currentState = "normal";
-			this.width = 470;
-			this.elementsContent = [__Bianshi_Tips_UIAsset1_i(),__Bianshi_Tips_Label1_i(),__Bianshi_Tips_Label2_i(),__Bianshi_Tips_Label3_i(),__Bianshi_Tips_Label4_i(),__Bianshi_Tips_Label5_i(),__Bianshi_Tips_Label6_i(),btnClose_i()];
+			this.height = 217;
+			this.width = 331;
+			this.elementsContent = [bg_i(),__Bianshi_Tips_UIAsset1_i(),btnClose_i(),__Bianshi_Tips_Label1_i(),lb_hecheng_i(),__Bianshi_Tips_Label3_i(),__Bianshi_Tips_Label4_i(),__Bianshi_Tips_Label5_i(),__Bianshi_Tips_Label6_i()];
 			
 			states = {
 			};
@@ -40,23 +48,10 @@ package org.mokylin.skin.app.beibao.Xinfa
 		private function __Bianshi_Tips_Label1_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.fontSize = 16;
-			temp.text = "没有适合的砭石";
-			temp.color = 0xB8AD80;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 192;
-			temp.y = 51;
-			return temp;
-		}
-
-		private function __Bianshi_Tips_Label2_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "砭石获得途径：";
-			temp.color = 0xE1D4A9;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 43;
-			temp.y = 85;
+			temp.color = 0xCFC6AE;
+			temp.x = 30;
+			temp.y = 60;
 			return temp;
 		}
 
@@ -67,8 +62,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
-			temp.x = 45;
-			temp.y = 120;
+			temp.x = 47;
+			temp.y = 84;
 			return temp;
 		}
 
@@ -79,8 +74,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
-			temp.x = 45;
-			temp.y = 145;
+			temp.x = 47;
+			temp.y = 109;
 			return temp;
 		}
 
@@ -91,8 +86,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
-			temp.x = 45;
-			temp.y = 170;
+			temp.x = 47;
+			temp.y = 134;
 			return temp;
 		}
 
@@ -103,17 +98,28 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
-			temp.x = 45;
-			temp.y = 195;
+			temp.x = 47;
+			temp.y = 159;
 			return temp;
 		}
 
 		private function __Bianshi_Tips_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 263;
+			temp.styleName = "ui/common/background/erji_bg.jpg";
+			temp.x = 11;
+			temp.y = 42;
+			return temp;
+		}
+
+		private function bg_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg = temp;
+			temp.name = "bg";
+			temp.height = 217;
 			temp.styleName = "ui/common/background/erji_kuang.png";
-			temp.width = 468;
+			temp.width = 331;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -125,8 +131,22 @@ package org.mokylin.skin.app.beibao.Xinfa
 			btnClose = temp;
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.x = 430;
+			temp.x = 297;
 			temp.y = 7;
+			return temp;
+		}
+
+		private function lb_hecheng_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lb_hecheng = temp;
+			temp.name = "lb_hecheng";
+			temp.text = "前往合成";
+			temp.color = 0x6BCC08;
+			temp.underline = true;
+			temp.visible = false;
+			temp.x = 47;
+			temp.y = 83;
 			return temp;
 		}
 

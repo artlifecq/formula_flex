@@ -56,5 +56,7 @@ package com.rpgGame.coreData.enum
 		public static const EM_HUODONGDATING:String="322";
 		/** 世界BOSS **/
 		public static const EM_BOSS_ACT:String="324";
+		/** 九层妖塔 **/
+		public static const EM_TOWERS:String="325";
 	}
 }

@@ -153,9 +153,9 @@ package com.rpgGame.app.ui.tips.cheats
 					{
 						lab=clonelab(_skin.lab_xiangsheng);
 						lab.y=starty;
-						var tipStr:String="与《$》相生，本心法$提升$%";
+						var tipStr:String="与《$》相生，本心法$提升$";
 						var effectArr:Array=cheatVo.careCheats.getValue(keys[i]);
-						tipStr=LanguageConfig.replaceStr(tipStr,[CheatsCfg.getCheats(effectArr[0]).q_name,CharAttributeType.getCNName(effectArr[2]),(effectArr[3]/10000).toFixed(2)]);
+						tipStr=LanguageConfig.replaceStr(tipStr,[CheatsCfg.getCheats(effectArr[0]).q_name,CharAttributeType.getCNName(effectArr[2]),(effectArr[3])]);
 						lab.text=tipStr;
 						starty+=lab.height+2;
 						lab.height=lab.textHeight;

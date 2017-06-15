@@ -843,6 +843,8 @@ package com.rpgGame.app.utils
 			if(TaskMissionManager.getMainTaskIsFinish())
 			{
 				SpellAnimationHelper.addTargetEffect(role, RenderUnitID.TASKMARK, RenderUnitType.TASKMARK, EffectUrl.UI_WENHAO, BoneNameEnum.c_0_name_01, 0, null, false);
+				
+				//Render3DTextUtil.addHeadKillToTarget(role);
 			}
 			
 		}

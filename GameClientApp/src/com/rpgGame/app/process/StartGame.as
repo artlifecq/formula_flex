@@ -25,6 +25,9 @@ package com.rpgGame.app.process
     import com.rpgGame.app.ui.tips.AmountTip;
     import com.rpgGame.app.ui.tips.BlessTip;
     import com.rpgGame.app.ui.tips.BuffTip;
+    import com.rpgGame.app.ui.tips.D1v1RankRewardExt;
+    import com.rpgGame.app.ui.tips.D1v1RankTipExt;
+    import com.rpgGame.app.ui.tips.D1v1TipExt;
     import com.rpgGame.app.ui.tips.EquipTip;
     import com.rpgGame.app.ui.tips.ExtarItemTip;
     import com.rpgGame.app.ui.tips.FriendHeroTips;
@@ -222,6 +225,9 @@ package com.rpgGame.app.process
 			TipManager.registerTipsParserClass(TipType.CHEATS_INTRADUCTION_TIP,CheatsIntraductTipExt);
 			TipManager.registerTipsParserClass(TipType.BLESS_TIP,BlessTip);
 			TipManager.registerTipsParserClass(TipType.TEAM_NEAR_TEAM_TIP,TeamTipExt);
+			TipManager.registerTipsParserClass(TipType.D1V1_TIP,D1v1TipExt);
+			TipManager.registerTipsParserClass(TipType.D1V1_RANK_TIP,D1v1RankTipExt);
+			TipManager.registerTipsParserClass(TipType.D1V1_RANK_REWARD_TIP,D1v1RankRewardExt);
 		}
 
 		private function onSwitchCmp() : void

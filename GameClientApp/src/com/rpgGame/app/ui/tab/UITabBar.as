@@ -33,6 +33,8 @@ package com.rpgGame.app.ui.tab
 		public function UITabBar(tab:TabBar,datas:Vector.<UITabBarData>)
 		{
 			_tabBar=tab;
+			tab.touchable=true;
+			tab.touchGroup=false;
 			_container=_tabBar.parent;
 			_tabViewMap=new HashMap();
 			_allDatas=datas;

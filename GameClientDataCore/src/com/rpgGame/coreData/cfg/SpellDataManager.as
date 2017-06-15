@@ -2,6 +2,7 @@ package com.rpgGame.coreData.cfg
 {
 	import com.rpgGame.coreData.clientConfig.Q_SpellEffect;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
+	import com.rpgGame.coreData.clientConfig.Q_skill_warning;
 	import com.rpgGame.coreData.enum.JobEnum;
 	
 	import flash.utils.ByteArray;
@@ -37,6 +38,9 @@ package com.rpgGame.coreData.cfg
 		 *不弹窗
 		 */
 		public static var unAlert:Boolean=false;
+		
+		/** 所有技能数据 **/
+		private static var _warningMap:HashMap = new HashMap();
 		
 		public function SpellDataManager()
 		{
@@ -76,6 +80,30 @@ package com.rpgGame.coreData.cfg
 				}
 			}
 		}
+		
+		/**
+		 * 设置预警技能关联数据
+		 */		
+		public static function setWarningConfig(data : ByteArray) : void
+		{
+			var arr:Array = data.readObject();
+			if (arr == null)
+				return;
+			for each (var warniData : Q_skill_warning in arr)
+			{
+				_warningMap.add(warniData.q_skillID,warniData);
+			}
+			
+		}
+		/**
+		 * 返回预警技能数据
+		 */		
+		public static function getWarningData(skillID : int ) : Q_skill_warning
+		{
+			return _warningMap.getValue(skillID);
+		}
+		
+		
 		
 		/**
 		 *获取基本技能列表 

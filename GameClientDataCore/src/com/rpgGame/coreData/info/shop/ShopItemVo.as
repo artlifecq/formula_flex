@@ -27,6 +27,17 @@ package com.rpgGame.coreData.info.shop
 		{
 			return _data;
 		}
-
+		public function get realPrice():int
+		{
+			if (_data) 
+			{
+				if (_data.discountPrice!=0) 
+				{
+					return _data.discountPrice;
+				}
+				return _data.price;
+			}
+			return 0;
+		}
 	}
 }

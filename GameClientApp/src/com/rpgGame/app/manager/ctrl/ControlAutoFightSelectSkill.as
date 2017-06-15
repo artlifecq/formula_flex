@@ -2,9 +2,11 @@ package com.rpgGame.app.manager.ctrl
 {
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.core.events.SceneInteractiveEvent;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.enum.JobEnum;
-	import com.rpgGame.coreData.role.HeroData;
+	
+	import org.client.mainCore.manager.EventManager;
 	
 	public class ControlAutoFightSelectSkill extends SceneObjectControlBase
 	{
@@ -15,6 +17,13 @@ package com.rpgGame.app.manager.ctrl
 		{
 			super(tar);
 			initSkills(job);
+			//EventManager.addEvent(SceneInteractiveEvent.SELECTED_SCENE_ROLE, selectedRole);
+		}
+		
+		private function selectedRole(...arg):void
+		{
+			// TODO Auto Generated method stub
+			
 		}
 		private function initSkills(job:int):void
 		{
@@ -48,7 +57,10 @@ package com.rpgGame.app.manager.ctrl
 		{
 			return _skillNum;
 		}
-
+		public function resetSkill():void
+		{
+			skillIndex=-1;
+		}
 		
 	}
 }

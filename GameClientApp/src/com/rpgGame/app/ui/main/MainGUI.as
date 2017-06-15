@@ -320,6 +320,10 @@ package com.rpgGame.app.ui.main
 			}
 			switch(role.type){
 				case SceneCharType.PLAYER:
+					if (EnumMapType.MAP_TYPE_D1V1==MapDataManager.currentScene.mapType) 
+					{
+						return;
+					}
 					this.addChild(_playerHead);
 					break;
 				case SceneCharType.MONSTER:

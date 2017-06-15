@@ -378,7 +378,7 @@ package com.rpgGame.app.manager.scene
 			SceneManager.getScene().clear();
 			SceneManager.getScene().clearAreaMap(1);
 			SceneManager.getScene().removeAllSceneObj();
-			TaskAutoManager.getInstance().stopAll();
+			TaskAutoManager.getInstance().stopSwitchAll();
 			TrusteeshipManager.getInstance().stopAll();
 		}
 		
@@ -605,7 +605,7 @@ package com.rpgGame.app.manager.scene
 			
 			//开启用户操作
 			InputManger.getInstance().openOperate();
-			TaskAutoManager.getInstance().startTaskAuto();
+			TaskAutoManager.getInstance().startSwitchTaskAuto();
 			
 			
 			//检测用户死亡
