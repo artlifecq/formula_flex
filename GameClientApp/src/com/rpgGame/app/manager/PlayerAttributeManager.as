@@ -18,20 +18,20 @@ package com.rpgGame.app.manager
 	 */
 	public class PlayerAttributeManager
 	{
-		public static function showSpriteStatChg( oldTotalStat:Vector.<AttributeItem>, newTotalStat:Vector.<AttributeItem> ):void
+		public static function showSpriteStatChg( oldTotalStat:SpriteStat, newTotalStat:Vector.<AttributeItem> ):void
 		{
 			//因为属性图片缺少所以先不飘字了
 //			return;
 			
 			if( oldTotalStat == null || newTotalStat == null )
 				return;
-			var oldStat:SpriteStat = new SpriteStat();
+			
 			var newStat:SpriteStat = new SpriteStat();
 			
-			oldStat.setData( oldTotalStat );
+		
 			newStat.setData( newTotalStat );
 			
-			var oldMap:HashMap = oldStat.getCloneMap();
+			var oldMap:HashMap = oldTotalStat.getCloneMap();
 			var newMap:HashMap = newStat.getCloneMap();
 			
 			var change:HashMap=new HashMap();

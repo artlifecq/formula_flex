@@ -80,7 +80,7 @@ package org.mokylin.skin.app.zhanchang
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/scene/VS.png";
 			temp.x = 395;
-			temp.y = 57;
+			temp.y = 59;
 			return temp;
 		}
 
@@ -106,8 +106,8 @@ package org.mokylin.skin.app.zhanchang
 			var skin:StateSkin = new org.mokylin.skin.app.zhanchang.Head_Role_Left()
 			temp.skin = skin
 			temp.width = 310;
-			temp.x = 14;
-			temp.y = 18;
+			temp.x = 7;
+			temp.y = 33;
 			return temp;
 		}
 
@@ -120,8 +120,8 @@ package org.mokylin.skin.app.zhanchang
 			var skin:StateSkin = new org.mokylin.skin.app.zhanchang.Head__Role_Right()
 			temp.skin = skin
 			temp.width = 310;
-			temp.x = 568;
-			temp.y = 18;
+			temp.x = 575;
+			temp.y = 33;
 			return temp;
 		}
 

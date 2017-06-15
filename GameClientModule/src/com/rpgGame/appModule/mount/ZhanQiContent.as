@@ -73,7 +73,7 @@ package com.rpgGame.appModule.mount
 			}
 			
 			_amationInfos=new Vector.<TargetAmationInfo>();
-			var currentName:String="tx_role_mieshijinzhen_01_5";//current.q_panel_show_id;
+			var currentName:String=current.q_panel_show_id;
 			_curtentInterEff=new InterObject3D();
 			var data : RenderParamData3D = new RenderParamData3D(0, "effect_ui", ClientConfig.getEffect(currentName));
 			data.forceLoad=true;//ui上的3d特效强制加载
@@ -103,7 +103,7 @@ package com.rpgGame.appModule.mount
 			_amationInfos.push(anation);
 			
 			if(next==null) return;
-			var nextName:String="tx_role_mieshijinzhen_01_5";//next.q_panel_show_id;
+			var nextName:String=next.q_panel_show_id;
 			_nextInterEff=new InterObject3D();
 			data = new RenderParamData3D(0, "effect_ui", ClientConfig.getEffect(nextName));
 			data.forceLoad=true;//ui上的3d特效强制加载

@@ -40,7 +40,7 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			temp.htmlText = "等级需求：<font color='#5DBD37'>50级</font>";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 16;
+			temp.x = 8;
 			temp.y = 7;
 			return temp;
 		}
@@ -52,7 +52,7 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 321;
-			temp.x = 16;
+			temp.x = 8;
 			temp.y = 28;
 			return temp;
 		}
@@ -65,8 +65,8 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			temp.leading = 7;
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 370;
-			temp.x = 16;
+			temp.width = 390;
+			temp.x = 8;
 			temp.y = 49;
 			return temp;
 		}
@@ -78,7 +78,7 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			temp.name = "bg";
 			temp.height = 96;
 			temp.styleName = "ui/common/tips/tips_2.png";
-			temp.width = 389;
+			temp.width = 398;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

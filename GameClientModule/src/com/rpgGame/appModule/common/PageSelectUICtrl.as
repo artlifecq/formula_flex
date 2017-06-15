@@ -2,10 +2,10 @@ package com.rpgGame.appModule.common
 {
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.Button;
 	import feathers.controls.Label;
-	
-	import away3d.events.Event;
 
 	/**
 	 * 翻页控制
@@ -14,6 +14,8 @@ package com.rpgGame.appModule.common
 	 */
 	public class PageSelectUICtrl
 	{
+		private var maxBtn:Button;
+		private var minBtn:Button;
 		private var leftBtn:Button;
 		private var rightBtn:Button;
 		private var _maxPage:int;
@@ -34,16 +36,44 @@ package com.rpgGame.appModule.common
 		}
 
 
-		public function PageSelectUICtrl(lbtn:Button,rbtn:Button,plab:Label,pageChageCall:Function,str:String="{0}")
+		public function PageSelectUICtrl(lbtn:Button,rbtn:Button,plab:Label,pageChageCall:Function,str:String="{0}",btnMax:Button=null,btnMin:Button=null)
 		{
 			this.leftBtn=lbtn;
 			this.rightBtn=rbtn;
 			this.pageLabel=plab;
 			this.labStr=str;
 			this.callBack=pageChageCall;
-			
+			this.maxBtn=btnMax;
+			this.minBtn=btnMin;
 			this.leftBtn.addEventListener(Event.TRIGGERED,onLeft);
 			this.rightBtn.addEventListener(Event.TRIGGERED,onRight);
+			
+			if (btnMax) 
+			{
+				btnMax.addEventListener(Event.TRIGGERED,onMax);
+			}
+			if (btnMin) 
+			{
+				btnMin.addEventListener(Event.TRIGGERED,onMin);
+			}
+		}
+		
+		private function onMin(eve:Event):void
+		{
+			// TODO Auto Generated method stub
+			if (_curPageIndex>0) 
+			{
+				setCurPage(0);
+			}
+		}
+		
+		private function onMax(eve:Event):void
+		{
+			// TODO Auto Generated method stub
+			if (_curPageIndex<maxPage-1) 
+			{
+				setCurPage(maxPage-1);
+			}
 		}
 		public function setData(data:Array,step:int):void
 		{
@@ -87,6 +117,14 @@ package com.rpgGame.appModule.common
 		{
 			this.leftBtn.touchable=_curPageIndex>0;
 			this.rightBtn.touchable=_curPageIndex<_maxPage-1;
+			if (minBtn) 
+			{
+				minBtn.touchable=leftBtn.touchable;
+			}
+			if (maxBtn) 
+			{
+				maxBtn.touchable=rightBtn.touchable;
+			}
 		}
 		private function setCurPage(pageIndex:int):void
 		{

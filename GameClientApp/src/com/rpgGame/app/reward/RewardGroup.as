@@ -1,13 +1,12 @@
-package com.rpgGame.appModule.common
+package  com.rpgGame.app.reward
 {
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
-	
-	import flash.utils.Dictionary;
 	
 	import feathers.controls.UIAsset;
 	
@@ -62,7 +61,8 @@ package com.rpgGame.appModule.common
 		private var initW:int;
 		private var initH:int;
 		private var _data:Vector.<ClientItemInfo>;
-		public function RewardGroup(g:UIAsset,ali:int=ALIN_LEFT,cellNum:int=10,dx:int=2,dy:int=2)
+		private var _needTips:Boolean;
+		public function RewardGroup(g:UIAsset,ali:int=ALIN_LEFT,cellNum:int=10,dx:int=2,dy:int=2,needTip:Boolean=true)
 		{
 			super();
 			this.grid=g;
@@ -79,6 +79,7 @@ package com.rpgGame.appModule.common
 				g.parent.addChildAt(this,g.parent.getChildIndex(g));
 				MCUtil.removeSelf(g);
 			}
+			_needTips=needTip;
 		}
 		public function setReward(items:Vector.<ClientItemInfo>):void
 		{
@@ -90,12 +91,37 @@ package com.rpgGame.appModule.common
 			{
 				obj=getIcon();
 				icons.push(obj);
-				FaceUtil.SetItemGrid(obj.icon,items[i]);
+				FaceUtil.SetItemGrid(obj.icon,items[i],_needTips);
 			}
 			layout();
 		}
 		private function setRewardByItemInfo(items:Vector.<ItemInfo>):void
 		{
+			
+		}
+		public function setRewardByJsonStr(reward:String):void
+		{
+			if (reward==null||reward=="") 
+			{
+				return;
+			}
+			var arr:Array=JSONUtil.decode(reward);
+			if (arr.length) 
+			{
+				var len:int=arr.length;
+				var obj:Object;
+				var rewards:Vector.<ClientItemInfo>=new Vector.<ClientItemInfo>();
+				for (var i:int = 0; i < len; i++) 
+				{
+					obj=arr[i];
+					var tmp:ClientItemInfo=new ClientItemInfo(obj.mod);
+					tmp.count=obj.num;
+				
+					rewards.push(tmp);
+				}
+				
+				setReward(rewards);
+			}
 			
 		}
 		private function layout():void
@@ -203,9 +229,13 @@ package com.rpgGame.appModule.common
 			}
 			icon=new IconCDFace(size);
 			bg.addChild(icon);
-		
-//			icon.x=(bg.width-size)/2;
-//			icon.y=(bg.height-size)/2;
+			//设置图片的时候有设置
+			//if (IcoSizeEnum.ICON_36==size||IcoSizeEnum.ICON_42==size) 
+//			{
+//				icon.x=(bg.width-size)/2;
+//				icon.y=(bg.height-size)/2;
+//			}
+
 			
 			var obj:Object={};
 			obj.bg=bg;

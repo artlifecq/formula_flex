@@ -1,13 +1,18 @@
 package com.rpgGame.app.manager.mount
 {
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.graphics.HeadFace;
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.manager.shop.ShopManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.UNIQUEID;
+	import com.rpgGame.coreData.cfg.SourceGetCfg;
+	import com.rpgGame.coreData.clientConfig.Q_source;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.netData.warFlag.bean.WarFlagDataInfo;
@@ -171,6 +176,22 @@ package com.rpgGame.app.manager.mount
 			{
 				NoticeManager.showNotifyById(9002,showdata.upLevelItem.qItem.q_name);
 				return false;
+			}
+			if(showdata.isAutoBuyItem&&!showdata.canUpLevel())
+			{
+				var qSource:Q_source=SourceGetCfg.getSource(showdata.upLevelItem.qItem.q_id);
+				if (!qSource) 
+				{
+					NoticeManager.mouseFollowNotify("商城未上架");
+					return false;
+				}	
+				var shopItems:Array=Mgr.shopMgr.getMallItemShopVo(showdata.upLevelItem.qItem.q_id,qSource.q_shoptype,JSONUtil.decode(qSource.q_sub_shop_type));
+				var needNum:int=showdata.upLevelNeedItemCount-showdata.bagHaveItemCount;
+				if(!ShopManager.ins.isCanBuy(shopItems,needNum))
+				{
+					NoticeManager.showNotifyById(9002,"元宝");
+					return false;
+				}
 			}
 			var msg:CSWarFlagStratumUpToGameMessage = new CSWarFlagStratumUpToGameMessage();
 			msg.Automatic = showdata.isAutoBuyItem?1:0;

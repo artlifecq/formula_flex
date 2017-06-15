@@ -3,6 +3,8 @@ package com.rpgGame.app.view.icon
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.type.AssetUrl;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.UIAsset;
 	
 	/**
@@ -48,10 +50,10 @@ package com.rpgGame.app.view.icon
 			_iconSize = $iconSize;
 			_iconSize = _iconSize <= 0 ? IcoSizeEnum.SIZE_46 : _iconSize;
 			switch(_iconSize){
-				case IcoSizeEnum.ICON_64:
-					_iconPositionX=_iconPositionY=7;
-					break;
+				case IcoSizeEnum.ICON_36:
+				case IcoSizeEnum.ICON_42:
 				case IcoSizeEnum.ICON_48:
+				case IcoSizeEnum.ICON_64:
 					_iconPositionX=_iconPositionY=6;
 					break;
 			}
@@ -93,35 +95,11 @@ package com.rpgGame.app.view.icon
 				return;
 			switch(_iconSize)
 			{
+				case IcoSizeEnum.ICON_36:
+				case IcoSizeEnum.ICON_42:
+				case IcoSizeEnum.ICON_48:
+				case IcoSizeEnum.ICON_64:
 				case  IcoSizeEnum.ICON_42:
-						_iconImage.x = 1;
-						_iconImage.y = 1;
-					break;
-				case  IcoSizeEnum.SIZE_40:
-					if( posx != 0 || posy != 0 )
-					{
-						_iconImage.x = posx;
-						_iconImage.y = posy;
-					}
-					else
-					{
-						_iconImage.x = 0;
-						_iconImage.y = 0;
-					}
-					break;
-				case  IcoSizeEnum.ICON_48:
-					if( posx != 0 || posy != 0 )
-					{
-						_iconImage.x = posx;
-						_iconImage.y = posy;
-					}
-					else
-					{
-						_iconImage.x = 0;
-						_iconImage.y = 0;
-					}
-					break;
-				case  IcoSizeEnum.ICON_64:
 					if( posx != 0 || posy != 0 )
 					{
 						_iconImage.x = posx;

@@ -36,6 +36,6 @@ package com.rpgGame.core.events
 		 */		
 		public static const GOBACK:int=UNIQUEID.NEXT;
 		
-		
+	
 	}
 }

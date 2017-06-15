@@ -1,6 +1,7 @@
 package com.rpgGame.app.graphics
 {
 	import com.game.engine3D.core.poolObject.InstancePool;
+	import com.rpgGame.app.graphics.decor.DecorCtrl;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.utils.HeadBloodUtil;
 	import com.rpgGame.coreData.clientConfig.Q_item;
@@ -58,7 +59,7 @@ package com.rpgGame.app.graphics
 			{
 				_nameBar = HeadNameBar.create();
 				_nameBar.y = 0;
-				this.addChild(_nameBar); //更新一下容器，从临时的到模型真正容器
+				//this.addChild(_nameBar); //更新一下容器，从临时的到模型真正容器
 			}
 			var nameColor : uint = HeadBloodUtil.getRoleNameColor(_role);
 			var qItem:Q_item=_role.data.qitem;
@@ -71,7 +72,7 @@ package com.rpgGame.app.graphics
 			_nameBar.setColor(nameColor);
 			if (_back) 
 			{
-				_back.width=_nameBar.textWidth+2;
+				_back.width=_nameBar.textWidth+20;
 			}
 		}
 		private function addBackandUpdataState():void
@@ -79,26 +80,32 @@ package com.rpgGame.app.graphics
 			if (_back == null)
 			{
 				_back = DropNameHeader.create();
-				this.addChild(_back); //更新一下容器，从临时的到模型真正容器
+				//this.addChild(_back); //更新一下容器，从临时的到模型真正容器
+				//_nameBar.addChildAt(_back,0);
 			}
 			_back.isSelect(_isShow);
 			_back.haveOwner(_dropdata.haveowner);
 		}
 		override protected function addAllBar() : void
 		{
-			addElement(_back);
-			addElement(_nameBar);
+			//addElement(_back);
+			addElement(_nameBar,DecorCtrl.TOP_NAME);
+			if (_back&&_nameBar) 
+			{
+				_nameBar.addChildAt(_back,0);
+			}
 		}
 		override protected function updateShowAndHide() : void
 		{
 			var nameVisible:Boolean = (_dropdata.qitem.q_showDrop_name==1);
-			showAndHideElement(_back, _isSelected || nameVisible);
-			showAndHideElement(_nameBar, _isSelected || nameVisible);
+			//showAndHideElement(_back, _isSelected || nameVisible);
+			if (_back) 
+			{
+				_back.visible=_isSelected || nameVisible;
+			}
+			showAndHideElement(_nameBar, _isSelected || nameVisible,DecorCtrl.TOP_NAME);
 		
 			addBackandUpdataState();
-		}
-		override protected function updateAllBarPosition() : void
-		{
 			//玩家名字为标准位置
 			if (_nameBar != null) //名字位置
 			{
@@ -108,12 +115,13 @@ package com.rpgGame.app.graphics
 			
 			if(_back != null)
 			{
-				var range:Rectangle = _nameBar.measureText();
-				_back.setSzie(range.width+40,21);
-				_back.x = int(-_back.realWidth * 0.5);
-				_back.y = int(-10 - _back.realHeight);
+				_back.width=_nameBar.textWidth+20;
+				_back.x =-10;
+				_back.y =-2;
 			}
-			
+		}
+		override protected function updateAllBarPosition() : void
+		{
 			//-------------------更新显示隐藏状态
 			updateShowAndHide();
 		}
@@ -171,6 +179,7 @@ package com.rpgGame.app.graphics
 			bind(null, null);
 			if (_nameBar != null)
 			{
+				deCtrl.removeTop(_nameBar);
 				HeadNameBar.recycle(_nameBar);
 				_nameBar = null;
 			}

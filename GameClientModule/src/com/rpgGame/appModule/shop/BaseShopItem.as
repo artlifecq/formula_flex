@@ -32,8 +32,8 @@ package com.rpgGame.appModule.shop
 			_skin=s;
 			super(s);
 			_grid=new IconCDFace(IcoSizeEnum.ICON_64);
-			_grid.x=-1;
-			_grid.y=-1;
+			_grid.x=0;
+			_grid.y=0;
 			this._skin.icons.addChild(_grid);
 			this._skin.icons.touchGroup=false;
 			this._skin.btnBuy.addEventListener(Event.TRIGGERED,onBuy);

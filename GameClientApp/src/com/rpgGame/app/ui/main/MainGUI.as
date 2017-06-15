@@ -34,6 +34,7 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.info.MapDataManager;
+	import com.rpgGame.coreData.info.map.EnumMapType;
 	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.coreData.lang.LangYuMaQiShou;
@@ -319,6 +320,10 @@ package com.rpgGame.app.ui.main
 			}
 			switch(role.type){
 				case SceneCharType.PLAYER:
+					if (EnumMapType.MAP_TYPE_D1V1==MapDataManager.currentScene.mapType) 
+					{
+						return;
+					}
 					this.addChild(_playerHead);
 					break;
 				case SceneCharType.MONSTER:

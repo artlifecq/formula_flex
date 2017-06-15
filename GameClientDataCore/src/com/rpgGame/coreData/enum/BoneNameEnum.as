@@ -62,7 +62,13 @@ package com.rpgGame.coreData.enum
 		public static const b_0_saddle_01 : String = "b_0_saddle_01";
 		
 		public static const chest:String = "chest";
+		/**
+		 * 只受位置影响
+		 */		
 		public static const st_zero:String = "st_zero";
+		/**
+		 * 不光受位置影响，还受角色公转的朝向影响，角色位置影响。不受角色自转的朝向影响
+		 */		
 		public static const zero:String = "zero";
         
         /**

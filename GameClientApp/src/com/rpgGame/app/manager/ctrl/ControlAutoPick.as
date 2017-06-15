@@ -371,7 +371,7 @@ package  com.rpgGame.app.manager.ctrl
 //					if (!items[i].isBind && (sitem.isBind || itemm.q_bind == 1))
 //						continue;
 					
-					if (items[i].num + sitem.data.goodsDatas.num<= itemm.q_max)
+					if (items[i].count + sitem.data.goodsDatas.num<= itemm.q_max)
 					{
 						return false;
 					}

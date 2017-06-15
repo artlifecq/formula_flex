@@ -26,7 +26,7 @@ package org.mokylin.skin.app.zuoqi.button
 		{
 			super();
 			
-			this.currentState = "down";
+			this.currentState = "upAndSelected";
 			this.elementsContent = [];
 			
 			states = {
@@ -48,9 +48,11 @@ package org.mokylin.skin.app.zuoqi.button
 					]
 			};
 			skinNames={"down":"ui/app/zuoqi/button/zhanqi/down.png",
+			"downAndSelected":"ui/app/zuoqi/button/zhanqi/select.png",
 			"hover":"ui/app/zuoqi/button/zhanqi/over.png",
-			"select":"ui/app/zuoqi/button/zhanqi/select.png",
-			"up":"ui/app/zuoqi/button/zhanqi/up.png"};
+			"overAndSelected":"ui/app/zuoqi/button/zhanqi/select.png",
+			"up":"ui/app/zuoqi/button/zhanqi/up.png",
+			"upAndSelected":"ui/app/zuoqi/button/zhanqi/select.png"};
 		}
 
 
