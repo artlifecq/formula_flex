@@ -47,6 +47,7 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.state.role.control.ShadowState;
 	import com.rpgGame.app.state.role.control.ShapeshiftingState;
 	import com.rpgGame.app.state.role.control.ShortcutGridState;
+	import com.rpgGame.app.state.role.control.SkillWarningState;
 	import com.rpgGame.app.state.role.control.StiffState;
 	import com.rpgGame.app.state.role.control.StopWalkMoveState;
 	import com.rpgGame.app.state.role.control.StunState;
@@ -146,6 +147,7 @@ package com.rpgGame.app.state.role
 		stateMapping[RoleStateType.CONTROL_USE_SPELL] = UseSpellState;
 		stateMapping[RoleStateType.CONTROL_SHAPESHIFTING] = ShapeshiftingState;
 		stateMapping[RoleStateType.CONTROL_SHORTCUTGRID] = ShortcutGridState;
+		stateMapping[RoleStateType.CONTROL_SKILL_WARNING] = SkillWarningState;
 		private var _role : SceneRole;
 		private var _lastCanShowRiding : Boolean;
 		

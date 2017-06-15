@@ -38,6 +38,7 @@ package com.rpgGame.app.manager.task
 		
 		private var _gTimer : GameTimer;
 		private var _isTaskRunning : Boolean;
+		private var _isAutoing:Boolean=false;
 		private var _isBroken : Boolean;
 		private var _stateMachine : AIStateMachine;
 		private var _taskTarget:int=0;
@@ -72,10 +73,15 @@ package com.rpgGame.app.manager.task
 			_gTimer.reset();
 			_gTimer.start();
 		}
-		
+		public function startSwitchTaskAuto(tar:int=0) : void
+		{
+			if(!_isAutoing)return;
+			startTaskAuto(tar);
+		}
 		
 		public function startTaskAuto(tar:int=0) : void
 		{
+			
 			testStopKey=false;
 			_stateMachine.transition(AIStateType.AI_NONE);
 			_taskTarget=tar;
@@ -84,6 +90,7 @@ package com.rpgGame.app.manager.task
 			if(!_isTaskRunning)
 			{
 				_isTaskRunning = true;
+				_isAutoing=true;
 				_isBroken = false;
 				TweenLite.killDelayedCallsTo(onDelayedUnbroken);
 				onUpdate(true);
@@ -102,6 +109,11 @@ package com.rpgGame.app.manager.task
 		private function onDelayedUnbroken() : void
 		{
 			_isBroken = false;
+		}
+		public function stopSwitchAll() : void
+		{
+			_isAutoing=_isTaskRunning;
+			stopAll();
 		}
 		public function stopAll() : void
 		{
