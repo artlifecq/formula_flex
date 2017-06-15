@@ -30,7 +30,7 @@ package com.editor.state.role.action
 
 		override public function execute() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				super.execute();
 				if (_ref)
@@ -41,7 +41,7 @@ package com.editor.state.role.action
 
 		override public function leave() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				super.leave();
 				stopBeat();
@@ -98,7 +98,7 @@ package com.editor.state.role.action
 		{
 			super.afterExecute();
 			syncAnimation(false, 0);
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				var bodyAp : RenderUnit3D = (_machine.owner as SceneRole).avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY, true);
 				var totalFrameTm : uint = (bodyAp ? bodyAp.totalDuration : 100);
@@ -113,7 +113,7 @@ package com.editor.state.role.action
 
 		private function onTotalFrameCmp() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				if (_totalFrameTween)
 				{

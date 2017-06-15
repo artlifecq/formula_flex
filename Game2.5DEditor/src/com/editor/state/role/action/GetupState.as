@@ -30,7 +30,7 @@ package com.editor.state.role.action
 
 		override public function execute() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				super.execute();
 			}
@@ -87,7 +87,7 @@ package com.editor.state.role.action
 			super.afterExecute();
 			syncAnimation(false, 0);
 
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				if (_totalFrameTween)
 				{
@@ -105,7 +105,7 @@ package com.editor.state.role.action
 
 		private function onPlayGetupCmp() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				stopGetup();
 				if ((_machine as RoleStateMachine).isPrewarWaiting)

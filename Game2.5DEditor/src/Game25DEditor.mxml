@@ -89,7 +89,7 @@
 				
 				GlobalConfig.radiusForEntity = 32;
 				GlobalConfig.use2DMap = true;
-				Stage3DLayerManager.errorChecking = true;
+//				Stage3DLayerManager.errorChecking = true;
 				
 				Engine.initEngine(60,null,null,50,50,256,256);
 				

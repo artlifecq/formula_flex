@@ -46,7 +46,7 @@ package com.editor.state.role.control
 		override public function enter() : void
 		{
 			super.enter();
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				_districtWithPath = SceneManager.getInstance().mainScene.sceneMapLayer.district;
 			}
@@ -76,7 +76,7 @@ package com.editor.state.role.control
 		override public function leave() : void
 		{
 			super.leave();
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				_throughTime = 0;
 				stopWalk();
@@ -85,7 +85,7 @@ package com.editor.state.role.control
 
 		private function ready() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				_stateReference.ready();
 			}
@@ -93,7 +93,7 @@ package com.editor.state.role.control
 
 		private function unable() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				_stateReference.unable();
 				transition(RoleStateType.CONTROL_STOP_WALK_MOVE);
@@ -133,7 +133,7 @@ package com.editor.state.role.control
 
 		private function arrive() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				_isMoving = false;
 				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {x: true, z: true});
@@ -155,7 +155,7 @@ package com.editor.state.role.control
 
 		private function stopWalk() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {x: true, z: true});
 				_stateReference.path = null;
@@ -177,7 +177,7 @@ package com.editor.state.role.control
 		 */
 		private function walkToPos() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				var targetPos3D : Vector3D = _stateReference.vectorPath;
 				var path : Vector.<Vector3D> = PathFinderUtil.findPath(_districtWithPath, (_machine.owner as SceneRole).position, targetPos3D);
@@ -245,7 +245,7 @@ package com.editor.state.role.control
 
 		private function walkByInfo() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				var info : *; //RoleMoveInfo = _stateReference.moveInfo;
 				var path : Vector.<Vector3D> = new Vector.<Vector3D>();
@@ -310,7 +310,7 @@ package com.editor.state.role.control
 
 		private function walkByPath(path : Vector.<Vector3D>, timeStamps : Array = null) : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				_isMoving = true;
 				_lastEndPos = _stateReference.endPos;
@@ -328,7 +328,7 @@ package com.editor.state.role.control
 
 		private function startMoveStep(path : Vector.<Vector3D>, timeStamps : Array = null) : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				_throughTime = getTimer();
 				//执行开始行走回调
@@ -339,7 +339,7 @@ package com.editor.state.role.control
 
 		private function moveStep(path : Vector.<Vector3D>, timeStamps : Array = null) : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {x: true, z: true});
 				if ((_machine.owner as SceneRole).usable && path && path.length)
@@ -397,7 +397,7 @@ package com.editor.state.role.control
 
 		private function onWalkStepUpdate() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				if (_stateReference)
 				{
