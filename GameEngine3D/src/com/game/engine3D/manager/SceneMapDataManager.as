@@ -22,7 +22,7 @@ package com.game.engine3D.manager
 		
 		public static function get countShareCnt() : uint
 		{
-			return sceneMapDataCountShare.getAllCacheKeyList().length;
+			return sceneMapDataCountShare.cacheCnt;
 		}
 		
 		public static function getMapData(mapName : String) : SceneMapData
