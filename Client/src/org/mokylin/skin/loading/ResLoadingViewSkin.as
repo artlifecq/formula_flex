@@ -70,10 +70,10 @@ package org.mokylin.skin.loading
 		private function __ResLoadingViewSkin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 19;
+			temp.height = 17;
 			temp.styleName = "ui/loading/wenzi.png";
-			temp.width = 947;
-			temp.x = 486.5;
+			temp.width = 702;
+			temp.x = 609;
 			temp.y = 160;
 			return temp;
 		}
@@ -114,7 +114,7 @@ package org.mokylin.skin.loading
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
 			temp.width = 108;
-			temp.x = 1194;
+			temp.x = 1184;
 			temp.y = 98;
 			return temp;
 		}
@@ -130,7 +130,7 @@ package org.mokylin.skin.loading
 			temp.color = 0x2C87B0;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 687;
-			temp.x = 616.5;
+			temp.x = 616;
 			temp.y = 98;
 			return temp;
 		}
@@ -146,7 +146,7 @@ package org.mokylin.skin.loading
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 687;
-			temp.x = 616.5;
+			temp.x = 616;
 			temp.y = 77;
 			return temp;
 		}
@@ -171,13 +171,13 @@ package org.mokylin.skin.loading
 			progressTxt = temp;
 			temp.name = "progressTxt";
 			temp.height = 19;
-			temp.text = "标签";
+			temp.text = "总进度：100%";
 			temp.textAlign = "center";
 			temp.color = 0xdedede;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 689;
-			temp.x = 615.5;
-			temp.y = 122;
+			temp.width = 687;
+			temp.x = 616;
+			temp.y = 124;
 			return temp;
 		}
 
