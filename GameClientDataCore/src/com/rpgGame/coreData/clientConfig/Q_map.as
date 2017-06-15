@@ -28,6 +28,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_map_max_level:int;
 		 /**  是否安全区(0战斗区域,1安全区域) */
 		public var q_map_safe:int;
+		 /**  脚本ID */
+		public var q_script:int;
 		 /**  地图默认PK类型（-1为不设置PK类型,0和平，1组队，2帮会，3全体，4阵营，5善恶（暂时没用）） */
 		public var q_default_pk:int;
 		 /**  是否允许手动切换PK状态（0不可以，1可以） */
@@ -118,8 +120,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_dark_fog:int;
 		 /**  掉落金币是否可多倍（0可以，1不可以） */
 		public var q_fortune:int;
-		 /**  副本类型(1论剑2:多人副本3：真气副本4：装备副本5：经验副本) */
-		public var q_mapzone_type:int;
+		 /**  地图类型(1论剑,2多人副本,3真气副本,4装备副本,5经验副本,6巅峰) */
+		public var q_map_type:int;
 		 /**  跳跃连接点 */
 		public var q_jump_link:String;
 		 /**  地图复活区域 */

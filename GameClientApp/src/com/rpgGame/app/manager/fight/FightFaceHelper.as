@@ -24,6 +24,8 @@ package com.rpgGame.app.manager.fight
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	
+	import away3d.containers.ObjectContainer3D;
+	
 	import gs.TimelineLite;
 	import gs.TweenLite;
 	import gs.TweenMax;
@@ -46,6 +48,14 @@ package com.rpgGame.app.manager.fight
 	 */
 	public class FightFaceHelper
 	{
+		public static var layer:FightFaceLayer=new FightFaceLayer();
+		public static function bindTarget(mainPlayer:ObjectContainer3D):void
+		{
+			layer.x=0;
+			layer.y=0;
+			StarlingLayerManager.headFaceLayer.addChildAt(layer,0);
+			layer.bind(mainPlayer);
+		}
 		/** 根路径 **/
 		public static const ROOT : String = "ui/pngx/fight/";
 		//---------------------------文字------------------------------------------//
@@ -723,21 +733,45 @@ package com.rpgGame.app.manager.fight
 				$onComplete(attackFace); // 动画就算不播放，也要调用完成函数
 				return;
 			}
-			//$displayObjectContainer.addChild(attackFace);
-			var layer:Sprite=StarlingLayerManager.headFaceLayer;
-			StarlingLayerManager.headFaceLayer.addChild(attackFace);
-			
-			if (null != $tweenFun)
+			var start:Point;
+			var end:Point;
+			//走场景
+			if (SpellResultTweenUtil.TweenCirt==$tweenFun||SpellResultTweenUtil.TweenHurt==$tweenFun) 
 			{
-				var start:Point=new Point(attacker.headFace.x+40,attacker.headFace.y+100);
-				var end:Point=null
-				if (hurter) 
+				layer.addChild(attackFace);
+				if (null != $tweenFun)
 				{
-					end=new Point(hurter.headFace.x+40,hurter.headFace.y+100);
+					start=new Point(attacker.pos.x,attacker.pos.y-50);
+					end=null
+					if (hurter) 
+					{
+						end=new Point(hurter.pos.x,hurter.pos.y-50);
+					}
+					
+					$tweenFun(attackFace,start,end, $onComplete);
 				}
-				
-				$tweenFun(attackFace,start,end, $onComplete);
 			}
+			else
+			{
+				StarlingLayerManager.headFaceLayer.addChild(attackFace);
+				
+				if (null != $tweenFun)
+				{
+					start=new Point(attacker.headFace.x,attacker.headFace.y);
+					end=null
+					if (hurter) 
+					{
+						end=new Point(hurter.headFace.x,hurter.headFace.y);
+					}
+					
+					$tweenFun(attackFace,start,end, $onComplete);
+				}
+			}
+			//$displayObjectContainer.addChild(attackFace);
+//			var layer:Sprite=StarlingLayerManager.headFaceLayer;
+
+						
+						
 		}
 		/**
 		 *

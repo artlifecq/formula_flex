@@ -72,7 +72,7 @@ package com.rpgGame.appModule.battle.dfdj
 		{
 			// TODO Auto Generated method stub
 			var left:int=(_endTime-getTimer())/1000;
-			if (left>=0) 
+			if (left>0) 
 			{
 				
 				_skin.lbTime.text=LanguageConfig.replaceStr(_initStr,[left]);

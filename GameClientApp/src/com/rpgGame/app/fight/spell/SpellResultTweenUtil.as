@@ -43,6 +43,15 @@
 			}
 			return _range;
 		}
+		private static function calTargetPos(start:Point,end:Point,len:int=180):void
+		{
+			var angle:Number=Math.atan2(end.y-start.y,end.x-start.x);
+			var rand:Number=1-Math.random()*2;
+			angle+=rand*Math.PI/12;
+			var dis:int=Point.distance(start,end)+(len+30*rand);
+			endPos.x=start.x+Math.cos(angle)*dis;
+			endPos.y=start.y+Math.sin(angle)*dis;
+		}
 		private static function calEndPos(start:Point,end:Point,len:int=BASE_DIS,bool:Boolean=false):void
 		{
 			var dis:int=Point.distance(start,end);
@@ -100,7 +109,7 @@
 			_timeDic=new Dictionary();
 			_timeDic[TweenAttrChange]=new TimeDelay("attr");
 			_timeDic[TweenCirt]=new TimeDelay("cirt");
-			_timeDic[TweenExp]=new TimeDelay("exp");
+			_timeDic[TweenExp]=new TimeDelay("exp",0.3);
 			_timeDic[TweenHurt]=new TimeDelay("hurt");
 			_timeDic[TweenDiaoXue]=new TimeDelay("diaoxue");
 			_timeDic[TweenZhanHun]=new TimeDelay("zhanhun");
@@ -128,8 +137,8 @@
 			
 			var pmX:String=calXPM(start,end);
 			var pmY:String=calYPM(start,end);
-			
-			calEndPos(start,end,160,true);
+			calTargetPos(start,end,140);
+			//calEndPos(start,end,160,true);
 			//trace(endPos.x,endPos.y)
 			var myTimeline:TimelineLite;
 			myTimeline = new TimelineLite({delay:timeDelay(TweenCirt),onComplete:callBack,onCompleteParams:[showobj],autoRemoveChildren:true});
@@ -154,8 +163,8 @@
 			{
 				return;
 			}
+			start.y+=100;
 			
-		
 			showobj.x=start.x-60;
 			showobj.y=start.y-50;
 			showobj.alpha=0;
@@ -181,27 +190,27 @@
 			showobj.x=end.x-60;
 			showobj.y=end.y;
 			showobj.alpha=0;
-			showobj.scaleX=showobj.scaleY=0.6;
+			showobj.scaleX=showobj.scaleY=0.3;
 			
 			var pmX:String=calXPM(start,end);
 			var pmY:String=calYPM(start,end);
-			calEndPos(start,end,200,true);
-			
+			//calEndPos(start,end,200,true);
+			calTargetPos(start,end,140);
 			var xx:String="";
 			var yy:String="";
 			if(pmX=="-")
 			{
-				xx="-50";
+				xx="-40";
 			}else
 			{
-				xx="50";
+				xx="40";
 			}
 			if(pmY=="-")
 			{
-				yy="-50";
+				yy="-40";
 			}else
 			{
-				yy="50";
+				yy="40";
 			}
 			
 			var myTimeline:TimelineLite;
@@ -210,7 +219,7 @@
 			myTimeline.addLabel("alpha1", 0);
 			//myTimeline.addLabel("alpha0", 0.6);
 			myTimeline.insert(new TweenLite(showobj, 0.4, {alpha:0.75,scaleX:0.75,scaleY:1}), "alpha1");
-			myTimeline.append(new TweenLite(showobj, 0.3, {alpha:0,x:xx,y:yy,ease:Sine.easeOut}));//,y:pSH[n].y-105,scaleX:0.82,scaleY:0.82,ease:Sine.easeOut
+			myTimeline.append(new TweenLite(showobj, 0.3, {alpha:0,x:xx,y:yy,ease:Sine.easeOut,scaleX:0.3,scaleY:0.3}));//,y:pSH[n].y-105,scaleX:0.82,scaleY:0.82,ease:Sine.easeOut
 		}
 		//掉血，应该用end
 		public static function TweenDiaoXue(showobj:DisplayObject,start:Point, end:Point,callBack:Function):void
@@ -498,7 +507,7 @@
 				return;
 			}
 			start.x=Starling.current.nativeStage.stageWidth/2;
-			start.y=Starling.current.nativeStage.stageHeight/2;
+			start.y=Starling.current.nativeStage.stageHeight/2-220;
 			showobj.x=start.x;
 			var i:int=timeIndex(TweenAttrChange);
 			showobj.y=start.y+28*i+20;

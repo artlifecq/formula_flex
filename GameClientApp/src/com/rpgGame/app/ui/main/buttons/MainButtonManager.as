@@ -15,6 +15,7 @@ package com.rpgGame.app.ui.main.buttons
 	import org.mokylin.skin.mainui.activityBar.button.ButtonFubenduilie;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonHuodongtating;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonLunjian;
+	import org.mokylin.skin.mainui.activityBar.button.ButtonZhanchangdating;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_renwu;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_shangcheng;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_shejiao;
@@ -41,7 +42,7 @@ package com.rpgGame.app.ui.main.buttons
 			regClass(101,ActivityButton,ButtonHuodongtating);
 			regClass(102,ActivityButton,ButtonLunjian);
 			regClass(103,ActivityButton,ButtonFubendating);
-			regClass(104,ActivityButton,ButtonFubenduilie);
+			regClass(104,ActivityButton,ButtonZhanchangdating);
 			regClass(105,MultyActivityButton,ButtonFubenduilie);
 		}
 		private static function regClass(id:int,cls:Class,skinui:Class):void

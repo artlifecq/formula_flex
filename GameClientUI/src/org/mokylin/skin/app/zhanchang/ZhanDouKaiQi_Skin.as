@@ -65,7 +65,6 @@ package org.mokylin.skin.app.zhanchang
 			temp.height = 37;
 			temp.label = "10";
 			temp.styleClass = org.mokylin.skin.app.zhanchang.uinumber.UINumberDaojishi;
-			temp.textAlign = "center";
 			temp.width = 58;
 			temp.x = 92;
 			temp.y = 30;

@@ -152,7 +152,7 @@ package com.rpgGame.coreData.info.map
 //				isCountryWarMap = _data.isCountryWarMap;
 //				isCountryMilitarySubsibyMap = _data.isCountryMilitarySubsibyMap;
 			}else if(_data.q_map_zones==1){//副本地图
-				_mapType=_data.q_mapzone_type;//需要和EnumMapType里面的枚举类型值一一对应
+				_mapType=_data.q_map_type;//需要和EnumMapType里面的枚举类型值一一对应
 				this.recommendLevel = _data.q_map_min_level;
 				this.requiredLevel = _data.q_map_min_level;
 				this.isClustered = false;

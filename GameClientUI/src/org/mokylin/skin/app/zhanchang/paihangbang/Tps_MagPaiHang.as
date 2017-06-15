@@ -68,6 +68,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.text = "说明：1.段位越高，领取的竞技声望越多";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 343;
 			temp.x = 8;
 			temp.y = 7;
 			return temp;
@@ -95,7 +96,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.htmlText = "3.每日<font color='#5DBD37'>24点刷新奖励</font>";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 296;
+			temp.width = 326;
 			temp.x = 49;
 			temp.y = 48;
 			return temp;
@@ -106,10 +107,10 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbT4 = temp;
 			temp.name = "lbT4";
-			temp.text = "4.每周一结算上周奖励，并重置排名";
+			temp.text = "4.每周一结算上周奖励，所有钻石重置为钻一";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 296;
+			temp.width = 328;
 			temp.x = 49;
 			temp.y = 69;
 			return temp;

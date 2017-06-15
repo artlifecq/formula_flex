@@ -34,7 +34,7 @@ package  com.rpgGame.app.graphics.decor
 		
 		public static const TOP_HPMP :int = SORT_VALUE--;
 		public static const TOP_NAME :int = SORT_VALUE--;
-
+		public static const TOP_GUILD :int = SORT_VALUE--;
 		
 		private var topLayer :SortLayer = null;
 		private var rightBottomLayer :SortLayer = null;

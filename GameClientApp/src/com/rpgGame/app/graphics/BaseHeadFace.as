@@ -158,7 +158,11 @@ package com.rpgGame.app.graphics
 		{
 			if (_bindDis)
 			{
-				_role.removeSyncInfo(_bindDis);
+				if (_role) 
+				{
+					_role.removeSyncInfo(_bindDis);
+				}
+				
 				PoolContainer3D.recycle(_bindDis);
 				_bindDis = null;
 			}

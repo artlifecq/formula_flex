@@ -1,11 +1,8 @@
 package com.rpgGame.appModule.battle.dfdj
 {
-	import com.rpgGame.app.manager.Mgr;
-	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.BattleRankCfg;
 	import com.rpgGame.coreData.clientConfig.Q_battle_rank;
-	import com.rpgGame.netData.pvp.bean.DianFengDataInfo;
 	import com.rpgGame.netData.pvp.bean.DianFengRankInfo;
 	
 	import org.mokylin.skin.app.zhanchang.paihangbang.PaiHang_Item;
@@ -68,8 +65,8 @@ package com.rpgGame.appModule.battle.dfdj
 			{
 				_skin.uiVip.styleName="ui/app/zhanchang/paihangbang/vip"+_data.vipLevel+".png";
 			}
-			_skin.uiMan.visible=_data.playerAppearanceInfo.sex==1;
-			_skin.uiWoman.visible=_data.playerAppearanceInfo.sex==2;
+//			_skin.uiMan.visible=_data.playerAppearanceInfo.sex==1;
+//			_skin.uiWoman.visible=_data.playerAppearanceInfo.sex==2;
 			_skin.lbName.text=_data.playerName;
 			var qRank:Q_battle_rank=BattleRankCfg.getRank(_data.level);
 			if (qRank) 

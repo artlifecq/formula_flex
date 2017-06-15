@@ -6,14 +6,17 @@ package com.rpgGame.app.fight.spell.time
 	{
 		private var _resetTime:int;
 		private var _key:String;
-		public function TimeDelay(key:String,time:int=1500)
+		private var _single:Number;
+		public function TimeDelay(key:String,s:Number=0.05,time:int=1500)
 		{
 			this._key=key;
+			_single=s;
 			_resetTime=time;
 		}
 		public  function get timeDelay():Number
 		{
-			return 0.05*getAttrChangeIndex();
+			var ret:Number=_single*getAttrChangeIndex();
+			return ret
 		}
 		private  var lastTime:int;
 		private  var index:int;

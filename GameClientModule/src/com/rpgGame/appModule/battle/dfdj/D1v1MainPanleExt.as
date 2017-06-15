@@ -15,6 +15,7 @@ package com.rpgGame.appModule.battle.dfdj
 	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.coreData.cfg.BattleRankCfg;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.TipsCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_battle_rank;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.EffectUrl;
@@ -37,6 +38,7 @@ package com.rpgGame.appModule.battle.dfdj
 		
 			TipTargetManager.show( _skin.btnMsg, TargetTipsMaker.makeTips( TipType.D1V1_TIP,null));
 			TipTargetManager.show(_skin.icon,TargetTipsMaker.makeTips(TipType.D1V1_RANK_TIP,new DynamicTipData()));
+			TipTargetManager.show(_skin.btnShengwang, TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(29)));
 		}
 		override protected function onTouchTarget(target:DisplayObject):void
 		{

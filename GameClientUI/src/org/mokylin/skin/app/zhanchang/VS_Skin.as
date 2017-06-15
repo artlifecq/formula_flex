@@ -103,7 +103,6 @@ package org.mokylin.skin.app.zhanchang
 			temp.height = 25;
 			temp.label = "00x01x52";
 			temp.styleClass = org.mokylin.skin.app.zhanchang.uinumber.UINumberNumTime;
-			temp.textAlign = "center";
 			temp.width = 123;
 			temp.x = 5;
 			temp.y = 56;

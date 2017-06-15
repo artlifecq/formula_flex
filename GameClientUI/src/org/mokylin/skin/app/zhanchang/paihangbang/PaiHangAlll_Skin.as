@@ -144,7 +144,6 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.height = 25;
 			temp.label = "2000";
 			temp.styleClass = org.mokylin.skin.app.zhanchang.uinumber.UINumberNumber3;
-			temp.textAlign = "center";
 			temp.width = 76;
 			temp.x = 26;
 			temp.y = 0;

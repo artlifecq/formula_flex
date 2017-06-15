@@ -11,6 +11,7 @@ package com.rpgGame.appModule.battle.dfdj
 	import com.rpgGame.core.events.D1v1Event;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.coreData.cfg.BattleRankCfg;
 	import com.rpgGame.coreData.clientConfig.Q_battle_rank;
 	import com.rpgGame.coreData.type.TipType;
@@ -72,7 +73,7 @@ package com.rpgGame.appModule.battle.dfdj
 			}
 			TipTargetManager.show(_skin.btnMsg,TargetTipsMaker.makeTips(TipType.D1V1_RANK_REWARD_TIP,null));
 			_weekRank=new D1v1WeekRewardPanelExt(_skin.skinRank.skin as PaiHangAlll_Skin);
-			TipTargetManager.show(_skin.uiLevel,TargetTipsMaker.makeTips(TipType.D1V1_RANK_TIP,{}));
+			TipTargetManager.show(_skin.uiLevel,TargetTipsMaker.makeTips(TipType.D1V1_RANK_TIP,new DynamicTipData()));
 		}
 		private function cellCkick(cell:D1v1RankCellExt):void
 		{

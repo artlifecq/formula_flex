@@ -72,7 +72,6 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			temp.height = 25;
 			temp.label = "1168";
 			temp.styleClass = org.mokylin.skin.app.zhanchang.uinumber.UINumberNumber4;
-			temp.textAlign = "center";
 			temp.width = 101;
 			temp.x = 358;
 			temp.y = 22;

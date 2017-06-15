@@ -948,6 +948,7 @@ package com.rpgGame.app.graphics
 			bind(null, null);
 			if (_nameBar != null)
 			{
+				deCtrl.removeTop(_nameBar);
 				HeadNameBar.recycle(_nameBar);
 				_nameBar = null;
 			}
@@ -982,6 +983,7 @@ package com.rpgGame.app.graphics
 			
 			if (_bloodBar != null)
 			{
+				deCtrl.removeTop(_bloodBar);
 				HeadBloodBar.recycle(_bloodBar);
 				_bloodBar = null;
 			}
