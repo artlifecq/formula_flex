@@ -28,7 +28,7 @@ package com.game.engine3D.scene.render.vo
 	 */
 	public class RenderResourceData extends CountShareData
 	{
-		private var _meshElements : Vector.<ObjectContainer3D>;
+		private var _drawElements : Vector.<ObjectContainer3D>;
 		private var _animatorElements : Vector.<CompositeMesh>;
 		private var _baseVirtualElements : Vector.<ObjectContainer3D>;
 		
@@ -51,6 +51,7 @@ package com.game.engine3D.scene.render.vo
 		
 		private var _resCompleteCallBackList : Vector.<CallBackData>;
 		private var _asyncResCompleteCallBackList : Vector.<CallBackData>;
+		private var _asyncResProgressCallBackList : Vector.<CallBackData>;
 		private var _resErrorCallBackList : Vector.<CallBackData>;
 		
 		private var _isSkinMesh : Boolean;
@@ -75,7 +76,6 @@ package com.game.engine3D.scene.render.vo
 		{
 			super();
 			_resCompleteCallBackList = new Vector.<CallBackData>();
-			_asyncResCompleteCallBackList = new Vector.<CallBackData>();
 			_resErrorCallBackList = new Vector.<CallBackData>();
 		}
 
@@ -116,6 +116,7 @@ package com.game.engine3D.scene.render.vo
 					else
 					{
 						_renderMeshLoader.setSyncResCompleteCallBack(onMeshAsyncComplete);
+						_renderMeshLoader.setSyncResProgressCallBack(onMeshAsyncProgress);
 					}
 				}
 			}
@@ -142,7 +143,7 @@ package com.game.engine3D.scene.render.vo
 		{
 			if (!_renderMeshLoader)
 				return;
-			_meshElements = _renderMeshLoader.elements;
+			_drawElements = _renderMeshLoader.elements;
 			
 			_lightPickerMap = _renderMeshLoader.lightPickerMap;
 			_lights = _renderMeshLoader.lights;
@@ -212,6 +213,25 @@ package com.game.engine3D.scene.render.vo
 				}
 			}
 		}
+		
+		private function onMeshAsyncProgress(progress:Number,loader : RenderUnitLoader) : void
+		{
+			if (_asyncResProgressCallBackList == null)return;
+			if (_animatorSourcePath)
+			{
+				if (_renderAnimatorLoader && _renderAnimatorLoader.isLoaded && _renderMeshLoader && _renderMeshLoader.isAsyncLoaded)
+				{
+					CallBackUtil.exceteCallBackData(this, _asyncResProgressCallBackList,progress);
+				}
+			}
+			else
+			{
+				if (_renderMeshLoader && _renderMeshLoader.isAsyncLoaded)
+				{
+					CallBackUtil.exceteCallBackData(this, _asyncResProgressCallBackList,progress);
+				}
+			}
+		}
 
 		private function onMeshAsyncComplete(loader : RenderUnitLoader) : void
 		{
@@ -224,6 +244,7 @@ package com.game.engine3D.scene.render.vo
 
 		private function tryResourceAsyncComplete() : void
 		{
+			if (_asyncResCompleteCallBackList == null)return;
 			if (_animatorSourcePath)
 			{
 				if (_renderAnimatorLoader && _renderAnimatorLoader.isLoaded && _renderMeshLoader && _renderMeshLoader.isAsyncLoaded)
@@ -254,12 +275,24 @@ package com.game.engine3D.scene.render.vo
 
 		public function setSyncResCompleteCallBack(value : Function, args : Array = null) : void
 		{
+			_asyncResCompleteCallBackList ||= new Vector.<CallBackData>();
 			CallBackUtil.addCallBackData(_asyncResCompleteCallBackList, value, args);
 		}
-
+		
 		public function removeSyncResCompleteCallBack(value : Function) : void
 		{
 			CallBackUtil.removeCallBackData(_asyncResCompleteCallBackList, value);
+		}
+		
+		public function setSyncResProgressCallBack(value : Function, args : Array = null) : void
+		{
+			_asyncResProgressCallBackList ||= new Vector.<CallBackData>();
+			CallBackUtil.addCallBackData(_asyncResProgressCallBackList, value, args);
+		}
+		
+		public function removeSyncResProgressCallBack(value : Function) : void
+		{
+			CallBackUtil.removeCallBackData(_asyncResProgressCallBackList, value);
 		}
 
 		public function setResErrorCallBack(value : Function, args : Array = null) : void
@@ -319,18 +352,18 @@ package com.game.engine3D.scene.render.vo
 			return _camera;
 		}
 
-		public function cloneMeshElements() : Vector.<ObjectContainer3D>
+		public function cloneDrawElements() : Vector.<ObjectContainer3D>
 		{
-			if (!_meshElements)
+			if (!_drawElements)
 			{
 				return null;
 			}
 			if (_isOnlyInstance)
 			{
-				return _meshElements;
+				return _drawElements;
 			}
 			var elements : Vector.<ObjectContainer3D> = new Vector.<ObjectContainer3D>();
-			for each (var element : ObjectContainer3D in _meshElements)
+			for each (var element : ObjectContainer3D in _drawElements)
 			{
 				elements.push(element.clone());
 			}
@@ -425,7 +458,10 @@ package com.game.engine3D.scene.render.vo
 		public function unload() : void
 		{
 			_resCompleteCallBackList.length = 0;
-			_asyncResCompleteCallBackList.length = 0;
+			if (_asyncResCompleteCallBackList)
+				_asyncResCompleteCallBackList.length = 0;
+			if (_asyncResProgressCallBackList)
+				_asyncResProgressCallBackList.length = 0;
 			_resErrorCallBackList.length = 0;
 			if (_renderMeshLoader)
 			{
@@ -439,7 +475,7 @@ package com.game.engine3D.scene.render.vo
 				_renderAnimatorLoader.removeResErrorCallBack(onAnimatorError);
 			}
 		}
-
+		
 		/**释放*/
 		override public function destroy() : void
 		{
@@ -447,13 +483,12 @@ package com.game.engine3D.scene.render.vo
 			unload();
 			_resCompleteCallBackList = null;
 			_asyncResCompleteCallBackList = null;
+			_asyncResProgressCallBackList = null;
 			_resErrorCallBackList = null;
 			_renderMeshLoader = null;
 			_renderAnimatorLoader = null;
-			_meshElements = null;
+			_drawElements = null;
 			_animatorElements = null;
-			_baseVirtualElements = null;
-			
 			_lightPickerMap = null;
 			_lights = null;
 			_methods = null;

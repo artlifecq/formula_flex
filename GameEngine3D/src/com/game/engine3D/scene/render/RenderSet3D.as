@@ -68,6 +68,7 @@ package com.game.engine3D.scene.render
 		 * 换装部件集合
 		 */
 		private var _renderUnitMap : Dictionary;
+		private var _renderUnitRef : Dictionary;
 		/** 灯光 **/
 		private var _lightPicker : LightPickerBase;
 		private var _useLight : Boolean;
@@ -93,6 +94,7 @@ package com.game.engine3D.scene.render
 			super([type, id,is25D]);
 			_syncInfos = new Dictionary();
 			_renderUnitMap = new Dictionary();
+			_renderUnitRef = new Dictionary();
 			_methodDatas = new Vector.<MethodData>();
 		}
 		
@@ -104,7 +106,7 @@ package com.game.engine3D.scene.render
 				{
 					_methodDatas.push(methodData);
 				}
-				for each (var ru : RenderUnit3D in _renderUnitMap)
+				for(var ru : RenderUnit3D in _renderUnitMap)
 				{
 					ru.addMethod(methodData);
 				}
@@ -123,7 +125,7 @@ package com.game.engine3D.scene.render
 						_methodDatas.splice(index, 1);
 					}
 				}
-				for each (var ru : RenderUnit3D in _renderUnitMap)
+				for(var ru : RenderUnit3D in _renderUnitMap)
 				{
 					ru.removeMethod(methodData);
 				}
@@ -136,7 +138,7 @@ package com.game.engine3D.scene.render
 			{
 				for each (var methodData : MethodData in _methodDatas)
 				{
-					for each (var ru : RenderUnit3D in _renderUnitMap)
+					for (var ru : RenderUnit3D in _renderUnitMap)
 					{
 						ru.removeMethod(methodData);
 					}
@@ -422,7 +424,7 @@ package com.game.engine3D.scene.render
 			var childName : String = childData.childName;
 			var meshIndex : int = childData.meshIndex;
 			var renderUnit : RenderUnit3D = childData.renderUnit;
-//			removeRenderUnit(renderUnit, false, false);
+
 			var ru : RenderUnit3D = getRenderUnitByID(renderUnitType, renderUnitId);
 			if (ru)
 			{
@@ -508,7 +510,7 @@ package com.game.engine3D.scene.render
 			{
 				ru.secondStatusGetter = null;
 				_secondStatusRender = ru;
-				for each (var otherRu : RenderUnit3D in _renderUnitMap)
+				for (var otherRu : RenderUnit3D in _renderUnitMap)
 				{
 					if (otherRu == _secondStatusRender)
 					{
@@ -539,9 +541,31 @@ package com.game.engine3D.scene.render
 				_secondStatusRender.setAddedCallBack(doSetsecondStatusGetter);
 			}
 			//添加进表
-			var key : String = rpd.type + "_" + rpd.id;
-			_renderUnitMap[key] = ru;
+			var obj:Object = _renderUnitRef[rpd.type] ||= new Object();
+			obj[rpd.id] = ru;
+			_renderUnitMap[ru] = true;
 			return ru;
+		}
+		
+		private function getRenderUnitRef(type:String, id:int) : RenderUnit3D
+		{
+			var obj:Object = _renderUnitRef[type];
+			if (obj)
+			{
+				return obj[id] as RenderUnit3D;
+			}
+			return null;
+		}
+		
+		private function deleteRenderUnit(ru:RenderUnit3D) : void
+		{
+			var obj:Object = _renderUnitRef[ru.type];
+			var rId:String = String(ru.id);
+			if (rId in obj)
+			{
+				delete obj[rId];
+				delete _renderUnitMap[ru];
+			}
 		}
 		
 		private function doSetsecondStatusGetter(ru : RenderUnit3D) : void
@@ -550,7 +574,7 @@ package com.game.engine3D.scene.render
 			{
 				return;
 			}
-			for each (var otherRu : RenderUnit3D in _renderUnitMap)
+			for (var otherRu : RenderUnit3D in _renderUnitMap)
 			{
 				if (otherRu == _secondStatusRender)
 				{
@@ -566,12 +590,8 @@ package com.game.engine3D.scene.render
 
 		private function recycleRenderUnit(ru : RenderUnit3D, recycle : Boolean = true) : void
 		{
-			var key : String = ru.type + "_" + ru.id;
-			//从表中移除
-			_renderUnitMap[key] = null;
-			delete _renderUnitMap[key];
+			deleteRenderUnit(ru);
 			ru.restoreAllChildUnits();
-			//			ru.restoreAllChildUnitToParent(_graphicDis);
 			ru.removeMouseUpCallBack(handleMouseUp);
 			ru.removeMouseDownCallBack(handleMouseDown);
 			ru.removeMouseOverCallBack(handlerMouseOver);
@@ -589,7 +609,7 @@ package com.game.engine3D.scene.render
 			{
 				_secondStatusRender.removeAddedCallBack(doSetsecondStatusGetter);
 				_secondStatusRender = null;
-				for each (var otherRu : RenderUnit3D in _renderUnitMap)
+				for (var otherRu : RenderUnit3D in _renderUnitMap)
 				{
 					otherRu.secondStatusGetter = null;
 				}
@@ -706,8 +726,7 @@ package com.game.engine3D.scene.render
 				return; //注意这个判断
 			
 			//检查换装内
-			var key : String = renderUnitType + "_" + renderUnitID;
-			var ru : RenderUnit3D = _renderUnitMap[key];
+			var ru : RenderUnit3D = getRenderUnitRef(renderUnitType, renderUnitID);
 			if (ru)
 			{
 				recycleRenderUnit(ru);
@@ -725,9 +744,8 @@ package com.game.engine3D.scene.render
 				return; //注意这个判断
 			
 			//检查换装内
-			for (var key : String in _renderUnitMap)
+			for (var ru : RenderUnit3D in _renderUnitMap)
 			{
-				var ru : RenderUnit3D = _renderUnitMap[key];
 				if (ru.type == renderUnitType)
 				{
 					recycleRenderUnit(ru, recycle);
@@ -742,7 +760,7 @@ package com.game.engine3D.scene.render
 		public function removeAllRenderUnits(recycle : Boolean = true) : void
 		{
 			//检查换装内
-			for each (var ru : RenderUnit3D in _renderUnitMap)
+			for (var ru : RenderUnit3D in _renderUnitMap)
 			{
 				recycleRenderUnit(ru, recycle);
 				ru = null;
@@ -761,8 +779,7 @@ package com.game.engine3D.scene.render
 		 */
 		public function hasIDRenderUnit(type : String, id : int, checkResReady : Boolean = false) : Boolean
 		{
-			var key : String = type + "_" + id;
-			var ru : RenderUnit3D = _renderUnitMap[key];
+			var ru : RenderUnit3D = getRenderUnitRef(type,id);
 			if (ru && ((!checkResReady) || ru.resReady))
 			{
 				return true;
@@ -776,7 +793,7 @@ package com.game.engine3D.scene.render
 		 */
 		public function hasTypeRenderUnits(type : String, checkResReady : Boolean = false) : Boolean
 		{
-			for each (var ru : RenderUnit3D in _renderUnitMap)
+			for (var ru : RenderUnit3D in _renderUnitMap)
 			{
 				if (ru.type == type && ((!checkResReady) || ru.resReady))
 				{
@@ -793,7 +810,7 @@ package com.game.engine3D.scene.render
 		 */
 		public function hasSameRenderUnit(rpd : RenderParamData3D, checkResReady : Boolean = false) : Boolean
 		{
-			for each (var ru : RenderUnit3D in _renderUnitMap)
+			for (var ru : RenderUnit3D in _renderUnitMap)
 			{
 				var apd : RenderParamData3D = ru.renderParamData;
 				if (apd && apd.equals(rpd) && ((!checkResReady) || ru.resReady))
@@ -811,8 +828,7 @@ package com.game.engine3D.scene.render
 		 */
 		public function hasRenderUnit(ru : RenderUnit3D, checkResReady : Boolean = false) : Boolean
 		{
-			var key : String = ru.type + "_" + ru.id;
-			var currRu : RenderUnit3D = _renderUnitMap[key];
+			var currRu : RenderUnit3D = getRenderUnitRef(ru.type, ru.id);
 			if (currRu)
 			{
 				if (checkResReady)
@@ -828,8 +844,7 @@ package com.game.engine3D.scene.render
 		 */
 		public function getRenderUnitByID(renderUnitType : String, id : int, checkResReady : Boolean = false) : RenderUnit3D
 		{
-			var key : String = renderUnitType + "_" + id;
-			var ru : RenderUnit3D = _renderUnitMap[key];
+			var ru : RenderUnit3D = getRenderUnitRef(renderUnitType, id);
 			if (ru && ((!checkResReady) || ru.resReady))
 			{
 				return ru;
@@ -844,7 +859,7 @@ package com.game.engine3D.scene.render
 		public function getRenderUnitsByType(renderUnitType : String, checkResReady : Boolean = false) : Array
 		{
 			var arr : Array = [];
-			for each (var ru : RenderUnit3D in _renderUnitMap)
+			for (var ru : RenderUnit3D in _renderUnitMap)
 			{
 				if (ru.type == renderUnitType && ((!checkResReady) || ru.resReady))
 				{
@@ -860,7 +875,7 @@ package com.game.engine3D.scene.render
 		public function getAllRenderUnits(checkResReady : Boolean = false) : Array
 		{
 			var arr : Array = [];
-			for each (var ru : RenderUnit3D in _renderUnitMap)
+			for (var ru : RenderUnit3D in _renderUnitMap)
 			{
 				if ((!checkResReady) || ru.resReady)
 				{
@@ -879,14 +894,35 @@ package com.game.engine3D.scene.render
 		 */
 		public function forEachRenderUnit(func : Function, args : Array = null) : void
 		{
-			//检查换装内
-			for each (var ru : RenderUnit3D in _renderUnitMap)
+//			var len : uint = 0;
+//			var funcArgs : Array = args;
+//			if (funcArgs)
+//				len = args.length;
+//			
+//			//检查换装内
+//			for (var ru : RenderUnit3D in _renderUnitMap)
+//			{
+//				if (len > 0)
+//					funcArgs[len] = ru;
+//				else
+//					funcArgs = [ru];
+//				
+//				func.apply(func, funcArgs);
+//			}
+			var funcArgs : Array = args;
+			var index:int = 0;
+			if (funcArgs)
 			{
-				var funcArgs : Array;
-				if (args)
-					funcArgs = args.concat(ru);
-				else
-					funcArgs = [ru];
+				index = funcArgs.length;
+			}
+			else{
+				funcArgs = [];
+				index = 0;
+			}
+			//检查换装内
+			for (var ru : RenderUnit3D in _renderUnitMap)
+			{
+				funcArgs[index] = ru;
 				func.apply(func, funcArgs);
 			}
 		}
@@ -899,7 +935,7 @@ package com.game.engine3D.scene.render
 		{
 			super.run(gapTm);
 			//运行逻辑
-			for each (var ru : RenderUnit3D in _renderUnitMap)
+			for (var ru : RenderUnit3D in _renderUnitMap)
 			{
 				if (ru.usable)
 				{
@@ -925,7 +961,7 @@ package com.game.engine3D.scene.render
 			if (_isInViewDistance != value)
 			{
 				super.isInViewDistance = value;
-				for each (var ru : RenderUnit3D in _renderUnitMap)
+				for (var ru : RenderUnit3D in _renderUnitMap)
 				{
 					ru.isInViewDistance = value;
 				}
@@ -935,7 +971,7 @@ package com.game.engine3D.scene.render
 		override final public function startRender() : void
 		{
 			super.startRender();
-			for each (var ru : RenderUnit3D in _renderUnitMap)
+			for (var ru : RenderUnit3D in _renderUnitMap)
 			{
 				ru.startRender();
 			}
@@ -944,7 +980,7 @@ package com.game.engine3D.scene.render
 		override final public function stopRender() : void
 		{
 			super.stopRender();
-			for each (var ru : RenderUnit3D in _renderUnitMap)
+			for (var ru : RenderUnit3D in _renderUnitMap)
 			{
 				ru.stopRender();
 			}
@@ -955,7 +991,7 @@ package com.game.engine3D.scene.render
 			if (_needInViewDist != value)
 			{
 				super.needInViewDist = value;
-				for each (var ru : RenderUnit3D in _renderUnitMap)
+				for (var ru : RenderUnit3D in _renderUnitMap)
 				{
 					ru.needInViewDist = value;
 				}
@@ -967,7 +1003,7 @@ package com.game.engine3D.scene.render
 			if (_renderLimitable != value)
 			{
 				super.renderLimitable = value;
-				for each (var ru : RenderUnit3D in _renderUnitMap)
+				for (var ru : RenderUnit3D in _renderUnitMap)
 				{
 					ru.renderLimitable = value;
 				}
@@ -979,7 +1015,7 @@ package com.game.engine3D.scene.render
 			if (_lightPicker != value)
 			{
 				_lightPicker = value;
-				for each (var ru : RenderUnit3D in _renderUnitMap)
+				for (var ru : RenderUnit3D in _renderUnitMap)
 				{
 					ru.lightPicker = value;
 				}
@@ -991,7 +1027,7 @@ package com.game.engine3D.scene.render
 			if (_useLight != value)
 			{
 				_useLight = value;
-				for each (var ru : RenderUnit3D in _renderUnitMap)
+				for (var ru : RenderUnit3D in _renderUnitMap)
 				{
 					ru.useLight = value;
 				}
@@ -1003,7 +1039,7 @@ package com.game.engine3D.scene.render
 			if (_shareMaterials != value)
 			{
 				_shareMaterials = value;
-				for each (var ru : RenderUnit3D in _renderUnitMap)
+				for (var ru : RenderUnit3D in _renderUnitMap)
 				{
 					ru.shareMaterials = value;
 				}
@@ -1015,7 +1051,7 @@ package com.game.engine3D.scene.render
 			if (_mouseEnable != value)
 			{
 				_mouseEnable = value;
-				for each (var ru : RenderUnit3D in _renderUnitMap)
+				for (var ru : RenderUnit3D in _renderUnitMap)
 				{
 					ru.mouseEnable = ru.renderParamData.mouseEnable && _mouseEnable;
 				}
@@ -1175,7 +1211,10 @@ package com.game.engine3D.scene.render
 				return;
 			var info : RenderUnitSyncInfo = ru.buildSyncInfo();
 			if (info)
-				_syncInfos[renderUnitType + "_" + id] = info;
+			{
+				var obj:Object = _syncInfos[renderUnitType] ||= new Object();
+				obj[id] = info;
+			}
 		}
 
 		/**
@@ -1186,12 +1225,14 @@ package com.game.engine3D.scene.render
 		 */		
 		public function applySyncInfo(renderUnitType : String, id : int) : void
 		{
-			var key : String = renderUnitType + "_" + id;
-			var info : RenderUnitSyncInfo = _syncInfos[key];
+			var obj:Object = _syncInfos[renderUnitType];
+			if (!obj)return;
+			
+			var info : RenderUnitSyncInfo = obj[id] as RenderUnitSyncInfo;
 			if (info)
 			{
-				_syncInfos[key] = null;
-				delete _syncInfos[key];
+				obj[id] = null;
+				delete obj[id];
 				var ru : RenderUnit3D = getRenderUnitByID(renderUnitType, id);
 				if (!ru)
 					return;
@@ -1203,7 +1244,7 @@ package com.game.engine3D.scene.render
 		override public function set alpha(value:Number):void
 		{
 			super.alpha = value;
-			for each (var ru : RenderUnit3D in _renderUnitMap)
+			for (var ru : RenderUnit3D in _renderUnitMap)
 			{
 				ru.alpha = value;
 			}
@@ -1212,7 +1253,7 @@ package com.game.engine3D.scene.render
 		override public function set blendMode(value:String):void
 		{
 			super.blendMode = value;
-			for each (var ru : RenderUnit3D in _renderUnitMap)
+			for (var ru : RenderUnit3D in _renderUnitMap)
 			{
 				ru.blendMode = value;
 			}
@@ -1221,7 +1262,7 @@ package com.game.engine3D.scene.render
 		override public function set zOffset(value : int) : void
 		{
 			super.zOffset = value;
-			for each (var ru : RenderUnit3D in _renderUnitMap)
+			for (var ru : RenderUnit3D in _renderUnitMap)
 			{
 				ru.zOffset = value;
 			}
@@ -1230,7 +1271,7 @@ package com.game.engine3D.scene.render
 		override public function set depth(value : int) : void
 		{
 			super.depth = value;
-			for each (var ru : RenderUnit3D in _renderUnitMap)
+			for (var ru : RenderUnit3D in _renderUnitMap)
 			{
 				ru.depth = value;
 			}
@@ -1238,7 +1279,7 @@ package com.game.engine3D.scene.render
 		
 		public function set castsShadows(value : Boolean) : void
 		{
-			for each (var ru : RenderUnit3D in _renderUnitMap)
+			for (var ru : RenderUnit3D in _renderUnitMap)
 			{
 				ru.castsShadows = value;
 			}
@@ -1247,7 +1288,7 @@ package com.game.engine3D.scene.render
 		override public function set planarRenderLayer(value : uint) : void
 		{
 			super.planarRenderLayer = value;
-			for each (var ru : RenderUnit3D in _renderUnitMap)
+			for (var ru : RenderUnit3D in _renderUnitMap)
 			{
 				ru.planarRenderLayer = value;
 			}
@@ -1255,7 +1296,7 @@ package com.game.engine3D.scene.render
 		
 		public function hasEntity(entity : ObjectContainer3D) : Boolean
 		{
-			for each (var ru : RenderUnit3D in _renderUnitMap)
+			for (var ru : RenderUnit3D in _renderUnitMap)
 			{
 				if (ru.graphicDis.contains(entity))
 					return true;
@@ -1304,7 +1345,11 @@ package com.game.engine3D.scene.render
 			{
 				for (key in _syncInfos)
 				{
-					var info : RenderUnitSyncInfo = _syncInfos[key];
+					var obj:Object = _syncInfos[key];
+					if (!obj)return;
+					
+					var info : RenderUnitSyncInfo = obj[id] as RenderUnitSyncInfo;
+//					var info : RenderUnitSyncInfo = _syncInfos[key];
 					if (info)
 					{
 						_syncInfos[key] = null;
