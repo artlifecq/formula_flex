@@ -14,14 +14,13 @@ package com.rpgGame.app.ui.tips
 	
 	public class ShiJieBossRewardTips extends SkinUI implements ITip
 	{
-		private var _skin:ShiJieBossTips;
+		private var _skins:ShiJieBossTips;
 		private var iconList:Vector.<IconCDFace>;
-		
 		public function ShiJieBossRewardTips()
 		{
-			_skin=new ShiJieBossTips();
-			super(_skin);
-			iconList=Vector.<IconCDFace>();
+			_skins=new ShiJieBossTips();
+			super(_skins);
+			iconList=new Vector.<IconCDFace>();
 		}
 		
 		public function setTipData(data:*):void
@@ -39,11 +38,14 @@ package com.rpgGame.app.ui.tips
 				itemInfo.itemInfo.num=reward[i].num;
 				FaceUtil.SetItemGrid(icon,itemInfo);
 				row=Math.floor(i/4);
-				icon.x=15+(i%4)*60;
-				icon.y=90+row*60+5;
+				icon.x=15+(i%4)*60-5;
+				icon.y=90+row*60;
+				_skins.container.addChild(icon);
 			}
-			_skin.bg.height=icon.y+70;
-			_skin.uiHead.styleName=bossHurtTipsData.titleRes;
+			if(icon){
+				_skins.bg.height=icon.y+70;
+			}
+			_skins.uiHead.styleName=bossHurtTipsData.titleRes;
 		}
 		
 		public function hideTips():void
@@ -53,6 +55,16 @@ package com.rpgGame.app.ui.tips
 				icon=iconList.pop();
 				icon.destroy();
 			}
+		}
+		
+		private static var _instance:ShiJieBossRewardTips=null;
+		public static function get instance():ShiJieBossRewardTips
+		{
+			if (null == _instance)
+			{
+				_instance=new ShiJieBossRewardTips();
+			}
+			return _instance;
 		}
 	}
 }

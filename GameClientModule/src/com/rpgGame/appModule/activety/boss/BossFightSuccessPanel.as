@@ -11,8 +11,6 @@ package com.rpgGame.appModule.activety.boss
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.monster.message.SCWorldBossResultMessage;
 	
-	import feathers.controls.StateSkin;
-	
 	import org.mokylin.skin.app.activety.shijieboss.TiaoZhanShengLi;
 	
 	import starling.display.DisplayObject;
@@ -41,7 +39,7 @@ package com.rpgGame.appModule.activety.boss
 			var msg:SCWorldBossResultMessage=data;
 			var rank:int=msg.rank;
 			var bossActInfo:BossActInfo=ActivetyDataManager.getActInfoById(msg.activityId) as BossActInfo;
-			var rewards:Array=getRewardInfo(bossActInfo,rank);
+			var rewards:Array=bossActInfo.getRankReward(rank);
 			_skin.numPaiming.label=rank.toString();
 			var icon:IconCDFace;
 			for(var i:int=0;i<rewards.length;i++){			
@@ -69,20 +67,9 @@ package com.rpgGame.appModule.activety.boss
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
 			super.onTouchTarget(target);
-		}
-		
-		private function getRewardInfo(actInfo:BossActInfo,rank:int):Array
-		{
-			var list:Array=JSONUtil.decode(actInfo.worldBossCfg.q_rank_rewards);
-			var num:int=list.length-1;
-			var reward:Array=[];
-			for(var i:int=num;i>0;i--){
-				if(rank>list[i].paras.rank){
-					break;
-				}
-				reward=list[i];
+			if(target==_skin.btnOk){
+				this.hide();
 			}
-			return reward;
 		}
 	}
 }

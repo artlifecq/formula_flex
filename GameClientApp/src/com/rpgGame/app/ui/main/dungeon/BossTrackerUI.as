@@ -5,6 +5,7 @@ package com.rpgGame.app.ui.main.dungeon
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
+	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
@@ -19,6 +20,7 @@ package com.rpgGame.app.ui.main.dungeon
 	import com.rpgGame.coreData.type.activity.ActivityJoinStateEnum;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
+	import com.rpgGame.netData.structs.Position;
 	
 	import flash.geom.Point;
 	
@@ -39,7 +41,7 @@ package com.rpgGame.app.ui.main.dungeon
 		private var _skin:ShiJieBoss_Skin;
 		private var iconList:Vector.<IconCDFace>;
 		private var _bgList:Vector.<UIAsset>;
-		private var toPoint:Point;
+		private var toPoint:Position;
 
 		private var actId:int;
 
@@ -59,7 +61,7 @@ package com.rpgGame.app.ui.main.dungeon
 			for(var i:int=0;i<4;i++){
 				_bgList.push(_skin["sec_ico1_"+i]);
 			}
-			toPoint=new Point();
+			toPoint=new Position();
 		}
 		
 		
@@ -67,6 +69,8 @@ package com.rpgGame.app.ui.main.dungeon
 		{
 			_skin.sec_info.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,"下次刷新时间:14:00");
 			_skin.lbHeadName.text=actInfo.actCfg.q_activity_name;
+			
+			
 			
 			toPoint.x=actInfo.actCfg.q_move_x;
 			toPoint.y=actInfo.actCfg.q_move_y;
@@ -85,6 +89,9 @@ package com.rpgGame.app.ui.main.dungeon
 					itemInfo.itemInfo=new ItemInfo();
 					itemInfo.itemInfo.isbind=arr[i].bind;
 					FaceUtil.SetItemGrid(iconList[i],itemInfo);
+					_skin.container.addChild(iconList[i]);
+					iconList[i].x=_skin["sec_ico1_"+i].x-5;
+					iconList[i].y=_skin["sec_ico1_"+i].y-5;
 				}else{
 					iconList[i].clear();
 				}
@@ -132,6 +139,7 @@ package com.rpgGame.app.ui.main.dungeon
 					MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, toPoint.x, toPoint.y,finishWalk, 100,null,finishWalk);
 					break;
 				case _skin.sec_subbut2:
+					SceneSender.reqOutMap();
 					break;
 			}
 		}
@@ -151,6 +159,15 @@ package com.rpgGame.app.ui.main.dungeon
 		private function initEvent():void
 		{
 			EventManager.addEvent(ActivityEvent.ENTER_ACTIVITY,getActId);
+			EventManager.addEvent(ActivityEvent.UPDATE_ACTIVITY,updateBossAct);
+		}
+		
+		private function updateBossAct(id:int):void
+		{
+			if(id==actId){
+				actInfo=ActivetyDataManager.getActInfoById(actId);
+				updateView();
+			}
 		}
 		
 		private function getActId(id:int):void
@@ -166,6 +183,7 @@ package com.rpgGame.app.ui.main.dungeon
 		{
 			super.onHide();
 			EventManager.removeEvent(ActivityEvent.ENTER_ACTIVITY,getActId);
+			EventManager.removeEvent(ActivityEvent.UPDATE_ACTIVITY,updateBossAct);
 			while(iconList.length>0){
 				var icon:IconCDFace=iconList.pop();
 				icon.destroy();

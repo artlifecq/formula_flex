@@ -167,6 +167,20 @@ package com.game.engine2D
 			reSize(sceneConfig.width, sceneConfig.height);
 		}
 		
+		/**
+		 *置灰场景 
+		 * 
+		 */
+		public function addGrayScene():void
+		{
+			_view.colorFilter.adjustSaturation(-1);
+		}
+		
+		public function removeGrayScene():void
+		{
+			_view.colorFilter.reset();
+		}
+		
 		public function get directionalLight():DirectionalLight
 		{
 			if (!_direction)

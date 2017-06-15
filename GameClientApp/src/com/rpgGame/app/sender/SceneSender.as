@@ -15,6 +15,7 @@ package com.rpgGame.app.sender
 	import com.rpgGame.netData.map.message.ReqNewRunningMessage;
 	import com.rpgGame.netData.map.message.ReqPlayerStopMessage;
 	import com.rpgGame.netData.map.message.ReqSmallFlyShoesMessage;
+	import com.rpgGame.netData.map.message.SCOutMapMessage;
 	import com.rpgGame.netData.player.message.ReqLocalReviveMessage;
 	import com.rpgGame.netData.player.message.ReqReviveMessage;
 	import com.rpgGame.netData.structs.Position;
@@ -49,6 +50,16 @@ package com.rpgGame.app.sender
 				(msg as ReqLoadFinishForChangeMapMessage).height = SceneManager.scene.sceneConfig.height;
 			}
 			SocketConnection.send(msg);
+		}
+		
+		/**
+		 *请求退出当前地图，返回上一张地图 
+		 * 
+		 */
+		public static function reqOutMap():void
+		{
+			var msg:SCOutMapMessage=new SCOutMapMessage();
+			sendMsg(msg);
 		}
 		
 		public static function SendNewRunningMessage(path : Vector.<Vector3D>):void

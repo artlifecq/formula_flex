@@ -144,11 +144,11 @@ package com.rpgGame.appModule.activety.boss
 		
 		private function sortList(infoA:ActivetyInfo,infoB:ActivetyInfo):int
 		{
-			if(infoA.info.joinState==ActivityJoinStateEnum.JOINING&&infoB.info.joinState!=ActivityJoinStateEnum.JOINING){
-				return -1;
-			}
-			if(infoA.info.joinState!=ActivityJoinStateEnum.JOINING&&infoB.info.joinState==ActivityJoinStateEnum.JOINING){
+			if(infoA.info.joinState<infoB.info.joinState){
 				return 1;
+			}
+			if(infoA.info.joinState>infoB.info.joinState){
+				return -1;
 			}
 			return 0;
 		}

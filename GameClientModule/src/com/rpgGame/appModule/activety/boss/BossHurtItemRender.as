@@ -13,7 +13,6 @@ package com.rpgGame.appModule.activety.boss
 	
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	
-	import org.game.netCore.data.long;
 	import org.mokylin.skin.app.activety.shijieboss.ShangHai_Item;
 	
 	/**
@@ -57,19 +56,28 @@ package com.rpgGame.appModule.activety.boss
 		{
 			if(_skin&&this.owner){
 				var info:BossHurtInfo=_data as BossHurtInfo;
-				var actId:int=this.owner.customData[0];
+				var actId:int=int(this.owner.customData);
 				var actInfo:BossActInfo=ActivetyDataManager.getActInfoById(actId) as BossActInfo;
-				_tipsSetInfo.rewads=getRewardInfo(actInfo,info.rank);
+				_tipsSetInfo.rewads=actInfo.getRankReward(info.rank);
 				if(info.rank<4){
 					_tipsSetInfo.titleRes="ui/app/activety/shijieboss/"+info.rank+".png";
 					_skin.uiNo.visible=true;
 					_skin.lbNo.text="";
 					_skin.uiNo.styleName="ui/app/activety/shijieboss/number/"+info.rank+".png";
+					_skin.uiBaoxiang.styleName="ui/app/activety/shijieboss/icon/"+info.rank+".png";
 				}else{
 					_tipsSetInfo.titleRes="ui/app/activety/shijieboss/4.png";
 					_skin.lbNo.text=info.rank.toString();
+					_skin.uiNo.visible=false;
+					_skin.uiBaoxiang.styleName="ui/app/activety/shijieboss/icon/4.png";
 				}
-					var id:Number=info.bossDamageInfo.playerId.ToGID();
+				if(!info.bossDamageInfo){
+					_skin.container.visible=false;					
+					return;
+				}else{
+					_skin.container.visible=true;
+				}
+				var id:Number=info.bossDamageInfo.playerId.ToGID();
 				if(MainRoleManager.isSelf(id)){
 					_skin.lbNo.color=_skin.lbName.color=_skin.lbKillNum.color=StaticValue.UI_YELLOW;
 				}else{
@@ -78,20 +86,6 @@ package com.rpgGame.appModule.activety.boss
 				_skin.lbName.text=info.bossDamageInfo.playerName;
 				_skin.lbKillNum.text=info.bossDamageInfo.damage+"("+info.perDamage+"%)";
 			}
-		}
-		
-		private function getRewardInfo(actInfo:BossActInfo,rank:int):Array
-		{
-			var list:Array=JSONUtil.decode(actInfo.worldBossCfg.q_rank_rewards);
-			var num:int=list.length-1;
-			var reward:Array;
-			for(var i:int=num;i>0;i--){
-				if(rank>list[i].paras.rank){
-					break;
-				}
-				reward=list[i];
-			}
-			return reward;
 		}
 	}
 }

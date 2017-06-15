@@ -36,6 +36,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			super();
 			
 			this.currentState = "normal";
+			this.height = 151;
 			this.width = 298;
 			this.elementsContent = [bg_i(),lbXiaJie_i(),line1_i(),icon1_i(),uiLiBao_i(),uiHead_i()];
 			

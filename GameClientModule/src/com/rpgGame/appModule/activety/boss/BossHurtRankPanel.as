@@ -15,9 +15,12 @@ package com.rpgGame.appModule.activety.boss
 	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.data.ListCollection;
 	
+	import gs.TweenMax;
+	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.activety.shijieboss.ShangHaiPaiHang;
 	
+	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 	
 	/**
@@ -30,18 +33,20 @@ package com.rpgGame.appModule.activety.boss
 		private var _skin:ShangHaiPaiHang;
 		private var _tipsData:DynamicTipData;
 		private var _tipsSetInfo:BossHurtTipsData;
+		private var tween:TweenMax;
 		
 		public function BossHurtRankPanel()
 		{
 			_skin=new ShangHaiPaiHang();
 			super(_skin);
 			initView();
+			setBoxState(true);
 		}
 		
 		private function initView():void
 		{
 			_skin.ListItem.itemRendererType=BossHurtItemRender;
-			_skin.ListItem.scrollBarDisplayMode = ScrollBarDisplayMode.FIXED;
+			_skin.ListItem.scrollBarDisplayMode = ScrollBarDisplayMode.NONE;
 			_skin.ListItem.dataProvider=new ListCollection();
 			for(var i:int=1;i<11;i++){
 				_skin.ListItem.dataProvider.addItem(new BossHurtInfo(i));
@@ -59,6 +64,8 @@ package com.rpgGame.appModule.activety.boss
 			var actInfo:BossActInfo=ActivetyDataManager.getActInfoById(actId) as BossActInfo;
 			_tipsSetInfo.rewads=JSONUtil.decode(actInfo.worldBossCfg.q_kill_rewards);
 			_tipsSetInfo.titleRes="ui/app/activety/shijieboss/5.png";
+			_skin.myHurt.text="我的伤害:";
+			_skin.myRank.text="我的排名:";
 			initEvent();
 		}
 		
@@ -67,6 +74,33 @@ package com.rpgGame.appModule.activety.boss
 			super.hide();
 			TipTargetManager.remove( _skin.uiIcon);
 			EventManager.removeEvent(ActivityEvent.UPDATE_BOSS_HURT_RANK,updateView);
+		}
+		
+		override protected function onTouchTarget(target:DisplayObject):void
+		{
+			super.onTouchTarget(target);
+			switch(target.name){
+				case "btn_close":
+					setBoxState(false);
+					break;
+				case "btn_open":
+					setBoxState(true);
+					break;
+			}
+		}
+		
+		private function setBoxState(state:Boolean):void
+		{
+			if(tween){
+				tween.kill();
+			}
+			if(state){
+				tween=TweenMax.to(_stateSkin["contentBox"],0.5,{x:-2});
+			}else{
+				tween=TweenMax.to(_stateSkin["contentBox"],0.5,{x:-1*_stateSkin["contentBox"].width});
+			}
+			_stateSkin["btn_close"].visible = state;
+			_stateSkin["btn_open"].visible = !state;
 		}
 		
 		override public function dispose():void
@@ -88,8 +122,10 @@ package com.rpgGame.appModule.activety.boss
 			var num:int=msg.BossDamageInfos.length;
 			for(var i:int=0;i<10;i++){
 				var info:BossHurtInfo=_skin.ListItem.dataProvider.getItemAt(i) as BossHurtInfo;
-				info.bossDamageInfo=msg.BossDamageInfos[i];
-				info.perDamage=(info.bossDamageInfo.damage/msg.totalHp).toFixed(2);
+				if(i<num){
+					info.bossDamageInfo=msg.BossDamageInfos[i];
+					info.perDamage=(info.bossDamageInfo.damage/msg.totalHp).toFixed(2);
+				}
 			}
 			_skin.ListItem.dataProvider.updateAll();
 		}
@@ -97,7 +133,7 @@ package com.rpgGame.appModule.activety.boss
 		override protected function onStageResize(sw:int, sh:int):void
 		{
 			var xx : int, yy : int;
-			xx = 0;
+			xx = -2;
 			yy = 160;
 			this.x = xx;
 			this.y = yy;

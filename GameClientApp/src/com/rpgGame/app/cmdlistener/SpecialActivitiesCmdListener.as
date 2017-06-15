@@ -43,7 +43,7 @@ package com.rpgGame.app.cmdlistener
 		
 		private function onSCWorldBossResultMessage(msg:SCWorldBossResultMessage):void
 		{
-			
+			AppManager.showApp(AppConstant.ACTIVETY_BOSS_RESULT,msg);
 		}
 		
 		private function onResBossDamageInfosToClientMessage(msg:ResBossDamageInfosToClientMessage):void
@@ -78,21 +78,21 @@ package com.rpgGame.app.cmdlistener
 			for (var i:int = 0; i <num; i++) 
 			{
 				ActivetyDataManager.updateInfo(list[i]);
+				EventManager.dispatchEvent(ActivityEvent.UPDATE_ACTIVITY,list[i].activityId);
 			}
 			ActivetyDataManager.sortAllDatas();
-			EventManager.dispatchEvent(ActivityEvent.UPDATE_ACTIVITY);
 		}
 		
 		private function onSCSpecialActivityCloseMessage(msg:SCSpecialActivityCloseMessage):void
 		{
 			ActivetyDataManager.setActState(msg.activityId,ActivityJoinStateEnum.CLOSE);
-			EventManager.dispatchEvent(ActivityEvent.UPDATE_ACTIVITY);
+			EventManager.dispatchEvent(ActivityEvent.UPDATE_ACTIVITY,msg.activityId);
 		}
 		
 		private function onSCSpecialActivityOpenMessage(msg:SCSpecialActivityOpenMessage):void
 		{
 			ActivetyDataManager.setActState(msg.activityId,ActivityJoinStateEnum.OPEN);
-			EventManager.dispatchEvent(ActivityEvent.UPDATE_ACTIVITY);
+			EventManager.dispatchEvent(ActivityEvent.UPDATE_ACTIVITY,msg.activityId);
 			var info:ActivetyInfo=ActivetyDataManager.getActInfoById(msg.activityId); 
 			AppManager.showAppNoHide(AppConstant.ACTIVETY_OPEN,info);
 		}
