@@ -43,7 +43,7 @@ package com.editor.state.role.action
 
 		override public function execute() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				super.execute();
 				transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
@@ -58,7 +58,7 @@ package com.editor.state.role.action
 		private function onCorrodeTextureComplete(globalTexture : GlobalTexture) : void
 		{
 			GlobalTexture.removeTextureCallBack(GlobalConfig.getDynTextureFilePath("corrode"), onCorrodeTextureComplete);
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				if (globalTexture.texture)
 				{
@@ -220,7 +220,7 @@ package com.editor.state.role.action
 			super.afterExecute();
 			syncAnimation(false, 0);
 
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				_valueObj = {alpha: 1};
 				var bodyAp : RenderUnit3D = (_machine.owner as SceneRole).avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY, true);
@@ -249,7 +249,7 @@ package com.editor.state.role.action
 
 		private function roleDied() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				var role : SceneRole = _machine.owner as SceneRole;
 				SceneManager.getInstance().removeSceneObjFromMainScene(role);
@@ -264,7 +264,7 @@ package com.editor.state.role.action
 
 		private function stopCorrode() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				var role : SceneRole = _machine.owner as SceneRole;
 				role.avatar.forEachRenderUnit(function(render : RenderUnit3D) : void

@@ -40,7 +40,7 @@ package com.editor.state.role.action
 
 		override public function execute() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				super.execute();
 				_attackBroken = false;
@@ -216,7 +216,7 @@ package com.editor.state.role.action
 			super.afterExecute();
 			syncAnimation(false, _startFrameTime, speedRatio);
 
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				var totalFrameTm : uint = 0;
 				if (_statusType)
@@ -310,7 +310,7 @@ package com.editor.state.role.action
 		 */
 		private function onTotalFrameCmp() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				if (_totalFrameTween)
 				{
@@ -327,7 +327,7 @@ package com.editor.state.role.action
 		private function onBreakFrameCmp() : void
 		{
 			_attackBroken = true;
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				if (_breakFrameTween)
 				{
