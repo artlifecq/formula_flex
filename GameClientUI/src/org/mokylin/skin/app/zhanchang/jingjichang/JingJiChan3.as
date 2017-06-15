@@ -268,7 +268,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbHuosheng = temp;
 			temp.name = "lbHuosheng";
-			temp.text = "获胜：10";
+			temp.text = "获胜：$";
 			temp.color = 0xBEA757;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 163;
@@ -282,7 +282,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbRongyu = temp;
 			temp.name = "lbRongyu";
-			temp.text = "获得荣誉：10";
+			temp.text = "获得荣誉：$";
 			temp.color = 0xBEA757;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 163;
@@ -296,7 +296,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbShibai = temp;
 			temp.name = "lbShibai";
-			temp.text = "失败：10";
+			temp.text = "失败：$";
 			temp.color = 0xBEA757;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 163;

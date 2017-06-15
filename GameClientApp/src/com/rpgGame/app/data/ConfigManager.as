@@ -11,6 +11,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.AttFormulaConfig;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.AttachEffectCfgData;
+	import com.rpgGame.coreData.cfg.BattleRankCfg;
 	import com.rpgGame.coreData.cfg.BuffStateDataManager;
 	import com.rpgGame.coreData.cfg.ChangeModelCfgData;
 	import com.rpgGame.coreData.cfg.ChatCfgData;
@@ -288,6 +289,7 @@ package com.rpgGame.app.data
 			
 			//功能开启
 			//ClientFunctionOpenCfgData.setup(dic["data.ClientFunctionOpen"]);
+			BattleRankCfg.setup(dic[ConfigClassRegister.Q_battle_rank]);//多人副本
 		}
 		
 		/**

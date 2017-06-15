@@ -8,6 +8,7 @@ package org.mokylin.skin.app.zhanchang
 	import feathers.controls.UINumber;
 	import org.mokylin.skin.app.zhanchang.uinumber.UINumberNumkuafu;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
+	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 
 	/**
 	 * @private
@@ -19,6 +20,8 @@ package org.mokylin.skin.app.zhanchang
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var btnCancel:feathers.controls.Button;
+
 		public var btnClose:feathers.controls.Button;
 
 		public var lbPiPei:feathers.controls.Label;
@@ -34,9 +37,9 @@ package org.mokylin.skin.app.zhanchang
 			super();
 			
 			this.currentState = "normal";
-			this.height = 150;
+			this.height = 166;
 			this.width = 405;
-			this.elementsContent = [__KuaFuVs_Skin_UIAsset1_i(),numTime_i(),lbPiPei_i(),btnClose_i()];
+			this.elementsContent = [__KuaFuVs_Skin_UIAsset1_i(),numTime_i(),lbPiPei_i(),btnClose_i(),btnCancel_i()];
 			
 			states = {
 			};
@@ -53,6 +56,22 @@ package org.mokylin.skin.app.zhanchang
 			temp.styleName = "ui/app/zhanchang/kuafu_bg.png";
 			temp.x = 0;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function btnCancel_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btnCancel = temp;
+			temp.name = "btnCancel";
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.label = "取消匹配";
+			temp.letterSpacing = 0;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
+			temp.textAlign = "center";
+			temp.width = 111;
+			temp.x = 152;
+			temp.y = 136;
 			return temp;
 		}
 
@@ -88,7 +107,7 @@ package org.mokylin.skin.app.zhanchang
 			temp.name = "numTime";
 			temp.gap = -6;
 			temp.height = 60;
-			temp.label = "52";
+			temp.label = "60";
 			temp.styleClass = org.mokylin.skin.app.zhanchang.uinumber.UINumberNumkuafu;
 			temp.width = 102;
 			temp.x = 158;

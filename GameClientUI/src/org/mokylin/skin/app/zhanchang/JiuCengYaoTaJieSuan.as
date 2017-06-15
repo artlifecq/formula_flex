@@ -21,12 +21,6 @@ package org.mokylin.skin.app.zhanchang
 
 		public var icon1:feathers.controls.UIAsset;
 
-		public var icon2:feathers.controls.UIAsset;
-
-		public var icon3:feathers.controls.UIAsset;
-
-		public var icon4:feathers.controls.UIAsset;
-
 		public var lbPaiming:feathers.controls.Label;
 
 		public var lbTime:feathers.controls.Label;
@@ -44,7 +38,7 @@ package org.mokylin.skin.app.zhanchang
 			this.currentState = "normal";
 			this.height = 349;
 			this.width = 469;
-			this.elementsContent = [__JiuCengYaoTaJieSuan_UIAsset1_i(),__JiuCengYaoTaJieSuan_UIAsset2_i(),__JiuCengYaoTaJieSuan_UIAsset3_i(),__JiuCengYaoTaJieSuan_UIAsset4_i(),icon1_i(),icon2_i(),icon3_i(),icon4_i(),btnOk_i(),lbTime_i(),__JiuCengYaoTaJieSuan_Label1_i(),__JiuCengYaoTaJieSuan_Label2_i(),lbZhanli_i(),lbPaiming_i()];
+			this.elementsContent = [__JiuCengYaoTaJieSuan_UIAsset1_i(),__JiuCengYaoTaJieSuan_UIAsset2_i(),__JiuCengYaoTaJieSuan_UIAsset3_i(),__JiuCengYaoTaJieSuan_UIAsset4_i(),icon1_i(),btnOk_i(),lbTime_i(),__JiuCengYaoTaJieSuan_Label1_i(),__JiuCengYaoTaJieSuan_Label2_i(),lbZhanli_i(),lbPaiming_i()];
 			
 			states = {
 			};
@@ -58,7 +52,7 @@ package org.mokylin.skin.app.zhanchang
 		private function __JiuCengYaoTaJieSuan_Label1_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "我的战力：";
+			temp.text = "我的积分：";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 79;
@@ -136,39 +130,6 @@ package org.mokylin.skin.app.zhanchang
 			temp.name = "icon1";
 			temp.styleName = "ui/common/grid/normal/64.png";
 			temp.x = 74;
-			temp.y = 215;
-			return temp;
-		}
-
-		private function icon2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon2 = temp;
-			temp.name = "icon2";
-			temp.styleName = "ui/common/grid/normal/64.png";
-			temp.x = 157;
-			temp.y = 215;
-			return temp;
-		}
-
-		private function icon3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon3 = temp;
-			temp.name = "icon3";
-			temp.styleName = "ui/common/grid/normal/64.png";
-			temp.x = 240;
-			temp.y = 215;
-			return temp;
-		}
-
-		private function icon4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon4 = temp;
-			temp.name = "icon4";
-			temp.styleName = "ui/common/grid/normal/64.png";
-			temp.x = 323;
 			temp.y = 215;
 			return temp;
 		}

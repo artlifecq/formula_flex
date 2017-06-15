@@ -30,11 +30,7 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 
 		public var icon1:feathers.controls.UIAsset;
 
-		public var icon2:feathers.controls.UIAsset;
-
-		public var icon3:feathers.controls.UIAsset;
-
-		public var icon4:feathers.controls.UIAsset;
+		public var lbRank:feathers.controls.Label;
 
 		public var lbShengwang:feathers.controls.Label;
 
@@ -49,7 +45,7 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [__JiuCengYaoTa_Skin_UIAsset2_i(),btnOpen_i(),__JiuCengYaoTa_Skin_UIAsset3_i(),__JiuCengYaoTa_Skin_UIAsset4_i(),lbShengwang_i(),btnShengwang_i(),__JiuCengYaoTa_Skin_UIAsset5_i(),__JiuCengYaoTa_Skin_UIAsset6_i(),grp_icon_i(),__JiuCengYaoTa_Skin_Label1_i(),btnMsg_i()];
+			this.elementsContent = [__JiuCengYaoTa_Skin_UIAsset2_i(),btnOpen_i(),__JiuCengYaoTa_Skin_UIAsset3_i(),__JiuCengYaoTa_Skin_UIAsset4_i(),lbShengwang_i(),btnShengwang_i(),__JiuCengYaoTa_Skin_UIAsset5_i(),__JiuCengYaoTa_Skin_UIAsset6_i(),grp_icon_i(),lbRank_i(),btnMsg_i()];
 			
 			states = {
 			};
@@ -60,17 +56,6 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __JiuCengYaoTa_Skin_Label1_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "战场日志 >>";
-			temp.color = 0x5CB006;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 844;
-			temp.y = 552;
-			return temp;
-		}
-
 		private function __JiuCengYaoTa_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -157,7 +142,7 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			temp.name = "grp_icon";
 			temp.x = 282;
 			temp.y = 527;
-			temp.elementsContent = [icon1_i(),icon2_i(),icon3_i(),icon4_i()];
+			temp.elementsContent = [icon1_i()];
 			return temp;
 		}
 
@@ -172,36 +157,17 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			return temp;
 		}
 
-		private function icon2_i():feathers.controls.UIAsset
+		private function lbRank_i():feathers.controls.Label
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon2 = temp;
-			temp.name = "icon2";
-			temp.styleName = "ui/common/grid/normal/36.png";
-			temp.x = 46;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function icon3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon3 = temp;
-			temp.name = "icon3";
-			temp.styleName = "ui/common/grid/normal/36.png";
-			temp.x = 93;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function icon4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon4 = temp;
-			temp.name = "icon4";
-			temp.styleName = "ui/common/grid/normal/36.png";
-			temp.x = 139;
-			temp.y = 0;
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbRank = temp;
+			temp.name = "lbRank";
+			temp.text = "战场日志 >>";
+			temp.color = 0x5CB006;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.underline = true;
+			temp.x = 844;
+			temp.y = 552;
 			return temp;
 		}
 

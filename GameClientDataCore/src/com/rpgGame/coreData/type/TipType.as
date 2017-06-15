@@ -85,5 +85,12 @@ package com.rpgGame.coreData.type
 		public static const TEAM_NEAR_TEAM_TIP : int = rEnum.next;
 		/** 祝福值 tips*/
 		public static const BLESS_TIP : int = rEnum.next;
+		
+		/** 巅峰1v1*/
+		public static const D1V1_TIP : int = rEnum.next;
+		/** 巅峰1v1rank*/
+		public static const D1V1_RANK_TIP : int = rEnum.next;
+		/** 巅峰1v1rank*/
+		public static const D1V1_RANK_REWARD_TIP : int = rEnum.next;
 	}
 }

@@ -62,7 +62,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 		private function __Xinfa_Tips2_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/xinfa/zhuangtai.png";
+			temp.styleName = "ui/common/tips/tipswenzi/jineng/zhuangtai.png";
 			temp.x = 32;
 			temp.y = 44;
 			return temp;
@@ -71,7 +71,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 		private function __Xinfa_Tips2_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/xinfa/yinzhangheng.png";
+			temp.styleName = "ui/app/beibao/tipswenzi/yinzhangheng.png";
 			temp.x = 82;
 			temp.y = 39;
 			return temp;
@@ -114,7 +114,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			imgJiHuoTitle = temp;
 			temp.name = "imgJiHuoTitle";
-			temp.styleName = "ui/app/beibao/xinfa/jihuojiangli2.png";
+			temp.styleName = "ui/common/tips/tipswenzi/jineng/jihuojiangli.png";
 			temp.x = 32;
 			temp.y = 141;
 			return temp;
@@ -125,7 +125,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			imgSkill = temp;
 			temp.name = "imgSkill";
-			temp.styleName = "ui/app/beibao/xinfa/xinfajiyi.png";
+			temp.styleName = "ui/common/tips/tipswenzi/jineng/xinfajiyi.png";
 			temp.x = 32;
 			temp.y = 187;
 			return temp;
@@ -136,7 +136,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			imgXS = temp;
 			temp.name = "imgXS";
-			temp.styleName = "ui/app/beibao/xinfa/xinfaxiangsheng.png";
+			temp.styleName = "ui/common/tips/tipswenzi/jineng/xinfaxiangsheng.png";
 			temp.x = 32;
 			temp.y = 262;
 			return temp;
@@ -190,11 +190,11 @@ package org.mokylin.skin.app.beibao.Xinfa
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lab_xiangsheng = temp;
 			temp.name = "lab_xiangsheng";
-			temp.height = 19;
+			temp.height = 59;
 			temp.text = "与XXX相生";
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 202;
+			temp.width = 237;
 			temp.x = 30;
 			temp.y = 284;
 			return temp;

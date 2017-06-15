@@ -16,10 +16,12 @@ package   com.rpgGame.app.ui.main.team
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.clientConfig.Q_buff;
 	import com.rpgGame.coreData.clientConfig.Q_map;
+	import com.rpgGame.coreData.clientConfig.Q_tipsinfo;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.type.AssetUrl;
+	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.netData.team.bean.TeamMemberBriefInfo;
 	import com.rpgGame.netData.team.bean.TeamMemberInfo;
 	
@@ -140,7 +142,7 @@ package   com.rpgGame.app.ui.main.team
 			var job:int=data.appearanceInfo.job;
 			_skin.UI_bing.visible=job==JobEnum.ROLE_1_TYPE;
 			_skin.UI_yi.visible=job==JobEnum.ROLE_4_TYPE;
-			_skin.UI_mo.visible=job==JobEnum.ROLE_2_TYPE||JobEnum.ROLE_3_TYPE;
+			_skin.UI_mo.visible=(job==JobEnum.ROLE_2_TYPE)||(job==JobEnum.ROLE_3_TYPE);
 			
 			switch(job){
 				case JobEnum.ROLE_1_TYPE:
@@ -213,6 +215,11 @@ package   com.rpgGame.app.ui.main.team
 						icon.x=_skin.role_buffer.x+i*26;
 						icon.y=_skin.role_buffer.y;
 						this.addChild(icon);
+						var info:Q_tipsinfo=new Q_tipsinfo();
+						info.q_describe_tittle=q_buff.q_buff_name;
+						info.q_describe=q_buff.q_description;
+						
+						TipTargetManager.show(icon, TargetTipsMaker.makeTips( TipType.NORMAL_TIP,info));
 						buffIcon.push(icon);
 					}
 				}
@@ -241,6 +248,7 @@ package   com.rpgGame.app.ui.main.team
 			for each (var icon:BgIcon in buffIcon) 
 			{
 				MCUtil.removeSelf(icon);
+				TipTargetManager.remove(icon);
 			}
 			buffIcon.length=0;
 		}

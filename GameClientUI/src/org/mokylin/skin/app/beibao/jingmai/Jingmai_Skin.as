@@ -20,7 +20,7 @@ package org.mokylin.skin.app.beibao.jingmai
 	import org.mokylin.skin.app.beibao.jingmai.mc.UIMovieClipJingmai;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 	import org.mokylin.skin.component.check.CheckBoxSkin_1;
-	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli;
+	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow2;
 
 	/**
 	 * @private
@@ -32,7 +32,7 @@ package org.mokylin.skin.app.beibao.jingmai
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var Num_zhandouli:feathers.controls.UINumber;
+		public var NumZhanli:feathers.controls.UINumber;
 
 		public var btn_hecheng:feathers.controls.Button;
 
@@ -73,7 +73,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [imgBg_i(),lb_zhenqi_i(),__Jingmai_Skin_UIAsset1_i(),__Jingmai_Skin_UIAsset2_i(),__Jingmai_Skin_UIAsset3_i(),Num_zhandouli_i(),__Jingmai_Skin_UIAsset4_i(),mc_name_i(),chk_shuxing_i(),chk_dengji_i(),btn_hecheng_i(),btn_prev_i(),btn_next_i(),rdo_renmai_i(),rdo_dumai_i(),rdo_chongmai_i(),rdo_daimai_i(),rdo_yinqiaomai_i(),rdo_yangqiaomai_i(),__Jingmai_Skin_UIAsset5_i()];
+			this.elementsContent = [imgBg_i(),lb_zhenqi_i(),__Jingmai_Skin_UIAsset1_i(),__Jingmai_Skin_UIAsset2_i(),NumZhanli_i(),__Jingmai_Skin_UIAsset3_i(),mc_name_i(),chk_shuxing_i(),chk_dengji_i(),btn_hecheng_i(),btn_prev_i(),btn_next_i(),rdo_renmai_i(),rdo_dumai_i(),rdo_chongmai_i(),rdo_daimai_i(),rdo_yinqiaomai_i(),rdo_yangqiaomai_i(),__Jingmai_Skin_UIAsset4_i()];
 			
 			states = {
 			};
@@ -84,41 +84,22 @@ package org.mokylin.skin.app.beibao.jingmai
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function Num_zhandouli_i():feathers.controls.UINumber
+		private function NumZhanli_i():feathers.controls.UINumber
 		{
 			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
-			Num_zhandouli = temp;
-			temp.name = "Num_zhandouli";
-			temp.gap = -3;
-			temp.height = 25;
-			temp.label = "652147";
-			temp.number = 21222;
-			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli;
-			temp.width = 147;
-			temp.x = 99;
-			temp.y = 91;
+			NumZhanli = temp;
+			temp.name = "NumZhanli";
+			temp.gap = -13;
+			temp.height = 33;
+			temp.label = "1364364";
+			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow2;
+			temp.width = 148;
+			temp.x = 85;
+			temp.y = 81;
 			return temp;
 		}
 
 		private function __Jingmai_Skin_UIAsset1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/di.png";
-			temp.x = 69;
-			temp.y = 79;
-			return temp;
-		}
-
-		private function __Jingmai_Skin_UIAsset2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/zhandouli2.png";
-			temp.x = 47;
-			temp.y = 91;
-			return temp;
-		}
-
-		private function __Jingmai_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/beibao/jingmai/zhenqi.png";
@@ -127,7 +108,16 @@ package org.mokylin.skin.app.beibao.jingmai
 			return temp;
 		}
 
-		private function __Jingmai_Skin_UIAsset4_i():feathers.controls.UIAsset
+		private function __Jingmai_Skin_UIAsset2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/common/zdl2.png";
+			temp.x = 14;
+			temp.y = 71;
+			return temp;
+		}
+
+		private function __Jingmai_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/beibao/jingmai/di.png";
@@ -136,7 +126,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			return temp;
 		}
 
-		private function __Jingmai_Skin_UIAsset5_i():feathers.controls.UIAsset
+		private function __Jingmai_Skin_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/beibao/jingmai/fengexian.png";
