@@ -151,8 +151,8 @@ package com.rpgGame.app.ui.main.dungeon
 			EventManager.addEvent(DungeonEvent.ZONE_STAGE_CHANGE,setTageChange);//副本状态
 			EventManager.addEvent(DungeonEvent.ZONE_REMAIN_TIME,setTime);//副本时间
 			EventManager.addEvent(DungeonEvent.ZONE_SKILL_INFOS,setKillInfo);//击杀列表
-			EventManager.addEvent(DungeonEvent.ZONE_SKILL_INFO,setKillInfo);//击杀列表
-			EventManager.addEvent(DungeonEvent.ZONE_OUT_RESULT,setOutResult);//击杀列表
+			EventManager.addEvent(DungeonEvent.ZONE_SKILL_INFO,setKillInfo);//击杀单个
+			EventManager.addEvent(DungeonEvent.ZONE_OUT_RESULT,setOutResult);//准备退出
 		}
 		private function removeEvent():void
 		{
@@ -161,8 +161,8 @@ package com.rpgGame.app.ui.main.dungeon
 			EventManager.removeEvent(DungeonEvent.ZONE_STAGE_CHANGE,setTageChange);//副本状态
 			EventManager.removeEvent(DungeonEvent.ZONE_REMAIN_TIME,setTime);//副本时间
 			EventManager.removeEvent(DungeonEvent.ZONE_SKILL_INFOS,setKillInfo);//击杀列表
-			EventManager.removeEvent(DungeonEvent.ZONE_SKILL_INFO,setKillInfo);//击杀列表
-			EventManager.removeEvent(DungeonEvent.ZONE_OUT_RESULT,setOutResult);//击杀列表
+			EventManager.removeEvent(DungeonEvent.ZONE_SKILL_INFO,setKillInfo);//击杀单个
+			EventManager.removeEvent(DungeonEvent.ZONE_OUT_RESULT,setOutResult);//准备退出
 			TimerServer.remove(updateTime);
 			TweenLite.killDelayedCallsTo(walkTo);
 		}

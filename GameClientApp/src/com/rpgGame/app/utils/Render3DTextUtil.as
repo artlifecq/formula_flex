@@ -1,8 +1,12 @@
 package com.rpgGame.app.utils
 {
 	import com.game.engine3D.scene.display.Render3DText;
+	import com.game.engine3D.scene.render.RenderSet3D;
+	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.BaseEntity;
+	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.engine3D.vo.Render3DTextData;
+	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.type.RenderUnitID;
@@ -20,7 +24,45 @@ package com.rpgGame.app.utils
 		public function Render3DTextUtil()
 		{
 		}
-		
+		public static function addHeadKillToTarget( target : SceneRole):Render3DText
+		{
+			var rud : RenderParamData3D = new RenderParamData3D(RenderUnitID.BLEED, RenderUnitType.HEADKILL, ClientConfig.getEffect("tx_liuxuexiaoguo"));
+			var effectRu : RenderUnit3D;
+			effectRu = target.avatar.addRenderUnitToChild(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_name_01, rud);
+			//effectRu.renderParamData.
+			effectRu.allowCameraAnimator = target.isMainChar;
+			effectRu.repeat = 0;
+			effectRu.x = 0;
+			effectRu.y = 0;
+			effectRu.z = 0;
+			effectRu.rotationY = 0;
+			effectRu.setPlayCompleteCallBack(avatarRuPlayComplete, target.avatar);
+			effectRu.play(1);
+			
+			var rudText : RenderParamData3D = new RenderParamData3D(RenderUnitID.BLEED_TEXT, RenderUnitType.HEADKILL, ClientConfig.getEffect("tx_shuzi_bai"));
+			var effectRuText : RenderUnit3D;
+			effectRuText = target.avatar.addRenderUnitToChild(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_name_01, rudText);
+			//effectRu.renderParamData.
+			effectRuText.allowCameraAnimator = target.isMainChar;
+			effectRuText.repeat = 0;
+			effectRuText.x = 0;
+			effectRuText.y = 0;
+			effectRuText.z = 0;
+			effectRuText.rotationY = 0;
+			effectRuText.scaleX=0.5;
+			effectRuText.scaleY=0.5;
+			effectRuText.scaleZ=0.5;
+			effectRuText.setPlayCompleteCallBack(avatarRuPlayComplete, target.avatar);
+			effectRuText.play(1100);
+			effectRuText.stop(1100);
+			//effectRu.setStatus();
+			
+			return null;
+		}
+		private static function avatarRuPlayComplete(avatar : RenderSet3D, ru : RenderUnit3D) : void
+		{
+			avatar.removeRenderUnit(ru);
+		}
 		/**
 		 * 添加鲜花赠送文字
 		 * @param entity
@@ -30,7 +72,7 @@ package com.rpgGame.app.utils
 		public static function addHeadFlowerTextToTarget( entity:BaseEntity ):Render3DText
 		{
 			var renderText:Render3DText = Render3DText.create( RenderUnitType.BODY_HEAD_FLOWER_TEXT, 100 );
-//			renderText.billboardMode = true;
+			//			renderText.billboardMode = true;
 			renderText.align = "center";
 			entity.addBaseObjToUnitChild(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_name_01, renderText);
 			
@@ -39,7 +81,7 @@ package com.rpgGame.app.utils
 			var textDatas : Vector.<Render3DTextData> = new Vector.<Render3DTextData>();
 			
 			var meigui:Render3DTextData = new Render3DTextData("meigui",200 );
-			meigui.addStyle("style1", ClientConfig.getEffect("tx_shuzi_meigui"));
+			meigui.addStyle("style1", ClientConfig.getEffect("tx_dianmingyujing"));
 			meigui.addCharSet( "h", 100 );
 			textDatas.push( meigui );
 			

@@ -117,11 +117,6 @@ package com.rpgGame.core.app
 		 *每日副本成功结算
 		 */
 		public static var DAILY_DUNGEON_SUCCESS:String = createAppInfo( "dungeon.genuine.DailyDungeonSuccessPanel","fuben");
-
-		/**
-		 *多人副本进入确认面板
-		 */
-		public static var MULTYENTER_PANL:String = createAppInfo( "dungeon.multy.MultyEnterPanel");
 		/**
 		 *多人副本倒计时面板
 		 */
@@ -135,7 +130,10 @@ package com.rpgGame.core.app
 		 *多人副本队伍投票面板
 		 */
 		public static var MULTY_TEAM_PANL:String = createAppInfo( "dungeon.multy.MultyTeamPanel");
-		
+		/**
+		 *多人副本队员拒绝
+		 */
+		public static var MULTY_TEAM_CANCEL_PANL:String = createAppInfo( "dungeon.multy.MultyTeamCancelPanel");
 		
 		/**
 		 *活动面板

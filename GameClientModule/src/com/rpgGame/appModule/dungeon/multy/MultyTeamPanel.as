@@ -63,7 +63,7 @@ package com.rpgGame.appModule.dungeon.multy
 		}
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
-			super.onTouchTarget(target);
+			//super.onTouchTarget(target);
 			switch (target) {
 				case _skin.btnOk:
 					DungeonSender.reqTeamMatchVote(DungeonManager.voteZid,1);
@@ -74,6 +74,13 @@ package com.rpgGame.appModule.dungeon.multy
 					DungeonSender.reqTeamMatchVote(DungeonManager.voteZid,0);
 					_skin.btnOk.isEnabled=false;
 					_skin.btnCancel.isEnabled=false;
+					break;
+				case _skin.btnClose:
+					if(!DungeonManager.isVote(MainRoleManager.actorInfo.serverID))
+					{
+						DungeonSender.reqTeamMatchVote(DungeonManager.voteZid,0);
+					}
+					this.hide();
 					break;
 			}
 			
