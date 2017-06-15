@@ -1,5 +1,6 @@
 package com.rpgGame.coreData.cfg.active
 {
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.clientConfig.Q_special_activities;
 	import com.rpgGame.netData.specialactivities.bean.SpecialActivityInfo;
@@ -47,10 +48,26 @@ package com.rpgGame.coreData.cfg.active
 				typeList=new Vector.<ActivetyInfo>();
 				_typeMap.add(cfg.q_activity_type,typeList);
 			}
-			info=new ActivetyInfo();
-			info.cfg=cfg;
+			if(cfg.q_activity_type==1){
+				info=new BossActInfo();
+			}else{
+				info=new ActivetyInfo();
+			}
+			info.actCfg=cfg;
 			_infoMap.add(cfg.q_activity_id,info);
 			typeList.push(info);
+		}
+		
+		/**
+		 *根据配置获取时间列表 
+		 * @param cfg
+		 * @return 
+		 * 
+		 */
+		public static function getTimeList(cfg:Q_special_activities):Array
+		{
+			var arr:Array=JSONUtil.decode(cfg.q_activity_time);
+			return arr;
 		}
 		
 		/**
@@ -88,10 +105,22 @@ package com.rpgGame.coreData.cfg.active
 			}
 			var num:int=typeList.length;
 			for(var i:int=0;i<num;i++){
-				if(typeList[i].cfg.q_activity_id==info.activityId){
+				if(typeList[i].actCfg.q_activity_id==info.activityId){
 					typeList[i].info=info;
 					return;
 				}
+			}
+		}
+		
+		/**
+		 *更新击杀者 
+		 * 
+		 */
+		public static function updateBossKiller(id:int,killer:String):void
+		{
+			var bossInfo:BossActInfo=getActInfoById(id) as BossActInfo;
+			if(bossInfo){
+				bossInfo.killerName=killer;
 			}
 		}
 		
@@ -132,6 +161,9 @@ package com.rpgGame.coreData.cfg.active
 		
 		private static function sortListByID(infoA:ActivetyInfo,infoB:ActivetyInfo):int
 		{
+			if(infoA.info==null||infoA.info==null){
+				return 0;
+			}
 			if(infoA.info.activityId<infoB.info.activityId){
 				return -1;
 			}else if(infoA.info.activityId>infoB.info.activityId){
@@ -142,6 +174,9 @@ package com.rpgGame.coreData.cfg.active
 		
 		private static function sortListByState(infoA:ActivetyInfo,infoB:ActivetyInfo):int
 		{
+			if(infoA.info==null||infoA.info==null){
+				return 0;
+			}
 			if(infoA.info.joinState>infoB.info.joinState){
 				return -1;
 			}else if(infoA.info.joinState<infoB.info.joinState){
@@ -149,6 +184,5 @@ package com.rpgGame.coreData.cfg.active
 			}
 			return 0;
 		}
-
 	}
 }

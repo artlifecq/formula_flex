@@ -56,8 +56,6 @@ package  com.rpgGame.app.ui.alert
 		public function ItemNoticePanel()
 		{
 			_skin=new piliangshiyong();
-			_iconFace=new IconCDFace( IcoSizeEnum.ICON_64);
-		
 			//_skin.input_txt.restrict="0-9";
 			super(_skin);
 			_skin.lbl_title.text="获得新物品";
@@ -101,12 +99,9 @@ package  com.rpgGame.app.ui.alert
 			_skin.lbl_name.color=ItemConfig.getItemQualityColor(clientItemInfo.cfgId);
 			_skin.lbl_name.text=clientItemInfo.name;
 			_skin.lbl_num.text="本组剩余:"+clientItemInfo.itemInfo.num;
-			_iconFace.x=30;
-			_iconFace.y=50;
 			FaceUtil.SetItemGrid(_iconFace, clientItemInfo);
 			_iconFace.setIconPoint(6,5);
 			_iconFace.selectImgVisible=false;
-			_skin.container.addChild(_iconFace);
 			//_skin.input_txt.text=currentNum.toString();
 			if(clientItemInfo.binded){
 				_skin.isLock.text="[已绑定]";
@@ -139,10 +134,19 @@ package  com.rpgGame.app.ui.alert
 			super.onTouchTarget(target);
 		}
 		
+		override protected function onShow():void
+		{
+			super.onShow();
+			_iconFace=IconCDFace.create(IcoSizeEnum.ICON_64);
+			_iconFace.x=30;
+			_iconFace.y=50;
+			_skin.container.addChild(_iconFace);
+		}
+		
 		override protected function onHide():void
 		{
 			super.onHide();
-			this._iconFace.clear();
+			_iconFace.destroy();
 			clientItemInfo=null;
 			currentNum=0;
 			pool.push(this);

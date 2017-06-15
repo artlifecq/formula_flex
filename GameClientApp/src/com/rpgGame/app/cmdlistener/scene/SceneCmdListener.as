@@ -263,8 +263,8 @@ package com.rpgGame.app.cmdlistener.scene
 		{
 			if(msg.personId.ToGID()==MainRoleManager.actor.id){
 				AppManager.showApp(AppConstant.DIE_PANEL,msg);
-				
 				EventManager.dispatchEvent(MainPlayerEvent.PLAYER_DIE);
+				SceneManager.scene.addGrayScene();
 			}
 		}
 		
@@ -1005,6 +1005,7 @@ package com.rpgGame.app.cmdlistener.scene
 				EffectUrl.RELIVE_NORMAL);
             if(roleData.id == MainRoleManager.actorID)
             {
+				SceneManager.scene.removeGrayScene();
                 ReliveManager.autoHideRelive();
 				EventManager.dispatchEvent(MainPlayerEvent.SELFHP_CHANGE);
 				EventManager.dispatchEvent(MainPlayerEvent.REVIVE_SUCCESS);

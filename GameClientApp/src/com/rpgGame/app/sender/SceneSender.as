@@ -15,6 +15,7 @@ package com.rpgGame.app.sender
 	import com.rpgGame.netData.map.message.ReqNewRunningMessage;
 	import com.rpgGame.netData.map.message.ReqPlayerStopMessage;
 	import com.rpgGame.netData.map.message.ReqSmallFlyShoesMessage;
+	import com.rpgGame.netData.map.message.SCOutMapMessage;
 	import com.rpgGame.netData.player.message.ReqLocalReviveMessage;
 	import com.rpgGame.netData.player.message.ReqReviveMessage;
 	import com.rpgGame.netData.structs.Position;
@@ -49,6 +50,16 @@ package com.rpgGame.app.sender
 				(msg as ReqLoadFinishForChangeMapMessage).height = SceneManager.scene.sceneConfig.height;
 			}
 			SocketConnection.send(msg);
+		}
+		
+		/**
+		 *请求退出当前地图，返回上一张地图 
+		 * 
+		 */
+		public static function reqOutMap():void
+		{
+			var msg:SCOutMapMessage=new SCOutMapMessage();
+			sendMsg(msg);
 		}
 		
 		public static function SendNewRunningMessage(path : Vector.<Vector3D>):void
@@ -138,39 +149,6 @@ package com.rpgGame.app.sender
 			msg.position = new Position();
 			msg.position.x = posx;
 			msg.position.y = posy;
-			SocketConnection.send(msg);
-		}
-		
-		/**
-		 * 在副本中要求离开副本, 回到进入副本前的场景/坐标.
-		 *
-		 * 必须在副本中才能请求, 请求后必须等返回
-		 *
-		 * 此消息不只是在剧情副本中才能用, 任何副本都用这条来主动离开副本
-		 *
-		 * 死亡时候发送也可以, 会满血回到进入副本前的位置
-		 *
-		 * 没有附带信息
-		 */
-		public static function requestLeaveDungeon(mapid:int=-1, pos:Point = null, params:int = 0) : void
-		{
-			if (ReqLockUtil.isReqLocked(101218))
-				return;
-			ReqLockUtil.lockReq(101218, 5 * 1000);
-			
-			var msg:ReqChangeMapCommonMessage = new ReqChangeMapCommonMessage();
-			msg.mapModel = mapid;
-			if (pos == null)
-			{
-				msg.position = new Position();
-			}
-			else
-			{
-				msg.position = Position.FromGridPoint(pos);
-			}
-			
-			msg.params = params;
-			
 			SocketConnection.send(msg);
 		}
 		
@@ -331,6 +309,16 @@ package com.rpgGame.app.sender
 			msg.itemmodelid=itemid;
 			msg.type=type;
 			SocketConnection.send(msg);
+		}
+		
+		/**
+		 *请求回到上一个场景去 
+		 * 
+		 */
+		public static function reqToPreScene():void
+		{
+			var msg:*;
+			sendMsg(msg);
 		}
 	}
 }

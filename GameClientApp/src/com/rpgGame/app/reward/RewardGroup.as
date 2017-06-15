@@ -227,7 +227,7 @@ package  com.rpgGame.app.reward
 			{
 				size=IcoSizeEnum.ICON_36;
 			}
-			icon=new IconCDFace(size);
+			icon=IconCDFace.create(size);
 			bg.addChild(icon);
 			//设置图片的时候有设置
 			//if (IcoSizeEnum.ICON_36==size||IcoSizeEnum.ICON_42==size) 

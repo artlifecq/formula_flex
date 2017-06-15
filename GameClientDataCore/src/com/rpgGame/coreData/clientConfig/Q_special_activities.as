@@ -16,7 +16,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_activity_id:int;
 		 /**  活动名称 */
 		public var q_activity_name:String;
-		 /**  活动类型（0综合 1开服活动） */
+		 /**  活动类型（0综合 1世界boss） */
 		public var q_activity_type:int;
 		 /**  活动时间（[[-1],[-1],[-1],[1,3,4,5],[1200,2200],[-1]]） */
 		public var q_activity_time:String;
@@ -34,6 +34,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_notice:String;
 		 /**  公告传送(不填直接去参加活动，填了跳转到对应面板) */
 		public var q_notice_trans:String;
+		 /**  新功能开放表中的功能ID */
+		public var q_trans_funcID:String;
 		 /**  活动名称图片资源编号 */
 		public var q_activity_page_id:int;
 		 /**  每日允许参与次数（-1无限） */
@@ -52,8 +54,18 @@ package com.rpgGame.coreData.clientConfig
 		public var q_npc:int;
 		 /**  关联副本ID */
 		public var q_zone:int;
+		 /**  关联地图ID */
+		public var q_map:int;
+		 /**  玩家移动X坐标 */
+		public var q_move_x:int;
+		 /**  玩家移动Y坐标 */
+		public var q_move_y:int;
 		 /**  是否为帮会活动（1是，0否） */
 		public var q_guide:int;
+		 /**  元素资源id */
+		public var q_res_id:String;
+		 /**  详情背景 */
+		public var q_des_bg:String;
 
 	}
 }
