@@ -7,7 +7,7 @@ package org.mokylin.skin.app.zhanchang
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.app.zhanchang.Head_Role_Left;
 	import org.mokylin.skin.app.zhanchang.Head__Role_Right;
-	import org.mokylin.skin.component.button.ButtonSkin_putong2;
+	import org.mokylin.skin.app.zhanchang.button.ButtonJiesu;
 
 	/**
 	 * @private
@@ -44,7 +44,7 @@ package org.mokylin.skin.app.zhanchang
 			this.currentState = "normal";
 			this.height = 512;
 			this.width = 922;
-			this.elementsContent = [__ZhangCheng_Scene_UIAsset1_i(),uiBuron1_i(),uiEnd1_i(),uiEnd2_i(),uiBuron2_i(),btnOver_i(),skinLeft_i(),skinRight_i()];
+			this.elementsContent = [__ZhangCheng_Scene_UIAsset1_i(),__ZhangCheng_Scene_UIAsset2_i(),uiBuron1_i(),uiEnd1_i(),uiEnd2_i(),uiBuron2_i(),btnOver_i(),skinLeft_i(),skinRight_i(),__ZhangCheng_Scene_UIAsset3_i()];
 			
 			states = {
 			};
@@ -66,17 +66,34 @@ package org.mokylin.skin.app.zhanchang
 			return temp;
 		}
 
+		private function __ZhangCheng_Scene_UIAsset2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/big_bg/zhanchang/scene_bg.jpg";
+			temp.x = 5;
+			temp.y = 5;
+			return temp;
+		}
+
+		private function __ZhangCheng_Scene_UIAsset3_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/zhanchang/scene/VS.png";
+			temp.x = 395;
+			temp.y = 59;
+			return temp;
+		}
+
 		private function btnOver_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnOver = temp;
 			temp.name = "btnOver";
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.label = "跳过战斗";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
+			temp.styleClass = org.mokylin.skin.app.zhanchang.button.ButtonJiesu;
 			temp.color = 0xCFC6AE;
-			temp.x = 424.5;
-			temp.y = 460;
+			temp.x = 345;
+			temp.y = 447;
 			return temp;
 		}
 
@@ -89,8 +106,8 @@ package org.mokylin.skin.app.zhanchang
 			var skin:StateSkin = new org.mokylin.skin.app.zhanchang.Head_Role_Left()
 			temp.skin = skin
 			temp.width = 310;
-			temp.x = 14;
-			temp.y = 18;
+			temp.x = 7;
+			temp.y = 33;
 			return temp;
 		}
 
@@ -103,8 +120,8 @@ package org.mokylin.skin.app.zhanchang
 			var skin:StateSkin = new org.mokylin.skin.app.zhanchang.Head__Role_Right()
 			temp.skin = skin
 			temp.width = 310;
-			temp.x = 596;
-			temp.y = 18;
+			temp.x = 575;
+			temp.y = 33;
 			return temp;
 		}
 
@@ -115,8 +132,8 @@ package org.mokylin.skin.app.zhanchang
 			temp.name = "uiBuron1";
 			temp.height = 10;
 			temp.width = 10;
-			temp.x = 19;
-			temp.y = 416;
+			temp.x = 120;
+			temp.y = 376;
 			return temp;
 		}
 
@@ -127,8 +144,8 @@ package org.mokylin.skin.app.zhanchang
 			temp.name = "uiBuron2";
 			temp.height = 10;
 			temp.width = 10;
-			temp.x = 889;
-			temp.y = 416;
+			temp.x = 800;
+			temp.y = 376;
 			return temp;
 		}
 
@@ -140,7 +157,7 @@ package org.mokylin.skin.app.zhanchang
 			temp.height = 10;
 			temp.width = 10;
 			temp.x = 369;
-			temp.y = 416;
+			temp.y = 376;
 			return temp;
 		}
 
@@ -152,7 +169,7 @@ package org.mokylin.skin.app.zhanchang
 			temp.height = 10;
 			temp.width = 10;
 			temp.x = 539;
-			temp.y = 416;
+			temp.y = 376;
 			return temp;
 		}
 

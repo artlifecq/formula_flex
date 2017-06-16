@@ -8,6 +8,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.ShortcutsManger;
 	import com.rpgGame.app.manager.TrusteeshipManager;
+	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.task.GatherAutoManager;
 	import com.rpgGame.app.manager.task.MiXinManager;
@@ -163,7 +164,7 @@ package com.rpgGame.app.manager.role
 				}
 				
 				FunctionOpenManager.openFunctionByLevel(data.totalStat.level,false);
-                
+                FightFaceHelper.bindTarget(_actor.graphicDis);
                 EventManager.dispatchEvent(RoleEvent.UPDATE_NEEDLE, 
                     _actor, 
                     data.totalStat.getResData(CharAttributeType.RES_JING_ZHENG), 

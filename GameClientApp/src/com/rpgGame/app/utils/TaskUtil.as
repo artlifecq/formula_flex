@@ -25,6 +25,8 @@ package com.rpgGame.app.utils
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.core.manager.tips.TipManager;
+	import com.rpgGame.core.view.ui.tip.implement.IBaseTipsInfo;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.StaticValue;
@@ -73,10 +75,16 @@ package com.rpgGame.app.utils
 	
 	import app.message.MonsterDataProto;
 	
+	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.UIAsset;
 	
 	import org.mokylin.skin.mainui.renwu.Renwu_Item;
+	
+	import starling.display.DisplayObject;
+	import starling.events.Touch;
+	import starling.events.TouchEvent;
+	import starling.events.TouchPhase;
 
 	/**
 	 * 任务
@@ -835,6 +843,8 @@ package com.rpgGame.app.utils
 			if(TaskMissionManager.getMainTaskIsFinish())
 			{
 				SpellAnimationHelper.addTargetEffect(role, RenderUnitID.TASKMARK, RenderUnitType.TASKMARK, EffectUrl.UI_WENHAO, BoneNameEnum.c_0_name_01, 0, null, false);
+				
+				//Render3DTextUtil.addHeadKillToTarget(role);
 			}
 			
 		}
@@ -913,7 +923,9 @@ package com.rpgGame.app.utils
 			}
 			if(rItme!=null)
 			{
+				rItme.labelDisplay.width=300;
 				rItme.labelDisplay.htmlText=t;
+				rItme.labelDisplay.width=rItme.labelDisplay.textWidth+10;
 				but.width=rItme.labelDisplay.textWidth+25;
 				but.visible=true;
 				rItme.btn_send.visible=false;
@@ -927,8 +939,56 @@ package com.rpgGame.app.utils
 			
 		}
 		
+		public static function setTextEvet(but:SkinnableContainer):void
+		{
+			var rItme:Renwu_Item;
+			if(but!=null&&but.skin!=null)
+			{
+				rItme=but.skin as Renwu_Item;
+			}
+			if(rItme!=null)
+			{
+				addLabelEvet(rItme.labelDisplay);
+			}
+		}
+		public static function addLabelEvet(labelDisplay:Label):void
+		{
+			if(labelDisplay)
+			{
+				labelDisplay.addEventListener(TouchEvent.TOUCH, onTouch);
+			}
+			
+		}
 		
 		
+		private static var isMouseOut : Boolean = true;
+		private static var outY:int=0;
+		private static var outColor:int=0;
+		private static var overClolor:int=16751616;
+		private static function onTouch(e:TouchEvent):void
+		{
+			var target : Label  = e.currentTarget as Label;
+			var touch : Touch;
+			touch = e.getTouch(target);
+			if (touch == null&&target!= null )
+			{
+				isMouseOut = true;
+				target.y=outY;
+				target.color=outColor;
+				//target.color
+				return;
+			}
+			
+			touch = e.getTouch(target, TouchPhase.HOVER);
+			if (touch != null&&target!= null && isMouseOut)
+			{
+				outY=target.y;
+				outColor=target.color;
+				isMouseOut = false;
+				target.y=outY-1;
+				target.color=overClolor;
+			}
+		}
 		
 		/**设置奖励物品*/
 		public static function setRewordInfo(rid:int,icoList:Vector.<IconCDFace>,icoBgList:Vector.<UIAsset>,show:Boolean=false):void

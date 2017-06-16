@@ -6,6 +6,8 @@ package com.rpgGame.app.manager
 	import com.rpgGame.netData.zone.bean.MultiZonePanelInfo;
 	
 	import flash.geom.Point;
+	
+	import org.game.netCore.data.long;
 
 	public class DungeonManager
 	{
@@ -29,8 +31,18 @@ package com.rpgGame.app.manager
 		public static var outTime: int=0;
 		/**总挑战次数*/
 		public static var challengeCount: int=0;
+		/**各副本通关次数*/
 		public static var panelInfos: Vector.<MultiZonePanelInfo>;
-		/**返回副本对应阶段的 文字描述*/
+		/**点击匹配 副本id*/
+		//public static var selectZid:int=0;
+		/**进入匹配 副本id*/
+		public static var teamZid:int=0;
+		/**投票副本id*/
+		public static var voteZid:int=0;
+		public static var voteList:Array;
+		
+		
+		/**设置副本杀怪完成次数*/
 		public static function setKillInfos(info:KillMonsterInfo):void
 		{
 			if(killInfos&&killInfos.length>0)
@@ -44,8 +56,6 @@ package com.rpgGame.app.manager
 					}
 				}
 			}
-			
-			
 		}
 		public static function setPanelInfos(zoneId:int,count:int,rewardCount:int):void
 		{
@@ -61,8 +71,6 @@ package com.rpgGame.app.manager
 					}
 				}
 			}
-			
-			
 		}
 		public static function getPanelInfo(zoneId:int):MultiZonePanelInfo
 		{
@@ -166,6 +174,35 @@ package com.rpgGame.app.manager
 			return 0;	
 		}
 		
+		/**创建进入匹配队伍投票列表*/
+		public static function createZoneTeam(zid:int,pid:long,result:int):void
+		{
+			if(voteZid!=zid)
+			{
+				voteList=new Array();
+				voteZid=zid;
+			}
+			if(voteList)
+			{
+				voteList.push([pid,result]);
+			}
+			
+		}
+		
+		/**队员是否已经投票同意*/
+		public static function isVote(mid:long):Boolean
+		{
+			var i:int;
+			for(i=0;i<voteList.length;i++)
+			{
+				if(mid.EqualTo(voteList[i][0])&&voteList[i][1]==1)
+				{
+					return true;
+				}
+			}
+			
+			return false;
+		}
 		
 		
 		

@@ -92,7 +92,6 @@ package com.game.engine3D.manager
 		private static var _viewCount : int;
 		private static var _viewAntiAlias : int = 0;
 		private static var _screenAntiAlias : int = 0;
-		private static var _errorChecking : Boolean = false;
 		
 		/**
 		 * 布局相关
@@ -231,10 +230,9 @@ package com.game.engine3D.manager
 				{
 					view.layeredView = true;
 				}
-				//trace(GlobalConfig.use2DMap);
 				//guoqing.wen add
-				view.entityCollector.collectPlanarShadow =true /*GlobalConfig.use2DMap*/;
-				view.lodEnabled = false/*!GlobalConfig.use2DMap*/;
+				view.entityCollector.collectPlanarShadow =GlobalConfig.use2DMap;
+				view.lodEnabled = !GlobalConfig.use2DMap;
 				
 				_views.push(view);
 			}
@@ -291,7 +289,6 @@ package com.game.engine3D.manager
 			_frame = 0;
 			_averageFps.length = 0;
 			_lastTime = getTimer();
-			_stage3DProxy.context3D.enableErrorChecking = _errorChecking;
 			_stage.addEventListener(flash.events.Event.RESIZE, handleScreenSize, false, 1000);
 			_stage3DProxy.addEventListener(away3d.events.Event.ENTER_FRAME, rendering);
 			if (_screenView)
@@ -341,19 +338,19 @@ package com.game.engine3D.manager
 			}
 		}
 		
-		public static function set errorChecking(value : Boolean) : void
-		{
-			_errorChecking = value;
-			if (_setupCompleted && _stage3DProxy && _stage3DProxy.context3D)
-			{
-				_stage3DProxy.context3D.enableErrorChecking = _errorChecking;
-			}
-		}
-		
-		public static function get errorChecking() : Boolean
-		{
-			return _errorChecking;
-		}
+//		public static function set errorChecking(value : Boolean) : void
+//		{
+//			_errorChecking = value;
+//			if (_setupCompleted && _stage3DProxy && _stage3DProxy.context3D)
+//			{
+//				_stage3DProxy.context3D.enableErrorChecking = _errorChecking;
+//			}
+//		}
+//		
+//		public static function get errorChecking() : Boolean
+//		{
+//			return _errorChecking;
+//		}
 		
 		/**
 		 * 屏幕适配
@@ -751,8 +748,12 @@ package com.game.engine3D.manager
 		{
 			if (item.type == Log.LOG_TYPE_ERROR)
 			{
-				UnCatchErrorReport.sendErroLog(item.message);
+				UnCatchErrorReport.sendErroLog(item.type, item.message);
 			}
+//			else if (item.type == Log.LOG_TYPE_FATAL)
+//			{
+//				UnCatchErrorReport.sendErroLog(item.type, item.message);
+//			}
 		}
 		
 		/** ---------------------------------编辑器使用代码------------------------- */

@@ -306,8 +306,9 @@ package com.rpgGame.app.ui.main.chat
 						str=str.replace(ChatManager.MSG_GOODS_CODE,goodsCode);
 					}
 				}
+				str=str.replace(ChatManager.MSG_GOODS_CODE,"道具数据异常: 包含的道具_"+info.extraResInfo.itemInfos.length);
 			}
-			
+			str=str.replace(ChatManager.MSG_GOODS_CODE,"后台数据异常");
 			return str;
 		}
 		

@@ -28,14 +28,23 @@ package com.rpgGame.appModule.dungeon.genuine
 		private var _skin:FuBen_ZhenQi_Skin;
 		private var _curentIndex:int;
 		private var _dailyZoneInfo:DailyZonePanelInfo;
+		private var gridList:Vector.<IconCDFace>;
 		public function GenuineDungeon():void
 		{
 			_skin = new FuBen_ZhenQi_Skin();
 			super(_skin);
-			initialize();
 		}
 		
-		protected function initialize():void
+		override public function hide():void
+		{
+			super.hide();
+			while(gridList.length>0){
+				var icon:IconCDFace=gridList.pop();
+				icon.destroy();
+			}
+		}
+		
+		override public function show(data:Object=null):void
 		{
 			_skin.list.itemRendererType =GenuineCell;
 			_skin.list.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
@@ -56,9 +65,10 @@ package com.rpgGame.appModule.dungeon.genuine
 			var startX:Number = 475 - (60*length)/2;
 			var item:ItemInfo;
 			var icon:IconCDFace;
+			gridList=new Vector.<IconCDFace>();
 			for(var i:int = 0;i<length;i++)
 			{
-				var grid:IconCDFace = new IconCDFace(IcoSizeEnum.ICON_48);
+				var grid:IconCDFace = IconCDFace.create(IcoSizeEnum.ICON_48);
 				grid.setBg( GridBGType.GRID_SIZE_48,1 );
 				grid.bgImage.styleName = "ui/common/gezikuang/tubiaodikuang/48.png";
 				_skin.container.addChild(grid);
@@ -67,6 +77,7 @@ package com.rpgGame.appModule.dungeon.genuine
 				item = new ItemInfo();
 				item.itemModelId = itemInfos[i]["mod"];
 				FaceUtil.SetItemGrid(grid,ItemUtil.convertClientItemInfo(item), true);
+				gridList.push(grid);
 			}
 			
 		}

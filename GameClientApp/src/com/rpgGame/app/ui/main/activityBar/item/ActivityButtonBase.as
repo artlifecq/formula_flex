@@ -1,6 +1,7 @@
 ﻿package com.rpgGame.app.ui.main.activityBar.item
 {
     import com.game.engine3D.display.InterObject3D;
+    import com.game.mainCore.core.manager.TimerManager;
     import com.rpgGame.app.manager.FunctionOpenManager;
     import com.rpgGame.app.manager.time.SystemTimeManager;
     import com.rpgGame.app.ui.main.buttons.IOpen;
@@ -18,9 +19,11 @@
     
     import org.client.mainCore.manager.EventManager;
     
+    import starling.animation.IAnimatable;
+    import starling.core.Starling;
     import starling.display.DisplayObject;
 
-    public class ActivityButtonBase extends SkinUI implements IOpen
+    public class ActivityButtonBase extends SkinUI implements IOpen,IAnimatable
     {
         public var type:int;
 		public var row:int;
@@ -34,12 +37,16 @@
         private var _openTimeStr:String;
         private var _duration:int;
         private var _openTimeAdvance:int;
+		private var _isDown:Boolean;
+		private var _TimeFun:Function;
         private var _runing:Boolean;
         private var _effect3D:InterObject3D;
+		protected var _activityState:int
 
         public function ActivityButtonBase(skin)
         {
             super(skin);
+			_activityState = ActivityOpenStateType.OPEN;
         }
 		
 		private var _info:FunctionBarInfo;
@@ -55,7 +62,11 @@
 		
 		public function canOpen():Boolean
 		{
-			return FunctionOpenManager.getOpenLevelByFunBarInfo(_info);
+			if(!FunctionOpenManager.getOpenLevelByFunBarInfo(_info))
+				return false;
+			if(_activityState == ActivityOpenStateType.CLOSE)
+				return false;
+			return true;
 		}
 		
 		public function set styleClass(cl:Class):void
@@ -160,12 +171,20 @@
 
         public function onActivityOpen():void
         {
+			_activityState = ActivityOpenStateType.OPEN;
+			EventManager.dispatchEvent(ActivityEvent.OPEN_ACTIVITY,_info);
         }
 
         public function onActivityClose():void
         {
+			if(Starling.juggler.contains(this))
+				Starling.juggler.remove(this);
+			clearTime();
+			_activityState = ActivityOpenStateType.CLOSE;
+			EventManager.dispatchEvent(ActivityEvent.CLOSE_ACTIVITY,_info);
+			this.onTextColse();
         }
-
+		
         public function onActivityUpdate():Boolean
         {
             return true;
@@ -185,13 +204,25 @@
         {
             return "<font color='#4efd6f'>进行中\n" + TimeUtil.intTimeActivityString(second) + "</font>";
         }
-
+		
+		protected function onTextRuningTime(second:int):String
+		{
+			return "<font color='#4efd6f'>活动持续\n" + TimeUtil.intTimeActivityString(second) + "</font>";
+		}
         protected function onTextColse():String
         {
             return "";
         }
 
-        public function setTimeData(openTime:Number, duration:int=0, openTimeAdvance:int=0):void
+		/**
+		 * 设置活动时间 
+		 * @param openTime 开启时间点
+		 * @param duration 持续时间点
+		 * @param openTimeAdvance 提前预告时间点
+		 * @param isdown 是否倒计时
+		 * 
+		 */
+        public function setTimeData(openTime:Number, duration:int=0, openTimeAdvance:int=0,isdown:Boolean = true):void
         {
             _openTime = 0;
 			if (isNaN(openTime))
@@ -199,21 +230,36 @@
 				_openTimeStr = openTime + "";
 				_openTimeData = new TimeData(openTime + "");
 				_openTime = _openTimeData.getCheackNextTime(duration);
-			}
-			else
-			{
+				clearTime();
+			}else{
 				_openTime = openTime;
 			}
             _duration = duration;
             _endTime = _openTime + _duration;
+			
             _openTimeAdvance = openTimeAdvance;
+			_isDown = isdown;
+			if(_isDown)
+			{
+				if(_openTime <_endTime)
+				{
+					Starling.juggler.add(this);
+				}
+				_TimeFun = updatedownTime;
+			}
+			else{
+				Starling.juggler.add(this);
+				_TimeFun = updtaupTime;
+			}
+				
         }
 
         public function clearTime():void
         {
-            onActivityClose();
             _openTime = 0;
             _runing = false;
+			if(Starling.juggler.contains(this))
+				Starling.juggler.remove(this);
         }
 
         public function debugInfo():void
@@ -230,74 +276,68 @@
 				+ "\t服务器时间：" + TimeUtil.changeTimeToSpecStr(SystemTimeManager.curtTm) + "\t" + _openTimeStr;
         }
 
-        public function updateTime(currTime:Number):int
+        public function advanceTime(time:Number):void
         {
-            var timeSpacer:int;
-            var endSpacer:Number;
-            _runing = false;
-            var activityStateType:uint = ActivityOpenStateType.CLOSE;
-            if (_openTime > 0)
-            {
-				timeSpacer = _openTime - currTime;
-                if (currTime / 1000 == _openTime / 1000)
-                {
-                    EventManager.dispatchEvent(ActivityEvent.NOTICE, type);
-					activityStateType = ActivityOpenStateType.CLOSE_COUNTDOWN;
-                }
-                if (currTime < _openTime)
-                {
-                    if (_openTimeAdvance > 0 && currTime >= (_openTime - _openTimeAdvance))
-                    {
-                        this.onTextStart(timeSpacer * 0.001);
-						activityStateType = ActivityOpenStateType.OPEN_COUNTDOWN;
-                    }
-                    else
-                    {
-                        this.onTextColse();
-						activityStateType = ActivityOpenStateType.CLOSE;
-                    }
-                }
-                else if (currTime >= _openTime && _duration <= 0)
+			if (_openTime > 0)
+			{
+				_TimeFun(time);
+			}else {//一直开启
+				this.onTextEmpty();
+				_activityState = ActivityOpenStateType.OPEN;
+			}
+        }
+		
+		protected function updatedownTime(time:Number):void
+		{
+			var currTime :Number = SystemTimeManager.curtTm;
+			var timeSpacer:Number = _openTime - currTime;
+			var endSpacer:Number;
+			if (currTime < _openTime)
+			{	
+				if (_openTimeAdvance > 0 && currTime >= (_openTime - _openTimeAdvance))
 				{
-					_runing = true;
-					this.onTextRuning();
-					activityStateType = ActivityOpenStateType.CLOSE_COUNTDOWN;
-				}
-				else if (currTime >= _openTime && currTime <= (_openTime + _duration))
-				{
-					_runing = true;
-					endSpacer = _openTime + _duration - currTime;
-					this.onTextEnd(endSpacer * 0.001);
-					activityStateType = ActivityOpenStateType.CLOSE_COUNTDOWN;
+					this.onTextStart(timeSpacer * 0.001);
+					_activityState = ActivityOpenStateType.OPEN_COUNTDOWN;
 				}
 				else
 				{
-					if (_openTimeData != null)
-					{
-						_openTime = _openTimeData.getCheackNextTime(_duration);
-					}
-					this.onTextColse();
+					onActivityClose();
 				}
-            }else {//一直开启
-				this.onTextEmpty();
-				activityStateType = ActivityOpenStateType.OPEN;
 			}
-            if (activityStateType != ActivityOpenStateType.CLOSE && !onActivityUpdate())
-            {
-				activityStateType = ActivityOpenStateType.CLOSE;
-            }
-            return activityStateType;
-        }
+			else if (currTime >= _openTime && _duration <= 0)
+			{
+				_runing = true;
+				this.onTextRuning();
+				_activityState = ActivityOpenStateType.CLOSE_COUNTDOWN;
+			}
+			else if (currTime >= _openTime && currTime <= (_openTime + _duration))
+			{
+				_runing = true;
+				endSpacer = _openTime + _duration - currTime;
+				this.onTextEnd(endSpacer * 0.001);
+				_activityState = ActivityOpenStateType.CLOSE_COUNTDOWN;
+			}
+			else
+			{
+				if (_openTimeData != null)
+				{
+					_openTime = _openTimeData.getCheackNextTime(_duration);
+				}
+				onActivityClose();
+			}
+		}
+		 
+		protected function updtaupTime(time:Number):void
+		{
+			var currTime :Number = SystemTimeManager.curtTm - _openTime;
+			_runing = true;
+			this.onTextRuningTime(currTime*0.001);
+		}
 		
 		protected function onTextEmpty():void
 		{
 			
 		}
-
-        public function checkCanOpen():Boolean
-        {
-            return true;
-        }
 		
 		private var _tweenmax:TweenMax;
 		public function runAnimation():void
@@ -316,5 +356,6 @@
 			_tweenmax = null;
 			display.y = lastY;
 		}
+		
     }
 }

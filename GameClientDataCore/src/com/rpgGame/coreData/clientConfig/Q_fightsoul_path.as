@@ -15,7 +15,7 @@ package com.rpgGame.coreData.clientConfig
 		 /**  类型id */
 		public var q_id:int;
 		 /**  窗口id */
-		public var q_winId:int;
+		public var q_winId:String;
 		 /**  需要完成次数 */
 		public var q_total:int;
 		 /**  单次经验 */

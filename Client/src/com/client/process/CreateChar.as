@@ -204,6 +204,9 @@ package com.client.process
 
 		private function onExitGame() : void
 		{
+			doCreateRole();//暂时不管退出
+			return;
+			
 			if (ExternalInterface.available)
 			{
 				ExternalInterface.call("close");

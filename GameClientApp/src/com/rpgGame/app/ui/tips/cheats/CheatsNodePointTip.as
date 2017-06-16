@@ -29,6 +29,7 @@ package  com.rpgGame.app.ui.tips.cheats
 	import flash.geom.Point;
 	
 	import feathers.controls.Label;
+	import feathers.controls.UIAsset;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.beibao.Xinfa.Xinfa_Tips;
@@ -109,11 +110,11 @@ package  com.rpgGame.app.ui.tips.cheats
 			//未激活
 			this._skin.lb_jihuo.text=serverData.curLevel+"/"+serverData.getConfig().q_maxlevel;
 			this._skin.lb_jihuo.visible=true;
-			var startY:int=40;
-			this._skin.lb_title1.y=startY;
-			startY+=this._skin.lb_title1.height+2;
+			var startY:int=this._skin.uiName1.y;
+			//this._skin.uiName1.y=startY;
+			startY+=this._skin.uiName1.height+2;
 			var isUnlock:Boolean=true;
-			this._skin.lb_title1.text="【升级条件】";
+			var url:String=TipUrl.URL_ShengJi_CON;
 			if(serverData.curLevel==0)
 			{
 				
@@ -121,10 +122,10 @@ package  com.rpgGame.app.ui.tips.cheats
 				if (!isUnlock) 
 				{
 					this._skin.lb_jihuo.text="锁定";
-					this._skin.lb_title1.text="【解锁条件】";
+					url=TipUrl.URL_JiHuo_CON;
 				}
 			}
-			
+			this._skin.uiName1.styleName=url;
 			var isMax:Boolean=serverData.curLevel>=cheatsVo.cheatsConfig.q_maxlevel;
 			//不是最高级,或者没解锁
 			if (!isMax||!isUnlock) 
@@ -141,10 +142,10 @@ package  com.rpgGame.app.ui.tips.cheats
 				lb.width=lb.textWidth;
 				//
 			}
-			this._skin.imgLine.y=startY;
-			startY+=_skin.imgLine.height+2;
+			this._skin.imgLine1.y=startY;
+			startY+=_skin.imgLine1.height+2;
 			var canLevelUp:Boolean=Mgr.cheatsMgr.getCanLevelUp(serverData);
-			_skin.lb_tile2.visible=false;
+			_skin.uiName2.visible=false;
 			
 			var startPos:Point=new Point(_skin.lab_condition.x,startY);
 			var curAttrId:int=serverData.getAttrIdAtLevel(serverData.curLevel);
@@ -155,11 +156,11 @@ package  com.rpgGame.app.ui.tips.cheats
 			}
 			if (curAttrId!=0) 
 			{
-				_skin.lb_tile2.visible=true;
-				_skin.lb_tile2.y=startY;
-				startY+=_skin.lb_tile2.height+2;
+				_skin.uiName2.visible=true;
+				_skin.uiName2.y=startY;
+				startY+=_skin.uiName2.height+2;
 				//属性
-				_skin.lb_tile2.text=canLevelUp||serverData.curLevel>0?"【当前属性】":"【解锁属性】";
+				_skin.uiName2.styleName=canLevelUp||serverData.curLevel>0?TipUrl.URL_DangQian:TipUrl.URL_JieSuo;
 				var qAtt:Q_att_values=AttValueConfig.getAttInfoById(curAttrId);
 				if (qAtt) 
 				{
@@ -174,11 +175,12 @@ package  com.rpgGame.app.ui.tips.cheats
 			//下一阶属性
 			if (!isMax&&isUnlock) 
 			{
-				var nextTitle:Label=clonelab(_skin.lb_tile2);
+				var nextTitle:UIAsset=cloneImg(_skin.uiName2);
 				nextTitle.y=startY;
 				startY+=nextTitle.height;
 				this.addChild(nextTitle);
-				nextTitle.text="【下层提升】";
+				//nextTitle.text="【下层提升】";
+				nextTitle.styleName=TipUrl.URL_XiaChengAdd;
 				var nextAttrId:int=serverData.getAttrIdAtLevel(serverData.curLevel+1);
 				if (nextAttrId!=0) 
 				{
@@ -297,10 +299,11 @@ package  com.rpgGame.app.ui.tips.cheats
 			this._skin.lb_name.text=qAcu.q_name;
 			//未激活
 			this._skin.lb_jihuo.visible=false;
-			var startY:int=40;
-			this._skin.lb_title1.y=startY;
-			startY+=this._skin.lb_title1.height+2;
-			this._skin.lb_title1.text="【砭石效果】";
+			var startY:int=this._skin.uiName1.y;
+			//this._skin.uiName1.y=startY;
+			startY+=this._skin.uiName1.height+2;
+			//this._skin.lb_title1.text="【砭石效果】";
+			this._skin.uiName1.styleName=TipUrl.URL_Stone;
 			var unLock:Boolean;
 			//奇穴等级一直为0,判断解锁没有
 			if (serverData.getStone()==null) 
@@ -310,7 +313,7 @@ package  com.rpgGame.app.ui.tips.cheats
 				if (!unLock) 
 				{
 					this._skin.lb_jihuo.text="锁定";
-					this._skin.lb_title1.text="【解锁条件】";
+					this._skin.uiName1.styleName=TipUrl.URL_JiHuo_CON;
 					startY=createCondition(serverData,startY,true);
 				}
 				
@@ -336,7 +339,7 @@ package  com.rpgGame.app.ui.tips.cheats
 				citemInfo.cfgId=serverData.getStone().itemModelId;
 				citemInfo.itemInfo=serverData.getStone();
 				stoneIcon.setIconResName(ClientConfig.getItemIcon(citemInfo.qItem.q_icon.toString(),IcoSizeEnum.ICON_48));
-				stoneIcon.x=this._skin.lb_title1.x;
+				stoneIcon.x=this._skin.uiName2.x;
 				stoneIcon.y=startY;
 				this.addChild(stoneIcon);
 				labList.push(stoneIcon);
@@ -361,17 +364,18 @@ package  com.rpgGame.app.ui.tips.cheats
 				}
 				startY=startPos.y;
 			}
-			_skin.imgLine.y=startY;
-			startY+=_skin.imgLine.height+2;
+			_skin.imgLine1.y=startY;
+			startY+=_skin.imgLine1.height+2;
 			//镶嵌说明
-			_skin.lb_tile2.y=startY;
-			_skin.lb_tile2.visible=true;
-			_skin.lb_tile2.text="【镶嵌说明】";
-			startY+=_skin.lb_tile2.height+2;
+			_skin.uiName2.y=startY;
+			_skin.uiName2.visible=true;
+			//_skin.lb_tile2.text="【镶嵌说明】";
+			_skin.uiName2.styleName="ui/common/tips/tipswenzi/jineng/xiangqianshuoming.png";
+			startY+=_skin.uiName2.height+2;
 			_skin.imgStone.y=startY;
 			
 			_skin.lb_Stone.y=startY;
-			_skin.lb_Stone.htmlText=_initStr.replace("@",HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,EnumMStoneType.getStoneTypeName(qAcu.q_stone_type)));
+			_skin.lb_Stone.htmlText=_initStr.replace("$",HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,EnumMStoneType.getStoneTypeName(qAcu.q_stone_type)));
 			startY+=_skin.lb_Stone.height;
 			_skin.imgBg.height=startY+2;
 		}
@@ -389,6 +393,12 @@ package  com.rpgGame.app.ui.tips.cheats
 			temp.y = lab.y;
 			labList.push(temp);
 			return temp;
+		}
+		private function cloneImg(ui:UIAsset):UIAsset
+		{
+			var ret:UIAsset=MCUtil.cloneUIAssert(ui);
+			labList.push(ret);
+			return ret;
 		}
 		public function hideTips():void
 		{

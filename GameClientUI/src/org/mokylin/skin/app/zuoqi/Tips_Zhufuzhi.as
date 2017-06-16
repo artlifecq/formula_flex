@@ -82,7 +82,7 @@ package org.mokylin.skin.app.zuoqi
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.letterSpacing = 1;
-			temp.text = "祝福值清零是，临时属性也将消失";
+			temp.text = "祝福值清零时，临时属性也将消失";
 			temp.color = 0x6BCC08;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 28;
@@ -133,7 +133,7 @@ package org.mokylin.skin.app.zuoqi
 			temp.height = 45;
 			temp.leading = 5;
 			temp.letterSpacing = 0;
-			temp.text = "24小时后祝福值将被清空，一次性完成进阶可避免祝福值损失";
+			temp.text = "每日0点祝福值将被清空，一次性完成进阶可避免祝福值损失";
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 236;
@@ -146,7 +146,7 @@ package org.mokylin.skin.app.zuoqi
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 345;
-			temp.styleName = "ui/common/tips/diban2.png";
+			temp.styleName = "ui/common/tips/diban3.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

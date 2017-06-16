@@ -28,7 +28,7 @@ package com.rpgGame.core.state.role.action
 
 		override public function beforeEnter() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				super.beforeEnter();
 				var state : IState = _machine.getLastState(ActionState);
@@ -54,7 +54,7 @@ package com.rpgGame.core.state.role.action
 		}
 		
 		override public function afterLeave() : void {
-			if (_machine && !_machine.isDisposed) {
+			if (_machine && !_machine.isInPool) {
 				super.afterLeave();
 				if (this.type == RoleStateType.ACTION_IDLE ||
 					this.type == RoleStateType.ACTION_WALK ||

@@ -267,6 +267,7 @@ package com.rpgGame.app.manager
 			{
 				var tmp:int=value*getSkillValueByInfo(getSkillStateInfoById(6007));
 				var atf:AttackFace=AttackFace.createAttackFace(getEffectNameUrl(6007),FightFaceHelper.NUMBER_PURPLE1,tmp);
+				atf.scaleX=atf.scaleY=1.8;
 				return atf;
 			}
 			return null;

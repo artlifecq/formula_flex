@@ -120,7 +120,7 @@ package com.game.engine3D.utils
 				var targetDist : Number = MathUtil.getDistance(position.x, position.z, targetPos.x, targetPos.z);
 				if (targetDist > stepDist)
 				{
-					var angle : Number = ZMath.getTowPointsAngle(new Point(position.x, position.z), new Point(targetPos.x, targetPos.z));
+					var angle : Number = getTowPointsAngle(position.x, position.z, targetPos.x, targetPos.z);
 					var angleRad : Number = angle * Math.PI / 180;
 					var cosV : Number = Math.cos(angleRad);
 					var sinV : Number = Math.sin(angleRad);
@@ -179,7 +179,7 @@ package com.game.engine3D.utils
 				var targetDist : Number = MathUtil.getDistance(position.x, position.z, targetPos.x, targetPos.z);
 				if (targetDist > stepDist)
 				{
-					var angle : Number = ZMath.getTowPointsAngle(new Point(position.x, position.z), new Point(targetPos.x, targetPos.z));
+					var angle : Number = getTowPointsAngle(position.x, position.z, targetPos.x, targetPos.z);
 					var angleRad : Number = angle * Math.PI / 180;
 					var cosV : Number = Math.cos(angleRad);
 					var sinV : Number = Math.sin(angleRad);
@@ -228,7 +228,7 @@ package com.game.engine3D.utils
 				var targetDist : Number = MathUtil.getDistance(position.x, position.z, targetPos.x, targetPos.z);
 				if (targetDist > dist)
 				{
-					var angle : Number = ZMath.getTowPointsAngle(new Point(position.x, position.z), new Point(targetPos.x, targetPos.z));
+					var angle : Number = getTowPointsAngle(position.x, position.z, targetPos.x, targetPos.z);
 					var angleRad : Number = angle * Math.PI / 180;
 					var cosV : Number = Math.cos(angleRad);
 					var sinV : Number = Math.sin(angleRad);
@@ -283,7 +283,7 @@ package com.game.engine3D.utils
 				var targetDist : Number = MathUtil.getDistance(position.x, position.z, targetPos.x, targetPos.z);
 				if (targetDist > stepDist)
 				{
-					var angle : Number = ZMath.getTowPointsAngle(new Point(position.x, position.z), new Point(targetPos.x, targetPos.z));
+					var angle : Number = getTowPointsAngle(position.x, position.z, targetPos.x, targetPos.z);
 					var angleRad : Number = angle * Math.PI / 180;
 					var cosV : Number = Math.cos(angleRad);
 					var sinV : Number = Math.sin(angleRad);
@@ -337,31 +337,44 @@ package com.game.engine3D.utils
 							posList.push(new Point(i, j));
 						}
 					}
-					var fromPos : Point = new Point(targetPos.x, targetPos.z);
-					posList.sort(function(posA : Point, posB : Point) : int
-					{
-						var disA : Number = Point.distance(posA, fromPos);
-						var disB : Number = Point.distance(posB, fromPos);
-						if (disA > disB)
-							return -1;
-						else if (disA < disB)
-							return 1;
-						return 0;
-					});
+					HELP_POINT1.setTo(targetPos.x, targetPos.z);
+					posList.sort(onPosSortFunc);
 					var len : int = posList.length;
-					var pos3d : Vector3D = new Vector3D();
 					var pos : Point;
 					while (len-- > 0)
 					{
 						pos = posList[len];
-						pos3d.setTo(pos.x, 0, pos.y);
-						if (isPointInSide(district, pos3d))
-							poses.push(pos3d.clone());
+						HELP_VECTOR3D1.setTo(pos.x, 0, pos.y);
+						if (isPointInSide(district, HELP_VECTOR3D1))
+							poses.push(HELP_VECTOR3D1.clone());
 					}
 				}
 				return poses;
 			}
 			return null;
+		}
+		
+		private static var HELP_VECTOR3D1:Vector3D = new Vector3D();
+		private static var HELP_VECTOR3D2:Vector3D = new Vector3D();
+		private static var HELP_POINT1:Point = new Point();
+		private static var HELP_POINT2:Point = new Point();
+		public static function onPosSortFunc(posA : Point, posB : Point) : int
+		{
+			var disA : Number = Point.distance(posA, HELP_POINT1);
+			var disB : Number = Point.distance(posB, HELP_POINT1);
+			if (disA > disB)
+				return -1;
+			else if (disA < disB)
+				return 1;
+			return 0;
+		}
+		
+		private static function getTowPointsAngle(px:Number,py:Number,tx:Number,ty:Number):Number
+		{
+			HELP_POINT1.setTo(px,py);
+			HELP_POINT2.setTo(tx,ty);
+			var angle : Number = ZMath.getTowPointsAngle(HELP_POINT1, HELP_POINT2);
+			return angle;
 		}
 	}
 }

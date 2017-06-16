@@ -30,6 +30,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.cfg.FightsoulData;
 	import com.rpgGame.coreData.cfg.FightsoulModeData;
 	import com.rpgGame.coreData.cfg.StallCfgData;
+	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
 	import com.rpgGame.coreData.cfg.country.CountryWarCfgData;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.res.AvatarResConfigSetData;
@@ -37,6 +38,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.clientConfig.ClientSceneEffect;
 	import com.rpgGame.coreData.clientConfig.Q_fightsoul_mode;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
+	import com.rpgGame.coreData.clientConfig.Q_warFlag;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.info.stall.StallData;
@@ -51,6 +53,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.role.ZhanCheData;
 	import com.rpgGame.coreData.type.AttachDisplayType;
 	import com.rpgGame.coreData.type.HeadBloodStateType;
+	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleActionType;
 	import com.rpgGame.coreData.type.RoleStateType;
@@ -120,6 +123,7 @@ package com.rpgGame.app.manager.role
 			role.name = data.name;
 			data.bodyRadius = radiusForHero;
 			role.headFace = HeadFace.create(role);
+			(role.headFace as HeadFace).bloodPercent= (data.totalStat.hp / data.totalStat.life);
 			role.dialogFace=BubbleDialogFace.create(role);
 			//执行主换装更新
 			AvatarManager.callEquipmentChange(role, false, false, false);
@@ -154,6 +158,10 @@ package com.rpgGame.app.manager.role
 			
 			if (role.headFace is HeadFace)
 				(role.headFace as HeadFace).updateTitle(data.junjieLv);
+			if(data.zhanqiLv>0)
+			{
+				updateZhanQiRole(role);
+			}
 			
 			CharAttributeManager.setCharHp(data, data.totalStat.hp);
 			CharAttributeManager.setCharMaxLife(data, data.totalStat.life); //需要提供初始化方法,优化一下!
@@ -194,7 +202,6 @@ package com.rpgGame.app.manager.role
 			var bornData : Q_monster = MonsterDataManager.getData(data.modelID);
 			//设置VO
 			role.data = data;
-			role.headFace = HeadFace.create(role);
 			var roleNameStr : String = (bornData ? bornData.q_name.toString() : "未知怪物");
 			if (charType == SceneCharType.NPC && data.ownerName)
 			{
@@ -202,6 +209,8 @@ package com.rpgGame.app.manager.role
 			}
 			role.name = data.name = roleNameStr;
 			role.ownerIsMainChar = (data.ownerId == MainRoleManager.actorID);
+			role.headFace = HeadFace.create(role);
+			(role.headFace as HeadFace).bloodPercent= (data.totalStat.hp / data.totalStat.life);
 			data.avatarInfo.setBodyResID(bornData ? bornData.q_body_res : "", null);
 			//			var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(bornData ? bornData.q_body_res : "");
 			if (bornData.q_animation>0)
@@ -476,6 +485,10 @@ package com.rpgGame.app.manager.role
 		 */
 		public function createDropGoods(data : SceneDropGoodsData) : void
 		{
+			if (SceneManager.isSceneOtherRenderLimit){
+				return;
+			}
+			
 			//如果场景中存在此类型此ID的角色，则移除之
 			removeSceneRoleByIdAndType(data.id, SceneCharType.DROP_GOODS);
 			var role : SceneRole = SceneRole.create(SceneCharType.DROP_GOODS, data.id);
@@ -633,10 +646,25 @@ package com.rpgGame.app.manager.role
 			fightSoulRole.rotationY = owner.rotationY;
 			SceneManager.addSceneObjToScene(fightSoulRole, false);
 			fightSoulFollowAnimator = new FightSoulFollowAnimator(fightSoulRole);
+			fightSoulFollowAnimator.radius = model.q_radius;
 			owner.setRenderAnimator(fightSoulFollowAnimator);
 			return fightSoulRole;
 		}
 		
+		/**创建战旗特效*/
+		public function updateZhanQiRole(owner:SceneRole):SceneRole
+		{
+			if(owner.avatar.hasTypeRenderUnits(RenderUnitType.ZHANQI_EFF))
+				owner.avatar.removeRenderUnitByID(RenderUnitType.ZHANQI_EFF,0);
+			var zhanqilv:int=(owner.data as HeroData).zhanqiLv;			
+			var q_warflag:Q_warFlag=ZhanQiConfigData.getZhanQiDataById(zhanqilv);
+			var rud : RenderParamData3D = new RenderParamData3D(0, RenderUnitType.ZHANQI_EFF, ClientConfig.getEffect(q_warflag.q_panel_show_id));
+			var effectRu : RenderUnit3D=owner.avatar.addRenderUnitToChild(RenderUnitType.BODY,RenderUnitID.BODY,BoneNameEnum.c_0_body_01,rud);
+			effectRu.setScale(1.5);
+			effectRu.play(1);
+			effectRu.z=30;
+			return owner;
+		}
 		
 		/**
 		 * 角色离开视野
@@ -705,8 +733,9 @@ package com.rpgGame.app.manager.role
 				var dec:int=oldVal-newVal;	
 				for (i = 0; i < dec; ++i) 
 				{
-					tmp=role.avatar.removeRenderUnitByID(RenderUnitType.NEEDLEEFFECT, oldVal-1-i);
+					tmp=role.avatar.getRenderUnitByID(RenderUnitType.NEEDLEEFFECT,oldVal-1-i);
 					TweenMax.killTweensOf(tmp);
+					role.avatar.removeRenderUnit(tmp);
 				}
 				for (i = 0; i < newVal; ++i) 
 				{

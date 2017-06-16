@@ -68,7 +68,7 @@ package com.rpgGame.appModule.mount
 			_mountdata.horsedataInfo = HorseManager.instance().horsedataInfo;
 			props = _mountdata.currentProp(null);
 			var levelPower:int = FightValueUtil.calAtrributeFightPower(props,MainRoleManager.actorInfo.job);
-			_skin.num_zhandouli.number = levelPower;
+			_skin.userData.number = levelPower;
 			_skin.num_lv.number = levelPower - lastPower;
 		}
 		
@@ -81,7 +81,7 @@ package com.rpgGame.appModule.mount
 			{
 				icon = _itemIcons[_rewardIconLength];
 			}else{
-				icon = new IconCDFace(IcoSizeEnum.ICON_64);
+				icon = IconCDFace.create(IcoSizeEnum.ICON_64);
 				icon.width = icon.height = IcoSizeEnum.ICON_64;
 				icon.setBg(GridBGType.GRID_SIZE_64);
 				this.addChild(icon);

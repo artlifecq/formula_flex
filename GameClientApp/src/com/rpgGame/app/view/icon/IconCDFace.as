@@ -1,16 +1,18 @@
 package com.rpgGame.app.view.icon
 {
+	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.view.uiComponent.face.cd.CDData;
 	import com.rpgGame.core.view.uiComponent.face.cd.CDDataEvent;
 	import com.rpgGame.core.view.uiComponent.face.cd.CDDataManager;
 	import com.rpgGame.core.view.uiComponent.face.cd.CDFace;
 	import com.rpgGame.coreData.cfg.StaticValue;
-	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.face.IBaseFaceInfo;
 	
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
+	
+	import away3d.events.Event;
 	
 	import feathers.dragDrop.IDragSource;
 	import feathers.dragDrop.IDropTarget;
@@ -18,7 +20,6 @@ package com.rpgGame.app.view.icon
 	
 	import org.client.mainCore.manager.EventManager;
 	
-	import away3d.events.Event;
 	import starling.text.TextField;
 	import starling.text.TextFormat;
 
@@ -46,6 +47,27 @@ package com.rpgGame.app.view.icon
 		private var _shortcutKeyLab : TextField;
 		public var isCircleCD : Boolean = false;
 		public var isReverse : Boolean = false;
+		
+		private static var _pool : InstancePool = new InstancePool("IconCDFace", 500);
+		private static var _cnt : int = 0;
+		/**
+		 * 生成一个IconCDFace
+		 * @param $type
+		 * @param $value
+		 */
+		public static function create($iconSize) : IconCDFace
+		{
+			_cnt++;
+			return _pool.createObj(IconCDFace, $iconSize) as IconCDFace;
+		}
+		
+		public static function recycle(role : IconCDFace) : void
+		{
+			if (!role)
+				return;
+			_cnt--;
+			_pool.recycleObj(role);
+		}
 
 		/**
 		 * 图标尺寸
@@ -55,7 +77,6 @@ package com.rpgGame.app.view.icon
 		public function IconCDFace($iconSize : int)
 		{
 			super($iconSize);
-
 			sortLayer();
 		}
 
@@ -327,46 +348,29 @@ package com.rpgGame.app.view.icon
 			}
 			_faceInfo = null;
 
+			if(_shortcutKeyLab){
+				this.removeChild(_shortcutKeyLab);
+			}
+			
 			TipTargetManager.remove(this);
 			super.clear();
 		}
+		
+		override public function destroy():void
+		{
+			this.removeFromParent();
+			this.x = 0;
+			this.y = 0;
+			this.alpha = 1;
+			this.faceInfo = null;
+			this.filter = null;
+			this.touchable = true;
+			this.touchGroup = true;
+			this.setBg("");
+			recycle(this);
+		}
 
 		//-------------------------------------------
-
-		private static var _icoFacePool : Array = [];
-
-		public static function getIcoFace(size : int = IcoSizeEnum.SIZE_40) : IconCDFace
-		{
-			var icoFace : IconCDFace;
-			if (_icoFacePool.length > 0)
-			{
-				icoFace = _icoFacePool.pop();
-			}
-			else
-			{
-				icoFace = new IconCDFace(size);
-			}
-			return icoFace;
-		}
-
-		public static function releaseIcoFace(iconFace : IconCDFace) : void
-		{
-			if (iconFace == null)
-				return;
-			//			iconFace.isShowQualityEffect(false);
-			iconFace.removeFromParent();
-
-			_icoFacePool.push(iconFace);
-			iconFace.x = 0;
-			iconFace.y = 0;
-			iconFace.alpha = 1;
-			iconFace.faceInfo = null;
-			iconFace.filter = null;
-			iconFace.touchable = true;
-			iconFace.touchGroup = true;
-			iconFace.setBg("");
-			iconFace.clear();
-		}
 
 		public function get showCD():Boolean
 		{
@@ -377,7 +381,5 @@ package com.rpgGame.app.view.icon
 		{
 			_showCD = value;
 		}
-
-
 	}
 }

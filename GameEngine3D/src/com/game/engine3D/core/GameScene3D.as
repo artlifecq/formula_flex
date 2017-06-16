@@ -196,7 +196,7 @@ package com.game.engine3D.core
 			_glowFilter = new GlowFilter3D();
 			resetViewFilters();
 			
-//			SoundUtil.soundReference = getCameraTarget();
+			SoundUtil.soundReference = getCameraTarget();
 		}
 		
 		public function get isLoading() : Boolean
@@ -367,7 +367,7 @@ package com.game.engine3D.core
 					break;
 				}
 			}
-			_view.virtualRender(); //预渲染，避免opengl进视野卡顿。
+//			_view.virtualRender(); //预渲染，避免opengl进视野卡顿。
 		}
 		
 		public function get cameraNear() : int

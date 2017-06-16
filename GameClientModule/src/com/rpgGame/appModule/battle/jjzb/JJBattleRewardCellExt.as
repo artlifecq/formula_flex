@@ -1,6 +1,6 @@
 package com.rpgGame.appModule.battle.jjzb
 {
-	import com.rpgGame.appModule.common.RewardGroup;
+	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	
@@ -43,7 +43,7 @@ package com.rpgGame.appModule.battle.jjzb
 				{
 					if (rankArr[1]==int.MAX_VALUE) 
 					{
-						rankStr=rankArr[0]+"+";
+						rankStr=rankArr[0]+"x";
 						_skin.uiL2.styleName="ui/app/zhanchang/jingjichang/yiwai.png";
 						_skin.uiL2.width=34;
 						minW=34;

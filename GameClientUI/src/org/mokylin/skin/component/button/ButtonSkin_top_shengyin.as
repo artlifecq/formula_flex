@@ -26,7 +26,7 @@ package org.mokylin.skin.component.button
 		{
 			super();
 			
-			this.currentState = "down";
+			this.currentState = "upAndSelected";
 			this.elementsContent = [];
 			
 			states = {
@@ -47,7 +47,12 @@ package org.mokylin.skin.component.button
 						}
 					]
 			};
-			skinNames={"down":"ui/component/button/skin_top_shengyin/down.png", "hover":"ui/component/button/skin_top_shengyin/over.png", "up":"ui/component/button/skin_top_shengyin/up.png"};
+			skinNames={"down":"ui/component/button/skin_top_shengyin/down.png",
+			"downAndSelected":"ui/component/button/skin_top_shengyin/downAndSelected.png",
+			"hover":"ui/component/button/skin_top_shengyin/over.png",
+			"overAndSelected":"ui/component/button/skin_top_shengyin/overAndSelected.png",
+			"up":"ui/component/button/skin_top_shengyin/up.png",
+			"upAndSelected":"ui/component/button/skin_top_shengyin/upAndSelected.png"};
 		}
 
 

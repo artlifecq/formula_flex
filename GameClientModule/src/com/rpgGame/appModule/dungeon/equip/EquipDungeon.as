@@ -30,15 +30,17 @@ package com.rpgGame.appModule.dungeon.equip
 		private var _skin:FuBen_ZhuangBei_Skin;
 		private var _curentIndex:int;
 		private var _dailyZoneInfo:DailyZonePanelInfo;
+
+		private var gridList:Vector.<IconCDFace>;
 		public function EquipDungeon():void
 		{
 			_skin = new FuBen_ZhuangBei_Skin();
 			super(_skin);
-			initialize();
 		}
 		
-		protected function initialize():void
+		override public function show(data:Object=null):void
 		{
+			super.show(data);
 			_skin.list.itemRendererType =EquipCell;
 			_skin.list.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			_skin.list.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
@@ -50,8 +52,8 @@ package com.rpgGame.appModule.dungeon.equip
 			_skin.list.dataProvider = new ListCollection(list);
 			_curentIndex = 0;
 			refeashList(0);
-			var data:Q_daily_zone = list[0] as Q_daily_zone;
-			_dailyZoneInfo = DailyZoneDataManager.instance().getInfoById(data.q_id);
+			var q_data:Q_daily_zone = list[0] as Q_daily_zone;
+			_dailyZoneInfo = DailyZoneDataManager.instance().getInfoById(q_data.q_id);
 			
 			
 			var qglob:Q_global = GlobalSheetData.getSettingInfo(717);
@@ -60,14 +62,16 @@ package com.rpgGame.appModule.dungeon.equip
 			var startX:Number = 475 - (60*length)/2;
 			var item:ItemInfo;
 			var icon:IconCDFace;
+			gridList=new Vector.<IconCDFace>();
 			for(var i:int = 0;i<length;i++)
 			{
-				var grid:IconCDFace = new IconCDFace(IcoSizeEnum.ICON_48);
+				var grid:IconCDFace = IconCDFace.create(IcoSizeEnum.ICON_48);
 				grid.setBg( GridBGType.GRID_SIZE_48,1 );
 				grid.bgImage.styleName = "ui/common/gezikuang/tubiaodikuang/48.png";
 				_skin.container.addChild(grid);
 				grid.x = startX+60*i;
 				grid.y = 507;
+				gridList.push(grid);
 				item = new ItemInfo();
 				item.itemModelId = itemInfos[i]["mod"];
 				FaceUtil.SetItemGrid(grid,ItemUtil.convertClientItemInfo(item), true);
@@ -110,10 +114,13 @@ package com.rpgGame.appModule.dungeon.equip
 			_skin.list.scrollToPageIndex(index,0);
 		}
 		
-		
 		override public function hide():void
 		{
 			EventManager.removeEvent(DailyZoneDataManager.UPDATEDAILYZONEINFO,refeashValue);
+			while(gridList.length>0){
+				var icon:IconCDFace=gridList.pop();
+				icon.destroy();
+			}
 		}
 	}
 }

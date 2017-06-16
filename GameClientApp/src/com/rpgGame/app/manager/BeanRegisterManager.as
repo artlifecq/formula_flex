@@ -7,6 +7,7 @@
 	import com.rpgGame.app.cmdlistener.ChatCmdListener;
 	import com.rpgGame.app.cmdlistener.CheatsCmdListerner;
 	import com.rpgGame.app.cmdlistener.CrossCmdListener;
+	import com.rpgGame.app.cmdlistener.DFBattleCmdListener;
 	import com.rpgGame.app.cmdlistener.DaTiCmdListener;
 	import com.rpgGame.app.cmdlistener.DailyZoneCmdListner;
 	import com.rpgGame.app.cmdlistener.DungeonCmdListener;
@@ -29,6 +30,7 @@
 	import com.rpgGame.app.cmdlistener.RoleStateCmdListener;
 	import com.rpgGame.app.cmdlistener.RollCmdListener;
 	import com.rpgGame.app.cmdlistener.ShopCmdListener;
+	import com.rpgGame.app.cmdlistener.SpecialActivitiesCmdListener;
 	import com.rpgGame.app.cmdlistener.SpellCmdListener;
 	import com.rpgGame.app.cmdlistener.StallCmdListener;
 	import com.rpgGame.app.cmdlistener.SummonCmdListener;
@@ -39,6 +41,7 @@
 	import com.rpgGame.app.cmdlistener.engine.InteractiveCmdListener;
 	import com.rpgGame.app.cmdlistener.engine.KeyboardCmdListener;
 	import com.rpgGame.app.cmdlistener.mount.MountCmdListener;
+	import com.rpgGame.app.cmdlistener.mount.ZhanQiCmdListener;
 	import com.rpgGame.app.cmdlistener.scene.SceneCmdListener;
 	import com.rpgGame.app.cmdlistener.scene.SceneReleliveCmdListener;
 	import com.rpgGame.app.cmdlistener.scene.SceneSpellCmdListener;
@@ -131,6 +134,7 @@
 			register("NpcCmdListener", NpcCmdListener); //王城战
 //			register("YunBiaoCmdListener", YunBiaoCmdListener); //王城战
 			register("MountCmdListener", MountCmdListener); //坐骑
+			register("ZhanQiCmdListener", ZhanQiCmdListener); //战旗
 			register("TradeCmdlistener", TradeCmdlistener); //王城战
 			register("BaZhenTuCmdListener", BaZhenTuCmdListener); //八阵图
 //			register("DailyTasksCmdListener", DailyTasksCmdListener); //日常任务追踪栏事件监听
@@ -152,6 +156,8 @@
 			register("CrossCmdListener",CrossCmdListener);
 			register("DailyZoneCmdListner",DailyZoneCmdListner);//日常副本
 			register("JJBattleCmdListener", JJBattleCmdListener); //模块号7
+			register("SpecialActivitiesCmdListener", SpecialActivitiesCmdListener); //模块号7
+			register("DFBattleCmdListener", DFBattleCmdListener); //模块号7
 		}
 	}
 }

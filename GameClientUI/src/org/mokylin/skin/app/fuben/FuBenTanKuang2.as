@@ -5,8 +5,6 @@ package org.mokylin.skin.app.fuben
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.component.button.ButtonSkin_close;
-	import org.mokylin.skin.component.button.ButtonSkin_putong;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 
 	/**
@@ -21,11 +19,7 @@ package org.mokylin.skin.app.fuben
 		//==========================================================================
 		public var bg:feathers.controls.UIAsset;
 
-		public var btnClose:feathers.controls.Button;
-
-		public var btn_cancel:feathers.controls.Button;
-
-		public var btn_ok:feathers.controls.Button;
+		public var btnOK:feathers.controls.Button;
 
 		public var lbl_title:feathers.controls.Label;
 
@@ -44,7 +38,7 @@ package org.mokylin.skin.app.fuben
 			this.currentState = "normal";
 			this.height = 270;
 			this.width = 332;
-			this.elementsContent = [bg_i(),__FuBenTanKuang2_UIAsset1_i(),__FuBenTanKuang2_UIAsset2_i(),lbl_title_i(),btnClose_i(),btn_cancel_i(),btn_ok_i(),title_i(),__FuBenTanKuang2_Label1_i(),uiName_i()];
+			this.elementsContent = [bg_i(),__FuBenTanKuang2_UIAsset1_i(),__FuBenTanKuang2_UIAsset2_i(),btnOK_i(),title_i(),uiName_i(),lbl_title_i()];
 			
 			states = {
 			};
@@ -55,17 +49,6 @@ package org.mokylin.skin.app.fuben
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __FuBenTanKuang2_Label1_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "——";
-			temp.color = 0xBEA757;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 118;
-			temp.y = 126;
-			return temp;
-		}
-
 		private function __FuBenTanKuang2_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -99,43 +82,17 @@ package org.mokylin.skin.app.fuben
 			return temp;
 		}
 
-		private function btnClose_i():feathers.controls.Button
+		private function btnOK_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btnClose = temp;
-			temp.name = "btnClose";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.x = 298;
-			temp.y = 7;
-			return temp;
-		}
-
-		private function btn_cancel_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_cancel = temp;
-			temp.name = "btn_cancel";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.label = "拒 绝";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
-			temp.color = 0xE1D4A9;
-			temp.width = 95;
-			temp.x = 51;
-			temp.y = 214;
-			return temp;
-		}
-
-		private function btn_ok_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_ok = temp;
-			temp.name = "btn_ok";
+			btnOK = temp;
+			temp.name = "btnOK";
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.label = "确 定";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xE1D4A9;
 			temp.width = 95;
-			temp.x = 182;
+			temp.x = 118.5;
 			temp.y = 216;
 			return temp;
 		}
@@ -150,12 +107,12 @@ package org.mokylin.skin.app.fuben
 			temp.touchGroup = true;
 			temp.letterSpacing = 2;
 			temp.fontSize = 16;
-			temp.text = "温馨提示";
+			temp.text = "提 示";
 			temp.textAlign = "center";
-			temp.color = 0xb8ad80;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 182;
-			temp.x = 80;
+			temp.color = 0xDDE2B1;
+			temp.nativeFilters = Fontter.filterObj[""];
+			temp.width = 240;
+			temp.x = 48;
 			temp.y = 11;
 			return temp;
 		}
@@ -165,12 +122,15 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			title = temp;
 			temp.name = "title";
+			temp.height = 55;
 			temp.fontSize = 16;
-			temp.text = "队长正在申请进入跨服副本";
-			temp.color = 0xBEA757;
+			temp.text = "浪里小白还没有准备就绪";
+			temp.textAlign = "center";
+			temp.color = 0xC29444;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 68;
-			temp.y = 88;
+			temp.width = 257;
+			temp.x = 40;
+			temp.y = 108;
 			return temp;
 		}
 

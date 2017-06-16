@@ -43,7 +43,7 @@ package com.rpgGame.coreData.info.item
 			_itemInfo = value;
 			updateParameters();
 		}
-		
+	
 		/**
 		 *更新参数 
 		 * 

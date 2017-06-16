@@ -54,6 +54,9 @@ package com.rpgGame.netData.map.bean{
 		//坐骑
 		private var _mount: int;
 		
+		//战旗
+		private var _warflag: int;
+		
 		//军阶头顶显示
 		private var _junJieId: int;
 		
@@ -97,6 +100,8 @@ package com.rpgGame.netData.map.bean{
 			writeInt(_second_weapon);
 			//坐骑
 			writeInt(_mount);
+			//战旗
+			writeInt(_warflag);
 			//军阶头顶显示
 			writeInt(_junJieId);
 			//PK类型(0-和平 1-组队 2-帮会 3-全体 4-阵营 5-善恶)
@@ -149,6 +154,8 @@ package com.rpgGame.netData.map.bean{
 			_second_weapon = readInt();
 			//坐骑
 			_mount = readInt();
+			//战旗
+			_warflag = readInt();
 			//军阶头顶显示
 			_junJieId = readInt();
 			//PK类型(0-和平 1-组队 2-帮会 3-全体 4-阵营 5-善恶)
@@ -351,6 +358,21 @@ package com.rpgGame.netData.map.bean{
 		 */
 		public function set mount(value: int): void{
 			this._mount = value;
+		}
+		
+		/**
+		 * get 战旗
+		 * @return 
+		 */
+		public function get warflag(): int{
+			return _warflag;
+		}
+		
+		/**
+		 * set 战旗
+		 */
+		public function set warflag(value: int): void{
+			this._warflag = value;
 		}
 		
 		/**

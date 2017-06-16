@@ -16,13 +16,13 @@ package com.rpgGame.coreData.clientConfig
 		public var q_id:int;
 		 /**  商店ID */
 		public var q_shop_id:int;
-		 /**  商店类型(1 热销道具;2 变强道具;3礼金商城;4 Vip商城;5 常用道具) */
+		 /**  商店类型(1 热销道具;2 变强道具;3 礼金商城;4 Vip商城;5 常用道具;6 声望商店) */
 		public var q_sub_shop_type:int;
 		 /**  页签前面名称(文字展示) */
 		public var q_sub_tab_name:String;
 		 /**  VIP等级限制 */
 		public var q_vip_level:int;
-		 /**  价格类型(3元宝;4银两;5礼金;6绑银) */
+		 /**  价格类型(3元宝;4银两;5礼金;6绑银;7声望) */
 		public var q_price_type:int;
 		 /**  折扣价格(没有折扣价不填) */
 		public var q_discount_price:int;

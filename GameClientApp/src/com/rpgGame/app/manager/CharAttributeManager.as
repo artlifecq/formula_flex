@@ -56,7 +56,7 @@ package com.rpgGame.app.manager
 							EventManager.dispatchEvent(TaoNiEvent.TAO_NI_LIANG_CANG_STATE_CHANGE, data, CharAttributeType.HP);
 						}
 						offset=data.totalStat.hp-oldValue;
-						if (data.id == MainRoleManager.actorID && offset > 0&&showEffet==1) //自己看到就好了
+						if (data.id == MainRoleManager.actorID && offset > 0&&showEffet>=1) //自己看到就好了
 						{
 							FightFaceHelper.showAttChange(EnumHurtType.ADDHP, offset,showEffet);
 						}
@@ -69,12 +69,6 @@ package com.rpgGame.app.manager
 						offset = attributeValue - oldValue;
 						updateMpBar(data);
 						EventManager.dispatchEvent(MainPlayerEvent.NOWMP_CHANGE, data);
-						break;
-					case CharAttributeType.PK_MODE:
-						//HeroData(data).pkMode = attributeValue;
-						break;
-					case CharAttributeType.PK:
-						HeroData(data).pkMode = attributeValue;
 						break;
 					case CharAttributeType.LV:
 						updateBloodLV(data);

@@ -117,11 +117,6 @@ package com.rpgGame.core.app
 		 *每日副本成功结算
 		 */
 		public static var DAILY_DUNGEON_SUCCESS:String = createAppInfo( "dungeon.genuine.DailyDungeonSuccessPanel","fuben");
-
-		/**
-		 *多人副本进入确认面板
-		 */
-		public static var MULTYENTER_PANL:String = createAppInfo( "dungeon.multy.MultyEnterPanel");
 		/**
 		 *多人副本倒计时面板
 		 */
@@ -131,6 +126,27 @@ package com.rpgGame.core.app
 		 */
 		public static var MULTY_EXITTIME_PANL:String = createAppInfo( "dungeon.multy.MultyExitTimePanel");
 		
+		/**
+		 *多人副本队伍投票面板
+		 */
+		public static var MULTY_TEAM_PANL:String = createAppInfo( "dungeon.multy.MultyTeamPanel");
+		/**
+		 *多人副本队员拒绝
+		 */
+		public static var MULTY_TEAM_CANCEL_PANL:String = createAppInfo( "dungeon.multy.MultyTeamCancelPanel");
+		
+		/**
+		 *活动面板
+		 */
+		public static var ACTIVETY_PANL:String = createAppInfo( "activety.ActivetyPanel","activety");
+		/** 活动BOSS **/
+		public static var ACTIVETY_BOSS_HURTRANK:String = createAppInfo("activety.boss.BossHurtRankPanel","activety");
+		/**
+		 *活动boss结果 
+		 */
+		public static var ACTIVETY_BOSS_RESULT:String = createAppInfo("activety.boss.BossFightSuccessPanel","activety");
+		/** 活动开启 **/
+		public static var ACTIVETY_OPEN:String = createAppInfo("activety.ActOpenPanel");
 		/**
 		 *装备面板
 		 */
@@ -412,5 +428,26 @@ package com.rpgGame.core.app
 		public static var BATTLE_RESULT_PANEL:String = createAppInfo("battle.jjzb.JJBattleResultPanelExt","zhanchang");
 		/**战场**/
 		public static var BATTLE_SHOP_PANEL:String = createAppInfo("shop.BattleShopPanelExt","zhanchang");
+		
+		/**巅峰开始倒计时**/
+		public static var BATTLE_D1V1_READY_PANEL:String = createAppInfo("battle.dfdj.D1v1ReafyPanelExt","zhanchang");
+		/**巅峰匹配倒计时**/
+		public static var BATTLE_D1V1_MATCH_PANEL:String = createAppInfo("battle.dfdj.D1v1MatchPanelExt","zhanchang");
+		/**巅峰排行榜**/
+		public static var BATTLE_D1V1_RANK_PANEL:String = createAppInfo("battle.dfdj.D1v1RankPanelExt","zhanchang");
+		
+		/**巅峰升级信息**/
+		public static var BATTLE_D1V1_LEVEL_UP_PANEL:String = createAppInfo("battle.dfdj.D1v1RankConfigPanelExt","zhanchang");
+		/**巅峰头像**/
+		public static var BATTLE_D1V1_HEAD_PANEL:String = createAppInfo("battle.dfdj.D1v1HeadPanelExt","zhanchang");
+		/**1v1战斗结束**/
+		public static var BATTLE_D1V1_RESULT_PANEL:String = createAppInfo("battle.dfdj.D1v1FightResultPanelExt","zhanchang");
+		
+		/**九层妖塔战场日志**/
+		public static var BATTLE_NINE_TOWER_LOG_PANEL:String = createAppInfo("battle.jcyt.NineTowerLogPanelExt","zhanchang");
+		/**九层妖塔提示**/
+		public static var BATTLE_NINE_TOWER_NOTICE_PANEL:String = createAppInfo("battle.jcyt.NineTowerEnterNoticePanelExt","zhanchang");
+		/**9t战斗结束**/
+		public static var BATTLE_NINE_TOWER_RESULT_PANEL:String = createAppInfo("battle.jcyt.NineTowerFightResultPanelExt","zhanchang");
 	}
 }

@@ -45,7 +45,7 @@ package com.rpgGame.app.scene
 			if (!role)
 				return;
 			_cnt--;
-			_pool.disposeObj(role);
+			_pool.recycleObj(role);
 		}
 		
 		public static function get cnt() : int

@@ -41,6 +41,7 @@ package com.game.engine3D.scene.render
 	import away3d.core.math.Matrix3DUtils;
 	import away3d.core.pick.PickingColliderType;
 	import away3d.entities.CompositeMesh;
+	import away3d.entities.Entity;
 	import away3d.entities.EntityLayerType;
 	import away3d.entities.Mesh;
 	import away3d.entities.SparticleMesh;
@@ -79,11 +80,11 @@ package com.game.engine3D.scene.render
 
 		public static function recycle(ru : RenderUnit3D) : void
 		{
-			if (!ru || ru.isDisposed)
+			if (!ru || ru.isInPool)
 				return;
 			_cnt--;
 			//利用池回收RenderUnit
-			_pool.disposeObj(ru);
+			_pool.recycleObj(ru);
 		}
 
 		public static function get cnt() : int
@@ -130,7 +131,6 @@ package com.game.engine3D.scene.render
 		private var _rootObj3ds : Vector.<ObjectContainer3D>;
 		private var _childObj3ds : Vector.<ObjectContainer3D>;
 		private var _castsShadows : Boolean;
-		private var _planarRenderLayer : uint = 1;
 		private var _showBounds : Boolean;
 		
 		public var useFog : Boolean;
@@ -147,6 +147,8 @@ package com.game.engine3D.scene.render
 		private var _mouseOutCallBackList : Vector.<CallBackData>;
 		private var _mouseRightUpCallBackList : Vector.<CallBackData>;
 		private var _mouseRightDownCallBackList : Vector.<CallBackData>;
+		private var _asyncResourceProgressCallBackList : Vector.<CallBackData>;
+		private var _asyncResourceCompleteCallBackList : Vector.<CallBackData>;
 		private var _resReady : Boolean = false;
 		private var _resSwitch : Boolean = false;
 		private var _animator : AnimatorBase;
@@ -260,14 +262,13 @@ package com.game.engine3D.scene.render
 		public function RenderUnit3D(rpd : RenderParamData3D,is25D:Boolean=false)
 		{
 			super([rpd,is25D]);
-//			_waitAddUnitList = new Vector.<RenderUnitChild>();
 			_currChildUnitList = new Vector.<RenderUnitChild>();
 			_methodDatas = new Vector.<MethodData>();
 		}
 		
 		override public function set zOffset(value : int) : void
 		{
-			if (zOffset == value)
+			if (zOffset == value || !_depthEnable)
 				return;
 			super.zOffset = value;
 			validateZoffset();
@@ -276,7 +277,7 @@ package com.game.engine3D.scene.render
 		override public function set y(value : Number) : void
 		{
 			super.y = value;
-			if (GlobalConfig.use2DMap)
+			if (_depthEnable && GlobalConfig.use2DMap)
 				this.zOffset = GlobalConfig.get2DMapDepth(value);
 		}
 		
@@ -514,6 +515,28 @@ package com.game.engine3D.scene.render
 		{
 			CallBackUtil.removeCallBackData(_playCompleteCallBackList, value);
 		}
+		
+		public function setAsyncResourceProgressCall(value : Function, ... args) : void
+		{
+			_asyncResourceProgressCallBackList ||= new Vector.<CallBackData>;
+			CallBackUtil.addCallBackData(_asyncResourceProgressCallBackList, value, args);
+		}
+		
+		public function removeAsyncResourceProgressCall(value : Function) : void
+		{
+			CallBackUtil.removeCallBackData(_asyncResourceProgressCallBackList, value);
+		}
+		
+		public function setAsyncResourceCompleteCall(value : Function, ... args) : void
+		{
+			_asyncResourceCompleteCallBackList ||= new Vector.<CallBackData>;
+			CallBackUtil.addCallBackData(_asyncResourceCompleteCallBackList, value, args);
+		}
+		
+		public function removeAsyncResourceCompleteCall(value : Function) : void
+		{
+			CallBackUtil.removeCallBackData(_asyncResourceCompleteCallBackList, value);
+		}
 
 		/**
 		 * @private
@@ -705,6 +728,14 @@ package com.game.engine3D.scene.render
 					mesh.castsShadows = _castsShadows;
 				}
 			}
+			if (_childObj3ds)
+			{
+				for each (var obj:ObjectContainer3D in _childObj3ds)
+				{
+					if (obj is Mesh)
+						Mesh(obj).castsShadows = _castsShadows;
+				}
+			}
 		}
 
 		public function get castsShadows() : Boolean
@@ -712,7 +743,7 @@ package com.game.engine3D.scene.render
 			return _castsShadows;
 		}
 		
-		public function set planarRenderLayer(value : uint) : void
+		override public function set planarRenderLayer(value : uint) : void
 		{
 			if (_planarRenderLayer == value)
 				return;
@@ -731,11 +762,14 @@ package com.game.engine3D.scene.render
 					mesh.planarRenderLayer = value;
 				}
 			}
-		}
-		
-		public function get planarRenderLayer() : uint
-		{
-			return _planarRenderLayer;
+			if (_childObj3ds)
+			{
+				for each (var obj:ObjectContainer3D in _childObj3ds)
+				{
+					if (obj is Entity)
+						Entity(obj).planarRenderLayer = _planarRenderLayer;
+				}
+			}
 		}
 
 		private function initRenderUnitContent() : void
@@ -751,7 +785,8 @@ package com.game.engine3D.scene.render
 			_childObj3ds = _renderUnitData.childObj3ds;
 			if (GlobalConfig.use2DMap)
 			{
-				initChildZoffset();
+//				initChildZoffset();
+				validateChildProperties();
 			}
 			if (_animatorElements)
 			{
@@ -815,7 +850,7 @@ package com.game.engine3D.scene.render
 			validateMaterialProperty();
 		}
 
-		private function initChildZoffset() : void
+		private function validateChildProperties() : void
 		{
 			var obj : ObjectContainer3D;
 			
@@ -825,12 +860,20 @@ package com.game.engine3D.scene.render
 				{
 					_zOffsetByName[obj.name] = obj.zOffset;
 				}
+				if (obj is Entity)
+				{
+					Entity(obj).planarRenderLayer = _planarRenderLayer;
+				}
 			}
 			for each (obj in _childObj3ds)
 			{
 				if (obj && !_zOffsetByName.hasOwnProperty(obj.name))
 				{
 					_zOffsetByName[obj.name] = obj.zOffset;
+				}
+				if (obj is Entity)
+				{
+					Entity(obj).planarRenderLayer = _planarRenderLayer;
 				}
 			}
 		}
@@ -1379,7 +1422,6 @@ package com.game.engine3D.scene.render
 									if (activeStatus)
 									{
 										(currAnimator as SkeletonAnimator).play(activeStatus, _animationTransitionTime, offsetTime);
-//										trace("====================================\t"+currAnimator.name + "\t动作：\t" + activeStatus);
 									}
 									else
 									{
@@ -1716,6 +1758,7 @@ package com.game.engine3D.scene.render
 
 		private function onValidateGraphic(resData : RenderResourceData) : void
 		{
+			CallBackUtil.exceteCallBackData(this, _asyncResourceCompleteCallBackList);
 			validateGraphic();
 		}
 
@@ -2163,17 +2206,7 @@ package com.game.engine3D.scene.render
 					removeUnitChildFromList(childData.renderUnit);
 				}
 			}
-//			_waitAddUnitList.length = 0;
 		}
-
-//		private function addWaitRenderUnitChild(childData : RenderUnitChild) : void
-//		{
-//			var index : int = _waitAddUnitList.indexOf(childData);
-//			if (index < 0)
-//			{
-//				_waitAddUnitList.push(childData);
-//			}
-//		}
 
 		private function addChildDataToList(childData : RenderUnitChild) : void
 		{
@@ -2511,17 +2544,6 @@ package com.game.engine3D.scene.render
 		{
 			if (!ru)
 				return;
-//			var childData : RenderUnitChild;
-//			var len : int = _waitAddUnitList.length;
-//			for (var i : int = len - 1; i >= 0; i--)
-//			{
-//				childData = _waitAddUnitList[i];
-//				if (childData.renderUnit == ru)
-//				{
-//					_waitAddUnitList.splice(i, 1);
-//					break;
-//				}
-//			}
 			removeUnitChildFromList(ru);
 		}
 
@@ -2666,6 +2688,7 @@ package com.game.engine3D.scene.render
 				if (_visibleNeedAsyncLoaded && !_renderResourceData.isAsyncLoaded)
 				{
 					_renderResourceData.setSyncResCompleteCallBack(onValidateGraphic);
+					_renderResourceData.setSyncResProgressCallBack(onNextSyncResProgress);
 				}
 				if (_renderResourceData.isLoaded)
 				{
@@ -2696,6 +2719,7 @@ package com.game.engine3D.scene.render
 					if (_visibleNeedAsyncLoaded && !_nextRenderResourceData.isAsyncLoaded)
 					{
 						_nextRenderResourceData.setSyncResCompleteCallBack(onNextSyncResComplete);
+						_nextRenderResourceData.setSyncResProgressCallBack(onNextSyncResProgress);
 					}
 					if (_nextRenderResourceData.isLoaded)
 					{
@@ -2716,6 +2740,12 @@ package com.game.engine3D.scene.render
 					doSetRenderParamData(_nextRenderParamData);
 				}
 			}
+		}
+		
+		private function onNextSyncResProgress(progress,resData : RenderResourceData) : void
+		{
+			if (_asyncResourceProgressCallBackList)
+				CallBackUtil.exceteCallBackData(this, _asyncResourceProgressCallBackList, progress);
 		}
 
 		private function onNextSyncResComplete(resData : RenderResourceData) : void
@@ -3423,6 +3453,10 @@ package com.game.engine3D.scene.render
 			{
 				for each (var element : ObjectContainer3D in _drawElements)
 				{
+					if(element.name.indexOf("chest") != -1 || element.name.indexOf("zero") != -1)//这里处理下策划自己加的挂点到模型里面去，干扰了模型的包围盒
+					{
+						continue;
+					}
 					var bounds : VolumeBounds = new VolumeBounds(element.minX * element.scaleX, element.minY * element.scaleY, element.minZ * element.scaleZ, //
 						element.maxX * element.scaleX, element.maxY * element.scaleY, element.maxZ * element.scaleZ);
 					return bounds;
@@ -3599,7 +3633,8 @@ package com.game.engine3D.scene.render
 			//释放缓存
 			if (_renderResourceData)
 			{
-				_renderResourceData.removeSyncResCompleteCallBack(onValidateGraphic);
+				_renderResourceData.removeSyncResProgressCallBack(onValidateGraphic);
+				_renderResourceData.removeSyncResCompleteCallBack(onNextSyncResProgress);
 				_renderResourceData.removeResCompleteCallBack(onSetRenderResourceData);
 				_renderResourceData.removeResErrorCallBack(onRenderResourceDataError);
 				//释放旧的换装
@@ -3905,6 +3940,16 @@ package com.game.engine3D.scene.render
 			if (_mouseRightDownCallBackList)
 			{
 				_mouseRightDownCallBackList.length = 0;
+			}
+			if (_asyncResourceCompleteCallBackList)
+			{
+				_asyncResourceCompleteCallBackList.length = 0;
+				_asyncResourceCompleteCallBackList = null;
+			}
+			if (_asyncResourceProgressCallBackList)
+			{
+				_asyncResourceProgressCallBackList.length = 0;
+				_asyncResourceProgressCallBackList = null;
 			}
 			unregisterEvent();
 			super.dispose();

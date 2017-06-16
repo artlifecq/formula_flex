@@ -27,6 +27,7 @@ package com.game.engine2D
 	import com.game.engine3D.vo.BaseObj3D;
 	
 	import flash.display.Sprite;
+	import flash.geom.ColorTransform;
 	import flash.geom.Point;
 	import flash.utils.Dictionary;
 	
@@ -56,6 +57,15 @@ package com.game.engine2D
 		/** 场景实体LightPicker */
 		public static const SCENE_ENTITY_LIGHT_PICKER_NAME : String = "SCENE_ENTITY_LIGHT_PICKER";
 		
+		public function get mapConfig():MapConfig
+		{
+			return _mapConfig;
+		}
+		
+		public function set mapConfig(value:MapConfig):void
+		{
+			_mapConfig = value;
+		}
 		private static const floor:Function = Math.floor;
 		private static var _current:Scene;
 		public static function get scene():Scene
@@ -63,7 +73,7 @@ package com.game.engine2D
 			return _current;
 		}
 		public var sceneConfig:SceneConfig;
-		public var mapConfig:MapConfig;
+		private var _mapConfig:MapConfig;
 		public var sceneCamera:SceneCamera;
 		public var sceneRender:SceneRender;
 		public var sceneSmallMapLayer:SceneSmallLayer;
@@ -79,6 +89,7 @@ package com.game.engine2D
 		private var _viewAsset:View3DAsset;
 		private var _mainChar : ISceneCameraTarget;
 		private var _view:View3D;
+		private var _screenView:View3D;
 		private var _scene3d:GameScene3D;
 		private var _scenePos:Point = new Point(int.MIN_VALUE, int.MIN_VALUE);
 		
@@ -91,6 +102,7 @@ package com.game.engine2D
 		
 		private var _planarShadowAlpha:Number = 0.3;
 		private var _filter3ds:Vector.<Filter3DBase> = new Vector.<Filter3DBase>();
+		private var _filter3dScreens:Vector.<Filter3DBase> = new Vector.<Filter3DBase>();
 		private var _cameraInit:Boolean = false;
 		private var _cameraOrthographicLens:CameraOrthographicLens;
 		
@@ -101,6 +113,7 @@ package com.game.engine2D
 			}
 			_current = this;
 			_view = view;
+			_screenView = Stage3DLayerManager.screenView;
 			_cameraOrthographicLens = new CameraOrthographicLens(1000);
 			_cameraOrthographicLens.viewportScale = 1.1;
 			
@@ -141,6 +154,7 @@ package com.game.engine2D
 			_view.mouseEnabled = view3dEvent;
 			_view.mouseChildren = view3dEvent;
 			_view.filters3d = _filter3ds;
+			_screenView.filters3d = _filter3dScreens;
 			//初始化camera
 			_view.camera.lens = _cameraOrthographicLens;
 			
@@ -152,6 +166,20 @@ package com.game.engine2D
 			Starling.current.nativeStage.addChildAt(sceneStageLayer, 0);
 			//调一下尺寸
 			reSize(sceneConfig.width, sceneConfig.height);
+		}
+		
+		/**
+		 *置灰场景 
+		 * 
+		 */
+		public function addGrayScene():void
+		{
+			_view.colorFilter.adjustSaturation(-1);
+		}
+		
+		public function removeGrayScene():void
+		{
+			_view.colorFilter.reset();
 		}
 		
 		public function get directionalLight():DirectionalLight
@@ -300,6 +328,25 @@ package com.game.engine2D
 			}
 		}
 		
+		public function addScreenFilter3ds(value:Filter3DBase):void
+		{
+			if (_filter3dScreens.indexOf(value) == -1)
+			{
+				_filter3dScreens.push(value);
+				_screenView.filters3d = _filter3dScreens;
+			}
+		}
+		
+		public function removeScreenFilter3ds(value:Filter3DBase):void
+		{
+			var index:int = _filter3dScreens.indexOf(value);
+			if (index != -1)
+			{
+				_filter3dScreens.splice(index, 1);
+				_screenView.filters3d = _filter3dScreens;
+			}
+		}
+		
 		/**
 		 * 重置大小
 		 * @param $width
@@ -365,8 +412,6 @@ package com.game.engine2D
 			{
 				//更新配置
 				mapConfig = $mapConfig;
-				
-//				sceneSmallMapLayer.smallMaterial = MaterialUtils.default1x1Texture;
 				
 				if ($awdMapUrl)
 				{
@@ -438,14 +483,9 @@ package com.game.engine2D
 					_direction.castsPlanarShadows = true;
 			}
 			
-//			if (_direction)
-//			{
-//				_direction.planarShadowAlpha = _planarShadowAlpha;
-//			}
 			if (_directionModel == null)
 			{
 				_directionModel = _direction;
-//				_directionModel.planarShadowAlpha = _planarShadowAlpha;
 			}
 			
 			GlobalConfig.use2DMap = _viewAsset.cameraMode2D;
@@ -738,15 +778,15 @@ package com.game.engine2D
 		 * @param $sc
 		 * @param $recycle 是否池回收
 		 */
-		public function removeSceneObjByType($type:String,$recycle:Boolean=true):void
-		{
-			var list:Array = sceneRenderLayer.getBaseObjByType($type);
-			var len:int = list.length;
-			while (len-- > 0)
-			{
-				removeSceneObj(list[len]);
-			}
-		}
+//		public function removeSceneObjByType($type:String,$recycle:Boolean=true):void
+//		{
+//			var list:Array = sceneRenderLayer.getBaseObjByType($type);
+//			var len:int = list.length;
+//			while (len-- > 0)
+//			{
+//				removeSceneObj(list[len]);
+//			}
+//		}
 		
 		/**
 		 * 从场景中移除角色(通过ID和类型)
@@ -847,6 +887,8 @@ package com.game.engine2D
 				_scene3d.clear();
 //			if (_view)
 //				_view.filters3d = _filter3ds;
+			if (_screenView)
+				_screenView.filters3d = _filter3dScreens;
 			TweenLite.killTweensOf(_current);
 		}
 		

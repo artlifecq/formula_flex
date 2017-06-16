@@ -1,7 +1,6 @@
 package com.rpgGame.appModule.mount
 {
 	import com.rpgGame.coreData.cfg.AttValueConfig;
-	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	
 	import org.mokylin.skin.app.zuoqi.Shuxing_Item;

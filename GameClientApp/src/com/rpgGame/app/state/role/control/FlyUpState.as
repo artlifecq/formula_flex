@@ -101,7 +101,7 @@ package com.rpgGame.app.state.role.control
 		 */		
 		private function doFly() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				if(_upTween)
 				{
@@ -128,7 +128,7 @@ package com.rpgGame.app.state.role.control
 		 */		
 		private function onFlyUpComplete() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				if(_flyTween)
 				{
@@ -154,7 +154,7 @@ package com.rpgGame.app.state.role.control
 		 */		
 		private function onFlyComplete() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				if(_fallTween)
 				{
@@ -175,7 +175,7 @@ package com.rpgGame.app.state.role.control
 		
 		private function onFlyFallComplete():void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				removeSelf();
 				transition(RoleStateType.ACTION_GETUP);
@@ -235,7 +235,7 @@ package com.rpgGame.app.state.role.control
 		 */		
 		private function stopFly() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				(_machine.owner as SceneRole).offsetZ = 0;
 			}

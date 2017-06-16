@@ -89,6 +89,7 @@ package com.rpgGame.app.ui.main.taskbar
 			for(i=0;i<killBut1List.length;i++)
 			{
 				killLabel1List.push(Renwu_Item(killBut1List[i].skin).labelDisplay);
+				TaskUtil.setTextEvet(killBut1List[i]);
 			}
 			killBut2List=new Vector.<SkinnableContainer>();
 			killBut2List.push(_skin.sec_killbut2_1);
@@ -98,6 +99,7 @@ package com.rpgGame.app.ui.main.taskbar
 			for(i=0;i<killBut2List.length;i++)
 			{
 				killLabel2List.push(Renwu_Item(killBut2List[i].skin).labelDisplay);
+				TaskUtil.setTextEvet(killBut2List[i]);
 			}
 			killBut3List=new Vector.<SkinnableContainer>();
 			killBut3List.push(_skin.sec_killbut3_1);
@@ -107,6 +109,7 @@ package com.rpgGame.app.ui.main.taskbar
 			for(i=0;i<killBut3List.length;i++)
 			{
 				killLabel3List.push(Renwu_Item(killBut3List[i].skin).labelDisplay);
+				TaskUtil.setTextEvet(killBut3List[i]);
 			}
 			
 			
@@ -125,7 +128,7 @@ package com.rpgGame.app.ui.main.taskbar
 			ico1List=new Vector.<IconCDFace>();
 			for(i=0;i<ico1BgList.length;i++)
 			{
-				ico=new IconCDFace(IcoSizeEnum.ICON_48);
+				ico=IconCDFace.create(IcoSizeEnum.ICON_48);
 				ico.showCD=false;
 				ico.x=ico1BgList[i].x-6;
 				ico.y=ico1BgList[i].y-6;
@@ -144,7 +147,7 @@ package com.rpgGame.app.ui.main.taskbar
 			ico2List=new Vector.<IconCDFace>();
 			for(i=0;i<ico2BgList.length;i++)
 			{
-				ico=new IconCDFace(IcoSizeEnum.ICON_48);
+				ico=IconCDFace.create(IcoSizeEnum.ICON_48);
 				ico.showCD=false;
 				ico.x=ico2BgList[i].x-6;
 				ico.y=ico2BgList[i].y-6;

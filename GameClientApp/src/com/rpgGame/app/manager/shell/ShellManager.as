@@ -296,13 +296,35 @@ package com.rpgGame.app.manager.shell
 		
 		private function test(alpha:Number):void
 		{
-			if(alpha == 1)
-			{
-				MainRoleManager.actor.forEachRenderUnit(setFunc);
+			if(alpha > 0)
+			{	
+				SceneManager.scene.view3d.colorFilter.adjustSaturation(-1);
 			}
-			else
+			if(alpha > 1)
 			{
-				MainRoleManager.actor.forEachRenderUnit(setFunc1);
+//				MainRoleManager.actor.forEachRenderUnit(setFunc);
+//				SceneManager.scene.addGrayScene();
+				SceneManager.scene.view3d.colorFilter.adjustContrast(alpha-1);
+			}
+			else if(alpha > 2)
+			{
+//				MainRoleManager.actor.forEachRenderUnit(setFunc1);
+//				SceneManager.scene.removeGrayScene();
+//				SceneManager.scene.view3d.colorFilter.adjustSaturation(alpha);
+				SceneManager.scene.view3d.colorFilter.adjustBrightness(alpha-2);
+			}
+			else if(alpha > 3)
+			{
+				SceneManager.scene.view3d.colorFilter.adjustHue(alpha-3);
+			}
+			else if(alpha > 4)
+			{
+				SceneManager.scene.view3d.colorFilter.tint(0xff0000,alpha - 4);
+			}
+			else if(alpha < 0)
+			{
+//				SceneManager.scene.view3d.colorFilter.invert();
+				SceneManager.scene.view3d.colorFilter.reset();
 			}
 		}
 		

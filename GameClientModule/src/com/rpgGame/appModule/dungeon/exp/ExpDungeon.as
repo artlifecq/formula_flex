@@ -24,37 +24,40 @@ package com.rpgGame.appModule.dungeon.exp
 	{
 		private var _skin:FuBen_JingYan_Skin;
 		private var _dailyZoneInfo:DailyZonePanelInfo;
+		private var gridList:Vector.<IconCDFace>;
 		public function ExpDungeon():void
 		{
 			_skin=new FuBen_JingYan_Skin();
 			super(_skin);
-			initialize();
 		}
-		protected function initialize():void
+		override public function show(data:Object=null):void
 		{
+			super.show(data);
 			var list:Array = DailyZoneCfgData.getTypeList(3);
-			var data:Q_daily_zone = list[0] as Q_daily_zone;
+			var qdata:Q_daily_zone = list[0] as Q_daily_zone;
 			
 			
-			var itemInfos:Array = JSON.parse(data.q_special_rewards_show) as Array;
+			var itemInfos:Array = JSON.parse(qdata.q_special_rewards_show) as Array;
 			var length:int = itemInfos.length;
 			var startX:Number = 475 - (60*length)/2;
 			var item:ItemInfo;
 			var icon:IconCDFace;
+			gridList=new Vector.<IconCDFace>();
 			for(var i:int = 0;i<length;i++)
 			{
-				var grid:IconCDFace = new IconCDFace(IcoSizeEnum.ICON_48);
+				var grid:IconCDFace = IconCDFace.create(IcoSizeEnum.ICON_48);
 				grid.setBg( GridBGType.GRID_SIZE_48,1 );
 				grid.bgImage.styleName = "ui/common/gezikuang/tubiaodikuang/48.png";
 				_skin.container.addChild(grid);
 				grid.x = startX+60*i;
 				grid.y = 507;
+				gridList.push(grid);
 				item = new ItemInfo();
 				item.itemModelId = itemInfos[i]["mod"];
 				FaceUtil.SetItemGrid(grid,ItemUtil.convertClientItemInfo(item), true);
 			}
 			
-			_dailyZoneInfo = DailyZoneDataManager.instance().getInfoById(data.q_id);
+			_dailyZoneInfo = DailyZoneDataManager.instance().getInfoById(qdata.q_id);
 			EventManager.addEvent(DailyZoneDataManager.UPDATEDAILYZONEINFO,refeashValue);
 			refeashValue();
 		}
@@ -92,6 +95,10 @@ package com.rpgGame.appModule.dungeon.exp
 		override public function hide():void
 		{
 			EventManager.removeEvent(DailyZoneDataManager.UPDATEDAILYZONEINFO,refeashValue);
+			while(gridList.length>0){
+				var icon:IconCDFace=gridList.pop();
+				icon.destroy();
+			}
 		}
 	}
 }

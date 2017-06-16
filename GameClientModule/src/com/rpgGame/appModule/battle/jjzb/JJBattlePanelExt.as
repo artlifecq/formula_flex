@@ -1,16 +1,30 @@
 package com.rpgGame.appModule.battle.jjzb
 {
+	import com.game.engine3D.display.Inter3DContainer;
+	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.Mgr;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.alert.GameCheckAlertExt;
 	import com.rpgGame.app.ui.tab.ViewUI;
+	import com.rpgGame.app.utils.BreatheTweenUtil;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.JJBattleEvent;
+	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.utils.GameColorUtil;
 	import com.rpgGame.core.utils.MCUtil;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.enum.EnumShopType;
+	import com.rpgGame.coreData.info.shop.ShopItemVo;
+	import com.rpgGame.coreData.type.CharAttributeType;
+	import com.rpgGame.coreData.type.EffectUrl;
+	import com.rpgGame.coreData.type.ShopType;
+	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.zhengba.bean.ZhengBaData;
 	
@@ -43,6 +57,7 @@ package com.rpgGame.appModule.battle.jjzb
 		private var _rewardPanel:JJBattleRewardPanelExt;
 		private var _costArr:Array;
 		private var _lastState:int=-1;
+		private var _eff:Inter3DContainer;
 		public function JJBattlePanelExt()
 		{
 			_skin=new JingJiChan1_Skin();
@@ -72,6 +87,8 @@ package com.rpgGame.appModule.battle.jjzb
 			_infoSkin.btnAdd1.addEventListener(Event.TRIGGERED,onBuyTimes);
 			_infoSkin.btnAdd2.addEventListener(Event.TRIGGERED,onBuyFightPwoer);
 			_infoSkin.btnDui.addEventListener(Event.TRIGGERED,onShowShop);
+			
+			TipTargetManager.show(_infoSkin.btnDui,TargetTipsMaker.makeSimpleTextTips("进入声望商城兑换道具"));
 		}
 		
 		private function onShowReward(eve:Event):void
@@ -192,6 +209,25 @@ package com.rpgGame.appModule.battle.jjzb
 			}
 			_curSub.show();
 		}
+		private function onStateResChange(type:int=0):void
+		{
+			// TODO Auto Generated method stub
+			if (CharAttributeType.RES_PRESTIGE==type) 
+			{
+				var value:int=MainRoleManager.actorInfo.totalStat.getResData(type);
+				_infoSkin.lbShengWang.text=LanguageConfig.replaceStr(_initPointStr,[value]);
+				var cheapItem:ShopItemVo=Mgr.shopMgr.getCheapestShopItemVo(EnumShopType.SHOP_SW);
+				if (cheapItem&&cheapItem.realPrice<=value) 
+				{
+					BreatheTweenUtil.add(_infoSkin.btnDui);
+				}
+				else
+				{
+					BreatheTweenUtil.remove(_infoSkin.btnDui);
+				}
+			}
+			
+		}
 		override protected function onShow():void
 		{
 			super.onShow();
@@ -199,11 +235,13 @@ package com.rpgGame.appModule.battle.jjzb
 			EventManager.addEvent(JJBattleEvent.GET_FIGHTERS_DATA,onGetFighters);
 			EventManager.addEvent(JJBattleEvent.GET_FIGHT_RESULT,onGetFightResult);
 			EventManager.addEvent(JJBattleEvent.GOBACK,goBack);
+			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,onStateResChange);
 			if (_showState==2) 
 			{
 				_showState=_lastState;
 			}
 			updateShowState();
+			onStateResChange(CharAttributeType.RES_PRESTIGE);
 		}
 		
 		private function onGetFightResult(...arg):void
@@ -249,11 +287,8 @@ package com.rpgGame.appModule.battle.jjzb
 			
 			_skin.numZhanli.label=data.rank+"";
 			
-			//未领奖
-			if (data.drawAward==0) 
-			{
-				
-			}
+		
+			showRewardEffect(data.drawAward==0);
 			var logLen:int=data.logs.length;
 			//日志
 			if (logLen>0) 
@@ -288,14 +323,46 @@ package com.rpgGame.appModule.battle.jjzb
 			EventManager.removeEvent(JJBattleEvent.GET_FIGHTERS_DATA,onGetFighters);
 			EventManager.removeEvent(JJBattleEvent.GET_FIGHT_RESULT,onGetFightResult);
 			EventManager.removeEvent(JJBattleEvent.GOBACK,goBack);
+			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,onStateResChange);
 			_curSub.hide();
 			if (_isShowLog) 
 			{
 				showHideBattleLog();
 			}
+			if (_rewardPanel) 
+			{
+				MCUtil.removeSelf(_rewardPanel);
+			}
+			_showState=0;
+			BreatheTweenUtil.remove(_infoSkin.btnDui);
+			showRewardEffect(false);
+		}
+		private function addEft(render:RenderUnit3D):void
+		{
+			render.play(0);
+		}
+		private function showRewardEffect(bool:Boolean):void
+		{
+			if (bool) 
+			{
+				if (!_eff) 
+				{
+					_eff=new Inter3DContainer();
+					_skin.btnJiangli.addChild(_eff);
+					_eff.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JJBREWARD),this._skin.btnJiangli.width/2,_skin.btnJiangli.height,0,null,addEft);
+				}
+			}
+			else
+			{
+				if (_eff) 
+				{
+					_eff.dispose();
+					MCUtil.removeSelf(_eff);
+					_eff=null;
+				}
+			}
 		}
 		
-	
 
 		public function get rewardPanel():JJBattleRewardPanelExt
 		{

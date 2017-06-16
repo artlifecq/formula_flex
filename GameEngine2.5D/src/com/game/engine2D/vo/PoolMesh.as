@@ -68,7 +68,7 @@ package com.game.engine2D.vo
 			return _isDestroyed;
 		}
 		
-		public function get isDisposed():Boolean
+		public function get isInPool():Boolean
 		{
 			return _isDisposed;
 		}
@@ -121,7 +121,7 @@ package com.game.engine2D.vo
 				colorTransform.redOffset = 0;
 			}
 		}
-
+		
 		public function get alpha():Number
 		{
 			return _alpha;
@@ -169,12 +169,12 @@ package com.game.engine2D.vo
 		{
 			return super.scaleX;
 		}
-
+		
 		public function get object3DScaleZ():Number
 		{
 			return super.scaleZ;
 		}
-
+		
 		public function get object3DScaleY():Number
 		{
 			return super.scaleY;
@@ -184,7 +184,7 @@ package com.game.engine2D.vo
 		{
 			_posScale.x = val;
 		}
-
+		
 		override public function set scaleY(val:Number):void
 		{
 			_posScale.y = val;
@@ -316,7 +316,7 @@ package com.game.engine2D.vo
 		}
 		
 		/** 进入缓存池调用 */
-		public function instanceDispose():void
+		public function putInPool():void
 		{
 			if (this.parent)
 				this.parent.removeChild(this);
@@ -413,7 +413,7 @@ package com.game.engine2D.vo
 		
 		static public function recycle($pool:PoolMesh):void
 		{
-			_pool.disposeObj($pool);
+			_pool.recycleObj($pool);
 		}
 		
 		static public function create(baseObj:BaseObj = null):PoolMesh

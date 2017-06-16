@@ -105,7 +105,7 @@ package com.rpgGame.app.ui.main.head
 				goodBuffs.push(icon);
 			}
 			
-			var gridW:int=IcoSizeEnum.ICON_24+2;
+			var gridW:int=IcoSizeEnum.ICON_24+10;
 			startX=52;
 			for(var i:int=0;i<goodBuffs.length;i++){//buff
 				icon=goodBuffs[i];

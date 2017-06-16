@@ -5,12 +5,13 @@ package com.rpgGame.appModule.dungeon.multy
 	import com.rpgGame.app.manager.ItemActionManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.DungeonSender;
-	import com.rpgGame.app.ui.SkinUIModePanel;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.TaskUtil;
+	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.core.events.DungeonEvent;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.ZoneCfgData;
@@ -20,13 +21,9 @@ package com.rpgGame.appModule.dungeon.multy
 	import com.rpgGame.coreData.clientConfig.Q_zone;
 	import com.rpgGame.coreData.clientConfig.Q_zone_multy;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
-	import com.rpgGame.coreData.info.MapDataManager;
-	import com.rpgGame.coreData.info.map.EnumMapType;
-	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.netData.zone.bean.MultiZonePanelInfo;
 	
 	import flash.utils.Dictionary;
-	import flash.utils.setTimeout;
 	
 	import away3d.events.Event;
 	
@@ -40,9 +37,10 @@ package com.rpgGame.appModule.dungeon.multy
 	
 	import gs.TweenLite;
 	
+	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.fuben.FuBen_DuoRen_Item;
 	import org.mokylin.skin.app.fuben.FuBen_DuoRen_Skin;
-	
+	import com.rpgGame.coreData.type.CharAttributeType;
 	import starling.display.DisplayObject;
 	import starling.display.Shape;
 	import starling.display.Sprite;
@@ -56,23 +54,40 @@ package com.rpgGame.appModule.dungeon.multy
 		private var skinList:Vector.<SkinnableContainer>;
 		private var itemList:Vector.<FuBen_DuoRen_Item>;
 		private var selectId:int=-1;
+		private var selectZid:int=0;
 		private var passRewardIcon:Vector.<IconCDFace>;
 		private var passRewardList:Dictionary;
 		private var allRewardIcon:Vector.<IconCDFace>;
+		
 		public function MultyView():void
 		{
 			_skin = new FuBen_DuoRen_Skin();
 			super(_skin);
 			initialize();
 		}
-		private var key:Boolean=false;//临时加的key
 		protected function initialize():void
 		{
+			
 			initScroll();
 			creatDungeonItem();
 			creatGlobalReward();
 		}
-		
+		private function addEvent():void
+		{
+			EventManager.addEvent(DungeonEvent.ZONE_ENTER_TEAM,changeTeamItem);//进入队列
+			EventManager.addEvent(DungeonEvent.ZONE_EXIT_TEAM,changeTeamItem);//退出队列
+			EventManager.addEvent(DungeonEvent.ZONE_TEAM_TIME,teamTime);//队列时间
+			
+			
+		}
+		private function removeEvent():void
+		{
+			EventManager.removeEvent(DungeonEvent.ZONE_ENTER_TEAM,changeTeamItem);//进入队列
+			EventManager.removeEvent(DungeonEvent.ZONE_EXIT_TEAM,changeTeamItem);//进入队列
+			EventManager.removeEvent(DungeonEvent.ZONE_TEAM_TIME,teamTime);//进入队列
+			TweenLite.killDelayedCallsTo(tweeReward);
+			
+		}
 		private function initScroll():void
 		{
 			scroll_Bar=_skin.scroll_Bar;
@@ -96,25 +111,45 @@ package com.rpgGame.appModule.dungeon.multy
 					butEnter();
 					break;
 				case _skin.btnExit:
-					
+					btnExit();
 					break;
 			}
 			
 		}
 		private function butEnter():void
 		{
-			var zid:int=ZoneMultyCfgData.getZoneIdByID(selectId);
-			if(zid<0)return;
-			var zoneData:Q_zone=ZoneCfgData.getZoneCfg(zid);
-			var multyData:Q_zone_multy=ZoneMultyCfgData.getZoneMultyByID(zid);
+			if(selectZid<0)return;
+			var zoneData:Q_zone=ZoneCfgData.getZoneCfg(selectZid);
+			var multyData:Q_zone_multy=ZoneMultyCfgData.getZoneMultyByID(selectZid);
 			if(zoneData==null||multyData==null)return;
 			if(MainRoleManager.actorInfo.totalStat.level>=zoneData.q_level)
 			{
-				//AppManager.showApp(AppConstant.MULTY_ENTERTIME_PANL);
 				DungeonSender.reqEnterDungeon(zoneData.q_id);
+				
+				DungeonSender.reqTeamMatchVote(zoneData.q_id,1);
+				
+				//_skin.btnEnter.isEnabled=false;
+				//DungeonManager.selectZid=selectZid;
+				
+				//AppManager.showApp(AppConstant.MULTY_ENTERTIME_PANL);
+				//DungeonSender.reqTeamMatchVote(zoneData.q_id,1);
+				//_skin.btnEnter.isEnabled=false;
+				
+				//changeTeamItem();
+				//AppManager.showApp(AppConstant.MULTY_TEAM_PANL);
 			}
+		}
+		private function btnExit():void
+		{
+			if(selectZid<0)return;
+			DungeonSender.reqCancelTeam(selectZid);
+			//_skin.btnExit.isEnabled=false;
 			
-			
+		}
+		
+		private function teamTime(time:int):void
+		{
+			_skin.lbTime.text=TimeUtil.format3TimeType(time);
 		}
 		
 		public function upView():void
@@ -123,14 +158,15 @@ package com.rpgGame.appModule.dungeon.multy
 		}
 		override public function show(data:Object=null):void
 		{
+			addEvent();
 			setGray();
 			setPassRewardText();
-			selectItemInfo();
+			changeTeamItem();
 			gainReward();
 		}
 		override public function hide():void
 		{
-			TweenLite.killDelayedCallsTo(tweeReward);
+			removeEvent();
 		}
 		
 		/**创建列表*/
@@ -191,26 +227,64 @@ package com.rpgGame.appModule.dungeon.multy
 		private function changeItem(id:int):void
 		{
 			if(id<0||id>=itemList.length)return;
-			if(selectId==id)return;
+			if(selectId!=id)
+			{
+				setSelctItem(id);
+			}
+			
+		}
+		
+		
+		
+		/**改变队列打开元素*/
+		private function changeTeamItem():void
+		{
+			var sid:int=0;
+			if(DungeonManager.teamZid>0)
+			{
+				selectZid=DungeonManager.teamZid;
+				var relist:Array=ZoneMultyCfgData.getMultyIdList();
+				if(relist&&relist.length>0)
+				{
+					for(var i:int=0;i<relist.length;i++)
+					{
+						if(relist[i]==selectZid)
+						{
+							sid=i;
+							break;
+						}
+					}
+				}
+				setSelctItem(sid);
+			}
+			else
+			{
+				setSelctItem(selectId);
+			}
+		}
+		
+		private function setSelctItem(id:int):void
+		{
 			if(selectId>=0)
 			{
 				cloSelectItem(itemList[selectId]);
 			}
-			unSelectItem(itemList[id]);
 			selectId=id;
+			selectZid=ZoneMultyCfgData.getZoneIdByID(selectId);
+			unSelectItem(itemList[selectId]);
 			setSite();
 			selectItemInfo();
 		}
+		
 		/**设置右边信息*/
 		private function selectItemInfo():void
 		{
-			var zid:int=ZoneMultyCfgData.getZoneIdByID(selectId);
-			if(zid<=0)return;
-			var zoneData:Q_zone=ZoneCfgData.getZoneCfg(zid);
-			var multyData:Q_zone_multy=ZoneMultyCfgData.getZoneMultyByID(zid);
+			if(selectZid<=0)return;
+			var zoneData:Q_zone=ZoneCfgData.getZoneCfg(selectZid);
+			var multyData:Q_zone_multy=ZoneMultyCfgData.getZoneMultyByID(selectZid);
 			var info:MultiZonePanelInfo;
 			if(zoneData==null||multyData==null)return;
-			info=DungeonManager.getPanelInfo(zid);
+			info=DungeonManager.getPanelInfo(selectZid);
 			if(info==null)
 			{
 				info=new MultiZonePanelInfo();
@@ -222,19 +296,35 @@ package com.rpgGame.appModule.dungeon.multy
 			_skin.lbDengji.htmlText=MainRoleManager.actorInfo.totalStat.level>=zoneData.q_level?zoneData.q_level.toString():"<font color='#e1201c'>"+zoneData.q_level+"</font>";
 			_skin.lbZhanli.htmlText=MainRoleManager.actorInfo.totalStat.getStatValue(CharAttributeType.FIGHTING)>=multyData.q_power?multyData.q_power.toString():"<font color='#e1201c'>"+multyData.q_power+"</font>";
 			_skin.lbCishu.htmlText=(multyData.q_count-info.count)>0?(multyData.q_count-info.count).toString():"<font color='#e1201c'>"+(multyData.q_count-info.count)+"</font>";
+			
+			if(DungeonManager.teamZid==selectZid)
+			{
+				_skin.btnEnter.visible=false;
+				_skin.btnExit.visible=true;
+				_skin.lbTime.visible=true;
+			}
+			else
+			{
+				_skin.btnEnter.visible=true;
+				_skin.btnExit.visible=false;
+				_skin.lbTime.visible=false;
+				_skin.btnEnter.isEnabled=DungeonManager.teamZid>0?false:true;
+			}
 		}
+		
+		
 		/**执灰列表*/
 		private function setGray():void
 		{
 			if(itemList==null)return;
 			var name:Array;
-			var zid:int,selectlevel:int,selectid:int;
+			var zid:int,selectlevel:int;
 			var zoneData:Q_zone,multyData:Q_zone_multy;
 			var item:FuBen_DuoRen_Item,skin:SkinnableContainer;
 			var info:MultiZonePanelInfo;
 			var i:int;
 			selectlevel=int.MAX_VALUE;
-			selectid=0;
+			selectId=0;
 			for(i=0;i<itemList.length;i++)
 			{
 				item=itemList[i];
@@ -261,7 +351,7 @@ package com.rpgGame.appModule.dungeon.multy
 						if(zoneData.q_level<selectlevel&&info.count<multyData.q_count)
 						{
 							selectlevel=zoneData.q_level;
-							selectid=i;
+							selectId=i;
 						}
 						GrayFilter.unGray(skin);
 					}
@@ -272,7 +362,7 @@ package com.rpgGame.appModule.dungeon.multy
 				}
 			}
 			
-			changeItem(selectid);
+			//changeItem(selectid);
 			
 		}
 		/**设置通关奖励文字*/
@@ -325,7 +415,7 @@ package com.rpgGame.appModule.dungeon.multy
 					item=ItemConfig.getQItemByID(reward[i].mod);
 					if(item!=null)
 					{
-						ico=new IconCDFace(IcoSizeEnum.ICON_36);
+						ico=IconCDFace.create(IcoSizeEnum.ICON_36);
 						ico.showCD=false;
 						ico.x=_skin["reward_ico_"+i].x+6;
 						ico.y=_skin["reward_ico_"+i].y+6;
@@ -413,7 +503,7 @@ package com.rpgGame.appModule.dungeon.multy
 				item=ItemConfig.getQItemByID(reward.mod);
 				if(item!=null)
 				{
-					ico=new IconCDFace(IcoSizeEnum.ICON_48);
+					ico=IconCDFace.create(IcoSizeEnum.ICON_48);
 					ico.showCD=false;
 					ico.x=temp.pass_ico.x;
 					ico.y=temp.pass_ico.y;
@@ -440,7 +530,7 @@ package com.rpgGame.appModule.dungeon.multy
 						item=ItemConfig.getQItemByID(passReward[i].mod);
 						if(item!=null)
 						{
-							ico=new IconCDFace(IcoSizeEnum.ICON_36);
+							ico=IconCDFace.create(IcoSizeEnum.ICON_36);
 							ico.showCD=false;
 							ico.x=temp["prob_ioc_"+add].x+6;
 							ico.y=temp["prob_ioc_"+add].y+6;

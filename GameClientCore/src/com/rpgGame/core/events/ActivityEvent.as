@@ -23,6 +23,19 @@ package com.rpgGame.core.events
 		public static const NOTICE:int = UNIQUEID.NEXT;
 		public static const SHOW_HIDE_ALL:int = UNIQUEID.NEXT;
 		public static const SHOW_NEW_ACTIVITY_BUTTON:int = UNIQUEID.NEXT;
+		
+		/**
+		 *更新活动 
+		 */
+		public static const UPDATE_ACTIVITY : int = UNIQUEID.NEXT;
+		/**
+		 *进入活动
+		 */
+		public static const ENTER_ACTIVITY : int = UNIQUEID.NEXT;
+		/**
+		 *更新boss伤害排行
+		 */
+		public static const UPDATE_BOSS_HURT_RANK : int = UNIQUEID.NEXT;
 
 		public function ActivityEvent()
 		{

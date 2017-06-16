@@ -16,8 +16,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_id:String;
 		 /**  功能名字 */
 		public var q_string_name:String;
-		 /**  按钮皮肤 */
-		public var q_button_skin:String;
+		 /**  按钮是否显示文字 */
+		public var q_show_buttonName:int;
 		 /**  主窗口id */
 		public var q_main_id:int;
 		 /**  排序 */

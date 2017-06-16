@@ -8,30 +8,35 @@ package com.rpgGame.netData.guild.message{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * 创建公会
+	 * 创建帮派
 	 */
 	public class ReqGuildCreateMessage extends Message {
 	
-		//公会名字
-		private var _guildName: String;
+		//帮派名字
+		private var _name: String;
 		
-		//帮旗名称
-		private var _guildFlagName: String;
+		//帮派宣言
+		private var _note: String;
 		
-		//帮旗造型ID
-		private var _guildFlagModelId: int;
+		//消耗类型1:元宝,2:绑定元宝
+		private var _costType: int;
+		
+		//本次操作标识
+		private var _opaque: int;
 		
 		
 		/**
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
-			//公会名字
-			writeString(_guildName);
-			//帮旗名称
-			writeString(_guildFlagName);
-			//帮旗造型ID
-			writeInt(_guildFlagModelId);
+			//帮派名字
+			writeString(_name);
+			//帮派宣言
+			writeString(_note);
+			//消耗类型1:元宝,2:绑定元宝
+			writeByte(_costType);
+			//本次操作标识
+			writeInt(_opaque);
 			return true;
 		}
 		
@@ -39,12 +44,14 @@ package com.rpgGame.netData.guild.message{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
-			//公会名字
-			_guildName = readString();
-			//帮旗名称
-			_guildFlagName = readString();
-			//帮旗造型ID
-			_guildFlagModelId = readInt();
+			//帮派名字
+			_name = readString();
+			//帮派宣言
+			_note = readString();
+			//消耗类型1:元宝,2:绑定元宝
+			_costType = readByte();
+			//本次操作标识
+			_opaque = readInt();
 			return true;
 		}
 		
@@ -57,48 +64,63 @@ package com.rpgGame.netData.guild.message{
 		}
 		
 		/**
-		 * get 公会名字
+		 * get 帮派名字
 		 * @return 
 		 */
-		public function get guildName(): String{
-			return _guildName;
+		public function get name(): String{
+			return _name;
 		}
 		
 		/**
-		 * set 公会名字
+		 * set 帮派名字
 		 */
-		public function set guildName(value: String): void{
-			this._guildName = value;
+		public function set name(value: String): void{
+			this._name = value;
 		}
 		
 		/**
-		 * get 帮旗名称
+		 * get 帮派宣言
 		 * @return 
 		 */
-		public function get guildFlagName(): String{
-			return _guildFlagName;
+		public function get note(): String{
+			return _note;
 		}
 		
 		/**
-		 * set 帮旗名称
+		 * set 帮派宣言
 		 */
-		public function set guildFlagName(value: String): void{
-			this._guildFlagName = value;
+		public function set note(value: String): void{
+			this._note = value;
 		}
 		
 		/**
-		 * get 帮旗造型ID
+		 * get 消耗类型1:元宝,2:绑定元宝
 		 * @return 
 		 */
-		public function get guildFlagModelId(): int{
-			return _guildFlagModelId;
+		public function get costType(): int{
+			return _costType;
 		}
 		
 		/**
-		 * set 帮旗造型ID
+		 * set 消耗类型1:元宝,2:绑定元宝
 		 */
-		public function set guildFlagModelId(value: int): void{
-			this._guildFlagModelId = value;
+		public function set costType(value: int): void{
+			this._costType = value;
+		}
+		
+		/**
+		 * get 本次操作标识
+		 * @return 
+		 */
+		public function get opaque(): int{
+			return _opaque;
+		}
+		
+		/**
+		 * set 本次操作标识
+		 */
+		public function set opaque(value: int): void{
+			this._opaque = value;
 		}
 		
 	}

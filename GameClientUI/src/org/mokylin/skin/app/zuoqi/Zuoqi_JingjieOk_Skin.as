@@ -7,8 +7,8 @@ package org.mokylin.skin.app.zuoqi
 	import feathers.controls.UINumber;
 	import org.mokylin.skin.app.zuoqi.button.ButtonLingqu;
 	import org.mokylin.skin.app.zuoqi.mc.UIMovieClipZuoqiName;
-	import org.mokylin.skin.app.zuoqi.uinumber.UINumberZhanli;
 	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_lv;
+	import org.mokylin.skin.component.uinumber.UINumberZhanli_min;
 
 	/**
 	 * @private
@@ -32,11 +32,11 @@ package org.mokylin.skin.app.zuoqi
 
 		public var num_lv:feathers.controls.UINumber;
 
-		public var num_zhandouli:feathers.controls.UINumber;
-
 		public var uiGuangquan:feathers.controls.UIAsset;
 
 		public var ui_zhandouli:feathers.controls.UIAsset;
+
+		public var userData:feathers.controls.UINumber;
 
 
 		//==========================================================================
@@ -49,7 +49,7 @@ package org.mokylin.skin.app.zuoqi
 			this.currentState = "normal";
 			this.height = 434;
 			this.width = 868;
-			this.elementsContent = [uiGuangquan_i(),bg_i(),mc_name_i(),btnOk_i(),ui_zhandouli_i(),num_zhandouli_i(),num_lv_i()];
+			this.elementsContent = [uiGuangquan_i(),bg_i(),mc_name_i(),btnOk_i(),ui_zhandouli_i(),userData_i(),num_lv_i()];
 			
 			states = {
 			};
@@ -65,7 +65,7 @@ package org.mokylin.skin.app.zuoqi
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg = temp;
 			temp.name = "bg";
-			temp.styleName = "ui/app/zuoqi/bg3.png";
+			temp.styleName = "ui/big_bg/zuoqi/bg3.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -87,6 +87,7 @@ package org.mokylin.skin.app.zuoqi
 			var temp:feathers.controls.UIMovieClip = new feathers.controls.UIMovieClip();
 			mc_name = temp;
 			temp.name = "mc_name";
+			temp.autoPlay = false;
 			temp.height = 196;
 			temp.styleClass = org.mokylin.skin.app.zuoqi.mc.UIMovieClipZuoqiName;
 			temp.width = 83;
@@ -110,21 +111,6 @@ package org.mokylin.skin.app.zuoqi
 			return temp;
 		}
 
-		private function num_zhandouli_i():feathers.controls.UINumber
-		{
-			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
-			num_zhandouli = temp;
-			temp.name = "num_zhandouli";
-			temp.gap = -4;
-			temp.height = 38;
-			temp.label = "31415";
-			temp.styleClass = org.mokylin.skin.app.zuoqi.uinumber.UINumberZhanli;
-			temp.width = 116;
-			temp.x = 596;
-			temp.y = 170;
-			return temp;
-		}
-
 		private function uiGuangquan_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -143,6 +129,21 @@ package org.mokylin.skin.app.zuoqi
 			temp.name = "ui_zhandouli";
 			temp.styleName = "ui/app/zuoqi/zhandouli.png";
 			temp.x = 504;
+			temp.y = 170;
+			return temp;
+		}
+
+		private function userData_i():feathers.controls.UINumber
+		{
+			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
+			userData = temp;
+			temp.name = "userData";
+			temp.gap = -4;
+			temp.height = 38;
+			temp.label = "31415";
+			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberZhanli_min;
+			temp.width = 116;
+			temp.x = 596;
 			temp.y = 170;
 			return temp;
 		}

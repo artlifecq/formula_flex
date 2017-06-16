@@ -72,12 +72,18 @@ package com.rpgGame.coreData.type
 		public static const FIGHTSOUL : int = rEnum.next;
 		public static const FIGHTSOUL_EFFECT:int = rEnum.next;
 		
+		/**战旗*/
+		public static const ZHANQI_EFFECT:int = rEnum.next;
+		
 		/**军阶**/
 		public static const JUNJIE : int = rEnum.next;
 		
 		/**问号**/
 		public static const TASKMARK : int = rEnum.next;
-
+		/**流血**/
+		public static const BLEED : int = rEnum.next;
+		/**流血数字**/
+		public static const BLEED_TEXT : int = rEnum.next;
 //	/**角色光环特效ID*/
 //		public static const MAGIC_RING:int = rEnum.next;
 //		/**怪物光环*/

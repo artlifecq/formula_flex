@@ -79,6 +79,10 @@ package com.rpgGame.appModule.fightsoul
 				return -1;
 			else if(q1.isOver&&!q2.isOver)
 				return 1;
+			else if(q1.isOpen()&&!q2.isOpen())
+				return -1;
+			else if(!q1.isOver&&q2.isOver)
+				return 1;
 			else 
 				return 0;
 		}
@@ -172,7 +176,7 @@ package com.rpgGame.appModule.fightsoul
 				_skin.modecontent.addChild(content);
 				_fightsoul = new FightSoulModePane();
 				_fightsoul.x = 340;
-				_fightsoul.y = 400;
+//				_fightsoul.y = 800;
 				content.addChild3D(_fightsoul);
 			}
 			
@@ -198,7 +202,7 @@ package com.rpgGame.appModule.fightsoul
 			
 			if(_skillIcon==null)
 			{
-				_skillIcon = new IconCDFace(IcoSizeEnum.ICON_48);
+				_skillIcon = IconCDFace.create(IcoSizeEnum.ICON_48);
 				_skillIcon.width = _skillIcon.height = IcoSizeEnum.ICON_48;
 				_skillIcon.setBg(GridBGType.GRID_SIZE_48);
 				_skillIcon.x = 554;
@@ -214,7 +218,7 @@ package com.rpgGame.appModule.fightsoul
 				 _itemIconLists = new Vector.<TouchToState>();
 				 for(var i:int = 0;i<length;i++)
 				 {
-					 icon= new IconCDFace(IcoSizeEnum.ICON_48);
+					 icon= IconCDFace.create(IcoSizeEnum.ICON_48);
 					 icon.width = icon.height = IcoSizeEnum.ICON_48;
 					 icon.setBg(GridBGType.GRID_SIZE_48);
 					 icon.x = 669+61*i;

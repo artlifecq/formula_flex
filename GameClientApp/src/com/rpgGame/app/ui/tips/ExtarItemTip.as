@@ -2,16 +2,18 @@ package com.rpgGame.app.ui.tips
 {
 	import com.rpgGame.app.manager.mount.HorseExtraItemInfo;
 	import com.rpgGame.app.manager.mount.MountShowData;
+	import com.rpgGame.app.manager.mount.ZhanQiExtraItemInfo;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
+	import com.rpgGame.coreData.cfg.HorseConfigData;
+	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.clientConfig.Q_att_values;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.GridInfo;
-	import com.rpgGame.coreData.type.CharAttributeType;
 	
 	import org.mokylin.skin.app.tips.Tips_DaoJu2;
 	
@@ -42,8 +44,8 @@ package com.rpgGame.app.ui.tips
 			_iconFace.x=28;
 			_iconFace.y=19;		
 		}
-		private var _item:HorseExtraItemInfo;
-		private var _show:MountShowData;
+		private var _item:*;//HorseExtraItemInfo;
+		private var _show:*;//MountShowData;
 		public function setTipData(data:*):void
 		{
 			_show = data[0];
@@ -51,10 +53,23 @@ package com.rpgGame.app.ui.tips
 			_item=_show.getOpenLevelBytype(type);
 			FaceUtil.SetItemGrid(_iconFace, _item.clientItemInfo);
 			_skin.lbName.text = _item.clientItemInfo.qItem.q_name;
-			var maxUseCount:int = _item.getMaxByLevel(_show.mountLevel);
+			if(_show is MountShowData)
+				var maxUseCount:int = (_item as HorseExtraItemInfo).getMaxByLevel(_show.mountLevel);
+			else maxUseCount = (_item as ZhanQiExtraItemInfo).getMaxByLevel(_show.zhanqiLevel);
 			var useCount:int = _show.getUseExtralItem(type);
 			_skin.lbCurrentNum.text = useCount.toString()+"/"+maxUseCount.toString()+"个";
-			_skin.lbNextName.text = (_item.getMaxByLevel(_show.mountLevel+1)-maxUseCount).toString()+"个";
+			if(_show is MountShowData){
+				if(_show.mountLevel < HorseConfigData.maxCount)
+					_skin.lbNextName.text = ((_item as HorseExtraItemInfo).getMaxByLevel(_show.mountLevel+1)-maxUseCount).toString()+"个";
+				else
+					_skin.lbNextName.text = "已满阶";
+			}
+			else {
+				if(_show.zhanqiLevel < ZhanQiConfigData._maxLevel)
+					_skin.lbNextName.text = ((_item as ZhanQiExtraItemInfo).getMaxByLevel(_show.zhanqiLevel+1)-maxUseCount).toString()+"个";
+				else
+					_skin.lbNextName.text = "已满阶";
+			}
 			_skin.lbShuxing.width = 240;
 			_skin.lbShuxing.wordWrap = true;
 			refeashAddPropView();
@@ -64,7 +79,7 @@ package com.rpgGame.app.ui.tips
 		
 		private function refeahAddPercentView():void
 		{
-			if(_item.clientItemInfo.cfgId!=404)
+			if(_item.clientItemInfo.cfgId!=404&&_item.clientItemInfo.cfgId!=407)
 				return ;
 			_skin.lbShuxing.htmlText = _item.clientItemInfo.qItem.q_describe;
 			_skin.grp_type.visible = false;
@@ -74,9 +89,12 @@ package com.rpgGame.app.ui.tips
 		
 		private function refeashAddPropView():void
 		{
-			if(_item.clientItemInfo.cfgId!=403)
+			if(_item.clientItemInfo.cfgId!=403&&_item.clientItemInfo.cfgId!=406)
 				return ;
-			_skin.lbShuxing.text = "每颗资质丹永久增加战骑属性：";
+			if(_item is HorseExtraItemInfo)
+				_skin.lbShuxing.text = "每颗资质丹永久增加战骑属性：";
+			else if(_item is ZhanQiExtraItemInfo)
+				_skin.lbShuxing.text = "每颗资质丹永久增加战旗属性：";
 			_skin.grp_type.visible = true; 
 			var currentatt:Q_att_values = AttValueConfig.getAttInfoById(_show.exartPropId);
 			_skin.lbGongJi.text = "+"+currentatt.q_value1;

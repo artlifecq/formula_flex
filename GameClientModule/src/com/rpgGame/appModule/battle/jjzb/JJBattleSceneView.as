@@ -1,21 +1,20 @@
 package com.rpgGame.appModule.battle.jjzb
 {
 
-	import com.rpgGame.app.fight.spell.ui.ReleaseSpellUIHelper;
-	import com.rpgGame.app.fight.spell.ui.ReleaseSpellUIInfo;
+	import com.game.engine3D.display.Inter3DContainer;
+	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.rpgGame.app.manager.ctrl.ControlAutoFightSelectSkill;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.app.state.role.action.RunStateReference;
 	import com.rpgGame.appModule.battle.jjzb.ai.RobotAI;
 	import com.rpgGame.appModule.common.RoleModelShow;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.utils.MCUtil;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.type.AssetUrl;
-	import com.rpgGame.coreData.type.RoleStateType;
-	import com.rpgGame.netData.player.bean.PlayerAppearanceInfo;
+	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.netData.zhengba.bean.ZhengBaBriefInfo;
 	import com.rpgGame.netData.zhengba.message.SCChallengeResultMessage;
 	
@@ -23,14 +22,13 @@ package com.rpgGame.appModule.battle.jjzb
 	
 	import away3d.events.Event;
 	
-	import cmodule.PreLoader._sprintf;
-	
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.UIAsset;
 	
 	import org.mokylin.skin.app.zhanchang.Head_Role_Left;
 	import org.mokylin.skin.app.zhanchang.Head__Role_Right;
 	import org.mokylin.skin.app.zhanchang.ZhangCheng_Scene;
+	import com.game.engine3D.display.InterObject3D;
 
 	public class JJBattleSceneView implements ISubBattleView
 	{
@@ -44,6 +42,7 @@ package com.rpgGame.appModule.battle.jjzb
 		private var _leftHeadIcon:UIAsset;
 		private var _rightHeadIcon:UIAsset;
 		private var _ai:RobotAI;
+		private var eff:Inter3DContainer
 		public function JJBattleSceneView(view:SkinnableContainer)
 		{
 			this._scene=view;
@@ -54,8 +53,14 @@ package com.rpgGame.appModule.battle.jjzb
 		}
 		private function onFightOver():void
 		{
+			stopEffect();
 			_skin.btnOver.visible=false;
-			AppManager.showAppNoHide(AppConstant.BATTLE_RESULT_PANEL,[_data.victoryInfo.playerId.EqualTo(MainRoleManager.actorInfo.serverID),_data.rank,_data.awardItemInfos,this]);
+			if (AppManager.isAppInScene(AppConstant.BATTLE_RESULT_PANEL)) 
+			{
+				return;
+			}
+			AppManager.showAppNoHide(AppConstant.BATTLE_RESULT_PANEL,[_data.victoryInfo.playerId.EqualTo(MainRoleManager.actorInfo.serverID),_data.rank,_data.awardItemInfos,this],""
+			,StarlingLayerManager.topUILayer);
 		}
 		private function onOver(eve:Event):void
 		{
@@ -82,6 +87,28 @@ package com.rpgGame.appModule.battle.jjzb
 			}
 			clearData();
 		}
+		private function addEft(render:RenderUnit3D):void
+		{
+			render.play(0);
+		}
+		public function playSuccessEff():void
+		{
+			if (eff==null) 
+			{
+				eff=new Inter3DContainer();
+				this._scene.addChild(eff);
+				 eff.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JJZB),-150,-160,0,null,addEft);
+			}
+			
+		}
+		private function stopEffect():void
+		{
+			if (eff) 
+			{
+				eff.dispose();
+				eff=null;
+			}
+		}
 		private function clearData():void
 		{
 			_ai.clear();
@@ -99,6 +126,7 @@ package com.rpgGame.appModule.battle.jjzb
 			}
 			_data=null;
 			_skill=null;
+			stopEffect();
 			
 		}
 		public function setData(data:*):void
@@ -107,7 +135,7 @@ package com.rpgGame.appModule.battle.jjzb
 			_skin.btnOver.visible=true;
 			_data=data as SCChallengeResultMessage;
 			//给个随机吧
-			var winerIsLeft:Boolean=Math.random()<0.5;
+			var winerIsLeft:Boolean=_data.victoryId.EqualTo(MainRoleManager.actorInfo.serverID);
 			var leftData:ZhengBaBriefInfo=_data.failureInfo;
 			var rightData:ZhengBaBriefInfo=_data.victoryInfo;
 			if (winerIsLeft) 
@@ -141,7 +169,7 @@ package com.rpgGame.appModule.battle.jjzb
 			{
 				setTimeout(_ai.setLeftPlayer,0.5,_rightRoleShow,_leftRoleShow,_data.playerHp_2, _data.plaeyrHp_1, _data.roundNumber,winerIsLeft);
 			}
-			
+			playSuccessEff();
 		}
 		private function setLeftHeadData(brief:ZhengBaBriefInfo,skin:Head_Role_Left):void
 		{
@@ -150,24 +178,30 @@ package com.rpgGame.appModule.battle.jjzb
 			if (_leftHeadIcon==null) 
 			{
 				_leftHeadIcon=new UIAsset();
-				_leftHeadIcon.x=21;
-				_leftHeadIcon.y=-4;
+				_leftHeadIcon.x=19;
+				_leftHeadIcon.y=-17;
 				skin.container.addChild(_leftHeadIcon);
 			}
-			switch(brief.playerAppearanceInfo.job){
+			_leftHeadIcon.styleName=getHeadUrl(brief.playerAppearanceInfo.job);
+		}
+		private function getHeadUrl(job:int):String
+		{
+			switch(job)
+			{
 				case JobEnum.ROLE_1_TYPE:
-					_leftHeadIcon.styleName=AssetUrl.HEAD_ICON_1;
+					return AssetUrl.HEAD_ICON_1;
 					break;
 				case JobEnum.ROLE_2_TYPE:
-					_leftHeadIcon.styleName=AssetUrl.HEAD_ICON_2;
+					return AssetUrl.HEAD_ICON_2;
 					break;
 				case JobEnum.ROLE_3_TYPE:
-					_leftHeadIcon.styleName=AssetUrl.HEAD_ICON_3;
+					return AssetUrl.HEAD_ICON_3;
 					break;
 				case JobEnum.ROLE_4_TYPE:
-					_leftHeadIcon.styleName=AssetUrl.HEAD_ICON_4;
+					return AssetUrl.HEAD_ICON_4;
 					break;
 			}
+			return "";
 		}
 		private function setRightHeadData(brief:ZhengBaBriefInfo,skin:Head__Role_Right):void
 		{
@@ -176,26 +210,12 @@ package com.rpgGame.appModule.battle.jjzb
 			if (_rightHeadIcon==null) 
 			{
 				_rightHeadIcon=new UIAsset();
-				_rightHeadIcon.x=290;
-				_rightHeadIcon.y=-4;
+				_rightHeadIcon.x=324;
+				_rightHeadIcon.y=-17;
 				
 				skin.container.addChild(_rightHeadIcon);
 			}
-			switch(brief.playerAppearanceInfo.job)
-			{
-				case JobEnum.ROLE_1_TYPE:
-					_rightHeadIcon.styleName=AssetUrl.HEAD_ICON_1;
-					break;
-				case JobEnum.ROLE_2_TYPE:
-					_rightHeadIcon.styleName=AssetUrl.HEAD_ICON_2;
-					break;
-				case JobEnum.ROLE_3_TYPE:
-					_rightHeadIcon.styleName=AssetUrl.HEAD_ICON_3;
-					break;
-				case JobEnum.ROLE_4_TYPE:
-					_rightHeadIcon.styleName=AssetUrl.HEAD_ICON_4;
-					break;
-			}
+			_rightHeadIcon.styleName=getHeadUrl(brief.playerAppearanceInfo.job);
 			_rightHeadIcon.scaleX=-1;
 		}
 	}

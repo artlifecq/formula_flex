@@ -99,6 +99,7 @@ package com.game.engine3D.loader
 				_loader.addEventListener(LoaderEvent.RESOURCE_COMPLETE, onResourceComplete);
 				_loader.addEventListener(AssetEvent.ASSET_COMPLETE, onAssetComplete);
 				_loader.addEventListener(LoaderEvent.ASYNC_TEXTURES_COMPLETE, onAsyncTexturesComplete);
+//				_loader.addEventListener(LoaderEvent.ASYNC_RESOURCE_PROGRESS, onAsyncResourceProgress);
 				_loader.addEventListener(LoaderEvent.LOAD_ERROR, onLoadError);
 				_loader.addEventListener(ParserEvent.PARSE_ERROR, onParseError);
 				_loader.load(new URLRequest(_url), null, null, new AWD2Parser(), _priority);
@@ -206,6 +207,11 @@ package com.game.engine3D.loader
 				TweenLite.delayedCall(dabugDelayComplete * 0.001, completeHandler, [e]);
 		}
 		
+		private function onAsyncResourceProgress(e : LoaderEvent) : void
+		{
+			this.dispatchEvent(e);
+		}
+		
 		private function onAsyncTexturesComplete(e : Event) : void
 		{
 			_isAsyncLoaded = true;
@@ -252,6 +258,7 @@ package com.game.engine3D.loader
 				_loader.removeEventListener(LoaderEvent.RESOURCE_COMPLETE, onResourceComplete);
 				_loader.removeEventListener(AssetEvent.ASSET_COMPLETE, onAssetComplete);
 				_loader.removeEventListener(LoaderEvent.ASYNC_TEXTURES_COMPLETE, onAsyncTexturesComplete);
+//				_loader.removeEventListener(LoaderEvent.ASYNC_RESOURCE_PROGRESS, onAsyncResourceProgress);
 				_loader.removeEventListener(LoaderEvent.LOAD_ERROR, onLoadError);
 				_loader.removeEventListener(ParserEvent.PARSE_ERROR, onParseError);
 			}

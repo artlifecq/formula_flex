@@ -22,6 +22,7 @@ package org.mokylin.skin.component.tabbar
 			super();
 			
 			this.currentState = "upAndSelected";
+			this.width = 75;
 			this.elementsContent = [];
 			
 			states = {
@@ -64,7 +65,7 @@ package org.mokylin.skin.component.tabbar
 			skinNames={"down":"ui/component/tabbar/skin_pack/down.png",
 			"downAndSelected":"ui/component/tabbar/skin_pack/select.png",
 			"hover":"ui/component/tabbar/skin_pack/over.png",
-			"overAndSelected":"ui/component/tabbar/skin_pack/select.png",
+			"hoverAndSelected":"ui/component/tabbar/skin_pack/select.png",
 			"up":"ui/component/tabbar/skin_pack/up.png",
 			"upAndSelected":"ui/component/tabbar/skin_pack/select.png"};
 		}
@@ -78,7 +79,7 @@ package org.mokylin.skin.component.tabbar
 			temp.height = 28;
 			temp.left = 0;
 			temp.right = 0;
-			temp.text = "按钮";
+			temp.text = "活动大厅";
 			temp.textAlign = "center";
 			temp.color = 0xaea790;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
