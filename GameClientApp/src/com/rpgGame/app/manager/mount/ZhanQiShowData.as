@@ -7,7 +7,7 @@ package com.rpgGame.app.manager.mount
 	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_att_values;
-	import com.rpgGame.coreData.clientConfig.Q_warFlag;
+	import com.rpgGame.coreData.clientConfig.Q_warflag;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
@@ -141,14 +141,14 @@ package com.rpgGame.app.manager.mount
 			}
 			_disProp = new Vector.<Number>(30,0);
 			//差距
-			var nextwarflag:Q_warFlag = ZhanQiConfigData.getZhanQiDataById(zhanqiLevel+1);
+			var nextwarflag:Q_warflag = ZhanQiConfigData.getZhanQiDataById(zhanqiLevel+1);
 			if(nextwarflag!=null)
 			{
 				var nextq_atts:Array = nextwarflag.q_attid.split(",");
 				if(zhanqiJob == JobEnum.ROLE_1_TYPE)
 				{
 					adds = int(nextq_atts[0]);
-				}else if(zhanqiJob == JobEnum.ROLE_4_TYPE){
+				}else if(zhanqiJob == JobEnum.ROLE_4_TYPE){	
 					adds = int(nextq_atts[2]);
 				}else{
 					adds = int(nextq_atts[1]);
@@ -280,7 +280,7 @@ package com.rpgGame.app.manager.mount
 				return this.exp/zhanqidata.q_blessnum_limit;
 		}
 		
-		public function get zhanqidata():Q_warFlag
+		public function get zhanqidata():Q_warflag
 		{
 			return ZhanQiConfigData.getZhanQiDataById(zhanqiLevel);
 		}

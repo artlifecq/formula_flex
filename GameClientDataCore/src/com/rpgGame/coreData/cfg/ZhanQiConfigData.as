@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.cfg
 {
-	import com.rpgGame.coreData.clientConfig.Q_warFlag;
+	import com.rpgGame.coreData.clientConfig.Q_warflag;
 	
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
@@ -27,7 +27,7 @@ package com.rpgGame.coreData.cfg
 				return;
 			_datas = new Dictionary();
 			var arr : Array = data.readObject();
-			for each(var info :Q_warFlag in arr) {
+			for each(var info :Q_warflag in arr) {
 				_datas[info.q_id] = info;
 				if(_maxLevel<info.q_id)
 					_maxLevel=	info.q_id;
@@ -35,7 +35,7 @@ package com.rpgGame.coreData.cfg
 			_maxCount = arr.length;
 		}
 		
-		public static function getZhanQiDataById( id:int ):Q_warFlag
+		public static function getZhanQiDataById( id:int ):Q_warflag
 		{
 			return _datas[id];
 		}

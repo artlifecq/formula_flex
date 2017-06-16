@@ -39,6 +39,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.clientConfig.Q_fightsoul_mode;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.clientConfig.Q_warFlag;
+	import com.rpgGame.coreData.clientConfig.Q_warflag;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.info.stall.StallData;
@@ -657,7 +658,7 @@ package com.rpgGame.app.manager.role
 			if(owner.avatar.hasTypeRenderUnits(RenderUnitType.ZHANQI_EFF))
 				owner.avatar.removeRenderUnitByID(RenderUnitType.ZHANQI_EFF,0);
 			var zhanqilv:int=(owner.data as HeroData).zhanqiLv;			
-			var q_warflag:Q_warFlag=ZhanQiConfigData.getZhanQiDataById(zhanqilv);
+			var q_warflag:Q_warflag=ZhanQiConfigData.getZhanQiDataById(zhanqilv);
 			var rud : RenderParamData3D = new RenderParamData3D(0, RenderUnitType.ZHANQI_EFF, ClientConfig.getEffect(q_warflag.q_panel_show_id));
 			var effectRu : RenderUnit3D=owner.avatar.addRenderUnitToChild(RenderUnitType.BODY,RenderUnitID.BODY,BoneNameEnum.c_0_body_01,rud);
 			effectRu.setScale(1.5);
