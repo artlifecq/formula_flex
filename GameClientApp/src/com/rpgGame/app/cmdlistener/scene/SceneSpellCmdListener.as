@@ -201,10 +201,22 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			var skillId:int=msg.state.skillId&0xffffff;
 			var skillData:Q_skill_model=SpellDataManager.getSpellData(skillId);
-			if(skillData!=null&&skillData.q_performType==0&&msg.state.attackerId.ToGID() == MainRoleManager.actorID)//判断是否是自己的技能但不是战魂的技能  ---yt
+			if(skillData!=null&&skillData.q_performType==0)//判断不是战魂的技能  ---yt
 			{
-				EventManager.dispatchEvent(SkillEvent.SKILL_RESULT,skillData.q_skillID);
+				if(msg.state.attackerId.ToGID() == MainRoleManager.actorID)//自己攻击别人
+				{
+					EventManager.dispatchEvent(SkillEvent.SKILL_RESULT,skillData.q_skillID);
+					TrusteeshipManager.getInstance().startFightSoulFight(msg.state.targetId,1);//战魂帮忙打
+				}
+				else if(msg.state.targetId.ToGID() == MainRoleManager.actorID)//别人攻击自己
+				{
+					EventManager.dispatchEvent(SkillEvent.SKILL_RESULT,skillData.q_skillID);
+					TrusteeshipManager.getInstance().startFightSoulFight(msg.state.attackerId,2);//战魂还击
+				}
 			}
+			
+			
+			
 		
 		}
 		
