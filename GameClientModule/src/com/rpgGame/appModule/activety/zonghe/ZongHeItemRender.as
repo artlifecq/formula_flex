@@ -1,4 +1,4 @@
-package com.rpgGame.appModule.activety
+package com.rpgGame.appModule.activety.zonghe
 {
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	
@@ -15,11 +15,11 @@ package com.rpgGame.appModule.activety
 	 * @author dik
 	 * 
 	 */
-	public class ActivetyItemRender extends DefaultListItemRenderer
+	public class ZongHeItemRender extends DefaultListItemRenderer
 	{
 		private var _skin:Active_Item;
 		
-		public function ActivetyItemRender()
+		public function ZongHeItemRender()
 		{
 			super();
 		}
@@ -62,9 +62,9 @@ package com.rpgGame.appModule.activety
 				if(!info||info.info==null){
 					return;
 				}
-				_skin.uiName.styleName="ui/app/activety/zonghe/active_name/"+info.cfg.q_activity_id+".png";
-				_skin.uiBg.styleName="ui/big_bg/activety/item/"+info.cfg.q_activity_id+".png";
-				_skin.lbMsg.htmlText=info.cfg.q_desc;
+				_skin.uiName.styleName="ui/app/activety/zonghe/active_name/"+info.actCfg.q_res_id+".png";
+				_skin.uiBg.styleName="ui/big_bg/activety/item/"+info.actCfg.q_res_id+".png";
+				_skin.lbMsg.htmlText=info.actCfg.q_desc;
 				if(info.info.joinState==0){
 					_skin.uiJinxing.visible=false;
 					GrayFilter.gray(this);

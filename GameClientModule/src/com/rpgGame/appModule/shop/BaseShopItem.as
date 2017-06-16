@@ -31,7 +31,7 @@ package com.rpgGame.appModule.shop
 			
 			_skin=s;
 			super(s);
-			_grid=new IconCDFace(IcoSizeEnum.ICON_64);
+			_grid=IconCDFace.create(IcoSizeEnum.ICON_64);
 			_grid.x=0;
 			_grid.y=0;
 			this._skin.icons.addChild(_grid);

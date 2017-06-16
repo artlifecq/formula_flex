@@ -33,6 +33,20 @@ package com.rpgGame.app.utils
 			var passTime : int = time - TimeUtil.getTodayZeroTime();
 			return (passTime > 0 && passTime < TimeUtil.DAY_MICRO_SECONDS);
 		}
+		
+		
+		/**
+		 *将整型时间2300转换未23:00格式类型 
+		 * @param time
+		 * @return 
+		 * 
+		 */
+		public static function changeIntHM2Str(time:int):String
+		{
+			var timeStr:String=time.toString();
+			var result:String=timeStr.slice(0,2)+":"+timeStr.slice(2);
+			return result;
+		}
 
 		/***
 		 * 把毫秒转换为指定格式的字符串

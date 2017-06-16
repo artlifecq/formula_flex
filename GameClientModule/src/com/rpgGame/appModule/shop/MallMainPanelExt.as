@@ -4,24 +4,22 @@ package com.rpgGame.appModule.shop
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
-	import com.rpgGame.appModule.common.GlobalFunction;
 	import com.rpgGame.appModule.common.PageSelectUICtrl;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.ShopEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
-	import com.rpgGame.core.manager.tips.TipManager;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.enum.EnumShopType;
 	import com.rpgGame.coreData.info.shop.ShopItemVo;
 	import com.rpgGame.coreData.info.shop.ShopVo;
 	import com.rpgGame.coreData.type.CharAttributeType;
-	import com.rpgGame.coreData.type.TipType;
+	
+	import away3d.events.Event;
 	
 	import feathers.data.ListCollection;
 	
 	import gs.TweenMax;
-	import gs.easing.Bounce;
 	import gs.easing.Quad;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -29,7 +27,6 @@ package com.rpgGame.appModule.shop
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
-	import away3d.events.Event;
 	
 	public class MallMainPanelExt extends SkinUIPanel
 	{

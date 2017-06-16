@@ -14,6 +14,10 @@ package com.rpgGame.coreData.clientConfig
 	{
 		 /**  职位编号 */
 		public var q_id:int;
+		 /**  职位备注 */
+		public var q_name:String;
+		 /**  召集成员 */
+		public var q_convene:int;
 		 /**  招募成员 */
 		public var q_recrui:int;
 		 /**  同意加入 */
@@ -38,6 +42,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_normal:int;
 		 /**  任命统帅 */
 		public var q_leader:int;
+		 /**  邀请权限 */
+		public var q_invite:int;
 
 	}
 }

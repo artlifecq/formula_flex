@@ -80,12 +80,6 @@ package com.rpgGame.app.ui.tips
 		private function initTip():void
 		{
 			//装备格子
-			_iconFace=new IconCDFace(IcoSizeEnum.ICON_64);
-			_iconFace.alwayShowCount=false;
-			addChild(_iconFace);
-			_iconFace.x=5;
-			_iconFace.y=35;
-			_itemTip.container.addChild(_iconFace);
 			labelList=new Vector.<Label>();
 			lines=new Vector.<UIAsset>();
 			yinIcon=new UIAsset();
@@ -104,6 +98,12 @@ package com.rpgGame.app.ui.tips
 		
 		public function setTipData(data:*):void
 		{
+			_iconFace=IconCDFace.create(IcoSizeEnum.ICON_64);
+			_iconFace.alwayShowCount=false;
+			addChild(_iconFace);
+			_iconFace.x=5;
+			_iconFace.y=35;
+			_itemTip.container.addChild(_iconFace);
 			_itemInfo = data as EquipInfo;
 			FaceUtil.SetItemGrid(_iconFace, _itemInfo, false);
 			var info:HeroData=MainRoleManager.actorInfo;
@@ -414,7 +414,7 @@ package com.rpgGame.app.ui.tips
 		 */		
 		public function hideTips():void
 		{
-		
+			_iconFace.destroy();
 		}
 
 		/**

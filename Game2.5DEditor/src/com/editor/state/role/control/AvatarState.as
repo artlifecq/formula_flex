@@ -19,7 +19,7 @@ package com.editor.state.role.control
 
 		override public function afterExecute() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				(_machine as RoleStateMachine).updateAvatar();
 				super.afterExecute();

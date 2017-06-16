@@ -12,9 +12,9 @@ package com.rpgGame.coreData.clientConfig
 	*/
 	public class FunctionBarInfo
 	{
-		 /**  功能ID */
+		 /**  窗口ID */
 		public var id:int;
-		 /**  按钮区域(0:功能区域,1:活动区域) */
+		 /**  按钮区域(0:功能区域,1:活动区域,9:其他区域) */
 		public var type:int;
 		 /**  功能行 */
 		public var row:int;
@@ -30,9 +30,9 @@ package com.rpgGame.coreData.clientConfig
 		public var showEft:int;
 		 /**  特效名称 */
 		public var effect_name:String;
-		 /**  副本是否显示(1:场景类型,0:全部展示) */
+		 /**  是否一直显示(1:场景类型,0:全部展示) */
 		public var mapType:String;
-		 /**  事件类型(1:窗口) */
+		 /**  事件类型(1:窗口,2:菜单) */
 		public var clickType:int;
 		 /**  窗口参数 */
 		public var clickarg:String;

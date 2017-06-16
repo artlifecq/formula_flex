@@ -493,10 +493,10 @@ package com.rpgGame.app.view.icon
 			
 			if( _selectImage != null )
 				_selectImage.removeFromParent();
-			
-			if(_bgImage){
+			//不用清理背景
+			/*if(_bgImage){
 				_bgImage.removeFromParent();
-			}
+			}*/
 			clearLockAsset();
 			hideQuality();
 			

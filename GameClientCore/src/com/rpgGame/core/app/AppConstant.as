@@ -139,6 +139,12 @@ package com.rpgGame.core.app
 		 *活动面板
 		 */
 		public static var ACTIVETY_PANL:String = createAppInfo( "activety.ActivetyPanel","activety");
+		/** 活动BOSS **/
+		public static var ACTIVETY_BOSS_HURTRANK:String = createAppInfo("activety.boss.BossHurtRankPanel","activety");
+		/**
+		 *活动boss结果 
+		 */
+		public static var ACTIVETY_BOSS_RESULT:String = createAppInfo("activety.boss.BossFightSuccessPanel","activety");
 		/** 活动开启 **/
 		public static var ACTIVETY_OPEN:String = createAppInfo("activety.ActOpenPanel");
 		/**
