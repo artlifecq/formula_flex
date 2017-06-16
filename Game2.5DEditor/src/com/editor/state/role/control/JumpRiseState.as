@@ -39,7 +39,7 @@ package com.editor.state.role.control
 
 		private function doJump() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {offsetY: true});
 				var jumpHeight : int = _stateReference.jumpHeight;
@@ -50,7 +50,7 @@ package com.editor.state.role.control
 
 		private function onJumpOffComplete() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				var totalTime : int = _stateReference.totalTime;
 				TweenLite.to(_machine.owner as SceneRole, totalTime * 0.5 * 0.001, {offsetY: 0, ease: Cubic.easeIn, overwrite: 0, onComplete: onJumpFallComplete});
@@ -59,7 +59,7 @@ package com.editor.state.role.control
 
 		private function onJumpFallComplete() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				removeSelf();
 				if ((_machine as RoleStateMachine).isWalkMoving)
@@ -77,7 +77,7 @@ package com.editor.state.role.control
 
 		private function stopJump() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				(_machine.owner as SceneRole).offsetY = 0;
 				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {offsetY: true});

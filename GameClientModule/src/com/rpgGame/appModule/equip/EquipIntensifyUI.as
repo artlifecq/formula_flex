@@ -143,7 +143,7 @@ package com.rpgGame.appModule.equip
 			_goodsContainerUse=new GoodsContainerPanel(_leftSkin.list2,ItemContainerID.INTENSIFY_USE,createItemRender);
 			_goodsContainerUse1=new GoodsContainerPanel(_skin.use_list,ItemContainerID.INTENSIFY_USE1,createItemRender1);
 			
-			_targetEquip=new DragDropItem(64,0);
+			_targetEquip=new DragDropItem(IcoSizeEnum.ICON_64,0);
 			_targetEquip.setBg(GridBGType.GRID_SIZE_64);
 //			_intensifyItem.setQualityImageIconPoint(8,8);
 			_targetEquip.x=610;

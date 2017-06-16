@@ -151,7 +151,7 @@ package com.rpgGame.app.ui.main.taskbar
 			
 			if(TaskMissionManager.mainTaskData!=null)
 			{
-				finishToNpc(TaskMissionManager.getMainTaskNpcModeId());
+				finishToNpc(TaskMissionManager.getMainTaskNpcAreaId());
 			}
 		}
 		/**移动完成*/

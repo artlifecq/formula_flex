@@ -263,8 +263,8 @@ package com.rpgGame.app.cmdlistener.scene
 		{
 			if(msg.personId.ToGID()==MainRoleManager.actor.id){
 				AppManager.showApp(AppConstant.DIE_PANEL,msg);
-				
 				EventManager.dispatchEvent(MainPlayerEvent.PLAYER_DIE);
+				SceneManager.scene.addGrayScene();
 			}
 		}
 		
@@ -616,7 +616,7 @@ package com.rpgGame.app.cmdlistener.scene
             info.read(buffer);
             var cfg : Attach_effect = AttachEffectCfgData.getInfo(info.modelId);
             if (null == cfg) {
-                GameLog.add("陷阱配置不存在:" + data.modelId);
+                GameLog.add("陷阱配置不存在:" + info.modelId);
                 return;
             }
             var data : TrapInfo = new TrapInfo(info.id, info.id.ToGID(), info.modelId, info.state, info.position.x, info.position.y);
@@ -1005,6 +1005,7 @@ package com.rpgGame.app.cmdlistener.scene
 				EffectUrl.RELIVE_NORMAL);
             if(roleData.id == MainRoleManager.actorID)
             {
+				SceneManager.scene.removeGrayScene();
                 ReliveManager.autoHideRelive();
 				EventManager.dispatchEvent(MainPlayerEvent.SELFHP_CHANGE);
 				EventManager.dispatchEvent(MainPlayerEvent.REVIVE_SUCCESS);

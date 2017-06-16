@@ -1,13 +1,11 @@
 package org.mokylin.skin.app.activety
 {
-	import feathers.data.ListCollection;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.TabBar;
 	import feathers.controls.UIAsset;
 	import feathers.layout.HorizontalLayout;
 	import org.mokylin.skin.common.yiji_panelbg2_Skin;
-	import org.mokylin.skin.component.tabbar.TabBarSkin_pack;
 
 	/**
 	 * @private
@@ -45,13 +43,6 @@ package org.mokylin.skin.app.activety
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __Activety_Skin_ArrayCollection1_i():feathers.data.ListCollection
-		{
-			var temp:feathers.data.ListCollection = new feathers.data.ListCollection();
-			temp.data = ['综合活动'];
-			return temp;
-		}
-
 		private function __Activety_Skin_HorizontalLayout1_i():feathers.layout.HorizontalLayout
 		{
 			var temp:feathers.layout.HorizontalLayout = new feathers.layout.HorizontalLayout();
@@ -100,14 +91,10 @@ package org.mokylin.skin.app.activety
 			var temp:feathers.controls.TabBar = new feathers.controls.TabBar();
 			tabBar = temp;
 			temp.name = "tabBar";
-			temp.btnWidth = 77;
-			temp.touchable = false;
-			temp.touchGroup = true;
-			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_pack;
+			temp.width = 509;
 			temp.x = 27;
 			temp.y = 44;
 			temp.layout = __Activety_Skin_HorizontalLayout1_i();
-			temp.dataProvider = __Activety_Skin_ArrayCollection1_i();
 			return temp;
 		}
 

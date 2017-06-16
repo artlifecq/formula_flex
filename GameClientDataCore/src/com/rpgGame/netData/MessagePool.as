@@ -1,5 +1,4 @@
-package  com.rpgGame.netData
-{
+package com.rpgGame.netData{
 	
 	import com.rpgGame.netData.achievement.handler.ResSendAchievementDataInfoHandler;
 	import com.rpgGame.netData.achievement.handler.ResSendFinishAchievementHandler;
@@ -143,6 +142,7 @@ package  com.rpgGame.netData
 	import com.rpgGame.netData.fight.handler.SCAttackerResultHandler;
 	import com.rpgGame.netData.fight.handler.SCBuffSkillHandler;
 	import com.rpgGame.netData.fight.handler.SCCancelSkillHandler;
+	import com.rpgGame.netData.fight.handler.SCSkillWarningInfoHandler;
 	import com.rpgGame.netData.fight.message.ResAttackBeautyMessage;
 	import com.rpgGame.netData.fight.message.ResAttackBreakSingingToClientMessage;
 	import com.rpgGame.netData.fight.message.ResAttackRangeMessage;
@@ -159,6 +159,7 @@ package  com.rpgGame.netData
 	import com.rpgGame.netData.fight.message.SCAttackerResultMessage;
 	import com.rpgGame.netData.fight.message.SCBuffSkillMessage;
 	import com.rpgGame.netData.fight.message.SCCancelSkillMessage;
+	import com.rpgGame.netData.fight.message.SCSkillWarningInfoMessage;
 	import com.rpgGame.netData.fightpower.handler.ResFightPowerToClientHandler;
 	import com.rpgGame.netData.fightpower.message.ResFightPowerToClientMessage;
 	import com.rpgGame.netData.fightsoul.handler.SCFightSoulChangeCountHandler;
@@ -381,6 +382,8 @@ package  com.rpgGame.netData
 	import com.rpgGame.netData.monster.handler.ResMonsterSpeedChangeHandler;
 	import com.rpgGame.netData.monster.handler.ResWGBossInfoToClientHandler;
 	import com.rpgGame.netData.monster.handler.ResWGBossListToClientHandler;
+	import com.rpgGame.netData.monster.handler.SCWorldBossKillerNameHandler;
+	import com.rpgGame.netData.monster.handler.SCWorldBossResultHandler;
 	import com.rpgGame.netData.monster.message.ResBossDamageInfosToClientMessage;
 	import com.rpgGame.netData.monster.message.ResBossOwerInfoToClientMessage;
 	import com.rpgGame.netData.monster.message.ResMonsterAIStepChangeMessage;
@@ -397,6 +400,8 @@ package  com.rpgGame.netData
 	import com.rpgGame.netData.monster.message.ResMonsterSpeedChangeMessage;
 	import com.rpgGame.netData.monster.message.ResWGBossInfoToClientMessage;
 	import com.rpgGame.netData.monster.message.ResWGBossListToClientMessage;
+	import com.rpgGame.netData.monster.message.SCWorldBossKillerNameMessage;
+	import com.rpgGame.netData.monster.message.SCWorldBossResultMessage;
 	import com.rpgGame.netData.moonbox.handler.ResMoonBoxItemAddMessageHandler;
 	import com.rpgGame.netData.moonbox.handler.ResMoonBoxItemChangeHandler;
 	import com.rpgGame.netData.moonbox.handler.ResMoonBoxItemRemoveHandler;
@@ -446,7 +451,6 @@ package  com.rpgGame.netData
 	import com.rpgGame.netData.pet.message.ResPetReliefTimeMessage;
 	import com.rpgGame.netData.pet.message.ResPetTargetMessage;
 	import com.rpgGame.netData.player.handler.BroadcastPlayerAttriChangeHandler;
-	import com.rpgGame.netData.player.handler.NonagePromptHandler;
 	import com.rpgGame.netData.player.handler.ResAutoStartStateHandler;
 	import com.rpgGame.netData.player.handler.ResChangePKStateHandler;
 	import com.rpgGame.netData.player.handler.ResChangePlayerNameToClientHandler;
@@ -476,7 +480,6 @@ package  com.rpgGame.netData
 	import com.rpgGame.netData.player.handler.SCNoticeHandler;
 	import com.rpgGame.netData.player.handler.SCPlayerLevelUpHandler;
 	import com.rpgGame.netData.player.message.BroadcastPlayerAttriChangeMessage;
-	import com.rpgGame.netData.player.message.NonagePromptMessage;
 	import com.rpgGame.netData.player.message.ResAutoStartStateMessage;
 	import com.rpgGame.netData.player.message.ResChangePKStateMessage;
 	import com.rpgGame.netData.player.message.ResChangePlayerNameToClientMessage;
@@ -592,10 +595,12 @@ package  com.rpgGame.netData
 	import com.rpgGame.netData.skill.message.ResSkillResetEffectsidMessage;
 	import com.rpgGame.netData.skill.message.ResSkillStartLevelUpMessage;
 	import com.rpgGame.netData.specialactivities.handler.SCActivitiesNotifyListHandler;
+	import com.rpgGame.netData.specialactivities.handler.SCEnterActivityHandler;
 	import com.rpgGame.netData.specialactivities.handler.SCSpecialActivitiesListHandler;
 	import com.rpgGame.netData.specialactivities.handler.SCSpecialActivityCloseHandler;
 	import com.rpgGame.netData.specialactivities.handler.SCSpecialActivityOpenHandler;
 	import com.rpgGame.netData.specialactivities.message.SCActivitiesNotifyListMessage;
+	import com.rpgGame.netData.specialactivities.message.SCEnterActivityMessage;
 	import com.rpgGame.netData.specialactivities.message.SCSpecialActivitiesListMessage;
 	import com.rpgGame.netData.specialactivities.message.SCSpecialActivityCloseMessage;
 	import com.rpgGame.netData.specialactivities.message.SCSpecialActivityOpenMessage;
@@ -887,6 +892,7 @@ package  com.rpgGame.netData
 			register(102114, SCAttackerResultMessage, SCAttackerResultHandler);
 			register(102115, SCCancelSkillMessage, SCCancelSkillHandler);
 			register(102116, SCBuffSkillMessage, SCBuffSkillHandler);
+			register(102117, SCSkillWarningInfoMessage, SCSkillWarningInfoHandler);
 			register(103101, ResMyPlayerInfoMessage, ResMyPlayerInfoHandler);
 			register(103102, ResPlayerAddExpMessage, ResPlayerAddExpHandler);
 			register(103103, ResPersonalNoticeMessage, ResPersonalNoticeHandler);
@@ -903,7 +909,7 @@ package  com.rpgGame.netData
 			register(103114, ResPlayerDieMessage, ResPlayerDieHandler);
 			register(103115, ResReviveSuccessMessage, ResReviveSuccessHandler);
 			register(103116, ResPlayerNonageStateMessage, ResPlayerNonageStateHandler);
-			register(103117, NonagePromptMessage, NonagePromptHandler);
+//			register(103117, SCNonagePromptMessage, SCNonagePromptHandler);
 			register(103118, ResPlayerNonageTimeMessage, ResPlayerNonageTimeHandler);
 			register(103119, ResPlayerNonageRegisterMessage, ResPlayerNonageRegisterHandler);
 			register(103120, ResOthersPlayerInfoMessage, ResOthersPlayerInfoHandler);
@@ -966,6 +972,7 @@ package  com.rpgGame.netData
 			register(111105, ResGuildApplyListInfoMessage, ResGuildApplyListInfoHandler);
 			register(111106, ResGuildChangeGuildIdMessage, ResGuildChangeGuildIdHandler);
 			register(111107, ResGuildChangeMemberTypeMessage, ResGuildChangeMemberTypeHandler);
+//			register(111108, ResGuildSkillInfoMessage, ResGuildSkillInfoHandler);
 			register(111199, ResGuildOperateResultMessage, ResGuildOperateResultHandler);
 			register(112101, ResChatMessage, ResChatHandler);
 			register(112102, ResChatRecordMessage, ResChatRecordHandler);
@@ -986,6 +993,8 @@ package  com.rpgGame.netData
 			register(114115, ResBossDamageInfosToClientMessage, ResBossDamageInfosToClientHandler);
 			register(114116, ResMonsterAIStepChangeMessage, ResMonsterAIStepChangeHandler);
 			register(114117, ResBossOwerInfoToClientMessage, ResBossOwerInfoToClientHandler);
+			register(114118, SCWorldBossResultMessage, SCWorldBossResultHandler);
+			register(114119, SCWorldBossKillerNameMessage, SCWorldBossKillerNameHandler);
 			register(115201, ResFightPowerToClientMessage, ResFightPowerToClientHandler);
 			register(116101, ResFriendListInfoMessage, ResFriendListInfoHandler);
 			register(116102, ResOperationFriendResultMessage, ResOperationFriendResultHandler);
@@ -1046,7 +1055,7 @@ package  com.rpgGame.netData
 			register(128109, SCOpenDianFengPanelMessage, SCOpenDianFengPanelHandler);
 			register(128111, SCOpenDianFengRankMessage, SCOpenDianFengRankHandler);
 			register(128113, SCDrawDianFengAwardMessage, SCDrawDianFengAwardHandler);
-			register(128115, SCQuitZoneResultMessage,SCQuitZoneResultHandler);
+			register(128115, SCQuitZoneResultMessage, SCQuitZoneResultHandler);
 			register(137201, ResCardToClientMessage, ResCardToClientHandler);
 			register(141101, ResToplistToClientMessage, ResToplistToClientHandler);
 			register(141102, ResListLeaderToClientMessage, ResListLeaderToClientHandler);
@@ -1121,6 +1130,7 @@ package  com.rpgGame.netData
 			register(162102, SCSpecialActivityOpenMessage, SCSpecialActivityOpenHandler);
 			register(162103, SCSpecialActivityCloseMessage, SCSpecialActivityCloseHandler);
 			register(162104, SCActivitiesNotifyListMessage, SCActivitiesNotifyListHandler);
+			register(162105, SCEnterActivityMessage, SCEnterActivityHandler);
 			register(181101, ResActivitiesInfoMessage, ResActivitiesInfoHandler);
 			register(181102, ResActivitiesGetRewardInfoMessage, ResActivitiesGetRewardInfoHandler);
 			register(181103, ResActivitiesRefreshMessage, ResActivitiesRefreshHandler);
@@ -1203,6 +1213,11 @@ package  com.rpgGame.netData
 			register(229105, SCWarFlagUpResultToClientMessage, SCWarFlagUpResultToClientHandler);
 			register(229106, SCWarFlagExtraItemNumMessage, SCWarFlagExtraItemNumHandler);
 			register(229107, SCWarFlagModelIdChangMessage, SCWarFlagModelIdChangHandler);
+//			register(230101, SCConvoyNumMessage, SCConvoyNumHandler);
+//			register(230102, SCConvoyInfoMessage, SCConvoyInfoHandler);
+//			register(230105, SCSuccessInfoMessage, SCSuccessInfoHandler);
+//			register(230106, SCRefreshGirlMessage, SCRefreshGirlHandler);
+//			register(230107, SCConvoyFailureMessage, SCConvoyFailureHandler);
 			register(250101, ResChangeServerGameToClientMessage, ResChangeServerGameToClientHandler);
 			register(250264, SCCancelTeamMatchMessage, SCCancelTeamMatchHandler);
 			register(250265, SCStartTeamMatchMessage, SCStartTeamMatchHandler);

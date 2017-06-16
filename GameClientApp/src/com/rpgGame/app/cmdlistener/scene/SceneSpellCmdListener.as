@@ -25,6 +25,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
+	import com.rpgGame.coreData.clientConfig.Q_skill_warning;
 	import com.rpgGame.coreData.info.fight.FightHurtResult;
 	import com.rpgGame.coreData.lang.LangQ_NoticeInfo;
 	import com.rpgGame.coreData.role.MonsterData;
@@ -38,6 +39,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.netData.fight.message.SCAttackerResultMessage;
 	import com.rpgGame.netData.fight.message.SCBuffSkillMessage;
 	import com.rpgGame.netData.fight.message.SCCancelSkillMessage;
+	import com.rpgGame.netData.fight.message.SCSkillWarningInfoMessage;
 	import com.rpgGame.netData.structs.Position;
 	
 	import flash.geom.Point;
@@ -71,6 +73,7 @@ package com.rpgGame.app.cmdlistener.scene
 			SocketConnection.addCmdListener(102103,onResAttackRangeMessage);
 			SocketConnection.addCmdListener(102115,onCanelSkillMessage);
             SocketConnection.addCmdListener(102116,onBuffSkillMessage);
+			SocketConnection.addCmdListener(102117,onSCSkillWarningInfoMessage);//  新加的预警消息 ----yt
 //			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_YOUR_SPELL_RELEASED, onYouSpellRelease);
 			//
 			finish();
@@ -302,8 +305,40 @@ package com.rpgGame.app.cmdlistener.scene
             SpellAnimationHelper.addFlyEffect(info);
         }
 		
-		
-		
+		/**预警消息*/
+		private function onSCSkillWarningInfoMessage(msg : SCSkillWarningInfoMessage) : void {
+			
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.monsterId.ToGID()) as SceneRole;
+			if (null == role || !role.usable) {
+				return;
+			}
+			
+			var skillInfo : Q_skill_model = SpellDataManager.getSpellDataWithID(msg.skillId);
+			if (skillInfo == null)
+			{
+				return;
+			}
+			var warningData:Q_skill_warning=SpellDataManager.getWarningData(skillInfo.q_skillID);//获取预警技能关联
+			if (warningData == null)
+			{
+				return;
+			}
+			var animationData : Q_SpellAnimation = AnimationDataManager.getData(warningData.q_warn_effect);
+			if (animationData == null)
+			{
+				return;
+			}
+			
+			for each(var point:Position in msg.posList)
+			{
+				SpellAnimationHelper.addWarningEffect(role,point.x, point.y, 0, animationData);
+			}
+			
+			
+			
+				//SpellAnimationHelper.addSkillWarningEffect(animationData);
+				//addSkillWarningEffect
+		}
 		
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
