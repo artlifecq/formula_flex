@@ -477,6 +477,7 @@ package com.rpgGame.netData{
 	import com.rpgGame.netData.player.handler.SCBroadcastCurrencyChangeHandler;
 	import com.rpgGame.netData.player.handler.SCCurrencyChangeHandler;
 	import com.rpgGame.netData.player.handler.SCMaxValueChangeHandler;
+	import com.rpgGame.netData.player.handler.SCNonagePromptHandler;
 	import com.rpgGame.netData.player.handler.SCNoticeHandler;
 	import com.rpgGame.netData.player.handler.SCPlayerLevelUpHandler;
 	import com.rpgGame.netData.player.message.BroadcastPlayerAttriChangeMessage;
@@ -506,6 +507,7 @@ package com.rpgGame.netData{
 	import com.rpgGame.netData.player.message.SCBroadcastCurrencyChangeMessage;
 	import com.rpgGame.netData.player.message.SCCurrencyChangeMessage;
 	import com.rpgGame.netData.player.message.SCMaxValueChangeMessage;
+	import com.rpgGame.netData.player.message.SCNonagePromptMessage;
 	import com.rpgGame.netData.player.message.SCNoticeMessage;
 	import com.rpgGame.netData.player.message.SCPlayerLevelUpMessage;
 	import com.rpgGame.netData.prestige.handler.ResPrestigeInfoHandler;
@@ -909,7 +911,7 @@ package com.rpgGame.netData{
 			register(103114, ResPlayerDieMessage, ResPlayerDieHandler);
 			register(103115, ResReviveSuccessMessage, ResReviveSuccessHandler);
 			register(103116, ResPlayerNonageStateMessage, ResPlayerNonageStateHandler);
-//			register(103117, SCNonagePromptMessage, SCNonagePromptHandler);
+			register(103117, SCNonagePromptMessage, SCNonagePromptHandler);
 			register(103118, ResPlayerNonageTimeMessage, ResPlayerNonageTimeHandler);
 			register(103119, ResPlayerNonageRegisterMessage, ResPlayerNonageRegisterHandler);
 			register(103120, ResOthersPlayerInfoMessage, ResOthersPlayerInfoHandler);
