@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.activety.boss
 {
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.sender.SpecialActivitySender;
@@ -54,6 +55,10 @@ package com.rpgGame.appModule.activety.boss
 					_skin.selectedBtn.isSelected=true;
 					break;
 				case _skin.btnEnter:
+					if(info.info.joinState==0){
+						NoticeManager.showNotifyById(61003);
+						return;
+					}
 					if(info.info){
 						SpecialActivitySender.reqJoinAct(info.info.activityId);
 					}
@@ -101,14 +106,21 @@ package com.rpgGame.appModule.activety.boss
 				var currentTime:Date=SystemTimeManager.sysDateTime;
 				var hour:int=currentTime.hours;
 				var min:int=currentTime.minutes;
-				var hm:int=int(hour.toString()+min.toString());
+				var sec:int=hour*60*60+min*60;
+				var timeStr1:String=TimeUtil.formatTimeToTimeString(sec);
+				var arrTime:Array=timeStr1.split(":");
+				var hm:int=int(arrTime[0]+arrTime[1]);
 				var timeList:Array=ActivetyDataManager.getTimeList(info.actCfg);
 				timeList=timeList[4];//第四个才是刷新段
 				var next:int=timeList[0];
 				var num:int=timeList.length;
 				for(var i:int=0;i<num;i++){
 					if(timeList[i]>hm){
-						next=timeList[i];
+						if((i+1)!=num){
+							next=timeList[i+1];
+						}else{
+							next=timeList[0];
+						}
 						break;
 					}
 				}

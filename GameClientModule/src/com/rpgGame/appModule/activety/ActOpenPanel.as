@@ -48,8 +48,7 @@ package com.rpgGame.appModule.activety
 				}
 				else
 				{
-//					AppManager.showAppNoHide(actInfo.cfg.q_notice_trans,actInfo);
-					AppManager.showAppNoHide(actInfo.actCfg.q_notice_trans,actInfo,actInfo.actCfg.q_trans_funcID);
+					AppManager.showAppNoHide(actInfo.actCfg.q_notice_trans,actInfo,actInfo.actCfg.q_trans_funcID);//跳到对应标签的对应活动
 				}
 				this.hide()
 			}
