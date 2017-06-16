@@ -210,7 +210,6 @@ package com.rpgGame.app.cmdlistener.scene
 				}
 				else if(msg.state.targetId.ToGID() == MainRoleManager.actorID)//别人攻击自己
 				{
-					EventManager.dispatchEvent(SkillEvent.SKILL_RESULT,skillData.q_skillID);
 					TrusteeshipManager.getInstance().startFightSoulFight(msg.state.attackerId,2);//战魂还击
 				}
 			}
