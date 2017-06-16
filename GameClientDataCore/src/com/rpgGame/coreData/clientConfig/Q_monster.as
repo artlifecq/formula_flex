@@ -138,6 +138,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_immunity_buff:String;
 		 /**  是否可挖掘(0: 不可，：可） */
 		public var q_mining:int;
+		 /**    */
+		public var q_attachs:String;
 		 /**  是否周末掉落双倍(0:不，1：是） */
 		public var q_double_weakend:int;
 		 /**  怪物史记类型[勋章类型,单次伤害值,每次产出勋章个数] */
