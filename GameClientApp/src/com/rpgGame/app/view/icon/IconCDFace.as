@@ -7,7 +7,9 @@ package com.rpgGame.app.view.icon
 	import com.rpgGame.core.view.uiComponent.face.cd.CDDataManager;
 	import com.rpgGame.core.view.uiComponent.face.cd.CDFace;
 	import com.rpgGame.coreData.cfg.StaticValue;
+	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.face.IBaseFaceInfo;
+	import com.rpgGame.coreData.type.item.GridBGType;
 	
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
@@ -78,6 +80,27 @@ package com.rpgGame.app.view.icon
 		{
 			super($iconSize);
 			sortLayer();
+		}
+		
+		override public function reSet($parameters : Array) : void
+		{
+			super.reSet($parameters);
+			var bg:String;
+			switch(this.iconSize){
+				case IcoSizeEnum.ICON_36:
+					bg=GridBGType.GRID_SIZE_36;
+					break;
+				case IcoSizeEnum.ICON_42:
+					bg=GridBGType.GRID_SIZE_42;
+					break;
+				case IcoSizeEnum.ICON_48:
+					bg=GridBGType.GRID_SIZE_48;
+					break;
+				case IcoSizeEnum.ICON_64:
+					bg=GridBGType.GRID_SIZE_64;
+					break;
+			}
+			this.setBg(bg);
 		}
 
 		public function get cdFace():CDFace

@@ -14,11 +14,15 @@ package com.rpgGame.coreData.clientConfig
 	{
 		 /**  世界BOSS活动ID */
 		public var q_id:int;
-		 /**  刷新X坐标 */
+		 /**  BOSS刷新X坐标 */
 		public var q_x:int;
-		 /**  刷新Y坐标 */
+		 /**  BOSS刷新Y坐标 */
 		public var q_y:int;
-		 /**  怪物ID */
+		 /**  进入X坐标 */
+		public var q_enterx:int;
+		 /**  进入Y坐标 */
+		public var q_entery:int;
+		 /**  BOSS ID */
 		public var q_monster:int;
 		 /**  排名奖励 */
 		public var q_rank_rewards:String;

@@ -1,10 +1,14 @@
 package com.rpgGame.appModule.activety.zonghe
 {
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.richText.RichTextCustomLinkType;
+	import com.rpgGame.app.richText.RichTextCustomUtil;
+	import com.rpgGame.app.richText.component.RichTextArea3D;
 	import com.rpgGame.app.sender.SpecialActivitySender;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.coreData.cfg.active.ActivetyDataManager;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.enum.ActivityEnum;
@@ -31,6 +35,7 @@ package com.rpgGame.appModule.activety.zonghe
 		private var _activeData:ListCollection;
 		private var rewardIcon:Vector.<IconCDFace>;
 		private var selectedInfo:ActivetyInfo;
+		private var _richText:RichTextArea3D;
 		
 		public function ZongHeView()
 		{
@@ -50,6 +55,15 @@ package com.rpgGame.appModule.activety.zonghe
 			}
 			_skin.ListItem.dataProvider=_activeData;
 			rewardIcon=new Vector.<IconCDFace>();
+			_richText= RichTextArea3D.getFromPool();
+			_richText.setSize(300);
+			_richText.breakLineManual = true;
+			_richText.setConfig(RichTextCustomUtil.getChatUnitConfigVec());
+			_richText.wordWrap = true;
+			_richText.multiline = true;
+			this.addChild(_richText);
+			_richText.x=630;
+			_richText.y=415;
 		}
 		
 		override public function show(data:Object=null):void
@@ -87,7 +101,12 @@ package com.rpgGame.appModule.activety.zonghe
 		private function onJoin(e:Event):void
 		{
 			if(selectedInfo.info.joinState==2){
-				SpecialActivitySender.reqJoinAct(selectedInfo.actCfg.q_activity_id);
+				if(selectedInfo.actCfg.q_notice_trans){
+					//跳到对应标签的对应活动
+					AppManager.showAppNoHide(selectedInfo.actCfg.q_notice_trans,selectedInfo,selectedInfo.actCfg.q_trans_funcID);
+				}else{
+					SpecialActivitySender.reqJoinAct(selectedInfo.actCfg.q_activity_id);
+				}
 			}else{//活动不在进行中
 //				NoticeManager.showNotifyById();
 			}
@@ -103,6 +122,9 @@ package com.rpgGame.appModule.activety.zonghe
 			_skin.activeName.styleName="ui/app/activety/zonghe/active_name/"+info.actCfg.q_activity_id+".png";
 			_skin.activeBg.styleName="ui/big_bg/activety/des/"+info.actCfg.q_activity_id+".jpg";
 			_skin.lbMsg.htmlText=info.actCfg.q_text;
+			_richText.text="";
+			var locationCode:String =RichTextCustomUtil.getTextLinkCode("找的人",0x55bb17,RichTextCustomLinkType.TASK_NPC_NAME_TYPE,null);
+			_richText.appendRichText(locationCode);
 			
 			var arr:Array;
 			if(info.actCfg.q_rewards){

@@ -101,14 +101,21 @@ package com.rpgGame.app.ui.main.dungeon
 			var currentTime:Date=SystemTimeManager.sysDateTime;
 			var hour:int=currentTime.hours;
 			var min:int=currentTime.minutes;
-			var hm:int=int(hour.toString()+min.toString());
+			var sec:int=hour*60*60+min*60;
+			var timeStr:String=TimeUtil.formatTimeToTimeString(sec);
+			var arrTime:Array=timeStr.split(":");
+			var hm:int=int(arrTime[0]+arrTime[1]);
 			var timeList:Array=ActivetyDataManager.getTimeList(actInfo.actCfg);
 			timeList=timeList[4];//第四个才是刷新段
 			var next:int=timeList[0];
 			num=timeList.length;
 			for(i=0;i<num;i++){
 				if(timeList[i]>hm){
-					next=timeList[i];
+					if((i+1)!=num){
+						next=timeList[i+1];
+					}else{
+						next=timeList[0];
+					}
 					break;
 				}
 			}

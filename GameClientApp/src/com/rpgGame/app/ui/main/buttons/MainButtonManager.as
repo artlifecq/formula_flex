@@ -16,13 +16,13 @@ package com.rpgGame.app.ui.main.buttons
 	import org.mokylin.skin.mainui.activityBar.button.ButtonHuodongtating;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonLunjian;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonZhanchangdating;
+	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_jinjie;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_renwu;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_shangcheng;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_shejiao;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_wuxue;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_zhanhun;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_zhuangbei;
-	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_zuoqi;
 
 	public class MainButtonManager
 	{
@@ -33,7 +33,7 @@ package com.rpgGame.app.ui.main.buttons
 			_initializeMap = new HashMap();
 			_classMap = new  HashMap();
 			regClass(1,MainButtonBases,ButtonSkin_renwu);
-			regClass(2,MainButton_Mount,ButtonSkin_zuoqi);
+			regClass(2,MainButton_Mount,ButtonSkin_jinjie);
 			regClass(3,MainButton_Equip,ButtonSkin_zhuangbei);
 			regClass(4,MainButtonBases,ButtonSkin_wuxue);
 			regClass(5,MainButtonBases,ButtonSkin_zhanhun);
