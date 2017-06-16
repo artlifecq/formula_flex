@@ -10,6 +10,7 @@ package com.rpgGame.app.graphics
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.utils.HeadBloodUtil;
 	import com.rpgGame.core.utils.MCUtil;
+	import com.rpgGame.coreData.SpriteStat;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.JunJieData;
 	import com.rpgGame.coreData.cfg.StaticValue;
@@ -463,6 +464,15 @@ package com.rpgGame.app.graphics
 				_bloodBar = HeadBloodBar.create(_role);
 				//				_bloodBar.state = HeadBloodUtil.getRoleBloodState( _role );
 				//				this.addChild(_bloodBar); //更新一下容器，从临时的到模型真正容器
+			}
+			if (_role) 
+			{
+				_bloodPercent=1;
+				var stat:SpriteStat=_role.data.totalStat;
+				if (stat) 
+				{
+					_bloodPercent=stat.hp/stat.life;
+				}
 			}
 			//更新一下数据
 			_bloodBar.update(_bloodPercent);
