@@ -106,7 +106,7 @@ package com.game.engine3D.scene.render
 				{
 					_methodDatas.push(methodData);
 				}
-				for(var ru : RenderUnit3D in _renderUnitMap)
+				for(var ru : * in _renderUnitMap)
 				{
 					ru.addMethod(methodData);
 				}
@@ -125,7 +125,7 @@ package com.game.engine3D.scene.render
 						_methodDatas.splice(index, 1);
 					}
 				}
-				for(var ru : RenderUnit3D in _renderUnitMap)
+				for(var ru : * in _renderUnitMap)
 				{
 					ru.removeMethod(methodData);
 				}
@@ -138,7 +138,7 @@ package com.game.engine3D.scene.render
 			{
 				for each (var methodData : MethodData in _methodDatas)
 				{
-					for (var ru : RenderUnit3D in _renderUnitMap)
+					for (var ru : * in _renderUnitMap)
 					{
 						ru.removeMethod(methodData);
 					}
@@ -510,7 +510,7 @@ package com.game.engine3D.scene.render
 			{
 				ru.secondStatusGetter = null;
 				_secondStatusRender = ru;
-				for (var otherRu : RenderUnit3D in _renderUnitMap)
+				for (var otherRu : * in _renderUnitMap)
 				{
 					if (otherRu == _secondStatusRender)
 					{
@@ -574,7 +574,7 @@ package com.game.engine3D.scene.render
 			{
 				return;
 			}
-			for (var otherRu : RenderUnit3D in _renderUnitMap)
+			for (var otherRu : * in _renderUnitMap)
 			{
 				if (otherRu == _secondStatusRender)
 				{
@@ -609,7 +609,7 @@ package com.game.engine3D.scene.render
 			{
 				_secondStatusRender.removeAddedCallBack(doSetsecondStatusGetter);
 				_secondStatusRender = null;
-				for (var otherRu : RenderUnit3D in _renderUnitMap)
+				for (var otherRu : * in _renderUnitMap)
 				{
 					otherRu.secondStatusGetter = null;
 				}
@@ -744,7 +744,7 @@ package com.game.engine3D.scene.render
 				return; //注意这个判断
 			
 			//检查换装内
-			for (var ru : RenderUnit3D in _renderUnitMap)
+			for (var ru : * in _renderUnitMap)
 			{
 				if (ru.type == renderUnitType)
 				{
@@ -760,7 +760,7 @@ package com.game.engine3D.scene.render
 		public function removeAllRenderUnits(recycle : Boolean = true) : void
 		{
 			//检查换装内
-			for (var ru : RenderUnit3D in _renderUnitMap)
+			for (var ru : * in _renderUnitMap)
 			{
 				recycleRenderUnit(ru, recycle);
 				ru = null;
@@ -793,7 +793,7 @@ package com.game.engine3D.scene.render
 		 */
 		public function hasTypeRenderUnits(type : String, checkResReady : Boolean = false) : Boolean
 		{
-			for (var ru : RenderUnit3D in _renderUnitMap)
+			for (var ru : * in _renderUnitMap)
 			{
 				if (ru.type == type && ((!checkResReady) || ru.resReady))
 				{
@@ -810,7 +810,7 @@ package com.game.engine3D.scene.render
 		 */
 		public function hasSameRenderUnit(rpd : RenderParamData3D, checkResReady : Boolean = false) : Boolean
 		{
-			for (var ru : RenderUnit3D in _renderUnitMap)
+			for (var ru : * in _renderUnitMap)
 			{
 				var apd : RenderParamData3D = ru.renderParamData;
 				if (apd && apd.equals(rpd) && ((!checkResReady) || ru.resReady))
@@ -859,7 +859,7 @@ package com.game.engine3D.scene.render
 		public function getRenderUnitsByType(renderUnitType : String, checkResReady : Boolean = false) : Array
 		{
 			var arr : Array = [];
-			for (var ru : RenderUnit3D in _renderUnitMap)
+			for (var ru : * in _renderUnitMap)
 			{
 				if (ru.type == renderUnitType && ((!checkResReady) || ru.resReady))
 				{
@@ -875,7 +875,7 @@ package com.game.engine3D.scene.render
 		public function getAllRenderUnits(checkResReady : Boolean = false) : Array
 		{
 			var arr : Array = [];
-			for (var ru : RenderUnit3D in _renderUnitMap)
+			for (var ru : * in _renderUnitMap)
 			{
 				if ((!checkResReady) || ru.resReady)
 				{
@@ -920,7 +920,7 @@ package com.game.engine3D.scene.render
 				index = 0;
 			}
 			//检查换装内
-			for (var ru : RenderUnit3D in _renderUnitMap)
+			for (var ru : * in _renderUnitMap)
 			{
 				funcArgs[index] = ru;
 				func.apply(func, funcArgs);
@@ -935,7 +935,7 @@ package com.game.engine3D.scene.render
 		{
 			super.run(gapTm);
 			//运行逻辑
-			for (var ru : RenderUnit3D in _renderUnitMap)
+			for (var ru : * in _renderUnitMap)
 			{
 				if (ru.usable)
 				{
@@ -961,7 +961,7 @@ package com.game.engine3D.scene.render
 			if (_isInViewDistance != value)
 			{
 				super.isInViewDistance = value;
-				for (var ru : RenderUnit3D in _renderUnitMap)
+				for (var ru : * in _renderUnitMap)
 				{
 					ru.isInViewDistance = value;
 				}
@@ -971,7 +971,7 @@ package com.game.engine3D.scene.render
 		override final public function startRender() : void
 		{
 			super.startRender();
-			for (var ru : RenderUnit3D in _renderUnitMap)
+			for (var ru : * in _renderUnitMap)
 			{
 				ru.startRender();
 			}
@@ -980,7 +980,7 @@ package com.game.engine3D.scene.render
 		override final public function stopRender() : void
 		{
 			super.stopRender();
-			for (var ru : RenderUnit3D in _renderUnitMap)
+			for (var ru : * in _renderUnitMap)
 			{
 				ru.stopRender();
 			}
@@ -991,7 +991,7 @@ package com.game.engine3D.scene.render
 			if (_needInViewDist != value)
 			{
 				super.needInViewDist = value;
-				for (var ru : RenderUnit3D in _renderUnitMap)
+				for (var ru : * in _renderUnitMap)
 				{
 					ru.needInViewDist = value;
 				}
@@ -1003,7 +1003,7 @@ package com.game.engine3D.scene.render
 			if (_renderLimitable != value)
 			{
 				super.renderLimitable = value;
-				for (var ru : RenderUnit3D in _renderUnitMap)
+				for (var ru : * in _renderUnitMap)
 				{
 					ru.renderLimitable = value;
 				}
@@ -1015,7 +1015,7 @@ package com.game.engine3D.scene.render
 			if (_lightPicker != value)
 			{
 				_lightPicker = value;
-				for (var ru : RenderUnit3D in _renderUnitMap)
+				for (var ru : * in _renderUnitMap)
 				{
 					ru.lightPicker = value;
 				}
@@ -1027,7 +1027,7 @@ package com.game.engine3D.scene.render
 			if (_useLight != value)
 			{
 				_useLight = value;
-				for (var ru : RenderUnit3D in _renderUnitMap)
+				for (var ru : * in _renderUnitMap)
 				{
 					ru.useLight = value;
 				}
@@ -1039,7 +1039,7 @@ package com.game.engine3D.scene.render
 			if (_shareMaterials != value)
 			{
 				_shareMaterials = value;
-				for (var ru : RenderUnit3D in _renderUnitMap)
+				for (var ru : * in _renderUnitMap)
 				{
 					ru.shareMaterials = value;
 				}
@@ -1051,7 +1051,7 @@ package com.game.engine3D.scene.render
 			if (_mouseEnable != value)
 			{
 				_mouseEnable = value;
-				for (var ru : RenderUnit3D in _renderUnitMap)
+				for (var ru : * in _renderUnitMap)
 				{
 					ru.mouseEnable = ru.renderParamData.mouseEnable && _mouseEnable;
 				}
@@ -1244,7 +1244,7 @@ package com.game.engine3D.scene.render
 		override public function set alpha(value:Number):void
 		{
 			super.alpha = value;
-			for (var ru : RenderUnit3D in _renderUnitMap)
+			for (var ru : * in _renderUnitMap)
 			{
 				ru.alpha = value;
 			}
@@ -1253,7 +1253,7 @@ package com.game.engine3D.scene.render
 		override public function set blendMode(value:String):void
 		{
 			super.blendMode = value;
-			for (var ru : RenderUnit3D in _renderUnitMap)
+			for (var ru : * in _renderUnitMap)
 			{
 				ru.blendMode = value;
 			}
@@ -1262,7 +1262,7 @@ package com.game.engine3D.scene.render
 		override public function set zOffset(value : int) : void
 		{
 			super.zOffset = value;
-			for (var ru : RenderUnit3D in _renderUnitMap)
+			for (var ru : * in _renderUnitMap)
 			{
 				ru.zOffset = value;
 			}
@@ -1271,7 +1271,7 @@ package com.game.engine3D.scene.render
 		override public function set depth(value : int) : void
 		{
 			super.depth = value;
-			for (var ru : RenderUnit3D in _renderUnitMap)
+			for (var ru : * in _renderUnitMap)
 			{
 				ru.depth = value;
 			}
@@ -1279,7 +1279,7 @@ package com.game.engine3D.scene.render
 		
 		public function set castsShadows(value : Boolean) : void
 		{
-			for (var ru : RenderUnit3D in _renderUnitMap)
+			for (var ru : * in _renderUnitMap)
 			{
 				ru.castsShadows = value;
 			}
@@ -1288,7 +1288,7 @@ package com.game.engine3D.scene.render
 		override public function set planarRenderLayer(value : uint) : void
 		{
 			super.planarRenderLayer = value;
-			for (var ru : RenderUnit3D in _renderUnitMap)
+			for (var ru : * in _renderUnitMap)
 			{
 				ru.planarRenderLayer = value;
 			}
@@ -1296,7 +1296,7 @@ package com.game.engine3D.scene.render
 		
 		public function hasEntity(entity : ObjectContainer3D) : Boolean
 		{
-			for (var ru : RenderUnit3D in _renderUnitMap)
+			for (var ru : * in _renderUnitMap)
 			{
 				if (ru.graphicDis.contains(entity))
 					return true;
