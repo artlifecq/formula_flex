@@ -275,7 +275,7 @@ package com.rpgGame.app.data
 			//坐骑数据
 			HorseConfigData.setConfig(dic[ConfigClassRegister.Q_horse]);
 			//战旗数据
-			ZhanQiConfigData.setConfig(dic[ConfigClassRegister.Q_warFlag]);
+			ZhanQiConfigData.setConfig(dic[ConfigClassRegister.Q_warflag]);
 			//			HorseSpellData.setConfig(dic[ConfigClassRegister.Q_horse_skills]);
 			HorseExtraItemInfo.createInfo();
 			ZhanQiExtraItemInfo.createInfo();
