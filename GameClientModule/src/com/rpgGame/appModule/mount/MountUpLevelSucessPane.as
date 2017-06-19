@@ -81,7 +81,7 @@ package com.rpgGame.appModule.mount
 			{
 				icon = _itemIcons[_rewardIconLength];
 			}else{
-				icon = new IconCDFace(IcoSizeEnum.ICON_64);
+				icon = IconCDFace.create(IcoSizeEnum.ICON_64);
 				icon.width = icon.height = IcoSizeEnum.ICON_64;
 				icon.setBg(GridBGType.GRID_SIZE_64);
 				this.addChild(icon);

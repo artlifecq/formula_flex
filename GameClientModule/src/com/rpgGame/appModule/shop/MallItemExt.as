@@ -1,21 +1,17 @@
 package com.rpgGame.appModule.shop
 {
-	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
-	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.info.shop.ShopItemVo;
 	
-	import feathers.controls.UIAsset;
+	import away3d.events.Event;
 	
 	import org.mokylin.skin.app.shangcheng.ShangPinItem;
-	
-	import away3d.events.Event;
 	
 	public class MallItemExt extends SkinUI
 	{
@@ -32,7 +28,7 @@ package com.rpgGame.appModule.shop
 			
 			_skin=new ShangPinItem();
 			super(_skin);
-			_grid=new IconCDFace(IcoSizeEnum.ICON_64);
+			_grid=IconCDFace.create(IcoSizeEnum.ICON_64);
 			_grid.x=-1;
 			_grid.y=-1;
 			this._skin.icons.addChild(_grid);

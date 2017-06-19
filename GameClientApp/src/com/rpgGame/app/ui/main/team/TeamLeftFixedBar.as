@@ -68,7 +68,7 @@ package  com.rpgGame.app.ui.main.team
 		
 		public function resize(w : int, h : int) : void 
 		{
-			this.y = 0.5*(h-120);
+			this.y =200;
 			this.x = 0;
 		}
 		private function onHideList(eve:Event):void

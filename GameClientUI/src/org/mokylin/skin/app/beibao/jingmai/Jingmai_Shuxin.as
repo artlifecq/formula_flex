@@ -54,7 +54,7 @@ package org.mokylin.skin.app.beibao.jingmai
 		private function __Jingmai_Shuxin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/jingmai/shuxingbeijing.jpg";
+			temp.styleName = "ui/big_bg/beibao/jingmai/shuxingbeijing.jpg";
 			temp.x = 8;
 			temp.y = 37;
 			return temp;

@@ -1,5 +1,9 @@
 package com.rpgGame.coreData.cfg
 {
+	import com.game.engine3D.utils.MathUtil;
+	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.coreData.clientConfig.Q_zone;
 	import com.rpgGame.coreData.clientConfig.Q_zone_multy;
 	
 	import flash.utils.ByteArray;
@@ -44,9 +48,29 @@ package com.rpgGame.coreData.cfg
 				relist.push(info.q_zone_id);
 			}
 			
+			relist.sort(onSort);
+			
 			return relist;
 		}
-		
+		private static function onSort(a : int, b : int) : int
+		{
+			var zoneDataA:Q_zone=ZoneCfgData.getZoneCfg(a);
+			var zoneDataB:Q_zone=ZoneCfgData.getZoneCfg(b);
+			if(zoneDataA&&zoneDataB)
+			{
+				if (zoneDataA.q_level > zoneDataB.q_level)
+				{
+					return 1;
+				}
+				else
+				{
+					return -1;
+				}
+			
+			}
+			
+			return 0;
+		}
 		/**根据下标返回副本id列表*/
 		public static function getZoneIdByID(id:int) :int
 		{

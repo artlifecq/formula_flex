@@ -1,15 +1,25 @@
 package com.rpgGame.appModule.guild
 {
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.display3D.InterAvatar3D;
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.guild.GuildManager;
+	import com.rpgGame.app.manager.hint.TopTipManager;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.appModule.common.RoleModelShow;
 	import com.rpgGame.core.events.GuildEvent;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
+	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.enum.EmFunctionID;
+	import com.rpgGame.coreData.enum.EnumGuildPost;
 	import com.rpgGame.coreData.role.RoleData;
+	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.guild.bean.GuildInfo;
 	import com.rpgGame.netData.guild.bean.GuildMemberInfo;
+	import com.rpgGame.netData.guild.message.ResGuildOperateResultMessage;
 	import com.rpgGame.netData.player.bean.PlayerAppearanceInfo;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -24,6 +34,7 @@ package com.rpgGame.appModule.guild
 		private var _showAvatarData : RoleData;
 		private var _roleModel:RoleModelShow;
 		private var _avatar : InterAvatar3D;
+		private var _guildGetDailyGiftOpaque:int;
 		public function GuildInfoViewUI()
 		{
 			_skin = new BangHui_Info();
@@ -66,6 +77,28 @@ package com.rpgGame.appModule.guild
 				return ;
 			refeashPanleInfo();
 			updateRole();
+			TipTargetManager.remove(_skin.btnFuli);
+			if(GuildManager.instance().haveDailyGift)
+			{
+				var str:String = "";
+				var selfMemberInfo:GuildMemberInfo = GuildManager.instance().selfMemberInfo;
+				var itemInfos:Object = JSONUtil.decode(GuildManager.instance().guildLevelInfo.q_gift_data);
+				var iteminfo:Object;
+				if(selfMemberInfo.memberType == EnumGuildPost.GUILDPOST_CHIEF||
+					selfMemberInfo.memberType == EnumGuildPost.GUILDPOST_AGEN_CHIEF||
+					selfMemberInfo.memberType == EnumGuildPost.GUILDPOST_VICE_CHIEF||
+					selfMemberInfo.memberType == EnumGuildPost.GUILDPOST_ELDERS)
+				{
+					str = LanguageConfig.replaceStr("&级帮派官员日福利\n",GuildManager.instance().guildData.level);
+					iteminfo = itemInfos[0];
+				}else{
+					str = LanguageConfig.replaceStr("&级帮派普通成员日福利\n",GuildManager.instance().guildData.level);
+					iteminfo = itemInfos[1];
+				}
+				var qitem:Q_item = ItemConfig.getQItemByID(iteminfo["mod"]);
+				str += HtmlTextUtil.getTextColor(ItemConfig.getItemQualityColor(qitem.q_id),qitem.q_name)+"×"+iteminfo["num"];
+				TipTargetManager.show(_skin.btnFuli,TargetTipsMaker.makeSimpleTextTips(str));
+			}
 		}
 		
 		private function refeashPanleInfo():void
@@ -114,6 +147,37 @@ package com.rpgGame.appModule.guild
 						GuildManager.instance().guildExit();
 					}
 					break;
+				case _skin.btnFuli:
+					if(_guildGetDailyGiftOpaque>0)
+						return ;
+					EventManager.addEvent(GuildEvent.GUILD_OPERATERESULT,refeashAppoint);
+					_guildGetDailyGiftOpaque = GuildManager.opaque;
+					GuildManager.instance().guildGetDailyGift(_guildGetDailyGiftOpaque);
+					break;
+			}
+		}
+		private function refeashAppoint(msg:ResGuildOperateResultMessage):void
+		{
+			if(msg.opaque != _guildGetDailyGiftOpaque)
+				return ;
+			_guildGetDailyGiftOpaque = 0;
+			if(msg.result ==1)
+			{
+				var str:String = "获得奖励:\n";
+				var itemInfos:Object = JSONUtil.decode(GuildManager.instance().guildLevelInfo.q_gift_data);
+				var iteminfo:Object;
+				var selfMemberInfo:GuildMemberInfo = GuildManager.instance().selfMemberInfo;
+				if(selfMemberInfo.memberType == EnumGuildPost.GUILDPOST_CHIEF||
+					selfMemberInfo.memberType == EnumGuildPost.GUILDPOST_AGEN_CHIEF||
+					selfMemberInfo.memberType == EnumGuildPost.GUILDPOST_VICE_CHIEF||
+					selfMemberInfo.memberType == EnumGuildPost.GUILDPOST_ELDERS)
+				{
+					iteminfo = itemInfos[0];
+					iteminfo = itemInfos[1];
+				}
+				var qitem:Q_item = ItemConfig.getQItemByID(iteminfo["mod"]);
+				str += HtmlTextUtil.getTextColor(ItemConfig.getItemQualityColor(qitem.q_id),qitem.q_name)+"×"+iteminfo["num"];
+				TopTipManager.getInstance().addMouseFollowTip(0,str);
 			}
 		}
 		private function get guildData():GuildInfo

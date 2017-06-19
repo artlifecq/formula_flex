@@ -1,6 +1,6 @@
 package com.rpgGame.appModule.battle.jjzb
 {
-	import com.rpgGame.appModule.common.RewardGroup;
+	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	

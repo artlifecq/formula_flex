@@ -39,7 +39,7 @@ package com.rpgGame.appModule.bag
 			_iconFace.gridInfo=new GridInfo(0,0);
 			//_skin.input_txt.restrict="0-9";
 			super(_skin);
-			numCtrl=new NumSelectUICtrl(_skin.btn_max,_skin.btn_min,_skin.btn_all,_skin.lbBuyNum,1,1,dataChange);
+			numCtrl=new NumSelectUICtrl(_skin.btn_max,_skin.btn_min,_skin.btn_all,null,_skin.lbBuyNum,1,1,dataChange);
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void 

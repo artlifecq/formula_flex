@@ -147,7 +147,7 @@ package org.mokylin.skin.app.activety.zonghe
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			activeBg = temp;
 			temp.name = "activeBg";
-			temp.styleName = "ui/big_bg/activety/des/1.jpg";
+			temp.styleName = "ui/big_bg/activety/zonghe/des/1.jpg";
 			temp.x = 629;
 			temp.y = 78;
 			return temp;

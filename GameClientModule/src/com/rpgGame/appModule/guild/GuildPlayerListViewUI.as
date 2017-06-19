@@ -5,7 +5,6 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.GuildEvent;
-	import com.rpgGame.netData.guild.bean.GuildMemberInfo;
 	import com.rpgGame.netData.guild.message.ResGuildOperateResultMessage;
 	
 	import feathers.controls.Scroller;

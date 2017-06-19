@@ -36,6 +36,8 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 
 		public var icon:feathers.controls.UIAsset;
 
+		public var iconName:feathers.controls.UIAsset;
+
 		public var lbDuanwei:feathers.controls.Label;
 
 		public var lbShengwang:feathers.controls.Label;
@@ -53,7 +55,7 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [__DianFeng_Skin_UIAsset2_i(),icon_i(),__DianFeng_Skin_UIAsset3_i(),Pro_duanwei_i(),lbDuanwei_i(),btnChakan_i(),btnOpen_i(),__DianFeng_Skin_UIAsset4_i(),__DianFeng_Skin_UIAsset5_i(),numCishu_i(),numShengwang_i(),__DianFeng_Skin_UIAsset6_i(),__DianFeng_Skin_UIAsset7_i(),lbShengwang_i(),btnShengwang_i(),btnMsg_i()];
+			this.elementsContent = [__DianFeng_Skin_UIAsset2_i(),icon_i(),iconName_i(),__DianFeng_Skin_UIAsset3_i(),Pro_duanwei_i(),lbDuanwei_i(),btnChakan_i(),btnOpen_i(),__DianFeng_Skin_UIAsset4_i(),__DianFeng_Skin_UIAsset5_i(),numCishu_i(),numShengwang_i(),__DianFeng_Skin_UIAsset6_i(),__DianFeng_Skin_UIAsset7_i(),lbShengwang_i(),btnShengwang_i(),btnMsg_i()];
 			
 			states = {
 			};
@@ -180,12 +182,23 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			return temp;
 		}
 
+		private function iconName_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			iconName = temp;
+			temp.name = "iconName";
+			temp.styleName = "ui/app/zhanchang/icon/name/1001.png";
+			temp.x = 39;
+			temp.y = 156;
+			return temp;
+		}
+
 		private function icon_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icon = temp;
 			temp.name = "icon";
-			temp.styleName = "ui/app/zhanchang/icon/huangjinyijie.png";
+			temp.styleName = "ui/app/zhanchang/icon/1001_max.png";
 			temp.x = 20;
 			temp.y = 89;
 			return temp;

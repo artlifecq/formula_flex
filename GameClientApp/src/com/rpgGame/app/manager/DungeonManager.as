@@ -33,6 +33,8 @@ package com.rpgGame.app.manager
 		public static var challengeCount: int=0;
 		/**各副本通关次数*/
 		public static var panelInfos: Vector.<MultiZonePanelInfo>;
+		/**点击匹配 副本id*/
+		//public static var selectZid:int=0;
 		/**进入匹配 副本id*/
 		public static var teamZid:int=0;
 		/**投票副本id*/
@@ -40,7 +42,7 @@ package com.rpgGame.app.manager
 		public static var voteList:Array;
 		
 		
-		/**返回副本对应阶段的 文字描述*/
+		/**设置副本杀怪完成次数*/
 		public static function setKillInfos(info:KillMonsterInfo):void
 		{
 			if(killInfos&&killInfos.length>0)
@@ -54,8 +56,6 @@ package com.rpgGame.app.manager
 					}
 				}
 			}
-			
-			
 		}
 		public static function setPanelInfos(zoneId:int,count:int,rewardCount:int):void
 		{
@@ -71,8 +71,6 @@ package com.rpgGame.app.manager
 					}
 				}
 			}
-			
-			
 		}
 		public static function getPanelInfo(zoneId:int):MultiZonePanelInfo
 		{
@@ -190,12 +188,8 @@ package com.rpgGame.app.manager
 			}
 			
 		}
-		/**创建进入匹配队伍投票列表*/
-		public static function isAllTeamOk():void
-		{
-			
-			
-		}
+		
+		/**队员是否已经投票同意*/
 		public static function isVote(mid:long):Boolean
 		{
 			var i:int;

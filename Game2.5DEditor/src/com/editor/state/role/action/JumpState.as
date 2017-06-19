@@ -38,7 +38,7 @@ package com.editor.state.role.action
 
 		override public function execute() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				super.execute();
 				_stateReference = null;
@@ -142,7 +142,7 @@ package com.editor.state.role.action
 		override public function afterExecute() : void
 		{
 			super.afterExecute();
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				if (_startRiseTween)
 				{
@@ -251,7 +251,7 @@ package com.editor.state.role.action
 
 		private function onPlayJumpCmp() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				stopJump();
 				if ((_machine as RoleStateMachine).isPrewarWaiting)

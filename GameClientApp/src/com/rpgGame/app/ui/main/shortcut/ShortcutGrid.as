@@ -521,7 +521,7 @@ package com.rpgGame.app.ui.main.shortcut
 			imgAutoUse.visible = isShow;
 			if (isShow)
 			{
-				setChildIndex(imgAutoUse, parent.numChildren);
+				addChild(imgAutoUse);
 			}
 			if(labTxt!=null)
 			{

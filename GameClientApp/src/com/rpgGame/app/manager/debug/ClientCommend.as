@@ -111,6 +111,10 @@ package   com.rpgGame.app.manager.debug
 			{
 				GameLog.enableTrace=false;
 			});
+			commandList.put( ".df", function (...arg):void
+			{
+				Mgr.d1v1Mgr.autoJoin();
+			});
 		}
 		
 		

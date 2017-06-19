@@ -11,6 +11,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.AttFormulaConfig;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.AttachEffectCfgData;
+	import com.rpgGame.coreData.cfg.BattleRankCfg;
 	import com.rpgGame.coreData.cfg.BuffStateDataManager;
 	import com.rpgGame.coreData.cfg.ChangeModelCfgData;
 	import com.rpgGame.coreData.cfg.ChatCfgData;
@@ -46,6 +47,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.LostSkillUpData;
 	import com.rpgGame.coreData.cfg.LunJianCfg;
 	import com.rpgGame.coreData.cfg.MailCfgData;
+	import com.rpgGame.coreData.cfg.MapPreLoadData;
 	import com.rpgGame.coreData.cfg.MazeCfgData;
 	import com.rpgGame.coreData.cfg.NewFuncCfgData;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
@@ -70,6 +72,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.ZoneCfgData;
 	import com.rpgGame.coreData.cfg.ZoneMultyCfgData;
 	import com.rpgGame.coreData.cfg.active.ActivetyDataManager;
+	import com.rpgGame.coreData.cfg.active.WorldBossCfgData;
 	import com.rpgGame.coreData.cfg.animat.EffectAnimationCfgData;
 	import com.rpgGame.coreData.cfg.biao.BiaoCfgData;
 	import com.rpgGame.coreData.cfg.cheats.CheatsCfg;
@@ -213,6 +216,7 @@ package com.rpgGame.app.data
 			//			CountryUnionStatCfgData.setup(null); //待解决
 			MeridianCfg.setup(dic[ConfigClassRegister.Q_meridian]);
 			ActivetyDataManager.setup(dic[ConfigClassRegister.Q_special_activities]);
+			WorldBossCfgData.setup(dic[ConfigClassRegister.Q_world_boss]);
 			
 			////////////////////////////////////////////////////////////////////////
 			//
@@ -221,6 +225,7 @@ package com.rpgGame.app.data
 			///////////////////////////////////////////////////////////////////////
 			//场景相关
 			MapDataManager.setSceneConfig(dic[ConfigClassRegister.Q_map]);
+			MapPreLoadData.setup(dic[ConfigClassRegister.Q_map_preload]);
 			// 地图区域
 			AreaCfgData.setup(dic[ConfigClassRegister.Q_area]);
 			// 传送门
@@ -232,6 +237,7 @@ package com.rpgGame.app.data
 			
 			//技能相关
 			SpellDataManager.setConfig(dic[ConfigClassRegister.Q_skill_model]);//技能总表
+			SpellDataManager.setWarningConfig(dic[ConfigClassRegister.Q_skill_warning]);//技能总表
 			SpellEffectDataManager.setConfig(dic[ConfigClassRegister.Q_SpellEffect]);//每个技能效果，具体参数配置表
 			AnimationDataManager.setConfig(dic[ConfigClassRegister.Q_SpellAnimation]);///技能特效配置表
 			//公共CD配置
@@ -270,7 +276,7 @@ package com.rpgGame.app.data
 			//坐骑数据
 			HorseConfigData.setConfig(dic[ConfigClassRegister.Q_horse]);
 			//战旗数据
-			ZhanQiConfigData.setConfig(dic[ConfigClassRegister.Q_warFlag]);
+			ZhanQiConfigData.setConfig(dic[ConfigClassRegister.Q_warflag]);
 			//			HorseSpellData.setConfig(dic[ConfigClassRegister.Q_horse_skills]);
 			HorseExtraItemInfo.createInfo();
 			ZhanQiExtraItemInfo.createInfo();
@@ -292,6 +298,7 @@ package com.rpgGame.app.data
 			GuildSkillCfgData.setup(dic[ConfigClassRegister.Q_guildskill]);//帮派技能表
 			//功能开启
 			//ClientFunctionOpenCfgData.setup(dic["data.ClientFunctionOpen"]);
+			BattleRankCfg.setup(dic[ConfigClassRegister.Q_battle_rank]);//多人副本
 		}
 		
 		/**

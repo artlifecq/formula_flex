@@ -15,9 +15,12 @@ package com.rpgGame.app.manager.guild
 	import com.rpgGame.coreData.clientConfig.Q_guild;
 	import com.rpgGame.coreData.clientConfig.Q_guild_permission;
 	import com.rpgGame.coreData.clientConfig.Q_guildskill;
+	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.enum.EnumGuildPost;
+	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.lang.LangGuild;
+	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.guild.bean.GuildApplyInfo;
 	import com.rpgGame.netData.guild.bean.GuildBriefnessInfo;
 	import com.rpgGame.netData.guild.bean.GuildInfo;
@@ -201,8 +204,26 @@ package com.rpgGame.app.manager.guild
 			_needSwitchChange = false;
 		}
 		
-		public function get haveDailyGift(): int{
-			return _haveDailyGift;
+		public function get DailyGiftRewards():String
+		{
+			var str:String;
+			var itemInfos:Object = JSONUtil.decode(guildLevelInfo.q_gift_data);
+			var iteminfo:Object;
+			if(selfMemberInfo.memberType == EnumGuildPost.GUILDPOST_CHIEF||
+				selfMemberInfo.memberType == EnumGuildPost.GUILDPOST_AGEN_CHIEF||
+				selfMemberInfo.memberType == EnumGuildPost.GUILDPOST_VICE_CHIEF||
+				selfMemberInfo.memberType == EnumGuildPost.GUILDPOST_ELDERS)
+			{
+				iteminfo = itemInfos[0];
+			}else{
+				iteminfo = itemInfos[1];
+			}
+			var qitem:Q_item = ItemConfig.getQItemByID(iteminfo["mod"]);
+			str = HtmlTextUtil.getTextColor(ItemConfig.getItemQualityColor(qitem.q_id),qitem.q_name)+"×"+iteminfo["num"];
+			return str;
+		}
+		public function get haveDailyGift():Boolean{
+			return _haveDailyGift == 1;
 		}
 		
 		private var _currentPageInfo:ResGuildListInfoMessage
@@ -619,6 +640,11 @@ package com.rpgGame.app.manager.guild
 			var msg:ReqGuildGetDailyGiftMessage = new ReqGuildGetDailyGiftMessage();
 			msg.opaque = opaque;
 			SocketConnection.send(msg);
+		}
+		
+		public function changeGuildDailyGift():void
+		{
+			_haveDailyGift = 0;
 		}
 		/** 请求帮派捐献 **/
 		public function guildDonate(type:int,num:int,opaque:int):void

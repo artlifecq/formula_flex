@@ -214,7 +214,7 @@ package com.rpgGame.app.utils
 			switch (type)
 			{
 				case LangMenu.LOOK_HERO://查看玩家信息
-					LookSender.lookOtherPlayer(new long(heroId));
+					LookSender.lookOtherPlayer(long(heroId));
 					//					LookSender.reqLook(heroId,true);
 					//					Mgr.teamMgr.loopPlayer(heroId);
 					break;

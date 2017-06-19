@@ -8,11 +8,9 @@ package  com.rpgGame.core.utils
 	import flash.utils.setInterval;
 	
 	import feathers.controls.Label;
-	import feathers.controls.List;
 	import feathers.controls.UIAsset;
 	
 	import org.client.mainCore.ds.HashMap;
-	import org.mokylin.skin.component.list.ListSkin1;
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
@@ -24,10 +22,6 @@ package  com.rpgGame.core.utils
 	 */
 	public class MCUtil
 	{
-		
-		
-		
-		
 		public static function getSprChildNum(dis:DisplayObjectContainer):int
 		{
 			var num:int = dis.numChildren;

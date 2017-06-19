@@ -189,9 +189,7 @@ package com.game.engine3D.vo
 
 		public function set position(value : Vector3D) : void
 		{
-			x = value.x;
-			y = value.y;
-			z = value.z;
+			syncPosition(value.x, value.y, value.z, true, this);
 		}
 
 		public function get position() : Vector3D
@@ -223,6 +221,34 @@ package com.game.engine3D.vo
 		public function set alpha(value:Number):void
 		{
 			_alpha = value;
+		}
+		
+		public function syncPosition($x : Number, $y : Number, $z : Number, syncHeight:Boolean, initiator : BaseObj3D) : void
+		{
+			if (_graphicDis)
+			{
+				if (_position.x != $x || _position.y != $y || _position.z != $z)
+				{
+					_position.x = $x;
+					_position.z = $z;
+					if (_clingGroundCalculate != null)
+					{
+						_position.y = _clingGroundCalculate($x, $z);
+					}
+					_showPosition.x = _position.x + _offset.x;
+					_showPosition.y = _position.y + _offset.y;
+					_graphicDis.x = _showPosition.x;
+					_graphicDis.y = _showPosition.y;
+					if (_clingGroundCalculate == null && syncHeight)
+					{
+						_position.y = $y;
+						_showPosition.y = _position.y + _offset.y;
+						_graphicDis.y = _showPosition.y;
+					}
+					calculateVolumeBounds();
+					syncAllInfo(initiator);
+				}
+			}
 		}
 		
 		//这里的设置其实只是一个借口的问题，并没有什么实际用途
@@ -450,6 +476,30 @@ package com.game.engine3D.vo
 				}
 			}
 		}
+		
+		public function syncRotation($x : Number, $y : Number, $z : Number, initiator : BaseObj3D) : void
+		{
+			if (_graphicDis)
+			{
+				if (_rotation.x != $x || _rotation.y != $y || _rotation.z != $z)
+				{
+					TweenLite.killTweensOf(_graphicRotation, false, {x: true,y: true,z: true});
+					_rotation.setTo($x,$y,$z);
+					_showRotation.setTo($x,$y,$z);
+					if (_clingGroundCalculate != null && _volumeBounds)
+					{
+						_graphicRotation.setTo($x,$y,$z);
+						calculateVolumeBounds();
+					}
+					else
+					{
+						_graphicDis.rotateTo($x,$y,$z);
+						_graphicRotation.setTo($x,$y,$z);
+					}
+					syncAllInfo(initiator);
+				}
+			}
+		}
 
 		public function get rotationX() : Number
 		{
@@ -475,16 +525,16 @@ package com.game.engine3D.vo
 				{
 					TweenLite.killTweensOf(_graphicRotation, false, {x: true});
 					_rotation.x = value;
-					_showRotation.x = _rotation.x;
+					_showRotation.x = value;
 					if (_clingGroundCalculate != null && _volumeBounds)
 					{
-						_graphicRotation.x = _showRotation.x;
+						_graphicRotation.x = value;
 						calculateVolumeBounds();
 					}
 					else
 					{
-						_graphicDis.rotationX = _showRotation.x;
-						_graphicRotation.x = _graphicDis.rotationX;
+						_graphicDis.rotationX = value;
+						_graphicRotation.x = value;
 					}
 					syncAllInfo(initiator);
 				}
@@ -515,16 +565,16 @@ package com.game.engine3D.vo
 				{
 					TweenLite.killTweensOf(_graphicRotation, false, {y: true});
 					_rotation.y = value;
-					_showRotation.y = _rotation.y;
+					_showRotation.y = value;
 					if (_clingGroundCalculate != null && _volumeBounds)
 					{
-						_graphicRotation.y = _showRotation.y;
+						_graphicRotation.y = value;
 						calculateVolumeBounds();
 					}
 					else
 					{
-						_graphicDis.rotationY = _showRotation.y;
-						_graphicRotation.y = _graphicDis.rotationY;
+						_graphicDis.rotationY = value;
+						_graphicRotation.y = value;
 					}
 					syncAllInfo(initiator);
 				}
@@ -554,16 +604,16 @@ package com.game.engine3D.vo
 				if (_rotation.z != value)
 				{
 					_rotation.z = value;
-					_showRotation.z = _rotation.z;
+					_showRotation.z = value;
 					if (_clingGroundCalculate != null && _volumeBounds)
 					{
-						_graphicRotation.z = _showRotation.z;
+						_graphicRotation.z = value;
 						calculateVolumeBounds();
 					}
 					else
 					{
-						_graphicDis.rotationZ = _showRotation.z;
-						_graphicRotation.z = _graphicDis.rotationZ;
+						_graphicDis.rotationZ = value;
+						_graphicRotation.z = value;
 					}
 					syncAllInfo(initiator);
 				}
@@ -715,57 +765,57 @@ package com.game.engine3D.vo
 		 * @return
 		 *
 		 */
-		private function getVolumeNormal(minX : Number, minZ : Number, maxX : Number, maxZ : Number) : Vector3D
+		private function getVolumeNormal(minX : Number, minZ : Number, maxX : Number, maxZ : Number, normal : Vector3D = null) : Vector3D
 		{
-			var normal : Vector3D = null;
-			if (_graphicRotation && _clingGroundCalculate != null)
-			{
-				normal = new Vector3D();
-				var radianY : Number = _graphicRotation.y * MathConsts.DEGREES_TO_RADIANS;
-				//求旋转后面区域
-				var dist : Number = MathUtil.getDistance(0, 0, minX, minZ);
-				var radian : Number = Math.atan2(minZ, minX);
-				var dx : Number = Math.cos(radianY + radian);
-				var dy : Number = Math.sin(radianY + radian);
-				var px1 : Number = _showPosition.x + dist * dx;
-				var pz1 : Number = _showPosition.z + dist * dy;
-				var py1 : Number = _clingGroundCalculate(px1, pz1);
-				//
-				dist = MathUtil.getDistance(0, 0, maxX, minZ);
-				radian = Math.atan2(minZ, maxX);
-				dx = Math.cos(radianY + radian);
-				dy = Math.sin(radianY + radian);
-				var px2 : Number = _showPosition.x + dist * dx;
-				var pz2 : Number = _showPosition.z + dist * dy;
-				var py2 : Number = _clingGroundCalculate(px2, pz2);
-				//
-				dist = MathUtil.getDistance(0, 0, maxX, maxZ);
-				radian = Math.atan2(maxZ, maxX);
-				dx = Math.cos(radianY + radian);
-				dy = Math.sin(radianY + radian);
-				var px3 : Number = _showPosition.x + dist * dx;
-				var pz3 : Number = _showPosition.z + dist * dy;
-				var py3 : Number = _clingGroundCalculate(px3, pz3);
-				//求法向量
-				var a : Number = py1 * pz2 + py2 * pz3 + py3 * pz1 - py1 * pz3 - py2 * pz1 - py3 * pz2;
-				var b : Number = -(px1 * pz2 + px2 * pz3 + px3 * pz1 - px3 * pz2 - px2 * pz1 - px1 * pz3);
-				var c : Number = px1 * py2 + px2 * py3 + px3 * py1 - px1 * py3 - px2 * py1 - px3 * py2;
-				var d : Number = -(px1 * py2 * pz3 + px2 * py3 * pz1 + px3 * py1 * pz2 - px1 * py3 * pz2 - px2 * py1 * pz3 - px3 * py2 * pz1);
-				var e : Number = Math.sqrt(a * a + b * b + c * c);
-				var vx : Number = a / e;
-				var vy : Number = b / e;
-				var vz : Number = c / e;
-				//trace(vx.toFixed(1), vy.toFixed(1), vz.toFixed(1));
+			var radianY : Number = _graphicRotation.y * MathConsts.DEGREES_TO_RADIANS;
+			//求旋转后面区域
+			var dist : Number = MathUtil.getDistance(0, 0, minX, minZ);
+			var radian : Number = Math.atan2(minZ, minX);
+			var dx : Number = Math.cos(radianY + radian);
+			var dy : Number = Math.sin(radianY + radian);
+			var px1 : Number = _showPosition.x + dist * dx;
+			var pz1 : Number = _showPosition.z + dist * dy;
+			var py1 : Number = _clingGroundCalculate(px1, pz1);
+			//
+			dist = MathUtil.getDistance(0, 0, maxX, minZ);
+			radian = Math.atan2(minZ, maxX);
+			dx = Math.cos(radianY + radian);
+			dy = Math.sin(radianY + radian);
+			var px2 : Number = _showPosition.x + dist * dx;
+			var pz2 : Number = _showPosition.z + dist * dy;
+			var py2 : Number = _clingGroundCalculate(px2, pz2);
+			//
+			dist = MathUtil.getDistance(0, 0, maxX, maxZ);
+			radian = Math.atan2(maxZ, maxX);
+			dx = Math.cos(radianY + radian);
+			dy = Math.sin(radianY + radian);
+			var px3 : Number = _showPosition.x + dist * dx;
+			var pz3 : Number = _showPosition.z + dist * dy;
+			var py3 : Number = _clingGroundCalculate(px3, pz3);
+			//求法向量
+			var a : Number = py1 * pz2 + py2 * pz3 + py3 * pz1 - py1 * pz3 - py2 * pz1 - py3 * pz2;
+			var b : Number = -(px1 * pz2 + px2 * pz3 + px3 * pz1 - px3 * pz2 - px2 * pz1 - px1 * pz3);
+			var c : Number = px1 * py2 + px2 * py3 + px3 * py1 - px1 * py3 - px2 * py1 - px3 * py2;
+//			var d : Number = -(px1 * py2 * pz3 + px2 * py3 * pz1 + px3 * py1 * pz2 - px1 * py3 * pz2 - px2 * py1 * pz3 - px3 * py2 * pz1);
+			var e : Number = Math.sqrt(a * a + b * b + c * c);
+			var vx : Number = a / e;
+//			var vy : Number = b / e;
+			var vz : Number = c / e;
+			//trace(vx.toFixed(1), vy.toFixed(1), vz.toFixed(1));
 
-				var normalX : Number = Math.acos(vz) * MathConsts.RADIANS_TO_DEGREES - 90;
-				//var normalY : Number = Math.asin(vy) * 57.33;
-				var normalZ : Number = Math.acos(vx) * MathConsts.RADIANS_TO_DEGREES;
-				//trace("normal:", normalX.toFixed(1) /*, normalY.toFixed(1)*/, normalZ.toFixed(1));
-				normal.setTo(normalX, 0, normalZ);
-			}
+			var normalX : Number = Math.acos(vz) * MathConsts.RADIANS_TO_DEGREES - 90;
+			//var normalY : Number = Math.asin(vy) * 57.33;
+			var normalZ : Number = Math.acos(vx) * MathConsts.RADIANS_TO_DEGREES;
+			//trace("normal:", normalX.toFixed(1) /*, normalY.toFixed(1)*/, normalZ.toFixed(1));
+			normal ||= new Vector3D();
+			normal.setTo(normalX, 0, normalZ);
 			return normal;
 		}
 
+		static private var _volumeNormalLT : Vector3D = new Vector3D();
+		static private var _volumeNormalRT : Vector3D = new Vector3D();
+		static private var _volumeNormalRB : Vector3D = new Vector3D();
+		static private var _volumeNormalLB : Vector3D = new Vector3D();
 		/**
 		 * 计算体积边界。@L.L.M.Sunny
 		 *
@@ -774,10 +824,10 @@ package com.game.engine3D.vo
 		{
 			if (_graphicDis && _clingGroundCalculate != null && _volumeBounds)
 			{
-				var normalLT : Vector3D = getVolumeNormal(_volumeBounds.minX, _volumeBounds.minZ, 0, 0); //左上
-				var normalRT : Vector3D = getVolumeNormal(0, _volumeBounds.minZ, _volumeBounds.maxX, 0); //右上
-				var normalRB : Vector3D = getVolumeNormal(0, 0, _volumeBounds.maxX, _volumeBounds.maxZ); //右下
-				var normalLB : Vector3D = getVolumeNormal(_volumeBounds.minX, 0, 0, _volumeBounds.maxZ); //左下
+				var normalLT : Vector3D = getVolumeNormal(_volumeBounds.minX, _volumeBounds.minZ, 0, 0,_volumeNormalLT); //左上
+				var normalRT : Vector3D = getVolumeNormal(0, _volumeBounds.minZ, _volumeBounds.maxX, 0,_volumeNormalRT); //右上
+				var normalRB : Vector3D = getVolumeNormal(0, 0, _volumeBounds.maxX, _volumeBounds.maxZ,_volumeNormalRB); //右下
+				var normalLB : Vector3D = getVolumeNormal(_volumeBounds.minX, 0, 0, _volumeBounds.maxZ,_volumeNormalLB); //左下
 
 				var ltxAbs : Number = normalLT.x < 0 ? -normalLT.x : normalLT.x;
 				var rtxAbs : Number = normalRT.x < 0 ? -normalRT.x : normalRT.x;
@@ -825,7 +875,7 @@ package com.game.engine3D.vo
 					normalZ = normalLB.z;
 				}
 
-				var volumeMatrix : Matrix3D = new Matrix3D();
+				var volumeMatrix : Matrix3D = Matrix3DUtil.MATRIX3D;
 				Matrix3DUtil.rotateX(volumeMatrix, normalX, true);
 				Matrix3DUtil.rotateZ(volumeMatrix, normalZ, true);
 				Matrix3DUtil.rotateY(volumeMatrix, _graphicRotation.y - 90, false);
@@ -1254,17 +1304,13 @@ package com.game.engine3D.vo
 				}
 				else
 				{
-					_showRotation.x = _rotation.x;
-					_showRotation.y = _rotation.y;
-					_showRotation.z = _rotation.z;
-
+					_showRotation.copyFrom(_rotation);
+					
 					_graphicDis.rotationX = _showRotation.x;
 					_graphicDis.rotationY = _showRotation.y;
 					_graphicDis.rotationZ = _showRotation.z;
-
-					_graphicRotation.x = _graphicDis.rotationX;
-					_graphicRotation.y = _graphicDis.rotationY;
-					_graphicRotation.z = _graphicDis.rotationZ;
+					
+					_graphicRotation.copyFrom(_rotation);
 				}
 				syncAllInfo(this);
 			}
@@ -1348,6 +1394,11 @@ package com.game.engine3D.vo
 			_disposing = false;
 			
 			_isDisposed = true;
+			_depthEnable = true;
+			_depth = 0;
+			_zOffset = 0;
+			_speed = 0;
+			_planarRenderLayer = 1;
 		}
 		
 		public function instanceDestroy() : void
@@ -1421,17 +1472,13 @@ package com.game.engine3D.vo
 				}
 				else
 				{
-					_showRotation.x = _rotation.x;
-					_showRotation.y = _rotation.y;
-					_showRotation.z = _rotation.z;
-
+					_showRotation.copyFrom(_rotation);
+					
 					_graphicDis.rotationX = _showRotation.x;
 					_graphicDis.rotationY = _showRotation.y;
 					_graphicDis.rotationZ = _showRotation.z;
-
-					_graphicRotation.x = _graphicDis.rotationX;
-					_graphicRotation.y = _graphicDis.rotationY;
-					_graphicRotation.z = _graphicDis.rotationZ;
+					
+					_graphicRotation.copyFrom(_rotation);
 				}
 				syncAllInfo(this);
 			}

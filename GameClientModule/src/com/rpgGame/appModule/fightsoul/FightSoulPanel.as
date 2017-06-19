@@ -234,7 +234,7 @@ package com.rpgGame.appModule.fightsoul
 			
 			if(_skillIcon==null)
 			{
-				_skillIcon = new IconCDFace(IcoSizeEnum.ICON_48);
+				_skillIcon = IconCDFace.create(IcoSizeEnum.ICON_48);
 				_skillIcon.width = _skillIcon.height = IcoSizeEnum.ICON_48;
 				_skillIcon.setBg(GridBGType.GRID_SIZE_48);
 				_skillIcon.x = 554;
@@ -250,7 +250,7 @@ package com.rpgGame.appModule.fightsoul
 				 _itemIconLists = new Vector.<TouchToState>();
 				 for(var i:int = 0;i<length;i++)
 				 {
-					 icon= new IconCDFace(IcoSizeEnum.ICON_48);
+					 icon= IconCDFace.create(IcoSizeEnum.ICON_48);
 					 icon.width = icon.height = IcoSizeEnum.ICON_48;
 					 icon.setBg(GridBGType.GRID_SIZE_48);
 					 icon.x = 669+61*i;

@@ -5,6 +5,7 @@ package com.rpgGame.app.graphics
 	import com.game.engine3D.scene.display.BindableSprite;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.vo.BaseObjSyncInfo;
+	import com.rpgGame.app.graphics.decor.DecorCtrl;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
@@ -37,10 +38,15 @@ package com.rpgGame.app.graphics
 		private var _isDestroyed : Boolean;
 		private var _isDisposed : Boolean;
 		
+		protected var deCtrl:DecorCtrl;
 		public function BaseHeadFace()
 		{
 			super();
+//			this.graphics.beginFill(0);
+//			this.graphics.drawRect(0,0,30,30);
+//			this.graphics.endFill();
 			_isDestroyed = false;
+			deCtrl=new DecorCtrl(this);
 		}
 		
 		public function get isDestroyed():Boolean
@@ -152,7 +158,11 @@ package com.rpgGame.app.graphics
 		{
 			if (_bindDis)
 			{
-				_role.removeSyncInfo(_bindDis);
+				if (_role) 
+				{
+					_role.removeSyncInfo(_bindDis);
+				}
+				
 				PoolContainer3D.recycle(_bindDis);
 				_bindDis = null;
 			}
@@ -221,7 +231,7 @@ package com.rpgGame.app.graphics
 //			updateTranform();
 //		}
 		
-		final protected function addElement(element : DisplayObject) : void
+		final protected function addElement(element : DisplayObject,sortLevel:int=-1) : void
 		{
 			if (element == null)
 				return;
@@ -229,7 +239,8 @@ package com.rpgGame.app.graphics
 			{
 				trace("!!!!!!!!addElement", (element as UIAsset).styleName);
 			}
-			this.addChild(element);
+			deCtrl.addTop(element,sortLevel);
+			//this.addChild(element);
 		}
 		
 		final protected function removeElement(element : DisplayObject) : void
@@ -240,7 +251,9 @@ package com.rpgGame.app.graphics
 			{
 				trace("!!!!!!!!removeElement", (element as UIAsset).styleName);
 			}
-			this.removeChild(element);
+			deCtrl.removeTop(element);
+			//
+			//this.removeChild(element);
 		}
 		
 		//-----------------------------------------------------
@@ -250,13 +263,13 @@ package com.rpgGame.app.graphics
 		 * @param isShow
 		 *
 		 */
-		final protected function showAndHideElement(element : DisplayObject, isShow : Boolean) : void
+		protected function showAndHideElement(element : DisplayObject, isShow : Boolean,sortLevel:int=-1) : void
 		{
 			if (element == null)
 				return;
 			
 			//			element.visible = isShow;
-			isShow ? addElement(element) : removeElement(element)
+			isShow ? addElement(element,sortLevel) : removeElement(element)
 		}
 		
 		/**
@@ -331,6 +344,7 @@ package com.rpgGame.app.graphics
 			_bodyRu = null;
 			_role = null;
 			_isDisposed = true;
+			deCtrl.removeAll();
 		}
 		/**
 		 * 销毁自身，需要重写 

@@ -92,41 +92,41 @@ package com.rpgGame.app.manager.shell
         
         public function ShellManager() {
             this._funcs = new Dictionary();
-            this._funcs["help".toLowerCase()] = this.help;
-            this._funcs["gotomap".toLowerCase()] = this.gotoMap;
-            this._funcs["addMonster".toLowerCase()] = this.addMonster;
-            this._funcs["addHero".toLowerCase()] = this.addHero;
-            this._funcs["skill".toLowerCase()] = this.skill;
-            this._funcs["camera".toLowerCase()] = this.camera;
-            this._funcs["show".toLowerCase()] = this.show;
-            this._funcs["hide".toLowerCase()] = this.hide;
-            this._funcs["status".toLowerCase()] = this.status;
-            this._funcs["addLog".toLowerCase()] = this.addLog;
-            this._funcs["showTrans".toLowerCase()] = this.showTrans;
-            this._funcs["addTrans".toLowerCase()] = this.addTrans;
-            this._funcs["showAreaFlag".toLowerCase()] = this.showAreaFlag;
-			this._funcs["addSkillToBar".toLowerCase()] = this.addSkillToBar;
-			this._funcs["shape".toLocaleLowerCase()] = this.shapeFunc;
-			this._funcs["addBuff".toLocaleLowerCase()] = this.addBuff;
-			this._funcs["setRenderFunc".toLocaleLowerCase()] = this.setRenderFunc;
-            this._funcs["addTrap".toLowerCase()] = this.addTrap;
-            this._funcs["changeTrap".toLowerCase()] = this.changeTrap;
-			this._funcs["test".toLowerCase()] = this.test;
-			this._funcs["removeTest".toLowerCase()] = this.removeTest;
+            this._funcs["&help".toLowerCase()] = this.help;
+            this._funcs["&gotomap".toLowerCase()] = this.gotoMap;
+            this._funcs["&addMonster".toLowerCase()] = this.addMonster;
+            this._funcs["&addHero".toLowerCase()] = this.addHero;
+            this._funcs["&skill".toLowerCase()] = this.skill;
+            this._funcs["&camera".toLowerCase()] = this.camera;
+            this._funcs["&show".toLowerCase()] = this.show;
+            this._funcs["&hide".toLowerCase()] = this.hide;
+            this._funcs["&status".toLowerCase()] = this.status;
+            this._funcs["&addLog".toLowerCase()] = this.addLog;
+            this._funcs["&showTrans".toLowerCase()] = this.showTrans;
+            this._funcs["&addTrans".toLowerCase()] = this.addTrans;
+            this._funcs["&showAreaFlag".toLowerCase()] = this.showAreaFlag;
+			this._funcs["&addSkillToBar".toLowerCase()] = this.addSkillToBar;
+			this._funcs["&shape".toLocaleLowerCase()] = this.shapeFunc;
+			this._funcs["&addBuff".toLocaleLowerCase()] = this.addBuff;
+			this._funcs["&setRenderFunc".toLocaleLowerCase()] = this.setRenderFunc;
+            this._funcs["&addTrap".toLowerCase()] = this.addTrap;
+            this._funcs["&changeTrap".toLowerCase()] = this.changeTrap;
+			this._funcs["&test".toLowerCase()] = this.test;
+			this._funcs["&removeTest".toLowerCase()] = this.removeTest;
 			
-			this._funcs["corred".toLowerCase()] = this.corredMethodTest;
-			this._funcs["stopCorrode".toLowerCase()] = this.stopCorrode;
-			this._funcs["tw".toLowerCase()] = this.twtest;
+			this._funcs["&corred".toLowerCase()] = this.corredMethodTest;
+			this._funcs["&stopCorrode".toLowerCase()] = this.stopCorrode;
+			this._funcs["&tw".toLowerCase()] = this.twtest;
 
-            this._funcs["playerCamerVibrate".toLowerCase()] = this.playerCamerVibrate;
-			this._funcs["testRibbon".toLowerCase()] = this.testRibbon;
-            this._funcs["addRoleMask".toLowerCase()] = this.addRoleMask;
-            this._funcs["addMount".toLowerCase()] = this.addMount;
-            this._funcs["showCd".toLowerCase()] = this.showCd;
-            this._funcs["showSameEffect".toLowerCase()] = this.showSameEffect;
-            this._funcs["addGroods".toLowerCase()] = this.addGroods;
-            this._funcs["testHeatLayer".toLowerCase()] = this.testHeatLayer;
-            this._funcs["getView".toLowerCase()] = this.getView;
+            this._funcs["&playerCamerVibrate".toLowerCase()] = this.playerCamerVibrate;
+			this._funcs["&testRibbon".toLowerCase()] = this.testRibbon;
+            this._funcs["&addRoleMask".toLowerCase()] = this.addRoleMask;
+            this._funcs["&addMount".toLowerCase()] = this.addMount;
+            this._funcs["&showCd".toLowerCase()] = this.showCd;
+            this._funcs["&showSameEffect".toLowerCase()] = this.showSameEffect;
+            this._funcs["&addGroods".toLowerCase()] = this.addGroods;
+            this._funcs["&testHeatLayer".toLowerCase()] = this.testHeatLayer;
+            this._funcs["&getView".toLowerCase()] = this.getView;
 			this._funcs["&tasklevel".toLowerCase()] = this.testTaskLevel;
 			this._funcs["&autofight".toLowerCase()] = this.testStopFight;
 			this._funcs["&showDistrictWireframe".toLowerCase()] = this.showDistrictWireframe;
@@ -290,13 +290,35 @@ package com.rpgGame.app.manager.shell
 		
 		private function test(alpha:Number):void
 		{
-			if(alpha == 1)
-			{
-				MainRoleManager.actor.forEachRenderUnit(setFunc);
+			if(alpha > 0)
+			{	
+				SceneManager.scene.view3d.colorFilter.adjustSaturation(-1);
 			}
-			else
+			if(alpha > 1)
 			{
-				MainRoleManager.actor.forEachRenderUnit(setFunc1);
+//				MainRoleManager.actor.forEachRenderUnit(setFunc);
+//				SceneManager.scene.addGrayScene();
+				SceneManager.scene.view3d.colorFilter.adjustContrast(alpha-1);
+			}
+			else if(alpha > 2)
+			{
+//				MainRoleManager.actor.forEachRenderUnit(setFunc1);
+//				SceneManager.scene.removeGrayScene();
+//				SceneManager.scene.view3d.colorFilter.adjustSaturation(alpha);
+				SceneManager.scene.view3d.colorFilter.adjustBrightness(alpha-2);
+			}
+			else if(alpha > 3)
+			{
+				SceneManager.scene.view3d.colorFilter.adjustHue(alpha-3);
+			}
+			else if(alpha > 4)
+			{
+				SceneManager.scene.view3d.colorFilter.tint(0xff0000,alpha - 4);
+			}
+			else if(alpha < 0)
+			{
+//				SceneManager.scene.view3d.colorFilter.invert();
+				SceneManager.scene.view3d.colorFilter.reset();
 			}
 		}
 		

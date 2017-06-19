@@ -3,14 +3,8 @@ package com.rpgGame.appModule.dungeon.multy
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.DungeonManager;
 	import com.rpgGame.app.manager.ItemActionManager;
-	import com.rpgGame.app.manager.TeamManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.sender.DungeonSender;
-	import com.rpgGame.app.ui.SkinUIModePanel;
-	import com.rpgGame.app.ui.main.activityBar.item.ActivityButton;
-	import com.rpgGame.app.ui.main.buttons.IOpen;
-	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.app.utils.TimeUtil;
@@ -19,7 +13,6 @@ package com.rpgGame.appModule.dungeon.multy
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.DungeonEvent;
 	import com.rpgGame.coreData.cfg.ClientConfig;
-	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.ZoneCfgData;
 	import com.rpgGame.coreData.cfg.ZoneMultyCfgData;
@@ -28,13 +21,9 @@ package com.rpgGame.appModule.dungeon.multy
 	import com.rpgGame.coreData.clientConfig.Q_zone;
 	import com.rpgGame.coreData.clientConfig.Q_zone_multy;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
-	import com.rpgGame.coreData.info.MapDataManager;
-	import com.rpgGame.coreData.info.map.EnumMapType;
-	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.netData.zone.bean.MultiZonePanelInfo;
 	
 	import flash.utils.Dictionary;
-	import flash.utils.setTimeout;
 	
 	import away3d.events.Event;
 	
@@ -51,12 +40,10 @@ package com.rpgGame.appModule.dungeon.multy
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.fuben.FuBen_DuoRen_Item;
 	import org.mokylin.skin.app.fuben.FuBen_DuoRen_Skin;
-	
+	import com.rpgGame.coreData.type.CharAttributeType;
 	import starling.display.DisplayObject;
 	import starling.display.Shape;
 	import starling.display.Sprite;
-	
-	import utils.TimerServer;
 
 	public class MultyView extends ViewUI
 	{
@@ -89,7 +76,7 @@ package com.rpgGame.appModule.dungeon.multy
 		{
 			EventManager.addEvent(DungeonEvent.ZONE_ENTER_TEAM,changeTeamItem);//进入队列
 			EventManager.addEvent(DungeonEvent.ZONE_EXIT_TEAM,changeTeamItem);//退出队列
-			EventManager.addEvent(DungeonEvent.ZONE_ENTER_TEAM,teamTime);//队列时间
+			EventManager.addEvent(DungeonEvent.ZONE_TEAM_TIME,teamTime);//队列时间
 			
 			
 		}
@@ -97,7 +84,7 @@ package com.rpgGame.appModule.dungeon.multy
 		{
 			EventManager.removeEvent(DungeonEvent.ZONE_ENTER_TEAM,changeTeamItem);//进入队列
 			EventManager.removeEvent(DungeonEvent.ZONE_EXIT_TEAM,changeTeamItem);//进入队列
-			EventManager.removeEvent(DungeonEvent.ZONE_ENTER_TEAM,teamTime);//进入队列
+			EventManager.removeEvent(DungeonEvent.ZONE_TEAM_TIME,teamTime);//进入队列
 			TweenLite.killDelayedCallsTo(tweeReward);
 			
 		}
@@ -139,10 +126,15 @@ package com.rpgGame.appModule.dungeon.multy
 			{
 				DungeonSender.reqEnterDungeon(zoneData.q_id);
 				
+				DungeonSender.reqTeamMatchVote(zoneData.q_id,1);
+				
+				//_skin.btnEnter.isEnabled=false;
+				//DungeonManager.selectZid=selectZid;
+				
 				//AppManager.showApp(AppConstant.MULTY_ENTERTIME_PANL);
 				//DungeonSender.reqTeamMatchVote(zoneData.q_id,1);
 				//_skin.btnEnter.isEnabled=false;
-				//DungeonManager.teamZid=selectZid;
+				
 				//changeTeamItem();
 				//AppManager.showApp(AppConstant.MULTY_TEAM_PANL);
 			}
@@ -151,7 +143,7 @@ package com.rpgGame.appModule.dungeon.multy
 		{
 			if(selectZid<0)return;
 			DungeonSender.reqCancelTeam(selectZid);
-			_skin.btnExit.isEnabled=false;
+			//_skin.btnExit.isEnabled=false;
 			
 		}
 		
@@ -423,7 +415,7 @@ package com.rpgGame.appModule.dungeon.multy
 					item=ItemConfig.getQItemByID(reward[i].mod);
 					if(item!=null)
 					{
-						ico=new IconCDFace(IcoSizeEnum.ICON_36);
+						ico=IconCDFace.create(IcoSizeEnum.ICON_36);
 						ico.showCD=false;
 						ico.x=_skin["reward_ico_"+i].x+6;
 						ico.y=_skin["reward_ico_"+i].y+6;
@@ -511,7 +503,7 @@ package com.rpgGame.appModule.dungeon.multy
 				item=ItemConfig.getQItemByID(reward.mod);
 				if(item!=null)
 				{
-					ico=new IconCDFace(IcoSizeEnum.ICON_48);
+					ico=IconCDFace.create(IcoSizeEnum.ICON_48);
 					ico.showCD=false;
 					ico.x=temp.pass_ico.x;
 					ico.y=temp.pass_ico.y;
@@ -538,7 +530,7 @@ package com.rpgGame.appModule.dungeon.multy
 						item=ItemConfig.getQItemByID(passReward[i].mod);
 						if(item!=null)
 						{
-							ico=new IconCDFace(IcoSizeEnum.ICON_36);
+							ico=IconCDFace.create(IcoSizeEnum.ICON_36);
 							ico.showCD=false;
 							ico.x=temp["prob_ioc_"+add].x+6;
 							ico.y=temp["prob_ioc_"+add].y+6;

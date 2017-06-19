@@ -79,7 +79,7 @@
 				StoryManager.get().uiLayer = storyUiLayer;
 
                 LayerManager.setup(container);
-				Stage3DLayerManager.errorChecking = true;
+//				Stage3DLayerManager.errorChecking = true;
 				Stage3DLayerManager.setup(container.stage, container, stage3DLayerSetupComplete,null,null, 1, 10);
 			}
 

@@ -1,10 +1,12 @@
 package org.mokylin.skin.loading
 {
 	import feathers.controls.text.Fontter;
+	import feathers.controls.Group;
 	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import org.mokylin.skin.loading.LoadingUpSkin;
 	import org.mokylin.skin.loading.loadingBarSkin;
 
 	/**
@@ -19,11 +21,19 @@ package org.mokylin.skin.loading
 		//==========================================================================
 		public var bgImage:feathers.controls.UIAsset;
 
+		public var grpBottom:feathers.controls.Group;
+
+		public var inSuaxin:feathers.controls.Label;
+
 		public var infoTxt:feathers.controls.Label;
+
+		public var infoTxt2:feathers.controls.Label;
 
 		public var loadingBar:feathers.controls.SkinnableContainer;
 
 		public var progressTxt:feathers.controls.Label;
+
+		public var skinUp:feathers.controls.SkinnableContainer;
 
 
 		//==========================================================================
@@ -34,9 +44,9 @@ package org.mokylin.skin.loading
 			super();
 			
 			this.currentState = "normal";
-			this.height = 1080;
+			this.height = 934;
 			this.width = 1920;
-			this.elementsContent = [bgImage_i(),loadingBar_i(),__ResLoadingViewSkin_UIAsset1_i(),infoTxt_i(),progressTxt_i()];
+			this.elementsContent = [bgImage_i(),grpBottom_i(),skinUp_i()];
 			
 			states = {
 			};
@@ -50,11 +60,21 @@ package org.mokylin.skin.loading
 		private function __ResLoadingViewSkin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 19;
+			temp.height = 188;
+			temp.styleName = "ui/big_bg/bg_2.png";
+			temp.x = 0;
+			temp.y = 2;
+			return temp;
+		}
+
+		private function __ResLoadingViewSkin_UIAsset2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.height = 17;
 			temp.styleName = "ui/loading/wenzi.png";
-			temp.width = 947;
-			temp.x = 487;
-			temp.y = 1047;
+			temp.width = 702;
+			temp.x = 609;
+			temp.y = 160;
 			return temp;
 		}
 
@@ -63,11 +83,55 @@ package org.mokylin.skin.loading
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bgImage = temp;
 			temp.name = "bgImage";
-			temp.height = 1080;
-			temp.styleName = "ui/big_bg/lanch_bg.png";
+			temp.height = 730;
+			temp.styleName = "ui/big_bg/bg_mo.png";
 			temp.width = 1920;
 			temp.x = 0;
-			temp.y = 0;
+			temp.y = 82;
+			return temp;
+		}
+
+		private function grpBottom_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			grpBottom = temp;
+			temp.name = "grpBottom";
+			temp.x = 0;
+			temp.y = 743;
+			temp.elementsContent = [__ResLoadingViewSkin_UIAsset1_i(),__ResLoadingViewSkin_UIAsset2_i(),loadingBar_i(),progressTxt_i(),infoTxt_i(),infoTxt2_i(),inSuaxin_i()];
+			return temp;
+		}
+
+		private function inSuaxin_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			inSuaxin = temp;
+			temp.name = "inSuaxin";
+			temp.height = 19;
+			temp.text = "卡住了，点击刷新";
+			temp.textAlign = "right";
+			temp.color = 0xE8C958;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.underline = true;
+			temp.width = 108;
+			temp.x = 1184;
+			temp.y = 98;
+			return temp;
+		}
+
+		private function infoTxt2_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			infoTxt2 = temp;
+			temp.name = "infoTxt2";
+			temp.height = 19;
+			temp.text = "标签";
+			temp.textAlign = "center";
+			temp.color = 0x2C87B0;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 687;
+			temp.x = 616;
+			temp.y = 98;
 			return temp;
 		}
 
@@ -78,11 +142,12 @@ package org.mokylin.skin.loading
 			temp.name = "infoTxt";
 			temp.height = 19;
 			temp.text = "标签";
+			temp.textAlign = "center";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 687;
-			temp.x = 639;
-			temp.y = 975;
+			temp.x = 616;
+			temp.y = 77;
 			return temp;
 		}
 
@@ -95,8 +160,8 @@ package org.mokylin.skin.loading
 			var skin:StateSkin = new org.mokylin.skin.loading.loadingBarSkin()
 			temp.skin = skin
 			temp.width = 723;
-			temp.x = 620;
-			temp.y = 999;
+			temp.x = 598.5;
+			temp.y = 118;
 			return temp;
 		}
 
@@ -106,13 +171,27 @@ package org.mokylin.skin.loading
 			progressTxt = temp;
 			temp.name = "progressTxt";
 			temp.height = 19;
-			temp.text = "标签";
+			temp.text = "总进度：100%";
 			temp.textAlign = "center";
 			temp.color = 0xdedede;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 643;
-			temp.x = 659;
-			temp.y = 1005;
+			temp.width = 687;
+			temp.x = 616;
+			temp.y = 124;
+			return temp;
+		}
+
+		private function skinUp_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			skinUp = temp;
+			temp.name = "skinUp";
+			temp.height = 162;
+			var skin:StateSkin = new org.mokylin.skin.loading.LoadingUpSkin()
+			temp.skin = skin
+			temp.width = 1920;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
