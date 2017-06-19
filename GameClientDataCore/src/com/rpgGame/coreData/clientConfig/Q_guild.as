@@ -29,11 +29,11 @@ package com.rpgGame.coreData.clientConfig
 		 /**  统帅技能等级 */
 		public var q_commander_skill_num:int;
 		 /**  每日福利加成[帮众奖励,官员奖励] */
-		public var q_daily_gift_id:int;
+		public var q_gift_data:String;
 		 /**  参加皇城争霸 */
 		public var q_emperor_join:int;
 		 /**  特权展示 */
-		public var q_privilege_show:int;
+		public var q_privilege_show:String;
 
 	}
 }

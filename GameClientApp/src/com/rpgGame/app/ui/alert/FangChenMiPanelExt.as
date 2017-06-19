@@ -2,11 +2,7 @@ package com.rpgGame.app.ui.alert
 {
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.core.utils.MCUtil;
-	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	
-	import gs.TweenLite;
-	
-	import org.client.mainCore.ds.HashMap;
 	import org.mokylin.skin.app.tips.Fangchenmi_Skin;
 	
 	import starling.display.DisplayObject;

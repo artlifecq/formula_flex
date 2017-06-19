@@ -28,6 +28,7 @@ package com.rpgGame.app.utils
 	import com.rpgGame.core.manager.tips.TipManager;
 	import com.rpgGame.core.view.ui.tip.implement.IBaseTipsInfo;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.HuBaoData;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.collect.CollectCfgData;
@@ -85,7 +86,7 @@ package com.rpgGame.app.utils
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
-
+	
 	/**
 	 * 任务
 	 * @author luguozheng
@@ -94,7 +95,7 @@ package com.rpgGame.app.utils
 	 */
 	public class TaskUtil
 	{
-
+		
 		/**
 		 * 根据任务类型，获取描述字段			这个方法没做完，还要完善
 		 * @param _targetInfo
@@ -106,7 +107,7 @@ package com.rpgGame.app.utils
 		{
 			if (_targetInfo == null)
 				return "";
-
+			
 			var info : String = "";
 			var prefix : String = "";
 			var content : String = "";
@@ -119,33 +120,33 @@ package com.rpgGame.app.utils
 				case TaskTargetType.TASK_TARGET_LEVEL_UP:
 					var upgradeInfo : TaskTargetUpgradeInfo = _targetInfo as TaskTargetUpgradeInfo;
 					content = LanguageConfig.replaceStr("升级推荐:$", [upgradeInfo.upgradeLvl]);
-
+					
 					var index : int = Math.floor(upgradeInfo.upgradeRecommendMonsterIDArr.length * Math.random());
 					var monsterInfo : String = LanguageConfig.replaceStr("<br/>推荐打怪:$", [RichTextCustomUtil.getTextLinkCode(MonsterDataManager.getMonsterName(upgradeInfo.upgradeRecommendMonsterIDArr[index]), StaticValue.COLOR_CODE_16, RichTextCustomLinkType.TASK_KILL_MONSTER_TYPE, upgradeInfo.upgradeRecommendMonsterIDArr[index] + "")]);
-
+					
 					content += monsterInfo;
 					break;
-
+				
 				case TaskTargetType.TASK_TARGET_REPLY_NPC:
 					var replyInfo : TaskTargetReplyInfo = _targetInfo as TaskTargetReplyInfo;
-
+					
 					npcData = MonsterDataManager.getData(replyInfo.npcId);
 					content = LanguageConfig.replaceStr("任务回复:$", [RichTextCustomUtil.getTextLinkCode(npcData ? npcData.q_name : "未知", StaticValue.COLOR_CODE_16, RichTextCustomLinkType.TASK_NPC_NAME_TYPE, replyInfo.npcId + "")]);
-
+					
 					break;
-
+				
 				case TaskTargetType.TASK_TARGET_KILL_MONSTER:
 					var monsterTargetInfo : TaskTargetMonsterInfo = _targetInfo as TaskTargetMonsterInfo;
 					content = RichTextCustomUtil.getTextLinkCode(MonsterDataManager.getMonsterName(monsterTargetInfo.killMonsterId) + getProgress(progressNum, monsterTargetInfo.killMonsterCount), StaticValue.COLOR_CODE_16, RichTextCustomLinkType.TASK_KILL_MONSTER_TYPE, monsterTargetInfo.killMonsterId + "");
 					content = LanguageConfig.replaceStr("击败:$", [content]);
 					break;
-
+				
 				case TaskTargetType.TASK_TARGET_KILL_MONSTER_AND_COLLECT:
 					var monsterCollectTargetInfo : TaskTargetMonsterGoodsInfo = _targetInfo as TaskTargetMonsterGoodsInfo;
 					content = RichTextCustomUtil.getTextLinkCode(MonsterDataManager.getMonsterName(monsterCollectTargetInfo.dropGoodsMonsterId), StaticValue.COLOR_CODE_16, RichTextCustomLinkType.TASK_COLLECT_KILL_MONSTER_TYPE, monsterCollectTargetInfo.dropGoodsMonsterId + "");
 					content = LanguageConfig.replaceStr("击败 $ 收集:$", [content, monsterCollectTargetInfo.dropGoodsName + getProgress(progressNum, monsterCollectTargetInfo.dropGoodsCount)]);
 					break;
-
+				
 				case TaskTargetType.TASK_TARGET_GATHER:
 					var gatherTargetInfo : TaskTargetGatherGoodsInfo = _targetInfo as TaskTargetGatherGoodsInfo;
 					var collectInfo : CollectObjcetInfo = CollectCfgData.getRandomColloct(gatherTargetInfo.collectGoodsType);
@@ -153,7 +154,7 @@ package com.rpgGame.app.utils
 					content = RichTextCustomUtil.getTextLinkCode(content, StaticValue.COLOR_CODE_16, RichTextCustomLinkType.TASK_COLLECT_TYPE, taskId + "," + collectInfo.objectID + "," + gatherTargetInfo.collectGoodsType + "," + collectInfo.sceneID + "," + collectInfo.tileX + "," + collectInfo.tileY);
 					content = LanguageConfig.replaceStr("采集:$", [content]);
 					break;
-
+				
 				case TaskTargetType.TASK_FOLLOW_ESCORT:
 					var escortInfo : TaskFollowEscortInfo = _targetInfo as TaskFollowEscortInfo;
 					if (escortInfo.roleId > 0)
@@ -195,51 +196,51 @@ package com.rpgGame.app.utils
 							break;
 					}
 					break;
-
-//				case TaskType.TASK_TARGET_DEDUCT_BACKPACK_GOODS:
-//					var goodsTargetInfo:TaskTargetBagGoodsInfo = _targetInfo as TaskTargetBagGoodsInfo;
-//					prefix = "需要物品:";
-//					content = ItemCfgData.getItemName(goodsTargetInfo.depotGoodsId);
-//					suffix = "(" + progressNum + "/" + goodsTargetInfo.depotGoodsCount + ")";
-//					break;
-//				case TaskType.TASK_TARGET_DUNGEON:
-//					var dungeonTargetInfo:TaskTargetDungeonInfo = _targetInfo as TaskTargetDungeonInfo;
-//					prefix = "进入副本:";
-//					content = MapDataManager.getMapName(dungeonTargetInfo.dungeonID);
-//					break;
-//				case TaskType.TASK_TARGET_LAYER_STORY:
-//					var layerStoryTargetInfo:TaskTargetLayerStory = _targetInfo as TaskTargetLayerStory;
-//					prefix = "探索:";
-//					content = layerStoryTargetInfo.content || MapDataManager.getMapName(layerStoryTargetInfo.sceneId);
-//					break;
-//				case TaskType.TASK_TARGET_FINISH_DUNGEON:
-//					var finishDungeonTargetInfo:TaskTargetFinishDungeonInfo = _targetInfo as TaskTargetFinishDungeonInfo;
-//					prefix = "通过副本:"
-//					content = MapDataManager.getMapName(finishDungeonTargetInfo.finishDungeon);
-//					suffix = "(" + progressNum + "/" + finishDungeonTargetInfo.finishTimes + ")";
-//					isFlyBtn = false;
-//					break;
-//				case TaskType.TASK_TARGET_GU_JIAN_SHENG_JIE:
-//					var guJianShengJieTargetInfo:TaskTargetGuJianShengJieInfo = _targetInfo as TaskTargetGuJianShengJieInfo;
-//					content = "查看缺少的装备";
-//					isFlyBtn = false;
-//					break;
+				
+				//				case TaskType.TASK_TARGET_DEDUCT_BACKPACK_GOODS:
+				//					var goodsTargetInfo:TaskTargetBagGoodsInfo = _targetInfo as TaskTargetBagGoodsInfo;
+				//					prefix = "需要物品:";
+				//					content = ItemCfgData.getItemName(goodsTargetInfo.depotGoodsId);
+				//					suffix = "(" + progressNum + "/" + goodsTargetInfo.depotGoodsCount + ")";
+				//					break;
+				//				case TaskType.TASK_TARGET_DUNGEON:
+				//					var dungeonTargetInfo:TaskTargetDungeonInfo = _targetInfo as TaskTargetDungeonInfo;
+				//					prefix = "进入副本:";
+				//					content = MapDataManager.getMapName(dungeonTargetInfo.dungeonID);
+				//					break;
+				//				case TaskType.TASK_TARGET_LAYER_STORY:
+				//					var layerStoryTargetInfo:TaskTargetLayerStory = _targetInfo as TaskTargetLayerStory;
+				//					prefix = "探索:";
+				//					content = layerStoryTargetInfo.content || MapDataManager.getMapName(layerStoryTargetInfo.sceneId);
+				//					break;
+				//				case TaskType.TASK_TARGET_FINISH_DUNGEON:
+				//					var finishDungeonTargetInfo:TaskTargetFinishDungeonInfo = _targetInfo as TaskTargetFinishDungeonInfo;
+				//					prefix = "通过副本:"
+				//					content = MapDataManager.getMapName(finishDungeonTargetInfo.finishDungeon);
+				//					suffix = "(" + progressNum + "/" + finishDungeonTargetInfo.finishTimes + ")";
+				//					isFlyBtn = false;
+				//					break;
+				//				case TaskType.TASK_TARGET_GU_JIAN_SHENG_JIE:
+				//					var guJianShengJieTargetInfo:TaskTargetGuJianShengJieInfo = _targetInfo as TaskTargetGuJianShengJieInfo;
+				//					content = "查看缺少的装备";
+				//					isFlyBtn = false;
+				//					break;
 			}
-
+			
 			info = prefix + content + suffix;
 			if (isFlyBtn)
 			{
 				info += RichTextCustomUtil.getImageLinkCode(AssetUrl.POSITION_FLY_TYPE_ICORES, RichTextCustomLinkType.TASK_FLY_TYPE, targetIndex + "," + type); //添加传送图标
 			}
-
+			
 			return info;
 		}
-
+		
 		public static function showProgressTip(_targetInfo : BaseTaskTargetInfo, progressNum : int) : String
 		{
 			if (_targetInfo == null)
 				return "";
-
+			
 			var content : String = "";
 			switch (_targetInfo.type)
 			{
@@ -248,7 +249,7 @@ package com.rpgGame.app.utils
 					var monsterTargetInfo : TaskTargetMonsterInfo = _targetInfo as TaskTargetMonsterInfo;
 					content = MonsterDataManager.getMonsterName(monsterTargetInfo.killMonsterId) + getProgress(progressNum, monsterTargetInfo.killMonsterCount);
 					break;
-
+				
 				//杀死怪采集xxx进度
 				case TaskTargetType.TASK_TARGET_KILL_MONSTER_AND_COLLECT:
 					var monsterCollectTargetInfo : TaskTargetMonsterGoodsInfo = _targetInfo as TaskTargetMonsterGoodsInfo;
@@ -261,13 +262,13 @@ package com.rpgGame.app.utils
 					content = collectInfo.name + getProgress(progressNum, gatherTargetInfo.collectGoodsCount);
 					break;
 			}
-
+			
 			if (content)
 				NoticeManager.showNotify(content);
 			return content;
 		}
-
-
+		
+		
 		/**
 		 *
 		 * @param curProgress		小于0 当它完成
@@ -279,7 +280,7 @@ package com.rpgGame.app.utils
 		{
 			if (curProgress < 0)
 			{
-//				curProgress = allProgress;
+				//				curProgress = allProgress;
 				return "×" + allProgress;
 			}
 			return "（" + curProgress + "/" + allProgress + "）"
@@ -438,14 +439,32 @@ package com.rpgGame.app.utils
 			
 			return -1;
 		}
+		
+		/**获取玩家与护宝Npc距离*/
+		public static function getDistHuBaoNpc() : int
+		{
+			var npcData : Q_scene_monster_area = MonsterDataManager.getAreaByAreaID(HuBaoData.acceptNpc);
+			if(npcData!=null)
+			{
+				if(npcData.q_mapid==SceneSwitchManager.currentMapId)
+				{
+					var dist:int = Point.distance(new Point(MainRoleManager.actor.x,MainRoleManager.actor.z),new Point(npcData.q_center_x,npcData.q_center_y));
+					
+					return dist;
+				}	
+			}
+			
+			return -1;
+		}
+		
+		
 		/**
 		 * 寻路Npc
 		 * @param id 刷新的id
 		 *
 		 */
 		public static function npcTaskWalk(id : int,onArrive:Function=null) : void
-		{
-			
+		{	
 			var monsterData : Q_scene_monster_area = MonsterDataManager.getAreaByAreaID(id);
 			if (monsterData)
 			{
@@ -541,7 +560,7 @@ package com.rpgGame.app.utils
 				//MainRoleSearchPathManager.walkToScene(npcData.q_mapid, pos.x, pos.y,onArrive, 100,null,noWalk);
 			}
 		}
-
+		
 		//------------------------------------------
 		/**
 		 * 回复任务
@@ -558,10 +577,10 @@ package com.rpgGame.app.utils
 			if (npcData)
 			{
 				var sceneRole : SceneRole = SceneManager.getSceneNpcByModelId(npcId);
-//			if( TouJingCfgData != null )
-//			{
-//				var toujingNpcId:int = TouJingCfgData.acceptNpcID;
-//			}
+				//			if( TouJingCfgData != null )
+				//			{
+				//				var toujingNpcId:int = TouJingCfgData.acceptNpcID;
+				//			}
 				var pos : Point = MonsterDataManager.getMonsterPosition(npcData);
 				var searchRoleData : SearchRoleData = new SearchRoleData();
 				searchRoleData.searchId = npcId;
@@ -575,8 +594,8 @@ package com.rpgGame.app.utils
 				}, 200, searchRoleData);
 			}
 		}
-
-
+		
+		
 		/**
 		 * 杀怪任务
 		 * 杀怪掉落任务
@@ -593,7 +612,7 @@ package com.rpgGame.app.utils
 				NoticeManager.showNotify("可以开始自己打怪了");
 			}, 200);
 		}
-
+		
 		/**
 		 * 采集
 		 * @param taskId
@@ -618,15 +637,15 @@ package com.rpgGame.app.utils
 		public static function flyToPos(taskType : int, targetIndex : int = 0, isDazuo : int = 0, chanceTaskid : int = -1, callback : Function = null) : void
 		{
 			taskType = (isDazuo << 6) | (targetIndex << 3) | taskType;
-
+			
 			if (taskType != TaskTargetType.TASK_TYPE_FLY_CHANCE)
 			{
 				targetIndex = -1;
 			}
-
+			
 			TaskSender.reqTaskTransport(taskType, chanceTaskid, false, null);
 		}
-
+		
 		/**
 		 * 跟随护送任务
 		 * @param data
@@ -648,7 +667,7 @@ package com.rpgGame.app.utils
 				{
 					sceneRole = SceneManager.getSceneNpcByModelId(npcId);
 				}
-
+				
 				if (sceneRole)
 				{
 					posX = sceneRole.x;
@@ -682,7 +701,7 @@ package com.rpgGame.app.utils
 				}, 200, searchRoleData);
 			}
 		}
-
+		
 		/**
 		 * 到场景位置
 		 * @param data
@@ -697,7 +716,7 @@ package com.rpgGame.app.utils
 			var y : int = posArr[1];
 			MainRoleSearchPathManager.walkToScene(sceneId, x, y);
 		}
-
+		
 		public static function tryCompleteSentTask() : void
 		{
 			if (!TaskManager.currentMainTaskInfo)
@@ -742,7 +761,7 @@ package com.rpgGame.app.utils
 				}
 			}
 		}
-
+		
 		/**
 		 * 到npc对话
 		 * @param data
@@ -780,7 +799,7 @@ package com.rpgGame.app.utils
 				}, 200, searchRoleData);
 			}
 		}
-
+		
 		public static function tryAddTaskIco(role : SceneRole) : void
 		{
 			if (role.type == SceneCharType.NPC)
@@ -791,7 +810,7 @@ package com.rpgGame.app.utils
 			}
 			SpellAnimationHelper.addTargetEffect(role, RenderUnitID.TASK, RenderUnitType.TASK, EffectUrl.TASK_JUAN_ZHOU, BoneNameEnum.c_0_name_01, 0, null, false);
 		}
-
+		
 		public static function tryRemoveTaskIco(role : SceneRole) : void
 		{
 			if (role.type == SceneCharType.NPC)
@@ -821,7 +840,7 @@ package com.rpgGame.app.utils
 						}
 					}
 				}
-					
+				
 				
 				
 				
@@ -905,7 +924,7 @@ package com.rpgGame.app.utils
 					}
 					
 				}
-			
+				
 			}
 			
 			

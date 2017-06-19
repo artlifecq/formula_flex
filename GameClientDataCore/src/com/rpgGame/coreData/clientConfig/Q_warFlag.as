@@ -10,7 +10,7 @@ package com.rpgGame.coreData.clientConfig
 	* @author NEIL
 	* 
 	*/
-	public class Q_warFlag
+	public class Q_warflag
 	{
 		 /**  战旗id */
 		public var q_id:int;

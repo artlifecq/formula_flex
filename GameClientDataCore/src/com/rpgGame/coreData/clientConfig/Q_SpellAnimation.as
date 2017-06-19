@@ -24,18 +24,20 @@ package com.rpgGame.coreData.clientConfig
 		public var weapon_res:String;
 		 /**  特效绑定点 */
 		public var bind_bone:String;
+		 /**  缩放量（100是原大小，不填默认为100） */
+		public var scale_x:int;
+		 /**  缩放量（100是原大小，不填默认为100） */
+		public var scale_y:int;
+		 /**  缩放量（100是原大小，不填默认为100） */
+		public var scale_z:int;
+		 /**  播放速度（相对于特效时间，默认为100，如时间为1秒的特效需要播2秒，计算公式为1/2*100=50） */
+		public var speed:int;
 		 /**  偏移量 */
 		public var offset_x:int;
 		 /**    */
 		public var offset_y:int;
 		 /**    */
 		public var offset_z:int;
-		 /**  缩放量（1是原大小，不填默认为1） */
-		public var scale_x:int;
-		 /**    */
-		public var scale_y:int;
-		 /**    */
-		public var scale_z:int;
 		 /**  特效表现效果类型 0：无特殊效果 1：暴风雪类型，对应排云掌，悲天剑雨 2：龙卷风类型，对应风神腿，断情七绝 */
 		public var special_effect:int;
 		 /**  第一次播放延时 */

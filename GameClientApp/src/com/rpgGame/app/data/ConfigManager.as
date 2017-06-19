@@ -40,6 +40,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.HintConfig;
 	import com.rpgGame.coreData.cfg.HorseConfigData;
 	import com.rpgGame.coreData.cfg.HorseSpellData;
+	import com.rpgGame.coreData.cfg.HuBaoData;
 	import com.rpgGame.coreData.cfg.JunJieData;
 	import com.rpgGame.coreData.cfg.LostSkillData;
 	import com.rpgGame.coreData.cfg.LostSkillUpData;
@@ -248,6 +249,8 @@ package com.rpgGame.app.data
 			ZhanGongData.setup(dic[ConfigClassRegister.Q_meritorious]);
 			ZhanGongMonsterData.setup(dic[ConfigClassRegister.Q_meritorious_monster]);
 			JunJieData.setup(dic[ConfigClassRegister.Q_junjie]);
+			//护宝
+			HuBaoData.setup(dic[ConfigClassRegister.Q_convoy]);
 			
 			LostSkillData.setup(dic[ConfigClassRegister.Q_lostskill_open]);
 			LostSkillUpData.setup(dic[ConfigClassRegister.Q_lostskill_up]);
@@ -269,7 +272,7 @@ package com.rpgGame.app.data
 			//坐骑数据
 			HorseConfigData.setConfig(dic[ConfigClassRegister.Q_horse]);
 			//战旗数据
-			ZhanQiConfigData.setConfig(dic[ConfigClassRegister.Q_warFlag]);
+			ZhanQiConfigData.setConfig(dic[ConfigClassRegister.Q_warflag]);
 			//			HorseSpellData.setConfig(dic[ConfigClassRegister.Q_horse_skills]);
 			HorseExtraItemInfo.createInfo();
 			ZhanQiExtraItemInfo.createInfo();

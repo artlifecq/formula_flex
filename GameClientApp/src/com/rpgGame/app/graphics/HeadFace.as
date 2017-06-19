@@ -4,10 +4,12 @@ package com.rpgGame.app.graphics
 	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.rpgGame.app.display2D.AttackFace;
+	import com.rpgGame.app.manager.HuBaoManager;
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.utils.HeadBloodUtil;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.HuBaoData;
 	import com.rpgGame.coreData.cfg.JunJieData;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
@@ -19,7 +21,6 @@ package com.rpgGame.app.graphics
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.SceneCharType;
-	import com.rpgGame.coreData.utils.JunJieUtil;
 	
 	import app.message.MonsterDataProto.MonsterType;
 	
@@ -90,6 +91,12 @@ package com.rpgGame.app.graphics
 		/**称号*/
 		private var _title : InterObject3D;
 		
+		/**护宝称号*/
+		private var _huabotitle : InterObject3D;
+		
+		/**NPC称号*/
+		private var _NPCtitle : InterObject3D;
+		
 		private var _moodTween : TweenLite;
 		
 		/** body图标*/
@@ -126,7 +133,7 @@ package com.rpgGame.app.graphics
 			_isCamouflage = false;
 			
 			initAddBar();
-//			setTemporary();
+			//			setTemporary();
 		}
 		//---------------------------------------------
 		//---------------------------------------------
@@ -161,6 +168,7 @@ package com.rpgGame.app.graphics
 					addAndUpdateHP();
 					addAndUpdateName();
 					addAndUpdateLV();
+//					updateNPCTitle();
 					break;
 				case SceneCharType.DROP_GOODS:
 					addAndUpdateName();
@@ -188,6 +196,8 @@ package com.rpgGame.app.graphics
 			addElement(_icoImage);
 			addElement(_bodyImage);
 			addElement(_title);
+			addElement(_huabotitle);
+			addElement(_NPCtitle);
 			addElement(_office);
 			addElement(_countryWarIcon);
 			addElement(_biaoFlagIcon);
@@ -290,6 +300,7 @@ package com.rpgGame.app.graphics
 					showAndHideElement(_familNameBar, _isSelected && !_isCamouflage);
 				}
 				showAndHideElement(_title, !_isCamouflage);
+				showAndHideElement(_huabotitle,!_isCamouflage);
 				showAndHideElement(_office, !_isCamouflage);
 			}
 			showAndHideElement(_junXianBar, _nameBar && _nameBar.parent && _nameBar.visible);
@@ -374,6 +385,20 @@ package com.rpgGame.app.graphics
 				_title.x = -3;
 				_title.y = offsetY - 30;
 				offsetY = _title.y;
+			}
+			
+			if(_huabotitle && _huabotitle.parent)
+			{
+				_huabotitle.x = -3;
+				_huabotitle.y = offsetY - 30;
+				offsetY = _huabotitle.y;
+			}
+			
+			if(_NPCtitle && _NPCtitle.parent)
+			{
+				_NPCtitle.x = 0;
+				_NPCtitle.y = offsetY -45;
+				offsetY = _NPCtitle.y;
 			}
 			
 			if (_office && _office.parent) //官职
@@ -989,6 +1014,16 @@ package com.rpgGame.app.graphics
 				_title.dispose();
 				_title = null;
 			}
+			if(_huabotitle != null)
+			{
+				_huabotitle.dispose();
+				_huabotitle =  null;
+			}
+			if(_NPCtitle != null)
+			{
+				_NPCtitle.dispose();
+				_NPCtitle=null;
+			}
 			if (_moodTween != null)
 			{
 				_moodTween.kill();
@@ -1099,10 +1134,9 @@ package com.rpgGame.app.graphics
 					_title = null;
 				}
 				_title = new InterObject3D();
-				
 				//				var titleData : TitleTreeData = TitleCfgData.titleHM.getValue(titleID);
 				var effName:String=JunJieData.getEffById(titleID);
-				var rud : RenderParamData3D = new RenderParamData3D(RenderUnitID.JUNJIE, RenderUnitType.JUNJIE, ClientConfig.getEffect(effName));
+				var rud:RenderParamData3D = new RenderParamData3D(RenderUnitID.JUNJIE, RenderUnitType.JUNJIE, ClientConfig.getEffect(effName));
 				_title.addRenderUnitWith(rud, 0);
 				this.addChild(_title);
 				_title.start();
@@ -1117,6 +1151,60 @@ package com.rpgGame.app.graphics
 			}
 			
 			updateAllBarPosition();
+		}
+		
+		/**增加护宝称号货移除称号*/
+		public function updateHuBaoTitle(titleID : int) : void
+		{
+			if (titleID > 0)
+			{
+				if (_huabotitle)
+				{
+					_huabotitle.removeFromParent();
+					_huabotitle = null;
+				}
+				_huabotitle = new InterObject3D();
+				
+				//				var titleData : TitleTreeData = TitleCfgData.titleHM.getValue(titleID);
+				var effName:String=HuBaoData.getEffByLv(HuBaoManager.instance().level);
+				var rud : RenderParamData3D = new RenderParamData3D(RenderUnitID.BAOWU, RenderUnitType.BAOWU, ClientConfig.getEffect(effName));
+				_huabotitle.addRenderUnitWith(rud, 0);
+				this.addChild(_huabotitle);
+				_huabotitle.start();
+			}
+			else
+			{
+				if (_huabotitle)
+				{
+					_huabotitle.removeFromParent();
+					_huabotitle = null;
+				}
+			}
+			
+			updateAllBarPosition();
+		}
+		
+		/**增加NPC称号*/
+		public function updateNPCTitle() : void
+		{
+			if(_role.type==SceneCharType.MONSTER)
+			{
+				if (_NPCtitle)
+				{
+					_NPCtitle.removeFromParent();
+					_NPCtitle = null;
+				}
+				_NPCtitle = new InterObject3D();
+				var effName:String=(_role.data as MonsterData).monsterData.q_chenhao;
+				if(effName!=null&&effName!="")
+				{
+					var rud : RenderParamData3D = new RenderParamData3D(RenderUnitID.BAOWU, RenderUnitType.BAOWU, ClientConfig.getEffect(effName));
+					_NPCtitle.addRenderUnitWith(rud, 0);
+					this.addChild(_NPCtitle);
+					_NPCtitle.start();
+					updateAllBarPosition();
+				}
+			}
 		}
 		
 		//---------------------------------------------

@@ -17,6 +17,7 @@
 	import com.rpgGame.app.cmdlistener.GuildCmdListener;
 	import com.rpgGame.app.cmdlistener.HeroMiscCmdListener;
 	import com.rpgGame.app.cmdlistener.HeroSearchCmdListener;
+	import com.rpgGame.app.cmdlistener.HuBaoContainerCmdListener;
 	import com.rpgGame.app.cmdlistener.JJBattleCmdListener;
 	import com.rpgGame.app.cmdlistener.JunJieContainerCmdListener;
 	import com.rpgGame.app.cmdlistener.LookCmdListener;
@@ -149,6 +150,7 @@
 			register("MeridianCmdListerner",MeridianCmdListerner);
 			register("ZhanGongContainerCmdListener", ZhanGongContainerCmdListener); //战功
 			register("JunJieContainerCmdListener", JunJieContainerCmdListener); //军阶
+			register("HuBaoContainerCmdListener", HuBaoContainerCmdListener); //护宝
 			register("CheatsCmdListerner",CheatsCmdListerner);
 			register("RollCmdListener",RollCmdListener);//roll掉落
 			register("DungeonCmdListener",DungeonCmdListener);

@@ -5,7 +5,7 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
-	import com.rpgGame.coreData.clientConfig.Q_warFlag;
+	import com.rpgGame.coreData.clientConfig.Q_warflag;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.type.TipType;
@@ -61,7 +61,7 @@ package com.rpgGame.appModule.mount
 					_skin.lab_xuyaowupin.color = 0xd02525;
 				}
 				_skin.uplevelgroup.visible = true;
-				const zhanqidata:Q_warFlag = _zhanqiShowData.zhanqidata;
+				const zhanqidata:Q_warflag = _zhanqiShowData.zhanqidata;
 				if(_zhanqiShowData.haveChange)
 				{
 					var rewards:Vector.<ClientItemInfo> = _zhanqiShowData.rewardItems;

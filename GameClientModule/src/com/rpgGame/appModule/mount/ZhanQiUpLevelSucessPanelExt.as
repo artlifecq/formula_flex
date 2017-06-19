@@ -12,7 +12,7 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
-	import com.rpgGame.coreData.clientConfig.Q_warFlag;
+	import com.rpgGame.coreData.clientConfig.Q_warflag;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.type.item.GridBGType;
@@ -100,7 +100,7 @@ package com.rpgGame.appModule.mount
 				_curtentInterEff = null;
 			}
 			
-			var nextShet:Q_warFlag = ZhanQiConfigData.getZhanQiDataById(zhanqiLevel);
+			var nextShet:Q_warflag = ZhanQiConfigData.getZhanQiDataById(zhanqiLevel);
 			var currentName:String=nextShet.q_panel_show_id;
 			_curtentInterEff=new InterObject3D();
 			var data : RenderParamData3D = new RenderParamData3D(0, "effect_ui", ClientConfig.getEffect(currentName));

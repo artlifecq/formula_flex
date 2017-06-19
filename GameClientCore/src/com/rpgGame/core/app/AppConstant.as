@@ -424,5 +424,13 @@ package com.rpgGame.core.app
 		public static var BATTLE_RESULT_PANEL:String = createAppInfo("battle.jjzb.JJBattleResultPanelExt","zhanchang");
 		/**战场**/
 		public static var BATTLE_SHOP_PANEL:String = createAppInfo("shop.BattleShopPanelExt","zhanchang");
+		
+		/**护宝主面板**/
+		public static var HUBAO_MAINPANEL:String = createAppInfo("hubao.HuBaoMainPanelExt","hubao");
+		/**护宝成功**/
+		public static var HUBAO_CHENGGONG:String = createAppInfo("hubao.HuBaoChengGongPanelExt","hubao");
+		/**护宝追踪**/
+		public static var HUBAO_ZHUIZONG:String = createAppInfo("dungeon.HuBaoTracjerBar","hubao");
+		
 	}
 }
