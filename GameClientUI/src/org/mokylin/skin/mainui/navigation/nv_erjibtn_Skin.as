@@ -4,7 +4,7 @@ package org.mokylin.skin.mainui.navigation
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-
+	
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
@@ -16,10 +16,10 @@ package org.mokylin.skin.mainui.navigation
 		//                                定义成员变量
 		//==========================================================================
 		public var iconDisplay:feathers.controls.UIAsset;
-
+		
 		public var labelDisplay:feathers.controls.Label;
-
-
+		
+		
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
@@ -29,45 +29,44 @@ package org.mokylin.skin.mainui.navigation
 			
 			this.currentState = "down";
 			this.width = 51;
-			this.height = 20;
 			this.elementsContent = [];
 			
 			states = {
 				hover:[
-						{target:"labelDisplay",
-							name:"color",
-							value:0xbbab91
-						}
-					]
+					{target:"labelDisplay",
+						name:"color",
+						value:0xbbab91
+					}
+				]
 				,
 				up:[
-						{target:"labelDisplay",
-							name:"color",
-							value:0x7e7669
-						}
-					]
+					{target:"labelDisplay",
+						name:"color",
+						value:0x7e7669
+					}
+				]
 				,
 				init:[
-						{target:"labelDisplay",
-							name:"textAlign",
-							value:"center"
-						}
-						,
-						{target:"labelDisplay",
-							name:"color",
-							value:0x7e7669
-						}
-						,
-						{target:"labelDisplay",
-							name:"nativeFilters",
-							value:Fontter.filterObj["labelFilterBlack"]
-						}
-					]
+					{target:"labelDisplay",
+						name:"textAlign",
+						value:"center"
+					}
+					,
+					{target:"labelDisplay",
+						name:"color",
+						value:0x7e7669
+					}
+					,
+					{target:"labelDisplay",
+						name:"nativeFilters",
+						value:Fontter.filterObj["labelFilterBlack"]
+					}
+				]
 			};
-			skinNames={"down":"ui/mainui/navigation/zhishi.png", "hover":"ui/mainui/navigation/zhishi.png"};
+			skinNames={"down":"ui/mainui/navigation/zhishi.png", "hover":"ui/mainui/navigation/zhishi.png", "up":"ui/common/hover/xuanqukuang2_alpha.png"};
 		}
-
-
+		
+		
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
@@ -78,7 +77,7 @@ package org.mokylin.skin.mainui.navigation
 			temp.name = "iconDisplay";
 			return temp;
 		}
-
+		
 		private function labelDisplay_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -93,6 +92,6 @@ package org.mokylin.skin.mainui.navigation
 			temp.x = 10;
 			return temp;
 		}
-
+		
 	}
 }

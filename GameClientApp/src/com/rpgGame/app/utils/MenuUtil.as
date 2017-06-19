@@ -2,7 +2,6 @@ package com.rpgGame.app.utils
 {
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.Mgr;
-	import com.rpgGame.app.manager.TeamManager;
 	import com.rpgGame.app.manager.chat.ChatWindowManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.friend.FriendManager;
@@ -32,7 +31,6 @@ package com.rpgGame.app.utils
 	import flash.desktop.ClipboardFormats;
 	
 	import app.message.AllFamilyOfficerDatasProto.FamilyOfficerDataProto;
-	import app.message.GuildOfficerDatasProto.GuildOfficerDataProto;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.data.long;
@@ -49,7 +47,6 @@ package com.rpgGame.app.utils
 		{
 			var selfMemberData : SocietyMemberData = SocietyManager.getSelfMemberData();
 			var officerDataProto : FamilyOfficerDataProto = selfMemberData ? SocietyStaticConfigData.getFamilyOfficerDataByPos(selfMemberData.societyPos) : null;
-			var guildOfficeDataProto : GuildOfficerDataProto = GuildManager.getSelfOfficePosData();
 			var menus : Array = [];
 			if(fromChat)
 			{
@@ -75,11 +72,51 @@ package com.rpgGame.app.utils
 			//			{
 			//				menus.push(LangMenu.INVITE_JOIN_SOCIETY);
 			//			}
-			//			if(guildOfficeDataProto && guildOfficeDataProto.canInviteOtherFamily)//能否邀请他人加入帮派
-			//			{
-			//				menus.push(LangMenu.INVITE_JOIN_GUILD);
-			//			}
+			if(GuildManager.instance().haveGuild&&GuildManager.instance().canInvite
+				&&GuildManager.instance().getGuildMemberInfoById(targetID.toString())==null)//能否邀请他人加入帮派
+			{
+				menus.push(LangMenu.INVITE_JOIN_GUILD);
+			}
 			//			menus.push(LangMenu.SEND_MAIL, LangMenu.COPY_THE_NAME, LangMenu.BLACK_FRIEND);
+			return menus;
+		}
+		
+		
+		public static function getPlayerTargetGuildMenu(targetID:String,fromChat:Boolean = false):Array
+		{
+			var menus : Array = [];
+			var selfMemberData : SocietyMemberData = SocietyManager.getSelfMemberData();
+			menus.push(LangMenu.LOOK_HERO);
+			menus.push(LangMenu.INVITE_TEAM);
+			if(GuildManager.instance().haveGuild&&GuildManager.instance().canExpel
+				&&GuildManager.instance().getGuildMemberInfoById(targetID)!=null)//逐出成员
+			{
+				menus.push(LangMenu.KICK_GUILD);
+			}
+			
+			if(GuildManager.instance().haveGuild&&GuildManager.instance().canElder
+				&&GuildManager.instance().getGuildMemberInfoById(targetID)!=null)//任命统帅
+			{
+				menus.push(LangMenu.SET_UP_VICE_LEADER);
+			}
+			
+			if(GuildManager.instance().haveGuild&&GuildManager.instance().canLeader
+				&&GuildManager.instance().getGuildMemberInfoById(targetID)!=null)//任命统帅
+			{
+				menus.push(LangMenu.SETUP_LEADER);
+			}
+			return menus;
+		}
+		
+		public static function getPlayerTargetGuildMenu2(targetID:String,fromChat:Boolean = false):Array
+		{
+			var menus : Array = [];
+			
+			if(GuildManager.instance().haveGuild&&GuildManager.instance().canLeader
+				&&GuildManager.instance().getGuildMemberInfoById(targetID)!=null)//任命统帅
+			{
+				menus.push(LangMenu.SETUP_LEADER);
+			}
 			return menus;
 		}
 		
@@ -186,7 +223,7 @@ package com.rpgGame.app.utils
 					break;
 				case LangMenu.SEND_MAIL://发送邮件
 				case LangMenu.INVITE_JOIN_GUILD:
-					GuildManager.inviteSocietyJoinMyGuild(heroId);
+					GuildManager.instance.reqGuildJoin(new long(heroId),0);
 					break;
 				case LangMenu.SEND_MAIL://邀请加入帮派
 					AppManager.showAppNoHide(AppConstant.MAIL_PANEL, [MailType.SEND, heroId, heroName, LanguageConfig.getText(LangMisc.NOTHING_INFO)]);
@@ -234,7 +271,7 @@ package com.rpgGame.app.utils
 					EventManager.dispatchEvent(ChatEvent.SWITCH_PRIVATE_CHANNEL,heroId,heroName);
 					break;
 				case LangMenu.INVITE_TEAM://组队
-					Mgr.teamMgr.InvitePlayerJoinTeam(heroId);
+					Mgr.teamMgr.InvitePlayerJoinTeam(new long(heroId));
 					//					TeamManager.InvitePlayerJoinTeam( heroId );
 					break;
 				case LangMenu.PLAY://切磋
@@ -281,16 +318,22 @@ package com.rpgGame.app.utils
 					}
 					break;
 				case LangMenu.REMOVE_VICE_LEADER:
-					GuildManager.removeViceLeader();
+					GuildManager.instance.removeViceLeader();
 					break;
 				case LangMenu.SET_UP_VICE_LEADER:
-					GuildManager.setupViceLeader();
+					if(GuildManager.instance().haveGuild&&GuildManager.instance().canNormal)
+						AppManager.showApp(AppConstant.GUILD_APPOINTED_PANEL,[heroId,heroName]);
 					break;
 				case LangMenu.KICK_GUILD:
-					GuildManager.kickFamily();
+					GuildManager.instance().guildKill(heroId);
 					break;
 				case LangMenu.MOVE_TO_HERO:
 					Mgr.teamMgr.move2TeamMember(heroId);
+					break;
+				case LangMenu.SETUP_LEADER:
+					if(GuildManager.instance().haveGuild&&GuildManager.instance().canLeader)
+						AppManager.showApp(AppConstant.GUILD_LEADER_PANEL,[heroId,heroName]);
+					break;
 					break;
 				
 			}

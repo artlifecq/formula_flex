@@ -1,5 +1,6 @@
 package com.rpgGame.netData.guild.bean{
 	
+	import org.game.netCore.data.long;
 	
 	import org.game.netCore.net.Bean;
 	
@@ -13,9 +14,12 @@ package com.rpgGame.netData.guild.bean{
 	 * 帮派列表信息
 	 */
 	public class GuildListInfo extends Bean {
-	
+		
 		//帮派排名
 		private var _rank: int;
+		
+		//帮派Id
+		private var _guildId: long;
 		
 		//帮派名称
 		private var _guildName: String;
@@ -25,6 +29,9 @@ package com.rpgGame.netData.guild.bean{
 		
 		//帮主名字
 		private var _chiefName: String;
+		
+		//帮主Id
+		private var _chiefId: long;
 		
 		//帮会人数
 		private var _guildMemberNum: int;
@@ -44,12 +51,16 @@ package com.rpgGame.netData.guild.bean{
 		override protected function writing(): Boolean{
 			//帮派排名
 			writeInt(_rank);
+			//帮派Id
+			writeLong(_guildId);
 			//帮派名称
 			writeString(_guildName);
 			//帮派等级
 			writeInt(_guildLevel);
 			//帮主名字
 			writeString(_chiefName);
+			//帮主Id
+			writeLong(_chiefId);
 			//帮会人数
 			writeInt(_guildMemberNum);
 			//总战力
@@ -67,12 +78,16 @@ package com.rpgGame.netData.guild.bean{
 		override protected function reading(): Boolean{
 			//帮派排名
 			_rank = readInt();
+			//帮派Id
+			_guildId = readLong();
 			//帮派名称
 			_guildName = readString();
 			//帮派等级
 			_guildLevel = readInt();
 			//帮主名字
 			_chiefName = readString();
+			//帮主Id
+			_chiefId = readLong();
 			//帮会人数
 			_guildMemberNum = readInt();
 			//总战力
@@ -97,6 +112,21 @@ package com.rpgGame.netData.guild.bean{
 		 */
 		public function set rank(value: int): void{
 			this._rank = value;
+		}
+		
+		/**
+		 * get 帮派Id
+		 * @return 
+		 */
+		public function get guildId(): long{
+			return _guildId;
+		}
+		
+		/**
+		 * set 帮派Id
+		 */
+		public function set guildId(value: long): void{
+			this._guildId = value;
 		}
 		
 		/**
@@ -142,6 +172,21 @@ package com.rpgGame.netData.guild.bean{
 		 */
 		public function set chiefName(value: String): void{
 			this._chiefName = value;
+		}
+		
+		/**
+		 * get 帮主Id
+		 * @return 
+		 */
+		public function get chiefId(): long{
+			return _chiefId;
+		}
+		
+		/**
+		 * set 帮主Id
+		 */
+		public function set chiefId(value: long): void{
+			this._chiefId = value;
 		}
 		
 		/**

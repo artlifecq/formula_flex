@@ -11,10 +11,12 @@ package com.rpgGame.app.graphics
 	import com.rpgGame.app.utils.HeadBloodUtil;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.GuildCfgData;
 	import com.rpgGame.coreData.cfg.JunJieData;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.FaceInfo;
+	import com.rpgGame.coreData.clientConfig.Q_guild_permission;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
@@ -144,7 +146,7 @@ package com.rpgGame.app.graphics
 				case SceneCharType.PLAYER:
 					addAndUpdateHP();
 					addAndUpdateName();
-					//addAndUpdateGuildName();
+					addAndUpdateGuildName();
 					//addAndUpdateOfficeName();
 					//addAndUpdateFamilyName();//暂无家族
 					addAndUpdateLV();
@@ -619,52 +621,34 @@ package com.rpgGame.app.graphics
 		 */
 		public function addAndUpdateGuildName() : void
 		{
-			if (_role.type != SceneCharType.PLAYER)
-				return;
-			
-			if (_role.isMainChar)
-				return;
-			
+			var guildMemberType: int = (_role.data as HeroData).guildMemberType;
 			var guildName : String = (_role.data as HeroData).guildName;
-			if (guildName == "" || guildName == null)
+			if (guildMemberType<=0||guildName == "" || guildName == null)
 			{
 				if (_guildNameBar != null)
 				{
 					HeadNameBar.recycle(_guildNameBar);
 					_guildNameBar = null;
-					
 					updateAllBarPosition();
 				}
 				return;
 			}
 			
+			var q_guild:Q_guild_permission = GuildCfgData.getPermissionInfo(guildMemberType);
+			guildName += "."+q_guild.q_name;
 			if (_guildNameBar == null)
 			{
 				//原来没有添加一个
 				_guildNameBar = HeadNameBar.create();
 				this.addChild(_guildNameBar); //更新一下容器，从临时的到模型真正容器
-				//				if((_role.data as HeroData).isKingFamily)
-				//				{
-				//					_guildNameBar.setName("[王城]"+guildName);
-				//				}
-				//				else
-				//				{
-				//					_guildNameBar.setName(guildName);
-				//				}
+				_guildNameBar.setName(guildName);
 				_guildNameBar.setColor(StaticValue.COLOR_CODE_1);
 				updateAllBarPosition();
 				return;
 			}
 			
 			//更新一下数据
-			//			if((_role.data as HeroData).isKingFamily)
-			//			{
-			//				_guildNameBar.setName("[王城]"+guildName);
-			//			}
-			//			else
-			//			{
-			//				_guildNameBar.setName(guildName);
-			//			}
+			_guildNameBar.setName(guildName);
 			updateAllBarPosition();
 		}
 		

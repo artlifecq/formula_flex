@@ -36,6 +36,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.GmConfig;
 	import com.rpgGame.coreData.cfg.GuildCfgData;
+	import com.rpgGame.coreData.cfg.GuildSkillCfgData;
 	import com.rpgGame.coreData.cfg.HeChengData;
 	import com.rpgGame.coreData.cfg.HintCfgData;
 	import com.rpgGame.coreData.cfg.HintConfig;
@@ -292,6 +293,9 @@ package com.rpgGame.app.data
 			//道具获取路径
 			SourceGetCfg.setup(dic[ConfigClassRegister.Q_source]);//多人副本
 			
+			GuildCfgData.setupGuildInfo(dic[ConfigClassRegister.Q_guild]);//帮会等级
+			GuildCfgData.setupGuildPermissionInfo(dic[ConfigClassRegister.Q_guild_permission]);//职务权限
+			GuildSkillCfgData.setup(dic[ConfigClassRegister.Q_guildskill]);//帮派技能表
 			//功能开启
 			//ClientFunctionOpenCfgData.setup(dic["data.ClientFunctionOpen"]);
 			BattleRankCfg.setup(dic[ConfigClassRegister.Q_battle_rank]);//多人副本
@@ -348,10 +352,7 @@ package com.rpgGame.app.data
 			//				MonsterDataManager.setConfig(config.monsterConfig); //怪物//NPC
 			//			}
 			
-			if (config.hasGuildConfig)
-			{
-				GuildCfgData.setup(config.guildConfig); //帮派
-			}
+			
 			//传送门
 			if (config.hasSceneTranports)
 			{
@@ -408,6 +409,7 @@ package com.rpgGame.app.data
 			MazeCfgData.setup(config.mazeConfig);
 			//摆摊
 			StallCfgData.setup(config.stallConfig);
+			
 			
 			if (config.biaoConfig)
 			{ //镖局配置

@@ -196,6 +196,7 @@ package com.rpgGame.netData{
 	import com.rpgGame.netData.guild.handler.ResGuildInviteListInfoHandler;
 	import com.rpgGame.netData.guild.handler.ResGuildListInfoHandler;
 	import com.rpgGame.netData.guild.handler.ResGuildOperateResultHandler;
+	import com.rpgGame.netData.guild.handler.ResGuildSkillInfoHandler;
 	import com.rpgGame.netData.guild.message.ResGuildApplyListInfoMessage;
 	import com.rpgGame.netData.guild.message.ResGuildBriefnessInfoMessage;
 	import com.rpgGame.netData.guild.message.ResGuildChangeGuildIdMessage;
@@ -204,6 +205,7 @@ package com.rpgGame.netData{
 	import com.rpgGame.netData.guild.message.ResGuildInviteListInfoMessage;
 	import com.rpgGame.netData.guild.message.ResGuildListInfoMessage;
 	import com.rpgGame.netData.guild.message.ResGuildOperateResultMessage;
+	import com.rpgGame.netData.guild.message.ResGuildSkillInfoMessage;
 	import com.rpgGame.netData.horse.handler.SCExtraItemNumHandler;
 	import com.rpgGame.netData.horse.handler.SCHorseAllInfoToClientHandler;
 	import com.rpgGame.netData.horse.handler.SCHorseIllusionToClientHandler;
@@ -974,7 +976,7 @@ package com.rpgGame.netData{
 			register(111105, ResGuildApplyListInfoMessage, ResGuildApplyListInfoHandler);
 			register(111106, ResGuildChangeGuildIdMessage, ResGuildChangeGuildIdHandler);
 			register(111107, ResGuildChangeMemberTypeMessage, ResGuildChangeMemberTypeHandler);
-//			register(111108, ResGuildSkillInfoMessage, ResGuildSkillInfoHandler);
+			register(111108, ResGuildSkillInfoMessage, ResGuildSkillInfoHandler);
 			register(111199, ResGuildOperateResultMessage, ResGuildOperateResultHandler);
 			register(112101, ResChatMessage, ResChatHandler);
 			register(112102, ResChatRecordMessage, ResChatRecordHandler);

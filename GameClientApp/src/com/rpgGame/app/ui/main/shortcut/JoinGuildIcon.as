@@ -20,8 +20,8 @@ package com.rpgGame.app.ui.main.shortcut
 		
 		override protected function onTouchIcon() : void
 		{
-			if(GuildManager.haveGuild)
-				GameAlert.showAlertUtil(LangAlertInfo.JOIN_GUILD_COMPLETE,null,GuildManager.guildData.name);
+			if(GuildManager.instance.haveGuild)
+				GameAlert.showAlertUtil(LangAlertInfo.JOIN_GUILD_COMPLETE,null,GuildManager.instance.guildData.name);
 			EventManager.dispatchEvent(FunctionMessageBarEvent.FUNCTION_MESSAGE_BAR_HIDE_TYPE,
 				EnumFunctionMessageBarIcoType.GUILD_JION_COMPLETE);
 		}
