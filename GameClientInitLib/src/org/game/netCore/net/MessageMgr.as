@@ -1,7 +1,6 @@
 package org.game.netCore.net
 {
 	import com.gameClient.alert.AlertPanel;
-	import com.gameClient.alert.ReconnectionPanelExt;
 	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.DebugUtil;
 	import com.gameClient.utils.HashMap;

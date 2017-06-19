@@ -24,7 +24,7 @@ package com.editor.state.role.control
 		override public function execute() : void
 		{
 			super.execute();
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				_stateReference = null;
 				if (_ref)

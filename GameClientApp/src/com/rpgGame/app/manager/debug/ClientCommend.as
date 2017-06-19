@@ -119,6 +119,10 @@ package   com.rpgGame.app.manager.debug
 				msg.type=parseInt(arg[0]);
 				FangChenMiManager.OnSCNonagePromptMessage(msg);
 			});
+			commandList.put( ".df", function (...arg):void
+			{
+				Mgr.d1v1Mgr.autoJoin();
+			});
 		}
 		
 		

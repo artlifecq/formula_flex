@@ -157,7 +157,7 @@ package com.rpgGame.appModule.common
 		}
 		override public function dispose():void
 		{
-			
+			MCUtil.removeSelf(this);
 			if (avatar) 
 			{
 				MCUtil.removeSelf(avatar);

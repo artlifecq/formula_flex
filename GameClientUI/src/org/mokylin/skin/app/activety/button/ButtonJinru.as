@@ -1,4 +1,4 @@
-package org.mokylin.skin.mainui.navigation.button
+package org.mokylin.skin.app.activety.button
 {
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
@@ -9,7 +9,7 @@ package org.mokylin.skin.mainui.navigation.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class ButtonSkin_zuoqi extends feathers.controls.StateSkin
+	public class ButtonJinru extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -22,7 +22,7 @@ package org.mokylin.skin.mainui.navigation.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function ButtonSkin_zuoqi()
+		public function ButtonJinru()
 		{
 			super();
 			
@@ -47,7 +47,7 @@ package org.mokylin.skin.mainui.navigation.button
 						}
 					]
 			};
-			skinNames={"down":"ui/mainui/navigation/button/skin_zuoqi/down.png", "hover":"ui/mainui/navigation/button/skin_zuoqi/over.png", "up":"ui/mainui/navigation/button/skin_zuoqi/up.png"};
+			skinNames={"down":"ui/app/activety/button/jinru/down.png", "hover":"ui/app/activety/button/jinru/over.png", "up":"ui/app/activety/button/jinru/up.png"};
 		}
 
 

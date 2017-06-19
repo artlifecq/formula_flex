@@ -11,6 +11,7 @@ package com.rpgGame.app.scene
 	import com.rpgGame.app.state.role.control.HushStateReference;
 	import com.rpgGame.app.state.role.control.ShapeshiftingStateReference;
 	import com.rpgGame.app.state.role.control.ShortcutGridStateReference;
+	import com.rpgGame.app.state.role.control.SkillWarningStateReference;
 	import com.rpgGame.app.state.role.control.StiffStateReference;
 	import com.rpgGame.app.state.role.control.StunStateReference;
 	import com.rpgGame.app.state.role.control.SyncSpellActionStateReference;
@@ -272,9 +273,13 @@ package com.rpgGame.app.scene
                     case 34:// 变身
                         _role.stateMachine.removeState(RoleStateType.CONTROL_SHAPESHIFTING);
                         break;
-					case 36:// 变身
+					case 36:// 疯狂连弩
 						_role.stateMachine.removeState(RoleStateType.CONTROL_SHORTCUTGRID);
 						break;
+					case 42:// 预警
+						_role.stateMachine.removeState(RoleStateType.CONTROL_SKILL_WARNING);
+						break;
+					
 					case 199://冰冻
 						_role.stateMachine.removeState(RoleStateType.CONTROL_BING_DONG);
 						break;
@@ -419,6 +424,12 @@ package com.rpgGame.app.scene
 						buffRef.setParams(buffData);
 						_role.stateMachine.transition(RoleStateType.CONTROL_SHORTCUTGRID, buffRef);
 						break;
+					
+					/*case 42:// 预警状态-------------------预警状态已经去掉不用了 后面如果加上的话再开启    yt
+						buffRef = _role.stateMachine.getReference(SkillWarningStateReference) as SkillWarningStateReference;
+						buffRef.setParams(buffData);
+						_role.stateMachine.transition(RoleStateType.CONTROL_SKILL_WARNING, buffRef);
+						break;*/
 					case 199://冰冻
 						buffRef = _role.stateMachine.getReference(BingDongStateReference) as BingDongStateReference;
 						buffRef.setParams(buffData);

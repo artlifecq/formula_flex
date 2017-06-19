@@ -118,7 +118,7 @@ package com.rpgGame.app.fight.spell.ui
 			}
 			if(spellInfo.atkor == MainRoleManager.actor)
 			{
-				TrusteeshipManager.getInstance().startFightSoulFight();
+				//TrusteeshipManager.getInstance().startFightSoulFight();
 			}
 		}
 

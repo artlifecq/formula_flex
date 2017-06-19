@@ -61,12 +61,13 @@ package org.mokylin.skin.app.zhanchang
 			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
 			numLevel = temp;
 			temp.name = "numLevel";
+			temp.gap = 0;
 			temp.height = 37;
-			temp.label = "5";
+			temp.label = "10";
 			temp.styleClass = org.mokylin.skin.app.zhanchang.uinumber.UINumberDaojishi;
-			temp.width = 34;
-			temp.x = 109;
-			temp.y = 32;
+			temp.width = 58;
+			temp.x = 92;
+			temp.y = 30;
 			return temp;
 		}
 

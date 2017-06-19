@@ -15,7 +15,7 @@ package com.rpgGame.coreData
 	 */	
 	public class SpriteStat
 	{
-		public var statArr : Vector.<AttributeItem>;
+		
 		
 		private var statMap:HashMap;//角色属性
 		private var maxMap:HashMap;//最大属性
@@ -126,7 +126,7 @@ package com.rpgGame.coreData
 		 */
 		public function setData( arr:Vector.<AttributeItem> ):void
 		{
-			statArr = arr;
+			
 			if ( arr == null )
 				return;
 			
@@ -141,7 +141,6 @@ package com.rpgGame.coreData
 				}
 			}
 		}
-		
 		//-----------------------------------------
 		/**
 		 * 得到属性

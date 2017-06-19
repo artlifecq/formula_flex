@@ -148,7 +148,7 @@ package com.rpgGame.app.manager.mount
 				if(zhanqiJob == JobEnum.ROLE_1_TYPE)
 				{
 					adds = int(nextq_atts[0]);
-				}else if(zhanqiJob == JobEnum.ROLE_4_TYPE){
+				}else if(zhanqiJob == JobEnum.ROLE_4_TYPE){	
 					adds = int(nextq_atts[2]);
 				}else{
 					adds = int(nextq_atts[1]);

@@ -1,9 +1,8 @@
 package com.rpgGame.app.view.icon
 {
+	import com.game.engine3D.core.poolObject.IInstancePoolClass;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.type.AssetUrl;
-	
-	import away3d.events.Event;
 	
 	import feathers.controls.UIAsset;
 	
@@ -14,7 +13,7 @@ package com.rpgGame.app.view.icon
 	 * 只有一个设置图片的方法   setIconResName(iconResName);
 	 * 
 	 */
-	public class BaseIcon extends UIAsset 
+	public class BaseIcon extends UIAsset implements IInstancePoolClass
 	{
 		private var _iconResURL:String = "";
 		/** ico的bitmaodata  */		
@@ -39,6 +38,9 @@ package com.rpgGame.app.view.icon
 		protected var _jobImage:UIAsset;
 		
 		protected var _lvImage:UIAsset;
+		private var _isDestroyed:Boolean;
+		private var _isDisposed:Boolean;
+		protected var _disposing : Boolean;
 		
 		/**
 		 * 格子大小 
@@ -48,6 +50,56 @@ package com.rpgGame.app.view.icon
 		public function BaseIcon($iconSize:int)
 		{
 			_iconSize = $iconSize;
+			_iconSize = _iconSize <= 0 ? IcoSizeEnum.SIZE_46 : _iconSize;
+			switch(_iconSize){
+				case IcoSizeEnum.ICON_36:
+				case IcoSizeEnum.ICON_42:
+				case IcoSizeEnum.ICON_48:
+				case IcoSizeEnum.ICON_64:
+					_iconPositionX=_iconPositionY=6;
+					break;
+			}
+			this.width = _iconSize;
+			this.height = _iconSize;
+		}
+		
+		public function instanceDestroy() : void
+		{
+			destroy();
+			clear();
+			_isDisposed = true;
+		}
+		
+		/**销毁显示对象 */
+		public function destroy() : void
+		{
+			clear();
+			_isDestroyed = true;
+		}
+		
+		public function putInPool() : void
+		{
+			clear();
+		}
+		
+		public function reSet($parameters : Array) : void
+		{
+			this.iconSize=$parameters[0];
+		}
+		
+		public function get isDestroyed() : Boolean
+		{
+			return _isDestroyed;
+		}
+		
+		public function get isInPool() : Boolean
+		{
+			return _isDisposed;
+		}
+		
+		public function set iconSize(value:int):void
+		{
+			_iconSize = value;
 			_iconSize = _iconSize <= 0 ? IcoSizeEnum.SIZE_46 : _iconSize;
 			switch(_iconSize){
 				case IcoSizeEnum.ICON_64:
@@ -60,7 +112,7 @@ package com.rpgGame.app.view.icon
 			this.width = _iconSize;
 			this.height = _iconSize;
 		}
-		
+
 		/**
 		 * 设置图标 
 		 * @param iconResURL url地址
@@ -95,35 +147,11 @@ package com.rpgGame.app.view.icon
 				return;
 			switch(_iconSize)
 			{
+				case IcoSizeEnum.ICON_36:
+				case IcoSizeEnum.ICON_42:
+				case IcoSizeEnum.ICON_48:
+				case IcoSizeEnum.ICON_64:
 				case  IcoSizeEnum.ICON_42:
-						_iconImage.x = 1;
-						_iconImage.y = 1;
-					break;
-				case  IcoSizeEnum.SIZE_40:
-					if( posx != 0 || posy != 0 )
-					{
-						_iconImage.x = posx;
-						_iconImage.y = posy;
-					}
-					else
-					{
-						_iconImage.x = 0;
-						_iconImage.y = 0;
-					}
-					break;
-				case  IcoSizeEnum.ICON_48:
-					if( posx != 0 || posy != 0 )
-					{
-						_iconImage.x = posx;
-						_iconImage.y = posy;
-					}
-					else
-					{
-						_iconImage.x = 0;
-						_iconImage.y = 0;
-					}
-					break;
-				case  IcoSizeEnum.ICON_64:
 					if( posx != 0 || posy != 0 )
 					{
 						_iconImage.x = posx;

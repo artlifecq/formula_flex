@@ -28,7 +28,7 @@ package com.editor.state.role.control
 
 		override public function execute() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				super.execute();
 				_stateReference = null;
@@ -47,7 +47,7 @@ package com.editor.state.role.control
 
 		private function doBeatBack() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {x: true, z: true});
 
@@ -76,7 +76,7 @@ package com.editor.state.role.control
 
 		private function onMoveComplete() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				var targetX : int = _stateReference.targetPos.x;
 				var targetZ : int = _stateReference.targetPos.y;
@@ -89,7 +89,7 @@ package com.editor.state.role.control
 
 		private function stopBeatBack() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				var targetX : int = _stateReference.targetPos.x;
 				var targetZ : int = _stateReference.targetPos.y;

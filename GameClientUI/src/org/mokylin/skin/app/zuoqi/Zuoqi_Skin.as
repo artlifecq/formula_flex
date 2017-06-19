@@ -4,6 +4,7 @@ package org.mokylin.skin.app.zuoqi
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.TabBar;
+	import feathers.controls.UIAsset;
 	import org.mokylin.skin.common.yiji_panelbg_Skin;
 
 	/**
@@ -31,7 +32,7 @@ package org.mokylin.skin.app.zuoqi
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [bg_i(),tabBar_i()];
+			this.elementsContent = [bg_i(),tabBar_i(),__Zuoqi_Skin_UIAsset1_i()];
 			
 			states = {
 			};
@@ -42,6 +43,17 @@ package org.mokylin.skin.app.zuoqi
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
+		private function __Zuoqi_Skin_UIAsset1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.touchable = false;
+			temp.touchGroup = true;
+			temp.styleName = "ui/app/zuoqi/jinjie.png";
+			temp.x = 447;
+			temp.y = 12;
+			return temp;
+		}
+
 		private function bg_i():feathers.controls.SkinnableContainer
 		{
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
@@ -63,8 +75,8 @@ package org.mokylin.skin.app.zuoqi
 			temp.name = "tabBar";
 			temp.height = 49;
 			temp.width = 713;
-			temp.x = 40;
-			temp.y = 527;
+			temp.x = 30;
+			temp.y = 529;
 			return temp;
 		}
 

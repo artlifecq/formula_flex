@@ -10,7 +10,6 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.manager.ClientTriggerManager;
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.GameCameraManager;
-	import com.rpgGame.app.manager.LostSkillManager;
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.RankManager;
 	import com.rpgGame.app.manager.ReliveManager;
@@ -264,8 +263,8 @@ package com.rpgGame.app.cmdlistener.scene
 		{
 			if(msg.personId.ToGID()==MainRoleManager.actor.id){
 				AppManager.showApp(AppConstant.DIE_PANEL,msg);
-				
 				EventManager.dispatchEvent(MainPlayerEvent.PLAYER_DIE);
+				SceneManager.scene.addGrayScene();
 			}
 		}
 		
@@ -751,7 +750,7 @@ package com.rpgGame.app.cmdlistener.scene
 				RoleData.readMonster(data,info);
 				sceneRole =SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
 				addTaskmark(sceneRole);			
-				(sceneRole.headFace as HeadFace).updateNPCTitle();
+//				(sceneRole.headFace as HeadFace).updateNPCTitle();
 				
 				GameLog.addShow("添加NPC客户端id：" + data.id);
 				GameLog.addShow("添加NPC服务器id：" + data.serverID.ToString());
@@ -1008,6 +1007,11 @@ package com.rpgGame.app.cmdlistener.scene
 			if(roleData.id == MainRoleManager.actorID)
 			{
 				ReliveManager.autoHideRelive();
+			}
+            if(roleData.id == MainRoleManager.actorID)
+            {
+				SceneManager.scene.removeGrayScene();
+                ReliveManager.autoHideRelive();
 				EventManager.dispatchEvent(MainPlayerEvent.SELFHP_CHANGE);
 				EventManager.dispatchEvent(MainPlayerEvent.REVIVE_SUCCESS);
 			}

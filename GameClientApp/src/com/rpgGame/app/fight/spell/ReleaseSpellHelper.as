@@ -8,9 +8,15 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.app.state.role.action.AttackStateReference;
 	import com.rpgGame.app.state.role.control.AttackHardStateReference;
+	import com.rpgGame.coreData.cfg.SpellDataManager;
+	import com.rpgGame.coreData.clientConfig.Q_skill_model;
+	import com.rpgGame.coreData.clientConfig.Q_skill_warning;
 	import com.rpgGame.coreData.type.RoleStateType;
+	import com.rpgGame.netData.fight.message.ResFightBroadcastMessage;
 	
 	import flash.geom.Point;
+	
+	import gs.TweenLite;
 
 	/**
 	 *
@@ -33,6 +39,31 @@ package com.rpgGame.app.fight.spell
 			}
 		}
 		public static function releaseSpell(spellInfo : ReleaseSpellInfo) : void
+		{
+			TweenLite.killDelayedCallsTo(releaseSpellPlay);
+			var warningData:Q_skill_warning=SpellDataManager.getWarningData(spellInfo.spellData.q_skillID);//获取预警技能关联
+			if(warningData&&warningData.q_time>0)//有预警技能先放预警技能，没有预警技能走正常流程
+			{
+				var warningSkillID:int=warningData.q_warnID;
+				var warningTime:int=warningData.q_time;
+				var skillMode:Q_skill_model= warningData?SpellDataManager.getSpellData(warningData.q_warnID):null; //预警技能
+				if(skillMode)
+				{
+					var info : ReleaseSpellInfo = new ReleaseSpellInfo();
+					info.readWarningFrom(warningSkillID,spellInfo);
+					releaseSpellPlay(info);
+				}
+				TweenLite.delayedCall(warningTime * 0.001, releaseSpellPlay, [spellInfo]);
+			}
+			else
+			{
+				releaseSpellPlay(spellInfo);
+			}
+			//
+			
+			
+		}
+		public static function releaseSpellPlay(spellInfo : ReleaseSpellInfo) : void
 		{
 			/** 施法者 **/
 			var ref : AttackStateReference = null;
@@ -113,7 +144,7 @@ package com.rpgGame.app.fight.spell
 			}
 			if(spellInfo.atkor == MainRoleManager.actor)
 			{
-				TrusteeshipManager.getInstance().startFightSoulFight();
+				//TrusteeshipManager.getInstance().startFightSoulFight();
 			}
 		}
 

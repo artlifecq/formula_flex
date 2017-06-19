@@ -151,8 +151,8 @@ package com.rpgGame.app.ui.main.dungeon
 			EventManager.addEvent(DungeonEvent.ZONE_STAGE_CHANGE,setTageChange);//副本状态
 			EventManager.addEvent(DungeonEvent.ZONE_REMAIN_TIME,setTime);//副本时间
 			EventManager.addEvent(DungeonEvent.ZONE_SKILL_INFOS,setKillInfo);//击杀列表
-			EventManager.addEvent(DungeonEvent.ZONE_SKILL_INFO,setKillInfo);//击杀列表
-			EventManager.addEvent(DungeonEvent.ZONE_OUT_RESULT,setOutResult);//击杀列表
+			EventManager.addEvent(DungeonEvent.ZONE_SKILL_INFO,setKillInfo);//击杀单个
+			EventManager.addEvent(DungeonEvent.ZONE_OUT_RESULT,setOutResult);//准备退出
 		}
 		private function removeEvent():void
 		{
@@ -161,8 +161,8 @@ package com.rpgGame.app.ui.main.dungeon
 			EventManager.removeEvent(DungeonEvent.ZONE_STAGE_CHANGE,setTageChange);//副本状态
 			EventManager.removeEvent(DungeonEvent.ZONE_REMAIN_TIME,setTime);//副本时间
 			EventManager.removeEvent(DungeonEvent.ZONE_SKILL_INFOS,setKillInfo);//击杀列表
-			EventManager.removeEvent(DungeonEvent.ZONE_SKILL_INFO,setKillInfo);//击杀列表
-			EventManager.removeEvent(DungeonEvent.ZONE_OUT_RESULT,setOutResult);//击杀列表
+			EventManager.removeEvent(DungeonEvent.ZONE_SKILL_INFO,setKillInfo);//击杀单个
+			EventManager.removeEvent(DungeonEvent.ZONE_OUT_RESULT,setOutResult);//准备退出
 			TimerServer.remove(updateTime);
 			TweenLite.killDelayedCallsTo(walkTo);
 		}
@@ -511,7 +511,7 @@ package com.rpgGame.app.ui.main.dungeon
 			ico1List=new Vector.<IconCDFace>();
 			for(i=0;i<icoBg1List.length;i++)
 			{
-				ico=new IconCDFace(IcoSizeEnum.ICON_48);
+				ico=IconCDFace.create(IcoSizeEnum.ICON_48);
 				ico.showCD=false;
 				ico.x=icoBg1List[i].x-6;
 				ico.y=icoBg1List[i].y-6;
@@ -528,7 +528,7 @@ package com.rpgGame.app.ui.main.dungeon
 			ico2List=new Vector.<IconCDFace>();
 			for(i=0;i<icoBg2List.length;i++)
 			{
-				ico=new IconCDFace(IcoSizeEnum.ICON_48);
+				ico=IconCDFace.create(IcoSizeEnum.ICON_48);
 				ico.showCD=false;
 				ico.x=icoBg2List[i].x-6;
 				ico.y=icoBg2List[i].y-6;
@@ -545,37 +545,29 @@ package com.rpgGame.app.ui.main.dungeon
 		{
 			var i:int,lenth:int;
 			var iocn:IconCDFace;
-			lenth=skinList.length;
-			for(i=0;i<lenth;i++)
-			{
-				skinList.pop()
-			}
 			skinList=null;
 			lenth=icoBg1List.length;
+			var img:UIAsset;
 			for(i=0;i<lenth;i++)
 			{
-				icoBg1List.pop()
+				img=icoBg1List.pop();
+				img.dispose();
 			}
 			icoBg1List=null;
 			lenth=ico1List.length;
 			for(i=0;i<lenth;i++)
 			{
 				iocn=ico1List.pop();
-				iocn.dispose();
+				iocn.destroy();
 			}
 			ico1List=null;
 			lenth=ico2List.length;
 			for(i=0;i<lenth;i++)
 			{
 				iocn=ico2List.pop();
-				iocn.dispose();
+				iocn.destroy();
 			}
 			ico2List=null;
-			lenth=killButList.length;
-			for(i=0;i<lenth;i++)
-			{
-				killButList.pop()
-			}
 			killButList=null;
 			iocn=null;
 			GameAlert.closeAlert(LangAlertInfo.ZONE_EXIT_SURE);
@@ -583,6 +575,5 @@ package com.rpgGame.app.ui.main.dungeon
 			_skin.dispose();
 			_skin=null;
 		}
-		
 	}
 }

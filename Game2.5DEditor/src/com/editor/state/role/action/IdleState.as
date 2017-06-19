@@ -27,7 +27,7 @@ package com.editor.state.role.action
 
 		override public function beforeEnter() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				super.beforeEnter();
 				_preStateIsDead = (_machine as RoleStateMachine).isDead;
@@ -36,7 +36,7 @@ package com.editor.state.role.action
 
 		override public function execute() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				super.execute();
 				transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);

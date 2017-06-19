@@ -91,6 +91,10 @@ package com.rpgGame.appModule.open
 		}
 		protected function runFly():void
 		{
+			if(!_button){//容错处理
+				this.hide();
+				return;
+			}
 			this.visible = false;
 			var startPos:Point = _skin.Icons.localToGlobal(new Point(0,0));
 			var icon:UIAsset = new UIAsset();

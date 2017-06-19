@@ -37,6 +37,7 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.info.MapDataManager;
+	import com.rpgGame.coreData.info.map.EnumMapType;
 	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.coreData.lang.LangYuMaQiShou;
@@ -109,6 +110,7 @@ package com.rpgGame.app.ui.main
 		private var _dungeonTrackerBar:DungeonTrackerBar;
 		//护宝追踪
 		private var _hubaoTrackerBar:HuBaoTracjerBar;
+		private var _trackerBar:DungeonTrackerBar;
 		
 		private var _teamFixedBar:TeamLeftFixedBar;
 		//buff
@@ -195,6 +197,7 @@ package com.rpgGame.app.ui.main
 			this._taskBar=new TaskBar();
 			_dungeonTrackerBar=new DungeonTrackerBar();
 			_hubaoTrackerBar = new HuBaoTracjerBar();
+			_trackerBar=new DungeonTrackerBar();
 			
 			
 			_buffBar=new BuffBar();
@@ -327,6 +330,10 @@ package com.rpgGame.app.ui.main
 			}
 			switch(role.type){
 				case SceneCharType.PLAYER:
+					if (EnumMapType.MAP_TYPE_D1V1==MapDataManager.currentScene.mapType) 
+					{
+						return;
+					}
 					this.addChild(_playerHead);
 					break;
 				case SceneCharType.MONSTER:
@@ -419,24 +426,13 @@ package com.rpgGame.app.ui.main
 		 */		
 		private function onSwitchCmp() : void
 		{//L.l("地图加载完成");
-			var mapId:int=MainRoleManager.actorInfo.mapID;
-			var sceneData:SceneData=MapDataManager.getMapInfo(mapId);
-			var mapCfg:Q_map=sceneData.getData();
-			if(HuBaoManager.instance().ishuing)
-			{
-				this.removeChild(_taskBar);
-				this.removeChild(_dungeonTrackerBar);
-				this.addChild(_hubaoTrackerBar);
-			}
-			else if(mapCfg.q_map_zones==1){//副本
-				this.removeChild(_taskBar);
-				this.addChild(_dungeonTrackerBar);
-				this.removeChild(_hubaoTrackerBar);
-			}else{
-				this.addChild(_taskBar);
-				this.removeChild(_dungeonTrackerBar);
-				this.removeChild(_hubaoTrackerBar);
-			}
+			
+			this.removeChild(_playerHead);
+			this.removeChild(_bossHead);
+			this.removeChild(_eliteHead);
+			this.removeChild(_normalHead);
+			
+			setCurrentSceneUI();
 			
 			
 			//			if( YuMaQiShouManager.isInBiMaWenActivity() )//在御马场场景，并且在后动时间内
@@ -469,6 +465,32 @@ package com.rpgGame.app.ui.main
 			//				_taskBar.onShow();
 			//				_hintBattleBar.visible = true;
 			//			}
+		}
+		
+		/**
+		 *设置当前场景特有的ui 
+		 * 
+		 */
+		private function setCurrentSceneUI():void
+		{
+			var mapId:int=MainRoleManager.actorInfo.mapID;
+			var sceneData:SceneData=MapDataManager.getMapInfo(mapId);
+			var mapCfg:Q_map=sceneData.getData();
+			if(HuBaoManager.instance().ishuing)
+			{
+				this.removeChild(_taskBar);
+				this.removeChild(_trackerBar);
+				this.addChild(_hubaoTrackerBar);
+			}
+			else if(mapCfg.q_map_zones==1||mapCfg.q_map_type!=EnumMapType.MAP_TYPE_NORMAL){//副本或者不是普通的基本地图
+				this.removeChild(_taskBar);
+				this.addChild(_trackerBar);
+				this.removeChild(_hubaoTrackerBar);
+			}else{
+				this.addChild(_taskBar);
+				this.removeChild(_trackerBar);
+				this.removeChild(_hubaoTrackerBar);
+			}			
 		}
 		
 		private function onStageResize(e : *) : void

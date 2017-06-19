@@ -255,7 +255,42 @@ package com.rpgGame.app.fight.spell
 			
 			readSpellEffectData(_spellData.q_spell_effect);
 		}
-		
+		/**
+		 * 初始化预警特效的信息 
+		 * 除了技能数据其它数据copy一份过来
+		 */		
+		public function readWarningFrom(skillModelId:int,skillInfo:ReleaseSpellInfo) : void
+		{
+			_spellData = SpellDataManager.getSpellData(skillModelId);
+			
+			_releaseAngle = skillInfo.releaseAngle;
+			
+			_atkorID =skillInfo.atkorID;
+			if (_atkorID > 0)
+			{
+				_atkor = SceneManager.getSceneObjByID(_atkorID) as SceneRole;
+				if (_atkor && !_atkor.usable)
+					_atkor = null;
+			}
+			if(_atkor == null)
+			{
+				return;
+			}
+			
+			_targetID = skillInfo.targetID;
+			if (_targetID > 0)
+			{
+				_targetRole = SceneManager.getSceneObjByID(_targetID) as SceneRole;
+				if (_targetRole && !_targetRole.usable)
+					_targetRole = null;
+			}
+			
+			_atkorPos = new Point(skillInfo.atkorPos .x, skillInfo.atkorPos .y);
+			_targetPos = new Point(skillInfo.targetPos.x, skillInfo.targetPos.y);
+			
+			
+			readSpellEffectData(_spellData.q_spell_effect);
+		}
 		public function readSpellEffectData(spellEffectID:int):void
 		{
 			_spellEffectID = spellEffectID;
