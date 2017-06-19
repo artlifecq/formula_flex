@@ -49,7 +49,7 @@ package org.mokylin.skin.app.banghui
 			this.currentState = "normal";
 			this.height = 230;
 			this.width = 257;
-			this.elementsContent = [__ProSkill_Item_UIAsset1_i(),icon_i(),uiName_i(),lbLevel_i(),__ProSkill_Item_Label1_i(),__ProSkill_Item_UIAsset2_i(),lbXiaoguo_i(),grpHide_i(),btnUp_i(),uiOk_i(),lbTips_i()];
+			this.elementsContent = [__ProSkill_Item_UIAsset1_i(),__ProSkill_Item_UIAsset2_i(),icon_i(),uiName_i(),lbLevel_i(),__ProSkill_Item_Label1_i(),__ProSkill_Item_UIAsset3_i(),lbXiaoguo_i(),grpHide_i(),btnUp_i(),uiOk_i(),lbTips_i()];
 			
 			states = {
 			};
@@ -105,13 +105,22 @@ package org.mokylin.skin.app.banghui
 		private function __ProSkill_Item_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/banghui/tubiaokuang.png";
+			temp.x = 26;
+			temp.y = 14;
+			return temp;
+		}
+
+		private function __ProSkill_Item_UIAsset3_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/banghui/jinengdikuang.png";
 			temp.x = 104;
 			temp.y = 92;
 			return temp;
 		}
 
-		private function __ProSkill_Item_UIAsset3_i():feathers.controls.UIAsset
+		private function __ProSkill_Item_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/banghui/jinengdikuang.png";
@@ -120,7 +129,7 @@ package org.mokylin.skin.app.banghui
 			return temp;
 		}
 
-		private function __ProSkill_Item_UIAsset4_i():feathers.controls.UIAsset
+		private function __ProSkill_Item_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/banghui/jinengdikuang.png";
@@ -150,7 +159,7 @@ package org.mokylin.skin.app.banghui
 			temp.name = "grpHide";
 			temp.x = 32;
 			temp.y = 114;
-			temp.elementsContent = [__ProSkill_Item_Label2_i(),__ProSkill_Item_Label3_i(),__ProSkill_Item_UIAsset3_i(),__ProSkill_Item_UIAsset4_i(),lbNextXiaguo_i(),lbXiaohao_i()];
+			temp.elementsContent = [__ProSkill_Item_Label2_i(),__ProSkill_Item_Label3_i(),__ProSkill_Item_UIAsset4_i(),__ProSkill_Item_UIAsset5_i(),lbNextXiaguo_i(),lbXiaohao_i()];
 			return temp;
 		}
 
@@ -159,9 +168,9 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icon = temp;
 			temp.name = "icon";
-			temp.styleName = "ui/app/banghui/tubiaokuang.png";
-			temp.x = 26;
-			temp.y = 14;
+			temp.styleName = "ui/app/banghui/icon/1.png";
+			temp.x = 31;
+			temp.y = 19;
 			return temp;
 		}
 

@@ -32,6 +32,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_panel_pre_time:int;
 		 /**  公告内容(【活动】开心问答,将｛@｝分钟后开始,请各位做好准备) */
 		public var q_notice:String;
+		 /**  公告传送(不填直接去参加活动，填了跳转到对应面板) */
+		public var q_notice_trans:String;
 		 /**  活动名称图片资源编号 */
 		public var q_activity_page_id:int;
 		 /**  每日允许参与次数（-1无限） */

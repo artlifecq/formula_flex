@@ -1,16 +1,25 @@
 package com.client.view
 {
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.IOErrorEvent;
 	import flash.events.MouseEvent;
 	import flash.net.SharedObject;
+	import flash.net.URLLoader;
+	import flash.net.URLLoaderDataFormat;
+	import flash.net.URLRequest;
 	import flash.system.Capabilities;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFieldType;
 	import flash.text.TextFormat;
+	
+	import feathers.controls.ComboBox;
+	
+	import starling.core.Starling;
 
 	/**
 	 *
@@ -22,24 +31,36 @@ package com.client.view
 	 */
 	public class SelectDeveloperView extends Sprite
 	{
-		private var _xml : XML = <ipList>
-				<item ip="192.168.1.18" port="8001" name="稳定服"/>
-				<item ip="0.0.0.0" port="0" name="单机版本"/>
-				<item ip="192.168.1.18" port="18001" name="杜服"/>
-				<item ip="192.168.4.112" port="8001" name="樊服"/>
-				<item ip="192.168.4.94" port="8001" name="蒋服"/>
-			</ipList>;
+		private var _xml : XML;
 
 		private var _clickFun : Function;
 		private var _so : SharedObject = null;
+		private var com:ComboBox;
 
 		public function SelectDeveloperView(clickFun : Function = null)
 		{
 			_clickFun = clickFun;
-			initItem();
+			urlloader=new URLLoader();
+			urlloader.addEventListener(Event.COMPLETE,onLoadComplete);
+			urlloader.addEventListener(IOErrorEvent.IO_ERROR,onErr);
+			urlloader.dataFormat=URLLoaderDataFormat.TEXT;
+			urlloader.load(new URLRequest("server.xml"));
 			addEventListener(Event.ADDED_TO_STAGE, onAddToStg);
 		}
-
+		
+		protected function onErr(event:IOErrorEvent):void
+		{
+			GameLog.addError("加载服务配置失败!");
+		}
+		
+		protected function onLoadComplete(event:Event):void
+		{
+			urlloader.removeEventListener(Event.COMPLETE,onLoadComplete);
+			
+			_xml=new XML(urlloader.data);
+			initItem();
+		}
+		
 		private function onAddToStg(e : Event) : void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, onAddToStg);
@@ -61,11 +82,15 @@ package com.client.view
 
 		private var _textIpPort : TextField;
 
+		private var urlloader:URLLoader;
+
 		private function initItem() : void
 		{
 			var txtFmt : TextFormat = new TextFormat();
 			txtFmt.font = "SimSun";
 			txtFmt.size = 32;
+			
+			com=new ComboBox();
 
 			//显示播放器版本
 			var txt : TextField = new TextField();
@@ -87,7 +112,7 @@ package com.client.view
 				txt = new TextField();
 				txt.defaultTextFormat = txtFmt;
 				txt.textColor = 0x000066;
-				txt.text = "【" + name + "】" + "ip : " + ip + "(" + "port : " + port + ")";
+				txt.text = "[" + name + "]" + "ip:" + ip + "(" + "port:" + port + ")";
 				txt.autoSize = TextFieldAutoSize.LEFT;
 				this.addChild(txt);
 				txt.y += 50 * cnt;
@@ -122,6 +147,7 @@ package com.client.view
 			txtBtn.backgroundColor = 0xFFEE66;
 			addChild(txtBtn);
 			txtBtn.addEventListener(MouseEvent.CLICK, onClickEnter);
+			onStgResize(null);
 		}
 
 		private function onClickEnter(ev : MouseEvent) : void

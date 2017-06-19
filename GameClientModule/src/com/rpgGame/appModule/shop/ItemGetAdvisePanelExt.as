@@ -37,7 +37,7 @@ package com.rpgGame.appModule.shop
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
-
+	
 	/**
 	 *快捷购买选项 
 	 * @author yfl
@@ -49,7 +49,7 @@ package com.rpgGame.appModule.shop
 		private var forceNum:int=0;
 		private var _skin:huoquSkin;
 		private static var  MAX_ALLOW:int=999;
-	
+		
 		private var saleShopItemHash:HashMap=new HashMap();
 		private var _grid:IconCDFace;
 		private var maxCount:int=900;
@@ -68,8 +68,8 @@ package com.rpgGame.appModule.shop
 			_skin=new huoquSkin();
 			super(_skin);
 			_grid=new IconCDFace(IcoSizeEnum.ICON_64);
-//			_grid.x=6;
-//			_grid.y=6;
+			//			_grid.x=6;
+			//			_grid.y=6;
 			this._skin.itembg.addChild(_grid);
 			this._skin.itembg.touchGroup=false;
 			bindGoldInitPt=new Point(_skin.gBindGold.x,_skin.gBindGold.y);
@@ -107,8 +107,8 @@ package com.rpgGame.appModule.shop
 			this._skin.btn_goumai.addEventListener(Event.TRIGGERED,onBuy);
 			this._skin.btn_jian.addEventListener(TouchEvent.TOUCH,onDecTouch);
 			this._skin.btn_jia.addEventListener(TouchEvent.TOUCH,onAddTouch);
-//			this._skin.btn_jian.addEventListener(Event.TRIGGERED,onDecCout);
-//			this._skin.btn_jia.addEventListener(Event.TRIGGERED,onAddCount);
+			//			this._skin.btn_jian.addEventListener(Event.TRIGGERED,onDecCout);
+			//			this._skin.btn_jia.addEventListener(Event.TRIGGERED,onAddCount);
 			
 			_group = new ToggleGroup();
 			_skin.btn_yuanbao.toggleGroup = _group;
@@ -117,7 +117,7 @@ package com.rpgGame.appModule.shop
 			
 		}
 		
-	
+		
 		
 		private function useMoneyTypeHandler(eve:Event):void
 		{
@@ -283,7 +283,7 @@ package com.rpgGame.appModule.shop
 			gTimer.stop();
 			//MCUtil.removeSelf(this);
 		}
-	
+		
 		
 		private function updateBuyInfo():void
 		{
@@ -335,6 +335,17 @@ package com.rpgGame.appModule.shop
 				MCUtil.removeSelf(_ins);
 			}
 		}
+		
+		/**切换面板时调用*/
+		public static function hidePanel():void
+		{
+			if (_ins&&_ins.parent) 
+			{
+				_ins.parent.x+=_ins.width/2;
+				MCUtil.removeSelf(_ins);
+			}		
+		}
+		
 		public function setData(shopItems:Array,config:Q_source,forceBuyNum:int):void
 		{
 			// TODO Auto Generated method stub
@@ -442,11 +453,11 @@ package com.rpgGame.appModule.shop
 				this._skin.gBindGold.y=this.bindGoldInitPt.y;
 			}
 		}
-
+		
 		public static function get ins():ItemGetAdvisePanelExt
 		{
 			return _ins;
 		}
-
+		
 	}
 }

@@ -32,7 +32,7 @@ package com.rpgGame.app.state.role.control
 
 		override public function execute() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				super.execute();
 				if (_stateReference)
@@ -78,7 +78,7 @@ package com.rpgGame.app.state.role.control
 
 		private function onWalkMove(ref : ScaredMoveStateReference) : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				var runRef : RunStateReference = (ref.owner as SceneRole).stateMachine.getReference(RunStateReference) as RunStateReference;
 				runRef.setParams(0, ((ref.owner as SceneRole).data as RoleData).totalStat.moveSpeed);
@@ -88,7 +88,7 @@ package com.rpgGame.app.state.role.control
 
 		private function onWalkThrough(ref : ScaredMoveStateReference) : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				var runRef : RunStateReference = (ref.owner as SceneRole).stateMachine.getReference(RunStateReference) as RunStateReference;
 				runRef.setParams(0, ((ref.owner as SceneRole).data as RoleData).totalStat.moveSpeed);

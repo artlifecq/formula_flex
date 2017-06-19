@@ -44,7 +44,7 @@ package org.mokylin.skin.app.banghui.check
 			skinNames={"down":"ui/app/banghui/check/skin_2/down.png",
 			"downAndSelected":"ui/app/banghui/check/skin_2/downAndSelected.png",
 			"hover":"ui/app/banghui/check/skin_2/over.png",
-			"overAndSelected":"ui/app/banghui/check/skin_2/overAndSelected.png",
+			"hoverAndSelected":"ui/app/banghui/check/skin_2/overAndSelected.png",
 			"up":"ui/app/banghui/check/skin_2/up.png",
 			"upAndSelected":"ui/app/banghui/check/skin_2/upAndSelected.png"};
 		}

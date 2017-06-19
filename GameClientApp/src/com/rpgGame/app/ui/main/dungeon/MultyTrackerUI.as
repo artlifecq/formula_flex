@@ -81,11 +81,14 @@ package com.rpgGame.app.ui.main.dungeon
 		{
 			addEvent();
 			enterZone();
-			
+//			GameAlert.showAlert(alertOk,onAlert);
 		}
 		override protected function onHide():void
 		{
+			super.onHide();
 			removeEvent();
+			clear();
+			
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -325,7 +328,9 @@ package com.rpgGame.app.ui.main.dungeon
 			}
 			if(rItme!=null)
 			{
+				rItme.labelDisplay.width=300;
 				rItme.labelDisplay.htmlText=t;
+				rItme.labelDisplay.width=rItme.labelDisplay.textWidth+2;
 				but.visible=true;
 			}
 		}
@@ -493,6 +498,8 @@ package com.rpgGame.app.ui.main.dungeon
 			for(i=0;i<5;i++)
 			{
 				killButList.push(_skin["killbut_"+i]);
+				TaskUtil.addLabelEvet(_skin["killbut_"+i].skin.labelDisplay);
+				
 			}
 			
 			var ico:IconCDFace;
@@ -533,5 +540,49 @@ package com.rpgGame.app.ui.main.dungeon
 			setUisite();
 			alertOk=new AlertSetInfo(LangAlertInfo.ZONE_EXIT_SURE);
 		}
+		
+		private function clear():void
+		{
+			var i:int,lenth:int;
+			var iocn:IconCDFace;
+			lenth=skinList.length;
+			for(i=0;i<lenth;i++)
+			{
+				skinList.pop()
+			}
+			skinList=null;
+			lenth=icoBg1List.length;
+			for(i=0;i<lenth;i++)
+			{
+				icoBg1List.pop()
+			}
+			icoBg1List=null;
+			lenth=ico1List.length;
+			for(i=0;i<lenth;i++)
+			{
+				iocn=ico1List.pop();
+				iocn.dispose();
+			}
+			ico1List=null;
+			lenth=ico2List.length;
+			for(i=0;i<lenth;i++)
+			{
+				iocn=ico2List.pop();
+				iocn.dispose();
+			}
+			ico2List=null;
+			lenth=killButList.length;
+			for(i=0;i<lenth;i++)
+			{
+				killButList.pop()
+			}
+			killButList=null;
+			iocn=null;
+			GameAlert.closeAlert(LangAlertInfo.ZONE_EXIT_SURE);
+			alertOk=null;
+			_skin.dispose();
+			_skin=null;
+		}
+		
 	}
 }

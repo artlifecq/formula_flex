@@ -110,6 +110,7 @@ package com.rpgGame.app.ui.main.taskbar
 			for(i=0;i<killButList.length;i++)
 			{
 				killButList[i].visible=false;
+				TaskUtil.setTextEvet(killButList[i]);
 			}
 			
 			

@@ -11,14 +11,17 @@ package com.rpgGame.app.ui.main.chat {
 	import com.rpgGame.app.richText.RichTextCustomUtil;
 	import com.rpgGame.app.richText.component.RichTextArea3D;
 	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.app.sender.CrossSender;
 	import com.rpgGame.app.ui.main.chat.laba.VipChatCanvas;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.ChatEvent;
 	import com.rpgGame.core.events.SceneInteractiveEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.ChatCfgData;
+	import com.rpgGame.coreData.cfg.active.ActivetyDataManager;
+	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.clientConfig.FaceInfo;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
@@ -43,7 +46,6 @@ package com.rpgGame.app.ui.main.chat {
 	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.net.MessageMgr;
 	import org.mokylin.skin.mainui.chat.chat_Skin;
 	
 	import starling.core.Starling;
@@ -220,6 +222,7 @@ package com.rpgGame.app.ui.main.chat {
 			var goodsCode:String = RichTextCustomUtil.getItemCode(key,item.name,item.quality);
 			_inputText.appendRichText(goodsCode);
 			_inputText.setFocus();
+			_inputText.textfield.setSelection(_inputText.width,_inputText.width);
 			setGroubState(true);
 		}
 		
@@ -318,6 +321,7 @@ package com.rpgGame.app.ui.main.chat {
 				var siLiaoTag:String ="你对" + targetName +  "说 :";			
 				this._inputText.setFocus();
 				this._inputText.text=siLiaoTag;
+				_inputText.textfield.setSelection(_inputText.width,_inputText.width);
 				setGroubState(true);
 			}
 		}
@@ -659,7 +663,17 @@ package com.rpgGame.app.ui.main.chat {
 				if (this._inputText.isInputFocus) {
 					switch (e.keyCode) {
 						case Keyboard.ENTER:
-							this.sendMsg();
+							if(_inputText.text!=null&&"" != this._inputText.text)
+								this.sendMsg();
+							else{
+								if(!_ismouseIn){
+									_inputText.removeFocus();
+									setGroubState(false);
+								}
+								else{
+									_inputText.removeFocus();
+								}
+							}
 							break;
 						case Keyboard.UP:
 							break;
@@ -755,15 +769,11 @@ package com.rpgGame.app.ui.main.chat {
 		
 		private function sendMsg() : void 
 		{
-			/*if(MessageMgr.Ins.isCrossSocket){
-				CrossSender.reqQuitCrossFight();
-			}else{
-				CrossSender.reqEnterCrossInfo(0);	
-			}*/
-			//			return;
-			//死亡面板测试
-			//			FightFaceHelper.showHurtText(MainRoleManager.actor,MainRoleManager.actor,EnumHurtType.SPELL_HURT_TYPE_CRIT,5000);
-			//			FightFaceHelper.showHurtText(MainRoleManager.actor,MainRoleManager.actor,EnumHurtType.SPELL_HURT_TYPE_NORMAL,8000);
+//			AppManager.showApp(AppConstant.ACTIVETY_PANL);
+			
+		/*	var info:ActivetyInfo=ActivetyDataManager.getActInfoById(1); 
+			AppManager.showAppNoHide(AppConstant.ACTIVETY_OPEN,info);*/
+			
 			if("" == this._inputText.text )
 			{
 				return;

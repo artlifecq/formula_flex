@@ -2,13 +2,8 @@ package com.rpgGame.coreData.cfg
 {
 	import com.rpgGame.coreData.clientConfig.Q_guild;
 	import com.rpgGame.coreData.clientConfig.Q_guild_permission;
-	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
 	
 	import flash.utils.ByteArray;
-	import flash.utils.Dictionary;
-	
-	import app.message.GuildLevelDatasProto.GuildLevelDataProto;
-	import app.message.GuildOfficerDatasProto.GuildOfficerDataProto;
 	
 	import org.client.mainCore.ds.HashMap;
 

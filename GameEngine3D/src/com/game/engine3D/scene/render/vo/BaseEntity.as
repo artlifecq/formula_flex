@@ -74,6 +74,13 @@ package com.game.engine3D.scene.render.vo
 				obj.blendMode = value;
 			}
 		}
+		
+		override public function set planarRenderLayer(value:uint):void
+		{
+			super.planarRenderLayer = value;
+			if (_renderSet)
+				_renderSet.planarRenderLayer = value;
+		}
 
 		private function setBaseObjState(baseObj : BaseObj3D) : void
 		{

@@ -44,6 +44,8 @@ package com.rpgGame.appModule.guild
 		
 		override protected function commitData():void
 		{
+			if(info==null)
+				return ;
 			_skin.lbRolenName.text = info.name;
 			_skin.lbZhanli.text = info.battle.toString();
 			_skin.lbLevel.htmlText = info.level+"级"+HtmlTextUtil.getTextColor(0xff0000,ItemUtil.getJobName(info.job));

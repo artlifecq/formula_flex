@@ -19,6 +19,8 @@ package org.mokylin.skin.app.banghui
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var bg:feathers.controls.SkinnableContainer;
+
 		public var lbRolenName:feathers.controls.Label;
 
 		public var lbZhanli:feathers.controls.Label;
@@ -40,7 +42,7 @@ package org.mokylin.skin.app.banghui
 			this.currentState = "normal";
 			this.height = 36;
 			this.width = 254;
-			this.elementsContent = [__ItemJuanXian_SkinnableContainer1_i(),uiFirt_i(),numList2_i(),numList_i(),lbRolenName_i(),lbZhanli_i()];
+			this.elementsContent = [bg_i(),uiFirt_i(),numList2_i(),numList_i(),lbRolenName_i(),lbZhanli_i()];
 			
 			states = {
 			};
@@ -51,9 +53,11 @@ package org.mokylin.skin.app.banghui
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __ItemJuanXian_SkinnableContainer1_i():feathers.controls.SkinnableContainer
+		private function bg_i():feathers.controls.SkinnableContainer
 		{
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			bg = temp;
+			temp.name = "bg";
 			temp.height = 36;
 			var skin:StateSkin = new org.mokylin.skin.app.banghui.ItemBg()
 			temp.skin = skin

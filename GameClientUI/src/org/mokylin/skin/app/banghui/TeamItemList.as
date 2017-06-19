@@ -79,7 +79,7 @@ package org.mokylin.skin.app.banghui
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 27;
-			temp.x = 227;
+			temp.x = 232;
 			temp.y = 10;
 			return temp;
 		}
@@ -118,12 +118,12 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbTeamName = temp;
 			temp.name = "lbTeamName";
-			temp.text = "帮派名字七个字";
+			temp.text = "[00000]帮派名字七个字";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
-			temp.width = 106;
-			temp.x = 88;
+			temp.width = 160;
+			temp.x = 69;
 			temp.y = 10;
 			return temp;
 		}
@@ -152,7 +152,7 @@ package org.mokylin.skin.app.banghui
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.visible = false;
-			temp.x = 36;
+			temp.x = 31;
 			temp.y = 11;
 			return temp;
 		}
@@ -167,7 +167,7 @@ package org.mokylin.skin.app.banghui
 			temp.label = "1";
 			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow2;
 			temp.width = 33;
-			temp.x = 31;
+			temp.x = 26;
 			temp.y = 2;
 			return temp;
 		}

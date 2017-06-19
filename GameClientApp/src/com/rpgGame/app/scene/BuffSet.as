@@ -53,7 +53,7 @@ package com.rpgGame.app.scene
 			_isDestroyed = true;
 		}
 		
-		public function instanceDispose():void
+		public function putInPool():void
 		{
 //			dispose();
 			_isDisposed = true;
@@ -66,7 +66,7 @@ package com.rpgGame.app.scene
 		public static function recycle(buffSet : BuffSet) : void
 		{
 			//利用池回收BuffSet
-			buffSetPool.disposeObj(buffSet);
+			buffSetPool.recycleObj(buffSet);
 		}
 		
 		public function BuffSet(role : SceneRole)
@@ -444,7 +444,7 @@ package com.rpgGame.app.scene
 			return _isDestroyed;
 		}
 		
-		public function get isDisposed():Boolean
+		public function get isInPool():Boolean
 		{
 			return _isDisposed;
 		}

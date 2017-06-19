@@ -52,8 +52,9 @@ package com.rpgGame.appModule.fightsoul
 			this._showAvatarData.avatarInfo.bodyEffectID2 =modeinfo.q_effect;
 			this.setRoleData(this._showAvatarData);
 			
-			this.curRole.setScale(modeinfo.q_panleScale/100);
-			this.curRole.z = modeinfo.q_panleY;
+			var scale:Number = modeinfo.q_panleScale/100;
+			this.curRole.setScale(scale);
+			this.curRole.z = -modeinfo.q_panleY*scale;
 		}
 		
 		private function onAddEftComplete(sr3D:InterObject3D,renderUint:RenderUnit3D):void

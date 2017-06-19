@@ -473,10 +473,10 @@ package com.rpgGame.app.ui.main
 			this._expBar.resize(sWidth, sHeight);
 			this._systemMsgBar.resize(sWidth, sHeight);
 			this._playerHead.resize(sWidth, sHeight);
-			
-			if(_taskBar.parent){
-				this._taskBar.resize(sWidth, sHeight);
-			}
+			this._taskBar.resize(sWidth, sHeight);
+			/*if(_taskBar.parent){
+				
+			}*/
 			
 			this._bossHead.resize(sWidth, sHeight);
 			this._eliteHead.resize(sWidth, sHeight);

@@ -72,6 +72,8 @@ package com.rpgGame.coreData.role
 		public var mood : String = "";
 		/**帮派名**/
 		public var guildName : String = "";
+		/**帮会职位**/
+		public var guildMemberType: int;
 		/**伴侣**/
 		public var loveName : String = "";
 		/**今天接了几次镖车任务**/
@@ -112,8 +114,11 @@ package com.rpgGame.coreData.role
 		
 		public var sex:int;
 		
-		public var junjieLv:int;
 		
+		/**军阶等级*/
+		public var junjieLv:int;
+		/**战旗等级*/
+		public var zhanqiLv:int;
 		
 		private var _customMount : int = 0;
 		public var trailMount : String = null;
@@ -306,6 +311,7 @@ package com.rpgGame.coreData.role
 			data.weapon = info.weapon;
 			data.deputyWeapon = info.second_weapon;
 			data.junjieLv=info.junJieId;
+			data.zhanqiLv=info.warflag;
 			
 			data.totalStat.setData(info.attributes);
 			
@@ -321,6 +327,8 @@ package com.rpgGame.coreData.role
 				buffData.buffInfo = info.buffs[i];
 				data.buffList.push(buffData);
 			}
+			data.guildName = info.guildName;
+			data.guildMemberType = info.guildMemberType;
 			
 			RoleData.readGeneric(data, new Point(info.position.x,info.position.y));
 		}

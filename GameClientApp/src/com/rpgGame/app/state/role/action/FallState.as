@@ -38,7 +38,7 @@ package com.rpgGame.app.state.role.action
 
 		override public function execute() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				super.execute();
 				_hardStiffFinished = false;
@@ -59,7 +59,7 @@ package com.rpgGame.app.state.role.action
 		
 		private function doFlyBack() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {x: true, z: true});
 				
@@ -82,7 +82,7 @@ package com.rpgGame.app.state.role.action
 		
 		private function onMoveComplete() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				var targetX : int = _stateReference.targetPos.x;
 				var targetZ : int = _stateReference.targetPos.y;
@@ -152,7 +152,7 @@ package com.rpgGame.app.state.role.action
 			super.afterExecute();
 			syncAnimation(false, 0);
 
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				var bodyAp : RenderUnit3D = (_machine.owner as SceneRole).avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY, true);
 				var totalFrameTm : uint = (bodyAp ? bodyAp.totalDuration : 0);
@@ -165,7 +165,7 @@ package com.rpgGame.app.state.role.action
 
 		private function onPlayFallCmp() : void
 		{
-			if (_machine && !_machine.isDisposed)
+			if (_machine && !_machine.isInPool)
 			{
 				stopFall();
 			}

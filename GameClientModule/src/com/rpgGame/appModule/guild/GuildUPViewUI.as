@@ -41,9 +41,12 @@ package com.rpgGame.appModule.guild
 		{
 			if(guildInfo==null)
 				return ;
+			
 			var currentGuildInfo:Q_guild = GuildCfgData.getLevelInfo(guildInfo.level);
 			if(currentGuildInfo!=null)
+			{
 				_skin.lbMsg1.htmlText = currentGuildInfo.q_privilege_show;
+			}
 			var nextGuildInfo:Q_guild= GuildCfgData.getLevelInfo(guildInfo.level+1);
 			if(nextGuildInfo!=null)
 				_skin.lbMsg2.htmlText = nextGuildInfo.q_privilege_show;
@@ -72,15 +75,22 @@ package com.rpgGame.appModule.guild
 				GrayFilter.gray(_skin.btnJuanxian);
 			}
 			
-			var guildLevel:Q_guild = GuildManager.instance().guildLevelInfo;
-			var percent:Number = guildInfo.active/guildLevel.q_active;
+			
+			var startActive:int = 0;
+			var lastGuildInfo:Q_guild = GuildCfgData.getLevelInfo(guildInfo.level-1);
+			if(lastGuildInfo!=null)
+				startActive = lastGuildInfo.q_active;
+			var have:int = guildInfo.active - startActive;
+			var need:int = currentGuildInfo.q_active - startActive;
+			var percent:Number = have/need;
 			if(percent >=1)
 				percent = 1;
 			_skin.proJindu.value = _skin.proJindu.maximum*percent;
-			_skin.lbJindu.text =  guildInfo.active.toString()+"/"+guildLevel.q_active.toString();
+			_skin.lbJindu.text =  have.toString()+"/"+need.toString();
 			
 			_skin.lbBanhuiZhanli.text = guildInfo.battle.toString();
 			_skin.lbBanhuiDengji.text = guildInfo.level.toString();
+			_skin.btnUp.visible = GuildManager.instance().canUpgrad;
 		}
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
@@ -93,11 +103,9 @@ package com.rpgGame.appModule.guild
 					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_BANGHUI_COMBAT,null,false);
 					break;
 				case _skin.btnUp:
-					GuildManager.instance().guildLevelup(0);
+					GuildManager.instance().guildLevelup();
 					break;
-				
 			}
-			
 		}
 		private function get guildInfo():GuildInfo
 		{

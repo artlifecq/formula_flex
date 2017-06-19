@@ -21,6 +21,8 @@ package org.mokylin.skin.app.banghui
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var bg:feathers.controls.SkinnableContainer;
+
 		public var btnAdd:feathers.controls.Button;
 
 		public var lbFull:feathers.controls.Label;
@@ -52,7 +54,7 @@ package org.mokylin.skin.app.banghui
 			this.currentState = "normal";
 			this.height = 36;
 			this.width = 627;
-			this.elementsContent = [__TeamItem1_Skin_SkinnableContainer1_i(),uiFirt_i(),numList_i(),numList2_i(),lbTeamName_i(),lbLevel_i(),lbRolenName_i(),lbNum_i(),lbZhanli_i(),btnAdd_i(),lbFull_i()];
+			this.elementsContent = [bg_i(),uiFirt_i(),numList_i(),numList2_i(),lbTeamName_i(),lbLevel_i(),lbRolenName_i(),lbNum_i(),lbZhanli_i(),btnAdd_i(),lbFull_i()];
 			
 			states = {
 			};
@@ -63,9 +65,11 @@ package org.mokylin.skin.app.banghui
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __TeamItem1_Skin_SkinnableContainer1_i():feathers.controls.SkinnableContainer
+		private function bg_i():feathers.controls.SkinnableContainer
 		{
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			bg = temp;
+			temp.name = "bg";
 			temp.height = 36;
 			var skin:StateSkin = new org.mokylin.skin.app.banghui.ItemBg()
 			temp.skin = skin
@@ -113,7 +117,7 @@ package org.mokylin.skin.app.banghui
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 27;
-			temp.x = 209;
+			temp.x = 214;
 			temp.y = 10;
 			return temp;
 		}
@@ -152,12 +156,13 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbTeamName = temp;
 			temp.name = "lbTeamName";
-			temp.text = "帮派名字七个字";
+			temp.text = "[00000]帮派名字七个字";
+			temp.textAlign = "left";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
-			temp.width = 106;
-			temp.x = 76;
+			temp.width = 160;
+			temp.x = 58;
 			temp.y = 10;
 			return temp;
 		}
@@ -185,7 +190,7 @@ package org.mokylin.skin.app.banghui
 			temp.text = "4";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 36;
+			temp.x = 26;
 			temp.y = 11;
 			return temp;
 		}
@@ -200,7 +205,7 @@ package org.mokylin.skin.app.banghui
 			temp.label = "1";
 			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow2;
 			temp.width = 33;
-			temp.x = 31;
+			temp.x = 21;
 			temp.y = 2;
 			return temp;
 		}

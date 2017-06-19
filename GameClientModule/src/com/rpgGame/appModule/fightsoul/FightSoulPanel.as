@@ -208,7 +208,7 @@ package com.rpgGame.appModule.fightsoul
 				_skin.modecontent.addChild(content);
 				_fightsoul = new FightSoulModePane();
 				_fightsoul.x = 340;
-				_fightsoul.y = 400;
+//				_fightsoul.y = 800;
 				content.addChild3D(_fightsoul);
 			}
 			

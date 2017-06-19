@@ -3,7 +3,6 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.manager.mount.MountShowData;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
@@ -23,10 +22,8 @@ package com.rpgGame.appModule.mount
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.zuoqi.ZuoqiCont_Skin;
-	import org.mokylin.skin.app.zuoqi.Zuoqi_Skin;
 	
 	import starling.display.DisplayObject;
-	import starling.display.DisplayObjectContainer;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -278,7 +275,7 @@ package com.rpgGame.appModule.mount
 			//					_shopPane.parent.removeChild(_shopPane,true);
 			//				_shopPane = null;
 			//			}
-			ItemGetAdvisePanelExt.remove(this);
+			ItemGetAdvisePanelExt.hidePanel();
 			removeEvent();
 			super.hide();
 		}

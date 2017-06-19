@@ -112,12 +112,13 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbRolenName = temp;
 			temp.name = "lbRolenName";
-			temp.text = "玩家名字六字";
+			temp.text = "[00000]玩家名字六字";
+			temp.textAlign = "center";
 			temp.color = 0x6BCC08;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
-			temp.width = 95;
-			temp.x = 35;
+			temp.width = 160;
+			temp.x = 1;
 			temp.y = 9;
 			return temp;
 		}

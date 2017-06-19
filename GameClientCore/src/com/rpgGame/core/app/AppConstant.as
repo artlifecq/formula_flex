@@ -132,6 +132,18 @@ package com.rpgGame.core.app
 		public static var MULTY_EXITTIME_PANL:String = createAppInfo( "dungeon.multy.MultyExitTimePanel");
 		
 		/**
+		 *多人副本队伍投票面板
+		 */
+		public static var MULTY_TEAM_PANL:String = createAppInfo( "dungeon.multy.MultyTeamPanel");
+		
+		
+		/**
+		 *活动面板
+		 */
+		public static var ACTIVETY_PANL:String = createAppInfo( "activety.ActivetyPanel","activety");
+		/** 活动开启 **/
+		public static var ACTIVETY_OPEN:String = createAppInfo("activety.ActOpenPanel");
+		/**
 		 *装备面板
 		 */
 		public static var EQUIP_PANL:String = createAppInfo( "equip.EquipPanel","zhuangbei");
@@ -360,6 +372,8 @@ package com.rpgGame.core.app
 		public static var GUILD_PANEL : String = createAppInfo("guild.GuildPanel","banghui");
 		/**帮会请求列表 **/
 		public static var GUILD_APPLAYLIST_PANEL : String = createAppInfo("guild.GuildApplyListPanle","banghui");
+		/**帮会邀请列表 **/
+		public static var GUILD_INVITATION_PANEL : String = createAppInfo("guild.GuildInvitationListPanle","banghui");
 		/**帮会信息 **/
 		public static var GUILD_APPLAYINFO_PANEL : String = createAppInfo("guild.GuildPorpInfoPanel","banghui");
 		/**帮会权限设置 **/

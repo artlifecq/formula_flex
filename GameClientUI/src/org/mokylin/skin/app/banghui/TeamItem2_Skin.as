@@ -17,6 +17,8 @@ package org.mokylin.skin.app.banghui
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var bg:feathers.controls.SkinnableContainer;
+
 		public var lbOnLine:feathers.controls.Label;
 
 		public var lbRolenName:feathers.controls.Label;
@@ -46,7 +48,7 @@ package org.mokylin.skin.app.banghui
 			this.currentState = "normal";
 			this.height = 36;
 			this.width = 896;
-			this.elementsContent = [__TeamItem2_Skin_SkinnableContainer1_i(),uiFirt_i(),numList2_i(),lbTeamName_i(),lbZhanli_i(),lbRolenName_i(),lbZhouHuoYue_i(),lbZongHuoYue_i(),lbOnLine_i(),uiTongShuai_i()];
+			this.elementsContent = [bg_i(),uiFirt_i(),numList2_i(),lbTeamName_i(),lbZhanli_i(),lbRolenName_i(),lbZhouHuoYue_i(),lbZongHuoYue_i(),lbOnLine_i(),uiTongShuai_i()];
 			
 			states = {
 			};
@@ -57,9 +59,11 @@ package org.mokylin.skin.app.banghui
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __TeamItem2_Skin_SkinnableContainer1_i():feathers.controls.SkinnableContainer
+		private function bg_i():feathers.controls.SkinnableContainer
 		{
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			bg = temp;
+			temp.name = "bg";
 			temp.height = 36;
 			var skin:StateSkin = new org.mokylin.skin.app.banghui.ItemBg()
 			temp.skin = skin
@@ -104,13 +108,13 @@ package org.mokylin.skin.app.banghui
 			temp.name = "lbTeamName";
 			temp.touchable = false;
 			temp.touchGroup = false;
-			temp.text = "玩家名六个字";
-			temp.textAlign = "center";
+			temp.text = "[00000]玩家名六个字";
+			temp.textAlign = "left";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
-			temp.width = 106;
-			temp.x = 148;
+			temp.width = 160;
+			temp.x = 138;
 			temp.y = 8;
 			return temp;
 		}

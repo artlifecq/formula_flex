@@ -14,7 +14,7 @@ package com.rpgGame.netData.guild.bean{
 	 * 帮派列表信息
 	 */
 	public class GuildListInfo extends Bean {
-	
+		
 		//帮派排名
 		private var _rank: int;
 		
@@ -29,6 +29,9 @@ package com.rpgGame.netData.guild.bean{
 		
 		//帮主名字
 		private var _chiefName: String;
+		
+		//帮主Id
+		private var _chiefId: long;
 		
 		//帮会人数
 		private var _guildMemberNum: int;
@@ -56,6 +59,8 @@ package com.rpgGame.netData.guild.bean{
 			writeInt(_guildLevel);
 			//帮主名字
 			writeString(_chiefName);
+			//帮主Id
+			writeLong(_chiefId);
 			//帮会人数
 			writeInt(_guildMemberNum);
 			//总战力
@@ -81,6 +86,8 @@ package com.rpgGame.netData.guild.bean{
 			_guildLevel = readInt();
 			//帮主名字
 			_chiefName = readString();
+			//帮主Id
+			_chiefId = readLong();
 			//帮会人数
 			_guildMemberNum = readInt();
 			//总战力
@@ -165,6 +172,21 @@ package com.rpgGame.netData.guild.bean{
 		 */
 		public function set chiefName(value: String): void{
 			this._chiefName = value;
+		}
+		
+		/**
+		 * get 帮主Id
+		 * @return 
+		 */
+		public function get chiefId(): long{
+			return _chiefId;
+		}
+		
+		/**
+		 * set 帮主Id
+		 */
+		public function set chiefId(value: long): void{
+			this._chiefId = value;
 		}
 		
 		/**

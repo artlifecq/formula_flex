@@ -38,11 +38,11 @@ package com.game.engine3D.scene.display
 		
 		public static function recycle(text : Render3DText) : void
 		{
-			if (!text || text.isDisposed)
+			if (!text || text.isInPool)
 				return;
 			_cnt--;
 			//利用池回收
-			_pool.disposeObj(text);
+			_pool.recycleObj(text);
 		}
 		
 		public static function get cnt() : int

@@ -54,8 +54,17 @@ package com.rpgGame.netData.map.bean{
 		//坐骑
 		private var _mount: int;
 		
+		//战旗
+		private var _warflag: int;
+		
 		//军阶头顶显示
 		private var _junJieId: int;
+		
+		//帮会名称
+		private var _guildName: String;
+		
+		//帮会职位
+		private var _guildMemberType: int;
 		
 		//PK类型(0-和平 1-组队 2-帮会 3-全体 4-阵营 5-善恶)
 		private var _pkType: int;
@@ -97,8 +106,14 @@ package com.rpgGame.netData.map.bean{
 			writeInt(_second_weapon);
 			//坐骑
 			writeInt(_mount);
+			//战旗
+			writeInt(_warflag);
 			//军阶头顶显示
 			writeInt(_junJieId);
+			//帮会名称
+			writeString(_guildName);
+			//帮会职位
+			writeInt(_guildMemberType);
 			//PK类型(0-和平 1-组队 2-帮会 3-全体 4-阵营 5-善恶)
 			writeByte(_pkType);
 			//阵营关系，为0则检查默认敌对关系，大于0则和相同阵营友好，不同阵营敌对
@@ -149,8 +164,14 @@ package com.rpgGame.netData.map.bean{
 			_second_weapon = readInt();
 			//坐骑
 			_mount = readInt();
+			//战旗
+			_warflag = readInt();
 			//军阶头顶显示
 			_junJieId = readInt();
+			//帮会名称
+			_guildName = readString();
+			//帮会职位
+			_guildMemberType = readInt();
 			//PK类型(0-和平 1-组队 2-帮会 3-全体 4-阵营 5-善恶)
 			_pkType = readByte();
 			//阵营关系，为0则检查默认敌对关系，大于0则和相同阵营友好，不同阵营敌对
@@ -354,6 +375,21 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
+		 * get 战旗
+		 * @return 
+		 */
+		public function get warflag(): int{
+			return _warflag;
+		}
+		
+		/**
+		 * set 战旗
+		 */
+		public function set warflag(value: int): void{
+			this._warflag = value;
+		}
+		
+		/**
 		 * get 军阶头顶显示
 		 * @return 
 		 */
@@ -366,6 +402,36 @@ package com.rpgGame.netData.map.bean{
 		 */
 		public function set junJieId(value: int): void{
 			this._junJieId = value;
+		}
+		
+		/**
+		 * get 帮会名称
+		 * @return 
+		 */
+		public function get guildName(): String{
+			return _guildName;
+		}
+		
+		/**
+		 * set 帮会名称
+		 */
+		public function set guildName(value: String): void{
+			this._guildName = value;
+		}
+		
+		/**
+		 * get 帮会职位
+		 * @return 
+		 */
+		public function get guildMemberType(): int{
+			return _guildMemberType;
+		}
+		
+		/**
+		 * set 帮会职位
+		 */
+		public function set guildMemberType(value: int): void{
+			this._guildMemberType = value;
 		}
 		
 		/**

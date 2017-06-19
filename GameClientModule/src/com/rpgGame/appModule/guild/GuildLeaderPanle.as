@@ -1,12 +1,11 @@
 package com.rpgGame.appModule.guild
 {
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.core.events.GuildEvent;
-	import com.rpgGame.coreData.cfg.GuildCfgData;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.clientConfig.Q_guild;
-	import com.rpgGame.coreData.clientConfig.Q_guild_permission;
 	import com.rpgGame.coreData.enum.EnumGuildPost;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.guild.bean.GuildMemberInfo;
@@ -30,6 +29,8 @@ package com.rpgGame.appModule.guild
 		private var _opaque:int;
 		private var _setPostType:int;
 		private var _postList:Vector.<int>;
+		private var _currentValue:int;
+		private var _maxValue:int;
 		public function GuildLeaderPanle():void
 		{
 			_skin = new TanKuang_TongShuaiRenMing();
@@ -62,7 +63,7 @@ package com.rpgGame.appModule.guild
 				return ;
 			if(msg.opaque == _opaque)
 			{
-				_heroInfo.memberType = _setPostType;
+				_heroInfo.isLeader = _setPostType;
 				_opaque = 0;
 				refeashVale();
 			}
@@ -76,9 +77,9 @@ package com.rpgGame.appModule.guild
 		private function refeashShowInfo():void
 		{
 			var guildLevelInfo:Q_guild = GuildManager.instance().guildLevelInfo;
-			var count:int = GuildManager.instance().getLeaderCount();
-			
-			_skin.lbLead.text = "统帅("+count+"/"+guildLevelInfo.q_deputy_chief_num+")";
+			_currentValue = GuildManager.instance().getLeaderCount();
+			_maxValue = guildLevelInfo.q_commander_num;
+			_skin.lbLead.text = "统帅("+_currentValue+"/"+_maxValue+")";
 			_group.selectedIndex = _heroInfo.isLeader==1?0:1;
 		}
 		
@@ -87,17 +88,20 @@ package com.rpgGame.appModule.guild
 			super.onTouchTarget(target);
 			if(target == _skin.btnOk)
 			{
-				if(_opaque>=0)
+				if(_opaque>0)
 					return ;
 				var posttype:int = _postList[_group.selectedIndex];
-				
-				
 				if(posttype == lastLeaderType)
 					return ;
-				_heroInfo.memberType = (posttype==EnumGuildPost.GUILDPOST_LEADER?1:0);
+				
+				if(!_heroInfo.isLeader&&_currentValue>=_maxValue)
+				{
+					NoticeManager.showNotifyById(60024);
+					return ;
+				}
+				_setPostType =  (posttype==EnumGuildPost.GUILDPOST_LEADER?1:0);
 				_opaque = GuildManager.opaque;
-				_setPostType = posttype;
-				GuildManager.instance().guildAppoint(_heroId,_setPostType,_opaque);
+				GuildManager.instance().guildAppoint(_heroId,posttype,1,_opaque);
 			}
 		}
 		

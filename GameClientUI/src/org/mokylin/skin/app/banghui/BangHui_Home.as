@@ -175,7 +175,7 @@ package org.mokylin.skin.app.banghui
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/banghui/word/dengji.png";
-			temp.x = 210;
+			temp.x = 215;
 			temp.y = 6;
 			return temp;
 		}

@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.guild
 {
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.core.events.GuildEvent;
@@ -30,6 +31,7 @@ package com.rpgGame.appModule.guild
 		private var _postList:Vector.<int>;
 		private var _opaque:int;
 		private var _setPostType:int;
+		private var _guildLevelInfo:Q_guild;
 		public function GuildAppointedPanel():void
 		{
 			_skin = new TanKuang_ZhiWeiRenMing();
@@ -42,13 +44,13 @@ package com.rpgGame.appModule.guild
 			_group = new ToggleGroup();
 			_skin.chkBangzhu.toggleGroup = _group;
 			_skin.chkFubangzhu.toggleGroup = _group;
-			_skin.chkZhanglao.toggleGroup = _group;
 			_skin.chkPutong.toggleGroup = _group;
+//			_skin.chkZhanglao.toggleGroup = _group;
 			_postList = new Vector.<int>();
 			_postList.push(EnumGuildPost.GUILDPOST_CHIEF);
 			_postList.push(EnumGuildPost.GUILDPOST_VICE_CHIEF);
-			_postList.push(EnumGuildPost.GUILDPOST_ELDERS);
 			_postList.push(EnumGuildPost.GUILDPOST_OTHER);
+			_postList.push(EnumGuildPost.GUILDPOST_ELDERS);
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
@@ -69,6 +71,10 @@ package com.rpgGame.appModule.guild
 				return ;
 			if(msg.opaque == _opaque)
 			{
+				if(_setPostType == EnumGuildPost.GUILDPOST_CHIEF)
+				{
+					GuildManager.instance().selfMemberInfo.memberType = EnumGuildPost.GUILDPOST_OTHER;
+				}
 				_heroInfo.memberType = _setPostType;
 				_opaque = 0;
 				refeashVale();
@@ -86,18 +92,24 @@ package com.rpgGame.appModule.guild
 		
 		private function refeashShowInfo():void
 		{
-			var guildLevelInfo:Q_guild = GuildManager.instance().guildLevelInfo;
+			_guildLevelInfo = GuildManager.instance().guildLevelInfo;
 			var post:int = EnumGuildPost.GUILDPOST_VICE_CHIEF;
 			var count:int = GuildManager.instance().getMemberCountByType(post);
 			var postInfo:Q_guild_permission = GuildCfgData.getPermissionInfo(post);
 			
-			_skin.lbFubangzhu.text = postInfo.q_name+"("+count+"/"+guildLevelInfo.q_deputy_chief_num+")";
+			_skin.lbFubangzhu.text = postInfo.q_name+"("+count+"/"+_guildLevelInfo.q_deputy_chief_num+")";
 			
 			post= EnumGuildPost.GUILDPOST_ELDERS;
 			count= GuildManager.instance().getMemberCountByType(post);
 			postInfo = GuildCfgData.getPermissionInfo(post);
 			
-			_skin.lbZhanglao.text = postInfo.q_name+"("+count+"/"+guildLevelInfo.q_deputy_chief_num+")";
+			_skin.lbZhanglao.text = postInfo.q_name+"("+count+"/"+_guildLevelInfo.q_eleder_num+")";
+			if(_guildLevelInfo.q_eleder_num==0)
+			{
+				_skin.chkZhanglao.toggleGroup =null;
+			}else{
+				_skin.chkZhanglao.toggleGroup = _group;
+			}
 			_group.selectedIndex = _postList.indexOf(_heroInfo.memberType);
 		}
 		
@@ -106,16 +118,41 @@ package com.rpgGame.appModule.guild
 			super.onTouchTarget(target);
 			if(target == _skin.btnOk)
 			{
-				if(_opaque>=0)
-					return ;
 				var posttype:int = _postList[_group.selectedIndex];
 				if(posttype == _heroInfo.memberType)
+					return ;
+				if(!checkCount())
+				{
+					NoticeManager.showNotifyById(60025);
+					return ;
+				}
+				if(_opaque>0)
 					return ;
 				_heroInfo.memberType = posttype;
 				_opaque = GuildManager.opaque;
 				_setPostType = posttype;
-				GuildManager.instance().guildAppoint(_heroId,_setPostType,_opaque);
+				GuildManager.instance().guildAppoint(_heroId,_setPostType,0,_opaque);
+			}else if(target == _skin.chkZhanglao){
+				if(_guildLevelInfo.q_eleder_num==0)
+				{
+					NoticeManager.showNotifyById(60046);
+					_skin.chkZhanglao.isSelected = false;
+					return ;
+				}
 			}
+		}
+		
+		private function checkCount():Boolean
+		{
+			var posttype:int = _postList[_group.selectedIndex];
+			switch(posttype)
+			{
+				case EnumGuildPost.GUILDPOST_VICE_CHIEF:
+					return (GuildManager.instance().getMemberCountByType(EnumGuildPost.GUILDPOST_VICE_CHIEF)<_guildLevelInfo.q_deputy_chief_num);
+				case EnumGuildPost.GUILDPOST_ELDERS:
+					return (GuildManager.instance().getMemberCountByType(EnumGuildPost.GUILDPOST_ELDERS)<_guildLevelInfo.q_eleder_num);
+			}
+			return true;
 		}
 		
 		override protected function onHide():void

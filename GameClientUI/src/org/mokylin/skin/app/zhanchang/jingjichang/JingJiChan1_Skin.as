@@ -169,8 +169,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.height = 24;
 			var skin:StateSkin = new org.mokylin.skin.app.zhanchang.jingjichang.JingJiPaiMing()
 			temp.skin = skin
-			temp.width = 276;
-			temp.x = 653;
+			temp.width = 330;
+			temp.x = 600;
 			temp.y = 75;
 			return temp;
 		}

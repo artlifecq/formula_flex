@@ -1,16 +1,21 @@
 package com.rpgGame.app.manager.mount
 {
+	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.shop.ShopManager;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.coreData.UNIQUEID;
 	import com.rpgGame.coreData.cfg.HorseConfigData;
 	import com.rpgGame.coreData.cfg.HorseSpellData;
+	import com.rpgGame.coreData.cfg.SourceGetCfg;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_horse;
 	import com.rpgGame.coreData.clientConfig.Q_horse_skills;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
+	import com.rpgGame.coreData.clientConfig.Q_source;
 	import com.rpgGame.coreData.info.face.BaseFaceInfo;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.role.HeroData;
@@ -23,7 +28,7 @@ package com.rpgGame.app.manager.mount
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.connection.SocketConnection;
-
+	
 	public class HorseManager
 	{
 		public static const HorseUpLevel:int = UNIQUEID.NEXT;
@@ -41,9 +46,9 @@ package com.rpgGame.app.manager.mount
 		{
 			return _useExtraItem1;
 		}
-
+		
 		private var _useExtarItem2:int;
-
+		
 		/**
 		 * 成长丹使用数量 
 		 */
@@ -51,12 +56,12 @@ package com.rpgGame.app.manager.mount
 		{
 			return _useExtarItem2;
 		}
-
+		
 		public function get horsedataInfo():HorseDataInfo
 		{
 			return _horsedataInfo;
 		}
-
+		
 		public function set horsedataInfo(value:HorseDataInfo):void
 		{
 			_horsedataInfo = value;
@@ -118,6 +123,22 @@ package com.rpgGame.app.manager.mount
 			{
 				NoticeManager.showNotifyById(9002,showdata.upLevelItem.qItem.q_name);
 				return false;
+			}
+			if(showdata.isAutoBuyItem&&!showdata.canUpLevel())
+			{
+				var qSource:Q_source=SourceGetCfg.getSource(showdata.upLevelItem.qItem.q_id);
+				if (!qSource) 
+				{
+					NoticeManager.mouseFollowNotify("商城未上架");
+					return false;
+				}	
+				var shopItems:Array=Mgr.shopMgr.getMallItemShopVo(showdata.upLevelItem.qItem.q_id,qSource.q_shoptype,JSONUtil.decode(qSource.q_sub_shop_type));
+				var needNum:int=showdata.upLevelNeedItemCount-showdata.bagHaveItemCount;
+				if(!ShopManager.ins.isCanBuy(shopItems,needNum))
+				{
+					NoticeManager.showNotifyById(9002,"元宝");
+					return false;
+				}
 			}
 			var msg:CSHorseStratumUpToGameMessage = new CSHorseStratumUpToGameMessage();
 			msg.Automatic = showdata.isAutoBuyItem?1:0;

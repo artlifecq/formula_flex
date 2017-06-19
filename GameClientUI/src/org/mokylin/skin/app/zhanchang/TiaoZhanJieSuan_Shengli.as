@@ -47,6 +47,8 @@ package org.mokylin.skin.app.zhanchang
 
 		public var uiShengwang:feathers.controls.UIAsset;
 
+		public var uiTip:feathers.controls.UIAsset;
+
 		public var uiYuanbao:feathers.controls.UIAsset;
 
 
@@ -60,7 +62,7 @@ package org.mokylin.skin.app.zhanchang
 			this.currentState = "normal";
 			this.height = 479;
 			this.width = 469;
-			this.elementsContent = [__TiaoZhanJieSuan_Shengli_UIAsset1_i(),imgWin_i(),__TiaoZhanJieSuan_Shengli_UIAsset2_i(),__TiaoZhanJieSuan_Shengli_UIAsset3_i(),__TiaoZhanJieSuan_Shengli_UIAsset4_i(),numPaiming_i(),gSW_i(),gZQ_i(),gMoney_i(),gExp_i(),btnOk_i()];
+			this.elementsContent = [__TiaoZhanJieSuan_Shengli_UIAsset1_i(),imgWin_i(),__TiaoZhanJieSuan_Shengli_UIAsset2_i(),__TiaoZhanJieSuan_Shengli_UIAsset3_i(),__TiaoZhanJieSuan_Shengli_UIAsset4_i(),numPaiming_i(),gSW_i(),gZQ_i(),gMoney_i(),gExp_i(),btnOk_i(),uiTip_i()];
 			
 			states = {
 			};
@@ -155,7 +157,7 @@ package org.mokylin.skin.app.zhanchang
 			temp.color = 0xCFC6AE;
 			temp.width = 112;
 			temp.x = 175;
-			temp.y = 425;
+			temp.y = 428;
 			return temp;
 		}
 
@@ -165,7 +167,7 @@ package org.mokylin.skin.app.zhanchang
 			gExp = temp;
 			temp.name = "gExp";
 			temp.x = 137;
-			temp.y = 381;
+			temp.y = 372;
 			temp.elementsContent = [__TiaoZhanJieSuan_Shengli_UIAsset8_i(),uiExp_i(),numExp_i()];
 			return temp;
 		}
@@ -176,7 +178,7 @@ package org.mokylin.skin.app.zhanchang
 			gMoney = temp;
 			temp.name = "gMoney";
 			temp.x = 137;
-			temp.y = 351;
+			temp.y = 342;
 			temp.elementsContent = [__TiaoZhanJieSuan_Shengli_UIAsset7_i(),uiYuanbao_i(),numYuanbao_i()];
 			return temp;
 		}
@@ -187,7 +189,7 @@ package org.mokylin.skin.app.zhanchang
 			gSW = temp;
 			temp.name = "gSW";
 			temp.x = 137;
-			temp.y = 289;
+			temp.y = 280;
 			temp.elementsContent = [__TiaoZhanJieSuan_Shengli_UIAsset5_i(),uiShengwang_i(),numShengwang_i()];
 			return temp;
 		}
@@ -198,7 +200,7 @@ package org.mokylin.skin.app.zhanchang
 			gZQ = temp;
 			temp.name = "gZQ";
 			temp.x = 137;
-			temp.y = 321;
+			temp.y = 312;
 			temp.elementsContent = [__TiaoZhanJieSuan_Shengli_UIAsset6_i(),uiLingqi_i(),numLingqi_i()];
 			return temp;
 		}
@@ -319,6 +321,17 @@ package org.mokylin.skin.app.zhanchang
 			temp.styleName = "ui/common/tubiao/shengwang.png";
 			temp.x = 0;
 			temp.y = 2;
+			return temp;
+		}
+
+		private function uiTip_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiTip = temp;
+			temp.name = "uiTip";
+			temp.styleName = "ui/app/zhanchang/jiesuan/yinjiuzhuangxingkeyi.png";
+			temp.x = 109;
+			temp.y = 403;
 			return temp;
 		}
 

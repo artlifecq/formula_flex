@@ -1,5 +1,6 @@
 package com.rpgGame.app.ui.main.dungeon
 {
+	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.core.ui.SkinUI;
 	
 	import feathers.controls.StateSkin;
@@ -39,6 +40,12 @@ package com.rpgGame.app.ui.main.dungeon
 		{
 			this.x = sw - this._stateSkin.width;
 			this.y = 273;
+		}
+		override protected function onHide():void
+		{
+			super.onHide();
+			TrusteeshipManager.getInstance().findDist=0;
+			TrusteeshipManager.getInstance().stopAll();
 		}
 		
 		private function setBoxState(state:Boolean):void

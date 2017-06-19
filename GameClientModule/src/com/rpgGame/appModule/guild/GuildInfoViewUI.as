@@ -73,11 +73,17 @@ package com.rpgGame.appModule.guild
 			_skin.NumZhanli.number = guildData.battle;
 			_skin.lbBangZhu.text = guildData.chiefName;
 			_skin.lbDengji.text = "Lv."+chiefGuildMemberInfo.level;
+			_skin.btnZhaoji.visible = GuildManager.instance().canConvene;
+			if(GuildManager.instance().canDissolve)
+			{
+				_skin.btnJiesan.label = "解散帮会";
+			}else{
+				_skin.btnJiesan.label = "退出帮派";
+			}
 		}
 		
 		private function updateRole():void
 		{
-			
 			var chiefAvatar:PlayerAppearanceInfo = guildData.chiefAvatar;
 			if(chiefAvatar!=null)
 			{
@@ -92,16 +98,21 @@ package com.rpgGame.appModule.guild
 			switch(target)
 			{
 				case _skin.btnJineng:
-					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_BANGHUI_SPELL);
+					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_BANGHUI_SPELL,null,false);
 					break;
 				case _skin.btnZhengba:
-					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_BANGHUI_COMBAT);
+					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_BANGHUI_COMBAT,null,false);
 					break;
 				case _skin.btnZhaoji:
 					GuildManager.instance().guildConvene();
 					break;
 				case _skin.btnJiesan:
-					GuildManager.instance().guildDissolve();
+					if(GuildManager.instance().canDissolve)
+					{
+						GuildManager.instance().guildDissolve();
+					}else{
+						GuildManager.instance().guildExit();
+					}
 					break;
 			}
 		}

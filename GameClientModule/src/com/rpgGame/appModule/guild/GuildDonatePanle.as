@@ -1,8 +1,10 @@
 package com.rpgGame.appModule.guild
 {
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.guild.GuildManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
@@ -39,6 +41,7 @@ package com.rpgGame.appModule.guild
 		private var _item1:ClientItemInfo;
 		private var _item2:ClientItemInfo;
 		private var _opaque:int;
+		private var _DonateMax:int;
 		public function GuildDonatePanle():void
 		{
 			_skin = new TanKuang_JuanXian();
@@ -49,11 +52,11 @@ package com.rpgGame.appModule.guild
 		private function initView():void
 		{
 			_skin.list.snapToPages = true;
-			_skin.list.itemRendererType =GuildPlayerInfoCell;
+			_skin.list.itemRendererType =GuildDonateCell;
 			_skin.list.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			_skin.list.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			var layout:VerticalLayout = new VerticalLayout();
-			layout.gap = 15;
+			layout.gap = 0;
 			_skin.list.layout = layout;
 			_skin.list.dataProvider = new ListCollection();
 			
@@ -84,6 +87,8 @@ package com.rpgGame.appModule.guild
 				FaceUtil.SetItemGrid(icon,_item2, true);
 			}
 			
+			_DonateMax = GlobalSheetData.getSettingInfo(824).q_int_value;
+			
 			var skincontet:Flip_Skin = _skin.skinSelect1.skin as Flip_Skin;
 			skincontet.textInput.textAlign = "center";
 			_itemPage1 = new PageContent(skincontet.btnDec,skincontet.btnAdd,itemPageUPdate);
@@ -107,6 +112,7 @@ package com.rpgGame.appModule.guild
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
+			EventManager.addEvent(GuildEvent.GUILD_DATA_INIT,refeashList);
 			refeashList();
 			
 			EventManager.addEvent(GuildEvent.GUILD_OPERATERESULT,opaqueChangeList);
@@ -120,7 +126,7 @@ package com.rpgGame.appModule.guild
 			if(msg.opaque == _opaque)
 			{
 				_opaque = 0;
-				refeashView();
+				GuildManager.instance().requestGuildInfo();
 			}
 		}
 		
@@ -129,9 +135,10 @@ package com.rpgGame.appModule.guild
 			_listPage.maxPage = _skin.list.maxVerticalPageIndex;
 			_itemPage1.maxPage = BackPackManager.instance.getBagItemsCountById(_item1.cfgId);
 			_skin.lbNum1.text = _itemPage1.maxPage.toString();
-			_itemPage2.maxPage = BackPackManager.instance.getBagItemsCountById(_item2.cfgId);
-			_skin.lbNum2.text = _itemPage2.maxPage.toString();
-			var last:int = GuildManager.instance().selfMemberInfo.goldContribution;
+			var haveGold:int = MainRoleManager.actorInfo.totalStat.getResData(_item2.cfgId);
+			var last:int =GuildManager.instance().selfMemberInfo.goldContribution;
+			_itemPage2.maxPage = Math.min(haveGold,last);
+			_skin.lbNum2.text = haveGold.toString();
 			_skin.lbLast.htmlText = LanguageConfig.replaceStr("今日还可捐献$元宝",HtmlTextUtil.getTextColor(0x5DBD37,last.toString()));
 		}
 		private function refeashList():void
@@ -140,16 +147,10 @@ package com.rpgGame.appModule.guild
 			if(list == null)
 				return ;
 			_skin.list.dataProvider.removeAll();
-			list.sort(sortHander);
 			for each(var info:GuildMemberInfo in list)
 			{
 				_skin.list.dataProvider.push(info);
 			}
-		}
-		
-		private function sortHander():void
-		{
-			
 		}
 		private function requestPage(page:int,maxPage:int):void
 		{
@@ -170,7 +171,17 @@ package com.rpgGame.appModule.guild
 		
 		private function guildDonate(type:int,num:int):void
 		{
-			if(_opaque<=0)
+			if(num<=0)
+			{
+				if(type == 1)
+				{
+					NoticeManager.showNotifyById(60036);
+				}else if(type == 2){
+					NoticeManager.showNotifyById(60037);
+				}
+				return ;
+			}
+			if(_opaque>0)
 				return ;
 			_opaque = GuildManager.opaque;
 			GuildManager.instance().guildDonate(type,num,_opaque);
@@ -179,6 +190,7 @@ package com.rpgGame.appModule.guild
 		override protected function onHide():void
 		{
 			super.onHide();
+			EventManager.removeEvent(GuildEvent.GUILD_DATA_INIT,refeashList);
 			EventManager.removeEvent(GuildEvent.GUILD_OPERATERESULT,opaqueChangeList);
 		}
 	}

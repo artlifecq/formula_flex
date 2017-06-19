@@ -2,7 +2,6 @@ package com.rpgGame.app.utils
 {
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.Mgr;
-	import com.rpgGame.app.manager.TeamManager;
 	import com.rpgGame.app.manager.chat.ChatWindowManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.friend.FriendManager;
@@ -32,7 +31,6 @@ package com.rpgGame.app.utils
 	import flash.desktop.ClipboardFormats;
 	
 	import app.message.AllFamilyOfficerDatasProto.FamilyOfficerDataProto;
-	import app.message.GuildOfficerDatasProto.GuildOfficerDataProto;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.data.long;
@@ -75,7 +73,7 @@ package com.rpgGame.app.utils
 			//				menus.push(LangMenu.INVITE_JOIN_SOCIETY);
 			//			}
 			if(GuildManager.instance().haveGuild&&GuildManager.instance().canInvite
-				&&GuildManager.instance().getGuildMemberInfoById(targetID)==null)//能否邀请他人加入帮派
+				&&GuildManager.instance().getGuildMemberInfoById(targetID.toString())==null)//能否邀请他人加入帮派
 			{
 				menus.push(LangMenu.INVITE_JOIN_GUILD);
 			}
@@ -84,7 +82,7 @@ package com.rpgGame.app.utils
 		}
 		
 		
-		public static function getPlayerTargetGuildMenu(targetID:Number,fromChat:Boolean = false):Array
+		public static function getPlayerTargetGuildMenu(targetID:String,fromChat:Boolean = false):Array
 		{
 			var menus : Array = [];
 			var selfMemberData : SocietyMemberData = SocietyManager.getSelfMemberData();
@@ -101,6 +99,18 @@ package com.rpgGame.app.utils
 			{
 				menus.push(LangMenu.SET_UP_VICE_LEADER);
 			}
+			
+			if(GuildManager.instance().haveGuild&&GuildManager.instance().canLeader
+				&&GuildManager.instance().getGuildMemberInfoById(targetID)!=null)//任命统帅
+			{
+				menus.push(LangMenu.SETUP_LEADER);
+			}
+			return menus;
+		}
+		
+		public static function getPlayerTargetGuildMenu2(targetID:String,fromChat:Boolean = false):Array
+		{
+			var menus : Array = [];
 			
 			if(GuildManager.instance().haveGuild&&GuildManager.instance().canLeader
 				&&GuildManager.instance().getGuildMemberInfoById(targetID)!=null)//任命统帅
@@ -315,7 +325,7 @@ package com.rpgGame.app.utils
 						AppManager.showApp(AppConstant.GUILD_APPOINTED_PANEL,[heroId,heroName]);
 					break;
 				case LangMenu.KICK_GUILD:
-					GuildManager.instance.guildKill(new long(heroId),0);
+					GuildManager.instance().guildKill(heroId);
 					break;
 				case LangMenu.MOVE_TO_HERO:
 					Mgr.teamMgr.move2TeamMember(heroId);

@@ -2,6 +2,7 @@ package org.mokylin.skin.mainui.top
 {
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
+	import feathers.controls.Check;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
@@ -32,7 +33,7 @@ package org.mokylin.skin.mainui.top
 
 		public var btn_set:feathers.controls.Button;
 
-		public var btn_sound:feathers.controls.Button;
+		public var btn_sound:feathers.controls.Check;
 
 		public var btn_write:feathers.controls.Button;
 
@@ -49,7 +50,7 @@ package org.mokylin.skin.mainui.top
 			this.currentState = "normal";
 			this.height = 28;
 			this.width = 242;
-			this.elementsContent = [btn_mail_i(),btn_write_i(),btn_lock_i(),btn_GM_i(),btn_sound_i(),btn_set_i(),UI_net_i(),txt_times_i()];
+			this.elementsContent = [btn_mail_i(),btn_write_i(),btn_lock_i(),btn_GM_i(),btn_sound_i(),btn_set_i(),txt_times_i(),UI_net_i()];
 			
 			states = {
 			};
@@ -65,8 +66,7 @@ package org.mokylin.skin.mainui.top
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			UI_net = temp;
 			temp.name = "UI_net";
-			temp.styleName = "ui/mainui/top/down.png";
-			temp.width = 28;
+			temp.styleName = "ui/mainui/top/signal00.png";
 			temp.x = 164;
 			temp.y = 2;
 			return temp;
@@ -118,9 +118,9 @@ package org.mokylin.skin.mainui.top
 			return temp;
 		}
 
-		private function btn_sound_i():feathers.controls.Button
+		private function btn_sound_i():feathers.controls.Check
 		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
+			var temp:feathers.controls.Check = new feathers.controls.Check();
 			btn_sound = temp;
 			temp.name = "btn_sound";
 			temp.height = 22;

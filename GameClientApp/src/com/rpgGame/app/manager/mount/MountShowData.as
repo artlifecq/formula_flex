@@ -2,6 +2,7 @@ package com.rpgGame.app.manager.mount
 {
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.goods.BackPackManager;
+	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.HorseConfigData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
@@ -16,7 +17,7 @@ package com.rpgGame.app.manager.mount
 	
 	import flash.utils.Dictionary;
 
-	public class MountShowData
+	public class MountShowData extends DynamicTipData
 	{
 		private var _haveChange:Boolean = true;
 

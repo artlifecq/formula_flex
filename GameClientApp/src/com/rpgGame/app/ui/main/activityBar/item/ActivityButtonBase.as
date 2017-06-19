@@ -236,16 +236,22 @@
 			}
             _duration = duration;
             _endTime = _openTime + _duration;
-			if(_openTime <_endTime)
-			{
-				Starling.juggler.add(this);
-			}
+			
             _openTimeAdvance = openTimeAdvance;
 			_isDown = isdown;
 			if(_isDown)
+			{
+				if(_openTime <_endTime)
+				{
+					Starling.juggler.add(this);
+				}
 				_TimeFun = updatedownTime;
-			else
+			}
+			else{
+				Starling.juggler.add(this);
 				_TimeFun = updtaupTime;
+			}
+				
         }
 
         public function clearTime():void

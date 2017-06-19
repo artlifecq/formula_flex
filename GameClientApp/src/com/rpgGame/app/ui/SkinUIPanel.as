@@ -131,7 +131,7 @@ package com.rpgGame.app.ui
 		private function switchModel(value : Boolean) : void
 		{
 			_model = value;
-//			UIModel.instence.switchModel(_model);
+			//UIModel.instence.switchModel(_model);
 		}
 
 		//==================================DragDrop============================================

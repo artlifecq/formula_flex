@@ -3,6 +3,7 @@ package com.rpgGame.app.controller.keyboard
 	import com.game.engine3D.utils.MathUtil;
 	import com.game.engine3D.vo.map.ClientMapAreaData;
 	import com.rpgGame.app.fight.spell.CastSpellHelper;
+	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.manager.mount.MountManager;
@@ -72,8 +73,12 @@ package com.rpgGame.app.controller.keyboard
 				case "5": //C 人物
 						AppManager.showApp(AppConstant.ROLE_PANEL);
 					break;
-				case "6": //V 坐骑
-						AppManager.showApp(AppConstant.MOUNT_PANEL);
+				case "6": //V pk
+						//AppManager.showApp(AppConstant.MOUNT_PANEL);
+					PKMamager.ChangeNextPkModel();
+					break;
+				case "23": //N 坐骑
+					AppManager.showApp(AppConstant.MOUNT_PANEL);
 					break;
 				case "7": //L 任务
 						AppManager.showApp(AppConstant.TASK_PANEL);
