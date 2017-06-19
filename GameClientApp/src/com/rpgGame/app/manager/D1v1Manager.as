@@ -12,17 +12,17 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.clientConfig.Q_battle_rank;
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.info.DRankWeekReward;
-	import com.rpgGame.netData.pvp.bean.DianFengDataInfo;
-	import com.rpgGame.netData.pvp.message.SCDrawDianFengAwardMessage;
-	import com.rpgGame.netData.pvp.message.SCMatchingResultMessage;
-	import com.rpgGame.netData.pvp.message.SCOpenDianFengPanelMessage;
-	import com.rpgGame.netData.pvp.message.SCOpenDianFengRankMessage;
-	import com.rpgGame.netData.pvp.message.SCQuitRaceResultMessage;
-	import com.rpgGame.netData.pvp.message.SCQuitZoneResultMessage;
-	import com.rpgGame.netData.pvp.message.SCRaceResultMessage;
-	import com.rpgGame.netData.pvp.message.SCReadyToLoadMessage;
-	import com.rpgGame.netData.pvp.message.SCReadyToStartMessage;
-	import com.rpgGame.netData.pvp.message.SCStartRaceMessage;
+	import com.rpgGame.netData.dianfeng.bean.DianFengDataInfo;
+	import com.rpgGame.netData.dianfeng.message.SCDrawDianFengAwardMessage;
+	import com.rpgGame.netData.dianfeng.message.SCMatchingResultMessage;
+	import com.rpgGame.netData.dianfeng.message.SCOpenDianFengPanelMessage;
+	import com.rpgGame.netData.dianfeng.message.SCOpenDianFengRankMessage;
+	import com.rpgGame.netData.dianfeng.message.SCQuitRaceResultMessage;
+	import com.rpgGame.netData.dianfeng.message.SCQuitZoneResultMessage;
+	import com.rpgGame.netData.dianfeng.message.SCRaceResultMessage;
+	import com.rpgGame.netData.dianfeng.message.SCReadyToLoadMessage;
+	import com.rpgGame.netData.dianfeng.message.SCReadyToStartMessage;
+	import com.rpgGame.netData.dianfeng.message.SCStartRaceMessage;
 	
 	import org.client.mainCore.manager.EventManager;
 

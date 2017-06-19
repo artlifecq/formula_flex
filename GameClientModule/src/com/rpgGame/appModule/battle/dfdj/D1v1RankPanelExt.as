@@ -15,9 +15,9 @@ package com.rpgGame.appModule.battle.dfdj
 	import com.rpgGame.coreData.cfg.BattleRankCfg;
 	import com.rpgGame.coreData.clientConfig.Q_battle_rank;
 	import com.rpgGame.coreData.type.TipType;
-	import com.rpgGame.netData.pvp.bean.DianFengDataInfo;
-	import com.rpgGame.netData.pvp.bean.DianFengRankInfo;
-	import com.rpgGame.netData.pvp.message.SCOpenDianFengRankMessage;
+	import com.rpgGame.netData.dianfeng.bean.DianFengDataInfo;
+	import com.rpgGame.netData.dianfeng.bean.DianFengRankInfo;
+	import com.rpgGame.netData.dianfeng.message.SCOpenDianFengRankMessage;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.zhanchang.paihangbang.KuaFuPaiHang_Skin;

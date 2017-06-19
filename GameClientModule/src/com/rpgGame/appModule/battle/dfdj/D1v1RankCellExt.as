@@ -3,7 +3,7 @@ package com.rpgGame.appModule.battle.dfdj
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.BattleRankCfg;
 	import com.rpgGame.coreData.clientConfig.Q_battle_rank;
-	import com.rpgGame.netData.pvp.bean.DianFengRankInfo;
+	import com.rpgGame.netData.dianfeng.bean.DianFengRankInfo;
 	
 	import org.mokylin.skin.app.zhanchang.paihangbang.PaiHang_Item;
 	
