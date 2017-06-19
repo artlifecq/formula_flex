@@ -9,7 +9,7 @@ package com.rpgGame.netData.guild.message{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * 请求提出成员
+	 * 请求踢出成员
 	 */
 	public class ReqGuildKillMessage extends Message {
 	
@@ -47,7 +47,7 @@ package com.rpgGame.netData.guild.message{
 		 * @return 
 		 */
 		override public function getId(): int {
-			return 111208;
+			return 111210;
 		}
 		
 		/**

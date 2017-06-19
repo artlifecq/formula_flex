@@ -15,8 +15,11 @@ package com.rpgGame.netData.guild.bean{
 	 */
 	public class GuildApplyInfo extends Bean {
 	
+		//申请Id
+		private var _id: int;
+		
 		//玩家Id
-		private var _id: long;
+		private var _playerId: long;
 		
 		//玩家姓名
 		private var _name: String;
@@ -34,8 +37,10 @@ package com.rpgGame.netData.guild.bean{
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
+			//申请Id
+			writeInt(_id);
 			//玩家Id
-			writeLong(_id);
+			writeLong(_playerId);
 			//玩家姓名
 			writeString(_name);
 			//玩家职业
@@ -51,8 +56,10 @@ package com.rpgGame.netData.guild.bean{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
+			//申请Id
+			_id = readInt();
 			//玩家Id
-			_id = readLong();
+			_playerId = readLong();
 			//玩家姓名
 			_name = readString();
 			//玩家职业
@@ -65,18 +72,33 @@ package com.rpgGame.netData.guild.bean{
 		}
 		
 		/**
+		 * get 申请Id
+		 * @return 
+		 */
+		public function get id(): int{
+			return _id;
+		}
+		
+		/**
+		 * set 申请Id
+		 */
+		public function set id(value: int): void{
+			this._id = value;
+		}
+		
+		/**
 		 * get 玩家Id
 		 * @return 
 		 */
-		public function get id(): long{
-			return _id;
+		public function get playerId(): long{
+			return _playerId;
 		}
 		
 		/**
 		 * set 玩家Id
 		 */
-		public function set id(value: long): void{
-			this._id = value;
+		public function set playerId(value: long): void{
+			this._playerId = value;
 		}
 		
 		/**

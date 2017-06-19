@@ -15,6 +15,9 @@ package com.rpgGame.netData.guild.message{
 		//技能类型,1:个人技能,2:统帅技能
 		private var _type: int;
 		
+		//技能Id
+		private var _skillId: int;
+		
 		//本次操作标识
 		private var _opaque: int;
 		
@@ -25,6 +28,8 @@ package com.rpgGame.netData.guild.message{
 		override protected function writing(): Boolean{
 			//技能类型,1:个人技能,2:统帅技能
 			writeByte(_type);
+			//技能Id
+			writeInt(_skillId);
 			//本次操作标识
 			writeInt(_opaque);
 			return true;
@@ -36,6 +41,8 @@ package com.rpgGame.netData.guild.message{
 		override protected function reading(): Boolean{
 			//技能类型,1:个人技能,2:统帅技能
 			_type = readByte();
+			//技能Id
+			_skillId = readInt();
 			//本次操作标识
 			_opaque = readInt();
 			return true;
@@ -46,7 +53,7 @@ package com.rpgGame.netData.guild.message{
 		 * @return 
 		 */
 		override public function getId(): int {
-			return 111213;
+			return 111215;
 		}
 		
 		/**
@@ -62,6 +69,21 @@ package com.rpgGame.netData.guild.message{
 		 */
 		public function set type(value: int): void{
 			this._type = value;
+		}
+		
+		/**
+		 * get 技能Id
+		 * @return 
+		 */
+		public function get skillId(): int{
+			return _skillId;
+		}
+		
+		/**
+		 * set 技能Id
+		 */
+		public function set skillId(value: int): void{
+			this._skillId = value;
 		}
 		
 		/**

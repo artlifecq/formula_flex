@@ -115,15 +115,15 @@ package com.rpgGame.appModule.hubao
 					var itemInfo:ClientItemInfo=new ClientItemInfo(prize[i].mod);
 					FaceUtil.SetItemGrid(ico,itemInfo);				
 					if(i==0){
-						ico.x=(tar.skin as HuBaoItem_Skin).icon1.x+6;
-						ico.y=(tar.skin as HuBaoItem_Skin).icon1.y+6;
+						ico.x=(tar.skin as HuBaoItem_Skin).icon1.x;
+						ico.y=(tar.skin as HuBaoItem_Skin).icon1.y;
 						(tar.skin as HuBaoItem_Skin).container.addChild(ico);
 						(tar.skin as HuBaoItem_Skin).container.addChild((tar.skin as HuBaoItem_Skin).lb1);
 						(tar.skin as HuBaoItem_Skin).lb1.text=prize[i].num;
 					}
 					else {
-						ico.x=(tar.skin as HuBaoItem_Skin).icon2.x+6;
-						ico.y=(tar.skin as HuBaoItem_Skin).icon2.y+6;
+						ico.x=(tar.skin as HuBaoItem_Skin).icon2.x;
+						ico.y=(tar.skin as HuBaoItem_Skin).icon2.y;
 						(tar.skin as HuBaoItem_Skin).container.addChild(ico);
 						(tar.skin as HuBaoItem_Skin).container.addChild((tar.skin as HuBaoItem_Skin).lb2);
 						(tar.skin as HuBaoItem_Skin).lb2.text=prize[i].num;
@@ -143,22 +143,22 @@ package com.rpgGame.appModule.hubao
 					ico.x=0;
 					ico.y=0;
 					if(i==0){
-						ico.x=(tar.skin as HuBaoItem2_Skin).icon1.x+6;
-						ico.y=(tar.skin as HuBaoItem2_Skin).icon1.y+6;
+						ico.x=(tar.skin as HuBaoItem2_Skin).icon1.x;
+						ico.y=(tar.skin as HuBaoItem2_Skin).icon1.y;
 						(tar.skin as HuBaoItem2_Skin).container.addChild(ico);
 						(tar.skin as HuBaoItem2_Skin).container.addChild((tar.skin as HuBaoItem2_Skin).lb1);
 						(tar.skin as HuBaoItem2_Skin).lb1.text=prize[i].num;
 					}
 					else if(i==1){
-						ico.x=(tar.skin as HuBaoItem2_Skin).icon2.x+6;
-						ico.y=(tar.skin as HuBaoItem2_Skin).icon2.y+6;
+						ico.x=(tar.skin as HuBaoItem2_Skin).icon2.x;
+						ico.y=(tar.skin as HuBaoItem2_Skin).icon2.y;
 						(tar.skin as HuBaoItem2_Skin).container.addChild(ico);
 						(tar.skin as HuBaoItem2_Skin).container.addChild((tar.skin as HuBaoItem2_Skin).lb2);
 						(tar.skin as HuBaoItem2_Skin).lb2.text=prize[i].num;
 					}
 					else{
-						ico.x=(tar.skin as HuBaoItem2_Skin).icon3.x+6;
-						ico.y=(tar.skin as HuBaoItem2_Skin).icon3.y+6;
+						ico.x=(tar.skin as HuBaoItem2_Skin).icon3.x;
+						ico.y=(tar.skin as HuBaoItem2_Skin).icon3.y;
 						(tar.skin as HuBaoItem2_Skin).container.addChild(ico);
 						(tar.skin as HuBaoItem2_Skin).container.addChild((tar.skin as HuBaoItem2_Skin).lb3);
 						(tar.skin as HuBaoItem2_Skin).lb3.text=prize[i].num;
@@ -316,9 +316,7 @@ package com.rpgGame.appModule.hubao
 		private function updateNowSelectBaoWu(lv:int):void
 		{
 			_q_con=HuBaoData.getmodByLv(lv);
-			clearChenHaoEff();
-			if(_chenhaoEft != null) _chenhaoEft=null;
-			if(_diEft != null) _diEft=null;
+			clearChenHaoEff();		
 			switch(lv)
 			{
 				case 1:
@@ -358,6 +356,15 @@ package com.rpgGame.appModule.hubao
 			_chenhaoEftContaner3.removeChild3D(_diEft);
 			_chenhaoEftContaner4.removeChild3D(_chenhaoEft);
 			_chenhaoEftContaner4.removeChild3D(_diEft);
+			if(_chenhaoEft != null)
+			{
+				_chenhaoEft.dispose();
+				_chenhaoEft=null;
+			}
+			if(_diEft != null) {
+				_diEft.dispose();
+				_diEft=null;
+			}
 		}
 		
 		private function btnTiShengHandler(e:Event):void

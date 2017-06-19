@@ -58,8 +58,8 @@ package com.rpgGame.app.ui.main.hubaozhuizong
 				var ico:IconCDFace=new IconCDFace(IcoSizeEnum.ICON_42);		
 				ico.selectImgVisible=false;
 				_icoList.push(ico);
-				ico.x=_beijingkuangList[i].x+2;
-				ico.y=_beijingkuangList[i].y+2;
+				ico.x=_beijingkuangList[i].x-4;
+				ico.y=_beijingkuangList[i].y-4;
 				_skin.scroll_box.addChild(ico);
 			}		
 			_labList=new Vector.<Label>();
@@ -120,7 +120,7 @@ package com.rpgGame.app.ui.main.hubaozhuizong
 					FaceUtil.SetItemGrid(_icoList[i],itemInfo);
 					_beijingkuangList[i].visible=true;
 					_icoList[i].visible=true;
-					_labList[i].text=(HuBaoManager.instance().prize[i].num*HuBaoManager.instance().isdouble).toString();
+					_labList[i].text=HuBaoManager.instance().prize[i].num.toString();
 					_labList[i].visible=true;
 				}
 				else

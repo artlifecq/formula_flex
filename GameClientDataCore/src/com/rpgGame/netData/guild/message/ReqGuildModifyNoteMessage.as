@@ -46,7 +46,7 @@ package com.rpgGame.netData.guild.message{
 		 * @return 
 		 */
 		override public function getId(): int {
-			return 111214;
+			return 111216;
 		}
 		
 		/**

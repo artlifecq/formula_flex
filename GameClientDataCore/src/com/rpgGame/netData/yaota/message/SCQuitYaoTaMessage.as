@@ -1,4 +1,4 @@
-package com.rpgGame.netData.guild.message{
+package com.rpgGame.netData.yaota.message{
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -8,20 +8,20 @@ package com.rpgGame.netData.guild.message{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * 获取申请列表
+	 * 离开妖塔
 	 */
-	public class ReqGuildApplyListMessage extends Message {
+	public class SCQuitYaoTaMessage extends Message {
 	
-		//本次操作标识
-		private var _opaque: int;
+		//结果  1 成功    0 失败
+		private var _result: int;
 		
 		
 		/**
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
-			//本次操作标识
-			writeInt(_opaque);
+			//结果  1 成功    0 失败
+			writeInt(_result);
 			return true;
 		}
 		
@@ -29,8 +29,8 @@ package com.rpgGame.netData.guild.message{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
-			//本次操作标识
-			_opaque = readInt();
+			//结果  1 成功    0 失败
+			_result = readInt();
 			return true;
 		}
 		
@@ -39,22 +39,22 @@ package com.rpgGame.netData.guild.message{
 		 * @return 
 		 */
 		override public function getId(): int {
-			return 111233;
+			return 129108;
 		}
 		
 		/**
-		 * get 本次操作标识
+		 * get 结果  1 成功    0 失败
 		 * @return 
 		 */
-		public function get opaque(): int{
-			return _opaque;
+		public function get result(): int{
+			return _result;
 		}
 		
 		/**
-		 * set 本次操作标识
+		 * set 结果  1 成功    0 失败
 		 */
-		public function set opaque(value: int): void{
-			this._opaque = value;
+		public function set result(value: int): void{
+			this._result = value;
 		}
 		
 	}
