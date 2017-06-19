@@ -22,6 +22,8 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.netData.guild.message.ResGuildOperateResultMessage;
 	import com.rpgGame.netData.player.bean.PlayerAppearanceInfo;
 	
+	import feathers.utils.filter.GrayFilter;
+	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.banghui.BangHui_Info;
 	
@@ -77,6 +79,11 @@ package com.rpgGame.appModule.guild
 				return ;
 			refeashPanleInfo();
 			updateRole();
+			refeashReward();
+		}
+		
+		private function refeashReward():void
+		{
 			TipTargetManager.remove(_skin.btnFuli);
 			if(GuildManager.instance().haveDailyGift)
 			{
@@ -98,9 +105,11 @@ package com.rpgGame.appModule.guild
 				var qitem:Q_item = ItemConfig.getQItemByID(iteminfo["mod"]);
 				str += HtmlTextUtil.getTextColor(ItemConfig.getItemQualityColor(qitem.q_id),qitem.q_name)+"×"+iteminfo["num"];
 				TipTargetManager.show(_skin.btnFuli,TargetTipsMaker.makeSimpleTextTips(str));
+				_skin.btnFuli.filter = null;
+			}else{
+				GrayFilter.gray(_skin.btnFuli);
 			}
 		}
-		
 		private function refeashPanleInfo():void
 		{
 			_skin.NumZhanli.number = guildData.battle;
@@ -178,7 +187,10 @@ package com.rpgGame.appModule.guild
 				var qitem:Q_item = ItemConfig.getQItemByID(iteminfo["mod"]);
 				str += HtmlTextUtil.getTextColor(ItemConfig.getItemQualityColor(qitem.q_id),qitem.q_name)+"×"+iteminfo["num"];
 				TopTipManager.getInstance().addMouseFollowTip(0,str);
+				GuildManager.instance().changeGuildDailyGift();
+				refeashReward();
 			}
+			EventManager.removeEvent(GuildEvent.GUILD_OPERATERESULT,refeashAppoint);
 		}
 		private function get guildData():GuildInfo
 		{

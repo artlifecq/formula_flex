@@ -5,6 +5,7 @@ package com.rpgGame.app.manager.guild
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.GuildEvent;
@@ -16,9 +17,11 @@ package com.rpgGame.app.manager.guild
 	import com.rpgGame.coreData.clientConfig.Q_guild_permission;
 	import com.rpgGame.coreData.clientConfig.Q_guildskill;
 	import com.rpgGame.coreData.clientConfig.Q_item;
+	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.enum.EnumGuildPost;
-	import com.rpgGame.coreData.info.item.ItemUtil;
+	import com.rpgGame.coreData.info.alert.AlertSetInfo;
+	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.coreData.lang.LangGuild;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.guild.bean.GuildApplyInfo;
@@ -453,7 +456,18 @@ package com.rpgGame.app.manager.guild
 		{
 			if(!canDissolve)
 				return ;
-			SocketConnection.send(new ReqGuildDissolveMessage());
+			var alertOk:AlertSetInfo=new AlertSetInfo(LangAlertInfo.LUNJIAN_FIGHT_MIN);
+			GameAlert.showAlert(alertOk,sureguildDissolve);
+		}
+		
+		private function sureguildDissolve(gameAlert:GameAlert):void
+		{
+			switch(gameAlert.clickType)
+			{
+				case AlertClickTypeEnum.TYPE_SURE:
+					SocketConnection.send(new ReqGuildDissolveMessage());
+					break;
+			}
 		}
 		
 		/** 请求召集帮派 **/
