@@ -357,6 +357,9 @@ package feathers.themes{
 				return false;
 			}else {
 				var skinName:String=stateSkins[UIState.UP];
+				if(!skinName){
+					return false;
+				}
 				return skinName.indexOf(",") != -1;
 			}
 			

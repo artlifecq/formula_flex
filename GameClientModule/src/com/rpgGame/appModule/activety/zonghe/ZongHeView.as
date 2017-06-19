@@ -127,6 +127,9 @@ package com.rpgGame.appModule.activety.zonghe
 			var desObj:Array=JSONUtil.decode(info.actCfg.q_text);
 			
 			_richText.text="";
+			if(!desObj){
+				desObj=[];
+			}
 			var num:int=desObj.length;
 			var text:String="";
 			for(var i:int=0;i<num;i++){

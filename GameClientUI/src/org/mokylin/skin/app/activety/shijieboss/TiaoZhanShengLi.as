@@ -90,7 +90,7 @@ package org.mokylin.skin.app.activety.shijieboss
 		private function __TiaoZhanShengLi_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhanchang/jiesuan/wodepaiming.png";
+			temp.styleName = "ui/app/activety/wodepaiming.png";
 			temp.x = 151;
 			temp.y = 206;
 			return temp;

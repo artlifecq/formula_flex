@@ -22,8 +22,6 @@ package com.rpgGame.app.ui.main.dungeon
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.structs.Position;
 	
-	import flash.geom.Point;
-	
 	import feathers.controls.UIAsset;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -74,6 +72,8 @@ package com.rpgGame.app.ui.main.dungeon
 			
 			toPoint.x=actInfo.actCfg.q_move_x;
 			toPoint.y=actInfo.actCfg.q_move_y;
+			//进入就自动挂机战斗
+			MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, toPoint.x, toPoint.y,finishWalk, 100,null,finishWalk);
 			
 			var arr:Array;
 			if(actInfo.actCfg.q_rewards){
