@@ -161,7 +161,7 @@ package com.rpgGame.coreData.cfg.active
 		
 		private static function sortListByID(infoA:ActivetyInfo,infoB:ActivetyInfo):int
 		{
-			if(infoA.info==null||infoA.info==null){
+			if(infoA.info==null||infoB.info==null){
 				return 0;
 			}
 			if(infoA.info.activityId<infoB.info.activityId){
@@ -174,7 +174,7 @@ package com.rpgGame.coreData.cfg.active
 		
 		private static function sortListByState(infoA:ActivetyInfo,infoB:ActivetyInfo):int
 		{
-			if(infoA.info==null||infoA.info==null){
+			if(infoA.info==null||infoB.info==null){
 				return 0;
 			}
 			if(infoA.info.joinState>infoB.info.joinState){
