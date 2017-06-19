@@ -53,10 +53,19 @@ package com.rpgGame.app.view.icon
 			_iconSize = _iconSize <= 0 ? IcoSizeEnum.SIZE_46 : _iconSize;
 			switch(_iconSize){
 				case IcoSizeEnum.ICON_36:
-				case IcoSizeEnum.ICON_42:
 				case IcoSizeEnum.ICON_48:
 				case IcoSizeEnum.ICON_64:
 					_iconPositionX=_iconPositionY=6;
+					break;
+				case IcoSizeEnum.ICON_42:
+					if (this is DragDropItem) 
+					{
+						_iconPositionX=_iconPositionY=1;
+					}
+					else
+					{
+						_iconPositionX=_iconPositionY=6;
+					}
 					break;
 			}
 			this.width = _iconSize;
@@ -151,7 +160,6 @@ package com.rpgGame.app.view.icon
 				case IcoSizeEnum.ICON_42:
 				case IcoSizeEnum.ICON_48:
 				case IcoSizeEnum.ICON_64:
-				case  IcoSizeEnum.ICON_42:
 					if( posx != 0 || posy != 0 )
 					{
 						_iconImage.x = posx;

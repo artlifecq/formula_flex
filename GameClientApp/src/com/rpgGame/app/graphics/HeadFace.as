@@ -1164,6 +1164,7 @@ package com.rpgGame.app.graphics
 					}
 					
 				}
+				this.deCtrl.addTop(_nameBar,DecorCtrl.TOP_NAME);
 			}
 			//this.addChildAt(_bloodBar,0);
 			this.deCtrl.addTop(_bloodBar,DecorCtrl.TOP_HPMP);
@@ -1181,7 +1182,8 @@ package com.rpgGame.app.graphics
 				showBloodTween.kill();
 				showBloodTween=null;
 			}
-			showAndHideElement(_bloodBar,false,DecorCtrl.TOP_HPMP);
+			//showAndHideElement(_bloodBar,false,DecorCtrl.TOP_HPMP);
+			updateShowAndHide();
 		}
 		
 		public function updateTeamFlag(bShow:Boolean):void
