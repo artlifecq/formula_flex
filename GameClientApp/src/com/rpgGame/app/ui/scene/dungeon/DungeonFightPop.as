@@ -1,4 +1,4 @@
-package com.rpgGame.app.ui.main.dungeon
+package com.rpgGame.app.ui.scene.dungeon
 {
 	import com.rpgGame.app.display2D.PopSkinUI;
 	

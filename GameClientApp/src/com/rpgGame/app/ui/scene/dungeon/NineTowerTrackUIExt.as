@@ -1,4 +1,4 @@
-package com.rpgGame.app.ui.main.dungeon
+package com.rpgGame.app.ui.scene.dungeon
 {
 	import com.game.mainCore.core.timer.GameTimer;
 	import com.rpgGame.app.manager.Mgr;

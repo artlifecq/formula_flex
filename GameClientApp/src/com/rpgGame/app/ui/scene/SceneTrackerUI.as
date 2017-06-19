@@ -1,4 +1,4 @@
-package com.rpgGame.app.ui.main.dungeon
+package com.rpgGame.app.ui.scene
 {
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.core.ui.SkinUI;
@@ -10,15 +10,15 @@ package com.rpgGame.app.ui.main.dungeon
 	import starling.display.DisplayObject;
 	
 	/**
-	 *副本追踪ui基础类
+	 *场景追踪ui基础类
 	 *@author dik
 	 *2017-5-9下午10:07:59
 	 */
-	public class DungeonTrackerUI extends SkinUI
+	public class SceneTrackerUI extends SkinUI
 	{
 		private var tween:TweenMax;
 		
-		public function DungeonTrackerUI(skin:StateSkin=null)
+		public function SceneTrackerUI(skin:StateSkin=null)
 		{
 			super(skin);
 		}
@@ -41,12 +41,6 @@ package com.rpgGame.app.ui.main.dungeon
 			this.x = sw - this._stateSkin.width;
 			this.y = 273;
 		}
-		override protected function onHide():void
-		{
-			super.onHide();
-			TrusteeshipManager.getInstance().findDist=0;
-			TrusteeshipManager.getInstance().stopAll();
-		}
 		
 		private function setBoxState(state:Boolean):void
 		{
@@ -63,3 +57,4 @@ package com.rpgGame.app.ui.main.dungeon
 		}
 	}
 }
+

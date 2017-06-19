@@ -1,4 +1,4 @@
-package com.rpgGame.app.ui.main.dungeon
+package com.rpgGame.app.ui.scene.dungeon
 {
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;

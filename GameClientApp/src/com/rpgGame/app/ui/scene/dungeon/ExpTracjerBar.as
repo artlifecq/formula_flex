@@ -1,4 +1,4 @@
-package com.rpgGame.app.ui.main.dungeon
+package com.rpgGame.app.ui.scene.dungeon
 {
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.pop.UIPopManager;

@@ -1,4 +1,4 @@
-package com.rpgGame.app.ui.main.dungeon
+package com.rpgGame.app.ui.scene.dungeon
 {
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.DungeonManager;

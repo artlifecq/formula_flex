@@ -1,6 +1,7 @@
-package com.rpgGame.app.ui.main.dungeon
+package com.rpgGame.app.ui.scene.dungeon
 {
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.ui.scene.BossTrackerUI;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.map.EnumMapType;

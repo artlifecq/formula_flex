@@ -1,4 +1,4 @@
-package com.rpgGame.app.ui.main.dungeon
+package com.rpgGame.app.ui.scene
 {
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.TrusteeshipManager;
@@ -6,6 +6,7 @@ package com.rpgGame.app.ui.main.dungeon
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.sender.SceneSender;
+	import com.rpgGame.app.ui.scene.dungeon.DungeonTrackerUI;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
@@ -34,7 +35,7 @@ package com.rpgGame.app.ui.main.dungeon
 	 * @author dik
 	 * 
 	 */
-	public class BossTrackerUI extends DungeonTrackerUI
+	public class BossTrackerUI extends SceneTrackerUI
 	{
 		private var _skin:ShiJieBoss_Skin;
 		private var iconList:Vector.<IconCDFace>;
