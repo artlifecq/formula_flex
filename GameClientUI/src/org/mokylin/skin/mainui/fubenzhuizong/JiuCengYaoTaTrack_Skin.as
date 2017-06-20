@@ -29,6 +29,8 @@ package org.mokylin.skin.mainui.fubenzhuizong
 
 		public var btn_open:feathers.controls.Button;
 
+		public var gLevel:feathers.controls.Group;
+
 		public var lbHeadName:feathers.controls.Label;
 
 		public var lbMyNum:feathers.controls.Label;
@@ -89,6 +91,11 @@ package org.mokylin.skin.mainui.fubenzhuizong
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.fontSize = 14;
+			temp.text = "【升层奖励】";
+			temp.color = 0xE8C958;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = -2;
+			temp.y = 117;
 			temp.text = "【进入下一层条件】";
 			temp.color = 0xE8C958;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
@@ -101,6 +108,13 @@ package org.mokylin.skin.mainui.fubenzhuizong
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.fontSize = 14;
+			temp.text = "我的战场积分：";
+			temp.textAlign = "left";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 102;
+			temp.x = 5;
+			temp.y = 91;
 			temp.text = "【升层奖励】";
 			temp.color = 0xE8C958;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
@@ -113,6 +127,11 @@ package org.mokylin.skin.mainui.fubenzhuizong
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.fontSize = 14;
+			temp.text = "【进入下一层条件】";
+			temp.color = 0xE8C958;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 0;
+			temp.y = 0;
 			temp.text = "积分条件：";
 			temp.textAlign = "left";
 			temp.color = 0xCFC6AE;
@@ -127,6 +146,13 @@ package org.mokylin.skin.mainui.fubenzhuizong
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.fontSize = 14;
+			temp.text = "积分条件：";
+			temp.textAlign = "left";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 74;
+			temp.x = 7;
+			temp.y = 25;
 			temp.text = "我的战场积分：";
 			temp.textAlign = "left";
 			temp.color = 0xCFC6AE;
@@ -181,6 +207,8 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/component/progress/jindutiao/jdtbg.png";
 			temp.width = 135;
+			temp.x = 78;
+			temp.y = 28;
 			temp.x = 76;
 			temp.y = 70;
 			return temp;
@@ -219,6 +247,17 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			return temp;
 		}
 
+		private function gLevel_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			gLevel = temp;
+			temp.name = "gLevel";
+			temp.x = -2;
+			temp.y = 42;
+			temp.elementsContent = [__JiuCengYaoTaTrack_Skin_Label4_i(),__JiuCengYaoTaTrack_Skin_Label5_i(),__JiuCengYaoTaTrack_Skin_UIAsset5_i(),pro_bar_i(),lbNum_i()];
+			return temp;
+		}
+		
 		private function lbHeadName_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -260,6 +299,8 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 74;
+			temp.x = 109;
+			temp.y = 27;
 			temp.x = 107;
 			temp.y = 69;
 			return temp;
@@ -293,6 +334,8 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.styleClass = org.mokylin.skin.component.progress.progress_jindutiao;
 			temp.value = 40;
 			temp.width = 121;
+			temp.x = 85;
+			temp.y = 30;
 			temp.x = 83;
 			temp.y = 72;
 			return temp;
@@ -307,6 +350,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.width = 237;
 			temp.x = 12;
 			temp.y = 37;
+			temp.elementsContent = [__JiuCengYaoTaTrack_Skin_Label1_i(),__JiuCengYaoTaTrack_Skin_Label2_i(),__JiuCengYaoTaTrack_Skin_Label3_i(),lbMyNum_i(),gLevel_i(),sec_time_i(),lbPaihang_i(),sec_ico1_0_i(),sec_subbut1_i(),btnMsg_i()];
 			temp.elementsContent = [__JiuCengYaoTaTrack_Skin_Label1_i(),__JiuCengYaoTaTrack_Skin_Label2_i(),__JiuCengYaoTaTrack_Skin_Label3_i(),__JiuCengYaoTaTrack_Skin_Label4_i(),__JiuCengYaoTaTrack_Skin_Label5_i(),lbMyNum_i(),__JiuCengYaoTaTrack_Skin_UIAsset5_i(),pro_bar_i(),lbNum_i(),sec_time_i(),lbPaihang_i(),sec_ico1_0_i(),sec_subbut1_i(),btnMsg_i()];
 			return temp;
 		}

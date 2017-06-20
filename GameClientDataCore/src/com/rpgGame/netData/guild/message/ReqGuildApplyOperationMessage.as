@@ -1,5 +1,4 @@
 package com.rpgGame.netData.guild.message{
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -16,8 +15,8 @@ package com.rpgGame.netData.guild.message{
 		//1:同意,0:拒绝
 		private var _flag: int;
 		
-		//玩家id,-1:标识全部操作
-		private var _playerId: long;
+		//申请id,-1:标识全部操作
+		private var _applyId: int;
 		
 		//本次操作标识
 		private var _opaque: int;
@@ -29,8 +28,8 @@ package com.rpgGame.netData.guild.message{
 		override protected function writing(): Boolean{
 			//1:同意,0:拒绝
 			writeByte(_flag);
-			//玩家id,-1:标识全部操作
-			writeLong(_playerId);
+			//申请id,-1:标识全部操作
+			writeInt(_applyId);
 			//本次操作标识
 			writeInt(_opaque);
 			return true;
@@ -42,8 +41,8 @@ package com.rpgGame.netData.guild.message{
 		override protected function reading(): Boolean{
 			//1:同意,0:拒绝
 			_flag = readByte();
-			//玩家id,-1:标识全部操作
-			_playerId = readLong();
+			//申请id,-1:标识全部操作
+			_applyId = readInt();
 			//本次操作标识
 			_opaque = readInt();
 			return true;
@@ -54,7 +53,7 @@ package com.rpgGame.netData.guild.message{
 		 * @return 
 		 */
 		override public function getId(): int {
-			return 111207;
+			return 111208;
 		}
 		
 		/**
@@ -73,18 +72,18 @@ package com.rpgGame.netData.guild.message{
 		}
 		
 		/**
-		 * get 玩家id,-1:标识全部操作
+		 * get 申请id,-1:标识全部操作
 		 * @return 
 		 */
-		public function get playerId(): long{
-			return _playerId;
+		public function get applyId(): int{
+			return _applyId;
 		}
 		
 		/**
-		 * set 玩家id,-1:标识全部操作
+		 * set 申请id,-1:标识全部操作
 		 */
-		public function set playerId(value: long): void{
-			this._playerId = value;
+		public function set applyId(value: int): void{
+			this._applyId = value;
 		}
 		
 		/**

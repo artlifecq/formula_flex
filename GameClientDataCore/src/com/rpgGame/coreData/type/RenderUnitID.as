@@ -78,6 +78,9 @@ package com.rpgGame.coreData.type
 		/**军阶**/
 		public static const JUNJIE : int = rEnum.next;
 		
+		/**宝物*/
+		public static const BAOWU : int = rEnum.next;
+		
 		/**问号**/
 		public static const TASKMARK : int = rEnum.next;
 		/**流血**/

@@ -1,0 +1,192 @@
+package com.rpgGame.app.manager
+{
+	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.graphics.HeadFace;
+	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.sender.HuBaoSender;
+	import com.rpgGame.app.utils.TaskUtil;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.core.events.HuBaoEvent;
+	import com.rpgGame.core.events.UserMoveEvent;
+	import com.rpgGame.coreData.cfg.HuBaoData;
+	import com.rpgGame.coreData.clientConfig.Q_convoy;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.role.HeroData;
+	import com.rpgGame.netData.backpack.bean.ItemInfo;
+	import com.rpgGame.netData.convoy.message.SCConvoyFailureMessage;
+	import com.rpgGame.netData.convoy.message.SCConvoyInfoMessage;
+	import com.rpgGame.netData.convoy.message.SCConvoyNumMessage;
+	import com.rpgGame.netData.convoy.message.SCConvoyToClientMessage;
+	import com.rpgGame.netData.convoy.message.SCRefreshGirlMessage;
+	import com.rpgGame.netData.convoy.message.SCSuccessInfoMessage;
+	
+	import org.client.mainCore.manager.EventManager;
+	
+	public class HuBaoManager
+	{	
+		public var iszidong:Boolean;
+		public var istishi:Boolean;
+		
+		private var _num:int=0;	
+		private var _prize:Vector.<ItemInfo>;
+		private var _time:int=0;
+		
+		public function HuBaoManager()
+		{
+			super();
+			EventManager.addEvent(UserMoveEvent.MOVE_RESCHANGE, onHuBaoHandler);
+		}
+		
+		private static var _instance:HuBaoManager;
+		public static function instance():HuBaoManager
+		{
+			if(_instance==null)
+			{
+				_instance = new HuBaoManager();
+			}
+			return _instance;
+		}
+		
+		public function get num():int
+		{
+			return instance()._num;
+		}
+		
+		private var _lv:int=0;
+		public function get level():int
+		{
+			return instance()._lv;
+		}
+		
+		private var _isdouble:int=0;
+		public function get isdouble():int
+		{
+			return instance()._isdouble;
+		}
+		
+		private var _ishuing:Boolean;
+		public function get ishuing():Boolean
+		{
+			return instance()._ishuing;
+		}
+		
+		public function get prize():Vector.<ItemInfo>
+		{
+			return instance()._prize;
+		}
+		
+		public function get time():int
+		{
+			return instance()._time;
+		}
+		
+		public function gettipsText(q_con:Q_convoy):String
+		{
+			var str:String="";
+			str=q_con.q_girl_level+"\n"+"奖励："+"\n";
+			var obj:Array=JSONUtil.decode(q_con.q_reward);
+			for(var i:int=0;i<obj.length;i++)
+			{
+				var itemInfo:ClientItemInfo=new ClientItemInfo(obj[i].mod);		
+				str+=itemInfo.qItem.q_name+": ×"+obj[i].num+"\n";
+			}		
+			return str;
+		}
+		
+		/**
+		 * 护宝追踪面板信息
+		 * */
+		public function onSCConvoyInfoMessage(msg:SCConvoyInfoMessage):void
+		{
+			instance()._ishuing=true;
+			instance()._num=msg.remainNum;
+			instance()._lv=msg.girlId;
+			instance()._prize=msg.reward;
+			instance()._time=msg.remainTime;
+			var role:SceneRole=MainRoleManager.actor;
+			if (role.headFace is HeadFace)
+				(role.headFace as HeadFace).updateHuBaoTitle(1);
+			AppManager.showApp(AppConstant.HUBAO_ZHUIZONG);	
+			EventManager.dispatchEvent(HuBaoEvent.HUBAO_ZHUIZONG,msg);
+		}
+		
+		/**
+		 * 护宝面板信息
+		 * */
+		public function onSCConvoyNumMessage(msg:SCConvoyNumMessage):void
+		{
+			instance()._num=msg.remainNum;
+			instance()._lv=msg.girlId;
+			instance().istishi=msg.isnotice==1;
+			instance()._isdouble=msg.isdouble;
+			AppManager.showAppNoHide(AppConstant.HUBAO_MAINPANEL);
+		}
+		
+		/**
+		 * 护宝结算信息
+		 * */
+		public function onSCSuccessInfoMessage(msg:SCSuccessInfoMessage):void
+		{
+			instance()._ishuing=false;
+			var role:SceneRole=MainRoleManager.actor;
+			if (role.headFace is HeadFace)
+				(role.headFace as HeadFace).updateHuBaoTitle(0);
+			AppManager.showAppNoHide(AppConstant.HUBAO_CHENGGONG);
+			EventManager.dispatchEvent(HuBaoEvent.HUBAO_HUSONGCHENGGONG,msg);
+		}
+		
+		/**
+		 * 更新品质信息
+		 * */
+		public function onSCRefreshGirlMessage(msg:SCRefreshGirlMessage):void
+		{
+			instance()._lv=msg.girlId;
+			EventManager.dispatchEvent(HuBaoEvent.HUBAO_UPDATEPINZHI,msg.girlId);
+		}
+		
+		public function onSCConvoyFailureMessage(msg:SCConvoyFailureMessage):void
+		{
+			instance()._ishuing=false;
+			var role:SceneRole=MainRoleManager.actor;
+			if (role.headFace is HeadFace)
+				(role.headFace as HeadFace).updateHuBaoTitle(0);
+			EventManager.dispatchEvent(HuBaoEvent.HUBAO_HUSONGSHIBAI,msg);
+		}
+		
+		public function onSCConvoyToClientMessage(msg:SCConvoyToClientMessage):void
+		{
+			var role:SceneRole=SceneManager.getSceneObjByID(msg.playerId.ToGID())as SceneRole;
+			if(role)
+			{
+				(role.data as HeroData).baowuLv=msg.convoyId;
+				if (role.headFace is HeadFace)
+					(role.headFace as HeadFace).updateHuBaoTitle((role.data as HeroData).baowuLv);
+			}
+		}
+		
+		private var _npcConfigId:int=0;
+		/**寻路npc*/
+		public function onwalkToNpc(npcconfigId:int):void
+		{
+			_npcConfigId=npcconfigId;
+			TaskUtil.npcTaskWalk(_npcConfigId,toDo);
+		}
+		
+		private function toDo(data :Object):void
+		{
+			HuBaoSender.upCSClientDataMessage(_npcConfigId);
+		}
+		
+		public function onHuBaoHandler():void
+		{
+			var dist:int = TaskUtil.getDistHuBaoNpc();
+			if(dist>=0&&dist<100)
+			{
+				HuBaoSender.upCSClientDataMessage(HuBaoData.acceptNpc);
+			}
+		}
+	}
+}
