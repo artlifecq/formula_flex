@@ -71,8 +71,6 @@ package com.rpgGame.app.cmdlistener
 		 */
 		private function onSCActivitiesNotifyListMessage(msg:SCActivitiesNotifyListMessage):void
 		{
-			//通过活动id去找该活动id对应的新功能id，然后看该新功能是够开启，然后再在活动按钮里面设置倒计时；
-			//或者去窗口链接信息表找对应的icon，开启对应icon的状态；
 			var list:Vector.<ActivityNotifyInfo>=msg.activityNotifyInfolist;
 			var num:int=list.length;
 			var info:ActivetyInfo;
