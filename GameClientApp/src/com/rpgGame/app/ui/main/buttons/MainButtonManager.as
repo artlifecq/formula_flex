@@ -53,7 +53,7 @@ package com.rpgGame.app.ui.main.buttons
 		public static function getButtonBuyInfo(info:FunctionBarInfo):IOpen
 		{
 			var level:int = FunctionOpenManager.getOpenLevelByFunBarInfo(info);
-			if(!FunctionOpenManager.checkOpenByLevel(level))
+			if(!_initializeMap||!FunctionOpenManager.checkOpenByLevel(level))
 				return null;
 			var button:IOpen = _initializeMap.getValue(info.id);
 			if(button == null)
