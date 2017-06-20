@@ -1,12 +1,11 @@
 package com.rpgGame.appModule.activety.boss
 {
-	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.coreData.cfg.StaticValue;
-	import com.rpgGame.coreData.cfg.active.ActivetyDataManager;
+	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.BossActInfo;
 	import com.rpgGame.coreData.info.tip.BossHurtTipsData;
 	import com.rpgGame.coreData.type.TipType;
@@ -57,7 +56,7 @@ package com.rpgGame.appModule.activety.boss
 			if(_skin&&this.owner){
 				var info:BossHurtInfo=_data as BossHurtInfo;
 				var actId:int=int(this.owner.customData);
-				var actInfo:BossActInfo=ActivetyDataManager.getActInfoById(actId) as BossActInfo;
+				var actInfo:BossActInfo=ActivetyCfgData.getActInfoById(actId) as BossActInfo;
 				_tipsSetInfo.rewads=actInfo.getRankReward(info.rank);
 				if(info.rank<4){
 					_tipsSetInfo.titleRes="ui/app/activety/shijieboss/"+info.rank+".png";

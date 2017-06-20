@@ -3,13 +3,14 @@ package com.rpgGame.appModule.activety.boss
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.display3D.InterAvatar3D;
+	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.events.MainPlayerEvent;
-	import com.rpgGame.coreData.cfg.active.ActivetyDataManager;
+	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.cfg.active.BossActInfo;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
@@ -61,7 +62,7 @@ package com.rpgGame.appModule.activety.boss
 			_skin.ListItem.scrollBarDisplayMode = ScrollBarDisplayMode.ALWAYS_VISIBLE;
 			
 			_activeData=new ListCollection();
-			actList=ActivetyDataManager.getActiveList(ActivityEnum.BOSS_ACT);
+			actList=ActivetyCfgData.getTypeList(ActivityEnum.BOSS_ACT);
 			for(var i:int=0;i<actList.length;i++){
 				_activeData.addItem(actList[i]);
 			}

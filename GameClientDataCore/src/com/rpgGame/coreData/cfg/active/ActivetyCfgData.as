@@ -1,26 +1,30 @@
 package com.rpgGame.coreData.cfg.active
 {
-	import com.gameClient.utils.JSONUtil;
-	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.clientConfig.Q_special_activities;
 	import com.rpgGame.netData.specialactivities.bean.SpecialActivityInfo;
 	
 	import flash.utils.ByteArray;
 	
 	import org.client.mainCore.ds.HashMap;
-	
+
 	/**
-	 *活动配置数据 
+	 *活动大厅配置数据 
 	 * @author dik
 	 * 
 	 */
-	public class ActivetyDataManager
+	public class ActivetyCfgData
 	{
-		public function ActivetyDataManager()
-		{
-		}
 		private static var _typeMap:HashMap;
 		private static var _infoMap:HashMap;
+		
+		public function ActivetyCfgData()
+		{
+		}
+		
+		public static function getTypes():Array
+		{
+			return _typeMap.keys();
+		}
 		
 		public static function setup( data:ByteArray ):void
 		{
@@ -59,87 +63,24 @@ package com.rpgGame.coreData.cfg.active
 		}
 		
 		/**
-		 *根据配置获取时间列表 
-		 * @param cfg
-		 * @return 
-		 * 
-		 */
-		public static function getTimeList(cfg:Q_special_activities):Array
-		{
-			var arr:Array=JSONUtil.decode(cfg.q_activity_time);
-			return arr;
-		}
-		
-		/**
-		 *根据活动id获取活动信息 
-		 * @param id
-		 * @return 
-		 * 
-		 */
-		public static function getActInfoById(id:int):ActivetyInfo
-		{
-			return _infoMap.getValue(id);
-		}
-		
-		/**
-		 *获取活动列表 
+		 *获取指定类型的活动列表 
 		 * @param type
 		 * @return 
 		 * 
 		 */
-		public static function getActiveList(type:int):Vector.<ActivetyInfo>
+		public static function sortTypeList(type:int):void
+		{
+			var list:Vector.<ActivetyInfo>= _typeMap.getValue(type);
+			if(list){
+				list.sort(sortListByID);
+				list.sort(sortListByState);
+			}
+		}
+		
+		
+		public static function getTypeList(type:int):Vector.<ActivetyInfo>
 		{
 			return _typeMap.getValue(type);
-		}
-		
-		/**
-		 *更新信息 
-		 * @param info
-		 * 
-		 */
-		public static  function updateInfo(info:SpecialActivityInfo):void
-		{
-			var typeList:Vector.<ActivetyInfo>=_typeMap.getValue(info.activityType);
-			if(!typeList){
-				return;
-			}
-			var num:int=typeList.length;
-			for(var i:int=0;i<num;i++){
-				if(typeList[i].actCfg.q_activity_id==info.activityId){
-					typeList[i].info=info;
-					return;
-				}
-			}
-		}
-		
-		/**
-		 *更新击杀者 
-		 * 
-		 */
-		public static function updateBossKiller(id:int,killer:String):void
-		{
-			var bossInfo:BossActInfo=getActInfoById(id) as BossActInfo;
-			if(bossInfo){
-				bossInfo.killerName=killer;
-			}
-		}
-		
-		/**
-		 * 设置活动状态
-		 * @param id
-		 * @param state
-		 * 
-		 */
-		public static function setActState(id:int,state:int):void
-		{
-			var info:ActivetyInfo=getActInfoById(id);
-			info.info.joinState=state;
-			var typeList:Vector.<ActivetyInfo>=_typeMap.getValue(info.info.activityType);
-			if(!typeList){
-				return;
-			}
-			typeList=typeList.sort(sortListByID);
-			typeList=typeList.sort(sortListByState);
 		}
 		
 		/**
@@ -150,12 +91,12 @@ package com.rpgGame.coreData.cfg.active
 		{
 			var keys:Array=_typeMap.keys();
 			for each(var key:int in keys){
-				var values:Vector.<ActivetyInfo>=_typeMap.getValue(key);
-				if(!values){
+				var list:Vector.<ActivetyInfo>=_typeMap.getValue(key);
+				if(!list){
 					continue;
 				}
-				values=values.sort(sortListByID);
-				values=values.sort(sortListByState);
+				list.sort(sortListByID);
+				list.sort(sortListByState);
 			}
 		}
 		
@@ -184,5 +125,16 @@ package com.rpgGame.coreData.cfg.active
 			}
 			return 0;
 		}	
+		
+		/**
+		 *根据活动id获取活动信息 
+		 * @param id
+		 * @return 
+		 * 
+		 */
+		public static function getActInfoById(id:int):ActivetyInfo
+		{
+			return _infoMap.getValue(id);
+		}
 	}
 }

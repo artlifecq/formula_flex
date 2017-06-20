@@ -1,11 +1,11 @@
 package com.rpgGame.app.cmdlistener
 {
-	import com.rpgGame.app.manager.FunctionOpenManager;
+	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.ActivityEvent;
-	import com.rpgGame.coreData.cfg.active.ActivetyDataManager;
+	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.type.activity.ActivityJoinStateEnum;
 	import com.rpgGame.netData.monster.message.ResBossDamageInfosToClientMessage;
@@ -76,13 +76,12 @@ package com.rpgGame.app.cmdlistener
 			var info:ActivetyInfo;
 			for (var i:int = 0; i <num; i++) 
 			{
-				info=ActivetyDataManager.getActInfoById(list[i].activityId);
-				if(info.actCfg.q_panel_id!=0){//有独立的功能icon
-					if(info.actCfg.q_panel_pre_time*60>list[i].notifyTime&&list[i].notifyTime!=0){//在预告时间内
-						updateActLeftTime(info.actCfg.q_panel_id,list[i].notifyTime);
-					}
+				info=ActivetyCfgData.getActInfoById(list[i].activityId);
+				if(info){
+					info.info.notifyTime=list[i].notifyTime;
 				}
 			}
+			ActivetyDataManager.checkOpenAct();
 		}
 		
 		private function onSCSpecialActivitiesListMessage(msg:SCSpecialActivitiesListMessage):void
@@ -90,38 +89,19 @@ package com.rpgGame.app.cmdlistener
 			var list:Vector.<SpecialActivityInfo>=msg.activityInfolist;
 			var num:int=list.length;
 			
-			var info:ActivetyInfo;
 			for (var i:int = 0; i <num; i++) 
 			{
 				ActivetyDataManager.updateInfo(list[i]);
-				info=ActivetyDataManager.getActInfoById(list[i].activityId);
-				if(info.actCfg.q_panel_id!=0){//有独立的功能icon
-					if(info.actCfg.q_panel_pre_time*60>list[i].notifyTime&&list[i].notifyTime!=0){//在预告时间内
-						updateActLeftTime(info.actCfg.q_panel_id,list[i].notifyTime);
-					}
-				}
 				EventManager.dispatchEvent(ActivityEvent.UPDATE_ACTIVITY,list[i].activityId);
 			}
 			ActivetyDataManager.sortAllDatas();
-		}
-		
-		/**
-		 *更新活动剩余时间 
-		 * @param q_panel_id 窗口链接表id
-		 * @param notifyTime   剩余的时间秒
-		 * 
-		 */
-		private function updateActLeftTime(q_panel_id:int, notifyTime:int):void
-		{
-			MainButtonManager.openActivityButton(q_panel_id);
-			MainButtonManager.setUptimeActivityButton(q_panel_id,notifyTime);
 		}
 		
 		private function onSCSpecialActivityCloseMessage(msg:SCSpecialActivityCloseMessage):void
 		{
 			ActivetyDataManager.setActState(msg.activityId,ActivityJoinStateEnum.CLOSE);
 			EventManager.dispatchEvent(ActivityEvent.UPDATE_ACTIVITY,msg.activityId);
-			var info:ActivetyInfo=ActivetyDataManager.getActInfoById(msg.activityId);
+			var info:ActivetyInfo=ActivetyCfgData.getActInfoById(msg.activityId);
 			if(info.actCfg.q_panel_id!=0){//有独立的功能icon
 				MainButtonManager.closeActivityButton(info.actCfg.q_panel_id);
 			}
@@ -131,7 +111,7 @@ package com.rpgGame.app.cmdlistener
 		{
 			ActivetyDataManager.setActState(msg.activityId,ActivityJoinStateEnum.OPEN);
 			EventManager.dispatchEvent(ActivityEvent.UPDATE_ACTIVITY,msg.activityId);
-			var info:ActivetyInfo=ActivetyDataManager.getActInfoById(msg.activityId); 
+			var info:ActivetyInfo=ActivetyCfgData.getActInfoById(msg.activityId); 
 			if(info.actCfg.q_show_notice==1){
 				AppManager.showAppNoHide(AppConstant.ACTIVETY_OPEN,info);
 			}

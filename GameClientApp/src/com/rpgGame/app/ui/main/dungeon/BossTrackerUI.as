@@ -1,6 +1,7 @@
 package com.rpgGame.app.ui.main.dungeon
 {
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
@@ -13,7 +14,7 @@ package com.rpgGame.app.ui.main.dungeon
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.ActivityEvent;
 	import com.rpgGame.coreData.cfg.StaticValue;
-	import com.rpgGame.coreData.cfg.active.ActivetyDataManager;
+	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
@@ -172,7 +173,7 @@ package com.rpgGame.app.ui.main.dungeon
 		private function updateBossAct(id:int):void
 		{
 			if(id==actId){
-				actInfo=ActivetyDataManager.getActInfoById(actId);
+				actInfo=ActivetyCfgData.getActInfoById(actId);
 				updateView();
 			}
 		}
@@ -182,7 +183,7 @@ package com.rpgGame.app.ui.main.dungeon
 			EventManager.removeEvent(ActivityEvent.ENTER_ACTIVITY,getActId);
 			AppManager.showAppNoHide(AppConstant.ACTIVETY_BOSS_HURTRANK,id);//打开伤害排行
 			actId=id;
-			actInfo=ActivetyDataManager.getActInfoById(actId);
+			actInfo=ActivetyCfgData.getActInfoById(actId);
 			updateView();
 		}
 		
