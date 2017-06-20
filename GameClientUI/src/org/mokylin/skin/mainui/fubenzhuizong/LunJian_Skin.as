@@ -26,6 +26,8 @@ package org.mokylin.skin.mainui.fubenzhuizong
 
 		public var killName:feathers.controls.Label;
 
+		public var lbHeadName:feathers.controls.Label;
+
 		public var scroll_box:feathers.controls.Group;
 
 		public var sec_info:feathers.controls.Label;
@@ -155,6 +157,20 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			return temp;
 		}
 
+		private function lbHeadName_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbHeadName = temp;
+			temp.name = "lbHeadName";
+			temp.fontSize = 16;
+			temp.text = "第一层";
+			temp.color = 0xFFF2B7;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlue"];
+			temp.x = 93;
+			temp.y = 6;
+			return temp;
+		}
+
 		private function scroll_box_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
@@ -230,7 +246,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.width = 253;
 			temp.x = 0;
 			temp.y = 0;
-			temp.elementsContent = [ui_head_i(),__LunJian_Skin_UIAsset3_i(),__LunJian_Skin_UIAsset4_i(),scroll_box_i()];
+			temp.elementsContent = [ui_head_i(),lbHeadName_i(),__LunJian_Skin_UIAsset3_i(),__LunJian_Skin_UIAsset4_i(),scroll_box_i()];
 			return temp;
 		}
 

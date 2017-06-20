@@ -113,6 +113,9 @@ package com.rpgGame.appModule.activety.boss
 						break;
 					}
 				}
+				if(_skin.ListItem.selectedIndex==-1){
+					_skin.ListItem.selectedIndex=0;
+				}
 			}
 			onChange(null);
 		}
@@ -144,10 +147,16 @@ package com.rpgGame.appModule.activety.boss
 		
 		private function sortList(infoA:ActivetyInfo,infoB:ActivetyInfo):int
 		{
-			if(infoA.info.joinState<infoB.info.joinState){
+			if(infoA.info.joinState<infoB.info.joinState){//越小的越再后面
+				if(infoA.info.joinState==ActivityJoinStateEnum.JOINING&&infoB.info.joinState==ActivityJoinStateEnum.COMPLETE){
+					return -1;
+				}
 				return 1;
 			}
 			if(infoA.info.joinState>infoB.info.joinState){
+				if(infoA.info.joinState==ActivityJoinStateEnum.COMPLETE&&infoB.info.joinState==ActivityJoinStateEnum.JOINING){
+					return 1;
+				}
 				return -1;
 			}
 			return 0;

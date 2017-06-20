@@ -8,7 +8,7 @@ package com.rpgGame.netData.guild.message{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * 获取邀请列表
+	 * 获取申请列表
 	 */
 	public class ReqGuildApplyListMessage extends Message {
 	

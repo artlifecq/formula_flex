@@ -1,6 +1,8 @@
 package com.rpgGame.app.ui.main.buff
 {
+	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.view.icon.BuffIcon;
 	import com.rpgGame.core.events.BuffEvent;
 	import com.rpgGame.core.ui.SkinUI;
@@ -233,7 +235,6 @@ package com.rpgGame.app.ui.main.buff
 			{
 				//createIcon(buffData);
 			}
-			
 			
 			createIcon(buffData);
 		}

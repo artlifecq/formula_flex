@@ -33,7 +33,7 @@ package com.rpgGame.coreData.clientConfig
 		 /**  参加皇城争霸 */
 		public var q_emperor_join:int;
 		 /**  特权展示 */
-		public var q_privilege_show:int;
+		public var q_privilege_show:String;
 
 	}
 }

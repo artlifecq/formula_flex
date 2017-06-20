@@ -30,6 +30,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_born_animation:int;
 		 /**  特效 */
 		public var q_animation:int;
+		 /**  头顶特效（或为称号，或为其他） */
+		public var q_chenhao:String;
 		 /**  受击特效，如果配置了此处，那么怪物受到攻击时只会播放这个特效，而忽略本来的受击特效 */
 		public var q_been_hurt_animation:int;
 		 /**  怪物朝向角度，配置0-359 */
@@ -138,6 +140,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_immunity_buff:String;
 		 /**  是否可挖掘(0: 不可，：可） */
 		public var q_mining:int;
+		 /**    */
+		public var q_attachs:String;
 		 /**  是否周末掉落双倍(0:不，1：是） */
 		public var q_double_weakend:int;
 		 /**  怪物史记类型[勋章类型,单次伤害值,每次产出勋章个数] */

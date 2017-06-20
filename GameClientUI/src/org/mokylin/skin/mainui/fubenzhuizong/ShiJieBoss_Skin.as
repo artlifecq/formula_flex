@@ -315,7 +315,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiYiTiaoZhan = temp;
 			temp.name = "uiYiTiaoZhan";
-			temp.styleName = "ui/common/yitiaozhan.png";
+			temp.styleName = "ui/common/yijisha2.png";
 			temp.x = 173;
 			temp.y = 34;
 			return temp;

@@ -6,6 +6,8 @@ package com.client.sender
 	import com.rpgGame.netData.login.message.ReqLoginForPlatformMessage;
 	import com.rpgGame.netData.login.message.ReqLoginMessage;
 	
+	import flash.utils.getTimer;
+	
 	import org.game.netCore.connection.SocketConnection;
 	
 	/**
@@ -76,11 +78,11 @@ package com.client.sender
 			msg.agent = ClientConfig.agent;
 			msg.ad = "";
 			msg.time = ClientConfig.loginTime + "";
-			msg.isadult = "1";
+			msg.isadult = ClientConfig.urlParmar["isadult"];///"1";
 			msg.sign = ClientConfig.loginKey;
 			msg.localref = "";
 			msg.reserva1 = "";
-			msg.reserva2 = "";
+			msg.reserva2 = ""; 
 			msg.logintype = "1";
 			msg.agentPlusdata = "";
 			msg.agentColdatas = "";

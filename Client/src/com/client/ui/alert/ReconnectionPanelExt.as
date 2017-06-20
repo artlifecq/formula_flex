@@ -74,6 +74,7 @@ package com.client.ui.alert
 		{		
 			if(_time>0)
 			{
+				if(_timer!=null) _timer.destroy();
 				_timer=new GameTimer("ReconnectionPanelExt",1000,0,onTimer);
 				_timer.start();	
 			}

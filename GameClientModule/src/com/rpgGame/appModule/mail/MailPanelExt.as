@@ -65,6 +65,7 @@ package com.rpgGame.appModule.mail
 		{
 			super.onHide();
 			_nowSelectMailItem=null;
+			if(_mailReadPanel) _mailReadPanel.hide();
 			EventManager.removeEvent(MailEvent.MAIL_SELECT,seendReadMail);
 			EventManager.removeEvent(MailEvent.MAIL_DETAILED_INFORMATION,showMailReadPanel);
 			EventManager.removeEvent(MailEvent.DEL_MAIL_DATA,updateMailList);

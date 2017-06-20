@@ -1,7 +1,6 @@
 package org.game.netCore.net
 {
 	import com.gameClient.alert.AlertPanel;
-	import com.gameClient.alert.ReconnectionPanelExt;
 	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.DebugUtil;
 	import com.gameClient.utils.HashMap;
@@ -880,7 +879,7 @@ package org.game.netCore.net
 						
 						//传入数据到对应的监听函数去
 						var beginTime:int = getTimer();
-//						GameLog.add("[消息处理 ] id:"  + id + "  message:" + message);
+						GameLog.add("[消息处理 ] id:"  + id + "  message:" + message);
 						GameSocketDispatcher.excute(id, message);
 						var delta:int = getTimer() - beginTime;
 						if ( delta > 100 )

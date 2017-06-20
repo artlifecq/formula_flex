@@ -8,7 +8,7 @@ package com.rpgGame.coreData.cfg.active
 	import flash.utils.ByteArray;
 	
 	import org.client.mainCore.ds.HashMap;
-
+	
 	/**
 	 *活动配置数据 
 	 * @author dik
@@ -183,6 +183,6 @@ package com.rpgGame.coreData.cfg.active
 				return 1;
 			}
 			return 0;
-		}
+		}	
 	}
 }

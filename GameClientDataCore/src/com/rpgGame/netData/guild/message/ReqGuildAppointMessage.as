@@ -16,8 +16,11 @@ package com.rpgGame.netData.guild.message{
 		//玩家id
 		private var _playerId: long;
 		
-		//玩家职位
+		//玩家职位,1:帮主,3:副帮主,4:长老,5:普通,6:统帅
 		private var _memberType: int;
+		
+		//1:任命统帅模式,0:任命普通管理模式
+		private var _leaderModel: int;
 		
 		//本次操作标识
 		private var _opaque: int;
@@ -29,8 +32,10 @@ package com.rpgGame.netData.guild.message{
 		override protected function writing(): Boolean{
 			//玩家id
 			writeLong(_playerId);
-			//玩家职位
+			//玩家职位,1:帮主,3:副帮主,4:长老,5:普通,6:统帅
 			writeByte(_memberType);
+			//1:任命统帅模式,0:任命普通管理模式
+			writeByte(_leaderModel);
 			//本次操作标识
 			writeInt(_opaque);
 			return true;
@@ -42,8 +47,10 @@ package com.rpgGame.netData.guild.message{
 		override protected function reading(): Boolean{
 			//玩家id
 			_playerId = readLong();
-			//玩家职位
+			//玩家职位,1:帮主,3:副帮主,4:长老,5:普通,6:统帅
 			_memberType = readByte();
+			//1:任命统帅模式,0:任命普通管理模式
+			_leaderModel = readByte();
 			//本次操作标识
 			_opaque = readInt();
 			return true;
@@ -54,7 +61,7 @@ package com.rpgGame.netData.guild.message{
 		 * @return 
 		 */
 		override public function getId(): int {
-			return 111209;
+			return 111211;
 		}
 		
 		/**
@@ -73,7 +80,7 @@ package com.rpgGame.netData.guild.message{
 		}
 		
 		/**
-		 * get 玩家职位
+		 * get 玩家职位,1:帮主,3:副帮主,4:长老,5:普通,6:统帅
 		 * @return 
 		 */
 		public function get memberType(): int{
@@ -81,10 +88,25 @@ package com.rpgGame.netData.guild.message{
 		}
 		
 		/**
-		 * set 玩家职位
+		 * set 玩家职位,1:帮主,3:副帮主,4:长老,5:普通,6:统帅
 		 */
 		public function set memberType(value: int): void{
 			this._memberType = value;
+		}
+		
+		/**
+		 * get 1:任命统帅模式,0:任命普通管理模式
+		 * @return 
+		 */
+		public function get leaderModel(): int{
+			return _leaderModel;
+		}
+		
+		/**
+		 * set 1:任命统帅模式,0:任命普通管理模式
+		 */
+		public function set leaderModel(value: int): void{
+			this._leaderModel = value;
 		}
 		
 		/**
