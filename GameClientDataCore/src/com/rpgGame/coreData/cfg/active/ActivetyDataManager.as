@@ -4,11 +4,9 @@ package com.rpgGame.coreData.cfg.active
 	import com.rpgGame.coreData.clientConfig.Q_special_activities;
 	import com.rpgGame.netData.specialactivities.bean.SpecialActivityInfo;
 	
-	import flash.events.ActivityEvent;
 	import flash.utils.ByteArray;
 	
 	import org.client.mainCore.ds.HashMap;
-	import org.client.mainCore.manager.EventManager;
 
 	/**
 	 *活动配置数据 
@@ -139,8 +137,7 @@ package com.rpgGame.coreData.cfg.active
 			if(!typeList){
 				return;
 			}
-			typeList=typeList.sort(sortListByID);
-			typeList=typeList.sort(sortListByState);
+			typeList.sort(sortList);
 		}
 		
 		/**
@@ -155,32 +152,18 @@ package com.rpgGame.coreData.cfg.active
 				if(!values){
 					continue;
 				}
-				values=values.sort(sortListByID);
-				values=values.sort(sortListByState);
+				values.sort(sortList);
 			}
 		}
 		
-		private static function sortListByID(infoA:ActivetyInfo,infoB:ActivetyInfo):int
+		private static function sortList(infoA:ActivetyInfo,infoB:ActivetyInfo):int
 		{
 			if(infoA.info==null||infoB.info==null){
 				return 0;
 			}
-			if(infoA.info.activityId<infoB.info.activityId){
+			if(infoA.info.joinState>infoB.info.joinState||infoA.info.activityId<infoB.info.activityId){
 				return -1;
-			}else if(infoA.info.activityId>infoB.info.activityId){
-				return 1;
-			}
-			return 0;
-		}
-		
-		private static function sortListByState(infoA:ActivetyInfo,infoB:ActivetyInfo):int
-		{
-			if(infoA.info==null||infoB.info==null){
-				return 0;
-			}
-			if(infoA.info.joinState>infoB.info.joinState){
-				return -1;
-			}else if(infoA.info.joinState<infoB.info.joinState){
+			}else if(infoA.info.activityId>infoB.info.activityId||infoA.info.joinState<infoB.info.joinState){
 				return 1;
 			}
 			return 0;
