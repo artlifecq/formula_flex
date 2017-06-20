@@ -36,7 +36,7 @@ package com.rpgGame.appModule.open
 			_skin = new KaiQi_Skin();
 			super(_skin);
 			this.escExcuteAble = false;
-//			initView();
+			//			initView();
 		}
 		
 		private function initView():void

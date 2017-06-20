@@ -1,5 +1,5 @@
 package com.rpgGame.netData.guild.message{
-	import com.rpgGame.netData.guild.bean.GuildListInfo;
+	import com.rpgGame.netData.guild.bean.GuildInviteInfo;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -14,7 +14,7 @@ package com.rpgGame.netData.guild.message{
 	public class ResGuildInviteListInfoMessage extends Message {
 	
 		//邀请列表信息
-		private var _inviteList: Vector.<GuildListInfo> = new Vector.<GuildListInfo>();
+		private var _inviteList: Vector.<GuildInviteInfo> = new Vector.<GuildInviteInfo>();
 		
 		/**
 		 * 写入字节缓存
@@ -37,7 +37,7 @@ package com.rpgGame.netData.guild.message{
 			//邀请列表信息
 			var inviteList_length : int = readShort();
 			for (i = 0; i < inviteList_length; i++) {
-				_inviteList[i] = readBean(GuildListInfo) as GuildListInfo;
+				_inviteList[i] = readBean(GuildInviteInfo) as GuildInviteInfo;
 			}
 			return true;
 		}
@@ -54,14 +54,14 @@ package com.rpgGame.netData.guild.message{
 		 * get 邀请列表信息
 		 * @return 
 		 */
-		public function get inviteList(): Vector.<GuildListInfo>{
+		public function get inviteList(): Vector.<GuildInviteInfo>{
 			return _inviteList;
 		}
 		
 		/**
 		 * set 邀请列表信息
 		 */
-		public function set inviteList(value: Vector.<GuildListInfo>): void{
+		public function set inviteList(value: Vector.<GuildInviteInfo>): void{
 			this._inviteList = value;
 		}
 		

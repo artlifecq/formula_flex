@@ -2,6 +2,7 @@ package com.rpgGame.app.manager.mount
 {
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.graphics.HeadFace;
+	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
@@ -130,7 +131,7 @@ package com.rpgGame.app.manager.mount
 			if(role)
 			{
 				(role.data as HeroData).zhanqiLv=msg.warFlagModelid;
-				SceneRoleManager.getInstance().updateZhanQiRole(role);
+				AvatarManager.callEquipmentChange(role);
 			}
 		}
 		
@@ -202,7 +203,7 @@ package com.rpgGame.app.manager.mount
 		public function updateZhanQiShow():void
 		{	
 			var role:SceneRole=MainRoleManager.actor;
-			SceneRoleManager.getInstance().updateZhanQiRole(role);
+			AvatarManager.callEquipmentChange(role);
 		}
 		
 		private static var _instance:ZhanQiManager;
