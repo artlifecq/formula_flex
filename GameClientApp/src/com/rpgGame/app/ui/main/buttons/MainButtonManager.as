@@ -24,6 +24,11 @@ package com.rpgGame.app.ui.main.buttons
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_zhanhun;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_zhuangbei;
 
+	/**
+	 *主按钮配置管理器 
+	 * @author dik
+	 * 
+	 */
 	public class MainButtonManager
 	{
 		private static var _classMap:HashMap;

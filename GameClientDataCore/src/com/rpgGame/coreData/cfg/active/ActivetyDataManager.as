@@ -1,13 +1,14 @@
 package com.rpgGame.coreData.cfg.active
 {
 	import com.gameClient.utils.JSONUtil;
-	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.clientConfig.Q_special_activities;
 	import com.rpgGame.netData.specialactivities.bean.SpecialActivityInfo;
 	
+	import flash.events.ActivityEvent;
 	import flash.utils.ByteArray;
 	
 	import org.client.mainCore.ds.HashMap;
+	import org.client.mainCore.manager.EventManager;
 
 	/**
 	 *活动配置数据 
