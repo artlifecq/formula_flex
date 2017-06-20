@@ -129,7 +129,7 @@ package com.rpgGame.appModule.activety.boss
 		private function updateList():void
 		{
 			for(var i:int=0;i<actList.length;i++){
-				if(actList[i].info.joinState!=ActivityJoinStateEnum.COMPLETE){
+				if(actList[i].info&&actList[i].info.joinState!=ActivityJoinStateEnum.COMPLETE){
 					if(actList[i].actCfg.q_activity_limit_level>MainRoleManager.actorInfo.totalStat.level){
 						actList[i].info.joinState=ActivityJoinStateEnum.CLOSE;//未开启
 					}else{
@@ -137,7 +137,7 @@ package com.rpgGame.appModule.activety.boss
 					}
 				}
 			}
-			actList=actList.sort(sortList);
+			actList.sort(sortList);
 			_activeData.removeAll();
 			for(i=0;i<actList.length;i++){
 				_activeData.addItem(actList[i]);
@@ -147,6 +147,10 @@ package com.rpgGame.appModule.activety.boss
 		
 		private function sortList(infoA:ActivetyInfo,infoB:ActivetyInfo):int
 		{
+			if(infoA.info==null||infoB.info==null){
+				return 0;
+			}
+			
 			if(infoA.info.joinState<infoB.info.joinState){//越小的越再后面
 				if(infoA.info.joinState==ActivityJoinStateEnum.JOINING&&infoB.info.joinState==ActivityJoinStateEnum.COMPLETE){
 					return -1;

@@ -97,6 +97,9 @@ package com.rpgGame.app.cmdlistener
 			{
 				ActivetyDataManager.updateInfo(list[i]);
 				info=ActivetyDataManager.getActInfoById(list[i].activityId);
+				if(!info){
+					continue;
+				}
 				if(info.actCfg.q_panel_id!=0){//有独立的功能icon
 					if(info.actCfg.q_panel_pre_time*60>list[i].notifyTime&&list[i].notifyTime!=0){//在预告时间内
 						updateActLeftTime(info.actCfg.q_panel_id,list[i].notifyTime);
