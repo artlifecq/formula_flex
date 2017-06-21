@@ -81,7 +81,7 @@ package com.rpgGame.appModule.guild
 				var contribution:int =0;
 				if(GuildManager.instance().haveGuild)
 					contribution = GuildManager.instance().selfMemberInfo.contribution;
-				_skin.lbXiaohao.text = LanguageConfig.replaceStr("帮贡$/$",_nextdata.q_costvalue,contribution);
+				_skin.lbXiaohao.text = LanguageConfig.replaceStr("帮贡$/$",contribution,_nextdata.q_costvalue);
 				if(_nextdata.q_costvalue>contribution)
 					_skin.lbXiaohao.color = 0xff0000;
 				else

@@ -57,10 +57,10 @@ package com.rpgGame.appModule.guild
 		{
 			super.show(data,openTable,parentContiner);
 			var arr:Array = data as Array;
-			_heroId = new long(arr[0]);
-			_heroInfo = GuildManager.instance().getGuildMemberInfoById(arr[0]);
+			_heroId = long(arr[0]);
+			_heroInfo = GuildManager.instance().getGuildMemberInfoById(_heroId.hexValue);
 			_opaque = 0;
-			EventManager.addEvent(GuildEvent.GUILD_OPERATERESULT,refeashAppoint);
+//			EventManager.addEvent(GuildEvent.GUILD_OPERATERESULT,refeashAppoint);
 			refeashVale();
 			
 		}
@@ -132,6 +132,7 @@ package com.rpgGame.appModule.guild
 				_opaque = GuildManager.opaque;
 				_setPostType = posttype;
 				GuildManager.instance().guildAppoint(_heroId,_setPostType,0,_opaque);
+				this.hide();
 			}else if(target == _skin.chkZhanglao){
 				if(_guildLevelInfo.q_eleder_num==0)
 				{
@@ -155,10 +156,5 @@ package com.rpgGame.appModule.guild
 			return true;
 		}
 		
-		override protected function onHide():void
-		{
-			super.onHide();
-			EventManager.removeEvent(GuildEvent.GUILD_OPERATERESULT,refeashAppoint);
-		}
 	}
 }

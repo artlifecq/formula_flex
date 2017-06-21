@@ -51,9 +51,8 @@ package com.rpgGame.appModule.guild
 		{
 			super.show(data,openTable,parentContiner);
 			var arr:Array = data as Array;
-			_heroId = new long(arr[0]);
-			_heroInfo = GuildManager.instance().getGuildMemberInfoById(arr[0]);
-			EventManager.addEvent(GuildEvent.GUILD_OPERATERESULT,refeashAppoint);
+			_heroId = long(arr[0]);
+			_heroInfo = GuildManager.instance().getGuildMemberInfoById(_heroId.hexValue);
 			refeashVale();
 			
 		}
@@ -102,6 +101,7 @@ package com.rpgGame.appModule.guild
 				_setPostType =  (posttype==EnumGuildPost.GUILDPOST_LEADER?1:0);
 				_opaque = GuildManager.opaque;
 				GuildManager.instance().guildAppoint(_heroId,posttype,1,_opaque);
+				this.onHide();
 			}
 		}
 		
@@ -110,10 +110,5 @@ package com.rpgGame.appModule.guild
 			return _heroInfo.isLeader==1?EnumGuildPost.GUILDPOST_LEADER:EnumGuildPost.GUILDPOST_OTHER;
 		}
 		
-		override protected function onHide():void
-		{
-			super.onHide();
-			EventManager.removeEvent(GuildEvent.GUILD_OPERATERESULT,refeashAppoint);
-		}
 	}
 }

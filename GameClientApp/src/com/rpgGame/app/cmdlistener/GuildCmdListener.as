@@ -1,6 +1,10 @@
 package com.rpgGame.app.cmdlistener
 {
+	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.guild.GuildManager;
+	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.netData.guild.message.ResGuildApplyListInfoMessage;
 	import com.rpgGame.netData.guild.message.ResGuildBriefnessInfoMessage;
 	import com.rpgGame.netData.guild.message.ResGuildChangeGuildIdMessage;
@@ -61,8 +65,17 @@ package com.rpgGame.app.cmdlistener
 		private function getResGuildChangeGuildId(msg:ResGuildChangeGuildIdMessage):void
 		{
 			GuildManager.instance().changeGuildId(msg);
+			var role:SceneRole = SceneManager.getSceneObjByID(msg.playerId.ToGID()) as SceneRole;
+			if(role && role.usable)
+			{
+				var herodata:HeroData = role.data as HeroData;
+				herodata.guildId = msg.guildId;
+				herodata.guildMemberType = msg.guildMemberType;
+				herodata.guildName = msg.guildName;
+				if(role.headFace is HeadFace)
+					(role.headFace as HeadFace).addAndUpdateGuildName();
+			}
 		}
-		
 		private function getResGuildChangeMemberType(msg:ResGuildChangeMemberTypeMessage):void
 		{
 			

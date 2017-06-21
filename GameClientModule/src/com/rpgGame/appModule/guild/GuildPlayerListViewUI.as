@@ -22,7 +22,7 @@ package com.rpgGame.appModule.guild
 		private var _currentPage:int = 1;
 		private var _maxPage:int = 0;
 		private var _currentOriderValue:String;
-		private static const PROP_JOB:String = "job";
+		private static const PROP_JOB:String = "memberType";
 		private static const PROP_BATTLE:String = "battle";
 		private static const PROP_LEVEL:String = "level";
 		private static const PROP_CURACTIVE:String = "curActive";
@@ -78,18 +78,8 @@ package com.rpgGame.appModule.guild
 		private function refeashList():void
 		{
 			var totalPage:int = GuildManager.instance().sortGuildMemberInfo(_currentOriderValue,_skin.chkOnLine.isSelected);
-			if(totalPage != _maxPage)
-			{
-				_maxPage = totalPage;
-				if(totalPage<_currentPage)
-				{
-					requestPage(totalPage);
-				}else{
-					refeahShowPageLable();
-				}
-			}else{
-				_skin.ListItem.dataProvider.updateAll();
-			}
+			_maxPage = totalPage;
+			requestPage(_currentPage);
 			_skin.arrowZhiwei_Down.visible = _currentOriderValue == PROP_JOB;
 			_skin.arrowZhanli_Down.visible = _currentOriderValue == PROP_BATTLE;
 			_skin.arrowDengji_Down.visible = _currentOriderValue == PROP_LEVEL;

@@ -73,7 +73,8 @@ package com.rpgGame.appModule.guild
 				addEvent();
 				GuildManager.instance().reqGuildJoin(_guildListinfo.guildId,_opaque);
 			}else{
-				AppManager.showApp(AppConstant.GUILD_APPLAYINFO_PANEL,_guildListinfo.guildId);
+//				AppManager.showApp(AppConstant.GUILD_APPLAYINFO_PANEL,_guildListinfo.guildId);
+				GuildPorpInfoPanel.instance.show(_guildListinfo.guildId);
 			}
 		
 		}

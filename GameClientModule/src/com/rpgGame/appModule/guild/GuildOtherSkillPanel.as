@@ -79,7 +79,7 @@ package com.rpgGame.appModule.guild
 		
 		private function refeashView():void
 		{
-			_currentinfo = GuildManager.instance().getSkillInfoById(_skillId);
+			_currentinfo = GuildManager.instance().getLeaderSkillInfoById(_skillId);
 			var currentLevel:int;
 			if(_currentinfo == null)
 			{
@@ -100,8 +100,21 @@ package com.rpgGame.appModule.guild
 				cell.setValue(currentatt,nextatt);
 			}
 			
+			
 			_skin.lbYuanbao.text = "元宝:"+MainRoleManager.actorInfo.totalStat.getResData(3);
-			_skin.lbXiaohao.htmlText = "本次花费元宝"+HtmlTextUtil.getTextColor(0x5DBD37,_nextdata.q_costvalue.toString());
+			if(_nextdata==null)
+			{
+				_skin.lbXiaohao.visible = false;
+				_skin.btnUP.visible = false;
+				_skin.imgmax.visible = true;
+			}else{
+				_skin.lbXiaohao.visible = true;
+				_skin.btnUP.visible = true;
+				_skin.imgmax.visible = false;
+				_skin.btnUP.label = "升级到LV"+int(currentLevel+1).toString();
+				_skin.lbXiaohao.htmlText = "本次花费元宝"+HtmlTextUtil.getTextColor(0x5DBD37,_nextdata.q_costvalue.toString());
+			}
+			
 		}
 		
 		

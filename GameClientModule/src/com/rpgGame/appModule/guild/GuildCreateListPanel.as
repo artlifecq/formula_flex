@@ -81,7 +81,8 @@ package com.rpgGame.appModule.guild
 				return ;
 			if(page>_maxPage)
 				return ;
-			GuildManager.instance().reqGuildList(page,0,0);
+			var isfull:int = _skin.chkGuolv.isSelected?1:0;
+			GuildManager.instance().reqGuildList(page,isfull,0);
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -94,6 +95,9 @@ package com.rpgGame.appModule.guild
 					break;
 				case _skin.btnNext:
 					requestPage(_currentPage+1);
+					break;
+				case _skin.chkGuolv:
+					requestPage(_currentPage);
 					break;
 				case _skin.btnJoin:
 					GuildManager.instance().reqGuildJoin(new long(-1),0);
