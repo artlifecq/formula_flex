@@ -8,6 +8,7 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.app.zhanchang.wangchengzhengba.WangChengHead_Item;
+	import org.mokylin.skin.app.zhanchang.wangchengzhengba.XuWei;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 	import org.mokylin.skin.component.button.ButtonSkin_shuoming2;
 
@@ -21,8 +22,6 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var btnLingQu:feathers.controls.Button;
-
 		public var btnShuoMing:feathers.controls.Button;
 
 		public var dui1:feathers.controls.UIAsset;
@@ -69,6 +68,10 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 
 		public var lbJiangli:feathers.controls.Label;
 
+		public var lbZhan:feathers.controls.Label;
+
+		public var toZhanChang:feathers.controls.Button;
+
 		public var uiBaoXiang:feathers.controls.UIAsset;
 
 		public var uiLingQu:feathers.controls.UIAsset;
@@ -84,7 +87,7 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [__WangChengZhengBa_UIAsset3_i(),__WangChengZhengBa_UIAsset4_i(),gPlayer1_i(),gPlayer2_i(),gPlayer3_i(),gPlayer4_i(),gPlayer5_i(),grpCheng_i(),__WangChengZhengBa_Label1_i(),lbBangName_i(),__WangChengZhengBa_UIAsset7_i(),icon1_i(),icon2_i(),icon3_i(),icon4_i(),lbJiangli_i(),btnLingQu_i(),btnShuoMing_i(),uiBaoXiang_i(),uiLingQu_i()];
+			this.elementsContent = [__WangChengZhengBa_UIAsset3_i(),__WangChengZhengBa_UIAsset4_i(),__WangChengZhengBa_SkinnableContainer1_i(),gPlayer1_i(),gPlayer2_i(),gPlayer3_i(),gPlayer4_i(),gPlayer5_i(),grpCheng_i(),lbZhan_i(),lbBangName_i(),__WangChengZhengBa_UIAsset7_i(),icon1_i(),icon2_i(),icon3_i(),icon4_i(),lbJiangli_i(),toZhanChang_i(),btnShuoMing_i(),uiBaoXiang_i(),uiLingQu_i()];
 			
 			states = {
 			};
@@ -95,14 +98,15 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __WangChengZhengBa_Label1_i():feathers.controls.Label
+		private function __WangChengZhengBa_SkinnableContainer1_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "[占]";
-			temp.color = 0x5CB006;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 408;
-			temp.y = 482;
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			temp.height = 340;
+			var skin:StateSkin = new org.mokylin.skin.app.zhanchang.wangchengzhengba.XuWei()
+			temp.skin = skin
+			temp.width = 216;
+			temp.x = 368;
+			temp.y = 128;
 			return temp;
 		}
 
@@ -148,21 +152,6 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 			temp.styleName = "ui/app/zhanchang/weicheng/wodejiangli.png";
 			temp.x = 24;
 			temp.y = 535;
-			return temp;
-		}
-
-		private function btnLingQu_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btnLingQu = temp;
-			temp.name = "btnLingQu";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.label = "进入战场";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.color = 0xCFC6AE;
-			temp.width = 117;
-			temp.x = 417;
-			temp.y = 530;
 			return temp;
 		}
 
@@ -441,6 +430,34 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 			temp.underline = true;
 			temp.x = 319;
 			temp.y = 537;
+			return temp;
+		}
+
+		private function lbZhan_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbZhan = temp;
+			temp.name = "lbZhan";
+			temp.text = "[占]";
+			temp.color = 0x5CB006;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 408;
+			temp.y = 482;
+			return temp;
+		}
+
+		private function toZhanChang_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			toZhanChang = temp;
+			temp.name = "toZhanChang";
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.label = "进入战场";
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
+			temp.color = 0xCFC6AE;
+			temp.width = 117;
+			temp.x = 417;
+			temp.y = 530;
 			return temp;
 		}
 

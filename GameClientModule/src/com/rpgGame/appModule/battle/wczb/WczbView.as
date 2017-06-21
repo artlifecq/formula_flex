@@ -72,7 +72,7 @@ package com.rpgGame.appModule.battle.wczb
 		{
 			super.onTouchTarget(target);
 			switch(target){
-				case _skin.btnLingQu:
+				case _skin.toZhanChang:
 					break;
 				case _skin.lbJiangli:
 					break;
