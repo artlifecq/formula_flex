@@ -1,11 +1,14 @@
 package com.rpgGame.appModule.battle.wczb
 {
 	import com.rpgGame.app.display3D.InterAvatar3D;
+	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.RoleData;
+	
+	import feathers.controls.StateSkin;
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.mokylin.skin.app.zhanchang.wangchengzhengba.WangChengHead_Item;
@@ -37,6 +40,17 @@ package com.rpgGame.appModule.battle.wczb
 			_rewards=new Vector.<IconCDFace>();
 			roleDatas=new HashMap();
 			avatars=new HashMap();			
+			
+			setHeadSkin(_skin.head1.skin,"3");
+			setHeadSkin(_skin.head2.skin,"2");
+			setHeadSkin(_skin.head3.skin,"1");
+			setHeadSkin(_skin.head4.skin,"2");
+			setHeadSkin(_skin.head5.skin,"3");
+		}
+		
+		private function setHeadSkin(head:StateSkin,skin:String):void
+		{
+			(head as WangChengHead_Item).uiHead.styleName="ui/app/zhanchang/weicheng/"+skin+".png";
 		}
 		
 		override public function show(data:Object=null):void
