@@ -19,8 +19,8 @@ package com.rpgGame.appModule.xinfa.sub
 		public function CheatsIcon(con:DisplayObjectContainer)
 		{
 			_icon=new BaseIcon(IcoSizeEnum.ICON_36);
-			_icon.x=(con.width-_icon.width)*0.5;
-			_icon.y=(con.height-_icon.height)*0.5;
+//			_icon.x=(con.width-_icon.width)*0.5;
+//			_icon.y=(con.height-_icon.height)*0.5;
 			con.addChild(_icon);
 		}
 		

@@ -3,6 +3,7 @@ package com.rpgGame.appModule.battle.dfdj
 	import com.game.mainCore.core.timer.GameTimer;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.events.D1v1Event;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	
@@ -30,7 +31,8 @@ package com.rpgGame.appModule.battle.dfdj
 			this.dragAble=false;
 			this.escExcuteAble=false;
 			_timer=new GameTimer("D1v1MatchPanelExt");
-			_timer.onUpdate=onTimer
+			_timer.onUpdate=onTimer;
+			AppConstant.getAppinfoByAppName(AppConstant.BATTLE_D1V1_MATCH_PANEL).isSpecialInCloseAll=true;
 		}
 		
 		private function onTimer():void

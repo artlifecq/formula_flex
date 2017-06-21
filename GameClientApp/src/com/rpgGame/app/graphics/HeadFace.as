@@ -1237,7 +1237,7 @@ package com.rpgGame.app.graphics
 				if (!_towerFlag) 
 				{
 					_towerFlag=new UIAsset();
-					_towerFlag.styleName="ui/mainui/guaji/vunludi.png";
+					_towerFlag.styleName="ui/mainui/fubenzhuizong/tower/qiangzhanqi.png";
 				}
 				deCtrl.addTop(_towerFlag,DecorCtrl.TOP_TOWER);
 			}

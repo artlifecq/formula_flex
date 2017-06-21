@@ -25,6 +25,11 @@ package com.rpgGame.appModule.battle.dfdj
 			_skin.bg2.visible=!_skin.bg1.visible;
 			_skin.lbId.width=50;
 			_skin.bg3.visible=false;
+			_skin.selectBg.visible=false;	
+		}
+		public function setSelect(bool:Boolean):void
+		{
+			_skin.selectBg.visible=bool;	
 		}
 		override protected function onTouchTarget(target:DisplayObject):void
 		{

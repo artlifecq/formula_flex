@@ -76,7 +76,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			super();
 			
 			this.currentState = "normal";
-			this.height = 406;
+			this.height = 425;
 			this.width = 253;
 			this.elementsContent = [task_box_i(),btn_open_i(),btn_close_i()];
 			
@@ -132,11 +132,11 @@ package org.mokylin.skin.mainui.fubenzhuizong
 		private function __JiuCengYaoTaTrack_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 358;
+			temp.height = 361;
 			temp.styleName = "ui/mainui/renwu/bg.png";
 			temp.width = 253;
 			temp.x = 0;
-			temp.y = 0;
+			temp.y = 21;
 			return temp;
 		}
 
@@ -145,7 +145,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/mainui/renwu/hengtiao.png";
 			temp.x = 0;
-			temp.y = 0;
+			temp.y = 21;
 			return temp;
 		}
 
@@ -178,6 +178,15 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			return temp;
 		}
 
+		private function __JiuCengYaoTaTrack_Skin_UIAsset6_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/mainui/fubenzhuizong/tower/zhanqi.png";
+			temp.x = -76;
+			temp.y = -2;
+			return temp;
+		}
+
 		private function btnMsg_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
@@ -196,7 +205,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.name = "btn_close";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_shouhui;
 			temp.x = 234;
-			temp.y = 47;
+			temp.y = 63;
 			return temp;
 		}
 
@@ -207,7 +216,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.name = "btn_open";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_zhankai;
 			temp.x = 234;
-			temp.y = 47;
+			temp.y = 63;
 			return temp;
 		}
 
@@ -216,9 +225,9 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			gFlag = temp;
 			temp.name = "gFlag";
-			temp.x = 90;
-			temp.y = -44;
-			temp.elementsContent = [labOwner_i(),labOwnerTime_i()];
+			temp.x = 85;
+			temp.y = -41;
+			temp.elementsContent = [__JiuCengYaoTaTrack_Skin_UIAsset6_i(),labOwner_i(),labOwnerTime_i()];
 			return temp;
 		}
 
@@ -273,7 +282,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 161;
 			temp.x = 0;
-			temp.y = 22;
+			temp.y = 31;
 			return temp;
 		}
 
@@ -289,7 +298,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 162;
 			temp.x = 0;
-			temp.y = 0;
+			temp.y = 9;
 			return temp;
 		}
 
@@ -453,7 +462,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.height = 355;
 			temp.width = 253;
 			temp.x = 0;
-			temp.y = 0;
+			temp.y = 25;
 			temp.elementsContent = [lbHeadName_i(),__JiuCengYaoTaTrack_Skin_UIAsset3_i(),__JiuCengYaoTaTrack_Skin_UIAsset4_i(),scroll_box_i()];
 			return temp;
 		}
@@ -463,10 +472,10 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			task_box = temp;
 			temp.name = "task_box";
-			temp.height = 356;
+			temp.height = 382;
 			temp.width = 253;
 			temp.x = 0;
-			temp.y = 47;
+			temp.y = 42;
 			temp.elementsContent = [__JiuCengYaoTaTrack_Skin_UIAsset1_i(),__JiuCengYaoTaTrack_Skin_UIAsset2_i(),secondary_box_i(),gFlag_i()];
 			return temp;
 		}

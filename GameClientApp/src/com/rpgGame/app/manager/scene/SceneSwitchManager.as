@@ -430,12 +430,12 @@ package com.rpgGame.app.manager.scene
 			{
 				//sendSceneLoaded();
 				change2dMap();
-				EventManager.dispatchEvent(MapEvent.MAP_SWITCH_START);
+				
 			}
 			else
 			{
 				//clearScene();
-				EventManager.dispatchEvent(MapEvent.MAP_LOAD_START);
+			
 				if (ClientConfig.isSingle)
 				{
 					if (mapInfo)

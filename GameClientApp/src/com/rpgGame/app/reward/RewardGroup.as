@@ -26,16 +26,16 @@ package  com.rpgGame.app.reward
 		public static const ALIN_RIGHT:int=2;
 		
 		private static const S2W:Object={};
-		S2W[36]=48;
-		S2W[42]=54;
-		S2W[48]=60;
-		S2W[64]=76;
+		S2W[36]=45;
+		S2W[42]=51;
+		S2W[48]=56;
+		S2W[64]=72;
 		
 		private static const W2S:Object={};
-		W2S[48]=36;
-		W2S[54]=42;
-		W2S[60]=48;
-		W2S[76]=64;
+		W2S[45]=36;
+		W2S[51]=42;
+		W2S[56]=48;
+		W2S[72]=64;
 		/**
 		 *布局模式 
 		 */		
