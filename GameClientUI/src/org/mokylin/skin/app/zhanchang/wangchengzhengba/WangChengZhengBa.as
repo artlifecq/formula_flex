@@ -9,6 +9,7 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.app.zhanchang.wangchengzhengba.WangChengHead_Item;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
+	import org.mokylin.skin.component.button.ButtonSkin_shuoming2;
 
 	/**
 	 * @private
@@ -21,6 +22,8 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 		//                                定义成员变量
 		//==========================================================================
 		public var btnLingQu:feathers.controls.Button;
+
+		public var btnShuoMing:feathers.controls.Button;
 
 		public var dui1:feathers.controls.UIAsset;
 
@@ -66,6 +69,10 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 
 		public var lbJiangli:feathers.controls.Label;
 
+		public var uiBaoXiang:feathers.controls.UIAsset;
+
+		public var uiLingQu:feathers.controls.UIAsset;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -77,7 +84,7 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [__WangChengZhengBa_UIAsset2_i(),__WangChengZhengBa_UIAsset3_i(),gPlayer1_i(),gPlayer2_i(),gPlayer3_i(),gPlayer4_i(),gPlayer5_i(),grpCheng_i(),__WangChengZhengBa_Label1_i(),lbBangName_i(),__WangChengZhengBa_UIAsset6_i(),icon1_i(),icon2_i(),icon3_i(),icon4_i(),lbJiangli_i(),btnLingQu_i()];
+			this.elementsContent = [__WangChengZhengBa_UIAsset3_i(),__WangChengZhengBa_UIAsset4_i(),gPlayer1_i(),gPlayer2_i(),gPlayer3_i(),gPlayer4_i(),gPlayer5_i(),grpCheng_i(),__WangChengZhengBa_Label1_i(),lbBangName_i(),__WangChengZhengBa_UIAsset7_i(),icon1_i(),icon2_i(),icon3_i(),icon4_i(),lbJiangli_i(),btnLingQu_i(),btnShuoMing_i(),uiBaoXiang_i(),uiLingQu_i()];
 			
 			states = {
 			};
@@ -99,7 +106,7 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 			return temp;
 		}
 
-		private function __WangChengZhengBa_UIAsset2_i():feathers.controls.UIAsset
+		private function __WangChengZhengBa_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/big_bg/zhanchang/weicheng_bg.jpg";
@@ -108,7 +115,7 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 			return temp;
 		}
 
-		private function __WangChengZhengBa_UIAsset3_i():feathers.controls.UIAsset
+		private function __WangChengZhengBa_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/weicheng/bg2.jpg";
@@ -117,7 +124,7 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 			return temp;
 		}
 
-		private function __WangChengZhengBa_UIAsset4_i():feathers.controls.UIAsset
+		private function __WangChengZhengBa_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/weicheng/wangcheng4.png";
@@ -126,7 +133,7 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 			return temp;
 		}
 
-		private function __WangChengZhengBa_UIAsset5_i():feathers.controls.UIAsset
+		private function __WangChengZhengBa_UIAsset6_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/weicheng/wangcheng.png";
@@ -135,7 +142,7 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 			return temp;
 		}
 
-		private function __WangChengZhengBa_UIAsset6_i():feathers.controls.UIAsset
+		private function __WangChengZhengBa_UIAsset7_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/weicheng/wodejiangli.png";
@@ -150,12 +157,23 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 			btnLingQu = temp;
 			temp.name = "btnLingQu";
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.label = "领取奖励";
+			temp.label = "进入战场";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xCFC6AE;
 			temp.width = 117;
 			temp.x = 417;
 			temp.y = 530;
+			return temp;
+		}
+
+		private function btnShuoMing_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btnShuoMing = temp;
+			temp.name = "btnShuoMing";
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_shuoming2;
+			temp.x = 898;
+			temp.y = 81;
 			return temp;
 		}
 
@@ -281,7 +299,7 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 			temp.name = "grpCheng";
 			temp.x = 398;
 			temp.y = 350;
-			temp.elementsContent = [__WangChengZhengBa_UIAsset4_i(),__WangChengZhengBa_UIAsset5_i()];
+			temp.elementsContent = [__WangChengZhengBa_UIAsset5_i(),__WangChengZhengBa_UIAsset6_i()];
 			return temp;
 		}
 
@@ -423,6 +441,28 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 			temp.underline = true;
 			temp.x = 319;
 			temp.y = 537;
+			return temp;
+		}
+
+		private function uiBaoXiang_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiBaoXiang = temp;
+			temp.name = "uiBaoXiang";
+			temp.styleName = "ui/app/zhanchang/weicheng/baoxiang.png";
+			temp.x = 498;
+			temp.y = 382;
+			return temp;
+		}
+
+		private function uiLingQu_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiLingQu = temp;
+			temp.name = "uiLingQu";
+			temp.styleName = "ui/app/zhanchang/weicheng/jinrifuliyilingqu.png";
+			temp.x = 420;
+			temp.y = 376;
 			return temp;
 		}
 
