@@ -34,7 +34,6 @@ package com.rpgGame.appModule.guild
 		{
 			super.show(data,openTable,parentContiner);
 			EventManager.addEvent(GuildEvent.GUILD_DATA_INIT,refeashView);
-			EventManager.addEvent(GuildEvent.GUILD_SKILLINFO_CHAGE,refeashView);
 			refeashView();
 			GuildManager.instance().requestGuildInfo();
 			GuildManager.instance().reqGuildSkillInfo();
@@ -49,7 +48,6 @@ package com.rpgGame.appModule.guild
 		{
 			super.hide();
 			EventManager.removeEvent(GuildEvent.GUILD_DATA_INIT,refeashView);
-			EventManager.removeEvent(GuildEvent.GUILD_SKILLINFO_CHAGE,refeashView);
 		}
 	}
 }

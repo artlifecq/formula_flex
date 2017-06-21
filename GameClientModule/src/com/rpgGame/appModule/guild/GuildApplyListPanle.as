@@ -89,7 +89,7 @@ package com.rpgGame.appModule.guild
 				case _skin.btnOk:
 					GuildManager.instance().applyOperation(1,-1);
 					break;
-				case _skin.btnOk:
+				case _skin.btnCancel:
 					GuildManager.instance().applyOperation(0,-1);
 					break;
 				case _skin.btnPrev:

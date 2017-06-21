@@ -2,9 +2,12 @@ package com.rpgGame.app.manager.guild
 {
 	import com.gameClient.utils.JSONUtil;
 	import com.gameClient.utils.StringFilter;
+	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
@@ -23,6 +26,7 @@ package com.rpgGame.app.manager.guild
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.coreData.lang.LangGuild;
+	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.guild.bean.GuildApplyInfo;
 	import com.rpgGame.netData.guild.bean.GuildBriefnessInfo;
@@ -151,6 +155,8 @@ package com.rpgGame.app.manager.guild
 		 */
 		public function requestGuildInfo():void
 		{
+			if(!this.haveGuild)
+				return ;
 			SocketConnection.send(new ReqGuildInfoMessage());
 		}
 		
@@ -162,14 +168,25 @@ package com.rpgGame.app.manager.guild
 		
 		public function getSortMemberListByProp(prop:String):Vector.<GuildMemberInfo>
 		{
-			var sortfun:Function = function(g1:GuildMemberInfo,g2:GuildMemberInfo):int{
+			var sortfun1:Function = function(g1:GuildMemberInfo,g2:GuildMemberInfo):int{
 				if(g1[prop]<g2[prop])
 					return 1;
 				else if(g1[prop]>g2[prop])
 					return -1;
 				else
 					return 0;
-			}
+			};
+			var sortfun2:Function = function(g1:GuildMemberInfo,g2:GuildMemberInfo):int{
+				if(g1[prop]<g2[prop])
+					return -1;
+				else if(g1[prop]>g2[prop])
+					return 1;
+				else
+					return 0;
+			};
+			var sortfun:Function = sortfun1;
+			if(prop == "memberType")
+				sortfun = sortfun2;
 			return _memberList.sort(sortfun);
 		}
 		
@@ -456,7 +473,7 @@ package com.rpgGame.app.manager.guild
 		{
 			if(!canDissolve)
 				return ;
-			var alertOk:AlertSetInfo=new AlertSetInfo(LangAlertInfo.LUNJIAN_FIGHT_MIN);
+			var alertOk:AlertSetInfo=new AlertSetInfo(LangAlertInfo.dissolve_guild,guildData.name);
 			GameAlert.showAlert(alertOk,sureguildDissolve);
 		}
 		
@@ -481,8 +498,20 @@ package com.rpgGame.app.manager.guild
 		/** 请求离开帮派 **/
 		public function guildExit():void
 		{
-			SocketConnection.send(new ReqGuildExitMessage());
+			var alertOk:AlertSetInfo=new AlertSetInfo(LangAlertInfo.quit_guild,guildData.name);
+			GameAlert.showAlert(alertOk,sureguildExit);
 		}
+		
+		private function sureguildExit(gameAlert:GameAlert):void
+		{
+			switch(gameAlert.clickType)
+			{
+				case AlertClickTypeEnum.TYPE_SURE:
+					SocketConnection.send(new ReqGuildExitMessage());
+					break;
+			}
+		}
+		
 		/** 获取帮派列表 **/
 		public function reqGuildList(page:int,isfull:int,opaque:int):void
 		{
@@ -516,9 +545,9 @@ package com.rpgGame.app.manager.guild
 				return false;
 			if(_questreqGuildJoinOpaque != opaque)
 				return false;
+			_questreqGuildJoinOpaque = 0;
 			if(result==0)
 			{
-				_questreqGuildJoinOpaque = 0;
 				return true;
 			}
 			requestGuildInfo();
@@ -574,7 +603,7 @@ package com.rpgGame.app.manager.guild
 				return ;
 			_guildData.isAutoApply = type;
 			var msg:ReqGuildSetAutoAcceptMessage = new ReqGuildSetAutoAcceptMessage();
-			msg.type = value?1:0;
+			msg.type = type;
 			SocketConnection.send(msg);
 		}
 		
@@ -598,16 +627,29 @@ package com.rpgGame.app.manager.guild
 		private var _killOpaque:int;
 		private var _killplayerInfo:GuildMemberInfo
 		/** 请求提出成员 **/
-		public function guildKill(playerId:String):void
+		public function guildKill(playerId:long):void
 		{
 			if(_killOpaque!=0)
 				return ;
-			_killOpaque = GuildManager.opaque;
-			var msg:ReqGuildKillMessage = new ReqGuildKillMessage();
-			_killplayerInfo = this.getGuildMemberInfoById(playerId);
-			msg.playerId = _killplayerInfo.id;
-			msg.opaque = _killOpaque;
-			SocketConnection.send(msg);
+			_killplayerInfo = this.getGuildMemberInfoById(playerId.hexValue);
+			var alertOk:AlertSetInfo=new AlertSetInfo(LangAlertInfo.expel_guild,_killplayerInfo.name);
+			GameAlert.showAlert(alertOk,sureGuildKill);
+			
+		}
+		
+		private function sureGuildKill(gameAlert:GameAlert):void
+		{
+			switch(gameAlert.clickType)
+			{
+				case AlertClickTypeEnum.TYPE_SURE:
+					_killOpaque = GuildManager.opaque;
+					var msg:ReqGuildKillMessage = new ReqGuildKillMessage();
+					msg.playerId = _killplayerInfo.id;
+					msg.opaque = _killOpaque;
+					SocketConnection.send(msg);
+					break;
+			}
+			
 		}
 		/** 请求任命成员 **/
 		public function guildAppoint(playerId:long,memberType:int,type:int,opaque:int):void
@@ -645,6 +687,8 @@ package com.rpgGame.app.manager.guild
 				return true;
 			}
 			_guildData.level++;
+			_guildData.active -= _guildLevelInfo.q_active;
+			updataGuildData(_guildData);
 			EventManager.dispatchEvent(GuildEvent.GUILD_DATA_INIT);
 			return false;
 		}
@@ -680,6 +724,8 @@ package com.rpgGame.app.manager.guild
 		 */
 		public function getGuildMemberInfoById(id:String):GuildMemberInfo
 		{
+			if(_memberList == null)
+				return null;
 			var length:int = _memberList.length;
 			for(var i:int = 0;i<length;i++)
 			{
@@ -850,8 +896,8 @@ package com.rpgGame.app.manager.guild
 		private var _skillType:int;
 		public function guildSkillLevelup(type:int,data:Q_guildskill):void
 		{
-			if(_skillOpaque>0)
-				return ;
+//			if(_skillOpaque>0)
+//				return ;
 			if(data==null)
 				return ;
 			
@@ -885,7 +931,6 @@ package com.rpgGame.app.manager.guild
 			msg.skillId = _skillData.q_skillid;
 			SocketConnection.send(msg);
 		}
-		
 		/** 更新升级技能 */
 		private function refeashSkillOpaque(opaque:int,result:int):Boolean
 		{
@@ -893,9 +938,10 @@ package com.rpgGame.app.manager.guild
 				return false;
 			if(_skillOpaque != opaque)
 				return false;
-			_skillOpaque = 0;
+			
 			if(result==0)
 			{
+				_skillOpaque = 0;
 				return true;
 			}
 			var skill:GuildSkillInfo;
@@ -929,6 +975,7 @@ package com.rpgGame.app.manager.guild
 			}
 			_selfMemberInfo.contribution -= _skillData.q_costvalue;
 			EventManager.dispatchEvent(GuildEvent.GUILD_SKILLINFO_CHAGE);
+			_skillOpaque = 0;
 			return true;
 		}
 		
@@ -946,21 +993,33 @@ package com.rpgGame.app.manager.guild
 			if(MainRoleManager.isSelf(msg.playerId.ToGID()))
 			{
 				ClientConfig.loginData.guildId = msg.guildId;
+				ClientConfig.loginData.guildMemberType = msg.guildMemberType;
 				if(!haveGuild)
 					EventManager.dispatchEvent(GuildEvent.GUILD_DATA_INIT);
 				else
 					this.requestGuildInfo();
 				_needSwitchChange = true;
-			}else{
+			}else if(this.haveGuild){
 				var playerInfo:GuildMemberInfo = this.getGuildMemberInfoById(msg.playerId.hexValue);
 				var index:int = _memberList.indexOf(playerInfo);
-				if(index>=0)
+				if(msg.guildId.IsZero())
 				{
-					_memberList.splice(index,0);
+					if(index>=0)
+					{
+						_memberList.splice(index,0);
+					}
+					_guildData.memberNum-- ;
+					EventManager.dispatchEvent(GuildEvent.GUILD_FAMILY_CHANGE);
+				}else{
+					if(index<0)
+						this.requestGuildInfo();
+					else{
+						playerInfo.memberType = msg.guildMemberType;
+						EventManager.dispatchEvent(GuildEvent.GUILD_FAMILY_CHANGE);
+					}
 				}
-				_guildData.memberNum-- ;
-				EventManager.dispatchEvent(GuildEvent.GUILD_FAMILY_CHANGE);
 			}
+			
 			
 		}
 		

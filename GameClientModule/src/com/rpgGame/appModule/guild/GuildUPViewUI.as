@@ -54,43 +54,33 @@ package com.rpgGame.appModule.guild
 				_skin.lbMsg2.htmlText = "已满级";
 			
 			
-			if(GuildManager.instance().getGuildHaveCityByIndex(0))
-			{
-				_skin.btnRenwu.filter = null
-			}else{
-				GrayFilter.gray(_skin.btnRenwu);
-			}
 			
-			if(GuildManager.instance().getGuildHaveCityByIndex(1))
+			/*if(GuildManager.instance().getGuildHaveCityByIndex(1))
 			{
 				_skin.btnZhengba.filter = null
 			}else{
 				GrayFilter.gray(_skin.btnZhengba);
-			}
-			
-			if(GuildManager.instance().getGuildHaveCityByIndex(2))
-			{
-				_skin.btnJuanxian.filter = null
-			}else{
-				GrayFilter.gray(_skin.btnJuanxian);
-			}
+			}*/
 			
 			
-			var startActive:int = 0;
-			var lastGuildInfo:Q_guild = GuildCfgData.getLevelInfo(guildInfo.level-1);
-			if(lastGuildInfo!=null)
-				startActive = lastGuildInfo.q_active;
-			var have:int = guildInfo.active - startActive;
-			var need:int = currentGuildInfo.q_active - startActive;
-			var percent:Number = have/need;
+			var guildLevel:Q_guild = GuildManager.instance().guildLevelInfo;
+			var percent:Number = guildInfo.active/guildLevel.q_active;
 			if(percent >=1)
 				percent = 1;
 			_skin.proJindu.value = _skin.proJindu.maximum*percent;
-			_skin.lbJindu.text =  have.toString()+"/"+need.toString();
+			_skin.lbJindu.text =  guildInfo.active.toString()+"/"+guildLevel.q_active.toString();
 			
 			_skin.lbBanhuiZhanli.text = guildInfo.battle.toString();
 			_skin.lbBanhuiDengji.text = guildInfo.level.toString();
-			_skin.btnUp.visible = GuildManager.instance().canUpgrad;
+			if(nextGuildInfo == null)
+			{
+//				_skin.lbMsg2.htmlText = nextGuildInfo.q_privilege_show;
+				_skin.btnUp.visible =false;
+				_skin.imgmax.visible = true;
+			}else{
+				_skin.btnUp.visible = GuildManager.instance().canUpgrad;
+				_skin.imgmax.visible = false;
+			}
 		}
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
@@ -98,8 +88,10 @@ package com.rpgGame.appModule.guild
 			switch(target)
 			{
 				case _skin.btnRenwu:
-				case _skin.btnZhengba:
 				case _skin.btnJuanxian:
+					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_BANGHUI_INFO,null,false);
+					break;
+				case _skin.btnZhengba:
 					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_BANGHUI_COMBAT,null,false);
 					break;
 				case _skin.btnUp:

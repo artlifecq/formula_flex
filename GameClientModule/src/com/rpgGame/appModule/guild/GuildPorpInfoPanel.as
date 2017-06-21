@@ -1,8 +1,9 @@
 package com.rpgGame.appModule.guild
 {
 	import com.rpgGame.app.manager.guild.GuildManager;
-	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.core.events.GuildEvent;
+	import com.rpgGame.core.manager.StarlingLayerManager;
+	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.GuildCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_guild;
 	import com.rpgGame.netData.guild.bean.GuildBriefnessInfo;
@@ -12,10 +13,19 @@ package com.rpgGame.appModule.guild
 	import org.mokylin.skin.app.banghui.TanKuang_JianJie;
 	
 	import starling.display.DisplayObject;
-	import starling.display.DisplayObjectContainer;
 	
-	public class GuildPorpInfoPanel extends SkinUIPanel
+	public class GuildPorpInfoPanel extends SkinUI
 	{
+		private static var _instance:GuildPorpInfoPanel;
+		
+		public static function get instance():GuildPorpInfoPanel
+		{
+			if(_instance==null)
+			{
+				_instance = new GuildPorpInfoPanel();
+			}
+			return _instance;
+		}
 		private var _skin:TanKuang_JianJie;
 		private var _guildId:long;
 		private var _levelInfo:Q_guild;
@@ -24,13 +34,20 @@ package com.rpgGame.appModule.guild
 			_skin = new TanKuang_JianJie();
 			super(_skin);
 		}
-		
-		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
+		override protected function onShow():void
 		{
-			super.show(data,openTable,parentContiner);
-			_guildId = data as long;
-//			refeashView();
+			super.onShow();
 			EventManager.addEvent(GuildEvent.GUILD_INFO_CHANGE,refeashView);
+			this.x = (stage.stageWidth- this._skin.width)/2;
+			this.y = (stage.stageHeight - this._skin.height)/2;
+		}
+		public function show(guild:long):void
+		{
+			_guildId = guild;
+			if(this.parent==null)
+			{
+				StarlingLayerManager.topUILayer.addChild(this);
+			}
 			GuildManager.instance().reqGuildBriefnessInfo(_guildId,0);
 		}
 		
@@ -46,10 +63,9 @@ package com.rpgGame.appModule.guild
 			_skin.btnOk.visible = !GuildManager.instance().haveGuild;
 		}
 		
-		
-		override public function hide():void
+		override protected function onHide():void
 		{
-			super.hide();
+			super.onHide();
 			EventManager.removeEvent(GuildEvent.GUILD_INFO_CHANGE,refeashView);
 		}
 		override protected function onTouchTarget(target:DisplayObject):void

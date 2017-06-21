@@ -61,6 +61,7 @@ package com.rpgGame.appModule.guild
 			if(lable == eduit.text)
 			{
 				eduit.text = "";
+				eduit.color = 0xffffff;
 			}
 		}
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -76,6 +77,7 @@ package com.rpgGame.appModule.guild
 			var eduit:TextFieldTextEditor = evt.target as TextFieldTextEditor;
 			if(eduit.text == "")
 			{
+				eduit.color = 0x8B8D7B;
 				if(eduit == _skin.lbXuanYan)
 				{
 					eduit.text = GuildManager.instance().defaultMsg;
