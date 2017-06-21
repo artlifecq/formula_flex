@@ -110,6 +110,9 @@ package com.rpgGame.app.manager
 		public static function setActState(id:int,state:int):void
 		{
 			var info:ActivetyInfo=ActivetyCfgData.getActInfoById(id);
+			if(!info.info){
+				return;
+			}
 			info.info.joinState=state;
 			ActivetyCfgData.sortTypeList(info.info.activityType);
 		}

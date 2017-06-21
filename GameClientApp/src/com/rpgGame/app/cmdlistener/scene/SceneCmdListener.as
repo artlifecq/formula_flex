@@ -276,7 +276,7 @@ package com.rpgGame.app.cmdlistener.scene
 			}
 			var heroData : HeroData = role.data as HeroData; 
 			heroData.cloths=msg.armorResId;
-			AvatarManager.callEquipmentChange(role);
+			AvatarManager.updateAvatar(role);
 		}
 		
 		private function onResHelmChangeMessage(msg:ResHelmChangeMessage):void
@@ -287,7 +287,7 @@ package com.rpgGame.app.cmdlistener.scene
 			}
 			var heroData : HeroData = role.data as HeroData; 
 			heroData.hair=msg.helmResId;
-			AvatarManager.callEquipmentChange(role);
+			AvatarManager.updateAvatar(role);
 		}
 		private function onResWeaponChangeMessage(msg:ResWeaponChangeMessage):void
 		{
@@ -298,7 +298,7 @@ package com.rpgGame.app.cmdlistener.scene
 			var heroData : HeroData = role.data as HeroData; 
 			heroData.weapon=msg.weaponResId;
 			heroData.deputyWeapon=msg.deputyWeaponResId;
-			AvatarManager.callEquipmentChange(role);
+			AvatarManager.updateAvatar(role);
 		}
 		
 		/**
