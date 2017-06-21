@@ -1,6 +1,7 @@
 
 package com.rpgGame.core.app
 {
+	import com.rpgGame.appModule.npc;
 	import com.rpgGame.core.app.enum.PanelPosType;
 	
 	import flash.utils.Dictionary;
@@ -147,6 +148,27 @@ package com.rpgGame.core.app
 		public static var ACTIVETY_BOSS_RESULT:String = createAppInfo("activety.boss.BossFightSuccessPanel","activety");
 		/** 活动开启 **/
 		public static var ACTIVETY_OPEN:String = createAppInfo("activety.ActOpenPanel");
+		
+		/**
+		 *天降礼金排行榜
+		 */
+		public static var ACTIVETY_LIJIN_SCORES:String = createAppInfo( "activety.zonghe.lijin.LijinScoresPanel","activety");
+		/**
+		 *天降礼金刷怪倒计时
+		 */
+		public static var ACTIVETY_LIJIN_TIMER:String = createAppInfo( "activety.zonghe.lijin.LijinMonsterTimerPanel","activety");
+		/**
+		 *天降礼金刷怪出现
+		 */
+		public static var ACTIVETY_LIJIN_REFRESH:String = createAppInfo( "activety.zonghe.lijin.LijinMonsterRefreshPanel","activety");
+		/**
+		 *天降礼金结算
+		 */
+		public static var ACTIVETY_LIJIN_RESULT:String = createAppInfo( "activety.zonghe.lijin.LijinResultPanel","activety");
+		
+		
+		
+		
 		/**
 		 *装备面板
 		 */
@@ -449,5 +471,9 @@ package com.rpgGame.core.app
 		public static var BATTLE_NINE_TOWER_NOTICE_PANEL:String = createAppInfo("battle.jcyt.NineTowerEnterNoticePanelExt","zhanchang");
 		/**9t战斗结束**/
 		public static var BATTLE_NINE_TOWER_RESULT_PANEL:String = createAppInfo("battle.jcyt.NineTowerFightResultPanelExt","zhanchang");
+		/**npc闲话**/
+		public static var NPC_SPEAK:String = createAppInfo("npc.NpcSpeak","npc");
+		
+		
 	}
 }

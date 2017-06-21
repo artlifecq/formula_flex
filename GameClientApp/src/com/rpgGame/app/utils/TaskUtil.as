@@ -959,7 +959,14 @@ package com.rpgGame.app.utils
 			}
 			
 		}
-		
+		public static function removeLabelEvet(labelDisplay:Label):void
+		{
+			if(labelDisplay)
+			{
+				labelDisplay.removeEventListener(TouchEvent.TOUCH, onTouch);
+			}
+			
+		}
 		
 		private static var isMouseOut : Boolean = true;
 		private static var outY:int=0;

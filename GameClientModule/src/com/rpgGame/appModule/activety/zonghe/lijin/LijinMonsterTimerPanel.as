@@ -1,33 +1,47 @@
-package com.rpgGame.appModule.dungeon.multy
+package com.rpgGame.appModule.activety.zonghe.lijin
 {
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	
-	import org.mokylin.skin.app.fuben.FuBenTanKuang1;
-	import org.mokylin.skin.app.fuben.FuBen_JinRuTime;
+	import org.mokylin.skin.app.activety.zonghe.Active_LiJin_DaoJiShi;
 	
-	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 	
 	import utils.TimerServer;
 
 	/**
-	* 副本进入倒计时框
-	* @author yt
-	* 
-	*/
-	public class MultyEnterTimePanel extends SkinUIPanel
+	 * 天降礼金刷怪倒计时
+	 * @author YT
+	 * 
+	 */	
+	public class LijinMonsterTimerPanel extends SkinUIPanel
 	{
-		private var _skin :FuBen_JinRuTime;
-		public function MultyEnterTimePanel()
+		private var _skin:Active_LiJin_DaoJiShi;
+		public function LijinMonsterTimerPanel()
 		{
-			_skin=new FuBen_JinRuTime();
+			_skin = new Active_LiJin_DaoJiShi();
 			super(_skin);
+			init();
 		}
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
 			setTime();
-			
+		}
+		override public function hide():void
+		{
+			super.hide();
+			TimerServer.remove(updateTime);
+		}
+		override protected function onStageResize(sw : int, sh : int) : void
+		{
+			this.x=sw/2-this.width/2;
+			this.y=sh/6;
+		}
+		private function init():void
+		{
+		
 		}
 		private var remainTime:int;
 		private function setTime():void
@@ -50,21 +64,10 @@ package com.rpgGame.appModule.dungeon.multy
 			if(remainTime==0){
 				hide();
 				TimerServer.remove(updateTime);
+				AppManager.showApp(AppConstant.ACTIVETY_LIJIN_REFRESH);
 			}
 		}
-		override public function hide():void 
-		{
-			super.hide();
-			TimerServer.remove(updateTime);
-		}
-		override protected function onTouchTarget(target:DisplayObject):void 
-		{
-			super.onTouchTarget(target);
-		}
-		override protected function onStageResize(sw : int, sh : int) : void
-		{
-			this.x=sw/2-this.width/2;
-			this.y=sh/6;
-		}
+		
+		
 	}
 }

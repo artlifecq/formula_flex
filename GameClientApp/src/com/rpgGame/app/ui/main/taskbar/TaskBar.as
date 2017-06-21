@@ -2,16 +2,22 @@ package com.rpgGame.app.ui.main.taskbar
 {
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
+	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.TaskSender;
+	import com.rpgGame.app.ui.main.head.NpcSpeakBubble;
 	import com.rpgGame.app.utils.TaskUtil;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.core.events.UserMoveEvent;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
+	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.type.TaskType;
 	
 	import gs.TweenMax;
@@ -185,7 +191,25 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				TaskControl.showLeadPanel();
 			}
-			
+			else //npc闲话
+			{
+				var role:SceneRole = SceneManager.getSceneObjByID(serverID.ToGID()) as SceneRole;
+				if (role != null&& role.data !=null) 
+				{
+					var speak:String=MonsterDataManager.getNpcSpeak(npcId);
+					if(speak!=""&&!AppManager.isAppInScene(AppConstant.NPC_SPEAK))
+					{
+						role.headFace.addChild(NpcSpeakBubble.speakBubble(speak));
+					}
+					
+				}
+				/*var speak:String=MonsterDataManager.getNpcSpeak(npcId);
+				if(speak!=""&&!AppManager.isAppInScene(AppConstant.NPC_SPEAK))
+				{
+					AppManager.showApp(AppConstant.NPC_SPEAK,speak);
+				}*/
+				
+			}
 		}
 	
 		/**接受任务信息初始化*/
