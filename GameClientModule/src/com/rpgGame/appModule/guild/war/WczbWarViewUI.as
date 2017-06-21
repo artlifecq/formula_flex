@@ -2,7 +2,7 @@ package com.rpgGame.appModule.guild.war
 {
 	import com.rpgGame.app.ui.tab.ViewUI;
 	
-	import feathers.controls.StateSkin;
+	import org.mokylin.skin.app.banghui.wangcheng.WangCheng_Skin;
 	
 	import starling.display.DisplayObject;
 	
@@ -13,10 +13,10 @@ package com.rpgGame.appModule.guild.war
 	 */
 	public class WczbWarViewUI extends ViewUI
 	{
-		private var _skin:StateSkin;
-		public function WczbWarViewUI(skin:StateSkin=null)
+		private var _skin:WangCheng_Skin;
+		public function WczbWarViewUI()
 		{
-			_skin=new StateSkin();
+			_skin=new WangCheng_Skin();
 			super(_skin);
 			initView();
 		}

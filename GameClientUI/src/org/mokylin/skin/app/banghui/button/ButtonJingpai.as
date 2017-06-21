@@ -1,6 +1,5 @@
 package org.mokylin.skin.app.banghui.button
 {
-	import feathers.controls.text.Fontter;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
@@ -10,7 +9,7 @@ package org.mokylin.skin.app.banghui.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class ButtonYeqian extends feathers.controls.StateSkin
+	public class ButtonJingpai extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -23,28 +22,14 @@ package org.mokylin.skin.app.banghui.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function ButtonYeqian()
+		public function ButtonJingpai()
 		{
 			super();
 			
-			this.currentState = "upAndSelected";
+			this.currentState = "down";
 			this.elementsContent = [];
 			
 			states = {
-				hover:[
-						{target:"labelDisplay",
-							name:"color",
-							value:0xcfc6ae
-						}
-					]
-				,
-				up:[
-						{target:"labelDisplay",
-							name:"color",
-							value:0x8b8d7b
-						}
-					]
-				,
 				init:[
 						{target:"labelDisplay",
 							name:"textAlign",
@@ -53,12 +38,7 @@ package org.mokylin.skin.app.banghui.button
 						,
 						{target:"labelDisplay",
 							name:"color",
-							value:0x8b8d7b
-						}
-						,
-						{target:"labelDisplay",
-							name:"nativeFilters",
-							value:Fontter.filterObj["labelFilterBlack"]
+							value:0xFFFFFF
 						}
 						,
 						{target:"labelDisplay",
@@ -67,12 +47,7 @@ package org.mokylin.skin.app.banghui.button
 						}
 					]
 			};
-			skinNames={"down":"ui/app/banghui/button/yeqian/down.png",
-			"downAndSelected":"ui/app/banghui/button/yeqian/over.png",
-			"hover":"ui/app/banghui/button/yeqian/over.png",
-			"overAndSelected":"ui/app/banghui/button/yeqian/over.png",
-			"up":"ui/app/banghui/button/yeqian/up.png",
-			"upAndSelected":"ui/app/banghui/button/yeqian/over.png"};
+			skinNames={"down":"ui/app/banghui/button/jingpai/down.png", "hover":"ui/app/banghui/button/jingpai/over.png", "up":"ui/app/banghui/button/jingpai/up.png"};
 		}
 
 
@@ -97,8 +72,7 @@ package org.mokylin.skin.app.banghui.button
 			temp.right = 0;
 			temp.text = "";
 			temp.textAlign = "center";
-			temp.color = 0x8b8d7b;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xFFFFFF;
 			temp.top = 0;
 			temp.verticalAlign = "middle";
 			return temp;
