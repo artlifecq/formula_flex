@@ -40,6 +40,8 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.state.role.control.HushState;
 	import com.rpgGame.app.state.role.control.JumpRiseState;
 	import com.rpgGame.app.state.role.control.MountRideState;
+	import com.rpgGame.app.state.role.control.MysteryManState;
+	import com.rpgGame.app.state.role.control.NineTowerFightFlagState;
 	import com.rpgGame.app.state.role.control.PrewarWaitingState;
 	import com.rpgGame.app.state.role.control.RidingState;
 	import com.rpgGame.app.state.role.control.ScaredMoveState;
@@ -148,6 +150,7 @@ package com.rpgGame.app.state.role
 		stateMapping[RoleStateType.CONTROL_SHAPESHIFTING] = ShapeshiftingState;
 		stateMapping[RoleStateType.CONTROL_SHORTCUTGRID] = ShortcutGridState;
 		stateMapping[RoleStateType.CONTROL_SKILL_WARNING] = SkillWarningState;
+		stateMapping[RoleStateType.CONTROL_TOWER_FLAG] = NineTowerFightFlagState;
 		private var _role : SceneRole;
 		private var _lastCanShowRiding : Boolean;
 		
@@ -444,7 +447,11 @@ package com.rpgGame.app.state.role
 			var state : IState = getCurrState(ShapeshiftingState);
 			return state != null;
 		}
-		
+		public function get isMysteryMan():Boolean
+		{
+			var state : IState = getCurrState(MysteryManState);
+			return state != null;
+		}
 		override protected function createState(type : int) : IState
 		{
 			var state : IState = null;

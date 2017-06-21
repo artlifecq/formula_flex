@@ -27,6 +27,8 @@ package com.rpgGame.app.graphics
 	
 	import app.message.MonsterDataProto.MonsterType;
 	
+	import away3d.bounds.NullBounds;
+	
 	import feathers.controls.UIAsset;
 	import feathers.controls.UIMovieClip;
 	import feathers.themes.GuiTheme;
@@ -114,6 +116,7 @@ package com.rpgGame.app.graphics
 		public var flowerY : int = 0;
 		private var showBloodTween:TweenLite;
 		private var _teamCaptainFlag:UIAsset;
+		private var _towerFlag:UIAsset;
 		public function HeadFace(role : SceneRole)
 		{
 			super();
@@ -202,6 +205,10 @@ package com.rpgGame.app.graphics
 		//---------------------------------------------
 		override protected function updateShowAndHide() : void
 		{
+			if (!_role) 
+			{
+				return;
+			}
 			var nameVisible : Boolean = _role.getAttachVisible(AttachDisplayType.ROLE_HEAD_NAME);
 			if (_role.type == SceneCharType.NPC) //NPC，不管是否被选中都显示
 			{
@@ -273,6 +280,8 @@ package com.rpgGame.app.graphics
 			}
 			else if (_role.type == SceneCharType.PLAYER) //玩家
 			{
+				//神秘人buff只显示名字和血条
+				var isMysteryMan:Boolean=false;
 				if (_role.isMainChar) //自己
 				{
 					//显示血条、称号、昵称
@@ -280,9 +289,11 @@ package com.rpgGame.app.graphics
 					showAndHideElement(_guildNameBar, !_isCamouflage);
 					showAndHideElement(_familNameBar, !_isCamouflage);
 					showAndHideElement(_bloodBar, true,DecorCtrl.TOP_HPMP);
+					isMysteryMan=false;
 				}
 				else
 				{
+					isMysteryMan=_role.stateMachine.isMysteryMan;
 					showAndHideElement(_bodyImage, !_isCamouflage);
 					//名字、称号
 					showAndHideElement(_nameBar, nameVisible && !_isCamouflage,DecorCtrl.TOP_NAME);
@@ -290,18 +301,18 @@ package com.rpgGame.app.graphics
 					//选中显示
 					//showAndHideElement( _bloodBar, _isSelected );
 					showAndHideElement(_bloodBar, true,DecorCtrl.TOP_HPMP);
-					showAndHideElement(_guildNameBar, _isSelected && !_isCamouflage);
-					showAndHideElement(_familNameBar, _isSelected && !_isCamouflage);
+					showAndHideElement(_guildNameBar, !isMysteryMan&&_isSelected && !_isCamouflage);
+					showAndHideElement(_familNameBar, !isMysteryMan&&_isSelected && !_isCamouflage);
 				}
-				showAndHideElement(_title, !_isCamouflage);
-				showAndHideElement(_office, !_isCamouflage);
-				updateTeamFlag(Mgr.teamMgr.isMyCaptian(HeroData(_role.data).serverID));
+				showAndHideElement(_title, !isMysteryMan&&!_isCamouflage);
+				showAndHideElement(_office, !isMysteryMan&&!_isCamouflage);
+				updateTeamFlag(!isMysteryMan&&Mgr.teamMgr.isMyCaptian(HeroData(_role.data).serverID));
 			}
-			showAndHideElement(_junXianBar, _nameBar && _nameBar.parent && _nameBar.visible);
+			showAndHideElement(_junXianBar, !isMysteryMan&&_nameBar && _nameBar.parent && _nameBar.visible);
 			//			showAndHideElement(_countryNameBar, _nameBar && _nameBar.parent && _nameBar.visible);
-			showAndHideElement(_biaoFlagIcon, _nameBar && _nameBar.parent && _nameBar.visible);
-			showAndHideElement(_countryWarIcon, _nameBar && _nameBar.parent && _nameBar.visible);
-			showAndHideElement(_familyWarIcon, _nameBar && _nameBar.parent && _nameBar.visible);
+			showAndHideElement(_biaoFlagIcon, !isMysteryMan&&_nameBar && _nameBar.parent && _nameBar.visible);
+			showAndHideElement(_countryWarIcon,!isMysteryMan&& _nameBar && _nameBar.parent && _nameBar.visible);
+			showAndHideElement(_familyWarIcon,!isMysteryMan&& _nameBar && _nameBar.parent && _nameBar.visible);
 			showAndHideElement(_moodMC, true);
 		}
 		
@@ -956,6 +967,11 @@ package com.rpgGame.app.graphics
 		{
 			super.removeBodyRender();
 			bind(null, null);
+			if (showBloodTween) 
+			{
+				showBloodTween.kill();
+				showBloodTween=null;
+			}
 			if (_nameBar != null)
 			{
 				deCtrl.removeTop(_nameBar);
@@ -1015,6 +1031,8 @@ package com.rpgGame.app.graphics
 			removeIco();
 			removeBodyIco();
 			TweenLite.killDelayedCallsTo(hideMoodMC);
+			updateTeamFlag(false);
+			updateTowerFlag(false);
 		}
 		
 		override public function showHead() : void
@@ -1211,6 +1229,31 @@ package com.rpgGame.app.graphics
 				//	deCtrl.sortTop();
 				}
 			}
+		}
+		public function updateTowerFlag(bShow:Boolean):void
+		{
+			if (bShow) 
+			{
+				if (!_towerFlag) 
+				{
+					_towerFlag=new UIAsset();
+					_towerFlag.styleName="ui/mainui/guaji/vunludi.png";
+				}
+				deCtrl.addTop(_towerFlag,DecorCtrl.TOP_TOWER);
+			}
+			else 
+			{
+				if (_towerFlag) 
+				{
+					deCtrl.removeTop(_towerFlag);
+					_towerFlag.dispose();
+					_towerFlag=null;
+				}
+			}
+		}
+		public function updateMysteryMan():void
+		{
+			updateShowAndHide();
 		}
 	}
 }

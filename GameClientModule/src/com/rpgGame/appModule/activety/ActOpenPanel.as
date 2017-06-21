@@ -41,15 +41,23 @@ package com.rpgGame.appModule.activety
 		{
 			super.onTouchTarget(target);
 			if(target==_skin.btn_ok){
-				//巅峰对决特殊处理
-				if (1==actInfo.actCfg.q_activity_id) 
+				switch(actInfo.actCfg.q_activity_id)
 				{
-					Mgr.d1v1Mgr.autoJoin();
-				}
-				else
-				{
-//					AppManager.showAppNoHide(actInfo.cfg.q_notice_trans,actInfo);
-					AppManager.showAppNoHide(actInfo.actCfg.q_notice_trans,actInfo,actInfo.actCfg.q_trans_funcID);
+					case 1:
+					{
+						Mgr.d1v1Mgr.autoJoin();
+						break;
+					}
+					case 2:
+					{
+						Mgr.nineTowerMgr.autoJoin();
+						break;
+					}	
+					default:
+					{
+						AppManager.showAppNoHide(actInfo.actCfg.q_notice_trans,actInfo,actInfo.actCfg.q_trans_funcID);
+						break;
+					}
 				}
 				this.hide()
 			}

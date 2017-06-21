@@ -94,5 +94,7 @@ package com.rpgGame.coreData.type
 		public static const D1V1_RANK_TIP : int = rEnum.next;
 		/** 巅峰1v1rank*/
 		public static const D1V1_RANK_REWARD_TIP : int = rEnum.next;
+		/** 巅峰1v1rank*/
+		public static const TWOER_TIP : int = rEnum.next;
 	}
 }

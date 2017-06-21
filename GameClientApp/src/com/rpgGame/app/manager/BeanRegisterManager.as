@@ -25,6 +25,7 @@
 	import com.rpgGame.app.cmdlistener.MailCmdListener;
 	import com.rpgGame.app.cmdlistener.MeridianCmdListerner;
 	import com.rpgGame.app.cmdlistener.MiscCmdListener;
+	import com.rpgGame.app.cmdlistener.NineTowerCmdListener;
 	import com.rpgGame.app.cmdlistener.NotifyCmdListener;
 	import com.rpgGame.app.cmdlistener.NpcCmdListener;
 	import com.rpgGame.app.cmdlistener.RoleStateCmdListener;
@@ -158,6 +159,7 @@
 			register("JJBattleCmdListener", JJBattleCmdListener); //模块号7
 			register("SpecialActivitiesCmdListener", SpecialActivitiesCmdListener); //模块号7
 			register("DFBattleCmdListener", DFBattleCmdListener); //模块号7
+			register("NineTowerCmdListener",NineTowerCmdListener);
 		}
 	}
 }

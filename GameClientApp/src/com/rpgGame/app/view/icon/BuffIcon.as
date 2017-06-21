@@ -43,7 +43,16 @@ package com.rpgGame.app.view.icon
 			_isshowbg=isShowBG;
 			
 		}
-		
+		override protected function calIconPos():void
+		{
+			switch(_iconSize){
+				case IcoSizeEnum.ICON_36:
+				case IcoSizeEnum.ICON_48:
+				case IcoSizeEnum.ICON_42:
+					_iconPositionX=_iconPositionY=0;
+					break;
+			}
+		}
 		override public function sortLayer():void
 		{
 			if( _bgImage != null )

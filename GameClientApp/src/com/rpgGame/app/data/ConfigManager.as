@@ -49,6 +49,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.MapPreLoadData;
 	import com.rpgGame.coreData.cfg.MazeCfgData;
 	import com.rpgGame.coreData.cfg.NewFuncCfgData;
+	import com.rpgGame.coreData.cfg.NineTowerCfg;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.RaceCfgData;
 	import com.rpgGame.coreData.cfg.RelationCfgData;
@@ -295,6 +296,7 @@ package com.rpgGame.app.data
 			//功能开启
 			//ClientFunctionOpenCfgData.setup(dic["data.ClientFunctionOpen"]);
 			BattleRankCfg.setup(dic[ConfigClassRegister.Q_battle_rank]);//多人副本
+			NineTowerCfg.setup(dic[ConfigClassRegister.Q_nine_tower]);//多人副本
 		}
 		
 		/**

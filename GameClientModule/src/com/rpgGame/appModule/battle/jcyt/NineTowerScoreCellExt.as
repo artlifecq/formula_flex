@@ -2,6 +2,7 @@ package com.rpgGame.appModule.battle.jcyt
 {
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.GameColorUtil;
+	import com.rpgGame.netData.yaota.bean.YaoTaInfo;
 	
 	import org.mokylin.skin.app.zhanchang.jiucengyaota.JiFenPaiHang_Item;
 	
@@ -16,11 +17,11 @@ package com.rpgGame.appModule.battle.jcyt
 		
 		}
 		
-		public function setData(data:*):void
+		public function setData(data:YaoTaInfo):void
 		{
-			var rank:int;
-			var name:String;
-			var score:int;
+			var rank:int=data.rank;
+			var name:String=data.playerName;
+			var score:int=data.integral;
 			
 			if (rank<=3) 
 			{
@@ -50,6 +51,8 @@ package com.rpgGame.appModule.battle.jcyt
 			}		
 			_skin.lbNum.text=score+"";
 			_skin.lbNum.color=color;
+			_skin.lbName.color=color;
+			_skin.lbName.text=name;
 		}
 	}
 }

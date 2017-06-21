@@ -129,8 +129,8 @@ package org.mokylin.skin.app.zhanchang
 			icon1 = temp;
 			temp.name = "icon1";
 			temp.styleName = "ui/common/grid/normal/64.png";
-			temp.x = 74;
-			temp.y = 215;
+			temp.x = 197;
+			temp.y = 210;
 			return temp;
 		}
 

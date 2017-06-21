@@ -44,8 +44,10 @@ package com.rpgGame.coreData.clientConfig
 		public var q_wave:int;
 		 /**  传送类型（0全图玩家传送） */
 		public var q_transfer_type:int;
-		 /**  传送有效区域，在区域内无须传送 */
-		public var q_transfer_effect_area:String;
+		 /**  有效战斗区域 */
+		public var q_damage_effect_area:String;
+		 /**  移除有效战斗区域 */
+		public var q_remove_damage_effect_area:String;
 		 /**  传送X坐标 */
 		public var q_x:int;
 		 /**  传送Y坐标 */

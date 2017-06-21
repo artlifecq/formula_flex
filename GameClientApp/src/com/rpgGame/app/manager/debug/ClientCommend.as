@@ -7,6 +7,7 @@ package   com.rpgGame.app.manager.debug
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.fight.spell.SkillAddPop;
 	import com.rpgGame.app.fight.spell.SpellHitHelper;
+	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
@@ -114,6 +115,10 @@ package   com.rpgGame.app.manager.debug
 			commandList.put( ".df", function (...arg):void
 			{
 				Mgr.d1v1Mgr.autoJoin();
+			});
+			commandList.put( ".head", function (...arg):void
+			{
+				(MainRoleManager.actor.headFace as HeadFace).updateTowerFlag(arg[0]==1);
 			});
 		}
 		

@@ -449,5 +449,7 @@ package com.rpgGame.core.app
 		public static var BATTLE_NINE_TOWER_NOTICE_PANEL:String = createAppInfo("battle.jcyt.NineTowerEnterNoticePanelExt","zhanchang");
 		/**9t战斗结束**/
 		public static var BATTLE_NINE_TOWER_RESULT_PANEL:String = createAppInfo("battle.jcyt.NineTowerFightResultPanelExt","zhanchang");
+		/**9t战斗结束**/
+		public static var BATTLE_NINE_TOWER_SCORE_PANEL:String = createAppInfo("battle.jcyt.NineTowerScorePanelExt","zhanchang");
 	}
 }

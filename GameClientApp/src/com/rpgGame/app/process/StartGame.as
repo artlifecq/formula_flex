@@ -38,6 +38,7 @@ package com.rpgGame.app.process
     import com.rpgGame.app.ui.tips.MountBeastCardTip;
     import com.rpgGame.app.ui.tips.MountSpellTips;
     import com.rpgGame.app.ui.tips.MountTip;
+    import com.rpgGame.app.ui.tips.NineTowerTipExt;
     import com.rpgGame.app.ui.tips.NormalTip;
     import com.rpgGame.app.ui.tips.OpenGridTip;
     import com.rpgGame.app.ui.tips.PKModeTip;
@@ -228,6 +229,8 @@ package com.rpgGame.app.process
 			TipManager.registerTipsParserClass(TipType.D1V1_TIP,D1v1TipExt);
 			TipManager.registerTipsParserClass(TipType.D1V1_RANK_TIP,D1v1RankTipExt);
 			TipManager.registerTipsParserClass(TipType.D1V1_RANK_REWARD_TIP,D1v1RankRewardExt);
+			TipManager.registerTipsParserClass(TipType.TWOER_TIP,NineTowerTipExt);
+			
 		}
 
 		private function onSwitchCmp() : void

@@ -1,8 +1,9 @@
 package com.rpgGame.appModule.battle
 {
 	import com.rpgGame.app.ui.TabBarPanel;
-	import com.rpgGame.appModule.battle.jjzb.JJBattlePanelExt;
 	import com.rpgGame.appModule.battle.dfdj.D1v1MainPanleExt;
+	import com.rpgGame.appModule.battle.jcyt.NineTowerMainPanelExt;
+	import com.rpgGame.appModule.battle.jjzb.JJBattlePanelExt;
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	
 	import org.mokylin.skin.app.zhanchang.ZhanChang_Skin;
@@ -20,9 +21,10 @@ package com.rpgGame.appModule.battle
 		}
 		override protected function initTabBarDatas():void
 		{
+			addTabDatas(TabBarSkin_pack,NineTowerMainPanelExt,EmFunctionID.EM_TOWERS);
 			addTabDatas(TabBarSkin_pack,D1v1MainPanleExt,EmFunctionID.EM_DIANFENGDUIJUE);
 			addTabDatas(TabBarSkin_pack,JJBattlePanelExt,EmFunctionID.EM_JINGJIZHENGBA);
-		
+			
 		}
 	}
 }

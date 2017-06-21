@@ -10,7 +10,7 @@ package com.rpgGame.netData.yaota.message{
 	 * 
 	 * 发送战旗信息
 	 */
-	public class SCMessage extends Message {
+	public class SCWarChessMessage extends Message {
 	
 		//战旗持有者
 		private var _playerName: String;

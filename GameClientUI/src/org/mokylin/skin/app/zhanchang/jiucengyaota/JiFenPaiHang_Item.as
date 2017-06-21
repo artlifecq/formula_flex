@@ -75,7 +75,7 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbName = temp;
 			temp.name = "lbName";
-			temp.fontSize = 12;
+			temp.fontSize = 14;
 			temp.text = "s1223 狼来了";
 			temp.textAlign = "left";
 			temp.color = 0xD02525;
@@ -83,7 +83,7 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			temp.underline = true;
 			temp.width = 109;
 			temp.x = 74;
-			temp.y = 9;
+			temp.y = 7;
 			return temp;
 		}
 
@@ -92,14 +92,14 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbNo = temp;
 			temp.name = "lbNo";
-			temp.fontSize = 12;
+			temp.fontSize = 14;
 			temp.text = "10";
 			temp.textAlign = "center";
 			temp.color = 0xEFD872;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 30;
 			temp.x = 19;
-			temp.y = 9;
+			temp.y = 7;
 			return temp;
 		}
 
@@ -108,7 +108,7 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbNum = temp;
 			temp.name = "lbNum";
-			temp.fontSize = 12;
+			temp.fontSize = 14;
 			temp.text = "662111";
 			temp.textAlign = "center";
 			temp.color = 0xD02525;
@@ -116,7 +116,7 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			temp.underline = false;
 			temp.width = 61;
 			temp.x = 210;
-			temp.y = 9;
+			temp.y = 7;
 			return temp;
 		}
 

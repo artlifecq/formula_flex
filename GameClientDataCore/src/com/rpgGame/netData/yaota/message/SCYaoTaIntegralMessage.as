@@ -15,6 +15,9 @@ package com.rpgGame.netData.yaota.message{
 	
 		//积分榜
 		private var _yaoTaInfo: Vector.<YaoTaInfo> = new Vector.<YaoTaInfo>();
+		//自己的数据
+		private var _myYaoTaInfo: YaoTaInfo;
+		
 		
 		/**
 		 * 写入字节缓存
@@ -26,6 +29,8 @@ package com.rpgGame.netData.yaota.message{
 			for (i = 0; i < _yaoTaInfo.length; i++) {
 				writeBean(_yaoTaInfo[i]);
 			}
+			//自己的数据
+			writeBean(_myYaoTaInfo);
 			return true;
 		}
 		
@@ -39,6 +44,8 @@ package com.rpgGame.netData.yaota.message{
 			for (i = 0; i < yaoTaInfo_length; i++) {
 				_yaoTaInfo[i] = readBean(YaoTaInfo) as YaoTaInfo;
 			}
+			//自己的数据
+			_myYaoTaInfo = readBean(YaoTaInfo) as YaoTaInfo;
 			return true;
 		}
 		
@@ -63,6 +70,21 @@ package com.rpgGame.netData.yaota.message{
 		 */
 		public function set yaoTaInfo(value: Vector.<YaoTaInfo>): void{
 			this._yaoTaInfo = value;
+		}
+		
+		/**
+		 * get 自己的数据
+		 * @return 
+		 */
+		public function get myYaoTaInfo(): YaoTaInfo{
+			return _myYaoTaInfo;
+		}
+		
+		/**
+		 * set 自己的数据
+		 */
+		public function set myYaoTaInfo(value: YaoTaInfo): void{
+			this._myYaoTaInfo = value;
 		}
 		
 	}

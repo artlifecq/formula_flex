@@ -7,6 +7,7 @@ package  com.rpgGame.appModule.battle.jcyt
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.netData.yaota.message.SCYaoTaAwardMessage;
 	
 	import flash.utils.getTimer;
 	
@@ -29,16 +30,17 @@ package  com.rpgGame.appModule.battle.jcyt
 			super(_skin);
 			this.dragAble=false;
 			_initStr="$s后自动关闭";
-			_gReward=new RewardGroup(_skin.icon1);
+			_gReward=new RewardGroup(_skin.icon1,1);
 		}
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,StarlingLayerManager.topUILayer);
-			var msg:*=data;
-			var score:int;
-			var rank:int;
+			var msg:SCYaoTaAwardMessage=data;
+			var score:int=msg.myYaoTaInfo.integral;
+			var rank:int=msg.myYaoTaInfo.rank;
 			_skin.lbZhanli.text=score+"";
 			_skin.lbPaiming.text=""+rank;
+			_gReward.setRewardByTeamItemInfo(msg.tempItems);
 			if (!_timer) 
 			{
 				_timer=new GameTimer("D1v1FightResultPanelExt");

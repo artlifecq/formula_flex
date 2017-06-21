@@ -114,7 +114,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 52;
-			temp.x = 324;
+			temp.x = 328;
 			temp.y = 4;
 			return temp;
 		}
@@ -129,7 +129,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 74;
-			temp.x = 218;
+			temp.x = 238;
 			temp.y = 4;
 			return temp;
 		}

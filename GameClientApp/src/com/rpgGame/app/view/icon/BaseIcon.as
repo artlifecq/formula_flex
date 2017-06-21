@@ -51,6 +51,16 @@ package com.rpgGame.app.view.icon
 		{
 			_iconSize = $iconSize;
 			_iconSize = _iconSize <= 0 ? IcoSizeEnum.SIZE_46 : _iconSize;
+			calIconPos();
+			this.width = _iconSize;
+			this.height = _iconSize;
+		}
+		/**
+		 *不同类型的底图可能不一样所以重写吧 
+		 * 
+		 */		
+		protected function calIconPos():void
+		{
 			switch(_iconSize){
 				case IcoSizeEnum.ICON_36:
 				case IcoSizeEnum.ICON_48:
@@ -58,20 +68,10 @@ package com.rpgGame.app.view.icon
 					_iconPositionX=_iconPositionY=6;
 					break;
 				case IcoSizeEnum.ICON_42:
-					if (this is DragDropItem) 
-					{
-						_iconPositionX=_iconPositionY=1;
-					}
-					else
-					{
-						_iconPositionX=_iconPositionY=6;
-					}
+					_iconPositionX=_iconPositionY=6;
 					break;
 			}
-			this.width = _iconSize;
-			this.height = _iconSize;
 		}
-		
 		public function instanceDestroy() : void
 		{
 			destroy();

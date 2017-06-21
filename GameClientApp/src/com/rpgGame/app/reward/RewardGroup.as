@@ -7,6 +7,7 @@ package  com.rpgGame.app.reward
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
+	import com.rpgGame.netData.backpack.bean.TempItemInfo;
 	
 	import feathers.controls.UIAsset;
 	
@@ -98,6 +99,25 @@ package  com.rpgGame.app.reward
 		private function setRewardByItemInfo(items:Vector.<ItemInfo>):void
 		{
 			
+		}
+		public function setRewardByTeamItemInfo(temps:Vector.<TempItemInfo>):void
+		{
+			if (temps==null) 
+			{
+				return;
+			}
+			var len:int=temps.length;
+			var rewards:Vector.<ClientItemInfo>=new Vector.<ClientItemInfo>();
+			var tmpi:TempItemInfo;
+			for (var i:int = 0; i < len; i++) 
+			{
+				tmpi=temps[i];
+				var tmp:ClientItemInfo=new ClientItemInfo(tmpi.mod);
+				tmp.count=tmpi.num;
+				rewards.push(tmp);
+			}
+			
+			setReward(rewards);
 		}
 		public function setRewardByJsonStr(reward:String):void
 		{

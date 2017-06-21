@@ -120,7 +120,8 @@ package com.rpgGame.core.manager.tips
 			
 			if($pos.x + _currentSowTips.width > Starling.current.stage.stageWidth)
 			{
-				$pos.x = $pos.x - _currentSowTips.width - ($pos.x + _currentSowTips.width-Starling.current.stage.stageWidth) ;
+				//$pos.x = $pos.x - _currentSowTips.width - ($pos.x + _currentSowTips.width-Starling.current.stage.stageWidth) ;
+				$pos.x = $pos.x - ($pos.x + _currentSowTips.width-Starling.current.stage.stageWidth) ;
 			}
 			if($pos.y + _currentSowTips.height > Starling.current.stage.stageHeight)
 			{

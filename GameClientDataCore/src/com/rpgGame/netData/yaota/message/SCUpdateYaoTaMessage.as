@@ -8,7 +8,7 @@ package com.rpgGame.netData.yaota.message{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * 
+	 * 更新玩家数据
 	 */
 	public class SCUpdateYaoTaMessage extends Message {
 	
@@ -18,8 +18,14 @@ package com.rpgGame.netData.yaota.message{
 		//总积分
 		private var _currentIntegral: int;
 		
-		//总积分
+		//积分
 		private var _integral: int;
+		
+		//领取奖励状态   1 已领取
+		private var _drawAward: int;
+		
+		//剩余时间  (秒)
+		private var _time: int;
 		
 		
 		/**
@@ -30,8 +36,12 @@ package com.rpgGame.netData.yaota.message{
 			writeInt(_tier);
 			//总积分
 			writeInt(_currentIntegral);
-			//总积分
+			//积分
 			writeInt(_integral);
+			//领取奖励状态   1 已领取
+			writeInt(_drawAward);
+			//剩余时间  (秒)
+			writeInt(_time);
 			return true;
 		}
 		
@@ -43,8 +53,12 @@ package com.rpgGame.netData.yaota.message{
 			_tier = readInt();
 			//总积分
 			_currentIntegral = readInt();
-			//总积分
+			//积分
 			_integral = readInt();
+			//领取奖励状态   1 已领取
+			_drawAward = readInt();
+			//剩余时间  (秒)
+			_time = readInt();
 			return true;
 		}
 		
@@ -87,7 +101,7 @@ package com.rpgGame.netData.yaota.message{
 		}
 		
 		/**
-		 * get 总积分
+		 * get 积分
 		 * @return 
 		 */
 		public function get integral(): int{
@@ -95,10 +109,40 @@ package com.rpgGame.netData.yaota.message{
 		}
 		
 		/**
-		 * set 总积分
+		 * set 积分
 		 */
 		public function set integral(value: int): void{
 			this._integral = value;
+		}
+		
+		/**
+		 * get 领取奖励状态   1 已领取
+		 * @return 
+		 */
+		public function get drawAward(): int{
+			return _drawAward;
+		}
+		
+		/**
+		 * set 领取奖励状态   1 已领取
+		 */
+		public function set drawAward(value: int): void{
+			this._drawAward = value;
+		}
+		
+		/**
+		 * get 剩余时间  (秒)
+		 * @return 
+		 */
+		public function get time(): int{
+			return _time;
+		}
+		
+		/**
+		 * set 剩余时间  (秒)
+		 */
+		public function set time(value: int): void{
+			this._time = value;
 		}
 		
 	}
