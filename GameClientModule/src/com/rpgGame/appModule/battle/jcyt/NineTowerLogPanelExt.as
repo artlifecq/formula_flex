@@ -1,8 +1,10 @@
 package com.rpgGame.appModule.battle.jcyt
 {
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.appModule.common.PageSelectUICtrl;
 	import com.rpgGame.core.events.NineTowerEvent;
+	import com.rpgGame.netData.yaota.bean.YaoTaInfo;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.zhanchang.jiucengyaota.ZhanChangRiZi_Skin;
@@ -55,15 +57,25 @@ package com.rpgGame.appModule.battle.jcyt
 				}
 			}
 		}
-		private function setPageData(data:*):void
+		private function setPageData(...arg):void
 		{
+			var list:Vector.<YaoTaInfo>=arg[0];
+			var data:Array=[];
+			var len:int=list.length;
+			for (var i:int = 0; i < len; i++) 
+			{
+				data.push(list[i]);
+			}
+			
 			_numCtrl.setData(data,PAGE_NUM);
-			_skin.uiNo.visible=data.length>0;
+			_skin.uiNo.visible=data.length==0;
+			_skin.skinFlip.visible=data.length>0;
 		}
 		override protected function onShow():void
 		{
 			super.onShow();
 			EventManager.addEvent(NineTowerEvent.GET_LOG_DATA,setPageData);
+			Mgr.nineTowerMgr.reqTowerLog();
 		}
 		override protected function onHide():void
 		{

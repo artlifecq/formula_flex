@@ -8,15 +8,17 @@ package  com.rpgGame.appModule.social.team
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.appModule.common.RoleModelShow;
 	import com.rpgGame.core.utils.MCUtil;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.netData.team.bean.TeamMemberInfo;
 	
 	import flash.utils.getTimer;
+	
+	import away3d.events.Event;
 	
 	import org.game.netCore.data.long;
 	import org.mokylin.skin.app.shejiao.zudui.Duiwu_TanKuang;
 	
 	import starling.display.DisplayObjectContainer;
-	import away3d.events.Event;
 
 	
 	public class TeamAskPanelExt extends SkinUIPanel
@@ -61,15 +63,15 @@ package  com.rpgGame.appModule.social.team
 			
 			if(type ==  TeamManager.TYPE_TEAM_INVITE)
 			{
-				tipsStr= "邀请您加入其队伍";
+				tipsStr= NotifyCfgData.getNotifyTextByID(61015);
 				
 			}else if(type == TeamManager.TYPE_TEAM_JOIN)
 			{
-				tipsStr="申请加入您的队伍";
+				tipsStr=NotifyCfgData.getNotifyTextByID(61016);
 //				tipsStr.push( TextUtil.FormatStr( "请问您是否同意？" ) );
 			}else if(type == TeamManager.TYPE_TEAM_APPOINT_CAPTAIN)
 			{
-				tipsStr=(  "希望提升您为本队队长");
+				tipsStr=(  NotifyCfgData.getNotifyTextByID(61017));
 			
 			}
 			_skin.lb_ask.text=tipsStr;
@@ -94,7 +96,7 @@ package  com.rpgGame.appModule.social.team
 			var diff:int=(timeLeft-getTimer())/1000;
 			if (diff>0) 
 			{
-				_skin.lbMsg.htmlText="请问您是否同意？("+diff+"s)";
+				_skin.lbMsg.htmlText=NotifyCfgData.getNotifyTextByID(61018)+"("+diff+"s)";
 			}
 			else
 			{

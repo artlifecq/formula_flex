@@ -38,7 +38,7 @@ package  com.rpgGame.app.graphics.decor
 		public static const TOP_CHENGHAO :int = SORT_VALUE--;
 		public static const TOP_HUBAOCHENGHAO :int = SORT_VALUE--;
 		public static const TOP_NPCCHENGHAO :int = SORT_VALUE--;
-		
+		public static const TOP_TOWER :int = 0;
 		private var topLayer :SortLayer = null;
 		private var rightBottomLayer :SortLayer = null;
 		

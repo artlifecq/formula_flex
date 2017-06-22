@@ -7,6 +7,7 @@ package  com.rpgGame.appModule.social.team
 	import com.rpgGame.core.utils.GameColorUtil;
 	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.coreData.cfg.ClientSceneCfgData;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.type.TipType;
@@ -35,7 +36,7 @@ package  com.rpgGame.appModule.social.team
 			this._data=team as MapTeamInfo;
 			this._tipData.data=data;
 			_skin.lbName.text=team.captainname;
-			_skin.lbLevel.text=team.captainlv+"级";
+			_skin.lbLevel.text=team.captainlv+NotifyCfgData.getNotifyTextByID(61019);
 			_skin.lbZhanli.text=team.avgFightPower+"";
 			if (team.teamnum<TeamManager.MAXMEMBER) 
 			{

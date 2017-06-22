@@ -35,7 +35,10 @@ package com.rpgGame.appModule.battle.dfdj
 			_cellList.push(new D1v1ConfigCell(_skin.skinItem5));
 			
 		}
-		
+		private function setSelectState(s:SkinnableContainer,select:Boolean):void
+		{
+			s.skin["uiSelect"].visible=select;
+		}
 		private function setLeftRankData(s:SkinnableContainer,rankId:int):void
 		{
 			s.userData=rankId;
@@ -54,7 +57,8 @@ package com.rpgGame.appModule.battle.dfdj
 				case _skin.skinDuan4:
 				case _skin.skinDuan5:
 				{
-					showRank((target.parent as SkinnableContainer).userData)
+					showRank((target.parent as SkinnableContainer).userData);
+					
 					break;
 				}
 					
@@ -75,6 +79,7 @@ package com.rpgGame.appModule.battle.dfdj
 			if (_nowRank==0) 
 			{
 				_nowRank=1000;
+				
 			}
 			showRank(_nowRank);
 		}
@@ -93,7 +98,7 @@ package com.rpgGame.appModule.battle.dfdj
 			{
 				_cellList[i].setConfig(arr[i]);
 			}
-			
+			setSelectState(_skin["skinDuan"+rank/1000],true);
 		}
 		private function clearData():void
 		{
@@ -101,7 +106,12 @@ package com.rpgGame.appModule.battle.dfdj
 			{
 				cell.clear();
 			}
-			
+			setSelectState(_skin.skinDuan1,false);
+			setSelectState(_skin.skinDuan2,false);
+			setSelectState(_skin.skinDuan3,false);
+			setSelectState(_skin.skinDuan4,false);
+			setSelectState(_skin.skinDuan5,false);
+		
 		}
 	}
 }
