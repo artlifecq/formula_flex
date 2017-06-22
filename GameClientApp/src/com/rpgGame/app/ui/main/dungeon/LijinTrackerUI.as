@@ -1,11 +1,13 @@
 package com.rpgGame.app.ui.main.dungeon
 {
 	import com.rpgGame.app.manager.DungeonManager;
+	import com.rpgGame.app.sender.SpecialActivitySender;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.core.events.ActivityEvent;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_item;
@@ -16,6 +18,7 @@ package com.rpgGame.app.ui.main.dungeon
 	
 	import gs.TweenMax;
 	
+	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.activety.zonghe.Active_LiJin_Skin;
 	import org.mokylin.skin.app.activety.zonghe.Active_LiJin_Tips;
 	
@@ -106,7 +109,9 @@ package com.rpgGame.app.ui.main.dungeon
 				ico2List.push(ico);
 				_skin.task_box.addChild(ico);
 			}
-			
+			_skin.lbTime1.text="00:00:00";
+			_skin.grpshuaxin.visible=false;
+			_skin.grpto.visible=false;
 			setUisite();
 			
 		}
@@ -121,13 +126,14 @@ package com.rpgGame.app.ui.main.dungeon
 					setQiangBoxState(true);
 					break;
 				case "sec_subbut1"://自动任务
-					AppManager.showApp(AppConstant.ACTIVETY_LIJIN_TIMER);
+					
 					break;
 				case "sec_subbut2"://离开场景
 					AppManager.showApp(AppConstant.ACTIVETY_LIJIN_RESULT);
 					break;
 				case "lbPaiHang"://排行榜
-					AppManager.showApp(AppConstant.ACTIVETY_LIJIN_SCORES);
+					//AppManager.showApp(AppConstant.ACTIVETY_LIJIN_SCORES);
+					SpecialActivitySender.reqLijinRankInfo();
 					break;
 				case "lbTo":// 前往刷怪点
 					
@@ -139,12 +145,11 @@ package com.rpgGame.app.ui.main.dungeon
 		{
 			super.onShow();
 			addEvent();
-			setTime();
 			setKill();
 			setReword();
 			setUisite();
-			setQianduoType();
-			setYuanbao();
+			//setQianduoType();
+			setCashgift(0);
 			setTipsText();
 		}
 		override protected function onHide():void
@@ -174,6 +179,9 @@ package com.rpgGame.app.ui.main.dungeon
 			TaskUtil.addLabelEvet(_skin.lbTo);
 			_skin.lbName2.addEventListener(TouchEvent.TOUCH, onTouchTips);
 			_skin.lbName.addEventListener(TouchEvent.TOUCH, onTouchTips);
+			EventManager.addEvent(ActivityEvent.LIJIN_CASHGIFT_CHANGE,setCashgift);
+			EventManager.addEvent(ActivityEvent.LIJIN_ACTIVITY_TIME,setTime);
+			EventManager.addEvent(ActivityEvent.LIJIN_MONSTER_CHANGE,setQianduoType);
 		}
 		private function removeEvent():void
 		{
@@ -185,7 +193,11 @@ package com.rpgGame.app.ui.main.dungeon
 			TaskUtil.removeLabelEvet(_skin.lbTo);
 			_skin.lbName2.removeEventListener(TouchEvent.TOUCH, onTouchTips);
 			_skin.lbName.removeEventListener(TouchEvent.TOUCH, onTouchTips);
+			EventManager.removeEvent(ActivityEvent.LIJIN_CASHGIFT_CHANGE,setCashgift);
+			EventManager.removeEvent(ActivityEvent.LIJIN_ACTIVITY_TIME,setTime);
+			EventManager.removeEvent(ActivityEvent.LIJIN_MONSTER_CHANGE,setQianduoType);
 		}
+		
 		private var isMouseOut : Boolean = true;
 		private function onTouchTips(e:TouchEvent):void
 		{
@@ -211,13 +223,13 @@ package com.rpgGame.app.ui.main.dungeon
 		
 		
 		private var remainTime:int;
-		private function setTime():void
+		private function setTime(time:int):void
 		{
-			var rTime:int=1200000;
+			var rTime:int=time;
 			if(rTime<0){
 				_skin.lbTime1.text="未开始!";
 			}else{
-				remainTime=rTime/1000;
+				remainTime=rTime;
 				_skin.lbTime1.text=TimeUtil.format3TimeType(remainTime);
 				TimerServer.remove(updateTime);
 				TimerServer.addLoop(updateTime,1000);
@@ -233,13 +245,13 @@ package com.rpgGame.app.ui.main.dungeon
 			}
 		}
 		private var remain2Time:int;
-		private function setTime2():void
+		private function setTime2(time:int):void
 		{
-			var rTime:int=300000;
+			var rTime:int=time;
 			if(rTime<0){
 				_skin.lbTime.text="";
 			}else{
-				remain2Time=rTime/1000;
+				remain2Time=rTime;
 				_skin.lbTime.text=TimeUtil.format3TimeType(remain2Time);
 				TimerServer.remove(updateTime2);
 				TimerServer.addLoop(updateTime2,1000);
@@ -281,25 +293,24 @@ package com.rpgGame.app.ui.main.dungeon
 			_skin.sec_navi0.htmlText="【完成<font color='#ff0000'>("+5+"/"+15+")</font>环额外奖励】";
 		}
 		/**设置抢夺阶段*/
-		private function setQianduoType():void
+		private function setQianduoType(monsterNum:int,refresh:int):void
 		{
-			var type:int=2;
-			if(type==1)
+			if(monsterNum>0&&refresh>0)
 			{
 				_skin.grpshuaxin.visible=true;
 				_skin.grpto.visible=false;
-				setTime2();
+				setTime2(refresh);
 				
 			}
-			else if(type==2)
+			else if(monsterNum>0&&refresh==0)
 			{
 				_skin.grpshuaxin.visible=false;
 				_skin.grpto.visible=true;
 				_skin.lbTo.visible=true;
-				_skin.lbName.htmlText="盗宝小怪(4)";
+				_skin.lbName.htmlText="盗宝小怪    <font color='#e8c958'>(剩余"+monsterNum+")</font>";
 				
 			}
-			else if(type==3)
+			else if(monsterNum==0&&refresh==0)
 			{
 				_skin.grpshuaxin.visible=false;
 				_skin.grpto.visible=true;
@@ -309,9 +320,9 @@ package com.rpgGame.app.ui.main.dungeon
 			
 		}
 		/**设置获得元宝*/
-		private function setYuanbao():void
+		private function setCashgift(num:int):void
 		{
-			_skin.numLiJin.label="10";
+			_skin.numLiJin.label=""+num;
 			
 		}
 		/**设置tips文字*/

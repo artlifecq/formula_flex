@@ -194,7 +194,7 @@ package com.rpgGame.app.ui.main.taskbar
 			else //npc闲话
 			{
 				var role:SceneRole = SceneManager.getSceneObjByID(serverID.ToGID()) as SceneRole;
-				if (role != null&& role.data !=null) 
+				if (role != null&& role.data !=null&&role.headFace!=null) 
 				{
 					var speak:String=MonsterDataManager.getNpcSpeak(npcId);
 					if(speak!=""&&!AppManager.isAppInScene(AppConstant.NPC_SPEAK))
@@ -252,6 +252,8 @@ package com.rpgGame.app.ui.main.taskbar
 				{
 					effetCont.playNewtaskEffect();
 					TaskAutoManager.getInstance().startTaskAuto();
+					
+					
 				}
 				else
 				{

@@ -1,6 +1,9 @@
 package com.rpgGame.appModule.activety.zonghe.lijin
 {
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.netData.daysdowngold.bean.RankInfo;
+	import com.rpgGame.netData.daysdowngold.message.SCRankInfoMessage;
 	
 	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
@@ -29,7 +32,12 @@ package com.rpgGame.appModule.activety.zonghe.lijin
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
-			setScoreList();
+			var dataInfo:SCRankInfoMessage=data as SCRankInfoMessage;
+			if(dataInfo)
+			{
+				setScoreList(dataInfo.playerRankLevel,dataInfo.playerCashGiftNum,dataInfo.RankInfoList);
+			}
+			
 			
 		}
 		override public function hide():void
@@ -40,26 +48,26 @@ package com.rpgGame.appModule.activety.zonghe.lijin
 			
 		}
 		
-		private function setScoreList():void
+		private function setScoreList(myrank:int,cashNum:int,rankList:Vector.<RankInfo>):void
 		{
 			var i:int;
-			for(i=0;i<10;i++)
+			var lenght:int=rankList.length<scoreList.length?rankList.length:scoreList.length;
+			for(i=0;i<lenght;i++)
 			{
 				_skin["list"+i].visible=true;
-				scoreList[i].lbName.text="玩家名称"+i;
-				scoreList[i].lbKill.text="帮会"+i;
-				scoreList[i].lbNum.text=""+5*i+100;
+				scoreList[i].lbName.text=rankList[i].name;
+				scoreList[i].lbKill.text=rankList[i].guildName;
+				scoreList[i].lbNum.text=""+rankList[i].cashGiftNum;
 				
 			}
-			var myrank:int=30;
 			if(myrank>0)
 			{
 				_skin["list"+10].visible=true;
 				_skin.tishi.visible=false;
 				setScoreRank(scoreList[10],myrank);
-				scoreList[10].lbName.text="我的名称";
-				scoreList[10].lbKill.text="我的帮会";
-				scoreList[10].lbNum.text=""+300;
+				scoreList[10].lbName.text=MainRoleManager.actorInfo.name;
+				scoreList[10].lbKill.text=MainRoleManager.actorInfo.guildName;
+				scoreList[10].lbNum.text=""+cashNum;
 			}
 			else
 			{

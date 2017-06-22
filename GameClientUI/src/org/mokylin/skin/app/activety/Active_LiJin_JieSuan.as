@@ -253,7 +253,7 @@ package org.mokylin.skin.app.activety
 			subbut = temp;
 			temp.name = "subbut";
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.label = "领取奖励";
+			temp.label = "确  认";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xCFC6AE;
 			temp.width = 89;

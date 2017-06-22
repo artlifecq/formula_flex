@@ -299,11 +299,19 @@ package com.rpgGame.core.view.uiComponent.face.cd
 			drawRectMask($angle);
 		}
 		
-		public function updateTimeTxt($now : Number, $cdTotal : Number):void
+		public function updateTimeTxt($now : Number, $cdTotal : Number,isGrid:Boolean=false):void
 		{
 			if (_tmTxt)
 			{
-				_tmTxt.numberText = (($cdTotal - $now) * 0.001).toFixed(0);		
+				var text:String=(($cdTotal - $now) * 0.001).toFixed(0);
+				_tmTxt.numberText =text ;
+				if(isGrid)
+				{
+					var length:int=text.length;
+					_tmTxt.x = _w/2+(3-length)*4-1;//修改技能框文字不能对齐    ------- yt
+					_tmTxt.y =_h/2;
+				}
+				
 			}
 				
 		}
@@ -311,7 +319,10 @@ package com.rpgGame.core.view.uiComponent.face.cd
 		{
 			if(_tmTxt)
 			{
-				_tmTxt.numberText =$txt;	
+				_tmTxt.numberText =$txt;
+				/*var length:int=$txt.length;
+				_tmTxt.x = _w/2+(3-length)*4-1;
+				_tmTxt.y =_h/2;*/
 			}
 					
 		}

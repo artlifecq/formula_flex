@@ -297,6 +297,7 @@ package com.rpgGame.app.ui.main.shortcut
 					else
 					{
 						turnKey=false;
+						nutaEffect.stopEffect();
 					}
 					nowNuta=num;
 					updateLabTxt(""+nowNuta);
@@ -369,7 +370,7 @@ package com.rpgGame.app.ui.main.shortcut
 			{
 				if(cdFace)
 				{
-					cdFace.updateTimeTxt($now,$cdTotal);
+					cdFace.updateTimeTxt($now,$cdTotal,true);
 				}
 				if($cdTotal>_now)
 				{

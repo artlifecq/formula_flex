@@ -27,7 +27,8 @@ package com.rpgGame.appModule.activety.zonghe.lijin
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
-			setTime();
+			var time:int=int(data);
+			setTime(time);
 		}
 		override public function hide():void
 		{
@@ -44,10 +45,10 @@ package com.rpgGame.appModule.activety.zonghe.lijin
 		
 		}
 		private var remainTime:int;
-		private function setTime():void
+		private function setTime(time:int):void
 		{
-			var rTime:int=10;
-			if(rTime<=0){
+			var rTime:int=time;
+			if(rTime<0){
 				_skin.numTime.label="0";
 			}else{
 				remainTime=rTime;

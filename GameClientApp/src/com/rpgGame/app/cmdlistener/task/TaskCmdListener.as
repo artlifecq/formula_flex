@@ -2,6 +2,8 @@ package com.rpgGame.app.cmdlistener.task
 {
 	import com.rpgGame.app.manager.collect.CollectManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.SkillEvent;
 	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
@@ -66,6 +68,15 @@ package com.rpgGame.app.cmdlistener.task
 				{
 					TaskMissionManager.setTaskInfo(msg.taskInfo);
 					EventManager.dispatchEvent(TaskEvent.TASK_NEW_MATION,taskData.q_mission_mainType);
+					if(taskData.q_fly==1&&taskData.q_pathing!="")//系统神行符
+					{
+						if (!AppManager.isAppInScene(AppConstant.TASK_FLY_PANEL))
+						{
+							AppManager.showApp(AppConstant.TASK_FLY_PANEL,taskData.q_pathing);
+						}
+						
+					}
+					
 				}
 				
 				

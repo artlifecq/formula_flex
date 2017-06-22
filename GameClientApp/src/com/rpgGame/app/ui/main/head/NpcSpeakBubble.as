@@ -21,8 +21,8 @@ package com.rpgGame.app.ui.main.head
 				_speakBubble=new NpcSpeakBubble();
 			}
 			_speakBubble.visible=false;
-			TweenLite.killDelayedCallsTo(_speakBubble.setLable);
-			TweenLite.delayedCall(0.05, _speakBubble.setLable,[text]);//没有new的时候改变不了width
+			TweenLite.killDelayedCallsTo(_speakBubble.setLable2);
+			TweenLite.delayedCall(0.05, _speakBubble.setLable2,[text]);//没有new的时候改变不了width
 			return _speakBubble;
 		}
 		
@@ -38,10 +38,9 @@ package com.rpgGame.app.ui.main.head
 			_skin.lable.htmlText="";
 			this.visible=false;
 		}
-		
+		/**高度不变宽拉长*/
 		public function setLable(text:String):void
 		{
-			L.l("text"+text.length);
 			var wid:int=text.length*14+14;
 			wid=wid*0.5;
 			if(wid>186)
@@ -59,7 +58,25 @@ package com.rpgGame.app.ui.main.head
 			TweenLite.killDelayedCallsTo(hide);
 			TweenLite.delayedCall(4.5, hide);
 		}
-		
+		/**宽度不变高拉长*/
+		public function setLable2(text:String):void
+		{
+			_skin.lable.height=0;
+			_skin.lable.htmlText=text;
+			if(_skin.lable.textHeight>32)
+			{
+				_skin.bg.height=_skin.lable.textHeight+27;
+				this.y=-_skin.bg.height-22;
+			}
+			else
+			{
+				_skin.bg.height=58;
+				this.y=-_skin.bg.height-22;
+			}
+			this.visible=true;
+			TweenLite.killDelayedCallsTo(hide);
+			TweenLite.delayedCall(4.5, hide);
+		}
 		private function hide():void
 		{
 			if(this.parent)

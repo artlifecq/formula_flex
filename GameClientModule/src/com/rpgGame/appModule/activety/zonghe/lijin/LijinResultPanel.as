@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.activety.zonghe.lijin
 {
+	import com.rpgGame.app.manager.ItemActionManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
@@ -9,8 +10,12 @@ package com.rpgGame.appModule.activety.zonghe.lijin
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
+	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	
 	import feathers.controls.UIAsset;
+	import feathers.utils.filter.GrayFilter;
+	
+	import gs.TweenLite;
 	
 	import org.mokylin.skin.app.activety.Active_LiJin_JieSuan;
 	
@@ -37,11 +42,23 @@ package com.rpgGame.appModule.activety.zonghe.lijin
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
-			setReword();
+			var dataInfo:Vector.<ItemInfo>;
+			hideItem();
+			/*if(data)
+			{
+				dataInfo= data as Vector.<ItemInfo>;
+			}
+			if(dataInfo)
+			{
+				setReword(dataInfo);
+			}*/
+			setReword2();
+			TweenLite.delayedCall(6, hide);
 		}
 		override public function hide():void
 		{
 			super.hide();
+			TweenLite.killDelayedCallsTo(hide);
 		}
 		override protected function onTouchTarget(target:DisplayObject):void 
 		{
@@ -81,21 +98,26 @@ package com.rpgGame.appModule.activety.zonghe.lijin
 			
 		}
 		/**设置奖励物品*/
-		private function setReword():void
+		private function setReword(dataInfo:Vector.<ItemInfo>):void
 		{
 			var i:int;
-			for(i=0;i<icoBgList.length;i++)
+			var lenght:int=dataInfo.length<icoList.length?dataInfo.length:icoList.length;
+			for(i=0;i<lenght;i++)
 			{
-				icoBgList[i].visible=false;
-				icoList[i].visible=false;
+				setIcon(icoList[i],dataInfo[i].itemModelId,dataInfo[i].num,icoBgList[i]);
+				icoList[i].x=i*83;
 			}
-			for(i=0;i<12;i++)
+			_skin.iocn_list.x=(490-83*lenght+7)*0.5;
+		}
+		private function setReword2():void
+		{
+			var i:int;
+			for(i=0;i<5;i++)
 			{
 				setIcon(icoList[i],201,10,icoBgList[i]);
 				icoList[i].x=i*83;
-				
 			}
-			_skin.iocn_list.x=(490-83*12+7)*0.5;
+			_skin.iocn_list.x=(490-83*5+7)*0.5;
 		}
 		private function setIcon(icon:IconCDFace,tiemId:int,num:int,bg:UIAsset=null):void
 		{
@@ -112,6 +134,29 @@ package com.rpgGame.appModule.activety.zonghe.lijin
 			}
 			
 		}
+		private function hideItem():void
+		{
+			var i:int;
+			for(i=0;i<icoBgList.length;i++)
+			{
+				icoBgList[i].visible=false;
+				icoList[i].visible=false;
+			}
+		}
 		
+		private function subReword():void
+		{
+			TweenLite.delayedCall(3, hide);
+			for(var i:int=0;i<icoList.length;i++)
+			{
+				if(icoList[i].visible)
+				{
+					GrayFilter.gray(icoList[i]);
+					ItemActionManager.tweenItemInBag(icoList[i]);
+				}
+				
+			}
+			
+		}
 	}
 }

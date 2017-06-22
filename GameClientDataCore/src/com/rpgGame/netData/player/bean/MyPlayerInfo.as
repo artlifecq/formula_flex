@@ -79,6 +79,15 @@ package com.rpgGame.netData.player.bean{
 		//最大真气值
 		private var _maxZhenQi: long;
 		
+		//帮派Id
+		private var _guildId: long;
+		
+		//帮会名称
+		private var _guildName: String;
+		
+		//帮会职位
+		private var _guildMemberType: int;
+		
 		/**
 		 * 写入字节缓存
 		 */
@@ -134,6 +143,12 @@ package com.rpgGame.netData.player.bean{
 			writeLong(_maxExp);
 			//最大真气值
 			writeLong(_maxZhenQi);
+			//帮派Id
+			writeLong(_guildId);
+			//帮会名称
+			writeString(_guildName);
+			//帮会职位
+			writeInt(_guildMemberType);
 			return true;
 		}
 		
@@ -192,6 +207,12 @@ package com.rpgGame.netData.player.bean{
 			_maxExp = readLong();
 			//最大真气值
 			_maxZhenQi = readLong();
+			//帮派Id
+			_guildId = readLong();
+			//帮会名称
+			_guildName = readString();
+			//帮会职位
+			_guildMemberType = readInt();
 			return true;
 		}
 		
@@ -508,6 +529,51 @@ package com.rpgGame.netData.player.bean{
 		 */
 		public function set maxZhenQi(value: long): void{
 			this._maxZhenQi = value;
+		}
+		
+		/**
+		 * get 帮派Id
+		 * @return 
+		 */
+		public function get guildId(): long{
+			return _guildId;
+		}
+		
+		/**
+		 * set 帮派Id
+		 */
+		public function set guildId(value: long): void{
+			this._guildId = value;
+		}
+		
+		/**
+		 * get 帮会名称
+		 * @return 
+		 */
+		public function get guildName(): String{
+			return _guildName;
+		}
+		
+		/**
+		 * set 帮会名称
+		 */
+		public function set guildName(value: String): void{
+			this._guildName = value;
+		}
+		
+		/**
+		 * get 帮会职位
+		 * @return 
+		 */
+		public function get guildMemberType(): int{
+			return _guildMemberType;
+		}
+		
+		/**
+		 * set 帮会职位
+		 */
+		public function set guildMemberType(value: int): void{
+			this._guildMemberType = value;
 		}
 		
 	}
