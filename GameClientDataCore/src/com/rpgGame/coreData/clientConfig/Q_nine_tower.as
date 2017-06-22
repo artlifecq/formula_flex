@@ -28,6 +28,10 @@ package com.rpgGame.coreData.clientConfig
 		public var q_per:int;
 		 /**  副本id */
 		public var q_zoneID:int;
+		 /**  进入点 */
+		public var q_enter_map:String;
+		 /**  复活点 */
+		public var q_revive_position:String;
 
 	}
 }

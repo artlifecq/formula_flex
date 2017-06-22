@@ -1265,5 +1265,22 @@ package com.game.engine3D.scene.layers
 			clear();
 			dispose();
 		}
+		/**
+		 *使用同一个地图资源的时候 
+		 * @param newData
+		 * 
+		 */		
+		public function resetSceneMapData(newData:SceneMapData):void
+		{
+			if (_sceneMapData)
+			{
+				_sceneMapData.removeErrorHandler(onDataErrorHandler);
+				_sceneMapData.removeMiniMapErrorHandler(onMiniMapErrorHandler);
+				_sceneMapData.removeRadarMapErrorHandler(onRadarMapErrorHandler);
+				SceneMapDataManager.removeMapData(this, _sceneMapData.mapName);
+				_sceneMapData = null;
+			}
+			_sceneMapData=newData;
+		}
 	}
 }

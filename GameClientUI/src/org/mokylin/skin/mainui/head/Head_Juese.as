@@ -15,7 +15,11 @@ package org.mokylin.skin.mainui.head
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var bar:feathers.controls.UIAsset;
+		public var barBlue:feathers.controls.UIAsset;
+
+		public var barGreen:feathers.controls.UIAsset;
+
+		public var barRed:feathers.controls.UIAsset;
 
 		public var lbLevel:feathers.controls.Label;
 
@@ -32,7 +36,7 @@ package org.mokylin.skin.mainui.head
 			this.currentState = "normal";
 			this.height = 31;
 			this.width = 123;
-			this.elementsContent = [__Head_Juese_UIAsset1_i(),bar_i(),__Head_Juese_UIAsset2_i(),__Head_Juese_UIAsset3_i(),__Head_Juese_UIAsset4_i(),__Head_Juese_UIAsset5_i(),uiQuan_i(),lbLevel_i()];
+			this.elementsContent = [__Head_Juese_UIAsset1_i(),barGreen_i(),barBlue_i(),barRed_i(),__Head_Juese_UIAsset2_i(),__Head_Juese_UIAsset3_i(),__Head_Juese_UIAsset4_i(),__Head_Juese_UIAsset5_i(),uiQuan_i(),lbLevel_i()];
 			
 			states = {
 			};
@@ -88,12 +92,34 @@ package org.mokylin.skin.mainui.head
 			return temp;
 		}
 
-		private function bar_i():feathers.controls.UIAsset
+		private function barBlue_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			bar = temp;
-			temp.name = "bar";
+			barBlue = temp;
+			temp.name = "barBlue";
+			temp.styleName = "ui/mainui/head/juese/juesexuetiao2.png";
+			temp.x = 29;
+			temp.y = 11;
+			return temp;
+		}
+
+		private function barGreen_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			barGreen = temp;
+			temp.name = "barGreen";
 			temp.styleName = "ui/mainui/head/juese/juesexuetiao.png";
+			temp.x = 29;
+			temp.y = 11;
+			return temp;
+		}
+
+		private function barRed_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			barRed = temp;
+			temp.name = "barRed";
+			temp.styleName = "ui/mainui/head/juese/juesexuetiao3.png";
 			temp.x = 29;
 			temp.y = 11;
 			return temp;

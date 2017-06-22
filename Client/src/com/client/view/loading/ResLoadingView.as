@@ -189,7 +189,7 @@ package com.client.view.loading
 			_resLoadingViewSkin.container.addChildAt(ui,0);
 		
 		}
-		private var isMouseOut:Boolean;
+		private var isMouseOut:Boolean=true;
 		private function onTouch(e:TouchEvent):void
 		{
 		

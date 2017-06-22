@@ -6,16 +6,18 @@ package com.rpgGame.appModule.shop
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	
 	import app.message.Quality;
 	
+	import away3d.events.Event;
+	
 	import org.mokylin.skin.app.shangcheng.ChuShou_Skin;
 	
 	import starling.display.DisplayObjectContainer;
-	import away3d.events.Event;
 	
 	public class ItemSellAlertExtPanelExt extends SkinUIPanel
 	{
@@ -57,7 +59,7 @@ package com.rpgGame.appModule.shop
 			}
 			if (item.qItem.q_sell==0) 
 			{
-				NoticeManager.mouseFollowNotify("该物品无法出售");
+				NoticeManager.mouseFollowNotify(NotifyCfgData.getNotifyTextByID(61025));
 				return;
 			}
 			if (isNoNotice||item.quality<=Quality.BLUE) 

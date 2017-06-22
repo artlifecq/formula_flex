@@ -89,7 +89,7 @@ package com.rpgGame.app.manager
 		
 		public static function tweenMode(startPos:Point,onCmpFun:Function = null,time:Number = 1):void
 		{
-			
+			return;
 			startPos = LayerManager.stageCenterPoint.add(startPos);
 			var content:Inter3DContainer = new Inter3DContainer();
 			content.x=startPos.x;
@@ -107,6 +107,7 @@ package com.rpgGame.app.manager
 		
 		public static function addTweenHT(endPos:Point,display:DisplayObject,onCmpFun:Function = null, time:Number = 0.6, interval:Number = 200):void
 		{
+			return;
 			_tweenHT.push(executeTween,[endPos,display,onCmpFun,time], interval);
 		}
 		

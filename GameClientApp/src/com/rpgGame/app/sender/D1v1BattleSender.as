@@ -2,14 +2,14 @@ package com.rpgGame.app.sender
 {
 
 	
-	import com.rpgGame.netData.pvp.message.CSDFMatchingMessage;
-	import com.rpgGame.netData.pvp.message.CSDrawDianFengAwardMessage;
-	import com.rpgGame.netData.pvp.message.CSOpenDianFengPanelMessage;
-	import com.rpgGame.netData.pvp.message.CSOpenDianFengRankMessage;
-	import com.rpgGame.netData.pvp.message.CSQuitRaceMessage;
+	import com.rpgGame.netData.dianfeng.message.CSDFMatchingMessage;
+	import com.rpgGame.netData.dianfeng.message.CSDrawDianFengAwardMessage;
+	import com.rpgGame.netData.dianfeng.message.CSOpenDianFengPanelMessage;
+	import com.rpgGame.netData.dianfeng.message.CSOpenDianFengRankMessage;
+	import com.rpgGame.netData.dianfeng.message.CSQuitRaceMessage;
 	
 	import org.game.netCore.connection.SocketConnection;
-	import com.rpgGame.netData.pvp.message.CSQuitZoneMessage;
+	import com.rpgGame.netData.dianfeng.message.CSQuitZoneMessage;
 
 
 	public class D1v1BattleSender extends BaseSender

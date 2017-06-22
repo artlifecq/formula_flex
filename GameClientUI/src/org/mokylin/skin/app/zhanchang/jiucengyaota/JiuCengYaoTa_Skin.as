@@ -8,7 +8,6 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.app.zhanchang.button.ButtonKaiqi;
 	import org.mokylin.skin.app.zhanchang.button.ButtonShengwangbtn;
-	import org.mokylin.skin.component.button.ButtonSkin_shuoming2;
 
 	/**
 	 * @private
@@ -20,7 +19,7 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var btnMsg:feathers.controls.Button;
+		public var bg0:feathers.controls.UIAsset;
 
 		public var btnOpen:feathers.controls.Button;
 
@@ -29,6 +28,8 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 		public var grp_icon:feathers.controls.Group;
 
 		public var icon1:feathers.controls.UIAsset;
+
+		public var iconSw:feathers.controls.UIAsset;
 
 		public var lbRank:feathers.controls.Label;
 
@@ -45,7 +46,7 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [__JiuCengYaoTa_Skin_UIAsset2_i(),btnOpen_i(),__JiuCengYaoTa_Skin_UIAsset3_i(),__JiuCengYaoTa_Skin_UIAsset4_i(),lbShengwang_i(),btnShengwang_i(),__JiuCengYaoTa_Skin_UIAsset5_i(),__JiuCengYaoTa_Skin_UIAsset6_i(),grp_icon_i(),lbRank_i(),btnMsg_i()];
+			this.elementsContent = [__JiuCengYaoTa_Skin_UIAsset2_i(),btnOpen_i(),__JiuCengYaoTa_Skin_UIAsset3_i(),iconSw_i(),lbShengwang_i(),btnShengwang_i(),__JiuCengYaoTa_Skin_UIAsset4_i(),__JiuCengYaoTa_Skin_UIAsset5_i(),grp_icon_i(),lbRank_i(),__JiuCengYaoTa_Skin_Group1_i()];
 			
 			states = {
 			};
@@ -56,6 +57,29 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
+		private function __JiuCengYaoTa_Skin_Group1_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			temp.x = 736;
+			temp.y = 75;
+			temp.elementsContent = [bg0_i(),__JiuCengYaoTa_Skin_Label1_i()];
+			return temp;
+		}
+
+		private function __JiuCengYaoTa_Skin_Label1_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.height = 364;
+			temp.htmlText = "1.每层击杀玩家和怪可获得战场积分，积分达到一定数量可进入下一层。<br>2.安全层(1、2、3、4)死亡复活点复活不会降层；非安全层(5、6、7、8、9)有几率降前一层。原地复活不会降层。<br>3.进入第九层可争夺封魔战旗，每5分钟刷新一面封魔战旗，玩家采集后可持有战旗。<br>4.持有战旗的玩家可获得BUFF。<br>5.击杀持有战旗的玩家，击杀者成为新的战旗持有者。<br>6.5分钟倒计时结束时，持有封魔战旗的玩家将获得镇妖宝箱，同时场景中刷新一面新的封魔战旗。";
+			temp.leading = 4;
+			temp.color = 0xA3A594;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 178;
+			temp.x = 9;
+			temp.y = 4;
+			return temp;
+		}
+
 		private function __JiuCengYaoTa_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -78,22 +102,13 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 		private function __JiuCengYaoTa_Skin_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/tubiao/shengwang.png";
-			temp.x = 583;
-			temp.y = 539;
-			return temp;
-		}
-
-		private function __JiuCengYaoTa_Skin_UIAsset5_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/jiucengyaota/zhanchangjiangli.png";
 			temp.x = 209;
 			temp.y = 544;
 			return temp;
 		}
 
-		private function __JiuCengYaoTa_Skin_UIAsset6_i():feathers.controls.UIAsset
+		private function __JiuCengYaoTa_Skin_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/jiucengyaota/shengwangzhi.png";
@@ -102,14 +117,16 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			return temp;
 		}
 
-		private function btnMsg_i():feathers.controls.Button
+		private function bg0_i():feathers.controls.UIAsset
 		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btnMsg = temp;
-			temp.name = "btnMsg";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_shuoming2;
-			temp.x = 902;
-			temp.y = 79;
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg0 = temp;
+			temp.name = "bg0";
+			temp.height = 369;
+			temp.styleName = "ui/common/tips/tips_2.png";
+			temp.width = 195;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -154,6 +171,17 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			temp.styleName = "ui/common/grid/normal/36.png";
 			temp.x = 0;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function iconSw_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			iconSw = temp;
+			temp.name = "iconSw";
+			temp.styleName = "ui/common/tubiao/shengwang.png";
+			temp.x = 583;
+			temp.y = 539;
 			return temp;
 		}
 
