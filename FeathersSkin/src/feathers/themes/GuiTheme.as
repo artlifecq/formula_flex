@@ -1168,7 +1168,8 @@ package feathers.themes{
 				{
 					onAssetsLoaded(url);
 				}, null, null, priority);
-			}else
+			}
+			else
 			{
 				var texture:ConcreteTexture;
 				var onTextureComplete:Function = function():void
