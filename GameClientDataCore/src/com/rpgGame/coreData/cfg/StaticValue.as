@@ -103,6 +103,11 @@ package com.rpgGame.coreData.cfg
 		 */
 		public static const UI_SPECIAL_RED:uint=0xe1201c;
 		
+		/**
+		 *紫色文本
+		 */
+		public static const UI_PURPLE:uint=0x9d4aa8;
+		
 		
 		//////////////////////////////品质色///////////////////////////////////////////
 		/**品质白*/		

@@ -9,6 +9,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.manager.input.KeyMoveManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
+	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.SpellSender;
@@ -29,6 +30,7 @@ package com.rpgGame.app.manager
 	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
+	import org.game.netCore.data.long;
 	
 	/**
 	 *
@@ -393,22 +395,64 @@ package com.rpgGame.app.manager
 		
 		
 		
-		
-		public function startFightSoulFight():void
+		private var soulFightId:long;
+		private var soulType:int;
+		private var soulBroken:Boolean=true
+		public function startFightSoulFight(targetId:long,type:int):void
 		{
+			if(!soulBroken)
+				return  ;
 			//无战魂，不能释放技能
 			if(FightSoulManager.instance().fightSoulInfo==null)
 				return  ;
 			var skill:Q_skill_model = FightSoulManager.instance().getSpellData();
 			//技能冷却中不能释放技能里
-			if(SkillCDManager.getInstance().getSkillHasCDTime(skill))
+			if(skill==null||SkillCDManager.getInstance().getSkillHasCDTime(skill))
 				return ;
+			//var tarID:int=targetId.ToGID();
+			var targetState : int = FightManager.getFightRoleState( SceneManager.getSceneObjByID(targetId.ToGID()) as SceneRole);//攻击类型
+			if(targetState==FightManager.FIGHT_ROLE_STATE_CAN_NOT_FIGHT)//不能攻击
+				return ;
+			if(soulFightId!=null)
+			{
+				if(!soulFightId.EqualTo(targetId))
+				{
+					var soulState : int = FightManager.getFightRoleState(SceneManager.getSceneObjByID(soulFightId.ToGID()) as SceneRole);//攻击类型
+					if(soulState==FightManager.FIGHT_ROLE_STATE_CAN_NOT_FIGHT)//上一攻击怪不能攻击了 
+					{
+						soulFightId=targetId;
+						soulType=type;
+					}
+					else if(type==1&&soulType==2)//上一攻击怪可以攻击 本次是主动攻击前一次为被动攻击怪
+					{
+						soulFightId=targetId;
+						soulType=type;
+					}
+				}
+			}
+			else
+			{
+				soulFightId=targetId;
+				soulType=type;
+			}
+			if(soulFightId)
+			{
+				soulBroken=false;
+				TweenLite.delayedCall(skill.q_cd*0.001, soulFightBroken);
+				SpellSender.releaseSpellAtTarget(skill.q_skillID,360*Math.random(),soulFightId);
+				SkillCDManager.getInstance().addSkillCDTime(skill);
+			}
 			
 			
-			SpellSender.releaseSpellAtPos(skill.q_skillID,360*Math.random(),MainRoleManager.actor.x,MainRoleManager.actor.z);
-			SkillCDManager.getInstance().addSkillCDTime(skill);
+			//SpellSender.releaseSpellAtPos(skill.q_skillID,360*Math.random(),MainRoleManager.actor.x,MainRoleManager.actor.z);
+			
 			/*var configCDTime : int = skill.q_cd; //配置的CD时间
 			TweenLite.delayedCall(configCDTime/1000, startFightSoulFight);*/
+		}
+		
+		private function soulFightBroken():void
+		{
+			soulBroken=true;
 		}
 		
 		public function get isAutoFhist():Boolean

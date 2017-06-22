@@ -7,7 +7,7 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.app.manager.mount.ZhanQiManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
-	import com.rpgGame.coreData.clientConfig.Q_warFlag;
+	import com.rpgGame.coreData.clientConfig.Q_warflag;
 	
 	import org.mokylin.skin.app.zuoqi.Zhanqi_Skin;
 	
@@ -49,8 +49,8 @@ package com.rpgGame.appModule.mount
 			if(_curShowZhanQi==level)
 				return ;
 			_curShowZhanQi = level;
-			var nowdata:Q_warFlag=ZhanQiConfigData.getZhanQiDataById(_curShowZhanQi);
-			var nextdata:Q_warFlag=ZhanQiConfigData.getZhanQiDataById(_curShowZhanQi+1);
+			var nowdata:Q_warflag=ZhanQiConfigData.getZhanQiDataById(_curShowZhanQi);
+			var nextdata:Q_warflag=ZhanQiConfigData.getZhanQiDataById(_curShowZhanQi+1);
 			this.addMode(nowdata,nextdata);
 			_skin.btn_prev.visible = _curShowZhanQi>1;
 			_skin.btn_next.visible = _curShowZhanQi<Math.min(ZhanQiConfigData.maxCount,ZhanQiManager.instance().zhanqiLevel);
@@ -58,7 +58,7 @@ package com.rpgGame.appModule.mount
 			_skin.mc_jieshu.gotoAndStop(_curShowZhanQi-1);
 		}
 		
-		public function addMode(current:Q_warFlag,next:Q_warFlag):void
+		public function addMode(current:Q_warflag,next:Q_warflag):void
 		{
 			if(_curtentInterEff!=null)
 			{
@@ -79,7 +79,7 @@ package com.rpgGame.appModule.mount
 			data.forceLoad=true;//ui上的3d特效强制加载
 			var unit : RenderUnit3D = _curtentInterEff.addRenderUnitWith(data, 0);		
 			_curtentInterEff.x=340;
-			_curtentInterEff.y=440;
+			_curtentInterEff.y=480;
 			unit.setScale(3.5);
 			unit.addUnitAtComposite(unit);
 			this.addChild3D(_curtentInterEff);
@@ -93,7 +93,7 @@ package com.rpgGame.appModule.mount
 			anation = new TargetAmationInfo();
 			anation.target = _curtentInterEff;
 			anation.propName = "y";
-			anation.setValue(440,480);
+			anation.setValue(480,520);
 			_amationInfos.push(anation);
 			
 			anation = new TargetAmationInfo();
@@ -123,7 +123,7 @@ package com.rpgGame.appModule.mount
 			anation = new TargetAmationInfo();
 			anation.target = _nextInterEff;
 			anation.propName = "y";
-			anation.setValue(370,440);
+			anation.setValue(370,480);
 			_amationInfos.push(anation);
 			
 			anation = new TargetAmationInfo();

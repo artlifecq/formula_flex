@@ -36,6 +36,8 @@ package com.rpgGame.coreData.clientConfig
 		public var clickType:int;
 		 /**  窗口参数 */
 		public var clickarg:String;
+		 /**  要打开的对应功能id */
+		public var open_id:String;
 
 	}
 }

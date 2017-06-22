@@ -3,7 +3,6 @@ package com.rpgGame.core.manager
 	import com.app.events.AudioEvent;
 	import com.app.media.AudioInfo;
 	import com.app.media.AudioInterface;
-	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	
 	/**

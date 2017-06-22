@@ -16,14 +16,19 @@ package com.rpgGame.app.ui.main.buttons
 	import org.mokylin.skin.mainui.activityBar.button.ButtonHuodongtating;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonLunjian;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonZhanchangdating;
+	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_jinjie;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_renwu;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_shangcheng;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_shejiao;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_wuxue;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_zhanhun;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_zhuangbei;
-	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_zuoqi;
 
+	/**
+	 *主按钮配置管理器 
+	 * @author dik
+	 * 
+	 */
 	public class MainButtonManager
 	{
 		private static var _classMap:HashMap;
@@ -33,7 +38,7 @@ package com.rpgGame.app.ui.main.buttons
 			_initializeMap = new HashMap();
 			_classMap = new  HashMap();
 			regClass(1,MainButtonBases,ButtonSkin_renwu);
-			regClass(2,MainButton_Mount,ButtonSkin_zuoqi);
+			regClass(2,MainButton_Mount,ButtonSkin_jinjie);
 			regClass(3,MainButton_Equip,ButtonSkin_zhuangbei);
 			regClass(4,MainButtonBases,ButtonSkin_wuxue);
 			regClass(5,MainButtonBases,ButtonSkin_zhanhun);
@@ -44,6 +49,7 @@ package com.rpgGame.app.ui.main.buttons
 			regClass(103,ActivityButton,ButtonFubendating);
 			regClass(104,ActivityButton,ButtonZhanchangdating);
 			regClass(105,MultyActivityButton,ButtonFubenduilie);
+			regClass(106,MultyActivityButton,ButtonFubenduilie);
 		}
 		private static function regClass(id:int,cls:Class,skinui:Class):void
 		{
@@ -53,7 +59,7 @@ package com.rpgGame.app.ui.main.buttons
 		public static function getButtonBuyInfo(info:FunctionBarInfo):IOpen
 		{
 			var level:int = FunctionOpenManager.getOpenLevelByFunBarInfo(info);
-			if(!FunctionOpenManager.checkOpenByLevel(level))
+			if(!_initializeMap||!FunctionOpenManager.checkOpenByLevel(level))
 				return null;
 			var button:IOpen = _initializeMap.getValue(info.id);
 			if(button == null)

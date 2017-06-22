@@ -1,6 +1,7 @@
 package com.rpgGame.coreData.clientConfig
 {
 	import flash.net.registerClassAlias;
+	
 	import org.client.mainCore.ds.HashMap;
 	/**
 	* 
@@ -80,7 +81,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const HeroModel:String = "data.model.HeroModel";
 		/**  坐骑模型表	功能名称	动画资源名称 */
 		public static const MountModel:String = "data.model.MountModel";
-		/**  3 怪物基本信息数据库																																																																	 */
+		/**  3 怪物基本信息数据库																																																																绑定器			 */
 		public static const Q_monster:String = "data.monster.Q_monster";
 		/**  NPC配置数据库																									 */
 		public static const Q_npc:String = "data.monster.Q_npc";
@@ -98,6 +99,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_cheats:String = "data.Q_cheats";
 		/**  经脉冲穴数据库																 */
 		public static const Q_cheats_node:String = "data.Q_cheats_node";
+		/**  押镖护宝											 */
+		public static const Q_convoy:String = "data.Q_convoy";
 		/**  资源副本数据库	副本类型 （1真气,2装备,3经验）	背景图													 */
 		public static const Q_daily_zone:String = "data.Q_daily_zone";
 		/**  每日副本刷怪配置表													 */
@@ -122,9 +125,9 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_fightsoul_path:String = "data.Q_fightsoul_path";
 		/**  全局变量表		 */
 		public static const Q_global:String = "data.Q_global";
-		/**   										 */
+		/**   											 */
 		public static const Q_guild:String = "data.Q_guild";
-		/**  															 */
+		/**  																 */
 		public static const Q_guild_permission:String = "data.Q_guild_permission";
 		/**  帮派技能表					 */
 		public static const Q_guildskill:String = "data.Q_guildskill";
@@ -144,7 +147,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_lostskill_up:String = "data.Q_lostskill_up";
 		/**  论剑配置表											 */
 		public static const Q_lunjian:String = "data.Q_lunjian";
-		/**  副本触发表																			 */
+		/**  副本触发表																				 */
 		public static const Q_map_trigger:String = "data.Q_map_trigger";
 		/**  经脉冲穴数据库																 */
 		public static const Q_meridian:String = "data.Q_meridian";
@@ -162,7 +165,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_mission_segment:String = "data.Q_mission_segment";
 		/**  功能开放表														 */
 		public static const Q_newfunc:String = "data.Q_newfunc";
-		/**  九层妖塔							 */
+		/**  九层妖塔									 */
 		public static const Q_nine_tower:String = "data.Q_nine_tower";
 		/**  通知列表			 */
 		public static const Q_notify:String = "data.Q_notify";
@@ -170,17 +173,19 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_relation:String = "data.Q_relation";
 		/**  16商城道具配置表													 */
 		public static const Q_shop:String = "data.Q_shop";
+		/**  城池基础表										 */
+		public static const Q_singlecitybase:String = "data.Q_singlecitybase";
 		/**  购买界面其他途径提示数据库				 */
 		public static const Q_source:String = "data.Q_source";
-		/**  活动配置表																										 */
+		/**  活动配置表																												 */
 		public static const Q_special_activities:String = "data.Q_special_activities";
 		/**  tipsid	标题	描述 */
 		public static const Q_tipsinfo:String = "data.Q_tipsinfo";
 		/**  战旗基本信息数据库																	 */
-		public static const Q_warFlag:String = "data.Q_warFlag";
+		public static const Q_warflag:String = "data.Q_warflag";
 		/**  窗口链接				 */
 		public static const Q_windowInfo:String = "data.Q_windowInfo";
-		/**  世界BOSS活动配置					 */
+		/**  世界BOSS活动配置								 */
 		public static const Q_world_boss:String = "data.Q_world_boss";
 		/**  副本数据表															 */
 		public static const Q_zone:String = "data.Q_zone";
@@ -200,8 +205,6 @@ package com.rpgGame.coreData.clientConfig
 		public static const SocketErrorNoteInfo:String = "data.SocketErrorNoteInfo";
 		/**  对象绑定器,绑定器可绑定在玩家，怪物，地面特效等，用来加强效果和增强功能，实现功能的组合									 */
 		public static const Attach:String = "data.spell.Attach";
-		/**  	预警技能关联							 */
-		public static const Q_skill_warning:String = "data.spell.Q_skill_warning";
 		/**  地面特效			 */
 		public static const Attach_effect:String = "data.spell.Attach_effect";
 		/**  BUFF效果配置数据表																																									 */
@@ -212,7 +215,9 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_skill_ignore:String = "data.spell.Q_skill_ignore";
 		/**  技能基本信息配置数据表																																																																																																																																									 */
 		public static const Q_skill_model:String = "data.spell.Q_skill_model";
-		/**  技能效果配置表																			 */
+		/**  预警技能关联表			 */
+		public static const Q_skill_warning:String = "data.spell.Q_skill_warning";
+		/**  技能效果配置表																				 */
 		public static const Q_SpellAnimation:String = "data.spell.Q_SpellAnimation";
 		/**  单个技能效果的数据配置																								 */
 		public static const Q_SpellEffect:String = "data.spell.Q_SpellEffect";
@@ -265,6 +270,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_battle_rank", com.rpgGame.coreData.clientConfig.Q_battle_rank);
 			regClass("data.Q_cheats", com.rpgGame.coreData.clientConfig.Q_cheats);
 			regClass("data.Q_cheats_node", com.rpgGame.coreData.clientConfig.Q_cheats_node);
+			regClass("data.Q_convoy", com.rpgGame.coreData.clientConfig.Q_convoy);
 			regClass("data.Q_daily_zone", com.rpgGame.coreData.clientConfig.Q_daily_zone);
 			regClass("data.Q_dailyzone_monster", com.rpgGame.coreData.clientConfig.Q_dailyzone_monster);
 			regClass("data.Q_die", com.rpgGame.coreData.clientConfig.Q_die);
@@ -301,10 +307,11 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_notify", com.rpgGame.coreData.clientConfig.Q_notify);
 			regClass("data.Q_relation", com.rpgGame.coreData.clientConfig.Q_relation);
 			regClass("data.Q_shop", com.rpgGame.coreData.clientConfig.Q_shop);
+			regClass("data.Q_singlecitybase", com.rpgGame.coreData.clientConfig.Q_singlecitybase);
 			regClass("data.Q_source", com.rpgGame.coreData.clientConfig.Q_source);
 			regClass("data.Q_special_activities", com.rpgGame.coreData.clientConfig.Q_special_activities);
 			regClass("data.Q_tipsinfo", com.rpgGame.coreData.clientConfig.Q_tipsinfo);
-			regClass("data.Q_warFlag", com.rpgGame.coreData.clientConfig.Q_warFlag);
+			regClass("data.Q_warflag", com.rpgGame.coreData.clientConfig.Q_warflag);
 			regClass("data.Q_windowInfo", com.rpgGame.coreData.clientConfig.Q_windowInfo);
 			regClass("data.Q_world_boss", com.rpgGame.coreData.clientConfig.Q_world_boss);
 			regClass("data.Q_zone", com.rpgGame.coreData.clientConfig.Q_zone);
@@ -316,12 +323,12 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.SceneCharPatrolInfo", com.rpgGame.coreData.clientConfig.SceneCharPatrolInfo);
 			regClass("data.SocketErrorNoteInfo", com.rpgGame.coreData.clientConfig.SocketErrorNoteInfo);
 			regClass("data.spell.Attach", com.rpgGame.coreData.clientConfig.Attach);
-			regClass("data.spell.Q_skill_warning", com.rpgGame.coreData.clientConfig.Q_skill_warning);
 			regClass("data.spell.Attach_effect", com.rpgGame.coreData.clientConfig.Attach_effect);
 			regClass("data.spell.Q_buff", com.rpgGame.coreData.clientConfig.Q_buff);
 			regClass("data.spell.Q_GCD", com.rpgGame.coreData.clientConfig.Q_GCD);
 			regClass("data.spell.Q_skill_ignore", com.rpgGame.coreData.clientConfig.Q_skill_ignore);
 			regClass("data.spell.Q_skill_model", com.rpgGame.coreData.clientConfig.Q_skill_model);
+			regClass("data.spell.Q_skill_warning", com.rpgGame.coreData.clientConfig.Q_skill_warning);
 			regClass("data.spell.Q_SpellAnimation", com.rpgGame.coreData.clientConfig.Q_SpellAnimation);
 			regClass("data.spell.Q_SpellEffect", com.rpgGame.coreData.clientConfig.Q_SpellEffect);
 			regClass("data.spell.Q_summon", com.rpgGame.coreData.clientConfig.Q_summon);

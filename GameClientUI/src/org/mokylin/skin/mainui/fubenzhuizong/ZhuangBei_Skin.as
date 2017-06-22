@@ -54,6 +54,8 @@ package org.mokylin.skin.mainui.fubenzhuizong
 
 		public var task_box:feathers.controls.Group;
 
+		public var uiKill:feathers.controls.UIAsset;
+
 		public var ui_head:feathers.controls.UIAsset;
 
 
@@ -141,7 +143,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.styleName = "ui/component/progress/jindutiao/jdtbg.png";
 			temp.width = 192;
 			temp.x = 16;
-			temp.y = 133;
+			temp.y = 296;
 			return temp;
 		}
 
@@ -221,7 +223,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.width = 237;
 			temp.x = 12;
 			temp.y = 37;
-			temp.elementsContent = [__ZhuangBei_Skin_UIAsset5_i(),sec_subbut1_i(),sec_time_i(),sec_time2_i(),__ZhuangBei_Skin_UIAsset6_i(),sec_killbut1_1_i(),__ZhuangBei_Skin_UIAsset7_i(),pro_bar_i(),lbNum_i(),sec_ico1_0_i(),sec_ico1_1_i(),sec_ico1_2_i(),lbshuliang_i()];
+			temp.elementsContent = [__ZhuangBei_Skin_UIAsset5_i(),sec_subbut1_i(),sec_time_i(),sec_time2_i(),__ZhuangBei_Skin_UIAsset6_i(),sec_killbut1_1_i(),__ZhuangBei_Skin_UIAsset7_i(),pro_bar_i(),lbNum_i(),sec_ico1_0_i(),sec_ico1_1_i(),sec_ico1_2_i(),lbshuliang_i(),uiKill_i()];
 			return temp;
 		}
 
@@ -349,6 +351,17 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.x = 0;
 			temp.y = 0;
 			temp.elementsContent = [__ZhuangBei_Skin_UIAsset1_i(),__ZhuangBei_Skin_UIAsset2_i(),secondary_box_i()];
+			return temp;
+		}
+
+		private function uiKill_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiKill = temp;
+			temp.name = "uiKill";
+			temp.styleName = "ui/common/yijisha.png";
+			temp.x = 62;
+			temp.y = 56;
 			return temp;
 		}
 

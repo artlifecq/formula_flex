@@ -23,7 +23,8 @@ package com.rpgGame.app.ui.tab
 		private var _tabViewMap:HashMap;
 		protected var _data:*;
 		protected var _allDatas:Vector.<UITabBarData>;//所有的tab数据
-		
+		protected var _currentKey:String;
+		protected var _needRefash:Boolean = true;
 		/**
 		 * 
 		 * @param tab 要绑定的tabbar
@@ -63,8 +64,7 @@ package com.rpgGame.app.ui.tab
 			}
 			_tabBar.addEventListener(Event.CHANGE,selectChangeHandler);
 			this._data=data;
-			_tabBar.selectedIndex=setTabDataWithTabKey(openTable);
-			selectChangeHandler();
+			switchTabKey(openTable);
 		}
 		
 		/**
@@ -72,7 +72,7 @@ package com.rpgGame.app.ui.tab
 		 * @param key
 		 * 
 		 */
-		protected function setTabDataWithTabKey(key:String):int
+		protected function getTabDataIndexByTabKey(key:String):int
 		{
 			var num:int=_tabBar.dataProvider.length;
 			var i:int=0;
@@ -83,18 +83,77 @@ package com.rpgGame.app.ui.tab
 					return i;
 				}
 			}
-			
-			num=_allDatas.length;
-			for(i=0;i<num;i++){
-				item=_allDatas[i];
-				if(item.tabKey==key){
-					_tabBar.dataProvider.addItemAt(item,i);
-					return i;
-				}
-			}
 			return -1;
 		}
 		
+		protected function getTabkeyByIndex(index:int):String
+		{
+			return (_tabBar.dataProvider.getItemAt(index) as UITabBarData).tabKey
+		}
+		
+		public function switchTabKey(key:String):void
+		{
+			var index:int = getTabDataIndexByTabKey(key);
+			if(index<0)
+			{
+				index = 0;
+				key = getTabkeyByIndex(index);
+			}
+			_currentKey = key;
+			_tabBar.selectedIndex=index;
+			selectChangeHandler();
+		}
+		
+		public function addTabDataWithTabKey(key:String):void
+		{
+			var num:int=_allDatas.length;
+			var item:UITabBarData;
+			for(var i:int=0;i<num;i++){
+				item=_allDatas[i];
+				if(item.tabKey==key){
+					if(!item.isShow)
+					{
+						item.isShow = true;
+						_needRefash = true;
+					}
+					break;
+				}
+			}
+		}
+		
+		public function removeTabDataWithTabKey(key:String):void
+		{
+			var num:int=_allDatas.length;
+			var item:UITabBarData;
+			for(var i:int=0;i<num;i++){
+				item=_allDatas[i];
+				if(item.tabKey==key){
+					if(item.isShow)
+					{
+						item.isShow = false;
+						_needRefash = true;
+					}
+					break;
+				}
+			}
+		}
+		
+		public function updata():void
+		{
+			if(!_needRefash)
+				return ;
+			_needRefash = false;
+			var num:int=_allDatas.length;
+			var item:UITabBarData;
+			_tabBar.dataProvider.removeAll();
+			for(var i:int=0;i<num;i++){
+				item=_allDatas[i];
+				if(item.isShow)
+				{
+					_tabBar.dataProvider.push(item);
+				}
+			}
+		}
 		private function selectChangeHandler():void
 		{
 			var index:int=_tabBar.selectedIndex;
@@ -105,6 +164,7 @@ package com.rpgGame.app.ui.tab
 			if(!item){
 				return;
 			}
+			_currentKey = item.tabKey;
 			var view:ViewUI=_tabViewMap.getValue(item.viewStyle);
 			if(!view){
 				var cls:Class=item.viewStyle;

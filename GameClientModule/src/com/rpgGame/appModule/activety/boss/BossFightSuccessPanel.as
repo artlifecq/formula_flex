@@ -1,10 +1,9 @@
 package com.rpgGame.appModule.activety.boss
 {
-	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
-	import com.rpgGame.coreData.cfg.active.ActivetyDataManager;
+	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.BossActInfo;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
@@ -38,7 +37,7 @@ package com.rpgGame.appModule.activety.boss
 			super.show(data,openTable,parentContiner);
 			var msg:SCWorldBossResultMessage=data;
 			var rank:int=msg.rank;
-			var bossActInfo:BossActInfo=ActivetyDataManager.getActInfoById(msg.activityId) as BossActInfo;
+			var bossActInfo:BossActInfo=ActivetyCfgData.getActInfoById(msg.activityId) as BossActInfo;
 			var rewards:Array=bossActInfo.getRankReward(rank);
 			_skin.numPaiming.label=rank.toString();
 			var icon:IconCDFace;

@@ -4,8 +4,6 @@ package com.editor.scene
 	import com.editor.state.role.RoleStateMachine;
 	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.game.engine3D.vo.BaseRole;
-	import com.game.mainCore.libCore.pool.IPoolClass;
-	import com.game.mainCore.libCore.pool.Pool;
 
 	/**
 	 *
@@ -41,7 +39,7 @@ package com.editor.scene
 			if (!role)
 				return;
 			_cnt--;
-			_pool.disposeObj(role);
+			_pool.recycleObj(role);
 		}
 
 		public static function get cnt() : int

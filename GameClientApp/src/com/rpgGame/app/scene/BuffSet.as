@@ -433,11 +433,11 @@ package com.rpgGame.app.scene
 						_role.stateMachine.transition(RoleStateType.CONTROL_SHORTCUTGRID, buffRef);
 						break;
 					
-					case 42:// 预警状态
+					/*case 42:// 预警状态-------------------预警状态已经去掉不用了 后面如果加上的话再开启    yt
 						buffRef = _role.stateMachine.getReference(SkillWarningStateReference) as SkillWarningStateReference;
 						buffRef.setParams(buffData);
 						_role.stateMachine.transition(RoleStateType.CONTROL_SKILL_WARNING, buffRef);
-						break;
+						break;*/
 					case 199://冰冻
 						buffRef = _role.stateMachine.getReference(BingDongStateReference) as BingDongStateReference;
 						buffRef.setParams(buffData);

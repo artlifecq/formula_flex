@@ -275,41 +275,33 @@ package com.rpgGame.app.ui.main.shortcut
 			}
 			
 		}
-		private var nowNuta:int=-1;
+		private var nowNuta:int=0;
 		private var turnKey:Boolean=false;
 		/**设置弩塔转动特效*/
 		private function showNutaNumber():void
 		{
-			var num:int = MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_NU_TA);
-			
 			if(skillID==NUTA&&playerJod==JobEnum.ROLE_2_TYPE)//疯狂连弩开启是否是墨家    
 			{
+				var num:int = MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_NU_TA);
+				
 				if(nowNuta!=num)
 				{
-					nowNuta=num;
-					updateLabTxt(""+num);
 					if(num<NUTAMAX)
 					{
-						
-						if(!turnKey&&nutaEffect!=null)//弩塔特效在转的话继续转就是了
+						if((!turnKey||num>nowNuta)&&nutaEffect!=null)
 						{
-							
-							nutaEffect.playEffect(0,0.2);
+							nutaEffect.playEffect(1,0.125);
 							turnKey=true;
 						}
-						
-						
 					}
-					else if(num==NUTAMAX)
+					else
 					{
-						if(nutaEffect!=null)
-						{
-							nutaEffect.stopEffect();
-							turnKey=false;
-						}
+						turnKey=false;
+						nutaEffect.stopEffect();
 					}
+					nowNuta=num;
+					updateLabTxt(""+nowNuta);
 				}
-				
 			}
 			else//不是弩塔技能了，值空数字
 			{
@@ -322,7 +314,10 @@ package com.rpgGame.app.ui.main.shortcut
 				}
 			}
 		}
-		
+		private function nutaComplete(target:InterObject3D):void
+		{
+			turnKey=false;
+		}
 		/**设置消耗金针数*/
 		private function showJingzhenNumber():void
 		{
@@ -375,7 +370,7 @@ package com.rpgGame.app.ui.main.shortcut
 			{
 				if(cdFace)
 				{
-					cdFace.updateTimeTxt($now,$cdTotal);
+					cdFace.updateTimeTxt($now,$cdTotal,true);
 				}
 				if($cdTotal>_now)
 				{
@@ -481,7 +476,7 @@ package com.rpgGame.app.ui.main.shortcut
 				}
 				else if(skillID==NUTA)
 				{
-					nutaEffect=effectSk.addInter3D(ClientConfig.getEffect(EffectUrl.UI_TANU_MJ));
+					nutaEffect=effectSk.addInter3D(ClientConfig.getEffect(EffectUrl.UI_TANU_MJ),false,nutaComplete);
 				}
 				
 			}

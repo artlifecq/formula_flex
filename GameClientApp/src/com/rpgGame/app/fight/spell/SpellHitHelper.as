@@ -77,7 +77,7 @@ package com.rpgGame.app.fight.spell
 						if (role.isMainChar && hurtVo.atkor && hurtVo.atkor.usable)
 						{
 							hurtVo.atkor.updateInteractTime();
-							TrusteeshipManager.getInstance().startFightSoulFight();
+							//TrusteeshipManager.getInstance().startFightSoulFight();
 						}
 						if (hurtVo.atkor && hurtVo.atkor.usable && hurtVo.atkor.isMainChar)
 						{

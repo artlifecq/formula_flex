@@ -9,7 +9,6 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
 	import com.rpgGame.app.ui.main.chat.ChatBar;
 	import com.rpgGame.app.ui.main.chat.SystemMsgBar;
-	import com.rpgGame.app.ui.main.dungeon.DungeonTrackerBar;
 	import com.rpgGame.app.ui.main.head.MainRoleHeadBar;
 	import com.rpgGame.app.ui.main.head.MonsterBossBar;
 	import com.rpgGame.app.ui.main.head.MonsterEliteBar;
@@ -23,6 +22,7 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.app.ui.main.team.TeamLeftFixedBar;
 	import com.rpgGame.app.ui.main.top.ExpBar;
 	import com.rpgGame.app.ui.main.top.TopBar;
+	import com.rpgGame.app.ui.scene.dungeon.DungeonTrackerBar;
 	import com.rpgGame.core.app.AppDispather;
 	import com.rpgGame.core.app.AppEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;

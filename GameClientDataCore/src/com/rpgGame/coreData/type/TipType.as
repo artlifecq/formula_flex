@@ -58,6 +58,8 @@ package com.rpgGame.coreData.type
 		public static const PROPCHANGE_TIP : int = rEnum.next;
 		/** 世界bos奖励 tips*/
 		public static const SHIJIEBOSS_REWAD_TIP : int = rEnum.next;
+		/** 王城争霸奖励 tips*/
+		public static const WCZB_REWAD_TIP : int = rEnum.next;
 		/** 绝学技能 tips*/
 		public static const LOSTSKILL_TIP : int = rEnum.next;
 		/**
