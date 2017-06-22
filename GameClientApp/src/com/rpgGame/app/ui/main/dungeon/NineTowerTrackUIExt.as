@@ -65,7 +65,7 @@ package com.rpgGame.app.ui.main.dungeon
 			var left2:int=(_flagEndTime-getTimer())/1000;
 			if (left2>0) 
 			{
-				_skin.labOwnerTime.text="倒计时："+TextUtil.SecondToHMS3(left2);
+				_skin.labOwnerTime.text="倒计时："+HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,TextUtil.SecondToHMS3(left2));
 			}
 			if (left<=0&&left2<=0) 
 			{
@@ -140,7 +140,7 @@ package com.rpgGame.app.ui.main.dungeon
 			{
 				_flagEndTime=data.time*1000+getTimer();
 			}
-			_skin.labOwnerTime.text="倒计时："+TextUtil.SecondToHMS3(data.time);
+			_skin.labOwnerTime.text="倒计时："+HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,TextUtil.SecondToHMS3(data.time));
 		}
 		override protected function onHide():void
 		{

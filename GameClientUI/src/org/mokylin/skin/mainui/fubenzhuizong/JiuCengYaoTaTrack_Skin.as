@@ -278,7 +278,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.fontSize = 14;
 			temp.text = "倒计时：$";
 			temp.textAlign = "left";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 161;
 			temp.x = 0;
@@ -294,7 +294,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.fontSize = 14;
 			temp.text = "持有者：$";
 			temp.textAlign = "left";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 162;
 			temp.x = 0;
