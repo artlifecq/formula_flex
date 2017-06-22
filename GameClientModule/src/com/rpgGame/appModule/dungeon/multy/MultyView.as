@@ -563,7 +563,6 @@ package com.rpgGame.appModule.dungeon.multy
 				{
 					GrayFilter.gray(paioc);
 					ItemActionManager.tweenItemInBag(paioc);
-					L.l("ItemActionManager");
 				}
 				//passRewardList[multyData.q_zone_id]
 				
