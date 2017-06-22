@@ -200,7 +200,7 @@ package com.rpgGame.app.ui.main.taskbar
 				if (role != null&& role.data !=null&&role.headFace!=null) 
 				{
 					var speak:String=MonsterDataManager.getNpcSpeak(npcId);
-					if(speak!=""&&!AppManager.isAppInScene(AppConstant.NPC_SPEAK))
+					if(speak!=null&&speak!=""&&!AppManager.isAppInScene(AppConstant.NPC_SPEAK))
 					{
 						role.headFace.addChild(NpcSpeakBubble.speakBubble(speak));
 					}
