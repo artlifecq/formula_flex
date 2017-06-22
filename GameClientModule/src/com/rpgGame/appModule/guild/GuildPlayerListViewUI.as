@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.guild
 {
 	import com.rpgGame.app.manager.guild.GuildManager;
+	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
@@ -120,10 +121,10 @@ package com.rpgGame.appModule.guild
 					requestPage(_currentPage+1);
 					break;
 				case _skin.btnZhaoJi:
-					GuildManager.instance().guildConvene();
+					GuildSender.guildConvene();
 					break;
 				case _skin.btnZhaoMu:
-					GuildManager.instance().guildConvene();
+					GuildSender.guildConvene();
 					break;
 				case _skin.btnJoin:
 					if(GuildManager.instance().canDissolve)

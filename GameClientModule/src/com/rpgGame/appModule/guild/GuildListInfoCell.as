@@ -1,8 +1,7 @@
 package com.rpgGame.appModule.guild
 {
 	import com.rpgGame.app.manager.guild.GuildManager;
-	import com.rpgGame.core.app.AppConstant;
-	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.core.events.GuildEvent;
 	import com.rpgGame.coreData.cfg.GuildCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_guild;
@@ -72,7 +71,7 @@ package com.rpgGame.appModule.guild
 				_opaque = GuildManager.opaque;
 				_guildid = _guildListinfo.guildId;
 				addEvent();
-				GuildManager.instance().reqGuildJoin(_guildListinfo.guildId,_opaque);
+				GuildSender.reqGuildJoin(_guildListinfo.guildId,_opaque);
 			}else{
 //				AppManager.showApp(AppConstant.GUILD_APPLAYINFO_PANEL,_guildListinfo.guildId);
 				GuildPorpInfoPanel.instance.show(_guildListinfo.guildId);

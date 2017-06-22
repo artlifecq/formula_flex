@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.guild
 {
 	import com.rpgGame.app.manager.guild.GuildManager;
+	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	
 	import away3d.events.Event;
@@ -59,7 +60,7 @@ package com.rpgGame.appModule.guild
 			}
 			
 			_gropu.selectedIndex = 0;
-			GuildManager.instance().reqGuildSkillInfo();
+			GuildSender.reqGuildSkillInfo();
 		}
 		
 	}

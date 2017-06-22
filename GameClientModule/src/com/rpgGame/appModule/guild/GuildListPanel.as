@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.guild
 {
 	import com.rpgGame.app.manager.guild.GuildManager;
+	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.core.events.GuildEvent;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.netData.guild.message.ResGuildListInfoMessage;
@@ -84,7 +85,7 @@ package com.rpgGame.appModule.guild
 				return ;
 			if(page>_maxPage)
 				return ;
-			GuildManager.instance().reqGuildList(page,0,0);
+			GuildSender.reqGuildList(page,0,0);
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void

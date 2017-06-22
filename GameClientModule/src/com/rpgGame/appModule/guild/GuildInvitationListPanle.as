@@ -1,6 +1,6 @@
 package com.rpgGame.appModule.guild
 {
-	import com.rpgGame.app.manager.guild.GuildManager;
+	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.core.events.GuildEvent;
 	import com.rpgGame.netData.guild.bean.GuildInviteInfo;
@@ -45,7 +45,7 @@ package com.rpgGame.appModule.guild
 			super.show(data,openTable,parentContiner);
 			EventManager.addEvent(GuildEvent.GET_INVITE_GUILD_LIST,refeashView);
 			refeashView(null);
-			GuildManager.instance().reqGuildInviteList();
+			GuildSender.reqGuildInviteList();
 		}
 		
 		override public function hide():void

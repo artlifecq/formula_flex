@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.guild
 {
 	import com.rpgGame.app.manager.guild.GuildManager;
+	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.core.events.GuildEvent;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.ui.SkinUI;
@@ -48,7 +49,7 @@ package com.rpgGame.appModule.guild
 			{
 				StarlingLayerManager.topUILayer.addChild(this);
 			}
-			GuildManager.instance().reqGuildBriefnessInfo(_guildId,0);
+			GuildSender.reqGuildBriefnessInfo(_guildId,0);
 		}
 		
 		private function refeashView(info:GuildBriefnessInfo):void
@@ -73,7 +74,7 @@ package com.rpgGame.appModule.guild
 			super.onTouchTarget(target);
 			if(target == _skin.btnOk)
 			{
-				GuildManager.instance().reqGuildJoin(_guildId,0);
+				GuildSender.reqGuildJoin(_guildId,0);
 			}
 		}
 	}

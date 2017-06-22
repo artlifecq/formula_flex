@@ -1,226 +1,232 @@
 package com.rpgGame.app.sender
 {
-	import com.game.engine3D.vo.SenderReferenceSet;
-	import com.rpgGame.coreData.cfg.GuildCfgData;
+	import com.rpgGame.app.manager.guild.GuildManager;
+	import com.rpgGame.coreData.clientConfig.Q_guildskill;
+	import com.rpgGame.netData.guild.message.ReqGuildApplyListMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildApplyOperationMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildAppointMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildBriefnessInfoMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildConveneMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildCreateMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildDissolveMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildDonateMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildExitMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildGetDailyGiftMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildInfoMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildInviteListMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildInviteMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildInviteOperationMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildJoinMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildKillMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildLevelupMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildListMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildModifyNoteMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildSetAutoAcceptMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildSkillInfoMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildSkillLevelupMessage;
 	
-	import app.cmd.GuildModuleMessages;
-	import app.cmd.NpcModuleMessages;
-
+	import org.game.netCore.connection.SocketConnection;
+	import org.game.netCore.data.long;
+	
 	public class GuildSender extends BaseSender
 	{
 		public function GuildSender()
 		{
 		}
-		
-//		private static const SEND_JOIN_GUILD_LIST : Number = 15000;
-//		
-//		private static var _reqGetOfficeReferenceSet : SenderReferenceSet = new SenderReferenceSet(onReqGetOffice, SEND_JOIN_GUILD_LIST);
-		/**
-		 * 请求家族加入帮派的列表
-		 *
-		 * 只有有权限的官员才可以申请,两次申请间隔必须为15秒
-		 */
-		public static function getJoinGuildList():void
+		/**  请求获得帮会信息 */
+		public static function requestGuildInfo():void
 		{
-			_bytes.clear();
-			send(GuildModuleMessages.C2S_GET_FAMILY_REQUEST_JOIN_GUILD_LIST,_bytes);
-		}
-		/**
-		 * 请求本国帮派列表,请求时间间隔15秒
-		 */
-		public static function getGuildList():void
-		{
-			_bytes.clear();
-			send(GuildModuleMessages.C2S_GET_GUILD_LIST,_bytes);
-		}
-		/**
-		 * 请求加入别的帮派, 返回前不能再请求, 或者回复别的帮派的邀请
-		 *
-		 * 请求时必须自己有家族, 且是有权限申请的人, 且要求加入的帮派没满
-		 *
-		 * 附带
-		 *
-		 * bool true(发送申请)/false(取消申请)
-		 * 
-		 *
-		 * byte 要求加入的帮派名字
-		 */
-		public static function reqJoinGuild(guild:String,isJoin:Boolean):void
-		{
-			_bytes.clear();
-			_bytes.writeBoolean(isJoin);
-			_bytes.writeUTFBytes(guild);
-			send(GuildModuleMessages.C2S_REQUEST_JOIN,_bytes);
-		}
-		/**
-		* bool 是否同意(true同意,false不同意)
-		* bytes 目标家族名字
-		*/
-		public static function replyJoinReq(isAgree:Boolean,guild:String):void
-		{
-			_bytes.clear();
-			_bytes.writeBoolean(isAgree);
-			_bytes.writeUTFBytes(guild);
-			send(GuildModuleMessages.C2S_REPLY_JOIN_REQUEST,_bytes);
-		}
-		/**请求帮派基本数据**/
-		public static function getGuildBaseData():void
-		{
-			_bytes.clear();
-			send(GuildModuleMessages.C2S_GUILD_BASIC,_bytes);
-		}
-		private static const GET_GUILD_BASE_DATA : Number = 15000;
-		
-		private static var _reqGetGuildBaseDataSet : SenderReferenceSet = new SenderReferenceSet("onGetGuildBaseData",onGetGuildBaseData, GET_GUILD_BASE_DATA);
-		private static function onGetGuildBaseData():void
-		{
-			getGuildBaseData();
+			if(!GuildManager.instance().haveGuild)
+				return ;
+			sendMsg(new ReqGuildInfoMessage());
 		}
 		
-		public static function addGetGuildBaseDataReference(ref : Object) : void
+		/**  请求帮会技能 */
+		public static function reqGuildSkillInfo():void
 		{
-			_reqGetGuildBaseDataSet.addRef(ref);
+			sendMsg(new ReqGuildSkillInfoMessage());
 		}
 		
-		public static function removeGetGuildBaseDataReference(ref : Object) : void
+		/**创建帮会**/
+		public static function createGuild(type:int,name:String,banner:String):void
 		{
-			_reqGetGuildBaseDataSet.removeRef(ref);
+			var msg:ReqGuildCreateMessage = new ReqGuildCreateMessage();
+			msg.costType = type+1;
+			msg.name = name;
+			msg.note = banner;
+			msg.opaque = 0;
+			sendMsg(msg);
 		}
 		
-		/**
-		 * 查看所有向我们帮派发送过申请的人
-		 *
-		 * 申请间隔，30S
-		 */
-		public static function getReqJoinGuildList():void
+		/** 请求召集帮派 **/
+		public static function guildConvene():void
 		{
-			_bytes.clear();
-			send(GuildModuleMessages.C2S_GET_REQUEST_JOIN_DETAIL,_bytes);
-		}
-		/**邀请**/
-		public static function inviteJoin(heroId : Number):void
-		{
-			_bytes.clear();
-			_bytes.writeVarint64(heroId);
-			send(GuildModuleMessages.C2S_INVITE_JOIN,_bytes);
-		}
-		/**
-		 * 回复收到的入帮邀请, 在收到返回前不能再回复邀请
-		 *
-		 * */
-		public static function replyJoinInvite(isAgree:Boolean,guild:String):void
-		{
-			_bytes.clear();
-			_bytes.writeBoolean(isAgree);
-			_bytes.writeUTFBytes(guild);
-			send(GuildModuleMessages.C2S_REPLY_JOIN_INVITE,_bytes);
-		}
-		/**离开帮派**/
-		public static function leaveGuild():void
-		{
-			_bytes.clear();
-			send(GuildModuleMessages.C2S_LEAVE_GUILD,_bytes);
-		}
-		/**提出**/
-		public static function kickGuildMember(name:String):void
-		{
-			_bytes.clear();
-			_bytes.writeUTFBytes(name);
-			send(GuildModuleMessages.C2S_KICK_GUILD_MEMBER,_bytes);
-		}
-		/**
-		 * 设置公告
-		 * <p>
-		 * bytes 公告内容,自己屏蔽屏蔽字,长度不超过100个汉字
-		 */
-		public static function setAnnouncement(str : String):void
-		{
-			_bytes.clear();
-			_bytes.writeUTFBytes(str);
-			send(GuildModuleMessages.C2S_SET_ANNOUNCEMENT,_bytes);
-		}
-		/**获取公告**/
-		public static function getAnnouncement():void
-		{
-			_bytes.clear();
-			send(GuildModuleMessages.C2S_GET_ANNOUCEMENT,_bytes);
+			if(!GuildManager.instance().canConvene)
+				return ;
+			sendMsg(new ReqGuildConveneMessage());
 		}
 		
-		public static function setPos(name:String,isset:Boolean,pos:int):void
+		/** 获取帮派列表 **/
+		public static function reqGuildList(page:int,isfull:int,opaque:int):void
 		{
-			_bytes.clear();
-			_bytes.writeUTF(name);
-			_bytes.writeBoolean(isset);
-			_bytes.writeVarint32(pos);
-			send(GuildModuleMessages.C2S_SET_POS,_bytes);
+			var request:ReqGuildListMessage = new ReqGuildListMessage();
+			request.isFilterFull = isfull;
+			request.page = page;
+			request.opaque = opaque;
+			sendMsg(request);
 		}
-		/**申请升级**/
-		public static function upgradeLevel():void
+		/** 请求加入帮派 **/
+		public static function reqGuildJoin(guild:long,opaque:int):void
 		{
-			_bytes.clear();
-			send(GuildModuleMessages.C2S_UPGRADE_LEVEL,_bytes);
-		}
-		/**
-		 * 领取帮派奖励
-		 */
-		public static function getSalary():void
-		{
-			_bytes.clear();
-			send(GuildModuleMessages.C2S_COLLECT_PRIZE,_bytes);
-		}
-		/**
-		 * 领取王帮奖励
-		 */
-		public static function getKingSalary():void
-		{
-			_bytes.clear();
-			send(GuildModuleMessages.C2S_COLLECT_KING_PRIZE,_bytes);
-		}
-		/**
-		 * 请求帮派日志,请求间隔30S
-		 */
-		public static function getGuildLog():void
-		{
-			_bytes.clear();
-			send(GuildModuleMessages.C2S_GUILD_LOG,_bytes);
-		}
-		/**帮派创建
-		 *    	varint32 要扣除的物品在背包的位置
-         *      varint32 底纹
-         *      varint32 底框
-         *      utf 旗号(策划说只能够是一个汉字)
-         *      bytes 帮派名字
-		 * **/
-		public static function createGuild(npcId:int,dialog : int,pos:int,diwen:int,dikuang:int,banner:String,name:String):void
-		{
-			_bytes.clear();
-			_bytes.writeVarint64(npcId);
-			_bytes.writeVarint32(dialog);
-			_bytes.writeVarint32(pos);
-			_bytes.writeVarint32(diwen);
-			_bytes.writeVarint32(dikuang);
-			_bytes.writeUTF(banner);
-			_bytes.writeUTFBytes(name);
-			send(NpcModuleMessages.C2S_ON_CLICK_NPC,_bytes);
-		}
-		/**
-		 * 帮派捐献
-		 * <p>
-		 * varint32 捐献基数的倍数,必须>=1
-		 */
-		public static function donate(silver:Number):void
-		{
-			/*_bytes.clear();
-			_bytes.writeVarint32(silver/GuildCfgData.guildMiscData.donateMoneyBase);
-			send(GuildModuleMessages.C2S_DONATE,_bytes);*/
+			var msg:ReqGuildJoinMessage = new ReqGuildJoinMessage();
+			msg.guildId = guild;
+			msg.opaque = opaque;
+			sendMsg(msg);
 		}
 		
-		public static function getFamilyData(name:String):void
+		/** 邀请加入帮派 **/
+		public static function reqGuildInvite(playerId:long,opaque:int):void
 		{
-			_bytes.clear();
-			_bytes.writeUTFBytes(name);
-			send(GuildModuleMessages.C2S_GUILD_FAMILY_MEMBERS,_bytes);
+			var msg:ReqGuildInviteMessage = new ReqGuildInviteMessage();
+			msg.playerId = playerId;
+			msg.opaque = opaque;
+			sendMsg(msg);
 		}
-			
+		
+		/** 对邀请操作 **/
+		public static function reqGuildInviteOperation(guild:int,flag:int,opaque:int):void
+		{
+			var msg:ReqGuildInviteOperationMessage = new ReqGuildInviteOperationMessage();
+			msg.inviteId = guild;
+			msg.flag = flag;
+			msg.opaque = opaque;
+			sendMsg(msg);
+		}
+		
+		/** 请求召集帮派 **/
+		public static function reqGuildConvene(opaque:int):void
+		{
+			var msg:ReqGuildConveneMessage = new ReqGuildConveneMessage();
+			msg.opaque = opaque;
+			sendMsg(msg);
+		}
+		/** 解散帮会 **/
+		public static function guildDissolve():void
+		{
+			if(!GuildManager.instance().canDissolve)
+				return ;
+			sendMsg(new ReqGuildDissolveMessage());
+		}
+		/** 请求离开帮派 **/
+		public static function guildExit():void
+		{
+			sendMsg(new ReqGuildExitMessage());
+		}
+		
+		/** 请求设置自动通过玩家申请模式 **/
+		public static function reqGuildSetAutoAccept(type:int):void
+		{
+			var msg:ReqGuildSetAutoAcceptMessage = new ReqGuildSetAutoAcceptMessage();
+			msg.type = type;
+			sendMsg(msg);
+		}
+		
+		/** 对申请者操作 **/
+		public static function applyOperation(flag:int,applyId:int,opaque:int):void
+		{
+			var msg:ReqGuildApplyOperationMessage = new ReqGuildApplyOperationMessage();
+			msg.flag = flag;
+			msg.applyId = applyId;
+			msg.opaque = opaque;
+			sendMsg(msg);
+		}
+		
+		/** 请求提出成员 **/
+		public static function guildKill(playerId:long,opaque:int):void
+		{
+			var msg:ReqGuildKillMessage = new ReqGuildKillMessage();
+			msg.playerId = playerId;
+			msg.opaque = opaque;
+			SocketConnection.send(msg);
+		}
+		
+		/** 请求提出成员 **/
+		public static function guildAppoint(playerId:long,memberType:int,type:int,opaque:int):ReqGuildAppointMessage
+		{
+			var msg:ReqGuildAppointMessage = new ReqGuildAppointMessage();
+			msg.playerId = playerId;
+			msg.memberType = memberType;
+			msg.leaderModel = type;
+			msg.opaque = opaque;
+			sendMsg(msg);
+			return msg;
+		}
+		
+		/** 请求帮派升级 **/
+		public static function guildLevelup(opaque:int):void
+		{
+			if(!GuildManager.instance().canUpgrad)
+				return ;
+			var msg:ReqGuildLevelupMessage = new ReqGuildLevelupMessage();
+			msg.opaque = opaque;
+			sendMsg(msg);
+		}
+		
+		/** 请求领取帮派每日礼包 **/
+		public static function guildGetDailyGift(opaque:int):void
+		{
+			var msg:ReqGuildGetDailyGiftMessage = new ReqGuildGetDailyGiftMessage();
+			msg.opaque = opaque;
+			sendMsg(msg);
+		}
+		
+		/** 请求帮派捐献 **/
+		public static function guildDonate(type:int,num:int,opaque:int):void
+		{
+			if(num==0)
+				return ;
+			var msg:ReqGuildDonateMessage = new ReqGuildDonateMessage();
+			msg.type = type;
+			msg.num = num;
+			msg.opaque = opaque;
+			sendMsg(msg);
+		}
+		
+		/** 请求申请列表*/
+		public static function reqGuildApplyListInfo():void
+		{
+			sendMsg(new ReqGuildApplyListMessage());
+		}
+		
+		/** 获取帮派简介信息*/
+		public static function reqGuildBriefnessInfo(guildId:long,opaque:int):void
+		{
+			var msg:ReqGuildBriefnessInfoMessage = new ReqGuildBriefnessInfoMessage();
+			msg.guildId = guildId;
+			msg.opaque = opaque;
+			sendMsg(msg);
+		}
+		/** 获取邀请列表*/
+		public static function reqGuildInviteList():void
+		{
+			sendMsg(new ReqGuildInviteListMessage());
+		}
+		
+		/** 请求帮派技能升级*/
+		public static function guildSkillLevelup(type:int,skillid:int,opaque:int):void
+		{
+			var msg:ReqGuildSkillLevelupMessage = new ReqGuildSkillLevelupMessage();
+			msg.type = type;
+			msg.opaque = opaque;
+			msg.skillId = skillid;
+			sendMsg(msg);
+		}
+		/** 请求帮派宣言修改*/
+		public static function reqGuildModifyNote(note:String):void
+		{
+			var msg:ReqGuildModifyNoteMessage = new ReqGuildModifyNoteMessage();
+			msg.note = note;
+			sendMsg(msg);
+		}
 	}
 }
