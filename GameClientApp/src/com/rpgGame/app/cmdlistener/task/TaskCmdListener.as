@@ -111,6 +111,7 @@ package com.rpgGame.app.cmdlistener.task
 				var type:int=TaskMissionManager.getTaskInfoType(msg.taskId);
 				TaskMissionManager.removeTaskInfo(type);
 				EventManager.dispatchEvent(TaskEvent.TASK_FINISH_MATION,type);
+				AppManager.hideApp(AppConstant.TASK_FLY_PANEL);
 			}
 		}
 		
