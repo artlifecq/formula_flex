@@ -154,7 +154,10 @@ package com.rpgGame.app.manager.role
 			}
 			
 			if (role.headFace is HeadFace)
+			{
 				(role.headFace as HeadFace).updateTitle(data.junjieLv);
+				(role.headFace as HeadFace).updateHuBaoTitle(data.baowuLv);
+			}
 			
 			CharAttributeManager.setCharHp(data, data.totalStat.hp);
 			CharAttributeManager.setCharMaxLife(data, data.totalStat.life); //需要提供初始化方法,优化一下!
