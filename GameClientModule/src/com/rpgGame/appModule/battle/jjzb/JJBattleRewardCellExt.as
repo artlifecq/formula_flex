@@ -2,6 +2,7 @@ package com.rpgGame.appModule.battle.jjzb
 {
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	
 	import away3d.events.Event;
@@ -16,7 +17,7 @@ package com.rpgGame.appModule.battle.jjzb
 		{
 			_skin=new PaiMingItem();
 			super(_skin);
-			_gReward=new RewardGroup(_skin.icon1,RewardGroup.ALIN_LEFT,10,10);
+			_gReward=new RewardGroup(IcoSizeEnum.ICON_48,_skin.icon1,RewardGroup.ALIN_LEFT,10,10);
 			this.addEventListener(Event.REMOVED_FROM_STAGE,onRemoved);
 		}
 		

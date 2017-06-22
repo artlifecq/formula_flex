@@ -6,7 +6,7 @@ package org.mokylin.skin.app.banghui
 	import feathers.controls.UIAsset;
 	import feathers.layout.HorizontalLayout;
 	import org.mokylin.skin.common.yiji_panelbg2_Skin;
-
+	
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
@@ -18,10 +18,10 @@ package org.mokylin.skin.app.banghui
 		//                                定义成员变量
 		//==========================================================================
 		public var bg:feathers.controls.SkinnableContainer;
-
+		
 		public var tabBar:feathers.controls.TabBar;
-
-
+		
+		
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
@@ -38,8 +38,8 @@ package org.mokylin.skin.app.banghui
 			};
 			skinNames={};
 		}
-
-
+		
+		
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
@@ -49,7 +49,7 @@ package org.mokylin.skin.app.banghui
 			temp.gap = -1;
 			return temp;
 		}
-
+		
 		private function __BangHui_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -60,18 +60,18 @@ package org.mokylin.skin.app.banghui
 			temp.y = 75;
 			return temp;
 		}
-
+		
 		private function __BangHui_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.styleName = "ui/app/banghui/bangpai.png";
 			temp.x = 448;
-			temp.y = 11;
+			temp.y = 20;
 			return temp;
 		}
-
+		
 		private function bg_i():feathers.controls.SkinnableContainer
 		{
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
@@ -85,7 +85,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 0;
 			return temp;
 		}
-
+		
 		private function tabBar_i():feathers.controls.TabBar
 		{
 			var temp:feathers.controls.TabBar = new feathers.controls.TabBar();
@@ -97,6 +97,6 @@ package org.mokylin.skin.app.banghui
 			temp.layout = __BangHui_Skin_HorizontalLayout1_i();
 			return temp;
 		}
-
+		
 	}
 }

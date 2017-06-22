@@ -17,6 +17,7 @@ package com.rpgGame.appModule.battle.jcyt
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.TipsCfgData;
+	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.TipType;
@@ -35,7 +36,7 @@ package com.rpgGame.appModule.battle.jcyt
 		{
 			_skin=new JiuCengYaoTa_Skin();
 			super(_skin);
-			_gReward=new RewardGroup(_skin.icon1,0,10,-2);
+			_gReward=new RewardGroup(IcoSizeEnum.ICON_36,_skin.icon1,0);
 			TipTargetManager.show(_skin.iconSw, TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(29)));
 		}
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -137,6 +138,7 @@ package com.rpgGame.appModule.battle.jcyt
 		{
 			super.onHide();
 			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,onStateResChange);
+			EventManager.removeEvent(NineTowerEvent.GET_PANEL_DATA,onGetPanelData);
 			showRewardEffect(false);
 			_gReward.clear();
 		}

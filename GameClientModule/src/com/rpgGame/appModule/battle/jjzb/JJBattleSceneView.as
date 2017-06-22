@@ -93,6 +93,7 @@ package com.rpgGame.appModule.battle.jjzb
 		}
 		public function playSuccessEff():void
 		{
+			
 			if (eff==null) 
 			{
 				eff=new Inter3DContainer();

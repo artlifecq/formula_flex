@@ -2,6 +2,7 @@ package com.rpgGame.appModule.battle.dfdj
 {
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.coreData.clientConfig.Q_battle_rank;
+	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	
 	import feathers.controls.SkinnableContainer;
 	
@@ -18,7 +19,7 @@ package com.rpgGame.appModule.battle.dfdj
 		{
 			_view=skin;
 			_skin=skin.skin as DuanWeiList_Item;
-			gReward=new RewardGroup(_skin.icon1,0,20,-5,0);
+			gReward=new RewardGroup(IcoSizeEnum.ICON_36,_skin.icon1,0,20,-5,0);
 			_view.visible=false;
 		}
 		public function setConfig(qRank:Q_battle_rank):void
