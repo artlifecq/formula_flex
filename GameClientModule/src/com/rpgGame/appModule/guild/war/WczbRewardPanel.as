@@ -5,6 +5,7 @@ package com.rpgGame.appModule.guild.war
 	import com.rpgGame.coreData.cfg.QSinglecitybaseCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_singlecitybase;
 	import com.rpgGame.coreData.enum.EnumCity;
+	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	
 	import gs.TweenMax;
 	import gs.easing.Back;
@@ -38,11 +39,11 @@ package com.rpgGame.appModule.guild.war
 		
 		private function initView():void
 		{
-			wangGRe=new RewardGroup(_skin.gid1_1,RewardGroup.ALIN_LEFT,5);
-			wangBRe=new RewardGroup(_skin.gid1_6,RewardGroup.ALIN_LEFT,5);
-			weiGRe=new RewardGroup(_skin.gid2_1,RewardGroup.ALIN_LEFT,5);
-			weiBRe=new RewardGroup(_skin.gid2_6,RewardGroup.ALIN_LEFT,5);
-			canyuRe=new RewardGroup(_skin.gid3_1,RewardGroup.ALIN_LEFT,5);
+			wangGRe=new RewardGroup(IcoSizeEnum.ICON_48,_skin.gid1_1,RewardGroup.ALIN_LEFT,5);
+			wangBRe=new RewardGroup(IcoSizeEnum.ICON_48,_skin.gid1_6,RewardGroup.ALIN_LEFT,5);
+			weiGRe=new RewardGroup(IcoSizeEnum.ICON_48,_skin.gid2_1,RewardGroup.ALIN_LEFT,5);
+			weiBRe=new RewardGroup(IcoSizeEnum.ICON_48,_skin.gid2_6,RewardGroup.ALIN_LEFT,5);
+			canyuRe=new RewardGroup(IcoSizeEnum.ICON_48,_skin.gid3_1,RewardGroup.ALIN_LEFT,5);
 		}
 		
 		override protected function onStageResize(sw : int, sh : int) : void
