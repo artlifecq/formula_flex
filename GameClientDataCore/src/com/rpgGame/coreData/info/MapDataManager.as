@@ -2,22 +2,24 @@ package com.rpgGame.coreData.info
 {
 	import com.game.engine2D.config.MapConfig;
 	import com.game.engine2D.core.AsyncMapTexture;
+	import com.game.engine3D.config.GlobalConfig;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.info.map.map2d.MapData;
 	
+	import flash.events.Event;
 	import flash.utils.ByteArray;
 	import flash.utils.Endian;
 	
 	import away3d.events.Event;
+	import away3d.loaders.multi.MultiLoadData;
+	import away3d.loaders.multi.MultiUrlLoadManager;
+	import away3d.loaders.multi.MultiUrlLoader;
 	
 	import gs.TweenLite;
 	
-	import org.client.load.loader.multi.UrlLoadManager;
-	import org.client.load.loader.multi.loader.UrlLoader;
-	import org.client.load.loader.multi.vo.LoadData;
 	import org.client.mainCore.ds.HashMap;
 
 	/**
@@ -105,6 +107,14 @@ package com.rpgGame.coreData.info
 		private static function loadMapConfigData(mapDataUrl:String,onConfigCmp:Function,mapID:uint):void
 		{
 			var isLoading:Boolean = false;
+			
+			var url : String = mapDataUrl;
+			if (GlobalConfig.version != null)
+			{
+				url = GlobalConfig.version(url);
+			}
+			mapDataUrl = url;
+			
 			if(onConfigCmp != null)
 			{
 				var list:Vector.<Function> = _configCmpFunMap.getValue(mapDataUrl);
@@ -122,16 +132,16 @@ package com.rpgGame.coreData.info
 			
 			if(!isLoading)
 			{
-				var ld:LoadData = new LoadData(mapDataUrl,onMapConfigLoaded,null,null,"","",uint.MAX_VALUE,LoadData.URLLOADER_BINARY);
-				ld.userData = {mapID:mapID}
-				UrlLoadManager.load(ld);
+				var ld : MultiLoadData = new MultiLoadData(mapDataUrl, onMapConfigLoaded, null, null, "", "", uint.MAX_VALUE, MultiLoadData.URLLOADER_BINARY);
+				ld.userData = {mapID:mapID};
+				MultiUrlLoadManager.load(ld);
 			}
 		}
 		
 		/** 解析map.cfg文件[合成data.dat及area.json文件 ] */
-		private static function onMapConfigLoaded(ld:LoadData,e:Object):void
+		private static function onMapConfigLoaded(ld : MultiLoadData, e : flash.events.Event):void
 		{
-			var loader:UrlLoader = e.currentTarget as UrlLoader;
+			var loader : MultiUrlLoader = e.currentTarget as MultiUrlLoader;
 			var byteArr:ByteArray = loader.data as ByteArray;
 			var mapDataUrl:String = ld.url;
 			var mapID:int = ld.userData.mapID;
@@ -252,7 +262,7 @@ package com.rpgGame.coreData.info
 					{
 						bmpData = new AsyncMapTexture();
 						bmpData.userData = mapID;
-						bmpData.addEventListener(Event.COMPLETE, onMiniMapLoaded);
+						bmpData.addEventListener(away3d.events.Event.COMPLETE, onMiniMapLoaded);
 						bmpData.load(url);
 					}
 				}
@@ -273,7 +283,7 @@ package com.rpgGame.coreData.info
 			}
 		}
 		
-		private static function onMiniMapLoaded(e:Event):void
+		private static function onMiniMapLoaded(e:away3d.events.Event):void
 		{
 			var texture:AsyncMapTexture = e.currentTarget as AsyncMapTexture;
 			

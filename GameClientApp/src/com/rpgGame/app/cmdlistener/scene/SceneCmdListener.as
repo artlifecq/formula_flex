@@ -476,7 +476,7 @@ package com.rpgGame.app.cmdlistener.scene
 			if (role && role.usable && !role.getCamouflageEntity()) //有伪装则跟随伪装，防止服务器发伪装者移动。
 			{
 				var elapseTm : int = SystemTimeManager.curtTm - mInfo.startTm;
-				trace("寻路开始时间：" + mInfo.startTm, "_差值：" + elapseTm + "_服务器时间 ：" + SystemTimeManager.curtTm);
+				//trace("寻路开始时间：" + mInfo.startTm, "_差值：" + elapseTm + "_服务器时间 ：" + SystemTimeManager.curtTm);
 				RoleStateUtil.walkByInfos(mInfo);
 				
 				//调试bug用，可以删除！！！！
@@ -983,7 +983,7 @@ package com.rpgGame.app.cmdlistener.scene
 			var dropGoodsData : SceneDropGoodsData = new SceneDropGoodsData();
 			dropGoodsData.setGoodsExtraMsg(msg);
 			dropGoodsData.isDroped=true;
-			SceneRoleManager.getInstance().createDropGoods(dropGoodsData)
+			SceneRoleManager.getInstance().createDropGoods(dropGoodsData);
 		}
 		
 		private function onResReviveSuccessMessage(msg : ResReviveSuccessMessage) : void 

@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.guild
 {
 	import com.rpgGame.app.manager.guild.GuildManager;
+	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.GuildEvent;
@@ -83,7 +84,7 @@ package com.rpgGame.appModule.guild
 			if(page>_maxPage)
 				return ;
 			var isfull:int = _skin.chkGuolv.isSelected?1:0;
-			GuildManager.instance().reqGuildList(page,isfull,0);
+			GuildSender.reqGuildList(page,isfull,0);
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -101,7 +102,7 @@ package com.rpgGame.appModule.guild
 					requestPage(_currentPage);
 					break;
 				case _skin.btnJoin:
-					GuildManager.instance().reqGuildJoin(new long(-1),0);
+					GuildSender.reqGuildJoin(new long(-1),0);
 					break;
 				case _skin.lbList:
 					AppManager.showApp(AppConstant.GUILD_INVITATION_PANEL);

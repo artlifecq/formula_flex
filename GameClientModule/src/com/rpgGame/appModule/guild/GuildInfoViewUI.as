@@ -5,6 +5,7 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.manager.hint.TopTipManager;
+	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.appModule.common.RoleModelShow;
 	import com.rpgGame.core.events.GuildEvent;
@@ -146,7 +147,7 @@ package com.rpgGame.appModule.guild
 					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_BANGHUI_COMBAT,null,false);
 					break;
 				case _skin.btnZhaoji:
-					GuildManager.instance().guildConvene();
+					GuildSender.guildConvene();
 					break;
 				case _skin.btnJiesan:
 					if(GuildManager.instance().canDissolve)
@@ -161,7 +162,7 @@ package com.rpgGame.appModule.guild
 						return ;
 					EventManager.addEvent(GuildEvent.GUILD_OPERATERESULT,refeashAppoint);
 					_guildGetDailyGiftOpaque = GuildManager.opaque;
-					GuildManager.instance().guildGetDailyGift(_guildGetDailyGiftOpaque);
+					GuildSender.guildGetDailyGift(_guildGetDailyGiftOpaque);
 					break;
 			}
 		}

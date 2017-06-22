@@ -2,15 +2,15 @@ package com.rpgGame.app.cmdlistener
 {
 
 	import com.rpgGame.app.manager.Mgr;
-	import com.rpgGame.netData.pvp.message.SCMatchingResultMessage;
-	import com.rpgGame.netData.pvp.message.SCDrawDianFengAwardMessage;
-	import com.rpgGame.netData.pvp.message.SCOpenDianFengPanelMessage;
-	import com.rpgGame.netData.pvp.message.SCOpenDianFengRankMessage;
-	import com.rpgGame.netData.pvp.message.SCQuitRaceResultMessage;
-	import com.rpgGame.netData.pvp.message.SCRaceResultMessage;
-	import com.rpgGame.netData.pvp.message.SCReadyToLoadMessage;
-	import com.rpgGame.netData.pvp.message.SCReadyToStartMessage;
-	import com.rpgGame.netData.pvp.message.SCStartRaceMessage;
+	import com.rpgGame.netData.dianfeng.message.SCMatchingResultMessage;
+	import com.rpgGame.netData.dianfeng.message.SCDrawDianFengAwardMessage;
+	import com.rpgGame.netData.dianfeng.message.SCOpenDianFengPanelMessage;
+	import com.rpgGame.netData.dianfeng.message.SCOpenDianFengRankMessage;
+	import com.rpgGame.netData.dianfeng.message.SCQuitRaceResultMessage;
+	import com.rpgGame.netData.dianfeng.message.SCRaceResultMessage;
+	import com.rpgGame.netData.dianfeng.message.SCReadyToLoadMessage;
+	import com.rpgGame.netData.dianfeng.message.SCReadyToStartMessage;
+	import com.rpgGame.netData.dianfeng.message.SCStartRaceMessage;
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.game.netCore.connection.SocketConnection;

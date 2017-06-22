@@ -24,6 +24,7 @@ package com.rpgGame.appModule.xinfa
 	import com.rpgGame.coreData.cfg.BuffStateDataManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.cheats.CheatsCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_buff;
@@ -43,6 +44,8 @@ package com.rpgGame.appModule.xinfa
 	
 	import app.message.GoodsType;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.Label;
 	import feathers.controls.Radio;
 	
@@ -59,8 +62,6 @@ package com.rpgGame.appModule.xinfa
 	import org.mokylin.skin.app.beibao.Xinfa.Zhenyuan_Skin;
 	import org.mokylin.skin.app.beibao.Xinfa.btnGruop_Skin;
 	import org.mokylin.skin.app.beibao.Xinfa.xinfa_Skin;
-	
-	import away3d.events.Event;
 
 	public class XinFaView
 	{
@@ -286,7 +287,8 @@ package com.rpgGame.appModule.xinfa
 				if (_curMap.cheatsVo.needItemHash.size()!=0) 
 				{
 					_skin.lab_Content.visible=true;
-					var str:String="收集@可激活心法";
+					//var str:String="收集@可激活心法";
+					var str:String=NotifyCfgData.getNotifyTextByID(61004);
 					var arr:Array=_curMap.cheatsVo.needItemHash.keys();
 					if (arr&&arr.length>0) 
 					{
@@ -305,7 +307,7 @@ package com.rpgGame.appModule.xinfa
 							{
 								color=GameColorUtil.COLOR_RED;
 							}
-							strArr.push(HtmlTextUtil.getTextColor(color,backNum+"/"+itemNum)+"个"+ItemConfig.getItemNameWithQualityColor(itemMid));
+							strArr.push(HtmlTextUtil.getTextColor(color,backNum+"/"+itemNum)+NotifyCfgData.getNotifyTextByID(61005)+ItemConfig.getItemNameWithQualityColor(itemMid));
 						}
 					}
 					str=str.replace("@",strArr.join("、"));

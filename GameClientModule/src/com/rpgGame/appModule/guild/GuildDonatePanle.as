@@ -5,6 +5,7 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.ui.common.NumSelectUICtrl;
 	import com.rpgGame.app.utils.FaceUtil;
@@ -113,7 +114,7 @@ package com.rpgGame.appModule.guild
 			if(msg.opaque == _opaque)
 			{
 				_opaque = 0;
-				GuildManager.instance().requestGuildInfo();
+				GuildSender.requestGuildInfo();
 			}
 		}
 		
@@ -175,7 +176,7 @@ package com.rpgGame.appModule.guild
 			if(_opaque>0)
 				return ;
 			_opaque = GuildManager.opaque;
-			GuildManager.instance().guildDonate(type,num,_opaque);
+			GuildSender.guildDonate(type,num,_opaque);
 		}
 		
 		override protected function onHide():void
