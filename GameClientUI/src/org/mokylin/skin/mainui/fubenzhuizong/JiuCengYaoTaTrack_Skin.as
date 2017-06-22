@@ -105,13 +105,6 @@ package org.mokylin.skin.mainui.fubenzhuizong
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.fontSize = 14;
-			temp.text = "积分条件：";
-			temp.textAlign = "left";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 74;
-			temp.x = 7;
-			temp.y = 25;
 			temp.text = "我的战场积分：";
 			temp.textAlign = "left";
 			temp.color = 0xCFC6AE;
@@ -323,17 +316,6 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			return temp;
 		}
 
-		private function gLevel_i():feathers.controls.Group
-		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
-			gLevel = temp;
-			temp.name = "gLevel";
-			temp.x = -2;
-			temp.y = 42;
-			temp.elementsContent = [__JiuCengYaoTaTrack_Skin_Label4_i(),__JiuCengYaoTaTrack_Skin_Label5_i(),__JiuCengYaoTaTrack_Skin_UIAsset5_i(),pro_bar_i(),lbNum_i()];
-			return temp;
-		}
-		
 		private function lbHeadName_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();

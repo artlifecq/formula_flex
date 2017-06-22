@@ -7,6 +7,7 @@ package   com.rpgGame.app.manager.debug
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.fight.spell.SkillAddPop;
 	import com.rpgGame.app.fight.spell.SpellHitHelper;
+	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.FangChenMiManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.PKMamager;
@@ -17,9 +18,8 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
-	import com.rpgGame.netData.player.message.SCNonagePromptMessage;
-	import com.rpgGame.netData.skill.bean.SkillInfo;
 	import com.rpgGame.netData.backpack.bean.TempItemInfo;
+	import com.rpgGame.netData.player.message.SCNonagePromptMessage;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
 	import com.rpgGame.netData.yaota.bean.YaoTaInfo;
 	import com.rpgGame.netData.yaota.message.SCYaoTaAwardMessage;
