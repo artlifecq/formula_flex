@@ -563,6 +563,7 @@ package com.rpgGame.appModule.dungeon.multy
 				{
 					GrayFilter.gray(paioc);
 					ItemActionManager.tweenItemInBag(paioc);
+					L.l("ItemActionManager");
 				}
 				//passRewardList[multyData.q_zone_id]
 				
@@ -589,10 +590,6 @@ package com.rpgGame.appModule.dungeon.multy
 		private function gainReward():void
 		{
 			var i:int;
-			for(i=0;i<allRewardIcon.length;i++)
-			{
-				GrayFilter.unGray(allRewardIcon[i]);
-			}
 			for(i=0;i<allRewardIcon.length;i++)
 			{
 				GrayFilter.unGray(allRewardIcon[i]);

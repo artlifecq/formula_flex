@@ -107,7 +107,6 @@ package com.rpgGame.app.manager
 		
 		public static function addTweenHT(endPos:Point,display:DisplayObject,onCmpFun:Function = null, time:Number = 0.6, interval:Number = 200):void
 		{
-			return;
 			_tweenHT.push(executeTween,[endPos,display,onCmpFun,time], interval);
 		}
 		
