@@ -21,7 +21,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 		//==========================================================================
 		public var bg:feathers.controls.UIAsset;
 
-		public var btnClose:feathers.controls.Button;
+		public var btnClose1:feathers.controls.Button;
 
 		public var title:feathers.controls.Label;
 
@@ -36,7 +36,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			this.currentState = "normal";
 			this.height = 429;
 			this.width = 625;
-			this.elementsContent = [bg_i(),__ZhengBaBaoMing_UIAsset1_i(),title_i(),btnClose_i(),__ZhengBaBaoMing_Group1_i()];
+			this.elementsContent = [bg_i(),__ZhengBaBaoMing_UIAsset1_i(),title_i(),btnClose1_i(),__ZhengBaBaoMing_Group1_i()];
 			
 			states = {
 			};
@@ -155,11 +155,11 @@ package org.mokylin.skin.app.banghui.wangcheng
 			return temp;
 		}
 
-		private function btnClose_i():feathers.controls.Button
+		private function btnClose1_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btnClose = temp;
-			temp.name = "btnClose";
+			btnClose1 = temp;
+			temp.name = "btnClose1";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
 			temp.x = 591;
 			temp.y = 7;

@@ -51,6 +51,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.MazeCfgData;
 	import com.rpgGame.coreData.cfg.NewFuncCfgData;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
+	import com.rpgGame.coreData.cfg.QSinglecitybaseCfgData;
 	import com.rpgGame.coreData.cfg.RaceCfgData;
 	import com.rpgGame.coreData.cfg.RelationCfgData;
 	import com.rpgGame.coreData.cfg.ReliveCfgData;
@@ -217,6 +218,7 @@ package com.rpgGame.app.data
 			MeridianCfg.setup(dic[ConfigClassRegister.Q_meridian]);
 			ActivetyDataManager.setup(dic[ConfigClassRegister.Q_special_activities]);
 			WorldBossCfgData.setup(dic[ConfigClassRegister.Q_world_boss]);
+			QSinglecitybaseCfgData.setup(dic[ConfigClassRegister.Q_singlecitybase]);
 			
 			////////////////////////////////////////////////////////////////////////
 			//

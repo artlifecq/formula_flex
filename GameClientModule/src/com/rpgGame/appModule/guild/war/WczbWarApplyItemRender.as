@@ -1,25 +1,25 @@
 package com.rpgGame.appModule.guild.war
 {
+	import com.rpgGame.app.ui.common.DefaultPageItemRender;
+	
 	import feathers.controls.StateSkin;
-	import feathers.controls.renderers.DefaultListItemRenderer;
+	
+	import org.mokylin.skin.app.banghui.wangcheng.ZhanBaoInfo_Item;
 	
 	/**
 	 *王城争霸战申请列表渲染器 
 	 * @author dik
 	 * 
 	 */
-	public class WczbWarApplyItemRender extends DefaultListItemRenderer
+	public class WczbWarApplyItemRender extends DefaultPageItemRender
 	{
-		private var _skin:StateSkin;
+		private var _skin:ZhanBaoInfo_Item;
 		public function WczbWarApplyItemRender()
 		{
-			super();
+			_skin=new ZhanBaoInfo_Item();
+			super(_skin);
 		}
 		
-		override protected function initialize():void
-		{
-			
-		}
 		
 		override public function get height():Number
 		{
@@ -27,6 +27,13 @@ package com.rpgGame.appModule.guild.war
 				return _skin.height;
 			}
 			return 0;
+		}
+		
+		override protected function commitData():void
+		{
+			if(_skin){
+				
+			}
 		}
 	}
 }

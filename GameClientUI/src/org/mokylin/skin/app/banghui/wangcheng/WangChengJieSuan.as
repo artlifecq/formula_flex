@@ -9,10 +9,10 @@ package org.mokylin.skin.app.banghui.wangcheng
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import feathers.controls.UINumber;
+	import org.mokylin.skin.app.banghui.button.ButtonLingqujiangli;
 	import org.mokylin.skin.app.banghui.number.UINumberJiesuannum;
 	import org.mokylin.skin.app.banghui.wangcheng.WangChengPaiHangList;
 	import org.mokylin.skin.app.banghui.wangcheng.WangCheng_JinDu;
-	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 
 	/**
 	 * @private
@@ -24,6 +24,8 @@ package org.mokylin.skin.app.banghui.wangcheng
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var btnLingQu:feathers.controls.Button;
+
 		public var gid3_1:feathers.controls.UIAsset;
 
 		public var gid3_2:feathers.controls.UIAsset;
@@ -71,7 +73,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			this.currentState = "normal";
 			this.height = 600;
 			this.width = 947;
-			this.elementsContent = [__WangChengJieSuan_UIAsset2_i(),__WangChengJieSuan_UIAsset3_i(),__WangChengJieSuan_UIAsset4_i(),__WangChengJieSuan_UIAsset5_i(),uiShibai_i(),uiShengli_i(),__WangChengJieSuan_UIAsset6_i(),lbBang1_i(),lbBang2_i(),skinList_i(),__WangChengJieSuan_UIAsset7_i(),__WangChengJieSuan_UIAsset8_i(),__WangChengJieSuan_UIAsset9_i(),__WangChengJieSuan_UIAsset10_i(),__WangChengJieSuan_UIAsset11_i(),grpGrid_i(),numPaiming_i(),numJisha_i(),numJifen_i(),__WangChengJieSuan_Button1_i(),lbTime_i(),__WangChengJieSuan_UIAsset12_i(),skinBar_i(),lbBar_i()];
+			this.elementsContent = [__WangChengJieSuan_UIAsset2_i(),__WangChengJieSuan_UIAsset3_i(),__WangChengJieSuan_UIAsset4_i(),__WangChengJieSuan_UIAsset5_i(),uiShibai_i(),uiShengli_i(),__WangChengJieSuan_UIAsset6_i(),lbBang1_i(),lbBang2_i(),skinList_i(),__WangChengJieSuan_UIAsset7_i(),__WangChengJieSuan_UIAsset8_i(),__WangChengJieSuan_UIAsset9_i(),__WangChengJieSuan_UIAsset10_i(),__WangChengJieSuan_UIAsset11_i(),grpGrid_i(),numPaiming_i(),numJisha_i(),numJifen_i(),btnLingQu_i(),lbTime_i(),__WangChengJieSuan_UIAsset12_i(),skinBar_i(),lbBar_i()];
 			
 			states = {
 			};
@@ -82,19 +84,6 @@ package org.mokylin.skin.app.banghui.wangcheng
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __WangChengJieSuan_Button1_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.label = "领取奖励";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.color = 0xCFC6AE;
-			temp.width = 118;
-			temp.x = 414;
-			temp.y = 546;
-			return temp;
-		}
-
 		private function __WangChengJieSuan_UIAsset10_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -192,6 +181,20 @@ package org.mokylin.skin.app.banghui.wangcheng
 			temp.styleName = "ui/app/banghui/jiesuan/jisha.png";
 			temp.x = 476;
 			temp.y = 441;
+			return temp;
+		}
+
+		private function btnLingQu_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btnLingQu = temp;
+			temp.name = "btnLingQu";
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.styleClass = org.mokylin.skin.app.banghui.button.ButtonLingqujiangli;
+			temp.color = 0xCFC6AE;
+			temp.width = 118;
+			temp.x = 414;
+			temp.y = 548;
 			return temp;
 		}
 

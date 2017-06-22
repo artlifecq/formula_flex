@@ -137,7 +137,8 @@ package com.rpgGame.coreData.cfg.active
 			if(!typeList){
 				return;
 			}
-			typeList.sort(sortList);
+			typeList.sort(sortListById);
+			typeList.sort(sortListByState);
 		}
 		
 		/**
@@ -152,18 +153,32 @@ package com.rpgGame.coreData.cfg.active
 				if(!values){
 					continue;
 				}
-				values.sort(sortList);
+				values.sort(sortListById);
+				values.sort(sortListByState);
 			}
 		}
 		
-		private static function sortList(infoA:ActivetyInfo,infoB:ActivetyInfo):int
+		private static function sortListByState(infoA:ActivetyInfo,infoB:ActivetyInfo):int
 		{
 			if(infoA.info==null||infoB.info==null){
 				return 0;
 			}
-			if(infoA.info.joinState>infoB.info.joinState||infoA.info.activityId<infoB.info.activityId){
+			if(infoA.info.joinState>infoB.info.joinState){
 				return -1;
-			}else if(infoA.info.activityId>infoB.info.activityId||infoA.info.joinState<infoB.info.joinState){
+			}else if(infoA.info.joinState<infoB.info.joinState){
+				return 1;
+			}
+			return 0;
+		}
+		
+		private static function sortListById(infoA:ActivetyInfo,infoB:ActivetyInfo):int
+		{
+			if(infoA.info==null||infoB.info==null){
+				return 0;
+			}
+			if(infoA.info.activityId<infoB.info.activityId){
+				return -1;
+			}else if(infoA.info.activityId>infoB.info.activityId){
 				return 1;
 			}
 			return 0;
