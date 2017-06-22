@@ -1,6 +1,7 @@
 package com.rpgGame.app.ui.main
 {
 	import com.rpgGame.app.manager.FunctionOpenManager;
+	import com.rpgGame.app.manager.HuBaoManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.ui.alert.GameAlert;
@@ -14,6 +15,7 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.app.ui.main.head.MonsterEliteBar;
 	import com.rpgGame.app.ui.main.head.MonsterNormalBar;
 	import com.rpgGame.app.ui.main.head.RoleHeadBar;
+	import com.rpgGame.app.ui.main.hubaozhuizong.HuBaoTracjerBar;
 	import com.rpgGame.app.ui.main.navigation.NavigationBar;
 	import com.rpgGame.app.ui.main.shortcut.ShortcutBar;
 	import com.rpgGame.app.ui.main.shortcut.ShortcutMessageBar;
@@ -25,6 +27,7 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.app.ui.scene.dungeon.DungeonTrackerBar;
 	import com.rpgGame.core.app.AppDispather;
 	import com.rpgGame.core.app.AppEvent;
+	import com.rpgGame.core.events.HuBaoEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.SceneInteractiveEvent;
@@ -103,6 +106,8 @@ package com.rpgGame.app.ui.main
 		private var _systemMsgBar:SystemMsgBar;
 		//任务追踪栏
 		private var _taskBar:TaskBar;
+		//护宝追踪
+		private var _hubaoTrackerBar:HuBaoTracjerBar;
 		//副本追踪
 		private var _trackerBar:DungeonTrackerBar;
 		
@@ -190,6 +195,7 @@ package com.rpgGame.app.ui.main
 			this.addChild(this._systemMsgBar);
 			this._taskBar=new TaskBar();
 			_trackerBar=new DungeonTrackerBar();
+			_hubaoTrackerBar=new HuBaoTracjerBar();
 			
 			
 			
@@ -270,6 +276,15 @@ package com.rpgGame.app.ui.main
 			
 			EventManager.addEvent(SceneInteractiveEvent.SELECTED_SCENE_ROLE, showHead);
 			EventManager.addEvent(MainPlayerEvent.SELFHP_CHANGE,showLowBlood);
+			EventManager.addEvent(HuBaoEvent.HUBAO_ZHUIZONG,onhubao);
+			EventManager.addEvent(HuBaoEvent.HUBAO_HUSONGSHIBAI,onhubao);
+			EventManager.addEvent(HuBaoEvent.HUBAO_HUSONGCHENGGONG,onhubao);
+		}
+		
+		//护宝
+		private function onhubao(msg:*):void
+		{
+			onSwitchCmp();
 		}
 		
 		private function showLowBlood():void
@@ -311,10 +326,10 @@ package com.rpgGame.app.ui.main
 			this.removeChild(_normalHead);
 			selectedRole=role;
 			//可以选中自己
-//            if (role==MainRoleManager.actor) {
-//                // 选中自己是不显示
-//                return;
-//            }
+			//            if (role==MainRoleManager.actor) {
+			//                // 选中自己是不显示
+			//                return;
+			//            }
 			if(!role){
 				return;
 			}
@@ -365,6 +380,9 @@ package com.rpgGame.app.ui.main
 			//EventManager.removeEvent(RankEvent.PLUNDER_HURT_RANK_CHANGE, updateRankInfo);
 			
 			EventManager.removeEvent(MapEvent.MAP_SWITCH_COMPLETE, onSwitchCmp);
+			EventManager.removeEvent(HuBaoEvent.HUBAO_ZHUIZONG,onhubao);
+			EventManager.removeEvent(HuBaoEvent.HUBAO_HUSONGSHIBAI,onhubao);
+			EventManager.removeEvent(HuBaoEvent.HUBAO_HUSONGCHENGGONG,onhubao);
 		}
 		
 		private function onAppLoadError(e:AppEvent):void
@@ -458,13 +476,22 @@ package com.rpgGame.app.ui.main
 			var mapId:int=MainRoleManager.actorInfo.mapID;
 			var sceneData:SceneData=MapDataManager.getMapInfo(mapId);
 			var mapCfg:Q_map=sceneData.getData();
-			if(mapCfg.q_map_zones==1||mapCfg.q_map_type!=EnumMapType.MAP_TYPE_NORMAL){//副本或者不是普通的基本地图
+			
+			if(HuBaoManager.instance().ishuing)
+			{
+				this.removeChild(_taskBar);
+				this.removeChild(_trackerBar);
+				this.addChild(_hubaoTrackerBar);
+			}
+			else if(mapCfg.q_map_zones==1||mapCfg.q_map_type!=EnumMapType.MAP_TYPE_NORMAL){//副本或者不是普通的基本地图
 				this.removeChild(_taskBar);
 				this.addChild(_trackerBar);
+				this.removeChild(_hubaoTrackerBar);
 			}else{
 				this.addChild(_taskBar);
 				this.removeChild(_trackerBar);
-			}			
+				this.removeChild(_hubaoTrackerBar);
+			}		
 		}
 		
 		private function onStageResize(e : *) : void
@@ -494,8 +521,9 @@ package com.rpgGame.app.ui.main
 			this._systemMsgBar.resize(sWidth, sHeight);
 			this._playerHead.resize(sWidth, sHeight);
 			this._taskBar.resize(sWidth, sHeight);
+			this._hubaoTrackerBar.resize(sWidth, sHeight);
 			/*if(_taskBar.parent){
-				
+			
 			}*/
 			
 			this._bossHead.resize(sWidth, sHeight);
