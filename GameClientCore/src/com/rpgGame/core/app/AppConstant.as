@@ -397,20 +397,27 @@ package com.rpgGame.core.app
 		/**镖局充钱**/
 		public static var BIAO_JU_ADD_MONEY_PANEL : String =  createAppInfo("biaoju.BiaoJuAddMoneyPanel","biaoju");
 		//-------------------帮派
-		/**帮派协议**/
-		public static var GUILD_AGREEMENT_PANEL : String = createAppInfo("country.guild.GuildAgreementPanel","country");
-		/**帮派创建**/
-		public static var GUILD_CREATE_PANEL : String = createAppInfo("country.guild.GuildCreatePanel","country");
-		/**申请加入帮派的家族列表**/
-		public static var GUILD_REQ_JOIN_YOUR_GUILD_PANEL : String = createAppInfo("country.guild.GuildInviteListPanel","country");
-		/**帮派升级**/
-		public static var GUILD_UPGRADE_LEVEL : String = createAppInfo("country.guild.GuildUpgradePanel","country");
-		/**帮派俸禄**/
-		public static var GUILD_SALARY_PANEL : String = createAppInfo("country.guild.GuildSalaryPanel","country");
-		/**帮派募捐**/
-		public static var GUILD_MU_JUAN_PANEL : String = createAppInfo("country.guild.GuildMuJuanPanel","country");
-		/**帮派家族成员列表**/
-		public static var GUILD_FAMILY_PANEL : String = createAppInfo("country.guild.GuildFamilyPanel","country");
+		/**帮会 **/
+		public static var GUILD_PANEL : String = createAppInfo("guild.GuildPanel","banghui");
+		/**帮会请求列表 **/
+		public static var GUILD_APPLAYLIST_PANEL : String = createAppInfo("guild.GuildApplyListPanle","banghui");
+		/**帮会邀请列表 **/
+		public static var GUILD_INVITATION_PANEL : String = createAppInfo("guild.GuildInvitationListPanle","banghui");
+		/**帮会信息 **/
+//		public static var GUILD_APPLAYINFO_PANEL : String = createAppInfo("guild.GuildPorpInfoPanel","banghui");
+		/**帮会权限设置 **/
+		public static var GUILD_APPOINTED_PANEL : String = createAppInfo("guild.GuildAppointedPanel","banghui");
+		/**帮会统帅设置 **/
+		public static var GUILD_LEADER_PANEL : String = createAppInfo("guild.GuildLeaderPanle","banghui");
+		/**帮会捐献 **/
+		public static var GUILD_DONATE_PANEL : String = createAppInfo("guild.GuildDonatePanle","banghui");
+		/**帮会王城争霸报名 **/
+		public static var GUILD_WCZB_APPLY : String = createAppInfo("guild.war.WczbWarApplyPanel","banghui");
+		/**帮会王城争霸战报 **/
+		public static var GUILD_WCZB_HISTORY : String = createAppInfo("guild.war.WczbWarHistoryPanel","banghui");
+		/**帮会王城争霸奖励 **/
+		public static var GUILD_WCZB_REWARD : String = createAppInfo("guild.war.WczbRewardPanel","banghui");
+		
 		/**迷宫排行**/
 		public static var MAZE_RANK_PANEL : String = createAppInfo("maze.MazeInfoPanel","maze",PanelPosType.MIDDLE_RIGHT);
 		/**上次迷宫排行**/
@@ -453,6 +460,13 @@ package com.rpgGame.core.app
 		public static var BATTLE_RESULT_PANEL:String = createAppInfo("battle.jjzb.JJBattleResultPanelExt","zhanchang");
 		/**战场**/
 		public static var BATTLE_SHOP_PANEL:String = createAppInfo("shop.BattleShopPanelExt","zhanchang");
+		
+		/**护宝主面板**/
+		public static var HUBAO_MAINPANEL:String = createAppInfo("hubao.HuBaoMainPanelExt","hubao");
+		/**护宝成功**/
+		public static var HUBAO_CHENGGONG:String = createAppInfo("hubao.HuBaoChengGongPanelExt","hubao");
+		/**护宝追踪**/
+		public static var HUBAO_ZHUIZONG:String = createAppInfo("dungeon.HuBaoTracjerBar","hubao");
 		
 		/**巅峰开始倒计时**/
 		public static var BATTLE_D1V1_READY_PANEL:String = createAppInfo("battle.dfdj.D1v1ReafyPanelExt","zhanchang");

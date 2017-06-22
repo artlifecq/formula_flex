@@ -17,12 +17,14 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.ui.alert.FangChenMiPanelExt;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.SpellEvent;
 	import com.rpgGame.core.events.SystemTimeEvent;
 	import com.rpgGame.core.events.role.RoleEvent;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.lang.LangText;
@@ -39,6 +41,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.player.message.ResPlayerAttributesChangeMessage;
 	import com.rpgGame.netData.player.message.SCCurrencyChangeMessage;
 	import com.rpgGame.netData.player.message.SCMaxValueChangeMessage;
+	import com.rpgGame.netData.player.message.SCNonagePromptMessage;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
 	import com.rpgGame.netData.skill.message.ResSkillAddMessage;
 	import com.rpgGame.netData.skill.message.ResSkillChangeMessage;
@@ -79,7 +82,7 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(103102,RecvResPlayerAddExpMessage);
 			SocketConnection.addCmdListener(103127,RecvSCCurrencyChangeMessage);
 			SocketConnection.addCmdListener(103128,RecvSCMaxValueChangeMessage);
-			
+			SocketConnection.addCmdListener(103117,OnSCNonagePromptMessage);
 			
 			
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -144,15 +147,21 @@ package com.rpgGame.app.cmdlistener
 			EventManager.dispatchEvent(MainPlayerEvent.STAT_MAX_CHANGE,msg.type);
 		}
 		
+		private function OnSCNonagePromptMessage(msg:SCNonagePromptMessage):void
+		{
+//			if(ClientConfig.isBanShu)
+				FangChenMiManager.OnSCNonagePromptMessage(msg);
+		}
+		
 		private function RecvSCCurrencyChangeMessage(msg:SCCurrencyChangeMessage):void
 		{
-            if (CharAttributeType.RES_JING_ZHENG == msg.curType) {
-                EventManager.dispatchEvent(RoleEvent.UPDATE_NEEDLE, 
-                    MainRoleManager.actor, 
-                    msg.value, 
-                    (MainRoleManager.actor.data as HeroData).totalStat.getResData(msg.curType));
-            }
-            
+			if (CharAttributeType.RES_JING_ZHENG == msg.curType) {
+				EventManager.dispatchEvent(RoleEvent.UPDATE_NEEDLE, 
+					MainRoleManager.actor, 
+					msg.value, 
+					(MainRoleManager.actor.data as HeroData).totalStat.getResData(msg.curType));
+			}
+			
 			checkMoney(msg);
 			
 			MainRoleManager.actorInfo.totalStat.setResData(msg.curType,msg.value);
@@ -187,7 +196,7 @@ package com.rpgGame.app.cmdlistener
 					noticeId=change>0?12:16;
 					break;
 				default:
-				return;
+					return;
 			}
 			NoticeManager.showNotifyById(noticeId,change);
 		}
@@ -235,10 +244,10 @@ package com.rpgGame.app.cmdlistener
 			//如果这个协议，改变的属性，包括hp，mp，maxhp，maxmp的话，就要在下面还要写一段逻辑，来更新角色的血条。因为现在还不确定，是不是这样的，所以，暂时先不写。等以后，真正
 			//用上的时候，检查下这里，再补上代码吧！
 			// code!!!
-//			for each (var attr:AttributeItem in msg.attributeChangeList) 
-//			{
-//				FightFaceHelper.showAttChange(attr.type,attr.value);
-//			}
+			//			for each (var attr:AttributeItem in msg.attributeChangeList) 
+			//			{
+			//				FightFaceHelper.showAttChange(attr.type,attr.value);
+			//			}
 			
 		}
 		
@@ -272,17 +281,17 @@ package com.rpgGame.app.cmdlistener
 					continue;
 				tmp.push( msg.values[i] );//TextUtil.getTextStr( msg.values[i] ) );
 			}
-//			if ( msg.content == null || msg.content == '' )
-//				msg.content = Mgr.gameDataMgr.getServerLanguageStr( msg.contentId );
-//			var info :String = PromptUtil.connectStr( msg.content, tmp );
-//			info = info.replace( /\\f/g, String.fromCharCode( 0xc ) );
+			//			if ( msg.content == null || msg.content == '' )
+			//				msg.content = Mgr.gameDataMgr.getServerLanguageStr( msg.contentId );
+			//			var info :String = PromptUtil.connectStr( msg.content, tmp );
+			//			info = info.replace( /\\f/g, String.fromCharCode( 0xc ) );
 			
 			var htmlStr :String;
-		
+			
 			
 			if ( msg.type == 1 || msg.type == 2 || msg.type == 3 )// 个人通知
 			{
-//				AddPersonInfo( msg.type, info, true );
+				//				AddPersonInfo( msg.type, info, true );
 			}
 				//			else if ( msg.type == EnumPersonalNoticeType.SROLL )// 滚动公告	
 				//			{
@@ -301,8 +310,8 @@ package com.rpgGame.app.cmdlistener
 				//			}
 			else if ( msg.type == 5 )// 头顶聊天公告提示
 			{
-//				htmlStr = TextUtil.GetHtmlStr( info, null, -1 );
-//				AddGlobalInfo( htmlStr );
+				//				htmlStr = TextUtil.GetHtmlStr( info, null, -1 );
+				//				AddGlobalInfo( htmlStr );
 			}
 				//			else if ( msg.type == EnumPersonalNoticeType.CHAT_SYSTEM )// 右下角侧栏提示
 				//			{
@@ -326,7 +335,7 @@ package com.rpgGame.app.cmdlistener
 				//			}
 			else if ( msg.type == 6 )// 公告聊天提示
 			{
-//				Mgr.chatMgr.AddChatStr( info );
+				//				Mgr.chatMgr.AddChatStr( info );
 				//				Mgr.chatMgr.addChatMsg( EnumChatChannelType.CIRCLE, long.MAX_VALUE, Mgr.mainPlayer.sid, '', info, new ExtraResInfo() );
 			}
 				//			else if ( msg.type == EnumPersonalNoticeType.CHAT_COUNTRY )
@@ -335,22 +344,22 @@ package com.rpgGame.app.cmdlistener
 				//			}
 			else if ( msg.type == 7 )// 锻造延迟聊天提示
 			{
-//				if ( Mgr.equipForgeMgr.delayDoTool.lock )
-//				{
-//					Mgr.equipForgeMgr.delayDoTool.Push( Mgr.chatMgr.AddChatStr, info );
-//				}
-//				else
-//				{
-//					Mgr.chatMgr.AddChatStr( info );
-//				}
+				//				if ( Mgr.equipForgeMgr.delayDoTool.lock )
+				//				{
+				//					Mgr.equipForgeMgr.delayDoTool.Push( Mgr.chatMgr.AddChatStr, info );
+				//				}
+				//				else
+				//				{
+				//					Mgr.chatMgr.AddChatStr( info );
+				//				}
 			}
 			else if ( msg.type == 8 )// 鼠标提示
 			{
-//				FloatingText.showUp( info );
+				//				FloatingText.showUp( info );
 			}
 			else if ( msg.type == 9 )// 鼠标提示( 绿色 )
 			{
-//				FloatingText.showUp( info );
+				//				FloatingText.showUp( info );
 			}
 		}
 		
@@ -520,7 +529,8 @@ package com.rpgGame.app.cmdlistener
 		
 		private function showChenMi(msg : String) : void
 		{
-			GameAlert.showAlertUtil(msg,showChenMiClick);
+			FangChenMiPanelExt.showFangChenMiUtil(msg);
+			//			GameAlert.showAlertUtil(msg,showChenMiClick);
 			NoticeManager.chatSystemNotify(msg);
 		}
 		

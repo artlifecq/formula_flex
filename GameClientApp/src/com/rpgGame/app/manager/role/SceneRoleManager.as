@@ -27,7 +27,6 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.core.events.role.RoleEvent;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
-	import com.rpgGame.coreData.cfg.FightsoulData;
 	import com.rpgGame.coreData.cfg.FightsoulModeData;
 	import com.rpgGame.coreData.cfg.StallCfgData;
 	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
@@ -38,7 +37,6 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.clientConfig.ClientSceneEffect;
 	import com.rpgGame.coreData.clientConfig.Q_fightsoul_mode;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
-	import com.rpgGame.coreData.clientConfig.Q_warFlag;
 	import com.rpgGame.coreData.clientConfig.Q_warflag;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.enum.JobEnum;
@@ -63,7 +61,6 @@ package com.rpgGame.app.manager.role
 	import app.message.StallTypeDataProto;
 	
 	import gs.TweenMax;
-	import gs.easing.Circ;
 	import gs.easing.Sine;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -128,7 +125,6 @@ package com.rpgGame.app.manager.role
 			role.dialogFace=BubbleDialogFace.create(role);
 			//执行主换装更新
 			AvatarManager.callEquipmentChange(role, false, false, false);
-			
 			var renderLimitable : Boolean = false;
 			if (!isMainChar)
 			{
@@ -159,10 +155,6 @@ package com.rpgGame.app.manager.role
 			
 			if (role.headFace is HeadFace)
 				(role.headFace as HeadFace).updateTitle(data.junjieLv);
-			if(data.zhanqiLv>0)
-			{
-				updateZhanQiRole(role);
-			}
 			
 			CharAttributeManager.setCharHp(data, data.totalStat.hp);
 			CharAttributeManager.setCharMaxLife(data, data.totalStat.life); //需要提供初始化方法,优化一下!
@@ -651,7 +643,7 @@ package com.rpgGame.app.manager.role
 			owner.setRenderAnimator(fightSoulFollowAnimator);
 			return fightSoulRole;
 		}
-		
+
 		/**创建战旗特效*/
 		public function updateZhanQiRole(owner:SceneRole):SceneRole
 		{

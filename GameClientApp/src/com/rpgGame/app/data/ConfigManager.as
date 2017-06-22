@@ -36,11 +36,13 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.GmConfig;
 	import com.rpgGame.coreData.cfg.GuildCfgData;
+	import com.rpgGame.coreData.cfg.GuildSkillCfgData;
 	import com.rpgGame.coreData.cfg.HeChengData;
 	import com.rpgGame.coreData.cfg.HintCfgData;
 	import com.rpgGame.coreData.cfg.HintConfig;
 	import com.rpgGame.coreData.cfg.HorseConfigData;
 	import com.rpgGame.coreData.cfg.HorseSpellData;
+	import com.rpgGame.coreData.cfg.HuBaoData;
 	import com.rpgGame.coreData.cfg.JunJieData;
 	import com.rpgGame.coreData.cfg.LostSkillData;
 	import com.rpgGame.coreData.cfg.LostSkillUpData;
@@ -50,6 +52,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.MazeCfgData;
 	import com.rpgGame.coreData.cfg.NewFuncCfgData;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
+	import com.rpgGame.coreData.cfg.QSinglecitybaseCfgData;
 	import com.rpgGame.coreData.cfg.RaceCfgData;
 	import com.rpgGame.coreData.cfg.RelationCfgData;
 	import com.rpgGame.coreData.cfg.ReliveCfgData;
@@ -70,7 +73,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
 	import com.rpgGame.coreData.cfg.ZoneCfgData;
 	import com.rpgGame.coreData.cfg.ZoneMultyCfgData;
-	import com.rpgGame.coreData.cfg.active.ActivetyDataManager;
+	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.WorldBossCfgData;
 	import com.rpgGame.coreData.cfg.animat.EffectAnimationCfgData;
 	import com.rpgGame.coreData.cfg.biao.BiaoCfgData;
@@ -214,8 +217,9 @@ package com.rpgGame.app.data
 			EquipWashAttCfg.setup(dic[ConfigClassRegister.Q_equip_wash_attr]);
 			//			CountryUnionStatCfgData.setup(null); //待解决
 			MeridianCfg.setup(dic[ConfigClassRegister.Q_meridian]);
-			ActivetyDataManager.setup(dic[ConfigClassRegister.Q_special_activities]);
+			ActivetyCfgData.setup(dic[ConfigClassRegister.Q_special_activities]);
 			WorldBossCfgData.setup(dic[ConfigClassRegister.Q_world_boss]);
+			QSinglecitybaseCfgData.setup(dic[ConfigClassRegister.Q_singlecitybase]);
 			
 			////////////////////////////////////////////////////////////////////////
 			//
@@ -254,6 +258,8 @@ package com.rpgGame.app.data
 			ZhanGongData.setup(dic[ConfigClassRegister.Q_meritorious]);
 			ZhanGongMonsterData.setup(dic[ConfigClassRegister.Q_meritorious_monster]);
 			JunJieData.setup(dic[ConfigClassRegister.Q_junjie]);
+			//护宝
+			HuBaoData.setup(dic[ConfigClassRegister.Q_convoy]);
 			
 			LostSkillData.setup(dic[ConfigClassRegister.Q_lostskill_open]);
 			LostSkillUpData.setup(dic[ConfigClassRegister.Q_lostskill_up]);
@@ -292,6 +298,9 @@ package com.rpgGame.app.data
 			//道具获取路径
 			SourceGetCfg.setup(dic[ConfigClassRegister.Q_source]);//多人副本
 			
+			GuildCfgData.setupGuildInfo(dic[ConfigClassRegister.Q_guild]);//帮会等级
+			GuildCfgData.setupGuildPermissionInfo(dic[ConfigClassRegister.Q_guild_permission]);//职务权限
+			GuildSkillCfgData.setup(dic[ConfigClassRegister.Q_guildskill]);//帮派技能表
 			//功能开启
 			//ClientFunctionOpenCfgData.setup(dic["data.ClientFunctionOpen"]);
 			BattleRankCfg.setup(dic[ConfigClassRegister.Q_battle_rank]);//多人副本
@@ -348,10 +357,7 @@ package com.rpgGame.app.data
 			//				MonsterDataManager.setConfig(config.monsterConfig); //怪物//NPC
 			//			}
 			
-			if (config.hasGuildConfig)
-			{
-				GuildCfgData.setup(config.guildConfig); //帮派
-			}
+			
 			//传送门
 			if (config.hasSceneTranports)
 			{
@@ -408,6 +414,7 @@ package com.rpgGame.app.data
 			MazeCfgData.setup(config.mazeConfig);
 			//摆摊
 			StallCfgData.setup(config.stallConfig);
+			
 			
 			if (config.biaoConfig)
 			{ //镖局配置

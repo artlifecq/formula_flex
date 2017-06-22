@@ -30,6 +30,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_born_animation:int;
 		 /**  特效 */
 		public var q_animation:int;
+		 /**  头顶特效（或为称号，或为其他） */
+		public var q_chenhao:String;
 		 /**  受击特效，如果配置了此处，那么怪物受到攻击时只会播放这个特效，而忽略本来的受击特效 */
 		public var q_been_hurt_animation:int;
 		 /**  怪物朝向角度，配置0-359 */

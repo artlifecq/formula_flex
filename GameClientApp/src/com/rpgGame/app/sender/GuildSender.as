@@ -210,9 +210,9 @@ package com.rpgGame.app.sender
 		 */
 		public static function donate(silver:Number):void
 		{
-			_bytes.clear();
+			/*_bytes.clear();
 			_bytes.writeVarint32(silver/GuildCfgData.guildMiscData.donateMoneyBase);
-			send(GuildModuleMessages.C2S_DONATE,_bytes);
+			send(GuildModuleMessages.C2S_DONATE,_bytes);*/
 		}
 		
 		public static function getFamilyData(name:String):void

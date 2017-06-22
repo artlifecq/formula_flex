@@ -94,10 +94,12 @@ package org.mokylin.skin.mainui.navigation
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			nv_bg = temp;
 			temp.name = "nv_bg";
+			temp.height = 66;
 			temp.left = 0;
 			temp.repeatScale9Skin = true;
 			temp.right = 0;
 			temp.styleName = "ui/mainui/navigation/di.png";
+			temp.y = 0;
 			return temp;
 		}
 

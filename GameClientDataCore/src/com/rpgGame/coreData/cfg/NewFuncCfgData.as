@@ -1,5 +1,6 @@
 package com.rpgGame.coreData.cfg
 {
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.coreData.clientConfig.Q_newfunc;
 	
 	import flash.utils.ByteArray;
@@ -24,13 +25,18 @@ package com.rpgGame.coreData.cfg
 			for each ( var info:Q_newfunc in _list )
 			{
 				_map.add( info.q_id, info );
-				typelist = _typelists.getValue(info.q_main_id) as Array;
-				if(typelist == null)
+				var ids:Array = JSONUtil.decode(info.q_main_id) as Array;
+				var length:int = ids.length;
+				for(var i:int = 0;i<length;i++)
 				{
-					typelist = new Array();
-					_typelists.add(info.q_main_id,typelist);
+					typelist = _typelists.getValue(ids[i]) as Array;
+					if(typelist == null)
+					{
+						typelist = new Array();
+						_typelists.add(ids[i],typelist);
+					}
+					typelist.push(info);
 				}
-				typelist.push(info);
 			}
 		}
 		

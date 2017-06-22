@@ -49,6 +49,8 @@ package com.rpgGame.app.cmdlistener
 			_roleData.maxExp=info.maxExp.fValue;
 			_roleData.maxZhenqi=info.maxZhenQi.fValue;
 			_roleData.curExp=info.exp.fValue;
+			_roleData.guildName = info.guildName;
+			_roleData.guildMemberType = info.guildMemberType;
 			var data:Object={roleData:_roleData,info:info};
 			AvatarManager.updateHeroAvatarInfo(_roleData);
 			AppManager.showApp(AppConstant.PLAYERINFO_PANEL,data);

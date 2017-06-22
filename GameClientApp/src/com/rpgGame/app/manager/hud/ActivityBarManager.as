@@ -1,13 +1,12 @@
 package com.rpgGame.app.manager.hud
 {
+	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.ui.main.activityBar.item.ActivityButtonBase;
-	import com.rpgGame.app.ui.main.activityBar.item.ActivityButtonBoss;
 	import com.rpgGame.app.utils.TimeData;
 	import com.rpgGame.core.events.ActivityEvent;
 	import com.rpgGame.core.events.WelfareEvent;
-	import com.rpgGame.coreData.cfg.MazeCfgData;
 	
 	import gs.TweenLite;
 	
@@ -74,6 +73,8 @@ package com.rpgGame.app.manager.hud
 //			EventManager.dispatchEvent(ActivityEvent.OPEN_ACTIVITY, "SevenLogin", SystemTimeManager.curtTm, 0, 0);
 			EventManager.dispatchEvent(WelfareEvent.GET_STATUS_CHANGED);
 //			setNotice("Racing", _local1.timeData, LanguageConfig.getText("NOTICE_START_HINT"), 300000);
+			
+			ActivetyDataManager.checkOpenAct();
 		}
 	}
 }

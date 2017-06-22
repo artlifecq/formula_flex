@@ -2,6 +2,7 @@ package com.rpgGame.appModule.open
 {
 	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.ItemActionManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.ui.main.buttons.IOpen;
@@ -36,7 +37,7 @@ package com.rpgGame.appModule.open
 			_skin = new KaiQi_Skin();
 			super(_skin);
 			this.escExcuteAble = false;
-//			initView();
+			//			initView();
 		}
 		
 		private function initView():void
@@ -81,9 +82,13 @@ package com.rpgGame.appModule.open
 			}else{
 				initView();
 			}
+			
 			_needCreate = false;
-			_qdata = NewFuncCfgData.getdataById(_idlist.pop());
-			var info:FunctionBarInfo = FuncionBarCfgData.getActivityBarInfo(_qdata.q_main_id);
+			do{
+				_qdata = NewFuncCfgData.getdataById(_idlist.pop());
+			}while(_qdata.q_show_panel == 1);
+			var ids:Array = JSONUtil.decode(_qdata.q_main_id) as Array;
+			var info:FunctionBarInfo = FuncionBarCfgData.getActivityBarInfo(ids[0]);
 			_button= MainButtonManager.getButtonBuyInfo(info);
 			_skin.Icons.styleName = "ui/app/xingongneng/icon/"+_qdata.q_openIcon+"/145.png";
 			_skin.uiName.styleName = "ui/app/xingongneng/icon/"+_qdata.q_openIcon+"/name.png";

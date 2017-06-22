@@ -16,6 +16,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.FightsoulModeData;
 	import com.rpgGame.coreData.cfg.HorseConfigData;
+	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
 	import com.rpgGame.coreData.cfg.model.AvatarClothesResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarDeputyWeaponResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarHairResCfgData;
@@ -30,6 +31,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.clientConfig.HeroModel;
 	import com.rpgGame.coreData.clientConfig.Q_fightsoul_mode;
 	import com.rpgGame.coreData.clientConfig.Q_horse;
+	import com.rpgGame.coreData.clientConfig.Q_warflag;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.RoleData;
@@ -87,6 +89,7 @@ package com.rpgGame.app.manager
 			role.avatar.buildSyncInfo(RenderUnitType.MOUNT, RenderUnitID.MOUNT);
 			role.avatar.buildSyncInfo(RenderUnitType.EFFECT, RenderUnitID.EFFECT);
 			role.avatar.buildSyncInfo(RenderUnitType.FIGHTSOUL, RenderUnitID.FIGHTSOUL);
+			role.avatar.buildSyncInfo(RenderUnitType.ZHANQI_EFF, RenderUnitID.ZHANQI_EFFECT);
 			//上“坐骑”
 			updateMount(role);
 			//穿“主体”
@@ -99,6 +102,8 @@ package com.rpgGame.app.manager
 			updateDeputyWeapon(role);
 			//穿“特效”
 			updateEffect(role);
+			//战旗“特效”
+			updateZhanQiRole(role);
 			//穿“效果方法类型特效”
 			updateMethodTypeEffect(role);
 			if (role.avatar.hasIDRenderUnit(RenderUnitType.MOUNT, RenderUnitID.MOUNT))
@@ -163,6 +168,7 @@ package com.rpgGame.app.manager
 				}
 			}
 			updateRoleSimpleShadow(role);
+			EventManager.dispatchEvent(AvatarEvent.EQUIP_CHANGE, role);
 		}
 		
 		public static function updateSimpleShadow() : void
@@ -300,7 +306,7 @@ package com.rpgGame.app.manager
 			var rpd_body_effect : RenderParamData3D = avatarInfo.rpd_body_effect;
 			if (rpd_body_effect != null)
 			{
-//				ru = role.avatar.addRenderUnitToUnit(RenderUnitType.BODY, RenderUnitID.BODY, rpd_body_effect);
+				//				ru = role.avatar.addRenderUnitToUnit(RenderUnitType.BODY, RenderUnitID.BODY, rpd_body_effect);
 				if (rpd_body)
 				{
 					if (rpd_body.animatorSourchPath)
@@ -332,7 +338,7 @@ package com.rpgGame.app.manager
 			var rpd_body_effect2 : RenderParamData3D = avatarInfo.rpd_body_effect2;
 			if (rpd_body_effect2 != null)
 			{
-//				ru = role.avatar.addRenderUnitToUnit(RenderUnitType.BODY, RenderUnitID.BODY, rpd_body_effect2);
+				//				ru = role.avatar.addRenderUnitToUnit(RenderUnitType.BODY, RenderUnitID.BODY, rpd_body_effect2);
 				if (rpd_body)
 				{
 					if (rpd_body.animatorSourchPath)
@@ -361,48 +367,48 @@ package com.rpgGame.app.manager
 				role.avatar.removeRenderUnitByID(RenderUnitType.BODY_EFFECT2, RenderUnitID.BODY_EFFECT2);
 			}
 			
-//			role.avatar.removeRenderUnitsByType(RenderUnitType.BODY_EFFECTS);
-//			var rpd_body_effects : Vector.<RenderParamData3D> = rpd_mount ? avatarInfo.rpd_body_on_mount_effects : avatarInfo.rpd_body_effects;
-//			var bodyEffectBindBones : Array = rpd_mount ? avatarInfo.bodyEffectOnMountBindBones : avatarInfo.bodyEffectBindBones;
-//			if (rpd_body_effects != null)
-//			{
-//				var len : int = rpd_body_effects.length;
-//				for (var i : int = 0; i < len; i++)
-//				{
-//					var effectRu : RenderUnit3D = null;
-//					var rpd_effect : RenderParamData3D = rpd_body_effects[i];
-//					var effectBindBone : String = bodyEffectBindBones ? bodyEffectBindBones[i] : null;
-//					if (rpd_body)
-//					{
-//						if (effectBindBone)
-//						{
-//							if (rpd_body.animatorSourchPath)
-//							{
-//								effectRu = role.avatar.addRenderUnitToJoint(RenderUnitType.BODY, RenderUnitID.BODY, effectBindBone, rpd_effect);
-//							}
-//							else
-//							{
-//								effectRu = role.avatar.addRenderUnitToChild(RenderUnitType.BODY, RenderUnitID.BODY, effectBindBone, rpd_effect);
-//							}
-//						}
-//						else
-//						{
-//							effectRu = role.avatar.addRenderUnitToUnit(RenderUnitType.BODY, RenderUnitID.BODY, rpd_effect);
-//						}
-//					}
-//					if (effectRu)
-//					{
-//						effectRu.defalutStatus = RoleActionType.IDLE;
-//						effectRu.setAddedCallBack(partAddedCallBack, role);
-//						effectRu.setErrorCallBack(partErrorCallBack, role);
-//						effectRu.entityGlass = false;
-//						effectRu.useLight = false;
-//						effectRu.castsShadows = false;
-//						effectRu.repeat = 0;
-//						effectRu.play(0);
-//					}
-//				}
-//			}
+			//			role.avatar.removeRenderUnitsByType(RenderUnitType.BODY_EFFECTS);
+			//			var rpd_body_effects : Vector.<RenderParamData3D> = rpd_mount ? avatarInfo.rpd_body_on_mount_effects : avatarInfo.rpd_body_effects;
+			//			var bodyEffectBindBones : Array = rpd_mount ? avatarInfo.bodyEffectOnMountBindBones : avatarInfo.bodyEffectBindBones;
+			//			if (rpd_body_effects != null)
+			//			{
+			//				var len : int = rpd_body_effects.length;
+			//				for (var i : int = 0; i < len; i++)
+			//				{
+			//					var effectRu : RenderUnit3D = null;
+			//					var rpd_effect : RenderParamData3D = rpd_body_effects[i];
+			//					var effectBindBone : String = bodyEffectBindBones ? bodyEffectBindBones[i] : null;
+			//					if (rpd_body)
+			//					{
+			//						if (effectBindBone)
+			//						{
+			//							if (rpd_body.animatorSourchPath)
+			//							{
+			//								effectRu = role.avatar.addRenderUnitToJoint(RenderUnitType.BODY, RenderUnitID.BODY, effectBindBone, rpd_effect);
+			//							}
+			//							else
+			//							{
+			//								effectRu = role.avatar.addRenderUnitToChild(RenderUnitType.BODY, RenderUnitID.BODY, effectBindBone, rpd_effect);
+			//							}
+			//						}
+			//						else
+			//						{
+			//							effectRu = role.avatar.addRenderUnitToUnit(RenderUnitType.BODY, RenderUnitID.BODY, rpd_effect);
+			//						}
+			//					}
+			//					if (effectRu)
+			//					{
+			//						effectRu.defalutStatus = RoleActionType.IDLE;
+			//						effectRu.setAddedCallBack(partAddedCallBack, role);
+			//						effectRu.setErrorCallBack(partErrorCallBack, role);
+			//						effectRu.entityGlass = false;
+			//						effectRu.useLight = false;
+			//						effectRu.castsShadows = false;
+			//						effectRu.repeat = 0;
+			//						effectRu.play(0);
+			//					}
+			//				}
+			//			}
 		}
 		
 		private static function updateHair(role : SceneRole) : void
@@ -503,6 +509,7 @@ package com.rpgGame.app.manager
 				{
 					if (rpd_body.animatorSourchPath)
 					{
+//						ru = role.avatar.addRenderUnitToComposite(RenderUnitType.BODY, RenderUnitID.BODY, rpd_weapon_effect);
 						ru = role.avatar.addRenderUnitToJoint(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.b_r_wq_01, rpd_weapon_effect);
 					}
 					else
@@ -733,6 +740,33 @@ package com.rpgGame.app.manager
 			}
 		}
 		
+		/**创建战旗特效*/
+		private static function updateZhanQiRole(role:SceneRole):void
+		{
+			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
+			var rud : RenderParamData3D= avatarInfo.zhanqiEffMode;
+			if(rud != null)
+			{
+				var effectRu : RenderUnit3D=role.avatar.addRenderUnitToChild(RenderUnitType.BODY,RenderUnitID.BODY,BoneNameEnum.c_0_body_01,rud);
+				if(effectRu)
+				{
+					effectRu.setAddedCallBack(partAddedCallBack, role);
+					effectRu.setErrorCallBack(partErrorCallBack, role);
+					effectRu.entityGlass = false;
+					effectRu.useLight = false;
+					effectRu.castsShadows = false;
+					effectRu.repeat = 0;
+					effectRu.setScale(1);
+					effectRu.play(0);
+					effectRu.z=50;
+				}
+			}
+			else
+			{
+				role.avatar.removeRenderUnitByID(RenderUnitType.ZHANQI_EFF,0);
+			}
+		}
+		
 		
 		
 		/**部件添加完成*/
@@ -807,11 +841,13 @@ package com.rpgGame.app.manager
 			var bodyEffectResID : String = null;
 			var fightsoulModeID:String = "";
 			var fightsoulEffectResId:String = "";
+			var zhanqiEffResId:String = "";
 			
 			var bodyMethodTypeEffectResID : String = null;
 			var heroModel : HeroModel = HeroModelCfgData.getInfo(roleData.body);
 			var mountModel :Q_horse = HorseConfigData.getMountDataById(roleData.mount);
 			var fightsoulInfo:Q_fightsoul_mode = FightsoulModeData.getModeInfoById(roleData.fightSoulLevel);
+			var zhanqiInfo:Q_warflag = ZhanQiConfigData.getZhanQiDataById(roleData.zhanqiLv);
 			
 			var clothesRes : AvatarClothesRes = AvatarClothesResCfgData.getInfo(roleData.cloths);
 			if (!clothesRes)
@@ -903,6 +939,11 @@ package com.rpgGame.app.manager
 				}
 			}
 			
+			if(zhanqiInfo)
+			{
+				zhanqiEffResId=zhanqiInfo.q_panel_show_id;
+			}
+			
 			roleData.avatarInfo.setBodyResID(bodyResID, animatResID);
 			roleData.avatarInfo.hairResID = hairResID;
 			roleData.avatarInfo.setMountResID(mountResID, mountAnimatResID);
@@ -918,6 +959,7 @@ package com.rpgGame.app.manager
 			roleData.avatarInfo.deputyWeaponEffectOffset = deputyWeaponEffectOffset;
 			roleData.avatarInfo.setFightSoulResID(fightsoulModeID);
 			roleData.avatarInfo.fightSoulefffectID= fightsoulEffectResId;
+			roleData.avatarInfo.zhanqiSouleeffId = zhanqiEffResId;
 		}
 		
 		/**
@@ -953,7 +995,7 @@ package com.rpgGame.app.manager
 			var bodyEffectResID : String = null;
 			var fightsoulModeID:String = "";
 			var fightsoulEffectResId:String = "";
-			
+			var zhanqiEffResId:String = "";
 			//			var bodyEffectResIDs : Array = null;
 			//			var bodyEffectOnMountResIDs : Array = null;
 			//			var bodyEffectBindBones : Array = null;
@@ -962,6 +1004,7 @@ package com.rpgGame.app.manager
 			var heroModel : HeroModel = HeroModelCfgData.getInfo(roleData.body);
 			var mountModel :Q_horse = HorseConfigData.getMountDataById(roleData.mount);
 			var fightsoulInfo:Q_fightsoul_mode = FightsoulModeData.getModeInfoById(roleData.fightSoulLevel);
+			var zhanqiInfo:Q_warflag = ZhanQiConfigData.getZhanQiDataById(roleData.zhanqiLv);
 			//			var clothesRes : AvatarClothesRes = AvatarClothesResCfgData.getInfo(roleData.cloths);
 			//			if (!clothesRes)
 			//			{
@@ -1194,6 +1237,11 @@ package com.rpgGame.app.manager
 					deputyWeaponEffectScale = deputyWeaponRes.effectScale;
 					deputyWeaponEffectOffset = new Vector3D(deputyWeaponRes.effectOffsetX, deputyWeaponRes.effectOffsetY, deputyWeaponRes.effectOffsetZ);
 				}
+				
+				if(zhanqiInfo)
+				{
+					zhanqiEffResId = zhanqiInfo.q_panel_show_id;
+				}
 			}
 			
 			//			var refineBodyEffectRes : AvatarClothesEffectRes = AvatarClothesEffectResCfgData.getInfo(roleData.qiangHuaTaoType);
@@ -1267,7 +1315,8 @@ package com.rpgGame.app.manager
 			roleData.avatarInfo.deputyWeaponEffectScale = deputyWeaponEffectScale;
 			roleData.avatarInfo.deputyWeaponEffectOffset = deputyWeaponEffectOffset;
 			roleData.avatarInfo.setFightSoulResID(fightsoulModeID);
-			roleData.avatarInfo.fightSoulefffectID= fightsoulEffectResId;;
+			roleData.avatarInfo.fightSoulefffectID= fightsoulEffectResId;
+			roleData.avatarInfo.zhanqiSouleeffId = zhanqiEffResId;
 			
 			//			roleData.avatarInfo.setBodyResID(bodyResID, animatResID);
 			//			roleData.avatarInfo.hairResID = hairResID;
@@ -1295,7 +1344,6 @@ package com.rpgGame.app.manager
 					updateAvatar(role, updateBuff);
 				}
 			}
-			EventManager.dispatchEvent(AvatarEvent.EQUIP_CHANGE, role);
 		}
 	}
 }

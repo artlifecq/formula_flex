@@ -11,6 +11,9 @@ package com.rpgGame.core.app
 	import flash.system.ApplicationDomain;
 	import flash.utils.setTimeout;
 	
+	import away3d.events.Event;
+	import away3d.events.EventDispatcher;
+	
 	import gs.TweenLite;
 	import gs.TweenMax;
 	import gs.easing.Back;
@@ -20,8 +23,6 @@ package com.rpgGame.core.app
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 	import starling.display.Sprite;
-	import away3d.events.Event;
-	import away3d.events.EventDispatcher;
 
 	/**
 	 *   app面板
@@ -52,6 +53,7 @@ package com.rpgGame.core.app
 		private var _errorNum : int;
 		private var _parentContiner : DisplayObjectContainer;
 		private var _isAppShowIng : Boolean = false;
+		private var _needAmition:Boolean = true;
 
 		public function AppPanel(appInfoP : AppInfo)
 		{
@@ -115,43 +117,48 @@ package com.rpgGame.core.app
 //					_app.superAddEvent();
 //					_app.addEvent();
 //				}
-				TweenMax.killTweensOf(_app);
-				var showObj:DisplayObject=_app as DisplayObject;
-				showObj.alpha=0;
 				_app.show(_data, _openTable, _parentContiner);
-				var initx:int=_app.x;
-				var inity:int=_app.y;
-				var initPvx:int=0;
-				var initPvy:int=0;
-				showObj.pivotX=_app.width/2;
-				showObj.pivotY=_app.height/2;
-				_app.x+=(_app.width/2-initPvx);
-				_app.y+=(_app.height/2-initPvy);
-			
-				
-//				_app.refresh();
-				TweenMax.fromTo(_app, 0.3, 
-					{
-						scaleX: 0.7,
-						scaleY: 0.7,
-						alpha: 0,
-						ease: Back.easeInOut
-						
-						
-					},
-					{
-					scaleX: 1.0,
-					scaleY: 1.0,
-					alpha: 1,
-					ease: Back.easeInOut,
-					onComplete:function():void
-					{
-						_app.x=initx;
-						_app.y=inity;
-						showObj.pivotX=initPvx;
-						showObj.pivotY=initPvy;
-					}
-				});
+				if(_needAmition)
+				{
+					TweenMax.killTweensOf(_app);
+					var showObj:DisplayObject=_app as DisplayObject;
+					showObj.alpha=0;
+					
+					var initx:int=_app.x;
+					var inity:int=_app.y;
+					var initPvx:int=0;
+					var initPvy:int=0;
+					showObj.pivotX=_app.width/2;
+					showObj.pivotY=_app.height/2;
+					_app.x+=(_app.width/2-initPvx);
+					_app.y+=(_app.height/2-initPvy);
+					
+					
+					//				_app.refresh();
+					TweenMax.fromTo(_app, 0.3, 
+						{
+							scaleX: 0.7,
+							scaleY: 0.7,
+							alpha: 0,
+							ease: Back.easeInOut
+							
+							
+						},
+						{
+							scaleX: 1.0,
+							scaleY: 1.0,
+							alpha: 1,
+							ease: Back.easeInOut,
+							onComplete:function():void
+							{
+								_app.x=initx;
+								_app.y=inity;
+								showObj.pivotX=initPvx;
+								showObj.pivotY=initPvy;
+							}
+						});
+					_needAmition = false;
+				}
 				AppDispather.instance.dispatchEvent(new AppEvent(AppEvent.APP_SHOW, appInfo));
 			}
 			else
@@ -164,6 +171,7 @@ package com.rpgGame.core.app
 		public function hide() : void
 		{
 			isAppShowIng = false;
+			_needAmition = true;
 			TweenMax.killTweensOf(_app);
 			if (_app != null && _app.parent != null)
 			{
