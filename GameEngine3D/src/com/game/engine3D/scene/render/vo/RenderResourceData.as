@@ -55,16 +55,18 @@ package com.game.engine3D.scene.render.vo
 		private var _resErrorCallBackList : Vector.<CallBackData>;
 		
 		private var _isSkinMesh : Boolean;
-
+			
 		public function get isSkinMesh() : Boolean
 		{
+			
 			return _isSkinMesh;
 		}
-
+			
 		public function set isSkinMesh(value : Boolean) : void
 		{
 			_isSkinMesh = value;
 		}
+
 
 		/**是否唯一的实例，不需要复制*/
 		public function set isOnlyInstance(value : Boolean) : void
@@ -430,6 +432,32 @@ package com.game.engine3D.scene.render.vo
 		public function get renderAnimatorLoader() : RenderUnitLoader
 		{
 			return _renderAnimatorLoader;
+		}
+		
+		public function animatorUseForSkin():void
+		{
+			if(_renderAnimatorLoader)
+				_renderAnimatorLoader.isUseForSkin = true;
+		}
+		
+		public function isAnimatorUseForSkin():Boolean
+		{
+			if(_renderAnimatorLoader)
+				return _renderAnimatorLoader.isUseForSkin;
+			return false;
+		}
+		
+		public function meshUseForSkeleton(name:String):void
+		{
+			if(_renderMeshLoader)
+				_renderMeshLoader.useForSkeletonName = name;
+		}
+		
+		public function meshUseForSkeletonName():String
+		{
+			if(_renderMeshLoader)
+				return _renderMeshLoader.useForSkeletonName;
+			return null;
 		}
 
 		/**

@@ -71,18 +71,10 @@ package com.game.engine3D.vo
 				if (BaseObj3D(_obj).usable)
 				{
 					BaseObj3D(_obj).syncPosition(position.x + _offsetX,position.y + _offsetY,position.z + _offsetZ,_syncHeight,initiator);
-					/*BaseObj3D(_obj).syncX(position.x + _offsetX, initiator);
-					BaseObj3D(_obj).syncZ(position.z + _offsetZ, initiator);
-					if (_syncHeight)
-					{
-					BaseObj3D(_obj).syncY(position.y + _offsetY, initiator);
-					}*/
+				
 					if (_syncRotation)
 					{
 						BaseObj3D(_obj).syncRotation(rotation.x,rotation.y,rotation.z,initiator);
-						/*BaseObj3D(_obj).syncRotationX(rotation.x, initiator);
-						BaseObj3D(_obj).syncRotationY(rotation.y, initiator);
-						BaseObj3D(_obj).syncRotationZ(rotation.z, initiator);*/
 					}
 					if (_syncVisible)
 					{

@@ -233,18 +233,23 @@ package com.game.engine3D.vo
 					_position.z = $z;
 					if (_clingGroundCalculate != null)
 					{
-						_position.y = _clingGroundCalculate($x, $z);
+						_position.y = _clingGroundCalculate(_position.x, _position.z);
 					}
-					_showPosition.x = _position.x + _offset.x;
-					_showPosition.y = _position.y + _offset.y;
-					_graphicDis.x = _showPosition.x;
-					_graphicDis.y = _showPosition.y;
-					if (_clingGroundCalculate == null && syncHeight)
+					else if (_clingGroundCalculate == null && syncHeight)
 					{
 						_position.y = $y;
-						_showPosition.y = _position.y + _offset.y;
-						_graphicDis.y = _showPosition.y;
 					}
+					_showPosition.setTo(_position.x + _offset.x,_position.y + _offset.y,_position.z + _offset.z);
+					_graphicDis.x = _showPosition.x;
+					_graphicDis.y = _showPosition.y;
+					_graphicDis.z = _showPosition.z;
+					
+					if ((this is BaseEntity) && _staticGraphicDis)
+					{
+						_staticGraphicDis.x = _showPosition.x;
+						_staticGraphicDis.y = _showPosition.y;
+					}
+					
 					calculateVolumeBounds();
 					syncAllInfo(initiator);
 				}
@@ -470,33 +475,6 @@ package com.game.engine3D.vo
 				{
 					_scale.z = value;
 					_graphicDis.scaleZ = _scale.z;
-//					if ((this is BaseEntity) && _staticGraphicDis) {
-//						_staticGraphicDis.scaleZ = _scale.z;
-//					}
-				}
-			}
-		}
-		
-		public function syncRotation($x : Number, $y : Number, $z : Number, initiator : BaseObj3D) : void
-		{
-			if (_graphicDis)
-			{
-				if (_rotation.x != $x || _rotation.y != $y || _rotation.z != $z)
-				{
-					TweenLite.killTweensOf(_graphicRotation, false, {x: true,y: true,z: true});
-					_rotation.setTo($x,$y,$z);
-					_showRotation.setTo($x,$y,$z);
-					if (_clingGroundCalculate != null && _volumeBounds)
-					{
-						_graphicRotation.setTo($x,$y,$z);
-						calculateVolumeBounds();
-					}
-					else
-					{
-						_graphicDis.rotateTo($x,$y,$z);
-						_graphicRotation.setTo($x,$y,$z);
-					}
-					syncAllInfo(initiator);
 				}
 			}
 		}
@@ -525,16 +503,16 @@ package com.game.engine3D.vo
 				{
 					TweenLite.killTweensOf(_graphicRotation, false, {x: true});
 					_rotation.x = value;
-					_showRotation.x = value;
+					_showRotation.x = _rotation.x;
 					if (_clingGroundCalculate != null && _volumeBounds)
 					{
-						_graphicRotation.x = value;
+						_graphicRotation.x = _showRotation.x;
 						calculateVolumeBounds();
 					}
 					else
 					{
-						_graphicDis.rotationX = value;
-						_graphicRotation.x = value;
+						_graphicDis.rotationX = _showRotation.x;
+						_graphicRotation.x = _graphicDis.rotationX;
 					}
 					syncAllInfo(initiator);
 				}
@@ -565,16 +543,16 @@ package com.game.engine3D.vo
 				{
 					TweenLite.killTweensOf(_graphicRotation, false, {y: true});
 					_rotation.y = value;
-					_showRotation.y = value;
+					_showRotation.y = _rotation.y;
 					if (_clingGroundCalculate != null && _volumeBounds)
 					{
-						_graphicRotation.y = value;
+						_graphicRotation.y = _showRotation.y;
 						calculateVolumeBounds();
 					}
 					else
 					{
-						_graphicDis.rotationY = value;
-						_graphicRotation.y = value;
+						_graphicDis.rotationY = _showRotation.y;
+						_graphicRotation.y = _graphicDis.rotationY;
 					}
 					syncAllInfo(initiator);
 				}
@@ -604,16 +582,42 @@ package com.game.engine3D.vo
 				if (_rotation.z != value)
 				{
 					_rotation.z = value;
-					_showRotation.z = value;
+					_showRotation.z = _rotation.z;
 					if (_clingGroundCalculate != null && _volumeBounds)
 					{
-						_graphicRotation.z = value;
+						_graphicRotation.z = _showRotation.z;
 						calculateVolumeBounds();
 					}
 					else
 					{
-						_graphicDis.rotationZ = value;
-						_graphicRotation.z = value;
+						_graphicDis.rotationZ = _showRotation.z;
+						_graphicRotation.z = _graphicDis.rotationZ;
+					}
+					syncAllInfo(initiator);
+				}
+			}
+		}
+		
+		public function syncRotation($x : Number, $y : Number, $z : Number, initiator : BaseObj3D) : void
+		{
+			if (_graphicDis)
+			{
+				if (_rotation.x != $x || _rotation.y != $y || _rotation.z != $z)
+				{
+					TweenLite.killTweensOf(_graphicRotation, false, {x: true,y: true,z: true});
+					_rotation.setTo($x,$y,$z);
+					_showRotation.setTo($x,$y,$z);
+					if (_clingGroundCalculate != null && _volumeBounds)
+					{
+						_graphicRotation.copyFrom(_showRotation);
+						calculateVolumeBounds();
+					}
+					else
+					{
+						_graphicDis.rotationX = _showRotation.x;
+						_graphicDis.rotationY = _showRotation.y;
+						_graphicDis.rotationZ = _showRotation.z;
+						_graphicRotation.copyFrom(_showRotation);
 					}
 					syncAllInfo(initiator);
 				}
