@@ -346,5 +346,20 @@ package com.rpgGame.coreData.cfg.monster
 		{
 			return _monsterArea[id];
 		}
+		
+		/**
+		 * 根据刷新id获取npc闲话
+		 */
+		public static function getNpcSpeak(areaid : int) :String
+		{
+			var areaData : Q_scene_monster_area =getAreaByAreaID(areaid);
+			if(areaData!=null)
+			{
+				return areaData.q_speak;
+			}
+			
+			return "";
+		}
+		
 	}
 }
