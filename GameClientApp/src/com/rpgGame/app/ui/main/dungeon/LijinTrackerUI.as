@@ -163,7 +163,7 @@ package com.rpgGame.app.ui.main.dungeon
 				icon.destroy();
 			}
 			while(ico2List.length>0){
-				icon=ico1List.pop();
+				icon=ico2List.pop();
 				icon.destroy();
 			}
 			icon=null;
@@ -308,7 +308,7 @@ package com.rpgGame.app.ui.main.dungeon
 				_skin.grpshuaxin.visible=false;
 				_skin.grpto.visible=true;
 				_skin.lbTo.visible=true;
-				_skin.lbName.htmlText="盗宝小怪    <font color='#e8c958'>(剩余"+monsterNum+")</font>";
+				_skin.lbName.htmlText="盗宝小怪 <font color='#e8c958'>(剩余"+monsterNum+")</font>";
 				
 			}
 			else if(monsterNum==0&&refresh==0)
