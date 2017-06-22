@@ -176,8 +176,7 @@ package com.rpgGame.appModule.fightsoul
 			{
 				view.showUpLevelView(bool);
 			}
-			_skin.arrow_up.visible = bool;
-			_skin.lab_poweradd.visible = bool;
+			_skin.num_lv.visible = bool;
 		}
 		
 		private function huanhuaTriggeredHandler(e:Event):void
@@ -222,8 +221,7 @@ package com.rpgGame.appModule.fightsoul
 			refeashQualityView();
 			refeahLevelView();
 			refeashVitality();
-			_skin.arrow_up.visible = false;
-			_skin.lab_poweradd.visible = false;
+			_skin.num_lv.visible = false;
 			_skin.List.itemRendererType = FightSoulActityCell;
 			var layout:VerticalLayout = new VerticalLayout();
 			layout.gap = 5;
@@ -291,14 +289,14 @@ package com.rpgGame.appModule.fightsoul
 			var nextShet:Q_fightsoul = FightsoulData.getInfobyId(fightSoulInfo.level+1);
 			var job:int = MainRoleManager.actorInfo.job;
 			var currentPower:int = FightValueUtil.calFightPowerByAttValue(currentatt,job);
-			_skin.Num_zhandouli.number = currentPower;
+			_skin.NumZhanli.number = currentPower;
 			if(nextShet!=null)
 			{
 				nextatt = AttValueConfig.getAttInfoById(nextShet.q_baseAtt_id);
 				var nextPower:int = FightValueUtil.calFightPowerByAttValue(nextatt,job);
-				_skin.lab_poweradd.text = (nextPower-currentPower).toString();
+				_skin.num_lv.label = "+"+(nextPower-currentPower).toString();
 			}else{
-				_skin.lab_poweradd.text = "0";
+				_skin.num_lv.label = "+0";
 			}
 			
 			
@@ -355,7 +353,7 @@ package com.rpgGame.appModule.fightsoul
 				_skin.lb_time.visible = false;
 				_skin.Num_dengji.visible = false;
 			}
-			_skin.mc_name.gotoAndStop(cshowshet.q_mode);
+			_skin.zhanhunName.styleName = "ui/app/zhanhun/modename/"+cshowshet.q_mode+".png";
 			_fightsoul.setModeLevel(cshowshet.q_mode);
 		}
 		

@@ -9,12 +9,10 @@ package org.mokylin.skin.app.zhanhun
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import feathers.controls.UIMovieClip;
 	import feathers.controls.UINumber;
 	import org.mokylin.skin.app.zhanhun.Shuxing_Skin;
 	import org.mokylin.skin.app.zhanhun.button.ButtonJiantou;
 	import org.mokylin.skin.app.zhanhun.button.Zhanhun_shengji;
-	import org.mokylin.skin.app.zhanhun.mc.UIMovieClipZhanhun_name;
 	import org.mokylin.skin.app.zhanhun.progress_jindu;
 	import org.mokylin.skin.app.zhanhun.uinumber.UINumberDengji;
 	import org.mokylin.skin.app.zhanhun.uinumber.UINumberLv;
@@ -23,7 +21,8 @@ package org.mokylin.skin.app.zhanhun
 	import org.mokylin.skin.component.button.ButtonSkin_shuoming2;
 	import org.mokylin.skin.component.list.ListSkin1;
 	import org.mokylin.skin.component.progress.Pro_jindu2_Skin;
-	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli;
+	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_lv2;
+	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow2;
 
 	/**
 	 * @private
@@ -37,11 +36,9 @@ package org.mokylin.skin.app.zhanhun
 		//==========================================================================
 		public var List:feathers.controls.List;
 
+		public var NumZhanli:feathers.controls.UINumber;
+
 		public var Num_dengji:feathers.controls.UINumber;
-
-		public var Num_zhandouli:feathers.controls.UINumber;
-
-		public var arrow_up:feathers.controls.UIAsset;
 
 		public var bg:feathers.controls.SkinnableContainer;
 
@@ -63,8 +60,6 @@ package org.mokylin.skin.app.zhanhun
 
 		public var grp_zhandouli:feathers.controls.Group;
 
-		public var lab_poweradd:feathers.controls.Label;
-
 		public var lab_prop1:feathers.controls.SkinnableContainer;
 
 		public var lab_prop2:feathers.controls.SkinnableContainer;
@@ -83,11 +78,11 @@ package org.mokylin.skin.app.zhanhun
 
 		public var lb_time:feathers.controls.Label;
 
-		public var mc_name:feathers.controls.UIMovieClip;
-
 		public var modecontent:feathers.controls.Group;
 
 		public var num_current:feathers.controls.UINumber;
+
+		public var num_lv:feathers.controls.UINumber;
 
 		public var num_next:feathers.controls.UINumber;
 
@@ -101,6 +96,8 @@ package org.mokylin.skin.app.zhanhun
 
 		public var ui_zhandou:feathers.controls.UIAsset;
 
+		public var zhanhunName:feathers.controls.UIAsset;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -112,7 +109,7 @@ package org.mokylin.skin.app.zhanhun
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [bg_i(),__Zhanhun_Skin_UIAsset3_i(),__Zhanhun_Skin_UIAsset4_i(),__Zhanhun_Skin_UIAsset5_i(),modecontent_i(),btn_prev_i(),btn_next_i(),grp_zhandouli_i(),__Zhanhun_Skin_Group1_i(),mc_name_i(),__Zhanhun_Skin_UIAsset7_i(),__Zhanhun_Skin_UIAsset8_i(),__Zhanhun_Skin_Group2_i(),grp_jindu_i(),__Zhanhun_Skin_Group3_i(),List_i(),grp_current_i(),btn_shuoming_i()];
+			this.elementsContent = [bg_i(),__Zhanhun_Skin_UIAsset3_i(),__Zhanhun_Skin_UIAsset4_i(),__Zhanhun_Skin_UIAsset5_i(),modecontent_i(),btn_prev_i(),btn_next_i(),grp_zhandouli_i(),__Zhanhun_Skin_Group1_i(),zhanhunName_i(),__Zhanhun_Skin_UIAsset6_i(),__Zhanhun_Skin_UIAsset7_i(),__Zhanhun_Skin_Group2_i(),grp_jindu_i(),__Zhanhun_Skin_Group3_i(),List_i(),grp_current_i(),btn_shuoming_i()];
 			
 			states = {
 			};
@@ -136,6 +133,21 @@ package org.mokylin.skin.app.zhanhun
 			return temp;
 		}
 
+		private function NumZhanli_i():feathers.controls.UINumber
+		{
+			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
+			NumZhanli = temp;
+			temp.name = "NumZhanli";
+			temp.gap = -13;
+			temp.height = 33;
+			temp.label = "1364364";
+			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow2;
+			temp.width = 148;
+			temp.x = 55;
+			temp.y = 7;
+			return temp;
+		}
+
 		private function Num_dengji_i():feathers.controls.UINumber
 		{
 			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
@@ -147,22 +159,6 @@ package org.mokylin.skin.app.zhanhun
 			temp.width = 37;
 			temp.x = 74;
 			temp.y = 1;
-			return temp;
-		}
-
-		private function Num_zhandouli_i():feathers.controls.UINumber
-		{
-			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
-			Num_zhandouli = temp;
-			temp.name = "Num_zhandouli";
-			temp.gap = -3;
-			temp.height = 25;
-			temp.label = "652147";
-			temp.number = 21222;
-			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli;
-			temp.width = 147;
-			temp.x = 50;
-			temp.y = 11;
 			return temp;
 		}
 
@@ -189,7 +185,7 @@ package org.mokylin.skin.app.zhanhun
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 656;
 			temp.y = 78;
-			temp.elementsContent = [__Zhanhun_Skin_UIAsset16_i(),__Zhanhun_Skin_Label1_i(),__Zhanhun_Skin_Label2_i(),__Zhanhun_Skin_Label3_i()];
+			temp.elementsContent = [__Zhanhun_Skin_UIAsset15_i(),__Zhanhun_Skin_Label1_i(),__Zhanhun_Skin_Label2_i(),__Zhanhun_Skin_Label3_i()];
 			return temp;
 		}
 
@@ -198,7 +194,7 @@ package org.mokylin.skin.app.zhanhun
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 70;
 			temp.y = 100;
-			temp.elementsContent = [__Zhanhun_Skin_UIAsset24_i(),__Zhanhun_Skin_UIAsset25_i(),__Zhanhun_Skin_UIAsset26_i()];
+			temp.elementsContent = [__Zhanhun_Skin_UIAsset23_i(),__Zhanhun_Skin_UIAsset24_i(),__Zhanhun_Skin_UIAsset25_i()];
 			return temp;
 		}
 
@@ -293,23 +289,12 @@ package org.mokylin.skin.app.zhanhun
 			temp.height = 24;
 			temp.styleName = "ui/app/zhanhun/dengjikuang.png";
 			temp.width = 68;
-			temp.x = 0;
-			temp.y = 10;
-			return temp;
-		}
-
-		private function __Zhanhun_Skin_UIAsset11_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 24;
-			temp.styleName = "ui/app/zhanhun/dengjikuang.png";
-			temp.width = 68;
 			temp.x = 502;
 			temp.y = 10;
 			return temp;
 		}
 
-		private function __Zhanhun_Skin_UIAsset12_i():feathers.controls.UIAsset
+		private function __Zhanhun_Skin_UIAsset11_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanhun/dengji.png";
@@ -318,7 +303,7 @@ package org.mokylin.skin.app.zhanhun
 			return temp;
 		}
 
-		private function __Zhanhun_Skin_UIAsset13_i():feathers.controls.UIAsset
+		private function __Zhanhun_Skin_UIAsset12_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanhun/dengji.png";
@@ -327,7 +312,7 @@ package org.mokylin.skin.app.zhanhun
 			return temp;
 		}
 
-		private function __Zhanhun_Skin_UIAsset14_i():feathers.controls.UIAsset
+		private function __Zhanhun_Skin_UIAsset13_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanhun/tiao_zuo.png";
@@ -336,7 +321,7 @@ package org.mokylin.skin.app.zhanhun
 			return temp;
 		}
 
-		private function __Zhanhun_Skin_UIAsset15_i():feathers.controls.UIAsset
+		private function __Zhanhun_Skin_UIAsset14_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.scaleX = -1;
@@ -346,7 +331,7 @@ package org.mokylin.skin.app.zhanhun
 			return temp;
 		}
 
-		private function __Zhanhun_Skin_UIAsset16_i():feathers.controls.UIAsset
+		private function __Zhanhun_Skin_UIAsset15_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanhun/mingzitiao.png";
@@ -355,7 +340,7 @@ package org.mokylin.skin.app.zhanhun
 			return temp;
 		}
 
-		private function __Zhanhun_Skin_UIAsset17_i():feathers.controls.UIAsset
+		private function __Zhanhun_Skin_UIAsset16_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanhun/youdi.png";
@@ -364,7 +349,7 @@ package org.mokylin.skin.app.zhanhun
 			return temp;
 		}
 
-		private function __Zhanhun_Skin_UIAsset18_i():feathers.controls.UIAsset
+		private function __Zhanhun_Skin_UIAsset17_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanhun/jrkhd.png";
@@ -373,7 +358,7 @@ package org.mokylin.skin.app.zhanhun
 			return temp;
 		}
 
-		private function __Zhanhun_Skin_UIAsset23_i():feathers.controls.UIAsset
+		private function __Zhanhun_Skin_UIAsset22_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanhun/tiao_di.png";
@@ -382,7 +367,7 @@ package org.mokylin.skin.app.zhanhun
 			return temp;
 		}
 
-		private function __Zhanhun_Skin_UIAsset24_i():feathers.controls.UIAsset
+		private function __Zhanhun_Skin_UIAsset23_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanhun/lantiaoxian.png";
@@ -391,7 +376,7 @@ package org.mokylin.skin.app.zhanhun
 			return temp;
 		}
 
-		private function __Zhanhun_Skin_UIAsset25_i():feathers.controls.UIAsset
+		private function __Zhanhun_Skin_UIAsset24_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanhun/lantiaoxian.png";
@@ -400,7 +385,7 @@ package org.mokylin.skin.app.zhanhun
 			return temp;
 		}
 
-		private function __Zhanhun_Skin_UIAsset26_i():feathers.controls.UIAsset
+		private function __Zhanhun_Skin_UIAsset25_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanhun/lantiaoxian.png";
@@ -412,7 +397,7 @@ package org.mokylin.skin.app.zhanhun
 		private function __Zhanhun_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhanhun/bg.jpg";
+			temp.styleName = "ui/big_bg/zhanhun/bg.jpg";
 			temp.x = 18;
 			temp.y = 71;
 			return temp;
@@ -441,23 +426,13 @@ package org.mokylin.skin.app.zhanhun
 		private function __Zhanhun_Skin_UIAsset6_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/di.png";
-			temp.visible = false;
-			temp.x = 22;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __Zhanhun_Skin_UIAsset7_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanhun/sxjc.png";
 			temp.x = 47;
 			temp.y = 420;
 			return temp;
 		}
 
-		private function __Zhanhun_Skin_UIAsset8_i():feathers.controls.UIAsset
+		private function __Zhanhun_Skin_UIAsset7_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanhun/jn.png";
@@ -466,14 +441,14 @@ package org.mokylin.skin.app.zhanhun
 			return temp;
 		}
 
-		private function arrow_up_i():feathers.controls.UIAsset
+		private function __Zhanhun_Skin_UIAsset9_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			arrow_up = temp;
-			temp.name = "arrow_up";
-			temp.styleName = "ui/common/tubiao/tu_up.png";
-			temp.x = 146;
-			temp.y = 19;
+			temp.height = 24;
+			temp.styleName = "ui/app/zhanhun/dengjikuang.png";
+			temp.width = 68;
+			temp.x = 0;
+			temp.y = 10;
 			return temp;
 		}
 
@@ -557,7 +532,7 @@ package org.mokylin.skin.app.zhanhun
 			temp.name = "grp_current";
 			temp.x = 656;
 			temp.y = 426;
-			temp.elementsContent = [__Zhanhun_Skin_UIAsset17_i(),__Zhanhun_Skin_UIAsset18_i(),__Zhanhun_Skin_UIAsset23_i(),pro_zongjindu_i(),__Zhanhun_Skin_Group5_i(),__Zhanhun_Skin_Label4_i(),__Zhanhun_Skin_Label5_i(),__Zhanhun_Skin_Label6_i(),__Zhanhun_Skin_Label7_i(),lb_jindu_i()];
+			temp.elementsContent = [__Zhanhun_Skin_UIAsset16_i(),__Zhanhun_Skin_UIAsset17_i(),__Zhanhun_Skin_UIAsset22_i(),pro_zongjindu_i(),__Zhanhun_Skin_Group5_i(),__Zhanhun_Skin_Label4_i(),__Zhanhun_Skin_Label5_i(),__Zhanhun_Skin_Label6_i(),__Zhanhun_Skin_Label7_i(),lb_jindu_i()];
 			return temp;
 		}
 
@@ -579,7 +554,7 @@ package org.mokylin.skin.app.zhanhun
 			temp.name = "grp_jindu";
 			temp.x = 57;
 			temp.y = 484;
-			temp.elementsContent = [btn_up_i(),__Zhanhun_Skin_UIAsset10_i(),__Zhanhun_Skin_UIAsset11_i(),__Zhanhun_Skin_UIAsset12_i(),__Zhanhun_Skin_UIAsset13_i(),num_current_i(),num_next_i(),track_i(),pro_jindu_i(),lb_progress_i(),__Zhanhun_Skin_UIAsset14_i(),__Zhanhun_Skin_UIAsset15_i()];
+			temp.elementsContent = [btn_up_i(),__Zhanhun_Skin_UIAsset9_i(),__Zhanhun_Skin_UIAsset10_i(),__Zhanhun_Skin_UIAsset11_i(),__Zhanhun_Skin_UIAsset12_i(),num_current_i(),num_next_i(),track_i(),pro_jindu_i(),lb_progress_i(),__Zhanhun_Skin_UIAsset13_i(),__Zhanhun_Skin_UIAsset14_i()];
 			return temp;
 		}
 
@@ -590,21 +565,7 @@ package org.mokylin.skin.app.zhanhun
 			temp.name = "grp_zhandouli";
 			temp.x = 37;
 			temp.y = 371;
-			temp.elementsContent = [__Zhanhun_Skin_UIAsset6_i(),ui_zhandou_i(),Num_zhandouli_i(),arrow_up_i(),lab_poweradd_i()];
-			return temp;
-		}
-
-		private function lab_poweradd_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lab_poweradd = temp;
-			temp.name = "lab_poweradd";
-			temp.letterSpacing = 1;
-			temp.text = "20";
-			temp.color = 0x5CB006;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 158;
-			temp.y = 17;
+			temp.elementsContent = [ui_zhandou_i(),NumZhanli_i(),num_lv_i()];
 			return temp;
 		}
 
@@ -741,19 +702,6 @@ package org.mokylin.skin.app.zhanhun
 			return temp;
 		}
 
-		private function mc_name_i():feathers.controls.UIMovieClip
-		{
-			var temp:feathers.controls.UIMovieClip = new feathers.controls.UIMovieClip();
-			mc_name = temp;
-			temp.name = "mc_name";
-			temp.height = 111;
-			temp.styleClass = org.mokylin.skin.app.zhanhun.mc.UIMovieClipZhanhun_name;
-			temp.width = 41;
-			temp.x = 593;
-			temp.y = 80;
-			return temp;
-		}
-
 		private function modecontent_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
@@ -776,6 +724,21 @@ package org.mokylin.skin.app.zhanhun
 			temp.width = 50;
 			temp.x = 35;
 			temp.y = 16;
+			return temp;
+		}
+
+		private function num_lv_i():feathers.controls.UINumber
+		{
+			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
+			num_lv = temp;
+			temp.name = "num_lv";
+			temp.gap = -2;
+			temp.height = 13;
+			temp.label = "x100";
+			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_lv2;
+			temp.width = 64;
+			temp.x = 166;
+			temp.y = 21;
 			return temp;
 		}
 
@@ -847,9 +810,20 @@ package org.mokylin.skin.app.zhanhun
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ui_zhandou = temp;
 			temp.name = "ui_zhandou";
-			temp.styleName = "ui/common/zhandouli2.png";
-			temp.x = 0;
-			temp.y = 10;
+			temp.styleName = "ui/common/zdl2.png";
+			temp.x = -16;
+			temp.y = -3;
+			return temp;
+		}
+
+		private function zhanhunName_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			zhanhunName = temp;
+			temp.name = "zhanhunName";
+			temp.styleName = "ui/app/zhanhun/modename/1.png";
+			temp.x = 593;
+			temp.y = 80;
 			return temp;
 		}
 

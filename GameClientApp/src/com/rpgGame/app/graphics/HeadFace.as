@@ -4,8 +4,8 @@ package com.rpgGame.app.graphics
 	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.rpgGame.app.display2D.AttackFace;
-	import com.rpgGame.app.manager.HuBaoManager;
 	import com.rpgGame.app.graphics.decor.DecorCtrl;
+	import com.rpgGame.app.manager.HuBaoManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.scene.SceneRole;
@@ -13,11 +13,13 @@ package com.rpgGame.app.graphics
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.SpriteStat;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.GuildCfgData;
 	import com.rpgGame.coreData.cfg.HuBaoData;
 	import com.rpgGame.coreData.cfg.JunJieData;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.FaceInfo;
+	import com.rpgGame.coreData.clientConfig.Q_guild_permission;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
@@ -27,8 +29,6 @@ package com.rpgGame.app.graphics
 	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import app.message.MonsterDataProto.MonsterType;
-	
-	import away3d.bounds.NullBounds;
 	
 	import feathers.controls.UIAsset;
 	import feathers.controls.UIMovieClip;
@@ -155,7 +155,7 @@ package com.rpgGame.app.graphics
 				case SceneCharType.PLAYER:
 					addAndUpdateHP();
 					addAndUpdateName();
-					//addAndUpdateGuildName();
+					addAndUpdateGuildName();
 					//addAndUpdateOfficeName();
 					//addAndUpdateFamilyName();//暂无家族
 					addAndUpdateLV();
@@ -298,7 +298,7 @@ package com.rpgGame.app.graphics
 				{
 					//显示血条、称号、昵称
 					showAndHideElement(_nameBar, nameVisible && !_isCamouflage,DecorCtrl.TOP_NAME);
-					showAndHideElement(_guildNameBar, !_isCamouflage);
+					showAndHideElement(_guildNameBar, !_isCamouflage,DecorCtrl.TOP_GUILD);
 					showAndHideElement(_familNameBar, !_isCamouflage);
 					showAndHideElement(_bloodBar, true,DecorCtrl.TOP_HPMP);
 					isMysteryMan=false;
@@ -313,7 +313,7 @@ package com.rpgGame.app.graphics
 					//选中显示
 					//showAndHideElement( _bloodBar, _isSelected );
 					showAndHideElement(_bloodBar, true,DecorCtrl.TOP_HPMP);
-					showAndHideElement(_guildNameBar, !isMysteryMan&&_isSelected && !_isCamouflage);
+					showAndHideElement(_guildNameBar, true,DecorCtrl.TOP_GUILD);
 					showAndHideElement(_familNameBar, !isMysteryMan&&_isSelected && !_isCamouflage);
 				}
 				showAndHideElement(_title, !isMysteryMan&&!_isCamouflage);
@@ -360,7 +360,7 @@ package com.rpgGame.app.graphics
 		{
 			//不管是临时，还是模型加载完成的，这是不能为NULL
 			updateShowAndHide();
-			//			return;
+			return;
 			var startPosy : int = 0; //不是临时的，说明模型那么就按名字绑定点就好了
 			if (isTemporary)
 			{
@@ -667,52 +667,35 @@ package com.rpgGame.app.graphics
 		 */
 		public function addAndUpdateGuildName() : void
 		{
-			if (_role.type != SceneCharType.PLAYER)
-				return;
-			
-			if (_role.isMainChar)
-				return;
-			
+			var guildMemberType: int = (_role.data as HeroData).guildMemberType;
 			var guildName : String = (_role.data as HeroData).guildName;
-			if (guildName == "" || guildName == null)
+			if (guildMemberType<=0||guildName == "" || guildName == null)
 			{
 				if (_guildNameBar != null)
 				{
+					deCtrl.removeTop(_guildNameBar);
 					HeadNameBar.recycle(_guildNameBar);
 					_guildNameBar = null;
-					
 					updateAllBarPosition();
 				}
 				return;
 			}
 			
+			var q_guild:Q_guild_permission = GuildCfgData.getPermissionInfo(guildMemberType);
+			guildName += "."+q_guild.q_name;
 			if (_guildNameBar == null)
 			{
 				//原来没有添加一个
 				_guildNameBar = HeadNameBar.create();
-				this.addChild(_guildNameBar); //更新一下容器，从临时的到模型真正容器
-				//				if((_role.data as HeroData).isKingFamily)
-				//				{
-				//					_guildNameBar.setName("[王城]"+guildName);
-				//				}
-				//				else
-				//				{
-				//					_guildNameBar.setName(guildName);
-				//				}
-				_guildNameBar.setColor(StaticValue.COLOR_CODE_1);
+				//				this.addChild(_guildNameBar); //更新一下容器，从临时的到模型真正容器
+				_guildNameBar.setName(guildName);
+				_guildNameBar.setColor(StaticValue.COLOR_CODE_15);
 				updateAllBarPosition();
 				return;
 			}
 			
 			//更新一下数据
-			//			if((_role.data as HeroData).isKingFamily)
-			//			{
-			//				_guildNameBar.setName("[王城]"+guildName);
-			//			}
-			//			else
-			//			{
-			//				_guildNameBar.setName(guildName);
-			//			}
+			_guildNameBar.setName(guildName);
 			updateAllBarPosition();
 		}
 		
@@ -1145,7 +1128,7 @@ package com.rpgGame.app.graphics
 			onHideBlood();
 			//showAndHideElement(_bloodBar, false);
 			showAndHideElement(_icoImage, false);
-			showAndHideElement(_guildNameBar, false);
+			showAndHideElement(_guildNameBar, false,DecorCtrl.TOP_GUILD);
 			showAndHideElement(_familNameBar, false);
 			showAndHideElement(_office, false);
 			showAndHideElement(_bodyImage, false);

@@ -23,7 +23,8 @@ package com.rpgGame.core.app
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 	import starling.display.Sprite;
-
+	
+	
 	/**
 	 *   app面板
 	 * @author fly.liuyang
@@ -112,11 +113,11 @@ package com.rpgGame.core.app
 			isAppShowIng = true;
 			if (_app != null)
 			{
-//				if( _app.parent == null || _app.isHideEffecting() )
-//				{
-//					_app.superAddEvent();
-//					_app.addEvent();
-//				}
+				//				if( _app.parent == null || _app.isHideEffecting() )
+				//				{
+				//					_app.superAddEvent();
+				//					_app.addEvent();
+				//				}
 				_app.show(_data, _openTable, _parentContiner);
 				if(_needAmition)
 				{

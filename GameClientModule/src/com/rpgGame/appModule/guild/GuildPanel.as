@@ -1,6 +1,6 @@
 package com.rpgGame.appModule.guild
 {
-	import com.rpgGame.app.manager.guild.GuildManager;
+	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.app.ui.TabBarPanel;
 	import com.rpgGame.appModule.guild.war.WczbWarViewUI;
 	import com.rpgGame.core.events.GuildEvent;
@@ -38,8 +38,8 @@ package com.rpgGame.appModule.guild
 			EventManager.addEvent(GuildEvent.GUILD_DATA_INIT,refeashView);
 			EventManager.addEvent(GuildEvent.GUILD_SKILLINFO_CHAGE,refeashView);
 			refeashView();
-			GuildManager.instance().requestGuildInfo();
-			GuildManager.instance().reqGuildSkillInfo();
+			GuildSender.requestGuildInfo();
+			GuildSender.reqGuildSkillInfo();
 		}
 		
 		private function refeashView():void
