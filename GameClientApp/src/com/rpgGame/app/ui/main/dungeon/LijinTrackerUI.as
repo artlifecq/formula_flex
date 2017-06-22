@@ -2,6 +2,7 @@ package com.rpgGame.app.ui.main.dungeon
 {
 	import com.rpgGame.app.manager.DungeonManager;
 	import com.rpgGame.app.sender.SpecialActivitySender;
+	import com.rpgGame.app.ui.scene.dungeon.DungeonTrackerUI;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
