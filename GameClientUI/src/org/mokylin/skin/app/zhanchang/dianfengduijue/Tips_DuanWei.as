@@ -52,7 +52,7 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			
 			this.currentState = "normal";
 			this.height = 278;
-			this.width = 298;
+			this.width = 280;
 			this.elementsContent = [bg_i(),lbDangqian_i(),lbCurrent_i(),lbDangqian1_i(),uiIcon_i(),lbXiaJie_i(),line1_i(),icon1_i(),gNext_i()];
 			
 			states = {
@@ -69,9 +69,9 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 278;
+			temp.height = 277;
 			temp.styleName = "ui/common/tips/tips_2.png";
-			temp.width = 298;
+			temp.width = 280;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -83,7 +83,7 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			gNext = temp;
 			temp.name = "gNext";
 			temp.x = 12;
-			temp.y = 174;
+			temp.y = 171;
 			temp.elementsContent = [lbNext_i(),uiIcon2_i(),lbNext2_i(),icon2_i()];
 			return temp;
 		}
@@ -93,9 +93,11 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icon1 = temp;
 			temp.name = "icon1";
+			temp.height = 48;
 			temp.styleName = "ui/common/grid/normal/36.png";
+			temp.width = 48;
 			temp.x = 12;
-			temp.y = 88;
+			temp.y = 82;
 			return temp;
 		}
 
@@ -104,9 +106,11 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icon2 = temp;
 			temp.name = "icon2";
+			temp.height = 48;
 			temp.styleName = "ui/common/grid/normal/36.png";
+			temp.width = 48;
 			temp.x = 0;
-			temp.y = 50;
+			temp.y = 48;
 			return temp;
 		}
 
@@ -118,8 +122,9 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			temp.text = "青铜一阶";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 45;
-			temp.y = 40;
+			temp.width = 111;
+			temp.x = 39;
+			temp.y = 36;
 			return temp;
 		}
 
@@ -132,7 +137,7 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.x = 12;
-			temp.y = 67;
+			temp.y = 61;
 			return temp;
 		}
 
@@ -142,10 +147,10 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			lbDangqian = temp;
 			temp.name = "lbDangqian";
 			temp.text = "【当前段位】";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 9;
-			temp.y = 14;
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 5;
+			temp.y = 11;
 			return temp;
 		}
 
@@ -158,7 +163,7 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.x = 0;
-			temp.y = 30;
+			temp.y = 27;
 			return temp;
 		}
 
@@ -170,7 +175,7 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			temp.text = "青铜二阶";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 33;
+			temp.x = 30;
 			temp.y = 3;
 			return temp;
 		}
@@ -181,9 +186,9 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			lbXiaJie = temp;
 			temp.name = "lbXiaJie";
 			temp.text = "【下一阶段位】";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 9;
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 5;
 			temp.y = 151;
 			return temp;
 		}
@@ -193,10 +198,10 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			line1 = temp;
 			temp.name = "line1";
-			temp.styleName = "ui/common/tips/tips_1fengexian.png";
-			temp.width = 267;
-			temp.x = 15;
-			temp.y = 140;
+			temp.styleName = "ui/common/tips/xian.png";
+			temp.width = 264;
+			temp.x = 7;
+			temp.y = 137;
 			return temp;
 		}
 
@@ -206,7 +211,7 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			uiIcon2 = temp;
 			temp.name = "uiIcon2";
 			temp.styleName = "ui/app/zhanchang/icon/1001_24.png";
-			temp.x = 3;
+			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
@@ -217,8 +222,8 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			uiIcon = temp;
 			temp.name = "uiIcon";
 			temp.styleName = "ui/app/zhanchang/icon/1001_24.png";
-			temp.x = 15;
-			temp.y = 37;
+			temp.x = 11;
+			temp.y = 33;
 			return temp;
 		}
 

@@ -3,6 +3,7 @@ package com.rpgGame.appModule.shop
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
@@ -84,14 +85,14 @@ package com.rpgGame.appModule.shop
 			this._skin.lbXiangou.visible=this._data.data.limitType!=0;
 			if (this._data.data.limitType!=0) 
 			{
-				var str:String=_data.data.global_limit==1?"全服":"";
+				var str:String=_data.data.global_limit==1?NotifyCfgData.getNotifyTextByID(61020):"";
 				if (_data.data.limitType==1) 
 				{
-					str+="每日限购";
+					str+=NotifyCfgData.getNotifyTextByID(61021);
 				}
 				else if (_data.data.limitType==2) 
 				{
-					str+="每周限购";
+					str+=NotifyCfgData.getNotifyTextByID(61022);
 				}
 				str+="："+_data.data.todayBuyNum+"/"+_data.data.limitNum;
 				_skin.lbXiangou.text=str;

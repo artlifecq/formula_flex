@@ -46,6 +46,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_finish_describe:String;
 		 /**  自动寻路信息（地图ID,X,Y,x,y;地图ID,X,Y)需传送用;分开填写坐标即可 */
 		public var q_pathing:String;
+		 /**  是否使用系统神行符(1使用，0不使用。默认 0) */
+		public var q_fly:int;
 		 /**  任务奖励信息id(调用t_mission_reword表) */
 		public var q_reword_id:int;
 		 /**  接任务阶段信息的对话（任务对话id。可配置多个id‘,’隔开） */

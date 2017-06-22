@@ -9,7 +9,8 @@ package com.rpgGame.appModule.activety.zonghe
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.app.AppManager;
-	import com.rpgGame.coreData.cfg.active.ActivetyDataManager;
+	import com.rpgGame.coreData.cfg.StaticValue;
+	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.enum.ActivityEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
@@ -49,7 +50,7 @@ package com.rpgGame.appModule.activety.zonghe
 			_skin.ListItem.itemRendererType=ZongHeItemRender;
 			_skin.ListItem.scrollBarDisplayMode = ScrollBarDisplayMode.ALWAYS_VISIBLE;
 			_activeData=new ListCollection();
-			var list:Vector.<ActivetyInfo>=ActivetyDataManager.getActiveList(ActivityEnum.ZONGHE_ACT);
+			var list:Vector.<ActivetyInfo>=ActivetyCfgData.getTypeList(ActivityEnum.ZONGHE_ACT);
 			for(var i:int=0;i<list.length;i++){
 				_activeData.addItem(list[i]);
 			}
@@ -122,9 +123,31 @@ package com.rpgGame.appModule.activety.zonghe
 			_skin.activeName.styleName="ui/app/activety/zonghe/active_name/"+info.actCfg.q_activity_id+".png";
 			_skin.activeBg.styleName="ui/big_bg/activety/des/"+info.actCfg.q_activity_id+".jpg";
 			_skin.lbMsg.htmlText=info.actCfg.q_text;
+			_skin.lbMsg.visible=false;
+			var desObj:Array=JSONUtil.decode(info.actCfg.q_text);
+			
 			_richText.text="";
-			var locationCode:String =RichTextCustomUtil.getTextLinkCode("找的人",0x55bb17,RichTextCustomLinkType.TASK_NPC_NAME_TYPE,null);
-			_richText.appendRichText(locationCode);
+			if(!desObj){
+				desObj=[];
+			}
+			var num:int=desObj.length;
+			var text:String="";
+			for(var i:int=0;i<num;i++){
+				var obj:Object=desObj[i];
+				var des:String=obj.des;
+				if(obj.trans){
+					var list:Array=des.split("$");
+					text+=list[0];
+					var linkData:String=obj.trans.map+","+obj.trans.x+","+obj.trans.y;
+					var linkName:String=RichTextCustomUtil.getTextLinkCode(obj.trans.target,StaticValue.UI_GREEN,
+						RichTextCustomLinkType.WALK_TO_SCENE_POS_TYPE,linkData);
+					text+=linkName;
+					text+=list[1];
+				}else{
+					text+=obj.des;
+				}
+			}
+			_richText.appendRichText(text);
 			
 			var arr:Array;
 			if(info.actCfg.q_rewards){
@@ -139,8 +162,8 @@ package com.rpgGame.appModule.activety.zonghe
 				GrayFilter.unGray(_skin.joinBtn);
 			}
 			
-			var num:int=arr.length;
-			for(var i:int=0;i<4;i++){
+			num=arr.length;
+			for(i=0;i<4;i++){
 				if(i<num){
 					var itemInfo:ClientItemInfo=new ClientItemInfo(arr[0].mod);
 					itemInfo.itemInfo=new ItemInfo();

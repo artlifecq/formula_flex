@@ -1,6 +1,7 @@
 package com.rpgGame.app.ui.main.buttons
 {
 	import com.rpgGame.app.manager.FunctionOpenManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
@@ -31,7 +32,7 @@ package com.rpgGame.app.ui.main.buttons
 		
 		public function canOpen():Boolean
 		{
-			return FunctionOpenManager.getOpenLevelByFunBarInfo(_info);
+			return FunctionOpenManager.getOpenLevelByFunBarInfo(_info)<=MainRoleManager.actorInfo.totalStat.level;
 		}
 		
 		private var _needPlayFirstAm:Boolean = false;
@@ -114,7 +115,7 @@ package com.rpgGame.app.ui.main.buttons
 		
 		protected function triggeredHanadler():void
 		{
-			FunctionOpenManager.openModeByInfo(_info);
+			FunctionOpenManager.openModeByInfo(_info,_info.open_id);
 		}
 		
 		private var _tweenmax:TweenMax;

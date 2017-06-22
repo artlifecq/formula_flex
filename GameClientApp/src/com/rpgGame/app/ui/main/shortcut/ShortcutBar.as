@@ -53,7 +53,10 @@ package com.rpgGame.app.ui.main.shortcut {
 			init();
 			
         }
-		
+		public function skin():shortcut_Skin
+		{
+			return _skin;
+		}
 		public function getSkillGridSeat(index:int):Point
 		{
 			return skillBar.getSkillGridSeat(index);

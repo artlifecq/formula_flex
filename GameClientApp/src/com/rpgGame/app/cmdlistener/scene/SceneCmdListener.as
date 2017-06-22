@@ -276,7 +276,7 @@ package com.rpgGame.app.cmdlistener.scene
 			}
 			var heroData : HeroData = role.data as HeroData; 
 			heroData.cloths=msg.armorResId;
-			AvatarManager.callEquipmentChange(role);
+			AvatarManager.updateAvatar(role);
 		}
 		
 		private function onResHelmChangeMessage(msg:ResHelmChangeMessage):void
@@ -287,7 +287,7 @@ package com.rpgGame.app.cmdlistener.scene
 			}
 			var heroData : HeroData = role.data as HeroData; 
 			heroData.hair=msg.helmResId;
-			AvatarManager.callEquipmentChange(role);
+			AvatarManager.updateAvatar(role);
 		}
 		private function onResWeaponChangeMessage(msg:ResWeaponChangeMessage):void
 		{
@@ -298,7 +298,7 @@ package com.rpgGame.app.cmdlistener.scene
 			var heroData : HeroData = role.data as HeroData; 
 			heroData.weapon=msg.weaponResId;
 			heroData.deputyWeapon=msg.deputyWeaponResId;
-			AvatarManager.callEquipmentChange(role);
+			AvatarManager.updateAvatar(role);
 		}
 		
 		/**
@@ -476,7 +476,7 @@ package com.rpgGame.app.cmdlistener.scene
 			if (role && role.usable && !role.getCamouflageEntity()) //有伪装则跟随伪装，防止服务器发伪装者移动。
 			{
 				var elapseTm : int = SystemTimeManager.curtTm - mInfo.startTm;
-				trace("寻路开始时间：" + mInfo.startTm, "_差值：" + elapseTm + "_服务器时间 ：" + SystemTimeManager.curtTm);
+				//trace("寻路开始时间：" + mInfo.startTm, "_差值：" + elapseTm + "_服务器时间 ：" + SystemTimeManager.curtTm);
 				RoleStateUtil.walkByInfos(mInfo);
 				
 				//调试bug用，可以删除！！！！

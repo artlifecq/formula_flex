@@ -125,7 +125,6 @@ package com.rpgGame.app.manager.role
 			role.dialogFace=BubbleDialogFace.create(role);
 			//执行主换装更新
 			AvatarManager.callEquipmentChange(role, false, false, false);
-			
 			var renderLimitable : Boolean = false;
 			if (!isMainChar)
 			{

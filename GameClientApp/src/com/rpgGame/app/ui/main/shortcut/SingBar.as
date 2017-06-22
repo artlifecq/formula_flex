@@ -67,7 +67,7 @@ package com.rpgGame.app.ui.main.shortcut
 			EventManager.addEvent(SkillEvent.SKILL_ATTACK,slillAttack);//技能开始吟唱
 			EventManager.addEvent(SkillEvent.SKILL_CANCEL,slillCancel);//技能被打断，取消吟唱
 			EventManager.addEvent(SkillEvent.SKILL_RESULT,slillCancel);//技能释放成功，吟唱没完的话也取消吟唱
-			EventManager.addEvent(UserMoveEvent.MOVE_START, slillCancel);//人物移动，取消吟唱
+			//EventManager.addEvent(UserMoveEvent.MOVE_START, slillCancel);//人物移动，取消吟唱
 			
 			EventManager.addEvent(SkillEvent.SING_START,startSing);
 			EventManager.addEvent(SkillEvent.SING_STOP,onCompFun);

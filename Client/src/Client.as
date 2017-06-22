@@ -138,7 +138,7 @@ package
 			//
 			ClientConfig.init(this);
 			ClientUrlManager.setup(ClientConfig.baseDir, version, ClientConfig.decodeFun);
-			VersionUtils.setup(versionMap, baseDir, (version && version.length > 0) ? version : Math.random().toFixed(5), ClientConfig.useVersion);
+			VersionUtils.setup(versionMap, baseDir, version, ClientConfig.useVersion);
 			
 			initProcess();
 			//initMenu();
