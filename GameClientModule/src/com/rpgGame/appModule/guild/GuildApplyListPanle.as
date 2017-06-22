@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.guild
 {
 	import com.rpgGame.app.manager.guild.GuildManager;
+	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.core.events.GuildEvent;
 	import com.rpgGame.netData.guild.bean.GuildApplyInfo;
@@ -46,7 +47,7 @@ package com.rpgGame.appModule.guild
 			
 			EventManager.addEvent(GuildEvent.GET_JOIN_GUILD_LIST,refeashView);
 			refeashView(null);
-			GuildManager.instance().reqGuildApplyListInfo();
+			GuildSender.reqGuildApplyListInfo();
 		}
 		
 		override public function hide():void

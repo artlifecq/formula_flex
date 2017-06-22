@@ -90,18 +90,6 @@ package com.rpgGame.netData{
 	import com.rpgGame.netData.dailyzone.message.SCDailyZonePanelInfoMessage;
 	import com.rpgGame.netData.dailyzone.message.SCDailyZoneRewardPanelInfoMessage;
 	import com.rpgGame.netData.dailyzone.message.SCDailyZoneTimeInfoMessage;
-	import com.rpgGame.netData.daysdowngold.handler.SCActivityTimeHandler;
-	import com.rpgGame.netData.daysdowngold.handler.SCCashGiftChangeHandler;
-	import com.rpgGame.netData.daysdowngold.handler.SCCashGiftClientHandler;
-	import com.rpgGame.netData.daysdowngold.handler.SCRankInfoHandler;
-	import com.rpgGame.netData.daysdowngold.handler.SCRemainRefreshTimeHandler;
-	import com.rpgGame.netData.daysdowngold.handler.SCRewardInfoHandler;
-	import com.rpgGame.netData.daysdowngold.message.SCActivityTimeMessage;
-	import com.rpgGame.netData.daysdowngold.message.SCCashGiftChangeMessage;
-	import com.rpgGame.netData.daysdowngold.message.SCCashGiftClientMessage;
-	import com.rpgGame.netData.daysdowngold.message.SCRankInfoMessage;
-	import com.rpgGame.netData.daysdowngold.message.SCRemainRefreshTimeMessage;
-	import com.rpgGame.netData.daysdowngold.message.SCRewardInfoMessage;
 	import com.rpgGame.netData.desirepond.handler.ResDesirePondPanlHandler;
 	import com.rpgGame.netData.desirepond.handler.ResDesireSuccessHandler;
 	import com.rpgGame.netData.desirepond.message.ResDesirePondPanlMessage;

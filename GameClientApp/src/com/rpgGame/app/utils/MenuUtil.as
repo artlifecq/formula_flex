@@ -9,6 +9,7 @@ package com.rpgGame.app.utils
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.manager.society.SocietyManager;
 	import com.rpgGame.app.manager.trade.TradeManager;
+	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.app.sender.LookSender;
 	import com.rpgGame.app.sender.TeamSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
@@ -233,7 +234,7 @@ package com.rpgGame.app.utils
 					break;
 				case LangMenu.SEND_MAIL://发送邮件
 				case LangMenu.INVITE_JOIN_GUILD:
-					GuildManager.instance().reqGuildInvite(heroId,0);
+					GuildSender.reqGuildInvite(heroId,0);
 					break;
 				case LangMenu.SEND_MAIL://邀请加入帮派
 					AppManager.showAppNoHide(AppConstant.MAIL_PANEL, [MailType.SEND, heroId, heroName, LanguageConfig.getText(LangMisc.NOTHING_INFO)]);
