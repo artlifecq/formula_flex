@@ -4,12 +4,12 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.game.engine3D.vo.BaseObj3D;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
+	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.manager.CharAttributeManager;
 	import com.rpgGame.app.manager.ClientTriggerManager;
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.GameCameraManager;
-	import com.rpgGame.app.manager.LostSkillManager;
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.RankManager;
 	import com.rpgGame.app.manager.ReliveManager;
@@ -144,9 +144,9 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			SocketConnection.addCmdListener(101143, RecvResPlayerRunFailMessage);
 			SocketConnection.addCmdListener(101117, onResChangeMapMessage);
-//			SocketConnection.addCmdListener(SceneModuleMessages.S2C_SCENE_MAP_TRANSPORT, onSceneMapTransport);
+			//			SocketConnection.addCmdListener(SceneModuleMessages.S2C_SCENE_MAP_TRANSPORT, onSceneMapTransport);
 			SocketConnection.addCmdListener(101126, onResChangeMapFailedMessage);
-            // 复活成功
+			// 复活成功
 			SocketConnection.addCmdListener(103114, onResPlayerDieMessage);
 			SocketConnection.addCmdListener(103115, onResReviveSuccessMessage);
 			SocketConnection.addCmdListener(101146, onResRoundGoodsExtraMessage);
@@ -158,11 +158,11 @@ package com.rpgGame.app.cmdlistener.scene
 			SocketConnection.addCmdListener(101118, onResWeaponChangeMessage);//武器
 			
 			// 陷阱状态改变
-            SocketConnection.addCmdListener(101151, onRecvSCAttachStateChangeMessage);
+			SocketConnection.addCmdListener(101151, onRecvSCAttachStateChangeMessage);
 			
-            SocketConnection.addCmdListener(103110, onResChangePKStateMessage);
+			SocketConnection.addCmdListener(103110, onResChangePKStateMessage);
 			SocketConnection.addCmdListener(114108, onResMonterDieMessage);
-//			SocketConnection.addCmdListener(SceneModuleMessages.S2C_TRIGGER_CLIENT_EVENT, onTriggerClientEvent);
+			//			SocketConnection.addCmdListener(SceneModuleMessages.S2C_TRIGGER_CLIENT_EVENT, onTriggerClientEvent);
 			
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			//////
@@ -185,7 +185,7 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_SCENE_OBJECT_MAX_LIFE_CHANGE, onRecObjectMaxLifeChange);
 			
-
+			
 			SocketConnection_protoBuffer.addCmdListener(SimpleDungeonModuleMessages.S2C_LEAVE_DUNGEON_FAIL, onLeaveDungeonFail);
 			SocketConnection_protoBuffer.addCmdListener(SimpleDungeonModuleMessages.S2C_LEAVE_DUNGEON_SUCCESS, onLeaveDungeonSuccess);
 			SocketConnection_protoBuffer.addCmdListener(SceneModuleMessages.S2C_HERO_JUMP, onHeroJump);
@@ -241,23 +241,23 @@ package com.rpgGame.app.cmdlistener.scene
 			EventManager.dispatchEvent(UserMoveEvent.MOVE_RESCHANGE);
 		}
 		
-        // 陷阱状态改变
-        private function onRecvSCAttachStateChangeMessage(msg : SCAttachStateChangeMessage) : void {
-            var trap : RenderUnit3D = SceneManager.getSceneObjByID(msg.personId.ToGID()) as RenderUnit3D;
-            if (null == trap) {
-                return;
-            }
-            var info : TrapInfo = trap.data as TrapInfo;
-            if (null == info || info.state == msg.state) {
-                return;
-            }
-            if (info.effect) {
-                info.effect.stop();
-                SceneManager.removeSceneObjFromScene(info.effect);
-            }
-            info.state = msg.state;
-            SceneManager.addSceneObjToScene(info.effect, true, false, false);
-        }
+		// 陷阱状态改变
+		private function onRecvSCAttachStateChangeMessage(msg : SCAttachStateChangeMessage) : void {
+			var trap : RenderUnit3D = SceneManager.getSceneObjByID(msg.personId.ToGID()) as RenderUnit3D;
+			if (null == trap) {
+				return;
+			}
+			var info : TrapInfo = trap.data as TrapInfo;
+			if (null == info || info.state == msg.state) {
+				return;
+			}
+			if (info.effect) {
+				info.effect.stop();
+				SceneManager.removeSceneObjFromScene(info.effect);
+			}
+			info.state = msg.state;
+			SceneManager.addSceneObjToScene(info.effect, true, false, false);
+		}
 		
 		private function onResPlayerDieMessage(msg:ResPlayerDieMessage):void
 		{
@@ -345,29 +345,29 @@ package com.rpgGame.app.cmdlistener.scene
 		 */		
 		private function RecvResPlayerStopMessage(msg:ResPlayerStopMessage):void
 		{
-//			var objId : Number = msg.personId.ToGID();
-//			if(MainRoleManager.actorID == objId)
-//			{
-//				var posX : int = msg.position.x;
-//				var posY : int = msg.position.y;
-//				
-//				var role : SceneRole = SceneManager.getSceneObjByID(objId) as SceneRole;
-//				if (role && role.usable)
-//				{
-//					var walkMoveRef : WalkMoveStateReference;
-//					var stopWalkRef : StopWalkMoveStateReference;
-//					walkMoveRef = role.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
-//					walkMoveRef.isServerStop = true;
-//					stopWalkRef = role.stateMachine.getReference(StopWalkMoveStateReference) as StopWalkMoveStateReference;
-//					stopWalkRef.setParams(posX, posY);
-//					role.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE, stopWalkRef);
-//					if (role.stateMachine.isPrewarWaiting)
-//						role.stateMachine.transition(RoleStateType.ACTION_PREWAR);
-//					else
-//						role.stateMachine.transition(RoleStateType.ACTION_IDLE);
-//				}
-//				return;
-//			}
+			//			var objId : Number = msg.personId.ToGID();
+			//			if(MainRoleManager.actorID == objId)
+			//			{
+			//				var posX : int = msg.position.x;
+			//				var posY : int = msg.position.y;
+			//				
+			//				var role : SceneRole = SceneManager.getSceneObjByID(objId) as SceneRole;
+			//				if (role && role.usable)
+			//				{
+			//					var walkMoveRef : WalkMoveStateReference;
+			//					var stopWalkRef : StopWalkMoveStateReference;
+			//					walkMoveRef = role.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
+			//					walkMoveRef.isServerStop = true;
+			//					stopWalkRef = role.stateMachine.getReference(StopWalkMoveStateReference) as StopWalkMoveStateReference;
+			//					stopWalkRef.setParams(posX, posY);
+			//					role.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE, stopWalkRef);
+			//					if (role.stateMachine.isPrewarWaiting)
+			//						role.stateMachine.transition(RoleStateType.ACTION_PREWAR);
+			//					else
+			//						role.stateMachine.transition(RoleStateType.ACTION_IDLE);
+			//				}
+			//				return;
+			//			}
 		}
 		
 		/**
@@ -379,7 +379,7 @@ package com.rpgGame.app.cmdlistener.scene
 			var objId : Number = msg.personId.ToGID();
 			if(MainRoleManager.actorID == objId)
 			{
-//				trace("主角自己，不用同步了吧！不然，场景会跳一下，体验不好！");
+				//				trace("主角自己，不用同步了吧！不然，场景会跳一下，体验不好！");
 				return;
 			}
 			
@@ -394,7 +394,7 @@ package com.rpgGame.app.cmdlistener.scene
 				var stopWalkRef : StopWalkMoveStateReference;
 				
 				GameLog.addShow("角色深度值为：  ****** " + role.z);
-			
+				
 				/////////////////伪装者停止移动
 				var camouflageEntity : SceneRole = SceneRole(role.getCamouflageEntity());
 				if (camouflageEntity)
@@ -575,11 +575,11 @@ package com.rpgGame.app.cmdlistener.scene
 							addDropGoods(addArr[j].bytesList[k]);
 						}
 						break;
-                    case SceneCharType.TRAP:
-                        for (k = 0; k < len; ++k) {
-                            addTrap(addArr[j].bytesList[k]);
-                        }
-                        break;
+					case SceneCharType.TRAP:
+						for (k = 0; k < len; ++k) {
+							addTrap(addArr[j].bytesList[k]);
+						}
+						break;
 				}
 			}
 		}
@@ -610,18 +610,18 @@ package com.rpgGame.app.cmdlistener.scene
 			data.isDroped=true;
 			SceneRoleManager.getInstance().createDropGoods(data);
 		}
-        
-        private function addTrap(buffer : ByteArray) : void {
-            var info : AttachInfo = new AttachInfo();
-            info.read(buffer);
-            var cfg : Attach_effect = AttachEffectCfgData.getInfo(info.modelId);
-            if (null == cfg) {
-                GameLog.add("陷阱配置不存在:" + info.modelId);
-                return;
-            }
-            var data : TrapInfo = new TrapInfo(info.id, info.id.ToGID(), info.modelId, info.state, info.position.x, info.position.y);
-            SceneManager.addSceneObjToScene(data.normalEffect, true, false, false);
-        }
+		
+		private function addTrap(buffer : ByteArray) : void {
+			var info : AttachInfo = new AttachInfo();
+			info.read(buffer);
+			var cfg : Attach_effect = AttachEffectCfgData.getInfo(info.modelId);
+			if (null == cfg) {
+				GameLog.add("陷阱配置不存在:" + data.modelId);
+				return;
+			}
+			var data : TrapInfo = new TrapInfo(info.id, info.id.ToGID(), info.modelId, info.state, info.position.x, info.position.y);
+			SceneManager.addSceneObjToScene(data.normalEffect, true, false, false);
+		}
 		
 		/**
 		 * 把一个英雄/怪物/宠物等从视野中删除
@@ -630,47 +630,47 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function onSceneRemoveObject(roleID : uint) : void
 		{
-            var unit : BaseObj3D = SceneManager.getSceneObjByID(roleID);
-            if (null == unit) {
-                return;
-            }
-            if (unit is SceneRole) {
-                var sceneRole : SceneRole = unit as SceneRole;
-                if(sceneRole != null )
-                {
-                    var data:MonsterData = sceneRole.data as MonsterData;
-                    if( data != null )
-                    {
-                        TouJingManager.setHuGuoSiEffect(data.modelID, sceneRole, false);
-                        var sceneClientRole:SceneRole = SceneManager.getSceneClientNpcByModelId( data.modelID);
-                        if( sceneClientRole != null )
-                        {
-                            sceneClientRole.visible = true;
-                            TouJingManager.setHuGuoSiEffect(data.modelID, sceneClientRole, true);						
-                        }
-                    }else if(sceneRole.data is SceneDropGoodsData){
+			var unit : BaseObj3D = SceneManager.getSceneObjByID(roleID);
+			if (null == unit) {
+				return;
+			}
+			if (unit is SceneRole) {
+				var sceneRole : SceneRole = unit as SceneRole;
+				if(sceneRole != null )
+				{
+					var data:MonsterData = sceneRole.data as MonsterData;
+					if( data != null )
+					{
+						TouJingManager.setHuGuoSiEffect(data.modelID, sceneRole, false);
+						var sceneClientRole:SceneRole = SceneManager.getSceneClientNpcByModelId( data.modelID);
+						if( sceneClientRole != null )
+						{
+							sceneClientRole.visible = true;
+							TouJingManager.setHuGuoSiEffect(data.modelID, sceneClientRole, true);						
+						}
+					}else if(sceneRole.data is SceneDropGoodsData){
 						DropGoodsManager.getInstance().removeDropGoods(sceneRole.data as SceneDropGoodsData);
 					}
-                }
-                SceneRoleManager.getInstance().removeSceneRoleById(roleID);
-                return;
-            }
-            if (unit is RenderUnit3D){
-                var trap : RenderUnit3D = unit as RenderUnit3D;
-                if (null != trap && (trap.data is TrapInfo)) {
-                    var trapInfo : TrapInfo = trap.data as TrapInfo;
-                    if (trapInfo.effect) {
-                        trapInfo.effect.stop();
-                    }
-                    if (trapInfo.normalEffect) {
-                        trapInfo.normalEffect.stop();
-                    }
-                    SceneManager.removeSceneObjFromScene(trapInfo.effect);
-                    SceneManager.removeSceneObjFromScene(trapInfo.normalEffect);
-                    return;
-                }
-            }
-            SceneManager.removeSceneObjFromScene(unit);
+				}
+				SceneRoleManager.getInstance().removeSceneRoleById(roleID);
+				return;
+			}
+			if (unit is RenderUnit3D){
+				var trap : RenderUnit3D = unit as RenderUnit3D;
+				if (null != trap && (trap.data is TrapInfo)) {
+					var trapInfo : TrapInfo = trap.data as TrapInfo;
+					if (trapInfo.effect) {
+						trapInfo.effect.stop();
+					}
+					if (trapInfo.normalEffect) {
+						trapInfo.normalEffect.stop();
+					}
+					SceneManager.removeSceneObjFromScene(trapInfo.effect);
+					SceneManager.removeSceneObjFromScene(trapInfo.normalEffect);
+					return;
+				}
+			}
+			SceneManager.removeSceneObjFromScene(unit);
 		}
 		
 		/**
@@ -749,14 +749,15 @@ package com.rpgGame.app.cmdlistener.scene
 				data.distributeId=info.distributeId;
 				RoleData.readMonster(data,info);
 				sceneRole =SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
-				addTaskmark(sceneRole);
+				addTaskmark(sceneRole);			
+//				(sceneRole.headFace as HeadFace).updateNPCTitle();
 				
 				GameLog.addShow("添加NPC客户端id：" + data.id);
 				GameLog.addShow("添加NPC服务器id：" + data.serverID.ToString());
 			}
 			else//走怪物创建流程
 			{
-			
+				
 				data = new MonsterData(RoleType.TYPE_MONSTER);
 				data.serverID = info.monsterId;
 				data.id = info.monsterId.ToGID();
@@ -883,7 +884,7 @@ package com.rpgGame.app.cmdlistener.scene
 					FunctionOpenManager.openFunctionByLevel(msg.attributeChange.value,true);
 					EventManager.dispatchEvent(MainPlayerEvent.LEVEL_CHANGE);
 				}
-//				ReliveManager.autoHideRelive();
+				//				ReliveManager.autoHideRelive();
 			}
 		}
 		
@@ -976,7 +977,7 @@ package com.rpgGame.app.cmdlistener.scene
 			dropGoodsData.isDroped=true;
 			SceneRoleManager.getInstance().createDropGoods(dropGoodsData)
 		}
-        
+		
 		private function onResRoundGoodsExtraMessage(msg:ResRoundGoodsExtraMessage):void
 		{
 			var dropGoodsData : SceneDropGoodsData = new SceneDropGoodsData();
@@ -984,38 +985,42 @@ package com.rpgGame.app.cmdlistener.scene
 			dropGoodsData.isDroped=true;
 			SceneRoleManager.getInstance().createDropGoods(dropGoodsData)
 		}
-        
-        private function onResReviveSuccessMessage(msg : ResReviveSuccessMessage) : void 
+		
+		private function onResReviveSuccessMessage(msg : ResReviveSuccessMessage) : void 
 		{
-            var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;
-            if (!role)
-                return;
-            var roleData : RoleData = role.data as RoleData;
-            
-            CharAttributeManager.setAttributeValue(roleData, CharAttributeType.HP, msg.hp);
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;
+			if (!role)
+				return;
+			var roleData : RoleData = role.data as RoleData;
+			
+			CharAttributeManager.setAttributeValue(roleData, CharAttributeType.HP, msg.hp);
 			
 			role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true); //切换到“站立状态”
-//			SceneManager.removeSceneObjFromScene(role);
-//			role = SceneRoleManager.getInstance().createHero(roleData as HeroData);
+			//			SceneManager.removeSceneObjFromScene(role);
+			//			role = SceneRoleManager.getInstance().createHero(roleData as HeroData);
 			
 			//to do 给这个人播放一个复活特效 
 			SpellAnimationHelper.addTargetEffect(role, 
 				RenderUnitID.LEVEL, 
 				RenderUnitType.LEVEL, 
 				EffectUrl.RELIVE_NORMAL);
+			if(roleData.id == MainRoleManager.actorID)
+			{
+				ReliveManager.autoHideRelive();
+			}
             if(roleData.id == MainRoleManager.actorID)
             {
 				SceneManager.scene.removeGrayScene();
                 ReliveManager.autoHideRelive();
 				EventManager.dispatchEvent(MainPlayerEvent.SELFHP_CHANGE);
 				EventManager.dispatchEvent(MainPlayerEvent.REVIVE_SUCCESS);
-            }
+			}
 			else
 			{
 				role.mouseEnable = true;
 			}
 			TaskAutoManager.getInstance().stopAll();//死亡复活终止挂机
-        }
+		}
 		
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//////
@@ -1038,10 +1043,10 @@ package com.rpgGame.app.cmdlistener.scene
 			if (playerData == null)
 				return;
 			
-//			playerData.x = tX;
-//			playerData.y = tY;
-//			playerData.hp = hp;
-//			playerData.totalStat.life = maxHp;
+			//			playerData.x = tX;
+			//			playerData.y = tY;
+			//			playerData.hp = hp;
+			//			playerData.totalStat.life = maxHp;
 			
 			TrusteeshipManager.getInstance().stopAll();
 			MainRoleManager.updateActorStatus();
@@ -1149,16 +1154,16 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function onLeaveDungeonFail(buffer : ByteBuffer) : void
 		{
-//			ReqLockUtil.unlockReq(101218);
-//			var failID : int = buffer.readVarint32();
-//			var failReason : String;
-//			switch (failID)
-//			{
-//				case 1:
-//					failReason = LangText.SCENE_LEAVE_DUNGEON_FAIL;
-//					return;
-//			}
-//			NoticeManager.showNotify(failReason, failID);
+			//			ReqLockUtil.unlockReq(101218);
+			//			var failID : int = buffer.readVarint32();
+			//			var failReason : String;
+			//			switch (failID)
+			//			{
+			//				case 1:
+			//					failReason = LangText.SCENE_LEAVE_DUNGEON_FAIL;
+			//					return;
+			//			}
+			//			NoticeManager.showNotify(failReason, failID);
 		}
 		
 		/**
@@ -1240,10 +1245,10 @@ package com.rpgGame.app.cmdlistener.scene
 		{
 			while (buffer.bytesAvailable)
 			{
-//				var dropGoodsData : SceneDropGoodsData = new SceneDropGoodsData();
-//				dropGoodsData.readFrom(buffer);
-//				dropGoodsData.isDroped = true;
-//				SceneRoleManager.getInstance().createDropGoods(dropGoodsData);
+				//				var dropGoodsData : SceneDropGoodsData = new SceneDropGoodsData();
+				//				dropGoodsData.readFrom(buffer);
+				//				dropGoodsData.isDroped = true;
+				//				SceneRoleManager.getInstance().createDropGoods(dropGoodsData);
 			}
 		}
 		
@@ -1255,9 +1260,9 @@ package com.rpgGame.app.cmdlistener.scene
 		{
 			while (buffer.bytesAvailable)
 			{
-//				var dropGoodsData : SceneDropGoodsData = new SceneDropGoodsData();
-//				dropGoodsData.readFrom(buffer);
-//				SceneRoleManager.getInstance().createDropGoods(dropGoodsData);
+				//				var dropGoodsData : SceneDropGoodsData = new SceneDropGoodsData();
+				//				dropGoodsData.readFrom(buffer);
+				//				SceneRoleManager.getInstance().createDropGoods(dropGoodsData);
 			}
 		}
 		
@@ -1273,7 +1278,7 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function onScenePickUpGoodsInfo(buffer : ByteBuffer) : void
 		{
-//			ReqLockUtil.unlockReq(SceneModuleMessages.C2S_SCENE_PICK_UP_GOODS_INFO);
+			//			ReqLockUtil.unlockReq(SceneModuleMessages.C2S_SCENE_PICK_UP_GOODS_INFO);
 			var sceneGoodsId : Number = buffer.readVarint64();
 			var goodsItems : Vector.<SceneDropGoodsItem> = new Vector.<SceneDropGoodsItem>();
 			while (buffer.bytesAvailable)
@@ -1311,7 +1316,7 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function onScenePickUpGoodsInfoFail(buffer : ByteBuffer) : void
 		{
-//			ReqLockUtil.unlockReq(SceneModuleMessages.C2S_SCENE_PICK_UP_GOODS_INFO);
+			//			ReqLockUtil.unlockReq(SceneModuleMessages.C2S_SCENE_PICK_UP_GOODS_INFO);
 			var failID : int = buffer.readVarint32();
 			var failReason : String;
 			switch (failID)
@@ -1342,7 +1347,7 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function onScenePickUpGoods(buffer : ByteBuffer) : void
 		{
-//			ReqLockUtil.unlockReq(SceneModuleMessages.C2S_SCENE_PICK_UP_GOODS);
+			//			ReqLockUtil.unlockReq(SceneModuleMessages.C2S_SCENE_PICK_UP_GOODS);
 			var sceneGoodsId : Number = buffer.readVarint64();
 			var index : int = buffer.readVarint32();
 			SceneDropGoodsManager.removeGoods(sceneGoodsId, index);
@@ -1364,7 +1369,7 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function onScenePickUpGoodsFail(buffer : ByteBuffer) : void
 		{
-//			ReqLockUtil.unlockReq(SceneModuleMessages.C2S_SCENE_PICK_UP_GOODS);
+			//			ReqLockUtil.unlockReq(SceneModuleMessages.C2S_SCENE_PICK_UP_GOODS);
 			var failID : int = buffer.readVarint32();
 			var failReason : String;
 			switch (failID)
@@ -1412,7 +1417,7 @@ package com.rpgGame.app.cmdlistener.scene
 			{
 				var roleData : RoleData = role.data as RoleData;
 				CharAttributeManager.setCharMaxLife(roleData, maxLife);
-//				CharAttributeManager.setCharHp(roleData, hp);这行代码有效，值是这个接口变了，所以，就注释掉了
+				//				CharAttributeManager.setCharHp(roleData, hp);这行代码有效，值是这个接口变了，所以，就注释掉了
 			}
 		}
 		

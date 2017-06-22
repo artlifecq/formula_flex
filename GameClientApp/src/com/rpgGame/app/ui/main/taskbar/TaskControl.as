@@ -2,6 +2,7 @@ package com.rpgGame.app.ui.main.taskbar
 {
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.fight.spell.CastSpellHelper;
+	import com.rpgGame.app.manager.HuBaoManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.WalkToRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -9,6 +10,7 @@ package com.rpgGame.app.ui.main.taskbar
 	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.sender.HuBaoSender;
 	import com.rpgGame.app.sender.TaskSender;
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
@@ -16,23 +18,24 @@ package com.rpgGame.app.ui.main.taskbar
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.HuBaoData;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.SceneCollectData;
 	import com.rpgGame.coreData.type.TaskType;
-
+	
 	public class TaskControl
 	{
 		/*public static static var _instance : TaskControl;
 		
 		public static function getInstance() : TaskControl
 		{
-			if (!_instance)
-			{
-				_instance = new TaskControl();
-			}
-			return _instance;
+		if (!_instance)
+		{
+		_instance = new TaskControl();
+		}
+		return _instance;
 		}*/
-
+		
 		
 		public function TaskControl()
 		{
@@ -147,8 +150,7 @@ package com.rpgGame.app.ui.main.taskbar
 		}
 		/**追踪面板上寻路完成*/
 		public static function finishWalk(data :Object):void
-		{
-			
+		{		
 			if(TaskMissionManager.mainTaskData!=null)
 			{
 				finishToNpc(TaskMissionManager.getMainTaskNpcAreaId());
@@ -160,14 +162,13 @@ package com.rpgGame.app.ui.main.taskbar
 			if(TaskMissionManager.isMainTaskNpc(npcId))
 			{
 				showLeadPanel();
-			}
-			
-			
+			}		
 		}
 		/**飞鞋完成*/
 		public static function flyComplete():void
-		{
-			var dist:int =TaskUtil.getDistfinishNpc();
+		{		
+			HuBaoManager.instance().onHuBaoHandler();
+			var dist:int = TaskUtil.getDistfinishNpc();
 			if(dist>=0&&dist<100)
 			{
 				showLeadPanel();

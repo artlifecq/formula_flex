@@ -86,7 +86,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_Line_time:int;
 		 /**  脚本BUFFID */
 		public var q_script_id:int;
-		 /**  针对目标（1玩家） */
+		 /**  针对目标（1玩家,2怪物） */
 		public var q_target_type:int;
 		 /**  拥有BUFF者是否变色（0否，1是） */
 		public var q_colour:int;

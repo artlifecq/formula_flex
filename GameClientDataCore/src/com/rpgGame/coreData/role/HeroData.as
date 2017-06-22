@@ -123,6 +123,8 @@ package com.rpgGame.coreData.role
 		public var junjieLv:int;
 		/**战旗等级*/
 		public var zhanqiLv:int;
+		/**宝物等级*/
+		public var baowuLv:int;
 		
 		private var _customMount : int = 0;
 		public var trailMount : String = null;
@@ -318,7 +320,7 @@ package com.rpgGame.coreData.role
 			data.deputyWeapon = info.second_weapon;
 			data.junjieLv=info.junJieId;
 			data.zhanqiLv=info.warflag;
-			
+			data.baowuLv=info.convoy;
 			data.totalStat.setData(info.attributes);
 			
 			//			data.hp = info.hp;

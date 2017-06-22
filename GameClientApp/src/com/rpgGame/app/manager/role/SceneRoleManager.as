@@ -156,10 +156,6 @@ package com.rpgGame.app.manager.role
 			
 			if (role.headFace is HeadFace)
 				(role.headFace as HeadFace).updateTitle(data.junjieLv);
-			if(data.zhanqiLv>0)
-			{
-				updateZhanQiRole(role);
-			}
 			
 			CharAttributeManager.setCharHp(data, data.totalStat.hp);
 			CharAttributeManager.setCharMaxLife(data, data.totalStat.life); //需要提供初始化方法,优化一下!
@@ -649,7 +645,7 @@ package com.rpgGame.app.manager.role
 			owner.setRenderAnimator(fightSoulFollowAnimator);
 			return fightSoulRole;
 		}
-		
+
 		/**创建战旗特效*/
 		public function updateZhanQiRole(owner:SceneRole):SceneRole
 		{

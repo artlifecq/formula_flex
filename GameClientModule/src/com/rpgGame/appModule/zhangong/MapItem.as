@@ -12,7 +12,13 @@ package com.rpgGame.appModule.zhangong
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.beibao.zhangong.MapItem_Skin;
-	import org.mokylin.skin.app.beibao.zhangong.button.ButtonMazeiyingzhai;
+	import org.mokylin.skin.app.beibao.zhangong.button.ButtonChangpingwanrenkeng;
+	import org.mokylin.skin.app.beibao.zhangong.button.ButtonDaliangcheng;
+	import org.mokylin.skin.app.beibao.zhangong.button.ButtonEfanggong;
+	import org.mokylin.skin.app.beibao.zhangong.button.ButtonHandanjinjiao;
+	import org.mokylin.skin.app.beibao.zhangong.button.ButtonQinshihuangling;
+	import org.mokylin.skin.app.beibao.zhangong.button.ButtonSaiwai;
+	import org.mokylin.skin.app.beibao.zhangong.button.ButtonWanlichangcheng;
 	import org.mokylin.skin.app.beibao.zhangong.button.ButtonWujiabaomuchang;
 	
 	import starling.display.DisplayObject;
@@ -57,14 +63,44 @@ package com.rpgGame.appModule.zhangong
 		{
 			switch(lv)
 			{
-				case 1:
+				case 21:
 				{
 					_skin.btnBG.styleClass=org.mokylin.skin.app.beibao.zhangong.button.ButtonWujiabaomuchang;
 					break;
 				}		
-				case 5:
+				case 31:
 				{
-					_skin.btnBG.styleClass=org.mokylin.skin.app.beibao.zhangong.button.ButtonMazeiyingzhai;
+					_skin.btnBG.styleClass=org.mokylin.skin.app.beibao.zhangong.button.ButtonHandanjinjiao;
+					break;
+				}
+				case 41:
+				{
+					_skin.btnBG.styleClass=org.mokylin.skin.app.beibao.zhangong.button.ButtonDaliangcheng;
+					break;
+				}
+				case 51:
+				{
+					_skin.btnBG.styleClass=org.mokylin.skin.app.beibao.zhangong.button.ButtonChangpingwanrenkeng;
+					break;
+				}
+				case 61:
+				{
+					_skin.btnBG.styleClass=org.mokylin.skin.app.beibao.zhangong.button.ButtonWanlichangcheng;
+					break;
+				}
+				case 71:
+				{
+					_skin.btnBG.styleClass=org.mokylin.skin.app.beibao.zhangong.button.ButtonSaiwai;
+					break;
+				}
+				case 81:
+				{
+					_skin.btnBG.styleClass=org.mokylin.skin.app.beibao.zhangong.button.ButtonEfanggong;
+					break;
+				}
+				case 91:
+				{
+					_skin.btnBG.styleClass=org.mokylin.skin.app.beibao.zhangong.button.ButtonQinshihuangling;
 					break;
 				}
 			}
