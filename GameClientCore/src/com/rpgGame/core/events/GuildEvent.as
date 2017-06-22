@@ -42,5 +42,7 @@ package com.rpgGame.core.events
 		public static const GUILD_INFO_CHANGE : uint = UNIQUEID.NEXT;
 		/**跟新帮派技能信息**/
 		public static const GUILD_SKILLINFO_CHAGE:uint = UNIQUEID.NEXT;
+		/**跟新帮派技能信息**/
+		public static const GUILD_WCZB_INFO:uint = UNIQUEID.NEXT;
 	}
 }

@@ -29,7 +29,10 @@ package com.rpgGame.coreData.cfg.model
 
 		public static function getInfo(id : int) : AvatarHairRes
 		{
-			return _map.getValue(id);
+			if(_map){
+				return _map.getValue(id);
+			}
+			return null;
 		}
 
 		public function AvatarHairResCfgData()
