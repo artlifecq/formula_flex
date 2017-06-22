@@ -168,6 +168,7 @@ package com.rpgGame.app.manager
 				}
 			}
 			updateRoleSimpleShadow(role);
+			EventManager.dispatchEvent(AvatarEvent.EQUIP_CHANGE, role);
 		}
 		
 		public static function updateSimpleShadow() : void
@@ -508,6 +509,7 @@ package com.rpgGame.app.manager
 				{
 					if (rpd_body.animatorSourchPath)
 					{
+//						ru = role.avatar.addRenderUnitToComposite(RenderUnitType.BODY, RenderUnitID.BODY, rpd_weapon_effect);
 						ru = role.avatar.addRenderUnitToJoint(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.b_r_wq_01, rpd_weapon_effect);
 					}
 					else
@@ -1342,7 +1344,6 @@ package com.rpgGame.app.manager
 					updateAvatar(role, updateBuff);
 				}
 			}
-			EventManager.dispatchEvent(AvatarEvent.EQUIP_CHANGE, role);
 		}
 	}
 }

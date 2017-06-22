@@ -349,7 +349,7 @@ package com.rpgGame.app.graphics
 		{
 			//不管是临时，还是模型加载完成的，这是不能为NULL
 			updateShowAndHide();
-//			return;
+			//			return;
 			var startPosy : int = 0; //不是临时的，说明模型那么就按名字绑定点就好了
 			if (isTemporary)
 			{
@@ -1287,7 +1287,7 @@ package com.rpgGame.app.graphics
 				if (_teamCaptainFlag&&_teamCaptainFlag.parent) 
 				{
 					MCUtil.removeSelf(_teamCaptainFlag);
-				//	deCtrl.sortTop();
+					//	deCtrl.sortTop();
 				}
 			}
 		}

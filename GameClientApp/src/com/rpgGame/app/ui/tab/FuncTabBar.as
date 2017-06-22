@@ -30,14 +30,21 @@ package com.rpgGame.app.ui.tab
 		{
 			var num2:int=ids.length;
 			var tabKey:String;
+			var bool:Boolean = false;
 			for(var i:int=0;i<num2;i++){
 				tabKey=ids[i].toString();
 				if(isHoldFunc(tabKey)){
 					if(FunctionOpenManager.functionIsOpen(ids[i])){//已经开启了
-						setTabDataWithTabKey(tabKey);
+						addTabDataWithTabKey(tabKey);
+						bool = true;
+					}else{
+						removeTabDataWithTabKey(tabKey);
+						bool = true;
 					}
 				}
 			}
+			if(bool)
+				this.updata();
 		}
 		
 		private function isHoldFunc(tabKey:String):Boolean
@@ -66,16 +73,22 @@ package com.rpgGame.app.ui.tab
 			}
 		}
 		
-		private function checkOpen():void
+		public function checkOpen():void
 		{
 			var num:int=_allDatas.length;
 			var item:UITabBarData;
 			for(var i:int=0;i<num;i++){
 				item=_allDatas[i];
 				if(FunctionOpenManager.functionIsOpen(item.tabKey)){//已经开启了
-					setTabDataWithTabKey(item.tabKey);
+					addTabDataWithTabKey(item.tabKey);
+				}else{
+					removeTabDataWithTabKey(item.tabKey);
 				}
 			}
+			if(!_needRefash)
+				return ;
+			this.updata();
+			this.switchTabKey(this._currentKey);
 		}
 	}
 }
