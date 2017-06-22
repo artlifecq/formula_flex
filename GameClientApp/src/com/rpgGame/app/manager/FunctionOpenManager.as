@@ -1,5 +1,6 @@
 ﻿package com.rpgGame.app.manager
 {
+    import com.gameClient.utils.JSONUtil;
     import com.rpgGame.app.manager.guild.GuildManager;
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.core.app.AppConstant;
@@ -161,7 +162,8 @@
 			{
 				return ;
 			}
-			var modeInfo:FunctionBarInfo = FuncionBarCfgData.getActivityBarInfo(info.q_main_id);
+			var ids:Array = JSONUtil.decode(info.q_main_id) as Array;
+			var modeInfo:FunctionBarInfo = FuncionBarCfgData.getActivityBarInfo(ids[0]);
 			openModeByInfo(modeInfo,info.q_id.toString(),data,isAutoHide);
 		}
 		

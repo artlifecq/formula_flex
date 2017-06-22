@@ -3,7 +3,7 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.core.events.GuildEvent;
-	import com.rpgGame.netData.guild.bean.GuildApplyInfo;
+	import com.rpgGame.netData.guild.bean.GuildInviteInfo;
 	
 	import feathers.controls.Scroller;
 	import feathers.data.ListCollection;
@@ -29,6 +29,7 @@ package com.rpgGame.appModule.guild
 		
 		private function initView():void
 		{
+			_skin.lbNum.isEditable = false;
 			_skin.list.itemRendererType =GuildInvitationListCell;
 			_skin.list.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			_skin.list.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
@@ -44,7 +45,7 @@ package com.rpgGame.appModule.guild
 			super.show(data,openTable,parentContiner);
 			EventManager.addEvent(GuildEvent.GET_INVITE_GUILD_LIST,refeashView);
 			refeashView(null);
-			GuildManager.instance().reqGuildApplyListInfo();
+			GuildManager.instance().reqGuildInviteList();
 		}
 		
 		override public function hide():void
@@ -64,7 +65,7 @@ package com.rpgGame.appModule.guild
 			_skin.btnNext.visible = _currentPage< _maxPage;
 		}
 		
-		private function refeashView(list:Vector.<GuildApplyInfo>):void
+		private function refeashView(list:Vector.<GuildInviteInfo>):void
 		{
 			if(list == null||list.length<=0)
 			{

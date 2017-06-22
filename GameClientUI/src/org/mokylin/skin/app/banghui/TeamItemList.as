@@ -8,7 +8,7 @@ package org.mokylin.skin.app.banghui
 	import feathers.controls.UINumber;
 	import org.mokylin.skin.app.banghui.ItemBg;
 	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow2;
-
+	
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
@@ -19,23 +19,25 @@ package org.mokylin.skin.app.banghui
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var bg:feathers.controls.SkinnableContainer;
+		
 		public var lbLevel:feathers.controls.Label;
-
+		
 		public var lbNum:feathers.controls.Label;
-
+		
 		public var lbRolenName:feathers.controls.Label;
-
+		
 		public var lbTeamName:feathers.controls.Label;
-
+		
 		public var lbZhanli:feathers.controls.Label;
-
+		
 		public var numList:feathers.controls.UINumber;
-
+		
 		public var numList2:feathers.controls.Label;
-
+		
 		public var uiFirt:feathers.controls.UIAsset;
-
-
+		
+		
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
@@ -46,20 +48,22 @@ package org.mokylin.skin.app.banghui
 			this.currentState = "normal";
 			this.height = 36;
 			this.width = 627;
-			this.elementsContent = [__TeamItemList_SkinnableContainer1_i(),uiFirt_i(),numList_i(),numList2_i(),lbTeamName_i(),lbLevel_i(),lbRolenName_i(),lbNum_i(),lbZhanli_i()];
+			this.elementsContent = [bg_i(),uiFirt_i(),numList_i(),numList2_i(),lbTeamName_i(),lbLevel_i(),lbRolenName_i(),lbNum_i(),lbZhanli_i()];
 			
 			states = {
 			};
 			skinNames={};
 		}
-
-
+		
+		
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __TeamItemList_SkinnableContainer1_i():feathers.controls.SkinnableContainer
+		private function bg_i():feathers.controls.SkinnableContainer
 		{
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			bg = temp;
+			temp.name = "bg";
 			temp.height = 36;
 			var skin:StateSkin = new org.mokylin.skin.app.banghui.ItemBg()
 			temp.skin = skin
@@ -68,7 +72,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 0;
 			return temp;
 		}
-
+		
 		private function lbLevel_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -83,7 +87,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 10;
 			return temp;
 		}
-
+		
 		private function lbNum_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -98,7 +102,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 10;
 			return temp;
 		}
-
+		
 		private function lbRolenName_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -112,7 +116,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 10;
 			return temp;
 		}
-
+		
 		private function lbTeamName_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -127,7 +131,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 10;
 			return temp;
 		}
-
+		
 		private function lbZhanli_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -142,7 +146,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 10;
 			return temp;
 		}
-
+		
 		private function numList2_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -156,7 +160,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 11;
 			return temp;
 		}
-
+		
 		private function numList_i():feathers.controls.UINumber
 		{
 			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
@@ -171,7 +175,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 2;
 			return temp;
 		}
-
+		
 		private function uiFirt_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -182,6 +186,6 @@ package org.mokylin.skin.app.banghui
 			temp.y = 14;
 			return temp;
 		}
-
+		
 	}
 }

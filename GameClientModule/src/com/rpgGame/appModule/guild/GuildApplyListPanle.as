@@ -29,6 +29,7 @@ package com.rpgGame.appModule.guild
 		
 		private function initView():void
 		{
+			_skin.lbNum.isEditable = false;
 			_skin.list.itemRendererType =GuildApplyInfoCell;
 			_skin.list.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			_skin.list.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;

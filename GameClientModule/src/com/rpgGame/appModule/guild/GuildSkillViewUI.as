@@ -27,8 +27,8 @@ package com.rpgGame.appModule.guild
 		private function initView():void
 		{
 			_panleList = new Vector.<GuildSkillBase>();
-			_panleList.push(new GuildOtherSkillPanel(_skin.skinTongShuai.skin as Skill_TongShuai));
 			_panleList.push(new GuildSelfSkillPanel(_skin.skinPersonal.skin as Skill_Personal));
+			_panleList.push(new GuildOtherSkillPanel(_skin.skinTongShuai.skin as Skill_TongShuai));
 			_gropu = _skin.btnSkill1.toggleGroup;
 			_gropu.addEventListener(Event.CHANGE,changeHandler);
 			changeHandler(null);
@@ -49,16 +49,16 @@ package com.rpgGame.appModule.guild
 		override public function show(data:Object=null):void
 		{
 			super.show(data);
-			if(!GuildManager.instance().isLeader)
+			if(!GuildManager.instance().haveGuild||!GuildManager.instance().isLeader)
 			{
-				_skin.btnSkill1.touchable = false;
-				GrayFilter.gray(_skin.btnSkill1);
+				_skin.btnSkill2.touchable = false;
+				GrayFilter.gray(_skin.btnSkill2);
 			}else{
-				_skin.btnSkill1.touchable = true;
-				_skin.btnSkill1.filter = null;
+				_skin.btnSkill2.touchable = true;
+				_skin.btnSkill2.filter = null;
 			}
 			
-			_gropu.selectedIndex = 1;
+			_gropu.selectedIndex = 0;
 			GuildManager.instance().reqGuildSkillInfo();
 		}
 		

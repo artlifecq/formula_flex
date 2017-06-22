@@ -37,6 +37,7 @@ package com.rpgGame.appModule.guild
 			_cratePanel.y = 81;
 			this.addChild(_cratePanel);
 			
+			_skin.lbNum.isEditable = false;
 			_skin.ListItem.itemRendererType =GuildListInfoCell;
 			_skin.ListItem.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			_skin.ListItem.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;

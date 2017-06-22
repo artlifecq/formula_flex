@@ -85,6 +85,8 @@ package com.rpgGame.app.ui.tab
 					removeTabDataWithTabKey(item.tabKey);
 				}
 			}
+			if(!_needRefash)
+				return ;
 			this.updata();
 			this.switchTabKey(this._currentKey);
 		}

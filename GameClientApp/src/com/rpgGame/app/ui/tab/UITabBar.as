@@ -24,7 +24,7 @@ package com.rpgGame.app.ui.tab
 		protected var _data:*;
 		protected var _allDatas:Vector.<UITabBarData>;//所有的tab数据
 		protected var _currentKey:String;
-		
+		protected var _needRefash:Boolean = true;
 		/**
 		 * 
 		 * @param tab 要绑定的tabbar
@@ -111,7 +111,12 @@ package com.rpgGame.app.ui.tab
 			for(var i:int=0;i<num;i++){
 				item=_allDatas[i];
 				if(item.tabKey==key){
-					item.isShow = true;
+					if(!item.isShow)
+					{
+						item.isShow = true;
+						_needRefash = true;
+					}
+					break;
 				}
 			}
 		}
@@ -123,13 +128,21 @@ package com.rpgGame.app.ui.tab
 			for(var i:int=0;i<num;i++){
 				item=_allDatas[i];
 				if(item.tabKey==key){
-					item.isShow = false;
+					if(item.isShow)
+					{
+						item.isShow = false;
+						_needRefash = true;
+					}
+					break;
 				}
 			}
 		}
 		
 		public function updata():void
 		{
+			if(!_needRefash)
+				return ;
+			_needRefash = false;
 			var num:int=_allDatas.length;
 			var item:UITabBarData;
 			_tabBar.dataProvider.removeAll();

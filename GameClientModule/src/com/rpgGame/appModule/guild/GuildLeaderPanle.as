@@ -3,7 +3,6 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
-	import com.rpgGame.core.events.GuildEvent;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.clientConfig.Q_guild;
 	import com.rpgGame.coreData.enum.EnumGuildPost;
@@ -13,7 +12,6 @@ package com.rpgGame.appModule.guild
 	
 	import feathers.core.ToggleGroup;
 	
-	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.data.long;
 	import org.mokylin.skin.app.banghui.TanKuang_TongShuaiRenMing;
 	
@@ -56,17 +54,7 @@ package com.rpgGame.appModule.guild
 			refeashVale();
 			
 		}
-		private function refeashAppoint(msg:ResGuildOperateResultMessage):void
-		{
-			if(_opaque<=0)
-				return ;
-			if(msg.opaque == _opaque)
-			{
-				_heroInfo.isLeader = _setPostType;
-				_opaque = 0;
-				refeashVale();
-			}
-		}
+		
 		private function refeashVale():void
 		{
 			_skin.lbMsg.htmlText = LanguageConfig.replaceStr("你想任命$为统帅？",HtmlTextUtil.getTextColor(0x5DBD37,_heroInfo.name));
@@ -87,8 +75,6 @@ package com.rpgGame.appModule.guild
 			super.onTouchTarget(target);
 			if(target == _skin.btnOk)
 			{
-				if(_opaque>0)
-					return ;
 				var posttype:int = _postList[_group.selectedIndex];
 				if(posttype == lastLeaderType)
 					return ;
@@ -99,9 +85,8 @@ package com.rpgGame.appModule.guild
 					return ;
 				}
 				_setPostType =  (posttype==EnumGuildPost.GUILDPOST_LEADER?1:0);
-				_opaque = GuildManager.opaque;
-				GuildManager.instance().guildAppoint(_heroId,posttype,1,_opaque);
-				this.onHide();
+				GuildManager.instance().guildAppoint(_heroId,posttype,1);
+				this.hide();
 			}
 		}
 		

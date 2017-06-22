@@ -52,6 +52,7 @@ package com.rpgGame.appModule.guild
 		
 		private function initView():void
 		{
+			_skin.lbNum.isEditable = false;
 			_skin.list.snapToPages = true;
 			_skin.list.itemRendererType =GuildDonateCell;
 			_skin.list.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
@@ -101,10 +102,8 @@ package com.rpgGame.appModule.guild
 		{
 			super.show(data,openTable,parentContiner);
 			EventManager.addEvent(GuildEvent.GUILD_DATA_INIT,refeashList);
-			refeashList();
-			
 			EventManager.addEvent(GuildEvent.GUILD_OPERATERESULT,opaqueChangeList);
-			refeashView();
+			refeashList();
 		}
 		
 		private function opaqueChangeList(msg:ResGuildOperateResultMessage):void
@@ -140,6 +139,7 @@ package com.rpgGame.appModule.guild
 			{
 				_skin.list.dataProvider.push(info);
 			}
+			refeashView();
 		}
 		private function requestPage(page:int,maxPage:int):void
 		{

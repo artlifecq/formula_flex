@@ -94,9 +94,14 @@ package com.rpgGame.appModule.guild
 				_skin.lbTips.text = "请加入帮会";
 				_skin.btnUp.visible = false;
 			}else if(currentLevel>=guildSkill){
-				_skin.lbTips.visible = true;
-				_skin.lbTips.text = "提升帮会等级";
 				_skin.btnUp.visible = false;
+				if(_nextdata==null)
+				{
+					_skin.lbTips.visible = false;
+				}else{
+					_skin.lbTips.visible = true;
+					_skin.lbTips.text = "提升帮会等级";
+				}
 			}else{
 				_skin.btnUp.visible = true;
 				_skin.lbTips.visible = false;

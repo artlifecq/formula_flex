@@ -86,7 +86,7 @@ package com.rpgGame.appModule.guild
 			super.onTouchTarget(target);
 			if(target == _skin.btnOk)
 			{
-				GuildManager.instance().questreqGuildJoin(_inviteInfo.info.guildId);
+				GuildManager.instance().reqGuildInviteOperation(_inviteInfo.id,1);
 			}
 		}
 		

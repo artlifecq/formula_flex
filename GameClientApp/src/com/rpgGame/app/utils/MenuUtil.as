@@ -233,7 +233,7 @@ package com.rpgGame.app.utils
 					break;
 				case LangMenu.SEND_MAIL://发送邮件
 				case LangMenu.INVITE_JOIN_GUILD:
-					GuildManager.instance().reqGuildJoin(heroId,0);
+					GuildManager.instance().reqGuildInvite(heroId,0);
 					break;
 				case LangMenu.SEND_MAIL://邀请加入帮派
 					AppManager.showAppNoHide(AppConstant.MAIL_PANEL, [MailType.SEND, heroId, heroName, LanguageConfig.getText(LangMisc.NOTHING_INFO)]);

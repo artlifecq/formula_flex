@@ -2,15 +2,13 @@ package com.rpgGame.app.manager.guild
 {
 	import com.gameClient.utils.JSONUtil;
 	import com.gameClient.utils.StringFilter;
-	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.manager.scene.SceneManager;
-	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.core.app.AppPanel;
 	import com.rpgGame.core.events.GuildEvent;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
@@ -26,7 +24,6 @@ package com.rpgGame.app.manager.guild
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.coreData.lang.LangGuild;
-	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.guild.bean.GuildApplyInfo;
 	import com.rpgGame.netData.guild.bean.GuildBriefnessInfo;
@@ -47,10 +44,13 @@ package com.rpgGame.app.manager.guild
 	import com.rpgGame.netData.guild.message.ReqGuildGetDailyGiftMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildInfoMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildInviteListMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildInviteMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildInviteOperationMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildJoinMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildKillMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildLevelupMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildListMessage;
+	import com.rpgGame.netData.guild.message.ReqGuildModifyNoteMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildSetAutoAcceptMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildSkillInfoMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildSkillLevelupMessage;
@@ -299,7 +299,7 @@ package com.rpgGame.app.manager.guild
 				return;
 			}
 			if(banner == defaultMsg)
-				banner = " ";
+				banner = "新创建的帮派，欢迎大家的加入";
 			if(name==""||name== defaultName)
 			{
 				NoticeManager.showNotify("帮会名字不能为空");
@@ -530,14 +530,16 @@ package com.rpgGame.app.manager.guild
 			SocketConnection.send(msg);
 		}
 		
-		private var _questreqGuildJoinOpaque:int;
-		public function questreqGuildJoin(guild:long):void
+		/** 邀请加入帮派 **/
+		public function reqGuildInvite(playerId:long,opaque:int):void
 		{
-			if(_questreqGuildJoinOpaque>0)
-				return ;
-			_questreqGuildJoinOpaque = opaque;
-			reqGuildJoin(guild,_questreqGuildJoinOpaque);
+			var msg:ReqGuildInviteMessage = new ReqGuildInviteMessage();
+			msg.playerId = playerId;
+			msg.opaque = opaque;
+			SocketConnection.send(msg);
 		}
+		
+		private var _questreqGuildJoinOpaque:int;
 		
 		private function refeashQuestreqGuildJoin(opaque:int,result:int):Boolean
 		{
@@ -556,6 +558,18 @@ package com.rpgGame.app.manager.guild
 			return false;
 		}
 		
+		public function reqGuildInviteOperation(guild:int,flag:int):void
+		{
+			if(_questreqGuildJoinOpaque>0)
+				return ;
+			_questreqGuildJoinOpaque = opaque;
+			var msg:ReqGuildInviteOperationMessage = new ReqGuildInviteOperationMessage();
+			msg.inviteId = guild;
+			msg.flag = flag;
+			msg.opaque = _questreqGuildJoinOpaque;
+			SocketConnection.send(msg);
+		}
+		
 		/** 请求召集帮派 **/
 		public function reqGuildConvene(opaque:int):void
 		{
@@ -571,6 +585,8 @@ package com.rpgGame.app.manager.guild
 		 */
 		public function getGuildOperateResult(msg:ResGuildOperateResultMessage):void
 		{
+			if(refeashGuildAppoint(msg.opaque,msg.result))
+				return ;
 			if(refeashQuestreqGuildJoin(msg.opaque,msg.result))
 				return ;
 			if(updataGuildLevelupMsg(msg.opaque,msg.result))
@@ -649,18 +665,44 @@ package com.rpgGame.app.manager.guild
 					SocketConnection.send(msg);
 					break;
 			}
-			
 		}
+		
+		private var _guildAppointmsg:ReqGuildAppointMessage
 		/** 请求任命成员 **/
-		public function guildAppoint(playerId:long,memberType:int,type:int,opaque:int):void
+		public function guildAppoint(playerId:long,memberType:int,type:int):void
 		{
-			var msg:ReqGuildAppointMessage = new ReqGuildAppointMessage();
-			msg.playerId = playerId;
-			msg.memberType = memberType;
-			msg.leaderModel = type;
-			msg.opaque = opaque;
-			SocketConnection.send(msg);
+			if(_guildAppointmsg ==null)
+				_guildAppointmsg = new ReqGuildAppointMessage();
+			_guildAppointmsg.playerId = playerId;
+			_guildAppointmsg.memberType = memberType;
+			_guildAppointmsg.leaderModel = type;
+			_guildAppointmsg.opaque = opaque;
+			SocketConnection.send(_guildAppointmsg);
 		}
+		
+		private function refeashGuildAppoint(opaque:int,result:int):Boolean
+		{
+			if(_guildAppointmsg==null)
+				return false;
+			if(_guildAppointmsg.opaque!= opaque)
+				return false;
+			if(result==0)
+			{
+				_guildAppointmsg==null;
+				return true;
+			}
+			var info:GuildMemberInfo = this.getGuildMemberInfoById(_guildAppointmsg.playerId.hexValue)
+			if(_guildAppointmsg.leaderModel ==0)
+			{
+				info.memberType = _guildAppointmsg.memberType;
+			}else{
+				info.isLeader = _guildAppointmsg.memberType == EnumGuildPost.GUILDPOST_LEADER?1:0;
+			}
+			_guildAppointmsg==null;
+			EventManager.dispatchEvent(GuildEvent.GUILD_DATA_INIT);
+			return true;
+		}
+		
 		private var _guildLevelUpOpaque:int
 		/** 请求帮派升级 **/
 		public function guildLevelup():void
@@ -917,7 +959,7 @@ package com.rpgGame.app.manager.guild
 				var money : Number = MainRoleManager.actorInfo.totalStat.getResData(3);
 				if(money < data.q_costvalue)
 				{
-					NoticeManager.showNotifyById(60027);
+					NoticeManager.showNotifyById(60041);
 					return;
 				}
 			}
@@ -959,12 +1001,13 @@ package com.rpgGame.app.manager.guild
 				}else{
 					skill.level++;
 				}
+				_selfMemberInfo.contribution -= _skillData.q_costvalue;
 			}else{
 				skill = getLeaderSkillInfoById(_skillData.q_skillid);
 				if(skill == null)
 				{
 					skill = new GuildSkillInfo();
-					skill.id =  _skillData.q_id;
+					skill.id =  _skillData.q_skillid;
 					skill.level = _skillData.q_level;
 					if(_leaderSkillList == null)
 						_leaderSkillList = new Vector.<GuildSkillInfo>();
@@ -973,7 +1016,6 @@ package com.rpgGame.app.manager.guild
 					skill.level = _skillData.q_level;
 				}
 			}
-			_selfMemberInfo.contribution -= _skillData.q_costvalue;
 			EventManager.dispatchEvent(GuildEvent.GUILD_SKILLINFO_CHAGE);
 			_skillOpaque = 0;
 			return true;
@@ -999,9 +1041,11 @@ package com.rpgGame.app.manager.guild
 				else
 					this.requestGuildInfo();
 				_needSwitchChange = true;
-			}else if(this.haveGuild){
+			}else if(this.haveGuild&&_memberList!=null){
 				var playerInfo:GuildMemberInfo = this.getGuildMemberInfoById(msg.playerId.hexValue);
-				var index:int = _memberList.indexOf(playerInfo);
+				var index:int = -1;
+				if(playerInfo!=null)
+					index = _memberList.indexOf(playerInfo);
 				if(msg.guildId.IsZero())
 				{
 					if(index>=0)
@@ -1015,6 +1059,7 @@ package com.rpgGame.app.manager.guild
 						this.requestGuildInfo();
 					else{
 						playerInfo.memberType = msg.guildMemberType;
+						playerInfo.isLeader = msg.leader;
 						EventManager.dispatchEvent(GuildEvent.GUILD_FAMILY_CHANGE);
 					}
 				}
@@ -1037,7 +1082,28 @@ package com.rpgGame.app.manager.guild
 		public function sortGuildMemberInfo(key:String,isShow:Boolean):int
 		{
 			_oriderList.length = 0;
-			var list:Vector.<GuildMemberInfo> = getSortMemberListByProp(key);
+			var list:Vector.<GuildMemberInfo>
+			if(key!="")
+				list = getSortMemberListByProp(key);
+			else{
+				var sortfun1:Function = function(g1:GuildMemberInfo,g2:GuildMemberInfo):int{
+					if(g1.online<g2.online)
+						return 1;
+					else if(g1.online > g2.online)
+						return -1;
+					else if(g1.memberType < g2.memberType)
+						return -1;
+					else if(g1.memberType > g2.memberType)
+						return 1;
+					else if(g1.curActive < g2.curActive)
+						return 1;
+					else if(g1.curActive > g2.curActive)
+						return -1;
+					else 
+						return 0;
+				};
+				list =  _memberList.sort(sortfun1)
+			}
 			var length:int = list.length;
 			for(var i:int = 0;i<length;i++)
 			{
@@ -1053,6 +1119,17 @@ package com.rpgGame.app.manager.guild
 			if(_oriderList.length<= index)
 				return null;
 			return _oriderList[index];
+		}
+		
+		
+		public function reqGuildModifyNote(note:String):void
+		{
+			if(_guildData.note == note)
+				return ;
+			_guildData.note = note;
+			var msg:ReqGuildModifyNoteMessage = new ReqGuildModifyNoteMessage();
+			msg.note = note;
+			SocketConnection.send(msg);
 		}
 	}
 }

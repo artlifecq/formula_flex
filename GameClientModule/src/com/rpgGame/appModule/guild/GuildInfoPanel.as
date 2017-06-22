@@ -10,6 +10,10 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.netData.guild.bean.GuildInfo;
 	
+	import away3d.events.Event;
+	
+	import feathers.controls.text.TextFieldTextEditor;
+	import feathers.events.FeathersEventType;
 	import feathers.utils.filter.GrayFilter;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -24,6 +28,16 @@ package com.rpgGame.appModule.guild
 		{
 			_skin = new BangHui_Info_left();
 			super(_skin);
+			initView();
+		}
+		private function initView():void
+		{
+			_skin.lbXuanYan.addEventListener(FeathersEventType.FOCUS_OUT,forceoutHandler);
+		}
+		
+		private function forceoutHandler(evt:Event):void
+		{
+			GuildManager.instance().reqGuildModifyNote(_skin.lbXuanYan.text);
 		}
 		override protected function onShow():void
 		{

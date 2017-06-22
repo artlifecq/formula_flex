@@ -33,14 +33,14 @@ package com.rpgGame.appModule.guild
 			_guildInfo.x = 19;
 			_guildInfo.y = 81;
 			this.addChild(_guildInfo);
-			
+			_skin.lbNum.isEditable = false;
 			_skin.ListItem.itemRendererType =GuildListSeeInfoCell;
 			_skin.ListItem.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			_skin.ListItem.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			var layout:VerticalLayout = new VerticalLayout();
-			layout.gap = 15;
+			layout.gap = 10;
 			_skin.ListItem.layout = layout;
-			_skin.ListItem.dataProvider = new ListCollection();
+			_skin.ListItem.dataProvider = new ListCollection([0,1,2,3,4,5,6,7,8,9,10]);
 		}
 		
 		override protected function onShow():void
@@ -66,9 +66,8 @@ package com.rpgGame.appModule.guild
 			}else{
 				_currentPage = msg.curPage;
 				_maxPage = msg.totalPage;
-				_skin.ListItem.dataProvider.removeAll();
-				_skin.ListItem.dataProvider.data = msg.guildList;
 			}
+			_skin.ListItem.dataProvider.updateAll();
 			refeashPageGroup();
 		}
 		
