@@ -41,8 +41,8 @@ package com.rpgGame.app.manager
 		
 		public function HuBaoManager()
 		{
-			super();
 			_gTimer = new GameTimer("HuBaoManager", 1000, 0, onUpdate);
+			super();
 			EventManager.addEvent(UserMoveEvent.MOVE_RESCHANGE, onHuBaoHandler);
 		}
 		
@@ -52,6 +52,8 @@ package com.rpgGame.app.manager
 			if(_instance==null)
 			{
 				_instance = new HuBaoManager();
+				_instance._gTimer.reset();
+				_instance._gTimer.start();
 			}
 			return _instance;
 		}
