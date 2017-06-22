@@ -63,7 +63,6 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.height = 38;
 			temp.label = "3";
 			temp.styleClass = org.mokylin.skin.app.activety.number.UINumberDaojishi;
-			temp.textAlign = "right";
 			temp.width = 66;
 			temp.x = 46;
 			temp.y = 26;

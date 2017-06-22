@@ -13,6 +13,7 @@ package   com.rpgGame.appModule.social.team.mediator
 	import com.rpgGame.core.utils.GameColorUtil;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.ClientSceneCfgData;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.lang.LangMenu;
@@ -241,16 +242,18 @@ package   com.rpgGame.appModule.social.team.mediator
 				if (isOffline) 
 				{
 					setState(2);
-					str+=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,"(离线)");
-					TipTargetManager.show(this.player,TargetTipsMaker.makeSimpleTextTips(HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,"处于离线状态的队员，将不被计入组队经验加成的有效人数")));
+					//str+=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,"(离线)");
+					//TipTargetManager.show(this.player,TargetTipsMaker.makeSimpleTextTips(HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,"处于离线状态的队员，将不被计入组队经验加成的有效人数")));
+					str+=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,NotifyCfgData.getNotifyTextByID(61041));
+					TipTargetManager.show(this.player,TargetTipsMaker.makeSimpleTextTips(HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,NotifyCfgData.getNotifyTextByID(61008))));
 				}
 				else
 				{
 					if (member.memberMapModelID!=MapDataManager.currentScene.sceneId) 
 					{
 						setState(1);
-						str+=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_YELLOW,"(远离)");
-						TipTargetManager.show(this.player,TargetTipsMaker.makeSimpleTextTips(HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,"处于远离状态的队员，将不被计入组队经验加成的有效人数")));
+						str+=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_YELLOW,NotifyCfgData.getNotifyTextByID(61042));
+						TipTargetManager.show(this.player,TargetTipsMaker.makeSimpleTextTips(HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,NotifyCfgData.getNotifyTextByID(61009))));
 					}
 					else
 					{
@@ -308,7 +311,7 @@ package   com.rpgGame.appModule.social.team.mediator
 				{
 					//imgCon.filter = FilterUtil.getGrayFilter();
 					
-					TipTargetManager.show(_imgCon,TargetTipsMaker.makeSimpleTextTips(HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,"处于远离或离线状态的队员，将不被计入组队经验加成与生命上限加成的有效人数")));
+					TipTargetManager.show(_imgCon,TargetTipsMaker.makeSimpleTextTips(HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,NotifyCfgData.getNotifyTextByID(61010))));
 				}else
 				{
 					//imgCon.filter=null;

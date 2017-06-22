@@ -2,6 +2,7 @@ package com.rpgGame.appModule.battle.jcyt
 {
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.GameColorUtil;
+	import com.rpgGame.netData.yaota.bean.YaoTaInfo;
 	
 	import org.mokylin.skin.app.zhanchang.jiucengyaota.RiZi_Item;
 	
@@ -17,13 +18,13 @@ package com.rpgGame.appModule.battle.jcyt
 			_skin.bg2.visible!=_skin.bg1.visible;
 		}
 		
-		public function setData(data:*):void
+		public function setData(data:YaoTaInfo):void
 		{
-			var rank:int;
-			var name:String;
-			var lv:int;
-			var kill:int;
-			var score:int;
+			var rank:int=data.rank;
+			var name:String=data.playerName;
+			var lv:int=data.tier;
+			var kill:int=data.killNumber;
+			var score:int=data.integral;
 			
 			if (rank<=3) 
 			{

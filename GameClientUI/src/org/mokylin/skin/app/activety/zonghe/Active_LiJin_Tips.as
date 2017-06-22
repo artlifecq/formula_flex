@@ -69,6 +69,7 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.text = "盗宝小怪";
 			temp.color = 0xE8C958;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 151;
 			temp.x = 31;
 			temp.y = 7;
 			return temp;
@@ -79,6 +80,7 @@ package org.mokylin.skin.app.activety.zonghe
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbTip = temp;
 			temp.name = "lbTip";
+			temp.height = 77;
 			temp.htmlText = "1.活动开启则出现第一波盗宝小怪，<br>第<font color='#5DBD37'>5、10、15</font>分钟刷新<br>2.冬季盗宝下怪必掉礼金<br>3.攻击盗宝小怪额外获得<font color='#5DBD37'>5-10礼金</font>";
 			temp.leading = 4;
 			temp.color = 0xCFC6AE;

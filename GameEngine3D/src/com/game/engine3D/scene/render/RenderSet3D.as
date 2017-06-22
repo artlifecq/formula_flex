@@ -1348,14 +1348,20 @@ package com.game.engine3D.scene.render
 					var obj:Object = _syncInfos[key];
 					if (!obj)return;
 					
-					var info : RenderUnitSyncInfo = obj[id] as RenderUnitSyncInfo;
-//					var info : RenderUnitSyncInfo = _syncInfos[key];
-					if (info)
+					for each (var info : RenderUnitSyncInfo in obj) 
 					{
-						_syncInfos[key] = null;
-						delete _syncInfos[key];
 						info.destroy();
 					}
+					_syncInfos[key] = null;
+					delete _syncInfos[key];
+					
+//					var info : RenderUnitSyncInfo = obj[id] as RenderUnitSyncInfo;
+//					if (info)
+//					{
+//						_syncInfos[key] = null;
+//						delete _syncInfos[key];
+//						info.destroy();
+//					}
 				}
 			}
 			_volumeRender = null;

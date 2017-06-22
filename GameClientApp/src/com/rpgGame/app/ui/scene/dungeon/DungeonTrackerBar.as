@@ -1,6 +1,7 @@
 package com.rpgGame.app.ui.scene.dungeon
 {
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.ui.main.dungeon.LijinTrackerUI;
 	import com.rpgGame.app.ui.scene.BossTrackerUI;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.info.MapDataManager;
@@ -39,6 +40,9 @@ package com.rpgGame.app.ui.scene.dungeon
 			uiClsMap.add(EnumMapType.MAP_TYPE_EXP,ExpTracjerBar);
 			uiClsMap.add(EnumMapType.MAP_WORLD_BOSS,BossTrackerUI);
 			uiClsMap.add(EnumMapType.MAP_TYPE_TOWERS,NineTowerTrackUIExt);
+			uiClsMap.add(EnumMapType.MAP_TYPE_LIJIN,LijinTrackerUI);
+			
+			
 		}
 		
 		override protected function onShow() : void

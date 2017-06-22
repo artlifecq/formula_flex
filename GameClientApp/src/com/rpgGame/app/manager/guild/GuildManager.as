@@ -5,10 +5,10 @@ package com.rpgGame.app.manager.guild
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
-	import com.rpgGame.core.app.AppPanel;
 	import com.rpgGame.core.events.GuildEvent;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
@@ -37,22 +37,15 @@ package com.rpgGame.app.manager.guild
 	import com.rpgGame.netData.guild.message.ReqGuildAppointMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildBriefnessInfoMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildConveneMessage;
-	import com.rpgGame.netData.guild.message.ReqGuildCreateMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildDissolveMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildDonateMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildExitMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildGetDailyGiftMessage;
-	import com.rpgGame.netData.guild.message.ReqGuildInfoMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildInviteListMessage;
-	import com.rpgGame.netData.guild.message.ReqGuildInviteMessage;
-	import com.rpgGame.netData.guild.message.ReqGuildInviteOperationMessage;
-	import com.rpgGame.netData.guild.message.ReqGuildJoinMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildKillMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildLevelupMessage;
-	import com.rpgGame.netData.guild.message.ReqGuildListMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildModifyNoteMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildSetAutoAcceptMessage;
-	import com.rpgGame.netData.guild.message.ReqGuildSkillInfoMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildSkillLevelupMessage;
 	import com.rpgGame.netData.guild.message.ResGuildChangeGuildIdMessage;
 	import com.rpgGame.netData.guild.message.ResGuildInfoMessage;
@@ -149,16 +142,7 @@ package com.rpgGame.app.manager.guild
 		}
 		
 		
-		/**
-		 * 请求获得帮会信息 
-		 * 
-		 */
-		public function requestGuildInfo():void
-		{
-			if(!this.haveGuild)
-				return ;
-			SocketConnection.send(new ReqGuildInfoMessage());
-		}
+		
 		
 		public function get memberList():Vector.<GuildMemberInfo>
 		{
@@ -324,12 +308,7 @@ package com.rpgGame.app.manager.guild
 				return;
 			}
 			
-			var msg:ReqGuildCreateMessage = new ReqGuildCreateMessage();
-			msg.costType = type+1;
-			msg.name = name;
-			msg.note = banner;
-			msg.opaque = 1;
-			SocketConnection.send(msg);
+			GuildSender.createGuild(type,name,banner);
 		}
 		//获取自己帮会信息
 		public function get selfMemberInfo():GuildMemberInfo
@@ -482,18 +461,11 @@ package com.rpgGame.app.manager.guild
 			switch(gameAlert.clickType)
 			{
 				case AlertClickTypeEnum.TYPE_SURE:
-					SocketConnection.send(new ReqGuildDissolveMessage());
+					GuildSender.guildDissolve();
 					break;
 			}
 		}
 		
-		/** 请求召集帮派 **/
-		public function guildConvene():void
-		{
-			if(!canConvene)
-				return ;
-			SocketConnection.send(new ReqGuildConveneMessage());
-		}
 		
 		/** 请求离开帮派 **/
 		public function guildExit():void
@@ -507,37 +479,12 @@ package com.rpgGame.app.manager.guild
 			switch(gameAlert.clickType)
 			{
 				case AlertClickTypeEnum.TYPE_SURE:
-					SocketConnection.send(new ReqGuildExitMessage());
+					GuildSender.guildExit();
 					break;
 			}
 		}
 		
-		/** 获取帮派列表 **/
-		public function reqGuildList(page:int,isfull:int,opaque:int):void
-		{
-			var request:ReqGuildListMessage = new ReqGuildListMessage();
-			request.isFilterFull = isfull;
-			request.page = page;
-			request.opaque = opaque;
-			SocketConnection.send(request);
-		}
-		/** 请求加入帮派 **/
-		public function reqGuildJoin(guild:long,opaque:int):void
-		{
-			var msg:ReqGuildJoinMessage = new ReqGuildJoinMessage();
-			msg.guildId = guild;
-			msg.opaque = opaque;
-			SocketConnection.send(msg);
-		}
 		
-		/** 邀请加入帮派 **/
-		public function reqGuildInvite(playerId:long,opaque:int):void
-		{
-			var msg:ReqGuildInviteMessage = new ReqGuildInviteMessage();
-			msg.playerId = playerId;
-			msg.opaque = opaque;
-			SocketConnection.send(msg);
-		}
 		
 		private var _questreqGuildJoinOpaque:int;
 		
@@ -552,7 +499,7 @@ package com.rpgGame.app.manager.guild
 			{
 				return true;
 			}
-			requestGuildInfo();
+			GuildSender.requestGuildInfo();
 			_needSwitchChange = true;
 			AppManager.showApp(AppConstant.GUILD_INVITATION_PANEL);
 			return false;
@@ -563,20 +510,9 @@ package com.rpgGame.app.manager.guild
 			if(_questreqGuildJoinOpaque>0)
 				return ;
 			_questreqGuildJoinOpaque = opaque;
-			var msg:ReqGuildInviteOperationMessage = new ReqGuildInviteOperationMessage();
-			msg.inviteId = guild;
-			msg.flag = flag;
-			msg.opaque = _questreqGuildJoinOpaque;
-			SocketConnection.send(msg);
+			GuildSender.reqGuildInviteOperation(guild,flag,_questreqGuildJoinOpaque);
 		}
 		
-		/** 请求召集帮派 **/
-		public function reqGuildConvene(opaque:int):void
-		{
-			var msg:ReqGuildConveneMessage = new ReqGuildConveneMessage();
-			msg.opaque = opaque;
-			SocketConnection.send(msg);
-		}
 		
 		/**
 		 * 操作结果反馈
@@ -600,7 +536,7 @@ package com.rpgGame.app.manager.guild
 				EventManager.dispatchEvent(GuildEvent.GUILD_FAMILY_CHANGE);
 				_killOpaque = 0;
 			}else if(_reqapplayOpaque>0&&_reqapplayOpaque == msg.opaque){
-				this.requestGuildInfo();
+				GuildSender.requestGuildInfo();
 				_reqapplayOpaque = 0;
 				if(_reqapplayId==-1)
 				{
@@ -618,9 +554,7 @@ package com.rpgGame.app.manager.guild
 			if(type == _guildData.isAutoApply)
 				return ;
 			_guildData.isAutoApply = type;
-			var msg:ReqGuildSetAutoAcceptMessage = new ReqGuildSetAutoAcceptMessage();
-			msg.type = type;
-			SocketConnection.send(msg);
+			GuildSender.reqGuildSetAutoAccept(type);
 		}
 		
 		private var _reqapplayOpaque:int;
@@ -632,11 +566,7 @@ package com.rpgGame.app.manager.guild
 				return false;
 			_reqapplayOpaque = opaque;
 			_reqapplayId = applyId;
-			var msg:ReqGuildApplyOperationMessage = new ReqGuildApplyOperationMessage();
-			msg.flag = flag;
-			msg.applyId = applyId;
-			msg.opaque = _reqapplayOpaque;
-			SocketConnection.send(msg);
+			GuildSender.applyOperation(flag,applyId,_reqapplayOpaque);
 			return true;
 		}
 		
@@ -658,11 +588,8 @@ package com.rpgGame.app.manager.guild
 			switch(gameAlert.clickType)
 			{
 				case AlertClickTypeEnum.TYPE_SURE:
-					_killOpaque = GuildManager.opaque;
-					var msg:ReqGuildKillMessage = new ReqGuildKillMessage();
-					msg.playerId = _killplayerInfo.id;
-					msg.opaque = _killOpaque;
-					SocketConnection.send(msg);
+					_killOpaque = opaque;
+					GuildSender.guildKill(_killplayerInfo.id,_killOpaque);
 					break;
 			}
 		}
@@ -671,13 +598,9 @@ package com.rpgGame.app.manager.guild
 		/** 请求任命成员 **/
 		public function guildAppoint(playerId:long,memberType:int,type:int):void
 		{
-			if(_guildAppointmsg ==null)
-				_guildAppointmsg = new ReqGuildAppointMessage();
-			_guildAppointmsg.playerId = playerId;
-			_guildAppointmsg.memberType = memberType;
-			_guildAppointmsg.leaderModel = type;
-			_guildAppointmsg.opaque = opaque;
-			SocketConnection.send(_guildAppointmsg);
+			if(_guildAppointmsg !=null)
+				return ;
+			_guildAppointmsg = GuildSender.guildAppoint(playerId,memberType,type,opaque);
 		}
 		
 		private function refeashGuildAppoint(opaque:int,result:int):Boolean
@@ -712,9 +635,7 @@ package com.rpgGame.app.manager.guild
 			if(_guildLevelUpOpaque>0)
 				return ;
 			_guildLevelUpOpaque = opaque;
-			var msg:ReqGuildLevelupMessage = new ReqGuildLevelupMessage();
-			msg.opaque = _guildLevelUpOpaque;
-			SocketConnection.send(msg);
+			GuildSender.guildLevelup(_guildLevelUpOpaque);
 		}
 		
 		private function updataGuildLevelupMsg(opaque:int,result:int):Boolean
@@ -734,29 +655,13 @@ package com.rpgGame.app.manager.guild
 			EventManager.dispatchEvent(GuildEvent.GUILD_DATA_INIT);
 			return false;
 		}
-		/** 请求领取帮派每日礼包 **/
-		public function guildGetDailyGift(opaque:int):void
-		{
-			var msg:ReqGuildGetDailyGiftMessage = new ReqGuildGetDailyGiftMessage();
-			msg.opaque = opaque;
-			SocketConnection.send(msg);
-		}
+		
 		
 		public function changeGuildDailyGift():void
 		{
 			_haveDailyGift = 0;
 		}
-		/** 请求帮派捐献 **/
-		public function guildDonate(type:int,num:int,opaque:int):void
-		{
-			if(num==0)
-				return ;
-			var msg:ReqGuildDonateMessage = new ReqGuildDonateMessage();
-			msg.type = type;
-			msg.num = num;
-			msg.opaque = opaque;
-			SocketConnection.send(msg);
-		}
+		
 		
 		/**
 		 * 根据id获取帮派信息 
@@ -779,14 +684,6 @@ package com.rpgGame.app.manager.guild
 			return null;
 		}
 		
-		
-		/** 请求申请列表*/
-		public function reqGuildApplyListInfo():void
-		{
-			SocketConnection.send(new ReqGuildApplyListMessage());
-		}
-		
-		
 		public function setGuildApplyListInfo(list:Vector.<GuildApplyInfo>):void
 		{
 			EventManager.dispatchEvent(GuildEvent.GET_JOIN_GUILD_LIST,list);
@@ -806,22 +703,6 @@ package com.rpgGame.app.manager.guild
 			if(_inviteListInfo.length<= index)
 				return null;
 			return _inviteListInfo[index];
-		}
-		
-		
-		/** 获取帮派简介信息*/
-		public function reqGuildBriefnessInfo(guildId:long,opaque:int):void
-		{
-			var msg:ReqGuildBriefnessInfoMessage = new ReqGuildBriefnessInfoMessage();
-			msg.guildId = guildId;
-			msg.opaque = opaque;
-			SocketConnection.send(msg);
-		}
-		
-		
-		public function reqGuildInviteList():void
-		{
-			SocketConnection.send(new ReqGuildInviteListMessage());
 		}
 		
 		public function setResGuildBriefnessInfo(info:GuildBriefnessInfo):void
@@ -862,14 +743,7 @@ package com.rpgGame.app.manager.guild
 		}
 		
 		
-		/**
-		 * 请求帮会技能 
-		 * 
-		 */
-		public function reqGuildSkillInfo():void
-		{
-			SocketConnection.send(new ReqGuildSkillInfoMessage());
-		}
+		
 		public function get personSkillList(): Vector.<GuildSkillInfo>
 		{
 			return _personSkillList;
@@ -967,11 +841,8 @@ package com.rpgGame.app.manager.guild
 			_skillOpaque = opaque;
 			_skillType = type;
 			_skillData = data;
-			var msg:ReqGuildSkillLevelupMessage = new ReqGuildSkillLevelupMessage();
-			msg.type = type;
-			msg.opaque = _skillOpaque;
-			msg.skillId = _skillData.q_skillid;
-			SocketConnection.send(msg);
+			
+			GuildSender.guildSkillLevelup(type,_skillData.q_skillid,_skillOpaque);
 		}
 		/** 更新升级技能 */
 		private function refeashSkillOpaque(opaque:int,result:int):Boolean
@@ -1039,7 +910,7 @@ package com.rpgGame.app.manager.guild
 				if(!haveGuild)
 					EventManager.dispatchEvent(GuildEvent.GUILD_DATA_INIT);
 				else
-					this.requestGuildInfo();
+					GuildSender.requestGuildInfo();
 				_needSwitchChange = true;
 			}else if(this.haveGuild&&_memberList!=null){
 				var playerInfo:GuildMemberInfo = this.getGuildMemberInfoById(msg.playerId.hexValue);
@@ -1056,7 +927,7 @@ package com.rpgGame.app.manager.guild
 					EventManager.dispatchEvent(GuildEvent.GUILD_FAMILY_CHANGE);
 				}else{
 					if(index<0)
-						this.requestGuildInfo();
+						GuildSender.requestGuildInfo();
 					else{
 						playerInfo.memberType = msg.guildMemberType;
 						playerInfo.isLeader = msg.leader;
@@ -1127,9 +998,7 @@ package com.rpgGame.app.manager.guild
 			if(_guildData.note == note)
 				return ;
 			_guildData.note = note;
-			var msg:ReqGuildModifyNoteMessage = new ReqGuildModifyNoteMessage();
-			msg.note = note;
-			SocketConnection.send(msg);
+			GuildSender.reqGuildModifyNote(note);
 		}
 	}
 }

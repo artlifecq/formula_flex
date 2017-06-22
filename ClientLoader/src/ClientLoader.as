@@ -38,13 +38,13 @@ package
 		private var _loadingView : LoadProgressView;
 		private var _urlParmar : Object = null;
 		private var _clientPathUrl : String = CLIENTSWF_PATH;
-		private var _versionPath : String = "version#/version.swf";
+		private var _versionPath : String = "version_#";
 
 		private var _decodeFun : Function;
 		private var _versionMap : Object = null;
         
         private var _useVersion : Boolean = false;
-        private var _isJson : Boolean = false;
+        private var _isJson : Boolean = true;
         private var _useBpgFormat : Boolean = true;
         
         // web params
@@ -199,7 +199,7 @@ package
 			}
 			else
 			{
-				_useVersion = false;
+				_useVersion = true;
 				startLoadClient();
 			}
 		}
@@ -268,7 +268,7 @@ package
 
 			var bytes : ByteArray = new ByteArray();
 			loadingStream.readBytes(bytes, 0, loadingStream.bytesAvailable);
-			bytes.uncompress();
+			//bytes.uncompress();
 			bytes.endian = Endian.LITTLE_ENDIAN;
 			_versionMap = readVersionsFromBuf(bytes);
 			startLoadClient();

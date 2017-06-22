@@ -11,6 +11,7 @@ package com.rpgGame.appModule.battle.jjzb
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
@@ -164,12 +165,12 @@ package com.rpgGame.appModule.battle.jjzb
 			var str:String;
 			if (hasReward) 
 			{
-				str=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,"可领取奖励");
+				str=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,NotifyCfgData.getNotifyTextByID(61038));
 				TouchableUtil.ungray(_skin.btnOK);
 			}
 			else
 			{
-				str=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,"已领取");
+				str=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,NotifyCfgData.getNotifyTextByID(61039));
 				TouchableUtil.gray(_skin.btnOK);
 			}
 			_skin.labReward.htmlText=str;

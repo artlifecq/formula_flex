@@ -26,6 +26,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.SceneCollectData;
 	import com.rpgGame.coreData.role.SceneDropGoodsData;
+	import com.rpgGame.coreData.type.EnumMonsterId;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import flash.geom.Point;
@@ -214,7 +215,10 @@ package com.rpgGame.app.manager
 				{
 					TaskSender.sendStartGatherMessage(collectData.serverID);
 				}
-				
+				else if (EnumMonsterId.MONTER_TOWER_FLAG==collectData.modelID) 
+				{
+					TaskSender.sendStartGatherMessage(collectData.serverID);
+				}
 				//var taskId : int = TaskManager.getTaskIdHasCollectObj(collectData.collectType);
 				///TaskManager.collectItemTask(taskId, collectData.id, collectData.collectType, collectData.sceneID, collectData.x, collectData.y);
 			}

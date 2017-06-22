@@ -35,7 +35,8 @@ package com.rpgGame.appModule.fightsoul
 		{
 			var modeinfo:Q_fightsoul_mode = FightsoulModeData.getModeInfoById(_level);
 			this._showAvatarData.avatarInfo.setBodyResID("pc/fightsoul/"+modeinfo.q_mode,null);
-			this._showAvatarData.avatarInfo.bodyEffectID2 =modeinfo.q_effect;
+			this._showAvatarData.avatarInfo.bodyEffectID =modeinfo.q_effect;
+			this._showAvatarData.avatarInfo.bodyEffectID2 =modeinfo.q_effect1;
 			this.setRoleData(this._showAvatarData);
 			
 			var scale:Number = modeinfo.q_panleScale/100;

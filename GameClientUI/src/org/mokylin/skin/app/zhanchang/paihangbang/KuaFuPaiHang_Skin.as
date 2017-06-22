@@ -117,7 +117,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.text = "玩家名称";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 84;
+			temp.x = 109;
 			temp.y = 4;
 			return temp;
 		}
@@ -128,7 +128,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.text = "段位";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 226;
+			temp.x = 262;
 			temp.y = 4;
 			return temp;
 		}
@@ -139,7 +139,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.text = "积分";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 324;
+			temp.x = 336;
 			temp.y = 4;
 			return temp;
 		}

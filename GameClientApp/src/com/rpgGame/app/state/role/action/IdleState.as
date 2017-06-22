@@ -31,6 +31,7 @@ package com.rpgGame.app.state.role.action
 			{
 				super.execute();
 				transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
+				transition(RoleStateType.CONTROL_CHECK_AUTO_FIGHT,ref);
 			}
 		}
 		
@@ -113,7 +114,15 @@ package com.rpgGame.app.state.role.action
 			}
 			return true;
 		}
-		
+		override public function afterLeave():void
+		{
+			super.afterLeave();
+			if (_machine && !_machine.isInPool) 
+			{
+				_machine.removeState(RoleStateType.CONTROL_CHECK_AUTO_FIGHT);
+			}
+			
+		}
 		override public function enterPass(prevState : IState, force : Boolean = false) : Boolean
 		{
 			if (prevState)

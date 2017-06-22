@@ -15,8 +15,8 @@ package com.rpgGame.netData.yaota.message{
 		//结果  1 成功    0 失败
 		private var _result: int;
 		
-		//剩余时间
-		private var _time: int;
+		//当前层数
+		private var _tier: int;
 		
 		
 		/**
@@ -25,8 +25,8 @@ package com.rpgGame.netData.yaota.message{
 		override protected function writing(): Boolean{
 			//结果  1 成功    0 失败
 			writeInt(_result);
-			//剩余时间
-			writeInt(_time);
+			//当前层数
+			writeInt(_tier);
 			return true;
 		}
 		
@@ -36,8 +36,8 @@ package com.rpgGame.netData.yaota.message{
 		override protected function reading(): Boolean{
 			//结果  1 成功    0 失败
 			_result = readInt();
-			//剩余时间
-			_time = readInt();
+			//当前层数
+			_tier = readInt();
 			return true;
 		}
 		
@@ -65,18 +65,18 @@ package com.rpgGame.netData.yaota.message{
 		}
 		
 		/**
-		 * get 剩余时间
+		 * get 当前层数
 		 * @return 
 		 */
-		public function get time(): int{
-			return _time;
+		public function get tier(): int{
+			return _tier;
 		}
 		
 		/**
-		 * set 剩余时间
+		 * set 当前层数
 		 */
-		public function set time(value: int): void{
-			this._time = value;
+		public function set tier(value: int): void{
+			this._tier = value;
 		}
 		
 	}

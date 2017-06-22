@@ -7,6 +7,7 @@ package  com.rpgGame.app.reward
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
+	import com.rpgGame.netData.backpack.bean.TempItemInfo;
 	
 	import feathers.controls.UIAsset;
 	
@@ -25,16 +26,20 @@ package  com.rpgGame.app.reward
 		public static const ALIN_RIGHT:int=2;
 		
 		private static const S2W:Object={};
-		S2W[36]=48;
-		S2W[42]=54;
-		S2W[48]=60;
-		S2W[64]=76;
+		S2W[36]=45;
+		S2W[42]=51;
+		S2W[48]=56;
+		S2W[64]=72;
 		
 		private static const W2S:Object={};
-		W2S[48]=36;
-		W2S[54]=42;
-		W2S[60]=48;
-		W2S[76]=64;
+		W2S[45]=36;
+		W2S[51]=42;
+		W2S[56]=48;
+		W2S[72]=64;
+		public static function size2Width(size:int):int
+		{
+			return S2W[size];
+		}
 		/**
 		 *布局模式 
 		 */		
@@ -62,7 +67,17 @@ package  com.rpgGame.app.reward
 		private var initH:int;
 		private var _data:Vector.<ClientItemInfo>;
 		private var _needTips:Boolean;
-		public function RewardGroup(g:UIAsset,ali:int=ALIN_LEFT,cellNum:int=10,dx:int=2,dy:int=2,needTip:Boolean=true)
+		/**
+		 * 
+		 * @param g 起始格子背景
+		 * @param ali 布局0左对齐1中间对齐，2右对齐
+		 * @param cellNum 每行数量（中对齐的话最好设置为奇数）
+		 * @param dx
+		 * @param dy
+		 * @param needTip
+		 * 
+		 */		
+		public function RewardGroup(g:UIAsset,ali:int=ALIN_LEFT,cellNum:int=9,dx:int=2,dy:int=2,needTip:Boolean=true)
 		{
 			super();
 			this.grid=g;
@@ -99,6 +114,25 @@ package  com.rpgGame.app.reward
 		{
 			
 		}
+		public function setRewardByTeamItemInfo(temps:Vector.<TempItemInfo>):void
+		{
+			if (temps==null) 
+			{
+				return;
+			}
+			var len:int=temps.length;
+			var rewards:Vector.<ClientItemInfo>=new Vector.<ClientItemInfo>();
+			var tmpi:TempItemInfo;
+			for (var i:int = 0; i < len; i++) 
+			{
+				tmpi=temps[i];
+				var tmp:ClientItemInfo=new ClientItemInfo(tmpi.mod);
+				tmp.count=tmpi.num;
+				rewards.push(tmp);
+			}
+			
+			setReward(rewards);
+		}
 		public function setRewardByJsonStr(reward:String):void
 		{
 			if (reward==null||reward=="") 
@@ -134,7 +168,7 @@ package  com.rpgGame.app.reward
 			{
 				layoutC();
 			}
-			else if (ALIN_RIGHT) 
+			else
 			{
 				layoutR();
 			}
@@ -163,7 +197,7 @@ package  com.rpgGame.app.reward
 			var tmpX:int;
 			var tmpY:int;
 			var dis:DisplayObject;
-			var maxX:int=(cellMaxNum-1)*(initW+dX);
+			var maxX:int=0;
 			for (var i:int = 0; i < len; i++) 
 			{
 				dis=icons[i].bg;
@@ -177,29 +211,39 @@ package  com.rpgGame.app.reward
 		private function layoutC():void
 		{
 			var add:int=0;
+			var len:int=icons.length;
+			var tmp:int=Math.min(cellMaxNum,len);
 			//偶数
-			if (cellMaxNum%2==0) 
+			if (tmp%2==0) 
 			{
-				add=-(initW+dX)/2;
+				add=(initW+dX)/2;
 			}
 			var center:int=cellMaxNum/2;
-			var len:int=icons.length;
+			
 			var tmpX:int;
 			var tmpY:int;
 			var dis:DisplayObject;
 			var mul:int=1;
 			var last:int=0;
-			var now:int=0;
+			
+			var nowCellIndex:int=0;
+			var nowRowIndex:int=0;
 			for (var i:int = 0; i < len; i++) 
 			{
 				dis=icons[i].bg;
-				now=last-(i%center)*mul;
-				tmpX=add+(now)*(initW+dX);
-				tmpY=int(i/cellMaxNum)*(initH+dY);	
-				dis.x=tmpX;
+				nowCellIndex=i%cellMaxNum;
+				if (nowCellIndex==0) 
+				{
+					last=0;
+				}
+				nowRowIndex=int(i/cellMaxNum);
+				
+				tmpX=last+(nowCellIndex)*(initW+dX)*mul;
+				tmpY=nowRowIndex*(initH+dY);	
+				dis.x=tmpX+add;
 				dis.y=tmpY;
 				mul*=-1;
-				last=now;
+				last=tmpX;
 				this.addChild(dis);
 			}
 		}

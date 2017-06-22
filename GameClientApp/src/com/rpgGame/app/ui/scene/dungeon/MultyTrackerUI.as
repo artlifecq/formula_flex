@@ -165,6 +165,10 @@ package com.rpgGame.app.ui.scene.dungeon
 			EventManager.removeEvent(DungeonEvent.ZONE_OUT_RESULT,setOutResult);//准备退出
 			TimerServer.remove(updateTime);
 			TweenLite.killDelayedCallsTo(walkTo);
+			for(var i:int=0;i<killButList.length;i++)
+			{
+				TaskUtil.removeLabelEvet(_skin["killbut_"+i].skin.labelDisplay);
+			}
 		}
 		
 		private function enterZone():void
