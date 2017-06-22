@@ -316,7 +316,7 @@ package com.rpgGame.app.graphics
 					showAndHideElement(_guildNameBar, true,DecorCtrl.TOP_GUILD);
 					showAndHideElement(_familNameBar, !isMysteryMan&&_isSelected && !_isCamouflage);
 				}
-				showAndHideElement(_title, !isMysteryMan&&!_isCamouflage);
+				showAndHideElement(_title, !isMysteryMan&&!_isCamouflage,DecorCtrl.TOP_CHENGHAO);
 				showAndHideElement(_office, !isMysteryMan&&!_isCamouflage);
 				showAndHideElement(_huabotitle, !isMysteryMan&&_nameBar && _nameBar.parent && _nameBar.visible,DecorCtrl.TOP_HUBAOCHENGHAO);
 				updateTeamFlag(!isMysteryMan&&Mgr.teamMgr.isMyCaptian(HeroData(_role.data).serverID));
@@ -1169,7 +1169,8 @@ package com.rpgGame.app.graphics
 				var effName:String=JunJieData.getEffById(titleID);
 				var rud:RenderParamData3D = new RenderParamData3D(RenderUnitID.JUNJIE, RenderUnitType.JUNJIE, ClientConfig.getEffect(effName));
 				_title.addRenderUnitWith(rud, 0);
-				this.addChild(_title);
+//				this.addChild(_title);
+				this.deCtrl.addTop(_title,DecorCtrl.TOP_CHENGHAO);
 				_title.start();
 			}
 			else
@@ -1197,10 +1198,11 @@ package com.rpgGame.app.graphics
 				_huabotitle = new InterObject3D();
 				
 				//				var titleData : TitleTreeData = TitleCfgData.titleHM.getValue(titleID);
-				var effName:String=HuBaoData.getEffByLv(HuBaoManager.instance().level);
+				var effName:String=HuBaoData.getEffByLv(titleID);
 				var rud : RenderParamData3D = new RenderParamData3D(RenderUnitID.BAOWU, RenderUnitType.BAOWU, ClientConfig.getEffect(effName));
 				_huabotitle.addRenderUnitWith(rud, 0);
-				this.addChild(_huabotitle);
+//				this.addChild(_huabotitle);
+				this.deCtrl.addTop(_huabotitle,DecorCtrl.TOP_HUBAOCHENGHAO);
 				_huabotitle.start();
 			}
 			else
@@ -1231,7 +1233,8 @@ package com.rpgGame.app.graphics
 				{
 					var rud : RenderParamData3D = new RenderParamData3D(RenderUnitID.BAOWU, RenderUnitType.BAOWU, ClientConfig.getEffect(effName));
 					_NPCtitle.addRenderUnitWith(rud, 0);
-					this.addChild(_NPCtitle);
+//					this.addChild(_NPCtitle);
+					this.deCtrl.addTop(_NPCtitle,DecorCtrl.TOP_NPCCHENGHAO);
 					_NPCtitle.start();
 				}
 				updateAllBarPosition();
