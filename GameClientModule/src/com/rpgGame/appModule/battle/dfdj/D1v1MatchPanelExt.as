@@ -6,6 +6,7 @@ package com.rpgGame.appModule.battle.dfdj
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.events.D1v1Event;
 	import com.rpgGame.core.manager.StarlingLayerManager;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	
 	import flash.utils.getTimer;
 	
@@ -111,13 +112,13 @@ package com.rpgGame.appModule.battle.dfdj
 			{
 				_skin.btnCancel.visible=true;
 				_skin.btnClose.visible=true;
-				_skin.lbPiPei.text="正在匹配中...";
+				_skin.lbPiPei.text=NotifyCfgData.getNotifyTextByID(61026);
 			}
 			else
 			{
 				_skin.btnCancel.visible=false;
 				_skin.btnClose.visible=false;
-				_skin.lbPiPei.text="挑战即将开始";
+				_skin.lbPiPei.text=NotifyCfgData.getNotifyTextByID(61027);
 			}
 		}
 	}

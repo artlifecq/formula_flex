@@ -5,6 +5,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.NineTowerEvent;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.netData.yaota.message.CSEnterYaoTaMessage;
 	import com.rpgGame.netData.yaota.message.CSQuitYaoTaMessage;
@@ -114,7 +115,7 @@ package com.rpgGame.app.manager
 			}
 			else
 			{
-				FloatingText.showUp("功能未开启");
+				FloatingText.showUp(NotifyCfgData.getNotifyTextByID(61040));
 			}
 		}
 	}

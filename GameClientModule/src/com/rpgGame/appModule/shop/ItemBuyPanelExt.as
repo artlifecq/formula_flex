@@ -10,6 +10,7 @@ package com.rpgGame.appModule.shop
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.utils.GameColorUtil;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.SourceGetCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_item;
@@ -245,7 +246,7 @@ package com.rpgGame.appModule.shop
 		{
 			if (vo.data.limitType!=0&&vo.data.todayBuyNum>=vo.data.limitNum) 
 			{
-				NoticeManager.mouseFollowNotify("该商品已卖完");
+				NoticeManager.mouseFollowNotify(NotifyCfgData.getNotifyTextByID(61023));
 				return;
 			}
 			if (!_ins) 
@@ -307,7 +308,7 @@ package com.rpgGame.appModule.shop
 			{
 				MAX_ALLOW=999;
 			}
-			this._skin.lbShengyu.text="剩余"+ItemConfig.getItemName(_data.data.priceType)+":"+allRes;
+			this._skin.lbShengyu.text=NotifyCfgData.getNotifyTextByID(61024)+ItemConfig.getItemName(_data.data.priceType)+":"+allRes;
 			this._skin.lbAll.color=buyNum*price>Mgr.shopMgr.getCurrency(_data.data.priceType)?GameColorUtil.COLOR_RED:GameColorUtil.COLOR_GREEN;
 		}
 		private function updateBuyCount():void

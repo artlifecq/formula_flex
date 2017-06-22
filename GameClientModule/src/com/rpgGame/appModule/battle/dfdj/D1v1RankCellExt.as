@@ -2,6 +2,7 @@ package com.rpgGame.appModule.battle.dfdj
 {
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.BattleRankCfg;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_battle_rank;
 	import com.rpgGame.netData.dianfeng.bean.DianFengRankInfo;
 	
@@ -58,7 +59,7 @@ package com.rpgGame.appModule.battle.dfdj
 			_data=data;
 			if (_data.rank>100||_data.rank<1) 
 			{
-				_skin.lbId.text="未入榜";
+				_skin.lbId.text=NotifyCfgData.getNotifyTextByID(61028);
 			}
 			else
 			{

@@ -9,6 +9,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.core.events.D1v1Event;
 	import com.rpgGame.coreData.cfg.BattleRankCfg;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_battle_rank;
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.info.DRankWeekReward;
@@ -197,7 +198,7 @@ package com.rpgGame.app.manager
 			}
 			else
 			{
-				FloatingText.showUp("功能未开启");
+				FloatingText.showUp(NotifyCfgData.getNotifyTextByID(61040));
 			}
 		}
 	}

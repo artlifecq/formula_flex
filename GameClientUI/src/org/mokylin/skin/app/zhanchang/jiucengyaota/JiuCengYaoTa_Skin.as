@@ -29,6 +29,8 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 
 		public var icon1:feathers.controls.UIAsset;
 
+		public var iconSw:feathers.controls.UIAsset;
+
 		public var lbRank:feathers.controls.Label;
 
 		public var lbShengwang:feathers.controls.Label;
@@ -44,7 +46,7 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 947;
-			this.elementsContent = [__JiuCengYaoTa_Skin_UIAsset2_i(),btnOpen_i(),__JiuCengYaoTa_Skin_UIAsset3_i(),__JiuCengYaoTa_Skin_UIAsset4_i(),lbShengwang_i(),btnShengwang_i(),__JiuCengYaoTa_Skin_UIAsset5_i(),__JiuCengYaoTa_Skin_UIAsset6_i(),grp_icon_i(),lbRank_i(),__JiuCengYaoTa_Skin_Group1_i()];
+			this.elementsContent = [__JiuCengYaoTa_Skin_UIAsset2_i(),btnOpen_i(),__JiuCengYaoTa_Skin_UIAsset3_i(),iconSw_i(),lbShengwang_i(),btnShengwang_i(),__JiuCengYaoTa_Skin_UIAsset4_i(),__JiuCengYaoTa_Skin_UIAsset5_i(),grp_icon_i(),lbRank_i(),__JiuCengYaoTa_Skin_Group1_i()];
 			
 			states = {
 			};
@@ -100,22 +102,13 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 		private function __JiuCengYaoTa_Skin_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/tubiao/shengwang.png";
-			temp.x = 583;
-			temp.y = 539;
-			return temp;
-		}
-
-		private function __JiuCengYaoTa_Skin_UIAsset5_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/jiucengyaota/zhanchangjiangli.png";
 			temp.x = 209;
 			temp.y = 544;
 			return temp;
 		}
 
-		private function __JiuCengYaoTa_Skin_UIAsset6_i():feathers.controls.UIAsset
+		private function __JiuCengYaoTa_Skin_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/jiucengyaota/shengwangzhi.png";
@@ -178,6 +171,17 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			temp.styleName = "ui/common/grid/normal/36.png";
 			temp.x = 0;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function iconSw_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			iconSw = temp;
+			temp.name = "iconSw";
+			temp.styleName = "ui/common/tubiao/shengwang.png";
+			temp.x = 583;
+			temp.y = 539;
 			return temp;
 		}
 

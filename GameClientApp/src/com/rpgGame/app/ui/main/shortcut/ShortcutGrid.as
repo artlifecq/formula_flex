@@ -408,13 +408,7 @@ package com.rpgGame.app.ui.main.shortcut
 			return false;
 		}
 		
-		override  protected function updateIconImagePosition( posx:Number=0, posy:Number=0 ):void
-		{
-			if(!_iconImage)
-				return;
-			_iconImage.x = 6;
-			_iconImage.y = 6;
-		}
+		
 		private var _skillData : Q_skill_model;
 		public function upData(shortData : ShortcutsData,skillData : Q_skill_model):void
 		{
@@ -646,7 +640,17 @@ package com.rpgGame.app.ui.main.shortcut
 			_playerJod = value;
 		}
 	
-		
+
+		/**
+		 *因为技能栏的格子是特殊的 
+		 * @param posx
+		 * @param posy
+		 * 
+		 */		
+		override protected function calIconPos():void
+		{
+			_iconPositionX=_iconPositionY=3;
+		}
 	}
 	
 	

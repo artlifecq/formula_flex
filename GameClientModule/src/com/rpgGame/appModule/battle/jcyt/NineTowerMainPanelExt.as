@@ -11,11 +11,15 @@ package com.rpgGame.appModule.battle.jcyt
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.NineTowerEvent;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
+	import com.rpgGame.coreData.cfg.TipsCfgData;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.EffectUrl;
+	import com.rpgGame.coreData.type.TipType;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.zhanchang.jiucengyaota.JiuCengYaoTa_Skin;
@@ -32,6 +36,7 @@ package com.rpgGame.appModule.battle.jcyt
 			_skin=new JiuCengYaoTa_Skin();
 			super(_skin);
 			_gReward=new RewardGroup(_skin.icon1,0,10,-2);
+			TipTargetManager.show(_skin.iconSw, TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(29)));
 		}
 		override protected function onTouchTarget(target:DisplayObject):void
 		{

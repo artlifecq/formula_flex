@@ -36,6 +36,10 @@ package  com.rpgGame.app.reward
 		W2S[51]=42;
 		W2S[56]=48;
 		W2S[72]=64;
+		public static function size2Width(size:int):int
+		{
+			return S2W[size];
+		}
 		/**
 		 *布局模式 
 		 */		

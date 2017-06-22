@@ -435,7 +435,7 @@ package com.rpgGame.app.manager.scene
 			else
 			{
 				//clearScene();
-			
+				EventManager.dispatchEvent(MapEvent.MAP_LOAD_START);
 				if (ClientConfig.isSingle)
 				{
 					if (mapInfo)

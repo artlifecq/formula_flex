@@ -24,9 +24,9 @@ package com.rpgGame.app.view.icon
 		/**
 		 * 图标/选择框在icon中的位置 
 		 */		
-		protected var _iconPositionX : Number = 0;
+		protected var _iconPositionX : int = 0;
 		
-		protected var _iconPositionY : Number = 0;
+		protected var _iconPositionY : int = 0;
 		/**绑定图片**/
 		protected var _bindImage : UIAsset;
 		/**穿戴图片**/
@@ -64,8 +64,6 @@ package com.rpgGame.app.view.icon
 			switch(_iconSize){
 				case IcoSizeEnum.ICON_36:
 				case IcoSizeEnum.ICON_42:
-					_iconPositionX=_iconPositionY=4.5;
-					break;
 				case IcoSizeEnum.ICON_48:
 				case IcoSizeEnum.ICON_64:
 					_iconPositionX=_iconPositionY=4;

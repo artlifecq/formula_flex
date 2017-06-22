@@ -34,6 +34,8 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 
 		public var grpTips:feathers.controls.Group;
 
+		public var icoSw:feathers.controls.UIAsset;
+
 		public var icon:feathers.controls.UIAsset;
 
 		public var iconName:feathers.controls.UIAsset;
@@ -55,7 +57,7 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [__DianFeng_Skin_UIAsset2_i(),icon_i(),iconName_i(),__DianFeng_Skin_UIAsset3_i(),Pro_duanwei_i(),lbDuanwei_i(),btnChakan_i(),btnOpen_i(),__DianFeng_Skin_UIAsset4_i(),__DianFeng_Skin_UIAsset5_i(),numCishu_i(),numShengwang_i(),__DianFeng_Skin_UIAsset6_i(),__DianFeng_Skin_UIAsset7_i(),lbShengwang_i(),btnShengwang_i(),grpTips_i()];
+			this.elementsContent = [__DianFeng_Skin_UIAsset2_i(),icon_i(),iconName_i(),__DianFeng_Skin_UIAsset3_i(),Pro_duanwei_i(),lbDuanwei_i(),btnChakan_i(),btnOpen_i(),__DianFeng_Skin_UIAsset4_i(),__DianFeng_Skin_UIAsset5_i(),numCishu_i(),numShengwang_i(),__DianFeng_Skin_UIAsset6_i(),icoSw_i(),lbShengwang_i(),btnShengwang_i(),grpTips_i()];
 			
 			states = {
 			};
@@ -165,15 +167,6 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 		private function __DianFeng_Skin_UIAsset7_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/tubiao/shengwang.png";
-			temp.x = 602;
-			temp.y = 539;
-			return temp;
-		}
-
-		private function __DianFeng_Skin_UIAsset8_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 122;
 			temp.styleName = "ui/app/zhanchang/dianfengduijue/touban.png";
 			temp.x = 0;
@@ -225,7 +218,18 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			temp.name = "grpTips";
 			temp.x = 558;
 			temp.y = 78;
-			temp.elementsContent = [__DianFeng_Skin_UIAsset8_i(),__DianFeng_Skin_Label1_i(),__DianFeng_Skin_Label2_i(),__DianFeng_Skin_Label3_i()];
+			temp.elementsContent = [__DianFeng_Skin_UIAsset7_i(),__DianFeng_Skin_Label1_i(),__DianFeng_Skin_Label2_i(),__DianFeng_Skin_Label3_i()];
+			return temp;
+		}
+
+		private function icoSw_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icoSw = temp;
+			temp.name = "icoSw";
+			temp.styleName = "ui/common/tubiao/shengwang.png";
+			temp.x = 602;
+			temp.y = 539;
 			return temp;
 		}
 
