@@ -133,12 +133,12 @@ package org.mokylin.skin.mainui.head
 			temp.bold = false;
 			temp.height = 16;
 			temp.fontSize = 12;
-			temp.text = "999";
+			temp.text = "100";
 			temp.textAlign = "center";
 			temp.color = 0xE1D4A9;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 28;
-			temp.x = 2;
+			temp.width = 22;
+			temp.x = 3;
 			temp.y = 8;
 			return temp;
 		}
