@@ -4,6 +4,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.core.events.GuildEvent;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.netData.guild.message.ResGuildApplyListInfoMessage;
 	import com.rpgGame.netData.guild.message.ResGuildBriefnessInfoMessage;
@@ -14,8 +15,10 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.guild.message.ResGuildListInfoMessage;
 	import com.rpgGame.netData.guild.message.ResGuildOperateResultMessage;
 	import com.rpgGame.netData.guild.message.ResGuildSkillInfoMessage;
+	import com.rpgGame.netData.guildWar.message.ResGuildWarCityInfoMessage;
 	
 	import org.client.mainCore.bean.BaseBean;
+	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.connection.SocketConnection;
 	
 	public class GuildCmdListener extends BaseBean
@@ -36,7 +39,16 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(111107, getResGuildChangeMemberType);
 			SocketConnection.addCmdListener(111108, getResGuildSkillInfo);
 			SocketConnection.addCmdListener(111199, getResGuildOperateResultMessage);
+			
+			SocketConnection.addCmdListener(111199, getResGuildWarCityInfoMessage);
+			
+			
 			finish();
+		}
+		
+		private function getResGuildWarCityInfoMessage(msg:ResGuildWarCityInfoMessage):void
+		{
+			EventManager.dispatchEvent(GuildEvent.GUILD_WCZB_INFO,msg);
 		}
 		
 		private function getResGuildInfoMessage(msg:ResGuildInfoMessage):void
