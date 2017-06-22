@@ -1,9 +1,11 @@
 package com.rpgGame.app.ui.main.taskbar
 {
 	import com.gameClient.log.GameLog;
+	import com.rpgGame.app.manager.HuBaoManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
+	import com.rpgGame.app.sender.HuBaoSender;
 	import com.rpgGame.app.sender.TaskSender;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.core.events.MainPlayerEvent;
@@ -12,6 +14,7 @@ package com.rpgGame.app.ui.main.taskbar
 	import com.rpgGame.core.events.UserMoveEvent;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
+	import com.rpgGame.coreData.cfg.HuBaoData;
 	import com.rpgGame.coreData.type.TaskType;
 	
 	import gs.TweenMax;
@@ -22,7 +25,7 @@ package com.rpgGame.app.ui.main.taskbar
 	import org.mokylin.skin.mainui.renwu.Renwu_Item;
 	
 	import starling.display.DisplayObject;
-
+	
 	public class TaskBar extends SkinUI
 	{
 		private var _skin:RenWuZhuiZong_Skin;
@@ -185,9 +188,12 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				TaskControl.showLeadPanel();
 			}
-			
+			if(HuBaoData.isTaskNpc(npcId))
+			{
+				HuBaoSender.upCSClientDataMessage(npcId);
+			}
 		}
-	
+		
 		/**接受任务信息初始化*/
 		private function inforMation():void
 		{
@@ -312,7 +318,7 @@ package com.rpgGame.app.ui.main.taskbar
 		}
 		
 		
-	
+		
 		/**追踪栏开启关闭操作*/
 		private function setState(isOpen : Boolean) : void {
 			if (barTweenMax) {

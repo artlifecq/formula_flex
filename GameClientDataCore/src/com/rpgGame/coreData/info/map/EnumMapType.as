@@ -1,7 +1,7 @@
 package com.rpgGame.coreData.info.map
 {
 	import com.rpgGame.coreData.rEnum;
-
+	
 	/**
 	 * 地图数据类型
 	 */
@@ -31,7 +31,7 @@ package com.rpgGame.coreData.info.map
 		 * 经验副本
 		 */
 		public static const MAP_TYPE_EXP:int = rEnum.next;//5
-		/**
+        /**
 		 * 巅峰对决
 		 */
 		public static const MAP_TYPE_D1V1:int = rEnum.next;//6

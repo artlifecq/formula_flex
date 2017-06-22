@@ -1,6 +1,7 @@
 package com.rpgGame.coreData.clientConfig
 {
 	import flash.net.registerClassAlias;
+	
 	import org.client.mainCore.ds.HashMap;
 	/**
 	* 

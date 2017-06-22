@@ -79,7 +79,7 @@ package com.rpgGame.appModule.mount
 			data.forceLoad=true;//ui上的3d特效强制加载
 			var unit : RenderUnit3D = _curtentInterEff.addRenderUnitWith(data, 0);		
 			_curtentInterEff.x=340;
-			_curtentInterEff.y=440;
+			_curtentInterEff.y=480;
 			unit.setScale(3.5);
 			unit.addUnitAtComposite(unit);
 			this.addChild3D(_curtentInterEff);
@@ -93,7 +93,7 @@ package com.rpgGame.appModule.mount
 			anation = new TargetAmationInfo();
 			anation.target = _curtentInterEff;
 			anation.propName = "y";
-			anation.setValue(440,480);
+			anation.setValue(480,520);
 			_amationInfos.push(anation);
 			
 			anation = new TargetAmationInfo();
@@ -123,7 +123,7 @@ package com.rpgGame.appModule.mount
 			anation = new TargetAmationInfo();
 			anation.target = _nextInterEff;
 			anation.propName = "y";
-			anation.setValue(370,440);
+			anation.setValue(370,480);
 			_amationInfos.push(anation);
 			
 			anation = new TargetAmationInfo();

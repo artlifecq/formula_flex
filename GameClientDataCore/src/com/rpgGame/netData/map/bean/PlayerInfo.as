@@ -57,6 +57,9 @@ package com.rpgGame.netData.map.bean{
 		//战旗
 		private var _warflag: int;
 		
+		//护宝旗
+		private var _convoy: int;
+		
 		//军阶头顶显示
 		private var _junJieId: int;
 		
@@ -108,6 +111,8 @@ package com.rpgGame.netData.map.bean{
 			writeInt(_mount);
 			//战旗
 			writeInt(_warflag);
+			//护宝旗
+			writeInt(_convoy);
 			//军阶头顶显示
 			writeInt(_junJieId);
 			//帮会名称
@@ -166,6 +171,8 @@ package com.rpgGame.netData.map.bean{
 			_mount = readInt();
 			//战旗
 			_warflag = readInt();
+			//护宝旗
+			_convoy = readInt();
 			//军阶头顶显示
 			_junJieId = readInt();
 			//帮会名称
@@ -387,6 +394,21 @@ package com.rpgGame.netData.map.bean{
 		 */
 		public function set warflag(value: int): void{
 			this._warflag = value;
+		}
+		
+		/**
+		 * get 护宝旗
+		 * @return 
+		 */
+		public function get convoy(): int{
+			return _convoy;
+		}
+		
+		/**
+		 * set 护宝旗
+		 */
+		public function set convoy(value: int): void{
+			this._convoy = value;
 		}
 		
 		/**

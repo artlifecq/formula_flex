@@ -10,7 +10,7 @@ package com.rpgGame.appModule.activety.zonghe
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.coreData.cfg.StaticValue;
-	import com.rpgGame.coreData.cfg.active.ActivetyDataManager;
+	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.enum.ActivityEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
@@ -50,7 +50,7 @@ package com.rpgGame.appModule.activety.zonghe
 			_skin.ListItem.itemRendererType=ZongHeItemRender;
 			_skin.ListItem.scrollBarDisplayMode = ScrollBarDisplayMode.ALWAYS_VISIBLE;
 			_activeData=new ListCollection();
-			var list:Vector.<ActivetyInfo>=ActivetyDataManager.getActiveList(ActivityEnum.ZONGHE_ACT);
+			var list:Vector.<ActivetyInfo>=ActivetyCfgData.getTypeList(ActivityEnum.ZONGHE_ACT);
 			for(var i:int=0;i<list.length;i++){
 				_activeData.addItem(list[i]);
 			}

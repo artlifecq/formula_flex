@@ -1217,11 +1217,11 @@ package com.rpgGame.netData{
 			register(229105, SCWarFlagUpResultToClientMessage, SCWarFlagUpResultToClientHandler);
 			register(229106, SCWarFlagExtraItemNumMessage, SCWarFlagExtraItemNumHandler);
 			register(229107, SCWarFlagModelIdChangMessage, SCWarFlagModelIdChangHandler);
-//			register(230101, SCConvoyNumMessage, SCConvoyNumHandler);
-//			register(230102, SCConvoyInfoMessage, SCConvoyInfoHandler);
-//			register(230105, SCSuccessInfoMessage, SCSuccessInfoHandler);
-//			register(230106, SCRefreshGirlMessage, SCRefreshGirlHandler);
-//			register(230107, SCConvoyFailureMessage, SCConvoyFailureHandler);
+			//			register(230101, SCConvoyNumMessage, SCConvoyNumHandler);
+			//			register(230102, SCConvoyInfoMessage, SCConvoyInfoHandler);
+			//			register(230105, SCSuccessInfoMessage, SCSuccessInfoHandler);
+			//			register(230106, SCRefreshGirlMessage, SCRefreshGirlHandler);
+			//			register(230107, SCConvoyFailureMessage, SCConvoyFailureHandler);
 			register(250101, ResChangeServerGameToClientMessage, ResChangeServerGameToClientHandler);
 			register(250264, SCCancelTeamMatchMessage, SCCancelTeamMatchHandler);
 			register(250265, SCStartTeamMatchMessage, SCStartTeamMatchHandler);
