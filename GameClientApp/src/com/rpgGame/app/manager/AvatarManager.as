@@ -756,7 +756,7 @@ package com.rpgGame.app.manager
 					effectRu.repeat = 0;
 					effectRu.setScale(1);
 					effectRu.play(0);
-					effectRu.z=50;
+//					effectRu.z=50;
 				}
 			}
 			else

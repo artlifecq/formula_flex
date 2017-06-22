@@ -166,6 +166,10 @@ package com.rpgGame.coreData.cfg
 		
 		/**纯白色*/		
 		public static const WHITE_PURE_COLOR:uint = 0xFFFFFF;
+		
+		//排行榜色值
+		/**18号 红色文字*/
+		public static const RANK_RED:uint = 0xd02525;
 		/**
 		 * 字符串颜色 转 16进制颜色
 		 */	

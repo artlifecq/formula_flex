@@ -1,7 +1,6 @@
 package com.rpgGame.coreData.clientConfig
 {
 	import flash.net.registerClassAlias;
-	
 	import org.client.mainCore.ds.HashMap;
 	/**
 	* 
@@ -87,7 +86,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_npc:String = "data.monster.Q_npc";
 		/**  定点刷怪数据库 -- 编辑器录入									 */
 		public static const Q_scene_monster:String = "data.monster.Q_scene_monster";
-		/**  区域刷怪数据库 -- 编辑器录入											 */
+		/**  区域刷怪数据库 -- 编辑器录入												 */
 		public static const Q_scene_monster_area:String = "data.monster.Q_scene_monster_area";
 		/**  每个职业一级属性换算二级属性表		 */
 		public static const Q_att_transfer:String = "data.Q_att_transfer";
@@ -125,9 +124,9 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_fightsoul_path:String = "data.Q_fightsoul_path";
 		/**  全局变量表		 */
 		public static const Q_global:String = "data.Q_global";
-		/**   										 */
+		/**   											 */
 		public static const Q_guild:String = "data.Q_guild";
-		/**  															 */
+		/**  																 */
 		public static const Q_guild_permission:String = "data.Q_guild_permission";
 		/**  帮派技能表					 */
 		public static const Q_guildskill:String = "data.Q_guildskill";
@@ -141,6 +140,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_item:String = "data.Q_item";
 		/**  军阶数据表					 */
 		public static const Q_junjie:String = "data.Q_junjie";
+		/**  极限挑战活动配置										 */
+		public static const Q_limitchallenge:String = "data.Q_limitchallenge";
 		/**  绝学开放表							 */
 		public static const Q_lostskill_open:String = "data.Q_lostskill_open";
 		/**  绝学升级表		 */
@@ -155,7 +156,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_meritorious:String = "data.Q_meritorious";
 		/**  战功表					 */
 		public static const Q_meritorious_monster:String = "data.Q_meritorious_monster";
-		/**  任务表(所有任务都这里)																																										 */
+		/**  任务表(所有任务都这里)																																											 */
 		public static const Q_mission_base:String = "data.Q_mission_base";
 		/**  任务奖励配置表			 */
 		public static const Q_mission_reword:String = "data.Q_mission_reword";
@@ -165,7 +166,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_mission_segment:String = "data.Q_mission_segment";
 		/**  功能开放表														 */
 		public static const Q_newfunc:String = "data.Q_newfunc";
-		/**  九层妖塔							 */
+		/**  九层妖塔									 */
 		public static const Q_nine_tower:String = "data.Q_nine_tower";
 		/**  通知列表			 */
 		public static const Q_notify:String = "data.Q_notify";
@@ -175,7 +176,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_shop:String = "data.Q_shop";
 		/**  购买界面其他途径提示数据库				 */
 		public static const Q_source:String = "data.Q_source";
-		/**  活动配置表																										 */
+		/**  活动配置表																											 */
 		public static const Q_special_activities:String = "data.Q_special_activities";
 		/**  tipsid	标题	描述 */
 		public static const Q_tipsinfo:String = "data.Q_tipsinfo";
@@ -289,6 +290,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_horse_skills", com.rpgGame.coreData.clientConfig.Q_horse_skills);
 			regClass("data.Q_item", com.rpgGame.coreData.clientConfig.Q_item);
 			regClass("data.Q_junjie", com.rpgGame.coreData.clientConfig.Q_junjie);
+			regClass("data.Q_limitchallenge", com.rpgGame.coreData.clientConfig.Q_limitchallenge);
 			regClass("data.Q_lostskill_open", com.rpgGame.coreData.clientConfig.Q_lostskill_open);
 			regClass("data.Q_lostskill_up", com.rpgGame.coreData.clientConfig.Q_lostskill_up);
 			regClass("data.Q_lunjian", com.rpgGame.coreData.clientConfig.Q_lunjian);

@@ -3,6 +3,7 @@ package com.rpgGame.coreData.cfg.active
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.clientConfig.Q_special_activities;
+	import com.rpgGame.netData.monster.message.SCLimitChallengeBossResultMessage;
 	import com.rpgGame.netData.specialactivities.bean.SpecialActivityInfo;
 	
 	import flash.utils.ByteArray;
@@ -16,8 +17,10 @@ package com.rpgGame.coreData.cfg.active
 	 */
 	public class ActivetyDataManager
 	{
+		private static var _jixianVo:JiXianVo;
 		public function ActivetyDataManager()
 		{
+			
 		}
 		private static var _typeMap:HashMap;
 		private static var _infoMap:HashMap;
@@ -35,6 +38,12 @@ package com.rpgGame.coreData.cfg.active
 			}
 		}
 		
+		public static function get jixianVo():JiXianVo
+		{
+			if(_jixianVo==null) _jixianVo=new JiXianVo();
+			return _jixianVo;
+		}
+		
 		/**
 		 *添加配置 
 		 * @param cfg
@@ -49,7 +58,7 @@ package com.rpgGame.coreData.cfg.active
 				_typeMap.add(cfg.q_activity_type,typeList);
 			}
 			if(cfg.q_activity_type==1){
-				info=new BossActInfo();
+				info=new BossActInfo();			
 			}else{
 				info=new ActivetyInfo();
 			}
@@ -118,9 +127,16 @@ package com.rpgGame.coreData.cfg.active
 		 */
 		public static function updateBossKiller(id:int,killer:String):void
 		{
-			var bossInfo:BossActInfo=getActInfoById(id) as BossActInfo;
-			if(bossInfo){
-				bossInfo.killerName=killer;
+			if(id == jixianVo.activityid)
+			{
+				jixianVo.killName = killer;
+			}
+			else
+			{
+				var bossInfo:BossActInfo=getActInfoById(id) as BossActInfo;
+				if(bossInfo){
+					bossInfo.killerName=killer;
+				}
 			}
 		}
 		
@@ -161,7 +177,7 @@ package com.rpgGame.coreData.cfg.active
 		
 		private static function sortListByID(infoA:ActivetyInfo,infoB:ActivetyInfo):int
 		{
-			if(infoA.info==null||infoA.info==null){
+			if(infoA.info==null||infoB.info==null){
 				return 0;
 			}
 			if(infoA.info.activityId<infoB.info.activityId){
@@ -174,7 +190,7 @@ package com.rpgGame.coreData.cfg.active
 		
 		private static function sortListByState(infoA:ActivetyInfo,infoB:ActivetyInfo):int
 		{
-			if(infoA.info==null||infoA.info==null){
+			if(infoA.info==null||infoB.info==null){
 				return 0;
 			}
 			if(infoA.info.joinState>infoB.info.joinState){

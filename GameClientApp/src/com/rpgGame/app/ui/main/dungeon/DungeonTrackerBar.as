@@ -38,6 +38,7 @@ package com.rpgGame.app.ui.main.dungeon
 			uiClsMap.add(EnumMapType.MAP_TYPE_EXP,ExpTracjerBar);
 			uiClsMap.add(EnumMapType.MAP_WORLD_BOSS,BossTrackerUI);
 			uiClsMap.add(EnumMapType.MAP_TYPE_TOWERS,NineTowerTrackUIExt);
+			uiClsMap.add(EnumMapType.MAP_JIXIAN,JiXianTrackerBar);
 		}
 		
 		override protected function onShow() : void

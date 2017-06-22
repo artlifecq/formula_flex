@@ -34,6 +34,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_notice:String;
 		 /**  公告传送(不填直接去参加活动，填了跳转到对应面板) */
 		public var q_notice_trans:String;
+		 /**  是否显示右下角公告（0否，1是） */
+		public var q_show_notice:int;
 		 /**  新功能开放表中的功能ID */
 		public var q_trans_funcID:String;
 		 /**  活动名称图片资源编号 */

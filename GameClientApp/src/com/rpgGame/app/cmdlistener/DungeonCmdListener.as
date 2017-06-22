@@ -29,6 +29,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.zone.message.SCEnterZoneMessage;
 	import com.rpgGame.netData.zone.message.SCKillInfoMessage;
 	import com.rpgGame.netData.zone.message.SCKillInfosMessage;
+	import com.rpgGame.netData.zone.message.SCLimitTrackInfoMessage;
 	import com.rpgGame.netData.zone.message.SCMultiZonePanelInfosMessage;
 	import com.rpgGame.netData.zone.message.SCMultiZonePanelSingleInfoMessage;
 	import com.rpgGame.netData.zone.message.SCMultiZoneResultMessage;
@@ -84,6 +85,7 @@ package com.rpgGame.app.cmdlistener
 			
 			SocketConnection.addCmdListener(109117, onSCZoneTeamVoteResultMessage);//队伍投票
 			
+			SocketConnection.addCmdListener(155148, onSCLimitTrackInfoMessage);//极限挑战追踪
 			
 			finish();
 		}
@@ -279,11 +281,12 @@ package com.rpgGame.app.cmdlistener
 					}
 					EventManager.dispatchEvent(DungeonEvent.ZONE_TEAM_VOTE);
 				}
-			}
-			
+			}		
 		}
 		
-		
-		
+		private function onSCLimitTrackInfoMessage(msg:SCLimitTrackInfoMessage):void
+		{
+			EventManager.dispatchEvent(DungeonEvent.ZONE_JIXIAN_TIME,msg);
+		}		
 	}
 }

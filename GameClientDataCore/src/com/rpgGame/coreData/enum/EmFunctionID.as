@@ -58,5 +58,7 @@ package com.rpgGame.coreData.enum
 		public static const EM_BOSS_ACT:String="324";
 		/** 九层妖塔 **/
 		public static const EM_TOWERS:String="325";
+		/** 极限挑战 **/
+		public static const EM_JIXIAN:String="326";
 	}
 }

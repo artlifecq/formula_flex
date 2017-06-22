@@ -42,6 +42,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.HorseConfigData;
 	import com.rpgGame.coreData.cfg.HorseSpellData;
 	import com.rpgGame.coreData.cfg.HuBaoData;
+	import com.rpgGame.coreData.cfg.JiXianTiaoZhanCfgData;
 	import com.rpgGame.coreData.cfg.JunJieData;
 	import com.rpgGame.coreData.cfg.LostSkillData;
 	import com.rpgGame.coreData.cfg.LostSkillUpData;
@@ -292,6 +293,7 @@ package com.rpgGame.app.data
 			SceneEffectCfgData.setup(dic[ConfigClassRegister.Q_map_effect]);
 			DailyZoneCfgData.setup(dic[ConfigClassRegister.Q_daily_zone]);//日常副本
 			DailyZoneMonsterCfgData.setup(dic[ConfigClassRegister.Q_dailyzone_monster]);//日常刷怪数据
+			JiXianTiaoZhanCfgData.setup(dic[ConfigClassRegister.Q_limitchallenge]);//极限挑战
 			//道具获取路径
 			SourceGetCfg.setup(dic[ConfigClassRegister.Q_source]);//多人副本
 			
