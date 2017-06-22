@@ -18,7 +18,6 @@ package com.rpgGame.app.graphics
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.FaceInfo;
-	import com.rpgGame.coreData.clientConfig.Q_guild_permission;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
@@ -153,7 +152,7 @@ package com.rpgGame.app.graphics
 				case SceneCharType.PLAYER:
 					addAndUpdateHP();
 					addAndUpdateName();
-					addAndUpdateGuildName();
+					//addAndUpdateGuildName();
 					//addAndUpdateOfficeName();
 					//addAndUpdateFamilyName();//暂无家族
 					addAndUpdateLV();
@@ -290,7 +289,7 @@ package com.rpgGame.app.graphics
 				{
 					//显示血条、称号、昵称
 					showAndHideElement(_nameBar, nameVisible && !_isCamouflage,DecorCtrl.TOP_NAME);
-					showAndHideElement(_guildNameBar, !_isCamouflage,DecorCtrl.TOP_GUILD);
+					showAndHideElement(_guildNameBar, !_isCamouflage);
 					showAndHideElement(_familNameBar, !_isCamouflage);
 					showAndHideElement(_bloodBar, true,DecorCtrl.TOP_HPMP);
 				}
@@ -303,7 +302,7 @@ package com.rpgGame.app.graphics
 					//选中显示
 					//showAndHideElement( _bloodBar, _isSelected );
 					showAndHideElement(_bloodBar, true,DecorCtrl.TOP_HPMP);
-					showAndHideElement(_guildNameBar, !_isCamouflage,DecorCtrl.TOP_GUILD);
+					showAndHideElement(_guildNameBar, _isSelected && !_isCamouflage);
 					showAndHideElement(_familNameBar, _isSelected && !_isCamouflage);
 				}
 				showAndHideElement(_title, !_isCamouflage);
@@ -649,35 +648,52 @@ package com.rpgGame.app.graphics
 		 */
 		public function addAndUpdateGuildName() : void
 		{
-			var guildMemberType: int = (_role.data as HeroData).guildMemberType;
+			if (_role.type != SceneCharType.PLAYER)
+				return;
+			
+			if (_role.isMainChar)
+				return;
+			
 			var guildName : String = (_role.data as HeroData).guildName;
-			if (guildMemberType<=0||guildName == "" || guildName == null)
+			if (guildName == "" || guildName == null)
 			{
 				if (_guildNameBar != null)
 				{
-					deCtrl.removeTop(_guildNameBar);
 					HeadNameBar.recycle(_guildNameBar);
 					_guildNameBar = null;
+					
 					updateAllBarPosition();
 				}
 				return;
 			}
 			
-			var q_guild:Q_guild_permission = GuildCfgData.getPermissionInfo(guildMemberType);
-			guildName += "."+q_guild.q_name;
 			if (_guildNameBar == null)
 			{
 				//原来没有添加一个
 				_guildNameBar = HeadNameBar.create();
-//				this.addChild(_guildNameBar); //更新一下容器，从临时的到模型真正容器
-				_guildNameBar.setName(guildName);
-				_guildNameBar.setColor(StaticValue.COLOR_CODE_15);
+				this.addChild(_guildNameBar); //更新一下容器，从临时的到模型真正容器
+				//				if((_role.data as HeroData).isKingFamily)
+				//				{
+				//					_guildNameBar.setName("[王城]"+guildName);
+				//				}
+				//				else
+				//				{
+				//					_guildNameBar.setName(guildName);
+				//				}
+				_guildNameBar.setColor(StaticValue.COLOR_CODE_1);
 				updateAllBarPosition();
 				return;
 			}
 			
 			//更新一下数据
-			_guildNameBar.setName(guildName);
+			//			if((_role.data as HeroData).isKingFamily)
+			//			{
+			//				_guildNameBar.setName("[王城]"+guildName);
+			//			}
+			//			else
+			//			{
+			//				_guildNameBar.setName(guildName);
+			//			}
 			updateAllBarPosition();
 		}
 		
@@ -965,8 +981,6 @@ package com.rpgGame.app.graphics
 				HeadNameBar.recycle(_nameBar);
 				_nameBar = null;
 			}
-			
-			
 			//			if (_countryNameBar != null)
 			//			{
 			//				HeadNameBar.recycle(_countryNameBar);
@@ -980,7 +994,6 @@ package com.rpgGame.app.graphics
 			
 			if (_guildNameBar != null)
 			{
-				deCtrl.removeTop(_guildNameBar);
 				HeadNameBar.recycle(_guildNameBar);
 				_guildNameBar = null;
 			}
@@ -1096,7 +1109,7 @@ package com.rpgGame.app.graphics
 			onHideBlood();
 			//showAndHideElement(_bloodBar, false);
 			showAndHideElement(_icoImage, false);
-			showAndHideElement(_guildNameBar, false,DecorCtrl.TOP_GUILD);
+			showAndHideElement(_guildNameBar, false);
 			showAndHideElement(_familNameBar, false);
 			showAndHideElement(_office, false);
 			showAndHideElement(_bodyImage, false);
@@ -1275,7 +1288,7 @@ package com.rpgGame.app.graphics
 				if (_teamCaptainFlag&&_teamCaptainFlag.parent) 
 				{
 					MCUtil.removeSelf(_teamCaptainFlag);
-				//	deCtrl.sortTop();
+					//	deCtrl.sortTop();
 				}
 			}
 		}

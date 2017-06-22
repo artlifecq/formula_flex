@@ -48,6 +48,10 @@ package com.rpgGame.coreData.enum
 		public static const EM_BANGHUI_LIEBIAO:String="56";
 		/** 皇城争霸 **/
 		public static const EM_BANGHUI_COMBAT:String="57";
+		/** 王城争霸 **/
+		public static const EM_BANGHUI_WCZB1:String="58";
+		/** 王城争霸 **/
+		public static const EM_BANGHUI_WCZB2:String="59";
 		/** 商城 **/
 		public static const EM_SHOP:String="60";
 		/** 论剑 **/

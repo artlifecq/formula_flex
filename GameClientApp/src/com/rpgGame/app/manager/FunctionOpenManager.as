@@ -178,18 +178,22 @@
 		/**
 		 * 打开面板
 		 * @param info
+		 * @param id 功能id
+		 * @param data
+		 * @param isAutoHide
 		 * 
 		 */
 		public static function openModeByInfo(info:FunctionBarInfo,id:String= "",data:Object = null,isAutoHide:Boolean = true):void
 		{
 			if(info.clickarg=="")
 				return ;
+			var openId:String=id?id:"";
 			if(info.clickType==1)
 			{
 				if(isAutoHide)
-					AppManager.showApp(info.clickarg,data,id);
+					AppManager.showApp(info.clickarg,data,openId);
 				else
-					AppManager.showAppNoHide(info.clickarg,data,id);
+					AppManager.showAppNoHide(info.clickarg,data,openId);
 			}
 		}
     }

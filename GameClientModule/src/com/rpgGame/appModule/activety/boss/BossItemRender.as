@@ -1,12 +1,11 @@
 package com.rpgGame.appModule.activety.boss
 {
+	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.sender.SpecialActivitySender;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.coreData.cfg.StaticValue;
-	import com.rpgGame.coreData.cfg.active.ActivetyDataManager;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.cfg.active.BossActInfo;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;

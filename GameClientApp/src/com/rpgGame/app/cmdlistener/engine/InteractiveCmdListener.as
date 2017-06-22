@@ -20,6 +20,7 @@ package com.rpgGame.app.cmdlistener.engine
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.controller.MouseCursorController;
+	import com.rpgGame.core.events.SkillEvent;
 	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.coreData.info.stall.StallData;
 	import com.rpgGame.coreData.type.SceneCharType;
@@ -145,7 +146,8 @@ package com.rpgGame.app.cmdlistener.engine
 			if (!KeyMoveManager.getInstance().keyMoving)
 			{
 				SceneCursorHelper.getInstance().showCursor(position);
-				RoleStateUtil.doWalkTo(MainRoleManager.actor, position)
+				RoleStateUtil.doWalkTo(MainRoleManager.actor, position);
+				EventManager.dispatchEvent(SkillEvent.SKILL_CANCEL);	
 			}
 		}
         private function sceneMapUp(position : Vector3D) : void {

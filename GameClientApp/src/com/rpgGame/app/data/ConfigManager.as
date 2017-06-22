@@ -52,6 +52,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.MazeCfgData;
 	import com.rpgGame.coreData.cfg.NewFuncCfgData;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
+	import com.rpgGame.coreData.cfg.QSinglecitybaseCfgData;
 	import com.rpgGame.coreData.cfg.RaceCfgData;
 	import com.rpgGame.coreData.cfg.RelationCfgData;
 	import com.rpgGame.coreData.cfg.ReliveCfgData;
@@ -72,7 +73,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
 	import com.rpgGame.coreData.cfg.ZoneCfgData;
 	import com.rpgGame.coreData.cfg.ZoneMultyCfgData;
-	import com.rpgGame.coreData.cfg.active.ActivetyDataManager;
+	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.WorldBossCfgData;
 	import com.rpgGame.coreData.cfg.animat.EffectAnimationCfgData;
 	import com.rpgGame.coreData.cfg.biao.BiaoCfgData;
@@ -216,8 +217,9 @@ package com.rpgGame.app.data
 			EquipWashAttCfg.setup(dic[ConfigClassRegister.Q_equip_wash_attr]);
 			//			CountryUnionStatCfgData.setup(null); //待解决
 			MeridianCfg.setup(dic[ConfigClassRegister.Q_meridian]);
-			ActivetyDataManager.setup(dic[ConfigClassRegister.Q_special_activities]);
+			ActivetyCfgData.setup(dic[ConfigClassRegister.Q_special_activities]);
 			WorldBossCfgData.setup(dic[ConfigClassRegister.Q_world_boss]);
+			QSinglecitybaseCfgData.setup(dic[ConfigClassRegister.Q_singlecitybase]);
 			
 			////////////////////////////////////////////////////////////////////////
 			//

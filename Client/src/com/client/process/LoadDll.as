@@ -50,8 +50,8 @@ package com.client.process
 			var url : String = "entry/GameClientDll.swf";
 			if (ClientConfig.isRelease && ClientConfig.decodeFun != null)
 				url = url.replace(".swf", ".ml");
-			if (ClientConfig.useVersion)
-				url = url.replace("entry", "version" + ClientConfig.version);
+//			if (ClientConfig.useVersion)
+//				url = url.replace("entry", "version" + ClientConfig.version);
 
 			urlList.push(url);
 			_listLoader = new ListStreamLoader(ClientConfig.stage);

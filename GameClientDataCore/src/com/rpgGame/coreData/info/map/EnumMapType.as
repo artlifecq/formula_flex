@@ -43,6 +43,17 @@ package com.rpgGame.coreData.info.map
 		 * 世界boss
 		 */
 		public static const MAP_WORLD_BOSS:int = rEnum.next;//8
+		/**
+		 * 极限挑战
+		 */
+		public static const MAP_JIXIAN:int = rEnum.next;//9
+		
+		/**
+		 * 天降礼金
+		 */
+		public static const MAP_TYPE_LIJIN:int = rEnum.next;//10
+		
+		
 		
 	}
 }

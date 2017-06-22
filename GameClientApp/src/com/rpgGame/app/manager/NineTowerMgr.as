@@ -1,6 +1,6 @@
 package com.rpgGame.app.manager
 {
-	import com.rpgGame.app.ui.main.dungeon.NineTowerTrackUIExt;
+	import com.rpgGame.app.ui.scene.dungeon.NineTowerTrackUIExt;
 
 	public class NineTowerMgr
 	{
