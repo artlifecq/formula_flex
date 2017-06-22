@@ -492,7 +492,7 @@ package com.rpgGame.appModule.role
 			
 			this._avatar.setRoleData(this._showAvatarData);
 			
-			this._avatar.curRole.setScale(3.7);	
+			this._avatar.curRole.setScale(1.7);	
 //			RoleFaceMaskEffectUtil.addAvatarMask(AvatarMaskType.DIALOG_MASK,_avatar,144,-371,1.7);
 		}
 		

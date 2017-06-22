@@ -115,7 +115,7 @@ package com.rpgGame.app.ui.main.buttons
 		
 		protected function triggeredHanadler():void
 		{
-			FunctionOpenManager.openModeByInfo(_info);
+			FunctionOpenManager.openModeByInfo(_info,_info.open_id);
 		}
 		
 		private var _tweenmax:TweenMax;

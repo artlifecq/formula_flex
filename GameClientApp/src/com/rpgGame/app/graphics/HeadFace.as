@@ -4,6 +4,7 @@ package com.rpgGame.app.graphics
 	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.rpgGame.app.display2D.AttackFace;
+	import com.rpgGame.app.manager.HuBaoManager;
 	import com.rpgGame.app.graphics.decor.DecorCtrl;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.PKMamager;
@@ -11,12 +12,11 @@ package com.rpgGame.app.graphics
 	import com.rpgGame.app.utils.HeadBloodUtil;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.ClientConfig;
-	import com.rpgGame.coreData.cfg.GuildCfgData;
+	import com.rpgGame.coreData.cfg.HuBaoData;
 	import com.rpgGame.coreData.cfg.JunJieData;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.FaceInfo;
-	import com.rpgGame.coreData.clientConfig.Q_guild_permission;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
@@ -94,6 +94,12 @@ package com.rpgGame.app.graphics
 		/**称号*/
 		private var _title : InterObject3D;
 		
+		/**护宝称号*/
+		private var _huabotitle : InterObject3D;
+		
+		/**NPC称号*/
+		private var _NPCtitle : InterObject3D;
+		
 		private var _moodTween : TweenLite;
 		
 		/** body图标*/
@@ -130,7 +136,7 @@ package com.rpgGame.app.graphics
 			_isCamouflage = false;
 			
 			initAddBar();
-//			setTemporary();
+			//			setTemporary();
 		}
 		//---------------------------------------------
 		//---------------------------------------------
@@ -145,7 +151,7 @@ package com.rpgGame.app.graphics
 				case SceneCharType.PLAYER:
 					addAndUpdateHP();
 					addAndUpdateName();
-					addAndUpdateGuildName();
+					//addAndUpdateGuildName();
 					//addAndUpdateOfficeName();
 					//addAndUpdateFamilyName();//暂无家族
 					addAndUpdateLV();
@@ -165,6 +171,7 @@ package com.rpgGame.app.graphics
 					addAndUpdateHP();
 					addAndUpdateName();
 					addAndUpdateLV();
+					updateNPCTitle();
 					break;
 				case SceneCharType.DROP_GOODS:
 					addAndUpdateName();
@@ -192,6 +199,8 @@ package com.rpgGame.app.graphics
 			addElement(_icoImage);
 			addElement(_bodyImage);
 			addElement(_title);
+			addElement(_huabotitle);
+			addElement(_NPCtitle);
 			addElement(_office);
 			addElement(_countryWarIcon);
 			addElement(_biaoFlagIcon);
@@ -207,6 +216,7 @@ package com.rpgGame.app.graphics
 			{
 				showAndHideElement(_nameBar, nameVisible,DecorCtrl.TOP_NAME);
 				showAndHideElement(_icoImage, true);
+				showAndHideElement(_NPCtitle, true,DecorCtrl.TOP_NPCCHENGHAO);
 			}
 			else if (_role.type == SceneCharType.PROTECT_NPC) //保护npc，全显示或者全隐藏
 			{
@@ -225,6 +235,7 @@ package com.rpgGame.app.graphics
 				showAndHideElement(_bloodBar, isMyMonster,DecorCtrl.TOP_HPMP);
 				
 				showAndHideElement(_nameBar, isMyMonster||(isNormal&&_isSelected && nameVisible)||isNPC,DecorCtrl.TOP_NAME);
+				showAndHideElement(_NPCtitle,isNPC, DecorCtrl.TOP_NPCCHENGHAO);
 			}
 			else if (_role.type == SceneCharType.COLLECT) //采集物显示名称
 			{
@@ -277,7 +288,7 @@ package com.rpgGame.app.graphics
 				{
 					//显示血条、称号、昵称
 					showAndHideElement(_nameBar, nameVisible && !_isCamouflage,DecorCtrl.TOP_NAME);
-					showAndHideElement(_guildNameBar, !_isCamouflage,DecorCtrl.TOP_GUILD);
+					showAndHideElement(_guildNameBar, !_isCamouflage);
 					showAndHideElement(_familNameBar, !_isCamouflage);
 					showAndHideElement(_bloodBar, true,DecorCtrl.TOP_HPMP);
 				}
@@ -290,11 +301,13 @@ package com.rpgGame.app.graphics
 					//选中显示
 					//showAndHideElement( _bloodBar, _isSelected );
 					showAndHideElement(_bloodBar, true,DecorCtrl.TOP_HPMP);
-					showAndHideElement(_guildNameBar, !_isCamouflage,DecorCtrl.TOP_GUILD);
+					showAndHideElement(_guildNameBar, _isSelected && !_isCamouflage);
 					showAndHideElement(_familNameBar, _isSelected && !_isCamouflage);
 				}
 				showAndHideElement(_title, !_isCamouflage);
+				showAndHideElement(_huabotitle,!_isCamouflage);
 				showAndHideElement(_office, !_isCamouflage);
+				showAndHideElement(_huabotitle, _nameBar && _nameBar.parent && _nameBar.visible,DecorCtrl.TOP_HUBAOCHENGHAO);
 				updateTeamFlag(Mgr.teamMgr.isMyCaptian(HeroData(_role.data).serverID));
 			}
 			showAndHideElement(_junXianBar, _nameBar && _nameBar.parent && _nameBar.visible);
@@ -336,7 +349,7 @@ package com.rpgGame.app.graphics
 		{
 			//不管是临时，还是模型加载完成的，这是不能为NULL
 			updateShowAndHide();
-			return;
+			//			return;
 			var startPosy : int = 0; //不是临时的，说明模型那么就按名字绑定点就好了
 			if (isTemporary)
 			{
@@ -375,11 +388,25 @@ package com.rpgGame.app.graphics
 				_junXianBar.y = offsetY - _junXianBar.realHeight;
 				offsetY = _junXianBar.y;
 			}
-			if (_title && _title.parent)
+			if (_title != null)
 			{
 				_title.x = -3;
 				_title.y = offsetY - 30;
 				offsetY = _title.y;
+			}
+			
+			if(_huabotitle != null)
+			{
+				_huabotitle.x = -3;
+				_huabotitle.y = offsetY - 30;
+				offsetY = _huabotitle.y;
+			}
+			
+			if(_NPCtitle != null)
+			{
+				_NPCtitle.x = 0;
+				_NPCtitle.y = offsetY - 45;
+				offsetY = _NPCtitle.y;
 			}
 			
 			if (_office && _office.parent) //官职
@@ -620,35 +647,52 @@ package com.rpgGame.app.graphics
 		 */
 		public function addAndUpdateGuildName() : void
 		{
-			var guildMemberType: int = (_role.data as HeroData).guildMemberType;
+			if (_role.type != SceneCharType.PLAYER)
+				return;
+			
+			if (_role.isMainChar)
+				return;
+			
 			var guildName : String = (_role.data as HeroData).guildName;
-			if (guildMemberType<=0||guildName == "" || guildName == null)
+			if (guildName == "" || guildName == null)
 			{
 				if (_guildNameBar != null)
 				{
-					deCtrl.removeTop(_guildNameBar);
 					HeadNameBar.recycle(_guildNameBar);
 					_guildNameBar = null;
+					
 					updateAllBarPosition();
 				}
 				return;
 			}
 			
-			var q_guild:Q_guild_permission = GuildCfgData.getPermissionInfo(guildMemberType);
-			guildName += "."+q_guild.q_name;
 			if (_guildNameBar == null)
 			{
 				//原来没有添加一个
 				_guildNameBar = HeadNameBar.create();
-//				this.addChild(_guildNameBar); //更新一下容器，从临时的到模型真正容器
-				_guildNameBar.setName(guildName);
-				_guildNameBar.setColor(StaticValue.COLOR_CODE_15);
+				this.addChild(_guildNameBar); //更新一下容器，从临时的到模型真正容器
+				//				if((_role.data as HeroData).isKingFamily)
+				//				{
+				//					_guildNameBar.setName("[王城]"+guildName);
+				//				}
+				//				else
+				//				{
+				//					_guildNameBar.setName(guildName);
+				//				}
+				_guildNameBar.setColor(StaticValue.COLOR_CODE_1);
 				updateAllBarPosition();
 				return;
 			}
 			
 			//更新一下数据
-			_guildNameBar.setName(guildName);
+			//			if((_role.data as HeroData).isKingFamily)
+			//			{
+			//				_guildNameBar.setName("[王城]"+guildName);
+			//			}
+			//			else
+			//			{
+			//				_guildNameBar.setName(guildName);
+			//			}
 			updateAllBarPosition();
 		}
 		
@@ -936,8 +980,6 @@ package com.rpgGame.app.graphics
 				HeadNameBar.recycle(_nameBar);
 				_nameBar = null;
 			}
-			
-			
 			//			if (_countryNameBar != null)
 			//			{
 			//				HeadNameBar.recycle(_countryNameBar);
@@ -951,7 +993,6 @@ package com.rpgGame.app.graphics
 			
 			if (_guildNameBar != null)
 			{
-				deCtrl.removeTop(_guildNameBar);
 				HeadNameBar.recycle(_guildNameBar);
 				_guildNameBar = null;
 			}
@@ -983,6 +1024,16 @@ package com.rpgGame.app.graphics
 			{
 				_title.dispose();
 				_title = null;
+			}
+			if(_huabotitle != null)
+			{
+				_huabotitle.dispose();
+				_huabotitle =  null;
+			}
+			if(_NPCtitle != null)
+			{
+				_NPCtitle.dispose();
+				_NPCtitle=null;
 			}
 			if (_moodTween != null)
 			{
@@ -1057,7 +1108,7 @@ package com.rpgGame.app.graphics
 			onHideBlood();
 			//showAndHideElement(_bloodBar, false);
 			showAndHideElement(_icoImage, false);
-			showAndHideElement(_guildNameBar, false,DecorCtrl.TOP_GUILD);
+			showAndHideElement(_guildNameBar, false);
 			showAndHideElement(_familNameBar, false);
 			showAndHideElement(_office, false);
 			showAndHideElement(_bodyImage, false);
@@ -1094,10 +1145,9 @@ package com.rpgGame.app.graphics
 					_title = null;
 				}
 				_title = new InterObject3D();
-				
 				//				var titleData : TitleTreeData = TitleCfgData.titleHM.getValue(titleID);
 				var effName:String=JunJieData.getEffById(titleID);
-				var rud : RenderParamData3D = new RenderParamData3D(RenderUnitID.JUNJIE, RenderUnitType.JUNJIE, ClientConfig.getEffect(effName));
+				var rud:RenderParamData3D = new RenderParamData3D(RenderUnitID.JUNJIE, RenderUnitType.JUNJIE, ClientConfig.getEffect(effName));
 				_title.addRenderUnitWith(rud, 0);
 				this.addChild(_title);
 				_title.start();
@@ -1112,6 +1162,60 @@ package com.rpgGame.app.graphics
 			}
 			
 			updateAllBarPosition();
+		}
+		
+		/**增加护宝称号货移除称号*/
+		public function updateHuBaoTitle(titleID : int) : void
+		{
+			if (titleID > 0)
+			{
+				if (_huabotitle)
+				{
+					_huabotitle.removeFromParent();
+					_huabotitle = null;
+				}
+				_huabotitle = new InterObject3D();
+				
+				//				var titleData : TitleTreeData = TitleCfgData.titleHM.getValue(titleID);
+				var effName:String=HuBaoData.getEffByLv(HuBaoManager.instance().level);
+				var rud : RenderParamData3D = new RenderParamData3D(RenderUnitID.BAOWU, RenderUnitType.BAOWU, ClientConfig.getEffect(effName));
+				_huabotitle.addRenderUnitWith(rud, 0);
+				this.addChild(_huabotitle);
+				_huabotitle.start();
+			}
+			else
+			{
+				if (_huabotitle)
+				{
+					_huabotitle.removeFromParent();
+					_huabotitle = null;
+				}
+			}
+			
+			updateAllBarPosition();
+		}
+		
+		/**增加NPC称号*/
+		public function updateNPCTitle() : void
+		{
+			if(_role.type==SceneCharType.MONSTER)
+			{
+				if (_NPCtitle)
+				{
+					_NPCtitle.removeFromParent();
+					_NPCtitle = null;
+				}
+				_NPCtitle = new InterObject3D();
+				var effName:String=(_role.data as MonsterData).monsterData.q_chenhao;
+				if(effName!=null&&effName!="")
+				{
+					var rud : RenderParamData3D = new RenderParamData3D(RenderUnitID.BAOWU, RenderUnitType.BAOWU, ClientConfig.getEffect(effName));
+					_NPCtitle.addRenderUnitWith(rud, 0);
+					this.addChild(_NPCtitle);
+					_NPCtitle.start();
+				}
+				updateAllBarPosition();
+			}
 		}
 		
 		//---------------------------------------------
@@ -1183,7 +1287,7 @@ package com.rpgGame.app.graphics
 				if (_teamCaptainFlag&&_teamCaptainFlag.parent) 
 				{
 					MCUtil.removeSelf(_teamCaptainFlag);
-				//	deCtrl.sortTop();
+					//	deCtrl.sortTop();
 				}
 			}
 		}

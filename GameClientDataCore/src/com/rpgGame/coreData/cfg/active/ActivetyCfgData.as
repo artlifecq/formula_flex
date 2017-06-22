@@ -72,8 +72,8 @@ package com.rpgGame.coreData.cfg.active
 		{
 			var list:Vector.<ActivetyInfo>= _typeMap.getValue(type);
 			if(list){
-				list.sort(sortListByID);
-				list.sort(sortListByState);
+				list=list.sort(sortListByID);
+				list=list.sort(sortListByState);
 			}
 		}
 		
@@ -95,8 +95,8 @@ package com.rpgGame.coreData.cfg.active
 				if(!list){
 					continue;
 				}
-				list.sort(sortListByID);
-				list.sort(sortListByState);
+				list=list.sort(sortListByID);
+				list=list.sort(sortListByState);
 			}
 		}
 		

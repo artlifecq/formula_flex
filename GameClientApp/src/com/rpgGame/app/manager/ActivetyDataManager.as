@@ -50,14 +50,15 @@ package com.rpgGame.app.manager
 		public static function checkOpenAct():void
 		{
 			var types:Array=ActivetyCfgData.getTypes();
+			updateActLeftTime(106,1000);
 			for each(var type:int in types){
 				var typeList:Vector.<ActivetyInfo>=ActivetyCfgData.getTypeList(type);
 				if(typeList){
 					for each(var info:ActivetyInfo in typeList){
 						if(info.actCfg.q_panel_id!=0&&info.info){//有独立的功能icon
-							/*if(info.actCfg.q_panel_pre_time*60>info.info.notifyTime&&info.info.notifyTime!=0){*///在预告时间内
+							if(info.actCfg.q_panel_pre_time*60>info.info.notifyTime&&info.info.notifyTime!=0){//在预告时间内
 								updateActLeftTime(info.actCfg.q_panel_id,info.info.notifyTime);
-							/*}*/
+							}
 						}
 					}
 				}

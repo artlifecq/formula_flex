@@ -43,7 +43,7 @@
             {
                 case ui.btnBar:
                     onButtonClick();
-					FunctionOpenManager.openModeByInfo(info);
+					FunctionOpenManager.openModeByInfo(info,info.open_id);
                     return;
             }
         }

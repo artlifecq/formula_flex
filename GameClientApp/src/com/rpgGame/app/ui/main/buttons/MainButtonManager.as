@@ -49,6 +49,7 @@ package com.rpgGame.app.ui.main.buttons
 			regClass(103,ActivityButton,ButtonFubendating);
 			regClass(104,ActivityButton,ButtonZhanchangdating);
 			regClass(105,MultyActivityButton,ButtonFubenduilie);
+			regClass(106,MultyActivityButton,ButtonFubenduilie);
 		}
 		private static function regClass(id:int,cls:Class,skinui:Class):void
 		{
