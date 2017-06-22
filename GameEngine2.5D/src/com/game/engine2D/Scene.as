@@ -27,7 +27,6 @@ package com.game.engine2D
 	import com.game.engine3D.vo.BaseObj3D;
 	
 	import flash.display.Sprite;
-	import flash.geom.ColorTransform;
 	import flash.geom.Point;
 	import flash.utils.Dictionary;
 	
@@ -39,10 +38,8 @@ package com.game.engine2D
 	import away3d.events.Event;
 	import away3d.filters.Filter3DBase;
 	import away3d.filters.GlowFilter3D;
-	import away3d.filters.GodRayFilter3D;
 	import away3d.filters.HeatFilter3D;
 	import away3d.filters.OutlineGlowFilter3D;
-	import away3d.filters.RingDepthOfFieldFilter3D;
 	import away3d.lights.DirectionalLight;
 	import away3d.lights.LightBase;
 	
@@ -178,10 +175,10 @@ package com.game.engine2D
 			//调一下尺寸
 			reSize(sceneConfig.width, sceneConfig.height);
 			
-			_heatFilter = new HeatFilter3D();
-			_glowFilter = new GlowFilter3D();
-			_outlineGlowFilter = new OutlineGlowFilter3D(4, 1);
-			resetViewFilters();
+//			_heatFilter = new HeatFilter3D();
+//			_glowFilter = new GlowFilter3D();
+//			_outlineGlowFilter = new OutlineGlowFilter3D(4, 1);
+//			resetViewFilters();
 		}
 		
 		/**
