@@ -21,7 +21,7 @@ package com.rpgGame.appModule.guild
 		private var _skin:BangHui_Member;
 		private var _currentPage:int = 1;
 		private var _maxPage:int = 0;
-		private var _currentOriderValue:String;
+		private var _currentOriderValue:String = "";
 		private static const PROP_JOB:String = "memberType";
 		private static const PROP_BATTLE:String = "battle";
 		private static const PROP_LEVEL:String = "level";
@@ -36,6 +36,7 @@ package com.rpgGame.appModule.guild
 		
 		private function initView():void
 		{
+			_skin.lbNum.isEditable  = false;
 			_skin.ListItem.snapToPages = true;
 			_skin.ListItem.itemRendererType =GuildPlayerInfoCell;
 			_skin.ListItem.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
@@ -44,7 +45,6 @@ package com.rpgGame.appModule.guild
 			layout.gap = 0;
 			_skin.ListItem.layout = layout;
 			_skin.ListItem.dataProvider = new ListCollection();
-			_currentOriderValue = PROP_BATTLE;
 		}
 		
 		override public function show(data:Object=null):void
@@ -53,7 +53,7 @@ package com.rpgGame.appModule.guild
 			EventManager.addEvent(GuildEvent.GUILD_DATA_INIT,refeashList);
 			EventManager.addEvent(GuildEvent.GUILD_OPERATERESULT,refeashAppoint);
 			EventManager.addEvent(GuildEvent.GUILD_FAMILY_CHANGE,refeashList);
-			refeashList();
+			sortByType("");
 			_skin.chkAuto.isSelected = GuildManager.instance().guildData.isAutoApply==1;
 			_skin.chkAuto.visible = GuildManager.instance().canJoin;
 			_skin.labchkAuto.visible = GuildManager.instance().canJoin;
@@ -75,16 +75,34 @@ package com.rpgGame.appModule.guild
 			refeashList();
 		}
 		
+		private function sortByType(type:String):void
+		{
+			if(_currentOriderValue==type)
+				_currentOriderValue = "";
+			else
+				_currentOriderValue = type;
+			refeashList();
+		}
 		private function refeashList():void
 		{
 			var totalPage:int = GuildManager.instance().sortGuildMemberInfo(_currentOriderValue,_skin.chkOnLine.isSelected);
 			_maxPage = totalPage;
 			requestPage(_currentPage);
-			_skin.arrowZhiwei_Down.visible = _currentOriderValue == PROP_JOB;
-			_skin.arrowZhanli_Down.visible = _currentOriderValue == PROP_BATTLE;
-			_skin.arrowDengji_Down.visible = _currentOriderValue == PROP_LEVEL;
-			_skin.arrowZhouHuoyue_Down.visible = _currentOriderValue == PROP_CURACTIVE;
-			_skin.arrowZongHuoyue_Down.visible = _currentOriderValue == PROP_ALLACTIVE;
+			if(_currentOriderValue=="")
+			{
+				_skin.arrowZhiwei_Down.visible = true;
+				_skin.arrowZhanli_Down.visible = true;
+				_skin.arrowDengji_Down.visible = true;
+				_skin.arrowZhouHuoyue_Down.visible = true;
+				_skin.arrowZongHuoyue_Down.visible = true;
+			}else{
+				_skin.arrowZhiwei_Down.visible = _currentOriderValue == PROP_JOB;
+				_skin.arrowZhanli_Down.visible = _currentOriderValue == PROP_BATTLE;
+				_skin.arrowDengji_Down.visible = _currentOriderValue == PROP_LEVEL;
+				_skin.arrowZhouHuoyue_Down.visible = _currentOriderValue == PROP_CURACTIVE;
+				_skin.arrowZongHuoyue_Down.visible = _currentOriderValue == PROP_ALLACTIVE;
+			}
+			
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -119,24 +137,19 @@ package com.rpgGame.appModule.guild
 					AppManager.showApp(AppConstant.GUILD_APPLAYLIST_PANEL);
 					break;
 				case _skin.uiZhiWei:
-					_currentOriderValue = PROP_JOB;
-					refeashList();
+					sortByType(PROP_JOB);
 					break;
 				case _skin.uiZhanli:
-					_currentOriderValue = PROP_BATTLE;
-					refeashList();
+					sortByType(PROP_BATTLE);
 					break;
 				case _skin.uiDengji:
-					_currentOriderValue = PROP_LEVEL;
-					refeashList();
+					sortByType(PROP_LEVEL);
 					break;
 				case _skin.uiZhouHuoYue:
-					_currentOriderValue = PROP_CURACTIVE;
-					refeashList();
+					sortByType(PROP_CURACTIVE);
 					break;
 				case _skin.uiZongHuoYue:
-					_currentOriderValue = PROP_ALLACTIVE;
-					refeashList();
+					sortByType(PROP_ALLACTIVE);
 					break;
 			}
 		}

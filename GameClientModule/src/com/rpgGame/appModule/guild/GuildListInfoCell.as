@@ -52,6 +52,7 @@ package com.rpgGame.appModule.guild
 				return ;
 			if(_opaque != msg.opaque)
 				return ;
+			_opaque = 0;
 			if(msg.result == 1&&_guildid.CompareTo(_guildListinfo.guildId)==0)
 			{
 				_guildListinfo.isApply = 1;
@@ -97,7 +98,7 @@ package com.rpgGame.appModule.guild
 		override protected function commitData():void
 		{
 			updateSkin();
-			_guildListinfo = GuildManager.instance().getGuildListInfoByIndex(this.index);
+			_guildListinfo = GuildManager.instance().getGuildListInfoByIndex(this.indexValue);
 			if(_guildListinfo==null)
 			{
 				_skin.btnAdd.visible = false;

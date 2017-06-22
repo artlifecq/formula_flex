@@ -107,6 +107,7 @@ package com.rpgGame.appModule.guild
 				_skin.lbXiaohao.visible = false;
 				_skin.btnUP.visible = false;
 				_skin.imgmax.visible = true;
+				showHide(false);
 			}else{
 				_skin.lbXiaohao.visible = true;
 				_skin.btnUP.visible = true;

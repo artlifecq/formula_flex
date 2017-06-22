@@ -65,21 +65,7 @@ package com.rpgGame.appModule.guild
 			
 		}
 		
-		private function refeashAppoint(msg:ResGuildOperateResultMessage):void
-		{
-			if(_opaque<=0)
-				return ;
-			if(msg.opaque == _opaque)
-			{
-				if(_setPostType == EnumGuildPost.GUILDPOST_CHIEF)
-				{
-					GuildManager.instance().selfMemberInfo.memberType = EnumGuildPost.GUILDPOST_OTHER;
-				}
-				_heroInfo.memberType = _setPostType;
-				_opaque = 0;
-				refeashVale();
-			}
-		}
+	
 		private function refeashVale():void
 		{
 			_skin.lbMsg.htmlText = LanguageConfig.replaceStr("你想任命$什么职位？",HtmlTextUtil.getTextColor(0x5DBD37,_heroInfo.name));
@@ -126,12 +112,9 @@ package com.rpgGame.appModule.guild
 					NoticeManager.showNotifyById(60025);
 					return ;
 				}
-				if(_opaque>0)
-					return ;
 				_heroInfo.memberType = posttype;
-				_opaque = GuildManager.opaque;
 				_setPostType = posttype;
-				GuildManager.instance().guildAppoint(_heroId,_setPostType,0,_opaque);
+				GuildManager.instance().guildAppoint(_heroId,_setPostType,0);
 				this.hide();
 			}else if(target == _skin.chkZhanglao){
 				if(_guildLevelInfo.q_eleder_num==0)

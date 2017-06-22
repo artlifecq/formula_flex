@@ -1,10 +1,12 @@
 package com.rpgGame.app.ui.main.head
 {
+	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.LookSender;
+	import com.rpgGame.app.utils.MenuUtil;
 	import com.rpgGame.app.view.icon.BuffIcon;
 	import com.rpgGame.core.events.BuffEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
@@ -231,6 +233,12 @@ package com.rpgGame.app.ui.main.head
 						break;
 					case this._skin.btn_zu:
 						Mgr.teamMgr.reqCreateTeamWithPlayer(_roleData.serverID);
+						break;
+					case this._skin.btn_more:
+//						Mgr.teamMgr.reqCreateTeamWithPlayer(_roleData.serverID);
+						
+						var menus : Array = MenuUtil.getPlayerTargetMenu(_roleData.serverID.ToGID(), true);
+						MenuManager.showMenu(menus, [_roleData.serverID, _roleData.name], -1, -1, 80);
 						break;
 				}
 		}

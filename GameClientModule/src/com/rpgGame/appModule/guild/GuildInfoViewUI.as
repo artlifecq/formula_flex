@@ -96,14 +96,14 @@ package com.rpgGame.appModule.guild
 					selfMemberInfo.memberType == EnumGuildPost.GUILDPOST_VICE_CHIEF||
 					selfMemberInfo.memberType == EnumGuildPost.GUILDPOST_ELDERS)
 				{
-					str = LanguageConfig.replaceStr("&级帮派官员日福利\n",GuildManager.instance().guildData.level);
-					iteminfo = itemInfos[0];
-				}else{
-					str = LanguageConfig.replaceStr("&级帮派普通成员日福利\n",GuildManager.instance().guildData.level);
+					str = LanguageConfig.replaceStr("$级帮派官员日福利\n",GuildManager.instance().guildData.level);
 					iteminfo = itemInfos[1];
+				}else{
+					str = LanguageConfig.replaceStr("$级帮派普通成员日福利\n",GuildManager.instance().guildData.level);
+					iteminfo = itemInfos[0];
 				}
 				var qitem:Q_item = ItemConfig.getQItemByID(iteminfo["mod"]);
-				str += HtmlTextUtil.getTextColor(ItemConfig.getItemQualityColor(qitem.q_id),qitem.q_name)+"×"+iteminfo["num"];
+				str += HtmlTextUtil.getTextColor(ItemConfig.getItemQualityColor(qitem.q_id),qitem.q_name);
 				TipTargetManager.show(_skin.btnFuli,TargetTipsMaker.makeSimpleTextTips(str));
 				_skin.btnFuli.filter = null;
 			}else{
@@ -181,11 +181,12 @@ package com.rpgGame.appModule.guild
 					selfMemberInfo.memberType == EnumGuildPost.GUILDPOST_VICE_CHIEF||
 					selfMemberInfo.memberType == EnumGuildPost.GUILDPOST_ELDERS)
 				{
-					iteminfo = itemInfos[0];
 					iteminfo = itemInfos[1];
+				}else{
+					iteminfo = itemInfos[0];
 				}
 				var qitem:Q_item = ItemConfig.getQItemByID(iteminfo["mod"]);
-				str += HtmlTextUtil.getTextColor(ItemConfig.getItemQualityColor(qitem.q_id),qitem.q_name)+"×"+iteminfo["num"];
+				str += HtmlTextUtil.getTextColor(ItemConfig.getItemQualityColor(qitem.q_id),qitem.q_name);
 				TopTipManager.getInstance().addMouseFollowTip(0,str);
 				GuildManager.instance().changeGuildDailyGift();
 				refeashReward();
