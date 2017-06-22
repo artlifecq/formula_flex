@@ -85,6 +85,7 @@ package com.rpgGame.appModule.battle.jcyt
 			EventManager.addEvent(NineTowerEvent.GET_PANEL_DATA,onGetPanelData);
 			onStateResChange(CharAttributeType.RES_PRESTIGE);
 			setReward();
+			Mgr.nineTowerMgr.reqPanelData();
 		}
 		private function setReward():void
 		{

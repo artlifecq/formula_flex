@@ -161,7 +161,9 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			rdoSelect = temp;
 			temp.name = "rdoSelect";
+			temp.height = 29;
 			temp.styleClass = org.mokylin.skin.app.zhanchang.paihangbang.ZhanChangPaiHangBtn;
+			temp.width = 386;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

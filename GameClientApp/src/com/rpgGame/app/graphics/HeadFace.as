@@ -947,7 +947,17 @@ package com.rpgGame.app.graphics
 				updateAllBarPosition();
 			}
 		}
-		
+		public function setName(name:String):void
+		{
+			if (_nameBar != null)
+			{
+				_nameBar.setName(name);
+				var nameColor : uint = HeadBloodUtil.getRoleNameColor(_role);
+				_nameBar.setColor(nameColor);
+				updateAllBarPosition();
+				deCtrl.sortTop();
+			}
+		}
 		/**
 		 * 删除图标
 		 *

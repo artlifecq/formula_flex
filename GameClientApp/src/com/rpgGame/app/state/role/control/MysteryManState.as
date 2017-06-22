@@ -32,6 +32,7 @@ package com.rpgGame.app.state.role.control
 					var role:SceneRole = (_machine.owner as SceneRole);
 					if (role&&role!=MainRoleManager.actor) 
 					{
+						HeadFace(role.headFace).setName("神秘人");
 						HeadFace(role.headFace).updateMysteryMan();
 					}
 				}

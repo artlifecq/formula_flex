@@ -57,6 +57,7 @@
 		 */
 		public static function functionIsOpen(id:String):Boolean
 		{
+			
 			return _statusMap.getValue(id) as Q_newfunc != null;
 		}
 		

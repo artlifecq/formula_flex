@@ -31,6 +31,7 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.state.role.control.BlindState;
 	import com.rpgGame.app.state.role.control.BlinkMoveState;
 	import com.rpgGame.app.state.role.control.CastSpellLockState;
+	import com.rpgGame.app.state.role.control.CheckStartAutoFightState;
 	import com.rpgGame.app.state.role.control.DeadLaunchMoveState;
 	import com.rpgGame.app.state.role.control.FastingState;
 	import com.rpgGame.app.state.role.control.FlyUpState;
@@ -151,6 +152,8 @@ package com.rpgGame.app.state.role
 		stateMapping[RoleStateType.CONTROL_SHORTCUTGRID] = ShortcutGridState;
 		stateMapping[RoleStateType.CONTROL_SKILL_WARNING] = SkillWarningState;
 		stateMapping[RoleStateType.CONTROL_TOWER_FLAG] = NineTowerFightFlagState;
+		stateMapping[RoleStateType.CONTROL_CHECK_AUTO_FIGHT] = CheckStartAutoFightState;
+		stateMapping[RoleStateType.CONTROL_MASTERY_MAN] = MysteryManState;
 		private var _role : SceneRole;
 		private var _lastCanShowRiding : Boolean;
 		

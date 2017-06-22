@@ -8,6 +8,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.netData.yaota.message.CSEnterYaoTaMessage;
+	import com.rpgGame.netData.yaota.message.CSOpenYaoTaPanelMessage;
 	import com.rpgGame.netData.yaota.message.CSQuitYaoTaMessage;
 	import com.rpgGame.netData.yaota.message.CSYaoTaIntegralMessage;
 	import com.rpgGame.netData.yaota.message.CSYaoTaLogMessage;
@@ -32,6 +33,11 @@ package com.rpgGame.app.manager
 	
 		public function NineTowerMgr()
 		{
+		}
+		public function reqPanelData():void
+		{
+			var msg:CSOpenYaoTaPanelMessage=new CSOpenYaoTaPanelMessage();
+			SocketConnection.send(msg);
 		}
 		public function reqEnterTower():void
 		{
