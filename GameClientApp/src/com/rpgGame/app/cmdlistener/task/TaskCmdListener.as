@@ -63,7 +63,6 @@ package com.rpgGame.app.cmdlistener.task
 			if(msg!=null&&msg.taskInfo!=null)
 			{
 				var taskData:Q_mission_base=TaskMissionCfgData.getTaskByID(msg.taskInfo.taskModelId);
-				
 				if(taskData!=null)
 				{
 					TaskMissionManager.setTaskInfo(msg.taskInfo);
@@ -74,17 +73,9 @@ package com.rpgGame.app.cmdlistener.task
 						{
 							AppManager.showApp(AppConstant.TASK_FLY_PANEL,taskData.q_pathing);
 						}
-						
 					}
-					
 				}
-				
-				
-				
-				
-				
 			}
-			
 		}
 		/**任务改变消息*/
 		private function onResTaskChangeMessage(msg:ResTaskChangeMessage):void
