@@ -1,6 +1,14 @@
 package com.rpgGame.coreData.role
 {
 	import com.gameClient.log.GameLog;
+	import com.rpgGame.coreData.cfg.model.AvatarClothesResCfgData;
+	import com.rpgGame.coreData.cfg.model.AvatarDeputyWeaponResCfgData;
+	import com.rpgGame.coreData.cfg.model.AvatarHairResCfgData;
+	import com.rpgGame.coreData.cfg.model.AvatarWeapontResCfgData;
+	import com.rpgGame.coreData.clientConfig.AvatarClothesRes;
+	import com.rpgGame.coreData.clientConfig.AvatarDeputyWeaponRes;
+	import com.rpgGame.coreData.clientConfig.AvatarHairRes;
+	import com.rpgGame.coreData.clientConfig.AvatarWeaponRes;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.info.fight.skill.ActiveSpellList;
@@ -12,6 +20,7 @@ package com.rpgGame.coreData.role
 	import com.rpgGame.netData.player.bean.MyPlayerInfo;
 	
 	import flash.geom.Point;
+	import flash.geom.Vector3D;
 	
 	import app.message.ActiveSpellProto;
 	import app.message.BiaoModuleObjProto;
@@ -19,6 +28,8 @@ package com.rpgGame.coreData.role
 	import app.message.MountModuleObjClientProto;
 	import app.message.OtherHeroProto;
 	import app.message.SpellProto;
+	
+	import org.game.netCore.data.long;
 	
 	/**
 	 *
@@ -72,6 +83,10 @@ package com.rpgGame.coreData.role
 		public var mood : String = "";
 		/**帮派名**/
 		public var guildName : String = "";
+		/**帮会职位**/
+		public var guildMemberType: int;
+		/**帮会Id**/
+		public var guildId:long;
 		/**伴侣**/
 		public var loveName : String = "";
 		/**今天接了几次镖车任务**/
@@ -83,15 +98,9 @@ package com.rpgGame.coreData.role
 		 */	
 		public var body:int;
 		
-		/**
-		 *头发资源id 
-		 */
-		public var hair:int;
+		private var _hair:int;
 		
-		/**
-		 *衣服资源id 
-		 */
-		public var cloths:int;
+		private var _cloths:int;
 		
 		/**
 		 *坐骑资源id 
@@ -100,17 +109,12 @@ package com.rpgGame.coreData.role
 		
 		
 		
-		/**
-		 *武器资源id
-		 */
-		public var weapon:int;
+		private var _weapon:int;
 		
-		/**
-		 *副武器资源 
-		 */
-		public var deputyWeapon:int;
+		private var _deputyWeapon:int;
 		
 		public var sex:int;
+		
 		
 		/**军阶等级*/
 		public var junjieLv:int;
@@ -140,6 +144,111 @@ package com.rpgGame.coreData.role
 		
 		
 		public static var spellArrs:Array = [];
+
+		/**
+		 *衣服资源id 
+		 */
+		public function get cloths():int
+		{
+			return _cloths;
+		}
+
+		/**
+		 * 服装资源
+		 * @private
+		 */
+		public function set cloths(value:int):void
+		{
+			_cloths = value;
+			var clothesRes : AvatarClothesRes = AvatarClothesResCfgData.getInfo(_cloths);
+			if (!clothesRes)
+			{
+				clothesRes = AvatarClothesResCfgData.getInfo(this.job);
+			}
+			if(clothesRes){
+				this.avatarInfo.setBodyResID(clothesRes.bodyRes, this.avatarInfo.bodyAnimatResID);
+				this.avatarInfo.bodyEffectID = clothesRes.effectRes;
+			}
+		}
+
+		/**
+		 *头发资源id 
+		 */
+		public function get hair():int
+		{
+			return _hair;
+		}
+
+		/**
+		 * 头发资源
+		 * @private
+		 */
+		public function set hair(value:int):void
+		{
+			_hair = value;
+			var hairRes : AvatarHairRes = AvatarHairResCfgData.getInfo(_hair);
+			if (hairRes)
+			{
+				this.avatarInfo.hairResID = hairRes.hairRes;
+			}else{
+				this.avatarInfo.hairResID=null;
+			}
+		}
+
+		/**
+		 *副武器资源 
+		 */
+		public function get deputyWeapon():int
+		{
+			return _deputyWeapon;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set deputyWeapon(value:int):void
+		{
+			_deputyWeapon = value;
+			var deputyWeaponRes : AvatarDeputyWeaponRes = AvatarDeputyWeaponResCfgData.getInfo(_deputyWeapon);
+			if (deputyWeaponRes)
+			{
+				this.avatarInfo.deputyWeaponResID = deputyWeaponRes.res;
+				this.avatarInfo.deputyWeaponEffectID = deputyWeaponRes.effectRes;
+				this.avatarInfo.deputyWeaponEffectScale = deputyWeaponRes.effectScale;
+				this.avatarInfo.deputyWeaponEffectOffset =new Vector3D(deputyWeaponRes.effectOffsetX, deputyWeaponRes.effectOffsetY, deputyWeaponRes.effectOffsetZ);
+			}else{
+				this.avatarInfo.deputyWeaponResID = null;
+				this.avatarInfo.deputyWeaponEffectID = null;
+			}
+		}
+
+		/**
+		 *武器资源id
+		 */
+		public function get weapon():int
+		{
+			return _weapon;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set weapon(value:int):void
+		{
+			_weapon = value;
+			var weaponRes : AvatarWeaponRes = AvatarWeapontResCfgData.getInfo(_weapon);
+			if (weaponRes)
+			{
+				this.avatarInfo.weaponResID = weaponRes.res;
+				this.avatarInfo.weaponEffectID = weaponRes.effectRes;
+				this.avatarInfo.weaponEffectScale = weaponRes.effectScale;
+				this.avatarInfo.weaponEffectOffset = new Vector3D(weaponRes.effectOffsetX, weaponRes.effectOffsetY, weaponRes.effectOffsetZ);
+			}else{
+				this.avatarInfo.weaponResID = null;
+				this.avatarInfo.weaponEffectID = null;
+			}
+		}
+
 		public static function setUserSingleInfo(info : HeroData, nick : String = null) : void
 		{
 			info.id = 2;
@@ -232,6 +341,8 @@ package com.rpgGame.coreData.role
 			data.maxExp=heroInfo.maxExp.fValue;
 			data.maxZhenqi=heroInfo.maxZhenQi.fValue;
 			data.curExp=heroInfo.exp.fValue;
+			data.guildMemberType = heroInfo.guildMemberType;
+			data.guildName = heroInfo.guildName;
 			
 			///角色属性信息
 			data.totalStat.setData(heroInfo.attributes);
@@ -326,6 +437,8 @@ package com.rpgGame.coreData.role
 				buffData.buffInfo = info.buffs[i];
 				data.buffList.push(buffData);
 			}
+			data.guildName = info.guildName;
+			data.guildMemberType = info.guildMemberType;
 			
 			RoleData.readGeneric(data, new Point(info.position.x,info.position.y));
 		}

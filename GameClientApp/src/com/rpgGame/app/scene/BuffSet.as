@@ -9,6 +9,8 @@ package com.rpgGame.app.scene
 	import com.rpgGame.app.state.role.control.HiddingStateReference;
 	import com.rpgGame.app.state.role.control.HunLuanStateReference;
 	import com.rpgGame.app.state.role.control.HushStateReference;
+	import com.rpgGame.app.state.role.control.MysteryManStateReference;
+	import com.rpgGame.app.state.role.control.NineTowerFightFlagStateReference;
 	import com.rpgGame.app.state.role.control.ShapeshiftingStateReference;
 	import com.rpgGame.app.state.role.control.ShortcutGridStateReference;
 	import com.rpgGame.app.state.role.control.SkillWarningStateReference;
@@ -283,6 +285,12 @@ package com.rpgGame.app.scene
 					case 199://冰冻
 						_role.stateMachine.removeState(RoleStateType.CONTROL_BING_DONG);
 						break;
+					case 72:
+						_role.stateMachine.removeState(RoleStateType.CONTROL_TOWER_FLAG);
+						break;
+					case 73:
+						_role.stateMachine.removeState(RoleStateType.CONTROL_MASTERY_MAN);
+						break;
 					default:
 						/*buffRef = _role.stateMachine.getReference(UnmovableStateReference) as UnmovableStateReference;
 						buffRef.setParams(buffData);
@@ -434,6 +442,16 @@ package com.rpgGame.app.scene
 						buffRef = _role.stateMachine.getReference(BingDongStateReference) as BingDongStateReference;
 						buffRef.setParams(buffData);
 						_role.stateMachine.transition(RoleStateType.CONTROL_BING_DONG, buffRef);
+						break;
+					case 72://封魔旗帜
+						buffRef = _role.stateMachine.getReference(NineTowerFightFlagStateReference) as NineTowerFightFlagStateReference;
+						buffRef.setParams(buffData);
+						_role.stateMachine.transition(RoleStateType.CONTROL_TOWER_FLAG, buffRef);
+						break;
+					case 73://神秘人
+						buffRef = _role.stateMachine.getReference(MysteryManStateReference) as MysteryManStateReference;
+						buffRef.setParams(buffData);
+						_role.stateMachine.transition(RoleStateType.CONTROL_MASTERY_MAN, buffRef);
 						break;
 					default:
 						/*buffRef = _role.stateMachine.getReference(UnmovableStateReference) as UnmovableStateReference;

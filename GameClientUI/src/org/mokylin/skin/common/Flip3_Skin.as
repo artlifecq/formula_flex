@@ -119,7 +119,7 @@ package org.mokylin.skin.common
 			temp.name = "textDisplay";
 			temp.left = 47;
 			temp.right = 47;
-			temp.text = "1/8";
+			temp.text = "1/1";
 			temp.textAlign = "center";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];

@@ -34,8 +34,8 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			super();
 			
 			this.currentState = "normal";
-			this.height = 95;
-			this.width = 389;
+			this.height = 93;
+			this.width = 349;
 			this.elementsContent = [bg_i(),lbT1_i(),lbT2_i(),lbT3_i(),lbT4_i()];
 			
 			states = {
@@ -52,9 +52,9 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 95;
+			temp.height = 93;
 			temp.styleName = "ui/common/tips/tips_2.png";
-			temp.width = 389;
+			temp.width = 349;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -68,9 +68,9 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.text = "说明：1.段位越高，领取的竞技声望越多";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 343;
-			temp.x = 8;
-			temp.y = 7;
+			temp.width = 309;
+			temp.x = 11;
+			temp.y = 11;
 			return temp;
 		}
 
@@ -82,9 +82,9 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.text = "2.今日可领取昨日的段位奖励";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 321;
-			temp.x = 49;
-			temp.y = 28;
+			temp.width = 273;
+			temp.x = 52;
+			temp.y = 29;
 			return temp;
 		}
 
@@ -96,9 +96,9 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.htmlText = "3.每日<font color='#5DBD37'>24点刷新奖励</font>";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 326;
-			temp.x = 49;
-			temp.y = 48;
+			temp.width = 284;
+			temp.x = 52;
+			temp.y = 47;
 			return temp;
 		}
 
@@ -110,9 +110,9 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.text = "4.每周一结算上周奖励，所有钻石重置为钻一";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 328;
-			temp.x = 49;
-			temp.y = 69;
+			temp.width = 288;
+			temp.x = 52;
+			temp.y = 65;
 			return temp;
 		}
 

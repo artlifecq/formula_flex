@@ -1,10 +1,13 @@
 package com.rpgGame.app.ui.main.navigation
 {
 	import com.rpgGame.app.manager.FunctionOpenManager;
+	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
+	import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	
 	import away3d.events.Event;
@@ -73,6 +76,12 @@ package com.rpgGame.app.ui.main.navigation
 			{
 				case _skin.btn_n2:
 					AppManager.showApp(AppConstant.SOCIAL_PANEL);
+					break;
+				case _skin.btn_n1:
+					if(GuildManager.instance().haveGuild)
+						FunctionOpenManager.openAppPaneById(EmFunctionID.EM_BANGHUI_INFO);
+					else
+						FunctionOpenManager.openAppPaneById(EmFunctionID.EM_BANGHUI_LIEBIAO);
 					break;
 			}
 			close();

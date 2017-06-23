@@ -1,13 +1,16 @@
 package com.rpgGame.appModule.battle.jcyt
 {
 	import com.game.mainCore.core.timer.GameTimer;
+	import com.rpgGame.app.manager.Mgr;
+	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.app.ui.main.dungeon.NineTowerTrackUIExt;
 	import com.rpgGame.core.events.NineTowerEvent;
-	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.netData.yaota.message.SCYaoTaIntegralMessage;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.zhanchang.jiucengyaota.JiFenPaiHang_Skin;
 	
-	public class NineTowerScorePanelExt extends SkinUI
+	public class NineTowerScorePanelExt extends SkinUIPanel
 	{
 		private var _skin:JiFenPaiHang_Skin;
 		private var _myRank:NineTowerScoreCellExt;
@@ -35,6 +38,7 @@ package com.rpgGame.appModule.battle.jcyt
 			_myRank.y=408;
 			this.addChild(_myRank);
 			
+			this.dragAble=false;
 		}
 		override protected function onShow():void
 		{
@@ -49,12 +53,28 @@ package com.rpgGame.appModule.battle.jcyt
 		}
 		private function onTimer():void
 		{
-			
+			Mgr.nineTowerMgr.reqTowerScore();
 		}
 		private function onGetRankData(...arg):void
 		{
 			// TODO Auto Generated method stub
-			
+			var data:SCYaoTaIntegralMessage=arg[0];
+			var len:int=data.yaoTaInfo.length;
+			var cell:NineTowerScoreCellExt;
+			for (var i:int = 0; i < 10; i++) 
+			{
+				cell=_cellList[i];
+				if (i<len) 
+				{
+					cell.setData(data.yaoTaInfo[i]);
+					cell.visible=true;
+				}
+				else
+				{
+					cell.visible=false;
+				}
+			}
+			_myRank.setData(data.myYaoTaInfo);
 		}
 		override protected function onHide():void
 		{
@@ -65,6 +85,17 @@ package com.rpgGame.appModule.battle.jcyt
 				_timer.destroy();
 				_timer=null;
 			}
+		}
+		override protected function onStageResize(sw:int, sh:int):void
+		{
+			//var track:NineTowerTrackUIExt=Mgr.nineTowerMgr.track;
+			var tw:int=260;
+			//if (track) 
+			{
+			//	tw=track.width;
+			}
+			this.x=sw-tw-this.width-4;
+			this.y=sh/2-this.height/2;
 		}
 	}
 }

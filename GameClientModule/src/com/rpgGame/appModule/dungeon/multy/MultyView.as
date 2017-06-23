@@ -593,10 +593,6 @@ package com.rpgGame.appModule.dungeon.multy
 			{
 				GrayFilter.unGray(allRewardIcon[i]);
 			}
-			for(i=0;i<allRewardIcon.length;i++)
-			{
-				GrayFilter.unGray(allRewardIcon[i]);
-			}
 			if(DungeonManager.isReward)
 			{
 				DungeonManager.isReward=false;

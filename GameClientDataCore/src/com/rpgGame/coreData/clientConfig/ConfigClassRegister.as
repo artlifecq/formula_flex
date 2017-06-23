@@ -125,9 +125,9 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_fightsoul_path:String = "data.Q_fightsoul_path";
 		/**  全局变量表		 */
 		public static const Q_global:String = "data.Q_global";
-		/**   										 */
+		/**   											 */
 		public static const Q_guild:String = "data.Q_guild";
-		/**  															 */
+		/**  																 */
 		public static const Q_guild_permission:String = "data.Q_guild_permission";
 		/**  帮派技能表					 */
 		public static const Q_guildskill:String = "data.Q_guildskill";
@@ -165,7 +165,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_mission_segment:String = "data.Q_mission_segment";
 		/**  功能开放表														 */
 		public static const Q_newfunc:String = "data.Q_newfunc";
-		/**  九层妖塔							 */
+		/**  九层妖塔									 */
 		public static const Q_nine_tower:String = "data.Q_nine_tower";
 		/**  通知列表			 */
 		public static const Q_notify:String = "data.Q_notify";
@@ -173,9 +173,11 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_relation:String = "data.Q_relation";
 		/**  16商城道具配置表													 */
 		public static const Q_shop:String = "data.Q_shop";
+		/**  城池基础表										 */
+		public static const Q_singlecitybase:String = "data.Q_singlecitybase";
 		/**  购买界面其他途径提示数据库				 */
 		public static const Q_source:String = "data.Q_source";
-		/**  活动配置表																										 */
+		/**  活动配置表																												 */
 		public static const Q_special_activities:String = "data.Q_special_activities";
 		/**  tipsid	标题	描述 */
 		public static const Q_tipsinfo:String = "data.Q_tipsinfo";
@@ -305,6 +307,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_notify", com.rpgGame.coreData.clientConfig.Q_notify);
 			regClass("data.Q_relation", com.rpgGame.coreData.clientConfig.Q_relation);
 			regClass("data.Q_shop", com.rpgGame.coreData.clientConfig.Q_shop);
+			regClass("data.Q_singlecitybase", com.rpgGame.coreData.clientConfig.Q_singlecitybase);
 			regClass("data.Q_source", com.rpgGame.coreData.clientConfig.Q_source);
 			regClass("data.Q_special_activities", com.rpgGame.coreData.clientConfig.Q_special_activities);
 			regClass("data.Q_tipsinfo", com.rpgGame.coreData.clientConfig.Q_tipsinfo);

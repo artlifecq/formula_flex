@@ -70,7 +70,7 @@ package org.mokylin.skin.app.zhanchang
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.textAlign = "center";
 			temp.width = 111;
-			temp.x = 152;
+			temp.x = 147;
 			temp.y = 136;
 			return temp;
 		}
@@ -95,7 +95,7 @@ package org.mokylin.skin.app.zhanchang
 			temp.text = "正在匹配中...";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 160;
+			temp.x = 148;
 			temp.y = 108;
 			return temp;
 		}
@@ -109,8 +109,9 @@ package org.mokylin.skin.app.zhanchang
 			temp.height = 60;
 			temp.label = "60";
 			temp.styleClass = org.mokylin.skin.app.zhanchang.uinumber.UINumberNumkuafu;
+			temp.textAlign = "center";
 			temp.width = 102;
-			temp.x = 158;
+			temp.x = 151.5;
 			temp.y = 45;
 			return temp;
 		}

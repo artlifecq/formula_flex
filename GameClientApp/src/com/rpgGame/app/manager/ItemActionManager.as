@@ -89,7 +89,6 @@ package com.rpgGame.app.manager
 		
 		public static function tweenMode(startPos:Point,onCmpFun:Function = null,time:Number = 1):void
 		{
-			
 			startPos = LayerManager.stageCenterPoint.add(startPos);
 			var content:Inter3DContainer = new Inter3DContainer();
 			content.x=startPos.x;

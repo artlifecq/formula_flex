@@ -26,6 +26,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_center_y:int;
 		 /**  刷新半径（格子数量） */
 		public var q_radius:int;
+		 /**  npc闲话 */
+		public var q_speak:String;
 		 /**  重生时间脱离怪物数据库控制变更为：0本规则不启用， >0则为变更后的重生时间，单位：秒 */
 		public var q_relive:int;
 		 /**  攻击类型脱离怪物数据库控制变更为：0本规则不启用，1变更为被动攻击类怪物，2变更为主动攻击类怪物 */

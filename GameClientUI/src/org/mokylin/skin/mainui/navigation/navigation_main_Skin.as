@@ -1,6 +1,7 @@
 package org.mokylin.skin.mainui.navigation
 {
 	import feathers.controls.Button;
+	import feathers.controls.Group;
 	import feathers.controls.StateSkin;
 	import org.mokylin.skin.component.button.ButtonSkin_shouhui;
 	import org.mokylin.skin.component.button.ButtonSkin_zhankai;
@@ -19,6 +20,8 @@ package org.mokylin.skin.mainui.navigation
 
 		public var btn_open:feathers.controls.Button;
 
+		public var btns:feathers.controls.Group;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -28,9 +31,9 @@ package org.mokylin.skin.mainui.navigation
 			super();
 			
 			this.currentState = "normal";
-			this.height = 70;
+			this.height = 112;
 			this.width = 20;
-			this.elementsContent = [btn_close_i(),btn_open_i()];
+			this.elementsContent = [btns_i(),btn_close_i(),btn_open_i()];
 			
 			states = {
 			};
@@ -48,7 +51,7 @@ package org.mokylin.skin.mainui.navigation
 			temp.name = "btn_close";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_shouhui;
 			temp.x = 0;
-			temp.y = 23;
+			temp.y = 67;
 			return temp;
 		}
 
@@ -59,7 +62,17 @@ package org.mokylin.skin.mainui.navigation
 			temp.name = "btn_open";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_zhankai;
 			temp.x = 0;
-			temp.y = 23;
+			temp.y = 67;
+			return temp;
+		}
+
+		private function btns_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			btns = temp;
+			temp.name = "btns";
+			temp.x = 0;
+			temp.y = 44;
 			return temp;
 		}
 

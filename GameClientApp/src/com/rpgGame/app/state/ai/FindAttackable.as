@@ -13,6 +13,7 @@ package com.rpgGame.app.state.ai
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
 	import com.rpgGame.core.state.ai.AIState;
+	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.AIStateType;
 	import com.rpgGame.coreData.type.RoleStateType;
@@ -65,23 +66,33 @@ package com.rpgGame.app.state.ai
 		private function findAttackableTarget() : SceneRole
 		{
 			var role:SceneRole;
-			role=findNearestMonster(TaskAutoManager.getInstance().isTaskRunning);
+			role=findNearestPlayer();//先搜寻可攻击玩家
+			if(role==null&&TaskAutoManager.getInstance().isTaskRunning)//任务中先搜寻任务怪
+			{
+				role=findNearestTaskMonster();
+			}
+			if(role==null)//再搜寻怪物
+			{
+				role=findNearestMonster();
+			}
 			return role;
 		}
 		private var currDist:int;
-		private function findNearestMonster(istask:Boolean=false) : SceneRole
+		/**搜寻视野中可攻击最近的玩家*/
+		private function findNearestPlayer() : SceneRole
 		{
-			var roleList : Array = SceneManager.getScene().getSceneObjsByType(SceneCharType.MONSTER);
+			var roleList : Array = SceneManager.getScene().getSceneObjsByType(SceneCharType.PLAYER);
 			var rerlle:SceneRole;
 			currDist=int.MAX_VALUE;
 			while (roleList.length)
 			{
 				var role : SceneRole = roleList.shift();
-				var monsterData : MonsterData = role.data as MonsterData;
-				if (role &&monsterData&& role.usable && monsterData.monsterData.q_monster_type>=1&&monsterData.monsterData.q_monster_type<=3&& !role.stateMachine.isDeadState)//if (role && role.usable && role.isInViewDistance && !role.stateMachine.isDeadState)
+				var heroData : HeroData = role.data as HeroData;
+				var modeState : int = FightManager.getFightRoleState(role);
+				if (role &&heroData&& role.usable &&!role.stateMachine.isDeadState&&modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY ||modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND)//if (role && role.usable && role.isInViewDistance && !role.stateMachine.isDeadState)
 				{
 					var dist:int = Point.distance(new Point(MainRoleManager.actor.x,MainRoleManager.actor.z),new Point(role.x,role.z));
-					var max:int=int.MAX_VALUE
+					var max:int;
 					if(TrusteeshipManager.getInstance().findDist>0)
 					{
 						max=TrusteeshipManager.getInstance().findDist*50;
@@ -92,31 +103,80 @@ package com.rpgGame.app.state.ai
 					}
 					if(dist<=max&&dist<currDist)
 					{
-						var modeState : int = FightManager.getFightRoleState(role);
-						if (modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY ||modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND)
-						{
-							if(istask)
-							{
-								if(TaskMissionManager.isMainTaskMonster(monsterData.modelID))
-								{
-									rerlle= role;
-									currDist=dist;
-								}
-							}
-							else
-							{
-								rerlle= role;
-								currDist=dist;
-							}
-						}
+						rerlle= role;
+						currDist=dist;
 					}
 					
 					
 				}
 			}
-			if(rerlle==null&&istask)
+			return rerlle;
+		}
+		/**搜寻视野中可攻击最近的任务怪物*/
+		private function findNearestTaskMonster() : SceneRole
+		{
+			var roleList : Array = SceneManager.getScene().getSceneObjsByType(SceneCharType.MONSTER);
+			var rerlle:SceneRole;
+			currDist=int.MAX_VALUE;
+			while (roleList.length)
+			{
+				var role : SceneRole = roleList.shift();
+				var monsterData : MonsterData = role.data as MonsterData;
+				var modeState : int = FightManager.getFightRoleState(role);
+				if (role &&monsterData&& role.usable &&TaskMissionManager.isMainTaskMonster(monsterData.modelID)&& monsterData.monsterData.q_monster_type>=1&&monsterData.monsterData.q_monster_type<=3&& !role.stateMachine.isDeadState&&modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY ||modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND)//if (role && role.usable && role.isInViewDistance && !role.stateMachine.isDeadState)
+				{
+					var dist:int = Point.distance(new Point(MainRoleManager.actor.x,MainRoleManager.actor.z),new Point(role.x,role.z));
+					var max:int;
+					if(TrusteeshipManager.getInstance().findDist>0)
+					{
+						max=TrusteeshipManager.getInstance().findDist*50;
+					}
+					else
+					{
+						max=int(SystemSetManager.getinstance().getValueByIndex(SystemSetManager.SYSTEMSET_HOOK_TYPE)*50);
+					}
+					if(dist<=max&&dist<currDist)
+					{
+						rerlle= role;
+						currDist=dist;
+					}
+				}
+			}
+			/*if(rerlle==null&&istask)
 			{
 				rerlle=findNearestMonster(false);
+			}*/
+			return rerlle;
+		}
+		/**搜寻视野中可攻击最近的怪物*/
+		private function findNearestMonster() : SceneRole
+		{
+			var roleList : Array = SceneManager.getScene().getSceneObjsByType(SceneCharType.MONSTER);
+			var rerlle:SceneRole;
+			currDist=int.MAX_VALUE;
+			while (roleList.length)
+			{
+				var role : SceneRole = roleList.shift();
+				var monsterData : MonsterData = role.data as MonsterData;
+				var modeState : int = FightManager.getFightRoleState(role);
+				if (role &&monsterData&& role.usable && monsterData.monsterData.q_monster_type>=1&&monsterData.monsterData.q_monster_type<=3&& !role.stateMachine.isDeadState&&modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY ||modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND)//if (role && role.usable && role.isInViewDistance && !role.stateMachine.isDeadState)
+				{
+					var dist:int = Point.distance(new Point(MainRoleManager.actor.x,MainRoleManager.actor.z),new Point(role.x,role.z));
+					var max:int;
+					if(TrusteeshipManager.getInstance().findDist>0)
+					{
+						max=TrusteeshipManager.getInstance().findDist*50;
+					}
+					else
+					{
+						max=int(SystemSetManager.getinstance().getValueByIndex(SystemSetManager.SYSTEMSET_HOOK_TYPE)*50);
+					}
+					if(dist<=max&&dist<currDist)
+					{
+						rerlle= role;
+						currDist=dist;
+					}
+				}
 			}
 			return rerlle;
 		}

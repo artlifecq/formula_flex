@@ -4,7 +4,6 @@ package org.mokylin.skin.app.zhanhun
 	import feathers.controls.Button;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
-	import feathers.controls.UIAsset;
 	import org.mokylin.skin.app.zhanhun.Zhanhun_ItemBtn;
 	import org.mokylin.skin.component.button.ButtonSkin_send;
 

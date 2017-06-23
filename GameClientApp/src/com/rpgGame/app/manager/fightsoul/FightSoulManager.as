@@ -62,7 +62,8 @@ package com.rpgGame.app.manager.fightsoul
 				fightSoulLevel = (owner.data as HeroData).fightSoulLevel;
 				var model:Q_fightsoul_mode = FightsoulModeData.getModeInfoById(fightSoulLevel);
 				fightSoulRole.data.avatarInfo.setBodyResID("pc/fightsoul/"+model.q_mode,null);
-				fightSoulRole.data.avatarInfo.bodyEffectID2 = model.q_effect;
+				fightSoulRole.data.avatarInfo.bodyEffectID = model.q_effect;
+				fightSoulRole.data.avatarInfo.bodyEffectID2 = model.q_effect1;
 				AvatarManager.updateAvatar(fightSoulRole);
 				var fightSoulFollowAnimator:FightSoulFollowAnimator = new FightSoulFollowAnimator(fightSoulRole);
 				fightSoulFollowAnimator.radius = model.q_radius;
@@ -155,19 +156,21 @@ package com.rpgGame.app.manager.fightsoul
 			return FightsoulData.getInfobyId(_fightSoulInfo.curModelLv);
 		}
 		
-		public function FightSoulLevelUp():void
+		public function FightSoulLevelUp():Boolean
 		{
 			if(fightSoulInfo.level == 130)
 			{
 				NoticeManager.showNotifyById(4002);
-				return ;
+				return false;
 			}
 			if(fightSoulInfo.exp<currentLeveldata.q_exp)
 			{
 				NoticeManager.showNotifyById(4003);
-				return ;
+				return false;
 			}
 			SocketConnection.send(new CSFightSoulLevelUpMessage());
+			
+			return true;
 		}
 		
 		public function chageModeLevel(level:int):void

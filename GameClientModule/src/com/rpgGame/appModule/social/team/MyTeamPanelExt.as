@@ -13,10 +13,13 @@ package com.rpgGame.appModule.social.team
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.GameColorUtil;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.utils.FilterUtil;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.team.bean.TeamInfo;
 	import com.rpgGame.netData.team.bean.TeamMemberInfo;
+	
+	import away3d.events.Event;
 	
 	import feathers.controls.Check;
 	
@@ -25,8 +28,6 @@ package com.rpgGame.appModule.social.team
 	import gs.easing.Circ;
 	
 	import org.mokylin.skin.app.shejiao.zudui.Duiwu_usSkin;
-	
-	import away3d.events.Event;
 
 	
 	public class MyTeamPanelExt extends SkinUI
@@ -58,9 +59,12 @@ package com.rpgGame.appModule.social.team
 			
 			_skin.chk_accept_apply.addEventListener(Event.TRIGGERED,OnStateButton);
 			_skin.chk_accept_invite.addEventListener(Event.TRIGGERED,OnStateButton);
-			var str:String="组队经验加成:<br>";
-			str+=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,"每多组一个队员，怪物经验总量将会上升5%<br>");
-			str+=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_YELLOW,"当前上升$%/20%");
+//			var str:String="组队经验加成:<br>";
+//			str+=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,"每多组一个队员，怪物经验总量将会上升5%<br>");
+//			str+=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_YELLOW,"当前上升$%/20%");
+			var str:String=NotifyCfgData.getNotifyTextByID(61011);
+			str+=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,NotifyCfgData.getNotifyTextByID(61012));
+			str+=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_YELLOW,NotifyCfgData.getNotifyTextByID(61013));
 			
 			TipTargetManager.show(_skin.grp_jingyan,TargetTipsMaker.makeSimplePropChangeTextTips(str,null,getTipValue));
 		}
@@ -249,7 +253,7 @@ package com.rpgGame.appModule.social.team
 			if(!isAutoAccept)
 			{
 				_skin.chk_accept_invite.isEnabled = false;
-				TipTargetManager.show(_skin.chk_accept_invite,TargetTipsMaker.makeSimpleTextTips(HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,"您在设置面板中勾选了“拒绝组队邀请”")));
+				TipTargetManager.show(_skin.chk_accept_invite,TargetTipsMaker.makeSimpleTextTips(HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,NotifyCfgData.getNotifyTextByID(61014))));
 			}else
 			{
 				_skin.chk_accept_invite.isEnabled = true;

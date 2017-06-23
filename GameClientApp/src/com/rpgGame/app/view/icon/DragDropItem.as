@@ -2,6 +2,7 @@ package com.rpgGame.app.view.icon
 {
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
+	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
 	
@@ -27,7 +28,19 @@ package com.rpgGame.app.view.icon
 			_realIndex = realIndex;
 			this.touchGroup = false;
 		}
-		
+		override protected function calIconPos():void
+		{
+			switch(_iconSize){
+				case IcoSizeEnum.ICON_36:
+				case IcoSizeEnum.ICON_48:
+				case IcoSizeEnum.ICON_64:
+					_iconPositionX=_iconPositionY=6;
+					break;
+				case IcoSizeEnum.ICON_42:
+					_iconPositionX=_iconPositionY=2;
+					break;
+			}
+		}
 		/**
 		 * 真实的下标(显示对象集合中),只读
 		 */		

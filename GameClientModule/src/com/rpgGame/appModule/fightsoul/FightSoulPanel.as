@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.fightsoul
 {
 	import com.game.engine3D.display.Inter3DContainer;
+	import com.game.engine3D.display.InterObject3D;
 	import com.rpgGame.app.manager.fightsoul.FightSoulManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
@@ -11,6 +12,7 @@ package com.rpgGame.appModule.fightsoul
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.FightsoulData;
 	import com.rpgGame.coreData.cfg.FightsoulPathData;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
@@ -20,10 +22,13 @@ package com.rpgGame.appModule.fightsoul
 	import com.rpgGame.coreData.clientConfig.Q_fightsoul_path;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.lang.LangUI_2;
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.type.item.GridBGType;
 	import com.rpgGame.netData.fightsoul.bean.FightSoulInfo;
+	
+	import away3d.events.Event;
 	
 	import feathers.data.ListCollection;
 	import feathers.events.FeathersEventType;
@@ -35,7 +40,6 @@ package com.rpgGame.appModule.fightsoul
 	import org.mokylin.skin.app.zhanhun.Zhanhun_Skin;
 	
 	import starling.display.DisplayObjectContainer;
-	import away3d.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchPhase;
 	
@@ -65,7 +69,7 @@ package com.rpgGame.appModule.fightsoul
 			initData();
 			initEvent();
 			initView();
-			
+			haveRewardEffect();
 		}
 		private function initData():void
 		{
@@ -127,11 +131,39 @@ package com.rpgGame.appModule.fightsoul
 					_itemIconLists[index].target.filter = null;
 			}
 		}
-		
+		private var _bigEffect:InterObject3D
 		private function uptriggeredHandler(e:Event):void
 		{
-			FightSoulManager.instance().FightSoulLevelUp();
+			if(!FightSoulManager.instance().FightSoulLevelUp())
+			{
+				if(_bigEffect==null)
+					_bigEffect=this.playInter3DAt(ClientConfig.getEffect("ui_zhanhun_da"),-20,-15,1,completeHandle);
+			}
 		}
+		private function completeHandle(sr3D : InterObject3D):void
+		{
+			_bigEffect = null;
+		}
+		
+		private function haveRewardEffect():void
+		{
+			var rewards:Vector.<ClientItemInfo> = FightSoulManager.instance().RewardInfos;
+			var length:int = rewards.length;
+			var bool:Boolean = false;
+			for(var i:int = 0;i<length;i++)
+			{
+				if(FightSoulManager.instance().isGetReward(i))
+					continue;
+				if(int(rewards[i].itemInfo.parameters)<=FightSoulManager.instance().fightSoulInfo.vitality)
+				{
+					bool = true;
+					break;
+				}
+			}
+			if(bool&&_bigEffect==null)
+				_bigEffect=this.playInter3DAt(ClientConfig.getEffect("ui_zhanhun_xiao"),-23,-12,1,completeHandle);
+		}
+		
 		private function buttonTouchHandler(event:Event):void
 		{
 			var bool:Boolean = false;
@@ -144,8 +176,7 @@ package com.rpgGame.appModule.fightsoul
 			{
 				view.showUpLevelView(bool);
 			}
-			_skin.arrow_up.visible = bool;
-			_skin.lab_poweradd.visible = bool;
+			_skin.num_lv.visible = bool;
 		}
 		
 		private function huanhuaTriggeredHandler(e:Event):void
@@ -190,8 +221,7 @@ package com.rpgGame.appModule.fightsoul
 			refeashQualityView();
 			refeahLevelView();
 			refeashVitality();
-			_skin.arrow_up.visible = false;
-			_skin.lab_poweradd.visible = false;
+			_skin.num_lv.visible = false;
 			_skin.List.itemRendererType = FightSoulActityCell;
 			var layout:VerticalLayout = new VerticalLayout();
 			layout.gap = 5;
@@ -259,14 +289,14 @@ package com.rpgGame.appModule.fightsoul
 			var nextShet:Q_fightsoul = FightsoulData.getInfobyId(fightSoulInfo.level+1);
 			var job:int = MainRoleManager.actorInfo.job;
 			var currentPower:int = FightValueUtil.calFightPowerByAttValue(currentatt,job);
-			_skin.Num_zhandouli.number = currentPower;
+			_skin.NumZhanli.number = currentPower;
 			if(nextShet!=null)
 			{
 				nextatt = AttValueConfig.getAttInfoById(nextShet.q_baseAtt_id);
 				var nextPower:int = FightValueUtil.calFightPowerByAttValue(nextatt,job);
-				_skin.lab_poweradd.text = (nextPower-currentPower).toString();
+				_skin.num_lv.label = "+"+(nextPower-currentPower).toString();
 			}else{
-				_skin.lab_poweradd.text = "0";
+				_skin.num_lv.label = "+0";
 			}
 			
 			
@@ -323,7 +353,7 @@ package com.rpgGame.appModule.fightsoul
 				_skin.lb_time.visible = false;
 				_skin.Num_dengji.visible = false;
 			}
-			_skin.mc_name.gotoAndStop(cshowshet.q_mode);
+			_skin.zhanhunName.styleName = "ui/app/zhanhun/modename/"+cshowshet.q_mode+".png";
 			_fightsoul.setModeLevel(cshowshet.q_mode);
 		}
 		
