@@ -111,10 +111,10 @@ package com.rpgGame.app.view.icon
 			_iconSize = _iconSize <= 0 ? IcoSizeEnum.SIZE_46 : _iconSize;
 			switch(_iconSize){
 				case IcoSizeEnum.ICON_64:
-					_iconPositionX=_iconPositionY=7;
+					_iconPositionX=_iconPositionY=4;
 					break;
 				case IcoSizeEnum.ICON_48:
-					_iconPositionX=_iconPositionY=6;
+					_iconPositionX=_iconPositionY=4;
 					break;
 			}
 			this.width = _iconSize;

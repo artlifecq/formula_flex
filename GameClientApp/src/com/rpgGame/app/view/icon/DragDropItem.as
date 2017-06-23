@@ -37,7 +37,7 @@ package com.rpgGame.app.view.icon
 					_iconPositionX=_iconPositionY=6;
 					break;
 				case IcoSizeEnum.ICON_42:
-					_iconPositionX=_iconPositionY=1;
+					_iconPositionX=_iconPositionY=2;
 					break;
 			}
 		}

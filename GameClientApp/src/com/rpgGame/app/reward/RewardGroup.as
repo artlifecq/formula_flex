@@ -26,14 +26,14 @@ package  com.rpgGame.app.reward
 		public static const ALIN_RIGHT:int=2;
 		
 		private static const S2W:Object={};
-		S2W[36]=45;
-		S2W[42]=51;
+		S2W[36]=44;
+		S2W[42]=50;
 		S2W[48]=56;
 		S2W[64]=72;
 		
 		private static const W2S:Object={};
-		W2S[45]=36;
-		W2S[51]=42;
+		W2S[44]=36;
+		W2S[50]=42;
 		W2S[56]=48;
 		W2S[72]=64;
 		public static function size2Width(size:int):int
@@ -67,6 +67,7 @@ package  com.rpgGame.app.reward
 		private var initH:int;
 		private var _data:Vector.<ClientItemInfo>;
 		private var _needTips:Boolean;
+		private var _iconSize:int;
 		/**
 		 * 
 		 * @param g 起始格子背景
@@ -77,9 +78,10 @@ package  com.rpgGame.app.reward
 		 * @param needTip
 		 * 
 		 */		
-		public function RewardGroup(g:UIAsset,ali:int=ALIN_LEFT,cellNum:int=9,dx:int=2,dy:int=2,needTip:Boolean=true)
+		public function RewardGroup(size:int,g:UIAsset,ali:int=ALIN_LEFT,cellNum:int=9,dx:int=2,dy:int=2,needTip:Boolean=true)
 		{
 			super();
+			_iconSize=size;
 			this.grid=g;
 			this.alin=ali;
 			this.initW=g.width;
@@ -266,12 +268,8 @@ package  com.rpgGame.app.reward
 			var icon:IconCDFace;
 			var bg:UIAsset=MCUtil.cloneUIAssert(grid);
 			bg.touchGroup=false;
-			var size:int=W2S[bg.width];
-			if (size==0) 
-			{
-				size=IcoSizeEnum.ICON_36;
-			}
-			icon=IconCDFace.create(size);
+			
+			icon=IconCDFace.create(_iconSize);
 			bg.addChild(icon);
 			//设置图片的时候有设置
 			//if (IcoSizeEnum.ICON_36==size||IcoSizeEnum.ICON_42==size) 

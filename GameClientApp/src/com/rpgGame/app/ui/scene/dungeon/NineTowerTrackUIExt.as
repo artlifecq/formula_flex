@@ -13,6 +13,7 @@ package com.rpgGame.app.ui.scene.dungeon
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.NineTowerCfg;
 	import com.rpgGame.coreData.clientConfig.Q_nine_tower;
+	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.yaota.message.SCUpdateYaoTaMessage;
@@ -45,7 +46,7 @@ package com.rpgGame.app.ui.scene.dungeon
 			_skin=new JiuCengYaoTaTrack_Skin();
 			super(_skin);
 			
-			_gReward=new RewardGroup(_skin.sec_ico1_0);
+			_gReward=new RewardGroup(IcoSizeEnum.ICON_48,_skin.sec_ico1_0);
 			
 			_timer=new GameTimer("NineTowerTrackUIExt",1000);
 			_timer.onUpdate=onTimer;
