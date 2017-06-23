@@ -668,6 +668,7 @@ package com.rpgGame.netData{
 	import com.rpgGame.netData.team.handler.ResTeamInfoHandler;
 	import com.rpgGame.netData.team.handler.ResTeamSynMemberinfoClientHandler;
 	import com.rpgGame.netData.team.handler.ResTeamSynPosClientHandler;
+	import com.rpgGame.netData.team.handler.SCHaveTeamHandler;
 	import com.rpgGame.netData.team.handler.SCZoneTeamVoteResultHandler;
 	import com.rpgGame.netData.team.message.ResApplyClientMessage;
 	import com.rpgGame.netData.team.message.ResAppointClientMessage;
@@ -681,6 +682,7 @@ package com.rpgGame.netData{
 	import com.rpgGame.netData.team.message.ResTeamInfoMessage;
 	import com.rpgGame.netData.team.message.ResTeamSynMemberinfoClientMessage;
 	import com.rpgGame.netData.team.message.ResTeamSynPosClientMessage;
+	import com.rpgGame.netData.team.message.SCHaveTeamMessage;
 	import com.rpgGame.netData.team.message.SCZoneTeamVoteResultMessage;
 	import com.rpgGame.netData.top.handler.ResListLeaderToClientHandler;
 	import com.rpgGame.netData.top.handler.ResRankRewardHandler;
@@ -999,6 +1001,7 @@ package com.rpgGame.netData{
 			register(109115, ResSetTeamOptionsClientMessage, ResSetTeamOptionsClientHandler);
 			register(109116, ResGenericSearchToClientMessage, ResGenericSearchToClientHandler);
 			register(109117, SCZoneTeamVoteResultMessage, SCZoneTeamVoteResultHandler);
+			register(109118, SCHaveTeamMessage, SCHaveTeamHandler);
 			register(111101, ResGuildInfoMessage, ResGuildInfoHandler);
 			register(111102, ResGuildBriefnessInfoMessage, ResGuildBriefnessInfoHandler);
 			register(111103, ResGuildListInfoMessage, ResGuildListInfoHandler);
