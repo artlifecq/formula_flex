@@ -54,6 +54,8 @@ package
 		private var _clientVersion : String = null;
 		/** loader版本号*/
 		private var _loaderVersion : String = "";
+        /** 资源版本号*/
+        private var _resourceVersion : String = null;
         /** 是否是正式版*/
 		private var _isRelease : Boolean = false;
         /** 是否稳定版本*/
@@ -148,6 +150,9 @@ package
                 if (_urlParmar["loaderVersion"]) {
                     _loaderVersion = _urlParmar["loaderVersion"];
                 }
+                if (_urlParmar["resourceVersion"]) {
+                    _resourceVersion = _urlParmar["resourceVersion"];
+                }
                 if (_urlParmar["isDebug"]) {
                     _isRelease = _urlParmar["isDebug"] != "true";
                 }
@@ -192,7 +197,7 @@ package
 			//initMenu();
 
 			showLoadingUI();
-			if (_clientVersion)
+			if (_resourceVersion)
 			{
 				_useVersion = true;
 				loadVersion();
@@ -254,7 +259,7 @@ package
 			loadingStream.addEventListener(IOErrorEvent.IO_ERROR, onVersionIoError);
 			loadingStream.addEventListener(ProgressEvent.PROGRESS, onFirstLoadingPrg);
 			//
-			var url : String = _versionPath.replace("#", _clientVersion);
+			var url : String = _versionPath.replace("#", _resourceVersion);
 			url = _baseDir + url;
 			loadingStream.load(new URLRequest(url));
 		}
