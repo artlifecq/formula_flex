@@ -45,7 +45,7 @@ package com.rpgGame.coreData.enum.item
 		 */
 		public static const ICON_48:int=48;
 		/**
-		 *60icon 
+		 *64icon 
 		 */
 		public static const ICON_64:int=64;
 		
