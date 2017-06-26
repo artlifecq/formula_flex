@@ -65,6 +65,10 @@ package com.rpgGame.app.fight.spell
 		}
 		public static function releaseSpellPlay(spellInfo : ReleaseSpellInfo) : void
 		{
+			if(spellInfo.spellData.q_skillID==7000)
+			{
+				
+			}
 			/** 施法者 **/
 			var ref : AttackStateReference = null;
 			if (spellInfo.atkor && spellInfo.atkor.usable)
@@ -94,7 +98,10 @@ package com.rpgGame.app.fight.spell
 					ref.onStartFrame(onSelfEffectFrame);
 					ref.onHitFrame(onAttackHitFrame);
 //					ref.onBreakFrame(onBreakFrame);
-					spellInfo.atkor.stateMachine.transition(RoleStateType.ACTION_ATTACK, ref);
+					if(spellInfo.spellData&&spellInfo.spellData.q_performType==0)//判断不是战魂的技能  才变成攻击状态---yt
+					{
+						spellInfo.atkor.stateMachine.transition(RoleStateType.ACTION_ATTACK, ref);
+					}
 				}
 				else
 				{
