@@ -24,6 +24,7 @@ package com.rpgGame.app.ui.tab
 		protected var _data:*;
 		protected var _allDatas:Vector.<UITabBarData>;//所有的tab数据
 		protected var _currentKey:String;
+		protected var _currentIndex:int;
 		protected var _needRefash:Boolean = true;
 		/**
 		 * 
@@ -99,7 +100,10 @@ package com.rpgGame.app.ui.tab
 				index = 0;
 				key = getTabkeyByIndex(index);
 			}
+			if(_currentKey == key && _currentIndex == index)
+				return ;
 			_currentKey = key;
+			_currentIndex = index;
 			_tabBar.selectedIndex=index;
 			selectChangeHandler();
 		}
