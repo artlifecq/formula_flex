@@ -59,10 +59,10 @@ package  com.rpgGame.app.reward
 		
 		private var grid:UIAsset;
 		
-		private var icons:Vector.<Object>=new Vector.<Object>();
+		private var icons:Vector.<IconCDFace>=new Vector.<IconCDFace>();
 		
 		
-		private var pool:Vector.<Object>=new Vector.<Object>();
+		
 		private var initW:int;
 		private var initH:int;
 		private var _data:Vector.<ClientItemInfo>;
@@ -103,12 +103,12 @@ package  com.rpgGame.app.reward
 			clear();
 			_data=items;
 			var len:int=items.length;
-			var obj:Object;
+			var obj:IconCDFace;
 			for (var i:int = 0; i < len; i++) 
 			{
 				obj=getIcon();
 				icons.push(obj);
-				FaceUtil.SetItemGrid(obj.icon,items[i],_needTips);
+				FaceUtil.SetItemGrid(obj,items[i],_needTips);
 			}
 			layout();
 		}
@@ -183,7 +183,7 @@ package  com.rpgGame.app.reward
 			var dis:DisplayObject;
 			for (var i:int = 0; i < len; i++) 
 			{
-				dis=icons[i].bg;
+				dis=icons[i];
 				tmpX=(i%cellMaxNum)*(initW+dX);
 				tmpY=int(i/cellMaxNum)*(initH+dY);	
 				
@@ -251,26 +251,25 @@ package  com.rpgGame.app.reward
 		}
 		public function clear():void
 		{
-			for each (var icon:Object in icons) 
+			for each (var icon:IconCDFace in icons) 
 			{
-				icon.icon.clear();
-				MCUtil.removeSelf(icon.bg);
-				pool.push(icon);
+				icon.destroy();
 			}
 			icons.length=0;
 		}
-		private function getIcon():Object
+		private function getIcon():IconCDFace
 		{
-			if (pool.length>0) 
-			{
-				return pool.pop();
-			}
+//			if (pool.length>0) 
+//			{
+//				return pool.pop();
+//			}
 			var icon:IconCDFace;
-			var bg:UIAsset=MCUtil.cloneUIAssert(grid);
-			bg.touchGroup=false;
+//			var bg:UIAsset=MCUtil.cloneUIAssert(grid);
+//			bg.touchGroup=false;
 			
 			icon=IconCDFace.create(_iconSize);
-			bg.addChild(icon);
+			icon.setUrlBg(grid.styleName);
+		//	bg.addChild(icon);
 			//设置图片的时候有设置
 			//if (IcoSizeEnum.ICON_36==size||IcoSizeEnum.ICON_42==size) 
 //			{
@@ -279,10 +278,10 @@ package  com.rpgGame.app.reward
 //			}
 
 			
-			var obj:Object={};
-			obj.bg=bg;
-			obj.icon=icon;
-			return obj;
+//			var obj:Object={};
+//			obj.bg=bg;
+		//	obj.icon=icon;
+			return icon;
 		}
 
 		public function get data():Vector.<ClientItemInfo>
