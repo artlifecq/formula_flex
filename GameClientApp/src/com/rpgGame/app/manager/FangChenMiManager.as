@@ -24,6 +24,8 @@ package com.rpgGame.app.manager
 		
 		private static var _fangChenMiInfoTimer : GameTimer = null;
 		
+		private static var _fangchenmiPanel:FangChenMiPanelExt;
+		
 		public function FangChenMiManager()
 		{
 		}
@@ -74,8 +76,12 @@ package com.rpgGame.app.manager
 		
 		private static function showChenMi(msg : String) : void
 		{
-			FangChenMiPanelExt.showFangChenMiUtil(msg);
-			//			GameAlert.showAlertUtil(msg,showChenMiClick);
+			if(_fangchenmiPanel&&_fangchenmiPanel.stage!=null)
+			{
+				_fangchenmiPanel.updateText(msg);
+			}
+			else
+				_fangchenmiPanel = FangChenMiPanelExt.showFangChenMiUtil(msg);
 			NoticeManager.chatSystemNotify(msg);
 		}
 		

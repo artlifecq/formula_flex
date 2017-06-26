@@ -29,6 +29,9 @@ package com.rpgGame.coreData.cfg.model
 
 		public static function getInfo(id : int) : AvatarClothesRes
 		{
+			if(!_map){
+				return null;
+			}
 			return _map.getValue(id);
 		}
 

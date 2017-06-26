@@ -258,6 +258,7 @@ package com.rpgGame.app.manager.fight
 				var result:uint=type&hurtType;
 				if(result!=0||hurtType==0)
 				{
+					//type=EnumHurtType.SPELL_ZHANHUN;
 					switch (type)
 					{
 						case EnumHurtType.SPELL_HURT_TYPE_REBOUND:

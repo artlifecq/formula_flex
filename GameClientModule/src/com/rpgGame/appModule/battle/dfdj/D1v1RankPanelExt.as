@@ -14,6 +14,7 @@ package com.rpgGame.appModule.battle.dfdj
 	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.coreData.cfg.BattleRankCfg;
 	import com.rpgGame.coreData.clientConfig.Q_battle_rank;
+	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.netData.dianfeng.bean.DianFengDataInfo;
 	import com.rpgGame.netData.dianfeng.bean.DianFengRankInfo;
@@ -45,7 +46,7 @@ package com.rpgGame.appModule.battle.dfdj
 			var skinF:Flip3_Skin=_skin.skinFlip.skin as Flip3_Skin;
 			_numCtrl=new D1v1RankPageSelectCtrl(skinF.btnAdd,skinF.btnDec,skinF.btnMax,skinF.btnMin,skinF.textDisplay,1,1,onPageChange);
 			_numCtrl.needSpeed=false;
-			_gReward=new RewardGroup(_skin.icon2);
+			_gReward=new RewardGroup(IcoSizeEnum.ICON_36,_skin.icon2);
 			initList();
 		}
 		private function initList():void

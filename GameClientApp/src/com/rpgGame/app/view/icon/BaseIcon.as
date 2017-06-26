@@ -15,6 +15,17 @@ package com.rpgGame.app.view.icon
 	 */
 	public class BaseIcon extends UIAsset implements IInstancePoolClass
 	{
+		public static const S2W:Object={};
+		S2W[36]=44;
+		S2W[42]=50;
+		S2W[48]=56;
+		S2W[64]=72;
+		
+		public static const W2S:Object={};
+		W2S[44]=36;
+		W2S[50]=42;
+		W2S[56]=48;
+		W2S[72]=64;
 		private var _iconResURL:String = "";
 		/** ico的bitmaodata  */		
 		protected var _iconImage:UIAsset;
@@ -66,7 +77,7 @@ package com.rpgGame.app.view.icon
 				case IcoSizeEnum.ICON_42:
 				case IcoSizeEnum.ICON_48:
 				case IcoSizeEnum.ICON_64:
-					_iconPositionX=_iconPositionY=4;
+					_iconPositionX=_iconPositionY=(S2W[_iconSize]-_iconSize)/2;
 					break;
 				
 			}
@@ -111,10 +122,10 @@ package com.rpgGame.app.view.icon
 			_iconSize = _iconSize <= 0 ? IcoSizeEnum.SIZE_46 : _iconSize;
 			switch(_iconSize){
 				case IcoSizeEnum.ICON_64:
-					_iconPositionX=_iconPositionY=7;
+					_iconPositionX=_iconPositionY=4;
 					break;
 				case IcoSizeEnum.ICON_48:
-					_iconPositionX=_iconPositionY=6;
+					_iconPositionX=_iconPositionY=4;
 					break;
 			}
 			this.width = _iconSize;

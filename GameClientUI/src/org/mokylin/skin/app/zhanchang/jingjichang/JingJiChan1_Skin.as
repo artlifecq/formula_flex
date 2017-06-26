@@ -75,7 +75,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [__JingJiChan1_Skin_UIAsset2_i(),gNormal_i(),gTop_i(),skinInfo_i(),lbTime_i(),__JingJiChan1_Skin_Label1_i(),numZhanli_i(),btnTiaoZhan_i(),btnBack_i(),btnJiangli_i(),item_msg_i(),skinBattke_i(),lbTime0_i()];
+			this.elementsContent = [__JingJiChan1_Skin_UIAsset2_i(),gNormal_i(),gTop_i(),skinInfo_i(),lbTime0_i(),lbTime_i(),__JingJiChan1_Skin_Label1_i(),numZhanli_i(),btnTiaoZhan_i(),btnBack_i(),btnJiangli_i(),item_msg_i(),skinBattke_i()];
 			
 			states = {
 			};
