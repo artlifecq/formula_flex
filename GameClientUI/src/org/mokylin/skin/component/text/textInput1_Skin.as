@@ -28,7 +28,6 @@ package org.mokylin.skin.component.text
 			super();
 			
 			this.currentState = "focused";
-			this.height = 25;
 			this.width = 65;
 			this.elementsContent = [textDisplay_i()];
 			bg_i();
@@ -66,8 +65,7 @@ package org.mokylin.skin.component.text
 			temp.text = "标签";
 			temp.color = 0x5cb006;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.verticalCenter = 1;
-			temp.y = 4;
+			temp.y = 3;
 			return temp;
 		}
 

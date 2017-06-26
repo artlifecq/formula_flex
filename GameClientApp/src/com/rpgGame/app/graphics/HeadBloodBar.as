@@ -7,6 +7,7 @@ package com.rpgGame.app.graphics
 	import com.rpgGame.coreData.type.HeadBloodStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
+	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	
@@ -269,7 +270,9 @@ package com.rpgGame.app.graphics
 		{
 			if (!_isMonster) 
 			{
-				_hpSkinClass.lbLevel.text=lv+"";
+				var label:Label=_hpSkinClass.lbLevel;
+				label.text=lv+"";
+				label.x=16-label.textWidth/2;
 			}
 			
 		}

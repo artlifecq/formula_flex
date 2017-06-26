@@ -9,7 +9,7 @@ package org.mokylin.skin.component.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class ButtonSkin_close extends feathers.controls.StateSkin
+	public class ButtonSkin_shang extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -22,7 +22,7 @@ package org.mokylin.skin.component.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function ButtonSkin_close()
+		public function ButtonSkin_shang()
 		{
 			super();
 			
@@ -47,7 +47,7 @@ package org.mokylin.skin.component.button
 						}
 					]
 			};
-			skinNames={"down":"ui/component/button/skin_close/down.png", "hover":"ui/component/button/skin_close/over.png", "up":"ui/component/button/skin_close/up.png"};
+			skinNames={"down":"ui/component/button/skin_shang/down.png", "hover":"ui/component/button/skin_shang/over.png", "up":"ui/component/button/skin_shang/up.png"};
 		}
 
 
@@ -59,9 +59,6 @@ package org.mokylin.skin.component.button
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			iconDisplay = temp;
 			temp.name = "iconDisplay";
-			temp.styleName = "ui/component/button/skin_close/up.png";
-			temp.x = 0;
-			temp.y = 0;
 			return temp;
 		}
 
