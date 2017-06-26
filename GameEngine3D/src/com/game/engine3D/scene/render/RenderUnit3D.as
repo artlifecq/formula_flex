@@ -46,6 +46,7 @@ package com.game.engine3D.scene.render
 	import away3d.entities.Mesh;
 	import away3d.entities.SparticleMesh;
 	import away3d.events.MouseEvent3D;
+	import away3d.log.Log;
 	import away3d.materials.MaterialBase;
 	import away3d.materials.TextureMaterial;
 	import away3d.materials.lightpickers.LightPickerBase;
@@ -220,7 +221,7 @@ package com.game.engine3D.scene.render
 		private var _currChildUnitList : Vector.<RenderUnitChild>;
 
 		protected var _compositeMesh : CompositeMesh;
-		
+		protected var _parentUnit : RenderUnit3D;
 		private var _methodDatas : Vector.<MethodData>;
 		//private var _boneChildrenByName : Dictionary;
 		private var _softOutlineData : SoftOutlineData;
@@ -802,6 +803,32 @@ package com.game.engine3D.scene.render
 			}
 			if (_drawElements)
 			{
+				var skeletonName:String;
+				var parentSkeletonName:String;
+//				for each (var element : ObjectContainer3D in _drawElements)
+//				{
+//					if (element.name == _defalutStatus)
+//					{
+//						_isElementStatus = true;
+//					}
+//					if (!(element is Mesh))
+//					{
+//						_graphicDis.addChild(element);
+//					}
+//					else
+//					{
+//						skeletonName = _renderResourceData.meshUseForSkeletonName();
+//						parentSkeletonName = _parentUnit ? _parentUnit._renderResourceData.meshUseForSkeletonName() : null;
+//						if(!skeletonName || skeletonName == parentSkeletonName)
+//						{
+//							_graphicDis.addChild(element);
+//						}
+//						else
+//						{
+//							Log.error(_renderParamData.sourcePath+":"+parentSkeletonName+":"+"蒙皮已经被骨骼引用，不能单独使用！");
+//						}
+//					}
+//				}
 				for each (var element : ObjectContainer3D in _drawElements)
 				{
 					if (element.name == _defalutStatus)
@@ -2324,6 +2351,8 @@ package com.game.engine3D.scene.render
 					{
 						if (element is Mesh)
 						{
+							childData.renderUnit._parentUnit = this;
+							childData.renderUnit._renderResourceData.meshUseForSkeleton(_renderParamData.animatorSourchPath);
 							childData.renderUnit._renderResourceData.isSkinMesh = true;
 							childData.renderUnit._compositeMesh = compositeMesh;
 							compositeMesh.addUnit(Mesh(element));
@@ -2863,6 +2892,7 @@ package com.game.engine3D.scene.render
 			_defalutStatus = null;
 			_secondStatusGetter = null;
 			_compositeMesh = null;
+			_parentUnit = null;
 			_repeat = 0;
 			_lifecycle = 0;
 			_playCount = 0;
@@ -3069,11 +3099,35 @@ package com.game.engine3D.scene.render
 				}
 				_currChildUnitList.length = 0;
 			}
-			
+			var skeletonName:String;
+			var parentSkeletonName:String;
 			if (_drawElements)
 			{
 				for each (var element : ObjectContainer3D in _drawElements)
 				{
+					
+//					if (!(element is Mesh))
+//					{
+//						element.hookingJointName = null;
+//						_graphicDis.addChild(element);
+//					}
+//					else
+//					{
+//						skeletonName = _renderResourceData.meshUseForSkeletonName();
+//						if(_parentUnit && _parentUnit._renderResourceData)
+//							parentSkeletonName = _parentUnit._renderResourceData.meshUseForSkeletonName();
+//						else
+//							parentSkeletonName = null
+//						if(!skeletonName || skeletonName == parentSkeletonName)
+//						{
+//							element.hookingJointName = null;
+//							_graphicDis.addChild(element);
+//						}
+//						else 
+//						{
+//							Log.error(_renderParamData.sourcePath+":"+parentSkeletonName+":"+"蒙皮已经被骨骼引用，不能单独使用！");
+//						}
+//					}
 					if (!_renderResourceData.isSkinMesh || !(element is Mesh))
 					{
 						element.hookingJointName = null;
@@ -3088,48 +3142,8 @@ package com.game.engine3D.scene.render
 				}
 			}
 			_compositeMesh = null;
-
+			_parentUnit = null;
 		}
-
-//		public function restoreAllChildUnitToParent(parent : ObjectContainer3D = null) : void
-//		{
-//			if (!_currChildUnitList)
-//			{
-//				return;
-//			}
-//			for each (var childData : RenderUnitChild in _currChildUnitList)
-//			{
-//				if (childData.renderUnit && childData.renderUnit.usable)
-//				{
-//					childData.renderUnit.removeAddedCallBack(doAddCompositeUnit);
-//					childData.renderUnit.removeAddedCallBack(doSetUnitChildMethods);
-//					childData.renderUnit.removeRemovedCallBack(doUnitChildRemoved);
-//					childData.renderUnit.restoreElementsParent(this, parent);
-//				}
-//				childData.destroy();
-//			}
-//			_currChildUnitList.length = 0;
-//			
-//			if (_drawElements)
-//			{
-//				for each (var element : ObjectContainer3D in _drawElements)
-//				{
-//					if (!_renderResourceData.isSkinMesh || !(element is Mesh))
-//					{
-//						element.hookingJointName = null;
-//						_graphicDis.addChild(element);
-//					}
-//					if (_compositeMesh && (element is Mesh))
-//					{
-//						var index : int = _compositeMesh.getUnitIndex(Mesh(element));
-//						if (index > -1)
-//							_compositeMesh.removeUnitByIndex(index);
-//					}
-//				}
-//			}
-//			_compositeMesh = null;
-//			this.parent = parent;
-//		}
 
 		protected function restoreElementsParent(parentUnit : RenderUnit3D, parent : ObjectContainer3D) : void
 		{

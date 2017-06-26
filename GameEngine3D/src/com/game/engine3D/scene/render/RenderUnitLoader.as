@@ -37,6 +37,8 @@ package com.game.engine3D.scene.render
 		private var _asyncResCompleteCallBackList : Vector.<CallBackData>;
 		private var _resErrorCallBackList : Vector.<CallBackData>;
 		private var _loader : Resource3DLoader;
+		private var _isUseForSkin : Boolean;
+		private var _useForSkeletonName : String;
 		
 		public function RenderUnitLoader()
 		{
@@ -44,8 +46,30 @@ package com.game.engine3D.scene.render
 			_isLoading = false;
 			_isAsyncLoaded = false;
 			_isUnloaded = false;
+			_isUseForSkin = false;
+			_useForSkeletonName = null;
 			_resCompleteCallBackList = new Vector.<CallBackData>();
 			_resErrorCallBackList = new Vector.<CallBackData>();
+		}
+		
+		public function get isUseForSkin() : Boolean
+		{
+			return _isUseForSkin;
+		}
+		
+		public function set isUseForSkin(value : Boolean) : void
+		{
+			_isUseForSkin = value;
+		}
+		
+		public function get useForSkeletonName() : String
+		{
+			return _useForSkeletonName;
+		}
+		
+		public function set useForSkeletonName(value : String) : void
+		{
+			_useForSkeletonName = value;
 		}
 		
 		public function setResCompleteCallBack(value : Function, args : Array = null) : void
@@ -111,7 +135,7 @@ package com.game.engine3D.scene.render
 			_loader = new Resource3DLoader();
 			_loader.addEventListener(LoaderEvent.RESOURCE_COMPLETE, onResourceComplete);
 			_loader.addEventListener(LoaderEvent.ASYNC_TEXTURES_COMPLETE, onAsyncTexturesComplete);
-//			_loader.addEventListener(LoaderEvent.ASYNC_RESOURCE_PROGRESS, onAsyncResourceProgress);
+			_loader.addEventListener(LoaderEvent.ASYNC_RESOURCE_PROGRESS, onAsyncResourceProgress);
 			//_loader.addEventListener(LoaderEvent.ASYNC_RESOURCE_COMPLETE, onAsyncResourceComplete);
 			_loader.addEventListener(LoaderEvent.LOAD_ERROR, onResourceLoadError);
 			_loader.addEventListener(ParserEvent.PARSE_ERROR, onResourceParseError);
@@ -124,7 +148,7 @@ package com.game.engine3D.scene.render
 			{
 				_loader.removeEventListener(LoaderEvent.RESOURCE_COMPLETE, onResourceComplete);
 				_loader.removeEventListener(LoaderEvent.ASYNC_TEXTURES_COMPLETE, onAsyncTexturesComplete);
-//				_loader.removeEventListener(LoaderEvent.ASYNC_RESOURCE_PROGRESS, onAsyncResourceProgress);
+				_loader.removeEventListener(LoaderEvent.ASYNC_RESOURCE_PROGRESS, onAsyncResourceProgress);
 				//_loader.removeEventListener(LoaderEvent.ASYNC_RESOURCE_COMPLETE, onAsyncResourceComplete);
 				_loader.removeEventListener(LoaderEvent.LOAD_ERROR, onResourceLoadError);
 				_loader.removeEventListener(ParserEvent.PARSE_ERROR, onResourceParseError);
@@ -146,7 +170,7 @@ package com.game.engine3D.scene.render
 		private function onAsyncResourceProgress(e : LoaderEvent) : void
 		{
 			if (_asyncResProgressCallBackList){
-//				CallBackUtil.exceteCallBackData(this, _asyncResProgressCallBackList, e.progress);
+				CallBackUtil.exceteCallBackData(this, _asyncResProgressCallBackList, e.progress);
 			}
 		}
 		
@@ -174,6 +198,8 @@ package com.game.engine3D.scene.render
 			_isLoading = false;
 			_isAsyncLoaded = false;
 			_isUnloaded = true;
+			_isUseForSkin = false;
+			_useForSkeletonName = null;
 			if (_resCompleteCallBackList)
 			{
 				_resCompleteCallBackList.length = 0;

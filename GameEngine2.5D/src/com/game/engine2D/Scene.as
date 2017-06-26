@@ -27,7 +27,6 @@ package com.game.engine2D
 	import com.game.engine3D.vo.BaseObj3D;
 	
 	import flash.display.Sprite;
-	import flash.geom.ColorTransform;
 	import flash.geom.Point;
 	import flash.utils.Dictionary;
 	
@@ -38,6 +37,9 @@ package com.game.engine2D
 	import away3d.core.pick.PickingCollisionVO;
 	import away3d.events.Event;
 	import away3d.filters.Filter3DBase;
+	import away3d.filters.GlowFilter3D;
+	import away3d.filters.HeatFilter3D;
+	import away3d.filters.OutlineGlowFilter3D;
 	import away3d.lights.DirectionalLight;
 	import away3d.lights.LightBase;
 	
@@ -103,6 +105,12 @@ package com.game.engine2D
 		private var _planarShadowAlpha:Number = 0.3;
 		private var _filter3ds:Vector.<Filter3DBase> = new Vector.<Filter3DBase>();
 		private var _filter3dScreens:Vector.<Filter3DBase> = new Vector.<Filter3DBase>();
+		/** 热扭曲滤镜  **/
+		private var _heatFilter : HeatFilter3D;
+		/** 发光滤镜  **/
+		private var _glowFilter : GlowFilter3D;
+		/** 外发光滤镜  **/
+		private var _outlineGlowFilter : OutlineGlowFilter3D;
 		private var _cameraInit:Boolean = false;
 		private var _cameraOrthographicLens:CameraOrthographicLens;
 		
@@ -115,7 +123,7 @@ package com.game.engine2D
 			_view = view;
 			_screenView = Stage3DLayerManager.screenView;
 			_cameraOrthographicLens = new CameraOrthographicLens(1000);
-			_cameraOrthographicLens.viewportScale = 1.1;
+			_cameraOrthographicLens.viewportScale = 1.15;
 			
 			//场景引擎配置
 			sceneConfig = new SceneConfig($width,$height);
@@ -166,6 +174,11 @@ package com.game.engine2D
 			Starling.current.nativeStage.addChildAt(sceneStageLayer, 0);
 			//调一下尺寸
 			reSize(sceneConfig.width, sceneConfig.height);
+			
+//			_heatFilter = new HeatFilter3D();
+//			_glowFilter = new GlowFilter3D();
+//			_outlineGlowFilter = new OutlineGlowFilter3D(4, 1);
+//			resetViewFilters();
 		}
 		
 		/**
@@ -345,6 +358,33 @@ package com.game.engine2D
 				_filter3dScreens.splice(index, 1);
 				_screenView.filters3d = _filter3dScreens;
 			}
+		}
+		
+		private function resetViewFilters() : void
+		{
+			_filter3dScreens.length = 0;
+			//glow必须放在之前
+			_filter3dScreens.push(_glowFilter);
+			
+			_filter3dScreens.push(_heatFilter);
+			if (_outlineGlowFilter)
+				_filter3dScreens.push(_outlineGlowFilter);
+			
+			_screenView.filters3d = _filter3dScreens;
+		}
+		
+		public function setUIOutlineGlowFilter(value : OutlineGlowFilter3D) : void
+		{
+			if (_outlineGlowFilter == value)
+			{
+				return;
+			}
+			if (_outlineGlowFilter)
+			{
+				_outlineGlowFilter.dispose();
+			}
+			_outlineGlowFilter = value;
+			resetViewFilters();
 		}
 		
 		/**
@@ -887,8 +927,8 @@ package com.game.engine2D
 				_scene3d.clear();
 //			if (_view)
 //				_view.filters3d = _filter3ds;
-			if (_screenView)
-				_screenView.filters3d = _filter3dScreens;
+//			if (_screenView)
+//				_screenView.filters3d = _filter3dScreens;
 			TweenLite.killTweensOf(_current);
 		}
 		

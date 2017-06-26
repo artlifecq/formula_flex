@@ -72,6 +72,18 @@ package com.rpgGame.netData{
 	import com.rpgGame.netData.client.message.ResClientCustomTagMessage;
 	import com.rpgGame.netData.client.message.ResClientMessageMessage;
 	import com.rpgGame.netData.client.message.TestMessageMessage;
+	import com.rpgGame.netData.convoy.handler.SCConvoyFailureHandler;
+	import com.rpgGame.netData.convoy.handler.SCConvoyInfoHandler;
+	import com.rpgGame.netData.convoy.handler.SCConvoyNumHandler;
+	import com.rpgGame.netData.convoy.handler.SCConvoyToClientHandler;
+	import com.rpgGame.netData.convoy.handler.SCRefreshGirlHandler;
+	import com.rpgGame.netData.convoy.handler.SCSuccessInfoHandler;
+	import com.rpgGame.netData.convoy.message.SCConvoyFailureMessage;
+	import com.rpgGame.netData.convoy.message.SCConvoyInfoMessage;
+	import com.rpgGame.netData.convoy.message.SCConvoyNumMessage;
+	import com.rpgGame.netData.convoy.message.SCConvoyToClientMessage;
+	import com.rpgGame.netData.convoy.message.SCRefreshGirlMessage;
+	import com.rpgGame.netData.convoy.message.SCSuccessInfoMessage;
 	import com.rpgGame.netData.cooldown.handler.ResCooldownInfoListHandler;
 	import com.rpgGame.netData.cooldown.message.ResCooldownInfoListMessage;
 	import com.rpgGame.netData.cross.handler.ResChangeServerGameToClientHandler;
@@ -668,7 +680,6 @@ package com.rpgGame.netData{
 	import com.rpgGame.netData.team.handler.ResTeamInfoHandler;
 	import com.rpgGame.netData.team.handler.ResTeamSynMemberinfoClientHandler;
 	import com.rpgGame.netData.team.handler.ResTeamSynPosClientHandler;
-	import com.rpgGame.netData.team.handler.SCHaveTeamHandler;
 	import com.rpgGame.netData.team.handler.SCZoneTeamVoteResultHandler;
 	import com.rpgGame.netData.team.message.ResApplyClientMessage;
 	import com.rpgGame.netData.team.message.ResAppointClientMessage;
@@ -682,7 +693,6 @@ package com.rpgGame.netData{
 	import com.rpgGame.netData.team.message.ResTeamInfoMessage;
 	import com.rpgGame.netData.team.message.ResTeamSynMemberinfoClientMessage;
 	import com.rpgGame.netData.team.message.ResTeamSynPosClientMessage;
-	import com.rpgGame.netData.team.message.SCHaveTeamMessage;
 	import com.rpgGame.netData.team.message.SCZoneTeamVoteResultMessage;
 	import com.rpgGame.netData.top.handler.ResListLeaderToClientHandler;
 	import com.rpgGame.netData.top.handler.ResRankRewardHandler;
@@ -840,7 +850,7 @@ package com.rpgGame.netData{
 	import org.game.netCore.net.Handler;
 	import org.game.netCore.net.Message;
 	
-	
+
 	/** 
 	 * @author Commuication Auto Maker
 	 * 
@@ -1001,7 +1011,6 @@ package com.rpgGame.netData{
 			register(109115, ResSetTeamOptionsClientMessage, ResSetTeamOptionsClientHandler);
 			register(109116, ResGenericSearchToClientMessage, ResGenericSearchToClientHandler);
 			register(109117, SCZoneTeamVoteResultMessage, SCZoneTeamVoteResultHandler);
-			register(109118, SCHaveTeamMessage, SCHaveTeamHandler);
 			register(111101, ResGuildInfoMessage, ResGuildInfoHandler);
 			register(111102, ResGuildBriefnessInfoMessage, ResGuildBriefnessInfoHandler);
 			register(111103, ResGuildListInfoMessage, ResGuildListInfoHandler);
@@ -1032,6 +1041,7 @@ package com.rpgGame.netData{
 			register(114117, ResBossOwerInfoToClientMessage, ResBossOwerInfoToClientHandler);
 			register(114118, SCWorldBossResultMessage, SCWorldBossResultHandler);
 			register(114119, SCWorldBossKillerNameMessage, SCWorldBossKillerNameHandler);
+//			register(114120, SCLimitChallengeBossResultMessage, SCLimitChallengeBossResultHandler);
 			register(115201, ResFightPowerToClientMessage, ResFightPowerToClientHandler);
 			register(116101, ResFriendListInfoMessage, ResFriendListInfoHandler);
 			register(116102, ResOperationFriendResultMessage, ResOperationFriendResultHandler);
@@ -1102,6 +1112,12 @@ package com.rpgGame.netData{
 			register(129110, SCWarChessMessage, SCWarChessHandler);
 			register(129112, SCOpenYaoTaPanelMessage, SCOpenYaoTaPanelHandler);
 			register(129114, SCDrawYaoTaAwardMessage, SCDrawYaoTaAwardHandler);
+			register(130101, SCRankInfoMessage, SCRankInfoHandler);
+			register(130102, SCCashGiftClientMessage, SCCashGiftClientHandler);
+			register(130103, SCActivityTimeMessage, SCActivityTimeHandler);
+			register(130104, SCRemainRefreshTimeMessage, SCRemainRefreshTimeHandler);
+			register(130105, SCRewardInfoMessage, SCRewardInfoHandler);
+			register(130106, SCCashGiftChangeMessage, SCCashGiftChangeHandler);
 			register(137201, ResCardToClientMessage, ResCardToClientHandler);
 			register(141101, ResToplistToClientMessage, ResToplistToClientHandler);
 			register(141102, ResListLeaderToClientMessage, ResListLeaderToClientHandler);
@@ -1165,6 +1181,7 @@ package com.rpgGame.netData{
 			register(155145, SCMultiZoneRewardMessage, SCMultiZoneRewardHandler);
 			register(155146, SCMultiZonePanelInfosMessage, SCMultiZonePanelInfosHandler);
 			register(155147, SCMultiZonePanelSingleInfoMessage, SCMultiZonePanelSingleInfoHandler);
+//			register(155148, SCLimitTrackInfoMessage, SCLimitTrackInfoHandler);
 			register(160101, ResHuntItemAddMessageMessage, ResHuntItemAddMessageHandler);
 			register(160102, ResHuntItemChangeMessage, ResHuntItemChangeHandler);
 			register(160103, ResHuntItemRemoveMessage, ResHuntItemRemoveHandler);
@@ -1259,14 +1276,19 @@ package com.rpgGame.netData{
 			register(229105, SCWarFlagUpResultToClientMessage, SCWarFlagUpResultToClientHandler);
 			register(229106, SCWarFlagExtraItemNumMessage, SCWarFlagExtraItemNumHandler);
 			register(229107, SCWarFlagModelIdChangMessage, SCWarFlagModelIdChangHandler);
-			//			register(230101, SCConvoyNumMessage, SCConvoyNumHandler);
-			//			register(230102, SCConvoyInfoMessage, SCConvoyInfoHandler);
-			//			register(230105, SCSuccessInfoMessage, SCSuccessInfoHandler);
-			//			register(230106, SCRefreshGirlMessage, SCRefreshGirlHandler);
-			//			register(230107, SCConvoyFailureMessage, SCConvoyFailureHandler);
+			register(230101, SCConvoyNumMessage, SCConvoyNumHandler);
+			register(230102, SCConvoyInfoMessage, SCConvoyInfoHandler);
+			register(230105, SCSuccessInfoMessage, SCSuccessInfoHandler);
+			register(230106, SCRefreshGirlMessage, SCRefreshGirlHandler);
+			register(230107, SCConvoyFailureMessage, SCConvoyFailureHandler);
+			register(230108, SCConvoyToClientMessage, SCConvoyToClientHandler);
 			register(250101, ResChangeServerGameToClientMessage, ResChangeServerGameToClientHandler);
 			register(250264, SCCancelTeamMatchMessage, SCCancelTeamMatchHandler);
 			register(250265, SCStartTeamMatchMessage, SCStartTeamMatchHandler);
+//			register(253101, ResGuildWarCityInfoMessage, ResGuildWarCityInfoHandler);
+//			register(253102, ResGuildWarCityApplyInfoMessage, ResGuildWarCityApplyInfoHandler);
+//			register(253103, ResGuildWarBattlefieldReportMessage, ResGuildWarBattlefieldReportHandler);
+//			register(253199, ResGuildWarOperateResultMessage, ResGuildWarOperateResultHandler);
 			register(301101, ResClientMessageMessage, ResClientMessageHandler);
 			register(301102, ResClientCustomTagMessage, ResClientCustomTagHandler);
 			register(301133, TestMessageMessage, TestMessageHandler);

@@ -1,5 +1,7 @@
 package com.rpgGame.appModule.guild.war
 {
+	import com.rpgGame.netData.guildWar.bean.GuildWarGuildRank;
+	
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	
 	import org.mokylin.skin.app.banghui.wangcheng.WangChengPaiMing_Item;
@@ -34,7 +36,15 @@ package com.rpgGame.appModule.guild.war
 		
 		override protected function commitData():void
 		{
-			
+			if(_skin){
+				if(_data){
+					var info:GuildWarGuildRank=_data as GuildWarGuildRank;
+					if(info){
+						_skin.lbNo.text=info.rank.toString();
+						_skin.lbBanghui.text=info.guildName.toString();
+					}
+				}
+			}
 		}
 	}
 }

@@ -282,7 +282,6 @@ package com.game.engine3D.core
 			if (_shadowLevel == value)
 				return;
 			_shadowLevel = value;
-			Log.warn("修改ShadowLevel,会导致整个场景的shader重新生成，可能会顿卡!");
 			validateShadow();
 			validateAreaDirectionalLight();
 		}

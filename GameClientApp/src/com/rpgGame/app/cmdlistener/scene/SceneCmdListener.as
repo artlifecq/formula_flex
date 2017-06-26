@@ -983,7 +983,7 @@ package com.rpgGame.app.cmdlistener.scene
 			var dropGoodsData : SceneDropGoodsData = new SceneDropGoodsData();
 			dropGoodsData.setGoodsExtraMsg(msg);
 			dropGoodsData.isDroped=true;
-			SceneRoleManager.getInstance().createDropGoods(dropGoodsData)
+			SceneRoleManager.getInstance().createDropGoods(dropGoodsData);
 		}
 		
 		private function onResReviveSuccessMessage(msg : ResReviveSuccessMessage) : void 
