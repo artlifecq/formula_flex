@@ -65,10 +65,6 @@ package com.rpgGame.app.fight.spell
 		}
 		public static function releaseSpellPlay(spellInfo : ReleaseSpellInfo) : void
 		{
-			if(spellInfo.spellData.q_skillID==7000)
-			{
-				
-			}
 			/** 施法者 **/
 			var ref : AttackStateReference = null;
 			if (spellInfo.atkor && spellInfo.atkor.usable)
