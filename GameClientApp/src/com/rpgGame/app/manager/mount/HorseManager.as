@@ -6,7 +6,10 @@ package com.rpgGame.app.manager.mount
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.shop.ShopManager;
+	import com.rpgGame.app.ui.alert.SomeSystemNoticePanel;
 	import com.rpgGame.app.utils.FaceUtil;
+	import com.rpgGame.core.events.ItemEvent;
+	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.coreData.UNIQUEID;
 	import com.rpgGame.coreData.cfg.HorseConfigData;
 	import com.rpgGame.coreData.cfg.HorseSpellData;
@@ -105,8 +108,21 @@ package com.rpgGame.app.manager.mount
 				var skill:Q_skill_model = SpellDataManager.getSpellData(data.q_id,1);
 				_spellList.push(FaceUtil.chanceSpellToFaceInfo(skill));
 			}
+			EventManager.addEvent(ItemEvent.ITEM_INIT,propSysCanUseExtraItem);
+			EventManager.addEvent(ItemEvent.ITEM_ADD,addItemHandler);
 		}
-		
+		private function addItemHandler(info:ClientItemInfo):void
+		{
+			if(_horsedataInfo==null)
+				return ;
+			if(_showdata == null)
+				_showdata= new MountShowData();
+			_showdata.heroJob = MainRoleManager.actorInfo.job;
+			_showdata.horsedataInfo =  HorseManager.instance().horsedataInfo;
+			if(info.cfgId != _showdata.upLevelItem.cfgId)
+				return ;
+			propSysCanUseExtraItem(info);
+		}
 		public function get houseLevel():int
 		{
 			return _horsedataInfo.horseModelId;
@@ -186,6 +202,29 @@ package com.rpgGame.app.manager.mount
 			var msg:CSHorseIllusionToGameMessage = new CSHorseIllusionToGameMessage();
 			msg.horseModelid = hoseId;
 			SocketConnection.send(msg);
+		}
+		
+		private var _showdata:MountShowData; 
+		private function propSysCanUseExtraItem(item:*):void
+		{
+			if(_horsedataInfo==null)
+				return ;
+			if(_showdata == null)
+				_showdata= new MountShowData();
+			_showdata.heroJob = MainRoleManager.actorInfo.job;
+			_showdata.horsedataInfo =  HorseManager.instance().horsedataInfo;
+			if(_showdata.isMaxLevel)
+			{
+				return;
+			}
+			if(_showdata.canUpLevel())
+			{
+				var data:Object={};
+				data.sys=SomeSystemNoticePanel.SYS_HORSE;
+				data.desc="坐骑可以进阶";
+				data.btnText="立即进阶";
+				EventManager.dispatchEvent(MainPlayerEvent.SYS_CAN_LEVEL_UP,data); 
+			}
 		}
 		
 		private static var _instance:HorseManager;
