@@ -265,7 +265,7 @@ package com.rpgGame.app.manager
 			AppManager.showAppNoHide( AppConstant.RELIVE_PANEL );
 			if(_curDieInfo.trusteeshipReliveTime)
 				TimerServer.add(autoOriginRelive,trusteeshipReliveTime);
-			UIModel.instence.showModel(RELIVE_TYPE);
+//			UIModel.instence.showModel(RELIVE_TYPE);
 		}
 		
 		/**
@@ -275,7 +275,7 @@ package com.rpgGame.app.manager
 		public static function hideRelivePanel():void
 		{
 			AppManager.hideApp( AppConstant.RELIVE_PANEL);
-			UIModel.instence.hideModel(RELIVE_TYPE);
+//			UIModel.instence.hideModel(RELIVE_TYPE);
 		}
 		
 		/**
@@ -303,7 +303,7 @@ package com.rpgGame.app.manager
 					break;
 			}
 			TimerServer.remove(autoOriginRelive);
-			UIModel.instence.hideModel(RELIVE_TYPE);
+//			UIModel.instence.hideModel(RELIVE_TYPE);
 			EventManager.dispatchEvent(FunctionMessageBarEvent.FUNCTION_MESSAGE_BAR_HIDE_TYPE,EnumFunctionMessageBarIcoType.RELIVE_TYPE);
 			tempDieInfo = null;
 		}

@@ -34,7 +34,7 @@ package com.rpgGame.appModule.guild
 			super.onTouchTarget(target);
 			if(_skin.lbTeamName == target)
 			{
-				GuildPorpInfoPanel.instance.show(_guildListinfo.guildId);
+				GuildPorpInfoPanel.instance.show(_guildListinfo);
 			}else if(_skin.lbRolenName == target){
 				LookSender.lookOtherPlayer(_guildListinfo.chiefId);
 			}
