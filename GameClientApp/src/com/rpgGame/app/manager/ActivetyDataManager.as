@@ -1,7 +1,9 @@
 package com.rpgGame.app.manager
 {
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
+	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.cfg.active.BossActInfo;
@@ -43,6 +45,43 @@ package com.rpgGame.app.manager
 			return arr;
 		}
 		
+		public static function getNextRefreshTime(cfg:Q_special_activities):String
+		{
+			var hm:int=getCurrentHM();
+			var timeList:Array=getTimeList(cfg);
+			timeList=timeList[4];//第四个才是刷新段
+			var num:int=timeList.length;
+			var next:int=timeList[0];
+			for(var i:int=0;i<num;i++){
+				if(i%2!=0){
+					continue;
+				}else{
+					if(timeList[i]>hm){
+						break;
+					}
+					next=timeList[i];
+				}
+			}
+			return TimeUtil.changeIntHM2Str(next);
+		}
+		
+		/**
+		 *获取当前时间和配置一致的时分格式 
+		 * @return 
+		 * 
+		 */
+		public static function getCurrentHM():int
+		{
+			var currentTime:Date=SystemTimeManager.sysDateTime;
+			var hour:int=currentTime.hours;
+			var min:int=currentTime.minutes;
+			var sec:int=hour*60*60+min*60;
+			var timeStr:String=TimeUtil.formatTimeToTimeString(sec);
+			var arrTime:Array=timeStr.split(":");
+			var hm:int=int(arrTime[0]+arrTime[1]);
+			return hm;
+		}
+		
 		/**
 		 *检测开启活动 
 		 * 
@@ -55,26 +94,14 @@ package com.rpgGame.app.manager
 				var typeList:Vector.<ActivetyInfo>=ActivetyCfgData.getTypeList(type);
 				if(typeList){
 					for each(var info:ActivetyInfo in typeList){
-						if(info.actCfg.q_panel_id!=0&&info.info){//有独立的功能icon
-							if(info.actCfg.q_panel_pre_time*60>info.info.notifyTime&&info.info.notifyTime!=0){//在预告时间内
-								updateActLeftTime(info.actCfg.q_panel_id,info.info.notifyTime);
+						if(info.actCfg.q_icon_id!=0&&info.info){//有独立的功能icon
+							if(info.info.notifyTime!=-1){//在预告时间内
+								MainButtonManager.openActByData(info.actCfg.q_icon_id,info);
 							}
 						}
 					}
 				}
 			}
-		}
-		
-		/**
-		 *更新活动剩余时间 
-		 * @param q_panel_id 窗口链接表id
-		 * @param notifyTime   剩余的时间秒
-		 * 
-		 */
-		private static  function updateActLeftTime(q_panel_id:int, notifyTime:int):void
-		{
-			MainButtonManager.openActivityButton(q_panel_id);
-			MainButtonManager.setUptimeActivityButton(q_panel_id,notifyTime);
 		}
 		
 		/**

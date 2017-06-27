@@ -22,19 +22,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 
 		public var icon1_1:feathers.controls.UIAsset;
 
-		public var icon1_2:feathers.controls.UIAsset;
-
-		public var icon1_3:feathers.controls.UIAsset;
-
-		public var icon1_4:feathers.controls.UIAsset;
-
 		public var icon2_1:feathers.controls.UIAsset;
-
-		public var icon2_2:feathers.controls.UIAsset;
-
-		public var icon2_3:feathers.controls.UIAsset;
-
-		public var icon2_4:feathers.controls.UIAsset;
 
 		public var imgBG:feathers.controls.UIAsset;
 
@@ -166,7 +154,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			temp.name = "grpicon1";
 			temp.x = 12;
 			temp.y = 125;
-			temp.elementsContent = [icon1_1_i(),icon1_2_i(),icon1_3_i(),icon1_4_i()];
+			temp.elementsContent = [icon1_1_i()];
 			return temp;
 		}
 
@@ -177,7 +165,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			temp.name = "grpicon2";
 			temp.x = 12;
 			temp.y = 205;
-			temp.elementsContent = [icon2_1_i(),icon2_2_i(),icon2_3_i(),icon2_4_i()];
+			temp.elementsContent = [icon2_1_i()];
 			return temp;
 		}
 
@@ -192,39 +180,6 @@ package org.mokylin.skin.app.banghui.wangcheng
 			return temp;
 		}
 
-		private function icon1_2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon1_2 = temp;
-			temp.name = "icon1_2";
-			temp.styleName = "ui/common/grid/normal/42.png";
-			temp.x = 55;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function icon1_3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon1_3 = temp;
-			temp.name = "icon1_3";
-			temp.styleName = "ui/common/grid/normal/42.png";
-			temp.x = 110;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function icon1_4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon1_4 = temp;
-			temp.name = "icon1_4";
-			temp.styleName = "ui/common/grid/normal/42.png";
-			temp.x = 165;
-			temp.y = 0;
-			return temp;
-		}
-
 		private function icon2_1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -232,39 +187,6 @@ package org.mokylin.skin.app.banghui.wangcheng
 			temp.name = "icon2_1";
 			temp.styleName = "ui/common/grid/normal/42.png";
 			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function icon2_2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon2_2 = temp;
-			temp.name = "icon2_2";
-			temp.styleName = "ui/common/grid/normal/42.png";
-			temp.x = 55;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function icon2_3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon2_3 = temp;
-			temp.name = "icon2_3";
-			temp.styleName = "ui/common/grid/normal/42.png";
-			temp.x = 110;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function icon2_4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon2_4 = temp;
-			temp.name = "icon2_4";
-			temp.styleName = "ui/common/grid/normal/42.png";
-			temp.x = 165;
 			temp.y = 0;
 			return temp;
 		}

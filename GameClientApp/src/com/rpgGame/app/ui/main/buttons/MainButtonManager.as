@@ -4,6 +4,7 @@ package com.rpgGame.app.ui.main.buttons
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.ui.main.activityBar.item.ActivityButton;
+	import com.rpgGame.app.ui.main.activityBar.item.LimitTimeActivityButton;
 	import com.rpgGame.app.ui.main.activityBar.item.MultyActivityButton;
 	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
 	import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
@@ -49,7 +50,7 @@ package com.rpgGame.app.ui.main.buttons
 			regClass(103,ActivityButton,ButtonFubendating);
 			regClass(104,ActivityButton,ButtonZhanchangdating);
 			regClass(105,MultyActivityButton,ButtonFubenduilie);
-			regClass(106,MultyActivityButton,ButtonFubenduilie);
+			regClass(106,LimitTimeActivityButton,ButtonLunjian);
 		}
 		private static function regClass(id:int,cls:Class,skinui:Class):void
 		{
@@ -85,6 +86,26 @@ package com.rpgGame.app.ui.main.buttons
 			return id.toString();
 		}
 		
+		/**
+		 *开启活动 通过id和数据
+		 * @param id
+		 * @param data
+		 * 
+		 */
+		public static function openActByData(id:int,data:Object):void
+		{
+			var bar:FunctionBarInfo=FuncionBarCfgData.getActivityBarInfo(id);
+			if(bar)
+			{
+				var button:ActivityButton= MainButtonManager.getButtonBuyInfo(bar) as ActivityButton;
+				if(button)
+				{
+					button.onActivityOpen();
+					button.onActivityData(data);
+				}
+			}
+		}
+		
 		/**开启活动按钮by id----yt*/
 		public static function openActivityButton(id:int):void
 		{
@@ -97,8 +118,6 @@ package com.rpgGame.app.ui.main.buttons
 					button.onActivityOpen();
 				}
 			}
-			
-			
 		}
 		/**关闭活动按钮 byid----yt*/
 		public static function closeActivityButton(id:int):void

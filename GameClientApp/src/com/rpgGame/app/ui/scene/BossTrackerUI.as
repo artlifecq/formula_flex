@@ -99,14 +99,8 @@ package com.rpgGame.app.ui.scene
 				}
 			}
 			
-			_skin.lbTime.htmlText=actInfo.actCfg.q_activity_timeshow;
-			var currentTime:Date=SystemTimeManager.sysDateTime;
-			var hour:int=currentTime.hours;
-			var min:int=currentTime.minutes;
-			var sec:int=hour*60*60+min*60;
-			var timeStr:String=TimeUtil.formatTimeToTimeString(sec);
-			var arrTime:Array=timeStr.split(":");
-			var hm:int=int(arrTime[0]+arrTime[1]);
+			_skin.lbTime.htmlText=actInfo.actCfg.q_activity_timeshow;		
+			var hm:int=ActivetyDataManager.getCurrentHM();
 			var timeList:Array=ActivetyDataManager.getTimeList(actInfo.actCfg);
 			timeList=timeList[4];//第四个才是刷新段
 			var next:int=timeList[0];

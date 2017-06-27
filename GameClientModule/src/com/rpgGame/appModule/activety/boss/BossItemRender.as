@@ -102,13 +102,7 @@ package com.rpgGame.appModule.activety.boss
 			
 			var timeStr:String;
 			if(_skin.uiJinxing.visible||info.info.joinState==0){
-				var currentTime:Date=SystemTimeManager.sysDateTime;
-				var hour:int=currentTime.hours;
-				var min:int=currentTime.minutes;
-				var sec:int=hour*60*60+min*60;
-				var timeStr1:String=TimeUtil.formatTimeToTimeString(sec);
-				var arrTime:Array=timeStr1.split(":");
-				var hm:int=int(arrTime[0]+arrTime[1]);
+				var hm:int=ActivetyDataManager.getCurrentHM();
 				var timeList:Array=ActivetyDataManager.getTimeList(info.actCfg);
 				timeList=timeList[4];//第四个才是刷新段
 				var next:int=timeList[0];

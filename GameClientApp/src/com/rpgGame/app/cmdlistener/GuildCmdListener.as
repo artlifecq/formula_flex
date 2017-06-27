@@ -15,7 +15,10 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.guild.message.ResGuildListInfoMessage;
 	import com.rpgGame.netData.guild.message.ResGuildOperateResultMessage;
 	import com.rpgGame.netData.guild.message.ResGuildSkillInfoMessage;
+	import com.rpgGame.netData.guildWar.message.ResGuildWarChangeMaxPriceMessage;
+	import com.rpgGame.netData.guildWar.message.ResGuildWarCityApplyInfoMessage;
 	import com.rpgGame.netData.guildWar.message.ResGuildWarCityInfoMessage;
+	import com.rpgGame.netData.guildWar.message.ResGuildWarOperateResultMessage;
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
@@ -40,10 +43,28 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(111108, getResGuildSkillInfo);
 			SocketConnection.addCmdListener(111199, getResGuildOperateResultMessage);
 			
-			SocketConnection.addCmdListener(111199, getResGuildWarCityInfoMessage);
+			SocketConnection.addCmdListener(253101, getResGuildWarCityInfoMessage);
+			SocketConnection.addCmdListener(253102, getResGuildWarCityApplyInfoMessage);
+			SocketConnection.addCmdListener(253104, getResGuildWarChangeMaxPriceMessage);
+			SocketConnection.addCmdListener(253199, getResGuildWarOperateResultMessage);
 			
 			
 			finish();
+		}
+		
+		private function getResGuildWarOperateResultMessage(msg:ResGuildWarOperateResultMessage):void
+		{
+			
+		}
+		
+		private function getResGuildWarChangeMaxPriceMessage(msg:ResGuildWarChangeMaxPriceMessage):void
+		{
+			
+		}
+		
+		private function getResGuildWarCityApplyInfoMessage(msg:ResGuildWarCityApplyInfoMessage):void
+		{
+			EventManager.dispatchEvent(GuildEvent.GUILD_WCZB_APPLYINFO,msg);
 		}
 		
 		private function getResGuildWarCityInfoMessage(msg:ResGuildWarCityInfoMessage):void

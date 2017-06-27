@@ -2,7 +2,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 {
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
-	import org.mokylin.skin.app.zhanchang.wangchengzhengba.WangChengInfo_Item;
+	import org.mokylin.skin.app.banghui.wangcheng.WangChengInfo_Item;
 
 	/**
 	 * @private
@@ -44,7 +44,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			guild0 = temp;
 			temp.name = "guild0";
 			temp.height = 24;
-			var skin:StateSkin = new org.mokylin.skin.app.zhanchang.wangchengzhengba.WangChengInfo_Item()
+			var skin:StateSkin = new org.mokylin.skin.app.banghui.wangcheng.WangChengInfo_Item()
 			temp.skin = skin
 			temp.width = 187;
 			temp.x = 0;
@@ -58,7 +58,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			guild1 = temp;
 			temp.name = "guild1";
 			temp.height = 24;
-			var skin:StateSkin = new org.mokylin.skin.app.zhanchang.wangchengzhengba.WangChengInfo_Item()
+			var skin:StateSkin = new org.mokylin.skin.app.banghui.wangcheng.WangChengInfo_Item()
 			temp.skin = skin
 			temp.width = 187;
 			temp.x = 0;

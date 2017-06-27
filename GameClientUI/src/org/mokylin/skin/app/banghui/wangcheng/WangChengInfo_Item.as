@@ -1,4 +1,4 @@
-package org.mokylin.skin.app.zhanchang.wangchengzhengba
+package org.mokylin.skin.app.banghui.wangcheng
 {
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Label;
@@ -10,27 +10,27 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class WangChengHead_Item extends feathers.controls.StateSkin
+	public class WangChengInfo_Item extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var lbName:feathers.controls.Label;
+		public var bg:feathers.controls.UIAsset;
 
-		public var uiHead:feathers.controls.UIAsset;
+		public var lbBangName:feathers.controls.Label;
+
+		public var lbZhan:feathers.controls.Label;
 
 
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function WangChengHead_Item()
+		public function WangChengInfo_Item()
 		{
 			super();
 			
 			this.currentState = "normal";
-			this.height = 51;
-			this.width = 143;
-			this.elementsContent = [uiHead_i(),__WangChengHead_Item_UIAsset1_i(),lbName_i()];
+			this.elementsContent = [bg_i(),lbZhan_i(),lbBangName_i()];
 			
 			states = {
 			};
@@ -41,39 +41,42 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __WangChengHead_Item_UIAsset1_i():feathers.controls.UIAsset
+		private function bg_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhanchang/weicheng/mingzidi.png";
-			temp.x = 0;
-			temp.y = 26;
+			bg = temp;
+			temp.name = "bg";
+			temp.bottom = 0;
+			temp.left = 0;
+			temp.right = 0;
+			temp.styleName = "ui/app/banghui/wangcheng/dianban.png";
+			temp.top = 0;
 			return temp;
 		}
 
-		private function lbName_i():feathers.controls.Label
+		private function lbBangName_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbName = temp;
-			temp.name = "lbName";
-			temp.fontSize = 12;
-			temp.text = "玩家名六个字【69级】";
-			temp.textAlign = "center";
+			lbBangName = temp;
+			temp.name = "lbBangName";
+			temp.text = "帮派名称七个字";
 			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 139;
-			temp.x = 2;
-			temp.y = 34;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 56;
+			temp.y = 3;
 			return temp;
 		}
 
-		private function uiHead_i():feathers.controls.UIAsset
+		private function lbZhan_i():feathers.controls.Label
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			uiHead = temp;
-			temp.name = "uiHead";
-			temp.styleName = "ui/app/zhanchang/weicheng/1.png";
-			temp.x = 6;
-			temp.y = 0;
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbZhan = temp;
+			temp.name = "lbZhan";
+			temp.text = "[占]";
+			temp.color = 0x5CB006;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 28;
+			temp.y = 3;
 			return temp;
 		}
 

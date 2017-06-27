@@ -111,6 +111,8 @@ package com.rpgGame.app.cmdlistener
 				EventManager.dispatchEvent(ActivityEvent.UPDATE_ACTIVITY,list[i].activityId);
 			}
 			ActivetyDataManager.sortAllDatas();
+			
+			ActivetyDataManager.checkOpenAct();
 		}
 		
 		private function onSCSpecialActivityCloseMessage(msg:SCSpecialActivityCloseMessage):void
@@ -118,8 +120,8 @@ package com.rpgGame.app.cmdlistener
 			ActivetyDataManager.setActState(msg.activityId,ActivityJoinStateEnum.CLOSE);
 			EventManager.dispatchEvent(ActivityEvent.UPDATE_ACTIVITY,msg.activityId);
 			var info:ActivetyInfo=ActivetyCfgData.getActInfoById(msg.activityId);
-			if(info.actCfg.q_panel_id!=0){//有独立的功能icon
-				MainButtonManager.closeActivityButton(info.actCfg.q_panel_id);
+			if(info.actCfg.q_icon_id!=0){//有独立的功能icon
+				MainButtonManager.closeActivityButton(info.actCfg.q_icon_id);
 			}
 		}
 		

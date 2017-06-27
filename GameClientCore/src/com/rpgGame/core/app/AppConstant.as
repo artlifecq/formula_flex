@@ -413,8 +413,6 @@ package com.rpgGame.core.app
 		public static var GUILD_DONATE_PANEL : String = createAppInfo("guild.GuildDonatePanle","banghui");
 		/**帮会王城争霸报名 **/
 		public static var GUILD_WCZB_APPLY : String = createAppInfo("guild.war.WczbWarApplyPanel","banghui");
-		/**帮会王城争霸战报 **/
-		public static var GUILD_WCZB_HISTORY : String = createAppInfo("guild.war.WczbWarHistoryPanel","banghui");
 		/**帮会王城争霸奖励 **/
 		public static var GUILD_WCZB_REWARD : String = createAppInfo("guild.war.WczbRewardPanel","banghui");
 		
