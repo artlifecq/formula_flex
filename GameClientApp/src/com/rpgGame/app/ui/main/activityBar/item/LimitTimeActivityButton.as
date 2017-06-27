@@ -1,14 +1,10 @@
 package com.rpgGame.app.ui.main.activityBar.item
 {
 	import com.rpgGame.app.manager.ActivetyDataManager;
-	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.utils.TimeUtil;
-	import com.rpgGame.core.events.DungeonEvent;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
-	
-	import org.client.mainCore.manager.EventManager;
 
 	/**
 	 *限时活动按钮 
