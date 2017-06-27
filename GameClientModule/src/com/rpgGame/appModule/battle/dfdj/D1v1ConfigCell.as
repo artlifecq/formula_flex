@@ -19,7 +19,7 @@ package com.rpgGame.appModule.battle.dfdj
 		{
 			_view=skin;
 			_skin=skin.skin as DuanWeiList_Item;
-			gReward=new RewardGroup(IcoSizeEnum.ICON_36,_skin.icon1,0,20,-5,0);
+			gReward=new RewardGroup(IcoSizeEnum.ICON_36,_skin.icon1,0,20);
 			_view.visible=false;
 		}
 		public function setConfig(qRank:Q_battle_rank):void
