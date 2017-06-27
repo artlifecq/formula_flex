@@ -242,7 +242,7 @@ package com.rpgGame.app.manager.guild
 		{
 			_currentPageInfo= msg;
 			_guildList = msg.guildList;
-			EventManager.dispatchEvent(GuildEvent.GET_GUILD_LIST,msg);
+			EventManager.dispatchEvent(GuildEvent.GET_GUILD_LIST);
 		}
 		
 		
@@ -253,6 +253,17 @@ package com.rpgGame.app.manager.guild
 			if(_guildList.length<= index)
 				return null;
 			return _guildList[index];
+		}
+		
+		public function getGuildListInfoById(guildid:long):GuildListInfo
+		{
+			var length:int = _guildList.length;
+			for(var i:int = 0;i<length;i++)
+			{
+				if(_guildList[i].guildId.CompareTo(guildid)==1)
+					return _guildList[i];
+			}
+			return null;
 		}
 		
 		private var _allcreateGuildInfo:Array;

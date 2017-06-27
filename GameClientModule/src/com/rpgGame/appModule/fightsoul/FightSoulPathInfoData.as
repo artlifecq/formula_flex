@@ -35,7 +35,7 @@ package com.rpgGame.appModule.fightsoul
 		
 		public function isOpen():Boolean
 		{
-			return FunctionOpenManager.functionIsOpen(_newFunc.q_id);
+			return FunctionOpenManager.functionIsOpen(_newFunc.q_id.toString());
 		}
 		
 		public function get count():int

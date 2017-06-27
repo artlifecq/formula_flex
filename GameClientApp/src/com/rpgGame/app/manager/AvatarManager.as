@@ -343,11 +343,11 @@ package com.rpgGame.app.manager
 				{
 					if (rpd_body.animatorSourchPath)
 					{
-						ru = role.avatar.addRenderUnitToJoint(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_body_01, rpd_body_effect2);
+						ru = role.avatar.addRenderUnitToJoint(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_body_02, rpd_body_effect2);
 					}
 					else
 					{
-						ru = role.avatar.addRenderUnitToBone(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_body_01, rpd_body_effect2);
+						ru = role.avatar.addRenderUnitToBone(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_body_02, rpd_body_effect2);
 					}
 				}
 				if (ru)
