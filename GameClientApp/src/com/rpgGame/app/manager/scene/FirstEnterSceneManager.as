@@ -83,7 +83,6 @@ package com.rpgGame.app.manager.scene
 			SocietySender.reqGetSelfFamilyInfo();
 
 			MapUnitDataManager.setup();
-
 //			CountryTaoNiManager.setup();
 		}
 
