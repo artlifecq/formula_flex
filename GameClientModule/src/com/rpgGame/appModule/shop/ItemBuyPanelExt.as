@@ -256,6 +256,10 @@ package com.rpgGame.appModule.shop
 			_ins.setData(vo);
 			StarlingLayerManager.topUILayer.addChild(_ins);
 		}
+		public static function buyItemByShopItemId(shopItemId:int):void
+		{
+			
+		}
 		public static function buyItemByModelId(itemMod:int):void
 		{
 			var qSource:Q_source=SourceGetCfg.getSource(itemMod);

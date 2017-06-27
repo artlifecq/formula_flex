@@ -12,6 +12,7 @@ package  com.rpgGame.app.manager.shop
 	import com.rpgGame.core.events.ShopEvent;
 	import com.rpgGame.coreData.SpriteStat;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
+	import com.rpgGame.coreData.enum.EnumShopType;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.shop.ShopItemVo;
 	import com.rpgGame.coreData.info.shop.ShopVo;
@@ -191,7 +192,12 @@ package  com.rpgGame.app.manager.shop
 			var eve:ShopEvent=new ShopEvent(type,data);
 			this.dispatchEvent(eve);
 		}
-		
+		/**
+		 *购买商品会检查货币数量够不够 
+		 * @param vo
+		 * @param buyNum
+		 * 
+		 */		
 		public function buyShopItem(vo:ShopItemVo,buyNum:int):void
 		{
 			if (vo) 
@@ -263,6 +269,15 @@ package  com.rpgGame.app.manager.shop
 			{
 				sellItemCall(item);
 			}
+		}
+		public function getMallShopItemVo(shopItemId:int):ShopItemVo
+		{
+			var shop:ShopVo=getShopVo(EnumShopType.SHOP_MALL);
+			if (shop) 
+			{
+				return shop.findShopItemVo(shopItemId);
+			}
+			return null;
 		}
 		public function getCheapestShopItemVo(shop:int):ShopItemVo
 		{
