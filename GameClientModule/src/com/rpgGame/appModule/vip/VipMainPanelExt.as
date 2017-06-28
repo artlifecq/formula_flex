@@ -48,9 +48,10 @@ package com.rpgGame.appModule.vip
 		private var _rewardVip2Ctrl:RewardMarkCtrl;
 		private var _rewardVip3Ctrl:RewardMarkCtrl;
 		private var _rewardBtnCtrl:RewardMarkCtrl;
-		private var _endTime:int;
+		private var _endTime:Number;
 		private var _timer:GameTimer;
 		private var _rewardStr:String;
+		private var _curVip:int;
 		public function VipMainPanelExt()
 		{
 			_skin=new Vip_Skin();
@@ -68,7 +69,14 @@ package com.rpgGame.appModule.vip
 					GlobalFunction.iWantRecharge();
 					break;
 				}
-					
+				case _skin.btnLIngQu:
+				{
+					if (_rewardBtnCtrl.hasReward) 
+					{
+						Mgr.vipMgr.reqGetVipReward(_curVip);
+					}
+					break;
+				}
 				default:
 				{
 					break;
@@ -125,7 +133,7 @@ package com.rpgGame.appModule.vip
 			{
 				MCUtil.removeSelf(lab);
 			}
-			
+			_curVip=vipLv;
 			_vip1.setSelectState(vipLv==EnumVip.VIP1);
 			_vip2.setSelectState(vipLv==EnumVip.VIP2);
 			_vip3.setSelectState(vipLv==EnumVip.VIP3);
@@ -152,7 +160,7 @@ package com.rpgGame.appModule.vip
 				}
 			}
 			_rewardBtnCtrl.hasReward=true;
-			_skin.imgBuy.styleName=Mgr.vipMgr.vipLv==vipLv?"ui/app/vip/xufei.png":"ui/app/vip/jihuo.png";
+			_skin.imgBuy.styleName=Mgr.vipMgr.vipLv>0?"ui/app/vip/xufei.png":"ui/app/vip/jihuo.png";
 			_skin.imgAttr.styleName="ui/app/vip/tq"+vipLv+".png";
 			_skin.imgVipPrivilegs.styleName="ui/app/vip/vip_name"+vipLv+".png";
 			_skin.imgAcitve.styleName="ui/app/vip/act"+vipLv+".png";
@@ -173,14 +181,7 @@ package com.rpgGame.appModule.vip
 			// TODO Auto Generated method stub
 			var nowVip:int=Mgr.vipMgr.vipLv;
 			//显示至尊
-			if (nowVip==0) 
-			{
-				showVipItem(EnumVip.VIP3);
-			}
-			else
-			{
-				showVipItem(nowVip);
-			}
+		
 			switch(nowVip)
 			{
 				case EnumVip.VIP1:
@@ -224,6 +225,19 @@ package com.rpgGame.appModule.vip
 			_vip1.resetData();
 			_vip2.resetData();
 			_vip3.resetData();
+			
+			_vip1.setState(nowVip);
+			_vip2.setState(nowVip);
+			_vip3.setState(nowVip);
+			
+			if (_curVip==0&&nowVip==0) 
+			{
+				showVipItem(EnumVip.VIP3);
+			}
+			else
+			{
+				showVipItem(_curVip!=0?_curVip:nowVip);
+			}
 		}
 		override protected function onHide():void
 		{
@@ -231,6 +245,7 @@ package com.rpgGame.appModule.vip
 			_rewarG.clear();
 			EventManager.removeEvent(VipEvent.GET_VIP_DATA,onGetVipData);
 			_timer.stop();
+			_curVip=0;
 		}
 	}
 }

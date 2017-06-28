@@ -76,7 +76,7 @@ package com.rpgGame.appModule.vip
 		}
 		public function setState(curVip:int):void
 		{
-			if (curVip==_vip) 
+			if (curVip>0) 
 			{
 				_skin.btnKaitong.label="续费";
 			}

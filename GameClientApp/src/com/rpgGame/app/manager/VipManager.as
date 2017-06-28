@@ -17,7 +17,7 @@ package com.rpgGame.app.manager
 		public static var ins:VipManager=new VipManager();
 		
 		private var _vipLv:int;
-		private var _endTime:int;
+		private var _endTime:Number;
 		private var _cardInfos:HashMap;
 		public function VipManager()
 		{
@@ -41,7 +41,7 @@ package com.rpgGame.app.manager
 		/**
 		 *过期剩余时间,绝对时间
 		 */
-		public function get endTime():int
+		public function get endTime():Number
 		{
 			return _endTime;
 		}

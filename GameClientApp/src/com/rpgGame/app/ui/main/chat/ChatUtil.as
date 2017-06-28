@@ -335,7 +335,7 @@ package com.rpgGame.app.ui.main.chat
 		public static function getHTMLChatMessage(msgInfo:ResChatMessage):String
 		{
 			var str:String=replaceItemShow(msgInfo);
-			var vip:int=1;
+			var vip:int=msgInfo.extraResInfo.viplevel;
 			switch(msgInfo.type)
 			{
 				case EnumChatChannelType.CHAT_CHANNEL_SYSTEM:				

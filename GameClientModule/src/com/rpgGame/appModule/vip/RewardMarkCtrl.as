@@ -17,6 +17,7 @@ package com.rpgGame.appModule.vip
 		private var _dis:DisplayObjectContainer;
 		private var _mark:UIAsset;
 		private var _needGray:Boolean;
+		private var _hasReward:Boolean;
 		public function RewardMarkCtrl(dis:DisplayObjectContainer,gray:Boolean=true)
 		{
 			this._dis=dis;
@@ -24,6 +25,7 @@ package com.rpgGame.appModule.vip
 		}
 		public function set hasReward(bool:Boolean):void
 		{
+			_hasReward=bool;
 			if (!bool) 
 			{
 				if (_needGray) 
@@ -54,5 +56,11 @@ package com.rpgGame.appModule.vip
 				MCUtil.BringToTop(_mark);
 			}
 		}
+
+		public function get hasReward():Boolean
+		{
+			return _hasReward;
+		}
+
 	}
 }
