@@ -1,13 +1,11 @@
 package com.rpgGame.appModule.guild.war
 {
+	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.app.ui.common.BgListItemRender;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.guildWar.bean.GuildWarGuildRank;
 	
-	import feathers.controls.renderers.DefaultListItemRenderer;
-	
-	import org.mokylin.skin.app.banghui.ItemBg;
 	import org.mokylin.skin.app.banghui.wangcheng.WangChengPaiMing_Item;
 	
 	import starling.display.DisplayObject;
@@ -39,7 +37,8 @@ package com.rpgGame.appModule.guild.war
 		{
 			super.onTouchTarget(target);
 			if(target==skin.lbBanghui){
-//				GuildSender.requestGuildInfo()
+				var info:GuildWarGuildRank=_data as GuildWarGuildRank;
+				GuildSender.reqGuildBriefnessInfo(info.guildId);
 			}
 		}
 		

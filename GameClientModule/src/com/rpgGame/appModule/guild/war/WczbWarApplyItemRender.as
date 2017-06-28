@@ -48,8 +48,8 @@ package com.rpgGame.appModule.guild.war
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
 			super.onTouchTarget(target);
+			var info:GuildWarCityApplyInfo=_data.info as GuildWarCityApplyInfo;
 			if(target==skin.btnPai){
-				var info:GuildWarCityApplyInfo=_data.info as GuildWarCityApplyInfo;
 				var op:int;
 				switch(info.id){
 					case EnumCity.XI_WEI:
@@ -63,6 +63,10 @@ package com.rpgGame.appModule.guild.war
 						break;
 				}
 				GuildSender.reqGuildWarApply(info.id,op);
+			}else if(target==skin.lbTeamName1&&info.occupyGuildName){
+				GuildSender.reqGuildBriefnessInfo(info.occupyGuildId);
+			}else if(target==skin.lbTeamName2&&info.curMaxPriceGuildName){
+				GuildSender.reqGuildBriefnessInfo(info.curMaxPriceGuildId);
 			}
 		}
 		

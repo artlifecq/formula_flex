@@ -106,8 +106,8 @@ package com.rpgGame.app.fight.spell
 			var toP:Point;
 			if(_cfg.q_trigger_type==1)
 			{
-				var index:int=getNextShortIndex();
 				var cfg:Q_skill_model=SpellDataManager.getSpellData(skillInfo.skillModelId,skillInfo.skillLevel);
+				var index:int=cfg.q_seat-1;//配置从1开始的 
 				toP=MainUIManager.mainui.shortcutBar.getSkillGridSeat(index);
 				ShortcutsManger.getInstance().setShortData(index,ShortcutsTypeEnum.SKILL_TYPE,cfg.q_skillID);
 			}
@@ -122,18 +122,6 @@ package com.rpgGame.app.fight.spell
 		private function flytoShortcutComplete(...arg):void
 		{
 			MCUtil.removeSelf(arg[0]);
-		}
-		private function getNextShortIndex():int
-		{
-			var index:int;
-			for(var i:int=0;i<8;i++){
-				var shortData : ShortcutsData = ShortcutsManger.getInstance().getShortcutsDataByPos(i);
-				if(!shortData){
-					index=i;
-					break;
-				}
-			}
-			return index;
 		}
 		
 		override protected function onStageResize(sw : int, sh : int) : void

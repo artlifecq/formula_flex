@@ -4,6 +4,8 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.GuildEvent;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.netData.guild.message.ResGuildActiveMessage;
@@ -89,7 +91,7 @@ package com.rpgGame.app.cmdlistener
 		
 		private function getResGuildBriefnessInfo(msg:ResGuildBriefnessInfoMessage):void
 		{
-			GuildManager.instance().setResGuildBriefnessInfo(msg.guildBriefnessInfo);
+			AppManager.showAppNoHide(AppConstant.GUILD_BRIEFNESSINFO_PANEL,msg.guildBriefnessInfo);
 		}
 		
 		private function getResGuildListInfo(msg:ResGuildListInfoMessage):void

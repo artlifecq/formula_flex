@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.guild
 {
 	import com.rpgGame.app.manager.guild.GuildManager;
+	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.app.sender.LookSender;
 	import com.rpgGame.coreData.cfg.GuildCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_guild;
@@ -34,7 +35,7 @@ package com.rpgGame.appModule.guild
 			super.onTouchTarget(target);
 			if(_skin.lbTeamName == target)
 			{
-				GuildPorpInfoPanel.instance.show(_guildListinfo);
+				GuildSender.reqGuildBriefnessInfo(_guildListinfo.guildId,0);
 			}else if(_skin.lbRolenName == target){
 				LookSender.lookOtherPlayer(_guildListinfo.chiefId);
 			}

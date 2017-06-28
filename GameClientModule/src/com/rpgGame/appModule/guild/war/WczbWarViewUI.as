@@ -446,7 +446,11 @@ package com.rpgGame.appModule.guild.war
 			_skin.grpCheng.visible=true;
 			_skin.lbHead.htmlText="竞拍"+getCityName(city);
 			_skin.lbName1.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,"当前出价最高帮派:");
-			_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,_infoMsg.curMaxPriceGuildName);
+			if(_infoMsg.curMaxPriceGuildName){
+				_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,_infoMsg.curMaxPriceGuildName);
+			}else{
+				_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,"暂无");
+			}
 			_skin.lbName2.text="";
 			_leftTime=_infoMsg.curWarTime;
 			_timeStr="距离竞拍结束还剩:"

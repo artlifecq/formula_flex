@@ -38,8 +38,6 @@ package com.rpgGame.core.events
 		/**帮派操作标识**/
 		public static const GUILD_OPERATERESULT : uint = UNIQUEID.NEXT;
 		
-		/**跟新指定帮派信息**/
-		public static const GUILD_INFO_CHANGE : uint = UNIQUEID.NEXT;
 		/**跟新帮派技能信息**/
 		public static const GUILD_SKILLINFO_CHAGE:uint = UNIQUEID.NEXT;
 		/**王城争霸战信息**/

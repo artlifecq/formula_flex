@@ -205,7 +205,7 @@ package com.rpgGame.app.sender
 		}
 		
 		/** 获取帮派简介信息*/
-		public static function reqGuildBriefnessInfo(guildId:long,opaque:int):void
+		public static function reqGuildBriefnessInfo(guildId:long,opaque:int=0):void
 		{
 			var msg:ReqGuildBriefnessInfoMessage = new ReqGuildBriefnessInfoMessage();
 			msg.guildId = guildId;

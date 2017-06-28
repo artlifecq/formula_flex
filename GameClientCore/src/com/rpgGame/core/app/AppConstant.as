@@ -404,7 +404,7 @@ package com.rpgGame.core.app
 		/**帮会邀请列表 **/
 		public static var GUILD_INVITATION_PANEL : String = createAppInfo("guild.GuildInvitationListPanle","banghui");
 		/**帮会信息 **/
-//		public static var GUILD_APPLAYINFO_PANEL : String = createAppInfo("guild.GuildPorpInfoPanel","banghui");
+		public static var GUILD_BRIEFNESSINFO_PANEL : String = createAppInfo("guild.GuildBriefnessInfoPanel","banghui");
 		/**帮会权限设置 **/
 		public static var GUILD_APPOINTED_PANEL : String = createAppInfo("guild.GuildAppointedPanel","banghui");
 		/**帮会统帅设置 **/
