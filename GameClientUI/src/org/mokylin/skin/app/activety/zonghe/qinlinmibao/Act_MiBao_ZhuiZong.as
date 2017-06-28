@@ -30,29 +30,67 @@ package org.mokylin.skin.app.activety.zonghe.qinlinmibao
 
 		public var head_right:feathers.controls.UIAsset;
 
+		public var ico1_0:feathers.controls.UIAsset;
+
+		public var ico1_1:feathers.controls.UIAsset;
+
+		public var ico1_2:feathers.controls.UIAsset;
+
+		public var ico1_3:feathers.controls.UIAsset;
+
+		public var ico1_4:feathers.controls.UIAsset;
+
+		public var ico1_5:feathers.controls.UIAsset;
+
+		public var ico1_6:feathers.controls.UIAsset;
+
+		public var ico1_7:feathers.controls.UIAsset;
+
+		public var ico2_0:feathers.controls.UIAsset;
+
+		public var ico2_1:feathers.controls.UIAsset;
+
+		public var ico2_2:feathers.controls.UIAsset;
+
+		public var ico2_3:feathers.controls.UIAsset;
+
+		public var ico2_4:feathers.controls.UIAsset;
+
+		public var ico2_5:feathers.controls.UIAsset;
+
+		public var ico2_6:feathers.controls.UIAsset;
+
+		public var ico2_7:feathers.controls.UIAsset;
+
+		public var jisha0:feathers.controls.UIAsset;
+
+		public var jisha1:feathers.controls.UIAsset;
+
+		public var jisha2:feathers.controls.UIAsset;
+
 		public var lbHeadName:feathers.controls.Label;
 
-		public var lbItem:feathers.controls.Label;
+		public var lbItem0:feathers.controls.Label;
+
+		public var lbItem1:feathers.controls.Label;
+
+		public var lbItem2:feathers.controls.Label;
 
 		public var lbJifen:feathers.controls.Label;
 
+		public var lbJifen0:feathers.controls.Label;
+
 		public var lbZhenqi:feathers.controls.Label;
 
-		public var sec_ico1_0:feathers.controls.UIAsset;
+		public var lbZhenqi0:feathers.controls.Label;
 
-		public var sec_ico1_1:feathers.controls.UIAsset;
+		public var pmItem0:feathers.controls.SkinnableContainer;
 
-		public var sec_ico1_2:feathers.controls.UIAsset;
+		public var pmItem1:feathers.controls.SkinnableContainer;
 
-		public var sec_ico1_3:feathers.controls.UIAsset;
+		public var pmItem2:feathers.controls.SkinnableContainer;
 
-		public var sec_ico2_0:feathers.controls.UIAsset;
-
-		public var sec_ico2_1:feathers.controls.UIAsset;
-
-		public var sec_ico2_2:feathers.controls.UIAsset;
-
-		public var sec_ico2_3:feathers.controls.UIAsset;
+		public var pmItem3:feathers.controls.SkinnableContainer;
 
 		public var sec_info:feathers.controls.Label;
 
@@ -65,8 +103,6 @@ package org.mokylin.skin.app.activety.zonghe.qinlinmibao
 		public var sec_subbut1:feathers.controls.Button;
 
 		public var task_box:feathers.controls.Group;
-
-		public var uiYiTiaoZhan:feathers.controls.UIAsset;
 
 		public var ui_bg:feathers.controls.UIAsset;
 
@@ -95,9 +131,9 @@ package org.mokylin.skin.app.activety.zonghe.qinlinmibao
 		private function __Act_MiBao_ZhuiZong_Group1_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
-			temp.x = 17;
-			temp.y = 330;
-			temp.elementsContent = [__Act_MiBao_ZhuiZong_UIAsset3_i(),__Act_MiBao_ZhuiZong_Label1_i(),__Act_MiBao_ZhuiZong_Label2_i(),__Act_MiBao_ZhuiZong_Label3_i()];
+			temp.x = 13;
+			temp.y = 326;
+			temp.elementsContent = [__Act_MiBao_ZhuiZong_UIAsset2_i(),__Act_MiBao_ZhuiZong_UIAsset3_i(),__Act_MiBao_ZhuiZong_Label1_i(),__Act_MiBao_ZhuiZong_Label2_i(),__Act_MiBao_ZhuiZong_Label3_i(),pmItem0_i(),pmItem1_i(),pmItem2_i(),pmItem3_i()];
 			return temp;
 		}
 
@@ -107,8 +143,8 @@ package org.mokylin.skin.app.activety.zonghe.qinlinmibao
 			temp.text = "名次";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 1;
-			temp.y = 4;
+			temp.x = 5;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -118,8 +154,8 @@ package org.mokylin.skin.app.activety.zonghe.qinlinmibao
 			temp.text = "玩家名称";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 47;
-			temp.y = 4;
+			temp.x = 51;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -129,20 +165,8 @@ package org.mokylin.skin.app.activety.zonghe.qinlinmibao
 			temp.text = "伤害输出";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 141;
-			temp.y = 4;
-			return temp;
-		}
-
-		private function __Act_MiBao_ZhuiZong_SkinnableContainer1_i():feathers.controls.SkinnableContainer
-		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			temp.height = 20;
-			var skin:StateSkin = new org.mokylin.skin.app.activety.zonghe.qinlinmibao.PaiMing_Item()
-			temp.skin = skin
-			temp.width = 217;
-			temp.x = 18;
-			temp.y = 360;
+			temp.x = 145;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -161,8 +185,8 @@ package org.mokylin.skin.app.activety.zonghe.qinlinmibao
 			temp.height = 141;
 			temp.styleName = "ui/common/background/neikuang_3.png";
 			temp.width = 224;
-			temp.x = 13;
-			temp.y = 326;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -170,8 +194,8 @@ package org.mokylin.skin.app.activety.zonghe.qinlinmibao
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/activety/zonghe/yeqian.png";
-			temp.x = 0;
-			temp.y = 0;
+			temp.x = 4;
+			temp.y = 4;
 			return temp;
 		}
 
@@ -225,6 +249,215 @@ package org.mokylin.skin.app.activety.zonghe.qinlinmibao
 			return temp;
 		}
 
+		private function ico1_0_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ico1_0 = temp;
+			temp.name = "ico1_0";
+			temp.styleName = "ui/mainui/renwu/tbk.png";
+			temp.x = 21;
+			temp.y = 221;
+			return temp;
+		}
+
+		private function ico1_1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ico1_1 = temp;
+			temp.name = "ico1_1";
+			temp.styleName = "ui/mainui/renwu/tbk.png";
+			temp.x = 73;
+			temp.y = 221;
+			return temp;
+		}
+
+		private function ico1_2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ico1_2 = temp;
+			temp.name = "ico1_2";
+			temp.styleName = "ui/mainui/renwu/tbk.png";
+			temp.x = 125;
+			temp.y = 221;
+			return temp;
+		}
+
+		private function ico1_3_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ico1_3 = temp;
+			temp.name = "ico1_3";
+			temp.styleName = "ui/mainui/renwu/tbk.png";
+			temp.x = 177;
+			temp.y = 221;
+			return temp;
+		}
+
+		private function ico1_4_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ico1_4 = temp;
+			temp.name = "ico1_4";
+			temp.styleName = "ui/mainui/renwu/tbk.png";
+			temp.x = 21;
+			temp.y = 221;
+			return temp;
+		}
+
+		private function ico1_5_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ico1_5 = temp;
+			temp.name = "ico1_5";
+			temp.styleName = "ui/mainui/renwu/tbk.png";
+			temp.x = 73;
+			temp.y = 221;
+			return temp;
+		}
+
+		private function ico1_6_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ico1_6 = temp;
+			temp.name = "ico1_6";
+			temp.styleName = "ui/mainui/renwu/tbk.png";
+			temp.x = 125;
+			temp.y = 221;
+			return temp;
+		}
+
+		private function ico1_7_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ico1_7 = temp;
+			temp.name = "ico1_7";
+			temp.styleName = "ui/mainui/renwu/tbk.png";
+			temp.x = 177;
+			temp.y = 221;
+			return temp;
+		}
+
+		private function ico2_0_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ico2_0 = temp;
+			temp.name = "ico2_0";
+			temp.styleName = "ui/mainui/renwu/tbk.png";
+			temp.x = 21;
+			temp.y = 476;
+			return temp;
+		}
+
+		private function ico2_1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ico2_1 = temp;
+			temp.name = "ico2_1";
+			temp.styleName = "ui/mainui/renwu/tbk.png";
+			temp.x = 73;
+			temp.y = 476;
+			return temp;
+		}
+
+		private function ico2_2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ico2_2 = temp;
+			temp.name = "ico2_2";
+			temp.styleName = "ui/mainui/renwu/tbk.png";
+			temp.x = 125;
+			temp.y = 476;
+			return temp;
+		}
+
+		private function ico2_3_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ico2_3 = temp;
+			temp.name = "ico2_3";
+			temp.styleName = "ui/mainui/renwu/tbk.png";
+			temp.x = 177;
+			temp.y = 476;
+			return temp;
+		}
+
+		private function ico2_4_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ico2_4 = temp;
+			temp.name = "ico2_4";
+			temp.styleName = "ui/mainui/renwu/tbk.png";
+			temp.x = 21;
+			temp.y = 476;
+			return temp;
+		}
+
+		private function ico2_5_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ico2_5 = temp;
+			temp.name = "ico2_5";
+			temp.styleName = "ui/mainui/renwu/tbk.png";
+			temp.x = 73;
+			temp.y = 476;
+			return temp;
+		}
+
+		private function ico2_6_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ico2_6 = temp;
+			temp.name = "ico2_6";
+			temp.styleName = "ui/mainui/renwu/tbk.png";
+			temp.x = 125;
+			temp.y = 476;
+			return temp;
+		}
+
+		private function ico2_7_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ico2_7 = temp;
+			temp.name = "ico2_7";
+			temp.styleName = "ui/mainui/renwu/tbk.png";
+			temp.x = 177;
+			temp.y = 476;
+			return temp;
+		}
+
+		private function jisha0_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			jisha0 = temp;
+			temp.name = "jisha0";
+			temp.styleName = "ui/common/yijisha2.png";
+			temp.x = 173;
+			temp.y = 39;
+			return temp;
+		}
+
+		private function jisha1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			jisha1 = temp;
+			temp.name = "jisha1";
+			temp.styleName = "ui/common/yijisha2.png";
+			temp.x = 173;
+			temp.y = 65;
+			return temp;
+		}
+
+		private function jisha2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			jisha2 = temp;
+			temp.name = "jisha2";
+			temp.styleName = "ui/common/yijisha2.png";
+			temp.x = 173;
+			temp.y = 90;
+			return temp;
+		}
+
 		private function lbHeadName_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -241,11 +474,12 @@ package org.mokylin.skin.app.activety.zonghe.qinlinmibao
 			return temp;
 		}
 
-		private function lbItem_i():feathers.controls.Label
+		private function lbItem0_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbItem = temp;
-			temp.name = "lbItem";
+			lbItem0 = temp;
+			temp.name = "lbItem0";
+			temp.height = 20;
 			temp.text = "击杀：秦国守卫（99/99）";
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
@@ -255,17 +489,75 @@ package org.mokylin.skin.app.activety.zonghe.qinlinmibao
 			return temp;
 		}
 
+		private function lbItem1_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbItem1 = temp;
+			temp.name = "lbItem1";
+			temp.height = 20;
+			temp.text = "击杀：秦国守卫（99/99）";
+			temp.color = 0x5CB006;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 203;
+			temp.x = 26;
+			temp.y = 91;
+			return temp;
+		}
+
+		private function lbItem2_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbItem2 = temp;
+			temp.name = "lbItem2";
+			temp.height = 20;
+			temp.text = "击杀：秦国守卫（99/99）";
+			temp.color = 0x5CB006;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 203;
+			temp.x = 26;
+			temp.y = 117;
+			return temp;
+		}
+
+		private function lbJifen0_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbJifen0 = temp;
+			temp.name = "lbJifen0";
+			temp.text = "9999999";
+			temp.color = 0xE3D9BF;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreeni"];
+			temp.width = 127;
+			temp.x = 112;
+			temp.y = 170;
+			return temp;
+		}
+
 		private function lbJifen_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbJifen = temp;
 			temp.name = "lbJifen";
-			temp.text = "获得积分：$";
+			temp.text = "累积积分：";
 			temp.color = 0xE8C958;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 203;
+			temp.width = 78;
 			temp.x = 26;
 			temp.y = 170;
+			return temp;
+		}
+
+		private function lbZhenqi0_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbZhenqi0 = temp;
+			temp.name = "lbZhenqi0";
+			temp.text = "99999999";
+			temp.color = 0xE3D9BF;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreeni"];
+			temp.width = 127;
+			temp.x = 112;
+			temp.y = 194;
 			return temp;
 		}
 
@@ -274,100 +566,68 @@ package org.mokylin.skin.app.activety.zonghe.qinlinmibao
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbZhenqi = temp;
 			temp.name = "lbZhenqi";
-			temp.text = "获得积分：$";
+			temp.text = "获得真气：";
 			temp.color = 0xE8C958;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 203;
+			temp.width = 78;
 			temp.x = 26;
 			temp.y = 194;
 			return temp;
 		}
 
-		private function sec_ico1_0_i():feathers.controls.UIAsset
+		private function pmItem0_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			sec_ico1_0 = temp;
-			temp.name = "sec_ico1_0";
-			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 21;
-			temp.y = 221;
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			pmItem0 = temp;
+			temp.name = "pmItem0";
+			temp.height = 20;
+			var skin:StateSkin = new org.mokylin.skin.app.activety.zonghe.qinlinmibao.PaiMing_Item()
+			temp.skin = skin
+			temp.width = 217;
+			temp.x = 5;
+			temp.y = 86;
 			return temp;
 		}
 
-		private function sec_ico1_1_i():feathers.controls.UIAsset
+		private function pmItem1_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			sec_ico1_1 = temp;
-			temp.name = "sec_ico1_1";
-			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 73;
-			temp.y = 221;
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			pmItem1 = temp;
+			temp.name = "pmItem1";
+			temp.height = 20;
+			var skin:StateSkin = new org.mokylin.skin.app.activety.zonghe.qinlinmibao.PaiMing_Item()
+			temp.skin = skin
+			temp.width = 217;
+			temp.x = 5;
+			temp.y = 60;
 			return temp;
 		}
 
-		private function sec_ico1_2_i():feathers.controls.UIAsset
+		private function pmItem2_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			sec_ico1_2 = temp;
-			temp.name = "sec_ico1_2";
-			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 125;
-			temp.y = 221;
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			pmItem2 = temp;
+			temp.name = "pmItem2";
+			temp.height = 20;
+			var skin:StateSkin = new org.mokylin.skin.app.activety.zonghe.qinlinmibao.PaiMing_Item()
+			temp.skin = skin
+			temp.width = 217;
+			temp.x = 5;
+			temp.y = 34;
 			return temp;
 		}
 
-		private function sec_ico1_3_i():feathers.controls.UIAsset
+		private function pmItem3_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			sec_ico1_3 = temp;
-			temp.name = "sec_ico1_3";
-			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 177;
-			temp.y = 221;
-			return temp;
-		}
-
-		private function sec_ico2_0_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			sec_ico2_0 = temp;
-			temp.name = "sec_ico2_0";
-			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 21;
-			temp.y = 476;
-			return temp;
-		}
-
-		private function sec_ico2_1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			sec_ico2_1 = temp;
-			temp.name = "sec_ico2_1";
-			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 73;
-			temp.y = 476;
-			return temp;
-		}
-
-		private function sec_ico2_2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			sec_ico2_2 = temp;
-			temp.name = "sec_ico2_2";
-			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 125;
-			temp.y = 476;
-			return temp;
-		}
-
-		private function sec_ico2_3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			sec_ico2_3 = temp;
-			temp.name = "sec_ico2_3";
-			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 177;
-			temp.y = 476;
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			pmItem3 = temp;
+			temp.name = "pmItem3";
+			temp.height = 20;
+			var skin:StateSkin = new org.mokylin.skin.app.activety.zonghe.qinlinmibao.PaiMing_Item()
+			temp.skin = skin
+			temp.width = 217;
+			temp.x = 5;
+			temp.y = 112;
 			return temp;
 		}
 
@@ -393,6 +653,7 @@ package org.mokylin.skin.app.activety.zonghe.qinlinmibao
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			sec_navi0 = temp;
 			temp.name = "sec_navi0";
+			temp.height = 20;
 			temp.text = "[阶段一·当前目标]";
 			temp.color = 0xE8C958;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
@@ -433,6 +694,7 @@ package org.mokylin.skin.app.activety.zonghe.qinlinmibao
 			sec_subbut1 = temp;
 			temp.name = "sec_subbut1";
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.height = 36;
 			temp.label = "退出副本";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xE1D4A9;
@@ -450,18 +712,7 @@ package org.mokylin.skin.app.activety.zonghe.qinlinmibao
 			temp.width = 253;
 			temp.x = 0;
 			temp.y = 0;
-			temp.elementsContent = [ui_bg_i(),__Act_MiBao_ZhuiZong_UIAsset1_i(),lbHeadName_i(),head_left_i(),head_right_i(),sec_navi0_i(),sec_navi1_i(),sec_navi2_i(),sec_ico1_0_i(),sec_ico1_1_i(),sec_ico1_2_i(),sec_ico1_3_i(),sec_ico2_0_i(),sec_ico2_1_i(),sec_ico2_2_i(),sec_ico2_3_i(),sec_subbut1_i(),sec_info_i(),lbItem_i(),lbJifen_i(),lbZhenqi_i(),uiYiTiaoZhan_i(),__Act_MiBao_ZhuiZong_UIAsset2_i(),__Act_MiBao_ZhuiZong_Group1_i(),__Act_MiBao_ZhuiZong_SkinnableContainer1_i()];
-			return temp;
-		}
-
-		private function uiYiTiaoZhan_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			uiYiTiaoZhan = temp;
-			temp.name = "uiYiTiaoZhan";
-			temp.styleName = "ui/common/yijisha2.png";
-			temp.x = 173;
-			temp.y = 34;
+			temp.elementsContent = [ui_bg_i(),__Act_MiBao_ZhuiZong_UIAsset1_i(),lbHeadName_i(),head_left_i(),head_right_i(),sec_navi0_i(),sec_navi1_i(),ico1_0_i(),ico1_1_i(),ico1_2_i(),ico1_3_i(),ico1_4_i(),ico1_5_i(),ico1_6_i(),ico1_7_i(),sec_subbut1_i(),sec_info_i(),lbItem0_i(),lbItem1_i(),lbItem2_i(),lbJifen_i(),lbZhenqi_i(),lbJifen0_i(),lbZhenqi0_i(),jisha0_i(),jisha1_i(),jisha2_i(),sec_navi2_i(),ico2_0_i(),ico2_1_i(),ico2_2_i(),ico2_3_i(),ico2_4_i(),ico2_5_i(),ico2_6_i(),ico2_7_i(),__Act_MiBao_ZhuiZong_Group1_i()];
 			return temp;
 		}
 
