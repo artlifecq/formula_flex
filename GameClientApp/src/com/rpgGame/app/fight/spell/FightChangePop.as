@@ -90,7 +90,6 @@ package com.rpgGame.app.fight.spell
 		{
 			TweenMax.to(skin.container,0.3,{y:skin.container.y+20,alpha:0,ease:Expo.easeOut,onComplete:popComplete});
 		}
-			
 		
 		private function updateSeate():void
 		{

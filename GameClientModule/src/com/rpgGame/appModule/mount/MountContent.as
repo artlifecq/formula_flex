@@ -70,10 +70,9 @@ package com.rpgGame.appModule.mount
 				_nextInter3D = null;
 			}
 			_amationInfos = new Vector.<TargetAmationInfo>();
-			var animat : String = ClientConfig.getAvatar(HorseConfigData.mountAnimatResID);
 			_curtentInter3D = new InterObject3D();
-			var data : RenderParamData3D = new RenderParamData3D(0, "mount1",ClientConfig.getAvatar(current.q_scene_show_url));
-			data.animatorSourchPath = animat;
+			var data : RenderParamData3D = new RenderParamData3D(0, "mount1",ClientConfig.getAvatar(current.q_skinResID));
+			data.animatorSourchPath = ClientConfig.getAvatar( current.q_animatResID);
 			data.forceLoad=true;//ui上的3d特效强制加载
 			var unit : RenderUnit3D = _curtentInter3D.addRenderUnitWith(data, 0);
 			unit.setStatus("stand");
@@ -104,8 +103,8 @@ package com.rpgGame.appModule.mount
 			if(next ==null)
 				return ;
 			_nextInter3D = new InterObject3D();
-			data = new RenderParamData3D(0, "mount2",ClientConfig.getAvatar(next.q_scene_show_url));
-			data.animatorSourchPath = animat;
+			data = new RenderParamData3D(0, "mount2",ClientConfig.getAvatar(next.q_skinResID));
+			data.animatorSourchPath = ClientConfig.getAvatar( next.q_animatResID);;
 			data.forceLoad=true;//ui上的3d特效强制加载
 			unit = _nextInter3D.addRenderUnitWith(data, 0);
 			unit.setStatus("stand");

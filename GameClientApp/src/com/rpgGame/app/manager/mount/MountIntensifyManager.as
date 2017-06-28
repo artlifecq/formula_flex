@@ -51,7 +51,7 @@ package com.rpgGame.app.manager.mount
 		 */		
 		public static function requestMountRefine( idx:int, isUse:Boolean, indexOrMountIdx:int ):void
 		{
-			MountSender.requestMountRefine( idx, isUse, indexOrMountIdx );
+//			MountSender.requestMountRefine( idx, isUse, indexOrMountIdx );
 		}
 		
 		/**
