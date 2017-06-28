@@ -26,15 +26,13 @@ package org.mokylin.skin.app.vip
 
 		public var lbDec:feathers.controls.Label;
 
-		public var lbFang:feathers.controls.Label;
-
 		public var lbGong:feathers.controls.Label;
 
 		public var lbTime:feathers.controls.Label;
 
-		public var lbXue:feathers.controls.Label;
-
 		public var lbl_titile:feathers.controls.Label;
+
+		public var uiDi:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -47,7 +45,7 @@ package org.mokylin.skin.app.vip
 			this.currentState = "normal";
 			this.height = 185;
 			this.width = 280;
-			this.elementsContent = [bg_i(),lbl_titile_i(),__Tips_VipSelect_UIAsset2_i(),lbGong_i(),lbFang_i(),lbXue_i(),lbTime_i(),lbDec_i()];
+			this.elementsContent = [bg_i(),lbl_titile_i(),__Tips_VipSelect_UIAsset1_i(),lbGong_i(),lbTime_i(),lbDec_i()];
 			
 			states = {
 			};
@@ -61,16 +59,7 @@ package org.mokylin.skin.app.vip
 		private function __Tips_VipSelect_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/tips/zhuangbei/bg_buttom1.png";
-			temp.x = 0;
-			temp.y = 159;
-			return temp;
-		}
-
-		private function __Tips_VipSelect_UIAsset2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/vip/pdzqsx.png";
+			temp.styleName = "ui/common/vip/pdzqsx.png";
 			temp.x = 13;
 			temp.y = 41;
 			return temp;
@@ -96,7 +85,7 @@ package org.mokylin.skin.app.vip
 			temp.name = "bg";
 			temp.x = 0;
 			temp.y = 0;
-			temp.elementsContent = [__Tips_VipSelect_UIAsset1_i(),bg_lan_i(),bg_zi_i(),bg_huang_i()];
+			temp.elementsContent = [uiDi_i(),bg_lan_i(),bg_zi_i(),bg_huang_i()];
 			return temp;
 		}
 
@@ -140,20 +129,6 @@ package org.mokylin.skin.app.vip
 			return temp;
 		}
 
-		private function lbFang_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbFang = temp;
-			temp.name = "lbFang";
-			temp.text = "防御：$";
-			temp.color = 0xEAEABC;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 165;
-			temp.x = 13;
-			temp.y = 79;
-			return temp;
-		}
-
 		private function lbGong_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -183,20 +158,6 @@ package org.mokylin.skin.app.vip
 			return temp;
 		}
 
-		private function lbXue_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbXue = temp;
-			temp.name = "lbXue";
-			temp.text = "血量：$";
-			temp.color = 0xEAEABC;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 165;
-			temp.x = 13;
-			temp.y = 99;
-			return temp;
-		}
-
 		private function lbl_titile_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -212,6 +173,17 @@ package org.mokylin.skin.app.vip
 			temp.width = 260;
 			temp.x = 14;
 			temp.y = 11;
+			return temp;
+		}
+
+		private function uiDi_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiDi = temp;
+			temp.name = "uiDi";
+			temp.styleName = "ui/common/tips/zhuangbei/bg_buttom1.png";
+			temp.x = 0;
+			temp.y = 159;
 			return temp;
 		}
 

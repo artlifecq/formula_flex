@@ -16,15 +16,21 @@ package com.rpgGame.appModule.vip
 	{
 		private var _dis:DisplayObjectContainer;
 		private var _mark:UIAsset;
-		public function RewardMarkCtrl(dis:DisplayObjectContainer)
+		private var _needGray:Boolean;
+		public function RewardMarkCtrl(dis:DisplayObjectContainer,gray:Boolean=true)
 		{
 			this._dis=dis;
+			this._needGray=gray;
 		}
 		public function set hasReward(bool:Boolean):void
 		{
 			if (!bool) 
 			{
-				GrayFilter.gray(_dis);
+				if (_needGray) 
+				{
+					GrayFilter.gray(_dis);
+				}
+				
 				if (_mark) 
 				{
 					_mark.visible=false;
@@ -32,7 +38,10 @@ package com.rpgGame.appModule.vip
 			}
 			else
 			{
-				GrayFilter.unGray(_dis);
+				if (_needGray) 
+				{
+					GrayFilter.unGray(_dis);
+				}
 				if (!_mark) 
 				{
 					_mark=new UIAsset();
@@ -41,6 +50,7 @@ package com.rpgGame.appModule.vip
 					_mark.y=2;
 					_dis.addChild(_mark);
 				}
+				_mark.visible=true;
 				MCUtil.BringToTop(_mark);
 			}
 		}

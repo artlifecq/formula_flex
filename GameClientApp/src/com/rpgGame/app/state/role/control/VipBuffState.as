@@ -3,11 +3,15 @@ package com.rpgGame.app.state.role.control
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.type.RoleStateType;
+	
+	import app.message.EnumVip;
 
 	public class VipBuffState extends BuffState
 	{
 		private static const BUFF2VIP:Object={};
-		
+		BUFF2VIP[12]=EnumVip.VIP1;
+		BUFF2VIP[13]=EnumVip.VIP2;
+		BUFF2VIP[14]=EnumVip.VIP3;
 		public function VipBuffState()
 		{
 			super(RoleStateType.CONTROL_VIP);

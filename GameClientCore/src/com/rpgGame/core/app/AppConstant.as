@@ -492,5 +492,8 @@ package com.rpgGame.core.app
 		public static var BATTLE_NINE_TOWER_SCORE_PANEL:String = createAppInfo("battle.jcyt.NineTowerScorePanelExt","zhanchang");
 		/**npc闲话**/
 		public static var NPC_SPEAK:String = createAppInfo("npc.NpcSpeak","npc");
+		
+		/**npc闲话**/
+		public static var VIP_PANEL:String = createAppInfo("vip.VipMainPanelExt","vip");
 	}
 }

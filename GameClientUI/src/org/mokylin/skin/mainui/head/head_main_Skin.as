@@ -33,6 +33,8 @@ package org.mokylin.skin.mainui.head
 
 		public var banghui:feathers.controls.SkinnableContainer;
 
+		public var btnVip:feathers.controls.Button;
+
 		public var btn_banghui:feathers.controls.Button;
 
 		public var btn_duiwu:feathers.controls.Button;
@@ -68,7 +70,7 @@ package org.mokylin.skin.mainui.head
 			this.currentState = "normal";
 			this.height = 220;
 			this.width = 435;
-			this.elementsContent = [__head_main_Skin_UIAsset1_i(),__head_main_Skin_UIAsset2_i(),role_zhandouli_i(),role_name_i(),grp_zhiye_i(),grp_mode_i(),grp_select_i()];
+			this.elementsContent = [__head_main_Skin_UIAsset1_i(),__head_main_Skin_UIAsset2_i(),role_zhandouli_i(),role_name_i(),grp_zhiye_i(),grp_mode_i(),grp_select_i(),btnVip_i()];
 			
 			states = {
 			};
@@ -158,6 +160,17 @@ package org.mokylin.skin.mainui.head
 			temp.width = 332;
 			temp.x = 5;
 			temp.y = 61;
+			return temp;
+		}
+
+		private function btnVip_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btnVip = temp;
+			temp.name = "btnVip";
+			temp.styleClass = org.mokylin.skin.mainui.head.button.ButtonSkin_heping;
+			temp.x = 12;
+			temp.y = 100;
 			return temp;
 		}
 

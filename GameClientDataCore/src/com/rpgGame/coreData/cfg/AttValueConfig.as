@@ -116,7 +116,15 @@ package com.rpgGame.coreData.cfg
 			_attrDic[att.id] =maps;
 			return maps;
 		}
-		
+		public static function getAttrHash(attId:int):HashMap
+		{
+			var attr:Q_att_values=getAttInfoById(attId);
+			if (attr) 
+			{
+				return getTypeValueMap(attr);
+			}
+			return null;
+		}
 		public static function getTypeValue(attId:int,retHash:HashMap):void
 		{
 			if (retHash==null) 

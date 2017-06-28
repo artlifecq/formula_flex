@@ -182,6 +182,7 @@ package com.rpgGame.app.view.icon
 			//因为从对象池取的，所以要设置下
 			_bgImage.width=S2W[_iconSize];
 			_bgImage.height=S2W[_iconSize];
+			_bgImage.visible=true;
 			sortLayer();
 		}
 		
@@ -209,6 +210,7 @@ package com.rpgGame.app.view.icon
 			//因为从对象池取的，所以要设置下
 			_bgImage.width=S2W[_iconSize];
 			_bgImage.height=S2W[_iconSize];
+			_bgImage.visible=true;
 			sortLayer();
 		}
 		protected function setIsShowLockAsset(value:Boolean,isBind:Boolean):void
@@ -507,6 +509,7 @@ package com.rpgGame.app.view.icon
 			}*/
 			clearLockAsset();
 			hideQuality();
+	
 			
 			if(_qualityEft){
 				_qualityEft.removeFromParent();

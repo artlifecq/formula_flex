@@ -26,6 +26,7 @@ package com.rpgGame.netData{
 	import com.rpgGame.netData.backpack.handler.ResRemovePrivateItemHandler;
 	import com.rpgGame.netData.backpack.handler.ResTakeUpSuccessHandler;
 	import com.rpgGame.netData.backpack.handler.ResUseItemSuccessHandler;
+	import com.rpgGame.netData.backpack.handler.SCFlyItemsHandler;
 	import com.rpgGame.netData.backpack.message.ResAddPrivateItemMessage;
 	import com.rpgGame.netData.backpack.message.ResBackpackFullMessage;
 	import com.rpgGame.netData.backpack.message.ResCellTimeMessage;
@@ -40,6 +41,7 @@ package com.rpgGame.netData{
 	import com.rpgGame.netData.backpack.message.ResRemovePrivateItemMessage;
 	import com.rpgGame.netData.backpack.message.ResTakeUpSuccessMessage;
 	import com.rpgGame.netData.backpack.message.ResUseItemSuccessMessage;
+	import com.rpgGame.netData.backpack.message.SCFlyItemsMessage;
 	import com.rpgGame.netData.buff.handler.ResAddBuffHandler;
 	import com.rpgGame.netData.buff.handler.ResBuffInfoHandler;
 	import com.rpgGame.netData.buff.handler.ResBuffsHandler;
@@ -740,8 +742,8 @@ package com.rpgGame.netData{
 	import com.rpgGame.netData.treasurehunt.message.ResHuntRewardInfosMessage;
 	import com.rpgGame.netData.treasurehunt.message.ResSendHuntHistoryInfoMessage;
 	import com.rpgGame.netData.treasurehunt.message.ResSendHuntStoreInfoMessage;
-	import com.rpgGame.netData.vip.handler.ResVipPanelHandler;
-	import com.rpgGame.netData.vip.message.ResVipPanelMessage;
+	import com.rpgGame.netData.vip.handler.SCVipDataHandler;
+	import com.rpgGame.netData.vip.message.SCVipDataMessage;
 	import com.rpgGame.netData.vitality.handler.ResSendVitalityInfoHandler;
 	import com.rpgGame.netData.vitality.message.ResSendVitalityInfoMessage;
 	import com.rpgGame.netData.warFlag.handler.SCWarFlagAllInfoToClientHandler;
@@ -998,6 +1000,7 @@ package com.rpgGame.netData{
 			register(108114, ResRemovePrivateItemMessage, ResRemovePrivateItemHandler);
 			register(108115, ResChangeBindItemMessage, ResChangeBindItemHandler);
 			register(108116, ResChangeLimitItemMessage, ResChangeLimitItemHandler);
+			register(108117, SCFlyItemsMessage, SCFlyItemsHandler);
 			register(109101, ResTeamInfoMessage, ResTeamInfoHandler);
 			register(109102, ResApplyClientMessage, ResApplyClientHandler);
 			register(109103, ResLeaveTeamMessage, ResLeaveTeamHandler);
@@ -1199,7 +1202,7 @@ package com.rpgGame.netData{
 			register(181103, ResActivitiesRefreshMessage, ResActivitiesRefreshHandler);
 			register(182101, ResNewActivitiesInfoMessage, ResNewActivitiesInfoHandler);
 			register(182103, ResNewGetRewardMessage, ResNewGetRewardHandler);
-			register(191101, ResVipPanelMessage, ResVipPanelHandler);
+			register(191101, SCVipDataMessage, SCVipDataHandler);
 			register(192101, ResGrownInfoMessage, ResGrownInfoHandler);
 			register(192102, ResGotSuccessMessage, ResGotSuccessHandler);
 			register(193101, ResWarMarkListMessage, ResWarMarkListHandler);

@@ -423,10 +423,10 @@ package org.mokylin.skin.app.vip
 			lb1 = temp;
 			temp.name = "lb1";
 			temp.text = "攻击：$";
-			temp.color = 0xA3A594;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 98;
-			temp.x = 298;
+			temp.width = 442;
+			temp.x = 244;
 			temp.y = 309;
 			return temp;
 		}

@@ -13,14 +13,18 @@ package com.rpgGame.appModule.vip
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.core.utils.TextUtil;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
+	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.VipCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.clientConfig.Q_vip;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
+	import com.rpgGame.netData.vip.bean.VipCardInfo;
 	
 	import flash.geom.Point;
 	import flash.utils.getTimer;
+	
+	import app.message.EnumVip;
 	
 	import feathers.controls.Label;
 	import feathers.controls.List;
@@ -46,11 +50,12 @@ package com.rpgGame.appModule.vip
 		private var _rewardBtnCtrl:RewardMarkCtrl;
 		private var _endTime:int;
 		private var _timer:GameTimer;
+		private var _rewardStr:String;
 		public function VipMainPanelExt()
 		{
 			_skin=new Vip_Skin();
 			super(_skin);
-			_rewarG=new RewardGroup(IcoSizeEnum.ICON_36,_skin.icon1);
+			//MCUtil.removeSelf(_skin.lb1);
 			setConfig();
 		}
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -72,13 +77,15 @@ package com.rpgGame.appModule.vip
 		}
 		private function setConfig():void
 		{
-			_vip1=new VipItem(_skin.skinVip1.skin,1,showVipItem);
-			_vip2=new VipItem(_skin.skinVip2.skin,2,showVipItem);
-			_vip3=new VipItem(_skin.skinVip3.skin,3,showVipItem);
+			_rewarG=new RewardGroup(IcoSizeEnum.ICON_36,_skin.icon1);
+			_rewardStr=_skin.lbTime0.text;
+			_vip1=new VipItem(_skin.skinVip1.skin,EnumVip.VIP1,showVipItem);
+			_vip2=new VipItem(_skin.skinVip2.skin,EnumVip.VIP2,showVipItem);
+			_vip3=new VipItem(_skin.skinVip3.skin,EnumVip.VIP3,showVipItem);
 			
-			_rewardVip1Ctrl=new RewardMarkCtrl(_skin.skinVip1);
-			_rewardVip2Ctrl=new RewardMarkCtrl(_skin.skinVip2);
-			_rewardVip3Ctrl=new RewardMarkCtrl(_skin.skinVip3);
+			_rewardVip1Ctrl=new RewardMarkCtrl(_skin.skinVip1,false);
+			_rewardVip2Ctrl=new RewardMarkCtrl(_skin.skinVip2,false);
+			_rewardVip3Ctrl=new RewardMarkCtrl(_skin.skinVip3,false);
 			_rewardBtnCtrl=new RewardMarkCtrl(_skin.btnLIngQu);
 			
 			var list:List=_skin.listVip;
@@ -119,23 +126,28 @@ package com.rpgGame.appModule.vip
 				MCUtil.removeSelf(lab);
 			}
 			
-			_vip1.setSelectState(vipLv==1);
-			_vip2.setSelectState(vipLv==2);
-			_vip3.setSelectState(vipLv==3);
+			_vip1.setSelectState(vipLv==EnumVip.VIP1);
+			_vip2.setSelectState(vipLv==EnumVip.VIP2);
+			_vip3.setSelectState(vipLv==EnumVip.VIP3);
 			var vip:Q_vip=VipCfg.getVip(vipLv);
 			if (vip) 
 			{
 				_rewarG.setRewardByJsonStr(vip.q_first_gift);
-				var attr:HashMap = AttValueConfig.getTypeValueMap(AttValueConfig.getAttInfoById(vip.q_attr_id));
-				var ret:Array=AttrUtil.showAttr(attr,this,_skin.lb1,10,new Point(_skin.lb1.x,_skin.lb1.y),0,0,":",_labs);
-				_labs=_labs.concat(ret);
+				if (vip.q_attr_id!=0) 
+				{
+					var attr:HashMap = AttValueConfig.getTypeValueMap(AttValueConfig.getAttInfoById(vip.q_attr_id));
+//					var ret:Array=AttrUtil.showAttr(attr,this,_skin.lb1,10,new Point(_skin.lb1.x,_skin.lb1.y),_skin.lb1.width,_skin.lb1.height,":",_labs);
+					AttrUtil.showAttrInSingleLab(attr,_skin.lb1,"  ",":");
+					//_labs=_labs.concat(ret);
+				}
+			
 				_skin.listVip.dataProvider=new ListCollection(vip.q_vip_privileges.split("|"));
 				
 				var item:Q_item=ItemConfig.getQItemByID(vip.q_mo_tokenID);
 				if (item) 
 				{
 					var retH:HashMap;
-					AttValueConfig.getTypeValue(item.q_att_type,retH);
+					retH=AttValueConfig.getAttrHash(item.q_att_type);
 					_skin.NumZhanli.label=FightValueUtil.calFightPowerByHash(retH,MainRoleManager.actorInfo.job)+"";
 				}
 			}
@@ -145,12 +157,15 @@ package com.rpgGame.appModule.vip
 			_skin.imgVipPrivilegs.styleName="ui/app/vip/vip_name"+vipLv+".png";
 			_skin.imgAcitve.styleName="ui/app/vip/act"+vipLv+".png";
 			_skin.imgMo.styleName="ui/app/vip/mo"+vipLv+".png";
-		
+			_skin.imgRewardType.styleName="ui/app/vip/vip_name"+vipLv+".png";
+			_skin.lbTime0.text=LanguageConfig.replaceStr(_rewardStr,[Mgr.vipMgr.getCardRewardCount(vipLv)]);
+			_rewardBtnCtrl.hasReward=Mgr.vipMgr.getCardRewardCount(vipLv);
 		}
 		override protected function onShow():void
 		{
 			super.onShow();
 			EventManager.addEvent(VipEvent.GET_VIP_DATA,onGetVipData);
+			onGetVipData();
 		}
 		
 		private function onGetVipData():void
@@ -160,7 +175,7 @@ package com.rpgGame.appModule.vip
 			//显示至尊
 			if (nowVip==0) 
 			{
-				showVipItem(3);
+				showVipItem(EnumVip.VIP3);
 			}
 			else
 			{
@@ -168,19 +183,19 @@ package com.rpgGame.appModule.vip
 			}
 			switch(nowVip)
 			{
-				case 1:
+				case EnumVip.VIP1:
 				{
 					_skin.uiVipLevel.styleName="ui/app/vip/vip/baijinjika.png";
 					_skin.uiVipLevel.width=181;
 					break;
 				}
-				case 2:
+				case EnumVip.VIP2:
 				{
 					_skin.uiVipLevel.styleName="ui/app/vip/vip/zuanshijika.png";
 					_skin.uiVipLevel.width=179;
 					break;
 				}
-				case 3:
+				case EnumVip.VIP3:
 				{
 					_skin.uiVipLevel.styleName="ui/app/vip/vip/zhizunbannianka.png";
 					_skin.uiVipLevel.width=209;
@@ -193,15 +208,22 @@ package com.rpgGame.appModule.vip
 					break;
 				}
 			}
-			this._skin.imgTQ.visible==nowVip==0;
+			this._skin.imgTQ.visible=nowVip==0;
 			this._skin.lbTime.visible=nowVip!=0;
-			if (Mgr.vipMgr.endTime>0) 
+			if (Mgr.vipMgr.endTime>getTimer()) 
 			{
-				_endTime=getTimer()+Mgr.vipMgr.endTime*1000;
+				_endTime=Mgr.vipMgr.endTime;
 				_timer.start();
 				onTimer();
 			}
-		
+			
+			_rewardVip1Ctrl.hasReward=Mgr.vipMgr.getCardRewardCount(EnumVip.VIP1);
+			_rewardVip2Ctrl.hasReward=Mgr.vipMgr.getCardRewardCount(EnumVip.VIP2);
+			_rewardVip3Ctrl.hasReward=Mgr.vipMgr.getCardRewardCount(EnumVip.VIP3);
+			
+			_vip1.resetData();
+			_vip2.resetData();
+			_vip3.resetData();
 		}
 		override protected function onHide():void
 		{

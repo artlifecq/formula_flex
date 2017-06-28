@@ -318,7 +318,14 @@ package com.rpgGame.app.ui.main.chat
 			str = RichTextCustomUtil.getTextLinkCode(name,color,RichTextCustomLinkType.ROLE_NAME_TYPE,uiseId);
 			return str;
 		}
-		
+		public static function getPlayerVipShow(vipLv:int):String
+		{
+			if (vipLv>0) 
+			{
+				return RichTextCustomUtil.getImageLinkCode("ui/common/tubiao/vips"+vipLv+".png");
+			}
+			return "";
+		}
 		/**
 		 *获取HTML聊天消息 
 		 * @param msgInfo
@@ -328,45 +335,45 @@ package com.rpgGame.app.ui.main.chat
 		public static function getHTMLChatMessage(msgInfo:ResChatMessage):String
 		{
 			var str:String=replaceItemShow(msgInfo);
-			
+			var vip:int=1;
 			switch(msgInfo.type)
 			{
 				case EnumChatChannelType.CHAT_CHANNEL_SYSTEM:				
-					return HtmlTextUtil.getTextColor(0xFFFFFF,"【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+HtmlTextUtil.underLine(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue))+": ")+HtmlTextUtil.getTextColor(0xFFFFFF,str);
+					return HtmlTextUtil.getTextColor(0xFFFFFF,"【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue))+": ")+HtmlTextUtil.getTextColor(0xFFFFFF,str);
 					
 				case EnumChatChannelType.CHAT_CHANNEL_WORLD:				
-					return HtmlTextUtil.getTextColor(0xdfb612,"【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+HtmlTextUtil.underLine(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue))+": ")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
+					return HtmlTextUtil.getTextColor(0xdfb612,"【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue))+": ")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
 					
 				case EnumChatChannelType.CHAT_CHANNEL_NORMAL:
-					return HtmlTextUtil.getTextColor(0xcdcb9d,"【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+HtmlTextUtil.underLine(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue))+": ")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
+					return HtmlTextUtil.getTextColor(0xcdcb9d,"【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue))+": ")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
 					
 				case EnumChatChannelType.CHAT_CHANNEL_PARTY:
-					return HtmlTextUtil.getTextColor(0x18b2cf,"【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+HtmlTextUtil.underLine(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue))+": ")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
+					return HtmlTextUtil.getTextColor(0x18b2cf,"【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue))+": ")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
 					
 				case EnumChatChannelType.CHAT_CHANNEL_TEAM:
-					return HtmlTextUtil.getTextColor(0x2dcfab,"【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+HtmlTextUtil.underLine(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue))+": ")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
+					return HtmlTextUtil.getTextColor(0x2dcfab,"【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue))+": ")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
 					
 				case EnumChatChannelType.CHAT_CHANNEL_LABA:
-					return HtmlTextUtil.getTextColor(0xf7ff15,"【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+HtmlTextUtil.underLine(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue))+": ")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
+					return HtmlTextUtil.getTextColor(0xf7ff15,"【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue))+": ")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
 					
 				case EnumChatChannelType.CHAT_CHANNEL_KUA_FU:
-					return HtmlTextUtil.getTextColor(0xFFFFFF,"【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+HtmlTextUtil.underLine(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue))+": ")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
+					return HtmlTextUtil.getTextColor(0xFFFFFF,"【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue))+": ")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
 					
 				case EnumChatChannelType.CHAT_CHANNEL_SILIAO:
 				{
 					if(msgInfo.playerId.ToGID()==MainRoleManager.actorID)
 					{
-						return HtmlTextUtil.getTextColor(0xe58bff,"【" + ChatUtil.getChannelTitle(msgInfo.type) + "】")+HtmlTextUtil.getTextColor(0xFFFFFF,"你对")+HtmlTextUtil.getTextColor(0xe58bff,HtmlTextUtil.underLine(replacePlayerShow(ChatManager.currentSiLiaoTargetName,0xFFFFFF,msgInfo.playerId.hexValue)))+HtmlTextUtil.getTextColor(0xFFFFFF,"说 : ")+HtmlTextUtil.getTextColor(0xe58bff,str);
+						return HtmlTextUtil.getTextColor(0xe58bff,"【" + ChatUtil.getChannelTitle(msgInfo.type) + "】")+HtmlTextUtil.getTextColor(0xFFFFFF,"你对")+getPlayerVipShow(vip)+HtmlTextUtil.getTextColor(0xe58bff,(replacePlayerShow(ChatManager.currentSiLiaoTargetName,0xFFFFFF,msgInfo.playerId.hexValue)))+HtmlTextUtil.getTextColor(0xFFFFFF,"说 : ")+HtmlTextUtil.getTextColor(0xe58bff,str);
 					}
 					else
-						return HtmlTextUtil.getTextColor(0xe58bff,"【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+HtmlTextUtil.underLine(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue)))+HtmlTextUtil.getTextColor(0xFFFFFF,"对你说 : ")+HtmlTextUtil.getTextColor(0xe58bff,str);
+						return HtmlTextUtil.getTextColor(0xe58bff,"【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue)))+HtmlTextUtil.getTextColor(0xFFFFFF,"对你说 : ")+HtmlTextUtil.getTextColor(0xe58bff,str);
 				}
 					
 				case EnumChatChannelType.CHAT_CHANNEL_NOTICE:
-					return HtmlTextUtil.getTextColor(0xFFFFFF,"【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+HtmlTextUtil.underLine(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue))+": ")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
+					return HtmlTextUtil.getTextColor(0xFFFFFF,"【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue))+": ")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
 					
 				case EnumChatChannelType.CHAT_CHANNEL_HEARSAY:
-					return HtmlTextUtil.getTextColor(0xFFFFFF,"【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+HtmlTextUtil.underLine(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue))+": ")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
+					return HtmlTextUtil.getTextColor(0xFFFFFF,"【" + ChatUtil.getChannelTitle(msgInfo.type) + "】"+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue))+": ")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
 			}
 			return "";
 		}

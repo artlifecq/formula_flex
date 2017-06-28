@@ -460,7 +460,7 @@ package com.rpgGame.app.scene
 					case 74://vip
 						buffRef = _role.stateMachine.getReference(VipBuffStateReference) as VipBuffStateReference;
 						buffRef.setParams(buffData);
-						_role.stateMachine.transition(RoleStateType.CONTROL_VIP);
+						_role.stateMachine.transition(RoleStateType.CONTROL_VIP,buffRef);
 						break;
 					default:
 						/*buffRef = _role.stateMachine.getReference(UnmovableStateReference) as UnmovableStateReference;
