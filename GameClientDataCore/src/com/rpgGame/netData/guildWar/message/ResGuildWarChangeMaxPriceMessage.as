@@ -22,6 +22,9 @@ package com.rpgGame.netData.guildWar.message{
 		//帮派名
 		private var _guildName: String;
 		
+		//价格
+		private var _price: int;
+		
 		
 		/**
 		 * 写入字节缓存
@@ -33,6 +36,8 @@ package com.rpgGame.netData.guildWar.message{
 			writeLong(_guildId);
 			//帮派名
 			writeString(_guildName);
+			//价格
+			writeInt(_price);
 			return true;
 		}
 		
@@ -46,6 +51,8 @@ package com.rpgGame.netData.guildWar.message{
 			_guildId = readLong();
 			//帮派名
 			_guildName = readString();
+			//价格
+			_price = readInt();
 			return true;
 		}
 		
@@ -100,6 +107,21 @@ package com.rpgGame.netData.guildWar.message{
 		 */
 		public function set guildName(value: String): void{
 			this._guildName = value;
+		}
+		
+		/**
+		 * get 价格
+		 * @return 
+		 */
+		public function get price(): int{
+			return _price;
+		}
+		
+		/**
+		 * set 价格
+		 */
+		public function set price(value: int): void{
+			this._price = value;
 		}
 		
 	}

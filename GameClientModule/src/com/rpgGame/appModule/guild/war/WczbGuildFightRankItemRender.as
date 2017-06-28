@@ -1,20 +1,24 @@
 package com.rpgGame.appModule.guild.war
 {
+	import com.rpgGame.app.ui.common.BgListItemRender;
+	import com.rpgGame.coreData.cfg.StaticValue;
+	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.guildWar.bean.GuildWarGuildRank;
 	
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	
+	import org.mokylin.skin.app.banghui.ItemBg;
 	import org.mokylin.skin.app.banghui.wangcheng.WangChengPaiMing_Item;
+	
+	import starling.display.DisplayObject;
 	
 	/**
 	 *王城争霸 帮会战斗力排行 
 	 * @author dik
 	 * 
 	 */
-	public class WczbGuildFightRankItemRender extends DefaultListItemRenderer
+	public class WczbGuildFightRankItemRender extends BgListItemRender
 	{
-		private var _skin:WangChengPaiMing_Item;
-		
 		public function WczbGuildFightRankItemRender()
 		{
 			super();
@@ -26,22 +30,33 @@ package com.rpgGame.appModule.guild.war
 			_skin.toSprite(this);
 		}
 		
+		private function get skin():WangChengPaiMing_Item
+		{
+			return _skin as WangChengPaiMing_Item;
+		}
+		
+		override protected function onTouchTarget(target:DisplayObject):void
+		{
+			super.onTouchTarget(target);
+			if(target==skin.lbBanghui){
+//				GuildSender.requestGuildInfo()
+			}
+		}
+		
 		override public function get height():Number
 		{
-			if(_skin){
-				return _skin.height;
-			}
-			return 0;
+			return 27;
 		}
 		
 		override protected function commitData():void
 		{
+			super.commitData();
 			if(_skin){
 				if(_data){
 					var info:GuildWarGuildRank=_data as GuildWarGuildRank;
 					if(info){
-						_skin.lbNo.text=info.rank.toString();
-						_skin.lbBanghui.text=info.guildName.toString();
+						skin.lbNo.text=info.rank.toString();
+						skin.lbBanghui.htmlText=HtmlTextUtil.underLine(HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,info.guildName.toString()));
 					}
 				}
 			}

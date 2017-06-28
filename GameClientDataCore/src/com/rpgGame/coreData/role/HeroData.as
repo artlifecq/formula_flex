@@ -1,6 +1,8 @@
 package com.rpgGame.coreData.role
 {
 	import com.gameClient.log.GameLog;
+	import com.rpgGame.coreData.cfg.HorseConfigData;
+	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
 	import com.rpgGame.coreData.cfg.model.AvatarClothesResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarDeputyWeaponResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarHairResCfgData;
@@ -9,6 +11,8 @@ package com.rpgGame.coreData.role
 	import com.rpgGame.coreData.clientConfig.AvatarDeputyWeaponRes;
 	import com.rpgGame.coreData.clientConfig.AvatarHairRes;
 	import com.rpgGame.coreData.clientConfig.AvatarWeaponRes;
+	import com.rpgGame.coreData.clientConfig.Q_horse;
+	import com.rpgGame.coreData.clientConfig.Q_warflag;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.info.fight.skill.ActiveSpellList;
@@ -99,33 +103,27 @@ package com.rpgGame.coreData.role
 		public var body:int;
 		
 		private var _hair:int;
-		
 		private var _cloths:int;
-		
-		/**
-		 *坐骑资源id 
-		 */
-		public var mount:int;
-		
-		
-		
 		private var _weapon:int;
-		
 		private var _deputyWeapon:int;
+		private var _trailMount : String = null;
+		private var _trailMountAnimat : String = null;
+		
+		private var _mount:int;
+		
+		
+		
 		
 		public var sex:int;
 		
 		
 		/**军阶等级*/
 		public var junjieLv:int;
-		/**战旗等级*/
-		public var zhanqiLv:int;
+		private var _zhanqiLv:int;
 		/**宝物等级*/
 		public var baowuLv:int;
 		
 		private var _customMount : int = 0;
-		public var trailMount : String = null;
-		public var trailMountAnimat : String = null;
 		
 		/**
 		 *战魂等级 
@@ -144,6 +142,64 @@ package com.rpgGame.coreData.role
 		
 		
 		public static var spellArrs:Array = [];
+
+		/**
+		 *坐骑资源id 
+		 */
+		public function get mount():int
+		{
+			return _mount;
+		}
+
+		public function set mount(value:int):void
+		{
+			_mount = value;
+			var mountModel :Q_horse = HorseConfigData.getMountDataById(_mount);
+			if (mountModel)
+			{
+				var mountResID:String = mountModel.q_scene_show_url;
+				var mountAnimatResID:String = HorseConfigData.mountAnimatResID;
+				this.avatarInfo.setMountResID(mountResID, mountAnimatResID);
+			}
+		}
+
+		/**战旗等级*/
+		public function get zhanqiLv():int
+		{
+			return _zhanqiLv;
+		}
+
+		public function set zhanqiLv(value:int):void
+		{
+			_zhanqiLv = value;
+			var zhanqiInfo:Q_warflag = ZhanQiConfigData.getZhanQiDataById(_zhanqiLv);
+			if(zhanqiInfo)
+			{
+				this.avatarInfo.zhanqiSouleeffId = zhanqiInfo.q_panel_show_id;
+			}
+		}
+
+		public function get trailMountAnimat():String
+		{
+			return _trailMountAnimat;
+		}
+
+		public function set trailMountAnimat(value:String):void
+		{
+			_trailMountAnimat = value;
+			this.avatarInfo.setMountResID(_trailMount, _trailMountAnimat);
+		}
+
+		public function get trailMount():String
+		{
+			return _trailMount;
+		}
+
+		public function set trailMount(value:String):void
+		{
+			_trailMount = value;
+			this.avatarInfo.setMountResID(_trailMount, _trailMountAnimat);
+		}
 
 		/**
 		 *衣服资源id 

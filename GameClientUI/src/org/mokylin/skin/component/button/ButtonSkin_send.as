@@ -27,6 +27,8 @@ package org.mokylin.skin.component.button
 			super();
 			
 			this.currentState = "down";
+			this.height = 20;
+			this.width = 20;
 			this.elementsContent = [];
 			
 			states = {

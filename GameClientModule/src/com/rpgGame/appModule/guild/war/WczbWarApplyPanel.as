@@ -4,8 +4,10 @@ package com.rpgGame.appModule.guild.war
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.ui.common.PageContainerUI;
 	import com.rpgGame.core.events.GuildEvent;
+	import com.rpgGame.netData.guildWar.message.ResGuildWarChangeMaxPriceMessage;
 	import com.rpgGame.netData.guildWar.message.ResGuildWarCityApplyInfoMessage;
 	
+	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.data.ListCollection;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -13,6 +15,8 @@ package com.rpgGame.appModule.guild.war
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
+	
+	import utils.TimerServer;
 	
 	/**
 	 *王城争霸申请面板 
@@ -23,6 +27,8 @@ package com.rpgGame.appModule.guild.war
 	{
 		private var _skin:ZhengBaBaoMing;
 		private var pageContainer:PageContainerUI;
+
+		private var applayCityId:int;
 		
 		public function WczbWarApplyPanel()
 		{
@@ -33,6 +39,8 @@ package com.rpgGame.appModule.guild.war
 		
 		private function initView():void
 		{
+			_skin.List.itemRendererType=WczbWarApplyItemRender;
+			_skin.List.scrollBarDisplayMode =ScrollBarDisplayMode.NONE;
 			_skin.List.dataProvider=new ListCollection();
 		}
 		
@@ -56,7 +64,9 @@ package com.rpgGame.appModule.guild.war
 		{
 			super.onHide();
 			EventManager.removeEvent(GuildEvent.GUILD_WCZB_APPLYINFO,getInfos);
+			EventManager.removeEvent(GuildEvent.GUILD_WCZB_CHANGEMAXPRICE,updateInfo);
 			GuildSender.reqGuildWarLeaveApplyPanel();
+			TimerServer.remove(updateTime);
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
@@ -64,11 +74,44 @@ package com.rpgGame.appModule.guild.war
 			super.show(data,openTable,parentContiner);
 			initEvent();
 			GuildSender.reqGuildWarCityApplyInfo(1);			
+			applayCityId=data;
+			TimerServer.addLoop(updateTime,1000,null,0);
+		}
+		
+		private function updateTime():void
+		{
+			var num:int=_skin.List.dataProvider.length;
+			for(var i:int=0;i<num;i++){
+				var item:WczbWarApplyItemRender=_skin.List.itemToItemRenderer(_skin.List.dataProvider.getItemAt(i)) as WczbWarApplyItemRender;
+				if(item){
+					item.updateTime();
+				}
+			}
 		}
 		
 		private function initEvent():void
 		{
 			EventManager.addEvent(GuildEvent.GUILD_WCZB_APPLYINFO,getInfos);
+			EventManager.addEvent(GuildEvent.GUILD_WCZB_CHANGEMAXPRICE,updateInfo);
+		}
+		
+		private function updateInfo(msg:ResGuildWarChangeMaxPriceMessage):void
+		{
+			var index:int=-1;
+			var num:int=_skin.List.dataProvider.length;
+			for(var i:int=0;i<num;i++){
+				var obj:Object=_skin.List.dataProvider.getItemAt(i);
+				if(obj.info.id==msg.cityId){
+					obj.info.curMaxPriceGuildId=msg.guildId;
+					obj.info.curMaxPriceGuildName=msg.guildName;
+					obj.info.curMaxPrice=msg.price;
+					index=i;
+					break;
+				}
+			}
+			if(index!=-1){
+				_skin.List.dataProvider.updateItemAt(index);
+			}
 		}
 		
 		private function getInfos(msg:ResGuildWarCityApplyInfoMessage):void
@@ -77,7 +120,7 @@ package com.rpgGame.appModule.guild.war
 			var i:int;
 			var num:int=msg.citys.length;
 			for(i=0;i<num;i++){
-				_skin.List.dataProvider.addItem(msg.citys[i]);
+				_skin.List.dataProvider.addItem({info:msg.citys[i],applayCityId:applayCityId});
 			}
 		}
 	}

@@ -151,6 +151,7 @@ package com.rpgGame.appModule.activety.zonghe
 							var linkName:String=RichTextCustomUtil.getTextLinkCode(mCfg.q_name,StaticValue.UI_GREEN,
 								RichTextCustomLinkType.WALK_TO_SCENE_POS_TYPE,linkData);
 							text+=linkName;
+							text+=RichTextCustomUtil.getButtonLinkCode("org.mokylin.skin.component.button.ButtonSkin_send",RichTextCustomLinkType.FLY_TO_SCENE_POS_TYPE,linkData);
 						}
 					}
 					text+=list[1]+"\n";

@@ -11,7 +11,10 @@ package com.rpgGame.appModule.guild.war
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.coreData.cfg.StaticValue;
+	import com.rpgGame.coreData.cfg.TipsCfgData;
+	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.enum.EnumCity;
+	import com.rpgGame.coreData.info.tip.WczbTipsData;
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.guildWar.bean.GuildWarCityInfo;
@@ -48,10 +51,7 @@ package com.rpgGame.appModule.guild.war
 		
 		
 		private var _skin:WangCheng_Skin;
-		private var _tipsData1:DynamicTipData;
-		private var _tipsData2:DynamicTipData;
-		private var _tipsData3:DynamicTipData;
-		private var _tipsData4:DynamicTipData;
+		private var _tipsDataMap:HashMap;
 		
 		private var _rewardMap:HashMap;
 		private var _nameMap:HashMap;
@@ -63,6 +63,7 @@ package com.rpgGame.appModule.guild.war
 		private var _timeStr:String;
 		private var fightInfo:GuildWarCityInfo;
 		private var cityHold:UIAsset;
+		private var applyCityId:int;
 		
 		public function WczbWarViewUI()
 		{
@@ -96,6 +97,11 @@ package com.rpgGame.appModule.guild.war
 			_nameMap.add(EnumCity.DONG_WEI,_skin.skinName3.skin);
 			
 			_cityData=new HashMap();
+			_tipsDataMap=new HashMap();
+			_tipsDataMap.add(EnumCity.WANG_CHENG,new DynamicTipData());
+			_tipsDataMap.add(EnumCity.XI_WEI,new DynamicTipData());
+			_tipsDataMap.add(EnumCity.ZHONG_WEI,new DynamicTipData());
+			_tipsDataMap.add(EnumCity.DONG_WEI,new DynamicTipData());
 		}
 		
 		override public function show(data:Object=null):void
@@ -141,17 +147,20 @@ package com.rpgGame.appModule.guild.war
 		
 		private function initEvent():void
 		{
-			_tipsData1=new DynamicTipData();
-			_tipsData2=new DynamicTipData();
-			_tipsData3=new DynamicTipData();
-			_tipsData4=new DynamicTipData();
-			TipTargetManager.show( _skin.grpWangCheng, TargetTipsMaker.makeTips( TipType.WCZB_REWAD_TIP,_tipsData1));
-			TipTargetManager.show( _skin.grpCheng1, TargetTipsMaker.makeTips( TipType.WCZB_REWAD_TIP,_tipsData2));
-			TipTargetManager.show( _skin.grpCheng2, TargetTipsMaker.makeTips( TipType.WCZB_REWAD_TIP,_tipsData3));
-			TipTargetManager.show( _skin.grpCheng3, TargetTipsMaker.makeTips( TipType.WCZB_REWAD_TIP,_tipsData4));
+			TipTargetManager.show( _skin.grpWangCheng, TargetTipsMaker.makeTips( TipType.WCZB_REWAD_TIP,_tipsDataMap.getValue(EnumCity.WANG_CHENG)));
+			TipTargetManager.show( _skin.grpCheng1, TargetTipsMaker.makeTips( TipType.WCZB_REWAD_TIP,_tipsDataMap.getValue(EnumCity.XI_WEI)));
+			TipTargetManager.show( _skin.grpCheng2, TargetTipsMaker.makeTips( TipType.WCZB_REWAD_TIP,_tipsDataMap.getValue(EnumCity.ZHONG_WEI)));
+			TipTargetManager.show( _skin.grpCheng3, TargetTipsMaker.makeTips( TipType.WCZB_REWAD_TIP,_tipsDataMap.getValue(EnumCity.DONG_WEI)));
 			EventManager.addEvent(GuildEvent.GUILD_WCZB_INFO,updatePanelView);
-			
-			GuildSender.reqGuildWarCityInfo(0);
+			TipTargetManager.show( _skin.btnShuoMing,TargetTipsMaker.makeSimpleTextTips( TipsCfgData.getTipsInfo(30).q_describe));
+			EventManager.addEvent(GuildEvent.GUILD_CHANGE_ACTIVE,updateAct);
+			GuildSender.reqGuildWarCityInfo();
+			GuildSender.reqEnterGuildWarPanel();
+		}
+		
+		private function updateAct(value:int):void
+		{
+			_skin.lbHuoYue.text=value.toString();
 		}
 		
 		private function updatePanelView(msg:ResGuildWarCityInfoMessage):void
@@ -159,19 +168,33 @@ package com.rpgGame.appModule.guild.war
 			var _citys:Vector.<GuildWarCityInfo>=msg.citys;
 			var num:int=_citys.length;
 			var i:int=0,info:GuildWarCityInfo;
-			var myGuildId:String=GuildManager.instance().guildData.id.hexValue;
+			var myGuildId:String;
+			if(GuildManager.instance().haveGuild){
+				myGuildId=GuildManager.instance().guildData.id.hexValue;
+			}
 			
 			var state:int=1;
 			_infoMsg=msg;
 			cityHold=null;
+			var nextTime:int=_infoMsg.nextWarTime*1000;
 			for(i=0;i<num;i++){
 				info=_citys[i];
 				_cityData.add(info.id,info);
+				var tipsData:WczbTipsData=(_tipsDataMap.getValue(info.id) as DynamicTipData).data;
+				if(!tipsData){
+					tipsData=new WczbTipsData();
+					(_tipsDataMap.getValue(info.id) as DynamicTipData).data=tipsData;
+				}
+				tipsData.cityInfo=info;
+				tipsData.nextTime=nextTime;
+				tipsData.rewardState=_infoMsg.haveDailyGift;
+				tipsData.isOwner=false;
 				if(info.occupyGuildId&&info.attackGuildId){//战斗中
 					if(info.occupyGuildId.hexValue==myGuildId){//自己是防守方
 						fightInfo=info;
 						state=DEF_STATE;
 						cityHold=_cityIcon.getValue(fightInfo.id);
+						tipsData.isOwner=true;
 					}else if(info.attackGuildId.hexValue==myGuildId){//自己是攻击方
 						fightInfo=info;
 						state=ATTACK_STATE;
@@ -181,10 +204,11 @@ package com.rpgGame.appModule.guild.war
 						fightInfo=info;
 						state=HOLD_STATE;
 						cityHold=_cityIcon.getValue(fightInfo.id);
+						tipsData.isOwner=true;
 					}
 				}
 			}
-			
+			applyCityId=-1;
 			if(!fightInfo){
 				if(msg.applyCityId==-1){
 					city=-1;
@@ -196,29 +220,33 @@ package com.rpgGame.appModule.guild.war
 				}else{
 					state=APPLYING_STATE;
 					city=msg.applyCityId;
+					applyCityId=city;
 				}
 			}else{
 				city=fightInfo.id;
 			}
-			
-			
 			
 			showZhanshi(state);
 			showRank();
 			showCityState();
 			_skin.lbHuoYue.text=_infoMsg.guildActive.toString();
 			if(_infoMsg.nextWarTime!=0){
-				_skin.lbDate.text=TimeUtil.changeDateToDateStr(new Date(_infoMsg.nextWarTime*1000));
+				_skin.nextTitle.text="下次开战时间:";
+				_skin.lbDate.text=TimeUtil.changeDateToDateStr(new Date(nextTime));
 			}else{
 				_skin.lbDate.text="";
+				_skin.nextTitle.text="";
 			}
 		}
 		
 		private function showCityState():void
 		{
 			var citys:Array=_cityData.keys();
-			var myGuildId:String=GuildManager.instance().guildData.id.hexValue;
-			var holdCity:Boolean=fightInfo.occupyGuildId.hexValue==myGuildId;
+			var myGuildId:String;
+			if(GuildManager.instance().guildData){
+				myGuildId=GuildManager.instance().guildData.id.hexValue;
+			}
+			var holdCity:Boolean=fightInfo?fightInfo.occupyGuildId.hexValue==myGuildId:false;
 			for each(var id:int in citys){
 				if(id==city&&holdCity){//是自己的城
 					if(_infoMsg.haveDailyGift!=-1){
@@ -234,17 +262,20 @@ package com.rpgGame.appModule.guild.war
 			var nm:ZhengBaVsNameItemSkin=_nameMap.getValue(city);
 			var nmItem:WangChengInfo_Item=(nm.guild0.skin as WangChengInfo_Item);
 			nm.guild0.visible=nm.guild1.visible=false;
-			if(!info){
+			if(!info||!info.occupyGuildName){
+				nm.guild0.visible=true;
 				nmItem.lbBangName.text="未占领";
 				nmItem.lbZhan.text="";
 			}else{
 				if(info.attackGuildName){
+					nm.guild0.visible=nm.guild1.visible=true;
 					nmItem.lbBangName.text=info.occupyGuildName;
 					nmItem.lbZhan.text="守";
 					nmItem=(nm.guild1.skin as WangChengInfo_Item);
 					nmItem.lbBangName.text=info.attackGuildName;
 					nmItem.lbZhan.text="攻";
 				}else{
+					nm.guild0.visible=true;
 					nmItem.lbBangName.text=info.occupyGuildName;
 					nmItem.lbZhan.text="占";
 				}
@@ -256,7 +287,7 @@ package com.rpgGame.appModule.guild.war
 			_skin.List.dataProvider.removeAll();
 			var num:int=_infoMsg.ranks.length;
 			for(var i:int=0;i<num;i++){
-				_skin.List.dataProvider.addItem(_infoMsg[i]);
+				_skin.List.dataProvider.addItem(_infoMsg.ranks[i]);
 			}
 		}
 		
@@ -288,14 +319,19 @@ package com.rpgGame.appModule.guild.war
 		
 		private function unGuildState():void
 		{
-			
+			_skin.grpTo.visible=true;
+			_skin.grpCheng.visible=false;
+			_skin.lbHead.htmlText="";
+			_skin.lbTitle.text="请先加入一个帮派";
+			_skin.btnJone.visible=true;
+			_skin.btnJinPai.visible=false;
 		}
 		
 		private function holdState():void
 		{
 			_skin.grpTo.visible=false;
 			_skin.grpCheng.visible=true;
-			_skin.lbHead.htmlText="占领"+city;
+			_skin.lbHead.htmlText="占领"+getCityName(city);
 			_skin.lbName1.htmlText="";
 			_skin.lbName2.htmlText="";
 			_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,"本帮已占领"+fightInfo.occupyGuildName);
@@ -303,6 +339,21 @@ package com.rpgGame.appModule.guild.war
 			
 			var cityStyleName:String="weicheng1";
 			var flagStyleName:String="xiwei";
+			switch(city){
+				case EnumCity.XI_WEI:
+					cityStyleName="weicheng1";
+					flagStyleName="xiwei";
+					break;
+				case EnumCity.ZHONG_WEI:
+					cityStyleName="weicheng2";
+					flagStyleName="zhongwei";
+					break;
+				case EnumCity.DONG_WEI:
+					cityStyleName="weicheng3";
+					flagStyleName="dongwei";
+					break;
+			}
+			
 			_skin.uiCheng.styleName="ui/app/banghui/wangcheng/xiaocheng/"+cityStyleName+".png";
 			_skin.uiMyFlag.styleName="ui/app/banghui/wangcheng/"+flagStyleName+".png";
 		}
@@ -311,7 +362,7 @@ package com.rpgGame.appModule.guild.war
 		{
 			_skin.grpTo.visible=false;
 			_skin.grpCheng.visible=true;
-			_skin.lbHead.htmlText="防守"+city;
+			_skin.lbHead.htmlText="防守"+getCityName(city);
 			_skin.lbName1.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,fightInfo.attackGuildName);
 			_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW,"VS");
 			_skin.lbName2.text=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,fightInfo.occupyGuildName);
@@ -321,6 +372,20 @@ package com.rpgGame.appModule.guild.war
 			
 			var cityStyleName:String="weicheng1";
 			var flagStyleName:String="xiwei";
+			switch(city){
+				case EnumCity.XI_WEI:
+					cityStyleName="weicheng1";
+					flagStyleName="xiwei";
+					break;
+				case EnumCity.ZHONG_WEI:
+					cityStyleName="weicheng2";
+					flagStyleName="zhongwei";
+					break;
+				case EnumCity.DONG_WEI:
+					cityStyleName="weicheng3";
+					flagStyleName="dongwei";
+					break;
+			}
 			_skin.uiCheng.styleName="ui/app/banghui/wangcheng/xiaocheng/"+cityStyleName+".png";
 			_skin.uiMyFlag.styleName="ui/app/banghui/wangcheng/"+flagStyleName+".png";
 		}
@@ -329,7 +394,7 @@ package com.rpgGame.appModule.guild.war
 		{
 			_skin.grpTo.visible=false;
 			_skin.grpCheng.visible=true;
-			_skin.lbHead.htmlText="进攻"+city;
+			_skin.lbHead.htmlText="进攻"+getCityName(city);
 			_skin.lbName1.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,fightInfo.attackGuildName);
 			_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW,"VS");
 			_skin.lbName2.text=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,fightInfo.occupyGuildName);
@@ -340,15 +405,46 @@ package com.rpgGame.appModule.guild.war
 			
 			var cityStyleName:String="weicheng1";
 			var flagStyleName:String="xiwei";
+			switch(city){
+				case EnumCity.XI_WEI:
+					cityStyleName="weicheng1";
+					flagStyleName="xiwei";
+					break;
+				case EnumCity.ZHONG_WEI:
+					cityStyleName="weicheng2";
+					flagStyleName="zhongwei";
+					break;
+				case EnumCity.DONG_WEI:
+					cityStyleName="weicheng3";
+					flagStyleName="dongwei";
+					break;
+			}
 			_skin.uiCheng.styleName="ui/app/banghui/wangcheng/xiaocheng/"+cityStyleName+".png";
 			_skin.uiMyFlag.styleName="ui/app/banghui/wangcheng/"+flagStyleName+".png";
+		}
+		
+		private function getCityName(city):String
+		{
+			var name:String="";
+			switch(city){
+				case EnumCity.XI_WEI:
+					name="西卫";
+					break;
+				case EnumCity.ZHONG_WEI:
+					name="中卫";
+					break;
+				case EnumCity.DONG_WEI:
+					name="东卫";
+					break;
+			}
+			return name;
 		}
 		
 		private function applying():void
 		{
 			_skin.grpTo.visible=false;
 			_skin.grpCheng.visible=true;
-			_skin.lbHead.htmlText="竞拍"+city;
+			_skin.lbHead.htmlText="竞拍"+getCityName(city);
 			_skin.lbName1.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,"当前出价最高帮派:");
 			_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,_infoMsg.curMaxPriceGuildName);
 			_skin.lbName2.text="";
@@ -358,6 +454,20 @@ package com.rpgGame.appModule.guild.war
 			
 			var cityStyleName:String="weicheng1";
 			var flagStyleName:String="xiwei";
+			switch(city){
+				case EnumCity.XI_WEI:
+					cityStyleName="weicheng1";
+					flagStyleName="xiwei";
+					break;
+				case EnumCity.ZHONG_WEI:
+					cityStyleName="weicheng2";
+					flagStyleName="zhongwei";
+					break;
+				case EnumCity.DONG_WEI:
+					cityStyleName="weicheng3";
+					flagStyleName="dongwei";
+					break;
+			}
 			_skin.uiCheng.styleName="ui/app/banghui/wangcheng/xiaocheng/"+cityStyleName+".png";
 			_skin.uiMyFlag.styleName="ui/app/banghui/wangcheng/"+flagStyleName+".png";
 		}
@@ -376,10 +486,22 @@ package com.rpgGame.appModule.guild.war
 			_skin.grpTo.visible=true;
 			_skin.grpCheng.visible=false;
 			_skin.lbHead.htmlText="";
+			_skin.lbTitle.text="请先竞拍城池";
+			_skin.btnJone.visible=false;
+			_skin.btnJinPai.visible=true;
 		}
 		
 		override public function hide():void
 		{
+			super.hide();
+			TipTargetManager.remove( _skin.grpWangCheng);
+			TipTargetManager.remove( _skin.grpCheng1);
+			TipTargetManager.remove( _skin.grpCheng2);
+			TipTargetManager.remove( _skin.grpCheng3);
+			TipTargetManager.remove( _skin.btnShuoMing);
+			EventManager.removeEvent(GuildEvent.GUILD_WCZB_INFO,updatePanelView);
+			EventManager.removeEvent(GuildEvent.GUILD_CHANGE_ACTIVE,updateAct);
+			TimerServer.remove(updateTime);
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -392,7 +514,7 @@ package com.rpgGame.appModule.guild.war
 			{
 				case _skin.btnBaoming:
 				case _skin.btnJinPai:
-					AppManager.showApp(AppConstant.GUILD_WCZB_APPLY,null,"",this._skin.container);
+					AppManager.showApp(AppConstant.GUILD_WCZB_APPLY,applyCityId,"",this._skin.container);
 					break;
 				case _skin.btnJiangli:
 					AppManager.showApp(AppConstant.GUILD_WCZB_REWARD,null,"",this._skin.container);
@@ -402,6 +524,9 @@ package com.rpgGame.appModule.guild.war
 					break;
 				case cityHold:
 					GuildSender.reqGuildWarGiveDailyGift();
+					break;
+				case _skin.btnJone:
+					AppManager.showAppNoHide(AppConstant.GUILD_PANEL,null,EmFunctionID.EM_BANGHUI_INFO);
 					break;
 			}
 		}

@@ -242,7 +242,7 @@ package com.rpgGame.app.manager.guild
 		{
 			_currentPageInfo= msg;
 			_guildList = msg.guildList;
-			EventManager.dispatchEvent(GuildEvent.GET_GUILD_LIST);
+			EventManager.dispatchEvent(GuildEvent.GET_GUILD_LIST,msg);
 		}
 		
 		

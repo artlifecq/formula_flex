@@ -46,5 +46,9 @@ package com.rpgGame.core.events
 		public static const GUILD_WCZB_INFO:uint = UNIQUEID.NEXT;
 		/**王城争霸申请列表**/
 		public static const GUILD_WCZB_APPLYINFO:uint = UNIQUEID.NEXT;
+		/**王城争霸竞价信息改变**/
+		public static const GUILD_WCZB_CHANGEMAXPRICE:uint = UNIQUEID.NEXT;
+		/**帮会活跃值变化**/
+		public static const GUILD_CHANGE_ACTIVE:uint = UNIQUEID.NEXT;
 	}
 }

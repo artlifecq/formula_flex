@@ -1,16 +1,12 @@
 package com.rpgGame.app.ui.scene
 {
-	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
-	import com.rpgGame.app.manager.time.SystemTimeManager;
+	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.sender.SceneSender;
-	import com.rpgGame.app.ui.scene.dungeon.DungeonTrackerUI;
-	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.utils.TimeUtil;
-	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.ActivityEvent;
@@ -18,13 +14,9 @@ package com.rpgGame.app.ui.scene
 	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
-	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.type.activity.ActivityJoinStateEnum;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
-	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.structs.Position;
-	
-	import feathers.controls.UIAsset;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.mainui.fubenzhuizong.ShiJieBoss_Skin;
@@ -39,9 +31,8 @@ package com.rpgGame.app.ui.scene
 	public class BossTrackerUI extends SceneTrackerUI
 	{
 		private var _skin:ShiJieBoss_Skin;
-		private var iconList:Vector.<IconCDFace>;
-		private var _bgList:Vector.<UIAsset>;
 		private var toPoint:Position;
+		private var rewardGrp:RewardGroup;
 
 		private var actId:int;
 
@@ -56,12 +47,8 @@ package com.rpgGame.app.ui.scene
 		
 		private function initUI():void
 		{
-			iconList=new Vector.<IconCDFace>();
-			_bgList=new Vector.<UIAsset>();
-			for(var i:int=0;i<4;i++){
-				_bgList.push(_skin["sec_ico1_"+i]);
-			}
 			toPoint=new Position();
+			rewardGrp=new RewardGroup(IcoSizeEnum.ICON_48,_skin.sec_ico1_0,RewardGroup.ALIN_LEFT,4);
 		}
 		
 		
@@ -70,34 +57,14 @@ package com.rpgGame.app.ui.scene
 			_skin.sec_info.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,"下次刷新时间:14:00");
 			_skin.lbHeadName.text=actInfo.actCfg.q_activity_name;
 			
-			
-			
 			toPoint.x=actInfo.actCfg.q_move_x;
 			toPoint.y=actInfo.actCfg.q_move_y;
 			//进入就自动挂机战斗
 			MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, toPoint.x, toPoint.y,finishWalk, 100,null,finishWalk);
 			
-			var arr:Array;
-			if(actInfo.actCfg.q_rewards){
-				arr=JSONUtil.decode(actInfo.actCfg.q_rewards);
-			}else{
-				arr=[];
-			}
-			var num:int=arr.length;
-			for(var i:int=0;i<4;i++){
-				iconList.push(IconCDFace.create(IcoSizeEnum.ICON_48));
-				if(i<num){
-					var itemInfo:ClientItemInfo=new ClientItemInfo(arr[i].mod);
-					itemInfo.itemInfo=new ItemInfo();
-					itemInfo.itemInfo.isbind=arr[i].bind;
-					FaceUtil.SetItemGrid(iconList[i],itemInfo);
-					_skin.container.addChild(iconList[i]);
-					iconList[i].x=_skin["sec_ico1_"+i].x-5;
-					iconList[i].y=_skin["sec_ico1_"+i].y-5;
-				}else{
-					iconList[i].clear();
-				}
-			}
+			
+			rewardGrp.setRewardByJsonStr(actInfo.actCfg.q_rewards);
+			var num:int;
 			
 			_skin.lbTime.htmlText=actInfo.actCfg.q_activity_timeshow;		
 			var hm:int=ActivetyDataManager.getCurrentHM();
@@ -105,7 +72,7 @@ package com.rpgGame.app.ui.scene
 			timeList=timeList[4];//第四个才是刷新段
 			var next:int=timeList[0];
 			num=timeList.length;
-			for(i=0;i<num;i++){
+			for(var i:int=0;i<num;i++){
 				if(timeList[i]>hm){
 					if((i+1)!=num){
 						next=timeList[i+1];
@@ -187,11 +154,9 @@ package com.rpgGame.app.ui.scene
 			super.onHide();
 			EventManager.removeEvent(ActivityEvent.ENTER_ACTIVITY,getActId);
 			EventManager.removeEvent(ActivityEvent.UPDATE_ACTIVITY,updateBossAct);
-			while(iconList.length>0){
-				var icon:IconCDFace=iconList.pop();
-				icon.destroy();
-			}
 			actInfo=null;
+			rewardGrp.clear();
+			rewardGrp=null;
 		}
 	}
 }

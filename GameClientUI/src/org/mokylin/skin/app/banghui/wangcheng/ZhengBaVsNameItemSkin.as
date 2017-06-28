@@ -27,7 +27,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [guild1_i(),guild0_i()];
+			this.elementsContent = [guild0_i(),guild1_i()];
 			
 			states = {
 			};
@@ -48,7 +48,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			temp.skin = skin
 			temp.width = 187;
 			temp.x = 0;
-			temp.y = 24;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -62,7 +62,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			temp.skin = skin
 			temp.width = 187;
 			temp.x = 0;
-			temp.y = 0;
+			temp.y = 24;
 			return temp;
 		}
 

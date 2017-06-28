@@ -26,6 +26,7 @@ package com.rpgGame.app.sender
 	import com.rpgGame.netData.guildWar.message.ReqGuildWarApplyMessage;
 	import com.rpgGame.netData.guildWar.message.ReqGuildWarCityApplyInfoMessage;
 	import com.rpgGame.netData.guildWar.message.ReqGuildWarCityInfoMessage;
+	import com.rpgGame.netData.guildWar.message.ReqGuildWarEnterApplyMessage;
 	import com.rpgGame.netData.guildWar.message.ReqGuildWarEnterMessage;
 	import com.rpgGame.netData.guildWar.message.ReqGuildWarGiveDailyGiftMessage;
 	import com.rpgGame.netData.guildWar.message.ReqGuildWarLeaveApplyMessage;
@@ -242,6 +243,18 @@ package com.rpgGame.app.sender
 		public static function reqGuildWarCityInfo(opaque:int=0):void
 		{
 			var msg:ReqGuildWarCityInfoMessage=new ReqGuildWarCityInfoMessage();
+			msg.opaque=opaque;
+			sendMsg(msg);
+		}
+		
+		/**
+		 *告知后台进入王城争霸界面 
+		 * @param opaque
+		 * 
+		 */
+		public static function reqEnterGuildWarPanel(opaque:int=0):void
+		{
+			var msg:ReqGuildWarEnterApplyMessage=new ReqGuildWarEnterApplyMessage();
 			msg.opaque=opaque;
 			sendMsg(msg);
 		}

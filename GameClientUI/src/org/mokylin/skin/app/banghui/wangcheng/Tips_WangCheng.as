@@ -34,6 +34,8 @@ package org.mokylin.skin.app.banghui.wangcheng
 
 		public var lbJiangli:feathers.controls.Label;
 
+		public var lbName:feathers.controls.Label;
+
 		public var lbRoleName:feathers.controls.Label;
 
 		public var lbTeamName:feathers.controls.Label;
@@ -53,7 +55,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			this.currentState = "normal";
 			this.height = 406;
 			this.width = 240;
-			this.elementsContent = [imgBG_i(),imgLine1_i(),imgLine2_i(),imgLine3_i(),__Tips_WangCheng_Label1_i(),__Tips_WangCheng_Label2_i(),__Tips_WangCheng_Label3_i(),__Tips_WangCheng_Label4_i(),__Tips_WangCheng_Label5_i(),__Tips_WangCheng_Label6_i(),__Tips_WangCheng_Label7_i(),lbVsBang_i(),lbTime_i(),lbJiangli_i(),lbTeamName_i(),lbRoleName_i(),grpicon1_i(),grpicon2_i()];
+			this.elementsContent = [imgBG_i(),imgLine1_i(),imgLine2_i(),imgLine3_i(),lbName_i(),__Tips_WangCheng_Label1_i(),__Tips_WangCheng_Label2_i(),__Tips_WangCheng_Label3_i(),__Tips_WangCheng_Label4_i(),__Tips_WangCheng_Label5_i(),__Tips_WangCheng_Label6_i(),lbVsBang_i(),lbTime_i(),lbJiangli_i(),lbTeamName_i(),lbRoleName_i(),grpicon1_i(),grpicon2_i()];
 			
 			states = {
 			};
@@ -67,19 +69,6 @@ package org.mokylin.skin.app.banghui.wangcheng
 		private function __Tips_WangCheng_Label1_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.fontSize = 16;
-			temp.text = "【王城】";
-			temp.color = 0xFFEA00;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 111;
-			temp.x = 4;
-			temp.y = 10;
-			return temp;
-		}
-
-		private function __Tips_WangCheng_Label2_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "占领帮派：";
 			temp.color = 0xA3A594;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
@@ -88,7 +77,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			return temp;
 		}
 
-		private function __Tips_WangCheng_Label3_i():feathers.controls.Label
+		private function __Tips_WangCheng_Label2_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "帮主名称：";
@@ -99,7 +88,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			return temp;
 		}
 
-		private function __Tips_WangCheng_Label4_i():feathers.controls.Label
+		private function __Tips_WangCheng_Label3_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "占领福利（官员）：";
@@ -111,7 +100,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			return temp;
 		}
 
-		private function __Tips_WangCheng_Label5_i():feathers.controls.Label
+		private function __Tips_WangCheng_Label4_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "占领福利（帮众）：";
@@ -123,7 +112,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			return temp;
 		}
 
-		private function __Tips_WangCheng_Label6_i():feathers.controls.Label
+		private function __Tips_WangCheng_Label5_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "下次争夺帮派：";
@@ -135,7 +124,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			return temp;
 		}
 
-		private function __Tips_WangCheng_Label7_i():feathers.controls.Label
+		private function __Tips_WangCheng_Label6_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "下次争时间：";
@@ -252,6 +241,21 @@ package org.mokylin.skin.app.banghui.wangcheng
 			temp.width = 173;
 			temp.x = 34;
 			temp.y = 377;
+			return temp;
+		}
+
+		private function lbName_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbName = temp;
+			temp.name = "lbName";
+			temp.fontSize = 16;
+			temp.text = "【王城】";
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 111;
+			temp.x = 4;
+			temp.y = 10;
 			return temp;
 		}
 

@@ -6,6 +6,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.core.events.GuildEvent;
 	import com.rpgGame.coreData.role.HeroData;
+	import com.rpgGame.netData.guild.message.ResGuildActiveMessage;
 	import com.rpgGame.netData.guild.message.ResGuildApplyListInfoMessage;
 	import com.rpgGame.netData.guild.message.ResGuildBriefnessInfoMessage;
 	import com.rpgGame.netData.guild.message.ResGuildChangeGuildIdMessage;
@@ -41,6 +42,7 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(111106, getResGuildChangeGuildId);
 			SocketConnection.addCmdListener(111107, getResGuildChangeMemberType);
 			SocketConnection.addCmdListener(111108, getResGuildSkillInfo);
+			SocketConnection.addCmdListener(111109, getResGuildActiveMessage);
 			SocketConnection.addCmdListener(111199, getResGuildOperateResultMessage);
 			
 			SocketConnection.addCmdListener(253101, getResGuildWarCityInfoMessage);
@@ -52,6 +54,14 @@ package com.rpgGame.app.cmdlistener
 			finish();
 		}
 		
+		private function getResGuildActiveMessage(msg:ResGuildActiveMessage):void
+		{
+			if(GuildManager.instance().guildData){
+				GuildManager.instance().guildData.active=msg.active;
+			}
+			EventManager.dispatchEvent(GuildEvent.GUILD_CHANGE_ACTIVE,msg.active);
+		}
+		
 		private function getResGuildWarOperateResultMessage(msg:ResGuildWarOperateResultMessage):void
 		{
 			
@@ -59,7 +69,7 @@ package com.rpgGame.app.cmdlistener
 		
 		private function getResGuildWarChangeMaxPriceMessage(msg:ResGuildWarChangeMaxPriceMessage):void
 		{
-			
+			EventManager.dispatchEvent(GuildEvent.GUILD_WCZB_CHANGEMAXPRICE,msg);
 		}
 		
 		private function getResGuildWarCityApplyInfoMessage(msg:ResGuildWarCityApplyInfoMessage):void
