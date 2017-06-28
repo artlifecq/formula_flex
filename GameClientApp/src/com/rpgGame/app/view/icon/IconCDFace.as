@@ -378,9 +378,6 @@ package com.rpgGame.app.view.icon
 			TipTargetManager.remove(this);
 			super.clear();
 			count = 0;
-			if(_bgImage){
-				_bgImage.removeFromParent();
-			}
 		}
 		
 		override public function destroy():void
