@@ -1,9 +1,12 @@
 package com.rpgGame.appModule.task
 {
+	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_mission_base;
 	
 	import gs.TweenLite;
 	
@@ -27,6 +30,7 @@ package com.rpgGame.appModule.task
 			_skin=new AlertSend();
 			super(_skin);
 		}
+		private var taskType:int;
 		private var mapid:int=0;
 		private var sendX:int=0;
 		private var sendY:int=0;
@@ -34,17 +38,26 @@ package com.rpgGame.appModule.task
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			sendKey=false;
-			var pathing:String=String(data);
-			var pathArr:Array=pathing.split(",");
-			if(pathArr.length==3)
+			
+			var taskModelId:int=int(data);
+			var taskData:Q_mission_base=TaskMissionCfgData.getTaskByID(taskModelId);
+			if(taskData)
 			{
-				super.show(data,openTable,parentContiner);
-				mapid=int(pathArr[0]);
-				sendX=int(pathArr[1]);
-				sendY=int(pathArr[2]);
-				sendKey=true;
-				setTime(3);
+				var pathing:String=taskData.q_pathing;
+				var pathArr:Array=pathing.split(",");
+				if(pathArr.length==3)
+				{
+					super.show(data,openTable,parentContiner);
+					taskType=taskData.q_mission_mainType;
+					mapid=int(pathArr[0]);
+					sendX=int(pathArr[1]);
+					sendY=int(pathArr[2]);
+					sendKey=true;
+					setTime(5);
+				}
+			
 			}
+			
 			
 			//TweenLite.delayedCall(3, hide);
 		}
@@ -92,6 +105,7 @@ package com.rpgGame.appModule.task
 		{
 			if(sendKey)
 			{
+				TaskMissionManager.flyTaskType=taskType;
 				SceneSender.sceneMapTransport(mapid, sendX,sendY,25,false,null,1);
 			}
 			

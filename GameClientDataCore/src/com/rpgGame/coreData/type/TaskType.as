@@ -13,6 +13,9 @@ package com.rpgGame.coreData.type
 		public static var MAINTYPE_TREASUREBOX:int = 3;
 		/**帮会日常任务*/
 		public static var MAINTYPE_GUILDDAILYTASK:int = 4;
+		/**天降礼金任务*/
+		public static var LIJIN_TASK:int = 5;
+		
 		/** 任务子类型（1为NPC类型，2打怪数量，3收集物品，4采集任务,5使用道具,6进入副本*/
 		/**1为对话类型*/
 		public static var SUB_CONVERSATION:int = 1;

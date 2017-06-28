@@ -144,6 +144,7 @@ package com.rpgGame.app.manager.role
 
 			TrusteeshipManager.getInstance().stopAll();
 			var role : SceneRole = MainRoleManager.actor;
+			posy=-Math.abs(posy);
 			var position : Vector3D = new Vector3D(posx, posy, 0);
 			EventManager.dispatchEvent(TaskEvent.AUTO_WALK_START);
 			walkToScenePos(role, targetSceneId, position,function(ref :WalkMoveStateReference):void{

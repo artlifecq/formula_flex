@@ -11,12 +11,16 @@ package com.rpgGame.app.manager.task
 	import com.rpgGame.netData.task.bean.TaskInfo;
 	import com.rpgGame.netData.task.bean.TaskSubRateInfo;
 	
+	import flash.utils.Dictionary;
+	
 	import app.message.BoolArrayProto;
 	
 	import org.game.netCore.data.long;
 
 	public class TaskMissionManager
 	{
+		public static var flyTaskType:int;
+		
 		/**最后完成主线任务id*/
 		private static var _taskModelId: int;
 		/**当天已经完成日常任务的次数*/
@@ -32,7 +36,10 @@ package com.rpgGame.app.manager.task
 		/**当前环式任务服务器信息*/
 		private static var _treasuerTaskInfo : TaskInfo;
 		private static var _treasuerTaskData : Q_mission_base;
-	
+		
+		private static var _otherTaskInfoList :Dictionary=new Dictionary();
+		private static var _otherTaskDataList : Dictionary = new Dictionary();
+		
 		/**当前环式任务客户端信息*/
 		public static function get treasuerTaskData():Q_mission_base
 		{
@@ -114,6 +121,10 @@ package com.rpgGame.app.manager.task
 					
 					//currentMainTaskInfo(task);
 				}
+				else
+				{
+					setOtherTaskInfo(task,taskData);
+				}
 			}
 			
 		}
@@ -179,7 +190,11 @@ package com.rpgGame.app.manager.task
 			{
 				taskdata=treasuerTaskData;
 			}
-			
+			else
+			{
+				taskdata=TaskMissionManager.getOtherTaskData(type);
+				
+			}
 			if(taskdata!=null)
 			{
 				var path:String=taskdata.q_pathing;
@@ -257,11 +272,10 @@ package com.rpgGame.app.manager.task
 		{
 			var taskdata:Q_mission_base;
 			var i:int,j:int;
-			for(i=0;i<3;i++)
+			for(i=1;i<=5;i++)
 			{
-				if(i==0)taskdata=mainTaskData;
-				else if(i==1)taskdata=dailyTaskData;
-				else if(i==2)taskdata=treasuerTaskData;
+				taskdata=getTaskDataByType(i);
+				
 				if(taskdata!=null&&taskdata.q_mission_type==TaskType.SUB_GATHER)
 				{
 					var path:String=taskdata.q_finish_information_str;
@@ -348,7 +362,23 @@ package com.rpgGame.app.manager.task
 			}
 			return false;
 		}
-		
+		/**判断其它任务是否有回复npc*/
+		public static function getTaskHaveNpc(type:int):Boolean
+		{
+			var taskData:Q_mission_base=TaskMissionManager.getTaskDataByType(type);
+			if(taskData&&taskData.q_finish_npc>0)
+			{
+				return true;
+			}
+			return false;
+		}
+		/**返回主线任务回复npc刷新表id*/
+		public static function getTaskNpcAreaId(type:int):int
+		{
+			var taskData:Q_mission_base=TaskMissionManager.getTaskDataByType(type);
+			return taskData.q_finish_npc;
+			
+		}
 		/**返回主线任务回复npc刷新表id*/
 		public static function getMainTaskNpcAreaId():int
 		{
@@ -466,6 +496,14 @@ package com.rpgGame.app.manager.task
 			return getTaskIsFinish(dailyTaskInfo,dailyTaskData);
 		}
 		
+		/**判断其它类型任务是否完成*/
+		public static function getTaskIsFinishByType(type:int):Boolean
+		{
+			var task:TaskInfo=TaskMissionManager.getTaskInfoByType(type);
+			var taskData:Q_mission_base=TaskMissionManager.getTaskDataByType(type);
+			return getTaskIsFinish(task,taskData);
+		}
+		
 		/**判断任务是否完成*/
 		public static function getTaskIsFinish(info:TaskInfo,data:Q_mission_base):Boolean
 		{
@@ -561,6 +599,15 @@ package com.rpgGame.app.manager.task
 			_treasuerTaskInfo=value;
 			_treasuerTaskData=taskData;
 		}
+		
+		/**设置其它任务类型 任务信息*/
+		public static function setOtherTaskInfo(value : TaskInfo,taskData:Q_mission_base) : void
+		{
+			//
+			_otherTaskInfoList[taskData.q_mission_mainType] = value;
+			_otherTaskDataList[taskData.q_mission_mainType] = taskData;
+		}
+		
 		/**判断环式任务是否完成*/
 		public static function getTreasuerTaskIsFinish():Boolean
 		{
@@ -661,6 +708,72 @@ package com.rpgGame.app.manager.task
 		}
 		
 		
+		/**获取其它环式任务额外奖励信息ID*/
+		public static function getTaskExtraReward(type:int):Object
+		{
+			var taskInfo:TaskInfo=TaskMissionManager.getTaskInfoByType(type);
+			var taskData:Q_mission_base=TaskMissionManager.getTaskDataByType(type);
+			
+			if(taskInfo!=null&&taskData!=null)
+			{
+				var exId:String=taskInfo.loopRewardId;
+				var nowTrea:int=taskInfo.loopNumber;//当前环数
+				var taskSection:Q_mission_section=TaskMissionCfgData.getSectionByID(exId);
+				if(taskSection!=null)
+				{
+					var rewards:String=taskSection.q_sec_rewards;
+					var reObj:Object=JSONUtil.decode(rewards);
+					var reArr:Array=reObj as Array;
+					var i:int;
+					for(i=0;i<reArr.length;i++)
+					{
+						if(reArr[i].l>=nowTrea)
+						{
+							return reArr[i];
+						}
+					}
+					
+				}
+			}
+			
+			return null;
+		}
+		
+		/**获取环式任务额外奖励是否完成*/
+		public static function getTaskExtraRewardIsFlish(type:int):Boolean
+		{
+			
+			if(TaskMissionManager.getTaskIsFinishByType(type))
+			{
+				var taskInfo:TaskInfo=TaskMissionManager.getTaskInfoByType(type);
+				var taskData:Q_mission_base=TaskMissionManager.getTaskDataByType(type);
+				if(taskInfo!=null&&taskData!=null)
+				{
+					var exId:String=taskInfo.loopRewardId;
+					var nowTrea:int=taskInfo.loopNumber;//当前环数
+					var taskSection:Q_mission_section=TaskMissionCfgData.getSectionByID(exId);
+					if(taskSection!=null)
+					{
+						var rewards:String=taskSection.q_sec_rewards;
+						var reObj:Object=JSONUtil.decode(rewards);
+						var reArr:Array=reObj as Array;
+						var i:int;
+						for(i=0;i<reArr.length;i++)
+						{
+							if(reArr[i].l==nowTrea)
+							{
+								return true;
+							}
+						}
+						
+					}
+				}
+				
+			}
+			
+			return false;
+		}
+		
 		
 		
 		
@@ -727,6 +840,100 @@ package com.rpgGame.app.manager.task
 		public static function set dailyTaskTimes(value:int):void
 		{
 			_dailyTaskTimes = value;
+		}
+		
+		/**返任务信息by type*/
+		public static function getTaskInfoByType(type:int):TaskInfo
+		{
+			if(type==TaskType.MAINTYPE_MAINTASK)
+			{
+				return TaskMissionManager.mainTaskInfo;
+			}
+			else if(type==TaskType.MAINTYPE_DAILYTASK)
+			{
+				return TaskMissionManager.dailyTaskInfo;
+			}
+			else if(type==TaskType.MAINTYPE_TREASUREBOX)
+			{
+				return TaskMissionManager.treasuerTaskInfo;
+			}
+			else
+			{
+				return TaskMissionManager.getOtherTaskInfo(type);
+			}
+		}
+		/**判断任务类型单个条件是否完成*/
+		public static function getTaskSubIsFinish(type:int,num:int):Boolean
+		{
+			var taskInfo:TaskInfo=TaskMissionManager.getTaskInfoByType(type);
+			var taskData:Q_mission_base=TaskMissionManager.getTaskDataByType(type);
+			if(taskInfo!=null&&taskData!=null)
+			{
+				if(taskData.q_mission_type==TaskType.SUB_CONVERSATION)
+				{
+					return true;
+				}
+				var information:String=taskData.q_finish_information_str;
+				var informationList:Array=information.split(";");
+				if(informationList.length>num)
+				{
+					return getTaskOneIsFinish(informationList[num],taskInfo.taskSubRateInfolist[num]);
+				}
+				
+			}
+			
+			return false
+		}
+		
+		/**任务子类型*/
+		public static function getTaskMissionType(type:int):int
+		{
+			
+			var taskData:Q_mission_base=TaskMissionManager.getTaskDataByType(type);
+			
+			if(taskData!=null)
+			{
+				return taskData.q_mission_type
+			}
+			return 0;
+		}
+		
+		
+		/**返任务数据by type*/
+		public static function getTaskDataByType(type:int):Q_mission_base
+		{
+			if(type==TaskType.MAINTYPE_MAINTASK)
+			{
+				return TaskMissionManager.mainTaskData;
+			}
+			else if(type==TaskType.MAINTYPE_DAILYTASK)
+			{
+				return TaskMissionManager.dailyTaskData;
+			}
+			else if(type==TaskType.MAINTYPE_TREASUREBOX)
+			{
+				return TaskMissionManager.treasuerTaskData;
+			}
+			else
+			{
+				return TaskMissionManager.getOtherTaskData(type);
+				
+			}
+		}
+
+		
+		
+		
+		/**返回额外任务信息*/
+		public static function getOtherTaskInfo(type:int):TaskInfo
+		{
+			return _otherTaskInfoList[type];
+			//_otherTaskDataList[taskData.q_mission_mainType] = taskData;
+		}
+		/**返回额外任务数据*/
+		public static function getOtherTaskData(type:int):Q_mission_base
+		{
+			return _otherTaskDataList[type];
 		}
 		
 		public function TaskMissionManager()

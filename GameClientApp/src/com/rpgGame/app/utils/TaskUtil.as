@@ -348,7 +348,12 @@ package com.rpgGame.app.utils
 				taskData=TaskMissionManager.treasuerTaskData;
 				taskInfo=TaskMissionManager.treasuerTaskInfo;
 			}
-			
+			else
+			{
+				taskInfo=TaskMissionManager.getOtherTaskInfo(type);
+				taskData=TaskMissionManager.getOtherTaskData(type);
+				
+			}
 			if(taskData!=null&&taskInfo!=null)
 			{
 				if(taskInfo.taskSubRateInfolist.length>ite) 
@@ -393,6 +398,11 @@ package com.rpgGame.app.utils
 			{
 				taskData=TaskMissionManager.treasuerTaskData;
 			}
+			else
+			{
+				taskData=TaskMissionManager.getOtherTaskData(type);
+			}
+			
 			if(taskData!=null)
 			{
 				return taskData.q_mission_type;
@@ -468,8 +478,8 @@ package com.rpgGame.app.utils
 			var monsterData : Q_scene_monster_area = MonsterDataManager.getAreaByAreaID(id);
 			if (monsterData)
 			{
-				MainRoleSearchPathManager.walkToScene(monsterData.q_mapid, monsterData.q_center_x, monsterData.q_center_y,onArrive, 100,null,onArrive);
 			}
+				MainRoleSearchPathManager.walkToScene(monsterData.q_mapid, monsterData.q_center_x, monsterData.q_center_y,onArrive, 100,null,onArrive);
 		}
 		
 		
@@ -505,12 +515,13 @@ package com.rpgGame.app.utils
 		 * @param id 刷新的id
 		 *
 		 */
-		public static function npcTaskFly(id : int) : void
+		public static function npcTaskFly(id : int,mainType : int) : void
 		{
 			
 			var monsterData : Q_scene_monster_area = MonsterDataManager.getAreaByAreaID(id);
 			if (monsterData)
 			{
+				TaskMissionManager.flyTaskType=mainType;
 				SceneSender.sceneMapTransport(monsterData.q_mapid, monsterData.q_center_x, monsterData.q_center_y);
 			}
 		}
@@ -521,12 +532,13 @@ package com.rpgGame.app.utils
 		 * @param modeId
 		 *
 		 */
-		public static function monsterTaskFly(modeId : int,onArrive:Function=null,noWalk:Function=null) : void
+		public static function monsterTaskFly(modeId : int,mainType : int,onArrive:Function=null,noWalk:Function=null) : void
 		{
 			
 			var monsterData : Q_scene_monster_area = MonsterDataManager.getMonsterByModelId(modeId,SceneSwitchManager.currentMapId);
 			if (monsterData)
 			{
+				TaskMissionManager.flyTaskType=mainType;
 				SceneSender.sceneMapTransport(monsterData.q_mapid, monsterData.q_center_x, monsterData.q_center_y);
 			}
 		}
@@ -535,11 +547,12 @@ package com.rpgGame.app.utils
 		 * @param modeId
 		 *
 		 */
-		public static function postTaskFly(post :Array,onArrive:Function=null,noWalk:Function=null) : void
+		public static function postTaskFly(post :Array,mainType : int,onArrive:Function=null,noWalk:Function=null) : void
 		{
 			
 			if (post!=null&&post.length==3)
 			{
+				TaskMissionManager.flyTaskType=mainType;
 				SceneSender.sceneMapTransport(post[0], post[1], post[2]);
 			}
 		}

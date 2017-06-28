@@ -19,8 +19,10 @@ package com.rpgGame.app.ui.main.taskbar
 	import com.rpgGame.core.events.UserMoveEvent;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
-	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.HuBaoData;
+	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
+	import com.rpgGame.coreData.info.MapDataManager;
+	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.type.TaskType;
 	
 	import gs.TweenMax;
@@ -45,7 +47,7 @@ package com.rpgGame.app.ui.main.taskbar
 			_skin=new RenWuZhuiZong_Skin();
 			super(_skin);
 			init();
-			addEvent();
+			
 			
 		}
 		override protected function onTouchTarget(target : DisplayObject) : void {
@@ -148,7 +150,18 @@ package com.rpgGame.app.ui.main.taskbar
 					
 				}
 		}
+		override protected function onShow() : void
+		{
+			super.onShow();
+			addEvent();
+		}
 		
+		
+		override protected function onHide():void
+		{
+			super.onHide();
+			removeEvent();
+		}
 		private function init():void
 		{
 			initX=_skin.task_box.x;
@@ -163,7 +176,6 @@ package com.rpgGame.app.ui.main.taskbar
 			EventManager.addEvent(TaskEvent.TASK_NEW_MATION,newMation);
 			EventManager.addEvent(TaskEvent.TASK_CHANGE_MATION,changeMation);
 			
-			//EventManager.addEvent(TaskEvent.TASK_FINISH_NPC,finishNpc);
 			EventManager.addEvent(TaskEvent.TASK_CLICK_NPC,taskNpc);
 			EventManager.addEvent(UserMoveEvent.MOVE_THROUGH, moveReschange);
 			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE,flyComplete);
@@ -171,7 +183,18 @@ package com.rpgGame.app.ui.main.taskbar
 			
 			
 		}
-		
+		private function removeEvent():void
+		{
+			EventManager.removeEvent(TaskEvent.TASK_INFOR_MATION,inforMation);
+			EventManager.removeEvent(TaskEvent.TASK_FINISH_MATION,finishMation);
+			EventManager.removeEvent(TaskEvent.TASK_NEW_MATION,newMation);
+			EventManager.removeEvent(TaskEvent.TASK_CHANGE_MATION,changeMation);
+
+			EventManager.removeEvent(TaskEvent.TASK_CLICK_NPC,taskNpc);
+			EventManager.removeEvent(UserMoveEvent.MOVE_THROUGH, moveReschange);
+			EventManager.removeEvent(MapEvent.MAP_SWITCH_COMPLETE,flyComplete);
+			EventManager.removeEvent(MainPlayerEvent.PLAYER_DIE,playerDie);
+		}
 		private var panlIsopen:Boolean=false;
 		/**玩家移动*/
 		private function moveReschange() : void
@@ -303,7 +326,6 @@ package com.rpgGame.app.ui.main.taskbar
 						TaskControl.showLeadPanel();
 					}
 				}
-				TaskAutoManager.getInstance().setTaskChange();
 			}
 			
 		}

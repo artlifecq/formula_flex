@@ -65,7 +65,7 @@ package com.rpgGame.appModule.activety.zonghe.lijin
 			if(remainTime==0){
 				hide();
 				TimerServer.remove(updateTime);
-				AppManager.showApp(AppConstant.ACTIVETY_LIJIN_REFRESH);
+//				AppManager.showApp(AppConstant.ACTIVETY_LIJIN_REFRESH);
 			}
 		}
 		

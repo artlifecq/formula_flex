@@ -167,6 +167,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_newfunc:String = "data.Q_newfunc";
 		/**  九层妖塔									 */
 		public static const Q_nine_tower:String = "data.Q_nine_tower";
+		/**  天降礼金								 */
+		public static const Q_daysdown_gold:String = "data.Q_daysdown_gold";
 		/**  通知列表			 */
 		public static const Q_notify:String = "data.Q_notify";
 		/**  阵营关系				 */
@@ -273,6 +275,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_convoy", com.rpgGame.coreData.clientConfig.Q_convoy);
 			regClass("data.Q_daily_zone", com.rpgGame.coreData.clientConfig.Q_daily_zone);
 			regClass("data.Q_dailyzone_monster", com.rpgGame.coreData.clientConfig.Q_dailyzone_monster);
+			regClass("data.Q_daysdown_gold", com.rpgGame.coreData.clientConfig.Q_daysdown_gold);
 			regClass("data.Q_die", com.rpgGame.coreData.clientConfig.Q_die);
 			regClass("data.Q_equip_inherit_cost", com.rpgGame.coreData.clientConfig.Q_equip_inherit_cost);
 			regClass("data.Q_equip_polish", com.rpgGame.coreData.clientConfig.Q_equip_polish);
