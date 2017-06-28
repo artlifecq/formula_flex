@@ -43,7 +43,7 @@ package com.rpgGame.app.state.role.control
 		override public function afterExecute() : void
 		{
 			super.afterExecute();
-			MountSender.requestSetUpMountRide(_stateReference.isRide);
+//			MountSender.requestSetUpMountRide(_stateReference.isRide);
 			if (!_stateReference.isRide)
 			{
 				removeSelf();

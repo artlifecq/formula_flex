@@ -6,6 +6,7 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneCursorHelper;
 	import com.rpgGame.app.manager.scene.SceneManager;
@@ -245,8 +246,18 @@ package com.rpgGame.app.state.role
 			ref.onStop(onWalkStop);
 			ref.onEnd(onWalkEnd);
 			ref.onSync(onWalkSync);
-			walkRole.stateMachine.transition(RoleStateType.CONTROL_WALK_MOVE, ref);
-			return walkRole.stateMachine.isWalkMoving;
+//			walkRole.stateMachine.transition(RoleStateType.CONTROL_WALK_MOVE, ref);
+			var isWalkMoving:Boolean = role.stateMachine.transition(RoleStateType.CONTROL_WALK_MOVE, ref);
+			if (role.isMainChar || role.isMainCamouflage)
+			{
+				if (isWalkMoving)
+				{
+//					_lastWalkServerTime = _local12;
+					HorseManager.instance().autoRiding(role, pos);
+				}
+			}
+
+			return isWalkMoving;
 		}
 		
 		private static function nullFunc():void

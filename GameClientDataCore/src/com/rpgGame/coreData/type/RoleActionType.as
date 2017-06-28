@@ -57,7 +57,10 @@ package com.rpgGame.coreData.type
 			}
 			if(onMount)
 			{
-				return type + "_on_mount";
+				if(type== "prewar")
+					return "stand_on_mount";
+				else
+					return type + "_on_mount";
 			}
 			else
 			{

@@ -42,6 +42,7 @@ package com.rpgGame.app.manager.mount
 		private var _lastLevel:int;
 		private var _upLevelItem:ClientItemInfo;
 		private var _currentProp:Vector.<Number>;
+		private var _nextProp:Vector.<Number>;
 		private var _disProp:Vector.<Number>;
 		private var _addProp:Vector.<Number>;
 		private var _useItems:Dictionary = new Dictionary();
@@ -140,6 +141,7 @@ package com.rpgGame.app.manager.mount
 				_currentProp[type] = value;
 			}
 			_disProp = new Vector.<Number>(30,0);
+			_nextProp = new Vector.<Number>(30,0);
 			//差距
 			var nexthousse:Q_horse = HorseConfigData.getMountDataById(mountLevel+1);
 			if(nexthousse!=null)
@@ -164,6 +166,7 @@ package com.rpgGame.app.manager.mount
 						if(type==0)
 							continue;
 						value = currentatt["q_value"+i];
+						_nextProp[type] = value;
 						_disProp[type] = value-_currentProp[type];
 					}
 					_isMaxLevel = false;
@@ -241,6 +244,11 @@ package com.rpgGame.app.manager.mount
 		public function get disProps():Vector.<Number>
 		{
 			return _disProp;
+		}
+		
+		public function get nextProps():Vector.<Number>
+		{
+			return _nextProp;
 		}
 		private function get addExtraPercent():Number
 		{
