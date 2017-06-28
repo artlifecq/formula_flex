@@ -12,6 +12,7 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
+	import com.rpgGame.app.manager.fightsoul.FightSoulManager;
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleManager;
@@ -147,6 +148,11 @@ package   com.rpgGame.app.manager.debug
 					msg.tempItems.push(tmp);
 				}
 				AppManager.showApp(AppConstant.BATTLE_NINE_TOWER_RESULT_PANEL,msg);
+			});
+			commandList.put( ".fightsoul", function (...arg):void
+			{
+				var level:int = arg[0];
+				FightSoulManager.instance().updateMode(level);
 			});
 		}
 		
