@@ -6,6 +6,7 @@ package com.rpgGame.app.ui.alert
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.utils.UIUtil;
 	
+	import flash.utils.Dictionary;
 	import flash.utils.getTimer;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -23,6 +24,7 @@ package com.rpgGame.app.ui.alert
 		private static const pool:Array=[];
 		private var _skin:AlertUp;
 		private var _data:Object;
+		private static const _showDic:Dictionary=new Dictionary();
 		public function SomeSystemNoticePanel()
 		{
 			_skin=new AlertUp();
@@ -84,8 +86,10 @@ package com.rpgGame.app.ui.alert
 			{
 				timeHash.remove(_data.sys);
 			}
+			delete _showDic[_data.sys];
 			_data=null;
 			pool.push(this);
+			
 		}
 		public static function addEvent():void
 		{
@@ -113,6 +117,10 @@ package com.rpgGame.app.ui.alert
 			{
 				return;
 			}
+			if (_showDic[data.sys]!=undefined) 
+			{
+				return;
+			}
 			var panel:SomeSystemNoticePanel=null;
 			if (pool.length>0) 
 			{
@@ -125,6 +133,7 @@ package com.rpgGame.app.ui.alert
 			StarlingLayerManager.appUILayer.addChild(panel);
 			UIUtil.alignToStageRightBottom(panel);
 			panel.setData(data);
+			_showDic[data.sys]=1;
 		}
 		override protected function onStageResize(sw:int, sh:int):void
 		{
