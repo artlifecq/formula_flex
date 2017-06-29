@@ -43,7 +43,7 @@ package org.mokylin.skin.common
 			
 			states = {
 			};
-			skinNames={"disabled":"ui/component/text/input_bg.png", "enabled":"ui/component/text/input_bg.png", "focused":"ui/component/text/input_bg.png"};
+			skinNames={"disabled":"ui/component/text/flip_bg.png", "enabled":"ui/component/text/flip_bg.png", "focused":"ui/component/text/flip_bg.png"};
 		}
 
 
@@ -55,10 +55,10 @@ package org.mokylin.skin.common
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg = temp;
 			temp.name = "bg";
-			temp.left = 21;
-			temp.right = 21;
-			temp.styleName = "ui/component/text/input_bg.png";
-			temp.y = 0;
+			temp.left = 23;
+			temp.right = 23;
+			temp.styleName = "ui/component/text/flip_bg.png";
+			temp.y = 2;
 			return temp;
 		}
 
@@ -89,8 +89,8 @@ package org.mokylin.skin.common
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			textDisplay = temp;
 			temp.name = "textDisplay";
-			temp.left = 30;
-			temp.right = 30;
+			temp.left = 26;
+			temp.right = 26;
 			temp.text = "1/8";
 			temp.textAlign = "center";
 			temp.color = 0xCFC6AE;

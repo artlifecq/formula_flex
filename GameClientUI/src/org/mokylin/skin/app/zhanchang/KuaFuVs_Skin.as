@@ -64,12 +64,13 @@ package org.mokylin.skin.app.zhanchang
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnCancel = temp;
 			temp.name = "btnCancel";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "取消匹配";
 			temp.letterSpacing = 0;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.textAlign = "center";
-			temp.width = 111;
+			temp.color = 0xFFFFFF;
+			temp.width = 110;
 			temp.x = 147;
 			temp.y = 136;
 			return temp;

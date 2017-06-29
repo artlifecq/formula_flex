@@ -108,5 +108,26 @@ package com.rpgGame.coreData.info.shop
 		{
 			return _shopPageItems.getValue(pgType);
 		}
+		public function findShopItemVo(shopItemId:int):ShopItemVo
+		{
+			var keys:Array=_shopPageItems.keys();
+			var len:int=0;
+			for each (var key:int in keys) 
+			{
+				var arr:Array=getPageShopItems(key);
+				if (arr) 
+				{
+					len=arr.length;
+					for (var i:int = 0; i < len; i++) 
+					{
+						if (ShopItemVo(arr[i]).data.shopItemId==shopItemId) 
+						{
+							return arr[i];
+						}
+					}
+				}
+			}
+			return null;
+		}
 	}
 }

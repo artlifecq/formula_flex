@@ -69,6 +69,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.TipsCfgData;
 	import com.rpgGame.coreData.cfg.TransCfgData;
 	import com.rpgGame.coreData.cfg.TriggerCfgData;
+	import com.rpgGame.coreData.cfg.VipCfg;
 	import com.rpgGame.coreData.cfg.WindowInfoData;
 	import com.rpgGame.coreData.cfg.ZhanGongData;
 	import com.rpgGame.coreData.cfg.ZhanGongMonsterData;
@@ -308,6 +309,7 @@ package com.rpgGame.app.data
 			//ClientFunctionOpenCfgData.setup(dic["data.ClientFunctionOpen"]);
 			BattleRankCfg.setup(dic[ConfigClassRegister.Q_battle_rank]);//多人副本
 			NineTowerCfg.setup(dic[ConfigClassRegister.Q_nine_tower]);//多人副本
+			VipCfg.setup(dic[ConfigClassRegister.Q_vip]);//多人副本
 		}
 		
 		/**

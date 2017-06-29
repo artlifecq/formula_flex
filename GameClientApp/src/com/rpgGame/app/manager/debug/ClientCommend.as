@@ -23,6 +23,8 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.netData.backpack.bean.TempItemInfo;
 	import com.rpgGame.netData.player.message.SCNonagePromptMessage;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
+	import com.rpgGame.netData.vip.bean.VipCardInfo;
+	import com.rpgGame.netData.vip.message.SCVipDataMessage;
 	import com.rpgGame.netData.yaota.bean.YaoTaInfo;
 	import com.rpgGame.netData.yaota.message.SCYaoTaAwardMessage;
 	
@@ -64,7 +66,21 @@ package   com.rpgGame.app.manager.debug
 			});
 			commandList.put( ".vip", function (...arg):void
 			{
-				Mgr.vipMgr.vipLv=arg[0];
+				var msg:SCVipDataMessage=new SCVipDataMessage();
+				msg.curVipId=arg[0];
+				msg.remain=arg[1];
+				if (arg.length>2) 
+				{
+					var len:int=arg[2];
+					for (var i:int = 0; i < len; i++) 
+					{
+						var card:VipCardInfo=new VipCardInfo();
+						card.vipId=i+1;
+						card.count=Math.random()*2;
+						msg.cardInfos.push(card);
+					}
+				}
+				Mgr.vipMgr.recVipPanelData(msg);
 			});
 			commandList.put( ".pk", function (...arg):void
 			{

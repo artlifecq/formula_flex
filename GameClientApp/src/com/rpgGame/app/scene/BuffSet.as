@@ -18,6 +18,7 @@ package com.rpgGame.app.scene
 	import com.rpgGame.app.state.role.control.StunStateReference;
 	import com.rpgGame.app.state.role.control.SyncSpellActionStateReference;
 	import com.rpgGame.app.state.role.control.UseSpellStateReference;
+	import com.rpgGame.app.state.role.control.VipBuffStateReference;
 	import com.rpgGame.core.events.BuffEvent;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
@@ -292,6 +293,9 @@ package com.rpgGame.app.scene
 					case 73:
 						_role.stateMachine.removeState(RoleStateType.CONTROL_MASTERY_MAN);
 						break;
+					case 74://vip
+						_role.stateMachine.removeState(RoleStateType.CONTROL_VIP);
+						break;
 					default:
 						/*buffRef = _role.stateMachine.getReference(UnmovableStateReference) as UnmovableStateReference;
 						buffRef.setParams(buffData);
@@ -453,6 +457,11 @@ package com.rpgGame.app.scene
 						buffRef = _role.stateMachine.getReference(MysteryManStateReference) as MysteryManStateReference;
 						buffRef.setParams(buffData);
 						_role.stateMachine.transition(RoleStateType.CONTROL_MASTERY_MAN, buffRef);
+						break;
+					case 74://vip
+						buffRef = _role.stateMachine.getReference(VipBuffStateReference) as VipBuffStateReference;
+						buffRef.setParams(buffData);
+						_role.stateMachine.transition(RoleStateType.CONTROL_VIP,buffRef);
 						break;
 					default:
 						/*buffRef = _role.stateMachine.getReference(UnmovableStateReference) as UnmovableStateReference;

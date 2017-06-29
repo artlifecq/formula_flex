@@ -151,7 +151,7 @@ package com.rpgGame.netData {
 			register(108114, ResRemovePrivateItemMessage, ResRemovePrivateItemHandler);
 			register(108115, ResChangeBindItemMessage, ResChangeBindItemHandler);
 			register(108116, ResChangeLimitItemMessage, ResChangeLimitItemHandler);
-//			register(108117, SCFlyItemsMessage, SCFlyItemsHandler);
+			register(108117, SCFlyItemsMessage, SCFlyItemsHandler);
 			register(109101, ResTeamInfoMessage, ResTeamInfoHandler);
 			register(109102, ResApplyClientMessage, ResApplyClientHandler);
 			register(109103, ResLeaveTeamMessage, ResLeaveTeamHandler);
@@ -356,7 +356,7 @@ package com.rpgGame.netData {
 			register(181103, ResActivitiesRefreshMessage, ResActivitiesRefreshHandler);
 			register(182101, ResNewActivitiesInfoMessage, ResNewActivitiesInfoHandler);
 			register(182103, ResNewGetRewardMessage, ResNewGetRewardHandler);
-//			register(191101, SCVipDataMessage, SCVipDataHandler);
+			register(191101, SCVipDataMessage, SCVipDataHandler);
 			register(192101, ResGrownInfoMessage, ResGrownInfoHandler);
 			register(192102, ResGotSuccessMessage, ResGotSuccessHandler);
 			register(193101, ResWarMarkListMessage, ResWarMarkListHandler);

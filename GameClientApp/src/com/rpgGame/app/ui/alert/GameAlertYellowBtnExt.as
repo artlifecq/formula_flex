@@ -2,11 +2,6 @@ package  com.rpgGame.app.ui.alert
 {
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	
-	import feathers.controls.Button;
-	import feathers.controls.Check;
-	import feathers.controls.Label;
-	
-	import org.mokylin.skin.common.alert.AlertSkin;
 	import org.mokylin.skin.common.alert.Tankuang_VIP;
 	
 	import starling.display.DisplayObject;

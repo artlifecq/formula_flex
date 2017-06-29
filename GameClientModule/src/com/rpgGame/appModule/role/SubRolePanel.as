@@ -71,6 +71,7 @@ package com.rpgGame.appModule.role
 			attConstrastView.show(_roleData);
 			basicView.show(_roleData);
 			avatarView.show(_roleData,_otherInfo.equips);
+			avatarView.setVipData(_otherInfo.viplevel);
 		}
 		override protected function onTouchTarget(target : DisplayObject) : void {
 			super.onTouchTarget(target);
