@@ -125,7 +125,6 @@ package com.rpgGame.app.manager.role
 			role.dialogFace=BubbleDialogFace.create(role);
 			//执行主换装更新
 			AvatarManager.callEquipmentChange(role, false, false, false);
-			
 			var renderLimitable : Boolean = false;
 			if (!isMainChar)
 			{
@@ -155,7 +154,10 @@ package com.rpgGame.app.manager.role
 			}
 			
 			if (role.headFace is HeadFace)
+			{
 				(role.headFace as HeadFace).updateTitle(data.junjieLv);
+				(role.headFace as HeadFace).updateHuBaoTitle(data.baowuLv);
+			}
 			
 			CharAttributeManager.setCharHp(data, data.totalStat.hp);
 			CharAttributeManager.setCharMaxLife(data, data.totalStat.life); //需要提供初始化方法,优化一下!
@@ -625,6 +627,7 @@ package com.rpgGame.app.manager.role
 			var fightSoulLevel:int = (owner.data as HeroData).fightSoulLevel;
 			var model:Q_fightsoul_mode = FightsoulModeData.getModeInfoById(fightSoulLevel);
 			roleData.avatarInfo.setBodyResID("pc/fightsoul/"+model.q_mode,null);
+			roleData.avatarInfo.bodyEffectID = model.q_effect;
 			roleData.avatarInfo.bodyEffectID2 = model.q_effect;
 			fightSoulRole.ownerIsMainChar = (owner.id == MainRoleManager.actorID);
 			fightSoulRole.data = roleData;

@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.activety.jixiantiaozhan
 {
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.sender.SpecialActivitySender;
 	import com.rpgGame.app.ui.tab.ViewUI;
@@ -8,7 +9,7 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.appModule.activety.ActivetyPanel;
 	import com.rpgGame.appModule.common.itemRender.GridItemRender;
-	import com.rpgGame.coreData.cfg.active.ActivetyDataManager;
+	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
@@ -71,7 +72,7 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 				_jixianItemList.push(item);
 				_skin.container_list.addChild(item);
 			}
-			_skin.lbDec.text="没得规则，进去一顿乱砍，得不得得到装备看造化！";
+			_skin.lbDec.text=ActivetyDataManager.jixianVo.qmod.q_rules;
 			
 		}
 		
@@ -220,7 +221,7 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 		
 		private function enterBtnHandler():void
 		{
-			var info:ActivetyInfo = ActivetyDataManager.getActInfoById(ActivetyDataManager.jixianVo.activityid);
+			var info:ActivetyInfo = ActivetyCfgData.getActInfoById(ActivetyDataManager.jixianVo.activityid);
 			if(info.info.joinState==0){
 				NoticeManager.showNotifyById(61003);
 				return;

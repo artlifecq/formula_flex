@@ -24,6 +24,11 @@ package com.rpgGame.app.ui.main.buttons
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_zhanhun;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_zhuangbei;
 
+	/**
+	 *主按钮配置管理器 
+	 * @author dik
+	 * 
+	 */
 	public class MainButtonManager
 	{
 		private static var _classMap:HashMap;
@@ -44,6 +49,7 @@ package com.rpgGame.app.ui.main.buttons
 			regClass(103,ActivityButton,ButtonFubendating);
 			regClass(104,ActivityButton,ButtonZhanchangdating);
 			regClass(105,MultyActivityButton,ButtonFubenduilie);
+			regClass(106,MultyActivityButton,ButtonFubenduilie);
 		}
 		private static function regClass(id:int,cls:Class,skinui:Class):void
 		{
@@ -53,7 +59,7 @@ package com.rpgGame.app.ui.main.buttons
 		public static function getButtonBuyInfo(info:FunctionBarInfo):IOpen
 		{
 			var level:int = FunctionOpenManager.getOpenLevelByFunBarInfo(info);
-			if(!FunctionOpenManager.checkOpenByLevel(level))
+			if(!_initializeMap||!FunctionOpenManager.checkOpenByLevel(level))
 				return null;
 			var button:IOpen = _initializeMap.getValue(info.id);
 			if(button == null)

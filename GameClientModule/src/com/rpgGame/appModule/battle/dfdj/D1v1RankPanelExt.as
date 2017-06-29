@@ -15,9 +15,9 @@ package com.rpgGame.appModule.battle.dfdj
 	import com.rpgGame.coreData.cfg.BattleRankCfg;
 	import com.rpgGame.coreData.clientConfig.Q_battle_rank;
 	import com.rpgGame.coreData.type.TipType;
-	import com.rpgGame.netData.pvp.bean.DianFengDataInfo;
-	import com.rpgGame.netData.pvp.bean.DianFengRankInfo;
-	import com.rpgGame.netData.pvp.message.SCOpenDianFengRankMessage;
+	import com.rpgGame.netData.dianfeng.bean.DianFengDataInfo;
+	import com.rpgGame.netData.dianfeng.bean.DianFengRankInfo;
+	import com.rpgGame.netData.dianfeng.message.SCOpenDianFengRankMessage;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.zhanchang.paihangbang.KuaFuPaiHang_Skin;
@@ -75,10 +75,17 @@ package com.rpgGame.appModule.battle.dfdj
 			_weekRank=new D1v1WeekRewardPanelExt(_skin.skinRank.skin as PaiHangAlll_Skin);
 			TipTargetManager.show(_skin.uiLevel,TargetTipsMaker.makeTips(TipType.D1V1_RANK_TIP,new DynamicTipData()));
 		}
+		private var _curCell:D1v1RankCellExt;
 		private function cellCkick(cell:D1v1RankCellExt):void
 		{
+			if (_curCell) 
+			{
+				_curCell.setSelect(false);
+			}
 			if (cell) 
 			{
+				_curCell=cell;
+				_curCell.setSelect(true);
 				setRightData(cell.data);
 			}
 		}
@@ -180,7 +187,8 @@ package com.rpgGame.appModule.battle.dfdj
 				}
 				if (len>0) 
 				{
-					setRightData(msg.dianFengRankInfos[0]);
+					//setRightData(msg.dianFengRankInfos[0]);
+					cellCkick(_rankList[0]);
 				}
 				_numCtrl.updateMax(msg.maxPage,msg.maxPage,false);
 				var skinF:Flip3_Skin=_skin.skinFlip.skin as Flip3_Skin;

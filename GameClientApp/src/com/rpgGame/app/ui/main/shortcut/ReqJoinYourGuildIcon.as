@@ -19,7 +19,7 @@ package com.rpgGame.app.ui.main.shortcut
 		
 		override protected function onTouchIcon() : void
 		{
-			AppManager.showApp(AppConstant.GUILD_REQ_JOIN_YOUR_GUILD_PANEL);
+//			AppManager.showApp(AppConstant.GUILD_REQ_JOIN_YOUR_GUILD_PANEL);
 			EventManager.dispatchEvent(FunctionMessageBarEvent.FUNCTION_MESSAGE_BAR_HIDE_TYPE,
 				EnumFunctionMessageBarIcoType.REQ_JOIN_GUILD);
 		}

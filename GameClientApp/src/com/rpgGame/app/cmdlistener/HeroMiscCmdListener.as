@@ -359,8 +359,8 @@ package com.rpgGame.app.cmdlistener
 			}
 			else if ( msg.type == 9 )// 鼠标提示( 绿色 )
 			{
-				//				FloatingText.showUp( info );
-			}
+//				FloatingText.showUp( info );
+			} 
 		}
 		
 		/**

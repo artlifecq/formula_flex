@@ -1,5 +1,6 @@
 package com.rpgGame.netData.guild.message{
 	import com.rpgGame.netData.guild.bean.GuildInviteInfo;
+	
 	import org.game.netCore.net.Message;
 	
 	/** 

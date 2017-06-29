@@ -1,17 +1,13 @@
 package com.rpgGame.appModule.fightsoul
 {
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
-	import com.rpgGame.coreData.cfg.NewFuncCfgData;
-	import com.rpgGame.coreData.cfg.NotifyCfgData;
-	import com.rpgGame.coreData.cfg.WindowInfoData;
 	import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
 	import com.rpgGame.coreData.clientConfig.Q_fightsoul_path;
 	import com.rpgGame.coreData.clientConfig.Q_newfunc;
-	import com.rpgGame.coreData.clientConfig.Q_windowInfo;
 	import com.rpgGame.coreData.lang.LangUI_2;
 	
 	import feathers.controls.renderers.DefaultListItemRenderer;
@@ -51,7 +47,8 @@ package com.rpgGame.appModule.fightsoul
 			_skin.lb_cishu.text = pathinfoData.count.toString()+"/"+path.q_total;
 			_skin.lb_jinyan.text =LanguageConfig.getText(LangUI_2.FightSoulShowReward).replace("$",path.q_reward)
 			
-			var fuc:FunctionBarInfo = FuncionBarCfgData.getActivityBarInfo(newFunc.q_main_id);
+			var ids:Array = JSONUtil.decode(newFunc.q_main_id) as Array;
+			var fuc:FunctionBarInfo = FuncionBarCfgData.getActivityBarInfo(ids[0]);
 			_skin.btn_send.visible = fuc.clickType==1;
 			if(pathinfoData.isOver)
 			{

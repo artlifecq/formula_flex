@@ -6,21 +6,27 @@ package com.rpgGame.appModule.battle.jcyt
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.NineTowerEvent;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.GlobalSheetData;
+	import com.rpgGame.coreData.cfg.TipsCfgData;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.EffectUrl;
+	import com.rpgGame.coreData.type.TipType;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.zhanchang.jiucengyaota.JiuCengYaoTa_Skin;
 	
 	import starling.display.DisplayObject;
 	
-	public class NineTowerMainPanelExt extends SkinUIPanel
+	public class NineTowerMainPanelExt extends ViewUI
 	{
 		private var _skin:JiuCengYaoTa_Skin;
 		private var _eff:Inter3DContainer;
@@ -30,6 +36,7 @@ package com.rpgGame.appModule.battle.jcyt
 			_skin=new JiuCengYaoTa_Skin();
 			super(_skin);
 			_gReward=new RewardGroup(_skin.icon1,0,10,-2);
+			TipTargetManager.show(_skin.iconSw, TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(29)));
 		}
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
@@ -63,13 +70,13 @@ package com.rpgGame.appModule.battle.jcyt
 		private function onRank():void
 		{
 			// TODO Auto Generated method stub
-			AppManager.showApp(AppConstant.BATTLE_D1V1_RANK_PANEL);
+			AppManager.showApp(AppConstant.BATTLE_NINE_TOWER_LOG_PANEL);
 		}
 		
 		private function onMate():void
 		{
 			// TODO Auto Generated method stub
-			
+			Mgr.nineTowerMgr.reqEnterTower();
 		}
 		override protected function onShow():void
 		{
@@ -77,9 +84,13 @@ package com.rpgGame.appModule.battle.jcyt
 			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,onStateResChange);
 			EventManager.addEvent(NineTowerEvent.GET_PANEL_DATA,onGetPanelData);
 			onStateResChange(CharAttributeType.RES_PRESTIGE);
-		
+			setReward();
+			Mgr.nineTowerMgr.reqPanelData();
 		}
-		
+		private function setReward():void
+		{
+			_gReward.setRewardByJsonStr(GlobalSheetData.getStrValue(825));
+		}
 		private function onGetPanelData(...arg):void
 		{
 			// TODO Auto Generated method stub

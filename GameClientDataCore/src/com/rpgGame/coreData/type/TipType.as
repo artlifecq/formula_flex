@@ -58,6 +58,8 @@ package com.rpgGame.coreData.type
 		public static const PROPCHANGE_TIP : int = rEnum.next;
 		/** 世界bos奖励 tips*/
 		public static const SHIJIEBOSS_REWAD_TIP : int = rEnum.next;
+		/** 王城争霸奖励 tips*/
+		public static const WCZB_REWAD_TIP : int = rEnum.next;
 		/** 绝学技能 tips*/
 		public static const LOSTSKILL_TIP : int = rEnum.next;
 		/**
@@ -94,10 +96,11 @@ package com.rpgGame.coreData.type
 		public static const D1V1_RANK_TIP : int = rEnum.next;
 		/** 巅峰1v1rank*/
 		public static const D1V1_RANK_REWARD_TIP : int = rEnum.next;
-		
 		/**极限挑战面板TIPS*/
 		public static const ACTIVITY_JIXIAN_PANEL_TIP : int = rEnum.next;
 		/**极限挑战buffTIPS*/
 		public static const ACTIVITY_JIXIAN_BUFF_TIP : int = rEnum.next;
+		/** 巅峰1v1rank*/
+		public static const TWOER_TIP : int = rEnum.next;
 	}
 }

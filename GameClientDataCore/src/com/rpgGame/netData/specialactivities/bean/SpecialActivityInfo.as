@@ -23,7 +23,7 @@ package com.rpgGame.netData.specialactivities.bean{
 		//参与状态0:活动未开启 1:可以参与  2:正在进行中
 		private var _joinState: int;
 		
-		//预告时间(分钟)
+		//预告时间(秒)
 		private var _notifyTime: int;
 		
 		/**
@@ -36,7 +36,7 @@ package com.rpgGame.netData.specialactivities.bean{
 			writeInt(_activityType);
 			//参与状态0:活动未开启 1:可以参与  2:正在进行中
 			writeInt(_joinState);
-			//预告时间(分钟)
+			//预告时间(秒)
 			writeInt(_notifyTime);
 			return true;
 		}
@@ -51,7 +51,7 @@ package com.rpgGame.netData.specialactivities.bean{
 			_activityType = readInt();
 			//参与状态0:活动未开启 1:可以参与  2:正在进行中
 			_joinState = readInt();
-			//预告时间(分钟)
+			//预告时间(秒)
 			_notifyTime = readInt();
 			return true;
 		}
@@ -102,7 +102,7 @@ package com.rpgGame.netData.specialactivities.bean{
 		}
 		
 		/**
-		 * get 预告时间(分钟)
+		 * get 预告时间(秒)
 		 * @return 
 		 */
 		public function get notifyTime(): int{
@@ -110,7 +110,7 @@ package com.rpgGame.netData.specialactivities.bean{
 		}
 		
 		/**
-		 * set 预告时间(分钟)
+		 * set 预告时间(秒)
 		 */
 		public function set notifyTime(value: int): void{
 			this._notifyTime = value;

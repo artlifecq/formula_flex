@@ -1,12 +1,11 @@
 package com.rpgGame.appModule.activety.jixiantiaozhan
 {
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.MCUtil;
-	import com.rpgGame.coreData.cfg.JiXianTiaoZhanCfgData;
-	import com.rpgGame.coreData.cfg.active.ActivetyDataManager;
 	import com.rpgGame.coreData.cfg.active.JiXianAcInfo;
 	import com.rpgGame.coreData.clientConfig.Q_limitchallenge;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
@@ -35,6 +34,15 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 		{
 			_skin=new JiXianTiaoZhanPaiHang();
 			super(_skin);
+			_skin.listItem.itemRendererFactory = creatremder;	
+			_skin.listItem.clipContent = true;
+			//			_skin.listItem.scrollBarDisplayMode = "fixed";
+			_skin.listItem.verticalScrollBarPosition = "right";
+			_skin.listItem.scrollBarDisplayMode=ScrollBarDisplayMode.ALWAYS_VISIBLE;
+			_skin.listItem.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
+			_skin.listItem.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
+			_skin.listItem.padding=0;
+			
 			initView();
 		}
 		
@@ -51,23 +59,15 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 				var ico:IconCDFace=new IconCDFace(IcoSizeEnum.ICON_48);
 				ico.selectImgVisible=false;	
 				_skin.grpIcon.addChild(ico);
-				ico.x=_icoList[i].x-4;
-				ico.y=_icoList[i].y-4;
+				ico.x=_icoList[i].x;
+				ico.y=_icoList[i].y;
 				_icoface.push(ico);
 			}
 			
-			_skin.listItem.itemRendererType=TiaoZhanPaiHangItemRemder;	
-			_skin.listItem.clipContent = true;
-			_skin.listItem.scrollBarDisplayMode = "fixed";
-			_skin.listItem.verticalScrollBarPosition = "right";
-			_skin.listItem.scrollBarDisplayMode=ScrollBarDisplayMode.ALWAYS_VISIBLE;
-			_skin.listItem.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
-			_skin.listItem.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
-			_skin.listItem.padding=4;
-			_q_mod = JiXianTiaoZhanCfgData.getModById(ActivetyDataManager.jixianVo.activityid);
+			_q_mod = ActivetyDataManager.jixianVo.qmod;
 			_reward = JSONUtil.decode(_q_mod.q_rank_rewards);
 			var rank:int=0;
-			var list:Vector.<JiXianAcInfo>=new Vector.<JiXianAcInfo>();
+			var list:Array=[];
 			for(i=0;i<_reward.length;i++)
 			{
 				var info:JiXianAcInfo=new JiXianAcInfo(rank,_reward[i].paras.rank,_reward[i]);
@@ -86,7 +86,14 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 					reward=JSONUtil.decode(_q_mod.q_join_rewards);
 				}
 				setRewardShow(reward);
+				_skin.grpIcon.visible=true;
+				_skin.uiWRB.visible=false;
 			}
+		}
+		
+		private function creatremder():TiaoZhanPaiHangItemRemder
+		{
+			return new TiaoZhanPaiHangItemRemder();
 		}
 		
 		private function setRewardShow(rewards:Array):void
@@ -152,8 +159,8 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 		public static function showPanel(container:DisplayObjectContainer):int
 		{
 			if(!_ins) _ins=new JiXianTiaozhanPaiHnagPenelExt();
-			_ins.x=container.width-5;
-			_ins.y=(container.height-_ins.height)/2+5;
+			_ins.x=container.width-10;
+			_ins.y=(container.height-_ins.height)/2+12;
 			container.addChild(_ins);
 			return _ins.width;
 		}

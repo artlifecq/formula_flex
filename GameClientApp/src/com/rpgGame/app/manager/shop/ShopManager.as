@@ -77,7 +77,7 @@ package  com.rpgGame.app.manager.shop
 				var ret:Array=shop.getJiXianShopItems(locationType);
 				for each (var item:ShopItemVo in ret) 
 				{
-					if(item.data.todayBuyNum>0)
+					if(item.data.limitNum-item.data.todayBuyNum>0)
 						return item;
 				}
 			}

@@ -81,10 +81,10 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			lbKillNum = temp;
 			temp.name = "lbKillNum";
 			temp.text = "250024(52%)";
-			temp.textAlign = "left";
+			temp.textAlign = "center";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 85;
+			temp.width = 95;
 			temp.x = 179;
 			temp.y = 6;
 			return temp;
@@ -96,7 +96,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			lbName = temp;
 			temp.name = "lbName";
 			temp.text = "【墨家】玩家名六个字";
-			temp.textAlign = "left";
+			temp.textAlign = "center";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 150;
@@ -126,7 +126,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			uiBaoxiang = temp;
 			temp.name = "uiBaoxiang";
 			temp.styleName = "ui/app/activety/shijieboss/icon/1.png";
-			temp.x = 267;
+			temp.x = 270;
 			temp.y = 1;
 			return temp;
 		}

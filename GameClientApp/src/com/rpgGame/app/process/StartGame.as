@@ -40,6 +40,7 @@ package com.rpgGame.app.process
     import com.rpgGame.app.ui.tips.MountBeastCardTip;
     import com.rpgGame.app.ui.tips.MountSpellTips;
     import com.rpgGame.app.ui.tips.MountTip;
+    import com.rpgGame.app.ui.tips.NineTowerTipExt;
     import com.rpgGame.app.ui.tips.NormalTip;
     import com.rpgGame.app.ui.tips.OpenGridTip;
     import com.rpgGame.app.ui.tips.PKModeTip;
@@ -51,6 +52,7 @@ package com.rpgGame.app.process
     import com.rpgGame.app.ui.tips.TeamTipExt;
     import com.rpgGame.app.ui.tips.TxtPropChangeTip;
     import com.rpgGame.app.ui.tips.TxtTip;
+    import com.rpgGame.app.ui.tips.WangChengRewardTips;
     import com.rpgGame.app.ui.tips.cheats.CheatsIntraductTipExt;
     import com.rpgGame.app.ui.tips.cheats.CheatsNodePointTip;
     import com.rpgGame.app.ui.tips.cheats.CheatsTipExt;
@@ -218,6 +220,7 @@ package com.rpgGame.app.process
 			TipManager.registerTipsParserClass(TipType.PROPCHANGE_TIP, TxtPropChangeTip);
 			TipManager.registerTipsParserClass(TipType.LOSTSKILL_TIP,LostSkillTip);
 			TipManager.registerTipsParserClass(TipType.SHIJIEBOSS_REWAD_TIP,ShiJieBossRewardTips);
+			TipManager.registerTipsParserClass(TipType.WCZB_REWAD_TIP,WangChengRewardTips);
 			TipManager.registerTipsParserClass(TipType.MERIDIAN_TIP,MeridainPointTip);
 
 			TipManager.registerTipsParserClass(TipType.PASSIVESKILL_TIP,PassiveSpellTip);
@@ -233,6 +236,7 @@ package com.rpgGame.app.process
 			
 			TipManager.registerTipsParserClass(TipType.ACTIVITY_JIXIAN_PANEL_TIP,JiXianPanelTip);
 			TipManager.registerTipsParserClass(TipType.ACTIVITY_JIXIAN_BUFF_TIP,JiXianBuffTip);
+			TipManager.registerTipsParserClass(TipType.TWOER_TIP,NineTowerTipExt);
 		}
 
 		private function onSwitchCmp() : void

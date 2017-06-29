@@ -14,7 +14,7 @@ package com.rpgGame.netData.guild.bean{
 	 * 帮派列表信息
 	 */
 	public class GuildListInfo extends Bean {
-	
+		
 		//帮派排名
 		private var _rank: int;
 		

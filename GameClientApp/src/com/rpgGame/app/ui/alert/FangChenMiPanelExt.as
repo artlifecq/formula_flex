@@ -14,6 +14,7 @@ package com.rpgGame.app.ui.alert
 		{
 			_skin=new Fangchenmi_Skin();
 			super(_skin);
+			_skin.btn_ok.x=(_skin.bg.width-_skin.btn_ok.width)/2;
 			this.model = true;
 		}
 		
@@ -36,9 +37,13 @@ package com.rpgGame.app.ui.alert
 			{
 				//移到上层
 				fangchenmiPanel.show();
-				return null;
 			}
 			return fangchenmiPanel;
+		}
+		
+		public function updateText(text:String):void
+		{
+			_skin.lb_text.text = text;
 		}
 		
 		override public function hide() : void

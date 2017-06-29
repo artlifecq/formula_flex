@@ -12,7 +12,7 @@ package com.rpgGame.netData.guild.message{
 	 * 通知玩家帮派Id改变
 	 */
 	public class ResGuildChangeGuildIdMessage extends Message {
-	
+		
 		//玩家Id
 		private var _playerId: long;
 		
@@ -24,6 +24,9 @@ package com.rpgGame.netData.guild.message{
 		
 		//帮派职位
 		private var _guildMemberType: int;
+		
+		//是否是统帅
+		private var _leader: int;
 		
 		
 		/**
@@ -38,6 +41,8 @@ package com.rpgGame.netData.guild.message{
 			writeString(_guildName);
 			//帮派职位
 			writeInt(_guildMemberType);
+			//是否是统帅
+			writeByte(_leader);
 			return true;
 		}
 		
@@ -53,6 +58,8 @@ package com.rpgGame.netData.guild.message{
 			_guildName = readString();
 			//帮派职位
 			_guildMemberType = readInt();
+			//是否是统帅
+			_leader = readByte();
 			return true;
 		}
 		
@@ -122,6 +129,21 @@ package com.rpgGame.netData.guild.message{
 		 */
 		public function set guildMemberType(value: int): void{
 			this._guildMemberType = value;
+		}
+		
+		/**
+		 * get 是否是统帅
+		 * @return 
+		 */
+		public function get leader(): int{
+			return _leader;
+		}
+		
+		/**
+		 * set 是否是统帅
+		 */
+		public function set leader(value: int): void{
+			this._leader = value;
 		}
 		
 	}

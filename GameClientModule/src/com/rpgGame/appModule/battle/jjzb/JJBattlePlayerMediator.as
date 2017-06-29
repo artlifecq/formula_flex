@@ -5,6 +5,8 @@ package    com.rpgGame.appModule.battle.jjzb
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.appModule.common.RoleModelShow;
 	import com.rpgGame.core.utils.MCUtil;
+	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.netData.zhengba.bean.ZhengBaBriefInfo;
 	
 	import feathers.controls.Label;
@@ -157,17 +159,17 @@ package    com.rpgGame.appModule.battle.jjzb
 		{
 			if (rank==1) 
 			{
-				return "天极魁首";
+				return NotifyCfgData.getNotifyTextByID(61034);
 			}
 			else if (rank==2) 
 			{
-				return "地级魁首";
+				return NotifyCfgData.getNotifyTextByID(61035);
 			}
 			else if (rank==3) 
 			{
-				return "人级魁首"
+				return NotifyCfgData.getNotifyTextByID(61036);
 			}
-			return "第"+rank+"名";
+			return LanguageConfig.replaceStr(NotifyCfgData.getNotifyTextByID(61037),[rank]);
 		}
 		public function get visible():Boolean
 		{

@@ -4,6 +4,7 @@ package  com.rpgGame.appModule.social.team
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.GameColorUtil;
 	import com.rpgGame.coreData.cfg.ClientSceneCfgData;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.netData.team.bean.MapPlayerInfo;
@@ -28,21 +29,21 @@ package  com.rpgGame.appModule.social.team
 		{
 			this._data=team as MapPlayerInfo;
 			_skin.lbName.text=_data.playername;
-			_skin.lbLevel.text=_data.playerlv+"级";
+			_skin.lbLevel.text=_data.playerlv+NotifyCfgData.getNotifyTextByID(61019);
 			_skin.lbZhanli.text=_data.fightPower+"";
 			if (_data.teamstate==0) 
 			{
-				_skin.lbNum.text="【尚未组队】";
+				_skin.lbNum.text=NotifyCfgData.getNotifyTextByID(61043);
 				_skin.lbNum.color=GameColorUtil.COLOR_GREEN;
 			}
 			else
 			{
-				_skin.lbNum.text="【已组队】";
+				_skin.lbNum.text=NotifyCfgData.getNotifyTextByID(61044);
 				_skin.lbNum.color=GameColorUtil.COLOR_RED;
 			}
 			if (_data.guildname==null||_data.guildname=="") 
 			{
-				_skin.lbBanghui.text="【尚未入帮】";
+				_skin.lbBanghui.text=NotifyCfgData.getNotifyTextByID(61045);
 			}
 			else
 			{

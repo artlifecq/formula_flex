@@ -8,7 +8,7 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
 	import com.rpgGame.coreData.cfg.BattleRankCfg;
 	import com.rpgGame.coreData.clientConfig.Q_battle_rank;
-	import com.rpgGame.netData.pvp.bean.DianFengDataInfo;
+	import com.rpgGame.netData.dianfeng.bean.DianFengDataInfo;
 	
 	import feathers.controls.Label;
 	import feathers.controls.UIAsset;

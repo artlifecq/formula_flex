@@ -23,6 +23,8 @@ package com.rpgGame.appModule.battle.dfdj
 			list.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			list.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
 			list.padding=2;
+			
+			_skin.numZhanli.textAlign="center";
 		}
 		
 		private function createStoneCell():D1v1WeekRewardCellRender

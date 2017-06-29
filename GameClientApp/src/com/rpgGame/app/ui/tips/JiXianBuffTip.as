@@ -33,8 +33,8 @@ package com.rpgGame.app.ui.tips
 			_shopIco=new BgIcon(IcoSizeEnum.ICON_64);
 			_shopIco.setBg(GridBGType.GRID_SIZE_64);
 			_skin.container.addChild(_shopIco);
-			_shopIco.x=24;
-			_shopIco.y=25;
+			_shopIco.x=9;
+			_shopIco.y=9;
 		}
 		
 		/**

@@ -33,35 +33,15 @@ package com.rpgGame.appModule.fightsoul
 		
 		private function addFightSoul():void
 		{
-			/*if(_mode!=null)
-				RenderUnit3D.recycle(_mode);
-			if(_effect != null)
-				RenderUnit3D.recycle(_effect);
-			
-			
-			var data : RenderParamData3D =  new RenderParamData3D(0, "effect", ClientConfig.getEffect(modeinfo.q_effect));
-			_mode = this.addRenderUnitWith(data, 0, onAddEftComplete);
-			_mode.scaleX=_mode.scaleY=2;
-			_mode.y = 80;
-			data=new RenderParamData3D(0, "mode", ClientConfig.getFightSoul(modeinfo.q_mode));
-  			_effect = this.addRenderUnitWith(data, 0, onAddEftComplete);
-			_effect.scaleX=_effect.scaleY=2;
-			_effect.y = 80;*/
 			var modeinfo:Q_fightsoul_mode = FightsoulModeData.getModeInfoById(_level);
 			this._showAvatarData.avatarInfo.setBodyResID("pc/fightsoul/"+modeinfo.q_mode,null);
-			this._showAvatarData.avatarInfo.bodyEffectID2 =modeinfo.q_effect;
+			this._showAvatarData.avatarInfo.bodyEffectID =modeinfo.q_effect;
+			this._showAvatarData.avatarInfo.bodyEffectID2 =modeinfo.q_effect1;
 			this.setRoleData(this._showAvatarData);
 			
 			var scale:Number = modeinfo.q_panleScale/100;
 			this.curRole.setScale(scale);
 			this.curRole.z = -modeinfo.q_panleY*scale;
-		}
-		
-		private function onAddEftComplete(sr3D:InterObject3D,renderUint:RenderUnit3D):void
-		{
-			renderUint.removeAddedCallBack(onAddEftComplete);
-			
-			
 		}
 	}
 }

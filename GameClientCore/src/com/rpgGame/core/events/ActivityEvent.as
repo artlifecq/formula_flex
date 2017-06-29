@@ -36,7 +36,27 @@ package com.rpgGame.core.events
 		 *更新boss伤害排行
 		 */
 		public static const UPDATE_BOSS_HURT_RANK : int = UNIQUEID.NEXT;
+		/**
+		 *更新极限挑战boss伤害排行
+		 */
+		public static const UPDATE_JIXIANBOSS_HURT_RANK : int = UNIQUEID.NEXT;
 
+		
+		/*----------------天降元宝   yt---------------------------------------------*/
+		/**
+		 *元宝变化
+		 */
+		public static const LIJIN_CASHGIFT_CHANGE : int = UNIQUEID.NEXT;
+		/**
+		 *活动剩余时间
+		 */
+		public static const LIJIN_ACTIVITY_TIME : int = UNIQUEID.NEXT;
+		/**
+		 *刷怪信息
+		 */
+		public static const LIJIN_MONSTER_CHANGE : int = UNIQUEID.NEXT;
+		
+		
 		public function ActivityEvent()
 		{
 		}

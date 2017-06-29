@@ -7,6 +7,7 @@ package   com.rpgGame.app.manager.debug
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.fight.spell.SkillAddPop;
 	import com.rpgGame.app.fight.spell.SpellHitHelper;
+	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.FangChenMiManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.PKMamager;
@@ -14,11 +15,15 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleManager;
+	import com.rpgGame.app.ui.main.dungeon.JiXianTiaoZhanExtPop;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.netData.backpack.bean.TempItemInfo;
 	import com.rpgGame.netData.player.message.SCNonagePromptMessage;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
+	import com.rpgGame.netData.yaota.bean.YaoTaInfo;
+	import com.rpgGame.netData.yaota.message.SCYaoTaAwardMessage;
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
@@ -107,7 +112,11 @@ package   com.rpgGame.app.manager.debug
 			});
 			commandList.put( ".bat", function (...arg):void
 			{
-				AppManager.showApp(AppConstant.BATTLE_MAIN_PANEL,null,"1");
+				AppManager.showApp(AppConstant.BATTLE_MAIN_PANEL,null,"325");
+			});
+			commandList.put( ".bat2", function (...arg):void
+			{
+				AppManager.showApp(AppConstant.BATTLE_MAIN_PANEL,null,"320");
 			});
 			commandList.put( ".log", function (...arg):void
 			{
@@ -118,10 +127,31 @@ package   com.rpgGame.app.manager.debug
 				var msg:SCNonagePromptMessage=new SCNonagePromptMessage();
 				msg.type=parseInt(arg[0]);
 				FangChenMiManager.OnSCNonagePromptMessage(msg);
-			});
+			});		
+			commandList.put( ".jixianjiesuan", function (...arg):void
+			{
+				UIPopManager.showAlonePopUI(JiXianTiaoZhanExtPop);
+			});	
 			commandList.put( ".df", function (...arg):void
 			{
 				Mgr.d1v1Mgr.autoJoin();
+			});
+			commandList.put( ".head", function (...arg):void
+			{
+				(MainRoleManager.actor.headFace as HeadFace).updateTowerFlag(arg[0]==1);
+			});
+			commandList.put( ".yt", function (...arg):void
+			{
+				var msg:SCYaoTaAwardMessage=new SCYaoTaAwardMessage();
+				msg.myYaoTaInfo=new YaoTaInfo();
+				for (var i:int = 0; i < arg[0]; i++) 
+				{
+					var tmp:TempItemInfo=new TempItemInfo();
+					tmp.mod=1;
+					tmp.num=100;
+					msg.tempItems.push(tmp);
+				}
+				AppManager.showApp(AppConstant.BATTLE_NINE_TOWER_RESULT_PANEL,msg);
 			});
 		}
 		
