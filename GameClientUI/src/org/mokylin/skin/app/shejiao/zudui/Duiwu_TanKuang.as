@@ -115,10 +115,10 @@ package org.mokylin.skin.app.shejiao.zudui
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_cancel = temp;
 			temp.name = "btn_cancel";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "拒 绝";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.color = 0xE1D4A9;
+			temp.color = 0xFFFFFF;
 			temp.width = 73;
 			temp.x = 342;
 			temp.y = 158;
@@ -130,10 +130,10 @@ package org.mokylin.skin.app.shejiao.zudui
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_ok = temp;
 			temp.name = "btn_ok";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "同 意";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.color = 0xE1D4A9;
+			temp.color = 0xFFFFFF;
 			temp.width = 73;
 			temp.x = 237;
 			temp.y = 158;

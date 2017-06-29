@@ -79,7 +79,7 @@ package com.rpgGame.app.manager
 					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveCollect,null,null,onCollect);
 					break;
 				case SceneCharType.DROP_GOODS:
-					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, ControlAutoPick.AUTO_DIRECT_SEND_PICK, role, onDropGoods);
+					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, ControlAutoPick.AUTO_DIRECT_SEND_PICK, role, onArriveDropGoods,null,null,onDropGoods);
 					break;
 				case SceneCharType.STALL:
 					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onWalkToStall);

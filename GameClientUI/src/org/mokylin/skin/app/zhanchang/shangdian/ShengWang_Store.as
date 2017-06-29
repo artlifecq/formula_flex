@@ -1,8 +1,6 @@
 package org.mokylin.skin.app.zhanchang.shangdian
 {
 	import feathers.controls.text.Fontter;
-	import feathers.controls.Button;
-	import feathers.controls.Group;
 	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
@@ -22,15 +20,7 @@ package org.mokylin.skin.app.zhanchang.shangdian
 		//==========================================================================
 		public var bg:feathers.controls.SkinnableContainer;
 
-		public var bg0:feathers.controls.UIAsset;
-
-		public var btn_max:feathers.controls.Button;
-
-		public var btn_min:feathers.controls.Button;
-
 		public var lbNum:feathers.controls.Label;
-
-		public var lbPage:feathers.controls.Label;
 
 		public var skinFlip:feathers.controls.SkinnableContainer;
 
