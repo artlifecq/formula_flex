@@ -311,8 +311,6 @@ package com.rpgGame.app.data
 			BattleRankCfg.setup(dic[ConfigClassRegister.Q_battle_rank]);//巅峰对决
 			NineTowerCfg.setup(dic[ConfigClassRegister.Q_nine_tower]);//九层妖塔	
 			LijinCfgData.setup(dic[ConfigClassRegister.Q_daysdown_gold]);//天降礼金
-			BattleRankCfg.setup(dic[ConfigClassRegister.Q_battle_rank]);//多人副本
-			NineTowerCfg.setup(dic[ConfigClassRegister.Q_nine_tower]);//多人副本
 			VipCfg.setup(dic[ConfigClassRegister.Q_vip]);//多人副本
 		}
 		
