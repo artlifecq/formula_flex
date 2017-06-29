@@ -47,7 +47,6 @@ package com.rpgGame.coreData.info.map
 		 * 极限挑战
 		 */
 		public static const MAP_JIXIAN:int = rEnum.next;//9
-		
 		/**
 		 * 天降礼金
 		 */

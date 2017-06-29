@@ -16,109 +16,109 @@ package com.rpgGame.coreData.clientConfig
 		private static var _classMap:HashMap = new HashMap();
 				/**  名称备注	资源路径#资源路径	动画名称#动画名称	碰撞隐藏节点#碰撞隐藏节点，用;分割多个节点	消散时间#消散时间	前轴围绕半径#前轴围绕半径	前轴围绕角速度#前轴围绕角速度（度/秒）	收敛次数#收敛次数	围绕半径#围绕半径	围绕角速度#围绕角速度（度/秒） */
 		public static const EffectAnimation:String = "data.animat.EffectAnimation";
-		/**  客户端区域数据			 */
+		/**  客户端区域数据*/
 		public static const ClientArea:String = "data.ClientArea";
-		/**  客户端自定义buff				 */
+		/**  客户端自定义buff*/
 		public static const ClientBuff:String = "data.ClientBuff";
-		/**  客户端对话数据									 */
+		/**  客户端对话数据*/
 		public static const ClientDialog:String = "data.ClientDialog";
-		/**  客户端的场景																																																		 */
+		/**  客户端的场景*/
 		public static const ClientScene:String = "data.ClientScene";
-		/**  客户端在场景中的特效						 */
+		/**  客户端在场景中的特效*/
 		public static const ClientSceneEffect:String = "data.ClientSceneEffect";
-		/**  客户端在场景中的NPC									 */
+		/**  客户端在场景中的NPC	*/
 		public static const ClientSceneNPC:String = "data.ClientSceneNPC";
-		/**  客户端在场景中的特效						 */
+		/**  客户端在场景中的特效*/
 		public static const ClientSceneRole:String = "data.ClientSceneRole";
-		/**  客户端表情配置					 */
+		/**  客户端表情配置*/
 		public static const FaceInfo:String = "data.FaceInfo";
-		/**  窗口链接信息表											 */
+		/**  窗口链接信息表*/
 		public static const FunctionBarInfo:String = "data.FunctionBarInfo";
-		/**  游戏音乐配置表							 */
+		/**  游戏音乐配置表*/
 		public static const GameSoundInfo:String = "data.GameSoundInfo";
 		/**  设置的主键#设置的主键，不重复就行	设置备注#设置备注	玻璃效果颜色#玻璃效果颜色	摄像机Y偏移#摄像机Y偏移	摄像机转角#摄像机转角	摄像机仰角#摄像机仰角	摄像机最小仰角#摄像机最小仰角	摄像机最大仰角#摄像机最大仰角	摄像机距离#摄像机距离	摄像机拖拽速度#摄像机鼠标拖拽速度	摄像机最小距离#摄像机最小距离	摄像机最大距离#摄像机最大距离	摄像机滚轮速度#摄像机鼠标滚轮速度	摄像机远裁切#摄像机远裁切	智能摄像机最小距离#智能摄像机最小距离	跳跃高度#跳跃高度	二级跳跃高度#二级跳跃高度	跳跃速率#跳跃速率	二级跳跃速率#二级跳跃速率	跳跃结束时间#跳跃结束时间	二级跳跃结束时间#二级跳跃结束时间	跳跃打断时间#跳跃打断时间	二级跳跃打断时间#二级跳跃打断时间	二级跳跃概率#二级跳跃概率（0~100）	跳跃开始时间#跳跃开始时间	二级跳跃开始时间#二级跳跃开始时间	死亡效果类型#死亡效果类型	外发光强度#外发光强度	外发光大小#外发光大小	外发光品质#外发光品质	外发光敌方颜色#外发光敌方颜色	外发光友方颜色#外发光友方颜色	外发光中立方颜色#外发光中立方颜色	半身像偏移#半身像偏移	头像偏移#头像偏移	Boss头像偏移#Boss头像偏移 */
 		public static const GlobalSetting:String = "data.GlobalSetting";
-		/**  GM命令							 */
+		/**  GM命令*/
 		public static const GmInfo:String = "data.GmInfo";
-		/**  广播，提示语				 */
+		/**  广播，提示语*/
 		public static const HintInfo:String = "data.HintInfo";
-		/**  消息提示类型配置表																													 */
+		/**  消息提示类型配置表*/
 		public static const HintTypeSetInfo:String = "data.HintTypeSetInfo";
-		/**  区域数据库						 */
+		/**  区域数据库*/
 		public static const Q_area:String = "data.map.Q_area";
-		/**  							本列取消，安全区改为刷格方式							本列取消																																										 */
+		/**本列取消，安全区改为刷格方式*/
 		public static const Q_map:String = "data.map.Q_map";
-		/**  场景特效动态生成表						 */
+		/**  场景特效动态生成表*/
 		public static const Q_map_effect:String = "data.map.Q_map_effect";
-		/**  预加载资源表		 */
+		/**  预加载资源表*/
 		public static const Q_map_preload:String = "data.map.Q_map_preload";
-		/**  地图传送点数据库												 */
+		/**  地图传送点数据库*/
 		public static const Q_map_transfer:String = "data.map.Q_map_transfer";
-		/**  场景音效配置信息					 */
+		/**  场景音效配置信息*/
 		public static const SceneSoundInfo:String = "data.map.SceneSoundInfo";
-		/**  场景触发器配置表								 */
+		/**  场景触发器配置表*/
 		public static const SceneTriggerInfo:String = "data.map.SceneTriggerInfo";
-		/**  换装衣服特效资源配置							 */
+		/**  换装衣服特效资源配置*/
 		public static const AvatarClothesEffectRes:String = "data.model.AvatarClothesEffectRes";
-		/**  衣服换模型						 */
+		/**  衣服换模型*/
 		public static const AvatarClothesRes:String = "data.model.AvatarClothesRes";
-		/**  副武器资源							 */
+		/**  副武器资源*/
 		public static const AvatarDeputyWeaponRes:String = "data.model.AvatarDeputyWeaponRes";
-		/**  头发资源		 */
+		/**  头发资源	*/
 		public static const AvatarHairRes:String = "data.model.AvatarHairRes";
-		/**  换装坐骑资源配置ID		 */
+		/**  换装坐骑资源配置ID	*/
 		public static const AvatarMountRes:String = "data.model.AvatarMountRes";
-		/**  换装武器特效资源配置				 */
+		/**  换装武器特效资源配置*/
 		public static const AvatarWeaponEffectRes:String = "data.model.AvatarWeaponEffectRes";
-		/**  主武器资源							 */
+		/**  主武器资源*/
 		public static const AvatarWeaponRes:String = "data.model.AvatarWeaponRes";
-		/**  换装头发资源配置ID		 */
+		/**  换装头发资源配置ID*/
 		public static const BaZhenTuRes:String = "data.model.BaZhenTuRes";
-		/**  变身ID						 */
+		/**  变身ID*/
 		public static const ChangeModel:String = "data.model.ChangeModel";
-		/**  角色骨骼						 */
+		/**  角色骨骼*/
 		public static const HeroModel:String = "data.model.HeroModel";
 		/**  坐骑模型表	功能名称	动画资源名称 */
 		public static const MountModel:String = "data.model.MountModel";
-		/**  3 怪物基本信息数据库																																																																绑定器			 */
+		/**  3 怪物基本信息数据库绑定器	*/
 		public static const Q_monster:String = "data.monster.Q_monster";
-		/**  NPC配置数据库																									 */
+		/**  NPC配置数据库 */
 		public static const Q_npc:String = "data.monster.Q_npc";
-		/**  定点刷怪数据库 -- 编辑器录入									 */
+		/**  定点刷怪数据库 -- 编辑器录入*/
 		public static const Q_scene_monster:String = "data.monster.Q_scene_monster";
-		/**  区域刷怪数据库 -- 编辑器录入												 */
+		/**  区域刷怪数据库 -- 编辑器录入*/
 		public static const Q_scene_monster_area:String = "data.monster.Q_scene_monster_area";
-		/**  每个职业一级属性换算二级属性表		 */
+		/**  每个职业一级属性换算二级属性表*/
 		public static const Q_att_transfer:String = "data.Q_att_transfer";
-		/**  所有属性相关的数据																														 */
+		/**  所有属性相关的数据*/
 		public static const Q_att_values:String = "data.Q_att_values";
-		/**  巅峰等级段位升级表						 */
+		/**  巅峰等级段位升级表*/
 		public static const Q_battle_rank:String = "data.Q_battle_rank";
-		/**  心法数据库												 */
+		/**  心法数据库*/
 		public static const Q_cheats:String = "data.Q_cheats";
-		/**  经脉冲穴数据库																 */
+		/**  经脉冲穴数据库*/
 		public static const Q_cheats_node:String = "data.Q_cheats_node";
-		/**  押镖护宝											 */
+		/**  押镖护宝*/
 		public static const Q_convoy:String = "data.Q_convoy";
-		/**  资源副本数据库	副本类型 （1真气,2装备,3经验）	背景图													 */
+		/**  资源副本数据库	副本类型 （1真气,2装备,3经验）	背景图*/
 		public static const Q_daily_zone:String = "data.Q_daily_zone";
-		/**  每日副本刷怪配置表													 */
+		/**  每日副本刷怪配置表	*/
 		public static const Q_dailyzone_monster:String = "data.Q_dailyzone_monster";
-		/**  复活界面配置表				 */
+		/**  复活界面配置表 */
 		public static const Q_die:String = "data.Q_die";
-		/**  继承消耗表			 */
+		/**  继承消耗表*/
 		public static const Q_equip_inherit_cost:String = "data.Q_equip_inherit_cost";
-		/**  琢磨配置表			 */
+		/**  琢磨配置表*/
 		public static const Q_equip_polish:String = "data.Q_equip_polish";
-		/**  强化配置表						 */
+		/**  强化配置表*/
 		public static const Q_equip_strength:String = "data.Q_equip_strength";
 		/**  					 */
 		public static const Q_equip_wash:String = "data.Q_equip_wash";
 		/**  				 */
 		public static const Q_equip_wash_attr:String = "data.Q_equip_wash_attr";
-		/**  战魂升级数据						 */
+		/**  战魂升级数据*/
 		public static const Q_fightsoul:String = "data.Q_fightsoul";
-		/**  战魂模型数据							 */
+		/**  战魂模型数据 */
 		public static const Q_fightsoul_mode:String = "data.Q_fightsoul_mode";
 		/**  战魂升级数据			 */
 		public static const Q_fightsoul_path:String = "data.Q_fightsoul_path";
@@ -172,13 +172,13 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_notify:String = "data.Q_notify";
 		/**  阵营关系				 */
 		public static const Q_relation:String = "data.Q_relation";
-		/**  16商城道具配置表													 */
+		/**  16商城道具配置表*/
 		public static const Q_shop:String = "data.Q_shop";
-		/**  城池基础表												 */
+		/**  城池基础表*/
 		public static const Q_singlecitybase:String = "data.Q_singlecitybase";
-		/**  购买界面其他途径提示数据库				 */
+		/**  购买界面其他途径提示数据库*/
 		public static const Q_source:String = "data.Q_source";
-		/**  活动配置表																											 */
+		/**  活动配置表 */
 		public static const Q_special_activities:String = "data.Q_special_activities";
 		/**  tipsid	标题	描述 */
 		public static const Q_tipsinfo:String = "data.Q_tipsinfo";

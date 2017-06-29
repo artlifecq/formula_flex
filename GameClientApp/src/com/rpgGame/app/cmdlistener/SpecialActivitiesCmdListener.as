@@ -5,6 +5,12 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.ui.main.dungeon.JiXianTiaoZhanExtPop;
 	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
+	import com.rpgGame.app.manager.ActivetyDataManager;
+	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
+
+	import com.rpgGame.app.manager.pop.UIPopManager;
+	import com.rpgGame.app.ui.main.dungeon.DungeonFightPop;
+	import com.rpgGame.app.ui.main.dungeon.JiXianTiaoZhanExtPop;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.ActivityEvent;
@@ -52,7 +58,6 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(114119,onSCWorldBossKillerNameMessage);
 			SocketConnection.addCmdListener(114115,onResBossDamageInfosToClientMessage);
 			SocketConnection.addCmdListener(114120,onSCLimitChallengeBossResultMessage);
-			
 			/*----------------天降元宝   yt---------------------------------------------*/
 			SocketConnection.addCmdListener(130101,onSCRankInfoMessage);
 			SocketConnection.addCmdListener(130102,onSCCashGiftClientMessage);
@@ -60,7 +65,7 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(130104,onSCRemainRefreshTimeMessage);
 			SocketConnection.addCmdListener(130105,onSCRewardInfoMessage);
 			SocketConnection.addCmdListener(130106,onSCCashGiftChangeMessage);
-			
+
 			finish();
 		}
 		

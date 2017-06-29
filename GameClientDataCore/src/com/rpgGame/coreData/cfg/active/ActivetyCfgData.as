@@ -16,10 +16,6 @@ package com.rpgGame.coreData.cfg.active
 	public class ActivetyCfgData
 	{
 		private static var _jixianVo:JiXianVo;
-		public function ActivetyDataManager()
-		{
-			
-		}
 		private static var _typeMap:HashMap;
 		private static var _infoMap:HashMap;
 		
