@@ -32,6 +32,9 @@ package com.rpgGame.appModule.vip
 	import feathers.data.ListCollection;
 	
 	import org.client.mainCore.manager.EventManager;
+	import org.mokylin.skin.app.vip.VipLevel1;
+	import org.mokylin.skin.app.vip.VipLevel2;
+	import org.mokylin.skin.app.vip.VipLevel3;
 	import org.mokylin.skin.app.vip.Vip_Skin;
 	
 	import starling.display.DisplayObject;
@@ -75,6 +78,21 @@ package com.rpgGame.appModule.vip
 					{
 						Mgr.vipMgr.reqGetVipReward(_curVip);
 					}
+					break;
+				}
+				case (_skin.skinVip1.skin as VipLevel1).uiVip:
+				{
+					showVipItem(EnumVip.VIP1);
+					break;
+				}
+				case (_skin.skinVip2.skin as VipLevel2).uiVip:
+				{
+					showVipItem(EnumVip.VIP2);
+					break;
+				}
+				case (_skin.skinVip3.skin as VipLevel3).uiVip:
+				{
+					showVipItem(EnumVip.VIP3);
 					break;
 				}
 				default:

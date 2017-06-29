@@ -170,8 +170,8 @@ package com.rpgGame.appModule.role
 		private function initAvatar():void
 		{
 			_avatar = new InterAvatar3D();
-			_avatar.x = _skin.weapons.x + (_skin.weapons.width >> 1)+20;
-			_avatar.y = _skin.weapons.y + _skin.weapons.height+20;
+			_avatar.x = _skin.weapons.x + (_skin.weapons.width >> 1);
+			_avatar.y = _skin.weapons.y + _skin.weapons.height;
 			_avatarContainer.addChild3D(_avatar);
 			_showAvatarData = new RoleData(0);
 			glowfilter=new GlowFilter(0xdfb612,1,1,1);

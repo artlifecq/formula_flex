@@ -502,7 +502,10 @@ package com.rpgGame.app.view.icon
 				_countText.removeFromParent();
 			
 			if( _selectImage != null )
+			{
 				_selectImage.removeFromParent();
+				_selectImage.visible=false;
+			}
 			//不用清理背景
 			/*if(_bgImage){
 				_bgImage.removeFromParent();
