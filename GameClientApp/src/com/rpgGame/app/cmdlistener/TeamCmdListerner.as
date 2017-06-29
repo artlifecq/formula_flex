@@ -48,7 +48,7 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(109114, RecSynMemberInfo);
 			SocketConnection.addCmdListener(109115, RecSetTeamOptions);
 			SocketConnection.addCmdListener(109116, RecSearchPlayerByServer);
-			SocketConnection.addCmdListener(109117, RecHaveTeam);
+			SocketConnection.addCmdListener(109218, RecHaveTeam);
 			finish();
 		}
 		
