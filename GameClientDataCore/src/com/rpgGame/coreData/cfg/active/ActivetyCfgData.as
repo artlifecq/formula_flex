@@ -1,6 +1,7 @@
 package com.rpgGame.coreData.cfg.active
 {
 	import com.rpgGame.coreData.clientConfig.Q_special_activities;
+	import com.rpgGame.netData.monster.message.SCLimitChallengeBossResultMessage;
 	import com.rpgGame.netData.specialactivities.bean.SpecialActivityInfo;
 	
 	import flash.utils.ByteArray;
@@ -14,6 +15,9 @@ package com.rpgGame.coreData.cfg.active
 	 */
 	public class ActivetyCfgData
 	{
+
+		private static var _jixianVo:JiXianVo;
+	
 		private static var _typeMap:HashMap;
 		private static var _infoMap:HashMap;
 		
@@ -39,6 +43,12 @@ package com.rpgGame.coreData.cfg.active
 			}
 		}
 		
+		public static function get jixianVo():JiXianVo
+		{
+			if(_jixianVo==null) _jixianVo=new JiXianVo();
+			return _jixianVo;
+		}
+		
 		/**
 		 *添加配置 
 		 * @param cfg
@@ -53,7 +63,7 @@ package com.rpgGame.coreData.cfg.active
 				_typeMap.add(cfg.q_activity_type,typeList);
 			}
 			if(cfg.q_activity_type==1){
-				info=new BossActInfo();
+				info=new BossActInfo();			
 			}else{
 				info=new ActivetyInfo();
 			}
@@ -76,8 +86,26 @@ package com.rpgGame.coreData.cfg.active
 				list=list.sort(sortListByState);
 			}
 		}
-		
-		
+
+		/**
+		 *更新击杀者 
+		 * 
+		 */
+		public static function updateBossKiller(id:int,killer:String):void
+		{
+			if(id == jixianVo.activityid)
+			{
+				jixianVo.killName = killer;
+			}
+			else
+			{
+				var bossInfo:BossActInfo=getActInfoById(id) as BossActInfo;
+				if(bossInfo){
+					bossInfo.killerName=killer;
+				}
+			}
+		}
+	
 		public static function getTypeList(type:int):Vector.<ActivetyInfo>
 		{
 			return _typeMap.getValue(type);

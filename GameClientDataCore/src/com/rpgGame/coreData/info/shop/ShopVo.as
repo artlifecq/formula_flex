@@ -2,15 +2,15 @@ package com.rpgGame.coreData.info.shop
 {
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.netData.shop.bean.ShopItemInfo;
-
+	
 	/**
 	 *分页 
-ShopVor Administrator
+	 ShopVor Administrator
 	 * 
 	 */	
 	public class ShopVo
 	{
-		private var _shopType:int; 		private var _shopPageItems:HashMap;
+		private var _shopType:int;		private var _shopPageItems:HashMap;
 		private var _shopPageTitles:Array;
 		public function ShopVo(type:int)
 		{
@@ -18,7 +18,7 @@ ShopVor Administrator
 			_shopPageItems=new HashMap();
 			_shopPageTitles=[];
 		}
-
+		
 		public function get shopType():int
 		{
 			return _shopType;
@@ -78,6 +78,24 @@ ShopVor Administrator
 			}
 			return ret;
 		}
+		
+		public function getJiXianShopItems(locationType:int):Array
+		{
+			var ret:Array=[];
+			for each (var type:int in shopPageTypes) 
+			{
+				var tmp:Array = getPageShopItems(type);
+				for each (var vo:ShopItemVo in tmp) 
+				{
+					if (vo.getItemConfig().q_type==18&&vo.getItemConfig().q_location==locationType) 
+					{
+						ret.push(vo);
+					}
+				}
+			}
+			return ret;
+		}
+		
 		public function get shopPageTitles():Array
 		{
 			return _shopPageTitles;

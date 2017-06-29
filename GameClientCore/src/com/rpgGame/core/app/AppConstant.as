@@ -170,6 +170,10 @@ package com.rpgGame.core.app
 		
 		
 		/**
+		 *极限挑战结果 
+		 */
+		public static var ACTIVETY_JIXIAN_RESULT:String = createAppInfo("activety.jixiantiaozhan.JiXianTiaoZhanSuccessPanelExt","activety");
+		/**
 		 *装备面板
 		 */
 		public static var EQUIP_PANL:String = createAppInfo( "equip.EquipPanel","zhuangbei");
