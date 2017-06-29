@@ -106,7 +106,9 @@
 		}
         public function playEffect():void
         {
-            if (!_effect3D&&_info.showEft==1)
+			if(_info.showEft==0)
+				return ;
+            if (!_effect3D)
             {
                 _effect3D = playInter3DAt(ClientConfig.getEffect(_info.effect_name), 42, 35, 0);
             }
