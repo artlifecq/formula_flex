@@ -71,9 +71,8 @@
 
         override protected function onTextRuning():String
         {
-            var _local1:String = "";
-            ui.txtTitle.htmlText = _local1;
-            return _local1;
+			setTextLeable("");
+            return "";
         }
 
         override protected function onShow():void

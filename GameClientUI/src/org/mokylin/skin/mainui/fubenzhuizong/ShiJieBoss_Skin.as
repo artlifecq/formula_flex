@@ -34,12 +34,6 @@ package org.mokylin.skin.mainui.fubenzhuizong
 
 		public var sec_ico1_0:feathers.controls.UIAsset;
 
-		public var sec_ico1_1:feathers.controls.UIAsset;
-
-		public var sec_ico1_2:feathers.controls.UIAsset;
-
-		public var sec_ico1_3:feathers.controls.UIAsset;
-
 		public var sec_info:feathers.controls.Label;
 
 		public var sec_navi0:feathers.controls.Label;
@@ -180,39 +174,6 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			return temp;
 		}
 
-		private function sec_ico1_1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			sec_ico1_1 = temp;
-			temp.name = "sec_ico1_1";
-			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 73;
-			temp.y = 199;
-			return temp;
-		}
-
-		private function sec_ico1_2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			sec_ico1_2 = temp;
-			temp.name = "sec_ico1_2";
-			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 125;
-			temp.y = 199;
-			return temp;
-		}
-
-		private function sec_ico1_3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			sec_ico1_3 = temp;
-			temp.name = "sec_ico1_3";
-			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 177;
-			temp.y = 199;
-			return temp;
-		}
-
 		private function sec_info_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -295,7 +256,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.width = 253;
 			temp.x = 0;
 			temp.y = 0;
-			temp.elementsContent = [ui_bg_i(),__ShiJieBoss_Skin_UIAsset1_i(),lbHeadName_i(),head_left_i(),head_right_i(),sec_navi1_i(),sec_navi0_i(),sec_ico1_0_i(),sec_ico1_1_i(),sec_ico1_2_i(),sec_ico1_3_i(),sec_subbut1_i(),sec_subbut2_i(),sec_info_i(),lbTime_i(),uiYiTiaoZhan_i(),uiWeiJiSha_i()];
+			temp.elementsContent = [ui_bg_i(),__ShiJieBoss_Skin_UIAsset1_i(),lbHeadName_i(),head_left_i(),head_right_i(),sec_navi1_i(),sec_navi0_i(),sec_ico1_0_i(),sec_subbut1_i(),sec_subbut2_i(),sec_info_i(),lbTime_i(),uiYiTiaoZhan_i(),uiWeiJiSha_i()];
 			return temp;
 		}
 

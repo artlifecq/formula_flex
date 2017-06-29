@@ -80,7 +80,7 @@ package org.mokylin.skin.component.scrollbar
 			temp.name = "thumb";
 			temp.left = 0;
 			temp.styleClass = org.mokylin.skin.component.scrollbar.skin_chat.button.ScrollBarSkin_thumb;
-			temp.top = 13;
+			temp.top = 23;
 			return temp;
 		}
 
@@ -89,10 +89,10 @@ package org.mokylin.skin.component.scrollbar
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			track = temp;
 			temp.name = "track";
-			temp.bottom = 12;
-			temp.left = 6;
+			temp.bottom = 19;
+			temp.left = 8;
 			temp.styleClass = org.mokylin.skin.component.scrollbar.skin_chat.button.ScrollBarSkin_track;
-			temp.top = 12;
+			temp.top = 19;
 			return temp;
 		}
 

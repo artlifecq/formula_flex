@@ -972,7 +972,14 @@ package com.game.engine3D.core
 				}
 				else if (baseObj is BaseEntity)
 				{
-					(baseObj as BaseEntity).avatar.lightPicker = null;
+					try
+					{
+						(baseObj as BaseEntity).avatar.lightPicker = null;
+					} 
+					catch(error:Error) 
+					{
+						Log.error((baseObj as BaseEntity).name+"上找不到avatar");
+					}
 				}
 				removeSceneObj(baseObj);
 			}

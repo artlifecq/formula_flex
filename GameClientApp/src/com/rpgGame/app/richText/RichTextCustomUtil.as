@@ -93,6 +93,7 @@ package com.rpgGame.app.richText
 	import com.rpgGame.app.richText.component.RichTextUnit;
 	import com.rpgGame.app.richText.component.RichTextUnitConfigData;
 	import com.rpgGame.app.richText.component.RichTextUnitData;
+	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.utils.MenuUtil;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.core.app.AppConstant;
@@ -113,12 +114,16 @@ package com.rpgGame.app.richText
 	import feathers.controls.UIAsset;
 	import feathers.controls.UIMovieClip;
 	import feathers.controls.text.Fontter;
+	import feathers.events.FeathersEventType;
 	
+	import org.client.mainCore.ds.HashMap;
 	import org.game.netCore.data.long;
 	
 	import starling.display.DisplayObject;
 	import starling.text.TextFieldAutoSize;
 
+	
+	
 	/**
 	 * 富文本自定义工具类，由项目维护
 	 * @author GuoDong.Zhang
@@ -138,7 +143,7 @@ package com.rpgGame.app.richText
 
 		/**聊天所需富文本单元配置列表*/
 		private static var _chatUnitConfigVect : Vector.<RichTextUnitConfigData>;
-
+		private static var updateMap:HashMap=new HashMap();
 		/**
 		 * 小飞鞋图标代码
 		 * @param sceneId
@@ -358,6 +363,13 @@ package com.rpgGame.app.richText
 				case RichTextCustomLinkType.WALK_TO_SCENE_POS_TYPE:
 					MainRoleSearchPathManager.walkToSceneByLink(unitData.linkData);
 					break;
+				case RichTextCustomLinkType.FLY_TO_SCENE_POS_TYPE:
+					var scenePosArr : Array = unitData.linkData.split(",");
+					var sceneId : int = scenePosArr[0];
+					var x : int = scenePosArr[1];
+					var y : int = scenePosArr[2];
+					SceneSender.sceneMapTransport(sceneId, x, y);
+					break;
 				case RichTextCustomLinkType.TASK_TO_NPC_DIAILOG_TYPE:
 					TaskUtil.toNpcDiailog(parseInt(unitData.linkData));
 					break;
@@ -528,12 +540,27 @@ package com.rpgGame.app.richText
 				target = RichTextButtonPool.getFromPool(unit.unitData.res);
 				unit.displayObj = target;
 			}
+			if(target.width==0){
+				updateMap.add(target,unit);
+				target.addEventListener(FeathersEventType.RESIZE,onResize);
+			}else{
+				unit.onDisplayObjLoaded();
+			}
 			//临时代码，不设置宽高第一次不显示
-			target.width = 23;
-			target.height = 23;
-			unit.onDisplayObjLoaded();
+			/*target.width = 23;
+			target.height = 23;*/
 		}
-
+		
+		private static function onResize(event:*):void
+		{
+			var target:Button=event.target;
+			var unit : RichTextUnit=updateMap.remove(target);
+			target.removeEventListener(FeathersEventType.RESIZE,onResize);
+			if(unit){
+				unit.onDisplayObjLoaded();
+			}
+		}
+		
 		private static function getBackDisplayObjWhenUnitDispose(displayObj : DisplayObject) : void
 		{
 			if (displayObj is Label)

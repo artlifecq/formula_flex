@@ -5,6 +5,11 @@ package com.rpgGame.coreData.cfg
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 
+	/**
+	 * 35Tips信息表.xlsx
+	 * @author dik
+	 * 
+	 */
 	public class TipsCfgData
 	{
 		
@@ -27,7 +32,13 @@ package com.rpgGame.coreData.cfg
 		
 		public static function getTipsInfo(id:int):Q_tipsinfo
 		{
-			return _dataDic[id];
+			if(_dataDic[id]){
+				return _dataDic[id];
+			}
+		
+			var info:Q_tipsinfo=new Q_tipsinfo();
+			info.q_describe="蛋疼的策划赶紧去配置35Tips信息表.xlsx，"+id+"的tips文字";
+			return info;
 		}
 	}
 }

@@ -42,6 +42,10 @@ package com.rpgGame.app.richText
 		public static const TASK_TO_NPC_DIAILOG_TYPE : String = "108";
 		/** 任务，走向怪物 需要参数：data:npcId */
 		public static const WALK_TO_SCENE_MONSTER_TYPE : String = "109";
+		/**
+		 *消耗道具飞到场景对应位置 
+		 */
+		public static const FLY_TO_SCENE_POS_TYPE : String = "110";
 		/** 寻路到指定国家，指定场景，指定位置(国家,场景,x,y) */
 		public static const FIND_TO_COUNTRY_SCENE_POS : String = "111";
 		/** 显示一个面板，需要参数:AppConstant枚举*/
