@@ -28,7 +28,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			this.currentState = "normal";
 			this.height = 166;
 			this.width = 400;
-			this.elementsContent = [__Stone_Skin_UIAsset1_i(),__Stone_Skin_UIAsset2_i(),lst_pack_i()];
+			this.elementsContent = [__Stone_Skin_UIAsset1_i(),lst_pack_i()];
 			
 			states = {
 			};
@@ -52,18 +52,6 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 166;
 			temp.styleName = "ui/common/tips/tips_2.png";
-			temp.visible = false;
-			temp.width = 400;
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __Stone_Skin_UIAsset2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 166;
-			temp.styleName = "ui/common/tips/diban3.png";
 			temp.width = 400;
 			temp.x = 0;
 			temp.y = 0;

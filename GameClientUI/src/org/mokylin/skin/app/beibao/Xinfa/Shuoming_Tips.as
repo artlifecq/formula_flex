@@ -21,7 +21,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			super();
 			
 			this.currentState = "normal";
-			this.width = 438;
+			this.height = 138;
+			this.width = 431;
 			this.elementsContent = [__Shuoming_Tips_UIAsset1_i(),__Shuoming_Tips_Label1_i(),__Shuoming_Tips_Label2_i(),__Shuoming_Tips_Label3_i(),__Shuoming_Tips_Label4_i(),__Shuoming_Tips_Label5_i(),__Shuoming_Tips_Label6_i()];
 			
 			states = {
@@ -39,8 +40,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.text = "1.心法是提升属性的主要途径之一";
 			temp.color = 0xE1D4A9;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 19;
-			temp.y = 19;
+			temp.x = 10;
+			temp.y = 10;
 			return temp;
 		}
 
@@ -50,8 +51,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.text = "2.心法来源于：任务奖励、副本掉落的残卷合成等";
 			temp.color = 0xE1D4A9;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 19;
-			temp.y = 49;
+			temp.x = 10;
+			temp.y = 30;
 			return temp;
 		}
 
@@ -61,8 +62,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.text = "3.心法激活时其附带技能也将激活";
 			temp.color = 0xE1D4A9;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 19;
-			temp.y = 79;
+			temp.x = 10;
+			temp.y = 50;
 			return temp;
 		}
 
@@ -72,8 +73,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.text = "4.每本心法都有相生组合，获得相生关系的心法后可获得额外属性";
 			temp.color = 0xE1D4A9;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 19;
-			temp.y = 109;
+			temp.x = 10;
+			temp.y = 70;
 			return temp;
 		}
 
@@ -83,8 +84,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.text = "5.每多收集一本心法还将获得心法收集的属性奖励";
 			temp.color = 0xE1D4A9;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 19;
-			temp.y = 139;
+			temp.x = 10;
+			temp.y = 90;
 			return temp;
 		}
 
@@ -94,17 +95,17 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.text = "6.砭石可通过砭石合成来获得更高级的砭石";
 			temp.color = 0xE1D4A9;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 19;
-			temp.y = 169;
+			temp.x = 10;
+			temp.y = 110;
 			return temp;
 		}
 
 		private function __Shuoming_Tips_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 204;
-			temp.styleName = "ui/common/tips/diban3.png";
-			temp.width = 437;
+			temp.height = 138;
+			temp.styleName = "ui/common/tips/tips_2.png";
+			temp.width = 431;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
