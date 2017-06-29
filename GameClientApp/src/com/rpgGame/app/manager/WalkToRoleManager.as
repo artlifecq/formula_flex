@@ -218,7 +218,7 @@ package com.rpgGame.app.manager
 				{
 					TaskSender.sendStartGatherMessage(collectData.serverID);
 				}
-				else if (EnumMonsterId.MONTER_TOWER_FLAG==collectData.modelID) 
+				else
 				{
 					TaskSender.sendStartGatherMessage(collectData.serverID);
 				}

@@ -93,7 +93,7 @@ package com.rpgGame.app.cmdlistener
 			for (var i:int = 0; i <num; i++) 
 			{
 				info=ActivetyCfgData.getActInfoById(list[i].activityId);
-				if(info){
+				if(info&&info.info){
 					info.info.notifyTime=list[i].notifyTime;
 				}
 			}

@@ -379,8 +379,10 @@ package com.rpgGame.app.manager.scene
 			ClientTriggerManager.sceneClear();
 			SceneCameraLensEffectManager.sceneClear();
 			TaskManager.storyTaskInfo=null;
-			MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
-			MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true);
+			if(MainRoleManager.actor){
+				MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
+				MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true);
+			}
 			
 			InputManger.getInstance().closeOperate();
 			

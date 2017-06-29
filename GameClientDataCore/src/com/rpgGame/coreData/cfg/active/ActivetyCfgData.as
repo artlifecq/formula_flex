@@ -105,9 +105,9 @@ package com.rpgGame.coreData.cfg.active
 			if(infoA.info==null||infoB.info==null){
 				return 0;
 			}
-			if(infoA.info.activityId<infoB.info.activityId){
+			if(infoA.actCfg.q_order<infoB.actCfg.q_order){
 				return -1;
-			}else if(infoA.info.activityId>infoB.info.activityId){
+			}else if(infoA.actCfg.q_order>infoB.actCfg.q_order){
 				return 1;
 			}
 			return 0;

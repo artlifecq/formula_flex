@@ -35,8 +35,8 @@ package com.rpgGame.appModule.guild
 		
 		override protected function onStageResize(sw : int, sh : int) : void
 		{
-			this.x=(this.parent.width-this.width)/2;
-			this.y=(this.parent.height-this.height)/2;
+			this.x=(sw-this.width)/2;
+			this.y=(sh-this.height)/2;
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void

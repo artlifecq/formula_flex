@@ -2,6 +2,7 @@ package com.rpgGame.appModule.role
 {
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
+	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.rpgGame.app.display3D.InterAvatar3D;
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
@@ -35,9 +36,12 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.coreData.type.item.GridBGType;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	
+	import flash.events.Event;
 	import flash.geom.Point;
 	
 	import app.message.EquipType;
+	
+	import away3d.events.MouseEvent3D;
 	
 	import feathers.data.ListCollection;
 	import feathers.dragDrop.DragData;
@@ -107,7 +111,7 @@ package com.rpgGame.appModule.role
 			initAvatar();
 			initEquips();
 			setGridsCount(equipNum);
-			
+			_skin.roleZone.visible=false;
 		}
 		
 		private function initEquips():void
@@ -156,13 +160,22 @@ package com.rpgGame.appModule.role
 		private function initAvatar():void
 		{
 			_avatar = new InterAvatar3D();
-			_avatar.x = _skin.weapons.x + (_skin.weapons.width >> 1)+20;
-			_avatar.y = _skin.weapons.y + _skin.weapons.height+20;
+			_avatar.x = _skin.weapons.x + (_skin.weapons.width >> 1);
+			_avatar.y = _skin.weapons.y + _skin.weapons.height;
 			_avatarContainer.addChild3D(_avatar);
 			_showAvatarData = new RoleData(0);
+			_showAvatarData.bodyRadius=25;
 			glowfilter=new GlowFilter(0xdfb612,1,1,1);
 			
 			_zhandouliEft= _zhandouliEftContaner.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JIEMIAN_ZHANDOULI),135,28,0);
+			Stage3DLayerManager.screenView.mouseChildren=Stage3DLayerManager.screenView.mouseEnabled=true;
+			Stage3DLayerManager.screenView.addEventListener(MouseEvent3D.MOUSE_DOWN,onMs);
+//			Stage3DLayerManager.screenView.addEventListener("mouseDown",onMs);
+		}
+		
+		protected function onMs(event:Event):void
+		{
+			trace(event);
 		}
 		
 		internal function onTouchTarget(target : DisplayObject):Boolean
@@ -496,6 +509,10 @@ package com.rpgGame.appModule.role
 //			RoleFaceMaskEffectUtil.addAvatarMask(AvatarMaskType.DIALOG_MASK,_avatar,144,-371,1.7);
 		}
 		
+		protected function on3dE(event:Event):void
+		{
+			trace(123);
+		}		
 	
 		
 		public function onTouch(e:TouchEvent):void
