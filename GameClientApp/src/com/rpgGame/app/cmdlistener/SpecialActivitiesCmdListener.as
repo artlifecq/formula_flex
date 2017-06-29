@@ -1,7 +1,16 @@
 package com.rpgGame.app.cmdlistener
 {
+	import com.rpgGame.app.manager.pop.UIPopManager;
+	import com.rpgGame.app.ui.main.dungeon.DungeonFightPop;
+	import com.rpgGame.app.ui.main.dungeon.JiXianTiaoZhanExtPop;
 	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
+	import com.rpgGame.app.manager.ActivetyDataManager;
+	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
+
+	import com.rpgGame.app.manager.pop.UIPopManager;
+	import com.rpgGame.app.ui.main.dungeon.DungeonFightPop;
+	import com.rpgGame.app.ui.main.dungeon.JiXianTiaoZhanExtPop;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.ActivityEvent;
@@ -15,6 +24,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.daysdowngold.message.SCRemainRefreshTimeMessage;
 	import com.rpgGame.netData.daysdowngold.message.SCRewardInfoMessage;
 	import com.rpgGame.netData.monster.message.ResBossDamageInfosToClientMessage;
+	import com.rpgGame.netData.monster.message.SCLimitChallengeBossResultMessage;
 	import com.rpgGame.netData.monster.message.SCWorldBossKillerNameMessage;
 	import com.rpgGame.netData.monster.message.SCWorldBossResultMessage;
 	import com.rpgGame.netData.specialactivities.bean.ActivityNotifyInfo;
@@ -47,7 +57,7 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(114118,onSCWorldBossResultMessage);
 			SocketConnection.addCmdListener(114119,onSCWorldBossKillerNameMessage);
 			SocketConnection.addCmdListener(114115,onResBossDamageInfosToClientMessage);
-			
+			SocketConnection.addCmdListener(114120,onSCLimitChallengeBossResultMessage);
 			/*----------------天降元宝   yt---------------------------------------------*/
 			SocketConnection.addCmdListener(130101,onSCRankInfoMessage);
 			SocketConnection.addCmdListener(130102,onSCCashGiftClientMessage);
@@ -55,8 +65,7 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(130104,onSCRemainRefreshTimeMessage);
 			SocketConnection.addCmdListener(130105,onSCRewardInfoMessage);
 			SocketConnection.addCmdListener(130106,onSCCashGiftChangeMessage);
-			
-			
+
 			finish();
 		}
 		
@@ -67,7 +76,19 @@ package com.rpgGame.app.cmdlistener
 		
 		private function onResBossDamageInfosToClientMessage(msg:ResBossDamageInfosToClientMessage):void
 		{
-			EventManager.dispatchEvent(ActivityEvent.UPDATE_BOSS_HURT_RANK,msg);
+			if(msg.rankType==1)
+			{
+				EventManager.dispatchEvent(ActivityEvent.UPDATE_BOSS_HURT_RANK,msg);
+			}
+			else if(msg.rankType==5)
+			{
+				EventManager.dispatchEvent(ActivityEvent.UPDATE_JIXIANBOSS_HURT_RANK,msg);
+			}
+			else
+			{
+				ActivetyDataManager.jixianVo.setdate(msg);
+			}
+			
 		}
 		
 		private function onSCEnterActivityMessage(msg:SCEnterActivityMessage):void
@@ -133,7 +154,14 @@ package com.rpgGame.app.cmdlistener
 			}
 		}
 		
-		
+		private function onSCLimitChallengeBossResultMessage(msg:SCLimitChallengeBossResultMessage):void
+		{
+			AppManager.showApp(AppConstant.ACTIVETY_JIXIAN_RESULT,msg);
+//			if(msg.success==1)
+//			{
+//				UIPopManager.showAlonePopUI(JiXianTiaoZhanExtPop);
+//			}
+		}
 		
 		/*----------------天降元宝   yt---------------------------------------------*/
 		/**排名消息*/
@@ -167,6 +195,5 @@ package com.rpgGame.app.cmdlistener
 		{//L.l("元宝变化:"+msg.cashGiftNum);
 			EventManager.dispatchEvent(ActivityEvent.LIJIN_CASHGIFT_CHANGE,msg.cashGiftNum);
 		}
-		
 	}
 }

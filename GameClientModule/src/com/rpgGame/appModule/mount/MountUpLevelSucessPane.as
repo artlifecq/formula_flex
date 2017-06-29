@@ -98,10 +98,9 @@ package com.rpgGame.appModule.mount
 				_curtentInter3D = null;
 			}
 			var nextShet:Q_horse = HorseConfigData.getMountDataById(mountLevel);
-			var animat : String = ClientConfig.getAvatar(HorseConfigData.mountAnimatResID);
 			_curtentInter3D = new InterObject3D();
-			var data : RenderParamData3D = new RenderParamData3D(0, "mount2",ClientConfig.getAvatar(nextShet.q_scene_show_url));
-			data.animatorSourchPath = animat;
+			var data : RenderParamData3D = new RenderParamData3D(0, "mount2",ClientConfig.getAvatar(nextShet.q_skinResID));
+			data.animatorSourchPath = ClientConfig.getAvatar(nextShet.q_animatResID);
 			data.forceLoad=true;//ui上的3d特效强制加载
 			var unit : RenderUnit3D = _curtentInter3D.addRenderUnitWith(data, 0);
 			unit.setStatus("stand");

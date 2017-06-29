@@ -6,6 +6,8 @@ package com.rpgGame.app.ui
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.ui.SkinUI;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.StateSkin;
 	import feathers.dragDrop.DragData;
 	import feathers.dragDrop.DragDropManager;
@@ -17,7 +19,6 @@ package com.rpgGame.app.ui
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
-	import away3d.events.Event;
 
 	/**
 	 *基于skinState配置的app面板基类,
@@ -60,7 +61,8 @@ package com.rpgGame.app.ui
 			{
 				escExcuteAble = dragAble = false;
 			}
-			switchModel(value);
+			_model = value;
+			UIModel.instence.switchModel(this,value);
 		}
 
 		/**
@@ -125,13 +127,6 @@ package com.rpgGame.app.ui
 				this.x = xx + _appInfo.pX;
 				this.y = yy + _appInfo.pY;
 			}
-			switchModel(_model);
-		}
-
-		private function switchModel(value : Boolean) : void
-		{
-			_model = value;
-			//UIModel.instence.switchModel(_model);
 		}
 
 		//==================================DragDrop============================================
@@ -287,6 +282,13 @@ package com.rpgGame.app.ui
 				{
 
 				}*/
+		
+		private var _isSHowing:Boolean = false;
+
+		public function get isSHowing():Boolean
+		{
+			return _isSHowing;
+		}
 
 		/**
 		 *  添加到显示列表
@@ -301,10 +303,13 @@ package com.rpgGame.app.ui
 			_openTab = openTable;
 			if (parentContiner == null)
 			{
-				parentContiner = StarlingLayerManager.appUILayer;
+				if(!_model)
+					parentContiner = StarlingLayerManager.appUILayer;
+				else
+					parentContiner = UIModel.PARTNER;
 			}
 			_parentContainer = parentContiner;
-
+			_isSHowing = true;
 			_parentContainer.addChild(this);
 			
 			refresh();
@@ -315,6 +320,7 @@ package com.rpgGame.app.ui
 		 */
 		public function hide() : void
 		{
+			_isSHowing = false;
 			preHide();
 			appinfo ? dispatchEventWith(Event.CLOSE) : this.removeFromParent();
 		}

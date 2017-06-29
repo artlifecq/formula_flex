@@ -5,6 +5,7 @@ package com.rpgGame.app.cmdlistener.mount
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.role.HeroData;
+	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.netData.horse.message.SCExtraItemNumMessage;
 	import com.rpgGame.netData.horse.message.SCHorseAllInfoToClientMessage;
 	import com.rpgGame.netData.horse.message.SCHorseIllusionToClientMessage;
@@ -36,7 +37,14 @@ package com.rpgGame.app.cmdlistener.mount
 			}
 			var heroData : HeroData = role.data as HeroData; 
 			heroData.mount = msg.horseModelid;
+			/*if(role.stateMachine.isPrewarWaiting)
+			{
+				role.stateMachine.
+			}*/
+			role.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
+			role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true);
 			AvatarManager.callEquipmentChange(role);
+			
 		}
 		
 		private function getSCHorseUpResultToClientMessage(msg:SCHorseUpResultToClientMessage):void

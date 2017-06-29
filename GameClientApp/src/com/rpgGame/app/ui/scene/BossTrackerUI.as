@@ -42,9 +42,9 @@ package com.rpgGame.app.ui.scene
 		private var iconList:Vector.<IconCDFace>;
 		private var _bgList:Vector.<UIAsset>;
 		private var toPoint:Position;
-
+		
 		private var actId:int;
-
+		
 		private var actInfo:ActivetyInfo;
 		
 		public function BossTrackerUI()
@@ -181,11 +181,14 @@ package com.rpgGame.app.ui.scene
 		
 		private function getActId(id:int):void
 		{
-			EventManager.removeEvent(ActivityEvent.ENTER_ACTIVITY,getActId);
-			AppManager.showAppNoHide(AppConstant.ACTIVETY_BOSS_HURTRANK,id);//打开伤害排行
-			actId=id;
-			actInfo=ActivetyCfgData.getActInfoById(actId);
-			updateView();
+			if(id!=ActivetyDataManager.jixianVo.activityid)
+			{
+				EventManager.removeEvent(ActivityEvent.ENTER_ACTIVITY,getActId);
+				AppManager.showAppNoHide(AppConstant.ACTIVETY_BOSS_HURTRANK,id);//打开伤害排行
+				actId=id;
+				actInfo=ActivetyCfgData.getActInfoById(actId);
+				updateView();
+			}
 		}
 		
 		override protected function onHide():void

@@ -68,6 +68,24 @@ package  com.rpgGame.app.manager.shop
 		}
 		
 		/**
+		 * 获取极限挑战的
+		 * */
+		public function getJiXianItemShopVo(locationType:int,shopId:int):ShopItemVo
+		{
+			var shop:ShopVo=getShopVo(shopId);
+			if (shop) 
+			{
+				var ret:Array=shop.getJiXianShopItems(locationType);
+				for each (var item:ShopItemVo in ret) 
+				{
+					if(item.data.limitNum-item.data.todayBuyNum>0)
+						return item;
+				}
+			}
+			return null;
+		}
+		
+		/**
 		 * 判断该物品是否足够钱购买
 		 * */
 		public function isCanBuy(shopItems:Array,needNum:int=0):Boolean

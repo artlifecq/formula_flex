@@ -67,7 +67,7 @@ package com.game.engine2D.utils
 			textureMaterial.writeDepth = WriteDepthOption.FALSE;
 			textureMaterial.blendMode = BlendMode.LAYER;
 			textureMaterial.animateUVs = true;
-			textureMaterial.depthCompareMode = Context3DCompareMode.ALWAYS;
+			textureMaterial.depthCompareMode = Context3DCompareMode.LESS_EQUAL;
 			textureMaterial.colorTransform = new ColorTransform();
 			return textureMaterial;
 		}
@@ -96,7 +96,7 @@ package com.game.engine2D.utils
 			var texture:ATFTextureMaterial = new ATFTextureMaterial(atfTexture);
 			texture.animateUVs = true;
 			texture.writeDepth = GlobalConfig2D.avatarHighlightEnabled?WriteDepthOption.TRUE:WriteDepthOption.FALSE;
-			texture.depthCompareMode = Context3DCompareMode.ALWAYS;
+			texture.depthCompareMode = Context3DCompareMode.LESS_EQUAL;
 			texture.bothSides = true;
 			texture.blendMode = blendMode;
 			texture.alphaThreshold = 0.05;
@@ -110,7 +110,7 @@ package com.game.engine2D.utils
 			var texture:BPGTextureMaterial = new BPGTextureMaterial(bpgTexture);
 			texture.animateUVs = true;
 			texture.writeDepth = WriteDepthOption.FALSE;
-			texture.depthCompareMode = Context3DCompareMode.ALWAYS;
+			texture.depthCompareMode = Context3DCompareMode.LESS_EQUAL;
 			texture.bothSides = true;
 			texture.blendMode = blendMode;
 			texture.alphaThreshold = 0.05;

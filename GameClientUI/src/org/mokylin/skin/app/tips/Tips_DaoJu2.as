@@ -16,7 +16,17 @@ package org.mokylin.skin.app.tips
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var bg:feathers.controls.UIAsset;
+		public var bg:feathers.controls.Group;
+
+		public var bg_bai:feathers.controls.UIAsset;
+
+		public var bg_huang:feathers.controls.UIAsset;
+
+		public var bg_lan:feathers.controls.UIAsset;
+
+		public var bg_lv:feathers.controls.UIAsset;
+
+		public var bg_zi:feathers.controls.UIAsset;
 
 		public var grp_foot:feathers.controls.Group;
 
@@ -38,6 +48,10 @@ package org.mokylin.skin.app.tips
 
 		public var lbShuxing:feathers.controls.Label;
 
+		public var ui_di:feathers.controls.UIAsset;
+
+		public var ui_xian3:feathers.controls.UIAsset;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -47,9 +61,9 @@ package org.mokylin.skin.app.tips
 			super();
 			
 			this.currentState = "normal";
-			this.height = 311;
-			this.width = 281;
-			this.elementsContent = [bg_i(),__Tips_DaoJu2_UIAsset1_i(),lbName_i(),__Tips_DaoJu2_Label1_i(),__Tips_DaoJu2_Label2_i(),lbShuxing_i(),lbCurrentNum_i(),lbNextName_i(),grp_foot_i(),grp_type_i()];
+			this.height = 319;
+			this.width = 280;
+			this.elementsContent = [bg_i(),__Tips_DaoJu2_UIAsset1_i(),__Tips_DaoJu2_UIAsset2_i(),ui_xian3_i(),lbName_i(),__Tips_DaoJu2_Label1_i(),__Tips_DaoJu2_Label2_i(),lbShuxing_i(),lbCurrentNum_i(),lbNextName_i(),grp_type_i(),grp_foot_i()];
 			
 			states = {
 			};
@@ -64,10 +78,10 @@ package org.mokylin.skin.app.tips
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "当前使用：";
-			temp.color = 0x958D70;
+			temp.color = 0xA3A594;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 108;
-			temp.y = 62;
+			temp.x = 96;
+			temp.y = 48;
 			return temp;
 		}
 
@@ -75,14 +89,47 @@ package org.mokylin.skin.app.tips
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "下一阶数可使用个数：";
-			temp.color = 0x958D70;
+			temp.color = 0xA3A594;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 29;
-			temp.y = 115;
+			temp.x = 10;
+			temp.y = 135;
 			return temp;
 		}
 
 		private function __Tips_DaoJu2_Label3_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.text = "攻  击";
+			temp.color = 0xA3A594;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function __Tips_DaoJu2_Label4_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.text = "防  御";
+			temp.color = 0xA3A594;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 0;
+			temp.y = 20;
+			return temp;
+		}
+
+		private function __Tips_DaoJu2_Label5_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.text = "生  命";
+			temp.color = 0xA3A594;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 0;
+			temp.y = 40;
+			return temp;
+		}
+
+		private function __Tips_DaoJu2_Label6_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.height = 18;
@@ -90,41 +137,8 @@ package org.mokylin.skin.app.tips
 			temp.color = 0x958D70;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 119;
-			temp.x = 17;
-			temp.y = 8;
-			return temp;
-		}
-
-		private function __Tips_DaoJu2_Label4_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "攻  击";
-			temp.color = 0x958D70;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 0;
 			temp.y = 0;
-			return temp;
-		}
-
-		private function __Tips_DaoJu2_Label5_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "防  御";
-			temp.color = 0x958D70;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 0;
-			temp.y = 22;
-			return temp;
-		}
-
-		private function __Tips_DaoJu2_Label6_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "生  命";
-			temp.color = 0x958D70;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 0;
-			temp.y = 45;
 			return temp;
 		}
 
@@ -132,8 +146,8 @@ package org.mokylin.skin.app.tips
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/common/tips/xian.png";
-			temp.x = 10;
-			temp.y = 99;
+			temp.x = 7;
+			temp.y = 124;
 			return temp;
 		}
 
@@ -141,18 +155,81 @@ package org.mokylin.skin.app.tips
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/common/tips/xian.png";
+			temp.x = 7;
+			temp.y = 162;
+			return temp;
+		}
+
+		private function bg_bai_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg_bai = temp;
+			temp.name = "bg_bai";
+			temp.height = 293;
+			temp.styleName = "ui/common/tips/zhuangbei/bg_bai.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
 
-		private function bg_i():feathers.controls.UIAsset
+		private function bg_huang_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg_huang = temp;
+			temp.name = "bg_huang";
+			temp.height = 293;
+			temp.styleName = "ui/common/tips/zhuangbei/bg_jin.png";
+			temp.visible = false;
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function bg_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 311;
-			temp.styleName = "ui/common/tips/diban.png";
+			temp.x = 0;
+			temp.y = 0;
+			temp.elementsContent = [ui_di_i(),bg_lv_i(),bg_lan_i(),bg_zi_i(),bg_huang_i(),bg_bai_i()];
+			return temp;
+		}
+
+		private function bg_lan_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg_lan = temp;
+			temp.name = "bg_lan";
+			temp.height = 293;
+			temp.styleName = "ui/common/tips/zhuangbei/bg_lan.png";
+			temp.visible = false;
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function bg_lv_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg_lv = temp;
+			temp.name = "bg_lv";
+			temp.height = 293;
+			temp.styleName = "ui/common/tips/zhuangbei/bg_lv.png";
+			temp.visible = false;
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function bg_zi_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg_zi = temp;
+			temp.name = "bg_zi";
+			temp.height = 293;
+			temp.styleName = "ui/common/tips/zhuangbei/bg_zi.png";
+			temp.visible = false;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -164,8 +241,8 @@ package org.mokylin.skin.app.tips
 			grp_foot = temp;
 			temp.name = "grp_foot";
 			temp.x = 10;
-			temp.y = 237;
-			temp.elementsContent = [__Tips_DaoJu2_UIAsset2_i(),lbLuJing_i(),__Tips_DaoJu2_Label3_i()];
+			temp.y = 270;
+			temp.elementsContent = [lbLuJing_i(),__Tips_DaoJu2_Label6_i()];
 			return temp;
 		}
 
@@ -174,9 +251,9 @@ package org.mokylin.skin.app.tips
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grp_type = temp;
 			temp.name = "grp_type";
-			temp.x = 29;
-			temp.y = 165;
-			temp.elementsContent = [__Tips_DaoJu2_Label4_i(),__Tips_DaoJu2_Label5_i(),__Tips_DaoJu2_Label6_i(),lbGongJi_i(),lbFangYu_i(),lbShengMing_i()];
+			temp.x = 10;
+			temp.y = 193;
+			temp.elementsContent = [__Tips_DaoJu2_Label3_i(),__Tips_DaoJu2_Label4_i(),__Tips_DaoJu2_Label5_i(),lbGongJi_i(),lbFangYu_i(),lbShengMing_i()];
 			return temp;
 		}
 
@@ -186,10 +263,11 @@ package org.mokylin.skin.app.tips
 			lbCurrentNum = temp;
 			temp.name = "lbCurrentNum";
 			temp.text = "130/130个";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF0C;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 174;
-			temp.y = 63;
+			temp.width = 88;
+			temp.x = 168;
+			temp.y = 48;
 			return temp;
 		}
 
@@ -202,8 +280,8 @@ package org.mokylin.skin.app.tips
 			temp.color = 0xE2D8BE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 132;
-			temp.x = 64;
-			temp.y = 23;
+			temp.x = 56;
+			temp.y = 20;
 			return temp;
 		}
 
@@ -216,8 +294,8 @@ package org.mokylin.skin.app.tips
 			temp.color = 0xE2D8BE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 132;
-			temp.x = 64;
-			temp.y = 1;
+			temp.x = 56;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -228,11 +306,11 @@ package org.mokylin.skin.app.tips
 			temp.name = "lbLuJing";
 			temp.height = 18;
 			temp.text = "跨服组队副本";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF0C;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 119;
-			temp.x = 17;
-			temp.y = 30;
+			temp.x = 0;
+			temp.y = 20;
 			return temp;
 		}
 
@@ -242,12 +320,13 @@ package org.mokylin.skin.app.tips
 			lbName = temp;
 			temp.name = "lbName";
 			temp.fontSize = 16;
-			temp.text = "坐骑资质丹";
-			temp.color = 0xE2D8BE;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 120;
-			temp.x = 109;
-			temp.y = 23;
+			temp.text = "坐骑丹";
+			temp.textAlign = "center";
+			temp.color = 0xEEEEEE;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.width = 260;
+			temp.x = 10;
+			temp.y = 11;
 			return temp;
 		}
 
@@ -257,10 +336,11 @@ package org.mokylin.skin.app.tips
 			lbNextName = temp;
 			temp.name = "lbNextName";
 			temp.text = "85个";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF0C;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 169;
-			temp.y = 116;
+			temp.width = 56;
+			temp.x = 147;
+			temp.y = 136;
 			return temp;
 		}
 
@@ -273,8 +353,8 @@ package org.mokylin.skin.app.tips
 			temp.color = 0xE2D8BE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 132;
-			temp.x = 64;
-			temp.y = 46;
+			temp.x = 56;
+			temp.y = 40;
 			return temp;
 		}
 
@@ -284,10 +364,32 @@ package org.mokylin.skin.app.tips
 			lbShuxing = temp;
 			temp.name = "lbShuxing";
 			temp.text = "每颗资质丹永久增加战骑属性：";
-			temp.color = 0x958D70;
+			temp.color = 0xA3A594;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 29;
-			temp.y = 140;
+			temp.x = 10;
+			temp.y = 173;
+			return temp;
+		}
+
+		private function ui_di_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ui_di = temp;
+			temp.name = "ui_di";
+			temp.styleName = "ui/common/tips/zhuangbei/bg_buttom1.png";
+			temp.x = 0;
+			temp.y = 293;
+			return temp;
+		}
+
+		private function ui_xian3_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ui_xian3 = temp;
+			temp.name = "ui_xian3";
+			temp.styleName = "ui/common/tips/xian.png";
+			temp.x = 7;
+			temp.y = 259;
 			return temp;
 		}
 

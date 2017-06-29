@@ -12,9 +12,11 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
+	import com.rpgGame.app.manager.fightsoul.FightSoulManager;
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleManager;
+	import com.rpgGame.app.ui.main.dungeon.JiXianTiaoZhanExtPop;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
@@ -142,7 +144,11 @@ package   com.rpgGame.app.manager.debug
 				var msg:SCNonagePromptMessage=new SCNonagePromptMessage();
 				msg.type=parseInt(arg[0]);
 				FangChenMiManager.OnSCNonagePromptMessage(msg);
-			});
+			});		
+			commandList.put( ".jixianjiesuan", function (...arg):void
+			{
+				UIPopManager.showAlonePopUI(JiXianTiaoZhanExtPop);
+			});	
 			commandList.put( ".df", function (...arg):void
 			{
 				Mgr.d1v1Mgr.autoJoin();
@@ -163,6 +169,11 @@ package   com.rpgGame.app.manager.debug
 					msg.tempItems.push(tmp);
 				}
 				AppManager.showApp(AppConstant.BATTLE_NINE_TOWER_RESULT_PANEL,msg);
+			});
+			commandList.put( ".fightsoul", function (...arg):void
+			{
+				var level:int = arg[0];
+				FightSoulManager.instance().updateMode(level);
 			});
 		}
 		

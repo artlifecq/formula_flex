@@ -73,6 +73,11 @@ package com.rpgGame.app.manager.mount
 				_itemPropIds[int(key)] = int(items[key]);
 			}
 		}
+		
+		public static function get allList():Dictionary
+		{
+			return _list;
+		}
 		public static function getItemPropsByJob(job:int):int
 		{
 			if(_itemPropIds.hasOwnProperty(job))

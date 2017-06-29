@@ -434,6 +434,9 @@ package com.rpgGame.app.manager
 		{
 			_allMailList=msg.mailBriefInfos;
 			_allMailList.sort(shortList);
+			var num:int=getNewMailNum();
+			if(num>0)
+				EventManager.dispatchEvent(FunctionMessageBarEvent.FUNCTION_MESSAGE_BAR_SHOW_TYPE, EnumFunctionMessageBarIcoType.MAIL_TYPE,num);
 		}
 		
 		/**展示某一个邮件的详细信息*/
