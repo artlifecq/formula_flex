@@ -7,7 +7,7 @@ package com.rpgGame.app.manager.mount
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.app.sender.MountSender;
+	import com.rpgGame.app.sender.HorseSender;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.FunctionMessageBarEvent;

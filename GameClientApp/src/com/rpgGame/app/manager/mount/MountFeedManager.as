@@ -2,7 +2,7 @@ package com.rpgGame.app.manager.mount
 {
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.goods.GoodsContainerMamager;
-	import com.rpgGame.app.sender.MountSender;
+	import com.rpgGame.app.sender.HorseSender;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.cfg.mount.MountMiscData;
 	import com.rpgGame.coreData.info.mount.MountInfoData;
