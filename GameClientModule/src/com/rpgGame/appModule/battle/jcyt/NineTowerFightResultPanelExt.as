@@ -1,6 +1,7 @@
 package  com.rpgGame.appModule.battle.jcyt
 {
 	import com.game.mainCore.core.timer.GameTimer;
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.core.app.AppConstant;
@@ -8,6 +9,7 @@ package  com.rpgGame.appModule.battle.jcyt
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
+	import com.rpgGame.netData.yaota.message.SCYaoTaAwardMessage;
 	
 	import flash.utils.getTimer;
 	
@@ -15,7 +17,6 @@ package  com.rpgGame.appModule.battle.jcyt
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
-	import com.rpgGame.netData.yaota.message.SCYaoTaAwardMessage;
 	
 	public class NineTowerFightResultPanelExt extends SkinUIPanel
 	{
@@ -86,7 +87,7 @@ package  com.rpgGame.appModule.battle.jcyt
 		override public function hide():void
 		{
 			super.hide();
-			_gReward.clear();
+			Mgr.nineTowerMgr.reqQuitTower();
 		}
 		override protected function onHide():void
 		{
@@ -96,6 +97,7 @@ package  com.rpgGame.appModule.battle.jcyt
 				_timer.destroy();
 				_timer=null;
 			}
+			_gReward.clear();
 		}
 	}
 }

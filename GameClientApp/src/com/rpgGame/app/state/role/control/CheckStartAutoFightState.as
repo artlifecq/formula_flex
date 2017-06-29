@@ -55,8 +55,9 @@ package com.rpgGame.app.state.role.control
 			}
 			return false;
 		}
-		override public function leavePass(nextState:IState, force:Boolean=false):Boolean
+		override public function leave():void
 		{
+			super.leave();
 			if ((_machine.owner as SceneRole).isMainChar)
 			{
 				if (_timeId!=0) 
@@ -65,7 +66,6 @@ package com.rpgGame.app.state.role.control
 					_timeId=0;
 				}
 			}
-			return true;
 		}
 	}
 }
