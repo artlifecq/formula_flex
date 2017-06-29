@@ -92,6 +92,10 @@ package com.rpgGame.core.events
 		 */
 		public static const ZONE_TEAM_TIME:int = UNIQUEID.NEXT;
 		
+		/**
+		 * 更新极限挑战时间以及击杀状态信息
+		 */
+		public static const ZONE_JIXIAN_TIME:int = UNIQUEID.NEXT;
 		
 		
 		public function DungeonEvent()

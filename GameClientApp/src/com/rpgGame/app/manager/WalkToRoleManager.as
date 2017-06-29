@@ -20,6 +20,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.TaskEvent;
+	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.TranportsDataManager;
 	import com.rpgGame.coreData.cfg.task.TouZhuCfgData;
 	import com.rpgGame.coreData.info.stall.StallData;
@@ -35,7 +36,7 @@ package com.rpgGame.app.manager
 	import app.message.SceneTransportProto;
 	
 	import org.client.mainCore.manager.EventManager;
-
+	
 	/**
 	 *
 	 * 走向角色管理器
@@ -48,15 +49,15 @@ package com.rpgGame.app.manager
 		public function WalkToRoleManager()
 		{
 		}
-
+		
 		public static function walkToRole(role : SceneRole) : Boolean
 		{
 			if (!role || !role.usable)
 				return false;
 			var ret:Boolean=false;
 			var targerPos : Vector3D = role.position.clone();
-            targerPos.y = targerPos.z;
-            targerPos.z = 0;
+			targerPos.y = targerPos.z;
+			targerPos.z = 0;
 			switch (role.type)
 			{
 				case SceneCharType.PLAYER:
@@ -78,7 +79,7 @@ package com.rpgGame.app.manager
 					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveCollect,null,null,onCollect);
 					break;
 				case SceneCharType.DROP_GOODS:
-					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, ControlAutoPick.AUTO_DIRECT_SEND_PICK, role, onArriveDropGoods,null,null,onDropGoods);
+					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, ControlAutoPick.AUTO_DIRECT_SEND_PICK, role, onDropGoods);
 					break;
 				case SceneCharType.STALL:
 					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onWalkToStall);
@@ -105,7 +106,7 @@ package com.rpgGame.app.manager
 				}
 			}
 		}
-
+		
 		
 		
 		private static function wakMonster(role : SceneRole,targerPos : Vector3D) : void
@@ -127,9 +128,9 @@ package com.rpgGame.app.manager
 				RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, dst, role, waikOver,null,null,waikOver);
 				function waikOver():void
 				{
-					var targetRoles : Vector.<SceneRole>=new Vector.<SceneRole> ();
-					targetRoles.push(role);
-					TrusteeshipManager.getInstance().startFightTarget(targetRoles);
+				var targetRoles : Vector.<SceneRole>=new Vector.<SceneRole> ();
+				targetRoles.push(role);
+				TrusteeshipManager.getInstance().startFightTarget(targetRoles);
 				}*/
 			}
 			else
@@ -145,11 +146,11 @@ package com.rpgGame.app.manager
 			walkComplet(role);
 			
 			//如果这只怪是猪，那么是不能杀的，请求抓猪
-//			if (TouZhuCfgData.isZhuMonster(monsterData.modelID))
-//			{
-//				TouZhuManager.reqStratTouZhu(monsterData.id);
-//				return;
-//			}
+			//			if (TouZhuCfgData.isZhuMonster(monsterData.modelID))
+			//			{
+			//				TouZhuManager.reqStratTouZhu(monsterData.id);
+			//				return;
+			//			}
 		}
 		private static function noWalk( role : SceneRole) : void
 		{
@@ -179,7 +180,7 @@ package com.rpgGame.app.manager
 			var role : SceneRole = ref.data as SceneRole;
 			if (role == null || !role.usable)
 				return;
-
+			
 			var actor : SceneRole = MainRoleManager.actor;
 			var dist : int = MathUtil.getDistanceNoSqrt(actor.x, actor.z, role.x, role.z);
 			var npcData : MonsterData = role.data as MonsterData;
@@ -214,19 +215,24 @@ package com.rpgGame.app.manager
 			var farDistance : int = 300;
 			if (dist < farDistance * farDistance)
 			{
-				if(TaskMissionManager.isGatherItem(collectData.modelID))//如果是任务采集物就采集
+				var wideStr:String=GlobalSheetData.getSettingInfo(834).q_string_value;
+				var wideArr:Array=wideStr.split("-");
+				if(wideArr.length==2&&collectData.modelID>=int(wideArr[0])&&collectData.modelID<=int(wideArr[1]))//任务采集物id范围
+				{
+					if(TaskMissionManager.isGatherItem(collectData.modelID))//如果是任务采集物就采集
+					{
+						TaskSender.sendStartGatherMessage(collectData.serverID);
+					}
+					
+				}
+				else
 				{
 					TaskSender.sendStartGatherMessage(collectData.serverID);
 				}
-				else if (EnumMonsterId.MONTER_TOWER_FLAG==collectData.modelID) 
-				{
-					TaskSender.sendStartGatherMessage(collectData.serverID);
-				}
-				//var taskId : int = TaskManager.getTaskIdHasCollectObj(collectData.collectType);
-				///TaskManager.collectItemTask(taskId, collectData.id, collectData.collectType, collectData.sceneID, collectData.x, collectData.y);
+				
 			}
 		}
-
+		
 		/**
 		 * 掉落物
 		 * @param ref
@@ -243,12 +249,12 @@ package com.rpgGame.app.manager
 			var dist : int = MathUtil.getDistanceNoSqrt(actor.x, actor.z, role.x, role.z);
 			var dropGoodsData : SceneDropGoodsData = role.data as SceneDropGoodsData;
 			//var farDistance : int = dropGoodsData.farDistance;
-		//	if (dist < farDistance * farDistance)
+			//	if (dist < farDistance * farDistance)
 			{
 				/*if (dropGoodsData.isMount)
-					MountManager.collectMountItem(dropGoodsData.id, dropGoodsData.name);
+				MountManager.collectMountItem(dropGoodsData.id, dropGoodsData.name);
 				else*/
-					SceneDropGoodsManager.selectedDropGoods(dropGoodsData);
+				SceneDropGoodsManager.selectedDropGoods(dropGoodsData);
 			}
 		}
 		
@@ -256,6 +262,7 @@ package com.rpgGame.app.manager
 		{
 			if (role == null || !role.usable)
 				return;
+			TrusteeshipManager.getInstance().autoPickCtrl.isArrivePk=true;
 			var actor : SceneRole = MainRoleManager.actor;
 			var dist : int = MathUtil.getDistanceNoSqrt(actor.x, actor.z, role.x, role.z);
 			var dropGoodsData : SceneDropGoodsData = role.data as SceneDropGoodsData;
@@ -268,7 +275,7 @@ package com.rpgGame.app.manager
 				SceneDropGoodsManager.selectedDropGoods(dropGoodsData);
 			}
 		}
-
+		
 		public static function walkToTranport(trans : SceneRole) : void
 		{
 			var transId : int = trans.id;

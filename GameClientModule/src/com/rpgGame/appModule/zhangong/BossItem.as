@@ -295,7 +295,7 @@ package com.rpgGame.appModule.zhangong
 		{
 			if(_q_meritorious)
 			{
-				MainRoleSearchPathManager.walkToScene(_q_meritorious.q_mapID, _q_meritorious.q_site_x, _q_meritorious.q_site_y,null, 100,null,null);
+				MainRoleSearchPathManager.walkToScene(_q_meritorious.q_mapID, _q_meritorious.q_site_x, _q_meritorious.q_site_y,null, 100);
 			}
 		}
 		

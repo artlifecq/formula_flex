@@ -17,7 +17,7 @@ package com.rpgGame.netData.player.bean{
 	 * 他人详细信息
 	 */
 	public class OthersInfo extends Bean {
-		
+	
 		//角色Id
 		private var _personId: long;
 		

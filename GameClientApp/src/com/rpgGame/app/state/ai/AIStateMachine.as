@@ -73,7 +73,9 @@ package com.rpgGame.app.state.ai
 				case AIStateType.TASK_WALK:
 					state = new AItaskWalk();
 					break;
-				
+				case AIStateType.TASK_OTHER_WALK:
+					state = new AItaskOtherWalk();
+					break;
 				case AIStateType.TASK_GATHER:
 					state = new AItaskGather();
 					break;

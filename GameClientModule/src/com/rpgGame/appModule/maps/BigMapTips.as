@@ -2,7 +2,7 @@ package com.rpgGame.appModule.maps
 {
 	import feathers.controls.SkinnableContainer;
 	
-	import org.mokylin.skin.app.tips.mouseHandTips1_Skin;
+	import org.mokylin.skin.app.tips.Tips_MouseHand;
 	
 	import starling.display.Sprite;
 
@@ -15,7 +15,7 @@ package com.rpgGame.appModule.maps
 	{
 		
 		private var _temp:SkinnableContainer;
-		private var _skin:mouseHandTips1_Skin;
+		private var _skin:Tips_MouseHand;
 		private var _maxWidth:int;//移动范围
 		private var _maxHight:int;
 		public function BigMapTips(maxWidth,maxHight)
@@ -31,10 +31,10 @@ package com.rpgGame.appModule.maps
 			var temp:SkinnableContainer = new SkinnableContainer();
 			_temp=temp;
 			
-			var skin:mouseHandTips1_Skin = new mouseHandTips1_Skin();
+			var skin:Tips_MouseHand = new Tips_MouseHand();
 			_skin=skin
 			temp.skin=skin;
-			skin.lbl_name.text="10000,10000";
+			skin.lbl_miaoshu.text="10000,10000";
 			temp.x=28;
 			temp.y=28;
 			temp.width=100;
@@ -84,13 +84,8 @@ package com.rpgGame.appModule.maps
 			var text:String=tx+","+ty;
 			var tleng:int=text.length;
 			_temp.width=22+tleng*7.6;
-			_skin.lbl_name.maxWidth=_skin.lbl_name.width=tleng*7.6;
-			_skin.lbl_name.text=text;
-			
-			
-		}
-		
-		
-		
+			_skin.lbl_miaoshu.maxWidth=_skin.lbl_miaoshu.width=tleng*7.6;
+			_skin.lbl_miaoshu.text=text;			
+		}		
 	}
 }

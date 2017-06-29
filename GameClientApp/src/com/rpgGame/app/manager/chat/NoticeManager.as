@@ -2,6 +2,7 @@ package com.rpgGame.app.manager.chat
 {
 	import com.rpgGame.app.manager.hint.TopTipManager;
 	import com.rpgGame.app.ui.alert.GameAlert;
+	import com.rpgGame.app.ui.alert.GameAlertExt;
 	import com.rpgGame.core.events.HintEvent;
 	import com.rpgGame.coreData.rEnum;
 	import com.rpgGame.coreData.cfg.HintConfig;
@@ -64,6 +65,9 @@ package com.rpgGame.app.manager.chat
 		public static const CHAT_CHANAEL_SYSTEM : int = 19;
 		/** 右下，传闻 */
 		public static const BATTLE_CHUANWEN : int = 20;
+		
+		/** 右下，传闻 */
+		public static const ALERT_NEW : int = 100;
 		
 		/**红 错误**/
 		public static const ERROR_RED : uint = rEnum.ENUM_START();
@@ -319,6 +323,11 @@ package com.rpgGame.app.manager.chat
 					case CHAT_CHANAEL_SYSTEM: //19聊天框 子类型,系统频道
 						ChatManager.addMsgInChat($msg, EnumChatChannelType.CHAT_CHANNEL_SYSTEM);
 						break;
+					case ALERT_NEW:
+					{
+						GameAlertExt.show($msg);
+						break;
+					}
 					default:
 						TopTipManager.getInstance().addHintByType($type, $msg);
 				}

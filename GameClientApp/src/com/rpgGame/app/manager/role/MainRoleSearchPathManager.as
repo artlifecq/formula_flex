@@ -144,15 +144,24 @@ package com.rpgGame.app.manager.role
 
 			TrusteeshipManager.getInstance().stopAll();
 			var role : SceneRole = MainRoleManager.actor;
+			posy=-Math.abs(posy);
 			var position : Vector3D = new Vector3D(posx, posy, 0);
 			EventManager.dispatchEvent(TaskEvent.AUTO_WALK_START);
-			walkToScenePos(role, targetSceneId, position,function(ref :WalkMoveStateReference):void{
+			walkToScenePos(role, targetSceneId, position,function(_ref :WalkMoveStateReference):void{
 				if(onArrive!=null)
 				{
-					onArrive(ref.data);
+					onArrive(_ref.data);
 				}
 				EventManager.dispatchEvent(TaskEvent.AUTO_WALK_STOP);
-			}, spacing, data,noWalk);
+			}, spacing, data,function(_data : Object):void{
+				if(onArrive!=null)
+				{
+					onArrive(_data);
+				}
+				EventManager.dispatchEvent(TaskEvent.AUTO_WALK_STOP);
+			});
+			
+			
 		}
 
 		/**

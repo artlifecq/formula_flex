@@ -4,6 +4,7 @@ package com.rpgGame.appModule.role
 	import com.game.engine3D.display.InterObject3D;
 	import com.rpgGame.app.display3D.InterAvatar3D;
 	import com.rpgGame.app.manager.MenuManager;
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.GoodsContainerMamager;
 	import com.rpgGame.app.manager.goods.ItemUseManager;
@@ -11,6 +12,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.ItemSender;
+	import com.rpgGame.app.view.icon.BgIcon;
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.app.view.uiComponent.menu.Menu;
@@ -18,7 +20,13 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.core.events.AvatarEvent;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.core.events.VipEvent;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.VipCfg;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
@@ -32,6 +40,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.RoleStateType;
+	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.type.item.GridBGType;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	
@@ -93,7 +102,7 @@ package com.rpgGame.appModule.role
 		private var glowTween:TweenLite;
 		private var nextBlur:Number;
 		
-		
+		private var _vipIcon:DragDropItem;
 		public function AvatarView(skin:juese_Skin)
 		{
 			acceptDropFromContainerIdArr=[ItemContainerID.BackPack];
@@ -124,6 +133,11 @@ package com.rpgGame.appModule.role
 				}
 				_skin.weapons.addChild(equipGrids[i]);
 			}
+			_vipIcon=new DragDropItem(IcoSizeEnum.ICON_48,-1);
+			_vipIcon.setBg(GridBGType.VIP);
+			_vipIcon.x=310;
+			_vipIcon.y=(10-5)*60;
+			_skin.weapons.addChild(_vipIcon);
 		}
 		
 		private function getGrid(bg:String):DragDropItem
@@ -156,8 +170,8 @@ package com.rpgGame.appModule.role
 		private function initAvatar():void
 		{
 			_avatar = new InterAvatar3D();
-			_avatar.x = _skin.weapons.x + (_skin.weapons.width >> 1)+20;
-			_avatar.y = _skin.weapons.y + _skin.weapons.height+20;
+			_avatar.x = _skin.weapons.x + (_skin.weapons.width >> 1);
+			_avatar.y = _skin.weapons.y + _skin.weapons.height;
 			_avatarContainer.addChild3D(_avatar);
 			_showAvatarData = new RoleData(0);
 			glowfilter=new GlowFilter(0xdfb612,1,1,1);
@@ -191,11 +205,14 @@ package com.rpgGame.appModule.role
 			_avatar.curRole.stateMachine.transition(RoleStateType.ACTION_SHOW);
 			updateBaseInfo();
 			
-			if(isMainRole){
+			if(isMainRole)
+			{
 				updateRoleEquip();
+				onGetVipData();
 			}else{//获取玩家的装备列表
 				updateRoleEquip();
 			}
+			
 		}
 		
 		private function getGoodsInfoForOther():Array
@@ -304,6 +321,7 @@ package com.rpgGame.appModule.role
 			
 			EventManager.addEvent(DragDropEvent.DRAG_START,onDragStart);
 			EventManager.addEvent(DragDropEvent.DRAG_COMPLETE,onDragEnd);
+			EventManager.addEvent(VipEvent.GET_VIP_DATA,onGetVipData);
 		}
 		
 		private function onDragEnd(data:DragData):void
@@ -380,8 +398,30 @@ package com.rpgGame.appModule.role
 			EventManager.removeEvent(AvatarEvent.EQUIP_CHANGE, equipChange);
 			EventManager.removeEvent(DragDropEvent.DRAG_START,onDragStart);
 			EventManager.removeEvent(DragDropEvent.DRAG_COMPLETE,onDragEnd);
+			EventManager.removeEvent(VipEvent.GET_VIP_DATA,onGetVipData);
 		}
 		
+		private function onGetVipData():void
+		{
+			// TODO Auto Generated method stub
+			var vip:int=Mgr.vipMgr.vipLv;
+			//_vipIcon.setIconResName(
+			setVipData(vip);
+		}
+		public function setVipData(vip:int):void
+		{
+			TipTargetManager.remove(_vipIcon);
+			if (vip>0) 
+			{
+				_vipIcon.setIconResName(ClientConfig.getItemIcon(ItemConfig.getQItemByID(VipCfg.getVip(vip).q_mo_tokenID).q_icon+"",IcoSizeEnum.ICON_48));
+				TipTargetManager.show(_vipIcon,TargetTipsMaker.makeTips(TipType.VIP_LEVEL_TIP,new DynamicTipData(vip)));
+			}
+			else
+			{
+				_vipIcon.clear();
+				TipTargetManager.show(_vipIcon,TargetTipsMaker.makeTips(TipType.VIP_NONE_TIP,null));
+			}
+		}
 		/**
 		 * 拖动物品放下时 
 		 * @param srcGrid

@@ -33,6 +33,7 @@ package com.game.engine3D.scene.render
 	import away3d.animators.IAnimator;
 	import away3d.animators.IAnimatorOwner;
 	import away3d.animators.SkeletonAnimator;
+	import away3d.audio.SoundBox;
 	import away3d.cameras.Camera3D;
 	import away3d.containers.ObjectContainer3D;
 	import away3d.containers.SkeletonBone;
@@ -46,7 +47,6 @@ package com.game.engine3D.scene.render
 	import away3d.entities.Mesh;
 	import away3d.entities.SparticleMesh;
 	import away3d.events.MouseEvent3D;
-	import away3d.log.Log;
 	import away3d.materials.MaterialBase;
 	import away3d.materials.TextureMaterial;
 	import away3d.materials.lightpickers.LightPickerBase;
@@ -818,14 +818,14 @@ package com.game.engine3D.scene.render
 //					else
 //					{
 //						skeletonName = _renderResourceData.meshUseForSkeletonName();
-//						parentSkeletonName = _parentUnit ? _parentUnit._renderResourceData.meshUseForSkeletonName() : null;
+//						parentSkeletonName = (_parentUnit && _parentUnit._renderResourceData) ? _parentUnit._renderResourceData.meshUseForSkeletonName() : null;
 //						if(!skeletonName || skeletonName == parentSkeletonName)
 //						{
 //							_graphicDis.addChild(element);
 //						}
 //						else
 //						{
-//							Log.error(_renderParamData.sourcePath+":"+parentSkeletonName+":"+"蒙皮已经被骨骼引用，不能单独使用！");
+//							//							Log.error(_renderParamData.sourcePath+":"+parentSkeletonName+":"+"蒙皮已经被骨骼引用，不能单独使用！");
 //						}
 //					}
 //				}
@@ -3114,10 +3114,7 @@ package com.game.engine3D.scene.render
 //					else
 //					{
 //						skeletonName = _renderResourceData.meshUseForSkeletonName();
-//						if(_parentUnit && _parentUnit._renderResourceData)
-//							parentSkeletonName = _parentUnit._renderResourceData.meshUseForSkeletonName();
-//						else
-//							parentSkeletonName = null
+//						parentSkeletonName = (_parentUnit && _parentUnit._renderResourceData) ? _parentUnit._renderResourceData.meshUseForSkeletonName() : null;
 //						if(!skeletonName || skeletonName == parentSkeletonName)
 //						{
 //							element.hookingJointName = null;
@@ -3304,6 +3301,11 @@ package com.game.engine3D.scene.render
 			if (_renderResourceData)
 				return _renderResourceData.camera;
 			return null;
+		}
+		
+		public function get soundBox():SoundBox
+		{
+			return _renderResourceData?_renderResourceData.soundBox:null;
 		}
 
 		/**

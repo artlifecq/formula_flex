@@ -7,6 +7,7 @@ package org.mokylin.skin.common.alert
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
+	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 
 	/**
 	 * @private
@@ -18,17 +19,17 @@ package org.mokylin.skin.common.alert
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var btnCancel:feathers.controls.Button;
+		public var bg:feathers.controls.UIAsset;
 
 		public var btnClose:feathers.controls.Button;
 
-		public var btnOk:feathers.controls.Button;
+		public var btn_cancel:feathers.controls.Button;
+
+		public var btn_ok:feathers.controls.Button;
 
 		public var lbTip:feathers.controls.Label;
 
 		public var title:feathers.controls.Label;
-
-		public var txt_bg:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -39,7 +40,9 @@ package org.mokylin.skin.common.alert
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [__AlertSkin_UIAsset1_i(),txt_bg_i(),btnOk_i(),btnCancel_i(),__AlertSkin_UIAsset2_i(),btnClose_i(),lbTip_i(),title_i()];
+			this.height = 265;
+			this.width = 331;
+			this.elementsContent = [bg_i(),__AlertSkin_UIAsset1_i(),btn_ok_i(),btn_cancel_i(),btnClose_i(),lbTip_i(),title_i()];
 			
 			states = {
 			};
@@ -53,37 +56,22 @@ package org.mokylin.skin.common.alert
 		private function __AlertSkin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 210;
-			temp.styleName = "ui/common/background/erji_kuang.png";
-			temp.width = 375;
-			temp.x = 0;
-			temp.y = 0;
+			temp.styleName = "ui/common/background/erji_bg.jpg";
+			temp.x = 12;
+			temp.y = 41;
 			return temp;
 		}
 
-		private function __AlertSkin_UIAsset2_i():feathers.controls.UIAsset
+		private function bg_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 104;
-			temp.styleName = "ui/loading/alert/kang/neikuang_2.png";
-			temp.width = 352;
-			temp.x = 12;
-			temp.y = 40;
-			return temp;
-		}
-
-		private function btnCancel_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btnCancel = temp;
-			temp.name = "btnCancel";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.label = "取消";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
-			temp.color = 0xE1D4A9;
-			temp.width = 80;
-			temp.x = 210;
-			temp.y = 156;
+			bg = temp;
+			temp.name = "bg";
+			temp.height = 265;
+			temp.styleName = "ui/common/background/erji_kuang.png";
+			temp.width = 331;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -93,23 +81,38 @@ package org.mokylin.skin.common.alert
 			btnClose = temp;
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.x = 341;
+			temp.x = 297;
 			temp.y = 7;
 			return temp;
 		}
 
-		private function btnOk_i():feathers.controls.Button
+		private function btn_cancel_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btnOk = temp;
-			temp.name = "btnOk";
+			btn_cancel = temp;
+			temp.name = "btn_cancel";
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.label = "确定";
+			temp.label = "取 消";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
 			temp.color = 0xE1D4A9;
-			temp.width = 80;
-			temp.x = 95;
-			temp.y = 156;
+			temp.width = 100;
+			temp.x = 187;
+			temp.y = 213;
+			return temp;
+		}
+
+		private function btn_ok_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btn_ok = temp;
+			temp.name = "btn_ok";
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.label = "确 认";
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
+			temp.color = 0xE1D4A9;
+			temp.width = 100;
+			temp.x = 56;
+			temp.y = 213;
 			return temp;
 		}
 
@@ -118,17 +121,17 @@ package org.mokylin.skin.common.alert
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbTip = temp;
 			temp.name = "lbTip";
-			temp.height = 96;
+			temp.height = 149;
 			temp.touchable = false;
 			temp.fontSize = 14;
 			temp.text = "提示内容";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xBEA757;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.verticalAlign = "middle";
-			temp.width = 330;
-			temp.x = 22;
-			temp.y = 42;
+			temp.width = 294;
+			temp.x = 20;
+			temp.y = 47;
 			return temp;
 		}
 
@@ -138,31 +141,18 @@ package org.mokylin.skin.common.alert
 			title = temp;
 			temp.name = "title";
 			temp.bold = false;
-			temp.height = 26;
+			temp.height = 24;
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.touchable = false;
 			temp.fontSize = 16;
-			temp.text = "标签";
+			temp.text = "提示";
 			temp.textAlign = "center";
-			temp.color = 0xE1D4A9;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.color = 0xDDE2B1;
+			temp.nativeFilters = Fontter.filterObj[""];
 			temp.width = 240;
-			temp.x = 68;
-			temp.y = 12;
-			return temp;
-		}
-
-		private function txt_bg_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			txt_bg = temp;
-			temp.name = "txt_bg";
-			temp.height = 108;
-			temp.styleName = "ui/common/background/neikuang_2.png";
-			temp.width = 344;
-			temp.x = 16;
-			temp.y = 41;
+			temp.x = 48;
+			temp.y = 11;
 			return temp;
 		}
 

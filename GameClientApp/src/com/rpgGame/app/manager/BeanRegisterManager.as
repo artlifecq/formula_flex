@@ -38,6 +38,7 @@
 	import com.rpgGame.app.cmdlistener.SummonCmdListener;
 	import com.rpgGame.app.cmdlistener.TeamCmdListerner;
 	import com.rpgGame.app.cmdlistener.TradeCmdlistener;
+	import com.rpgGame.app.cmdlistener.VipCmdListerner;
 	import com.rpgGame.app.cmdlistener.ZhanGongContainerCmdListener;
 	import com.rpgGame.app.cmdlistener.clientConfig.ClientConfigCmdListener;
 	import com.rpgGame.app.cmdlistener.engine.InteractiveCmdListener;
@@ -162,6 +163,7 @@
 			register("SpecialActivitiesCmdListener", SpecialActivitiesCmdListener); //模块号7
 			register("DFBattleCmdListener", DFBattleCmdListener); //模块号7
 			register("NineTowerCmdListener",NineTowerCmdListener);
+			register("VipCmdListerner",VipCmdListerner);
 		}
 	}
 }

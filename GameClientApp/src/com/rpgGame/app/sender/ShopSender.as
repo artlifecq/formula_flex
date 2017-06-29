@@ -28,7 +28,7 @@ package com.rpgGame.app.sender
 		 * @param costType 货币类型
 		 * @param _discountItemid 是否使用折扣卡
 		 */        
-		public static function ReqBuyItem(shopvo:ShopItemInfo, num:int, _discountItemid:long = null):void
+		public static function ReqBuyItem(shopvo:ShopItemInfo, num:int, _discountItemid:long = null,autoUse:int=0):void
 		{
 			if (shopvo == null)
 				return;
@@ -36,7 +36,7 @@ package com.rpgGame.app.sender
 			msg.shopItemId = shopvo.shopItemId;
 			msg.num = num;
 			msg.shopItemId = shopvo.shopItemId;
-			
+			msg.autoUse=autoUse
 			
 			SocketConnection.send(msg);
 			//			Mgr.musicMgr.playSoundCom(117);

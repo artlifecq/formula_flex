@@ -10,10 +10,12 @@ package com.rpgGame.app.manager.task
 	import com.rpgGame.core.app.AppEvent;
 	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
+	import com.rpgGame.coreData.clientConfig.Q_mission_base;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.map.EnumMapType;
 	import com.rpgGame.coreData.type.AIStateType;
 	import com.rpgGame.coreData.type.TaskType;
+	import com.rpgGame.netData.task.bean.TaskInfo;
 	
 	import gs.TweenLite;
 	
@@ -38,10 +40,12 @@ package com.rpgGame.app.manager.task
 		
 		private var _gTimer : GameTimer;
 		private var _isTaskRunning : Boolean;
+		private var _isOtherTaskRunning : Boolean;
 		private var _isAutoing:Boolean=false;
 		private var _isBroken : Boolean;
 		private var _stateMachine : AIStateMachine;
 		private var _taskTarget:int=0;
+		private var _otherType:int;
 		public static var AUTOLVE:int=30;
 		public static var AUTOIDE:int=90;
 		public function TaskAutoManager()
@@ -56,9 +60,10 @@ package com.rpgGame.app.manager.task
 			}
 			_gTimer = new GameTimer("TaskAutoManager", 500, 0, onUpdate);
 			_isTaskRunning = false;
+			_isOtherTaskRunning =false;
 			_isBroken = false;
 			AppDispather.instance.addEventListener( AppEvent.APP_HIDE, onApphide );
-			
+			EventManager.addEvent(TaskEvent.TASK_CHANGE_MATION,changeMation);
 		}
 		private function onApphide( ev:AppEvent ):void
 		{
@@ -66,6 +71,13 @@ package com.rpgGame.app.manager.task
 			{
 				stopTaskAuto();
 			}
+		}
+		/**任务进度改变*/
+		private function changeMation(type:int):void
+		{
+			if (!_isTaskRunning&&!_isOtherTaskRunning)
+				return;
+			setTaskChange();
 		}
 		public function setup(role : SceneRole) : void
 		{
@@ -85,11 +97,34 @@ package com.rpgGame.app.manager.task
 			testStopKey=false;
 			_stateMachine.transition(AIStateType.AI_NONE);
 			_taskTarget=tar;
+			_otherType=1;
 			changeSub();
 			TrusteeshipManager.getInstance().stopAll();
 			if(!_isTaskRunning)
 			{
 				_isTaskRunning = true;
+				_isOtherTaskRunning=false;
+				_isAutoing=true;
+				_isBroken = false;
+				TweenLite.killDelayedCallsTo(onDelayedUnbroken);
+				onUpdate(true);
+			}
+			
+			
+		}
+		public function startOtherTaskAuto(type:int,tar:int=0) : void
+		{
+			
+			testStopKey=false;
+			_stateMachine.transition(AIStateType.AI_NONE);
+			_taskTarget=tar;
+			_otherType=type;
+			//changeSub();
+			TrusteeshipManager.getInstance().stopAll();
+			if(!_isOtherTaskRunning)
+			{
+				_isOtherTaskRunning = true;
+				_isTaskRunning=false;
 				_isAutoing=true;
 				_isBroken = false;
 				TweenLite.killDelayedCallsTo(onDelayedUnbroken);
@@ -100,7 +135,7 @@ package com.rpgGame.app.manager.task
 		}
 		public function broken() : void
 		{
-			if (!_isTaskRunning)
+			if (!_isTaskRunning&&!_isOtherTaskRunning)
 				return;
 			_isBroken = true;
 			TweenLite.killDelayedCallsTo(onDelayedUnbroken);
@@ -112,7 +147,7 @@ package com.rpgGame.app.manager.task
 		}
 		public function stopSwitchAll() : void
 		{
-			_isAutoing=_isTaskRunning;
+			_isAutoing=_isTaskRunning||_isOtherTaskRunning;
 			stopAll();
 		}
 		public function stopAll() : void
@@ -126,10 +161,11 @@ package com.rpgGame.app.manager.task
 		{
 			TrusteeshipManager.getInstance().stopAll();
 			GatherAutoManager.getInstance().stopGatherAuto();
-			if (!_isTaskRunning)
+			if (!_isTaskRunning&&!_isOtherTaskRunning)
 			return;
 			_isBroken = false;
 			_isTaskRunning = false;
+			_isOtherTaskRunning= false;
 			TweenLite.killDelayedCallsTo(onDelayedUnbroken);
 			//stop();
 		}
@@ -143,16 +179,23 @@ package com.rpgGame.app.manager.task
 		private function onUpdate(force : Boolean = false) : void
 		{
 			
-			if (!_isTaskRunning)
-			{
-				techState();
+			if (!_isTaskRunning&&!_isOtherTaskRunning)
 				return;
-			}
 				
 			if (_isBroken)
 				return;
-			
-			_stateMachine.transition(AIStateType.TASK_WALK, null, force);
+			if (_isTaskRunning)
+			{
+				_stateMachine.transition(AIStateType.TASK_WALK, null, force);
+			}
+			else if(_isOtherTaskRunning)
+			{
+				_stateMachine.transition(AIStateType.TASK_OTHER_WALK, null, force);
+			}
+			else
+			{
+				techState();
+			}
 		}
 		
 		
@@ -206,13 +249,15 @@ package com.rpgGame.app.manager.task
 		
 		public function setTaskChange():void
 		{
-			if (!_isTaskRunning)
+			if (!_isTaskRunning&&!_isOtherTaskRunning)
 				return;
-			if(TaskMissionManager.getMainTaskMissionType()==TaskType.SUB_GATHER||TaskMissionManager.getMainTaskMissionType()==TaskType.SUB_USEITEM)
+			
+			var missionType:int=TaskMissionManager.getTaskMissionType(otherType);
+			if(missionType==TaskType.SUB_GATHER||missionType==TaskType.SUB_USEITEM)
 			{
 				GatherAutoManager.getInstance().setGatherChange();
 			}
-			if(TaskMissionManager.getMainTaskSubIsFinish(_taskTarget))
+			if(TaskMissionManager.getTaskSubIsFinish(otherType,_taskTarget))
 			{
 				//taskFlishArr[_taskTarget]=true;
 				changeSub();
@@ -226,14 +271,17 @@ package com.rpgGame.app.manager.task
 		
 		private function changeSub():void
 		{
-			if(!TaskMissionManager.getMainTaskSubIsFinish(_taskTarget))
+			if(TaskMissionManager.getTaskSubIsFinish(otherType,_taskTarget))
 			return;
 			_taskTarget=0;
 			var i:int,length:int;
-			length=TaskMissionManager.getMainTaskSubNum();
+			var taskData:Q_mission_base=TaskMissionManager.getTaskDataByType(otherType);
+			var information:String=taskData.q_finish_information_str;
+			var informationList:Array=information.split(";");
+			length=informationList.length;
 			for(i=0;i<length;i++)
 			{
-				if(!TaskMissionManager.getMainTaskSubIsFinish(i))
+				if(TaskMissionManager.getTaskSubIsFinish(otherType,i))
 				{
 					_taskTarget=i;
 					break;
@@ -255,6 +303,17 @@ package com.rpgGame.app.manager.task
 			}
 			testStopKey=false;
 		}
+
+		public function get otherType():int
+		{
+			return _otherType;
+		}
+
+		public function set otherType(value:int):void
+		{
+			_otherType = value;
+		}
+
 		private var testStopKey:Boolean=true;
 		
 	}

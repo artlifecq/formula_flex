@@ -219,7 +219,7 @@ package com.rpgGame.app.ui.scene.dungeon
 			var pos:Point=DungeonManager.getStagePos(id);
 			if(pos)
 			{//L.l("寻路到："+pos.x+":"+ pos.y);
-				MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, pos.x, pos.y,finishWalk, 100,null,finishWalk);
+				MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, pos.x, pos.y,finishWalk, 100);
 			}
 		}
 		private function finishWalk(data:Object):void

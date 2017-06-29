@@ -56,7 +56,7 @@ package com.rpgGame.app.state.ai
 					var post2:Array=TaskMissionManager.getPathingByType(TaskType.MAINTYPE_MAINTASK,TaskAutoManager.getInstance().taskTarget);
 					var modeid2:int=TaskUtil.getMonsterByType(TaskType.MAINTYPE_MAINTASK,TaskAutoManager.getInstance().taskTarget);
 					var obj:Object=new Object();
-					obj.subType=TaskUtil.getSubtypeByType(type);
+					obj.subType=TaskUtil.getSubtypeByType(TaskType.MAINTYPE_MAINTASK);
 					obj.modeid=modeid2;
 					TaskUtil.postTaskWalk(post2,walkStartGather,obj);
 				}

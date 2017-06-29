@@ -15,6 +15,9 @@ package com.rpgGame.netData.monster.message{
 	
 		//玩家对BOSS伤害列表
 		private var _BossDamageInfos: Vector.<BossDamageInfo> = new Vector.<BossDamageInfo>();
+		//排名类型(1世界BOSS，4极限挑战上次排名，5极限挑战当前排名)
+		private var _rankType: int;
+		
 		//总血量
 		private var _totalHp: int;
 		
@@ -35,6 +38,8 @@ package com.rpgGame.netData.monster.message{
 			for (i = 0; i < _BossDamageInfos.length; i++) {
 				writeBean(_BossDamageInfos[i]);
 			}
+			//排名类型(1世界BOSS，4极限挑战上次排名，5极限挑战当前排名)
+			writeByte(_rankType);
 			//总血量
 			writeInt(_totalHp);
 			//玩家自身排名
@@ -54,6 +59,8 @@ package com.rpgGame.netData.monster.message{
 			for (i = 0; i < BossDamageInfos_length; i++) {
 				_BossDamageInfos[i] = readBean(BossDamageInfo) as BossDamageInfo;
 			}
+			//排名类型(1世界BOSS，4极限挑战上次排名，5极限挑战当前排名)
+			_rankType = readByte();
 			//总血量
 			_totalHp = readInt();
 			//玩家自身排名
@@ -84,6 +91,21 @@ package com.rpgGame.netData.monster.message{
 		 */
 		public function set BossDamageInfos(value: Vector.<BossDamageInfo>): void{
 			this._BossDamageInfos = value;
+		}
+		
+		/**
+		 * get 排名类型(1世界BOSS，4极限挑战上次排名，5极限挑战当前排名)
+		 * @return 
+		 */
+		public function get rankType(): int{
+			return _rankType;
+		}
+		
+		/**
+		 * set 排名类型(1世界BOSS，4极限挑战上次排名，5极限挑战当前排名)
+		 */
+		public function set rankType(value: int): void{
+			this._rankType = value;
 		}
 		
 		/**

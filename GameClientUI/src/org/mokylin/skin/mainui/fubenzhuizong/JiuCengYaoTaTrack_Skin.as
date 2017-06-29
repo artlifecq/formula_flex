@@ -7,9 +7,9 @@ package org.mokylin.skin.mainui.fubenzhuizong
 	import feathers.controls.ProgressBar;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import org.mokylin.skin.component.button.ButtonSkin_info;
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
 	import org.mokylin.skin.component.button.ButtonSkin_shouhui;
-	import org.mokylin.skin.component.button.ButtonSkin_shuoming2;
 	import org.mokylin.skin.component.button.ButtonSkin_zhankai;
 	import org.mokylin.skin.component.progress.progress_jindutiao;
 
@@ -192,7 +192,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnMsg = temp;
 			temp.name = "btnMsg";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_shuoming2;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_info;
 			temp.x = 209;
 			temp.y = 1;
 			return temp;

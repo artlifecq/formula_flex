@@ -7,6 +7,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.cfg.active.BossActInfo;
+	import com.rpgGame.coreData.cfg.active.JiXianVo;
 	import com.rpgGame.coreData.clientConfig.Q_special_activities;
 	import com.rpgGame.netData.specialactivities.bean.SpecialActivityInfo;
 
@@ -17,8 +18,15 @@ package com.rpgGame.app.manager
 	 */
 	public class ActivetyDataManager
 	{
+		private static var _jixianvo:JiXianVo;
 		public function ActivetyDataManager()
 		{
+		}
+		
+		public static function get jixianVo():JiXianVo
+		{
+			if(_jixianvo==null) _jixianvo=new JiXianVo();
+			return _jixianvo;
 		}
 		
 		/**
