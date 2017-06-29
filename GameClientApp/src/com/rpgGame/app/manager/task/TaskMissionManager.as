@@ -659,7 +659,7 @@ package com.rpgGame.app.manager.task
 				var i:int;
 				for(i=0;i<reArr.length;i++)
 				{
-					if(reArr[i].l>=nowTrea)
+					if(reArr[i].l>nowTrea)
 					{
 						return reArr[i];
 					}
@@ -683,7 +683,7 @@ package com.rpgGame.app.manager.task
 				var i:int;
 				for(i=0;i<reArr.length;i++)
 				{
-					if(reArr[i].l>=nowTrea)
+					if(reArr[i].l>nowTrea)
 					{
 						return reArr[i];
 					}
@@ -727,7 +727,7 @@ package com.rpgGame.app.manager.task
 					var i:int;
 					for(i=0;i<reArr.length;i++)
 					{
-						if(reArr[i].l>=nowTrea)
+						if(reArr[i].l>nowTrea)
 						{
 							return reArr[i];
 						}
@@ -760,7 +760,7 @@ package com.rpgGame.app.manager.task
 						var i:int;
 						for(i=0;i<reArr.length;i++)
 						{
-							if(reArr[i].l==nowTrea)
+							if(reArr[i].l==(nowTrea+1))
 							{
 								return true;
 							}

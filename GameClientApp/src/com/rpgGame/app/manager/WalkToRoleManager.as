@@ -20,6 +20,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.TaskEvent;
+	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.TranportsDataManager;
 	import com.rpgGame.coreData.cfg.task.TouZhuCfgData;
 	import com.rpgGame.coreData.info.stall.StallData;
@@ -214,11 +215,17 @@ package com.rpgGame.app.manager
 			var farDistance : int = 300;
 			if (dist < farDistance * farDistance)
 			{
-				if(TaskMissionManager.isGatherItem(collectData.modelID))//如果是任务采集物就采集
+				var wideStr:String=GlobalSheetData.getSettingInfo(834).q_string_value;
+				var wideArr:Array=wideStr.split("-");
+				if(wideArr.length==2&&collectData.modelID>=int(wideArr[0])&&collectData.modelID<=int(wideArr[1]))//任务采集物id范围
 				{
-					TaskSender.sendStartGatherMessage(collectData.serverID);
+					if(TaskMissionManager.isGatherItem(collectData.modelID))//如果是任务采集物就采集
+					{
+						TaskSender.sendStartGatherMessage(collectData.serverID);
+					}
+					
 				}
-				else if (EnumMonsterId.MONTER_TOWER_FLAG==collectData.modelID) 
+				else
 				{
 					TaskSender.sendStartGatherMessage(collectData.serverID);
 				}

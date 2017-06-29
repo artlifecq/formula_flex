@@ -75,7 +75,7 @@ package com.rpgGame.app.ui.scene
 			toPoint.x=actInfo.actCfg.q_move_x;
 			toPoint.y=actInfo.actCfg.q_move_y;
 			//进入就自动挂机战斗
-			MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, toPoint.x, toPoint.y,finishWalk, 100,null,finishWalk);
+			MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, toPoint.x, toPoint.y,finishWalk, 100);
 			
 			var arr:Array;
 			if(actInfo.actCfg.q_rewards){
@@ -145,7 +145,7 @@ package com.rpgGame.app.ui.scene
 			super.onTouchTarget(target);
 			switch(target){
 				case _skin.sec_subbut1:
-					MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, toPoint.x, toPoint.y,finishWalk, 100,null,finishWalk);
+					MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, toPoint.x, toPoint.y,finishWalk, 100);
 					break;
 				case _skin.sec_subbut2:
 					SceneSender.reqOutMap();

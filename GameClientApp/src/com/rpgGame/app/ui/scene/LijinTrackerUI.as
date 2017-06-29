@@ -1,5 +1,6 @@
 package com.rpgGame.app.ui.scene
 {
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.ItemActionManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -21,9 +22,11 @@ package com.rpgGame.app.ui.scene
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LijinCfgData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
+	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_daysdown_gold;
 	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.clientConfig.Q_mission_base;
+	import com.rpgGame.coreData.clientConfig.Q_mission_section;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
@@ -103,10 +106,11 @@ package com.rpgGame.app.ui.scene
 			skinList.push(_skin.sec_subbut1);
 			
 			killButList=new Vector.<SkinnableContainer>();
-			killButList.push(_skin.killbut0);
-			killButList.push(_skin.killbut1);
-			killButList.push(_skin.killbut2);
-			
+			for(i=0;i<3;i++)
+			{
+				killButList.push(_skin["killbut"+i]);
+				TaskUtil.setTextEvet(killButList[i]);
+			}
 			var ico:IconCDFace;
 			icoBg1List=new Vector.<UIAsset>();
 			for(i=0;i<8;i++)
@@ -210,11 +214,14 @@ package com.rpgGame.app.ui.scene
 			hideGotargetInfo();
 			setCashgift(0);
 			setTipsText();
+			allFilish();;
 		}
 		override protected function onHide():void
 		{
 			super.onHide();
 			removeEvent();
+			
+			
 			var icon:IconCDFace;
 			while(ico1List.length>0){
 				icon=ico1List.pop();
@@ -340,15 +347,7 @@ package com.rpgGame.app.ui.scene
 				TimerServer.remove(updateTime2);
 			}
 		}
-		/**设置目标*/		
-		/*private function setKill():void
-		{
-		_skin.lbRenWu.htmlText="目标任务";//<font color='#5cb006'>("+10+"/"+20+")</font>
-		_skin.lbDuiHua.width=300;
-		_skin.lbDuiHua.htmlText="击杀：秦国士兵<font color='#cfc6ae'>("+5+"/"+15+")</font>";
-		_skin.lbDuiHua.width=_skin.lbDuiHua.textWidth+2;
-		_skin.btnSend.x=_skin.lbDuiHua.x+_skin.lbDuiHua.width;
-		}*/
+		
 		/**设置奖励物品*/
 		private function setReword():void
 		{
@@ -357,11 +356,12 @@ package com.rpgGame.app.ui.scene
 			var taskData:Q_mission_base=TaskMissionManager.getOtherTaskData(TaskType.LIJIN_TASK);
 			
 			if(task!=null&&taskData!=null)
-			{
+			{//L.l("任务："+task.taskModelId);
 				//setNavView(TaskType.MAINTYPE_TREASUREBOX,taskData.q_party_name,taskData.q_name,TaskMissionManager.getTreasuerTaskIsFinish(),navi3,subBut2);
 				setGotargetInfo();
 				TaskUtil.setRewordInfo(taskData.q_reword_id,ico1List,icoBg1List);
 				var reward:Object=TaskMissionManager.getTaskExtraReward(TaskType.LIJIN_TASK);
+				_skin.sec_navi0.visible=false;
 				if(reward!=null)
 				{
 					TaskUtil.setRewordInfo(reward.r,ico2List,icoBg2List);
@@ -406,7 +406,7 @@ package com.rpgGame.app.ui.scene
 		private function setExtraLabel(loopNumber:int,num:int):void
 		{
 			//_skin.sec_navi0.htmlText="【完成<font color='#ff0000'>("+num+"/"+15+")</font>环额外奖励】";
-			_skin.sec_navi0.htmlText="【当前"+loopNumber+"环 完成<font color='#ff0000'>"+num+"</font>环额外奖励】";
+			_skin.sec_navi0.htmlText="【当前"+(loopNumber+1)+"环 完成<font color='#ff0000'>"+num+"</font>环额外奖励】";
 			_skin.sec_navi0.visible=true;
 			
 		}
@@ -434,7 +434,7 @@ package com.rpgGame.app.ui.scene
 				_skin.grpshuaxin.visible=false;
 				_skin.grpto.visible=true;
 				_skin.lbTo.visible=false;
-				_skin.lbName.htmlText="盗宝小怪(4)<font color='#e8c958'>已抢夺完毕</font>";
+				_skin.lbName.htmlText="盗宝小怪 <font color='#e8c958'>(剩余"+monsterNum+")</font><font color='#e8c958'>已抢夺完毕</font>";
 			}
 			
 		}
@@ -462,6 +462,7 @@ package com.rpgGame.app.ui.scene
 					newIdList.push(monsteIdList[i]);
 				}
 			}
+			var mid:int=0;
 			var goldData:Q_daysdown_gold;
 			var minGold:Q_daysdown_gold;
 			var currDist:int=int.MAX_VALUE;
@@ -474,13 +475,14 @@ package com.rpgGame.app.ui.scene
 					dist = Point.distance(new Point(MainRoleManager.actor.x,MainRoleManager.actor.z),new Point(goldData.q_move_x,-Math.abs(goldData.q_move_y)));
 					if(dist<currDist)
 					{
+						mid=newIdList[i];
 						minGold=goldData;
 					}
 				}
 			}
 			if(minGold)
-			{
-				MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, minGold.q_move_x, -Math.abs(minGold.q_move_y),finishWalk, 100,null,finishWalk);
+			{//L.l("寻路到："+mid+"怪");
+				MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, minGold.q_move_x, -Math.abs(minGold.q_move_y),finishWalk, 100);
 			}
 			
 		}
@@ -536,29 +538,31 @@ package com.rpgGame.app.ui.scene
 		
 		/**接受任务信息初始化*/
 		private function inforMation():void
-		{L.l("任务信息初始化");
+		{//L.l("任务信息初始化");
 			setReword();
 			flishTask();
 		}
 		/**完成任务*/
 		private function finishMation(type:int):void
 		{
-			L.l("完成任务22");
+			//L.l("完成任务22");
 			TaskAutoManager.getInstance().stopAll();
 			tweeReward();
 			hideReword();
 			hideGotargetInfo();
+			
 		}
 		/**新任务*/
 		private function newMation(type:int):void
-		{L.l("新任务");
+		{//L.l("新任务");
 			setReword();
 			taskAuto();
+			allFilish();
 		}
 		
 		/**任务进度改变*/
 		private function changeMation(type:int):void
-		{L.l("任务进度改变");
+		{//L.l("任务进度改变");
 			setGotargetInfo();
 			flishTask();
 		}
@@ -573,6 +577,23 @@ package com.rpgGame.app.ui.scene
 		private function flyComplete():void
 		{
 			TaskControl.flyComplete();
+		}
+		
+		private function allFilish():void
+		{
+			_skin.sec_subbut1.isEnabled=true;
+			var task:TaskInfo=TaskMissionManager.getTaskInfoByType(TaskType.LIJIN_TASK);
+			if(!task)
+				return;
+			var taskSection:Q_mission_section=TaskMissionCfgData.getSectionByID(task.loopRewardId);
+			if(!taskSection)
+				return;
+			var taskList:Array=JSONUtil.decode(taskSection.q_mission_randomid);
+			if(taskList&&taskList.length>0&&taskList[taskList.length-1]==task.taskModelId)
+			{
+				_skin.sec_subbut1.isEnabled=false;
+			}
+			
 		}
 		
 		private function tweeReward():void

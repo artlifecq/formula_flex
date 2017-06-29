@@ -139,7 +139,7 @@ package com.rpgGame.app.manager.role
 		//跨场景寻路静态方法
 		//===========================================================================================================
 
-		public static function walkToScene(targetSceneId : int, posx : Number = -1, posy : Number = -1, onArrive : Function = null, spacing : int = 0, data : Object = null,noWalk:Function=null) : void
+		public static function walkToScene(targetSceneId : int, posx : Number = -1, posy : Number = -1, onArrive : Function = null, spacing : int = 0, data : Object = null) : void
 		{
 
 			TrusteeshipManager.getInstance().stopAll();
@@ -147,13 +147,21 @@ package com.rpgGame.app.manager.role
 			posy=-Math.abs(posy);
 			var position : Vector3D = new Vector3D(posx, posy, 0);
 			EventManager.dispatchEvent(TaskEvent.AUTO_WALK_START);
-			walkToScenePos(role, targetSceneId, position,function(ref :WalkMoveStateReference):void{
+			walkToScenePos(role, targetSceneId, position,function(_ref :WalkMoveStateReference):void{
 				if(onArrive!=null)
 				{
-					onArrive(ref.data);
+					onArrive(_ref.data);
 				}
 				EventManager.dispatchEvent(TaskEvent.AUTO_WALK_STOP);
-			}, spacing, data,noWalk);
+			}, spacing, data,function(_data : Object):void{
+				if(onArrive!=null)
+				{
+					onArrive(_data);
+				}
+				EventManager.dispatchEvent(TaskEvent.AUTO_WALK_STOP);
+			});
+			
+			
 		}
 
 		/**

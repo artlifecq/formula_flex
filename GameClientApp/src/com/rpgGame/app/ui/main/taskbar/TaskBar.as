@@ -153,7 +153,9 @@ package com.rpgGame.app.ui.main.taskbar
 		override protected function onShow() : void
 		{
 			super.onShow();
+			inforMation();
 			addEvent();
+			
 		}
 		
 		

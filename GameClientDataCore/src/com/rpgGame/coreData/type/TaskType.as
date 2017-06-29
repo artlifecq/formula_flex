@@ -29,7 +29,9 @@ package com.rpgGame.coreData.type
 		public static var SUB_USEITEM:int = 5;
 		/**6副本*/
 		public static var SUB_QUIT_ZONE:int = 6;
-
+		
+		/**10其它挂机*/
+		public static var SUB_GUAJI:int = 10;
 		
 		
 		

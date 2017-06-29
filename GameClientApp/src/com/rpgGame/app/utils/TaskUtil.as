@@ -479,7 +479,7 @@ package com.rpgGame.app.utils
 			if (monsterData)
 			{
 			}
-				MainRoleSearchPathManager.walkToScene(monsterData.q_mapid, monsterData.q_center_x, monsterData.q_center_y,onArrive, 100,null,onArrive);
+				MainRoleSearchPathManager.walkToScene(monsterData.q_mapid, monsterData.q_center_x, monsterData.q_center_y,onArrive, 100);
 		}
 		
 		
@@ -494,7 +494,7 @@ package com.rpgGame.app.utils
 			var monsterData : Q_scene_monster_area = MonsterDataManager.getMonsterByModelId(modeId,SceneSwitchManager.currentMapId);
 			if (monsterData)
 			{
-				MainRoleSearchPathManager.walkToScene(monsterData.q_mapid, monsterData.q_center_x, monsterData.q_center_y,onArrive, 100,null,onArrive);
+				MainRoleSearchPathManager.walkToScene(monsterData.q_mapid, monsterData.q_center_x, monsterData.q_center_y,onArrive, 100);
 			}
 		}
 		/**
@@ -507,7 +507,7 @@ package com.rpgGame.app.utils
 			
 			if (post!=null&&post.length==3)
 			{
-				MainRoleSearchPathManager.walkToScene(post[0], post[1], post[2],onArrive, 100,data,onArrive);
+				MainRoleSearchPathManager.walkToScene(post[0], post[1], post[2],onArrive, 100,data);
 			}
 		}
 		/**
@@ -894,17 +894,30 @@ package com.rpgGame.app.utils
 		/**设置任务目标内容*/
 		public static  function setGotargetInfo(type:int,describe:String,finisstr:String,subList:Vector.<TaskSubRateInfo>,txtButList:Vector.<SkinnableContainer>):void
 		{
+			var i:int,j:int,length:int;
 			var text:String="";
 			if(type==TaskType.SUB_CONVERSATION)
 			{
 				text=TaskMissionCfgData.getTaskDescribe(type,describe,TaskMissionManager.getMainTaskNpcModeId());
 				setGotargetLabelText(type,txtButList[0],text);
 			}
+			else if(type==TaskType.SUB_GUAJI)
+			{
+				//text=TaskMissionCfgData.getTaskDescribe(type,describe,TaskMissionManager.getMainTaskNpcModeId());
+				var textArr:Array=describe.split(";");
+				for(i=0;i<textArr.length;i++)
+				{
+					if(textArr[i]&&textArr[i]!="")
+					{
+						setGotargetLabelText(type,txtButList[i],textArr[i]);
+					}
+				}
+			}
 			else
 			{
 				var finiStr:Array;
 				var informationList:Array=finisstr.split(";");
-				var i:int,j:int,length:int;
+				
 				length=informationList.length;
 				for(i=0;i<length;i++)
 				{
@@ -961,7 +974,7 @@ package com.rpgGame.app.utils
 				but.width=rItme.labelDisplay.textWidth+25;
 				but.visible=true;
 				rItme.btn_send.visible=false;
-				if(type==1||type==2||type==3||type==4)
+				if(type==1||type==2||type==3||type==4||type==10)
 				{
 					rItme.btn_send.visible=true;
 				}
