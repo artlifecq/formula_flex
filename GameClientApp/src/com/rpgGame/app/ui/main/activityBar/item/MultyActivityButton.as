@@ -23,7 +23,8 @@ package com.rpgGame.app.ui.main.activityBar.item
 		{
 			EventManager.dispatchEvent(DungeonEvent.ZONE_TEAM_TIME,second);
 			var closeTxt:String = "<font color='#4efd6f'>副本匹配中\n" + TimeUtil.format3TimeType(second) + "</font>";
-			ui.txtTitle.htmlText = closeTxt;
+//			ui.txtTitle.htmlText = closeTxt;
+			setTextLeable(closeTxt);
 			return closeTxt;
 			
 		}

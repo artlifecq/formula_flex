@@ -2,10 +2,12 @@ package org.mokylin.skin.mainui.activityBar
 {
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
-	import feathers.controls.Label;
+	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
+	import feathers.controls.UIAsset;
+	import org.mokylin.skin.mainui.activityBar.ActivityItem;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonRacing;
-
+	
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
@@ -17,10 +19,12 @@ package org.mokylin.skin.mainui.activityBar
 		//                                定义成员变量
 		//==========================================================================
 		public var btnBar:feathers.controls.Button;
-
-		public var txtTitle:feathers.controls.Label;
-
-
+		
+		public var skinItem:feathers.controls.SkinnableContainer;
+		
+		public var uiJinXing:feathers.controls.UIAsset;
+		
+		
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
@@ -29,16 +33,16 @@ package org.mokylin.skin.mainui.activityBar
 			super();
 			
 			this.currentState = "normal";
-			this.height = 86;
+			this.height = 101;
 			this.width = 86;
-			this.elementsContent = [btnBar_i(),txtTitle_i()];
+			this.elementsContent = [btnBar_i(),uiJinXing_i(),skinItem_i()];
 			
 			states = {
 			};
 			skinNames={};
 		}
-
-
+		
+		
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
@@ -54,24 +58,31 @@ package org.mokylin.skin.mainui.activityBar
 			temp.y = 5;
 			return temp;
 		}
-
-		private function txtTitle_i():feathers.controls.Label
+		
+		private function skinItem_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			txtTitle = temp;
-			temp.name = "txtTitle";
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			skinItem = temp;
+			temp.name = "skinItem";
 			temp.height = 20;
-			temp.touchable = false;
-			temp.touchGroup = true;
-			temp.text = "30:30后开始";
-			temp.textAlign = "center";
-			temp.color = 0x4EFD6F;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			var skin:StateSkin = new org.mokylin.skin.mainui.activityBar.ActivityItem()
+			temp.skin = skin
 			temp.width = 113;
 			temp.x = -13;
 			temp.y = 67;
 			return temp;
 		}
-
+		
+		private function uiJinXing_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiJinXing = temp;
+			temp.name = "uiJinXing";
+			temp.styleName = "ui/common/jinxingzhong.png";
+			temp.x = 51;
+			temp.y = -17;
+			return temp;
+		}
+		
 	}
 }

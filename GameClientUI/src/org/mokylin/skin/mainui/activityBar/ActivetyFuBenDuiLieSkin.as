@@ -3,7 +3,9 @@ package org.mokylin.skin.mainui.activityBar
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
 	import feathers.controls.Label;
+	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
+	import org.mokylin.skin.mainui.activityBar.ActiveLabelDg;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonFubenduilie;
 
 	/**
@@ -18,6 +20,10 @@ package org.mokylin.skin.mainui.activityBar
 		//==========================================================================
 		public var btnBar:feathers.controls.Button;
 
+		public var skinBg1:feathers.controls.SkinnableContainer;
+
+		public var skinBg2:feathers.controls.SkinnableContainer;
+
 		public var txtTitle:feathers.controls.Label;
 
 
@@ -31,7 +37,7 @@ package org.mokylin.skin.mainui.activityBar
 			this.currentState = "normal";
 			this.height = 107;
 			this.width = 82;
-			this.elementsContent = [btnBar_i(),txtTitle_i()];
+			this.elementsContent = [skinBg1_i(),skinBg2_i(),btnBar_i(),txtTitle_i()];
 			
 			states = {
 			};
@@ -53,6 +59,34 @@ package org.mokylin.skin.mainui.activityBar
 			return temp;
 		}
 
+		private function skinBg1_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			skinBg1 = temp;
+			temp.name = "skinBg1";
+			temp.height = 16;
+			var skin:StateSkin = new org.mokylin.skin.mainui.activityBar.ActiveLabelDg()
+			temp.skin = skin
+			temp.width = 80;
+			temp.x = 1;
+			temp.y = 68;
+			return temp;
+		}
+
+		private function skinBg2_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			skinBg2 = temp;
+			temp.name = "skinBg2";
+			temp.height = 16;
+			var skin:StateSkin = new org.mokylin.skin.mainui.activityBar.ActiveLabelDg()
+			temp.skin = skin
+			temp.width = 80;
+			temp.x = 1;
+			temp.y = 85;
+			return temp;
+		}
+
 		private function txtTitle_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -64,7 +98,7 @@ package org.mokylin.skin.mainui.activityBar
 			temp.leading = 3;
 			temp.text = "副本列队中00：30";
 			temp.textAlign = "center";
-			temp.color = 0x41FF65;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 82;
 			temp.x = 0;

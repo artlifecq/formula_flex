@@ -136,7 +136,7 @@ package com.rpgGame.app.state.role
 				role.faceToGround(pos.x,pos.y);
 				if(noWalk!=null)
 				{
-					noWalk(data);
+					noWalk(role);
 				}
 				
 				return false;

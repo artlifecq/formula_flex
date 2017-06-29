@@ -320,6 +320,10 @@ package com.rpgGame.appModule.role
 		{
 			if(storagePanel.parent){
 				var item:ClientItemInfo = grid.faceInfo as ClientItemInfo;
+				if (!item) 
+				{
+					return;
+				}
 				ItemSender.bagToStore(item.itemInfo.itemId,-1);
 				return;	
 			}

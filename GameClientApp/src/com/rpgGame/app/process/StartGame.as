@@ -52,6 +52,8 @@ package com.rpgGame.app.process
     import com.rpgGame.app.ui.tips.TeamTipExt;
     import com.rpgGame.app.ui.tips.TxtPropChangeTip;
     import com.rpgGame.app.ui.tips.TxtTip;
+    import com.rpgGame.app.ui.tips.VipMoTipExt;
+    import com.rpgGame.app.ui.tips.VipNoneTipExt;
     import com.rpgGame.app.ui.tips.WangChengRewardTips;
     import com.rpgGame.app.ui.tips.cheats.CheatsIntraductTipExt;
     import com.rpgGame.app.ui.tips.cheats.CheatsNodePointTip;
@@ -237,6 +239,8 @@ package com.rpgGame.app.process
 			TipManager.registerTipsParserClass(TipType.ACTIVITY_JIXIAN_PANEL_TIP,JiXianPanelTip);
 			TipManager.registerTipsParserClass(TipType.ACTIVITY_JIXIAN_BUFF_TIP,JiXianBuffTip);
 			TipManager.registerTipsParserClass(TipType.TWOER_TIP,NineTowerTipExt);
+			TipManager.registerTipsParserClass(TipType.VIP_LEVEL_TIP,VipMoTipExt);
+			TipManager.registerTipsParserClass(TipType.VIP_NONE_TIP,VipNoneTipExt);
 		}
 
 		private function onSwitchCmp() : void

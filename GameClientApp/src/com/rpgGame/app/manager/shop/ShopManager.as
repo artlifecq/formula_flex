@@ -12,6 +12,7 @@ package  com.rpgGame.app.manager.shop
 	import com.rpgGame.core.events.ShopEvent;
 	import com.rpgGame.coreData.SpriteStat;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
+	import com.rpgGame.coreData.enum.EnumShopType;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.shop.ShopItemVo;
 	import com.rpgGame.coreData.info.shop.ShopVo;
@@ -116,11 +117,11 @@ package  com.rpgGame.app.manager.shop
 			}
 			return BackPackManager.instance.getItemCount(type);
 		}
-		public function ReqBuyItem(shopvo:ShopItemInfo, num:int, _discountItemid:long = null):void
+		public function ReqBuyItem(shopvo:ShopItemInfo, num:int, _discountItemid:long = null,autoUse:int=0):void
 		{
 			if (shopvo == null)
 				return;
-			ShopSender.ReqBuyItem(shopvo,num,_discountItemid);
+			ShopSender.ReqBuyItem(shopvo,num,_discountItemid,autoUse);
 		}
 		
 		/**
@@ -209,8 +210,13 @@ package  com.rpgGame.app.manager.shop
 			var eve:ShopEvent=new ShopEvent(type,data);
 			this.dispatchEvent(eve);
 		}
-		
-		public function buyShopItem(vo:ShopItemVo,buyNum:int):void
+		/**
+		 *购买商品会检查货币数量够不够 
+		 * @param vo
+		 * @param buyNum
+		 * 
+		 */		
+		public function buyShopItem(vo:ShopItemVo,buyNum:int,autoUse:int=0):void
 		{
 			if (vo) 
 			{
@@ -242,7 +248,7 @@ package  com.rpgGame.app.manager.shop
 						needGold=allNeed-have;
 						if (Mgr.shopMgr.getCurrency(CharAttributeType.RES_GOLD)>=needGold) 
 						{
-							GameAlertYellowBtnExt.show("礼金不足，是否再使用"+(needGold)+"元宝支付？",Mgr.shopMgr.ReqBuyItem,[vo.data,buyNum]);
+							GameAlertYellowBtnExt.show("礼金不足，是否再使用"+(needGold)+"元宝支付？",Mgr.shopMgr.ReqBuyItem,[vo.data,buyNum,null,autoUse]);
 							return;
 						}
 					}
@@ -251,16 +257,16 @@ package  com.rpgGame.app.manager.shop
 						needGold=allNeed-have;
 						if (Mgr.shopMgr.getCurrency(CharAttributeType.RES_MONEY)>=needGold) 
 						{
-							GameAlertYellowBtnExt.show("绑定银两不足，是否再使用"+(needGold)+"银两支付？",Mgr.shopMgr.ReqBuyItem,[vo.data,buyNum]);
+							GameAlertYellowBtnExt.show("绑定银两不足，是否再使用"+(needGold)+"银两支付？",Mgr.shopMgr.ReqBuyItem,[vo.data,buyNum,null,autoUse]);
 							return;
 						}
 					}
-					Mgr.shopMgr.ReqBuyItem(vo.data,buyNum);
+					Mgr.shopMgr.ReqBuyItem(vo.data,buyNum,null,autoUse);
 					//					NoticeManager.mouseFollowNotify(ItemConfig.getItemName(priceType)+"不足");
 				}
 				else
 				{
-					Mgr.shopMgr.ReqBuyItem(vo.data,buyNum);
+					Mgr.shopMgr.ReqBuyItem(vo.data,buyNum,null,autoUse);
 				}
 			}
 		}
@@ -281,6 +287,15 @@ package  com.rpgGame.app.manager.shop
 			{
 				sellItemCall(item);
 			}
+		}
+		public function getMallShopItemVo(shopItemId:int):ShopItemVo
+		{
+			var shop:ShopVo=getShopVo(EnumShopType.SHOP_MALL);
+			if (shop) 
+			{
+				return shop.findShopItemVo(shopItemId);
+			}
+			return null;
 		}
 		public function getCheapestShopItemVo(shop:int):ShopItemVo
 		{

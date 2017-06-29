@@ -102,5 +102,10 @@ package com.rpgGame.coreData.type
 		public static const ACTIVITY_JIXIAN_BUFF_TIP : int = rEnum.next;
 		/** 巅峰1v1rank*/
 		public static const TWOER_TIP : int = rEnum.next;
+		
+		/** vip*/
+		public static const VIP_NONE_TIP : int = rEnum.next;
+		/** vip*/
+		public static const VIP_LEVEL_TIP : int = rEnum.next;
 	}
 }

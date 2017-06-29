@@ -26,6 +26,8 @@ package org.mokylin.skin.app.shejiao.zudui
 			super();
 			
 			this.currentState = "normal";
+			this.height = 601;
+			this.width = 956;
 			this.elementsContent = [tab_duiwu_i(),__ZuiDuiSkin_UIAsset2_i()];
 			
 			states = {
@@ -55,8 +57,8 @@ package org.mokylin.skin.app.shejiao.zudui
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/shejiao/zudui/bg2.jpg";
-			temp.x = 19;
-			temp.y = 449;
+			temp.x = 23;
+			temp.y = 462;
 			return temp;
 		}
 
@@ -69,8 +71,8 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_pack;
-			temp.x = 29;
-			temp.y = 41;
+			temp.x = 33;
+			temp.y = 54;
 			temp.layout = __ZuiDuiSkin_HorizontalLayout1_i();
 			temp.dataProvider = __ZuiDuiSkin_ArrayCollection1_i();
 			return temp;

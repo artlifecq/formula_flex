@@ -1,7 +1,6 @@
 package com.rpgGame.app.sender
 {
 	import com.rpgGame.app.manager.guild.GuildManager;
-	import com.rpgGame.coreData.clientConfig.Q_guildskill;
 	import com.rpgGame.netData.guild.message.ReqGuildApplyListMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildApplyOperationMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildAppointMessage;
@@ -24,6 +23,13 @@ package com.rpgGame.app.sender
 	import com.rpgGame.netData.guild.message.ReqGuildSetAutoAcceptMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildSkillInfoMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildSkillLevelupMessage;
+	import com.rpgGame.netData.guildWar.message.ReqGuildWarApplyMessage;
+	import com.rpgGame.netData.guildWar.message.ReqGuildWarCityApplyInfoMessage;
+	import com.rpgGame.netData.guildWar.message.ReqGuildWarCityInfoMessage;
+	import com.rpgGame.netData.guildWar.message.ReqGuildWarEnterApplyMessage;
+	import com.rpgGame.netData.guildWar.message.ReqGuildWarEnterMessage;
+	import com.rpgGame.netData.guildWar.message.ReqGuildWarGiveDailyGiftMessage;
+	import com.rpgGame.netData.guildWar.message.ReqGuildWarLeaveApplyMessage;
 	
 	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.data.long;
@@ -199,7 +205,7 @@ package com.rpgGame.app.sender
 		}
 		
 		/** 获取帮派简介信息*/
-		public static function reqGuildBriefnessInfo(guildId:long,opaque:int):void
+		public static function reqGuildBriefnessInfo(guildId:long,opaque:int=0):void
 		{
 			var msg:ReqGuildBriefnessInfoMessage = new ReqGuildBriefnessInfoMessage();
 			msg.guildId = guildId;
@@ -226,6 +232,93 @@ package com.rpgGame.app.sender
 		{
 			var msg:ReqGuildModifyNoteMessage = new ReqGuildModifyNoteMessage();
 			msg.note = note;
+			sendMsg(msg);
+		}
+		
+		/**
+		 *请求帮会战城池信息 
+		 * @param opaque
+		 * 
+		 */
+		public static function reqGuildWarCityInfo(opaque:int=0):void
+		{
+			var msg:ReqGuildWarCityInfoMessage=new ReqGuildWarCityInfoMessage();
+			msg.opaque=opaque;
+			sendMsg(msg);
+		}
+		
+		/**
+		 *告知后台进入王城争霸界面 
+		 * @param opaque
+		 * 
+		 */
+		public static function reqEnterGuildWarPanel(opaque:int=0):void
+		{
+			var msg:ReqGuildWarEnterApplyMessage=new ReqGuildWarEnterApplyMessage();
+			msg.opaque=opaque;
+			sendMsg(msg);
+		}
+		
+		/**
+		 *请求帮会战报名 
+		 * @param city
+		 * @param opaque
+		 * 
+		 */
+		public static function reqGuildWarApply(city:int,opaque:int=0):void
+		{
+			var msg:ReqGuildWarApplyMessage=new ReqGuildWarApplyMessage();
+			msg.cityId=city;
+			msg.opaque=opaque;
+			sendMsg(msg);
+		}
+		
+		/**
+		 * 请求王城报名信息 
+		 * @param type 王城类型,1:卫城,2:王城
+		 * @param opaque
+		 * 
+		 */
+		public static function reqGuildWarCityApplyInfo(type:int,opaque:int=0):void
+		{
+			var msg:ReqGuildWarCityApplyInfoMessage=new ReqGuildWarCityApplyInfoMessage();
+			msg.type=type;
+			msg.opaque=opaque;
+			sendMsg(msg);
+		}
+		
+		/**
+		 *告知后台离开报名界面 
+		 * 
+		 */
+		public static function reqGuildWarLeaveApplyPanel(opaque:int=0):void
+		{
+			var msg:ReqGuildWarLeaveApplyMessage=new ReqGuildWarLeaveApplyMessage();
+			msg.opaque=opaque;
+			sendMsg(msg);
+		}
+		
+		/**
+		 *获取帮会战每日奖励 
+		 * @param opaque
+		 * 
+		 */
+		public static function reqGuildWarGiveDailyGift(opaque:int=0):void
+		{
+			var msg:ReqGuildWarGiveDailyGiftMessage=new ReqGuildWarGiveDailyGiftMessage();
+			msg.opaque=opaque;
+			sendMsg(msg);
+		}
+		
+		/**
+		 *请求进入帮会战 
+		 * @param opaque
+		 * 
+		 */
+		public static function reqGuildWarEnter(opaque:int=0):void
+		{
+			var msg:ReqGuildWarEnterMessage=new ReqGuildWarEnterMessage();
+			msg.opaque=opaque;
 			sendMsg(msg);
 		}
 	}

@@ -74,6 +74,11 @@ package com.rpgGame.coreData.type.item
 		 */
 		public static const EQUIP_WEAPON:String="equip/10wuqi";
 		
+		/**
+		 *vip
+		 */
+		public static const VIP:String="equip/10wuqi";
+		
 		/** 格子光圈品质 44*44 **/
 		public static const GRID_SIZE_40 : String = "quality/40_4";
 		/** 格子光圈品质 40*40 **/

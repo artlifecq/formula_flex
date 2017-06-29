@@ -51,5 +51,10 @@ package com.rpgGame.coreData.info.map
 		 * 天降礼金
 		 */
 		public static const MAP_TYPE_LIJIN:int = rEnum.next;//10
+		/**
+		 * 秦陵秘宝
+		 */
+		public static const MAP_TYPE_MIBAO:int = rEnum.next;//11
+
 	}
 }

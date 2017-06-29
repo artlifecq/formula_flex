@@ -132,6 +132,8 @@ package com.rpgGame.app.cmdlistener
 				EventManager.dispatchEvent(ActivityEvent.UPDATE_ACTIVITY,list[i].activityId);
 			}
 			ActivetyDataManager.sortAllDatas();
+			
+			ActivetyDataManager.checkOpenAct();
 		}
 		
 		private function onSCSpecialActivityCloseMessage(msg:SCSpecialActivityCloseMessage):void
@@ -139,8 +141,8 @@ package com.rpgGame.app.cmdlistener
 			ActivetyDataManager.setActState(msg.activityId,ActivityJoinStateEnum.CLOSE);
 			EventManager.dispatchEvent(ActivityEvent.UPDATE_ACTIVITY,msg.activityId);
 			var info:ActivetyInfo=ActivetyCfgData.getActInfoById(msg.activityId);
-			if(info.actCfg.q_panel_id!=0){//有独立的功能icon
-				MainButtonManager.closeActivityButton(info.actCfg.q_panel_id);
+			if(info.actCfg.q_icon_id!=0){//有独立的功能icon
+				MainButtonManager.closeActivityButton(info.actCfg.q_icon_id);
 			}
 		}
 		
@@ -172,8 +174,8 @@ package com.rpgGame.app.cmdlistener
 		}
 		/**抢夺怪物*/
 		private function onSCCashGiftClientMessage(msg:SCCashGiftClientMessage):void
-		{//L.l("抢夺怪物:"+msg.monsterNum+"+"+msg.refresh);
-			EventManager.dispatchEvent(ActivityEvent.LIJIN_MONSTER_CHANGE,msg.monsterNum,msg.refresh);
+		{//L.l("抢夺怪物:"+msg.monsterNum+"+"+msg.refresh+"死亡："+msg.dieList.toString());
+			EventManager.dispatchEvent(ActivityEvent.LIJIN_MONSTER_CHANGE,msg.monsterNum,msg.refresh,msg.dieList);
 		}
 		/**剩余时间*/
 		private function onSCActivityTimeMessage(msg:SCActivityTimeMessage):void
@@ -183,7 +185,18 @@ package com.rpgGame.app.cmdlistener
 		/**刷新时间*/
 		private function onSCRemainRefreshTimeMessage(msg:SCRemainRefreshTimeMessage):void
 		{//L.l("刷新时间:"+msg.remainRefreshTime);
-			AppManager.showApp(AppConstant.ACTIVETY_LIJIN_TIMER,msg.remainRefreshTime);
+			if(msg.remainRefreshTime>0)
+			{
+				AppManager.showApp(AppConstant.ACTIVETY_LIJIN_TIMER,msg.remainRefreshTime);
+			}
+			else
+			{
+				AppManager.hideApp(AppConstant.ACTIVETY_LIJIN_TIMER);
+				if (!AppManager.isAppInScene(AppConstant.ACTIVETY_LIJIN_REFRESH))
+				{
+					AppManager.showApp(AppConstant.ACTIVETY_LIJIN_REFRESH);
+				}
+			}
 		}
 		/**奖励信息*/
 		private function onSCRewardInfoMessage(msg:SCRewardInfoMessage):void

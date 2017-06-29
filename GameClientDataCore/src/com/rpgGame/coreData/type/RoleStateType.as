@@ -12,15 +12,15 @@ package com.rpgGame.coreData.type
 	public class RoleStateType
 	{
 		public static const NONE : int = 0;
-		public static const ACTION_IDLE : int = rEnum.ENUM_START(1);//待机状态
-		public static const ACTION_SHOW : int = rEnum.next;//展示状态
-		public static const ACTION_WALK : int = rEnum.next; //走路状态
-		public static const ACTION_RUN : int = rEnum.next;//跑步状态
-		public static const ACTION_JUMP : int = rEnum.next;//跳跃状态
-		public static const ACTION_DEATH : int = rEnum.next;//死亡状态
-		public static const ACTION_DEAD_LAUNCH : int = rEnum.next;//
-		public static const ACTION_HIT : int = rEnum.next;//受击状态
-		public static const ACTION_PREWAR : int = rEnum.next;//战斗预备状态
+		public static const ACTION_IDLE : int = rEnum.ENUM_START(1);//待机状态1
+		public static const ACTION_SHOW : int = rEnum.next;//展示状态2
+		public static const ACTION_WALK : int = rEnum.next; //走路状态3
+		public static const ACTION_RUN : int = rEnum.next;//跑步状态4
+		public static const ACTION_JUMP : int = rEnum.next;//跳跃状态5
+		public static const ACTION_DEATH : int = rEnum.next;//死亡状态6
+		public static const ACTION_DEAD_LAUNCH : int = rEnum.next;//7
+		public static const ACTION_HIT : int = rEnum.next;//受击状态8
+		public static const ACTION_PREWAR : int = rEnum.next;//战斗预备状态9
 		public static const ACTION_ATTACK : int = rEnum.next;//攻击状态
 		public static const ACTION_ATTACK_UI : int = rEnum.next;//攻击状态,攻击状态
 		public static const ACTION_BLINK : int = rEnum.next;//闪烁状态
@@ -79,5 +79,6 @@ package com.rpgGame.coreData.type
 		public static const CONTROL_TOWER_FLAG:int = rEnum.next;// 预警状态
 		public static const CONTROL_MASTERY_MAN:int = rEnum.next;// 神秘人
 		public static const CONTROL_CHECK_AUTO_FIGHT:int = rEnum.next;// 自动战斗
+		public static const CONTROL_VIP:int = rEnum.next;// 自动战斗
 	}
 }

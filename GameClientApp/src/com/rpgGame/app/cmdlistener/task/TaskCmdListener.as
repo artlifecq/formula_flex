@@ -71,7 +71,7 @@ package com.rpgGame.app.cmdlistener.task
 					{
 						if (!AppManager.isAppInScene(AppConstant.TASK_FLY_PANEL))
 						{
-							AppManager.showApp(AppConstant.TASK_FLY_PANEL,taskData.q_pathing);
+							AppManager.showApp(AppConstant.TASK_FLY_PANEL,msg.taskInfo.taskModelId);
 						}
 					}
 				}

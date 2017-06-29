@@ -98,6 +98,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_check_relation_auto_lock:int;
 		 /**  寻怪距离(像素)0表示全屏 */
 		public var q_search_range:int;
+		 /**  快捷栏位置索引（仅人物技能用） */
+		public var q_seat:int;
 		 /**  显示所需人物等级 */
 		public var q_show_needgrade:int;
 		 /**  战斗力加成 */

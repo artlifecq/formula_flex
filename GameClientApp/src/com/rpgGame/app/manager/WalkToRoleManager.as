@@ -20,6 +20,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.TaskEvent;
+	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.TranportsDataManager;
 	import com.rpgGame.coreData.cfg.task.TouZhuCfgData;
 	import com.rpgGame.coreData.info.stall.StallData;
@@ -214,16 +215,21 @@ package com.rpgGame.app.manager
 			var farDistance : int = 300;
 			if (dist < farDistance * farDistance)
 			{
-				//				if(TaskMissionManager.isGatherItem(collectData.modelID))//如果是任务采集物就采集
-				//				{
-				//					TaskSender.sendStartGatherMessage(collectData.serverID);
-				//				}
-				//				else if (EnumMonsterId.MONTER_TOWER_FLAG==collectData.modelID) 
-				//				{
-				TaskSender.sendStartGatherMessage(collectData.serverID);
-				//				}
-				//var taskId : int = TaskManager.getTaskIdHasCollectObj(collectData.collectType);
-				///TaskManager.collectItemTask(taskId, collectData.id, collectData.collectType, collectData.sceneID, collectData.x, collectData.y);
+				var wideStr:String=GlobalSheetData.getSettingInfo(834).q_string_value;
+				var wideArr:Array=wideStr.split("-");
+				if(wideArr.length==2&&collectData.modelID>=int(wideArr[0])&&collectData.modelID<=int(wideArr[1]))//任务采集物id范围
+				{
+					if(TaskMissionManager.isGatherItem(collectData.modelID))//如果是任务采集物就采集
+					{
+						TaskSender.sendStartGatherMessage(collectData.serverID);
+					}
+					
+				}
+				else
+				{
+					TaskSender.sendStartGatherMessage(collectData.serverID);
+				}
+				
 			}
 		}
 		
@@ -256,6 +262,7 @@ package com.rpgGame.app.manager
 		{
 			if (role == null || !role.usable)
 				return;
+			TrusteeshipManager.getInstance().autoPickCtrl.isArrivePk=true;
 			var actor : SceneRole = MainRoleManager.actor;
 			var dist : int = MathUtil.getDistanceNoSqrt(actor.x, actor.z, role.x, role.z);
 			var dropGoodsData : SceneDropGoodsData = role.data as SceneDropGoodsData;

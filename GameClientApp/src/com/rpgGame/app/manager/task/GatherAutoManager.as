@@ -32,7 +32,7 @@ package com.rpgGame.app.manager.task
 		private var _isBroken : Boolean;
 		private var _stateMachine : AIStateMachine;
 		private var _gatherTarget:int=0;
-		
+		private var _otherType:int;
 		public function GatherAutoManager()
 		{
 			_gTimer = new GameTimer("GatherAutoManager", 500, 0, onUpdate);
@@ -45,9 +45,10 @@ package com.rpgGame.app.manager.task
 		}
 		
 		
-		public function startGatherAuto(tar:int=0) : void
+		public function startGatherAuto(tar:int=0,taskType:int=1) : void
 		{
 			_gatherTarget=tar;
+			_otherType=taskType;
 			_stateMachine.transition(AIStateType.AI_NONE);
 			//changeSub();
 			//TrusteeshipManager.getInstance().stopAutoFight();
@@ -128,18 +129,18 @@ package com.rpgGame.app.manager.task
 			if (!_isGatherRunning)
 				return;
 			
-			
-			if(TaskMissionManager.getMainTaskMissionType()==TaskType.SUB_GATHER)
+			var missionType:int=TaskMissionManager.getTaskMissionType(otherType);
+			if(missionType==TaskType.SUB_GATHER)
 			{
-				if(!TaskMissionManager.getMainTaskIsFinish())
+				if(!TaskMissionManager.getTaskIsFinishByType(otherType))
 				{
 					_stateMachine.transition(AIStateType.AI_NONE);
 				}
 				
 			}
-			else if(TaskMissionManager.getMainTaskMissionType()==TaskType.SUB_USEITEM)
+			else if(missionType==TaskType.SUB_USEITEM)
 			{
-				if(TaskMissionManager.getMainTaskIsFinish())
+				if(TaskMissionManager.getTaskIsFinishByType(otherType))
 				{
 					TaskControl.hideBagPanel();
 				}
@@ -155,6 +156,17 @@ package com.rpgGame.app.manager.task
 		{
 			
 		}
+
+		public function get otherType():int
+		{
+			return _otherType;
+		}
+
+		public function set otherType(value:int):void
+		{
+			_otherType = value;
+		}
+
 	}
 }
 

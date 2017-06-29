@@ -131,7 +131,8 @@ package com.rpgGame.app.manager.mount
 			if(role)
 			{
 				(role.data as HeroData).zhanqiLv=msg.warFlagModelid;
-				AvatarManager.callEquipmentChange(role);
+//				AvatarManager.callEquipmentChange(role);
+				AvatarManager.updateAvatar(role,false);
 			}
 		}
 		
@@ -203,7 +204,8 @@ package com.rpgGame.app.manager.mount
 		public function updateZhanQiShow():void
 		{	
 			var role:SceneRole=MainRoleManager.actor;
-			AvatarManager.callEquipmentChange(role);
+//			AvatarManager.callEquipmentChange(role);
+			AvatarManager.updateAvatar(role,false);
 		}
 		
 		private static var _instance:ZhanQiManager;
