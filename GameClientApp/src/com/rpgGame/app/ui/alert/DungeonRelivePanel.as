@@ -44,7 +44,7 @@ package com.rpgGame.app.ui.alert
 		
 		override protected function onHide():void
 		{
-			UIModel.instence.hideModel(_ins);
+//			UIModel.instence.hideModel(_ins);
 			TimerServer.remove(updateReliveLabel);
 		}
 		
@@ -58,7 +58,7 @@ package com.rpgGame.app.ui.alert
 			Stage3DLayerManager.starlingLayer.getLayer("alert").addChild(_ins);
 			_ins.showCompleteFun = showComplete;
 			_ins.starttime();
-			UIModel.instence.showModel(_ins);
+//			UIModel.instence.showModel(_ins);
 		}
 		
 		override protected function onStageResize(sw:int, sh:int):void

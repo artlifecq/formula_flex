@@ -236,9 +236,9 @@ package com.game.engine2D.controller
 				_pan.y = stage.mouseY;
 				_ispanning = true;
 			}
-			if(distance != 1)
+			if(distance != 1.15)
 			{
-				distance = 1;
+				distance = 1.15;
 				sceneCamera.updateScale(distance);
 			}
 		}

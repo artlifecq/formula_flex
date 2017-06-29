@@ -8,6 +8,9 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.coreData.cfg.GuildCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_guild;
 	import com.rpgGame.netData.guild.bean.GuildBriefnessInfo;
+	import com.rpgGame.netData.guild.bean.GuildListInfo;
+	
+	import feathers.utils.filter.GrayFilter;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.data.long;
@@ -28,7 +31,7 @@ package com.rpgGame.appModule.guild
 			return _instance;
 		}
 		private var _skin:TanKuang_JianJie;
-		private var _guildId:long;
+		private var _guildId:GuildListInfo;
 		private var _levelInfo:Q_guild;
 		public function GuildPorpInfoPanel():void
 		{
@@ -42,14 +45,14 @@ package com.rpgGame.appModule.guild
 			this.x = (stage.stageWidth- this._skin.width)/2;
 			this.y = (stage.stageHeight - this._skin.height)/2;
 		}
-		public function show(guild:long):void
+		public function show(guild:GuildListInfo):void
 		{
 			_guildId = guild;
 			if(this.parent==null)
 			{
 				StarlingLayerManager.topUILayer.addChild(this);
 			}
-			GuildSender.reqGuildBriefnessInfo(_guildId,0);
+			GuildSender.reqGuildBriefnessInfo(_guildId.guildId,0);
 		}
 		
 		private function refeashView(info:GuildBriefnessInfo):void
@@ -61,7 +64,22 @@ package com.rpgGame.appModule.guild
 			_skin.lbXuanyan.text = info.note;
 			_skin.lbVip.visible = info.chiefVip == 1;
 			
-			_skin.btnOk.visible = !GuildManager.instance().haveGuild;
+			if(GuildManager.instance().haveGuild)
+			{
+				_skin.btnOk.visible = false;
+			}else{
+				_skin.btnOk.visible = true;
+				if(_guildId.isApply)
+				{
+					_skin.btnOk.label = "已申请";
+					GrayFilter.gray(_skin.btnOk);
+				}else{
+					_skin.btnOk.label = "申请";
+					_skin.btnOk.filter = null;
+				}
+			}
+			
+			
 		}
 		
 		override protected function onHide():void
@@ -74,8 +92,22 @@ package com.rpgGame.appModule.guild
 			super.onTouchTarget(target);
 			if(target == _skin.btnOk)
 			{
-				GuildSender.reqGuildJoin(_guildId,0);
+				if(_guildId.isApply)
+				{
+					this.removeFromParent();
+				}else{
+					replayapplay();
+				}
 			}
+		}
+		
+		private function replayapplay():void
+		{
+			_guildId.isApply = 1;
+			GuildSender.reqGuildJoin(_guildId.guildId,0);
+			EventManager.dispatchEvent(GuildEvent.GET_GUILD_LIST);
+			_skin.btnOk.label = "已申请";
+			GrayFilter.gray(_skin.btnOk);
 		}
 	}
 }

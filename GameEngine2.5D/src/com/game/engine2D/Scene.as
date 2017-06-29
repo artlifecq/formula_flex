@@ -123,7 +123,7 @@ package com.game.engine2D
 			_view = view;
 			_screenView = Stage3DLayerManager.screenView;
 			_cameraOrthographicLens = new CameraOrthographicLens(1000);
-			_cameraOrthographicLens.viewportScale = 1.1;
+			_cameraOrthographicLens.viewportScale = 1.15;
 			
 			//场景引擎配置
 			sceneConfig = new SceneConfig($width,$height);
@@ -175,10 +175,9 @@ package com.game.engine2D
 			//调一下尺寸
 			reSize(sceneConfig.width, sceneConfig.height);
 			
-//			_heatFilter = new HeatFilter3D();
-//			_glowFilter = new GlowFilter3D();
-//			_outlineGlowFilter = new OutlineGlowFilter3D(4, 1);
-//			resetViewFilters();
+			_heatFilter = new HeatFilter3D();
+			_glowFilter = new GlowFilter3D();
+			_outlineGlowFilter = new OutlineGlowFilter3D(4, 1);
 		}
 		
 		/**
@@ -360,13 +359,13 @@ package com.game.engine2D
 			}
 		}
 		
-		private function resetViewFilters() : void
+		public function resetUIViewFilters() : void
 		{
 			_filter3dScreens.length = 0;
 			//glow必须放在之前
-			_filter3dScreens.push(_glowFilter);
+//			_filter3dScreens.push(_glowFilter);
 			
-			_filter3dScreens.push(_heatFilter);
+//			_filter3dScreens.push(_heatFilter);
 			if (_outlineGlowFilter)
 				_filter3dScreens.push(_outlineGlowFilter);
 			
@@ -384,7 +383,7 @@ package com.game.engine2D
 				_outlineGlowFilter.dispose();
 			}
 			_outlineGlowFilter = value;
-			resetViewFilters();
+			resetUIViewFilters();
 		}
 		
 		/**

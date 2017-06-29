@@ -39,7 +39,7 @@ package com.rpgGame.app.manager.mount
 		 */		
 		public static function mountFeed( index:int, backpackIndex:int, num:int, itemID:int ):void
 		{
-			MountSender.requestMountFeed( index, backpackIndex, num, itemID );
+//			MountSender.requestMountFeed( index, backpackIndex, num, itemID );
 		}
 		
 		/**

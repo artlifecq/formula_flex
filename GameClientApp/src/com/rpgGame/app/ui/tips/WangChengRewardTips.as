@@ -6,6 +6,7 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.coreData.cfg.QSinglecitybaseCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_singlecitybase;
 	import com.rpgGame.coreData.enum.EnumCity;
+	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	
 	import org.mokylin.skin.app.banghui.wangcheng.Tips_WangCheng;
 	
@@ -24,8 +25,8 @@ package com.rpgGame.app.ui.tips
 		{
 			_skins=new Tips_WangCheng();
 			super(_skins);
-			_rewardG=new RewardGroup(_skins.icon1_1,RewardGroup.ALIN_LEFT,4);
-			_rewardB=new RewardGroup(_skins.icon2_1,RewardGroup.ALIN_LEFT,4);
+			_rewardG=new RewardGroup(IcoSizeEnum.ICON_42,_skins.icon1_1,RewardGroup.ALIN_LEFT,4);
+			_rewardB=new RewardGroup(IcoSizeEnum.ICON_42,_skins.icon2_1,RewardGroup.ALIN_LEFT,4);
 		}
 		
 		public function setTipData(data:*):void

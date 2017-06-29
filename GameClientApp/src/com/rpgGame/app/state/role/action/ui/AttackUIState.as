@@ -78,10 +78,7 @@ package com.rpgGame.app.state.role.action.ui
 				else
 					throw new Error("攻击状态引用必须是AttackStateReference类型！");
 
-				if (!_canWalkRelease)//不可边走边放技能
-				{
-					transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
-				}
+				
 				
 				_statusType = _stateReference.statusType;
 				if (_statusType)
@@ -102,16 +99,21 @@ package com.rpgGame.app.state.role.action.ui
 					_hitFrameTime = 0;
 					_stateReference.setThrowFrameTime(0);
 				}
-
-				var fixDirection : Boolean = false;
-				if ((_machine.owner as SceneRole).data is RoleData)
+				if (!_canWalkRelease)//不可边走边放技能
 				{
-					fixDirection = ((_machine.owner as SceneRole).data as RoleData).fixDirection;
+					transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
+					var fixDirection : Boolean = false;
+					if ((_machine.owner as SceneRole).data is RoleData)
+					{
+						fixDirection = ((_machine.owner as SceneRole).data as RoleData).fixDirection;
+					}
+					if (!fixDirection)
+					{
+						(_machine.owner as SceneRole).turnRoundTo(_stateReference.angle, 0);
+					}
+					
 				}
-				if (!fixDirection)
-				{
-					(_machine.owner as SceneRole).turnRoundTo(_stateReference.angle, 0);
-				}
+				
 				syncAnimationSpeed(1);
 			}
 		}

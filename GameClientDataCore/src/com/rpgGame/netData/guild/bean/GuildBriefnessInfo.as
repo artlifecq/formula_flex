@@ -39,6 +39,9 @@ package com.rpgGame.netData.guild.bean{
 		//是否自动加入
 		private var _isAutoJoin: int;
 		
+		//是否已经申请
+		private var _isApply: int;
+		
 		/**
 		 * 写入字节缓存
 		 */
@@ -59,6 +62,8 @@ package com.rpgGame.netData.guild.bean{
 			writeString(_note);
 			//是否自动加入
 			writeByte(_isAutoJoin);
+			//是否已经申请
+			writeByte(_isApply);
 			return true;
 		}
 		
@@ -82,6 +87,8 @@ package com.rpgGame.netData.guild.bean{
 			_note = readString();
 			//是否自动加入
 			_isAutoJoin = readByte();
+			//是否已经申请
+			_isApply = readByte();
 			return true;
 		}
 		
@@ -203,6 +210,21 @@ package com.rpgGame.netData.guild.bean{
 		 */
 		public function set isAutoJoin(value: int): void{
 			this._isAutoJoin = value;
+		}
+		
+		/**
+		 * get 是否已经申请
+		 * @return 
+		 */
+		public function get isApply(): int{
+			return _isApply;
+		}
+		
+		/**
+		 * set 是否已经申请
+		 */
+		public function set isApply(value: int): void{
+			this._isApply = value;
 		}
 		
 	}

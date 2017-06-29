@@ -59,6 +59,7 @@ package com.rpgGame.app.manager
 		{
 			var types:Array=ActivetyCfgData.getTypes();
 			//			updateActLeftTime(106,1000);
+			//			updateActLeftTime(106,1000);
 			for each(var type:int in types){
 				var typeList:Vector.<ActivetyInfo>=ActivetyCfgData.getTypeList(type);
 				if(typeList){

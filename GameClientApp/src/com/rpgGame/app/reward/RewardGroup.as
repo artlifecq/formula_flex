@@ -26,14 +26,14 @@ package  com.rpgGame.app.reward
 		public static const ALIN_RIGHT:int=2;
 		
 		private static const S2W:Object={};
-		S2W[36]=45;
-		S2W[42]=51;
+		S2W[36]=44;
+		S2W[42]=50;
 		S2W[48]=56;
 		S2W[64]=72;
 		
 		private static const W2S:Object={};
-		W2S[45]=36;
-		W2S[51]=42;
+		W2S[44]=36;
+		W2S[50]=42;
 		W2S[56]=48;
 		W2S[72]=64;
 		public static function size2Width(size:int):int
@@ -59,14 +59,15 @@ package  com.rpgGame.app.reward
 		
 		private var grid:UIAsset;
 		
-		private var icons:Vector.<Object>=new Vector.<Object>();
+		private var icons:Vector.<IconCDFace>=new Vector.<IconCDFace>();
 		
 		
-		private var pool:Vector.<Object>=new Vector.<Object>();
+		
 		private var initW:int;
 		private var initH:int;
 		private var _data:Vector.<ClientItemInfo>;
 		private var _needTips:Boolean;
+		private var _iconSize:int;
 		/**
 		 * 
 		 * @param g 起始格子背景
@@ -77,9 +78,10 @@ package  com.rpgGame.app.reward
 		 * @param needTip
 		 * 
 		 */		
-		public function RewardGroup(g:UIAsset,ali:int=ALIN_LEFT,cellNum:int=9,dx:int=2,dy:int=2,needTip:Boolean=true)
+		public function RewardGroup(size:int,g:UIAsset,ali:int=ALIN_LEFT,cellNum:int=9,dx:int=2,dy:int=2,needTip:Boolean=true)
 		{
 			super();
+			_iconSize=size;
 			this.grid=g;
 			this.alin=ali;
 			this.initW=g.width;
@@ -101,12 +103,12 @@ package  com.rpgGame.app.reward
 			clear();
 			_data=items;
 			var len:int=items.length;
-			var obj:Object;
+			var obj:IconCDFace;
 			for (var i:int = 0; i < len; i++) 
 			{
 				obj=getIcon();
 				icons.push(obj);
-				FaceUtil.SetItemGrid(obj.icon,items[i],_needTips);
+				FaceUtil.SetItemGrid(obj,items[i],_needTips);
 			}
 			layout();
 		}
@@ -181,7 +183,7 @@ package  com.rpgGame.app.reward
 			var dis:DisplayObject;
 			for (var i:int = 0; i < len; i++) 
 			{
-				dis=icons[i].bg;
+				dis=icons[i];
 				tmpX=(i%cellMaxNum)*(initW+dX);
 				tmpY=int(i/cellMaxNum)*(initH+dY);	
 				
@@ -249,30 +251,25 @@ package  com.rpgGame.app.reward
 		}
 		public function clear():void
 		{
-			for each (var icon:Object in icons) 
+			for each (var icon:IconCDFace in icons) 
 			{
-				icon.icon.clear();
-				MCUtil.removeSelf(icon.bg);
-				pool.push(icon);
+				icon.destroy();
 			}
 			icons.length=0;
 		}
-		private function getIcon():Object
+		private function getIcon():IconCDFace
 		{
-			if (pool.length>0) 
-			{
-				return pool.pop();
-			}
+//			if (pool.length>0) 
+//			{
+//				return pool.pop();
+//			}
 			var icon:IconCDFace;
-			var bg:UIAsset=MCUtil.cloneUIAssert(grid);
-			bg.touchGroup=false;
-			var size:int=W2S[bg.width];
-			if (size==0) 
-			{
-				size=IcoSizeEnum.ICON_36;
-			}
-			icon=IconCDFace.create(size);
-			bg.addChild(icon);
+//			var bg:UIAsset=MCUtil.cloneUIAssert(grid);
+//			bg.touchGroup=false;
+			
+			icon=IconCDFace.create(_iconSize);
+			icon.setUrlBg(grid.styleName);
+		//	bg.addChild(icon);
 			//设置图片的时候有设置
 			//if (IcoSizeEnum.ICON_36==size||IcoSizeEnum.ICON_42==size) 
 //			{
@@ -281,10 +278,10 @@ package  com.rpgGame.app.reward
 //			}
 
 			
-			var obj:Object={};
-			obj.bg=bg;
-			obj.icon=icon;
-			return obj;
+//			var obj:Object={};
+//			obj.bg=bg;
+		//	obj.icon=icon;
+			return icon;
 		}
 
 		public function get data():Vector.<ClientItemInfo>

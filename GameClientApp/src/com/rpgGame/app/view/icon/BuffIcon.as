@@ -158,12 +158,13 @@ package com.rpgGame.app.view.icon
 		
 		override public function dispose():void
 		{
-			this.removeFromParent();
-			super.dispose();
+		
 			clear();
 			removeEffect();
 			TipTargetManager.remove(this);
 			_buffData=null;
+			this.removeFromParent();
+			super.dispose();
 		}
 		
 	}

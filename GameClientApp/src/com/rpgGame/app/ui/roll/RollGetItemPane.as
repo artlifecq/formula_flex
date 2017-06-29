@@ -11,6 +11,8 @@ package com.rpgGame.app.ui.roll
 	
 	import feathers.utils.filter.GrayFilter;
 	
+	import gs.TweenLite;
+	
 	import org.mokylin.skin.app.roll.Roll_HuoDe;
 	
 	import starling.core.Starling;
@@ -34,7 +36,7 @@ package com.rpgGame.app.ui.roll
 			FaceUtil.SetItemGrid(_icon,_clientItem, true);
 			this.x = (LayerManager.stage.stageWidth - this.width)/2;
 			this.y = 200;
-			Starling.juggler.delayCall(delayFlyHandler,1);
+			TweenLite.delayedCall(1,delayFlyHandler);
 			StarlingLayerManager.topUILayer.addChild(this);
 		}
 		private function delayFlyHandler():void

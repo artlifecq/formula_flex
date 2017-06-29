@@ -113,7 +113,8 @@ package com.rpgGame.app.view.icon
 			}
 			setSelectedImgSize(iconSize);
 			_qualityImage.styleName = ClientConfig.getQualityBg( _qualityId ,iconSize);
-			_qualityImage.visible=true;			
+			_qualityImage.visible=true;	
+			_qualityImage.width=_qualityImage.height=_iconSize;
 			if(qualityID>Quality.YELLOW){
 				showQualityEft();
 			}else{
@@ -178,7 +179,9 @@ package com.rpgGame.app.view.icon
 			_bgImage.alpha = alpha;
 			_bgImage.styleName = ClientConfig.getGridBg( _bgResName );
 			_bgImage.onImageLoaded = onBgImgComplete;
-			
+			//因为从对象池取的，所以要设置下
+			_bgImage.width=S2W[_iconSize];
+			_bgImage.height=S2W[_iconSize];
 			sortLayer();
 		}
 		
@@ -203,7 +206,9 @@ package com.rpgGame.app.view.icon
 			_bgImage.alpha = alpha;
 			_bgImage.styleName =value;
 			_bgImage.onImageLoaded = onBgImgComplete;
-			
+			//因为从对象池取的，所以要设置下
+			_bgImage.width=S2W[_iconSize];
+			_bgImage.height=S2W[_iconSize];
 			sortLayer();
 		}
 		protected function setIsShowLockAsset(value:Boolean,isBind:Boolean):void
@@ -361,7 +366,8 @@ package com.rpgGame.app.view.icon
 				_selectImage.styleName = ClientConfig.getSelectBg( _selectRes )+"_"+this._qualityId+ClientConfig.eName_PNG;
 			}else{
 				_selectImage.styleName = ClientConfig.getSelectBg( _selectRes )+"_"+0+ClientConfig.eName_PNG;
-			}			
+			}
+			_selectImage.width=_selectImage.height=_iconSize;
 			sortLayer();
 		}
 		

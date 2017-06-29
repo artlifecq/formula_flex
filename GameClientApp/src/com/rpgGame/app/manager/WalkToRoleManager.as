@@ -165,7 +165,10 @@ package com.rpgGame.app.manager
 			var monsterData : MonsterData = role.data as MonsterData;
 			if (monsterData == null)
 				return;
-			EventManager.dispatchEvent(TaskEvent.TASK_CLICK_NPC,monsterData.distributeId,monsterData.serverID);//交任务用------YT
+			if(monsterData.monsterData.q_monster_type==4)
+			{
+				EventManager.dispatchEvent(TaskEvent.TASK_CLICK_NPC,monsterData.distributeId,monsterData.serverID);//交任务用------YT
+			}
 			
 		}
 		
