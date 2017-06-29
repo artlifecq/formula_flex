@@ -38,11 +38,15 @@ package com.rpgGame.core.events
 		/**帮派操作标识**/
 		public static const GUILD_OPERATERESULT : uint = UNIQUEID.NEXT;
 		
-		/**跟新指定帮派信息**/
-		public static const GUILD_INFO_CHANGE : uint = UNIQUEID.NEXT;
 		/**跟新帮派技能信息**/
 		public static const GUILD_SKILLINFO_CHAGE:uint = UNIQUEID.NEXT;
-		/**跟新帮派技能信息**/
+		/**王城争霸战信息**/
 		public static const GUILD_WCZB_INFO:uint = UNIQUEID.NEXT;
+		/**王城争霸申请列表**/
+		public static const GUILD_WCZB_APPLYINFO:uint = UNIQUEID.NEXT;
+		/**王城争霸竞价信息改变**/
+		public static const GUILD_WCZB_CHANGEMAXPRICE:uint = UNIQUEID.NEXT;
+		/**帮会活跃值变化**/
+		public static const GUILD_CHANGE_ACTIVE:uint = UNIQUEID.NEXT;
 	}
 }

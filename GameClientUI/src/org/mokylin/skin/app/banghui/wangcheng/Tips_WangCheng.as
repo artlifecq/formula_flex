@@ -22,19 +22,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 
 		public var icon1_1:feathers.controls.UIAsset;
 
-		public var icon1_2:feathers.controls.UIAsset;
-
-		public var icon1_3:feathers.controls.UIAsset;
-
-		public var icon1_4:feathers.controls.UIAsset;
-
 		public var icon2_1:feathers.controls.UIAsset;
-
-		public var icon2_2:feathers.controls.UIAsset;
-
-		public var icon2_3:feathers.controls.UIAsset;
-
-		public var icon2_4:feathers.controls.UIAsset;
 
 		public var imgBG:feathers.controls.UIAsset;
 
@@ -45,6 +33,8 @@ package org.mokylin.skin.app.banghui.wangcheng
 		public var imgLine3:feathers.controls.UIAsset;
 
 		public var lbJiangli:feathers.controls.Label;
+
+		public var lbName:feathers.controls.Label;
 
 		public var lbRoleName:feathers.controls.Label;
 
@@ -65,7 +55,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			this.currentState = "normal";
 			this.height = 406;
 			this.width = 240;
-			this.elementsContent = [imgBG_i(),imgLine1_i(),imgLine2_i(),imgLine3_i(),__Tips_WangCheng_Label1_i(),__Tips_WangCheng_Label2_i(),__Tips_WangCheng_Label3_i(),__Tips_WangCheng_Label4_i(),__Tips_WangCheng_Label5_i(),__Tips_WangCheng_Label6_i(),__Tips_WangCheng_Label7_i(),lbVsBang_i(),lbTime_i(),lbJiangli_i(),lbTeamName_i(),lbRoleName_i(),grpicon1_i(),grpicon2_i()];
+			this.elementsContent = [imgBG_i(),imgLine1_i(),imgLine2_i(),imgLine3_i(),lbName_i(),__Tips_WangCheng_Label1_i(),__Tips_WangCheng_Label2_i(),__Tips_WangCheng_Label3_i(),__Tips_WangCheng_Label4_i(),__Tips_WangCheng_Label5_i(),__Tips_WangCheng_Label6_i(),lbVsBang_i(),lbTime_i(),lbJiangli_i(),lbTeamName_i(),lbRoleName_i(),grpicon1_i(),grpicon2_i()];
 			
 			states = {
 			};
@@ -79,19 +69,6 @@ package org.mokylin.skin.app.banghui.wangcheng
 		private function __Tips_WangCheng_Label1_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.fontSize = 16;
-			temp.text = "【王城】";
-			temp.color = 0xFFEA00;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 111;
-			temp.x = 4;
-			temp.y = 10;
-			return temp;
-		}
-
-		private function __Tips_WangCheng_Label2_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "占领帮派：";
 			temp.color = 0xA3A594;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
@@ -100,7 +77,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			return temp;
 		}
 
-		private function __Tips_WangCheng_Label3_i():feathers.controls.Label
+		private function __Tips_WangCheng_Label2_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "帮主名称：";
@@ -111,7 +88,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			return temp;
 		}
 
-		private function __Tips_WangCheng_Label4_i():feathers.controls.Label
+		private function __Tips_WangCheng_Label3_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "占领福利（官员）：";
@@ -123,7 +100,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			return temp;
 		}
 
-		private function __Tips_WangCheng_Label5_i():feathers.controls.Label
+		private function __Tips_WangCheng_Label4_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "占领福利（帮众）：";
@@ -135,7 +112,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			return temp;
 		}
 
-		private function __Tips_WangCheng_Label6_i():feathers.controls.Label
+		private function __Tips_WangCheng_Label5_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "下次争夺帮派：";
@@ -147,7 +124,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			return temp;
 		}
 
-		private function __Tips_WangCheng_Label7_i():feathers.controls.Label
+		private function __Tips_WangCheng_Label6_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "下次争时间：";
@@ -166,7 +143,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			temp.name = "grpicon1";
 			temp.x = 12;
 			temp.y = 125;
-			temp.elementsContent = [icon1_1_i(),icon1_2_i(),icon1_3_i(),icon1_4_i()];
+			temp.elementsContent = [icon1_1_i()];
 			return temp;
 		}
 
@@ -177,7 +154,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			temp.name = "grpicon2";
 			temp.x = 12;
 			temp.y = 205;
-			temp.elementsContent = [icon2_1_i(),icon2_2_i(),icon2_3_i(),icon2_4_i()];
+			temp.elementsContent = [icon2_1_i()];
 			return temp;
 		}
 
@@ -192,39 +169,6 @@ package org.mokylin.skin.app.banghui.wangcheng
 			return temp;
 		}
 
-		private function icon1_2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon1_2 = temp;
-			temp.name = "icon1_2";
-			temp.styleName = "ui/common/grid/normal/42.png";
-			temp.x = 55;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function icon1_3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon1_3 = temp;
-			temp.name = "icon1_3";
-			temp.styleName = "ui/common/grid/normal/42.png";
-			temp.x = 110;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function icon1_4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon1_4 = temp;
-			temp.name = "icon1_4";
-			temp.styleName = "ui/common/grid/normal/42.png";
-			temp.x = 165;
-			temp.y = 0;
-			return temp;
-		}
-
 		private function icon2_1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -232,39 +176,6 @@ package org.mokylin.skin.app.banghui.wangcheng
 			temp.name = "icon2_1";
 			temp.styleName = "ui/common/grid/normal/42.png";
 			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function icon2_2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon2_2 = temp;
-			temp.name = "icon2_2";
-			temp.styleName = "ui/common/grid/normal/42.png";
-			temp.x = 55;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function icon2_3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon2_3 = temp;
-			temp.name = "icon2_3";
-			temp.styleName = "ui/common/grid/normal/42.png";
-			temp.x = 110;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function icon2_4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon2_4 = temp;
-			temp.name = "icon2_4";
-			temp.styleName = "ui/common/grid/normal/42.png";
-			temp.x = 165;
 			temp.y = 0;
 			return temp;
 		}
@@ -330,6 +241,21 @@ package org.mokylin.skin.app.banghui.wangcheng
 			temp.width = 173;
 			temp.x = 34;
 			temp.y = 377;
+			return temp;
+		}
+
+		private function lbName_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbName = temp;
+			temp.name = "lbName";
+			temp.fontSize = 16;
+			temp.text = "【王城】";
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 111;
+			temp.x = 4;
+			temp.y = 10;
 			return temp;
 		}
 

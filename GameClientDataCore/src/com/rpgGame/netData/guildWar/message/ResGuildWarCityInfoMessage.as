@@ -1,6 +1,7 @@
 package com.rpgGame.netData.guildWar.message{
 	import com.rpgGame.netData.guildWar.bean.GuildWarGuildRank;
 	import com.rpgGame.netData.guildWar.bean.GuildWarCityInfo;
+	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -24,7 +25,7 @@ package com.rpgGame.netData.guildWar.message{
 		//本次帮会战时间(s),-1:没有战争
 		private var _curWarTime: int;
 		
-		//下一次帮会战时间(s)
+		//下一次帮会战时间(s),-1:没有战争
 		private var _nextWarTime: int;
 		
 		//帮派活跃度
@@ -34,7 +35,7 @@ package com.rpgGame.netData.guildWar.message{
 		private var _applyCityId: int;
 		
 		//申请城市中,当前出价最高帮派Id,-1:没有
-		private var _curMaxPriceGuildId: int;
+		private var _curMaxPriceGuildId: long;
 		
 		//申请城市中,当前出价最高帮派名
 		private var _curMaxPriceGuildName: String;
@@ -59,14 +60,14 @@ package com.rpgGame.netData.guildWar.message{
 			writeByte(_haveDailyGift);
 			//本次帮会战时间(s),-1:没有战争
 			writeInt(_curWarTime);
-			//下一次帮会战时间(s)
+			//下一次帮会战时间(s),-1:没有战争
 			writeInt(_nextWarTime);
 			//帮派活跃度
 			writeInt(_guildActive);
 			//申请城市Id, -1:没有申请
 			writeInt(_applyCityId);
 			//申请城市中,当前出价最高帮派Id,-1:没有
-			writeInt(_curMaxPriceGuildId);
+			writeLong(_curMaxPriceGuildId);
 			//申请城市中,当前出价最高帮派名
 			writeString(_curMaxPriceGuildName);
 			return true;
@@ -91,14 +92,14 @@ package com.rpgGame.netData.guildWar.message{
 			_haveDailyGift = readByte();
 			//本次帮会战时间(s),-1:没有战争
 			_curWarTime = readInt();
-			//下一次帮会战时间(s)
+			//下一次帮会战时间(s),-1:没有战争
 			_nextWarTime = readInt();
 			//帮派活跃度
 			_guildActive = readInt();
 			//申请城市Id, -1:没有申请
 			_applyCityId = readInt();
 			//申请城市中,当前出价最高帮派Id,-1:没有
-			_curMaxPriceGuildId = readInt();
+			_curMaxPriceGuildId = readLong();
 			//申请城市中,当前出价最高帮派名
 			_curMaxPriceGuildName = readString();
 			return true;
@@ -173,7 +174,7 @@ package com.rpgGame.netData.guildWar.message{
 		}
 		
 		/**
-		 * get 下一次帮会战时间(s)
+		 * get 下一次帮会战时间(s),-1:没有战争
 		 * @return 
 		 */
 		public function get nextWarTime(): int{
@@ -181,7 +182,7 @@ package com.rpgGame.netData.guildWar.message{
 		}
 		
 		/**
-		 * set 下一次帮会战时间(s)
+		 * set 下一次帮会战时间(s),-1:没有战争
 		 */
 		public function set nextWarTime(value: int): void{
 			this._nextWarTime = value;
@@ -221,14 +222,14 @@ package com.rpgGame.netData.guildWar.message{
 		 * get 申请城市中,当前出价最高帮派Id,-1:没有
 		 * @return 
 		 */
-		public function get curMaxPriceGuildId(): int{
+		public function get curMaxPriceGuildId(): long{
 			return _curMaxPriceGuildId;
 		}
 		
 		/**
 		 * set 申请城市中,当前出价最高帮派Id,-1:没有
 		 */
-		public function set curMaxPriceGuildId(value: int): void{
+		public function set curMaxPriceGuildId(value: long): void{
 			this._curMaxPriceGuildId = value;
 		}
 		

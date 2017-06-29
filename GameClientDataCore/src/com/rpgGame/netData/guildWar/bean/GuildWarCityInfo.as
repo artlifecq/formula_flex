@@ -24,11 +24,20 @@ package com.rpgGame.netData.guildWar.bean{
 		//占领帮派Id
 		private var _occupyGuildId: long;
 		
+		//指令帮派帮主名
+		private var _occupyCheifName: String;
+		
+		//占领天数
+		private var _occupyDay: int;
+		
 		//攻击帮派名
 		private var _attackGuildName: String;
 		
 		//攻击帮派Id
 		private var _attackGuildId: long;
+		
+		//状态,2:竞标,3:准备,4:战斗,5:结束
+		private var _state: int;
 		
 		/**
 		 * 写入字节缓存
@@ -40,10 +49,16 @@ package com.rpgGame.netData.guildWar.bean{
 			writeString(_occupyGuildName);
 			//占领帮派Id
 			writeLong(_occupyGuildId);
+			//指令帮派帮主名
+			writeString(_occupyCheifName);
+			//占领天数
+			writeInt(_occupyDay);
 			//攻击帮派名
 			writeString(_attackGuildName);
 			//攻击帮派Id
 			writeLong(_attackGuildId);
+			//状态,2:竞标,3:准备,4:战斗,5:结束
+			writeInt(_state);
 			return true;
 		}
 		
@@ -57,10 +72,16 @@ package com.rpgGame.netData.guildWar.bean{
 			_occupyGuildName = readString();
 			//占领帮派Id
 			_occupyGuildId = readLong();
+			//指令帮派帮主名
+			_occupyCheifName = readString();
+			//占领天数
+			_occupyDay = readInt();
 			//攻击帮派名
 			_attackGuildName = readString();
 			//攻击帮派Id
 			_attackGuildId = readLong();
+			//状态,2:竞标,3:准备,4:战斗,5:结束
+			_state = readInt();
 			return true;
 		}
 		
@@ -110,6 +131,36 @@ package com.rpgGame.netData.guildWar.bean{
 		}
 		
 		/**
+		 * get 指令帮派帮主名
+		 * @return 
+		 */
+		public function get occupyCheifName(): String{
+			return _occupyCheifName;
+		}
+		
+		/**
+		 * set 指令帮派帮主名
+		 */
+		public function set occupyCheifName(value: String): void{
+			this._occupyCheifName = value;
+		}
+		
+		/**
+		 * get 占领天数
+		 * @return 
+		 */
+		public function get occupyDay(): int{
+			return _occupyDay;
+		}
+		
+		/**
+		 * set 占领天数
+		 */
+		public function set occupyDay(value: int): void{
+			this._occupyDay = value;
+		}
+		
+		/**
 		 * get 攻击帮派名
 		 * @return 
 		 */
@@ -137,6 +188,21 @@ package com.rpgGame.netData.guildWar.bean{
 		 */
 		public function set attackGuildId(value: long): void{
 			this._attackGuildId = value;
+		}
+		
+		/**
+		 * get 状态,2:竞标,3:准备,4:战斗,5:结束
+		 * @return 
+		 */
+		public function get state(): int{
+			return _state;
+		}
+		
+		/**
+		 * set 状态,2:竞标,3:准备,4:战斗,5:结束
+		 */
+		public function set state(value: int): void{
+			this._state = value;
 		}
 		
 	}

@@ -375,7 +375,8 @@ package com.rpgGame.app.cmdlistener
 			if (role && role.usable)
 			{
 				//				HeroData.setResources(role.data as HeroData, buffer);
-				AvatarManager.callEquipmentChange(role);
+//				AvatarManager.callEquipmentChange(role);
+				AvatarManager.updateAvatar(role);
 				if (SceneRoleSelectManager.selectedRole == role)
 					SceneRoleSelectManager.updateSelectRole();
 			}

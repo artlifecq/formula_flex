@@ -50,7 +50,7 @@ package org.mokylin.skin.component.radio
 			skinNames={"down":"ui/component/radio/skin_1/down.png",
 			"downAndSelected":"ui/component/radio/skin_1/downAndSelected.png",
 			"hover":"ui/component/radio/skin_1/over.png",
-			"hoverAndSelected":"ui/component/radio/skin_1/overAndSelected.png",
+			"overAndSelected":"ui/component/radio/skin_1/overAndSelected.png",
 			"up":"ui/component/radio/skin_1/up.png",
 			"upAndSelected":"ui/component/radio/skin_1/upAndSelected.png"};
 		}

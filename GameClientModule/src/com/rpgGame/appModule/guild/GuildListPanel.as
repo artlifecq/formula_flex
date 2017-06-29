@@ -47,7 +47,7 @@ package com.rpgGame.appModule.guild
 		override protected function onShow():void
 		{
 			EventManager.addEvent(GuildEvent.GET_GUILD_LIST,refeashList);
-			refeashList(null);
+			refeashList();
 			requestPage(0);
 			if(GuildManager.instance().canDissolve)
 			{
@@ -57,9 +57,9 @@ package com.rpgGame.appModule.guild
 			}
 		}
 		
-		private function refeashList(msg:ResGuildListInfoMessage):void
+		private function refeashList():void
 		{
-			msg = GuildManager.instance().currentPageInfo;
+			var msg:ResGuildListInfoMessage = GuildManager.instance().currentPageInfo;
 			if(msg==null)
 			{
 				_currentPage = 0;

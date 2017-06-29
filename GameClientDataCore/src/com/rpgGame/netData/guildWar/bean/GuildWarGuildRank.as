@@ -1,5 +1,6 @@
 package com.rpgGame.netData.guildWar.bean{
 	
+	import org.game.netCore.data.long;
 	
 	import org.game.netCore.net.Bean;
 	
@@ -17,6 +18,9 @@ package com.rpgGame.netData.guildWar.bean{
 		//排名
 		private var _rank: int;
 		
+		//帮会Id
+		private var _guildId: long;
+		
 		//帮会名
 		private var _guildName: String;
 		
@@ -26,6 +30,8 @@ package com.rpgGame.netData.guildWar.bean{
 		override protected function writing(): Boolean{
 			//排名
 			writeInt(_rank);
+			//帮会Id
+			writeLong(_guildId);
 			//帮会名
 			writeString(_guildName);
 			return true;
@@ -37,6 +43,8 @@ package com.rpgGame.netData.guildWar.bean{
 		override protected function reading(): Boolean{
 			//排名
 			_rank = readInt();
+			//帮会Id
+			_guildId = readLong();
 			//帮会名
 			_guildName = readString();
 			return true;
@@ -55,6 +63,21 @@ package com.rpgGame.netData.guildWar.bean{
 		 */
 		public function set rank(value: int): void{
 			this._rank = value;
+		}
+		
+		/**
+		 * get 帮会Id
+		 * @return 
+		 */
+		public function get guildId(): long{
+			return _guildId;
+		}
+		
+		/**
+		 * set 帮会Id
+		 */
+		public function set guildId(value: long): void{
+			this._guildId = value;
 		}
 		
 		/**

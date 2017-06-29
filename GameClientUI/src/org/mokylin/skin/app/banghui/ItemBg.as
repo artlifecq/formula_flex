@@ -26,8 +26,6 @@ package org.mokylin.skin.app.banghui
 			super();
 			
 			this.currentState = "normal";
-			this.height = 36;
-			this.width = 627;
 			this.elementsContent = [bg2_i(),bg1_i()];
 			
 			states = {
@@ -44,11 +42,11 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg1 = temp;
 			temp.name = "bg1";
-			temp.height = 36;
+			temp.bottom = 0;
 			temp.left = 0;
 			temp.right = 0;
 			temp.styleName = "ui/app/banghui/list1.png";
-			temp.y = 0;
+			temp.top = 0;
 			return temp;
 		}
 
@@ -57,11 +55,11 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg2 = temp;
 			temp.name = "bg2";
-			temp.height = 36;
+			temp.bottom = 0;
 			temp.left = 0;
 			temp.right = 0;
 			temp.styleName = "ui/app/banghui/list.png";
-			temp.y = 0;
+			temp.top = 0;
 			return temp;
 		}
 

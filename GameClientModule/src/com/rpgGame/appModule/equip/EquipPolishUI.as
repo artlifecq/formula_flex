@@ -468,7 +468,7 @@ package com.rpgGame.appModule.equip
 			if(tweenEquip){
 				tweenEquip.kill();
 			}
-			tweenEquip=TweenMax.to(_targetEquip,1,{x:612,y:177,ease:Expo.easeOut});
+			tweenEquip=TweenMax.to(_targetEquip,1,{x:613,y:177,ease:Expo.easeOut});
 			
 			if(isUse(targetEquipInfo)){
 //				_goodsContainerUse.setGrayForData(targetEquipInfo,true);

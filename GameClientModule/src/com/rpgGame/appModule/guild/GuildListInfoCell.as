@@ -74,7 +74,7 @@ package com.rpgGame.appModule.guild
 				GuildSender.reqGuildJoin(_guildListinfo.guildId,_opaque);
 			}else{
 //				AppManager.showApp(AppConstant.GUILD_APPLAYINFO_PANEL,_guildListinfo.guildId);
-				GuildPorpInfoPanel.instance.show(_guildListinfo);
+				GuildSender.reqGuildBriefnessInfo(_guildListinfo.guildId,0);
 			}
 		
 		}

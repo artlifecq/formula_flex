@@ -1,7 +1,6 @@
 ﻿package com.rpgGame.app.ui.main.activityBar.item
 {
     import com.rpgGame.app.manager.FunctionOpenManager;
-    import com.rpgGame.app.manager.time.SystemTimeManager;
     
     import org.mokylin.skin.mainui.activityBar.ActivityButtonSkin;
     
@@ -64,6 +63,9 @@
             var title:String = this.title;
             var startTxt:String = super.onTextStart(second);
             ui.txtTitle.htmlText = startTxt;
+			if(!ui.skinBg1.visible){
+				ui.skinBg1.visible=true;
+			}
             return startTxt;
         }
 
@@ -71,6 +73,9 @@
         {
             var runingTxt:String = super.onTextRuning();
             ui.txtTitle.htmlText = runingTxt;
+			if(!ui.skinBg1.visible){
+				ui.skinBg1.visible=true;
+			}
             return runingTxt;
         }
 
@@ -78,6 +83,9 @@
         {
             var endTxt:String = super.onTextEnd(second);
             ui.txtTitle.htmlText = endTxt;
+			if(!ui.skinBg1.visible){
+				ui.skinBg1.visible=true;
+			}
             return endTxt;
         }
 		
@@ -90,6 +98,7 @@
         {
             var closeTxt:String = super.onTextColse();
             ui.txtTitle.htmlText = closeTxt;
+			ui.skinBg1.visible=false;
             return closeTxt;
         }
 		
@@ -97,6 +106,9 @@
 		{
 			var closeTxt:String = super.onTextRuningTime(second);
 			ui.txtTitle.htmlText = closeTxt;
+			if(!ui.skinBg1.visible){
+				ui.skinBg1.visible=true;
+			}
 			return closeTxt;
 		}
     }
