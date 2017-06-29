@@ -1193,6 +1193,10 @@ package com.game.engine3D.core
 				_outlineGlowFilter.dispose();
 				_outlineGlowFilter = null;
 			}
+			if (_ringDepthOfFieldFilter3D) {
+				_ringDepthOfFieldFilter3D.dispose();
+				_ringDepthOfFieldFilter3D = null;
+			}
 			_mainChar = null;
 			if (_lightNullObject)
 			{
