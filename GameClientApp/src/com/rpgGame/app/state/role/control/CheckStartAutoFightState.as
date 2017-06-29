@@ -3,15 +3,18 @@ package com.rpgGame.app.state.role.control
 	import com.game.engine3D.manager.SceneMapDataManager;
 	import com.game.engine3D.state.IState;
 	import com.rpgGame.app.manager.TrusteeshipManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.core.state.role.control.ControlState;
 	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.map.EnumMapType;
+	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.type.RoleStateType;
 	
 	import flash.utils.clearTimeout;
+	import flash.utils.getQualifiedClassName;
 	import flash.utils.setTimeout;
 	
 	public class CheckStartAutoFightState extends ControlState
@@ -37,7 +40,13 @@ package com.rpgGame.app.state.role.control
 		{
 			// TODO Auto Generated method stub
 			_timeId=0;
-			TrusteeshipManager.getInstance().startAutoFight();
+			var mapId:int=MainRoleManager.actorInfo.mapID;
+			var sceneData:SceneData=MapDataManager.getMapInfo(mapId);
+			if (EnumMapType.MAP_TYPE_TOWERS==sceneData.mapType) 
+			{
+				TrusteeshipManager.getInstance().startAutoFight();
+			}
+			
 		}
 		override public function enterPass(prevState:IState, force:Boolean=false):Boolean
 		{
@@ -66,6 +75,10 @@ package com.rpgGame.app.state.role.control
 					_timeId=0;
 				}
 			}
+		}
+		override public function get tribe():String
+		{
+			return getQualifiedClassName(CheckStartAutoFightState);
 		}
 	}
 }
