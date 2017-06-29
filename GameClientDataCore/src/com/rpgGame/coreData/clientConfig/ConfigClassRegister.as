@@ -120,8 +120,6 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_daily_zone:String = "data.Q_daily_zone";
 		/**  每日副本刷怪配置表													 */
 		public static const Q_dailyzone_monster:String = "data.Q_dailyzone_monster";
-		/**  天降元宝活动配置						 */
-		public static const Q_daysdown_gold:String = "data.Q_daysdown_gold";
 		/**  复活界面配置表				 */
 		public static const Q_die:String = "data.Q_die";
 		/**  继承消耗表			 */
@@ -186,6 +184,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_newfunc:String = "data.Q_newfunc";
 		/**  九层妖塔									 */
 		public static const Q_nine_tower:String = "data.Q_nine_tower";
+		/**  天降礼金								 */
+		public static const Q_daysdown_gold:String = "data.Q_daysdown_gold";
 		/**  通知列表			 */
 		public static const Q_notify:String = "data.Q_notify";
 		/**  阵营关系				 */

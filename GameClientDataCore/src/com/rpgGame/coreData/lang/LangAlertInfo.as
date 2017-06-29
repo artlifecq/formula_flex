@@ -188,6 +188,9 @@ package com.rpgGame.coreData.lang
 		public static const GOLD_LACK:String = "GOLD_LACK";
 		/**  是否离开副本！ */
 		public static const ZONE_EXIT_SURE:String = "ZONE_EXIT_SURE";
+		/**  是否离开天降礼金！ */
+		public static const LIJIN_EXIT_SURE:String = "LIJIN_EXIT_SURE";
+		
 		/**  您即将解散帮派<font color='#4efd6f'>$</font>解散后该帮派将不再存在，确认解散？ */
 		public static const dissolve_guild:String = "dissolve_guild";
 		/**  您即将退出帮派<font color='#4efd6f'>$</font>退出后24小时以内您无法加入任何帮派，确认退出？ */

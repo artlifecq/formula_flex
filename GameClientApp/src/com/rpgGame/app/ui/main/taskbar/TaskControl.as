@@ -7,6 +7,7 @@ package com.rpgGame.app.ui.main.taskbar
 	import com.rpgGame.app.manager.WalkToRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.manager.task.GatherAutoManager;
 	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.scene.SceneRole;
@@ -19,6 +20,7 @@ package com.rpgGame.app.ui.main.taskbar
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.HuBaoData;
+	import com.rpgGame.coreData.clientConfig.Q_mission_base;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.SceneCollectData;
 	import com.rpgGame.coreData.type.TaskType;
@@ -100,7 +102,7 @@ package com.rpgGame.app.ui.main.taskbar
 					}
 					else
 					{
-						TaskUtil.npcTaskFly(TaskMissionManager.getMainTaskNpcAreaId());
+						TaskUtil.npcTaskFly(TaskMissionManager.getMainTaskNpcAreaId(),type);
 					}
 				}
 				else
@@ -119,7 +121,7 @@ package com.rpgGame.app.ui.main.taskbar
 					}
 					else
 					{
-						TaskUtil.monsterTaskFly(monsterId);
+						TaskUtil.monsterTaskFly(monsterId,type);
 					}
 					
 				}
@@ -143,7 +145,7 @@ package com.rpgGame.app.ui.main.taskbar
 					}
 					else
 					{
-						TaskUtil.postTaskFly(post);
+						TaskUtil.postTaskFly(post,type);
 					}
 				}
 			}
@@ -151,29 +153,81 @@ package com.rpgGame.app.ui.main.taskbar
 		/**追踪面板上寻路完成*/
 		public static function finishWalk(data :Object):void
 		{		
-			if(TaskMissionManager.mainTaskData!=null)
-			{
-				finishToNpc(TaskMissionManager.getMainTaskNpcAreaId());
-			}
-		}
-		/**移动完成*/
-		public static function finishToNpc(npcId:int) : void
-		{
-			if(TaskMissionManager.isMainTaskNpc(npcId))
+			if(TaskMissionManager.mainTaskData!=null&&TaskMissionManager.isMainTaskNpc(TaskMissionManager.getMainTaskNpcAreaId()))
 			{
 				showLeadPanel();
-			}		
+			}
 		}
 		/**飞鞋完成*/
 		public static function flyComplete():void
 		{		
 			HuBaoManager.instance().onHuBaoHandler();
-			var dist:int = TaskUtil.getDistfinishNpc();
-			if(dist>=0&&dist<100)
+			
+			if(TaskMissionManager.flyTaskType>0)
 			{
-				showLeadPanel();
+				var taskType:int=TaskMissionManager.flyTaskType;
+				var taskData:Q_mission_base=TaskMissionManager.getTaskDataByType(taskType);
+				if(taskData!=null)
+				{
+					var missionType:int=taskData.q_mission_type;
+					if(TaskMissionManager.getTaskIsFinishByType(taskType))
+					{
+						/*var dist:int = TaskUtil.getDistfinishNpc();
+						if(dist>=0&&dist<100)
+						{
+						
+						}*/
+						taskFlishOk(taskType);
+					}
+					else
+					{
+						taskFlishNot(taskType,missionType);
+					}
+					
+				}
+				
+				
+				
+				TaskMissionManager.flyTaskType=0;
+				
 			}
+			
 		}
+		public static function taskFlishOk(taskType:int):void
+		{
+			if(taskType==TaskType.MAINTYPE_MAINTASK)
+			{
+				TaskControl.showLeadPanel();
+			}
+			else if(taskType==TaskType.MAINTYPE_DAILYTASK)
+			{
+				TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);	
+			}
+			else if(taskType==TaskType.MAINTYPE_TREASUREBOX)
+			{
+				TaskControl.showLoopPanel();
+			}
+			else if(taskType==TaskType.LIJIN_TASK)
+			{
+				TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);	
+			}
+			
+		}
+		public static function taskFlishNot(taskType:int,missionType:int):void
+		{
+			if(missionType==TaskType.SUB_MONSTER||missionType==TaskType.SUB_ITEM)
+			{
+				startFight();
+			}
+			else if(missionType==TaskType.SUB_GATHER)
+			{
+				var modeid:int=TaskUtil.getMonsterByType(taskType,TaskAutoManager.getInstance().taskTarget);
+				startGather(modeid);
+			}
+			
+		}
+		
+		
 		/**采集寻路完成开始采集了*/
 		public static function walkStartGather(data :Object):void
 		{
@@ -204,7 +258,7 @@ package com.rpgGame.app.ui.main.taskbar
 		}
 		
 		/**寻路完成开始杀怪*/
-		public static function startFight(modeid :int):void
+		public static function startFight(modeid :Object=null):void
 		{
 			TrusteeshipManager.getInstance().startAutoFight();
 		}

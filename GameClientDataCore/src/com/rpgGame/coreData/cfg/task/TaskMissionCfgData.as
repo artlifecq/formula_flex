@@ -187,7 +187,7 @@ package com.rpgGame.coreData.cfg.task
 		}
 		
 		
-		/**根据ID获取任务对话信息*/
+		/**根据ID获取任务奖励信息*/
 		public static function getSectionByID(id :String) : Q_mission_section 
 		{
 			return _sectionDic[id];
