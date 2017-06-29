@@ -47,6 +47,7 @@
         {
             super(skin);
 			_activityState = ActivityOpenStateType.OPEN;
+			
         }
 		
 		private var _info:FunctionBarInfo;
@@ -91,12 +92,23 @@
         {
             _title = value;
         }
-
+		
+		override protected function onShow():void
+		{
+			super.onShow();
+			playEffect();
+		}
+		
+		override protected function onHide():void
+		{
+			super.onHide();
+			stopEffect();
+		}
         public function playEffect():void
         {
-            if (!_effect3D)
+            if (!_effect3D&&_info.showEft==1)
             {
-                _effect3D = playInter3DAt(ClientConfig.getEffect("tx_quan"), 42, 30, 0);
+                _effect3D = playInter3DAt(ClientConfig.getEffect(_info.effect_name), 42, 35, 0);
             }
             else
             {
@@ -169,8 +181,9 @@
         {
         }
 
-        public function onActivityOpen():void
+        public function onActivityOpen(data:Object=null):void
         {
+			onActivityData(data);
 			_activityState = ActivityOpenStateType.OPEN;
 			EventManager.dispatchEvent(ActivityEvent.OPEN_ACTIVITY,_info);
         }

@@ -200,7 +200,7 @@ package com.rpgGame.app.manager.mount
 			if(_horsedataInfo==null)
 				return ;
 			var scenedata:SceneData = MapDataManager.currentScene;
-			if (scenedata== null ||scenedata.isMountLimit)
+			if (scenedata== null ||!scenedata.isMountLimit)
 			{
 				NoticeManager.showNotifyById(9007);
 				return;
@@ -256,7 +256,7 @@ package com.rpgGame.app.manager.mount
 			if(_horsedataInfo==null)
 				return ;
 			var scenedata:SceneData = MapDataManager.currentScene;
-			if (scenedata== null ||scenedata.isMountLimit)
+			if (scenedata== null ||!scenedata.isMountLimit)
 			{
 				return;
 			};

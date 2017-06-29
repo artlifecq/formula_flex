@@ -14,7 +14,7 @@ package com.rpgGame.app.ui.alert
 		{
 			_skin=new Fangchenmi_Skin();
 			super(_skin);
-			this.model = true;
+//			this.model = true;
 		}
 		
 		override protected function onTouchTarget(target : DisplayObject) : void

@@ -157,8 +157,8 @@ package com.rpgGame.coreData.role
 			var mountModel :Q_horse = HorseConfigData.getMountDataById(_mount);
 			if (mountModel)
 			{
-				var mountResID:String = mountModel.q_scene_show_url;
-				var mountAnimatResID:String = HorseConfigData.mountAnimatResID;
+				var mountResID:String = mountModel.q_skinResID;
+				var mountAnimatResID:String = mountModel.q_animatResID;
 				this.avatarInfo.setMountResID(mountResID, mountAnimatResID);
 			}
 		}
