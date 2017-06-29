@@ -233,10 +233,10 @@ package com.rpgGame.app.process
 			TipManager.registerTipsParserClass(TipType.D1V1_TIP,D1v1TipExt);
 			TipManager.registerTipsParserClass(TipType.D1V1_RANK_TIP,D1v1RankTipExt);
 			TipManager.registerTipsParserClass(TipType.D1V1_RANK_REWARD_TIP,D1v1RankRewardExt);
-
-			TipManager.registerTipsParserClass(TipType.TWOER_TIP,NineTowerTipExt);
+			
 			TipManager.registerTipsParserClass(TipType.ACTIVITY_JIXIAN_PANEL_TIP,JiXianPanelTip);
 			TipManager.registerTipsParserClass(TipType.ACTIVITY_JIXIAN_BUFF_TIP,JiXianBuffTip);
+			TipManager.registerTipsParserClass(TipType.TWOER_TIP,NineTowerTipExt);
 		}
 
 		private function onSwitchCmp() : void

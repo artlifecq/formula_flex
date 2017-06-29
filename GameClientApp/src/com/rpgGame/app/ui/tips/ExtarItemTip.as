@@ -83,8 +83,9 @@ package com.rpgGame.app.ui.tips
 				return ;
 			_skin.lbShuxing.htmlText = _item.clientItemInfo.qItem.q_describe;
 			_skin.grp_type.visible = false;
-			_skin.grp_foot.y = 182;
-			_skin.bg.height = 250;
+			_skin.ui_xian3.y=215;
+			_skin.grp_foot.y = _skin.ui_xian3.y + 11;
+			_skin.bg_bai.height = _skin.ui_di.y = 250;
 		}
 		
 		private function refeashAddPropView():void
@@ -100,8 +101,10 @@ package com.rpgGame.app.ui.tips
 			_skin.lbGongJi.text = "+"+currentatt.q_value1;
 			_skin.lbFangYu.text = "+"+currentatt.q_value2;
 			_skin.lbShengMing.text = "+"+currentatt.q_value3;
-			_skin.grp_foot.y = 237;
-			_skin.bg.height = 311;
+			
+			_skin.ui_xian3.y=259;	
+			_skin.grp_foot.y = _skin.ui_xian3.y + 11;
+			_skin.bg_bai.height = _skin.ui_di.y = 311;
 		}
 		
 		public function hideTips():void

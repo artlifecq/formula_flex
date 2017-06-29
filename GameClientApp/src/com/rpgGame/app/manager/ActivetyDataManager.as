@@ -5,9 +5,10 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.cfg.active.BossActInfo;
+	import com.rpgGame.coreData.cfg.active.JiXianVo;
 	import com.rpgGame.coreData.clientConfig.Q_special_activities;
 	import com.rpgGame.netData.specialactivities.bean.SpecialActivityInfo;
-
+	
 	/**
 	 *活动大厅数据管理器 
 	 * @author dik
@@ -15,8 +16,15 @@ package com.rpgGame.app.manager
 	 */
 	public class ActivetyDataManager
 	{
+		private static var _jixianvo:JiXianVo;
 		public function ActivetyDataManager()
 		{
+		}
+		
+		public static function get jixianVo():JiXianVo
+		{
+			if(_jixianvo==null) _jixianvo=new JiXianVo();
+			return _jixianvo;
 		}
 		
 		/**
@@ -50,7 +58,8 @@ package com.rpgGame.app.manager
 		public static function checkOpenAct():void
 		{
 			var types:Array=ActivetyCfgData.getTypes();
-//			updateActLeftTime(106,1000);
+			//			updateActLeftTime(106,1000);
+			//			updateActLeftTime(106,1000);
 			for each(var type:int in types){
 				var typeList:Vector.<ActivetyInfo>=ActivetyCfgData.getTypeList(type);
 				if(typeList){

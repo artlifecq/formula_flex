@@ -15,9 +15,7 @@ package com.rpgGame.coreData.cfg.active
 	 */
 	public class ActivetyCfgData
 	{
-
 		private static var _jixianVo:JiXianVo;
-	
 		private static var _typeMap:HashMap;
 		private static var _infoMap:HashMap;
 		
@@ -86,7 +84,7 @@ package com.rpgGame.coreData.cfg.active
 				list=list.sort(sortListByState);
 			}
 		}
-
+		
 		/**
 		 *更新击杀者 
 		 * 
@@ -105,7 +103,7 @@ package com.rpgGame.coreData.cfg.active
 				}
 			}
 		}
-	
+		
 		public static function getTypeList(type:int):Vector.<ActivetyInfo>
 		{
 			return _typeMap.getValue(type);

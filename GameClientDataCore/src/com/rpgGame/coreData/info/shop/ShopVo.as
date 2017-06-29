@@ -87,7 +87,7 @@ package com.rpgGame.coreData.info.shop
 				var tmp:Array = getPageShopItems(type);
 				for each (var vo:ShopItemVo in tmp) 
 				{
-					if (vo.getItemConfig().q_type==18&&vo.getItemConfig().q_location==locationType) 
+					if (vo.getItemConfig().q_type==15&&vo.getItemConfig().q_location==locationType) 
 					{
 						ret.push(vo);
 					}

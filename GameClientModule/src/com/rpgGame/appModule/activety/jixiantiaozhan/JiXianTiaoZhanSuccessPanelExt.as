@@ -1,10 +1,10 @@
 package com.rpgGame.appModule.activety.jixiantiaozhan
 {
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
-	import com.rpgGame.coreData.cfg.active.ActivetyDataManager;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
@@ -49,7 +49,8 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 			}
 			_skin.numPaiming.label=rank.toString();
 			_skin.lb_player_damage.text="累计伤害:"+msg.damage;
-			_skin.lb_damagethan.text="占总伤害:"+((msg.damage/msg.totalDamage)*100).toFixed(1)+"%";
+			var nu:Number=Math.min(msg.damage/msg.totalDamage,1);
+			_skin.lb_damagethan.text="占总伤害:"+(nu*100).toFixed(1)+"%";
 			var icon:IconCDFace;
 			for(var i:int=0;i<reward.length;i++){			
 				icon=IconCDFace.create(IcoSizeEnum.ICON_48);

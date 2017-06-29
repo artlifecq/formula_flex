@@ -34,6 +34,10 @@ package com.rpgGame.coreData.clientConfig
 		public var q_auctiontime:String;
 		 /**  争霸时间 */
 		public var q_battletime:String;
+		 /**  竞拍起价 */
+		public var q_startingprice:int;
+		 /**  每次竞价 */
+		public var q_bidding:int;
 
 	}
 }

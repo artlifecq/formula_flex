@@ -142,6 +142,8 @@ package com.rpgGame.core.app
 		public static var ACTIVETY_PANL:String = createAppInfo( "activety.ActivetyPanel","activety");
 		/** 活动BOSS **/
 		public static var ACTIVETY_BOSS_HURTRANK:String = createAppInfo("activety.boss.BossHurtRankPanel","activety");
+		/** 极限挑战BOSS **/
+		public static var ACTIVETY_JIXIANBOSS_HURTRANK:String = createAppInfo("activety.jixiantiaozhan.JiXianRankPanel","activety");
 		/**
 		 *活动boss结果 
 		 */

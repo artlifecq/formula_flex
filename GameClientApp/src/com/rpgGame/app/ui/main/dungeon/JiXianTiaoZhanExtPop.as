@@ -11,7 +11,6 @@ package com.rpgGame.app.ui.main.dungeon
 	
 	public class JiXianTiaoZhanExtPop extends PopSkinUI
 	{
-		private var _skin:TiaoZhan_Exit;
 		private var _remainTime:int=0;
 		public function JiXianTiaoZhanExtPop(data:*)
 		{
@@ -32,20 +31,20 @@ package com.rpgGame.app.ui.main.dungeon
 		private function tweenTo():void
 		{
 			var endy:int=this._skin.container.y+100;	
-			TweenMax.to(skin.container,0.3,{y:endy,scale:1,alpha:1,ease:Expo.easeOut,onComplete:initTime});
+			TweenMax.to(this,0.3,{y:endy,scale:1,alpha:1,ease:Expo.easeOut,onComplete:initTime});
 		}
 		
 		private function initTime():void
 		{
 			_remainTime=5;
-			_skin.num.label=_remainTime.toString();
+			skin.num.label=_remainTime.toString();
 			TimerServer.addLoop(updateTime,1000);
 		}
 		
 		private function updateTime():void
 		{
 			_remainTime--;
-			_skin.num.label=_remainTime.toString();
+			skin.num.label=_remainTime.toString();
 			if(_remainTime==0){
 				TimerServer.remove(updateTime);
 				popComplete();

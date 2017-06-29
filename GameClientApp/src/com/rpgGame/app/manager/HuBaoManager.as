@@ -43,7 +43,6 @@ package com.rpgGame.app.manager
 		{
 			_gTimer = new GameTimer("HuBaoManager", 1000, 0, onUpdate);
 			super();
-			_gTimer = new GameTimer("HuBaoManager", 1000, 0, onUpdate);
 			EventManager.addEvent(UserMoveEvent.MOVE_RESCHANGE, onHuBaoHandler);
 		}
 		

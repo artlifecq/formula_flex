@@ -28,7 +28,8 @@ package org.mokylin.skin.app.zuoqi
 			super();
 			
 			this.currentState = "normal";
-			this.height = 345;
+			this.height = 249;
+			this.width = 280;
 			this.elementsContent = [__Tips_Zhufuzhi_UIAsset1_i(),__Tips_Zhufuzhi_Label1_i(),lab_num_i(),__Tips_Zhufuzhi_Label2_i(),lab_time_i(),__Tips_Zhufuzhi_UIAsset2_i(),__Tips_Zhufuzhi_Label3_i(),__Tips_Zhufuzhi_Label4_i(),__Tips_Zhufuzhi_Label5_i(),__Tips_Zhufuzhi_Label6_i(),__Tips_Zhufuzhi_Label7_i(),__Tips_Zhufuzhi_Label8_i()];
 			
 			states = {
@@ -49,8 +50,8 @@ package org.mokylin.skin.app.zuoqi
 			temp.text = "当前祝福值：";
 			temp.color = 0xDFB01F;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 31;
-			temp.y = 27;
+			temp.x = 11;
+			temp.y = 11;
 			return temp;
 		}
 
@@ -61,8 +62,8 @@ package org.mokylin.skin.app.zuoqi
 			temp.text = "祝福值清空时间：";
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 32;
-			temp.y = 62;
+			temp.x = 12;
+			temp.y = 38;
 			return temp;
 		}
 
@@ -73,8 +74,8 @@ package org.mokylin.skin.app.zuoqi
 			temp.text = "祝福值可以增加人物临时属性";
 			temp.color = 0x6BCC08;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 40;
-			temp.y = 119;
+			temp.x = 11;
+			temp.y = 77;
 			return temp;
 		}
 
@@ -85,8 +86,8 @@ package org.mokylin.skin.app.zuoqi
 			temp.text = "祝福值清零时，临时属性也将消失";
 			temp.color = 0x6BCC08;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 28;
-			temp.y = 144;
+			temp.x = 11;
+			temp.y = 95;
 			return temp;
 		}
 
@@ -96,8 +97,8 @@ package org.mokylin.skin.app.zuoqi
 			temp.text = "什么是祝福值：";
 			temp.color = 0xDFB01F;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 22;
-			temp.y = 183;
+			temp.x = 11;
+			temp.y = 121;
 			return temp;
 		}
 
@@ -110,9 +111,9 @@ package org.mokylin.skin.app.zuoqi
 			temp.text = "进阶失败后获得祝福值，祝福值越高成功几率越大";
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 236;
-			temp.x = 22;
-			temp.y = 208;
+			temp.width = 259;
+			temp.x = 11;
+			temp.y = 139;
 			return temp;
 		}
 
@@ -122,8 +123,8 @@ package org.mokylin.skin.app.zuoqi
 			temp.text = "祝福值清空时间：";
 			temp.color = 0xDFB01F;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 22;
-			temp.y = 255;
+			temp.x = 11;
+			temp.y = 183;
 			return temp;
 		}
 
@@ -136,17 +137,18 @@ package org.mokylin.skin.app.zuoqi
 			temp.text = "每日0点祝福值将被清空，一次性完成进阶可避免祝福值损失";
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 236;
-			temp.x = 22;
-			temp.y = 280;
+			temp.width = 264;
+			temp.x = 11;
+			temp.y = 201;
 			return temp;
 		}
 
 		private function __Tips_Zhufuzhi_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 345;
-			temp.styleName = "ui/common/tips/diban3.png";
+			temp.height = 249;
+			temp.styleName = "ui/common/tips/tips_2.png";
+			temp.width = 280;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -156,8 +158,8 @@ package org.mokylin.skin.app.zuoqi
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/common/tips/xian.png";
-			temp.x = 9;
-			temp.y = 94;
+			temp.x = 7;
+			temp.y = 65;
 			return temp;
 		}
 
@@ -172,8 +174,8 @@ package org.mokylin.skin.app.zuoqi
 			temp.color = 0x9D4AA8;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 70;
-			temp.x = 137;
-			temp.y = 28;
+			temp.x = 117;
+			temp.y = 12;
 			return temp;
 		}
 
@@ -186,8 +188,8 @@ package org.mokylin.skin.app.zuoqi
 			temp.color = 0x6BCC08;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 90;
-			temp.x = 142;
-			temp.y = 62;
+			temp.x = 122;
+			temp.y = 38;
 			return temp;
 		}
 

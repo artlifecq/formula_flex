@@ -28,6 +28,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 
 		public var btn_open:feathers.controls.Button;
 
+		public var container_list:feathers.controls.SkinnableContainer;
+
 		public var contentBox:feathers.controls.Group;
 
 		public var head_left:feathers.controls.UIAsset;
@@ -220,6 +222,18 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			return temp;
 		}
 
+		private function container_list_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			container_list = temp;
+			temp.name = "container_list";
+			temp.height = 267;
+			temp.width = 295;
+			temp.x = 6;
+			temp.y = 60;
+			return temp;
+		}
+
 		private function contentBox_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
@@ -229,7 +243,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			temp.width = 305;
 			temp.x = -3;
 			temp.y = 0;
-			temp.elementsContent = [__JiXianPaiHang_UIAsset1_i(),__JiXianPaiHang_UIAsset2_i(),__JiXianPaiHang_UIAsset3_i(),lbHeadName_i(),head_left_i(),head_right_i(),__JiXianPaiHang_UIAsset4_i(),__JiXianPaiHang_Label1_i(),myHurt_i(),myRank_i(),__JiXianPaiHang_Group1_i(),ListItem_i(),uiIcon_i()];
+			temp.elementsContent = [__JiXianPaiHang_UIAsset1_i(),__JiXianPaiHang_UIAsset2_i(),__JiXianPaiHang_UIAsset3_i(),lbHeadName_i(),head_left_i(),head_right_i(),__JiXianPaiHang_UIAsset4_i(),__JiXianPaiHang_Label1_i(),myHurt_i(),myRank_i(),__JiXianPaiHang_Group1_i(),ListItem_i(),uiIcon_i(),container_list_i()];
 			return temp;
 		}
 
