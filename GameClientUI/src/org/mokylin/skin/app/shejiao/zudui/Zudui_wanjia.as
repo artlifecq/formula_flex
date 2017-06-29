@@ -69,12 +69,12 @@ package org.mokylin.skin.app.shejiao.zudui
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_chakan = temp;
 			temp.name = "btn_chakan";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "查看资料";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
-			temp.color = 0xCFC6AE;
-			temp.width = 103;
-			temp.x = 598;
+			temp.color = 0xFFFFFF;
+			temp.width = 90;
+			temp.x = 610;
 			temp.y = 393;
 			return temp;
 		}
@@ -84,11 +84,11 @@ package org.mokylin.skin.app.shejiao.zudui
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_shuaixin = temp;
 			temp.name = "btn_shuaixin";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "刷新列表";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
-			temp.color = 0xCFC6AE;
-			temp.width = 103;
+			temp.color = 0xFFFFFF;
+			temp.width = 90;
 			temp.x = 7;
 			temp.y = 393;
 			return temp;
@@ -99,12 +99,12 @@ package org.mokylin.skin.app.shejiao.zudui
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_tianjia = temp;
 			temp.name = "btn_tianjia";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "加为好友";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
-			temp.color = 0xCFC6AE;
-			temp.width = 103;
-			temp.x = 697;
+			temp.color = 0xFFFFFF;
+			temp.width = 90;
+			temp.x = 709;
 			temp.y = 393;
 			return temp;
 		}
@@ -114,12 +114,12 @@ package org.mokylin.skin.app.shejiao.zudui
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_yaoqing = temp;
 			temp.name = "btn_yaoqing";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "邀请入队";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
-			temp.color = 0xCFC6AE;
-			temp.width = 103;
-			temp.x = 796;
+			temp.color = 0xFFFFFF;
+			temp.width = 90;
+			temp.x = 808;
 			temp.y = 393;
 			return temp;
 		}

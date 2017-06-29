@@ -113,7 +113,7 @@ package org.mokylin.skin.app.shejiao.zudui
 		private function __Duiwu_usSkin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/shejiao/zudui/bg1.jpg";
+			temp.styleName = "ui/big_bg/shejiao/zudui/bg1.jpg";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -133,12 +133,12 @@ package org.mokylin.skin.app.shejiao.zudui
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_add = temp;
 			temp.name = "btn_add";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "添加队员";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
-			temp.color = 0xCFC6AE;
-			temp.width = 103;
-			temp.x = 807;
+			temp.color = 0xFFFFFF;
+			temp.width = 90;
+			temp.x = 808;
 			temp.y = 409;
 			return temp;
 		}
@@ -148,12 +148,12 @@ package org.mokylin.skin.app.shejiao.zudui
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_create = temp;
 			temp.name = "btn_create";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "创建队伍";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
-			temp.color = 0xCFC6AE;
-			temp.width = 103;
-			temp.x = 809;
+			temp.color = 0xFFFFFF;
+			temp.width = 90;
+			temp.x = 808;
 			temp.y = 394;
 			return temp;
 		}
@@ -163,12 +163,12 @@ package org.mokylin.skin.app.shejiao.zudui
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_exit = temp;
 			temp.name = "btn_exit";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "退出队伍";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
-			temp.color = 0xCFC6AE;
-			temp.width = 103;
-			temp.x = 807;
+			temp.color = 0xFFFFFF;
+			temp.width = 90;
+			temp.x = 808;
 			temp.y = 376;
 			return temp;
 		}
