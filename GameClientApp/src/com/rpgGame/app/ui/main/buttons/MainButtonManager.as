@@ -4,6 +4,7 @@ package com.rpgGame.app.ui.main.buttons
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.ui.main.activityBar.item.ActivityButton;
+	import com.rpgGame.app.ui.main.activityBar.item.LimitTimeActivityButton;
 	import com.rpgGame.app.ui.main.activityBar.item.MultyActivityButton;
 	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
 	import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
@@ -11,10 +12,18 @@ package com.rpgGame.app.ui.main.buttons
 	import away3d.log.Log;
 	
 	import org.client.mainCore.ds.HashMap;
+	import org.mokylin.skin.mainui.activityBar.button.ButtonDianfengduijue;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonFubendating;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonFubenduilie;
+	import org.mokylin.skin.mainui.activityBar.button.ButtonHuangchengzhengba;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonHuodongtating;
+	import org.mokylin.skin.mainui.activityBar.button.ButtonJiucengyaota;
+	import org.mokylin.skin.mainui.activityBar.button.ButtonJixianboss;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonLunjian;
+	import org.mokylin.skin.mainui.activityBar.button.ButtonShijieboss;
+	import org.mokylin.skin.mainui.activityBar.button.ButtonShuangbeihubao;
+	import org.mokylin.skin.mainui.activityBar.button.ButtonTianjianglijing;
+	import org.mokylin.skin.mainui.activityBar.button.ButtonWangchengzhengba;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonZhanchangdating;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_jinjie;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_renwu;
@@ -48,8 +57,17 @@ package com.rpgGame.app.ui.main.buttons
 			regClass(102,ActivityButton,ButtonLunjian);
 			regClass(103,ActivityButton,ButtonFubendating);
 			regClass(104,ActivityButton,ButtonZhanchangdating);
-			regClass(105,MultyActivityButton,ButtonFubenduilie);
-			regClass(106,MultyActivityButton,ButtonFubenduilie);
+			regClass(300,MultyActivityButton,ButtonFubenduilie);
+			regClass(301,LimitTimeActivityButton,ButtonShijieboss);
+			regClass(302,LimitTimeActivityButton,ButtonDianfengduijue);
+			regClass(303,LimitTimeActivityButton,ButtonShuangbeihubao);
+			regClass(304,LimitTimeActivityButton,ButtonJiucengyaota);
+			regClass(305,LimitTimeActivityButton,ButtonHuangchengzhengba);
+			regClass(306,LimitTimeActivityButton,ButtonWangchengzhengba);
+			regClass(307,LimitTimeActivityButton,ButtonWangchengzhengba);
+			regClass(308,LimitTimeActivityButton,ButtonFubenduilie);
+			regClass(309,LimitTimeActivityButton,ButtonTianjianglijing);
+			regClass(310,LimitTimeActivityButton,ButtonJixianboss);
 		}
 		private static function regClass(id:int,cls:Class,skinui:Class):void
 		{
@@ -85,6 +103,25 @@ package com.rpgGame.app.ui.main.buttons
 			return id.toString();
 		}
 		
+		/**
+		 *开启活动 通过id和数据
+		 * @param id
+		 * @param data
+		 * 
+		 */
+		public static function openActByData(id:int,data:Object):void
+		{
+			var bar:FunctionBarInfo=FuncionBarCfgData.getActivityBarInfo(id);
+			if(bar)
+			{
+				var button:ActivityButton= MainButtonManager.getButtonBuyInfo(bar) as ActivityButton;
+				if(button)
+				{
+					button.onActivityOpen(data);
+				}
+			}
+		}
+		
 		/**开启活动按钮by id----yt*/
 		public static function openActivityButton(id:int):void
 		{
@@ -97,8 +134,6 @@ package com.rpgGame.app.ui.main.buttons
 					button.onActivityOpen();
 				}
 			}
-			
-			
 		}
 		/**关闭活动按钮 byid----yt*/
 		public static function closeActivityButton(id:int):void

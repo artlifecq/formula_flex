@@ -4,10 +4,12 @@ package org.mokylin.skin.common.alert
 	import feathers.controls.Button;
 	import feathers.controls.Check;
 	import feathers.controls.Label;
+	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import org.mokylin.skin.common.TongYongTanKuang_bg;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
-	import org.mokylin.skin.component.button.ButtonSkin_putong;
+	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 	import org.mokylin.skin.component.check.CheckBoxSkin_1;
 
 	/**
@@ -20,7 +22,7 @@ package org.mokylin.skin.common.alert
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var bg:feathers.controls.UIAsset;
+		public var bg:feathers.controls.SkinnableContainer;
 
 		public var btnClose:feathers.controls.Button;
 
@@ -32,7 +34,7 @@ package org.mokylin.skin.common.alert
 
 		public var labContent:feathers.controls.Label;
 
-		public var lbl_title:feathers.controls.Label;
+		public var lbInfo:feathers.controls.Label;
 
 
 		//==========================================================================
@@ -43,9 +45,9 @@ package org.mokylin.skin.common.alert
 			super();
 			
 			this.currentState = "normal";
-			this.height = 265;
-			this.width = 331;
-			this.elementsContent = [bg_i(),__AlertUp_UIAsset1_i(),lbl_title_i(),btnClose_i(),btn_ok_i(),__AlertUp_UIAsset2_i(),labContent_i(),__AlertUp_Label1_i(),chk_ok_i(),icons_i()];
+			this.height = 264;
+			this.width = 326;
+			this.elementsContent = [bg_i(),__AlertUp_UIAsset1_i(),btnClose_i(),btn_ok_i(),__AlertUp_UIAsset2_i(),labContent_i(),lbInfo_i(),chk_ok_i(),icons_i(),__AlertUp_UIAsset3_i()];
 			
 			states = {
 			};
@@ -56,22 +58,12 @@ package org.mokylin.skin.common.alert
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __AlertUp_Label1_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "10分钟内不再提示";
-			temp.color = 0x6BCC08;
-			temp.x = 122;
-			temp.y = 176;
-			return temp;
-		}
-
 		private function __AlertUp_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/background/erji_bg.jpg";
+			temp.styleName = "ui/common/background/erji_bg.png";
 			temp.x = 12;
-			temp.y = 40;
+			temp.y = 39;
 			return temp;
 		}
 
@@ -79,19 +71,31 @@ package org.mokylin.skin.common.alert
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/common/quan.png";
-			temp.x = 103;
-			temp.y = 44;
+			temp.x = 112;
+			temp.y = 53;
 			return temp;
 		}
 
-		private function bg_i():feathers.controls.UIAsset
+		private function __AlertUp_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.touchable = false;
+			temp.touchGroup = true;
+			temp.styleName = "ui/common/background/jjts.png";
+			temp.x = 121;
+			temp.y = 9;
+			return temp;
+		}
+
+		private function bg_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 265;
-			temp.styleName = "ui/common/background/erji_kuang.png";
-			temp.width = 331;
+			temp.height = 264;
+			var skin:StateSkin = new org.mokylin.skin.common.TongYongTanKuang_bg()
+			temp.skin = skin
+			temp.width = 326;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -103,8 +107,8 @@ package org.mokylin.skin.common.alert
 			btnClose = temp;
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.x = 297;
-			temp.y = 7;
+			temp.x = 293;
+			temp.y = 5;
 			return temp;
 		}
 
@@ -113,13 +117,14 @@ package org.mokylin.skin.common.alert
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_ok = temp;
 			temp.name = "btn_ok";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "立即使用";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
-			temp.color = 0xE1D4A9;
-			temp.width = 95;
+			temp.fontSize = 16;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
+			temp.color = 0xEAEABC;
+			temp.width = 100;
 			temp.x = 119;
-			temp.y = 214;
+			temp.y = 213;
 			return temp;
 		}
 
@@ -140,8 +145,8 @@ package org.mokylin.skin.common.alert
 			icons = temp;
 			temp.name = "icons";
 			temp.styleName = "ui/common/icon/erjikuang/zuoqijinjie.png";
-			temp.x = 117;
-			temp.y = 52;
+			temp.x = 116;
+			temp.y = 55;
 			return temp;
 		}
 
@@ -154,7 +159,7 @@ package org.mokylin.skin.common.alert
 			temp.leading = 6;
 			temp.text = "有坐骑可以进阶了";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 246;
 			temp.x = 46;
@@ -162,23 +167,17 @@ package org.mokylin.skin.common.alert
 			return temp;
 		}
 
-		private function lbl_title_i():feathers.controls.Label
+		private function lbInfo_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbl_title = temp;
-			temp.name = "lbl_title";
-			temp.bold = true;
-			temp.touchable = false;
-			temp.touchGroup = true;
-			temp.letterSpacing = 2;
-			temp.fontSize = 16;
-			temp.text = "提 示";
-			temp.textAlign = "center";
-			temp.color = 0xDDE2B1;
-			temp.nativeFilters = Fontter.filterObj[""];
-			temp.width = 240;
-			temp.x = 48;
-			temp.y = 11;
+			lbInfo = temp;
+			temp.name = "lbInfo";
+			temp.text = "10分钟内不再提示";
+			temp.color = 0x00FF33;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.width = 138;
+			temp.x = 122;
+			temp.y = 176;
 			return temp;
 		}
 

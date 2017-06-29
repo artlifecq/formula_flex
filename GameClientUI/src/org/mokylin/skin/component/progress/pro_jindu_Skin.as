@@ -27,7 +27,6 @@ package org.mokylin.skin.component.progress
 			
 			this.currentState = "normal";
 			this.height = 14;
-			this.width = 210;
 			this.elementsContent = [track_i(),thumb_i()];
 			
 			states = {
@@ -44,9 +43,9 @@ package org.mokylin.skin.component.progress
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			thumb = temp;
 			temp.name = "thumb";
+			temp.left = 0;
+			temp.right = 0;
 			temp.styleName = "ui/component/progress/skin_jindu/track.png";
-			temp.width = 210;
-			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
@@ -58,8 +57,8 @@ package org.mokylin.skin.component.progress
 			temp.name = "track";
 			temp.alpha = 0;
 			temp.left = 0;
+			temp.right = 0;
 			temp.styleName = "ui/component/progress/skin_jindu/track.png";
-			temp.width = 210;
 			temp.y = 0;
 			return temp;
 		}

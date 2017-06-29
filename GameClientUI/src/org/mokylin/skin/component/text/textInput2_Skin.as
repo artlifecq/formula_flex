@@ -47,6 +47,7 @@ package org.mokylin.skin.component.text
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg = temp;
 			temp.name = "bg";
+			temp.height = 23;
 			temp.left = 0;
 			temp.right = 0;
 			temp.styleName = "ui/component/text/input_bg.png";
@@ -66,7 +67,7 @@ package org.mokylin.skin.component.text
 			temp.textAlign = "center";
 			temp.color = 0x5cb006;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.y = 4;
+			temp.y = 3;
 			return temp;
 		}
 

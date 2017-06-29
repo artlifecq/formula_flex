@@ -6,7 +6,6 @@
 	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
 	import com.rpgGame.core.events.ActivityEvent;
 	import com.rpgGame.core.events.FunctionOpenEvent;
-	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
 	
@@ -19,16 +18,12 @@
 	public class ActivityButtonList extends SkinUI 
 	{
 		private const SIZE_WIDTH:uint = 360;
-		private const SIZE_HEIGHT:uint = 85;
+		private const SIZE_HEIGHT:uint = 320;
 		private const GRID_WIDTH:uint = 83;
 		private const GRID_HEIGHT:uint = 80;
 		private const ALIGN:String = "right";
-		
-		private var skinConfig:Object;
-		
 		public function ActivityButtonList()
 		{
-			skinConfig = {};
 			super();
 			init();
 		}
@@ -46,7 +41,6 @@
 			var btn:ActivityButtonBase = getActivityType(activityType);
 			if (btn != null)
 			{
-				trace("活动关闭:" + btn.title);
 				TweenLite.killTweensOf(btn);
 				btn.clearTime();
 			}
@@ -100,17 +94,7 @@
 		
 		public function playEffect():void
 		{
-			/*var i:int = 0;
-			var btn:ActivityButtonBase = null;
-			while (i < buttonList.length)
-			{
-			btn = (buttonList[i] as ActivityButtonBase);
-			if (btn.isHasEffect)
-			{
-			btn.playEffect();
-			}
-			i++;
-			}*/
+			
 		}
 		
 		public function stopEffect():void

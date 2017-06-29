@@ -127,11 +127,13 @@ package com.rpgGame.appModule.equip
 			_targetEquip.selectImgVisible=false;
 			_useItem=IconCDFace.create(64);
 			_useItem.selectImgVisible=false;
+			_targetEquip.x=475;
+			_targetEquip.y=130;
 			_skin.container.addChild(_targetEquip);
 			_skin.container.addChild(_useItem);
 			_skin.container.addChild(_skin.lb_num);
-			_useItem.x=730;
-			_useItem.y=130;
+			_useItem.x=733;
+			_useItem.y=132;
 			_skin.lb_cailiao.text=LanguageConfig.getText(LangUI.UI_TEXT26);
 			
 			useItemInfo=new ClientItemInfo();

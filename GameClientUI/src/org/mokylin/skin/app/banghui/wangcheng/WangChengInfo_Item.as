@@ -1,4 +1,4 @@
-package org.mokylin.skin.app.zhanchang.wangchengzhengba
+package org.mokylin.skin.app.banghui.wangcheng
 {
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Label;
@@ -15,6 +15,8 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var bg:feathers.controls.UIAsset;
+
 		public var lbBangName:feathers.controls.Label;
 
 		public var lbZhan:feathers.controls.Label;
@@ -28,9 +30,7 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 			super();
 			
 			this.currentState = "normal";
-			this.height = 24;
-			this.width = 187;
-			this.elementsContent = [__WangChengInfo_Item_UIAsset1_i(),lbZhan_i(),lbBangName_i()];
+			this.elementsContent = [bg_i(),lbZhan_i(),lbBangName_i()];
 			
 			states = {
 			};
@@ -41,9 +41,11 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __WangChengInfo_Item_UIAsset1_i():feathers.controls.UIAsset
+		private function bg_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg = temp;
+			temp.name = "bg";
 			temp.bottom = 0;
 			temp.left = 0;
 			temp.right = 0;

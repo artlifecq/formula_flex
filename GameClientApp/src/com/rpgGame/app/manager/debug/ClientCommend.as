@@ -20,6 +20,8 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
+	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.netData.backpack.bean.TempItemInfo;
 	import com.rpgGame.netData.player.message.SCNonagePromptMessage;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
@@ -174,6 +176,13 @@ package   com.rpgGame.app.manager.debug
 			{
 				var level:int = arg[0];
 				FightSoulManager.instance().updateMode(level);
+			});
+			commandList.put( ".actopen", function (...arg):void
+			{
+				var info:ActivetyInfo=ActivetyCfgData.getActInfoById(arg[0]); 
+				if(info.actCfg.q_show_notice==1){
+					AppManager.showAppNoHide(AppConstant.ACTIVETY_OPEN,info);
+				}
 			});
 		}
 		
