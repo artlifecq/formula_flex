@@ -335,7 +335,7 @@ package com.rpgGame.appModule.junjie
 				_chenhaoEft.dispose();
 			}
 			var effName:String=JunJieData.getEffById(_nowSelectItem.info.modelId);
-			_chenhaoEft=_chenhaoEftContaner.playInter3DAt(ClientConfig.getEffect(effName),120,20,0);
+			_chenhaoEft=_chenhaoEftContaner.playInter3DAt(ClientConfig.getEffect(effName),120,50,0);
 			showTiaoJian();	
 			contrastAttr();		
 			updateWanChengDuShow();

@@ -391,6 +391,10 @@ package com.rpgGame.app.view.icon
 			this.touchable = true;
 			this.touchGroup = true;
 			this.setBg("");
+			if (_bgImage) 
+			{
+				_bgImage.visible=false;
+			}
 			recycle(this);
 		}
 

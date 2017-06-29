@@ -20,7 +20,7 @@ package com.rpgGame.app.cmdlistener
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.game.netCore.connection.SocketConnection;
-
+	
 	public class BuffCmdListener extends BaseBean
 	{
 		public function BuffCmdListener()
@@ -58,7 +58,22 @@ package com.rpgGame.app.cmdlistener
 		
 		private function onResChangeBuffMessage(msg:ResChangeBuffMessage):void
 		{
-			
+			var tarObj :SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;
+			var srcObj :SceneRole = SceneManager.getSceneObjByID(msg.sourceId.ToGID()) as SceneRole;
+			if (tarObj != null)
+			{
+				var buffData:BuffData = new BuffData(msg.personId.ToGID());
+				buffData.buffInfo = msg.buff;
+				buffData.srcRole = srcObj;
+				tarObj.buffSet.addBuff(buffData);
+				BuffCdManager.playBuffCd(buffData);
+				if (buffData._data.q_buff_id==6008) 
+				{
+					LostSkillManager.instance().checkHideSelf(msg.personId);
+				}
+				
+				GameLog.addShow("*************************改变一条buff，buffID为： \t" + msg.buff.buffId.ToGID() + "\t当前时间：\t" + getTimer());
+			}
 		}
 		
 		/**
@@ -75,13 +90,13 @@ package com.rpgGame.app.cmdlistener
 			if (MainRoleManager.actor == null)
 				return; 
 			
-//			var buffData:BuffData = MainRoleManager.actor.buffSet.getBuffData(msg.buffId);
-//			if (buffData != null)
-//			{
-//				vo.SetTime(msg.remain, vo.buffi.totalTime);
-//				vo.buffi.value = msg.value;
-//				AddBuff(vo, Mgr.mainPlayer, null);
-//			}
+			//			var buffData:BuffData = MainRoleManager.actor.buffSet.getBuffData(msg.buffId);
+			//			if (buffData != null)
+			//			{
+			//				vo.SetTime(msg.remain, vo.buffi.totalTime);
+			//				vo.buffi.value = msg.value;
+			//				AddBuff(vo, Mgr.mainPlayer, null);
+			//			}
 		}
 		
 		private function onResAddBuffMessage(msg:ResAddBuffMessage):void
@@ -90,16 +105,16 @@ package com.rpgGame.app.cmdlistener
 			var srcObj :SceneRole = SceneManager.getSceneObjByID(msg.sourceId.ToGID()) as SceneRole;
 			if (tarObj != null)
 			{
-//				tarObj.SetFightState(msg.fightState);
+				//				tarObj.SetFightState(msg.fightState);
 				var buffData:BuffData = new BuffData(msg.personId.ToGID());
 				buffData.buffInfo = msg.buff;
 				buffData.srcRole = srcObj;
 				tarObj.buffSet.addBuff(buffData);
 				BuffCdManager.playBuffCd(buffData);
-//				if (LostSkillData.isLostSkill(buffData.buffData.q_buff_id)) 
-//				{
-//					FightFaceHelper.showBuffNameEffect(buffData.buffData,tarObj);
-//				}
+				//				if (LostSkillData.isLostSkill(buffData.buffData.q_buff_id)) 
+				//				{
+				//					FightFaceHelper.showBuffNameEffect(buffData.buffData,tarObj);
+				//				}
 				//
 				if (buffData._data.q_buff_id==6008) 
 				{

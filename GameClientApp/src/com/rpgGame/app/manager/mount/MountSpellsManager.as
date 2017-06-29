@@ -45,7 +45,7 @@ package com.rpgGame.app.manager.mount
 		 */		
 		public static function requestMountLearnSpell( idx:int, backpackIndex:int ):void
 		{
-			MountSender.requestMountLearnSpell( idx, backpackIndex );
+//			MountSender.requestMountLearnSpell( idx, backpackIndex );
 		}
 		
 		/**

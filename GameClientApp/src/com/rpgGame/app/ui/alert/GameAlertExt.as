@@ -54,7 +54,7 @@ package  com.rpgGame.app.ui.alert
 		{
 			switch (target)
 			{
-				case skin.btnOk:
+				case skin.btn_ok:
 					if (okFCallBack != null)
 						okFCallBack.apply(null,okParam);
 					hide();
@@ -64,7 +64,7 @@ package  com.rpgGame.app.ui.alert
 						closeCallBack();
 					hide();
 					break;
-				case skin.btnCancel:
+				case skin.btn_cancel:
 					if (cancelCallBack != null)
 						cancelCallBack();
 					hide();

@@ -3,6 +3,7 @@ package com.rpgGame.app.sender
 	import com.rpgGame.app.ctrl.ControlCoolDown;
 	import com.rpgGame.app.ctrl.EnumCustomCoolDown;
 	import com.rpgGame.app.manager.Mgr;
+	import com.rpgGame.netData.team.message.CSConfirmQuitTeamMessage;
 	import com.rpgGame.netData.team.message.CSOpenOrClosePanelTypeMessage;
 	import com.rpgGame.netData.team.message.ReqApplyGameSelectMessage;
 	import com.rpgGame.netData.team.message.ReqAppointGameMessage;
@@ -209,6 +210,12 @@ package com.rpgGame.app.sender
 			SocketConnection.send(msg);
 			
 			
+		}
+		public static function ReqConfirm2QuitTeam(reason:int):void
+		{
+			var msg:CSConfirmQuitTeamMessage=new CSConfirmQuitTeamMessage();
+			msg.type=reason;
+			SocketConnection.send(msg);
 		}
 	}
 }

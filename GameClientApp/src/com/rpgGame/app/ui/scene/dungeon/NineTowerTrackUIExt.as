@@ -12,6 +12,7 @@ package com.rpgGame.app.ui.scene.dungeon
 	import com.rpgGame.core.utils.TextUtil;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.NineTowerCfg;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_nine_tower;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.type.TipType;
@@ -61,12 +62,12 @@ package com.rpgGame.app.ui.scene.dungeon
 			if (left>0) 
 			{
 				
-				_skin.sec_time.text="剩余时间："+TextUtil.SecondToHMS3(left);
+				_skin.sec_time.text=NotifyCfgData.getNotifyTextByID(61046)+TextUtil.SecondToHMS3(left);
 			}
 			var left2:int=(_flagEndTime-getTimer())/1000;
 			if (left2>0) 
 			{
-				_skin.labOwnerTime.text="倒计时："+HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,TextUtil.SecondToHMS3(left2));
+				_skin.labOwnerTime.htmlText=NotifyCfgData.getNotifyTextByID(61050)+HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,TextUtil.SecondToHMS3(left2));
 			}
 			if (left<=0&&left2<=0) 
 			{
@@ -131,7 +132,7 @@ package com.rpgGame.app.ui.scene.dungeon
 			Mgr.nineTowerMgr.flagData=null;
 			var data:SCWarChessMessage=arg[0];
 			_skin.gFlag.visible=data!=null;
-			var name:String="暂无";
+			var name:String=NotifyCfgData.getNotifyTextByID(61051);
 			if (data.playerName!=null) 
 			{
 				name=data.playerName;
@@ -141,7 +142,7 @@ package com.rpgGame.app.ui.scene.dungeon
 			{
 				_flagEndTime=data.time*1000+getTimer();
 			}
-			_skin.labOwnerTime.text="倒计时："+HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,TextUtil.SecondToHMS3(data.time));
+			_skin.labOwnerTime.htmlText=NotifyCfgData.getNotifyTextByID(61050)+HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,TextUtil.SecondToHMS3(data.time));
 		}
 		override protected function onHide():void
 		{
@@ -172,7 +173,7 @@ package com.rpgGame.app.ui.scene.dungeon
 			var level:int=data.tier;
 			var score:int=data.currentIntegral;
 			
-			_skin.lbHeadName.text=TextUtil.ConectParam("第{0}层",[level]);
+			_skin.lbHeadName.text=TextUtil.ConectParam(NotifyCfgData.getNotifyTextByID(61049),[level]);
 			_skin.lbMyNum.text=data.integral+"";
 			var qTower:Q_nine_tower=NineTowerCfg.getTower(level);
 			if (!qTower) 
@@ -188,11 +189,11 @@ package com.rpgGame.app.ui.scene.dungeon
 			}
 			if (qTower.q_per==0) 
 			{
-				_skin.labPer.text="本层死亡复活不会降层";
+				_skin.labPer.text=NotifyCfgData.getNotifyTextByID(61048);
 			}
 			else
 			{
-				_skin.labPer.text="本层死亡复活有几率会降层"
+				_skin.labPer.text=NotifyCfgData.getNotifyTextByID(61047);
 			}
 			_skin.uiLinQu.visible=data.drawAward==1;
 			_endTime=getTimer()+data.time*1000;
@@ -200,7 +201,7 @@ package com.rpgGame.app.ui.scene.dungeon
 			{
 				_timer.start();
 			}
-			_skin.sec_time.text="剩余时间："+TextUtil.SecondToHMS3(data.time);
+			_skin.sec_time.text=NotifyCfgData.getNotifyTextByID(61046)+TextUtil.SecondToHMS3(data.time);
 			//最大层
 			_skin.gFlag.visible=qTower.q_next_tower==0;
 			_skin.gLevel.visible=qTower.q_next_tower!=0;

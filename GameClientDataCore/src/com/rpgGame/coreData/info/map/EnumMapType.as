@@ -47,7 +47,6 @@ package com.rpgGame.coreData.info.map
 		 * 极限挑战
 		 */
 		public static const MAP_JIXIAN:int = rEnum.next;//9
-		
 		/**
 		 * 天降礼金
 		 */
@@ -56,7 +55,6 @@ package com.rpgGame.coreData.info.map
 		 * 秦陵秘宝
 		 */
 		public static const MAP_TYPE_MIBAO:int = rEnum.next;//11
-		
-		
+
 	}
 }

@@ -17,11 +17,8 @@ package com.rpgGame.netData.vip.bean{
 		//当前vip等级
 		private var _vipId: int;
 		
-		//激活奖励领取状态  0 非领取状态  1 开通奖励  2 徐芬奖励
-		private var _optainAwardState: int;
-		
-		//激活奖励领取状态  0 不能领取   1 可领取
-		private var _dailyAwardState: int;
+		//剩余奖励次数
+		private var _count: int;
 		
 		/**
 		 * 写入字节缓存
@@ -29,10 +26,8 @@ package com.rpgGame.netData.vip.bean{
 		override protected function writing(): Boolean{
 			//当前vip等级
 			writeInt(_vipId);
-			//激活奖励领取状态  0 非领取状态  1 开通奖励  2 徐芬奖励
-			writeByte(_optainAwardState);
-			//激活奖励领取状态  0 不能领取   1 可领取
-			writeByte(_dailyAwardState);
+			//剩余奖励次数
+			writeByte(_count);
 			return true;
 		}
 		
@@ -42,10 +37,8 @@ package com.rpgGame.netData.vip.bean{
 		override protected function reading(): Boolean{
 			//当前vip等级
 			_vipId = readInt();
-			//激活奖励领取状态  0 非领取状态  1 开通奖励  2 徐芬奖励
-			_optainAwardState = readByte();
-			//激活奖励领取状态  0 不能领取   1 可领取
-			_dailyAwardState = readByte();
+			//剩余奖励次数
+			_count = readByte();
 			return true;
 		}
 		
@@ -65,33 +58,18 @@ package com.rpgGame.netData.vip.bean{
 		}
 		
 		/**
-		 * get 激活奖励领取状态  0 非领取状态  1 开通奖励  2 徐芬奖励
+		 * get 剩余奖励次数
 		 * @return 
 		 */
-		public function get optainAwardState(): int{
-			return _optainAwardState;
+		public function get count(): int{
+			return _count;
 		}
 		
 		/**
-		 * set 激活奖励领取状态  0 非领取状态  1 开通奖励  2 徐芬奖励
+		 * set 剩余奖励次数
 		 */
-		public function set optainAwardState(value: int): void{
-			this._optainAwardState = value;
-		}
-		
-		/**
-		 * get 激活奖励领取状态  0 不能领取   1 可领取
-		 * @return 
-		 */
-		public function get dailyAwardState(): int{
-			return _dailyAwardState;
-		}
-		
-		/**
-		 * set 激活奖励领取状态  0 不能领取   1 可领取
-		 */
-		public function set dailyAwardState(value: int): void{
-			this._dailyAwardState = value;
+		public function set count(value: int): void{
+			this._count = value;
 		}
 		
 	}

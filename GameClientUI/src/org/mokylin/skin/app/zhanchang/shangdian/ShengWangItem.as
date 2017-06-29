@@ -89,10 +89,10 @@ package org.mokylin.skin.app.zhanchang.shangdian
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnBuy = temp;
 			temp.name = "btnBuy";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "购 买";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
-			temp.color = 0xCFC6AE;
+			temp.color = 0xFFFFFF;
 			temp.width = 110;
 			temp.x = 121;
 			temp.y = 84;

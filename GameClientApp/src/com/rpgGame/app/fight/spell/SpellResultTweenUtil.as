@@ -255,14 +255,13 @@
 			}
 			
 		
-			showobj.x=end.x-40;
-			showobj.y=end.y;
+			showobj.x=end.x;
+			showobj.y=end.y-50;
 			showobj.alpha=0;
-			showobj.scaleX=showobj.scaleY=0.4;
+			showobj.scaleX=showobj.scaleY=0.7;
 			
-			var pmX:String=calXPM(start,end);
-			var pmY:String=calYPM(start,end);
-			calEndPos(start,end,70);
+		
+			//calEndPos(start,end,70);
 			var myTimeline:TimelineLite;
 			myTimeline = new TimelineLite({delay:timeDelay(TweenZhanHun),onComplete:callBack,onCompleteParams:[showobj]});
 			myTimeline.append(new TweenLite(showobj, 0.7, {y:end.y-80,ease:Expo.easeOut}));

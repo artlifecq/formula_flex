@@ -12,7 +12,7 @@ package com.rpgGame.netData.guild.message{
 	 * 通知玩家帮派Id改变
 	 */
 	public class ResGuildChangeGuildIdMessage extends Message {
-		
+	
 		//玩家Id
 		private var _playerId: long;
 		

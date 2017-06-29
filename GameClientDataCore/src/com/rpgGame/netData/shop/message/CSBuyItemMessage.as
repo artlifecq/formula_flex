@@ -22,6 +22,9 @@ package com.rpgGame.netData.shop.message{
 		//打折道具ID
 		private var _discountItemid: long;
 		
+		//自动使用物品（0不使用，1使用）
+		private var _autoUse: int;
+		
 		
 		/**
 		 * 写入字节缓存
@@ -33,6 +36,8 @@ package com.rpgGame.netData.shop.message{
 			writeInt(_num);
 			//打折道具ID
 			writeLong(_discountItemid);
+			//自动使用物品（0不使用，1使用）
+			writeByte(_autoUse);
 			return true;
 		}
 		
@@ -46,6 +51,8 @@ package com.rpgGame.netData.shop.message{
 			_num = readInt();
 			//打折道具ID
 			_discountItemid = readLong();
+			//自动使用物品（0不使用，1使用）
+			_autoUse = readByte();
 			return true;
 		}
 		
@@ -100,6 +107,21 @@ package com.rpgGame.netData.shop.message{
 		 */
 		public function set discountItemid(value: long): void{
 			this._discountItemid = value;
+		}
+		
+		/**
+		 * get 自动使用物品（0不使用，1使用）
+		 * @return 
+		 */
+		public function get autoUse(): int{
+			return _autoUse;
+		}
+		
+		/**
+		 * set 自动使用物品（0不使用，1使用）
+		 */
+		public function set autoUse(value: int): void{
+			this._autoUse = value;
 		}
 		
 	}

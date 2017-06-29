@@ -29,7 +29,11 @@ package com.rpgGame.appModule.skill.lostskill
 		private function addFightSoul():void
 		{
 			if(_effect != null)
+			{
+				_effect.stopRender();
 				RenderUnit3D.recycle(_effect);
+				_effect = null;
+			}
 			if(_state==null)
 				return ;
 			var data : RenderParamData3D = new RenderParamData3D(0, "effect", ClientConfig.getEffect(_qdata.q_effect));

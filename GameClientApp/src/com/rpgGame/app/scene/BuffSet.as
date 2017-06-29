@@ -18,6 +18,7 @@ package com.rpgGame.app.scene
 	import com.rpgGame.app.state.role.control.StunStateReference;
 	import com.rpgGame.app.state.role.control.SyncSpellActionStateReference;
 	import com.rpgGame.app.state.role.control.UseSpellStateReference;
+	import com.rpgGame.app.state.role.control.VipBuffStateReference;
 	import com.rpgGame.core.events.BuffEvent;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
@@ -58,7 +59,7 @@ package com.rpgGame.app.scene
 		
 		public function putInPool():void
 		{
-//			dispose();
+			//			dispose();
 			_isDisposed = true;
 		}
 		/**
@@ -137,6 +138,7 @@ package com.rpgGame.app.scene
 				if (currData.buffId == buffData.buffId)
 				{
 					buffExist = true;
+					currData=buffData;
 					break;
 				}
 			}
@@ -272,9 +274,9 @@ package com.rpgGame.app.scene
 					case 27://技能同步buff
 						_role.stateMachine.removeState(RoleStateType.CONTROL_SYNC_SPELLACTION); //切换到“技能动作同步状态”
 						break;
-                    case 34:// 变身
-                        _role.stateMachine.removeState(RoleStateType.CONTROL_SHAPESHIFTING);
-                        break;
+					case 34:// 变身
+						_role.stateMachine.removeState(RoleStateType.CONTROL_SHAPESHIFTING);
+						break;
 					case 36:// 疯狂连弩
 						_role.stateMachine.removeState(RoleStateType.CONTROL_SHORTCUTGRID);
 						break;
@@ -290,6 +292,9 @@ package com.rpgGame.app.scene
 						break;
 					case 73:
 						_role.stateMachine.removeState(RoleStateType.CONTROL_MASTERY_MAN);
+						break;
+					case 74://vip
+						_role.stateMachine.removeState(RoleStateType.CONTROL_VIP);
 						break;
 					default:
 						/*buffRef = _role.stateMachine.getReference(UnmovableStateReference) as UnmovableStateReference;
@@ -318,58 +323,58 @@ package com.rpgGame.app.scene
 		
 		/**
 		 * 效果类型	          适用技能	       效果详解
-				1		晕眩----不能移动、跳跃、攻击
-				2		定身----不能移动、跳跃
-				3		沉默----不能释放基础能量获取技能之外的技能
-				4		混乱
-				5		隐身
-				6		嘲讽----强制攻击施放嘲讽的目标
-				7		减少技能CD
-				8		死亡后对半径1码圆形范围内敌人造成50%秒伤伤害
-				9		护盾----吸收伤害
-				10		净化----清除所有负面buff
-				11		驱散----移除目标身上所有有利的增益
-				12		血量最多扣到1点
-				13		无敌
-				14		反伤（全局变量控制比例）（不反死）（配置万分比分子）
-				15		牺牲（生命值每降低A%，伤害额外增加B%,A B 可配置）
-				16		在一段时间内享受禁止被PK的保护，持续一段时间后或当玩家主动PK其他玩家时消失
-				17		每隔一段时间加满人物的生命，直至剩余容量用完
-				18		打怪获得多倍经验，持续一段时间后消失
-				19		打怪获得多倍真气，持续一段时间后消失
-				20		打怪获得多倍金钱，持续一段时间后消失
-				21		无法跳跃（翻滚）
-				22		每击中1个敌人可获得自身X%最大生命上限的血量
-				23		必定触发状态BUFF
-				24		消失BUFF（移除场景外）
-				25		使用技能
-				26		浮空BUFF
-				27		动作BUFF
-				28		不死，血量保持在指定值
-				29		不可击退
-				30		不受指定技能伤害
-                34      变身
-				100		增加或减少能量消耗总量
-				101		增加或减少气血
-				102		增加或减少能量
-				103		增加或减少最大气血
-				104		增加或减少最大能量
-				105		增加或减少外功
-				106		增加或减少内功
-				107		增加或减少防御百分比
-				108		增加或减少暴击率
-				109		增加或减少暴击伤害
-				110		增加或减少暴击抗性
-				111		增加或减少生命回复
-				112		增加或减少能量回复
-				113		增加或减少命中率
-				114		增加或减少闪避率
-				115		增加或减少移动速度
-				116		增加或减少攻击速度
-				117		伤害加深
-				118		伤害减免
-				119		击中敌人获得自身X%秒伤的血量
- 
+		 1		晕眩----不能移动、跳跃、攻击
+		 2		定身----不能移动、跳跃
+		 3		沉默----不能释放基础能量获取技能之外的技能
+		 4		混乱
+		 5		隐身
+		 6		嘲讽----强制攻击施放嘲讽的目标
+		 7		减少技能CD
+		 8		死亡后对半径1码圆形范围内敌人造成50%秒伤伤害
+		 9		护盾----吸收伤害
+		 10		净化----清除所有负面buff
+		 11		驱散----移除目标身上所有有利的增益
+		 12		血量最多扣到1点
+		 13		无敌
+		 14		反伤（全局变量控制比例）（不反死）（配置万分比分子）
+		 15		牺牲（生命值每降低A%，伤害额外增加B%,A B 可配置）
+		 16		在一段时间内享受禁止被PK的保护，持续一段时间后或当玩家主动PK其他玩家时消失
+		 17		每隔一段时间加满人物的生命，直至剩余容量用完
+		 18		打怪获得多倍经验，持续一段时间后消失
+		 19		打怪获得多倍真气，持续一段时间后消失
+		 20		打怪获得多倍金钱，持续一段时间后消失
+		 21		无法跳跃（翻滚）
+		 22		每击中1个敌人可获得自身X%最大生命上限的血量
+		 23		必定触发状态BUFF
+		 24		消失BUFF（移除场景外）
+		 25		使用技能
+		 26		浮空BUFF
+		 27		动作BUFF
+		 28		不死，血量保持在指定值
+		 29		不可击退
+		 30		不受指定技能伤害
+		 34      变身
+		 100		增加或减少能量消耗总量
+		 101		增加或减少气血
+		 102		增加或减少能量
+		 103		增加或减少最大气血
+		 104		增加或减少最大能量
+		 105		增加或减少外功
+		 106		增加或减少内功
+		 107		增加或减少防御百分比
+		 108		增加或减少暴击率
+		 109		增加或减少暴击伤害
+		 110		增加或减少暴击抗性
+		 111		增加或减少生命回复
+		 112		增加或减少能量回复
+		 113		增加或减少命中率
+		 114		增加或减少闪避率
+		 115		增加或减少移动速度
+		 116		增加或减少攻击速度
+		 117		伤害加深
+		 118		伤害减免
+		 119		击中敌人获得自身X%秒伤的血量
+		 
 		 * @param buffStateType
 		 * @param buffData
 		 * 
@@ -421,11 +426,11 @@ package com.rpgGame.app.scene
 						buffRef.setParams(buffData);
 						_role.stateMachine.transition(RoleStateType.CONTROL_SYNC_SPELLACTION, buffRef, true); //切换到“技能动作同步状态”
 						break;
-                    case 34:// 变身
+					case 34:// 变身
 						buffRef = _role.stateMachine.getReference(ShapeshiftingStateReference) as ShapeshiftingStateReference;
-                   		buffRef.setParams(buffData);
-                    	_role.stateMachine.transition(RoleStateType.CONTROL_SHAPESHIFTING, buffRef);
-                        break;
+						buffRef.setParams(buffData);
+						_role.stateMachine.transition(RoleStateType.CONTROL_SHAPESHIFTING, buffRef);
+						break;
 					
 					case 36:// 疯狂连弩图标效果
 						buffRef = _role.stateMachine.getReference(ShortcutGridStateReference) as ShortcutGridStateReference;
@@ -434,10 +439,10 @@ package com.rpgGame.app.scene
 						break;
 					
 					/*case 42:// 预警状态-------------------预警状态已经去掉不用了 后面如果加上的话再开启    yt
-						buffRef = _role.stateMachine.getReference(SkillWarningStateReference) as SkillWarningStateReference;
-						buffRef.setParams(buffData);
-						_role.stateMachine.transition(RoleStateType.CONTROL_SKILL_WARNING, buffRef);
-						break;*/
+					buffRef = _role.stateMachine.getReference(SkillWarningStateReference) as SkillWarningStateReference;
+					buffRef.setParams(buffData);
+					_role.stateMachine.transition(RoleStateType.CONTROL_SKILL_WARNING, buffRef);
+					break;*/
 					case 199://冰冻
 						buffRef = _role.stateMachine.getReference(BingDongStateReference) as BingDongStateReference;
 						buffRef.setParams(buffData);
@@ -452,6 +457,11 @@ package com.rpgGame.app.scene
 						buffRef = _role.stateMachine.getReference(MysteryManStateReference) as MysteryManStateReference;
 						buffRef.setParams(buffData);
 						_role.stateMachine.transition(RoleStateType.CONTROL_MASTERY_MAN, buffRef);
+						break;
+					case 74://vip
+						buffRef = _role.stateMachine.getReference(VipBuffStateReference) as VipBuffStateReference;
+						buffRef.setParams(buffData);
+						_role.stateMachine.transition(RoleStateType.CONTROL_VIP,buffRef);
 						break;
 					default:
 						/*buffRef = _role.stateMachine.getReference(UnmovableStateReference) as UnmovableStateReference;

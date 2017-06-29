@@ -15,19 +15,21 @@ package org.mokylin.skin.app.wuxue
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var icon:feathers.controls.UIAsset;
+
 		public var imgBg:feathers.controls.UIAsset;
 
-		public var imgLine0:feathers.controls.UIAsset;
-
 		public var imgLine1:feathers.controls.UIAsset;
+
+		public var imgLine2:feathers.controls.UIAsset;
 
 		public var lb_dengji:feathers.controls.Label;
 
 		public var lb_jihuo:feathers.controls.Label;
 
-		public var lb_name:feathers.controls.Label;
-
 		public var lb_shengming:feathers.controls.Label;
+
+		public var skillName:feathers.controls.UIAsset;
 
 		public var uiName1:feathers.controls.UIAsset;
 
@@ -42,9 +44,9 @@ package org.mokylin.skin.app.wuxue
 			super();
 			
 			this.currentState = "normal";
-			this.height = 260;
-			this.width = 281;
-			this.elementsContent = [imgBg_i(),__Tips_Skin_UIAsset1_i(),imgLine1_i(),imgLine0_i(),lb_name_i(),lb_jihuo_i(),uiName1_i(),uiName2_i(),lb_dengji_i(),lb_shengming_i()];
+			this.height = 193;
+			this.width = 280;
+			this.elementsContent = [imgBg_i(),imgLine2_i(),imgLine1_i(),icon_i(),skillName_i(),lb_jihuo_i(),uiName1_i(),uiName2_i(),lb_dengji_i(),lb_shengming_i()];
 			
 			states = {
 			};
@@ -55,12 +57,14 @@ package org.mokylin.skin.app.wuxue
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __Tips_Skin_UIAsset1_i():feathers.controls.UIAsset
+		private function icon_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/tips/tiao.png";
+			icon = temp;
+			temp.name = "icon";
+			temp.styleName = "ui/common/tips/icon/shengshengbuxi.png";
 			temp.x = 12;
-			temp.y = 19;
+			temp.y = 12;
 			return temp;
 		}
 
@@ -69,23 +73,11 @@ package org.mokylin.skin.app.wuxue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			imgBg = temp;
 			temp.name = "imgBg";
-			temp.height = 260;
-			temp.styleName = "ui/common/tips/diban3.png";
+			temp.height = 193;
+			temp.styleName = "ui/common/tips/jinengdi.png";
 			temp.top = 0;
 			temp.width = 281;
 			temp.x = 0;
-			return temp;
-		}
-
-		private function imgLine0_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			imgLine0 = temp;
-			temp.name = "imgLine0";
-			temp.styleName = "ui/common/tips/xian.png";
-			temp.width = 264;
-			temp.x = 9;
-			temp.y = 53;
 			return temp;
 		}
 
@@ -96,8 +88,20 @@ package org.mokylin.skin.app.wuxue
 			temp.name = "imgLine1";
 			temp.styleName = "ui/common/tips/xian.png";
 			temp.width = 264;
-			temp.x = 9;
-			temp.y = 146;
+			temp.x = 7;
+			temp.y = 74;
+			return temp;
+		}
+
+		private function imgLine2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			imgLine2 = temp;
+			temp.name = "imgLine2";
+			temp.styleName = "ui/common/tips/xian.png";
+			temp.width = 264;
+			temp.x = 7;
+			temp.y = 133;
 			return temp;
 		}
 
@@ -109,11 +113,11 @@ package org.mokylin.skin.app.wuxue
 			temp.leading = 0;
 			temp.letterSpacing = -1;
 			temp.text = "60级开启";
-			temp.color = 0x25931B;
+			temp.color = 0x00FF0C;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 214;
-			temp.x = 15;
-			temp.y = 93;
+			temp.x = 11;
+			temp.y = 106;
 			return temp;
 		}
 
@@ -128,25 +132,8 @@ package org.mokylin.skin.app.wuxue
 			temp.color = 0xD02525;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 50;
-			temp.x = 222;
-			temp.y = 22;
-			return temp;
-		}
-
-		private function lb_name_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lb_name = temp;
-			temp.name = "lb_name";
-			temp.bold = true;
-			temp.letterSpacing = 0;
-			temp.fontSize = 16;
-			temp.text = "亡魂悲歌";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 131;
-			temp.x = 13;
-			temp.y = 21;
+			temp.x = 75;
+			temp.y = 39;
 			return temp;
 		}
 
@@ -155,13 +142,24 @@ package org.mokylin.skin.app.wuxue
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb_shengming = temp;
 			temp.name = "lb_shengming";
+			temp.htmlText = "打怪经验获得提高<font color='#00ff33'>50%</font>";
 			temp.letterSpacing = 0;
-			temp.text = "打怪经验获得提高50%";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 213;
-			temp.x = 15;
-			temp.y = 185;
+			temp.x = 11;
+			temp.y = 163;
+			return temp;
+		}
+
+		private function skillName_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			skillName = temp;
+			temp.name = "skillName";
+			temp.styleName = "ui/common/tips/name/shengshengbuxi.png";
+			temp.x = 72;
+			temp.y = 15;
 			return temp;
 		}
 
@@ -171,8 +169,8 @@ package org.mokylin.skin.app.wuxue
 			uiName1 = temp;
 			temp.name = "uiName1";
 			temp.styleName = "ui/common/tips/tipswenzi/jineng/jihuotiaojian.png";
-			temp.x = 15;
-			temp.y = 67;
+			temp.x = 13;
+			temp.y = 87;
 			return temp;
 		}
 
@@ -182,8 +180,8 @@ package org.mokylin.skin.app.wuxue
 			uiName2 = temp;
 			temp.name = "uiName2";
 			temp.styleName = "ui/common/tips/tipswenzi/jineng/xiaoguo.png";
-			temp.x = 15;
-			temp.y = 161;
+			temp.x = 13;
+			temp.y = 145;
 			return temp;
 		}
 
