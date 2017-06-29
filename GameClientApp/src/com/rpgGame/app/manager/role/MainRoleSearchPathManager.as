@@ -139,7 +139,7 @@ package com.rpgGame.app.manager.role
 		//跨场景寻路静态方法
 		//===========================================================================================================
 
-		public static function walkToScene(targetSceneId : int, posx : Number = -1, posy : Number = -1, onArrive : Function = null, spacing : int = 0, data : Object = null) : void
+		public static function walkToScene(targetSceneId : int, posx : Number = -1, posy : Number = -1, onArrive : Function = null, spacing : int = 0, data : Object = null,noWalk:Function=null) : void
 		{
 
 			TrusteeshipManager.getInstance().stopAll();
