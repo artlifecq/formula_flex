@@ -205,12 +205,14 @@ package com.rpgGame.appModule.role
 			_avatar.curRole.stateMachine.transition(RoleStateType.ACTION_SHOW);
 			updateBaseInfo();
 			
-			if(isMainRole){
+			if(isMainRole)
+			{
 				updateRoleEquip();
+				onGetVipData();
 			}else{//获取玩家的装备列表
 				updateRoleEquip();
 			}
-			onGetVipData();
+			
 		}
 		
 		private function getGoodsInfoForOther():Array
@@ -404,11 +406,15 @@ package com.rpgGame.appModule.role
 			// TODO Auto Generated method stub
 			var vip:int=Mgr.vipMgr.vipLv;
 			//_vipIcon.setIconResName(
+			setVipData(vip);
+		}
+		public function setVipData(vip:int):void
+		{
 			TipTargetManager.remove(_vipIcon);
 			if (vip>0) 
 			{
 				_vipIcon.setIconResName(ClientConfig.getItemIcon(ItemConfig.getQItemByID(VipCfg.getVip(vip).q_mo_tokenID).q_icon+"",IcoSizeEnum.ICON_48));
-				TipTargetManager.show(_vipIcon,TargetTipsMaker.makeTips(TipType.VIP_LEVEL_TIP,new DynamicTipData()));
+				TipTargetManager.show(_vipIcon,TargetTipsMaker.makeTips(TipType.VIP_LEVEL_TIP,new DynamicTipData(vip)));
 			}
 			else
 			{
@@ -416,7 +422,6 @@ package com.rpgGame.appModule.role
 				TipTargetManager.show(_vipIcon,TargetTipsMaker.makeTips(TipType.VIP_NONE_TIP,null));
 			}
 		}
-		
 		/**
 		 * 拖动物品放下时 
 		 * @param srcGrid

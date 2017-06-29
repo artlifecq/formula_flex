@@ -3,9 +3,9 @@ package com.rpgGame.core.view.ui.tip.vo
 	public class DynamicTipData
 	{
 		private var _data:*
-		public function DynamicTipData()
+		public function DynamicTipData(d:*=null)
 		{
-			
+			this._data=d;
 		}
 		public function get data():*
 		{

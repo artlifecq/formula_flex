@@ -70,7 +70,7 @@ package com.rpgGame.app.ui.tips
 			_skin.bg_huang.visible=false;
 			_skin.bg_zi.visible=false;
 			_skin.bg_lan.visible=false;
-			var vipLv:int=Mgr.vipMgr.vipLv;
+			var vipLv:int=data.data;
 			var bg:UIAsset;
 			if (vipLv==1) 
 			{
