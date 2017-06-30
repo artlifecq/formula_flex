@@ -33,8 +33,10 @@ package com.rpgGame.app.view.icon
 			switch(_iconSize){
 				case IcoSizeEnum.ICON_36:
 				case IcoSizeEnum.ICON_48:
-				case IcoSizeEnum.ICON_64:
 					_iconPositionX=_iconPositionY=6;
+					break;
+				case IcoSizeEnum.ICON_64:
+					_iconPositionX=_iconPositionY=4;
 					break;
 				case IcoSizeEnum.ICON_42:
 					_iconPositionX=_iconPositionY=1;
