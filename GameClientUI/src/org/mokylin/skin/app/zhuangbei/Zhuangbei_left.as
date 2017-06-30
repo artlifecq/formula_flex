@@ -93,7 +93,7 @@ package org.mokylin.skin.app.zhuangbei
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 445;
-			temp.styleName = "ui/common/background/neikuang_1.png";
+			temp.styleName = "ui/common/background/neikuang_2.png";
 			temp.width = 350;
 			temp.x = -4;
 			temp.y = -6;

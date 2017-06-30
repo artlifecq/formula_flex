@@ -33,9 +33,9 @@ package org.mokylin.skin.app.beibao.Xinfa
 
 		public var lab_name:feathers.controls.Label;
 
-		public var lab_shuxing:feathers.controls.Label;
+		public var lab_shuoming:feathers.controls.Label;
 
-		public var lab_shuxing2:feathers.controls.Label;
+		public var lab_shuxing:feathers.controls.Label;
 
 		public var lab_xiangsheng:feathers.controls.Label;
 
@@ -62,7 +62,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			this.currentState = "normal";
 			this.height = 360;
 			this.width = 280;
-			this.elementsContent = [imgBg_i(),line1_i(),line2_i(),line3_i(),line4_i(),line5_i(),lab_xiangsheng_i(),__Xinfa_Tips2_Label1_i(),lab_Ctrl_i(),imgXS_i(),gridSkill_i(),imgSkill_i(),imgJiHuoTitle_i(),lab_shuxing2_i(),lab_shuxing_i(),__Xinfa_Tips2_Label2_i(),__Xinfa_Tips2_Label3_i(),__Xinfa_Tips2_UIAsset1_i(),__Xinfa_Tips2_UIAsset2_i(),mcLevel_i(),lab_jihuo_i(),lab_name_i()];
+			this.elementsContent = [imgBg_i(),line1_i(),line2_i(),line3_i(),line4_i(),line5_i(),lab_xiangsheng_i(),lab_shuoming_i(),lab_Ctrl_i(),imgXS_i(),gridSkill_i(),imgSkill_i(),imgJiHuoTitle_i(),lab_shuxing_i(),__Xinfa_Tips2_UIAsset1_i(),__Xinfa_Tips2_UIAsset2_i(),mcLevel_i(),lab_jihuo_i(),lab_name_i()];
 			
 			states = {
 			};
@@ -73,43 +73,6 @@ package org.mokylin.skin.app.beibao.Xinfa
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __Xinfa_Tips2_Label1_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.leading = 4;
-			temp.text = "本心法倾向增强体力、攻击，建议在前期有限提升";
-			temp.color = 0xEAEABC;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 259;
-			temp.x = 11;
-			temp.y = 294;
-			return temp;
-		}
-
-		private function __Xinfa_Tips2_Label2_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "体力：";
-			temp.color = 0xA3A594;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 50;
-			temp.x = 130;
-			temp.y = 108;
-			return temp;
-		}
-
-		private function __Xinfa_Tips2_Label3_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "体力：";
-			temp.color = 0xA3A594;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 50;
-			temp.x = 11;
-			temp.y = 108;
-			return temp;
-		}
-
 		private function __Xinfa_Tips2_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -133,9 +96,9 @@ package org.mokylin.skin.app.beibao.Xinfa
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			gridSkill = temp;
 			temp.name = "gridSkill";
-			temp.styleName = "ui/common/grid/normal/42.png";
-			temp.x = 11;
-			temp.y = 165;
+			temp.styleName = "ui/common/grid/normal/36.png";
+			temp.x = 13;
+			temp.y = 167;
 			return temp;
 		}
 
@@ -232,17 +195,18 @@ package org.mokylin.skin.app.beibao.Xinfa
 			return temp;
 		}
 
-		private function lab_shuxing2_i():feathers.controls.Label
+		private function lab_shuoming_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lab_shuxing2 = temp;
-			temp.name = "lab_shuxing2";
-			temp.text = "+100";
-			temp.color = 0x00FF33;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 80;
-			temp.x = 173;
-			temp.y = 108;
+			lab_shuoming = temp;
+			temp.name = "lab_shuoming";
+			temp.leading = 4;
+			temp.text = "本心法倾向增强体力、攻击，建议在前期有限提升";
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 259;
+			temp.x = 11;
+			temp.y = 294;
 			return temp;
 		}
 
@@ -291,7 +255,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			line2 = temp;
 			temp.name = "line2";
 			temp.styleName = "ui/common/tips/xian.png";
-			temp.x = 7;
+			temp.x = 9;
 			temp.y = 78;
 			return temp;
 		}

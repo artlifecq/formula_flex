@@ -55,6 +55,10 @@ package com.rpgGame.coreData.info.map
 		 * 秦陵秘宝
 		 */
 		public static const MAP_TYPE_MIBAO:int = rEnum.next;//11
+		/**
+		 * 王城争霸
+		 */
+		public static const MAP_TYPE_WCZB:int = rEnum.next;//12
 
 	}
 }

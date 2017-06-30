@@ -71,7 +71,7 @@ package com.rpgGame.appModule.vip
 			// TODO Auto Generated method stub
 			if (_shopItem) 
 			{
-				ItemBuyPanelExt.buyItem(_shopItem,1);
+				ItemBuyPanelExt.buyItem(_shopItem);
 			}
 		}
 		public function setState(curVip:int):void

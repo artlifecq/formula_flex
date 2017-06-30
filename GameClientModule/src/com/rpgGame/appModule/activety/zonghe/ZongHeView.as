@@ -125,8 +125,8 @@ package com.rpgGame.appModule.activety.zonghe
 				return;
 			}
 			selectedInfo=info;
-			_skin.activeName.styleName="ui/app/activety/zonghe/active_name/"+info.actCfg.q_activity_id+".png";
-			_skin.activeBg.styleName="ui/big_bg/activety/des/"+info.actCfg.q_activity_id+".jpg";
+			_skin.activeName.styleName="ui/app/activety/zonghe/active_name/"+info.actCfg.q_res_id+".png";
+			_skin.activeBg.styleName="ui/big_bg/activety/des/"+info.actCfg.q_des_bg+".jpg";
 			_skin.lbMsg.htmlText=info.actCfg.q_text;
 			_skin.lbMsg.visible=false;
 			var desObj:Array=JSONUtil.decode(info.actCfg.q_text);

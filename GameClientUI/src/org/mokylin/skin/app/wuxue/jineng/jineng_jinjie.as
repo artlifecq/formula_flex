@@ -124,9 +124,10 @@ package org.mokylin.skin.app.wuxue.jineng
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_jinjie = temp;
 			temp.name = "btn_jinjie";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "技能升级";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
+			temp.color = 0xFFFFFF;
 			temp.width = 90;
 			temp.x = 136;
 			temp.y = 367;

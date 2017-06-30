@@ -13,6 +13,11 @@ package com.rpgGame.app.state.role.action
 	
 	import gs.TweenLite;
 
+	/**
+	 *展示状态 
+	 * @author dik
+	 * 
+	 */
 	public class ShowState extends ActionState
 	{
 		private var _showType:String;
