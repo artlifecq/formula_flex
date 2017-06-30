@@ -25,10 +25,21 @@ package com.rpgGame.app.cmdlistener.mount
 			super.finish();
 		}
 		
+		/**
+		 * 拉取坐骑信息，初始化的时候，幻化成功。发过来 
+		 * @param msg
+		 * 
+		 */		
 		private function getSCHorseAllInfoToClientMessage(msg:SCHorseAllInfoToClientMessage):void
 		{
 			HorseManager.instance().horsedataInfo = msg.horseDataInfo;
 		}
+		
+		/**
+		 * 上下坐骑的协议 
+		 * @param msg
+		 * 
+		 */		
 		private function getSCHorseIllusionToClientMessage(msg:SCHorseIllusionToClientMessage):void
 		{
 			var role:SceneRole = SceneManager.getSceneObjByID(msg.playerId.ToGID()) as SceneRole;
@@ -38,16 +49,25 @@ package com.rpgGame.app.cmdlistener.mount
 			var heroData : HeroData = role.data as HeroData; 
 			heroData.mount = msg.horseModelid;
 			
-			HorseManager.instance().onRequestSetUpMountRide(Boolean(msg.horseModelid));
-			
+//			HorseManager.instance().setRoleRideState(role,Boolean(msg.horseModelid));
 			AvatarManager.callEquipmentChange(role);
-			
 		}
 		
+		/**
+		 * 坐骑升级 
+		 * @param msg
+		 * 
+		 */		
 		private function getSCHorseUpResultToClientMessage(msg:SCHorseUpResultToClientMessage):void
 		{
 			HorseManager.instance().uplevel(msg);
 		}
+		
+		/**
+		 * 吃坐骑丹的时候过来
+		 * @param msg
+		 * 
+		 */		
 		private function getSCExtraItemNumMessage(msg:SCExtraItemNumMessage):void
 		{
 			HorseManager.instance().updateExtraItemNum(msg);

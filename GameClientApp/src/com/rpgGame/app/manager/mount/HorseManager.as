@@ -4,7 +4,6 @@ package com.rpgGame.app.manager.mount
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
-	import com.rpgGame.app.manager.input.KeyMoveManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.shop.ShopManager;
 	import com.rpgGame.app.scene.SceneRole;
@@ -17,10 +16,8 @@ package com.rpgGame.app.manager.mount
 	import com.rpgGame.coreData.UNIQUEID;
 	import com.rpgGame.coreData.cfg.HorseConfigData;
 	import com.rpgGame.coreData.cfg.HorseSpellData;
-	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.SourceGetCfg;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
-	import com.rpgGame.coreData.cfg.mount.MountMiscData;
 	import com.rpgGame.coreData.clientConfig.Q_horse;
 	import com.rpgGame.coreData.clientConfig.Q_horse_skills;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
@@ -252,6 +249,14 @@ package com.rpgGame.app.manager.mount
 			var rideTime:int = q_mount.q_ride_time;
 			TweenLite.delayedCall(rideTime * 0.001, delayRideMount);
 //			setHouseRide();
+		}
+		
+		public function setRoleRideState(role:SceneRole,isRide:Boolean):void
+		{
+			if(role.isMainChar)
+			{
+				role.stateMachine.removeState(RoleStateType.CONTROL_MOUNT_RIDE);
+			}
 		}
 		
 		public function setMountRide():void
