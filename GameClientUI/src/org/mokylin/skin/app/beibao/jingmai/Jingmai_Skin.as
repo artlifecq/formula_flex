@@ -71,9 +71,9 @@ package org.mokylin.skin.app.beibao.jingmai
 			super();
 			
 			this.currentState = "normal";
-			this.height = 587;
-			this.width = 947;
-			this.elementsContent = [imgBg_i(),lb_zhenqi_i(),__Jingmai_Skin_UIAsset1_i(),__Jingmai_Skin_UIAsset2_i(),NumZhanli_i(),__Jingmai_Skin_UIAsset3_i(),mc_name_i(),chk_shuxing_i(),chk_dengji_i(),btn_hecheng_i(),btn_prev_i(),btn_next_i(),rdo_renmai_i(),rdo_dumai_i(),rdo_chongmai_i(),rdo_daimai_i(),rdo_yinqiaomai_i(),rdo_yangqiaomai_i(),__Jingmai_Skin_UIAsset4_i()];
+			this.height = 601;
+			this.width = 956;
+			this.elementsContent = [imgBg_i(),lb_zhenqi_i(),__Jingmai_Skin_UIAsset2_i(),__Jingmai_Skin_UIAsset3_i(),NumZhanli_i(),__Jingmai_Skin_UIAsset4_i(),mc_name_i(),chk_shuxing_i(),chk_dengji_i(),btn_hecheng_i(),btn_prev_i(),btn_next_i(),rdo_renmai_i(),rdo_dumai_i(),rdo_chongmai_i(),rdo_daimai_i(),rdo_yinqiaomai_i(),rdo_yangqiaomai_i(),__Jingmai_Skin_UIAsset5_i()];
 			
 			states = {
 			};
@@ -94,44 +94,44 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.label = "1364364";
 			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow2;
 			temp.width = 148;
-			temp.x = 85;
-			temp.y = 81;
-			return temp;
-		}
-
-		private function __Jingmai_Skin_UIAsset1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/jingmai/zhenqi.png";
-			temp.x = 49;
-			temp.y = 43;
+			temp.x = 89;
+			temp.y = 95;
 			return temp;
 		}
 
 		private function __Jingmai_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/zdl2.png";
-			temp.x = 14;
-			temp.y = 71;
+			temp.styleName = "ui/app/beibao/jingmai/zhenqi.png";
+			temp.x = 53;
+			temp.y = 57;
 			return temp;
 		}
 
 		private function __Jingmai_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/jingmai/di.png";
-			temp.x = 686;
-			temp.y = 118;
+			temp.styleName = "ui/common/zdl2.png";
+			temp.x = 18;
+			temp.y = 85;
 			return temp;
 		}
 
 		private function __Jingmai_Skin_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/beibao/jingmai/di.png";
+			temp.x = 690;
+			temp.y = 132;
+			return temp;
+		}
+
+		private function __Jingmai_Skin_UIAsset5_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/beibao/jingmai/fengexian.png";
-			temp.x = 174;
-			temp.y = 434;
+			temp.x = 178;
+			temp.y = 448;
 			return temp;
 		}
 
@@ -140,13 +140,13 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_hecheng = temp;
 			temp.name = "btn_hecheng";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "砭石合成";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.color = 0xCFC6AE;
-			temp.width = 76;
-			temp.x = 842;
-			temp.y = 112;
+			temp.color = 0xFFFFFF;
+			temp.width = 90;
+			temp.x = 826;
+			temp.y = 126;
 			return temp;
 		}
 
@@ -157,8 +157,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.name = "btn_next";
 			temp.scaleX = -1;
 			temp.styleClass = org.mokylin.skin.app.beibao.jingmai.button.ButtonJiantou;
-			temp.x = 716;
-			temp.y = 285;
+			temp.x = 720;
+			temp.y = 299;
 			return temp;
 		}
 
@@ -168,8 +168,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			btn_prev = temp;
 			temp.name = "btn_prev";
 			temp.styleClass = org.mokylin.skin.app.beibao.jingmai.button.ButtonJiantou;
-			temp.x = 241;
-			temp.y = 285;
+			temp.x = 245;
+			temp.y = 299;
 			return temp;
 		}
 
@@ -183,8 +183,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.letterSpacing = -2;
 			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
 			temp.width = 134;
-			temp.x = 788;
-			temp.y = 83;
+			temp.x = 792;
+			temp.y = 97;
 			return temp;
 		}
 
@@ -198,8 +198,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.letterSpacing = -2;
 			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
 			temp.width = 118;
-			temp.x = 660;
-			temp.y = 83;
+			temp.x = 664;
+			temp.y = 97;
 			return temp;
 		}
 
@@ -211,8 +211,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.height = 450;
 			temp.styleName = "ui/big_bg/beibao/jingmai/bg.jpg";
 			temp.width = 911;
-			temp.x = 18;
-			temp.y = 74;
+			temp.x = 22;
+			temp.y = 88;
 			return temp;
 		}
 
@@ -225,8 +225,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 117;
-			temp.x = 90;
-			temp.y = 44;
+			temp.x = 94;
+			temp.y = 58;
 			return temp;
 		}
 
@@ -239,8 +239,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.height = 133;
 			temp.styleClass = org.mokylin.skin.app.beibao.jingmai.mc.UIMovieClipJingmai;
 			temp.width = 52;
-			temp.x = 687;
-			temp.y = 118;
+			temp.x = 691;
+			temp.y = 132;
 			return temp;
 		}
 
@@ -251,8 +251,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.name = "rdo_chongmai";
 			temp.groupName = "rdoJingmaiBtn";
 			temp.styleClass = org.mokylin.skin.app.beibao.jingmai.button.ButtonChongmai;
-			temp.x = 425;
-			temp.y = 443;
+			temp.x = 429;
+			temp.y = 457;
 			return temp;
 		}
 
@@ -263,8 +263,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.name = "rdo_daimai";
 			temp.groupName = "rdoJingmaiBtn";
 			temp.styleClass = org.mokylin.skin.app.beibao.jingmai.button.ButtonDaimai;
-			temp.x = 486;
-			temp.y = 443;
+			temp.x = 490;
+			temp.y = 457;
 			return temp;
 		}
 
@@ -275,8 +275,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.name = "rdo_dumai";
 			temp.groupName = "rdoJingmaiBtn";
 			temp.styleClass = org.mokylin.skin.app.beibao.jingmai.button.ButtonDumai;
-			temp.x = 363;
-			temp.y = 443;
+			temp.x = 367;
+			temp.y = 457;
 			return temp;
 		}
 
@@ -287,8 +287,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.name = "rdo_renmai";
 			temp.groupName = "rdoJingmaiBtn";
 			temp.styleClass = org.mokylin.skin.app.beibao.jingmai.button.ButtonRenmai;
-			temp.x = 302;
-			temp.y = 443;
+			temp.x = 306;
+			temp.y = 457;
 			return temp;
 		}
 
@@ -299,8 +299,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.name = "rdo_yangqiaomai";
 			temp.groupName = "rdoJingmaiBtn";
 			temp.styleClass = org.mokylin.skin.app.beibao.jingmai.button.ButtonYangqiaomai;
-			temp.x = 609;
-			temp.y = 443;
+			temp.x = 613;
+			temp.y = 457;
 			return temp;
 		}
 
@@ -311,8 +311,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.name = "rdo_yinqiaomai";
 			temp.groupName = "rdoJingmaiBtn";
 			temp.styleClass = org.mokylin.skin.app.beibao.jingmai.button.ButtonYinqiaomai;
-			temp.x = 548;
-			temp.y = 443;
+			temp.x = 552;
+			temp.y = 457;
 			return temp;
 		}
 

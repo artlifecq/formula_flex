@@ -104,7 +104,6 @@ package org.mokylin.skin.app.beibao.zhangong
 			temp.height = 20;
 			temp.label = "6";
 			temp.styleClass = org.mokylin.skin.app.beibao.zhangong.uinumber.UINumberDengji;
-			temp.textAlign = "center";
 			temp.width = 22;
 			temp.x = 0;
 			temp.y = 2;

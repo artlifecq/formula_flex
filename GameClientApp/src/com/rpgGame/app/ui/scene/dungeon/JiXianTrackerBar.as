@@ -99,6 +99,7 @@ package com.rpgGame.app.ui.scene.dungeon
 			EventManager.addEvent(ItemEvent.ITEM_ADD,updateshow);
 			EventManager.addEvent(ActivityEvent.ENTER_ACTIVITY,getActId);
 			updateshow(null);
+			doFindMonsterWork();
 		}
 		
 		override protected function onHide():void
