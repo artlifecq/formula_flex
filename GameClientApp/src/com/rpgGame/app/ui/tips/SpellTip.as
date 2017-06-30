@@ -100,7 +100,7 @@ package com.rpgGame.app.ui.tips
 			}
 			
 			mainIco.setIconResName(ClientConfig.getSkillIcon(cfg.q_icon.toString(),64));
-			_spellTip.skill_name.text=cfg.q_skillName+"		Lv."+info.skillChildLv;
+			_spellTip.skill_name.text=cfg.q_skillName+" Lv."+info.skillChildLv;
 			_spellTip.lbTime.text=cfg.q_cd==0?LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT12):(cfg.q_cd/1000)+"s";
 			_spellTip.lbXiaohao.text=cfg.q_recovers_detail.length==0?LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT12):cfg.q_recovers_detail;
 			var lvData:Q_skill_ignore=SkillLvLDataManager.getData(info.skillModelId+"_"+info.skillChildLv);
