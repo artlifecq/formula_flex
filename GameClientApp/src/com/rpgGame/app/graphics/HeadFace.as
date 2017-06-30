@@ -5,9 +5,11 @@ package com.rpgGame.app.graphics
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.rpgGame.app.display2D.AttackFace;
 	import com.rpgGame.app.graphics.decor.DecorCtrl;
-	import com.rpgGame.app.manager.HuBaoManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.PKMamager;
+	import com.rpgGame.app.manager.guild.GuildManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.utils.HeadBloodUtil;
 	import com.rpgGame.core.utils.MCUtil;
@@ -20,7 +22,11 @@ package com.rpgGame.app.graphics
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.FaceInfo;
 	import com.rpgGame.coreData.clientConfig.Q_guild_permission;
+	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
+	import com.rpgGame.coreData.info.MapDataManager;
+	import com.rpgGame.coreData.info.map.EnumMapType;
+	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.AttachDisplayType;
@@ -89,6 +95,8 @@ package com.rpgGame.app.graphics
 		
 		private var _guildNameBar : HeadNameBar;
 		private var _familNameBar : HeadNameBar;
+		private var _guildWarInfoBar:GuildWarInfoBar;
+		
 		/** 图标图片*/
 		private var _icoImage : UIAsset;
 		/**心情动画*/
@@ -321,6 +329,9 @@ package com.rpgGame.app.graphics
 				showAndHideElement(_office, !isMysteryMan&&!_isCamouflage);
 				showAndHideElement(_huabotitle, !isMysteryMan&&_nameBar && _nameBar.parent && _nameBar.visible,DecorCtrl.TOP_HUBAOCHENGHAO);
 				updateTeamFlag(!isMysteryMan&&Mgr.teamMgr.isMyCaptian(HeroData(_role.data).serverID));
+				if(_guildWarInfoBar){
+					showAndHideElement(_guildWarInfoBar,true,DecorCtrl.TOP_TOWER);//帮会战信息条
+				}
 			}
 			showAndHideElement(_junXianBar, !isMysteryMan&&_nameBar && _nameBar.parent && _nameBar.visible);
 			//			showAndHideElement(_countryNameBar, _nameBar && _nameBar.parent && _nameBar.visible);
@@ -1066,6 +1077,7 @@ package com.rpgGame.app.graphics
 			updateTowerFlag(false);
 		}
 		
+		
 		override public function showHead() : void
 		{
 			super.showHead();
@@ -1184,6 +1196,28 @@ package com.rpgGame.app.graphics
 			}
 			
 			updateAllBarPosition();
+		}
+		
+		
+		/**
+		 *创建帮派战信息条 
+		 * 
+		 */
+		private function createGuildWarBar():void
+		{
+			var mapId:int=MainRoleManager.actorInfo.mapID;
+			var sceneData:SceneData=MapDataManager.getMapInfo(mapId);
+			var mapCfg:Q_map=sceneData.getData();
+			if(GuildManager.instance().haveGuild==false||mapCfg.q_map_type!=EnumMapType.MAP_TYPE_WCZB){//没有帮会或者不是帮会战地图
+				if(_guildWarInfoBar){
+					_guildWarInfoBar.removeFromParent();
+					_guildWarInfoBar=null;
+				}
+				return;
+			}
+			if(!_guildWarInfoBar){
+				_guildWarInfoBar=GuildWarInfoBar.create(_role);
+			}
 		}
 		
 		/**增加护宝称号货移除称号*/

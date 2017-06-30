@@ -79,6 +79,9 @@ package com.rpgGame.app.manager.fightsoul
 		}
 		public static function updateRoleAvatar(owner:SceneRole):void
 		{
+			if(!owner){
+				return;
+			}
 			var fightSoulLevel:int;
 			var fightSoulRole:SceneRole = SceneRoleManager.getInstance().createFightSoulRole(owner);
 			if (fightSoulRole)

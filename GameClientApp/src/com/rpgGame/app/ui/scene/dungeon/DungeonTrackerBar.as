@@ -2,6 +2,7 @@ package com.rpgGame.app.ui.scene.dungeon
 {
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.scene.BossTrackerUI;
+	import com.rpgGame.app.ui.scene.GuildWarTrackerUI;
 	import com.rpgGame.app.ui.scene.LijinTrackerUI;
 	import com.rpgGame.app.ui.scene.MibaoTrackerUI;
 	import com.rpgGame.core.ui.SkinUI;
@@ -43,6 +44,7 @@ package com.rpgGame.app.ui.scene.dungeon
 			uiClsMap.add(EnumMapType.MAP_TYPE_TOWERS,NineTowerTrackUIExt);
 			uiClsMap.add(EnumMapType.MAP_JIXIAN,JiXianTrackerBar);
 			uiClsMap.add(EnumMapType.MAP_TYPE_LIJIN,LijinTrackerUI);
+			uiClsMap.add(EnumMapType.MAP_TYPE_WCZB,GuildWarTrackerUI);
 			uiClsMap.add(EnumMapType.MAP_TYPE_MIBAO,MibaoTrackerUI);
 		}
 		
@@ -51,6 +53,7 @@ package com.rpgGame.app.ui.scene.dungeon
 			var mapId:int=MainRoleManager.actorInfo.mapID;
 			var sceneData:SceneData=MapDataManager.getMapInfo(mapId);
 			var cls:Class=uiClsMap.getValue(sceneData.mapType);
+			
 			if(!cls){
 				return;
 			}
