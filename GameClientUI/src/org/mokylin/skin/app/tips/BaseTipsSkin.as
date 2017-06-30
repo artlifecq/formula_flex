@@ -21,8 +21,8 @@ package org.mokylin.skin.app.tips
 			super();
 			
 			this.currentState = "normal";
-			this.height = 47;
-			this.width = 44;
+			this.height = 91;
+			this.width = 281;
 			this.elementsContent = [imgBG_i()];
 			
 			states = {

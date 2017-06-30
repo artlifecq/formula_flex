@@ -12,12 +12,11 @@ package com.rpgGame.coreData.cfg
 		{
 			return _maxCount;
 		}
-		private static var _datas:Dictionary;
+		private static var _datas:Dictionary=new Dictionary();;
 		public static function setConfig( data:ByteArray):void
 		{
 			if( data == null )
 				return;
-			_datas = new Dictionary();
 			var arr : Array = data.readObject();
 			for each(var info :Q_horse in arr) {
 				_datas[info.q_id] = info;
@@ -31,9 +30,5 @@ package com.rpgGame.coreData.cfg
 		}
 		
 		
-		public static function get mountAnimatResID():String
-		{
-			return "pc/mount/mount_zhanma_animat";
-		}
 	}
 }

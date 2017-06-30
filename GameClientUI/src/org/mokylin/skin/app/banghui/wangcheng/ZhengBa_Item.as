@@ -18,6 +18,8 @@ package org.mokylin.skin.app.banghui.wangcheng
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var bg:feathers.controls.SkinnableContainer;
+
 		public var btnPai:feathers.controls.Button;
 
 		public var lbCityName:feathers.controls.Label;
@@ -41,7 +43,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			this.currentState = "normal";
 			this.height = 27;
 			this.width = 599;
-			this.elementsContent = [__ZhengBa_Item_SkinnableContainer1_i(),lbCityName_i(),lbTeamName1_i(),lbTeamName2_i(),lbJiage_i(),lbTime_i(),btnPai_i()];
+			this.elementsContent = [bg_i(),lbCityName_i(),lbTeamName1_i(),lbTeamName2_i(),lbJiage_i(),lbTime_i(),btnPai_i()];
 			
 			states = {
 			};
@@ -52,9 +54,11 @@ package org.mokylin.skin.app.banghui.wangcheng
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __ZhengBa_Item_SkinnableContainer1_i():feathers.controls.SkinnableContainer
+		private function bg_i():feathers.controls.SkinnableContainer
 		{
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			bg = temp;
+			temp.name = "bg";
 			temp.height = 27;
 			var skin:StateSkin = new org.mokylin.skin.app.banghui.ItemBg()
 			temp.skin = skin

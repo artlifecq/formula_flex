@@ -1,12 +1,18 @@
 package com.rpgGame.app.ui.tips
 {
 	import com.rpgGame.app.reward.RewardGroup;
+	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
+	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.coreData.cfg.QSinglecitybaseCfgData;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.clientConfig.Q_singlecitybase;
 	import com.rpgGame.coreData.enum.EnumCity;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
+	import com.rpgGame.coreData.info.tip.WczbTipsData;
+	import com.rpgGame.coreData.utils.HtmlTextUtil;
+	import com.rpgGame.netData.guildWar.bean.GuildWarCityInfo;
 	
 	import org.mokylin.skin.app.banghui.wangcheng.Tips_WangCheng;
 	
@@ -31,10 +37,49 @@ package com.rpgGame.app.ui.tips
 		
 		public function setTipData(data:*):void
 		{
-			var cityId:int=EnumCity.DONG_WEI;
-			var cfg:Q_singlecitybase=QSinglecitybaseCfgData.getCityCfg(cityId);
+			var tipsInfo:WczbTipsData=(data as DynamicTipData).data;
+			if(!tipsInfo){
+				return;
+			}
+			var info:GuildWarCityInfo=tipsInfo.cityInfo;
+			var cfg:Q_singlecitybase=QSinglecitybaseCfgData.getCityCfg(info.id);
 			_rewardG.setRewardByJsonStr(cfg.q_rewards2);
 			_rewardB.setRewardByJsonStr(cfg.q_rewards1);
+			
+			_skins.lbTeamName.text=info.occupyGuildName?info.occupyGuildName:"无";
+			_skins.lbRoleName.text=info.occupyCheifName?info.occupyCheifName:"无";
+			
+			_skins.lbVsBang.text=info.occupyGuildName&&info.attackGuildName?info.occupyGuildName+"VS"+info.attackGuildName:"无";
+			if(tipsInfo.nextTime!=0){
+				_skins.lbTime.text=TimeUtil.changeDateToDateStr(new Date(tipsInfo.nextTime));
+			}else{
+				_skins.lbTime.text="待定";
+			}
+			_skins.lbJiangli.visible=tipsInfo.isOwner;
+			if(tipsInfo.isOwner){
+				_skins.lbJiangli.htmlText=tipsInfo.rewardState==0?HtmlTextUtil.getTextColor(StaticValue.UI_RED1,"已经领取"):HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,"点击领取");
+			}
+			_skins.lbName.text=getCityName(info.id);
+		}
+		
+		private function getCityName(city):String
+		{
+			var name:String="";
+			switch(city){
+				case EnumCity.WANG_CHENG:
+					name="【王城】";
+					break;
+				case EnumCity.XI_WEI:
+					name="【西卫】";
+					break;
+				case EnumCity.ZHONG_WEI:
+					name="【中卫】";
+					break;
+				case EnumCity.DONG_WEI:
+					name="【东卫】";
+					break;
+			}
+			return name;
 		}
 		
 		public function hideTips():void

@@ -26,34 +26,18 @@ package com.rpgGame.app.manager.guild
 	import com.rpgGame.coreData.lang.LangGuild;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.guild.bean.GuildApplyInfo;
-	import com.rpgGame.netData.guild.bean.GuildBriefnessInfo;
 	import com.rpgGame.netData.guild.bean.GuildInfo;
 	import com.rpgGame.netData.guild.bean.GuildInviteInfo;
 	import com.rpgGame.netData.guild.bean.GuildListInfo;
 	import com.rpgGame.netData.guild.bean.GuildMemberInfo;
 	import com.rpgGame.netData.guild.bean.GuildSkillInfo;
-	import com.rpgGame.netData.guild.message.ReqGuildApplyListMessage;
-	import com.rpgGame.netData.guild.message.ReqGuildApplyOperationMessage;
 	import com.rpgGame.netData.guild.message.ReqGuildAppointMessage;
-	import com.rpgGame.netData.guild.message.ReqGuildBriefnessInfoMessage;
-	import com.rpgGame.netData.guild.message.ReqGuildConveneMessage;
-	import com.rpgGame.netData.guild.message.ReqGuildDissolveMessage;
-	import com.rpgGame.netData.guild.message.ReqGuildDonateMessage;
-	import com.rpgGame.netData.guild.message.ReqGuildExitMessage;
-	import com.rpgGame.netData.guild.message.ReqGuildGetDailyGiftMessage;
-	import com.rpgGame.netData.guild.message.ReqGuildInviteListMessage;
-	import com.rpgGame.netData.guild.message.ReqGuildKillMessage;
-	import com.rpgGame.netData.guild.message.ReqGuildLevelupMessage;
-	import com.rpgGame.netData.guild.message.ReqGuildModifyNoteMessage;
-	import com.rpgGame.netData.guild.message.ReqGuildSetAutoAcceptMessage;
-	import com.rpgGame.netData.guild.message.ReqGuildSkillLevelupMessage;
 	import com.rpgGame.netData.guild.message.ResGuildChangeGuildIdMessage;
 	import com.rpgGame.netData.guild.message.ResGuildInfoMessage;
 	import com.rpgGame.netData.guild.message.ResGuildListInfoMessage;
 	import com.rpgGame.netData.guild.message.ResGuildOperateResultMessage;
 	
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.data.long;
 
 	/**
@@ -242,7 +226,7 @@ package com.rpgGame.app.manager.guild
 		{
 			_currentPageInfo= msg;
 			_guildList = msg.guildList;
-			EventManager.dispatchEvent(GuildEvent.GET_GUILD_LIST,msg);
+			EventManager.dispatchEvent(GuildEvent.GET_GUILD_LIST);
 		}
 		
 		
@@ -253,6 +237,17 @@ package com.rpgGame.app.manager.guild
 			if(_guildList.length<= index)
 				return null;
 			return _guildList[index];
+		}
+		
+		public function getGuildListInfoById(guildid:long):GuildListInfo
+		{
+			var length:int = _guildList.length;
+			for(var i:int = 0;i<length;i++)
+			{
+				if(_guildList[i].guildId.CompareTo(guildid)==1)
+					return _guildList[i];
+			}
+			return null;
 		}
 		
 		private var _allcreateGuildInfo:Array;
@@ -704,12 +699,6 @@ package com.rpgGame.app.manager.guild
 				return null;
 			return _inviteListInfo[index];
 		}
-		
-		public function setResGuildBriefnessInfo(info:GuildBriefnessInfo):void
-		{
-			EventManager.dispatchEvent(GuildEvent.GUILD_INFO_CHANGE,info);
-		}
-		
 		
 		/**
 		 *根据职务类型获取帮会中已有该职务成员数量 

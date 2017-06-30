@@ -43,6 +43,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.HorseConfigData;
 	import com.rpgGame.coreData.cfg.HorseSpellData;
 	import com.rpgGame.coreData.cfg.HuBaoData;
+	import com.rpgGame.coreData.cfg.JiXianTiaoZhanCfgData;
 	import com.rpgGame.coreData.cfg.JunJieData;
 	import com.rpgGame.coreData.cfg.LijinCfgData;
 	import com.rpgGame.coreData.cfg.LostSkillData;
@@ -69,6 +70,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.TipsCfgData;
 	import com.rpgGame.coreData.cfg.TransCfgData;
 	import com.rpgGame.coreData.cfg.TriggerCfgData;
+	import com.rpgGame.coreData.cfg.VipCfg;
 	import com.rpgGame.coreData.cfg.WindowInfoData;
 	import com.rpgGame.coreData.cfg.ZhanGongData;
 	import com.rpgGame.coreData.cfg.ZhanGongMonsterData;
@@ -297,6 +299,7 @@ package com.rpgGame.app.data
 			SceneEffectCfgData.setup(dic[ConfigClassRegister.Q_map_effect]);
 			DailyZoneCfgData.setup(dic[ConfigClassRegister.Q_daily_zone]);//日常副本
 			DailyZoneMonsterCfgData.setup(dic[ConfigClassRegister.Q_dailyzone_monster]);//日常刷怪数据
+			JiXianTiaoZhanCfgData.setup(dic[ConfigClassRegister.Q_limitchallenge]);//极限挑战
 			//道具获取路径
 			SourceGetCfg.setup(dic[ConfigClassRegister.Q_source]);//购买界面
 			
@@ -308,8 +311,7 @@ package com.rpgGame.app.data
 			BattleRankCfg.setup(dic[ConfigClassRegister.Q_battle_rank]);//巅峰对决
 			NineTowerCfg.setup(dic[ConfigClassRegister.Q_nine_tower]);//九层妖塔	
 			LijinCfgData.setup(dic[ConfigClassRegister.Q_daysdown_gold]);//天降礼金
-			
-			
+			VipCfg.setup(dic[ConfigClassRegister.Q_vip]);//多人副本
 		}
 		
 		/**

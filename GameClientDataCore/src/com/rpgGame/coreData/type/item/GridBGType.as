@@ -30,7 +30,7 @@ package com.rpgGame.coreData.type.item
 		public static const GRID_SIZE_36 : String = "normal/36";
 		public static const GRID_SIZE_42 : String = "normal/42";
 		public static const GRID_SIZE_48 : String = "normal/48";
-		public static const GRID_SIZE_60 : String = "normal/60";
+	//	public static const GRID_SIZE_60 : String = "normal/60";
 		public static const GRID_SIZE_64 : String = "normal/64";
 		
 		/**
@@ -73,6 +73,11 @@ package com.rpgGame.coreData.type.item
 		 *武器 
 		 */
 		public static const EQUIP_WEAPON:String="equip/10wuqi";
+		
+		/**
+		 *vip
+		 */
+		public static const VIP:String="equip/10wuqi";
 		
 		/** 格子光圈品质 44*44 **/
 		public static const GRID_SIZE_40 : String = "quality/40_4";

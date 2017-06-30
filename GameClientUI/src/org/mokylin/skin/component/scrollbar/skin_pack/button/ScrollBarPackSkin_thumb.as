@@ -18,13 +18,11 @@ package org.mokylin.skin.component.scrollbar.skin_pack.button
 			super();
 			
 			this.currentState = "up";
-			this.height = 17;
-			this.width = 17;
 			this.elementsContent = [];
 			
 			states = {
 			};
-			skinNames={"down":"ui/component/scrollbar/skin_pack/button/skin_thumb/down.png", "hover":"ui/component/scrollbar/skin_pack/button/skin_thumb/over.png", "up":"ui/component/scrollbar/skin_pack/button/skin_thumb/up.png"};
+			skinNames={"down":"ui/component/scrollbar/skin_pack/button/skin_thumb/down.png,ui/component/scrollbar/skin_pack/button/skin_thumb/fangkuai_up.png", "hover":"ui/component/scrollbar/skin_pack/button/skin_thumb/over.png,ui/component/scrollbar/skin_pack/button/skin_thumb/fangkuai_up.png", "up":"ui/component/scrollbar/skin_pack/button/skin_thumb/up.png,ui/component/scrollbar/skin_pack/button/skin_thumb/fangkuai_up.png"};
 		}
 
 

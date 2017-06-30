@@ -6,7 +6,7 @@ package org.mokylin.skin.app.zhanchang
 	import feathers.controls.TabBar;
 	import feathers.controls.UIAsset;
 	import feathers.layout.HorizontalLayout;
-	import org.mokylin.skin.common.yiji_panelbg2_Skin;
+	import org.mokylin.skin.common.TongYongPanelbg1;
 	import org.mokylin.skin.component.tabbar.TabBarSkin_pack;
 
 	/**
@@ -32,8 +32,8 @@ package org.mokylin.skin.app.zhanchang
 			super();
 			
 			this.currentState = "normal";
-			this.height = 587;
-			this.width = 947;
+			this.height = 601;
+			this.width = 956;
 			this.elementsContent = [bg_i(),__ZhanChang_Skin_UIAsset1_i(),__ZhanChang_Skin_UIAsset2_i(),tabBar_i()];
 			
 			states = {
@@ -65,8 +65,8 @@ package org.mokylin.skin.app.zhanchang
 			temp.height = 512;
 			temp.styleName = "ui/common/background/neikuang_1.png";
 			temp.width = 922;
-			temp.x = 14;
-			temp.y = 69;
+			temp.x = 18;
+			temp.y = 82;
 			return temp;
 		}
 
@@ -76,8 +76,8 @@ package org.mokylin.skin.app.zhanchang
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/zhanchang/jingjichang/zhanchang.png";
-			temp.x = 448;
-			temp.y = 12;
+			temp.x = 450;
+			temp.y = 17;
 			return temp;
 		}
 
@@ -86,10 +86,10 @@ package org.mokylin.skin.app.zhanchang
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 587;
-			var skin:StateSkin = new org.mokylin.skin.common.yiji_panelbg2_Skin()
+			temp.height = 601;
+			var skin:StateSkin = new org.mokylin.skin.common.TongYongPanelbg1()
 			temp.skin = skin
-			temp.width = 947;
+			temp.width = 956;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -104,8 +104,8 @@ package org.mokylin.skin.app.zhanchang
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_pack;
-			temp.x = 27;
-			temp.y = 41;
+			temp.x = 31;
+			temp.y = 54;
 			temp.layout = __ZhanChang_Skin_HorizontalLayout1_i();
 			temp.dataProvider = __ZhanChang_Skin_ArrayCollection1_i();
 			return temp;

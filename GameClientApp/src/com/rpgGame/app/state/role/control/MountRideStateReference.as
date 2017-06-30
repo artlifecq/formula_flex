@@ -11,6 +11,7 @@ package com.rpgGame.app.state.role.control
 	 */
 	public class MountRideStateReference extends RoleStateReference
 	{
+		private var _horseID : Number = 0;
 		private var _isRide : Boolean = false;
 
 		public function MountRideStateReference()
@@ -18,9 +19,10 @@ package com.rpgGame.app.state.role.control
 			super();
 		}
 
-		public function setParams(isRide : Boolean) : void
+		public function setParams(isRide : Boolean,horseID : Number) : void
 		{
 			_isRide = isRide;
+			_horseID = horseID;
 		}
 
 		public function get isRide() : Boolean
@@ -30,8 +32,15 @@ package com.rpgGame.app.state.role.control
 
 		override public function dispose() : void
 		{
+			_horseID = 0;
 			_isRide = false;
 			super.dispose();
 		}
+
+		public function get horseID():Number
+		{
+			return _horseID;
+		}
+
 	}
 }

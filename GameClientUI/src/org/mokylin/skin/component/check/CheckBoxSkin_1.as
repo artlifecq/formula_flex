@@ -38,8 +38,7 @@ package org.mokylin.skin.component.check
 			super();
 			
 			this.currentState = "upAndSelected";
-			this.elementsContent = [];
-			labelDisplay_i();
+			this.elementsContent = [labelDisplay_i()];
 			__CheckBoxSkin_1_UIAsset1_i();
 			__CheckBoxSkin_1_UIAsset2_i();
 			__CheckBoxSkin_1_UIAsset3_i();
@@ -48,7 +47,8 @@ package org.mokylin.skin.component.check
 			__CheckBoxSkin_1_UIAsset6_i();
 			
 			
-	
+			states = {
+			};
 			skinNames={"down":"ui/component/check/skin_1/down.png",
 			"downAndSelected":"ui/component/check/skin_1/downAndSelected.png",
 			"hover":"ui/component/check/skin_1/over.png",
@@ -130,10 +130,11 @@ package org.mokylin.skin.component.check
 			temp.left = 28;
 			temp.text = "复选框";
 			temp.textAlign = "left";
-			temp.color = 0xCFC6AE;
+			temp.color = 0x55BD15;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.top = 0;
 			temp.verticalAlign = "middle";
+			temp.width = 96;
 			return temp;
 		}
 

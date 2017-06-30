@@ -7,11 +7,9 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 	import feathers.controls.ProgressBar;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import feathers.controls.UINumber;
 	import org.mokylin.skin.app.zhanchang.button.ButtonKaiqi;
 	import org.mokylin.skin.app.zhanchang.button.ButtonShengwangbtn;
 	import org.mokylin.skin.app.zhanchang.dianfengduijue.Pro_duanwei;
-	import org.mokylin.skin.app.zhanchang.uinumber.UINumberNumber4;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 
 	/**
@@ -40,13 +38,13 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 
 		public var iconName:feathers.controls.UIAsset;
 
+		public var lbCiShu:feathers.controls.Label;
+
 		public var lbDuanwei:feathers.controls.Label;
 
+		public var lbSheng:feathers.controls.Label;
+
 		public var lbShengwang:feathers.controls.Label;
-
-		public var numCishu:feathers.controls.UINumber;
-
-		public var numShengwang:feathers.controls.UINumber;
 
 
 		//==========================================================================
@@ -57,7 +55,9 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [__DianFeng_Skin_UIAsset2_i(),icon_i(),iconName_i(),__DianFeng_Skin_UIAsset3_i(),Pro_duanwei_i(),lbDuanwei_i(),btnChakan_i(),btnOpen_i(),__DianFeng_Skin_UIAsset4_i(),__DianFeng_Skin_UIAsset5_i(),numCishu_i(),numShengwang_i(),__DianFeng_Skin_UIAsset6_i(),icoSw_i(),lbShengwang_i(),btnShengwang_i(),grpTips_i()];
+			this.height = 601;
+			this.width = 956;
+			this.elementsContent = [__DianFeng_Skin_UIAsset2_i(),icon_i(),iconName_i(),__DianFeng_Skin_UIAsset3_i(),Pro_duanwei_i(),lbDuanwei_i(),btnChakan_i(),btnOpen_i(),__DianFeng_Skin_UIAsset4_i(),__DianFeng_Skin_UIAsset5_i(),lbCiShu_i(),lbSheng_i(),__DianFeng_Skin_UIAsset6_i(),icoSw_i(),lbShengwang_i(),btnShengwang_i(),grpTips_i()];
 			
 			states = {
 			};
@@ -75,8 +75,8 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			temp.name = "Pro_duanwei";
 			temp.styleClass = org.mokylin.skin.app.zhanchang.dianfengduijue.Pro_duanwei;
 			temp.value = 60;
-			temp.x = 136;
-			temp.y = 114;
+			temp.x = 140;
+			temp.y = 127;
 			return temp;
 		}
 
@@ -111,7 +111,7 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			temp.leading = 7;
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 369;
+			temp.width = 380;
 			temp.x = 7;
 			temp.y = 53;
 			return temp;
@@ -121,8 +121,8 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/big_bg/zhanchang/dianfeng_bg.jpg";
-			temp.x = 19;
-			temp.y = 74;
+			temp.x = 23;
+			temp.y = 87;
 			return temp;
 		}
 
@@ -131,8 +131,8 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/dianfengduijue/jindutiaodi.png";
 			temp.width = 199;
-			temp.x = 118;
-			temp.y = 111;
+			temp.x = 122;
+			temp.y = 124;
 			return temp;
 		}
 
@@ -140,8 +140,8 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/dianfengduijue/cishu.png";
-			temp.x = 217;
-			temp.y = 530;
+			temp.x = 221;
+			temp.y = 543;
 			return temp;
 		}
 
@@ -149,8 +149,8 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/dianfengduijue/shengwang.png";
-			temp.x = 197;
-			temp.y = 554;
+			temp.x = 201;
+			temp.y = 567;
 			return temp;
 		}
 
@@ -159,8 +159,8 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/common/background/neikuang.png";
 			temp.width = 88;
-			temp.x = 597;
-			temp.y = 541;
+			temp.x = 601;
+			temp.y = 554;
 			return temp;
 		}
 
@@ -184,8 +184,8 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xCFC6AE;
 			temp.width = 80;
-			temp.x = 127;
-			temp.y = 141;
+			temp.x = 131;
+			temp.y = 154;
 			return temp;
 		}
 
@@ -195,8 +195,8 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			btnOpen = temp;
 			temp.name = "btnOpen";
 			temp.styleClass = org.mokylin.skin.app.zhanchang.button.ButtonKaiqi;
-			temp.x = 359;
-			temp.y = 516;
+			temp.x = 363;
+			temp.y = 529;
 			return temp;
 		}
 
@@ -206,8 +206,8 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			btnShengwang = temp;
 			temp.name = "btnShengwang";
 			temp.styleClass = org.mokylin.skin.app.zhanchang.button.ButtonShengwangbtn;
-			temp.x = 693;
-			temp.y = 510;
+			temp.x = 697;
+			temp.y = 523;
 			return temp;
 		}
 
@@ -216,8 +216,8 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grpTips = temp;
 			temp.name = "grpTips";
-			temp.x = 558;
-			temp.y = 78;
+			temp.x = 545;
+			temp.y = 90;
 			temp.elementsContent = [__DianFeng_Skin_UIAsset7_i(),__DianFeng_Skin_Label1_i(),__DianFeng_Skin_Label2_i(),__DianFeng_Skin_Label3_i()];
 			return temp;
 		}
@@ -228,8 +228,8 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			icoSw = temp;
 			temp.name = "icoSw";
 			temp.styleName = "ui/common/tubiao/shengwang.png";
-			temp.x = 602;
-			temp.y = 539;
+			temp.x = 606;
+			temp.y = 552;
 			return temp;
 		}
 
@@ -239,8 +239,8 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			iconName = temp;
 			temp.name = "iconName";
 			temp.styleName = "ui/app/zhanchang/icon/name/1001.png";
-			temp.x = 39;
-			temp.y = 156;
+			temp.x = 43;
+			temp.y = 169;
 			return temp;
 		}
 
@@ -250,8 +250,22 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			icon = temp;
 			temp.name = "icon";
 			temp.styleName = "ui/app/zhanchang/icon/1001_max.png";
-			temp.x = 20;
-			temp.y = 89;
+			temp.x = 24;
+			temp.y = 102;
+			return temp;
+		}
+
+		private function lbCiShu_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbCiShu = temp;
+			temp.name = "lbCiShu";
+			temp.text = "1/3";
+			temp.color = 0x00FF33;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.width = 80;
+			temp.x = 317;
+			temp.y = 546;
 			return temp;
 		}
 
@@ -265,8 +279,22 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 101;
-			temp.x = 167;
-			temp.y = 114;
+			temp.x = 171;
+			temp.y = 127;
+			return temp;
+		}
+
+		private function lbSheng_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbSheng = temp;
+			temp.name = "lbSheng";
+			temp.text = "4545110";
+			temp.color = 0x00FF33;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.width = 80;
+			temp.x = 301;
+			temp.y = 568;
 			return temp;
 		}
 
@@ -279,38 +307,8 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 50;
-			temp.x = 630;
-			temp.y = 544;
-			return temp;
-		}
-
-		private function numCishu_i():feathers.controls.UINumber
-		{
-			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
-			numCishu = temp;
-			temp.name = "numCishu";
-			temp.gap = -4;
-			temp.height = 25;
-			temp.label = "1168";
-			temp.styleClass = org.mokylin.skin.app.zhanchang.uinumber.UINumberNumber4;
-			temp.width = 63;
-			temp.x = 316;
-			temp.y = 532;
-			return temp;
-		}
-
-		private function numShengwang_i():feathers.controls.UINumber
-		{
-			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
-			numShengwang = temp;
-			temp.name = "numShengwang";
-			temp.gap = -4;
-			temp.height = 25;
-			temp.label = "1168";
-			temp.styleClass = org.mokylin.skin.app.zhanchang.uinumber.UINumberNumber4;
-			temp.width = 67;
-			temp.x = 296;
-			temp.y = 555;
+			temp.x = 634;
+			temp.y = 557;
 			return temp;
 		}
 

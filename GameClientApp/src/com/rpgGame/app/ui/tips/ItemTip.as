@@ -19,8 +19,8 @@ package com.rpgGame.app.ui.tips
 	import feathers.controls.Label;
 	import feathers.controls.UIAsset;
 	
-	import org.mokylin.skin.app.tips.daojuTips_Skin;
-
+	import org.mokylin.skin.app.tips.Tips_DaoJu1;
+	
 	/**
 	 * 物品TIPS
 	 * @author luguozheng
@@ -30,7 +30,7 @@ package com.rpgGame.app.ui.tips
 	 */
 	public class ItemTip extends SkinUI implements ITip
 	{
-		private var _itemTip : daojuTips_Skin;//ItemTipsSkin;
+		private var _itemTip : Tips_DaoJu1;
 		/** 物品信息类 **/
 		private var _itemInfo : ClientItemInfo;
 		
@@ -41,14 +41,15 @@ package com.rpgGame.app.ui.tips
 		
 		private var labelList:Vector.<Label>;
 		private var lines:Vector.<UIAsset>;
-
+		private var uititles:Vector.<UIAsset>;
+		
 		public function ItemTip()
 		{
-			_itemTip = new daojuTips_Skin();
+			_itemTip = new Tips_DaoJu1();
 			super(_itemTip);
 			initTip();
 		}
-
+		
 		/**
 		 * 初始化
 		 *
@@ -58,18 +59,47 @@ package com.rpgGame.app.ui.tips
 			_iconFace=new DragDropItem(IcoSizeEnum.ICON_64,0);
 			_iconFace.gridInfo=new GridInfo(ItemContainerID.BackPack,0);
 			addChild(_iconFace);
-			_iconFace.x=8;
-			_iconFace.y=12;
+			_iconFace.x=12;
+			_iconFace.y=39;
 			labelList=new Vector.<Label>();
 			lines=new Vector.<UIAsset>();
+			uititles=new Vector.<UIAsset>();
 			yinIcon=new UIAsset();
 			yinIcon.styleName="ui/common/tubiao/yinzi_24.png";
 		}
-
+		
+		//创建美术资源——UIASSET
+		private function createUiAsset(name:String):UIAsset
+		{
+			var uiasset:UIAsset=new UIAsset();
+			uiasset.name = name;
+			uiasset.height = 17;
+			uiasset.styleName = "ui/common/tips/tipswenzi/jineng/"+name+".png";
+			uiasset.x = curX;
+			uiasset.y = curY;
+			uititles.push(uiasset);
+			_itemTip.container.addChild(uiasset);
+			return uiasset;
+		}
+		
+		//创建文字——LABLE
+		private function createLabel(name:String,value:String):Label
+		{
+			var label:Label=new Label();
+			label.fontSize=14;
+			label.htmlText=name+value;
+			label.y=curY;
+			label.x=curX;
+			labelList.push(label);
+			_itemTip.container.addChild(label);
+			return label;
+		}
+		
+		//创建美术资源——线
 		private function createLine(x:int,y:int,w:int):void
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/tips/tips_1fengexian.png";
+			temp.styleName = "ui/common/tips/xian.png";
 			temp.width=w;
 			temp.x=x;
 			temp.y=y;
@@ -85,7 +115,7 @@ package com.rpgGame.app.ui.tips
 		public function setTipData(data : *) : void
 		{
 			_itemInfo = data as ClientItemInfo;
-
+			
 			while(labelList.length!=0){
 				var l:Label=labelList.shift();
 				l.removeFromParent(true);
@@ -94,6 +124,12 @@ package com.rpgGame.app.ui.tips
 			while(lines.length!=0){
 				var line:UIAsset=lines.shift();
 				line.removeFromParent(true);
+			}
+			
+			while(uititles.length!=0)
+			{
+				var uititle:UIAsset=uititles.shift();
+				uititle.removeFromParent(true);
 			}
 			
 			if (_itemInfo == null)
@@ -106,164 +142,180 @@ package com.rpgGame.app.ui.tips
 			_iconFace.countText.visible=false;
 			
 			
-			_itemTip.lbl_name.color=ItemConfig.getItemQualityColor(_itemInfo.cfgId);
-			_itemTip.lbl_name.text=_itemInfo.qItem.q_name;
-			_itemTip.lbl_lock.visible=true;
+			_itemTip.lbName.color=ItemConfig.getItemQualityColor(_itemInfo.cfgId);
+			_itemTip.lbName.text=_itemInfo.qItem.q_name;
+			_itemTip.lbBangding.visible=true;
 			if(_itemInfo.binded){
-				_itemTip.lbl_lock.text="[已绑定]";
+				_itemTip.lbBangding.text="【已绑定】";
 			}else{
 				if(_itemInfo.qItem.q_bind==0){
-					_itemTip.lbl_lock.visible=false;
+					_itemTip.lbBangding.visible=false;
 				}else if(_itemInfo.qItem.q_bind==1){
-					_itemTip.lbl_lock.text="[获得时绑定]";
+					_itemTip.lbBangding.text="【获得时绑定】";
 				}else{
-					_itemTip.lbl_lock.text="[使用后绑定]";
+					_itemTip.lbBangding.text="【使用后绑定】";
 				}
 			}
-			
-			var nameColor:uint=StaticValue.UI_NORMAL;
-			var valueColor:uint=StaticValue.UI_YELLOW1;
-			var valueColor1:uint=StaticValue.UI_SPECIAL_RED;
-			var valueColor2:uint=StaticValue.UI_GREEN;
-			
-			curY=93;
-			curX=10;
+			var title:UIAsset;
 			var name:String;
 			var value:String;
 			var info:HeroData=MainRoleManager.actorInfo;
-			if(_itemInfo.qItem.q_level!=0){//等级要求
-				name=HtmlTextUtil.getTextColor(nameColor,"等级要求:");
+			//等级要求
+			if(_itemInfo.qItem.q_level!=0){
+				
+				_itemTip.lb1.text="等级要求:";
+				_itemTip.lbDengji.text=_itemInfo.qItem.q_level.toString();
 				if(info.totalStat.level<_itemInfo.qItem.q_level){
-					value=HtmlTextUtil.getTextColor(valueColor1,_itemInfo.qItem.q_level.toString());
+					_itemTip.lbDengji.color=StaticValue.A_UI_RED_TEXT;
 				}else{
-					value=HtmlTextUtil.getTextColor(valueColor,_itemInfo.qItem.q_level.toString());
+					_itemTip.lbDengji.color=StaticValue.A_UI_BEIGE_TEXT;
 				}
-				createLabel(name,value);
-				curX=150;
 			}
 			
-			if(_itemInfo.qItem.q_cooldown!=0){//冷却时间
-				name=HtmlTextUtil.getTextColor(nameColor,"冷却时间:");
-				value=HtmlTextUtil.getTextColor(valueColor,(_itemInfo.qItem.q_cooldown/1000)+"秒");
-				createLabel(name,value);
-			}
-			curY+=22;
+			//叠加上限
+			curY=67;
+			_itemTip.lb2.text="叠加上限:";
+			_itemTip.lbXiaohao.text=_itemInfo.qItem.q_max>0?_itemInfo.qItem.q_max.toString():"1";
+			_itemTip.lbXiaohao.color=StaticValue.A_UI_BEIGE_TEXT;
+			_itemTip.lb2.visible=true;
+			_itemTip.lbXiaohao.visible=true;
+			_itemTip.lb2.y=_itemTip.lbXiaohao.y=curY;
+			curY+=20;
 			
-			curX=10;
-		/*	if(_itemInfo.qItem.q_dailylimit!=0){//今日使用次数
-				name=HtmlTextUtil.getTextColor(nameColor,"今日使用次数:");
-				value=HtmlTextUtil.getTextColor(valueColor,"0/"+_itemInfo.qItem.q_dailylimit);
-				createLabel(name,value);
-				curY+=22;
+			//冷却时间
+			if(_itemInfo.qItem.q_cooldown!=0){
+				_itemTip.lb3.text="冷却时间:";
+				_itemTip.lbXiuwei.text=(_itemInfo.qItem.q_cooldown/1000)+"秒";
+				_itemTip.lbXiuwei.color=StaticValue.A_UI_BEIGE_TEXT;
+				_itemTip.lb3.visible=true;
+				_itemTip.lbXiuwei.visible=true;
+				_itemTip.lb3.y=_itemTip.lbXiuwei.y=curY;
+				curY+=20;
+			}
+			else
+			{
+				_itemTip.lb3.visible=false;
+				_itemTip.lbXiuwei.visible=false;
 			}
 			
-			if(_itemInfo.qItem.q_weeklimit!=0){//今日使用次数
-				name=HtmlTextUtil.getTextColor(nameColor,"每周使用次数:");
-				value=HtmlTextUtil.getTextColor(valueColor,"0/"+_itemInfo.qItem.q_weeklimit);
-				createLabel(name,value);
-				curY+=22;
-			}*/
+			curY=120;
+			//使用次数
 			var label:Label;
 			if(_itemInfo.itemInfo){//物品存在的情况下
 				if(_itemInfo.itemInfo.limitType>0){
 					switch(_itemInfo.itemInfo.limitType){
 						case ItemLimitType.LIMIT_DAY:
-							name=HtmlTextUtil.getTextColor(nameColor,"今日使用次数:");
-							
+							_itemTip.lb4.text="今日使用次数";
 							break;
 						case ItemLimitType.LIMIT_WEEK:
-							name=HtmlTextUtil.getTextColor(nameColor,"本周使用次数:");
+							_itemTip.lb4.text="本周使用次数";
 							break;
 						case ItemLimitType.LIMIT_MONTH:
-							name=HtmlTextUtil.getTextColor(nameColor,"本月使用次数:");
+							_itemTip.lb4.text="本月使用次数";
 							break;
 						case ItemLimitType.LIMIT_YEAR:
-							name=HtmlTextUtil.getTextColor(nameColor,"本年使用次数:");
+							_itemTip.lb4.text="本年使用次数";
 							break;
 					}
-					value=HtmlTextUtil.getTextColor(valueColor,_itemInfo.itemInfo.limitValue+"/"+_itemInfo.itemInfo.limitNum);
-					createLabel(name,value);
-					curY+=22;
+					_itemTip.lbCishu.text=_itemInfo.itemInfo.limitValue+"/"+_itemInfo.itemInfo.limitNum;
+					_itemTip.lbCishu.color=StaticValue.A_UI_BEIGE_TEXT;
+					_itemTip.lb4.y=_itemTip.lbCishu.y=curY;
+					_itemTip.lb4.visible=_itemTip.lbCishu.visible=true;
+					curY+=27;
+				}	
+				else{
+					_itemTip.lb4.visible=_itemTip.lbCishu.visible=false;
 				}
-				
-				createLine(10,curY,280);
-				curY+=10;
-				
-				name=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,"[物品说明]\n");
-				label=createLabel(name,_itemInfo.qItem.q_describe);
+				_itemTip.imgLine1.y=curY;
+				curY+=13;
+				//物品说明
+				curX=13;
+				createUiAsset("wupinshuoming");
+				curY+=17;
+				label=createLabel(_itemInfo.qItem.q_describe,"");
 				label.width=250;
 				label.leading=5;
 				label.wordWrap=true;
-				curY+=label.height+10;
+				curY+=27;
+				createLine(10,curY,263);
+				curY+=13;
 				
-				createLine(10,curY,280);
-				curY+=10;
-				
+				//时效
+				createUiAsset("wupinshuoming");
+				curY+=17;
 				if(_itemInfo.itemInfo.lostTime==0){
-					name=HtmlTextUtil.getTextColor(nameColor,"类别:");
-					value=HtmlTextUtil.getTextColor(valueColor,"永久");
+					name=HtmlTextUtil.getTextColor(StaticValue.A_UI_GRAY_TEXT,"类别:");
+					value=HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"永久");
 				}else{
-					name=HtmlTextUtil.getTextColor(nameColor,"时效:");
-					value=HtmlTextUtil.getTextColor(valueColor,_itemInfo.itemInfo.lostTime.toString());
+					name=HtmlTextUtil.getTextColor(StaticValue.A_UI_GRAY_TEXT,"时效:");
+					value=HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,_itemInfo.itemInfo.lostTime.toString());
 				}
 				createLabel(name,value);
-				curY+=22;
-			}else{
-				createLine(10,curY,280);
-				curY+=10;
+				curY+=27;
 				
-				name=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,"[物品说明]\n");
-				label=createLabel(name,_itemInfo.qItem.q_describe);
+			}else{
+				//物品说明
+				curX=13;
+				curY=137;	
+				createUiAsset("wupinshuoming");
+				curY+=17;
+				label=createLabel(_itemInfo.qItem.q_describe,"");
 				label.width=250;
 				label.leading=5;
 				label.wordWrap=true;
-				curY+=label.height+10;
-				name=HtmlTextUtil.getTextColor(nameColor,"类别:");
-				value=HtmlTextUtil.getTextColor(valueColor,"永久");
+				curY+=27;
+				createLine(10,curY,263);
+				curY+=13;
+				
+				//时效
+				createUiAsset("shixiaoxing");
+				curY+=17;
+				name=HtmlTextUtil.getTextColor(StaticValue.A_UI_GRAY_TEXT,"类别:");
+				value=HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"永久");
 				createLabel(name,value);
-				curY+=22;
+				curY+=27;
+				_itemTip.lb3.visible=_itemTip.lbXiuwei.visible=false;
 			}
-		
+			
+			//物品价值
 			if (_itemInfo.qItem.q_sell==1) 
 			{
-				createLine(10,curY,280);
-				curY+=10;
+				createLine(10,curY,263);
+				curY+=13;
 				
-				name=HtmlTextUtil.getTextColor(nameColor,"回收价格:");
-				value=HtmlTextUtil.getTextColor(valueColor2,"      "+_itemInfo.qItem.q_sell_price.toString());
-				_itemTip.container.addChild(yinIcon);
+				createUiAsset("zhuangbeijiazhi");
+				curY+=17;
 				
+				name=HtmlTextUtil.getTextColor(StaticValue.A_UI_GRAY_TEXT,"售价:");
+				value=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"    "+_itemInfo.qItem.q_sell_price.toString());
+				_itemTip.container.addChild(yinIcon);			
 				label=createLabel(name,value);
-				yinIcon.x=80;
-				yinIcon.y=curY-5;
+				yinIcon.x=52;
+				yinIcon.y=curY-4;
 			}
 			else
 			{
 				MCUtil.removeSelf(yinIcon);
-				curY-=20;
+				curY-=27;
 			}
-		
-			_itemTip.bg.height=curY+25;
+			
+			for(var i:int=0;i<_itemTip.bg.numChildren;i++){
+				_itemTip.bg.getChildAt(i).visible=false;
+			}
+			var ui_bg:UIAsset=_itemTip.bg.getChildAt(_itemInfo.qItem.q_default) as UIAsset;
+			ui_bg.visible=true;
+			ui_bg.height=curY;
+			_itemTip.bg_di.y=ui_bg.height;
+			_itemTip.lbBangding.y=_itemTip.bg_di.y-3;
+			_itemTip.bg_di.visible=true;
+			_itemTip.bg.height=_itemTip.bg_di.y+_itemTip.bg_di.height;
 		}
 		
-		private function createLabel(name:String,value:String):Label
-		{
-			var label:Label=new Label();
-			label.fontSize=14;
-			label.htmlText=name+value;
-			label.y=curY;
-			label.x=curX;
-			labelList.push(label);
-			_itemTip.container.addChild(label);
-			return label;
-		}
-		
-
 		public function hideTips() : void
 		{
 			
 		}
-
+		
 		/**
 		 * 获取物品tips背景高度
 		 * @return
@@ -271,17 +323,17 @@ package com.rpgGame.app.ui.tips
 		 */
 		public override function get height() : Number
 		{
-
+			
 			return _itemTip.bg.height;
 		}
-
+		
 		private static var _instance : ItemTip = null;
-
+		
 		private var curY:int;
-
+		
 		private var curX:int;
-
-
+		
+		
 		public static function get instance() : ItemTip
 		{
 			if (null == _instance)

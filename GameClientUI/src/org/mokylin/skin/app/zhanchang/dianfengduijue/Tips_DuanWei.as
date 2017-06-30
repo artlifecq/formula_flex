@@ -93,9 +93,9 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icon1 = temp;
 			temp.name = "icon1";
-			temp.height = 48;
+			temp.height = 44;
 			temp.styleName = "ui/common/grid/normal/36.png";
-			temp.width = 48;
+			temp.width = 44;
 			temp.x = 12;
 			temp.y = 82;
 			return temp;
@@ -106,9 +106,9 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icon2 = temp;
 			temp.name = "icon2";
-			temp.height = 48;
+			temp.height = 44;
 			temp.styleName = "ui/common/grid/normal/36.png";
-			temp.width = 48;
+			temp.width = 44;
 			temp.x = 0;
 			temp.y = 48;
 			return temp;

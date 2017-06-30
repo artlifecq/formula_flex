@@ -972,7 +972,14 @@ package com.game.engine3D.core
 				}
 				else if (baseObj is BaseEntity)
 				{
-					(baseObj as BaseEntity).avatar.lightPicker = null;
+					try
+					{
+						(baseObj as BaseEntity).avatar.lightPicker = null;
+					} 
+					catch(error:Error) 
+					{
+						Log.error((baseObj as BaseEntity).name+"上找不到avatar");
+					}
 				}
 				removeSceneObj(baseObj);
 			}
@@ -1192,6 +1199,10 @@ package com.game.engine3D.core
 			{
 				_outlineGlowFilter.dispose();
 				_outlineGlowFilter = null;
+			}
+			if (_ringDepthOfFieldFilter3D) {
+				_ringDepthOfFieldFilter3D.dispose();
+				_ringDepthOfFieldFilter3D = null;
 			}
 			_mainChar = null;
 			if (_lightNullObject)

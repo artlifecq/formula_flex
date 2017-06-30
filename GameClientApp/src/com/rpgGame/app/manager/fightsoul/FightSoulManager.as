@@ -8,6 +8,8 @@ package com.rpgGame.app.manager.fightsoul
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.scene.animator.FightSoulFollowAnimator;
+	import com.rpgGame.app.ui.alert.SomeSystemNoticePanel;
+	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.coreData.UNIQUEID;
 	import com.rpgGame.coreData.cfg.FightsoulData;
 	import com.rpgGame.coreData.cfg.FightsoulModeData;
@@ -40,6 +42,9 @@ package com.rpgGame.app.manager.fightsoul
 		public static const FightSoul_ModeLevel:int = UNIQUEID.NEXT;
 		public static const FightSoul_TypeValue:int = UNIQUEID.NEXT;
 		public static const FightSoul_GetReward:int = UNIQUEID.NEXT;
+		
+		
+		public static const FightSoulMaxLevel:int = 130;
 		/**
 		 * 战魂数据
 		 */
@@ -51,8 +56,27 @@ package com.rpgGame.app.manager.fightsoul
 			this._fightSoulInfo = value;
 			updataSceneMode();
 			updataSKill();
+			
+			checkCanUpLevel();
 		}
 		
+		private function checkCanUpLevel():void
+		{
+			if(fightSoulInfo.level == FightSoulMaxLevel)
+			{
+				return ;
+			}
+			if(fightSoulInfo.exp<currentLeveldata.q_exp)
+			{
+				return ;
+			}
+			
+			var data:Object={};
+			data.sys=SomeSystemNoticePanel.SYS_ZHANHUN;
+			data.desc="您的战魂可以升级了";
+			data.btnText="立即升级";
+			EventManager.dispatchEvent(MainPlayerEvent.SYS_CAN_LEVEL_UP,data); 
+		}
 		public static function updateRoleAvatar(owner:SceneRole):void
 		{
 			var fightSoulLevel:int;
@@ -158,7 +182,7 @@ package com.rpgGame.app.manager.fightsoul
 		
 		public function FightSoulLevelUp():Boolean
 		{
-			if(fightSoulInfo.level == 130)
+			if(fightSoulInfo.level == FightSoulMaxLevel)
 			{
 				NoticeManager.showNotifyById(4002);
 				return false;

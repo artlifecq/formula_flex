@@ -19,13 +19,12 @@ package com.rpgGame.coreData.cfg
 			return _maxLevel;
 		}
 		
-		private static var _datas:Dictionary;
+		private static var _datas:Dictionary= new Dictionary();
 		
 		public static function setConfig( data:ByteArray):void
 		{
 			if( data == null )
 				return;
-			_datas = new Dictionary();
 			var arr : Array = data.readObject();
 			for each(var info :Q_warflag in arr) {
 				_datas[info.q_id] = info;

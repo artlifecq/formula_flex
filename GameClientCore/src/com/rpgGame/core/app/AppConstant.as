@@ -142,6 +142,8 @@ package com.rpgGame.core.app
 		public static var ACTIVETY_PANL:String = createAppInfo( "activety.ActivetyPanel","activety");
 		/** 活动BOSS **/
 		public static var ACTIVETY_BOSS_HURTRANK:String = createAppInfo("activety.boss.BossHurtRankPanel","activety");
+		/** 极限挑战BOSS **/
+		public static var ACTIVETY_JIXIANBOSS_HURTRANK:String = createAppInfo("activety.jixiantiaozhan.JiXianRankPanel","activety");
 		/**
 		 *活动boss结果 
 		 */
@@ -169,6 +171,10 @@ package com.rpgGame.core.app
 		
 		
 		
+		/**
+		 *极限挑战结果 
+		 */
+		public static var ACTIVETY_JIXIAN_RESULT:String = createAppInfo("activety.jixiantiaozhan.JiXianTiaoZhanSuccessPanelExt","activety");
 		/**
 		 *装备面板
 		 */
@@ -404,7 +410,7 @@ package com.rpgGame.core.app
 		/**帮会邀请列表 **/
 		public static var GUILD_INVITATION_PANEL : String = createAppInfo("guild.GuildInvitationListPanle","banghui");
 		/**帮会信息 **/
-//		public static var GUILD_APPLAYINFO_PANEL : String = createAppInfo("guild.GuildPorpInfoPanel","banghui");
+		public static var GUILD_BRIEFNESSINFO_PANEL : String = createAppInfo("guild.GuildBriefnessInfoPanel","banghui");
 		/**帮会权限设置 **/
 		public static var GUILD_APPOINTED_PANEL : String = createAppInfo("guild.GuildAppointedPanel","banghui");
 		/**帮会统帅设置 **/
@@ -413,8 +419,6 @@ package com.rpgGame.core.app
 		public static var GUILD_DONATE_PANEL : String = createAppInfo("guild.GuildDonatePanle","banghui");
 		/**帮会王城争霸报名 **/
 		public static var GUILD_WCZB_APPLY : String = createAppInfo("guild.war.WczbWarApplyPanel","banghui");
-		/**帮会王城争霸战报 **/
-		public static var GUILD_WCZB_HISTORY : String = createAppInfo("guild.war.WczbWarHistoryPanel","banghui");
 		/**帮会王城争霸奖励 **/
 		public static var GUILD_WCZB_REWARD : String = createAppInfo("guild.war.WczbRewardPanel","banghui");
 		
@@ -492,5 +496,8 @@ package com.rpgGame.core.app
 		public static var BATTLE_NINE_TOWER_SCORE_PANEL:String = createAppInfo("battle.jcyt.NineTowerScorePanelExt","zhanchang");
 		/**npc闲话**/
 		public static var NPC_SPEAK:String = createAppInfo("npc.NpcSpeak","npc");
+		
+		/**npc闲话**/
+		public static var VIP_PANEL:String = createAppInfo("vip.VipMainPanelExt","vip");
 	}
 }

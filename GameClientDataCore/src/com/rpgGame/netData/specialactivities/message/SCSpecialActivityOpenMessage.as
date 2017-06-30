@@ -11,9 +11,15 @@ package com.rpgGame.netData.specialactivities.message{
 	 * 返回活动开启信息
 	 */
 	public class SCSpecialActivityOpenMessage extends Message {
-	
+		
 		//返回活动开启id
 		private var _activityId: int;
+		
+		//参与状态0:未开启 1:开启中  2:进行中
+		private var _joinState: int;
+		
+		//活动剩余时间
+		private var _remainTime: int;
 		
 		
 		/**
@@ -22,6 +28,10 @@ package com.rpgGame.netData.specialactivities.message{
 		override protected function writing(): Boolean{
 			//返回活动开启id
 			writeInt(_activityId);
+			//参与状态0:未开启 1:开启中  2:进行中
+			writeInt(_joinState);
+			//活动剩余时间
+			writeInt(_remainTime);
 			return true;
 		}
 		
@@ -31,6 +41,10 @@ package com.rpgGame.netData.specialactivities.message{
 		override protected function reading(): Boolean{
 			//返回活动开启id
 			_activityId = readInt();
+			//参与状态0:未开启 1:开启中  2:进行中
+			_joinState = readInt();
+			//活动剩余时间
+			_remainTime = readInt();
 			return true;
 		}
 		
@@ -55,6 +69,36 @@ package com.rpgGame.netData.specialactivities.message{
 		 */
 		public function set activityId(value: int): void{
 			this._activityId = value;
+		}
+		
+		/**
+		 * get 参与状态0:未开启 1:开启中  2:进行中
+		 * @return 
+		 */
+		public function get joinState(): int{
+			return _joinState;
+		}
+		
+		/**
+		 * set 参与状态0:未开启 1:开启中  2:进行中
+		 */
+		public function set joinState(value: int): void{
+			this._joinState = value;
+		}
+		
+		/**
+		 * get 活动剩余时间
+		 * @return 
+		 */
+		public function get remainTime(): int{
+			return _remainTime;
+		}
+		
+		/**
+		 * set 活动剩余时间
+		 */
+		public function set remainTime(value: int): void{
+			this._remainTime = value;
 		}
 		
 	}

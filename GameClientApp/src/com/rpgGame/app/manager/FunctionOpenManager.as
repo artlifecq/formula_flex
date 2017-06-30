@@ -88,24 +88,19 @@
 		 */
 		public static function openNoticeByLevel(level:int):void
 		{
-			var infos:Array = NewFuncCfgData.alldata();
+			var infos:Vector.<Q_newfunc> = NewFuncCfgData.getSortList();
 			var length:int = infos.length;
 			var found:Q_newfunc; 
 
 			for(var i:int = 0;i<length;i++)
 			{
 				var data:Q_newfunc = infos[i];
-				if(data.q_notivelevel <= 0)
-					continue;
-				if(data.q_notivelevel > level)
-					continue;
 				if(data.q_level <= level)
 					continue;
-				
 				if(found==null)
+				{
 					found = data;
-				else if(found.q_id<data.q_id){
-					found = data;
+					break;
 				}
 			}
 			
@@ -128,9 +123,11 @@
 		
 		public static function getOpenLevelByFunBarInfo(info:FunctionBarInfo):int
 		{
+			if(info.isshow==1)
+				return int.MAX_VALUE;
 			var list:Array = NewFuncCfgData.getListById(info.id);
 			if(list==null)
-				return 0;
+				return int.MAX_VALUE;
 			var value:int = int.MAX_VALUE;
 			for each(var func:Q_newfunc in list)
 			{
@@ -158,7 +155,7 @@
 		{
 			if(info==null)
 				return ;
-			if(!functionIsOpen(info.q_id))
+			if(!functionIsOpen(info.q_id.toString()))
 			{
 				return ;
 			}

@@ -2,11 +2,13 @@ package org.mokylin.skin.app.activety.zonghe
 {
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
+	import feathers.controls.Group;
 	import feathers.controls.Label;
 	import feathers.controls.List;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import feathers.layout.HorizontalLayout;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 	import org.mokylin.skin.component.list.ListSkin1;
 
@@ -28,12 +30,6 @@ package org.mokylin.skin.app.activety.zonghe
 
 		public var icon1:feathers.controls.UIAsset;
 
-		public var icon2:feathers.controls.UIAsset;
-
-		public var icon3:feathers.controls.UIAsset;
-
-		public var icon4:feathers.controls.UIAsset;
-
 		public var joinBtn:feathers.controls.Button;
 
 		public var lbMsg:feathers.controls.Label;
@@ -48,8 +44,8 @@ package org.mokylin.skin.app.activety.zonghe
 			
 			this.currentState = "normal";
 			this.height = 587;
-			this.width = 947;
-			this.elementsContent = [__ActivetyAll_Skin_UIAsset1_i(),__ActivetyAll_Skin_UIAsset2_i(),ListItem_i(),activeBg_i(),activeName_i(),__ActivetyAll_Skin_UIAsset3_i(),__ActivetyAll_Skin_UIAsset4_i(),__ActivetyAll_Skin_UIAsset5_i(),__ActivetyAll_Skin_UIAsset6_i(),lbMsg_i(),joinBtn_i(),__ActivetyAll_Skin_UIAsset7_i(),icon1_i(),icon2_i(),icon3_i(),icon4_i()];
+			this.width = 956;
+			this.elementsContent = [__ActivetyAll_Skin_UIAsset2_i(),ListItem_i(),activeBg_i(),__ActivetyAll_Skin_Group1_i(),__ActivetyAll_Skin_UIAsset3_i(),__ActivetyAll_Skin_UIAsset4_i(),__ActivetyAll_Skin_UIAsset5_i(),__ActivetyAll_Skin_UIAsset6_i(),lbMsg_i(),joinBtn_i(),__ActivetyAll_Skin_UIAsset7_i(),icon1_i()];
 			
 			states = {
 			};
@@ -68,19 +64,28 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.height = 486;
 			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
 			temp.width = 602;
-			temp.x = 21;
-			temp.y = 78;
+			temp.x = 25;
+			temp.y = 88;
 			return temp;
 		}
 
-		private function __ActivetyAll_Skin_UIAsset1_i():feathers.controls.UIAsset
+		private function __ActivetyAll_Skin_Group1_i():feathers.controls.Group
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 498;
-			temp.styleName = "ui/common/background/neikuang_1.png";
-			temp.width = 922;
-			temp.x = 14;
-			temp.y = 72;
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			temp.height = 30;
+			temp.width = 301;
+			temp.x = 633;
+			temp.y = 89;
+			temp.layout = __ActivetyAll_Skin_HorizontalLayout1_i();
+			temp.elementsContent = [activeName_i()];
+			return temp;
+		}
+
+		private function __ActivetyAll_Skin_HorizontalLayout1_i():feathers.layout.HorizontalLayout
+		{
+			var temp:feathers.layout.HorizontalLayout = new feathers.layout.HorizontalLayout();
+			temp.horizontalAlign = "center";
+			temp.verticalAlign = "middle";
 			return temp;
 		}
 
@@ -90,8 +95,8 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.height = 498;
 			temp.styleName = "ui/common/background/neikuang_1.png";
 			temp.width = 313;
-			temp.x = 623;
-			temp.y = 72;
+			temp.x = 627;
+			temp.y = 82;
 			return temp;
 		}
 
@@ -99,8 +104,8 @@ package org.mokylin.skin.app.activety.zonghe
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/activety/zonghe/xzt.png";
-			temp.x = 628;
-			temp.y = 276;
+			temp.x = 632;
+			temp.y = 286;
 			return temp;
 		}
 
@@ -108,8 +113,8 @@ package org.mokylin.skin.app.activety.zonghe
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/activety/zonghe/xzt.png";
-			temp.x = 628;
-			temp.y = 383;
+			temp.x = 632;
+			temp.y = 393;
 			return temp;
 		}
 
@@ -117,8 +122,8 @@ package org.mokylin.skin.app.activety.zonghe
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/activety/zonghe/hdjl.png";
-			temp.x = 740;
-			temp.y = 276;
+			temp.x = 744;
+			temp.y = 286;
 			return temp;
 		}
 
@@ -126,8 +131,8 @@ package org.mokylin.skin.app.activety.zonghe
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/activety/zonghe/hdsm.png";
-			temp.x = 740;
-			temp.y = 384;
+			temp.x = 744;
+			temp.y = 394;
 			return temp;
 		}
 
@@ -147,9 +152,9 @@ package org.mokylin.skin.app.activety.zonghe
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			activeBg = temp;
 			temp.name = "activeBg";
-			temp.styleName = "ui/big_bg/activety/zonghe/des/1.jpg";
-			temp.x = 629;
-			temp.y = 78;
+			temp.styleName = "ui/big_bg/activety/des/1.jpg";
+			temp.x = 633;
+			temp.y = 88;
 			return temp;
 		}
 
@@ -159,8 +164,8 @@ package org.mokylin.skin.app.activety.zonghe
 			activeName = temp;
 			temp.name = "activeName";
 			temp.styleName = "ui/app/activety/zonghe/active_name/1.png";
-			temp.x = 725;
-			temp.y = 81;
+			temp.x = 96;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -171,39 +176,6 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.name = "icon1";
 			temp.styleName = "ui/common/grid/normal/48.png";
 			temp.x = 643;
-			temp.y = 315;
-			return temp;
-		}
-
-		private function icon2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon2 = temp;
-			temp.name = "icon2";
-			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 713;
-			temp.y = 315;
-			return temp;
-		}
-
-		private function icon3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon3 = temp;
-			temp.name = "icon3";
-			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 783;
-			temp.y = 315;
-			return temp;
-		}
-
-		private function icon4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon4 = temp;
-			temp.name = "icon4";
-			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 853;
 			temp.y = 315;
 			return temp;
 		}
@@ -238,7 +210,7 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 297;
 			temp.x = 631;
-			temp.y = 416;
+			temp.y = 426;
 			return temp;
 		}
 

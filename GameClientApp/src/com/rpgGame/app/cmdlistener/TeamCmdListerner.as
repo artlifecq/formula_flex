@@ -1,6 +1,8 @@
 package com.rpgGame.app.cmdlistener
 {
 	import com.rpgGame.app.manager.Mgr;
+	import com.rpgGame.app.sender.TeamSender;
+	import com.rpgGame.app.ui.alert.GameAlertExt;
 	import com.rpgGame.core.events.TeamEvent;
 	import com.rpgGame.netData.team.bean.TeamMemberInfo;
 	import com.rpgGame.netData.team.message.ResApplyClientMessage;
@@ -15,6 +17,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.team.message.ResTeamInfoMessage;
 	import com.rpgGame.netData.team.message.ResTeamSynMemberinfoClientMessage;
 	import com.rpgGame.netData.team.message.ResTeamSynPosClientMessage;
+	import com.rpgGame.netData.team.message.SCHaveTeamMessage;
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.game.netCore.connection.SocketConnection;
@@ -45,7 +48,14 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(109114, RecSynMemberInfo);
 			SocketConnection.addCmdListener(109115, RecSetTeamOptions);
 			SocketConnection.addCmdListener(109116, RecSearchPlayerByServer);
+			SocketConnection.addCmdListener(109218, RecHaveTeam);
 			finish();
+		}
+		
+		private function RecHaveTeam(msg:SCHaveTeamMessage):void
+		{
+			// TODO Auto Generated method stub
+			GameAlertExt.show(msg.content,TeamSender.ReqConfirm2QuitTeam,[msg.type]);
 		}
 		
 		//============================ 返回消息 ==================================

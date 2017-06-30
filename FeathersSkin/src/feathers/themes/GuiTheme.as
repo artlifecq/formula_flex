@@ -922,9 +922,10 @@ package feathers.themes{
 					skinSelector.readjustSize(sub.width, sub.height);
 				}
 				
-				if(isScale9Textue(key))
+				var scaleName:String=splitIconSkinName(key, isIcon);
+				if(isScale9Textue(scaleName))
 				{
-					applayScale9Gird(skinSelector, key);
+					applayScale9Gird(skinSelector, scaleName);
 				}
 				
 				//没有disabled状态图片

@@ -343,11 +343,11 @@ package com.rpgGame.app.manager
 				{
 					if (rpd_body.animatorSourchPath)
 					{
-						ru = role.avatar.addRenderUnitToJoint(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_body_01, rpd_body_effect2);
+						ru = role.avatar.addRenderUnitToJoint(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_body_02, rpd_body_effect2);
 					}
 					else
 					{
-						ru = role.avatar.addRenderUnitToBone(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_body_01, rpd_body_effect2);
+						ru = role.avatar.addRenderUnitToBone(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_body_02, rpd_body_effect2);
 					}
 				}
 				if (ru)
@@ -758,7 +758,6 @@ package com.rpgGame.app.manager
 					effectRu.repeat = 0;
 					effectRu.setScale(1);
 					effectRu.play(0);
-					effectRu.z=50;
 				}
 			}
 			else
@@ -902,8 +901,8 @@ package com.rpgGame.app.manager
 				
 				if (mountModel)
 				{
-					mountResID = mountModel.q_scene_show_url;
-					mountAnimatResID = HorseConfigData.mountAnimatResID;
+					mountResID = mountModel.q_skinResID;
+					mountAnimatResID = mountModel.q_animatResID;
 				}
 				
 				if(fightsoulInfo)
@@ -1005,149 +1004,6 @@ package com.rpgGame.app.manager
 			var mountModel :Q_horse = HorseConfigData.getMountDataById(roleData.mount);
 			var fightsoulInfo:Q_fightsoul_mode = FightsoulModeData.getModeInfoById(roleData.fightSoulLevel);
 			var zhanqiInfo:Q_warflag = ZhanQiConfigData.getZhanQiDataById(roleData.zhanqiLv);
-			//			var clothesRes : AvatarClothesRes = AvatarClothesResCfgData.getInfo(roleData.cloths);
-			//			if (!clothesRes)
-			//			{
-			//				if (heroModel)
-			//					clothesRes = AvatarClothesResCfgData.getInfo(roleData.job);
-			//			}
-			//			if (clothesRes)
-			//			{
-			//				var clothesEffectRes : AvatarClothesEffectRes = null;
-			//				if (!isUseforAvatar)
-			//				{
-			//					clothesEffectRes = AvatarClothesEffectResCfgData.getInfo(clothesRes.effectResId);
-			//				}
-			//				
-			//				if (clothesEffectRes)
-			//				{
-			//					bodyEffectBindBones = clothesEffectRes.effectBindBone.split(";");
-			//					bodyEffectOnMountBindBones = clothesEffectRes.mount_effectBindBone.split(";");
-			//				}
-			//				
-			//				if (roleData.sex)
-			//				{
-			//					bodyResID = clothesRes.bodyRes_man;
-			//					if (clothesEffectRes)
-			//					{
-			//						bodyEffectResIDs = clothesEffectRes.effectRes_man.split(";");
-			//						bodyEffectOnMountResIDs = clothesEffectRes.mount_effectRes_man.split(";");
-			//						bodyMethodTypeEffectResID = clothesEffectRes.effectMethodTypeRes_man;
-			//					}
-			//				}
-			//				else
-			//				{
-			//					bodyResID = clothesRes.bodyRes_woman;
-			//					if (clothesEffectRes)
-			//					{
-			//						bodyEffectResIDs = clothesEffectRes.effectRes_woman.split(";");
-			//						bodyEffectOnMountResIDs = clothesEffectRes.mount_effectRes_woman.split(";");
-			//						bodyMethodTypeEffectResID = clothesEffectRes.effectMethodTypeRes_woman;
-			//					}
-			//				}
-			//				
-			//				var hairRes : AvatarHairRes = AvatarHairResCfgData.getInfo(clothesRes.hairResId);
-			//				if (hairRes)
-			//				{
-			//					if (roleData.sex)
-			//						hairResID = hairRes.hairRes_man;
-			//					else
-			//						hairResID = hairRes.hairRes_woman;
-			//				}
-			//				if (!isUseforAvatar)
-			//				{
-			//					var mountRes : AvatarMountRes = AvatarMountResCfgData.getInfo(roleData.mount);
-			//					if (mountRes && !isMountBlank)
-			//					{
-			//						mountResID = mountRes.mountRes;
-			//						mountModel = MountModelCfgData.getInfo(mountRes.modelId);
-			//					}
-			//					
-			//					switch (roleData.weaponRace)
-			//					{
-			//						case RaceId.ZHONG_JIAN:
-			//							if (roleData.sex)
-			//								animatResID = heroModel.animatRes_zhongJian_man;
-			//							else
-			//								animatResID = heroModel.animatRes_zhongJian_woman;
-			//							if (mountModel)
-			//							{
-			//								mountAnimatResID = mountModel.animatRes_zhongJian;
-			//							}
-			//							break;
-			//						case RaceId.BA_DAO:
-			//							if (roleData.sex)
-			//								animatResID = heroModel.animatRes_baDao_man;
-			//							else
-			//								animatResID = heroModel.animatRes_baDao_woman;
-			//							if (mountModel)
-			//							{
-			//								mountAnimatResID = mountModel.animatRes_baDao;
-			//							}
-			//							break;
-			//						case RaceId.YIN_QIANG:
-			//							if (roleData.sex)
-			//								animatResID = heroModel.animatRes_yinQiang_man;
-			//							else
-			//								animatResID = heroModel.animatRes_yinQiang_woman;
-			//							if (mountModel)
-			//							{
-			//								mountAnimatResID = mountModel.animatRes_yinQiang;
-			//							}
-			//							break;
-			//						case RaceId.YU_SHAN:
-			//							if (roleData.sex)
-			//								animatResID = heroModel.animatRes_yuShan_man;
-			//							else
-			//								animatResID = heroModel.animatRes_yuShan_woman;
-			//							if (mountModel)
-			//							{
-			//								mountAnimatResID = mountModel.animatRes_yuShan;
-			//							}
-			//							break;
-			//						case RaceId.FA_ZHANG:
-			//							if (roleData.sex)
-			//								animatResID = heroModel.animatRes_faZhang_man;
-			//							else
-			//								animatResID = heroModel.animatRes_faZhang_woman;
-			//							if (mountModel)
-			//							{
-			//								mountAnimatResID = mountModel.animatRes_faZhang;
-			//							}
-			//							break;
-			//						case RaceId.SHEN_GONG:
-			//							if (roleData.sex)
-			//								animatResID = heroModel.animatRes_shenGong_man;
-			//							else
-			//								animatResID = heroModel.animatRes_shenGong_woman;
-			//							if (mountModel)
-			//							{
-			//								mountAnimatResID = mountModel.animatRes_shenGong;
-			//							}
-			//							break;
-			//						case RaceId.KUANG_FU:
-			//							if (roleData.sex)
-			//								animatResID = heroModel.animatRes_kuangFu_man;
-			//							else
-			//								animatResID = heroModel.animatRes_kuangFu_woman;
-			//							if (mountModel)
-			//							{
-			//								mountAnimatResID = mountModel.animatRes_kuangFu;
-			//							}
-			//							break;
-			//						default:
-			//							if (roleData.sex)
-			//								animatResID = heroModel.animatRes_unarmed_man;
-			//							else
-			//								animatResID = heroModel.animatRes_unarmed_woman;
-			//							if (mountModel)
-			//							{
-			//								mountAnimatResID = mountModel.animatRes_unarmed;
-			//							}
-			//							break;
-			//					}
-			//				}
-			//			}
 			
 			var clothesRes : AvatarClothesRes = AvatarClothesResCfgData.getInfo(roleData.cloths);
 			if (!clothesRes)
@@ -1207,8 +1063,8 @@ package com.rpgGame.app.manager
 				
 				if (mountModel)
 				{
-					mountResID = mountModel.q_scene_show_url;
-					mountAnimatResID = HorseConfigData.mountAnimatResID;
+					mountResID = mountModel.q_skinResID;
+					mountAnimatResID = mountModel.q_animatResID;
 				}
 				
 				if(fightsoulInfo)
@@ -1218,10 +1074,6 @@ package com.rpgGame.app.manager
 				}
 				
 				var weaponRes : AvatarWeaponRes = AvatarWeapontResCfgData.getInfo(roleData.weapon);
-				/*	if (!weaponRes)
-				{
-				weaponRes = AvatarWeapontResCfgData.getInfo(clothesRes.weaponResId);
-				}*/
 				if (weaponRes)
 				{
 					weaponResID = weaponRes.res;
@@ -1244,56 +1096,8 @@ package com.rpgGame.app.manager
 				}
 			}
 			
-			//			var refineBodyEffectRes : AvatarClothesEffectRes = AvatarClothesEffectResCfgData.getInfo(roleData.qiangHuaTaoType);
-			//			if (refineBodyEffectRes)
-			//			{
-			//				bodyEffectBindBones = bodyEffectBindBones ? bodyEffectBindBones.concat(refineBodyEffectRes.effectBindBone.split(";")) : refineBodyEffectRes.effectBindBone.split(";");
-			//				bodyEffectOnMountBindBones = bodyEffectOnMountBindBones ? bodyEffectOnMountBindBones.concat(refineBodyEffectRes.mount_effectBindBone.split(";")) : refineBodyEffectRes.mount_effectBindBone.split(";");
-			//				//强化套装特效
-			//				if (roleData.sex)
-			//				{
-			//					bodyEffectResIDs = bodyEffectResIDs ? bodyEffectResIDs.concat(refineBodyEffectRes.effectRes_man.split(";")) : refineBodyEffectRes.effectRes_man.split(";");
-			//					bodyEffectOnMountResIDs = bodyEffectOnMountResIDs ? bodyEffectOnMountResIDs.concat(refineBodyEffectRes.mount_effectRes_man.split(";")) : refineBodyEffectRes.mount_effectRes_man.split(";");
-			//				}
-			//				else
-			//				{
-			//					bodyEffectResIDs = bodyEffectResIDs ? bodyEffectResIDs.concat(refineBodyEffectRes.effectRes_woman.split(";")) : refineBodyEffectRes.effectRes_woman.split(";");
-			//					bodyEffectOnMountResIDs = bodyEffectOnMountResIDs ? bodyEffectOnMountResIDs.concat(refineBodyEffectRes.mount_effectRes_woman.split(";")) : refineBodyEffectRes.mount_effectRes_woman.split(";");
-			//				}
-			//			}
-			
 			if (!isUseforAvatar)
-			{
-				//				var weaponRes : AvatarWeaponRes = AvatarWeapontResCfgData.getInfo(roleData.weapon);
-				//				if (!weaponRes)
-				//				{
-				//					if (heroModel)
-				//						weaponRes = AvatarWeapontResCfgData.getInfo(heroModel.weaponResId);
-				//				}
-				//				if (weaponRes)
-				//				{
-				//					weaponResID = weaponRes.res;
-				//					var weaponBaseEffectRes : AvatarWeaponEffectRes = AvatarWeaponEffectResCfgData.getInfo(weaponRes.effectResId);
-				//					var weaponEffectRes : AvatarWeaponEffectRes = AvatarWeaponEffectResCfgData.getInfo(roleData.qianghuaType);
-				//					if (weaponBaseEffectRes)
-				//					{
-				//						//武器基础特效
-				//						weaponEffectResIDs = weaponBaseEffectRes.effectRes.split(";");
-				//						weaponEffectBindBones = weaponBaseEffectRes.effectBindBone.split(";");
-				//					}
-				//					if (weaponEffectRes)
-				//					{
-				//						//武器强化特效
-				//						weaponEffectResIDs = weaponEffectResIDs ? weaponEffectResIDs.concat(weaponEffectRes.effectRes.split(";")) : weaponEffectRes.effectRes.split(";");
-				//						weaponEffectBindBones = weaponEffectBindBones ? weaponEffectBindBones.concat(weaponEffectRes.effectBindBone.split(";")) : weaponEffectRes.effectBindBone.split(";");
-				//					}
-				//				}
-				//				var deputyWeaponRes : AvatarDeputyWeaponRes = AvatarDeputyWeaponResCfgData.getInfo(roleData.deputyWeapon);
-				//				if (deputyWeaponRes)
-				//				{
-				//					deputyWeaponResID = deputyWeaponRes.res;
-				//				}
-				
+			{				
 				if (roleData.trailMount && !isMountBlank)
 				{
 					mountResID = roleData.trailMount;
@@ -1318,15 +1122,6 @@ package com.rpgGame.app.manager
 			roleData.avatarInfo.fightSoulefffectID= fightsoulEffectResId;
 			roleData.avatarInfo.zhanqiSouleeffId = zhanqiEffResId;
 			
-			//			roleData.avatarInfo.setBodyResID(bodyResID, animatResID);
-			//			roleData.avatarInfo.hairResID = hairResID;
-			//			roleData.avatarInfo.setMountResID(mountResID, mountAnimatResID);
-			//			roleData.avatarInfo.setBodyEffectResIDs(bodyEffectResIDs, bodyEffectBindBones, bodyEffectOnMountResIDs, bodyEffectOnMountBindBones);
-			//			roleData.avatarInfo.bodyMethodTypeEffectResID = bodyMethodTypeEffectResID;
-			//			roleData.avatarInfo.weaponResID = weaponResID;
-			//			roleData.avatarInfo.setWeaponEffectResIDs(weaponEffectResIDs, weaponEffectBindBones);
-			//			roleData.avatarInfo.deputyWeaponResID = deputyWeaponResID;
-			
 			if (mountResID)
 			{
 				var ref : RidingStateReference = role.stateMachine.getReference(RidingStateReference) as RidingStateReference;
@@ -1338,6 +1133,7 @@ package com.rpgGame.app.manager
 				if ((role.stateMachine as RoleStateMachine).isRiding)
 				{
 					role.stateMachine.removeState(RoleStateType.CONTROL_RIDING);
+					role.stateMachine.removeState(RoleStateType.CONTROL_MOUNT_RIDE);
 				}
 				else
 				{

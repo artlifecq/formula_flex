@@ -80,12 +80,12 @@ package com.rpgGame.app.ui.alert
 			_ins.okFun = onOkFun;
 			_ins.skin.text.selectRange(0,_ins.skin.text.text.length);
 			_ins.show();
-			UIModel.instence.showModel(_ins);
+//			UIModel.instence.showModel(_ins);
 		}
 		
 		public static function hideAlert():void
 		{
-			UIModel.instence.hideModel(_ins);
+//			UIModel.instence.hideModel(_ins);
 			if(_ins)_ins.hide();
 		}
 	}

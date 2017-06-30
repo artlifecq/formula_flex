@@ -312,8 +312,8 @@ package game.rpgGame.login.view
 		private function initAvatar():void
 		{
 			_avatar=new InterAvatar3D();
-			_avatar.x=700;
-			_avatar.y=780;
+			_avatar.x=740;
+			_avatar.y=860;
 			bgEft=new Inter3DContainer();
 			bgEft.playInter3DAt(ClientConfig.getEffect("ui_xuanren"),0,0,0);
 			this.addChildAt(bgEft,1);
@@ -328,12 +328,46 @@ package game.rpgGame.login.view
 		private function initAvatarInfo():void
 		{
 			//兵家
+//			job_info_0=new AvatarInfo();
+//			job_info_0.setBodyResID("pc/body/binjia_skin","pc/body/binjia_animat");
+//			job_info_0.hairResID = "pc/hair/bingjia_toufa_skin";
+//			job_info_0.weaponResID = "pc/weapon/binjia_wq_changqiang_004";
+//			job_info_0.weaponEffectID = "tx_changmao_01";
+//			job_info_0.deputyWeaponResID = null;	
+//			
+//			//医家
+//			job_info_1=new AvatarInfo();
+//			job_info_1.setBodyResID("pc/body/yijia_w_pl06_skin","pc/body/yijia_w_pl06_animat");
+//			job_info_1.hairResID = "pc/hair/yijia_w_m_pl06_toufa_skin";
+//			job_info_1.weaponResID = "pc/weapon/yijia_wq_umbrella_004-guanbi";
+//			job_info_1.weaponEffectID = "tx_san_01";
+//			job_info_1.deputyWeaponResID = null;			
+//			
+//			//墨家
+//			job_info_2=new AvatarInfo();
+//			job_info_2.setBodyResID("pc/body/mojia_m_pl04_skin","pc/body/mojia_m_pl04_animat");
+//			job_info_2.hairResID = "pc/hair/mojia_m_pl04_toufa_skin";
+//			job_info_2.weaponResID = "pc/weapon/mojia_wq_crossbow_007";
+//			job_info_2.weaponEffectID = "tx_nu_01";
+//			job_info_2.deputyWeaponResID = "pc/weapon/mojia_wq_crossbow_007";			
+//			job_info_2.deputyWeaponEffectID="tx_nu_01";
+//			
+//			job_info_3=new AvatarInfo();
+//			job_info_3.setBodyResID("pc/body/mojia_m_pl04_skin","pc/body/mojia_m_pl04_animat");
+//			job_info_3.hairResID = "pc/hair/mojia_m_pl04_toufa_skin";
+//			job_info_3.weaponResID = "pc/weapon/mojia_wq_crossbow_007";
+//			job_info_3.weaponEffectID = "tx_nu_01";
+//			job_info_3.deputyWeaponResID = "pc/weapon/mojia_wq_crossbow_007";		
+//			job_info_3.deputyWeaponEffectID="tx_nu_01";
+			
+			//兵家
 			job_info_0=new AvatarInfo();
-			job_info_0.setBodyResID("pc/body/binjia_skin","pc/body/binjia_animat");
-			job_info_0.hairResID = "pc/hair/bingjia_toufa_skin";
-			job_info_0.weaponResID = "pc/weapon/binjia_wq_changqiang_004";
-			job_info_0.weaponEffectID = "tx_changmao_01";
-			job_info_0.deputyWeaponResID = null;	
+			job_info_0.setBodyResID("pc_2/body/binjia_m_pl10_skin","pc_2/body/binjia_animat");
+			job_info_0.hairResID = "pc_2/hair/binjia_m_pl10_toufa_skin";
+			job_info_0.weaponResID = null;
+			job_info_0.weaponEffectID = null;
+			job_info_0.deputyWeaponResID = "pc_2/weapon/wq_spear_004";
+			job_info_0.deputyWeaponEffectID = "tx_changmao_01";										
 			
 			//医家
 			job_info_1=new AvatarInfo();
@@ -341,23 +375,23 @@ package game.rpgGame.login.view
 			job_info_1.hairResID = "pc/hair/yijia_w_m_pl06_toufa_skin";
 			job_info_1.weaponResID = "pc/weapon/yijia_wq_umbrella_004-guanbi";
 			job_info_1.weaponEffectID = "tx_san_01";
-			job_info_1.deputyWeaponResID = null;			
+			job_info_1.deputyWeaponResID = null;	
 			
 			//墨家
 			job_info_2=new AvatarInfo();
-			job_info_2.setBodyResID("pc/body/mojia_m_pl04_skin","pc/body/mojia_m_pl04_animat");
-			job_info_2.hairResID = "pc/hair/mojia_m_pl04_toufa_skin";
-			job_info_2.weaponResID = "pc/weapon/mojia_wq_crossbow_007";
+			job_info_2.setBodyResID("pc_2/body/mojia_m_pl10_skin","pc_2/body/mojia_animat");
+			job_info_2.hairResID = "pc_2/hair/mojia_m_pl10_toufa_skin";
+			job_info_2.weaponResID = "pc_2/weapon/wq_crossbow_007_R";
 			job_info_2.weaponEffectID = "tx_nu_01";
-			job_info_2.deputyWeaponResID = "pc/weapon/mojia_wq_crossbow_007";			
+			job_info_2.deputyWeaponResID = "pc_2/weapon/wq_crossbow_007_L";		
 			job_info_2.deputyWeaponEffectID="tx_nu_01";
 			
 			job_info_3=new AvatarInfo();
-			job_info_3.setBodyResID("pc/body/mojia_m_pl04_skin","pc/body/mojia_m_pl04_animat");
-			job_info_3.hairResID = "pc/hair/mojia_m_pl04_toufa_skin";
-			job_info_3.weaponResID = "pc/weapon/mojia_wq_crossbow_007";
+			job_info_3.setBodyResID("pc_2/body/mojia_m_pl10_skin","pc_2/body/mojia_animat");
+			job_info_3.hairResID = "pc_2/hair/mojia_m_pl10_toufa_skin";
+			job_info_3.weaponResID = "pc_2/weapon/wq_crossbow_007_R";
 			job_info_3.weaponEffectID = "tx_nu_01";
-			job_info_3.deputyWeaponResID = "pc/weapon/mojia_wq_crossbow_007";		
+			job_info_3.deputyWeaponResID = "pc_2/weapon/wq_crossbow_007_L";			
 			job_info_3.deputyWeaponEffectID="tx_nu_01";
 			
 			avatarInfos=new Array();

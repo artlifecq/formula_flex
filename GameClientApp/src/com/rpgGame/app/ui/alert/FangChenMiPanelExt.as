@@ -14,7 +14,7 @@ package com.rpgGame.app.ui.alert
 		{
 			_skin=new Fangchenmi_Skin();
 			super(_skin);
-			this.model = true;
+//			this.model = true;
 		}
 		
 		override protected function onTouchTarget(target : DisplayObject) : void
@@ -36,9 +36,13 @@ package com.rpgGame.app.ui.alert
 			{
 				//移到上层
 				fangchenmiPanel.show();
-				return null;
 			}
 			return fangchenmiPanel;
+		}
+		
+		public function updateText(text:String):void
+		{
+			_skin.lb_text.text = text;
 		}
 		
 		override public function hide() : void

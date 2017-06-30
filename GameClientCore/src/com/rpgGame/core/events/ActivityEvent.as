@@ -36,6 +36,10 @@ package com.rpgGame.core.events
 		 *更新boss伤害排行
 		 */
 		public static const UPDATE_BOSS_HURT_RANK : int = UNIQUEID.NEXT;
+		/**
+		 *更新极限挑战boss伤害排行
+		 */
+		public static const UPDATE_JIXIANBOSS_HURT_RANK : int = UNIQUEID.NEXT;
 
 		
 		/*----------------天降元宝   yt---------------------------------------------*/

@@ -69,25 +69,25 @@ package com.rpgGame.appModule.junjie
 			super(_skin);
 			_skin.roleCont.addChild(_avatarContainer);
 			_skin.roleCont.addChild(_chenhaoEftContaner);
-			_pointXArr=[68,49,36,32,34];
+			_pointXArr=[72,53,40,36,38];
 			initView();
 			initAvatar();
 			_skin.conTiaojian.x=_skin.conTiaojian.x-14;
-			_skin.uiUp.visible=false;
+//			_skin.uiUp.visible=false;
 			_skin.num_lv.visible=false;		
 		}
 		
 		private function initView():void
 		{
 			_huangqinguoqiItem=new JunJieItem();
-			_huangqinguoqiItem.setInitPoint(33,420);
+			_huangqinguoqiItem.setInitPoint(37,434);
 			_huangqinguoqiItem.setData(JunJieData.getMaxLv());
 			_skin.container.addChild(_huangqinguoqiItem);
 			var item:JunJieItem;
 			var shuxingItem:ShuXingItem;
 			var tiaojianItem:TiaoJianItem;
 			var initX:int=0;
-			var initY:int=92;
+			var initY:int=106;
 			for(var i:int=0;i<_maxShowNum;i++)
 			{
 				initX=parseInt(_pointXArr[(i)]);
@@ -124,6 +124,9 @@ package com.rpgGame.appModule.junjie
 			this._avatarData.avatarInfo.weaponResID = MainRoleManager.actorInfo.avatarInfo.weaponResID;
 			this._avatarData.avatarInfo.weaponEffectID = MainRoleManager.actorInfo.avatarInfo.weaponEffectID;
 			this._avatarData.avatarInfo.weaponEffectScale = MainRoleManager.actorInfo.avatarInfo.weaponEffectScale;
+			this._avatarData.avatarInfo.deputyWeaponResID = MainRoleManager.actorInfo.avatarInfo.deputyWeaponResID;
+			this._avatarData.avatarInfo.deputyWeaponEffectID=MainRoleManager.actorInfo.avatarInfo.deputyWeaponEffectID;
+			this._avatarData.avatarInfo.deputyWeaponEffectScale=MainRoleManager.actorInfo.avatarInfo.deputyWeaponEffectScale;
 			this._avatar.setRoleData(this._avatarData);
 			this._avatar.curRole.setScale(1.5);	
 			this._avatar.curRole.stateMachine.transition(RoleStateType.ACTION_SHOW);
@@ -335,7 +338,7 @@ package com.rpgGame.appModule.junjie
 				_chenhaoEft.dispose();
 			}
 			var effName:String=JunJieData.getEffById(_nowSelectItem.info.modelId);
-			_chenhaoEft=_chenhaoEftContaner.playInter3DAt(ClientConfig.getEffect(effName),120,20,0);
+			_chenhaoEft=_chenhaoEftContaner.playInter3DAt(ClientConfig.getEffect(effName),120,50,0);
 			showTiaoJian();	
 			contrastAttr();		
 			updateWanChengDuShow();
@@ -350,10 +353,10 @@ package com.rpgGame.appModule.junjie
 			if(_nowSelectItem.lv>Mgr.junjieMgr.getActivationLv()&&pow>0){
 				_skin.num_lv.label="x"+pow;
 				_skin.num_lv.visible=true;
-				_skin.uiUp.visible=true;
+//				_skin.uiUp.visible=true;
 			}else{
 				_skin.num_lv.visible=false;
-				_skin.uiUp.visible=false;
+//				_skin.uiUp.visible=false;
 			}
 			for(var i:int=0;i<_shuxingItemList.length;i++)
 			{

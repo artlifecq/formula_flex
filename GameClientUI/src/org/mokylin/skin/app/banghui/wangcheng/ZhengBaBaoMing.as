@@ -4,10 +4,12 @@ package org.mokylin.skin.app.banghui.wangcheng
 	import feathers.controls.Button;
 	import feathers.controls.Group;
 	import feathers.controls.Label;
+	import feathers.controls.List;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
+	import org.mokylin.skin.component.list.ListSkin1;
 
 	/**
 	 * @private
@@ -19,6 +21,8 @@ package org.mokylin.skin.app.banghui.wangcheng
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var List:feathers.controls.List;
+
 		public var bg:feathers.controls.UIAsset;
 
 		public var btnClose1:feathers.controls.Button;
@@ -36,7 +40,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			this.currentState = "normal";
 			this.height = 429;
 			this.width = 625;
-			this.elementsContent = [bg_i(),__ZhengBaBaoMing_UIAsset1_i(),title_i(),btnClose1_i(),__ZhengBaBaoMing_Group1_i()];
+			this.elementsContent = [bg_i(),__ZhengBaBaoMing_UIAsset1_i(),title_i(),btnClose1_i(),__ZhengBaBaoMing_Group1_i(),List_i()];
 			
 			states = {
 			};
@@ -47,6 +51,19 @@ package org.mokylin.skin.app.banghui.wangcheng
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
+		private function List_i():feathers.controls.List
+		{
+			var temp:feathers.controls.List = new feathers.controls.List();
+			List = temp;
+			temp.name = "List";
+			temp.height = 349;
+			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
+			temp.width = 601;
+			temp.x = 12;
+			temp.y = 67;
+			return temp;
+		}
+
 		private function __ZhengBaBaoMing_Group1_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();

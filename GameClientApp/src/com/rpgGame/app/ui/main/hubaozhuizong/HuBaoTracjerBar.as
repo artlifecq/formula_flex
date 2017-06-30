@@ -88,21 +88,21 @@ package com.rpgGame.app.ui.main.hubaozhuizong
 		private function updatePanel():void
 		{
 			_remainTime=HuBaoManager.instance().time;
-			switch(HuBaoManager.instance().level)
-			{
-				case 1:
-					_skin.icons.styleName = "ui/app/hubao/icon/inlvyi.png";
-					break;
-				case 2:
-					_skin.icons.styleName = "ui/app/hubao/icon/inlvyi.png";
-					break;
-				case 3:
-					_skin.icons.styleName = "ui/app/hubao/icon/inlvyi.png";
-					break;
-				case 4:
-					_skin.icons.styleName = "ui/app/hubao/icon/inlvyi.png";
-					break;
-			}
+//			switch(HuBaoManager.instance().level)
+//			{
+//				case 1:
+//					_skin.icons.styleName = "ui/app/hubao/icon/inlvyi.png";
+//					break;
+//				case 2:
+//					_skin.icons.styleName = "ui/app/hubao/icon/inlvyi.png";
+//					break;
+//				case 3:
+//					_skin.icons.styleName = "ui/app/hubao/icon/inlvyi.png";
+//					break;
+//				case 4:
+//					_skin.icons.styleName = "ui/app/hubao/icon/inlvyi.png";
+//					break;
+//			}
 			_q_con=HuBaoData.getmodByLv(HuBaoManager.instance().level);
 			_skin.lbName.text=_q_con.q_girl_level;
 			var q_scene_monsnter:Q_scene_monster_area=MonsterDataManager.getAreaByAreaID(_q_con.q_destination);
@@ -145,7 +145,7 @@ package com.rpgGame.app.ui.main.hubaozhuizong
 					// 关闭
 					setState(false);
 					break;
-				case _skin.icons:
+				case _skin.ico_chenhao:
 				case _skin.lbTaget:
 					doFindNpcWork();
 					break;

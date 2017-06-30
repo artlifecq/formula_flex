@@ -20,15 +20,15 @@ package org.mokylin.skin.app.hubao
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var bg_quan:feathers.controls.UIAsset;
+
 		public var btn_close:feathers.controls.Button;
 
 		public var btn_open:feathers.controls.Button;
 
 		public var btn_shuoming:feathers.controls.Button;
 
-		public var icons:feathers.controls.UIAsset;
-
-		public var ionbg:feathers.controls.UIAsset;
+		public var ico_chenhao:feathers.controls.UIAsset;
 
 		public var lb1:feathers.controls.Label;
 
@@ -174,6 +174,17 @@ package org.mokylin.skin.app.hubao
 			return temp;
 		}
 
+		private function bg_quan_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg_quan = temp;
+			temp.name = "bg_quan";
+			temp.styleName = "ui/mainui/fubenzhuizong/quan.png";
+			temp.x = 15;
+			temp.y = 25;
+			return temp;
+		}
+
 		private function btn_close_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
@@ -207,25 +218,14 @@ package org.mokylin.skin.app.hubao
 			return temp;
 		}
 
-		private function icons_i():feathers.controls.UIAsset
+		private function ico_chenhao_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icons = temp;
-			temp.name = "icons";
-			temp.styleName = "ui/app/hubao/icon/inlvyi.png";
-			temp.x = 20;
-			temp.y = 35;
-			return temp;
-		}
-
-		private function ionbg_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ionbg = temp;
-			temp.name = "ionbg";
-			temp.styleName = "ui/app/hubao/quan.png";
-			temp.x = 12;
-			temp.y = 24;
+			ico_chenhao = temp;
+			temp.name = "ico_chenhao";
+			temp.styleName = "ui/mainui/fubenzhuizong/icon/inlvyi.png";
+			temp.x = 24;
+			temp.y = 36;
 			return temp;
 		}
 
@@ -357,7 +357,7 @@ package org.mokylin.skin.app.hubao
 			temp.width = 234;
 			temp.x = 12;
 			temp.y = 37;
-			temp.elementsContent = [__HuBao_ZhuiZong_Label1_i(),__HuBao_ZhuiZong_Label2_i(),lbTaget_i(),lbTime_i(),lbName_i(),ionbg_i(),__HuBao_ZhuiZong_Label3_i(),icons_i(),__HuBao_ZhuiZong_Label4_i(),sec_ico1_0_i(),sec_ico1_1_i(),sec_ico1_2_i(),lb1_i(),lb2_i(),lb3_i(),btn_shuoming_i()];
+			temp.elementsContent = [__HuBao_ZhuiZong_Label1_i(),__HuBao_ZhuiZong_Label2_i(),lbTaget_i(),lbTime_i(),lbName_i(),__HuBao_ZhuiZong_Label3_i(),__HuBao_ZhuiZong_Label4_i(),sec_ico1_0_i(),sec_ico1_1_i(),sec_ico1_2_i(),lb1_i(),lb2_i(),lb3_i(),btn_shuoming_i(),bg_quan_i(),ico_chenhao_i()];
 			return temp;
 		}
 

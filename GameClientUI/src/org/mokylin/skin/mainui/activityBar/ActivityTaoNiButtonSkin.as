@@ -3,7 +3,9 @@ package org.mokylin.skin.mainui.activityBar
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
 	import feathers.controls.Label;
+	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
+	import org.mokylin.skin.mainui.activityBar.ActiveLabelDg;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonTaoni;
 
 	/**
@@ -17,6 +19,8 @@ package org.mokylin.skin.mainui.activityBar
 		//                                定义成员变量
 		//==========================================================================
 		public var btnBar:feathers.controls.Button;
+
+		public var skinBg1:feathers.controls.SkinnableContainer;
 
 		public var surplusNpcTxt:feathers.controls.Label;
 
@@ -33,7 +37,7 @@ package org.mokylin.skin.mainui.activityBar
 			this.currentState = "normal";
 			this.height = 86;
 			this.width = 86;
-			this.elementsContent = [btnBar_i(),txtTitle_i(),surplusNpcTxt_i()];
+			this.elementsContent = [skinBg1_i(),btnBar_i(),txtTitle_i(),surplusNpcTxt_i()];
 			
 			states = {
 			};
@@ -54,6 +58,20 @@ package org.mokylin.skin.mainui.activityBar
 			temp.color = 0xF9F0CC;
 			temp.x = 13;
 			temp.y = 5;
+			return temp;
+		}
+
+		private function skinBg1_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			skinBg1 = temp;
+			temp.name = "skinBg1";
+			temp.height = 16;
+			var skin:StateSkin = new org.mokylin.skin.mainui.activityBar.ActiveLabelDg()
+			temp.skin = skin
+			temp.width = 80;
+			temp.x = 1;
+			temp.y = 68;
 			return temp;
 		}
 
@@ -86,7 +104,7 @@ package org.mokylin.skin.mainui.activityBar
 			temp.touchGroup = true;
 			temp.text = "30:30后开始";
 			temp.textAlign = "center";
-			temp.color = 0x4EFD6F;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 113;
 			temp.x = -13;

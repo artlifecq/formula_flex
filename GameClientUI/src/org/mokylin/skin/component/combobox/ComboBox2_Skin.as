@@ -74,9 +74,9 @@ package org.mokylin.skin.component.combobox
 			dropDown = temp;
 			temp.name = "dropDown";
 			temp.height = 105;
-			temp.left = -1;
-			temp.right = -1;
 			temp.styleClass = org.mokylin.skin.component.text.TextAreaDwonSkin;
+			temp.width = 72;
+			temp.x = 0;
 			temp.y = 23;
 			temp.layout = __ComboBox2_Skin_VerticalLayout1_i();
 			return temp;

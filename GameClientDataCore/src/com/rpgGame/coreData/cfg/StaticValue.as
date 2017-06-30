@@ -107,19 +107,61 @@ package com.rpgGame.coreData.cfg
 		 *紫色文本
 		 */
 		public static const UI_PURPLE:uint=0x9d4aa8;
-		
+		////////////////////////////////////上面的跟UI统一的色值不符，用下面的//////////////////////////////////////
+		/**
+		 * 白色 (面板UI白色系都用此色值)
+		 *@param 描述内容使用此色值
+		 * @return  
+		 * */
+		public static const A_UI_WHITE_TEXT:uint = 0x000000;
+		/**
+		 * 绿(面板UI绿色系都用此色值)
+		 *@param 连接文字、属性加成、特殊提示、安全状态、在线等使用此色值
+		 * @return  
+		 * */
+		public static const A_UI_GREEN_TEXT:uint = 0x00ff0c;
+		/**
+		 * 黄(面板UI黄色系都用此色值)
+		 *@param 提示用此色值
+		 * @return  
+		 * */
+		public static const A_UI_YELLOW_TEXT:uint = 0xffea00;
+		/**
+		 * 米色(面板UI米色系都用此色值)
+		 *@param 提示用此色值
+		 * @return  
+		 * */
+		public static const A_UI_BEIGE_TEXT:uint = 0xeaeabc;
+		/**
+		 * 灰色(面板UI灰色系都用此色值)
+		 *@param 普通文本使用此色值
+		 * @return  
+		 * */
+		public static const A_UI_GRAY_TEXT:uint = 0xa3a594;
+		/**
+		 *蓝色(面板UI蓝色系都用此色值)
+		 *@param 特殊使用此色值
+		 * @return  
+		 * */
+		public static const A_UI_BLUE_TEXT:uint = 0x14a3f3;
+		/**
+		 * 红色(面板UI红色系都用此色值)
+		 *@param 特殊使用此色值
+		 * @return  
+		 * */
+		public static const A_UI_RED_TEXT:uint = 0xff0d0d;
 		
 		//////////////////////////////品质色///////////////////////////////////////////
 		/**品质白*/		
-		public static const Q_WHITE:uint = 0x939388;
+		public static const Q_WHITE:uint = 0xeeeeee;
 		/**品质绿*/		
-		public static const Q_GREEN:uint = 0x25931b;
+		public static const Q_GREEN:uint = 0x00ff33;
 		/**品质蓝色*/		
-		public static const Q_BLUE:uint = 0x2c87b0;
+		public static const Q_BLUE:uint = 0x00dfff;
 		/**品质紫色*/		
-		public static const Q_PURPLE:uint = 0x9b4aa8;
+		public static const Q_PURPLE:uint = 0xff00ff;
 		/**品质橙色  */		
-		public static const Q_YELLOW:uint = 0xc2992b;
+		public static const Q_YELLOW:uint = 0xffea00;
 		
 		//////////////////////////////聊天文字颜色///////////////////////////////////////////
 		/**公告*/
@@ -166,6 +208,10 @@ package com.rpgGame.coreData.cfg
 		
 		/**纯白色*/		
 		public static const WHITE_PURE_COLOR:uint = 0xFFFFFF;
+		
+		//排行榜色值
+		/**18号 红色文字*/
+		public static const RANK_RED:uint = 0xd02525;
 		/**
 		 * 字符串颜色 转 16进制颜色
 		 */	
