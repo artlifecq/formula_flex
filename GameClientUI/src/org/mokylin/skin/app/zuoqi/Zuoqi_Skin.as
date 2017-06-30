@@ -5,8 +5,8 @@ package org.mokylin.skin.app.zuoqi
 	import feathers.controls.StateSkin;
 	import feathers.controls.TabBar;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.common.yiji_panelbg_Skin;
-
+	import org.mokylin.skin.common.TongYongPanelbg1;
+	
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
@@ -18,10 +18,10 @@ package org.mokylin.skin.app.zuoqi
 		//                                定义成员变量
 		//==========================================================================
 		public var bg:feathers.controls.SkinnableContainer;
-
+		
 		public var tabBar:feathers.controls.TabBar;
-
-
+		
+		
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
@@ -30,44 +30,55 @@ package org.mokylin.skin.app.zuoqi
 			super();
 			
 			this.currentState = "normal";
-			this.height = 587;
-			this.width = 947;
-			this.elementsContent = [bg_i(),tabBar_i(),__Zuoqi_Skin_UIAsset1_i()];
+			this.height = 601;
+			this.width = 956;
+			this.elementsContent = [bg_i(),__Zuoqi_Skin_UIAsset1_i(),tabBar_i(),__Zuoqi_Skin_UIAsset2_i()];
 			
 			states = {
 			};
 			skinNames={};
 		}
-
-
+		
+		
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
 		private function __Zuoqi_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.height = 453;
+			temp.styleName = "ui/common/background/neikuang_1.png";
+			temp.width = 922;
+			temp.x = 18;
+			temp.y = 82;
+			return temp;
+		}
+		
+		private function __Zuoqi_Skin_UIAsset2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/zuoqi/jinjie.png";
-			temp.x = 447;
-			temp.y = 12;
+			temp.x = 450;
+			temp.y = 17;
 			return temp;
 		}
-
+		
 		private function bg_i():feathers.controls.SkinnableContainer
 		{
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 587;
-			var skin:StateSkin = new org.mokylin.skin.common.yiji_panelbg_Skin()
+			temp.height = 601;
+			var skin:StateSkin = new org.mokylin.skin.common.TongYongPanelbg1()
 			temp.skin = skin
-			temp.width = 947;
+			temp.width = 956;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
-
+		
 		private function tabBar_i():feathers.controls.TabBar
 		{
 			var temp:feathers.controls.TabBar = new feathers.controls.TabBar();
@@ -75,10 +86,10 @@ package org.mokylin.skin.app.zuoqi
 			temp.name = "tabBar";
 			temp.height = 49;
 			temp.width = 713;
-			temp.x = 30;
-			temp.y = 529;
+			temp.x = 28;
+			temp.y = 538;
 			return temp;
 		}
-
+		
 	}
 }
