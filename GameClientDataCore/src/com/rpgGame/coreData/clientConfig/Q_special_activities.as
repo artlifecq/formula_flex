@@ -20,6 +20,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_activity_type:int;
 		 /**  活动时间（[[-1],[-1],[-1],[1,3,4,5],[1200,2200],[-1]]） */
 		public var q_activity_time:String;
+		 /**    */
+		public var q_order:int;
 		 /**  活动时间展示 */
 		public var q_activity_timeshow:String;
 		 /**  活动限制等级 */

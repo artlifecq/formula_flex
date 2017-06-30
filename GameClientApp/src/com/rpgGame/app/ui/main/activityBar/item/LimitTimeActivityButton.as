@@ -1,6 +1,7 @@
 package com.rpgGame.app.ui.main.activityBar.item
 {
 	import com.rpgGame.app.manager.ActivetyDataManager;
+	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
@@ -32,7 +33,7 @@ package com.rpgGame.app.ui.main.activityBar.item
 				return false;
 			if(_actData == null)
 				return false;
-			if(_actData.info.notifyTime == -1)
+			if(_actData.info.joinState<=0)
 				return false;
 			return true;
 		}
@@ -42,7 +43,7 @@ package com.rpgGame.app.ui.main.activityBar.item
 			if(_actData.info.notifyTime==0){
 				setTextLeable(HtmlTextUtil.getTextColor(StaticValue.UI_RED1, ActivetyDataManager.getNextRefreshTime(_actData.actCfg)+"开启"));
 			}else{
-				this.setTimeData(_actData.info.notifyTime,0,0,true);
+				this.setTimeData(SystemTimeManager.curtTm,_actData.info.notifyTime*1000,0,true);
 			}
 		}
 		override protected function onTextRuningTime(second:int):String

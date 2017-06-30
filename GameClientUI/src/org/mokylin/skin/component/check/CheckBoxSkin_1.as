@@ -52,7 +52,7 @@ package org.mokylin.skin.component.check
 			skinNames={"down":"ui/component/check/skin_1/down.png",
 			"downAndSelected":"ui/component/check/skin_1/downAndSelected.png",
 			"hover":"ui/component/check/skin_1/over.png",
-			"overAndSelected":"ui/component/check/skin_1/overAndSelected.png",
+			"hoverAndSelected":"ui/component/check/skin_1/overAndSelected.png",
 			"up":"ui/component/check/skin_1/up.png",
 			"upAndSelected":"ui/component/check/skin_1/upAndSelected.png"};
 		}

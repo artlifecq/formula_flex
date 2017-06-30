@@ -78,9 +78,10 @@ package org.mokylin.skin.mainui.activityBar
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiJinXing = temp;
 			temp.name = "uiJinXing";
+			temp.height = 40;
 			temp.styleName = "ui/common/jinxingzhong.png";
-			temp.x = 51;
-			temp.y = -17;
+			temp.x = 46;
+			temp.y = -6;
 			return temp;
 		}
 		

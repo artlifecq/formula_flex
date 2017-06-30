@@ -35,7 +35,7 @@ package com.rpgGame.app.state.ai
 			//	RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 200, null, onArrive);
 				//walkrun=true;
 				var position : Vector3D = new Vector3D(targerPos.x, targerPos.z, 0, MainRoleManager.actor.position.w);
-				RoleStateUtil.walkToPos(MainRoleManager.actor, position, 200,null, onArrive,null,null,onArrive);
+				RoleStateUtil.walkToPos(MainRoleManager.actor, position, 200,null, onArrive);
 			}
 			else
 			{

@@ -1,8 +1,8 @@
 ﻿package com.rpgGame.app.ui.main.activityBar.item
 {
     import com.game.engine3D.display.InterObject3D;
-    import com.game.mainCore.core.manager.TimerManager;
     import com.rpgGame.app.manager.FunctionOpenManager;
+    import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.manager.time.SystemTimeManager;
     import com.rpgGame.app.ui.main.buttons.IOpen;
     import com.rpgGame.app.utils.TimeData;
@@ -19,11 +19,11 @@
     
     import org.client.mainCore.manager.EventManager;
     
-    import starling.animation.IAnimatable;
-    import starling.core.Starling;
     import starling.display.DisplayObject;
+    
+    import utils.TimerServer;
 
-    public class ActivityButtonBase extends SkinUI implements IOpen,IAnimatable
+    public class ActivityButtonBase extends SkinUI implements IOpen
     {
         public var type:int;
 		public var row:int;
@@ -63,7 +63,7 @@
 		
 		public function canOpen():Boolean
 		{
-			if(!FunctionOpenManager.getOpenLevelByFunBarInfo(_info))
+			if(FunctionOpenManager.getOpenLevelByFunBarInfo(_info)>MainRoleManager.actorInfo.totalStat.level)
 				return false;
 			if(_activityState == ActivityOpenStateType.CLOSE)
 				return false;
@@ -107,6 +107,8 @@
         public function playEffect():void
         {
 			if(_info.showEft==0)
+				return ;
+			if(this.parent == null)
 				return ;
             if (!_effect3D)
             {
@@ -192,8 +194,6 @@
 
         public function onActivityClose():void
         {
-			if(Starling.juggler.contains(this))
-				Starling.juggler.remove(this);
 			clearTime();
 			_activityState = ActivityOpenStateType.CLOSE;
 			EventManager.dispatchEvent(ActivityEvent.CLOSE_ACTIVITY,_info);
@@ -217,12 +217,12 @@
 
         protected function onTextEnd(second:int):String
         {
-            return "<font color='#4efd6f'>进行中\n" + TimeUtil.intTimeActivityString(second) + "</font>";
+            return "<font color='#4efd6f'>" + TimeUtil.intTimeActivityString(second) + "</font>";
         }
 		
 		protected function onTextRuningTime(second:int):String
 		{
-			return "<font color='#4efd6f'>活动持续\n" + TimeUtil.intTimeActivityString(second) + "</font>";
+			return "<font color='#4efd6f'>" + TimeUtil.intTimeActivityString(second) + "</font>";
 		}
         protected function onTextColse():String
         {
@@ -256,25 +256,21 @@
 			_isDown = isdown;
 			if(_isDown)
 			{
-				if(_openTime <_endTime)
-				{
-					Starling.juggler.add(this);
-				}
 				_TimeFun = updatedownTime;
 			}
 			else{
-				Starling.juggler.add(this);
 				_TimeFun = updtaupTime;
 			}
-				
+			if(!TimerServer.has(updateTime))
+				TimerServer.addLoop(updateTime,1000);
         }
 
         public function clearTime():void
         {
             _openTime = 0;
             _runing = false;
-			if(Starling.juggler.contains(this))
-				Starling.juggler.remove(this);
+			if(TimerServer.has(updateTime))
+				TimerServer.remove(updateTime);
         }
 
         public function debugInfo():void
@@ -291,18 +287,18 @@
 				+ "\t服务器时间：" + TimeUtil.changeTimeToSpecStr(SystemTimeManager.curtTm) + "\t" + _openTimeStr;
         }
 
-        public function advanceTime(time:Number):void
+        public function updateTime():void
         {
 			if (_openTime > 0)
 			{
-				_TimeFun(time);
+				_TimeFun();
 			}else {//一直开启
 				this.onTextEmpty();
 				_activityState = ActivityOpenStateType.OPEN;
 			}
         }
 		
-		protected function updatedownTime(time:Number):void
+		protected function updatedownTime():void
 		{
 			var currTime :Number = SystemTimeManager.curtTm;
 			var timeSpacer:Number = _openTime - currTime;
@@ -342,7 +338,7 @@
 			}
 		}
 		 
-		protected function updtaupTime(time:Number):void
+		protected function updtaupTime():void
 		{
 			var currTime :Number = SystemTimeManager.curtTm - _openTime;
 			_runing = true;
@@ -371,6 +367,7 @@
 			_tweenmax = null;
 			display.y = lastY;
 		}
+		
 		
     }
 }
