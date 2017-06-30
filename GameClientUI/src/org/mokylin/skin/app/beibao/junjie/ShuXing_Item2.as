@@ -45,11 +45,11 @@ package org.mokylin.skin.app.beibao.junjie
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbName = temp;
 			temp.name = "lbName";
-			temp.text = "绝学技能手动激活>>";
+			temp.text = "人物等级达到";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
-			temp.width = 150;
+			temp.width = 105;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -65,7 +65,7 @@ package org.mokylin.skin.app.beibao.junjie
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 67;
-			temp.x = 145;
+			temp.x = 100;
 			temp.y = 0;
 			return temp;
 		}
@@ -79,7 +79,7 @@ package org.mokylin.skin.app.beibao.junjie
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 52;
-			temp.x = 220;
+			temp.x = 181;
 			temp.y = 0;
 			return temp;
 		}

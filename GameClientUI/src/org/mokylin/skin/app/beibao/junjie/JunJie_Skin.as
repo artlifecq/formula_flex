@@ -9,7 +9,7 @@ package org.mokylin.skin.app.beibao.junjie
 	import feathers.controls.UIAsset;
 	import feathers.controls.UINumber;
 	import org.mokylin.skin.app.beibao.junjie.button.ButtonJihuo;
-	import org.mokylin.skin.component.button.ButtonSkin_jiantou2;
+	import org.mokylin.skin.component.button.ButtonSkin_jiantou3;
 	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_lv2;
 	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow2;
 
@@ -218,9 +218,9 @@ package org.mokylin.skin.app.beibao.junjie
 			btnNext = temp;
 			temp.name = "btnNext";
 			temp.scaleY = -1;
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jiantou2;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jiantou3;
 			temp.x = 119;
-			temp.y = 440;
+			temp.y = 434;
 			return temp;
 		}
 
@@ -229,9 +229,9 @@ package org.mokylin.skin.app.beibao.junjie
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnPrev = temp;
 			temp.name = "btnPrev";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jiantou2;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jiantou3;
 			temp.x = 161;
-			temp.y = 85;
+			temp.y = 91;
 			return temp;
 		}
 

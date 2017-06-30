@@ -35,7 +35,7 @@ package org.mokylin.skin.component.text
 			
 			states = {
 			};
-			skinNames={"disabled":"ui/component/text/input_bg.png", "enabled":"ui/component/text/input_bg.png", "focused":"ui/component/text/input_bg.png"};
+			skinNames={"disabled":"ui/component/text/flip_bg.png", "enabled":"ui/component/text/flip_bg.png", "focused":"ui/component/text/flip_bg.png"};
 		}
 
 
@@ -50,7 +50,7 @@ package org.mokylin.skin.component.text
 			temp.height = 23;
 			temp.left = 0;
 			temp.right = 0;
-			temp.styleName = "ui/component/text/input_bg.png";
+			temp.styleName = "ui/component/text/flip_bg.png";
 			temp.y = 0;
 			return temp;
 		}
