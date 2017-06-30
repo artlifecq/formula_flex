@@ -1,5 +1,7 @@
 package com.rpgGame.app.ui.scene
 {
+	import com.rpgGame.app.graphics.HeadFace;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.DungeonSender;
 	
 	import org.mokylin.skin.app.banghui.huangcheng.HuangCheng_ZhuiZong;
@@ -27,6 +29,7 @@ package com.rpgGame.app.ui.scene
 			switch(target){
 				case _skin.sec_Exit:
 					DungeonSender.reqQuitDungeon();
+					(MainRoleManager.actor.headFace as HeadFace).updateGuildWarInfoBar(null);
 					break;
 			}
 		}

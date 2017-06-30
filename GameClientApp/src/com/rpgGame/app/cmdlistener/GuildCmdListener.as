@@ -22,6 +22,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.guildWar.message.ResGuildWarCityApplyInfoMessage;
 	import com.rpgGame.netData.guildWar.message.ResGuildWarCityInfoMessage;
 	import com.rpgGame.netData.guildWar.message.ResGuildWarOperateResultMessage;
+	import com.rpgGame.netData.guildWar.message.ResGuildWarOreInfoMessage;
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
@@ -47,13 +48,22 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(111109, getResGuildActiveMessage);
 			SocketConnection.addCmdListener(111199, getResGuildOperateResultMessage);
 			
+			//帮会战
 			SocketConnection.addCmdListener(253101, getResGuildWarCityInfoMessage);
 			SocketConnection.addCmdListener(253102, getResGuildWarCityApplyInfoMessage);
 			SocketConnection.addCmdListener(253104, getResGuildWarChangeMaxPriceMessage);
 			SocketConnection.addCmdListener(253199, getResGuildWarOperateResultMessage);
-			
+			SocketConnection.addCmdListener(253105, getResGuildWarOreInfoMessage);
 			
 			finish();
+		}
+		
+		private function getResGuildWarOreInfoMessage(msg:ResGuildWarOreInfoMessage):void
+		{
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.playerId.ToGID()) as SceneRole;
+			if(role){
+				(role.headFace as HeadFace).updateGuildWarInfoBar(msg.oreList);
+			}
 		}
 		
 		private function getResGuildActiveMessage(msg:ResGuildActiveMessage):void
