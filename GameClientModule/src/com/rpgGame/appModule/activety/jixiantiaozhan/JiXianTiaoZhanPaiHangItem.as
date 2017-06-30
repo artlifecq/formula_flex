@@ -4,6 +4,7 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.appModule.common.itemRender.GridItemRender;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.active.JiXianAcInfo;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
@@ -22,6 +23,7 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 		{
 			_skin=new TiaoZhanPaiHang_Item();
 			super(_skin);
+			MCUtil.removeSelf(_skin.ico1);
 			_render = new GridItemRender(IcoSizeEnum.ICON_48,GridBGType.GRID_SIZE_48);
 		}
 		

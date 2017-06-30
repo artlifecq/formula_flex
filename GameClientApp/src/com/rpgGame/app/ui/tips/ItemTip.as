@@ -236,7 +236,7 @@ package com.rpgGame.app.ui.tips
 				label.width=250;
 				label.leading=5;
 				label.wordWrap=true;
-				curY+=27;
+				curY+=9+label.textHeight;
 				createLine(10,curY,263);
 				curY+=13;
 				
@@ -263,7 +263,7 @@ package com.rpgGame.app.ui.tips
 				label.width=250;
 				label.leading=5;
 				label.wordWrap=true;
-				curY+=27;
+				curY+=9+label.textHeight;
 				createLine(10,curY,263);
 				curY+=13;
 				

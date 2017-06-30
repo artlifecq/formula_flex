@@ -87,7 +87,7 @@ package com.rpgGame.app.view.icon
 			//			this.setIconResName(ClientConfig.getItemIcon("101", IcoSizeEnum.ICON_36 ));
 			sortLayer();
 			this.faceInfo=buffData;
-			if(value._data.q_buff_id>=9&&value._data.q_buff_id<=18)
+			if(value._data.q_buff_id==9||value._data.q_buff_id==10)
 			{
 				TipTargetManager.remove(this);
 				TipTargetManager.show(this, TargetTipsMaker.makeTips( TipType.ACTIVITY_JIXIAN_BUFF_TIP,value));
