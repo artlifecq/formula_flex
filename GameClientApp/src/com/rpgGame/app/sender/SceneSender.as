@@ -98,9 +98,8 @@ package com.rpgGame.app.sender
 			if (ReqLockUtil.isReqLocked(101206))
 				return;
 			ReqLockUtil.lockReq(101206, 3000);
-			
 			//切换场景
-			GameLog.addShow("3_9：准备换场景  传送门ID:\t" +transId);
+			GameLog.addShow("------------------------------3_9：准备换场景  传送门ID:\t" +transId);
 			var msg:ReqChangeMapByMoveMessage = new ReqChangeMapByMoveMessage();
 			msg.line = 0;
 			msg.tranId = transId;
