@@ -139,20 +139,24 @@ package com.rpgGame.app.manager.role
 		//跨场景寻路静态方法
 		//===========================================================================================================
 
-		public static function walkToScene(targetSceneId : int, posx : Number = -1, posy : Number = -1, onArrive : Function = null, spacing : int = 0, data : Object = null,noWalk:Function=null) : void
+		public static function walkToScene(targetSceneId : int, posx : Number = -1, posy : Number = -1, onArrive : Function = null, spacing : int = 0, data : Object = null) : void
 		{
 
 			TrusteeshipManager.getInstance().stopAll();
 			var role : SceneRole = MainRoleManager.actor;
+			posy=-Math.abs(posy);
 			var position : Vector3D = new Vector3D(posx, posy, 0);
 			EventManager.dispatchEvent(TaskEvent.AUTO_WALK_START);
-			walkToScenePos(role, targetSceneId, position,function(ref :WalkMoveStateReference):void{
+			walkToScenePos(role, targetSceneId, position,walkOver, spacing, data);
+			function walkOver(_data : *):void
+			{
 				if(onArrive!=null)
 				{
-					onArrive(ref.data);
+					onArrive(data);
 				}
 				EventManager.dispatchEvent(TaskEvent.AUTO_WALK_STOP);
-			}, spacing, data,noWalk);
+			}
+			
 		}
 
 		/**
@@ -162,7 +166,7 @@ package com.rpgGame.app.manager.role
 		 * @param pos
 		 * @param onArrive
 		 */
-		public static function walkToScenePos(role : SceneRole, targetSceneId : int, pos : Vector3D, onArrive : Function = null, spacing : int = 0, data : Object = null,noWalk:Function=null) : void
+		public static function walkToScenePos(role : SceneRole, targetSceneId : int, pos : Vector3D, onArrive : Function = null, spacing : int = 0, data : Object = null) : void
 		{
 			_data = data;
 			var mapID : int = SceneSwitchManager.currentMapId;
@@ -170,7 +174,7 @@ package com.rpgGame.app.manager.role
 			{
 				if (pos.x > -1 && (-pos.y)> -1)//if (pos.x > -1 && pos.z> -1)
 				{
-					RoleStateUtil.walkToPos(role, pos, spacing, _data, onArrive,null,null,noWalk);
+					RoleStateUtil.walkToPos(role, pos, spacing, _data, onArrive);
 					EventManager.dispatchEvent(WorldMapEvent.MAP_WAYS_GUILD_UPDATA_PATHS);
 				}
 			}
@@ -262,7 +266,7 @@ package com.rpgGame.app.manager.role
 					else
 					{
 						//RoleStateUtil.walkToPos(MainRoleManager.actor, pos, searchMapData.spacing, _data);
-						RoleStateUtil.walkToPos(MainRoleManager.actor, pos, 10, _data);
+						RoleStateUtil.walkToPos(MainRoleManager.actor, pos, 0, _data);
 					}
 					//RoleStateUtil.walk(MainRoleManager.actor, searchMapData.posX, searchMapData.posY, searchMapData.spacing, _data);
 				}

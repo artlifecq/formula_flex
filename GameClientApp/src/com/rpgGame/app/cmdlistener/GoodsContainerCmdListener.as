@@ -22,6 +22,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.backpack.message.ResItemRemoveMessage;
 	import com.rpgGame.netData.backpack.message.ResTakeUpSuccessMessage;
 	import com.rpgGame.netData.backpack.message.ResUseItemSuccessMessage;
+	import com.rpgGame.netData.backpack.message.SCFlyItemsMessage;
 	import com.rpgGame.netData.cooldown.bean.CooldownInfo;
 	import com.rpgGame.netData.cooldown.message.ResCooldownInfoListMessage;
 	import com.rpgGame.netData.equip.message.ResEquipInfoMessage;
@@ -63,7 +64,7 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(108107, onResTakeUpSuccessMessage );
 			SocketConnection.addCmdListener(108115, onResChangeBindItemMessage );
 			SocketConnection.addCmdListener(108116, onResChangeLimitItemMessage );
-			
+			SocketConnection.addCmdListener(108117,onFlyItems);
 			SocketConnection.addCmdListener(105100, onResStoreItemInfosMessage );
 			SocketConnection.addCmdListener(105101, onResStoreItemAddMessage );
 			SocketConnection.addCmdListener(105102, onResStoreItemChangeMessage );
@@ -75,6 +76,12 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(107106, onResEquipOperateResultMessage );
 			SocketConnection.addCmdListener(228100, onResCooldownInfoListMessage );
 			finish();
+		}
+		
+		private function onFlyItems(msg:SCFlyItemsMessage):void
+		{
+			// TODO Auto Generated method stub
+			ItemActionManager.flyItemsToBagByList(msg.itemModels);
 		}
 		
 		private function onResTakeUpSuccessMessage(msg:ResTakeUpSuccessMessage):void

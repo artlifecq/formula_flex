@@ -255,8 +255,8 @@
 			}
 			
 		
-			showobj.x=end.x-40;
-			showobj.y=end.y;
+			showobj.x=end.x;
+			showobj.y=end.y-50;
 			showobj.alpha=0;
 			showobj.scaleX=showobj.scaleY=0.7;
 			

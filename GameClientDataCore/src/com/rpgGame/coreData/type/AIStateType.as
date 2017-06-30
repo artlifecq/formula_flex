@@ -26,6 +26,10 @@ package com.rpgGame.coreData.type
 		
 		/**任务 自动寻路*/
 		public static const TASK_WALK : int = rEnum.next;
+		/**任务 主线任务外 自动寻路*/
+		public static const TASK_OTHER_WALK : int = rEnum.next;
+		
+		
 		/**任务 面板操作*/
 		public static const TASK_PANEL : int = rEnum.next;
 		/**任务 自动采集*/

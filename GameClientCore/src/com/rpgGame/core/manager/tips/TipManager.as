@@ -5,6 +5,7 @@ package com.rpgGame.core.manager.tips
 	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.core.view.ui.tip.vo.TextTipsData;
 	import com.rpgGame.core.view.ui.tip.vo.TextTipsPropChangeData;
+	import com.rpgGame.coreData.info.face.BaseFaceInfo;
 	
 	import flash.geom.Point;
 	import flash.utils.Dictionary;
@@ -120,8 +121,7 @@ package com.rpgGame.core.manager.tips
 			
 			if($pos.x + _currentSowTips.width > Starling.current.stage.stageWidth)
 			{
-				//$pos.x = $pos.x - _currentSowTips.width - ($pos.x + _currentSowTips.width-Starling.current.stage.stageWidth) ;
-				$pos.x = $pos.x - ($pos.x + _currentSowTips.width-Starling.current.stage.stageWidth) ;
+				$pos.x = $pos.x - _currentSowTips.width/2;// - ($pos.x + _currentSowTips.width-Starling.current.stage.stageWidth) ;
 			}
 			if($pos.y + _currentSowTips.height > Starling.current.stage.stageHeight)
 			{

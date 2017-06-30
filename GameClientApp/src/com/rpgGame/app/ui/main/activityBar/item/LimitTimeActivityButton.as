@@ -23,23 +23,32 @@ package com.rpgGame.app.ui.main.activityBar.item
 		override public function onActivityData(data:Object):void
 		{
 			_actData=data as ActivetyInfo;
+		}
+		
+		override public function canOpen():Boolean
+		{
+			var bool:Boolean = super.canOpen();
+			if(!bool)
+				return false;
+			if(_actData == null)
+				return false;
+			if(_actData.info.notifyTime == -1)
+				return false;
+			return true;
+		}
+		
+		override protected function onShow():void
+		{
 			if(_actData.info.notifyTime==0){
-				ui.txtTitle.htmlText =HtmlTextUtil.getTextColor(StaticValue.UI_RED1, ActivetyDataManager.getNextRefreshTime(_actData.actCfg)+"开启");
-				if(!ui.skinBg1.visible){
-					ui.skinBg1.visible=true;
-				}
+				setTextLeable(HtmlTextUtil.getTextColor(StaticValue.UI_RED1, ActivetyDataManager.getNextRefreshTime(_actData.actCfg)+"开启"));
 			}else{
 				this.setTimeData(_actData.info.notifyTime,0,0,true);
 			}
 		}
-		
 		override protected function onTextRuningTime(second:int):String
 		{
 			var closeTxt:String = "<font color='#4efd6f'>活动剩余时间\n" + TimeUtil.format3TimeType(second) + "</font>";
-			ui.txtTitle.htmlText = closeTxt;
-			if(!ui.skinBg1.visible){
-				ui.skinBg1.visible=true;
-			}
+			setTextLeable(closeTxt);
 			return closeTxt;
 		}
 	}

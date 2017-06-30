@@ -7,6 +7,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.cfg.active.BossActInfo;
+	import com.rpgGame.coreData.cfg.active.JiXianVo;
 	import com.rpgGame.coreData.clientConfig.Q_special_activities;
 	import com.rpgGame.netData.specialactivities.bean.SpecialActivityInfo;
 
@@ -17,8 +18,15 @@ package com.rpgGame.app.manager
 	 */
 	public class ActivetyDataManager
 	{
+		private static var _jixianvo:JiXianVo;
 		public function ActivetyDataManager()
 		{
+		}
+		
+		public static function get jixianVo():JiXianVo
+		{
+			if(_jixianvo==null) _jixianvo=new JiXianVo();
+			return _jixianvo;
 		}
 		
 		/**
@@ -57,9 +65,9 @@ package com.rpgGame.app.manager
 					continue;
 				}else{
 					if(timeList[i]>hm){
+						next=timeList[i];
 						break;
 					}
-					next=timeList[i];
 				}
 			}
 			return TimeUtil.changeIntHM2Str(next);
@@ -89,7 +97,8 @@ package com.rpgGame.app.manager
 		public static function checkOpenAct():void
 		{
 			var types:Array=ActivetyCfgData.getTypes();
-//			updateActLeftTime(106,1000);
+			/*MainButtonManager.openActByData(301,ActivetyCfgData.getActInfoById(16));
+			MainButtonManager.openActByData(310, ActivetyCfgData.getActInfoById(25));*/
 			for each(var type:int in types){
 				var typeList:Vector.<ActivetyInfo>=ActivetyCfgData.getTypeList(type);
 				if(typeList){

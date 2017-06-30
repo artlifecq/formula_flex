@@ -16,12 +16,17 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleManager;
+	import com.rpgGame.app.ui.main.dungeon.JiXianTiaoZhanExtPop;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
+	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.netData.backpack.bean.TempItemInfo;
 	import com.rpgGame.netData.player.message.SCNonagePromptMessage;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
+	import com.rpgGame.netData.vip.bean.VipCardInfo;
+	import com.rpgGame.netData.vip.message.SCVipDataMessage;
 	import com.rpgGame.netData.yaota.bean.YaoTaInfo;
 	import com.rpgGame.netData.yaota.message.SCYaoTaAwardMessage;
 	
@@ -63,7 +68,21 @@ package   com.rpgGame.app.manager.debug
 			});
 			commandList.put( ".vip", function (...arg):void
 			{
-				Mgr.vipMgr.vipLv=arg[0];
+				var msg:SCVipDataMessage=new SCVipDataMessage();
+				msg.curVipId=arg[0];
+				msg.remain=arg[1];
+				if (arg.length>2) 
+				{
+					var len:int=arg[2];
+					for (var i:int = 0; i < len; i++) 
+					{
+						var card:VipCardInfo=new VipCardInfo();
+						card.vipId=i+1;
+						card.count=Math.random()*2;
+						msg.cardInfos.push(card);
+					}
+				}
+				Mgr.vipMgr.recVipPanelData(msg);
 			});
 			commandList.put( ".pk", function (...arg):void
 			{
@@ -127,7 +146,11 @@ package   com.rpgGame.app.manager.debug
 				var msg:SCNonagePromptMessage=new SCNonagePromptMessage();
 				msg.type=parseInt(arg[0]);
 				FangChenMiManager.OnSCNonagePromptMessage(msg);
-			});
+			});		
+			commandList.put( ".jixianjiesuan", function (...arg):void
+			{
+				UIPopManager.showAlonePopUI(JiXianTiaoZhanExtPop);
+			});	
 			commandList.put( ".df", function (...arg):void
 			{
 				Mgr.d1v1Mgr.autoJoin();
@@ -153,6 +176,13 @@ package   com.rpgGame.app.manager.debug
 			{
 				var level:int = arg[0];
 				FightSoulManager.instance().updateMode(level);
+			});
+			commandList.put( ".actopen", function (...arg):void
+			{
+				var info:ActivetyInfo=ActivetyCfgData.getActInfoById(arg[0]); 
+				if(info.actCfg.q_show_notice==1){
+					AppManager.showAppNoHide(AppConstant.ACTIVETY_OPEN,info);
+				}
 			});
 		}
 		

@@ -17,6 +17,8 @@ package org.mokylin.skin.app.shejiao.zudui
 		//==========================================================================
 		public var imgBG:feathers.controls.UIAsset;
 
+		public var lb_name:feathers.controls.Label;
+
 		public var lbl_laiyuan:feathers.controls.Label;
 
 		public var lbl_miaoshu:feathers.controls.Label;
@@ -32,7 +34,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			this.currentState = "normal";
 			this.height = 163;
 			this.width = 281;
-			this.elementsContent = [imgBG_i(),__DuiWu_Tips_Label1_i(),__DuiWu_Tips_Label2_i(),lbl_miaoshu_i(),lbl_laiyuan_i()];
+			this.elementsContent = [imgBG_i(),lb_name_i(),__DuiWu_Tips_Label1_i(),lbl_miaoshu_i(),lbl_laiyuan_i()];
 			
 			states = {
 			};
@@ -49,29 +51,13 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.bold = true;
 			temp.height = 26;
 			temp.letterSpacing = -1;
-			temp.fontSize = 16;
-			temp.text = "队员名称";
-			temp.color = 0xCFC6AE;
+			temp.fontSize = 14;
+			temp.text = "【等级】";
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 85;
-			temp.x = 12;
-			temp.y = 12;
-			return temp;
-		}
-
-		private function __DuiWu_Tips_Label2_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.bold = true;
-			temp.height = 26;
-			temp.letterSpacing = -1;
-			temp.fontSize = 16;
-			temp.text = "等级";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 48;
-			temp.x = 187;
-			temp.y = 12;
+			temp.width = 63;
+			temp.x = 215;
+			temp.y = 11;
 			return temp;
 		}
 
@@ -81,10 +67,27 @@ package org.mokylin.skin.app.shejiao.zudui
 			imgBG = temp;
 			temp.name = "imgBG";
 			temp.height = 166;
-			temp.styleName = "ui/common/tips/diban3.png";
+			temp.styleName = "ui/common/tips/tips_2.png";
 			temp.width = 281;
 			temp.x = 0;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function lb_name_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lb_name = temp;
+			temp.name = "lb_name";
+			temp.bold = true;
+			temp.letterSpacing = 0;
+			temp.fontSize = 14;
+			temp.text = "【队员名称】";
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 131;
+			temp.x = 5;
+			temp.y = 11;
 			return temp;
 		}
 
@@ -96,11 +99,11 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.height = 20;
 			temp.text = "66";
 			temp.textAlign = "center";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 53;
-			temp.x = 179;
-			temp.y = 40;
+			temp.x = 220;
+			temp.y = 32;
 			return temp;
 		}
 
@@ -114,8 +117,8 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 145;
-			temp.x = 13;
-			temp.y = 40;
+			temp.x = 11;
+			temp.y = 32;
 			return temp;
 		}
 

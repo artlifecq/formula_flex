@@ -58,6 +58,7 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.state.role.control.TrailMoveState;
 	import com.rpgGame.app.state.role.control.UnmovableState;
 	import com.rpgGame.app.state.role.control.UseSpellState;
+	import com.rpgGame.app.state.role.control.VipBuffState;
 	import com.rpgGame.app.state.role.control.WalkMoveState;
 	import com.rpgGame.core.state.role.action.ActionState;
 	import com.rpgGame.core.state.role.control.MoveState;
@@ -154,6 +155,7 @@ package com.rpgGame.app.state.role
 		stateMapping[RoleStateType.CONTROL_TOWER_FLAG] = NineTowerFightFlagState;
 		stateMapping[RoleStateType.CONTROL_CHECK_AUTO_FIGHT] = CheckStartAutoFightState;
 		stateMapping[RoleStateType.CONTROL_MASTERY_MAN] = MysteryManState;
+		stateMapping[RoleStateType.CONTROL_VIP] = VipBuffState;
 		private var _role : SceneRole;
 		private var _lastCanShowRiding : Boolean;
 		

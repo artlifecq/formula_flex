@@ -46,9 +46,9 @@ package org.mokylin.skin.app.beibao.jingmai
 			super();
 			
 			this.currentState = "normal";
-			this.height = 260;
-			this.width = 281;
-			this.elementsContent = [imgBg_i(),__Jingmai_Tips_UIAsset1_i(),lb_name_i(),lb_jihuo_i(),lb_dengji_i(),imgLine1_i(),imgLine0_i(),lb_shengming_i(),lb_Stone_i(),imgStone_i(),uiName1_i(),uiName2_i()];
+			this.height = 187;
+			this.width = 280;
+			this.elementsContent = [imgBg_i(),lb_name_i(),lb_jihuo_i(),lb_dengji_i(),imgLine1_i(),imgLine0_i(),lb_shengming_i(),lb_Stone_i(),imgStone_i(),uiName1_i(),uiName2_i()];
 			
 			states = {
 			};
@@ -59,25 +59,15 @@ package org.mokylin.skin.app.beibao.jingmai
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __Jingmai_Tips_UIAsset1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/tips/tiao.png";
-			temp.x = 12;
-			temp.y = 19;
-			return temp;
-		}
-
 		private function imgBg_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			imgBg = temp;
 			temp.name = "imgBg";
-			temp.height = 260;
-			temp.styleName = "ui/common/tips/diban3.png";
-			temp.top = 0;
-			temp.width = 281;
+			temp.height = 187;
+			temp.styleName = "ui/common/tips/jinengdi.png";
 			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -89,7 +79,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.styleName = "ui/common/tips/xian.png";
 			temp.width = 264;
 			temp.x = 9;
-			temp.y = 53;
+			temp.y = 39;
 			return temp;
 		}
 
@@ -101,7 +91,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.styleName = "ui/common/tips/xian.png";
 			temp.width = 264;
 			temp.x = 9;
-			temp.y = 146;
+			temp.y = 95;
 			return temp;
 		}
 
@@ -111,8 +101,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			imgStone = temp;
 			temp.name = "imgStone";
 			temp.styleName = "ui/app/beibao/icons/icon/baojibianshi/huangse.png";
-			temp.x = 18;
-			temp.y = 214;
+			temp.x = 11;
+			temp.y = 146;
 			return temp;
 		}
 
@@ -127,9 +117,9 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.textAlign = "left";
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 218;
-			temp.x = 53;
-			temp.y = 214;
+			temp.width = 229;
+			temp.x = 48;
+			temp.y = 146;
 			return temp;
 		}
 
@@ -144,8 +134,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.color = 0xD02525;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 214;
-			temp.x = 13;
-			temp.y = 92;
+			temp.x = 10;
+			temp.y = 68;
 			return temp;
 		}
 
@@ -159,8 +149,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.text = "未激活";
 			temp.color = 0xD02525;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 222;
-			temp.y = 22;
+			temp.x = 226;
+			temp.y = 10;
 			return temp;
 		}
 
@@ -172,12 +162,12 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.bold = true;
 			temp.letterSpacing = 0;
 			temp.fontSize = 16;
-			temp.text = "亡魂悲歌";
-			temp.color = 0xCFC6AE;
+			temp.text = "穴位名称·奇穴";
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 131;
-			temp.x = 13;
-			temp.y = 21;
+			temp.x = 10;
+			temp.y = 10;
 			return temp;
 		}
 
@@ -191,8 +181,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 213;
-			temp.x = 13;
-			temp.y = 185;
+			temp.x = 10;
+			temp.y = 126;
 			return temp;
 		}
 
@@ -202,8 +192,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			uiName1 = temp;
 			temp.name = "uiName1";
 			temp.styleName = "ui/common/tips/tipswenzi/jineng/jihuotiaojian.png";
-			temp.x = 15;
-			temp.y = 67;
+			temp.x = 13;
+			temp.y = 51;
 			return temp;
 		}
 
@@ -213,8 +203,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			uiName2 = temp;
 			temp.name = "uiName2";
 			temp.styleName = "ui/common/tips/tipswenzi/jineng/chongxueshuxing.png";
-			temp.x = 15;
-			temp.y = 161;
+			temp.x = 13;
+			temp.y = 109;
 			return temp;
 		}
 

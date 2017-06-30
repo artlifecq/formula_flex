@@ -8,17 +8,16 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.SkillLvLDataManager;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.clientConfig.Q_skill_ignore;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.info.face.BaseFaceInfo;
 	import com.rpgGame.coreData.lang.LangSpell;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
 	
-	import flash.desktop.Clipboard;
-	
 	import feathers.utils.filter.GrayFilter;
 	
-	import org.mokylin.skin.app.tips.jinengTips_Skin;
+	import org.mokylin.skin.app.tips.Tips_ZhuDongJiNeng;
 	
 	/**
 	 * 技能TIPS
@@ -27,7 +26,7 @@ package com.rpgGame.app.ui.tips
 	 */
 	public class SpellTip extends SkinUI implements ITip
 	{
-		private var _spellTip:jinengTips_Skin;
+		private var _spellTip:Tips_ZhuDongJiNeng;
 		
 		private static var _instance:SpellTip = null;
 		public static function get instance() : SpellTip
@@ -44,7 +43,7 @@ package com.rpgGame.app.ui.tips
 		
 		public function SpellTip()
 		{
-			_spellTip = new jinengTips_Skin();
+			_spellTip = new Tips_ZhuDongJiNeng();
 			super( _spellTip );
 			
 			initTip();
@@ -57,14 +56,14 @@ package com.rpgGame.app.ui.tips
 		private function initTip():void
 		{
 			mainIco=new BgIcon(64);
-			riseIco=new BgIcon(48);
+			riseIco=new BgIcon(64);
 			_spellTip.container.addChildAt(mainIco,4);
-			_spellTip.grp_rise_content.addChild(riseIco);
-			_spellTip.rise_des.wordWrap=true;
-			riseIco.x=3;
-			riseIco.y=0;
-			mainIco.x=9;
-			mainIco.y=10;
+			_spellTip.grpContent.addChild(riseIco);
+			_spellTip.lbJinjie2.wordWrap=true;
+			riseIco.x=_spellTip.Icon2.x+5;
+			riseIco.y=_spellTip.Icon2.y+5;
+			mainIco.x=_spellTip.Icon1.x+5;
+			mainIco.y=_spellTip.Icon1.y+5;
 		}		
 		
 		/**
@@ -101,68 +100,44 @@ package com.rpgGame.app.ui.tips
 			}
 			
 			mainIco.setIconResName(ClientConfig.getSkillIcon(cfg.q_icon.toString(),64));
-			_spellTip.lbl_name.text=cfg.q_skillName;
-			_spellTip.lbl_dengji.text="Lv."+info.skillChildLv;
-			_spellTip.lbl_lenque.text=cfg.q_cd==0?LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT12):(cfg.q_cd/1000)+"s";
-			_spellTip.lbl_xiaohao.text=cfg.q_recovers_detail.length==0?LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT12):cfg.q_recovers_detail;
+			_spellTip.skill_name.text=cfg.q_skillName+" Lv."+info.skillChildLv;
+			_spellTip.lbTime.text=cfg.q_cd==0?LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT12):(cfg.q_cd/1000)+"s";
+			_spellTip.lbXiaohao.text=cfg.q_recovers_detail.length==0?LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT12):cfg.q_recovers_detail;
 			var lvData:Q_skill_ignore=SkillLvLDataManager.getData(info.skillModelId+"_"+info.skillChildLv);
-			_spellTip.lbl_miaosu.text=lvData.q_skillpanel_description;
-			_spellTip.lbl_miaosu.isHtmlText=true;
-			
+			_spellTip.lbShuoming.text=lvData.q_skillpanel_description;
+			_spellTip.lbShuoming.isHtmlText=true;
 			
 			if(!riseCfg){
-				_spellTip.bg.height=_spellTip.grp_shuoming.y+_spellTip.lbl_jinengName.height+5+_spellTip.lbl_miaosu.textHeight+20;
-				_spellTip.grp_rise_tite.visible=false;
-				_spellTip.grp_rise_content.visible=false;
+				_spellTip.tipbg.height=_spellTip.lbShuoming.y+_spellTip.lbShuoming.textHeight+20;
+				_spellTip.grpContent.visible=false;
 				return;
 			}
-			_spellTip.rise_name.color=0xcfc6ae;
-			_spellTip.rise_name.text=riseCfg.q_skillName;
-			_spellTip.grp_rise_tite.visible=true;
-			_spellTip.grp_rise_content.visible=true;
-			
-			_spellTip.grp_rise_tite.y=_spellTip.grp_shuoming.y+_spellTip.lbl_jinengName.height+5+_spellTip.lbl_miaosu.textHeight+20;
-			_spellTip.grp_rise_content.y=_spellTip.grp_rise_tite.y+_spellTip.grp_rise_tite.height+20;
-			
-			_spellTip.mc_dengjie.gotoAndStop(info.skillLevel.toString());
-			_spellTip.mc_dengjie.visible=true;
+			_spellTip.grpContent.visible=true;
+			_spellTip.tipbg.height = 380;
+			_spellTip.lbName.text=riseCfg.q_grade_name;
 			if(info.skillLevel==1){
-				_spellTip.is_act.visible=false;
-				if(cfg.q_max_grade==1){
-					_spellTip.mc_dengjie.visible=false;
-				}
-				
-				_spellTip.rise_name.color=0x939388;
 				GrayFilter.gray(riseIco);
 				riseIco.width=riseIco.height=80;
+				riseIco.setIconResName(ClientConfig.getRiseSkillIcon(cfg.q_icon.toString(),64));
 				if(riseCfg.q_need_skill_level!=0){
-					_spellTip.rise_name.text="("+riseCfg.q_skillName+riseCfg.q_need_skill_level+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT17)+")";
+					_spellTip.lbJinjie.text="("+riseCfg.q_skillName+riseCfg.q_need_skill_level+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT17)+")";
 					if(riseCfg.q_level_up!=0){
-						_spellTip.rise_name.text+="\n"+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT18).replace("$",riseCfg.q_level_up);
+						_spellTip.lbJinjie.text+="\n"+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT18).replace("$",riseCfg.q_level_up);
 					}
 				}else{
 					if(riseCfg.q_level_up!=0){
-						_spellTip.rise_name.text+=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT18).replace("$",riseCfg.q_level_up);
+						_spellTip.lbJinjie.text+=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT18).replace("$",riseCfg.q_level_up);
 					}
-				}
-				
+				}		
 			}else{
 				GrayFilter.unGray(riseIco);
-				_spellTip.is_act.color=0x6BCC08;
-				_spellTip.is_act.text=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT3).substr(0,3);
-				_spellTip.is_act.visible=true;
+				_spellTip.lbJinjie.text=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT3).substr(0,3);
 			}
-			_spellTip.is_act.x=_spellTip.rise_name.x+_spellTip.rise_name.textWidth+10;
-			_spellTip.rise_des.htmlText=cfg.q_skillpanel_description2;
-			_spellTip.eft_name.text=riseCfg.q_grade_name;
-			
-			
-			riseIco.setIconResName(ClientConfig.getRiseSkillIcon(cfg.q_icon.toString(),48));
-			if(_spellTip.rise_name.textHeight+_spellTip.rise_des.textHeight<80){
-				_spellTip.bg.height=_spellTip.grp_rise_content.y+80;
-			}else{
-				_spellTip.bg.height=_spellTip.grp_rise_content.y+_spellTip.rise_name.textHeight+_spellTip.rise_des.textHeight+40+_spellTip.eft_name.textHeight;
-			}
+			_spellTip.lbJinjie.color=StaticValue.A_UI_YELLOW_TEXT;
+			_spellTip.lbJinjie2.y=_spellTip.lbJinjie.y+_spellTip.lbJinjie.textHeight+3;
+			_spellTip.lbJinjie2.htmlText=cfg.q_skillpanel_description2;		
+			_spellTip.grpContent.height=_spellTip.lbJinjie2.y+_spellTip.lbJinjie2.textHeight+18;
+			_spellTip.tipbg.height=_spellTip.grpContent.y+_spellTip.grpContent.height;
 		}
 		
 		/**
@@ -182,7 +157,7 @@ package com.rpgGame.app.ui.tips
 		public override function get height() : Number
 		{
 			
-			return _spellTip.bg.height;
+			return _spellTip.tipbg.height;
 		}
 	}
 }

@@ -2,22 +2,32 @@
 {
     import com.rpgGame.app.manager.FunctionOpenManager;
     
+    import away3d.events.Event;
+    
     import org.mokylin.skin.mainui.activityBar.ActivityButtonSkin;
+    import org.mokylin.skin.mainui.activityBar.ActivityItem;
     
     import starling.display.DisplayObject;
 
     public class ActivityButton extends ActivityButtonBase 
     {
-
         protected var ui:ActivityButtonSkin;
-
+		private var _item:ActivityLable;
         public function ActivityButton()
         {
             ui = new ActivityButtonSkin();
             super(ui);
-            ui.txtTitle.isHtmlText = true;
+			
+			_item = new ActivityLable(ui.skinItem.skin as ActivityItem);
 			this.onTextColse();
+			ui.btnBar.addEventListener(Event.RESIZE,sizeHandler);
         }
+		
+		private function sizeHandler(e:Event):void
+		{
+			ui.btnBar.x = (this.width-ui.btnBar.width)/2;
+			ui.skinItem.y = ui.btnBar.y+ui.btnBar.height-5;
+		}
 
         override public function set styleClass(cl:Class):void
         {
@@ -62,54 +72,51 @@
         {
             var title:String = this.title;
             var startTxt:String = super.onTextStart(second);
-            ui.txtTitle.htmlText = startTxt;
-			if(!ui.skinBg1.visible){
-				ui.skinBg1.visible=true;
-			}
+			setTextLeable(startTxt);
+			ui.uiJinXing.visible = false;
             return startTxt;
         }
 
         override protected function onTextRuning():String
         {
             var runingTxt:String = super.onTextRuning();
-            ui.txtTitle.htmlText = runingTxt;
-			if(!ui.skinBg1.visible){
-				ui.skinBg1.visible=true;
-			}
+			setTextLeable(runingTxt);
+			ui.uiJinXing.visible = true;
             return runingTxt;
         }
 
         override protected function onTextEnd(second:int):String
         {
             var endTxt:String = super.onTextEnd(second);
-            ui.txtTitle.htmlText = endTxt;
-			if(!ui.skinBg1.visible){
-				ui.skinBg1.visible=true;
-			}
+			setTextLeable(endTxt);
             return endTxt;
         }
 		
 		override protected function onTextEmpty():void
 		{
-			ui.txtTitle.htmlText = "";
+			setTextLeable("");
+			ui.uiJinXing.visible = false;
 		}
 
         override protected function onTextColse():String
         {
             var closeTxt:String = super.onTextColse();
-            ui.txtTitle.htmlText = closeTxt;
-			ui.skinBg1.visible=false;
+			setTextLeable(closeTxt);
+			ui.uiJinXing.visible = false;
             return closeTxt;
         }
 		
 		override protected function onTextRuningTime(second:int):String
 		{
 			var closeTxt:String = super.onTextRuningTime(second);
-			ui.txtTitle.htmlText = closeTxt;
-			if(!ui.skinBg1.visible){
-				ui.skinBg1.visible=true;
-			}
+			setTextLeable(closeTxt);
+			ui.uiJinXing.visible = true;
 			return closeTxt;
+		}
+		
+		protected function setTextLeable(str:String):void
+		{
+			_item.text = str;
 		}
     }
 }

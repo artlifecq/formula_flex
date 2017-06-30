@@ -35,11 +35,11 @@
                 }
                 if (!WelfareManager.isCanGetPrize())
                 {
-                    ui.txtTitle.htmlText = LanguageConfig.getText("SEVEN_LOGIN_NOT_GET");
+                    setTextLeable(LanguageConfig.getText("SEVEN_LOGIN_NOT_GET"));
                 }
                 else
                 {
-                    ui.txtTitle.htmlText = LanguageConfig.getText("SEVEN_LOGIN_GET");
+                    setTextLeable(LanguageConfig.getText("SEVEN_LOGIN_GET"));
                 }
             }
         }
@@ -50,7 +50,7 @@
             {
                 this.isShowEffect = false;
                 this.stopEffect();
-                ui.txtTitle.htmlText = LanguageConfig.getText("SEVEN_LOGIN_NOT_GET");
+                setTextLeable(LanguageConfig.getText("SEVEN_LOGIN_NOT_GET"));
             }
         }
 

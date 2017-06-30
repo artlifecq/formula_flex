@@ -42,6 +42,7 @@ package com.rpgGame.app.scene.animator
 		
 		protected var _destPosition : Vector3D;
 		protected var _targetPos : Vector3D;
+		protected var _atkor : SceneRole;
 		protected var _targetRole : SceneRole;
 		/**
 		 * 飞行特效的每次更新位置时的当前位置，方面用来算当前飞行特效到目标点的方位 
@@ -90,7 +91,6 @@ package com.rpgGame.app.scene.animator
 		protected var _isAdaptiveTargetHeight : Boolean;
 		protected var _moveDelay : int;
 		protected var _playDelay : int;
-//		protected var _releaseDelayTime : int;
 		protected var _isMoving : Boolean;
 		protected var _isPlaying : Boolean;
 		protected var _spellInfo : ReleaseSpellInfo;
@@ -104,6 +104,11 @@ package com.rpgGame.app.scene.animator
 		protected var _endPosY : Number;
 		protected var _endOffsetY : Number;
 		protected var _endRotationX : Number;
+		protected var _bindBone : String;
+		protected var _targetBindBone : String;
+		/**
+		 * 施法者当前的位置与施法者身上骨骼当前位置得   偏移量
+		 */		
 		private var _offsetDest : Vector3D;
 		
 		public function CommonTrajectoryAnimator(spellInfo : ReleaseSpellInfo, targetPos : Vector3D, targetRole : SceneRole, 
@@ -180,6 +185,13 @@ package com.rpgGame.app.scene.animator
 			}
 		}
 		
+		/**
+		 * 设置弹道其实数据 
+		 * @param position         施法者当前场景位置
+		 * @param rotationY        施法者当前转向
+		 * @param destPosition     施法者身上的某一个骨骼在场景中位置
+		 * 
+		 */		
 		public function setAtkorData(position : Vector3D, rotationY : Number, destPosition : Vector3D) : void
 		{
 			_atkorPosition = position.clone();
@@ -493,7 +505,9 @@ package com.rpgGame.app.scene.animator
 				if (_locusPoints)
 				{
 					if (_queue.length == 0)
+					{
 						_locusPoints.length = 0;
+					}
 					_locusPoints = null;
 				}
 				_queue = null;

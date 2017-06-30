@@ -186,7 +186,7 @@ package com.rpgGame.appModule.hubao
 			EventManager.addEvent(HuBaoEvent.HUBAO_STAR,close);
 			EventManager.addEvent(ItemEvent.ITEM_ADD,updateItem);
 			EventManager.addEvent(ItemEvent.ITEM_CHANG,updateItem);
-			EventManager.addEvent(ItemEvent.ITEM_DELETE,updateItem);
+			EventManager.addEvent(ItemEvent.ITEM_REMOVE,updateItem);
 			
 			updateShowUseItem();
 			updateHuSongNum(HuBaoManager.instance().num);
@@ -202,7 +202,7 @@ package com.rpgGame.appModule.hubao
 			EventManager.removeEvent(HuBaoEvent.HUBAO_STAR,close);
 			EventManager.removeEvent(ItemEvent.ITEM_ADD,updateItem);
 			EventManager.removeEvent(ItemEvent.ITEM_CHANG,updateItem);
-			EventManager.removeEvent(ItemEvent.ITEM_DELETE,updateItem);
+			EventManager.removeEvent(ItemEvent.ITEM_REMOVE,updateItem);
 		}
 		
 		private function updateItem(info:ClientItemInfo):void
@@ -321,26 +321,26 @@ package com.rpgGame.appModule.hubao
 			{
 				case 1:
 				{
-					_chenhaoEft = _chenhaoEftContaner1.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,20,0);
-					_diEft = _chenhaoEftContaner1.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,300,0);
+					_chenhaoEft = _chenhaoEftContaner1.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,50,0);
+					_diEft = _chenhaoEftContaner1.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,330,0);
 					break;
 				}
 				case 2:
 				{
-					_chenhaoEft = _chenhaoEftContaner2.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,20,0);
-					_diEft = _chenhaoEftContaner2.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,300,0);
+					_chenhaoEft = _chenhaoEftContaner2.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,50,0);
+					_diEft = _chenhaoEftContaner2.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,330,0);
 					break;
 				}
 				case 3:
 				{
-					_chenhaoEft = _chenhaoEftContaner3.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,20,0);
-					_diEft = _chenhaoEftContaner3.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,300,0);
+					_chenhaoEft = _chenhaoEftContaner3.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,50,0);
+					_diEft = _chenhaoEftContaner3.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,330,0);
 					break;
 				}
 				case 4:
 				{
-					_chenhaoEft = _chenhaoEftContaner4.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,20,0);
-					_diEft = _chenhaoEftContaner4.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,300,0);
+					_chenhaoEft = _chenhaoEftContaner4.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,50,0);
+					_diEft = _chenhaoEftContaner4.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,330,0);
 					break;
 				}			
 			}		

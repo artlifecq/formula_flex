@@ -54,8 +54,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			super();
 			
 			this.currentState = "normal";
-			this.height = 587;
-			this.width = 947;
+			this.height = 601;
+			this.width = 956;
 			this.elementsContent = [__JingJiChan3_UIAsset2_i(),labReward_i(),__JingJiChan3_UIAsset3_i(),__JingJiChan3_UIAsset4_i(),ListItem_i(),__JingJiChan3_UIAsset5_i(),__JingJiChan3_UIAsset6_i(),__JingJiChan3_UIAsset7_i(),__JingJiChan3_UIAsset8_i(),__JingJiChan3_UIAsset9_i(),__JingJiChan3_UIAsset10_i(),__JingJiChan3_UIAsset11_i(),__JingJiChan3_UIAsset12_i(),imgYiwai_i(),imgMing_i(),numZhanli_i(),__JingJiChan3_Label1_i(),lbHuosheng_i(),lbShibai_i(),lbRongyu_i(),icon1_i(),btnBack_i(),btnOK_i()];
 			
 			states = {
@@ -75,8 +75,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.height = 456;
 			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
 			temp.width = 503;
-			temp.x = 30;
-			temp.y = 113;
+			temp.x = 34;
+			temp.y = 126;
 			return temp;
 		}
 
@@ -89,8 +89,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 350;
-			temp.x = 568;
-			temp.y = 230;
+			temp.x = 572;
+			temp.y = 243;
 			return temp;
 		}
 
@@ -98,8 +98,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/jingjichang/jinrizhankuang.png";
-			temp.x = 569;
-			temp.y = 285;
+			temp.x = 573;
+			temp.y = 298;
 			return temp;
 		}
 
@@ -107,8 +107,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/jingjichang/pomo.png";
-			temp.x = 556;
-			temp.y = 404;
+			temp.x = 560;
+			temp.y = 417;
 			return temp;
 		}
 
@@ -116,8 +116,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/jingjichang/paimingjiangli.png";
-			temp.x = 569;
-			temp.y = 403;
+			temp.x = 573;
+			temp.y = 416;
 			return temp;
 		}
 
@@ -125,8 +125,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/big_bg/zhanchang/bg2.jpg";
-			temp.x = 18;
-			temp.y = 74;
+			temp.x = 22;
+			temp.y = 87;
 			return temp;
 		}
 
@@ -134,8 +134,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/jingjichang/paimingjiangliyulan.png";
-			temp.x = 162;
-			temp.y = 75;
+			temp.x = 166;
+			temp.y = 88;
 			return temp;
 		}
 
@@ -143,8 +143,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/jingjichang/wodepaimingjiangli.png";
-			temp.x = 618;
-			temp.y = 75;
+			temp.x = 622;
+			temp.y = 88;
 			return temp;
 		}
 
@@ -152,8 +152,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/jingjichang/pomo.png";
-			temp.x = 556;
-			temp.y = 118;
+			temp.x = 560;
+			temp.y = 131;
 			return temp;
 		}
 
@@ -161,8 +161,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/jingjichang/wodepaiming.png";
-			temp.x = 569;
-			temp.y = 117;
+			temp.x = 573;
+			temp.y = 130;
 			return temp;
 		}
 
@@ -170,8 +170,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/jingjichang/pomo.png";
-			temp.x = 556;
-			temp.y = 186;
+			temp.x = 560;
+			temp.y = 199;
 			return temp;
 		}
 
@@ -179,8 +179,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/jingjichang/lingjiangpaiming.png";
-			temp.x = 569;
-			temp.y = 185;
+			temp.x = 573;
+			temp.y = 198;
 			return temp;
 		}
 
@@ -188,8 +188,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/jingjichang/pomo.png";
-			temp.x = 556;
-			temp.y = 286;
+			temp.x = 560;
+			temp.y = 299;
 			return temp;
 		}
 
@@ -234,8 +234,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			imgMing = temp;
 			temp.name = "imgMing";
 			temp.styleName = "ui/app/zhanchang/jingjichang/ming2.png";
-			temp.x = 738;
-			temp.y = 151;
+			temp.x = 742;
+			temp.y = 164;
 			return temp;
 		}
 
@@ -245,8 +245,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			imgYiwai = temp;
 			temp.name = "imgYiwai";
 			temp.styleName = "ui/app/zhanchang/jingjichang/yiwai.png";
-			temp.x = 765;
-			temp.y = 151;
+			temp.x = 769;
+			temp.y = 164;
 			return temp;
 		}
 
@@ -258,8 +258,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.text = "可领取奖励";
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 705;
-			temp.y = 552;
+			temp.x = 709;
+			temp.y = 565;
 			return temp;
 		}
 
@@ -315,8 +315,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.label = "2000";
 			temp.styleClass = org.mokylin.skin.app.zhanchang.uinumber.UINumberNumber3;
 			temp.width = 76;
-			temp.x = 665;
-			temp.y = 151;
+			temp.x = 669;
+			temp.y = 164;
 			return temp;
 		}
 

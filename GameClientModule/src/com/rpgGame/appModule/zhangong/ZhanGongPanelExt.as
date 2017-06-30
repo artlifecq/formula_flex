@@ -72,8 +72,8 @@ package com.rpgGame.appModule.zhangong
 		private function initView():void
 		{
 			_isFirst=true;
-			_skin.num_lv.visible=false;
-			_skin.uiUp.visible=false;
+			_skin.num_lv0.visible=false;
+//			_skin.uiUp.visible=false;
 			_skin.ListMap.addEventListener(FeathersEventType.CREATION_COMPLETE,toShouShow);
 			var mapItemList:Vector.<int>=ZhanGongData.getMapItemLvList();
 			_skin.ListMap.dataProvider=new ListCollection(mapItemList);
@@ -154,7 +154,7 @@ package com.rpgGame.appModule.zhangong
 			if(bool)
 			{
 				var nowFight:int=ZhanGongManager.getPower();
-				var change:int=nowFight-_skin.Num_zhandouli.number;
+				var change:int=nowFight-_skin.NumZhanli.number;
 				changeList=getChangeList(change);		
 				var  timeLine : TimelineLite = new TimelineLite();
 				for(var i:int=0;i<changeList.length;i++){
@@ -164,14 +164,14 @@ package com.rpgGame.appModule.zhangong
 			else
 			{
 				//				_skin.Num_zhandouli.label=ZhanGongManager.getPower().toString();
-				_skin.Num_zhandouli.number=ZhanGongManager.getPower();
+				_skin.NumZhanli.number=ZhanGongManager.getPower();
 			}
 			updateShuXing();
 		}
 		
 		private function delayTween(v:int):void
 		{
-			_skin.Num_zhandouli.number=v;
+			_skin.NumZhanli.number=v;
 		}
 		
 		private function getChangeList(changeV:int):Array
@@ -193,7 +193,7 @@ package com.rpgGame.appModule.zhangong
 			var num:int=i+1;
 			var list:Array=[];
 			for(i=1;i<num;i++){
-				list.push(_skin.Num_zhandouli.number+i*per);
+				list.push(_skin.NumZhanli.number+i*per);
 			}
 			return list;
 		}
@@ -286,15 +286,15 @@ package com.rpgGame.appModule.zhangong
 			var has:HashMap=new HashMap();
 			has.put(type,num);
 			var pow:int=FightValueUtil.calFightPowerByHash(has,MainRoleManager.actorInfo.job);
-			_skin.num_lv.label=pow.toString();
-			_skin.num_lv.visible=true;
-			_skin.uiUp.visible=true;
+			_skin.num_lv0.label="x"+pow.toString();
+			_skin.num_lv0.visible=true;
+//			_skin.uiUp.visible=true;
 		}
 		
 		private function closeNextAtt():void
 		{
-			_skin.num_lv.visible=false;
-			_skin.uiUp.visible=false;
+			_skin.num_lv0.visible=false;
+//			_skin.uiUp.visible=false;
 		}
 		
 		private function updatePower(msg:SCMeritoriousUpgradeResultMessage):void

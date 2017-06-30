@@ -60,7 +60,7 @@ package com.rpgGame.appModule.activety.zonghe.lijin
 				scoreList[i].lbNum.text=""+rankList[i].cashGiftNum;
 				
 			}
-			if(myrank>0)
+			if(cashNum>0)
 			{
 				_skin["list"+10].visible=true;
 				_skin.tishi.visible=false;

@@ -171,12 +171,14 @@ package com.rpgGame.coreData.info.fight
 		
 		public function get deadLaunchProbability() : int
 		{
-			return _deadLaunchProbability > 0 ? _deadLaunchProbability : 100;
+			//return _deadLaunchProbability > 0 ? _deadLaunchProbability : 100;
+			return _deadLaunchProbability;
 		}
 		
 		public function get deadBeatProbability() : int
 		{
-			return _deadBeatProbability > 0 ? _deadBeatProbability : 100;
+			//return _deadBeatProbability > 0 ? _deadBeatProbability : 100;
+			return _deadBeatProbability;
 		}
 		
 		public function get deadBeatSpeed() : int
