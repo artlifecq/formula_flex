@@ -88,17 +88,18 @@ package com.rpgGame.app.cmdlistener
 			var areaMapData : AreaMapData = _otherAreaMap.getFlag(actor.x, actor.z);
 			var flagObj : Object = areaMapData ? areaMapData.data : null;
 			if (flagObj is SceneRole)
-			{
+			{GameLog.addShow("----------触发场景物"+actor.x+","+actor.z);
 				if ((flagObj as SceneRole).type == SceneCharType.TRANS)
-				{
+				{GameLog.addShow("----------触发传送门了"+actor.x+","+actor.z);
 					var trans : SceneRole = flagObj as SceneRole;
 					if (!trans.isInViewDistance)
 						return;
 					var tranportData : SceneTranportData = trans.data as SceneTranportData;
-					GameLog.add("[RoleStateCmdListener] [mainCharMoveThroughHandler]" + tranportData.id);
+					GameLog.addShow("[RoleStateCmdListener] [mainCharMoveThroughHandler]" + tranportData.id);
 					switch (tranportData.type)
 					{
 						case RoleType.TYPE_TRANPORT_NORMAL:
+							GameLog.addShow("----------TYPE_TRANPORT_NORMAL" +tranportData.id);
 							SceneSender.transportChgMap(tranportData.id);
 							break;
 						case RoleType.TYPE_TRANPORT_MAZE:
