@@ -43,7 +43,7 @@
 	import com.rpgGame.app.cmdlistener.clientConfig.ClientConfigCmdListener;
 	import com.rpgGame.app.cmdlistener.engine.InteractiveCmdListener;
 	import com.rpgGame.app.cmdlistener.engine.KeyboardCmdListener;
-	import com.rpgGame.app.cmdlistener.mount.MountCmdListener;
+	import com.rpgGame.app.cmdlistener.mount.HorseCmdListener;
 	import com.rpgGame.app.cmdlistener.mount.ZhanQiCmdListener;
 	import com.rpgGame.app.cmdlistener.scene.SceneCmdListener;
 	import com.rpgGame.app.cmdlistener.scene.SceneReleliveCmdListener;
@@ -136,7 +136,7 @@
 //			register("FamilyWarCmdListener", FamilyWarCmdListener); //王城战
 			register("NpcCmdListener", NpcCmdListener); //王城战
 //			register("YunBiaoCmdListener", YunBiaoCmdListener); //王城战
-			register("MountCmdListener", MountCmdListener); //坐骑
+			register("HorseCmdListener", HorseCmdListener); //坐骑
 			register("ZhanQiCmdListener", ZhanQiCmdListener); //战旗
 			register("TradeCmdlistener", TradeCmdlistener); //王城战
 			register("BaZhenTuCmdListener", BaZhenTuCmdListener); //八阵图
