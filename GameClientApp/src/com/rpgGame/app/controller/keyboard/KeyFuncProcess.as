@@ -84,14 +84,14 @@ package com.rpgGame.app.controller.keyboard
 						AppManager.showApp(AppConstant.TASK_PANEL);
 					break;
 				case "8": //F 好友
-					if (AppManager.isAppInScene(AppConstant.MULTY_PANL))
+					/*if (AppManager.isAppInScene(AppConstant.MULTY_PANL))
 					{
 						AppManager.hideApp(AppConstant.MULTY_PANL);
 					}
 					else if(MapDataManager.getMapInfo(MainRoleManager.actorInfo.mapID).mapType==EnumMapType.MAP_TYPE_NORMAL)
 					{
 						AppManager.showApp(AppConstant.MULTY_PANL);
-					}
+					}*/
 						
 					
 //					if (!ClientConfig.isBanShu)

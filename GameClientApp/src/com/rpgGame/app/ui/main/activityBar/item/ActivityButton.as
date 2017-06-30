@@ -4,6 +4,8 @@
     
     import away3d.events.Event;
     
+    import gs.TweenLite;
+    
     import org.mokylin.skin.mainui.activityBar.ActivityButtonSkin;
     import org.mokylin.skin.mainui.activityBar.ActivityItem;
     
@@ -59,6 +61,13 @@
 
         protected function onButtonClick():void
         {
+			if(info.showEft!=0)
+			{
+				stopEffect();
+				TweenLite.delayedCall(600,playEffect);
+			}
+			
+			
         }
 
         override public function onActivityData(data:Object):void

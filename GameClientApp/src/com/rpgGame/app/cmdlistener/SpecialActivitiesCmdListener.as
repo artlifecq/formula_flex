@@ -148,7 +148,7 @@ package com.rpgGame.app.cmdlistener
 		
 		private function onSCSpecialActivityOpenMessage(msg:SCSpecialActivityOpenMessage):void
 		{
-			ActivetyDataManager.setActState(msg.activityId,ActivityJoinStateEnum.OPEN);
+			ActivetyDataManager.setActState(msg.activityId,ActivityJoinStateEnum.OPEN,msg.remainTime);
 			EventManager.dispatchEvent(ActivityEvent.UPDATE_ACTIVITY,msg.activityId);
 			var info:ActivetyInfo=ActivetyCfgData.getActInfoById(msg.activityId); 
 			if(info.actCfg.q_show_notice==1){

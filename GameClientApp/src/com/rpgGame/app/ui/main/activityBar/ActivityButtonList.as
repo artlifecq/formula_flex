@@ -6,8 +6,12 @@
 	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
 	import com.rpgGame.core.events.ActivityEvent;
 	import com.rpgGame.core.events.FunctionOpenEvent;
+	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
+	import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
+	import com.rpgGame.coreData.info.MapDataManager;
+	import com.rpgGame.coreData.info.map.SceneData;
 	
 	import gs.TweenLite;
 	
@@ -19,7 +23,7 @@
 	{
 		private const SIZE_WIDTH:uint = 360;
 		private const SIZE_HEIGHT:uint = 320;
-		private const GRID_WIDTH:uint = 83;
+		private const GRID_WIDTH:Array = [70,70,70,90]
 		private const GRID_HEIGHT:uint = 80;
 		private const ALIGN:String = "right";
 		public function ActivityButtonList()
@@ -33,6 +37,7 @@
 			EventManager.addEvent(ActivityEvent.OPEN_ACTIVITY, updatePositionAll);
 			EventManager.addEvent(ActivityEvent.CLOSE_ACTIVITY, updatePositionAll);
 			EventManager.addEvent(FunctionOpenEvent.FUNCTIONOPENID,updatePositionAll);
+			EventManager.addEvent(MapEvent.MAP_SWITCH_START,updatePositionAll);
 			updatePositionAll(0);
 		}
 		
@@ -52,15 +57,23 @@
 		}
 		
 		private static const TYPE:int = 1;
-		private function updatePositionAll(data:*):void
+		private function updatePositionAll(data:*=null):void
 		{
 			this.removeChildren();
+			var scentType:int;
+			if(MapDataManager.currentScene.isNormalScene)
+				scentType = 1;
+			else
+				scentType = 2;
+			
 			var rows:Array = FuncionBarCfgData.getinfoRows(TYPE);
 			var length:int = rows.length;
 			var button:IOpen;
 			var row:int;
 			var len:int;
 			var starX:int;
+			var funinfo:FunctionBarInfo;
+			var width:int;
 			for(var i:int=0;i<length;i++){
 				row = rows[i];
 				var list:Array=FuncionBarCfgData.getInfoListbyType(TYPE,row);
@@ -69,12 +82,16 @@
 					continue;
 				}
 				starX = SIZE_WIDTH;
+				width = GRID_WIDTH[row];
 				for(var j:int=0;j<len;j++){
-					button = MainButtonManager.getButtonBuyInfo(list[j]);
+					funinfo = list[j] as FunctionBarInfo;
+					if(funinfo.mapType!=0&&funinfo.mapType!= scentType)
+						continue;
+					button = MainButtonManager.getButtonBuyInfo(funinfo);
 					if(button!=null&&button.canOpen())
 					{
 						button.y = row*GRID_HEIGHT;
-						starX -= GRID_WIDTH;
+						starX -= width;
 						button.x = starX;
 						this.addChild(button as DisplayObject);
 					}

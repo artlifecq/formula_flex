@@ -1,5 +1,4 @@
 package com.rpgGame.netData.specialactivities.message{
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -12,7 +11,7 @@ package com.rpgGame.netData.specialactivities.message{
 	 * 返回活动开启信息
 	 */
 	public class SCSpecialActivityOpenMessage extends Message {
-	
+		
 		//返回活动开启id
 		private var _activityId: int;
 		
@@ -20,7 +19,7 @@ package com.rpgGame.netData.specialactivities.message{
 		private var _joinState: int;
 		
 		//活动剩余时间
-		private var _remainTime: long;
+		private var _remainTime: int;
 		
 		
 		/**
@@ -32,7 +31,7 @@ package com.rpgGame.netData.specialactivities.message{
 			//参与状态0:未开启 1:开启中  2:进行中
 			writeInt(_joinState);
 			//活动剩余时间
-			writeLong(_remainTime);
+			writeInt(_remainTime);
 			return true;
 		}
 		
@@ -45,7 +44,7 @@ package com.rpgGame.netData.specialactivities.message{
 			//参与状态0:未开启 1:开启中  2:进行中
 			_joinState = readInt();
 			//活动剩余时间
-			_remainTime = readLong();
+			_remainTime = readInt();
 			return true;
 		}
 		
@@ -91,14 +90,14 @@ package com.rpgGame.netData.specialactivities.message{
 		 * get 活动剩余时间
 		 * @return 
 		 */
-		public function get remainTime(): long{
+		public function get remainTime(): int{
 			return _remainTime;
 		}
 		
 		/**
 		 * set 活动剩余时间
 		 */
-		public function set remainTime(value: long): void{
+		public function set remainTime(value: int): void{
 			this._remainTime = value;
 		}
 		

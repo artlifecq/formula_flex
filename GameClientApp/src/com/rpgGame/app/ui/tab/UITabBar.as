@@ -101,7 +101,10 @@ package com.rpgGame.app.ui.tab
 				key = getTabkeyByIndex(index);
 			}
 			if(_currentKey == key && _currentIndex == index)
+			{
+				_currentView.show(_data);
 				return ;
+			}
 			_currentKey = key;
 			_currentIndex = index;
 			_tabBar.selectedIndex=index;

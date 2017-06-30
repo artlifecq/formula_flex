@@ -50,10 +50,7 @@ package com.rpgGame.app.ui.main.activityBar.item
 				else{
 					skincontent = createSkin();
 				}
-				if(skincontent.parent == null)
-				{
-					this._skin.container.addChildAt(skincontent,0);
-				}
+				skincontent.visible = true;
 				skincontent.y = 17*i;
 			}
 			
@@ -63,8 +60,7 @@ package com.rpgGame.app.ui.main.activityBar.item
 			for(i= line;i<length;i++)
 			{
 				skincontent = _iconList[i];
-				if(skincontent.parent!=null)
-					this._skin.container.removeChild(skincontent);
+				skincontent.visible = false;
 			}
 		}
 		private function createSkin():SkinnableContainer
@@ -75,6 +71,7 @@ package com.rpgGame.app.ui.main.activityBar.item
 			temp.skin = skin;
 			temp.width = 80;
 			temp.x = 17;
+			this._skin.container.addChildAt(temp,0);
 			return temp;
 		}
 	}

@@ -8,6 +8,7 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.app.fight.spell.SkillAddPop;
 	import com.rpgGame.app.fight.spell.SpellHitHelper;
 	import com.rpgGame.app.graphics.HeadFace;
+	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.manager.FangChenMiManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.PKMamager;
@@ -183,6 +184,13 @@ package   com.rpgGame.app.manager.debug
 				if(info.actCfg.q_show_notice==1){
 					AppManager.showAppNoHide(AppConstant.ACTIVETY_OPEN,info);
 				}
+			});
+			
+			commandList.put( ".acts", function (...arg):void
+			{
+				var id:int = arg[0];
+				var state:int = arg[1];
+				ActivetyDataManager.setActState(id,state,30);
 			});
 		}
 		
