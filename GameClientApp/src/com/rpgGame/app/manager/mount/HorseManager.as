@@ -8,7 +8,8 @@ package com.rpgGame.app.manager.mount
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.shop.ShopManager;
 	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.app.sender.MountSender;
+	import com.rpgGame.app.sender.HorseSender;
+	import com.rpgGame.app.state.role.control.MountRideStateReference;
 	import com.rpgGame.app.ui.alert.SomeSystemNoticePanel;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.core.events.ItemEvent;
@@ -19,6 +20,7 @@ package com.rpgGame.app.manager.mount
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.SourceGetCfg;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
+	import com.rpgGame.coreData.cfg.mount.MountMiscData;
 	import com.rpgGame.coreData.clientConfig.Q_horse;
 	import com.rpgGame.coreData.clientConfig.Q_horse_skills;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
@@ -28,6 +30,7 @@ package com.rpgGame.app.manager.mount
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.role.HeroData;
+	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.netData.horse.bean.HorseDataInfo;
 	import com.rpgGame.netData.horse.message.SCExtraItemNumMessage;
 	import com.rpgGame.netData.horse.message.SCHorseUpResultToClientMessage;
@@ -48,6 +51,9 @@ package com.rpgGame.app.manager.mount
 		private var _spellList:Vector.<BaseFaceInfo>;
 		
 		private var _useExtraItem1:int;
+		
+		public static var isInRideCD:Boolean;
+		private static var _tweenLite:TweenLite;
 		
 		public static const MaxDistance:int  = 400;
 		
@@ -167,7 +173,7 @@ package com.rpgGame.app.manager.mount
 					return false;
 				}
 			}
-			MountSender.horseStratumUp(showdata.isAutoBuyItem?1:0);
+			HorseSender.horseStratumUp(showdata.isAutoBuyItem?1:0);
 			return true;
 		}
 		
@@ -187,34 +193,8 @@ package com.rpgGame.app.manager.mount
 				NoticeManager.showNotifyById(9002,clientitem.qItem.q_name);
 				return false;
 			}
-			MountSender.useHorseAddtion(extraItemInfo.eatType,1);
+			HorseSender.useHorseAddtion(extraItemInfo.eatType,1);
 			return true;
-		}
-		/**
-		 * 请求坐骑切换/上马/下马 
-		 * 
-		 */
-		public function setHouseRide():void
-		{
-			//坐骑未开放
-			if(_horsedataInfo==null)
-				return ;
-			var scenedata:SceneData = MapDataManager.currentScene;
-			if (scenedata== null ||!scenedata.isMountLimit)
-			{
-				NoticeManager.showNotifyById(9007);
-				return;
-			};
-			var hoseId:int = _horsedataInfo.horseModelId;
-			var currentHouseid:int = HeroData(MainRoleManager.actor.data).mount;
-			if(currentHouseid ==hoseId)
-			{
-				hoseId = 0;
-			}else if(MainRoleManager.actor.stateMachine.isAttacking){
-				NoticeManager.showNotifyById(9006);
-				return;
-			}
-			MountSender.horseIllusion(hoseId);
 		}
 		
 		private var _showdata:MountShowData; 
@@ -265,11 +245,86 @@ package com.rpgGame.app.manager.mount
 				return ;
 			hoseId= _horsedataInfo.horseModelId;
 			var q_mount:Q_horse = HorseConfigData.getMountDataById(hoseId);
-			var disance:Number = Point.distance(new Point(MainRoleManager.actor.x, MainRoleManager.actor.z), new Point(pos.x, pos.z));
+			var disance:Number = Point.distance(new Point(walkRole.x, walkRole.z), new Point(pos.x, pos.y));
 			if(disance <q_mount.q_distance)
 				return ;
-			setHouseRide();
+			clearDelatAutoRideMount();
+			var rideTime:int = q_mount.q_ride_time;
+			TweenLite.delayedCall(rideTime * 0.001, delayRideMount);
+//			setHouseRide();
 		}
-
+		
+		public function setMountRide():void
+		{
+			var currentHouseid:int = HeroData(MainRoleManager.actor.data).mount;
+			
+			if (currentHouseid > 0)
+			{
+				onRequestSetUpMountRide(false);
+			}
+			else
+			{
+				onRequestSetUpMountRide(true);
+			}
+		}
+		
+		/**
+		 * 请求坐骑切换/上马/下马 
+		 * 
+		 */
+		public function onRequestSetUpMountRide(isRide:Boolean):void
+		{
+			//坐骑未开放
+			if(_horsedataInfo == null)
+				return ;
+			var scenedata:SceneData = MapDataManager.currentScene;
+			if (scenedata== null ||!scenedata.isMountLimit)
+			{
+				NoticeManager.showNotifyById(9007);
+				return;
+			}
+			var hoseId:int = _horsedataInfo.horseModelId;
+			var currentHouseid:int = HeroData(MainRoleManager.actor.data).mount;
+			if(currentHouseid ==hoseId)
+			{
+				hoseId = 0;
+			}/*else if(MainRoleManager.actor.stateMachine.isAttacking){
+				NoticeManager.showNotifyById(9006);
+				return;
+			}*/
+			
+			var ref:MountRideStateReference = null;
+			if (MainRoleManager.actor.stateMachine.passTo(RoleStateType.CONTROL_MOUNT_RIDE))
+			{
+				if (isRide)
+				{
+					isInRideCD = true;
+//					_tweenLite = TweenLite.delayedCall((MountMiscData.upOrDownCd * 0.001), onDelayedCD);
+				}
+				ref = (MainRoleManager.actor.stateMachine.getReference(MountRideStateReference) as MountRideStateReference);
+				ref.setParams(isRide,hoseId);
+				MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_MOUNT_RIDE, ref);
+			}
+		}
+		
+		private function onDelayedCD():void
+		{
+			isInRideCD = false;
+			if (_tweenLite)
+			{
+				_tweenLite.kill();
+				_tweenLite = null;
+			}
+		}
+		
+		public function delayRideMount():void
+		{
+			onRequestSetUpMountRide(true);
+		}
+		
+		public function clearDelatAutoRideMount():void
+		{
+			TweenLite.killDelayedCallsTo(delayRideMount);
+		}
 	}
 }

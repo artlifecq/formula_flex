@@ -125,7 +125,7 @@ package com.rpgGame.app.controller.keyboard
 					break;
 				case "29": //T 坐骑上下马
 //						MountManager.setMountRide();
-						HorseManager.instance().setHouseRide();
+						HorseManager.instance().setMountRide();
 					break;
 				case "30": //U
 					break;

@@ -11,11 +11,15 @@ package com.rpgGame.appModule.bag
 	import com.rpgGame.coreData.info.item.GridInfo;
 	import com.rpgGame.coreData.type.item.GridBGType;
 	
+	import away3d.events.Event;
+	
+	import feathers.controls.Slider;
+	
 	import org.mokylin.skin.app.beibao.wupingchaifen;
+	import org.mokylin.skin.common.ChaiFen_Skin;
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
-	import away3d.events.Event;
 	
 	/**
 	 *物品拆分面板 
@@ -32,6 +36,7 @@ package com.rpgGame.appModule.bag
 		private var split2:DragDropItem;
 
 		private var allNum:int;
+		private var slider:Slider;
 		
 		public function ItemSplitPanel()
 		{
@@ -53,15 +58,16 @@ package com.rpgGame.appModule.bag
 			split1.x=173;
 			split2.x=229;
 			targetIcon.y=split1.y=split2.y=52;
-			skin.slider.value=1;
-			skin.slider.y+=10;
+			slider=(skin.skinChaiFen.skin as ChaiFen_Skin).slider;
+			slider.value=1;
+			slider.y+=10;
 		}
 		
 		override public function hide():void
 		{
 			super.hide();
 			skin.input_txt.removeEventListener(Event.CHANGE,onChangeNum);
-			skin.slider.removeEventListener(Event.CHANGE,onChange);
+			slider.removeEventListener(Event.CHANGE,onChange);
 		}
 		
 		private function onChangeNum(e:Event):void
@@ -70,10 +76,10 @@ package com.rpgGame.appModule.bag
 			num=num<=0?1:num;
 			num=num>=_iteminfo.itemInfo.num?_iteminfo.itemInfo.num:num;
 			
-			skin.slider.value=num;
-			skin.input_txt.text=skin.slider.value.toString();
-			split1.count=allNum-skin.slider.value;
-			split2.count=skin.slider.value;
+			slider.value=num;
+			skin.input_txt.text=slider.value.toString();
+			split1.count=allNum-slider.value;
+			split2.count=slider.value;
 		}
 		
 		override protected function onStageResize(sw : int, sh : int) : void
@@ -83,9 +89,9 @@ package com.rpgGame.appModule.bag
 		
 		private function onChange(event:Event):void
 		{
-			skin.input_txt.text=skin.slider.value.toString();
-			split1.count=allNum-skin.slider.value;
-			split2.count=skin.slider.value;
+			skin.input_txt.text=slider.value.toString();
+			split1.count=allNum-slider.value;
+			split2.count=slider.value;
 		}
 		
 		private function getGrid():DragDropItem
@@ -110,14 +116,14 @@ package com.rpgGame.appModule.bag
 			targetIcon.count=allNum;
 			targetIcon.alwayShowCount=split1.alwayShowCount=split2.alwayShowCount=true;
 			
-			skin.slider.minimum=1;
-			skin.slider.maximum=_iteminfo.itemInfo.num-1;
-			skin.slider.step=1;
+			slider.minimum=1;
+			slider.maximum=_iteminfo.itemInfo.num-1;
+			slider.step=1;
 			
-			skin.slider.value=Math.floor(allNum/2);//默认对半拆分
-			split1.count=allNum-skin.slider.value;
-			split2.count=skin.slider.value;
-			skin.input_txt.text=skin.slider.value.toString();
+			slider.value=Math.floor(allNum/2);//默认对半拆分
+			split1.count=allNum-slider.value;
+			split2.count=slider.value;
+			skin.input_txt.text=slider.value.toString();
 		}
 
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -131,31 +137,31 @@ package com.rpgGame.appModule.bag
 				case skin.btn_cancel:
 					hide();
 					break;
-				case skin.btn_min:
-					skin.slider.value=skin.slider.value-1;
-					skin.input_txt.text=skin.slider.value.toString();
-					split1.count=allNum-skin.slider.value;
-					split2.count=skin.slider.value;
+				case (skin.skinChaiFen.skin as ChaiFen_Skin).btn_min:
+					slider.value=slider.value-1;
+					skin.input_txt.text=slider.value.toString();
+					split1.count=allNum-slider.value;
+					split2.count=slider.value;
 					break;
-				case skin.btn_max:
-					skin.slider.value=skin.slider.value+1;
-					skin.input_txt.text=skin.slider.value.toString();
-					split1.count=allNum-skin.slider.value;
-					split2.count=skin.slider.value;
+				case (skin.skinChaiFen.skin as ChaiFen_Skin).btn_max:
+					slider.value=slider.value+1;
+					skin.input_txt.text=slider.value.toString();
+					split1.count=allNum-slider.value;
+					split2.count=slider.value;
 					break;
 			}
 		}
 		
 		private function  get splitNum():int
 		{
-			return skin.slider.value;
+			return slider.value;
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner)
 			iteminfo=data as ClientItemInfo;
-			skin.slider.addEventListener(Event.CHANGE,onChange);
+			slider.addEventListener(Event.CHANGE,onChange);
 			skin.input_txt.addEventListener(Event.CHANGE,onChangeNum);
 		}
 	}
