@@ -73,7 +73,7 @@ package com.rpgGame.app.manager
 					}
 				}
 			}
-			return TimeUtil.changeIntHM2Str(next);
+			return TimeUtil.format3TimeType(next);
 		}
 		
 		/**

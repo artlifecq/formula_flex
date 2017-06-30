@@ -35,7 +35,7 @@
         private var _openTime:Number = 0;
         private var _endTime:Number = 0;
         private var _openTimeStr:String;
-        private var _duration:int;
+        private var _duration:Number;
         private var _openTimeAdvance:int;
 		private var _isDown:Boolean;
 		private var _TimeFun:Function;
@@ -237,7 +237,7 @@
 		 * @param isdown 是否倒计时
 		 * 
 		 */
-        public function setTimeData(openTime:Number, duration:int=0, openTimeAdvance:int=0,isdown:Boolean = true):void
+        public function setTimeData(openTime:Number, duration:Number=0, openTimeAdvance:int=0,isdown:Boolean = true):void
         {
             _openTime = 0;
 			if (isNaN(openTime))
@@ -324,7 +324,7 @@
 			else if (currTime >= _openTime && currTime <= (_openTime + _duration))
 			{
 				_runing = true;
-				endSpacer = _openTime + _duration - currTime;
+				endSpacer = _endTime - currTime;
 				this.onTextEnd(endSpacer * 0.001);
 				_activityState = ActivityOpenStateType.CLOSE_COUNTDOWN;
 			}
