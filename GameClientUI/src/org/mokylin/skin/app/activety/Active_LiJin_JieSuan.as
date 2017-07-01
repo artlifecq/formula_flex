@@ -252,12 +252,12 @@ package org.mokylin.skin.app.activety
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			subbut = temp;
 			temp.name = "subbut";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "确  认";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.color = 0xCFC6AE;
-			temp.width = 89;
-			temp.x = 203;
+			temp.color = 0xFFFFFF;
+			temp.width = 110;
+			temp.x = 192.5;
 			temp.y = 297;
 			return temp;
 		}

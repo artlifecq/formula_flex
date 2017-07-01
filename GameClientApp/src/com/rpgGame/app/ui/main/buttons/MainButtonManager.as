@@ -160,7 +160,7 @@ package com.rpgGame.app.ui.main.buttons
 				var button:ActivityButton= MainButtonManager.getButtonBuyInfo(bar) as ActivityButton;
 				if(button)
 				{
-					button.setTimeData(SystemTimeManager.curtTm-startTime*1000,0,0,false);
+					button.setupActTime(0,false);
 				}
 			}
 		}

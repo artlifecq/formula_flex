@@ -96,8 +96,8 @@ package org.mokylin.skin.app.activety.shijieboss
 		private function __ShangHaiPaiHang_Label2_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "门派与玩家名";
-			temp.textAlign = "left";
+			temp.text = "玩家名";
+			temp.textAlign = "center";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 104;
@@ -240,7 +240,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.text = "我的伤害：$";
 			temp.color = 0xE8C958;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 139;
+			temp.width = 180;
 			temp.x = 10;
 			temp.y = 340;
 			return temp;
@@ -254,8 +254,8 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.text = "我的排名：$";
 			temp.color = 0xE8C958;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 139;
-			temp.x = 163;
+			temp.width = 110;
+			temp.x = 191;
 			temp.y = 340;
 			return temp;
 		}
