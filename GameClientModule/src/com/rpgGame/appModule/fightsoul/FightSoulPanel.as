@@ -209,7 +209,7 @@ package com.rpgGame.appModule.fightsoul
 		private function initView():void
 		{
 			var content:Inter3DContainer = new Inter3DContainer();
-			_skin.modecontent.addChild(content);
+			_skin.container.addChild(content);
 			_fightsoul = new InterAvatar3D();
 			_fightsoul.x = 340;
 			content.addChild3D(_fightsoul);
@@ -378,7 +378,7 @@ package com.rpgGame.appModule.fightsoul
 			
 			var scale:Number = modeinfo.q_panleScale/100;
 			this._fightsoul.curRole.setScale(scale);
-			this._fightsoul.y = modeinfo.q_panleY*scale;
+			this._fightsoul.y = modeinfo.q_panleY;
 		}
 		private function get  currentMode():Q_fightsoul
 		{
