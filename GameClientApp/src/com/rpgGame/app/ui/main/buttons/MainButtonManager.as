@@ -46,7 +46,7 @@ package com.rpgGame.app.ui.main.buttons
 		{
 			_initializeMap = new HashMap();
 			_classMap = new  HashMap();
-			regClass(1,MainButtonBases,ButtonSkin_renwu);
+			regClass(1,MainButton_Role,ButtonSkin_renwu);
 			regClass(2,MainButton_Mount,ButtonSkin_jinjie);
 			regClass(3,MainButton_Equip,ButtonSkin_zhuangbei);
 			regClass(4,MainButtonBases,ButtonSkin_wuxue);

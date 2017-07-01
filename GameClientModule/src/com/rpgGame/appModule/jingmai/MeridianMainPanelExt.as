@@ -2,6 +2,7 @@ package com.rpgGame.appModule.jingmai
 {
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.core.ui.tip.RTNodeID;
 	
 	import org.mokylin.skin.app.beibao.jingmai.Jingmai_Skin;
 	
@@ -27,7 +28,7 @@ package com.rpgGame.appModule.jingmai
 		}
 		private function initView():void
 		{
-			_view=new MeridianView(_skin as Jingmai_Skin,this);
+			
 		
 //			var content:Sprite=new Sprite();
 //			content.x=15;
@@ -51,6 +52,14 @@ package com.rpgGame.appModule.jingmai
 //			var tween:TweenScaleScrollUitlExt=new TweenScaleScrollUitlExt(content,dataArr,_skin.btn_prev,_skin.btn_next,0.5,920,500,tx);
 		//	TipTargetManager.show(this,TargetTipsMaker.makeTips(TipType.MERIDIAN_TIP,"sssss"));
 			//this.addEventListener(TouchEvent.TOUCH,onTouchMain);
+			_view=new MeridianView();
+			addNode(RTNodeID.MIANROLE,RTNodeID.JM_RENM,_skin.rdo_renmai,46,_view.checkRenM,false);
+			addNode(RTNodeID.MIANROLE,RTNodeID.JM_DUM,_skin.rdo_dumai,46,_view.checkDuM,false);
+			addNode(RTNodeID.MIANROLE,RTNodeID.JM_CHONGM,_skin.rdo_chongmai,46,_view.checkChongM,false);
+			addNode(RTNodeID.MIANROLE,RTNodeID.JM_DAIM,_skin.rdo_daimai,46,_view.checkDaiM,false);
+			addNode(RTNodeID.MIANROLE,RTNodeID.JM_YINGM,_skin.rdo_yinqiaomai,46,_view.checkYinM,false);
+			addNode(RTNodeID.MIANROLE,RTNodeID.JM_YANGM,_skin.rdo_yangqiaomai,46,_view.checkYangM,false);
+			_view.setUi(_skin as Jingmai_Skin,this);
 		}
 		
 		private function onTouchMain(eve:TouchEvent):void

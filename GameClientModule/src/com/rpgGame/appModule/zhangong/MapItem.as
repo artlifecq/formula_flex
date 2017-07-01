@@ -5,6 +5,7 @@ package com.rpgGame.appModule.zhangong
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.ZhanGongEvent;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.netData.zhangong.message.SCMeritoriousUpgradeResultMessage;
 	
@@ -31,6 +32,8 @@ package com.rpgGame.appModule.zhangong
 		{
 			_skin=new MapItem_Skin();
 			super(_skin);
+			
+			//addNode(RTNodeID.MIANROLE,
 		}
 		
 		override protected function onShow():void

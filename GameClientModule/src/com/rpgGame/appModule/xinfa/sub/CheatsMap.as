@@ -5,11 +5,13 @@ package  com.rpgGame.appModule.xinfa.sub
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.view.icon.BaseIcon;
+	import com.rpgGame.appModule.jingmai.sub.MerdianPoint;
 	import com.rpgGame.appModule.jingmai.sub.MeridianMapLine;
 	import com.rpgGame.core.events.CheatsEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.core.ui.tip.IRewardCheck;
 	import com.rpgGame.core.utils.GameColorUtil;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.ClientConfig;
@@ -33,7 +35,7 @@ package  com.rpgGame.appModule.xinfa.sub
 	import starling.display.Sprite;
 	import starling.filters.FragmentFilter;
 	
-	public class CheatsMap extends SkinUI
+	public class CheatsMap extends SkinUI implements IRewardCheck
 	{
 		//经脉图id
 		private var _cheatsVo:CheatsVo;
@@ -317,6 +319,17 @@ package  com.rpgGame.appModule.xinfa.sub
 			}
 			return _grayFilter;
 		}
-
+		public function hasReward():Boolean
+		{
+			var points:Array=pointHash.values();
+			for each (var p:CheatsNodePoint in points)
+			{
+				if (p.hasReward) 
+				{
+					return true;
+				}
+			}
+			return false;
+		}
 	}
 }

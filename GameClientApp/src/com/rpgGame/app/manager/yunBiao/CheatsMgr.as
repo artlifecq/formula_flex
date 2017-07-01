@@ -1,6 +1,7 @@
 package com.rpgGame.app.manager.yunBiao
 {
 	import com.gameClient.utils.HashMap;
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -336,6 +337,45 @@ package com.rpgGame.app.manager.yunBiao
 			}
 			return null;
 		}
-		
+		public function checkNodeCanClick(cheatsId:int):Boolean
+		{
+			var cheats:CheatsVo=_cheatsHash.getValue(cheatsId);
+			if (cheats) 
+			{
+				var arr:Array=cheats.subNodeHash.values();
+				var len:int=arr.length;
+				var node:CheatsNodeVo;
+				for (var i:int = 0; i < len; i++) 
+				{
+					node=arr[i];
+					var config:Q_cheats_node=node.getConfig();
+					var hasUnlock:Boolean=Mgr.cheatsMgr.getNodeIsUnlock(node);
+					if (config.q_type==0) 
+					{
+						if (hasUnlock) 
+						{
+							var canLevelUp:Boolean=Mgr.cheatsMgr.getCanLevelUp(node);
+							if (canLevelUp)
+							{
+								return true;
+							}
+						}
+					}
+					else
+					{
+						if (hasUnlock) 
+						{
+							var hasBetter:Boolean=Mgr.meridianMgr.getBetterStone(config.q_stone_type,node.getStone()).length>0;
+							if (hasBetter) 
+							{
+								return true;
+							}
+						}
+					}
+				}
+				
+			}
+			return false;
+		}
 	}
 }

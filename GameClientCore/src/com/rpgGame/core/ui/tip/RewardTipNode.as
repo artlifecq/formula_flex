@@ -1,0 +1,205 @@
+package com.rpgGame.core.ui.tip
+{
+	import com.game.mainCore.core.timer.GameTimer;
+	import com.gameClient.utils.HashMap;
+	
+	import flash.utils.getTimer;
+	
+	import starling.display.DisplayObjectContainer;
+
+	public class RewardTipNode
+	{
+		public static const allNode:HashMap=new HashMap();
+		private static const timeNodes:HashMap=new HashMap();
+		private static var checkTime:int;
+		private static function onTimer():void
+		{
+			// TODO Auto Generated method stub
+			if (getTimer()-checkTime>5000) 
+			{
+				timeNodes.eachValue(timeUpdate);
+			}
+			allNode.eachValue(setTip2Top);
+		}
+		private static const _timer:GameTimer=new GameTimer("RewardTipNode",5000,0,onTimer);
+		_timer.start();
+		private static function setTip2Top(node:RewardTipNode):void
+		{
+			node._tipCtrl.setTip2Top();
+		}
+		private static function timeUpdate(node:RewardTipNode):void
+		{
+			node.update();
+		}
+		private var _checkFunc:Function;
+		private var _checkParam:Object;
+		private var _tipCtrl:RewardMarkTip;
+		private var _parentNodeKey:String;
+		private var _childrenNodes:Vector.<String>;
+		private var _key:String;
+		public static function getNode(key:String):RewardTipNode
+		{
+			return allNode.getValue(key);
+		}
+		public function RewardTipNode(key:String,dis:DisplayObjectContainer,dw:int,check:Function,isGray:Boolean=false,param:Object=null,isInTimer:Boolean=false)
+		{
+			this._key=key;
+			this._checkParam=param;
+			this._tipCtrl=new RewardMarkTip(dis,dw,isGray);
+			this._checkFunc=check;
+			allNode.put(_key,this);
+			if (isInTimer) 
+			{
+				timeNodes.put(_key,this);
+			}
+		}
+		public function update():void
+		{
+			var ret:Boolean=false;
+			if (_checkFunc) 
+			{
+				if (_checkParam) 
+				{
+					ret=_checkFunc.call(null,_checkParam);
+				}
+				else
+				{
+					ret=_checkFunc();
+				}
+				
+			}
+			if (!ret&&_childrenNodes) 
+			{
+				for each (var child:RewardTipNode in _childrenNodes) 
+				{
+					if (child.hasReward) 
+					{
+						ret=true;
+						break;
+					}
+				}
+			}
+			setState(ret);
+		}
+		/**
+		 *设置状态 
+		 * @param state 为true父节点直接设为true,false,父节点会检测
+		 * 
+		 */		
+		public function setState(state:Boolean):void
+		{
+			if (_tipCtrl) 
+			{
+				_tipCtrl.hasReward=state;
+			}
+			if (_parentNodeKey) 
+			{
+				var p:RewardTipNode=getNode(_parentNodeKey);
+				if (p) 
+				{
+					if (state) 
+					{
+						p.setState(state);
+					}
+					else
+					{
+						p.update();
+					}
+				}
+			
+			}
+		}
+		public function addChildNode(node:RewardTipNode):void
+		{
+			if (node) 
+			{
+				if (!_childrenNodes) 
+				{
+					_childrenNodes=new Vector.<String>();
+				}
+				_childrenNodes.push(node._key);
+				node._parentNodeKey=this._key;
+				update();
+			}
+		}
+		public function removeNode(node:RewardTipNode,isUpdate:Boolean=true):void
+		{
+			if (!node||!_childrenNodes) 
+			{
+				return;
+			}
+			var index:int=_childrenNodes.indexOf(node._key);
+			if (index!=-1) 
+			{
+				_childrenNodes.splice(index,1);
+			}
+			node._parentNodeKey=null;
+			if (isUpdate) 
+			{
+				update();
+			}
+			
+		}
+		public function removeNodeByKey(key:String,isUpdate:Boolean=true):void
+		{
+			if (!_childrenNodes) 
+			{
+				return;
+			}
+			var len:int=_childrenNodes.length;
+			
+			for (var i:int = 0; i < len; i++) 
+			{
+				if (_childrenNodes[i]._key==key) 
+				{
+					_childrenNodes.removeAt(i);
+					_childrenNodes[i]._parentNodeKey=null;
+					if (isUpdate) 
+					{
+						update();
+					}
+					break;
+				}
+			}
+			
+		}
+		public function get hasReward():Boolean
+		{
+			if (_tipCtrl) 
+			{
+				return _tipCtrl.hasReward;
+			}
+			return false;
+		}
+		public function clear():void
+		{
+			_tipCtrl.clear();
+			_tipCtrl=null;
+			_checkFunc=null;
+			
+		
+			if (_childrenNodes) 
+			{
+				for each (var node:RewardTipNode in _childrenNodes) 
+				{
+					node._parentNodeKey=null;
+					node.clear();
+				}
+				_childrenNodes.length=0;
+			}
+			allNode.remove(_key);
+			timeNodes.remove(_key);
+			if (_parentNodeKey) 
+			{
+				var p:RewardTipNode=getNode(_parentNodeKey);
+				if (p) 
+				{
+					p.removeNode(this);
+				}
+				_parentNodeKey=null;
+			}
+			
+		}
+		
+	}
+}

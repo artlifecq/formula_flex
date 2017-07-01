@@ -2,20 +2,24 @@ package com.rpgGame.core.ui
 {
 
 	import com.game.engine3D.display.Inter3DContainer;
+	import com.gameClient.utils.HashMap;
 	import com.rpgGame.core.controller.MouseCursorController;
+	import com.rpgGame.core.ui.tip.RewardTipNode;
+	import com.rpgGame.core.ui.tip.RewardTipTree;
 	import com.rpgGame.core.utils.AudioPlayUtil;
-
+	
 	import flash.display.Stage;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
-
+	
+	import away3d.events.Event;
+	
 	import feathers.controls.StateSkin;
 	import feathers.core.FeathersControl;
-
+	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
-	import away3d.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -35,7 +39,7 @@ package com.rpgGame.core.ui
 		protected var _stateSkin : StateSkin;
 		protected var _parentContainer : DisplayObjectContainer;
 		private var _hitArea : Rectangle;
-
+		
 		public function SkinUI(skin : StateSkin = null)
 		{
 			if (skin != null)
@@ -196,6 +200,19 @@ package com.rpgGame.core.ui
 				_stage = null;
 			}
 			super.dispose();
+		}
+		private static var _tree:RewardTipTree=new RewardTipTree();
+		public static function addNode(parentKey:String,key:String,dis:DisplayObjectContainer,dw:int,check:Function,isGray:Boolean=false,param:Object=null):void
+		{
+			_tree.addNode(parentKey,key,dis,dw,check,isGray,param);
+		}
+		public static function notifyUpdate(key:String):void
+		{
+			_tree.updateNode(key);
+		}
+		public static function removeNode(key:String):void
+		{
+			_tree.removeNode(key);
 		}
 	}
 }
