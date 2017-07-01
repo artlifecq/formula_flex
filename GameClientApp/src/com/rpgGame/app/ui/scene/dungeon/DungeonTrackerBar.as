@@ -53,7 +53,6 @@ package com.rpgGame.app.ui.scene.dungeon
 			var mapId:int=MainRoleManager.actorInfo.mapID;
 			var sceneData:SceneData=MapDataManager.getMapInfo(mapId);
 			var cls:Class=uiClsMap.getValue(sceneData.mapType);
-			
 			if(!cls){
 				return;
 			}

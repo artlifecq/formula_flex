@@ -495,7 +495,7 @@ package com.rpgGame.app.ui.main
 				this.addChild(_taskBar);
 				this.removeChild(_trackerBar);
 				this.removeChild(_hubaoTrackerBar);
-			}		
+			}
 		}
 		
 		private function onStageResize(e : *) : void
