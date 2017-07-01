@@ -330,12 +330,12 @@ package org.mokylin.skin.app.activety.zonghe
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			sec_subbut1 = temp;
 			temp.name = "sec_subbut1";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "自动任务";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
-			temp.color = 0xE1D4A9;
-			temp.width = 95;
-			temp.x = 22;
+			temp.color = 0xFFFFFF;
+			temp.width = 90;
+			temp.x = 27;
 			temp.y = 295;
 			return temp;
 		}
@@ -345,11 +345,11 @@ package org.mokylin.skin.app.activety.zonghe
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			sec_subbut2 = temp;
 			temp.name = "sec_subbut2";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "离开场景";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
-			temp.color = 0xE1D4A9;
-			temp.width = 95;
+			temp.color = 0xFFFFFF;
+			temp.width = 90;
 			temp.x = 137;
 			temp.y = 295;
 			return temp;

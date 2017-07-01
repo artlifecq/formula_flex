@@ -6,6 +6,7 @@ package com.rpgGame.app.ui.scene
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
+	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.ui.scene.dungeon.DungeonTrackerUI;
 	import com.rpgGame.app.utils.FaceUtil;
@@ -39,13 +40,11 @@ package com.rpgGame.app.ui.scene
 	public class BossTrackerUI extends SceneTrackerUI
 	{
 		private var _skin:ShiJieBoss_Skin;
-		private var iconList:Vector.<IconCDFace>;
-		private var _bgList:Vector.<UIAsset>;
 		private var toPoint:Position;
 		
 		private var actId:int;
-		
 		private var actInfo:ActivetyInfo;
+		private var rewardGrp:RewardGroup;
 		
 		public function BossTrackerUI()
 		{
@@ -56,11 +55,7 @@ package com.rpgGame.app.ui.scene
 		
 		private function initUI():void
 		{
-			iconList=new Vector.<IconCDFace>();
-			_bgList=new Vector.<UIAsset>();
-			for(var i:int=0;i<4;i++){
-				_bgList.push(_skin["sec_ico1_"+i]);
-			}
+			rewardGrp=new RewardGroup(IcoSizeEnum.ICON_48,_skin.sec_ico1_0,RewardGroup.ALIN_LEFT,4);
 			toPoint=new Position();
 		}
 		
@@ -77,27 +72,8 @@ package com.rpgGame.app.ui.scene
 			//进入就自动挂机战斗
 			MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, toPoint.x, toPoint.y,finishWalk, 100);
 			
-			var arr:Array;
-			if(actInfo.actCfg.q_rewards){
-				arr=JSONUtil.decode(actInfo.actCfg.q_rewards);
-			}else{
-				arr=[];
-			}
-			var num:int=arr.length;
-			for(var i:int=0;i<4;i++){
-				iconList.push(IconCDFace.create(IcoSizeEnum.ICON_48));
-				if(i<num){
-					var itemInfo:ClientItemInfo=new ClientItemInfo(arr[i].mod);
-					itemInfo.itemInfo=new ItemInfo();
-					itemInfo.itemInfo.isbind=arr[i].bind;
-					FaceUtil.SetItemGrid(iconList[i],itemInfo);
-					_skin.container.addChild(iconList[i]);
-					iconList[i].x=_skin["sec_ico1_"+i].x-5;
-					iconList[i].y=_skin["sec_ico1_"+i].y-5;
-				}else{
-					iconList[i].clear();
-				}
-			}
+			rewardGrp.clear();
+			rewardGrp.setRewardByJsonStr(actInfo.actCfg.q_rewards);
 			
 			_skin.lbTime.htmlText=actInfo.actCfg.q_activity_timeshow;
 			var currentTime:Date=SystemTimeManager.sysDateTime;
@@ -110,7 +86,8 @@ package com.rpgGame.app.ui.scene
 			var timeList:Array=ActivetyDataManager.getTimeList(actInfo.actCfg);
 			timeList=timeList[4];//第四个才是刷新段
 			var next:int=timeList[0];
-			num=timeList.length;
+			var num:int=timeList.length;
+			var i:int=0;
 			for(i=0;i<num;i++){
 				if(timeList[i]>hm){
 					if((i+1)!=num){
@@ -196,11 +173,8 @@ package com.rpgGame.app.ui.scene
 			super.onHide();
 			EventManager.removeEvent(ActivityEvent.ENTER_ACTIVITY,getActId);
 			EventManager.removeEvent(ActivityEvent.UPDATE_ACTIVITY,updateBossAct);
-			while(iconList.length>0){
-				var icon:IconCDFace=iconList.pop();
-				icon.destroy();
-			}
 			actInfo=null;
+			rewardGrp.clear();
 		}
 	}
 }
