@@ -44,15 +44,15 @@ package com.rpgGame.app.ui.scene.dungeon
 			uiClsMap.add(EnumMapType.MAP_TYPE_TOWERS,NineTowerTrackUIExt);
 			uiClsMap.add(EnumMapType.MAP_JIXIAN,JiXianTrackerBar);
 			uiClsMap.add(EnumMapType.MAP_TYPE_LIJIN,LijinTrackerUI);
-			uiClsMap.add(EnumMapType.MAP_TYPE_WCZB,GuildWarTrackerUI);
 			uiClsMap.add(EnumMapType.MAP_TYPE_MIBAO,MibaoTrackerUI);
+			uiClsMap.add(EnumMapType.MAP_TYPE_WCZB,GuildWarTrackerUI);
 		}
 		
 		override protected function onShow() : void
 		{
 			var mapId:int=MainRoleManager.actorInfo.mapID;
 			var sceneData:SceneData=MapDataManager.getMapInfo(mapId);
-			var cls:Class=uiClsMap.getValue(sceneData.mapType);
+			var cls:Class=uiClsMap.getValue(EnumMapType.MAP_TYPE_MIBAO/*sceneData.mapType*/);
 			
 			if(!cls){
 				return;
