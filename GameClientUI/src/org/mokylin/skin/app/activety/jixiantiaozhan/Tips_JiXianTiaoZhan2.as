@@ -88,8 +88,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			icon = temp;
 			temp.name = "icon";
 			temp.styleName = "ui/common/grid/normal/64.png";
-			temp.x = 9;
-			temp.y = 9;
+			temp.x = 11;
+			temp.y = 11;
 			return temp;
 		}
 
