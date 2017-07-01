@@ -76,10 +76,10 @@ package com.rpgGame.app.manager
 					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveNpc);
 					break;
 				case SceneCharType.COLLECT:
-					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveCollect,null,null,onCollect);
+					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveCollect);
 					break;
 				case SceneCharType.DROP_GOODS:
-					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, ControlAutoPick.AUTO_DIRECT_SEND_PICK, role, onArriveDropGoods,null,null,onDropGoods);
+					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, ControlAutoPick.AUTO_DIRECT_SEND_PICK, role, onArriveDropGoods);
 					break;
 				case SceneCharType.STALL:
 					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onWalkToStall);
@@ -135,7 +135,7 @@ package com.rpgGame.app.manager
 			}
 			else
 			{
-				RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveMonster,null,null,noWalk);
+				RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveMonster);
 			}
 			
 			

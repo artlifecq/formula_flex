@@ -12,7 +12,7 @@ package org.mokylin.skin.app.maps
 	import feathers.controls.ScrollContainer;
 	import feathers.layout.HorizontalLayout;
 	import org.mokylin.skin.app.maps.mapItems;
-	import org.mokylin.skin.common.yiji_panelbg_Skin;
+	import org.mokylin.skin.common.TongTongPanelbg1_k;
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
 	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
 	import org.mokylin.skin.component.tabbar.TabBarSkin_pack;
@@ -28,10 +28,6 @@ package org.mokylin.skin.app.maps
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var UIMap:feathers.controls.UIAsset;
-		
-		public var grp_cont:feathers.controls.Group;
-		
 		public var Item1:feathers.controls.SkinnableContainer;
 
 		public var Item2:feathers.controls.SkinnableContainer;
@@ -42,15 +38,11 @@ package org.mokylin.skin.app.maps
 
 		public var btn_go:feathers.controls.Button;
 
-		public var btn_jia:feathers.controls.Button;
-
-		public var btn_jian:feathers.controls.Button;
+		public var grp_cont:feathers.controls.Group;
 
 		public var grp_msg:feathers.controls.Group;
 
 		public var lbl_mapName:feathers.controls.Label;
-
-		public var lbl_name:feathers.controls.Label;
 
 		public var locat_x:feathers.controls.SkinnableContainer;
 
@@ -69,9 +61,9 @@ package org.mokylin.skin.app.maps
 			super();
 			
 			this.currentState = "normal";
-			this.height = 587;
-			this.width = 947;
-			this.elementsContent = [bg_i(),tab_i(),__maps_Skin_UIAsset1_i(),grp_cont_i(),__maps_Skin_UIAsset2_i(),Item1_i(),Item2_i(),Item3_i(),scroll_Bar_i(),grp_msg_i()];
+			this.height = 601;
+			this.width = 956;
+			this.elementsContent = [bg_i(),tab_i(),grp_cont_i(),__maps_Skin_UIAsset1_i(),__maps_Skin_UIAsset2_i(),Item1_i(),Item2_i(),Item3_i(),scroll_Bar_i(),grp_msg_i()];
 			
 			states = {
 			};
@@ -91,8 +83,8 @@ package org.mokylin.skin.app.maps
 			var skin:StateSkin = new org.mokylin.skin.app.maps.mapItems()
 			temp.skin = skin
 			temp.width = 247;
-			temp.x = 664;
-			temp.y = 75;
+			temp.x = 668;
+			temp.y = 87;
 			return temp;
 		}
 
@@ -105,8 +97,8 @@ package org.mokylin.skin.app.maps
 			var skin:StateSkin = new org.mokylin.skin.app.maps.mapItems()
 			temp.skin = skin
 			temp.width = 247;
-			temp.x = 664;
-			temp.y = 195;
+			temp.x = 668;
+			temp.y = 207;
 			return temp;
 		}
 
@@ -119,8 +111,8 @@ package org.mokylin.skin.app.maps
 			var skin:StateSkin = new org.mokylin.skin.app.maps.mapItems()
 			temp.skin = skin
 			temp.width = 247;
-			temp.x = 664;
-			temp.y = 317;
+			temp.x = 668;
+			temp.y = 329;
 			return temp;
 		}
 
@@ -155,7 +147,7 @@ package org.mokylin.skin.app.maps
 			temp.text = "X:";
 			temp.color = 0xE8C958;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 584;
+			temp.x = 544;
 			temp.y = 10;
 			return temp;
 		}
@@ -166,7 +158,7 @@ package org.mokylin.skin.app.maps
 			temp.text = "Y:";
 			temp.color = 0xE8C958;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 712;
+			temp.x = 672;
 			temp.y = 10;
 			return temp;
 		}
@@ -175,10 +167,10 @@ package org.mokylin.skin.app.maps
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 458;
-			temp.styleName = "ui/common/background/neikuang_1.png";
+			temp.styleName = "ui/common/background/neikuang_2.png";
 			temp.width = 277;
-			temp.x = 659;
-			temp.y = 70;
+			temp.x = 663;
+			temp.y = 82;
 			return temp;
 		}
 
@@ -186,12 +178,12 @@ package org.mokylin.skin.app.maps
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/maps/ditu.png";
-			temp.x = 442;
-			temp.y = 11;
+			temp.x = 450;
+			temp.y = 17;
 			return temp;
 		}
 
-		private function __maps_Skin_UIAsset4_i():feathers.controls.UIAsset
+		private function __maps_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/maps/hongdi.png";
@@ -205,10 +197,10 @@ package org.mokylin.skin.app.maps
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 587;
-			var skin:StateSkin = new org.mokylin.skin.common.yiji_panelbg_Skin()
+			temp.height = 601;
+			var skin:StateSkin = new org.mokylin.skin.common.TongTongPanelbg1_k()
 			temp.skin = skin
-			temp.width = 947;
+			temp.width = 956;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -219,11 +211,25 @@ package org.mokylin.skin.app.maps
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_go = temp;
 			temp.name = "btn_go";
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.label = "前往";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
-			temp.width = 80;
-			temp.x = 836;
+			temp.color = 0xE1D4A9;
+			temp.width = 90;
+			temp.x = 813;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function grp_cont_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			grp_cont = temp;
+			temp.name = "grp_cont";
+			temp.height = 450;
+			temp.width = 640;
+			temp.x = 19;
+			temp.y = 84;
 			return temp;
 		}
 
@@ -232,9 +238,9 @@ package org.mokylin.skin.app.maps
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grp_msg = temp;
 			temp.name = "grp_msg";
-			temp.x = 20;
-			temp.y = 534;
-			temp.elementsContent = [__maps_Skin_UIAsset4_i(),__maps_Skin_Label1_i(),lbl_mapName_i(),__maps_Skin_Label2_i(),__maps_Skin_Label3_i(),locat_x_i(),locat_y_i(),btn_go_i()];
+			temp.x = 28;
+			temp.y = 549;
+			temp.elementsContent = [__maps_Skin_UIAsset3_i(),__maps_Skin_Label1_i(),lbl_mapName_i(),__maps_Skin_Label2_i(),__maps_Skin_Label3_i(),locat_x_i(),locat_y_i(),btn_go_i()];
 			return temp;
 		}
 
@@ -260,7 +266,7 @@ package org.mokylin.skin.app.maps
 			var skin:StateSkin = new org.mokylin.skin.component.text.textInput2_Skin()
 			temp.skin = skin
 			temp.width = 104;
-			temp.x = 600;
+			temp.x = 560;
 			temp.y = 6;
 			return temp;
 		}
@@ -274,7 +280,7 @@ package org.mokylin.skin.app.maps
 			var skin:StateSkin = new org.mokylin.skin.component.text.textInput2_Skin()
 			temp.skin = skin
 			temp.width = 104;
-			temp.x = 727;
+			temp.x = 687;
 			temp.y = 6;
 			return temp;
 		}
@@ -286,8 +292,8 @@ package org.mokylin.skin.app.maps
 			temp.name = "scroll_Bar";
 			temp.height = 452;
 			temp.styleClass = org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
-			temp.x = 912;
-			temp.y = 73;
+			temp.x = 916;
+			temp.y = 86;
 			return temp;
 		}
 
@@ -300,37 +306,10 @@ package org.mokylin.skin.app.maps
 			temp.height = 30;
 			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_pack;
 			temp.width = 174;
-			temp.x = 23;
-			temp.y = 41;
+			temp.x = 27;
+			temp.y = 54;
 			temp.layout = __maps_Skin_HorizontalLayout1_i();
 			temp.dataProvider = __maps_Skin_ArrayCollection1_i();
-			return temp;
-		}
-		
-		
-		//==========================================================================
-		//                                定义成员方法
-		//==========================================================================
-		private function UIMap_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			UIMap = temp;
-			temp.name = "UIMap";
-			temp.width = 640;
-			temp.height = 450;
-			
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-		private function grp_cont_i():feathers.controls.Group
-		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
-			grp_cont = temp;
-			temp.name = "grp_cont";
-			temp.x = 18;
-			temp.y = 74;
-			temp.elementsContent = [UIMap_i()];
 			return temp;
 		}
 

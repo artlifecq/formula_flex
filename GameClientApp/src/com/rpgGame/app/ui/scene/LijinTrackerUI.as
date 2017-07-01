@@ -109,6 +109,7 @@ package com.rpgGame.app.ui.scene
 			for(i=0;i<3;i++)
 			{
 				killButList.push(_skin["killbut"+i]);
+				Renwu_Item(_skin["killbut"+i].skin).btn_send.visible=false;
 				TaskUtil.setTextEvet(killButList[i]);
 			}
 			var ico:IconCDFace;

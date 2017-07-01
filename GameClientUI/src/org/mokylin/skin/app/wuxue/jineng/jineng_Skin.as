@@ -47,9 +47,9 @@ package org.mokylin.skin.app.wuxue.jineng
 			super();
 			
 			this.currentState = "normal";
-			this.height = 587;
-			this.width = 947;
-			this.elementsContent = [__jineng_Skin_UIAsset1_i(),__jineng_Skin_Label1_i(),pro_zhenqi_i(),lb_zhenqi_i(),vs_bar_i(),__jineng_Skin_UIAsset5_i(),shengji_i(),jinjie_i(),tab_zizhi_i()];
+			this.height = 601;
+			this.width = 956;
+			this.elementsContent = [__jineng_Skin_UIAsset2_i(),__jineng_Skin_Label1_i(),pro_zhenqi_i(),lb_zhenqi_i(),vs_bar_i(),__jineng_Skin_UIAsset5_i(),shengji_i(),jinjie_i(),tab_zizhi_i()];
 			
 			states = {
 			};
@@ -80,19 +80,19 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.text = "真气：";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 32;
-			temp.y = 43;
+			temp.x = 36;
+			temp.y = 56;
 			return temp;
 		}
 
-		private function __jineng_Skin_UIAsset1_i():feathers.controls.UIAsset
+		private function __jineng_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 447;
 			temp.styleName = "ui/big_bg/wuxue/jineng/bg_zuo.png";
 			temp.width = 531;
-			temp.x = 20;
-			temp.y = 74;
+			temp.x = 24;
+			temp.y = 87;
 			return temp;
 		}
 
@@ -101,8 +101,8 @@ package org.mokylin.skin.app.wuxue.jineng
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 422;
 			temp.styleName = "ui/big_bg/wuxue/jineng/bg_you.png";
-			temp.x = 570;
-			temp.y = 101;
+			temp.x = 574;
+			temp.y = 114;
 			return temp;
 		}
 
@@ -114,10 +114,9 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.height = 422;
 			var skin:StateSkin = new org.mokylin.skin.app.wuxue.jineng.jineng_jinjie()
 			temp.skin = skin
-			temp.visible = false;
 			temp.width = 356;
-			temp.x = 569;
-			temp.y = 101;
+			temp.x = 573;
+			temp.y = 114;
 			return temp;
 		}
 
@@ -132,8 +131,8 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.color = 0xE3D9BF;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 130;
-			temp.x = 81;
-			temp.y = 45;
+			temp.x = 85;
+			temp.y = 58;
 			return temp;
 		}
 
@@ -146,8 +145,8 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.styleClass = org.mokylin.skin.component.progress.progress_role2_Skin;
 			temp.value = 0;
 			temp.width = 131;
-			temp.x = 82;
-			temp.y = 48;
+			temp.x = 86;
+			temp.y = 61;
 			return temp;
 		}
 
@@ -160,8 +159,8 @@ package org.mokylin.skin.app.wuxue.jineng
 			var skin:StateSkin = new org.mokylin.skin.app.wuxue.jineng.jineng_shengji()
 			temp.skin = skin
 			temp.width = 365;
-			temp.x = 569;
-			temp.y = 101;
+			temp.x = 573;
+			temp.y = 114;
 			return temp;
 		}
 
@@ -172,8 +171,8 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.name = "tab_zizhi";
 			temp.btnWidth = 78;
 			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_pack;
-			temp.x = 577;
-			temp.y = 73;
+			temp.x = 581;
+			temp.y = 86;
 			temp.layout = __jineng_Skin_HorizontalLayout1_i();
 			temp.dataProvider = __jineng_Skin_ArrayCollection1_i();
 			return temp;
@@ -186,8 +185,8 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.name = "vs_bar";
 			temp.height = 450;
 			temp.styleClass = org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
-			temp.x = 550;
-			temp.y = 74;
+			temp.x = 554;
+			temp.y = 86;
 			return temp;
 		}
 

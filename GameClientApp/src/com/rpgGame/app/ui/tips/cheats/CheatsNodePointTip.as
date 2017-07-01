@@ -14,6 +14,7 @@ package  com.rpgGame.app.ui.tips.cheats
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.meridian.EnumMStoneType;
 	import com.rpgGame.coreData.clientConfig.Q_att_values;
@@ -56,7 +57,7 @@ package  com.rpgGame.app.ui.tips.cheats
 		{
 			_skin=new Xinfa_Tips();
 			super(_skin);
-			MCUtil.removeSelf(_skin.lab_condition);
+			MCUtil.removeSelf(_skin.lb_dengji);
 			_initStr=_skin.lb_Stone.text;
 			labList=[];
 			Mgr.cheatsMgr.addEventListener(CheatsEvent.CHEATS_NODE_TIP_CHANGE,onDataChange);
@@ -134,20 +135,20 @@ package  com.rpgGame.app.ui.tips.cheats
 			}
 			else
 			{
-				var lb:Label=clonelab(_skin.lab_condition);
+				var lb:Label=clonelab(_skin.lb_dengji);
 				this.addChild(lb);
 				lb.y=startY;
 				startY+=lb.height+2;
-				lb.htmlText=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,"已达到最高层");
+				lb.htmlText=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,"已达到最高层");
 				lb.width=lb.textWidth;
 				//
 			}
-			this._skin.imgLine1.y=startY;
-			startY+=_skin.imgLine1.height+2;
+			this._skin.imgLine2.y=startY;
+			startY+=_skin.imgLine2.height+2;
 			var canLevelUp:Boolean=Mgr.cheatsMgr.getCanLevelUp(serverData);
 			_skin.uiName2.visible=false;
 			
-			var startPos:Point=new Point(_skin.lab_condition.x,startY);
+			var startPos:Point=new Point(_skin.lb_dengji.x,startY);
 			var curAttrId:int=serverData.getAttrIdAtLevel(serverData.curLevel);
 			//如果是0级显示1级的属性
 			if (serverData.curLevel==0&&!isUnlock) 
@@ -166,7 +167,7 @@ package  com.rpgGame.app.ui.tips.cheats
 				{
 					startPos.y=startY;
 					var getTypeValueMap:HashMap = AttValueConfig.getTypeValueMap(qAtt);
-					var labs:Array=AttrUtil.showAttr(getTypeValueMap,this,_skin.lab_condition,1,startPos,0,_skin.lab_condition.height+2);
+					var labs:Array=AttrUtil.showAttr(getTypeValueMap,this,_skin.lb_dengji,1,startPos,0,_skin.lb_dengji.height+2);
 					labList=labList.concat(labs);
 				}
 				startY=startPos.y+2;
@@ -190,13 +191,13 @@ package  com.rpgGame.app.ui.tips.cheats
 					serverData.getAttrHash(nowHash);
 					HashMap.subtractionValueHashMap(nexth,nowHash);
 					startPos.y=startY;
-					var labsn:Array=AttrUtil.showDiffAttr(nexth,this,_skin.lab_condition,1,startPos,_skin.lab_condition.width,_skin.lab_condition.height+2);
+					var labsn:Array=AttrUtil.showDiffAttr(nexth,this,_skin.lb_dengji,1,startPos,_skin.lb_dengji.width,_skin.lb_dengji.height+2);
 					labList=labList.concat(labsn);
 					startY=startPos.y+2;
 				}
 				else
 				{
-					lb=clonelab(_skin.lab_condition);
+					lb=clonelab(_skin.lb_dengji);
 					this.addChild(lb);
 					lb.text="无";
 					lb.y=startY;
@@ -216,23 +217,23 @@ package  com.rpgGame.app.ui.tips.cheats
 			var nextLevel:int=qMer.curLevel+1;
 			if (nextLevel<=qMer.getConfig().q_maxlevel) 
 			{
-				lb=clonelab(_skin.lab_condition);
+				lb=clonelab(_skin.lb_dengji);
 				this.addChild(lb);
 				lb.y=startY;
 				startY+=lb.height+2;
 				isOk=nextLevel<=Mgr.cheatsMgr.getCheatVo(qMer.cheatsId).level;
-				lb.htmlText=HtmlTextUtil.getTextColor(isOk?GameColorUtil.COLOR_GREEN:GameColorUtil.COLOR_RED,Mgr.cheatsMgr.getCheatVo(qMer.cheatsId).cheatsConfig.q_name+"等级:"+nextLevel+"重");
+				lb.htmlText=HtmlTextUtil.getTextColor(isOk?StaticValue.A_UI_GREEN_TEXT:StaticValue.A_UI_RED_TEXT,Mgr.cheatsMgr.getCheatVo(qMer.cheatsId).cheatsConfig.q_name+"等级:"+nextLevel+"重");
 				lb.width=lb.textWidth;
 			}
 			var needLv:int=qMer.levelUpNeedPlayerLevel;
 			if (needLv!=0) 
 			{
-				lb=clonelab(_skin.lab_condition);
+				lb=clonelab(_skin.lb_dengji);
 				this.addChild(lb);
 				lb.y=startY;
 				startY+=lb.height+2;
 				isOk=needLv<=MainRoleManager.actorInfo.totalStat.level;
-				lb.htmlText=HtmlTextUtil.getTextColor(isOk?GameColorUtil.COLOR_GREEN:GameColorUtil.COLOR_RED,"角色等级:"+needLv+"级");
+				lb.htmlText=HtmlTextUtil.getTextColor(isOk?StaticValue.A_UI_GREEN_TEXT:StaticValue.A_UI_RED_TEXT,"角色等级:"+needLv+"级");
 				lb.width=lb.textWidth;
 			}
 			var preLv:int=qMer.levelUpNeedPreLv;
@@ -244,7 +245,7 @@ package  com.rpgGame.app.ui.tips.cheats
 				{
 					var tmp:Array=need.q_node_id.split("_");
 					var needInfo:CheatsNodeVo=Mgr.cheatsMgr.getCheatNodeVo(tmp[0],tmp[1]);
-					lb=clonelab(_skin.lab_condition);
+					lb=clonelab(_skin.lb_dengji);
 					this.addChild(lb);
 					lb.y=startY;
 					startY+=lb.height+2;
@@ -273,7 +274,7 @@ package  com.rpgGame.app.ui.tips.cheats
 						}
 					}
 					
-					lb.htmlText=HtmlTextUtil.getTextColor(isOk?GameColorUtil.COLOR_GREEN:GameColorUtil.COLOR_RED,str);
+					lb.htmlText=HtmlTextUtil.getTextColor(isOk?StaticValue.A_UI_GREEN_TEXT:StaticValue.A_UI_RED_TEXT,str);
 					lb.width=lb.textWidth;
 				}
 			}
@@ -281,12 +282,12 @@ package  com.rpgGame.app.ui.tips.cheats
 			//解锁不消耗
 			if (needSprit!=0&&!isUnlockCondion) 
 			{
-				lb=clonelab(_skin.lab_condition);
+				lb=clonelab(_skin.lb_dengji);
 				this.addChild(lb);
 				lb.y=startY;
 				startY+=lb.height+2;
 				isOk=needSprit<=MainRoleManager.actorInfo.curZhenqi;
-				lb.htmlText=HtmlTextUtil.getTextColor(isOk?GameColorUtil.COLOR_GREEN:GameColorUtil.COLOR_RED,"真气消耗:"+needSprit);
+				lb.htmlText=HtmlTextUtil.getTextColor(isOk?StaticValue.A_UI_GREEN_TEXT:StaticValue.A_UI_RED_TEXT,"真气消耗:"+needSprit);
 				lb.width=lb.textWidth;
 			}
 			return startY;
@@ -326,7 +327,7 @@ package  com.rpgGame.app.ui.tips.cheats
 				//冲穴
 				this._skin.lb_jihuo.text="未镶嵌";
 				this._skin.lb_jihuo.visible=true;
-				lb=clonelab(_skin.lab_condition);
+				lb=clonelab(_skin.lb_dengji);
 				this.addChild(lb);
 				lb.text="空";
 				lb.y=startY;
@@ -345,7 +346,7 @@ package  com.rpgGame.app.ui.tips.cheats
 				labList.push(stoneIcon);
 				
 				//名字
-				lb=clonelab(_skin.lab_condition);
+				lb=clonelab(_skin.lb_dengji);
 				this.addChild(lb);
 				lb.color=ItemConfig.getItemQualityColor(citemInfo.cfgId);
 				lb.text=citemInfo.qItem.q_name;
@@ -359,13 +360,13 @@ package  com.rpgGame.app.ui.tips.cheats
 				if (qAtt) 
 				{
 					var nexth:HashMap = AttValueConfig.getTypeValueMap(qAtt);
-					var labsn:Array=AttrUtil.showAttr(nexth,this,_skin.lab_condition,1,startPos,_skin.lab_condition.width,_skin.lab_condition.height+2);
+					var labsn:Array=AttrUtil.showAttr(nexth,this,_skin.lb_dengji,1,startPos,_skin.lb_dengji.width,_skin.lb_dengji.height+2);
 					labList=labList.concat(labsn);
 				}
 				startY=startPos.y;
 			}
-			_skin.imgLine1.y=startY;
-			startY+=_skin.imgLine1.height+2;
+			_skin.imgLine2.y=startY;
+			startY+=_skin.imgLine2.height+2;
 			//镶嵌说明
 			_skin.uiName2.y=startY;
 			_skin.uiName2.visible=true;
@@ -375,9 +376,9 @@ package  com.rpgGame.app.ui.tips.cheats
 			_skin.imgStone.y=startY;
 			
 			_skin.lb_Stone.y=startY;
-			_skin.lb_Stone.htmlText=_initStr.replace("$",HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,EnumMStoneType.getStoneTypeName(qAcu.q_stone_type)));
+			_skin.lb_Stone.htmlText=_initStr.replace("$",HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,EnumMStoneType.getStoneTypeName(qAcu.q_stone_type)));
 			startY+=_skin.lb_Stone.height;
-			_skin.imgBg.height=startY+2;
+			_skin.imgBg.height=startY+10;
 		}
 		
 		private function clonelab(lab:Label):Label

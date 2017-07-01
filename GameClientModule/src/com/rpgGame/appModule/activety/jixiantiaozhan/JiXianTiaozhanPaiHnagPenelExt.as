@@ -75,7 +75,7 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 				rank=_reward[i].paras.rank;
 			}
 			_skin.listItem.dataProvider=new ListCollection(list);
-			if(ActivetyDataManager.jixianVo.rank==-1){
+			if(ActivetyDataManager.jixianVo.rank<1){
 				_skin.grpIcon.visible=false;
 				_skin.uiWRB.visible=true;
 			}

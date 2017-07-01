@@ -10,7 +10,7 @@ package org.mokylin.skin.app.wuxue.juexue
 	import org.mokylin.skin.app.wuxue.juexue.Juexue_jihuo;
 	import org.mokylin.skin.app.wuxue.juexue.Juxue_Shengji;
 	import org.mokylin.skin.app.wuxue.juexue.mc.UIMovieClipJuexue_name;
-	import org.mokylin.skin.component.button.ButtonSkin_shuoming2;
+	import org.mokylin.skin.component.button.ButtonSkin_info;
 
 	/**
 	 * @private
@@ -71,9 +71,9 @@ package org.mokylin.skin.app.wuxue.juexue
 			super();
 			
 			this.currentState = "normal";
-			this.height = 587;
-			this.width = 947;
-			this.elementsContent = [__Juexue_Skin_UIAsset1_i(),__Juexue_Skin_UIAsset2_i(),grp_bg_i(),grp_btn_i(),btn_shuoming_i(),sk_jihuo_i(),sk_shengji_i(),mc_name_i()];
+			this.height = 601;
+			this.width = 956;
+			this.elementsContent = [__Juexue_Skin_UIAsset2_i(),__Juexue_Skin_UIAsset3_i(),grp_bg_i(),grp_btn_i(),btn_shuoming_i(),sk_jihuo_i(),sk_shengji_i(),mc_name_i()];
 			
 			states = {
 			};
@@ -84,23 +84,23 @@ package org.mokylin.skin.app.wuxue.juexue
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __Juexue_Skin_UIAsset1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 445;
-			temp.styleName = "ui/app/wuxue/juexue/xbg.jpg";
-			temp.width = 650;
-			temp.x = 19;
-			temp.y = 76;
-			return temp;
-		}
-
 		private function __Juexue_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.height = 445;
+			temp.styleName = "ui/common/background/neikuang_2.png";
+			temp.width = 650;
+			temp.x = 23;
+			temp.y = 86;
+			return temp;
+		}
+
+		private function __Juexue_Skin_UIAsset3_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/wuxue/juexue/bg.png";
-			temp.x = 24;
-			temp.y = 411;
+			temp.x = 28;
+			temp.y = 421;
 			return temp;
 		}
 
@@ -186,9 +186,9 @@ package org.mokylin.skin.app.wuxue.juexue
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_shuoming = temp;
 			temp.name = "btn_shuoming";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_shuoming2;
-			temp.x = 628;
-			temp.y = 96;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_info;
+			temp.x = 632;
+			temp.y = 106;
 			return temp;
 		}
 
@@ -197,8 +197,8 @@ package org.mokylin.skin.app.wuxue.juexue
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grp_bg = temp;
 			temp.name = "grp_bg";
-			temp.x = 24;
-			temp.y = 82;
+			temp.x = 28;
+			temp.y = 92;
 			temp.elementsContent = [bg_1_i(),bg_2_i(),bg_3_i(),bg_4_i(),bg_5_i(),bg_6_i(),bg_7_i()];
 			return temp;
 		}
@@ -208,8 +208,8 @@ package org.mokylin.skin.app.wuxue.juexue
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grp_btn = temp;
 			temp.name = "grp_btn";
-			temp.x = 27;
-			temp.y = 406;
+			temp.x = 31;
+			temp.y = 416;
 			temp.elementsContent = [sk_feisheng_i(),sk_wanghun_i(),skin_bindong_i(),sk_renzhe_i(),sk_shikong_i(),sk_canglong_i(),sk_shengsheng_i()];
 			return temp;
 		}
@@ -223,8 +223,8 @@ package org.mokylin.skin.app.wuxue.juexue
 			temp.height = 119;
 			temp.styleClass = org.mokylin.skin.app.wuxue.juexue.mc.UIMovieClipJuexue_name;
 			temp.width = 54;
-			temp.x = 34;
-			temp.y = 93;
+			temp.x = 38;
+			temp.y = 103;
 			return temp;
 		}
 
@@ -265,8 +265,8 @@ package org.mokylin.skin.app.wuxue.juexue
 			var skin:StateSkin = new org.mokylin.skin.app.wuxue.juexue.Juexue_jihuo()
 			temp.skin = skin
 			temp.width = 258;
-			temp.x = 670;
-			temp.y = 76;
+			temp.x = 674;
+			temp.y = 86;
 			return temp;
 		}
 
@@ -293,8 +293,8 @@ package org.mokylin.skin.app.wuxue.juexue
 			var skin:StateSkin = new org.mokylin.skin.app.wuxue.juexue.Juxue_Shengji()
 			temp.skin = skin
 			temp.width = 260;
-			temp.x = 670;
-			temp.y = 76;
+			temp.x = 674;
+			temp.y = 86;
 			return temp;
 		}
 

@@ -76,12 +76,12 @@ package com.rpgGame.appModule.maps
 		public function BigMaps(skin:maps_Skin): void 
 		{
 			_skin=skin;
-			_mapWidth = _skin.UIMap.width;
-			_mapHeight = _skin.UIMap.height;
+			_mapWidth = _skin.grp_cont.width;
+			_mapHeight = _skin.grp_cont.height;
 			skinSpr=new Sprite();
-			skinSpr.x=_skin.UIMap.x;
-			skinSpr.y=_skin.UIMap.y;
-			this._skin.grp_cont.addChildAt(skinSpr, skin.grp_cont.getChildIndex(_skin.UIMap) + 1);
+			skinSpr.x=0;
+			skinSpr.y=0;
+			this._skin.grp_cont.addChild(skinSpr);
 			EventManager.addEvent(MapUnitEvent.UPDATE_MAP_TEAMMATE,updateTeamatesPoint);
 		}
 		public function init():void

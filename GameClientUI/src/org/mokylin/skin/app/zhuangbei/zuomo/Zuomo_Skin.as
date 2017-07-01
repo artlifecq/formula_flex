@@ -11,8 +11,8 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.app.zhuangbei.Zhuangbei_left;
 	import org.mokylin.skin.app.zhuangbei.zuomo.button.ButtonZhuomo;
+	import org.mokylin.skin.component.button.ButtonSkin_info;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
-	import org.mokylin.skin.component.button.ButtonSkin_shuoming;
 	import org.mokylin.skin.component.combobox.ComboBox1_Skin;
 	import org.mokylin.skin.component.combobox.ComboBox2_Skin;
 	import org.mokylin.skin.component.progress.pro_jindu_Skin;
@@ -88,8 +88,8 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			super();
 			
 			this.currentState = "normal";
-			this.height = 587;
-			this.width = 947;
+			this.height = 601;
+			this.width = 956;
 			this.elementsContent = [left_i(),__Zuomo_Skin_UIAsset3_i(),btn_shuoming_i(),grp_cilun_i(),lb_name_i(),btn_zuomo_i(),ico_zuomo_i(),use_grp_i(),grp_jiacheng_i(),cmb_pinzhi_i(),cmb_dengjie_i(),btn_zuomo_all_i(),__Zuomo_Skin_Label3_i(),__Zuomo_Skin_Label4_i(),lb_dengji_i()];
 			
 			states = {
@@ -130,8 +130,8 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			temp.text = "请放入消耗材料";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 484;
-			temp.y = 346;
+			temp.x = 488;
+			temp.y = 359;
 			return temp;
 		}
 
@@ -142,8 +142,8 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			temp.text = "(琢磨成功后消耗材料将会消失，请慎重选择）";
 			temp.color = 0xD02525;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 576;
-			temp.y = 346;
+			temp.x = 580;
+			temp.y = 359;
 			return temp;
 		}
 
@@ -151,8 +151,8 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/big_bg/zhuangbei/zuomo/bg.jpg";
-			temp.x = 371;
-			temp.y = 75;
+			temp.x = 375;
+			temp.y = 88;
 			return temp;
 		}
 
@@ -208,9 +208,9 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_shuoming = temp;
 			temp.name = "btn_shuoming";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_shuoming;
-			temp.x = 834;
-			temp.y = 83;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_info;
+			temp.x = 900;
+			temp.y = 96;
 			return temp;
 		}
 
@@ -220,8 +220,8 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			btn_zuomo_all = temp;
 			temp.name = "btn_zuomo_all";
 			temp.styleClass = org.mokylin.skin.app.zhuangbei.zuomo.button.ButtonZhuomo;
-			temp.x = 732;
-			temp.y = 472;
+			temp.x = 736;
+			temp.y = 485;
 			return temp;
 		}
 
@@ -230,13 +230,13 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_zuomo = temp;
 			temp.name = "btn_zuomo";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "琢 磨";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.color = 0xE1D4A9;
+			temp.color = 0xFFFFFF;
 			temp.width = 77;
-			temp.x = 611;
-			temp.y = 264;
+			temp.x = 615;
+			temp.y = 277;
 			return temp;
 		}
 
@@ -252,8 +252,8 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 70;
-			temp.x = 462;
-			temp.y = 475;
+			temp.x = 466;
+			temp.y = 488;
 			return temp;
 		}
 
@@ -269,8 +269,8 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 155;
-			temp.x = 534;
-			temp.y = 475;
+			temp.x = 538;
+			temp.y = 488;
 			return temp;
 		}
 
@@ -279,8 +279,8 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grp_cilun = temp;
 			temp.name = "grp_cilun";
-			temp.x = 412;
-			temp.y = 74;
+			temp.x = 416;
+			temp.y = 87;
 			temp.elementsContent = [];
 			return temp;
 		}
@@ -290,8 +290,8 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grp_jiacheng = temp;
 			temp.name = "grp_jiacheng";
-			temp.x = 401;
-			temp.y = 377;
+			temp.x = 405;
+			temp.y = 390;
 			temp.elementsContent = [__Zuomo_Skin_UIAsset4_i(),__Zuomo_Skin_UIAsset5_i(),lb_current_i(),lb_next_i(),__Zuomo_Skin_UIAsset6_i(),progressBar_i(),lb_pro_i(),__Zuomo_Skin_Label1_i(),__Zuomo_Skin_Label2_i(),up_title_i(),lb_baifenbi_i(),lb_up2_i(),arrow_up2_i(),__Zuomo_Skin_UIAsset7_i()];
 			return temp;
 		}
@@ -302,8 +302,8 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			ico_zuomo = temp;
 			temp.name = "ico_zuomo";
 			temp.styleName = "ui/app/zhuangbei/zuomo/dakuang.png";
-			temp.x = 600;
-			temp.y = 165;
+			temp.x = 604;
+			temp.y = 178;
 			return temp;
 		}
 
@@ -348,8 +348,8 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 113;
-			temp.x = 808;
-			temp.y = 113;
+			temp.x = 812;
+			temp.y = 126;
 			return temp;
 		}
 
@@ -363,8 +363,8 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 123;
-			temp.x = 590;
-			temp.y = 144;
+			temp.x = 594;
+			temp.y = 157;
 			return temp;
 		}
 
@@ -421,8 +421,8 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			var skin:StateSkin = new org.mokylin.skin.app.zhuangbei.Zhuangbei_left()
 			temp.skin = skin
 			temp.width = 340;
-			temp.x = 23;
-			temp.y = 79;
+			temp.x = 27;
+			temp.y = 92;
 			return temp;
 		}
 
@@ -524,8 +524,8 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			use_grp = temp;
 			temp.name = "use_grp";
-			temp.x = 495;
-			temp.y = 80;
+			temp.x = 499;
+			temp.y = 93;
 			temp.elementsContent = [use0_i(),use1_i(),use4_i(),use3_i(),use5_i(),use2_i()];
 			return temp;
 		}

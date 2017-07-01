@@ -1,4 +1,4 @@
-package org.mokylin.skin.app.beibao.zhangong.button
+package org.mokylin.skin.component.button
 {
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
@@ -9,7 +9,7 @@ package org.mokylin.skin.app.beibao.zhangong.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class ButtonDituBgBtn extends feathers.controls.StateSkin
+	public class ButtonSkin_putongMax extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -22,11 +22,11 @@ package org.mokylin.skin.app.beibao.zhangong.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function ButtonDituBgBtn()
+		public function ButtonSkin_putongMax()
 		{
 			super();
 			
-			this.currentState = "upAndSelected";
+			this.currentState = "down";
 			this.elementsContent = [];
 			
 			states = {
@@ -47,12 +47,7 @@ package org.mokylin.skin.app.beibao.zhangong.button
 						}
 					]
 			};
-			skinNames={"down":"ui/app/beibao/zhangong/button/dituBgBtn/down.jpg",
-			"downAndSelected":"ui/app/beibao/zhangong/button/dituBgBtn/select.jpg",
-			"hover":"ui/app/beibao/zhangong/button/dituBgBtn/over.jpg",
-			"overAndSelected":"ui/app/beibao/zhangong/button/dituBgBtn/select.jpg",
-			"up":"ui/app/beibao/zhangong/button/dituBgBtn/up.jpg",
-			"upAndSelected":"ui/app/beibao/zhangong/button/dituBgBtn/select.jpg"};
+			skinNames={"down":"ui/component/button/skin_putongMax/down.png", "hover":"ui/component/button/skin_putongMax/over.png", "up":"ui/component/button/skin_putongMax/up.png"};
 		}
 
 

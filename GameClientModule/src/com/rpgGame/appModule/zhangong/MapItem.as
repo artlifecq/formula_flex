@@ -5,7 +5,7 @@ package com.rpgGame.appModule.zhangong
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.ZhanGongEvent;
 	import com.rpgGame.core.ui.SkinUI;
-	import com.rpgGame.core.ui.tip.RTNodeID;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.netData.zhangong.message.SCMeritoriousUpgradeResultMessage;
 	
@@ -32,8 +32,6 @@ package com.rpgGame.appModule.zhangong
 		{
 			_skin=new MapItem_Skin();
 			super(_skin);
-			
-			//addNode(RTNodeID.MIANROLE,
 		}
 		
 		override protected function onShow():void
@@ -112,7 +110,7 @@ package com.rpgGame.appModule.zhangong
 		public function ClearData():void
 		{
 			_lv=0;
-			_skin.lbMsg.text="0%";
+			_skin.lbMsg.text="0.000%";
 			_skin.grp_dengji.visible=false;
 		}
 		
@@ -164,12 +162,12 @@ package com.rpgGame.appModule.zhangong
 			if(_lv>MainRoleManager.actorInfo.totalStat.level)
 			{
 				_skin.lbMsg.text="等级不足";
-				_skin.lbMsg.color=0xd02525;
+				_skin.lbMsg.color=StaticValue.A_UI_RED_TEXT;
 			}
 			else
 			{
 				_skin.lbMsg.text=ZhanGongManager.getProgressByLv(_lv);
-				_skin.lbMsg.color=0x5cb006;
+				_skin.lbMsg.color=StaticValue.A_UI_GREEN_TEXT;
 			}
 			var num:int=ZhanGongManager.getCanUpNumByLv(_lv);
 			if(num<=0) _skin.grp_dengji.visible=false;
