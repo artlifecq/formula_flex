@@ -342,7 +342,7 @@ package com.rpgGame.appModule.xinfa
 			{
 				meridianType=keys[i];
 				tmp=new CheatsMap(_skinArr[i],hash.getValue(meridianType),sbtnArr[i]);
-				SkinUI.addNode(RTNodeID.MIANROLE,RTNodeID["XF_"+(i+1)],sbtnArr[i],106,checkReward,false,meridianType);
+				SkinUI.addNode(RTNodeID.XF,RTNodeID["XF_"+(i+1)],sbtnArr[i],106,checkReward,false,meridianType);
 				tmp.pos=i;
 				tmp.x=200;
 				tmp.y=70;

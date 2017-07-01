@@ -202,9 +202,9 @@ package com.rpgGame.core.ui
 			super.dispose();
 		}
 		private static var _tree:RewardTipTree=new RewardTipTree();
-		public static function addNode(parentKey:String,key:String,dis:DisplayObjectContainer,dw:int,check:Function,isGray:Boolean=false,param:Object=null):void
+		public static function addNode(parentKey:String,key:String,dis:DisplayObjectContainer,dw:int,check:Function,isGray:Boolean=false,param:Object=null,isInTimer:Boolean=false):void
 		{
-			_tree.addNode(parentKey,key,dis,dw,check,isGray,param);
+			_tree.addNode(parentKey,key,dis,dw,check,isGray,param,isInTimer);
 		}
 		public static function notifyUpdate(key:String):void
 		{

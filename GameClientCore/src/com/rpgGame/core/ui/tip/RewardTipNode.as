@@ -17,6 +17,7 @@ package com.rpgGame.core.ui.tip
 			// TODO Auto Generated method stub
 			if (getTimer()-checkTime>5000) 
 			{
+				checkTime=getTimer();
 				timeNodes.eachValue(timeUpdate);
 			}
 			allNode.eachValue(setTip2Top);
@@ -70,9 +71,10 @@ package com.rpgGame.core.ui.tip
 			}
 			if (!ret&&_childrenNodes) 
 			{
-				for each (var child:RewardTipNode in _childrenNodes) 
+				for each (var key:String in _childrenNodes) 
 				{
-					if (child.hasReward) 
+					var child:RewardTipNode=getNode(key);
+					if (child&&child.hasReward) 
 					{
 						ret=true;
 						break;
@@ -138,30 +140,6 @@ package com.rpgGame.core.ui.tip
 			{
 				update();
 			}
-			
-		}
-		public function removeNodeByKey(key:String,isUpdate:Boolean=true):void
-		{
-			if (!_childrenNodes) 
-			{
-				return;
-			}
-			var len:int=_childrenNodes.length;
-			
-			for (var i:int = 0; i < len; i++) 
-			{
-				if (_childrenNodes[i]._key==key) 
-				{
-					_childrenNodes.removeAt(i);
-					_childrenNodes[i]._parentNodeKey=null;
-					if (isUpdate) 
-					{
-						update();
-					}
-					break;
-				}
-			}
-			
 		}
 		public function get hasReward():Boolean
 		{
@@ -180,10 +158,14 @@ package com.rpgGame.core.ui.tip
 		
 			if (_childrenNodes) 
 			{
-				for each (var node:RewardTipNode in _childrenNodes) 
+				for each (var key:String in _childrenNodes) 
 				{
-					node._parentNodeKey=null;
-					node.clear();
+					var node:RewardTipNode=getNode(key);
+					if (node) 
+					{
+						node._parentNodeKey=null;
+						node.clear();
+					}
 				}
 				_childrenNodes.length=0;
 			}

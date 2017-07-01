@@ -29,5 +29,9 @@ package com.rpgGame.appModule.role
 		{
 			super.show(data,EmFunctionID.EM_ROLE,parentContiner);
 		}
+		override protected function addRTN():void
+		{
+			
+		}
 	}
 }

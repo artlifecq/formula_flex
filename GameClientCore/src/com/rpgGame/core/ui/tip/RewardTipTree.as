@@ -27,14 +27,14 @@ package com.rpgGame.core.ui.tip
 				_roots.put(key,node);
 			}
 		}
-		public function addNode(parentKey:String,key:String,dis:DisplayObjectContainer,dw:int,check:Function,isGray:Boolean=false,param:Object=null):void
+		public function addNode(parentKey:String,key:String,dis:DisplayObjectContainer,dw:int,check:Function,isGray:Boolean=false,param:Object=null,isInTimer:Boolean=false):void
 		{
 			var parentNode:RewardTipNode;
 			if (parentKey!=null||parentKey!="") 
 			{
 				parentNode=getNode(parentKey);
 			}
-			var child:RewardTipNode=new RewardTipNode(key,dis,dw,check,isGray,param);
+			var child:RewardTipNode=new RewardTipNode(key,dis,dw,check,isGray,param,isInTimer);
 			if (parentNode==null) 
 			{
 				addRoot(key,child);
