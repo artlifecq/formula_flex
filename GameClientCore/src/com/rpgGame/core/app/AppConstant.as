@@ -169,6 +169,10 @@ package com.rpgGame.core.app
 		public static var ACTIVETY_LIJIN_RESULT:String = createAppInfo( "activety.zonghe.lijin.LijinResultPanel","activety");
 		
 		
+		/**
+		 *秦陵秘宝结算
+		 */
+		public static var ACTIVETY_MIBAO_RESULT:String = createAppInfo( "activety.zonghe.lijin.MibaoResultPanel","activety");
 		
 		
 		/**

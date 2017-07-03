@@ -1,24 +1,26 @@
 package com.rpgGame.app.ui.scene
 {
-	import com.rpgGame.app.ui.scene.dungeon.DungeonTrackerUI;
+	import com.gameClient.log.Lyt;
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.utils.TaskUtil;
+	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
-	import com.rpgGame.core.events.ActivityEvent;
-	import com.rpgGame.core.events.MapEvent;
-	import com.rpgGame.core.events.TaskEvent;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
+	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	
 	import feathers.controls.Label;
-	import feathers.controls.SkinnableContainer;
 	import feathers.controls.UIAsset;
 	
-	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.activety.zonghe.qinlinmibao.Act_MiBao_ZhuiZong;
 	import org.mokylin.skin.app.activety.zonghe.qinlinmibao.PaiMing_Item;
-	import org.mokylin.skin.mainui.renwu.Renwu_Item;
 	
 	import starling.display.DisplayObject;
-	import starling.events.TouchEvent;
+	
+	import utils.TimerServer;
 	
 	/**
 	 * 秦陵秘宝追踪
@@ -46,7 +48,9 @@ package com.rpgGame.app.ui.scene
 		{
 			super.onTouchTarget(target);
 			switch(target.name){
-				case "btn_qiang_close":
+				case _skin.sec_subbut1.name:
+					Lyt.a("退出");
+					AppManager.showApp(AppConstant.ACTIVETY_MIBAO_RESULT);
 					break;
 			}
 		}
@@ -56,6 +60,10 @@ package com.rpgGame.app.ui.scene
 			addEvent();
 			setUiRefresh();
 			setStep(2);
+			setJifenReword();
+			setShanghaiReword();
+			setShanghaiRank();
+			setTime(500);
 			setUisite();
 		}
 		override protected function onHide():void
@@ -100,9 +108,129 @@ package com.rpgGame.app.ui.scene
 				_skin.shanghai_List.visible=true;
 				
 			}
+		}
+		/**设置击杀目标*/
+		private function setKillInfo():void
+		{
+			var i:int=0;
+			for(i=0;i<killButList.length;i++)
+			{
+				killButList[i].visible=false;
+			}
+			var killList:Array;
+			//var killList:Vector.<KillMonsterInfo>=DungeonManager.killInfos;
+			//var rItme:Renwu_Item2;
+			//var qzm:Q_dailyzone_monster;
+			if(killList&&killList.length>0)
+			{
+				for(i=0;i<killList.length;i++)
+				{
+					//qzm=DailyZoneMonsterCfgData.getZoneCfg(killList[i].monsterModelId);
+					if(i<killButList.length)
+					{
+						//rItme=killButList[i].skin as Renwu_Item2;
+						//killButList[i].htmlText="击杀：<u>"+MonsterDataManager.getMonsterName(qzm.q_monsterId)+"</u><font color='#cfc6ae'>("+killList[i].count+"/"+qzm.q_monsterNum+")</font>";
+						killButList[i].visible=true;
+					}
+					
+				}
+			}
+			
+			setUisite();
+		}
+		/**设置积分奖励物品*/
+		private function setJifenReword():void
+		{
+			_skin.lbJifen.text="5864";
+			_skin.lbZhenqi.text="20156";
+			var passReward:Array=JSONUtil.decode('[{"mod":802,"num":1,"show":1},{"mod":803,"num":1,"show":1},{"mod":804,"num":1,"show":1}]'/*multyData.q_all_reward*/);
+			var i:int;
+			var ico:IconCDFace; 
+			var item:Q_item;
+			if(passReward&&passReward.length>0)
+			{
+				for(i=0;i<passReward.length;i++)
+				{
+					if(i<ico1List.length&&passReward[i]!=null)
+					{
+						item=ItemConfig.getQItemByID(passReward[i].mod);
+						ico=ico1List[i];
+						if(item!=null&&ico!=null)
+						{
+							ico.setIconResName(ClientConfig.getItemIcon(item.q_icon.toString(),IcoSizeEnum.ICON_48));
+							ico.visible=true;
+							icoBg1List[i].visible=true;
+							TaskUtil.setItemTips(ico,item,passReward[i].num);
+						}
+					}
+				}
+			}
 			
 		}
+		/**设置伤害奖励物品*/
+		private function setShanghaiReword():void
+		{
+			
+			var passReward:Array=JSONUtil.decode('[{"mod":802,"num":1,"show":1},{"mod":803,"num":1,"show":1},{"mod":804,"num":1,"show":1}]'/*multyData.q_all_reward*/);
+			var i:int;
+			var ico:IconCDFace; 
+			var item:Q_item;
+			if(passReward&&passReward.length>0)
+			{
+				for(i=0;i<passReward.length;i++)
+				{
+					if(i<ico2List.length&&passReward[i]!=null)
+					{
+						item=ItemConfig.getQItemByID(passReward[i].mod);
+						ico=ico2List[i];
+						if(item!=null&&ico!=null)
+						{
+							ico.setIconResName(ClientConfig.getItemIcon(item.q_icon.toString(),IcoSizeEnum.ICON_48));
+							ico.visible=true;
+							icoBg2List[i].visible=true;
+							TaskUtil.setItemTips(ico,item,passReward[i].num);
+						}
+					}
+				}
+			}
+			
+		}
+		/**设置伤害排行*/
+		private function setShanghaiRank():void
+		{
+			var i:int;
+			for(i=0;i<3;i++)
+			{
+				hitList[i].lbName.text="玩家名称"+i;
+				hitList[i].lbNum.text=""+(i*100);
+			}
+			hitList[3].lbNo.text="33";
+			hitList[3].lbName.text="我的名称";
+			hitList[3].lbNum.text="500";
+		}
 		
+		private var remainTime:int;
+		private function setTime(time:int):void
+		{
+			var rTime:int=time;
+			if(rTime<0){
+				_skin.sec_info.text="00:00:00";
+			}else{
+				remainTime=rTime;
+				_skin.sec_info.text=TimeUtil.format3TimeType(remainTime);
+				TimerServer.remove(updateTime);
+				TimerServer.addLoop(updateTime,1000);
+			}
+		}
+		
+		private function updateTime():void
+		{
+			remainTime--;
+			_skin.sec_info.text=TimeUtil.format3TimeType(remainTime);
+			if(remainTime==0){
+				TimerServer.remove(updateTime);
+			}
+		}
 		private function initUI():void
 		{
 			skinList=new Array();
