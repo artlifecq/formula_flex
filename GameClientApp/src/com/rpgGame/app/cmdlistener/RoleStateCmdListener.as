@@ -23,6 +23,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.core.events.SceneInteractiveEvent;
 	import com.rpgGame.core.events.UserMoveEvent;
 	import com.rpgGame.coreData.cfg.ClientTrigger;
+	import com.rpgGame.coreData.cfg.TriggerArea;
 	import com.rpgGame.coreData.enum.EnumAreaMapType;
 	import com.rpgGame.coreData.info.task.target.TaskAreaExplorationInfo;
 	import com.rpgGame.coreData.info.task.target.TaskFollowEscortInfo;
@@ -125,7 +126,11 @@ package com.rpgGame.app.cmdlistener
 				var trigger : ClientTrigger = flagObj as ClientTrigger;
 				ClientTriggerManager.ClientBytrigger(trigger.id);
 			}
-
+			else if (flagObj is TriggerArea)
+			{
+				var triggerArea : TriggerArea = flagObj as TriggerArea;
+				//ClientTriggerManager.ClientBytrigger(triggerArea.areaId);
+			}
 			var dist : int = 0;
 			var farDistance : int = 0;
 			var selectedRole : SceneRole = SceneRoleSelectManager.selectedRole;
