@@ -111,7 +111,8 @@ package com.rpgGame.appModule.role
 			initAvatar();
 			initEquips();
 			setGridsCount(equipNum);
-			_skin.roleZone.visible=false;
+			
+			_skin.icon_lijin.blendMode
 		}
 		
 		private function initEquips():void
