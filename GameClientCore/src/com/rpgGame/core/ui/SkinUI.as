@@ -210,6 +210,10 @@ package com.rpgGame.core.ui
 		{
 			_tree.updateNode(key);
 		}
+		public static function setRTNState(key:String,state:Boolean):void
+		{
+			_tree.setState(key,state);
+		}
 		public static function removeNode(key:String):void
 		{
 			_tree.removeNode(key);

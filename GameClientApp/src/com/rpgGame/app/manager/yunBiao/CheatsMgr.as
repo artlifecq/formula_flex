@@ -337,11 +337,27 @@ package com.rpgGame.app.manager.yunBiao
 			}
 			return null;
 		}
+		public function checkHasNodeCanClick():Boolean
+		{
+			var keys:Array=_cheatsHash.keys();
+			for each (var key:int in keys) 
+			{
+				if (checkNodeCanClick(key)) 
+				{
+					return true;
+				}
+			}
+			return false;
+		}
 		public function checkNodeCanClick(cheatsId:int):Boolean
 		{
 			var cheats:CheatsVo=_cheatsHash.getValue(cheatsId);
 			if (cheats) 
 			{
+				if (cheats.level<1) 
+				{
+					return Mgr.cheatsMgr.getCanActive(cheats.cheatsConfig.q_id);
+				}
 				var arr:Array=cheats.subNodeHash.values();
 				var len:int=arr.length;
 				var node:CheatsNodeVo;

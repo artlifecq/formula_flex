@@ -60,5 +60,13 @@ package com.rpgGame.core.ui.tip
 				node.update();
 			}
 		}
+		public function setState(key:String,state:Boolean):void
+		{
+			var node:RewardTipNode=getNode(key);
+			if (node) 
+			{
+				node.setState(state);
+			}
+		}
 	}
 }

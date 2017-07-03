@@ -38,7 +38,7 @@ package com.rpgGame.app.ui.main.navigation {
 			this.setState(true);
 			EventManager.addEvent(FunctionOpenEvent.FUNCTIONOPENID,refeashButton);
 			refeashButton();
-			addNode(null,RTNodeID.MAINROLE,_content.buttonList[0]as DisplayObjectContainer,60,null,false);
+			
 		}
 		
 		private function refeashButton(data:*=null):void

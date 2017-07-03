@@ -20,6 +20,7 @@ package com.rpgGame.appModule.zhangong
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.AwdProgressBar;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
@@ -85,6 +86,7 @@ package com.rpgGame.appModule.zhangong
 			_skin.lbNumUp.visible=false;
 			_skin.uiUp.visible=false;
 			//			_skin.container.addChild(_avatarContainer);
+			
 		}
 		
 		override protected function onShow():void
@@ -343,6 +345,7 @@ package com.rpgGame.appModule.zhangong
 			_skin.lbNum.text="0/1";
 			_progressBar.value=0;
 			//			_skin.pro_bar.value=0;
+			
 		}
 	}
 }

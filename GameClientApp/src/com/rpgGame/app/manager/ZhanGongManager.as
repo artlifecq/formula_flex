@@ -107,7 +107,18 @@ package com.rpgGame.app.manager
 			
 			return par;
 		}
-		
+		public static function getCanUp():Boolean
+		{
+			var list:Vector.<int>=ZhanGongData.getMapItemLvList();
+			for each (var lv:int in list) 
+			{
+				if (getCanUpNumByLv(lv)) 
+				{
+					return true;
+				}
+			}
+			return false;
+		}
 		/**
 		 * 获取相应等级的可升级个数
 		 * */

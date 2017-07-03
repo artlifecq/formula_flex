@@ -1,6 +1,8 @@
 package com.rpgGame.appModule.role
 {
+	import com.rpgGame.app.manager.JunJieManager;
 	import com.rpgGame.app.manager.Mgr;
+	import com.rpgGame.app.manager.ZhanGongManager;
 	import com.rpgGame.app.ui.TabBarPanel;
 	import com.rpgGame.appModule.jingmai.MeridianMainPanelExt;
 	import com.rpgGame.appModule.junjie.JunJiePanelExt;
@@ -46,7 +48,10 @@ package com.rpgGame.appModule.role
 		}
 		protected function addRTN():void
 		{
-			addNode(RTNodeID.MAINROLE,RTNodeID.JM,_tabBar.getTabDataByTabKey(EmFunctionID.EM_MERIDIAN).button,140,Mgr.meridianMgr.checkHasNodeCanClick,false,null,true)
+			addNode(RTNodeID.MAINROLE,RTNodeID.JM,_tabBar.getTabDataByTabKey(EmFunctionID.EM_MERIDIAN).button,140,Mgr.meridianMgr.checkHasNodeCanClick,false,null,true);
+			addNode(RTNodeID.MAINROLE,RTNodeID.XF,_tabBar.getTabDataByTabKey(EmFunctionID.EM_XINFA).button,140,Mgr.cheatsMgr.checkHasNodeCanClick,false,null,true);
+			addNode(RTNodeID.MAINROLE,RTNodeID.ZG,_tabBar.getTabDataByTabKey(EmFunctionID.EM_ZHANGONG).button,140,ZhanGongManager.getCanUp,false,null,true);
+			addNode(RTNodeID.MAINROLE,RTNodeID.JJ,_tabBar.getTabDataByTabKey(EmFunctionID.Em_JUNJIE).button,140,JunJieManager.ins.getCanActivation,false,null,true);
 		}
 	}
 }

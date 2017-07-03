@@ -1,6 +1,6 @@
 package com.rpgGame.core.ui.tip
 {
-	import com.rpgGame.coreData.rEnum;
+	
 
 	public class RTNodeID
 	{
@@ -17,16 +17,36 @@ package com.rpgGame.core.ui.tip
 		public static const JM_YANGM:String=JM+"-yang"; 
 		//心法
 		public static const XF:String=MAINROLE+"-xf";
-		public static const XF_1:String=XF+rEnum.ENUM_START(1);
-		public static const XF_2:String=XF+rEnum.next;
-		public static const XF_3:String=XF+rEnum.next;
-		public static const XF_4:String=XF+rEnum.next;
-		public static const XF_5:String=XF+rEnum.next;
-		public static const XF_6:String=XF+rEnum.next;
-		public static const XF_7:String=XF+rEnum.next;
-		public static const XF_8:String=XF+rEnum.next;
-		public static const XF_9:String=XF+rEnum.next;
-		public static const XF_10:String=XF+rEnum.next;
+		
+		//战功
+		public static const ZG:String=MAINROLE+"-zg";
+		//军阶
+		public static const JJ:String=MAINROLE+"junjie";
+		//军阶
+		public static const JJ_BTN_ACTIVE:String=JJ+"-active";
+		
+		//进阶
+		public static const MAIN_JINJIE:String="mainjinjie";
+		public static const HORSE:String=MAIN_JINJIE+"-horse";
+		public static const HORSE_UP:String=HORSE+"-up";
+		public static const FIGHTFLAG:String=MAIN_JINJIE+"-fihtflag";
+		public static const FIGHTFLAG_UP:String=FIGHTFLAG+"-up";
+	
+		//装备面板
+		public static const MAIN_EQUIP:String="mainequip";
+		public static const EQUIP_QH:String=MAIN_EQUIP+"-strength";
+		public static const EQUIP_ZM:String=MAIN_EQUIP+"-zuomo";
+		public static const EQUIP_XL:String=MAIN_EQUIP+"-xilian";
+		public static const EQUIP_JC:String=MAIN_EQUIP+"-jicheng";
+		public static const EQUIP_HC:String=MAIN_EQUIP+"-hecheng";
+		
+		//武学
+		public static const MAIN_WU_XUE:String="mainwuxue";
+		public static const WX_SKILL:String=MAIN_WU_XUE+"-skill";
+		public static const WX_SKILL_LEVELUP:String=WX_SKILL+"-levelUp";
+		public static const WX_SKILL_UPGRADE:String=WX_SKILL+"-upgrade";
+		public static const WX_JX:String=MAIN_WU_XUE+"-juexue";
+		public static const WX_JX_SKILL:String=WX_JX+"-skill";
 		public function RTNodeID()
 		{
 		}
