@@ -5,7 +5,6 @@ package com.rpgGame.app.ui.main.activityBar.item
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
-	import com.rpgGame.coreData.type.activity.ActivityOpenStateType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 
 	/**
@@ -25,14 +24,6 @@ package com.rpgGame.app.ui.main.activityBar.item
 		override public function onActivityData(data:Object):void
 		{
 			_actData=data as ActivetyInfo;
-			if(_actData==null)
-				return ;
-			if(_actData.info.joinState==1)
-				_activityState == ActivityOpenStateType.OPEN;
-			else if(_actData.info.joinState==2)
-				_activityState == ActivityOpenStateType.OPEN_COUNTDOWN;
-			else
-				_activityState = ActivityOpenStateType.CLOSE;
 			onShow();
 		}
 		
@@ -52,17 +43,17 @@ package com.rpgGame.app.ui.main.activityBar.item
 				return ;
 			if(_actData.info.notifyTime==0){
 				setTextLeable(HtmlTextUtil.getTextColor(StaticValue.UI_RED1, ActivetyDataManager.getNextRefreshTime(_actData.actCfg)+"开启"));
+				ui.uiJinXing.visible=false;
 			}else{
-				this.setTimeData(SystemTimeManager.curtTm,_actData.info.notifyTime*1000,0,true);
+				this.setupActTime(_actData.info.notifyTime);
+				ui.uiJinXing.visible=true;
 			}
 		}
 		
-		
-		override protected function onTextRuningTime(second:int):String
+		override protected function onHide():void
 		{
-			var closeTxt:String = "<font color='#4efd6f'>活动剩余时间\n" + TimeUtil.format3TimeType(second) + "</font>";
-			setTextLeable(closeTxt);
-			return closeTxt;
+			super.onHide();
+			ui.uiJinXing.visible=false;
 		}
 	}
 }

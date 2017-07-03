@@ -86,7 +86,7 @@ package org.mokylin.skin.app.activety.zonghe
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiBg = temp;
 			temp.name = "uiBg";
-			temp.styleName = "ui/big_bg/activety/zonghe/item/1.png";
+			temp.styleName = "ui/big_bg/activety/item/1.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

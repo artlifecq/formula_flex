@@ -120,7 +120,6 @@ package com.rpgGame.appModule.role
 			initAvatar();
 			initEquips();
 			setGridsCount(equipNum);
-			_skin.roleZone.visible=false;
 		}
 		
 		private function initEquips():void
