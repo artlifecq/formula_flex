@@ -31,15 +31,7 @@ package com.rpgGame.appModule.die
 			_icon.x=20;
 			_icon.y=48;
 			this.addChild(_icon);
-			_skin.btn.addEventListener(Event.TRIGGERED,triggeeredHandler);
 		}
-		private function triggeeredHandler():void
-		{
-			if(_item.q_panel>0){
-				FunctionOpenManager.openFunctionById(_item.q_panel.toString());
-			}
-		}
-		
 		override protected function commitData():void
 		{
 			_item= this.data as Q_die;

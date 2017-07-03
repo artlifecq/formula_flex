@@ -72,7 +72,6 @@ package org.mokylin.skin.app.fuben
 			temp.height = 38;
 			temp.label = "30";
 			temp.styleClass = org.mokylin.skin.app.fuben.uinumber.UINumberDaojishi;
-			temp.textAlign = "right";
 			temp.width = 56;
 			temp.x = 313;
 			temp.y = 27;

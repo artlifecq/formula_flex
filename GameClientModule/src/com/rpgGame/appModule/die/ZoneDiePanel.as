@@ -46,8 +46,6 @@ package com.rpgGame.appModule.die
 			{
 				DungeonSender.reqQuitDungeon();
 				this.hide();
-			}else if(target is DieToitemCell){
-				trace(DieToitemCell(target).data);
 			}
 		}
 	}

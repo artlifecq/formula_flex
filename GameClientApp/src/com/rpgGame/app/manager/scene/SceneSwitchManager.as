@@ -666,7 +666,7 @@ package com.rpgGame.app.manager.scene
 			
 			if(needOpenNewFuncId>0)
 			{
-				FunctionOpenManager.openFunctionById(needOpenNewFuncId.toString());
+				FunctionOpenManager.openAppPaneById(needOpenNewFuncId.toString());
 				needOpenNewFuncId = 0;
 			}
 		}

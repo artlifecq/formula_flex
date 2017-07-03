@@ -135,7 +135,7 @@ package com.rpgGame.appModule.fightsoul
 				if(FightSoulManager.instance().isGetReward(index))
 					GrayFilter.gray(_itemIconLists[index]);
 				else
-					_itemIconLists[index].target.filter = null;
+					_itemIconLists[index].filter = null;
 			}
 		}
 		private var _bigEffect:InterObject3D

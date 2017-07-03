@@ -89,7 +89,7 @@ package org.mokylin.skin.app.fuben
 		private function __FuBenJieSuan_Shibai_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/fuben/fubenjiesuan/shibai.png";
+			temp.styleName = "ui/big_bg/fuben/fubenjiesuan/shibai.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

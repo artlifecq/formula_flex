@@ -1,6 +1,7 @@
 ﻿package com.rpgGame.app.manager
 {
     import com.gameClient.utils.JSONUtil;
+    import com.rpgGame.app.manager.chat.NoticeManager;
     import com.rpgGame.app.manager.guild.GuildManager;
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.core.app.AppConstant;
@@ -167,11 +168,15 @@
 			openModeByInfo(modeInfo,info.q_id.toString(),data,isAutoHide);
 		}
 		
-		public static function openAppPaneById(id:String,data:Object = null,isAutoHide:Boolean = true):void
+		public static function openAppPaneById(id:String,data:Object = null,isAutoHide:Boolean = true,isError:Boolean = true):void
 		{
 			var info:Q_newfunc = NewFuncCfgData.getdataById(id);
 			if(info==null)
+			{
+				if(isError)
+					NoticeManager.showNotifyById(61040);
 				return ;
+			}
 			openFunctionId(info,data,isAutoHide);
 		}
 		
