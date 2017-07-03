@@ -55,7 +55,7 @@ package com.rpgGame.app.ui.scene
 			super.onShow();
 			addEvent();
 			setUiRefresh();
-			
+			setStep(2);
 			setUisite();
 		}
 		override protected function onHide():void
@@ -93,7 +93,13 @@ package com.rpgGame.app.ui.scene
 				_skin.shanghai_List.visible=false;
 				
 			}
-			
+			else if(step==2)
+			{
+				_skin.sec_navi0.visible=true;
+				_skin.sec_navi2.visible=true;
+				_skin.shanghai_List.visible=true;
+				
+			}
 			
 		}
 		

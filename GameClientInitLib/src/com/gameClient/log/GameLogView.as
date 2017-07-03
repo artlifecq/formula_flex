@@ -40,6 +40,7 @@ package com.gameClient.log
 				LogShortcutController.init( stage );//增加日志快捷键
 				LogShortcutController.setKeyListFun( keyList , _gameLogView.showOrHide, [ stage ] );
 			}
+			GameLogViewYT.init(stage);
 		}
 		
 		public function GameLogView(w:Number=300,h:Number=800)
