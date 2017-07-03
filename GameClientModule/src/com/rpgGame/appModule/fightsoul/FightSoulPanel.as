@@ -43,6 +43,7 @@ package com.rpgGame.appModule.fightsoul
 	import org.mokylin.skin.app.zhanhun.Shuxing_Skin;
 	import org.mokylin.skin.app.zhanhun.Zhanhun_Skin;
 	
+	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 	import starling.events.Touch;
 	import starling.events.TouchPhase;
@@ -57,7 +58,7 @@ package com.rpgGame.appModule.fightsoul
 		private var _skillData:Q_skill_model;
 		private var _skillIcon:IconCDFace;
 		
-		private var _itemIconLists:Vector.<TouchToState>;
+		private var _itemIconLists:Vector.<IconCDFace>;
 		private var _showAvatarData : RoleData;
 		private var _fightsoul:InterAvatar3D;
 		private var _touchstate:ButtonTouchState;
@@ -65,7 +66,6 @@ package com.rpgGame.appModule.fightsoul
 		{
 			_skin=new Zhanhun_Skin();
 			super(_skin);
-			TipTargetManager.show(_skin.pro_jindu, TargetTipsMaker.makeSimpleTextTips(LanguageConfig.getText(LangUI_2.FightSoulExpTip)));
 			initView();
 		}
 		
@@ -133,7 +133,7 @@ package com.rpgGame.appModule.fightsoul
 			for(var index:int = 0;index<_itemIconLists.length;index++)
 			{
 				if(FightSoulManager.instance().isGetReward(index))
-					GrayFilter.gray(_itemIconLists[index].target);
+					GrayFilter.gray(_itemIconLists[index]);
 				else
 					_itemIconLists[index].target.filter = null;
 			}
@@ -205,7 +205,6 @@ package com.rpgGame.appModule.fightsoul
 			}
 			refeashQualityView();
 		}
-		
 		private function initView():void
 		{
 			var content:Inter3DContainer = new Inter3DContainer();
@@ -239,24 +238,33 @@ package com.rpgGame.appModule.fightsoul
 			
 			var length:int = FightSoulManager.instance().RewardInfos.length;
 			var icon:IconCDFace
-			_itemIconLists = new Vector.<TouchToState>();
+			_itemIconLists = new Vector.<IconCDFace>();
 			for(var i:int = 0;i<length;i++)
 			{
 				icon= IconCDFace.create(IcoSizeEnum.ICON_48);
-				icon.width = icon.height = IcoSizeEnum.ICON_48;
 				icon.setBg(GridBGType.GRID_SIZE_48);
-				icon.x = 669+61*i;
-				icon.y = 448;
+				icon.x = 673+61*i;
+				icon.y = 465;
 				addChild(icon);
-				var touch:TouchToState = new TouchToState(icon,rewardIconTriggeredHandler);
-				touch.data = i;
-				_itemIconLists.push(touch);
+				/*var touch:TouchToState = new TouchToState(icon,rewardIconTriggeredHandler);
+				touch.data = i;*/
+				_itemIconLists.push(icon);
 			}
 			
-			 TipTargetManager.show( _skin.btn_shuoming,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(27)));
-			 
+			TipTargetManager.show( _skin.btn_shuoming,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(27)));
+			TipTargetManager.show(_skin.pro_jindu, TargetTipsMaker.makeSimpleTextTips(LanguageConfig.getText(LangUI_2.FightSoulExpTip)));
 		}
-		
+		override protected function onTouchTarget(target:DisplayObject):void
+		{
+			super.onTouchTarget(target);
+			if(target is IconCDFace)
+			{
+				var index:int = _itemIconLists.indexOf(IconCDFace(target));
+				if(index<0)
+					return ;
+				FightSoulManager.instance().getRewardByIndex(index);
+			}
+		}
 		private function refeashView():void
 		{
 			refeashQualityView();
@@ -264,18 +272,16 @@ package com.rpgGame.appModule.fightsoul
 			refeashVitality();
 			_skin.num_lv.visible = false;
 			listrefeash();
-			refeashRewards();
-			
 			FaceUtil.SetSkillGrid(_skillIcon, FaceUtil.chanceSpellToFaceInfo(_skillData), true);//目前Tips有bug,待修改
 			_skillIcon.setIconPoint(5,5);
 			var icon:IconCDFace
 			for(var index:int = 0;index<_itemIconLists.length;index++)
 			{
-				icon = _itemIconLists[index].target as IconCDFace
+				icon = _itemIconLists[index];
 				FaceUtil.setGridData(icon,FightSoulManager.instance().RewardInfos[index],true);
 				icon.setIconPoint(4,4);
-				//				 icon.setQualityImageIconPoint(6,7);
 			}
+			refeashRewards();
 		}
 		private function rewardIconTriggeredHandler(touch:Touch,ts:TouchToState):void
 		{
@@ -378,7 +384,7 @@ package com.rpgGame.appModule.fightsoul
 			
 			var scale:Number = modeinfo.q_panleScale/100;
 			this._fightsoul.curRole.setScale(scale);
-			this._fightsoul.y = modeinfo.q_panleY*scale;
+			this._fightsoul.y = modeinfo.q_panleY;
 		}
 		private function get  currentMode():Q_fightsoul
 		{

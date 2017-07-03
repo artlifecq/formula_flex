@@ -19,7 +19,7 @@
     {
         public static var funcBits:Object = null;
         private static var _statusMap:HashMap = new HashMap();
-		
+		public static var needShowOpenMode:Boolean = true;
 		/**
 		 * 检查已经开启的新功能,并通知消息 
 		 * @param level
@@ -41,10 +41,13 @@
 			}
 			if(isdispatch)
 			{
-				if(itemlist.length>0)
-					AppManager.showAppNoHide(AppConstant.OPEN_FUNCTION,itemlist.concat());
-				else
-					AppManager.hideApp(AppConstant.OPEN_FUNCTION);
+				if(needShowOpenMode)
+				{
+					if(itemlist.length>0)
+						AppManager.showAppNoHide(AppConstant.OPEN_FUNCTION,itemlist.concat());
+					else
+						AppManager.hideApp(AppConstant.OPEN_FUNCTION);
+				}
 				EventManager.dispatchEvent(FunctionOpenEvent.FUNCTIONOPENID,itemlist);
 			}
 			openNoticeByLevel(level);

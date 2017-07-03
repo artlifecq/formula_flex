@@ -10,6 +10,7 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.manager.FangChenMiManager;
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
@@ -191,6 +192,10 @@ package   com.rpgGame.app.manager.debug
 				var id:int = arg[0];
 				var state:int = arg[1];
 				ActivetyDataManager.setActState(id,state,30);
+			});
+			commandList.put( ".showom", function (...arg):void
+			{
+				FunctionOpenManager.needShowOpenMode = arg[0]==1;
 			});
 		}
 		

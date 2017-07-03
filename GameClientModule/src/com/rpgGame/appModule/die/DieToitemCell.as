@@ -1,6 +1,6 @@
 package com.rpgGame.appModule.die
 {
-	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.clientConfig.Q_die;
 	
@@ -35,8 +35,8 @@ package com.rpgGame.appModule.die
 		}
 		private function triggeeredHandler():void
 		{
-			if(_item.q_panel.length!=0){
-				AppManager.showApp(_item.q_panel);
+			if(_item.q_panel>0){
+				FunctionOpenManager.openFunctionById(_item.q_panel.toString());
 			}
 		}
 		
