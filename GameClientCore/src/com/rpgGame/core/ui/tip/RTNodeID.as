@@ -47,6 +47,10 @@ package com.rpgGame.core.ui.tip
 		public static const WX_SKILL_UPGRADE:String=WX_SKILL+"-upgrade";
 		public static const WX_JX:String=MAIN_WU_XUE+"-juexue";
 		public static const WX_JX_SKILL:String=WX_JX+"-skill";
+		//战魂
+		public static const MAIN_ZHANHUN:String="mainzhanhun";
+		public static const ZH_UP:String=MAIN_ZHANHUN+"-up";
+		public static const ZH_REWARD:String=MAIN_ZHANHUN+"-reward";
 		public function RTNodeID()
 		{
 		}

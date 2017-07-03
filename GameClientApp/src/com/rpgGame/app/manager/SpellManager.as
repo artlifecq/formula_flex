@@ -42,18 +42,18 @@ package com.rpgGame.app.manager
 		
 		
 		/**
-		 *是否可以升级或者升阶 
+		 *是否可以升级或者升阶 0,不可升级1可升级2，可升阶，3两者都可以
 		 * @param skillId
 		 * @return 
 		 * 
 		 */
-		public static function canUpOrRise(skillId:int):Boolean
+		public static function canUpOrRise(skillId:int):int
 		{
 			var result:Boolean=true;
 			var data:HeroData=MainRoleManager.actorInfo;
 			var skillInfo:SkillInfo=data.spellList.getSkillInfo(skillId);
 			if(!skillInfo){//没学习的技能
-				return false;
+				return 0;
 			}
 			var cfg:Q_skill_model=SpellDataManager.getSpellData(skillId,skillInfo.skillLevel);//技能配置
 			var canUp:Boolean=true;
@@ -113,7 +113,16 @@ package com.rpgGame.app.manager
 			}
 			
 			result=canUp||canRise;
-			return result;			
+			var ret:int=0;
+			if (canUp) 
+			{
+				ret+=1;
+			}
+			else if (canRise) 
+			{
+				ret+=2;
+			}
+			return ret;			
 		}
 		
 		/**
@@ -436,6 +445,18 @@ package com.rpgGame.app.manager
 					return LanguageConfig.getText( LangSpell.SPELL_GRID_POINT_2 );
 			}
 			return LanguageConfig.getText( LangSpell.SPELL_GRID_POINT_2 );
+		}
+		public static function hasSkillCanLevelUpOrUpgrade():Boolean
+		{
+			var list:Vector.<Q_skill_model>=SpellDataManager.getBasicSkills(MainRoleManager.actorInfo.job);//基本职业技能
+			for each (var qSkill:Q_skill_model in list) 
+			{
+				if (canUpOrRise(qSkill.q_skillID)>0) 
+				{
+					return true;
+				}
+			}
+			return false;
 		}
 	}
 }

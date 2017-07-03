@@ -1,12 +1,16 @@
 package com.rpgGame.appModule.skill
 {
+	import com.rpgGame.app.manager.SpellManager;
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.ui.tab.ViewUI;
+	import com.rpgGame.appModule.vip.RewardMarkCtrl;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.SpellEvent;
+	import com.rpgGame.core.ui.tip.RTNodeID;
+	import com.rpgGame.core.ui.tip.RewardMarkTip;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
@@ -21,6 +25,7 @@ package com.rpgGame.appModule.skill
 	
 	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.controls.ScrollPolicy;
+	import feathers.controls.ToggleButton;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.wuxue.jineng.jineng_Skin;
@@ -54,6 +59,9 @@ package com.rpgGame.appModule.skill
 		private var basicItems:Vector.<SkillItem>;
 		private var otherItems:Vector.<SkillItem>;
 		
+		private var _levelUpTip:RewardMarkTip;
+		private var _upGradeTip:RewardMarkTip;
+		private var _tabBtns:Array;
 		public function SkillStudyView()
 		{
 			_skin=new jineng_Skin();
@@ -139,6 +147,18 @@ package com.rpgGame.appModule.skill
 			_lastSp.y=item.y+item.height+40;
 			_skillContainer.addChild(_lastSp);
 			this._skin.vs_bar.addChild(_skillContainer);
+			
+			
+			_tabBtns=[new ToggleButton(),new ToggleButton()];
+			_levelUpTip=new RewardMarkTip(_tabBtns[0],85,false);
+			_upGradeTip=new RewardMarkTip(_tabBtns[1],85,false);
+			_skin.tab_zizhi.tabFactory=onTabCreate;
+		}
+		
+		private function onTabCreate():ToggleButton
+		{
+			// TODO Auto Generated method stub
+			return _tabBtns.shift();
 		}
 		
 		private function updateSkillList():void
@@ -174,6 +194,16 @@ package com.rpgGame.appModule.skill
 			
 			skillUpgrade.update(selectedItem.skillCfg,selectedItem.skillInfo);
 			skillRise.update(selectedItem.skillCfg,selectedItem.skillInfo);
+			var ret:int=SpellManager.canUpOrRise(selectedItem.skillCfg.q_skillID);
+			if (_levelUpTip) 
+			{
+				_levelUpTip.hasReward=(ret==1)||ret==3;
+			}
+			if (_upGradeTip) 
+			{
+				_upGradeTip.hasReward=ret==2||ret==3;
+			}
+			notifyUpdate(RTNodeID.WX_SKILL);
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -255,6 +285,15 @@ package com.rpgGame.appModule.skill
 			
 			skillUpgrade.update(selectedItem.skillCfg,selectedItem.skillInfo);
 			skillRise.update(selectedItem.skillCfg,selectedItem.skillInfo);
+			var ret:int=SpellManager.canUpOrRise(selectedItem.skillCfg.q_skillID);
+			if (_levelUpTip) 
+			{
+				_levelUpTip.hasReward=(ret==1)||ret==3;
+			}
+			if (_upGradeTip) 
+			{
+				_upGradeTip.hasReward=ret==2||ret==3;
+			}
 		}
 		
 		private function updateZhenqi():void

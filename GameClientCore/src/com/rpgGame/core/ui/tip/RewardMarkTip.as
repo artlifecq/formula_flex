@@ -19,7 +19,7 @@ package  com.rpgGame.core.ui.tip
 		private var _needGray:Boolean;
 		private var _hasReward:Boolean;
 		private var _disW:int;
-		public function RewardMarkTip(dis:DisplayObjectContainer,dw:int,gray:Boolean=true)
+		public function RewardMarkTip(dis:DisplayObjectContainer,dw:int,gray:Boolean=false)
 		{
 			this._disW=dw;
 			this._dis=dis;

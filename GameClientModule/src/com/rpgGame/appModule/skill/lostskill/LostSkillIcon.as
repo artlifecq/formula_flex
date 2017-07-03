@@ -3,6 +3,9 @@ package com.rpgGame.appModule.skill.lostskill
 	import com.rpgGame.app.manager.LostSkillManager;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.core.ui.tip.RTNodeID;
+	import com.rpgGame.core.ui.tip.RewardMarkTip;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.netData.lostSkill.bean.SkillStateInfo;
@@ -17,6 +20,7 @@ package com.rpgGame.appModule.skill.lostskill
 		private var _skin:Juexue_Item;
 		private var _data:Q_lostskill_open;
 		private var _stateinfo:SkillStateInfo;
+		private var _markTip:RewardMarkTip;
 		public function LostSkillIcon(content:SkinnableContainer,data:Q_lostskill_open,groupName:String):void
 		{
 			_skin = content.skin as Juexue_Item;
@@ -34,6 +38,9 @@ package com.rpgGame.appModule.skill.lostskill
 			_skin.lb_weijihuo.touchable = false;
 			_skin.qiyong.touchable = false;
 			_skin.lb_weijihuo.touchable = false;
+			
+			//
+			_markTip=new RewardMarkTip(_skin.container,94);
 		}
 		
 		public function refeashView():void
@@ -46,10 +53,13 @@ package com.rpgGame.appModule.skill.lostskill
 				_skin.lb_weijihuo.visible = true;
 				GrayFilter.gray(_skin.icons);
 				GrayFilter.gray(_skin.uiName);
-			}else{
+				_markTip.hasReward=false;
+			}else
+			{
 				_skin.lb_weijihuo.visible = false;
 				_skin.icons.filter = null;
 				_skin.uiName.filter = null;
+				_markTip.hasReward=LostSkillManager.instance().isLostSkillCanLevelUp(_data.q_id);
 			}
 			
 		}

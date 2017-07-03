@@ -1,8 +1,10 @@
 package com.rpgGame.app.manager
 {
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.display2D.AttackFace;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
+	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
@@ -14,9 +16,11 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_up;
+	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.SceneCharType;
+	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.fight.message.ResAttackResultMessage;
 	import com.rpgGame.netData.lostSkill.bean.SkillStateInfo;
 	import com.rpgGame.netData.lostSkill.message.CSActivitSkillMessage;
@@ -283,6 +287,48 @@ package com.rpgGame.app.manager
 				}
 			}
 			return false;
+		}
+		private static const maxLevel:int = 100;
+		public function hasLostSkillCanLevelUp():Boolean
+		{
+			if (_infos==null||_infos.length==0) 
+			{
+				return false;
+			}
+			for each (var skill:SkillStateInfo in _infos) 
+			{
+				return isLostSkillCanLevelUp(skill.skillId);
+			}
+			return false;
+		}
+		public function isLostSkillCanLevelUp(skillId:int):Boolean
+		{
+			var skill:SkillStateInfo=getSkillStateInfoById(skillId);
+			if (!skill) 
+			{
+				return false;
+			}
+			if ( skill.level >=maxLevel) 
+			{
+				return false;
+			}
+			var info:HeroData=MainRoleManager.actorInfo;
+			if(skill.level>info.totalStat.level)
+			{
+				
+				return false;
+			}
+			var updata:Q_lostskill_up = LostSkillUpData.getDatabyIdAndLevel(skill.skillId,skill.level);
+			var itemInfo:Object = JSONUtil.decode( updata.q_cost)[0];
+			
+			var itemModelId:int = itemInfo["mod"];
+			var num:int = itemInfo["num"];
+			var total:int = BackPackManager.instance.getBagItemsCountById(itemModelId);
+			if(total<num)
+			{
+				return false;
+			}
+			return true;
 		}
 	}
 }
