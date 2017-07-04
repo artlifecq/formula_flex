@@ -138,12 +138,12 @@ package com.rpgGame.appModule.fightsoul
 			{
 				if(FightSoulManager.instance().isGetReward(index))
 				{
-					GrayFilter.gray(_itemIconLists[index].target);
+					GrayFilter.gray(_itemIconLists[index].target.parent);
 					
 				}
 				else
 				{
-					_itemIconLists[index].target.filter = null;
+					_itemIconLists[index].target.parent.filter = null;
 				}
 				setRTNState(RTNodeID.ZH_REWARD+"-"+index,FightSoulManager.instance().canGetReward(index));
 			}

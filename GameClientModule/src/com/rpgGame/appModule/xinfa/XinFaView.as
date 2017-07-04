@@ -410,6 +410,10 @@ package com.rpgGame.appModule.xinfa
 				{
 					checkForUpdateJX();
 				}
+				else
+				{
+					checkForActive();
+				}
 				//没激活是不是材料
 				if (_curMap&&_curMap.cheatsVo.level==0) 
 				{
@@ -454,6 +458,20 @@ package com.rpgGame.appModule.xinfa
 				if (map) 
 				{
 					map.checkForUpdateJX();
+				}
+			}
+		}
+		private function checkForActive():void
+		{
+			var keys:Array=_mapsHash.keys();
+			var tmp:Array;
+			var map:CheatsMap;
+			for each (var key:int in keys) 
+			{
+				map=_mapsHash.getValue(key);
+				if (map) 
+				{
+					map.updateBtnState();
 				}
 			}
 		}

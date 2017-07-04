@@ -51,6 +51,14 @@ package com.rpgGame.core.ui.tip
 		public static const MAIN_ZHANHUN:String="mainzhanhun";
 		public static const ZH_UP:String=MAIN_ZHANHUN+"-up";
 		public static const ZH_REWARD:String=MAIN_ZHANHUN+"-reward";
+		
+		//社交
+		public static const MAIN_SOCAIL:String="mainsocial";
+		public static const GUILD:String=MAIN_SOCAIL+"-guild";
+		public static const GUILD_INFO:String=GUILD+"-info";
+		public static const GUILD_REWARD:String=GUILD+"-reward";
+		public static const GUILD_UP:String=GUILD+"-up";
+		public static const GUILD_UP_BTN:String=GUILD+"-upbtn";
 		public function RTNodeID()
 		{
 		}

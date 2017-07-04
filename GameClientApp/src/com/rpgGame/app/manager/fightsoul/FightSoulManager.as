@@ -224,6 +224,23 @@ package com.rpgGame.app.manager.fightsoul
 			}
 			return true;
 		}
+		public function hasSthNotice():Boolean
+		{
+			if (canLevelUp()) 
+			{
+				return true;
+			}
+			var len:int=_rewards.length;
+			for (var i:int = 0; i < len; i++) 
+			{
+				if (canGetReward(i)) 
+				{
+					return true;
+				}
+			}
+			
+			return false;
+		}
 		public function chageModeLevel(level:int):void
 		{
 			var msg:CSFightSoulChangeModelMessage = new CSFightSoulChangeModelMessage();

@@ -156,7 +156,7 @@ package  com.rpgGame.appModule.xinfa.sub
 			updateFirstLine(false);
 			updateBtnState();
 		}
-		private function updateBtnState():void
+		public function updateBtnState():void
 		{
 			var noGray:Boolean=false;
 			if (_cheatsVo.level>0) 
@@ -168,6 +168,7 @@ package  com.rpgGame.appModule.xinfa.sub
 				noGray=Mgr.cheatsMgr.getCanActive(_cheatsVo.cheatsConfig.q_id);
 			}
 			_btn.filter=noGray>0?null:grayFilter;
+			notifyUpdate(RTNodeID.XF+"_"+_cheatsVo.cheatsConfig.q_id);
 		}
 		private function updateFirstLine(useTween:Boolean):void
 		{

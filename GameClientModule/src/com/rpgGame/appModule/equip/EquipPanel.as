@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.equip
 {
+	import com.rpgGame.app.manager.goods.ItemManager;
 	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.manager.mount.ZhanQiManager;
 	import com.rpgGame.app.ui.TabBarPanel;
@@ -27,11 +28,11 @@ package com.rpgGame.appModule.equip
 			_skin=new Zhuangbei_Skin();
 			super(_skin);
 			
-			addNode(RTNodeID.MAIN_EQUIP,RTNodeID.EQUIP_QH,_tabBar.getTabDataByTabKey(EmFunctionID.EM_QIANGHUA).button,140,null,false,null,true);
-			addNode(RTNodeID.MAIN_EQUIP,RTNodeID.EQUIP_ZM,_tabBar.getTabDataByTabKey(EmFunctionID.EM_ZUOMO).button,140,null,false,null,true);
-			addNode(RTNodeID.MAIN_EQUIP,RTNodeID.EQUIP_XL,_tabBar.getTabDataByTabKey(EmFunctionID.EM_XILIAN).button,140,null,false,null,true);
-			addNode(RTNodeID.MAIN_EQUIP,RTNodeID.EQUIP_JC,_tabBar.getTabDataByTabKey(EmFunctionID.EM_JICHENG).button,140,null,false,null,true);
-			addNode(RTNodeID.MAIN_EQUIP,RTNodeID.EQUIP_HC,_tabBar.getTabDataByTabKey(EmFunctionID.EM_HECHENG).button,140,null,false,null,true);
+			addNode(RTNodeID.MAIN_EQUIP,RTNodeID.EQUIP_QH,_tabBar.getTabDataByTabKey(EmFunctionID.EM_QIANGHUA).button,140,ItemManager.checkHasEquip2Strengthen,false,null,true);
+			addNode(RTNodeID.MAIN_EQUIP,RTNodeID.EQUIP_ZM,_tabBar.getTabDataByTabKey(EmFunctionID.EM_ZUOMO).button,140,ItemManager.checkHasEquip2ZM,false,null,true);
+			addNode(RTNodeID.MAIN_EQUIP,RTNodeID.EQUIP_XL,_tabBar.getTabDataByTabKey(EmFunctionID.EM_XILIAN).button,140,ItemManager.checkHasEquip2XILIAN,false,null,true);
+			addNode(RTNodeID.MAIN_EQUIP,RTNodeID.EQUIP_JC,_tabBar.getTabDataByTabKey(EmFunctionID.EM_JICHENG).button,140,ItemManager.checkItemCanInheritance,false,null,true);
+			addNode(RTNodeID.MAIN_EQUIP,RTNodeID.EQUIP_HC,_tabBar.getTabDataByTabKey(EmFunctionID.EM_HECHENG).button,140,ItemManager.checkHasEquip2HC,false,null,true);
 		}
 		
 		override protected function initTabBarDatas():void

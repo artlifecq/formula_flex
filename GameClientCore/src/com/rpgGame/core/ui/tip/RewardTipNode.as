@@ -10,19 +10,35 @@ package com.rpgGame.core.ui.tip
 	public class RewardTipNode
 	{
 		public static const allNode:HashMap=new HashMap();
-		private static const timeNodes:HashMap=new HashMap();
+		private static const timeNodes:Vector.<RewardTipNode>=new Vector.<RewardTipNode>()
 		private static var checkTime:int;
+		private static var timerIndex:int=0;
+		private static const STEP:int=2;
 		private static function onTimer():void
 		{
 			// TODO Auto Generated method stub
 			if (getTimer()-checkTime>5000) 
 			{
 				checkTime=getTimer();
-				timeNodes.eachValue(timeUpdate);
+				allNode.eachValue(setTip2Top);
 			}
-			allNode.eachValue(setTip2Top);
+			var len:int=timeNodes.length;
+			if (timerIndex>=len) 
+			{
+				timerIndex=0;
+			}
+			var time:int=getTimer();
+			for (var i:int = 0; i < STEP; i++) 
+			{
+				if (timerIndex<=len-1) 
+				{
+					timeNodes[timerIndex].update();
+				}
+				timerIndex++;
+			}
+			//trace("usetime2:"+(getTimer()-time));
 		}
-		private static const _timer:GameTimer=new GameTimer("RewardTipNode",5000,0,onTimer);
+		private static const _timer:GameTimer=new GameTimer("RewardTipNode",1000,0,onTimer);
 		_timer.start();
 		private static function setTip2Top(node:RewardTipNode):void
 		{
@@ -51,7 +67,8 @@ package com.rpgGame.core.ui.tip
 			allNode.put(_key,this);
 			if (isInTimer) 
 			{
-				timeNodes.put(_key,this);
+				timeNodes.push(this);
+				update();
 			}
 		}
 		public function update():void
@@ -170,7 +187,11 @@ package com.rpgGame.core.ui.tip
 				_childrenNodes.length=0;
 			}
 			allNode.remove(_key);
-			timeNodes.remove(_key);
+			var index:int=timeNodes.indexOf(this);
+			if (index!=-1) 
+			{
+				timeNodes.splice(index,1);
+			}
 			if (_parentNodeKey) 
 			{
 				var p:RewardTipNode=getNode(_parentNodeKey);
