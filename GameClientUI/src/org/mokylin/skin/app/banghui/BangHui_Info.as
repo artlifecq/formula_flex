@@ -51,7 +51,7 @@ package org.mokylin.skin.app.banghui
 			
 			this.currentState = "normal";
 			this.height = 600;
-			this.width = 947;
+			this.width = 956;
 			this.elementsContent = [__BangHui_Info_UIAsset2_i(),__BangHui_Info_UIAsset3_i(),btnJiesan_i(),btnZhaoji_i(),lbBangZhu_i(),lbDengji_i(),__BangHui_Info_UIAsset4_i(),NumZhanli_i(),btnRenwu_i(),btnJineng_i(),btnZhengba_i(),btnFuli_i()];
 			
 			states = {
@@ -73,8 +73,8 @@ package org.mokylin.skin.app.banghui
 			temp.label = "1364364";
 			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow2;
 			temp.width = 148;
-			temp.x = 763;
-			temp.y = 468;
+			temp.x = 767;
+			temp.y = 472;
 			return temp;
 		}
 
@@ -82,8 +82,8 @@ package org.mokylin.skin.app.banghui
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/banghui/dibg.png";
-			temp.x = 289;
-			temp.y = 524;
+			temp.x = 293;
+			temp.y = 527;
 			return temp;
 		}
 
@@ -91,8 +91,8 @@ package org.mokylin.skin.app.banghui
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/big_bg/banghui/bg1_right.png";
-			temp.x = 286;
-			temp.y = 81;
+			temp.x = 290;
+			temp.y = 85;
 			return temp;
 		}
 
@@ -100,8 +100,8 @@ package org.mokylin.skin.app.banghui
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/common/zdl2.png";
-			temp.x = 691;
-			temp.y = 458;
+			temp.x = 695;
+			temp.y = 462;
 			return temp;
 		}
 
@@ -111,8 +111,8 @@ package org.mokylin.skin.app.banghui
 			btnFuli = temp;
 			temp.name = "btnFuli";
 			temp.styleClass = org.mokylin.skin.app.banghui.button.ButtonFuli;
-			temp.x = 858;
-			temp.y = 179;
+			temp.x = 862;
+			temp.y = 183;
 			return temp;
 		}
 
@@ -126,8 +126,8 @@ package org.mokylin.skin.app.banghui
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xCFC6AE;
 			temp.width = 112;
-			temp.x = 798;
-			temp.y = 541;
+			temp.x = 802;
+			temp.y = 545;
 			return temp;
 		}
 
@@ -137,8 +137,8 @@ package org.mokylin.skin.app.banghui
 			btnJineng = temp;
 			temp.name = "btnJineng";
 			temp.styleClass = org.mokylin.skin.app.banghui.button.ButtonBh_jineng;
-			temp.x = 792;
-			temp.y = 335;
+			temp.x = 796;
+			temp.y = 339;
 			return temp;
 		}
 
@@ -148,8 +148,8 @@ package org.mokylin.skin.app.banghui
 			btnRenwu = temp;
 			temp.name = "btnRenwu";
 			temp.styleClass = org.mokylin.skin.app.banghui.button.ButtonBh_renwu;
-			temp.x = 731;
-			temp.y = 386;
+			temp.x = 735;
+			temp.y = 390;
 			return temp;
 		}
 
@@ -163,8 +163,8 @@ package org.mokylin.skin.app.banghui
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xCFC6AE;
 			temp.width = 112;
-			temp.x = 679;
-			temp.y = 541;
+			temp.x = 683;
+			temp.y = 545;
 			return temp;
 		}
 
@@ -174,8 +174,8 @@ package org.mokylin.skin.app.banghui
 			btnZhengba = temp;
 			temp.name = "btnZhengba";
 			temp.styleClass = org.mokylin.skin.app.banghui.button.ButtonBh_zhengba;
-			temp.x = 828;
-			temp.y = 256;
+			temp.x = 832;
+			temp.y = 260;
 			return temp;
 		}
 
@@ -187,8 +187,8 @@ package org.mokylin.skin.app.banghui
 			temp.text = "名字共六个字";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 330;
-			temp.y = 227;
+			temp.x = 334;
+			temp.y = 231;
 			return temp;
 		}
 
@@ -202,8 +202,8 @@ package org.mokylin.skin.app.banghui
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 61;
-			temp.x = 345;
-			temp.y = 267;
+			temp.x = 349;
+			temp.y = 271;
 			return temp;
 		}
 

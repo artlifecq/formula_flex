@@ -9,7 +9,7 @@ package org.mokylin.skin.app.banghui
 	import org.mokylin.skin.app.banghui.check.CheckBoxSkin_2;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
-	
+
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
@@ -21,32 +21,30 @@ package org.mokylin.skin.app.banghui
 		//                                定义成员变量
 		//==========================================================================
 		public var bg:feathers.controls.UIAsset;
-		
+
 		public var btnClose:feathers.controls.Button;
-		
+
 		public var btnOk:feathers.controls.Button;
-		
+
 		public var chkBangzhu:feathers.controls.Check;
-		
+
 		public var chkFubangzhu:feathers.controls.Check;
-		
+
 		public var chkPutong:feathers.controls.Check;
-		
+
 		public var chkZhanglao:feathers.controls.Check;
-		
+
 		public var lbBangzhu:feathers.controls.Label;
-		
+
 		public var lbFubangzhu:feathers.controls.Label;
-		
+
 		public var lbMsg:feathers.controls.Label;
-		
+
 		public var lbPutong:feathers.controls.Label;
-		
+
 		public var lbZhanglao:feathers.controls.Label;
-		
-		public var title:feathers.controls.Label;
-		
-		
+
+
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
@@ -57,14 +55,14 @@ package org.mokylin.skin.app.banghui
 			this.currentState = "normal";
 			this.height = 291;
 			this.width = 580;
-			this.elementsContent = [bg_i(),__TanKuang_ZhiWeiRenMing_UIAsset1_i(),title_i(),btnClose_i(),btnOk_i(),__TanKuang_ZhiWeiRenMing_UIAsset2_i(),__TanKuang_ZhiWeiRenMing_UIAsset3_i(),lbMsg_i(),chkBangzhu_i(),lbBangzhu_i(),__TanKuang_ZhiWeiRenMing_Label1_i(),chkFubangzhu_i(),lbFubangzhu_i(),__TanKuang_ZhiWeiRenMing_Label2_i(),chkZhanglao_i(),lbZhanglao_i(),__TanKuang_ZhiWeiRenMing_Label3_i(),chkPutong_i(),lbPutong_i(),__TanKuang_ZhiWeiRenMing_Label4_i()];
+			this.elementsContent = [bg_i(),__TanKuang_ZhiWeiRenMing_UIAsset1_i(),btnClose_i(),btnOk_i(),__TanKuang_ZhiWeiRenMing_UIAsset2_i(),__TanKuang_ZhiWeiRenMing_UIAsset3_i(),lbMsg_i(),chkBangzhu_i(),lbBangzhu_i(),__TanKuang_ZhiWeiRenMing_Label1_i(),chkFubangzhu_i(),lbFubangzhu_i(),__TanKuang_ZhiWeiRenMing_Label2_i(),chkZhanglao_i(),lbZhanglao_i(),__TanKuang_ZhiWeiRenMing_Label3_i(),chkPutong_i(),lbPutong_i(),__TanKuang_ZhiWeiRenMing_Label4_i(),__TanKuang_ZhiWeiRenMing_UIAsset4_i()];
 			
 			states = {
 			};
 			skinNames={};
 		}
-		
-		
+
+
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
@@ -78,7 +76,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 88;
 			return temp;
 		}
-		
+
 		private function __TanKuang_ZhiWeiRenMing_Label2_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -89,7 +87,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 123;
 			return temp;
 		}
-		
+
 		private function __TanKuang_ZhiWeiRenMing_Label3_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -100,7 +98,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 160;
 			return temp;
 		}
-		
+
 		private function __TanKuang_ZhiWeiRenMing_Label4_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -111,7 +109,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 198;
 			return temp;
 		}
-		
+
 		private function __TanKuang_ZhiWeiRenMing_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -122,7 +120,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 38;
 			return temp;
 		}
-		
+
 		private function __TanKuang_ZhiWeiRenMing_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -133,7 +131,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 79;
 			return temp;
 		}
-		
+
 		private function __TanKuang_ZhiWeiRenMing_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -144,7 +142,18 @@ package org.mokylin.skin.app.banghui
 			temp.y = 151;
 			return temp;
 		}
-		
+
+		private function __TanKuang_ZhiWeiRenMing_UIAsset4_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.touchable = false;
+			temp.touchGroup = true;
+			temp.styleName = "ui/app/banghui/word/head_zhiwei.png";
+			temp.x = 247;
+			temp.y = 8;
+			return temp;
+		}
+
 		private function bg_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -157,7 +166,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 0;
 			return temp;
 		}
-		
+
 		private function btnClose_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
@@ -168,7 +177,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 7;
 			return temp;
 		}
-		
+
 		private function btnOk_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
@@ -183,7 +192,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 242;
 			return temp;
 		}
-		
+
 		private function chkBangzhu_i():feathers.controls.Check
 		{
 			var temp:feathers.controls.Check = new feathers.controls.Check();
@@ -194,7 +203,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 86;
 			return temp;
 		}
-		
+
 		private function chkFubangzhu_i():feathers.controls.Check
 		{
 			var temp:feathers.controls.Check = new feathers.controls.Check();
@@ -205,7 +214,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 121;
 			return temp;
 		}
-		
+
 		private function chkPutong_i():feathers.controls.Check
 		{
 			var temp:feathers.controls.Check = new feathers.controls.Check();
@@ -216,7 +225,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 196;
 			return temp;
 		}
-		
+
 		private function chkZhanglao_i():feathers.controls.Check
 		{
 			var temp:feathers.controls.Check = new feathers.controls.Check();
@@ -227,7 +236,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 158;
 			return temp;
 		}
-		
+
 		private function lbBangzhu_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -240,7 +249,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 88;
 			return temp;
 		}
-		
+
 		private function lbFubangzhu_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -253,7 +262,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 123;
 			return temp;
 		}
-		
+
 		private function lbMsg_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -266,7 +275,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 52;
 			return temp;
 		}
-		
+
 		private function lbPutong_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -279,7 +288,7 @@ package org.mokylin.skin.app.banghui
 			temp.y = 198;
 			return temp;
 		}
-		
+
 		private function lbZhanglao_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -292,26 +301,6 @@ package org.mokylin.skin.app.banghui
 			temp.y = 160;
 			return temp;
 		}
-		
-		private function title_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			title = temp;
-			temp.name = "title";
-			temp.bold = true;
-			temp.touchable = false;
-			temp.touchGroup = false;
-			temp.letterSpacing = 2;
-			temp.fontSize = 16;
-			temp.text = "职位任命";
-			temp.textAlign = "center";
-			temp.color = 0xDDE2B1;
-			temp.nativeFilters = Fontter.filterObj[""];
-			temp.width = 240;
-			temp.x = 170;
-			temp.y = 11;
-			return temp;
-		}
-		
+
 	}
 }

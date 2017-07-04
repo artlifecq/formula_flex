@@ -51,7 +51,7 @@ package org.mokylin.skin.app.banghui
 			
 			this.currentState = "normal";
 			this.height = 600;
-			this.width = 947;
+			this.width = 956;
 			this.elementsContent = [__BangHui_Home_UIAsset2_i(),chkGuolv_i(),__BangHui_Home_Label1_i(),lbList_i(),__BangHui_Home_UIAsset3_i(),__BangHui_Home_Group1_i(),ListItem_i(),btnJoin_i(),grpFlip_i()];
 			
 			states = {
@@ -71,16 +71,16 @@ package org.mokylin.skin.app.banghui
 			temp.height = 401;
 			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
 			temp.width = 631;
-			temp.x = 295;
-			temp.y = 115;
+			temp.x = 299;
+			temp.y = 119;
 			return temp;
 		}
 
 		private function __BangHui_Home_Group1_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
-			temp.x = 291;
-			temp.y = 86;
+			temp.x = 295;
+			temp.y = 90;
 			temp.elementsContent = [__BangHui_Home_UIAsset4_i(),__BangHui_Home_UIAsset5_i(),__BangHui_Home_UIAsset6_i(),__BangHui_Home_UIAsset7_i(),__BangHui_Home_UIAsset8_i(),__BangHui_Home_UIAsset9_i(),__BangHui_Home_UIAsset10_i(),__BangHui_Home_UIAsset11_i()];
 			return temp;
 		}
@@ -91,8 +91,8 @@ package org.mokylin.skin.app.banghui
 			temp.text = "过滤满员帮会";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 339;
-			temp.y = 546;
+			temp.x = 343;
+			temp.y = 550;
 			return temp;
 		}
 
@@ -127,8 +127,8 @@ package org.mokylin.skin.app.banghui
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/banghui/dibg.png";
-			temp.x = 289;
-			temp.y = 524;
+			temp.x = 293;
+			temp.y = 527;
 			return temp;
 		}
 
@@ -138,8 +138,8 @@ package org.mokylin.skin.app.banghui
 			temp.height = 442;
 			temp.styleName = "ui/app/banghui/kuang1.png";
 			temp.width = 645;
-			temp.x = 286;
-			temp.y = 81;
+			temp.x = 290;
+			temp.y = 85;
 			return temp;
 		}
 
@@ -208,8 +208,8 @@ package org.mokylin.skin.app.banghui
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xCFC6AE;
 			temp.width = 112;
-			temp.x = 798;
-			temp.y = 541;
+			temp.x = 802;
+			temp.y = 545;
 			return temp;
 		}
 
@@ -242,8 +242,8 @@ package org.mokylin.skin.app.banghui
 			chkGuolv = temp;
 			temp.name = "chkGuolv";
 			temp.styleClass = org.mokylin.skin.app.banghui.check.CheckBoxSkin_2;
-			temp.x = 308;
-			temp.y = 544;
+			temp.x = 312;
+			temp.y = 548;
 			return temp;
 		}
 
@@ -252,8 +252,8 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grpFlip = temp;
 			temp.name = "grpFlip";
-			temp.x = 572;
-			temp.y = 509;
+			temp.x = 576;
+			temp.y = 513;
 			temp.elementsContent = [__BangHui_Home_UIAsset12_i(),lbNum_i(),btnPrev_i(),btnNext_i()];
 			return temp;
 		}
@@ -267,8 +267,8 @@ package org.mokylin.skin.app.banghui
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
-			temp.x = 721;
-			temp.y = 546;
+			temp.x = 725;
+			temp.y = 550;
 			return temp;
 		}
 
