@@ -145,11 +145,11 @@ package org.mokylin.skin.app.zhanchang
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnOk = temp;
 			temp.name = "btnOk";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.label = "确认";
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.label = "确 认";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.color = 0xCFC6AE;
-			temp.width = 112;
+			temp.color = 0xFFFFFF;
+			temp.width = 110;
 			temp.x = 177;
 			temp.y = 378;
 			return temp;

@@ -49,8 +49,8 @@ package org.mokylin.skin.component.slider
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			thumb = temp;
 			temp.name = "thumb";
+			temp.right = 1;
 			temp.styleClass = org.mokylin.skin.component.slider.skin_Slider.button.ButtonSkin_thumb;
-			temp.x = 147;
 			temp.y = 0;
 			return temp;
 		}

@@ -73,6 +73,7 @@ package com.rpgGame.app.ui.main.buff
 			for(var i:int=0;i<num;i++){
 				icon=goodBuffs[i];
 				if(icon.buffData.buffData.q_buff_id==data.buffData.q_buff_id){
+					icon.buffData=data;
 					return true;
 				}
 			}
@@ -80,6 +81,7 @@ package com.rpgGame.app.ui.main.buff
 			for(i=0;i<num;i++){
 				icon=badBuffs[i];
 				if(icon.buffData.buffData.q_buff_id==data.buffData.q_buff_id){
+					icon.buffData=data;
 					return true;
 				}
 			}
@@ -92,7 +94,8 @@ package com.rpgGame.app.ui.main.buff
 			if(data.buffData.q_icon_show==0||isCreate(data)){
 				return;
 			}
-			var icon:BuffIcon=new BuffIcon(IcoSizeEnum.ICON_36,true);
+			var isShowBG:Boolean=(data.buffData.q_buff_id==9||data.buffData.q_buff_id==10);
+			var icon:BuffIcon=new BuffIcon(IcoSizeEnum.ICON_36,!isShowBG);
 			icon.buffData=data;
 			icon.setUrlBg("ui/mainui/shortcut/buffkuang.png");
 			//			icon.setBg(GridBGType.GRID_SIZE_44);

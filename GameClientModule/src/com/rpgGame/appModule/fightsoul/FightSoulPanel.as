@@ -209,7 +209,7 @@ package com.rpgGame.appModule.fightsoul
 		private function initView():void
 		{
 			var content:Inter3DContainer = new Inter3DContainer();
-			_skin.modecontent.addChild(content);
+			_skin.container.addChild(content);
 			_fightsoul = new InterAvatar3D();
 			_fightsoul.x = 340;
 			content.addChild3D(_fightsoul);
@@ -231,11 +231,10 @@ package com.rpgGame.appModule.fightsoul
 			_skin.List.dataProvider = new ListCollection();
 			_skin.lb_progress.touchable = false;
 			
-			_skillIcon = IconCDFace.create(IcoSizeEnum.ICON_48);
-			_skillIcon.width = _skillIcon.height = IcoSizeEnum.ICON_48;
-			_skillIcon.setBg(GridBGType.GRID_SIZE_48);
-			_skillIcon.x = 554;
-			_skillIcon.y = 425;
+			_skillIcon = IconCDFace.create(IcoSizeEnum.ICON_64);
+			_skillIcon.setBg(GridBGType.GRID_SIZE_46);
+			_skillIcon.x = 558;
+			_skillIcon.y = 433;
 			addChild(_skillIcon);
 			
 			var length:int = FightSoulManager.instance().RewardInfos.length;
@@ -268,13 +267,13 @@ package com.rpgGame.appModule.fightsoul
 			refeashRewards();
 			
 			FaceUtil.SetSkillGrid(_skillIcon, FaceUtil.chanceSpellToFaceInfo(_skillData), true);//目前Tips有bug,待修改
-			_skillIcon.setIconPoint(6,7);
+			_skillIcon.setIconPoint(5,5);
 			var icon:IconCDFace
 			for(var index:int = 0;index<_itemIconLists.length;index++)
 			{
 				icon = _itemIconLists[index].target as IconCDFace
 				FaceUtil.setGridData(icon,FightSoulManager.instance().RewardInfos[index],true);
-				icon.setIconPoint(6,7);
+				icon.setIconPoint(4,4);
 				//				 icon.setQualityImageIconPoint(6,7);
 			}
 		}
@@ -379,7 +378,7 @@ package com.rpgGame.appModule.fightsoul
 			
 			var scale:Number = modeinfo.q_panleScale/100;
 			this._fightsoul.curRole.setScale(scale);
-			this._fightsoul.y = modeinfo.q_panleY*scale;
+			this._fightsoul.y = modeinfo.q_panleY;
 		}
 		private function get  currentMode():Q_fightsoul
 		{

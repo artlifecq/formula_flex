@@ -75,6 +75,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			super();
 			
 			this.currentState = "normal";
+			this.height = 601;
+			this.width = 956;
 			this.elementsContent = [__JingJiChan1_Skin_UIAsset2_i(),gNormal_i(),gTop_i(),skinInfo_i(),lbTime0_i(),lbTime_i(),__JingJiChan1_Skin_Label1_i(),numZhanli_i(),btnTiaoZhan_i(),btnBack_i(),btnJiangli_i(),item_msg_i(),skinBattke_i()];
 			
 			states = {
@@ -92,8 +94,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.text = "我的排名：";
 			temp.color = 0xBEA757;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 710;
-			temp.y = 548;
+			temp.x = 714;
+			temp.y = 561;
 			return temp;
 		}
 
@@ -101,8 +103,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/big_bg/zhanchang/bg.jpg";
-			temp.x = 18;
-			temp.y = 74;
+			temp.x = 22;
+			temp.y = 87;
 			return temp;
 		}
 
@@ -112,8 +114,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			btnBack = temp;
 			temp.name = "btnBack";
 			temp.styleClass = org.mokylin.skin.app.zhanchang.button.ButtonFanhui;
-			temp.x = 350;
-			temp.y = 74;
+			temp.x = 354;
+			temp.y = 87;
 			return temp;
 		}
 
@@ -123,8 +125,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			btnJiangli = temp;
 			temp.name = "btnJiangli";
 			temp.styleClass = org.mokylin.skin.app.zhanchang.button.ButtonJiangli;
-			temp.x = 350;
-			temp.y = 512;
+			temp.x = 354;
+			temp.y = 525;
 			return temp;
 		}
 
@@ -134,8 +136,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			btnTiaoZhan = temp;
 			temp.name = "btnTiaoZhan";
 			temp.styleClass = org.mokylin.skin.app.zhanchang.button.ButtonTiaozhan;
-			temp.x = 350;
-			temp.y = 74;
+			temp.x = 354;
+			temp.y = 87;
 			return temp;
 		}
 
@@ -144,8 +146,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			gNormal = temp;
 			temp.name = "gNormal";
-			temp.x = 23;
-			temp.y = 107;
+			temp.x = 27;
+			temp.y = 120;
 			temp.elementsContent = [skinRole3_i(),skinRole2_i(),skinRole1_i(),skinRole4_i(),skinRole5_i()];
 			return temp;
 		}
@@ -155,8 +157,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			gTop = temp;
 			temp.name = "gTop";
-			temp.x = 121;
-			temp.y = 109;
+			temp.x = 125;
+			temp.y = 122;
 			temp.elementsContent = [top3_i(),top2_i(),top1_i()];
 			return temp;
 		}
@@ -170,8 +172,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			var skin:StateSkin = new org.mokylin.skin.app.zhanchang.jingjichang.JingJiPaiMing()
 			temp.skin = skin
 			temp.width = 330;
-			temp.x = 600;
-			temp.y = 75;
+			temp.x = 604;
+			temp.y = 88;
 			return temp;
 		}
 
@@ -184,8 +186,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 117;
-			temp.x = 199;
-			temp.y = 548;
+			temp.x = 203;
+			temp.y = 561;
 			return temp;
 		}
 
@@ -198,8 +200,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.color = 0xBEA757;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 117;
-			temp.x = 100;
-			temp.y = 548;
+			temp.x = 104;
+			temp.y = 561;
 			return temp;
 		}
 
@@ -213,8 +215,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.label = "1168";
 			temp.styleClass = org.mokylin.skin.app.zhanchang.uinumber.UINumberNumber;
 			temp.width = 122;
-			temp.x = 777;
-			temp.y = 542;
+			temp.x = 781;
+			temp.y = 555;
 			return temp;
 		}
 
@@ -228,8 +230,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.skin = skin
 			temp.visible = false;
 			temp.width = 922;
-			temp.x = 14;
-			temp.y = 69;
+			temp.x = 18;
+			temp.y = 82;
 			return temp;
 		}
 
@@ -242,8 +244,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			var skin:StateSkin = new org.mokylin.skin.app.zhanchang.jingjichang.JingJi_Info()
 			temp.skin = skin
 			temp.width = 225;
-			temp.x = 19;
-			temp.y = 74;
+			temp.x = 23;
+			temp.y = 87;
 			return temp;
 		}
 

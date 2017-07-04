@@ -22,6 +22,8 @@ package com.rpgGame.appModule.activety.zonghe.lijin
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 	import starling.display.Sprite;
+	
+	import utils.TimerServer;
 
 	/**
 	 * 天降礼金结算面板
@@ -42,23 +44,24 @@ package com.rpgGame.appModule.activety.zonghe.lijin
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
+			setTime(10);
 			var dataInfo:Vector.<ItemInfo>;
 			hideItem();
-			/*if(data)
+			if(data)
 			{
 				dataInfo= data as Vector.<ItemInfo>;
 			}
 			if(dataInfo)
 			{
 				setReword(dataInfo);
-			}*/
-			setReword2();
-			TweenLite.delayedCall(6, hide);
+			}
+			//setReword2();
+			//TweenLite.delayedCall(6, hide);
 		}
 		override public function hide():void
 		{
 			super.hide();
-			TweenLite.killDelayedCallsTo(hide);
+			//TweenLite.killDelayedCallsTo(hide);
 		}
 		override protected function onTouchTarget(target:DisplayObject):void 
 		{
@@ -103,7 +106,7 @@ package com.rpgGame.appModule.activety.zonghe.lijin
 			var i:int;
 			var lenght:int=dataInfo.length<icoList.length?dataInfo.length:icoList.length;
 			for(i=0;i<lenght;i++)
-			{
+			{//L.l("奖励物品："+dataInfo[i].itemModelId+"数量"+dataInfo[i].num);
 				setIcon(icoList[i],dataInfo[i].itemModelId,dataInfo[i].num,icoBgList[i]);
 				icoList[i].x=i*83;
 			}
@@ -157,6 +160,25 @@ package com.rpgGame.appModule.activety.zonghe.lijin
 				
 			}
 			
+		}
+		private var remainTime:int;
+		private function setTime(time:int):void
+		{
+			var rTime:int=time;
+			remainTime=rTime;
+			_skin.subbut.label="确认("+remainTime.toString()+")";
+			TimerServer.remove(updateTime);
+			TimerServer.addLoop(updateTime,1000);
+		}
+		
+		private function updateTime():void
+		{
+			remainTime--;
+			_skin.subbut.label="确认("+remainTime.toString()+")";
+			if(remainTime==0){
+				hide();
+				TimerServer.remove(updateTime);
+			}
 		}
 	}
 }

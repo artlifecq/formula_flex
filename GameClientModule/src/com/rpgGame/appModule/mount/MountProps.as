@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.mount
 {
+	import com.rpgGame.app.fight.spell.NumberChangeEffect;
 	import com.rpgGame.app.manager.mount.MountShowData;
 	import com.rpgGame.app.utils.FightValueUtil;
 	
@@ -13,6 +14,7 @@ package com.rpgGame.appModule.mount
 		private var _propList:Vector.<MountPropView>;
 		private var _skin:ZuoqiCont_Skin;
 		private var _mountShowData:MountShowData;
+		private var _numbereffect:NumberChangeEffect;
 		public function MountProps(skin:ZuoqiCont_Skin):void
 		{
 			_skin = skin;
@@ -30,6 +32,7 @@ package com.rpgGame.appModule.mount
 			_propList.push(new MountPropView(_skin.lab_6.skin as Shuxing_Item,6));
 			_propList.push(new MountPropView(_skin.lab_7.skin as Shuxing_Item,7));
 			_propList.push(new MountPropView(_skin.lab_8.skin as Shuxing_Item,8));
+			_numbereffect = new NumberChangeEffect(_skin.NumZhanli);
 		}
 		
 		private var _isSHowNext:Boolean = true;
@@ -45,6 +48,15 @@ package com.rpgGame.appModule.mount
 			{
 				view.showUpLevelView(bool);
 			}
+			
+			if(bool)
+			{
+				_numbereffect.updateValue(_currentPower,_nextPower);
+				_numbereffect.runEffect();
+			}else{
+				_numbereffect.updateValue(_nextPower,_currentPower);
+				_numbereffect.runEffect();
+			}
 		}
 		private var _foundIndex:int;
 		private var _currentProp:Vector.<Number>;
@@ -57,11 +69,12 @@ package com.rpgGame.appModule.mount
 			_currentPower = FightValueUtil.calAtrributeFightPower(_currentProp.concat(),_mountShowData.heroJob);
 			if(_addProp!=null)
 			{
-				_nextPower = FightValueUtil.calAtrributeFightPower(_addProp.concat(),_mountShowData.heroJob);
+				_nextPower = FightValueUtil.calAtrributeFightPower(_mountShowData.nextProps,_mountShowData.heroJob);
 			}else{
 				_nextPower = 0;
 			}
-			_skin.NumZhanli.number = Math.floor(_currentPower+_nextPower*_mountShowData.percent);
+			_nextPower = Math.floor(_currentPower+_nextPower*_mountShowData.percent);
+			_numbereffect.updateValue(_currentPower,_nextPower);
 			_foundIndex = 0;
 			_disProps = _mountShowData.disProps;
 			for each(var view:MountPropView in _propList)

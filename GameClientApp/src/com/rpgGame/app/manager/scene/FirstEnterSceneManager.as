@@ -6,7 +6,6 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.app.manager.collect.CollectManager;
 	import com.rpgGame.app.manager.hud.ActivityBarManager;
 	import com.rpgGame.app.manager.map.MapUnitDataManager;
-	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.society.SocietyManager;
 	import com.rpgGame.app.manager.task.MiXinManager;
 	import com.rpgGame.app.manager.task.TouJingManager;
@@ -57,7 +56,6 @@ package com.rpgGame.app.manager.scene
 			EventManager.dispatchEvent(FunctionMessageBarEvent.FUNCTION_MESSAGE_BAR_SHOW_TYPE, EnumFunctionMessageBarIcoType.PRIVILEGE_MARK_TYPE, 1);
 			//暂时放这里测试用，@L.L.M.Sunny 20160113
 
-//			MainRoleManager.initActor();
 			AppMergeManager.instace.setup();
 			MouseCursorController.setup();
 			SocietyManager.init();
@@ -85,8 +83,6 @@ package com.rpgGame.app.manager.scene
 			SocietySender.reqGetSelfFamilyInfo();
 
 			MapUnitDataManager.setup();
-			
-
 //			CountryTaoNiManager.setup();
 		}
 

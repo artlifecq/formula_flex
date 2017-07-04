@@ -87,11 +87,19 @@ package com.rpgGame.app.view.icon
 			//			this.setIconResName(ClientConfig.getItemIcon("101", IcoSizeEnum.ICON_36 ));
 			sortLayer();
 			this.faceInfo=buffData;
-			var info:Q_tipsinfo=new Q_tipsinfo();
-			info.q_describe_tittle=_buffData.buffData.q_buff_name;
-			info.q_describe=_buffData.buffData.q_description;
-			TipTargetManager.remove(this);
-			TipTargetManager.show(this, TargetTipsMaker.makeTips( TipType.NORMAL_TIP,info));
+			if(value._data.q_buff_id==9||value._data.q_buff_id==10)
+			{
+				TipTargetManager.remove(this);
+				TipTargetManager.show(this, TargetTipsMaker.makeTips( TipType.ACTIVITY_JIXIAN_BUFF_TIP,value));
+			}
+			else
+			{
+				var info:Q_tipsinfo=new Q_tipsinfo();
+				info.q_describe_tittle=_buffData.buffData.q_buff_name;
+				info.q_describe=_buffData.buffData.q_description;
+				TipTargetManager.remove(this);
+				TipTargetManager.show(this, TargetTipsMaker.makeTips( TipType.NORMAL_TIP,info));
+			}
 		}
 		
 		/**继承的父类名字，是cd完的时候调用*/
@@ -109,14 +117,14 @@ package com.rpgGame.app.view.icon
 		private var _now: Number=0;
 		override  public function cdUpdate($now : Number, $cdTotal : Number) :void
 		{
-//			if (!cdFace || !cdFace.parent)
-//			{
-//				addCdFace();
-//			}
-//			if(cdFace)
-//			{
-//				cdFace.updateTimeTxt($now,$cdTotal);
-//			}
+			//			if (!cdFace || !cdFace.parent)
+			//			{
+			//				addCdFace();
+			//			}
+			//			if(cdFace)
+			//			{
+			//				cdFace.updateTimeTxt($now,$cdTotal);
+			//			}
 			if($cdTotal>_now)
 			{
 				_now=$now;

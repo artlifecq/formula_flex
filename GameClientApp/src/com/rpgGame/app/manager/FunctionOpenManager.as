@@ -123,9 +123,11 @@
 		
 		public static function getOpenLevelByFunBarInfo(info:FunctionBarInfo):int
 		{
+			if(info.isshow==1)
+				return int.MAX_VALUE;
 			var list:Array = NewFuncCfgData.getListById(info.id);
 			if(list==null)
-				return 0;
+				return int.MAX_VALUE;
 			var value:int = int.MAX_VALUE;
 			for each(var func:Q_newfunc in list)
 			{

@@ -43,8 +43,6 @@ package org.mokylin.skin.app.beibao.junjie
 
 		public var roleCont:feathers.controls.SkinnableContainer;
 
-		public var uiUp:feathers.controls.UIAsset;
-
 		public var uiUpOK:feathers.controls.UIAsset;
 
 
@@ -56,7 +54,9 @@ package org.mokylin.skin.app.beibao.junjie
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [__JunJie_Skin_UIAsset3_i(),roleCont_i(),btnPrev_i(),btnNext_i(),__JunJie_Skin_UIAsset4_i(),btnJihuo_i(),__JunJie_Skin_UIAsset5_i(),NumZhanli_i(),num_lv_i(),uiUp_i(),__JunJie_Skin_Group1_i(),__JunJie_Skin_Group2_i(),__JunJie_Skin_UIAsset12_i(),__JunJie_Skin_UIAsset13_i(),lbTiaojian_i(),contShuxing_i(),conTiaojian_i(),lb_wanchengdu_i(),uiUpOK_i()];
+			this.height = 601;
+			this.width = 956;
+			this.elementsContent = [__JunJie_Skin_UIAsset2_i(),roleCont_i(),btnPrev_i(),btnNext_i(),__JunJie_Skin_UIAsset3_i(),btnJihuo_i(),__JunJie_Skin_UIAsset4_i(),NumZhanli_i(),num_lv_i(),__JunJie_Skin_Group1_i(),__JunJie_Skin_Group2_i(),__JunJie_Skin_UIAsset11_i(),__JunJie_Skin_UIAsset12_i(),lbTiaojian_i(),contShuxing_i(),conTiaojian_i(),lb_wanchengdu_i(),uiUpOK_i()];
 			
 			states = {
 			};
@@ -77,34 +77,35 @@ package org.mokylin.skin.app.beibao.junjie
 			temp.label = "1364364";
 			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow2;
 			temp.width = 148;
-			temp.x = 755;
-			temp.y = 99;
+			temp.x = 759;
+			temp.y = 115;
 			return temp;
 		}
 
 		private function __JunJie_Skin_Group1_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
-			temp.x = 669;
-			temp.y = 141;
-			temp.elementsContent = [__JunJie_Skin_UIAsset6_i(),__JunJie_Skin_UIAsset7_i(),__JunJie_Skin_UIAsset8_i()];
+			temp.x = 673;
+			temp.y = 155;
+			temp.elementsContent = [__JunJie_Skin_UIAsset5_i(),__JunJie_Skin_UIAsset6_i(),__JunJie_Skin_UIAsset7_i()];
 			return temp;
 		}
 
 		private function __JunJie_Skin_Group2_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
-			temp.x = 669;
-			temp.y = 332;
-			temp.elementsContent = [__JunJie_Skin_UIAsset9_i(),__JunJie_Skin_UIAsset10_i(),__JunJie_Skin_UIAsset11_i()];
+			temp.x = 673;
+			temp.y = 346;
+			temp.elementsContent = [__JunJie_Skin_UIAsset8_i(),__JunJie_Skin_UIAsset9_i(),__JunJie_Skin_UIAsset10_i()];
 			return temp;
 		}
 
 		private function __JunJie_Skin_UIAsset10_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.scaleX = -1;
 			temp.styleName = "ui/app/beibao/junjie/fenge.png";
-			temp.x = 0;
+			temp.x = 231;
 			temp.y = 6;
 			return temp;
 		}
@@ -112,59 +113,49 @@ package org.mokylin.skin.app.beibao.junjie
 		private function __JunJie_Skin_UIAsset11_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.scaleX = -1;
-			temp.styleName = "ui/app/beibao/junjie/fenge.png";
-			temp.x = 231;
-			temp.y = 6;
+			temp.styleName = "ui/app/beibao/junjie/youjiushuxing.png";
+			temp.x = 739;
+			temp.y = 160;
 			return temp;
 		}
 
 		private function __JunJie_Skin_UIAsset12_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/junjie/youjiushuxing.png";
-			temp.x = 735;
-			temp.y = 146;
+			temp.styleName = "ui/app/beibao/junjie/jihuotiaojian.png";
+			temp.x = 736;
+			temp.y = 351;
 			return temp;
 		}
 
-		private function __JunJie_Skin_UIAsset13_i():feathers.controls.UIAsset
+		private function __JunJie_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/junjie/jihuotiaojian.png";
-			temp.x = 732;
-			temp.y = 337;
+			temp.styleName = "ui/big_bg/beibao/junjie/bg_1.png";
+			temp.x = 22;
+			temp.y = 88;
 			return temp;
 		}
 
 		private function __JunJie_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/big_bg/beibao/junjie/bg_1.png";
-			temp.x = 18;
-			temp.y = 74;
+			temp.styleName = "ui/app/beibao/junjie/quxian.png";
+			temp.x = 29;
+			temp.y = 101;
 			return temp;
 		}
 
 		private function __JunJie_Skin_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/junjie/quxian.png";
-			temp.x = 25;
-			temp.y = 87;
+			temp.styleName = "ui/common/zdl2.png";
+			temp.x = 688;
+			temp.y = 105;
 			return temp;
 		}
 
 		private function __JunJie_Skin_UIAsset5_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/zdl2.png";
-			temp.x = 684;
-			temp.y = 91;
-			return temp;
-		}
-
-		private function __JunJie_Skin_UIAsset6_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/beibao/junjie/tiao.png";
@@ -173,7 +164,7 @@ package org.mokylin.skin.app.beibao.junjie
 			return temp;
 		}
 
-		private function __JunJie_Skin_UIAsset7_i():feathers.controls.UIAsset
+		private function __JunJie_Skin_UIAsset6_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/beibao/junjie/fenge.png";
@@ -182,7 +173,7 @@ package org.mokylin.skin.app.beibao.junjie
 			return temp;
 		}
 
-		private function __JunJie_Skin_UIAsset8_i():feathers.controls.UIAsset
+		private function __JunJie_Skin_UIAsset7_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.scaleX = -1;
@@ -192,12 +183,21 @@ package org.mokylin.skin.app.beibao.junjie
 			return temp;
 		}
 
-		private function __JunJie_Skin_UIAsset9_i():feathers.controls.UIAsset
+		private function __JunJie_Skin_UIAsset8_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/beibao/junjie/tiao.png";
 			temp.x = 26;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function __JunJie_Skin_UIAsset9_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/beibao/junjie/fenge.png";
+			temp.x = 0;
+			temp.y = 6;
 			return temp;
 		}
 
@@ -207,8 +207,8 @@ package org.mokylin.skin.app.beibao.junjie
 			btnJihuo = temp;
 			temp.name = "btnJihuo";
 			temp.styleClass = org.mokylin.skin.app.beibao.junjie.button.ButtonJihuo;
-			temp.x = 387;
-			temp.y = 456;
+			temp.x = 391;
+			temp.y = 470;
 			return temp;
 		}
 
@@ -219,8 +219,8 @@ package org.mokylin.skin.app.beibao.junjie
 			temp.name = "btnNext";
 			temp.scaleY = -1;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jiantou3;
-			temp.x = 115;
-			temp.y = 420;
+			temp.x = 119;
+			temp.y = 434;
 			return temp;
 		}
 
@@ -230,8 +230,8 @@ package org.mokylin.skin.app.beibao.junjie
 			btnPrev = temp;
 			temp.name = "btnPrev";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jiantou3;
-			temp.x = 157;
-			temp.y = 77;
+			temp.x = 161;
+			temp.y = 91;
 			return temp;
 		}
 
@@ -242,8 +242,8 @@ package org.mokylin.skin.app.beibao.junjie
 			temp.name = "conTiaojian";
 			temp.height = 126;
 			temp.width = 222;
-			temp.x = 671;
-			temp.y = 367;
+			temp.x = 675;
+			temp.y = 381;
 			return temp;
 		}
 
@@ -254,8 +254,8 @@ package org.mokylin.skin.app.beibao.junjie
 			temp.name = "contShuxing";
 			temp.height = 126;
 			temp.width = 200;
-			temp.x = 693;
-			temp.y = 177;
+			temp.x = 697;
+			temp.y = 191;
 			return temp;
 		}
 
@@ -267,8 +267,8 @@ package org.mokylin.skin.app.beibao.junjie
 			temp.text = "（4/5）";
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 793;
-			temp.y = 338;
+			temp.x = 797;
+			temp.y = 352;
 			return temp;
 		}
 
@@ -280,8 +280,8 @@ package org.mokylin.skin.app.beibao.junjie
 			temp.height = 20;
 			temp.textAlign = "center";
 			temp.width = 200;
-			temp.x = 380;
-			temp.y = 432;
+			temp.x = 384;
+			temp.y = 446;
 			return temp;
 		}
 
@@ -295,8 +295,8 @@ package org.mokylin.skin.app.beibao.junjie
 			temp.label = "x100";
 			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_lv2;
 			temp.width = 64;
-			temp.x = 877;
-			temp.y = 114;
+			temp.x = 870;
+			temp.y = 129;
 			return temp;
 		}
 
@@ -307,8 +307,8 @@ package org.mokylin.skin.app.beibao.junjie
 			temp.name = "roleCont";
 			temp.height = 394;
 			temp.width = 250;
-			temp.x = 344;
-			temp.y = 88;
+			temp.x = 348;
+			temp.y = 102;
 			return temp;
 		}
 
@@ -318,19 +318,8 @@ package org.mokylin.skin.app.beibao.junjie
 			uiUpOK = temp;
 			temp.name = "uiUpOK";
 			temp.styleName = "ui/app/beibao/junjie/shengjiechenggong.png";
-			temp.x = 326;
-			temp.y = 70;
-			return temp;
-		}
-
-		private function uiUp_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			uiUp = temp;
-			temp.name = "uiUp";
-			temp.styleName = "ui/common/tubiao/xiangshang.png";
-			temp.x = 865;
-			temp.y = 112;
+			temp.x = 330;
+			temp.y = 84;
 			return temp;
 		}
 

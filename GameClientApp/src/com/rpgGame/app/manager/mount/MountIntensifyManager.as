@@ -1,7 +1,7 @@
 package com.rpgGame.app.manager.mount
 {
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.sender.MountSender;
+	import com.rpgGame.app.sender.HorseSender;
 	import com.rpgGame.core.events.mount.MountEvent;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.cfg.mount.MountConfigData;
@@ -51,7 +51,7 @@ package com.rpgGame.app.manager.mount
 		 */		
 		public static function requestMountRefine( idx:int, isUse:Boolean, indexOrMountIdx:int ):void
 		{
-			MountSender.requestMountRefine( idx, isUse, indexOrMountIdx );
+//			MountSender.requestMountRefine( idx, isUse, indexOrMountIdx );
 		}
 		
 		/**

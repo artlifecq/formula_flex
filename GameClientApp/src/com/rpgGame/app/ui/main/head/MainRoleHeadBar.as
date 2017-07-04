@@ -1,6 +1,7 @@
 package com.rpgGame.app.ui.main.head {
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
@@ -196,6 +197,9 @@ package com.rpgGame.app.ui.main.head {
 					if (JobEnum.ROLE_4_TYPE == MainRoleManager.actorInfo.job) {
 						SceneRoleSelectManager.selectedRole = MainRoleManager.actor;
 					}
+					break;
+				case this._skin.btnVip:
+					Mgr.vipMgr.iWantBecomeVip();
 					break;
 				default:
 				{

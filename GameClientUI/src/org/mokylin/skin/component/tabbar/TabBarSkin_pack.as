@@ -65,7 +65,7 @@ package org.mokylin.skin.component.tabbar
 			skinNames={"down":"ui/component/tabbar/skin_pack/down.png",
 			"downAndSelected":"ui/component/tabbar/skin_pack/select.png",
 			"hover":"ui/component/tabbar/skin_pack/over.png",
-			"overAndSelected":"ui/component/tabbar/skin_pack/select.png",
+			"hoverAndSelected":"ui/component/tabbar/skin_pack/select.png",
 			"up":"ui/component/tabbar/skin_pack/up.png",
 			"upAndSelected":"ui/component/tabbar/skin_pack/select.png"};
 		}

@@ -26,9 +26,17 @@ package com.rpgGame.appModule.activety.zonghe.lijin
 		}
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
-			super.show(data,openTable,parentContiner);
 			var time:int=int(data);
-			setTime(time);
+			if(time>0)
+			{
+				super.show(data,openTable,parentContiner);
+				setTime(time);
+			}
+			else
+			{
+				hide();
+				AppManager.showApp(AppConstant.ACTIVETY_LIJIN_REFRESH);
+			}
 		}
 		override public function hide():void
 		{
@@ -48,14 +56,10 @@ package com.rpgGame.appModule.activety.zonghe.lijin
 		private function setTime(time:int):void
 		{
 			var rTime:int=time;
-			if(rTime<0){
-				_skin.numTime.label="0";
-			}else{
-				remainTime=rTime;
-				_skin.numTime.label=remainTime.toString();
-				TimerServer.remove(updateTime);
-				TimerServer.addLoop(updateTime,1000);
-			}
+			remainTime=rTime;
+			_skin.numTime.label=remainTime.toString();
+			TimerServer.remove(updateTime);
+			TimerServer.addLoop(updateTime,1000);
 		}
 		
 		private function updateTime():void

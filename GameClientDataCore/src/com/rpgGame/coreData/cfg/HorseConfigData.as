@@ -30,9 +30,5 @@ package com.rpgGame.coreData.cfg
 		}
 		
 		
-		public static function get mountAnimatResID():String
-		{
-			return "pc/mount/mount_zhanma_animat";
-		}
 	}
 }

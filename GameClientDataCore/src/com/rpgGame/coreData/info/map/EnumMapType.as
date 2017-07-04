@@ -47,17 +47,18 @@ package com.rpgGame.coreData.info.map
 		 * 极限挑战
 		 */
 		public static const MAP_JIXIAN:int = rEnum.next;//9
-		
 		/**
 		 * 天降礼金
 		 */
 		public static const MAP_TYPE_LIJIN:int = rEnum.next;//10
 		/**
+		 * 秦陵秘宝
+		 */
+		public static const MAP_TYPE_MIBAO:int = rEnum.next;//11
+		/**
 		 * 王城争霸
 		 */
-		public static const MAP_TYPE_WCZB:int = rEnum.next;//11
-		
-		
-		
+		public static const MAP_TYPE_WCZB:int = rEnum.next;//12
+
 	}
 }

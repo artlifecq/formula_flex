@@ -38,6 +38,7 @@ package com.rpgGame.appModule.shop
 		private static var _ins:ItemBuyPanelExt;
 		private var _skin:Tankuang_Shangpin;
 		private var _data:ShopItemVo;
+		private var _atuoUse:int=0;
 		private var _grid:IconCDFace;
 		private var maxCount:int=900;
 		private var price:int;
@@ -212,7 +213,7 @@ package com.rpgGame.appModule.shop
 			// TODO Auto Generated method stub
 			if (_data) 
 			{
-				Mgr.shopMgr.buyShopItem(_data,buyNum);
+				Mgr.shopMgr.buyShopItem(_data,buyNum,_atuoUse);
 			}
 			hide();
 		}
@@ -242,7 +243,7 @@ package com.rpgGame.appModule.shop
 			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,onResChange);
 			gTimer.stop();
 		}
-		public static function buyItem(vo:ShopItemVo):void
+		public static function buyItem(vo:ShopItemVo,auto:int=0):void
 		{
 			if (vo.data.limitType!=0&&vo.data.todayBuyNum>=vo.data.limitNum) 
 			{
@@ -253,10 +254,10 @@ package com.rpgGame.appModule.shop
 			{
 				_ins=new ItemBuyPanelExt();
 			}
-			_ins.setData(vo);
+			_ins.setData(vo,auto);
 			StarlingLayerManager.topUILayer.addChild(_ins);
 		}
-		public static function buyItemByModelId(itemMod:int):void
+		public static function buyItemByModelId(itemMod:int,auto:int=0):void
 		{
 			var qSource:Q_source=SourceGetCfg.getSource(itemMod);
 			if (!qSource) 
@@ -268,12 +269,12 @@ package com.rpgGame.appModule.shop
 			{
 				return;
 			}
-			buyItem(shopItems[0]);
+			buyItem(shopItems[0],auto);
 		}
-		private function setData(vo:ShopItemVo):void
+		private function setData(vo:ShopItemVo,auto:int):void
 		{
 			this._data=vo;
-			
+			this._atuoUse=auto;
 			var itemInfo:ClientItemInfo=new ClientItemInfo(vo.data.item.mod);
 			itemInfo.count=vo.data.item.num;
 			FaceUtil.SetItemGrid(_grid,itemInfo);

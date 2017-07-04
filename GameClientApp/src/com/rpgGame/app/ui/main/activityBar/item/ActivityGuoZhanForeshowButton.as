@@ -7,19 +7,7 @@
     {
 
 
-        override protected function onTextRuning():String
-        {
-            var _local1:String = "";
-            ui.txtTitle.htmlText = _local1;
-            return (_local1);
-        }
-
-        override protected function onTextEnd(second:int):String
-        {
-            var _local2:String = "";
-            ui.txtTitle.htmlText = _local2;
-            return _local2;
-        }
+       
 
         override protected function dynamicTips():Array
         {

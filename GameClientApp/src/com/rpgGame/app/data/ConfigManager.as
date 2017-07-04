@@ -43,7 +43,9 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.HorseConfigData;
 	import com.rpgGame.coreData.cfg.HorseSpellData;
 	import com.rpgGame.coreData.cfg.HuBaoData;
+	import com.rpgGame.coreData.cfg.JiXianTiaoZhanCfgData;
 	import com.rpgGame.coreData.cfg.JunJieData;
+	import com.rpgGame.coreData.cfg.LijinCfgData;
 	import com.rpgGame.coreData.cfg.LostSkillData;
 	import com.rpgGame.coreData.cfg.LostSkillUpData;
 	import com.rpgGame.coreData.cfg.LunJianCfg;
@@ -68,6 +70,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.TipsCfgData;
 	import com.rpgGame.coreData.cfg.TransCfgData;
 	import com.rpgGame.coreData.cfg.TriggerCfgData;
+	import com.rpgGame.coreData.cfg.VipCfg;
 	import com.rpgGame.coreData.cfg.WindowInfoData;
 	import com.rpgGame.coreData.cfg.ZhanGongData;
 	import com.rpgGame.coreData.cfg.ZhanGongMonsterData;
@@ -296,16 +299,19 @@ package com.rpgGame.app.data
 			SceneEffectCfgData.setup(dic[ConfigClassRegister.Q_map_effect]);
 			DailyZoneCfgData.setup(dic[ConfigClassRegister.Q_daily_zone]);//日常副本
 			DailyZoneMonsterCfgData.setup(dic[ConfigClassRegister.Q_dailyzone_monster]);//日常刷怪数据
+			JiXianTiaoZhanCfgData.setup(dic[ConfigClassRegister.Q_limitchallenge]);//极限挑战
 			//道具获取路径
-			SourceGetCfg.setup(dic[ConfigClassRegister.Q_source]);//多人副本
+			SourceGetCfg.setup(dic[ConfigClassRegister.Q_source]);//购买界面
 			
 			GuildCfgData.setupGuildInfo(dic[ConfigClassRegister.Q_guild]);//帮会等级
 			GuildCfgData.setupGuildPermissionInfo(dic[ConfigClassRegister.Q_guild_permission]);//职务权限
 			GuildSkillCfgData.setup(dic[ConfigClassRegister.Q_guildskill]);//帮派技能表
 			//功能开启
 			//ClientFunctionOpenCfgData.setup(dic["data.ClientFunctionOpen"]);
-			BattleRankCfg.setup(dic[ConfigClassRegister.Q_battle_rank]);//多人副本
-			NineTowerCfg.setup(dic[ConfigClassRegister.Q_nine_tower]);//多人副本
+			BattleRankCfg.setup(dic[ConfigClassRegister.Q_battle_rank]);//巅峰对决
+			NineTowerCfg.setup(dic[ConfigClassRegister.Q_nine_tower]);//九层妖塔	
+			LijinCfgData.setup(dic[ConfigClassRegister.Q_daysdown_gold]);//天降礼金
+			VipCfg.setup(dic[ConfigClassRegister.Q_vip]);//多人副本
 		}
 		
 		/**

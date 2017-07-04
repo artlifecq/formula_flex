@@ -74,7 +74,6 @@ package org.mokylin.skin.component.scrollbar
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			thumb = temp;
 			temp.name = "thumb";
-			temp.height = 61;
 			temp.styleClass = org.mokylin.skin.component.scrollbar.skin_pack.button.ScrollBarPackSkin_thumb;
 			temp.x = 0;
 			temp.y = 31;

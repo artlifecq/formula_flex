@@ -4,7 +4,7 @@ package org.mokylin.skin.app.wuxue
 	import feathers.controls.StateSkin;
 	import feathers.controls.TabBar;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.common.yiji_panelbg_Skin;
+	import org.mokylin.skin.common.TongYongPanelbg1;
 
 	/**
 	 * @private
@@ -29,9 +29,9 @@ package org.mokylin.skin.app.wuxue
 			super();
 			
 			this.currentState = "normal";
-			this.height = 587;
-			this.width = 947;
-			this.elementsContent = [bg_i(),tabBar_i(),__Wuxue_Skin_UIAsset1_i()];
+			this.height = 601;
+			this.width = 956;
+			this.elementsContent = [bg_i(),__Wuxue_Skin_UIAsset1_i(),tabBar_i(),__Wuxue_Skin_UIAsset2_i()];
 			
 			states = {
 			};
@@ -45,11 +45,22 @@ package org.mokylin.skin.app.wuxue
 		private function __Wuxue_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.height = 453;
+			temp.styleName = "ui/common/background/neikuang_1.png";
+			temp.width = 922;
+			temp.x = 18;
+			temp.y = 82;
+			return temp;
+		}
+
+		private function __Wuxue_Skin_UIAsset2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/wuxue/wuxue.png";
-			temp.x = 441;
-			temp.y = 11;
+			temp.x = 450;
+			temp.y = 17;
 			return temp;
 		}
 
@@ -58,10 +69,10 @@ package org.mokylin.skin.app.wuxue
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 587;
-			var skin:StateSkin = new org.mokylin.skin.common.yiji_panelbg_Skin()
+			temp.height = 601;
+			var skin:StateSkin = new org.mokylin.skin.common.TongYongPanelbg1()
 			temp.skin = skin
-			temp.width = 947;
+			temp.width = 956;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -74,8 +85,8 @@ package org.mokylin.skin.app.wuxue
 			temp.name = "tabBar";
 			temp.height = 49;
 			temp.width = 713;
-			temp.x = 23;
-			temp.y = 531;
+			temp.x = 28;
+			temp.y = 538;
 			return temp;
 		}
 

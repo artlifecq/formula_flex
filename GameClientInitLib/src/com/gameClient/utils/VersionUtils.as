@@ -53,7 +53,7 @@ package com.gameClient.utils
 			var version : String = _verMap ? _verMap[verUrl] : null;
 			if (version)
 			{
-                versionUrl = url + QUE + _version;
+                versionUrl = url + QUE + version;
 			}
 			else
 			{

@@ -4,18 +4,18 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
 	import com.rpgGame.coreData.clientConfig.Q_tipsinfo;
 	
-	import org.mokylin.skin.app.tips.NormalTipsSkin;
+	import org.mokylin.skin.app.tips.Tips_ShuXing;
 	
 	public class NormalTip extends SkinUI implements ITip
 	{
-		private var _itemTip:NormalTipsSkin;
+		private var _itemTip:Tips_ShuXing;
 		private static var _instance:NormalTip;
 		
 		public function NormalTip()
 		{
-			_itemTip=new NormalTipsSkin();
-			_itemTip.lbl_miaoshu.wordWrap=true;
-			_itemTip.lbl_miaoshu.leading=5;
+			_itemTip=new Tips_ShuXing();
+			_itemTip.lbl_miaoshu1.wordWrap=true;
+			_itemTip.lbl_miaoshu1.leading=5;
 			super(_itemTip);
 		}
 		
@@ -30,10 +30,22 @@ package com.rpgGame.app.ui.tips
 		
 		public function setTipData(data:*):void
 		{
+			var height:int=0;
 			var info:Q_tipsinfo=data as Q_tipsinfo;
 			_itemTip.lbl_title.htmlText=info.q_describe_tittle;
-			_itemTip.lbl_miaoshu.htmlText=info.q_describe;
-			_itemTip.bg.height=_itemTip.lbl_miaoshu.y+_itemTip.lbl_miaoshu.textHeight+10;
+			_itemTip.lbl_miaoshu1.htmlText=info.q_describe;
+			height=_itemTip.lbl_miaoshu1.y+_itemTip.lbl_miaoshu1.textHeight;
+			if(info.q_source!=null&&info.q_source!="")
+			{
+				_itemTip.lbl_miaoshu2.htmlText=info.q_source;
+				_itemTip.lbl_miaoshu2.y=height+20;
+				height=_itemTip.lbl_miaoshu2.y+_itemTip.lbl_miaoshu2.textHeight;
+				_itemTip.lbl_miaoshu2.visible=true;
+			}
+			else{
+				_itemTip.lbl_miaoshu2.visible=false;
+			}
+			_itemTip.bg.height=height+10;
 		}
 		
 		/**

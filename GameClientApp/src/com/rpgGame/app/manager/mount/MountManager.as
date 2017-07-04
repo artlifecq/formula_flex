@@ -7,7 +7,7 @@ package com.rpgGame.app.manager.mount
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.app.sender.MountSender;
+	import com.rpgGame.app.sender.HorseSender;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.FunctionMessageBarEvent;
@@ -432,7 +432,7 @@ package com.rpgGame.app.manager.mount
 		 */		
 		public static function mountRelease( idx:int ):void
 		{
-			MountSender.requestMountRelease( idx );
+//			MountSender.requestMountRelease( idx );
 		}
 		
 		/**
@@ -443,7 +443,7 @@ package com.rpgGame.app.manager.mount
 		 */		
 		public static function setUpMountStatus( index:int, status:int ):void
 		{
-			MountSender.requestSetUpMountStatus( index, status );
+//			MountSender.requestSetUpMountStatus( index, status );
 		}
 		
 		/**
@@ -453,7 +453,7 @@ package com.rpgGame.app.manager.mount
 		 */		
 		public static function setUpMountRide( isRide:Boolean ):void
 		{
-			MountSender.requestSetUpMountRide( isRide );
+//			MountSender.requestSetUpMountRide( isRide );
 		}
 		
 		/**
@@ -512,10 +512,10 @@ package com.rpgGame.app.manager.mount
 					return;
 				}
 				
-				if( mountInfoData.isRiding )
+				/*if( mountInfoData.isRiding )
 					MountSender.requestSetUpMountRide( false );
 				else
-					MountSender.requestSetUpMountRide( true );
+					MountSender.requestSetUpMountRide( true );*/
 			}
 		}
 		
@@ -1168,7 +1168,7 @@ package com.rpgGame.app.manager.mount
 		private static function onCollectComplete( args:* ):void
 		{
 			var id:int = args[0];
-			MountSender.requestCollectMountCollectObj( id );
+//			MountSender.requestCollectMountCollectObj( id );
 		}
 		
 		/**

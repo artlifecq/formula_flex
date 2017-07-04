@@ -14,8 +14,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 	import org.mokylin.skin.app.beibao.Xinfa.mc.UIMovieClipDengji;
 	import org.mokylin.skin.app.beibao.Xinfa.mc.UIMovieClipMingcheng;
 	import org.mokylin.skin.app.beibao.jingmai.button.ButtonJiantou;
+	import org.mokylin.skin.component.button.ButtonSkin_info;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
-	import org.mokylin.skin.component.button.ButtonSkin_shuoming2;
 	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow2;
 
 	/**
@@ -91,7 +91,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 1013;
-			this.elementsContent = [Bg_i(),imgYuan_i(),__xinfa_Skin_UIAsset1_i(),__xinfa_Skin_UIAsset2_i(),lab_Weijihuo_i(),lab_jiangli_i(),lab_Skill_i(),lab_shuxing_i(),__xinfa_Skin_UIAsset3_i(),gExtends_i(),__xinfa_Skin_UIAsset6_i(),__xinfa_Skin_UIAsset7_i(),imgSkill_i(),__xinfa_Skin_UIAsset8_i(),imgFight_i(),imgLevelBg_i(),mc_Level_i(),__xinfa_Skin_UIAsset9_i(),NumZhanli_i(),num_xinfazhanli_i(),grid_1_i(),grid_2_i(),grid_3_i(),__xinfa_Skin_UIAsset10_i(),num_zhenqi_i(),btn_hecheng_i(),grid_item_1_i(),btn_jihuo_i(),btn_shuoming_i(),btn_prev_i(),btnGroup_i(),btn_next_i(),lab_Content_i(),mc_Name_i()];
+			this.elementsContent = [Bg_i(),imgYuan_i(),__xinfa_Skin_UIAsset2_i(),__xinfa_Skin_UIAsset3_i(),lab_Weijihuo_i(),lab_jiangli_i(),lab_Skill_i(),lab_shuxing_i(),__xinfa_Skin_UIAsset4_i(),gExtends_i(),__xinfa_Skin_UIAsset7_i(),__xinfa_Skin_UIAsset8_i(),imgSkill_i(),__xinfa_Skin_UIAsset9_i(),imgFight_i(),imgLevelBg_i(),mc_Level_i(),__xinfa_Skin_UIAsset10_i(),NumZhanli_i(),num_xinfazhanli_i(),grid_1_i(),grid_2_i(),grid_3_i(),__xinfa_Skin_UIAsset11_i(),num_zhenqi_i(),btn_hecheng_i(),grid_item_1_i(),btn_jihuo_i(),btn_shuoming_i(),btn_prev_i(),btnGroup_i(),btn_next_i(),lab_Content_i(),mc_Name_i()];
 			
 			states = {
 			};
@@ -108,8 +108,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			Bg = temp;
 			temp.name = "Bg";
 			temp.styleName = "ui/big_bg/beibao/jingmai/bg.jpg";
-			temp.x = 20;
-			temp.y = 74;
+			temp.x = 24;
+			temp.y = 88;
 			return temp;
 		}
 
@@ -123,48 +123,57 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.label = "1364364";
 			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow2;
 			temp.width = 148;
-			temp.x = 85;
-			temp.y = 81;
+			temp.x = 89;
+			temp.y = 95;
 			return temp;
 		}
 
 		private function __xinfa_Skin_UIAsset10_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/jingmai/zhenqi.png";
-			temp.x = 26;
-			temp.y = 41;
+			temp.styleName = "ui/common/zdl2.png";
+			temp.x = 18;
+			temp.y = 85;
 			return temp;
 		}
 
-		private function __xinfa_Skin_UIAsset1_i():feathers.controls.UIAsset
+		private function __xinfa_Skin_UIAsset11_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/big_bg/beibao/xinfa/shuxingbg.jpg";
-			temp.x = 767;
-			temp.y = 74;
+			temp.styleName = "ui/app/beibao/jingmai/zhenqi.png";
+			temp.x = 30;
+			temp.y = 55;
 			return temp;
 		}
 
 		private function __xinfa_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/xinfa/wenzidi3.png";
-			temp.x = 140;
-			temp.y = 467;
+			temp.styleName = "ui/big_bg/beibao/xinfa/shuxingbg.jpg";
+			temp.x = 771;
+			temp.y = 88;
 			return temp;
 		}
 
 		private function __xinfa_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/xinfa/wenzidi2.png";
-			temp.x = 773;
-			temp.y = 195;
+			temp.styleName = "ui/app/beibao/xinfa/wenzidi3.png";
+			temp.x = 144;
+			temp.y = 481;
 			return temp;
 		}
 
 		private function __xinfa_Skin_UIAsset4_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/beibao/xinfa/wenzidi2.png";
+			temp.x = 777;
+			temp.y = 209;
+			return temp;
+		}
+
+		private function __xinfa_Skin_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/beibao/xinfa/wenzidi2.png";
@@ -173,7 +182,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			return temp;
 		}
 
-		private function __xinfa_Skin_UIAsset5_i():feathers.controls.UIAsset
+		private function __xinfa_Skin_UIAsset6_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/beibao/xinfa/jihuojiangli.png";
@@ -182,39 +191,30 @@ package org.mokylin.skin.app.beibao.Xinfa
 			return temp;
 		}
 
-		private function __xinfa_Skin_UIAsset6_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/xinfa/shengjixinfa.png";
-			temp.x = 776;
-			temp.y = 198;
-			return temp;
-		}
-
 		private function __xinfa_Skin_UIAsset7_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/xinfa/wenzidi.png";
-			temp.x = 274;
-			temp.y = 475;
+			temp.styleName = "ui/app/beibao/xinfa/shengjixinfa.png";
+			temp.x = 780;
+			temp.y = 212;
 			return temp;
 		}
 
 		private function __xinfa_Skin_UIAsset8_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/xinfa/xiangsheng.png";
-			temp.x = 634;
-			temp.y = 79;
+			temp.styleName = "ui/app/beibao/xinfa/wenzidi.png";
+			temp.x = 278;
+			temp.y = 489;
 			return temp;
 		}
 
 		private function __xinfa_Skin_UIAsset9_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/zdl2.png";
-			temp.x = 14;
-			temp.y = 71;
+			temp.styleName = "ui/app/beibao/xinfa/xiangsheng.png";
+			temp.x = 638;
+			temp.y = 93;
 			return temp;
 		}
 
@@ -227,8 +227,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			var skin:StateSkin = new org.mokylin.skin.app.beibao.Xinfa.btnGruop_Skin()
 			temp.skin = skin
 			temp.width = 111;
-			temp.x = 27;
-			temp.y = 160;
+			temp.x = 31;
+			temp.y = 174;
 			return temp;
 		}
 
@@ -238,14 +238,14 @@ package org.mokylin.skin.app.beibao.Xinfa
 			btn_hecheng = temp;
 			temp.name = "btn_hecheng";
 			temp.bold = false;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "砭石合成";
 			temp.fontSize = 14;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.color = 0xCFC6AE;
-			temp.width = 75;
-			temp.x = 809;
-			temp.y = 477;
+			temp.color = 0xFFFFFF;
+			temp.width = 90;
+			temp.x = 813;
+			temp.y = 491;
 			return temp;
 		}
 
@@ -255,8 +255,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			btn_jihuo = temp;
 			temp.name = "btn_jihuo";
 			temp.styleClass = org.mokylin.skin.app.beibao.Xinfa.button.ButtonJihuo;
-			temp.x = 396;
-			temp.y = 430;
+			temp.x = 400;
+			temp.y = 444;
 			return temp;
 		}
 
@@ -268,8 +268,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.rotation = 1.5707963267948966;
 			temp.scaleX = -1;
 			temp.styleClass = org.mokylin.skin.app.beibao.jingmai.button.ButtonJiantou;
-			temp.x = 110;
-			temp.y = 510;
+			temp.x = 114;
+			temp.y = 524;
 			return temp;
 		}
 
@@ -280,8 +280,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.name = "btn_prev";
 			temp.rotation = 1.5707963267948966;
 			temp.styleClass = org.mokylin.skin.app.beibao.jingmai.button.ButtonJiantou;
-			temp.x = 109;
-			temp.y = 121;
+			temp.x = 113;
+			temp.y = 135;
 			return temp;
 		}
 
@@ -290,9 +290,9 @@ package org.mokylin.skin.app.beibao.Xinfa
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_shuoming = temp;
 			temp.name = "btn_shuoming";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_shuoming2;
-			temp.x = 732;
-			temp.y = 437;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_info;
+			temp.x = 736;
+			temp.y = 451;
 			return temp;
 		}
 
@@ -301,9 +301,9 @@ package org.mokylin.skin.app.beibao.Xinfa
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			gExtends = temp;
 			temp.name = "gExtends";
-			temp.x = 773;
-			temp.y = 380;
-			temp.elementsContent = [__xinfa_Skin_UIAsset4_i(),__xinfa_Skin_UIAsset5_i()];
+			temp.x = 777;
+			temp.y = 394;
+			temp.elementsContent = [__xinfa_Skin_UIAsset5_i(),__xinfa_Skin_UIAsset6_i()];
 			return temp;
 		}
 
@@ -313,8 +313,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			grid_1 = temp;
 			temp.name = "grid_1";
 			temp.styleName = "ui/common/grid/normal/36.png";
-			temp.x = 624;
-			temp.y = 93;
+			temp.x = 628;
+			temp.y = 107;
 			return temp;
 		}
 
@@ -324,8 +324,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			grid_2 = temp;
 			temp.name = "grid_2";
 			temp.styleName = "ui/common/grid/normal/36.png";
-			temp.x = 666;
-			temp.y = 93;
+			temp.x = 670;
+			temp.y = 107;
 			return temp;
 		}
 
@@ -335,8 +335,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			grid_3 = temp;
 			temp.name = "grid_3";
 			temp.styleName = "ui/common/grid/normal/36.png";
-			temp.x = 708;
-			temp.y = 93;
+			temp.x = 712;
+			temp.y = 107;
 			return temp;
 		}
 
@@ -346,8 +346,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			grid_item_1 = temp;
 			temp.name = "grid_item_1";
 			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 216;
-			temp.y = 467;
+			temp.x = 220;
+			temp.y = 481;
 			return temp;
 		}
 
@@ -357,8 +357,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			imgFight = temp;
 			temp.name = "imgFight";
 			temp.styleName = "ui/app/beibao/xinfa/xinfazhandouli.png";
-			temp.x = 775;
-			temp.y = 155;
+			temp.x = 779;
+			temp.y = 169;
 			return temp;
 		}
 
@@ -368,8 +368,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			imgLevelBg = temp;
 			temp.name = "imgLevelBg";
 			temp.styleName = "ui/app/beibao/xinfa/yinzhang.png";
-			temp.x = 894;
-			temp.y = 83;
+			temp.x = 898;
+			temp.y = 97;
 			return temp;
 		}
 
@@ -379,8 +379,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			imgSkill = temp;
 			temp.name = "imgSkill";
 			temp.styleName = "ui/app/beibao/xinfa/tiaohe.png";
-			temp.x = 273;
-			temp.y = 475;
+			temp.x = 277;
+			temp.y = 489;
 			return temp;
 		}
 
@@ -392,8 +392,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.height = 431;
 			temp.styleName = "ui/big_bg/beibao/jingmai/bg2.png";
 			temp.width = 493;
-			temp.x = 200;
-			temp.y = 70;
+			temp.x = 204;
+			temp.y = 84;
 			return temp;
 		}
 
@@ -408,8 +408,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 229;
-			temp.x = 341;
-			temp.y = 437;
+			temp.x = 345;
+			temp.y = 451;
 			return temp;
 		}
 
@@ -423,8 +423,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 489;
-			temp.x = 272;
-			temp.y = 497;
+			temp.x = 276;
+			temp.y = 511;
 			return temp;
 		}
 
@@ -439,8 +439,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.color = 0xE1201C;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 133;
-			temp.x = 781;
-			temp.y = 173;
+			temp.x = 785;
+			temp.y = 187;
 			return temp;
 		}
 
@@ -454,8 +454,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 128;
-			temp.x = 777;
-			temp.y = 405;
+			temp.x = 781;
+			temp.y = 419;
 			return temp;
 		}
 
@@ -469,8 +469,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 133;
-			temp.x = 777;
-			temp.y = 223;
+			temp.x = 781;
+			temp.y = 237;
 			return temp;
 		}
 
@@ -479,11 +479,12 @@ package org.mokylin.skin.app.beibao.Xinfa
 			var temp:feathers.controls.UIMovieClip = new feathers.controls.UIMovieClip();
 			mc_Level = temp;
 			temp.name = "mc_Level";
+			temp.autoPlay = false;
 			temp.height = 51;
 			temp.styleClass = org.mokylin.skin.app.beibao.Xinfa.mc.UIMovieClipDengji;
 			temp.width = 20;
-			temp.x = 897;
-			temp.y = 89;
+			temp.x = 901;
+			temp.y = 103;
 			return temp;
 		}
 
@@ -496,8 +497,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.height = 38;
 			temp.styleClass = org.mokylin.skin.app.beibao.Xinfa.mc.UIMovieClipMingcheng;
 			temp.width = 70;
-			temp.x = 811;
-			temp.y = 94;
+			temp.x = 815;
+			temp.y = 108;
 			return temp;
 		}
 
@@ -510,8 +511,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.color = 0xE8C958;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 82;
-			temp.x = 845;
-			temp.y = 152;
+			temp.x = 849;
+			temp.y = 166;
 			return temp;
 		}
 
@@ -523,8 +524,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.text = "62154550";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 68;
-			temp.y = 43;
+			temp.x = 72;
+			temp.y = 57;
 			return temp;
 		}
 

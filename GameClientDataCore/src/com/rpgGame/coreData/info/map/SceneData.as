@@ -174,7 +174,7 @@ package com.rpgGame.coreData.info.map
 //			_isNewHeroProtect = _data.isNewHeroProtect;
 //			_isDeathProtect = _data.isDeathProtect;
 //			_isNightAutoProtect = _data.isNightAutoProtect;
-//			_isMountLimit = _data.isMountLimit;
+			_isMountLimit = _data.q_map_ride==1;
 			_mapNameResource = _data.q_mapres;
 			_sound = _data.q_music;
 //			isReliveLimit = _data.isReliveLimit;

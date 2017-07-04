@@ -132,6 +132,7 @@ package com.rpgGame.app.graphics
 		private var showBloodTween:TweenLite;
 		private var _teamCaptainFlag:UIAsset;
 		private var _towerFlag:UIAsset;
+		private var _vipFlag:UIAsset;
 		public function HeadFace(role : SceneRole)
 		{
 			super();
@@ -1395,6 +1396,30 @@ package com.rpgGame.app.graphics
 		public function updateMysteryMan():void
 		{
 			updateShowAndHide();
+		}
+		public function setVipFlag(vipLv:int):void
+		{
+			if (vipLv!=0) 
+			{
+				if (!_vipFlag) 
+				{
+					_vipFlag=new UIAsset();
+					
+				}
+				_vipFlag.styleName="ui/common/tubiao/vipb"+vipLv+".png";
+				_vipFlag.x=-46;
+				_vipFlag.y=(_nameBar.height-29)*0.5;
+				_nameBar.addChild(_vipFlag);
+				deCtrl.sortTop();
+			}
+			else
+			{
+				if (_vipFlag) 
+				{
+					MCUtil.removeSelf(_vipFlag);
+					deCtrl.sortTop();
+				}
+			}
 		}
 	}
 }
