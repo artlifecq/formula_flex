@@ -19,6 +19,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.SceneCharacterEvent;
 	import com.rpgGame.core.events.SceneInteractiveEvent;
 	import com.rpgGame.core.events.UserMoveEvent;
@@ -121,15 +122,10 @@ package com.rpgGame.app.cmdlistener
 					TaskSender.reqTaskCompleteAreaSearch(TaskManager.currentMainTaskInfo.id);
 				}
 			}
-			else if (flagObj is ClientTrigger)
-			{
-				var trigger : ClientTrigger = flagObj as ClientTrigger;
-				ClientTriggerManager.ClientBytrigger(trigger.id);
-			}
-			else if (flagObj is TriggerArea)
+			else if (flagObj is TriggerArea)//地图区域触发
 			{
 				var triggerArea : TriggerArea = flagObj as TriggerArea;
-				//ClientTriggerManager.ClientBytrigger(triggerArea.areaId);
+				EventManager.dispatchEvent(MapEvent.AREA_TRIGGER,triggerArea.areaId);//触发地图区域，抛出 地图区域id
 			}
 			var dist : int = 0;
 			var farDistance : int = 0;
