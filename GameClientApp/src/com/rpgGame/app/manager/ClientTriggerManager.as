@@ -66,6 +66,7 @@ package com.rpgGame.app.manager
 		public static function setup() : void
 		{
 			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE, onSwitchCmp);
+			EventManager.addEvent(MapEvent.AREA_TRIGGER,ClientBytrigger);
 		}
 
 		public static function sceneClear() : void
@@ -225,34 +226,31 @@ package com.rpgGame.app.manager
 		
 		
 		/**客户端触发*/
-		public static function ClientBytrigger(triggerId : int) : void
+		public static function ClientBytrigger(areaid : int) : void
 		{
+			var triggerData : ClientTrigger = TriggerCfgData.getTriggerByAreaid(areaid);
+			if (!triggerData)return;
+			var triggerId:int=triggerData.id;
 			if (_isTrigging[triggerId])return;
 			_isTrigging[triggerId]=true;
 			TweenLite.killDelayedCallsTo(onTiggerkey);
-			
-			var triggerData : ClientTrigger = TriggerCfgData.getClientTrigger(triggerId);
 			var pretriggerData : ClientTrigger;
-			if (triggerData)
+			if(triggerData.isTrigging)return;//服务器 已触发不再触发
+			
+			if(triggerData.preTrigger!=null)//判定触发前置条件
 			{
-				if(triggerData.isTrigging)return;//服务器 已触发不再触发
-				
-				if(triggerData.preTrigger!=null)//判定触发前置条件
+				var preTri:Array=triggerData.preTrigger;
+				for each (var trid : int in preTri)
 				{
-					var preTri:Array=triggerData.preTrigger;
-					for each (var trid : int in preTri)
+					pretriggerData=TriggerCfgData.getClientTrigger(trid);
+					if (pretriggerData&&!pretriggerData.isTrigging)
 					{
-						pretriggerData=TriggerCfgData.getClientTrigger(trid);
-						if (pretriggerData&&!pretriggerData.isTrigging)
-						{
-							return;
-						}
+						return;
 					}
 				}
-				DungeonSender.reqTrigger(triggerData.id);///通知服务器 触发消息
-				TweenLite.delayedCall(0.1, onTiggerkey,[triggerData.id]);
-				
 			}
+			DungeonSender.reqTrigger(triggerData.id);///通知服务器 触发消息
+			TweenLite.delayedCall(0.1, onTiggerkey,[triggerData.id]);
 		}
 		private static function onTiggerkey(triggerId:int):void
 		{
