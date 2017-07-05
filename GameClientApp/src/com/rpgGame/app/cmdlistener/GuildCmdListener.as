@@ -18,11 +18,6 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.guild.message.ResGuildListInfoMessage;
 	import com.rpgGame.netData.guild.message.ResGuildOperateResultMessage;
 	import com.rpgGame.netData.guild.message.ResGuildSkillInfoMessage;
-	import com.rpgGame.netData.guildWar.message.ResGuildWarChangeMaxPriceMessage;
-	import com.rpgGame.netData.guildWar.message.ResGuildWarCityApplyInfoMessage;
-	import com.rpgGame.netData.guildWar.message.ResGuildWarCityInfoMessage;
-	import com.rpgGame.netData.guildWar.message.ResGuildWarOperateResultMessage;
-	import com.rpgGame.netData.guildWar.message.ResGuildWarOreInfoMessage;
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
@@ -48,23 +43,10 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(111109, getResGuildActiveMessage);
 			SocketConnection.addCmdListener(111199, getResGuildOperateResultMessage);
 			
-			//帮会战
-			SocketConnection.addCmdListener(253101, getResGuildWarCityInfoMessage);
-			SocketConnection.addCmdListener(253102, getResGuildWarCityApplyInfoMessage);
-			SocketConnection.addCmdListener(253104, getResGuildWarChangeMaxPriceMessage);
-			SocketConnection.addCmdListener(253199, getResGuildWarOperateResultMessage);
-			SocketConnection.addCmdListener(253105, getResGuildWarOreInfoMessage);
-			
 			finish();
 		}
 		
-		private function getResGuildWarOreInfoMessage(msg:ResGuildWarOreInfoMessage):void
-		{
-			var role : SceneRole = SceneManager.getSceneObjByID(msg.playerId.ToGID()) as SceneRole;
-			if(role){
-				(role.headFace as HeadFace).updateGuildWarInfoBar(msg.oreList);
-			}
-		}
+	
 		
 		private function getResGuildActiveMessage(msg:ResGuildActiveMessage):void
 		{
@@ -74,25 +56,6 @@ package com.rpgGame.app.cmdlistener
 			EventManager.dispatchEvent(GuildEvent.GUILD_CHANGE_ACTIVE,msg.active);
 		}
 		
-		private function getResGuildWarOperateResultMessage(msg:ResGuildWarOperateResultMessage):void
-		{
-			
-		}
-		
-		private function getResGuildWarChangeMaxPriceMessage(msg:ResGuildWarChangeMaxPriceMessage):void
-		{
-			EventManager.dispatchEvent(GuildEvent.GUILD_WCZB_CHANGEMAXPRICE,msg);
-		}
-		
-		private function getResGuildWarCityApplyInfoMessage(msg:ResGuildWarCityApplyInfoMessage):void
-		{
-			EventManager.dispatchEvent(GuildEvent.GUILD_WCZB_APPLYINFO,msg);
-		}
-		
-		private function getResGuildWarCityInfoMessage(msg:ResGuildWarCityInfoMessage):void
-		{
-			EventManager.dispatchEvent(GuildEvent.GUILD_WCZB_INFO,msg);
-		}
 		
 		private function getResGuildInfoMessage(msg:ResGuildInfoMessage):void
 		{

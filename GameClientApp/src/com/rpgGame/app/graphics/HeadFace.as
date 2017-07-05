@@ -197,6 +197,16 @@ package com.rpgGame.app.graphics
 		}
 		
 		/**
+		 *是否有矿石 
+		 * @return 
+		 * 
+		 */
+		public function hasGuildWarOre():Boolean
+		{
+			return _guildWarInfoBar;
+		}
+		
+		/**
 		 * 由于模型未加载之前是在别的容器中，所以加载完成后要重新更新一下加到真正的容器之中
 		 *
 		 */
@@ -1227,7 +1237,7 @@ package com.rpgGame.app.graphics
 		 */
 		public function updateGuildWarInfoBar(oreList:Vector.<IntKeyValue>):void
 		{
-			if(!oreList){
+			if(!oreList||oreList.length==0){
 				if(_guildWarInfoBar){
 					_guildWarInfoBar.removeFromParent();
 					_guildWarInfoBar=null;

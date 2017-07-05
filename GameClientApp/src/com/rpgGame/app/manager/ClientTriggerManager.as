@@ -7,6 +7,8 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.manager.role.SceneRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.scene.trigger.TriggerHandler;
+	import com.rpgGame.app.scene.trigger.TriggerPool;
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.sender.StoryDungeonSender;
 	import com.rpgGame.core.app.AppConstant;
@@ -14,6 +16,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.coreData.cfg.ClientDialogCfgData;
 	import com.rpgGame.coreData.cfg.ClientSceneEffectCfgData;
+	import com.rpgGame.coreData.cfg.ClientTrigger;
 	import com.rpgGame.coreData.cfg.ClientTriggerCfgData;
 	import com.rpgGame.coreData.cfg.SceneEffectCfgData;
 	import com.rpgGame.coreData.cfg.TriggerCfgData;
@@ -41,7 +44,6 @@ package com.rpgGame.app.manager
 	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
-	import com.rpgGame.coreData.cfg.ClientTrigger;
 
 	/**
 	 *
@@ -58,6 +60,7 @@ package com.rpgGame.app.manager
 		private static var _plotDialogTrigger : ClientTrigger = null;
 		private static var _killStatistic : Dictionary = null;
 		private static var _isTrigging : Dictionary = null;
+		private static var triggerHandler:TriggerHandler;
 
 		public function ClientTriggerManager()
 		{
@@ -78,6 +81,12 @@ package com.rpgGame.app.manager
 
 		private static function onSwitchCmp() : void
 		{
+			if(triggerHandler){
+				triggerHandler.dispose();
+				triggerHandler=null;
+			}
+			triggerHandler=TriggerPool.getHandler();
+			
 //			if (CountryManager.isAtMyCountry())
 //			{
 //				triggerCreateSceneEffect(_createEffectTrigger);
@@ -224,11 +233,17 @@ package com.rpgGame.app.manager
 		
 		
 		
-		
 		/**客户端触发*/
 		public static function ClientBytrigger(areaid : int) : void
 		{
-			var triggerData : ClientTrigger = TriggerCfgData.getTriggerByAreaid(areaid);
+			if (_isTrigging[areaid])return;
+			if(triggerHandler){
+				triggerHandler.trigger(areaid);
+				_isTrigging[areaid]=true;
+				TweenLite.delayedCall(0.1, onTiggerkey,[areaid]);
+			}
+			
+		/*	var triggerData : ClientTrigger = TriggerCfgData.getTriggerByAreaid(areaid);
 			if (!triggerData)return;
 			var triggerId:int=triggerData.id;
 			if (_isTrigging[triggerId])return;
@@ -250,11 +265,11 @@ package com.rpgGame.app.manager
 				}
 			}
 			DungeonSender.reqTrigger(triggerData.id);///通知服务器 触发消息
-			TweenLite.delayedCall(0.1, onTiggerkey,[triggerData.id]);
+			TweenLite.delayedCall(0.1, onTiggerkey,[triggerData.id]);*/
 		}
-		private static function onTiggerkey(triggerId:int):void
+		private static function onTiggerkey(areaid:int):void
 		{
-			_isTrigging[triggerId]=false;
+			_isTrigging[areaid]=false;
 		}
 		public static function clearTigerByZone(zid : int) : void
 		{
@@ -434,7 +449,7 @@ package com.rpgGame.app.manager
 			}
 		}
 		
-		private static function createSceneEffect(effectData : ClientSceneEffect) : void
+		public static function createSceneEffect(effectData : ClientSceneEffect) : void
 		{//L.l("添加火墙："+effectData.id);
 			var bornPosArr : Array = effectData.bornPos.split(";");
 			var len : int = bornPosArr.length;

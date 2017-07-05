@@ -667,6 +667,7 @@ package com.rpgGame.app.manager.scene
 			SceneManager.generateSceneCollects();
 			SceneManager.generateSceneTransports();
 			SceneManager.generateEventArea();
+			
 		}
 		
 		/**

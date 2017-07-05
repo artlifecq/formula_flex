@@ -3,6 +3,7 @@ package com.rpgGame.app.manager
 	import com.game.engine3D.utils.MathUtil;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.graphics.StallHeadFace;
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.ctrl.ControlAutoPick;
 	import com.rpgGame.app.manager.fight.FightManager;
 	import com.rpgGame.app.manager.mount.MountManager;
@@ -205,7 +206,7 @@ package com.rpgGame.app.manager
 		 * 采集物
 		 *
 		 */
-		private static function onCollect(role : SceneRole) : void
+		public static function onCollect(role : SceneRole) : void
 		{
 			if (role == null || !role.usable)
 				return;
@@ -227,7 +228,12 @@ package com.rpgGame.app.manager
 				}
 				else
 				{
-					TaskSender.sendStartGatherMessage(collectData.serverID);
+					if(collectData.relation==MainRoleManager.actorInfo.relation)
+					{
+						TaskSender.sendStartGatherMessage(collectData.serverID);
+					}else{
+						NoticeManager.showNotifyById(60103);
+					}
 				}
 				
 			}
