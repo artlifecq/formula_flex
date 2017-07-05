@@ -690,6 +690,13 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			GameLog.addShow("添加角色对象id：" + data.id);
 			GameLog.addShow("添加对象服务器id：" + data.serverID.ToString());
+			//角色自带寻路
+			if (info.positions.length>0) 
+			{
+				var mInfo : RoleMoveInfo = new RoleMoveInfo();
+				mInfo.setValues(data.id,data.totalStat.getStatValue(CharAttributeType.SPEED), SystemTimeManager.curtTm,info.position,info.positions);
+				RoleStateUtil.walkByInfos(mInfo);
+			}
 			//			var otherHeroBiaoMap:HashMap = YunBiaoManager._otherBiaoCheHashMap;
 			//			if( otherHeroBiaoMap.getValue( data.id ) != null )
 			//				data.biaoCheData = otherHeroBiaoMap.getValue( data.id );
@@ -769,7 +776,12 @@ package com.rpgGame.app.cmdlistener.scene
 				GameLog.addShow("添加怪物客户端id：" + data.id);
 				GameLog.addShow("添加怪物服务器id：" + data.serverID.ToString());
 			}
-			
+			if (sceneRole&&info.positions.length>0) 
+			{
+				var mInfo : RoleMoveInfo = new RoleMoveInfo();
+				mInfo.setValues(data.id,info.speed, SystemTimeManager.curtTm,info.position,info.positions);
+				RoleStateUtil.walkByInfos(mInfo);
+			}
 			
 		}
 		
