@@ -4,6 +4,7 @@ package com.rpgGame.app.scene.animator
 	import com.game.engine3D.scene.render.vo.IRenderAnimator;
 	import com.game.engine3D.utils.MathUtil;
 	import com.game.engine3D.vo.BaseObj3D;
+	import com.rpgGame.app.manager.TrusteeshipFightSoulManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.scene.SceneRole;
@@ -124,7 +125,7 @@ package com.rpgGame.app.scene.animator
 		{
 			//当战魂攻击时，执行圆周运动
 			var postTime:Number=0;
-			if(_fightSoulRole.stateMachine.isAttacking)
+			if(TrusteeshipFightSoulManager.getInstance().isFightSoulRunning)//_fightSoulRole.stateMachine.isAttacking
 			{
 				postTime +=gapTm;
 				if(postTime >= TotalRunTime)
@@ -132,7 +133,7 @@ package com.rpgGame.app.scene.animator
 					postTime -= TotalRunTime;
 				}
 				var percent:Number = Math.PI * 2 * postTime/TotalRunTime;
-				
+				//Lyt.a(percent);
 				_fightSoulRole.x = _owner.x + _radius*Math.sin(percent);
 				_fightSoulRole.z = _owner.z + Math.cos(Math.abs(GlobalConfig.mapCameraRadian)) * _radius*Math.cos(percent);
 				return;
