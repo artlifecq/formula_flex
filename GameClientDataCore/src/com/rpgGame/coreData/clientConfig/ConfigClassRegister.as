@@ -172,6 +172,10 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_meritorious:String = "data.Q_meritorious";
 		/**  战功表					 */
 		public static const Q_meritorious_monster:String = "data.Q_meritorious_monster";
+		/**  秦陵秘宝刷怪配置表												 */
+		public static const Q_mibao_monster:String = "data.Q_mibao_monster";
+		/**  秦陵秘宝怪物配置					 */
+		public static const Q_mibao_reward:String = "data.Q_mibao_reward";
 		/**  任务表(所有任务都这里)																																											 */
 		public static const Q_mission_base:String = "data.Q_mission_base";
 		/**  任务奖励配置表			 */
@@ -186,6 +190,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_nine_tower:String = "data.Q_nine_tower";
 		/**  天降礼金								 */
 		public static const Q_daysdown_gold:String = "data.Q_daysdown_gold";
+		
 		/**  通知列表			 */
 		public static const Q_notify:String = "data.Q_notify";
 		/**  阵营关系				 */
@@ -322,6 +327,8 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_meridian", com.rpgGame.coreData.clientConfig.Q_meridian);
 			regClass("data.Q_meritorious", com.rpgGame.coreData.clientConfig.Q_meritorious);
 			regClass("data.Q_meritorious_monster", com.rpgGame.coreData.clientConfig.Q_meritorious_monster);
+			regClass("data.Q_mibao_monster", com.rpgGame.coreData.clientConfig.Q_mibao_monster);
+			regClass("data.Q_mibao_reward", com.rpgGame.coreData.clientConfig.Q_mibao_reward);
 			regClass("data.Q_mission_base", com.rpgGame.coreData.clientConfig.Q_mission_base);
 			regClass("data.Q_mission_reword", com.rpgGame.coreData.clientConfig.Q_mission_reword);
 			regClass("data.Q_mission_section", com.rpgGame.coreData.clientConfig.Q_mission_section);

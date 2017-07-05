@@ -21,8 +21,8 @@ package com.rpgGame.coreData.type
 		public static const ACTION_DEAD_LAUNCH : int = rEnum.next;//7
 		public static const ACTION_HIT : int = rEnum.next;//受击状态8
 		public static const ACTION_PREWAR : int = rEnum.next;//战斗预备状态9
-		public static const ACTION_ATTACK : int = rEnum.next;//攻击状态
-		public static const ACTION_ATTACK_UI : int = rEnum.next;//攻击状态,攻击状态
+		public static const ACTION_ATTACK : int = rEnum.next;//攻击状态10
+		public static const ACTION_ATTACK_UI : int = rEnum.next;//攻击状态,攻击状态11
 		public static const ACTION_BLINK : int = rEnum.next;//闪烁状态
 		public static const ACTION_BEAT_BACK : int = rEnum.next;//击退状态
 		public static const ACTION_FALL : int = rEnum.next;//掉落状态
