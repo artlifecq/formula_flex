@@ -190,15 +190,24 @@
 		 */
 		public static function openModeByInfo(info:FunctionBarInfo,id:String= "",data:Object = null,isAutoHide:Boolean = true):void
 		{
-			if(info.clickarg=="")
-				return ;
 			var openId:String=id?id:"";
 			if(info.clickType==1)
 			{
+				if(info.clickarg=="")
+					return ;
 				if(isAutoHide)
 					AppManager.showApp(info.clickarg,data,openId);
 				else
 					AppManager.showAppNoHide(info.clickarg,data,openId);
+			}else if(info.clickType ==3){
+				if(info.id == 105){
+					if(RedRewardManager.instance().canGetReward)
+					{
+						AppManager.showAppNoHide(AppConstant.REDREWARD_OPEN);
+					}else{
+						
+					}
+				}
 			}
 		}
     }
