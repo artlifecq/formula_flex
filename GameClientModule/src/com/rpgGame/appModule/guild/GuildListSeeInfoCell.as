@@ -9,9 +9,8 @@ package com.rpgGame.appModule.guild
 	
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	
-	import org.game.netCore.data.long;
-	import org.mokylin.skin.app.banghui.ItemBg;
 	import org.mokylin.skin.app.banghui.TeamItemList;
+	import org.mokylin.skin.common.ItemBg;
 	
 	import starling.display.DisplayObject;
 	

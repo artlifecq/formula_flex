@@ -14,8 +14,8 @@ package com.rpgGame.appModule.guild
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	import feathers.utils.filter.GrayFilter;
 	
-	import org.mokylin.skin.app.banghui.ItemBg;
 	import org.mokylin.skin.app.banghui.TeamItem2_Skin;
+	import org.mokylin.skin.common.ItemBg;
 	
 	import starling.display.DisplayObject;
 	

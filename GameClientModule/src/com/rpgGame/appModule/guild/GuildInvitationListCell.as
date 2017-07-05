@@ -5,12 +5,10 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.coreData.clientConfig.Q_guild;
 	import com.rpgGame.netData.guild.bean.GuildInviteInfo;
 	
-	import away3d.events.Event;
-	
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	
-	import org.mokylin.skin.app.banghui.ItemBg;
 	import org.mokylin.skin.app.banghui.ItemYaoQin;
+	import org.mokylin.skin.common.ItemBg;
 	
 	import starling.display.DisplayObject;
 	
@@ -31,7 +29,7 @@ package com.rpgGame.appModule.guild
 		
 		private function updateSkin():void
 		{
-			var item:ItemBg = _skin.bg.skin as ItemBg;
+			var item:ItemBg = _skin.bg.skin as org.mokylin.skin.common.ItemBg;
 			if(this.indexValue%2 ==0)
 			{
 				item.bg1.visible = true;
