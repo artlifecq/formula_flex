@@ -85,6 +85,7 @@ package com.rpgGame.app.manager
 			_stateMachine = new AIStateMachine(role);
 			_autoPickCtrl=new ControlAutoPick(role);
 			_autoSkillCtrl=new ControlAutoFightSelectSkill(role,(role.data as HeroData).job);
+			TrusteeshipFightSoulManager.getInstance().setup(role);
 		}
 		public  function get autoPickCtrl():ControlAutoPick
 		{
@@ -391,68 +392,6 @@ package com.rpgGame.app.manager
 				}
 			}
 			//_stateMachine.transition(AIStateType.TASK_WALK, null, force);
-		}
-		
-		
-		
-		private var soulFightId:long;
-		private var soulType:int;
-		private var soulBroken:Boolean=true
-		public function startFightSoulFight(targetId:long,type:int):void
-		{
-			if(!soulBroken)
-				return  ;
-			//无战魂，不能释放技能
-			if(FightSoulManager.instance().fightSoulInfo==null)
-				return  ;
-			var skill:Q_skill_model = FightSoulManager.instance().getSpellData();
-			//技能冷却中不能释放技能里
-			if(skill==null||SkillCDManager.getInstance().getSkillHasCDTime(skill))
-				return ;
-			//var tarID:int=targetId.ToGID();
-			var targetState : int = FightManager.getFightRoleState( SceneManager.getSceneObjByID(targetId.ToGID()) as SceneRole);//攻击类型
-			if(targetState==FightManager.FIGHT_ROLE_STATE_CAN_NOT_FIGHT)//不能攻击
-				return ;
-			if(soulFightId!=null)
-			{
-				if(!soulFightId.EqualTo(targetId))
-				{
-					var soulState : int = FightManager.getFightRoleState(SceneManager.getSceneObjByID(soulFightId.ToGID()) as SceneRole);//攻击类型
-					if(soulState==FightManager.FIGHT_ROLE_STATE_CAN_NOT_FIGHT)//上一攻击怪不能攻击了 
-					{
-						soulFightId=targetId;
-						soulType=type;
-					}
-					else if(type==1&&soulType==2)//上一攻击怪可以攻击 本次是主动攻击前一次为被动攻击怪
-					{
-						soulFightId=targetId;
-						soulType=type;
-					}
-				}
-			}
-			else
-			{
-				soulFightId=targetId;
-				soulType=type;
-			}
-			if(soulFightId)
-			{
-				soulBroken=false;
-				TweenLite.delayedCall(skill.q_cd*0.001, soulFightBroken);
-				SpellSender.releaseSpellAtTarget(skill.q_skillID,360*Math.random(),soulFightId);
-				SkillCDManager.getInstance().addSkillCDTime(skill);
-			}
-			
-			
-			//SpellSender.releaseSpellAtPos(skill.q_skillID,360*Math.random(),MainRoleManager.actor.x,MainRoleManager.actor.z);
-			
-			/*var configCDTime : int = skill.q_cd; //配置的CD时间
-			TweenLite.delayedCall(configCDTime/1000, startFightSoulFight);*/
-		}
-		
-		private function soulFightBroken():void
-		{
-			soulBroken=true;
 		}
 		
 		public function get isAutoFhist():Boolean

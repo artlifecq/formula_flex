@@ -12,6 +12,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.manager.CharAttributeManager;
 	import com.rpgGame.app.manager.LostSkillManager;
 	import com.rpgGame.app.manager.SkillCDManager;
+	import com.rpgGame.app.manager.TrusteeshipFightSoulManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -206,11 +207,11 @@ package com.rpgGame.app.cmdlistener.scene
 				if(msg.state.attackerId.ToGID() == MainRoleManager.actorID)//自己攻击别人
 				{
 					EventManager.dispatchEvent(SkillEvent.SKILL_RESULT,skillData.q_skillID);
-					TrusteeshipManager.getInstance().startFightSoulFight(msg.state.targetId,1);//战魂帮忙打
+					TrusteeshipFightSoulManager.getInstance().startFightSoulAuto(msg.state.targetId,1);//战魂帮忙打
 				}
 				else if(msg.state.targetId.ToGID() == MainRoleManager.actorID)//别人攻击自己
 				{
-					TrusteeshipManager.getInstance().startFightSoulFight(msg.state.attackerId,2);//战魂还击
+					TrusteeshipFightSoulManager.getInstance().startFightSoulAuto(msg.state.attackerId,2);//战魂还击
 				}
 			}
 			

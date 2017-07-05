@@ -35,6 +35,10 @@ package com.rpgGame.coreData.type
 		/**任务 自动采集*/
 		public static const TASK_GATHER : int = rEnum.next;
 		
+		/**战魂自动技能*/
+		public static const FIGHTSOUL_ATTACE : int = rEnum.next;
+		
+		
 		public function AIStateType()
 		{
 		}
