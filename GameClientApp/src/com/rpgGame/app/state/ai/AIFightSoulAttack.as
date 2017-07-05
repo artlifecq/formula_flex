@@ -15,7 +15,12 @@ package com.rpgGame.app.state.ai
 	import gs.TweenLite;
 	
 	import org.game.netCore.data.long;
-
+	/**
+	 *战魂自动攻击状态 
+	 * @author YT
+	 * 
+	 * 
+	 */	
 	public class AIFightSoulAttack extends AIState
 	{
 		private var skill:Q_skill_model;
