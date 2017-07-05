@@ -127,7 +127,16 @@ package com.rpgGame.app.manager
 		/**设置攻击目标*/
 		public function fightSoulTarget(targetId:long,type:int):void
 		{
+			var targetState : int = FightManager.getFightRoleState( SceneManager.getSceneObjByID(targetId.ToGID()) as SceneRole);//攻击类型
+			if(targetState==FightManager.FIGHT_ROLE_STATE_CAN_NOT_FIGHT)//不能攻击
+				return ;
+			if(!soulFightId)
+			{
+				soulFightId=targetId;
+			}
 			
+			/*
+			攻击规则 ：优先自己攻击   再被动攻击
 			var targetState : int = FightManager.getFightRoleState( SceneManager.getSceneObjByID(targetId.ToGID()) as SceneRole);//攻击类型
 			if(targetState==FightManager.FIGHT_ROLE_STATE_CAN_NOT_FIGHT)//不能攻击
 				return ;
@@ -152,7 +161,7 @@ package com.rpgGame.app.manager
 			{
 				soulFightId=targetId;
 				soulType=type;
-			}
+			}*/
 			/*if(soulFightId)
 			{
 				soulBroken=false;
