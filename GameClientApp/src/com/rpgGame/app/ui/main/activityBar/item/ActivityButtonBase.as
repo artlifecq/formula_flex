@@ -13,7 +13,6 @@
     import com.rpgGame.core.ui.SkinUI;
     import com.rpgGame.coreData.cfg.ClientConfig;
     import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
-    import com.rpgGame.coreData.type.activity.ActivityOpenStateType;
     
     import gs.TweenMax;
     
@@ -41,12 +40,10 @@
 		private var _TimeFun:Function;
         private var _runing:Boolean;
         private var _effect3D:InterObject3D;
-		protected var _activityState:int
 
         public function ActivityButtonBase(skin)
         {
             super(skin);
-			_activityState = ActivityOpenStateType.OPEN;
 			
         }
 		
@@ -64,8 +61,6 @@
 		public function canOpen():Boolean
 		{
 			if(FunctionOpenManager.getOpenLevelByFunBarInfo(_info)>MainRoleManager.actorInfo.totalStat.level)
-				return false;
-			if(_activityState == ActivityOpenStateType.CLOSE)
 				return false;
 			return true;
 		}
@@ -188,14 +183,12 @@
         public function onActivityOpen(data:Object=null):void
         {
 			onActivityData(data);
-			_activityState = ActivityOpenStateType.OPEN;
 			EventManager.dispatchEvent(ActivityEvent.OPEN_ACTIVITY,_info);
         }
 
         public function onActivityClose():void
         {
 			clearTime();
-			_activityState = ActivityOpenStateType.CLOSE;
 			EventManager.dispatchEvent(ActivityEvent.CLOSE_ACTIVITY,_info);
 			this.onTextColse();
         }
@@ -207,22 +200,22 @@
 
         protected function onTextStart(second:int):String
         {
-            return "<font color='#ffe258'>即将开启\n" + TimeUtil.intTimeActivityString(second) + "</font>";
+            return "<font color='#ffe258'>即将开启\n" + TimeUtil.format3TimeType(second) + "</font>";
         }
 
         protected function onTextRuning():String
         {
-            return "<font color='#4efd6f'>进行中</font>";
+            return "";
         }
 
         protected function onTextEnd(second:int):String
         {
-            return "<font color='#4efd6f'>" + TimeUtil.intTimeActivityString(second) + "</font>";
+            return "<font color='#4efd6f'>" + TimeUtil.format3TimeType(second) + "</font>";
         }
 		
 		protected function onTextRuningTime(second:int):String
 		{
-			return "<font color='#4efd6f'>" + TimeUtil.intTimeActivityString(second) + "</font>";
+			return "<font color='#4efd6f'>" + TimeUtil.format3TimeType(second) + "</font>";
 		}
         protected function onTextColse():String
         {
@@ -230,17 +223,15 @@
         }
 
 		/**
-		 * 设置活动时间 
-		 * @param openTime 开启时间点
-		 * @param duration 持续时间点
-		 * @param openTimeAdvance 提前预告时间点
+		 * 启动活动时间
+		 * @param time 时间
 		 * @param isdown 是否倒计时
 		 * 
 		 */
-        public function setTimeData(openTime:Number, duration:Number=0, openTimeAdvance:int=0,isdown:Boolean = true):void
+        public function setupActTime(time:int,isdown:Boolean = true):void
         {
-            _openTime = 0;
-			if (isNaN(openTime))
+            _openTime = time;
+		/*	if (isNaN(openTime))
 			{
 				_openTimeStr = openTime + "";
 				_openTimeData = new TimeData(openTime + "");
@@ -252,7 +243,7 @@
             _duration = duration;
             _endTime = _openTime + _duration;
 			
-            _openTimeAdvance = openTimeAdvance;
+            _openTimeAdvance = openTimeAdvance;*/
 			_isDown = isdown;
 			if(_isDown)
 			{
@@ -294,13 +285,12 @@
 				_TimeFun();
 			}else {//一直开启
 				this.onTextEmpty();
-				_activityState = ActivityOpenStateType.OPEN;
 			}
         }
 		
 		protected function updatedownTime():void
 		{
-			var currTime :Number = SystemTimeManager.curtTm;
+		/*	var currTime :Number = SystemTimeManager.curtTm;
 			var timeSpacer:Number = _openTime - currTime;
 			var endSpacer:Number;
 			if (currTime < _openTime)
@@ -308,7 +298,6 @@
 				if (_openTimeAdvance > 0 && currTime >= (_openTime - _openTimeAdvance))
 				{
 					this.onTextStart(timeSpacer * 0.001);
-					_activityState = ActivityOpenStateType.OPEN_COUNTDOWN;
 				}
 				else
 				{
@@ -319,14 +308,12 @@
 			{
 				_runing = true;
 				this.onTextRuning();
-				_activityState = ActivityOpenStateType.CLOSE_COUNTDOWN;
 			}
 			else if (currTime >= _openTime && currTime <= (_openTime + _duration))
 			{
 				_runing = true;
 				endSpacer = _endTime - currTime;
 				this.onTextEnd(endSpacer * 0.001);
-				_activityState = ActivityOpenStateType.CLOSE_COUNTDOWN;
 			}
 			else
 			{
@@ -335,14 +322,19 @@
 					_openTime = _openTimeData.getCheackNextTime(_duration);
 				}
 				onActivityClose();
+			}*/
+			_openTime--;
+			if(_openTime<=0){
+				onActivityClose();
+			}else{
+				this.onTextRuningTime(_openTime);
 			}
 		}
 		 
 		protected function updtaupTime():void
 		{
-			var currTime :Number = SystemTimeManager.curtTm - _openTime;
-			_runing = true;
-			this.onTextRuningTime(currTime*0.001);
+			_openTime++;
+			this.onTextRuningTime(_openTime);
 		}
 		
 		protected function onTextEmpty():void

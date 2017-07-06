@@ -15,6 +15,7 @@ package com.rpgGame.app.ui.main.buttons
 	import org.mokylin.skin.mainui.activityBar.button.ButtonDianfengduijue;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonFubendating;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonFubenduilie;
+	import org.mokylin.skin.mainui.activityBar.button.ButtonHongbao;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonHuangchengzhengba;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonHuodongtating;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonJiucengyaota;
@@ -57,6 +58,7 @@ package com.rpgGame.app.ui.main.buttons
 			regClass(102,ActivityButton,ButtonLunjian);
 			regClass(103,ActivityButton,ButtonFubendating);
 			regClass(104,ActivityButton,ButtonZhanchangdating);
+			regClass(105,ActivityButton,ButtonHongbao);
 			regClass(300,MultyActivityButton,ButtonFubenduilie);
 			regClass(301,LimitTimeActivityButton,ButtonShijieboss);
 			regClass(302,LimitTimeActivityButton,ButtonDianfengduijue);
@@ -160,7 +162,7 @@ package com.rpgGame.app.ui.main.buttons
 				var button:ActivityButton= MainButtonManager.getButtonBuyInfo(bar) as ActivityButton;
 				if(button)
 				{
-					button.setTimeData(SystemTimeManager.curtTm-startTime*1000,0,0,false);
+					button.setupActTime(0,false);
 				}
 			}
 		}

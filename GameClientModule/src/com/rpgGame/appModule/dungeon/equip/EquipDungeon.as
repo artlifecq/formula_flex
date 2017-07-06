@@ -78,6 +78,7 @@ package com.rpgGame.appModule.dungeon.equip
 			}
 			
 			EventManager.addEvent(DailyZoneDataManager.UPDATEDAILYZONEINFO,refeashValue);
+			
 			refeashValue();
 		}
 		

@@ -1,6 +1,6 @@
 package com.rpgGame.appModule.die
 {
-	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.clientConfig.Q_die;
 	
@@ -31,15 +31,7 @@ package com.rpgGame.appModule.die
 			_icon.x=20;
 			_icon.y=48;
 			this.addChild(_icon);
-			_skin.btn.addEventListener(Event.TRIGGERED,triggeeredHandler);
 		}
-		private function triggeeredHandler():void
-		{
-			if(_item.q_panel.length!=0){
-				AppManager.showApp(_item.q_panel);
-			}
-		}
-		
 		override protected function commitData():void
 		{
 			_item= this.data as Q_die;

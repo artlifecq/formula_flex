@@ -6,6 +6,9 @@ package com.game.engine3D.utils
 	
 	import away3d.core.managers.Stage3DProxy;
 	import away3d.debug.AwayStats;
+	import away3d.debug.AwayStatsMin;
+	
+	import starling.core.Starling;
 	
 	/**
 	 *
@@ -18,6 +21,7 @@ package com.game.engine3D.utils
 	{
 		/** 3D监测工具 **/
 		private static var _awayStatView : AwayStats;
+		private static var _awayStat : AwayStatsMin;
 		
 		public function StatsUtil()
 		{
@@ -27,6 +31,14 @@ package com.game.engine3D.utils
 		 * 显示3D监测工具
 		 *
 		 */
+		public static function showAwayStatsMin() : void
+		{
+			_awayStat ||= new AwayStatsMin();
+			_awayStat.x = 0;
+			_awayStat.y = 180;
+			Starling.current.stage.addChild(_awayStat);
+		}
+		
 		public static function showAwayStats(stage : Stage, stage3DProxy : Stage3DProxy = null) : void
 		{
 			if (stage3DProxy == null)
@@ -56,6 +68,10 @@ package com.game.engine3D.utils
 			if (_awayStatView && _awayStatView.parent)
 			{
 				_awayStatView.parent.removeChild(_awayStatView);
+			}
+			if (_awayStat && _awayStat.parent)
+			{
+				_awayStat.parent.removeChild(_awayStat);
 			}
 		}
 	}

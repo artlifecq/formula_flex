@@ -117,12 +117,12 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnOk = temp;
 			temp.name = "btnOk";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "领取奖励";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.color = 0xCFC6AE;
-			temp.width = 112;
-			temp.x = 178.5;
+			temp.color = 0xFFFFFF;
+			temp.width = 110;
+			temp.x = 179.5;
 			temp.y = 392;
 			return temp;
 		}

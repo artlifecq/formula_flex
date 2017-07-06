@@ -1,5 +1,6 @@
 package com.game.engine3D.scene.render.vo
 {
+	import away3d.utils.GCObject;
 
 	/**
 	 *
@@ -8,7 +9,7 @@ package com.game.engine3D.scene.render.vo
 	 * 创建时间：2015-6-4 下午6:08:33
 	 *
 	 */
-	public class RenderParamData3D
+	public class RenderParamData3D extends GCObject
 	{
 		/**
 		 * ID 某角色换装的唯一标识,注意该ID必须唯一

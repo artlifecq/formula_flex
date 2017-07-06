@@ -136,18 +136,23 @@ package com.rpgGame.app.manager
 		
 		public function getSkillValue(open:Q_lostskill_open,up:Q_lostskill_up):Number
 		{
-			switch(open.q_type)
+			return getValueByType(open.q_type,up.q_value);
+		}
+		
+		public function getValueByType(type:int,value:int):Number
+		{
+			switch(type)
 			{
 				case 1:
 				case 2:
 				case 6:
 				case 7:
-					return up.q_value/100000;
+					return value/100000;
 				case 3:
 				case 5:
-					return up.q_value; 
+					return value; 
 				default:
-					return up.q_value;
+					return value;
 			}
 		}
 		public function getSkillValueByInfo(skillState:SkillStateInfo):Number

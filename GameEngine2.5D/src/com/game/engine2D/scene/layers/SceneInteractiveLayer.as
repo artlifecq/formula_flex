@@ -15,12 +15,11 @@ package com.game.engine2D.scene.layers
 	
 	import away3d.containers.View3D;
 	import away3d.core.pick.PickingCollisionVO;
-	
+	import away3d.events.EventDispatcher;
 	import org.client.mainCore.manager.EventManager;
 	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
-	import away3d.events.EventDispatcher;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;

@@ -10,6 +10,7 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.manager.FangChenMiManager;
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
@@ -23,10 +24,7 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
-	import com.rpgGame.coreData.role.GirlPetData;
-	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.netData.backpack.bean.TempItemInfo;
-	import com.rpgGame.netData.map.bean.PetInfo;
 	import com.rpgGame.netData.player.message.SCNonagePromptMessage;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
 	import com.rpgGame.netData.vip.bean.VipCardInfo;
@@ -36,7 +34,6 @@ package   com.rpgGame.app.manager.debug
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.MessageMgr;
 	
 	
@@ -195,6 +192,10 @@ package   com.rpgGame.app.manager.debug
 				var id:int = arg[0];
 				var state:int = arg[1];
 				ActivetyDataManager.setActState(id,state,30);
+			});
+			commandList.put( ".showom", function (...arg):void
+			{
+				FunctionOpenManager.needShowOpenMode = arg[0]==1;
 			});
 			commandList.put( ".pet", function (...arg):void
 			{

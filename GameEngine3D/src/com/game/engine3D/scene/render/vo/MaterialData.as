@@ -1,6 +1,7 @@
 package com.game.engine3D.scene.render.vo
 {
 	import away3d.materials.MaterialBase;
+	import away3d.utils.GCObject;
 
 	/**
 	 *
@@ -9,7 +10,7 @@ package com.game.engine3D.scene.render.vo
 	 * 创建时间：2016-9-9 下午1:26:38
 	 *
 	 */
-	public class MaterialData
+	public class MaterialData extends GCObject
 	{
 		private var _type : String;
 		private var _id : Number;

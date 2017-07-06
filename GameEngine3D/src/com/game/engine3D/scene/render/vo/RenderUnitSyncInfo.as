@@ -1,5 +1,7 @@
 package com.game.engine3D.scene.render.vo
 {
+	import away3d.utils.GCObject;
+
 	/**
 	 *
 	 * 渲染单元同步信息，同步快照。
@@ -7,7 +9,7 @@ package com.game.engine3D.scene.render.vo
 	 * 创建时间：2015-12-8 下午1:26:38
 	 *
 	 */
-	public class RenderUnitSyncInfo
+	public class RenderUnitSyncInfo extends GCObject
 	{
 		/**
 		 * 动作名称 

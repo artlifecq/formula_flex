@@ -1,6 +1,8 @@
 package com.game.engine3D.scene.render.vo
 {
 	import flash.geom.Vector3D;
+	
+	import away3d.utils.GCObject;
 
 	/**
 	 *
@@ -9,7 +11,7 @@ package com.game.engine3D.scene.render.vo
 	 * 创建时间：2016-6-30 上午10:26:37
 	 *
 	 */
-	public class VolumeBounds
+	public class VolumeBounds extends GCObject
 	{
 		private var _min : Vector3D;
 		private var _max : Vector3D;

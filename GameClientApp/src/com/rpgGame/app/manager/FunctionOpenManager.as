@@ -1,6 +1,7 @@
 ﻿package com.rpgGame.app.manager
 {
     import com.gameClient.utils.JSONUtil;
+    import com.rpgGame.app.manager.chat.NoticeManager;
     import com.rpgGame.app.manager.guild.GuildManager;
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.core.app.AppConstant;
@@ -19,7 +20,7 @@
     {
         public static var funcBits:Object = null;
         private static var _statusMap:HashMap = new HashMap();
-		
+		public static var needShowOpenMode:Boolean = true;
 		/**
 		 * 检查已经开启的新功能,并通知消息 
 		 * @param level
@@ -41,10 +42,13 @@
 			}
 			if(isdispatch)
 			{
-				if(itemlist.length>0)
-					AppManager.showAppNoHide(AppConstant.OPEN_FUNCTION,itemlist.concat());
-				else
-					AppManager.hideApp(AppConstant.OPEN_FUNCTION);
+				if(needShowOpenMode)
+				{
+					if(itemlist.length>0)
+						AppManager.showAppNoHide(AppConstant.OPEN_FUNCTION,itemlist.concat());
+					else
+						AppManager.hideApp(AppConstant.OPEN_FUNCTION);
+				}
 				EventManager.dispatchEvent(FunctionOpenEvent.FUNCTIONOPENID,itemlist);
 			}
 			openNoticeByLevel(level);
@@ -164,11 +168,15 @@
 			openModeByInfo(modeInfo,info.q_id.toString(),data,isAutoHide);
 		}
 		
-		public static function openAppPaneById(id:String,data:Object = null,isAutoHide:Boolean = true):void
+		public static function openAppPaneById(id:String,data:Object = null,isAutoHide:Boolean = true,isError:Boolean = true):void
 		{
 			var info:Q_newfunc = NewFuncCfgData.getdataById(id);
 			if(info==null)
+			{
+				if(isError)
+					NoticeManager.showNotifyById(61040);
 				return ;
+			}
 			openFunctionId(info,data,isAutoHide);
 		}
 		
@@ -182,15 +190,24 @@
 		 */
 		public static function openModeByInfo(info:FunctionBarInfo,id:String= "",data:Object = null,isAutoHide:Boolean = true):void
 		{
-			if(info.clickarg=="")
-				return ;
 			var openId:String=id?id:"";
 			if(info.clickType==1)
 			{
+				if(info.clickarg=="")
+					return ;
 				if(isAutoHide)
 					AppManager.showApp(info.clickarg,data,openId);
 				else
 					AppManager.showAppNoHide(info.clickarg,data,openId);
+			}else if(info.clickType ==3){
+				if(info.id == 105){
+					if(RedRewardManager.instance().canGetReward)
+					{
+						AppManager.showAppNoHide(AppConstant.REDREWARD_OPEN);
+					}else{
+						
+					}
+				}
 			}
 		}
     }

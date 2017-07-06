@@ -1,6 +1,8 @@
 package com.game.engine3D.state
 {
 	import flash.utils.getQualifiedClassName;
+	
+	import away3d.utils.GCObject;
 
 	/**
 	 *
@@ -9,7 +11,7 @@ package com.game.engine3D.state
 	 * 创建时间：2015-4-9 下午5:25:12
 	 *
 	 */
-	public class State implements IState
+	public class State extends GCObject implements IState
 	{
 		protected var _machine : StateMachine;
 		protected var _ref : StateReference;

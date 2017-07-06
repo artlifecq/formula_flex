@@ -1,5 +1,6 @@
 package com.game.engine3D.state
 {
+	import away3d.utils.GCObject;
 
 	/**
 	 *
@@ -8,7 +9,7 @@ package com.game.engine3D.state
 	 * 创建时间：2015-4-10 上午10:15:16
 	 *
 	 */
-	public class StateReference
+	public class StateReference extends GCObject
 	{
 		private var _owner : Object;
 		private var _data : Object;
