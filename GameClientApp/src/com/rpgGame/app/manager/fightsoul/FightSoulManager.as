@@ -199,7 +199,56 @@ package com.rpgGame.app.manager.fightsoul
 			
 			return true;
 		}
-		
+		public function canLevelUp():Boolean
+		{
+			if (!fightSoulInfo) 
+			{
+				return false;
+			}
+			if(fightSoulInfo.level == FightSoulMaxLevel)
+			{
+				return false;
+			}
+			if(fightSoulInfo.exp<currentLeveldata.q_exp)
+			{
+				return false;
+			}
+			return true;
+		}
+		public function canGetReward(index:int):Boolean
+		{
+			if (!fightSoulInfo) 
+			{
+				return false;
+			}
+			if(isGetReward(index))
+			{
+				return false;
+			}
+			var reward:ClientItemInfo = _rewards[index];
+			if(int(reward.itemInfo.parameters)>FightSoulManager.instance().fightSoulInfo.vitality)
+			{
+				return false;
+			}
+			return true;
+		}
+		public function hasSthNotice():Boolean
+		{
+			if (canLevelUp()) 
+			{
+				return true;
+			}
+			var len:int=_rewards.length;
+			for (var i:int = 0; i < len; i++) 
+			{
+				if (canGetReward(i)) 
+				{
+					return true;
+				}
+			}
+			
+			return false;
+		}
 		public function chageModeLevel(level:int):void
 		{
 			var msg:CSFightSoulChangeModelMessage = new CSFightSoulChangeModelMessage();
@@ -237,6 +286,10 @@ package com.rpgGame.app.manager.fightsoul
 		
 		public function isGetReward(index:int):Boolean
 		{
+			if (!_fightSoulInfo) 
+			{
+				return false;
+			}
 			if(index>3)
 				return false;
 			else

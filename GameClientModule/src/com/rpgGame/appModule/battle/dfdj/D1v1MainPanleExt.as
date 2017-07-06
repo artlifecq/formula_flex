@@ -106,7 +106,7 @@ package com.rpgGame.appModule.battle.dfdj
 			_skin.icon.styleName=Mgr.d1v1Mgr.getRankIconUrl(rank,0);
 			
 			_skin.lbCiShu.text=data.currentNumber+"";
-			_skin.lbShengwang.text=data.reputation+"";
+			_skin.lbSheng.text=data.reputation+"";
 			
 			var state:int=arg[0];
 			showRewardEffect(state==1);

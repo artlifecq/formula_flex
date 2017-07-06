@@ -189,6 +189,9 @@ package com.rpgGame.app.graphics
 				case SceneCharType.DROP_GOODS:
 					addAndUpdateName();
 					break;
+				case SceneCharType.GIRL_PET:
+					addAndUpdateName();
+					break;
 				//				case SceneCharType.RACING_HERO:
 				//				case SceneCharType.ROBOT:
 				//addAndUpdateName();
@@ -229,6 +232,10 @@ package com.rpgGame.app.graphics
 				return;
 			}
 			var nameVisible : Boolean = _role.getAttachVisible(AttachDisplayType.ROLE_HEAD_NAME);
+			if (_role.type==SceneCharType.GIRL_PET) 
+			{
+				showAndHideElement(_nameBar, true,DecorCtrl.TOP_NAME);
+			}
 			if (_role.type == SceneCharType.NPC) //NPC，不管是否被选中都显示
 			{
 				showAndHideElement(_nameBar, nameVisible,DecorCtrl.TOP_NAME);
