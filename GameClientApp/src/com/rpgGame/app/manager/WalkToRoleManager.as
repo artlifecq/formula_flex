@@ -228,7 +228,7 @@ package com.rpgGame.app.manager
 				}
 				else
 				{
-					if(collectData.relation==MainRoleManager.actorInfo.relation)
+					if(collectData.faction==MainRoleManager.actorInfo.faction)
 					{
 						TaskSender.sendStartGatherMessage(collectData.serverID);
 					}else{

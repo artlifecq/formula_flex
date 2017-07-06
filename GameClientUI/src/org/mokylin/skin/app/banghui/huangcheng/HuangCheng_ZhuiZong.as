@@ -32,6 +32,8 @@ package org.mokylin.skin.app.banghui.huangcheng
 
 		public var item2:feathers.controls.SkinnableContainer;
 
+		public var item3:feathers.controls.SkinnableContainer;
+
 		public var lbHeadName:feathers.controls.Label;
 
 		public var lbInfo0:feathers.controls.Label;
@@ -53,8 +55,6 @@ package org.mokylin.skin.app.banghui.huangcheng
 		public var lbName:feathers.controls.Label;
 
 		public var lbName0:feathers.controls.Label;
-
-		public var lbNum:feathers.controls.SkinnableContainer;
 
 		public var lbPaiming:feathers.controls.Label;
 
@@ -235,7 +235,7 @@ package org.mokylin.skin.app.banghui.huangcheng
 			temp.name = "grpList";
 			temp.x = -1;
 			temp.y = 240;
-			temp.elementsContent = [__HuangCheng_ZhuiZong_UIAsset5_i(),__HuangCheng_ZhuiZong_UIAsset6_i(),__HuangCheng_ZhuiZong_UIAsset7_i(),__HuangCheng_ZhuiZong_UIAsset8_i(),item1_i(),item2_i(),lbNum_i(),__HuangCheng_ZhuiZong_UIAsset9_i(),__HuangCheng_ZhuiZong_UIAsset10_i(),__HuangCheng_ZhuiZong_UIAsset11_i()];
+			temp.elementsContent = [__HuangCheng_ZhuiZong_UIAsset5_i(),__HuangCheng_ZhuiZong_UIAsset6_i(),__HuangCheng_ZhuiZong_UIAsset7_i(),__HuangCheng_ZhuiZong_UIAsset8_i(),item1_i(),item2_i(),item3_i(),__HuangCheng_ZhuiZong_UIAsset9_i(),__HuangCheng_ZhuiZong_UIAsset10_i(),__HuangCheng_ZhuiZong_UIAsset11_i()];
 			return temp;
 		}
 
@@ -264,6 +264,20 @@ package org.mokylin.skin.app.banghui.huangcheng
 			temp.width = 215;
 			temp.x = 24;
 			temp.y = 56;
+			return temp;
+		}
+
+		private function item3_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			item3 = temp;
+			temp.name = "item3";
+			temp.height = 20;
+			var skin:StateSkin = new org.mokylin.skin.app.banghui.huangcheng.HuangChengJiFen_Item()
+			temp.skin = skin
+			temp.width = 215;
+			temp.x = 24;
+			temp.y = 79;
 			return temp;
 		}
 
@@ -462,20 +476,6 @@ package org.mokylin.skin.app.banghui.huangcheng
 			temp.width = 247;
 			temp.x = 0;
 			temp.y = 5;
-			return temp;
-		}
-
-		private function lbNum_i():feathers.controls.SkinnableContainer
-		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			lbNum = temp;
-			temp.name = "lbNum";
-			temp.height = 20;
-			var skin:StateSkin = new org.mokylin.skin.app.banghui.huangcheng.HuangChengJiFen_Item()
-			temp.skin = skin
-			temp.width = 215;
-			temp.x = 24;
-			temp.y = 79;
 			return temp;
 		}
 

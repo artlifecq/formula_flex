@@ -32,7 +32,7 @@ package com.rpgGame.app.scene.trigger.handler
 		
 		override public function  trigger(areaid:int):void
 		{
-			var checkId:int=areaids[MainRoleManager.actorInfo.relation-1];
+			var checkId:int=areaids[MainRoleManager.actorInfo.faction-1];
 			if(areaid==checkId){//是自己的矿石上缴区
 				if((MainRoleManager.actor.headFace as HeadFace).hasGuildWarOre()){//有矿石
 					GuildWarSender.reqTrunInOreMessage();

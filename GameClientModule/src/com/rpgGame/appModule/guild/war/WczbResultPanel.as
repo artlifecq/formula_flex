@@ -82,7 +82,7 @@ package com.rpgGame.appModule.guild.war
 			
 			
 			//参与奖励+进攻奖励+积分折算奖励
-			var myRe:int=MainRoleManager.actorInfo.relation;
+			var myRe:int=MainRoleManager.actorInfo.faction;
 			var isAttack:Boolean=myRe!=defId;//不是防守方
 			var jifen:int;
 			var canyuRewards:Array=JSONUtil.decode(cfg.q_reward3);

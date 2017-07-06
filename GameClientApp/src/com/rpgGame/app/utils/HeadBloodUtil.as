@@ -196,8 +196,8 @@ package com.rpgGame.app.utils
 			}
 			if (_role.type == SceneCharType.COLLECT)
 			{
-				var myRe:int=MainRoleManager.actorInfo.relation;
-				if((_role.data as SceneCollectData).relation!=myRe){//不是自己阵营
+				var myRe:int=MainRoleManager.actorInfo.faction;
+				if((_role.data as SceneCollectData).faction!=myRe){//不是自己阵营
 					return HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,"敌方矿物");
 				}
 				return _role.name;

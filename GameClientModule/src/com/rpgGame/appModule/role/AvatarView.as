@@ -107,6 +107,7 @@ package com.rpgGame.appModule.role
 		private var nextBlur:Number;
 		
 		private var _vipIcon:DragDropItem;
+		private var _marryIcon:DragDropItem;
 		public function AvatarView(skin:juese_Skin)
 		{
 			acceptDropFromContainerIdArr=[ItemContainerID.BackPack];
@@ -115,11 +116,13 @@ package com.rpgGame.appModule.role
 			_zhandouliEftContaner=new Inter3DContainer();
 			var index:int=_skin.container.getChildIndex(_skin.weapons);
 			_skin.container.addChildAt(_avatarContainer,index);
-			_skin.footMsg.addChild(_zhandouliEftContaner);
+			index=_skin.container.getChildIndex(_skin.weapons);
+			_skin.container.addChildAt(_zhandouliEftContaner,index);
 			_mgr=RoleEquipmentManager.instance;
 			initAvatar();
 			initEquips();
 			setGridsCount(equipNum);
+//			_skin.ui_zhandou.visible=false;
 		}
 		
 		private function initEquips():void
@@ -128,19 +131,25 @@ package com.rpgGame.appModule.role
 			for(var i:int=0;i<equipNum;i++){
 				equipGrids.push(getGrid(bgList[i]));
 				if(i<5){
-					equipGrids[i].x=0;
-					equipGrids[i].y=i*60;
+					equipGrids[i].x=7;
+					equipGrids[i].y=i*59;
 				}else{
-					equipGrids[i].x=310;
-					equipGrids[i].y=(i-5)*60;
+					equipGrids[i].x=301;
+					equipGrids[i].y=(i-5)*59;
 				}
 				_skin.weapons.addChild(equipGrids[i]);
 			}
 			_vipIcon=new DragDropItem(IcoSizeEnum.ICON_48,-1);
-			_vipIcon.setBg(GridBGType.VIP);
-			_vipIcon.x=310;
-			_vipIcon.y=(10-5)*60;
+//			_vipIcon.setBg(GridBGType.VIP);
+			_vipIcon.x=301;
+			_vipIcon.y=(10-5)*59;
 			_skin.weapons.addChild(_vipIcon);
+			
+			_marryIcon=new DragDropItem(IcoSizeEnum.ICON_48,-1);
+//			_marryIcon.setBg(GridBGType.VIP);
+			_marryIcon.x=7;
+			_marryIcon.y=5*59;
+			_skin.weapons.addChild(_marryIcon);
 		}
 		
 		private function getGrid(bg:String):DragDropItem
@@ -174,13 +183,13 @@ package com.rpgGame.appModule.role
 		{
 			_avatar = new InterAvatar3D();
 			_avatar.x = _skin.weapons.x + (_skin.weapons.width >> 1);
-			_avatar.y = _skin.weapons.y + _skin.weapons.height;
+			_avatar.y = _skin.weapons.y + _skin.weapons.height-20;
 			_avatarContainer.addChild3D(_avatar);
 			_showAvatarData = new RoleData(0);
 			_showAvatarData.bodyRadius=25;
 			glowfilter=new GlowFilter(0xdfb612,1,1,1);
 			
-			_zhandouliEft= _zhandouliEftContaner.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JIEMIAN_ZHANDOULI),135,28,0);
+			_zhandouliEft= _zhandouliEftContaner.playInter3DAt(ClientConfig.getEffect("ui_zhandouli_jiemian"),_skin.footMsg.x+180,_skin.footMsg.y+42,0);
 			Stage3DLayerManager.screenView.mouseChildren=Stage3DLayerManager.screenView.mouseEnabled=true;
 			Stage3DLayerManager.screenView.addEventListener(MouseEvent3D.MOUSE_DOWN,onMs);
 //			Stage3DLayerManager.screenView.addEventListener("mouseDown",onMs);
@@ -504,7 +513,7 @@ package com.rpgGame.appModule.role
 //			var roleName:String=info.name.substr(zoneInddex);
 			_skin.txt_roleName.text=_roleData.name;
 //			_skin.txt_qu.text=zone;
-			_skin.txt_type.text=_roleData.jobName;
+//			_skin.txt_type.text=_roleData.jobName;//新版没有职业了
 			_skin.txt_team.text=_roleData.societyName;
 		
 			_skin.txt_roleName.width=_skin.txt_roleName.textWidth;
@@ -516,14 +525,14 @@ package com.rpgGame.appModule.role
 		
 		private function updateTxt():void
 		{
-			_skin.txt_level.text="Lv"+_roleData.totalStat.level;
+			_skin.numLevel.label=_roleData.totalStat.level.toString();
 			
-			_skin.txt_loveName.visible=_skin.LoveIcon.visible=false;
+//			_skin.txt_loveName.visible=_skin.LoveIcon.visible=false;
 			
-			_skin.txt_loveName.text=_roleData.loveName.length!=0?_roleData.loveName:"无";
+			_skin.txt_loveName.text=_roleData.loveName.length!=0?_roleData.loveName:"";
 			_skin.NumZhanli.number=_roleData.totalStat.getStatValue(CharAttributeType.FIGHTING);
 //			_skin.Num_zhandouli.number=1000;
-			_skin.NumZhanli.x=128+(135-_skin.NumZhanli.width)/2;
+//			_skin.NumZhanli.x=128+(135-_skin.NumZhanli.width)/2;
 		}
 		
 		private function updateRole():void
@@ -547,12 +556,6 @@ package com.rpgGame.appModule.role
 			this._avatar.curRole.setScale(1.7);	
 //			RoleFaceMaskEffectUtil.addAvatarMask(AvatarMaskType.DIALOG_MASK,_avatar,144,-371,1.7);
 		}
-		
-		protected function on3dE(event:Event):void
-		{
-			trace(123);
-		}		
-	
 		
 		public function onTouch(e:TouchEvent):void
 		{

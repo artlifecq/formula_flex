@@ -157,7 +157,7 @@ package com.rpgGame.app.ui.scene
 		private function toOre(msg:ResGuildWarOrePositionMessage):void
 		{
 			var mapId:int=MainRoleManager.actorInfo.mapID;
-			MainRoleSearchPathManager.walkToScene(mapId,msg.position.x,msg.position.y,onArrive,200,msg.monsterId);
+			MainRoleSearchPathManager.walkToScene(mapId,msg.position.x,msg.position.y,onArrive,10,msg.monsterId);
 		}
 		
 		private function onArrive(id:long):void
@@ -170,7 +170,7 @@ package com.rpgGame.app.ui.scene
 		
 		private function getCampScore(msg:ResGuildWarCampScoreMessage):void
 		{
-			var myCamp:int=MainRoleManager.actorInfo.relation;
+			var myCamp:int=MainRoleManager.actorInfo.faction;
 			var max:int=cfg.q_integral_victory;
 			for(var i:int=0;i<msg.infos.length;i++){
 				var info:CampScoreInfo=msg.infos[i];
@@ -195,13 +195,13 @@ package com.rpgGame.app.ui.scene
 			for(var i:int=0;i<3;i++){
 				var itemI:int=i+1; 
 				if(i<num){
-					(_skin["item"+itemI] as HuangChengJiFen_Item).lbNo.text=msg.infos[i].rank.toString();
-					(_skin["item"+itemI] as HuangChengJiFen_Item).lbName.text=msg.infos[i].playerName;
-					(_skin["item"+itemI] as HuangChengJiFen_Item).lbNum.text=msg.infos[i].score.toString();
+					(_skin["item"+itemI].skin as HuangChengJiFen_Item).lbNo.text=msg.infos[i].rank.toString();
+					(_skin["item"+itemI].skin as HuangChengJiFen_Item).lbName.text=msg.infos[i].playerName;
+					(_skin["item"+itemI].skin as HuangChengJiFen_Item).lbNum.text=msg.infos[i].score.toString();
 				}else{
-					(_skin["item"+itemI] as HuangChengJiFen_Item).lbNo.text="";
-					(_skin["item"+itemI] as HuangChengJiFen_Item).lbName.text="";
-					(_skin["item"+itemI] as HuangChengJiFen_Item).lbNum.text="";
+					(_skin["item"+itemI].skin as HuangChengJiFen_Item).lbNo.text="";
+					(_skin["item"+itemI].skin as HuangChengJiFen_Item).lbName.text="";
+					(_skin["item"+itemI].skin as HuangChengJiFen_Item).lbNum.text="";
 				}
 			}
 		}

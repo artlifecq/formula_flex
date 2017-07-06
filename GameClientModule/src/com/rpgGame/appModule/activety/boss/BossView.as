@@ -99,14 +99,25 @@ package com.rpgGame.appModule.activety.boss
 			}
 			initEvent();
 			updateList();
+			var len:int=_activeData.length;
+			var info:ActivetyInfo;
 			if(!data){
-				_skin.ListItem.selectedIndex=0;
-				_skin.ListItem.dataProvider.updateItemAt(0);
-				_skin.ListItem.scrollToDisplayIndex(0);
+				for(i=0;i<len;i++){
+					info=_activeData.data[i] as ActivetyInfo;
+					if(info.info&&info.info.joinState==ActivityJoinStateEnum.JOINING){//跳到进行中
+						_skin.ListItem.selectedIndex=i;
+						_skin.ListItem.scrollToDisplayIndex(i);
+						_skin.ListItem.dataProvider.updateItemAt(i);
+						break;
+					}
+				}
+				if(_skin.ListItem.selectedIndex==-1){
+					_skin.ListItem.selectedIndex=0;
+				}
 			}else{
 				var dataInfo:ActivetyInfo=data as ActivetyInfo;
 				for(i=0;i<_activeData.length;i++){
-					var info:ActivetyInfo=_activeData.data[i] as ActivetyInfo;
+					info=_activeData.data[i] as ActivetyInfo;
 					if(info.actCfg.q_activity_id==dataInfo.actCfg.q_activity_id){
 						_skin.ListItem.selectedIndex=i;
 						_skin.ListItem.scrollToDisplayIndex(i);

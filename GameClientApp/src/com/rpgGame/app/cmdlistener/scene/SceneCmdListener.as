@@ -216,7 +216,7 @@ package com.rpgGame.app.cmdlistener.scene
 		{
 			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;			
 			if(role){
-				(role.data as HeroData).relation=msg.faction;
+				(role.data as HeroData).faction=msg.faction;
 			}
 		}
 		
@@ -750,6 +750,7 @@ package com.rpgGame.app.cmdlistener.scene
 				collectData.y = info.position.y;
 				collectData.isDynamicCreate =true;
 				collectData.relation=info.relation;
+				collectData.faction=info.faction;
 				SceneRoleManager.getInstance().createCollect(collectData);
 			}
 			else if(qData.q_monster_type==4)//npc创建流程       对应 改的东西太多了 先保留
@@ -759,7 +760,6 @@ package com.rpgGame.app.cmdlistener.scene
 				data.id = info.monsterId.ToGID();
 				data.modelID = info.modelId;
 				data.distributeId=info.distributeId;
-				data.relation=info.relation;
 				RoleData.readMonster(data,info);
 				sceneRole =SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
 				addTaskmark(sceneRole);			
@@ -776,7 +776,6 @@ package com.rpgGame.app.cmdlistener.scene
 				data.id = info.monsterId.ToGID();
 				data.modelID = info.modelId;
 				data.distributeId=info.distributeId;
-				data.relation=info.relation;
 				RoleData.readMonster(data,info);
 				sceneRole =SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
 				
