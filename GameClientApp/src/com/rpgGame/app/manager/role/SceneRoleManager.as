@@ -712,33 +712,33 @@ package com.rpgGame.app.manager.role
 			var tmp:RenderUnit3D
 			if (newVal>oldVal) 
 			{
-				var add:int=newVal-oldVal;
-				for (i = 0; i < add;i++) 
-				{
-					tmp=SpellAnimationHelper.addTargetEffect(role, oldVal+i, RenderUnitType.NEEDLEEFFECT, "tx_role_mieshijinzhen_01_5", BoneNameEnum.c_crossbow, 0);
-					tmp.x = needleRoleX[oldVal+i];
-					tmp.y =0;
-					tmp.z = 0;
-					var data:Object={y:needleRoleY[oldVal+i]-30,delay:i*0.3,ease:Sine.easeInOut};
-					data["yoyo"] = true;
-					data["repeat"] = -1;
-					TweenMax.to(tmp,1.5,data);
-				}
+//				var add:int=newVal-oldVal;
+//				for (i = 0; i < add;i++) 
+//				{
+//					tmp=SpellAnimationHelper.addTargetEffect(role, oldVal+i, RenderUnitType.NEEDLEEFFECT, "tx_role_mieshijinzhen_01_5", BoneNameEnum.c_crossbow, 0);
+//					tmp.x = needleRoleX[oldVal+i];
+//					tmp.y =0;
+//					tmp.z = 0;
+//					var data:Object={y:needleRoleY[oldVal+i]-30,delay:i*0.3,ease:Sine.easeInOut};
+//					data["yoyo"] = true;
+//					data["repeat"] = -1;
+//					TweenMax.to(tmp,1.5,data);
+//				}
 			}
 			else
 			{
-				var dec:int=oldVal-newVal;	
-				for (i = 0; i < dec; ++i) 
-				{
-					tmp=role.avatar.getRenderUnitByID(RenderUnitType.NEEDLEEFFECT,oldVal-1-i);
-					TweenMax.killTweensOf(tmp);
-					role.avatar.removeRenderUnit(tmp);
-				}
-				for (i = 0; i < newVal; ++i) 
-				{
-					tmp=role.avatar.getRenderUnitByID(RenderUnitType.NEEDLEEFFECT,i);
-					tmp.x = needleRoleX[i];
-				}
+//				var dec:int=oldVal-newVal;	
+//				for (i = 0; i < dec; ++i) 
+//				{
+//					tmp=role.avatar.getRenderUnitByID(RenderUnitType.NEEDLEEFFECT,oldVal-1-i);
+//					TweenMax.killTweensOf(tmp);
+//					role.avatar.removeRenderUnit(tmp);
+//				}
+//				for (i = 0; i < newVal; ++i) 
+//				{
+//					tmp=role.avatar.getRenderUnitByID(RenderUnitType.NEEDLEEFFECT,i);
+//					tmp.x = needleRoleX[i];
+//				}
 			}
 			
 		}
