@@ -5,6 +5,8 @@ package com.game.engine3D.state
 	import flash.utils.Dictionary;
 	import flash.utils.getQualifiedClassName;
 	
+	import away3d.utils.GCObject;
+	
 	/**
 	 *
 	 * 状态机
@@ -12,7 +14,7 @@ package com.game.engine3D.state
 	 * 创建时间：2015-4-9 下午2:05:15
 	 *
 	 */
-	public class StateMachine implements IInstancePoolClass
+	public class StateMachine extends GCObject implements IInstancePoolClass
 	{
 		public static var isDebug : Boolean = false;
 		protected var _owner : Object;

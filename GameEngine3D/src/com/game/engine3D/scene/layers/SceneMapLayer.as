@@ -323,8 +323,8 @@ package com.game.engine3D.scene.layers
 					case AssetType.PROPERTY_ANIMATOR_CONTAINER:
 					case AssetType.CONTAINER:
 					case AssetType.COMPOSITE_ANIMATOR_GROUP:
-					case AssetType.KEY_FRAME_OBJECT_CONTAINER:
-					case AssetType.EVENTS_ANIMATOR_CONTAINER:
+//					case AssetType.KEY_FRAME_OBJECT_CONTAINER:
+//					case AssetType.EVENTS_ANIMATOR_CONTAINER:
 					case AssetType.CAMERAS_ACTIVE_CONTROL_GROUP:
 					case AssetType.RESOURCE_BUNDLE_INSTANCE:
 					case AssetType.RIBBON:

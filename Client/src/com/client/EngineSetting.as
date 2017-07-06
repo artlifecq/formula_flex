@@ -30,6 +30,7 @@ package com.client
 		{
 			GlobalConfig.radiusForEntity = 32;
 			GlobalConfig.use2DMap = true;
+			ClientConfig.isMapUseAtf = true;
 //			GlobalConfig.MAP_2D_CAMERA_ANGLE = 45;
 			GlobalConfig.mapCameraAngle = -40;
 			

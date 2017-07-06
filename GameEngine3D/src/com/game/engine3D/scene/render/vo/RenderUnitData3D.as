@@ -1,6 +1,5 @@
 package com.game.engine3D.scene.render.vo
 {
-	import com.game.engine3D.config.GlobalConfig;
 	import com.game.engine3D.loader.GlobalTexture;
 	import com.game.engine3D.loader.GlobalTextureGroup;
 	import com.game.engine3D.vo.FadeAlphaRectData;
@@ -34,6 +33,7 @@ package com.game.engine3D.scene.render.vo
 	import away3d.materials.methods.EffectMethodBase;
 	import away3d.materials.methods.FadeAlphaMethod;
 	import away3d.textures.Texture2DBase;
+	import away3d.utils.GCObject;
 	
 	/**
 	 *
@@ -42,7 +42,7 @@ package com.game.engine3D.scene.render.vo
 	 * 创建时间：2015-6-4 下午1:26:38
 	 *
 	 */
-	public class RenderUnitData3D
+	public class RenderUnitData3D extends GCObject
 	{
 		private var _type : String;
 		private var _id : Number;

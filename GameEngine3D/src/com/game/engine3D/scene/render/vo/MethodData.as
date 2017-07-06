@@ -1,6 +1,7 @@
 package com.game.engine3D.scene.render.vo
 {
 	import away3d.materials.methods.EffectMethodBase;
+	import away3d.utils.GCObject;
 
 	/**
 	 *
@@ -9,7 +10,7 @@ package com.game.engine3D.scene.render.vo
 	 * 创建时间：2016-9-21 下午1:26:38
 	 *
 	 */
-	public class MethodData
+	public class MethodData extends GCObject
 	{
 		private var _method : EffectMethodBase;
 		private var _materialNames : Array;

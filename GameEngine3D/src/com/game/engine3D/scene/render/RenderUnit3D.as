@@ -259,6 +259,8 @@ package com.game.engine3D.scene.render
 		private var _shareMaterialProperty : Vector.<MaterialPropertyData>;
 		
 		private var _is25D:Boolean = false;
+		
+		private var _validateChildMeshEffect:Boolean = false;
 
 		public function RenderUnit3D(rpd : RenderParamData3D,is25D:Boolean=false)
 		{
@@ -968,7 +970,10 @@ package com.game.engine3D.scene.render
 			{
 				for each (obj in _childObj3ds)
 				{
-					validateContainerEffect(obj);
+					if ((GlobalConfig.use2DMap || _validateChildMeshEffect) && obj is Mesh) //CompositeMesh,Mesh//
+						validateMeshEffect(Mesh(obj));
+					else
+						validateContainerEffect(obj);
 				}
 			}
 		}
@@ -1048,10 +1053,6 @@ package com.game.engine3D.scene.render
 			{
 			}
 			else
-			{
-				layerType = 0;
-			}
-			if(!_visible)
 			{
 				layerType = 0;
 			}
@@ -2167,6 +2168,16 @@ package com.game.engine3D.scene.render
 			_entityPhantom = value;
 			validateEffect();
 		}
+		
+		public function get validateChildMeshEffect():Boolean
+		{
+			return _validateChildMeshEffect;
+		}
+		
+		public function set validateChildMeshEffect(value:Boolean):void
+		{
+			_validateChildMeshEffect = value;
+		}
 
 		private function onSetRenderResourceData(resData : RenderResourceData) : void
 		{
@@ -2929,6 +2940,7 @@ package com.game.engine3D.scene.render
 			_shareMaterialProperty = new Vector.<MaterialPropertyData>();
 			
 			useFog = false;
+			_validateChildMeshEffect = false;
 		}
 
 		/**

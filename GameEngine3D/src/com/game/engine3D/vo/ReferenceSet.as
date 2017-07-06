@@ -1,5 +1,6 @@
 package com.game.engine3D.vo
 {
+	import away3d.utils.GCObject;
 
 	/**
 	 *
@@ -8,7 +9,7 @@ package com.game.engine3D.vo
 	 * 创建时间：2016-1-14 上午10:15:16
 	 *
 	 */
-	public class ReferenceSet
+	public class ReferenceSet extends GCObject
 	{
 		private var _references : Array;
 
