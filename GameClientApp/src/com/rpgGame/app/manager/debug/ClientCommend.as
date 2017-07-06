@@ -23,7 +23,10 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
+	import com.rpgGame.coreData.role.GirlPetData;
+	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.netData.backpack.bean.TempItemInfo;
+	import com.rpgGame.netData.map.bean.PetInfo;
 	import com.rpgGame.netData.player.message.SCNonagePromptMessage;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
 	import com.rpgGame.netData.vip.bean.VipCardInfo;
@@ -33,6 +36,7 @@ package   com.rpgGame.app.manager.debug
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
+	import org.game.netCore.data.long;
 	import org.game.netCore.net.MessageMgr;
 	
 	
@@ -191,6 +195,20 @@ package   com.rpgGame.app.manager.debug
 				var id:int = arg[0];
 				var state:int = arg[1];
 				ActivetyDataManager.setActState(id,state,30);
+			});
+			commandList.put( ".pet", function (...arg):void
+			{
+				var mod:int = arg[0];
+				
+				var petInfo:PetInfo=new PetInfo();
+				petInfo.petId=new long(9999);
+				petInfo.ownerId=(MainRoleManager.actor.data as HeroData).serverID;
+				petInfo.petModelId=mod;
+				petInfo.x=MainRoleManager.actor.pos.x;
+				petInfo.y=-MainRoleManager.actor.pos.y;
+				var data:GirlPetData=new GirlPetData();
+				data.setServerData(petInfo);
+				SceneRoleManager.getInstance().createGirlPet(data);
 			});
 		}
 		

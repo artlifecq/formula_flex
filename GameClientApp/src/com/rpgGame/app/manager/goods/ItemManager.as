@@ -203,5 +203,9 @@ package com.rpgGame.app.manager.goods
 		{
 			return false;
 		}
+		public static function checkEquip2HCByType(type:int):Boolean
+		{
+			return true;
+		}
 	}
 }

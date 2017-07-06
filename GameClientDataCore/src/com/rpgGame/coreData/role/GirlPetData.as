@@ -8,9 +8,9 @@ package com.rpgGame.coreData.role
 	{
 		private var _modelId:int;
 		private var _ownerName:String;
-		public function GirlPetData(type:int, priority:int=100)
+		public function GirlPetData( priority:int=100)
 		{
-			super(type, priority);
+			super(RoleType.GIRL_PET, priority);
 		}
 		public function setServerData(info:PetInfo):void
 		{
@@ -19,9 +19,11 @@ package com.rpgGame.coreData.role
 			this._modelId=info.petModelId;
 			this.ownerId=info.ownerId.ToGID();
 			this._ownerName=info.ownerName;
+			this.name="xxxxx";
 			this.x=info.x;
 			this.y=info.y;
 			this.direction=info.dir;
+			this.avatarInfo.setBodyResID("monster/pt_shiwei_006/pt_shiwei_006",null);
 		}
 	}
 }

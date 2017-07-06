@@ -11,10 +11,26 @@ package com.rpgGame.core.ui.tip
 	 */	
 	public class RewardTipTree
 	{
+		public static var ins:RewardTipTree=new RewardTipTree();
 		private var _roots:HashMap=new HashMap();
-		
+		public var recordNodeState2Server:Function;
+		private var _serverRecord:HashMap;
 		public function RewardTipTree()
 		{
+		}
+		public function setServerData(hash:HashMap):void
+		{
+			this._serverRecord=hash;
+			var keys:Array=hash.keys();
+			var tmp:RewardTipNode;
+			for each (var key:String in keys) 
+			{
+				tmp=getNode(key);
+				if (tmp) 
+				{
+					tmp.setState(Boolean(hash.remove(key)),true);
+				}
+			}
 		}
 		public function getNode(key:String):RewardTipNode
 		{
@@ -38,6 +54,11 @@ package com.rpgGame.core.ui.tip
 			if (parentNode==null) 
 			{
 				addRoot(key,child);
+				child.isRoot=true;
+				if (_serverRecord&&_serverRecord.containsKey(key)) 
+				{
+					child.setState(Boolean(_serverRecord.remove(key)),true);
+				}
 			}
 			else
 			{

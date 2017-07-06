@@ -201,6 +201,10 @@ package com.rpgGame.app.manager.fightsoul
 		}
 		public function canLevelUp():Boolean
 		{
+			if (!fightSoulInfo) 
+			{
+				return false;
+			}
 			if(fightSoulInfo.level == FightSoulMaxLevel)
 			{
 				return false;
@@ -278,6 +282,10 @@ package com.rpgGame.app.manager.fightsoul
 		
 		public function isGetReward(index:int):Boolean
 		{
+			if (!_fightSoulInfo) 
+			{
+				return false;
+			}
 			if(index>3)
 				return false;
 			else

@@ -42,6 +42,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.info.stall.StallData;
 	import com.rpgGame.coreData.role.BiaoCheData;
+	import com.rpgGame.coreData.role.GirlPetData;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleData;
@@ -473,7 +474,33 @@ package com.rpgGame.app.manager.role
 			if (role.headFace is HeadFace)
 				(role.headFace as HeadFace).updateName();
 		}
-		
+		public function createGirlPet(data:GirlPetData):void
+		{
+			removeSceneRoleByIdAndType(data.id, SceneCharType.GIRL_PET);
+			var role : SceneRole = SceneRole.create(SceneCharType.GIRL_PET, data.id);
+			//设置VO
+			role.data = data;
+			role.name = data.name;
+			role.headFace = HeadFace.create(role);
+			//role.headFace.show();
+			//role.headFace.showHead();
+			//data.avatarInfo.setBodyResID(data.avatarRes, null);
+//			var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(data.avatarRes);
+//			if (avatarResConfig)
+//			{
+//				data.avatarInfo.effectResID = avatarResConfig.idleEffect;
+//			}
+			
+			//执行主换装更新
+			AvatarManager.updateAvatar(role);
+			role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true); //切换到“站立状态”
+			
+			role.setScale(data.sizeScale);
+			role.setGroundXY(data.x, data.y);
+			role.rotationY = data.direction;
+			SceneManager.addSceneObjToScene(role, true, false, false);
+			
+		}
 		/**
 		 * 创建掉落物
 		 * @param data

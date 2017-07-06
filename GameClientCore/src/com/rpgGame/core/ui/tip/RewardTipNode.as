@@ -54,6 +54,7 @@ package com.rpgGame.core.ui.tip
 		private var _parentNodeKey:String;
 		private var _childrenNodes:Vector.<String>;
 		private var _key:String;
+		private var _isRoot:Boolean;
 		public static function getNode(key:String):RewardTipNode
 		{
 			return allNode.getValue(key);
@@ -105,12 +106,21 @@ package com.rpgGame.core.ui.tip
 		 * @param state 为true父节点直接设为true,false,父节点会检测
 		 * 
 		 */		
-		public function setState(state:Boolean):void
+		public function setState(state:Boolean,isInit:Boolean=false):void
 		{
 			if (_tipCtrl) 
 			{
+				if (_isRoot&&!isInit&&RewardTipTree.ins.recordNodeState2Server!=null) 
+				{
+					if (_tipCtrl.hasReward!=state) 
+					{
+						RewardTipTree.ins.recordNodeState2Server(_key,state?1:0);
+					}
+				}
 				_tipCtrl.hasReward=state;
+				
 			}
+			
 			if (_parentNodeKey) 
 			{
 				var p:RewardTipNode=getNode(_parentNodeKey);
@@ -203,6 +213,17 @@ package com.rpgGame.core.ui.tip
 			}
 			
 		}
+
+		public function get isRoot():Boolean
+		{
+			return _isRoot;
+		}
+
+		public function set isRoot(value:Boolean):void
+		{
+			_isRoot = value;
+		}
+
 		
 	}
 }

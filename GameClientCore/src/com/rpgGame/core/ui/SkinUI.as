@@ -201,22 +201,22 @@ package com.rpgGame.core.ui
 			}
 			super.dispose();
 		}
-		private static var _tree:RewardTipTree=new RewardTipTree();
+		
 		public static function addNode(parentKey:String,key:String,dis:DisplayObjectContainer,dw:int,check:Function,isGray:Boolean=false,param:Object=null,isInTimer:Boolean=false):void
 		{
-			_tree.addNode(parentKey,key,dis,dw,check,isGray,param,isInTimer);
+			RewardTipTree.ins.addNode(parentKey,key,dis,dw,check,isGray,param,isInTimer);
 		}
 		public static function notifyUpdate(key:String):void
 		{
-			_tree.updateNode(key);
+			RewardTipTree.ins.updateNode(key);
 		}
 		public static function setRTNState(key:String,state:Boolean):void
 		{
-			_tree.setState(key,state);
+			RewardTipTree.ins.setState(key,state);
 		}
 		public static function removeNode(key:String):void
 		{
-			_tree.removeNode(key);
+			RewardTipTree.ins.removeNode(key);
 		}
 	}
 }
