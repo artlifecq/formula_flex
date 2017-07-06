@@ -64,16 +64,7 @@ package com.rpgGame.app.manager
 				stopFightSoulAuto();
 				return;
 			}	
-			if(FightSoulManager.instance().getSpellData())//距离太远
-			{
-				var sid:int=CastSpellHelper.caseSpell(new CastSpellInfo(FightSoulManager.instance().getSpellData()), true)
-				if(sid==1)
-				{
-					stopFightSoulAuto();
-					return;
-				}
-				
-			}
+			
 			
 			_stateMachine.transition(AIStateType.FIGHTSOUL_ATTACE, null, force);
 		}
