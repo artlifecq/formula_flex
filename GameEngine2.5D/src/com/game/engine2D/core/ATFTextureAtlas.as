@@ -46,8 +46,8 @@ package com.game.engine2D.core
 				var texture:ITextureMaterial = null;
 				if (isAtf)
 					texture = MaterialUtils.getAtfMaterialByData(pack.atfDataArr[i],pack.path,pack.autoRecycleEnable, pack.isAsync, pack.blendMode);
-				else 
-					texture = MaterialUtils.getBpgMaterialByData(pack.atfDataArr[i],pack.path,pack.enableScaleTexture,pack.autoRecycleEnable, pack.blendMode);
+//				else 
+//					texture = MaterialUtils.getBpgMaterialByData(pack.atfDataArr[i],pack.path,pack.enableScaleTexture,pack.autoRecycleEnable, pack.blendMode);
 				texture.name += i;
 				texture.index = i;
 				_atlasTextures.push(texture);

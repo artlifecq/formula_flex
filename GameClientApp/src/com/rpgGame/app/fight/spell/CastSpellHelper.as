@@ -24,6 +24,7 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.app.sender.SpellSender;
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.app.state.role.control.CastSpellLockStateReference;
+	import com.rpgGame.app.state.role.control.TripleAttackSpellLockStateReference;
 	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
 	import com.rpgGame.core.events.SpellEvent;
 	import com.rpgGame.core.fight.spell.CastSpellInfo;
@@ -212,6 +213,13 @@ package com.rpgGame.app.fight.spell
 					var spellData : Q_skill_model = caseInfo.spellData;
 					ref.setParams(spellData);
 					MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_CAST_SPELL_LOCK, ref);
+					if (spellData.q_relate_spells!="") 
+					{
+						var reft:TripleAttackSpellLockStateReference=MainRoleManager.actor.stateMachine.getReference(TripleAttackSpellLockStateReference) as TripleAttackSpellLockStateReference;
+						reft.setParams(spellData.q_skillID);
+						MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_TRIPLE_ATTACK_LOCK, reft);
+					}
+					
 					SpellSender.releaseSpell(caseInfo.caseSpellData.q_skillID, caseInfo.releasePos.x, caseInfo.releasePos.y, angle, caseInfo.targetServerID);
 				}
 			}

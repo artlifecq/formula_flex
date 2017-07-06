@@ -8,6 +8,7 @@ package org.mokylin.skin.app.fuben
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.app.fuben.ListItem_Skin;
+	import org.mokylin.skin.common.TongYongTanKuang_bg;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
@@ -22,7 +23,7 @@ package org.mokylin.skin.app.fuben
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var bg:feathers.controls.UIAsset;
+		public var bg:feathers.controls.SkinnableContainer;
 
 		public var btnCancel:feathers.controls.Button;
 
@@ -48,8 +49,6 @@ package org.mokylin.skin.app.fuben
 
 		public var teaminfo:feathers.controls.Label;
 
-		public var title:feathers.controls.Label;
-
 		public var uiFubenName:feathers.controls.UIAsset;
 
 
@@ -63,7 +62,7 @@ package org.mokylin.skin.app.fuben
 			this.currentState = "normal";
 			this.height = 314;
 			this.width = 331;
-			this.elementsContent = [bg_i(),__FuBenTanKuang_Skin_UIAsset1_i(),title_i(),btnClose_i(),btnOk_i(),btnCancel_i(),teaminfo_i(),__FuBenTanKuang_Skin_Label1_i(),uiFubenName_i(),__FuBenTanKuang_Skin_UIAsset3_i(),lbTips_i(),skinRole1_i(),skinRole2_i(),skinRole3_i(),skinRole4_i(),skinRole0_i()];
+			this.elementsContent = [bg_i(),btnClose_i(),btnOk_i(),btnCancel_i(),teaminfo_i(),__FuBenTanKuang_Skin_Label1_i(),uiFubenName_i(),__FuBenTanKuang_Skin_UIAsset2_i(),lbTips_i(),skinRole1_i(),skinRole2_i(),skinRole3_i(),skinRole4_i(),skinRole0_i(),__FuBenTanKuang_Skin_UIAsset3_i()];
 			
 			states = {
 			};
@@ -86,32 +85,35 @@ package org.mokylin.skin.app.fuben
 			return temp;
 		}
 
-		private function __FuBenTanKuang_Skin_UIAsset1_i():feathers.controls.UIAsset
+		private function __FuBenTanKuang_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/fuben/tankuang_bg.jpg";
-			temp.x = 11;
-			temp.y = 42;
+			temp.styleName = "ui/common/tips/xian.png";
+			temp.x = 37;
+			temp.y = 114;
 			return temp;
 		}
 
 		private function __FuBenTanKuang_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/tips/xian.png";
-			temp.x = 37;
-			temp.y = 116;
+			temp.touchable = false;
+			temp.touchGroup = true;
+			temp.styleName = "ui/common/background/head_tishi.png";
+			temp.x = 142;
+			temp.y = 9;
 			return temp;
 		}
 
-		private function bg_i():feathers.controls.UIAsset
+		private function bg_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
 			temp.height = 314;
-			temp.styleName = "ui/common/background/erji_kuang.png";
-			temp.width = 331;
+			var skin:StateSkin = new org.mokylin.skin.common.TongYongTanKuang_bg()
+			temp.skin = skin
+			temp.width = 326;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -183,7 +185,7 @@ package org.mokylin.skin.app.fuben
 			temp.skin = skin
 			temp.width = 263;
 			temp.x = 49;
-			temp.y = 134;
+			temp.y = 130;
 			return temp;
 		}
 
@@ -197,7 +199,7 @@ package org.mokylin.skin.app.fuben
 			temp.skin = skin
 			temp.width = 263;
 			temp.x = 49;
-			temp.y = 159;
+			temp.y = 155;
 			return temp;
 		}
 
@@ -211,7 +213,7 @@ package org.mokylin.skin.app.fuben
 			temp.skin = skin
 			temp.width = 263;
 			temp.x = 49;
-			temp.y = 184;
+			temp.y = 180;
 			return temp;
 		}
 
@@ -225,7 +227,7 @@ package org.mokylin.skin.app.fuben
 			temp.skin = skin
 			temp.width = 263;
 			temp.x = 49;
-			temp.y = 209;
+			temp.y = 205;
 			return temp;
 		}
 
@@ -239,7 +241,7 @@ package org.mokylin.skin.app.fuben
 			temp.skin = skin
 			temp.width = 263;
 			temp.x = 49;
-			temp.y = 234;
+			temp.y = 230;
 			return temp;
 		}
 
@@ -254,26 +256,6 @@ package org.mokylin.skin.app.fuben
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 61;
 			temp.y = 55;
-			return temp;
-		}
-
-		private function title_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			title = temp;
-			temp.name = "title";
-			temp.bold = true;
-			temp.touchable = false;
-			temp.touchGroup = true;
-			temp.letterSpacing = 2;
-			temp.fontSize = 16;
-			temp.text = "提 示";
-			temp.textAlign = "center";
-			temp.color = 0xDDE2B1;
-			temp.nativeFilters = Fontter.filterObj[""];
-			temp.width = 240;
-			temp.x = 48;
-			temp.y = 11;
 			return temp;
 		}
 

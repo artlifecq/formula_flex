@@ -1,5 +1,7 @@
 package com.game.engine3D.vo
 {
+	import away3d.utils.GCObject;
+
 	/**
 	 *
 	 * 回调数据
@@ -8,7 +10,7 @@ package com.game.engine3D.vo
 	 * 创建时间：2015-6-4 下午1:26:38
 	 *
 	 */
-	public class CallBackData
+	public class CallBackData extends GCObject
 	{
 		public var callBackFun : Function;
 		public var cbFunParames : Array = [];

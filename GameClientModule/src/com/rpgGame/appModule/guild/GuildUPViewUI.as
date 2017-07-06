@@ -4,6 +4,7 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.core.events.GuildEvent;
+	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.coreData.cfg.GuildCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_guild;
 	import com.rpgGame.coreData.enum.EmFunctionID;
@@ -24,6 +25,7 @@ package com.rpgGame.appModule.guild
 		{
 			_skin = new BangHui_Up();
 			super(_skin);
+			addNode(RTNodeID.GUILD_UP,RTNodeID.GUILD_UP_BTN+"-2",_skin.btnUp,112,null);
 		}
 		override public function show(data:Object=null):void
 		{
@@ -81,6 +83,7 @@ package com.rpgGame.appModule.guild
 				_skin.btnUp.visible = GuildManager.instance().canUpgrad;
 				_skin.imgmax.visible = false;
 			}
+			setRTNState(RTNodeID.GUILD_UP_BTN+"-2",GuildManager.instance().hasGuildLevelUp());
 		}
 		override protected function onTouchTarget(target:DisplayObject):void
 		{

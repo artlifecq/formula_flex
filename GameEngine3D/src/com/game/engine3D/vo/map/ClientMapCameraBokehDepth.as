@@ -1,6 +1,8 @@
 package com.game.engine3D.vo.map
 {
 	import flash.utils.ByteArray;
+	
+	import away3d.utils.GCObject;
 
 	/**
 	 *
@@ -9,7 +11,7 @@ package com.game.engine3D.vo.map
 	 * 创建时间：2016-03-29 下午2:03:17
 	 *
 	 */
-	public class ClientMapCameraBokehDepth
+	public class ClientMapCameraBokehDepth extends GCObject
 	{
 		private var _version : int = 0;
 

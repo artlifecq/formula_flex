@@ -20,6 +20,7 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.StaticValue;
@@ -373,6 +374,7 @@ package com.rpgGame.appModule.equip
 			num=num>MIN_GRID?num:MIN_GRID;
 			_goodsbyBag.setGridsCount(num,false);
 			_goodsbyBag.refleshGridsByDatas(useItems);
+			notifyUpdate(RTNodeID.EQUIP_JC);
 		}
 		
 		private function updateAll():void

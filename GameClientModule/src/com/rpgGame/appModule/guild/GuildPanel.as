@@ -1,9 +1,12 @@
 package com.rpgGame.appModule.guild
 {
+	import com.rpgGame.app.manager.guild.GuildManager;
+	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.app.ui.TabBarPanel;
 	import com.rpgGame.appModule.guild.war.WczbWarViewUI;
 	import com.rpgGame.core.events.GuildEvent;
+	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -19,6 +22,9 @@ package com.rpgGame.appModule.guild
 		{
 			_skin = new BangHui_Skin();
 			super(_skin);
+			
+			addNode(RTNodeID.MAIN_SOCAIL,RTNodeID.GUILD_INFO,_tabBar.getTabDataByTabKey(EmFunctionID.EM_BANGHUI_INFO).button,65,GuildManager.instance().hasDailyGift,false,null,true);
+			addNode(RTNodeID.MAIN_SOCAIL,RTNodeID.GUILD_UP,_tabBar.getTabDataByTabKey(EmFunctionID.EM_BANGHUI_UPLEVEL).button,65,GuildManager.instance().hasGuildLevelUp,false,null,true);
 		}
 		
 		override protected function initTabBarDatas():void

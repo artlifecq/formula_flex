@@ -32,6 +32,7 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.state.role.control.BlinkMoveState;
 	import com.rpgGame.app.state.role.control.CastSpellLockState;
 	import com.rpgGame.app.state.role.control.CheckStartAutoFightState;
+	import com.rpgGame.app.state.role.control.CheckTripleAttackState;
 	import com.rpgGame.app.state.role.control.DeadLaunchMoveState;
 	import com.rpgGame.app.state.role.control.FastingState;
 	import com.rpgGame.app.state.role.control.FlyUpState;
@@ -56,6 +57,7 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.state.role.control.StunState;
 	import com.rpgGame.app.state.role.control.SyncSpellActionState;
 	import com.rpgGame.app.state.role.control.TrailMoveState;
+	import com.rpgGame.app.state.role.control.TripleAttackSpellLockState;
 	import com.rpgGame.app.state.role.control.UnmovableState;
 	import com.rpgGame.app.state.role.control.UseSpellState;
 	import com.rpgGame.app.state.role.control.VipBuffState;
@@ -156,6 +158,8 @@ package com.rpgGame.app.state.role
 		stateMapping[RoleStateType.CONTROL_CHECK_AUTO_FIGHT] = CheckStartAutoFightState;
 		stateMapping[RoleStateType.CONTROL_MASTERY_MAN] = MysteryManState;
 		stateMapping[RoleStateType.CONTROL_VIP] = VipBuffState;
+		stateMapping[RoleStateType.CONTROL_TRIPLE_ATTACK_LOCK] = TripleAttackSpellLockState;
+		stateMapping[RoleStateType.CONTROL_TRIPLE_ATTACK_CHECK] = CheckTripleAttackState;
 		private var _role : SceneRole;
 		private var _lastCanShowRiding : Boolean;
 		
@@ -368,7 +372,11 @@ package com.rpgGame.app.state.role
 			var state : IState = getCurrState(CastSpellLockState);
 			return state != null;
 		}
-		
+		public function get isTripleLockCaseSpell() : Boolean
+		{
+			var state : IState = getCurrState(TripleAttackSpellLockState);
+			return state != null;
+		}
 		public function get isBingDong() : Boolean
 		{
 			var state : IState = getCurrState(BingDongState);

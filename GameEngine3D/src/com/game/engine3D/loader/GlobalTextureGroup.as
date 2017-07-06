@@ -5,6 +5,8 @@ package com.game.engine3D.loader
 	
 	import flash.utils.Dictionary;
 	
+	import away3d.utils.GCObject;
+	
 	import org.client.mainCore.utils.ArrayUtil;
 	
 	/**
@@ -14,7 +16,7 @@ package com.game.engine3D.loader
 	 * 创建时间：2016-06-17 上午10:05:12
 	 *
 	 */
-	public class GlobalTextureGroup
+	public class GlobalTextureGroup extends GCObject
 	{
 		private static var globalTextureGroupByUrls : Dictionary = new Dictionary();
 		

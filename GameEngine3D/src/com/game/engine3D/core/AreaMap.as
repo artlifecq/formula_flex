@@ -9,6 +9,8 @@ package com.game.engine3D.core
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	import flash.utils.Dictionary;
+	
+	import away3d.utils.GCObject;
 
 	/**
 	 *
@@ -17,7 +19,7 @@ package com.game.engine3D.core
 	 * 创建时间：2015-9-15 上午10:26:37
 	 *
 	 */
-	public class AreaMap
+	public class AreaMap extends GCObject
 	{
 		private var _bitmapData : BitmapData;
 		private var _shape : Shape;

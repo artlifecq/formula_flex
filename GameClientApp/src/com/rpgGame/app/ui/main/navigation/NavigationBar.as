@@ -4,6 +4,7 @@ package com.rpgGame.app.ui.main.navigation {
 	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
 	import com.rpgGame.core.events.FunctionOpenEvent;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
 	
 	import flash.geom.Point;
@@ -15,6 +16,7 @@ package com.rpgGame.app.ui.main.navigation {
 	import org.mokylin.skin.mainui.navigation.navigation_main_Skin;
 	
 	import starling.display.DisplayObject;
+	import starling.display.DisplayObjectContainer;
 	
 	public class NavigationBar extends SkinUI {
 		private var _skin : navigation_main_Skin;
@@ -36,6 +38,7 @@ package com.rpgGame.app.ui.main.navigation {
 			this.setState(true);
 			EventManager.addEvent(FunctionOpenEvent.FUNCTIONOPENID,refeashButton);
 			refeashButton();
+			
 		}
 		
 		private function refeashButton(data:*=null):void

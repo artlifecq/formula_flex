@@ -6,7 +6,7 @@ package org.mokylin.skin.app.fuben
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
-	
+
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
@@ -18,10 +18,10 @@ package org.mokylin.skin.app.fuben
 		//                                定义成员变量
 		//==========================================================================
 		public var btnEixt:feathers.controls.Button;
-		
+
 		public var lbTime:feathers.controls.Label;
-		
-		
+
+
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
@@ -38,8 +38,8 @@ package org.mokylin.skin.app.fuben
 			};
 			skinNames={};
 		}
-		
-		
+
+
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
@@ -52,7 +52,7 @@ package org.mokylin.skin.app.fuben
 			temp.y = 115;
 			return temp;
 		}
-		
+
 		private function __FuBenJieSuan2_Shibai_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -61,7 +61,7 @@ package org.mokylin.skin.app.fuben
 			temp.y = 0;
 			return temp;
 		}
-		
+
 		private function btnEixt_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
@@ -76,7 +76,7 @@ package org.mokylin.skin.app.fuben
 			temp.y = 224;
 			return temp;
 		}
-		
+
 		private function lbTime_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -91,6 +91,6 @@ package org.mokylin.skin.app.fuben
 			temp.y = 257;
 			return temp;
 		}
-		
+
 	}
 }

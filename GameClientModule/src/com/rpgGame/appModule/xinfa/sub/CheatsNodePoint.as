@@ -53,7 +53,7 @@ package  com.rpgGame.appModule.xinfa.sub
 		private var _careAcuId:String;
 		private var _drawLine:Array;
 		private var _tipsInfo:BaseTipsInfo;
-	
+		private var _hasReward:Boolean;
 		public function CheatsNodePoint(point:UIAsset,lab:Label)
 		{
 			this.imgPoint=point;
@@ -265,6 +265,7 @@ package  com.rpgGame.appModule.xinfa.sub
 		}
 		public  function showLoopEffect(bool:Boolean):void
 		{
+			_hasReward=bool;
 			if (bool) 
 			{
 				if (!_effect) 
@@ -436,6 +437,12 @@ package  com.rpgGame.appModule.xinfa.sub
 		{
 			CheatsSender.reqSetUpPoint(_data.cheatsId,_data.chetasNodeId,item);
 		}
+
+		public function get hasReward():Boolean
+		{
+			return _hasReward;
+		}
+
 		
 	}
 }

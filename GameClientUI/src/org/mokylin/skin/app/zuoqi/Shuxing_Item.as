@@ -4,7 +4,7 @@ package org.mokylin.skin.app.zuoqi
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-
+	
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
@@ -16,16 +16,16 @@ package org.mokylin.skin.app.zuoqi
 		//                                定义成员变量
 		//==========================================================================
 		public var ico_up:feathers.controls.UIAsset;
-
+		
 		public var lbCurrent:feathers.controls.Label;
-
+		
 		public var lbName:feathers.controls.Label;
-
+		
 		public var lbUp:feathers.controls.Label;
-
+		
 		public var lbaddprop:feathers.controls.Label;
-
-
+		
+		
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
@@ -40,8 +40,8 @@ package org.mokylin.skin.app.zuoqi
 			};
 			skinNames={};
 		}
-
-
+		
+		
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
@@ -50,12 +50,12 @@ package org.mokylin.skin.app.zuoqi
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ico_up = temp;
 			temp.name = "ico_up";
-			temp.styleName = "ui/common/tubiao/xiangshang.png";
+			temp.styleName = "ui/common/tubiao/tu_up.png";
 			temp.x = 204;
 			temp.y = 3;
 			return temp;
 		}
-
+		
 		private function lbCurrent_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -68,7 +68,7 @@ package org.mokylin.skin.app.zuoqi
 			temp.y = 1;
 			return temp;
 		}
-
+		
 		private function lbName_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -81,7 +81,7 @@ package org.mokylin.skin.app.zuoqi
 			temp.y = 0;
 			return temp;
 		}
-
+		
 		private function lbUp_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -95,7 +95,7 @@ package org.mokylin.skin.app.zuoqi
 			temp.y = 2;
 			return temp;
 		}
-
+		
 		private function lbaddprop_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -108,6 +108,6 @@ package org.mokylin.skin.app.zuoqi
 			temp.y = 1;
 			return temp;
 		}
-
+		
 	}
 }

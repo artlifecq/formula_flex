@@ -1,18 +1,19 @@
 package com.game.engine3D.debug
 {
 	import com.game.engine3D.core.GameScene3D;
-
+	
 	import flash.display.BitmapData;
 	import flash.display.Shape;
 	import flash.geom.Matrix;
 	import flash.geom.Vector3D;
-
+	
 	import away3d.containers.ObjectContainer3D;
 	import away3d.entities.Mesh;
 	import away3d.materials.TextureMaterial;
 	import away3d.primitives.PlaneGeometry;
 	import away3d.utils.Cast;
-
+	import away3d.utils.GCObject;
+	
 	import gs.TweenLite;
 
 	/**
@@ -22,7 +23,7 @@ package com.game.engine3D.debug
 	 * 创建时间：2015-11-6 上午11:03:17
 	 *
 	 */
-	public class MapPositionPoint
+	public class MapPositionPoint extends GCObject
 	{
 		private static var shape : Shape;
 		private static var shapeBmd : BitmapData;

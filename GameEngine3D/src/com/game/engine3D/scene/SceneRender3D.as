@@ -3,6 +3,7 @@ package com.game.engine3D.scene
 	import com.game.engine3D.core.GameScene3D;
 	
 	import away3d.tick.Tick;
+	import away3d.utils.GCObject;
 	
 	/**
 	 *
@@ -11,7 +12,7 @@ package com.game.engine3D.scene
 	 * 创建时间：2015-6-4 上午10:26:37
 	 *
 	 */
-	public class SceneRender3D
+	public class SceneRender3D extends GCObject
 	{
 		/**
 		 * @private

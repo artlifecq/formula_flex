@@ -278,6 +278,11 @@ package com.rpgGame.app.manager
 						this._isUsed = !this._isUsed;
                         return true;
                     }
+					//三连击锁定
+					if (MainRoleManager.actor.stateMachine.isTripleLockCaseSpell) 
+					{
+						return false;
+					}
 					CastSpellHelper.shortcutsTryCaseSpell(shortData.id);
 					return true;
 

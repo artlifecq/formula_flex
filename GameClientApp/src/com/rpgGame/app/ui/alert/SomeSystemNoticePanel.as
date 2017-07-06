@@ -1,10 +1,12 @@
 package com.rpgGame.app.ui.alert
 {
 	import com.gameClient.utils.HashMap;
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.utils.UIUtil;
+	import com.rpgGame.coreData.enum.EmFunctionID;
 	
 	import flash.utils.Dictionary;
 	import flash.utils.getTimer;
@@ -70,6 +72,19 @@ package com.rpgGame.app.ui.alert
 				if (_data.callBack) 
 				{
 					_data.callBack();
+				}else{
+					switch(_data.sys)
+					{
+						case SYS_HORSE:
+							FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ZUOQI);
+							break;
+						case SYS_SKILL:
+							FunctionOpenManager.openAppPaneById(EmFunctionID.EM_JINENG);
+							break;
+						case SYS_ZHANHUN:
+							FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ZHANHUN);
+							break;
+					}
 				}
 				hide();
 			}

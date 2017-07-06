@@ -1,5 +1,7 @@
 ﻿package com.game.engine3D.core.poolObject
 {
+	import away3d.utils.GCObject;
+	
 	import org.client.mainCore.utils.ClassConstruct;
 	
 	/**
@@ -9,7 +11,7 @@
 	 * 创建时间：2016-11-7 上午10:26:35
 	 *
 	 */
-	public class InstancePool
+	public class InstancePool extends GCObject
 	{
 		private var _name : String;
 		private var _maxSize : int;

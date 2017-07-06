@@ -2,7 +2,9 @@ package com.game.engine3D.vo.share
 {
 	import flash.utils.Dictionary;
 	import flash.utils.getTimer;
-
+	
+	import away3d.utils.GCObject;
+	
 	import org.client.mainCore.utils.Tick;
 
 	/**
@@ -10,7 +12,7 @@ package com.game.engine3D.vo.share
 	 * @author Carver
 	 *
 	 */
-	public class CountShare
+	public class CountShare extends GCObject
 	{
 		/**
 		 * 存储数据字典

@@ -7,8 +7,6 @@ package com.rpgGame.coreData
 	
 	import flash.geom.Vector3D;
 	
-	import away3d.bounds.NullBounds;
-	
 	/**
 	 *
 	 * 换装信息
@@ -209,6 +207,8 @@ package com.rpgGame.coreData
 				_rpd_body_method_type_effect = new RenderParamData3D(RenderUnitID.BODY_METHOD_TYPE_EFFECT, RenderUnitType.BODY_METHOD_TYPE_EFFECT, ClientConfig.getEffect(_bodyMethodTypeEffectResID));
 				_rpd_body_method_type_effect.mouseEnable = false;
 				_rpd_body_method_type_effect.clearSameType = false;
+				_rpd_body_method_type_effect.isEffectMethodType = true;
+				_rpd_body_method_type_effect.effectMethodMaterialNames = ["equip"];
 				_rpd_body_method_type_effect.priority = _priority;
 			}
 			else

@@ -6,6 +6,7 @@ package com.game.engine3D.vo
 	import flash.geom.Vector3D;
 	
 	import away3d.containers.ObjectContainer3D;
+	import away3d.utils.GCObject;
 	
 	/**
 	 *
@@ -14,7 +15,7 @@ package com.game.engine3D.vo
 	 * 创建时间：2015-12-25 上午10:26:37
 	 *
 	 */
-	public class BaseObjSyncInfo
+	public class BaseObjSyncInfo extends GCObject
 	{
 		private var _obj : Object;
 		private var _syncHeight : Boolean;

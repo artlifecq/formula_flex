@@ -229,5 +229,54 @@ package com.rpgGame.app.manager
 			}
 			return true;
 		}
+		//===============================下面是可以升级或者替换砭石的图标提示
+		public function checkHasNodeCanClick():Boolean
+		{
+			var keys:Array=vo.meridianHash.keys();
+			for each (var key:int in keys) 
+			{
+				if (checkNodeCanClick(key)) 
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+		public function checkNodeCanClick(mapId:int):Boolean
+		{
+			var arr:Array=vo.getMeridianMapData(mapId);
+			if (arr) 
+			{
+				var len:int=arr.length;
+				var data:AcuPointInfo;
+				for (var i:int = 0; i < len; i++) 
+				{
+					data=arr[i];
+					var id:String=data.MeridId+"_"+data.acuPointId+"_"+data.level;
+					var config:Q_meridian=MeridianCfg.getMeridianCfg(id);
+					
+					if (config.q_showtype==0) 
+					{
+						if (getCanLevelUp(data)) 
+						{
+							return true;
+						}
+					}
+					else
+					{
+						var canActive:Boolean=data.stone.length>0||Mgr.meridianMgr.getCanActive(data);
+						if (canActive) 
+						{
+							var hasBetter:Boolean=(config.q_need_level<=MainRoleManager.actorInfo.totalStat.level)&&Mgr.meridianMgr.getBetterStone(config.q_stone_type,data.stone.length>0?data.stone[0]:null).length>0;
+							if (hasBetter) 
+							{
+								return true;
+							}
+						}
+					}
+				}
+			}
+			return false;
+		}
 	}
 }

@@ -501,5 +501,8 @@ package com.rpgGame.core.app
 		
 		/**npc闲话**/
 		public static var VIP_PANEL:String = createAppInfo("vip.VipMainPanelExt","vip");
+		
+		/**红包拆开**/
+		public static var REDREWARD_OPEN:String = createAppInfo("redreward.RedRewardGetPanle","hongbao");
 	}
 }

@@ -166,6 +166,7 @@
 			register("DFBattleCmdListener", DFBattleCmdListener); //模块号7
 			register("NineTowerCmdListener",NineTowerCmdListener);
 			register("VipCmdListerner",VipCmdListerner);
+			
 		}
 	}
 }

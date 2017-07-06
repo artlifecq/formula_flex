@@ -207,7 +207,21 @@ package com.rpgGame.app.manager.mount
 //			AvatarManager.callEquipmentChange(role);
 			AvatarManager.updateAvatar(role,false);
 		}
-		
+		private var _showdata:ZhanQiShowData;
+		public function canZhanqiLevelUp():Boolean
+		{
+			if(_zhanqiDataInfo==null)
+				return false;
+			if(_showdata == null)
+				_showdata= new ZhanQiShowData();
+			_showdata.zhanqiJob = MainRoleManager.actorInfo.job;
+			_showdata.zhanqidataInfo =  _zhanqiDataInfo;
+			if(_showdata.isMaxLevel)
+			{
+				return false;
+			}
+			return (_showdata.canUpLevel());
+		}
 		private static var _instance:ZhanQiManager;
 		public static function instance():ZhanQiManager
 		{
