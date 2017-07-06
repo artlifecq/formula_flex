@@ -91,6 +91,10 @@ package com.rpgGame.app.cmdlistener
 			{
 				EventManager.dispatchEvent(ActivityEvent.UPDATE_JIXIANBOSS_HURT_RANK,msg);
 			}
+			else if(msg.rankType==6)
+			{Lyt.a("伤害排行:rank="+msg.rank+"damage="+msg.damage);
+				EventManager.dispatchEvent(ActivityEvent.MIBAO__HURT_RANK,msg);
+			}
 			else
 			{
 				ActivetyDataManager.jixianVo.setdate(msg);
@@ -237,12 +241,12 @@ package com.rpgGame.app.cmdlistener
 		/**积分变化*/
 		private function onSCJiFenChangeMessage(msg:SCJiFenChangeMessage):void
 		{Lyt.a("积分变化:"+msg.jifenNum);
-			EventManager.dispatchEvent(ActivityEvent.LIJIN_JIFEN_CHANGE,msg.jifenNum);
+			EventManager.dispatchEvent(ActivityEvent.MIBAO_JIFEN_CHANGE,msg.jifenNum);
 		}
 		/**奖励信息*/
 		private function onSCMiBaoRewardInfoMessage(msg:SCMiBaoRewardInfoMessage):void
 		{Lyt.a("奖励信息:"+msg.reward.length);
-			AppManager.showApp(AppConstant.ACTIVETY_MIBAO_RESULT);
+			AppManager.showApp(AppConstant.ACTIVETY_MIBAO_RESULT,msg);
 		}
 	}
 }

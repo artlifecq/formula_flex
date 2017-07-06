@@ -42,11 +42,24 @@ package com.rpgGame.coreData.cfg
 					_waveIdDic[info.q_zoneId]=idArr;
 				}
 				
-				if(!haveWaveIdList(info.q_zoneId,info.q_wave))
+				if(!haveWaveIdList(info.q_zoneId,info.q_step))
 				{
-					idArr.push(info.q_wave);
+					idArr.push(info.q_step);
 				}
-				idArr.sort(function(a:int,b:int):int{
+				/*idArr.sort(function(a:int,b:int):int{
+					return a>b?1:-1;
+				});*/
+			}
+			
+			var bossInfo:Vector.<Q_mibao_monster>=getMonsterListByType(2);
+			if(bossInfo&&bossInfo.length>0)
+			{
+				for each(var idArray :Array in _waveIdDic) {
+					idArray.push(bossInfo[0].q_step);
+				}
+			}
+			for each(var allidArray :Array in _waveIdDic) {
+				allidArray.sort(function(a:int,b:int):int{
 					return a>b?1:-1;
 				});
 			}
@@ -79,12 +92,12 @@ package com.rpgGame.coreData.cfg
 			return _waveIdDic[zoneId];
 		}
 		/** 返回 怪物数据列表 by 波数*/
-		public static function getMonsterListByWaveId(zoneId:int,wave:int):Vector.<Q_mibao_monster>
+		public static function getMonsterListByWaveId(zoneId:int,step:int):Vector.<Q_mibao_monster>
 		{
 			var mlist:Vector.<Q_mibao_monster>=new Vector.<Q_mibao_monster>();
 			
 			for each(var info :Q_mibao_monster in _monsterdataDic) {
-				if(info.q_zoneId==zoneId&&info.q_wave==wave)
+				if(info.q_zoneId==zoneId&&info.q_step==step)
 				{
 					mlist.push(info);
 				}
@@ -97,7 +110,7 @@ package com.rpgGame.coreData.cfg
 			var mlist:Vector.<Q_mibao_monster>=new Vector.<Q_mibao_monster>();
 			
 			for each(var info :Q_mibao_monster in _monsterdataDic) {
-				if(info.q_monster_type==type)
+				if(info.q_type==type)
 				{
 					mlist.push(info);
 				}
@@ -109,13 +122,26 @@ package com.rpgGame.coreData.cfg
 		public static function getRewardDataByjf(jf:int):Q_mibao_reward
 		{
 			for each(var info :Q_mibao_reward in _rewarddataDic) {
-				if(jf>=info.q_jifen_start&&jf<=info.q_jifen_end)
+				if(info.q_type==1&&jf>=info.q_jifen_start&&jf<=info.q_jifen_end)
 				{
 					return info;
 				}
 			}
 			return null;
 		}
+		/** 返回 奖励数据 by 根据伤害百分比*/
+		public static function getRewardDataBydamage(damage:int):Q_mibao_reward
+		{
+			for each(var info :Q_mibao_reward in _rewarddataDic) {
+				if(info.q_type==2&&damage>=info.q_jifen_start&&damage<=info.q_jifen_end)
+				{
+					return info;
+				}
+			}
+			return null;
+		}
+		
+		
 		
 		public function MibaoCfgData()
 		{

@@ -38,12 +38,24 @@ package com.rpgGame.app.manager
 				{
 					return waveList[i];
 				}
+				
+				
 			}
 			
 			
 			return 0;
 		}
-		
+		/**返回boss波数*/
+		public static function getBossWave():int
+		{
+			var bossInfo:Vector.<Q_mibao_monster>=MibaoCfgData.getMonsterListByType(2);
+			if(bossInfo&&bossInfo.length>0)
+			{
+				return bossInfo[0].q_step;
+			}
+			
+			return 0;
+		}
 		
 		
 		
@@ -59,7 +71,7 @@ package com.rpgGame.app.manager
 				for(i=0;i<monsterInfoList.length;i++)
 				{
 					monsterData=MibaoCfgData.getMonster(monsterInfoList[i].monsterId);
-					if(monsterData.q_monster_type==1&&!isKillAllByid(monsterInfoList[i].monsterId))
+					if(monsterData.q_type==1&&!isKillAllByid(monsterInfoList[i].monsterId))
 					{
 						return false
 					}

@@ -12,32 +12,16 @@ package com.rpgGame.coreData.clientConfig
 	*/
 	public class Q_mibao_monster
 	{
-		 /**  ID */
+		 /**  ID（ID对应23—1中怪物ID） */
 		public var q_id:int;
-		 /**  波数 */
-		public var q_wave:int;
 		 /**   区域ID(BOSS所在区域配0) */
 		public var q_zoneId:int;
-		 /**  怪物的ID */
-		public var q_monsterId:int;
-		 /**  怪物类型(1:前面阶段怪，2：最后一个boss) */
-		public var q_monster_type:int;
-		 /**  怪物的数量(相同怪物数量) */
-		public var q_monsterNum:int;
 		 /**  获得的积分 */
 		public var q_jifen:int;
-		 /**  刷怪半径 */
-		public var q_radius:int;
-		 /**  刷怪形状(1随机，2圆形) */
-		public var q_shape:int;
-		 /**  怪物出生点X */
-		public var q_x:int;
-		 /**  怪物出生点Y */
-		public var q_y:int;
-		 /**  玩家移动X坐标 */
-		public var q_move_x:int;
-		 /**  玩家移动Y坐标 */
-		public var q_move_y:int;
+		 /**  客户端用于显示阶段 */
+		public var q_step:int;
+		 /**  客户端用于显示是否开始杀最后boss */
+		public var q_type:int;
 
 	}
 }

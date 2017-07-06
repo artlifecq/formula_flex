@@ -73,7 +73,12 @@ package com.rpgGame.core.events
 		/**
 		 *积分变化
 		 */
-		public static const LIJIN_JIFEN_CHANGE : int = UNIQUEID.NEXT;
+		public static const MIBAO_JIFEN_CHANGE : int = UNIQUEID.NEXT;
+		
+		/**
+		 *boss伤害排行
+		 */
+		public static const MIBAO__HURT_RANK : int = UNIQUEID.NEXT;
 		
 		public function ActivityEvent()
 		{

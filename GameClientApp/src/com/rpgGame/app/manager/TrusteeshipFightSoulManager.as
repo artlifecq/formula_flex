@@ -15,6 +15,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.AIStateType;
+	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import gs.TweenLite;
 	
@@ -127,6 +128,12 @@ package com.rpgGame.app.manager
 		/**设置攻击目标*/
 		public function fightSoulTarget(targetId:long,type:int):void
 		{
+			
+			var srole:SceneRole=SceneManager.getSceneObjByID(targetId.ToGID()) as SceneRole;
+			if(!srole)
+				return ;
+			if (srole.type != SceneCharType.MONSTER)
+				return ;
 			var targetState : int = FightManager.getFightRoleState( SceneManager.getSceneObjByID(targetId.ToGID()) as SceneRole);//攻击类型
 			if(targetState==FightManager.FIGHT_ROLE_STATE_CAN_NOT_FIGHT)//不能攻击
 				return ;
