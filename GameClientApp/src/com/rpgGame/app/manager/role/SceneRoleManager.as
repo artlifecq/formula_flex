@@ -639,8 +639,8 @@ package com.rpgGame.app.manager.role
 			AvatarManager.updateAvatar(fightSoulRole);
 			fightSoulRole.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true);
 			fightSoulRole.setScale(model.q_sceneScale/100);
-//			fightSoulRole.setGroundXY((owner.x + 100), owner.y);
-//			fightSoulRole.rotationY = owner.rotationY;
+			fightSoulRole.setGroundXY((owner.x + 100), owner.y);
+			fightSoulRole.rotationY = 0;
 			SceneManager.addSceneObjToScene(fightSoulRole, false);
 			fightSoulFollowAnimator = new FightSoulFollowAnimator(fightSoulRole);
 			fightSoulFollowAnimator.radius = model.q_radius;

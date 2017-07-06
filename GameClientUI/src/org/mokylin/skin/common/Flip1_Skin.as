@@ -7,7 +7,7 @@ package org.mokylin.skin.common
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.component.button.ButtonSkin_you;
 	import org.mokylin.skin.component.button.ButtonSkin_zuo;
-
+	
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
@@ -19,14 +19,14 @@ package org.mokylin.skin.common
 		//                                定义成员变量
 		//==========================================================================
 		public var bg:feathers.controls.UIAsset;
-
+		
 		public var btnAdd:feathers.controls.Button;
-
+		
 		public var btnDec:feathers.controls.Button;
-
+		
 		public var textDisplay:feathers.controls.Label;
-
-
+		
+		
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
@@ -37,16 +37,14 @@ package org.mokylin.skin.common
 			this.currentState = "normal";
 			this.height = 25;
 			this.width = 106;
-			this.elementsContent = [textDisplay_i(),btnDec_i(),btnAdd_i()];
-			bg_i();
-			
+			this.elementsContent = [bg_i(),textDisplay_i(),btnDec_i(),btnAdd_i()];
 			
 			states = {
 			};
-			skinNames={"disabled":"ui/component/text/flip_bg.png", "enabled":"ui/component/text/flip_bg.png", "focused":"ui/component/text/flip_bg.png"};
+			skinNames={};
 		}
-
-
+		
+		
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
@@ -61,7 +59,7 @@ package org.mokylin.skin.common
 			temp.y = 2;
 			return temp;
 		}
-
+		
 		private function btnAdd_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
@@ -72,7 +70,7 @@ package org.mokylin.skin.common
 			temp.y = 2;
 			return temp;
 		}
-
+		
 		private function btnDec_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
@@ -83,7 +81,7 @@ package org.mokylin.skin.common
 			temp.y = 2;
 			return temp;
 		}
-
+		
 		private function textDisplay_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -98,6 +96,6 @@ package org.mokylin.skin.common
 			temp.y = 4;
 			return temp;
 		}
-
+		
 	}
 }

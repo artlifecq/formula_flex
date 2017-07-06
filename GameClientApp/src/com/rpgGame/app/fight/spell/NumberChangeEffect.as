@@ -60,6 +60,7 @@ package com.rpgGame.app.fight.spell
 			for(i=1;i<num;i++){
 				changeList.push(_beforeValue+i*per);
 			}
+			changeList.push(_afterValue);
 		}
 	}
 }

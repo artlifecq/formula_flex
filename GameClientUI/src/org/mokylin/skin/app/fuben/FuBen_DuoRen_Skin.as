@@ -72,6 +72,7 @@ package org.mokylin.skin.app.fuben
 			super();
 			
 			this.currentState = "normal";
+			this.width = 956;
 			this.elementsContent = [__FuBen_DuoRen_Skin_UIAsset2_i(),__FuBen_DuoRen_Skin_UIAsset3_i(),__FuBen_DuoRen_Skin_UIAsset4_i(),grpShuoming_i(),scroll_Bar_i(),lbTiaozhan_i(),reward_ico_list_i()];
 			
 			states = {
@@ -135,10 +136,10 @@ package org.mokylin.skin.app.fuben
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 431;
-			temp.styleName = "ui/common/background/neikuang_1.png";
+			temp.styleName = "ui/common/background/neikuang_2.png";
 			temp.width = 567;
-			temp.x = 19;
-			temp.y = 74;
+			temp.x = 23;
+			temp.y = 87;
 			return temp;
 		}
 
@@ -146,10 +147,10 @@ package org.mokylin.skin.app.fuben
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 431;
-			temp.styleName = "ui/common/background/neikuang_1.png";
+			temp.styleName = "ui/common/background/neikuang_2.png";
 			temp.width = 343;
-			temp.x = 587;
-			temp.y = 74;
+			temp.x = 591;
+			temp.y = 87;
 			return temp;
 		}
 
@@ -157,8 +158,8 @@ package org.mokylin.skin.app.fuben
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/fuben/tiao.jpg";
-			temp.x = 19;
-			temp.y = 506;
+			temp.x = 23;
+			temp.y = 519;
 			return temp;
 		}
 
@@ -203,11 +204,12 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnEnter = temp;
 			temp.name = "btnEnter";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "进入匹配";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.color = 0xCFC6AE;
-			temp.x = 130;
+			temp.color = 0xFFFFFF;
+			temp.width = 90;
+			temp.x = 126;
 			temp.y = 374;
 			return temp;
 		}
@@ -232,8 +234,8 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grpShuoming = temp;
 			temp.name = "grpShuoming";
-			temp.x = 592;
-			temp.y = 79;
+			temp.x = 596;
+			temp.y = 92;
 			temp.elementsContent = [__FuBen_DuoRen_Skin_UIAsset5_i(),__FuBen_DuoRen_Skin_UIAsset6_i(),uiName_i(),_info_text_i(),__FuBen_DuoRen_Skin_Label1_i(),__FuBen_DuoRen_Skin_Label2_i(),__FuBen_DuoRen_Skin_Label3_i(),__FuBen_DuoRen_Skin_Label4_i(),lbRenshu_i(),lbDengji_i(),lbZhanli_i(),lbCishu_i(),btnEnter_i(),btnExit_i(),lbTime_i()];
 			return temp;
 		}
@@ -293,8 +295,8 @@ package org.mokylin.skin.app.fuben
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 229;
-			temp.x = 17;
-			temp.y = 532;
+			temp.x = 21;
+			temp.y = 545;
 			return temp;
 		}
 
@@ -421,8 +423,8 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			reward_ico_list = temp;
 			temp.name = "reward_ico_list";
-			temp.x = 247;
-			temp.y = 516;
+			temp.x = 251;
+			temp.y = 529;
 			temp.elementsContent = [reward_ico_0_i(),reward_ico_1_i(),reward_ico_2_i(),reward_ico_3_i(),reward_ico_4_i(),reward_ico_5_i(),reward_ico_6_i(),reward_ico_7_i()];
 			return temp;
 		}
@@ -435,8 +437,8 @@ package org.mokylin.skin.app.fuben
 			temp.height = 424;
 			temp.styleClass = org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
 			temp.width = 559;
-			temp.x = 24;
-			temp.y = 77;
+			temp.x = 28;
+			temp.y = 90;
 			return temp;
 		}
 

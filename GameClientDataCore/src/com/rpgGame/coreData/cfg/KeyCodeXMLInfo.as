@@ -53,6 +53,7 @@ package com.rpgGame.coreData.cfg
 					<key funcID="2" code="90" name="Z" dataID="0" type="2" funName="TrustView" />
 					<key funcID="3" code="77" name="M" dataID="0" type="2" funName="WorldMapPanel" />
 					<key funcID="4" code="66" name="B" dataID="0" type="2" funName="BackPackPanel" />
+                    <key funcID="13" code="68" name="D" dataID="0" type="2" funName="BackPackPanel" />
 					<key funcID="5" code="67" name="C" dataID="0" type="2" funName="RolePanel" />
 					<key funcID="6" code="86" name="V" dataID="0" type="2" funName="SpellPanel" />
 					<key funcID="7" code="76" name="L" dataID="0" type="2" funName="TaskPanel" />
