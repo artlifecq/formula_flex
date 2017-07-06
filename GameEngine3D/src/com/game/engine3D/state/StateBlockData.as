@@ -1,5 +1,6 @@
 package com.game.engine3D.state
 {
+	import away3d.utils.GCObject;
 
 	/**
 	 *
@@ -8,7 +9,7 @@ package com.game.engine3D.state
 	 * 创建时间：2015-4-9 下午5:25:12
 	 *
 	 */
-	public class StateBlockData
+	public class StateBlockData extends GCObject
 	{
 		private var _type : int;
 		private var _ref : StateReference;

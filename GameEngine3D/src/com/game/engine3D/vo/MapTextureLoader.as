@@ -1,7 +1,7 @@
 package com.game.engine3D.vo
 {
 	import com.game.engine3D.config.GlobalConfig;
-
+	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.Loader;
@@ -9,12 +9,13 @@ package com.game.engine3D.vo
 	import flash.events.IOErrorEvent;
 	import flash.geom.Rectangle;
 	import flash.utils.ByteArray;
-
+	
 	import away3d.events.Event;
 	import away3d.loaders.multi.MultiLoadData;
 	import away3d.loaders.multi.MultiUrlLoadManager;
 	import away3d.loaders.multi.MultiUrlLoader;
-
+	import away3d.utils.GCObject;
+	
 	import starling.textures.ConcreteTexture;
 	import starling.textures.IStarlingTexture;
 	import starling.textures.SubTexture;
@@ -27,7 +28,7 @@ package com.game.engine3D.vo
 	 * 创建时间：2016-5-13 下午1:26:38
 	 *
 	 */
-	public class MapTextureLoader
+	public class MapTextureLoader extends GCObject
 	{
 		private var _url : String = null;
 		private var _bitmapData : BitmapData = null;

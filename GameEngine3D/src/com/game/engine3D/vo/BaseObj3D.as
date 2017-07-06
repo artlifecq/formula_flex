@@ -24,6 +24,7 @@ package com.game.engine3D.vo
 	import away3d.core.math.MathConsts;
 	import away3d.core.math.Matrix3DUtils;
 	import away3d.tick.Tick;
+	import away3d.utils.GCObject;
 	
 	import gs.TweenLite;
 	import gs.easing.Linear;
@@ -35,7 +36,7 @@ package com.game.engine3D.vo
 	 * 创建时间：2015-6-4 上午10:26:37
 	 *
 	 */
-	public class BaseObj3D implements IInstancePoolClass, IDisplayObject3D, IFrameRender,ISceneCameraTarget
+	public class BaseObj3D extends GCObject implements IInstancePoolClass, IDisplayObject3D, IFrameRender,ISceneCameraTarget
 	{
 		//唯一ID(注意用Number而不要用int)--------------------------------------------------------------------
 		/**
@@ -117,9 +118,14 @@ package com.game.engine3D.vo
 		 */
 		protected var _renderLimitable : Boolean;
 		/**
-		 * 互动时间
+		 * 互动保护持续时间
 		 */
-		protected var _interactTime : int;
+		protected var _interactDuration : int;
+		private var _interactStartTime:int;
+		private var _interactEndTime:int;
+		/**互动后保护持续时间，防止很快被其他互动对象挤掉，单位：毫秒*/
+		private const INTERACT_PROTECT_TIME_DURATION:int = 5000;
+		
 		private var _inViewDistanceChangedCallbackVec : Vector.<CallBackData>;
 		private var _disposeCallbackVec : Vector.<CallBackData>;
 		private var _renderAnimator : IRenderAnimator;
@@ -880,6 +886,7 @@ package com.game.engine3D.vo
 				}
 
 				var volumeMatrix : Matrix3D = Matrix3DUtil.MATRIX3D;
+				volumeMatrix.identity();
 				Matrix3DUtil.rotateX(volumeMatrix, normalX, true);
 				Matrix3DUtil.rotateZ(volumeMatrix, normalZ, true);
 				Matrix3DUtil.rotateY(volumeMatrix, _graphicRotation.y - 90, false);
@@ -1265,18 +1272,34 @@ package com.game.engine3D.vo
 			_renderLimitable = value;
 		}
 
-		public function get interactTime() : int
+		/**
+		 * 交互优先级，越大越优先，由生效的交互保护持续时间长短决定
+		 * @return 
+		 * 
+		 */
+		public function get interactPriority() : int
 		{
-			return _interactTime;
+			var currentTime:int = getTimer();
+			if(currentTime <= _interactEndTime)
+			{
+				return _interactDuration;
+			}
+			return 0;
 		}
-
+		
 		/**
 		 * 更新互动时间
 		 *
 		 */
 		public function updateInteractTime() : void
 		{
-			_interactTime = getTimer();
+			var currentTime:int = getTimer();
+			if(currentTime > _interactEndTime)
+			{
+				_interactStartTime = currentTime;
+			}
+			_interactEndTime = currentTime + INTERACT_PROTECT_TIME_DURATION;
+			_interactDuration = _interactEndTime - _interactStartTime;
 		}
 		
 		public function get isClingGround() : Boolean
@@ -1370,7 +1393,9 @@ package com.game.engine3D.vo
 			_needInViewDist = false;
 			_renderLimitable = false;
 			_mouseEnable = false;
-			_interactTime = 0;
+			_interactDuration = 0;
+			_interactStartTime = 0;
+			_interactEndTime = 0;
 			_clingGroundCalculate = null;
 			_showPosition.setTo(0, 0, 0);
 			_showRotation.setTo(0, 0, 0);
@@ -1427,7 +1452,9 @@ package com.game.engine3D.vo
 			_usable = true;
 			_needInViewDist = false;
 			_renderLimitable = false;
-			_interactTime = 0;
+			_interactDuration = 0;
+			_interactStartTime = 0;
+			_interactEndTime = 0;
 			_clingGroundCalculate = null;
 			canRemoved = true;
 			_needRun = false;

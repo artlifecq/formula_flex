@@ -376,11 +376,11 @@ package com.game.engine3D.scene.layers
 				var inViewB : Boolean = disA < _viewDistanceSquare;
 				if (inViewA && inViewB)
 				{
-					if (baA.interactTime > baB.interactTime)
+					if (baA.interactPriority > baB.interactPriority)
 					{
 						return 1;
 					}
-					else if (baA.interactTime < baB.interactTime)
+					else if (baA.interactPriority < baB.interactPriority)
 					{
 						return -1;
 					}

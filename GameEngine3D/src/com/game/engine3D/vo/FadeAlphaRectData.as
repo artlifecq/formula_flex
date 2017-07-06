@@ -1,5 +1,6 @@
 package com.game.engine3D.vo
 {
+	import away3d.utils.GCObject;
 
 	/**
 	 *
@@ -8,7 +9,7 @@ package com.game.engine3D.vo
 	 * 创建时间：2016-05-25 下午1:26:38
 	 *
 	 */
-	public class FadeAlphaRectData
+	public class FadeAlphaRectData extends GCObject
 	{
 		private var _fadeX : Number;
 		private var _fadeY : Number;

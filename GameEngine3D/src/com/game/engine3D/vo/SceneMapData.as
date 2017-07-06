@@ -71,12 +71,16 @@ package com.game.engine3D.vo
 		
 		private function loadComplete() : void
 		{
-			for each (var handler : Function in _completeHandlerSet)
+			if(_completeHandlerSet)
 			{
-				handler(this);
+				for each (var handler : Function in _completeHandlerSet)
+				{
+					handler(this);
+				}
+				_completeHandlerSet.length = 0;
 			}
-			_completeHandlerSet.length = 0;
-			_errorHandlerSet.length = 0;
+			if(_errorHandlerSet)
+				_errorHandlerSet.length = 0;
 		}
 		
 		private function loadError() : void
@@ -167,23 +171,6 @@ package com.game.engine3D.vo
 		public function get mapData() : ByteArray
 		{
 			return _mapData;
-		}
-		
-		private function clearMapData() : void
-		{
-			if (_mapData)
-			{
-				_mapData.clear();
-				_mapData = null;
-			}
-			if (_mapDataUrl)
-			{
-				MultiUrlLoadManager.cancelLoadByUrl(_mapDataUrl);
-				_mapDataUrl = null;
-			}
-			_completeHandlerSet.length = 0;
-			_errorHandlerSet.length = 0;
-			_clientMapData = null;
 		}
 		
 		public function addCompleteHandler(handler : Function) : void
@@ -318,6 +305,17 @@ package com.game.engine3D.vo
 		/**释放*/
 		override public function destroy() : void
 		{
+			if (_mapData)
+			{
+				_mapData.clear();
+				_mapData = null;
+			}
+			if (_mapDataUrl)
+			{
+				MultiUrlLoadManager.cancelLoadByUrl(_mapDataUrl);
+				_mapDataUrl = null;
+			}
+			_clientMapData = null;
 			_mapName = null;
 			_completeHandlerSet = null;
 			_errorHandlerSet = null;

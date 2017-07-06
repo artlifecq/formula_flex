@@ -1,5 +1,6 @@
 package com.game.engine3D.vo
 {
+	import away3d.utils.GCObject;
 	
 	/**
 	 *
@@ -8,7 +9,7 @@ package com.game.engine3D.vo
 	 * 创建时间：2017-03-10 上午10:42:33
 	 *
 	 */
-	public class ErrorReportData
+	public class ErrorReportData extends GCObject
 	{
 		/**
 		 * 报错时的内存

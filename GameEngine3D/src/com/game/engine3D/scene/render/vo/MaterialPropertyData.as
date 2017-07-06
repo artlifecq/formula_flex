@@ -1,5 +1,7 @@
 package com.game.engine3D.scene.render.vo
 {
+	import away3d.utils.GCObject;
+
 	/**
 	 *
 	 * 材质属性数据
@@ -8,7 +10,7 @@ package com.game.engine3D.scene.render.vo
 	 *
 	 */
 	
-	public class MaterialPropertyData
+	public class MaterialPropertyData extends GCObject
 	{
 		public var materialName:String;
 		public var propertyName:String;
