@@ -807,7 +807,6 @@ package com.rpgGame.app.cmdlistener.scene
 				data.distributeId=info.distributeId;
 				RoleData.readMonster(data,info);
 				sceneRole =SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
-				
 				GameLog.addShow("添加怪物客户端id：" + data.id);
 				GameLog.addShow("添加怪物服务器id：" + data.serverID.ToString());
 			}

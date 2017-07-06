@@ -52,6 +52,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.MailCfgData;
 	import com.rpgGame.coreData.cfg.MapPreLoadData;
 	import com.rpgGame.coreData.cfg.MazeCfgData;
+	import com.rpgGame.coreData.cfg.MibaoCfgData;
 	import com.rpgGame.coreData.cfg.NewFuncCfgData;
 	import com.rpgGame.coreData.cfg.NineTowerCfg;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
@@ -313,6 +314,8 @@ package com.rpgGame.app.data
 			BattleRankCfg.setup(dic[ConfigClassRegister.Q_battle_rank]);//巅峰对决
 			NineTowerCfg.setup(dic[ConfigClassRegister.Q_nine_tower]);//九层妖塔	
 			LijinCfgData.setup(dic[ConfigClassRegister.Q_daysdown_gold]);//天降礼金
+			MibaoCfgData.setup(dic[ConfigClassRegister.Q_mibao_monster],dic[ConfigClassRegister.Q_mibao_reward]);//秦陵秘宝
+			
 			VipCfg.setup(dic[ConfigClassRegister.Q_vip]);//多人副本
 		}
 		

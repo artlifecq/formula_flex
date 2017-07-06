@@ -4,6 +4,7 @@ package com.rpgGame.app.scene.animator
 	import com.game.engine3D.scene.render.vo.IRenderAnimator;
 	import com.game.engine3D.utils.MathUtil;
 	import com.game.engine3D.vo.BaseObj3D;
+	import com.rpgGame.app.manager.TrusteeshipFightSoulManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.scene.SceneRole;
@@ -119,12 +120,12 @@ package com.rpgGame.app.scene.animator
 //				}
 //			}
 		}	*/
-		
+		private var postTime:Number=0;
 		public function update(gapTm:uint):void
 		{
 			//当战魂攻击时，执行圆周运动
-			var postTime:Number=0;
-			if(_fightSoulRole.stateMachine.isAttacking)
+			
+			if(TrusteeshipFightSoulManager.getInstance().isFightSoulRunning)//_fightSoulRole.stateMachine.isAttacking
 			{
 				postTime +=gapTm;
 				if(postTime >= TotalRunTime)
@@ -135,10 +136,11 @@ package com.rpgGame.app.scene.animator
 				
 				_fightSoulRole.x = _owner.x + _radius*Math.sin(percent);
 				_fightSoulRole.z = _owner.z + Math.cos(Math.abs(GlobalConfig.mapCameraRadian)) * _radius*Math.cos(percent);
+				
 				return;
 			}
+			postTime=(_owner.rotationY + 270)/360*TotalRunTime;//同步转圈初始位置
 			//当战魂待机状态时，只是跟随运动
-			
 			var curTime:Number = SystemTimeManager.curtTm;
 			if ((curTime - _preTime) < 200)
 			{

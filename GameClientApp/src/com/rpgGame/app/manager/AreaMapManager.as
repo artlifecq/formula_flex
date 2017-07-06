@@ -179,7 +179,7 @@ package com.rpgGame.app.manager
 		 *
 		 */
 		public static function addDynamicObstacleArea(aid:int) : void
-		{//L.l("添加阻挡区域："+aid);//return;
+		{
 			var obstacleArea : ClientMapAreaData = AreaCfgData.getDynamicObstacleAreas(aid);
 			if(!obstacleArea)return;
 			var mapPointSets : Vector.<MapPointSet> = new Vector.<MapPointSet>();
@@ -190,7 +190,7 @@ package com.rpgGame.app.manager
 		 *  删除动态阻挡区域
 		 */
 		public static function removeDynamicObstacleArea(aid:int) : void
-		{//L.l("删除阻挡区域："+aid);//return;
+		{
 			SceneManager.getScene().sceneMapLayer.removeObstaclePoints(["MapDataDynamicObstacleArea" + aid]);
 		}
 		
