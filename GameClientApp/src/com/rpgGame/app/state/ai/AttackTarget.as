@@ -7,6 +7,7 @@ package com.rpgGame.app.state.ai
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.core.fight.spell.CastSpellInfo;
 	import com.rpgGame.core.state.ai.AIState;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
@@ -165,6 +166,10 @@ package com.rpgGame.app.state.ai
 				return false;
 			}
 			if (MainRoleManager.actor.stateMachine.isLockCaseSpell)
+			{
+				return false;
+			}
+			if (MainRoleManager.actor.stateMachine.isTripleLockCaseSpell)
 			{
 				return false;
 			}

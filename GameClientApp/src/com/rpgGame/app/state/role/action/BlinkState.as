@@ -442,6 +442,10 @@ package com.rpgGame.app.state.role.action
 				return false;
 			if (!force && (_machine as RoleStateMachine).isLockCaseSpell)
 				return false;
+			if (!force&&(_machine as RoleStateMachine).isTripleLockCaseSpell)
+			{
+				return false;
+			}
 			if (!force && (_machine as RoleStateMachine).isAttacking)
 				return false;
 			if (!force && (_machine as RoleStateMachine).isBeatMoving)
@@ -452,6 +456,7 @@ package com.rpgGame.app.state.role.action
 				return false;
 			if (!force && (_machine as RoleStateMachine).isUnmovable)
 				return false;
+			
 			return true;
 		}
 

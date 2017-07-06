@@ -217,6 +217,10 @@ package com.rpgGame.app.manager.fightsoul
 		}
 		public function canGetReward(index:int):Boolean
 		{
+			if (!fightSoulInfo) 
+			{
+				return false;
+			}
 			if(isGetReward(index))
 			{
 				return false;

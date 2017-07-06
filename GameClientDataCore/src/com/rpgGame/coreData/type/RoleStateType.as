@@ -80,5 +80,8 @@ package com.rpgGame.coreData.type
 		public static const CONTROL_MASTERY_MAN:int = rEnum.next;// 神秘人
 		public static const CONTROL_CHECK_AUTO_FIGHT:int = rEnum.next;// 自动战斗
 		public static const CONTROL_VIP:int = rEnum.next;// 自动战斗
+		
+		public static const CONTROL_TRIPLE_ATTACK_LOCK:int = rEnum.next;// 三连击锁定
+		public static const CONTROL_TRIPLE_ATTACK_CHECK:int = rEnum.next;// 三连击锁定
 	}
 }

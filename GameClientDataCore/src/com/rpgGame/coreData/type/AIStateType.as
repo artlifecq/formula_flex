@@ -35,6 +35,11 @@ package com.rpgGame.coreData.type
 		/**任务 自动采集*/
 		public static const TASK_GATHER : int = rEnum.next;
 		
+		//美人
+		public static const AI_GIRL_FOLLOW:int=rEnum.next;
+		public static const AI_GIRL_ATTACK:int=rEnum.next;
+		public static const AI_GIRL_SPEAK:int=rEnum.next;
+		public static const AI_GIRL_TRANS_LOCK:int=rEnum.next;
 		public function AIStateType()
 		{
 		}
