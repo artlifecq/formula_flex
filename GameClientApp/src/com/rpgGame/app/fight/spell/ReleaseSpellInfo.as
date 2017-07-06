@@ -9,6 +9,8 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
 	import com.rpgGame.coreData.clientConfig.Q_SpellEffect;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
+	import com.rpgGame.coreData.enum.EnumSkillPerformType;
+	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.netData.fight.message.ResAttackVentToClientMessage;
 	import com.rpgGame.netData.fight.message.ResFightBroadcastMessage;
 	import com.rpgGame.netData.structs.Position;
@@ -177,13 +179,19 @@ package com.rpgGame.app.fight.spell
 				_releaseAngle = (_releaseAngle + 270) % 360;
 				
 				_atkorID = fightTargetMsg.personId.ToGID();
-				if (_atkorID > 0)
+				
+				if (_atkorID > 0&&EnumSkillPerformType.T_PLAYER==_spellData.q_performType)
 				{
 					_atkor = SceneManager.getSceneObjByID(_atkorID) as SceneRole;
 					if (_atkor && !_atkor.usable)
 						_atkor = null;
 				}
-				
+				if (_atkorID > 0&&EnumSkillPerformType.T_FIGHTSOUL==_spellData.q_performType) 
+				{
+					_atkor = SceneManager.getScene().getSceneObjByID(_atkorID, SceneCharType.FIGHT_SOUL) as SceneRole;
+					if (_atkor && !_atkor.usable)
+						_atkor = null;
+				}
 				if(_atkor == null)
 				{
 					GameLog.addShow("攻击者为空!攻击者服务器ID为：\t" + fightTargetMsg.personId.ToString());
