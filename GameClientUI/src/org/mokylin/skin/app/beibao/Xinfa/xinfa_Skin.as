@@ -345,9 +345,9 @@ package org.mokylin.skin.app.beibao.Xinfa
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			grid_item_1 = temp;
 			temp.name = "grid_item_1";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 220;
-			temp.y = 481;
+			temp.styleName = "ui/common/grid/normal/36.png";
+			temp.x = 222;
+			temp.y = 487;
 			return temp;
 		}
 

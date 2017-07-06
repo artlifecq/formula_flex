@@ -59,8 +59,8 @@ package com.rpgGame.app.ui.tips
 			_iconFace=new DragDropItem(IcoSizeEnum.ICON_64,0);
 			_iconFace.gridInfo=new GridInfo(ItemContainerID.BackPack,0);
 			addChild(_iconFace);
-			_iconFace.x=12;
-			_iconFace.y=39;
+			_iconFace.x=16;
+			_iconFace.y=43;
 			labelList=new Vector.<Label>();
 			lines=new Vector.<UIAsset>();
 			uititles=new Vector.<UIAsset>();
@@ -254,6 +254,7 @@ package com.rpgGame.app.ui.tips
 				curY+=27;
 				
 			}else{
+				_itemTip.lb4.visible=_itemTip.lbCishu.visible=false;
 				//物品说明
 				curX=13;
 				curY=137;	

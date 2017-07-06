@@ -33,6 +33,10 @@ package com.rpgGame.core.events
 		
 		/** 角色死亡**/
 		public static const ROLE_DIE : int = UNIQUEID.NEXT;
+		
+		/** 地图区域触发事件**/
+		public static const AREA_TRIGGER : int = UNIQUEID.NEXT;
+		
 	}
 }
 

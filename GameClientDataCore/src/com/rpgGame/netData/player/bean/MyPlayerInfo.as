@@ -64,6 +64,9 @@ package com.rpgGame.netData.player.bean{
 		//阵营关系，为0则检查默认敌对关系，大于0则和相同阵营友好，不同阵营敌对
 		private var _relation: int;
 		
+		//阵营Id
+		private var _faction: int;
+		
 		//角色属性信息
 		private var _attributes: Vector.<AttributeItem> = new Vector.<AttributeItem>();
 		//buff列表
@@ -122,6 +125,8 @@ package com.rpgGame.netData.player.bean{
 			writeByte(_pkType);
 			//阵营关系，为0则检查默认敌对关系，大于0则和相同阵营友好，不同阵营敌对
 			writeByte(_relation);
+			//阵营Id
+			writeByte(_faction);
 			//角色属性信息
 			writeShort(_attributes.length);
 			for (var i: int = 0; i < _attributes.length; i++) {
@@ -186,6 +191,8 @@ package com.rpgGame.netData.player.bean{
 			_pkType = readByte();
 			//阵营关系，为0则检查默认敌对关系，大于0则和相同阵营友好，不同阵营敌对
 			_relation = readByte();
+			//阵营Id
+			_faction = readByte();
 			//角色属性信息
 			var attributes_length : int = readShort();
 			for (var i: int = 0; i < attributes_length; i++) {
@@ -439,6 +446,21 @@ package com.rpgGame.netData.player.bean{
 		 */
 		public function set relation(value: int): void{
 			this._relation = value;
+		}
+		
+		/**
+		 * get 阵营Id
+		 * @return 
+		 */
+		public function get faction(): int{
+			return _faction;
+		}
+		
+		/**
+		 * set 阵营Id
+		 */
+		public function set faction(value: int): void{
+			this._faction = value;
 		}
 		
 		/**

@@ -28,16 +28,6 @@ package org.mokylin.skin.app.banghui.wangcheng
 
 		public var gid3_1:feathers.controls.UIAsset;
 
-		public var gid3_2:feathers.controls.UIAsset;
-
-		public var gid3_3:feathers.controls.UIAsset;
-
-		public var gid3_4:feathers.controls.UIAsset;
-
-		public var gid3_5:feathers.controls.UIAsset;
-
-		public var gid3_6:feathers.controls.UIAsset;
-
 		public var grpGrid:feathers.controls.Group;
 
 		public var lbBang1:feathers.controls.Label;
@@ -209,61 +199,6 @@ package org.mokylin.skin.app.banghui.wangcheng
 			return temp;
 		}
 
-		private function gid3_2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			gid3_2 = temp;
-			temp.name = "gid3_2";
-			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 69;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function gid3_3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			gid3_3 = temp;
-			temp.name = "gid3_3";
-			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 138;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function gid3_4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			gid3_4 = temp;
-			temp.name = "gid3_4";
-			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 211;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function gid3_5_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			gid3_5 = temp;
-			temp.name = "gid3_5";
-			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 281;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function gid3_6_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			gid3_6 = temp;
-			temp.name = "gid3_6";
-			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 349;
-			temp.y = 0;
-			return temp;
-		}
-
 		private function grpGrid_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
@@ -271,7 +206,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			temp.name = "grpGrid";
 			temp.x = 123;
 			temp.y = 475;
-			temp.elementsContent = [gid3_1_i(),gid3_2_i(),gid3_3_i(),gid3_4_i(),gid3_5_i(),gid3_6_i()];
+			temp.elementsContent = [gid3_1_i()];
 			return temp;
 		}
 

@@ -1,5 +1,7 @@
 package com.rpgGame.coreData.role
 {
+	import com.gameClient.alert.AlertPanel;
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.netData.map.bean.DropGoodsInfo;
@@ -69,6 +71,10 @@ package com.rpgGame.coreData.role
 			_qitem = ItemConfig.getQItemByID(goods.itemModelId);
 			this.name = _qitem.q_name;
 			avatarRes="drop/"+_qitem.q_drop_model;
+			if(_qitem.q_drop_model==""){
+				var loginfo:String = "场景掉落物："+goods.itemModelId+"掉落地面模型ID:q_drop_model未配置";
+				AlertPanel.showMsg( loginfo, null );
+			}
 			x=goodsDatas.x;
 			y=-1*goodsDatas.y;
 		}

@@ -571,6 +571,7 @@ package com.rpgGame.app.manager.role
 			role.rotationY = data.direction;
 			SceneManager.addSceneObjToScene(role, true, true, false);
 			ClientTriggerManager.addTriggerCollectEffect(role);
+			EventManager.dispatchEvent(MapEvent.UPDATE_MAP_ROLE_ADD, role);
 		}
 		
 		/**

@@ -9,7 +9,6 @@ package com.rpgGame.app.graphics
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.utils.HeadBloodUtil;
 	import com.rpgGame.core.utils.MCUtil;
@@ -33,6 +32,7 @@ package com.rpgGame.app.graphics
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.SceneCharType;
+	import com.rpgGame.netData.structs.IntKeyValue;
 	
 	import app.message.MonsterDataProto.MonsterType;
 	
@@ -197,6 +197,16 @@ package com.rpgGame.app.graphics
 				//addAndUpdateName();
 				break;
 			}
+		}
+		
+		/**
+		 *是否有矿石 
+		 * @return 
+		 * 
+		 */
+		public function hasGuildWarOre():Boolean
+		{
+			return _guildWarInfoBar;
 		}
 		
 		/**
@@ -1225,6 +1235,27 @@ package com.rpgGame.app.graphics
 			if(!_guildWarInfoBar){
 				_guildWarInfoBar=GuildWarInfoBar.create(_role);
 			}
+		}
+		
+		/**
+		 *更新帮会战信息条 
+		 * @param oreList
+		 * 
+		 */
+		public function updateGuildWarInfoBar(oreList:Vector.<IntKeyValue>):void
+		{
+			if(!oreList||oreList.length==0){
+				if(_guildWarInfoBar){
+					_guildWarInfoBar.removeFromParent();
+					_guildWarInfoBar=null;
+				}
+			}else{
+				createGuildWarBar();
+			}
+			if(_guildWarInfoBar){
+				_guildWarInfoBar.update(oreList);
+			}
+			updateShowAndHide();
 		}
 		
 		/**增加护宝称号货移除称号*/

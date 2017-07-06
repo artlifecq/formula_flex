@@ -94,6 +94,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.netData.map.message.SCSceneObjMoveMessage;
 	import com.rpgGame.netData.monster.message.ResMonsterDieMessage;
 	import com.rpgGame.netData.player.message.BroadcastPlayerAttriChangeMessage;
+	import com.rpgGame.netData.player.message.ResChangeFactionMessage;
 	import com.rpgGame.netData.player.message.ResChangePKStateMessage;
 	import com.rpgGame.netData.player.message.ResPlayerDieMessage;
 	import com.rpgGame.netData.player.message.ResReviveSuccessMessage;
@@ -150,6 +151,7 @@ package com.rpgGame.app.cmdlistener.scene
 			SocketConnection.addCmdListener(101117, onResChangeMapMessage);
 			//			SocketConnection.addCmdListener(SceneModuleMessages.S2C_SCENE_MAP_TRANSPORT, onSceneMapTransport);
 			SocketConnection.addCmdListener(101126, onResChangeMapFailedMessage);
+			SocketConnection.addCmdListener(103129, onResChangeFactionMessage);
 			// 复活成功
 			SocketConnection.addCmdListener(103114, onResPlayerDieMessage);
 			SocketConnection.addCmdListener(103115, onResReviveSuccessMessage);
@@ -211,6 +213,14 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			
 			finish();
+		}
+		
+		private function onResChangeFactionMessage(msg:ResChangeFactionMessage):void
+		{
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;			
+			if(role){
+				(role.data as HeroData).faction=msg.faction;
+			}
 		}
 		
 		private function onResMonterDieMessage(msg:ResMonsterDieMessage):void
@@ -768,6 +778,8 @@ package com.rpgGame.app.cmdlistener.scene
 				collectData.x = info.position.x;
 				collectData.y = info.position.y;
 				collectData.isDynamicCreate =true;
+				collectData.relation=info.relation;
+				collectData.faction=info.faction;
 				SceneRoleManager.getInstance().createCollect(collectData);
 			}
 			else if(qData.q_monster_type==4)//npc创建流程       对应 改的东西太多了 先保留
