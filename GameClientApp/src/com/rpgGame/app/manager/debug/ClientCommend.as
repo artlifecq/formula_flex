@@ -24,7 +24,10 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
+	import com.rpgGame.coreData.role.GirlPetData;
+	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.netData.backpack.bean.TempItemInfo;
+	import com.rpgGame.netData.map.bean.PetInfo;
 	import com.rpgGame.netData.player.message.SCNonagePromptMessage;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
 	import com.rpgGame.netData.vip.bean.VipCardInfo;
@@ -34,6 +37,7 @@ package   com.rpgGame.app.manager.debug
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
+	import org.game.netCore.data.long;
 	import org.game.netCore.net.MessageMgr;
 	
 	
