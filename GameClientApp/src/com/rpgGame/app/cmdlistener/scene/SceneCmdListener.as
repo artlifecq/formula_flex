@@ -3,7 +3,6 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.vo.BaseObj3D;
 	import com.gameClient.log.GameLog;
-	import com.gameClient.log.Lyt;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.ActivetyDataManager;
