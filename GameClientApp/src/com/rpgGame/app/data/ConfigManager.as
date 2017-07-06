@@ -57,6 +57,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.QSinglecitybaseCfgData;
 	import com.rpgGame.coreData.cfg.RaceCfgData;
+	import com.rpgGame.coreData.cfg.RedRewardCfgData;
 	import com.rpgGame.coreData.cfg.RelationCfgData;
 	import com.rpgGame.coreData.cfg.ReliveCfgData;
 	import com.rpgGame.coreData.cfg.SceneEffectCfgData;
@@ -312,6 +313,7 @@ package com.rpgGame.app.data
 			NineTowerCfg.setup(dic[ConfigClassRegister.Q_nine_tower]);//九层妖塔	
 			LijinCfgData.setup(dic[ConfigClassRegister.Q_daysdown_gold]);//天降礼金
 			VipCfg.setup(dic[ConfigClassRegister.Q_vip]);//多人副本
+			RedRewardCfgData.setup(dic[ConfigClassRegister.Q_redreward]);//红包
 		}
 		
 		/**

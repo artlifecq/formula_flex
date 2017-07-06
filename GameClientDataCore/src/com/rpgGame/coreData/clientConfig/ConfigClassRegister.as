@@ -1,36 +1,20 @@
 package com.rpgGame.coreData.clientConfig
-	
 {
-	
 	import flash.net.registerClassAlias;
-	
 	import org.client.mainCore.ds.HashMap;
-	
 	/**
-	 
-	 * 
-	 
-	 *  根据模块config 文件设置自动生成的代码
-	 
-	 *	
-	 
-	 * 【**不可手动修改此类**】，
-	 
-	 *	
-	 
-	 * 【任何修改都将被生成工具覆盖，如需修改请直接修改具体的config文件】
-	 
-	 * @author NEIL
-	 
-	 */
-	
+	* 
+	*  根据模块config 文件设置自动生成的代码
+	*	
+	* 【**不可手动修改此类**】，
+	*	
+	* 【任何修改都将被生成工具覆盖，如需修改请直接修改具体的config文件】
+	* @author NEIL
+	*/
 	public class ConfigClassRegister
-		
 	{
-		
 		private static var _classMap:HashMap = new HashMap();
-		
-		/**  名称备注	资源路径#资源路径	动画名称#动画名称	碰撞隐藏节点#碰撞隐藏节点，用;分割多个节点	消散时间#消散时间	前轴围绕半径#前轴围绕半径	前轴围绕角速度#前轴围绕角速度（度/秒）	收敛次数#收敛次数	围绕半径#围绕半径	围绕角速度#围绕角速度（度/秒） */
+				/**  名称备注	资源路径#资源路径	动画名称#动画名称	碰撞隐藏节点#碰撞隐藏节点，用;分割多个节点	消散时间#消散时间	前轴围绕半径#前轴围绕半径	前轴围绕角速度#前轴围绕角速度（度/秒）	收敛次数#收敛次数	围绕半径#围绕半径	围绕角速度#围绕角速度（度/秒） */
 		public static const EffectAnimation:String = "data.animat.EffectAnimation";
 		/**  客户端区域数据			 */
 		public static const ClientArea:String = "data.ClientArea";
@@ -96,7 +80,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const HeroModel:String = "data.model.HeroModel";
 		/**  坐骑模型表	功能名称	动画资源名称 */
 		public static const MountModel:String = "data.model.MountModel";
-		/**  3 怪物基本信息数据库																																																																绑定器			 */
+		/**  3 怪物基本信息数据库																																																																		绑定器			 */
 		public static const Q_monster:String = "data.monster.Q_monster";
 		/**  NPC配置数据库																											 */
 		public static const Q_npc:String = "data.monster.Q_npc";
@@ -108,8 +92,12 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_att_transfer:String = "data.Q_att_transfer";
 		/**  所有属性相关的数据																														 */
 		public static const Q_att_values:String = "data.Q_att_values";
+		/**  争霸战刷怪表										 */
+		public static const Q_battle_monster_refresh:String = "data.Q_battle_monster_refresh";
 		/**  巅峰等级段位升级表						 */
 		public static const Q_battle_rank:String = "data.Q_battle_rank";
+		/**  争霸战积分奖励表			 */
+		public static const Q_battle_reward:String = "data.Q_battle_reward";
 		/**  心法数据库												 */
 		public static const Q_cheats:String = "data.Q_cheats";
 		/**  经脉冲穴数据库																 */
@@ -120,6 +108,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_daily_zone:String = "data.Q_daily_zone";
 		/**  每日副本刷怪配置表													 */
 		public static const Q_dailyzone_monster:String = "data.Q_dailyzone_monster";
+		/**  天降元宝活动配置						 */
+		public static const Q_daysdown_gold:String = "data.Q_daysdown_gold";
 		/**  复活界面配置表				 */
 		public static const Q_die:String = "data.Q_die";
 		/**  继承消耗表			 */
@@ -152,7 +142,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_horse:String = "data.Q_horse";
 		/**  坐骑技能数据库		 */
 		public static const Q_horse_skills:String = "data.Q_horse_skills";
-		/**  2物品基本信息数据库																																																																																								 */
+		/**  2物品基本信息数据库																																																																																									 */
 		public static const Q_item:String = "data.Q_item";
 		/**  军阶数据表					 */
 		public static const Q_junjie:String = "data.Q_junjie";
@@ -172,6 +162,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_meritorious:String = "data.Q_meritorious";
 		/**  战功表					 */
 		public static const Q_meritorious_monster:String = "data.Q_meritorious_monster";
+		/**  秦陵秘宝出生复活点配置				 */
+		public static const Q_mibao_point:String = "data.Q_mibao_point";
 		/**  任务表(所有任务都这里)																																											 */
 		public static const Q_mission_base:String = "data.Q_mission_base";
 		/**  任务奖励配置表			 */
@@ -184,17 +176,17 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_newfunc:String = "data.Q_newfunc";
 		/**  九层妖塔									 */
 		public static const Q_nine_tower:String = "data.Q_nine_tower";
-		/**  天降礼金								 */
-		public static const Q_daysdown_gold:String = "data.Q_daysdown_gold";
 		/**  通知列表			 */
 		public static const Q_notify:String = "data.Q_notify";
+		/**  红包配置		 */
+		public static const Q_redreward:String = "data.Q_redreward";
 		/**  阵营关系				 */
 		public static const Q_relation:String = "data.Q_relation";
 		/**  城池基础表												 */
 		public static const Q_singlecitybase:String = "data.Q_singlecitybase";
 		/**  购买界面其他途径提示数据库				 */
 		public static const Q_source:String = "data.Q_source";
-		/**  活动配置表																												 */
+		/**  活动配置表																														 */
 		public static const Q_special_activities:String = "data.Q_special_activities";
 		/**  tipsid	标题	描述 */
 		public static const Q_tipsinfo:String = "data.Q_tipsinfo";
@@ -244,12 +236,9 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_summon:String = "data.spell.Q_summon";
 		/**  属性的名字（针对不同的地方可以有不同的配置）	 */
 		public static const SpriteStatNameInfo:String = "data.SpriteStatNameInfo";
-		
-		
+
 		public static function setup():void
-			
 		{
-			
 			regClass("data.animat.EffectAnimation", com.rpgGame.coreData.clientConfig.EffectAnimation);
 			regClass("data.ClientArea", com.rpgGame.coreData.clientConfig.ClientArea);
 			regClass("data.ClientBuff", com.rpgGame.coreData.clientConfig.ClientBuff);
@@ -289,7 +278,9 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.monster.Q_scene_monster_area", com.rpgGame.coreData.clientConfig.Q_scene_monster_area);
 			regClass("data.Q_att_transfer", com.rpgGame.coreData.clientConfig.Q_att_transfer);
 			regClass("data.Q_att_values", com.rpgGame.coreData.clientConfig.Q_att_values);
+			regClass("data.Q_battle_monster_refresh", com.rpgGame.coreData.clientConfig.Q_battle_monster_refresh);
 			regClass("data.Q_battle_rank", com.rpgGame.coreData.clientConfig.Q_battle_rank);
+			regClass("data.Q_battle_reward", com.rpgGame.coreData.clientConfig.Q_battle_reward);
 			regClass("data.Q_cheats", com.rpgGame.coreData.clientConfig.Q_cheats);
 			regClass("data.Q_cheats_node", com.rpgGame.coreData.clientConfig.Q_cheats_node);
 			regClass("data.Q_convoy", com.rpgGame.coreData.clientConfig.Q_convoy);
@@ -322,6 +313,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_meridian", com.rpgGame.coreData.clientConfig.Q_meridian);
 			regClass("data.Q_meritorious", com.rpgGame.coreData.clientConfig.Q_meritorious);
 			regClass("data.Q_meritorious_monster", com.rpgGame.coreData.clientConfig.Q_meritorious_monster);
+			regClass("data.Q_mibao_point", com.rpgGame.coreData.clientConfig.Q_mibao_point);
 			regClass("data.Q_mission_base", com.rpgGame.coreData.clientConfig.Q_mission_base);
 			regClass("data.Q_mission_reword", com.rpgGame.coreData.clientConfig.Q_mission_reword);
 			regClass("data.Q_mission_section", com.rpgGame.coreData.clientConfig.Q_mission_section);
@@ -329,6 +321,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_newfunc", com.rpgGame.coreData.clientConfig.Q_newfunc);
 			regClass("data.Q_nine_tower", com.rpgGame.coreData.clientConfig.Q_nine_tower);
 			regClass("data.Q_notify", com.rpgGame.coreData.clientConfig.Q_notify);
+			regClass("data.Q_redreward", com.rpgGame.coreData.clientConfig.Q_redreward);
 			regClass("data.Q_relation", com.rpgGame.coreData.clientConfig.Q_relation);
 			regClass("data.Q_singlecitybase", com.rpgGame.coreData.clientConfig.Q_singlecitybase);
 			regClass("data.Q_source", com.rpgGame.coreData.clientConfig.Q_source);
@@ -357,29 +350,17 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.spell.Q_SpellEffect", com.rpgGame.coreData.clientConfig.Q_SpellEffect);
 			regClass("data.spell.Q_summon", com.rpgGame.coreData.clientConfig.Q_summon);
 			regClass("data.SpriteStatNameInfo", com.rpgGame.coreData.clientConfig.SpriteStatNameInfo);
-			
-			
-		}
-		
-		private static function regClass(name:String, cls:Class):void
-			
-		{
-			
-			_classMap.add(name,cls);
-			
-			registerClassAlias(name, cls);
-			
-		}
-		
-		public static function getClass(name:String):Class
-			
-		{
-			
-			return _classMap.getValue(name);
-			
-		}
-		
-	}
-	
-}
 
+		}
+		private static function regClass(name:String, cls:Class):void
+		{
+			_classMap.add(name,cls);
+			registerClassAlias(name, cls);
+		}
+		public static function getClass(name:String):Class
+		{
+			return _classMap.getValue(name);
+		}
+	}
+}
+		
