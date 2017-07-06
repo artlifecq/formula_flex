@@ -4,6 +4,7 @@ package com.rpgGame.app.state.ai
 	import com.game.engine3D.state.StateMachine;
 	import com.game.engine3D.state.StateReference;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.state.ai.pet.GirlPetTransLockState;
 	import com.rpgGame.core.state.ai.AINone;
 	import com.rpgGame.core.state.ai.AIState;
 	import com.rpgGame.coreData.type.AIStateType;
@@ -48,7 +49,11 @@ package com.rpgGame.app.state.ai
 			var state : IState = getCurrState(AIState);
 			return state && (state.type == AIStateType.AI_NONE);
 		}
-
+		public function get isGrilPetTransLock() : Boolean
+		{
+			var state : IState = getCurrState(GirlPetTransLockState);
+			return state && (state.type == AIStateType.AI_GIRL_TRANS_LOCK);
+		}
 		override protected function createState(type : int) : IState
 		{
 			var state : IState;

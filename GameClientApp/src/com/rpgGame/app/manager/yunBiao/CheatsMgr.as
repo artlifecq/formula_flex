@@ -1,6 +1,7 @@
 package com.rpgGame.app.manager.yunBiao
 {
 	import com.gameClient.utils.HashMap;
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -336,6 +337,61 @@ package com.rpgGame.app.manager.yunBiao
 			}
 			return null;
 		}
-		
+		public function checkHasNodeCanClick():Boolean
+		{
+			var keys:Array=_cheatsHash.keys();
+			for each (var key:int in keys) 
+			{
+				if (checkNodeCanClick(key)) 
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+		public function checkNodeCanClick(cheatsId:int):Boolean
+		{
+			var cheats:CheatsVo=_cheatsHash.getValue(cheatsId);
+			if (cheats) 
+			{
+				if (cheats.level<1) 
+				{
+					return Mgr.cheatsMgr.getCanActive(cheats.cheatsConfig.q_id);
+				}
+				var arr:Array=cheats.subNodeHash.values();
+				var len:int=arr.length;
+				var node:CheatsNodeVo;
+				for (var i:int = 0; i < len; i++) 
+				{
+					node=arr[i];
+					var config:Q_cheats_node=node.getConfig();
+					var hasUnlock:Boolean=Mgr.cheatsMgr.getNodeIsUnlock(node);
+					if (config.q_type==0) 
+					{
+						if (hasUnlock) 
+						{
+							var canLevelUp:Boolean=Mgr.cheatsMgr.getCanLevelUp(node);
+							if (canLevelUp)
+							{
+								return true;
+							}
+						}
+					}
+					else
+					{
+						if (hasUnlock) 
+						{
+							var hasBetter:Boolean=Mgr.meridianMgr.getBetterStone(config.q_stone_type,node.getStone()).length>0;
+							if (hasBetter) 
+							{
+								return true;
+							}
+						}
+					}
+				}
+				
+			}
+			return false;
+		}
 	}
 }

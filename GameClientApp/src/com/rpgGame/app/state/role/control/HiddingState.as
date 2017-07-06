@@ -27,7 +27,6 @@ package com.rpgGame.app.state.role.control
 			if (_machine && !_machine.isInPool)
 			{
 				super.execute();
-//				transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
 				if (_stateReference)
 				{
 					if (_stateReference is HiddingStateReference)

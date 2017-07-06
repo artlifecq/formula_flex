@@ -10,8 +10,10 @@ package com.rpgGame.app.utils
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleType;
+	import com.rpgGame.coreData.role.SceneCollectData;
 	import com.rpgGame.coreData.type.HeadBloodStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
+	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import org.client.mainCore.ds.HashMap;
 
@@ -194,7 +196,11 @@ package com.rpgGame.app.utils
 			}
 			if (_role.type == SceneCharType.COLLECT)
 			{
-					return _role.name;
+				var myRe:int=MainRoleManager.actorInfo.faction;
+				if((_role.data as SceneCollectData).faction!=myRe){//不是自己阵营
+					return HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,"敌方矿物");
+				}
+				return _role.name;
 			}
 			if (_role.type != SceneCharType.PLAYER)
 				return _role.name;

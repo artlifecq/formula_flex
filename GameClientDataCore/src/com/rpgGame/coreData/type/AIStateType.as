@@ -38,6 +38,12 @@ package com.rpgGame.coreData.type
 		/**战魂自动技能*/
 		public static const FIGHTSOUL_ATTACE : int = rEnum.next;
 		
+		//美人
+		public static const AI_GIRL_FOLLOW:int=rEnum.next;
+		public static const AI_GIRL_ATTACK:int=rEnum.next;
+		public static const AI_GIRL_SPEAK:int=rEnum.next;
+		public static const AI_GIRL_TRANS_LOCK:int=rEnum.next;
+		
 		
 		public function AIStateType()
 		{

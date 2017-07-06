@@ -1,7 +1,7 @@
 package com.rpgGame.appModule.guild.war
 {
 	import com.rpgGame.app.manager.guild.GuildManager;
-	import com.rpgGame.app.sender.GuildSender;
+	import com.rpgGame.app.sender.GuildWarSender;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.core.app.AppConstant;
@@ -154,8 +154,8 @@ package com.rpgGame.appModule.guild.war
 			EventManager.addEvent(GuildEvent.GUILD_WCZB_INFO,updatePanelView);
 			TipTargetManager.show( _skin.btnShuoMing,TargetTipsMaker.makeSimpleTextTips( TipsCfgData.getTipsInfo(30).q_describe));
 			EventManager.addEvent(GuildEvent.GUILD_CHANGE_ACTIVE,updateAct);
-			GuildSender.reqGuildWarCityInfo();
-			GuildSender.reqEnterGuildWarPanel();
+			GuildWarSender.reqGuildWarCityInfo();
+			GuildWarSender.reqEnterGuildWarPanel();
 		}
 		
 		private function updateAct(value:int):void
@@ -527,7 +527,7 @@ package com.rpgGame.appModule.guild.war
 					toEnterWar();
 					break;
 				case cityHold:
-					GuildSender.reqGuildWarGiveDailyGift();
+					GuildWarSender.reqGuildWarGiveDailyGift();
 					break;
 				case _skin.btnJone:
 					AppManager.showAppNoHide(AppConstant.GUILD_PANEL,null,EmFunctionID.EM_BANGHUI_INFO);
@@ -538,7 +538,7 @@ package com.rpgGame.appModule.guild.war
 		private function toEnterWar():void
 		{
 			AppManager.closeAllApp();
-			GuildSender.reqGuildWarEnter();
+			GuildWarSender.reqGuildWarEnter();
 		}
 	}
 }

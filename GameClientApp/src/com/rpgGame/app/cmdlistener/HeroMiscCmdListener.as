@@ -1,6 +1,7 @@
 package com.rpgGame.app.cmdlistener
 {
 	import com.gameClient.log.GameLog;
+	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.fight.spell.FightChangePop;
 	import com.rpgGame.app.fight.spell.SkillAddPop;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
@@ -17,6 +18,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.sender.HeroMiscSender;
 	import com.rpgGame.app.ui.alert.FangChenMiPanelExt;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.utils.TimeUtil;
@@ -24,6 +26,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.core.events.SpellEvent;
 	import com.rpgGame.core.events.SystemTimeEvent;
 	import com.rpgGame.core.events.role.RoleEvent;
+	import com.rpgGame.core.ui.tip.RewardTipTree;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
@@ -34,7 +37,10 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.coreData.type.EnumHurtType;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
+	import com.rpgGame.netData.client.bean.SystemHint;
+	import com.rpgGame.netData.client.handler.SCSystemHintHandler;
 	import com.rpgGame.netData.client.message.ResClientCustomTagMessage;
+	import com.rpgGame.netData.client.message.SCSystemHintMessage;
 	import com.rpgGame.netData.player.bean.AttributeItem;
 	import com.rpgGame.netData.player.message.ResPersonalNoticeMessage;
 	import com.rpgGame.netData.player.message.ResPlayerAddExpMessage;
@@ -83,6 +89,7 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(103127,RecvSCCurrencyChangeMessage);
 			SocketConnection.addCmdListener(103128,RecvSCMaxValueChangeMessage);
 			SocketConnection.addCmdListener(103117,OnSCNonagePromptMessage);
+			SocketConnection.addCmdListener(301134,SCSystemHintHandler);
 			
 			
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -110,6 +117,17 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection_protoBuffer.addCmdListener(HeroMiscModuleMessages.S2C_FANG_CHEN_MI_ONLINE_STRONG, onRecFangChenMiOnelineStrong);
 			
 			finish();
+		}
+		RewardTipTree.ins.recordNodeState2Server=HeroMiscSender.reqSetSystemHint;
+		private function SCSystemHintHandler(msg:SCSystemHintMessage):void
+		{
+			// TODO Auto Generated method stub
+			var hash:HashMap=new HashMap();
+			for each (var item:SystemHint in msg.systemHints) 
+			{
+				hash.put(item.key,item.value==1);
+			}
+			RewardTipTree.ins.setServerData(hash);
 		}
 		
 		private function RecvResSkillAddMessage(msg:ResSkillAddMessage):void

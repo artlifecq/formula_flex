@@ -12,6 +12,7 @@ package com.game.engine3D.scene.render.vo
 	import away3d.cameras.Camera3D;
 	import away3d.containers.ObjectContainer3D;
 	import away3d.entities.CompositeMesh;
+	import away3d.entities.Mesh;
 	import away3d.lights.LightBase;
 	import away3d.materials.lightpickers.LightPickerBase;
 	import away3d.materials.methods.EffectMethodBase;
@@ -140,12 +141,27 @@ package com.game.engine3D.scene.render.vo
 				}
 			}
 		}
+		
+		private function meshSortFunc(a:ObjectContainer3D,b:ObjectContainer3D):int
+		{
+			if(a is Mesh)
+			{
+				return -1;
+			}
+			if(b is Mesh)
+			{
+				return 1;
+			}
+			return 0;
+		}
 
 		private function onMeshComplete(loader : RenderUnitLoader) : void
 		{
 			if (!_renderMeshLoader)
 				return;
+			
 			_drawElements = _renderMeshLoader.elements;
+			_drawElements.sort(meshSortFunc);
 			
 			_lightPickerMap = _renderMeshLoader.lightPickerMap;
 			_lights = _renderMeshLoader.lights;
@@ -178,11 +194,12 @@ package com.game.engine3D.scene.render.vo
 					if (element is CompositeMesh)
 					{
 						_animatorElements.push(CompositeMesh(element));
-					} else if (element is ObjectContainer3D) {
+					} 
+					else if (element is ObjectContainer3D)
+					{
 						_baseVirtualElements.push(ObjectContainer3D(element));
 					}
 				}
-				
 			}
 			
 			tryResourceComplete();

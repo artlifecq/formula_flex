@@ -14,7 +14,6 @@ package org.mokylin.skin.app.banghui.wangcheng
 	import org.mokylin.skin.app.banghui.wangcheng.ZhengBaVsNameItemSkin;
 	import org.mokylin.skin.component.button.ButtonSkin_info;
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
-	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 	import org.mokylin.skin.component.list.ListSkin1;
 
 	/**
@@ -340,7 +339,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			temp.name = "btnJinPai";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "前往报名";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
 			temp.color = 0xFFFFFF;
 			temp.width = 90;
 			temp.x = 10;
@@ -368,7 +367,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			temp.name = "btnJone";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "加入帮派";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
 			temp.color = 0xFFFFFF;
 			temp.width = 90;
 			temp.x = 10;

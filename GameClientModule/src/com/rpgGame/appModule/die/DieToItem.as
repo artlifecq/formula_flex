@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.die
 {
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.ClientConfig;
@@ -36,8 +37,8 @@ package com.rpgGame.appModule.die
 		
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
-			if(target==_skin.btn&&_item.q_panel.length!=0){
-				AppManager.showApp(_item.q_panel);
+			if(target==_skin.btn&&_item.q_panel>0){
+				FunctionOpenManager.openAppPaneById(_item.q_panel.toString());
 			}
 		}
 		

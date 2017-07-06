@@ -2,6 +2,8 @@ package com.rpgGame.app.sender
 {
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.netData.client.bean.CustomTaginfo;
+	import com.rpgGame.netData.client.bean.SystemHint;
+	import com.rpgGame.netData.client.message.CSAddOrUpdateHintMessage;
 	import com.rpgGame.netData.client.message.ReqClientCustomTagSetMessage;
 	import com.rpgGame.netData.player.message.ReqChangePKStateMessage;
 	
@@ -40,7 +42,14 @@ package com.rpgGame.app.sender
 				SocketConnection.send(msg);
 			}
 		}
-		
+		public static function reqSetSystemHint(type :String, value:int):void
+		{
+			var msg:CSAddOrUpdateHintMessage= new CSAddOrUpdateHintMessage();
+			msg.systemHint = new SystemHint();
+			msg.systemHint.key = type.toString();
+			msg.systemHint.value = value;
+			SocketConnection.send(msg);
+		}
 		public static function reqChangePKMode(pkMode:uint):void
 		{
 			var msg:ReqChangePKStateMessage=new ReqChangePKStateMessage();

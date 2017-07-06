@@ -147,8 +147,12 @@ package com.rpgGame.appModule.die
 		
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
-			super.onTouchTarget(target);
-			
+//			super.onTouchTarget(target);
+			if( target.name){
+				SceneSender.reqReviveRole();
+				this.hide();
+				return;
+			}
 			BackPackManager.instance.getBagItemsCountById(FUHUO_ID);
 			
 			switch(target){

@@ -1,6 +1,8 @@
 package com.game.engine3D.scene.render.vo
 {
 	import com.game.engine3D.scene.render.RenderUnit3D;
+	
+	import away3d.utils.GCObject;
 
 	/**
 	 *
@@ -9,7 +11,7 @@ package com.game.engine3D.scene.render.vo
 	 * 创建时间：2016-6-30 下午1:26:38
 	 *
 	 */
-	public class RenderUnitChild
+	public class RenderUnitChild extends GCObject
 	{
 		private var _renderUnit : RenderUnit3D;
 		private var _childName : String;

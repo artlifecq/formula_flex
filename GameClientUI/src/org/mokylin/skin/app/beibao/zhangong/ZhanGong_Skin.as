@@ -9,7 +9,7 @@ package org.mokylin.skin.app.beibao.zhangong
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import feathers.controls.UINumber;
-	import org.mokylin.skin.component.button.ButtonSkin_jiantou2;
+	import org.mokylin.skin.component.button.ButtonSkin_jiantou;
 	import org.mokylin.skin.component.list.ListSkin1;
 	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_lv2;
 	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow2;
@@ -140,7 +140,7 @@ package org.mokylin.skin.app.beibao.zhangong
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnNext = temp;
 			temp.name = "btnNext";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jiantou2;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jiantou;
 			temp.x = 899;
 			temp.y = 301;
 			return temp;
@@ -152,7 +152,7 @@ package org.mokylin.skin.app.beibao.zhangong
 			btnPrev = temp;
 			temp.name = "btnPrev";
 			temp.scaleX = -1;
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jiantou2;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jiantou;
 			temp.x = 307;
 			temp.y = 301;
 			return temp;

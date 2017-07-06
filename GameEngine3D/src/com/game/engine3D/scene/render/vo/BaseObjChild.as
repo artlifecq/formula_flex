@@ -3,6 +3,8 @@ package com.game.engine3D.scene.render.vo
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.vo.BaseObj3D;
 	
+	import away3d.utils.GCObject;
+	
 	/**
 	 *
 	 * 基础对象子对象
@@ -10,7 +12,7 @@ package com.game.engine3D.scene.render.vo
 	 * 创建时间：2016-10-10 下午1:26:38
 	 *
 	 */
-	public class BaseObjChild
+	public class BaseObjChild extends GCObject
 	{
 		private var _renderUnit : RenderUnit3D;
 		private var _baseObj : BaseObj3D;

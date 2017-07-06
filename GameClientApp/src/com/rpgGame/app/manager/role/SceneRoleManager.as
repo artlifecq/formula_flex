@@ -42,6 +42,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.info.stall.StallData;
 	import com.rpgGame.coreData.role.BiaoCheData;
+	import com.rpgGame.coreData.role.GirlPetData;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleData;
@@ -473,7 +474,33 @@ package com.rpgGame.app.manager.role
 			if (role.headFace is HeadFace)
 				(role.headFace as HeadFace).updateName();
 		}
-		
+		public function createGirlPet(data:GirlPetData):void
+		{
+			removeSceneRoleByIdAndType(data.id, SceneCharType.GIRL_PET);
+			var role : SceneRole = SceneRole.create(SceneCharType.GIRL_PET, data.id);
+			//设置VO
+			role.data = data;
+			role.name = data.name;
+			role.headFace = HeadFace.create(role);
+			//role.headFace.show();
+			//role.headFace.showHead();
+			//data.avatarInfo.setBodyResID(data.avatarRes, null);
+//			var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(data.avatarRes);
+//			if (avatarResConfig)
+//			{
+//				data.avatarInfo.effectResID = avatarResConfig.idleEffect;
+//			}
+			
+			//执行主换装更新
+			AvatarManager.updateAvatar(role);
+			role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true); //切换到“站立状态”
+			
+			role.setScale(data.sizeScale);
+			role.setGroundXY(data.x, data.y);
+			role.rotationY = data.direction;
+			SceneManager.addSceneObjToScene(role, true, false, false);
+			
+		}
 		/**
 		 * 创建掉落物
 		 * @param data
@@ -544,6 +571,7 @@ package com.rpgGame.app.manager.role
 			role.rotationY = data.direction;
 			SceneManager.addSceneObjToScene(role, true, true, false);
 			ClientTriggerManager.addTriggerCollectEffect(role);
+			EventManager.dispatchEvent(MapEvent.UPDATE_MAP_ROLE_ADD, role);
 		}
 		
 		/**
@@ -639,8 +667,8 @@ package com.rpgGame.app.manager.role
 			AvatarManager.updateAvatar(fightSoulRole);
 			fightSoulRole.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true);
 			fightSoulRole.setScale(model.q_sceneScale/100);
-//			fightSoulRole.setGroundXY((owner.x + 100), owner.y);
-//			fightSoulRole.rotationY = owner.rotationY;
+			fightSoulRole.setGroundXY((owner.x + 100), owner.y);
+			fightSoulRole.rotationY = 0;
 			SceneManager.addSceneObjToScene(fightSoulRole, false);
 			fightSoulFollowAnimator = new FightSoulFollowAnimator(fightSoulRole);
 			fightSoulFollowAnimator.radius = model.q_radius;
@@ -712,33 +740,33 @@ package com.rpgGame.app.manager.role
 			var tmp:RenderUnit3D
 			if (newVal>oldVal) 
 			{
-				var add:int=newVal-oldVal;
-				for (i = 0; i < add;i++) 
-				{
-					tmp=SpellAnimationHelper.addTargetEffect(role, oldVal+i, RenderUnitType.NEEDLEEFFECT, "tx_role_mieshijinzhen_01_5", BoneNameEnum.c_crossbow, 0);
-					tmp.x = needleRoleX[oldVal+i];
-					tmp.y =0;
-					tmp.z = 0;
-					var data:Object={y:needleRoleY[oldVal+i]-30,delay:i*0.3,ease:Sine.easeInOut};
-					data["yoyo"] = true;
-					data["repeat"] = -1;
-					TweenMax.to(tmp,1.5,data);
-				}
+//				var add:int=newVal-oldVal;
+//				for (i = 0; i < add;i++) 
+//				{
+//					tmp=SpellAnimationHelper.addTargetEffect(role, oldVal+i, RenderUnitType.NEEDLEEFFECT, "tx_role_mieshijinzhen_01_5", BoneNameEnum.c_crossbow, 0);
+//					tmp.x = needleRoleX[oldVal+i];
+//					tmp.y =0;
+//					tmp.z = 0;
+//					var data:Object={y:needleRoleY[oldVal+i]-30,delay:i*0.3,ease:Sine.easeInOut};
+//					data["yoyo"] = true;
+//					data["repeat"] = -1;
+//					TweenMax.to(tmp,1.5,data);
+//				}
 			}
 			else
 			{
-				var dec:int=oldVal-newVal;	
-				for (i = 0; i < dec; ++i) 
-				{
-					tmp=role.avatar.getRenderUnitByID(RenderUnitType.NEEDLEEFFECT,oldVal-1-i);
-					TweenMax.killTweensOf(tmp);
-					role.avatar.removeRenderUnit(tmp);
-				}
-				for (i = 0; i < newVal; ++i) 
-				{
-					tmp=role.avatar.getRenderUnitByID(RenderUnitType.NEEDLEEFFECT,i);
-					tmp.x = needleRoleX[i];
-				}
+//				var dec:int=oldVal-newVal;	
+//				for (i = 0; i < dec; ++i) 
+//				{
+//					tmp=role.avatar.getRenderUnitByID(RenderUnitType.NEEDLEEFFECT,oldVal-1-i);
+//					TweenMax.killTweensOf(tmp);
+//					role.avatar.removeRenderUnit(tmp);
+//				}
+//				for (i = 0; i < newVal; ++i) 
+//				{
+//					tmp=role.avatar.getRenderUnitByID(RenderUnitType.NEEDLEEFFECT,i);
+//					tmp.x = needleRoleX[i];
+//				}
 			}
 			
 		}

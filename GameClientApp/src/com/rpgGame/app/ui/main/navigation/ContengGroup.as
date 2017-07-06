@@ -91,5 +91,11 @@ package com.rpgGame.app.ui.main.navigation
 			if(_openState)
 				this.x = -this.width;
 		}
+
+		public function get buttonList():Vector.<IOpen>
+		{
+			return _buttonList;
+		}
+
 	}
 }

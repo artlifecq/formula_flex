@@ -13,6 +13,7 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.app.interfaces.IMapProcess;
 	import com.rpgGame.app.manager.AreaMapManager;
 	import com.rpgGame.app.manager.ClientTriggerManager;
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.GameCameraManager;
 	import com.rpgGame.app.manager.GamePerformsManager;
 	import com.rpgGame.app.manager.ReliveManager;
@@ -81,6 +82,7 @@ package com.rpgGame.app.manager.scene
 		
 		private static var _isChangeSceneComplete : Boolean = false;
 		private static var _mapRes : String = null;
+		public static var needOpenNewFuncId:int;
 		setup();
 		
 		private static function setup() : void
@@ -629,11 +631,14 @@ package com.rpgGame.app.manager.scene
 			
 			//检测用户死亡
 			ReliveManager.checkPlayerDie();
+			
+			
 			showSceneTips();
 			showSceneEffect();
 			MapDataManager.lastScene = MapDataManager.currentScene;
 			showScenePanel();
 		}
+		
 		
 		private static function showScenePanel():void
 		{
@@ -658,6 +663,12 @@ package com.rpgGame.app.manager.scene
 					AppManager.showApp(AppConstant.SWORD_PANL);
 					break;
 			}
+			
+			if(needOpenNewFuncId>0)
+			{
+				FunctionOpenManager.openAppPaneById(needOpenNewFuncId.toString());
+				needOpenNewFuncId = 0;
+			}
 		}
 		
 		private static function generateSceneEntities() : void
@@ -667,6 +678,7 @@ package com.rpgGame.app.manager.scene
 			SceneManager.generateSceneCollects();
 			SceneManager.generateSceneTransports();
 			SceneManager.generateEventArea();
+			
 		}
 		
 		/**

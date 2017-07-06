@@ -634,8 +634,7 @@ package com.rpgGame.app.ui.main.shortcut
 		{
 			_playerJod = value;
 		}
-	
-
+		
 		/**
 		 *因为技能栏的格子是特殊的 
 		 * @param posx
@@ -645,6 +644,16 @@ package com.rpgGame.app.ui.main.shortcut
 		override protected function calIconPos():void
 		{
 			_iconPositionX=_iconPositionY=3;
+			if(_bgImage&&_bgImage.width!=0&&_iconImage&&_iconImage.width!=0){
+				_iconPositionX=(_bgImage.width-_iconImage.width)/2;
+			}
+			if(_bgImage&&_bgImage.height!=0&&_iconImage&&_iconImage.height!=0){
+				_iconPositionY=(_bgImage.height-_iconImage.height)/2;
+			}
+			if(_iconImage){
+				_iconImage.x = _iconPositionX;
+				_iconImage.y = _iconPositionY;
+			}
 		}
 	}
 	

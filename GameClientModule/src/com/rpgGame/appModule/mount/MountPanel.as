@@ -1,7 +1,11 @@
 package com.rpgGame.appModule.mount
 {
+	import com.rpgGame.app.manager.Mgr;
+	import com.rpgGame.app.manager.mount.HorseManager;
+	import com.rpgGame.app.manager.mount.ZhanQiManager;
 	import com.rpgGame.app.ui.TabBarPanel;
 	import com.rpgGame.appModule.shop.ItemGetAdvisePanelExt;
+	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	
 	import org.mokylin.skin.app.zuoqi.Zuoqi_Skin;
@@ -17,11 +21,16 @@ package com.rpgGame.appModule.mount
 		{
 			_skin = new Zuoqi_Skin();
 			super(_skin);
+			addNode(RTNodeID.MAIN_JINJIE,RTNodeID.HORSE,_tabBar.getTabDataByTabKey(EmFunctionID.EM_ZUOQI).button,140,HorseManager.instance().canHorseLevelUp,false,null,true);
+			addNode(RTNodeID.MAIN_JINJIE,RTNodeID.FIGHTFLAG,_tabBar.getTabDataByTabKey(EmFunctionID.EM_ZHANQI).button,140,ZhanQiManager.instance().canZhanqiLevelUp,false,null,true);
 		}
 		override protected function initTabBarDatas():void
 		{
 			addTabDatas(ButtonZuoqi,MountView,EmFunctionID.EM_ZUOQI);
 			addTabDatas(ButtonZhanqi,ZhanQiPanelExt,EmFunctionID.EM_ZHANQI);
+			
+			
+			
 		}
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{

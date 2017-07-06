@@ -3,8 +3,10 @@ package org.mokylin.skin.app.banghui
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
 	import feathers.controls.Label;
+	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import org.mokylin.skin.common.TongYongTanKuang_bg;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 
@@ -18,7 +20,7 @@ package org.mokylin.skin.app.banghui
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var bg:feathers.controls.UIAsset;
+		public var bg:feathers.controls.SkinnableContainer;
 
 		public var btnClose:feathers.controls.Button;
 
@@ -34,8 +36,6 @@ package org.mokylin.skin.app.banghui
 
 		public var lbXuanyan:feathers.controls.Label;
 
-		public var title:feathers.controls.Label;
-
 
 		//==========================================================================
 		//                                定义构造函数
@@ -45,9 +45,9 @@ package org.mokylin.skin.app.banghui
 			super();
 			
 			this.currentState = "normal";
-			this.height = 265;
-			this.width = 331;
-			this.elementsContent = [bg_i(),__TanKuang_JianJie_UIAsset2_i(),title_i(),btnClose_i(),btnOk_i(),__TanKuang_JianJie_Label1_i(),lbBanghuiName_i(),__TanKuang_JianJie_Label2_i(),lbBanghuiNum_i(),__TanKuang_JianJie_Label3_i(),__TanKuang_JianJie_Label4_i(),lbBangZhuName_i(),lbVip_i(),lbXuanyan_i()];
+			this.height = 264;
+			this.width = 326;
+			this.elementsContent = [bg_i(),__TanKuang_JianJie_UIAsset1_i(),btnOk_i(),__TanKuang_JianJie_Label1_i(),btnClose_i(),lbBanghuiName_i(),__TanKuang_JianJie_Label2_i(),lbBanghuiNum_i(),__TanKuang_JianJie_Label3_i(),__TanKuang_JianJie_Label4_i(),lbBangZhuName_i(),lbVip_i(),lbXuanyan_i(),__TanKuang_JianJie_UIAsset2_i()];
 			
 			states = {
 			};
@@ -102,25 +102,37 @@ package org.mokylin.skin.app.banghui
 			return temp;
 		}
 
-		private function __TanKuang_JianJie_UIAsset2_i():feathers.controls.UIAsset
+		private function __TanKuang_JianJie_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 73;
 			temp.styleName = "ui/common/background/neikuang_3.png";
-			temp.width = 295;
-			temp.x = 18;
+			temp.width = 297;
+			temp.x = 15;
 			temp.y = 131;
 			return temp;
 		}
 
-		private function bg_i():feathers.controls.UIAsset
+		private function __TanKuang_JianJie_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.touchable = false;
+			temp.touchGroup = true;
+			temp.styleName = "ui/app/banghui/word/head_jianjie.png";
+			temp.x = 119;
+			temp.y = 8;
+			return temp;
+		}
+
+		private function bg_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 265;
-			temp.styleName = "ui/common/background/erji_kuang.png";
-			temp.width = 331;
+			temp.height = 264;
+			var skin:StateSkin = new org.mokylin.skin.common.TongYongTanKuang_bg()
+			temp.skin = skin
+			temp.width = 326;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -132,8 +144,8 @@ package org.mokylin.skin.app.banghui
 			btnClose = temp;
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.x = 297;
-			temp.y = 7;
+			temp.x = 293;
+			temp.y = 5;
 			return temp;
 		}
 
@@ -145,9 +157,9 @@ package org.mokylin.skin.app.banghui
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.label = "申请加入";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.width = 88;
-			temp.x = 121.5;
-			temp.y = 217;
+			temp.width = 100;
+			temp.x = 108;
+			temp.y = 216;
 			return temp;
 		}
 
@@ -219,26 +231,6 @@ package org.mokylin.skin.app.banghui
 			temp.width = 278;
 			temp.x = 26;
 			temp.y = 138;
-			return temp;
-		}
-
-		private function title_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			title = temp;
-			temp.name = "title";
-			temp.bold = true;
-			temp.touchable = false;
-			temp.touchGroup = false;
-			temp.letterSpacing = 2;
-			temp.fontSize = 16;
-			temp.text = "帮派简介";
-			temp.textAlign = "center";
-			temp.color = 0xDDE2B1;
-			temp.nativeFilters = Fontter.filterObj[""];
-			temp.width = 240;
-			temp.x = 48;
-			temp.y = 11;
 			return temp;
 		}
 

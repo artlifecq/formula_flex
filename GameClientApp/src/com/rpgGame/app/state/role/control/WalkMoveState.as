@@ -483,6 +483,10 @@ package com.rpgGame.app.state.role.control
 				if (!force)
 					return false;
 			}
+			else if ((_machine as RoleStateMachine).isTripleLockCaseSpell)
+			{
+				return false;
+			}
 			else if ((_machine as RoleStateMachine).isStiff)
 			{
 				return false;
@@ -515,6 +519,7 @@ package com.rpgGame.app.state.role.control
 				if (!force && !blinkState.blinkBroken)
 					return false;
 			}
+			
 			return true;
 		}
 

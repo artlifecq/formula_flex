@@ -3,7 +3,7 @@ package com.rpgGame.app.ui.common
 	import feathers.controls.StateSkin;
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	
-	import org.mokylin.skin.app.banghui.ItemBg;
+	import org.mokylin.skin.common.ItemBg;
 	
 	/**
 	 *具有换色背景的渲染器 

@@ -165,10 +165,12 @@ package com.rpgGame.app.scene.animator
 				
 				var ribbon:LightningRibbon = new LightningRibbon(fromObj, toObj, 16, 64, LightMaterial);
 				ribbon.shakeTimer = 100;
+				ribbon.shakeAmp=50;
 				ribbon.animator = new CPUSpriteSheetAnimator(8, 1, 15, 8);
 				ribbon.start();
 				
 				_lightList.push(ribbon);
+				
 				SceneManager.scene.gameScene3d.addChild(ribbon);
 			}
 		}

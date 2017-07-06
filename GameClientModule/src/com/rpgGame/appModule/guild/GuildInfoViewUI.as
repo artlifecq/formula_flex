@@ -11,6 +11,7 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.core.events.GuildEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_item;
@@ -43,6 +44,7 @@ package com.rpgGame.appModule.guild
 			_skin = new BangHui_Info();
 			super(_skin);
 			initView();
+			addNode(RTNodeID.GUILD_INFO,RTNodeID.GUILD_REWARD,_skin.btnFuli,65,null);
 		}
 		private function initView():void
 		{
@@ -107,8 +109,10 @@ package com.rpgGame.appModule.guild
 				str += HtmlTextUtil.getTextColor(ItemConfig.getItemQualityColor(qitem.q_id),qitem.q_name);
 				TipTargetManager.show(_skin.btnFuli,TargetTipsMaker.makeSimpleTextTips(str));
 				_skin.btnFuli.filter = null;
+				setRTNState(RTNodeID.GUILD_REWARD,true);
 			}else{
 				GrayFilter.gray(_skin.btnFuli);
+				setRTNState(RTNodeID.GUILD_REWARD,false);
 			}
 		}
 		private function refeashPanleInfo():void

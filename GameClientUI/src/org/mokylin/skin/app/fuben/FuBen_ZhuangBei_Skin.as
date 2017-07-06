@@ -41,8 +41,8 @@ package org.mokylin.skin.app.fuben
 			super();
 			
 			this.currentState = "normal";
-			this.height = 587;
-			this.width = 947;
+			this.height = 601;
+			this.width = 956;
 			this.elementsContent = [__FuBen_ZhuangBei_Skin_UIAsset1_i(),__FuBen_ZhuangBei_Skin_UIAsset2_i(),btnNext_i(),btnPrev_i(),__FuBen_ZhuangBei_Skin_UIAsset3_i(),lbShengyu_i(),lbGoumai_i(),btnAdd_i(),list_i()];
 			
 			states = {
@@ -60,8 +60,8 @@ package org.mokylin.skin.app.fuben
 			temp.height = 512;
 			temp.styleName = "ui/common/background/neikuang_1.png";
 			temp.width = 922;
-			temp.x = 14;
-			temp.y = 69;
+			temp.x = 18;
+			temp.y = 79;
 			return temp;
 		}
 
@@ -69,8 +69,8 @@ package org.mokylin.skin.app.fuben
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/big_bg/fuben/bbg.jpg";
-			temp.x = 18;
-			temp.y = 74;
+			temp.x = 22;
+			temp.y = 84;
 			return temp;
 		}
 
@@ -78,8 +78,8 @@ package org.mokylin.skin.app.fuben
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/fuben/fubengjiangli.png";
-			temp.x = 388;
-			temp.y = 483;
+			temp.x = 392;
+			temp.y = 493;
 			return temp;
 		}
 
@@ -89,8 +89,8 @@ package org.mokylin.skin.app.fuben
 			btnAdd = temp;
 			temp.name = "btnAdd";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jia;
-			temp.x = 146;
-			temp.y = 497;
+			temp.x = 150;
+			temp.y = 507;
 			return temp;
 		}
 
@@ -100,8 +100,8 @@ package org.mokylin.skin.app.fuben
 			btnNext = temp;
 			temp.name = "btnNext";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jiantou;
-			temp.x = 901;
-			temp.y = 238;
+			temp.x = 905;
+			temp.y = 248;
 			return temp;
 		}
 
@@ -112,8 +112,8 @@ package org.mokylin.skin.app.fuben
 			temp.name = "btnPrev";
 			temp.scaleX = -1;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jiantou;
-			temp.x = 53;
-			temp.y = 238;
+			temp.x = 57;
+			temp.y = 248;
 			return temp;
 		}
 
@@ -126,8 +126,8 @@ package org.mokylin.skin.app.fuben
 			temp.color = 0xBEA757;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 130;
-			temp.x = 29;
-			temp.y = 530;
+			temp.x = 33;
+			temp.y = 540;
 			return temp;
 		}
 
@@ -140,8 +140,8 @@ package org.mokylin.skin.app.fuben
 			temp.color = 0xBEA757;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 130;
-			temp.x = 29;
-			temp.y = 499;
+			temp.x = 33;
+			temp.y = 509;
 			return temp;
 		}
 
@@ -152,8 +152,8 @@ package org.mokylin.skin.app.fuben
 			temp.name = "list";
 			temp.height = 387;
 			temp.width = 827;
-			temp.x = 60;
-			temp.y = 80;
+			temp.x = 64;
+			temp.y = 90;
 			return temp;
 		}
 

@@ -36,27 +36,27 @@ package com.rpgGame.coreData.type.item
 		/**
 		 *手镯 
 		 */
-		public static const EQUIP_BRACER:String="equip/01shoubi";
+		public static const EQUIP_BRACER:String="equip/08shouzhuo";
 		/**
 		 *鞋子 
 		 */
-		public static const EQUIP_SHOE:String="equip/02xiezi";
+		public static const EQUIP_SHOE:String="equip/09xiezi";
 		/**
 		 *肩甲 
 		 */
-		public static const EQUIP_SCAPULA:String="equip/03yaodai";
+		public static const EQUIP_SCAPULA:String="equip/02juanjia";
 		/**
 		 *项链 
 		 */
-		public static const EQUIP_NECKLACE:String="equip/04diaozui";
+		public static const EQUIP_NECKLACE:String="equip/06xianglian";
 		/**
 		 *衣服 
 		 */
-		public static const EQUIP_ARMOR:String="equip/05xiongjia";
+		public static const EQUIP_ARMOR:String="equip/05yifu";
 		/**
 		 *戒指 
 		 */
-		public static const EQUIP_RING:String="equip/06jiezhi";
+		public static const EQUIP_RING:String="equip/04jiezhi";
 		/**
 		 *护腿 
 		 */
@@ -64,20 +64,24 @@ package com.rpgGame.coreData.type.item
 		/**
 		 *玉佩 
 		 */
-		public static const EQUIP_JADE:String="equip/08yupei";
+		public static const EQUIP_JADE:String="equip/10yupei";
 		/**
 		 *帽子 
 		 */
-		public static const EQUIP_HELM:String="equip/09maozi";
+		public static const EQUIP_HELM:String="equip/03toukui";
 		/**
 		 *武器 
 		 */
-		public static const EQUIP_WEAPON:String="equip/10wuqi";
+		public static const EQUIP_WEAPON:String="equip/01wuqi";
 		
 		/**
 		 *vip
 		 */
-		public static const VIP:String="equip/10wuqi";
+		public static const VIP:String="equip/12lingpai";
+		/**
+		 *结婚戒指
+		 */
+		public static const MARRY_ICON:String="equip/11hunjie";
 		
 		/** 格子光圈品质 44*44 **/
 		public static const GRID_SIZE_40 : String = "quality/40_4";

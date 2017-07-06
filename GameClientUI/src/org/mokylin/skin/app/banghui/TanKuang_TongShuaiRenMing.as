@@ -36,8 +36,6 @@ package org.mokylin.skin.app.banghui
 
 		public var lbMsg:feathers.controls.Label;
 
-		public var title:feathers.controls.Label;
-
 
 		//==========================================================================
 		//                                定义构造函数
@@ -49,7 +47,7 @@ package org.mokylin.skin.app.banghui
 			this.currentState = "normal";
 			this.height = 291;
 			this.width = 580;
-			this.elementsContent = [bg_i(),__TanKuang_TongShuaiRenMing_UIAsset1_i(),title_i(),btnClose_i(),btnOk_i(),__TanKuang_TongShuaiRenMing_UIAsset2_i(),__TanKuang_TongShuaiRenMing_UIAsset3_i(),lbMsg_i(),chkLead_i(),lbLead_i(),__TanKuang_TongShuaiRenMing_Label1_i(),chkMember_i(),lbMember_i(),__TanKuang_TongShuaiRenMing_Label2_i()];
+			this.elementsContent = [bg_i(),__TanKuang_TongShuaiRenMing_UIAsset1_i(),btnClose_i(),btnOk_i(),__TanKuang_TongShuaiRenMing_UIAsset2_i(),__TanKuang_TongShuaiRenMing_UIAsset3_i(),lbMsg_i(),chkLead_i(),lbLead_i(),__TanKuang_TongShuaiRenMing_Label1_i(),chkMember_i(),lbMember_i(),__TanKuang_TongShuaiRenMing_Label2_i(),__TanKuang_TongShuaiRenMing_UIAsset4_i()];
 			
 			states = {
 			};
@@ -112,6 +110,17 @@ package org.mokylin.skin.app.banghui
 			temp.width = 546;
 			temp.x = 17;
 			temp.y = 151;
+			return temp;
+		}
+
+		private function __TanKuang_TongShuaiRenMing_UIAsset4_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.touchable = false;
+			temp.touchGroup = true;
+			temp.styleName = "ui/app/banghui/word/head_tongshuairenming.png";
+			temp.x = 247;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -212,26 +221,6 @@ package org.mokylin.skin.app.banghui
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 189.5;
 			temp.y = 52;
-			return temp;
-		}
-
-		private function title_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			title = temp;
-			temp.name = "title";
-			temp.bold = true;
-			temp.touchable = false;
-			temp.touchGroup = false;
-			temp.letterSpacing = 2;
-			temp.fontSize = 16;
-			temp.text = "统帅任命";
-			temp.textAlign = "center";
-			temp.color = 0xDDE2B1;
-			temp.nativeFilters = Fontter.filterObj[""];
-			temp.width = 240;
-			temp.x = 170;
-			temp.y = 11;
 			return temp;
 		}
 

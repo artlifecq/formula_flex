@@ -1,5 +1,6 @@
 package com.game.engine3D.vo
 {
+	import away3d.utils.GCObject;
 
 	/**
 	 *
@@ -8,7 +9,7 @@ package com.game.engine3D.vo
 	 * 创建时间：2015-12-4 下午1:26:38
 	 *
 	 */
-	public class SoftOutlineData
+	public class SoftOutlineData extends GCObject
 	{
 		private var _color : uint;
 		private var _alpha : Number;

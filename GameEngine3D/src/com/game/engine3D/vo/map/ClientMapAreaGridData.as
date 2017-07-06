@@ -1,5 +1,6 @@
 package com.game.engine3D.vo.map
 {
+	import away3d.utils.GCObject;
 
 	/**
 	 *
@@ -8,7 +9,7 @@ package com.game.engine3D.vo.map
 	 * 创建时间：2015-9-9 下午2:03:17
 	 *
 	 */
-	public class ClientMapAreaGridData
+	public class ClientMapAreaGridData extends GCObject
 	{
 		private var _id : int;
 		private var _gridX : int;

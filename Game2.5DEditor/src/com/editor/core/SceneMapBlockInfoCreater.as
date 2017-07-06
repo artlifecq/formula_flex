@@ -105,7 +105,7 @@ package com.editor.core
 						if (areaData.mType == MapAreaTypeEnum.STALL)
 						{
 							var polygonPos : Vector.<Point> = areaData.getPoints();
-							var bounds : Array = MathUtil.getPolygonBounds(polygonPos);
+							var bounds : Vector3D = MathUtil.getPolygonBounds(polygonPos);
 							if (bounds)
 							{
 								var gridMaxCount : int = ((bounds[2] - bounds[0]) / areaData.mGridWidth) * ((bounds[3] - bounds[1]) / areaData.mGridHeight);

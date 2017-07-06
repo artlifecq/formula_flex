@@ -11,7 +11,8 @@ package com.rpgGame.coreData.cfg
 	import flash.utils.Dictionary;
 
 	/**
-	 * 触发配置表
+	 * 
+	 * 触发配置表 22_3 多人副本触发数据库.xlsx
 	 * @author yt
 	 * 
 	 */	

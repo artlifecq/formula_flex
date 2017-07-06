@@ -112,6 +112,8 @@
 		public var mountSlotCount : int = 0;
         /** 阵营关系 **/
         public var relation : int;
+		/** 阵营id **/
+		public var faction: int;
 
 		/**
 		 *
@@ -168,6 +170,7 @@
 		public static function readMonster(data : RoleData, info : MonsterInfo):void
 		{
             data.relation = info.relation;
+			data.faction=info.faction;
 			data.totalStat.level = info.level;
 			
 			data.totalStat.hp = info.hp;

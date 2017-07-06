@@ -5,6 +5,7 @@ package com.rpgGame.appModule.zhangong
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.ZhanGongEvent;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.netData.zhangong.message.SCMeritoriousUpgradeResultMessage;
@@ -28,10 +29,12 @@ package com.rpgGame.appModule.zhangong
 	{
 		private var _skin:MapItem_Skin;
 		private var _lv:int=0;
+		private static var id:int=0;
 		public function MapItem()
 		{
 			_skin=new MapItem_Skin();
 			super(_skin);
+			
 		}
 		
 		override protected function onShow():void
@@ -170,12 +173,18 @@ package com.rpgGame.appModule.zhangong
 				_skin.lbMsg.color=StaticValue.A_UI_GREEN_TEXT;
 			}
 			var num:int=ZhanGongManager.getCanUpNumByLv(_lv);
-			if(num<=0) _skin.grp_dengji.visible=false;
+			if(num<=0)
+			{
+				_skin.grp_dengji.visible=false;
+				notifyUpdate(RTNodeID.ZG);
+			}
 			else
 			{
 				_skin.numDengji.label=num.toString();
 				_skin.grp_dengji.visible=true;
+				setRTNState(RTNodeID.ZG,true);
 			}
+			
 		}
 	}
 }

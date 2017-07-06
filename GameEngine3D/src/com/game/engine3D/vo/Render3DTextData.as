@@ -1,6 +1,8 @@
 package com.game.engine3D.vo
 {
 	import flash.utils.Dictionary;
+	
+	import away3d.utils.GCObject;
 
 	/**
 	 *
@@ -9,7 +11,7 @@ package com.game.engine3D.vo
 	 * 创建时间：2016-10-10 下午1:26:38
 	 *
 	 */
-	public class Render3DTextData
+	public class Render3DTextData extends GCObject
 	{
 		private var _styleName : String;
 		private var _textWidth : int;

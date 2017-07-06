@@ -1,6 +1,9 @@
 package com.rpgGame.app.ui.main.buttons
 {
+	import com.rpgGame.app.manager.fightsoul.FightSoulManager;
 	import com.rpgGame.app.ui.main.navigation.NativieSocietyPanel;
+	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
 	
 	import flash.geom.Point;
@@ -15,6 +18,7 @@ package com.rpgGame.app.ui.main.buttons
 			this.styleClass = ButtonSkin_shejiao;
 			_helpPoint = new Point();
 			super.initialize();
+			SkinUI.addNode(null,RTNodeID.MAIN_SOCAIL,this,60,null,false,null,true);
 		}
 		override protected function triggeredHanadler():void
 		{
