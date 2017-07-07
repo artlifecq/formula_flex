@@ -59,6 +59,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.QBattleRewardCfgData;
 	import com.rpgGame.coreData.cfg.QSinglecitybaseCfgData;
 	import com.rpgGame.coreData.cfg.RaceCfgData;
+	import com.rpgGame.coreData.cfg.RedRewardCfgData;
 	import com.rpgGame.coreData.cfg.RelationCfgData;
 	import com.rpgGame.coreData.cfg.ReliveCfgData;
 	import com.rpgGame.coreData.cfg.SceneEffectCfgData;
@@ -317,6 +318,7 @@ package com.rpgGame.app.data
 			MibaoCfgData.setup(dic[ConfigClassRegister.Q_mibao_monster],dic[ConfigClassRegister.Q_mibao_reward]);//秦陵秘宝
 			
 			VipCfg.setup(dic[ConfigClassRegister.Q_vip]);//多人副本
+			RedRewardCfgData.setup(dic[ConfigClassRegister.Q_redreward]);//红包
 		}
 		
 		/**

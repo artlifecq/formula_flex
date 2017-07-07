@@ -1,7 +1,6 @@
 
 package com.rpgGame.core.app
 {
-	import com.rpgGame.appModule.npc;
 	import com.rpgGame.core.app.enum.PanelPosType;
 	
 	import flash.utils.Dictionary;
@@ -508,5 +507,9 @@ package com.rpgGame.core.app
 		
 		/**红包拆开**/
 		public static var REDREWARD_OPEN:String = createAppInfo("redreward.RedRewardGetPanle","hongbao");
+		/**发送红包**/
+		public static var REDREWARD_SEND:String = createAppInfo("redreward.RedRewardSendPanle","hongbao");
+		/**红包信息**/
+		public static var REDREWARD_PANLE:String = createAppInfo("redreward.RedRewardInfoPanle","hongbao");
 	}
 }

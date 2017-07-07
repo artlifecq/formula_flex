@@ -205,7 +205,7 @@
 					{
 						AppManager.showAppNoHide(AppConstant.REDREWARD_OPEN);
 					}else{
-						
+						AppManager.showAppNoHide(AppConstant.REDREWARD_PANLE);
 					}
 				}
 			}
