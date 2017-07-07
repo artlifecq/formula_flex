@@ -71,8 +71,8 @@ package com.rpgGame.appModule.task
 			{
 				var ico:IconCDFace=IconCDFace.create(IcoSizeEnum.ICON_42);
 				ico.showCD=false;
-				ico.x=icoBgList[i].x+6;
-				ico.y=icoBgList[i].y+6;
+				ico.x=icoBgList[i].x+3;
+				ico.y=icoBgList[i].y+3;
 				ico.visible=false;
 				icoBgList[i].visible=false;
 				icoList.push(ico);

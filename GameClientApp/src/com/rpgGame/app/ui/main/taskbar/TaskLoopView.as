@@ -130,8 +130,8 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				ico=IconCDFace.create(IcoSizeEnum.ICON_42);
 				ico.showCD=false;
-				ico.x=ico1BgList[i].x-1;
-				ico.y=ico1BgList[i].y-1;
+				ico.x=ico1BgList[i].x+3;
+				ico.y=ico1BgList[i].y+3;
 				//ico.visible=false;
 				//ico1BgList[i].visible=false;
 				ico1List.push(ico);
@@ -149,8 +149,8 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				ico=IconCDFace.create(IcoSizeEnum.ICON_42);
 				ico.showCD=false;
-				ico.x=ico2BgList[i].x-1;
-				ico.y=ico2BgList[i].y-1;
+				ico.x=ico2BgList[i].x+3;
+				ico.y=ico2BgList[i].y+3;
 				//ico.visible=false;
 				//ico2BgList[i].visible=false;
 				ico2List.push(ico);
@@ -588,22 +588,22 @@ package com.rpgGame.app.ui.main.taskbar
 			for(i=0;i<3;i++)
 			{
 				ico1BgList[i].y=ico1BgList[0].y;
-				ico1List[i].y=ico1BgList[0].y-1;
+				ico1List[i].y=ico1BgList[0].y+3;
 			}
 			for(i=3;i<ico1BgList.length;i++)
 			{
 				ico1BgList[i].y=ico1BgList[3].y;
-				ico1List[i].y=ico1BgList[3].y-1;
+				ico1List[i].y=ico1BgList[3].y+3;
 			}
 			for(i=0;i<3;i++)
 			{
 				ico2BgList[i].y=ico2BgList[0].y;
-				ico2List[i].y=ico2BgList[0].y-1;
+				ico2List[i].y=ico2BgList[0].y+3;
 			}
 			for(i=3;i<ico2BgList.length;i++)
 			{
 				ico2BgList[i].y=ico2BgList[3].y;
-				ico2List[i].y=ico2BgList[3].y-1;
+				ico2List[i].y=ico2BgList[3].y+3;
 			}
 			if(count>=0)
 			{
