@@ -7,7 +7,7 @@ package org.mokylin.skin.app.banghui
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import feathers.controls.UINumber;
-	import org.mokylin.skin.app.banghui.ItemBg;
+	import org.mokylin.skin.common.ItemBg;
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
 	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow2;
 
@@ -71,7 +71,7 @@ package org.mokylin.skin.app.banghui
 			bg = temp;
 			temp.name = "bg";
 			temp.height = 36;
-			var skin:StateSkin = new org.mokylin.skin.app.banghui.ItemBg()
+			var skin:StateSkin = new org.mokylin.skin.common.ItemBg()
 			temp.skin = skin
 			temp.width = 627;
 			temp.x = 0;

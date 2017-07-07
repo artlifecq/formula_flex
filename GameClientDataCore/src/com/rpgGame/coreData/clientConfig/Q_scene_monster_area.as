@@ -18,6 +18,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_mapid:int;
 		 /**  怪物ID */
 		public var q_monster_model:int;
+		 /**  阵营属性（争霸战使用，0无阵营） */
+		public var q_camp:int;
 		 /**  刷怪数量 */
 		public var q_monster_num:int;
 		 /**  刷新中心点X（格子坐标） */
@@ -26,7 +28,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_center_y:int;
 		 /**  刷新半径（格子数量） */
 		public var q_radius:int;
-		 /**  npc闲话 */
+		 /**  NPC闲话 */
 		public var q_speak:String;
 		 /**  重生时间脱离怪物数据库控制变更为：0本规则不启用， >0则为变更后的重生时间，单位：秒 */
 		public var q_relive:int;

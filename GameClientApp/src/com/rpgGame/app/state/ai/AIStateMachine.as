@@ -84,7 +84,9 @@ package com.rpgGame.app.state.ai
 				case AIStateType.TASK_GATHER:
 					state = new AItaskGather();
 					break;
-				
+				case AIStateType.FIGHTSOUL_ATTACE:
+					state = new AIFightSoulAttack();
+					break;
 			}
 			if (!state)
 			{

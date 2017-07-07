@@ -20,6 +20,8 @@ package org.mokylin.skin.app.hongbao
 
 		public var lbName:feathers.controls.Label;
 
+		public var lbNum:feathers.controls.Label;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -31,7 +33,7 @@ package org.mokylin.skin.app.hongbao
 			this.currentState = "normal";
 			this.height = 31;
 			this.width = 263;
-			this.elementsContent = [bg_i(),lbName_i()];
+			this.elementsContent = [bg_i(),lbNum_i(),lbName_i(),__HongBao_Item1_Label1_i()];
 			
 			states = {
 			};
@@ -42,6 +44,18 @@ package org.mokylin.skin.app.hongbao
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
+		private function __HongBao_Item1_Label1_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.text = "来自土豪";
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.width = 66;
+			temp.x = 77;
+			temp.y = 7;
+			return temp;
+		}
+
 		private function bg_i():feathers.controls.SkinnableContainer
 		{
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
@@ -61,10 +75,24 @@ package org.mokylin.skin.app.hongbao
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbName = temp;
 			temp.name = "lbName";
-			temp.text = "20礼金   来自土豪   超级无敌xxxx";
+			temp.text = "超级无敌xxxx";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 235;
+			temp.width = 108;
+			temp.x = 154;
+			temp.y = 7;
+			return temp;
+		}
+
+		private function lbNum_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbNum = temp;
+			temp.name = "lbNum";
+			temp.text = "20礼金";
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.width = 57;
 			temp.x = 14;
 			temp.y = 7;
 			return temp;

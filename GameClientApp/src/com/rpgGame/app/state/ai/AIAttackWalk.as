@@ -105,7 +105,7 @@ package com.rpgGame.app.state.ai
 			return true;
 		}
 		//private static var walkrun:Boolean=false;
-		public static function isWalk():Boolean
+		private function isWalk():Boolean
 		{
 			if (SceneRoleSelectManager.selectedRole != null)
 			{

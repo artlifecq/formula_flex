@@ -15,7 +15,7 @@ package com.rpgGame.app.view.icon
 	 */
 	public class BaseIcon extends UIAsset implements IInstancePoolClass
 	{
-		public static const S2W:Object={};
+		/*public static const S2W:Object={};
 		S2W[36]=44;
 		S2W[42]=50;
 		S2W[48]=56;
@@ -25,8 +25,8 @@ package com.rpgGame.app.view.icon
 		W2S[44]=36;
 		W2S[50]=42;
 		W2S[56]=48;
-		W2S[72]=64;
-		private var _iconResURL:String = "";
+		W2S[72]=64;*/
+		protected var _iconResURL:String = "";
 		/** ico的bitmaodata  */		
 		protected var _iconImage:UIAsset;
 		
@@ -72,7 +72,7 @@ package com.rpgGame.app.view.icon
 		 */		
 		protected function calIconPos():void
 		{
-			switch(_iconSize){
+		/*	switch(_iconSize){
 				case IcoSizeEnum.ICON_36:
 				case IcoSizeEnum.ICON_42:
 				case IcoSizeEnum.ICON_48:
@@ -80,7 +80,7 @@ package com.rpgGame.app.view.icon
 					_iconPositionX=_iconPositionY=(S2W[_iconSize]-_iconSize)/2;
 					break;
 				
-			}
+			}*/
 		}
 		public function instanceDestroy() : void
 		{
@@ -153,6 +153,7 @@ package com.rpgGame.app.view.icon
 			updateIconImagePosition(_iconPositionX,_iconPositionY);
 			_iconImage.styleName = iconResURL;
 		}
+		
 		
 		/**
 		 * 设置物品图标x/y的偏移值 

@@ -64,11 +64,11 @@ package com.rpgGame.coreData.type
 		public static const MAX_MP:int = 13;
 		
 		/**
-		 * 外功,影响物理攻击伤害
+		 * 外功,影响物理攻击伤害（作攻击）
 		 */
 		public static const WAI_GONG:int = 14;
 		/**
-		 * 内功,影响法系攻击伤害及治疗效果
+		 * 内功,影响法系攻击伤害及治疗效果(废弃)
 		 */
 		public static const NEI_GONG:int = 15;
 		/**

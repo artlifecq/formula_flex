@@ -929,6 +929,10 @@ package com.game.engine3D.vo
 
 		public function faceToGround(x : Number, y : Number, angularVelocity : Number = 0.001, minTweenDuration : Number = 0.05, maxTweenDuration : Number = 0.1) : void
 		{
+			if(id==10001)
+			{
+				trace(10001);
+			}
 			if (_graphicDis)
 			{
 				if (x == _position.x && y == _position.z)

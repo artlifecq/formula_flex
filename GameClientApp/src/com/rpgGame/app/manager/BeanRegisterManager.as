@@ -16,6 +16,7 @@
 	import com.rpgGame.app.cmdlistener.GMCmdListener;
 	import com.rpgGame.app.cmdlistener.GoodsContainerCmdListener;
 	import com.rpgGame.app.cmdlistener.GuildCmdListener;
+	import com.rpgGame.app.cmdlistener.GuildWarCmdListener;
 	import com.rpgGame.app.cmdlistener.HeroMiscCmdListener;
 	import com.rpgGame.app.cmdlistener.HeroSearchCmdListener;
 	import com.rpgGame.app.cmdlistener.HuBaoContainerCmdListener;
@@ -29,6 +30,7 @@
 	import com.rpgGame.app.cmdlistener.NineTowerCmdListener;
 	import com.rpgGame.app.cmdlistener.NotifyCmdListener;
 	import com.rpgGame.app.cmdlistener.NpcCmdListener;
+	import com.rpgGame.app.cmdlistener.RedRewardCmdListener;
 	import com.rpgGame.app.cmdlistener.RoleStateCmdListener;
 	import com.rpgGame.app.cmdlistener.RollCmdListener;
 	import com.rpgGame.app.cmdlistener.ShopCmdListener;
@@ -142,6 +144,7 @@
 			register("BaZhenTuCmdListener", BaZhenTuCmdListener); //八阵图
 //			register("DailyTasksCmdListener", DailyTasksCmdListener); //日常任务追踪栏事件监听
 			register("GuildCmdListener", GuildCmdListener); //帮派
+			register("GuildWarCmdListener", GuildWarCmdListener); //帮派战
 			register("DaTiCmdListener", DaTiCmdListener); //答题
 //			register("BiaoJuCmdListener", BiaoJuCmdListener); //镖局
 //			register("MazeCmdListener", MazeCmdListener); //迷宫
@@ -164,7 +167,7 @@
 			register("DFBattleCmdListener", DFBattleCmdListener); //模块号7
 			register("NineTowerCmdListener",NineTowerCmdListener);
 			register("VipCmdListerner",VipCmdListerner);
-			
+			register("RedRewardCmdListener",RedRewardCmdListener);
 		}
 	}
 }

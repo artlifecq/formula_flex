@@ -16,6 +16,7 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.task.TouJingManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.scene.trigger.TriggerPool;
 	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.cfg.ClientSceneNpcCfgData;
@@ -92,6 +93,7 @@ package com.rpgGame.app.manager.scene
 
 			SceneRoleSelectManager.setup();
 			SceneDropGoodsManager.setup();
+			TriggerPool.setup();
 
 			EventManager.addEvent(TaskEvent.TASK_AREA_INFO_CHANGE, onUpdateTaskArea);
 		}

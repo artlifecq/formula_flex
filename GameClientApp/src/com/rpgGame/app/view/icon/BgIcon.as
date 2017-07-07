@@ -88,13 +88,6 @@ package com.rpgGame.app.view.icon
 			
 		}
 		
-		override public function setIconResName( iconResURL:String , isSetSelect:Boolean=true):void
-		{
-			super.setIconResName(iconResURL);
-			if(isSetSelect)
-				setSelectedImgSize(iconSize);
-		}
-		
 		/**
 		 * 显示品质 
 		 * @param qualityID  详情请见 EnumItemQualityType
@@ -112,6 +105,7 @@ package com.rpgGame.app.view.icon
 				_qualityImage = new UIAsset();
 			}
 			setSelectedImgSize(iconSize);
+			_qualityImage.onImageLoaded=onIcoComplete;
 			_qualityImage.styleName = ClientConfig.getQualityBg( _qualityId ,iconSize);
 			_qualityImage.visible=true;	
 			_qualityImage.width=_qualityImage.height=_iconSize;
@@ -177,13 +171,53 @@ package com.rpgGame.app.view.icon
 			}
 			
 			_bgImage.alpha = alpha;
-			_bgImage.styleName = ClientConfig.getGridBg( _bgResName );
 			_bgImage.onImageLoaded = onBgImgComplete;
+			_bgImage.styleName = ClientConfig.getGridBg( _bgResName );
 			//因为从对象池取的，所以要设置下
-			_bgImage.width=S2W[_iconSize];
-			_bgImage.height=S2W[_iconSize];
+//			_bgImage.width=S2W[_iconSize];
+//			_bgImage.height=S2W[_iconSize];
 			_bgImage.visible=true;
 			sortLayer();
+		}
+		
+		
+		/**
+		 *绑定一个背景资源 
+		 * @param bg
+		 * 
+		 */
+		public function bindBg(bg:UIAsset):void
+		{
+			if(_bgImage){
+				_bgImage.removeFromParent();
+			}
+			_bgImage=bg;
+			this.x=_bgImage.x;
+			this.y=_bgImage.y;
+			_bgImage.x=_bgImage.y=0;
+			sortLayer();
+			calIconPos();
+		}
+		
+		override public function setIconResName( iconResURL:String , isSetSelect:Boolean=true):void
+		{
+			if( _iconResURL == iconResURL )
+				return;
+			_iconResURL = iconResURL;
+			
+			if( _iconImage == null )
+			{
+				_iconImage = new UIAsset();
+				_iconImage.width = _iconSize;
+				_iconImage.height = _iconSize;
+				addChild( _iconImage );
+			}
+//			updateIconImagePosition(_iconPositionX,_iconPositionY);
+			_iconImage.onImageLoaded = onIcoComplete;
+			_iconImage.styleName = iconResURL;
+			
+			if(isSetSelect)
+				setSelectedImgSize(iconSize);
 		}
 		
 		//没找到对应的各种背景自己写了一个
@@ -208,8 +242,8 @@ package com.rpgGame.app.view.icon
 			_bgImage.styleName =value;
 			_bgImage.onImageLoaded = onBgImgComplete;
 			//因为从对象池取的，所以要设置下
-			_bgImage.width=S2W[_iconSize];
-			_bgImage.height=S2W[_iconSize];
+//			_bgImage.width=S2W[_iconSize];
+//			_bgImage.height=S2W[_iconSize];
 			_bgImage.visible=true;
 			sortLayer();
 		}
@@ -276,10 +310,42 @@ package com.rpgGame.app.view.icon
 			}
 		}
 		
+		/**
+		 *icon更新完成 
+		 * @param uiasset
+		 * 
+		 */
+		private function onIcoComplete(uiasset:UIAsset):void
+		{
+			calIconPos();
+		}
+		
+		
+		override protected function calIconPos():void
+		{
+			_iconPositionX=0;
+			_iconPositionY=0;
+			if(_bgImage&&_bgImage.width!=0&&_iconImage&&_iconImage.width!=0){
+				_iconPositionX=(_bgImage.width-_iconImage.width)/2;
+			}
+			if(_bgImage&&_bgImage.height!=0&&_iconImage&&_iconImage.height!=0){
+				_iconPositionY=(_bgImage.height-_iconImage.height)/2;
+			}
+			if(_iconImage){
+				_iconImage.x = _iconPositionX;
+				_iconImage.y = _iconPositionY;
+			}
+			setQualityImageIconPoint();
+		}
+		
+		/**
+		 * 背景加载完成
+		 * @param uiasset
+		 * 
+		 */
 		private function onBgImgComplete(uiasset:UIAsset):void
 		{
-			this.width = _bgImage.width;
-			this.height = _bgImage.height;
+			calIconPos();
 		}
 		
 		public function get bgImage():UIAsset
@@ -321,8 +387,8 @@ package com.rpgGame.app.view.icon
 				_qualityImage.x = _iconPositionX;
 				_qualityImage.y = _iconPositionY;
 				if(_qualityEft){
-					_qualityEft.x+=_iconPositionX;
-					_qualityEft.y+=_iconPositionY;
+					_qualityEft.x=_iconPositionX;
+					_qualityEft.y=_iconPositionY;
 				}
 			}
 		}

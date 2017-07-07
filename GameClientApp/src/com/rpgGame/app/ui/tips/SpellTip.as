@@ -60,10 +60,9 @@ package com.rpgGame.app.ui.tips
 			_spellTip.container.addChildAt(mainIco,4);
 			_spellTip.grpContent.addChild(riseIco);
 			_spellTip.lbJinjie2.wordWrap=true;
-			riseIco.x=_spellTip.Icon2.x+5;
-			riseIco.y=_spellTip.Icon2.y+5;
-			mainIco.x=_spellTip.Icon1.x+5;
-			mainIco.y=_spellTip.Icon1.y+5;
+			
+			mainIco.bindBg(_spellTip.Icon1);
+			riseIco.bindBg(_spellTip.Icon2);
 		}		
 		
 		/**

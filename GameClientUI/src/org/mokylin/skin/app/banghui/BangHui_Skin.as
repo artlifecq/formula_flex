@@ -5,8 +5,8 @@ package org.mokylin.skin.app.banghui
 	import feathers.controls.TabBar;
 	import feathers.controls.UIAsset;
 	import feathers.layout.HorizontalLayout;
-	import org.mokylin.skin.common.yiji_panelbg2_Skin;
-	
+	import org.mokylin.skin.common.TongYongPanelbg1;
+
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
@@ -18,10 +18,10 @@ package org.mokylin.skin.app.banghui
 		//                                定义成员变量
 		//==========================================================================
 		public var bg:feathers.controls.SkinnableContainer;
-		
+
 		public var tabBar:feathers.controls.TabBar;
-		
-		
+
+
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
@@ -31,15 +31,15 @@ package org.mokylin.skin.app.banghui
 			
 			this.currentState = "normal";
 			this.height = 600;
-			this.width = 947;
+			this.width = 956;
 			this.elementsContent = [bg_i(),__BangHui_Skin_UIAsset1_i(),__BangHui_Skin_UIAsset2_i(),tabBar_i()];
 			
 			states = {
 			};
 			skinNames={};
 		}
-		
-		
+
+
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
@@ -49,54 +49,54 @@ package org.mokylin.skin.app.banghui
 			temp.gap = -1;
 			return temp;
 		}
-		
+
 		private function __BangHui_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 516;
+			temp.height = 512;
 			temp.styleName = "ui/common/background/neikuang_1.png";
 			temp.width = 922;
-			temp.x = 14;
-			temp.y = 75;
+			temp.x = 18;
+			temp.y = 81;
 			return temp;
 		}
-		
+
 		private function __BangHui_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/banghui/bangpai.png";
-			temp.x = 448;
-			temp.y = 20;
+			temp.x = 450;
+			temp.y = 17;
 			return temp;
 		}
-		
+
 		private function bg_i():feathers.controls.SkinnableContainer
 		{
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
 			temp.height = 600;
-			var skin:StateSkin = new org.mokylin.skin.common.yiji_panelbg2_Skin()
+			var skin:StateSkin = new org.mokylin.skin.common.TongYongPanelbg1()
 			temp.skin = skin
-			temp.width = 947;
+			temp.width = 956;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
-		
+
 		private function tabBar_i():feathers.controls.TabBar
 		{
 			var temp:feathers.controls.TabBar = new feathers.controls.TabBar();
 			tabBar = temp;
 			temp.name = "tabBar";
 			temp.btnWidth = 77;
-			temp.x = 20;
-			temp.y = 47;
+			temp.x = 24;
+			temp.y = 54;
 			temp.layout = __BangHui_Skin_HorizontalLayout1_i();
 			return temp;
 		}
-		
+
 	}
 }

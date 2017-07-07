@@ -87,6 +87,9 @@ package com.rpgGame.coreData.type
 		public static const BLEED : int = rEnum.next;
 		/**流血数字**/
 		public static const BLEED_TEXT : int = rEnum.next;
+		/**点名**/
+		public static const BOSS_SELECT : int = rEnum.next;
+		
 //	/**角色光环特效ID*/
 //		public static const MAGIC_RING:int = rEnum.next;
 //		/**怪物光环*/

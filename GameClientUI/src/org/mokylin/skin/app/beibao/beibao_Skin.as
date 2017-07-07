@@ -58,9 +58,9 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/app/beibao/juese.png";
-			temp.x = 445.5;
-			temp.y = 17;
+			temp.styleName = "ui/app/beibao/renwu.png";
+			temp.x = 455;
+			temp.y = 19;
 			return temp;
 		}
 

@@ -127,13 +127,13 @@ package com.rpgGame.appModule.equip
 			_targetEquip.selectImgVisible=false;
 			_useItem=IconCDFace.create(64);
 			_useItem.selectImgVisible=false;
-			_targetEquip.x=475;
-			_targetEquip.y=130;
+			_targetEquip.x=485;
+			_targetEquip.y=150;
 			_skin.container.addChild(_targetEquip);
 			_skin.container.addChild(_useItem);
 			_skin.container.addChild(_skin.lb_num);
-			_useItem.x=733;
-			_useItem.y=132;
+			_useItem.x=737;
+			_useItem.y=150;
 			_skin.lb_cailiao.text=LanguageConfig.getText(LangUI.UI_TEXT26);
 			
 			useItemInfo=new ClientItemInfo();
@@ -193,7 +193,7 @@ package com.rpgGame.appModule.equip
 			if(tweenEquip){
 				tweenEquip.kill();
 			}
-			tweenEquip=TweenMax.to(_targetEquip,1,{x:475,y:130,ease:Expo.easeOut});
+			tweenEquip=TweenMax.to(_targetEquip,1,{x:490,y:150,ease:Expo.easeOut});
 			
 			showUseItem();
 			

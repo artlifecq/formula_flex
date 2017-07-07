@@ -5,7 +5,7 @@ package org.mokylin.skin.app.banghui
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.app.banghui.ItemBg;
+	import org.mokylin.skin.common.ItemBg;
 
 	/**
 	 * @private
@@ -65,7 +65,7 @@ package org.mokylin.skin.app.banghui
 			bg = temp;
 			temp.name = "bg";
 			temp.height = 36;
-			var skin:StateSkin = new org.mokylin.skin.app.banghui.ItemBg()
+			var skin:StateSkin = new org.mokylin.skin.common.ItemBg()
 			temp.skin = skin
 			temp.width = 896;
 			temp.x = 0;
@@ -107,7 +107,7 @@ package org.mokylin.skin.app.banghui
 			lbTeamName = temp;
 			temp.name = "lbTeamName";
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.text = "[00000]玩家名六个字";
 			temp.textAlign = "left";
 			temp.color = 0xCFC6AE;

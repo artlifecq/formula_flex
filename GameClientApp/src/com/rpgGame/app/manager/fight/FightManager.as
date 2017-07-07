@@ -18,6 +18,8 @@ package com.rpgGame.app.manager.fight
 	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.coreData.type.SpellTargetType;
 	
+	import feathers.core.IFeathersControl;
+	
 	/**
 	 *
 	 * 战斗管理器
@@ -57,6 +59,11 @@ package com.rpgGame.app.manager.fight
 		 */
 		public static function getFightRoleState(role : SceneRole, spellData : Q_skill_model = null) : int
 		{
+			//主玩家自己
+			if (role==MainRoleManager.actor) 
+			{
+				return FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
+			}
 			var modeState : int = FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
 			var heroData:HeroData = MainRoleManager.actorInfo;
             do {
@@ -94,14 +101,16 @@ package com.rpgGame.app.manager.fight
                     }
                     break;
                 }
-                if (SceneCharType.PLAYER == role.type) {
+                if (SceneCharType.PLAYER == role.type) 
+				{
                     // 是玩家
                     checkPlayer:
 						var pkMode:int=MainRoleManager.actorInfo.pkMode;
-						switch (pkMode) {
+						switch (pkMode) 
+						{
                         case PKModeType.ALL:
                             // 全体
-                            modeState = FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
+                            modeState = role==MainRoleManager.actor?FIGHT_ROLE_STATE_CAN_NOT_FIGHT:FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
                             break;
                         case PKModeType.TEAM:
                             // 队伍,肯定有组队

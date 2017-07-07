@@ -93,6 +93,18 @@ package com.rpgGame.coreData.cfg
 			return null;
 		}
 		
-		
+		/**根据地图id返回触发点*/
+		public static function getTriggerAreas(mid:int) : Vector.<ClientMapAreaData>
+		{
+			var areaSet : Vector.<ClientMapAreaData> = new Vector.<ClientMapAreaData>();
+			for each (var areaData : ClientMapAreaData in _arras)
+			{
+				if (areaData.mapid==mid&&areaData.type ==MapAreaTypeEnum.TRIGGER_EVENT)
+				{
+					areaSet.push(areaData);
+				}
+			}
+			return areaSet;
+		}
     }
 }

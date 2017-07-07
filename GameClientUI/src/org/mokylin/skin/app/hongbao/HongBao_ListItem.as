@@ -2,8 +2,9 @@ package org.mokylin.skin.app.hongbao
 {
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Label;
+	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
-	import feathers.controls.UIAsset;
+	import org.mokylin.skin.common.ItemBg;
 
 	/**
 	 * @private
@@ -15,9 +16,7 @@ package org.mokylin.skin.app.hongbao
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var bg1:feathers.controls.UIAsset;
-
-		public var bg2:feathers.controls.UIAsset;
+		public var bg:feathers.controls.SkinnableContainer;
 
 		public var lbHand:feathers.controls.Label;
 
@@ -36,7 +35,7 @@ package org.mokylin.skin.app.hongbao
 			this.currentState = "normal";
 			this.height = 33;
 			this.width = 619;
-			this.elementsContent = [bg1_i(),bg2_i(),lbName_i(),lbType_i(),lbHand_i()];
+			this.elementsContent = [bg_i(),lbName_i(),lbType_i(),lbHand_i()];
 			
 			states = {
 			};
@@ -47,26 +46,14 @@ package org.mokylin.skin.app.hongbao
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function bg1_i():feathers.controls.UIAsset
+		private function bg_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			bg1 = temp;
-			temp.name = "bg1";
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			bg = temp;
+			temp.name = "bg";
 			temp.height = 33;
-			temp.styleName = "ui/common/titilebg/ItemBg.png";
-			temp.width = 619;
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function bg2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			bg2 = temp;
-			temp.name = "bg2";
-			temp.height = 33;
-			temp.styleName = "ui/common/titilebg/ItemBghei.png";
+			var skin:StateSkin = new org.mokylin.skin.common.ItemBg()
+			temp.skin = skin
 			temp.width = 619;
 			temp.x = 0;
 			temp.y = 0;

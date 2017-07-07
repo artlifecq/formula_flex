@@ -36,6 +36,7 @@ package com.rpgGame.app.ui.main.smallmap
     import com.rpgGame.coreData.role.BaseEntityData;
     import com.rpgGame.coreData.role.MonsterBornData;
     import com.rpgGame.coreData.role.RoleData;
+    import com.rpgGame.coreData.role.SceneCollectData;
     import com.rpgGame.coreData.role.SceneTranportData;
     import com.rpgGame.coreData.type.EffectUrl;
     import com.rpgGame.coreData.type.SceneCharType;
@@ -1196,7 +1197,7 @@ package com.rpgGame.app.ui.main.smallmap
             {
                 return;
             }
-            if (sceneRole.type == SceneCharType.MONSTER || sceneRole.type == SceneCharType.PLAYER)
+            if (sceneRole.type == SceneCharType.MONSTER || sceneRole.type == SceneCharType.PLAYER||sceneRole.type==SceneCharType.COLLECT)
             {
                 var ico : SmallMapRoleIcon = _moveIcoMap.getValue((sceneRole.data as RoleData).type + "_" + (sceneRole.data as RoleData).id);
                 if (ico == null)
@@ -1217,7 +1218,12 @@ package com.rpgGame.app.ui.main.smallmap
                         ico.setData(MapIconType.SCENE_PLAYER_MY_COUNTRY, sceneRole.data as RoleData, sceneRole.x, sceneRole.z);
                         _scenePlayerMyCountryVect.push(ico);
                         ico.visible = _scenePlayerMyCountryShow;
-                    }
+                    }else if(sceneRole.type == SceneCharType.COLLECT){
+						monsterSpr.addChild(ico);
+						ico.setData(MapIconType.SCENE_COLLECT, sceneRole.data as SceneCollectData, sceneRole.x, sceneRole.z);
+						_sceneMonsterVect.push(ico);
+						ico.visible = true;
+					}
                 }
                 ico.updatePos(getChangeSceneToMap(sceneRole.position));
             }

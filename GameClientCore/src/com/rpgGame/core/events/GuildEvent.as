@@ -48,5 +48,19 @@ package com.rpgGame.core.events
 		public static const GUILD_WCZB_CHANGEMAXPRICE:uint = UNIQUEID.NEXT;
 		/**帮会活跃值变化**/
 		public static const GUILD_CHANGE_ACTIVE:uint = UNIQUEID.NEXT;
+		/**争霸阵营矿信息**/
+		public static const GUILD_WAR_CAMPORE:uint = UNIQUEID.NEXT;
+		/**通知帮会战玩家排名**/
+		public static const GUILD_WAR_PERSONRANK:uint = UNIQUEID.NEXT;
+		/**通知个人信息**/
+		public static const GUILD_WAR_PERSIONINFO:uint = UNIQUEID.NEXT;
+		/**通知阵营积分**/
+		public static const GUILD_WAR_CAMPSCORE:uint = UNIQUEID.NEXT;
+		/**回复矿位置**/
+		public static const GUILD_WAR_FINDORE:uint = UNIQUEID.NEXT;
+		/**争霸城**/
+		public static const GUILD_WCZB_FIGHTCITY:uint = UNIQUEID.NEXT;
+		/**王城争霸结束**/
+		public static const GUILD_WCZB_OVER:uint = UNIQUEID.NEXT;
 	}
 }

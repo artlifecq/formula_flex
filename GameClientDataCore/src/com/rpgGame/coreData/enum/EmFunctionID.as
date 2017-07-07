@@ -52,6 +52,14 @@ package com.rpgGame.coreData.enum
 		public static const EM_BANGHUI_WCZB2:String="59";
 		/** 商城 **/
 		public static const EM_SHOP:String="60";
+		/** 红包 **/
+		public static const EM_REDREWARD:String="70";
+		/** 发送红包 **/
+		public static const EM_SENDREDREWARD:String="71";
+		/** 红包列表 **/
+		public static const EM_REDREWARDList:String="72";
+		/** 领取记录 **/
+		public static const EM_REDREWARDGETLOG:String="73";
 		/** 论剑 **/
 		public static const EM_LUNJIAN:String="300";
 		/** 多人副本 **/
