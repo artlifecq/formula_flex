@@ -12,7 +12,7 @@ package com.rpgGame.coreData.lang
 	*/
 	public class LangMAIL_UI
 	{
-		 /**  收件箱邮件基金上限，请及时整理收件箱！以免造成不必要的损失。 */
+		 /**  收件箱邮件接近上限，请及时整理收件箱！以免造成不必要的损失。 */
 		public static const MAIL_TEXT1:String = "MAIL_TEXT1";
 
 	}
