@@ -135,6 +135,18 @@ package com.rpgGame.app.ui.scene
 			defendCmapId=msg.defendCmapId;
 			leftTime=msg.endTime;
 			TimerServer.addLoop(updateTime,1000);
+			
+			/*var myCamp:int=MainRoleManager.actorInfo.faction;
+			var testMsg:ResGuildWarResultMessage=new ResGuildWarResultMessage();
+			testMsg.winCampId=myCamp;
+			testMsg.winCampName="11";
+			testMsg.lostCampId=2;
+			testMsg.lostCampName="22";
+			testMsg.myCampScore=100;
+			testMsg.myKillCnt=10;
+			testMsg.myRank=1;
+			testMsg.mySource=10;
+			AppManager.showApp(AppConstant.GUILD_WCZB_RESULT,[testMsg,cfg,defendCmapId]);*/
 		}
 		
 		private function getCityName(city:int):String
