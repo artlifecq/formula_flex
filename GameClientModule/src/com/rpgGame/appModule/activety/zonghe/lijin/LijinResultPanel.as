@@ -108,7 +108,7 @@ package com.rpgGame.appModule.activety.zonghe.lijin
 			for(i=0;i<lenght;i++)
 			{
 				setIcon(icoList[i],dataInfo[i].itemModelId,dataInfo[i].num,icoBgList[i]);
-				icoList[i].x=i*83;
+				icoList[i].x=icoBgList[i].x=i*83;
 			}
 			_skin.iocn_list.x=(490-83*lenght+7)*0.5;
 		}
