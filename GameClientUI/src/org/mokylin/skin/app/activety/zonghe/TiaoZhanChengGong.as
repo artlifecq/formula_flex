@@ -6,7 +6,6 @@ package org.mokylin.skin.app.activety.zonghe
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import feathers.controls.UINumber;
-	import feathers.layout.HorizontalLayout;
 	import org.mokylin.skin.app.activety.number.UINumberTiaozhannum;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 
@@ -48,8 +47,6 @@ package org.mokylin.skin.app.activety.zonghe
 
 		public var imgWin:feathers.controls.UIAsset;
 
-		public var iocn_list:feathers.controls.Group;
-
 		public var numExp:feathers.controls.UINumber;
 
 		public var numLingqi:feathers.controls.UINumber;
@@ -69,7 +66,7 @@ package org.mokylin.skin.app.activety.zonghe
 			this.currentState = "normal";
 			this.height = 534;
 			this.width = 469;
-			this.elementsContent = [__TiaoZhanChengGong_UIAsset1_i(),imLose_i(),imgWin_i(),__TiaoZhanChengGong_UIAsset2_i(),__TiaoZhanChengGong_UIAsset3_i(),gSW_i(),gZQ_i(),gMoney_i(),gExp_i(),btnOk_i(),grpIcon_i(),iocn_list_i()];
+			this.elementsContent = [__TiaoZhanChengGong_UIAsset1_i(),imLose_i(),imgWin_i(),__TiaoZhanChengGong_UIAsset2_i(),__TiaoZhanChengGong_UIAsset3_i(),gSW_i(),gZQ_i(),gMoney_i(),gExp_i(),btnOk_i(),grpIcon_i()];
 			
 			states = {
 			};
@@ -80,22 +77,6 @@ package org.mokylin.skin.app.activety.zonghe
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __TiaoZhanChengGong_HorizontalLayout1_i():feathers.layout.HorizontalLayout
-		{
-			var temp:feathers.layout.HorizontalLayout = new feathers.layout.HorizontalLayout();
-			temp.horizontalAlign = "center";
-			temp.verticalAlign = "middle";
-			return temp;
-		}
-
-		private function __TiaoZhanChengGong_HorizontalLayout2_i():feathers.layout.HorizontalLayout
-		{
-			var temp:feathers.layout.HorizontalLayout = new feathers.layout.HorizontalLayout();
-			temp.horizontalAlign = "center";
-			temp.verticalAlign = "middle";
-			return temp;
-		}
-
 		private function __TiaoZhanChengGong_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -226,7 +207,6 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.name = "grpIcon";
 			temp.x = 59;
 			temp.y = 411;
-			temp.layout = __TiaoZhanChengGong_HorizontalLayout1_i();
 			temp.elementsContent = [icon0_i(),icon1_i(),icon2_i(),icon3_i(),icon4_i(),icon5_i()];
 			return temp;
 		}
@@ -317,18 +297,6 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.styleName = "ui/app/activety/tianzhanshengli.png";
 			temp.x = 59;
 			temp.y = 0;
-			return temp;
-		}
-
-		private function iocn_list_i():feathers.controls.Group
-		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
-			iocn_list = temp;
-			temp.name = "iocn_list";
-			temp.x = 59;
-			temp.y = 411;
-			temp.layout = __TiaoZhanChengGong_HorizontalLayout2_i();
-			temp.elementsContent = [];
 			return temp;
 		}
 

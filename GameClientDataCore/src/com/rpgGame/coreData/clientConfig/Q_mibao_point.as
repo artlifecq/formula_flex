@@ -22,6 +22,10 @@ package com.rpgGame.coreData.clientConfig
 		public var q_revive_x:int;
 		 /**  复活点Y坐标 */
 		public var q_revive_y:int;
+		 /**  生成触发id */
+		public var q_create_trigger:int;
+		 /**  移除触发id */
+		public var q_remove_trigger:int;
 
 	}
 }

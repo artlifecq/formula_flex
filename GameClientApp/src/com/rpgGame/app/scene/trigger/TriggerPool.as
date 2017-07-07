@@ -30,6 +30,9 @@ package com.rpgGame.app.scene.trigger
 		{
 			handlerMap.add(EnumMapType.MAP_TYPE_MULTY,MultyTriggerHandler);
 			handlerMap.add(EnumMapType.MAP_TYPE_WCZB,WczbTriggerHandler);
+			handlerMap.add(EnumMapType.MAP_TYPE_MIBAO,MultyTriggerHandler);
+			
+			
 		}
 		
 		/**

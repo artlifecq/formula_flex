@@ -147,13 +147,13 @@ package com.rpgGame.app.cmdlistener
 		/*——————————————————————————多人副本————————————————————————————————————————————*/
 		private function onSCClientTriggerValiedMessage(msg:SCClientTriggerValiedMessage):void
 		{Lyt.a("触发消息:triggerId="+msg.triggerId);
-			ClientTriggerManager.serverTrigger(msg.triggerId);
+			EventManager.dispatchEvent(DungeonEvent.ZONE_TO_TRIGGER,msg.triggerId);
 		}
 		private function onSCEnterZoneMessage(msg:SCEnterZoneMessage):void
 		{
 			DungeonManager.teamZid=0;
 			DungeonManager.curryZoneId=msg.zoneId;
-			ClientTriggerManager.clearTigerByZone(msg.zoneId);
+			EventManager.dispatchEvent(DungeonEvent.ZONE_CLEAR_TRIGGER,msg.zoneId);
 			EventManager.dispatchEvent(DungeonEvent.ENTER_ZONE);
 			AppManager.hideApp(AppConstant.MULTY_PANL);
 		}
@@ -191,8 +191,7 @@ package com.rpgGame.app.cmdlistener
 		}
 		private function onSCCurTriggerMessage(msg:SCCurTriggerMessage):void
 		{
-			ClientTriggerManager.triggerInit(msg.curTriggerIds);
-			EventManager.dispatchEvent(DungeonEvent.ZONE_CUR_TRIGGER);
+			EventManager.dispatchEvent(DungeonEvent.ZONE_CUR_TRIGGER,msg.curTriggerIds);
 		}
 		private function onSCMultiZoneResultMessage(msg:SCMultiZoneResultMessage):void
 		{

@@ -234,45 +234,45 @@ package com.rpgGame.app.ui.scene
 			var monsterBank:Q_dailyzone_monster;
 			if(!MibaoManager.isKillAllBytype())
 			{
-				var wave:int=MibaoManager.getCurrWave();
-				monsterDataList=MibaoCfgData.getMonsterListByWaveId(MibaoManager.zoneid,wave);
-				
-				if(monsterDataList&&monsterDataList.length>0)
-				{
-					for(i=0;i<monsterDataList.length;i++)
-					{
-						monsterData=monsterDataList[i];
-						monsterInfo=MibaoManager.getMonsterInfo(monsterData.q_id);
-						monsterBank=DailyZoneMonsterCfgData.getZoneCfg(monsterData.q_id);
-						if(monsterInfo&&monsterBank&&i<killButList.length)
-						{
-							killButList[i].htmlText="击杀：<u>"+MonsterDataManager.getMonsterName(monsterBank.q_monsterId)+"</u><font color='#cfc6ae'>("+(monsterBank.q_monsterNum-monsterInfo.remainingNum)+"/"+monsterBank.q_monsterNum+")</font>";
-							killButList[i].visible=true;
-							killOkList[i].visible=MibaoManager.isKillAllByid(monsterData.q_id);
-						}
-						
-					}
-				}
+			var wave:int=MibaoManager.getCurrWave();
+			monsterDataList=MibaoCfgData.getMonsterListByWaveId(MibaoManager.zoneid,wave);
+			
+			if(monsterDataList&&monsterDataList.length>0)
+			{
+			for(i=0;i<monsterDataList.length;i++)
+			{
+			monsterData=monsterDataList[i];
+			monsterInfo=MibaoManager.getMonsterInfo(monsterData.q_id);
+			monsterBank=DailyZoneMonsterCfgData.getZoneCfg(monsterData.q_id);
+			if(monsterInfo&&monsterBank&&i<killButList.length)
+			{
+			killButList[i].htmlText="击杀：<u>"+MonsterDataManager.getMonsterName(monsterBank.q_monsterId)+"</u><font color='#cfc6ae'>("+(monsterBank.q_monsterNum-monsterInfo.remainingNum)+"/"+monsterBank.q_monsterNum+")</font>";
+			killButList[i].visible=true;
+			killOkList[i].visible=MibaoManager.isKillAllByid(monsterData.q_id);
+			}
+			
+			}
+			}
 			}
 			else
 			{
-				monsterDataList=MibaoCfgData.getMonsterListByType(2);
-				if(monsterDataList&&monsterDataList.length>0)
-				{
-					for(i=0;i<monsterDataList.length;i++)
-					{
-						monsterData=monsterDataList[i];
-						monsterBank=DailyZoneMonsterCfgData.getZoneCfg(monsterData.q_id);
-						if(monsterBank&&i<killButList.length)
-						{
-							killButList[i].htmlText="击杀：<u>"+MonsterDataManager.getMonsterName(monsterBank.q_monsterId);
-							killButList[i].visible=true;
-						}
-						
-					}
-				}
+			monsterDataList=MibaoCfgData.getMonsterListByType(2);
+			if(monsterDataList&&monsterDataList.length>0)
+			{
+			for(i=0;i<monsterDataList.length;i++)
+			{
+			monsterData=monsterDataList[i];
+			monsterBank=DailyZoneMonsterCfgData.getZoneCfg(monsterData.q_id);
+			if(monsterBank&&i<killButList.length)
+			{
+			killButList[i].htmlText="击杀：<u>"+MonsterDataManager.getMonsterName(monsterBank.q_monsterId);
+			killButList[i].visible=true;
+			}
+			
+			}
+			}
 			}*/
-			setUisite();
+			
 		}
 		private function hidekillInfo():void
 		{
@@ -318,7 +318,7 @@ package com.rpgGame.app.ui.scene
 					}
 				}
 			}
-			
+			setUisite();
 		}
 		private function hideJifenReword():void
 		{
@@ -348,6 +348,7 @@ package com.rpgGame.app.ui.scene
 			hitList[3].lbNum.text=msg.damage+"("+int(msg.damage/msg.totalHp*100)+"%)";
 			
 			setShanghaiReword(int(msg.damage/msg.totalHp*100));
+			setUisite();
 		}
 		/**设置伤害奖励物品*/
 		private function setShanghaiReword(damage:int):void
@@ -480,6 +481,11 @@ package com.rpgGame.app.ui.scene
 			{
 				hitList.push(_skin["pmItem"+i].skin as PaiMing_Item);
 			}
+			
+			hitList[3].lbNo.color=16771584;
+			hitList[3].lbName.color=16771584;
+			hitList[3].lbNum.color=16771584;
+			
 			alertOk=new AlertSetInfo(LangAlertInfo.MIBAO_EXIT_SURE);
 		}
 		private function outToGame():void
@@ -518,7 +524,7 @@ package com.rpgGame.app.ui.scene
 				{
 					MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, monsterBank.q_move_x,-Math.abs(monsterBank.q_move_y),finishWalk, 100);
 				}
-			
+				
 			}
 			
 		}
@@ -556,6 +562,15 @@ package com.rpgGame.app.ui.scene
 			}
 			_skin.sec_info.text="00:00:00";
 			_skin.sec_navi0.text="";
+			for(i=0;i<3;i++)
+			{
+				hitList[i].lbName.text="";
+				hitList[i].lbNum.text="";
+			}
+			hitList[3].lbNo.text="0";
+			hitList[3].lbName.text=MainRoleManager.actorInfo.name;
+			hitList[3].lbNum.text="0";
+			
 		}
 		/**设置UI位置*/
 		private function setUisite():void

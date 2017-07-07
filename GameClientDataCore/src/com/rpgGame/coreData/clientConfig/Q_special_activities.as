@@ -68,8 +68,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_move_y:int;
 		 /**  是否为帮会活动（1是，0否） */
 		public var q_guide:int;
-		 /**  左上角图标资源 */
-		public var q_lt_res:String;
+		 /**  左上角icon */
+		public var q_lt_res:int;
 		 /**  元素资源id */
 		public var q_res_id:String;
 		 /**  详情背景 */

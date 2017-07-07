@@ -28,6 +28,10 @@ package com.rpgGame.coreData.clientConfig
 		public var q_center_y:int;
 		 /**  刷新半径（格子数量） */
 		public var q_radius:int;
+		 /**  怪物出生Buff（怪物出生携带，配置buff表对应ID） */
+		public var q_buff:String;
+		 /**  Buff持续时间（单位：毫秒，-1为永久携带，Buff表中时间与此处时间，此处时间优先级最高） */
+		public var q_buff_time:String;
 		 /**  NPC闲话 */
 		public var q_speak:String;
 		 /**  重生时间脱离怪物数据库控制变更为：0本规则不启用， >0则为变更后的重生时间，单位：秒 */

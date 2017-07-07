@@ -67,6 +67,15 @@ package com.rpgGame.core.events
 		 */
 		public static const ZONE_CUR_TRIGGER:int = UNIQUEID.NEXT;
 		/**
+		 *触发事件
+		 */
+		public static const ZONE_TO_TRIGGER:int = UNIQUEID.NEXT;
+		/**
+		 *清除触发事件
+		 */
+		public static const ZONE_CLEAR_TRIGGER:int = UNIQUEID.NEXT;
+		
+		/**
 		 *准备退出副本
 		 */
 		public static const ZONE_OUT_RESULT:int = UNIQUEID.NEXT;

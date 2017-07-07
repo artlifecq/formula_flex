@@ -14,7 +14,7 @@ package com.rpgGame.coreData.clientConfig
 	{
 		 /**  提示编号 */
 		public var q_id:int;
-		 /**  提示类型(个人 200,队伍 201，帮会 202，世界 203) */
+		 /**  提示类型(个人 200,队伍 201，帮会 202，世界 203，区域204) */
 		public var q_type:int;
 		 /**  显示类型 */
 		public var q_show_type:String;

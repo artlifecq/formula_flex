@@ -27,7 +27,7 @@ package com.rpgGame.appModule.guild.war
 	 **/
 	public class WczbResultPanel extends SkinUIPanel
 	{
-		private var showTime:int=10;
+		private var showTime:int=500;
 		
 		private var _skin:WangChengJieSuan;
 		private var _rankDatas:ListCollection;
@@ -93,28 +93,29 @@ package com.rpgGame.appModule.guild.war
 				all=updateResultResult(attackRe,all);
 			}
 			rewardGrp.setRewardByArray(all);
-			timer=TimerManager.createTimer(1000,showTime,updateTime);
+//			timer=TimerManager.createTimer(1000,showTime,updateTime);
 		}
 		
 		private function updateResultResult(listA:Array,listB:Array):Array
 		{
-			var result:Array=listA;
-			var num:int=listB.length;
-			for(var i:int=0;i<num;i++){
-				var itemB:Object=listB[i];
-				for(var j:int=0;j<listA.length;j++){
-					var itemA:Object=listA[j];
-					if(itemA.mod==itemB.mod){
-						itemA.num+=itemB.num;
-					}else{
-						listA.push(itemB);
+			var len:int=listB.length;
+			var item:Object;
+			var num:int=listA.length;
+			for(var i:int=0;i<len;i++){
+				item=listB[i];
+				for(var j:int=0;j<num;j++){
+					if(listA[j].mod==item.mod){//在A里面找到一样的了,累加数量
+						listA[j].num+=item.num;
+//						listB.splice(j,1);
+						break;
 					}
 				}
+				if(j==num){//没找到
+					listA.push(item);
+				}
 			}
-			
-			return result;
+			return listA;
 		}
-		
 		
 		private function updateTime():void
 		{
