@@ -120,7 +120,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_dark_fog:int;
 		 /**  掉落金币是否可多倍（0可以，1不可以） */
 		public var q_fortune:int;
-		 /**  地图类型(1论剑,2多人副本,3真气副本,4装备副本,5经验副本,6巅峰,10:天降元宝,11战场类型，12秦陵秘宝) */
+		 /**  地图类型(1论剑,2多人副本,3真气副本,4装备副本,5经验副本,6巅峰,10:天降元宝,11战场类型，12秦陵秘宝,13夫妻副本) */
 		public var q_map_type:int;
 		 /**  跳跃连接点 */
 		public var q_jump_link:String;
