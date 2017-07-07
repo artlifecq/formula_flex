@@ -180,7 +180,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_attributes:String;
 		 /**  战斗计算技能伤害属性 */
 		public var q_fight_attributes:String;
-		 /**  技能伤害系数（万分比分子）没启用 */
+		 /**  技能伤害系数（万分比分子） */
 		public var q_hurt_correct_factor:int;
 		 /**  技能附加伤害（为-1则通过技能编号_技能等级  去q_skill_ignore表中读取无视防御伤害值） */
 		public var q_ignore_defence:int;
@@ -193,16 +193,16 @@ package com.rpgGame.coreData.clientConfig
 		 /**  位置编号（0不在技能面板,，1：未升阶，2升阶后 3 其他 */
 		public var q_index:int;
 		 /**  召唤怪物ID（1是幻象分身） */
-		public var q_summon_id:int;
+		public var q_summon_id:String;
 		 /**  召唤距离（像素距离，距离当前朝向的距离，0在脚下，为负表示以选中坐标点） */
 		public var q_summon_dist:int;
 		 /**  召唤怪物数量 */
-		public var q_summon_num:int;
+		public var q_summon_num:String;
 		 /**  召唤怪上限 */
-		public var q_summon_max:int;
+		public var q_summon_max:String;
 		 /**  召唤物继承召唤者的生命值比例（万分比分子），如果不填，和档案表属性是叠加关系 */
 		public var q_summon_hp:int;
-		 /**  召唤的幻象分身，攻击力比例（万分比分子） */
+		 /**  召唤的幻象分身，秒伤（万分比分子） */
 		public var q_summon_attack:int;
 		 /**  召唤的怪物/幻象分身持续时间（单位：秒） */
 		public var q_summon_last:int;

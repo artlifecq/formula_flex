@@ -18,8 +18,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_describe_tittle:String;
 		 /**    */
 		public var q_describe:String;
-		/**来源*/
-		public var q_source:String;
+
 	}
 }
 		

@@ -10,16 +10,12 @@ package com.rpgGame.coreData.clientConfig
 	* @author NEIL
 	* 
 	*/
-	public class Q_notify
+	public class Q_battleincident
 	{
-		 /**  提示编号 */
+		 /**  ID编号 */
 		public var q_id:int;
-		 /**  提示类型(个人 200,队伍 201，帮会 202，世界 203，区域204) */
-		public var q_type:int;
-		 /**  显示类型 */
-		public var q_show_type:String;
-		 /**  提示内容 */
-		public var q_content:String;
+		 /**  获得积分 */
+		public var q_integral:int;
 
 	}
 }

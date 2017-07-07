@@ -80,13 +80,13 @@ package com.rpgGame.coreData.clientConfig
 		public static const HeroModel:String = "data.model.HeroModel";
 		/**  坐骑模型表	功能名称	动画资源名称 */
 		public static const MountModel:String = "data.model.MountModel";
-		/**  3 怪物基本信息数据库																																																																		绑定器			 */
+		/**  3 怪物基本信息数据库																																																																			绑定器			 */
 		public static const Q_monster:String = "data.monster.Q_monster";
 		/**  NPC配置数据库																											 */
 		public static const Q_npc:String = "data.monster.Q_npc";
 		/**  定点刷怪数据库 -- 编辑器录入									 */
 		public static const Q_scene_monster:String = "data.monster.Q_scene_monster";
-		/**  区域刷怪数据库 -- 编辑器录入													 */
+		/**  区域刷怪数据库 -- 编辑器录入															 */
 		public static const Q_scene_monster_area:String = "data.monster.Q_scene_monster_area";
 		/**  每个职业一级属性换算二级属性表		 */
 		public static const Q_att_transfer:String = "data.Q_att_transfer";
@@ -98,6 +98,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_battle_rank:String = "data.Q_battle_rank";
 		/**  争霸战积分奖励表			 */
 		public static const Q_battle_reward:String = "data.Q_battle_reward";
+		/**  争霸战积分事件表	 */
+		public static const Q_battleincident:String = "data.Q_battleincident";
 		/**  心法数据库												 */
 		public static const Q_cheats:String = "data.Q_cheats";
 		/**  经脉冲穴数据库																 */
@@ -164,7 +166,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_meritorious_monster:String = "data.Q_meritorious_monster";
 		/**  秦陵秘宝刷怪配置表				 */
 		public static const Q_mibao_monster:String = "data.Q_mibao_monster";
-		/**  秦陵秘宝出生复活点配置				 */
+		/**  秦陵秘宝出生复活点配置						 */
 		public static const Q_mibao_point:String = "data.Q_mibao_point";
 		/**  秦陵秘宝怪物配置					 */
 		public static const Q_mibao_reward:String = "data.Q_mibao_reward";
@@ -182,11 +184,9 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_nine_tower:String = "data.Q_nine_tower";
 		/**  通知列表			 */
 		public static const Q_notify:String = "data.Q_notify";
-		/**  红包配置		 */
-		public static const Q_redreward:String = "data.Q_redreward";
 		/**  阵营关系				 */
 		public static const Q_relation:String = "data.Q_relation";
-		/**  城池基础表												 */
+		/**  城池基础表													 */
 		public static const Q_singlecitybase:String = "data.Q_singlecitybase";
 		/**  购买界面其他途径提示数据库				 */
 		public static const Q_source:String = "data.Q_source";
@@ -285,6 +285,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_battle_monster_refresh", com.rpgGame.coreData.clientConfig.Q_battle_monster_refresh);
 			regClass("data.Q_battle_rank", com.rpgGame.coreData.clientConfig.Q_battle_rank);
 			regClass("data.Q_battle_reward", com.rpgGame.coreData.clientConfig.Q_battle_reward);
+			regClass("data.Q_battleincident", com.rpgGame.coreData.clientConfig.Q_battleincident);
 			regClass("data.Q_cheats", com.rpgGame.coreData.clientConfig.Q_cheats);
 			regClass("data.Q_cheats_node", com.rpgGame.coreData.clientConfig.Q_cheats_node);
 			regClass("data.Q_convoy", com.rpgGame.coreData.clientConfig.Q_convoy);
@@ -317,6 +318,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_meridian", com.rpgGame.coreData.clientConfig.Q_meridian);
 			regClass("data.Q_meritorious", com.rpgGame.coreData.clientConfig.Q_meritorious);
 			regClass("data.Q_meritorious_monster", com.rpgGame.coreData.clientConfig.Q_meritorious_monster);
+			regClass("data.Q_mibao_monster", com.rpgGame.coreData.clientConfig.Q_mibao_monster);
 			regClass("data.Q_mibao_point", com.rpgGame.coreData.clientConfig.Q_mibao_point);
 			regClass("data.Q_mibao_reward", com.rpgGame.coreData.clientConfig.Q_mibao_reward);
 			regClass("data.Q_mission_base", com.rpgGame.coreData.clientConfig.Q_mission_base);
@@ -326,7 +328,6 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_newfunc", com.rpgGame.coreData.clientConfig.Q_newfunc);
 			regClass("data.Q_nine_tower", com.rpgGame.coreData.clientConfig.Q_nine_tower);
 			regClass("data.Q_notify", com.rpgGame.coreData.clientConfig.Q_notify);
-			regClass("data.Q_redreward", com.rpgGame.coreData.clientConfig.Q_redreward);
 			regClass("data.Q_relation", com.rpgGame.coreData.clientConfig.Q_relation);
 			regClass("data.Q_singlecitybase", com.rpgGame.coreData.clientConfig.Q_singlecitybase);
 			regClass("data.Q_source", com.rpgGame.coreData.clientConfig.Q_source);
