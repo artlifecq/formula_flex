@@ -172,7 +172,7 @@ package com.rpgGame.core.app
 		/**
 		 *秦陵秘宝结算
 		 */
-		public static var ACTIVETY_MIBAO_RESULT:String = createAppInfo( "activety.zonghe.lijin.MibaoResultPanel","activety");
+		public static var ACTIVETY_MIBAO_RESULT:String = createAppInfo( "activety.zonghe.mibao.MibaoResultPanel","activety");
 		
 		
 		/**

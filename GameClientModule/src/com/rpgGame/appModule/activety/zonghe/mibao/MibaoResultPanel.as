@@ -97,7 +97,7 @@ package com.rpgGame.appModule.activety.zonghe.mibao
 				ico.visible=false;
 				icoBgList[i].visible=false;
 				icoList.push(ico);
-				_skin.iocn_list.addChild(ico);
+				_skin.grpIcon.addChild(ico);
 				//spr.addChild(ico);
 			}
 			
@@ -122,11 +122,20 @@ package com.rpgGame.appModule.activety.zonghe.mibao
 			for(i=0;i<lenght;i++)
 			{
 				setIcon(icoList[i],dataInfo[i].itemModelId,dataInfo[i].num,icoBgList[i]);
-				//icoList[i].x=i*83;
+				icoList[i].x=icoBgList[i].x=i*56;
 			}
-			//_skin.iocn_list.x=(490-83*lenght+7)*0.5;
+			_skin.grpIcon.x=(469-56*lenght)*0.5;
 		}
-		
+		private function setReword2():void
+		{
+			var i:int;
+			for(i=0;i<5;i++)
+			{
+				setIcon(icoList[i],201,10,icoBgList[i]);
+				icoList[i].x=icoBgList[i].x=i*56;
+			}
+			_skin.grpIcon.x=(469-56*5)*0.5;
+		}
 		private function setIcon(icon:IconCDFace,tiemId:int,num:int,bg:UIAsset=null):void
 		{
 			var item:Q_item=ItemConfig.getQItemByID(tiemId);
