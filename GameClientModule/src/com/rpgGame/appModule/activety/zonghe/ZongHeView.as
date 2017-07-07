@@ -77,8 +77,8 @@ package com.rpgGame.appModule.activety.zonghe
 			_defaultFormat.leading = 4;
 			_richText.defaultTextFormat = _defaultFormat;
 			this.addChild(_richText);
-			_richText.x=630;
-			_richText.y=415;
+			_richText.x=640;
+			_richText.y=425;
 		}
 		
 		override public function show(data:Object=null):void
