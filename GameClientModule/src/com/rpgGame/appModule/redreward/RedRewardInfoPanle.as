@@ -26,7 +26,7 @@ package com.rpgGame.appModule.redreward
 		
 		private function initView():void
 		{
-			_view = new RedRewardSendView(_skin.skinFa.skin as HongBao_Fa);
+			_view = new RedRewardSendView(_skin.skinFa.skin as HongBao_Fa,false);
 		}
 		
 		override protected function initTabBarDatas():void
@@ -37,16 +37,16 @@ package com.rpgGame.appModule.redreward
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
+			EventManager.addEvent(RedRewardEvent.UPDATA_REDREWARDMONTHCOUNT,refashMothCountHandler);
 			super.show(data,openTable,parentContiner);
 			_view.refeashView();
 			_skin.lbNum.text = RedRewardManager.instance().haveRewardCount.toString();
-			EventManager.addEvent(RedRewardEvent.UPDATA_REDREWARDMONTHCOUNT,refashMothCountHandler);
 			refashMothCountHandler();
 		}
 		
 		private function refashMothCountHandler():void
 		{
-			_skin.lbNum.text = RedRewardManager.instance().mouthTotal.toString();
+			_skin.lbTotal.text = RedRewardManager.instance().mouthTotal.toString();
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -57,8 +57,8 @@ package com.rpgGame.appModule.redreward
 		
 		override public function hide():void
 		{
-			super.hide();
 			EventManager.removeEvent(RedRewardEvent.UPDATA_REDREWARDMONTHCOUNT,refashMothCountHandler);
+			super.hide();
 		}
 	}
 }

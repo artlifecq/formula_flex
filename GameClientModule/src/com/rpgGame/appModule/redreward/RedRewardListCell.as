@@ -23,6 +23,8 @@ package com.rpgGame.appModule.redreward
 		override protected function commitData():void
 		{
 			var info:RedRewardState = this.data as RedRewardState;
+			if(info==null)
+				return ;
 			_skin.lbName.text = info.playerName;
 			if(info.state==0)
 				_skin.lbHand.text = "已领取";

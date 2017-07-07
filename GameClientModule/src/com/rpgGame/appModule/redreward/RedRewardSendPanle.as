@@ -23,7 +23,7 @@ package com.rpgGame.appModule.redreward
 		}
 		private function initView():void
 		{
-			_view = new RedRewardSendView(_skin)
+			_view = new RedRewardSendView(_skin,true)
 		}
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{

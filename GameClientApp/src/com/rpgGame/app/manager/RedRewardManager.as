@@ -1,5 +1,6 @@
 package com.rpgGame.app.manager
 {
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.sender.RedRewardSender;
 	import com.rpgGame.core.events.RedRewardEvent;
 	import com.rpgGame.core.events.VipEvent;
@@ -142,11 +143,17 @@ package com.rpgGame.app.manager
 		
 		public function get canGetReward():Boolean
 		{
-			if(_dayCount>0)
-				return true;
-			if(!isMaxVipLevel&&_redCount>0)
-				return true;
-			return false;
+			var minvalue:int = Math.min(_dayCount,_redCount);
+			if(isMaxVipLevel)
+			{
+				return minvalue>0;
+			}else{
+				if(minvalue>0)
+					return true;
+				if(minvalue==0&&_redCount>0)
+					return true;
+				return false;
+			}
 		}
 		
 		private var _redRewardInfo:RedRewardDataInfo;
@@ -193,6 +200,11 @@ package com.rpgGame.app.manager
 		{
 			if(_redRewardInfo==null)
 				return ;
+			if(!this.isMaxVipLevel&&_redCount>0&&_dayCount==0)
+			{
+				NoticeManager.showNotifyById(91003);
+				return ;
+			}
 			var type:int = 0;
 			if(_redRewardInfo.sendPlayerId.IsZero())
 				type = 0;

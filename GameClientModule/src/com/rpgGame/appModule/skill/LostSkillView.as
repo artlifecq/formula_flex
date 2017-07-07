@@ -50,8 +50,8 @@ package com.rpgGame.appModule.skill
 				var content:Inter3DContainer = new Inter3DContainer();
 				this._skin.container.addChildAt(content,4);
 				_lostSkillModePane = new LostSkillModePane();
-				_lostSkillModePane.x = 25;
-				_lostSkillModePane.y = 84;
+				_lostSkillModePane.x = 30;
+				_lostSkillModePane.y = 90;
 				content.addChild3D(_lostSkillModePane);
 			}
 			_skillIconList = new Vector.<LostSkillIcon>();

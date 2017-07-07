@@ -7,8 +7,8 @@ package com.rpgGame.appModule.redreward
 	
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	
-	import org.mokylin.skin.app.banghui.ItemBg;
 	import org.mokylin.skin.app.hongbao.HongBao_LogItem;
+	import org.mokylin.skin.common.ItemBg;
 	
 	public class RedRewardLogCell extends DefaultListItemRenderer
 	{
@@ -29,7 +29,7 @@ package com.rpgGame.appModule.redreward
 			var time:String = TimeUtil.formatTimeToSpecString(info.time.fValue);
 			var playerName:String = HtmlTextUtil.getTextColor(0x14a3f3,"["+info.playerName+"]");
 			var reward:String = HtmlTextUtil.getTextColor(0xffea00,info.count.toString()+"礼金!");
-			_skin.lbName.text = LanguageConfig.replaceStr("[$]  $领取了红包,获得了:$礼金!",time,playerName);
+			_skin.lbName.htmlText = LanguageConfig.replaceStr("[$]  $领取了红包,获得了:$礼金!",time,playerName,info.count.toString());
 			var isshow:Boolean = this.index%2==0;
 			ItemBg(_skin.bg.skin).bg1.visible = isshow;
 			ItemBg(_skin.bg.skin).bg2.visible = !isshow;

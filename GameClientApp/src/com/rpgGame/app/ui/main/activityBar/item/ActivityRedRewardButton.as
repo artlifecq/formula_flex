@@ -38,13 +38,14 @@ package com.rpgGame.app.ui.main.activityBar.item
 		
 		private function refeashCount():void
 		{
-			if(RedRewardManager.instance().isMaxVipLevel)
+			var count:int = RedRewardManager.instance().redCount;
+			_labSkin.lbnum.text = count.toString();
+			var minValie:int = Math.min(RedRewardManager.instance().haveRewardCount,count)
+			if((RedRewardManager.instance().isMaxVipLevel&&minValie==0)
+				||(!RedRewardManager.instance().isMaxVipLevel&&count==0))
 			{
-				var count:int = RedRewardManager.instance().haveRewardCount
-				_labSkin.lbnum.text = count.toString();
-				_lableContent.visible = count>0;
+				_lableContent.visible = false;
 			}else{
-				_labSkin.lbnum.text = RedRewardManager.instance().redCount.toString();
 				_lableContent.visible = true;
 			}
 				

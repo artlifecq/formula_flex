@@ -34,12 +34,14 @@ package com.rpgGame.app.cmdlistener
 		
 		private function getSCGetRedRewardLogMessage(msg:SCGetRedRewardLogMessage):void
 		{
+			RedRewardManager.instance().updataMouthTotal(msg.monthCount);
 			RedRewardManager.instance().updataRedTewardLogLists(msg.loglist);
 		}
 		
 		
 		private function getSCRedRewardListMessage(msg:SCRedRewardListMessage):void
 		{
+			RedRewardManager.instance().updataMouthTotal(msg.monthCount);
 			RedRewardManager.instance().updataRedRewardStates(msg.redRewards);
 		}
 		private function getSCSendRedRewardMessage(msg:SCSendRedRewardMessage):void

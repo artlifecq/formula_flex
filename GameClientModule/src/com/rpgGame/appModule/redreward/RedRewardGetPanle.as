@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.redreward
 {
+	import com.rpgGame.app.manager.GlobalFunction;
 	import com.rpgGame.app.manager.RedRewardManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.RedRewardSender;
@@ -50,6 +51,7 @@ package com.rpgGame.appModule.redreward
 			_skin.container.mask = mask;
 			_onecellList = new Vector.<RedRewardOneCell>();
 			_moreList = new Vector.<RedRewardMoreCell>();
+			_skin.lbItem.leading = 5;
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
@@ -102,12 +104,14 @@ package com.rpgGame.appModule.redreward
 				_skin.lbItem.htmlText = HtmlTextUtil.getTextColor(0xff0d0d,"发了一个红包");
 				_skin.lbVip.visible = false;
 				_skin.grpYiJian.visible = !_redRewardInfo.sendPlayerId.IsZero();
+				_skin.faBg.height = 33;
 			}else{
 				_skin.lbItem.htmlText = HtmlTextUtil.getTextColor(0xff0d0d,"发了一个红包")+"\n"+redmgr.vipInfo.q_desc;
 				_skin.grpYiJian.visible = false;
-				_skin.lbVip.visible =!redmgr.isMaxVipLevel;	
+				_skin.lbVip.visible =!redmgr.isMaxVipLevel;
+				_skin.faBg.height = 70;
 			}
-			_skin.faBg.height = _skin.lbItem.height+15;
+			
 		}
 		
 		private function get redmgr():RedRewardManager
@@ -134,6 +138,9 @@ package com.rpgGame.appModule.redreward
 					break;
 				case Flip1_Skin(_skin.skinFlip.skin).btnAdd:
 					refeashPageView(_currentPage+1);
+					break;
+				case _skin.lbVip:
+					GlobalFunction.iWantRecharge();
 					break;
 			}
 		}

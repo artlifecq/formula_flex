@@ -6,11 +6,12 @@ package org.mokylin.skin.app.hongbao
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import org.mokylin.skin.app.hongbao.button.ButtonCha;
 	import org.mokylin.skin.app.hongbao.button.ButtonFahongbao;
 	import org.mokylin.skin.component.button.ButtonSkin_jia;
 	import org.mokylin.skin.component.button.ButtonSkin_jian;
 	import org.mokylin.skin.component.button.ButtonSkin_putongMax;
-	
+
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
@@ -21,33 +22,35 @@ package org.mokylin.skin.app.hongbao
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var btnClose:feathers.controls.Button;
+
 		public var btnFa:feathers.controls.Button;
-		
+
 		public var btn_all:feathers.controls.Button;
-		
+
 		public var btn_max:feathers.controls.Button;
-		
+
 		public var btn_min:feathers.controls.Button;
-		
+
 		public var faBg:feathers.controls.UIAsset;
-		
+
 		public var fbg:feathers.controls.UIAsset;
-		
+
 		public var grpFa:feathers.controls.Group;
-		
+
 		public var grpFlip:feathers.controls.Group;
-		
+
 		public var lbBuyNum:feathers.controls.Label;
-		
+
 		public var lbItem:feathers.controls.Label;
-		
+
 		public var uiDown:feathers.controls.UIAsset;
-		
+
 		public var uiIcon:feathers.controls.UIAsset;
-		
+
 		public var uiUp:feathers.controls.UIAsset;
-		
-		
+
+
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
@@ -58,14 +61,14 @@ package org.mokylin.skin.app.hongbao
 			this.currentState = "normal";
 			this.height = 502;
 			this.width = 271;
-			this.elementsContent = [__HongBao_Fa_UIAsset1_i(),uiDown_i(),uiUp_i(),uiIcon_i(),btnFa_i(),grpFa_i(),grpFlip_i()];
+			this.elementsContent = [__HongBao_Fa_UIAsset1_i(),uiDown_i(),uiUp_i(),uiIcon_i(),btnFa_i(),grpFa_i(),grpFlip_i(),btnClose_i()];
 			
 			states = {
 			};
 			skinNames={};
 		}
-		
-		
+
+
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
@@ -82,7 +85,7 @@ package org.mokylin.skin.app.hongbao
 			temp.y = 30;
 			return temp;
 		}
-		
+
 		private function __HongBao_Fa_Label2_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -95,7 +98,7 @@ package org.mokylin.skin.app.hongbao
 			temp.y = 3;
 			return temp;
 		}
-		
+
 		private function __HongBao_Fa_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -104,7 +107,18 @@ package org.mokylin.skin.app.hongbao
 			temp.y = 0;
 			return temp;
 		}
-		
+
+		private function btnClose_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btnClose = temp;
+			temp.name = "btnClose";
+			temp.styleClass = org.mokylin.skin.app.hongbao.button.ButtonCha;
+			temp.x = 237;
+			temp.y = 5;
+			return temp;
+		}
+
 		private function btnFa_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
@@ -115,7 +129,7 @@ package org.mokylin.skin.app.hongbao
 			temp.y = 231;
 			return temp;
 		}
-		
+
 		private function btn_all_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
@@ -126,7 +140,7 @@ package org.mokylin.skin.app.hongbao
 			temp.y = 0;
 			return temp;
 		}
-		
+
 		private function btn_max_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
@@ -137,7 +151,7 @@ package org.mokylin.skin.app.hongbao
 			temp.y = 0;
 			return temp;
 		}
-		
+
 		private function btn_min_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
@@ -148,7 +162,7 @@ package org.mokylin.skin.app.hongbao
 			temp.y = 0;
 			return temp;
 		}
-		
+
 		private function faBg_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -161,7 +175,7 @@ package org.mokylin.skin.app.hongbao
 			temp.y = 0;
 			return temp;
 		}
-		
+
 		private function fbg_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -173,7 +187,7 @@ package org.mokylin.skin.app.hongbao
 			temp.y = 0;
 			return temp;
 		}
-		
+
 		private function grpFa_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
@@ -184,7 +198,7 @@ package org.mokylin.skin.app.hongbao
 			temp.elementsContent = [faBg_i(),__HongBao_Fa_Label1_i(),lbItem_i(),__HongBao_Fa_Label2_i()];
 			return temp;
 		}
-		
+
 		private function grpFlip_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
@@ -195,7 +209,7 @@ package org.mokylin.skin.app.hongbao
 			temp.elementsContent = [btn_min_i(),btn_max_i(),btn_all_i(),fbg_i(),lbBuyNum_i()];
 			return temp;
 		}
-		
+
 		private function lbBuyNum_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -210,7 +224,7 @@ package org.mokylin.skin.app.hongbao
 			temp.y = 2;
 			return temp;
 		}
-		
+
 		private function lbItem_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -225,7 +239,7 @@ package org.mokylin.skin.app.hongbao
 			temp.y = 4;
 			return temp;
 		}
-		
+
 		private function uiDown_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -236,7 +250,7 @@ package org.mokylin.skin.app.hongbao
 			temp.y = 227;
 			return temp;
 		}
-		
+
 		private function uiIcon_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -247,7 +261,7 @@ package org.mokylin.skin.app.hongbao
 			temp.y = 30;
 			return temp;
 		}
-		
+
 		private function uiUp_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -258,6 +272,6 @@ package org.mokylin.skin.app.hongbao
 			temp.y = 2;
 			return temp;
 		}
-		
+
 	}
 }
