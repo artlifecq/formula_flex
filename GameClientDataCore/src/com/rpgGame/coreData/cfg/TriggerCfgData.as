@@ -11,7 +11,8 @@ package com.rpgGame.coreData.cfg
 	import flash.utils.Dictionary;
 
 	/**
-	 * 触发配置表
+	 * 
+	 * 触发配置表 22_3 多人副本触发数据库.xlsx
 	 * @author yt
 	 * 
 	 */	
@@ -101,6 +102,18 @@ package com.rpgGame.coreData.cfg
 			}
 			return triggerList;
 		}
-		
+		/**根据地图区域id返回触发类型*/
+		public static function getTriggerByAreaid(areaId:int):ClientTrigger
+		{
+			for each(var info :ClientTrigger in _trigers)
+			{
+				if(info.areaId==areaId)
+				{
+					return info;
+				}
+				
+			}
+			return null;
+		}
 	}
 }

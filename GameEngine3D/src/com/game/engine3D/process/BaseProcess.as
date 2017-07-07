@@ -1,5 +1,6 @@
 package com.game.engine3D.process
 {
+	import away3d.utils.GCObject;
 
 	/**
 	 *
@@ -8,7 +9,7 @@ package com.game.engine3D.process
 	 * 创建时间：2015-4-3 下午3:12:31
 	 *
 	 */
-	public class BaseProcess implements IProcess
+	public class BaseProcess extends GCObject implements IProcess
 	{
 		private var _onCompleteNotify : Function;
 		private var _holdOnNotify : Function;

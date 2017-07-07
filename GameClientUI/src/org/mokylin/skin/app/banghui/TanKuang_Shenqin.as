@@ -4,7 +4,6 @@ package org.mokylin.skin.app.banghui
 	import feathers.controls.Button;
 	import feathers.controls.text.TextFieldTextEditor;
 	import feathers.controls.Group;
-	import feathers.controls.Label;
 	import feathers.controls.List;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
@@ -41,8 +40,6 @@ package org.mokylin.skin.app.banghui
 
 		public var list:feathers.controls.List;
 
-		public var title:feathers.controls.Label;
-
 		public var uiNull:feathers.controls.UIAsset;
 
 
@@ -56,7 +53,7 @@ package org.mokylin.skin.app.banghui
 			this.currentState = "normal";
 			this.height = 361;
 			this.width = 580;
-			this.elementsContent = [bg_i(),__TanKuang_Shenqin_UIAsset1_i(),title_i(),btnClose_i(),grpFlip_i(),btnOk_i(),btnCancel_i(),__TanKuang_Shenqin_Group1_i(),list_i(),uiNull_i()];
+			this.elementsContent = [bg_i(),__TanKuang_Shenqin_UIAsset1_i(),btnClose_i(),grpFlip_i(),btnOk_i(),btnCancel_i(),__TanKuang_Shenqin_Group1_i(),list_i(),uiNull_i(),__TanKuang_Shenqin_UIAsset8_i()];
 			
 			states = {
 			};
@@ -139,6 +136,17 @@ package org.mokylin.skin.app.banghui
 			temp.styleName = "ui/app/banghui/word/caozuo.png";
 			temp.x = 467;
 			temp.y = 6;
+			return temp;
+		}
+
+		private function __TanKuang_Shenqin_UIAsset8_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.touchable = false;
+			temp.touchGroup = true;
+			temp.styleName = "ui/app/banghui/word/head_shengqingbiao.png";
+			temp.x = 247;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -255,26 +263,6 @@ package org.mokylin.skin.app.banghui
 			temp.width = 549;
 			temp.x = 16;
 			temp.y = 72;
-			return temp;
-		}
-
-		private function title_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			title = temp;
-			temp.name = "title";
-			temp.bold = true;
-			temp.touchable = false;
-			temp.touchGroup = false;
-			temp.letterSpacing = 2;
-			temp.fontSize = 16;
-			temp.text = "申请列表";
-			temp.textAlign = "center";
-			temp.color = 0xDDE2B1;
-			temp.nativeFilters = Fontter.filterObj[""];
-			temp.width = 240;
-			temp.x = 170;
-			temp.y = 11;
 			return temp;
 		}
 

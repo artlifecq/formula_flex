@@ -19,10 +19,12 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.SceneCharacterEvent;
 	import com.rpgGame.core.events.SceneInteractiveEvent;
 	import com.rpgGame.core.events.UserMoveEvent;
 	import com.rpgGame.coreData.cfg.ClientTrigger;
+	import com.rpgGame.coreData.cfg.TriggerArea;
 	import com.rpgGame.coreData.enum.EnumAreaMapType;
 	import com.rpgGame.coreData.info.task.target.TaskAreaExplorationInfo;
 	import com.rpgGame.coreData.info.task.target.TaskFollowEscortInfo;
@@ -120,12 +122,11 @@ package com.rpgGame.app.cmdlistener
 					TaskSender.reqTaskCompleteAreaSearch(TaskManager.currentMainTaskInfo.id);
 				}
 			}
-			else if (flagObj is ClientTrigger)
+			else if (flagObj is TriggerArea)//地图区域触发
 			{
-				var trigger : ClientTrigger = flagObj as ClientTrigger;
-				ClientTriggerManager.ClientBytrigger(trigger.id);
+				var triggerArea : TriggerArea = flagObj as TriggerArea;
+				EventManager.dispatchEvent(MapEvent.AREA_TRIGGER,triggerArea.areaId);//触发地图区域，抛出 地图区域id
 			}
-
 			var dist : int = 0;
 			var farDistance : int = 0;
 			var selectedRole : SceneRole = SceneRoleSelectManager.selectedRole;

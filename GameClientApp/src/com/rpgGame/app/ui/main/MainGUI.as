@@ -429,7 +429,7 @@ package com.rpgGame.app.ui.main
 		 * 
 		 */		
 		private function onSwitchCmp() : void
-		{//L.l("地图加载完成");
+		{
 			
 			this.removeChild(_playerHead);
 			this.removeChild(_bossHead);

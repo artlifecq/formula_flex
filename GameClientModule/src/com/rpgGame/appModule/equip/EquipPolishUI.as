@@ -151,10 +151,11 @@ package com.rpgGame.appModule.equip
 			for(i=0;i<6;i++){
 				_useEquipGrids.push(new DragDropItem(48,i));
 				_useEquipGrids[i].gridInfo=new GridInfo(ItemContainerID.POLIST_USE,i);
+				_useEquipGrids[i].bindBg(_skin["use"+i]);
 				_skin.use_grp.addChild(_useEquipGrids[i]);
 				_useEquipGrids[i].onTouchEndCallBack=onCancelUse;
-				_useEquipGrids[i].x=_skin["use"+i].x;
-				_useEquipGrids[i].y=_skin["use"+i].y;
+//				_useEquipGrids[i].x=_skin["use"+i].x;
+//				_useEquipGrids[i].y=_skin["use"+i].y;
 				_useEquipGrids[i].dragAble = true;
 			}
 			
@@ -468,7 +469,7 @@ package com.rpgGame.appModule.equip
 			if(tweenEquip){
 				tweenEquip.kill();
 			}
-			tweenEquip=TweenMax.to(_targetEquip,1,{x:613,y:177,ease:Expo.easeOut});
+			tweenEquip=TweenMax.to(_targetEquip,1,{x:624,y:195,ease:Expo.easeOut});
 			
 			if(isUse(targetEquipInfo)){
 //				_goodsContainerUse.setGrayForData(targetEquipInfo,true);

@@ -156,6 +156,10 @@ package com.rpgGame.app.state.role.action
 				if (KeyMoveManager.getInstance().keyMoving)
 					return false;
 			}
+			if (!force&& (_machine as RoleStateMachine).isTripleLockCaseSpell) 
+			{
+				return false;
+			}
 			return true;
 		}
 	}

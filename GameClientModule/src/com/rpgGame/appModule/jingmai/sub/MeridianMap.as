@@ -2,6 +2,7 @@ package com.rpgGame.appModule.jingmai.sub
 {
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.core.ui.tip.IRewardCheck;
 	import com.rpgGame.coreData.clientConfig.Q_meridian;
 	import com.rpgGame.netData.meridian.bean.AcuPointInfo;
 	
@@ -15,7 +16,7 @@ package com.rpgGame.appModule.jingmai.sub
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
 	
-	public class MeridianMap extends SkinUI
+	public class MeridianMap extends SkinUI implements IRewardCheck
 	{
 		//经脉图id
 		private var meridianId:int;
@@ -24,9 +25,11 @@ package com.rpgGame.appModule.jingmai.sub
 		//用来快速查找点击对象
 		private var nameDic:Dictionary=new Dictionary();
 		private var linesContianer:Sprite;
-		public function MeridianMap(skin:StateSkin,mid:int,configList:Array)
+		private var _key:String;
+		public function MeridianMap(skin:StateSkin,mid:int,configList:Array,nodeKey:String)
 		{
 			super(skin);
+			this._key=nodeKey;
 			linesContianer=new Sprite();
 			linesContianer.touchable=false;
 			this._stateSkin["grp_icon"].addChildAt(linesContianer,0);
@@ -116,6 +119,7 @@ package com.rpgGame.appModule.jingmai.sub
 				}
 				
 			}
+			notifyUpdate(_key);
 		}
 		public function checkCareDataUpdate(acu:AcuPointInfo):void
 		{
@@ -130,7 +134,7 @@ package com.rpgGame.appModule.jingmai.sub
 						p.setData(p.data,true);
 					}
 				}
-				
+				notifyUpdate(_key);
 			}
 		}
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -168,6 +172,7 @@ package com.rpgGame.appModule.jingmai.sub
 			{
 				p.setData(p.data);
 			}
+			notifyUpdate(_key);
 		}
 		public function checkForUpdateJX():void
 		{
@@ -179,6 +184,7 @@ package com.rpgGame.appModule.jingmai.sub
 					p.setData(p.data);
 				}
 			}
+			notifyUpdate(_key);
 		}
 		public function hideEffect():void
 		{
@@ -188,6 +194,18 @@ package com.rpgGame.appModule.jingmai.sub
 			{
 				p.showLoopEffect(false);
 			}
+		}
+		public  function hasReward():Boolean
+		{
+			var points:Array=pointHash.values();
+			for each (var p:MerdianPoint in points)
+			{
+				if (p.hasReward) 
+				{
+					return true;
+				}
+			}
+			return false;
 		}
 	}
 }

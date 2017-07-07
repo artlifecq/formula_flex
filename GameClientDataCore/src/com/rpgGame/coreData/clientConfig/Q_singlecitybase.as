@@ -38,6 +38,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_startingprice:int;
 		 /**  每次竞价 */
 		public var q_bidding:int;
+		 /**  胜利积分 */
+		public var q_integral_victory:int;
 
 	}
 }

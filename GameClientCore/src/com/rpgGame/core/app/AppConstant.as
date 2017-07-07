@@ -168,6 +168,10 @@ package com.rpgGame.core.app
 		public static var ACTIVETY_LIJIN_RESULT:String = createAppInfo( "activety.zonghe.lijin.LijinResultPanel","activety");
 		
 		
+		/**
+		 *秦陵秘宝结算
+		 */
+		public static var ACTIVETY_MIBAO_RESULT:String = createAppInfo( "activety.zonghe.lijin.MibaoResultPanel","activety");
 		
 		
 		/**
@@ -420,6 +424,8 @@ package com.rpgGame.core.app
 		public static var GUILD_WCZB_APPLY : String = createAppInfo("guild.war.WczbWarApplyPanel","banghui");
 		/**帮会王城争霸奖励 **/
 		public static var GUILD_WCZB_REWARD : String = createAppInfo("guild.war.WczbRewardPanel","banghui");
+		/**帮会王城争霸结果 **/
+		public static var GUILD_WCZB_RESULT : String = createAppInfo("guild.war.WczbResultPanel","banghui");
 		
 		/**迷宫排行**/
 		public static var MAZE_RANK_PANEL : String = createAppInfo("maze.MazeInfoPanel","maze",PanelPosType.MIDDLE_RIGHT);

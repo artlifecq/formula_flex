@@ -453,7 +453,7 @@ package org.mokylin.skin.app.banghui
 			temp.name = "title";
 			temp.bold = true;
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.letterSpacing = 2;
 			temp.fontSize = 16;
 			temp.text = "捐献";

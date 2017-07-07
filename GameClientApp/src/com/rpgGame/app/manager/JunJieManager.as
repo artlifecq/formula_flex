@@ -171,5 +171,21 @@ package com.rpgGame.app.manager
 					(role.headFace as HeadFace).updateTitle((role.data as HeroData).junjieLv);
 			}
 		}
+		public function getCanActivation():Boolean
+		{
+			
+			if(_junjieInfoList==null||_junjieInfoList.length==0)
+			{
+				return false;
+			}
+			for(var i:int=0;i<_junjieInfoList.length;i++)
+			{
+				if(_junjieInfoList[i].state==1)
+				{
+					return true;
+				}
+			}
+			return false;
+		}
 	}
 }

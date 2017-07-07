@@ -1,13 +1,13 @@
 package com.game.engine3D.utils
 {
 	import com.game.mainCore.libCore.utils.ZMath;
-
+	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
-
+	
 	import away3d.containers.ObjectContainer3D;
 	import away3d.tools.utils.Bounds;
-
+	
 	/**
 	 *
 	 * 数学工具
@@ -17,10 +17,13 @@ package com.game.engine3D.utils
 	 */
 	public class MathUtil
 	{
+		
+		private static const TEMP_POINT : Point = new Point();
+		
 		public function MathUtil()
 		{
 		}
-
+		
 		public static function clamp(min : Number, max : Number, value : Number) : Number
 		{
 			if (value < min)
@@ -37,13 +40,9 @@ package com.game.engine3D.utils
 			}
 		}
 		
-		public static function getAngle(ax : Number, ay : Number, bx : Number, by : Number) : Number
+		public static function getAngle(ax : Number, ay : Number, bx : Number, by : Number) : int
 		{
-			var dx : Number = bx - ax;
-			var dy : Number = by - ay;
-			var angle : Number = Math.round(Math.atan2(dy, dx) * 57.33);
-			angle = angle % 360;
-			return angle;
+			return int(Math.atan2(by - ay, bx - ax) * 57.33 + 0.5) % 360;
 		}
 		
 		public static function getRadian(ax : Number, ay : Number, bx : Number, by : Number) : Number
@@ -60,12 +59,12 @@ package com.game.engine3D.utils
 		
 		public static function getDxByAngle(value : Number, angle : Number) : Number
 		{
-			return cosd(angle) * value;
+			return Math.cos(0.0175 * angle) * value;
 		}
 		
 		public static function getDyByAngle(value : Number, angle : Number) : Number
 		{
-			return sind(angle) * value;
+			return Math.sin(0.0175 * angle) * value;
 		}
 		
 		public static function sind(angle : Number) : Number
@@ -88,28 +87,61 @@ package com.game.engine3D.utils
 			return ((ax - bx) * (ax - bx)) + ((ay - by) * (ay - by));
 		}
 		
-		public static function getOffsetByAngle(angle : int) : Array
+		/**
+		 *  
+		 * @param angle
+		 * @return 返回一个Point,该Point为缓存对象，若需要长期持有需要自己创建对象然后进行拷贝。
+		 * 
+		 */		
+		public static function getOffsetByAngle(angle : int) : Point
 		{
+			// TODO:是否有必要将方位数据转换为bit
 			angle = (angle + 360) % 360;
-			if (angle <= 22 || angle >= 338)
-				return [1, 0];
-			else if (angle >= 23 && angle <= 67)
-				return [1, 1];
-			else if (angle >= 68 && angle <= 112)
-				return [0, 1];
-			else if (angle >= 113 && angle <= 157)
-				return [-1, 1];
-			else if (angle >= 158 && angle <= 202)
-				return [-1, 0];
-			else if (angle >= 203 && angle <= 247)
-				return [-1, -1];
-			else if (angle >= 248 && angle <= 292)
-				return [0, -1];
-			else if (angle >= 293 && angle <= 337)
-				return [1, -1];
-			return [0, 0];
+			if (angle <= 22 || angle >= 338) {
+				TEMP_POINT.x = 1;
+				TEMP_POINT.y = 0;
+			}
+			else if (angle >= 23 && angle <= 67) {
+				TEMP_POINT.x = 1;
+				TEMP_POINT.y = 1;
+			}
+			else if (angle >= 68 && angle <= 112) {
+				TEMP_POINT.x = 0;
+				TEMP_POINT.y = 1;
+			}
+			else if (angle >= 113 && angle <= 157) {
+				TEMP_POINT.x = -1;
+				TEMP_POINT.y = 1;
+			}
+			else if (angle >= 158 && angle <= 202) {
+				TEMP_POINT.x = -1;
+				TEMP_POINT.y = 0;
+			}
+			else if (angle >= 203 && angle <= 247) {
+				TEMP_POINT.x = -1;
+				TEMP_POINT.y = -1;
+			}
+			else if (angle >= 248 && angle <= 292) {
+				TEMP_POINT.x = 0;
+				TEMP_POINT.y = -1;
+			}
+			else if (angle >= 293 && angle <= 337) {
+				TEMP_POINT.x = 1;
+				TEMP_POINT.y = -1;
+			} else {
+				TEMP_POINT.x = 0;
+				TEMP_POINT.y = 0;
+			}
+			return TEMP_POINT;
 		}
 		
+		/**
+		 * 直接使用API:Bounds.getObjectContainerBounds(oc, sceneBased);
+		 * @param oc
+		 * @param sceneBased
+		 * @return 
+		 * 
+		 */		
 		public static function containerBounds(oc : ObjectContainer3D, sceneBased : Boolean = true) : Vector.<Number>
 		{
 			Bounds.getObjectContainerBounds(oc, sceneBased);
@@ -151,9 +183,14 @@ package com.game.engine3D.utils
 			return center;
 		}
 		
+		/**
+		 *  
+		 * @param vertexList
+		 * @return 返回一个Point,该Point为缓存对象，若需要长期持有需要自己创建对象然后进行拷贝。
+		 * 
+		 */		
 		public static function getPolygonCenter(vertexList : Vector.<Point>) : Point
 		{
-			var center : Point = new Point();
 			var x : Number = 0;
 			var y : Number = 0;
 			var pLen : int = vertexList.length;
@@ -163,9 +200,9 @@ package com.game.engine3D.utils
 				x += p.x;
 				y += p.y;
 			}
-			center.x = int(x / pLen);
-			center.y = int(y / pLen);
-			return center;
+			TEMP_POINT.x = int(x / pLen);
+			TEMP_POINT.y = int(y / pLen);
+			return TEMP_POINT;
 		}
 		
 		/**
@@ -180,12 +217,10 @@ package com.game.engine3D.utils
 			var center : Point = getPolygonCenter(points);
 			for each (var pos : Point in points)
 			{
-				var dist : int = getDistance(center.x, center.y, pos.x, pos.y) + extend;
-				var angle : Number = getAngle(center.x, center.y, pos.x, pos.y);
-				var dx : Number = getDxByAngle(dist, angle);
-				var dy : Number = getDyByAngle(dist, angle);
-				pos.x = center.x + dx;
-				pos.y = center.y + dy;
+				var dist : int = Math.sqrt(((center.x - pos.x) * (center.x - pos.x)) + ((center.y - pos.y) * (center.y - pos.y))) + extend;
+				var angle : Number = int(Math.atan2(pos.y - center.y, pos.x - center.x) * 57.33 + 0.5) % 360;
+				pos.x = center.x + Math.cos(0.0175 * angle) * dist;
+				pos.y = center.y + Math.sin(0.0175 * angle) * dist;
 			}
 		}
 		
@@ -223,11 +258,11 @@ package com.game.engine3D.utils
 			for (i = 1; i <= n; i++)
 			{
 				p2 = vertexList[i % n];
-				if (p.y > Math.min(p1.y, p2.y))
+				if (p.y > (p1.y < p2.y ? p1.y : p2.y))
 				{
-					if (p.y <= Math.max(p1.y, p2.y))
+					if (p.y <= (p1.y > p2.y ? p1.y : p2.y))
 					{
-						if (p.x <= Math.max(p1.x, p2.x))
+						if (p.x <= (p1.x > p2.x ? p1.x : p2.x))
 						{
 							if (p1.y != p2.y)
 							{
@@ -243,8 +278,15 @@ package com.game.engine3D.utils
 			return counter % 2 != 0;
 		}
 		
-		public static function getPolygonBounds(vertexList : Vector.<Point>) : Array
+		/**
+		 *  
+		 * @param vertexList
+		 * @return 返回一个Vector3D缓存对象，[x,y,z,w]分别存储[minX,minY,maxX,maxY]
+		 * 
+		 */		
+		public static function getPolygonBounds(vertexList : Vector.<Point>) : Vector3D
 		{
+			var ret : Vector3D = Vector3DUtil.vec2;
 			if (vertexList.length > 1)
 			{
 				var minX : int = int.MAX_VALUE;
@@ -263,9 +305,14 @@ package com.game.engine3D.utils
 					if (vp.y > maxY)
 						maxY = vp.y;
 				}
-				return [minX, minY, maxX, maxY];
+				ret.x = minX;
+				ret.y = minY;
+				ret.z = maxX;
+				ret.w = maxY;
+				return ret;
 			}
-			return null;
+			ret.x = ret.y = ret.z = ret.w = 0;
+			return ret;
 		}
 		
 		public static function polygonToGrids(vertexList : Vector.<Point>, width : int, height : int, isInside : Boolean = false) : Array
@@ -274,12 +321,12 @@ package com.game.engine3D.utils
 			var p : Point;
 			if (vertexList.length > 1)
 			{
-				var bounds : Array = getPolygonBounds(vertexList);
+				var bounds : Vector3D = getPolygonBounds(vertexList);
 				
-				var minX : int = bounds[0];
-				var minY : int = bounds[1];
-				var maxX : int = bounds[2];
-				var maxY : int = bounds[3];
+				var minX : int = bounds.x;
+				var minY : int = bounds.y;
+				var maxX : int = bounds.z;
+				var maxY : int = bounds.w;
 				
 				var lenX : int = maxX - minX;
 				var lenY : int = maxY - minY;
@@ -288,7 +335,7 @@ package com.game.engine3D.utils
 				var halfWidth : int = width * 0.5;
 				var halfHeight : int = height * 0.5;
 				
-				var tempPoint : Point = new Point();
+				var tempPoint : Point = TEMP_POINT;
 				for (var i : int = 0; i < lenX; i += width)
 				{
 					for (var j : int = 0; j < lenY; j += height)
@@ -491,12 +538,21 @@ package com.game.engine3D.utils
 			return pos;
 		}
 		
+		/**
+		 *  
+		 * @param startPos
+		 * @param endPos
+		 * @param dist
+		 * @return 返回一个Point,该Point为缓存对象，若需要长期持有需要自己创建对象然后进行拷贝。
+		 * 
+		 */		
 		public static function get2PosDisPos(startPos : Point, endPos : Point, dist : Number) : Point
 		{
-			var pos : Point;
+			var pos : Point = TEMP_POINT;
 			if (dist <= 0)
 			{
-				pos = new Point(startPos.x, startPos.y);
+				pos.x = startPos.x;
+				pos.y = startPos.y;
 				return pos;
 			}
 			else
@@ -504,51 +560,14 @@ package com.game.engine3D.utils
 				var posDist : Number = Point.distance(startPos, endPos);
 				if (dist > posDist)
 				{
-					pos = new Point(endPos.x, endPos.y);
+					pos.x = endPos.x;
+					pos.y = endPos.y;
 					return pos;
 				}
 			}
 			var angle : Number = ZMath.getTowPointsAngle(startPos, endPos);
-			pos = getAnglePos(startPos, angle, dist);
+			pos = getAnglePos(startPos, angle, dist, pos);
 			return pos;
 		}
-		
-		public static function pointInArea(vertexList : Vector.<Point>, p : Point) : Boolean
-		{
-			if (vertexList == null)
-				return false;
-			if (vertexList.length<3)
-				return false;
-			var n : int = vertexList.length;
-			var i : int = 0;
-			var p1 : Point;
-			var p2 : Point;
-			var counter : int = 0;
-			var xinters : int = 0;
-			p1 = vertexList[0];
-			
-			for (i = 1; i <= n; i++)
-			{
-				p2 = vertexList[i % n];
-				if (p.y > Math.min(p1.y, p2.y))
-				{
-					if (p.y <= Math.max(p1.y, p2.y))
-					{
-						if (p.x <= Math.max(p1.x, p2.x))
-						{
-							if (p1.y != p2.y)
-							{
-								xinters = (p.y - p1.y) * (p2.x - p1.x) / (p2.y - p1.y) + p1.x;
-								if (p1.x == p2.x || p.x <= xinters)
-									counter++;
-							}
-						}
-					}
-				}
-				p1 = p2;
-			}
-			return counter % 2 != 0;
-		}
-
 	}
 }

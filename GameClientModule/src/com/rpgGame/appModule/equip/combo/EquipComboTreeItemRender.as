@@ -2,6 +2,9 @@ package com.rpgGame.appModule.equip.combo
 {
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.goods.BackPackManager;
+	import com.rpgGame.app.manager.goods.ItemManager;
+	import com.rpgGame.core.ui.tip.RTNodeID;
+	import com.rpgGame.core.ui.tip.RewardTipTree;
 	import com.rpgGame.coreData.cfg.HeChengData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_hecheng;
@@ -97,6 +100,12 @@ package com.rpgGame.appModule.equip.combo
 					mainSkin.btnFlag.styleClass=ButtonJiahao;
 					mainSkin.btnFlag.y=12;
 				}
+				var nodeKey:String=RTNodeID.EQUIP_HC+MainNodeInfo(node.data).type;
+				if (!RewardTipTree.ins.getNode(nodeKey)) 
+				{
+					RewardTipTree.ins.addNode(RTNodeID.EQUIP_HC,nodeKey,this,244,ItemManager.checkEquip2HCByType,false,node.data.type);
+				}
+				RewardTipTree.ins.updateNode(nodeKey);
 			}else if(node.data is SubNodeInfo){
 				this.addChild(_skin.sub_item);
 				_skin.main_item.removeFromParent();

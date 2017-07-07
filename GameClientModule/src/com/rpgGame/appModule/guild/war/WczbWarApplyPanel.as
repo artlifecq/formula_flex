@@ -1,6 +1,6 @@
 package com.rpgGame.appModule.guild.war
 {
-	import com.rpgGame.app.sender.GuildSender;
+	import com.rpgGame.app.sender.GuildWarSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.ui.common.PageContainerUI;
 	import com.rpgGame.core.events.GuildEvent;
@@ -65,7 +65,7 @@ package com.rpgGame.appModule.guild.war
 			super.onHide();
 			EventManager.removeEvent(GuildEvent.GUILD_WCZB_APPLYINFO,getInfos);
 			EventManager.removeEvent(GuildEvent.GUILD_WCZB_CHANGEMAXPRICE,updateInfo);
-			GuildSender.reqGuildWarLeaveApplyPanel();
+			GuildWarSender.reqGuildWarLeaveApplyPanel();
 			TimerServer.remove(updateTime);
 		}
 		
@@ -73,7 +73,7 @@ package com.rpgGame.appModule.guild.war
 		{
 			super.show(data,openTable,parentContiner);
 			initEvent();
-			GuildSender.reqGuildWarCityApplyInfo(1);			
+			GuildWarSender.reqGuildWarCityApplyInfo(1);			
 			applayCityId=data;
 			TimerServer.addLoop(updateTime,1000,null,0);
 		}

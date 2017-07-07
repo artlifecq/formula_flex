@@ -8,6 +8,7 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.appModule.systemset.TouchToState;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.manager.StarlingLayerManager;
+	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	
 	import flash.utils.setTimeout;
@@ -39,6 +40,7 @@ package com.rpgGame.appModule.mount
 			_skin=new Zhanqi_Skin();
 			super(_skin);
 			initPanel();
+			addNode(RTNodeID.FIGHTFLAG,RTNodeID.FIGHTFLAG_UP,_skin.btn_kaishi,110,null);
 		}
 		
 		private function initPanel():void
@@ -61,6 +63,8 @@ package com.rpgGame.appModule.mount
 			EventManager.addEvent(ZhanQiManager.ZhanQiChangeExp,refeashExpHandler);
 			EventManager.addEvent(ZhanQiManager.ZhanQiExtraItemNum,refeashPropHandler);
 			EventManager.addEvent(ItemEvent.ITEM_ADD,addItemHandler);
+			EventManager.addEvent(ItemEvent.ITEM_REMOVE,addItemHandler);
+			EventManager.addEvent(ItemEvent.ITEM_CHANG,addItemHandler);
 		}
 		
 		private function removeEvent():void
@@ -71,6 +75,8 @@ package com.rpgGame.appModule.mount
 			EventManager.removeEvent(ZhanQiManager.ZhanQiChangeExp,refeashExpHandler);
 			EventManager.removeEvent(ZhanQiManager.ZhanQiExtraItemNum,refeashPropHandler);
 			EventManager.removeEvent(ItemEvent.ITEM_ADD,addItemHandler);
+			EventManager.removeEvent(ItemEvent.ITEM_REMOVE,addItemHandler);
+			EventManager.removeEvent(ItemEvent.ITEM_CHANG,addItemHandler);
 		}
 		
 		override public function show(data:Object=null):void
@@ -234,6 +240,7 @@ package com.rpgGame.appModule.mount
 				eb.refeash(_zhanqiShowData);
 			}
 			setTimeout(isAutoing,30);
+			setRTNState(RTNodeID.FIGHTFLAG_UP,_zhanqiShowData.isSelf&&_zhanqiShowData.canUpLevel());
 		}
 		
 		private function isAutoing():void

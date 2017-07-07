@@ -1,14 +1,16 @@
 package com.game.engine3D.scene.display
 {
 	import com.game.engine3D.manager.Stage3DLayerManager;
-
+	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
 	import flash.display.Stage;
 	import flash.geom.Point;
 	import flash.utils.Dictionary;
-
+	
+	import away3d.utils.GCObject;
+	
 	import starling.utils.Color;
 
 	/**
@@ -18,7 +20,7 @@ package com.game.engine3D.scene.display
 	 * 创建时间：2015-10-28 上午11:12:28
 	 *
 	 */
-	public class PixelHitArea
+	public class PixelHitArea extends GCObject
 	{
 		private static var hitAreas : Dictionary;
 		private static var areasCount : int = 0;

@@ -173,8 +173,8 @@ package org.mokylin.skin.app.beibao
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 67;
-			temp.x = 236;
-			temp.y = 164;
+			temp.x = 226;
+			temp.y = 166;
 			return temp;
 		}
 
@@ -187,7 +187,7 @@ package org.mokylin.skin.app.beibao
 			var skin:StateSkin = new org.mokylin.skin.common.ChaiFen_Skin()
 			temp.skin = skin
 			temp.width = 187;
-			temp.x = 44;
+			temp.x = 36;
 			temp.y = 164;
 			return temp;
 		}

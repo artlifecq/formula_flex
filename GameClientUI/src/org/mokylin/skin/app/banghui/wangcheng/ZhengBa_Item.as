@@ -5,8 +5,8 @@ package org.mokylin.skin.app.banghui.wangcheng
 	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
-	import org.mokylin.skin.app.banghui.ItemBg;
 	import org.mokylin.skin.app.banghui.button.ButtonJingpai;
+	import org.mokylin.skin.common.ItemBg;
 
 	/**
 	 * @private
@@ -60,7 +60,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			bg = temp;
 			temp.name = "bg";
 			temp.height = 27;
-			var skin:StateSkin = new org.mokylin.skin.app.banghui.ItemBg()
+			var skin:StateSkin = new org.mokylin.skin.common.ItemBg()
 			temp.skin = skin
 			temp.width = 599;
 			temp.x = 0;

@@ -21,8 +21,8 @@ package com.rpgGame.coreData.type
 		public static const ACTION_DEAD_LAUNCH : int = rEnum.next;//7
 		public static const ACTION_HIT : int = rEnum.next;//受击状态8
 		public static const ACTION_PREWAR : int = rEnum.next;//战斗预备状态9
-		public static const ACTION_ATTACK : int = rEnum.next;//攻击状态
-		public static const ACTION_ATTACK_UI : int = rEnum.next;//攻击状态,攻击状态
+		public static const ACTION_ATTACK : int = rEnum.next;//攻击状态10
+		public static const ACTION_ATTACK_UI : int = rEnum.next;//攻击状态,攻击状态11
 		public static const ACTION_BLINK : int = rEnum.next;//闪烁状态
 		public static const ACTION_BEAT_BACK : int = rEnum.next;//击退状态
 		public static const ACTION_FALL : int = rEnum.next;//掉落状态
@@ -80,5 +80,8 @@ package com.rpgGame.coreData.type
 		public static const CONTROL_MASTERY_MAN:int = rEnum.next;// 神秘人
 		public static const CONTROL_CHECK_AUTO_FIGHT:int = rEnum.next;// 自动战斗
 		public static const CONTROL_VIP:int = rEnum.next;// 自动战斗
+		
+		public static const CONTROL_TRIPLE_ATTACK_LOCK:int = rEnum.next;// 三连击锁定
+		public static const CONTROL_TRIPLE_ATTACK_CHECK:int = rEnum.next;// 三连击锁定
 	}
 }

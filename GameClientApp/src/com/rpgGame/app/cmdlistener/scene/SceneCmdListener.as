@@ -54,6 +54,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.coreData.info.task.target.TaskFollowEscortInfo;
 	import com.rpgGame.coreData.lang.LangQ_NoticeInfo;
 	import com.rpgGame.coreData.lang.LangText;
+	import com.rpgGame.coreData.role.GirlPetData;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleData;
@@ -72,6 +73,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.netData.map.bean.DropGoodsInfo;
 	import com.rpgGame.netData.map.bean.MonsterInfo;
 	import com.rpgGame.netData.map.bean.NpcInfo;
+	import com.rpgGame.netData.map.bean.PetInfo;
 	import com.rpgGame.netData.map.bean.PlayerInfo;
 	import com.rpgGame.netData.map.bean.SceneObjInfo;
 	import com.rpgGame.netData.map.message.ResArmorChangeMessage;
@@ -92,9 +94,11 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.netData.map.message.SCSceneObjMoveMessage;
 	import com.rpgGame.netData.monster.message.ResMonsterDieMessage;
 	import com.rpgGame.netData.player.message.BroadcastPlayerAttriChangeMessage;
+	import com.rpgGame.netData.player.message.ResChangeFactionMessage;
 	import com.rpgGame.netData.player.message.ResChangePKStateMessage;
 	import com.rpgGame.netData.player.message.ResPlayerDieMessage;
 	import com.rpgGame.netData.player.message.ResReviveSuccessMessage;
+	import com.rpgGame.netData.structs.Position;
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
@@ -147,6 +151,7 @@ package com.rpgGame.app.cmdlistener.scene
 			SocketConnection.addCmdListener(101117, onResChangeMapMessage);
 			//			SocketConnection.addCmdListener(SceneModuleMessages.S2C_SCENE_MAP_TRANSPORT, onSceneMapTransport);
 			SocketConnection.addCmdListener(101126, onResChangeMapFailedMessage);
+			SocketConnection.addCmdListener(103129, onResChangeFactionMessage);
 			// 复活成功
 			SocketConnection.addCmdListener(103114, onResPlayerDieMessage);
 			SocketConnection.addCmdListener(103115, onResReviveSuccessMessage);
@@ -208,6 +213,14 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			
 			finish();
+		}
+		
+		private function onResChangeFactionMessage(msg:ResChangeFactionMessage):void
+		{
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;			
+			if(role){
+				(role.data as HeroData).faction=msg.faction;
+			}
 		}
 		
 		private function onResMonterDieMessage(msg:ResMonsterDieMessage):void
@@ -581,6 +594,12 @@ package com.rpgGame.app.cmdlistener.scene
 							addTrap(addArr[j].bytesList[k]);
 						}
 						break;
+					case SceneCharType.GIRL_PET:
+						for(k=0;k<len;k++)
+						{
+							addGirlPet(addArr[j].bytesList[k]);
+						}
+						break;
 				}
 			}
 		}
@@ -601,7 +620,20 @@ package com.rpgGame.app.cmdlistener.scene
 		
 		
 		
-		
+		private function addGirlPet(buffer:ByteArray):void
+		{
+			var info:PetInfo=new PetInfo();
+			info.read(buffer);
+			var data:GirlPetData=new GirlPetData();
+			data.setServerData(info);
+			SceneRoleManager.getInstance().createGirlPet(data);
+			if (info.positions.length>0) 
+			{
+				var mInfo : RoleMoveInfo = new RoleMoveInfo();
+				mInfo.setValues(data.id,data.totalStat.getStatValue(CharAttributeType.SPEED), SystemTimeManager.curtTm,Position.FromXY(info.x,info.y),null);
+				RoleStateUtil.walkByInfos(mInfo);
+			}
+		}
 		private function addDropGoods(buffer:ByteArray):void
 		{
 			var info:DropGoodsInfo=new DropGoodsInfo();
@@ -691,6 +723,13 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			GameLog.addShow("添加角色对象id：" + data.id);
 			GameLog.addShow("添加对象服务器id：" + data.serverID.ToString());
+			//角色自带寻路
+			if (info.positions.length>0) 
+			{
+				var mInfo : RoleMoveInfo = new RoleMoveInfo();
+				mInfo.setValues(data.id,data.totalStat.getStatValue(CharAttributeType.SPEED), SystemTimeManager.curtTm,info.position,info.positions);
+				RoleStateUtil.walkByInfos(mInfo);
+			}
 			//			var otherHeroBiaoMap:HashMap = YunBiaoManager._otherBiaoCheHashMap;
 			//			if( otherHeroBiaoMap.getValue( data.id ) != null )
 			//				data.biaoCheData = otherHeroBiaoMap.getValue( data.id );
@@ -739,6 +778,8 @@ package com.rpgGame.app.cmdlistener.scene
 				collectData.x = info.position.x;
 				collectData.y = info.position.y;
 				collectData.isDynamicCreate =true;
+				collectData.relation=info.relation;
+				collectData.faction=info.faction;
 				SceneRoleManager.getInstance().createCollect(collectData);
 			}
 			else if(qData.q_monster_type==4)//npc创建流程       对应 改的东西太多了 先保留
@@ -766,11 +807,15 @@ package com.rpgGame.app.cmdlistener.scene
 				data.distributeId=info.distributeId;
 				RoleData.readMonster(data,info);
 				sceneRole =SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
-				
 				GameLog.addShow("添加怪物客户端id：" + data.id);
 				GameLog.addShow("添加怪物服务器id：" + data.serverID.ToString());
 			}
-			
+			if (sceneRole&&info.positions.length>0) 
+			{
+				var mInfo : RoleMoveInfo = new RoleMoveInfo();
+				mInfo.setValues(data.id,info.speed, SystemTimeManager.curtTm,info.position,info.positions);
+				RoleStateUtil.walkByInfos(mInfo);
+			}
 			
 		}
 		

@@ -14,6 +14,7 @@ package com.rpgGame.appModule.junjie
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.FightValueUtil;
 	import com.rpgGame.core.events.JunJieEvent;
+	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.JunJieData;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
@@ -75,6 +76,7 @@ package com.rpgGame.appModule.junjie
 			_skin.conTiaojian.x=_skin.conTiaojian.x-14;
 //			_skin.uiUp.visible=false;
 			_skin.num_lv.visible=false;		
+			addNode(RTNodeID.JJ,RTNodeID.JJ_BTN_ACTIVE,_skin.btnJihuo,177,null);
 		}
 		
 		private function initView():void
@@ -265,16 +267,19 @@ package com.rpgGame.appModule.junjie
 				GrayFilter.gray(_skin.btnJihuo);
 				_skin.btnJihuo.visible=true;
 				_skin.lb_wanchengdu.visible=true;
+				setRTNState(RTNodeID.JJ_BTN_ACTIVE,false);
 			}
 			else if(_nowSelectItem.info.state==1){
 				_skin.btnJihuo.filter=null;
 				_skin.btnJihuo.visible=true;
 				_skin.lb_wanchengdu.visible=true;
+				setRTNState(RTNodeID.JJ_BTN_ACTIVE,true);
 			}
 			else
 			{
 				_skin.btnJihuo.visible=false;
 				_skin.lb_wanchengdu.visible=false;
+				setRTNState(RTNodeID.JJ_BTN_ACTIVE,false);
 			}		
 			var _wanchengnum:int=0;
 			for(var i:int=0;i<_tiaojianItemList.length;i++)

@@ -106,7 +106,7 @@ package com.rpgGame.appModule.activety.zonghe.lijin
 			var i:int;
 			var lenght:int=dataInfo.length<icoList.length?dataInfo.length:icoList.length;
 			for(i=0;i<lenght;i++)
-			{//L.l("奖励物品："+dataInfo[i].itemModelId+"数量"+dataInfo[i].num);
+			{
 				setIcon(icoList[i],dataInfo[i].itemModelId,dataInfo[i].num,icoBgList[i]);
 				icoList[i].x=i*83;
 			}

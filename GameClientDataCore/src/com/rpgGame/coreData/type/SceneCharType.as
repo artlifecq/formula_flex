@@ -68,6 +68,9 @@ package com.rpgGame.coreData.type
 		public static const FAMILY_WAR_FLAG:String = rEnum.next.toString();
 		
 		public static const SCENE_RIBBON_SPELL:String = rEnum.next.toString();
+		
+		/**美人**/
+		public static const GIRL_PET:String=rEnum.next.toString();
 		//		/** 召唤怪  3 **/
 //		public static const SUMMON_MONSTER:String = rEnum.next.toString();
 //		/** 宝袋（精英怪或BOSS死后出现） 4 **/
@@ -159,7 +162,7 @@ package com.rpgGame.coreData.type
 //		
 		public static function get serverType() : Array
 		{
-			return [PLAYER, NPC, DROP_GOODS, MONSTER, BIAO_CHE,PROTECT_NPC,COLLECT, TRAP, LIANG_CANG, ZHAN_CHE]; //,FOLLOWER,BAG,SUMMON_MONSTER,BAO_DAI_MONSTER,STORY_ACTOR
+			return [PLAYER, NPC, DROP_GOODS, MONSTER, BIAO_CHE,PROTECT_NPC,COLLECT, TRAP, LIANG_CANG, ZHAN_CHE,GIRL_PET]; //,FOLLOWER,BAG,SUMMON_MONSTER,BAO_DAI_MONSTER,STORY_ACTOR
 		}
 	}
 }

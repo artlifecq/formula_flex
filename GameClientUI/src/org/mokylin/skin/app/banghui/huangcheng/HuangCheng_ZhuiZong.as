@@ -36,6 +36,8 @@ package org.mokylin.skin.app.banghui.huangcheng
 
 		public var lbHeadName:feathers.controls.Label;
 
+		public var lbInfo0:feathers.controls.Label;
+
 		public var lbInfo1:feathers.controls.Label;
 
 		public var lbInfo2:feathers.controls.Label;
@@ -44,11 +46,15 @@ package org.mokylin.skin.app.banghui.huangcheng
 
 		public var lbInfo4:feathers.controls.Label;
 
+		public var lbInfo5:feathers.controls.Label;
+
 		public var lbJifen:feathers.controls.Label;
 
 		public var lbJisha:feathers.controls.Label;
 
 		public var lbName:feathers.controls.Label;
+
+		public var lbName0:feathers.controls.Label;
 
 		public var lbPaiming:feathers.controls.Label;
 
@@ -291,6 +297,24 @@ package org.mokylin.skin.app.banghui.huangcheng
 			return temp;
 		}
 
+		private function lbInfo0_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbInfo0 = temp;
+			temp.name = "lbInfo0";
+			temp.height = 17;
+			temp.leading = 3;
+			temp.letterSpacing = -1;
+			temp.fontSize = 14;
+			temp.text = "剩余:$";
+			temp.textAlign = "left";
+			temp.color = 0xCFC6AE;
+			temp.width = 92;
+			temp.x = 74;
+			temp.y = 64;
+			return temp;
+		}
+
 		private function lbInfo1_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -369,6 +393,24 @@ package org.mokylin.skin.app.banghui.huangcheng
 			return temp;
 		}
 
+		private function lbInfo5_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbInfo5 = temp;
+			temp.name = "lbInfo5";
+			temp.height = 17;
+			temp.leading = 3;
+			temp.letterSpacing = -1;
+			temp.fontSize = 14;
+			temp.text = "剩余:$";
+			temp.textAlign = "left";
+			temp.color = 0xCFC6AE;
+			temp.width = 92;
+			temp.x = 74;
+			temp.y = 185;
+			return temp;
+		}
+
 		private function lbJifen_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -404,6 +446,21 @@ package org.mokylin.skin.app.banghui.huangcheng
 			temp.width = 182;
 			temp.x = 18;
 			temp.y = 400;
+			return temp;
+		}
+
+		private function lbName0_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbName0 = temp;
+			temp.name = "lbName0";
+			temp.fontSize = 14;
+			temp.text = "帮派名称七个字总积分:100000/200000";
+			temp.color = 0x5CB006;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 247;
+			temp.x = 0;
+			temp.y = 24;
 			return temp;
 		}
 
@@ -479,7 +536,7 @@ package org.mokylin.skin.app.banghui.huangcheng
 			temp.name = "scroll_box";
 			temp.x = 3;
 			temp.y = 37;
-			temp.elementsContent = [lbInfo1_i(),lbInfo3_i(),lbInfo2_i(),lbInfo4_i(),lbName_i(),sec_ico1_0_i(),sec_ico1_1_i(),sec_ico1_2_i(),sec_Exit_i(),line1_i(),grpList_i(),lbTime_i(),lbJifen_i(),lbPaiming_i(),lbJisha_i()];
+			temp.elementsContent = [lbInfo1_i(),lbInfo3_i(),lbInfo2_i(),lbInfo5_i(),lbInfo0_i(),lbInfo4_i(),lbName_i(),lbName0_i(),sec_ico1_0_i(),sec_ico1_1_i(),sec_ico1_2_i(),sec_Exit_i(),line1_i(),grpList_i(),lbTime_i(),lbJifen_i(),lbPaiming_i(),lbJisha_i()];
 			return temp;
 		}
 
