@@ -7,6 +7,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.ActivityEvent;
+	import com.rpgGame.core.events.DungeonEvent;
 	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.type.activity.ActivityJoinStateEnum;
@@ -225,6 +226,7 @@ package com.rpgGame.app.cmdlistener
 		{Lyt.a("活动剩余时间:"+msg.zoneId+"=="+msg.remainingTime);
 			MibaoManager.zoneid=msg.zoneId;
 			EventManager.dispatchEvent(ActivityEvent.MIBAO_ACTIVITY_TIME,msg.remainingTime);
+			EventManager.dispatchEvent(DungeonEvent.ZONE_CLEAR_TRIGGER,msg.zoneId);
 		}
 		/**剩余怪物列表*/
 		private function onSCRemainMosterNumMessage(msg:SCRemainMosterNumMessage):void
