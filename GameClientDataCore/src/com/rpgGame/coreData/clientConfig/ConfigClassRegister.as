@@ -317,6 +317,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_meridian", com.rpgGame.coreData.clientConfig.Q_meridian);
 			regClass("data.Q_meritorious", com.rpgGame.coreData.clientConfig.Q_meritorious);
 			regClass("data.Q_meritorious_monster", com.rpgGame.coreData.clientConfig.Q_meritorious_monster);
+			regClass("data.Q_mibao_monster", com.rpgGame.coreData.clientConfig.Q_mibao_monster);
 			regClass("data.Q_mibao_point", com.rpgGame.coreData.clientConfig.Q_mibao_point);
 			regClass("data.Q_mibao_reward", com.rpgGame.coreData.clientConfig.Q_mibao_reward);
 			regClass("data.Q_mission_base", com.rpgGame.coreData.clientConfig.Q_mission_base);
