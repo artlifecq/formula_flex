@@ -64,7 +64,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			lbBanghui = temp;
 			temp.name = "lbBanghui";
 			temp.text = "帮派名称一个字";
-			temp.textAlign = "center";
+			temp.textAlign = "left";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;

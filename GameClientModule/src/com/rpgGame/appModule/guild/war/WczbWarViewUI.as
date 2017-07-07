@@ -365,7 +365,7 @@ package com.rpgGame.appModule.guild.war
 			_skin.lbHead.htmlText="防守"+getCityName(city);
 			_skin.lbName1.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,fightInfo.attackGuildName);
 			_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW,"VS");
-			_skin.lbName2.text=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,fightInfo.occupyGuildName);
+			_skin.lbName2.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,fightInfo.occupyGuildName);
 			_timeStr="距离战斗结束还有:"
 			_leftTime=_infoMsg.curWarTime;
 			TimerServer.addLoop(updateTime,1000);
@@ -397,7 +397,7 @@ package com.rpgGame.appModule.guild.war
 			_skin.lbHead.htmlText="进攻"+getCityName(city);
 			_skin.lbName1.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,fightInfo.attackGuildName);
 			_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW,"VS");
-			_skin.lbName2.text=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,fightInfo.occupyGuildName);
+			_skin.lbName2.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,fightInfo.occupyGuildName);
 			
 			_timeStr="距离战斗结束还有:"
 			_leftTime=_infoMsg.curWarTime;
@@ -451,7 +451,7 @@ package com.rpgGame.appModule.guild.war
 			}else{
 				_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,"暂无");
 			}
-			_skin.lbName2.text="";
+			_skin.lbName2.htmlText="";
 			_leftTime=_infoMsg.curWarTime;
 			_timeStr="距离竞拍结束还剩:"
 			TimerServer.addLoop(updateTime,1000);
