@@ -126,6 +126,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_isdisplaytime:int;
 		 /**  属性ID */
 		public var q_att_type:int;
+		 /**  VIP编号 */
+		public var q_vip:int;
 		 /**  使用的场景ID限制 */
 		public var q_sceneid:int;
 		 /**  敏感道具数量异常数值 */
@@ -146,10 +148,14 @@ package com.rpgGame.coreData.clientConfig
 		public var q_grouplimit:int;
 		 /**  是否显示转框特效（0显示 1不显示） */
 		public var q_isshoweffects:int;
+		 /**  是否允许死亡后掉落（1为允许，不填或0为不允许） */
+		public var q_fall:int;
 		 /**  使用后触发任务id */
 		public var q_task:int;
 		 /**  使用后触发脚本编号 */
 		public var q_script:int;
+		 /**  自动使用脚本（只有自动使用字段有定义才会生效） */
+		public var q_auto_use_script:int;
 		 /**  装备最大可强化等级 */
 		public var q_max_strengthen:int;
 		 /**  消耗获得强化值 */
