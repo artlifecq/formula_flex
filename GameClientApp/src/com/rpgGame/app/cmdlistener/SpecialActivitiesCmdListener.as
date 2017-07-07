@@ -150,7 +150,7 @@ package com.rpgGame.app.cmdlistener
 		
 		private function onSCSpecialActivityCloseMessage(msg:SCSpecialActivityCloseMessage):void
 		{
-			ActivetyDataManager.setActState(msg.activityId,ActivityJoinStateEnum.CLOSE);
+			ActivetyDataManager.setActState(msg.activityId,ActivityJoinStateEnum.UN_OPEN);
 			EventManager.dispatchEvent(ActivityEvent.UPDATE_ACTIVITY,msg.activityId);
 			var info:ActivetyInfo=ActivetyCfgData.getActInfoById(msg.activityId);
 			if(info.actCfg.q_icon_id!=0){//有独立的功能icon
@@ -160,7 +160,7 @@ package com.rpgGame.app.cmdlistener
 		
 		private function onSCSpecialActivityOpenMessage(msg:SCSpecialActivityOpenMessage):void
 		{
-			ActivetyDataManager.setActState(msg.activityId,ActivityJoinStateEnum.OPEN,msg.remainTime);
+			ActivetyDataManager.setActState(msg.activityId,ActivityJoinStateEnum.JOINING,msg.remainTime);
 			EventManager.dispatchEvent(ActivityEvent.UPDATE_ACTIVITY,msg.activityId);
 			var info:ActivetyInfo=ActivetyCfgData.getActInfoById(msg.activityId); 
 			if(info.actCfg.q_show_notice==1){
