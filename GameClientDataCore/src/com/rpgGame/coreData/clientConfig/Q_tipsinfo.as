@@ -18,6 +18,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_describe_tittle:String;
 		 /**    */
 		public var q_describe:String;
+		 /**    */
+		public var q_source:String;
 
 	}
 }
