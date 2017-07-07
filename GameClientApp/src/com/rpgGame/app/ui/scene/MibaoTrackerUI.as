@@ -272,7 +272,7 @@ package com.rpgGame.app.ui.scene
 					}
 				}
 			}*/
-			setUisite();
+			
 		}
 		private function hidekillInfo():void
 		{
@@ -318,7 +318,7 @@ package com.rpgGame.app.ui.scene
 					}
 				}
 			}
-			
+			setUisite();
 		}
 		private function hideJifenReword():void
 		{
@@ -348,6 +348,7 @@ package com.rpgGame.app.ui.scene
 			hitList[3].lbNum.text=msg.damage+"("+int(msg.damage/msg.totalHp*100)+"%)";
 			
 			setShanghaiReword(int(msg.damage/msg.totalHp*100));
+			setUisite();
 		}
 		/**设置伤害奖励物品*/
 		private function setShanghaiReword(damage:int):void
