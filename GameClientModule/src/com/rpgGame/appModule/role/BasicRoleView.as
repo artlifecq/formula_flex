@@ -153,7 +153,6 @@ package com.rpgGame.appModule.role
 			_skin.txt_shengmin.text=_roleData.totalStat.hp+"/"+_roleData.totalStat.life;
 			_skin.txt_zhenqi.text=_roleData.curZhenqi+"/"+_roleData.maxZhenqi;			
 			_skin.txt_jinyan.text=_roleData.curExp+"/"+_roleData.maxExp;
-			
 			_skin.pro_shengmin.maximum=_roleData.totalStat.life;
 			_skin.pro_shengmin.value=_roleData.totalStat.hp;
 			
