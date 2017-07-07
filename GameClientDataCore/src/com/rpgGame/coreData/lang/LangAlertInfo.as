@@ -194,6 +194,10 @@ package com.rpgGame.coreData.lang
 		public static const quit_guild:String = "quit_guild";
 		 /**  玩家<font color='#4efd6f'>$</font>即将被您踢出帮派，确认将其踢出？ */
 		public static const expel_guild:String = "expel_guild";
+		 /**  是否离开天降礼金活动！ */
+		public static const LIJIN_EXIT_SURE:String = "LIJIN_EXIT_SURE";
+		 /**  是否离开秦陵秘宝活动！ */
+		public static const MIBAO_EXIT_SURE:String = "MIBAO_EXIT_SURE";
 
 	}
 }
