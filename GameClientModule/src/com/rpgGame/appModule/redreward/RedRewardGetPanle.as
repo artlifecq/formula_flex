@@ -110,6 +110,12 @@ package com.rpgGame.appModule.redreward
 				_skin.grpYiJian.visible = false;
 				_skin.lbVip.visible =!redmgr.isMaxVipLevel;
 				_skin.faBg.height = 70;
+				if(redmgr.rechaged)
+				{
+					_skin.lbVip.text = "提升vip";
+				}else{
+					_skin.lbVip.text = "充点小钱玩玩";
+				}
 			}
 			
 		}

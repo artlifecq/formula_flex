@@ -311,10 +311,12 @@ package org.mokylin.skin.app.hongbao
 			lbVip = temp;
 			temp.name = "lbVip";
 			temp.text = "提升VIP";
+			temp.textAlign = "center";
 			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.underline = true;
-			temp.x = 103;
+			temp.width = 141;
+			temp.x = 55;
 			temp.y = 384;
 			return temp;
 		}

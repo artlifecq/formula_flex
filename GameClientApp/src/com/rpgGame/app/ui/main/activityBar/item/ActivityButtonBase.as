@@ -107,7 +107,7 @@
 				return ;
             if (!_effect3D)
             {
-                _effect3D = playInter3DAt(ClientConfig.getEffect(_info.effect_name), 42, 40, 0);
+                _effect3D = playInter3DAt(ClientConfig.getEffect(_info.effect_name), 42, 45, 0);
             }
             else
             {
