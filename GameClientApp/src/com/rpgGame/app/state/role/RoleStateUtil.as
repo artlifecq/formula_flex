@@ -252,7 +252,6 @@ package com.rpgGame.app.state.role
 			ref.onSync(onWalkSync);
 //			walkRole.stateMachine.transition(RoleStateType.CONTROL_WALK_MOVE, ref);
 			walkRole.stateMachine.transition(RoleStateType.CONTROL_WALK_MOVE, ref);
-			walkRole.stateMachine.transition(RoleStateType.CONTROL_WALK_MOVE, ref);
 			if (role.isMainChar || role.isMainCamouflage)
 			{
 				if (walkRole.stateMachine.isWalkMoving)
