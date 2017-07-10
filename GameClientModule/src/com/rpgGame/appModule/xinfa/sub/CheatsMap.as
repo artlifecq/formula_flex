@@ -5,6 +5,7 @@ package  com.rpgGame.appModule.xinfa.sub
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.view.icon.BaseIcon;
+	import com.rpgGame.app.view.icon.BgIcon;
 	import com.rpgGame.appModule.jingmai.sub.MerdianPoint;
 	import com.rpgGame.appModule.jingmai.sub.MeridianMapLine;
 	import com.rpgGame.core.events.CheatsEvent;
@@ -46,7 +47,7 @@ package  com.rpgGame.appModule.xinfa.sub
 		private var nameDic:Dictionary=new Dictionary();
 		private var linesContianer:Sprite;
 		private var firstLine:MeridianMapLine;
-		private var imgGrid:UIAsset;
+		private var imgIcon:BgIcon;
 		private var _btn:Radio;
 		private var _grayFilter:FragmentFilter=null;
 		public function CheatsMap(skin:StateSkin,data:CheatsVo,btn:Radio)
@@ -54,7 +55,10 @@ package  com.rpgGame.appModule.xinfa.sub
 			super(skin);
 			linesContianer=new Sprite();
 			linesContianer.touchable=false;
-			imgGrid=_stateSkin["ico_xinfa"];
+			imgIcon=new BgIcon(IcoSizeEnum.ICON_48);
+			_stateSkin["ico_xinfa"].width=_stateSkin["ico_xinfa"].height=72;
+			imgIcon.bindBg(_stateSkin["ico_xinfa"]);
+			skin.container.addChild(imgIcon);
 			this._stateSkin["grp_icon"].addChildAt(linesContianer,0);
 			this._cheatsVo=data;
 			this._btn=btn;
@@ -85,7 +89,7 @@ package  com.rpgGame.appModule.xinfa.sub
 				pointHash.put(tmpC.chetasNodeId,mp);
 			}
 			tmpPoint=_stateSkin["ico_1"];
-			var firstStartPt:Point=imgGrid.localToGlobal(new Point(imgGrid.width/2,imgGrid.height/2));
+			var firstStartPt:Point=imgIcon.localToGlobal(new Point(imgIcon.width/2,imgIcon.height/2));
 			firstStartPt=_stateSkin["grp_icon"].globalToLocal(firstStartPt);
 			firstLine=new MeridianMapLine("ui/app/beibao/jingmai/line/shang.png","ui/app/beibao/tu/xiaoguoxian/dixian2.png",[firstStartPt.clone(),new Point(tmpPoint.x+tmpPoint.width/2,tmpPoint.y+tmpPoint.height/2)]);
 			linesContianer.addChild(firstLine);
@@ -131,9 +135,9 @@ package  com.rpgGame.appModule.xinfa.sub
 				(pointHash.getValue(tmpC.chetasNodeId) as CheatsNodePoint).setLineArr(lines);
 				(pointHash.getValue(tmpC.chetasNodeId) as CheatsNodePoint).setData(tmpC);
 			}
-			imgGrid.userData=this;
+			imgIcon.userData=this;
 			_btn.userData=this;
-			TipTargetManager.show( imgGrid, TargetTipsMaker.makeTips( TipType.CHEATS_TIP, this));
+			TipTargetManager.show( imgIcon, TargetTipsMaker.makeTips( TipType.CHEATS_TIP, this));
 			TipTargetManager.show( _btn, TargetTipsMaker.makeTips( TipType.CHEATS_TIP, this));
 			//===================
 			//this.touchGroup=true;
@@ -146,13 +150,9 @@ package  com.rpgGame.appModule.xinfa.sub
 //				_btn.label=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,"未激活");
 //			}
 			//_btn.label="xxxxxxxxxxxxxxsssssssss";
-			MCUtil.BringToTop(imgGrid);
+			MCUtil.BringToTop(imgIcon);
 			//设置icon
-			var _icon:BaseIcon=new BaseIcon(IcoSizeEnum.ICON_48);
-			_icon.x=7;
-			_icon.y=5;
-			imgGrid.addChild(_icon);
-			_icon.setIconResName(ClientConfig.getCheatsIcon(data.cheatsConfig.q_icon,IcoSizeEnum.ICON_48));
+			imgIcon.setIconResName(ClientConfig.getCheatsIcon(data.cheatsConfig.q_icon,IcoSizeEnum.ICON_48));
 			updateFirstLine(false);
 			updateBtnState();
 		}
@@ -192,7 +192,7 @@ package  com.rpgGame.appModule.xinfa.sub
 		{
 			var eff:Inter3DContainer=new Inter3DContainer();
 			this.addChild(eff);
-			eff.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_XINFA),imgGrid.x+this.imgGrid.width/2,imgGrid.y+this.imgGrid.height/2,1,function():void
+			eff.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_XINFA),imgIcon.x+this.imgIcon.width/2,imgIcon.y+this.imgIcon.height/2,1,function():void
 			{
 				eff.dispose();
 				MCUtil.removeSelf(eff);

@@ -196,6 +196,8 @@ package com.rpgGame.app.view.icon
 			this.x=_bgImage.x;
 			this.y=_bgImage.y;
 			_bgImage.x=_bgImage.y=0;
+			this.width=_bgImage.width;
+			this.height=_bgImage.height;
 			sortLayer();
 			calIconPos();
 		}
@@ -346,6 +348,8 @@ package com.rpgGame.app.view.icon
 		 */
 		private function onBgImgComplete(uiasset:UIAsset):void
 		{
+			this.width=_bgImage.width;
+			this.height=_bgImage.height;
 			calIconPos();
 		}
 		

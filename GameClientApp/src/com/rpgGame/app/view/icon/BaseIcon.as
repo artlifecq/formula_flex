@@ -220,22 +220,17 @@ package com.rpgGame.app.view.icon
 					_bindImage = new UIAsset();
 					addChild(_bindImage);
 				}
+				_bindImage.onImageLoaded=onBindLoad;
 				switch(_iconSize)
 				{
 					case IcoSizeEnum.ICON_42:
 						_bindImage.styleName=AssetUrl.EQUIP_BIND_42;
-						_bindImage.x = 6;
-						_bindImage.y = 27;
 						break;
 					case IcoSizeEnum.ICON_64:
 						_bindImage.styleName=AssetUrl.EQUIP_BIND_64;
-						_bindImage.x = 14;
-						_bindImage.y = 47;
 						break;
 					case IcoSizeEnum.ICON_48:
 						_bindImage.styleName=AssetUrl.EQUIP_BIND_42;
-						_bindImage.x = 12;
-						_bindImage.y = 33;
 						break;
 				}
 //				this.setChildIndex(_bindImage,numChildren);
@@ -245,6 +240,12 @@ package com.rpgGame.app.view.icon
 					_bindImage.parent.removeChild(_bindImage);
 				_bindImage = null;
 			}
+		}
+		
+		private function onBindLoad(res:UIAsset):void
+		{
+			_bindImage.x = 2;
+			_bindImage.y = _iconSize-_bindImage.height;
 		}
 		
 		public function setJobState(state:String):void

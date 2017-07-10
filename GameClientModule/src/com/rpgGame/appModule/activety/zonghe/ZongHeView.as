@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.activety.zonghe
 {
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.richText.RichTextCustomLinkType;
 	import com.rpgGame.app.richText.RichTextCustomUtil;
@@ -142,7 +143,17 @@ package com.rpgGame.appModule.activety.zonghe
 					SpecialActivitySender.reqJoinAct(selectedInfo.actCfg.q_activity_id);
 				}
 			}else{//活动不在进行中
-//				NoticeManager.showNotifyById();
+				switch(selectedInfo.info.joinState){
+					case ActivityJoinStateEnum.OVER:
+						NoticeManager.showNotifyById(91004);
+						break;
+					case ActivityJoinStateEnum.UN_OPEN:
+						NoticeManager.showNotifyById(91005);
+						break;
+					case ActivityJoinStateEnum.UN_TODAY:
+						NoticeManager.showNotifyById(91006);
+						break;
+				}
 			}
 		}
 		

@@ -40,7 +40,7 @@
 		private var _TimeFun:Function;
         private var _runing:Boolean;
         private var _effect3D:InterObject3D;
-		private var _openState:Boolean=false;
+		private var _openState:Boolean=true;
 
         public function ActivityButtonBase(skin)
         {
