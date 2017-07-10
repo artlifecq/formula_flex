@@ -90,6 +90,9 @@ package com.rpgGame.coreData.type
 		
 		/**结婚戒子模型ID*/
 		public static const HUNYIN_JIEZI : int = rEnum.next;
+		/**点名**/
+		public static const BOSS_SELECT : int = rEnum.next;
+		
 //	/**角色光环特效ID*/
 //		public static const MAGIC_RING:int = rEnum.next;
 //		/**怪物光环*/

@@ -4,6 +4,8 @@ package com.game.engine3D.vo.map
 	import flash.geom.Vector3D;
 	import flash.utils.ByteArray;
 	
+	import away3d.utils.GCObject;
+	
 	/**
 	 *
 	 * 客户端地图区域数据
@@ -11,7 +13,7 @@ package com.game.engine3D.vo.map
 	 * 创建时间：2015-9-9 下午2:03:17
 	 *
 	 */
-	public class ClientMapAreaData
+	public class ClientMapAreaData extends GCObject
 	{
 		private var _version : int = 0;
 		

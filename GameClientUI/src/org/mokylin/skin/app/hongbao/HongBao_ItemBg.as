@@ -1,4 +1,4 @@
-package org.mokylin.skin.app.banghui
+package org.mokylin.skin.app.hongbao
 {
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
@@ -8,7 +8,7 @@ package org.mokylin.skin.app.banghui
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class ItemBg extends feathers.controls.StateSkin
+	public class HongBao_ItemBg extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -21,12 +21,14 @@ package org.mokylin.skin.app.banghui
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function ItemBg()
+		public function HongBao_ItemBg()
 		{
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [bg2_i(),bg1_i()];
+			this.height = 31;
+			this.width = 263;
+			this.elementsContent = [bg1_i(),bg2_i()];
 			
 			states = {
 			};
@@ -42,11 +44,10 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg1 = temp;
 			temp.name = "bg1";
-			temp.bottom = 0;
-			temp.left = 0;
-			temp.right = 0;
-			temp.styleName = "ui/app/banghui/list1.png";
-			temp.top = 0;
+			temp.styleName = "ui/app/hongbao/huitiao.png";
+			temp.width = 263;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -55,11 +56,10 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg2 = temp;
 			temp.name = "bg2";
-			temp.bottom = 0;
-			temp.left = 0;
-			temp.right = 0;
-			temp.styleName = "ui/app/banghui/list.png";
-			temp.top = 0;
+			temp.styleName = "ui/app/hongbao/chengtiao.png";
+			temp.visible = false;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 

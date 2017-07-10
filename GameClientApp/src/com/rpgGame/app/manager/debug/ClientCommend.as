@@ -10,6 +10,7 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.manager.FangChenMiManager;
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.chat.ChatManager;
@@ -28,9 +29,11 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
+	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
 	import com.rpgGame.netData.backpack.bean.TempItemInfo;
+	import com.rpgGame.netData.map.bean.PetInfo;
 	import com.rpgGame.netData.player.message.SCNonagePromptMessage;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
 	import com.rpgGame.netData.vip.bean.VipCardInfo;
@@ -40,6 +43,7 @@ package   com.rpgGame.app.manager.debug
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
+	import org.game.netCore.data.long;
 	import org.game.netCore.net.MessageMgr;
 	
 	
@@ -207,6 +211,24 @@ package   com.rpgGame.app.manager.debug
 				var state:int = arg[1];
 				ActivetyDataManager.setActState(id,state,30);
 			});
+			commandList.put( ".showom", function (...arg):void
+			{
+				FunctionOpenManager.needShowOpenMode = arg[0]==1;
+			});
+//			commandList.put( ".pet", function (...arg):void
+//			{
+//				var mod:int = arg[0];
+//				
+//				var petInfo:PetInfo=new PetInfo();
+//				petInfo.petId=new long(9999);
+//				petInfo.ownerId=(MainRoleManager.actor.data as HeroData).serverID;
+//				petInfo.petModelId=mod;
+//				petInfo.x=MainRoleManager.actor.pos.x;
+//				petInfo.y=-MainRoleManager.actor.pos.y;
+//				var data:GirlPetData=new GirlPetData();
+//				data.setServerData(petInfo);
+//				SceneRoleManager.getInstance().createGirlPet(data);
+//			});
 		}
 		
 		

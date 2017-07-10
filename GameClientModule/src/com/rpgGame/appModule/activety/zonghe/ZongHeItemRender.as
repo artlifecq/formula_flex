@@ -1,6 +1,8 @@
 package com.rpgGame.appModule.activety.zonghe
 {
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
+	import com.rpgGame.coreData.type.activity.ActivityJoinStateEnum;
 	
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	import feathers.utils.filter.GrayFilter;
@@ -65,18 +67,72 @@ package com.rpgGame.appModule.activety.zonghe
 				_skin.uiName.styleName="ui/app/activety/zonghe/active_name/"+info.actCfg.q_res_id+".png";
 				_skin.uiBg.styleName="ui/big_bg/activety/item/"+info.actCfg.q_res_id+".png";
 				_skin.lbMsg.htmlText=info.actCfg.q_desc;
-				if(info.info.joinState==0){
-					_skin.uiJinxing.visible=false;
-					GrayFilter.gray(this);
+				
+				if(info.info.joinState==ActivityJoinStateEnum.JOINING){
+					_skin.mcEffect.visible=true;
+					_skin.mcEffect.autoPlay=true;
 				}else{
-					GrayFilter.unGray(this);
-					if(info.info.joinState==1){
-						_skin.uiJinxing.visible=false;
-					}else{
-						_skin.uiJinxing.visible=true;
-					}
+					_skin.mcEffect.visible=false;
+					_skin.mcEffect.autoPlay=false;
+				}
+				
+//				info.actCfg.q_lt_res="kuafu";
+				
+				if(info.actCfg.q_lt_res){
+					_skin.lt_icon.visible=true;
+					_skin.lt_icon.styleName="ui/common/"+info.actCfg.q_lt_res+".png";
+				}else{
+					_skin.lt_icon.visible=false;
+				}
+				
+				var lv:int=MainRoleManager.actorInfo.totalStat.level;
+				if(lv<info.actCfg.q_activity_limit_level){
+					_skin.lbLevel.text="(等级需求:"+info.actCfg.q_activity_limit_level+")";
+				}else{
+					_skin.lbLevel.text="";
+				}
+				
+//				info.info.joinState=ActivityJoinStateEnum.UN_TODAY;
+				
+				switch(info.info.joinState){
+					case ActivityJoinStateEnum.UN_TODAY:
+						_skin.state_icon.styleName="ui/app/activety/feidangri.png";
+						grayItem();
+						break;
+					case ActivityJoinStateEnum.UN_OPEN:
+						_skin.state_icon.styleName="ui/app/activety/weikaiqi.png";
+						ungrayItem();
+						break;
+					case ActivityJoinStateEnum.JOINING:
+						_skin.state_icon.styleName="ui/app/activety/jinxingzhong2.png";
+						ungrayItem();
+						break;
+					case ActivityJoinStateEnum.OVER:
+						_skin.state_icon.styleName="ui/app/activety/yijieshu.png";
+						grayItem();
+						break;
+					default:
+						break;
 				}
 			}
+		}
+		
+		private function grayItem():void
+		{
+			GrayFilter.gray(_skin.uiName);
+			GrayFilter.gray(_skin.uiBg);
+			GrayFilter.gray(_skin.state_icon);
+			GrayFilter.gray(_skin.lbLevel);
+			GrayFilter.gray(_skin.lbMsg);
+		}
+		
+		private function ungrayItem():void
+		{
+			GrayFilter.unGray(_skin.uiName);
+			GrayFilter.unGray(_skin.uiBg);
+			GrayFilter.unGray(_skin.state_icon);
+			GrayFilter.unGray(_skin.lbMsg);
+			GrayFilter.unGray(_skin.lbLevel);
 		}
 	}
 }

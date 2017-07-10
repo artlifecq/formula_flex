@@ -36,7 +36,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			super();
 			
 			this.currentState = "normal";
-			this.height = 151;
+			this.height = 173;
 			this.width = 298;
 			this.elementsContent = [bg_i(),lbXiaJie_i(),line1_i(),icon1_i(),uiLiBao_i(),uiHead_i()];
 			
@@ -54,7 +54,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 151;
+			temp.height = 173;
 			temp.styleName = "ui/common/tips/tips_2.png";
 			temp.width = 298;
 			temp.x = 0;
@@ -69,7 +69,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.name = "icon1";
 			temp.styleName = "ui/common/grid/normal/42.png";
 			temp.x = 12;
-			temp.y = 90;
+			temp.y = 110;
 			return temp;
 		}
 
@@ -81,8 +81,9 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.text = "【奖励】";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.width = 103;
 			temp.x = 59;
-			temp.y = 59;
+			temp.y = 69;
 			return temp;
 		}
 
@@ -91,10 +92,9 @@ package org.mokylin.skin.app.activety.shijieboss
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			line1 = temp;
 			temp.name = "line1";
-			temp.styleName = "ui/common/tips/tips_1fengexian.png";
-			temp.width = 267;
-			temp.x = 15;
-			temp.y = 41;
+			temp.styleName = "ui/common/tips/xian.png";
+			temp.x = 7;
+			temp.y = 42;
 			return temp;
 		}
 
@@ -115,8 +115,8 @@ package org.mokylin.skin.app.activety.shijieboss
 			uiLiBao = temp;
 			temp.name = "uiLiBao";
 			temp.styleName = "ui/app/activety/shijieboss/icon/da.png";
-			temp.x = 15;
-			temp.y = 44;
+			temp.x = 12;
+			temp.y = 54;
 			return temp;
 		}
 

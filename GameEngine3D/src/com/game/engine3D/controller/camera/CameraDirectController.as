@@ -1,23 +1,24 @@
 package com.game.engine3D.controller.camera
 {
 	import com.game.engine3D.manager.Stage3DLayerManager;
-
+	
 	import flash.display.InteractiveObject;
 	import flash.display.Stage;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
-
+	
 	import away3d.entities.Entity;
 	import away3d.events.Event;
+	import away3d.utils.GCObject;
 
 	/**
 	 * 镜头直接控制
 	 @author Guodong.Zhang
 	 * 创建时间：2015-8-18 下午2:20:29
 	 */
-	public class CameraDirectController
+	public class CameraDirectController extends GCObject
 	{
 		private var _listenerTarget : InteractiveObject;
 		private var _pan : Point = new Point();

@@ -28,50 +28,7 @@ package com.rpgGame.app.view.icon
 			_realIndex = realIndex;
 			this.touchGroup = false;
 		}
-		override protected function calIconPos():void
-		{
-			switch(_iconSize){
-				case IcoSizeEnum.ICON_36:
-				case IcoSizeEnum.ICON_48:
-					_iconPositionX=_iconPositionY=6;
-					break;
-				case IcoSizeEnum.ICON_64:
-					_iconPositionX=_iconPositionY=4;
-					break;
-				case IcoSizeEnum.ICON_42:
-					_iconPositionX=_iconPositionY=1;
-					break;
-			}
-		}
-		//因为这个格子不是通用规范
-		override public  function setBg(value:String, alpha:Number=1):void
-		{
-			super.setBg(value,alpha);
-			if (_bgImage) 
-			{
-				//装备
-				if (IcoSizeEnum.ICON_48==_iconSize) 
-				{
-					_bgImage.width=_bgImage.height=60;
-				}
-				else if(IcoSizeEnum.ICON_42==_iconSize)
-				{
-					_bgImage.width=_bgImage.height=44;
-				}
-			}
-		}
-		override public function setUrlBg(value:String, alpha:Number=1):void
-		{
-			super.setUrlBg(value,alpha);
-			if (IcoSizeEnum.ICON_48==_iconSize) 
-			{
-				_bgImage.width=_bgImage.height=60;
-			}
-			else if(IcoSizeEnum.ICON_42==_iconSize)
-			{
-				_bgImage.width=_bgImage.height=44;
-			}
-		}
+		
 		/**
 		 * 真实的下标(显示对象集合中),只读
 		 */		

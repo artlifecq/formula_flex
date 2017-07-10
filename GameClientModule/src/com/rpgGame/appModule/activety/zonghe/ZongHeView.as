@@ -16,6 +16,7 @@ package com.rpgGame.appModule.activety.zonghe
 	import com.rpgGame.coreData.clientConfig.Q_scene_monster_area;
 	import com.rpgGame.coreData.enum.ActivityEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
+	import com.rpgGame.coreData.type.activity.ActivityJoinStateEnum;
 	
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
@@ -76,23 +77,34 @@ package com.rpgGame.appModule.activety.zonghe
 			_defaultFormat.leading = 4;
 			_richText.defaultTextFormat = _defaultFormat;
 			this.addChild(_richText);
-			_richText.x=630;
-			_richText.y=415;
+			_richText.x=640;
+			_richText.y=425;
 		}
 		
 		override public function show(data:Object=null):void
 		{
 			_skin.ListItem.addEventListener(Event.CHANGE,onChange);
 			_skin.joinBtn.addEventListener(Event.TRIGGERED,onJoin);
-			
+			var i:int;
+			var len:int=_activeData.length;
+			var info:ActivetyInfo;
 			if(!data){
-				_skin.ListItem.selectedIndex=0;
-				_skin.ListItem.dataProvider.updateItemAt(0);
-				_skin.ListItem.scrollToDisplayIndex(0);
+				for(i=0;i<len;i++){
+					info=_activeData.data[i] as ActivetyInfo;
+					if(info.info&&info.info.joinState==ActivityJoinStateEnum.JOINING){//跳到进行中
+						_skin.ListItem.selectedIndex=i;
+						_skin.ListItem.scrollToDisplayIndex(i);
+						_skin.ListItem.dataProvider.updateItemAt(i);
+						break;
+					}
+				}
+				if(_skin.ListItem.selectedIndex==-1){
+					_skin.ListItem.selectedIndex=0;
+				}
 			}else{
 				var dataInfo:ActivetyInfo=data as ActivetyInfo;
-				for(var i:int=0;i<_activeData.length;i++){
-					var info:ActivetyInfo=_activeData.data[i] as ActivetyInfo;
+				for(i=0;i<len;i++){
+					info=_activeData.data[i] as ActivetyInfo;
 					if(info.actCfg.q_activity_id==dataInfo.actCfg.q_activity_id){
 						_skin.ListItem.selectedIndex=i;
 						_skin.ListItem.scrollToDisplayIndex(i);

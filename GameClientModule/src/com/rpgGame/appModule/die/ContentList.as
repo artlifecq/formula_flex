@@ -5,6 +5,7 @@ package com.rpgGame.appModule.die
 	import away3d.events.Event;
 	
 	import feathers.controls.Button;
+	import feathers.controls.List;
 	import feathers.controls.Scroller;
 	import feathers.data.ListCollection;
 	import feathers.layout.HorizontalLayout;
@@ -16,6 +17,10 @@ package com.rpgGame.appModule.die
 	public class ContentList extends Sprite
 	{
 		private var _skin:ContentListSkin;
+		public function get list():List
+		{
+			return _skin.ContList;
+		}
 		private var _w:Number;
 		private var _h:Number;
 		public function ContentList(w:Number,h:Number):void
@@ -44,6 +49,8 @@ package com.rpgGame.appModule.die
 			_skin.btn_next.addEventListener(Event.TRIGGERED,triggeredHandler);
 			refeashList(0);
 		}
+		
+		
 		private function triggeredHandler(e:Event):void
 		{
 			var target:Button = e.target as Button;

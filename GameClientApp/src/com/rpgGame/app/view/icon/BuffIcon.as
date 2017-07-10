@@ -1,12 +1,13 @@
 package com.rpgGame.app.view.icon
 {
-	import com.game.engine3D.core.poolObject.IInstancePoolClass;
-	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.game.engine3D.display.EffectObject3D;
 	import com.game.engine3D.display.Inter3DContainer;
+	import com.rpgGame.app.manager.LostSkillManager;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.LostSkillData;
+	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
 	import com.rpgGame.coreData.clientConfig.Q_tipsinfo;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.buff.BuffData;
@@ -96,7 +97,14 @@ package com.rpgGame.app.view.icon
 			{
 				var info:Q_tipsinfo=new Q_tipsinfo();
 				info.q_describe_tittle=_buffData.buffData.q_buff_name;
-				info.q_describe=_buffData.buffData.q_description;
+				var lostSkiLL:Q_lostskill_open = LostSkillData.getModeInfoById(_buffData.buffData.q_buff_id);
+				if(lostSkiLL==null)
+				{
+					info.q_describe=_buffData.buffData.q_description;
+				}else{
+					info.q_describe=lostSkiLL.q_desc.replace("$",LostSkillManager.instance().getValueByType(lostSkiLL.q_type,_buffData.buffInfo.percent))
+				}
+				
 				TipTargetManager.remove(this);
 				TipTargetManager.show(this, TargetTipsMaker.makeTips( TipType.NORMAL_TIP,info));
 			}

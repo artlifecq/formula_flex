@@ -4,9 +4,11 @@ package com.rpgGame.app.state.ai
 	import com.rpgGame.app.fight.spell.CastSpellHelper;
 	import com.rpgGame.app.manager.SkillCDManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
+	import com.rpgGame.app.manager.fight.FightManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.core.fight.spell.CastSpellInfo;
 	import com.rpgGame.core.state.ai.AIState;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
@@ -122,6 +124,10 @@ package com.rpgGame.app.state.ai
 		{
 			if (nextState.type == AIStateType.AI_NONE)
 				return true;
+			if(!TrusteeshipManager.getInstance().getHasRole()&&SceneRoleSelectManager.selectedRole ==null)
+				return true;
+			if (TrusteeshipManager.getInstance().isAutoFightRunning&&FightManager.getFightRoleState(SceneRoleSelectManager.selectedRole as SceneRole) == FightManager.FIGHT_ROLE_STATE_CAN_NOT_FIGHT )
+				return true;
 			return false;
 		}
 
@@ -132,8 +138,9 @@ package com.rpgGame.app.state.ai
 			{
 				transition(AIStateType.AI_NONE);
 				return false;
-					
 			}
+			if (TrusteeshipManager.getInstance().isAutoFightRunning&&FightManager.getFightRoleState(SceneRoleSelectManager.selectedRole as SceneRole) == FightManager.FIGHT_ROLE_STATE_CAN_NOT_FIGHT )
+				return false;
 			
 			if (MainRoleManager.actor.stateMachine.isWalkMoving)
 			{
@@ -165,6 +172,10 @@ package com.rpgGame.app.state.ai
 				return false;
 			}
 			if (MainRoleManager.actor.stateMachine.isLockCaseSpell)
+			{
+				return false;
+			}
+			if (MainRoleManager.actor.stateMachine.isTripleLockCaseSpell)
 			{
 				return false;
 			}

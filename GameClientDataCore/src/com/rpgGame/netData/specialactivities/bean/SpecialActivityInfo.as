@@ -20,7 +20,7 @@ package com.rpgGame.netData.specialactivities.bean{
 		//活动类型：0综合活动，1世界BOSS
 		private var _activityType: int;
 		
-		//参与状态0:未开启 1:开启中  2:进行中
+		//参与状态0:非当日 1:未开启  2:进行中3:Boss已击杀 4:已结束
 		private var _joinState: int;
 		
 		//通知时间(-1:离开启时间超过半小时,0:还有半小时开启,其他表示还有多少时间关闭活动)
@@ -34,7 +34,7 @@ package com.rpgGame.netData.specialactivities.bean{
 			writeInt(_activityId);
 			//活动类型：0综合活动，1世界BOSS
 			writeInt(_activityType);
-			//参与状态0:未开启 1:开启中  2:进行中
+			//参与状态0:非当日 1:未开启  2:进行中3:Boss已击杀 4:已结束
 			writeInt(_joinState);
 			//通知时间(-1:离开启时间超过半小时,0:还有半小时开启,其他表示还有多少时间关闭活动)
 			writeInt(_notifyTime);
@@ -49,7 +49,7 @@ package com.rpgGame.netData.specialactivities.bean{
 			_activityId = readInt();
 			//活动类型：0综合活动，1世界BOSS
 			_activityType = readInt();
-			//参与状态0:未开启 1:开启中  2:进行中
+			//参与状态0:非当日 1:未开启  2:进行中3:Boss已击杀 4:已结束
 			_joinState = readInt();
 			//通知时间(-1:离开启时间超过半小时,0:还有半小时开启,其他表示还有多少时间关闭活动)
 			_notifyTime = readInt();
@@ -87,7 +87,7 @@ package com.rpgGame.netData.specialactivities.bean{
 		}
 		
 		/**
-		 * get 参与状态0:未开启 1:开启中  2:进行中
+		 * get 参与状态0:非当日 1:未开启  2:进行中3:Boss已击杀 4:已结束
 		 * @return 
 		 */
 		public function get joinState(): int{
@@ -95,7 +95,7 @@ package com.rpgGame.netData.specialactivities.bean{
 		}
 		
 		/**
-		 * set 参与状态0:未开启 1:开启中  2:进行中
+		 * set 参与状态0:非当日 1:未开启  2:进行中3:Boss已击杀 4:已结束
 		 */
 		public function set joinState(value: int): void{
 			this._joinState = value;

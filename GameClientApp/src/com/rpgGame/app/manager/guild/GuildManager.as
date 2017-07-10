@@ -211,9 +211,16 @@ package com.rpgGame.app.manager.guild
 			return str;
 		}
 		public function get haveDailyGift():Boolean{
+			if (!haveGuild) 
+			{
+				return false;
+			}
 			return _haveDailyGift == 1;
 		}
-		
+		public function hasDailyGift():Boolean
+		{
+			return haveDailyGift;
+		}
 		private var _currentPageInfo:ResGuildListInfoMessage
 
 		public function get currentPageInfo():ResGuildListInfoMessage
@@ -632,7 +639,33 @@ package com.rpgGame.app.manager.guild
 			_guildLevelUpOpaque = opaque;
 			GuildSender.guildLevelup(_guildLevelUpOpaque);
 		}
-		
+		public function hasGuildLevelUp():Boolean
+		{
+			if (!haveGuild) 
+			{
+				return false;
+			}
+			if (!canUpgrad) 
+			{
+				return false;
+			}
+			if (!_guildData) 
+			{
+				return false;
+			}
+			if (_guildData.active<guildLevelInfo.q_active) 
+			{
+				return false;
+			}
+			var nextGuildInfo:Q_guild= GuildCfgData.getLevelInfo(_guildData.level+1);
+			if (!nextGuildInfo) 
+			{
+				return false;
+			}
+			if(_guildLevelUpOpaque>0)
+				return false;
+			return true;
+		}
 		private function updataGuildLevelupMsg(opaque:int,result:int):Boolean
 		{
 			if(_guildLevelUpOpaque<=0)

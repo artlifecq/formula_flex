@@ -11,6 +11,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.task.TaskInfoDecoder;
 	import com.rpgGame.coreData.cfg.AreaCfgData;
 	import com.rpgGame.coreData.cfg.ClientTrigger;
+	import com.rpgGame.coreData.cfg.TriggerArea;
 	import com.rpgGame.coreData.cfg.TriggerCfgData;
 	import com.rpgGame.coreData.enum.AreaMapTypeEnum;
 	import com.rpgGame.coreData.enum.EnumAreaMapType;
@@ -150,41 +151,35 @@ package com.rpgGame.app.manager
 			//
 			var otherAreaMap : AreaMap = SceneManager.getScene().getAreaMap(EnumAreaMapType.OTHER_AREA);
 			var mapID : int = SceneSwitchManager.currentMapId;
+			var areaDataList : Vector.<ClientMapAreaData> = AreaCfgData.getTriggerAreas(mapID);
+			//var triggerList : Vector.<ClientTrigger> = ClientTriggerCfgData.getSceneTriggerList(mapID);
+			for each (var areaData : ClientMapAreaData in areaDataList)
+			{
+				var areaMapData : AreaMapData = new AreaMapData(AreaCfgData.getAreaPointsByID(areaData.id), AreaMapTypeEnum.TRIGGER_AREA_PROPERTY, areaData.id, new TriggerArea(areaData.id));
+				otherAreaMap.addFlag(areaMapData);
+				
+			}
+		}
+		/*public static function updateTriggerAreaMap() : void
+		{
+			//
+			var otherAreaMap : AreaMap = SceneManager.getScene().getAreaMap(EnumAreaMapType.OTHER_AREA);
+			var mapID : int = SceneSwitchManager.currentMapId;
 			var triggerList : Vector.<ClientTrigger> = TriggerCfgData.getTriggerAreas(mapID);
 			//var triggerList : Vector.<ClientTrigger> = ClientTriggerCfgData.getSceneTriggerList(mapID);
 			for each (var trigger : ClientTrigger in triggerList)
 			{
 				var areaMapData : AreaMapData = new AreaMapData(AreaCfgData.getAreaPointsByID(trigger.areaId), AreaMapTypeEnum.TRIGGER_AREA_PROPERTY, trigger.id, trigger);
 				otherAreaMap.addFlag(areaMapData);
-				
-				/*if (trigger.targetType == EnumClientTriggerType.AREA_TRIGGER)
-				{
-					var area : ClientArea = ClientAreaCfgData.getData(trigger.areaId);
-					if (area)
-					{
-						var polygon : Vector.<Point> = new Vector.<Point>();
-						var poses : Array = area.pos.split(";");
-						var posesLen : int = poses.length;
-						for (var i : int = 0; i < posesLen; i++)
-						{
-							var xy : Array = String(poses[i]).split("=");
-							var x : int = int(xy[0]);
-							var y : int = int(xy[1]);
-							polygon.push(new Point(x, y));
-						}
-						var areaMapData : AreaMapData = new AreaMapData(polygon, AreaMapTypeEnum.TRIGGER_AREA_PROPERTY, trigger.id, trigger);
-						otherAreaMap.addFlag(areaMapData);
-					}
-				}*/
 			}
-		}
+		}*/
 		
 		/**
 		 *  添加动态阻挡区域
 		 *
 		 */
 		public static function addDynamicObstacleArea(aid:int) : void
-		{//L.l("添加阻挡区域："+aid);//return;
+		{
 			var obstacleArea : ClientMapAreaData = AreaCfgData.getDynamicObstacleAreas(aid);
 			if(!obstacleArea)return;
 			var mapPointSets : Vector.<MapPointSet> = new Vector.<MapPointSet>();
@@ -195,7 +190,7 @@ package com.rpgGame.app.manager
 		 *  删除动态阻挡区域
 		 */
 		public static function removeDynamicObstacleArea(aid:int) : void
-		{//L.l("删除阻挡区域："+aid);//return;
+		{
 			SceneManager.getScene().sceneMapLayer.removeObstaclePoints(["MapDataDynamicObstacleArea" + aid]);
 		}
 		

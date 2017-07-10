@@ -6,18 +6,19 @@ package com.game.engine3D.controller
 	import com.game.engine3D.enum.CameraModeEnum;
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.game.engine3D.vo.BaseObj3D;
-
+	
 	import flash.display.InteractiveObject;
-
+	
 	import away3d.cameras.Camera3D;
 	import away3d.containers.ObjectContainer3D;
+	import away3d.utils.GCObject;
 
 	/**
 	 * 镜头控制器
 	 @author Guodong.Zhang
 	 * 创建时间：2015-8-18 上午11:55:33
 	 */
-	public class CameraController
+	public class CameraController extends GCObject
 	{
 		private static var _target : ObjectContainer3D;
 		private static var _targetObj : BaseObj3D;

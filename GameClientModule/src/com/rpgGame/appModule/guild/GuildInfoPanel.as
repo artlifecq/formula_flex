@@ -6,6 +6,7 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.GuildEvent;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.coreData.clientConfig.Q_guild;
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.netData.guild.bean.GuildInfo;
@@ -33,6 +34,7 @@ package com.rpgGame.appModule.guild
 		private function initView():void
 		{
 			_skin.lbXuanYan.addEventListener(FeathersEventType.FOCUS_OUT,forceoutHandler);
+			
 		}
 		
 		private function forceoutHandler(evt:Event):void
@@ -91,6 +93,8 @@ package com.rpgGame.appModule.guild
 				}else{
 					GrayFilter.gray(_skin.btnHuangcheng);
 				}
+				
+				
 			}else{
 				this.visible = false;
 			}

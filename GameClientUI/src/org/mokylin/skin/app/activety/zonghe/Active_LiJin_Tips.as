@@ -28,8 +28,8 @@ package org.mokylin.skin.app.activety.zonghe
 			super();
 			
 			this.currentState = "normal";
-			this.height = 112;
-			this.width = 249;
+			this.height = 113;
+			this.width = 245;
 			this.elementsContent = [__Active_LiJin_Tips_UIAsset1_i(),__Active_LiJin_Tips_UIAsset2_i(),lbName_i(),lbTip_i()];
 			
 			states = {
@@ -44,9 +44,9 @@ package org.mokylin.skin.app.activety.zonghe
 		private function __Active_LiJin_Tips_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 112;
+			temp.height = 113;
 			temp.styleName = "ui/common/tips/tips_2.png";
-			temp.width = 248;
+			temp.width = 245;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -56,8 +56,8 @@ package org.mokylin.skin.app.activety.zonghe
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/activety/zonghe/tianjianglijin/daobaoxiaoguai.png";
-			temp.x = -45;
-			temp.y = -21;
+			temp.x = -55;
+			temp.y = -31;
 			return temp;
 		}
 
@@ -66,12 +66,12 @@ package org.mokylin.skin.app.activety.zonghe
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbName = temp;
 			temp.name = "lbName";
-			temp.text = "盗宝小怪";
+			temp.text = "【盗宝小怪】";
 			temp.color = 0xE8C958;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 151;
-			temp.x = 31;
-			temp.y = 7;
+			temp.x = 8;
+			temp.y = 11;
 			return temp;
 		}
 
@@ -85,8 +85,8 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.leading = 4;
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 20;
-			temp.y = 30;
+			temp.x = 12;
+			temp.y = 31;
 			return temp;
 		}
 

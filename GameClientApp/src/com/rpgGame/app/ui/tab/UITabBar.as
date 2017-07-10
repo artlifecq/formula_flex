@@ -4,6 +4,7 @@ package com.rpgGame.app.ui.tab
 	
 	import feathers.controls.TabBar;
 	import feathers.controls.ToggleButton;
+	import feathers.core.ToggleGroup;
 	import feathers.data.ListCollection;
 	
 	import org.client.mainCore.ds.HashMap;
@@ -24,8 +25,10 @@ package com.rpgGame.app.ui.tab
 		protected var _data:*;
 		protected var _allDatas:Vector.<UITabBarData>;//所有的tab数据
 		protected var _currentKey:String;
-		protected var _currentIndex:int;
+		protected var _currentIndex:int=-1;
 		protected var _needRefash:Boolean = true;
+		protected var _touchGroup:ToggleGroup;
+		protected var _gap:int = 0;
 		/**
 		 * 
 		 * @param tab 要绑定的tabbar
@@ -35,20 +38,38 @@ package com.rpgGame.app.ui.tab
 		public function UITabBar(tab:TabBar,datas:Vector.<UITabBarData>)
 		{
 			_tabBar=tab;
-			tab.touchable=true;
-			tab.touchGroup=false;
+			_allDatas=datas;
+			_gap = tab.gap;
+			init();
+		}
+		private function init():void
+		{
+			_tabBar.touchable=true;
+			_tabBar.touchGroup=false;
 			_container=_tabBar.parent;
 			_tabViewMap=new HashMap();
-			_allDatas=datas;
-			if(!tab.dataProvider){
-				tab.dataProvider=new ListCollection();
-			}else{
-				tab.dataProvider.removeAll();
+			if(_tabBar.dataProvider != null){
+				_tabBar.dataProvider.removeAll();
 			}
-			_tabBar.tabInitializer = onTabInitializer;
+			_touchGroup = new ToggleGroup();
+			var length:int = _allDatas.length;
+			var button:ToggleButton;
+			var item:UITabBarData;
+			for(var i:int = 0;i<length;i++)
+			{
+				item = _allDatas[i];
+				button = new ToggleButton();
+				button.toggleGroup = _touchGroup;
+				if(item.text){
+					button.label = item.text;
+				}
+				if(item.tabStyle){
+					button.styleClass=item.tabStyle;
+				}
+				item.button = button;
+			}
 		}
-		
-		private function onTabInitializer(tab:ToggleButton, item:UITabBarData ):void
+		/*private function onTabInitializer(tab:ToggleButton, item:UITabBarData ):void
 		{
 			if(item.text){
 				tab.label = item.text;
@@ -56,14 +77,14 @@ package com.rpgGame.app.ui.tab
 			if(item.tabStyle){
 				tab.styleClass=item.tabStyle;
 			}
-		}
+		}*/
 		
 		public function show(data:*=null, openTable:String="0"):void
 		{
 			if(openTable.length==0){//没给就给个默认的
 				openTable=_allDatas[0].tabKey;
 			}
-			_tabBar.addEventListener(Event.CHANGE,selectChangeHandler);
+			_touchGroup.addEventListener(Event.CHANGE,selectChangeHandler);
 			this._data=data;
 			switchTabKey(openTable);
 		}
@@ -75,21 +96,44 @@ package com.rpgGame.app.ui.tab
 		 */
 		protected function getTabDataIndexByTabKey(key:String):int
 		{
-			var num:int=_tabBar.dataProvider.length;
+			var num:int=_allDatas.length;
 			var i:int=0;
-			var item:UITabBarData;
 			for(i=0;i<num;i++){
-				item=_tabBar.dataProvider.getItemAt(i) as UITabBarData;
-				if(item.tabKey==key){//已经在数据组里面了
+				if(_allDatas[i].tabKey==key){//已经在数据组里面了
 					return i;
 				}
 			}
 			return -1;
 		}
 		
+		
+		public function getTabDataByTabKey(key:String):UITabBarData
+		{
+			var num:int=_allDatas.length;
+			var i:int=0;
+			for(i=0;i<num;i++)
+			{
+				if(_allDatas[i].tabKey==key)
+				{//已经在数据组里面了
+					return _allDatas[i];
+				}
+			}
+			return null;
+		}
+			
+		
 		protected function getTabkeyByIndex(index:int):String
 		{
-			return (_tabBar.dataProvider.getItemAt(index) as UITabBarData).tabKey
+			var num:int=_allDatas.length;
+			var i:int=0;
+			for(i=0;i<num;i++){
+				if(_allDatas[i].isShow){//已经在数据组里面了
+					index--;
+					if(index<0)
+						return _allDatas[i].tabKey;
+				}
+			}
+			return null;
 		}
 		
 		public function switchTabKey(key:String):void
@@ -107,7 +151,7 @@ package com.rpgGame.app.ui.tab
 			}
 			_currentKey = key;
 			_currentIndex = index;
-			_tabBar.selectedIndex=index;
+			_touchGroup.selectedIndex=index;
 			selectChangeHandler();
 		}
 		
@@ -152,19 +196,23 @@ package com.rpgGame.app.ui.tab
 			_needRefash = false;
 			var num:int=_allDatas.length;
 			var item:UITabBarData;
-			_tabBar.dataProvider.removeAll();
+			_tabBar.removeChildren();
+			var startX:Number = 0;
 			for(var i:int=0;i<num;i++){
 				item=_allDatas[i];
 				if(item.isShow)
 				{
-					_tabBar.dataProvider.push(item);
+					_tabBar.addChild(item.button);
+					item.button.validate();
+					item.button.x = startX;
+					startX += item.button.width+_gap;
 				}
 			}
 		}
 		private function selectChangeHandler():void
 		{
-			var index:int=_tabBar.selectedIndex;
-			var item:UITabBarData=_tabBar.selectedItem as UITabBarData;
+			var index:int=_touchGroup.selectedIndex;
+			var item:UITabBarData=_allDatas[index];
 			if(_currentView){
 				_currentView.removeFromParent();
 			}

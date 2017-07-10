@@ -44,6 +44,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_leader:int;
 		 /**  邀请权限 */
 		public var q_invite:int;
+		 /**  争霸报名 */
+		public var q_battlereport:int;
 
 	}
 }

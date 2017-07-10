@@ -5,6 +5,8 @@ package com.rpgGame.app.state.role.action
 	import com.game.engine3D.vo.BaseRole;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateMachine;
+	import com.rpgGame.app.state.role.control.CheckTripleAttackStateReference;
+	import com.rpgGame.app.state.role.control.TripleAttackSpellLockStateReference;
 	import com.rpgGame.core.state.role.action.ActionState;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RenderUnitID;
@@ -400,7 +402,17 @@ package com.rpgGame.app.state.role.action
 				if (_stateReference)
 					_stateReference.totalFrame();
 				stopAttack();
-				transition(RoleStateType.ACTION_PREWAR, null, false, false, [RoleStateType.CONTROL_WALK_MOVE]);
+				if((_machine as RoleStateMachine).isTripleLockCaseSpell&&(_machine.getReference(TripleAttackSpellLockStateReference) as TripleAttackSpellLockStateReference).isLockSkill(AttackStateReference(_ref).spellInfo.spellData.q_skillID))
+				{
+					var ref:CheckTripleAttackStateReference=_machine.getReference(CheckTripleAttackStateReference) as CheckTripleAttackStateReference;
+					ref.setParams(AttackStateReference(_ref).spellInfo.spellData.q_skillID);
+					transition(RoleStateType.CONTROL_TRIPLE_ATTACK_CHECK,ref);
+				}
+				else
+				{
+					transition(RoleStateType.ACTION_PREWAR, null, false, false, [RoleStateType.CONTROL_WALK_MOVE]);
+				}
+				
 			}
 		}
 
@@ -417,7 +429,15 @@ package com.rpgGame.app.state.role.action
 				}
 				if (_stateReference)
 					_stateReference.breakFrame();
+				
+//				if((_machine as RoleStateMachine).isTripleLockCaseSpell&&(_machine.getReference(TripleAttackSpellLockStateReference) as TripleAttackSpellLockStateReference).isLockSkill(AttackStateReference(_ref).spellInfo.spellData.q_skillID))
+//				{
+//					var ref:CheckTripleAttackStateReference=_machine.getReference(CheckTripleAttackStateReference) as CheckTripleAttackStateReference;
+//					ref.setParams(AttackStateReference(_ref).spellInfo.spellData.q_skillID);
+//					transition(RoleStateType.CONTROL_TRIPLE_ATTACK_CHECK,ref);
+//				}
 			}
+			
 		}
 
 		public function get attackBroken() : Boolean

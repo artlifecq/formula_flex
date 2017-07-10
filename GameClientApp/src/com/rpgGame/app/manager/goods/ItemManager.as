@@ -189,5 +189,25 @@ package com.rpgGame.app.manager.goods
 			}
 			return false;
 		}
+		public static function checkHasEquip2Strengthen():Boolean
+		{
+			return false;
+		}
+		public static function checkHasEquip2ZM():Boolean
+		{
+			return false;
+		}
+		public static function checkHasEquip2XILIAN():Boolean
+		{
+			return false;
+		}
+		public static function checkHasEquip2HC():Boolean
+		{
+			return false;
+		}
+		public static function checkEquip2HCByType(type:int):Boolean
+		{
+			return true;
+		}
 	}
 }

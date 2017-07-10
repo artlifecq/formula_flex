@@ -30,7 +30,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_girl_activities_add:String;
 		 /**  副本购买次数+ */
 		public var q_zone_buy_add:String;
-		 /**    */
+		 /**  vip特权前端用（|隔开） */
 		public var q_vip_privileges:String;
 		 /**  人物属性加成(属性表id) */
 		public var q_attr_id:int;

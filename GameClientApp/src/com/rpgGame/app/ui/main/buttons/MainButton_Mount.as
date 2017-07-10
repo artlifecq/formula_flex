@@ -1,12 +1,17 @@
 package com.rpgGame.app.ui.main.buttons
 {
 	import com.rpgGame.core.events.ItemEvent;
+	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.core.ui.tip.RTNodeID;
 	
 	import org.client.mainCore.manager.EventManager;
 	
 	public class MainButton_Mount extends MainButtonBases
 	{
-		
+		public function MainButton_Mount()
+		{
+			SkinUI.addNode(null,RTNodeID.MAIN_JINJIE,this,60,null,false);
+		}
 		override protected function onShow():void
 		{
 			super.onShow();

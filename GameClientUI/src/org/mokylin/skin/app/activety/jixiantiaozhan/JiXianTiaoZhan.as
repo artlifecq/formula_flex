@@ -291,7 +291,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 135;
-			temp.x = 652;
+			temp.x = 653;
 			temp.y = 499;
 			return temp;
 		}

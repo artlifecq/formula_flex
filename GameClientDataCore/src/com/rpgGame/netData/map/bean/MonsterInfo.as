@@ -16,7 +16,7 @@ package com.rpgGame.netData.map.bean{
 	 * 怪物信息类
 	 */
 	public class MonsterInfo extends Bean {
-		
+	
 		//怪物Id
 		private var _monsterId: long;
 		
@@ -37,6 +37,9 @@ package com.rpgGame.netData.map.bean{
 		
 		//阵营关系，为0则检查默认敌对关系，大于0则和相同阵营友好，不同阵营敌对
 		private var _relation: int;
+		
+		//阵营Id
+		private var _faction: int;
 		
 		//怪物等级
 		private var _level: int;
@@ -84,6 +87,8 @@ package com.rpgGame.netData.map.bean{
 			writeInt(_monsterIcon);
 			//阵营关系，为0则检查默认敌对关系，大于0则和相同阵营友好，不同阵营敌对
 			writeByte(_relation);
+			//阵营Id
+			writeByte(_faction);
 			//怪物等级
 			writeShort(_level);
 			//怪物所在地图
@@ -131,6 +136,8 @@ package com.rpgGame.netData.map.bean{
 			_monsterIcon = readInt();
 			//阵营关系，为0则检查默认敌对关系，大于0则和相同阵营友好，不同阵营敌对
 			_relation = readByte();
+			//阵营Id
+			_faction = readByte();
 			//怪物等级
 			_level = readShort();
 			//怪物所在地图
@@ -263,6 +270,21 @@ package com.rpgGame.netData.map.bean{
 		 */
 		public function set relation(value: int): void{
 			this._relation = value;
+		}
+		
+		/**
+		 * get 阵营Id
+		 * @return 
+		 */
+		public function get faction(): int{
+			return _faction;
+		}
+		
+		/**
+		 * set 阵营Id
+		 */
+		public function set faction(value: int): void{
+			this._faction = value;
 		}
 		
 		/**

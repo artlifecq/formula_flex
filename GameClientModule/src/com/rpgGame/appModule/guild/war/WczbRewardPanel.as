@@ -13,6 +13,7 @@ package com.rpgGame.appModule.guild.war
 	import org.mokylin.skin.app.banghui.wangcheng.WangChengJiangLi;
 	
 	import starling.display.DisplayObject;
+	import starling.display.DisplayObjectContainer;
 	
 	/**
 	 *王城争霸奖励一览 
@@ -51,9 +52,15 @@ package com.rpgGame.appModule.guild.war
 			
 		}
 		
+		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
+		{
+			this.x=0;
+			this.y=0;
+			super.show(data,openTable,parentContiner);
+		}
+		
 		override protected function onShow():void
 		{
-			this.y=0;
 			var cfg:Q_singlecitybase=QSinglecitybaseCfgData.getCityCfg(EnumCity.DONG_WEI);
 			var str:String=cfg.q_rewards2;
 			weiGRe.setRewardByJsonStr(str);
@@ -87,9 +94,8 @@ package com.rpgGame.appModule.guild.war
 		override protected function onHide():void
 		{
 			super.onHide();
-			TweenMax.killTweensOf(this);
-			tween=null;
-			
+//			TweenMax.killTweensOf(this);
+//			tween=null;
 			wangGRe.clear();
 			wangBRe.clear();
 			weiGRe.clear();

@@ -12,6 +12,8 @@ package com.rpgGame.appModule.fightsoul
 	import com.rpgGame.appModule.systemset.TouchToState;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.core.ui.tip.RTNodeID;
+	import com.rpgGame.core.ui.tip.RewardMarkTip;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.FightsoulData;
@@ -43,7 +45,9 @@ package com.rpgGame.appModule.fightsoul
 	import org.mokylin.skin.app.zhanhun.Shuxing_Skin;
 	import org.mokylin.skin.app.zhanhun.Zhanhun_Skin;
 	
+	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
+	import starling.display.Sprite;
 	import starling.events.Touch;
 	import starling.events.TouchPhase;
 	
@@ -57,7 +61,7 @@ package com.rpgGame.appModule.fightsoul
 		private var _skillData:Q_skill_model;
 		private var _skillIcon:IconCDFace;
 		
-		private var _itemIconLists:Vector.<TouchToState>;
+		private var _itemIconLists:Vector.<IconCDFace>;
 		private var _showAvatarData : RoleData;
 		private var _fightsoul:InterAvatar3D;
 		private var _touchstate:ButtonTouchState;
@@ -65,7 +69,6 @@ package com.rpgGame.appModule.fightsoul
 		{
 			_skin=new Zhanhun_Skin();
 			super(_skin);
-			TipTargetManager.show(_skin.pro_jindu, TargetTipsMaker.makeSimpleTextTips(LanguageConfig.getText(LangUI_2.FightSoulExpTip)));
 			initView();
 		}
 		
@@ -133,9 +136,15 @@ package com.rpgGame.appModule.fightsoul
 			for(var index:int = 0;index<_itemIconLists.length;index++)
 			{
 				if(FightSoulManager.instance().isGetReward(index))
-					GrayFilter.gray(_itemIconLists[index].target);
+				{
+					GrayFilter.gray(_itemIconLists[index]);
+					
+				}
 				else
-					_itemIconLists[index].target.filter = null;
+				{
+					_itemIconLists[index].filter = null;
+				}
+				setRTNState(RTNodeID.ZH_REWARD+"-"+index,FightSoulManager.instance().canGetReward(index));
 			}
 		}
 		private var _bigEffect:InterObject3D
@@ -205,11 +214,10 @@ package com.rpgGame.appModule.fightsoul
 			}
 			refeashQualityView();
 		}
-		
 		private function initView():void
 		{
 			var content:Inter3DContainer = new Inter3DContainer();
-			_skin.modecontent.addChild(content);
+			_skin.container.addChild(content);
 			_fightsoul = new InterAvatar3D();
 			_fightsoul.x = 340;
 			content.addChild3D(_fightsoul);
@@ -231,33 +239,50 @@ package com.rpgGame.appModule.fightsoul
 			_skin.List.dataProvider = new ListCollection();
 			_skin.lb_progress.touchable = false;
 			
-			_skillIcon = IconCDFace.create(IcoSizeEnum.ICON_48);
-			_skillIcon.width = _skillIcon.height = IcoSizeEnum.ICON_48;
-			_skillIcon.setBg(GridBGType.GRID_SIZE_48);
-			_skillIcon.x = 554;
-			_skillIcon.y = 425;
+			_skillIcon = IconCDFace.create(IcoSizeEnum.ICON_64);
+			_skillIcon.setBg(GridBGType.GRID_SIZE_46);
+			_skillIcon.x = 558;
+			_skillIcon.y = 433;
 			addChild(_skillIcon);
 			
 			var length:int = FightSoulManager.instance().RewardInfos.length;
 			var icon:IconCDFace
-			_itemIconLists = new Vector.<TouchToState>();
+			_itemIconLists = new Vector.<IconCDFace>();
+			
+			var tmp:Sprite;
 			for(var i:int = 0;i<length;i++)
 			{
 				icon= IconCDFace.create(IcoSizeEnum.ICON_48);
 				icon.width = icon.height = IcoSizeEnum.ICON_48;
 				icon.setBg(GridBGType.GRID_SIZE_48);
-				icon.x = 669+61*i;
-				icon.y = 448;
-				addChild(icon);
-				var touch:TouchToState = new TouchToState(icon,rewardIconTriggeredHandler);
-				touch.data = i;
-				_itemIconLists.push(touch);
+				tmp=new Sprite();
+				tmp.x = 669+61*i;
+				tmp.y = 465;
+				tmp.addChild(icon);
+				icon.x =0;
+				icon.y = 0;
+				addChild(tmp);
+				/*var touch:TouchToState = new TouchToState(icon,rewardIconTriggeredHandler);
+				touch.data = i;*/
+				_itemIconLists.push(icon);
+				
+				addNode(RTNodeID.MAIN_ZHANHUN,RTNodeID.ZH_REWARD+"-"+i,tmp,56,null);
 			}
-			
-			 TipTargetManager.show( _skin.btn_shuoming,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(27)));
-			 
+			addNode(RTNodeID.MAIN_ZHANHUN,RTNodeID.ZH_UP,_skin.btn_up,112,FightSoulManager.instance().canLevelUp,false,null,true);
+			TipTargetManager.show( _skin.btn_shuoming,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(27)));
+			TipTargetManager.show(_skin.pro_jindu, TargetTipsMaker.makeSimpleTextTips(LanguageConfig.getText(LangUI_2.FightSoulExpTip)));
 		}
-		
+		override protected function onTouchTarget(target:DisplayObject):void
+		{
+			super.onTouchTarget(target);
+			if(target is IconCDFace)
+			{
+				var index:int = _itemIconLists.indexOf(IconCDFace(target));
+				if(index<0)
+					return ;
+				FightSoulManager.instance().getRewardByIndex(index);
+			}
+		}
 		private function refeashView():void
 		{
 			refeashQualityView();
@@ -265,18 +290,16 @@ package com.rpgGame.appModule.fightsoul
 			refeashVitality();
 			_skin.num_lv.visible = false;
 			listrefeash();
-			refeashRewards();
-			
 			FaceUtil.SetSkillGrid(_skillIcon, FaceUtil.chanceSpellToFaceInfo(_skillData), true);//目前Tips有bug,待修改
-			_skillIcon.setIconPoint(6,7);
+			_skillIcon.setIconPoint(5,5);
 			var icon:IconCDFace
 			for(var index:int = 0;index<_itemIconLists.length;index++)
 			{
-				icon = _itemIconLists[index].target as IconCDFace
+				icon = _itemIconLists[index];
 				FaceUtil.setGridData(icon,FightSoulManager.instance().RewardInfos[index],true);
-				icon.setIconPoint(6,7);
-				//				 icon.setQualityImageIconPoint(6,7);
+				icon.setIconPoint(4,4);
 			}
+			refeashRewards();
 		}
 		private function rewardIconTriggeredHandler(touch:Touch,ts:TouchToState):void
 		{
@@ -290,6 +313,7 @@ package com.rpgGame.appModule.fightsoul
 		{
 			refeahLevel();
 			refeahExp();
+			
 		}
 		private function refeahLevel():void
 		{
@@ -322,12 +346,17 @@ package com.rpgGame.appModule.fightsoul
 			_skin.pro_jindu.maximum = currentMode.q_exp;
 			_skin.pro_jindu.value = fightSoulInfo.exp;
 			_skin.lb_progress.text = fightSoulInfo.exp.toString()+"/"+currentMode.q_exp;
+			notifyUpdate(RTNodeID.ZH_UP);
 		}
 		
 		private function refeashVitality():void
 		{
 			_skin.pro_zongjindu.value = fightSoulInfo.vitality/200*_skin.pro_zongjindu.maximum;
 			_skin.lb_jindu.text = LanguageConfig.getText(LangUI_2.FightSoulProgress).replace("$",fightSoulInfo.vitality);
+			for(var index:int = 0;index<_itemIconLists.length;index++)
+			{
+				setRTNState(RTNodeID.ZH_REWARD+"-"+index,FightSoulManager.instance().canGetReward(index));
+			}
 		}
 		private function refeashQualityView():void
 		{
@@ -379,7 +408,7 @@ package com.rpgGame.appModule.fightsoul
 			
 			var scale:Number = modeinfo.q_panleScale/100;
 			this._fightsoul.curRole.setScale(scale);
-			this._fightsoul.y = modeinfo.q_panleY*scale;
+			this._fightsoul.y = modeinfo.q_panleY;
 		}
 		private function get  currentMode():Q_fightsoul
 		{

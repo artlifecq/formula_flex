@@ -1,9 +1,14 @@
 package com.rpgGame.appModule.role
 {
+	import com.game.engine3D.display.Inter3DContainer;
+	import com.game.engine3D.display.InterObject3D;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.TipsCfgData;
+	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.TipType;
@@ -20,9 +25,15 @@ package com.rpgGame.appModule.role
 	{
 		private var _skin : juese_Skin;
 		private var _roleData:HeroData;
+		private var _msEftC:Inter3DContainer;
+		private var _msEft:InterObject3D;
+		
 		public function BasicRoleView(skin:juese_Skin)
 		{
 			_skin=skin;
+			_msEftC=new Inter3DContainer();
+			_skin.container.addChild(_msEftC);
+			_msEft=_msEftC.playInter3DAt(ClientConfig.getEffect("ui_jiemian_miaoshang"),120,125,0);
 		}
 		
 		public function show(data:HeroData):void
@@ -37,28 +48,22 @@ package com.rpgGame.appModule.role
 		private function updateTxt():void
 		{
 			_skin.num_miaoshang.number=_roleData.totalStat.getStatValue(CharAttributeType.HURT_SEC);
-			_skin.txt_lidao.text=_roleData.totalStat.getStatValueString(CharAttributeType.LIDAO);
-			_skin.txt_genggu.text=_roleData.totalStat.getStatValueString(CharAttributeType.GENGU);
-			_skin.txt_huigeng.text=_roleData.totalStat.getStatValueString(CharAttributeType.HUIGEN);
+			_skin.txt_gengu.text=_roleData.totalStat.getStatValueString(CharAttributeType.GENGU);
 			_skin.txt_shenfa.text=_roleData.totalStat.getStatValueString(CharAttributeType.SHENFA);
-			_skin.txt_qixue.text=_roleData.totalStat.getStatValueString(CharAttributeType.QI_XUE);
-			_skin.txt_waigong.text=_roleData.totalStat.getStatValueString(CharAttributeType.WAI_GONG);
-			_skin.txt_neigong.text=_roleData.totalStat.getStatValueString(CharAttributeType.NEI_GONG);
+			_skin.txt_gongji.text=_roleData.totalStat.getStatValueString(CharAttributeType.WAI_GONG);
+			_skin.txt_fangyu.text=_roleData.totalStat.getStatValueString(CharAttributeType.DEFENSE_PER);
+			_skin.txt_mingzhong.text=_roleData.totalStat.getStatValueString(CharAttributeType.HIT);
+			_skin.txt_shanbi.text=_roleData.totalStat.getStatValueString(CharAttributeType.MISS);
+			_skin.txt_baoji.text=_roleData.totalStat.getStatValueString(CharAttributeType.CRIT_PER);
+			_skin.txt_baoshang.text=_roleData.totalStat.getStatValueString(CharAttributeType.CRIT);		
 			_skin.txt_gongsu.text=_roleData.totalStat.getStatValueString(CharAttributeType.ATT_SPEED);
-			_skin.txt_mingzhonglv.text=_roleData.totalStat.getStatValueString(CharAttributeType.HIT);
-			_skin.txt_baojikangxing.text=_roleData.totalStat.getStatValueString(CharAttributeType.ANTI_CRIT_PER);
-			_skin.txt_bishanlv.text=_roleData.totalStat.getStatValueString(CharAttributeType.MISS);
-			_skin.txt_fangyubaifenbi.text=_roleData.totalStat.getStatValueString(CharAttributeType.DEFENSE_PER);
-			_skin.txt_shengminhuifu.text=_roleData.totalStat.getStatValueString(CharAttributeType.HP_REC);
-			_skin.txt_zhiliaotishen.text=_roleData.totalStat.getStatValueString(CharAttributeType.CURE_LIFT);
-			_skin.txt_baojilv.text=_roleData.totalStat.getStatValueString(CharAttributeType.CRIT_PER);
-			_skin.txt_baojijiacheng.text=_roleData.totalStat.getStatValueString(CharAttributeType.CRIT);		
-			
-			var allW:int=_skin.msIcon.width+_skin.msName.width+_skin.num_miaoshang.width;
-			var xx:int=(185-allW)/2;
-			_skin.msIcon.x=xx;
-			_skin.msName.x=_skin.msIcon.x+_skin.msIcon.width;
-			_skin.num_miaoshang.x=_skin.msName.x+_skin.msName.width;
+			if(MainRoleManager.actorInfo.job==JobEnum.ROLE_4_TYPE){//医家
+				_skin.txt_lidao.text=_roleData.totalStat.getStatValueString(CharAttributeType.HUIGEN);
+				_skin.uiLd.styleName="ui/app/beibao/shuxing/hg.png";
+			}else{
+				_skin.txt_lidao.text=_roleData.totalStat.getStatValueString(CharAttributeType.LIDAO);
+				_skin.uiLd.styleName="ui/app/beibao/shuxing/ld.png";
+			}
 		}
 		
 		public function onHide():void
@@ -69,43 +74,31 @@ package com.rpgGame.appModule.role
 			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,updateEXPMP);
 			EventManager.removeEvent(MainPlayerEvent.STAT_MAX_CHANGE,updateEXPMP);
 			
-			TipTargetManager.remove( _skin.txt_jinyan);
 			TipTargetManager.remove( _skin.txt_zhenqi);
+			TipTargetManager.remove( _skin.txt_jinyan);
 			TipTargetManager.remove( _skin.txt_lidao);
-			TipTargetManager.remove( _skin.txt_genggu);
-			TipTargetManager.remove( _skin.txt_huigeng);
+			TipTargetManager.remove( _skin.txt_gengu);
 			TipTargetManager.remove( _skin.txt_shenfa);
-			TipTargetManager.remove( _skin.txt_qixue);
-			TipTargetManager.remove( _skin.txt_waigong);
-			TipTargetManager.remove( _skin.txt_neigong);
+			TipTargetManager.remove( _skin.txt_gongji);
+			TipTargetManager.remove( _skin.txt_fangyu);
+			TipTargetManager.remove( _skin.txt_mingzhong);
+			TipTargetManager.remove( _skin.txt_baoji);
+			TipTargetManager.remove( _skin.txt_baoshang);
 			TipTargetManager.remove( _skin.txt_gongsu);
-			TipTargetManager.remove( _skin.txt_mingzhonglv);
-			TipTargetManager.remove( _skin.txt_baojikangxing);
-			TipTargetManager.remove( _skin.txt_bishanlv);
-			TipTargetManager.remove( _skin.txt_fangyubaifenbi);
-			TipTargetManager.remove( _skin.txt_shengminhuifu);
-			TipTargetManager.remove( _skin.txt_zhiliaotishen);
-			TipTargetManager.remove( _skin.txt_baojilv);
-			TipTargetManager.remove( _skin.txt_baojijiacheng);
 			
-			TipTargetManager.remove( _skin.lbl_jingyan);
-			TipTargetManager.remove( _skin.lbl_zhenqi);
-			TipTargetManager.remove( _skin.lbl_lidao);
-			TipTargetManager.remove( _skin.lbl_genggu);
-			TipTargetManager.remove( _skin.lbl_huigeng);
-			TipTargetManager.remove( _skin.lbl_shenfa);
-			TipTargetManager.remove( _skin.lbl_qixue);
-			TipTargetManager.remove( _skin.lbl_waigong);
-			TipTargetManager.remove( _skin.lbl_neigong);
-			TipTargetManager.remove( _skin.lbl_gongsu);
-			TipTargetManager.remove( _skin.lbl_minzhonglv);
-			TipTargetManager.remove( _skin.lbl_baojikangxing);
-			TipTargetManager.remove( _skin.lbl_bishanlv);
-			TipTargetManager.remove( _skin.lbl_fangyubaifenbi);
-			TipTargetManager.remove( _skin.lbl_shengminhuifu);
-			TipTargetManager.remove( _skin.lbl_zhiliaotishen);
-			TipTargetManager.remove( _skin.lbl_baojilv);
-			TipTargetManager.remove( _skin.lbl_baojijiacheng);
+			TipTargetManager.remove( _skin.uiZq);
+			TipTargetManager.remove( _skin.uiJy);
+			TipTargetManager.remove( _skin.uiLd);
+			
+			TipTargetManager.remove( _skin.uiHg);
+			TipTargetManager.remove( _skin.uiSf);
+			TipTargetManager.remove( _skin.uiGj);
+			TipTargetManager.remove( _skin.uiFy);
+			TipTargetManager.remove( _skin.uiMz);
+			TipTargetManager.remove( _skin.uiSb);
+			TipTargetManager.remove( _skin.uiBj);
+			TipTargetManager.remove( _skin.uiBs);
+			TipTargetManager.remove( _skin.uiGs);
 		}
 		
 		private function initEvent():void
@@ -115,57 +108,59 @@ package com.rpgGame.appModule.role
 			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,updateEXPMP);//真气变化
 			EventManager.addEvent(MainPlayerEvent.STAT_MAX_CHANGE,updateEXPMP);//最大真气经验改变
 			
-			TipTargetManager.show( _skin.txt_jinyan,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(1)));
 			TipTargetManager.show( _skin.txt_zhenqi,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(2)));
-			TipTargetManager.show( _skin.txt_lidao,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(3)));
-			TipTargetManager.show( _skin.txt_genggu,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(4)));
-			TipTargetManager.show( _skin.txt_huigeng,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(5)));
-			TipTargetManager.show( _skin.txt_shenfa,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(6)));
-			TipTargetManager.show( _skin.txt_qixue,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(7)));
-			TipTargetManager.show( _skin.txt_waigong,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(8)));
-			TipTargetManager.show( _skin.txt_neigong,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(9)));
-			TipTargetManager.show( _skin.txt_gongsu,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(10)));
-			TipTargetManager.show( _skin.txt_mingzhonglv,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(11)));
-			TipTargetManager.show( _skin.txt_baojikangxing,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(12)));
-			TipTargetManager.show( _skin.txt_bishanlv,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(13)));
-			TipTargetManager.show( _skin.txt_fangyubaifenbi,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(14)));
-			TipTargetManager.show( _skin.txt_shengminhuifu,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(15)));
-			TipTargetManager.show( _skin.txt_zhiliaotishen,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(16)));
-			TipTargetManager.show( _skin.txt_baojilv,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(17)));
-			TipTargetManager.show( _skin.txt_baojijiacheng,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(18)));
+			TipTargetManager.show( _skin.txt_jinyan,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(1)));
+			if(MainRoleManager.actorInfo.job==JobEnum.ROLE_4_TYPE){//医家
+				TipTargetManager.show( _skin.txt_lidao,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(5)));
+			}else{
+				TipTargetManager.show( _skin.txt_lidao,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(3)));
+			}
 			
-			TipTargetManager.show( _skin.lbl_jingyan,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(1)));
-			TipTargetManager.show( _skin.lbl_zhenqi,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(2)));
-			TipTargetManager.show( _skin.lbl_lidao,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(3)));
-			TipTargetManager.show( _skin.lbl_genggu,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(4)));
-			TipTargetManager.show( _skin.lbl_huigeng,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(5)));
-			TipTargetManager.show( _skin.lbl_shenfa,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(6)));
-			TipTargetManager.show( _skin.lbl_qixue,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(7)));
-			TipTargetManager.show( _skin.lbl_waigong,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(8)));
-			TipTargetManager.show( _skin.lbl_neigong,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(9)));
-			TipTargetManager.show( _skin.lbl_gongsu,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(10)));
-			TipTargetManager.show( _skin.lbl_minzhonglv,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(11)));
-			TipTargetManager.show( _skin.lbl_baojikangxing,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(12)));
-			TipTargetManager.show( _skin.lbl_bishanlv,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(13)));
-			TipTargetManager.show( _skin.lbl_fangyubaifenbi,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(14)));
-			TipTargetManager.show( _skin.lbl_shengminhuifu,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(15)));
-			TipTargetManager.show( _skin.lbl_zhiliaotishen,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(16)));
-			TipTargetManager.show( _skin.lbl_baojilv,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(17)));
-			TipTargetManager.show( _skin.lbl_baojijiacheng,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(18)));
+			TipTargetManager.show( _skin.txt_gengu,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(4)));
+			TipTargetManager.show( _skin.txt_shenfa,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(6)));
+			TipTargetManager.show( _skin.txt_gongji,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(8)));
+			TipTargetManager.show( _skin.txt_fangyu,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(14)));
+			TipTargetManager.show( _skin.txt_mingzhong,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(11)));
+			TipTargetManager.show( _skin.txt_shanbi,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(13)));
+			TipTargetManager.show( _skin.txt_baoji,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(17)));
+			TipTargetManager.show( _skin.txt_baoshang,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(18)));
+			TipTargetManager.show( _skin.txt_gongsu,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(10)));
+			
+			TipTargetManager.show( _skin.uiZq,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(2)));
+			TipTargetManager.show( _skin.uiJy,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(1)));
+			if(MainRoleManager.actorInfo.job==JobEnum.ROLE_4_TYPE){//医家
+				TipTargetManager.show( _skin.uiLd,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(5)));
+			}else{
+				TipTargetManager.show( _skin.uiLd,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(3)));
+			}
+			
+			TipTargetManager.show( _skin.uiHg,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(4)));
+			TipTargetManager.show( _skin.uiSf,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(6)));
+			TipTargetManager.show( _skin.uiGj,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(8)));
+			TipTargetManager.show( _skin.uiFy,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(14)));
+			TipTargetManager.show( _skin.uiMz,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(11)));
+			TipTargetManager.show( _skin.uiSb,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(13)));
+			TipTargetManager.show( _skin.uiBj,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(17)));
+			TipTargetManager.show( _skin.uiBs,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(18)));
+			TipTargetManager.show( _skin.uiGs,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(10)));
 		}
 		
 		private function updateEXPMP(type:int=1):void
 		{
-			if(type!=CharAttributeType.RES_EXP&&type!=CharAttributeType.RES_ZHENQI){
+			if(type!=CharAttributeType.RES_EXP&&type!=CharAttributeType.RES_ZHENQI&&type!=CharAttributeType.HP){
 				return;
 			}
+			_skin.txt_shengmin.text=_roleData.totalStat.hp+"/"+_roleData.totalStat.life;
 			_skin.txt_zhenqi.text=_roleData.curZhenqi+"/"+_roleData.maxZhenqi;			
 			_skin.txt_jinyan.text=_roleData.curExp+"/"+_roleData.maxExp;
+			_skin.pro_shengmin.maximum=_roleData.totalStat.life;
+			_skin.pro_shengmin.value=_roleData.totalStat.hp;
+			
+			_skin.pro_zhenqi.maximum=_roleData.maxZhenqi;
+			_skin.pro_zhenqi.value=_roleData.curZhenqi;
 			
 			_skin.pro_jinyan.maximum=_roleData.maxExp;
 			_skin.pro_jinyan.value=_roleData.curExp;
-			_skin.pro_zhenqi.maximum=_roleData.maxZhenqi;
-			_skin.pro_zhenqi.value=_roleData.curZhenqi;
 		}
 	}	
 }

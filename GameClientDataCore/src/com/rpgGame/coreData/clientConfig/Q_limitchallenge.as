@@ -26,6 +26,12 @@ package com.rpgGame.coreData.clientConfig
 		public var q_monster:String;
 		 /**  退出移除BUFF列表 */
 		public var q_quit_buffs:String;
+		 /**  宝箱ID */
+		public var q_box:int;
+		 /**  宝箱数量 */
+		public var q_box_num:int;
+		 /**  宝箱范围 */
+		public var q_box_range:int;
 		 /**  排名奖励 */
 		public var q_rank_rewards:String;
 		 /**  最后一击奖励 */

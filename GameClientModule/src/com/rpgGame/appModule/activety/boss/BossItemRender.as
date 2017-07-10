@@ -2,12 +2,14 @@ package com.rpgGame.appModule.activety.boss
 {
 	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.sender.SpecialActivitySender;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.cfg.active.BossActInfo;
+	import com.rpgGame.coreData.type.activity.ActivityJoinStateEnum;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import feathers.controls.renderers.DefaultListItemRenderer;
@@ -85,46 +87,74 @@ package com.rpgGame.appModule.activety.boss
 					return;
 				}
 				
-				if(info.info.joinState==0){//未开启
-					_skin.uiJinxing.visible=false;
-					GrayFilter.gray(_skin.uiBg);
-					GrayFilter.gray(_skin.btnEnter);
-				}else{
-					GrayFilter.unGray(_skin.uiBg);
-					GrayFilter.unGray(_skin.btnEnter);
-					if(info.info.joinState<3){//进行中
-						_skin.uiJinxing.visible=false;
-					}else{//已经击杀
+				switch(info.info.joinState){
+					case ActivityJoinStateEnum.KILLED_BOSS:
 						_skin.uiJinxing.visible=true;
-					}
-				}
-			}
-			
-			var timeStr:String;
-			if(_skin.uiJinxing.visible||info.info.joinState==0){
-				var hm:int=ActivetyDataManager.getCurrentHM();
-				var timeList:Array=ActivetyDataManager.getTimeList(info.actCfg);
-				timeList=timeList[4];//第四个才是刷新段
-				var next:int=timeList[0];
-				var num:int=timeList.length;
-				for(var i:int=0;i<num;i++){
-					if(timeList[i]>hm){
-						if((i+1)!=num){
-							next=timeList[i+1];
-						}else{
-							next=timeList[0];
-						}
+						ungrayItem();
 						break;
-					}
+					case ActivityJoinStateEnum.JOINING:
+						_skin.uiJinxing.visible=false;
+						ungrayItem();
+						break;
+					default:
+						_skin.uiJinxing.visible=false;
+						grayItem();
+						break;
 				}
-				timeStr="下次刷新时间:"+TimeUtil.changeIntHM2Str(next);
-				timeStr=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,timeStr);
-			}else{
-				timeStr="已刷新(未击杀)";
-				timeStr=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,timeStr);
+				
+				var lv:int=MainRoleManager.actorInfo.totalStat.level;
+				if(lv<info.actCfg.q_activity_limit_level){
+					_skin.lbLevel.text="(等级需求:+"+info.actCfg.q_activity_limit_level+")";
+				}else{
+					_skin.lbLevel.text="";
+				}
+				
+				var timeStr:String;
+				if(_skin.uiJinxing.visible||info.info.joinState==0){
+					var hm:int=ActivetyDataManager.getCurrentHM();
+					var timeList:Array=ActivetyDataManager.getTimeList(info.actCfg);
+					timeList=timeList[4];//第四个才是刷新段
+					var next:int=timeList[0];
+					var num:int=timeList.length;
+					for(var i:int=0;i<num;i++){
+						if(timeList[i]>hm){
+							if((i+1)!=num){
+								next=timeList[i+1];
+							}else{
+								next=timeList[0];
+							}
+							break;
+						}
+					}
+					timeStr="下次刷新时间:"+TimeUtil.changeIntHM2Str(next);
+					timeStr=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,timeStr);
+				}else{
+					timeStr="已刷新(未击杀)";
+					timeStr=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,timeStr);
+				}
+				
+				_skin.lbMsg2.htmlText=timeStr;
 			}
-			
-			_skin.lbMsg2.htmlText=timeStr;
+		}
+		
+		private function grayItem():void
+		{
+			GrayFilter.gray(_skin.uiName);
+			GrayFilter.gray(_skin.uiBg);
+			GrayFilter.gray(_skin.lbLevel);
+			GrayFilter.gray(_skin.btnEnter);
+			GrayFilter.gray(_skin.lbMsg1);
+			GrayFilter.gray(_skin.lbMsg2);
+		}
+		
+		private function ungrayItem():void
+		{
+			GrayFilter.unGray(_skin.uiName);
+			GrayFilter.unGray(_skin.uiBg);
+			GrayFilter.unGray(_skin.lbLevel);
+			GrayFilter.unGray(_skin.btnEnter);
+			GrayFilter.unGray(_skin.lbMsg1);
+			GrayFilter.unGray(_skin.lbMsg2);
 		}
 	}
 }

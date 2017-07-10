@@ -7,8 +7,10 @@ package com.rpgGame.appModule.skill
 	import com.rpgGame.appModule.skill.lostskill.LostSkillModePane;
 	import com.rpgGame.appModule.skill.lostskill.LostSkillUpLevelView;
 	import com.rpgGame.appModule.skill.lostskill.LostSpellActivate;
+	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LostSkillData;
 	import com.rpgGame.coreData.cfg.TipsCfgData;
@@ -50,8 +52,8 @@ package com.rpgGame.appModule.skill
 				var content:Inter3DContainer = new Inter3DContainer();
 				this._skin.container.addChildAt(content,4);
 				_lostSkillModePane = new LostSkillModePane();
-				_lostSkillModePane.x = 25;
-				_lostSkillModePane.y = 84;
+				_lostSkillModePane.x = 30;
+				_lostSkillModePane.y = 90;
 				content.addChild3D(_lostSkillModePane);
 			}
 			_skillIconList = new Vector.<LostSkillIcon>();
@@ -97,12 +99,24 @@ package com.rpgGame.appModule.skill
 			EventManager.addEvent(LostSkillManager.LostSkill_ChangeSkillId,changeStateHandler);
 			EventManager.addEvent(LostSkillManager.LostSkill_ChangeSkillState,changeStateHandler);
 			EventManager.addEvent(LostSkillManager.LostSkill_UpLevelSkillId,selecteChangeHandler);
+			EventManager.addEvent(ItemEvent.ITEM_ADD,onItemChange);
+			EventManager.addEvent(ItemEvent.ITEM_CHANG,onItemChange);
+			EventManager.addEvent(ItemEvent.ITEM_REMOVE,onItemChange);
+		}
+		
+		private function onItemChange(...arg):void
+		{
+			// TODO Auto Generated method stub
+			refeashIconsList();
 		}
 		override public function hide():void
 		{
 			EventManager.removeEvent(LostSkillManager.LostSkill_ChangeSkillId,changeStateHandler);
 			EventManager.removeEvent(LostSkillManager.LostSkill_ChangeSkillState,changeStateHandler);
 			EventManager.removeEvent(LostSkillManager.LostSkill_UpLevelSkillId,selecteChangeHandler);
+			EventManager.removeEvent(ItemEvent.ITEM_ADD,onItemChange);
+			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onItemChange);
+			EventManager.removeEvent(ItemEvent.ITEM_REMOVE,onItemChange);
 		}
 		private function refeashIconsList():void
 		{
@@ -110,6 +124,11 @@ package com.rpgGame.appModule.skill
 			{
 				icon.refeashView();
 			}
+			var index:int = _radioGroup.selectedIndex;
+			var data:Q_lostskill_open = LostSkillData.datas[index];
+			var state:SkillStateInfo = LostSkillManager.instance().getSkillStateInfoById(data.q_id);
+			_updataLevel.updataSkill(data,state);
+			notifyUpdate(RTNodeID.WX_JX);
 		}
 		private function changeStateHandler():void
 		{

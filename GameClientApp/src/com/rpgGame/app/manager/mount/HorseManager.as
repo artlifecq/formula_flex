@@ -331,5 +331,19 @@ package com.rpgGame.app.manager.mount
 		{
 			TweenLite.killDelayedCallsTo(delayRideMount);
 		}
+		public function canHorseLevelUp():Boolean
+		{
+			if(_horsedataInfo==null)
+				return false;
+			if(_showdata == null)
+				_showdata= new MountShowData();
+			_showdata.heroJob = MainRoleManager.actorInfo.job;
+			_showdata.horsedataInfo =  HorseManager.instance().horsedataInfo;
+			if(_showdata.isMaxLevel)
+			{
+				return false;
+			}
+			return (_showdata.canUpLevel());
+		}
 	}
 }

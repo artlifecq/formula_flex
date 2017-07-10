@@ -17,6 +17,9 @@ package com.rpgGame.appModule.xinfa
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.core.ui.tip.IRewardCheck;
+	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.core.utils.AttrUtil;
 	import com.rpgGame.core.utils.GameColorUtil;
 	import com.rpgGame.core.utils.MCUtil;
@@ -71,9 +74,11 @@ package com.rpgGame.appModule.xinfa
 		private var _effectCheatsGridArr:Array;
 		private var _skillIcon:BgIcon;
 		private var _btnStateLabelHash:HashMap=new HashMap();
+		private var _rtnIds:Array;
 		
 		public function XinFaView(s:xinfa_Skin)
 		{
+			
 			_skin=s;
 			_skinArr=[new Longxiang_Skin(),new Shijue_Skin(),new Xiaoyao_Skin,new Qiankun_Skin(),new Xijing_Skin(),new Chunyang_Skin(),new Zhenyuan_Skin(),new Jiuxiao_Skin(),new Mingxin_Skin(),new Wanji_Skin()];
 			//tweenScroll=new TweenScaleScrollUitlExt(con,
@@ -85,7 +90,7 @@ package com.rpgGame.appModule.xinfa
 			{
 				var sbtn:Radio=sbtnArr[i];
 				sbtn.addEventListener(Event.TRIGGERED,onTriggered);
-			
+				
 			}
 			_effectCheatsGridArr=[new CheatsIcon(_skin.grid_1),new CheatsIcon(_skin.grid_2),new CheatsIcon(_skin.grid_3)];
 			_skillIcon=new BgIcon(IcoSizeEnum.ICON_36);
@@ -310,6 +315,15 @@ package com.rpgGame.appModule.xinfa
 				}
 			}
 		}
+		private function checkReward(id:int):Boolean
+		{
+			var map:IRewardCheck=_mapsHash.getValue(id) as IRewardCheck;
+			if (map) 
+			{
+				return map.hasReward();
+			}
+			return false;
+		}
 		private function initData():void
 		{
 			//选取等级为1的数据
@@ -323,6 +337,7 @@ package com.rpgGame.appModule.xinfa
 			{
 				meridianType=keys[i];
 				tmp=new CheatsMap(_skinArr[i],hash.getValue(meridianType),sbtnArr[i]);
+				SkinUI.addNode(RTNodeID.XF,RTNodeID.XF+"_"+meridianType,sbtnArr[i],106,checkReward,false,meridianType);
 				tmp.pos=i;
 				tmp.x=200;
 				tmp.y=70;
@@ -390,6 +405,10 @@ package com.rpgGame.appModule.xinfa
 				{
 					checkForUpdateJX();
 				}
+				else
+				{
+					checkForActive();
+				}
 				//没激活是不是材料
 				if (_curMap&&_curMap.cheatsVo.level==0) 
 				{
@@ -434,6 +453,20 @@ package com.rpgGame.appModule.xinfa
 				if (map) 
 				{
 					map.checkForUpdateJX();
+				}
+			}
+		}
+		private function checkForActive():void
+		{
+			var keys:Array=_mapsHash.keys();
+			var tmp:Array;
+			var map:CheatsMap;
+			for each (var key:int in keys) 
+			{
+				map=_mapsHash.getValue(key);
+				if (map) 
+				{
+					map.updateBtnState();
 				}
 			}
 		}

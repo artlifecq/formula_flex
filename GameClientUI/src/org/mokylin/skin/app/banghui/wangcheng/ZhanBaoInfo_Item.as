@@ -5,7 +5,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.app.banghui.ItemBg;
+	import org.mokylin.skin.common.ItemBg;
 
 	/**
 	 * @private
@@ -53,7 +53,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 		{
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			temp.height = 27;
-			var skin:StateSkin = new org.mokylin.skin.app.banghui.ItemBg()
+			var skin:StateSkin = new org.mokylin.skin.common.ItemBg()
 			temp.skin = skin
 			temp.width = 599;
 			temp.x = 0;

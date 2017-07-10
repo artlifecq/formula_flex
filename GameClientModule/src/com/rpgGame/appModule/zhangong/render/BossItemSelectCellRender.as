@@ -11,10 +11,10 @@ package com.rpgGame.appModule.zhangong.render
 		public function BossItemSelectCellRender()
 		{
 			super();
-			cell=new BossItem();
-			this.addChild(cell);
-			this.height=cell.height;
-			this.width=cell.width;
+//			cell=new BossItem();
+//			this.addChild(cell);
+//			this.height=cell.height;
+//			this.width=cell.width;
 		}
 		
 		override protected function commitData():void

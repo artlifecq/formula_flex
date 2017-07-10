@@ -204,7 +204,7 @@ package com.rpgGame.app.manager.chat
 					}
 				}
 			}else{
-				notify(MOUSE_FOLLOW_TIP, "未定义的配置通知信息ID:"+id);
+				notify(MOUSE_FOLLOW_TIP, "未定义的配置通知信息ID(09 通知信息.xlsx):"+id);
 			}
 		}
 		

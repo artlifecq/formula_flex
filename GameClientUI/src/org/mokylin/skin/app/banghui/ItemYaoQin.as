@@ -5,7 +5,7 @@ package org.mokylin.skin.app.banghui
 	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
-	import org.mokylin.skin.app.banghui.ItemBg;
+	import org.mokylin.skin.common.ItemBg;
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
 
 	/**
@@ -62,7 +62,7 @@ package org.mokylin.skin.app.banghui
 			bg = temp;
 			temp.name = "bg";
 			temp.height = 36;
-			var skin:StateSkin = new org.mokylin.skin.app.banghui.ItemBg()
+			var skin:StateSkin = new org.mokylin.skin.common.ItemBg()
 			temp.skin = skin
 			temp.width = 549;
 			temp.x = 0;

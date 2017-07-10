@@ -2,6 +2,7 @@ package com.rpgGame.netData.map.bean{
 	import com.rpgGame.netData.player.bean.AttributeItem;
 	import com.rpgGame.netData.buff.bean.BuffInfo;
 	import com.rpgGame.netData.structs.Position;
+	import com.rpgGame.netData.structs.IntKeyValue;
 	
 	import org.game.netCore.data.long;
 	
@@ -75,12 +76,17 @@ package com.rpgGame.netData.map.bean{
 		//阵营关系，为0则检查默认敌对关系，大于0则和相同阵营友好，不同阵营敌对
 		private var _relation: int;
 		
+		//阵营Id
+		private var _faction: int;
+		
 		//角色属性信息
 		private var _attributes: Vector.<com.rpgGame.netData.player.bean.AttributeItem> = new Vector.<com.rpgGame.netData.player.bean.AttributeItem>();
 		//跑步坐标集合
 		private var _positions: Vector.<com.rpgGame.netData.structs.Position> = new Vector.<com.rpgGame.netData.structs.Position>();
 		//buff列表
 		private var _buffs: Vector.<com.rpgGame.netData.buff.bean.BuffInfo> = new Vector.<com.rpgGame.netData.buff.bean.BuffInfo>();
+		//额外需要显示的参数
+		private var _keyValueList: Vector.<com.rpgGame.netData.structs.IntKeyValue> = new Vector.<com.rpgGame.netData.structs.IntKeyValue>();
 		/**
 		 * 写入字节缓存
 		 */
@@ -123,6 +129,8 @@ package com.rpgGame.netData.map.bean{
 			writeByte(_pkType);
 			//阵营关系，为0则检查默认敌对关系，大于0则和相同阵营友好，不同阵营敌对
 			writeByte(_relation);
+			//阵营Id
+			writeByte(_faction);
 			//角色属性信息
 			writeShort(_attributes.length);
 			for (var i: int = 0; i < _attributes.length; i++) {
@@ -137,6 +145,11 @@ package com.rpgGame.netData.map.bean{
 			writeShort(_buffs.length);
 			for (var i: int = 0; i < _buffs.length; i++) {
 				writeBean(_buffs[i]);
+			}
+			//额外需要显示的参数
+			writeShort(_keyValueList.length);
+			for (var i: int = 0; i < _keyValueList.length; i++) {
+				writeBean(_keyValueList[i]);
 			}
 			return true;
 		}
@@ -183,6 +196,8 @@ package com.rpgGame.netData.map.bean{
 			_pkType = readByte();
 			//阵营关系，为0则检查默认敌对关系，大于0则和相同阵营友好，不同阵营敌对
 			_relation = readByte();
+			//阵营Id
+			_faction = readByte();
 			//角色属性信息
 			var attributes_length : int = readShort();
 			for (var i: int = 0; i < attributes_length; i++) {
@@ -197,6 +212,11 @@ package com.rpgGame.netData.map.bean{
 			var buffs_length : int = readShort();
 			for (var i: int = 0; i < buffs_length; i++) {
 				_buffs[i] = readBean(com.rpgGame.netData.buff.bean.BuffInfo) as com.rpgGame.netData.buff.bean.BuffInfo;
+			}
+			//额外需要显示的参数
+			var keyValueList_length : int = readShort();
+			for (var i: int = 0; i < keyValueList_length; i++) {
+				_keyValueList[i] = readBean(com.rpgGame.netData.structs.IntKeyValue) as com.rpgGame.netData.structs.IntKeyValue;
 			}
 			return true;
 		}
@@ -487,6 +507,21 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
+		 * get 阵营Id
+		 * @return 
+		 */
+		public function get faction(): int{
+			return _faction;
+		}
+		
+		/**
+		 * set 阵营Id
+		 */
+		public function set faction(value: int): void{
+			this._faction = value;
+		}
+		
+		/**
 		 * get 角色属性信息
 		 * @return 
 		 */
@@ -529,6 +564,21 @@ package com.rpgGame.netData.map.bean{
 		 */
 		public function set buffs(value: Vector.<com.rpgGame.netData.buff.bean.BuffInfo>): void{
 			this._buffs = value;
+		}
+		
+		/**
+		 * get 额外需要显示的参数
+		 * @return 
+		 */
+		public function get keyValueList(): Vector.<com.rpgGame.netData.structs.IntKeyValue>{
+			return _keyValueList;
+		}
+		
+		/**
+		 * set 额外需要显示的参数
+		 */
+		public function set keyValueList(value: Vector.<com.rpgGame.netData.structs.IntKeyValue>): void{
+			this._keyValueList = value;
 		}
 		
 	}

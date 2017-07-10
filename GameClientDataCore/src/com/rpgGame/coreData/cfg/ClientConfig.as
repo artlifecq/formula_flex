@@ -95,19 +95,19 @@ package com.rpgGame.coreData.cfg
 		public static function getLoginuiResUrl() : String
 		{
 			var url : String = "login/loginui.png";
-			return baseDir + resURL + (ClientConfig.uiCompressed ? (url + ".bpg") : (url + ".bpg")); //需要获取位图数据，都用bpg。@L.L.M.Sunny
+			return baseDir + resURL + url + ".atf"; //需要获取位图数据，都用bpg。@L.L.M.Sunny
 		}
 		
 		public static function getSignInResUrl() : String
 		{
 			var url : String = "loading/signIn.png";
-			return baseDir + resURL + (ClientConfig.uiCompressed ? (url + ".bpg") : (url + ".atf"));
+			return baseDir + resURL + url + ".atf";
 		}
 		
 		public static function getLoadingResUrl() : String
 		{
 			var url : String = "loading/loading.png";
-			return baseDir + resURL + (ClientConfig.uiCompressed ? (url + ".bpg") : (url + ".atf"));
+			return baseDir + resURL + url + ".atf";
 		}
 		
 		public static function getLangUrl() : String
@@ -248,6 +248,11 @@ package com.rpgGame.coreData.cfg
 			return decode == null ? ".mp4" : ".res";
 		}
 		
+		public static function get eName_ATF():String
+		{
+			return decode == null ? ".jpg.atf" : ".res";
+		}
+		
 		public static function get eName_BBPG():String{return decode==null?".jpg.bpg":".res";}
 		public static function get eName_MAP_CFG():String{return decode==null?".cfg":".res";}
 
@@ -360,8 +365,12 @@ package com.rpgGame.coreData.cfg
 		// map stage
 		//--------------------------------------------------
 		///////////////////////////map2d///////////////////////////////////////
+		public static var isMapUseAtf:Boolean = true;
 		public static var ATF_RES:String = ".zatf";
-		public static function get ENAME_JPG_ATF():String{return decode==null?".jpg.atf":".res";}
+		public static function get ENAME_JPG_ATF():String
+		{
+			return decode == null ? ".jpg.atf" : ".res";
+		}
 		public static function getSmallMap(mapPackName:String):String
 		{
 			var path:String = baseDir + resURL+ "map/" + mapPackName +"_2d/mini";
@@ -369,16 +378,25 @@ package com.rpgGame.coreData.cfg
 			path += (ATF_RES == ".zatf")?ENAME_JPG_ATF:eName_BBPG;
 			return path;
 		}
+		
 		public static function getMapZoneDir(mapPackName:String):String
 		{
-			var url:String = baseDir + resURL+"map/"+ mapPackName + "_2d/#" + eName_JPG;
+			var url:String = "";
+			if(isMapUseAtf)
+			{
+				url = baseDir + resURL + "map/" + mapPackName + "_2d/#" + eName_ATF;
+			}
+			else
+			{
+				url = baseDir + resURL + "map/" + mapPackName + "_2d/#" + eName_JPG;
+			}
 			return url;
 		}
 		
 		public static function getMapDataConfig(mapPackName:String):String
 		{
 			if(mapPackName == null || mapPackName == "")return "";
-			var url:String = baseDir + resURL+"map/"+mapPackName+"_2d/map"+eName_MAP_CFG;
+			var url:String = baseDir + resURL + "map/" +mapPackName + "_2d/map" + eName_MAP_CFG;
 			return url;
 		}
 		
