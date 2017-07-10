@@ -240,7 +240,7 @@ package com.rpgGame.appModule.fightsoul
 			_skin.lb_progress.touchable = false;
 			
 			_skillIcon = IconCDFace.create(IcoSizeEnum.ICON_64);
-			_skillIcon.setBg(GridBGType.GRID_SIZE_46);
+			_skillIcon.setBg(GridBGType.GRID_SIZE_64);
 			_skillIcon.x = 558;
 			_skillIcon.y = 433;
 			addChild(_skillIcon);

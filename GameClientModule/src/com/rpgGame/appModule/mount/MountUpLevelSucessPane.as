@@ -20,6 +20,7 @@ package com.rpgGame.appModule.mount
 	import org.mokylin.skin.app.zuoqi.Zuoqi_JingjieOk_Skin;
 	
 	import starling.display.DisplayObject;
+	import starling.display.DisplayObjectContainer;
 	
 	public class MountUpLevelSucessPane extends SkinUIPanel
 	{
