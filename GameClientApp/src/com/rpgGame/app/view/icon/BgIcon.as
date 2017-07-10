@@ -137,8 +137,8 @@ package com.rpgGame.app.view.icon
 			_qualityEft.frameRate=20;
 			_qualityEft.autoPlay=true;
 			//			var scaleV:Number=(90/64);
-			_qualityEft.width=_iconSize;
-			_qualityEft.height=_iconSize;
+			_qualityEft.width=this.width;
+			_qualityEft.height=this.width;
 			//			var xy:Number=-1*(_iconSize/64)*(90-64)/2
 			//			_qualityEft.x=xy;
 			//			_qualityEft.y=xy;
@@ -198,6 +198,11 @@ package com.rpgGame.app.view.icon
 			_bgImage.x=_bgImage.y=0;
 			this.width=_bgImage.width;
 			this.height=_bgImage.height;
+			if(_qualityEft){
+				_qualityEft.width=this.width;
+				_qualityEft.height=this.width;
+			}
+	
 			sortLayer();
 			calIconPos();
 		}
@@ -350,6 +355,10 @@ package com.rpgGame.app.view.icon
 		{
 			this.width=_bgImage.width;
 			this.height=_bgImage.height;
+			if(_qualityEft){
+				_qualityEft.width=this.width;
+				_qualityEft.height=this.width;
+			}
 			calIconPos();
 		}
 		
