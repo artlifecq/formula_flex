@@ -1058,7 +1058,7 @@ package com.rpgGame.app.utils
 					item=ItemConfig.getQItemByID(rewordList[i].mod);
 					if(item&&i<icoList.length)
 					{
-						icoList[idd].setIconResName(ClientConfig.getItemIcon(""+item.q_icon,IcoSizeEnum.ICON_48));
+						icoList[idd].setIconResName(ClientConfig.getItemIcon(""+item.q_icon,IcoSizeEnum.ICON_42));
 						icoList[idd].setSubString(rewordList[i].num);
 						icoList[idd].visible=true;
 						icoBgList[idd].visible=true;
