@@ -1,6 +1,5 @@
 package com.rpgGame.app.scene.trigger.handler
 {
-	import com.gameClient.log.Lyt;
 	import com.rpgGame.app.manager.AreaMapManager;
 	import com.rpgGame.app.manager.ClientTriggerManager;
 	import com.rpgGame.app.scene.trigger.TriggerHandler;
@@ -70,7 +69,7 @@ package com.rpgGame.app.scene.trigger.handler
 		{
 			var triggerData : ClientTrigger = TriggerCfgData.getClientTrigger(triggerId);
 			if (triggerData)
-			{Lyt.a("触发消息:triggerData="+triggerData.id);
+			{
 				triggerData.isTrigging=true;
 				if(triggerData.obstacleArea!=null&&triggerData.obstacleArea.length>0)
 				{
