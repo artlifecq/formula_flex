@@ -158,6 +158,7 @@ package com.rpgGame.app.manager.role
 			{
 				(role.headFace as HeadFace).updateTitle(data.junjieLv);
 				(role.headFace as HeadFace).updateHuBaoTitle(data.baowuLv);
+				(role.headFace as HeadFace).updateFuQiTitle();
 			}
 			
 			CharAttributeManager.setCharHp(data, data.totalStat.hp);

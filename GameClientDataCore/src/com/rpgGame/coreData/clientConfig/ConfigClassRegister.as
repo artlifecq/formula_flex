@@ -88,6 +88,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_scene_monster:String = "data.monster.Q_scene_monster";
 		/**  区域刷怪数据库 -- 编辑器录入															 */
 		public static const Q_scene_monster_area:String = "data.monster.Q_scene_monster_area";
+		/**  婚戒升阶表							 */
+		public static const Q_advance_wedding:String = "data.Q_advance_wedding";
 		/**  每个职业一级属性换算二级属性表		 */
 		public static const Q_att_transfer:String = "data.Q_att_transfer";
 		/**  所有属性相关的数据																														 */
@@ -144,6 +146,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_horse:String = "data.Q_horse";
 		/**  坐骑技能数据库		 */
 		public static const Q_horse_skills:String = "data.Q_horse_skills";
+		/**  婚姻互动消耗表				 */
+		public static const Q_interaction:String = "data.Q_interaction";
 		/**  2物品基本信息数据库																																																																																									 */
 		public static const Q_item:String = "data.Q_item";
 		/**  军阶数据表					 */
@@ -158,16 +162,18 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_lunjian:String = "data.Q_lunjian";
 		/**  副本触发表																				 */
 		public static const Q_map_trigger:String = "data.Q_map_trigger";
+		/**  婚姻技能数据库		 */
+		public static const Q_marriage_skills:String = "data.Q_marriage_skills";
 		/**  经脉冲穴数据库																 */
 		public static const Q_meridian:String = "data.Q_meridian";
 		/**  战功表												 */
 		public static const Q_meritorious:String = "data.Q_meritorious";
 		/**  战功表					 */
 		public static const Q_meritorious_monster:String = "data.Q_meritorious_monster";
+		/**  秦陵秘宝出生复活点配置				 */
+		public static const Q_mibao_point:String = "data.Q_mibao_point";
 		/**  秦陵秘宝刷怪配置表				 */
 		public static const Q_mibao_monster:String = "data.Q_mibao_monster";
-		/**  秦陵秘宝出生复活点配置						 */
-		public static const Q_mibao_point:String = "data.Q_mibao_point";
 		/**  秦陵秘宝怪物配置					 */
 		public static const Q_mibao_reward:String = "data.Q_mibao_reward";
 		/**  任务表(所有任务都这里)																																											 */
@@ -282,8 +288,12 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.monster.Q_npc", com.rpgGame.coreData.clientConfig.Q_npc);
 			regClass("data.monster.Q_scene_monster", com.rpgGame.coreData.clientConfig.Q_scene_monster);
 			regClass("data.monster.Q_scene_monster_area", com.rpgGame.coreData.clientConfig.Q_scene_monster_area);
+			regClass("data.Q_advance_wedding", com.rpgGame.coreData.clientConfig.Q_advance_wedding);
 			regClass("data.Q_att_transfer", com.rpgGame.coreData.clientConfig.Q_att_transfer);
 			regClass("data.Q_att_values", com.rpgGame.coreData.clientConfig.Q_att_values);
+//			regClass("data.Q_battle_monster_refresh", com.rpgGame.coreData.clientConfig.Q_battle_monster_refresh);
+			regClass("data.Q_battle_rank", com.rpgGame.coreData.clientConfig.Q_battle_rank);
+//			regClass("data.Q_battle_reward", com.rpgGame.coreData.clientConfig.Q_battle_reward);
 			regClass("data.Q_battle_monster_refresh", com.rpgGame.coreData.clientConfig.Q_battle_monster_refresh);
 			regClass("data.Q_battle_rank", com.rpgGame.coreData.clientConfig.Q_battle_rank);
 			regClass("data.Q_battle_reward", com.rpgGame.coreData.clientConfig.Q_battle_reward);
@@ -310,6 +320,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_hecheng", com.rpgGame.coreData.clientConfig.Q_hecheng);
 			regClass("data.Q_horse", com.rpgGame.coreData.clientConfig.Q_horse);
 			regClass("data.Q_horse_skills", com.rpgGame.coreData.clientConfig.Q_horse_skills);
+			regClass("data.Q_interaction", com.rpgGame.coreData.clientConfig.Q_interaction);
 			regClass("data.Q_item", com.rpgGame.coreData.clientConfig.Q_item);
 			regClass("data.Q_junjie", com.rpgGame.coreData.clientConfig.Q_junjie);
 			regClass("data.Q_limitchallenge", com.rpgGame.coreData.clientConfig.Q_limitchallenge);
@@ -317,9 +328,11 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_lostskill_up", com.rpgGame.coreData.clientConfig.Q_lostskill_up);
 			regClass("data.Q_lunjian", com.rpgGame.coreData.clientConfig.Q_lunjian);
 			regClass("data.Q_map_trigger", com.rpgGame.coreData.clientConfig.Q_map_trigger);
+			regClass("data.Q_marriage_skills", com.rpgGame.coreData.clientConfig.Q_marriage_skills);
 			regClass("data.Q_meridian", com.rpgGame.coreData.clientConfig.Q_meridian);
 			regClass("data.Q_meritorious", com.rpgGame.coreData.clientConfig.Q_meritorious);
 			regClass("data.Q_meritorious_monster", com.rpgGame.coreData.clientConfig.Q_meritorious_monster);
+//			regClass("data.Q_mibao_point", com.rpgGame.coreData.clientConfig.Q_mibao_point);
 			regClass("data.Q_mibao_monster", com.rpgGame.coreData.clientConfig.Q_mibao_monster);
 			regClass("data.Q_mibao_point", com.rpgGame.coreData.clientConfig.Q_mibao_point);
 			regClass("data.Q_mibao_reward", com.rpgGame.coreData.clientConfig.Q_mibao_reward);

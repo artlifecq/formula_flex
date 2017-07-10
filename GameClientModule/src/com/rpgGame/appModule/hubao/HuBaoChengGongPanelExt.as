@@ -6,12 +6,8 @@ package com.rpgGame.appModule.hubao
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.events.HuBaoEvent;
-	import com.rpgGame.core.utils.MCUtil;
-	import com.rpgGame.coreData.cfg.StaticValue;
-	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
-	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.convoy.message.SCSuccessInfoMessage;
 	
 	import feathers.controls.Label;
@@ -62,8 +58,8 @@ package com.rpgGame.appModule.hubao
 				ico.selectImgVisible=false;	
 				//				_beijingkuangList[i].addChild(ico);
 				_skin.container.addChild(ico);
-				ico.x=_beijingkuangList[i].x-4;
-				ico.y=_beijingkuangList[i].y-4;
+				ico.bindBg(_beijingkuangList[i]);
+				//				ico.y=_beijingkuangList[i].y;
 				_icoList.push(ico);
 			}
 			
@@ -97,7 +93,7 @@ package com.rpgGame.appModule.hubao
 		{
 			_skin.bg_shuangbei.visible=msg.isdouble==2;
 			var len:int=msg.reward.length;
-			updatePoint(len);
+			//			updatePoint(len);
 			for(var i:int=0;i<_beijingkuangList.length;i++)
 			{
 				if(i<len)

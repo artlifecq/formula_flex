@@ -17,7 +17,7 @@ package com.rpgGame.netData.marriage.bean{
 		//互动类型 1 送花    2  拥抱    3  亲吻       4  洞房
 		private var _type: int;
 		
-		//剩余次数
+		//已使用次数
 		private var _subNumber: int;
 		
 		/**
@@ -26,7 +26,7 @@ package com.rpgGame.netData.marriage.bean{
 		override protected function writing(): Boolean{
 			//互动类型 1 送花    2  拥抱    3  亲吻       4  洞房
 			writeInt(_type);
-			//剩余次数
+			//已使用次数
 			writeInt(_subNumber);
 			return true;
 		}
@@ -37,7 +37,7 @@ package com.rpgGame.netData.marriage.bean{
 		override protected function reading(): Boolean{
 			//互动类型 1 送花    2  拥抱    3  亲吻       4  洞房
 			_type = readInt();
-			//剩余次数
+			//已使用次数
 			_subNumber = readInt();
 			return true;
 		}
@@ -58,7 +58,7 @@ package com.rpgGame.netData.marriage.bean{
 		}
 		
 		/**
-		 * get 剩余次数
+		 * get 已使用次数
 		 * @return 
 		 */
 		public function get subNumber(): int{
@@ -66,7 +66,7 @@ package com.rpgGame.netData.marriage.bean{
 		}
 		
 		/**
-		 * set 剩余次数
+		 * set 已使用次数
 		 */
 		public function set subNumber(value: int): void{
 			this._subNumber = value;

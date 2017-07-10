@@ -90,6 +90,9 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.country.CountryStaticConfigData;
 	import com.rpgGame.coreData.cfg.country.CountryTaoNiCfgData;
 	import com.rpgGame.coreData.cfg.country.CountryWarCfgData;
+	import com.rpgGame.coreData.cfg.hunyin.HunYinHuDongData;
+	import com.rpgGame.coreData.cfg.hunyin.HunYinSkillData;
+	import com.rpgGame.coreData.cfg.hunyin.JieHunJieZiData;
 	import com.rpgGame.coreData.cfg.item.EquipJiChengData;
 	import com.rpgGame.coreData.cfg.item.EquipPolishCfg;
 	import com.rpgGame.coreData.cfg.item.EquipStrengthCfg;
@@ -293,6 +296,10 @@ package com.rpgGame.app.data
 			//			HorseSpellData.setConfig(dic[ConfigClassRegister.Q_horse_skills]);
 			HorseExtraItemInfo.createInfo();
 			ZhanQiExtraItemInfo.createInfo();
+			HunYinHuDongData.setup(dic[ConfigClassRegister.Q_interaction]);//婚姻互动
+			HunYinSkillData.setup(dic[ConfigClassRegister.Q_marriage_skills]);//婚姻技能
+			JieHunJieZiData.setup(dic[ConfigClassRegister.Q_advance_wedding]);//结婚进阶
+			
 			HorseSpellData.setConfig(dic[ConfigClassRegister.Q_horse_skills]);
 			
 			//副本相关配置

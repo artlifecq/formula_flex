@@ -6,7 +6,7 @@ package com.rpgGame.app.state.role.control
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.action.PlayActionStateReference;
-	import com.rpgGame.coreData.cfg.ChangeModelCfgData;
+	import com.rpgGame.coreData.cfg.hunyin.ChangeModelCfgData;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.cfg.SpellEffectDataManager;
 	import com.rpgGame.coreData.cfg.model.AvatarDeputyWeaponResCfgData;

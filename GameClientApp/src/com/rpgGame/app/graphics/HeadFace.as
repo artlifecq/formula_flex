@@ -86,6 +86,9 @@ package com.rpgGame.app.graphics
 		/**军衔*/
 		private var _junXianBar : HeadNameBar;
 		
+		/**夫妻称号*/
+		private var _fuqititle:HeadNameBar;
+		
 		/** 血条*/
 		private var _bloodBar : HeadBloodBar;
 		private var _bloodPercent : Number = 1;
@@ -220,6 +223,7 @@ package com.rpgGame.app.graphics
 			addElement(_nameBar);
 			//			addElement(_countryNameBar);
 			addElement(_junXianBar);
+			addElement(_fuqititle);
 			addElement(_guildNameBar);
 			addElement(_familNameBar);
 			addElement(_icoImage);
@@ -335,13 +339,13 @@ package com.rpgGame.app.graphics
 					showAndHideElement(_bodyImage, !_isCamouflage);
 					//名字、称号
 					showAndHideElement(_nameBar, nameVisible && !_isCamouflage,DecorCtrl.TOP_NAME);
-					
 					//选中显示
 					//showAndHideElement( _bloodBar, _isSelected );
 					showAndHideElement(_bloodBar, true,DecorCtrl.TOP_HPMP);
 					showAndHideElement(_guildNameBar, true,DecorCtrl.TOP_GUILD);
 					showAndHideElement(_familNameBar, !isMysteryMan&&_isSelected && !_isCamouflage);
 				}
+				showAndHideElement(_fuqititle, true,DecorCtrl.TOP_FUQI);
 				showAndHideElement(_title, !isMysteryMan&&!_isCamouflage,DecorCtrl.TOP_CHENGHAO);
 				showAndHideElement(_office, !isMysteryMan&&!_isCamouflage);
 				showAndHideElement(_huabotitle, !isMysteryMan&&_nameBar && _nameBar.parent && _nameBar.visible,DecorCtrl.TOP_HUBAOCHENGHAO);
@@ -422,6 +426,15 @@ package com.rpgGame.app.graphics
 			//				_countryNameBar.x = _nameBar.x + _nameBar.realWidth;
 			//				_countryNameBar.y = _nameBar.y;
 			//			}
+			if (_fuqititle != null)
+			{
+				_fuqititle.x = int(-_fuqititle.realWidth * 0.5);
+				_fuqititle.y = int(upPosy - _fuqititle.realHeight);
+				upPosy = _fuqititle.y;
+				offsetY = _fuqititle.y;
+				downPosy = _fuqititle.y + _fuqititle.realHeight;
+			}
+			
 			if (_junXianBar != null)
 			{
 				_junXianBar.x = -_junXianBar.width / 2;
@@ -1032,6 +1045,13 @@ package com.rpgGame.app.graphics
 			//				HeadNameBar.recycle(_countryNameBar);
 			//				_countryNameBar = null;
 			//			}
+			if (_fuqititle != null)
+			{
+				deCtrl.removeTop(_fuqititle);
+				HeadNameBar.recycle(_fuqititle);
+				_fuqititle = null;
+			}
+			
 			if (_junXianBar != null)
 			{
 				HeadNameBar.recycle(_junXianBar);
@@ -1151,6 +1171,7 @@ package com.rpgGame.app.graphics
 				return;
 			
 			showAndHideElement(_nameBar, false,DecorCtrl.TOP_NAME);
+			showAndHideElement(_fuqititle, false,DecorCtrl.TOP_FUQI);
 			//			showAndHideElement(_countryNameBar, false);
 			showAndHideElement(_junXianBar, false);
 			showAndHideElement(_countryWarIcon, false);
@@ -1199,7 +1220,7 @@ package com.rpgGame.app.graphics
 				var effName:String=JunJieData.getEffById(titleID);
 				var rud:RenderParamData3D = new RenderParamData3D(RenderUnitID.JUNJIE, RenderUnitType.JUNJIE, ClientConfig.getEffect(effName));
 				_title.addRenderUnitWith(rud, 0);
-//				this.addChild(_title);
+				//				this.addChild(_title);
 				this.deCtrl.addTop(_title,DecorCtrl.TOP_CHENGHAO);
 				_title.start();
 			}
@@ -1215,6 +1236,34 @@ package com.rpgGame.app.graphics
 			updateAllBarPosition();
 		}
 		
+		/**
+		 * 增加夫妻称号
+		 */
+		public function updateFuQiTitle() : void
+		{
+			if(Mgr.hunyinMgr.marriageInfos==null||Mgr.hunyinMgr.marriageInfos.state==5)
+			{
+				if (_fuqititle != null)
+				{
+					deCtrl.removeTop(_fuqititle);
+					HeadNameBar.recycle(_fuqititle);
+					_fuqititle = null;
+					updateAllBarPosition();
+				}
+				return;
+			}
+			var fuqiName:String=Mgr.hunyinMgr.marriageInfos.marriagePlayerName+"的";
+			var text:String=MainRoleManager.actorInfo.sex==1?"老公":"老婆";
+			fuqiName+=text;
+			if (_fuqititle == null)
+			{
+				_fuqititle = HeadNameBar.create();
+				_fuqititle.setName(fuqiName);
+				_fuqititle.setColor(StaticValue.A_UI_BEIGE_TEXT);
+				updateAllBarPosition();
+				deCtrl.sortTop();
+			}
+		}
 		
 		/**
 		 *创建帮派战信息条 
@@ -1274,7 +1323,7 @@ package com.rpgGame.app.graphics
 				var effName:String=HuBaoData.getEffByLv(titleID);
 				var rud : RenderParamData3D = new RenderParamData3D(RenderUnitID.BAOWU, RenderUnitType.BAOWU, ClientConfig.getEffect(effName));
 				_huabotitle.addRenderUnitWith(rud, 0);
-//				this.addChild(_huabotitle);
+				//				this.addChild(_huabotitle);
 				this.deCtrl.addTop(_huabotitle,DecorCtrl.TOP_HUBAOCHENGHAO);
 				_huabotitle.start();
 			}
@@ -1306,7 +1355,7 @@ package com.rpgGame.app.graphics
 				{
 					var rud : RenderParamData3D = new RenderParamData3D(RenderUnitID.BAOWU, RenderUnitType.BAOWU, ClientConfig.getEffect(effName));
 					_NPCtitle.addRenderUnitWith(rud, 0);
-//					this.addChild(_NPCtitle);
+					//					this.addChild(_NPCtitle);
 					this.deCtrl.addTop(_NPCtitle,DecorCtrl.TOP_NPCCHENGHAO);
 					_NPCtitle.start();
 				}

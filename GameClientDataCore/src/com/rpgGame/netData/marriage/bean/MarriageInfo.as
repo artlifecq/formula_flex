@@ -38,6 +38,12 @@ package com.rpgGame.netData.marriage.bean{
 		//战斗力
 		private var _fihtPower: int;
 		
+		//突破值
+		private var _wishValue: int;
+		
+		//副本挑战剩余次数
+		private var _zoneSubNum: int;
+		
 		//当前激活的buff
 		private var _buffs: Vector.<int> = new Vector.<int>();
 		//互动数据
@@ -62,6 +68,10 @@ package com.rpgGame.netData.marriage.bean{
 			writeInt(_state);
 			//战斗力
 			writeInt(_fihtPower);
+			//突破值
+			writeInt(_wishValue);
+			//副本挑战剩余次数
+			writeInt(_zoneSubNum);
 			//当前激活的buff
 			writeShort(_buffs.length);
 			for (var i: int = 0; i < _buffs.length; i++) {
@@ -98,6 +108,10 @@ package com.rpgGame.netData.marriage.bean{
 			_state = readInt();
 			//战斗力
 			_fihtPower = readInt();
+			//突破值
+			_wishValue = readInt();
+			//副本挑战剩余次数
+			_zoneSubNum = readInt();
 			//当前激活的buff
 			var buffs_length : int = readShort();
 			for (var i: int = 0; i < buffs_length; i++) {
@@ -219,6 +233,36 @@ package com.rpgGame.netData.marriage.bean{
 		 */
 		public function set fihtPower(value: int): void{
 			this._fihtPower = value;
+		}
+		
+		/**
+		 * get 突破值
+		 * @return 
+		 */
+		public function get wishValue(): int{
+			return _wishValue;
+		}
+		
+		/**
+		 * set 突破值
+		 */
+		public function set wishValue(value: int): void{
+			this._wishValue = value;
+		}
+		
+		/**
+		 * get 副本挑战剩余次数
+		 * @return 
+		 */
+		public function get zoneSubNum(): int{
+			return _zoneSubNum;
+		}
+		
+		/**
+		 * set 副本挑战剩余次数
+		 */
+		public function set zoneSubNum(value: int): void{
+			this._zoneSubNum = value;
 		}
 		
 		/**
