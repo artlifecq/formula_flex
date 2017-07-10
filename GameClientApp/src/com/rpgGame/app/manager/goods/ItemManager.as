@@ -1,8 +1,12 @@
 package com.rpgGame.app.manager.goods
 {
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.ItemSender;
+	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.core.events.ItemEvent;
+	import com.rpgGame.coreData.cfg.item.EquipStrengthCfg;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -126,6 +130,64 @@ package com.rpgGame.app.manager.goods
 				}
 			}
 			return 0;
+		}
+		
+		//继承判断用	
+		/**判断是否有可继承装备*/
+		public static function checkItemCanInheritance():Boolean
+		{
+			var allEquips:Array=getAllEquipDatas();
+			var num:int=allEquips.length;
+			var result:Vector.<ClientItemInfo>=new Vector.<ClientItemInfo>();
+			for(var i:int=0;i<num;i++){
+				var info:ClientItemInfo=allEquips[i];
+				var equp:EquipInfo=info as EquipInfo;
+				if(isCanInheritance(equp)){					
+					if(judgeIsHaveItemCanBeInherited(equp))
+						return true;
+				}
+			}
+			return false;
+		}
+		
+		//判断是否可以继承
+		private static function isCanInheritance(info:EquipInfo):Boolean
+		{
+			if(info.qItem.q_max_strengthen>0&&!EquipStrengthCfg.isMax(info.strengthLevel))
+				return true;
+			return false;
+		}
+		
+		/**判断背包中是否有可被继承的装备*/
+		private static function judgeIsHaveItemCanBeInherited(targetEquipInfo:EquipInfo):Boolean
+		{
+			var backDatas:Array=BackPackManager.instance.getAllItem();	
+			var num:int=backDatas.length;
+			for(var i:int=0;i<num;i++){
+				var info:ClientItemInfo=backDatas[i];
+				if(info is EquipInfo)
+				{
+					if(isCanInheritanceTo(targetEquipInfo,(info as EquipInfo))){
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+		
+		//判断是否可以被继承
+		private static function isCanInheritanceTo(targetEquipInfo:EquipInfo,info:EquipInfo):Boolean
+		{
+			var job:int=MainRoleManager.actorInfo.job;
+			if(targetEquipInfo!=null)
+			{
+				if((info.qItem.q_job==job||info.qItem.q_job==0)&&info.qItem.q_kind==targetEquipInfo.qItem.q_kind&&(info.strengthLevel>targetEquipInfo.strengthLevel||
+					info.polishLevel>targetEquipInfo.polishLevel||info.smeltAtt1!=0||info.smeltAtt2!=0))
+				{
+					return true;
+				}
+			}
+			return false;
 		}
 	}
 }

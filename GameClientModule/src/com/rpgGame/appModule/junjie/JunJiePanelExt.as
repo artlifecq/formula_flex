@@ -73,7 +73,7 @@ package com.rpgGame.appModule.junjie
 			initView();
 			initAvatar();
 			_skin.conTiaojian.x=_skin.conTiaojian.x-14;
-//			_skin.uiUp.visible=false;
+			//			_skin.uiUp.visible=false;
 			_skin.num_lv.visible=false;		
 		}
 		
@@ -136,10 +136,41 @@ package com.rpgGame.appModule.junjie
 		{
 			initEvent();
 			showNowJunJieLvAtt();
-			_showFirstLv=1;
-			updateBtnState();
-			showItemList(_showFirstLv);
-			SelectHandler(_junjieItemList[0]);
+//			_showFirstLv=1;
+//			updateBtnState();
+//			showItemList(_showFirstLv);
+//			SelectHandler(_junjieItemList[0]);	
+			showBtn();
+		}
+		
+		private function showBtn():void
+		{
+			if(JunJieData.getMaxLv()-1>Mgr.junjieMgr.getActivationLv())
+			{
+				_showFirstLv=(Mgr.junjieMgr.getActivationLv()+1);
+				updateBtnState();
+				showItemList(_showFirstLv);
+				var index:int=getIndex();
+				SelectHandler(_junjieItemList[index]);	
+			}
+			else
+			{
+				_showFirstLv=1;
+				updateBtnState();
+				showItemList(_showFirstLv);
+				SelectHandler(_huangqinguoqiItem);
+			}
+		}
+		
+		private function getIndex():int
+		{
+			if(_junjieItemList==null||_junjieItemList.length==0) return 0;
+			for(var i:int=0;i<_junjieItemList.length;i++)
+			{
+				if(_showFirstLv==_junjieItemList[i].lv)
+					return i;
+			}
+			return 0;
 			
 		}
 		
@@ -201,13 +232,15 @@ package com.rpgGame.appModule.junjie
 			if(bool)
 			{
 				//更新掉
-				updateJunJieItemList();
-				showNowJunJieLvAtt();
-				if(_nowSelectItem!=null)
-				{
-					_nowSelectItem.info=Mgr.junjieMgr.getInfoById(_nowSelectItem.info.modelId);
-					showSelectItem();
-				}				
+//				updateJunJieItemList();
+//				showNowJunJieLvAtt();
+//				if(_nowSelectItem!=null)
+//				{
+//					_nowSelectItem.info=Mgr.junjieMgr.getInfoById(_nowSelectItem.info.modelId);
+//					showSelectItem();
+//				}				
+				showBtn();
+				
 				UIPopManager.showAlonePopUI(CenterEftPop,"ui_shengjichenggong");
 				var nowFight:int=Mgr.junjieMgr.power;
 				var change:int=nowFight-_skin.NumZhanli.number;
@@ -353,10 +386,10 @@ package com.rpgGame.appModule.junjie
 			if(_nowSelectItem.lv>Mgr.junjieMgr.getActivationLv()&&pow>0){
 				_skin.num_lv.label="x"+pow;
 				_skin.num_lv.visible=true;
-//				_skin.uiUp.visible=true;
+				//				_skin.uiUp.visible=true;
 			}else{
 				_skin.num_lv.visible=false;
-//				_skin.uiUp.visible=false;
+				//				_skin.uiUp.visible=false;
 			}
 			for(var i:int=0;i<_shuxingItemList.length;i++)
 			{

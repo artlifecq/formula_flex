@@ -48,8 +48,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			
 			this.currentState = "normal";
 			this.height = 587;
-			this.width = 947;
-			this.elementsContent = [__JiXianTiaoZhan_UIAsset1_i(),__JiXianTiaoZhan_UIAsset2_i(),__JiXianTiaoZhan_UIAsset3_i(),__JiXianTiaoZhan_UIAsset4_i(),__JiXianTiaoZhan_UIAsset5_i(),lbTime_i(),__JiXianTiaoZhan_Label1_i(),lbDec_i(),__JiXianTiaoZhan_UIAsset6_i(),lbBossKill_i(),__JiXianTiaoZhan_UIAsset7_i(),icon_i(),btn_enter_i(),__JiXianTiaoZhan_UIAsset8_i(),__JiXianTiaoZhan_UIAsset9_i(),__JiXianTiaoZhan_UIAsset10_i(),__JiXianTiaoZhan_UIAsset11_i(),__JiXianTiaoZhan_UIAsset12_i(),lbPaiMing_i(),lbShangHai_i(),__JiXianTiaoZhan_Group1_i(),skinFlip_i(),container_list_i()];
+			this.elementsContent = [__JiXianTiaoZhan_UIAsset2_i(),__JiXianTiaoZhan_UIAsset3_i(),__JiXianTiaoZhan_UIAsset4_i(),__JiXianTiaoZhan_UIAsset5_i(),lbTime_i(),__JiXianTiaoZhan_Label1_i(),lbDec_i(),__JiXianTiaoZhan_UIAsset6_i(),lbBossKill_i(),__JiXianTiaoZhan_UIAsset7_i(),icon_i(),btn_enter_i(),__JiXianTiaoZhan_UIAsset8_i(),__JiXianTiaoZhan_UIAsset9_i(),__JiXianTiaoZhan_UIAsset10_i(),__JiXianTiaoZhan_UIAsset11_i(),__JiXianTiaoZhan_UIAsset12_i(),lbPaiMing_i(),lbShangHai_i(),__JiXianTiaoZhan_Group1_i(),container_list_i(),skinFlip_i()];
 			
 			states = {
 			};
@@ -63,8 +62,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 		private function __JiXianTiaoZhan_Group1_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
-			temp.x = 628;
-			temp.y = 104;
+			temp.x = 632;
+			temp.y = 114;
 			temp.elementsContent = [__JiXianTiaoZhan_UIAsset13_i(),__JiXianTiaoZhan_UIAsset14_i(),__JiXianTiaoZhan_UIAsset15_i(),__JiXianTiaoZhan_UIAsset16_i()];
 			return temp;
 		}
@@ -75,8 +74,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			temp.text = "活动规则:";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 77;
-			temp.y = 148;
+			temp.x = 81;
+			temp.y = 219;
 			return temp;
 		}
 
@@ -84,8 +83,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/activety/jixiantiaozhan/bg1.png";
-			temp.x = 629;
-			temp.y = 470;
+			temp.x = 633;
+			temp.y = 480;
 			return temp;
 		}
 
@@ -93,8 +92,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/activety/jixiantiaozhan/wenzibg2.png";
-			temp.x = 628;
-			temp.y = 447;
+			temp.x = 632;
+			temp.y = 457;
 			return temp;
 		}
 
@@ -102,8 +101,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/activety/jixiantiaozhan/wodepaihangjiangli2.png";
-			temp.x = 724;
-			temp.y = 448;
+			temp.x = 728;
+			temp.y = 458;
 			return temp;
 		}
 
@@ -144,25 +143,14 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			return temp;
 		}
 
-		private function __JiXianTiaoZhan_UIAsset1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 498;
-			temp.styleName = "ui/common/background/neikuang_1.png";
-			temp.width = 922;
-			temp.x = 14;
-			temp.y = 72;
-			return temp;
-		}
-
 		private function __JiXianTiaoZhan_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 498;
 			temp.styleName = "ui/common/background/neikuang_1.png";
 			temp.width = 614;
-			temp.x = 14;
-			temp.y = 72;
+			temp.x = 18;
+			temp.y = 82;
 			return temp;
 		}
 
@@ -170,8 +158,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/big_bg/activety/jixiantiaozhan_bg.jpg";
-			temp.x = 20;
-			temp.y = 77;
+			temp.x = 24;
+			temp.y = 87;
 			return temp;
 		}
 
@@ -181,8 +169,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			temp.height = 25;
 			temp.styleName = "ui/app/activety/jixiantiaozhan/paihangdi.png";
 			temp.width = 236;
-			temp.x = 36;
-			temp.y = 100;
+			temp.x = 40;
+			temp.y = 110;
 			return temp;
 		}
 
@@ -190,8 +178,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/activety/jixiantiaozhan/huodongshuoming.png";
-			temp.x = 46;
-			temp.y = 103;
+			temp.x = 50;
+			temp.y = 113;
 			return temp;
 		}
 
@@ -199,8 +187,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/activety/jixiantiaozhan/shanglunBOSSjishazhe.png";
-			temp.x = 71;
-			temp.y = 460;
+			temp.x = 75;
+			temp.y = 470;
 			return temp;
 		}
 
@@ -208,8 +196,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/activety/jixiantiaozhan/zuihouyijijiangli1.png";
-			temp.x = 71;
-			temp.y = 508;
+			temp.x = 75;
+			temp.y = 518;
 			return temp;
 		}
 
@@ -217,8 +205,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/activety/zonghe/xzt.png";
-			temp.x = 628;
-			temp.y = 78;
+			temp.x = 632;
+			temp.y = 88;
 			return temp;
 		}
 
@@ -226,8 +214,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/activety/jixiantiaozhan/bossshanghaipaiming.png";
-			temp.x = 734;
-			temp.y = 78;
+			temp.x = 738;
+			temp.y = 88;
 			return temp;
 		}
 
@@ -237,8 +225,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			btn_enter = temp;
 			temp.name = "btn_enter";
 			temp.styleClass = org.mokylin.skin.app.activety.jixiantiaozhan.button.ButtonJinruzhanchang;
-			temp.x = 435;
-			temp.y = 454;
+			temp.x = 439;
+			temp.y = 464;
 			return temp;
 		}
 
@@ -247,10 +235,10 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			container_list = temp;
 			temp.name = "container_list";
-			temp.height = 306;
-			temp.width = 305;
-			temp.x = 628;
-			temp.y = 136;
+			temp.height = 313;
+			temp.width = 303;
+			temp.x = 632;
+			temp.y = 143;
 			return temp;
 		}
 
@@ -260,8 +248,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			icon = temp;
 			temp.name = "icon";
 			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 188;
-			temp.y = 489;
+			temp.x = 192;
+			temp.y = 499;
 			return temp;
 		}
 
@@ -274,8 +262,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 181;
-			temp.x = 194;
-			temp.y = 462;
+			temp.x = 198;
+			temp.y = 472;
 			return temp;
 		}
 
@@ -289,8 +277,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 492;
-			temp.x = 77;
-			temp.y = 193;
+			temp.x = 81;
+			temp.y = 246;
 			return temp;
 		}
 
@@ -303,8 +291,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 135;
-			temp.x = 648;
-			temp.y = 489;
+			temp.x = 652;
+			temp.y = 499;
 			return temp;
 		}
 
@@ -317,8 +305,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 135;
-			temp.x = 798;
-			temp.y = 489;
+			temp.x = 802;
+			temp.y = 499;
 			return temp;
 		}
 
@@ -331,8 +319,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 149;
-			temp.x = 120;
-			temp.y = 104;
+			temp.x = 124;
+			temp.y = 114;
 			return temp;
 		}
 
@@ -344,8 +332,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			var skin:StateSkin = new org.mokylin.skin.common.Flip1_Skin()
 			temp.skin = skin
 			temp.width = 106;
-			temp.x = 722;
-			temp.y = 521;
+			temp.x = 726;
+			temp.y = 531;
 			return temp;
 		}
 

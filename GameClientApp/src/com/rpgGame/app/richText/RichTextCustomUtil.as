@@ -1,85 +1,86 @@
 /*
-	使用示例：
-	!!!非输入框=================================================================
-	//定义默认格式，查原生api
-	var defaultFormat:TextFormat = new TextFormat(Fontter.FONT_Hei);
-	defaultFormat.color = 0xded8c7;
-	defaultFormat.size = 14;
-	defaultFormat.align = TextFieldAutoSize.LEFT;
-	//创建富文本框
-	var _richText:RichTextArea3D = new RichTextArea3D( _chatBarSkin.scroller.width - 30);
-	//设置快捷命令配置，比如表情,具体配置格式和方法见RichTextCustomUtil.cloneChatUnitConfigVec
-	_richText.setConfig(RichTextCustomUtil.cloneChatUnitConfigVec());
-	_richText.wordWrap = true;
-	_richText.multiline = true;
-	_richText.x = 3;
-	_richText.y = 6;
-	_richText.defaultTextFormat = defaultFormat;
-	//设置宽高
-	_chatText.setSize( _chatBarSkin.scroller.width - 30 );
-	//重置文本
-	_chatText.text = "";
-	//添加文本，这个方法非输入文本框会自动换行，而输入框不会
-	_chatText.appendRichText( ChatUtil.getChatMessageByChannel( info.channel, content ) );
+使用示例：
+!!!非输入框=================================================================
+//定义默认格式，查原生api
+var defaultFormat:TextFormat = new TextFormat(Fontter.FONT_Hei);
+defaultFormat.color = 0xded8c7;
+defaultFormat.size = 14;
+defaultFormat.align = TextFieldAutoSize.LEFT;
+//创建富文本框
+var _richText:RichTextArea3D = new RichTextArea3D( _chatBarSkin.scroller.width - 30);
+//设置快捷命令配置，比如表情,具体配置格式和方法见RichTextCustomUtil.cloneChatUnitConfigVec
+_richText.setConfig(RichTextCustomUtil.cloneChatUnitConfigVec());
+_richText.wordWrap = true;
+_richText.multiline = true;
+_richText.x = 3;
+_richText.y = 6;
+_richText.defaultTextFormat = defaultFormat;
+//设置宽高
+_chatText.setSize( _chatBarSkin.scroller.width - 30 );
+//重置文本
+_chatText.text = "";
+//添加文本，这个方法非输入文本框会自动换行，而输入框不会
+_chatText.appendRichText( ChatUtil.getChatMessageByChannel( info.channel, content ) );
 
-	!!!输入框=================================================================
-	var inputText:RichTextArea3D = new RichTextArea3D(skin.textInput.width,skin.textInput.height);
-	inputText.setConfig(RichTextCustomUtil.cloneChatUnitConfigVec());
-	//设置最大输入字符数
-	inputText.maxChars = 50;
-	//设置是否自动换行和是否多行输入
-	inputText.wordWrap = true;
-	inputText.multiline = true;
-	//设置是否是输入文本框
-	inputText.isEditable = true;
-	inputText.x = skin.textInput.x;
-	inputText.y = skin.textInput.y + 2;
-	inputText.defaultTextFormat = defaultFormat;
-	inputText.addEventListener(FeathersEventType.FOCUS_IN,inputFocusInHandler);
-	inputText.addEventListener(FeathersEventType.FOCUS_OUT,inputFocusOutHandler);
-	inputText.addEventListener(Event.CHANGE,onChange);
-	//访问剩余可输入字符数，与Event.CHANGE事件配合显示提示
-	inputText.remainChars
-	//访问是否是输入焦点状态
-	inputText.isInputFocus
-	//设置焦点
-	inputText.setFocus();
-	//设置光标位置
-	inputText.selectRange(index,index);
-	//访问文本框的文本，此处指源码,与设置时相同
-	inputText.text
+!!!输入框=================================================================
+var inputText:RichTextArea3D = new RichTextArea3D(skin.textInput.width,skin.textInput.height);
+inputText.setConfig(RichTextCustomUtil.cloneChatUnitConfigVec());
+//设置最大输入字符数
+inputText.maxChars = 50;
+//设置是否自动换行和是否多行输入
+inputText.wordWrap = true;
+inputText.multiline = true;
+//设置是否是输入文本框
+inputText.isEditable = true;
+inputText.x = skin.textInput.x;
+inputText.y = skin.textInput.y + 2;
+inputText.defaultTextFormat = defaultFormat;
+inputText.addEventListener(FeathersEventType.FOCUS_IN,inputFocusInHandler);
+inputText.addEventListener(FeathersEventType.FOCUS_OUT,inputFocusOutHandler);
+inputText.addEventListener(Event.CHANGE,onChange);
+//访问剩余可输入字符数，与Event.CHANGE事件配合显示提示
+inputText.remainChars
+//访问是否是输入焦点状态
+inputText.isInputFocus
+//设置焦点
+inputText.setFocus();
+//设置光标位置
+inputText.selectRange(index,index);
+//访问文本框的文本，此处指源码,与设置时相同
+inputText.text
 
-	富文本内容相关接口=================================================================
-	//添加文本链接对象，比如一个人名链接
-	var linkTextCode:String = RichTextCustomUtil.getTextLinkCode("某某某",0xFFFFFF,RichTextCustomLinkType.ROLE_NAME_TYPE, "携带的数据");
-	inputText.appendRichText(linkTextCode);
-	//添加一个图标，比如小飞鞋
-	var imageCode:String = RichTextCustomUtil.getImageLinkCode("aaa.png",RichTextCustomLinkType.TASK_FLY_TYPE, "携带的数据");
-	inputText.appendRichText(imageCode);
-	//添加一个物品文本链接
-	var goodsCode:String = RichTextCustomUtil.getItemCode(cfgId,name,quality);
-	inputText.appendRichText(goodsCode);
-	//添加一个表情动画,快捷键参考RichTextCustomUtil.cloneChatUnitConfigVec配置
-	inputText.appendRichText("表情对应的快捷键");
-	//把富文本单元的代码替换成普通显示的标签
-	var unitLabel:String = RichTextConfig.replaceUnitCodeToLabel(goodsCode);
-	//把富文本单元的代码数据转换成一个格式化的数据对象
-	var unitData:RichTextUnitData = RichTextConfig.getUnitData(goodsCode);
+富文本内容相关接口=================================================================
+//添加文本链接对象，比如一个人名链接
+var linkTextCode:String = RichTextCustomUtil.getTextLinkCode("某某某",0xFFFFFF,RichTextCustomLinkType.ROLE_NAME_TYPE, "携带的数据");
+inputText.appendRichText(linkTextCode);
+//添加一个图标，比如小飞鞋
+var imageCode:String = RichTextCustomUtil.getImageLinkCode("aaa.png",RichTextCustomLinkType.TASK_FLY_TYPE, "携带的数据");
+inputText.appendRichText(imageCode);
+//添加一个物品文本链接
+var goodsCode:String = RichTextCustomUtil.getItemCode(cfgId,name,quality);
+inputText.appendRichText(goodsCode);
+//添加一个表情动画,快捷键参考RichTextCustomUtil.cloneChatUnitConfigVec配置
+inputText.appendRichText("表情对应的快捷键");
+//把富文本单元的代码替换成普通显示的标签
+var unitLabel:String = RichTextConfig.replaceUnitCodeToLabel(goodsCode);
+//把富文本单元的代码数据转换成一个格式化的数据对象
+var unitData:RichTextUnitData = RichTextConfig.getUnitData(goodsCode);
 
-	!!!处理以及扩展链接事件类型，比如玩家名字、物品名字、坐标位置、任务目标=================================================================
-	RichTextCustomLinkType
-	RichTextCustomUtil.onClickFunc
-	RichTextCustomUtil.onMouseOut
-	RichTextCustomUtil.onMouseMove
+!!!处理以及扩展链接事件类型，比如玩家名字、物品名字、坐标位置、任务目标=================================================================
+RichTextCustomLinkType
+RichTextCustomUtil.onClickFunc
+RichTextCustomUtil.onMouseOut
+RichTextCustomUtil.onMouseMove
 
-	!!!扩展富文本单元类型，已有链接文本、图标、动画=================================================================
-	RichTextCustomUnitType
-	RichTextCustomUtil.updateRichUnit
+!!!扩展富文本单元类型，已有链接文本、图标、动画=================================================================
+RichTextCustomUnitType
+RichTextCustomUtil.updateRichUnit
 
- */
+*/
 package com.rpgGame.app.richText
 {
 	import com.rpgGame.app.manager.MenuManager;
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.ChatManager;
 	import com.rpgGame.app.manager.chat.FaceLoadManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -121,7 +122,7 @@ package com.rpgGame.app.richText
 	
 	import starling.display.DisplayObject;
 	import starling.text.TextFieldAutoSize;
-
+	
 	
 	
 	/**
@@ -132,7 +133,7 @@ package com.rpgGame.app.richText
 	 */
 	public class RichTextCustomUtil
 	{
-
+		
 		/**配置回调函数*/
 		RichTextArea3D.onMouseClickUnit = onClickFunc;
 		RichTextArea3D.onMouseMoveUnit = onMouseMove;
@@ -140,7 +141,7 @@ package com.rpgGame.app.richText
 		RichTextArea3D.onMouseDoubleClickUnit = onDoubleClick;
 		RichTextArea3D.onUpdateRichUnit = updateRichUnit;
 		RichTextArea3D.onGetBackDisplayObjWhenUnitDispose = getBackDisplayObjWhenUnitDispose;
-
+		
 		/**聊天所需富文本单元配置列表*/
 		private static var _chatUnitConfigVect : Vector.<RichTextUnitConfigData>;
 		private static var updateMap:HashMap=new HashMap();
@@ -184,8 +185,8 @@ package com.rpgGame.app.richText
 			}
 			return _chatUnitConfigVect;
 		}
-
-
+		
+		
 		/**
 		 * 获得文本链接的代码
 		 * @param label 显示的标签名
@@ -200,7 +201,7 @@ package com.rpgGame.app.richText
 		{
 			return RichTextConfig.getCode(RichTextCustomUnitType.LINK, null, label, labelColor, linkType, linkData, 0, tWidth);
 		}
-
+		
 		/**
 		 * 获得图标对象的代码
 		 * @param res 对应的图标的资源(UIAsset的styleName)
@@ -213,7 +214,7 @@ package com.rpgGame.app.richText
 		{
 			return RichTextConfig.getCode(RichTextCustomUnitType.IMAGE, res, null, -1, linkType, linkData, offsetY);
 		}
-
+		
 		/**
 		 * 获得按钮对象的代码
 		 * @param res 对应的图标的资源(Button的styleName)
@@ -226,7 +227,7 @@ package com.rpgGame.app.richText
 		{
 			return RichTextConfig.getCode(RichTextCustomUnitType.BUTTON, res, null, -1, linkType, linkData, offsetY);
 		}
-
+		
 		/**
 		 * 获得动画对象的代码
 		 * @param res 对应的动画的资源(可以自定义，最终在updateMovieClip处理)
@@ -239,7 +240,7 @@ package com.rpgGame.app.richText
 		{
 			return RichTextConfig.getCode(RichTextCustomUnitType.MOVIECLIP, res, null, -1, linkType, linkData);
 		}
-
+		
 		/**
 		 * 物品名称代码
 		 *
@@ -253,7 +254,7 @@ package com.rpgGame.app.richText
 		{
 			return getTextLinkCode(itemName, ItemQualityType.getColorValue(qualiy), RichTextCustomLinkType.ITEM_SHOW_TYPE, id + "," + qualiy.toString());
 		}
-
+		
 		/**
 		 * 坐骑名称代码
 		 *
@@ -268,7 +269,7 @@ package com.rpgGame.app.richText
 			var nameColor : uint = ItemQualityType.getColorValue(qualiy);
 			return RichTextCustomUtil.getTextLinkCode(mountName, nameColor, RichTextCustomLinkType.SHOW_MOUNT_TYPE, key);
 		}
-
+		
 		/**
 		 * 富文本单元被点击回调函数
 		 * @param type
@@ -376,9 +377,18 @@ package com.rpgGame.app.richText
 				case RichTextCustomLinkType.WALK_TO_SCENE_MONSTER_TYPE:
 					//					TaskUtil.walkToSceneMonster(parseInt(unitData.linkData));
 					break;
+				case RichTextCustomLinkType.QIUHUN:
+					var name:Array=unitData.linkData.split(',');
+					var gid:Number=parseInt(name[1]);
+					if (MainRoleManager.isSelf(gid))
+					{
+						return;
+					}
+					Mgr.hunyinMgr.showQiuHunTiShiPanel(1,null,name[0]);
+					break;
 			}
 		}
-
+		
 		/**
 		 * 鼠标双击事件
 		 * @param unit
@@ -399,7 +409,7 @@ package com.rpgGame.app.richText
 			//					break;
 			//			}
 		}
-
+		
 		/**
 		 * 鼠标移出事件，可以根据类型来写不同的效果
 		 *
@@ -414,7 +424,7 @@ package com.rpgGame.app.richText
 				TipManager.remove();
 			}
 		}
-
+		
 		/**
 		 * 鼠标移动事件，可以根据类型来写不同的效果
 		 *
@@ -442,7 +452,7 @@ package com.rpgGame.app.richText
 				//				}
 			}
 		}
-
+		
 		/**
 		 * 更新富文本单元
 		 *
@@ -465,7 +475,7 @@ package com.rpgGame.app.richText
 					break;
 			}
 		}
-
+		
 		/**
 		 * 生成动态表情
 		 *
@@ -473,7 +483,7 @@ package com.rpgGame.app.richText
 		private static function updateMovieClip(unit : RichTextUnit) : void
 		{
 			var movieClass : Class = FaceCfgData.getFaceInfoByKey(unit.unitData.res).faceClass;
-
+			
 			var movieClip : UIMovieClip = unit.displayObj as UIMovieClip;
 			if (movieClip == null)
 			{
@@ -485,7 +495,7 @@ package com.rpgGame.app.richText
 			movieClip.styleClass = movieClass;
 			unit.onDisplayObjLoaded();
 		}
-
+		
 		//-----------------------------------
 		/**
 		 * 设置图标
@@ -503,7 +513,7 @@ package com.rpgGame.app.richText
 			image.onImageLoaded = unit.onDisplayObjLoaded;
 			image.styleName = unit.unitData.res;
 		}
-
+		
 		/**
 		 * 设置文本
 		 * @param title
@@ -531,7 +541,7 @@ package com.rpgGame.app.richText
 			label.htmlText = text;
 			unit.onDisplayObjLoaded();
 		}
-
+		
 		private static function updateButton(unit : RichTextUnit) : void
 		{
 			var target : Button = unit.displayObj as Button;

@@ -19,6 +19,7 @@
 	import com.rpgGame.app.cmdlistener.HeroMiscCmdListener;
 	import com.rpgGame.app.cmdlistener.HeroSearchCmdListener;
 	import com.rpgGame.app.cmdlistener.HuBaoContainerCmdListener;
+	import com.rpgGame.app.cmdlistener.HunYinCmdListener;
 	import com.rpgGame.app.cmdlistener.JJBattleCmdListener;
 	import com.rpgGame.app.cmdlistener.JunJieContainerCmdListener;
 	import com.rpgGame.app.cmdlistener.LookCmdListener;
@@ -138,6 +139,8 @@
 //			register("YunBiaoCmdListener", YunBiaoCmdListener); //王城战
 			register("HorseCmdListener", HorseCmdListener); //坐骑
 			register("ZhanQiCmdListener", ZhanQiCmdListener); //战旗
+			register("HunYinCmdListener", HunYinCmdListener); //婚姻
+			
 			register("TradeCmdlistener", TradeCmdlistener); //王城战
 			register("BaZhenTuCmdListener", BaZhenTuCmdListener); //八阵图
 //			register("DailyTasksCmdListener", DailyTasksCmdListener); //日常任务追踪栏事件监听

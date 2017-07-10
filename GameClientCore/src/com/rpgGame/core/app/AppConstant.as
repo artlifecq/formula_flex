@@ -499,5 +499,16 @@ package com.rpgGame.core.app
 		
 		/**npc闲话**/
 		public static var VIP_PANEL:String = createAppInfo("vip.VipMainPanelExt","vip");
+		
+		/**求婚界面**/
+		public static var HUNYIN_QIUHUN:String = createAppInfo("hunyin.QiuHunPanelExt","hunyin");
+		/**婚姻界面**/
+		public static var HUNYIN_JIEHUN:String = createAppInfo("hunyin.HunYinPanelExt","hunyin");
+		/**夫妻日志**/
+		public static var HUNYIN_RIZHI:String = createAppInfo("hunyin.FuQiRiZhiPanelExt","hunyin");
+		/**夫妻副本**/
+		public static var HUNYIN_FUBEN:String = createAppInfo("hunyin.FuQiFuBenPanelExt","hunyin");
+		/**夫妻邀请提示**/
+		public static var HUNYIN_FUBENYAOQING:String = createAppInfo("hunyin.FuQiYaoQingPanel","hunyin");
 	}
 }

@@ -59,6 +59,10 @@ package com.rpgGame.coreData.info.map
 		 * 王城争霸
 		 */
 		public static const MAP_TYPE_WCZB:int = rEnum.next;//12
+		/**
+		 * 夫妻副本
+		 */
+		public static const MAP_TYPE_FQFB:int = rEnum.next;//13
 
 	}
 }

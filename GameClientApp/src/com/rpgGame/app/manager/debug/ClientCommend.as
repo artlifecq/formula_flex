@@ -12,17 +12,24 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.app.manager.FangChenMiManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.PKMamager;
+	import com.rpgGame.app.manager.chat.ChatManager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.fightsoul.FightSoulManager;
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleManager;
+	import com.rpgGame.app.richText.RichTextCustomLinkType;
+	import com.rpgGame.app.richText.RichTextCustomUtil;
 	import com.rpgGame.app.ui.main.dungeon.JiXianTiaoZhanExtPop;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
+	import com.rpgGame.coreData.type.CharAttributeType;
+	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
 	import com.rpgGame.netData.backpack.bean.TempItemInfo;
 	import com.rpgGame.netData.player.message.SCNonagePromptMessage;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
@@ -147,6 +154,14 @@ package   com.rpgGame.app.manager.debug
 				var msg:SCNonagePromptMessage=new SCNonagePromptMessage();
 				msg.type=parseInt(arg[0]);
 				FangChenMiManager.OnSCNonagePromptMessage(msg);
+			});		
+			commandList.put( ".qiuhun", function (...arg):void
+			{
+				var str:String=ItemUtil.getJobName(MainRoleManager.actorInfo.job)+" "+MainRoleManager.actorInfo.totalStat.getStatValue(CharAttributeType.LV)+"级,"
+				if(MainRoleManager.actorInfo.sex==1) str+="玉树临风胜潘安，一树梨花压海棠，求美女老婆一枚";
+				else str+="小萝莉，娇羞藏，声音甜美本领强，求帅哥老公一枚";
+				var link:String=RichTextCustomUtil.getTextLinkCode("点击向我求婚",StaticValue.A_UI_GREEN_TEXT,RichTextCustomLinkType.QIUHUN,MainRoleManager.actorInfo.name);		
+				ChatManager.reqSendChat( str+link, EnumChatChannelType.CHAT_CHANNEL_WORLD,  ChatManager.currentSiLiaoTargetName );
 			});		
 			commandList.put( ".jixianjiesuan", function (...arg):void
 			{

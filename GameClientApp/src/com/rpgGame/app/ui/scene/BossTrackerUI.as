@@ -58,7 +58,7 @@ package com.rpgGame.app.ui.scene
 		{
 			iconList=new Vector.<IconCDFace>();
 			_bgList=new Vector.<UIAsset>();
-			for(var i:int=0;i<4;i++){
+			for(var i:int=0;i<1;i++){
 				_bgList.push(_skin["sec_ico1_"+i]);
 			}
 			toPoint=new Position();

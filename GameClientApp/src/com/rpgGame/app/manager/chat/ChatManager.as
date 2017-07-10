@@ -563,7 +563,7 @@ package com.rpgGame.app.manager.chat
 		{
 			CONFIG::Debug {
 				/*if (ShellManager.parse(msg)) {
-					//                    return true;
+				//                    return true;
 				}*/
 			}
 				//验证gm命令
@@ -630,6 +630,10 @@ package com.rpgGame.app.manager.chat
 				if(unitData.linkType == RichTextCustomLinkType.POSITION_TYPE)//给文本位置数据加上频道颜色
 				{
 					data[i] = addColorToPositionData(unitData,channel);
+				}
+				if(unitData.linkType == RichTextCustomLinkType.QIUHUN)//如果是求婚直接返回源数据
+				{
+					return msgStr;
 				}
 			}
 			

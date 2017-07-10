@@ -330,7 +330,7 @@ package com.rpgGame.app.ui.main.head {
 				line=i%MAX_SHOW_NUM;
 				row=int(i/MAX_SHOW_NUM);
 				icon.x=line*gridW;
-				icon.y=-row*gridW;
+				icon.y=row*gridW;
 			}
 		}
 	}

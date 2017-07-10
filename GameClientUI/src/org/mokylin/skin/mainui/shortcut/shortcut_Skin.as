@@ -7,6 +7,7 @@ package org.mokylin.skin.mainui.shortcut
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import feathers.controls.UIMovieClip;
+	import org.mokylin.skin.mainui.duiwu.button.ButtonTuianniu;
 	import org.mokylin.skin.mainui.juexue.Juexue_mc;
 	import org.mokylin.skin.mainui.juexue.button.ButtonJuexue_bt;
 
@@ -39,6 +40,8 @@ package org.mokylin.skin.mainui.shortcut
 		public var Iconbg8:feathers.controls.UIAsset;
 
 		public var Icons:feathers.controls.Group;
+
+		public var btn_jiehun:feathers.controls.Button;
 
 		public var btn_juexue:feathers.controls.Button;
 
@@ -117,7 +120,7 @@ package org.mokylin.skin.mainui.shortcut
 			this.currentState = "normal";
 			this.height = 127;
 			this.width = 809;
-			this.elementsContent = [right_nengliang_i(),right_jintiao_i(),right_nengliangMask_i(),mask_blue_i(),left_xuecao_i(),left_xuecaoMask_i(),mask_red_i(),__shortcut_Skin_UIAsset1_i(),__shortcut_Skin_UIAsset2_i(),Icons_i(),juexuegroup_i(),fangun_i(),jingzhen_yijia_i()];
+			this.elementsContent = [right_nengliang_i(),right_jintiao_i(),right_nengliangMask_i(),mask_blue_i(),left_xuecao_i(),left_xuecaoMask_i(),mask_red_i(),__shortcut_Skin_UIAsset1_i(),__shortcut_Skin_UIAsset2_i(),Icons_i(),juexuegroup_i(),fangun_i(),jingzhen_yijia_i(),btn_jiehun_i()];
 			
 			states = {
 			};
@@ -395,6 +398,19 @@ package org.mokylin.skin.mainui.shortcut
 			temp.styleName = "ui/mainui/shortcut/tishiyuandi.png";
 			temp.x = 0;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function btn_jiehun_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btn_jiehun = temp;
+			temp.name = "btn_jiehun";
+			temp.height = 30;
+			temp.styleClass = org.mokylin.skin.mainui.duiwu.button.ButtonTuianniu;
+			temp.width = 30;
+			temp.x = 22;
+			temp.y = 55;
 			return temp;
 		}
 
