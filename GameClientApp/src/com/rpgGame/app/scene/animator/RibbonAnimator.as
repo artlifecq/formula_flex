@@ -5,9 +5,11 @@ package com.rpgGame.app.scene.animator
 	import com.game.engine3D.scene.render.vo.IRenderAnimator;
 	import com.game.engine3D.utils.MathUtil;
 	import com.game.engine3D.vo.BaseObj3D;
+	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.type.RenderUnitID;
@@ -22,6 +24,9 @@ package com.rpgGame.app.scene.animator
 	import away3d.materials.TextureMaterial;
 	import away3d.ribbon.LightningRibbon;
 	import away3d.textures.AsyncTexture2D;
+	
+	import org.client.mainCore.manager.EventManager;
+	import org.game.netCore.data.long;
 	
 	/**
 	 * 条带动画 
@@ -39,14 +44,35 @@ package com.rpgGame.app.scene.animator
 		private static const MAX_COUNT:int = 5;
 		private var _lightList:Vector.<LightningRibbon>;
 		
-		private static var LightMaterial:TextureMaterial;
-		
+		private static var LightMaterialMap:HashMap=new HashMap();
+		private var _lightMaterial:TextureMaterial;
 		protected var _renderSet : RenderSet3D;
 		private var _isAttachUnit:Boolean;
-		
+		//现在只有一个目标了
+		private var _targetId:long;
 		public function RibbonAnimator()
 		{
 			_lightList = new Vector.<LightningRibbon>();
+			EventManager.addEvent(MapEvent.ROLE_DIE,onMonsterDie);
+			EventManager.addEvent(MapEvent.UPDATE_MAP_ROLE_REMOVE,onMonsterRemoved);
+		}
+		
+		private function onMonsterRemoved(...arg):void
+		{
+			// TODO Auto Generated method stub
+			if (arg[0]==SceneCharType.MONSTER&&_targetId.ToGID()==arg[1]) 
+			{
+				dispose();
+			}
+		}
+		
+		private function onMonsterDie(monsterId:long):void
+		{
+			// TODO Auto Generated method stub
+			if (monsterId.EqualTo(_targetId)) 
+			{
+				dispose();
+			}
 		}
 		
 		public function setOwner(owner:BaseObj3D):void
@@ -88,6 +114,14 @@ package com.rpgGame.app.scene.animator
 					ribbon.dispose();
 					//					SceneManager.scene.gameScene3d.removeChild(ribbon);
 				}
+				//一次销毁两个
+				ribbon = _lightList.shift();
+				if(ribbon)
+				{
+					ribbon.stop();
+					ribbon.dispose();
+					//					SceneManager.scene.gameScene3d.removeChild(ribbon);
+				}
 				if (_lightList.length==0) 
 				{
 					dispose();
@@ -97,6 +131,8 @@ package com.rpgGame.app.scene.animator
 		
 		public function dispose():void
 		{
+			EventManager.removeEvent(MapEvent.ROLE_DIE,onMonsterDie);
+			EventManager.removeEvent(MapEvent.UPDATE_MAP_ROLE_REMOVE,onMonsterRemoved);
 			SceneManager.removeSceneObjFromScene(_renderSet);
 			for each(var ribbon:LightningRibbon in _lightList)
 			{
@@ -109,19 +145,23 @@ package com.rpgGame.app.scene.animator
 			_recycleDelay = 1000;
 			_from = _to = _aktor = null;
 			_renderSet = null;
+			_targetId=null;
+			_lightMaterial=null;
 		}
 		
 		public function initRibbonData(imgUrl:String,targetList:Vector.<SceneRole>,aktor:SceneRole,isAttachUnit:Boolean=false):void
 		{
-			if(LightMaterial == null)
+			_lightMaterial=LightMaterialMap.getValue(imgUrl);
+			if(_lightMaterial == null)
 			{
 				var tex:AsyncTexture2D = new AsyncTexture2D(true, true, false);
 				tex.load(ClientConfig.getDynTexture(imgUrl));
 				
-				LightMaterial = new TextureMaterial(tex);
-				LightMaterial.bothSides = true;
-				LightMaterial.blendMode = BlendMode.ADD;
-				LightMaterial.depthCompareMode = Context3DCompareMode.LESS;
+				_lightMaterial = new TextureMaterial(tex);
+				_lightMaterial.bothSides = true;
+				_lightMaterial.blendMode = BlendMode.ADD;
+				_lightMaterial.depthCompareMode = Context3DCompareMode.LESS;
+				LightMaterialMap.put(imgUrl,_lightMaterial);
 			}
 			
 			_isAttachUnit = isAttachUnit;
@@ -131,7 +171,7 @@ package com.rpgGame.app.scene.animator
 			
 			_to = _targetList.shift();
 			_from = _aktor = aktor;
-			
+			_targetId=_to.data.serverID;
 			//			addTimeHandlerAt(4000, on4000Ms);
 			
 			light(_from,_to);
@@ -167,10 +207,10 @@ package com.rpgGame.app.scene.animator
 				trace(fromObj.position);
 				trace(toObj.position);
 				var seg:int=10;
-				var h:int=90;
-				var ribbon:LightningRibbon = new LightningRibbon(fromObj, toObj, seg, h, LightMaterial);
+				var h:int=64;
+				var ribbon:LightningRibbon = new LightningRibbon(fromObj, toObj, seg, h, _lightMaterial);
 				ribbon.shakeTimer = 100;
-				ribbon.shakeAmp=50;
+				ribbon.shakeAmp=60;
 				var fps:int=12;
 				ribbon.animator = new CPUSpriteSheetAnimator(8, 1, fps, 8);
 				ribbon.start();
@@ -179,9 +219,9 @@ package com.rpgGame.app.scene.animator
 				
 				SceneManager.scene.gameScene3d.addChild(ribbon);
 				
-				ribbon = new LightningRibbon(toObj,fromObj , seg, h, LightMaterial);
+				ribbon = new LightningRibbon(toObj,fromObj , seg, h, _lightMaterial);
 				ribbon.shakeTimer = 100;
-				ribbon.shakeAmp=50;
+				ribbon.shakeAmp=60;
 				
 				ribbon.animator = new CPUSpriteSheetAnimator(8, 1, fps, 8);
 				ribbon.start();
