@@ -40,6 +40,7 @@
 		private var _TimeFun:Function;
         private var _runing:Boolean;
         private var _effect3D:InterObject3D;
+		private var _openState:Boolean=false;
 
         public function ActivityButtonBase(skin)
         {
@@ -60,6 +61,9 @@
 		
 		public function canOpen():Boolean
 		{
+			if(!_openState){
+				return false;
+			}
 			if(FunctionOpenManager.getOpenLevelByFunBarInfo(_info)>MainRoleManager.actorInfo.totalStat.level)
 				return false;
 			return true;
@@ -182,12 +186,14 @@
 
         public function onActivityOpen(data:Object=null):void
         {
+			_openState=true;
 			onActivityData(data);
 			EventManager.dispatchEvent(ActivityEvent.OPEN_ACTIVITY,_info);
         }
 
         public function onActivityClose():void
         {
+			_openState=false;
 			clearTime();
 			EventManager.dispatchEvent(ActivityEvent.CLOSE_ACTIVITY,_info);
 			this.onTextColse();

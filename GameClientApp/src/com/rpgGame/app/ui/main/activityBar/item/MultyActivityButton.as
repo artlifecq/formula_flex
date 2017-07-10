@@ -10,8 +10,6 @@ package com.rpgGame.app.ui.main.activityBar.item
 	 * */
 	public class MultyActivityButton extends ActivityButton
 	{
-		private var openState:Boolean=false;
-		
 		public function MultyActivityButton()
 		{
 			super();
@@ -26,23 +24,6 @@ package com.rpgGame.app.ui.main.activityBar.item
 			setTextLeable(closeTxt);
 			return closeTxt;
 			
-		}
-		
-		override public function canOpen():Boolean
-		{
-			return openState;
-		}
-		
-		override public function onActivityOpen(data:Object=null):void
-		{
-			super.onActivityOpen(data);
-			openState=true;
-		}
-		
-		override public function onActivityClose():void
-		{
-			super.onActivityClose();
-			openState=false;
 		}
 	}
 }
