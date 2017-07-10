@@ -8,6 +8,7 @@ package com.rpgGame.appModule.activety.zonghe
 	import com.rpgGame.app.sender.SpecialActivitySender;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.core.events.ActivityEvent;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
@@ -28,6 +29,7 @@ package com.rpgGame.appModule.activety.zonghe
 	import feathers.data.ListCollection;
 	import feathers.utils.filter.GrayFilter;
 	
+	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.activety.zonghe.ActivetyAll_Skin;
 	
 	/**
@@ -85,6 +87,7 @@ package com.rpgGame.appModule.activety.zonghe
 		{
 			_skin.ListItem.addEventListener(Event.CHANGE,onChange);
 			_skin.joinBtn.addEventListener(Event.TRIGGERED,onJoin);
+			EventManager.addEvent(ActivityEvent.UPDATE_ACTIVITY,onUpdateAct);
 			var i:int;
 			var len:int=_activeData.length;
 			var info:ActivetyInfo;
@@ -114,6 +117,19 @@ package com.rpgGame.appModule.activety.zonghe
 				}
 			}
 			onChange(null);
+		}
+		
+		private function onUpdateAct(id:int):void
+		{
+			var len:int=_activeData.length;
+			var info:ActivetyInfo;
+			for(var i:int=0;i<len;i++){
+				info=_activeData.data[i] as ActivetyInfo;
+				if(info.actCfg.q_activity_id==id){
+					_skin.ListItem.dataProvider.updateItemAt(i);
+					break;
+				}
+			}
 		}
 		
 		private function onJoin(e:Event):void
