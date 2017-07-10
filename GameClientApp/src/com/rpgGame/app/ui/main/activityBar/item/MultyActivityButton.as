@@ -13,6 +13,7 @@ package com.rpgGame.app.ui.main.activityBar.item
 		public function MultyActivityButton()
 		{
 			super();
+			_openState=false;
 			setTips(ui.btnBar,"","您当前处于跨服\n副本的队列匹配\n中，点击查看。");
 		}
 		
@@ -24,6 +25,23 @@ package com.rpgGame.app.ui.main.activityBar.item
 			setTextLeable(closeTxt);
 			return closeTxt;
 			
+		}
+		
+		override public function canOpen():Boolean
+		{
+			return _openState;
+		}
+		
+		override public function onActivityOpen(data:Object=null):void
+		{
+			super.onActivityOpen(data);
+			_openState=true;
+		}
+		
+		override public function onActivityClose():void
+		{
+			super.onActivityClose();
+			_openState=false;
 		}
 	}
 }
