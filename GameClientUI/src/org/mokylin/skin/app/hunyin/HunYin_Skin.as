@@ -404,7 +404,9 @@ package org.mokylin.skin.app.hunyin
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icon1 = temp;
 			temp.name = "icon1";
+			temp.height = 56;
 			temp.styleName = "ui/common/grid/normal/48.png";
+			temp.width = 56;
 			temp.x = 280;
 			temp.y = 524;
 			return temp;
@@ -415,7 +417,9 @@ package org.mokylin.skin.app.hunyin
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icon2 = temp;
 			temp.name = "icon2";
+			temp.height = 56;
 			temp.styleName = "ui/common/grid/normal/48.png";
+			temp.width = 56;
 			temp.x = 353;
 			temp.y = 524;
 			return temp;
@@ -426,7 +430,9 @@ package org.mokylin.skin.app.hunyin
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icon3 = temp;
 			temp.name = "icon3";
+			temp.height = 56;
 			temp.styleName = "ui/common/grid/normal/48.png";
+			temp.width = 56;
 			temp.x = 426;
 			temp.y = 524;
 			return temp;
@@ -437,7 +443,9 @@ package org.mokylin.skin.app.hunyin
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icon4 = temp;
 			temp.name = "icon4";
+			temp.height = 50;
 			temp.styleName = "ui/common/grid/normal/42.png";
+			temp.width = 50;
 			temp.x = 714;
 			temp.y = 173;
 			return temp;

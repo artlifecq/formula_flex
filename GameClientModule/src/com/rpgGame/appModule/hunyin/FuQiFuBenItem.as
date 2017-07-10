@@ -1,21 +1,11 @@
 package com.rpgGame.appModule.hunyin
 {
-	import com.rpgGame.app.manager.HunYinManager;
-	import com.rpgGame.app.manager.Mgr;
-	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.sender.HunYinSender;
-	import com.rpgGame.core.app.AppConstant;
-	import com.rpgGame.core.app.AppManager;
-	import com.rpgGame.core.events.ChatEvent;
 	import com.rpgGame.core.events.HunYinEvent;
 	import com.rpgGame.core.ui.SkinUI;
-	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.ZoneMultyCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_zone;
 	import com.rpgGame.coreData.clientConfig.Q_zone_multy;
-	import com.rpgGame.coreData.enum.HunYinEnum;
-	
-	import flash.events.MouseEvent;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.hunyin.FuQiFuben_Item1;

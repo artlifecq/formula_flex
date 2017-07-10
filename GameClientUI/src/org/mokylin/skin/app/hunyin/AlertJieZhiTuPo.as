@@ -175,9 +175,10 @@ package org.mokylin.skin.app.hunyin
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.labelOffsetY = 3;
 			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
+			temp.textAlign = "left";
 			temp.color = 0x00FF33;
-			temp.width = 111;
-			temp.x = 181;
+			temp.width = 24;
+			temp.x = 187;
 			temp.y = 163;
 			return temp;
 		}
@@ -203,7 +204,7 @@ package org.mokylin.skin.app.hunyin
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = false;
 			temp.width = 94;
-			temp.x = 206;
+			temp.x = 212;
 			temp.y = 165;
 			return temp;
 		}
@@ -217,8 +218,8 @@ package org.mokylin.skin.app.hunyin
 			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.underline = true;
-			temp.width = 94;
-			temp.x = 72;
+			temp.width = 120;
+			temp.x = 66;
 			temp.y = 165;
 			return temp;
 		}
@@ -244,7 +245,7 @@ package org.mokylin.skin.app.hunyin
 			lb_xiaohao = temp;
 			temp.name = "lb_xiaohao";
 			temp.text = "消耗:";
-			temp.x = 36;
+			temp.x = 30;
 			temp.y = 165;
 			return temp;
 		}

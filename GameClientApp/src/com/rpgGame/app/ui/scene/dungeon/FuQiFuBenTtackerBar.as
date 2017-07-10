@@ -102,8 +102,8 @@ package com.rpgGame.app.ui.scene.dungeon
 			{
 				ico=IconCDFace.create(IcoSizeEnum.ICON_48);
 				ico.showCD=false;
-				ico.x=icoBg1List[i].x-6;
-				ico.y=icoBg1List[i].y-6;
+				ico.x=icoBg1List[i].x;
+				ico.y=icoBg1List[i].y;
 				ico.visible=false;
 				icoBg1List[i].visible=false;
 				ico1List.push(ico);
@@ -119,8 +119,8 @@ package com.rpgGame.app.ui.scene.dungeon
 			{
 				ico=IconCDFace.create(IcoSizeEnum.ICON_48);
 				ico.showCD=false;
-				ico.x=icoBg2List[i].x-6;
-				ico.y=icoBg2List[i].y-6;
+				ico.x=icoBg2List[i].x;
+				ico.y=icoBg2List[i].y;
 				ico.visible=false;
 				icoBg2List[i].visible=false;
 				ico2List.push(ico);
@@ -151,7 +151,7 @@ package com.rpgGame.app.ui.scene.dungeon
 					touchBut(0);
 					break;
 				case _skin.sec_subbut1:				
-					//					HunYinSender.
+					HunYinSender.upCSInviteMessage();
 					break;
 				case _skin.sec_subbut2:				
 					zoneOutToGame();
@@ -415,7 +415,7 @@ package com.rpgGame.app.ui.scene.dungeon
 				if(icoBg1List[i].visible==true)
 				{
 					icoBg1List[i].y=icoBg1List[0].y;
-					ico1List[i].y=icoBg1List[0].y-6;
+					ico1List[i].y=icoBg1List[0].y;
 				}
 			}
 			for(i=0;i<icoBg2List.length;i++)
@@ -423,7 +423,7 @@ package com.rpgGame.app.ui.scene.dungeon
 				if(icoBg2List[i].visible==true)
 				{
 					icoBg2List[i].y=icoBg2List[0].y;
-					ico2List[i].y=icoBg2List[0].y-6;
+					ico2List[i].y=icoBg2List[0].y;
 				}
 			}	
 			

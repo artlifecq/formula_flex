@@ -1,11 +1,11 @@
 package com.rpgGame.app.cmdlistener
 {
 	import com.rpgGame.app.manager.Mgr;
-	import com.rpgGame.core.events.HunYinEvent;
 	import com.rpgGame.netData.marriage.message.SCDivorceMessage;
 	import com.rpgGame.netData.marriage.message.SCInteractionMessage;
 	import com.rpgGame.netData.marriage.message.SCMarriageInfoMessage;
 	import com.rpgGame.netData.marriage.message.SCMarriageLogMessage;
+	import com.rpgGame.netData.marriage.message.SCNoticeByDivorceMessage;
 	import com.rpgGame.netData.marriage.message.SCNoticeZoneMessage;
 	import com.rpgGame.netData.marriage.message.SCProposalResultMessage;
 	import com.rpgGame.netData.marriage.message.SCRefuseNtoiceMessage;
@@ -14,7 +14,6 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.marriage.message.SCUpdateZoneSubNumMessage;
 	
 	import org.client.mainCore.bean.BaseBean;
-	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.connection.SocketConnection;
 	
 	
@@ -35,7 +34,7 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(150116,onSCNoticeZoneMessage);
 			SocketConnection.addCmdListener(150118,onSCRefuseNtoiceMessage);
 			SocketConnection.addCmdListener(150119,onSCUpdateZoneSubNumMessage);
-			
+			SocketConnection.addCmdListener(150121,onSCNoticeByDivorceMessage);
 			super.finish();
 		}
 		
@@ -45,6 +44,14 @@ package com.rpgGame.app.cmdlistener
 		private function onSCDivorceMessage(msg:SCDivorceMessage):void
 		{
 			Mgr.hunyinMgr.onSCDivorceMessage(msg);
+		}
+		
+		/**
+		 * 被离婚反馈
+		 * */
+		private function onSCNoticeByDivorceMessage(msg:SCNoticeByDivorceMessage):void
+		{
+			Mgr.hunyinMgr.onSCNoticeByDivorceMessage(msg);
 		}
 		
 		/**

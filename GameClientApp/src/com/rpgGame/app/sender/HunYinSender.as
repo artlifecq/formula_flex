@@ -3,6 +3,7 @@ package com.rpgGame.app.sender
 	import com.rpgGame.netData.marriage.message.CSChallengeZoneMessage;
 	import com.rpgGame.netData.marriage.message.CSDivorceMessage;
 	import com.rpgGame.netData.marriage.message.CSInteractionMessage;
+	import com.rpgGame.netData.marriage.message.CSInviteMessage;
 	import com.rpgGame.netData.marriage.message.CSMarriageInfoMessage;
 	import com.rpgGame.netData.marriage.message.CSMarriageLogMessage;
 	import com.rpgGame.netData.marriage.message.CSNoticeZoneMessage;
@@ -26,6 +27,13 @@ package com.rpgGame.app.sender
 			var msg:CSChallengeZoneMessage=new CSChallengeZoneMessage();
 			msg.zoneModelId=zoneModId;
 			msg.type=type;
+			SocketConnection.send(msg);
+		}
+		
+		/**手动邀请伴侣*/
+		public static function upCSInviteMessage():void
+		{
+			var msg:CSInviteMessage=new CSInviteMessage();
 			SocketConnection.send(msg);
 		}
 		

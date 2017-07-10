@@ -59,8 +59,8 @@ package com.rpgGame.app.ui.tips
 			_iconFace=new DragDropItem(IcoSizeEnum.ICON_64,0);
 			_iconFace.gridInfo=new GridInfo(ItemContainerID.BackPack,0);
 			addChild(_iconFace);
-			_iconFace.x=16;
-			_iconFace.y=43;
+			_iconFace.bindBg(_itemTip.Icon);//x=16;
+//			_iconFace.y=43;
 			labelList=new Vector.<Label>();
 			lines=new Vector.<UIAsset>();
 			uititles=new Vector.<UIAsset>();

@@ -7,6 +7,7 @@ package com.rpgGame.app.ui.alert
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
+	import com.rpgGame.netData.marriage.message.SCNoticeByDivorceMessage;
 	import com.rpgGame.netData.marriage.message.SCProposalResultMessage;
 	import com.rpgGame.netData.marriage.message.SCRefuseNtoiceMessage;
 	import com.rpgGame.netData.marriage.message.SCTargetProposalMessage;
@@ -108,7 +109,8 @@ package com.rpgGame.app.ui.alert
 					_skin.btn_ok.visible=true;
 					_skin.btn_jieshou.visible=false;
 					_skin.btn_jujue.visible=false;
-					str=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"你的伴侣")+HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"和你离婚了");
+					var ms1:SCNoticeByDivorceMessage =_msg as SCNoticeByDivorceMessage;
+					str=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,ms1.name)+HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"和你离婚了");
 					_skin.lbInfo1.htmlText=str;
 					_skin.lbInfo2.visible=false;
 					break;

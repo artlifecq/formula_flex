@@ -24,6 +24,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.netData.marriage.message.SCInteractionMessage;
 	import com.rpgGame.netData.marriage.message.SCMarriageInfoMessage;
 	import com.rpgGame.netData.marriage.message.SCMarriageLogMessage;
+	import com.rpgGame.netData.marriage.message.SCNoticeByDivorceMessage;
 	import com.rpgGame.netData.marriage.message.SCNoticeZoneMessage;
 	import com.rpgGame.netData.marriage.message.SCProposalResultMessage;
 	import com.rpgGame.netData.marriage.message.SCRefuseNtoiceMessage;
@@ -159,6 +160,14 @@ package com.rpgGame.app.manager
 			var role:SceneRole=MainRoleManager.actor;
 			if (role.headFace is HeadFace)
 				(role.headFace as HeadFace).updateFuQiTitle();
+		}
+		
+		/**
+		 * 被离婚反馈
+		 * */
+		public function onSCNoticeByDivorceMessage(msg:SCNoticeByDivorceMessage):void
+		{
+			showQiuHunTiShiPanel(4,msg,null);
 		}
 		
 		/**

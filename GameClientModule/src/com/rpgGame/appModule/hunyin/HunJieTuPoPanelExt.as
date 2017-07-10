@@ -37,6 +37,7 @@ package com.rpgGame.appModule.hunyin
 		{
 			_skin=new AlertJieZhiTuPo();
 			super(_skin);
+//			_skin.cboxCailiao.x=
 		}
 		
 		private function initView():void

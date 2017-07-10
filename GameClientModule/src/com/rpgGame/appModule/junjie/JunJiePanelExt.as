@@ -138,10 +138,10 @@ package com.rpgGame.appModule.junjie
 		{
 			initEvent();
 			showNowJunJieLvAtt();
-//			_showFirstLv=1;
-//			updateBtnState();
-//			showItemList(_showFirstLv);
-//			SelectHandler(_junjieItemList[0]);	
+			//			_showFirstLv=1;
+			//			updateBtnState();
+			//			showItemList(_showFirstLv);
+			//			SelectHandler(_junjieItemList[0]);	
 			showBtn();
 		}
 		
@@ -149,7 +149,14 @@ package com.rpgGame.appModule.junjie
 		{
 			if(JunJieData.getMaxLv()-1>Mgr.junjieMgr.getActivationLv())
 			{
+				
 				_showFirstLv=(Mgr.junjieMgr.getActivationLv()+1);
+				if(_showFirstLv<=_maxShowNum){
+					_showFirstLv=1;
+				}
+				else{
+					_showFirstLv=_showFirstLv-(_maxShowNum-1);
+				}
 				updateBtnState();
 				showItemList(_showFirstLv);
 				var index:int=getIndex();
@@ -166,19 +173,23 @@ package com.rpgGame.appModule.junjie
 		
 		private function getIndex():int
 		{
+			var lv:int=(Mgr.junjieMgr.getActivationLv()+1);
 			if(_junjieItemList==null||_junjieItemList.length==0) return 0;
 			for(var i:int=0;i<_junjieItemList.length;i++)
 			{
-				if(_showFirstLv==_junjieItemList[i].lv)
+				if(lv==_junjieItemList[i].lv)
 					return i;
 			}
-			return 0;
-			
+			return 0;		
 		}
 		
 		override public function hide():void
 		{
 			closeEvent();
+			if(_nowSelectItem!=null)
+			{
+				_nowSelectItem.setBtnState(false);
+			}
 			_nowSelectItem=null;
 			_nowShowLevel=0;
 		}
@@ -233,14 +244,7 @@ package com.rpgGame.appModule.junjie
 		{
 			if(bool)
 			{
-				//更新掉
-//				updateJunJieItemList();
-//				showNowJunJieLvAtt();
-//				if(_nowSelectItem!=null)
-//				{
-//					_nowSelectItem.info=Mgr.junjieMgr.getInfoById(_nowSelectItem.info.modelId);
-//					showSelectItem();
-//				}				
+				//更新掉		
 				showBtn();
 				
 				UIPopManager.showAlonePopUI(CenterEftPop,"ui_shengjichenggong");
@@ -496,17 +500,10 @@ package com.rpgGame.appModule.junjie
 		
 		private function SelectHandler(item:JunJieItem):void
 		{
-			//			if(e.currentTarget is JunJieItem)
-			//			{
-			//				var itm:JunJieItem=e.currentTarget as JunJieItem;
 			if(_nowSelectItem==null)
 			{
 				_nowSelectItem=item;
 				_nowSelectItem.setBtnState(true);
-			}
-			else if(_nowSelectItem.lv==item.lv)
-			{
-				return;
 			}
 			else
 			{
@@ -517,7 +514,6 @@ package com.rpgGame.appModule.junjie
 			
 			_nowShowLevel=_nowSelectItem.info.modelId;
 			showSelectItem();
-			//			}
 		}	
 	}
 }

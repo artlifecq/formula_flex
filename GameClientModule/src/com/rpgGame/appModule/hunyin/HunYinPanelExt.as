@@ -3,10 +3,8 @@ package com.rpgGame.appModule.hunyin
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
-	import com.rpgGame.app.manager.HunYinManager;
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.Mgr;
-	import com.rpgGame.app.manager.ZhanGongManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -14,7 +12,6 @@ package com.rpgGame.appModule.hunyin
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.ui.common.CenterEftPop;
 	import com.rpgGame.app.utils.FaceUtil;
-	import com.rpgGame.app.utils.HunYinUtil;
 	import com.rpgGame.app.utils.MenuUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.app.AppConstant;
@@ -36,7 +33,6 @@ package com.rpgGame.appModule.hunyin
 	import com.rpgGame.coreData.info.face.BaseFaceInfo;
 	import com.rpgGame.netData.marriage.message.SCInteractionMessage;
 	
-	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	
 	import feathers.controls.UIAsset;
@@ -94,8 +90,7 @@ package com.rpgGame.appModule.hunyin
 					ico.selectImgVisible = false;	
 					_skin.container.addChild(ico);
 					var uibg:UIAsset = _skin.container.getChildByName("icon"+(i+1)) as UIAsset;
-					ico.x = uibg.x;
-					ico.y = uibg.y;
+					ico.bindBg(uibg);
 					_skillList.push(ico);
 					FaceUtil.SetSkillGrid(ico, info, true);
 				}
@@ -346,7 +341,23 @@ package com.rpgGame.appModule.hunyin
 			if(msg!=null)
 			{
 				//这里要依据类型显示不同的特效
-				UIPopManager.showAlonePopUI(CenterEftPop,"ui_jichengchenggong");
+				var uieff:String;
+				switch(msg.interactionInfo.type)
+				{
+					case HunYinEnum.HD_SONGHUA:
+						uieff="ui_songhua";
+						break;
+					case HunYinEnum.HD_YONGBAO:
+						uieff="ui_yongbao";
+						break;
+					case HunYinEnum.HD_QINWEN:
+						uieff="ui_qinwen";
+						break;
+					case HunYinEnum.HD_DONGFANG:
+						uieff="ui_dongfang";
+						break;
+				}
+				UIPopManager.showAlonePopUI(CenterEftPop,uieff);
 			}
 			_rightPanel.updateBestWishesValue();
 			chackAllBtnState();
@@ -380,7 +391,7 @@ package com.rpgGame.appModule.hunyin
 			t=e.getTouch(_skin.btnSonghua,TouchPhase.HOVER);
 			if(t){
 				dispassbtnEff();
-				_btneff=_modEftContaner.playInter3DAt(ClientConfig.getEffect("tx_zh_qiuniuwenpei"),_skin.btnSonghua.x+50,_skin.btnSonghua.y+100,0);
+				_btneff=_modEftContaner.playInter3DAt(ClientConfig.getEffect("ui_dongfang_xuanze"),_skin.btnSonghua.x,_skin.btnSonghua.y,0);
 			}
 		}
 		
@@ -394,7 +405,7 @@ package com.rpgGame.appModule.hunyin
 			t=e.getTouch(_skin.btnYongbao,TouchPhase.HOVER);
 			if(t){
 				dispassbtnEff();
-				_btneff=_modEftContaner.playInter3DAt(ClientConfig.getEffect("tx_zh_qiuniuwenpei"),_skin.btnYongbao.x+50,_skin.btnYongbao.y+100,0);
+				_btneff=_modEftContaner.playInter3DAt(ClientConfig.getEffect("ui_dongfang_xuanze"),_skin.btnYongbao.x,_skin.btnYongbao.y,0);
 			}
 		}
 		
@@ -408,7 +419,7 @@ package com.rpgGame.appModule.hunyin
 			t=e.getTouch(_skin.btnQinwen,TouchPhase.HOVER);
 			if(t){
 				dispassbtnEff();
-				_btneff=_modEftContaner.playInter3DAt(ClientConfig.getEffect("tx_zh_qiuniuwenpei"),_skin.btnQinwen.x+50,_skin.btnQinwen.y+100,0);
+				_btneff=_modEftContaner.playInter3DAt(ClientConfig.getEffect("ui_dongfang_xuanze"),_skin.btnQinwen.x,_skin.btnQinwen.y,0);
 			}
 		}
 		
@@ -422,7 +433,7 @@ package com.rpgGame.appModule.hunyin
 			t=e.getTouch(_skin.btnDongfang,TouchPhase.HOVER);
 			if(t){
 				dispassbtnEff();
-				_btneff=_modEftContaner.playInter3DAt(ClientConfig.getEffect("tx_zh_qiuniuwenpei"),_skin.btnDongfang.x+50,_skin.btnDongfang.y+100,0);
+				_btneff=_modEftContaner.playInter3DAt(ClientConfig.getEffect("ui_dongfang_xuanze"),_skin.btnDongfang.x,_skin.btnDongfang.y,0);
 			}
 		}
 	}
