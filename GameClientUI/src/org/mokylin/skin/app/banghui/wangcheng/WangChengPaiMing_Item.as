@@ -4,7 +4,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
-	import org.mokylin.skin.app.banghui.ItemBg;
+	import org.mokylin.skin.common.ItemBg;
 
 	/**
 	 * @private
@@ -50,7 +50,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			bg = temp;
 			temp.name = "bg";
 			temp.height = 27;
-			var skin:StateSkin = new org.mokylin.skin.app.banghui.ItemBg()
+			var skin:StateSkin = new org.mokylin.skin.common.ItemBg()
 			temp.skin = skin
 			temp.width = 271;
 			temp.x = 0;
@@ -64,9 +64,10 @@ package org.mokylin.skin.app.banghui.wangcheng
 			lbBanghui = temp;
 			temp.name = "lbBanghui";
 			temp.text = "帮派名称一个字";
-			temp.textAlign = "center";
+			temp.textAlign = "left";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.underline = true;
 			temp.width = 148;
 			temp.x = 103;
 			temp.y = 6;
@@ -82,7 +83,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			temp.textAlign = "center";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.underline = true;
+			temp.underline = false;
 			temp.width = 66;
 			temp.x = 17;
 			temp.y = 6;

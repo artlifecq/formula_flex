@@ -1,7 +1,6 @@
 
 package com.rpgGame.core.app
 {
-	import com.rpgGame.appModule.npc;
 	import com.rpgGame.core.app.enum.PanelPosType;
 	
 	import flash.utils.Dictionary;
@@ -169,6 +168,10 @@ package com.rpgGame.core.app
 		public static var ACTIVETY_LIJIN_RESULT:String = createAppInfo( "activety.zonghe.lijin.LijinResultPanel","activety");
 		
 		
+		/**
+		 *秦陵秘宝结算
+		 */
+		public static var ACTIVETY_MIBAO_RESULT:String = createAppInfo( "activety.zonghe.mibao.MibaoResultPanel","activety");
 		
 		
 		/**
@@ -421,6 +424,8 @@ package com.rpgGame.core.app
 		public static var GUILD_WCZB_APPLY : String = createAppInfo("guild.war.WczbWarApplyPanel","banghui");
 		/**帮会王城争霸奖励 **/
 		public static var GUILD_WCZB_REWARD : String = createAppInfo("guild.war.WczbRewardPanel","banghui");
+		/**帮会王城争霸结果 **/
+		public static var GUILD_WCZB_RESULT : String = createAppInfo("guild.war.WczbResultPanel","banghui");
 		
 		/**迷宫排行**/
 		public static var MAZE_RANK_PANEL : String = createAppInfo("maze.MazeInfoPanel","maze",PanelPosType.MIDDLE_RIGHT);
@@ -502,5 +507,9 @@ package com.rpgGame.core.app
 		
 		/**红包拆开**/
 		public static var REDREWARD_OPEN:String = createAppInfo("redreward.RedRewardGetPanle","hongbao");
+		/**发送红包**/
+		public static var REDREWARD_SEND:String = createAppInfo("redreward.RedRewardSendPanle","hongbao");
+		/**红包信息**/
+		public static var REDREWARD_PANLE:String = createAppInfo("redreward.RedRewardInfoPanle","hongbao");
 	}
 }

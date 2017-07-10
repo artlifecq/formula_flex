@@ -59,6 +59,7 @@ package com.rpgGame.appModule.role
 	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.controls.Scroller;
 	import feathers.data.ListCollection;
+	import feathers.layout.TiledRowsLayout;
 	import feathers.themes.GuiThemeStyle;
 	import feathers.utils.filter.GrayFilter;
 	
@@ -69,6 +70,7 @@ package com.rpgGame.appModule.role
 	import starling.display.DisplayObject;
 	
 	import utils.KeyboardMananger;
+
 	/**
 	 *背包部分 
 	 * @author dik
@@ -132,7 +134,9 @@ package com.rpgGame.appModule.role
 			_skin.lst_pack.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			_skin.lst_pack.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
 			
-			_skin.lst_pack.padding=3;
+			_skin.lst_pack.padding=1;
+			(_skin.lst_pack.layout as TiledRowsLayout).horizontalGap=1;
+			(_skin.lst_pack.layout as TiledRowsLayout).verticalGap=2;
 			Mgr.shopMgr.sellItemCall=ItemSellAlertExtPanelExt.showAlert;
 		}
 		
@@ -202,8 +206,9 @@ package com.rpgGame.appModule.role
 			else
 			{
 				BackPackManager.instance.setCheckType(curType);
-				BackPackManager.instance.setUnusableGrid(true);
-				refreshPackGrid();
+				BackPackManager.instance.setUnusableGrid(false);
+				goodsContainer.refleshGrids();
+//				refreshPackGrid();
 			}
 		}
 		
@@ -625,8 +630,6 @@ package com.rpgGame.appModule.role
 					shopPanel.y=75;
 					//this._skin.container.addChild(shopPanel);
 					shopPanel.show(null,"",this._skin.container);
-					return true;
-				case _skin.btn_paimaihang:
 					return true;
 				case _skin.btn_getYuanbao:
 					return true;

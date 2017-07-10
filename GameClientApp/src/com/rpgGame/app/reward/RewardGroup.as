@@ -142,7 +142,12 @@ package  com.rpgGame.app.reward
 				return;
 			}
 			var arr:Array=JSONUtil.decode(reward);
-			if (arr.length) 
+			setRewardByArray(arr);
+		}
+		
+		public function setRewardByArray(arr:Array):void
+		{
+			if (arr&&arr.length) 
 			{
 				var len:int=arr.length;
 				var obj:Object;
@@ -152,14 +157,14 @@ package  com.rpgGame.app.reward
 					obj=arr[i];
 					var tmp:ClientItemInfo=new ClientItemInfo(obj.mod);
 					tmp.count=obj.num;
-				
+					
 					rewards.push(tmp);
 				}
 				
 				setReward(rewards);
 			}
-			
 		}
+		
 		private function layout():void
 		{
 			if (ALIN_LEFT==alin) 

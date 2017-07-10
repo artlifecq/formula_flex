@@ -5,8 +5,8 @@ package com.rpgGame.appModule.guild
 	
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	
-	import org.mokylin.skin.app.banghui.ItemBg;
 	import org.mokylin.skin.app.banghui.ItemJuanXian;
+	import org.mokylin.skin.common.ItemBg;
 	
 	public class GuildDonateCell extends DefaultListItemRenderer
 	{
@@ -26,7 +26,7 @@ package com.rpgGame.appModule.guild
 		
 		private function updateSkin():void
 		{
-			var item:ItemBg = _skin.bg.skin as ItemBg;
+			var item:ItemBg = _skin.bg.skin as org.mokylin.skin.common.ItemBg;
 			item.bg1.visible = this.index/2 !=0;
 			item.bg1.visible = this.index/2 ==0;
 		}

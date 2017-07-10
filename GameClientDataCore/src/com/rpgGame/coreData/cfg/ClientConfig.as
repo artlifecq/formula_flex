@@ -95,19 +95,19 @@ package com.rpgGame.coreData.cfg
 		public static function getLoginuiResUrl() : String
 		{
 			var url : String = "login/loginui.png";
-			return baseDir + resURL + (ClientConfig.uiCompressed ? (url + ".bpg") : (url + ".bpg")); //需要获取位图数据，都用bpg。@L.L.M.Sunny
+			return baseDir + resURL + url + ".atf"; //需要获取位图数据，都用bpg。@L.L.M.Sunny
 		}
 		
 		public static function getSignInResUrl() : String
 		{
 			var url : String = "loading/signIn.png";
-			return baseDir + resURL + (ClientConfig.uiCompressed ? (url + ".bpg") : (url + ".atf"));
+			return baseDir + resURL + url + ".atf";
 		}
 		
 		public static function getLoadingResUrl() : String
 		{
 			var url : String = "loading/loading.png";
-			return baseDir + resURL + (ClientConfig.uiCompressed ? (url + ".bpg") : (url + ".atf"));
+			return baseDir + resURL + url + ".atf";
 		}
 		
 		public static function getLangUrl() : String

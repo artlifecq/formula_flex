@@ -99,14 +99,25 @@ package com.rpgGame.appModule.activety.boss
 			}
 			initEvent();
 			updateList();
+			var len:int=_activeData.length;
+			var info:ActivetyInfo;
 			if(!data){
-				_skin.ListItem.selectedIndex=0;
-				_skin.ListItem.dataProvider.updateItemAt(0);
-				_skin.ListItem.scrollToDisplayIndex(0);
+				for(i=0;i<len;i++){
+					info=_activeData.data[i] as ActivetyInfo;
+					if(info.info&&info.info.joinState==ActivityJoinStateEnum.JOINING){//跳到进行中
+						_skin.ListItem.selectedIndex=i;
+						_skin.ListItem.scrollToDisplayIndex(i);
+						_skin.ListItem.dataProvider.updateItemAt(i);
+						break;
+					}
+				}
+				if(_skin.ListItem.selectedIndex==-1){
+					_skin.ListItem.selectedIndex=0;
+				}
 			}else{
 				var dataInfo:ActivetyInfo=data as ActivetyInfo;
 				for(i=0;i<_activeData.length;i++){
-					var info:ActivetyInfo=_activeData.data[i] as ActivetyInfo;
+					info=_activeData.data[i] as ActivetyInfo;
 					if(info.actCfg.q_activity_id==dataInfo.actCfg.q_activity_id){
 						_skin.ListItem.selectedIndex=i;
 						_skin.ListItem.scrollToDisplayIndex(i);
@@ -130,9 +141,9 @@ package com.rpgGame.appModule.activety.boss
 		private function updateList():void
 		{
 			for(var i:int=0;i<actList.length;i++){
-				if(actList[i].info&&actList[i].info.joinState!=ActivityJoinStateEnum.COMPLETE){
+				if(actList[i].info&&actList[i].info.joinState!=ActivityJoinStateEnum.OVER){
 					if(actList[i].actCfg.q_activity_limit_level>MainRoleManager.actorInfo.totalStat.level){
-						actList[i].info.joinState=ActivityJoinStateEnum.CLOSE;//未开启
+						actList[i].info.joinState=ActivityJoinStateEnum.UN_OPEN;//未开启
 					}else{
 						actList[i].info.joinState=ActivityJoinStateEnum.JOINING;//开启
 					}
@@ -153,13 +164,13 @@ package com.rpgGame.appModule.activety.boss
 			}
 			
 			if(infoA.info.joinState<infoB.info.joinState){//越小的越再后面
-				if(infoA.info.joinState==ActivityJoinStateEnum.JOINING&&infoB.info.joinState==ActivityJoinStateEnum.COMPLETE){
+				if(infoA.info.joinState==ActivityJoinStateEnum.JOINING&&infoB.info.joinState==ActivityJoinStateEnum.OVER){
 					return -1;
 				}
 				return 1;
 			}
 			if(infoA.info.joinState>infoB.info.joinState){
-				if(infoA.info.joinState==ActivityJoinStateEnum.COMPLETE&&infoB.info.joinState==ActivityJoinStateEnum.JOINING){
+				if(infoA.info.joinState==ActivityJoinStateEnum.OVER&&infoB.info.joinState==ActivityJoinStateEnum.JOINING){
 					return 1;
 				}
 				return -1;

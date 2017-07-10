@@ -388,6 +388,7 @@ package com.rpgGame.coreData.role
 			data.mount = heroInfo.mount;
 			data.pkMode = heroInfo.pkType;
 			data.relation = heroInfo.relation;
+			data.faction=heroInfo.faction;
 			//data.pkType = heroInfo.pkType;
 			data.weapon = heroInfo.weapon;
 			data.deputyWeapon = heroInfo.second_weapon;
@@ -473,6 +474,7 @@ package com.rpgGame.coreData.role
 			data.mount = info.mount;
 			data.pkMode = info.pkType;
 			data.relation = info.relation;
+			data.faction=info.faction;
 			
 			data.weapon = info.weapon;
 			data.deputyWeapon = info.second_weapon;

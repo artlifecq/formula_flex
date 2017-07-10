@@ -218,7 +218,7 @@ package com.rpgGame.app.ui.scene.dungeon
 			TweenLite.killDelayedCallsTo(walkTo);
 			var pos:Point=DungeonManager.getStagePos(id);
 			if(pos)
-			{//L.l("寻路到："+pos.x+":"+ pos.y);
+			{
 				MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, pos.x, pos.y,finishWalk, 100);
 			}
 		}
@@ -237,7 +237,7 @@ package com.rpgGame.app.ui.scene.dungeon
 		}
 		
 		private function setTageText():void
-		{//L.l("[阶段"+DungeonManager.zoneStage);
+		{
 			
 			
 			if(DungeonManager.zoneStage==0)

@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.redreward
 {
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.netData.redreward.bean.RedRewardPlayerInfo;
 	
 	import org.mokylin.skin.app.hongbao.HongBao_Item1;
 	import org.mokylin.skin.app.hongbao.HongBao_ItemBg;
@@ -13,7 +14,7 @@ package com.rpgGame.appModule.redreward
 			_skin = new HongBao_Item1();
 			super(_skin);
 		}
-		public function updata(index:int):void
+		public function updata(index:int,playerInfolist:Vector.<RedRewardPlayerInfo>):void
 		{
 			var bgskin:HongBao_ItemBg = _skin.bg.skin as HongBao_ItemBg;
 			if(index%2 ==0)

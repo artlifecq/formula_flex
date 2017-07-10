@@ -7,6 +7,8 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.manager.role.SceneRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.scene.trigger.TriggerHandler;
+	import com.rpgGame.app.scene.trigger.TriggerPool;
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.sender.StoryDungeonSender;
 	import com.rpgGame.core.app.AppConstant;
@@ -14,6 +16,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.coreData.cfg.ClientDialogCfgData;
 	import com.rpgGame.coreData.cfg.ClientSceneEffectCfgData;
+	import com.rpgGame.coreData.cfg.ClientTrigger;
 	import com.rpgGame.coreData.cfg.ClientTriggerCfgData;
 	import com.rpgGame.coreData.cfg.SceneEffectCfgData;
 	import com.rpgGame.coreData.cfg.TriggerCfgData;
@@ -41,7 +44,6 @@ package com.rpgGame.app.manager
 	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
-	import com.rpgGame.coreData.cfg.ClientTrigger;
 
 	/**
 	 *
@@ -58,6 +60,7 @@ package com.rpgGame.app.manager
 		private static var _plotDialogTrigger : ClientTrigger = null;
 		private static var _killStatistic : Dictionary = null;
 		private static var _isTrigging : Dictionary = null;
+		private static var triggerHandler:TriggerHandler;
 
 		public function ClientTriggerManager()
 		{
@@ -66,6 +69,7 @@ package com.rpgGame.app.manager
 		public static function setup() : void
 		{
 			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE, onSwitchCmp);
+			EventManager.addEvent(MapEvent.AREA_TRIGGER,ClientBytrigger);
 		}
 
 		public static function sceneClear() : void
@@ -77,6 +81,12 @@ package com.rpgGame.app.manager
 
 		private static function onSwitchCmp() : void
 		{
+			if(triggerHandler){
+				triggerHandler.dispose();
+				triggerHandler=null;
+			}
+			triggerHandler=TriggerPool.getHandler();
+			
 //			if (CountryManager.isAtMyCountry())
 //			{
 //				triggerCreateSceneEffect(_createEffectTrigger);
@@ -84,203 +94,47 @@ package com.rpgGame.app.manager
 //				triggerPlotDialog(_plotDialogTrigger);
 //			}
 		}
-		/**收到服务器触发消息*/
-		public static function serverTrigger(triggerId : int):void
-		{
-			_isTrigging[triggerId]=true;
-			TweenLite.killDelayedCallsTo(onTiggerkey);
-			var triggerData : ClientTrigger = TriggerCfgData.getClientTrigger(triggerId);
-			if (triggerData)
-			{
-				triggerData.isTrigging=true;
-				if(triggerData.obstacleArea!=null&&triggerData.obstacleArea.length>0)
-				{
-					triggerCreateObstacle(triggerData);
-				}
-				if(triggerData.sceneEffectIds!=null&&triggerData.sceneEffectIds.length>0)
-				{
-					triggerCreateSceneEffect(triggerData);
-				}
-				if(triggerData.obstacleAreaRemove!=null&&triggerData.obstacleAreaRemove.length>0)
-				{
-					triggerClearObstacle(triggerData);
-				}
-				if(triggerData.sceneEffectRemove!=null&&triggerData.sceneEffectRemove.length>0)
-				{
-					triggerClearSceneEffect(triggerData);
-				}
-				if(triggerData.resetTriggers!=null&&triggerData.resetTriggers.length>0)
-				{
-					clearTigerList(triggerData.resetTriggers);
-					
-				}
-				
-				/*switch (triggerData.triggerType)
-				{
-					case TriggerTypeEnum.SCENE_ADD_OBSTACLE: //触发生成动态阻挡 
-						
-						break;
-					case TriggerTypeEnum.SCENE_REMOVE_OBSTACLE: //移除阻挡
-						
-						break;
-					case TriggerTypeEnum.ADD_MONSTER: //刷怪 
-						
-						break;
-					case TriggerTypeEnum.PLOT_DIALOG: //触发剧情对话 
-						
-						break;
-					case TriggerTypeEnum.SCENE_ROLE: //生成场景物 
-						break;
-				}*/
-
-			}
-			
-			
-		}
-		/**玩家进入触发信息初始化*/
-		public static function triggerInit(tidLis:Vector.<int>):void
-		{
-			var trAreaList:Array=new Array();
-			var trEffectList:Array=new Array();
-			var triggerData : ClientTrigger;
-			var i:int,j:int,k:int;
-			for(i=0;i<tidLis.length;i++)
-			{
-				triggerData=TriggerCfgData.getClientTrigger(tidLis[i]);
-				if (triggerData)
-				{
-					triggerData.isTrigging=true;
-					_isTrigging[triggerData.id]=true;
-					if(triggerData.obstacleArea!=null&&triggerData.obstacleArea.length>0)
-					{
-						for(j=0;j<triggerData.obstacleArea.length;j++)
-						{
-							trAreaList.push(triggerData.obstacleArea[j]);
-						}
-						
-					}
-					if(triggerData.sceneEffectIds!=null&&triggerData.sceneEffectIds.length>0)
-					{
-						for(j=0;j<triggerData.sceneEffectIds.length;j++)
-						{
-							trEffectList.push(triggerData.sceneEffectIds[j]);
-						}
-					}
-					if(triggerData.obstacleAreaRemove!=null&&triggerData.obstacleAreaRemove.length>0)
-					{
-						for(j=0;j<triggerData.obstacleAreaRemove.length;j++)
-						{
-							for(k=0;k<trAreaList.length;k++)
-							{
-								if(triggerData.obstacleAreaRemove[j]==trAreaList[k])
-								{
-									trAreaList[k]==0;
-								}
-							}
-						}
-					}
-					if(triggerData.sceneEffectRemove!=null&&triggerData.sceneEffectRemove.length>0)
-					{
-						for(j=0;j<triggerData.sceneEffectRemove.length;j++)
-						{
-							for(k=0;k<trEffectList.length;k++)
-							{
-								if(triggerData.sceneEffectRemove[j]==trEffectList[k])
-								{
-									trEffectList[k]==0;
-								}
-							}
-						}
-					}
-					/*if(triggerData.resetTriggers!=null&&triggerData.resetTriggers.length>0)
-					{
-						for(j=0;j<triggerData.resetTriggers.length;j++)
-						{
-							clearTigerByZone(triggerData.resetTriggers[j]);
-						}
-						
-					}*/
-				}
-			}
-			
-			for(k=0;k<trAreaList.length;k++)
-			{
-				if(trAreaList[k]!=0)
-				{
-					AreaMapManager.addDynamicObstacleArea(trAreaList[k]);
-				}
-			}
-			var effectData : ClientSceneEffect;
-			for(k=0;k<trEffectList.length;k++)
-			{
-				if(trEffectList[k]!=0)
-				{
-					effectData = SceneEffectCfgData.getData(trEffectList[k]);
-					createSceneEffect(effectData);
-				}
-			}
-		}
-		
-		
 		
 		
 		/**客户端触发*/
-		public static function ClientBytrigger(triggerId : int) : void
+		public static function ClientBytrigger(areaid : int) : void
 		{
+			if (_isTrigging[areaid])return;
+			if(triggerHandler){
+				triggerHandler.trigger(areaid);
+				_isTrigging[areaid]=true;
+				TweenLite.delayedCall(0.1, onTiggerkey,[areaid]);
+			}
+			
+		/*	var triggerData : ClientTrigger = TriggerCfgData.getTriggerByAreaid(areaid);
+			if (!triggerData)return;
+			var triggerId:int=triggerData.id;
 			if (_isTrigging[triggerId])return;
 			_isTrigging[triggerId]=true;
 			TweenLite.killDelayedCallsTo(onTiggerkey);
-			
-			var triggerData : ClientTrigger = TriggerCfgData.getClientTrigger(triggerId);
 			var pretriggerData : ClientTrigger;
-			if (triggerData)
+			if(triggerData.isTrigging)return;//服务器 已触发不再触发
+			
+			if(triggerData.preTrigger!=null)//判定触发前置条件
 			{
-				if(triggerData.isTrigging)return;//服务器 已触发不再触发
-				
-				if(triggerData.preTrigger!=null)//判定触发前置条件
+				var preTri:Array=triggerData.preTrigger;
+				for each (var trid : int in preTri)
 				{
-					var preTri:Array=triggerData.preTrigger;
-					for each (var trid : int in preTri)
+					pretriggerData=TriggerCfgData.getClientTrigger(trid);
+					if (pretriggerData&&!pretriggerData.isTrigging)
 					{
-						pretriggerData=TriggerCfgData.getClientTrigger(trid);
-						if (pretriggerData&&!pretriggerData.isTrigging)
-						{
-							return;
-						}
+						return;
 					}
 				}
-				DungeonSender.reqTrigger(triggerData.id);///通知服务器 触发消息
-				TweenLite.delayedCall(0.1, onTiggerkey,[triggerData.id]);
-				
 			}
+			DungeonSender.reqTrigger(triggerData.id);///通知服务器 触发消息
+			TweenLite.delayedCall(0.1, onTiggerkey,[triggerData.id]);*/
 		}
-		private static function onTiggerkey(triggerId:int):void
+		private static function onTiggerkey(areaid:int):void
 		{
-			_isTrigging[triggerId]=false;
+			_isTrigging[areaid]=false;
 		}
-		public static function clearTigerByZone(zid : int) : void
-		{
-			TweenLite.killDelayedCallsTo(onTiggerkey);
-			var triggerList:Vector.<ClientTrigger>=TriggerCfgData.getTriggerInZone(zid);
-			for each(var triger:ClientTrigger in triggerList)
-			{
-				_isTrigging[triger.id]=false;
-				triger.isTrigging=false;
-			}
-		}
-		private static function clearTigerList(triggers:Array) : void
-		{
-			var triger:ClientTrigger;
-			for(var i:int=0;i<triggers.length;i++)
-			{
-				triger=TriggerCfgData.getClientTrigger(triggers[i]);
-				if(triger)
-				{
-					_isTrigging[triger.id]=false;
-					triger.isTrigging=false;
-				}
-			}
-		}
+		
 		
 		
 		
@@ -436,8 +290,8 @@ package com.rpgGame.app.manager
 			}
 		}
 		
-		private static function createSceneEffect(effectData : ClientSceneEffect) : void
-		{//L.l("添加火墙："+effectData.id);
+		public static function createSceneEffect(effectData : ClientSceneEffect) : void
+		{
 			var bornPosArr : Array = effectData.bornPos.split(";");
 			var len : int = bornPosArr.length;
 			for (var i : int = 0; i < len; i++)
@@ -448,8 +302,8 @@ package com.rpgGame.app.manager
 				SceneRoleManager.getInstance().createSceneEffect(effectData, i + 1, SceneCharType.SCENE_EFFECT + "_" + effectData.id, x, y);
 			}
 		}
-		private static function removeSceneEffect(effectData : ClientSceneEffect) : void
-		{//L.l("删除火墙："+effectData.id);
+		public static function removeSceneEffect(effectData : ClientSceneEffect) : void
+		{
 			var bornPosArr : Array = effectData.bornPos.split(";");
 			var len : int = bornPosArr.length;
 			for (var i : int = 0; i < len; i++)
@@ -474,7 +328,7 @@ package com.rpgGame.app.manager
 			}
 		}
 		/**创建阻挡区域*/
-		private static function triggerCreateObstacle(triggerData : ClientTrigger) : void
+		public static function triggerCreateObstacle(triggerData : ClientTrigger) : void
 		{
 			if (triggerData)
 			{
@@ -486,7 +340,7 @@ package com.rpgGame.app.manager
 			}
 		}
 		/**清除阻挡区域*/
-		private static function triggerClearObstacle(triggerData : ClientTrigger) : void
+		public static function triggerClearObstacle(triggerData : ClientTrigger) : void
 		{
 			if (triggerData)
 			{
@@ -499,7 +353,7 @@ package com.rpgGame.app.manager
 		}
 		
 		/**创建场景特效*/
-		private static function triggerCreateSceneEffect(triggerData : ClientTrigger) : void
+		public static function triggerCreateSceneEffect(triggerData : ClientTrigger) : void
 		{
 			if (triggerData)
 			{
@@ -515,7 +369,7 @@ package com.rpgGame.app.manager
 			}
 		}
 		/**清除场景特效*/
-		private static function triggerClearSceneEffect(triggerData : ClientTrigger) : void
+		public static function triggerClearSceneEffect(triggerData : ClientTrigger) : void
 		{
 			if (triggerData)
 			{

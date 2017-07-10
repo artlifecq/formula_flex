@@ -16,15 +16,15 @@ package com.rpgGame.coreData.clientConfig
 		public var id:int;
 		 /**  功能名称 */
 		public var name:String;
-		 /**  兵家动画资源名称 */
+		 /**  兵家骨骼资源名称 */
 		public var animatRes_bingjia:String;
-		 /**  墨家男动画资源名称 */
+		 /**  墨家男骨骼资源名称 */
 		public var animatRes_mojia_man:String;
-		 /**  墨家女动画资源名称 */
+		 /**  墨家女骨骼资源名称 */
 		public var animatRes_mojia_woman:String;
-		 /**  医家动画资源名称 */
+		 /**  医家骨骼资源名称 */
 		public var animatRes_yijia:String;
-		 /**    */
+		 /**  兵家外包资源 */
 		public var animatRes_waibao:String;
 
 	}

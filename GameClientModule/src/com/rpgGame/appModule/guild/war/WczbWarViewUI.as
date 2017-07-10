@@ -1,7 +1,7 @@
 package com.rpgGame.appModule.guild.war
 {
 	import com.rpgGame.app.manager.guild.GuildManager;
-	import com.rpgGame.app.sender.GuildSender;
+	import com.rpgGame.app.sender.GuildWarSender;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.core.app.AppConstant;
@@ -154,8 +154,8 @@ package com.rpgGame.appModule.guild.war
 			EventManager.addEvent(GuildEvent.GUILD_WCZB_INFO,updatePanelView);
 			TipTargetManager.show( _skin.btnShuoMing,TargetTipsMaker.makeSimpleTextTips( TipsCfgData.getTipsInfo(30).q_describe));
 			EventManager.addEvent(GuildEvent.GUILD_CHANGE_ACTIVE,updateAct);
-			GuildSender.reqGuildWarCityInfo();
-			GuildSender.reqEnterGuildWarPanel();
+			GuildWarSender.reqGuildWarCityInfo();
+			GuildWarSender.reqEnterGuildWarPanel();
 		}
 		
 		private function updateAct(value:int):void
@@ -365,7 +365,7 @@ package com.rpgGame.appModule.guild.war
 			_skin.lbHead.htmlText="防守"+getCityName(city);
 			_skin.lbName1.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,fightInfo.attackGuildName);
 			_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW,"VS");
-			_skin.lbName2.text=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,fightInfo.occupyGuildName);
+			_skin.lbName2.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,fightInfo.occupyGuildName);
 			_timeStr="距离战斗结束还有:"
 			_leftTime=_infoMsg.curWarTime;
 			TimerServer.addLoop(updateTime,1000);
@@ -397,7 +397,7 @@ package com.rpgGame.appModule.guild.war
 			_skin.lbHead.htmlText="进攻"+getCityName(city);
 			_skin.lbName1.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,fightInfo.attackGuildName);
 			_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW,"VS");
-			_skin.lbName2.text=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,fightInfo.occupyGuildName);
+			_skin.lbName2.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,fightInfo.occupyGuildName);
 			
 			_timeStr="距离战斗结束还有:"
 			_leftTime=_infoMsg.curWarTime;
@@ -451,7 +451,7 @@ package com.rpgGame.appModule.guild.war
 			}else{
 				_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,"暂无");
 			}
-			_skin.lbName2.text="";
+			_skin.lbName2.htmlText="";
 			_leftTime=_infoMsg.curWarTime;
 			_timeStr="距离竞拍结束还剩:"
 			TimerServer.addLoop(updateTime,1000);
@@ -527,7 +527,7 @@ package com.rpgGame.appModule.guild.war
 					toEnterWar();
 					break;
 				case cityHold:
-					GuildSender.reqGuildWarGiveDailyGift();
+					GuildWarSender.reqGuildWarGiveDailyGift();
 					break;
 				case _skin.btnJone:
 					AppManager.showAppNoHide(AppConstant.GUILD_PANEL,null,EmFunctionID.EM_BANGHUI_INFO);
@@ -538,7 +538,7 @@ package com.rpgGame.appModule.guild.war
 		private function toEnterWar():void
 		{
 			AppManager.closeAllApp();
-			GuildSender.reqGuildWarEnter();
+			GuildWarSender.reqGuildWarEnter();
 		}
 	}
 }

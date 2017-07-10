@@ -10,21 +10,25 @@ package com.rpgGame.coreData.type.activity
 	public class ActivityJoinStateEnum
 	{
 		/**
-		 *关闭 
+		 *非当日
 		 */
-		public static const CLOSE : uint = rEnum.ENUM_START(0);
+		public static const UN_TODAY : uint = rEnum.ENUM_START(0);
 		/**
-		 *开启 
+		 *未开启 
 		 */
-		public static const OPEN : uint = rEnum.next;
+		public static const UN_OPEN : uint = rEnum.next;
 		/**
-		 *参与中 
+		 *进行中
 		 */
 		public static const JOINING : uint = rEnum.next;
 		/**
-		 *已完成 
+		 *已击杀
 		 */
-		public static const COMPLETE : uint = rEnum.next;
+		public static const KILLED_BOSS : uint = rEnum.next;
+		/**
+		 *已结束
+		 */
+		public static const OVER : uint = rEnum.next;
 		
 		public function ActivityJoinStateEnum()
 		{

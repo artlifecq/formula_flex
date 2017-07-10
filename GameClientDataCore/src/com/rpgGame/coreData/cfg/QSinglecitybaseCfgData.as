@@ -7,7 +7,7 @@ package com.rpgGame.coreData.cfg
 	import org.client.mainCore.ds.HashMap;
 
 	/**
-	 *单服城池基础数据 
+	 * 26_3单服城池基础表.xlsx	 
 	 * @author dik
 	 * 
 	 */

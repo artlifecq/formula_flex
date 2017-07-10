@@ -12,8 +12,8 @@ package com.rpgGame.appModule.guild
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.data.long;
-	import org.mokylin.skin.app.banghui.ItemBg;
 	import org.mokylin.skin.app.banghui.TeamItem1_Skin;
+	import org.mokylin.skin.common.ItemBg;
 	
 	import starling.display.DisplayObject;
 	

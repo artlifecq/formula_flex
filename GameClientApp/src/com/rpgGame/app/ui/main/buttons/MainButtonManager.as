@@ -2,8 +2,8 @@ package com.rpgGame.app.ui.main.buttons
 {
 	import com.game.engine3D.config.GlobalConfig;
 	import com.rpgGame.app.manager.FunctionOpenManager;
-	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.ui.main.activityBar.item.ActivityButton;
+	import com.rpgGame.app.ui.main.activityBar.item.ActivityRedRewardButton;
 	import com.rpgGame.app.ui.main.activityBar.item.LimitTimeActivityButton;
 	import com.rpgGame.app.ui.main.activityBar.item.MultyActivityButton;
 	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
@@ -58,7 +58,7 @@ package com.rpgGame.app.ui.main.buttons
 			regClass(102,ActivityButton,ButtonLunjian);
 			regClass(103,ActivityButton,ButtonFubendating);
 			regClass(104,ActivityButton,ButtonZhanchangdating);
-			regClass(105,ActivityButton,ButtonHongbao);
+			regClass(105,ActivityRedRewardButton,ButtonHongbao);
 			regClass(300,MultyActivityButton,ButtonFubenduilie);
 			regClass(301,LimitTimeActivityButton,ButtonShijieboss);
 			regClass(302,LimitTimeActivityButton,ButtonDianfengduijue);

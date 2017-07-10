@@ -21,6 +21,8 @@ package org.mokylin.skin.app.hongbao
 
 		public var lbName:feathers.controls.Label;
 
+		public var lbNum:feathers.controls.Label;
+
 		public var uiNo1:feathers.controls.UIAsset;
 
 
@@ -32,7 +34,7 @@ package org.mokylin.skin.app.hongbao
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [bg_i(),lbName_i(),uiNo1_i()];
+			this.elementsContent = [bg_i(),lbName_i(),lbNum_i(),uiNo1_i()];
 			
 			states = {
 			};
@@ -62,11 +64,25 @@ package org.mokylin.skin.app.hongbao
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbName = temp;
 			temp.name = "lbName";
-			temp.text = "超级无敌xxxx     20礼金";
+			temp.text = "超级无敌xxxx";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 179;
+			temp.width = 119;
 			temp.x = 76;
+			temp.y = 7;
+			return temp;
+		}
+
+		private function lbNum_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbNum = temp;
+			temp.name = "lbNum";
+			temp.text = "20礼金";
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.width = 64;
+			temp.x = 195;
 			temp.y = 7;
 			return temp;
 		}

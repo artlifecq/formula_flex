@@ -12,7 +12,7 @@ package com.rpgGame.coreData.clientConfig
 	*/
 	public class Q_npc
 	{
-		 /**  NPC编号10000-39990任务NPC、40000-49990功能NPC、50000-55000特殊类、59010-59990采集类 */
+		 /**  采集物编号 */
 		public var q_id:int;
 		 /**  NPC上绑定的功能列表（格式：功能类型|选项文字描述;功能类型|选项文字描述;） */
 		public var q_function:String;
@@ -48,6 +48,10 @@ package com.rpgGame.coreData.clientConfig
 		public var q_collectscript:int;
 		 /**  采集时间（毫秒） */
 		public var q_collecttime:int;
+		 /**  最大采集上限 */
+		public var q_collectup:int;
+		 /**  采集是否移除(0不移除，1移除) */
+		public var q_collectremove:int;
 		 /**  是否显示NPC */
 		public var q_displaynpc:String;
 		 /**  采集道具冷却时间（不填为没有CD时间，CD时间毫秒计算） */

@@ -2,6 +2,7 @@ package com.rpgGame.appModule.guild.war
 {
 	import com.rpgGame.app.cmdlistener.enum.OpaqueEnum;
 	import com.rpgGame.app.sender.GuildSender;
+	import com.rpgGame.app.sender.GuildWarSender;
 	import com.rpgGame.app.ui.common.BgListItemRender;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.core.app.AppConstant;
@@ -62,7 +63,7 @@ package com.rpgGame.appModule.guild.war
 						op=OpaqueEnum.DONG_WEI;
 						break;
 				}
-				GuildSender.reqGuildWarApply(info.id,op);
+				GuildWarSender.reqGuildWarApply(info.id,op);
 			}else if(target==skin.lbTeamName1&&info.occupyGuildName){
 				GuildSender.reqGuildBriefnessInfo(info.occupyGuildId);
 			}else if(target==skin.lbTeamName2&&info.curMaxPriceGuildName){

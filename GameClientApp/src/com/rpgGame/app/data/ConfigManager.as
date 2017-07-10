@@ -52,11 +52,14 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.MailCfgData;
 	import com.rpgGame.coreData.cfg.MapPreLoadData;
 	import com.rpgGame.coreData.cfg.MazeCfgData;
+	import com.rpgGame.coreData.cfg.MibaoCfgData;
 	import com.rpgGame.coreData.cfg.NewFuncCfgData;
 	import com.rpgGame.coreData.cfg.NineTowerCfg;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
+	import com.rpgGame.coreData.cfg.QBattleRewardCfgData;
 	import com.rpgGame.coreData.cfg.QSinglecitybaseCfgData;
 	import com.rpgGame.coreData.cfg.RaceCfgData;
+	import com.rpgGame.coreData.cfg.RedRewardCfgData;
 	import com.rpgGame.coreData.cfg.RelationCfgData;
 	import com.rpgGame.coreData.cfg.ReliveCfgData;
 	import com.rpgGame.coreData.cfg.SceneEffectCfgData;
@@ -224,6 +227,7 @@ package com.rpgGame.app.data
 			ActivetyCfgData.setup(dic[ConfigClassRegister.Q_special_activities]);
 			WorldBossCfgData.setup(dic[ConfigClassRegister.Q_world_boss]);
 			QSinglecitybaseCfgData.setup(dic[ConfigClassRegister.Q_singlecitybase]);
+			QBattleRewardCfgData.setup(dic[ConfigClassRegister.Q_battle_reward]);
 			
 			////////////////////////////////////////////////////////////////////////
 			//
@@ -311,7 +315,10 @@ package com.rpgGame.app.data
 			BattleRankCfg.setup(dic[ConfigClassRegister.Q_battle_rank]);//巅峰对决
 			NineTowerCfg.setup(dic[ConfigClassRegister.Q_nine_tower]);//九层妖塔	
 			LijinCfgData.setup(dic[ConfigClassRegister.Q_daysdown_gold]);//天降礼金
+			MibaoCfgData.setup(dic[ConfigClassRegister.Q_mibao_monster],dic[ConfigClassRegister.Q_mibao_reward]);//秦陵秘宝
+			
 			VipCfg.setup(dic[ConfigClassRegister.Q_vip]);//多人副本
+			RedRewardCfgData.setup(dic[ConfigClassRegister.Q_redreward]);//红包
 		}
 		
 		/**
