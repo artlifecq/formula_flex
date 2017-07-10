@@ -2,6 +2,7 @@ package com.rpgGame.coreData.info.item
 {
 	import com.game.mainCore.core.utils.TextFormatUtil;
 	import com.rpgGame.coreData.cfg.item.ContainerData;
+	import com.rpgGame.coreData.cfg.item.EquipStrengthCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.enum.JobEnum;
@@ -19,7 +20,7 @@ package com.rpgGame.coreData.info.item
 	import app.message.ContainerProto.ContainerType;
 	
 	import org.game.netCore.net_protobuff.ByteBuffer;
-
+	
 	/**
 	 * 物品栏对象
 	 * @author Raizo
@@ -27,7 +28,7 @@ package com.rpgGame.coreData.info.item
 	 */
 	public class ItemUtil
 	{
-
+		
 		public static function convertClientItemInfo(itemInfo:ItemInfo):ClientItemInfo
 		{
 			var cfgId : int =itemInfo.itemModelId;
@@ -43,11 +44,11 @@ package com.rpgGame.coreData.info.item
 			clientInfo.count=itemInfo.num;
 			return clientInfo;
 		}
-
+		
 		public static function createEquipInfo(data : GoodsProto) : EquipInfo
 		{
 			/*if (!data.hasEquipment)
-				return null;
+			return null;
 			var equipInfo : EquipInfo = new EquipInfo();
 			var equipment : EquipmentProto = data.equipment;
 			equipInfo.count = data.count;
@@ -57,12 +58,12 @@ package com.rpgGame.coreData.info.item
 			equipInfo.expireTime = data.expireTime ? data.expireTime.toNumber() : 0;
 			equipInfo.evaluate = equipment.evaluate;
 			equipInfo.quality = equipment.quality;
-//			equipInfo.base_stat = equipment.baseStat;
-//			equipInfo.random_stat = equipment.randomStat;
+			//			equipInfo.base_stat = equipment.baseStat;
+			//			equipInfo.random_stat = equipment.randomStat;
 			equipInfo.durability = equipment.durability;
 			equipInfo.used_durability = equipment.usedDurability;
 			equipInfo.refined_times = equipment.refinedTimes;
-//			equipInfo.refined_stat = equipment.refinedStat;
+			//			equipInfo.refined_stat = equipment.refinedStat;
 			equipInfo.build_signature = equipment.buildSignature;
 			equipInfo.fighting_amount = equipment.fightingAmount.toNumber();
 			equipInfo.general_taoz_id = equipment.generalTaozId;
@@ -70,7 +71,7 @@ package com.rpgGame.coreData.info.item
 			equipInfo.general_quality = equipment.generalQuality;*/
 			return null;
 		}
-
+		
 		/**
 		 * 创建一个坐骑兽牌
 		 * @param data
@@ -79,9 +80,9 @@ package com.rpgGame.coreData.info.item
 		 */		
 		public static function createMountInfoData( data:GoodsProto ):MountBeastCardInfo
 		{
-//			if( data.mount == null )
-				return null;
-		/*	var mountBreastCardInfo:MountBeastCardInfo = new MountBeastCardInfo();
+			//			if( data.mount == null )
+			return null;
+			/*	var mountBreastCardInfo:MountBeastCardInfo = new MountBeastCardInfo();
 			var mountProto:MountProto = data.mount;
 			mountBreastCardInfo.count = data.count;
 			mountBreastCardInfo.cfgId = data.id;
@@ -93,14 +94,14 @@ package com.rpgGame.coreData.info.item
 		}
 		public static function createSocietyBuildMoneyItemInfo() : ClientItemInfo
 		{
-		/*	var itemInfo : ClientItemInfo = new ClientItemInfo();
+			/*	var itemInfo : ClientItemInfo = new ClientItemInfo();
 			itemInfo.name = LanguageConfig.getText(LangSociety.SOCIETY_BUILD_MONEY_ITEM_NAME);
 			itemInfo.desc = LanguageConfig.getText(LangSociety.SOCIETY_BUILD_MONEY_ITEM_DESC);
 			itemInfo.quality = Quality.YELLOW;
 			itemInfo.icoName = "yinzi";*/
 			return null;
 		}
-
+		
 		/**
 		 * 礼包数据转换成vo
 		 * @param prizeProto
@@ -109,7 +110,7 @@ package com.rpgGame.coreData.info.item
 		{
 			return ProtoParseToInfo.decodePrizeProto(prizeProto);
 		}
-
+		
 		/**
 		 * 转换商城tab下的数据
 		 * @param tabList
@@ -117,22 +118,22 @@ package com.rpgGame.coreData.info.item
 		public static function converToShopTabVos(tabList : Array, shopId : int) : Array
 		{
 			var list : Array = [];
-//			var len:int = tabList.length;
-//			var index:int = 0;
-//			var shopTabProto:ShopTabProto;
-//			while(index < len)
-//			{
-//				var shopTabVo:ShopTabVo = new ShopTabVo();
-//				shopTabProto = tabList[index];
-//				shopTabVo.name = BytesUtil.bytes2UTF(shopTabProto.name);
-//				shopTabVo.index = shopTabProto.index;
-//				shopTabVo.list = convertToItemVoList(shopTabProto.goodsList, index,shopId);
-//				list.push(shopTabVo);
-//				index++;
-//			}
+			//			var len:int = tabList.length;
+			//			var index:int = 0;
+			//			var shopTabProto:ShopTabProto;
+			//			while(index < len)
+			//			{
+			//				var shopTabVo:ShopTabVo = new ShopTabVo();
+			//				shopTabProto = tabList[index];
+			//				shopTabVo.name = BytesUtil.bytes2UTF(shopTabProto.name);
+			//				shopTabVo.index = shopTabProto.index;
+			//				shopTabVo.list = convertToItemVoList(shopTabProto.goodsList, index,shopId);
+			//				list.push(shopTabVo);
+			//				index++;
+			//			}
 			return list;
 		}
-
+		
 		/**
 		 * 当前分页下的商品数据
 		 * @param dataList
@@ -140,45 +141,45 @@ package com.rpgGame.coreData.info.item
 		private static function convertToItemVoList(dataList : Array, tabIndex : int, shopId : int) : Array
 		{
 			var goodList : Array = [];
-//			var len:int = dataList.length;
-//			var index:int = 0;
-//			var shopItemInfo:ShopItemInfo;
-//			var shopGoodsProto:ShopGoodsProto;
-//			while(index < len)
-//			{
-//				shopGoodsProto = dataList[index];
-//				shopItemInfo = new ShopItemInfo();
-//				shopItemInfo.goodsIndex = index;
-//				shopItemInfo.tabIndex = tabIndex;
-//				shopItemInfo.shopId = shopId;
-//				shopItemInfo.itemInfo = wrapperProtoToItemInfo(shopGoodsProto.goodsWrapper);
-//				if(shopGoodsProto.hasPriceType) shopItemInfo.priceType = shopGoodsProto.priceType;
-//				if(shopGoodsProto.hasPrice)
-//				{
-//					shopItemInfo.price = shopGoodsProto.price;
-//					//fly 注释，这里不确定是什么售价，如果是物品的静态售价，那就从itemcfgdata里取
-////					shopItemInfo.price = shopGoodsProto.price;
-//				}
-//				if(shopGoodsProto.hasStartTime)shopItemInfo.startTime = shopGoodsProto.startTime.toNumber();
-//				if(shopGoodsProto.hasEndTime)shopItemInfo.endTime = shopGoodsProto.endTime.toNumber();
-//				if(shopGoodsProto.hasPromotion)shopItemInfo.promotion = shopGoodsProto.promotion;
-//				if(shopGoodsProto.hasShowPrice)shopItemInfo.showPrice = shopGoodsProto.showPrice;
-//				if(shopGoodsProto.hasDesc)shopItemInfo.goodsDesc = shopGoodsProto.desc;
-//				
-//				goodList.push(shopItemInfo);
-//				ShopCfgData.addShopItemInfo(shopItemInfo);
-//				index++;
-//			}
+			//			var len:int = dataList.length;
+			//			var index:int = 0;
+			//			var shopItemInfo:ShopItemInfo;
+			//			var shopGoodsProto:ShopGoodsProto;
+			//			while(index < len)
+			//			{
+			//				shopGoodsProto = dataList[index];
+			//				shopItemInfo = new ShopItemInfo();
+			//				shopItemInfo.goodsIndex = index;
+			//				shopItemInfo.tabIndex = tabIndex;
+			//				shopItemInfo.shopId = shopId;
+			//				shopItemInfo.itemInfo = wrapperProtoToItemInfo(shopGoodsProto.goodsWrapper);
+			//				if(shopGoodsProto.hasPriceType) shopItemInfo.priceType = shopGoodsProto.priceType;
+			//				if(shopGoodsProto.hasPrice)
+			//				{
+			//					shopItemInfo.price = shopGoodsProto.price;
+			//					//fly 注释，这里不确定是什么售价，如果是物品的静态售价，那就从itemcfgdata里取
+			////					shopItemInfo.price = shopGoodsProto.price;
+			//				}
+			//				if(shopGoodsProto.hasStartTime)shopItemInfo.startTime = shopGoodsProto.startTime.toNumber();
+			//				if(shopGoodsProto.hasEndTime)shopItemInfo.endTime = shopGoodsProto.endTime.toNumber();
+			//				if(shopGoodsProto.hasPromotion)shopItemInfo.promotion = shopGoodsProto.promotion;
+			//				if(shopGoodsProto.hasShowPrice)shopItemInfo.showPrice = shopGoodsProto.showPrice;
+			//				if(shopGoodsProto.hasDesc)shopItemInfo.goodsDesc = shopGoodsProto.desc;
+			//				
+			//				goodList.push(shopItemInfo);
+			//				ShopCfgData.addShopItemInfo(shopItemInfo);
+			//				index++;
+			//			}
 			return goodList;
 		}
-
-
+		
+		
 		public static function getPrizeInfoDescript(prizeInfo : PrizeInfo) : String
 		{
 			var str : String = getPrizeInfoDescriptArr(prizeInfo).join(";");
 			return str;
 		}
-
+		
 		public static function getPrizeInfoDescriptArr(prizeInfo : PrizeInfo) : Array
 		{
 			var arr : Array = [];
@@ -186,32 +187,32 @@ package com.rpgGame.coreData.info.item
 			{
 				arr.push(ShopType.getMoneyStrByType(AmountType.EXP) + prizeInfo.moneyAmount.getAmountByType(AmountType.EXP));
 			}
-
+			
 			if (prizeInfo.moneyAmount.hasSomeType(AmountType.MONEY))
 			{
 				arr.push(ShopType.getMoneyStrByType(AmountType.MONEY) + prizeInfo.moneyAmount.getAmountByType(AmountType.MONEY));
 			}
-
+			
 			if (prizeInfo.moneyAmount.hasSomeType(AmountType.BAND_JINZI))
 			{
 				arr.push(ShopType.getMoneyStrByType(AmountType.BAND_JINZI) + prizeInfo.moneyAmount.getAmountByType(AmountType.BAND_JINZI));
 			}
-
+			
 			if (prizeInfo.moneyAmount.hasSomeType(AmountType.BAND_MONEY))
 			{
 				arr.push(ShopType.getMoneyStrByType(AmountType.BAND_MONEY) + prizeInfo.moneyAmount.getAmountByType(AmountType.BAND_MONEY));
 			}
-
+			
 			if (prizeInfo.moneyAmount.hasSomeType(AmountType.GONGXUN))
 			{
 				arr.push(ShopType.getMoneyStrByType(AmountType.GONGXUN) + prizeInfo.moneyAmount.getAmountByType(AmountType.GONGXUN));
 			}
-
+			
 			if (prizeInfo.moneyAmount.hasSomeType(AmountType.JINZI))
 			{
 				arr.push(ShopType.getMoneyStrByType(AmountType.JINZI) + prizeInfo.moneyAmount.getAmountByType(AmountType.JINZI));
 			}
-
+			
 			if (prizeInfo.itemInfoList.length)
 			{
 				for each (var itemInfo : ClientItemInfo in prizeInfo.itemInfoList)
@@ -222,7 +223,7 @@ package com.rpgGame.coreData.info.item
 			}
 			return arr;
 		}
-
+		
 		/**
 		 *容器类型：
 		 *      if(容器类型=MOUNT_EQUIPMENT){
@@ -243,7 +244,7 @@ package com.rpgGame.coreData.info.item
 			else
 				bytes.writeVarint32(containerId);
 		}
-
+		
 		/**
 		 * 容器类型：
 		 *      if(容器类型=MOUNT_EQUIPMENT){

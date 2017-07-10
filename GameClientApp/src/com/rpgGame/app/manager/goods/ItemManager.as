@@ -2,6 +2,7 @@ package com.rpgGame.app.manager.goods
 {
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.ItemSender;
+	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.coreData.cfg.item.EquipStrengthCfg;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
@@ -130,6 +131,7 @@ package com.rpgGame.app.manager.goods
 			}
 			return 0;
 		}
+		
 		//继承判断用	
 		/**判断是否有可继承装备*/
 		public static function checkItemCanInheritance():Boolean
