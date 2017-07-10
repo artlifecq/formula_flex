@@ -242,6 +242,10 @@ package com.rpgGame.appModule.mount
 		{
 			_mountShowData.useExtraItem(HorseManager.instance().useExtraItem1,HorseManager.instance().useExtarItem2);
 			_propContent.updataInfo(_mountShowData);
+			for each(var eb:ExtraButton in _extraItemList)
+			{
+				eb.refeash(_mountShowData);
+			}
 		}
 		private function onTouch(e : TouchEvent) : void
 		{

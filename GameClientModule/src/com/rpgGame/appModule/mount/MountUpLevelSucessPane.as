@@ -31,7 +31,7 @@ package com.rpgGame.appModule.mount
 		{
 			_skin = new Zuoqi_JingjieOk_Skin();
 			super(_skin);
-			this.dragAble =false;
+			this.model = true;
 			initView();
 		}
 		private function initView():void

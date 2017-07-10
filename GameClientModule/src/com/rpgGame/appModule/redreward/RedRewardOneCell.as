@@ -9,7 +9,7 @@ package com.rpgGame.appModule.redreward
 	public class RedRewardOneCell extends SkinUI
 	{
 		private var _skin:HongBao_Item2;
-		private static const playerNameList:Array = ["项少龙","嬴政","连晋","项少龙","善柔","赵倩","乌应元","少原君","吕不韦"];
+		private static const playerNameList:Array = ["项少龙","嬴政","连晋","善柔","赵倩","乌应元","少原君","吕不韦"];
 		public function RedRewardOneCell():void
 		{
 			_skin = new HongBao_Item2();
