@@ -205,6 +205,9 @@ package com.rpgGame.app.view.icon
 			}else if(_iconSize==IcoSizeEnum.ICON_64){
 				_lvImage.x = 8;
 				_lvImage.y = 8;
+			}else if(_iconSize==IcoSizeEnum.ICON_42){
+				_lvImage.x = 2;
+				_lvImage.y = 2;
 			}
 		}
 		
@@ -258,12 +261,15 @@ package com.rpgGame.app.view.icon
 				_jobImage = new UIAsset();
 				addChild(_jobImage);
 			}
-			
+			_jobImage.onImageLoaded=jobIconComplete;
 			_jobImage.styleName=state;
-			_jobImage.x = _iconSize-13;
-			_jobImage.y = _iconSize-13;
 		}
 		
+		private function jobIconComplete(ass:UIAsset):void
+		{
+			_jobImage.x = _iconSize-_jobImage.width-1;
+			_jobImage.y = _iconSize-_jobImage.height-1;
+		}		
 		
 		public function setIsWear(v:Boolean):void
 		{

@@ -1,6 +1,7 @@
 package com.rpgGame.app.view.icon
 {
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.type.AssetUrl;
 	
@@ -507,7 +508,7 @@ package com.rpgGame.app.view.icon
 			_countText.verticalAlign="middle";
 			_countText.verticalCenter=-2;
 			_countText.textAlign = Align.RIGHT;
-			_countText.color = 0xcfc6ae;
+			_countText.color = StaticValue.A_UI_BEIGE_TEXT;
 			_countText.fontSize = 10;
 			_countText.nativeFilters=Fontter.filterObj["labelFilterBlack"];
 			addChild(_countText);

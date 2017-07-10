@@ -86,8 +86,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 				icon=IconCDFace.create(IcoSizeEnum.ICON_48);
 				rewardIcon.push(icon);
 				rewardList[i].container.addChildAt(icon,3);
-				icon.x=10;
-				icon.y=1;
+				icon.bindBg(rewardList[i].Icon);
 			}
 		}
 		

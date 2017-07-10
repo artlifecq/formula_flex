@@ -155,10 +155,9 @@ package com.rpgGame.appModule.die
 		
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
-//			super.onTouchTarget(target);
-			if( target.name){
+			super.onTouchTarget(target);
+			if( target.name=="btnClose"||target.name=="closeBtn"){
 				SceneSender.reqReviveRole();
-				this.hide();
 				return;
 			}
 			BackPackManager.instance.getBagItemsCountById(FUHUO_ID);

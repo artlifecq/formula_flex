@@ -5,7 +5,6 @@ package com.rpgGame.appModule.skill
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.SpellSender;
-	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.view.icon.BgIcon;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
@@ -62,10 +61,8 @@ package com.rpgGame.appModule.skill
 			skin=_skin;
 			skin.container.addChild(_icon);
 			skin.container.addChildAt(_riseIcon,12);
-			_icon.x=16;
-			_icon.y=21;
-			_riseIcon.x=15;
-			_riseIcon.y=117;
+			_icon.bindBg(_skin.Icon_jineng);
+			_riseIcon.bindBg(_skin.Icon_jineng2);
 			skin.lb_yinliang.wordWrap=false;
 			skin.lb_daoju.wordWrap=false;
 			labelList=new Vector.<Label>();

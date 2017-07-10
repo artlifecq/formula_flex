@@ -181,8 +181,8 @@ package com.rpgGame.appModule.equip
 			_exisList=new Vector.<UIAsset>();
 			icon=IconCDFace.create(IcoSizeEnum.ICON_64);
 			icon.selectImgVisible=false;
-			icon.x=591;
-			icon.y=211;
+			icon.x=571;
+			icon.y=201;
 			_exisList.push(_skin.exist1);
 			_exisList.push(_skin.exist2);
 			_exisList.push(_skin.exist3);
