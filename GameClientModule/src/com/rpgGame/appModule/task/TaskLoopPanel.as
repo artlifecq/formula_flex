@@ -66,8 +66,8 @@ package com.rpgGame.appModule.task
 			{
 				ico=IconCDFace.create(IcoSizeEnum.ICON_42);
 				ico.showCD=false;
-				ico.x=ico1BgList[i].x+6;
-				ico.y=ico1BgList[i].y+6;
+				ico.x=ico1BgList[i].x+3;
+				ico.y=ico1BgList[i].y+3;
 				ico.visible=false;
 				ico1BgList[i].visible=false;
 				ico1List.push(ico);
@@ -83,8 +83,8 @@ package com.rpgGame.appModule.task
 			{
 				ico=IconCDFace.create(IcoSizeEnum.ICON_42);
 				ico.showCD=false;
-				ico.x=ico2BgList[i].x+6;
-				ico.y=ico2BgList[i].y+6;
+				ico.x=ico2BgList[i].x+3;
+				ico.y=ico2BgList[i].y+3;
 				ico.visible=false;
 				ico2BgList[i].visible=false;
 				ico2List.push(ico);
