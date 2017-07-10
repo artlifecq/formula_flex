@@ -803,7 +803,8 @@ package org.mokylin.skin.app.beibao
 			pro_jinyan = temp;
 			temp.name = "pro_jinyan";
 			temp.height = 10;
-			temp.minimum = 100;
+			temp.maximum = 100;
+			temp.minimum = 0;
 			temp.styleClass = org.mokylin.skin.app.beibao.Pro_roleJY;
 			temp.value = 0;
 			temp.width = 112;
@@ -818,7 +819,7 @@ package org.mokylin.skin.app.beibao
 			pro_shengmin = temp;
 			temp.name = "pro_shengmin";
 			temp.height = 10;
-			temp.minimum = 50;
+			temp.minimum = 0;
 			temp.styleClass = org.mokylin.skin.app.beibao.Pro_roleSM;
 			temp.value = 50;
 			temp.width = 112;
@@ -833,7 +834,7 @@ package org.mokylin.skin.app.beibao
 			pro_zhenqi = temp;
 			temp.name = "pro_zhenqi";
 			temp.height = 10;
-			temp.minimum = 50;
+			temp.minimum = 0;
 			temp.styleClass = org.mokylin.skin.app.beibao.Pro_roleZQ;
 			temp.value = 0;
 			temp.width = 112;

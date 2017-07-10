@@ -100,8 +100,8 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				var ico:IconCDFace=IconCDFace.create(IcoSizeEnum.ICON_42);
 				ico.showCD=false;
-				ico.x=icoBgList[i].x-1;
-				ico.y=icoBgList[i].y;
+				ico.x=icoBgList[i].x+3;
+				ico.y=icoBgList[i].y+3;
 				ico.visible=false;
 				icoBgList[i].visible=false;
 				icoList.push(ico);
@@ -274,7 +274,7 @@ package com.rpgGame.app.ui.main.taskbar
 				if(icoBgList[i].visible==true)
 				{
 					icoBgList[i].y=icoBgList[0].y;
-					icoList[i].y=icoBgList[0].y-1;
+					icoList[i].y=icoBgList[0].y+3;
 				}
 			}
 			for(i=3;i<icoBgList.length;i++)
@@ -282,7 +282,7 @@ package com.rpgGame.app.ui.main.taskbar
 				if(icoBgList[i].visible==true)
 				{
 					icoBgList[i].y=icoBgList[3].y;
-					icoList[i].y=icoBgList[3].y-1;
+					icoList[i].y=icoBgList[3].y+3;
 				}
 			}
 			
