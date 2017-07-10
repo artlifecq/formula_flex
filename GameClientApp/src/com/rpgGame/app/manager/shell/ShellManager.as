@@ -145,7 +145,7 @@ package com.rpgGame.app.manager.shell
 			if (!ribbonAnimator)
 			{
 				ribbonAnimator = new RibbonAnimator();
-				(ribbonAnimator as RibbonAnimator).initRibbonData("shandian02",targetList,MainRoleManager.actor);
+				(ribbonAnimator as RibbonAnimator).initRibbonData("lv",targetList,MainRoleManager.actor);
 				effectSet.setRenderAnimator(ribbonAnimator);
 			}
 		}

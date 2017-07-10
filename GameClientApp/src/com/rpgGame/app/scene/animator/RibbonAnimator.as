@@ -67,7 +67,7 @@ package com.rpgGame.app.scene.animator
 				_excuteDelay = excuteInterval;
 				if(_targetList.length == 0)
 				{
-					dispose();
+					//dispose();
 				}
 				else
 				{
@@ -87,6 +87,10 @@ package com.rpgGame.app.scene.animator
 					ribbon.stop();
 					ribbon.dispose();
 					//					SceneManager.scene.gameScene3d.removeChild(ribbon);
+				}
+				if (_lightList.length==0) 
+				{
+					dispose();
 				}
 			}
 		}
@@ -162,11 +166,24 @@ package com.rpgGame.app.scene.animator
 				}
 				trace(fromObj.position);
 				trace(toObj.position);
-				
-				var ribbon:LightningRibbon = new LightningRibbon(fromObj, toObj, 16, 64, LightMaterial);
+				var seg:int=10;
+				var h:int=90;
+				var ribbon:LightningRibbon = new LightningRibbon(fromObj, toObj, seg, h, LightMaterial);
 				ribbon.shakeTimer = 100;
 				ribbon.shakeAmp=50;
-				ribbon.animator = new CPUSpriteSheetAnimator(8, 1, 15, 8);
+				var fps:int=12;
+				ribbon.animator = new CPUSpriteSheetAnimator(8, 1, fps, 8);
+				ribbon.start();
+				
+				_lightList.push(ribbon);
+				
+				SceneManager.scene.gameScene3d.addChild(ribbon);
+				
+				ribbon = new LightningRibbon(toObj,fromObj , seg, h, LightMaterial);
+				ribbon.shakeTimer = 100;
+				ribbon.shakeAmp=50;
+				
+				ribbon.animator = new CPUSpriteSheetAnimator(8, 1, fps, 8);
 				ribbon.start();
 				
 				_lightList.push(ribbon);

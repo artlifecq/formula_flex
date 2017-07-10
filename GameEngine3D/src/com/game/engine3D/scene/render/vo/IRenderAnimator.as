@@ -14,5 +14,6 @@ package com.game.engine3D.scene.render.vo
 		function setOwner(owner : BaseObj3D) : void;
 		function update(gapTm:uint) : void;
 		function dispose() : void;
+		//function get type():int;
 	}
 }
