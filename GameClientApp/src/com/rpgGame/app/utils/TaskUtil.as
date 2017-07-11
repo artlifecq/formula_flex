@@ -502,12 +502,12 @@ package com.rpgGame.app.utils
 		 * @param modeId
 		 *
 		 */
-		public static function postTaskWalk(post :Array,onArrive:Function=null,data:Object=null) : void
+		public static function postTaskWalk(post :Array,onArrive:Function=null,data:Object=null,needSprite:Boolean=false) : void
 		{
 			
 			if (post!=null&&post.length==3)
 			{
-				MainRoleSearchPathManager.walkToScene(post[0], post[1], post[2],onArrive, 100,data);
+				MainRoleSearchPathManager.walkToScene(post[0], post[1], post[2],onArrive, 100,data,needSprite);
 			}
 		}
 		/**
