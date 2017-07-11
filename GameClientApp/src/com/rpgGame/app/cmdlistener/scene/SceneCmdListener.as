@@ -227,6 +227,7 @@ package com.rpgGame.app.cmdlistener.scene
 		{
 			// TODO Auto Generated method stub
 			//LostSkillManager.instance().checkExpNotice(msg.killer);
+			EventManager.dispatchEvent(MapEvent.ROLE_DIE,msg.monsterId);
 		}
 		
 		private function onResChangePKStateMessage(msg:ResChangePKStateMessage):void

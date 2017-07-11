@@ -150,15 +150,14 @@ package com.rpgGame.app.state.role.action
 			{
 				return false;
 			}
-			
+//			if (!force && (_machine as RoleStateMachine).isTripleLockCaseSpell)
+//			{
+//				return false;
+//			}
 			if ((_machine.owner as SceneRole).isMainChar)
 			{
 				if (KeyMoveManager.getInstance().keyMoving)
 					return false;
-			}
-			if (!force&& (_machine as RoleStateMachine).isTripleLockCaseSpell) 
-			{
-				return false;
 			}
 			return true;
 		}
