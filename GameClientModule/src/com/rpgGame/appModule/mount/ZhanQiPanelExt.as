@@ -215,7 +215,8 @@ package com.rpgGame.appModule.mount
 			{
 				_uplevelSuccess = new ZhanQiUpLevelSucessPanelExt();
 				_uplevelSuccess.addEventListener(Event.REMOVED_FROM_STAGE,removePropHandler);
-				StarlingLayerManager.topUILayer.addChild(_uplevelSuccess);
+//				StarlingLayerManager.topUILayer.addChild();
+				_uplevelSuccess.show();
 				_uplevelSuccess.x = int((_uplevelSuccess.stage.stageWidth - _uplevelSuccess.width) / 2);
 				_uplevelSuccess.y = int((_uplevelSuccess.stage.stageHeight - _uplevelSuccess.height) / 2);
 			}

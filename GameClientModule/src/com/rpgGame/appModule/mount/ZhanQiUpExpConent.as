@@ -12,6 +12,8 @@ package com.rpgGame.appModule.mount
 	
 	import away3d.events.Event;
 	
+	import gs.TweenLite;
+	
 	import org.mokylin.skin.app.zuoqi.Zhanqi_Skin;
 	
 	public class ZhanQiUpExpConent
@@ -99,6 +101,8 @@ package com.rpgGame.appModule.mount
 				_skin.maximg.visible = true;
 			}
 		}
+		private var _isAutoing:Boolean;
+		
 		public function set isAutoing(value:Boolean):void
 		{
 			if(_zhanqiShowData.isMaxLevel)
@@ -112,6 +116,21 @@ package com.rpgGame.appModule.mount
 			
 			if(_zhanqiShowData!=null)
 				_zhanqiShowData.isAutoing = value;			
-		}		
+			
+			if(_isAutoing != value)
+			{
+				updateButtonTouchState(false);
+				TweenLite.delayedCall(0.1,updateButtonTouchState,[true]);
+			}else{
+				updateButtonTouchState(true);
+			}
+			_isAutoing = value;
+		}
+		private function updateButtonTouchState(bool:Boolean):void
+		{
+			_skin.btn_kaishi.touchable = bool;
+			_skin.btn_zidong.touchable = bool;
+			_skin.btn_tingzhi.touchable = bool;
+		}
 	}
 }
