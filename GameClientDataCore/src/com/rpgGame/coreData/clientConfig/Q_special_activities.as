@@ -22,6 +22,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_activity_time:String;
 		 /**    */
 		public var q_order:int;
+		 /**  是否是跨服活动（0否1是） */
+		public var q_cross:int;
 		 /**  活动时间展示 */
 		public var q_activity_timeshow:String;
 		 /**  活动限制等级 */

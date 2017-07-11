@@ -530,7 +530,7 @@ package com.rpgGame.coreData.cfg
 		 */
 		public static function getEffect(effectName : String) : String
 		{
-			var url : String = "effect/" + effectName + eName_AWD;
+			var url : String = "avatar/pc/flag/zhanqi_002/zhanqi_002"+ eName_AWD;
 			return baseDir + resURL + url;
 		}
 
