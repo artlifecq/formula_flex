@@ -149,7 +149,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			activeBg = temp;
 			temp.name = "activeBg";
-			temp.styleName = "ui/big_bg/activety/des/14.jpg";
+			temp.styleName = "ui/big_bg/activety/des/bosstongyong.jpg";
 			temp.x = 633;
 			temp.y = 88;
 			return temp;

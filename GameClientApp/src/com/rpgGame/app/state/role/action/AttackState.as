@@ -3,6 +3,7 @@ package com.rpgGame.app.state.role.action
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.state.IState;
 	import com.game.engine3D.vo.BaseRole;
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.app.state.role.control.CheckTripleAttackStateReference;
@@ -58,6 +59,9 @@ package com.rpgGame.app.state.role.action
 			if (_machine && !_machine.isInPool)
 			{
 				super.execute();
+				//
+				_machine.removeState(RoleStateType.CONTROL_PREWAR_WAITING);
+				//
 				_attackBroken = false;
 				_attackFinished = false;
 				_canWalkRelease = false;
@@ -357,6 +361,11 @@ package com.rpgGame.app.state.role.action
 		override public function leave() : void
 		{
 			super.leave();
+			if ((_machine as RoleStateMachine).isTripleLockCaseSpell) 
+			{
+				GameLog.add("三连击非正常打断");
+				_machine.removeState(RoleStateType.CONTROL_TRIPLE_ATTACK_LOCK);
+			}
 			stopAttack();
 			_attackBroken = false;
 			_attackFinished = false;
@@ -480,7 +489,7 @@ package com.rpgGame.app.state.role.action
 			}
 			else if (nextState.type == RoleStateType.ACTION_HIT)
 			{
-				if (!force && !_attackBroken)
+				//if (!force && !_attackBroken)
 					return false;
 			}
 			else if (nextState.type == RoleStateType.ACTION_COLLECT)
@@ -565,6 +574,11 @@ package com.rpgGame.app.state.role.action
 			{
 				_totalFrameTween.kill();
 				_totalFrameTween = null;
+			}
+			if ((_machine as RoleStateMachine).isTripleLockCaseSpell) 
+			{
+				GameLog.add("三连击非正常打断2");
+				_machine.removeState(RoleStateType.CONTROL_TRIPLE_ATTACK_LOCK);
 			}
 			super.dispose();
 		}

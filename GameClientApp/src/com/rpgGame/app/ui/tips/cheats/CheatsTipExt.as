@@ -46,7 +46,9 @@ package com.rpgGame.app.ui.tips.cheats
 			super(_skin);
 			MCUtil.removeSelf(_skin.lab_shuxing);
 			MCUtil.removeSelf(_skin.lab_xiangsheng);
-			
+			MCUtil.removeSelf(_skin.line5);
+			MCUtil.removeSelf(_skin.lab_shuoming);
+			MCUtil.removeSelf(_skin.lab_Ctrl);
 			_skillIcon=new BgIcon(IcoSizeEnum.ICON_36);
 			_skillIcon.x=0;
 			_skillIcon.y=0;
@@ -142,8 +144,7 @@ package com.rpgGame.app.ui.tips.cheats
 					_skin.gridSkill.visible=false;
 					_skin.line3.visible=false;
 				}
-				
-				
+								
 				var keys:Array=cheatVo.careCheats.keys();
 				var len:int=keys.length;
 				if (len>0) 
@@ -173,13 +174,9 @@ package com.rpgGame.app.ui.tips.cheats
 					_skin.line4.visible=false;
 					_skin.imgXS.visible=false;
 				}
-				//线
-				_skin.line5.y=starty;
-				starty+=_skin.line5.height+5;
-				_skin.lab_shuoming.y=starty;
-				starty+=_skin.lab_shuoming.height+5;
-				_skin.lab_Ctrl.y=starty;
-				_skin.imgBg.height=starty+_skin.lab_Ctrl.height+10;
+				//线 不要 等要的时候在启用
+				
+				_skin.imgBg.height=starty+10;
 			}
 		}
 		public function hideTips():void

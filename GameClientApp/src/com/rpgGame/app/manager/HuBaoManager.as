@@ -15,6 +15,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.cfg.HuBaoData;
 	import com.rpgGame.coreData.clientConfig.Q_convoy;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.AIStateType;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
@@ -119,7 +120,7 @@ package com.rpgGame.app.manager
 			var obj:Array=JSONUtil.decode(q_con.q_reward);
 			for(var i:int=0;i<obj.length;i++)
 			{
-				var itemInfo:ClientItemInfo=new ClientItemInfo(obj[i].mod);		
+				var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(obj[i].mod,1);
 				str+=itemInfo.qItem.q_name+": ×"+obj[i].num+"\n";
 			}		
 			return str;

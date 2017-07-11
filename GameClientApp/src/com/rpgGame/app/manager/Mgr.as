@@ -26,6 +26,10 @@ package com.rpgGame.app.manager
 		{
 			return JunJieManager.ins;
 		}
+		public static function get hunyinMgr():HunYinManager
+		{
+			return HunYinManager.ins;
+		}
 		public static function get shopMgr():ShopManager
 		{
 			return ShopManager.ins;

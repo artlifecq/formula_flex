@@ -132,8 +132,8 @@ package com.rpgGame.appModule.equip
 			_skin.container.addChild(_targetEquip);
 			_skin.container.addChild(_useItem);
 			_skin.container.addChild(_skin.lb_num);
-			_useItem.x=737;
-			_useItem.y=150;
+			_useItem.x=740;
+			_useItem.y=147;
 			_skin.lb_cailiao.text=LanguageConfig.getText(LangUI.UI_TEXT26);
 			
 			useItemInfo=new ClientItemInfo();
@@ -405,8 +405,8 @@ package com.rpgGame.appModule.equip
 				_leftSkin.lb_yinzi.text=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT27),0);
 			}
 			
-			_goodsContainerTarget.dataProvider.updateAll();
-			_goodsContainerUse.dataProvider.updateAll();
+//			_goodsContainerTarget.dataProvider.updateAll();
+//			_goodsContainerUse.dataProvider.updateAll();
 		}
 		
 		private function getTitleText(title:String,value:*,value1:int=-1,noSlip:Boolean=true):String

@@ -1,6 +1,7 @@
 package com.rpgGame.app.view.icon
 {
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.type.AssetUrl;
 	
@@ -57,7 +58,7 @@ package com.rpgGame.app.view.icon
 		/** 选中框 */		
 		protected var _selectImage:UIAsset;
 		/** 背景资源路径 **/
-		private var _bgResName:String;
+		protected var _bgResName:String;
 		/** ico的背景bitmapdata  */		
 		protected var _bgImage:UIAsset;
 		/** 锁定图片，大小对应格子的大小**/
@@ -136,8 +137,8 @@ package com.rpgGame.app.view.icon
 			_qualityEft.frameRate=20;
 			_qualityEft.autoPlay=true;
 			//			var scaleV:Number=(90/64);
-			_qualityEft.width=_iconSize;
-			_qualityEft.height=_iconSize;
+			_qualityEft.width=this.width;
+			_qualityEft.height=this.width;
 			//			var xy:Number=-1*(_iconSize/64)*(90-64)/2
 			//			_qualityEft.x=xy;
 			//			_qualityEft.y=xy;
@@ -151,6 +152,17 @@ package com.rpgGame.app.view.icon
 			if(_qualityEft){
 				_qualityEft.removeFromParent();
 			}
+		}
+		
+		
+		/**销毁显示对象 */
+		override public function destroy() : void
+		{
+			if(_bgImage){
+				_bgImage.removeFromParent();
+				_bgImage=null;
+			}
+			super.destroy();
 		}
 		
 		/**
@@ -167,7 +179,7 @@ package com.rpgGame.app.view.icon
 			{
 				_bgImage = new UIAsset();
 				addChild( _bgImage );
-				_bgImage.imageScaleMode=UIAsset.IMAGE_SCALE_MODE_AUTO;
+				_bgImage.imageScaleMode=UIAsset.IMAGE_SCALE_MODE_NO_SCALE;
 			}
 			
 			_bgImage.alpha = alpha;
@@ -195,6 +207,13 @@ package com.rpgGame.app.view.icon
 			this.x=_bgImage.x;
 			this.y=_bgImage.y;
 			_bgImage.x=_bgImage.y=0;
+			this.width=_bgImage.width;
+			this.height=_bgImage.height;
+			if(_qualityEft){
+				_qualityEft.width=this.width;
+				_qualityEft.height=this.width;
+			}
+	
 			sortLayer();
 			calIconPos();
 		}
@@ -235,12 +254,12 @@ package com.rpgGame.app.view.icon
 			{
 				_bgImage = new UIAsset();
 				addChild( _bgImage );
-				_bgImage.imageScaleMode=UIAsset.IMAGE_SCALE_MODE_AUTO;
+				_bgImage.imageScaleMode=UIAsset.IMAGE_SCALE_MODE_NO_SCALE;
 			}
 			
 			_bgImage.alpha = alpha;
-			_bgImage.styleName =value;
 			_bgImage.onImageLoaded = onBgImgComplete;
+			_bgImage.styleName =value;
 			//因为从对象池取的，所以要设置下
 //			_bgImage.width=S2W[_iconSize];
 //			_bgImage.height=S2W[_iconSize];
@@ -343,14 +362,16 @@ package com.rpgGame.app.view.icon
 		 * @param uiasset
 		 * 
 		 */
-		private function onBgImgComplete(uiasset:UIAsset):void
+		protected function onBgImgComplete(uiasset:UIAsset):void
 		{
+			_bgImage.onImageLoaded=null;
+			this.width=_bgImage.width;
+			this.height=_bgImage.height;
+			if(_qualityEft){
+				_qualityEft.width=this.width;
+				_qualityEft.height=this.width;
+			}
 			calIconPos();
-		}
-		
-		public function get bgImage():UIAsset
-		{
-			return _bgImage;
 		}
 		
 		/**
@@ -507,7 +528,7 @@ package com.rpgGame.app.view.icon
 			_countText.verticalAlign="middle";
 			_countText.verticalCenter=-2;
 			_countText.textAlign = Align.RIGHT;
-			_countText.color = 0xcfc6ae;
+			_countText.color = StaticValue.A_UI_BEIGE_TEXT;
 			_countText.fontSize = 10;
 			_countText.nativeFilters=Fontter.filterObj["labelFilterBlack"];
 			addChild(_countText);
@@ -573,9 +594,10 @@ package com.rpgGame.app.view.icon
 				_selectImage.visible=false;
 			}
 			//不用清理背景
-			/*if(_bgImage){
-				_bgImage.removeFromParent();
-			}*/
+//			if(_bgImage){
+//				_bgImage.removeFromParent();
+//				_bgImage=null;
+//			}
 			clearLockAsset();
 			hideQuality();
 	

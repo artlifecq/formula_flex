@@ -148,6 +148,14 @@ package com.rpgGame.coreData.cfg
 			return _map.getValue(key);
 		}
 		
+		/**
+		 *获取技能数据
+		 */
+		public static function getSpellById(skillId:String):Q_skill_model
+		{
+			return _map.getValue(skillId);
+		}
+		
 		public static function getSpellEffectData(spellID : int):Q_SpellEffect
 		{
 			var skillData:Q_skill_model = _map.getValue(spellID);

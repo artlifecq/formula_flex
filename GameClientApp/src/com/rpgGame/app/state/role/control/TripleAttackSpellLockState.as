@@ -17,7 +17,7 @@ package com.rpgGame.app.state.role.control
 	{
 		
 		private var _lockTween : TweenLite;
-
+		private static var index:int=0;
 		public function TripleAttackSpellLockState()
 		{
 			super(RoleStateType.CONTROL_TRIPLE_ATTACK_LOCK);
@@ -25,7 +25,8 @@ package com.rpgGame.app.state.role.control
 		override public function enter():void
 		{
 			super.enter();
-			trace(" enter TripleAttackSpellLockState");
+			index++;
+			trace(" enter TripleAttackSpellLockState+========================"+index);
 		}
 		override public function execute() : void
 		{
@@ -33,7 +34,7 @@ package com.rpgGame.app.state.role.control
 			{
 				super.execute();
 				
-				_lockTween = TweenLite.delayedCall(5, onUnlock);
+				//_lockTween = TweenLite.delayedCall(5, onUnlock);
 			}
 		}
 
@@ -47,6 +48,7 @@ package com.rpgGame.app.state.role.control
 		}
 		override public function leave() : void
 		{
+			trace(" leave TripleAttackSpellLockState+========================"+index);
 			super.leave();
 			if (_lockTween)
 			{

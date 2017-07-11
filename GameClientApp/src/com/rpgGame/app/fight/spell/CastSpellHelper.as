@@ -178,6 +178,12 @@ package com.rpgGame.app.fight.spell
 			}
 			else if (caseState == CASE_STATE_NOT_IN_RELEASE_RANGE)//距离过远
 			{
+				//三连击的话直接发送请求
+				if (MainRoleManager.actor.stateMachine.isTripleLockCaseSpell) 
+				{
+					requestReleaseSpell();
+					return true;
+				}
 				if (caseInfo.targetPos)
 				{
 					if (caseInfo.targetID > 0)
@@ -287,6 +293,7 @@ package com.rpgGame.app.fight.spell
 				{
 					//NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsHarding); //"技能硬直中"
 				}
+				GameLog.addShow("技能僵直中不能释放=============");
 				return CASE_STATE_FAIL;
 			}
 			else if (MainRoleManager.actor.stateMachine.isLockCaseSpell)

@@ -301,6 +301,9 @@ package com.rpgGame.appModule.equip
 				_goodsContainerTarget.setGrayForData(itemInfo,false);
 			}
 			addExp-=itemInfo.qItem.q_strengthen_num;
+			if(addExp<0){
+				addExp=0;
+			}
 			updateView();
 		}
 		
@@ -475,8 +478,8 @@ package com.rpgGame.appModule.equip
 				}
 			}
 			
-			_goodsContainerTarget.dataProvider.updateAll();
-			_goodsContainerUse.dataProvider.updateAll();
+//			_goodsContainerTarget.dataProvider.updateAll();
+//			_goodsContainerUse.dataProvider.updateAll();
 		}
 		
 		private function showComplete():void
@@ -616,6 +619,10 @@ package com.rpgGame.appModule.equip
 					isToUp=true;//到顶级了
 					break;
 				}
+			}
+			
+			if(addExp<0){
+				addExp=0;
 			}
 			
 			useMon=addExp*perMon;

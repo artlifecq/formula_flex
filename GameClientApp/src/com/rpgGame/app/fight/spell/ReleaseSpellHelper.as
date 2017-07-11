@@ -11,6 +11,7 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.clientConfig.Q_skill_warning;
+	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.netData.fight.message.ResFightBroadcastMessage;
 	
@@ -40,7 +41,7 @@ package com.rpgGame.app.fight.spell
 		}
 		public static function releaseSpell(spellInfo : ReleaseSpellInfo) : void
 		{
-			TweenLite.killDelayedCallsTo(releaseSpellPlay);
+			//TweenLite.killDelayedCallsTo(releaseSpellPlay);
 			var warningData:Q_skill_warning=SpellDataManager.getWarningData(spellInfo.spellData.q_skillID);//获取预警技能关联
 			if(warningData&&warningData.q_time>0)//有预警技能先放预警技能，没有预警技能走正常流程
 			{
@@ -138,7 +139,7 @@ package com.rpgGame.app.fight.spell
 			if (spellInfo.atkor && spellInfo.atkor.usable && spellInfo.atkor.isMainChar)
 			{
 				var hardRef : AttackHardStateReference = spellInfo.atkor.stateMachine.getReference(AttackHardStateReference) as AttackHardStateReference;
-				hardRef.setParams(spellInfo.castTime);
+				hardRef.setParams(spellInfo.castTime-50);
 				spellInfo.atkor.stateMachine.transition(RoleStateType.CONTROL_ATTACK_HARD, hardRef, true);
 				SkillCDManager.getInstance().addSkillCDTime(spellInfo.spellData);
 			}

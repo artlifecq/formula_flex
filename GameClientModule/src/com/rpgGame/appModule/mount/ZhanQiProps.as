@@ -1,6 +1,5 @@
 package com.rpgGame.appModule.mount
 {
-	import com.rpgGame.app.manager.mount.MountShowData;
 	import com.rpgGame.app.manager.mount.ZhanQiShowData;
 	import com.rpgGame.app.utils.FightValueUtil;
 	

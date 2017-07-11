@@ -310,7 +310,7 @@ package com.rpgGame.app.ui.scene
 						ico=ico1List[i];
 						if(item!=null&&ico!=null)
 						{
-							ico.setIconResName(ClientConfig.getItemIcon(item.q_icon.toString(),IcoSizeEnum.ICON_48));
+							ico.setIconResName(ClientConfig.getItemIcon(item.q_icon.toString(),IcoSizeEnum.ICON_42));
 							ico.visible=true;
 							icoBg1List[i].visible=true;
 							TaskUtil.setItemTips(ico,item,passReward[i].num);
@@ -370,7 +370,7 @@ package com.rpgGame.app.ui.scene
 						ico=ico2List[i];
 						if(item!=null&&ico!=null)
 						{
-							ico.setIconResName(ClientConfig.getItemIcon(item.q_icon.toString(),IcoSizeEnum.ICON_48));
+							ico.setIconResName(ClientConfig.getItemIcon(item.q_icon.toString(),IcoSizeEnum.ICON_42));
 							ico.visible=true;
 							icoBg2List[i].visible=true;
 							TaskUtil.setItemTips(ico,item,passReward[i].num);
@@ -452,10 +452,10 @@ package com.rpgGame.app.ui.scene
 			ico1List=new Vector.<IconCDFace>();
 			for(i=0;i<icoBg1List.length;i++)
 			{
-				ico=IconCDFace.create(IcoSizeEnum.ICON_48);
+				ico=IconCDFace.create(IcoSizeEnum.ICON_42);
 				ico.showCD=false;
-				ico.x=icoBg1List[i].x-6;
-				ico.y=icoBg1List[i].y-6;
+				ico.x=icoBg1List[i].x+3;
+				ico.y=icoBg1List[i].y+3;
 				ico.visible=false;
 				ico1List.push(ico);
 				_skin.task_box.addChild(ico);
@@ -468,10 +468,10 @@ package com.rpgGame.app.ui.scene
 			ico2List=new Vector.<IconCDFace>();
 			for(i=0;i<icoBg2List.length;i++)
 			{
-				ico=IconCDFace.create(IcoSizeEnum.ICON_48);
+				ico=IconCDFace.create(IcoSizeEnum.ICON_42);
 				ico.showCD=false;
-				ico.x=icoBg2List[i].x-6;
-				ico.y=icoBg2List[i].y-6;
+				ico.x=icoBg2List[i].x+3;
+				ico.y=icoBg2List[i].y+3;
 				ico.visible=false;
 				ico2List.push(ico);
 				_skin.task_box.addChild(ico);
@@ -599,12 +599,12 @@ package com.rpgGame.app.ui.scene
 				if(icoBg1List[i].visible)
 				{
 					icoBg1List[i].y=icoBg1List[id].y;
-					ico1List[i].y=icoBg1List[id].y-6;
+					ico1List[i].y=icoBg1List[id].y+3;
 				}
 				if(icoBg2List[i].visible)
 				{
 					icoBg2List[i].y=icoBg2List[id].y;
-					ico2List[i].y=icoBg2List[id].y-6;
+					ico2List[i].y=icoBg2List[id].y+3;
 				}
 			}
 		}

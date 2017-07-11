@@ -1,6 +1,5 @@
 package com.rpgGame.app.cmdlistener
 {
-	import com.gameClient.log.Lyt;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.ClientTriggerManager;
 	import com.rpgGame.app.manager.DailyZoneDataManager;
@@ -146,7 +145,7 @@ package com.rpgGame.app.cmdlistener
 		
 		/*——————————————————————————多人副本————————————————————————————————————————————*/
 		private function onSCClientTriggerValiedMessage(msg:SCClientTriggerValiedMessage):void
-		{Lyt.a("触发消息:triggerId="+msg.triggerId);
+		{
 			EventManager.dispatchEvent(DungeonEvent.ZONE_TO_TRIGGER,msg.triggerId);
 		}
 		private function onSCEnterZoneMessage(msg:SCEnterZoneMessage):void

@@ -17,6 +17,8 @@ package com.rpgGame.app.view.icon
 	import flash.text.TextFormat;
 	import flash.text.TextFormatAlign;
 	
+	import feathers.controls.UIAsset;
+	
 	/**
 	 *buff图标 
 	 * @author dik
@@ -67,6 +69,14 @@ package com.rpgGame.app.view.icon
 			if( _iconImage != null )
 				addChild( _iconImage );
 			this.setChildIndex(effectSk,this.numChildren-1);
+		}
+		
+		override protected function onBgImgComplete(uiasset:UIAsset):void
+		{
+			_bgImage.onImageLoaded=null;
+			this._bgImage.width=_iconSize+6;
+			this._bgImage.height=_iconSize+6;
+			calIconPos();
 		}
 		
 		public function get buffData():BuffData

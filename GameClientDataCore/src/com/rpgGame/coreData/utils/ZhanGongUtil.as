@@ -1,6 +1,5 @@
 package com.rpgGame.coreData.utils
 {
-	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.coreData.clientConfig.Q_meritorious;
 	import com.rpgGame.coreData.enum.JobEnum;
 	
