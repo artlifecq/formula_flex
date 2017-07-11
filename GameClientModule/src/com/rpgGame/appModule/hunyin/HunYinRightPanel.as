@@ -26,7 +26,7 @@ package com.rpgGame.appModule.hunyin
 		private const MAX_SHOW_NUM:int=5;
 		private var _hunyinItems:Vector.<HunYinItem>;
 		
-		private var _progressBar:AwdProgressBar;
+//		private var _progressBar:AwdProgressBar;
 		
 		public function HunYinRightPanel(skin:HunYin_Skin)
 		{
@@ -38,9 +38,9 @@ package com.rpgGame.appModule.hunyin
 		private function initView():void
 		{
 			_hunyinItems=new Vector.<HunYinItem>();
-			_progressBar=new AwdProgressBar(_skin.barJindu,"ui_zuomotiao");
-			_skin.grpBar.addChild(_progressBar);
-			_skin.grpBar.addChild(_skin.lbJindu);
+//			_progressBar=new AwdProgressBar(_skin.barJindu,"ui_zuomotiao");
+//			_skin.grpBar.addChild(_progressBar);
+//			_skin.grpBar.addChild(_skin.lbJindu);
 			
 			for(var i:int=0;i<MAX_SHOW_NUM;i++)
 			{
@@ -155,8 +155,8 @@ package com.rpgGame.appModule.hunyin
 			_skin.lbJindu.text=num.toString()+"/"+needNum.toString();
 			if(num>=needNum) _skin.lbJindu.color=StaticValue.A_UI_GREEN_TEXT;
 			else _skin.lbJindu.color=StaticValue.A_UI_RED_TEXT;
-			_progressBar.maximum=needNum;
-			_progressBar.value=num;
+			_skin.barJindu.maximum=needNum;
+			_skin.barJindu.value=num;
 		}
 	}
 }

@@ -209,7 +209,7 @@ package com.rpgGame.app.manager.goods
 		
 		public static function equipIsWearing(equip:ClientItemInfo):Boolean
 		{
-			if(!equip)
+			if(!equip||equip.itemInfo.itemId==null)
 				return false;
 			var items:Array = instance.getAllItem();
 			for each(var roleEquip : ClientItemInfo in items)

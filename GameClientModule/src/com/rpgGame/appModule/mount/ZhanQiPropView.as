@@ -4,18 +4,17 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.coreData.type.CharAttributeType;
 	
 	import org.mokylin.skin.app.zuoqi.Shuxing_Item;
-	
-	public class MountPropView
+
+	public class ZhanQiPropView
 	{
 		private var _skin:Shuxing_Item;
 		private var _index:int;
 		private var _isSHow:Boolean = false;
-		public function MountPropView(skin:Shuxing_Item,index:int):void
+		public function ZhanQiPropView(skin:Shuxing_Item,index:int):void
 		{
 			_skin = skin;
 			_index = index;
 		}
-		
 		public function get index():int
 		{
 			return _index;
@@ -78,3 +77,5 @@ package com.rpgGame.appModule.mount
 		}
 	}
 }
+
+

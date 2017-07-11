@@ -118,7 +118,7 @@ package com.rpgGame.app.manager.mount
 				(role.data as HeroData).zhanqiLv=msg.isSuccess;
 				updateZhanQiShow();
 			}else{
-				EventManager.dispatchEvent(ZhanQiChangeExp);
+				EventManager.dispatchEvent(ZhanQiChangeExp,true);
 			}
 		}
 		

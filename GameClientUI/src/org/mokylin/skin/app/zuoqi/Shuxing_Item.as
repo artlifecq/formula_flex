@@ -4,7 +4,7 @@ package org.mokylin.skin.app.zuoqi
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	
+
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
@@ -16,16 +16,14 @@ package org.mokylin.skin.app.zuoqi
 		//                                定义成员变量
 		//==========================================================================
 		public var ico_up:feathers.controls.UIAsset;
-		
+
 		public var lbCurrent:feathers.controls.Label;
-		
-		public var lbName:feathers.controls.Label;
-		
+
+		public var lbTemp:feathers.controls.Label;
+
 		public var lbUp:feathers.controls.Label;
-		
-		public var lbaddprop:feathers.controls.Label;
-		
-		
+
+
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
@@ -34,14 +32,14 @@ package org.mokylin.skin.app.zuoqi
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [lbName_i(),lbCurrent_i(),lbaddprop_i(),lbUp_i(),ico_up_i()];
+			this.elementsContent = [lbCurrent_i(),lbTemp_i(),lbUp_i(),ico_up_i()];
 			
 			states = {
 			};
 			skinNames={};
 		}
-		
-		
+
+
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
@@ -50,64 +48,54 @@ package org.mokylin.skin.app.zuoqi
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ico_up = temp;
 			temp.name = "ico_up";
-			temp.styleName = "ui/common/tubiao/tu_up.png";
-			temp.x = 204;
+			temp.styleName = "ui/common/tubiao/jobup.png";
+			temp.x = 120;
 			temp.y = 3;
 			return temp;
 		}
-		
+
 		private function lbCurrent_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbCurrent = temp;
 			temp.name = "lbCurrent";
-			temp.text = "100";
-			temp.color = 0xCFC6AE;
+			temp.htmlText = " color='#00ff33'>(+36)</font>";
+			temp.text = "32157";
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 62;
+			temp.width = 108;
+			temp.x = 0;
 			temp.y = 1;
 			return temp;
 		}
-		
-		private function lbName_i():feathers.controls.Label
+
+		private function lbTemp_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbName = temp;
-			temp.name = "lbName";
-			temp.text = "力    道：";
-			temp.color = 0x8B8D7B;
+			lbTemp = temp;
+			temp.name = "lbTemp";
+			temp.text = "+28730(临时)";
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 0;
-			temp.y = 0;
+			temp.width = 100;
+			temp.x = 41;
+			temp.y = 1;
 			return temp;
 		}
-		
+
 		private function lbUp_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbUp = temp;
 			temp.name = "lbUp";
-			temp.text = "+20";
-			temp.color = 0x5CB006;
+			temp.text = "20";
+			temp.textAlign = "left";
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 50;
-			temp.x = 178;
+			temp.x = 130;
 			temp.y = 2;
 			return temp;
 		}
-		
-		private function lbaddprop_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbaddprop = temp;
-			temp.name = "lbaddprop";
-			temp.text = "100";
-			temp.color = 0x25931B;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 94;
-			temp.y = 1;
-			return temp;
-		}
-		
+
 	}
 }

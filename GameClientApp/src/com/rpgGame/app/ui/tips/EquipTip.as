@@ -22,6 +22,7 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.coreData.clientConfig.Q_equip_polish;
 	import com.rpgGame.coreData.clientConfig.Q_equip_strength;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
+	import com.rpgGame.coreData.enum.item.ItemTypeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
@@ -146,6 +147,7 @@ package com.rpgGame.app.ui.tips
 			}
 			
 			_itemTip.lbl_bangding.visible=true;
+			_itemTip.lbl_bangding.width=120;
 			if(_itemInfo.binded){
 				_itemTip.lbl_bangding.text="【已绑定】"
 			}else{
@@ -163,7 +165,7 @@ package com.rpgGame.app.ui.tips
 			if(equipItemInfo){
 				if(_itemInfo.itemInfo==equipItemInfo.itemInfo){
 					_itemTip.yizhuangbei.visible=true;
-				}else if(_itemInfo.qItem.q_job==0||_itemInfo.qItem.q_job==equipItemInfo.qItem.q_job){//职业符合
+				}else if((_itemInfo.qItem.q_job==0||_itemInfo.qItem.q_job==equipItemInfo.qItem.q_job)&&(_itemInfo.qItem.q_type!=GoodsType.EQUIPMENT2&&_itemInfo.qItem.q_location!=5)){//职业符合
 					isShowDuiBi=true;
 				}
 			}
@@ -314,9 +316,9 @@ package com.rpgGame.app.ui.tips
 				label=createLabel(name,value);
 				label.x=curX;
 				label.y=curY;
+				curY+=27;
 			}
 			//装备产出
-			curY+=27;
 			createLine(curX,curY,263);
 			curY+=13;
 			titleui=createUiAsset("zhuangbeichanchu");
@@ -416,6 +418,7 @@ package com.rpgGame.app.ui.tips
 			ui_bg.height=curY;
 			_itemTip.ui_di.y=ui_bg.height;
 			_itemTip.ui_di.visible=true;
+			_itemTip.lbl_bangding.x=175;
 			_itemTip.lbl_bangding.y=_itemTip.ui_di.y-3;
 			_itemTip.bg.height=_itemTip.ui_di.y+_itemTip.ui_di.height;
 		}

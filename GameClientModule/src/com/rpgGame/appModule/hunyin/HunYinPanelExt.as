@@ -3,6 +3,7 @@ package com.rpgGame.appModule.hunyin
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
+	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
@@ -49,7 +50,7 @@ package com.rpgGame.appModule.hunyin
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
-
+	
 	public class HunYinPanelExt extends SkinUIPanel
 	{
 		private var _skin:HunYin_Skin;
@@ -64,7 +65,10 @@ package com.rpgGame.appModule.hunyin
 		private var _hunjietupoPanel:HunJieTuPoPanelExt;
 		private var _itemFace:IconCDFace;
 		
-		private var _btneff:InterObject3D;
+		private var _btnsonghuaeff:InterObject3D;
+		private var _btnyongbaoeff:InterObject3D;
+		private var _btnqinweneff:InterObject3D;
+		private var _btndongfangeff:InterObject3D;
 		
 		public function HunYinPanelExt()
 		{
@@ -72,7 +76,7 @@ package com.rpgGame.appModule.hunyin
 			_rightPanel=new HunYinRightPanel(_skin);
 			super(_skin);
 			_modEftContaner = new Inter3DContainer();
-			_skin.container.addChild(_modEftContaner);
+			_skin.group.addChild(_modEftContaner);
 			initView();
 			initEff();
 		}
@@ -113,7 +117,45 @@ package com.rpgGame.appModule.hunyin
 		
 		private function initEff():void
 		{
+			_btnsonghuaeff=new InterObject3D();
+			var data : RenderParamData3D = new RenderParamData3D(0, "effect_ui", ClientConfig.getEffect("ui_dongfang_xuanze"));
+			data.forceLoad=true;//ui上的3d特效强制加载
+			var unit : RenderUnit3D = _btnsonghuaeff.addRenderUnitWith(data, 0);	
+			_btnsonghuaeff.x=460;
+			_btnsonghuaeff.y=40;
+			unit.addUnitAtComposite(unit);
+			_modEftContaner.addChild3D(_btnsonghuaeff);
+			_btnsonghuaeff.stop();
 			
+			_btnyongbaoeff=new InterObject3D();
+			data = new RenderParamData3D(0, "effect_ui", ClientConfig.getEffect("ui_dongfang_xuanze"));
+			data.forceLoad=true;//ui上的3d特效强制加载
+			unit = _btnyongbaoeff.addRenderUnitWith(data, 0);	
+			_btnyongbaoeff.x=460;
+			_btnyongbaoeff.y=111;
+			unit.addUnitAtComposite(unit);
+			_modEftContaner.addChild3D(_btnyongbaoeff);
+			_btnyongbaoeff.stop();
+			
+			_btnqinweneff=new InterObject3D();
+			data = new RenderParamData3D(0, "effect_ui", ClientConfig.getEffect("ui_dongfang_xuanze"));
+			data.forceLoad=true;//ui上的3d特效强制加载
+			unit = _btnqinweneff.addRenderUnitWith(data, 0);	
+			_btnqinweneff.x=460;
+			_btnqinweneff.y=182;
+			unit.addUnitAtComposite(unit);
+			_modEftContaner.addChild3D(_btnqinweneff);
+			_btnqinweneff.stop();
+			
+			_btndongfangeff=new InterObject3D();
+			data = new RenderParamData3D(0, "effect_ui", ClientConfig.getEffect("ui_dongfang_xuanze"));
+			data.forceLoad=true;//ui上的3d特效强制加载
+			unit = _btndongfangeff.addRenderUnitWith(data, 0);	
+			_btndongfangeff.x=460;
+			_btndongfangeff.y=253;
+			unit.addUnitAtComposite(unit);
+			_modEftContaner.addChild3D(_btndongfangeff);
+			_btndongfangeff.stop();
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -197,10 +239,7 @@ package com.rpgGame.appModule.hunyin
 		
 		private function initEvent():void
 		{
-			_skin.btnSonghua.addEventListener(starling.events.TouchEvent.TOUCH,btnSonghuaHandler);
-			_skin.btnYongbao.addEventListener(starling.events.TouchEvent.TOUCH,btnYongbaoHandler);
-			_skin.btnQinwen.addEventListener(starling.events.TouchEvent.TOUCH,btnQinwenHandler);
-			_skin.btnDongfang.addEventListener(starling.events.TouchEvent.TOUCH,btnDongfangHandler);
+			this.addEventListener(starling.events.TouchEvent.TOUCH,btnHandler);
 			EventManager.addEvent(HunYinEvent.HUNYIN_HUDONG,onHuDongHandler);
 			EventManager.addEvent(HunYinEvent.HUNYIN_JINJIE,onJinJieHandler);
 			EventManager.addEvent(HunYinEvent.HUNYIN_JINJIE_CHENGGONG,onJinJieHandler);
@@ -208,10 +247,7 @@ package com.rpgGame.appModule.hunyin
 		
 		private function clearEvent():void
 		{
-			_skin.btnSonghua.removeEventListener(starling.events.TouchEvent.TOUCH,btnSonghuaHandler);
-			_skin.btnYongbao.removeEventListener(starling.events.TouchEvent.TOUCH,btnYongbaoHandler);
-			_skin.btnQinwen.removeEventListener(starling.events.TouchEvent.TOUCH,btnQinwenHandler);
-			_skin.btnDongfang.removeEventListener(starling.events.TouchEvent.TOUCH,btnDongfangHandler);
+			this.removeEventListener(starling.events.TouchEvent.TOUCH,btnHandler);
 			EventManager.removeEvent(HunYinEvent.HUNYIN_HUDONG,onHuDongHandler);
 			EventManager.removeEvent(HunYinEvent.HUNYIN_JINJIE,onJinJieHandler);
 			EventManager.removeEvent(HunYinEvent.HUNYIN_JINJIE_CHENGGONG,onJinJieHandler);
@@ -375,68 +411,55 @@ package com.rpgGame.appModule.hunyin
 			_rightPanel.updateBestWishesValue();
 		}
 		
-		private function dispassbtnEff():void
-		{
-			if(_btneff!=null)
-			{
-				_btneff.removeFromParent();
-				_btneff=null;
-			}
-		}
 		
-		protected function btnSonghuaHandler(e:TouchEvent):void
+		protected function btnHandler(e:TouchEvent):void
 		{
 			var t:Touch=e.getTouch(_skin.btnSonghua);
 			if(!t){
-				dispassbtnEff();
-				return;
+				_btnsonghuaeff.stop();
 			}
-			t=e.getTouch(_skin.btnSonghua,TouchPhase.HOVER);
-			if(t){
-				dispassbtnEff();
-				_btneff=_modEftContaner.playInter3DAt(ClientConfig.getEffect("ui_dongfang_xuanze"),_skin.btnSonghua.x,_skin.btnSonghua.y,0);
+			else
+			{
+				t=e.getTouch(_skin.btnSonghua,TouchPhase.HOVER);
+				if(t){			
+					_btnsonghuaeff.play(0);
+				}
 			}
-		}
-		
-		protected function btnYongbaoHandler(e:TouchEvent):void
-		{
-			var t:Touch=e.getTouch(_skin.btnYongbao);
+			
+			t=e.getTouch(_skin.btnYongbao);
 			if(!t){
-				dispassbtnEff();
-				return;
+				_btnyongbaoeff.stop();;
 			}
-			t=e.getTouch(_skin.btnYongbao,TouchPhase.HOVER);
-			if(t){
-				dispassbtnEff();
-				_btneff=_modEftContaner.playInter3DAt(ClientConfig.getEffect("ui_dongfang_xuanze"),_skin.btnYongbao.x,_skin.btnYongbao.y,0);
+			else
+			{
+				t=e.getTouch(_skin.btnYongbao,TouchPhase.HOVER);
+				if(t){			
+					_btnyongbaoeff.play(0);
+				}
 			}
-		}
-		
-		protected function btnQinwenHandler(e:TouchEvent):void
-		{
-			var t:Touch=e.getTouch(_skin.btnQinwen);
+			
+			t=e.getTouch(_skin.btnQinwen);
 			if(!t){
-				dispassbtnEff();
-				return;
+				_btnqinweneff.stop();
 			}
-			t=e.getTouch(_skin.btnQinwen,TouchPhase.HOVER);
-			if(t){
-				dispassbtnEff();
-				_btneff=_modEftContaner.playInter3DAt(ClientConfig.getEffect("ui_dongfang_xuanze"),_skin.btnQinwen.x,_skin.btnQinwen.y,0);
+			else
+			{
+				t=e.getTouch(_skin.btnQinwen,TouchPhase.HOVER);
+				if(t){			
+					_btnqinweneff.play(0);
+				}
 			}
-		}
-		
-		protected function btnDongfangHandler(e:TouchEvent):void
-		{
-			var t:Touch=e.getTouch(_skin.btnDongfang);
+			
+			t=e.getTouch(_skin.btnDongfang);
 			if(!t){
-				dispassbtnEff();
-				return;
+				_btndongfangeff.stop();
 			}
-			t=e.getTouch(_skin.btnDongfang,TouchPhase.HOVER);
-			if(t){
-				dispassbtnEff();
-				_btneff=_modEftContaner.playInter3DAt(ClientConfig.getEffect("ui_dongfang_xuanze"),_skin.btnDongfang.x,_skin.btnDongfang.y,0);
+			else
+			{
+				t=e.getTouch(_skin.btnDongfang,TouchPhase.HOVER);
+				if(t){			
+					_btndongfangeff.play(0);
+				}
 			}
 		}
 	}
