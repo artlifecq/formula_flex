@@ -151,7 +151,7 @@ package com.rpgGame.app.state.role.action
 					status = RoleActionType.RUN;
 				}
 			}
-			
+			var isHideState:Boolean=(_machine.owner as SceneRole).stateMachine.isHiding;
 			var matchStatus : String = RoleActionType.getActionType(status, (_machine as RoleStateMachine).isRiding);
 			switch (render.type)
 			{
@@ -159,7 +159,11 @@ package com.rpgGame.app.state.role.action
 				case RenderUnitType.HAIR:
 				case RenderUnitType.WEAPON:
 				case RenderUnitType.DEPUTY_WEAPON:
-					render.visible = true;
+					if (!isHideState) 
+					{
+						render.visible = true;
+					}
+					
 					render.repeat = 1;
 					render.setStatus(matchStatus, _useCrossfadeTransition ? 0.2 : null, time, speedRatio);
 					if (isFreeze)
@@ -176,10 +180,16 @@ package com.rpgGame.app.state.role.action
 					render.play(time, speedRatio);
 					break;
 				case RenderUnitType.WEAPON_EFFECT:
-					render.visible = true;
+					if (!isHideState) 
+					{
+						render.visible = true;
+					}
 					break;
 				case RenderUnitType.EFFECT:
-					render.visible = false;
+					if (!isHideState) 
+					{
+						render.visible = true;
+					}
 					break;
 				case RenderUnitType.HURT:
 					break;
