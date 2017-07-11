@@ -107,6 +107,7 @@ package com.rpgGame.appModule.common
 				var info:GridInfo=goodsList.dataProvider.getItemAt(i) as GridInfo;
 				if(info&&info.data==data){
 					info.isGray=gray;
+					goodsList.dataProvider.updateItemAt(i);
 					break;
 				}
 			}

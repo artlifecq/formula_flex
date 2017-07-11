@@ -34,7 +34,7 @@ package org.mokylin.skin.app.fuben
 			this.currentState = "normal";
 			this.height = 347;
 			this.width = 469;
-			this.elementsContent = [__FuBenJieSuan2_Shengli_UIAsset1_i(),icon1_i(),btnEixt_i(),lbTime_i(),__FuBenJieSuan2_Shengli_UIAsset2_i()];
+			this.elementsContent = [__FuBenJieSuan2_Shengli_UIAsset1_i(),icon1_i(),btnEixt_i(),lbTime_i()];
 			
 			states = {
 			};
@@ -52,15 +52,6 @@ package org.mokylin.skin.app.fuben
 			temp.styleName = "ui/app/fuben/fubenjiesuan/bg.png";
 			temp.x = 0;
 			temp.y = 151;
-			return temp;
-		}
-
-		private function __FuBenJieSuan2_Shengli_UIAsset2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/big_bg/fuben/fubenjiesuan/tiaozhanshengli.png";
-			temp.x = 50;
-			temp.y = -50;
 			return temp;
 		}
 
