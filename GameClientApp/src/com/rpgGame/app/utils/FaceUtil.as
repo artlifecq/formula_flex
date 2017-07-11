@@ -17,6 +17,7 @@ package com.rpgGame.app.utils
 	import com.rpgGame.coreData.cfg.mount.MountUnitData;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.face.FaceTypeEnum;
+	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.info.face.BaseFaceInfo;
 	import com.rpgGame.coreData.info.face.IBaseFaceInfo;
@@ -271,17 +272,17 @@ package com.rpgGame.app.utils
 		{
 			var grid:DragDropItem = new DragDropItem( size, index);
 			var icon:String = oldGrid.styleName;
-			grid.setBg( GridBGType.GRID_SIZE_46 );
-			grid.bgImage.styleName = icon;
-			grid.bgImage.width = oldGrid.width;
-			grid.bgImage.height = oldGrid.height;
+//			grid.setBg( GridBGType.GRID_SIZE_46 );
+//			grid.bgImage.styleName = icon;
+//			grid.bgImage.width = oldGrid.width;
+//			grid.bgImage.height = oldGrid.height;
 			grid.dragAble = true;
 			grid.x = oldGrid.x;
 			grid.y = oldGrid.y;
 			grid.name = oldGrid.name;
 			grid.visible = oldGrid.visible;
-			grid.bgImage.width = grid.width = oldGrid.width;
-			grid.bgImage.height = grid.height = oldGrid.height;
+//			grid.bgImage.width = grid.width = oldGrid.width;
+//			grid.bgImage.height = grid.height = oldGrid.height;
 			grid.setIconPoint(0,0);
 			oldGrid.parent.addChild(grid);
 			oldGrid.removeFromParent();
@@ -300,15 +301,15 @@ package com.rpgGame.app.utils
 		{
 			var grid:IconCDFace = IconCDFace.create(size);
 			var icon:String = oldGrid.styleName;
-			grid.setBg( GridBGType.GRID_SIZE_46,alpha );
-			grid.bgImage.styleName = icon;
+//			grid.setBg( GridBGType.GRID_SIZE_46,alpha );
+//			grid.bgImage.styleName = icon;
 			grid.x = oldGrid.x;
 			grid.y = oldGrid.y;
 			grid.name = oldGrid.name;
 			grid.visible = oldGrid.visible;
-			grid.bgImage.width = grid.width = oldGrid.width;
-			grid.bgImage.height = grid.height = oldGrid.height;
-			grid.setIconPoint(iconX,iconY);
+//			grid.bgImage.width = grid.width = oldGrid.width;
+//			grid.bgImage.height = grid.height = oldGrid.height;
+//			grid.setIconPoint(iconX,iconY);
 			grid.name = oldGrid.name;
 			oldGrid.parent.addChild(grid);
 			oldGrid.removeFromParent();

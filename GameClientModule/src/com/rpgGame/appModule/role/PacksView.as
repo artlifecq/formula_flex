@@ -540,8 +540,8 @@ package com.rpgGame.appModule.role
 			else
 			{
 				BackPackManager.instance.setCheckType(curType);
-				BackPackManager.instance.setUnusableGrid(true);
-				refreshPackGrid();
+				BackPackManager.instance.setUnusableGrid(false);
+				goodsContainer.refleshGrids();
 			}			
 			_skin.lst_pack.scrollToDisplayIndex(getScrollIndex(info));
 			//切换页

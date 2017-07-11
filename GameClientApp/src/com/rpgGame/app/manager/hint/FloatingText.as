@@ -141,7 +141,8 @@ package  com.rpgGame.app.manager.hint
 			setText(info,color);
 			if (_bg) 
 			{
-				_bg.width=_label.width;
+				_bg.width=_label.width+80;
+				_bg.x = -40;
 				_bg.height=_label.height+6;
 			}
 			_type = type;

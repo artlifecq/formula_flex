@@ -10,7 +10,7 @@ package com.rpgGame.app.ui.main.activityBar.item
 	{
 		private var _skin:ActivityItem;
 		private var _iconList:Vector.<SkinnableContainer>;
-		private var _lastLine:int = 1;
+		private var _lastLine:int = 0;
 		private var _width:int;
 		public function ActivityLable(skin:ActivityItem):void
 		{
@@ -22,7 +22,8 @@ package com.rpgGame.app.ui.main.activityBar.item
 		private function initView():void
 		{
 			_iconList = new Vector.<SkinnableContainer>();
-			_iconList.push(_skin.skinBg);
+			_skin.skinBg.visible = false;
+//			_iconList.push(_skin.skinBg);
 		}
 		
 		
@@ -41,6 +42,7 @@ package com.rpgGame.app.ui.main.activityBar.item
 		{
 			if(_lastLine == line)
 				return ;
+			_lastLine = line;
 			var length:int = _iconList.length;
 			var skincontent:SkinnableContainer;
 			for(var i:int = 0;i<line;i++)
@@ -52,6 +54,8 @@ package com.rpgGame.app.ui.main.activityBar.item
 				}
 				skincontent.visible = true;
 				skincontent.y = 17*i;
+				skincontent.width = 60;
+				skincontent.x = 25;
 			}
 			
 			length= _iconList.length;
@@ -66,11 +70,9 @@ package com.rpgGame.app.ui.main.activityBar.item
 		private function createSkin():SkinnableContainer
 		{
 			var temp:SkinnableContainer = new SkinnableContainer();
-			temp.height = 16;
+			temp.height = 17;
 			var skin:StateSkin = new ActiveLabelDg();
 			temp.skin = skin;
-			temp.width = 80;
-			temp.x = 17;
 			this._skin.container.addChildAt(temp,0);
 			return temp;
 		}

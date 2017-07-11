@@ -234,7 +234,7 @@ package org.mokylin.skin.app.beibao
 			temp.name = "NumZhanli";
 			temp.gap = -14;
 			temp.height = 40;
-			temp.label = "132955";
+			temp.label = "10";
 			temp.styleClass = org.mokylin.skin.app.beibao.number.UINumberZdl;
 			temp.width = 127;
 			temp.x = 77;
@@ -250,6 +250,18 @@ package org.mokylin.skin.app.beibao
 		}
 
 		private function __juese_Skin_Group1_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			temp.height = 29;
+			temp.width = 175;
+			temp.x = 21;
+			temp.y = 35;
+			temp.layout = __juese_Skin_HorizontalLayout2_i();
+			temp.elementsContent = [msName_i(),num_miaoshang_i()];
+			return temp;
+		}
+
+		private function __juese_Skin_Group2_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 65;
@@ -268,6 +280,15 @@ package org.mokylin.skin.app.beibao
 		}
 
 		private function __juese_Skin_HorizontalLayout2_i():feathers.layout.HorizontalLayout
+		{
+			var temp:feathers.layout.HorizontalLayout = new feathers.layout.HorizontalLayout();
+			temp.gap = -6;
+			temp.horizontalAlign = "center";
+			temp.verticalAlign = "top";
+			return temp;
+		}
+
+		private function __juese_Skin_HorizontalLayout3_i():feathers.layout.HorizontalLayout
 		{
 			var temp:feathers.layout.HorizontalLayout = new feathers.layout.HorizontalLayout();
 			temp.gap = 1;
@@ -750,8 +771,8 @@ package org.mokylin.skin.app.beibao
 			msName = temp;
 			temp.name = "msName";
 			temp.styleName = "ui/app/beibao/shuxing/ms.png";
-			temp.x = 56;
-			temp.y = 35;
+			temp.x = 16;
+			temp.y = 12;
 			return temp;
 		}
 
@@ -781,8 +802,8 @@ package org.mokylin.skin.app.beibao
 			temp.label = "4512";
 			temp.styleClass = org.mokylin.skin.app.beibao.number.UINumberMs;
 			temp.width = 50;
-			temp.x = 99;
-			temp.y = 35;
+			temp.x = 78;
+			temp.y = 5;
 			return temp;
 		}
 
@@ -867,7 +888,7 @@ package org.mokylin.skin.app.beibao
 			temp.width = 331;
 			temp.x = 11;
 			temp.y = -3;
-			temp.layout = __juese_Skin_HorizontalLayout2_i();
+			temp.layout = __juese_Skin_HorizontalLayout3_i();
 			temp.dataProvider = __juese_Skin_ArrayCollection1_i();
 			return temp;
 		}
@@ -1349,7 +1370,7 @@ package org.mokylin.skin.app.beibao
 			temp.name = "values";
 			temp.x = 22;
 			temp.y = 86;
-			temp.elementsContent = [__juese_Skin_UIAsset4_i(),msName_i(),num_miaoshang_i(),__juese_Skin_UIAsset5_i(),__juese_Skin_UIAsset6_i(),__juese_Skin_UIAsset7_i(),grpShuxing_i(),__juese_Skin_Group1_i(),pro_shengmin_i(),pro_zhenqi_i(),pro_jinyan_i(),txt_shengmin_i(),txt_zhenqi_i(),txt_jinyan_i(),txt_i()];
+			temp.elementsContent = [__juese_Skin_UIAsset4_i(),__juese_Skin_Group1_i(),__juese_Skin_UIAsset5_i(),__juese_Skin_UIAsset6_i(),__juese_Skin_UIAsset7_i(),grpShuxing_i(),__juese_Skin_Group2_i(),pro_shengmin_i(),pro_zhenqi_i(),pro_jinyan_i(),txt_shengmin_i(),txt_zhenqi_i(),txt_jinyan_i(),txt_i()];
 			return temp;
 		}
 

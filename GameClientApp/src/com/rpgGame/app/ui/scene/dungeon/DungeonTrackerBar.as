@@ -45,6 +45,7 @@ package com.rpgGame.app.ui.scene.dungeon
 			uiClsMap.add(EnumMapType.MAP_JIXIAN,JiXianTrackerBar);
 			uiClsMap.add(EnumMapType.MAP_TYPE_LIJIN,LijinTrackerUI);
 			uiClsMap.add(EnumMapType.MAP_TYPE_MIBAO,MibaoTrackerUI);
+			uiClsMap.add(EnumMapType.MAP_TYPE_FQFB,FuQiFuBenTtackerBar);
 			uiClsMap.add(EnumMapType.MAP_TYPE_WCZB,GuildWarTrackerUI);
 		}
 		

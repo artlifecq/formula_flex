@@ -531,6 +531,8 @@ package com.rpgGame.appModule.role
 			
 			_skin.txt_loveName.text=_roleData.loveName.length!=0?_roleData.loveName:"";
 			_skin.NumZhanli.number=_roleData.totalStat.getStatValue(CharAttributeType.FIGHTING);
+//			_skin.NumZhanli.width=_skin.NumZhanli.bounds.width;
+			_skin.NumZhanli.bounds.width=_skin.NumZhanli.width;
 //			_skin.Num_zhandouli.number=1000;
 //			_skin.NumZhanli.x=128+(135-_skin.NumZhanli.width)/2;
 		}

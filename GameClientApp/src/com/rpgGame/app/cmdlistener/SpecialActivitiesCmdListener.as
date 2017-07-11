@@ -150,7 +150,7 @@ package com.rpgGame.app.cmdlistener
 		
 		private function onSCSpecialActivityCloseMessage(msg:SCSpecialActivityCloseMessage):void
 		{
-			ActivetyDataManager.setActState(msg.activityId,ActivityJoinStateEnum.UN_OPEN);
+			ActivetyDataManager.setActState(msg.activityId,ActivityJoinStateEnum.OVER);
 			EventManager.dispatchEvent(ActivityEvent.UPDATE_ACTIVITY,msg.activityId);
 			var info:ActivetyInfo=ActivetyCfgData.getActInfoById(msg.activityId);
 			if(info.actCfg.q_icon_id!=0){//有独立的功能icon

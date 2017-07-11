@@ -56,9 +56,9 @@ package org.mokylin.skin.app.beibao
 			temp.name = "Icon";
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 2;
-			temp.y = 2;
+			temp.styleName = "ui/common/grid/normal/42.png";
+			temp.x = 3;
+			temp.y = 3;
 			return temp;
 		}
 

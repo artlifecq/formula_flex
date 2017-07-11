@@ -16,6 +16,9 @@ package com.rpgGame.netData.marriage.message{
 		//挑战的副本id
 		private var _zoneId: long;
 		
+		//副本模型id
+		private var _zoneModelId: int;
+		
 		
 		/**
 		 * 写入字节缓存
@@ -23,6 +26,8 @@ package com.rpgGame.netData.marriage.message{
 		override protected function writing(): Boolean{
 			//挑战的副本id
 			writeLong(_zoneId);
+			//副本模型id
+			writeInt(_zoneModelId);
 			return true;
 		}
 		
@@ -32,6 +37,8 @@ package com.rpgGame.netData.marriage.message{
 		override protected function reading(): Boolean{
 			//挑战的副本id
 			_zoneId = readLong();
+			//副本模型id
+			_zoneModelId = readInt();
 			return true;
 		}
 		
@@ -56,6 +63,21 @@ package com.rpgGame.netData.marriage.message{
 		 */
 		public function set zoneId(value: long): void{
 			this._zoneId = value;
+		}
+		
+		/**
+		 * get 副本模型id
+		 * @return 
+		 */
+		public function get zoneModelId(): int{
+			return _zoneModelId;
+		}
+		
+		/**
+		 * set 副本模型id
+		 */
+		public function set zoneModelId(value: int): void{
+			this._zoneModelId = value;
 		}
 		
 	}

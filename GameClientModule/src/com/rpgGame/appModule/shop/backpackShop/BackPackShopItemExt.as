@@ -31,11 +31,8 @@ package com.rpgGame.appModule.shop.backpackShop
 			_skin=new ShangDian_Item();
 			super(_skin);
 			_grid=IconCDFace.create(IcoSizeEnum.ICON_42);
-			_skin.Icon.addChild(_grid);
-			_grid.x=6;
-			_grid.y=6;
-			_skin.Icon.touchGroup=false;
-			_skin.Icon.touchable=true;
+			_skin.container.addChild(_grid);
+			_grid.bindBg(_skin.Icon);
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void

@@ -264,8 +264,6 @@ package com.rpgGame.app.ui.main.head {
 			var icon:BuffIcon=new BuffIcon(IcoSizeEnum.ICON_24);
 			icon.buffData=data;
 			icon.setUrlBg("ui/mainui/shortcut/buffkuang.png");
-			icon.bgImage.setSize(30,30);
-			
 			_buffList.push(icon);
 			_buffContainer.addChild(icon);		
 			updatePoint();
@@ -330,7 +328,7 @@ package com.rpgGame.app.ui.main.head {
 				line=i%MAX_SHOW_NUM;
 				row=int(i/MAX_SHOW_NUM);
 				icon.x=line*gridW;
-				icon.y=-row*gridW;
+				icon.y=row*gridW;
 			}
 		}
 	}

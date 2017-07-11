@@ -5,7 +5,7 @@ package com.rpgGame.coreData.cfg
 	import flash.utils.ByteArray;
 	
 	import org.client.mainCore.ds.HashMap;
-
+	
 	/**
 	 *副本配置数据
 	 *@author dik
@@ -39,6 +39,17 @@ package com.rpgGame.coreData.cfg
 		public static function getZoneCfg(id:int):Q_zone
 		{
 			return allMap.getValue(id);
+		}
+		
+		public static function getZoneListByType(type:int):Vector.<Q_zone>
+		{
+			var list:Vector.<Q_zone>=new Vector.<Q_zone>();
+			for each(var info:Q_zone in allMap.getValues())
+			{
+				if(info.q_zone_type==type)
+					list.push(info);
+			}
+			return list;
 		}
 	}
 }

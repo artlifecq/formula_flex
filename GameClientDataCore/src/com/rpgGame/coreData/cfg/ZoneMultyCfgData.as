@@ -1,8 +1,5 @@
 package com.rpgGame.coreData.cfg
 {
-	import com.game.engine3D.utils.MathUtil;
-	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.clientConfig.Q_zone;
 	import com.rpgGame.coreData.clientConfig.Q_zone_multy;
 	
@@ -33,8 +30,14 @@ package com.rpgGame.coreData.cfg
 		public static function getZoneMultyList() : Vector.<Q_zone_multy> 
 		{
 			var relist:Vector.<Q_zone_multy>=new Vector.<Q_zone_multy>();
+			var zone:Q_zone;
 			for each(var info :Q_zone_multy in _dataDic) {
-				relist.push(info);
+				zone=ZoneCfgData.getZoneCfg(info.q_zone_id);
+				if(zone.q_zone_type==12)
+				{
+					relist.push(info);
+				}
+				
 			}
 			
 			return relist;
@@ -44,9 +47,19 @@ package com.rpgGame.coreData.cfg
 		public static function getMultyIdList() :Array
 		{
 			var relist:Array=new Array();
+			var zone:Q_zone;
+			for each(var info :Q_zone_multy in _dataDic) {
+				zone=ZoneCfgData.getZoneCfg(info.q_zone_id);
+				if(zone.q_zone_type==12)
+				{
+					relist.push(info.q_zone_id);
+				}
+				
+			}
+			/*
 			for each(var info :Q_zone_multy in _dataDic) {
 				relist.push(info.q_zone_id);
-			}
+			}*/
 			
 			relist.sort(onSort);
 			

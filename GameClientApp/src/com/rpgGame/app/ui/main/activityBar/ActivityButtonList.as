@@ -23,7 +23,7 @@
 	{
 		private const SIZE_WIDTH:uint = 360;
 		private const SIZE_HEIGHT:uint = 320;
-		private const GRID_WIDTH:Array = [70,70,70,90]
+		private const GRID_WIDTH:Array = [70,70,70,70]
 		private const GRID_HEIGHT:uint = 80;
 		private const ALIGN:String = "right";
 		public function ActivityButtonList()

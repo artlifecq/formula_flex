@@ -72,5 +72,7 @@ package com.rpgGame.app.richText
 		public static const DOINGA_ACITON_WABAO:String = "122";
 		/**其他类型传送*/
 		public static const OTHERTYPE_FLY:String = "123";
+		/**求婚链接*/
+		public static const QIUHUN:String = "124";
 	}
 }

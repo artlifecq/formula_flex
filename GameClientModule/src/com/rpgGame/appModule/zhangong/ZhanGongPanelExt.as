@@ -211,7 +211,6 @@ package com.rpgGame.appModule.zhangong
 		private function updateShuXing():void
 		{
 			var tipStr:String=ZhanGongManager.getAllAttrbut();
-			//			tipStr=LanguageConfig.replaceStr(tipStr,[CheatsCfg.getCheats(effectArr[0]).q_name,CharAttributeType.getCNName(effectArr[2]),(effectArr[3]/10000).toFixed(2)]);
 			TipTargetManager.show( _skin.lb_shuxing, TargetTipsMaker.makeSimpleTextTips(tipStr));
 		}
 		

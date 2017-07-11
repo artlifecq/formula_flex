@@ -147,7 +147,7 @@ package com.rpgGame.app.manager
 				case 2:
 				case 6:
 				case 7:
-					return value/100000;
+					return value/100;
 				case 3:
 				case 5:
 					return value; 
