@@ -40,6 +40,7 @@ package com.rpgGame.appModule.mount
 		private function initView():void
 		{
 			_itemIcons = new Vector.<IconCDFace>();
+			_skin.mc_zhanqiname.visible = false;
 			_numbereffect = new NumberChangeEffect(_skin.userData);
 			var sr3D : InterObject3D = new InterObject3D();
 			var data : RenderParamData3D = new RenderParamData3D(0, "effect_ui", ClientConfig.getEffect("ui_zuoqi_jinjiechenggongguangquan"));
@@ -55,6 +56,7 @@ package com.rpgGame.appModule.mount
 		{
 			_mountdata = mountdata;
 			refeashModle();
+			_skin.mc_jieshu.gotoAndStop(mountLevel);
 			_skin.mc_name.gotoAndStop(mountLevel);
 			var rewards:Vector.<ClientItemInfo> = mountdata.rewardItems;
 			var length:int = rewards.length;

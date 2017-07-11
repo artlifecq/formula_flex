@@ -12,6 +12,9 @@ package com.rpgGame.appModule.mount
 	
 	import away3d.events.Event;
 	
+	import gs.TimelineLite;
+	import gs.TweenLite;
+	
 	import org.mokylin.skin.app.zuoqi.ZuoqiCont_Skin;
 	
 	import starling.display.DisplayObjectContainer;
@@ -97,9 +100,9 @@ package com.rpgGame.appModule.mount
 				_skin.maximg.visible = true;
 			}
 		}
+		private var _isAutoing:Boolean;
 		public function set isAutoing(value:Boolean):void
 		{
-			
 			if(_mountShowData.isMaxLevel)
 			{
 				value = false;
@@ -107,12 +110,26 @@ package com.rpgGame.appModule.mount
 				_skin.btn_kaishi.visible = !value;
 				_skin.btn_zidong.visible = !value;
 				_skin.btn_tingzhi.visible = value;
+				
 			}
 			
 			if(_mountShowData!=null)
 				_mountShowData.isAutoing = value;
 			
+			if(_isAutoing != value)
+			{
+				updateButtonTouchState(false);
+				TweenLite.delayedCall(0.1,updateButtonTouchState,[true]);
+			}else{
+				updateButtonTouchState(true);
+			}
+			_isAutoing = value;
 		}
-		
+		private function updateButtonTouchState(bool:Boolean):void
+		{
+			_skin.btn_kaishi.touchable = bool;
+			_skin.btn_zidong.touchable = bool;
+			_skin.btn_tingzhi.touchable = bool;
+		}
 	}
 }
