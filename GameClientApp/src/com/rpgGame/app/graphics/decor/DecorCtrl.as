@@ -34,6 +34,7 @@ package  com.rpgGame.app.graphics.decor
 		
 		public static const TOP_HPMP :int = SORT_VALUE--;
 		public static const TOP_NAME :int = SORT_VALUE--;
+		public static const TOP_FUQI :int = SORT_VALUE--;
 		public static const TOP_GUILD :int = SORT_VALUE--;
 		public static const TOP_CHENGHAO :int = SORT_VALUE--;
 		public static const TOP_HUBAOCHENGHAO :int = SORT_VALUE--;

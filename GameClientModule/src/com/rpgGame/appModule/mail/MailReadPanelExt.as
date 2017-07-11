@@ -7,6 +7,7 @@ package com.rpgGame.appModule.mail
 	import com.rpgGame.core.events.MailEvent;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.netData.mail.bean.MailDetailInfo;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -113,8 +114,7 @@ package com.rpgGame.appModule.mail
 				{
 					if(i<_info.attachments.length)
 					{
-						var itemInfo:ClientItemInfo=new ClientItemInfo(_info.attachments[i].tempItemInfo.mod);
-						itemInfo.count=_info.attachments[i].tempItemInfo.num;
+						var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(_info.attachments[i].tempItemInfo.mod,_info.attachments[i].tempItemInfo.num);
 						FaceUtil.SetItemGrid(_fujianList[i],itemInfo);
 						_fujianList[i].selectImgVisible=false;
 					}

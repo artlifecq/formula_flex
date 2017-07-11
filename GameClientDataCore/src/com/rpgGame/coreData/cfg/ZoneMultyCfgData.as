@@ -1,8 +1,5 @@
 package com.rpgGame.coreData.cfg
 {
-	import com.game.engine3D.utils.MathUtil;
-	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.clientConfig.Q_zone;
 	import com.rpgGame.coreData.clientConfig.Q_zone_multy;
 	

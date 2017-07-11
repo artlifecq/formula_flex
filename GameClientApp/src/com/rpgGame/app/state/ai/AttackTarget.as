@@ -42,7 +42,10 @@ package com.rpgGame.app.state.ai
 
 		private function findUseableSpell() : Q_skill_model
 		{
-			
+			if (MainRoleManager.actor.stateMachine.isTripleLockCaseSpell) 
+			{
+				return null;
+			}
 			var castSpell : Q_skill_model = CastSpellHelper.getSortCastSpell();
 			if (false) //旧的挂机模式，先留着。@L.L.M.Sunny 
 			{

@@ -55,7 +55,7 @@ package com.rpgGame.appModule.open
 			if(this._touchPointID >= 0)
 			{
 				//a touch has begun, so we'll ignore all other touches.
-				var touch:Touch = e.getTouch(_skin.Icons, null, this._touchPointID);
+				var touch:Touch = e.getTouch(this, null, this._touchPointID);
 				if(!touch)
 				{
 					return;
@@ -93,14 +93,14 @@ package com.rpgGame.appModule.open
 			else
 			{
 				//we aren't tracking another touch, so let's look for a new one.
-				touch = e.getTouch(_skin.Icons, TouchPhase.BEGAN);
+				touch = e.getTouch(this, TouchPhase.BEGAN);
 				if(touch !== null )
 				{
 					this.changeState(ButtonState.DOWN);
 					this._touchPointID = touch.id;
 					return;
 				}
-				touch = e.getTouch(_skin.Icons, TouchPhase.HOVER);
+				touch = e.getTouch(this, TouchPhase.HOVER);
 				if(touch !== null)
 				{
 					this.changeState(ButtonState.HOVER);
@@ -196,7 +196,6 @@ package com.rpgGame.appModule.open
 				initView();
 			}
 			_needCreate = false;
-			
 			var ids:Array = JSONUtil.decode(_qdata.q_main_id) as Array;
 			_info = FuncionBarCfgData.getActivityBarInfo(ids[0]);
 			_button= MainButtonManager.getButtonBuyInfo(_info);
@@ -205,7 +204,11 @@ package com.rpgGame.appModule.open
 			_skin.Icons.styleName = "ui/app/xingongneng/icon/"+_qdata.q_openIcon+"/145.png";
 			_skin.uiName.styleName = "ui/app/xingongneng/icon/"+_qdata.q_openIcon+"/name.png";
 			_skin.uiName.x = (this.width - _skin.uiName.width)/2;
-			this.changeState(ButtonState.UP);
+			if(this._touchPointID<0)
+				this.changeState(ButtonState.UP);
+			else
+				this.changeState(ButtonState.HOVER);
+			trace(this._touchPointID);
 		}
 		protected function runFly():void
 		{

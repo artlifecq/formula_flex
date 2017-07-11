@@ -7,6 +7,7 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.monster.message.SCLimitChallengeBossResultMessage;
 	
@@ -57,9 +58,7 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 				_gridList.push(icon);
 				_skin.grpIcon.addChild(icon);
 				icon.x=i*60;
-				var itemInfo:ClientItemInfo=new ClientItemInfo(reward[i].mod);
-				itemInfo.itemInfo=new ItemInfo();
-				itemInfo.itemInfo.isbind=reward[i].bind;
+				var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(reward[i].mod,1,reward[i].bind);
 				FaceUtil.SetItemGrid(icon,itemInfo);
 			}
 		}

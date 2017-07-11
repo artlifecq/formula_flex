@@ -4,7 +4,6 @@ package com.rpgGame.appModule.xinfa
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.scene.BuffSet;
 	import com.rpgGame.app.sender.CheatsSender;
 	import com.rpgGame.app.utils.FightValueUtil;
 	import com.rpgGame.app.view.icon.BgIcon;
@@ -28,7 +27,6 @@ package com.rpgGame.appModule.xinfa
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
-	import com.rpgGame.coreData.cfg.cheats.CheatsCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_buff;
 	import com.rpgGame.coreData.clientConfig.Q_cheats;
@@ -36,11 +34,8 @@ package com.rpgGame.appModule.xinfa
 	import com.rpgGame.coreData.info.cheats.CheatsNodeVo;
 	import com.rpgGame.coreData.info.cheats.CheatsVo;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
-	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.TipType;
-	import com.rpgGame.coreData.utils.FilterUtil;
-	import com.rpgGame.coreData.utils.FilterUtility;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import flash.geom.Point;
@@ -98,10 +93,9 @@ package com.rpgGame.appModule.xinfa
 				
 			}
 			_effectCheatsGridArr=[new CheatsIcon(_skin.grid_1),new CheatsIcon(_skin.grid_2),new CheatsIcon(_skin.grid_3)];
-			_skillIcon=new BgIcon(IcoSizeEnum.ICON_42);
-			_skin.grid_item_1.addChild(_skillIcon);
-			_skillIcon.x=6;
-			_skillIcon.y=6;
+			_skillIcon=new BgIcon(IcoSizeEnum.ICON_36);
+			_skillIcon.bindBg(_skin.grid_item_1);
+			_skin.container.addChild(_skillIcon);
 			initData();
 			MCUtil.removeSelf(_skin.lab_shuxing);
 			MCUtil.removeSelf(_skin.lab_jiangli);
@@ -216,7 +210,7 @@ package com.rpgGame.appModule.xinfa
 //				TipTargetManager.remove(_skin.grid_item_1);
 //				TipTargetManager.show( _skin.grid_item_1, TargetTipsMaker.makeTips( TipType.SPELL_TIP,data.cheatsConfig.q_skill+"_"+Math.max(1,data.level)));
 				var buff:Q_buff=BuffStateDataManager.getData(buffObj[0]);
-				_skillIcon.setIconResName(ClientConfig.getBuffIcon(buff.q_icon,IcoSizeEnum.ICON_42));
+				_skillIcon.setIconResName(ClientConfig.getBuffIcon(buff.q_icon,IcoSizeEnum.ICON_36));
 				_skin.lab_Skill.text=LanguageConfig.replaceStr(buff.q_description,buffObj[1]);
 				_skin.imgSkill.styleName="ui/app/beibao/xinfa/buff/"+buff.q_icon+".png"
 			}

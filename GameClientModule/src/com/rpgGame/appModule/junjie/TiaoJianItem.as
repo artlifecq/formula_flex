@@ -31,6 +31,7 @@ package com.rpgGame.appModule.junjie
 		{
 			_skin=new ShuXing_Item2();
 			super(_skin);
+			_skin.lbName.width=150;
 		}
 		
 		public function get iswancheng():Boolean

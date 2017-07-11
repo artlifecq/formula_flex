@@ -15,6 +15,9 @@ package com.rpgGame.netData.marriage.message{
 		//0 失败  1 成功
 		private var _result: int;
 		
+		//1 进阶   2 突破
+		private var _type: int;
+		
 		//当前的亲密值
 		private var _intimacyValue: int;
 		
@@ -23,6 +26,9 @@ package com.rpgGame.netData.marriage.message{
 		
 		//战斗力
 		private var _fihtPower: int;
+		
+		//突破值
+		private var _wishValue: int;
 		
 		//当前激活的buff
 		private var _buffs: Vector.<int> = new Vector.<int>();
@@ -34,12 +40,16 @@ package com.rpgGame.netData.marriage.message{
 			var i: int = 0;
 			//0 失败  1 成功
 			writeInt(_result);
+			//1 进阶   2 突破
+			writeInt(_type);
 			//当前的亲密值
 			writeInt(_intimacyValue);
 			//当前戒指等阶
 			writeInt(_levelnum);
 			//战斗力
 			writeInt(_fihtPower);
+			//突破值
+			writeInt(_wishValue);
 			//当前激活的buff
 			writeShort(_buffs.length);
 			for (i = 0; i < _buffs.length; i++) {
@@ -55,12 +65,16 @@ package com.rpgGame.netData.marriage.message{
 			var i: int = 0;
 			//0 失败  1 成功
 			_result = readInt();
+			//1 进阶   2 突破
+			_type = readInt();
 			//当前的亲密值
 			_intimacyValue = readInt();
 			//当前戒指等阶
 			_levelnum = readInt();
 			//战斗力
 			_fihtPower = readInt();
+			//突破值
+			_wishValue = readInt();
 			//当前激活的buff
 			var buffs_length : int = readShort();
 			for (i = 0; i < buffs_length; i++) {
@@ -90,6 +104,21 @@ package com.rpgGame.netData.marriage.message{
 		 */
 		public function set result(value: int): void{
 			this._result = value;
+		}
+		
+		/**
+		 * get 1 进阶   2 突破
+		 * @return 
+		 */
+		public function get type(): int{
+			return _type;
+		}
+		
+		/**
+		 * set 1 进阶   2 突破
+		 */
+		public function set type(value: int): void{
+			this._type = value;
 		}
 		
 		/**
@@ -135,6 +164,21 @@ package com.rpgGame.netData.marriage.message{
 		 */
 		public function set fihtPower(value: int): void{
 			this._fihtPower = value;
+		}
+		
+		/**
+		 * get 突破值
+		 * @return 
+		 */
+		public function get wishValue(): int{
+			return _wishValue;
+		}
+		
+		/**
+		 * set 突破值
+		 */
+		public function set wishValue(value: int): void{
+			this._wishValue = value;
 		}
 		
 		/**

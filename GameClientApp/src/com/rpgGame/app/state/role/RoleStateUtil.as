@@ -251,17 +251,18 @@ package com.rpgGame.app.state.role
 			ref.onEnd(onWalkEnd);
 			ref.onSync(onWalkSync);
 //			walkRole.stateMachine.transition(RoleStateType.CONTROL_WALK_MOVE, ref);
-			var isWalkMoving:Boolean = role.stateMachine.transition(RoleStateType.CONTROL_WALK_MOVE, ref);
+			walkRole.stateMachine.transition(RoleStateType.CONTROL_WALK_MOVE, ref);
 			if (role.isMainChar || role.isMainCamouflage)
 			{
-				if (isWalkMoving)
+				if (walkRole.stateMachine.isWalkMoving)
 				{
-//					_lastWalkServerTime = _local12;
+					//					_lastWalkServerTime = _local12;
 					HorseManager.instance().autoRiding(role, pos);
 				}
 			}
+			
+			return walkRole.stateMachine.isWalkMoving;
 
-			return isWalkMoving;
 		}
 		
 		private static function nullFunc():void

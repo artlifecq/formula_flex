@@ -30,10 +30,8 @@ package com.rpgGame.appModule.shop
 			_skin=new ShangPinItem();
 			super(_skin);
 			_grid=IconCDFace.create(IcoSizeEnum.ICON_64);
-			_grid.x=-1;
-			_grid.y=-1;
-			this._skin.icons.addChild(_grid);
-			this._skin.icons.touchGroup=false;
+			_grid.bindBg(this._skin.icons);
+			this._skin.container.addChild(_grid);
 			this._skin.btnBuy.addEventListener(Event.TRIGGERED,onBuy);
 			this.x=ix;
 			this.y=iy;

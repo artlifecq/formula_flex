@@ -47,6 +47,7 @@ package com.rpgGame.appModule.skill
 			_icon.touchable=false;
 			skin=_skin;
 			skin.container.addChild(_icon);
+			_icon.bindBg(_skin.Icon_jineng);
 			alertPanel=new SkillAlertPanel();
 		}
 		
@@ -70,8 +71,6 @@ package com.rpgGame.appModule.skill
 			skin.ms_txt.htmlText=lvData.q_skillpanel_description;
 			
 			_icon.setIconResName(ClientConfig.getSkillIcon(selectedCfg.q_skillID.toString(),48));
-			_icon.x=16;
-			_icon.y=21;
 			
 			if(selectedInfo.skillChildLv==selectedCfg.q_max_level){
 				skin.eft_name.visible=false;

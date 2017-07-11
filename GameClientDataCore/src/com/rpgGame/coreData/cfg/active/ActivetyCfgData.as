@@ -81,7 +81,7 @@ package com.rpgGame.coreData.cfg.active
 			var list:Vector.<ActivetyInfo>= _typeMap.getValue(type);
 			if(list){
 				list=list.sort(sortListByID);
-				list=list.sort(sortListByState);
+//				list=list.sort(sortListByState);
 			}
 		}
 		
@@ -122,7 +122,7 @@ package com.rpgGame.coreData.cfg.active
 					continue;
 				}
 				list=list.sort(sortListByID);
-				list=list.sort(sortListByState);
+//				list=list.sort(sortListByState);
 			}
 		}
 		
@@ -138,7 +138,7 @@ package com.rpgGame.coreData.cfg.active
 			}
 			return 0;
 		}
-		
+	/*	
 		private static function sortListByState(infoA:ActivetyInfo,infoB:ActivetyInfo):int
 		{
 			if(infoA.info==null||infoB.info==null){
@@ -150,7 +150,7 @@ package com.rpgGame.coreData.cfg.active
 				return 1;
 			}
 			return 0;
-		}	
+		}	*/
 		
 		/**
 		 *根据活动id获取活动信息 

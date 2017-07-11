@@ -87,12 +87,17 @@ package com.rpgGame.appModule.activety.boss
 					return;
 				}
 				
-				_skin.uiJinxing.visible=false;
 				switch(info.info.joinState){
 					case ActivityJoinStateEnum.KILLED_BOSS:
+						_skin.uiJinxing.visible=true;
+						ungrayItem();
+						break;
+					case ActivityJoinStateEnum.JOINING:
+						_skin.uiJinxing.visible=false;
 						ungrayItem();
 						break;
 					default:
+						_skin.uiJinxing.visible=false;
 						grayItem();
 						break;
 				}
@@ -137,6 +142,9 @@ package com.rpgGame.appModule.activety.boss
 			GrayFilter.gray(_skin.uiName);
 			GrayFilter.gray(_skin.uiBg);
 			GrayFilter.gray(_skin.lbLevel);
+			GrayFilter.gray(_skin.btnEnter);
+			GrayFilter.gray(_skin.lbMsg1);
+			GrayFilter.gray(_skin.lbMsg2);
 		}
 		
 		private function ungrayItem():void
@@ -144,6 +152,9 @@ package com.rpgGame.appModule.activety.boss
 			GrayFilter.unGray(_skin.uiName);
 			GrayFilter.unGray(_skin.uiBg);
 			GrayFilter.unGray(_skin.lbLevel);
+			GrayFilter.unGray(_skin.btnEnter);
+			GrayFilter.unGray(_skin.lbMsg1);
+			GrayFilter.unGray(_skin.lbMsg2);
 		}
 	}
 }

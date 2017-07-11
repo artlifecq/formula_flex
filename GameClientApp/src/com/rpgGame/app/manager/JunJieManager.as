@@ -13,8 +13,6 @@ package com.rpgGame.app.manager
 	import com.rpgGame.netData.junjie.message.SCJunJieInfoUpdateListMessage;
 	import com.rpgGame.netData.junjie.message.SCUpdateRoundMessage;
 	
-	import app.client_proto.MainSetProtoC;
-	
 	import org.client.mainCore.manager.EventManager;
 	
 	public class JunJieManager

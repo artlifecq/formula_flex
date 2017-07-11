@@ -57,6 +57,9 @@ package com.rpgGame.appModule.role
 			_skin.txt_baoji.text=_roleData.totalStat.getStatValueString(CharAttributeType.CRIT_PER);
 			_skin.txt_baoshang.text=_roleData.totalStat.getStatValueString(CharAttributeType.CRIT);		
 			_skin.txt_gongsu.text=_roleData.totalStat.getStatValueString(CharAttributeType.ATT_SPEED);
+			
+			_skin.num_miaoshang.bounds.width=_skin.num_miaoshang.width;
+			
 			if(MainRoleManager.actorInfo.job==JobEnum.ROLE_4_TYPE){//医家
 				_skin.txt_lidao.text=_roleData.totalStat.getStatValueString(CharAttributeType.HUIGEN);
 				_skin.uiLd.styleName="ui/app/beibao/shuxing/hg.png";

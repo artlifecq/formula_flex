@@ -72,6 +72,11 @@ package com.rpgGame.app.manager
 			EventManager.dispatchEvent(RedRewardEvent.UPDATA_COUNTINFO);
 		}
 		
+		public function get rechaged():Boolean
+		{
+			return _recharged==1;
+		}
+		
 		private var _rewardInfoList: Vector.<RedRewardPlayerInfo>;
 
 		public function get rewardInfoList():Vector.<RedRewardPlayerInfo>
@@ -124,7 +129,7 @@ package com.rpgGame.app.manager
 					viplevel = 5;
 					break;
 				default:
-					viplevel = _recharged?2:1;
+					viplevel = rechaged?2:1;
 			}
 			_vipInfo = RedRewardCfgData.getdataById(viplevel);
 			_isMaxVipLevel = viplevel>=5;

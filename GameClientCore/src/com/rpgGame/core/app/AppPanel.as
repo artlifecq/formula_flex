@@ -55,6 +55,7 @@ package com.rpgGame.core.app
 		private var _parentContiner : DisplayObjectContainer;
 		private var _isAppShowIng : Boolean = false;
 		private var _needAmition:Boolean = true;
+		private var closeTween:TweenMax;
 
 		public function AppPanel(appInfoP : AppInfo)
 		{
@@ -171,14 +172,15 @@ package com.rpgGame.core.app
 
 		public function hide() : void
 		{
-			isAppShowIng = false;
-			_needAmition = true;
+			if(closeTween){
+				return;
+			}
 			TweenMax.killTweensOf(_app);
 			if (_app != null && _app.parent != null)
 			{
 //				_app.superRemoveEvent();
 //				_app.removeEvent();
-				TweenMax.to(_app, 0.3, {
+				closeTween=TweenMax.to(_app, 0.3, {
 					y: _app.y + 10,
 					alpha: 0,
 					ease: Sine.easeIn,
@@ -189,6 +191,9 @@ package com.rpgGame.core.app
 		}
 		private function realRemove():void
 		{
+			isAppShowIng = false;
+			_needAmition = true;
+			closeTween=null;
 			_app.parent.removeChild(_app as DisplayObject);
 			AppDispather.instance.dispatchEvent(new AppEvent(AppEvent.APP_HIDE, appInfo));
 		}
