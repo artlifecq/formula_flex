@@ -74,22 +74,9 @@ package com.rpgGame.appModule.mount
 				if(_addProp!=null&&_addProp.length >0)
 					view.updataAtt(nextType,_currentProp[nextType],_addProp[nextType],_disProps[nextType],_zhanqiShowData.zhanqiJob);
 				else
-					view.updataAtt(nextType,_currentProp[nextType],0,_disProps[nextType],_zhanqiShowData.zhanqiJob);
-				
+					view.updataAtt(nextType,_currentProp[nextType],0,_disProps[nextType],_zhanqiShowData.zhanqiJob);		
 				_foundIndex++;
 			}
-		}
-		
-		public function nextPropIndex():int
-		{
-			if(_foundIndex>=_currentProp.length)
-				return 0;
-			for(_foundIndex++;_foundIndex<_currentProp.length;_foundIndex++)
-			{
-				if(_currentProp[_foundIndex]!=0||_disProps[_foundIndex]!=0)
-					return _foundIndex;
-			}
-			return 0;
 		}
 		
 		public function updataInfo(zhanqiShowData:ZhanQiShowData):void

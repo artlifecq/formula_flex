@@ -390,11 +390,7 @@ package com.rpgGame.app.view.icon
 			this.filter = null;
 			this.touchable = true;
 			this.touchGroup = true;
-			this.setBg("");
-			if (_bgImage) 
-			{
-				_bgImage.visible=false;
-			}
+			super.destroy();
 			recycle(this);
 		}
 

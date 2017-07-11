@@ -178,11 +178,20 @@ package com.rpgGame.app.fight.spell
 			}
 			else if (caseState == CASE_STATE_NOT_IN_RELEASE_RANGE)//距离过远
 			{
+				//三连击的话直接发送请求
+				if (MainRoleManager.actor.stateMachine.isTripleLockCaseSpell) 
+				{
+					caseInfo.targetServerID=null;//改成空放
+					caseInfo.releasePos.x=MainRoleManager.actor.x;
+					caseInfo.releasePos.y=MainRoleManager.actor.z;
+					requestReleaseSpell();
+					return true;
+				}
 				if (caseInfo.targetPos)
 				{
 					if (caseInfo.targetID > 0)
 						targerRole = SceneManager.getSceneObjByID(caseInfo.targetID) as SceneRole;
-					RoleStateUtil.walk(MainRoleManager.actor, caseInfo.targetPos.x, caseInfo.targetPos.y, 0, caseInfo, onWalkArriveRelease, onWalkThroughCase);
+					RoleStateUtil.walk(MainRoleManager.actor, caseInfo.targetPos.x, caseInfo.targetPos.y, 0, caseInfo, onWalkArriveRelease, onWalkThroughCase,null,true);
 				}
 			}
 
@@ -250,7 +259,7 @@ package com.rpgGame.app.fight.spell
 					{
 						if (caseInfo.targetPos)
 						{
-							RoleStateUtil.walk(MainRoleManager.actor, caseInfo.targetPos.x, caseInfo.targetPos.y, 0, caseInfo, onWalkArriveRelease, onWalkThroughCase);
+							RoleStateUtil.walk(MainRoleManager.actor, caseInfo.targetPos.x, caseInfo.targetPos.y, 0, caseInfo, onWalkArriveRelease, onWalkThroughCase,null,true);
 						}
 					}
 				}
@@ -287,6 +296,7 @@ package com.rpgGame.app.fight.spell
 				{
 					//NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsHarding); //"技能硬直中"
 				}
+				GameLog.addShow("技能僵直中不能释放=============");
 				return CASE_STATE_FAIL;
 			}
 			else if (MainRoleManager.actor.stateMachine.isLockCaseSpell)

@@ -1,11 +1,15 @@
 package com.rpgGame.appModule.die
 {
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.utils.TimeUtil;
+	import com.rpgGame.appModule.shop.ItemBuyPanelExt;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.coreData.cfg.DieCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_map;
@@ -28,6 +32,7 @@ package com.rpgGame.appModule.die
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
+	import com.rpgGame.coreData.info.shop.ShopItemVo;
 	
 	/**
 	 *死亡面板 
@@ -205,8 +210,8 @@ package com.rpgGame.appModule.die
 		
 		private function showByFuHuo():void
 		{
-			// TODO Auto Generated method stub
 //			this.hide();
+			ItemBuyPanelExt.buyItemByModelId(300);
 		}
 		
 		/*private function updateSeeItem(isNext:Boolean,showAni:Boolean=true):void

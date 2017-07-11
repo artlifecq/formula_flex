@@ -182,7 +182,7 @@ package com.rpgGame.appModule.equip
 			_skin.container.addChild(_useEquip);
 			_targetEquip.x=753;
 			_targetEquip.y=121;
-			_useEquip.x=486;
+			_useEquip.x=481;
 			_useEquip.y=121;
 			
 			//初始化选项

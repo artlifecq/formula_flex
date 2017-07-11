@@ -335,7 +335,7 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			reward_ico_0 = temp;
 			temp.name = "reward_ico_0";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/36.png";
+			temp.styleName = "ui/common/grid/normal/36.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -346,7 +346,7 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			reward_ico_1 = temp;
 			temp.name = "reward_ico_1";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/36.png";
+			temp.styleName = "ui/common/grid/normal/36.png";
 			temp.x = 52;
 			temp.y = 0;
 			return temp;
@@ -357,7 +357,7 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			reward_ico_2 = temp;
 			temp.name = "reward_ico_2";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/36.png";
+			temp.styleName = "ui/common/grid/normal/36.png";
 			temp.x = 103;
 			temp.y = 0;
 			return temp;
@@ -368,7 +368,7 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			reward_ico_3 = temp;
 			temp.name = "reward_ico_3";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/36.png";
+			temp.styleName = "ui/common/grid/normal/36.png";
 			temp.x = 155;
 			temp.y = 0;
 			return temp;
@@ -379,7 +379,7 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			reward_ico_4 = temp;
 			temp.name = "reward_ico_4";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/36.png";
+			temp.styleName = "ui/common/grid/normal/36.png";
 			temp.x = 206;
 			temp.y = 0;
 			return temp;
@@ -390,7 +390,7 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			reward_ico_5 = temp;
 			temp.name = "reward_ico_5";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/36.png";
+			temp.styleName = "ui/common/grid/normal/36.png";
 			temp.x = 258;
 			temp.y = 0;
 			return temp;
@@ -401,7 +401,7 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			reward_ico_6 = temp;
 			temp.name = "reward_ico_6";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/36.png";
+			temp.styleName = "ui/common/grid/normal/36.png";
 			temp.x = 309;
 			temp.y = 0;
 			return temp;
@@ -412,7 +412,7 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			reward_ico_7 = temp;
 			temp.name = "reward_ico_7";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/36.png";
+			temp.styleName = "ui/common/grid/normal/36.png";
 			temp.x = 361;
 			temp.y = 0;
 			return temp;

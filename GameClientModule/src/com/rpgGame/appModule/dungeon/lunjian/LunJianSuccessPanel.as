@@ -61,7 +61,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
-			data=1;
+//			data=1;
 			var ljid:int=data;
 			var cfg:Q_lunjian=LunJianCfg.getCfgByID(ljid);
 			var rewads:Array=JSONUtil.decode(cfg.q_rewards);

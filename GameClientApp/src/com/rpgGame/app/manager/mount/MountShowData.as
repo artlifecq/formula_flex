@@ -68,6 +68,8 @@ package com.rpgGame.app.manager.mount
 		
 		public function canUpLevel():Boolean
 		{
+			if(isMaxLevel)
+				return false;
 			return upLevelNeedItemCount<=bagHaveItemCount
 		}
 		
@@ -233,7 +235,6 @@ package com.rpgGame.app.manager.mount
 			helpProp = new Vector.<Number>(30,0);
 			var per:Number = percent;
 			helpProp[CharAttributeType.WAI_GONG]=_disProp[CharAttributeType.WAI_GONG]*addExtraPercent*per;
-			helpProp[CharAttributeType.NEI_GONG]=_disProp[CharAttributeType.NEI_GONG]*addExtraPercent*per;
 			if(percent>=0.3)
 				helpProp[CharAttributeType.DEFENSE_PER]=_disProp[CharAttributeType.DEFENSE_PER]*addExtraPercent*per;
 			if(percent>=0.5)

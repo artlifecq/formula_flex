@@ -6,6 +6,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.manager.ctrl.ControlAutoPick;
 	import com.rpgGame.app.manager.fight.FightManager;
 	import com.rpgGame.app.manager.fightsoul.FightSoulManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.task.GatherAutoManager;
 	import com.rpgGame.app.scene.SceneRole;
@@ -64,7 +65,11 @@ package com.rpgGame.app.manager
 				stopFightSoulAuto();
 				return;
 			}	
-			
+			if(!MainRoleManager.actor.usable||MainRoleManager.actor.stateMachine.isDeadState)
+			{
+				stopFightSoulAuto();
+				return;
+			}
 			
 			_stateMachine.transition(AIStateType.FIGHTSOUL_ATTACE, null, force);
 		}

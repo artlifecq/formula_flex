@@ -24,7 +24,7 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			this.currentState = "down";
 			this.height = 22;
 			this.width = 68;
-			this.elementsContent = [];
+			this.elementsContent = [labelDisplay_i()];
 			
 			states = {
 				init:[

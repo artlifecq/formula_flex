@@ -110,7 +110,6 @@ package com.rpgGame.app.ui.main.shortcut
 			_gridVect = new Vector.<ShortcutGrid>();
 			var size : int = IcoSizeEnum.ICON_48;
 			var gridInfo : GridInfo;
-			var bgWH:int=RewardGroup.size2Width(size);
 			var _skin:shortcut_Skin=_shortcutBar.skin();
 			for (var i : int = 0; i < GRID_COUNT; i++)
 			{
