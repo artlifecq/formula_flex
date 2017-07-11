@@ -2,6 +2,7 @@ package com.rpgGame.coreData.info.item
 {
 	import com.game.mainCore.core.utils.TextFormatUtil;
 	import com.rpgGame.coreData.cfg.item.ContainerData;
+	import com.rpgGame.coreData.cfg.item.EquipStrengthCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.enum.JobEnum;
@@ -43,7 +44,7 @@ package com.rpgGame.coreData.info.item
 			clientInfo.count=itemInfo.num;
 			return clientInfo;
 		}
-		
+	
 		/**
 		 * 通过MODID生成INFO
 		 * */

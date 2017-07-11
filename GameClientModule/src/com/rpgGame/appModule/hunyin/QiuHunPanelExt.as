@@ -146,8 +146,8 @@ package com.rpgGame.appModule.hunyin
 		
 		private function forceinHandler(evt:Event):void
 		{
-			 _skin.textInput.text="";		
-			 _skin.textInput.color=StaticValue.A_UI_BEIGE_TEXT;
+			_skin.textInput.text="";		
+			_skin.textInput.color=StaticValue.A_UI_BEIGE_TEXT;
 		}
 		
 		private function forceoutHandler(evt:Event):void

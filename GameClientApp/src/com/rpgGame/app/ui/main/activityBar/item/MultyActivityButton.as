@@ -10,11 +10,10 @@ package com.rpgGame.app.ui.main.activityBar.item
 	 * */
 	public class MultyActivityButton extends ActivityButton
 	{
-		private var openState:Boolean=false;
-		
 		public function MultyActivityButton()
 		{
 			super();
+			_openState=false;
 			setTips(ui.btnBar,"","您当前处于跨服\n副本的队列匹配\n中，点击查看。");
 		}
 		
@@ -30,19 +29,19 @@ package com.rpgGame.app.ui.main.activityBar.item
 		
 		override public function canOpen():Boolean
 		{
-			return openState;
+			return _openState;
 		}
 		
 		override public function onActivityOpen(data:Object=null):void
 		{
 			super.onActivityOpen(data);
-			openState=true;
+			_openState=true;
 		}
 		
 		override public function onActivityClose():void
 		{
 			super.onActivityClose();
-			openState=false;
+			_openState=false;
 		}
 	}
 }

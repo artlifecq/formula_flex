@@ -49,7 +49,7 @@ package com.rpgGame.appModule.hunyin
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
-	
+
 	public class HunYinPanelExt extends SkinUIPanel
 	{
 		private var _skin:HunYin_Skin;
@@ -109,7 +109,6 @@ package com.rpgGame.appModule.hunyin
 			_itemFace.selectImgVisible=false;	
 			_skin.container.addChild(_itemFace);
 			_itemFace.bindBg(_skin.icon4);
-//			_itemFace.y=_skin.icon4.y;
 		}
 		
 		private function initEff():void

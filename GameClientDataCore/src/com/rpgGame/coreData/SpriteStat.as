@@ -199,8 +199,8 @@ package com.rpgGame.coreData
 		{
 			var per:int=CharAttributeType.getAttrPer(type);
 			if(per!=1){
-				var str:String=(getStatValue( type )/per).toFixed(2);
-				return Number(str).toString()+CharAttributeType.getAttrUnit(type);
+				var value:Number=getStatValue( type )/per;
+				return Math.round(value)+CharAttributeType.getAttrUnit(type);
 			}
 			return getStatValue( type ).toString()+CharAttributeType.getAttrUnit(type);
 		}

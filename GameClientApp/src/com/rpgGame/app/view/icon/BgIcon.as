@@ -1,6 +1,7 @@
 package com.rpgGame.app.view.icon
 {
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.type.AssetUrl;
 	
@@ -136,8 +137,8 @@ package com.rpgGame.app.view.icon
 			_qualityEft.frameRate=20;
 			_qualityEft.autoPlay=true;
 			//			var scaleV:Number=(90/64);
-			_qualityEft.width=_iconSize;
-			_qualityEft.height=_iconSize;
+			_qualityEft.width=this.width;
+			_qualityEft.height=this.width;
 			//			var xy:Number=-1*(_iconSize/64)*(90-64)/2
 			//			_qualityEft.x=xy;
 			//			_qualityEft.y=xy;
@@ -195,6 +196,13 @@ package com.rpgGame.app.view.icon
 			this.x=_bgImage.x;
 			this.y=_bgImage.y;
 			_bgImage.x=_bgImage.y=0;
+			this.width=_bgImage.width;
+			this.height=_bgImage.height;
+			if(_qualityEft){
+				_qualityEft.width=this.width;
+				_qualityEft.height=this.width;
+			}
+	
 			sortLayer();
 			calIconPos();
 		}
@@ -345,6 +353,12 @@ package com.rpgGame.app.view.icon
 		 */
 		private function onBgImgComplete(uiasset:UIAsset):void
 		{
+			this.width=_bgImage.width;
+			this.height=_bgImage.height;
+			if(_qualityEft){
+				_qualityEft.width=this.width;
+				_qualityEft.height=this.width;
+			}
 			calIconPos();
 		}
 		
@@ -507,7 +521,7 @@ package com.rpgGame.app.view.icon
 			_countText.verticalAlign="middle";
 			_countText.verticalCenter=-2;
 			_countText.textAlign = Align.RIGHT;
-			_countText.color = 0xcfc6ae;
+			_countText.color = StaticValue.A_UI_BEIGE_TEXT;
 			_countText.fontSize = 10;
 			_countText.nativeFilters=Fontter.filterObj["labelFilterBlack"];
 			addChild(_countText);

@@ -126,7 +126,9 @@ package org.mokylin.skin.app.shangcheng
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icons = temp;
 			temp.name = "icons";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/64.png";
+			temp.height = 72;
+			temp.styleName = "ui/common/grid/normal/64.png";
+			temp.width = 72;
 			temp.x = 9;
 			temp.y = 36;
 			return temp;
