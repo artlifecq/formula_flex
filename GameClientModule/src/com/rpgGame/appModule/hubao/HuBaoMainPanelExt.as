@@ -23,6 +23,7 @@ package com.rpgGame.appModule.hubao
 	import com.rpgGame.coreData.clientConfig.Q_convoy;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import away3d.events.Event;
@@ -112,7 +113,7 @@ package com.rpgGame.appModule.hubao
 				{
 					var ico:IconCDFace=new IconCDFace(IcoSizeEnum.ICON_36);		
 					ico.selectImgVisible=false;	
-					var itemInfo:ClientItemInfo=new ClientItemInfo(prize[i].mod);
+					var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(prize[i].mod);
 					FaceUtil.SetItemGrid(ico,itemInfo);				
 					if(i==0){
 						ico.bindBg((tar.skin as HuBaoItem_Skin).icon1);
@@ -138,7 +139,7 @@ package com.rpgGame.appModule.hubao
 				{
 					ico=new IconCDFace(IcoSizeEnum.ICON_42);		
 					ico.selectImgVisible=false;	
-					itemInfo=new ClientItemInfo(prize[i].mod);
+					itemInfo=ItemUtil.convertClientItemInfoById(prize[i].mod);
 					FaceUtil.SetItemGrid(ico,itemInfo);
 					if(i==0){
 						ico.bindBg((tar.skin as HuBaoItem2_Skin).icon1);

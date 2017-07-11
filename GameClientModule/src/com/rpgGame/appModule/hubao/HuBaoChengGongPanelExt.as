@@ -8,6 +8,7 @@ package com.rpgGame.appModule.hubao
 	import com.rpgGame.core.events.HuBaoEvent;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.netData.convoy.message.SCSuccessInfoMessage;
 	
 	import feathers.controls.Label;
@@ -98,7 +99,7 @@ package com.rpgGame.appModule.hubao
 			{
 				if(i<len)
 				{
-					var itemInfo:ClientItemInfo=new ClientItemInfo(msg.reward[i].itemModelId);
+					var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(msg.reward[i].itemModelId,1,msg.reward[i].isbind);
 					FaceUtil.SetItemGrid(_icoList[i],itemInfo);
 					_labList[i].htmlText=itemInfo.qItem.q_name+"×"+msg.reward[i].num*msg.isdouble;
 					

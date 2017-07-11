@@ -25,12 +25,16 @@ package com.rpgGame.appModule.hunyin
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.cfg.hunyin.HunYinHuDongData;
 	import com.rpgGame.coreData.cfg.hunyin.HunYinSkillData;
+	import com.rpgGame.coreData.cfg.hunyin.JieHunJieZiData;
+	import com.rpgGame.coreData.clientConfig.Q_advance_wedding;
 	import com.rpgGame.coreData.clientConfig.Q_marriage_skills;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.HunYinEnum;
 	import com.rpgGame.coreData.enum.face.FaceTypeEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.face.BaseFaceInfo;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.netData.marriage.message.SCInteractionMessage;
 	
 	import flash.geom.Point;
@@ -45,7 +49,7 @@ package com.rpgGame.appModule.hunyin
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
-	
+
 	public class HunYinPanelExt extends SkinUIPanel
 	{
 		private var _skin:HunYin_Skin;
@@ -104,8 +108,7 @@ package com.rpgGame.appModule.hunyin
 			_itemFace=new IconCDFace(IcoSizeEnum.ICON_48);
 			_itemFace.selectImgVisible=false;	
 			_skin.container.addChild(_itemFace);
-			_itemFace.x=_skin.icon4.x;
-			_itemFace.y=_skin.icon4.y;
+			_itemFace.bindBg(_skin.icon4);
 		}
 		
 		private function initEff():void
@@ -120,7 +123,7 @@ package com.rpgGame.appModule.hunyin
 				case _skin.btnSonghua:
 					if(_skin.btnSonghua.filter!=null)
 					{
-						NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(22010));
+						NoticeManager.mouseFollowNotify(NotifyCfgData.getNotifyTextByID(92002),["今日送花"]);
 					}
 					else
 						HunYinSender.upCSInteractionMessage(HunYinEnum.HD_SONGHUA);
@@ -128,7 +131,7 @@ package com.rpgGame.appModule.hunyin
 				case _skin.btnYongbao:
 					if(_skin.btnYongbao.filter!=null)
 					{
-						NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(22010));
+						NoticeManager.mouseFollowNotify(NotifyCfgData.getNotifyTextByID(92002),["今日拥抱"]);
 					}
 					else
 						HunYinSender.upCSInteractionMessage(HunYinEnum.HD_YONGBAO);
@@ -136,7 +139,7 @@ package com.rpgGame.appModule.hunyin
 				case _skin.btnQinwen:
 					if(_skin.btnQinwen.filter!=null)
 					{
-						NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(22010));
+						NoticeManager.mouseFollowNotify(NotifyCfgData.getNotifyTextByID(92002),["今日亲吻"]);
 					}
 					else
 						HunYinSender.upCSInteractionMessage(HunYinEnum.HD_QINWEN);
@@ -144,7 +147,7 @@ package com.rpgGame.appModule.hunyin
 				case _skin.btnDongfang:
 					if(_skin.btnDongfang.filter!=null)
 					{
-						NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(22010));
+						NoticeManager.mouseFollowNotify(NotifyCfgData.getNotifyTextByID(92002),["今日洞房"]);
 					}
 					else
 						HunYinSender.upCSInteractionMessage(HunYinEnum.HD_DONGFANG);
@@ -225,9 +228,9 @@ package com.rpgGame.appModule.hunyin
 		//更新戒子显示
 		public function updateJieHunJieZi():void
 		{
-			//			var info:Q_advance_wedding=JieHunJieZiData.getModByLv(Mgr.hunyinMgr.JieZiLv);		
-			//			var itemInfo:ClientItemInfo=new ClientItemInfo(info.q_mod_id);
-			//			FaceUtil.SetItemGrid(_itemFace,itemInfo);
+			var info:Q_advance_wedding=JieHunJieZiData.getModByLv(Mgr.hunyinMgr.JieZiLv);		
+			var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(info.q_mod_id);
+			FaceUtil.SetItemGrid(_itemFace,itemInfo);
 			_skin.numJie.label=Mgr.hunyinMgr.JieZiLv.toString();
 		}
 		
@@ -263,7 +266,7 @@ package com.rpgGame.appModule.hunyin
 		{
 			if(!Mgr.hunyinMgr.isCanJinJie())
 			{
-				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(22010));
+				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(92001));
 				return;
 			}
 			if(Mgr.hunyinMgr.isCanJinJie()&&Mgr.hunyinMgr.isNeedTuPo())
