@@ -11,6 +11,7 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.utils.FightValueUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
 	import com.rpgGame.coreData.clientConfig.Q_warflag;
@@ -36,6 +37,7 @@ package com.rpgGame.appModule.mount
 			super(_skin);
 			this.dragAble =false;
 			this.model=true;
+			MCUtil.removeSelf(_skin.mc_name);
 			initView();
 		}
 		
@@ -66,7 +68,8 @@ package com.rpgGame.appModule.mount
 		{
 			_zhanqidata = zhanqidata;
 			refeashModle();
-			_skin.mc_name.gotoAndStop(zhanqiLevel);
+			_skin.mc_zhanqiname.gotoAndStop(zhanqiLevel-1);
+			_skin.mc_jieshu.gotoAndStop(zhanqiLevel-1);
 			var rewards:Vector.<ClientItemInfo> = zhanqidata.rewardItems;
 			var length:int = rewards.length;
 			_rewardIconLength = 0;

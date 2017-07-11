@@ -7,6 +7,7 @@ package org.mokylin.skin.app.zuoqi
 	import feathers.controls.UINumber;
 	import org.mokylin.skin.app.zuoqi.button.ButtonLingqu;
 	import org.mokylin.skin.app.zuoqi.mc.UIMovieClipJieshu;
+	import org.mokylin.skin.app.zuoqi.mc.UIMovieClipZhanqiName;
 	import org.mokylin.skin.app.zuoqi.mc.UIMovieClipZuoqiName;
 	import org.mokylin.skin.component.uinumber.UINumberJuese_zhanli;
 	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_lv;
@@ -37,6 +38,8 @@ package org.mokylin.skin.app.zuoqi
 
 		public var mc_name:feathers.controls.UIMovieClip;
 
+		public var mc_zhanqiname:feathers.controls.UIMovieClip;
+
 		public var num_lv:feathers.controls.UINumber;
 
 		public var uiGuangquan:feathers.controls.UIAsset;
@@ -56,7 +59,7 @@ package org.mokylin.skin.app.zuoqi
 			this.currentState = "normal";
 			this.height = 558;
 			this.width = 1048;
-			this.elementsContent = [bg_i(),uiGuangquan_i(),__Zuoqi_JingjieOk_Skin_UIAsset1_i(),mc_name_i(),mc_jieshu_i(),btnOk_i(),ui_zhandouli_i(),userData_i(),num_lv_i(),ico_up_i()];
+			this.elementsContent = [bg_i(),uiGuangquan_i(),__Zuoqi_JingjieOk_Skin_UIAsset1_i(),mc_name_i(),mc_jieshu_i(),mc_zhanqiname_i(),btnOk_i(),ui_zhandouli_i(),userData_i(),num_lv_i(),ico_up_i()];
 			
 			states = {
 			};
@@ -131,6 +134,19 @@ package org.mokylin.skin.app.zuoqi
 			temp.autoPlay = false;
 			temp.styleClass = org.mokylin.skin.app.zuoqi.mc.UIMovieClipZuoqiName;
 			temp.x = 119;
+			temp.y = 382;
+			return temp;
+		}
+
+		private function mc_zhanqiname_i():feathers.controls.UIMovieClip
+		{
+			var temp:feathers.controls.UIMovieClip = new feathers.controls.UIMovieClip();
+			mc_zhanqiname = temp;
+			temp.name = "mc_zhanqiname";
+			temp.height = 165;
+			temp.styleClass = org.mokylin.skin.app.zuoqi.mc.UIMovieClipZhanqiName;
+			temp.width = 39;
+			temp.x = 125;
 			temp.y = 382;
 			return temp;
 		}

@@ -53,8 +53,8 @@ package com.rpgGame.appModule.mount
 			_zhanqiProps=new ZhanQiProps(_skin);
 			_zhanqiUpExpConent=new ZhanQiUpExpConent(_skin);
 			_zhanqiExtraItemList=new Vector.<ZhanQiExtraButton>();
-			_zhanqiExtraItemList.push(new ZhanQiExtraButton(_skin.btn_zizhidan,519));
-			_zhanqiExtraItemList.push(new ZhanQiExtraButton(_skin.btn_chengzhangdan,520));
+			_zhanqiExtraItemList.push(new ZhanQiExtraButton(_skin.btn_zizhidan,519,_skin.lbZhizi));
+			_zhanqiExtraItemList.push(new ZhanQiExtraButton(_skin.btn_chengzhangdan,520,_skin.lbJinjie));
 			_touchState=new TouchToState(_skin.lab_xuyaowupin,labTouchHandler);
 			
 			MCUtil.removeSelf(_skin.num_lv);
@@ -178,7 +178,7 @@ package com.rpgGame.appModule.mount
 		
 		private function addItemHandler(info:ClientItemInfo):void
 		{
-			if(info.cfgId==519||info.cfgId==520)
+			if(info.cfgId==406||info.cfgId==407)
 			{
 				updatedanyaoShow();
 			}
@@ -196,12 +196,12 @@ package com.rpgGame.appModule.mount
 		
 		private function updatedanyaoShow():void
 		{
-			var num:int=BackPackManager.instance.getBagItemsCountById(519);
+			var num:int=BackPackManager.instance.getBagItemsCountById(406);
 			_skin.lbZhizi.text=num.toString();
 			if(num>0) _skin.lbZhizi.color=StaticValue.A_UI_GREEN_TEXT;
 			else _skin.lbZhizi.color=StaticValue.A_UI_RED_TEXT;
 			
-			num=BackPackManager.instance.getBagItemsCountById(520);
+			num=BackPackManager.instance.getBagItemsCountById(407);
 			_skin.lbJinjie.text=num.toString();
 			if(num>0) _skin.lbJinjie.color=StaticValue.A_UI_GREEN_TEXT;
 			else _skin.lbJinjie.color=StaticValue.A_UI_RED_TEXT;
@@ -252,6 +252,7 @@ package com.rpgGame.appModule.mount
 			{
 				eb.refeash(_zhanqiShowData);
 			}
+			_skin.ui_text.visible=_skin.btn_zizhidan.visible;
 		}
 		
 		private function refeashExpHandler(issever:Boolean=false):void
@@ -264,6 +265,7 @@ package com.rpgGame.appModule.mount
 			{
 				eb.refeash(_zhanqiShowData);
 			}		
+			_skin.ui_text.visible=_skin.btn_zizhidan.visible;
 			setRTNState(RTNodeID.FIGHTFLAG_UP,_zhanqiShowData.isSelf&&_zhanqiShowData.canUpLevel());
 			if(issever)
 			{

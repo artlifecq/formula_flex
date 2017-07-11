@@ -87,9 +87,10 @@ package com.rpgGame.appModule.mount
 						_skin.lab_zhufuzhi.color = 0xe1201c;
 					}
 				}
-				const percent:Number = _zhanqiShowData.percent;
-				_skin.progressbar1.value = _skin.progressbar1.maximum*percent;
-//				_skin.progressbar_light.x = _skin.progressbar.x +_skin.progressbar.width*percent-3;
+				//				const percent:Number = _zhanqiShowData.percent;
+				_skin.progressbar1.maximum = zhanqidata.q_blessnum_limit;
+				_skin.progressbar1.value = _zhanqiShowData.exp;//_skin.progressbar1.maximum*percent;
+				//				_skin.progressbar_light.x = _skin.progressbar.x +_skin.progressbar.width*percent-3;
 				_skin.lab_progressbar.text = _zhanqiShowData.exp.toString()+"/"+zhanqidata.q_blessnum_limit.toString();
 				TipTargetManager.show(_skin.expgroup,TargetTipsMaker.makeTips(TipType.BLESS_TIP,_zhanqiShowData));
 			}else{
