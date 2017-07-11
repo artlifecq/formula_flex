@@ -188,6 +188,9 @@ package com.rpgGame.appModule.equip
 			}
 			
 			addExp-=itemInfo.qItem.q_polish_num;
+			if(addExp<0){
+				addExp=0;
+			}
 			updateView();
 		}
 		
@@ -369,6 +372,10 @@ package com.rpgGame.appModule.equip
 				}
 			}
 			
+			if(addExp<0){
+				addExp=0;
+			}
+			
 			useMon=addExp*perMon;
 			if(userMon<useMon||(addExp==0&&result.length!=0)){
 				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(6014));
@@ -522,8 +529,8 @@ package com.rpgGame.appModule.equip
 				_leftSkin.lb_yinzi.text=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT4),0);
 			}
 			
-			_goodsContainerTarget.dataProvider.updateAll();
-			_goodsContainerUse.dataProvider.updateAll();
+//			_goodsContainerTarget.dataProvider.updateAll();
+//			_goodsContainerUse.dataProvider.updateAll();
 		}
 		
 		private function updateAttShow(current:Q_equip_polish,up:Q_equip_polish=null):void

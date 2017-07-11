@@ -362,7 +362,7 @@ package com.rpgGame.app.view.icon
 		 * @param uiasset
 		 * 
 		 */
-		private function onBgImgComplete(uiasset:UIAsset):void
+		protected function onBgImgComplete(uiasset:UIAsset):void
 		{
 			_bgImage.onImageLoaded=null;
 			this.width=_bgImage.width;
