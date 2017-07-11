@@ -530,7 +530,7 @@ package com.rpgGame.appModule.guild.war
 					GuildWarSender.reqGuildWarGiveDailyGift();
 					break;
 				case _skin.btnJone:
-					AppManager.showAppNoHide(AppConstant.GUILD_PANEL,null,EmFunctionID.EM_BANGHUI_INFO);
+					AppManager.showAppNoHide(AppConstant.GUILD_PANEL,null,EmFunctionID.EM_BANGHUI_LIEBIAO);
 					break;
 			}
 		}

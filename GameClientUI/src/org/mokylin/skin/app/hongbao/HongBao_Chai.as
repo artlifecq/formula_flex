@@ -330,6 +330,7 @@ package org.mokylin.skin.app.hongbao
 			temp.height = 51;
 			temp.label = "9999";
 			temp.styleClass = org.mokylin.skin.app.hongbao.number.UINumberHongbaoNum;
+			temp.textAlign = "center";
 			temp.width = 125;
 			temp.x = 17;
 			temp.y = 152;

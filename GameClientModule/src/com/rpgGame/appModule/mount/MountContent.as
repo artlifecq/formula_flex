@@ -15,6 +15,8 @@ package com.rpgGame.appModule.mount
 	import starling.animation.IAnimatable;
 	import starling.core.Starling;
 	
+	import utils.TimerServer;
+	
 	public class MountContent extends Inter3DContainer implements IAnimatable
 	{
 		private var _isSHowNext:Boolean;
@@ -23,7 +25,7 @@ package com.rpgGame.appModule.mount
 		private var _curtentInter3D:InterObject3D;
 		private var _nextInter3D:InterObject3D;
 		private var _amationInfos:Vector.<TargetAmationInfo>;
-		private static const TotalTime:Number = 0.3;
+		private static const TotalTime:Number = 0.6;
 		private static var _passTime:Number = 0;
 		private var _list:Vector.<RenderUnit3D>;
 		public function MountContent(skin:ZuoqiCont_Skin):void
@@ -57,8 +59,21 @@ package com.rpgGame.appModule.mount
 			_skin.btn_next.visible = _curShowHorse<Math.min(HorseConfigData.maxCount,HorseManager.instance().houseLevel);
 			_skin.mc_name.gotoAndStop(_curShowHorse-1);
 			_skin.mc_jieshu.gotoAndStop(_curShowHorse-1);
+			
 		}
 		
+		public function show():void
+		{
+			if(!TimerServer.has(updateTime))
+				TimerServer.addLoop(updateTime,10000);
+			updateTime();
+		}
+		
+		public function hide():void
+		{
+			if(TimerServer.has(updateTime))
+				TimerServer.remove(updateTime);
+		}
 		public function addMode(current:Q_horse,next:Q_horse):void
 		{
 			if(_curtentInter3D!=null)
@@ -78,8 +93,8 @@ package com.rpgGame.appModule.mount
 			var data : RenderParamData3D = new RenderParamData3D(0, "mount1",ClientConfig.getAvatar(current.q_skinResID));
 			data.animatorSourchPath = ClientConfig.getAvatar( current.q_animatResID);
 			data.forceLoad=true;//ui上的3d特效强制加载
-			var unit : RenderUnit3D = _curtentInter3D.addRenderUnitWith(data, 0);
-			_curtentInter3D.x = 340;
+			var unit : RenderUnit3D = addRenderUnitWith(data,_curtentInter3D);
+			_curtentInter3D.x = 400;
 			_curtentInter3D.y = 440;
 			_curtentInter3D.rotationY = 60;
 			unit.setScale(1.8);
@@ -90,7 +105,7 @@ package com.rpgGame.appModule.mount
 			var anation:TargetAmationInfo = new TargetAmationInfo();
 			anation.target = _curtentInter3D;
 			anation.propName = "x";
-			anation.setValue(340,120);
+			anation.setValue(400,120);
 			_amationInfos.push(anation);
 			
 			anation = new TargetAmationInfo();
@@ -102,7 +117,7 @@ package com.rpgGame.appModule.mount
 			anation = new TargetAmationInfo();
 			anation.target = unit;
 			anation.propName = "scale";
-			anation.setValue(1.8,0.4);
+			anation.setValue(1.8,0);
 			_amationInfos.push(anation);
 			
 			if(next ==null)
@@ -111,7 +126,7 @@ package com.rpgGame.appModule.mount
 			data = new RenderParamData3D(0, "mount2",ClientConfig.getAvatar(next.q_skinResID));
 			data.animatorSourchPath = ClientConfig.getAvatar( next.q_animatResID);;
 			data.forceLoad=true;//ui上的3d特效强制加载
-			unit = _nextInter3D.addRenderUnitWith(data, 0);
+			unit = addRenderUnitWith(data,_nextInter3D);
 			unit.setScale(0.1);
 			_list.push(unit);
 			_nextInter3D.x = 590;
@@ -123,7 +138,7 @@ package com.rpgGame.appModule.mount
 			anation = new TargetAmationInfo();
 			anation.target = _nextInter3D;
 			anation.propName = "x";
-			anation.setValue(590,340);
+			anation.setValue(590,400);
 			_amationInfos.push(anation);
 			
 			anation = new TargetAmationInfo();
@@ -142,9 +157,31 @@ package com.rpgGame.appModule.mount
 				info.advanceTime(0);
 			}
 			completeHandler();
-			showModeSate(RoleActionType.IDLE);
+			
 		}
 		
+		private function addRenderUnitWith(rend : RenderParamData3D,src3d:InterObject3D):RenderUnit3D
+		{
+			var unit : RenderUnit3D;
+			unit = RenderUnit3D.create(rend);
+			unit.repeat = 1;
+			unit.setPlayCompleteCallBack(onPlayComplete, src3d);
+			unit.setAddedCallBack(addComplete);
+			src3d.setRenderUnit(unit);
+			return unit;
+		}
+		private function addComplete(unit : RenderUnit3D):void
+		{
+			showModeSate(RoleActionType.SHOW_IDLE);
+		}
+		private function updateTime():void
+		{
+			showModeSate(RoleActionType.SHOW_IDLE);
+		}
+		private function onPlayComplete(iter3d:InterObject3D,unit : RenderUnit3D ):void
+		{
+			showModeSate(RoleActionType.STAND);
+		}
 		private var needChangeFun:Function;
 		private var completeFun:Function;
 		private function changeHandler(parcent:Number):Number
@@ -177,7 +214,6 @@ package com.rpgGame.appModule.mount
 			}else{
 				_passTime = 0;
 				Starling.juggler.add(this);
-				showModeSate(RoleActionType.RUN);
 			}
 		}
 		
@@ -185,7 +221,10 @@ package com.rpgGame.appModule.mount
 		{
 			for each(var unit:RenderUnit3D in _list)
 			{
-				unit.setStatus(state);
+				if(unit.scaleX==0)
+					unit.setStatus(RoleActionType.STAND);
+				else
+					unit.setStatus(state);
 			}
 		}
 		public function advanceTime(time:Number):void
@@ -195,7 +234,7 @@ package com.rpgGame.appModule.mount
 			{
 				_passTime =TotalTime;
 				Starling.juggler.remove(this);
-				showModeSate(RoleActionType.IDLE);
+//				showModeSate(RoleActionType.IDLE);
 				if(completeFun!=null)
 					completeFun();
 			}

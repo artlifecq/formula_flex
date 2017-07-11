@@ -76,13 +76,13 @@ package com.rpgGame.app.ui.alert
 					switch(_data.sys)
 					{
 						case SYS_HORSE:
-							FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ZUOQI);
+							FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ZUOQI,null,false);
 							break;
 						case SYS_SKILL:
-							FunctionOpenManager.openAppPaneById(EmFunctionID.EM_JINENG);
+							FunctionOpenManager.openAppPaneById(EmFunctionID.EM_JINENG,null,false);
 							break;
 						case SYS_ZHANHUN:
-							FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ZHANHUN);
+							FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ZHANHUN,null,false);
 							break;
 					}
 				}

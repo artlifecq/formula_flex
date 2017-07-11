@@ -510,7 +510,7 @@ package com.rpgGame.app.ui.scene
 			var item:Q_item=ItemConfig.getQItemByID(tiemId);
 			if(item!=null&&icon!=null)
 			{
-				icon.setIconResName(ClientConfig.getItemIcon(item.q_icon.toString(),IcoSizeEnum.ICON_48));
+				icon.setIconResName(ClientConfig.getItemIcon(item.q_icon.toString(),IcoSizeEnum.ICON_42));
 				icon.visible=true;
 				if(bg)
 				{

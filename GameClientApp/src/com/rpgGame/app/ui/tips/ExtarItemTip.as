@@ -99,7 +99,7 @@ package com.rpgGame.app.ui.tips
 			_skin.grp_type.visible = true; 
 			var currentatt:Q_att_values = AttValueConfig.getAttInfoById(_show.exartPropId);
 			_skin.lbGongJi.text = "+"+currentatt.q_value1;
-			_skin.lbFangYu.text = "+"+currentatt.q_value2;
+			_skin.lbFangYu.text = "+"+(currentatt.q_value2/10);
 			_skin.lbShengMing.text = "+"+currentatt.q_value3;
 			
 			_skin.ui_xian3.y=259;	

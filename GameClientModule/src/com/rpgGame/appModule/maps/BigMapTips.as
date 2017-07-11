@@ -58,13 +58,13 @@ package com.rpgGame.appModule.maps
 		{
 			this.x=x;
 			this.y=y;
-			if((x+_temp.x+_temp.width)>_maxWidth)//使tips不用超出地图区域
+			if((x+_temp.x+_skin.bg.width)>_maxWidth)//使tips不用超出地图区域
 			{
-				this.x=x-_temp.x-_temp.width;
+				this.x=x-_temp.x-_skin.bg.width;
 			}
-			if((y+_temp.y+_temp.height)>_maxHight)
+			if((y+_temp.y+_skin.bg.height)>_maxHight)
 			{
-				this.y=y-_temp.y-_temp.height;
+				this.y=y-_temp.y-_skin.bg.height;
 			}
 			/*if((x+_temp.x+_temp.width)>_maxWidth||(y+_temp.y+_temp.height)>_maxHight)
 			{
@@ -83,9 +83,13 @@ package com.rpgGame.appModule.maps
 		{
 			var text:String=tx+","+ty;
 			var tleng:int=text.length;
-			_temp.width=22+tleng*7.6;
-			_skin.lbl_miaoshu.maxWidth=_skin.lbl_miaoshu.width=tleng*7.6;
-			_skin.lbl_miaoshu.text=text;			
+			//_temp.width=22+tleng*7.6;
+			//_skin.lbl_miaoshu.maxWidth=_skin.lbl_miaoshu.width=tleng*7.6;
+			_skin.lbl_miaoshu.width=300;
+			_skin.lbl_miaoshu.text=text;
+			_skin.lbl_miaoshu.width=_skin.lbl_miaoshu.textWidth;
+			_skin.bg.width=_skin.lbl_miaoshu.width+20;
+		
 		}		
 	}
 }

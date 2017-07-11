@@ -46,6 +46,7 @@ package com.rpgGame.appModule.open
 		{
 			_skin = new KaiQi_Skin();
 			super(_skin);
+			this._blackType = 0;
 			this.model = true;
 			_idlist = new Vector.<Q_newfunc>();
 		}
