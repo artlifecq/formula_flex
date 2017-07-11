@@ -45,7 +45,7 @@ package com.rpgGame.appModule.activety
 			if(target==_skin.btn_ok){
 				switch(actInfo.actCfg.q_activity_id)
 				{
-					case 1:
+					/*case 1:
 					{
 						Mgr.d1v1Mgr.autoJoin();
 						break;
@@ -54,7 +54,7 @@ package com.rpgGame.appModule.activety
 					{
 						Mgr.nineTowerMgr.autoJoin();
 						break;
-					}	
+					}	*/
 					default:
 					{
 						if(actInfo.actCfg.q_notice_trans){
