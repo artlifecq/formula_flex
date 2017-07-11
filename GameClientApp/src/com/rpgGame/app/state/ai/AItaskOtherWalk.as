@@ -55,7 +55,7 @@ package com.rpgGame.app.state.ai
 				else if(missionType==TaskType.SUB_MONSTER||missionType==TaskType.SUB_ITEM)
 				{
 					var post:Array=TaskMissionManager.getPathingByType(taskType,TaskAutoManager.getInstance().taskTarget);
-					TaskUtil.postTaskWalk(post,subMonster);
+					TaskUtil.postTaskWalk(post,subMonster,null,missionType==TaskType.SUB_MONSTER);
 				}
 				else if(missionType==TaskType.SUB_GATHER)
 				{

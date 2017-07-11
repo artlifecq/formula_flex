@@ -140,7 +140,7 @@ package com.rpgGame.app.ui.main.taskbar
 						}
 						else
 						{
-							TaskUtil.postTaskWalk(post,startFight);
+							TaskUtil.postTaskWalk(post,startFight,null,true);
 						}
 					}
 					else

@@ -181,6 +181,9 @@ package com.rpgGame.app.fight.spell
 				//三连击的话直接发送请求
 				if (MainRoleManager.actor.stateMachine.isTripleLockCaseSpell) 
 				{
+					caseInfo.targetServerID=null;//改成空放
+					caseInfo.releasePos.x=MainRoleManager.actor.x;
+					caseInfo.releasePos.y=MainRoleManager.actor.z;
 					requestReleaseSpell();
 					return true;
 				}
@@ -188,7 +191,7 @@ package com.rpgGame.app.fight.spell
 				{
 					if (caseInfo.targetID > 0)
 						targerRole = SceneManager.getSceneObjByID(caseInfo.targetID) as SceneRole;
-					RoleStateUtil.walk(MainRoleManager.actor, caseInfo.targetPos.x, caseInfo.targetPos.y, 0, caseInfo, onWalkArriveRelease, onWalkThroughCase);
+					RoleStateUtil.walk(MainRoleManager.actor, caseInfo.targetPos.x, caseInfo.targetPos.y, 0, caseInfo, onWalkArriveRelease, onWalkThroughCase,null,true);
 				}
 			}
 
@@ -256,7 +259,7 @@ package com.rpgGame.app.fight.spell
 					{
 						if (caseInfo.targetPos)
 						{
-							RoleStateUtil.walk(MainRoleManager.actor, caseInfo.targetPos.x, caseInfo.targetPos.y, 0, caseInfo, onWalkArriveRelease, onWalkThroughCase);
+							RoleStateUtil.walk(MainRoleManager.actor, caseInfo.targetPos.x, caseInfo.targetPos.y, 0, caseInfo, onWalkArriveRelease, onWalkThroughCase,null,true);
 						}
 					}
 				}

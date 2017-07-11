@@ -296,6 +296,9 @@ package com.rpgGame.app.scene
 					case 74://vip
 						_role.stateMachine.removeState(RoleStateType.CONTROL_VIP);
 						break;
+					case 121://冲刺
+						_role.stateMachine.removeState(RoleStateType.CONTROL_BUFF_SPRITEUP);
+						break;
 					default:
 						/*buffRef = _role.stateMachine.getReference(UnmovableStateReference) as UnmovableStateReference;
 						buffRef.setParams(buffData);
@@ -462,6 +465,9 @@ package com.rpgGame.app.scene
 						buffRef = _role.stateMachine.getReference(VipBuffStateReference) as VipBuffStateReference;
 						buffRef.setParams(buffData);
 						_role.stateMachine.transition(RoleStateType.CONTROL_VIP,buffRef);
+						break;
+					case 121://冲刺
+						_role.stateMachine.transition(RoleStateType.CONTROL_BUFF_SPRITEUP);
 						break;
 					default:
 						/*buffRef = _role.stateMachine.getReference(UnmovableStateReference) as UnmovableStateReference;

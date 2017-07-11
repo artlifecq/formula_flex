@@ -105,7 +105,15 @@ package com.rpgGame.app.cmdlistener.scene
 		private function onResFightFailedBroadcastMessage(msg:ResFightFailedBroadcastMessage):void
 		{
 			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
-			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_TRIPLE_ATTACK_LOCK);
+			if (MainRoleManager.actor.stateMachine.isTripleLockCaseSpell) 
+			{
+				MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_TRIPLE_ATTACK_LOCK);
+				if (MainRoleManager.actor.stateMachine.isPrewarWaiting)
+					MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_PREWAR);
+				else
+					MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE);
+			}
+			
 			var failID : int = msg.failType;
 			var failReason : String;
 			failReason=NotifyCfgData.getNotifyTextByID(failID);//yt修改，读取新的消息表格式
