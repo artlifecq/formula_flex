@@ -26,6 +26,7 @@ package com.rpgGame.appModule.mount
 	import org.mokylin.skin.app.zuoqi.ZuoqiCont_Skin;
 	
 	import starling.display.DisplayObject;
+	import starling.display.DisplayObjectContainer;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -59,6 +60,7 @@ package com.rpgGame.appModule.mount
 			_mountShowData.heroJob = MainRoleManager.actorInfo.job;
 			_mountShowData.horsedataInfo =  HorseManager.instance().horsedataInfo;
 			_mountContent.refeashMode(_mountShowData.mountLevel);
+			_mountContent.show();
 			refeashPropHandler();
 			/*_propContent.refeashPropShow(false);
 			_mountupContent.updataInfo(_mountShowData);*/
@@ -84,6 +86,7 @@ package com.rpgGame.appModule.mount
 						}
 						_mountupContent.isAutoing = false;
 					}
+//					showUplevel();
 					break;
 				case "btn_zidong":
 					onMouseOut();
@@ -154,25 +157,30 @@ package com.rpgGame.appModule.mount
 		{
 			_spellIconList = new Vector.<IconCDFace>();
 			var spellList:Vector.<BaseFaceInfo> = HorseManager.instance().spellList; 
-			var icon:IconCDFace = FaceUtil.creatIconCDFaceByUIAsset(_skin.kuang_1,IcoSizeEnum.ICON_48);
+			var partner:DisplayObjectContainer = _skin.kuang_1.parent;
+			var icon:IconCDFace = IconCDFace.create(IcoSizeEnum.ICON_42);
+			icon.bindBg(_skin.kuang_1);
 			FaceUtil.SetSkillGrid(icon, spellList[0], true);
-			icon.setIconPoint(6,6);
+			partner.addChild(icon);
 			_spellIconList.push(icon);
-			icon = FaceUtil.creatIconCDFaceByUIAsset(_skin.kuang_2,IcoSizeEnum.ICON_48);
+			icon = IconCDFace.create(IcoSizeEnum.ICON_42);
+			icon.bindBg(_skin.kuang_2);
 			FaceUtil.SetSkillGrid(icon, spellList[1], true);
-			icon.setIconPoint(6,6);
+			partner.addChild(icon);
 			_spellIconList.push(icon);
-			icon = FaceUtil.creatIconCDFaceByUIAsset(_skin.kuang_3,IcoSizeEnum.ICON_48);
+			
+			icon = IconCDFace.create(IcoSizeEnum.ICON_42);
+			icon.bindBg(_skin.kuang_3);
 			FaceUtil.SetSkillGrid(icon, spellList[2], true);
-			icon.setIconPoint(6,6);
+			partner.addChild(icon);
 			_spellIconList.push(icon);
 			
 			_mountContent = new MountContent(_skin);
 			_propContent = new MountProps(_skin);
 			_mountupContent = new MountUpExpConent(_skin);
 			_extraItemList = new Vector.<ExtraButton>();
-			_extraItemList.push(new ExtraButton(_skin.btn_zizhidan,506));
-			_extraItemList.push(new ExtraButton(_skin.btn_chengzhangdan,507));
+			_extraItemList.push(new ExtraButton(_skin.btn_zizhidan,_skin.lbZhizi,506));
+			_extraItemList.push(new ExtraButton(_skin.btn_chengzhangdan,_skin.lbJinjie,507));
 			_touchState = new TouchToState(_skin.lab_xuyaowupin,labTouchHandler);
 			
 			addNode(RTNodeID.HORSE,RTNodeID.HORSE_UP,_skin.btn_kaishi,110,null);
@@ -205,18 +213,22 @@ package com.rpgGame.appModule.mount
 		{
 			if(info.cfgId!= _mountShowData.upLevelItem.cfgId)
 				return ;
-			refeashExpHandler();
+			refeashExpHandler(false);
 		}
-		private function refeashExpHandler():void
+		private function refeashExpHandler(needeat:Boolean= true):void
 		{
 			_mountupContent.updataInfo(_mountShowData);
 			_propContent.refeashPropValue();
 			_mountContent.refeashMode(_mountShowData.mountLevel);
+			var bool:Boolean = false;
 			for each(var eb:ExtraButton in _extraItemList)
 			{
 				eb.refeash(_mountShowData);
+				if(eb.canShow)
+					bool = true;
 			}
-			if(_mountShowData.isAutoing)
+			_skin.lberror.visible = bool;
+			if(_mountShowData.isAutoing&&needeat)
 			{
 				_mountupContent.isAutoing =HorseManager.instance().eatItemHorse(_mountShowData)
 			}
@@ -237,6 +249,7 @@ package com.rpgGame.appModule.mount
 			EventManager.removeEvent(ItemEvent.ITEM_ADD,addItemHandler);
 			EventManager.addEvent(ItemEvent.ITEM_REMOVE,addItemHandler);
 			EventManager.addEvent(ItemEvent.ITEM_CHANG,addItemHandler);
+			_mountContent.hide();
 		}
 		private function refeashPropHandler():void
 		{
@@ -282,15 +295,9 @@ package com.rpgGame.appModule.mount
 		
 		override public function hide():void
 		{
-			//			if(_shopPane!=null)
-			//			{
-			//				_shopPane.removeEventListener(Event.REMOVED,panleremoveFormSatgeHander);
-			//				if(_shopPane.parent!=null)
-			//					_shopPane.parent.removeChild(_shopPane,true);
-			//				_shopPane = null;
-			//			}
 			ItemGetAdvisePanelExt.hidePanel();
 			removeEvent();
+			
 			super.hide();
 		}
 	}

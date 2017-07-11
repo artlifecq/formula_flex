@@ -62,7 +62,7 @@ package com.rpgGame.app.ui
 		private function drawBlack():void
 		{
 			_blackShape = new Shape();
-			_blackShape.graphics.beginFill( 0x000000, 0.5 );
+			_blackShape.graphics.beginFill( 0x000000, 1 );
 			_blackShape.graphics.drawRect( 0, 0, 10, 10 );
 			_blackShape.graphics.endFill();
 			addChildAt( _blackShape , 0 );
@@ -82,7 +82,7 @@ package com.rpgGame.app.ui
 			this.addChild(_bottonPng);
 		}
 		
-		public function switchModel(panel:SkinUIPanel,isadd:Boolean):void
+		public function switchModel(panel:SkinUIPanel,isadd:Boolean,type:int):void
 		{
 			var index:int = showModelArray.indexOf(panel);
 			if(!isadd)
@@ -102,6 +102,17 @@ package com.rpgGame.app.ui
 					showModelArray.push(panel);
 					changeHandler();
 				}
+			}
+			
+			if(type==1)
+			{
+				_blackShape.alpha = 0.8;
+				_topPng.visible = false;
+				_bottonPng.visible = false;
+			}else{
+				_blackShape.alpha = 0.5;
+				_topPng.visible = true;
+				_bottonPng.visible = true;
 			}
 		}
 		

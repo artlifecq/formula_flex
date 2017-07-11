@@ -49,7 +49,13 @@ package com.rpgGame.app.ui
 		{
 			_escAble = value;
 		}
-
+		
+		protected var _blackType:int = 1;
+		
+		public function set blackType(value:int):void
+		{
+			_blackType = 1;
+		}
 		/**
 		 *模态,设置为true时 esc快捷关闭键以及面板拖动功能将自动失效
 		 */
@@ -62,7 +68,7 @@ package com.rpgGame.app.ui
 				escExcuteAble = dragAble = false;
 			}
 			_model = value;
-			UIModel.instence.switchModel(this,value);
+			UIModel.instence.switchModel(this,value,_blackType);
 		}
 
 		/**
