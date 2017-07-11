@@ -132,8 +132,8 @@ package com.rpgGame.appModule.equip
 			_skin.container.addChild(_targetEquip);
 			_skin.container.addChild(_useItem);
 			_skin.container.addChild(_skin.lb_num);
-			_useItem.x=739;
-			_useItem.y=148;
+			_useItem.x=740;
+			_useItem.y=147;
 			_skin.lb_cailiao.text=LanguageConfig.getText(LangUI.UI_TEXT26);
 			
 			useItemInfo=new ClientItemInfo();

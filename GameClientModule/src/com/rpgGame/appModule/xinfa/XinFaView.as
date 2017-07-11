@@ -94,9 +94,8 @@ package com.rpgGame.appModule.xinfa
 			}
 			_effectCheatsGridArr=[new CheatsIcon(_skin.grid_1),new CheatsIcon(_skin.grid_2),new CheatsIcon(_skin.grid_3)];
 			_skillIcon=new BgIcon(IcoSizeEnum.ICON_36);
-			_skin.grid_item_1.addChild(_skillIcon);
-			_skillIcon.x=0;
-			_skillIcon.y=0;
+			_skillIcon.bindBg(_skin.grid_item_1);
+			_skin.container.addChild(_skillIcon);
 			initData();
 			MCUtil.removeSelf(_skin.lab_shuxing);
 			MCUtil.removeSelf(_skin.lab_jiangli);
