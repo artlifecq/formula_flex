@@ -179,8 +179,8 @@ package com.rpgGame.appModule.mount
 			_propContent = new MountProps(_skin);
 			_mountupContent = new MountUpExpConent(_skin);
 			_extraItemList = new Vector.<ExtraButton>();
-			_extraItemList.push(new ExtraButton(_skin.btn_zizhidan,_skin.lbZhizi,506));
-			_extraItemList.push(new ExtraButton(_skin.btn_chengzhangdan,_skin.lbJinjie,507));
+			_extraItemList.push(new ExtraButton(_skin.btn_zizhidan,_skin.lbZhizi,507));
+			_extraItemList.push(new ExtraButton(_skin.btn_chengzhangdan,_skin.lbJinjie,506));
 			_touchState = new TouchToState(_skin.lab_xuyaowupin,labTouchHandler);
 			
 			addNode(RTNodeID.HORSE,RTNodeID.HORSE_UP,_skin.btn_kaishi,110,null);
