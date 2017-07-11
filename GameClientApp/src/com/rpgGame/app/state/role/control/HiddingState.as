@@ -33,6 +33,10 @@ package com.rpgGame.app.state.role.control
 //					{
 						var role : SceneRole = _machine.owner as SceneRole;
 						role.forEachRenderUnit(eachUnVisible);
+						if (role.headFace) 
+						{
+							role.headFace.headVisible=false;
+						}
 //					}
 //					else
 //						throw new Error("场景隐身状态引用必须是HiddingStateReference类型！");
@@ -64,9 +68,11 @@ package com.rpgGame.app.state.role.control
 					{
 						render.compositeMesh.layerType = layerType;
 					}*/
+					render.isHiding=false;
 					render.visible = true;
 					break;
 				default:
+					render.isHiding=false;
 					render.visible = true;
 					break;
 			}
@@ -104,6 +110,7 @@ package com.rpgGame.app.state.role.control
 						return;
 					}
 					render.visible = false;
+					render.isHiding=true;
 					break;
 			}
 		}
@@ -115,6 +122,10 @@ package com.rpgGame.app.state.role.control
 			{
 				var role : SceneRole = _machine.owner as SceneRole;
 				role.forEachRenderUnit(eachVisible);
+				if (role.headFace) 
+				{
+					role.headFace.headVisible=true;
+				}
 			}
 		}
 	}
