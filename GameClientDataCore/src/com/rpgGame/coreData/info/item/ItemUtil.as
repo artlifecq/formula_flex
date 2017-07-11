@@ -2,7 +2,6 @@ package com.rpgGame.coreData.info.item
 {
 	import com.game.mainCore.core.utils.TextFormatUtil;
 	import com.rpgGame.coreData.cfg.item.ContainerData;
-	import com.rpgGame.coreData.cfg.item.EquipStrengthCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.enum.JobEnum;
@@ -42,6 +41,24 @@ package com.rpgGame.coreData.info.item
 			clientInfo.itemInfo=itemInfo;
 			clientInfo.setIndex(itemInfo.gridId);//格子索引
 			clientInfo.count=itemInfo.num;
+			return clientInfo;
+		}
+		
+		/**
+		 * 通过MODID生成INFO
+		 * */
+		public static function convertClientItemInfoById(id:int,num:int=1,isbind:int=0):ClientItemInfo
+		{
+			var qItem:Q_item=ItemConfig.getQItemByID(id);
+			var clientInfo : ClientItemInfo;
+			if(qItem.q_type==GoodsType.EQUIPMENT||qItem.q_type==GoodsType.EQUIPMENT1||qItem.q_type==GoodsType.EQUIPMENT2){//装备
+				clientInfo=new EquipInfo(id);
+			}else{
+				clientInfo=new ClientItemInfo(id);
+			}
+			clientInfo.count=num;
+			clientInfo.itemInfo=new ItemInfo();
+			clientInfo.itemInfo.isbind=isbind;
 			return clientInfo;
 		}
 		
@@ -277,7 +294,7 @@ package com.rpgGame.coreData.info.item
 				case JobEnum.ROLE_4_TYPE:
 					return JobEnum.ROLE_3_NAME;
 			}
-			return "不存在的职业"
+			return "通用";
 		}
 		
 		public static function getLevele(num:int):String

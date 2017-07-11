@@ -9,6 +9,7 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.type.item.GridBGType;
 	
 	import org.mokylin.skin.app.activety.jixiantiaozhan.TiaoZhanPaiHang_Item;
@@ -45,8 +46,7 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 				for(var i:int=0;i<info.reWard.length;i++)
 				{
 					var item:DragDropItem=_render.getGrid();
-					var clientItemInfo:ClientItemInfo=new ClientItemInfo(info.reWard[i].mod);	
-					clientItemInfo.count=info.reWard[i].num;
+					var clientItemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(info.reWard[i].mod,info.reWard[i].num);
 					item.gridInfo = new GridInfo(0,i);
 					item.x = initX;
 					item.y = initY;
@@ -59,8 +59,7 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 			else
 			{
 				item=_render.getGrid();
-				clientItemInfo=new ClientItemInfo(info.reWard.mod);	
-				clientItemInfo.count=info.reWard.num;
+				clientItemInfo=ItemUtil.convertClientItemInfoById(info.reWard.mod,info.reWard.num);
 				item.gridInfo = new GridInfo(0,0);
 				item.x = initX;
 				item.y = initY;

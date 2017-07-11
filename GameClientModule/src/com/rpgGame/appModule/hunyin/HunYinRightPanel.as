@@ -2,16 +2,12 @@ package com.rpgGame.appModule.hunyin
 {
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.Mgr;
-	import com.rpgGame.app.utils.FaceUtil;
-	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.ui.AwdProgressBar;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.hunyin.JieHunJieZiData;
 	import com.rpgGame.coreData.clientConfig.Q_advance_wedding;
 	import com.rpgGame.coreData.clientConfig.Q_att_values;
-	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
-	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	
 	import gs.TimelineLite;
 	import gs.TweenLite;

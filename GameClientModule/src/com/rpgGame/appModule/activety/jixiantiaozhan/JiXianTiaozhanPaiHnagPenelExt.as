@@ -10,6 +10,7 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 	import com.rpgGame.coreData.clientConfig.Q_limitchallenge;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
 	
 	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.controls.Scroller;
@@ -102,7 +103,7 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 			{
 				if(i<rewards.length)
 				{
-					var itemInfo:ClientItemInfo=new ClientItemInfo(rewards[i].mod);
+					var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(rewards[i].mod,1);
 					FaceUtil.SetItemGrid(_icoface[i],itemInfo);
 					_icoface[i].visible=true;
 					_icoList[i].visible=true;

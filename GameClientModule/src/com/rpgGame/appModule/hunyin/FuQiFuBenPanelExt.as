@@ -12,6 +12,7 @@ package com.rpgGame.appModule.hunyin
 	import com.rpgGame.coreData.clientConfig.Q_zone_multy;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
 	
 	import feathers.controls.UIAsset;
 	
@@ -70,8 +71,7 @@ package com.rpgGame.appModule.hunyin
 			{
 				if(i<prize.length)
 				{
-					var itemInfo:ClientItemInfo=new ClientItemInfo(prize[i].mod);
-					itemInfo.count=prize[i].num;
+					var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(prize[i].mod,prize[i].num);
 					FaceUtil.SetItemGrid(_items[i],itemInfo);
 				}
 				else
