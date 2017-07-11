@@ -217,7 +217,7 @@ package com.rpgGame.coreData.cfg.item
 		 */
 		public static function isAddHpItem(cfgId:int):Boolean
 		{
-			if (getItemType(cfgId) == GoodsType.MEDICINE && getItemLocation(cfgId) == NormalEfficacy.BUFF)
+			if (getItemType(cfgId) == GoodsType.MEDICINE && getItemLocation(cfgId) == 1)
 			{
 				return true;
 			}

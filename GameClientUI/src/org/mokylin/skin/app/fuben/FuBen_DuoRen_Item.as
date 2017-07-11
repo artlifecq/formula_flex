@@ -176,8 +176,7 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			pass_ico = temp;
 			temp.name = "pass_ico";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/48.png";
-			temp.x = 2;
+			temp.styleName = "ui/common/grid/normal/48.png";
 			return temp;
 		}
 
@@ -186,7 +185,7 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			prob_ioc_0 = temp;
 			temp.name = "prob_ioc_0";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/36.png";
+			temp.styleName = "ui/common/grid/normal/36.png";
 			temp.x = 101;
 			temp.y = 0;
 			return temp;
@@ -197,7 +196,7 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			prob_ioc_1 = temp;
 			temp.name = "prob_ioc_1";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/36.png";
+			temp.styleName = "ui/common/grid/normal/36.png";
 			temp.x = 154;
 			temp.y = 0;
 			return temp;
@@ -208,7 +207,7 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			prob_ioc_2 = temp;
 			temp.name = "prob_ioc_2";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/36.png";
+			temp.styleName = "ui/common/grid/normal/36.png";
 			temp.x = 207;
 			temp.y = 0;
 			return temp;
@@ -219,7 +218,7 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			prob_ioc_3 = temp;
 			temp.name = "prob_ioc_3";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/36.png";
+			temp.styleName = "ui/common/grid/normal/36.png";
 			temp.x = 260;
 			temp.y = 0;
 			return temp;
@@ -230,7 +229,7 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			prob_ioc_4 = temp;
 			temp.name = "prob_ioc_4";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/36.png";
+			temp.styleName = "ui/common/grid/normal/36.png";
 			temp.x = 312;
 			temp.y = 0;
 			return temp;
@@ -241,7 +240,7 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			prob_ioc_5 = temp;
 			temp.name = "prob_ioc_5";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/36.png";
+			temp.styleName = "ui/common/grid/normal/36.png";
 			temp.x = 365;
 			temp.y = 0;
 			return temp;
@@ -252,7 +251,7 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			prob_ioc_6 = temp;
 			temp.name = "prob_ioc_6";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/36.png";
+			temp.styleName = "ui/common/grid/normal/36.png";
 			temp.x = 418;
 			temp.y = 0;
 			return temp;
@@ -263,7 +262,7 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			prob_ioc_7 = temp;
 			temp.name = "prob_ioc_7";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/36.png";
+			temp.styleName = "ui/common/grid/normal/36.png";
 			temp.x = 471;
 			temp.y = 0;
 			return temp;
