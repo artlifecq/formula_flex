@@ -264,7 +264,6 @@ package com.rpgGame.app.ui.main.head {
 			var icon:BuffIcon=new BuffIcon(IcoSizeEnum.ICON_24);
 			icon.buffData=data;
 			icon.setUrlBg("ui/mainui/shortcut/buffkuang.png");
-			
 			_buffList.push(icon);
 			_buffContainer.addChild(icon);		
 			updatePoint();
