@@ -2035,6 +2035,11 @@ package com.game.engine3D.scene.render
 		
 		override public function set visible(value : Boolean) : void
 		{
+			//隐藏状态yfl
+			if (isHiding&&value==true) 
+			{
+				return;
+			}
 			if (_visible != value)
 			{
 				super.visible = value;
@@ -3933,6 +3938,7 @@ package com.game.engine3D.scene.render
 			_layerTypeByName = null;
 			_visibleByName = null;
 			useFog = false;
+			
 			if (_addedCallBackList)
 			{
 				_addedCallBackList.length = 0;
