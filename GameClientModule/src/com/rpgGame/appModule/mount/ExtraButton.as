@@ -35,7 +35,9 @@ package com.rpgGame.appModule.mount
 			_canShow = _horseExtraItem.getMaxByLevel(_mountShowData.mountLevel)>0
 			_button.visible = _canShow;
 			_lable.visible = _canShow;
-			_lable.text = _horseExtraItem.bagHaveCount().toString();
+			var haveCount:int = _horseExtraItem.bagHaveCount();
+			_lable.text = haveCount.toString();
+			_lable.color = haveCount>0?0xffffff:0xff0d0d;
 			TipTargetManager.remove(_button);
 			TipTargetManager.show(_button,TargetTipsMaker.makeTips(TipType.EXTARITEM_TIP,[_mountShowData,_type],false,new Point(_button.x,_button.y)));
 		}

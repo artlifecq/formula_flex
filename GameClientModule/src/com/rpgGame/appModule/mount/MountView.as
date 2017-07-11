@@ -211,8 +211,8 @@ package com.rpgGame.appModule.mount
 		
 		private function addItemHandler(info:ClientItemInfo):void
 		{
-			if(info.cfgId!= _mountShowData.upLevelItem.cfgId)
-				return ;
+			/*if(info.cfgId!= _mountShowData.upLevelItem.cfgId)
+				return ;*/
 			refeashExpHandler(false);
 		}
 		private function refeashExpHandler(needeat:Boolean= true):void
