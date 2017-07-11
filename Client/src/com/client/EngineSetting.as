@@ -9,6 +9,7 @@ package com.client
 	import away3d.debug.AwayStats;
 	import away3d.enum.LoadPriorityType;
 	import away3d.loaders.multi.MultiUrlLoadManager;
+	import away3d.utils.SoundUtil;
 	
 	import feathers.themes.GuiTheme;
 
@@ -29,6 +30,7 @@ package com.client
 		{
 			GlobalConfig.radiusForEntity = 32;
 			GlobalConfig.use2DMap = true;
+			ClientConfig.isMapUseAtf = true;
 //			GlobalConfig.MAP_2D_CAMERA_ANGLE = 45;
 			GlobalConfig.mapCameraAngle = -40;
 			
@@ -79,6 +81,32 @@ package com.client
 			LoadPriorityType.LEVEL_CUSTOM_0 = 5000;
 			LoadPriorityType.LEVEL_CUSTOM_1 = 4500;
 			LoadPriorityType.LEVEL_CUSTOM_2 = 4000;
+			SoundUtil.initConfig({
+				"at":{
+					"index":1,
+					"count":2,
+					"offset":1000,
+					"name":"攻击类"
+				},
+				"injure":{
+					"index":2,
+					"count":2,
+					"offset":1000,
+					"name":"受击类"
+				},
+				"die":{
+					"index":3,
+					"count":2,
+					"offset":1000,
+					"name":"死亡类"
+				},
+				"hit":{
+					"index":4,
+					"count":2,
+					"offset":1000,
+					"name":"击中类"
+				}
+			});
 		}
 
 		private static function initFeathers() : void

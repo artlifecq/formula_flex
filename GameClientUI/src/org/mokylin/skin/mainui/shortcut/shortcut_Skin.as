@@ -7,6 +7,7 @@ package org.mokylin.skin.mainui.shortcut
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import feathers.controls.UIMovieClip;
+	import org.mokylin.skin.mainui.duiwu.button.ButtonTuianniu;
 	import org.mokylin.skin.mainui.juexue.Juexue_mc;
 	import org.mokylin.skin.mainui.juexue.button.ButtonJuexue_bt;
 
@@ -20,7 +21,27 @@ package org.mokylin.skin.mainui.shortcut
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var Iconbg0:feathers.controls.UIAsset;
+
+		public var Iconbg1:feathers.controls.UIAsset;
+
+		public var Iconbg2:feathers.controls.UIAsset;
+
+		public var Iconbg3:feathers.controls.UIAsset;
+
+		public var Iconbg4:feathers.controls.UIAsset;
+
+		public var Iconbg5:feathers.controls.UIAsset;
+
+		public var Iconbg6:feathers.controls.UIAsset;
+
+		public var Iconbg7:feathers.controls.UIAsset;
+
+		public var Iconbg8:feathers.controls.UIAsset;
+
 		public var Icons:feathers.controls.Group;
+
+		public var btn_jiehun:feathers.controls.Button;
 
 		public var btn_juexue:feathers.controls.Button;
 
@@ -99,7 +120,7 @@ package org.mokylin.skin.mainui.shortcut
 			this.currentState = "normal";
 			this.height = 127;
 			this.width = 809;
-			this.elementsContent = [right_nengliang_i(),right_jintiao_i(),right_nengliangMask_i(),mask_blue_i(),left_xuecao_i(),left_xuecaoMask_i(),mask_red_i(),__shortcut_Skin_UIAsset1_i(),__shortcut_Skin_UIAsset2_i(),Icons_i(),juexuegroup_i(),fangun_i(),jingzhen_yijia_i()];
+			this.elementsContent = [right_nengliang_i(),right_jintiao_i(),right_nengliangMask_i(),mask_blue_i(),left_xuecao_i(),left_xuecaoMask_i(),mask_red_i(),__shortcut_Skin_UIAsset1_i(),__shortcut_Skin_UIAsset2_i(),Icons_i(),juexuegroup_i(),fangun_i(),jingzhen_yijia_i(),btn_jiehun_i()];
 			
 			states = {
 			};
@@ -110,6 +131,105 @@ package org.mokylin.skin.mainui.shortcut
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
+		private function Iconbg0_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			Iconbg0 = temp;
+			temp.name = "Iconbg0";
+			temp.styleName = "ui/mainui/shortcut/kuang.png";
+			temp.x = 198;
+			temp.y = -58;
+			return temp;
+		}
+
+		private function Iconbg1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			Iconbg1 = temp;
+			temp.name = "Iconbg1";
+			temp.styleName = "ui/mainui/shortcut/kuang.png";
+			temp.x = 9;
+			temp.y = 6;
+			return temp;
+		}
+
+		private function Iconbg2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			Iconbg2 = temp;
+			temp.name = "Iconbg2";
+			temp.styleName = "ui/mainui/shortcut/kuang.png";
+			temp.x = 63;
+			temp.y = 6;
+			return temp;
+		}
+
+		private function Iconbg3_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			Iconbg3 = temp;
+			temp.name = "Iconbg3";
+			temp.styleName = "ui/mainui/shortcut/kuang.png";
+			temp.x = 117;
+			temp.y = 6;
+			return temp;
+		}
+
+		private function Iconbg4_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			Iconbg4 = temp;
+			temp.name = "Iconbg4";
+			temp.styleName = "ui/mainui/shortcut/kuang.png";
+			temp.x = 171;
+			temp.y = 6;
+			return temp;
+		}
+
+		private function Iconbg5_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			Iconbg5 = temp;
+			temp.name = "Iconbg5";
+			temp.styleName = "ui/mainui/shortcut/kuang.png";
+			temp.x = 225;
+			temp.y = 6;
+			return temp;
+		}
+
+		private function Iconbg6_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			Iconbg6 = temp;
+			temp.name = "Iconbg6";
+			temp.styleName = "ui/mainui/shortcut/kuang.png";
+			temp.x = 279;
+			temp.y = 6;
+			return temp;
+		}
+
+		private function Iconbg7_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			Iconbg7 = temp;
+			temp.name = "Iconbg7";
+			temp.styleName = "ui/mainui/shortcut/kuang.png";
+			temp.x = 333;
+			temp.y = 6;
+			return temp;
+		}
+
+		private function Iconbg8_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			Iconbg8 = temp;
+			temp.name = "Iconbg8";
+			temp.styleName = "ui/mainui/shortcut/kuang.png";
+			temp.x = 387;
+			temp.y = 6;
+			return temp;
+		}
+
 		private function Icons_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
@@ -119,7 +239,7 @@ package org.mokylin.skin.mainui.shortcut
 			temp.width = 451;
 			temp.x = 179;
 			temp.y = 58;
-			temp.elementsContent = [dian1_i(),dian2_i(),dian3_i(),dian4_i(),dian5_i(),dian6_i(),dian7_i(),dian8_i(),__shortcut_Skin_Label1_i(),__shortcut_Skin_Label2_i(),__shortcut_Skin_Label3_i(),__shortcut_Skin_Label4_i(),__shortcut_Skin_Label5_i(),__shortcut_Skin_Label6_i(),__shortcut_Skin_Label7_i(),__shortcut_Skin_Label8_i(),grp_buff_i()];
+			temp.elementsContent = [Iconbg1_i(),Iconbg2_i(),Iconbg3_i(),Iconbg4_i(),Iconbg5_i(),Iconbg6_i(),Iconbg7_i(),Iconbg8_i(),Iconbg0_i(),dian1_i(),dian2_i(),dian3_i(),dian4_i(),dian5_i(),dian6_i(),dian7_i(),dian8_i(),__shortcut_Skin_Label1_i(),__shortcut_Skin_Label2_i(),__shortcut_Skin_Label3_i(),__shortcut_Skin_Label4_i(),__shortcut_Skin_Label5_i(),__shortcut_Skin_Label6_i(),__shortcut_Skin_Label7_i(),__shortcut_Skin_Label8_i(),grp_buff_i()];
 			return temp;
 		}
 
@@ -278,6 +398,19 @@ package org.mokylin.skin.mainui.shortcut
 			temp.styleName = "ui/mainui/shortcut/tishiyuandi.png";
 			temp.x = 0;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function btn_jiehun_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btn_jiehun = temp;
+			temp.name = "btn_jiehun";
+			temp.height = 30;
+			temp.styleClass = org.mokylin.skin.mainui.duiwu.button.ButtonTuianniu;
+			temp.width = 30;
+			temp.x = 22;
+			temp.y = 55;
 			return temp;
 		}
 

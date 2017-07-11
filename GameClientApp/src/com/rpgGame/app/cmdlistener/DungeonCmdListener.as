@@ -29,6 +29,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.zone.message.SCEnterZoneMessage;
 	import com.rpgGame.netData.zone.message.SCKillInfoMessage;
 	import com.rpgGame.netData.zone.message.SCKillInfosMessage;
+	import com.rpgGame.netData.zone.message.SCLimitTrackInfoMessage;
 	import com.rpgGame.netData.zone.message.SCMultiZonePanelInfosMessage;
 	import com.rpgGame.netData.zone.message.SCMultiZonePanelSingleInfoMessage;
 	import com.rpgGame.netData.zone.message.SCMultiZoneResultMessage;
@@ -84,6 +85,7 @@ package com.rpgGame.app.cmdlistener
 			
 			SocketConnection.addCmdListener(109117, onSCZoneTeamVoteResultMessage);//队伍投票
 			
+			SocketConnection.addCmdListener(155148, onSCLimitTrackInfoMessage);//极限挑战追踪
 			
 			finish();
 		}
@@ -143,19 +145,19 @@ package com.rpgGame.app.cmdlistener
 		
 		/*——————————————————————————多人副本————————————————————————————————————————————*/
 		private function onSCClientTriggerValiedMessage(msg:SCClientTriggerValiedMessage):void
-		{////L.l(MainRoleManager.actorInfo.name+"服务器#触发:"+msg.triggerId);
-			ClientTriggerManager.serverTrigger(msg.triggerId);
+		{
+			EventManager.dispatchEvent(DungeonEvent.ZONE_TO_TRIGGER,msg.triggerId);
 		}
 		private function onSCEnterZoneMessage(msg:SCEnterZoneMessage):void
-		{//L.l(MainRoleManager.actorInfo.name+"服务器#进入");
+		{
 			DungeonManager.teamZid=0;
 			DungeonManager.curryZoneId=msg.zoneId;
-			ClientTriggerManager.clearTigerByZone(msg.zoneId);
+			EventManager.dispatchEvent(DungeonEvent.ZONE_CLEAR_TRIGGER,msg.zoneId);
 			EventManager.dispatchEvent(DungeonEvent.ENTER_ZONE);
 			AppManager.hideApp(AppConstant.MULTY_PANL);
 		}
 		private function onSCOutZoneMessage(msg:SCOutZoneMessage):void
-		{//L.l(MainRoleManager.actorInfo.name+"服务器#退出");
+		{
 			DungeonManager.teamZid=0;
 			TrusteeshipManager.getInstance().findDist=0;
 			TrusteeshipManager.getInstance().stopAll();
@@ -164,7 +166,7 @@ package com.rpgGame.app.cmdlistener
 		}
 		
 		private function onSCZoneStageChangeMessage(msg:SCZoneStageChangeMessage):void
-		{//L.l(MainRoleManager.actorInfo.name+"服务器#阶段变化:"+msg.zoneModelId+":"+msg.stage+":"+msg.wave);
+		{
 			DungeonManager.curryZoneId=msg.zoneModelId;
 			DungeonManager.zoneStage=msg.stage;
 			DungeonManager.zoneWave=msg.wave;
@@ -172,27 +174,26 @@ package com.rpgGame.app.cmdlistener
 			
 		}
 		private function onSCRemainTimeMessage(msg:SCRemainTimeMessage):void
-		{//L.l(MainRoleManager.actorInfo.name+"服务器#时间:"+msg.remainTime);
+		{
 			DungeonManager.remainTime=msg.remainTime;
 			EventManager.dispatchEvent(DungeonEvent.ZONE_REMAIN_TIME);
 		}
 		private function onSCKillInfosMessage(msg:SCKillInfosMessage):void
-		{//L.l(MainRoleManager.actorInfo.name+"服务器#击杀列表:"+msg.infos.length);
+		{
 			DungeonManager.killInfos=msg.infos;
 			EventManager.dispatchEvent(DungeonEvent.ZONE_SKILL_INFOS);
 		}
 		private function onSCKillInfoMessage(msg:SCKillInfoMessage):void
-		{//L.l(MainRoleManager.actorInfo.name+"服务器#击杀单个:"+msg.info.monsterModelId);
+		{
 			DungeonManager.setKillInfos(msg.info);
 			EventManager.dispatchEvent(DungeonEvent.ZONE_SKILL_INFO);
 		}
 		private function onSCCurTriggerMessage(msg:SCCurTriggerMessage):void
-		{//L.l(MainRoleManager.actorInfo.name+"服务器#初始化触发:"+msg.curTriggerIds.length);
-			ClientTriggerManager.triggerInit(msg.curTriggerIds);
-			EventManager.dispatchEvent(DungeonEvent.ZONE_CUR_TRIGGER);
+		{
+			EventManager.dispatchEvent(DungeonEvent.ZONE_CUR_TRIGGER,msg.curTriggerIds);
 		}
 		private function onSCMultiZoneResultMessage(msg:SCMultiZoneResultMessage):void
-		{//L.l(MainRoleManager.actorInfo.name+"服务器#准备退出:"+msg.outTime);
+		{
 			DungeonManager.outTime=msg.outTime;
 			if(msg.success==1)
 			{
@@ -207,7 +208,7 @@ package com.rpgGame.app.cmdlistener
 			
 		}
 		private function onSCMultiZoneRewardMessage(msg:SCMultiZoneRewardMessage):void
-		{//L.l(MainRoleManager.actorInfo.name+"服务器#奖励:"+msg.passReward+"=="+msg.extraReward);
+		{
 			DungeonManager.curryZoneId=msg.zoneID;
 			DungeonManager.passReward=msg.passReward;
 			DungeonManager.extraReward=msg.extraReward;
@@ -222,26 +223,26 @@ package com.rpgGame.app.cmdlistener
 			//EventManager.dispatchEvent(DungeonEvent.ZONE_REWARD);
 		}
 		private function onSCMultiZonePanelInfosMessage(msg:SCMultiZonePanelInfosMessage):void
-		{//L.l(MainRoleManager.actorInfo.name+"服务器#面板信息:"+msg.panelInfos.length+"=="+msg.challengeCount);
+		{
 			DungeonManager.challengeCount=msg.challengeCount;
 			DungeonManager.panelInfos=msg.panelInfos;
 		}
 		private function onSCMultiZonePanelSingleInfoMessage(msg:SCMultiZonePanelSingleInfoMessage):void
-		{//L.l(MainRoleManager.actorInfo.name+"服务器#面板单个:"+msg.zoneId+"=="+msg.count+"=="+msg.rewardCount+"=="+msg.challengeCount);
+		{
 			DungeonManager.challengeCount=msg.challengeCount;
 			DungeonManager.setPanelInfos(msg.zoneId,msg.count,msg.rewardCount);
 			
 		}
 		private const ACTIBUTID:int=105;
 		private function onSCCancelTeamMatchMessage(msg:SCCancelTeamMatchMessage):void
-		{//L.l(MainRoleManager.actorInfo.name+"服务器#取消匹配:"+msg.zoneModelId);
+		{
 			DungeonManager.teamZid=0;
 			MainButtonManager.closeActivityButton(ACTIBUTID);
 			MainButtonManager.clearUptimeActivityButton(ACTIBUTID);
 			EventManager.dispatchEvent(DungeonEvent.ZONE_EXIT_TEAM);
 		}
 		private function onSCStartTeamMatchMessage(msg:SCStartTeamMatchMessage):void
-		{//L.l(MainRoleManager.actorInfo.name+"服务器#匹配副本:"+msg.zoneModelId);
+		{
 			DungeonManager.teamZid=msg.zoneModelId;
 			MainButtonManager.openActivityButton(ACTIBUTID);
 			MainButtonManager.setUptimeActivityButton(ACTIBUTID);
@@ -250,7 +251,7 @@ package com.rpgGame.app.cmdlistener
 		
 		
 		private function onSCZoneTeamVoteResultMessage(msg:SCZoneTeamVoteResultMessage):void
-		{//L.l(MainRoleManager.actorInfo.name+"服务器#队伍投票:"+msg.zoneModelid+"=="+msg.playerId.ToGID()+"=="+msg.result);
+		{
 			
 			if(msg.result==0)
 			{
@@ -279,11 +280,12 @@ package com.rpgGame.app.cmdlistener
 					}
 					EventManager.dispatchEvent(DungeonEvent.ZONE_TEAM_VOTE);
 				}
-			}
-			
+			}		
 		}
 		
-		
-		
+		private function onSCLimitTrackInfoMessage(msg:SCLimitTrackInfoMessage):void
+		{
+			EventManager.dispatchEvent(DungeonEvent.ZONE_JIXIAN_TIME,msg);
+		}		
 	}
 }

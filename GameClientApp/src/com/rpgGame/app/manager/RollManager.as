@@ -1,4 +1,5 @@
 package com.rpgGame.app.manager {
+    import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.manager.time.SystemTimeManager;
     import com.rpgGame.core.events.SystemEvent;
     import com.rpgGame.coreData.UNIQUEID;
@@ -39,6 +40,7 @@ package com.rpgGame.app.manager {
 		}
         public function canUseRoll() : Boolean 
 		{
+			
 			if(_currentState == RoleState_CD)
 				return false;
 			else

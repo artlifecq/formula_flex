@@ -7,6 +7,7 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.face.BaseFaceInfo;
@@ -37,8 +38,8 @@ package com.rpgGame.app.ui.tips
 		private function initView():void
 		{
 			mainIco = new BgIcon(IcoSizeEnum.ICON_64);
-			mainIco.x = 102;
-			mainIco.y = 37;
+			mainIco.x = _skin.Icon1.x+5;
+			mainIco.y = _skin.Icon1.y+5;
 			_skin.container.addChildAt(mainIco,4);
 		}
 		
@@ -53,21 +54,21 @@ package com.rpgGame.app.ui.tips
 			
 			var cfg:Q_skill_model=SpellDataManager.getSpellData(id,1);
 			mainIco.setIconResName(ClientConfig.getSkillIcon(cfg.q_icon,64));
-			_skin.skill_name.styleName = "ui/common/tips/jinengming/"+cfg.q_name_icon+ClientConfig.eName_PNG;
+			_skin.skill_name.text = cfg.q_skillName;
 			_skin.lbShuoming.text = cfg.q_skillpanel_description1;
 			_skin.jihuogroup.isEnabled = false;
 			if(MainRoleManager.actorInfo.spellList.getSkillInfo(id)==null)
 			{
 				_skin.lbJIhuo.text = LanguageConfig.getText(LangUI_2.Skill_weijihuo);
-				_skin.lbJIhuo.color = 0xd02525;
+				_skin.lbJIhuo.color = StaticValue.A_UI_RED_TEXT;
 				_skin.jihuogroup.visible = true;
 				_skin.lbDengji.text = cfg.q_skillopen_desc;
-				_skin.tipbg.height = 349;
+				_skin.tipbg.height = 252;
 			}else{
 				_skin.lbJIhuo.text = LanguageConfig.getText(LangUI_2.Skill_jihuo);
-				_skin.lbJIhuo.color = 0x239D02;
+				_skin.lbJIhuo.color = StaticValue.A_UI_GREEN_TEXT;
 				_skin.jihuogroup.visible = false;
-				_skin.tipbg.height = 270;
+				_skin.tipbg.height = 252-_skin.jihuogroup.height;
 			}
 		}
 		

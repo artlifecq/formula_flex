@@ -88,7 +88,7 @@ package com.rpgGame.coreData.lang
 		public static const INVITE_JOIN_GUILD:String = "INVITE_JOIN_GUILD";
 		 /**  开除出帮 */
 		public static const KICK_GUILD:String = "KICK_GUILD";
-		 /**  任命副帮主 */
+		 /**  职位任命 */
 		public static const SET_UP_VICE_LEADER:String = "SET_UP_VICE_LEADER";
 		 /**  卸任副帮主 */
 		public static const REMOVE_VICE_LEADER:String = "REMOVE_VICE_LEADER";
@@ -98,6 +98,8 @@ package com.rpgGame.coreData.lang
 		public static const BATCH_ITM:String = "BATCH_ITM";
 		 /**  快速到达 */
 		public static const MOVE_TO_HERO:String = "MOVE_TO_HERO";
+		 /**  统帅任命 */
+		public static const SETUP_LEADER:String = "SETUP_LEADER";
 
 	}
 }

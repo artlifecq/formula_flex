@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.mount
 {
+	import com.rpgGame.app.fight.spell.NumberChangeEffect;
 	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.manager.mount.MountShowData;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -10,6 +11,7 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.appModule.systemset.TouchToState;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.manager.StarlingLayerManager;
+	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.coreData.cfg.HorseSpellData;
 	import com.rpgGame.coreData.clientConfig.Q_horse_skills;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
@@ -116,7 +118,7 @@ package com.rpgGame.appModule.mount
 			{
 				_uplevelSuccess = new MountUpLevelSucessPane();
 				_uplevelSuccess.addEventListener(Event.REMOVED_FROM_STAGE,removePropHandler);
-				StarlingLayerManager.topUILayer.addChild(_uplevelSuccess);
+				_uplevelSuccess.show();
 				_uplevelSuccess.x = int((_uplevelSuccess.stage.stageWidth - _uplevelSuccess.width) / 2);
 				_uplevelSuccess.y = int((_uplevelSuccess.stage.stageHeight - _uplevelSuccess.height) / 2);
 			}
@@ -172,6 +174,9 @@ package com.rpgGame.appModule.mount
 			_extraItemList.push(new ExtraButton(_skin.btn_zizhidan,506));
 			_extraItemList.push(new ExtraButton(_skin.btn_chengzhangdan,507));
 			_touchState = new TouchToState(_skin.lab_xuyaowupin,labTouchHandler);
+			
+			addNode(RTNodeID.HORSE,RTNodeID.HORSE_UP,_skin.btn_kaishi,110,null);
+		
 		}
 		private function labTouchHandler(touch:Touch):void
 		{
@@ -192,6 +197,8 @@ package com.rpgGame.appModule.mount
 			EventManager.addEvent(HorseManager.HorseChangeExp,refeashExpHandler);
 			EventManager.addEvent(HorseManager.HorseExtraItemNum,refeashPropHandler);
 			EventManager.addEvent(ItemEvent.ITEM_ADD,addItemHandler);
+			EventManager.addEvent(ItemEvent.ITEM_REMOVE,addItemHandler);
+			EventManager.addEvent(ItemEvent.ITEM_CHANG,addItemHandler);
 		}
 		
 		private function addItemHandler(info:ClientItemInfo):void
@@ -213,6 +220,7 @@ package com.rpgGame.appModule.mount
 			{
 				_mountupContent.isAutoing =HorseManager.instance().eatItemHorse(_mountShowData)
 			}
+			setRTNState(RTNodeID.HORSE_UP,_mountShowData.isSelf&&_mountShowData.canUpLevel());
 		}
 		private function refeashLevel():void
 		{
@@ -227,11 +235,17 @@ package com.rpgGame.appModule.mount
 			EventManager.removeEvent(HorseManager.HorseChangeExp,refeashExpHandler);
 			EventManager.removeEvent(HorseManager.HorseExtraItemNum,refeashPropHandler);
 			EventManager.removeEvent(ItemEvent.ITEM_ADD,addItemHandler);
+			EventManager.addEvent(ItemEvent.ITEM_REMOVE,addItemHandler);
+			EventManager.addEvent(ItemEvent.ITEM_CHANG,addItemHandler);
 		}
 		private function refeashPropHandler():void
 		{
 			_mountShowData.useExtraItem(HorseManager.instance().useExtraItem1,HorseManager.instance().useExtarItem2);
 			_propContent.updataInfo(_mountShowData);
+			for each(var eb:ExtraButton in _extraItemList)
+			{
+				eb.refeash(_mountShowData);
+			}
 		}
 		private function onTouch(e : TouchEvent) : void
 		{

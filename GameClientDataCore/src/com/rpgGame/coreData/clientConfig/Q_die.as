@@ -16,8 +16,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_id:int;
 		 /**  功能名称 */
 		public var q_name:String;
-		 /**  界面名称 */
-		public var q_panel:String;
+		 /**  功能id */
+		public var q_panel:int;
 		 /**  星星数量 */
 		public var q_starsnum:int;
 		 /**  图标 */

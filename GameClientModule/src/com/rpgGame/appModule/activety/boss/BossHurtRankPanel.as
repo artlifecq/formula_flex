@@ -1,12 +1,13 @@
 package com.rpgGame.appModule.activety.boss
 {
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.core.events.ActivityEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
-	import com.rpgGame.coreData.cfg.active.ActivetyDataManager;
+	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.BossActInfo;
 	import com.rpgGame.coreData.info.tip.BossHurtTipsData;
 	import com.rpgGame.coreData.type.TipType;
@@ -61,8 +62,15 @@ package com.rpgGame.appModule.activety.boss
 			super.show(data,openTable,parentContiner);
 			var actId:int=data;
 			_skin.ListItem.customData=actId;
-			var actInfo:BossActInfo=ActivetyDataManager.getActInfoById(actId) as BossActInfo;
+			if(actId==25)
+			{
+				_tipsSetInfo.rewads=JSONUtil.decode(ActivetyDataManager.jixianVo.qmod.q_kill_rewards);
+			}
+			else{
+			var actInfo:BossActInfo=ActivetyCfgData.getActInfoById(actId) as BossActInfo;
 			_tipsSetInfo.rewads=JSONUtil.decode(actInfo.worldBossCfg.q_kill_rewards);
+			
+			}
 			_tipsSetInfo.titleRes="ui/app/activety/shijieboss/5.png";
 			_skin.myHurt.text="我的伤害:";
 			_skin.myRank.text="我的排名:";

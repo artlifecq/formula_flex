@@ -7,6 +7,7 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.coreData.cfg.LostSkillData;
 	import com.rpgGame.coreData.cfg.LostSkillUpData;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_up;
 	import com.rpgGame.coreData.lang.LangUI_2;
@@ -33,18 +34,21 @@ package com.rpgGame.app.ui.tips
 			}
 			var skillId:int = skillOpenData.q_id;
 			var state:SkillStateInfo = LostSkillManager.instance().getSkillStateInfoById(skillId);
-			_skin.lb_name.text = skillOpenData.q_name;
+			var skillNameUrl:String="ui/common/tips/name/"+skillOpenData.q_name+".png";
+			_skin.skillName.styleName = skillNameUrl;
+			var icoUrl:String="ui/common/tips/icon/"+skillOpenData.q_name+".png";
+			_skin.icon.styleName = icoUrl;
 			_skin.lb_dengji.text = LanguageConfig.getText(LangUI_2.Lostskill_Opentips).replace("$",skillOpenData.q_level);
 			var level:int;
 			if(state!=null)
 			{
 				level = state.level;
 				_skin.lb_jihuo.text = "Lv:"+level;
-				_skin.lb_jihuo.color = 0x25931b;
+				_skin.lb_jihuo.color = StaticValue.A_UI_GREEN_TEXT;
 			}else{
 				level = 1;
 				_skin.lb_jihuo.text = NotifyCfgData.getNotifyTextByID(7012);
-				_skin.lb_jihuo.color = 0xd02525;
+				_skin.lb_jihuo.color = StaticValue.A_UI_RED_TEXT;
 			}
 			var currentupdate:Q_lostskill_up = LostSkillUpData.getDatabyIdAndLevel(skillId,level);
 			_skin.lb_shengming.text = skillOpenData.q_desc.replace("$",LostSkillManager.instance().getSkillValue(skillOpenData,currentupdate))

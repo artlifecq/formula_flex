@@ -4,8 +4,6 @@ package com.game.engine2D.utils
 	import com.game.engine2D.core.ATFByteTexture;
 	import com.game.engine2D.core.ATFTextureMaterial;
 	import com.game.engine2D.core.AsyncByteTexture;
-	import com.game.engine2D.core.BPGByteTexture;
-	import com.game.engine2D.core.BPGTextureMaterial;
 	import com.game.engine2D.core.ITextureMaterial;
 	import com.game.engine2D.core.SingleTextureMaterial;
 	
@@ -67,7 +65,7 @@ package com.game.engine2D.utils
 			textureMaterial.writeDepth = WriteDepthOption.FALSE;
 			textureMaterial.blendMode = BlendMode.LAYER;
 			textureMaterial.animateUVs = true;
-			textureMaterial.depthCompareMode = Context3DCompareMode.ALWAYS;
+			textureMaterial.depthCompareMode = Context3DCompareMode.LESS_EQUAL;
 			textureMaterial.colorTransform = new ColorTransform();
 			return textureMaterial;
 		}
@@ -96,7 +94,7 @@ package com.game.engine2D.utils
 			var texture:ATFTextureMaterial = new ATFTextureMaterial(atfTexture);
 			texture.animateUVs = true;
 			texture.writeDepth = GlobalConfig2D.avatarHighlightEnabled?WriteDepthOption.TRUE:WriteDepthOption.FALSE;
-			texture.depthCompareMode = Context3DCompareMode.ALWAYS;
+			texture.depthCompareMode = Context3DCompareMode.LESS_EQUAL;
 			texture.bothSides = true;
 			texture.blendMode = blendMode;
 			texture.alphaThreshold = 0.05;
@@ -104,19 +102,19 @@ package com.game.engine2D.utils
 			return texture;
 		}
 		
-		public static function getBpgMaterialByData(data:ByteArray, path:String, enableScaleTexture:Boolean,autoRecycleEnable:Boolean, blendMode:String):ITextureMaterial
-		{
-			var bpgTexture:BPGByteTexture = new BPGByteTexture(data, path, enableScaleTexture,autoRecycleEnable);
-			var texture:BPGTextureMaterial = new BPGTextureMaterial(bpgTexture);
-			texture.animateUVs = true;
-			texture.writeDepth = WriteDepthOption.FALSE;
-			texture.depthCompareMode = Context3DCompareMode.ALWAYS;
-			texture.bothSides = true;
-			texture.blendMode = blendMode;
-			texture.alphaThreshold = 0.05;
-			texture.name = "bpg";
-			return texture;
-		}
+//		public static function getBpgMaterialByData(data:ByteArray, path:String, enableScaleTexture:Boolean,autoRecycleEnable:Boolean, blendMode:String):ITextureMaterial
+//		{
+//			var bpgTexture:BPGByteTexture = new BPGByteTexture(data, path, enableScaleTexture,autoRecycleEnable);
+//			var texture:BPGTextureMaterial = new BPGTextureMaterial(bpgTexture);
+//			texture.animateUVs = true;
+//			texture.writeDepth = WriteDepthOption.FALSE;
+//			texture.depthCompareMode = Context3DCompareMode.LESS_EQUAL;
+//			texture.bothSides = true;
+//			texture.blendMode = blendMode;
+//			texture.alphaThreshold = 0.05;
+//			texture.name = "bpg";
+//			return texture;
+//		}
 		
 		public static function getSingleMaterialByBitmapData(bitmapData:BitmapData):ITextureMaterial
 		{

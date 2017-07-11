@@ -38,6 +38,7 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.app.scene.SceneRole;
     import com.rpgGame.app.scene.animator.RibbonAnimator;
     import com.rpgGame.app.sender.SceneSender;
+    import com.rpgGame.app.state.role.control.HiddingStateReference;
     import com.rpgGame.app.state.role.control.RidingStateReference;
     import com.rpgGame.app.state.role.control.ShapeshiftingStateReference;
     import com.rpgGame.app.utils.RoleFaceMaskEffectUtil;
@@ -115,6 +116,7 @@ package com.rpgGame.app.manager.shell
             this._funcs["&addTrap".toLowerCase()] = this.addTrap;
             this._funcs["&changeTrap".toLowerCase()] = this.changeTrap;
 			this._funcs["&test".toLowerCase()] = this.test;
+			this._funcs["&addhide".toLowerCase()] = this.addHideTest;
 			this._funcs["&removeTest".toLowerCase()] = this.removeTest;
 			
 			this._funcs["&corred".toLowerCase()] = this.corredMethodTest;
@@ -151,7 +153,7 @@ package com.rpgGame.app.manager.shell
 			if (!ribbonAnimator)
 			{
 				ribbonAnimator = new RibbonAnimator();
-				(ribbonAnimator as RibbonAnimator).initRibbonData("shandian02",targetList,MainRoleManager.actor);
+				(ribbonAnimator as RibbonAnimator).initRibbonData("lv",targetList,MainRoleManager.actor);
 				effectSet.setRenderAnimator(ribbonAnimator);
 			}
 		}
@@ -364,9 +366,15 @@ package com.rpgGame.app.manager.shell
 			}
 		}
 		
+		private function addHideTest():void
+		{
+			var ref:HiddingStateReference = MainRoleManager.actor.stateMachine.getReference(HiddingStateReference) as HiddingStateReference;
+			MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_HIDDING,ref);
+		}
+		
 		private function removeTest():void
 		{
-//			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_HIDDING);
+			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_HIDDING);
 		}
 		
 		private var arr:Vector.<ShapeArea3D> = new Vector.<ShapeArea3D>();	

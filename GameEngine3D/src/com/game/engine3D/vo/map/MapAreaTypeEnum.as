@@ -24,9 +24,9 @@ package com.game.engine3D.vo.map
 		 */
 		public static const ATHLETICS : int = 2;
 		/**
-		 * 事件区域
+		 * 触发事件区域
 		 */
-		public static const EVENT : int = 3;
+		public static const TRIGGER_EVENT : int = 3;
 		/**
 		 * 动态障碍区域
 		 */
@@ -60,7 +60,7 @@ package com.game.engine3D.vo.map
 		nameByType[CUSTOM] = "自定义区域";
 		nameByType[OBSTACLE] = "固定障碍区域";
 		nameByType[ATHLETICS] = "竞技区域";
-		nameByType[EVENT] = "事件区域";
+		nameByType[TRIGGER_EVENT] = "事件区域";
 		nameByType[DYNAMIC_OBSTACLE] = "动态障碍区域";
 		nameByType[CAMERA_PROPERTY] = "摄像头属性区域";
 		nameByType[SAFE] = "安全区域";

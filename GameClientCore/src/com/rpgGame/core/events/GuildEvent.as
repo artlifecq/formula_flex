@@ -17,6 +17,8 @@ package com.rpgGame.core.events
 		public static const GUILD_NAME_CHANGE : uint = UNIQUEID.NEXT;
 		/**获取申请加入帮派的list**/
 		public static const GET_JOIN_GUILD_LIST : uint = UNIQUEID.NEXT;
+		/**获取本人帮派邀请的list**/
+		public static const GET_INVITE_GUILD_LIST : uint = UNIQUEID.NEXT;
 		/**请求本国帮派列表**/
 		public static const GET_GUILD_LIST : uint = UNIQUEID.NEXT;
 		/**帮派公告改变了**/
@@ -33,5 +35,32 @@ package com.rpgGame.core.events
 		public static const GUILDCONTRIBUTIONPOINT_CHANGE : uint = UNIQUEID.NEXT;
 		/**帮派家族成员变化了**/
 		public static const GUILD_FAMILY_CHANGE : uint = UNIQUEID.NEXT;
+		/**帮派操作标识**/
+		public static const GUILD_OPERATERESULT : uint = UNIQUEID.NEXT;
+		
+		/**跟新帮派技能信息**/
+		public static const GUILD_SKILLINFO_CHAGE:uint = UNIQUEID.NEXT;
+		/**王城争霸战信息**/
+		public static const GUILD_WCZB_INFO:uint = UNIQUEID.NEXT;
+		/**王城争霸申请列表**/
+		public static const GUILD_WCZB_APPLYINFO:uint = UNIQUEID.NEXT;
+		/**王城争霸竞价信息改变**/
+		public static const GUILD_WCZB_CHANGEMAXPRICE:uint = UNIQUEID.NEXT;
+		/**帮会活跃值变化**/
+		public static const GUILD_CHANGE_ACTIVE:uint = UNIQUEID.NEXT;
+		/**争霸阵营矿信息**/
+		public static const GUILD_WAR_CAMPORE:uint = UNIQUEID.NEXT;
+		/**通知帮会战玩家排名**/
+		public static const GUILD_WAR_PERSONRANK:uint = UNIQUEID.NEXT;
+		/**通知个人信息**/
+		public static const GUILD_WAR_PERSIONINFO:uint = UNIQUEID.NEXT;
+		/**通知阵营积分**/
+		public static const GUILD_WAR_CAMPSCORE:uint = UNIQUEID.NEXT;
+		/**回复矿位置**/
+		public static const GUILD_WAR_FINDORE:uint = UNIQUEID.NEXT;
+		/**争霸城**/
+		public static const GUILD_WCZB_FIGHTCITY:uint = UNIQUEID.NEXT;
+		/**王城争霸结束**/
+		public static const GUILD_WCZB_OVER:uint = UNIQUEID.NEXT;
 	}
 }

@@ -24,7 +24,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_node_id:int;
 		 /**  任务名称 */
 		public var q_mission_name:String;
-		 /**  任务类型(1主线2支线3环式) */
+		 /**  任务类型(1主线2支线3环式4帮会任务5天降元宝) */
 		public var q_mission_mainType:int;
 		 /**  自动接取的下一个任务ID 0是没有 */
 		public var q_next_task:int;
@@ -36,7 +36,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_mission_type:int;
 		 /**  任务完成条件,数值类（该字段未用到） */
 		public var q_finish_information_int:int;
-		 /**  任务完成条件,字符串类型(道具ID或者怪物ID,数量)(1001,1;1002,1)（副本ID，次数）对话填npc档案ID */
+		 /**  任务完成条件,字符串类型(道具ID或者怪物ID,数量)(1001,1;1002,1)（副本ID，次数）对话、采集填npc档案ID */
 		public var q_finish_information_str:String;
 		 /**  完成任务npc 没有npc为0 */
 		public var q_finish_npc:int;
@@ -46,6 +46,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_finish_describe:String;
 		 /**  自动寻路信息（地图ID,X,Y,x,y;地图ID,X,Y)需传送用;分开填写坐标即可 */
 		public var q_pathing:String;
+		 /**  是否使用系统神行符(1使用，0不使用。默认 0)为1时必须配寻路点 */
+		public var q_fly:int;
 		 /**  任务奖励信息id(调用t_mission_reword表) */
 		public var q_reword_id:int;
 		 /**  接任务阶段信息的对话（任务对话id。可配置多个id‘,’隔开） */

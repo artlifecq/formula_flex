@@ -5,7 +5,8 @@ package org.mokylin.skin.app.activety
 	import feathers.controls.TabBar;
 	import feathers.controls.UIAsset;
 	import feathers.layout.HorizontalLayout;
-	import org.mokylin.skin.common.yiji_panelbg2_Skin;
+	import org.mokylin.skin.common.TongYongPanelbg1;
+	import org.mokylin.skin.component.tabbar.TabBarSkin_pack;
 
 	/**
 	 * @private
@@ -30,8 +31,8 @@ package org.mokylin.skin.app.activety
 			super();
 			
 			this.currentState = "normal";
-			this.height = 587;
-			this.width = 947;
+			this.height = 601;
+			this.width = 956;
 			this.elementsContent = [bg_i(),__Activety_Skin_UIAsset1_i(),tabBar_i(),__Activety_Skin_UIAsset2_i()];
 			
 			states = {
@@ -56,8 +57,8 @@ package org.mokylin.skin.app.activety
 			temp.height = 498;
 			temp.styleName = "ui/common/background/neikuang_1.png";
 			temp.width = 922;
-			temp.x = 14;
-			temp.y = 72;
+			temp.x = 18;
+			temp.y = 82;
 			return temp;
 		}
 
@@ -67,8 +68,8 @@ package org.mokylin.skin.app.activety
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/activety/zonghe/hddt.png";
-			temp.x = 430;
-			temp.y = 12;
+			temp.x = 433;
+			temp.y = 17;
 			return temp;
 		}
 
@@ -78,9 +79,8 @@ package org.mokylin.skin.app.activety
 			bg = temp;
 			temp.name = "bg";
 			temp.height = 587;
-			var skin:StateSkin = new org.mokylin.skin.common.yiji_panelbg2_Skin()
+			var skin:StateSkin = new org.mokylin.skin.common.TongYongPanelbg1()
 			temp.skin = skin
-			temp.width = 947;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -91,9 +91,9 @@ package org.mokylin.skin.app.activety
 			var temp:feathers.controls.TabBar = new feathers.controls.TabBar();
 			tabBar = temp;
 			temp.name = "tabBar";
-			temp.width = 509;
-			temp.x = 27;
-			temp.y = 44;
+			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_pack;
+			temp.x = 23;
+			temp.y = 54;
 			temp.layout = __Activety_Skin_HorizontalLayout1_i();
 			return temp;
 		}

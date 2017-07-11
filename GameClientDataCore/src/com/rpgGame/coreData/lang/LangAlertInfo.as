@@ -184,9 +184,20 @@ package com.rpgGame.coreData.lang
 		public static const EQUIP_USE_TIPS:String = "EQUIP_USE_TIPS";
 		 /**  花费<font color='0xffff00'>$元宝</font>可购买1次挑战次数 */
 		public static const BuyCombatCount:String = "BuyCombatCount";
-		
-		/**  副本退出二次确认 */
+		 /**  您的元宝不足！请充值！ */
+		public static const GOLD_LACK:String = "GOLD_LACK";
+		 /**  是否离开副本！ */
 		public static const ZONE_EXIT_SURE:String = "ZONE_EXIT_SURE";
+		 /**  您即将解散帮派<font color='#4efd6f'>$</font>解散后该帮派将不再存在，确认解散？ */
+		public static const dissolve_guild:String = "dissolve_guild";
+		 /**  您即将退出帮派<font color='#4efd6f'>$</font>退出后24小时以内您无法加入任何帮派，确认退出？ */
+		public static const quit_guild:String = "quit_guild";
+		 /**  玩家<font color='#4efd6f'>$</font>即将被您踢出帮派，确认将其踢出？ */
+		public static const expel_guild:String = "expel_guild";
+		 /**  是否离开天降礼金活动！ */
+		public static const LIJIN_EXIT_SURE:String = "LIJIN_EXIT_SURE";
+		 /**  是否离开秦陵秘宝活动！ */
+		public static const MIBAO_EXIT_SURE:String = "MIBAO_EXIT_SURE";
 
 	}
 }

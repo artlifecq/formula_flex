@@ -7,7 +7,6 @@ package com.rpgGame.app.state.role.control
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	
-	import flash.display.BlendMode;
 	import flash.utils.getQualifiedClassName;
 
 	/**
@@ -26,18 +25,17 @@ package com.rpgGame.app.state.role.control
 		{
 			if (_machine && !_machine.isInPool)
 			{
-				super.execute();
-//				transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
-				if (_stateReference)
-				{
-					if (_stateReference is HiddingStateReference)
-					{
+//				super.execute();
+//				if (_stateReference)
+//				{
+//					if (_stateReference is HiddingStateReference)
+//					{
 						var role : SceneRole = _machine.owner as SceneRole;
 						role.forEachRenderUnit(eachUnVisible);
-					}
-					else
-						throw new Error("场景隐身状态引用必须是HiddingStateReference类型！");
-				}
+//					}
+//					else
+//						throw new Error("场景隐身状态引用必须是HiddingStateReference类型！");
+//				}
 			}
 		}
 		
@@ -54,17 +52,21 @@ package com.rpgGame.app.state.role.control
 			render.castsShadows = true;
 			switch(render.type)
 			{
-				case RenderUnitType.WEAPON_EFFECT:
+				/*case RenderUnitType.WEAPON_EFFECT:
 				case RenderUnitType.DEPUTY_WEAPON_EFFECT:
 					render.blendMode = BlendMode.NORMAL;
 					render.visible = true;
 					render.alpha = 1;
-					break;
+					break;*/
 				case RenderUnitType.BODY:
-					if(render.compositeMesh)
+					/*if(render.compositeMesh)
 					{
 						render.compositeMesh.layerType = layerType;
-					}
+					}*/
+					render.visible = true;
+					break;
+				default:
+					render.visible = true;
 					break;
 			}
 		}
@@ -81,18 +83,22 @@ package com.rpgGame.app.state.role.control
 			render.castsShadows = false;
 			switch(render.type)
 			{
-				case RenderUnitType.WEAPON_EFFECT:
+				/*case RenderUnitType.WEAPON_EFFECT:
 				case RenderUnitType.DEPUTY_WEAPON_EFFECT:
 					render.blendMode = BlendMode.LAYER;
 					render.visible = false;
 					render.alpha = 0;
-					break;
+					break;*/
 				case RenderUnitType.BODY:
-					if(render.compositeMesh)
-					{
-						layerType = render.compositeMesh.layerType;
-						render.compositeMesh.layerType = 0;
-					}
+//					if(render.compositeMesh)
+//					{
+//						layerType = render.compositeMesh.layerType;
+//						render.compositeMesh.layerType = 0;
+//					}
+					render.visible = true;
+					break;
+				default:
+					render.visible = false;
 					break;
 			}
 		}

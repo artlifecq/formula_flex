@@ -1,6 +1,7 @@
 package com.rpgGame.app.ui.main.head {
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
@@ -197,6 +198,9 @@ package com.rpgGame.app.ui.main.head {
 						SceneRoleSelectManager.selectedRole = MainRoleManager.actor;
 					}
 					break;
+				case this._skin.btnVip:
+					Mgr.vipMgr.iWantBecomeVip();
+					break;
 				default:
 				{
 					switch(target.parent)
@@ -260,7 +264,6 @@ package com.rpgGame.app.ui.main.head {
 			var icon:BuffIcon=new BuffIcon(IcoSizeEnum.ICON_24);
 			icon.buffData=data;
 			icon.setUrlBg("ui/mainui/shortcut/buffkuang.png");
-			icon.bgImage.setSize(30,30);
 			
 			_buffList.push(icon);
 			_buffContainer.addChild(icon);		
@@ -326,7 +329,7 @@ package com.rpgGame.app.ui.main.head {
 				line=i%MAX_SHOW_NUM;
 				row=int(i/MAX_SHOW_NUM);
 				icon.x=line*gridW;
-				icon.y=-row*gridW;
+				icon.y=row*gridW;
 			}
 		}
 	}

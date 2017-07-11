@@ -161,6 +161,7 @@ package org.mokylin.skin.app.activety.zonghe
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grpto = temp;
 			temp.name = "grpto";
+			temp.visible = false;
 			temp.x = 21;
 			temp.y = 50;
 			temp.elementsContent = [lbName_i(),lbTo_i(),lbOk_i()];

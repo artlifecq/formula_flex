@@ -1,5 +1,7 @@
 package com.rpgGame.app.ui.tab
 {
+	import feathers.controls.ToggleButton;
+
 	/**
 	 *自定义tabbar数据信息 
 	 * @author dik
@@ -25,6 +27,11 @@ package com.rpgGame.app.ui.tab
 		public var tabKey:String;
 		
 		
+		public var button:ToggleButton;
+		/**
+		 *是否显示 
+		 */
+		internal var isShow:Boolean;
 		public function UITabBarData(tabStyle:Class,viewStyle:Class)
 		{
 			this.tabStyle=tabStyle;

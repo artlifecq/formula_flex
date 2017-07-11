@@ -1,11 +1,12 @@
 package com.game.engine3D.vo.share
 {
+	import away3d.utils.GCObject;
 
 
 	/**
 	 * 共享数据对象
 	 * */
-	public class CountShareData
+	public class CountShareData extends GCObject
 	{
 		/**引用数量*/
 		private var _count : int = 0; //这个最开始给0

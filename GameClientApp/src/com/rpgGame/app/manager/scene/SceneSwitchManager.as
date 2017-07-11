@@ -13,6 +13,7 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.app.interfaces.IMapProcess;
 	import com.rpgGame.app.manager.AreaMapManager;
 	import com.rpgGame.app.manager.ClientTriggerManager;
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.GameCameraManager;
 	import com.rpgGame.app.manager.GamePerformsManager;
 	import com.rpgGame.app.manager.ReliveManager;
@@ -81,6 +82,7 @@ package com.rpgGame.app.manager.scene
 		
 		private static var _isChangeSceneComplete : Boolean = false;
 		private static var _mapRes : String = null;
+		public static var needOpenNewFuncId:int;
 		setup();
 		
 		private static function setup() : void
@@ -107,9 +109,10 @@ package com.rpgGame.app.manager.scene
 		/**当前地图资源*/
 		private static var _curtMapInfo:SceneData;
 		
-		private static var _isSameResMap:Boolean = false;
+		private static var _isSameMap:Boolean = false;
 		
 		private static var _isReconnect:Boolean = false;
+		private static var _isMapSameRes:Boolean=false;
 		/**
 		 * 初次登录和切场景成功后的通用逻辑
 		 * @param isShowLoading
@@ -152,7 +155,7 @@ package com.rpgGame.app.manager.scene
 			if (0 != needLoadCmpCnt) {
 				return;
 			}
-			if(_isSameResMap)
+			if(_isSameMap)
 			{
 				onCfgCmp();
 			}
@@ -163,14 +166,23 @@ package com.rpgGame.app.manager.scene
 				var mapDataName : String = ClientConfig.getMapDataName();
 				
 				needLoadCmpCnt = 2;
+				if (_isMapSameRes) 
+				{
+					needLoadCmpCnt=1;
+					Scene.scene.gameScene3d.sceneMapLayer.resetSceneMapData(null);
+				}
 				onLoadSceneCmpParam = null;
-				Scene.scene.switchScene(
-					curtMapInfo.sceneId,
-					curtMapInfo.mapConfig,null,
-					ClientConfig.getMapZoneDir(curtMapInfo.mapNameResource),
-					mapUrl + "/" +mapName,
-					onCfgCmp,
-					enterSceneSuccessed,false);
+				if (!_isMapSameRes) 
+				{
+					Scene.scene.switchScene(
+						curtMapInfo.sceneId,
+						curtMapInfo.mapConfig,null,
+						ClientConfig.getMapZoneDir(curtMapInfo.mapNameResource),
+						mapUrl + "/" +mapName,
+						onCfgCmp,
+						enterSceneSuccessed,false);
+				}
+				
 				Scene.scene.gameScene3d.loadMapData(mapName, mapUrl + "/" +mapDataName,onMapDataComplete);
 			}
 		}
@@ -180,7 +192,7 @@ package com.rpgGame.app.manager.scene
 			var isDesMap:Boolean = false;
 			if(_isReconnect)
 			{
-				isDesMap = !_isSameResMap;
+				isDesMap = !_isSameMap;
 			}
 			if(isDesMap)//销毁上一地图的操作 
 			{
@@ -218,7 +230,7 @@ package com.rpgGame.app.manager.scene
 			var isResetData:Boolean = false;
 			if(_isReconnect)
 			{
-				isResetData = !_isSameResMap;
+				isResetData = !_isSameMap;
 			}
 			if(isResetData)//不是切线
 			{
@@ -274,10 +286,10 @@ package com.rpgGame.app.manager.scene
 		//资源相同则不处理加载逻辑，但是切场景的相关逻辑继续。
 		private static function checkIsSameResMap():void
 		{
-			_isSameResMap = false;
+			_isSameMap = false;
 			if(lastMapID == curtMapID)//是否与上一场景是同一地图
 			{
-				_isSameResMap = true;
+				_isSameMap = true;
 			}
 			else
 			{
@@ -285,7 +297,7 @@ package com.rpgGame.app.manager.scene
 				{
 					if(lastMapInfo.map == curtMapInfo.map)
 					{
-						_isSameResMap = true;
+						_isSameMap = true;
 					}
 				}
 			}
@@ -361,7 +373,7 @@ package com.rpgGame.app.manager.scene
 		 *清理场景 
 		 * 
 		 */
-		private static function clearScene():void
+		private static function clearScene(clearScene:Boolean=true):void
 		{
 			GamePerformsManager.pause();
 			MapUnitDataManager.clear();
@@ -369,14 +381,20 @@ package com.rpgGame.app.manager.scene
 			ClientTriggerManager.sceneClear();
 			SceneCameraLensEffectManager.sceneClear();
 			TaskManager.storyTaskInfo=null;
-			MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
-			MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true);
+			if(MainRoleManager.actor){
+				MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
+				MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true);
+			}
 			
 			InputManger.getInstance().closeOperate();
 			
 			SceneTimeOfTheDayManager.clear();
-			SceneManager.getScene().clear();
-			SceneManager.getScene().clearAreaMap(1);
+			if (clearScene) 
+			{
+				SceneManager.getScene().clear();
+				SceneManager.getScene().clearAreaMap(1);
+				
+			}
 			SceneManager.getScene().removeAllSceneObj();
 			TaskAutoManager.getInstance().stopSwitchAll();
 			TrusteeshipManager.getInstance().stopAll();
@@ -409,15 +427,18 @@ package com.rpgGame.app.manager.scene
 				}
 			}
 			MapDataManager.currentScene = mapInfo;
-			clearScene();
+			_isMapSameRes=mapInfo && currMapInfo && (mapInfo.map == currMapInfo.map);
+			clearScene(!_isMapSameRes);
 			EventManager.dispatchEvent(MapEvent.MAP_SWITCH_START);
-			if (mapInfo && currMapInfo && (mapInfo.map == currMapInfo.map))
+			if (_isMapSameRes)
 			{
-				sendSceneLoaded();
-				EventManager.dispatchEvent(MapEvent.MAP_SWITCH_START);
+				//sendSceneLoaded();
+				change2dMap();
+				
 			}
 			else
 			{
+				//clearScene();
 				EventManager.dispatchEvent(MapEvent.MAP_LOAD_START);
 				if (ClientConfig.isSingle)
 				{
@@ -610,11 +631,14 @@ package com.rpgGame.app.manager.scene
 			
 			//检测用户死亡
 			ReliveManager.checkPlayerDie();
+			
+			
 			showSceneTips();
 			showSceneEffect();
 			MapDataManager.lastScene = MapDataManager.currentScene;
 			showScenePanel();
 		}
+		
 		
 		private static function showScenePanel():void
 		{
@@ -639,6 +663,12 @@ package com.rpgGame.app.manager.scene
 					AppManager.showApp(AppConstant.SWORD_PANL);
 					break;
 			}
+			
+			if(needOpenNewFuncId>0)
+			{
+				FunctionOpenManager.openAppPaneById(needOpenNewFuncId.toString());
+				needOpenNewFuncId = 0;
+			}
 		}
 		
 		private static function generateSceneEntities() : void
@@ -648,6 +678,7 @@ package com.rpgGame.app.manager.scene
 			SceneManager.generateSceneCollects();
 			SceneManager.generateSceneTransports();
 			SceneManager.generateEventArea();
+			
 		}
 		
 		/**

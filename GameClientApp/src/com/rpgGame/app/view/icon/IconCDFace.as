@@ -361,7 +361,7 @@ package com.rpgGame.app.view.icon
 			removeCdEvent();
 			removeCDFace();
 
-			count = 0;
+			
 			hideQuality();
 
 			if (_cdFace != null)
@@ -377,6 +377,7 @@ package com.rpgGame.app.view.icon
 			
 			TipTargetManager.remove(this);
 			super.clear();
+			count = 0;
 		}
 		
 		override public function destroy():void
@@ -390,6 +391,10 @@ package com.rpgGame.app.view.icon
 			this.touchable = true;
 			this.touchGroup = true;
 			this.setBg("");
+			if (_bgImage) 
+			{
+				_bgImage.visible=false;
+			}
 			recycle(this);
 		}
 

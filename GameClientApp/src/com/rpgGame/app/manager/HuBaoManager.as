@@ -1,5 +1,6 @@
 package com.rpgGame.app.manager
 {
+	import com.game.mainCore.core.timer.GameTimer;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -14,7 +15,9 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.cfg.HuBaoData;
 	import com.rpgGame.coreData.clientConfig.Q_convoy;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.role.HeroData;
+	import com.rpgGame.coreData.type.AIStateType;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.convoy.message.SCConvoyFailureMessage;
 	import com.rpgGame.netData.convoy.message.SCConvoyInfoMessage;
@@ -34,8 +37,12 @@ package com.rpgGame.app.manager
 		private var _prize:Vector.<ItemInfo>;
 		private var _time:int=0;
 		
+		private var _gTimer : GameTimer;
+		public static var AUTHUBAO:int=10;
+		
 		public function HuBaoManager()
 		{
+			_gTimer = new GameTimer("HuBaoManager", 1000, 0, onUpdate);
 			super();
 			EventManager.addEvent(UserMoveEvent.MOVE_RESCHANGE, onHuBaoHandler);
 		}
@@ -46,6 +53,8 @@ package com.rpgGame.app.manager
 			if(_instance==null)
 			{
 				_instance = new HuBaoManager();
+				_instance._gTimer.reset();
+				_instance._gTimer.start();
 			}
 			return _instance;
 		}
@@ -83,6 +92,27 @@ package com.rpgGame.app.manager
 			return instance()._time;
 		}
 		
+		private var _techSta:int=0;
+		private function onUpdate(force : Boolean = false) : void
+		{
+			if(_ishuing)
+			{
+				if(MainRoleManager.actor.stateMachine.isIdle)
+				{
+					_techSta++;
+					if(_techSta>=AUTHUBAO)
+					{
+						_techSta=0;
+						onwalkToNpc(HuBaoData.destinationNpc);
+					}
+				}
+				else
+				{
+					_techSta=0;
+				}
+			}
+		}
+		
 		public function gettipsText(q_con:Q_convoy):String
 		{
 			var str:String="";
@@ -90,7 +120,7 @@ package com.rpgGame.app.manager
 			var obj:Array=JSONUtil.decode(q_con.q_reward);
 			for(var i:int=0;i<obj.length;i++)
 			{
-				var itemInfo:ClientItemInfo=new ClientItemInfo(obj[i].mod);		
+				var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(obj[i].mod,1);
 				str+=itemInfo.qItem.q_name+": ×"+obj[i].num+"\n";
 			}		
 			return str;
@@ -107,8 +137,9 @@ package com.rpgGame.app.manager
 			instance()._prize=msg.reward;
 			instance()._time=msg.remainTime;
 			var role:SceneRole=MainRoleManager.actor;
+			(role.data as HeroData).baowuLv=msg.girlId;
 			if (role.headFace is HeadFace)
-				(role.headFace as HeadFace).updateHuBaoTitle(1);
+				(role.headFace as HeadFace).updateHuBaoTitle((role.data as HeroData).baowuLv);
 			AppManager.showApp(AppConstant.HUBAO_ZHUIZONG);	
 			EventManager.dispatchEvent(HuBaoEvent.HUBAO_ZHUIZONG,msg);
 		}
@@ -132,8 +163,9 @@ package com.rpgGame.app.manager
 		{
 			instance()._ishuing=false;
 			var role:SceneRole=MainRoleManager.actor;
+			(role.data as HeroData).baowuLv=0;
 			if (role.headFace is HeadFace)
-				(role.headFace as HeadFace).updateHuBaoTitle(0);
+				(role.headFace as HeadFace).updateHuBaoTitle((role.data as HeroData).baowuLv);
 			AppManager.showAppNoHide(AppConstant.HUBAO_CHENGGONG);
 			EventManager.dispatchEvent(HuBaoEvent.HUBAO_HUSONGCHENGGONG,msg);
 		}
@@ -151,8 +183,9 @@ package com.rpgGame.app.manager
 		{
 			instance()._ishuing=false;
 			var role:SceneRole=MainRoleManager.actor;
+			(role.data as HeroData).baowuLv=0;
 			if (role.headFace is HeadFace)
-				(role.headFace as HeadFace).updateHuBaoTitle(0);
+				(role.headFace as HeadFace).updateHuBaoTitle((role.data as HeroData).baowuLv);
 			EventManager.dispatchEvent(HuBaoEvent.HUBAO_HUSONGSHIBAI,msg);
 		}
 		

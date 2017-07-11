@@ -1,6 +1,8 @@
 package com.game.engine3D.vo
 {
 	import flash.geom.Vector3D;
+	
+	import away3d.utils.GCObject;
 
 	/**
 	 *
@@ -9,7 +11,7 @@ package com.game.engine3D.vo
 	 * 创建时间：2015-11-26 下午1:26:38
 	 *
 	 */
-	public class MapPointSet
+	public class MapPointSet extends GCObject
 	{
 		public var name : String;
 		public var points : Vector.<Vector3D>;

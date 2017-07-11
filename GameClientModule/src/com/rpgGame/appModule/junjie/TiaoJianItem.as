@@ -1,11 +1,13 @@
 package com.rpgGame.appModule.junjie
 {
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.JunJieEvent;
 	import com.rpgGame.core.events.ZhanGongEvent;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
 	import com.rpgGame.coreData.cfg.JunJieData;
 	import com.rpgGame.coreData.clientConfig.Q_junjie;
 	import com.rpgGame.coreData.utils.JunJieUtil;
@@ -24,10 +26,12 @@ package com.rpgGame.appModule.junjie
 		private var _info:JunJieConditionInfo;
 		private var _iswancheng:Boolean;
 		private var _q_junjie:Q_junjie;
+		private var _gongnengId:int=0;
 		public function TiaoJianItem()
 		{
 			_skin=new ShuXing_Item2();
 			super(_skin);
+			_skin.lbName.width=150;
 		}
 		
 		public function get iswancheng():Boolean
@@ -53,7 +57,7 @@ package com.rpgGame.appModule.junjie
 			switch(target)
 			{
 				case _skin.lbName:
-					AppManager.showAppById(_q_junjie.q_windId);
+					FunctionOpenManager.openAppPaneById(_gongnengId.toString(),null,false);
 					break;
 			}
 		}
@@ -64,6 +68,7 @@ package com.rpgGame.appModule.junjie
 			_info=info;	
 			showTiaojian();
 			_q_junjie=JunJieData.getModByLv(_id);
+			_gongnengId=JunJieUtil.getIDByTiaoJianType(_info.type);
 		}
 		
 		private function showTiaojian():void

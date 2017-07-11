@@ -328,6 +328,10 @@ package com.game.engine3D.display
 		
 		override public function dispose():void
 		{
+			if (this.parent) 
+			{
+				this.removeFromParent();
+			}
 			var len:int = _inter3DObjs ? _inter3DObjs.length : 0;
 			var i:int;
 			var inter3DObj:InterObject3D;

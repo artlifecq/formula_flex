@@ -49,8 +49,8 @@ package org.mokylin.skin.app.beibao.zhangong.button
 			};
 			skinNames={"down":"ui/app/beibao/zhangong/button/efanggong/down.jpg",
 			"downAndSelected":"ui/app/beibao/zhangong/button/efanggong/select.jpg",
+			"hover":"ui/app/beibao/zhangong/button/efanggong/over.jpg",
 			"overAndSelected":"ui/app/beibao/zhangong/button/efanggong/select.jpg",
-			"pver":"ui/app/beibao/zhangong/button/efanggong/pver.jpg",
 			"up":"ui/app/beibao/zhangong/button/efanggong/up.jpg",
 			"upAndSelected":"ui/app/beibao/zhangong/button/efanggong/select.jpg"};
 		}

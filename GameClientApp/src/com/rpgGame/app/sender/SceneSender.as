@@ -98,9 +98,8 @@ package com.rpgGame.app.sender
 			if (ReqLockUtil.isReqLocked(101206))
 				return;
 			ReqLockUtil.lockReq(101206, 3000);
-			
 			//切换场景
-			GameLog.addShow("3_9：准备换场景  传送门ID:\t" +transId);
+			GameLog.addShow("------------------------------3_9：准备换场景  传送门ID:\t" +transId);
 			var msg:ReqChangeMapByMoveMessage = new ReqChangeMapByMoveMessage();
 			msg.line = 0;
 			msg.tranId = transId;
@@ -121,7 +120,7 @@ package com.rpgGame.app.sender
 		 *
 		 * 成功后会收到切场景的消息
 		 */
-		public static function sceneMapTransport(sceneID : int, posx : int, posy : int, randomRan : int = 25, isVipTrans : Boolean = false, upgradeItemListVo : UpgradeItemListVo = null) : void
+		public static function sceneMapTransport(sceneID : int, posx : int, posy : int, randomRan : int = 25, isVipTrans : Boolean = false, upgradeItemListVo : UpgradeItemListVo = null,autoGold:int=0) : void
 		{
 			/*if (PathFinderUtil.isSolid(SceneManager.getDistrict(), new Vector3D(posx, posy, 0)))
 			{
@@ -143,7 +142,7 @@ package com.rpgGame.app.sender
 			}
 			
 			var msg:ReqSmallFlyShoesMessage = new ReqSmallFlyShoesMessage();
-			msg.autoGold = 0;
+			msg.autoGold = autoGold;
 			msg.mapLine = 1;
 			msg.mapModel = sceneID;
 			msg.position = new Position();

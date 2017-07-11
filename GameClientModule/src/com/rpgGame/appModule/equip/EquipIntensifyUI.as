@@ -144,10 +144,10 @@ package com.rpgGame.appModule.equip
 			_goodsContainerUse1=new GoodsContainerPanel(_skin.use_list,ItemContainerID.INTENSIFY_USE1,createItemRender1);
 			
 			_targetEquip=new DragDropItem(IcoSizeEnum.ICON_64,0);
-			_targetEquip.setBg(GridBGType.GRID_SIZE_64);
+//			_targetEquip.setBg(GridBGType.GRID_SIZE_64);
 //			_intensifyItem.setQualityImageIconPoint(8,8);
-			_targetEquip.x=610;
-			_targetEquip.y=130;
+			_targetEquip.x=621;
+			_targetEquip.y=150;
 			_targetEquip.onTouchEndCallBack=onCancelIntensify;
 			_targetEquip.dragAble = true;
 			_targetEquip.checkDrag=checkDrag;
@@ -384,7 +384,7 @@ package com.rpgGame.appModule.equip
 			if(tweenEquip){
 				tweenEquip.kill();
 			}
-			tweenEquip=TweenMax.to(_targetEquip,1,{x:610,y:130,ease:Expo.easeOut});
+			tweenEquip=TweenMax.to(_targetEquip,1,{x:621,y:150,ease:Expo.easeOut});
 			
 			if(isUse(targetEquipInfo)){
 //				_goodsContainerUse.setGrayForData(targetEquipInfo,true);

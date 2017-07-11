@@ -20,9 +20,11 @@ package com.editor.display
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.utils.MathUtil;
 	import com.game.engine3D.vo.SoftOutlineData;
-
+	
+	import flash.geom.Vector3D;
+	
 	import mx.controls.Alert;
-
+	
 	import away3d.containers.ObjectContainer3D;
 
 	/**
@@ -155,7 +157,7 @@ package com.editor.display
 				if (_data is ClientMapAreaData)
 				{
 					var areaData : ClientMapAreaData = _data as ClientMapAreaData;
-					var bounds : Array = MathUtil.getPolygonBounds(points);
+					var bounds : Vector3D = MathUtil.getPolygonBounds(points);
 					if (bounds)
 					{
 						var gridMaxCount : int = ((bounds[2] - bounds[0]) / areaData.mGridWidth) * ((bounds[3] - bounds[1]) / areaData.mGridHeight);

@@ -439,6 +439,9 @@ package org.game.netCore.net
 			sendCrossHash.put( 102208, 1 );
 			sendCrossHash.put( 102209, 1 );
 			
+			//采集请求
+			sendCrossHash.put( 104201, 1 );
+			
 			//boss传送  跨服中不允许使用
 			sendCrossHash.put( 101210, -1 );
 			sendCrossHash.put( 101216, -1 );
@@ -879,7 +882,7 @@ package org.game.netCore.net
 						
 						//传入数据到对应的监听函数去
 						var beginTime:int = getTimer();
-						GameLog.add("[消息处理 ] id:"  + id + "  message:" + message);
+						//GameLog.add("[消息处理 ] id:"  + id + "  message:" + message);
 						GameSocketDispatcher.excute(id, message);
 						var delta:int = getTimer() - beginTime;
 						if ( delta > 100 )

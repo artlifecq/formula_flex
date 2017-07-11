@@ -11,7 +11,7 @@ package com.rpgGame.appModule.battle.dfdj
 	import com.rpgGame.coreData.cfg.BattleRankCfg;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.clientConfig.Q_battle_rank;
-	import com.rpgGame.netData.pvp.message.SCRaceResultMessage;
+	import com.rpgGame.netData.dianfeng.message.SCRaceResultMessage;
 	
 	import flash.utils.Dictionary;
 	import flash.utils.getTimer;

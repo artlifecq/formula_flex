@@ -71,7 +71,7 @@ package com.rpgGame.appModule.skill
 			_skin.txt_Name.text=cfg.q_skillName;
 			_skillCfg=cfg;
 			_skillInfo=info;
-			_skin.tips.visible=SpellManager.canUpOrRise(cfg.q_skillID);
+			_skin.tips.visible=SpellManager.canUpOrRise(cfg.q_skillID)>0;
 			var i:int=0;
 			_icon.setIconResName(ClientConfig.getSkillIcon(cfg.q_skillID.toString(),IcoSizeEnum.ICON_42));
 			var item:DisplayObject;

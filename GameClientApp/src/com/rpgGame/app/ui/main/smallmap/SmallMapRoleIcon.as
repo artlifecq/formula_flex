@@ -17,6 +17,7 @@ package com.rpgGame.app.ui.main.smallmap
     import com.rpgGame.coreData.role.HeroData;
     import com.rpgGame.coreData.role.MonsterBornData;
     import com.rpgGame.coreData.role.MonsterData;
+    import com.rpgGame.coreData.role.SceneCollectData;
     import com.rpgGame.coreData.role.SceneTranportData;
     import com.rpgGame.coreData.utils.ColorUtils;
     
@@ -24,12 +25,13 @@ package com.rpgGame.app.ui.main.smallmap
     
     import app.message.CountryOfficerPos;
     
+    import away3d.events.Event;
+    
     import feathers.controls.Label;
     import feathers.controls.UIAsset;
     import feathers.controls.text.Fontter;
     
     import starling.display.Sprite;
-    import away3d.events.Event;
     import starling.text.TextFieldAutoSize;
 
     
@@ -246,8 +248,18 @@ package com.rpgGame.app.ui.main.smallmap
                     updateIco(iconUrl);
                     _tipsData.info = enemyHeroData.name + "<br/>" + mapX + "," + mapY;
                     break;
+				case MapIconType.SCENE_COLLECT:
+					var colletcData:SceneCollectData=_data as SceneCollectData;
+					iconUrl=getMapColletcIco(colletcData.id);
+					updateIco(iconUrl);
+					break;
             }
         }
+		
+		private function getMapColletcIco(id:int):String
+		{
+			return "ui/common/icon/caiji/jin_24.png"
+		}
         
         public function get data() : BaseEntityData
         {

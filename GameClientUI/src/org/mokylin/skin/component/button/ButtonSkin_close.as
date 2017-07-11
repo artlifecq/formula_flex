@@ -59,6 +59,9 @@ package org.mokylin.skin.component.button
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			iconDisplay = temp;
 			temp.name = "iconDisplay";
+			temp.styleName = "ui/component/button/skin_close/up.png";
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 

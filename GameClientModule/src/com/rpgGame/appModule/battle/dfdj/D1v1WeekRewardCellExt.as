@@ -2,6 +2,7 @@ package  com.rpgGame.appModule.battle.dfdj
 {
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.DRankWeekReward;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	
@@ -18,7 +19,7 @@ package  com.rpgGame.appModule.battle.dfdj
 		{
 			_skin=new PaiHangItem();
 			super(_skin);
-			_gReward=new RewardGroup(_skin.ico1,0,10,4);
+			_gReward=new RewardGroup(IcoSizeEnum.ICON_48,_skin.ico1,0,10,4);
 			this.addEventListener(Event.REMOVED_FROM_STAGE,onRemoved);
 		}
 		

@@ -58,6 +58,18 @@ package com.rpgGame.app.manager
 				setTimeout(flyItemToBag,0.2*i,itemsIdArr[i]);
 			}
 		}
+		public static function flyItemsToBagByList(itemsIdArr:Vector.<int>):void
+		{
+			if (itemsIdArr==null||itemsIdArr.length==0) 
+			{
+				return;
+			}
+			var len:int=itemsIdArr.length;
+			for (var i:int = 0; i <len; i++) 
+			{
+				setTimeout(flyItemToBag,0.2*i,itemsIdArr[i]);
+			}
+		}
 		/**
 		 * 物品缓动进包裹 
 		 * @param info
@@ -89,7 +101,6 @@ package com.rpgGame.app.manager
 		
 		public static function tweenMode(startPos:Point,onCmpFun:Function = null,time:Number = 1):void
 		{
-			
 			startPos = LayerManager.stageCenterPoint.add(startPos);
 			var content:Inter3DContainer = new Inter3DContainer();
 			content.x=startPos.x;

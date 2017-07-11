@@ -2,6 +2,7 @@ package com.rpgGame.app.view.icon
 {
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
+	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
 	

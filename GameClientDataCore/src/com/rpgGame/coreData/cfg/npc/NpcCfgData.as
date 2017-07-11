@@ -117,8 +117,8 @@ package com.rpgGame.coreData.cfg.npc
 				case NpcType.MAZE_PRIZE://迷宫奖励
 					MazeCfgData.mazeNpcIds.push(npcId);
 					break;
-				case NpcType.GUILD_CREATE://创建帮派
-					GuildCfgData.createGuildNpc = npcId;
+				/*case NpcType.GUILD_CREATE://创建帮派
+					GuildCfgData.createGuildNpc = npcId;*/
 					break;
 				case NpcType.COUNTRY_WAR_ENTER_ADMIRE_AREA://进入参拜区域
 					enterWorshipNPCID = npcId;

@@ -31,6 +31,8 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.state.role.control.BlindState;
 	import com.rpgGame.app.state.role.control.BlinkMoveState;
 	import com.rpgGame.app.state.role.control.CastSpellLockState;
+	import com.rpgGame.app.state.role.control.CheckStartAutoFightState;
+	import com.rpgGame.app.state.role.control.CheckTripleAttackState;
 	import com.rpgGame.app.state.role.control.DeadLaunchMoveState;
 	import com.rpgGame.app.state.role.control.FastingState;
 	import com.rpgGame.app.state.role.control.FlyUpState;
@@ -40,6 +42,8 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.state.role.control.HushState;
 	import com.rpgGame.app.state.role.control.JumpRiseState;
 	import com.rpgGame.app.state.role.control.MountRideState;
+	import com.rpgGame.app.state.role.control.MysteryManState;
+	import com.rpgGame.app.state.role.control.NineTowerFightFlagState;
 	import com.rpgGame.app.state.role.control.PrewarWaitingState;
 	import com.rpgGame.app.state.role.control.RidingState;
 	import com.rpgGame.app.state.role.control.ScaredMoveState;
@@ -53,8 +57,10 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.state.role.control.StunState;
 	import com.rpgGame.app.state.role.control.SyncSpellActionState;
 	import com.rpgGame.app.state.role.control.TrailMoveState;
+	import com.rpgGame.app.state.role.control.TripleAttackSpellLockState;
 	import com.rpgGame.app.state.role.control.UnmovableState;
 	import com.rpgGame.app.state.role.control.UseSpellState;
+	import com.rpgGame.app.state.role.control.VipBuffState;
 	import com.rpgGame.app.state.role.control.WalkMoveState;
 	import com.rpgGame.core.state.role.action.ActionState;
 	import com.rpgGame.core.state.role.control.MoveState;
@@ -148,6 +154,12 @@ package com.rpgGame.app.state.role
 		stateMapping[RoleStateType.CONTROL_SHAPESHIFTING] = ShapeshiftingState;
 		stateMapping[RoleStateType.CONTROL_SHORTCUTGRID] = ShortcutGridState;
 		stateMapping[RoleStateType.CONTROL_SKILL_WARNING] = SkillWarningState;
+		stateMapping[RoleStateType.CONTROL_TOWER_FLAG] = NineTowerFightFlagState;
+		stateMapping[RoleStateType.CONTROL_CHECK_AUTO_FIGHT] = CheckStartAutoFightState;
+		stateMapping[RoleStateType.CONTROL_MASTERY_MAN] = MysteryManState;
+		stateMapping[RoleStateType.CONTROL_VIP] = VipBuffState;
+		stateMapping[RoleStateType.CONTROL_TRIPLE_ATTACK_LOCK] = TripleAttackSpellLockState;
+		stateMapping[RoleStateType.CONTROL_TRIPLE_ATTACK_CHECK] = CheckTripleAttackState;
 		private var _role : SceneRole;
 		private var _lastCanShowRiding : Boolean;
 		
@@ -360,7 +372,11 @@ package com.rpgGame.app.state.role
 			var state : IState = getCurrState(CastSpellLockState);
 			return state != null;
 		}
-		
+		public function get isTripleLockCaseSpell() : Boolean
+		{
+			var state : IState = getCurrState(TripleAttackSpellLockState);
+			return state != null;
+		}
 		public function get isBingDong() : Boolean
 		{
 			var state : IState = getCurrState(BingDongState);
@@ -444,7 +460,11 @@ package com.rpgGame.app.state.role
 			var state : IState = getCurrState(ShapeshiftingState);
 			return state != null;
 		}
-		
+		public function get isMysteryMan():Boolean
+		{
+			var state : IState = getCurrState(MysteryManState);
+			return state != null;
+		}
 		override protected function createState(type : int) : IState
 		{
 			var state : IState = null;

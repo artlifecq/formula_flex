@@ -4,6 +4,7 @@ package com.rpgGame.appModule.social
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.utils.TouchableUtil;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	
 	import feathers.controls.Button;
 
@@ -33,7 +34,7 @@ package com.rpgGame.appModule.social
 				left=(obj.endTime-SystemTimeManager.curtTm)/1000;
 				if (left>0) 
 				{
-					btn.label=left+"秒";
+					btn.label=left+NotifyCfgData.getNotifyTextByID(61007);
 				}
 				else
 				{
@@ -67,7 +68,7 @@ package com.rpgGame.appModule.social
 			obj.lab=endLab;
 			obj.endTime=time*1000+SystemTimeManager.curtTm;
 			TouchableUtil.gray(btn);
-			btn.label=time+"秒";
+			btn.label=time+NotifyCfgData.getNotifyTextByID(61007);
 			checkTimeStart();
 		}
 		private function checkTimeStart():void

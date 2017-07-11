@@ -27,6 +27,8 @@ package com.rpgGame.appModule.jingmai.sub
 	import com.rpgGame.coreData.utils.FilterUtil;
 	import com.rpgGame.netData.meridian.bean.AcuPointInfo;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.Label;
 	import feathers.controls.UIAsset;
 	import feathers.controls.UIMovieClip;
@@ -35,7 +37,6 @@ package com.rpgGame.appModule.jingmai.sub
 	import org.mokylin.skin.app.beibao.mc.UIMovieClipBianshi_guang;
 	
 	import starling.display.DisplayObject;
-	import away3d.events.Event;
 	import starling.filters.FragmentFilter;
 
 	public class MerdianPoint implements IStoneSelector
@@ -55,6 +56,7 @@ package com.rpgGame.appModule.jingmai.sub
 		private var _drawLine:MeridianMapLine;
 		private var _tipsInfo:BaseTipsInfo;
 		private var _type:int;
+		private var _hasReward:Boolean;
 		public function MerdianPoint(point:UIAsset,lab:Label,acupoint:String,mapLine:MeridianMapLine,ptType:int)
 		{
 			this._type=ptType;
@@ -293,6 +295,7 @@ package com.rpgGame.appModule.jingmai.sub
 		}
 		public  function showLoopEffect(bool:Boolean):void
 		{
+			_hasReward=bool;
 			if (bool) 
 			{
 				if (!_effect) 
@@ -478,6 +481,12 @@ package com.rpgGame.appModule.jingmai.sub
 		{
 			MeridianSender.reqSetUpPoint(data.MeridId,data.acuPointId,item);
 		}
+
+		public function get hasReward():Boolean
+		{
+			return _hasReward;
+		}
+
 		
 	}
 }

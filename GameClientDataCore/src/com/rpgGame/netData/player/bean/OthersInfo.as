@@ -17,7 +17,7 @@ package com.rpgGame.netData.player.bean{
 	 * 他人详细信息
 	 */
 	public class OthersInfo extends Bean {
-		
+	
 		//角色Id
 		private var _personId: long;
 		
@@ -59,6 +59,9 @@ package com.rpgGame.netData.player.bean{
 		
 		//帮会名称
 		private var _guildName: String;
+		
+		//帮会职位
+		private var _guildMemberType: int;
 		
 		//当前经验值
 		private var _exp: long;
@@ -107,6 +110,8 @@ package com.rpgGame.netData.player.bean{
 			writeByte(_viplevel);
 			//帮会名称
 			writeString(_guildName);
+			//帮会职位
+			writeInt(_guildMemberType);
 			//当前经验值
 			writeLong(_exp);
 			//最大经验值
@@ -163,6 +168,8 @@ package com.rpgGame.netData.player.bean{
 			_viplevel = readByte();
 			//帮会名称
 			_guildName = readString();
+			//帮会职位
+			_guildMemberType = readInt();
 			//当前经验值
 			_exp = readLong();
 			//最大经验值
@@ -395,6 +402,21 @@ package com.rpgGame.netData.player.bean{
 		 */
 		public function set guildName(value: String): void{
 			this._guildName = value;
+		}
+		
+		/**
+		 * get 帮会职位
+		 * @return 
+		 */
+		public function get guildMemberType(): int{
+			return _guildMemberType;
+		}
+		
+		/**
+		 * set 帮会职位
+		 */
+		public function set guildMemberType(value: int): void{
+			this._guildMemberType = value;
 		}
 		
 		/**

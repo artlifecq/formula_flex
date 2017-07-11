@@ -1,8 +1,6 @@
 package org.mokylin.skin.app.zhuangbei.xilian
 {
 	import feathers.controls.Button;
-	import feathers.controls.Check;
-	import feathers.controls.Group;
 	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
@@ -10,7 +8,7 @@ package org.mokylin.skin.app.zhuangbei.xilian
 	import org.mokylin.skin.app.zhuangbei.Zhuangbei_left;
 	import org.mokylin.skin.app.zhuangbei.xilian.XiLianItem;
 	import org.mokylin.skin.app.zhuangbei.xilian.button.ButtonXilian;
-	import org.mokylin.skin.component.button.ButtonSkin_shuoming;
+	import org.mokylin.skin.component.button.ButtonSkin_info;
 
 	/**
 	 * @private
@@ -30,8 +28,6 @@ package org.mokylin.skin.app.zhuangbei.xilian
 
 		public var btn_xilian:feathers.controls.Button;
 
-		public var chk_suoding1:feathers.controls.Check;
-
 		public var jiahao:feathers.controls.UIAsset;
 
 		public var lb_cailiao:feathers.controls.Label;
@@ -40,11 +36,7 @@ package org.mokylin.skin.app.zhuangbei.xilian
 
 		public var lb_item2:feathers.controls.Label;
 
-		public var lb_name1:feathers.controls.Label;
-
 		public var lb_num:feathers.controls.Label;
-
-		public var lb_yuanbao1:feathers.controls.Label;
 
 		public var left:feathers.controls.SkinnableContainer;
 
@@ -57,8 +49,8 @@ package org.mokylin.skin.app.zhuangbei.xilian
 			super();
 			
 			this.currentState = "normal";
-			this.height = 587;
-			this.width = 947;
+			this.height = 601;
+			this.width = 956;
 			this.elementsContent = [__Xilian_Skin_UIAsset3_i(),__Xilian_Skin_UIAsset4_i(),__Xilian_Skin_UIAsset5_i(),btn_shuoming_i(),Item1_i(),Item2_i(),jiahao_i(),__Xilian_Skin_Label1_i(),btn_xilian_i(),left_i(),lb_cailiao_i(),lb_num_i(),lb_item1_i(),lb_item2_i()];
 			
 			states = {
@@ -77,8 +69,8 @@ package org.mokylin.skin.app.zhuangbei.xilian
 			temp.name = "Item1";
 			var skin:StateSkin = new org.mokylin.skin.app.zhuangbei.xilian.XiLianItem()
 			temp.skin = skin
-			temp.x = 406;
-			temp.y = 301;
+			temp.x = 410;
+			temp.y = 314;
 			return temp;
 		}
 
@@ -89,8 +81,8 @@ package org.mokylin.skin.app.zhuangbei.xilian
 			temp.name = "Item2";
 			var skin:StateSkin = new org.mokylin.skin.app.zhuangbei.xilian.XiLianItem()
 			temp.skin = skin
-			temp.x = 406;
-			temp.y = 354;
+			temp.x = 410;
+			temp.y = 367;
 			return temp;
 		}
 
@@ -99,8 +91,8 @@ package org.mokylin.skin.app.zhuangbei.xilian
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.htmlText = "注：洗练除了获得属性外有机会洗练出特殊效果";
 			temp.color = 0xD02525;
-			temp.x = 504;
-			temp.y = 392;
+			temp.x = 508;
+			temp.y = 405;
 			return temp;
 		}
 
@@ -108,8 +100,8 @@ package org.mokylin.skin.app.zhuangbei.xilian
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/big_bg/zhuangbei/xilian/bg.jpg";
-			temp.x = 371;
-			temp.y = 75;
+			temp.x = 375;
+			temp.y = 88;
 			return temp;
 		}
 
@@ -117,8 +109,8 @@ package org.mokylin.skin.app.zhuangbei.xilian
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhuangbei/xilian/push_zhuangbei.png";
-			temp.x = 474;
-			temp.y = 225;
+			temp.x = 478;
+			temp.y = 238;
 			return temp;
 		}
 
@@ -126,8 +118,8 @@ package org.mokylin.skin.app.zhuangbei.xilian
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhuangbei/xilian/push_cailiao.png";
-			temp.x = 730;
-			temp.y = 225;
+			temp.x = 734;
+			temp.y = 238;
 			return temp;
 		}
 
@@ -136,9 +128,9 @@ package org.mokylin.skin.app.zhuangbei.xilian
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_shuoming = temp;
 			temp.name = "btn_shuoming";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_shuoming;
-			temp.x = 834;
-			temp.y = 83;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_info;
+			temp.x = 900;
+			temp.y = 96;
 			return temp;
 		}
 
@@ -148,8 +140,8 @@ package org.mokylin.skin.app.zhuangbei.xilian
 			btn_xilian = temp;
 			temp.name = "btn_xilian";
 			temp.styleClass = org.mokylin.skin.app.zhuangbei.xilian.button.ButtonXilian;
-			temp.x = 584;
-			temp.y = 457;
+			temp.x = 588;
+			temp.y = 470;
 			return temp;
 		}
 
@@ -159,8 +151,8 @@ package org.mokylin.skin.app.zhuangbei.xilian
 			jiahao = temp;
 			temp.name = "jiahao";
 			temp.styleName = "ui/app/zhuangbei/xilian/jiahao.png";
-			temp.x = 607;
-			temp.y = 143;
+			temp.x = 611;
+			temp.y = 156;
 			return temp;
 		}
 
@@ -172,8 +164,8 @@ package org.mokylin.skin.app.zhuangbei.xilian
 			temp.text = "初级图鉴图纸";
 			temp.color = 0xD02525;
 			temp.underline = true;
-			temp.x = 818;
-			temp.y = 198;
+			temp.x = 822;
+			temp.y = 211;
 			return temp;
 		}
 
@@ -186,8 +178,8 @@ package org.mokylin.skin.app.zhuangbei.xilian
 			temp.textAlign = "center";
 			temp.color = 0xD02525;
 			temp.width = 150;
-			temp.x = 438;
-			temp.y = 97;
+			temp.x = 442;
+			temp.y = 110;
 			return temp;
 		}
 
@@ -200,8 +192,8 @@ package org.mokylin.skin.app.zhuangbei.xilian
 			temp.textAlign = "center";
 			temp.color = 0xD02525;
 			temp.width = 150;
-			temp.x = 692;
-			temp.y = 98;
+			temp.x = 696;
+			temp.y = 111;
 			return temp;
 		}
 
@@ -214,8 +206,8 @@ package org.mokylin.skin.app.zhuangbei.xilian
 			temp.textAlign = "right";
 			temp.color = 0xD02525;
 			temp.width = 70;
-			temp.x = 735;
-			temp.y = 184;
+			temp.x = 739;
+			temp.y = 197;
 			return temp;
 		}
 
@@ -228,8 +220,8 @@ package org.mokylin.skin.app.zhuangbei.xilian
 			var skin:StateSkin = new org.mokylin.skin.app.zhuangbei.Zhuangbei_left()
 			temp.skin = skin
 			temp.width = 340;
-			temp.x = 23;
-			temp.y = 79;
+			temp.x = 27;
+			temp.y = 92;
 			return temp;
 		}
 

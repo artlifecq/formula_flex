@@ -310,7 +310,10 @@ package com.rpgGame.app.ui.main.chat {
 		
 		private function scrollToBottom() : void
 		{
-			_skin.chat_list.scrollToBottom(0);
+			if(!iskeepOrto)
+			{
+				_skin.chat_list.scrollToBottom(0);
+			}
 		}
 		
 		private function onSwitchPrivateChannel(targetID:Number, targetName:String):void

@@ -7,6 +7,7 @@ package com.rpgGame.app.graphics
 	import com.rpgGame.coreData.type.HeadBloodStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
+	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	
@@ -96,7 +97,7 @@ package com.rpgGame.app.graphics
 		private var _isDisposed : Boolean;
 		private var color:uint;
 		
-		
+		private var _hpBar:UIAsset;
 		public function HeadBloodBar($role : SceneRole,monster:Boolean)
 		{
 			super();
@@ -187,8 +188,26 @@ package com.rpgGame.app.graphics
 			
 			color = arr[0];
 			updateStateText(arr[1]);
-			
-			_hpSkinClass.bar.styleName = HeadBloodUtil.getBarStyleName(_state);
+			_hpSkinClass.barRed.visible=false;
+			_hpSkinClass.barBlue.visible=false;
+			if (!_isMonster) 
+			{
+				_hpSkinClass.barGreen.visible=false;
+			}
+			switch (_state)
+			{
+				case HeadBloodStateType.MAIN_CHAR:
+					_hpBar=_hpSkinClass.barGreen;
+					break;
+				case HeadBloodStateType.ENEMY:
+					_hpBar=_hpSkinClass.barRed;
+					break;
+				case HeadBloodStateType.TEAM:
+				case HeadBloodStateType.NPC:
+					_hpBar=_hpSkinClass.barBlue;
+					break;
+			}
+			_hpBar.visible=true;
 			if (!_isMonster) 
 			{
 				_hpSkinClass.uiQuan.styleName=HeadBloodUtil.getHPIconStyleName(_state);
@@ -238,12 +257,12 @@ package com.rpgGame.app.graphics
 			
 			if (value < 0)
 				value = 0;
-			//_hpSkinClass.bar.scaleX = value;
-			if (tw) 
-			{
-				tw.kill();
-			}
-			tw=TweenMax.to(_hpSkinClass.bar,0.5,{scaleX:value,onComplete:onTweenComplete});
+			_hpBar.scaleX = value;
+//			if (tw) 
+//			{
+//				tw.kill();
+//			}
+//			tw=TweenMax.to(_hpSkinClass.bar,0.5,{scaleX:value,onComplete:onTweenComplete});
 			
 			_lastPercent = value;
 		}
@@ -251,7 +270,9 @@ package com.rpgGame.app.graphics
 		{
 			if (!_isMonster) 
 			{
-				_hpSkinClass.lbLevel.text=lv+"";
+				var label:Label=_hpSkinClass.lbLevel;
+				label.text=lv+"";
+				label.x=16-label.textWidth/2;
 			}
 			
 		}
@@ -289,6 +310,14 @@ package com.rpgGame.app.graphics
 		public function get isInPool():Boolean
 		{
 			return _isDisposed;
+		}
+		override public function set x(value:Number):void
+		{
+			if (value==0) 
+			{
+				trace("xxx error");
+			}
+			super.x=value;
 		}
 	}
 }

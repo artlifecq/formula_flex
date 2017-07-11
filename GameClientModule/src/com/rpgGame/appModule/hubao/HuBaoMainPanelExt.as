@@ -23,6 +23,7 @@ package com.rpgGame.appModule.hubao
 	import com.rpgGame.coreData.clientConfig.Q_convoy;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import away3d.events.Event;
@@ -112,18 +113,18 @@ package com.rpgGame.appModule.hubao
 				{
 					var ico:IconCDFace=new IconCDFace(IcoSizeEnum.ICON_36);		
 					ico.selectImgVisible=false;	
-					var itemInfo:ClientItemInfo=new ClientItemInfo(prize[i].mod);
+					var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(prize[i].mod);
 					FaceUtil.SetItemGrid(ico,itemInfo);				
 					if(i==0){
-						ico.x=(tar.skin as HuBaoItem_Skin).icon1.x;
-						ico.y=(tar.skin as HuBaoItem_Skin).icon1.y;
+						ico.bindBg((tar.skin as HuBaoItem_Skin).icon1);
+						//						ico.y=(tar.skin as HuBaoItem_Skin).icon1.y;
 						(tar.skin as HuBaoItem_Skin).container.addChild(ico);
 						(tar.skin as HuBaoItem_Skin).container.addChild((tar.skin as HuBaoItem_Skin).lb1);
 						(tar.skin as HuBaoItem_Skin).lb1.text=prize[i].num;
 					}
 					else {
-						ico.x=(tar.skin as HuBaoItem_Skin).icon2.x;
-						ico.y=(tar.skin as HuBaoItem_Skin).icon2.y;
+						ico.bindBg((tar.skin as HuBaoItem_Skin).icon2);
+						//						ico.y=(tar.skin as HuBaoItem_Skin).icon2.y;
 						(tar.skin as HuBaoItem_Skin).container.addChild(ico);
 						(tar.skin as HuBaoItem_Skin).container.addChild((tar.skin as HuBaoItem_Skin).lb2);
 						(tar.skin as HuBaoItem_Skin).lb2.text=prize[i].num;
@@ -138,27 +139,25 @@ package com.rpgGame.appModule.hubao
 				{
 					ico=new IconCDFace(IcoSizeEnum.ICON_42);		
 					ico.selectImgVisible=false;	
-					itemInfo=new ClientItemInfo(prize[i].mod);
+					itemInfo=ItemUtil.convertClientItemInfoById(prize[i].mod);
 					FaceUtil.SetItemGrid(ico,itemInfo);
-					ico.x=0;
-					ico.y=0;
 					if(i==0){
-						ico.x=(tar.skin as HuBaoItem2_Skin).icon1.x;
-						ico.y=(tar.skin as HuBaoItem2_Skin).icon1.y;
+						ico.bindBg((tar.skin as HuBaoItem2_Skin).icon1);
+						//						ico.y=(tar.skin as HuBaoItem2_Skin).icon1.y;
 						(tar.skin as HuBaoItem2_Skin).container.addChild(ico);
 						(tar.skin as HuBaoItem2_Skin).container.addChild((tar.skin as HuBaoItem2_Skin).lb1);
 						(tar.skin as HuBaoItem2_Skin).lb1.text=prize[i].num;
 					}
 					else if(i==1){
-						ico.x=(tar.skin as HuBaoItem2_Skin).icon2.x;
+						ico.bindBg((tar.skin as HuBaoItem2_Skin).icon2);
 						ico.y=(tar.skin as HuBaoItem2_Skin).icon2.y;
 						(tar.skin as HuBaoItem2_Skin).container.addChild(ico);
 						(tar.skin as HuBaoItem2_Skin).container.addChild((tar.skin as HuBaoItem2_Skin).lb2);
 						(tar.skin as HuBaoItem2_Skin).lb2.text=prize[i].num;
 					}
 					else{
-						ico.x=(tar.skin as HuBaoItem2_Skin).icon3.x;
-						ico.y=(tar.skin as HuBaoItem2_Skin).icon3.y;
+						ico.bindBg((tar.skin as HuBaoItem2_Skin).icon3);
+						//						ico.y=(tar.skin as HuBaoItem2_Skin).icon3.y;
 						(tar.skin as HuBaoItem2_Skin).container.addChild(ico);
 						(tar.skin as HuBaoItem2_Skin).container.addChild((tar.skin as HuBaoItem2_Skin).lb3);
 						(tar.skin as HuBaoItem2_Skin).lb3.text=prize[i].num;
@@ -186,7 +185,7 @@ package com.rpgGame.appModule.hubao
 			EventManager.addEvent(HuBaoEvent.HUBAO_STAR,close);
 			EventManager.addEvent(ItemEvent.ITEM_ADD,updateItem);
 			EventManager.addEvent(ItemEvent.ITEM_CHANG,updateItem);
-			EventManager.addEvent(ItemEvent.ITEM_DELETE,updateItem);
+			EventManager.addEvent(ItemEvent.ITEM_REMOVE,updateItem);
 			
 			updateShowUseItem();
 			updateHuSongNum(HuBaoManager.instance().num);
@@ -202,7 +201,7 @@ package com.rpgGame.appModule.hubao
 			EventManager.removeEvent(HuBaoEvent.HUBAO_STAR,close);
 			EventManager.removeEvent(ItemEvent.ITEM_ADD,updateItem);
 			EventManager.removeEvent(ItemEvent.ITEM_CHANG,updateItem);
-			EventManager.removeEvent(ItemEvent.ITEM_DELETE,updateItem);
+			EventManager.removeEvent(ItemEvent.ITEM_REMOVE,updateItem);
 		}
 		
 		private function updateItem(info:ClientItemInfo):void
@@ -249,7 +248,7 @@ package com.rpgGame.appModule.hubao
 					_chenhaoEftContaner1.addChild(sp);
 					_moxing1.x=100;
 					_moxing1.y=280;
-					unit.setScale(2.5);
+					//					unit.setScale(2.5);
 					unit.addUnitAtComposite(unit);
 					_chenhaoEftContaner1.addChild3D(_moxing1);
 					var tipStr:String=HuBaoManager.instance().gettipsText(q_con);
@@ -267,7 +266,7 @@ package com.rpgGame.appModule.hubao
 					_chenhaoEftContaner2.addChild(sp);
 					_moxing2.x=100;
 					_moxing2.y=280;
-					unit.setScale(2.5);
+					//					unit.setScale(2.5);
 					unit.addUnitAtComposite(unit);
 					_chenhaoEftContaner2.addChild3D(_moxing2);
 					tipStr=HuBaoManager.instance().gettipsText(q_con);
@@ -285,7 +284,7 @@ package com.rpgGame.appModule.hubao
 					_chenhaoEftContaner3.addChild(sp);
 					_moxing3.x=100;
 					_moxing3.y=280;
-					unit.setScale(2.5);
+					//					unit.setScale(2.5);
 					unit.addUnitAtComposite(unit);
 					_chenhaoEftContaner3.addChild3D(_moxing3);
 					tipStr=HuBaoManager.instance().gettipsText(q_con);
@@ -303,7 +302,7 @@ package com.rpgGame.appModule.hubao
 					_chenhaoEftContaner4.addChild(sp);
 					_moxing4.x=100;
 					_moxing4.y=280;
-					unit.setScale(2.5);
+					//					unit.setScale(2.5);
 					unit.addUnitAtComposite(unit);
 					_chenhaoEftContaner4.addChild3D(_moxing4);
 					tipStr=HuBaoManager.instance().gettipsText(q_con);
@@ -321,29 +320,66 @@ package com.rpgGame.appModule.hubao
 			{
 				case 1:
 				{
-					_chenhaoEft = _chenhaoEftContaner1.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,20,0);
-					_diEft = _chenhaoEftContaner1.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,300,0);
+					_chenhaoEft = _chenhaoEftContaner1.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,50,0);
+					_diEft = _chenhaoEftContaner1.playInter3DAt(ClientConfig.getEffect("tx_ui_yabiao_xuanzhong"),100,300,0);
+					_moxing1.addEventListener(Event.ENTER_FRAME,onRotaion1);
 					break;
 				}
 				case 2:
 				{
-					_chenhaoEft = _chenhaoEftContaner2.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,20,0);
-					_diEft = _chenhaoEftContaner2.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,300,0);
+					_chenhaoEft = _chenhaoEftContaner2.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,50,0);
+					_diEft = _chenhaoEftContaner2.playInter3DAt(ClientConfig.getEffect("tx_ui_yabiao_xuanzhong"),100,300,0);
+					_moxing2.addEventListener(Event.ENTER_FRAME,onRotaion2);
 					break;
 				}
 				case 3:
 				{
-					_chenhaoEft = _chenhaoEftContaner3.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,20,0);
-					_diEft = _chenhaoEftContaner3.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,300,0);
+					_chenhaoEft = _chenhaoEftContaner3.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,50,0);
+					_diEft = _chenhaoEftContaner3.playInter3DAt(ClientConfig.getEffect("tx_ui_yabiao_xuanzhong"),100,300,0);
+					_moxing3.addEventListener(Event.ENTER_FRAME,onRotaion3);
 					break;
 				}
 				case 4:
 				{
-					_chenhaoEft = _chenhaoEftContaner4.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,20,0);
-					_diEft = _chenhaoEftContaner4.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,300,0);
+					_chenhaoEft = _chenhaoEftContaner4.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,50,0);
+					_diEft = _chenhaoEftContaner4.playInter3DAt(ClientConfig.getEffect("tx_ui_yabiao_xuanzhong"),100,300,0);
+					_moxing4.addEventListener(Event.ENTER_FRAME,onRotaion4);				
 					break;
 				}			
-			}		
+			}
+			//			_chenhaoEft.addEventListener(Event.ENTER_FRAME,onRotaion);
+		}
+		
+		private function onRotaion1(e:Event):void
+		{
+			if(_moxing1)
+			{
+				_moxing1.baseObj3D.rotationY+=20;
+			}
+		}
+		
+		private function onRotaion2(e:Event):void
+		{
+			if(_moxing2)
+			{
+				_moxing2.baseObj3D.rotationY+=20;
+			}
+		}
+		
+		private function onRotaion3(e:Event):void
+		{
+			if(_moxing3)
+			{
+				_moxing3.baseObj3D.rotationY+=20;
+			}
+		}
+		
+		private function onRotaion4(e:Event):void
+		{
+			if(_moxing4)
+			{
+				_moxing4.baseObj3D.rotationY+=20;
+			}
 		}
 		
 		private function clearChenHaoEff():void
@@ -356,6 +392,14 @@ package com.rpgGame.appModule.hubao
 			_chenhaoEftContaner3.removeChild3D(_diEft);
 			_chenhaoEftContaner4.removeChild3D(_chenhaoEft);
 			_chenhaoEftContaner4.removeChild3D(_diEft);
+			_moxing1.removeEventListener(Event.ENTER_FRAME,onRotaion1);
+			_moxing2.removeEventListener(Event.ENTER_FRAME,onRotaion2);
+			_moxing3.removeEventListener(Event.ENTER_FRAME,onRotaion3);
+			_moxing4.removeEventListener(Event.ENTER_FRAME,onRotaion4);
+			_moxing1.baseObj3D.rotationY=0;
+			_moxing2.baseObj3D.rotationY=0;
+			_moxing3.baseObj3D.rotationY=0;
+			_moxing4.baseObj3D.rotationY=0;
 			if(_chenhaoEft != null)
 			{
 				_chenhaoEft.dispose();

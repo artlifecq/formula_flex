@@ -25,16 +25,6 @@ package org.mokylin.skin.app.activety.shijieboss
 
 		public var icon1:feathers.controls.UIAsset;
 
-		public var icon2:feathers.controls.UIAsset;
-
-		public var icon3:feathers.controls.UIAsset;
-
-		public var icon4:feathers.controls.UIAsset;
-
-		public var icon5:feathers.controls.UIAsset;
-
-		public var icon6:feathers.controls.UIAsset;
-
 		public var imgWin:feathers.controls.UIAsset;
 
 		public var numPaiming:feathers.controls.UINumber;
@@ -90,7 +80,7 @@ package org.mokylin.skin.app.activety.shijieboss
 		private function __TiaoZhanShengLi_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhanchang/jiesuan/wodepaiming.png";
+			temp.styleName = "ui/app/activety/wodepaiming.png";
 			temp.x = 151;
 			temp.y = 206;
 			return temp;
@@ -101,11 +91,11 @@ package org.mokylin.skin.app.activety.shijieboss
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnOk = temp;
 			temp.name = "btnOk";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "领取奖励";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.color = 0xCFC6AE;
-			temp.width = 112;
+			temp.color = 0xFFFFFF;
+			temp.width = 110;
 			temp.x = 175;
 			temp.y = 367;
 			return temp;
@@ -118,7 +108,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.name = "grpIcon";
 			temp.x = 59;
 			temp.y = 286;
-			temp.elementsContent = [icon1_i(),icon2_i(),icon3_i(),icon4_i(),icon5_i(),icon6_i()];
+			temp.elementsContent = [icon1_i()];
 			return temp;
 		}
 
@@ -129,61 +119,6 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.name = "icon1";
 			temp.styleName = "ui/common/grid/normal/48.png";
 			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function icon2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon2 = temp;
-			temp.name = "icon2";
-			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 56;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function icon3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon3 = temp;
-			temp.name = "icon3";
-			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 112;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function icon4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon4 = temp;
-			temp.name = "icon4";
-			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 169;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function icon5_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon5 = temp;
-			temp.name = "icon5";
-			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 225;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function icon6_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon6 = temp;
-			temp.name = "icon6";
-			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 281;
 			temp.y = 0;
 			return temp;
 		}

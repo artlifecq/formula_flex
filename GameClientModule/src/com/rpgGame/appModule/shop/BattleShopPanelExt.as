@@ -16,6 +16,7 @@ package com.rpgGame.appModule.shop
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.zhanchang.shangdian.ShengWang_Store;
+	import org.mokylin.skin.common.Flip1_Skin;
 	
 	import starling.display.DisplayObjectContainer;
 	
@@ -33,7 +34,8 @@ package com.rpgGame.appModule.shop
 			super(_skin);
 		
 			shopVo=Mgr.shopMgr.getShopVo(EnumShopType.SHOP_SW);
-			_pageCtrl=new PageSelectUICtrl(_skin.btn_min,_skin.btn_max,_skin.lbPage,showPageData);
+			var flip:Flip1_Skin=_skin.skinFlip.skin as Flip1_Skin;
+			_pageCtrl=new PageSelectUICtrl(flip.btnDec,flip.btnAdd,flip.textDisplay,showPageData);
 			init();
 		}
 		private function init():void

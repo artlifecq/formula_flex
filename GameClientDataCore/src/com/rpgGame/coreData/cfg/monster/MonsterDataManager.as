@@ -341,10 +341,32 @@ package com.rpgGame.coreData.cfg.monster
 			
 			return 0;
 		}
-		/**根据任务ID获取任务信息*/
+		
+		
+		/**
+		 *根据刷新id获取刷新数据 
+		 * @param id
+		 * @return 
+		 * 
+		 */
 		public static function getAreaByAreaID(id : uint) : Q_scene_monster_area 
 		{
 			return _monsterArea[id];
 		}
+		
+		/**
+		 * 根据刷新id获取npc闲话
+		 */
+		public static function getNpcSpeak(areaid : int) :String
+		{
+			var areaData : Q_scene_monster_area =getAreaByAreaID(areaid);
+			if(areaData!=null)
+			{
+				return areaData.q_speak;
+			}
+			
+			return "";
+		}
+		
 	}
 }

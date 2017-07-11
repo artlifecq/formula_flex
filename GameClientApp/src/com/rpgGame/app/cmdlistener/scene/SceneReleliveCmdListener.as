@@ -1,6 +1,7 @@
 package com.rpgGame.app.cmdlistener.scene
 {
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
+	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.CharAttributeManager;
 	import com.rpgGame.app.manager.GameCameraManager;
 	import com.rpgGame.app.manager.ReliveManager;
@@ -219,6 +220,9 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			HeroData.setEnterEyeUserInfo(data, info);
 			var role : SceneRole = SceneRoleManager.getInstance().createHero(data);
+			if(info.keyValueList&&role){
+				(role.headFace as HeadFace).updateGuildWarInfoBar(info.keyValueList);
+			}
 			//to do 给这个人播放一个复活特效 
 			SpellAnimationHelper.addTargetEffect(role, 
 				RenderUnitID.LEVEL, 

@@ -27,6 +27,8 @@ package com.rpgGame.coreData.info.map
 		public static const BORN_NPC : int = rEnum.next;
 		/**场景怪物点*/
 		public static const SCENE_MONSTER : int = rEnum.next;
+		/**场景采集物点*/
+		public static const SCENE_COLLECT : int = rEnum.next;
 		/**场景本国玩家点*/
 		public static const SCENE_PLAYER_MY_COUNTRY : int = rEnum.next;
 		/**场景敌国玩家点*/

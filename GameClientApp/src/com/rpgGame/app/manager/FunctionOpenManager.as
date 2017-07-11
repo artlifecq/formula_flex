@@ -1,14 +1,17 @@
 ﻿package com.rpgGame.app.manager
 {
+    import com.gameClient.utils.JSONUtil;
+    import com.rpgGame.app.manager.chat.NoticeManager;
+    import com.rpgGame.app.manager.guild.GuildManager;
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.core.app.AppConstant;
     import com.rpgGame.core.app.AppManager;
     import com.rpgGame.core.events.FunctionOpenEvent;
-    import com.rpgGame.coreData.UNIQUEID;
     import com.rpgGame.coreData.cfg.FuncionBarCfgData;
     import com.rpgGame.coreData.cfg.NewFuncCfgData;
     import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
     import com.rpgGame.coreData.clientConfig.Q_newfunc;
+    import com.rpgGame.coreData.enum.EmFunctionID;
     
     import org.client.mainCore.ds.HashMap;
     import org.client.mainCore.manager.EventManager;
@@ -17,7 +20,7 @@
     {
         public static var funcBits:Object = null;
         private static var _statusMap:HashMap = new HashMap();
-		
+		public static var needShowOpenMode:Boolean = true;
 		/**
 		 * 检查已经开启的新功能,并通知消息 
 		 * @param level
@@ -39,10 +42,13 @@
 			}
 			if(isdispatch)
 			{
-				if(itemlist.length>0)
-					AppManager.showAppNoHide(AppConstant.OPEN_FUNCTION,itemlist.concat());
-				else
-					AppManager.hideApp(AppConstant.OPEN_FUNCTION);
+				if(needShowOpenMode)
+				{
+					if(itemlist.length>0)
+						AppManager.showAppNoHide(AppConstant.OPEN_FUNCTION,itemlist.concat());
+					else
+						AppManager.hideApp(AppConstant.OPEN_FUNCTION);
+				}
 				EventManager.dispatchEvent(FunctionOpenEvent.FUNCTIONOPENID,itemlist);
 			}
 			openNoticeByLevel(level);
@@ -57,7 +63,26 @@
 		 */
 		public static function functionIsOpen(id:String):Boolean
 		{
-			return _statusMap.getValue(id) as Q_newfunc != null;
+			var bool:Boolean = _statusMap.getValue(id) as Q_newfunc != null;
+			if(bool)
+			{
+				switch(id)
+				{
+					case EmFunctionID.EM_BANGHUI_INFO:
+					case EmFunctionID.EM_BANGHUI_CHENGYUAN:
+					case EmFunctionID.EM_BANGHUI_UPLEVEL:
+					case EmFunctionID.EM_BANGHUI_COMBAT:
+						bool = GuildManager.instance().haveGuild;
+						break;
+					case EmFunctionID.EM_BANGHUI_SPELL:
+						if(GuildManager.instance().haveGuild)
+							bool = true;
+						else
+							bool = GuildManager.instance().havePersonSkill;
+						break;
+				}
+			}
+			return bool;
 		}
 		
 		/**
@@ -67,24 +92,19 @@
 		 */
 		public static function openNoticeByLevel(level:int):void
 		{
-			var infos:Array = NewFuncCfgData.alldata();
+			var infos:Vector.<Q_newfunc> = NewFuncCfgData.getSortList();
 			var length:int = infos.length;
 			var found:Q_newfunc; 
 
 			for(var i:int = 0;i<length;i++)
 			{
 				var data:Q_newfunc = infos[i];
-				if(data.q_notivelevel <= 0)
-					continue;
-				if(data.q_notivelevel > level)
-					continue;
 				if(data.q_level <= level)
 					continue;
-				
 				if(found==null)
+				{
 					found = data;
-				else if(found.q_id<data.q_id){
-					found = data;
+					break;
 				}
 			}
 			
@@ -107,9 +127,11 @@
 		
 		public static function getOpenLevelByFunBarInfo(info:FunctionBarInfo):int
 		{
+			if(info.isshow==1)
+				return int.MAX_VALUE;
 			var list:Array = NewFuncCfgData.getListById(info.id);
 			if(list==null)
-				return 0;
+				return int.MAX_VALUE;
 			var value:int = int.MAX_VALUE;
 			for each(var func:Q_newfunc in list)
 			{
@@ -133,38 +155,59 @@
 		 * @return 
 		 * 
 		 */
-		public static function openFunctionId(info:Q_newfunc,data:Object = null):void
+		public static function openFunctionId(info:Q_newfunc,data:Object = null,isAutoHide:Boolean = true):void
 		{
 			if(info==null)
 				return ;
-			if(!functionIsOpen(info.q_id))
+			if(!functionIsOpen(info.q_id.toString()))
 			{
 				return ;
 			}
-			var modeInfo:FunctionBarInfo = FuncionBarCfgData.getActivityBarInfo(info.q_main_id);
-			openModeByInfo(modeInfo,info.q_id.toString(),data);
+			var ids:Array = JSONUtil.decode(info.q_main_id) as Array;
+			var modeInfo:FunctionBarInfo = FuncionBarCfgData.getActivityBarInfo(ids[0]);
+			openModeByInfo(modeInfo,info.q_id.toString(),data,isAutoHide);
 		}
 		
-		public static function openAppPaneById(id:String,data:Object = null):void
+		public static function openAppPaneById(id:String,data:Object = null,isAutoHide:Boolean = true,isError:Boolean = true):void
 		{
 			var info:Q_newfunc = NewFuncCfgData.getdataById(id);
 			if(info==null)
+			{
+				if(isError)
+					NoticeManager.showNotifyById(61040);
 				return ;
-			openFunctionId(info,data);
+			}
+			openFunctionId(info,data,isAutoHide);
 		}
 		
 		/**
 		 * 打开面板
 		 * @param info
+		 * @param id 功能id
+		 * @param data
+		 * @param isAutoHide
 		 * 
 		 */
-		public static function openModeByInfo(info:FunctionBarInfo,id:String= "",data:Object = null):void
+		public static function openModeByInfo(info:FunctionBarInfo,id:String= "",data:Object = null,isAutoHide:Boolean = true):void
 		{
-			if(info.clickarg=="")
-				return ;
+			var openId:String=id?id:"";
 			if(info.clickType==1)
 			{
-				AppManager.showApp(info.clickarg,data,id);
+				if(info.clickarg=="")
+					return ;
+				if(isAutoHide)
+					AppManager.showApp(info.clickarg,data,openId);
+				else
+					AppManager.showAppNoHide(info.clickarg,data,openId);
+			}else if(info.clickType ==3){
+				if(info.id == 105){
+					if(RedRewardManager.instance().canGetReward)
+					{
+						AppManager.showAppNoHide(AppConstant.REDREWARD_OPEN);
+					}else{
+						AppManager.showAppNoHide(AppConstant.REDREWARD_PANLE);
+					}
+				}
 			}
 		}
     }

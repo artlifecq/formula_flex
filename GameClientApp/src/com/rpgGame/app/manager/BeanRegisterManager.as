@@ -16,9 +16,11 @@
 	import com.rpgGame.app.cmdlistener.GMCmdListener;
 	import com.rpgGame.app.cmdlistener.GoodsContainerCmdListener;
 	import com.rpgGame.app.cmdlistener.GuildCmdListener;
+	import com.rpgGame.app.cmdlistener.GuildWarCmdListener;
 	import com.rpgGame.app.cmdlistener.HeroMiscCmdListener;
 	import com.rpgGame.app.cmdlistener.HeroSearchCmdListener;
 	import com.rpgGame.app.cmdlistener.HuBaoContainerCmdListener;
+	import com.rpgGame.app.cmdlistener.HunYinCmdListener;
 	import com.rpgGame.app.cmdlistener.JJBattleCmdListener;
 	import com.rpgGame.app.cmdlistener.JunJieContainerCmdListener;
 	import com.rpgGame.app.cmdlistener.LookCmdListener;
@@ -26,8 +28,10 @@
 	import com.rpgGame.app.cmdlistener.MailCmdListener;
 	import com.rpgGame.app.cmdlistener.MeridianCmdListerner;
 	import com.rpgGame.app.cmdlistener.MiscCmdListener;
+	import com.rpgGame.app.cmdlistener.NineTowerCmdListener;
 	import com.rpgGame.app.cmdlistener.NotifyCmdListener;
 	import com.rpgGame.app.cmdlistener.NpcCmdListener;
+	import com.rpgGame.app.cmdlistener.RedRewardCmdListener;
 	import com.rpgGame.app.cmdlistener.RoleStateCmdListener;
 	import com.rpgGame.app.cmdlistener.RollCmdListener;
 	import com.rpgGame.app.cmdlistener.ShopCmdListener;
@@ -37,11 +41,12 @@
 	import com.rpgGame.app.cmdlistener.SummonCmdListener;
 	import com.rpgGame.app.cmdlistener.TeamCmdListerner;
 	import com.rpgGame.app.cmdlistener.TradeCmdlistener;
+	import com.rpgGame.app.cmdlistener.VipCmdListerner;
 	import com.rpgGame.app.cmdlistener.ZhanGongContainerCmdListener;
 	import com.rpgGame.app.cmdlistener.clientConfig.ClientConfigCmdListener;
 	import com.rpgGame.app.cmdlistener.engine.InteractiveCmdListener;
 	import com.rpgGame.app.cmdlistener.engine.KeyboardCmdListener;
-	import com.rpgGame.app.cmdlistener.mount.MountCmdListener;
+	import com.rpgGame.app.cmdlistener.mount.HorseCmdListener;
 	import com.rpgGame.app.cmdlistener.mount.ZhanQiCmdListener;
 	import com.rpgGame.app.cmdlistener.scene.SceneCmdListener;
 	import com.rpgGame.app.cmdlistener.scene.SceneReleliveCmdListener;
@@ -134,12 +139,15 @@
 //			register("FamilyWarCmdListener", FamilyWarCmdListener); //王城战
 			register("NpcCmdListener", NpcCmdListener); //王城战
 //			register("YunBiaoCmdListener", YunBiaoCmdListener); //王城战
-			register("MountCmdListener", MountCmdListener); //坐骑
+			register("HorseCmdListener", HorseCmdListener); //坐骑
 			register("ZhanQiCmdListener", ZhanQiCmdListener); //战旗
+			register("HunYinCmdListener", HunYinCmdListener); //婚姻
+			
 			register("TradeCmdlistener", TradeCmdlistener); //王城战
 			register("BaZhenTuCmdListener", BaZhenTuCmdListener); //八阵图
 //			register("DailyTasksCmdListener", DailyTasksCmdListener); //日常任务追踪栏事件监听
 			register("GuildCmdListener", GuildCmdListener); //帮派
+			register("GuildWarCmdListener", GuildWarCmdListener); //帮派战
 			register("DaTiCmdListener", DaTiCmdListener); //答题
 //			register("BiaoJuCmdListener", BiaoJuCmdListener); //镖局
 //			register("MazeCmdListener", MazeCmdListener); //迷宫
@@ -160,6 +168,9 @@
 			register("JJBattleCmdListener", JJBattleCmdListener); //模块号7
 			register("SpecialActivitiesCmdListener", SpecialActivitiesCmdListener); //模块号7
 			register("DFBattleCmdListener", DFBattleCmdListener); //模块号7
+			register("NineTowerCmdListener",NineTowerCmdListener);
+			register("VipCmdListerner",VipCmdListerner);
+			register("RedRewardCmdListener",RedRewardCmdListener);
 		}
 	}
 }

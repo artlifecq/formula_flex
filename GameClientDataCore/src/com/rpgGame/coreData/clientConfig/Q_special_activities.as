@@ -20,6 +20,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_activity_type:int;
 		 /**  活动时间（[[-1],[-1],[-1],[1,3,4,5],[1200,2200],[-1]]） */
 		public var q_activity_time:String;
+		 /**    */
+		public var q_order:int;
 		 /**  活动时间展示 */
 		public var q_activity_timeshow:String;
 		 /**  活动限制等级 */
@@ -30,10 +32,14 @@ package com.rpgGame.coreData.clientConfig
 		public var q_announcement_time:String;
 		 /**  面板提前公告时间（提前分钟） */
 		public var q_panel_pre_time:int;
+		 /**  活动icon编号 */
+		public var q_icon_id:int;
 		 /**  公告内容(【活动】开心问答,将｛@｝分钟后开始,请各位做好准备) */
 		public var q_notice:String;
 		 /**  公告传送(不填直接去参加活动，填了跳转到对应面板) */
 		public var q_notice_trans:String;
+		 /**  是否显示右下角公告（0否，1是） */
+		public var q_show_notice:int;
 		 /**  新功能开放表中的功能ID */
 		public var q_trans_funcID:String;
 		 /**  活动名称图片资源编号 */
@@ -62,6 +68,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_move_y:int;
 		 /**  是否为帮会活动（1是，0否） */
 		public var q_guide:int;
+		 /**  左上角icon */
+		public var q_lt_res:String;
 		 /**  元素资源id */
 		public var q_res_id:String;
 		 /**  详情背景 */

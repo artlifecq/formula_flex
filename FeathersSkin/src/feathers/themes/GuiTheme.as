@@ -357,6 +357,9 @@ package feathers.themes{
 				return false;
 			}else {
 				var skinName:String=stateSkins[UIState.UP];
+				if(!skinName){
+					return false;
+				}
 				return skinName.indexOf(",") != -1;
 			}
 			
@@ -919,9 +922,10 @@ package feathers.themes{
 					skinSelector.readjustSize(sub.width, sub.height);
 				}
 				
-				if(isScale9Textue(key))
+				var scaleName:String=splitIconSkinName(key, isIcon);
+				if(isScale9Textue(scaleName))
 				{
-					applayScale9Gird(skinSelector, key);
+					applayScale9Gird(skinSelector, scaleName);
 				}
 				
 				//没有disabled状态图片
@@ -1165,7 +1169,8 @@ package feathers.themes{
 				{
 					onAssetsLoaded(url);
 				}, null, null, priority);
-			}else
+			}
+			else
 			{
 				var texture:ConcreteTexture;
 				var onTextureComplete:Function = function():void

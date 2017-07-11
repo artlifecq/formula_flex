@@ -86,7 +86,7 @@ package com.rpgGame.app.manager
 		 * */
 		public static function getProgressByLv(lv:int):String
 		{
-			if(_meritoriousInfos==null) return "0%";
+			if(_meritoriousInfos==null) return "0.000%";
 			var nowLv:int=0;
 			var maxLv:int=0;
 			for(var i:int=0;i<_meritoriousInfos.length;i++)
@@ -103,11 +103,22 @@ package com.rpgGame.app.manager
 				var par:String=(nowLv/maxLv).toFixed(3)+"%";
 			}
 			else
-				par="0%";
+				par="0.000%";
 			
 			return par;
 		}
-		
+		public static function getCanUp():Boolean
+		{
+			var list:Vector.<int>=ZhanGongData.getMapItemLvList();
+			for each (var lv:int in list) 
+			{
+				if (getCanUpNumByLv(lv)) 
+				{
+					return true;
+				}
+			}
+			return false;
+		}
 		/**
 		 * 获取相应等级的可升级个数
 		 * */

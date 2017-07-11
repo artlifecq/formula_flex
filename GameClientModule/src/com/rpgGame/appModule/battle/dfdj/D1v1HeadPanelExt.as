@@ -14,7 +14,7 @@ package com.rpgGame.appModule.battle.dfdj
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.AssetUrl;
 	import com.rpgGame.coreData.type.CharAttributeType;
-	import com.rpgGame.netData.pvp.message.SCReadyToStartMessage;
+	import com.rpgGame.netData.dianfeng.message.SCReadyToStartMessage;
 	
 	import flash.utils.getTimer;
 	

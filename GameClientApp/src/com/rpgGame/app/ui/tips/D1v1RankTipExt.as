@@ -8,7 +8,8 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
 	import com.rpgGame.coreData.cfg.BattleRankCfg;
 	import com.rpgGame.coreData.clientConfig.Q_battle_rank;
-	import com.rpgGame.netData.pvp.bean.DianFengDataInfo;
+	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
+	import com.rpgGame.netData.dianfeng.bean.DianFengDataInfo;
 	
 	import feathers.controls.Label;
 	import feathers.controls.UIAsset;
@@ -34,8 +35,8 @@ package com.rpgGame.app.ui.tips
 		{
 			_skin=new Tips_DuanWei();
 			super(_skin);
-			_rewardNow=new RewardGroup(_skin.icon1,RewardGroup.ALIN_LEFT,10,2,2,false);
-			_rewardNext=new RewardGroup(_skin.icon2,RewardGroup.ALIN_LEFT,10,2,2,false);
+			_rewardNow=new RewardGroup(IcoSizeEnum.ICON_36,_skin.icon1,RewardGroup.ALIN_LEFT,10,2,2,false);
+			_rewardNext=new RewardGroup(IcoSizeEnum.ICON_36,_skin.icon2,RewardGroup.ALIN_LEFT,10,2,2,false);
 		}
 	
 		public function setTipData(data:*):void

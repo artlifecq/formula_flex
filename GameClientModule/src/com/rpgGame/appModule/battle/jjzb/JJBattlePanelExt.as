@@ -19,6 +19,7 @@ package com.rpgGame.appModule.battle.jjzb
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.enum.EnumShopType;
 	import com.rpgGame.coreData.info.shop.ShopItemVo;
 	import com.rpgGame.coreData.type.CharAttributeType;
@@ -88,7 +89,7 @@ package com.rpgGame.appModule.battle.jjzb
 			_infoSkin.btnAdd2.addEventListener(Event.TRIGGERED,onBuyFightPwoer);
 			_infoSkin.btnDui.addEventListener(Event.TRIGGERED,onShowShop);
 			
-			TipTargetManager.show(_infoSkin.btnDui,TargetTipsMaker.makeSimpleTextTips("进入声望商城兑换道具"));
+			TipTargetManager.show(_infoSkin.btnDui,TargetTipsMaker.makeSimpleTextTips(NotifyCfgData.getNotifyTextByID(61029)));
 		}
 		
 		private function onShowReward(eve:Event):void
@@ -158,9 +159,9 @@ package com.rpgGame.appModule.battle.jjzb
 			{
 				val=_costArr[1];
 			}
-			var str:String=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,"饮酒壮行");
+			var str:String=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,NotifyCfgData.getNotifyTextByID(61030));
 			var numStr:String=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,val+"");
-			str+=LanguageConfig.replaceStr("可以提高本人当日的竞技战斗力消耗{0}元宝或{1}礼金（优先消耗礼金）",[numStr,numStr]);
+			str+=LanguageConfig.replaceStr(NotifyCfgData.getNotifyTextByID(61031),[numStr,numStr]);
 			GameCheckAlertExt.show(GameCheckAlertExt.T_JJB_BUY_POWER,str,Mgr.jjBattleMgr.reqBuyTimesOrPower,[2]);
 		}
 		
@@ -172,7 +173,7 @@ package com.rpgGame.appModule.battle.jjzb
 			{
 				val=_costArr[0];
 			}
-			GameCheckAlertExt.show(GameCheckAlertExt.T_JJB_BUY_TIMES,LanguageConfig.replaceStr("花费{0}元宝增加一次挑战次数？",[HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,val+"")]),Mgr.jjBattleMgr.reqBuyTimesOrPower,[1]);
+			GameCheckAlertExt.show(GameCheckAlertExt.T_JJB_BUY_TIMES,LanguageConfig.replaceStr(NotifyCfgData.getNotifyTextByID(61032),[HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,val+"")]),Mgr.jjBattleMgr.reqBuyTimesOrPower,[1]);
 		}
 		
 		private function onFightTop3(eve:Event):void
@@ -311,7 +312,7 @@ package com.rpgGame.appModule.battle.jjzb
 			}
 			else
 			{
-				_logSkin.labTitle.htmlText="暂无记录";
+				_logSkin.labTitle.htmlText=NotifyCfgData.getNotifyTextByID(61033);
 				
 			}
 			

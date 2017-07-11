@@ -3,11 +3,16 @@ package com.rpgGame.app.ui.main.taskbar
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.HuBaoManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
+	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.HuBaoSender;
 	import com.rpgGame.app.sender.TaskSender;
+	import com.rpgGame.app.ui.main.head.NpcSpeakBubble;
 	import com.rpgGame.app.utils.TaskUtil;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.TaskEvent;
@@ -15,6 +20,9 @@ package com.rpgGame.app.ui.main.taskbar
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.HuBaoData;
+	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
+	import com.rpgGame.coreData.info.MapDataManager;
+	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.type.TaskType;
 	
 	import gs.TweenMax;
@@ -39,7 +47,7 @@ package com.rpgGame.app.ui.main.taskbar
 			_skin=new RenWuZhuiZong_Skin();
 			super(_skin);
 			init();
-			addEvent();
+			
 			
 		}
 		override protected function onTouchTarget(target : DisplayObject) : void {
@@ -142,7 +150,20 @@ package com.rpgGame.app.ui.main.taskbar
 					
 				}
 		}
+		override protected function onShow() : void
+		{
+			super.onShow();
+			inforMation();
+			addEvent();
+			
+		}
 		
+		
+		override protected function onHide():void
+		{
+			super.onHide();
+			removeEvent();
+		}
 		private function init():void
 		{
 			initX=_skin.task_box.x;
@@ -157,7 +178,6 @@ package com.rpgGame.app.ui.main.taskbar
 			EventManager.addEvent(TaskEvent.TASK_NEW_MATION,newMation);
 			EventManager.addEvent(TaskEvent.TASK_CHANGE_MATION,changeMation);
 			
-			//EventManager.addEvent(TaskEvent.TASK_FINISH_NPC,finishNpc);
 			EventManager.addEvent(TaskEvent.TASK_CLICK_NPC,taskNpc);
 			EventManager.addEvent(UserMoveEvent.MOVE_THROUGH, moveReschange);
 			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE,flyComplete);
@@ -165,7 +185,18 @@ package com.rpgGame.app.ui.main.taskbar
 			
 			
 		}
-		
+		private function removeEvent():void
+		{
+			EventManager.removeEvent(TaskEvent.TASK_INFOR_MATION,inforMation);
+			EventManager.removeEvent(TaskEvent.TASK_FINISH_MATION,finishMation);
+			EventManager.removeEvent(TaskEvent.TASK_NEW_MATION,newMation);
+			EventManager.removeEvent(TaskEvent.TASK_CHANGE_MATION,changeMation);
+
+			EventManager.removeEvent(TaskEvent.TASK_CLICK_NPC,taskNpc);
+			EventManager.removeEvent(UserMoveEvent.MOVE_THROUGH, moveReschange);
+			EventManager.removeEvent(MapEvent.MAP_SWITCH_COMPLETE,flyComplete);
+			EventManager.removeEvent(MainPlayerEvent.PLAYER_DIE,playerDie);
+		}
 		private var panlIsopen:Boolean=false;
 		/**玩家移动*/
 		private function moveReschange() : void
@@ -188,10 +219,29 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				TaskControl.showLeadPanel();
 			}
+			else //npc闲话
+			{
+				var role:SceneRole = SceneManager.getSceneObjByID(serverID.ToGID()) as SceneRole;
+				if (role != null&& role.data !=null&&role.headFace!=null) 
+				{
+					var speak:String=MonsterDataManager.getNpcSpeak(npcId);
+					if(speak!=null&&speak!=""&&!AppManager.isAppInScene(AppConstant.NPC_SPEAK))
+					{
+						role.headFace.addChild(NpcSpeakBubble.speakBubble(speak));
+					}
+					
+				}
+				/*var speak:String=MonsterDataManager.getNpcSpeak(npcId);
+				if(speak!=""&&!AppManager.isAppInScene(AppConstant.NPC_SPEAK))
+				{
+					AppManager.showApp(AppConstant.NPC_SPEAK,speak);
+				}*/
+			}
 			if(HuBaoData.isTaskNpc(npcId))
 			{
 				HuBaoSender.upCSClientDataMessage(npcId);
 			}
+		
 		}
 		
 		/**接受任务信息初始化*/
@@ -234,6 +284,8 @@ package com.rpgGame.app.ui.main.taskbar
 				{
 					effetCont.playNewtaskEffect();
 					TaskAutoManager.getInstance().startTaskAuto();
+					
+					
 				}
 				else
 				{
@@ -276,7 +328,6 @@ package com.rpgGame.app.ui.main.taskbar
 						TaskControl.showLeadPanel();
 					}
 				}
-				TaskAutoManager.getInstance().setTaskChange();
 			}
 			
 		}

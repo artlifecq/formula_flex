@@ -36,8 +36,30 @@ package com.rpgGame.coreData.enum
 		public static const EM_ZUDUI:String="50";
 		/** 帮会 **/
 		public static const EM_BANGHUI:String="51";
+		/** 帮会信息 **/
+		public static const EM_BANGHUI_INFO:String="52";
+		/** 帮会成员 **/
+		public static const EM_BANGHUI_CHENGYUAN:String="53";
+		/** 帮会升级 **/
+		public static const EM_BANGHUI_UPLEVEL:String="54";
+		/** 帮会技能 **/
+		public static const EM_BANGHUI_SPELL:String="55";
+		/** 帮会列表 **/
+		public static const EM_BANGHUI_LIEBIAO:String="56";
+		/** 皇城争霸 **/
+		public static const EM_BANGHUI_COMBAT:String="57";
+		/** 王城争霸 **/
+		public static const EM_BANGHUI_WCZB2:String="59";
 		/** 商城 **/
 		public static const EM_SHOP:String="60";
+		/** 红包 **/
+		public static const EM_REDREWARD:String="70";
+		/** 发送红包 **/
+		public static const EM_SENDREDREWARD:String="71";
+		/** 红包列表 **/
+		public static const EM_REDREWARDList:String="72";
+		/** 领取记录 **/
+		public static const EM_REDREWARDGETLOG:String="73";
 		/** 论剑 **/
 		public static const EM_LUNJIAN:String="300";
 		/** 多人副本 **/
@@ -58,5 +80,7 @@ package com.rpgGame.coreData.enum
 		public static const EM_BOSS_ACT:String="324";
 		/** 九层妖塔 **/
 		public static const EM_TOWERS:String="325";
+		/** 极限挑战 **/
+		public static const EM_JIXIAN:String="326";
 	}
 }

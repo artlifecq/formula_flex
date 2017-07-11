@@ -7,21 +7,43 @@ package   com.rpgGame.app.manager.debug
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.fight.spell.SkillAddPop;
 	import com.rpgGame.app.fight.spell.SpellHitHelper;
+	import com.rpgGame.app.graphics.HeadFace;
+	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.manager.FangChenMiManager;
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.PKMamager;
+	import com.rpgGame.app.manager.chat.ChatManager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
+	import com.rpgGame.app.manager.fightsoul.FightSoulManager;
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleManager;
+	import com.rpgGame.app.richText.RichTextCustomLinkType;
+	import com.rpgGame.app.richText.RichTextCustomUtil;
+	import com.rpgGame.app.ui.main.dungeon.JiXianTiaoZhanExtPop;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.coreData.cfg.StaticValue;
+	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
+	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
+	import com.rpgGame.coreData.role.HeroData;
+	import com.rpgGame.coreData.type.CharAttributeType;
+	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
+	import com.rpgGame.netData.backpack.bean.TempItemInfo;
+	import com.rpgGame.netData.map.bean.PetInfo;
 	import com.rpgGame.netData.player.message.SCNonagePromptMessage;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
+	import com.rpgGame.netData.vip.bean.VipCardInfo;
+	import com.rpgGame.netData.vip.message.SCVipDataMessage;
+	import com.rpgGame.netData.yaota.bean.YaoTaInfo;
+	import com.rpgGame.netData.yaota.message.SCYaoTaAwardMessage;
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
+	import org.game.netCore.data.long;
 	import org.game.netCore.net.MessageMgr;
 	
 	
@@ -58,7 +80,21 @@ package   com.rpgGame.app.manager.debug
 			});
 			commandList.put( ".vip", function (...arg):void
 			{
-				Mgr.vipMgr.vipLv=arg[0];
+				var msg:SCVipDataMessage=new SCVipDataMessage();
+				msg.curVipId=arg[0];
+				msg.remain=arg[1];
+				if (arg.length>2) 
+				{
+					var len:int=arg[2];
+					for (var i:int = 0; i < len; i++) 
+					{
+						var card:VipCardInfo=new VipCardInfo();
+						card.vipId=i+1;
+						card.count=Math.random()*2;
+						msg.cardInfos.push(card);
+					}
+				}
+				Mgr.vipMgr.recVipPanelData(msg);
 			});
 			commandList.put( ".pk", function (...arg):void
 			{
@@ -107,7 +143,11 @@ package   com.rpgGame.app.manager.debug
 			});
 			commandList.put( ".bat", function (...arg):void
 			{
-				AppManager.showApp(AppConstant.BATTLE_MAIN_PANEL,null,"1");
+				AppManager.showApp(AppConstant.BATTLE_MAIN_PANEL,null,"325");
+			});
+			commandList.put( ".bat2", function (...arg):void
+			{
+				AppManager.showApp(AppConstant.BATTLE_MAIN_PANEL,null,"320");
 			});
 			commandList.put( ".log", function (...arg):void
 			{
@@ -118,11 +158,77 @@ package   com.rpgGame.app.manager.debug
 				var msg:SCNonagePromptMessage=new SCNonagePromptMessage();
 				msg.type=parseInt(arg[0]);
 				FangChenMiManager.OnSCNonagePromptMessage(msg);
-			});
+			});		
+			commandList.put( ".qiuhun", function (...arg):void
+			{
+				var str:String=ItemUtil.getJobName(MainRoleManager.actorInfo.job)+" "+MainRoleManager.actorInfo.totalStat.getStatValue(CharAttributeType.LV)+"级,"
+				if(MainRoleManager.actorInfo.sex==1) str+="玉树临风胜潘安，一树梨花压海棠，求美女老婆一枚";
+				else str+="小萝莉，娇羞藏，声音甜美本领强，求帅哥老公一枚";
+				var link:String=RichTextCustomUtil.getTextLinkCode("点击向我求婚",StaticValue.A_UI_GREEN_TEXT,RichTextCustomLinkType.QIUHUN,MainRoleManager.actorInfo.name);		
+				ChatManager.reqSendChat( str+link, EnumChatChannelType.CHAT_CHANNEL_WORLD,  ChatManager.currentSiLiaoTargetName );
+			});		
+			commandList.put( ".jixianjiesuan", function (...arg):void
+			{
+				UIPopManager.showAlonePopUI(JiXianTiaoZhanExtPop);
+			});	
 			commandList.put( ".df", function (...arg):void
 			{
 				Mgr.d1v1Mgr.autoJoin();
 			});
+			commandList.put( ".head", function (...arg):void
+			{
+				(MainRoleManager.actor.headFace as HeadFace).updateTowerFlag(arg[0]==1);
+			});
+			commandList.put( ".yt", function (...arg):void
+			{
+				var msg:SCYaoTaAwardMessage=new SCYaoTaAwardMessage();
+				msg.myYaoTaInfo=new YaoTaInfo();
+				for (var i:int = 0; i < arg[0]; i++) 
+				{
+					var tmp:TempItemInfo=new TempItemInfo();
+					tmp.mod=1;
+					tmp.num=100;
+					msg.tempItems.push(tmp);
+				}
+				AppManager.showApp(AppConstant.BATTLE_NINE_TOWER_RESULT_PANEL,msg);
+			});
+			commandList.put( ".fightsoul", function (...arg):void
+			{
+				var level:int = arg[0];
+				FightSoulManager.instance().updateMode(level);
+			});
+			commandList.put( ".actopen", function (...arg):void
+			{
+				var info:ActivetyInfo=ActivetyCfgData.getActInfoById(arg[0]); 
+				if(info.actCfg.q_show_notice==1){
+					AppManager.showAppNoHide(AppConstant.ACTIVETY_OPEN,info);
+				}
+			});
+			
+			commandList.put( ".acts", function (...arg):void
+			{
+				var id:int = arg[0];
+				var state:int = arg[1];
+				ActivetyDataManager.setActState(id,state,30);
+			});
+			commandList.put( ".showom", function (...arg):void
+			{
+				FunctionOpenManager.needShowOpenMode = arg[0]==1;
+			});
+//			commandList.put( ".pet", function (...arg):void
+//			{
+//				var mod:int = arg[0];
+//				
+//				var petInfo:PetInfo=new PetInfo();
+//				petInfo.petId=new long(9999);
+//				petInfo.ownerId=(MainRoleManager.actor.data as HeroData).serverID;
+//				petInfo.petModelId=mod;
+//				petInfo.x=MainRoleManager.actor.pos.x;
+//				petInfo.y=-MainRoleManager.actor.pos.y;
+//				var data:GirlPetData=new GirlPetData();
+//				data.setServerData(petInfo);
+//				SceneRoleManager.getInstance().createGirlPet(data);
+//			});
 		}
 		
 		

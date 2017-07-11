@@ -13,8 +13,6 @@ package com.rpgGame.app.manager
 	import com.rpgGame.netData.junjie.message.SCJunJieInfoUpdateListMessage;
 	import com.rpgGame.netData.junjie.message.SCUpdateRoundMessage;
 	
-	import app.client_proto.MainSetProtoC;
-	
 	import org.client.mainCore.manager.EventManager;
 	
 	public class JunJieManager
@@ -170,6 +168,22 @@ package com.rpgGame.app.manager
 				if (role.headFace is HeadFace)
 					(role.headFace as HeadFace).updateTitle((role.data as HeroData).junjieLv);
 			}
+		}
+		public function getCanActivation():Boolean
+		{
+			
+			if(_junjieInfoList==null||_junjieInfoList.length==0)
+			{
+				return false;
+			}
+			for(var i:int=0;i<_junjieInfoList.length;i++)
+			{
+				if(_junjieInfoList[i].state==1)
+				{
+					return true;
+				}
+			}
+			return false;
 		}
 	}
 }

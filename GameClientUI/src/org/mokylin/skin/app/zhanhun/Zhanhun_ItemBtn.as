@@ -56,7 +56,7 @@ package org.mokylin.skin.app.zhanhun
 						}
 					]
 			};
-			skinNames={"down":"ui/app/zhanhun/kongzhitiao_liang.png", "hover":"ui/app/zhanhun/kongzhitiao_liang.png", "up":"ui/app/zhanhun/kongzhitiao.png"};
+			skinNames={"down":"ui/common/titilebg/ItemBghei2.png", "hover":"ui/common/titilebg/ItemBghei2.png", "up":"ui/common/titilebg/ItemBg2.png"};
 		}
 
 

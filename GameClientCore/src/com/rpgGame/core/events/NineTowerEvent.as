@@ -15,6 +15,8 @@ package com.rpgGame.core.events
 	
 		public static const GET_TRACK_DATA:int=UNIQUEID.NEXT;
 		
+		public static const GET_TRACK__FLAG_DATA:int=UNIQUEID.NEXT;
+		
 		public static const QUIT_FB_RESULT:int=UNIQUEID.NEXT;
 		
 		public static const GET_REWARD_RESULT:int=UNIQUEID.NEXT;

@@ -20,8 +20,8 @@ package com.rpgGame.coreData.clientConfig
 		public var row:int;
 		 /**  排序值 */
 		public var order:int;
-		 /**  是否显示table(0:默认显示,1:不显示) */
-		public var show_tab:int;
+		 /**  是否显示图标(0:默认开启,1:不开启) */
+		public var isshow:int;
 		 /**  功能名 */
 		public var name:String;
 		 /**  悬停 */
@@ -30,12 +30,14 @@ package com.rpgGame.coreData.clientConfig
 		public var showEft:int;
 		 /**  特效名称 */
 		public var effect_name:String;
-		 /**  是否一直显示(1:场景类型,0:全部展示) */
-		public var mapType:String;
-		 /**  事件类型(1:窗口,2:菜单) */
+		 /**  是否一直显示(1:普通场景2:战斗场景,0:全部展示) */
+		public var mapType:int;
+		 /**  事件类型(1:窗口,2:菜单，) */
 		public var clickType:int;
 		 /**  窗口参数 */
 		public var clickarg:String;
+		 /**  要打开的对应功能id */
+		public var open_id:String;
 
 	}
 }

@@ -3,6 +3,8 @@ package com.game.engine3D.vo.map
 	import flash.geom.Rectangle;
 	import flash.utils.ByteArray;
 	
+	import away3d.utils.GCObject;
+	
 	/**
 	 *
 	 * 客户端地图数据
@@ -10,7 +12,7 @@ package com.game.engine3D.vo.map
 	 * 创建时间：2015-7-27 下午2:03:17
 	 *
 	 */
-	public class ClientMapData
+	public class ClientMapData extends GCObject
 	{
 		private static const SCALE_RATIO : int = 100;
 		public var version : int = 0;

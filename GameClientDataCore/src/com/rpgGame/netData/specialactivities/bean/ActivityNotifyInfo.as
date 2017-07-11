@@ -17,7 +17,7 @@ package com.rpgGame.netData.specialactivities.bean{
 		//活动id
 		private var _activityId: int;
 		
-		//预告时间(分钟)
+		//通知时间(-1:离开启时间超过半小时,0:还有半小时开启,其他表示还有多少时间关闭活动)
 		private var _notifyTime: int;
 		
 		/**
@@ -26,7 +26,7 @@ package com.rpgGame.netData.specialactivities.bean{
 		override protected function writing(): Boolean{
 			//活动id
 			writeInt(_activityId);
-			//预告时间(分钟)
+			//通知时间(-1:离开启时间超过半小时,0:还有半小时开启,其他表示还有多少时间关闭活动)
 			writeInt(_notifyTime);
 			return true;
 		}
@@ -37,7 +37,7 @@ package com.rpgGame.netData.specialactivities.bean{
 		override protected function reading(): Boolean{
 			//活动id
 			_activityId = readInt();
-			//预告时间(分钟)
+			//通知时间(-1:离开启时间超过半小时,0:还有半小时开启,其他表示还有多少时间关闭活动)
 			_notifyTime = readInt();
 			return true;
 		}
@@ -58,7 +58,7 @@ package com.rpgGame.netData.specialactivities.bean{
 		}
 		
 		/**
-		 * get 预告时间(分钟)
+		 * get 通知时间(-1:离开启时间超过半小时,0:还有半小时开启,其他表示还有多少时间关闭活动)
 		 * @return 
 		 */
 		public function get notifyTime(): int{
@@ -66,7 +66,7 @@ package com.rpgGame.netData.specialactivities.bean{
 		}
 		
 		/**
-		 * set 预告时间(分钟)
+		 * set 通知时间(-1:离开启时间超过半小时,0:还有半小时开启,其他表示还有多少时间关闭活动)
 		 */
 		public function set notifyTime(value: int): void{
 			this._notifyTime = value;

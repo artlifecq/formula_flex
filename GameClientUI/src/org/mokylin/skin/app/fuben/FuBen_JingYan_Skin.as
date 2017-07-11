@@ -37,9 +37,9 @@ package org.mokylin.skin.app.fuben
 			super();
 			
 			this.currentState = "normal";
-			this.height = 587;
-			this.width = 947;
-			this.elementsContent = [__FuBen_JingYan_Skin_UIAsset1_i(),__FuBen_JingYan_Skin_UIAsset2_i(),__FuBen_JingYan_Skin_UIAsset3_i(),lbTips_i(),lbShengyu_i(),lbGoumai_i(),btnEnter_i(),btnAdd_i()];
+			this.height = 601;
+			this.width = 956;
+			this.elementsContent = [__FuBen_JingYan_Skin_UIAsset2_i(),__FuBen_JingYan_Skin_UIAsset3_i(),lbTips_i(),lbShengyu_i(),lbGoumai_i(),btnEnter_i(),btnAdd_i()];
 			
 			states = {
 			};
@@ -50,23 +50,12 @@ package org.mokylin.skin.app.fuben
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __FuBen_JingYan_Skin_UIAsset1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 512;
-			temp.styleName = "ui/common/background/neikuang_1.png";
-			temp.width = 922;
-			temp.x = 14;
-			temp.y = 69;
-			return temp;
-		}
-
 		private function __FuBen_JingYan_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/big_bg/fuben/bg.jpg";
-			temp.x = 18;
-			temp.y = 74;
+			temp.x = 22;
+			temp.y = 87;
 			return temp;
 		}
 
@@ -74,8 +63,8 @@ package org.mokylin.skin.app.fuben
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/fuben/shoutongjiangli.png";
-			temp.x = 388;
-			temp.y = 483;
+			temp.x = 392;
+			temp.y = 496;
 			return temp;
 		}
 
@@ -85,8 +74,8 @@ package org.mokylin.skin.app.fuben
 			btnAdd = temp;
 			temp.name = "btnAdd";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jia;
-			temp.x = 146;
-			temp.y = 497;
+			temp.x = 150;
+			temp.y = 510;
 			return temp;
 		}
 
@@ -95,13 +84,13 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnEnter = temp;
 			temp.name = "btnEnter";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "挑 战";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
-			temp.color = 0xCFC6AE;
-			temp.width = 79;
-			temp.x = 813;
-			temp.y = 513;
+			temp.color = 0xFFFFFF;
+			temp.width = 90;
+			temp.x = 817;
+			temp.y = 526;
 			return temp;
 		}
 
@@ -114,8 +103,8 @@ package org.mokylin.skin.app.fuben
 			temp.color = 0xBEA757;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 130;
-			temp.x = 29;
-			temp.y = 530;
+			temp.x = 33;
+			temp.y = 543;
 			return temp;
 		}
 
@@ -128,8 +117,8 @@ package org.mokylin.skin.app.fuben
 			temp.color = 0xBEA757;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 130;
-			temp.x = 29;
-			temp.y = 499;
+			temp.x = 33;
+			temp.y = 512;
 			return temp;
 		}
 
@@ -144,8 +133,8 @@ package org.mokylin.skin.app.fuben
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 889;
-			temp.x = 29;
-			temp.y = 374;
+			temp.x = 33;
+			temp.y = 387;
 			return temp;
 		}
 

@@ -9,7 +9,7 @@ package org.mokylin.skin.app.beibao
 	import feathers.controls.UINumber;
 	import org.mokylin.skin.component.progress.pro_vs1_Skin;
 	import org.mokylin.skin.component.progress.pro_vs2_Skin;
-	import org.mokylin.skin.component.uinumber.UINumberSkin_zhujuezhandouli;
+	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow2;
 
 	/**
 	 * @private
@@ -153,7 +153,7 @@ package org.mokylin.skin.app.beibao
 		private function __VS_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/vs/bg.png";
+			temp.styleName = "ui/big_bg/beibao/vs/bg.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -631,10 +631,10 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
 			num_other = temp;
 			temp.name = "num_other";
-			temp.gap = -3;
+			temp.gap = -14;
 			temp.height = 25;
 			temp.label = "6521478";
-			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhujuezhandouli;
+			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow2;
 			temp.width = 103;
 			temp.x = 223;
 			temp.y = 52;
@@ -646,10 +646,10 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
 			num_own = temp;
 			temp.name = "num_own";
-			temp.gap = -3;
+			temp.gap = -14;
 			temp.height = 25;
 			temp.label = "6521478";
-			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhujuezhandouli;
+			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow2;
 			temp.width = 96;
 			temp.x = 30;
 			temp.y = 52;

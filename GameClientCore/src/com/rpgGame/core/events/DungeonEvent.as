@@ -67,6 +67,15 @@ package com.rpgGame.core.events
 		 */
 		public static const ZONE_CUR_TRIGGER:int = UNIQUEID.NEXT;
 		/**
+		 *触发事件
+		 */
+		public static const ZONE_TO_TRIGGER:int = UNIQUEID.NEXT;
+		/**
+		 *清除触发事件
+		 */
+		public static const ZONE_CLEAR_TRIGGER:int = UNIQUEID.NEXT;
+		
+		/**
 		 *准备退出副本
 		 */
 		public static const ZONE_OUT_RESULT:int = UNIQUEID.NEXT;
@@ -92,6 +101,10 @@ package com.rpgGame.core.events
 		 */
 		public static const ZONE_TEAM_TIME:int = UNIQUEID.NEXT;
 		
+		/**
+		 * 更新极限挑战时间以及击杀状态信息
+		 */
+		public static const ZONE_JIXIAN_TIME:int = UNIQUEID.NEXT;
 		
 		
 		public function DungeonEvent()

@@ -33,6 +33,7 @@ package com.game.engine3D.scene.render
 	import away3d.animators.IAnimator;
 	import away3d.animators.IAnimatorOwner;
 	import away3d.animators.SkeletonAnimator;
+	import away3d.audio.SoundBox;
 	import away3d.cameras.Camera3D;
 	import away3d.containers.ObjectContainer3D;
 	import away3d.containers.SkeletonBone;
@@ -220,7 +221,7 @@ package com.game.engine3D.scene.render
 		private var _currChildUnitList : Vector.<RenderUnitChild>;
 
 		protected var _compositeMesh : CompositeMesh;
-		
+		protected var _parentUnit : RenderUnit3D;
 		private var _methodDatas : Vector.<MethodData>;
 		//private var _boneChildrenByName : Dictionary;
 		private var _softOutlineData : SoftOutlineData;
@@ -258,6 +259,8 @@ package com.game.engine3D.scene.render
 		private var _shareMaterialProperty : Vector.<MaterialPropertyData>;
 		
 		private var _is25D:Boolean = false;
+		
+		private var _validateChildMeshEffect:Boolean = false;
 
 		public function RenderUnit3D(rpd : RenderParamData3D,is25D:Boolean=false)
 		{
@@ -802,6 +805,32 @@ package com.game.engine3D.scene.render
 			}
 			if (_drawElements)
 			{
+				var skeletonName:String;
+				var parentSkeletonName:String;
+//				for each (var element : ObjectContainer3D in _drawElements)
+//				{
+//					if (element.name == _defalutStatus)
+//					{
+//						_isElementStatus = true;
+//					}
+//					if (!(element is Mesh))
+//					{
+//						_graphicDis.addChild(element);
+//					}
+//					else
+//					{
+//						skeletonName = _renderResourceData.meshUseForSkeletonName();
+//						parentSkeletonName = (_parentUnit && _parentUnit._renderResourceData) ? _parentUnit._renderResourceData.meshUseForSkeletonName() : null;
+//						if(!skeletonName || skeletonName == parentSkeletonName)
+//						{
+//							_graphicDis.addChild(element);
+//						}
+//						else
+//						{
+//							//							Log.error(_renderParamData.sourcePath+":"+parentSkeletonName+":"+"蒙皮已经被骨骼引用，不能单独使用！");
+//						}
+//					}
+//				}
 				for each (var element : ObjectContainer3D in _drawElements)
 				{
 					if (element.name == _defalutStatus)
@@ -941,7 +970,10 @@ package com.game.engine3D.scene.render
 			{
 				for each (obj in _childObj3ds)
 				{
-					validateContainerEffect(obj);
+					if ((GlobalConfig.use2DMap || _validateChildMeshEffect) && obj is Mesh) //CompositeMesh,Mesh//
+						validateMeshEffect(Mesh(obj));
+					else
+						validateContainerEffect(obj);
 				}
 			}
 		}
@@ -1021,10 +1053,6 @@ package com.game.engine3D.scene.render
 			{
 			}
 			else
-			{
-				layerType = 0;
-			}
-			if(!_visible)
 			{
 				layerType = 0;
 			}
@@ -2140,6 +2168,16 @@ package com.game.engine3D.scene.render
 			_entityPhantom = value;
 			validateEffect();
 		}
+		
+		public function get validateChildMeshEffect():Boolean
+		{
+			return _validateChildMeshEffect;
+		}
+		
+		public function set validateChildMeshEffect(value:Boolean):void
+		{
+			_validateChildMeshEffect = value;
+		}
 
 		private function onSetRenderResourceData(resData : RenderResourceData) : void
 		{
@@ -2324,6 +2362,8 @@ package com.game.engine3D.scene.render
 					{
 						if (element is Mesh)
 						{
+							childData.renderUnit._parentUnit = this;
+							childData.renderUnit._renderResourceData.meshUseForSkeleton(_renderParamData.animatorSourchPath);
 							childData.renderUnit._renderResourceData.isSkinMesh = true;
 							childData.renderUnit._compositeMesh = compositeMesh;
 							compositeMesh.addUnit(Mesh(element));
@@ -2863,6 +2903,7 @@ package com.game.engine3D.scene.render
 			_defalutStatus = null;
 			_secondStatusGetter = null;
 			_compositeMesh = null;
+			_parentUnit = null;
 			_repeat = 0;
 			_lifecycle = 0;
 			_playCount = 0;
@@ -2899,6 +2940,7 @@ package com.game.engine3D.scene.render
 			_shareMaterialProperty = new Vector.<MaterialPropertyData>();
 			
 			useFog = false;
+			_validateChildMeshEffect = false;
 		}
 
 		/**
@@ -3069,11 +3111,32 @@ package com.game.engine3D.scene.render
 				}
 				_currChildUnitList.length = 0;
 			}
-			
+			var skeletonName:String;
+			var parentSkeletonName:String;
 			if (_drawElements)
 			{
 				for each (var element : ObjectContainer3D in _drawElements)
 				{
+					
+//					if (!(element is Mesh))
+//					{
+//						element.hookingJointName = null;
+//						_graphicDis.addChild(element);
+//					}
+//					else
+//					{
+//						skeletonName = _renderResourceData.meshUseForSkeletonName();
+//						parentSkeletonName = (_parentUnit && _parentUnit._renderResourceData) ? _parentUnit._renderResourceData.meshUseForSkeletonName() : null;
+//						if(!skeletonName || skeletonName == parentSkeletonName)
+//						{
+//							element.hookingJointName = null;
+//							_graphicDis.addChild(element);
+//						}
+//						else 
+//						{
+//							Log.error(_renderParamData.sourcePath+":"+parentSkeletonName+":"+"蒙皮已经被骨骼引用，不能单独使用！");
+//						}
+//					}
 					if (!_renderResourceData.isSkinMesh || !(element is Mesh))
 					{
 						element.hookingJointName = null;
@@ -3088,48 +3151,8 @@ package com.game.engine3D.scene.render
 				}
 			}
 			_compositeMesh = null;
-
+			_parentUnit = null;
 		}
-
-//		public function restoreAllChildUnitToParent(parent : ObjectContainer3D = null) : void
-//		{
-//			if (!_currChildUnitList)
-//			{
-//				return;
-//			}
-//			for each (var childData : RenderUnitChild in _currChildUnitList)
-//			{
-//				if (childData.renderUnit && childData.renderUnit.usable)
-//				{
-//					childData.renderUnit.removeAddedCallBack(doAddCompositeUnit);
-//					childData.renderUnit.removeAddedCallBack(doSetUnitChildMethods);
-//					childData.renderUnit.removeRemovedCallBack(doUnitChildRemoved);
-//					childData.renderUnit.restoreElementsParent(this, parent);
-//				}
-//				childData.destroy();
-//			}
-//			_currChildUnitList.length = 0;
-//			
-//			if (_drawElements)
-//			{
-//				for each (var element : ObjectContainer3D in _drawElements)
-//				{
-//					if (!_renderResourceData.isSkinMesh || !(element is Mesh))
-//					{
-//						element.hookingJointName = null;
-//						_graphicDis.addChild(element);
-//					}
-//					if (_compositeMesh && (element is Mesh))
-//					{
-//						var index : int = _compositeMesh.getUnitIndex(Mesh(element));
-//						if (index > -1)
-//							_compositeMesh.removeUnitByIndex(index);
-//					}
-//				}
-//			}
-//			_compositeMesh = null;
-//			this.parent = parent;
-//		}
 
 		protected function restoreElementsParent(parentUnit : RenderUnit3D, parent : ObjectContainer3D) : void
 		{
@@ -3290,6 +3313,11 @@ package com.game.engine3D.scene.render
 			if (_renderResourceData)
 				return _renderResourceData.camera;
 			return null;
+		}
+		
+		public function get soundBox():SoundBox
+		{
+			return _renderResourceData?_renderResourceData.soundBox:null;
 		}
 
 		/**

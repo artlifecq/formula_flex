@@ -38,13 +38,13 @@ package
 		private var _loadingView : LoadProgressView;
 		private var _urlParmar : Object = null;
 		private var _clientPathUrl : String = CLIENTSWF_PATH;
-		private var _versionPath : String = "version#/version.swf";
+		private var _versionPath : String = "version_#";
 
 		private var _decodeFun : Function;
 		private var _versionMap : Object = null;
         
         private var _useVersion : Boolean = false;
-        private var _isJson : Boolean = false;
+        private var _isJson : Boolean = true;
         private var _useBpgFormat : Boolean = true;
         
         // web params
@@ -54,6 +54,8 @@ package
 		private var _clientVersion : String = null;
 		/** loader版本号*/
 		private var _loaderVersion : String = "";
+        /** 资源版本号*/
+        private var _resourceVersion : String = null;
         /** 是否是正式版*/
 		private var _isRelease : Boolean = false;
         /** 是否稳定版本*/
@@ -148,6 +150,9 @@ package
                 if (_urlParmar["loaderVersion"]) {
                     _loaderVersion = _urlParmar["loaderVersion"];
                 }
+                if (_urlParmar["resourceVersion"]) {
+                    _resourceVersion = _urlParmar["resourceVersion"];
+                }
                 if (_urlParmar["isDebug"]) {
                     _isRelease = _urlParmar["isDebug"] != "true";
                 }
@@ -192,14 +197,14 @@ package
 			//initMenu();
 
 			showLoadingUI();
-			if (_clientVersion)
+			if (_resourceVersion)
 			{
 				_useVersion = true;
 				loadVersion();
 			}
 			else
 			{
-				_useVersion = false;
+				_useVersion = true;
 				startLoadClient();
 			}
 		}
@@ -254,7 +259,7 @@ package
 			loadingStream.addEventListener(IOErrorEvent.IO_ERROR, onVersionIoError);
 			loadingStream.addEventListener(ProgressEvent.PROGRESS, onFirstLoadingPrg);
 			//
-			var url : String = _versionPath.replace("#", _clientVersion);
+			var url : String = _versionPath.replace("#", _resourceVersion);
 			url = _baseDir + url;
 			loadingStream.load(new URLRequest(url));
 		}
@@ -268,7 +273,7 @@ package
 
 			var bytes : ByteArray = new ByteArray();
 			loadingStream.readBytes(bytes, 0, loadingStream.bytesAvailable);
-			bytes.uncompress();
+			//bytes.uncompress();
 			bytes.endian = Endian.LITTLE_ENDIAN;
 			_versionMap = readVersionsFromBuf(bytes);
 			startLoadClient();

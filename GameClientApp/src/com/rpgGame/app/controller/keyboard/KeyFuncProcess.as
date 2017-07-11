@@ -3,6 +3,7 @@ package com.rpgGame.app.controller.keyboard
 	import com.game.engine3D.utils.MathUtil;
 	import com.game.engine3D.vo.map.ClientMapAreaData;
 	import com.rpgGame.app.fight.spell.CastSpellHelper;
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.mount.HorseManager;
@@ -17,6 +18,7 @@ package com.rpgGame.app.controller.keyboard
 	import com.rpgGame.core.manager.EscActionManager;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.key.KeyInfo;
 	import com.rpgGame.coreData.info.map.EnumMapType;
@@ -39,13 +41,14 @@ package com.rpgGame.app.controller.keyboard
 			switch (funcID)
 			{
 				case "1": //G GM命令面板
-					if (!ClientConfig.isRelease)
+					/*if (!ClientConfig.isRelease)
 					{
 						if (AppManager.isAppInScene(AppConstant.GM_PANEL))
 							AppManager.hideApp(AppConstant.GM_PANEL);
 						else
 							AppManager.showApp(AppConstant.GM_PANEL);
-					}
+					}*/
+					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ZHANHUN,null,true,false);
 					break;
 				case "2": //Z 自动挂机   挂机改到A去了
 					
@@ -68,30 +71,30 @@ package com.rpgGame.app.controller.keyboard
 					AppManager.showApp(AppConstant.BIGMAP_PANEL);
 					break;
 				case "4": //B 背包
-						AppManager.showApp(AppConstant.ROLE_PANEL);
+					AppManager.showApp(AppConstant.ROLE_PANEL);
 					break;
 				case "5": //C 人物
-						AppManager.showApp(AppConstant.ROLE_PANEL);
+					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ROLE,null,true,false);
 					break;
 				case "6": //V pk
 						//AppManager.showApp(AppConstant.MOUNT_PANEL);
-					PKMamager.ChangeNextPkModel();
+//					PKMamager.ChangeNextPkModel();
 					break;
 				case "23": //N 坐骑
-					AppManager.showApp(AppConstant.MOUNT_PANEL);
+					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ZUOQI,null,true,false);
 					break;
 				case "7": //L 任务
 						AppManager.showApp(AppConstant.TASK_PANEL);
 					break;
 				case "8": //F 好友
-					if (AppManager.isAppInScene(AppConstant.MULTY_PANL))
+					/*if (AppManager.isAppInScene(AppConstant.MULTY_PANL))
 					{
 						AppManager.hideApp(AppConstant.MULTY_PANL);
 					}
 					else if(MapDataManager.getMapInfo(MainRoleManager.actorInfo.mapID).mapType==EnumMapType.MAP_TYPE_NORMAL)
 					{
 						AppManager.showApp(AppConstant.MULTY_PANL);
-					}
+					}*/
 						
 					
 //					if (!ClientConfig.isBanShu)
@@ -111,6 +114,9 @@ package com.rpgGame.app.controller.keyboard
 				case "12": //Q 装备
 						AppManager.showApp(AppConstant.EQUIP_CHANGE);
 					break;
+				case "13": //D 强化
+					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_QIANGHUA,null,true,false);
+					break;
 				case "14": //E
 //					CountryWarChengMenManager.testAddChengMen();
 					break;
@@ -119,20 +125,23 @@ package com.rpgGame.app.controller.keyboard
 					break;
 				case "18": //I
 //					CountryWarChengMenManager.testRemoveChengMen();
+					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_MERIDIAN,null,true,false);
 					break;
 				case "27": //R 聊天框缩放
 					//resizeChatPanel();
 					break;
 				case "29": //T 坐骑上下马
 //						MountManager.setMountRide();
-						HorseManager.instance().setHouseRide();
+					HorseManager.instance().setMountRide();
 					break;
 				case "30": //U
 					break;
-				case "33": //X打坐
+				case "33": //X 心法
 					//SitManager.sit();
+					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_XINFA,null,true,false);
 					break;
 				case "34": //Y
+					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_JUEXUE,null,true,false);
 					break;
 				case "50": //显示掉落物图标
 					DropGoodsManager.getInstance().showScaneName(isdown);
@@ -156,6 +165,10 @@ package com.rpgGame.app.controller.keyboard
 				case "66":
 					//MainRoleManager.autoPickCtrl.DoShortcutPick();
 					TrusteeshipManager.getInstance().autoPickCtrl.DoShortcutPick();
+					break;
+				case "20":
+					//MainRoleManager.autoPickCtrl.DoShortcutPick();
+					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_JINENG,null,true,false);
 					break;
 			}
 		}

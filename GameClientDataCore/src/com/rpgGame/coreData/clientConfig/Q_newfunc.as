@@ -13,17 +13,17 @@ package com.rpgGame.coreData.clientConfig
 	public class Q_newfunc
 	{
 		 /**  编号id */
-		public var q_id:String;
+		public var q_id:int;
 		 /**  功能名字 */
 		public var q_string_name:String;
 		 /**  按钮是否显示文字 */
 		public var q_show_buttonName:int;
 		 /**  主窗口id */
-		public var q_main_id:int;
+		public var q_main_id:String;
 		 /**  排序 */
 		public var q_order:int;
-		 /**  功能预告等级(0:不预告) */
-		public var q_notivelevel:int;
+		 /**  功能预告是否显示(0:不预告) */
+		public var q_notiveneedshow:int;
 		 /**  开放等级 */
 		public var q_level:int;
 		 /**  是否显示悬停 */

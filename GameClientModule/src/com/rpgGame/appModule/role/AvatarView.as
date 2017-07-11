@@ -2,8 +2,10 @@ package com.rpgGame.appModule.role
 {
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
+	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.rpgGame.app.display3D.InterAvatar3D;
 	import com.rpgGame.app.manager.MenuManager;
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.GoodsContainerMamager;
 	import com.rpgGame.app.manager.goods.ItemUseManager;
@@ -11,6 +13,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.ItemSender;
+	import com.rpgGame.app.view.icon.BgIcon;
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.app.view.uiComponent.menu.Menu;
@@ -18,7 +21,13 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.core.events.AvatarEvent;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.core.events.VipEvent;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.VipCfg;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
@@ -32,12 +41,16 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.RoleStateType;
+	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.type.item.GridBGType;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	
+	import flash.events.Event;
 	import flash.geom.Point;
 	
 	import app.message.EquipType;
+	
+	import away3d.events.MouseEvent3D;
 	
 	import feathers.data.ListCollection;
 	import feathers.dragDrop.DragData;
@@ -93,7 +106,8 @@ package com.rpgGame.appModule.role
 		private var glowTween:TweenLite;
 		private var nextBlur:Number;
 		
-		
+		private var _vipIcon:DragDropItem;
+		private var _marryIcon:DragDropItem;
 		public function AvatarView(skin:juese_Skin)
 		{
 			acceptDropFromContainerIdArr=[ItemContainerID.BackPack];
@@ -102,12 +116,13 @@ package com.rpgGame.appModule.role
 			_zhandouliEftContaner=new Inter3DContainer();
 			var index:int=_skin.container.getChildIndex(_skin.weapons);
 			_skin.container.addChildAt(_avatarContainer,index);
-			_skin.footMsg.addChild(_zhandouliEftContaner);
+			index=_skin.container.getChildIndex(_skin.weapons);
+			_skin.container.addChildAt(_zhandouliEftContaner,index);
 			_mgr=RoleEquipmentManager.instance;
 			initAvatar();
 			initEquips();
 			setGridsCount(equipNum);
-			
+//			_skin.ui_zhandou.visible=false;
 		}
 		
 		private function initEquips():void
@@ -116,14 +131,25 @@ package com.rpgGame.appModule.role
 			for(var i:int=0;i<equipNum;i++){
 				equipGrids.push(getGrid(bgList[i]));
 				if(i<5){
-					equipGrids[i].x=0;
-					equipGrids[i].y=i*60;
+					equipGrids[i].x=7;
+					equipGrids[i].y=i*59;
 				}else{
-					equipGrids[i].x=310;
-					equipGrids[i].y=(i-5)*60;
+					equipGrids[i].x=301;
+					equipGrids[i].y=(i-5)*59;
 				}
 				_skin.weapons.addChild(equipGrids[i]);
 			}
+			_vipIcon=new DragDropItem(IcoSizeEnum.ICON_48,-1);
+//			_vipIcon.setBg(GridBGType.VIP);
+			_vipIcon.x=301;
+			_vipIcon.y=(10-5)*59;
+			_skin.weapons.addChild(_vipIcon);
+			
+			_marryIcon=new DragDropItem(IcoSizeEnum.ICON_48,-1);
+//			_marryIcon.setBg(GridBGType.VIP);
+			_marryIcon.x=7;
+			_marryIcon.y=5*59;
+			_skin.weapons.addChild(_marryIcon);
 		}
 		
 		private function getGrid(bg:String):DragDropItem
@@ -156,13 +182,22 @@ package com.rpgGame.appModule.role
 		private function initAvatar():void
 		{
 			_avatar = new InterAvatar3D();
-			_avatar.x = _skin.weapons.x + (_skin.weapons.width >> 1)+20;
-			_avatar.y = _skin.weapons.y + _skin.weapons.height+20;
+			_avatar.x = _skin.weapons.x + (_skin.weapons.width >> 1);
+			_avatar.y = _skin.weapons.y + _skin.weapons.height-20;
 			_avatarContainer.addChild3D(_avatar);
 			_showAvatarData = new RoleData(0);
+			_showAvatarData.bodyRadius=25;
 			glowfilter=new GlowFilter(0xdfb612,1,1,1);
 			
-			_zhandouliEft= _zhandouliEftContaner.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JIEMIAN_ZHANDOULI),135,28,0);
+			_zhandouliEft= _zhandouliEftContaner.playInter3DAt(ClientConfig.getEffect("ui_zhandouli_jiemian"),_skin.footMsg.x+180,_skin.footMsg.y+42,0);
+			Stage3DLayerManager.screenView.mouseChildren=Stage3DLayerManager.screenView.mouseEnabled=true;
+			Stage3DLayerManager.screenView.addEventListener(MouseEvent3D.MOUSE_DOWN,onMs);
+//			Stage3DLayerManager.screenView.addEventListener("mouseDown",onMs);
+		}
+		
+		protected function onMs(event:Event):void
+		{
+			trace(event);
 		}
 		
 		internal function onTouchTarget(target : DisplayObject):Boolean
@@ -191,11 +226,14 @@ package com.rpgGame.appModule.role
 			_avatar.curRole.stateMachine.transition(RoleStateType.ACTION_SHOW);
 			updateBaseInfo();
 			
-			if(isMainRole){
+			if(isMainRole)
+			{
 				updateRoleEquip();
+				onGetVipData();
 			}else{//获取玩家的装备列表
 				updateRoleEquip();
 			}
+			
 		}
 		
 		private function getGoodsInfoForOther():Array
@@ -304,6 +342,7 @@ package com.rpgGame.appModule.role
 			
 			EventManager.addEvent(DragDropEvent.DRAG_START,onDragStart);
 			EventManager.addEvent(DragDropEvent.DRAG_COMPLETE,onDragEnd);
+			EventManager.addEvent(VipEvent.GET_VIP_DATA,onGetVipData);
 		}
 		
 		private function onDragEnd(data:DragData):void
@@ -380,8 +419,30 @@ package com.rpgGame.appModule.role
 			EventManager.removeEvent(AvatarEvent.EQUIP_CHANGE, equipChange);
 			EventManager.removeEvent(DragDropEvent.DRAG_START,onDragStart);
 			EventManager.removeEvent(DragDropEvent.DRAG_COMPLETE,onDragEnd);
+			EventManager.removeEvent(VipEvent.GET_VIP_DATA,onGetVipData);
 		}
 		
+		private function onGetVipData():void
+		{
+			// TODO Auto Generated method stub
+			var vip:int=Mgr.vipMgr.vipLv;
+			//_vipIcon.setIconResName(
+			setVipData(vip);
+		}
+		public function setVipData(vip:int):void
+		{
+			TipTargetManager.remove(_vipIcon);
+			if (vip>0) 
+			{
+				_vipIcon.setIconResName(ClientConfig.getItemIcon(ItemConfig.getQItemByID(VipCfg.getVip(vip).q_mo_tokenID).q_icon+"",IcoSizeEnum.ICON_48));
+				TipTargetManager.show(_vipIcon,TargetTipsMaker.makeTips(TipType.VIP_LEVEL_TIP,new DynamicTipData(vip)));
+			}
+			else
+			{
+				_vipIcon.clear();
+				TipTargetManager.show(_vipIcon,TargetTipsMaker.makeTips(TipType.VIP_NONE_TIP,null));
+			}
+		}
 		/**
 		 * 拖动物品放下时 
 		 * @param srcGrid
@@ -452,7 +513,7 @@ package com.rpgGame.appModule.role
 //			var roleName:String=info.name.substr(zoneInddex);
 			_skin.txt_roleName.text=_roleData.name;
 //			_skin.txt_qu.text=zone;
-			_skin.txt_type.text=_roleData.jobName;
+//			_skin.txt_type.text=_roleData.jobName;//新版没有职业了
 			_skin.txt_team.text=_roleData.societyName;
 		
 			_skin.txt_roleName.width=_skin.txt_roleName.textWidth;
@@ -464,14 +525,16 @@ package com.rpgGame.appModule.role
 		
 		private function updateTxt():void
 		{
-			_skin.txt_level.text="Lv"+_roleData.totalStat.level;
+			_skin.numLevel.label=_roleData.totalStat.level.toString();
 			
-			_skin.txt_loveName.visible=_skin.LoveIcon.visible=false;
+//			_skin.txt_loveName.visible=_skin.LoveIcon.visible=false;
 			
-			_skin.txt_loveName.text=_roleData.loveName.length!=0?_roleData.loveName:"无";
+			_skin.txt_loveName.text=_roleData.loveName.length!=0?_roleData.loveName:"";
 			_skin.NumZhanli.number=_roleData.totalStat.getStatValue(CharAttributeType.FIGHTING);
+//			_skin.NumZhanli.width=_skin.NumZhanli.bounds.width;
+			_skin.NumZhanli.bounds.width=_skin.NumZhanli.width;
 //			_skin.Num_zhandouli.number=1000;
-			_skin.NumZhanli.x=128+(135-_skin.NumZhanli.width)/2;
+//			_skin.NumZhanli.x=128+(135-_skin.NumZhanli.width)/2;
 		}
 		
 		private function updateRole():void
@@ -495,8 +558,6 @@ package com.rpgGame.appModule.role
 			this._avatar.curRole.setScale(1.7);	
 //			RoleFaceMaskEffectUtil.addAvatarMask(AvatarMaskType.DIALOG_MASK,_avatar,144,-371,1.7);
 		}
-		
-	
 		
 		public function onTouch(e:TouchEvent):void
 		{

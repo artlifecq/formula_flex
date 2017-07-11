@@ -15,7 +15,18 @@ package com.rpgGame.app.view.icon
 	 */
 	public class BaseIcon extends UIAsset implements IInstancePoolClass
 	{
-		private var _iconResURL:String = "";
+		/*public static const S2W:Object={};
+		S2W[36]=44;
+		S2W[42]=50;
+		S2W[48]=56;
+		S2W[64]=72;
+		
+		public static const W2S:Object={};
+		W2S[44]=36;
+		W2S[50]=42;
+		W2S[56]=48;
+		W2S[72]=64;*/
+		protected var _iconResURL:String = "";
 		/** ico的bitmaodata  */		
 		protected var _iconImage:UIAsset;
 		
@@ -51,18 +62,26 @@ package com.rpgGame.app.view.icon
 		{
 			_iconSize = $iconSize;
 			_iconSize = _iconSize <= 0 ? IcoSizeEnum.SIZE_46 : _iconSize;
-			switch(_iconSize){
+			calIconPos();
+			this.width = _iconSize;
+			this.height = _iconSize;
+		}
+		/**
+		 *不同类型的底图可能不一样所以重写吧 
+		 * 
+		 */		
+		protected function calIconPos():void
+		{
+		/*	switch(_iconSize){
 				case IcoSizeEnum.ICON_36:
 				case IcoSizeEnum.ICON_42:
 				case IcoSizeEnum.ICON_48:
 				case IcoSizeEnum.ICON_64:
-					_iconPositionX=_iconPositionY=6;
+					_iconPositionX=_iconPositionY=(S2W[_iconSize]-_iconSize)/2;
 					break;
-			}
-			this.width = _iconSize;
-			this.height = _iconSize;
+				
+			}*/
 		}
-		
 		public function instanceDestroy() : void
 		{
 			destroy();
@@ -103,10 +122,10 @@ package com.rpgGame.app.view.icon
 			_iconSize = _iconSize <= 0 ? IcoSizeEnum.SIZE_46 : _iconSize;
 			switch(_iconSize){
 				case IcoSizeEnum.ICON_64:
-					_iconPositionX=_iconPositionY=7;
+					_iconPositionX=_iconPositionY=4;
 					break;
 				case IcoSizeEnum.ICON_48:
-					_iconPositionX=_iconPositionY=6;
+					_iconPositionX=_iconPositionY=4;
 					break;
 			}
 			this.width = _iconSize;
@@ -135,6 +154,7 @@ package com.rpgGame.app.view.icon
 			_iconImage.styleName = iconResURL;
 		}
 		
+		
 		/**
 		 * 设置物品图标x/y的偏移值 
 		 * @param posx
@@ -151,7 +171,6 @@ package com.rpgGame.app.view.icon
 				case IcoSizeEnum.ICON_42:
 				case IcoSizeEnum.ICON_48:
 				case IcoSizeEnum.ICON_64:
-				case  IcoSizeEnum.ICON_42:
 					if( posx != 0 || posy != 0 )
 					{
 						_iconImage.x = posx;
@@ -186,6 +205,9 @@ package com.rpgGame.app.view.icon
 			}else if(_iconSize==IcoSizeEnum.ICON_64){
 				_lvImage.x = 8;
 				_lvImage.y = 8;
+			}else if(_iconSize==IcoSizeEnum.ICON_42){
+				_lvImage.x = 2;
+				_lvImage.y = 2;
 			}
 		}
 		
@@ -198,22 +220,17 @@ package com.rpgGame.app.view.icon
 					_bindImage = new UIAsset();
 					addChild(_bindImage);
 				}
+				_bindImage.onImageLoaded=onBindLoad;
 				switch(_iconSize)
 				{
 					case IcoSizeEnum.ICON_42:
 						_bindImage.styleName=AssetUrl.EQUIP_BIND_42;
-						_bindImage.x = 6;
-						_bindImage.y = 27;
 						break;
 					case IcoSizeEnum.ICON_64:
 						_bindImage.styleName=AssetUrl.EQUIP_BIND_64;
-						_bindImage.x = 14;
-						_bindImage.y = 47;
 						break;
 					case IcoSizeEnum.ICON_48:
 						_bindImage.styleName=AssetUrl.EQUIP_BIND_42;
-						_bindImage.x = 12;
-						_bindImage.y = 33;
 						break;
 				}
 //				this.setChildIndex(_bindImage,numChildren);
@@ -223,6 +240,12 @@ package com.rpgGame.app.view.icon
 					_bindImage.parent.removeChild(_bindImage);
 				_bindImage = null;
 			}
+		}
+		
+		private function onBindLoad(res:UIAsset):void
+		{
+			_bindImage.x = 2;
+			_bindImage.y = _iconSize-_bindImage.height;
 		}
 		
 		public function setJobState(state:String):void
@@ -239,12 +262,15 @@ package com.rpgGame.app.view.icon
 				_jobImage = new UIAsset();
 				addChild(_jobImage);
 			}
-			
+			_jobImage.onImageLoaded=jobIconComplete;
 			_jobImage.styleName=state;
-			_jobImage.x = _iconSize-13;
-			_jobImage.y = _iconSize-13;
 		}
 		
+		private function jobIconComplete(ass:UIAsset):void
+		{
+			_jobImage.x = _iconSize-_jobImage.width-1;
+			_jobImage.y = _iconSize-_jobImage.height-1;
+		}		
 		
 		public function setIsWear(v:Boolean):void
 		{

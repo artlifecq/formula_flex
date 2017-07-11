@@ -30,6 +30,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_commander_skill_num:int;
 		 /**  每日福利加成[帮众奖励,官员奖励] */
 		public var q_gift_data:String;
+		 /**  参加王城争霸 */
+		public var q_kindom_join:int;
 		 /**  参加皇城争霸 */
 		public var q_emperor_join:int;
 		 /**  特权展示 */

@@ -1,59 +1,66 @@
 package com.rpgGame.app.ui.main.shortcut {
-    import com.game.engine3D.display.Inter3DContainer;
-    import com.game.engine3D.display.InterObject3D;
-    import com.game.engine3D.scene.render.RenderUnit3D;
-    import com.rpgGame.app.manager.LostSkillManager;
-    import com.rpgGame.app.manager.role.MainRoleManager;
-    import com.rpgGame.core.events.MainPlayerEvent;
-    import com.rpgGame.core.events.society.SocietyEvent;
-    import com.rpgGame.core.manager.tips.TargetTipsMaker;
-    import com.rpgGame.core.manager.tips.TipTargetManager;
-    import com.rpgGame.core.ui.SkinUI;
-    import com.rpgGame.coreData.cfg.ClientConfig;
-    import com.rpgGame.coreData.cfg.LanguageConfig;
-    import com.rpgGame.coreData.cfg.LostSkillData;
-    import com.rpgGame.coreData.cfg.LostSkillUpData;
-    import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
-    import com.rpgGame.coreData.clientConfig.Q_lostskill_up;
-    import com.rpgGame.coreData.enum.JobEnum;
-    import com.rpgGame.coreData.lang.LangUI_2;
-    import com.rpgGame.coreData.type.CharAttributeType;
-    import com.rpgGame.coreData.type.TipType;
-    import com.rpgGame.netData.lostSkill.bean.SkillStateInfo;
-    
-    import flash.geom.Point;
-    
-    import feathers.controls.UIAsset;
-    
-    import org.client.mainCore.manager.EventManager;
-    import org.mokylin.skin.mainui.shortcut.shortcut_Skin;
-    
-    import starling.display.DisplayObject;
-    
-    public class ShortcutBar extends SkinUI {
+	import com.game.engine3D.display.Inter3DContainer;
+	import com.game.engine3D.display.InterObject3D;
+	import com.game.engine3D.scene.render.RenderUnit3D;
+	import com.rpgGame.app.manager.HunYinManager;
+	import com.rpgGame.app.manager.LostSkillManager;
+	import com.rpgGame.app.manager.Mgr;
+	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.core.events.society.SocietyEvent;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.cfg.LostSkillData;
+	import com.rpgGame.coreData.cfg.LostSkillUpData;
+	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
+	import com.rpgGame.coreData.clientConfig.Q_lostskill_up;
+	import com.rpgGame.coreData.enum.JobEnum;
+	import com.rpgGame.coreData.lang.LangUI_2;
+	import com.rpgGame.coreData.type.CharAttributeType;
+	import com.rpgGame.coreData.type.TipType;
+	import com.rpgGame.netData.lostSkill.bean.SkillStateInfo;
+	
+	import flash.geom.Point;
+	
+	import feathers.controls.UIAsset;
+	
+	import org.client.mainCore.manager.EventManager;
+	import org.mokylin.skin.mainui.shortcut.shortcut_Skin;
+	
+	import starling.display.DisplayObject;
+	
+	public class ShortcutBar extends SkinUI {
 		
 		private var autoBar:AutoBar;
 		private var skillBar : ShortcutSkillBar;
 		private var singBar : SingBar;
-        private var _skin : shortcut_Skin;
+		private var _skin : shortcut_Skin;
 		
 		private var _jumpState:Vector.<UIAsset>;
-
+		
 		private var renderUint:RenderUnit3D;
-        private var _rollprogress:RollProgress;
+		private var _rollprogress:RollProgress;
 		private var _jinzhencontent:Inter3DContainer;
 		private var _jinzhenList:Vector.<JinZhenControl>;
 		
 		private var _shortcutMessageBar:ShortcutMessageBar;
 		
-        public function ShortcutBar() {
-            this._skin = new shortcut_Skin();
-            super(this._skin);
-			 
+		public function ShortcutBar() {
+			this._skin = new shortcut_Skin();
+			super(this._skin);
+			
 			init();
 			
-        }
-		
+		}
+		public function skin():shortcut_Skin
+		{
+			return _skin;
+		}
 		public function getSkillGridSeat(index:int):Point
 		{
 			return skillBar.getSkillGridSeat(index);
@@ -107,21 +114,21 @@ package com.rpgGame.app.ui.main.shortcut {
 			
 			
 			refeashState();
-//			if (!ClientConfig.isBanShu)
-//			{				
-//				TipTargetManager.show(_skin.btnBackpack, TargetTipsMaker.makeSimpleTextTips("背包<br/>快捷键：B"));
-//				TipTargetManager.show(_skin.btnRole, TargetTipsMaker.makeSimpleTextTips("人物<br/>快捷键：C"));
-//				TipTargetManager.show(_skin.btnHaoYou, TargetTipsMaker.makeSimpleTextTips("好友<br/>快捷键：F"));
-//				TipTargetManager.show(_skin.btnZudui, TargetTipsMaker.makeSimpleTextTips("队伍<br/>快捷键：P"));
-//				TipTargetManager.show(_skin.btnSheHui, TargetTipsMaker.makeSimpleTextTips("帮派"));
-//				
-//				TipTargetManager.show(_skin.btnTask, TargetTipsMaker.makeSimpleTextTips("任务<br/>快捷键：L"));
-//				TipTargetManager.show(_skin.btnSpell, TargetTipsMaker.makeSimpleTextTips("技能<br/>快捷键：V"));
-//				TipTargetManager.show(_skin.btnMount, TargetTipsMaker.makeSimpleTextTips("坐骑<br/>快捷键：N"));
-//				TipTargetManager.show(_skin.btnChengJiu, TargetTipsMaker.makeSimpleTextTips("社会<br/>快捷键：J"));
-//				TipTargetManager.show(_skin.btnSheHui, TargetTipsMaker.makeSimpleTextTips("装备<br/>快捷键：Q"));
-//				TipTargetManager.show(_skin.btnShangDian, TargetTipsMaker.makeSimpleTextTips("商店<br/>快捷键：O"));
-//			}
+			//			if (!ClientConfig.isBanShu)
+			//			{				
+			//				TipTargetManager.show(_skin.btnBackpack, TargetTipsMaker.makeSimpleTextTips("背包<br/>快捷键：B"));
+			//				TipTargetManager.show(_skin.btnRole, TargetTipsMaker.makeSimpleTextTips("人物<br/>快捷键：C"));
+			//				TipTargetManager.show(_skin.btnHaoYou, TargetTipsMaker.makeSimpleTextTips("好友<br/>快捷键：F"));
+			//				TipTargetManager.show(_skin.btnZudui, TargetTipsMaker.makeSimpleTextTips("队伍<br/>快捷键：P"));
+			//				TipTargetManager.show(_skin.btnSheHui, TargetTipsMaker.makeSimpleTextTips("帮派"));
+			//				
+			//				TipTargetManager.show(_skin.btnTask, TargetTipsMaker.makeSimpleTextTips("任务<br/>快捷键：L"));
+			//				TipTargetManager.show(_skin.btnSpell, TargetTipsMaker.makeSimpleTextTips("技能<br/>快捷键：V"));
+			//				TipTargetManager.show(_skin.btnMount, TargetTipsMaker.makeSimpleTextTips("坐骑<br/>快捷键：N"));
+			//				TipTargetManager.show(_skin.btnChengJiu, TargetTipsMaker.makeSimpleTextTips("社会<br/>快捷键：J"));
+			//				TipTargetManager.show(_skin.btnSheHui, TargetTipsMaker.makeSimpleTextTips("装备<br/>快捷键：Q"));
+			//				TipTargetManager.show(_skin.btnShangDian, TargetTipsMaker.makeSimpleTextTips("商店<br/>快捷键：O"));
+			//			}
 			
 			EventManager.addEvent(SocietyEvent.SOCIETY_APPROVE_CHANGE, addSheHuiTab);
 			
@@ -150,7 +157,7 @@ package com.rpgGame.app.ui.main.shortcut {
 		{
 			if(TipTargetManager.hasTipsEventListener(_skin.btn_juexue))
 				TipTargetManager.remove(_skin.btn_juexue);
-	
+			
 			var datas:Array = LostSkillData.datas;
 			var currentdata:Q_lostskill_open = LostSkillData.getModeInfoById(LostSkillManager.instance().curSkillId);
 			if(currentdata == null)
@@ -190,7 +197,7 @@ package com.rpgGame.app.ui.main.shortcut {
 			Msg += "<br/>施放技能会消耗金针<br/>每10秒恢复1个金针";
 			TipTargetManager.show(_skin.jingzhen_yijia, TargetTipsMaker.makeSimpleTextTips(Msg));
 		}
-      
+		
 		public function getBtnGlobalPos(btnName : String) : Point
 		{
 			if (btnName == null || btnName == "")
@@ -205,15 +212,15 @@ package com.rpgGame.app.ui.main.shortcut {
 		
 		private function initExp() : void
 		{
-//			expKArr = [];
-//			
-//			expKArr.push(_skin.imgExpK1, _skin.imgExpK2, _skin.imgExpK3, _skin.imgExpK4, _skin.imgExpK5, _skin.imgExpK6, _skin.imgExpK7, _skin.imgExpK8, _skin.imgExpK9);
-//			
-//			changeExp();
-//			EventManager.addEvent(MainPlayerEvent.MAXEXP_CHANGE, changeExp);
-//			EventManager.addEvent(MainPlayerEvent.NOWEXP_CHANGE, changeExp);
-//			
-//			TipTargetManager.show(_skin.imgExpBg, TargetTipsMaker.makeSimpleTextTips("经验：$/$($%)", null, getExp));
+			//			expKArr = [];
+			//			
+			//			expKArr.push(_skin.imgExpK1, _skin.imgExpK2, _skin.imgExpK3, _skin.imgExpK4, _skin.imgExpK5, _skin.imgExpK6, _skin.imgExpK7, _skin.imgExpK8, _skin.imgExpK9);
+			//			
+			//			changeExp();
+			//			EventManager.addEvent(MainPlayerEvent.MAXEXP_CHANGE, changeExp);
+			//			EventManager.addEvent(MainPlayerEvent.NOWEXP_CHANGE, changeExp);
+			//			
+			//			TipTargetManager.show(_skin.imgExpBg, TargetTipsMaker.makeSimpleTextTips("经验：$/$($%)", null, getExp));
 		}
 		
 		/**
@@ -232,18 +239,18 @@ package com.rpgGame.app.ui.main.shortcut {
 			if (p > 1)
 				p = 1;
 			
-//			_skin.imgExp.width = p * expWidth;
+			//			_skin.imgExp.width = p * expWidth;
 			
 			//shortcutSkin.imgCurEffect.x = shortcutSkin.imgExp.x + shortcutSkin.imgExp.width - shortcutSkin.imgCurEffect.width / 2;
 		}
 		
 		private function resizeExp(sWidth : int, sHeight : int) : void
 		{
-//			expWidth = sWidth - 42;
-//			
-//			_skin.imgExpBg.width = sWidth;
-//			_skin.imgExpBg.x = (_skin.width - sWidth) / 2;
-//			_skin.imgExp.x = _skin.imgExpBg.x + 21;
+			//			expWidth = sWidth - 42;
+			//			
+			//			_skin.imgExpBg.width = sWidth;
+			//			_skin.imgExpBg.x = (_skin.width - sWidth) / 2;
+			//			_skin.imgExp.x = _skin.imgExpBg.x + 21;
 			
 			sortExp();
 			
@@ -252,13 +259,13 @@ package com.rpgGame.app.ui.main.shortcut {
 		
 		private function sortExp() : void
 		{
-//			var d : int = expWidth / 10;
-//			var len : int = expKArr.length;
-//			var startX : int = _skin.imgExp.x;
-//			for (var i : int = 0; i < len; i++)
-//			{
-//				expKArr[i].x = int(startX + d * (i + 1));
-//			}
+			//			var d : int = expWidth / 10;
+			//			var len : int = expKArr.length;
+			//			var startX : int = _skin.imgExp.x;
+			//			for (var i : int = 0; i < len; i++)
+			//			{
+			//				expKArr[i].x = int(startX + d * (i + 1));
+			//			}
 		}
 		
 		override protected function onTouchTarget(target : DisplayObject) : void
@@ -273,46 +280,55 @@ package com.rpgGame.app.ui.main.shortcut {
 					break;
 				case autoBar.guajiSkin.btnGuaji:
 					autoBar.guajiClick();
-					break;				
-//				case _skin.btnBackpack://背包
-//					AppManager.showApp(AppConstant.BACK_PACK_PANEL);
-//					break;
-//				case _skin.btnRole://人物
-//					AppManager.showApp(AppConstant.ROLE_PANEL);
-//					break;
-//				case _skin.btnHaoYou://好友
-//					AppManager.showApp(AppConstant.FRIEND_PANEL);
-//					break;
-//				case _skin.btnZudui://组队
-//					AppManager.showApp(AppConstant.TEAM_PANEL);
-//					break;
-//				case _skin.btnShangDian://商店
-//					AppManager.showApp(AppConstant.SHOP_SYSTEM_PANEL);
-//					break;
-//				case _skin.btnTask://任务
-//					AppManager.showApp(AppConstant.TASK_PANEL);
-//					break;
-//				case _skin.btnSheHui://装备
-//					AppManager.showApp(AppConstant.EQUIP_CHANGE);
-//					break;
-//				case _skin.btnMount://坐骑
-//					if (MainRoleManager.actorInfo.level < int(LanguageConfig.getText(LangMount.MOUNT_TIP_95))) //等级条件
-//					{
-//						NoticeManager.showNotify(LangMount.MOUNT_CMDLISTENER_FAILD_120);
-//						return;
-//					}
-//					MountManager.onCheckOpenPanelCondition(true);
-//					AppManager.showApp(AppConstant.MOUNT_PANEL);
-//					break;
-//				case _skin.btnSpell://技能
-//					AppManager.showApp(AppConstant.SPELL_PANEL);
-//					break;
-//				//				case _skin.btnGm:
-//				//					AppManager.showApp(AppConstant.GM_PANEL);
-//				//					break;
-//				case _skin.btnChengJiu://国家
-//					AppManager.showApp(AppConstant.COUNTRY_PANEL);
-//					break;
+					break;		
+				case _skin.btn_jiehun:
+					if(Mgr.hunyinMgr.marriageInfos==null||Mgr.hunyinMgr.marriageInfos.state==5)
+					{
+						AppManager.showApp(AppConstant.HUNYIN_QIUHUN);
+					}
+					else{
+						AppManager.showApp(AppConstant.HUNYIN_JIEHUN);
+					}
+					break;
+				//				case _skin.btnBackpack://背包
+				//					AppManager.showApp(AppConstant.BACK_PACK_PANEL);
+				//					break;
+				//				case _skin.btnRole://人物
+				//					AppManager.showApp(AppConstant.ROLE_PANEL);
+				//					break;
+				//				case _skin.btnHaoYou://好友
+				//					AppManager.showApp(AppConstant.FRIEND_PANEL);
+				//					break;
+				//				case _skin.btnZudui://组队
+				//					AppManager.showApp(AppConstant.TEAM_PANEL);
+				//					break;
+				//				case _skin.btnShangDian://商店
+				//					AppManager.showApp(AppConstant.SHOP_SYSTEM_PANEL);
+				//					break;
+				//				case _skin.btnTask://任务
+				//					AppManager.showApp(AppConstant.TASK_PANEL);
+				//					break;
+				//				case _skin.btnSheHui://装备
+				//					AppManager.showApp(AppConstant.EQUIP_CHANGE);
+				//					break;
+				//				case _skin.btnMount://坐骑
+				//					if (MainRoleManager.actorInfo.level < int(LanguageConfig.getText(LangMount.MOUNT_TIP_95))) //等级条件
+				//					{
+				//						NoticeManager.showNotify(LangMount.MOUNT_CMDLISTENER_FAILD_120);
+				//						return;
+				//					}
+				//					MountManager.onCheckOpenPanelCondition(true);
+				//					AppManager.showApp(AppConstant.MOUNT_PANEL);
+				//					break;
+				//				case _skin.btnSpell://技能
+				//					AppManager.showApp(AppConstant.SPELL_PANEL);
+				//					break;
+				//				//				case _skin.btnGm:
+				//				//					AppManager.showApp(AppConstant.GM_PANEL);
+				//				//					break;
+				//				case _skin.btnChengJiu://国家
+				//					AppManager.showApp(AppConstant.COUNTRY_PANEL);
+				//					break;
 			}
 		}
 		
@@ -339,13 +355,13 @@ package com.rpgGame.app.ui.main.shortcut {
 		{
 			return _shortcutMessageBar;
 		}
-        
-        public function resize(w : int, h : int) : void {
-            this.x = (w - this._skin.width) >> 1;
-            this.y = h - this._skin.height;
-            CONFIG::netDebug{
-                NetDebug.LOG("[ShortcutBar] [resize] x:" + this.x + ", y:" + this.y + ", w:" + this._skin.width + ", h:" + this._skin.height);
-            }
-        }
-    }
+		
+		public function resize(w : int, h : int) : void {
+			this.x = (w - this._skin.width) >> 1;
+			this.y = h - this._skin.height;
+			CONFIG::netDebug{
+				NetDebug.LOG("[ShortcutBar] [resize] x:" + this.x + ", y:" + this.y + ", w:" + this._skin.width + ", h:" + this._skin.height);
+			}
+		}
+	}
 }

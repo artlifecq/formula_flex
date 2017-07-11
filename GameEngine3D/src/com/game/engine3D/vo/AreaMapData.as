@@ -1,6 +1,8 @@
 package com.game.engine3D.vo
 {
 	import flash.geom.Point;
+	
+	import away3d.utils.GCObject;
 
 	/**
 	 *
@@ -9,7 +11,7 @@ package com.game.engine3D.vo
 	 * 创建时间：2015-9-15 上午10:26:37
 	 *
 	 */
-	public class AreaMapData
+	public class AreaMapData extends GCObject
 	{
 		private var _vertexList : Vector.<Point>;
 		private var _type : uint;
@@ -48,7 +50,7 @@ package com.game.engine3D.vo
 		{
 			if (_vertexList)
 			{
-				//_vertexList.length = 0;
+				_vertexList.length = 0;
 				_vertexList = null;
 			}
 			_type = 0;

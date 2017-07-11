@@ -1,12 +1,13 @@
 package com.rpgGame.app.view.icon
 {
-	import com.game.engine3D.core.poolObject.IInstancePoolClass;
-	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.game.engine3D.display.EffectObject3D;
 	import com.game.engine3D.display.Inter3DContainer;
+	import com.rpgGame.app.manager.LostSkillManager;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.LostSkillData;
+	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
 	import com.rpgGame.coreData.clientConfig.Q_tipsinfo;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.buff.BuffData;
@@ -43,7 +44,16 @@ package com.rpgGame.app.view.icon
 			_isshowbg=isShowBG;
 			
 		}
-		
+		override protected function calIconPos():void
+		{
+			switch(_iconSize){
+				case IcoSizeEnum.ICON_36:
+				case IcoSizeEnum.ICON_48:
+				case IcoSizeEnum.ICON_42:
+					_iconPositionX=_iconPositionY=0;
+					break;
+			}
+		}
 		override public function sortLayer():void
 		{
 			if( _bgImage != null )
@@ -78,11 +88,26 @@ package com.rpgGame.app.view.icon
 			//			this.setIconResName(ClientConfig.getItemIcon("101", IcoSizeEnum.ICON_36 ));
 			sortLayer();
 			this.faceInfo=buffData;
-			var info:Q_tipsinfo=new Q_tipsinfo();
-			info.q_describe_tittle=_buffData.buffData.q_buff_name;
-			info.q_describe=_buffData.buffData.q_description;
-			TipTargetManager.remove(this);
-			TipTargetManager.show(this, TargetTipsMaker.makeTips( TipType.NORMAL_TIP,info));
+			if(value._data.q_buff_id==9||value._data.q_buff_id==10)
+			{
+				TipTargetManager.remove(this);
+				TipTargetManager.show(this, TargetTipsMaker.makeTips( TipType.ACTIVITY_JIXIAN_BUFF_TIP,value));
+			}
+			else
+			{
+				var info:Q_tipsinfo=new Q_tipsinfo();
+				info.q_describe_tittle=_buffData.buffData.q_buff_name;
+				var lostSkiLL:Q_lostskill_open = LostSkillData.getModeInfoById(_buffData.buffData.q_buff_id);
+				if(lostSkiLL==null)
+				{
+					info.q_describe=_buffData.buffData.q_description;
+				}else{
+					info.q_describe=lostSkiLL.q_desc.replace("$",LostSkillManager.instance().getValueByType(lostSkiLL.q_type,_buffData.buffInfo.percent))
+				}
+				
+				TipTargetManager.remove(this);
+				TipTargetManager.show(this, TargetTipsMaker.makeTips( TipType.NORMAL_TIP,info));
+			}
 		}
 		
 		/**继承的父类名字，是cd完的时候调用*/
@@ -100,14 +125,14 @@ package com.rpgGame.app.view.icon
 		private var _now: Number=0;
 		override  public function cdUpdate($now : Number, $cdTotal : Number) :void
 		{
-//			if (!cdFace || !cdFace.parent)
-//			{
-//				addCdFace();
-//			}
-//			if(cdFace)
-//			{
-//				cdFace.updateTimeTxt($now,$cdTotal);
-//			}
+			//			if (!cdFace || !cdFace.parent)
+			//			{
+			//				addCdFace();
+			//			}
+			//			if(cdFace)
+			//			{
+			//				cdFace.updateTimeTxt($now,$cdTotal);
+			//			}
 			if($cdTotal>_now)
 			{
 				_now=$now;
@@ -141,12 +166,13 @@ package com.rpgGame.app.view.icon
 		
 		override public function dispose():void
 		{
-			this.removeFromParent();
-			super.dispose();
+		
 			clear();
 			removeEffect();
 			TipTargetManager.remove(this);
 			_buffData=null;
+			this.removeFromParent();
+			super.dispose();
 		}
 		
 	}

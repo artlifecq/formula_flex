@@ -3,13 +3,14 @@ package com.rpgGame.appModule.activety.boss
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.display3D.InterAvatar3D;
+	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.events.MainPlayerEvent;
-	import com.rpgGame.coreData.cfg.active.ActivetyDataManager;
+	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.cfg.active.BossActInfo;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
@@ -61,7 +62,7 @@ package com.rpgGame.appModule.activety.boss
 			_skin.ListItem.scrollBarDisplayMode = ScrollBarDisplayMode.ALWAYS_VISIBLE;
 			
 			_activeData=new ListCollection();
-			actList=ActivetyDataManager.getActiveList(ActivityEnum.BOSS_ACT);
+			actList=ActivetyCfgData.getTypeList(ActivityEnum.BOSS_ACT);
 			for(var i:int=0;i<actList.length;i++){
 				_activeData.addItem(actList[i]);
 			}
@@ -98,14 +99,25 @@ package com.rpgGame.appModule.activety.boss
 			}
 			initEvent();
 			updateList();
+			var len:int=_activeData.length;
+			var info:ActivetyInfo;
 			if(!data){
-				_skin.ListItem.selectedIndex=0;
-				_skin.ListItem.dataProvider.updateItemAt(0);
-				_skin.ListItem.scrollToDisplayIndex(0);
+				for(i=0;i<len;i++){
+					info=_activeData.data[i] as ActivetyInfo;
+					if(info.info&&info.info.joinState==ActivityJoinStateEnum.JOINING){//跳到进行中
+						_skin.ListItem.selectedIndex=i;
+						_skin.ListItem.scrollToDisplayIndex(i);
+						_skin.ListItem.dataProvider.updateItemAt(i);
+						break;
+					}
+				}
+				if(_skin.ListItem.selectedIndex==-1){
+					_skin.ListItem.selectedIndex=0;
+				}
 			}else{
 				var dataInfo:ActivetyInfo=data as ActivetyInfo;
 				for(i=0;i<_activeData.length;i++){
-					var info:ActivetyInfo=_activeData.data[i] as ActivetyInfo;
+					info=_activeData.data[i] as ActivetyInfo;
 					if(info.actCfg.q_activity_id==dataInfo.actCfg.q_activity_id){
 						_skin.ListItem.selectedIndex=i;
 						_skin.ListItem.scrollToDisplayIndex(i);
@@ -129,15 +141,15 @@ package com.rpgGame.appModule.activety.boss
 		private function updateList():void
 		{
 			for(var i:int=0;i<actList.length;i++){
-				if(actList[i].info.joinState!=ActivityJoinStateEnum.COMPLETE){
+				if(actList[i].info&&actList[i].info.joinState!=ActivityJoinStateEnum.OVER){
 					if(actList[i].actCfg.q_activity_limit_level>MainRoleManager.actorInfo.totalStat.level){
-						actList[i].info.joinState=ActivityJoinStateEnum.CLOSE;//未开启
+						actList[i].info.joinState=ActivityJoinStateEnum.UN_OPEN;//未开启
 					}else{
 						actList[i].info.joinState=ActivityJoinStateEnum.JOINING;//开启
 					}
 				}
 			}
-			actList=actList.sort(sortList);
+			actList.sort(sortList);
 			_activeData.removeAll();
 			for(i=0;i<actList.length;i++){
 				_activeData.addItem(actList[i]);
@@ -147,14 +159,18 @@ package com.rpgGame.appModule.activety.boss
 		
 		private function sortList(infoA:ActivetyInfo,infoB:ActivetyInfo):int
 		{
+			if(infoA.info==null||infoB.info==null){
+				return 0;
+			}
+			
 			if(infoA.info.joinState<infoB.info.joinState){//越小的越再后面
-				if(infoA.info.joinState==ActivityJoinStateEnum.JOINING&&infoB.info.joinState==ActivityJoinStateEnum.COMPLETE){
+				if(infoA.info.joinState==ActivityJoinStateEnum.JOINING&&infoB.info.joinState==ActivityJoinStateEnum.OVER){
 					return -1;
 				}
 				return 1;
 			}
 			if(infoA.info.joinState>infoB.info.joinState){
-				if(infoA.info.joinState==ActivityJoinStateEnum.COMPLETE&&infoB.info.joinState==ActivityJoinStateEnum.JOINING){
+				if(infoA.info.joinState==ActivityJoinStateEnum.OVER&&infoB.info.joinState==ActivityJoinStateEnum.JOINING){
 					return 1;
 				}
 				return -1;

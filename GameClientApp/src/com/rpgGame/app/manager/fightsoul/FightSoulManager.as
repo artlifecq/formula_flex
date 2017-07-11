@@ -8,6 +8,8 @@ package com.rpgGame.app.manager.fightsoul
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.scene.animator.FightSoulFollowAnimator;
+	import com.rpgGame.app.ui.alert.SomeSystemNoticePanel;
+	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.coreData.UNIQUEID;
 	import com.rpgGame.coreData.cfg.FightsoulData;
 	import com.rpgGame.coreData.cfg.FightsoulModeData;
@@ -40,6 +42,9 @@ package com.rpgGame.app.manager.fightsoul
 		public static const FightSoul_ModeLevel:int = UNIQUEID.NEXT;
 		public static const FightSoul_TypeValue:int = UNIQUEID.NEXT;
 		public static const FightSoul_GetReward:int = UNIQUEID.NEXT;
+		
+		
+		public static const FightSoulMaxLevel:int = 130;
 		/**
 		 * 战魂数据
 		 */
@@ -51,10 +56,32 @@ package com.rpgGame.app.manager.fightsoul
 			this._fightSoulInfo = value;
 			updataSceneMode();
 			updataSKill();
+			
+			checkCanUpLevel();
 		}
 		
+		private function checkCanUpLevel():void
+		{
+			if(fightSoulInfo.level == FightSoulMaxLevel)
+			{
+				return ;
+			}
+			if(fightSoulInfo.exp<currentLeveldata.q_exp)
+			{
+				return ;
+			}
+			
+			var data:Object={};
+			data.sys=SomeSystemNoticePanel.SYS_ZHANHUN;
+			data.desc="您的战魂可以升级了";
+			data.btnText="立即升级";
+			EventManager.dispatchEvent(MainPlayerEvent.SYS_CAN_LEVEL_UP,data); 
+		}
 		public static function updateRoleAvatar(owner:SceneRole):void
 		{
+			if(!owner){
+				return;
+			}
 			var fightSoulLevel:int;
 			var fightSoulRole:SceneRole = SceneRoleManager.getInstance().createFightSoulRole(owner);
 			if (fightSoulRole)
@@ -62,7 +89,8 @@ package com.rpgGame.app.manager.fightsoul
 				fightSoulLevel = (owner.data as HeroData).fightSoulLevel;
 				var model:Q_fightsoul_mode = FightsoulModeData.getModeInfoById(fightSoulLevel);
 				fightSoulRole.data.avatarInfo.setBodyResID("pc/fightsoul/"+model.q_mode,null);
-				fightSoulRole.data.avatarInfo.bodyEffectID2 = model.q_effect;
+				fightSoulRole.data.avatarInfo.bodyEffectID = model.q_effect;
+				fightSoulRole.data.avatarInfo.bodyEffectID2 = model.q_effect1;
 				AvatarManager.updateAvatar(fightSoulRole);
 				var fightSoulFollowAnimator:FightSoulFollowAnimator = new FightSoulFollowAnimator(fightSoulRole);
 				fightSoulFollowAnimator.radius = model.q_radius;
@@ -155,21 +183,72 @@ package com.rpgGame.app.manager.fightsoul
 			return FightsoulData.getInfobyId(_fightSoulInfo.curModelLv);
 		}
 		
-		public function FightSoulLevelUp():void
+		public function FightSoulLevelUp():Boolean
 		{
-			if(fightSoulInfo.level == 130)
+			if(fightSoulInfo.level == FightSoulMaxLevel)
 			{
 				NoticeManager.showNotifyById(4002);
-				return ;
+				return false;
 			}
 			if(fightSoulInfo.exp<currentLeveldata.q_exp)
 			{
 				NoticeManager.showNotifyById(4003);
-				return ;
+				return false;
 			}
 			SocketConnection.send(new CSFightSoulLevelUpMessage());
+			
+			return true;
 		}
-		
+		public function canLevelUp():Boolean
+		{
+			if (!fightSoulInfo) 
+			{
+				return false;
+			}
+			if(fightSoulInfo.level == FightSoulMaxLevel)
+			{
+				return false;
+			}
+			if(fightSoulInfo.exp<currentLeveldata.q_exp)
+			{
+				return false;
+			}
+			return true;
+		}
+		public function canGetReward(index:int):Boolean
+		{
+			if (!fightSoulInfo) 
+			{
+				return false;
+			}
+			if(isGetReward(index))
+			{
+				return false;
+			}
+			var reward:ClientItemInfo = _rewards[index];
+			if(int(reward.itemInfo.parameters)>FightSoulManager.instance().fightSoulInfo.vitality)
+			{
+				return false;
+			}
+			return true;
+		}
+		public function hasSthNotice():Boolean
+		{
+			if (canLevelUp()) 
+			{
+				return true;
+			}
+			var len:int=_rewards.length;
+			for (var i:int = 0; i < len; i++) 
+			{
+				if (canGetReward(i)) 
+				{
+					return true;
+				}
+			}
+			
+			return false;
+		}
 		public function chageModeLevel(level:int):void
 		{
 			var msg:CSFightSoulChangeModelMessage = new CSFightSoulChangeModelMessage();
@@ -207,6 +286,10 @@ package com.rpgGame.app.manager.fightsoul
 		
 		public function isGetReward(index:int):Boolean
 		{
+			if (!_fightSoulInfo) 
+			{
+				return false;
+			}
 			if(index>3)
 				return false;
 			else

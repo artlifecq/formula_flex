@@ -141,12 +141,43 @@ package com.rpgGame.core.app
 		public static var ACTIVETY_PANL:String = createAppInfo( "activety.ActivetyPanel","activety");
 		/** 活动BOSS **/
 		public static var ACTIVETY_BOSS_HURTRANK:String = createAppInfo("activety.boss.BossHurtRankPanel","activety");
+		/** 极限挑战BOSS **/
+		public static var ACTIVETY_JIXIANBOSS_HURTRANK:String = createAppInfo("activety.jixiantiaozhan.JiXianRankPanel","activety");
 		/**
 		 *活动boss结果 
 		 */
 		public static var ACTIVETY_BOSS_RESULT:String = createAppInfo("activety.boss.BossFightSuccessPanel","activety");
 		/** 活动开启 **/
 		public static var ACTIVETY_OPEN:String = createAppInfo("activety.ActOpenPanel");
+		
+		/**
+		 *天降礼金排行榜
+		 */
+		public static var ACTIVETY_LIJIN_SCORES:String = createAppInfo( "activety.zonghe.lijin.LijinScoresPanel","activety");
+		/**
+		 *天降礼金刷怪倒计时
+		 */
+		public static var ACTIVETY_LIJIN_TIMER:String = createAppInfo( "activety.zonghe.lijin.LijinMonsterTimerPanel","activety");
+		/**
+		 *天降礼金刷怪出现
+		 */
+		public static var ACTIVETY_LIJIN_REFRESH:String = createAppInfo( "activety.zonghe.lijin.LijinMonsterRefreshPanel","activety");
+		/**
+		 *天降礼金结算
+		 */
+		public static var ACTIVETY_LIJIN_RESULT:String = createAppInfo( "activety.zonghe.lijin.LijinResultPanel","activety");
+		
+		
+		/**
+		 *秦陵秘宝结算
+		 */
+		public static var ACTIVETY_MIBAO_RESULT:String = createAppInfo( "activety.zonghe.mibao.MibaoResultPanel","activety");
+		
+		
+		/**
+		 *极限挑战结果 
+		 */
+		public static var ACTIVETY_JIXIAN_RESULT:String = createAppInfo("activety.jixiantiaozhan.JiXianTiaoZhanSuccessPanelExt","activety");
 		/**
 		 *装备面板
 		 */
@@ -186,6 +217,9 @@ package com.rpgGame.core.app
 		public static var TASK_LEAD_PANEL:String = createAppInfo( "task.TaskLeadPanel" ); 
 		/**环线任务面板**/
 		public static var TASK_LOOP_PANEL:String = createAppInfo( "task.TaskLoopPanel" ); 
+		/**系统神行符**/
+		public static var TASK_FLY_PANEL:String = createAppInfo( "task.TaskFlySend" ); 
+		
 		/**国家讨逆任务条面板**/
 		public static var COUNTRY_TAO_NI_TASK_BAR_PANEL:String = createAppInfo( "taoni.CountryTaoNiTaskBarPanel" , null,PanelPosType.MIDDLE_RIGHT); 
 	
@@ -372,20 +406,27 @@ package com.rpgGame.core.app
 		/**镖局充钱**/
 		public static var BIAO_JU_ADD_MONEY_PANEL : String =  createAppInfo("biaoju.BiaoJuAddMoneyPanel","biaoju");
 		//-------------------帮派
-		/**帮派协议**/
-		public static var GUILD_AGREEMENT_PANEL : String = createAppInfo("country.guild.GuildAgreementPanel","country");
-		/**帮派创建**/
-		public static var GUILD_CREATE_PANEL : String = createAppInfo("country.guild.GuildCreatePanel","country");
-		/**申请加入帮派的家族列表**/
-		public static var GUILD_REQ_JOIN_YOUR_GUILD_PANEL : String = createAppInfo("country.guild.GuildInviteListPanel","country");
-		/**帮派升级**/
-		public static var GUILD_UPGRADE_LEVEL : String = createAppInfo("country.guild.GuildUpgradePanel","country");
-		/**帮派俸禄**/
-		public static var GUILD_SALARY_PANEL : String = createAppInfo("country.guild.GuildSalaryPanel","country");
-		/**帮派募捐**/
-		public static var GUILD_MU_JUAN_PANEL : String = createAppInfo("country.guild.GuildMuJuanPanel","country");
-		/**帮派家族成员列表**/
-		public static var GUILD_FAMILY_PANEL : String = createAppInfo("country.guild.GuildFamilyPanel","country");
+		/**帮会 **/
+		public static var GUILD_PANEL : String = createAppInfo("guild.GuildPanel","banghui");
+		/**帮会请求列表 **/
+		public static var GUILD_APPLAYLIST_PANEL : String = createAppInfo("guild.GuildApplyListPanle","banghui");
+		/**帮会邀请列表 **/
+		public static var GUILD_INVITATION_PANEL : String = createAppInfo("guild.GuildInvitationListPanle","banghui");
+		/**帮会信息 **/
+		public static var GUILD_BRIEFNESSINFO_PANEL : String = createAppInfo("guild.GuildBriefnessInfoPanel","banghui");
+		/**帮会权限设置 **/
+		public static var GUILD_APPOINTED_PANEL : String = createAppInfo("guild.GuildAppointedPanel","banghui");
+		/**帮会统帅设置 **/
+		public static var GUILD_LEADER_PANEL : String = createAppInfo("guild.GuildLeaderPanle","banghui");
+		/**帮会捐献 **/
+		public static var GUILD_DONATE_PANEL : String = createAppInfo("guild.GuildDonatePanle","banghui");
+		/**帮会王城争霸报名 **/
+		public static var GUILD_WCZB_APPLY : String = createAppInfo("guild.war.WczbWarApplyPanel","banghui");
+		/**帮会王城争霸奖励 **/
+		public static var GUILD_WCZB_REWARD : String = createAppInfo("guild.war.WczbRewardPanel","banghui");
+		/**帮会王城争霸结果 **/
+		public static var GUILD_WCZB_RESULT : String = createAppInfo("guild.war.WczbResultPanel","banghui");
+		
 		/**迷宫排行**/
 		public static var MAZE_RANK_PANEL : String = createAppInfo("maze.MazeInfoPanel","maze",PanelPosType.MIDDLE_RIGHT);
 		/**上次迷宫排行**/
@@ -456,5 +497,30 @@ package com.rpgGame.core.app
 		public static var BATTLE_NINE_TOWER_NOTICE_PANEL:String = createAppInfo("battle.jcyt.NineTowerEnterNoticePanelExt","zhanchang");
 		/**9t战斗结束**/
 		public static var BATTLE_NINE_TOWER_RESULT_PANEL:String = createAppInfo("battle.jcyt.NineTowerFightResultPanelExt","zhanchang");
+		/**9t战斗结束**/
+		public static var BATTLE_NINE_TOWER_SCORE_PANEL:String = createAppInfo("battle.jcyt.NineTowerScorePanelExt","zhanchang");
+		/**npc闲话**/
+		public static var NPC_SPEAK:String = createAppInfo("npc.NpcSpeak","npc");
+		
+		/**npc闲话**/
+		public static var VIP_PANEL:String = createAppInfo("vip.VipMainPanelExt","vip");
+		
+		/**求婚界面**/
+		public static var HUNYIN_QIUHUN:String = createAppInfo("hunyin.QiuHunPanelExt","hunyin");
+		/**婚姻界面**/
+		public static var HUNYIN_JIEHUN:String = createAppInfo("hunyin.HunYinPanelExt","hunyin");
+		/**夫妻日志**/
+		public static var HUNYIN_RIZHI:String = createAppInfo("hunyin.FuQiRiZhiPanelExt","hunyin");
+		/**夫妻副本**/
+		public static var HUNYIN_FUBEN:String = createAppInfo("hunyin.FuQiFuBenPanelExt","hunyin");
+		/**夫妻邀请提示**/
+		public static var HUNYIN_FUBENYAOQING:String = createAppInfo("hunyin.FuQiYaoQingPanel","hunyin");
+
+		/**红包拆开**/
+		public static var REDREWARD_OPEN:String = createAppInfo("redreward.RedRewardGetPanle","hongbao");
+		/**发送红包**/
+		public static var REDREWARD_SEND:String = createAppInfo("redreward.RedRewardSendPanle","hongbao");
+		/**红包信息**/
+		public static var REDREWARD_PANLE:String = createAppInfo("redreward.RedRewardInfoPanle","hongbao");
 	}
 }

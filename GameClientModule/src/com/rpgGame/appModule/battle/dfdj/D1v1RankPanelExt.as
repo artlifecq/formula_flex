@@ -14,10 +14,11 @@ package com.rpgGame.appModule.battle.dfdj
 	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.coreData.cfg.BattleRankCfg;
 	import com.rpgGame.coreData.clientConfig.Q_battle_rank;
+	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.type.TipType;
-	import com.rpgGame.netData.pvp.bean.DianFengDataInfo;
-	import com.rpgGame.netData.pvp.bean.DianFengRankInfo;
-	import com.rpgGame.netData.pvp.message.SCOpenDianFengRankMessage;
+	import com.rpgGame.netData.dianfeng.bean.DianFengDataInfo;
+	import com.rpgGame.netData.dianfeng.bean.DianFengRankInfo;
+	import com.rpgGame.netData.dianfeng.message.SCOpenDianFengRankMessage;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.zhanchang.paihangbang.KuaFuPaiHang_Skin;
@@ -45,7 +46,7 @@ package com.rpgGame.appModule.battle.dfdj
 			var skinF:Flip3_Skin=_skin.skinFlip.skin as Flip3_Skin;
 			_numCtrl=new D1v1RankPageSelectCtrl(skinF.btnAdd,skinF.btnDec,skinF.btnMax,skinF.btnMin,skinF.textDisplay,1,1,onPageChange);
 			_numCtrl.needSpeed=false;
-			_gReward=new RewardGroup(_skin.icon2);
+			_gReward=new RewardGroup(IcoSizeEnum.ICON_36,_skin.icon2);
 			initList();
 		}
 		private function initList():void
@@ -54,13 +55,13 @@ package com.rpgGame.appModule.battle.dfdj
 			_myCell=new D1v1RankCellExt(0);
 			_myCell.isMy(true);
 			
-			_myCell.x=22;
-			_myCell.y=372;
+			_myCell.x=27;
+			_myCell.y=386;
 			_myCell.visible=false;
 			_skin.container.addChild(_myCell);
 			var tmp:D1v1RankCellExt;
-			var startX:int=22;
-			var startY:int=102;
+			var startX:int=26;
+			var startY:int=115;
 			_rankList=new Vector.<D1v1RankCellExt>();
 			for (var i:int = 0; i < MAX_COUNT; i++) 
 			{
@@ -75,10 +76,17 @@ package com.rpgGame.appModule.battle.dfdj
 			_weekRank=new D1v1WeekRewardPanelExt(_skin.skinRank.skin as PaiHangAlll_Skin);
 			TipTargetManager.show(_skin.uiLevel,TargetTipsMaker.makeTips(TipType.D1V1_RANK_TIP,new DynamicTipData()));
 		}
+		private var _curCell:D1v1RankCellExt;
 		private function cellCkick(cell:D1v1RankCellExt):void
 		{
+			if (_curCell) 
+			{
+				_curCell.setSelect(false);
+			}
 			if (cell) 
 			{
+				_curCell=cell;
+				_curCell.setSelect(true);
 				setRightData(cell.data);
 			}
 		}
@@ -180,7 +188,8 @@ package com.rpgGame.appModule.battle.dfdj
 				}
 				if (len>0) 
 				{
-					setRightData(msg.dianFengRankInfos[0]);
+					//setRightData(msg.dianFengRankInfos[0]);
+					cellCkick(_rankList[0]);
 				}
 				_numCtrl.updateMax(msg.maxPage,msg.maxPage,false);
 				var skinF:Flip3_Skin=_skin.skinFlip.skin as Flip3_Skin;

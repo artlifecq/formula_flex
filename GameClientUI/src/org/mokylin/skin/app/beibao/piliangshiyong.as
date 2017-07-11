@@ -4,13 +4,15 @@ package org.mokylin.skin.app.beibao
 	import feathers.controls.Button;
 	import feathers.controls.Group;
 	import feathers.controls.Label;
+	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import org.mokylin.skin.common.TongYongTanKuang_bg;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
 	import org.mokylin.skin.component.button.ButtonSkin_jia;
 	import org.mokylin.skin.component.button.ButtonSkin_jian;
-	import org.mokylin.skin.component.button.ButtonSkin_putong;
-	import org.mokylin.skin.component.button.ButtonSkin_putong3;
+	import org.mokylin.skin.component.button.ButtonSkin_putong2;
+	import org.mokylin.skin.component.button.ButtonSkin_putongMax;
 
 	/**
 	 * @private
@@ -22,7 +24,7 @@ package org.mokylin.skin.app.beibao
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var bg:feathers.controls.UIAsset;
+		public var bg:feathers.controls.SkinnableContainer;
 
 		public var bg0:feathers.controls.UIAsset;
 
@@ -48,8 +50,6 @@ package org.mokylin.skin.app.beibao
 
 		public var lbl_num:feathers.controls.Label;
 
-		public var lbl_title:feathers.controls.Label;
-
 
 		//==========================================================================
 		//                                定义构造函数
@@ -59,9 +59,9 @@ package org.mokylin.skin.app.beibao
 			super();
 			
 			this.currentState = "normal";
-			this.height = 265;
-			this.width = 331;
-			this.elementsContent = [bg_i(),__piliangshiyong_UIAsset1_i(),__piliangshiyong_UIAsset2_i(),lbl_title_i(),btnClose_i(),btn_ok_i(),btns_i(),contents_i()];
+			this.height = 264;
+			this.width = 326;
+			this.elementsContent = [bg_i(),__piliangshiyong_UIAsset1_i(),btnClose_i(),btn_ok_i(),btns_i(),contents_i(),__piliangshiyong_UIAsset3_i()];
 			
 			states = {
 			};
@@ -77,29 +77,31 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.height = 24;
 			temp.text = "批量使用：";
-			temp.color = 0xC2992B;
+			temp.color = 0xA3A594;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 76;
-			temp.x = 15;
-			temp.y = 4;
+			temp.x = 0;
+			temp.y = 3;
 			return temp;
 		}
 
 		private function __piliangshiyong_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/background/erji_bg.jpg";
-			temp.x = 12;
-			temp.y = 40;
+			temp.styleName = "ui/common/xian_heng.png";
+			temp.x = 35;
+			temp.y = 147;
 			return temp;
 		}
 
-		private function __piliangshiyong_UIAsset2_i():feathers.controls.UIAsset
+		private function __piliangshiyong_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/xian_heng.png";
-			temp.x = 35;
-			temp.y = 137;
+			temp.touchable = false;
+			temp.touchGroup = true;
+			temp.styleName = "ui/common/background/plsy.png";
+			temp.x = 122;
+			temp.y = 9;
 			return temp;
 		}
 
@@ -108,21 +110,22 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg0 = temp;
 			temp.name = "bg0";
-			temp.styleName = "ui/component/text/input_bg.png";
-			temp.width = 56;
-			temp.x = 112;
+			temp.styleName = "ui/component/text/flip_bg.png";
+			temp.width = 57;
+			temp.x = 97;
 			temp.y = 1;
 			return temp;
 		}
 
-		private function bg_i():feathers.controls.UIAsset
+		private function bg_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 265;
-			temp.styleName = "ui/common/background/erji_kuang.png";
-			temp.width = 331;
+			temp.height = 264;
+			var skin:StateSkin = new org.mokylin.skin.common.TongYongTanKuang_bg()
+			temp.skin = skin
+			temp.width = 326;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -134,8 +137,8 @@ package org.mokylin.skin.app.beibao
 			btnClose = temp;
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.x = 297;
-			temp.y = 7;
+			temp.x = 293;
+			temp.y = 5;
 			return temp;
 		}
 
@@ -144,10 +147,9 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_all = temp;
 			temp.name = "btn_all";
-			temp.label = "MAX";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong3;
-			temp.x = 205;
-			temp.y = 2;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putongMax;
+			temp.x = 178;
+			temp.y = 1;
 			return temp;
 		}
 
@@ -157,8 +159,8 @@ package org.mokylin.skin.app.beibao
 			btn_max = temp;
 			temp.name = "btn_max";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jia;
-			temp.x = 169;
-			temp.y = 3;
+			temp.x = 155;
+			temp.y = 1;
 			return temp;
 		}
 
@@ -168,8 +170,8 @@ package org.mokylin.skin.app.beibao
 			btn_min = temp;
 			temp.name = "btn_min";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jian;
-			temp.x = 88;
-			temp.y = 3;
+			temp.x = 74;
+			temp.y = 1;
 			return temp;
 		}
 
@@ -178,13 +180,14 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_ok = temp;
 			temp.name = "btn_ok";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.label = "确认使用";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
-			temp.color = 0xE1D4A9;
-			temp.width = 95;
-			temp.x = 119;
-			temp.y = 214;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.label = "确 认";
+			temp.fontSize = 16;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
+			temp.color = 0xEAEABC;
+			temp.width = 110;
+			temp.x = 108;
+			temp.y = 216;
 			return temp;
 		}
 
@@ -193,9 +196,8 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			btns = temp;
 			temp.name = "btns";
-			temp.width = 268;
-			temp.x = 32;
-			temp.y = 163;
+			temp.x = 42;
+			temp.y = 162;
 			temp.elementsContent = [__piliangshiyong_Label1_i(),btn_min_i(),btn_max_i(),btn_all_i(),bg0_i(),lbBuyNum_i()];
 			return temp;
 		}
@@ -205,8 +207,9 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			contents = temp;
 			temp.name = "contents";
-			temp.x = 33;
-			temp.y = 64;
+			temp.height = 80;
+			temp.x = 32;
+			temp.y = 59;
 			temp.elementsContent = [lbl_name_i(),lbl_num_i(),isLock_i()];
 			return temp;
 		}
@@ -219,8 +222,8 @@ package org.mokylin.skin.app.beibao
 			temp.text = "【已绑定】";
 			temp.color = 0xE1201C;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 197;
-			temp.y = 44;
+			temp.x = 201;
+			temp.y = 25;
 			return temp;
 		}
 
@@ -229,14 +232,13 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbBuyNum = temp;
 			temp.name = "lbBuyNum";
-			temp.height = 21;
 			temp.text = "1000";
 			temp.textAlign = "center";
-			temp.color = 0xBEA757;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 53;
-			temp.x = 112;
-			temp.y = 5;
+			temp.x = 97;
+			temp.y = 3;
 			return temp;
 		}
 
@@ -249,12 +251,12 @@ package org.mokylin.skin.app.beibao
 			temp.height = 26;
 			temp.letterSpacing = 0;
 			temp.fontSize = 16;
-			temp.text = "讨伐卷轴（紫装）";
-			temp.color = 0x9d4aa8;
+			temp.text = "道具名(黄色)";
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 196;
-			temp.x = 80;
-			temp.y = 3;
+			temp.x = 81;
+			temp.y = 2;
 			return temp;
 		}
 
@@ -263,32 +265,12 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbl_num = temp;
 			temp.name = "lbl_num";
-			temp.height = 24;
-			temp.text = "本组剩余：18";
-			temp.color = 0xcfc6ae;
+			temp.text = "本组剩余：$";
+			temp.color = 0xA3A594;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 104;
 			temp.x = 82;
-			temp.y = 43;
-			return temp;
-		}
-
-		private function lbl_title_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbl_title = temp;
-			temp.name = "lbl_title";
-			temp.bold = true;
-			temp.touchable = false;
-			temp.touchGroup = true;
-			temp.letterSpacing = 2;
-			temp.fontSize = 16;
-			temp.text = "批量使用";
-			temp.textAlign = "center";
-			temp.color = 0xDDE2B1;
-			temp.nativeFilters = Fontter.filterObj[""];
-			temp.width = 240;
-			temp.x = 48;
-			temp.y = 11;
+			temp.y = 24;
 			return temp;
 		}
 

@@ -3,6 +3,7 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.app.display2D.PopSkinUI;
 	import com.rpgGame.app.manager.MainUIManager;
 	import com.rpgGame.app.manager.ShortcutsManger;
+	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
 	import com.rpgGame.app.view.icon.BgIcon;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.utils.MCUtil;
@@ -17,15 +18,12 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.netData.skill.bean.SkillInfo;
 	
 	import flash.geom.Point;
-	import flash.utils.clearInterval;
 	import flash.utils.clearTimeout;
-	import flash.utils.setInterval;
 	import flash.utils.setTimeout;
 	
 	import feathers.controls.UIAsset;
 	
 	import gs.TweenLite;
-	import gs.easing.Cubic;
 	import gs.easing.Expo;
 	
 	import org.mokylin.skin.mainui.tishi.huode_Jineng;
@@ -108,14 +106,15 @@ package com.rpgGame.app.fight.spell
 			var toP:Point;
 			if(_cfg.q_trigger_type==1)
 			{
-				var index:int=getNextShortIndex();
 				var cfg:Q_skill_model=SpellDataManager.getSpellData(skillInfo.skillModelId,skillInfo.skillLevel);
+				var index:int=cfg.q_seat-1;//配置从1开始的 
 				toP=MainUIManager.mainui.shortcutBar.getSkillGridSeat(index);
 				ShortcutsManger.getInstance().setShortData(index,ShortcutsTypeEnum.SKILL_TYPE,cfg.q_skillID);
 			}
 			else
 			{
-				toP=MainUIManager.getBtnGolbalPos("btn_wuxue");
+				
+				toP=MainUIManager.getBtnGolbalPos(MainButtonManager.getButtonName(4));
 			}
 			TweenLite.to(skillIcon,0.5,{x:toP.x,y:toP.y,onComplete:flytoShortcutComplete,onCompleteParams:[skillIcon] ,ease:Expo.easeIn});	
 			popComplete();	
@@ -123,18 +122,6 @@ package com.rpgGame.app.fight.spell
 		private function flytoShortcutComplete(...arg):void
 		{
 			MCUtil.removeSelf(arg[0]);
-		}
-		private function getNextShortIndex():int
-		{
-			var index:int;
-			for(var i:int=0;i<8;i++){
-				var shortData : ShortcutsData = ShortcutsManger.getInstance().getShortcutsDataByPos(i);
-				if(!shortData){
-					index=i;
-					break;
-				}
-			}
-			return index;
 		}
 		
 		override protected function onStageResize(sw : int, sh : int) : void

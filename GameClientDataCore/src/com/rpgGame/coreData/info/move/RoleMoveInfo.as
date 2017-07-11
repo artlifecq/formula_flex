@@ -37,5 +37,20 @@ package com.rpgGame.coreData.info.move
 				pathList.push(curtPos);
 			}
 		}
+		public function setValues(roleId:Number,speed:int,startTime:Number,startPos:Position,positions:Vector.<Position>):void
+		{
+			this.roleID=roleId;
+			this.speed=speed;
+			this.startTm=startTime;
+			var pathLen : int = positions.length;
+			pathList = new Vector.<Point>;
+			pathList.push(new Point(startPos.x,startPos.y));
+			for (var i : uint = 0; i < pathLen; i++)
+			{
+				var pos:Position =positions[i];
+				var curtPos : Point = new Point(pos.x, pos.y);
+				pathList.push(curtPos);
+			}
+		}
 	}
 }

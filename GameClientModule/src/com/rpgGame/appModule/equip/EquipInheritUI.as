@@ -20,6 +20,7 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.StaticValue;
@@ -179,10 +180,10 @@ package com.rpgGame.appModule.equip
 			
 			_skin.container.addChild(_targetEquip);
 			_skin.container.addChild(_useEquip);
-			_targetEquip.x=739;
-			_targetEquip.y=105;
-			_useEquip.x=470;
-			_useEquip.y=105;
+			_targetEquip.x=753;
+			_targetEquip.y=121;
+			_useEquip.x=481;
+			_useEquip.y=121;
 			
 			//初始化选项
 			for(var i:int=0;i<3;i++)
@@ -256,7 +257,7 @@ package com.rpgGame.appModule.equip
 			if(tweenEquip){
 				tweenEquip.kill();
 			}
-			tweenEquip=TweenMax.to(_targetEquip,1,{x:741,y:100,ease:Expo.easeOut});
+			tweenEquip=TweenMax.to(_targetEquip,1,{x:753,y:121,ease:Expo.easeOut});
 			
 			updateUsePanel();
 			targetGrid=_goodsbyBag.getDragDropItemByItemInfo(_targetEquipInfo);
@@ -313,7 +314,7 @@ package com.rpgGame.appModule.equip
 			if(tweenEquip){
 				tweenEquip.kill();
 			}
-			tweenEquip=TweenMax.to(_useEquip,1,{x:475,y:100,ease:Expo.easeOut});
+			tweenEquip=TweenMax.to(_useEquip,1,{x:486,y:121,ease:Expo.easeOut});
 			targetGrid=_goodsbyPlayer.getDragDropItemByItemInfo(_useEuipInfo);
 			if(targetGrid)
 			{
@@ -373,6 +374,7 @@ package com.rpgGame.appModule.equip
 			num=num>MIN_GRID?num:MIN_GRID;
 			_goodsbyBag.setGridsCount(num,false);
 			_goodsbyBag.refleshGridsByDatas(useItems);
+			notifyUpdate(RTNodeID.EQUIP_JC);
 		}
 		
 		private function updateAll():void

@@ -21,7 +21,11 @@ package com.rpgGame.coreData.clientConfig
 		 /**  坐骑面板展示用造型资源编号 */
 		public var q_panel_show_id:int;
 		 /**  场景中骑乘用造型资源路径 */
-		public var q_scene_show_url:String;
+		public var q_skinResID:String;
+		 /**  场景中骑乘动画资源路径 */
+		public var q_animatResID:String;
+		 /**  最小距离可自动骑乘 */
+		public var q_distance:int;
 		 /**  获得本阶坐骑后学会的坐骑被动技能[ID,ID,ID] */
 		public var q_skill_id:String;
 		 /**  属性id([兵家,墨家,医家]) */

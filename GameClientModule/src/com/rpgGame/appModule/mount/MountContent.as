@@ -8,6 +8,7 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.HorseConfigData;
 	import com.rpgGame.coreData.clientConfig.Q_horse;
+	import com.rpgGame.coreData.type.RoleActionType;
 	
 	import org.mokylin.skin.app.zuoqi.ZuoqiCont_Skin;
 	
@@ -24,12 +25,14 @@ package com.rpgGame.appModule.mount
 		private var _amationInfos:Vector.<TargetAmationInfo>;
 		private static const TotalTime:Number = 0.3;
 		private static var _passTime:Number = 0;
+		private var _list:Vector.<RenderUnit3D>;
 		public function MountContent(skin:ZuoqiCont_Skin):void
 		{
 			_skin = skin;
 			super();
 			skin.container.addChildAt(this,skin.container.getChildIndex(skin.bg_2)+1);
 			_isSHowNext = true;
+			_list = new Vector.<RenderUnit3D>();
 		}
 		
 		public function buttonLeft():void
@@ -69,18 +72,19 @@ package com.rpgGame.appModule.mount
 				this.removeChild3D(_nextInter3D);
 				_nextInter3D = null;
 			}
+			_list.length = 0;
 			_amationInfos = new Vector.<TargetAmationInfo>();
-			var animat : String = ClientConfig.getAvatar(HorseConfigData.mountAnimatResID);
 			_curtentInter3D = new InterObject3D();
-			var data : RenderParamData3D = new RenderParamData3D(0, "mount1",ClientConfig.getAvatar(current.q_scene_show_url));
-			data.animatorSourchPath = animat;
+			var data : RenderParamData3D = new RenderParamData3D(0, "mount1",ClientConfig.getAvatar(current.q_skinResID));
+			data.animatorSourchPath = ClientConfig.getAvatar( current.q_animatResID);
 			data.forceLoad=true;//ui上的3d特效强制加载
 			var unit : RenderUnit3D = _curtentInter3D.addRenderUnitWith(data, 0);
-			unit.setStatus("stand");
 			_curtentInter3D.x = 340;
 			_curtentInter3D.y = 440;
 			_curtentInter3D.rotationY = 60;
+			unit.setScale(1.8);
 			unit.addUnitAtComposite(unit);
+			_list.push(unit);
 			this.addChild3D(_curtentInter3D);
 			
 			var anation:TargetAmationInfo = new TargetAmationInfo();
@@ -98,18 +102,18 @@ package com.rpgGame.appModule.mount
 			anation = new TargetAmationInfo();
 			anation.target = unit;
 			anation.propName = "scale";
-			anation.setValue(1,0.4);
+			anation.setValue(1.8,0.4);
 			_amationInfos.push(anation);
 			
 			if(next ==null)
 				return ;
 			_nextInter3D = new InterObject3D();
-			data = new RenderParamData3D(0, "mount2",ClientConfig.getAvatar(next.q_scene_show_url));
-			data.animatorSourchPath = animat;
+			data = new RenderParamData3D(0, "mount2",ClientConfig.getAvatar(next.q_skinResID));
+			data.animatorSourchPath = ClientConfig.getAvatar( next.q_animatResID);;
 			data.forceLoad=true;//ui上的3d特效强制加载
 			unit = _nextInter3D.addRenderUnitWith(data, 0);
-			unit.setStatus("stand");
 			unit.setScale(0.1);
+			_list.push(unit);
 			_nextInter3D.x = 590;
 			_nextInter3D.y = 370;
 			_nextInter3D.rotationY = 60;
@@ -131,13 +135,14 @@ package com.rpgGame.appModule.mount
 			anation = new TargetAmationInfo();
 			anation.target = unit;
 			anation.propName = "scale";
-			anation.setValue(0,1);
+			anation.setValue(0,1.8);
 			_amationInfos.push(anation);
 			for each(var info:TargetAmationInfo in _amationInfos)
 			{
 				info.advanceTime(0);
 			}
 			completeHandler();
+			showModeSate(RoleActionType.IDLE);
 		}
 		
 		private var needChangeFun:Function;
@@ -172,6 +177,15 @@ package com.rpgGame.appModule.mount
 			}else{
 				_passTime = 0;
 				Starling.juggler.add(this);
+				showModeSate(RoleActionType.RUN);
+			}
+		}
+		
+		private function showModeSate(state:String):void
+		{
+			for each(var unit:RenderUnit3D in _list)
+			{
+				unit.setStatus(state);
 			}
 		}
 		public function advanceTime(time:Number):void
@@ -181,6 +195,7 @@ package com.rpgGame.appModule.mount
 			{
 				_passTime =TotalTime;
 				Starling.juggler.remove(this);
+				showModeSate(RoleActionType.IDLE);
 				if(completeFun!=null)
 					completeFun();
 			}

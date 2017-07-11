@@ -34,7 +34,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			this.currentState = "normal";
 			this.height = 217;
 			this.width = 331;
-			this.elementsContent = [bg_i(),__Bianshi_Tips_UIAsset1_i(),btnClose_i(),__Bianshi_Tips_Label1_i(),lb_hecheng_i(),__Bianshi_Tips_Label3_i(),__Bianshi_Tips_Label4_i(),__Bianshi_Tips_Label5_i(),__Bianshi_Tips_Label6_i()];
+			this.elementsContent = [bg_i(),btnClose_i(),__Bianshi_Tips_Label1_i(),lb_hecheng_i(),__Bianshi_Tips_Label3_i(),__Bianshi_Tips_Label4_i(),__Bianshi_Tips_Label5_i(),__Bianshi_Tips_Label6_i(),__Bianshi_Tips_UIAsset1_i()];
 			
 			states = {
 			};
@@ -106,9 +106,11 @@ package org.mokylin.skin.app.beibao.Xinfa
 		private function __Bianshi_Tips_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/background/erji_bg.jpg";
-			temp.x = 11;
-			temp.y = 42;
+			temp.touchable = false;
+			temp.touchGroup = true;
+			temp.styleName = "ui/common/background/head_tishi.png";
+			temp.x = 142;
+			temp.y = 9;
 			return temp;
 		}
 

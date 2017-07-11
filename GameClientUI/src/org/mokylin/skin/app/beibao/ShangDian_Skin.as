@@ -60,7 +60,7 @@ package org.mokylin.skin.app.beibao
 			this.currentState = "normal";
 			this.height = 447;
 			this.width = 364;
-			this.elementsContent = [__ShangDian_Skin_Group1_i(),lst_pack0_i(),lst_pack1_i(),bg_i(),lb_Title_i(),btnClose_i(),tab_pack_i(),__ShangDian_Skin_Label1_i(),gCheck_i(),uiNo_i(),lbMsg_i()];
+			this.elementsContent = [__ShangDian_Skin_Group1_i(),lst_pack0_i(),lst_pack1_i(),bg_i(),lb_Title_i(),btnClose_i(),tab_pack_i(),__ShangDian_Skin_Label1_i(),gCheck_i(),uiNo_i()];
 			
 			states = {
 			};
@@ -83,14 +83,14 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 0;
 			temp.y = 0;
-			temp.elementsContent = [__ShangDian_Skin_UIAsset1_i(),__ShangDian_Skin_UIAsset2_i(),__ShangDian_Skin_UIAsset3_i()];
+			temp.elementsContent = [__ShangDian_Skin_UIAsset1_i(),__ShangDian_Skin_UIAsset2_i(),__ShangDian_Skin_UIAsset3_i(),lbMsg_i()];
 			return temp;
 		}
 
 		private function __ShangDian_Skin_HorizontalLayout1_i():feathers.layout.HorizontalLayout
 		{
 			var temp:feathers.layout.HorizontalLayout = new feathers.layout.HorizontalLayout();
-			temp.gap = -2;
+			temp.gap = -1;
 			return temp;
 		}
 
@@ -209,10 +209,12 @@ package org.mokylin.skin.app.beibao
 			lbMsg = temp;
 			temp.name = "lbMsg";
 			temp.text = "最多保留10条，道具出售后下线则不保留信息";
+			temp.textAlign = "center";
 			temp.color = 0xD23735;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 30;
-			temp.y = 364;
+			temp.width = 350;
+			temp.x = 7;
+			temp.y = 404;
 			return temp;
 		}
 

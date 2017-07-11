@@ -12,21 +12,16 @@ package com.rpgGame.netData.vip.message{
 	 */
 	public class ReqGetVipAwardMessage extends Message {
 	
-		//当前vip等级
+		//当前领取vip等级
 		private var _vipId: int;
-		
-		//领取奖励类型 1 开通/续费奖励   2 每日奖励
-		private var _type: int;
 		
 		
 		/**
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
-			//当前vip等级
+			//当前领取vip等级
 			writeInt(_vipId);
-			//领取奖励类型 1 开通/续费奖励   2 每日奖励
-			writeByte(_type);
 			return true;
 		}
 		
@@ -34,10 +29,8 @@ package com.rpgGame.netData.vip.message{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
-			//当前vip等级
+			//当前领取vip等级
 			_vipId = readInt();
-			//领取奖励类型 1 开通/续费奖励   2 每日奖励
-			_type = readByte();
 			return true;
 		}
 		
@@ -50,7 +43,7 @@ package com.rpgGame.netData.vip.message{
 		}
 		
 		/**
-		 * get 当前vip等级
+		 * get 当前领取vip等级
 		 * @return 
 		 */
 		public function get vipId(): int{
@@ -58,25 +51,10 @@ package com.rpgGame.netData.vip.message{
 		}
 		
 		/**
-		 * set 当前vip等级
+		 * set 当前领取vip等级
 		 */
 		public function set vipId(value: int): void{
 			this._vipId = value;
-		}
-		
-		/**
-		 * get 领取奖励类型 1 开通/续费奖励   2 每日奖励
-		 * @return 
-		 */
-		public function get type(): int{
-			return _type;
-		}
-		
-		/**
-		 * set 领取奖励类型 1 开通/续费奖励   2 每日奖励
-		 */
-		public function set type(value: int): void{
-			this._type = value;
 		}
 		
 	}

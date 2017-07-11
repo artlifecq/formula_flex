@@ -12,6 +12,7 @@ package com.game.engine3D.scene.render.vo
 	import away3d.cameras.Camera3D;
 	import away3d.containers.ObjectContainer3D;
 	import away3d.entities.CompositeMesh;
+	import away3d.entities.Mesh;
 	import away3d.lights.LightBase;
 	import away3d.materials.lightpickers.LightPickerBase;
 	import away3d.materials.methods.EffectMethodBase;
@@ -55,16 +56,18 @@ package com.game.engine3D.scene.render.vo
 		private var _resErrorCallBackList : Vector.<CallBackData>;
 		
 		private var _isSkinMesh : Boolean;
-
+			
 		public function get isSkinMesh() : Boolean
 		{
+			
 			return _isSkinMesh;
 		}
-
+			
 		public function set isSkinMesh(value : Boolean) : void
 		{
 			_isSkinMesh = value;
 		}
+
 
 		/**是否唯一的实例，不需要复制*/
 		public function set isOnlyInstance(value : Boolean) : void
@@ -138,12 +141,27 @@ package com.game.engine3D.scene.render.vo
 				}
 			}
 		}
+		
+		private function meshSortFunc(a:ObjectContainer3D,b:ObjectContainer3D):int
+		{
+			if(a is Mesh)
+			{
+				return -1;
+			}
+			if(b is Mesh)
+			{
+				return 1;
+			}
+			return 0;
+		}
 
 		private function onMeshComplete(loader : RenderUnitLoader) : void
 		{
 			if (!_renderMeshLoader)
 				return;
+			
 			_drawElements = _renderMeshLoader.elements;
+			_drawElements.sort(meshSortFunc);
 			
 			_lightPickerMap = _renderMeshLoader.lightPickerMap;
 			_lights = _renderMeshLoader.lights;
@@ -176,11 +194,12 @@ package com.game.engine3D.scene.render.vo
 					if (element is CompositeMesh)
 					{
 						_animatorElements.push(CompositeMesh(element));
-					} else if (element is ObjectContainer3D) {
+					} 
+					else if (element is ObjectContainer3D)
+					{
 						_baseVirtualElements.push(ObjectContainer3D(element));
 					}
 				}
-				
 			}
 			
 			tryResourceComplete();
@@ -430,6 +449,32 @@ package com.game.engine3D.scene.render.vo
 		public function get renderAnimatorLoader() : RenderUnitLoader
 		{
 			return _renderAnimatorLoader;
+		}
+		
+		public function animatorUseForSkin():void
+		{
+			if(_renderAnimatorLoader)
+				_renderAnimatorLoader.isUseForSkin = true;
+		}
+		
+		public function isAnimatorUseForSkin():Boolean
+		{
+			if(_renderAnimatorLoader)
+				return _renderAnimatorLoader.isUseForSkin;
+			return false;
+		}
+		
+		public function meshUseForSkeleton(name:String):void
+		{
+			if(_renderMeshLoader)
+				_renderMeshLoader.useForSkeletonName = name;
+		}
+		
+		public function meshUseForSkeletonName():String
+		{
+			if(_renderMeshLoader)
+				return _renderMeshLoader.useForSkeletonName;
+			return null;
 		}
 
 		/**

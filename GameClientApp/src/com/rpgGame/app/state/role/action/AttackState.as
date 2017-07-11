@@ -3,8 +3,11 @@ package com.rpgGame.app.state.role.action
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.state.IState;
 	import com.game.engine3D.vo.BaseRole;
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateMachine;
+	import com.rpgGame.app.state.role.control.CheckTripleAttackStateReference;
+	import com.rpgGame.app.state.role.control.TripleAttackSpellLockStateReference;
 	import com.rpgGame.core.state.role.action.ActionState;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RenderUnitID;
@@ -56,6 +59,9 @@ package com.rpgGame.app.state.role.action
 			if (_machine && !_machine.isInPool)
 			{
 				super.execute();
+				//
+				_machine.removeState(RoleStateType.CONTROL_PREWAR_WAITING);
+				//
 				_attackBroken = false;
 				_attackFinished = false;
 				_canWalkRelease = false;
@@ -77,10 +83,7 @@ package com.rpgGame.app.state.role.action
 				else
 					throw new Error("攻击状态引用必须是AttackStateReference类型！");
 
-				if (!_canWalkRelease)//不可边走边放技能
-				{
-					transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
-				}
+				
 				
 				_statusType = _stateReference.statusType;
 				if (_statusType)
@@ -101,16 +104,20 @@ package com.rpgGame.app.state.role.action
 					_hitFrameTime = 0;
 					_stateReference.setThrowFrameTime(0);
 				}
-
-				var fixDirection : Boolean = false;
-				if ((_machine.owner as SceneRole).data is RoleData)
+				if (!_canWalkRelease)//不可边走边放技能
 				{
-					fixDirection = ((_machine.owner as SceneRole).data as RoleData).fixDirection;
+					transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
+					var fixDirection : Boolean = false;
+					if ((_machine.owner as SceneRole).data is RoleData)
+					{
+						fixDirection = ((_machine.owner as SceneRole).data as RoleData).fixDirection;
+					}
+					if (!fixDirection)
+					{
+						(_machine.owner as SceneRole).turnRoundTo(_stateReference.angle, 0);
+					}
 				}
-				if (!fixDirection)
-				{
-					(_machine.owner as SceneRole).turnRoundTo(_stateReference.angle, 0);
-				}
+				
 				syncAnimationSpeed(1);
 			}
 		}
@@ -354,6 +361,11 @@ package com.rpgGame.app.state.role.action
 		override public function leave() : void
 		{
 			super.leave();
+			if ((_machine as RoleStateMachine).isTripleLockCaseSpell) 
+			{
+				GameLog.add("三连击非正常打断");
+				_machine.removeState(RoleStateType.CONTROL_TRIPLE_ATTACK_LOCK);
+			}
 			stopAttack();
 			_attackBroken = false;
 			_attackFinished = false;
@@ -399,7 +411,17 @@ package com.rpgGame.app.state.role.action
 				if (_stateReference)
 					_stateReference.totalFrame();
 				stopAttack();
-				transition(RoleStateType.ACTION_PREWAR, null, false, false, [RoleStateType.CONTROL_WALK_MOVE]);
+				if((_machine as RoleStateMachine).isTripleLockCaseSpell&&(_machine.getReference(TripleAttackSpellLockStateReference) as TripleAttackSpellLockStateReference).isLockSkill(AttackStateReference(_ref).spellInfo.spellData.q_skillID))
+				{
+					var ref:CheckTripleAttackStateReference=_machine.getReference(CheckTripleAttackStateReference) as CheckTripleAttackStateReference;
+					ref.setParams(AttackStateReference(_ref).spellInfo.spellData.q_skillID);
+					transition(RoleStateType.CONTROL_TRIPLE_ATTACK_CHECK,ref);
+				}
+				else
+				{
+					transition(RoleStateType.ACTION_PREWAR, null, false, false, [RoleStateType.CONTROL_WALK_MOVE]);
+				}
+				
 			}
 		}
 
@@ -416,7 +438,15 @@ package com.rpgGame.app.state.role.action
 				}
 				if (_stateReference)
 					_stateReference.breakFrame();
+				
+//				if((_machine as RoleStateMachine).isTripleLockCaseSpell&&(_machine.getReference(TripleAttackSpellLockStateReference) as TripleAttackSpellLockStateReference).isLockSkill(AttackStateReference(_ref).spellInfo.spellData.q_skillID))
+//				{
+//					var ref:CheckTripleAttackStateReference=_machine.getReference(CheckTripleAttackStateReference) as CheckTripleAttackStateReference;
+//					ref.setParams(AttackStateReference(_ref).spellInfo.spellData.q_skillID);
+//					transition(RoleStateType.CONTROL_TRIPLE_ATTACK_CHECK,ref);
+//				}
 			}
+			
 		}
 
 		public function get attackBroken() : Boolean
@@ -459,7 +489,7 @@ package com.rpgGame.app.state.role.action
 			}
 			else if (nextState.type == RoleStateType.ACTION_HIT)
 			{
-				if (!force && !_attackBroken)
+				//if (!force && !_attackBroken)
 					return false;
 			}
 			else if (nextState.type == RoleStateType.ACTION_COLLECT)
@@ -544,6 +574,11 @@ package com.rpgGame.app.state.role.action
 			{
 				_totalFrameTween.kill();
 				_totalFrameTween = null;
+			}
+			if ((_machine as RoleStateMachine).isTripleLockCaseSpell) 
+			{
+				GameLog.add("三连击非正常打断2");
+				_machine.removeState(RoleStateType.CONTROL_TRIPLE_ATTACK_LOCK);
 			}
 			super.dispose();
 		}

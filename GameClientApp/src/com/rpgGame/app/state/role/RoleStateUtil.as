@@ -6,6 +6,7 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneCursorHelper;
 	import com.rpgGame.app.manager.scene.SceneManager;
@@ -124,7 +125,7 @@ package com.rpgGame.app.state.role
 		 *@param noWalk 寻路路径小不用寻路，也返回方法 返回 role   任务上用到 ---------yt
 		 */
 		public static function walkToPos(role : SceneRole, pos : Vector3D, spacing : int = 0, data : Object = null, 
-										 onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null,noWalk:Function=null) : Boolean
+										 onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null) : Boolean
 		{
 			if (!role || !role.usable)
 				return false;
@@ -133,9 +134,13 @@ package com.rpgGame.app.state.role
 			if(dist <= spacing)
 			{
 				role.faceToGround(pos.x,pos.y);
-				if(noWalk!=null)
+				if(onArrive!=null)
 				{
-					noWalk(data);
+					var camouflageEntity : SceneRole = SceneRole(role.getCamouflageEntity());
+					var walkRole : SceneRole = camouflageEntity || role;
+					var ref : WalkMoveStateReference = walkRole.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
+					ref.data = data;
+					onArrive(ref);
 				}
 				
 				return false;
@@ -245,8 +250,19 @@ package com.rpgGame.app.state.role
 			ref.onStop(onWalkStop);
 			ref.onEnd(onWalkEnd);
 			ref.onSync(onWalkSync);
+//			walkRole.stateMachine.transition(RoleStateType.CONTROL_WALK_MOVE, ref);
 			walkRole.stateMachine.transition(RoleStateType.CONTROL_WALK_MOVE, ref);
+			if (role.isMainChar || role.isMainCamouflage)
+			{
+				if (walkRole.stateMachine.isWalkMoving)
+				{
+					//					_lastWalkServerTime = _local12;
+					HorseManager.instance().autoRiding(role, pos);
+				}
+			}
+			
 			return walkRole.stateMachine.isWalkMoving;
+
 		}
 		
 		private static function nullFunc():void

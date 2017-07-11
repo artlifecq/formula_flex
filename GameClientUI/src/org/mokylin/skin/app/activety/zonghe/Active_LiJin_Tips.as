@@ -28,8 +28,8 @@ package org.mokylin.skin.app.activety.zonghe
 			super();
 			
 			this.currentState = "normal";
-			this.height = 112;
-			this.width = 249;
+			this.height = 113;
+			this.width = 245;
 			this.elementsContent = [__Active_LiJin_Tips_UIAsset1_i(),__Active_LiJin_Tips_UIAsset2_i(),lbName_i(),lbTip_i()];
 			
 			states = {
@@ -44,9 +44,9 @@ package org.mokylin.skin.app.activety.zonghe
 		private function __Active_LiJin_Tips_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 112;
+			temp.height = 113;
 			temp.styleName = "ui/common/tips/tips_2.png";
-			temp.width = 248;
+			temp.width = 245;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -56,8 +56,8 @@ package org.mokylin.skin.app.activety.zonghe
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/activety/zonghe/tianjianglijin/daobaoxiaoguai.png";
-			temp.x = -45;
-			temp.y = -21;
+			temp.x = -55;
+			temp.y = -31;
 			return temp;
 		}
 
@@ -66,11 +66,12 @@ package org.mokylin.skin.app.activety.zonghe
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbName = temp;
 			temp.name = "lbName";
-			temp.text = "盗宝小怪";
+			temp.text = "【盗宝小怪】";
 			temp.color = 0xE8C958;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 31;
-			temp.y = 7;
+			temp.width = 151;
+			temp.x = 8;
+			temp.y = 11;
 			return temp;
 		}
 
@@ -79,12 +80,13 @@ package org.mokylin.skin.app.activety.zonghe
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbTip = temp;
 			temp.name = "lbTip";
+			temp.height = 77;
 			temp.htmlText = "1.活动开启则出现第一波盗宝小怪，<br>第<font color='#5DBD37'>5、10、15</font>分钟刷新<br>2.冬季盗宝下怪必掉礼金<br>3.攻击盗宝小怪额外获得<font color='#5DBD37'>5-10礼金</font>";
 			temp.leading = 4;
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 20;
-			temp.y = 30;
+			temp.x = 12;
+			temp.y = 31;
 			return temp;
 		}
 

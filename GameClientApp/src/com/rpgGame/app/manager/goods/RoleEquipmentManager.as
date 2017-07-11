@@ -260,7 +260,8 @@ package com.rpgGame.app.manager.goods
 		public static function isSuitSex(equipSex:int):Boolean
 		{
 			if(equipSex == 0)return true;
-			var sex:int = MainRoleManager.actorInfo.sex ? SexType.MALE : SexType.FEMALE;
+			
+			var sex:int = MainRoleManager.actorInfo.sex;
 			return equipSex == sex;
 		}
 	}	

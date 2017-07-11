@@ -4,7 +4,6 @@ package com.rpgGame.appModule.xinfa
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.scene.BuffSet;
 	import com.rpgGame.app.sender.CheatsSender;
 	import com.rpgGame.app.utils.FightValueUtil;
 	import com.rpgGame.app.view.icon.BgIcon;
@@ -18,13 +17,16 @@ package com.rpgGame.appModule.xinfa
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.core.ui.tip.IRewardCheck;
+	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.core.utils.AttrUtil;
 	import com.rpgGame.core.utils.GameColorUtil;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.BuffStateDataManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
-	import com.rpgGame.coreData.cfg.cheats.CheatsCfg;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_buff;
 	import com.rpgGame.coreData.clientConfig.Q_cheats;
@@ -32,16 +34,15 @@ package com.rpgGame.appModule.xinfa
 	import com.rpgGame.coreData.info.cheats.CheatsNodeVo;
 	import com.rpgGame.coreData.info.cheats.CheatsVo;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
-	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.TipType;
-	import com.rpgGame.coreData.utils.FilterUtil;
-	import com.rpgGame.coreData.utils.FilterUtility;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import flash.geom.Point;
 	
 	import app.message.GoodsType;
+	
+	import away3d.events.Event;
 	
 	import feathers.controls.Label;
 	import feathers.controls.Radio;
@@ -59,8 +60,6 @@ package com.rpgGame.appModule.xinfa
 	import org.mokylin.skin.app.beibao.Xinfa.Zhenyuan_Skin;
 	import org.mokylin.skin.app.beibao.Xinfa.btnGruop_Skin;
 	import org.mokylin.skin.app.beibao.Xinfa.xinfa_Skin;
-	
-	import away3d.events.Event;
 
 	public class XinFaView
 	{
@@ -75,9 +74,11 @@ package com.rpgGame.appModule.xinfa
 		private var _effectCheatsGridArr:Array;
 		private var _skillIcon:BgIcon;
 		private var _btnStateLabelHash:HashMap=new HashMap();
+		private var _rtnIds:Array;
 		
 		public function XinFaView(s:xinfa_Skin)
 		{
+			
 			_skin=s;
 			_skinArr=[new Longxiang_Skin(),new Shijue_Skin(),new Xiaoyao_Skin,new Qiankun_Skin(),new Xijing_Skin(),new Chunyang_Skin(),new Zhenyuan_Skin(),new Jiuxiao_Skin(),new Mingxin_Skin(),new Wanji_Skin()];
 			//tweenScroll=new TweenScaleScrollUitlExt(con,
@@ -89,13 +90,12 @@ package com.rpgGame.appModule.xinfa
 			{
 				var sbtn:Radio=sbtnArr[i];
 				sbtn.addEventListener(Event.TRIGGERED,onTriggered);
-			
+				
 			}
 			_effectCheatsGridArr=[new CheatsIcon(_skin.grid_1),new CheatsIcon(_skin.grid_2),new CheatsIcon(_skin.grid_3)];
-			_skillIcon=new BgIcon(IcoSizeEnum.ICON_42);
-			_skin.grid_item_1.addChild(_skillIcon);
-			_skillIcon.x=6;
-			_skillIcon.y=6;
+			_skillIcon=new BgIcon(IcoSizeEnum.ICON_36);
+			_skillIcon.bindBg(_skin.grid_item_1);
+			_skin.container.addChild(_skillIcon);
 			initData();
 			MCUtil.removeSelf(_skin.lab_shuxing);
 			MCUtil.removeSelf(_skin.lab_jiangli);
@@ -210,7 +210,7 @@ package com.rpgGame.appModule.xinfa
 //				TipTargetManager.remove(_skin.grid_item_1);
 //				TipTargetManager.show( _skin.grid_item_1, TargetTipsMaker.makeTips( TipType.SPELL_TIP,data.cheatsConfig.q_skill+"_"+Math.max(1,data.level)));
 				var buff:Q_buff=BuffStateDataManager.getData(buffObj[0]);
-				_skillIcon.setIconResName(ClientConfig.getBuffIcon(buff.q_icon,IcoSizeEnum.ICON_42));
+				_skillIcon.setIconResName(ClientConfig.getBuffIcon(buff.q_icon,IcoSizeEnum.ICON_36));
 				_skin.lab_Skill.text=LanguageConfig.replaceStr(buff.q_description,buffObj[1]);
 				_skin.imgSkill.styleName="ui/app/beibao/xinfa/buff/"+buff.q_icon+".png"
 			}
@@ -286,7 +286,8 @@ package com.rpgGame.appModule.xinfa
 				if (_curMap.cheatsVo.needItemHash.size()!=0) 
 				{
 					_skin.lab_Content.visible=true;
-					var str:String="收集@可激活心法";
+					//var str:String="收集@可激活心法";
+					var str:String=NotifyCfgData.getNotifyTextByID(61004);
 					var arr:Array=_curMap.cheatsVo.needItemHash.keys();
 					if (arr&&arr.length>0) 
 					{
@@ -305,13 +306,22 @@ package com.rpgGame.appModule.xinfa
 							{
 								color=GameColorUtil.COLOR_RED;
 							}
-							strArr.push(HtmlTextUtil.getTextColor(color,backNum+"/"+itemNum)+"个"+ItemConfig.getItemNameWithQualityColor(itemMid));
+							strArr.push(HtmlTextUtil.getTextColor(color,backNum+"/"+itemNum)+NotifyCfgData.getNotifyTextByID(61005)+ItemConfig.getItemNameWithQualityColor(itemMid));
 						}
 					}
 					str=str.replace("@",strArr.join("、"));
 					_skin.lab_Content.htmlText=str;
 				}
 			}
+		}
+		private function checkReward(id:int):Boolean
+		{
+			var map:IRewardCheck=_mapsHash.getValue(id) as IRewardCheck;
+			if (map) 
+			{
+				return map.hasReward();
+			}
+			return false;
 		}
 		private function initData():void
 		{
@@ -326,6 +336,7 @@ package com.rpgGame.appModule.xinfa
 			{
 				meridianType=keys[i];
 				tmp=new CheatsMap(_skinArr[i],hash.getValue(meridianType),sbtnArr[i]);
+				SkinUI.addNode(RTNodeID.XF,RTNodeID.XF+"_"+meridianType,sbtnArr[i],106,checkReward,false,meridianType);
 				tmp.pos=i;
 				tmp.x=200;
 				tmp.y=70;
@@ -393,6 +404,10 @@ package com.rpgGame.appModule.xinfa
 				{
 					checkForUpdateJX();
 				}
+				else
+				{
+					checkForActive();
+				}
 				//没激活是不是材料
 				if (_curMap&&_curMap.cheatsVo.level==0) 
 				{
@@ -437,6 +452,20 @@ package com.rpgGame.appModule.xinfa
 				if (map) 
 				{
 					map.checkForUpdateJX();
+				}
+			}
+		}
+		private function checkForActive():void
+		{
+			var keys:Array=_mapsHash.keys();
+			var tmp:Array;
+			var map:CheatsMap;
+			for each (var key:int in keys) 
+			{
+				map=_mapsHash.getValue(key);
+				if (map) 
+				{
+					map.updateBtnState();
 				}
 			}
 		}

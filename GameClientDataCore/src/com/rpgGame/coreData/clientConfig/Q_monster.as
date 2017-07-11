@@ -40,6 +40,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_is_direction_fixed:int;
 		 /**  是否在小地图中显示（1是，2否） */
 		public var q_isminimap:int;
+		 /**  小地图展示图片资源（配置文件名称） */
+		public var q_minimap_image:String;
 		 /**  怪物掉落归属（0：最后一击，1：伤害排行最高玩家，2：无主掉落） */
 		public var q_drop_type:int;
 		 /**  控制怪物模型大小参数为百分比，100为标准体型不填为原始大小 */
@@ -100,11 +102,15 @@ package com.rpgGame.coreData.clientConfig
 		public var q_script_index:int;
 		 /**  造型是否翻转（0：否，1：是） */
 		public var q_exchange:int;
+		 /**  携带buff（对应Buff表中编号） */
+		public var q_carry_buff:String;
+		 /**  buff持续时间（刷新表中优先级为最高，此处次之） */
+		public var q_buff_time:String;
 		 /**  BOSS技能AI */
 		public var q_ai:int;
 		 /**  怪物的属性强度万分比显示[攻击,防御,血量] （BOSS刷新面板的3个属性条长度） */
 		public var q_attribute_strength:String;
-		 /**  是否同步显示详细信息（0不显示 1世界BOSS 2统领BOSS） */
+		 /**  是否同步显示详细信息（0不显示 1世界BOSS 2统领BOSS 3帮派BOSS、4极限挑战BOSS、6秦陵秘宝BOSS） */
 		public var q_info_sync:int;
 		 /**  是否显示伤害排行榜及奖励信息(0:不显示，1：显示） */
 		public var q_rank_show:int;

@@ -5,7 +5,6 @@ package com.rpgGame.app.ui.tips.cheats
 	import com.rpgGame.core.events.CheatsEvent;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.AttrUtil;
-	import com.rpgGame.core.utils.GameColorUtil;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
 	import com.rpgGame.coreData.cfg.BuffStateDataManager;
@@ -17,7 +16,6 @@ package com.rpgGame.app.ui.tips.cheats
 	import com.rpgGame.coreData.info.cheats.CheatsVo;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	
-	import flash.events.Event;
 	import flash.geom.Point;
 	
 	import feathers.controls.Label;
@@ -47,11 +45,13 @@ package com.rpgGame.app.ui.tips.cheats
 			_skin=new Xinfa_Tips2();
 			super(_skin);
 			MCUtil.removeSelf(_skin.lab_shuxing);
-			MCUtil.removeSelf(_skin.lab_shuxing2);
 			MCUtil.removeSelf(_skin.lab_xiangsheng);
-			_skillIcon=new BgIcon(IcoSizeEnum.ICON_42);
-			_skillIcon.x=3;
-			_skillIcon.y=3;
+			MCUtil.removeSelf(_skin.line5);
+			MCUtil.removeSelf(_skin.lab_shuoming);
+			MCUtil.removeSelf(_skin.lab_Ctrl);
+			_skillIcon=new BgIcon(IcoSizeEnum.ICON_36);
+			_skillIcon.x=0;
+			_skillIcon.y=0;
 			_skin.gridSkill.addChild(_skillIcon);
 			labList=[];
 			Mgr.cheatsMgr.addEventListener(CheatsEvent.CHEATS_TIP_CHANGE,onDataChange);
@@ -84,29 +84,29 @@ package com.rpgGame.app.ui.tips.cheats
 				//状态
 				if (cheatVo.level==0) 
 				{
-					lab=clonelab(_skin.lab_xiangsheng);
-					lab.color=GameColorUtil.COLOR_RED;
-					lab.text="未激活";
-					lab.x=_skin.mcLevel.x;
-					lab.y=_skin.mcLevel.y;
-					this.addChild(lab);
+					_skin.lab_jihuo.visible=true;
 					_skin.mcLevel.visible=false;
 				}
 				else
 				{
+					_skin.lab_jihuo.visible=false;
 					_skin.mcLevel.visible=true;
 					_skin.mcLevel.gotoAndStop(cheatVo.level+"");
 				}
 				var starty:int=_skin.mcLevel.y+_skin.mcLevel.height+8;
-				var startPos:Point=new Point(_skin.lab_shuxing.x,starty);
+				var startPos:Point=new Point(11,starty);
 				//属性
 				if (cheatVo.level>0) 
-				{
+				{					
 					labList=labList.concat(AttrUtil.showAttr(cheatVo.totalValue,this,_skin.lab_shuxing,2,startPos,_skin.lab_shuxing.width,_skin.lab_shuxing.height+2,":"));
 					starty=startPos.y;
 				}
+				starty+=10;			
 				if (cheatVo.extendAttr.size()>0) 
 				{
+					_skin.line2.visible=true;
+					_skin.line2.y=starty;
+					starty+=_skin.line2.height+5;
 					_skin.imgJiHuoTitle.visible=true;
 					//激活属性
 					_skin.imgJiHuoTitle.y=starty;
@@ -118,13 +118,17 @@ package com.rpgGame.app.ui.tips.cheats
 				}
 				else
 				{
+					_skin.line2.visible=false;
 					_skin.imgJiHuoTitle.visible=false;
 				}
-			
+				
 				//技能
 				var buffObj:Array=cheatVo.getCurBuff();
 				if (buffObj!=null) 
 				{
+					_skin.line3.visible=true;
+					_skin.line3.y=starty;
+					starty+=_skin.line3.height+5;
 					_skin.imgSkill.visible=true;
 					_skin.gridSkill.visible=true;
 					_skin.imgSkill.y=starty;
@@ -132,19 +136,22 @@ package com.rpgGame.app.ui.tips.cheats
 					_skin.gridSkill.y=starty;
 					starty+=_skin.gridSkill.height+2;
 					var buff:Q_buff=BuffStateDataManager.getData(buffObj[0]);
-					_skillIcon.setIconResName(ClientConfig.getBuffIcon(buff.q_icon,IcoSizeEnum.ICON_42));
+					_skillIcon.setIconResName(ClientConfig.getBuffIcon(buff.q_icon,IcoSizeEnum.ICON_36));
 				}
 				else
 				{
 					_skin.imgSkill.visible=false;
 					_skin.gridSkill.visible=false;
+					_skin.line3.visible=false;
 				}
-				
-				
+								
 				var keys:Array=cheatVo.careCheats.keys();
 				var len:int=keys.length;
 				if (len>0) 
 				{
+					_skin.line4.visible=true;
+					_skin.line4.y=starty;
+					starty+=_skin.line4.height+5;
 					_skin.imgXS.visible=true;
 					//相生
 					_skin.imgXS.y=starty;
@@ -164,9 +171,11 @@ package com.rpgGame.app.ui.tips.cheats
 				}
 				else
 				{
+					_skin.line4.visible=false;
 					_skin.imgXS.visible=false;
 				}
-				//线
+				//线 不要 等要的时候在启用
+				
 				_skin.imgBg.height=starty+10;
 			}
 		}

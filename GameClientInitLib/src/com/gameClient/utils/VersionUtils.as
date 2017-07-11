@@ -31,10 +31,10 @@ package com.gameClient.utils
 
 		public static function setup(vMap : Object, baseDir : String = "../", version : String = null, useVersion : Boolean = false) : void
 		{
-			_verMap = vMap;
+			_verMap = vMap ? vMap.list : null;;
 			_baseDir = baseDir;
-			_version = version || Math.random().toString();
-			_defaultVer = _verMap ? _verMap.defaultVersion : null;
+			_version = version || "0";
+			_defaultVer = vMap ? vMap.defaultVersion : "0";
 			_useVersion = useVersion;
 		}
 
@@ -53,37 +53,11 @@ package com.gameClient.utils
 			var version : String = _verMap ? _verMap[verUrl] : null;
 			if (version)
 			{
-				if (arr.length > 1)
-				{
-					arr[arr.length - 2] = arr[arr.length - 2] + SPLIT + version;
-					versionUrl = arr.join(".");
-				}
-				else
-				{
-					versionUrl = url + QUE + _version;
-				}
+                versionUrl = url + QUE + version;
 			}
 			else
 			{
-				if (_useVersion)
-				{
-					if (arr.length > 1)
-					{
-						if (_defaultVer)
-						{
-							arr[arr.length - 2] = arr[arr.length - 2] + SPLIT + _defaultVer;
-							versionUrl = arr.join(".");
-						}
-						else
-						{
-							versionUrl = url + QUE + _version;
-						}
-					}
-				}
-				else
-				{
-					versionUrl = url + QUE + _version;
-				}
+                versionUrl = url + QUE + _defaultVer;
 			}
 			_cacheUrlDic[url] = versionUrl;
 			//避免重复执行的必要措施！@L.L.M.Sunny 
@@ -100,7 +74,7 @@ package com.gameClient.utils
 			var verUrl : String = url;
 			if (verUrl.indexOf(_baseDir) == 0)
 				verUrl = verUrl.substr(_baseDir.length);
-			return _verMap ? _verMap[verUrl] : _version;
+			return _verMap ? _verMap[verUrl] : _defaultVer;
 		}
 	}
 }

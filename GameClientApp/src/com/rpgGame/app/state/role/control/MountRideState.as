@@ -1,7 +1,7 @@
 package com.rpgGame.app.state.role.control
 {
 	import com.game.engine3D.state.IState;
-	import com.rpgGame.app.sender.MountSender;
+	import com.rpgGame.app.sender.HorseSender;
 	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.core.state.role.control.ControlState;
 	import com.rpgGame.coreData.type.RoleStateType;
@@ -43,11 +43,11 @@ package com.rpgGame.app.state.role.control
 		override public function afterExecute() : void
 		{
 			super.afterExecute();
-			MountSender.requestSetUpMountRide(_stateReference.isRide);
-			if (!_stateReference.isRide)
+			if(!_stateReference.isRide)
 			{
 				removeSelf();
 			}
+			HorseSender.horseIllusion(_stateReference.horseID);
 		}
 
 		override public function afterLeave() : void

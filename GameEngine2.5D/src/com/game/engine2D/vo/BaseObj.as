@@ -627,10 +627,11 @@ package com.game.engine2D.vo{
 			usable = true;
 			updateNow = true;
 			_rotation = 0;
+			_depthEnable = true;
 			_smooth = false;
-			alpha = 1;
 			_planarRenderLayer = 1;
 			_layerType = EntityLayerType.DEFAULT;
+			alpha = 1;
 		}
 		
 		//释放----------------------------------------------------------------------------------------
@@ -671,6 +672,10 @@ package com.game.engine2D.vo{
 			_x = 0;
 			_y = 0;
 			_colorTransform = null;
+			_depthEnable = true;
+			_smooth = false;
+			_planarRenderLayer = 1;
+			_layerType = EntityLayerType.DEFAULT;
 			isMainChar = false;
 		}
 		

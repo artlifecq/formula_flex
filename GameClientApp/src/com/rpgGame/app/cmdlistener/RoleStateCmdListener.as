@@ -19,10 +19,12 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.SceneCharacterEvent;
 	import com.rpgGame.core.events.SceneInteractiveEvent;
 	import com.rpgGame.core.events.UserMoveEvent;
 	import com.rpgGame.coreData.cfg.ClientTrigger;
+	import com.rpgGame.coreData.cfg.TriggerArea;
 	import com.rpgGame.coreData.enum.EnumAreaMapType;
 	import com.rpgGame.coreData.info.task.target.TaskAreaExplorationInfo;
 	import com.rpgGame.coreData.info.task.target.TaskFollowEscortInfo;
@@ -88,17 +90,18 @@ package com.rpgGame.app.cmdlistener
 			var areaMapData : AreaMapData = _otherAreaMap.getFlag(actor.x, actor.z);
 			var flagObj : Object = areaMapData ? areaMapData.data : null;
 			if (flagObj is SceneRole)
-			{
+			{GameLog.addShow("----------触发场景物"+actor.x+","+actor.z);
 				if ((flagObj as SceneRole).type == SceneCharType.TRANS)
-				{
+				{GameLog.addShow("----------触发传送门了"+actor.x+","+actor.z);
 					var trans : SceneRole = flagObj as SceneRole;
 					if (!trans.isInViewDistance)
 						return;
 					var tranportData : SceneTranportData = trans.data as SceneTranportData;
-					GameLog.add("[RoleStateCmdListener] [mainCharMoveThroughHandler]" + tranportData.id);
+					GameLog.addShow("[RoleStateCmdListener] [mainCharMoveThroughHandler]" + tranportData.id);
 					switch (tranportData.type)
 					{
 						case RoleType.TYPE_TRANPORT_NORMAL:
+							GameLog.addShow("----------TYPE_TRANPORT_NORMAL" +tranportData.id);
 							SceneSender.transportChgMap(tranportData.id);
 							break;
 						case RoleType.TYPE_TRANPORT_MAZE:
@@ -119,12 +122,11 @@ package com.rpgGame.app.cmdlistener
 					TaskSender.reqTaskCompleteAreaSearch(TaskManager.currentMainTaskInfo.id);
 				}
 			}
-			else if (flagObj is ClientTrigger)
+			else if (flagObj is TriggerArea)//地图区域触发
 			{
-				var trigger : ClientTrigger = flagObj as ClientTrigger;
-				ClientTriggerManager.ClientBytrigger(trigger.id);
+				var triggerArea : TriggerArea = flagObj as TriggerArea;
+				EventManager.dispatchEvent(MapEvent.AREA_TRIGGER,triggerArea.areaId);//触发地图区域，抛出 地图区域id
 			}
-
 			var dist : int = 0;
 			var farDistance : int = 0;
 			var selectedRole : SceneRole = SceneRoleSelectManager.selectedRole;

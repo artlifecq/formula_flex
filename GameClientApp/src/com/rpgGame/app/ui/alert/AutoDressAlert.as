@@ -49,7 +49,7 @@ package com.rpgGame.app.ui.alert
 			skin.icons.touchGroup=false;
 			skin.icons.touchable=true;
 			equips = [];
-			gameTimer=new GameTimer("AutoDressAlert",1,0,onTimer);
+			gameTimer=new GameTimer("AutoDressAlert",1000,0,onTimer);
 		}
 		
 		private function onTimer():void

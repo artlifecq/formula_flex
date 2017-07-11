@@ -36,22 +36,30 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.GmConfig;
 	import com.rpgGame.coreData.cfg.GuildCfgData;
+	import com.rpgGame.coreData.cfg.GuildSkillCfgData;
 	import com.rpgGame.coreData.cfg.HeChengData;
 	import com.rpgGame.coreData.cfg.HintCfgData;
 	import com.rpgGame.coreData.cfg.HintConfig;
 	import com.rpgGame.coreData.cfg.HorseConfigData;
 	import com.rpgGame.coreData.cfg.HorseSpellData;
 	import com.rpgGame.coreData.cfg.HuBaoData;
+	import com.rpgGame.coreData.cfg.JiXianTiaoZhanCfgData;
 	import com.rpgGame.coreData.cfg.JunJieData;
+	import com.rpgGame.coreData.cfg.LijinCfgData;
 	import com.rpgGame.coreData.cfg.LostSkillData;
 	import com.rpgGame.coreData.cfg.LostSkillUpData;
 	import com.rpgGame.coreData.cfg.LunJianCfg;
 	import com.rpgGame.coreData.cfg.MailCfgData;
 	import com.rpgGame.coreData.cfg.MapPreLoadData;
 	import com.rpgGame.coreData.cfg.MazeCfgData;
+	import com.rpgGame.coreData.cfg.MibaoCfgData;
 	import com.rpgGame.coreData.cfg.NewFuncCfgData;
+	import com.rpgGame.coreData.cfg.NineTowerCfg;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
+	import com.rpgGame.coreData.cfg.QBattleRewardCfgData;
+	import com.rpgGame.coreData.cfg.QSinglecitybaseCfgData;
 	import com.rpgGame.coreData.cfg.RaceCfgData;
+	import com.rpgGame.coreData.cfg.RedRewardCfgData;
 	import com.rpgGame.coreData.cfg.RelationCfgData;
 	import com.rpgGame.coreData.cfg.ReliveCfgData;
 	import com.rpgGame.coreData.cfg.SceneEffectCfgData;
@@ -65,13 +73,14 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.TipsCfgData;
 	import com.rpgGame.coreData.cfg.TransCfgData;
 	import com.rpgGame.coreData.cfg.TriggerCfgData;
+	import com.rpgGame.coreData.cfg.VipCfg;
 	import com.rpgGame.coreData.cfg.WindowInfoData;
 	import com.rpgGame.coreData.cfg.ZhanGongData;
 	import com.rpgGame.coreData.cfg.ZhanGongMonsterData;
 	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
 	import com.rpgGame.coreData.cfg.ZoneCfgData;
 	import com.rpgGame.coreData.cfg.ZoneMultyCfgData;
-	import com.rpgGame.coreData.cfg.active.ActivetyDataManager;
+	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.WorldBossCfgData;
 	import com.rpgGame.coreData.cfg.animat.EffectAnimationCfgData;
 	import com.rpgGame.coreData.cfg.biao.BiaoCfgData;
@@ -81,6 +90,9 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.country.CountryStaticConfigData;
 	import com.rpgGame.coreData.cfg.country.CountryTaoNiCfgData;
 	import com.rpgGame.coreData.cfg.country.CountryWarCfgData;
+	import com.rpgGame.coreData.cfg.hunyin.HunYinHuDongData;
+	import com.rpgGame.coreData.cfg.hunyin.HunYinSkillData;
+	import com.rpgGame.coreData.cfg.hunyin.JieHunJieZiData;
 	import com.rpgGame.coreData.cfg.item.EquipJiChengData;
 	import com.rpgGame.coreData.cfg.item.EquipPolishCfg;
 	import com.rpgGame.coreData.cfg.item.EquipStrengthCfg;
@@ -215,8 +227,10 @@ package com.rpgGame.app.data
 			EquipWashAttCfg.setup(dic[ConfigClassRegister.Q_equip_wash_attr]);
 			//			CountryUnionStatCfgData.setup(null); //待解决
 			MeridianCfg.setup(dic[ConfigClassRegister.Q_meridian]);
-			ActivetyDataManager.setup(dic[ConfigClassRegister.Q_special_activities]);
+			ActivetyCfgData.setup(dic[ConfigClassRegister.Q_special_activities]);
 			WorldBossCfgData.setup(dic[ConfigClassRegister.Q_world_boss]);
+			QSinglecitybaseCfgData.setup(dic[ConfigClassRegister.Q_singlecitybase]);
+			QBattleRewardCfgData.setup(dic[ConfigClassRegister.Q_battle_reward]);
 			
 			////////////////////////////////////////////////////////////////////////
 			//
@@ -282,6 +296,10 @@ package com.rpgGame.app.data
 			//			HorseSpellData.setConfig(dic[ConfigClassRegister.Q_horse_skills]);
 			HorseExtraItemInfo.createInfo();
 			ZhanQiExtraItemInfo.createInfo();
+			HunYinHuDongData.setup(dic[ConfigClassRegister.Q_interaction]);//婚姻互动
+			HunYinSkillData.setup(dic[ConfigClassRegister.Q_marriage_skills]);//婚姻技能
+			JieHunJieZiData.setup(dic[ConfigClassRegister.Q_advance_wedding]);//结婚进阶
+			
 			HorseSpellData.setConfig(dic[ConfigClassRegister.Q_horse_skills]);
 			
 			//副本相关配置
@@ -292,12 +310,22 @@ package com.rpgGame.app.data
 			SceneEffectCfgData.setup(dic[ConfigClassRegister.Q_map_effect]);
 			DailyZoneCfgData.setup(dic[ConfigClassRegister.Q_daily_zone]);//日常副本
 			DailyZoneMonsterCfgData.setup(dic[ConfigClassRegister.Q_dailyzone_monster]);//日常刷怪数据
+			JiXianTiaoZhanCfgData.setup(dic[ConfigClassRegister.Q_limitchallenge]);//极限挑战
 			//道具获取路径
-			SourceGetCfg.setup(dic[ConfigClassRegister.Q_source]);//多人副本
+			SourceGetCfg.setup(dic[ConfigClassRegister.Q_source]);//购买界面
 			
+			GuildCfgData.setupGuildInfo(dic[ConfigClassRegister.Q_guild]);//帮会等级
+			GuildCfgData.setupGuildPermissionInfo(dic[ConfigClassRegister.Q_guild_permission]);//职务权限
+			GuildSkillCfgData.setup(dic[ConfigClassRegister.Q_guildskill]);//帮派技能表
 			//功能开启
 			//ClientFunctionOpenCfgData.setup(dic["data.ClientFunctionOpen"]);
-			BattleRankCfg.setup(dic[ConfigClassRegister.Q_battle_rank]);//多人副本
+			BattleRankCfg.setup(dic[ConfigClassRegister.Q_battle_rank]);//巅峰对决
+			NineTowerCfg.setup(dic[ConfigClassRegister.Q_nine_tower]);//九层妖塔	
+			LijinCfgData.setup(dic[ConfigClassRegister.Q_daysdown_gold]);//天降礼金
+			MibaoCfgData.setup(dic[ConfigClassRegister.Q_mibao_monster],dic[ConfigClassRegister.Q_mibao_reward]);//秦陵秘宝
+			
+			VipCfg.setup(dic[ConfigClassRegister.Q_vip]);//多人副本
+			RedRewardCfgData.setup(dic[ConfigClassRegister.Q_redreward]);//红包
 		}
 		
 		/**
@@ -351,10 +379,7 @@ package com.rpgGame.app.data
 			//				MonsterDataManager.setConfig(config.monsterConfig); //怪物//NPC
 			//			}
 			
-			if (config.hasGuildConfig)
-			{
-				GuildCfgData.setup(config.guildConfig); //帮派
-			}
+			
 			//传送门
 			if (config.hasSceneTranports)
 			{
@@ -411,6 +436,7 @@ package com.rpgGame.app.data
 			MazeCfgData.setup(config.mazeConfig);
 			//摆摊
 			StallCfgData.setup(config.stallConfig);
+			
 			
 			if (config.biaoConfig)
 			{ //镖局配置

@@ -1,5 +1,7 @@
 package com.rpgGame.app.state.role.control
 {
+	import com.game.engine3D.vo.IFrameRender;
+	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.core.state.role.control.ControlState;
 	import com.rpgGame.coreData.type.RoleStateType;
 	
@@ -42,7 +44,11 @@ package com.rpgGame.app.state.role.control
 
 				if (!_stateReference.spellData || !_stateReference.spellData.q_can_walk_release) {
 					transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
-                    transition(RoleStateType.ACTION_IDLE);
+					//没有三连击才切换吧
+                    if((_machine as RoleStateMachine).isTripleLockCaseSpell==false)
+					{
+						transition(RoleStateType.ACTION_IDLE);
+					}
                 }
 				_lockTween = TweenLite.delayedCall(5, onUnlock);
 			}

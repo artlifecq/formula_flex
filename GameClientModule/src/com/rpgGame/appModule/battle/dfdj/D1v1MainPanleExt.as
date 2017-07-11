@@ -20,7 +20,7 @@ package com.rpgGame.appModule.battle.dfdj
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.TipType;
-	import com.rpgGame.netData.pvp.bean.DianFengDataInfo;
+	import com.rpgGame.netData.dianfeng.bean.DianFengDataInfo;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.zhanchang.dianfengduijue.DianFeng_Skin;
@@ -36,9 +36,9 @@ package com.rpgGame.appModule.battle.dfdj
 			_skin=new DianFeng_Skin();
 			super(_skin);
 		
-			TipTargetManager.show( _skin.btnMsg, TargetTipsMaker.makeTips( TipType.D1V1_TIP,null));
+		
 			TipTargetManager.show(_skin.icon,TargetTipsMaker.makeTips(TipType.D1V1_RANK_TIP,new DynamicTipData()));
-			TipTargetManager.show(_skin.btnShengwang, TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(29)));
+			TipTargetManager.show(_skin.icoSw, TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(29)));
 		}
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
@@ -105,8 +105,8 @@ package com.rpgGame.appModule.battle.dfdj
 			_skin.Pro_duanwei.value=per*100;
 			_skin.icon.styleName=Mgr.d1v1Mgr.getRankIconUrl(rank,0);
 			
-			_skin.numCishu.label=data.currentNumber+"";
-			_skin.numShengwang.label=data.reputation+"";
+			_skin.lbCiShu.text=data.currentNumber+"";
+			_skin.lbSheng.text=data.reputation+"";
 			
 			var state:int=arg[0];
 			showRewardEffect(state==1);

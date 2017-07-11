@@ -12,6 +12,7 @@ package com.game.engine3D.loader
 	import away3d.library.assets.AssetType;
 	import away3d.textures.AsyncTexture2D;
 	import away3d.tools.utils.TextureUtils;
+	import away3d.utils.GCObject;
 	
 	/**
 	 *
@@ -20,7 +21,7 @@ package com.game.engine3D.loader
 	 * 创建时间：2015-10-09 下午4:05:12
 	 *
 	 */
-	public class GlobalTexture
+	public class GlobalTexture extends GCObject
 	{
 		private static var globalTextureByUrl : Dictionary = new Dictionary();
 		

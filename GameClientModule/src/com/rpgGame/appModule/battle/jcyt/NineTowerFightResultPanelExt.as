@@ -1,12 +1,15 @@
 package  com.rpgGame.appModule.battle.jcyt
 {
 	import com.game.mainCore.core.timer.GameTimer;
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
+	import com.rpgGame.netData.yaota.message.SCYaoTaAwardMessage;
 	
 	import flash.utils.getTimer;
 	
@@ -21,7 +24,7 @@ package  com.rpgGame.appModule.battle.jcyt
 		private var _timer:GameTimer;
 		private var _endTime:int;
 		private var _initStr:String;
-
+		
 		private var _gReward:RewardGroup;
 		public function NineTowerFightResultPanelExt()
 		{
@@ -29,16 +32,17 @@ package  com.rpgGame.appModule.battle.jcyt
 			super(_skin);
 			this.dragAble=false;
 			_initStr="$s后自动关闭";
-			_gReward=new RewardGroup(_skin.icon1);
+			_gReward=new RewardGroup(IcoSizeEnum.ICON_64,_skin.icon1);
 		}
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,StarlingLayerManager.topUILayer);
-			var msg:*=data;
-			var score:int;
-			var rank:int;
+			var msg:SCYaoTaAwardMessage=data;
+			var score:int=msg.myYaoTaInfo.integral;
+			var rank:int=msg.myYaoTaInfo.rank;
 			_skin.lbZhanli.text=score+"";
 			_skin.lbPaiming.text=""+rank;
+			_gReward.setRewardByTeamItemInfo(msg.tempItems);
 			if (!_timer) 
 			{
 				_timer=new GameTimer("D1v1FightResultPanelExt");
@@ -83,7 +87,7 @@ package  com.rpgGame.appModule.battle.jcyt
 		override public function hide():void
 		{
 			super.hide();
-			_gReward.clear();
+			Mgr.nineTowerMgr.reqQuitTower();
 		}
 		override protected function onHide():void
 		{
@@ -93,6 +97,7 @@ package  com.rpgGame.appModule.battle.jcyt
 				_timer.destroy();
 				_timer=null;
 			}
+			_gReward.clear();
 		}
 	}
 }

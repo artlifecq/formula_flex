@@ -287,9 +287,9 @@ package com.rpgGame.app.manager.society
 			_hasRequestJoin = value.hasRequestJoin;
 			_selfSocietyData = new SocietyDetailData();
 			_selfSocietyData.setConfig(value.shared);
-			GuildManager.guildNameChange(_selfSocietyData.guildName);
+			GuildManager.instance.guildNameChange(_selfSocietyData.guildName);
 			if (_selfSocietyData.guildName)
-				GuildManager.getSelfGuildBaseData();
+				GuildManager.instance.getSelfGuildBaseData();
 			_lastAnnouncement = _selfSocietyData.announcement;
 			GameSetting.autoAgreeJoinApprove = _selfSocietyData.isAutoAcceptJoinRequest;
 			_societySpellTotalData.updateSocietyData(_selfSocietyData);
@@ -555,7 +555,7 @@ package com.rpgGame.app.manager.society
 			//			MainRoleManager.actor.headFace.addAndUpdateFamilyName();
 			EventManager.dispatchEvent(SocietyEvent.LEAVE_SOCIETY);
 
-			GuildManager.guildData.clear();
+			GuildManager.instance.guildData.clear();
 			EventManager.dispatchEvent(GuildEvent.HAVE_GUILD_CHANGE);
 
 			AppManager.hideApp(AppConstant.SOCIETY_JOIN_APPROVE_PANEL);

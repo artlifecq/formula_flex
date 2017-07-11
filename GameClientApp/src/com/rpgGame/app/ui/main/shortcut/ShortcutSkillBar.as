@@ -3,6 +3,7 @@ package com.rpgGame.app.ui.main.shortcut
 	import com.rpgGame.app.manager.ShortcutsManger;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.SpellEvent;
@@ -18,6 +19,7 @@ package com.rpgGame.app.ui.main.shortcut
 	import flash.geom.Point;
 	
 	import org.client.mainCore.manager.EventManager;
+	import org.mokylin.skin.mainui.shortcut.shortcut_Skin;
 	
 	import starling.display.Sprite;
 
@@ -108,7 +110,7 @@ package com.rpgGame.app.ui.main.shortcut
 			_gridVect = new Vector.<ShortcutGrid>();
 			var size : int = IcoSizeEnum.ICON_48;
 			var gridInfo : GridInfo;
-			var bgWH:int=54;
+			var _skin:shortcut_Skin=_shortcutBar.skin();
 			for (var i : int = 0; i < GRID_COUNT; i++)
 			{
 				var cd:ShortcutGrid = new ShortcutGrid(_shortcutBar, size);
@@ -119,11 +121,12 @@ package com.rpgGame.app.ui.main.shortcut
 				cd.gridInfo = gridInfo;
 				cd.onTouchEndCallBack = onTouchGrid;
 				cd.rightMouseClickFun = onRightMouseClick;
-				cd.x = 9 + bgWH * i;
-				cd.y = 4;
+				//cd.x = 10 + bgWH * i;
+				//cd.y = 8;
 				
-				cd.setBg(GridBGType.GRID_SIZE_48);
-				addChild(cd);
+				//cd.setBg(GridBGType.GRID_SIZE_48);
+				_skin["Iconbg"+(i+1)].addChild(cd);
+				_skin["Iconbg"+(i+1)].touchGroup=false;
 				_gridVect.push(cd);
 				//
  			 //cd.showShortCutText(SHORTCUTS_KEY[i]);
@@ -138,10 +141,11 @@ package com.rpgGame.app.ui.main.shortcut
 			_gridF1.gridInfo = gridInfo;
 			_gridF1.onTouchEndCallBack = onTouchGrid;
 			_gridF1.rightMouseClickFun = onRightMouseClick;
-			_gridF1.x = 194;
-			_gridF1.y =-64;
-			_gridF1.setBg(GridBGType.GRID_SIZE_48);
-			this.addChild(_gridF1);
+//			_gridF1.x = 194;
+//			_gridF1.y =-64;
+//			_gridF1.setBg(GridBGType.GRID_SIZE_48);
+			_skin.Iconbg0.addChild(_gridF1);
+			_skin.Iconbg0.touchGroup=false;
 			_gridVect.push(_gridF1);
 		}
 		

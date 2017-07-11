@@ -6,7 +6,7 @@ package org.mokylin.skin.app.fuben
 	import feathers.controls.TabBar;
 	import feathers.controls.UIAsset;
 	import feathers.layout.HorizontalLayout;
-	import org.mokylin.skin.common.yiji_panelbg2_Skin;
+	import org.mokylin.skin.common.TongYongPanelbg1;
 	import org.mokylin.skin.component.tabbar.TabBarSkin_pack;
 
 	/**
@@ -32,8 +32,8 @@ package org.mokylin.skin.app.fuben
 			super();
 			
 			this.currentState = "normal";
-			this.height = 587;
-			this.width = 947;
+			this.height = 601;
+			this.width = 956;
 			this.elementsContent = [bg_i(),__FuBen_Skin_UIAsset1_i(),__FuBen_Skin_UIAsset2_i(),tabBar_i()];
 			
 			states = {
@@ -55,18 +55,18 @@ package org.mokylin.skin.app.fuben
 		private function __FuBen_Skin_HorizontalLayout1_i():feathers.layout.HorizontalLayout
 		{
 			var temp:feathers.layout.HorizontalLayout = new feathers.layout.HorizontalLayout();
-			temp.gap = -1;
+			temp.gap = 1;
 			return temp;
 		}
 
 		private function __FuBen_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 501;
+			temp.height = 512;
 			temp.styleName = "ui/common/background/neikuang_1.png";
 			temp.width = 922;
-			temp.x = 14;
-			temp.y = 69;
+			temp.x = 18;
+			temp.y = 82;
 			return temp;
 		}
 
@@ -74,10 +74,10 @@ package org.mokylin.skin.app.fuben
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.styleName = "ui/app/fuben/fuben.png";
-			temp.x = 447;
-			temp.y = 13;
+			temp.x = 450;
+			temp.y = 17;
 			return temp;
 		}
 
@@ -86,10 +86,10 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 587;
-			var skin:StateSkin = new org.mokylin.skin.common.yiji_panelbg2_Skin()
+			temp.height = 601;
+			var skin:StateSkin = new org.mokylin.skin.common.TongYongPanelbg1()
 			temp.skin = skin
-			temp.width = 947;
+			temp.width = 956;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -102,8 +102,8 @@ package org.mokylin.skin.app.fuben
 			temp.name = "tabBar";
 			temp.btnWidth = 98;
 			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_pack;
-			temp.x = 21;
-			temp.y = 41;
+			temp.x = 36;
+			temp.y = 54;
 			temp.layout = __FuBen_Skin_HorizontalLayout1_i();
 			temp.dataProvider = __FuBen_Skin_ArrayCollection1_i();
 			return temp;

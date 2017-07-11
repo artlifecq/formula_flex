@@ -63,7 +63,6 @@ package org.mokylin.skin.app.fuben
 			temp.height = 32;
 			temp.label = "5";
 			temp.styleClass = org.mokylin.skin.app.fuben.uinumber.UINumberTime;
-			temp.textAlign = "center";
 			temp.width = 67;
 			temp.x = 112;
 			temp.y = 52;

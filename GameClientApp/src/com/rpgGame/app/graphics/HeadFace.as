@@ -4,26 +4,35 @@ package com.rpgGame.app.graphics
 	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.rpgGame.app.display2D.AttackFace;
-	import com.rpgGame.app.manager.HuBaoManager;
 	import com.rpgGame.app.graphics.decor.DecorCtrl;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.PKMamager;
+	import com.rpgGame.app.manager.guild.GuildManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.utils.HeadBloodUtil;
 	import com.rpgGame.core.utils.MCUtil;
+	import com.rpgGame.coreData.SpriteStat;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.GuildCfgData;
 	import com.rpgGame.coreData.cfg.HuBaoData;
 	import com.rpgGame.coreData.cfg.JunJieData;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.FaceInfo;
+	import com.rpgGame.coreData.clientConfig.Q_guild_permission;
+	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
+	import com.rpgGame.coreData.info.MapDataManager;
+	import com.rpgGame.coreData.info.map.EnumMapType;
+	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.AttachDisplayType;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.SceneCharType;
+	import com.rpgGame.netData.structs.IntKeyValue;
 	
 	import app.message.MonsterDataProto.MonsterType;
 	
@@ -77,6 +86,9 @@ package com.rpgGame.app.graphics
 		/**军衔*/
 		private var _junXianBar : HeadNameBar;
 		
+		/**夫妻称号*/
+		private var _fuqititle:HeadNameBar;
+		
 		/** 血条*/
 		private var _bloodBar : HeadBloodBar;
 		private var _bloodPercent : Number = 1;
@@ -86,6 +98,8 @@ package com.rpgGame.app.graphics
 		
 		private var _guildNameBar : HeadNameBar;
 		private var _familNameBar : HeadNameBar;
+		private var _guildWarInfoBar:GuildWarInfoBar;
+		
 		/** 图标图片*/
 		private var _icoImage : UIAsset;
 		/**心情动画*/
@@ -120,6 +134,8 @@ package com.rpgGame.app.graphics
 		public var flowerY : int = 0;
 		private var showBloodTween:TweenLite;
 		private var _teamCaptainFlag:UIAsset;
+		private var _towerFlag:UIAsset;
+		private var _vipFlag:UIAsset;
 		public function HeadFace(role : SceneRole)
 		{
 			super();
@@ -151,7 +167,7 @@ package com.rpgGame.app.graphics
 				case SceneCharType.PLAYER:
 					addAndUpdateHP();
 					addAndUpdateName();
-					//addAndUpdateGuildName();
+					addAndUpdateGuildName();
 					//addAndUpdateOfficeName();
 					//addAndUpdateFamilyName();//暂无家族
 					addAndUpdateLV();
@@ -176,11 +192,24 @@ package com.rpgGame.app.graphics
 				case SceneCharType.DROP_GOODS:
 					addAndUpdateName();
 					break;
+				case SceneCharType.GIRL_PET:
+					addAndUpdateName();
+					break;
 				//				case SceneCharType.RACING_HERO:
 				//				case SceneCharType.ROBOT:
 				//addAndUpdateName();
 				break;
 			}
+		}
+		
+		/**
+		 *是否有矿石 
+		 * @return 
+		 * 
+		 */
+		public function hasGuildWarOre():Boolean
+		{
+			return _guildWarInfoBar;
 		}
 		
 		/**
@@ -194,6 +223,7 @@ package com.rpgGame.app.graphics
 			addElement(_nameBar);
 			//			addElement(_countryNameBar);
 			addElement(_junXianBar);
+			addElement(_fuqititle);
 			addElement(_guildNameBar);
 			addElement(_familNameBar);
 			addElement(_icoImage);
@@ -211,7 +241,15 @@ package com.rpgGame.app.graphics
 		//---------------------------------------------
 		override protected function updateShowAndHide() : void
 		{
+			if (!_role) 
+			{
+				return;
+			}
 			var nameVisible : Boolean = _role.getAttachVisible(AttachDisplayType.ROLE_HEAD_NAME);
+			if (_role.type==SceneCharType.GIRL_PET) 
+			{
+				showAndHideElement(_nameBar, true,DecorCtrl.TOP_NAME);
+			}
 			if (_role.type == SceneCharType.NPC) //NPC，不管是否被选中都显示
 			{
 				showAndHideElement(_nameBar, nameVisible,DecorCtrl.TOP_NAME);
@@ -284,37 +322,43 @@ package com.rpgGame.app.graphics
 			}
 			else if (_role.type == SceneCharType.PLAYER) //玩家
 			{
+				//神秘人buff只显示名字和血条
+				var isMysteryMan:Boolean=false;
 				if (_role.isMainChar) //自己
 				{
 					//显示血条、称号、昵称
 					showAndHideElement(_nameBar, nameVisible && !_isCamouflage,DecorCtrl.TOP_NAME);
-					showAndHideElement(_guildNameBar, !_isCamouflage);
+					showAndHideElement(_guildNameBar, !_isCamouflage,DecorCtrl.TOP_GUILD);
 					showAndHideElement(_familNameBar, !_isCamouflage);
 					showAndHideElement(_bloodBar, true,DecorCtrl.TOP_HPMP);
+					isMysteryMan=false;
 				}
 				else
 				{
+					isMysteryMan=_role.stateMachine.isMysteryMan;
 					showAndHideElement(_bodyImage, !_isCamouflage);
 					//名字、称号
 					showAndHideElement(_nameBar, nameVisible && !_isCamouflage,DecorCtrl.TOP_NAME);
-					
 					//选中显示
 					//showAndHideElement( _bloodBar, _isSelected );
 					showAndHideElement(_bloodBar, true,DecorCtrl.TOP_HPMP);
-					showAndHideElement(_guildNameBar, _isSelected && !_isCamouflage);
-					showAndHideElement(_familNameBar, _isSelected && !_isCamouflage);
+					showAndHideElement(_guildNameBar, true,DecorCtrl.TOP_GUILD);
+					showAndHideElement(_familNameBar, !isMysteryMan&&_isSelected && !_isCamouflage);
 				}
-				showAndHideElement(_title, !_isCamouflage);
-				showAndHideElement(_huabotitle,!_isCamouflage);
-				showAndHideElement(_office, !_isCamouflage);
-				showAndHideElement(_huabotitle, _nameBar && _nameBar.parent && _nameBar.visible,DecorCtrl.TOP_HUBAOCHENGHAO);
-				updateTeamFlag(Mgr.teamMgr.isMyCaptian(HeroData(_role.data).serverID));
+				showAndHideElement(_fuqititle, true,DecorCtrl.TOP_FUQI);
+				showAndHideElement(_title, !isMysteryMan&&!_isCamouflage,DecorCtrl.TOP_CHENGHAO);
+				showAndHideElement(_office, !isMysteryMan&&!_isCamouflage);
+				showAndHideElement(_huabotitle, !isMysteryMan&&_nameBar && _nameBar.parent && _nameBar.visible,DecorCtrl.TOP_HUBAOCHENGHAO);
+				updateTeamFlag(!isMysteryMan&&Mgr.teamMgr.isMyCaptian(HeroData(_role.data).serverID));
+				if(_guildWarInfoBar){
+					showAndHideElement(_guildWarInfoBar,true,DecorCtrl.TOP_TOWER);//帮会战信息条
+				}
 			}
-			showAndHideElement(_junXianBar, _nameBar && _nameBar.parent && _nameBar.visible);
+			showAndHideElement(_junXianBar, !isMysteryMan&&_nameBar && _nameBar.parent && _nameBar.visible);
 			//			showAndHideElement(_countryNameBar, _nameBar && _nameBar.parent && _nameBar.visible);
-			showAndHideElement(_biaoFlagIcon, _nameBar && _nameBar.parent && _nameBar.visible);
-			showAndHideElement(_countryWarIcon, _nameBar && _nameBar.parent && _nameBar.visible);
-			showAndHideElement(_familyWarIcon, _nameBar && _nameBar.parent && _nameBar.visible);
+			showAndHideElement(_biaoFlagIcon, !isMysteryMan&&_nameBar && _nameBar.parent && _nameBar.visible);
+			showAndHideElement(_countryWarIcon,!isMysteryMan&& _nameBar && _nameBar.parent && _nameBar.visible);
+			showAndHideElement(_familyWarIcon,!isMysteryMan&& _nameBar && _nameBar.parent && _nameBar.visible);
 			showAndHideElement(_moodMC, true);
 		}
 		
@@ -349,7 +393,7 @@ package com.rpgGame.app.graphics
 		{
 			//不管是临时，还是模型加载完成的，这是不能为NULL
 			updateShowAndHide();
-//			return;
+			return;
 			var startPosy : int = 0; //不是临时的，说明模型那么就按名字绑定点就好了
 			if (isTemporary)
 			{
@@ -382,6 +426,15 @@ package com.rpgGame.app.graphics
 			//				_countryNameBar.x = _nameBar.x + _nameBar.realWidth;
 			//				_countryNameBar.y = _nameBar.y;
 			//			}
+			if (_fuqititle != null)
+			{
+				_fuqititle.x = int(-_fuqititle.realWidth * 0.5);
+				_fuqititle.y = int(upPosy - _fuqititle.realHeight);
+				upPosy = _fuqititle.y;
+				offsetY = _fuqititle.y;
+				downPosy = _fuqititle.y + _fuqititle.realHeight;
+			}
+			
 			if (_junXianBar != null)
 			{
 				_junXianBar.x = -_junXianBar.width / 2;
@@ -491,6 +544,15 @@ package com.rpgGame.app.graphics
 				_bloodBar = HeadBloodBar.create(_role);
 				//				_bloodBar.state = HeadBloodUtil.getRoleBloodState( _role );
 				//				this.addChild(_bloodBar); //更新一下容器，从临时的到模型真正容器
+			}
+			if (_role) 
+			{
+				_bloodPercent=1;
+				var stat:SpriteStat=_role.data.totalStat;
+				if (stat) 
+				{
+					_bloodPercent=stat.hp/stat.life;
+				}
 			}
 			//更新一下数据
 			_bloodBar.update(_bloodPercent);
@@ -647,52 +709,35 @@ package com.rpgGame.app.graphics
 		 */
 		public function addAndUpdateGuildName() : void
 		{
-			if (_role.type != SceneCharType.PLAYER)
-				return;
-			
-			if (_role.isMainChar)
-				return;
-			
+			var guildMemberType: int = (_role.data as HeroData).guildMemberType;
 			var guildName : String = (_role.data as HeroData).guildName;
-			if (guildName == "" || guildName == null)
+			if (guildMemberType<=0||guildName == "" || guildName == null)
 			{
 				if (_guildNameBar != null)
 				{
+					deCtrl.removeTop(_guildNameBar);
 					HeadNameBar.recycle(_guildNameBar);
 					_guildNameBar = null;
-					
 					updateAllBarPosition();
 				}
 				return;
 			}
 			
+			var q_guild:Q_guild_permission = GuildCfgData.getPermissionInfo(guildMemberType);
+			guildName += "."+q_guild.q_name;
 			if (_guildNameBar == null)
 			{
 				//原来没有添加一个
 				_guildNameBar = HeadNameBar.create();
-				this.addChild(_guildNameBar); //更新一下容器，从临时的到模型真正容器
-				//				if((_role.data as HeroData).isKingFamily)
-				//				{
-				//					_guildNameBar.setName("[王城]"+guildName);
-				//				}
-				//				else
-				//				{
-				//					_guildNameBar.setName(guildName);
-				//				}
-				_guildNameBar.setColor(StaticValue.COLOR_CODE_1);
+				//				this.addChild(_guildNameBar); //更新一下容器，从临时的到模型真正容器
+				_guildNameBar.setName(guildName);
+				_guildNameBar.setColor(StaticValue.COLOR_CODE_15);
 				updateAllBarPosition();
 				return;
 			}
 			
 			//更新一下数据
-			//			if((_role.data as HeroData).isKingFamily)
-			//			{
-			//				_guildNameBar.setName("[王城]"+guildName);
-			//			}
-			//			else
-			//			{
-			//				_guildNameBar.setName(guildName);
-			//			}
+			_guildNameBar.setName(guildName);
 			updateAllBarPosition();
 		}
 		
@@ -954,7 +999,17 @@ package com.rpgGame.app.graphics
 				updateAllBarPosition();
 			}
 		}
-		
+		public function setName(name:String):void
+		{
+			if (_nameBar != null)
+			{
+				_nameBar.setName(name);
+				var nameColor : uint = HeadBloodUtil.getRoleNameColor(_role);
+				_nameBar.setColor(nameColor);
+				updateAllBarPosition();
+				deCtrl.sortTop();
+			}
+		}
 		/**
 		 * 删除图标
 		 *
@@ -974,6 +1029,11 @@ package com.rpgGame.app.graphics
 		{
 			super.removeBodyRender();
 			bind(null, null);
+			if (showBloodTween) 
+			{
+				showBloodTween.kill();
+				showBloodTween=null;
+			}
 			if (_nameBar != null)
 			{
 				deCtrl.removeTop(_nameBar);
@@ -985,6 +1045,13 @@ package com.rpgGame.app.graphics
 			//				HeadNameBar.recycle(_countryNameBar);
 			//				_countryNameBar = null;
 			//			}
+			if (_fuqititle != null)
+			{
+				deCtrl.removeTop(_fuqititle);
+				HeadNameBar.recycle(_fuqititle);
+				_fuqititle = null;
+			}
+			
 			if (_junXianBar != null)
 			{
 				HeadNameBar.recycle(_junXianBar);
@@ -1043,7 +1110,11 @@ package com.rpgGame.app.graphics
 			removeIco();
 			removeBodyIco();
 			TweenLite.killDelayedCallsTo(hideMoodMC);
+			updateTeamFlag(false);
+			updateTowerFlag(false);
+			setVipFlag(0);
 		}
+		
 		
 		override public function showHead() : void
 		{
@@ -1101,6 +1172,7 @@ package com.rpgGame.app.graphics
 				return;
 			
 			showAndHideElement(_nameBar, false,DecorCtrl.TOP_NAME);
+			showAndHideElement(_fuqititle, false,DecorCtrl.TOP_FUQI);
 			//			showAndHideElement(_countryNameBar, false);
 			showAndHideElement(_junXianBar, false);
 			showAndHideElement(_countryWarIcon, false);
@@ -1108,7 +1180,7 @@ package com.rpgGame.app.graphics
 			onHideBlood();
 			//showAndHideElement(_bloodBar, false);
 			showAndHideElement(_icoImage, false);
-			showAndHideElement(_guildNameBar, false);
+			showAndHideElement(_guildNameBar, false,DecorCtrl.TOP_GUILD);
 			showAndHideElement(_familNameBar, false);
 			showAndHideElement(_office, false);
 			showAndHideElement(_bodyImage, false);
@@ -1149,7 +1221,8 @@ package com.rpgGame.app.graphics
 				var effName:String=JunJieData.getEffById(titleID);
 				var rud:RenderParamData3D = new RenderParamData3D(RenderUnitID.JUNJIE, RenderUnitType.JUNJIE, ClientConfig.getEffect(effName));
 				_title.addRenderUnitWith(rud, 0);
-				this.addChild(_title);
+				//				this.addChild(_title);
+				this.deCtrl.addTop(_title,DecorCtrl.TOP_CHENGHAO);
 				_title.start();
 			}
 			else
@@ -1162,6 +1235,77 @@ package com.rpgGame.app.graphics
 			}
 			
 			updateAllBarPosition();
+		}
+		
+		/**
+		 * 增加夫妻称号
+		 */
+		public function updateFuQiTitle() : void
+		{
+			if(Mgr.hunyinMgr.marriageInfos==null||Mgr.hunyinMgr.marriageInfos.state==5)
+			{
+				if (_fuqititle != null)
+				{
+					deCtrl.removeTop(_fuqititle);
+					HeadNameBar.recycle(_fuqititle);
+					_fuqititle = null;
+					updateAllBarPosition();
+				}
+				return;
+			}
+			var fuqiName:String=Mgr.hunyinMgr.marriageInfos.marriagePlayerName+"的";
+			var text:String=MainRoleManager.actorInfo.sex==1?"老公":"老婆";
+			fuqiName+=text;
+			if (_fuqititle == null)
+			{
+				_fuqititle = HeadNameBar.create();
+				_fuqititle.setName(fuqiName);
+				_fuqititle.setColor(StaticValue.A_UI_BEIGE_TEXT);
+				updateAllBarPosition();
+				deCtrl.sortTop();
+			}
+		}
+		
+		/**
+		 *创建帮派战信息条 
+		 * 
+		 */
+		private function createGuildWarBar():void
+		{
+			var mapId:int=MainRoleManager.actorInfo.mapID;
+			var sceneData:SceneData=MapDataManager.getMapInfo(mapId);
+			var mapCfg:Q_map=sceneData.getData();
+			if(GuildManager.instance().haveGuild==false||mapCfg.q_map_type!=EnumMapType.MAP_TYPE_WCZB){//没有帮会或者不是帮会战地图
+				if(_guildWarInfoBar){
+					_guildWarInfoBar.removeFromParent();
+					_guildWarInfoBar=null;
+				}
+				return;
+			}
+			if(!_guildWarInfoBar){
+				_guildWarInfoBar=GuildWarInfoBar.create(_role);
+			}
+		}
+		
+		/**
+		 *更新帮会战信息条 
+		 * @param oreList
+		 * 
+		 */
+		public function updateGuildWarInfoBar(oreList:Vector.<IntKeyValue>):void
+		{
+			if(!oreList||oreList.length==0){
+				if(_guildWarInfoBar){
+					_guildWarInfoBar.removeFromParent();
+					_guildWarInfoBar=null;
+				}
+			}else{
+				createGuildWarBar();
+			}
+			if(_guildWarInfoBar){
+				_guildWarInfoBar.update(oreList);
+			}
+			updateShowAndHide();
 		}
 		
 		/**增加护宝称号货移除称号*/
@@ -1177,10 +1321,11 @@ package com.rpgGame.app.graphics
 				_huabotitle = new InterObject3D();
 				
 				//				var titleData : TitleTreeData = TitleCfgData.titleHM.getValue(titleID);
-				var effName:String=HuBaoData.getEffByLv(HuBaoManager.instance().level);
+				var effName:String=HuBaoData.getEffByLv(titleID);
 				var rud : RenderParamData3D = new RenderParamData3D(RenderUnitID.BAOWU, RenderUnitType.BAOWU, ClientConfig.getEffect(effName));
 				_huabotitle.addRenderUnitWith(rud, 0);
-				this.addChild(_huabotitle);
+				//				this.addChild(_huabotitle);
+				this.deCtrl.addTop(_huabotitle,DecorCtrl.TOP_HUBAOCHENGHAO);
 				_huabotitle.start();
 			}
 			else
@@ -1211,7 +1356,8 @@ package com.rpgGame.app.graphics
 				{
 					var rud : RenderParamData3D = new RenderParamData3D(RenderUnitID.BAOWU, RenderUnitType.BAOWU, ClientConfig.getEffect(effName));
 					_NPCtitle.addRenderUnitWith(rud, 0);
-					this.addChild(_NPCtitle);
+					//					this.addChild(_NPCtitle);
+					this.deCtrl.addTop(_NPCtitle,DecorCtrl.TOP_NPCCHENGHAO);
 					_NPCtitle.start();
 				}
 				updateAllBarPosition();
@@ -1245,6 +1391,7 @@ package com.rpgGame.app.graphics
 					}
 					
 				}
+				this.deCtrl.addTop(_nameBar,DecorCtrl.TOP_NAME);
 			}
 			//this.addChildAt(_bloodBar,0);
 			this.deCtrl.addTop(_bloodBar,DecorCtrl.TOP_HPMP);
@@ -1262,7 +1409,8 @@ package com.rpgGame.app.graphics
 				showBloodTween.kill();
 				showBloodTween=null;
 			}
-			showAndHideElement(_bloodBar,false,DecorCtrl.TOP_HPMP);
+			//showAndHideElement(_bloodBar,false,DecorCtrl.TOP_HPMP);
+			updateShowAndHide();
 		}
 		
 		public function updateTeamFlag(bShow:Boolean):void
@@ -1287,7 +1435,58 @@ package com.rpgGame.app.graphics
 				if (_teamCaptainFlag&&_teamCaptainFlag.parent) 
 				{
 					MCUtil.removeSelf(_teamCaptainFlag);
-				//	deCtrl.sortTop();
+					//	deCtrl.sortTop();
+				}
+			}
+		}
+		public function updateTowerFlag(bShow:Boolean):void
+		{
+			if (bShow) 
+			{
+				if (!_towerFlag) 
+				{
+					_towerFlag=new UIAsset();
+					_towerFlag.styleName="ui/mainui/fubenzhuizong/tower/qiangzhanqi.png";
+				}
+				deCtrl.addTop(_towerFlag,DecorCtrl.TOP_TOWER);
+			}
+			else 
+			{
+				if (_towerFlag) 
+				{
+					deCtrl.removeTop(_towerFlag);
+					_towerFlag.dispose();
+					_towerFlag=null;
+				}
+			}
+		}
+		public function updateMysteryMan():void
+		{
+			updateShowAndHide();
+		}
+		public function setVipFlag(vipLv:int):void
+		{
+			if (vipLv!=0) 
+			{
+				if (!_vipFlag) 
+				{
+					_vipFlag=new UIAsset();
+					
+				}
+				_vipFlag.styleName="ui/common/tubiao/vipb"+vipLv+".png";
+				_vipFlag.x=-46;
+				_vipFlag.y=(_nameBar.height-29)*0.5;
+				_nameBar.addChild(_vipFlag);
+				deCtrl.sortTop();
+			}
+			else
+			{
+				if (_vipFlag) 
+				{
+					MCUtil.removeSelf(_vipFlag);
+					_vipFlag.dispose();
+					_vipFlag=null;
+					deCtrl.sortTop();
 				}
 			}
 		}

@@ -11,6 +11,8 @@ package com.rpgGame.appModule.battle.jjzb
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.cfg.NotifyCfgData;
+	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
@@ -49,7 +51,7 @@ package com.rpgGame.appModule.battle.jjzb
 			list.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
 			list.padding=4;
 			
-			_gReward=new RewardGroup(_skin.icon1,RewardGroup.ALIN_LEFT,10,10);
+			_gReward=new RewardGroup(IcoSizeEnum.ICON_64,_skin.icon1,RewardGroup.ALIN_LEFT,10,10);
 			var rewardNum:int=GlobalSheetData.getIntValue(800);
 			rewards=[];
 			var tmp:Object;
@@ -164,12 +166,12 @@ package com.rpgGame.appModule.battle.jjzb
 			var str:String;
 			if (hasReward) 
 			{
-				str=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,"可领取奖励");
+				str=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,NotifyCfgData.getNotifyTextByID(61038));
 				TouchableUtil.ungray(_skin.btnOK);
 			}
 			else
 			{
-				str=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,"已领取");
+				str=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,NotifyCfgData.getNotifyTextByID(61039));
 				TouchableUtil.gray(_skin.btnOK);
 			}
 			_skin.labReward.htmlText=str;
