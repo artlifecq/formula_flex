@@ -13,9 +13,9 @@ package org.mokylin.skin.app.zuoqi
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var thack:feathers.controls.UIAsset;
-
 		public var thumb:feathers.controls.UIAsset;
+
+		public var track:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -26,7 +26,7 @@ package org.mokylin.skin.app.zuoqi
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [thack_i(),thumb_i()];
+			this.elementsContent = [track_i(),thumb_i()];
 			
 			states = {
 			};
@@ -37,26 +37,26 @@ package org.mokylin.skin.app.zuoqi
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function thack_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			thack = temp;
-			temp.name = "thack";
-			temp.alpha = 0;
-			temp.styleName = "ui/app/zuoqi/jindutiao_tiao1.png";
-			temp.width = 220;
-			temp.x = 0;
-			temp.y = 1;
-			return temp;
-		}
-
 		private function thumb_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			thumb = temp;
 			temp.name = "thumb";
-			temp.styleName = "ui/app/zuoqi/jindutiao_tiao1.png";
-			temp.width = 220;
+			temp.height = 20;
+			temp.styleName = "ui/app/zuoqi/jdt_dtiao.png";
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function track_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			track = temp;
+			temp.name = "track";
+			temp.alpha = 0;
+			temp.height = 20;
+			temp.styleName = "ui/app/zuoqi/jdt_dtiao.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

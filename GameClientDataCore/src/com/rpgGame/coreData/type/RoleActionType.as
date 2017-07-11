@@ -48,7 +48,7 @@ package com.rpgGame.coreData.type
 		public static const FLY:String = "fly";
 		public static const FLY_HIT:String = "flyhit";
 		public static const DROPOUT:String = "dropout";
-
+		public static const SHOW_IDLE:String = "show_idle";
 		public static function getActionType(type : String, onMount : Boolean = false) : String
 		{
 			if (!type)

@@ -9,18 +9,21 @@ package com.rpgGame.appModule.mount
 	
 	import flash.geom.Point;
 	
-	import feathers.controls.Button;
-	
 	import away3d.events.Event;
+	
+	import feathers.controls.Button;
+	import feathers.controls.Label;
 
 	public class ExtraButton
 	{
 		private var _button:Button;
+		private var _lable:Label;
 		private var _type:int;
-		public function ExtraButton(button:Button,type:int)
+		public function ExtraButton(button:Button,lable:Label,type:int)
 		{
 			_button = button;
 			_type = type;
+			_lable = lable;
 			_button.addEventListener(Event.TRIGGERED,triggeedHandler);
 		}
 		private var _mountShowData:MountShowData;
@@ -29,7 +32,12 @@ package com.rpgGame.appModule.mount
 		{
 			_mountShowData = mountShowData;
 			_horseExtraItem = _mountShowData.getOpenLevelBytype(_type);
-			_button.visible = _horseExtraItem.getMaxByLevel(_mountShowData.mountLevel)>0;
+			_canShow = _horseExtraItem.getMaxByLevel(_mountShowData.mountLevel)>0
+			_button.visible = _canShow;
+			_lable.visible = _canShow;
+			var haveCount:int = _horseExtraItem.bagHaveCount();
+			_lable.text = haveCount.toString();
+			_lable.color = haveCount>0?0xffffff:0xff0d0d;
 			TipTargetManager.remove(_button);
 			TipTargetManager.show(_button,TargetTipsMaker.makeTips(TipType.EXTARITEM_TIP,[_mountShowData,_type],false,new Point(_button.x,_button.y)));
 		}
@@ -37,5 +45,14 @@ package com.rpgGame.appModule.mount
 		{
 			HorseManager.instance().useExtraItemHorse(_mountShowData,_type);
 		}
+		
+		private var _canShow:Boolean;
+
+		public function get canShow():Boolean
+		{
+			return _canShow;
+		}
+
+		
 	}
 }

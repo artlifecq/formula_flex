@@ -38,8 +38,8 @@ package com.rpgGame.app.ui.tips
 		private function initView():void
 		{
 			mainIco = new BgIcon(IcoSizeEnum.ICON_64);
-			mainIco.x = _skin.Icon1.x+5;
-			mainIco.y = _skin.Icon1.y+5;
+			mainIco.x = _skin.Icon1.x+9;
+			mainIco.y = _skin.Icon1.y+9;
 			_skin.container.addChildAt(mainIco,4);
 		}
 		
