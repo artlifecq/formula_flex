@@ -33,6 +33,9 @@ package com.rpgGame.appModule.dungeon.lunjian
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	
+	import flash.geom.Point;
+	
+	import feathers.controls.UIAsset;
 	import feathers.utils.filter.GrayFilter;
 	
 	import org.mokylin.skin.app.jianghu.lunjian.LunJian_Nandu;
@@ -55,6 +58,8 @@ package com.rpgGame.appModule.dungeon.lunjian
 		private var _avatardata:MonsterData;
 
 		private var alertOk:AlertSetInfo;
+		private var bgList:Vector.<UIAsset>;
+		private var points:Vector.<Point>;
 		
 		public function LunJianItemRender()
 		{
@@ -72,9 +77,13 @@ package com.rpgGame.appModule.dungeon.lunjian
 			_avatardata=new MonsterData(RoleType.TYPE_MONSTER);
 			_avatarContainer.x=-28;
 			_skin.modeCont.addChild(_avatarContainer);
+			bgList=new Vector.<UIAsset>();
+			points=new Vector.<Point>();
 			for(var i:int=0;i<3;i++){
 				rewardList[i].mc_nandu.gotoAndStop((i+1).toString());
 				rewardList[i].uiBg.visible=false;
+				bgList.push(rewardList[i].Icon);
+				points.push(new Point(bgList[i].x,bgList[i].y));
 			}
 			alertOk=new AlertSetInfo(LangAlertInfo.LUNJIAN_FIGHT_MIN);
 		}
@@ -86,7 +95,9 @@ package com.rpgGame.appModule.dungeon.lunjian
 				icon=IconCDFace.create(IcoSizeEnum.ICON_48);
 				rewardIcon.push(icon);
 				rewardList[i].container.addChildAt(icon,3);
-				icon.bindBg(rewardList[i].Icon);
+				icon.bindBg(bgList[i]);
+				icon.x=points[i].x;
+				icon.y=points[i].y;
 			}
 		}
 		
