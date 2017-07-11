@@ -1,6 +1,8 @@
 package com.rpgGame.appModule.activety
 {
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.Mgr;
+	import com.rpgGame.app.sender.SpecialActivitySender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.coreData.cfg.StaticValue;
@@ -55,7 +57,12 @@ package com.rpgGame.appModule.activety
 					}	
 					default:
 					{
-						AppManager.showAppNoHide(actInfo.actCfg.q_notice_trans,actInfo,actInfo.actCfg.q_trans_funcID);//跳到对应标签的对应活动
+						if(actInfo.actCfg.q_notice_trans){
+							var list:Array=JSONUtil.decode(actInfo.actCfg.q_notice_trans);
+							AppManager.showAppNoHide(list[0],actInfo,list[1]);//跳到对应标签的对应活动
+						}else{
+							SpecialActivitySender.reqJoinAct(actInfo.actCfg.q_activity_id);
+						}						
 						break;
 					}
 				}

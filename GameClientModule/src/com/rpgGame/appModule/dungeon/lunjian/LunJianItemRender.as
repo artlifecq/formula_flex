@@ -91,10 +91,13 @@ package com.rpgGame.appModule.dungeon.lunjian
 		override protected function onShow():void
 		{
 			var icon:IconCDFace;
+			if(rewardIcon.length==3){
+				return;
+			}
 			for(var i:int=0;i<3;i++){
 				icon=IconCDFace.create(IcoSizeEnum.ICON_48);
 				rewardIcon.push(icon);
-				rewardList[i].container.addChildAt(icon,3);
+				rewardList[i].container.addChildAt(icon,2);
 				icon.bindBg(bgList[i]);
 				icon.x=points[i].x;
 				icon.y=points[i].y;
@@ -194,7 +197,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 				for(var i:int=0;i<3;i++){
 					var icon:IconCDFace=rewardIcon[i];
 					var diffCfg:Q_lunjian=LunJianCfg.getCfgByInfo(itemData.cfg.q_npc_map,itemData.cfg.q_type,i+1);
-					rewardItemList=JSONUtil.decode(itemData.cfg.q_rewards);
+					rewardItemList=JSONUtil.decode(diffCfg.q_rewards);
 					var itemInfo:ClientItemInfo=new ClientItemInfo(rewardItemList[0].mod);
 					itemInfo.itemInfo=new ItemInfo();
 					itemInfo.itemInfo.isbind=rewardItemList[0].bind;

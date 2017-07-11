@@ -54,9 +54,9 @@ package com.rpgGame.appModule.shop
 		{
 			_skin=new Tankuang_Shangpin();
 			super(_skin);
-			_grid=IconCDFace.create(IcoSizeEnum.ICON_64);
+			_grid=IconCDFace.create(IcoSizeEnum.ICON_48);
 			_grid.bindBg(_skin.icons);
-			this._skin.container.addChild(_grid);
+			this._skin.contents.addChild(_grid);
 			initEvent();
 			this.model=true;
 			gTimer=new GameTimer("ItemBuyPanelExt",100,0,onTime);
@@ -288,7 +288,7 @@ package com.rpgGame.appModule.shop
 			var qitem:Q_item=ItemConfig.getQItemByID(vo.data.item.mod);
 			if (qitem) 
 			{
-				this._skin.lbDiejia0.text=qitem.q_max+"";
+				this._skin.lbDiejia1.text=qitem.q_max+"";
 			}
 			
 			updateBuyInfo();
