@@ -21,6 +21,7 @@ package com.rpgGame.app.ui.alert
 		public static const SYS_HORSE:int=1;
 		public static const SYS_SKILL:int=2;
 		public static const SYS_ZHANHUN:int=3;
+		public static const SYS_ZHANQI:int=4;
 		private static const TIME_OUT:int=10*60*1000;
 		private static const timeHash:HashMap=new HashMap();
 		private static const pool:Array=[];
@@ -52,7 +53,11 @@ package com.rpgGame.app.ui.alert
 					url="ui/common/icon/erjikuang/zuoqijinjie.png";
 					break;
 				}
-					
+				case SYS_ZHANQI:
+				{
+					url="ui/common/icon/erjikuang/zuoqijinjie.png";
+					break;
+				}
 				default:
 				{
 					url="ui/common/icon/erjikuang/zuoqijinjie.png";
@@ -83,6 +88,9 @@ package com.rpgGame.app.ui.alert
 							break;
 						case SYS_ZHANHUN:
 							FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ZHANHUN,null,false);
+							break;
+						case SYS_ZHANQI:
+							FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ZHANQI,null,false);
 							break;
 					}
 				}
