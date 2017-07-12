@@ -63,6 +63,8 @@ package com.rpgGame.appModule.activety.boss
 			
 			_activeData=new ListCollection();
 			actList=ActivetyCfgData.getTypeList(ActivityEnum.BOSS_ACT);
+			actList.sort(sortList);
+			_activeData.removeAll();
 			for(var i:int=0;i<actList.length;i++){
 				_activeData.addItem(actList[i]);
 			}
@@ -147,14 +149,9 @@ package com.rpgGame.appModule.activety.boss
 					}else{
 						actList[i].info.joinState=ActivityJoinStateEnum.JOINING;//开启
 					}
+					_skin.ListItem.dataProvider.updateItemAt(i);
 				}
 			}
-			actList.sort(sortList);
-			_activeData.removeAll();
-			for(i=0;i<actList.length;i++){
-				_activeData.addItem(actList[i]);
-			}
-			_skin.ListItem.dataProvider=_activeData;
 		}
 		
 		private function sortList(infoA:ActivetyInfo,infoB:ActivetyInfo):int
@@ -163,17 +160,13 @@ package com.rpgGame.appModule.activety.boss
 				return 0;
 			}
 			
-			if(infoA.info.joinState<infoB.info.joinState){//越小的越再后面
-				if(infoA.info.joinState==ActivityJoinStateEnum.JOINING&&infoB.info.joinState==ActivityJoinStateEnum.OVER){
-					return -1;
-				}
-				return 1;
+			if(infoA.info==null||infoB.info==null){
+				return 0;
 			}
-			if(infoA.info.joinState>infoB.info.joinState){
-				if(infoA.info.joinState==ActivityJoinStateEnum.OVER&&infoB.info.joinState==ActivityJoinStateEnum.JOINING){
-					return 1;
-				}
+			if(infoA.actCfg.q_order<infoB.actCfg.q_order){
 				return -1;
+			}else if(infoA.actCfg.q_order>infoB.actCfg.q_order){
+				return 1;
 			}
 			return 0;
 		}
