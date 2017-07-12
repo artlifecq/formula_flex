@@ -77,7 +77,7 @@ package com.rpgGame.coreData.type
 		public static const BAOWU:String = "BaoWu";
 		
 		/**战旗特效**/
-		public static const ZHANQI_EFF:String = "ZhanQi_Eff";
+		public static const ZHANQI:String = "ZhanQi";
 
 		/**任务问号**/
 		public static const TASKMARK : String = "taskMark";

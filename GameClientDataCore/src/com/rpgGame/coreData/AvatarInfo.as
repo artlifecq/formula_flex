@@ -327,9 +327,10 @@ package com.rpgGame.coreData
 			_zhanqiEffResID = value;
 			if(_zhanqiEffResID != null && _zhanqiEffResID != "")
 			{
-				_zhanqiEffMode = new RenderParamData3D(RenderUnitID.ZHANQI_EFFECT, RenderUnitType.ZHANQI_EFF, ClientConfig.getEffect(_zhanqiEffResID));
+				_zhanqiEffMode = new RenderParamData3D(RenderUnitID.ZHANQI, RenderUnitType.ZHANQI, ClientConfig.getZhanqi("zhanqi_002/zhanqi_002"));
 				_zhanqiEffMode.mouseEnable = false;
 				_zhanqiEffMode.clearSameType = false;
+				_zhanqiEffMode.priority = _priority;
 			}
 			else
 			{

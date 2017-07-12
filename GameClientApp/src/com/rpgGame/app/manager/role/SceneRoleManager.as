@@ -680,11 +680,11 @@ package com.rpgGame.app.manager.role
 		/**创建战旗特效*/
 		public function updateZhanQiRole(owner:SceneRole):SceneRole
 		{
-			if(owner.avatar.hasTypeRenderUnits(RenderUnitType.ZHANQI_EFF))
-				owner.avatar.removeRenderUnitByID(RenderUnitType.ZHANQI_EFF,0);
+			if(owner.avatar.hasTypeRenderUnits(RenderUnitType.ZHANQI))
+				owner.avatar.removeRenderUnitByID(RenderUnitType.ZHANQI,RenderUnitID.ZHANQI);
 			var zhanqilv:int=(owner.data as HeroData).zhanqiLv;			
 			var q_warflag:Q_warflag=ZhanQiConfigData.getZhanQiDataById(zhanqilv);
-			var rud : RenderParamData3D = new RenderParamData3D(0, RenderUnitType.ZHANQI_EFF, ClientConfig.getEffect(q_warflag.q_panel_show_id));
+			var rud : RenderParamData3D = new RenderParamData3D(0, RenderUnitType.ZHANQI, ClientConfig.getEffect(q_warflag.q_panel_show_id));
 			var effectRu : RenderUnit3D=owner.avatar.addRenderUnitToChild(RenderUnitType.BODY,RenderUnitID.BODY,BoneNameEnum.c_0_body_01,rud);
 			effectRu.setScale(1.5);
 			effectRu.play(1);

@@ -50,6 +50,10 @@ package com.rpgGame.app.state.role.action
 					render.repeat = 0;
 					render.setStatus(statusType, _useCrossfadeTransition ? 0.2 : null, time);
 					break;
+				case RenderUnitType.ZHANQI:
+					render.repeat = 0;
+					render.setStatus(RoleActionType.STAND, _useCrossfadeTransition ? 0.2 : null, time);
+					break;
 				case RenderUnitType.MOUNT:
 					render.repeat = 0;
 					render.setStatus(RoleActionType.PREWAR, _useCrossfadeTransition ? 0.2 : null, time);
