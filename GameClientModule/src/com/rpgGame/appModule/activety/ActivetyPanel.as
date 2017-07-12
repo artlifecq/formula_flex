@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.activety
 {
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.ui.TabBarPanel;
 	import com.rpgGame.appModule.activety.boss.BossView;
 	import com.rpgGame.appModule.activety.jixiantiaozhan.JiXianTiaoZhanPenelExt;
@@ -42,7 +43,8 @@ package com.rpgGame.appModule.activety
 			if(data&&funcKey!=""){
 				var info:ActivetyInfo=data as ActivetyInfo;
 				if(info){
-					funcKey=info.actCfg.q_trans_funcID;
+					var list:Array=JSONUtil.decode(info.actCfg.q_notice_trans);
+					funcKey=list[1];
 				}
 			}
 			super.show(data,funcKey,parentContiner);

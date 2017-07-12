@@ -14,6 +14,7 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.type.item.GridBGType;
 	import com.rpgGame.netData.monster.bean.BossDamageInfo;
 	
@@ -60,8 +61,7 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 			_prizeItem.x = _skin.icon.x;
 			_prizeItem.y = _skin.icon.y;
 			var reward:Array=JSONUtil.decode(ActivetyDataManager.jixianVo.qmod.q_join_rewards);
-			var clientItemInfo:ClientItemInfo=new ClientItemInfo(reward[0].mod);	
-			clientItemInfo.count=reward[0].num;
+			var clientItemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(reward[0].mod,reward[0].num);
 			FaceUtil.SetItemGrid(_prizeItem, clientItemInfo);
 			
 			//boss伤害排名

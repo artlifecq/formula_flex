@@ -125,7 +125,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			btn_jinjie = temp;
 			temp.name = "btn_jinjie";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.label = "技能升级";
+			temp.label = "技能进阶";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
 			temp.color = 0xFFFFFF;
 			temp.width = 90;

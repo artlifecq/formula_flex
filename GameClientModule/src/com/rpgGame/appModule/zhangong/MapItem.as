@@ -34,7 +34,7 @@ package com.rpgGame.appModule.zhangong
 		{
 			_skin=new MapItem_Skin();
 			super(_skin);
-			
+			_skin.numDengji.textAlign = "center";
 		}
 		
 		override protected function onShow():void

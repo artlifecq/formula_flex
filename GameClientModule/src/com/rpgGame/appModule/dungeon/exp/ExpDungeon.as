@@ -46,8 +46,7 @@ package com.rpgGame.appModule.dungeon.exp
 			for(var i:int = 0;i<length;i++)
 			{
 				var grid:IconCDFace = IconCDFace.create(IcoSizeEnum.ICON_48);
-				grid.setBg( GridBGType.GRID_SIZE_48,1 );
-				grid.bgImage.styleName = "ui/common/gezikuang/tubiaodikuang/48.png";
+				grid.setUrlBg( "ui/common/gezikuang/tubiaodikuang/48.png");
 				_skin.container.addChild(grid);
 				grid.x = startX+60*i;
 				grid.y = 507;

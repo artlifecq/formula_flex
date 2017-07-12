@@ -58,7 +58,7 @@ package com.rpgGame.app.view.icon
 		/** 选中框 */		
 		protected var _selectImage:UIAsset;
 		/** 背景资源路径 **/
-		private var _bgResName:String;
+		protected var _bgResName:String;
 		/** ico的背景bitmapdata  */		
 		protected var _bgImage:UIAsset;
 		/** 锁定图片，大小对应格子的大小**/
@@ -154,6 +154,17 @@ package com.rpgGame.app.view.icon
 			}
 		}
 		
+		
+		/**销毁显示对象 */
+		override public function destroy() : void
+		{
+			if(_bgImage){
+				_bgImage.removeFromParent();
+				_bgImage=null;
+			}
+			super.destroy();
+		}
+		
 		/**
 		 * 设置ico的背景图片, 参数详细请参考 GridBGType.as
 		 */		
@@ -168,7 +179,7 @@ package com.rpgGame.app.view.icon
 			{
 				_bgImage = new UIAsset();
 				addChild( _bgImage );
-				_bgImage.imageScaleMode=UIAsset.IMAGE_SCALE_MODE_AUTO;
+				_bgImage.imageScaleMode=UIAsset.IMAGE_SCALE_MODE_NO_SCALE;
 			}
 			
 			_bgImage.alpha = alpha;
@@ -243,12 +254,12 @@ package com.rpgGame.app.view.icon
 			{
 				_bgImage = new UIAsset();
 				addChild( _bgImage );
-				_bgImage.imageScaleMode=UIAsset.IMAGE_SCALE_MODE_AUTO;
+				_bgImage.imageScaleMode=UIAsset.IMAGE_SCALE_MODE_NO_SCALE;
 			}
 			
 			_bgImage.alpha = alpha;
-			_bgImage.styleName =value;
 			_bgImage.onImageLoaded = onBgImgComplete;
+			_bgImage.styleName =value;
 			//因为从对象池取的，所以要设置下
 //			_bgImage.width=S2W[_iconSize];
 //			_bgImage.height=S2W[_iconSize];
@@ -351,8 +362,9 @@ package com.rpgGame.app.view.icon
 		 * @param uiasset
 		 * 
 		 */
-		private function onBgImgComplete(uiasset:UIAsset):void
+		protected function onBgImgComplete(uiasset:UIAsset):void
 		{
+			_bgImage.onImageLoaded=null;
 			this.width=_bgImage.width;
 			this.height=_bgImage.height;
 			if(_qualityEft){
@@ -360,11 +372,6 @@ package com.rpgGame.app.view.icon
 				_qualityEft.height=this.width;
 			}
 			calIconPos();
-		}
-		
-		public function get bgImage():UIAsset
-		{
-			return _bgImage;
 		}
 		
 		/**
@@ -587,9 +594,10 @@ package com.rpgGame.app.view.icon
 				_selectImage.visible=false;
 			}
 			//不用清理背景
-			/*if(_bgImage){
-				_bgImage.removeFromParent();
-			}*/
+//			if(_bgImage){
+//				_bgImage.removeFromParent();
+//				_bgImage=null;
+//			}
 			clearLockAsset();
 			hideQuality();
 	

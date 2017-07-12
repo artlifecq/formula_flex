@@ -49,7 +49,7 @@ package com.rpgGame.app.state.ai
 				else if(TaskMissionManager.getMainTaskMissionType()==TaskType.SUB_MONSTER||TaskMissionManager.getMainTaskMissionType()==TaskType.SUB_ITEM)
 				{
 					var post:Array=TaskMissionManager.getPathingByType(TaskType.MAINTYPE_MAINTASK,TaskAutoManager.getInstance().taskTarget);
-					TaskUtil.postTaskWalk(post,subMonster);
+					TaskUtil.postTaskWalk(post,subMonster,null,TaskMissionManager.getMainTaskMissionType()==TaskType.SUB_MONSTER);
 				}
 				else if(TaskMissionManager.getMainTaskMissionType()==TaskType.SUB_GATHER)
 				{

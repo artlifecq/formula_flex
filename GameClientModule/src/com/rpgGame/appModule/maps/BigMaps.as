@@ -158,9 +158,10 @@ package com.rpgGame.appModule.maps
 //			}
 //			else
 //			{
-				absMaxWidth = sceneMapData.clientMapData.boundMaxX;
-				absMaxHeight = sceneMapData.clientMapData.boundMaxY;
 				var senceData : SceneData = MapDataManager.getMapInfo(_currentMapId);
+				absMaxWidth = senceData.mapConfig.width;
+				absMaxHeight = senceData.mapConfig.height;
+				
 				var mapUrl : String = ClientConfig.getMap(senceData.map);
 				var mapName : String = ClientConfig.getMapName(senceData.map);
 				var miniMapName : String = ClientConfig.getMiniMapName(sceneMapData.clientMapData.miniMapRes);
@@ -202,7 +203,7 @@ package com.rpgGame.appModule.maps
 			}
 			var scalex:Number= _mapWidth/thumbnaiImage.width ;
 			var scaley:Number= _mapHeight/thumbnaiImage.height;
-			_scale=scalex>scaley?scalex:scaley;
+			_scale=scalex<scaley?scalex:scaley;
 			var mapX:Number=(_mapWidth-thumbnaiImage.width*_scale)/2;
 			var mapY:Number=(_mapHeight-thumbnaiImage.height*_scale)/2;
 			baseSpr.x=mapX;

@@ -13,6 +13,7 @@ package com.rpgGame.app.state.role.control
 	import com.rpgGame.core.state.role.action.ActionState;
 	import com.rpgGame.core.state.role.control.MoveState;
 	import com.rpgGame.coreData.info.move.RoleMoveInfo;
+	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.RoleStateType;
 	
 	import flash.geom.Point;
@@ -164,6 +165,10 @@ package com.rpgGame.app.state.role.control
 			if (_machine && !_machine.isInPool)
 			{
 				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {x: true, z: true});
+				//测试代码动态更新展示位置为了
+			/*	if((_machine.owner as SceneRole).data is MonsterData){
+					(_machine.owner as SceneRole).headFace.updateName();
+				}*/
 				//执行行走被停止回调
 				if (_isMoving)
 				{

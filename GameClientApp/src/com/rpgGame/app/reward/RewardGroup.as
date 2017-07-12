@@ -4,7 +4,6 @@ package  com.rpgGame.app.reward
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.utils.MCUtil;
-	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.backpack.bean.TempItemInfo;
@@ -25,7 +24,7 @@ package  com.rpgGame.app.reward
 		public static const ALIN_CENTER:int=1;
 		public static const ALIN_RIGHT:int=2;
 		
-		private static const S2W:Object={};
+/*		private static const S2W:Object={};
 		S2W[36]=44;
 		S2W[42]=50;
 		S2W[48]=56;
@@ -35,11 +34,11 @@ package  com.rpgGame.app.reward
 		W2S[44]=36;
 		W2S[50]=42;
 		W2S[56]=48;
-		W2S[72]=64;
-		public static function size2Width(size:int):int
+		W2S[72]=64;*/
+	/*	public static function size2Width(size:int):int
 		{
 			return S2W[size];
-		}
+		}*/
 		/**
 		 *布局模式 
 		 */		
@@ -264,28 +263,10 @@ package  com.rpgGame.app.reward
 		}
 		private function getIcon():IconCDFace
 		{
-//			if (pool.length>0) 
-//			{
-//				return pool.pop();
-//			}
 			var icon:IconCDFace;
-//			var bg:UIAsset=MCUtil.cloneUIAssert(grid);
-//			bg.touchGroup=false;
 			
 			icon=IconCDFace.create(_iconSize);
 			icon.setUrlBg(grid.styleName);
-		//	bg.addChild(icon);
-			//设置图片的时候有设置
-			//if (IcoSizeEnum.ICON_36==size||IcoSizeEnum.ICON_42==size) 
-//			{
-//				icon.x=(bg.width-size)/2;
-//				icon.y=(bg.height-size)/2;
-//			}
-
-			
-//			var obj:Object={};
-//			obj.bg=bg;
-		//	obj.icon=icon;
 			return icon;
 		}
 

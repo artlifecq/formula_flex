@@ -31,6 +31,7 @@ package com.rpgGame.appModule.shop
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.zuoqi.huoquSkin;
+	import org.mokylin.skin.common.alert.Alert_WuPinHuoQu;
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
@@ -47,7 +48,7 @@ package com.rpgGame.appModule.shop
 	{
 		private static var _ins:ItemGetAdvisePanelExt;
 		private var forceNum:int=0;
-		private var _skin:huoquSkin;
+		private var _skin:Alert_WuPinHuoQu;
 		private static var  MAX_ALLOW:int=999;
 		
 		private var saleShopItemHash:HashMap=new HashMap();
@@ -65,13 +66,12 @@ package com.rpgGame.appModule.shop
 		private var bindGoldInitPt:Point;
 		public function ItemGetAdvisePanelExt(skin:StateSkin=null)
 		{
-			_skin=new huoquSkin();
+			_skin=new Alert_WuPinHuoQu();
 			super(_skin);
 			_grid=IconCDFace.create(IcoSizeEnum.ICON_64);
-			//			_grid.x=6;
-			//			_grid.y=6;
-			this._skin.itembg.addChild(_grid);
-			this._skin.itembg.touchGroup=false;
+			_grid.bindBg(_skin.itembg);
+			this._skin.container.addChild(_grid);
+//			this._skin.itembg.touchGroup=false;
 			bindGoldInitPt=new Point(_skin.gBindGold.x,_skin.gBindGold.y);
 			initEvent();
 			gTimer=new GameTimer("ItemGetAdvisePanelExt",100,0,onTime);

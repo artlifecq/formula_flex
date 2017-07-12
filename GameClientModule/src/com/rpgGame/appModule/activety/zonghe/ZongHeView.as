@@ -136,9 +136,10 @@ package com.rpgGame.appModule.activety.zonghe
 		private function onJoin(e:Event):void
 		{
 			if(selectedInfo.info.joinState==ActivityJoinStateEnum.JOINING){
-				if(selectedInfo.actCfg.q_notice_trans){
+				if(selectedInfo.actCfg.q_trans){
 					//跳到对应标签的对应活动
-					AppManager.showAppNoHide(selectedInfo.actCfg.q_notice_trans,selectedInfo,selectedInfo.actCfg.q_trans_funcID);
+					var list:Array=JSONUtil.decode(selectedInfo.actCfg.q_trans);
+					AppManager.showAppNoHide(list[0],selectedInfo,list[1]);
 				}else{
 					SpecialActivitySender.reqJoinAct(selectedInfo.actCfg.q_activity_id);
 				}
@@ -218,6 +219,7 @@ package com.rpgGame.appModule.activety.zonghe
 		{
 			_skin.ListItem.removeEventListener(Event.CHANGE,onChange);
 			_skin.joinBtn.removeEventListener(Event.TRIGGERED,onJoin);
+			EventManager.removeEvent(ActivityEvent.UPDATE_ACTIVITY,onUpdateAct);
 			rewardGp.clear();
 		}
 	}

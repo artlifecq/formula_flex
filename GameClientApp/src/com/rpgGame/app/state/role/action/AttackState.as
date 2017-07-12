@@ -3,6 +3,7 @@ package com.rpgGame.app.state.role.action
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.state.IState;
 	import com.game.engine3D.vo.BaseRole;
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.app.state.role.control.CheckTripleAttackStateReference;
@@ -58,6 +59,9 @@ package com.rpgGame.app.state.role.action
 			if (_machine && !_machine.isInPool)
 			{
 				super.execute();
+				//
+				_machine.removeState(RoleStateType.CONTROL_PREWAR_WAITING);
+				//
 				_attackBroken = false;
 				_attackFinished = false;
 				_canWalkRelease = false;
@@ -147,7 +151,7 @@ package com.rpgGame.app.state.role.action
 					status = RoleActionType.RUN;
 				}
 			}
-			
+			var isHideState:Boolean=(_machine.owner as SceneRole).stateMachine.isHiding;
 			var matchStatus : String = RoleActionType.getActionType(status, (_machine as RoleStateMachine).isRiding);
 			switch (render.type)
 			{
@@ -155,7 +159,11 @@ package com.rpgGame.app.state.role.action
 				case RenderUnitType.HAIR:
 				case RenderUnitType.WEAPON:
 				case RenderUnitType.DEPUTY_WEAPON:
-					render.visible = true;
+					if (!isHideState) 
+					{
+						render.visible = true;
+					}
+					
 					render.repeat = 1;
 					render.setStatus(matchStatus, _useCrossfadeTransition ? 0.2 : null, time, speedRatio);
 					if (isFreeze)
@@ -172,10 +180,16 @@ package com.rpgGame.app.state.role.action
 					render.play(time, speedRatio);
 					break;
 				case RenderUnitType.WEAPON_EFFECT:
-					render.visible = true;
+					if (!isHideState) 
+					{
+						render.visible = true;
+					}
 					break;
 				case RenderUnitType.EFFECT:
-					render.visible = false;
+					if (!isHideState) 
+					{
+						render.visible = true;
+					}
 					break;
 				case RenderUnitType.HURT:
 					break;
@@ -357,6 +371,11 @@ package com.rpgGame.app.state.role.action
 		override public function leave() : void
 		{
 			super.leave();
+			if ((_machine as RoleStateMachine).isTripleLockCaseSpell) 
+			{
+				GameLog.add("三连击非正常打断");
+				_machine.removeState(RoleStateType.CONTROL_TRIPLE_ATTACK_LOCK);
+			}
 			stopAttack();
 			_attackBroken = false;
 			_attackFinished = false;
@@ -480,7 +499,7 @@ package com.rpgGame.app.state.role.action
 			}
 			else if (nextState.type == RoleStateType.ACTION_HIT)
 			{
-				if (!force && !_attackBroken)
+				//if (!force && !_attackBroken)
 					return false;
 			}
 			else if (nextState.type == RoleStateType.ACTION_COLLECT)
@@ -565,6 +584,11 @@ package com.rpgGame.app.state.role.action
 			{
 				_totalFrameTween.kill();
 				_totalFrameTween = null;
+			}
+			if ((_machine as RoleStateMachine).isTripleLockCaseSpell) 
+			{
+				GameLog.add("三连击非正常打断2");
+				_machine.removeState(RoleStateType.CONTROL_TRIPLE_ATTACK_LOCK);
 			}
 			super.dispose();
 		}

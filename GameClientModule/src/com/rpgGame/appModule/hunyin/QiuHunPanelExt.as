@@ -112,15 +112,13 @@ package com.rpgGame.appModule.hunyin
 				ico.selectImgVisible = false;	
 				_skin.container.addChild(ico);
 				var uibg:UIAsset = _skin.container.getChildByName("icon"+(i+1)) as UIAsset;
-				ico.x = uibg.x;
-				ico.y = uibg.y;
+				ico.bindBg(uibg);
 				_icoList.push(ico);
 				if(i<prizearr.length)
 				{
-					var iteminfo:ClientItemInfo=new ClientItemInfo(prizearr[i].mod);
+					var iteminfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(prizearr[i].mod,prizearr[i].num);
 					if(iteminfo!=null)
 					{
-						iteminfo.count=prizearr[i].num;
 						FaceUtil.SetItemGrid(ico,iteminfo);
 					}
 				}
@@ -148,8 +146,8 @@ package com.rpgGame.appModule.hunyin
 		
 		private function forceinHandler(evt:Event):void
 		{
-			 _skin.textInput.text="";		
-			 _skin.textInput.color=StaticValue.A_UI_BEIGE_TEXT;
+			_skin.textInput.text="";		
+			_skin.textInput.color=StaticValue.A_UI_BEIGE_TEXT;
 		}
 		
 		private function forceoutHandler(evt:Event):void
@@ -174,7 +172,7 @@ package com.rpgGame.appModule.hunyin
 		{
 			if(_skin.textInput.text == ""||_skin.textInput.text == DEFAULT_CHAT_TEXT)
 			{
-				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(22010));
+				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(92003));
 				return;
 			}
 			Mgr.hunyinMgr.showQiuHunTiShiPanel(1,null,_skin.textInput.text);

@@ -1112,6 +1112,7 @@ package com.rpgGame.app.graphics
 			TweenLite.killDelayedCallsTo(hideMoodMC);
 			updateTeamFlag(false);
 			updateTowerFlag(false);
+			setVipFlag(0);
 		}
 		
 		
@@ -1483,6 +1484,8 @@ package com.rpgGame.app.graphics
 				if (_vipFlag) 
 				{
 					MCUtil.removeSelf(_vipFlag);
+					_vipFlag.dispose();
+					_vipFlag=null;
 					deCtrl.sortTop();
 				}
 			}

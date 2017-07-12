@@ -23,6 +23,7 @@ package com.rpgGame.app.state.role.control
 		
 		override public function execute() : void
 		{
+			
 			if (_machine && !_machine.isInPool)
 			{
 //				super.execute();
@@ -32,6 +33,10 @@ package com.rpgGame.app.state.role.control
 //					{
 						var role : SceneRole = _machine.owner as SceneRole;
 						role.forEachRenderUnit(eachUnVisible);
+						if (role.headFace) 
+						{
+							role.headFace.headVisible=false;
+						}
 //					}
 //					else
 //						throw new Error("场景隐身状态引用必须是HiddingStateReference类型！");
@@ -63,9 +68,11 @@ package com.rpgGame.app.state.role.control
 					{
 						render.compositeMesh.layerType = layerType;
 					}*/
+					render.isHiding=false;
 					render.visible = true;
 					break;
 				default:
+					render.isHiding=false;
 					render.visible = true;
 					break;
 			}
@@ -89,16 +96,21 @@ package com.rpgGame.app.state.role.control
 					render.visible = false;
 					render.alpha = 0;
 					break;*/
-				case RenderUnitType.BODY:
+			//	case RenderUnitType.BODY:
 //					if(render.compositeMesh)
 //					{
 //						layerType = render.compositeMesh.layerType;
 //						render.compositeMesh.layerType = 0;
 //					}
-					render.visible = true;
-					break;
+		//			render.visible = true;
+	//				break;
 				default:
+					if (render.type.indexOf(RenderUnitType.BUFF)!=-1) 
+					{
+						return;
+					}
 					render.visible = false;
+					render.isHiding=true;
 					break;
 			}
 		}
@@ -110,6 +122,10 @@ package com.rpgGame.app.state.role.control
 			{
 				var role : SceneRole = _machine.owner as SceneRole;
 				role.forEachRenderUnit(eachVisible);
+				if (role.headFace) 
+				{
+					role.headFace.headVisible=true;
+				}
 			}
 		}
 	}

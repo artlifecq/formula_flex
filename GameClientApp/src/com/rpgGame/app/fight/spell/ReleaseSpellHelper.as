@@ -139,7 +139,7 @@ package com.rpgGame.app.fight.spell
 			if (spellInfo.atkor && spellInfo.atkor.usable && spellInfo.atkor.isMainChar)
 			{
 				var hardRef : AttackHardStateReference = spellInfo.atkor.stateMachine.getReference(AttackHardStateReference) as AttackHardStateReference;
-				hardRef.setParams(spellInfo.castTime);
+				hardRef.setParams(spellInfo.castTime-50);
 				spellInfo.atkor.stateMachine.transition(RoleStateType.CONTROL_ATTACK_HARD, hardRef, true);
 				SkillCDManager.getInstance().addSkillCDTime(spellInfo.spellData);
 			}

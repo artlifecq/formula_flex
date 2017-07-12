@@ -58,8 +58,8 @@ package com.rpgGame.app.ui.main.hubaozhuizong
 				var ico:IconCDFace=new IconCDFace(IcoSizeEnum.ICON_42);		
 				ico.selectImgVisible=false;
 				_icoList.push(ico);
-				ico.x=_beijingkuangList[i].x-4;
-				ico.y=_beijingkuangList[i].y-4;
+				ico.bindBg(_beijingkuangList[i]);
+//				ico.y=_beijingkuangList[i].y-4;
 				_skin.scroll_box.addChild(ico);
 			}		
 			_labList=new Vector.<Label>();

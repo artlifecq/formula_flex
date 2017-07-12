@@ -57,6 +57,8 @@ package org.mokylin.skin.app.hunyin
 
 		public var btnYongbao:feathers.controls.Button;
 
+		public var group:feathers.controls.Group;
+
 		public var grpBar:feathers.controls.Group;
 
 		public var icon1:feathers.controls.UIAsset;
@@ -92,7 +94,7 @@ package org.mokylin.skin.app.hunyin
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [bg_i(),__HunYin_Skin_UIAsset1_i(),__HunYin_Skin_UIAsset2_i(),__HunYin_Skin_UIAsset3_i(),btnSonghua_i(),btnYongbao_i(),btnQinwen_i(),btnDongfang_i(),btnFuben_i(),btnLihun_i(),btnLiaotian_i(),btnJishi_i(),__HunYin_Skin_UIAsset4_i(),__HunYin_Skin_UIAsset5_i(),lbLaoPo_i(),lbLaoGong_i(),icon1_i(),icon2_i(),icon3_i(),ui_zhandou_i(),NumZhanli_i(),icon4_i(),__HunYin_Skin_UIAsset6_i(),uiJie_i(),numJie_i(),__HunYin_Skin_Group1_i(),__HunYin_Skin_Group2_i(),grpBar_i(),btnJinjie_i(),skin_container_i()];
+			this.elementsContent = [bg_i(),__HunYin_Skin_UIAsset1_i(),__HunYin_Skin_UIAsset2_i(),__HunYin_Skin_UIAsset3_i(),btnSonghua_i(),btnYongbao_i(),btnQinwen_i(),btnDongfang_i(),btnFuben_i(),btnLihun_i(),btnLiaotian_i(),btnJishi_i(),__HunYin_Skin_UIAsset4_i(),__HunYin_Skin_UIAsset5_i(),lbLaoPo_i(),lbLaoGong_i(),icon1_i(),icon2_i(),icon3_i(),ui_zhandou_i(),NumZhanli_i(),icon4_i(),__HunYin_Skin_UIAsset6_i(),uiJie_i(),numJie_i(),__HunYin_Skin_Group1_i(),__HunYin_Skin_Group2_i(),grpBar_i(),btnJinjie_i(),skin_container_i(),group_i()];
 			
 			states = {
 			};
@@ -385,6 +387,18 @@ package org.mokylin.skin.app.hunyin
 			temp.styleClass = org.mokylin.skin.app.hunyin.button.ButtonYongbao;
 			temp.x = 38;
 			temp.y = 177;
+			return temp;
+		}
+
+		private function group_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			group = temp;
+			temp.name = "group";
+			temp.height = 61;
+			temp.width = 78;
+			temp.x = 37;
+			temp.y = 106;
 			return temp;
 		}
 

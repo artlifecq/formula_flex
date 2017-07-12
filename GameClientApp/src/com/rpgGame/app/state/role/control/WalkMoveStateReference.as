@@ -2,7 +2,7 @@ package com.rpgGame.app.state.role.control
 {
 	import com.game.engine3D.state.role.RoleStateReference;
 	import com.rpgGame.coreData.info.move.RoleMoveInfo;
-
+	
 	import flash.geom.Vector3D;
 
 	/**
@@ -48,7 +48,10 @@ package com.rpgGame.app.state.role.control
 		public var startPos : Vector3D;
 		public var endPos : Vector3D;
 		public var isServerStop : Boolean;
-
+		/**
+		 *是否需要冲刺 
+		 */		
+		public var needSpriteUp:Boolean=false;
 		public function WalkMoveStateReference()
 		{
 			super();
@@ -61,6 +64,7 @@ package com.rpgGame.app.state.role.control
 			_vectorPath = vectorPath;
 			_moveInfo = moveInfo;
 			isServerStop = false;
+			needSpriteUp=false;
 		}
 
 		public function get vectorPath() : Vector3D
@@ -231,6 +235,7 @@ package com.rpgGame.app.state.role.control
 			_speed = 0;
 			_spacing = 0;
 			isServerStop = false;
+			needSpriteUp=false;
 			super.dispose();
 		}
 	}

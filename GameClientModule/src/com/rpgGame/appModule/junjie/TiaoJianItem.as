@@ -2,18 +2,12 @@ package com.rpgGame.appModule.junjie
 {
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.Mgr;
-	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.core.app.AppManager;
-	import com.rpgGame.core.events.JunJieEvent;
-	import com.rpgGame.core.events.ZhanGongEvent;
 	import com.rpgGame.core.ui.SkinUI;
-	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
 	import com.rpgGame.coreData.cfg.JunJieData;
 	import com.rpgGame.coreData.clientConfig.Q_junjie;
 	import com.rpgGame.coreData.utils.JunJieUtil;
 	import com.rpgGame.netData.junjie.bean.JunJieConditionInfo;
 	
-	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.beibao.junjie.ShuXing_Item2;
 	
 	import starling.display.DisplayObject;

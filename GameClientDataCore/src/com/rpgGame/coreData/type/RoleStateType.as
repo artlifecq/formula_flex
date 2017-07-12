@@ -83,5 +83,6 @@ package com.rpgGame.coreData.type
 		
 		public static const CONTROL_TRIPLE_ATTACK_LOCK:int = rEnum.next;// 三连击锁定
 		public static const CONTROL_TRIPLE_ATTACK_CHECK:int = rEnum.next;// 三连击锁定
+		public static const CONTROL_BUFF_SPRITEUP:int = rEnum.next;// 冲刺
 	}
 }

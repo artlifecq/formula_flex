@@ -2,6 +2,7 @@ package com.rpgGame.app.manager.mount
 {
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.goods.BackPackManager;
+	import com.rpgGame.app.utils.FightValueUtil;
 	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
@@ -42,6 +43,7 @@ package com.rpgGame.app.manager.mount
 		private var _lastLevel:int;
 		private var _upLevelItem:ClientItemInfo;
 		private var _currentProp:Vector.<Number>;
+		private var _nextProp:Vector.<Number>;
 		private var _disProp:Vector.<Number>;
 		private var _addProp:Vector.<Number>;
 		private var _useItems:Dictionary = new Dictionary();
@@ -139,6 +141,7 @@ package com.rpgGame.app.manager.mount
 				value = currentatt["q_value"+i];
 				_currentProp[type] = value;
 			}
+			_nextProp=new Vector.<Number>(30,0);
 			_disProp = new Vector.<Number>(30,0);
 			//差距
 			var nextwarflag:Q_warflag = ZhanQiConfigData.getZhanQiDataById(zhanqiLevel+1);
@@ -164,6 +167,7 @@ package com.rpgGame.app.manager.mount
 						if(type==0)
 							continue;
 						value = currentatt["q_value"+i];
+						_nextProp[type] = value;
 						_disProp[type] = value-_currentProp[type];
 					}
 					_isMaxLevel = false;
@@ -221,6 +225,18 @@ package com.rpgGame.app.manager.mount
 				helpProp[i]=(_currentProp[i]+_addProp[i]*_useItems[519])*addExtraPercent;
 			}
 			return helpProp;
+		}
+		
+		private var _power:int=0;
+		public function nextPower():void
+		{
+			var list:Vector.<Number>=new Vector.<Number>(30,0);
+			for(var i:int = 0;i<30;i++)
+			{
+				list[i]=(_nextProp[i]+_addProp[i]*_useItems[519])*addExtraPercent;
+			}
+			_power=FightValueUtil.calAtrributeFightPower(_currentProp.concat(),zhanqiJob);
+			
 		}
 		
 		public function addProps(helpProp:Vector.<Number> = null):Vector.<Number>

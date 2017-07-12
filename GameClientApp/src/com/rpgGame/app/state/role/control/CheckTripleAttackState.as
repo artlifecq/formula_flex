@@ -27,8 +27,13 @@ package com.rpgGame.app.state.role.control
 				{
 					var nextSkill:int=ref.getNextSkill(skill);
 					CastSpellHelper.shortcutsTryCaseSpell(nextSkill);
+					if (ref.isLast(nextSkill)) 
+					{
+						_machine.removeState(RoleStateType.CONTROL_TRIPLE_ATTACK_LOCK);
+					}
 				}
 			}
+			removeSelf();
 		}
 	}
 }

@@ -23,6 +23,7 @@ package com.rpgGame.appModule.hubao
 	import com.rpgGame.coreData.clientConfig.Q_convoy;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import away3d.events.Event;
@@ -97,9 +98,6 @@ package com.rpgGame.appModule.hubao
 					showModle(q_convoy);
 				}
 			}
-			var usearr:Array=JSONUtil.decode(q_convoy.q_refresh_item);
-			_useItemId=parseInt(usearr[0].mod);
-			_useNum=parseInt(usearr[0].num);
 			_maxnum=q_convoy.q_day_times;
 		}
 		
@@ -112,7 +110,7 @@ package com.rpgGame.appModule.hubao
 				{
 					var ico:IconCDFace=new IconCDFace(IcoSizeEnum.ICON_36);		
 					ico.selectImgVisible=false;	
-					var itemInfo:ClientItemInfo=new ClientItemInfo(prize[i].mod);
+					var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(prize[i].mod);
 					FaceUtil.SetItemGrid(ico,itemInfo);				
 					if(i==0){
 						ico.bindBg((tar.skin as HuBaoItem_Skin).icon1);
@@ -138,7 +136,7 @@ package com.rpgGame.appModule.hubao
 				{
 					ico=new IconCDFace(IcoSizeEnum.ICON_42);		
 					ico.selectImgVisible=false;	
-					itemInfo=new ClientItemInfo(prize[i].mod);
+					itemInfo=ItemUtil.convertClientItemInfoById(prize[i].mod);
 					FaceUtil.SetItemGrid(ico,itemInfo);
 					if(i==0){
 						ico.bindBg((tar.skin as HuBaoItem2_Skin).icon1);
@@ -314,6 +312,10 @@ package com.rpgGame.appModule.hubao
 		private function updateNowSelectBaoWu(lv:int):void
 		{
 			_q_con=HuBaoData.getmodByLv(lv);
+			var usearr:Array=JSONUtil.decode(_q_con.q_refresh_item);
+			_useItemId=parseInt(usearr[0].mod);
+			_useNum=parseInt(usearr[0].num);
+			updateShowUseItem();
 			clearChenHaoEff();		
 			switch(lv)
 			{
@@ -346,14 +348,13 @@ package com.rpgGame.appModule.hubao
 					break;
 				}			
 			}
-			//			_chenhaoEft.addEventListener(Event.ENTER_FRAME,onRotaion);
 		}
 		
 		private function onRotaion1(e:Event):void
 		{
 			if(_moxing1)
 			{
-				_moxing1.baseObj3D.rotationY+=20;
+				_moxing1.baseObj3D.rotationY+=10;
 			}
 		}
 		
@@ -361,7 +362,7 @@ package com.rpgGame.appModule.hubao
 		{
 			if(_moxing2)
 			{
-				_moxing2.baseObj3D.rotationY+=20;
+				_moxing2.baseObj3D.rotationY+=10;
 			}
 		}
 		
@@ -369,7 +370,7 @@ package com.rpgGame.appModule.hubao
 		{
 			if(_moxing3)
 			{
-				_moxing3.baseObj3D.rotationY+=20;
+				_moxing3.baseObj3D.rotationY+=10;
 			}
 		}
 		
@@ -377,7 +378,7 @@ package com.rpgGame.appModule.hubao
 		{
 			if(_moxing4)
 			{
-				_moxing4.baseObj3D.rotationY+=20;
+				_moxing4.baseObj3D.rotationY+=10;
 			}
 		}
 		

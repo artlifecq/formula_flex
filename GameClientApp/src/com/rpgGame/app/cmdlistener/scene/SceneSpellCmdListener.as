@@ -105,6 +105,15 @@ package com.rpgGame.app.cmdlistener.scene
 		private function onResFightFailedBroadcastMessage(msg:ResFightFailedBroadcastMessage):void
 		{
 			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
+			if (MainRoleManager.actor.stateMachine.isTripleLockCaseSpell) 
+			{
+				MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_TRIPLE_ATTACK_LOCK);
+				if (MainRoleManager.actor.stateMachine.isPrewarWaiting)
+					MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_PREWAR);
+				else
+					MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE);
+			}
+			
 			var failID : int = msg.failType;
 			var failReason : String;
 			failReason=NotifyCfgData.getNotifyTextByID(failID);//yt修改，读取新的消息表格式
@@ -127,11 +136,14 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function onResFightBroadcastMessage(msg:ResFightBroadcastMessage):void
 		{
-			GameLog.addShow("技能流水号为： 对目标\t" + msg.uid);
+			//GameLog.addShow("技能流水号为： 对目标\t" + msg.uid);
 			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
 			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg, true);
 			ReleaseSpellHelper.releaseSpell(info);
-			
+			if (msg.personId.ToGID()==MainRoleManager.actorID) 
+			{
+				GameLog.addShow("主玩家释放技能：\t" + info.spellData.q_skillID);
+			}
 			
 			var skillId:int=msg.skillModelId&0xffffff;
 			var skillData:Q_skill_model=SpellDataManager.getSpellData(skillId);
