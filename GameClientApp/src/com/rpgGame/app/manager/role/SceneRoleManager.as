@@ -59,6 +59,8 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
+	import flash.utils.getTimer;
+	
 	import app.message.StallTypeDataProto;
 	
 	import gs.TweenMax;

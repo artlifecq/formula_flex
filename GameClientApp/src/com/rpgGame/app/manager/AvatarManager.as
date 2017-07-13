@@ -748,7 +748,7 @@ package com.rpgGame.app.manager
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
 			var ru : RenderUnit3D;
 			var rpd_body : RenderParamData3D = avatarInfo.rpd_body;
-			var rud_zhanqi : RenderParamData3D= avatarInfo.zhanqiEffMode;
+			var rud_zhanqi : RenderParamData3D= avatarInfo.zhanqiMode;
 			
 			if (rud_zhanqi != null)
 			{
@@ -864,7 +864,7 @@ package com.rpgGame.app.manager
 			var bodyEffectResID : String = null;
 			var fightsoulModeID:String = "";
 			var fightsoulEffectResId:String = "";
-			var zhanqiEffResId:String = "";
+			var zhanqiResID:String = "";
 			
 			var bodyMethodTypeEffectResID : String = null;
 			var heroModel : HeroModel = HeroModelCfgData.getInfo(roleData.body);
@@ -964,7 +964,7 @@ package com.rpgGame.app.manager
 			
 			if(zhanqiInfo)
 			{
-				zhanqiEffResId=zhanqiInfo.q_panel_show_id;
+				zhanqiResID=zhanqiInfo.q_panel_show_id;
 			}
 			
 			roleData.avatarInfo.setBodyResID(bodyResID, animatResID);
@@ -982,7 +982,7 @@ package com.rpgGame.app.manager
 			roleData.avatarInfo.deputyWeaponEffectOffset = deputyWeaponEffectOffset;
 			roleData.avatarInfo.setFightSoulResID(fightsoulModeID);
 			roleData.avatarInfo.fightSoulefffectID= fightsoulEffectResId;
-			roleData.avatarInfo.zhanqiSouleeffId = zhanqiEffResId;
+			roleData.avatarInfo.zhanqiResID = zhanqiResID;
 		}
 		
 		/**
@@ -1018,7 +1018,7 @@ package com.rpgGame.app.manager
 			var bodyEffectResID : String = null;
 			var fightsoulModeID:String = "";
 			var fightsoulEffectResId:String = "";
-			var zhanqiEffResId:String = "";
+			var zhanqiResID:String = "";
 			//			var bodyEffectResIDs : Array = null;
 			//			var bodyEffectOnMountResIDs : Array = null;
 			//			var bodyEffectBindBones : Array = null;
@@ -1116,7 +1116,7 @@ package com.rpgGame.app.manager
 				
 				if(zhanqiInfo)
 				{
-					zhanqiEffResId = zhanqiInfo.q_panel_show_id;
+					zhanqiResID = zhanqiInfo.q_panel_show_id;
 				}
 			}
 			
@@ -1144,7 +1144,7 @@ package com.rpgGame.app.manager
 			roleData.avatarInfo.deputyWeaponEffectOffset = deputyWeaponEffectOffset;
 			roleData.avatarInfo.setFightSoulResID(fightsoulModeID);
 			roleData.avatarInfo.fightSoulefffectID= fightsoulEffectResId;
-			roleData.avatarInfo.zhanqiSouleeffId = zhanqiEffResId;
+			roleData.avatarInfo.zhanqiResID = zhanqiResID;
 			
 			if (mountResID)
 			{
