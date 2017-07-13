@@ -49,7 +49,7 @@ package com.rpgGame.app.ui.tips
 			_skins.lbTeamName.text=info.occupyGuildName?info.occupyGuildName:"无";
 			_skins.lbRoleName.text=info.occupyCheifName?info.occupyCheifName:"无";
 			
-			_skins.lbVsBang.text=info.occupyGuildName&&info.attackGuildName?info.occupyGuildName+"VS"+info.attackGuildName:"无";
+			_skins.lbVsBang.htmlText=info.occupyGuildName&&info.attackGuildName?HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,info.occupyGuildName)+"VS"+HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,info.attackGuildName):"无";
 			if(tipsInfo.nextTime!=0){
 				_skins.lbTime.text=TimeUtil.changeDateToDateStr(new Date(tipsInfo.nextTime));
 			}else{
