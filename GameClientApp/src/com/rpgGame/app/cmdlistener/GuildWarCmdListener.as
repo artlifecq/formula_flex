@@ -12,6 +12,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.guildWar.message.ResGuildWarCityApplyInfoMessage;
 	import com.rpgGame.netData.guildWar.message.ResGuildWarCityBriefnessInfoMessage;
 	import com.rpgGame.netData.guildWar.message.ResGuildWarCityInfoMessage;
+	import com.rpgGame.netData.guildWar.message.ResGuildWarLeaderSkillUseMessage;
 	import com.rpgGame.netData.guildWar.message.ResGuildWarOperateResultMessage;
 	import com.rpgGame.netData.guildWar.message.ResGuildWarOreInfoMessage;
 	import com.rpgGame.netData.guildWar.message.ResGuildWarOrePositionMessage;
@@ -24,7 +25,7 @@ package com.rpgGame.app.cmdlistener
 	import org.game.netCore.connection.SocketConnection;
 	
 	/**
-	 *
+	 *帮派战消息处理
 	 *@author dik
 	 *2017-7-4
 	 **/
@@ -49,8 +50,14 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(253110, getResGuildWarCityBriefnessInfoMessage);
 			SocketConnection.addCmdListener(253111, getResGuildWarOrePositionMessage);
 			SocketConnection.addCmdListener(253112, getResGuildWarResultMessage);
+			SocketConnection.addCmdListener(253113, getResGuildWarLeaderSkillUseMessage);
 			
 			finish();
+		}
+		
+		private function getResGuildWarLeaderSkillUseMessage(msg:ResGuildWarLeaderSkillUseMessage):void
+		{
+			AppManager.showAppNoHide(AppConstant.GUILD_LEADER_SKILL_NOTICE,msg);
 		}
 		
 		private function getResGuildWarResultMessage(msg:ResGuildWarResultMessage):void
