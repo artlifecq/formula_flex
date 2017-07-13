@@ -2,6 +2,7 @@ package com.rpgGame.app.ui.scene
 {
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.WalkToRoleManager;
+	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
@@ -14,6 +15,7 @@ package com.rpgGame.app.ui.scene
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.GuildEvent;
+	import com.rpgGame.core.events.SpellEvent;
 	import com.rpgGame.coreData.cfg.QSinglecitybaseCfgData;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.clientConfig.Q_singlecitybase;
@@ -135,6 +137,9 @@ package com.rpgGame.app.ui.scene
 			defendCmapId=msg.defendCmapId;
 			leftTime=msg.endTime;
 			TimerServer.addLoop(updateTime,1000);
+			if(GuildManager.instance().isLeader){//是统帅
+				EventManager.dispatchEvent(SpellEvent.SHOW_GUILD_LEADER_SPELL);
+			}
 			
 			/*var myCamp:int=MainRoleManager.actorInfo.faction;
 			var testMsg:ResGuildWarResultMessage=new ResGuildWarResultMessage();
@@ -290,6 +295,9 @@ package com.rpgGame.app.ui.scene
 			EventManager.removeEvent(GuildEvent.GUILD_WAR_FINDORE,toOre);
 			EventManager.removeEvent(GuildEvent.GUILD_WCZB_OVER,overWczb);
 			TimerServer.remove(updateTime);
+			if(GuildManager.instance().isLeader){//是统帅
+				EventManager.dispatchEvent(SpellEvent.HIDE_GUILD_LEADER_SPELL);
+			}
 			icon1.destroy();
 			icon2.destroy();
 			icon3.destroy();
