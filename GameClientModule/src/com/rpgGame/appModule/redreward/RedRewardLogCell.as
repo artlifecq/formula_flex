@@ -26,6 +26,8 @@ package com.rpgGame.appModule.redreward
 		override protected function commitData():void
 		{
 			var info:RedRewardLog = this.data as RedRewardLog;
+			if(info==null)
+				return ;
 			var time:String = TimeUtil.formatTimeToSpecString(info.time.fValue);
 			var playerName:String = HtmlTextUtil.getTextColor(0x14a3f3,"["+info.playerName+"]");
 			var reward:String = HtmlTextUtil.getTextColor(0xffea00,info.count.toString()+"礼金!");

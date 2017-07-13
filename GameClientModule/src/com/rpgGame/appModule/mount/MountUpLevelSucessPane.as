@@ -22,6 +22,9 @@ package com.rpgGame.appModule.mount
 	import org.mokylin.skin.app.zuoqi.Zuoqi_JingjieOk_Skin;
 	
 	import starling.display.DisplayObject;
+	import starling.display.DisplayObjectContainer;
+	
+	import utils.TimerServer;
 	
 	public class MountUpLevelSucessPane extends SkinUIPanel
 	{
@@ -56,8 +59,8 @@ package com.rpgGame.appModule.mount
 		{
 			_mountdata = mountdata;
 			refeashModle();
-			_skin.mc_jieshu.gotoAndStop(mountLevel);
-			_skin.mc_name.gotoAndStop(mountLevel);
+			_skin.mc_jieshu.gotoAndStop(mountLevel-1);
+			_skin.mc_name.gotoAndStop(mountLevel-1);
 			var rewards:Vector.<ClientItemInfo> = mountdata.rewardItems;
 			var length:int = rewards.length;
 			_rewardIconLength = 0;
@@ -71,6 +74,11 @@ package com.rpgGame.appModule.mount
 				FaceUtil.SetItemGrid(icon,rewards[i],true);
 			}
 			
+			if(_mountdata.percent<0.9)
+				_skin.uiName.styleName = "ui/app/zuoqi/rpbftqjj.png";
+			else
+				_skin.uiName.styleName = "ui/app/zuoqi/jjcg.png";
+			_skin.uiName.x = 753-_skin.uiName.width/2;
 			while(_itemIcons.length>_rewardIconLength)
 			{
 				this.removeChild(_itemIcons.pop(),true);
@@ -87,6 +95,20 @@ package com.rpgGame.appModule.mount
 			_skin.num_lv.number = levelPower - lastPower;
 		}
 		
+		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
+		{
+			super.show(data,openTable,parentContiner);
+			TimerServer.addLoop(updateTime,20000);
+		}
+		override public function hide():void
+		{
+			super.hide();
+			TimerServer.remove(updateTime);
+		}
+		private function updateTime():void
+		{
+			(_curtentInter3D.baseObj3D as RenderUnit3D).setStatus(RoleActionType.SHOW_IDLE);
+		}
 		private var _rewardIconLength:int = 0;
 		
 		private function getNextIcon():IconCDFace

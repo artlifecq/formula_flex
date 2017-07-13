@@ -41,13 +41,13 @@ package com.rpgGame.appModule.redreward
 		private function updataShow():void
 		{
 			var count:int = RedRewardManager.instance().sendCount;
-			_itemPage1.updateMax(count ,count);
+			_itemPage1.updateMax(count ,count,false);
 			_skin.lbItem.text = count.toString();
 		}
 		public function refeashView():void
 		{
 			var count:int = RedRewardManager.instance().sendCount;
-			_itemPage1.updateMax(count ,count);
+			_itemPage1.updateMax(count ,count,false);
 			_skin.btn_all.dispatchEventWith(Event.TRIGGERED);
 			_skin.lbItem.text = count.toString();
 		}

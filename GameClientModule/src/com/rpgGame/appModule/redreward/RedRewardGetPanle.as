@@ -44,6 +44,7 @@ package com.rpgGame.appModule.redreward
 			_headImg=new UIAsset();
 			_headImg.x=101;
 			_headImg.y=32;
+			_headImg.touchable = false;
 			_skin.container.addChild(_headImg);
 			var mask:Sprite = new Sprite();
 			mask.graphics.drawRect(0,0,this.width,this.height);
@@ -58,6 +59,7 @@ package com.rpgGame.appModule.redreward
 		{
 			super.show(data,openTable,parentContiner);
 			EventManager.addEvent(RedRewardEvent.UPDATA_REDREWARDINFO,refeashOpenValue);
+			EventManager.addEvent(RedRewardEvent.UPDATA_COUNTINFO,refeashOpenValue);
 			EventManager.addEvent(RedRewardEvent.UPDATA_REDREWARDGETINFO,updataRedRewardOpenList);
 			refeashOpenValue();
 		}
@@ -246,6 +248,7 @@ package com.rpgGame.appModule.redreward
 			super.hide();
 			EventManager.removeEvent(RedRewardEvent.UPDATA_REDREWARDINFO,refeashOpenValue);
 			EventManager.removeEvent(RedRewardEvent.UPDATA_REDREWARDGETINFO,updataRedRewardOpenList);
+			EventManager.removeEvent(RedRewardEvent.UPDATA_COUNTINFO,refeashOpenValue);
 		}
 	}
 }

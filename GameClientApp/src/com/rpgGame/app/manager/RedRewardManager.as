@@ -2,6 +2,8 @@ package com.rpgGame.app.manager
 {
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.sender.RedRewardSender;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.RedRewardEvent;
 	import com.rpgGame.core.events.VipEvent;
 	import com.rpgGame.coreData.cfg.RedRewardCfgData;
@@ -17,6 +19,7 @@ package com.rpgGame.app.manager
 
 	public class RedRewardManager
 	{
+		private var _firstAutoOpen:Boolean = true;
 		private var _vipInfo:Q_redreward;
 
 		public function get vipInfo():Q_redreward
@@ -70,6 +73,12 @@ package com.rpgGame.app.manager
 				FunctionOpenManager.openAppPaneById(EmFunctionID.EM_SENDREDREWARD);
 			refeashVipData();
 			EventManager.dispatchEvent(RedRewardEvent.UPDATA_COUNTINFO);
+			if(_firstAutoOpen&&canGetReward)
+			{
+				AppManager.showAppNoHide(AppConstant.REDREWARD_OPEN);
+				_firstAutoOpen = false;
+			}
+			
 		}
 		
 		public function get rechaged():Boolean
