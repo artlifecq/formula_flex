@@ -549,10 +549,7 @@ package com.rpgGame.appModule.dungeon.multy
 		
 		private function tweeReward():void
 		{
-			if (!AppManager.isAppInScene(AppConstant.MULTY_PANL))
-			{
-				AppManager.showApp(AppConstant.MULTY_PANL);
-			}
+			AppManager.showAppNoHide(AppConstant.MULTY_PANL);
 			var i:int;
 			if(DungeonManager.passReward==1)
 			{

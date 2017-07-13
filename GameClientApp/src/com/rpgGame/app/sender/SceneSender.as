@@ -1,6 +1,7 @@
 package com.rpgGame.app.sender
 {
 	import com.gameClient.log.GameLog;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.FirstEnterSceneManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
@@ -85,6 +86,9 @@ package com.rpgGame.app.sender
 		public static function SendPlayerStopMessage():void
 		{
 			var msg:ReqPlayerStopMessage = new ReqPlayerStopMessage();
+			msg.pos=new Position();
+			msg.pos.x=MainRoleManager.actor.x;
+			msg.pos.y=MainRoleManager.actor.z;
 			SocketConnection.send(msg);
 		}
 		
