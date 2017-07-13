@@ -36,7 +36,7 @@ package com.rpgGame.coreData.utils
 				case 10: return "绝学技能总等级";
 				case 11: return "绝学技能手动激活";
 			}
-			return "未知条件";
+			return "未知条件:"+type;
 		}
 		
 		/**
@@ -46,8 +46,8 @@ package com.rpgGame.coreData.utils
 		{
 			switch(type)
 			{
-				case 1: return 1;
-				case 2: return 1;
+				case 1: return 313;
+				case 2: return 20;
 				case 3: return 30;
 				case 4: return 20;
 				case 5: return 10;

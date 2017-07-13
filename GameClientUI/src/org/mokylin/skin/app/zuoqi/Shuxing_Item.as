@@ -49,7 +49,7 @@ package org.mokylin.skin.app.zuoqi
 			ico_up = temp;
 			temp.name = "ico_up";
 			temp.styleName = "ui/common/tubiao/jobup.png";
-			temp.x = 97;
+			temp.x = 120;
 			temp.y = 3;
 			return temp;
 		}
@@ -77,7 +77,7 @@ package org.mokylin.skin.app.zuoqi
 			temp.text = "+28730(临时)";
 			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 120;
+			temp.width = 100;
 			temp.x = 41;
 			temp.y = 1;
 			return temp;
@@ -89,10 +89,10 @@ package org.mokylin.skin.app.zuoqi
 			lbUp = temp;
 			temp.name = "lbUp";
 			temp.text = "20";
+			temp.textAlign = "left";
 			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 60;
-			temp.x = 111;
+			temp.x = 130;
 			temp.y = 2;
 			return temp;
 		}

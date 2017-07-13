@@ -16,6 +16,7 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.cfg.animat.EffectAnimationCfgData;
+	import com.rpgGame.coreData.clientConfig.ClientSceneEffect;
 	import com.rpgGame.coreData.clientConfig.EffectAnimation;
 	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
 	import com.rpgGame.coreData.clientConfig.Q_SpellEffect;
@@ -1021,6 +1022,19 @@ package com.rpgGame.app.fight.spell
 //					effectRu.play(1);
 //				}
 			}
+		}
+		public static function createSceneEffect(effectRes:String, id : int, type : String, x : int, y : int) : RenderUnit3D
+		{
+			//如果场景中存在此类型此ID的角色，则移除之
+			var rud : RenderParamData3D = new RenderParamData3D(id, type, ClientConfig.getEffect(effectRes));
+			var effectRu : RenderUnit3D = RenderUnit3D.create(rud,true);
+			effectRu.repeat = 0;
+			effectRu.mouseEnable = false;
+			effectRu.play(0);
+			effectRu.visible = true;
+			effectRu.setGroundXY(x, y);
+			SceneManager.addSceneObjToScene(effectRu, true, false, false);
+			return effectRu;
 		}
 	}
 }

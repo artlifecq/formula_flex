@@ -78,7 +78,7 @@ package com.rpgGame.app.state.role
 		 *
 		 */
 		public static function walk(role : SceneRole, posx : Number, posy : Number, spacing : int = 0, data : Object = null, 
-									onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null) : void
+									onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null,needSprite:Boolean=false) : void
 		{
 			if (!role || !role.usable)
 				return;
@@ -91,7 +91,7 @@ package com.rpgGame.app.state.role
 				}
 			}
 			var position : Vector3D = new Vector3D(posx, posy, 0, role.position.w);
-			walkToPos(role, position, spacing, data, onArrive, onThrough, onUpdate);
+			walkToPos(role, position, spacing, data, onArrive, onThrough, onUpdate,needSprite);
 		}
 
 		/**
@@ -125,7 +125,7 @@ package com.rpgGame.app.state.role
 		 *@param noWalk 寻路路径小不用寻路，也返回方法 返回 role   任务上用到 ---------yt
 		 */
 		public static function walkToPos(role : SceneRole, pos : Vector3D, spacing : int = 0, data : Object = null, 
-										 onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null) : Boolean
+										 onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null,needSprite:Boolean=false) : Boolean
 		{
 			if (!role || !role.usable)
 				return false;
@@ -155,13 +155,13 @@ package com.rpgGame.app.state.role
 				}
 				SceneCursorHelper.getInstance().hideCursor();
 			}
-			return doWalkTo(role, pos, spacing, data,onArrive, onThrough, onUpdate);
+			return doWalkTo(role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite);
 			
 		}
 		private static var _timeOutId:uint;
 		private static var _timeOutNum:int=0;
 		public static function doWalkTo(role : SceneRole, pos : Vector3D, spacing : int = 0, data : Object = null, 
-										   onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null) : Boolean
+										   onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null,needSprite:Boolean=false) : Boolean
 		{
 			clearTimeout(_timeOutId);
 			if (!role || !role.usable)
@@ -173,7 +173,7 @@ package com.rpgGame.app.state.role
 				_timeOutNum++;
 				if(_timeOutNum<=20)
 				{
-					_timeOutId=setTimeout(function():void{doWalkTo(role, pos, spacing, data,onArrive, onThrough, onUpdate);},500);
+					_timeOutId=setTimeout(function():void{doWalkTo(role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite);},500);
 					return true;
 				}
 				else
@@ -184,14 +184,14 @@ package com.rpgGame.app.state.role
 			else
 			{
 				_timeOutNum=0;
-				return doWalkToPos(role, pos, spacing, data,onArrive, onThrough, onUpdate);
+				return doWalkToPos(role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite);
 			}
 			_timeOutNum=0;
 			return false
 		}
 		
 		public static function doWalkToPos(role : SceneRole, pos : Vector3D, spacing : int = 0, data : Object = null, 
-										   onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null) : Boolean
+										   onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null,needSprite:Boolean=false) : Boolean
 		{
             /*CONFIG::netDebug {
                 NetDebug.LOG("[RoleStateUtil] [doWalkToPos]");
@@ -241,6 +241,7 @@ package com.rpgGame.app.state.role
 			var ref : WalkMoveStateReference = walkRole.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
 			ref.setParams(moveSpeed, spacing, pos);
 			ref.data = data;
+			ref.needSpriteUp=needSprite;
 			ref.onMove(onWalkMove);
 			ref.onUpdate(onUpdate);
 			ref.onThrough(onWalkThrough, onThrough);
@@ -344,7 +345,11 @@ package com.rpgGame.app.state.role
 //			{
 //				return;
 //			}
-
+			if (ref.needSpriteUp) 
+			{
+				ref.needSpriteUp=false;
+				SceneSender.reqSpriteUp();
+			}
 			if ((ref.owner as SceneRole).isMainChar || (ref.owner as SceneRole).isMainCamouflage)
 			{
 				if (ref.path.length > 1)

@@ -2,6 +2,7 @@ package com.rpgGame.app.scene
 {
 	import com.game.engine3D.core.poolObject.IInstancePoolClass;
 	import com.game.engine3D.core.poolObject.InstancePool;
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.state.role.control.BingDongStateReference;
 	import com.rpgGame.app.state.role.control.BuffStateReference;
@@ -178,6 +179,7 @@ package com.rpgGame.app.scene
 			if (!buffList || buffList.length == 0)
 				return;
 			var len : int = buffList.length;
+			var isRemove:Boolean=false;
 			for (var i : int = 0; i < len; i++)
 			{
 				var currData : BuffData = buffList[i];
@@ -188,8 +190,13 @@ package com.rpgGame.app.scene
 					removeRoleState(currData);
 					removeBuffEffect(currData.cfgId);
 					EventManager.dispatchEvent(BuffEvent.REMOVE_BUFF, currData);
+					isRemove=true;
 					break;
 				}
+			}
+			if (!isRemove) 
+			{
+				GameLog.addShow("移除buff失败");
 			}
 		}
 		
@@ -295,6 +302,9 @@ package com.rpgGame.app.scene
 						break;
 					case 74://vip
 						_role.stateMachine.removeState(RoleStateType.CONTROL_VIP);
+						break;
+					case 121://冲刺
+						_role.stateMachine.removeState(RoleStateType.CONTROL_BUFF_SPRITEUP);
 						break;
 					default:
 						/*buffRef = _role.stateMachine.getReference(UnmovableStateReference) as UnmovableStateReference;
@@ -462,6 +472,9 @@ package com.rpgGame.app.scene
 						buffRef = _role.stateMachine.getReference(VipBuffStateReference) as VipBuffStateReference;
 						buffRef.setParams(buffData);
 						_role.stateMachine.transition(RoleStateType.CONTROL_VIP,buffRef);
+						break;
+					case 121://冲刺
+						_role.stateMachine.transition(RoleStateType.CONTROL_BUFF_SPRITEUP);
 						break;
 					default:
 						/*buffRef = _role.stateMachine.getReference(UnmovableStateReference) as UnmovableStateReference;

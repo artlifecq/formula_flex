@@ -48,7 +48,11 @@ package com.rpgGame.app.graphics
 			_isDestroyed = false;
 			deCtrl=new DecorCtrl(this);
 		}
-		
+		public function set headVisible(value:Boolean):void
+		{
+			_visible = value;
+			this.visible=value;
+		}
 		public function get isDestroyed():Boolean
 		{
 			return _isDestroyed;

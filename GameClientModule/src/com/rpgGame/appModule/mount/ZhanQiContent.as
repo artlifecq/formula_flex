@@ -78,28 +78,28 @@ package com.rpgGame.appModule.mount
 			var data : RenderParamData3D = new RenderParamData3D(0, "effect_ui", ClientConfig.getEffect(currentName));
 			data.forceLoad=true;//ui上的3d特效强制加载
 			var unit : RenderUnit3D = _curtentInterEff.addRenderUnitWith(data, 0);		
-			_curtentInterEff.x=340;
-			_curtentInterEff.y=480;
-			unit.setScale(3.5);
+			_curtentInterEff.x=357;
+			_curtentInterEff.y=400;
+			unit.setScale(2);
 			unit.addUnitAtComposite(unit);
 			this.addChild3D(_curtentInterEff);
 			
 			var anation:TargetAmationInfo = new TargetAmationInfo();
 			anation.target = _curtentInterEff;
 			anation.propName = "x";
-			anation.setValue(340,120);
+			anation.setValue(357,137);
 			_amationInfos.push(anation);
 			
 			anation = new TargetAmationInfo();
 			anation.target = _curtentInterEff;
 			anation.propName = "y";
-			anation.setValue(480,520);
+			anation.setValue(400,440);
 			_amationInfos.push(anation);
 			
 			anation = new TargetAmationInfo();
 			anation.target = unit;
 			anation.propName = "scale";
-			anation.setValue(3.5,2);
+			anation.setValue(2,1);
 			_amationInfos.push(anation);
 			
 			if(next==null) return;
@@ -109,7 +109,7 @@ package com.rpgGame.appModule.mount
 			data.forceLoad=true;//ui上的3d特效强制加载
 			unit = _nextInterEff.addRenderUnitWith(data, 0);
 			_nextInterEff.x=590;
-			_nextInterEff.y=370;
+			_nextInterEff.y=310;
 			unit.setScale(2);
 			unit.addUnitAtComposite(unit);
 			this.addChild3D(_nextInterEff);
@@ -123,13 +123,13 @@ package com.rpgGame.appModule.mount
 			anation = new TargetAmationInfo();
 			anation.target = _nextInterEff;
 			anation.propName = "y";
-			anation.setValue(370,480);
+			anation.setValue(310,420);
 			_amationInfos.push(anation);
 			
 			anation = new TargetAmationInfo();
 			anation.target = unit;
 			anation.propName = "scale";
-			anation.setValue(2,3.5);
+			anation.setValue(1,2);
 			_amationInfos.push(anation);
 			for each(var info:TargetAmationInfo in _amationInfos)
 			{
