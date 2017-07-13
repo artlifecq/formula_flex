@@ -66,6 +66,26 @@ package com.rpgGame.coreData.cfg
         public static function getAreaPointsByID(id : uint) : Vector.<Point> {
             return _posDic[id];
         }
+		/**计算多边形中点*/
+		public static function getAreaPointsCenter(points:Vector.<Point>) : Point {
+			
+			if(points&&points.length>0)
+			{
+				var center:Point=new Point();
+				var addX:Number=0,addY:Number=0;
+				for(var i:int=0;i<points.length;i++)
+				{
+					addX+=points[i].x;
+					addY+=points[i].y;
+				}
+				center.x=addX/points.length;
+				center.y=addY/points.length;
+				return center;
+			}
+			
+			return null;
+		}
+		
 		
 		/**根据地图id返回阻挡点*/
 		public static function getObstacleAreas(mid:int) : Vector.<ClientMapAreaData>
