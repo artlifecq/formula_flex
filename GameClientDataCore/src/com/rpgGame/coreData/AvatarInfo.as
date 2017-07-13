@@ -327,7 +327,7 @@ package com.rpgGame.coreData
 			_zhanqiResID = value;
 			if(_zhanqiResID != null && _zhanqiResID != "")
 			{
-				_zhanqiMode = new RenderParamData3D(RenderUnitID.ZHANQI, RenderUnitType.ZHANQI, ClientConfig.getZhanqi("zhanqi_002/zhanqi_002"));
+				_zhanqiMode = new RenderParamData3D(RenderUnitID.ZHANQI, RenderUnitType.ZHANQI, ClientConfig.getZhanqi(_zhanqiResID));
 				_zhanqiMode.mouseEnable = false;
 				_zhanqiMode.clearSameType = false;
 				_zhanqiMode.priority = _priority;
