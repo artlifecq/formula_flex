@@ -16,11 +16,15 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.app.manager.chat.ChatManager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.fightsoul.FightSoulManager;
+	import com.rpgGame.app.manager.hint.FloatingText;
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleManager;
 	import com.rpgGame.app.richText.RichTextCustomLinkType;
 	import com.rpgGame.app.richText.RichTextCustomUtil;
+	import com.rpgGame.app.state.role.RoleStateUtil;
+	import com.rpgGame.app.state.role.control.SpriteUpBuffStateReference;
+	import com.rpgGame.app.state.role.control.VipBuffStateReference;
 	import com.rpgGame.app.ui.main.dungeon.JiXianTiaoZhanExtPop;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
@@ -29,8 +33,10 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
+	import com.rpgGame.coreData.role.GirlPetData;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.CharAttributeType;
+	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
 	import com.rpgGame.netData.backpack.bean.TempItemInfo;
 	import com.rpgGame.netData.map.bean.PetInfo;
@@ -215,8 +221,25 @@ package   com.rpgGame.app.manager.debug
 			{
 				FunctionOpenManager.needShowOpenMode = arg[0]==1;
 			});
-//			commandList.put( ".pet", function (...arg):void
-//			{
+			commandList.put( ".server", function (...arg):void
+			{
+				FloatingText.showUp(MessageMgr.Ins.ip);
+			});
+			commandList.put( ".sprite", function (...arg):void
+			{
+				if (MainRoleManager.actor.stateMachine.isSpriteUp) 
+				{
+					MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_BUFF_SPRITEUP);
+				}
+				else
+				{
+					var buffRef:SpriteUpBuffStateReference = MainRoleManager.actor.stateMachine.getReference(SpriteUpBuffStateReference) as SpriteUpBuffStateReference;
+					MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_BUFF_SPRITEUP,buffRef);
+				}
+			});
+			commandList.put( ".pet", function (...arg):void
+			{
+				AppManager.showApp(AppConstant.PET_PANLE);
 //				var mod:int = arg[0];
 //				
 //				var petInfo:PetInfo=new PetInfo();
@@ -228,7 +251,7 @@ package   com.rpgGame.app.manager.debug
 //				var data:GirlPetData=new GirlPetData();
 //				data.setServerData(petInfo);
 //				SceneRoleManager.getInstance().createGirlPet(data);
-//			});
+			});
 		}
 		
 		

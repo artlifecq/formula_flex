@@ -92,7 +92,10 @@ package com.rpgGame.coreData.type
 		public static const HUNYIN_JIEZI : int = rEnum.next;
 		/**点名**/
 		public static const BOSS_SELECT : int = rEnum.next;
-		
+		/**
+		 * 侍从ui模型
+		 */		
+		public static const PET_MODELl:int=rEnum.next;
 //	/**角色光环特效ID*/
 //		public static const MAGIC_RING:int = rEnum.next;
 //		/**怪物光环*/
