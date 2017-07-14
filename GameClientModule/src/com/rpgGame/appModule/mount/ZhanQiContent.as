@@ -8,6 +8,9 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
 	import com.rpgGame.coreData.clientConfig.Q_warflag;
+	import com.rpgGame.coreData.type.RoleActionType;
+	
+	import feathers.controls.NumericStepper;
 	
 	import org.mokylin.skin.app.zuoqi.Zhanqi_Skin;
 	
@@ -72,16 +75,19 @@ package com.rpgGame.appModule.mount
 				_nextInterEff = null;
 			}
 			
+			var scaleXY:Number=3;
+			
 			_amationInfos=new Vector.<TargetAmationInfo>();
 			var currentName:String=current.q_panel_show_id;
 			_curtentInterEff=new InterObject3D();
-			var data : RenderParamData3D = new RenderParamData3D(0, "effect_ui", ClientConfig.getEffect(currentName));
+			var data : RenderParamData3D = new RenderParamData3D(0, "effect_ui", ClientConfig.getZhanqi(currentName));
 			data.forceLoad=true;//ui上的3d特效强制加载
 			var unit : RenderUnit3D = _curtentInterEff.addRenderUnitWith(data, 0);		
 			_curtentInterEff.x=357;
 			_curtentInterEff.y=400;
-			unit.setScale(2);
+			unit.setScale(scaleXY);
 			unit.addUnitAtComposite(unit);
+			unit.setStatus(RoleActionType.STAND);
 			this.addChild3D(_curtentInterEff);
 			
 			var anation:TargetAmationInfo = new TargetAmationInfo();
@@ -108,9 +114,10 @@ package com.rpgGame.appModule.mount
 			data = new RenderParamData3D(0, "effect_ui", ClientConfig.getEffect(nextName));
 			data.forceLoad=true;//ui上的3d特效强制加载
 			unit = _nextInterEff.addRenderUnitWith(data, 0);
+			unit.setStatus(RoleActionType.STAND);
 			_nextInterEff.x=590;
 			_nextInterEff.y=310;
-			unit.setScale(2);
+			unit.setScale(scaleXY);
 			unit.addUnitAtComposite(unit);
 			this.addChild3D(_nextInterEff);
 			

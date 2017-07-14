@@ -95,6 +95,10 @@ package com.rpgGame.app.fight.spell
 					ref.onStartFrame(onSelfEffectFrame);
 					ref.onHitFrame(onAttackHitFrame);
 //					ref.onBreakFrame(onBreakFrame);
+					try{if((spellInfo.atkor.data as MonsterData).modelID==6206)
+					{
+						Lyt.a(spellInfo.spellData.q_skillName);
+					}}catch(e:Error){}
 					spellInfo.atkor.stateMachine.transition(RoleStateType.ACTION_ATTACK, ref);
 				}
 				else

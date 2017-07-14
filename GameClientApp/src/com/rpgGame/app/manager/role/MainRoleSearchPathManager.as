@@ -360,7 +360,7 @@ package com.rpgGame.app.manager.role
 			
 			//寻路
 			//获取$fromScene所在场景的所有出口
-			var transOuts : Array = TransCfgData.getSceneTransportObj($fromScene);
+			var transOuts : Array = TransCfgData.getSceneTransportObj($fromScene,MainRoleManager.actorInfo.job);
 			//var transOuts : Array = TranportsDataManager.getSceneTransportProtos($fromScene, MainRoleManager.actorInfo.sceneSequence);
 			
 			if (!transOuts || transOuts.length == 0)
