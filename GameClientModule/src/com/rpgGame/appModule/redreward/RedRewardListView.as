@@ -6,6 +6,8 @@ package com.rpgGame.appModule.redreward
 	import com.rpgGame.core.events.RedRewardEvent;
 	import com.rpgGame.netData.redreward.bean.RedRewardState;
 	
+	import feathers.controls.ScrollBarDisplayMode;
+	import feathers.controls.Scroller;
 	import feathers.data.ListCollection;
 	import feathers.layout.VerticalLayout;
 	
@@ -26,6 +28,9 @@ package com.rpgGame.appModule.redreward
 			this.x = 294;
 			this.y = 117;
 			_skin.ListItem.itemRendererType = RedRewardListCell;
+			_skin.ListItem.scrollBarDisplayMode = ScrollBarDisplayMode.ALWAYS_VISIBLE;
+			_skin.ListItem.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
+			_skin.ListItem.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
 			var layout:VerticalLayout = new VerticalLayout();
 			layout.gap = 0;
 			_skin.ListItem.layout = layout;

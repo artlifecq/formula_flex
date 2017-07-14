@@ -13,20 +13,15 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.UNIQUEID;
 	import com.rpgGame.coreData.cfg.LostSkillData;
 	import com.rpgGame.coreData.cfg.LostSkillUpData;
-	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_up;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.SceneCharType;
-	import com.rpgGame.netData.backpack.bean.ItemInfo;
-	import com.rpgGame.netData.fight.message.ResAttackResultMessage;
 	import com.rpgGame.netData.lostSkill.bean.SkillStateInfo;
 	import com.rpgGame.netData.lostSkill.message.CSActivitSkillMessage;
 	import com.rpgGame.netData.lostSkill.message.CSChangeSkillMessage;
-	
-	import flash.utils.getTimer;
 	
 	import app.message.MonsterDataProto.MonsterType;
 	
@@ -147,7 +142,7 @@ package com.rpgGame.app.manager
 				case 2:
 				case 6:
 				case 7:
-					return value/100;
+					return value/1000;
 				case 3:
 				case 5:
 					return value; 

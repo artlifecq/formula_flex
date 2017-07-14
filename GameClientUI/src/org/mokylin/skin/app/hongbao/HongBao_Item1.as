@@ -5,7 +5,7 @@ package org.mokylin.skin.app.hongbao
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import org.mokylin.skin.app.hongbao.HongBao_ItemBg;
-
+	
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
@@ -17,12 +17,14 @@ package org.mokylin.skin.app.hongbao
 		//                                定义成员变量
 		//==========================================================================
 		public var bg:feathers.controls.SkinnableContainer;
-
+		
 		public var lbName:feathers.controls.Label;
-
+		
 		public var lbNum:feathers.controls.Label;
-
-
+		
+		public var lbmsg:feathers.controls.Label;
+		
+		
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
@@ -33,29 +35,17 @@ package org.mokylin.skin.app.hongbao
 			this.currentState = "normal";
 			this.height = 31;
 			this.width = 263;
-			this.elementsContent = [bg_i(),lbNum_i(),lbName_i(),__HongBao_Item1_Label1_i()];
+			this.elementsContent = [bg_i(),lbNum_i(),lbName_i(),lbmsg_i()];
 			
 			states = {
 			};
 			skinNames={};
 		}
-
-
+		
+		
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __HongBao_Item1_Label1_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "来自土豪";
-			temp.color = 0xEAEABC;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 66;
-			temp.x = 77;
-			temp.y = 7;
-			return temp;
-		}
-
 		private function bg_i():feathers.controls.SkinnableContainer
 		{
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
@@ -69,7 +59,7 @@ package org.mokylin.skin.app.hongbao
 			temp.y = 0;
 			return temp;
 		}
-
+		
 		private function lbName_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -83,7 +73,7 @@ package org.mokylin.skin.app.hongbao
 			temp.y = 7;
 			return temp;
 		}
-
+		
 		private function lbNum_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -97,6 +87,20 @@ package org.mokylin.skin.app.hongbao
 			temp.y = 7;
 			return temp;
 		}
-
+		
+		private function lbmsg_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbmsg = temp;
+			temp.name = "lbmsg";
+			temp.text = "来自土豪";
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.width = 66;
+			temp.x = 77;
+			temp.y = 7;
+			return temp;
+		}
+		
 	}
 }

@@ -5,6 +5,8 @@ package com.rpgGame.appModule.redreward
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.RedRewardSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.RedRewardEvent;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.type.AssetUrl;
@@ -148,7 +150,10 @@ package com.rpgGame.appModule.redreward
 					refeashPageView(_currentPage+1);
 					break;
 				case _skin.lbVip:
-					GlobalFunction.iWantRecharge();
+					if(redmgr.rechaged)
+						AppManager.showApp(AppConstant.VIP_PANEL);
+					else
+						GlobalFunction.iWantRecharge();
 					break;
 			}
 		}
@@ -177,6 +182,7 @@ package com.rpgGame.appModule.redreward
 			{
 				var cell:RedRewardMoreCell = getMoreNextCell(i);
 				cell.y = 31*i;
+				cell.updata(i,_playerInfolist);
 				_skin.itemgroup.addChild(cell);
 			}
 			var count:int = 0;
@@ -198,7 +204,7 @@ package com.rpgGame.appModule.redreward
 			Flip1_Skin(_skin.skinFlip.skin).btnDec.visible = _currentPage>1;
 			Flip1_Skin(_skin.skinFlip.skin).btnAdd.visible = _currentPage<_totalPage;
 			Flip1_Skin(_skin.skinFlip.skin).textDisplay.text = _currentPage.toString()+"/"+_totalPage.toString();
-			var startIndex:int = _currentPage*pageMaxCellCount;
+			var startIndex:int = (_currentPage-1)*pageMaxCellCount;
 			for(var i:int = 0;i<pageMaxCellCount;i++)
 			{
 				var cell:RedRewardMoreCell = getMoreNextCell(i);

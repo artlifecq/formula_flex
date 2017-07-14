@@ -33,6 +33,7 @@ package com.rpgGame.appModule.redreward
 		private function addTostageHandler(e:Event):void
 		{
 			EventManager.addEvent(RedRewardEvent.UPDATA_COUNTINFO,updataShow);
+			updataShow();
 		}
 		private function removeformstageHandler(e:Event):void
 		{
@@ -57,18 +58,7 @@ package com.rpgGame.appModule.redreward
 			switch(target)
 			{
 				case _skin.btnFa:
-					var count:int = _itemPage1.getValue();
-					if(count==0)
-					{
-						NoticeManager.showNotifyById(91001);
-						return ;
-					}
-					if(RedRewardManager.instance().sendCount<=0)
-					{
-						NoticeManager.showNotifyById(91002);
-						return ;
-					}
-					RedRewardSender.sendReward(count);
+					RedRewardManager.instance().sendReward( _itemPage1.getValue());
 					break;
 			}
 		}

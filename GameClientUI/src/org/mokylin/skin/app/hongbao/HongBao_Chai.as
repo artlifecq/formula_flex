@@ -215,8 +215,6 @@ package org.mokylin.skin.app.hongbao
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grpChai = temp;
 			temp.name = "grpChai";
-			temp.touchable = false;
-			temp.touchGroup = true;
 			temp.x = 12;
 			temp.y = 57;
 			temp.elementsContent = [btnChai_i(),grpMsg_i(),grpFa_i(),grpYiJian_i(),lbVip_i()];

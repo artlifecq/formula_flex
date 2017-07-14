@@ -123,6 +123,23 @@ package com.rpgGame.app.manager
 			EventManager.dispatchEvent(RedRewardEvent.UPDATA_REDREWARDGETINFO);
 		}
 		
+		public function sendReward(count:int):void
+		{
+			if(count==0)
+			{
+				NoticeManager.showNotifyById(91001);
+				return ;
+			}
+			if(RedRewardManager.instance().sendCount<=0)
+			{
+				NoticeManager.showNotifyById(91002);
+				return ;
+			}
+			_selfCount -= count;
+			EventManager.dispatchEvent(RedRewardEvent.UPDATA_REDREWARDGETINFO);
+			RedRewardSender.sendReward(count);
+		}
+		
 		private function refeashVipData():void
 		{
 			var viplevel:int = 0;
@@ -216,7 +233,10 @@ package com.rpgGame.app.manager
 				return ;
 			if(!this.isMaxVipLevel&&_redCount>0&&_dayCount==0)
 			{
-				NoticeManager.showNotifyById(91003);
+				if(_recharged)
+					NoticeManager.showNotifyById(91003);
+				else
+					NoticeManager.showNotifyById(91007);
 				return ;
 			}
 			var type:int = 0;
