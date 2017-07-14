@@ -228,8 +228,9 @@ package com.rpgGame.coreData.type
 		public static const UI_JJBREWARD:String="ui_meirijingjijiangli";
 		public static const EFFECT_SPRITE:String="tx_chongfengjiaoxiayanchen";
 		
-		
 		public static const EFFECT_HEAD_BLEED:String="tx_liuxuexiaoguo";
+		
+		public static const UI_PET_BALL:String="ui_meiren_xiaoqiu";
 		public function EffectUrl()
 		{
 		}

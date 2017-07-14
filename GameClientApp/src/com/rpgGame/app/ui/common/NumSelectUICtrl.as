@@ -36,6 +36,8 @@ package  com.rpgGame.app.ui.common
 		private var lab:Label;
 		private var btnMin:Button;
 		
+		private var _deflatMin:int= 1;
+		
 		/**
 		 *是否开启加速 ,默认开启
 		 */		
@@ -49,19 +51,20 @@ package  com.rpgGame.app.ui.common
 		 * @param maxValue 一键最大值
 		 * @param minValue 一键最最小值
 		 */		
-		public function NumSelectUICtrl(btnA:Button,btnD:Button,btnMax:Button,btnMin:Button,la:Label,addMax:int,maxValue:int,changeCall:Function)
+		public function NumSelectUICtrl(btnA:Button,btnD:Button,btnMax:Button,btnMin:Button,la:Label,addMax:int,maxValue:int,changeCall:Function,deflatmain:int=1)
 		{
 			this.lab=la;
 			this.btnAdd=btnA;
 			this.btnDec=btnD;
 			this.btnMax=btnMax;
 			this.btnMin=btnMin;
+			_deflatMin = deflatmain;
 			MAX_ALLOW=addMax;
 			_maxCount=maxValue;
 			callBack=changeCall;
 			initEvent();
 			gTimer=new GameTimer("NumSelectUICtrl",100,0,onTime);
-			setcurNum(1);
+			setcurNum(_deflatMin);
 		}
 		
 		public function updateMax(maxValue:int,addMax:int,reset:Boolean=true):void
@@ -70,9 +73,16 @@ package  com.rpgGame.app.ui.common
 			this.MAX_ALLOW=addMax;
 			if (reset) 
 			{
-				setcurNum(1);
+				setcurNum(_deflatMin);
 			}
-			
+		}
+		
+		public function maxValue():void
+		{
+			if (curNum!=maxCount) 
+			{
+				setcurNum(maxCount);
+			}
 		}
 		private function onTime():void
 		{
@@ -222,7 +232,7 @@ package  com.rpgGame.app.ui.common
 		{
 			
 			curNum=Math.min(num,MAX_ALLOW);
-			curNum=Math.max(curNum,1);
+			curNum=Math.max(curNum,_deflatMin);
 			this.lab.text=getText();
 			if (callBack) 
 			{
@@ -236,11 +246,7 @@ package  com.rpgGame.app.ui.common
 		private function onSetMax(eve:Event):void
 		{
 			// TODO Auto Generated method stub
-			if (curNum!=maxCount) 
-			{
-				setcurNum(maxCount);
-			}
-			
+			maxValue();
 		}
 		public function getValue():int
 		{

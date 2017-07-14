@@ -1028,11 +1028,12 @@ package com.rpgGame.app.fight.spell
 			//如果场景中存在此类型此ID的角色，则移除之
 			var rud : RenderParamData3D = new RenderParamData3D(id, type, ClientConfig.getEffect(effectRes));
 			var effectRu : RenderUnit3D = RenderUnit3D.create(rud,true);
-			effectRu.repeat = 0;
+			effectRu.repeat = 1;
 			effectRu.mouseEnable = false;
 			effectRu.play(0);
 			effectRu.visible = true;
 			effectRu.setGroundXY(x, y);
+			effectRu.setPlayCompleteCallBack(SceneManager.removeSceneObjFromScene);
 			SceneManager.addSceneObjToScene(effectRu, true, false, false);
 			return effectRu;
 		}

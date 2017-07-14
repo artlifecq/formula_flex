@@ -1,4 +1,4 @@
-package com.rpgGame.netData.pet.message{
+package com.rpgGame.netData.guildWar.message{
 	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
 	
@@ -9,20 +9,20 @@ package com.rpgGame.netData.pet.message{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * 侍宠改变攻击目标
+	 * 通知统帅使用技能
 	 */
-	public class ReqPetChangeAttackTargetMessage extends Message {
+	public class ResGuildWarLeaderSkillUseMessage extends Message {
 	
-		//角色Id
-		private var _petTargetId: long;
+		//统帅Id
+		private var _leaderPlayerId: long;
 		
 		
 		/**
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
-			//角色Id
-			writeLong(_petTargetId);
+			//统帅Id
+			writeLong(_leaderPlayerId);
 			return true;
 		}
 		
@@ -30,8 +30,8 @@ package com.rpgGame.netData.pet.message{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
-			//角色Id
-			_petTargetId = readLong();
+			//统帅Id
+			_leaderPlayerId = readLong();
 			return true;
 		}
 		
@@ -40,22 +40,22 @@ package com.rpgGame.netData.pet.message{
 		 * @return 
 		 */
 		override public function getId(): int {
-			return 148202;
+			return 253113;
 		}
 		
 		/**
-		 * get 角色Id
+		 * get 统帅Id
 		 * @return 
 		 */
-		public function get petTargetId(): long{
-			return _petTargetId;
+		public function get leaderPlayerId(): long{
+			return _leaderPlayerId;
 		}
 		
 		/**
-		 * set 角色Id
+		 * set 统帅Id
 		 */
-		public function set petTargetId(value: long): void{
-			this._petTargetId = value;
+		public function set leaderPlayerId(value: long): void{
+			this._leaderPlayerId = value;
 		}
 		
 	}

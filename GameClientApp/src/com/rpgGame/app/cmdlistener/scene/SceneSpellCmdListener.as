@@ -301,6 +301,29 @@ package com.rpgGame.app.cmdlistener.scene
             if (null == role) {
                 return;
             }
+			
+			if (role.isMainChar||role.ownerIsMainChar) 
+			{
+				var qSkill:Q_skill_model=SpellDataManager.getSpellData(msg.skillId);
+				//打断了重置cd
+				if (qSkill&&qSkill.q_cancel_cd==1) 
+				{
+					SkillCDManager.getInstance().cancelSkillCD(qSkill);
+				}
+				if (qSkill.q_singing_time!=0) 
+				{
+					EventManager.dispatchEvent(SkillEvent.SKILL_CANCEL);
+				}
+				MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_ATTACK_HARD);
+				if (MainRoleManager.actor.stateMachine.isTripleLockCaseSpell) 
+				{
+					MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_TRIPLE_ATTACK_LOCK);
+				}
+				if (MainRoleManager.actor.stateMachine.isPrewarWaiting)
+					MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_PREWAR,null,true);
+				else
+					MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE,null,true);
+			}
         }
         
         private function onBuffSkillMessage(msg : SCBuffSkillMessage) : void {

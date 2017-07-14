@@ -10,7 +10,7 @@ package org.mokylin.skin.app.mail
 	import feathers.controls.TabBar;
 	import feathers.controls.UIAsset;
 	import feathers.layout.HorizontalLayout;
-	import org.mokylin.skin.common.Erji_panelbg_Skin;
+	import org.mokylin.skin.common.TongYongPanelbg3;
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 	import org.mokylin.skin.component.check.CheckBoxSkin_1;
@@ -49,7 +49,7 @@ package org.mokylin.skin.app.mail
 			
 			this.currentState = "normal";
 			this.height = 586;
-			this.width = 434;
+			this.width = 437;
 			this.elementsContent = [__MailReceive_Skin_SkinnableContainer1_i(),__MailReceive_Skin_UIAsset1_i(),tab_nv_i(),chkSelect_i(),__MailReceive_Skin_UIAsset2_i(),btnCancel_i(),btnTiqu_i(),listMail_i(),__MailReceive_Skin_UIAsset3_i(),imgNO_i()];
 			
 			states = {
@@ -79,9 +79,8 @@ package org.mokylin.skin.app.mail
 		{
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			temp.height = 586;
-			var skin:StateSkin = new org.mokylin.skin.common.Erji_panelbg_Skin()
+			var skin:StateSkin = new org.mokylin.skin.common.TongYongPanelbg3()
 			temp.skin = skin
-			temp.width = 434;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -93,8 +92,8 @@ package org.mokylin.skin.app.mail
 			temp.height = 440;
 			temp.styleName = "ui/common/background/neikuang_1.png";
 			temp.width = 404;
-			temp.x = 14;
-			temp.y = 71;
+			temp.x = 18;
+			temp.y = 82;
 			return temp;
 		}
 
@@ -102,8 +101,8 @@ package org.mokylin.skin.app.mail
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/mail/quanxuan.png";
-			temp.x = 63;
-			temp.y = 543;
+			temp.x = 67;
+			temp.y = 554;
 			return temp;
 		}
 
@@ -113,8 +112,8 @@ package org.mokylin.skin.app.mail
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/mail/sxx.png";
-			temp.x = 195;
-			temp.y = 12;
+			temp.x = 183.5;
+			temp.y = 16;
 			return temp;
 		}
 
@@ -127,9 +126,9 @@ package org.mokylin.skin.app.mail
 			temp.label = "删除";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
 			temp.color = 0xCFC6AE;
-			temp.width = 79;
-			temp.x = 236;
-			temp.y = 528;
+			temp.width = 90;
+			temp.x = 230;
+			temp.y = 533;
 			return temp;
 		}
 
@@ -142,9 +141,9 @@ package org.mokylin.skin.app.mail
 			temp.label = "提取附件";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xCFC6AE;
-			temp.width = 73;
-			temp.x = 323;
-			temp.y = 531;
+			temp.width = 90;
+			temp.x = 327;
+			temp.y = 533;
 			return temp;
 		}
 
@@ -154,8 +153,8 @@ package org.mokylin.skin.app.mail
 			chkSelect = temp;
 			temp.name = "chkSelect";
 			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
-			temp.x = 37;
-			temp.y = 539;
+			temp.x = 41;
+			temp.y = 550;
 			return temp;
 		}
 
@@ -165,8 +164,8 @@ package org.mokylin.skin.app.mail
 			imgNO = temp;
 			temp.name = "imgNO";
 			temp.styleName = "ui/app/mail/dangqian.png";
-			temp.x = 69;
-			temp.y = 236;
+			temp.x = 73;
+			temp.y = 247;
 			return temp;
 		}
 
@@ -178,8 +177,8 @@ package org.mokylin.skin.app.mail
 			temp.height = 428;
 			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
 			temp.width = 394;
-			temp.x = 19;
-			temp.y = 77;
+			temp.x = 23;
+			temp.y = 88;
 			return temp;
 		}
 
@@ -191,8 +190,8 @@ package org.mokylin.skin.app.mail
 			temp.btnWidth = 67;
 			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_pack;
 			temp.width = 71;
-			temp.x = 20;
-			temp.y = 44;
+			temp.x = 24;
+			temp.y = 55;
 			temp.layout = __MailReceive_Skin_HorizontalLayout1_i();
 			temp.dataProvider = __MailReceive_Skin_ArrayCollection1_i();
 			return temp;

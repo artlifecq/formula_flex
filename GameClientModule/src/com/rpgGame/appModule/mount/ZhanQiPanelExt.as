@@ -8,7 +8,6 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.appModule.shop.ItemGetAdvisePanelExt;
 	import com.rpgGame.appModule.systemset.TouchToState;
 	import com.rpgGame.core.events.ItemEvent;
-	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.StaticValue;
@@ -56,9 +55,6 @@ package com.rpgGame.appModule.mount
 			_zhanqiExtraItemList.push(new ZhanQiExtraButton(_skin.btn_zizhidan,519,_skin.lbZhizi));
 			_zhanqiExtraItemList.push(new ZhanQiExtraButton(_skin.btn_chengzhangdan,520,_skin.lbJinjie));
 			_touchState=new TouchToState(_skin.lab_xuyaowupin,labTouchHandler);
-			
-			MCUtil.removeSelf(_skin.num_lv);
-			MCUtil.removeSelf(_skin.ico_up);
 		}
 		
 		private function initEvent():void

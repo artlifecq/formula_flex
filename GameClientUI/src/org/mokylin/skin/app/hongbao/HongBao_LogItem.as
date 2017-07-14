@@ -5,7 +5,7 @@ package org.mokylin.skin.app.hongbao
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import org.mokylin.skin.common.ItemBg;
-
+	
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
@@ -17,10 +17,10 @@ package org.mokylin.skin.app.hongbao
 		//                                定义成员变量
 		//==========================================================================
 		public var bg:feathers.controls.SkinnableContainer;
-
+		
 		public var lbName:feathers.controls.Label;
-
-
+		
+		
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
@@ -29,14 +29,16 @@ package org.mokylin.skin.app.hongbao
 			super();
 			
 			this.currentState = "normal";
+			this.height = 33;
+			this.width = 619;
 			this.elementsContent = [bg_i(),lbName_i()];
 			
 			states = {
 			};
 			skinNames={};
 		}
-
-
+		
+		
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
@@ -53,7 +55,7 @@ package org.mokylin.skin.app.hongbao
 			temp.y = 0;
 			return temp;
 		}
-
+		
 		private function lbName_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -61,13 +63,13 @@ package org.mokylin.skin.app.hongbao
 			temp.name = "lbName";
 			temp.text = "[2017-6-17 13:38:39]";
 			temp.textAlign = "left";
-			temp.color = 0xEAEABC;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 600;
 			temp.x = 15;
 			temp.y = 9;
 			return temp;
 		}
-
+		
 	}
 }

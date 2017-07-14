@@ -26,13 +26,14 @@ package com.rpgGame.appModule.redreward
 		
 		private function initView():void
 		{
-			_itemPage1 = new NumSelectUICtrl(_skin.btn_max,_skin.btn_min,_skin.btn_all,null,_skin.lbBuyNum,1,int.MAX_VALUE,null);
+			_itemPage1 = new NumSelectUICtrl(_skin.btn_max,_skin.btn_min,_skin.btn_all,null,_skin.lbBuyNum,1,int.MAX_VALUE,null,0);
 			_skin.container.addEventListener(Event.ADDED_TO_STAGE,addTostageHandler);
 			_skin.container.addEventListener(Event.REMOVED_FROM_STAGE,removeformstageHandler);
 		}
 		private function addTostageHandler(e:Event):void
 		{
 			EventManager.addEvent(RedRewardEvent.UPDATA_COUNTINFO,updataShow);
+			updataShow();
 		}
 		private function removeformstageHandler(e:Event):void
 		{
@@ -41,14 +42,15 @@ package com.rpgGame.appModule.redreward
 		private function updataShow():void
 		{
 			var count:int = RedRewardManager.instance().sendCount;
-			_itemPage1.updateMax(count ,count);
+			_itemPage1.updateMax(count ,count,false);
+			_itemPage1.maxValue();
 			_skin.lbItem.text = count.toString();
 		}
 		public function refeashView():void
 		{
 			var count:int = RedRewardManager.instance().sendCount;
-			_itemPage1.updateMax(count ,count);
-			_skin.btn_all.dispatchEventWith(Event.TRIGGERED);
+			_itemPage1.updateMax(count ,count,false);
+			_itemPage1.maxValue();
 			_skin.lbItem.text = count.toString();
 		}
 		
@@ -57,18 +59,7 @@ package com.rpgGame.appModule.redreward
 			switch(target)
 			{
 				case _skin.btnFa:
-					var count:int = _itemPage1.getValue();
-					if(count==0)
-					{
-						NoticeManager.showNotifyById(91001);
-						return ;
-					}
-					if(RedRewardManager.instance().sendCount<=0)
-					{
-						NoticeManager.showNotifyById(91002);
-						return ;
-					}
-					RedRewardSender.sendReward(count);
+					RedRewardManager.instance().sendReward( _itemPage1.getValue());
 					break;
 			}
 		}

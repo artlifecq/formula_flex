@@ -4,8 +4,9 @@ package com.rpgGame.appModule.redreward
 	import com.rpgGame.app.sender.RedRewardSender;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.core.events.RedRewardEvent;
-	import com.rpgGame.netData.redreward.bean.RedRewardLog;
 	
+	import feathers.controls.ScrollBarDisplayMode;
+	import feathers.controls.Scroller;
 	import feathers.data.ListCollection;
 	import feathers.layout.VerticalLayout;
 	
@@ -25,11 +26,14 @@ package com.rpgGame.appModule.redreward
 		{
 			this.x = 294;
 			this.y = 117;
+			_skin.ListItem.scrollBarDisplayMode = ScrollBarDisplayMode.ALWAYS_VISIBLE;
+			_skin.ListItem.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
+			_skin.ListItem.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
 			_skin.ListItem.itemRendererType = RedRewardLogCell;
 			var layout:VerticalLayout = new VerticalLayout();
 			layout.gap = 0;
 			_skin.ListItem.layout = layout;
-			_skin.ListItem.dataProvider  = new ListCollection();
+			_skin.ListItem.dataProvider = new ListCollection();
 		}
 		override public function show(data:Object=null):void
 		{
@@ -39,8 +43,8 @@ package com.rpgGame.appModule.redreward
 		private function updataListHandler():void
 		{
 			_skin.ListItem.dataProvider.removeAll();
-			var list:Vector.<RedRewardLog> = RedRewardManager.instance().loglist;
-			_skin.ListItem.dataProvider.data = list;
+			_skin.ListItem.dataProvider.data = RedRewardManager.instance().loglist;
+			
 		}
 	}
 }

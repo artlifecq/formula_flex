@@ -132,6 +132,10 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_fightsoul_mode:String = "data.Q_fightsoul_mode";
 		/**  战魂升级数据			 */
 		public static const Q_fightsoul_path:String = "data.Q_fightsoul_path";
+		/**  美人基本信息数据库																								 */
+		public static const Q_girl_advance:String = "data.Q_girl_advance";
+		/**  美人基本信息数据库											 */
+		public static const Q_girl_pet:String = "data.Q_girl_pet";
 		/**  全局变量表		 */
 		public static const Q_global:String = "data.Q_global";
 		/**   											 */
@@ -170,10 +174,10 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_meritorious:String = "data.Q_meritorious";
 		/**  战功表					 */
 		public static const Q_meritorious_monster:String = "data.Q_meritorious_monster";
-		/**  秦陵秘宝出生复活点配置				 */
-		public static const Q_mibao_point:String = "data.Q_mibao_point";
 		/**  秦陵秘宝刷怪配置表				 */
 		public static const Q_mibao_monster:String = "data.Q_mibao_monster";
+		/**  秦陵秘宝出生复活点配置						 */
+		public static const Q_mibao_point:String = "data.Q_mibao_point";
 		/**  秦陵秘宝怪物配置					 */
 		public static const Q_mibao_reward:String = "data.Q_mibao_reward";
 		/**  任务表(所有任务都这里)																																											 */
@@ -194,13 +198,13 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_redreward:String = "data.Q_redreward";
 		/**  阵营关系				 */
 		public static const Q_relation:String = "data.Q_relation";
-		/**  城池基础表													 */
+		/**  城池基础表															 */
 		public static const Q_singlecitybase:String = "data.Q_singlecitybase";
 		/**  购买界面其他途径提示数据库				 */
 		public static const Q_source:String = "data.Q_source";
 		/**  活动配置表																														 */
 		public static const Q_special_activities:String = "data.Q_special_activities";
-		/**  tipsid	标题	描述 */
+		/**  tipsid	标题	描述	来源 */
 		public static const Q_tipsinfo:String = "data.Q_tipsinfo";
 		/**  											 */
 		public static const Q_vip:String = "data.Q_vip";
@@ -291,9 +295,6 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_advance_wedding", com.rpgGame.coreData.clientConfig.Q_advance_wedding);
 			regClass("data.Q_att_transfer", com.rpgGame.coreData.clientConfig.Q_att_transfer);
 			regClass("data.Q_att_values", com.rpgGame.coreData.clientConfig.Q_att_values);
-//			regClass("data.Q_battle_monster_refresh", com.rpgGame.coreData.clientConfig.Q_battle_monster_refresh);
-			regClass("data.Q_battle_rank", com.rpgGame.coreData.clientConfig.Q_battle_rank);
-//			regClass("data.Q_battle_reward", com.rpgGame.coreData.clientConfig.Q_battle_reward);
 			regClass("data.Q_battle_monster_refresh", com.rpgGame.coreData.clientConfig.Q_battle_monster_refresh);
 			regClass("data.Q_battle_rank", com.rpgGame.coreData.clientConfig.Q_battle_rank);
 			regClass("data.Q_battle_reward", com.rpgGame.coreData.clientConfig.Q_battle_reward);
@@ -313,6 +314,8 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_fightsoul", com.rpgGame.coreData.clientConfig.Q_fightsoul);
 			regClass("data.Q_fightsoul_mode", com.rpgGame.coreData.clientConfig.Q_fightsoul_mode);
 			regClass("data.Q_fightsoul_path", com.rpgGame.coreData.clientConfig.Q_fightsoul_path);
+			regClass("data.Q_girl_advance", com.rpgGame.coreData.clientConfig.Q_girl_advance);
+			regClass("data.Q_girl_pet", com.rpgGame.coreData.clientConfig.Q_girl_pet);
 			regClass("data.Q_global", com.rpgGame.coreData.clientConfig.Q_global);
 			regClass("data.Q_guild", com.rpgGame.coreData.clientConfig.Q_guild);
 			regClass("data.Q_guild_permission", com.rpgGame.coreData.clientConfig.Q_guild_permission);
@@ -332,7 +335,6 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_meridian", com.rpgGame.coreData.clientConfig.Q_meridian);
 			regClass("data.Q_meritorious", com.rpgGame.coreData.clientConfig.Q_meritorious);
 			regClass("data.Q_meritorious_monster", com.rpgGame.coreData.clientConfig.Q_meritorious_monster);
-//			regClass("data.Q_mibao_point", com.rpgGame.coreData.clientConfig.Q_mibao_point);
 			regClass("data.Q_mibao_monster", com.rpgGame.coreData.clientConfig.Q_mibao_monster);
 			regClass("data.Q_mibao_point", com.rpgGame.coreData.clientConfig.Q_mibao_point);
 			regClass("data.Q_mibao_reward", com.rpgGame.coreData.clientConfig.Q_mibao_reward);

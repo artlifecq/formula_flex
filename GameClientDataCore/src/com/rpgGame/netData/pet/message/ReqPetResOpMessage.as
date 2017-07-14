@@ -15,8 +15,11 @@ package com.rpgGame.netData.pet.message{
 		//侍宠模板Id
 		private var _modelId: int;
 		
-		//侍宠操作类型 0:激活  1:升级 2:升阶
+		//侍宠操作类型 0:激活  1:升阶
 		private var _type: int;
+		
+		//是否自动使用元宝购买（0否1是）
+		private var _useGold: int;
 		
 		
 		/**
@@ -25,8 +28,10 @@ package com.rpgGame.netData.pet.message{
 		override protected function writing(): Boolean{
 			//侍宠模板Id
 			writeInt(_modelId);
-			//侍宠操作类型 0:激活  1:升级 2:升阶
+			//侍宠操作类型 0:激活  1:升阶
 			writeInt(_type);
+			//是否自动使用元宝购买（0否1是）
+			writeByte(_useGold);
 			return true;
 		}
 		
@@ -36,8 +41,10 @@ package com.rpgGame.netData.pet.message{
 		override protected function reading(): Boolean{
 			//侍宠模板Id
 			_modelId = readInt();
-			//侍宠操作类型 0:激活  1:升级 2:升阶
+			//侍宠操作类型 0:激活  1:升阶
 			_type = readInt();
+			//是否自动使用元宝购买（0否1是）
+			_useGold = readByte();
 			return true;
 		}
 		
@@ -65,7 +72,7 @@ package com.rpgGame.netData.pet.message{
 		}
 		
 		/**
-		 * get 侍宠操作类型 0:激活  1:升级 2:升阶
+		 * get 侍宠操作类型 0:激活  1:升阶
 		 * @return 
 		 */
 		public function get type(): int{
@@ -73,10 +80,25 @@ package com.rpgGame.netData.pet.message{
 		}
 		
 		/**
-		 * set 侍宠操作类型 0:激活  1:升级 2:升阶
+		 * set 侍宠操作类型 0:激活  1:升阶
 		 */
 		public function set type(value: int): void{
 			this._type = value;
+		}
+		
+		/**
+		 * get 是否自动使用元宝购买（0否1是）
+		 * @return 
+		 */
+		public function get useGold(): int{
+			return _useGold;
+		}
+		
+		/**
+		 * set 是否自动使用元宝购买（0否1是）
+		 */
+		public function set useGold(value: int): void{
+			this._useGold = value;
 		}
 		
 	}
