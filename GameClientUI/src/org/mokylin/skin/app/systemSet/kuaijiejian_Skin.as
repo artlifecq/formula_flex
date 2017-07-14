@@ -24,7 +24,7 @@ package org.mokylin.skin.app.systemSet
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [bg_i(),__kuaijiejian_Skin_UIAsset1_i(),__kuaijiejian_Skin_UIAsset2_i(),__kuaijiejian_Skin_Group1_i(),__kuaijiejian_Skin_Group2_i(),__kuaijiejian_Skin_Group3_i(),__kuaijiejian_Skin_Group4_i(),__kuaijiejian_Skin_Group5_i(),__kuaijiejian_Skin_Group6_i(),__kuaijiejian_Skin_Group7_i(),__kuaijiejian_Skin_Group8_i(),__kuaijiejian_Skin_Group9_i(),__kuaijiejian_Skin_Group10_i(),__kuaijiejian_Skin_Group11_i(),__kuaijiejian_Skin_Group12_i(),__kuaijiejian_Skin_Group13_i(),__kuaijiejian_Skin_Group14_i(),__kuaijiejian_Skin_Group15_i(),__kuaijiejian_Skin_Group16_i(),__kuaijiejian_Skin_Group17_i(),__kuaijiejian_Skin_Group18_i(),__kuaijiejian_Skin_Group19_i(),__kuaijiejian_Skin_Group20_i(),__kuaijiejian_Skin_Group21_i(),__kuaijiejian_Skin_Group22_i(),__kuaijiejian_Skin_Group23_i(),__kuaijiejian_Skin_Group24_i(),__kuaijiejian_Skin_Group25_i(),__kuaijiejian_Skin_Group26_i(),__kuaijiejian_Skin_Group27_i()];
+			this.elementsContent = [bg_i(),__kuaijiejian_Skin_UIAsset1_i(),__kuaijiejian_Skin_UIAsset2_i(),__kuaijiejian_Skin_Group1_i(),__kuaijiejian_Skin_Group2_i(),__kuaijiejian_Skin_Group3_i(),__kuaijiejian_Skin_Group4_i(),__kuaijiejian_Skin_Group5_i(),__kuaijiejian_Skin_Group6_i(),__kuaijiejian_Skin_Group7_i(),__kuaijiejian_Skin_Group8_i(),__kuaijiejian_Skin_Group9_i(),__kuaijiejian_Skin_Group10_i(),__kuaijiejian_Skin_Group11_i(),__kuaijiejian_Skin_Group12_i(),__kuaijiejian_Skin_Group13_i(),__kuaijiejian_Skin_Group14_i(),__kuaijiejian_Skin_Group15_i(),__kuaijiejian_Skin_Group16_i(),__kuaijiejian_Skin_Group17_i(),__kuaijiejian_Skin_Group18_i(),__kuaijiejian_Skin_Group19_i(),__kuaijiejian_Skin_Group20_i(),__kuaijiejian_Skin_Group21_i(),__kuaijiejian_Skin_Group22_i(),__kuaijiejian_Skin_Group23_i(),__kuaijiejian_Skin_Group24_i(),__kuaijiejian_Skin_Group25_i(),__kuaijiejian_Skin_Group26_i(),__kuaijiejian_Skin_Group27_i(),__kuaijiejian_Skin_Group28_i()];
 			
 			states = {
 			};
@@ -39,7 +39,7 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 11;
-			temp.y = 263;
+			temp.y = 207;
 			temp.elementsContent = [__kuaijiejian_Skin_Label19_i(),__kuaijiejian_Skin_UIAsset21_i(),__kuaijiejian_Skin_UIAsset22_i(),__kuaijiejian_Skin_Label20_i()];
 			return temp;
 		}
@@ -129,7 +129,7 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 11;
-			temp.y = 11;
+			temp.y = 39;
 			temp.elementsContent = [__kuaijiejian_Skin_Label1_i(),__kuaijiejian_Skin_UIAsset3_i(),__kuaijiejian_Skin_UIAsset4_i(),__kuaijiejian_Skin_Label2_i()];
 			return temp;
 		}
@@ -206,11 +206,20 @@ package org.mokylin.skin.app.systemSet
 			return temp;
 		}
 
+		private function __kuaijiejian_Skin_Group28_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			temp.x = 215;
+			temp.y = 319;
+			temp.elementsContent = [__kuaijiejian_Skin_Label55_i(),__kuaijiejian_Skin_UIAsset57_i(),__kuaijiejian_Skin_UIAsset58_i(),__kuaijiejian_Skin_Label56_i()];
+			return temp;
+		}
+
 		private function __kuaijiejian_Skin_Group2_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 11;
-			temp.y = 39;
+			temp.y = 151;
 			temp.elementsContent = [__kuaijiejian_Skin_Label3_i(),__kuaijiejian_Skin_UIAsset5_i(),__kuaijiejian_Skin_UIAsset6_i(),__kuaijiejian_Skin_Label4_i()];
 			return temp;
 		}
@@ -219,7 +228,7 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 11;
-			temp.y = 67;
+			temp.y = 235;
 			temp.elementsContent = [__kuaijiejian_Skin_Label5_i(),__kuaijiejian_Skin_UIAsset7_i(),__kuaijiejian_Skin_UIAsset8_i(),__kuaijiejian_Skin_Label6_i()];
 			return temp;
 		}
@@ -237,7 +246,7 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 11;
-			temp.y = 123;
+			temp.y = 263;
 			temp.elementsContent = [__kuaijiejian_Skin_Label9_i(),__kuaijiejian_Skin_UIAsset11_i(),__kuaijiejian_Skin_UIAsset12_i(),__kuaijiejian_Skin_Label10_i()];
 			return temp;
 		}
@@ -246,7 +255,7 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 11;
-			temp.y = 151;
+			temp.y = 67;
 			temp.elementsContent = [__kuaijiejian_Skin_Label11_i(),__kuaijiejian_Skin_UIAsset13_i(),__kuaijiejian_Skin_UIAsset14_i(),__kuaijiejian_Skin_Label12_i()];
 			return temp;
 		}
@@ -255,7 +264,7 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 11;
-			temp.y = 179;
+			temp.y = 11;
 			temp.elementsContent = [__kuaijiejian_Skin_Label13_i(),__kuaijiejian_Skin_UIAsset15_i(),__kuaijiejian_Skin_UIAsset16_i(),__kuaijiejian_Skin_Label14_i()];
 			return temp;
 		}
@@ -264,7 +273,7 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 11;
-			temp.y = 207;
+			temp.y = 123;
 			temp.elementsContent = [__kuaijiejian_Skin_Label15_i(),__kuaijiejian_Skin_UIAsset17_i(),__kuaijiejian_Skin_UIAsset18_i(),__kuaijiejian_Skin_Label16_i()];
 			return temp;
 		}
@@ -273,7 +282,7 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 11;
-			temp.y = 235;
+			temp.y = 179;
 			temp.elementsContent = [__kuaijiejian_Skin_Label17_i(),__kuaijiejian_Skin_UIAsset19_i(),__kuaijiejian_Skin_UIAsset20_i(),__kuaijiejian_Skin_Label18_i()];
 			return temp;
 		}
@@ -294,7 +303,7 @@ package org.mokylin.skin.app.systemSet
 		private function __kuaijiejian_Skin_Label11_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "屏蔽";
+			temp.text = "背包";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.x = 1;
@@ -305,7 +314,7 @@ package org.mokylin.skin.app.systemSet
 		private function __kuaijiejian_Skin_Label12_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "F9";
+			temp.text = "B";
 			temp.textAlign = "center";
 			temp.color = 0xe8c958;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
@@ -318,7 +327,7 @@ package org.mokylin.skin.app.systemSet
 		private function __kuaijiejian_Skin_Label13_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "心法";
+			temp.text = "战魂";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.x = 1;
@@ -366,7 +375,7 @@ package org.mokylin.skin.app.systemSet
 		private function __kuaijiejian_Skin_Label17_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "绝学";
+			temp.text = "社交";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.x = 1;
@@ -390,7 +399,7 @@ package org.mokylin.skin.app.systemSet
 		private function __kuaijiejian_Skin_Label19_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "经脉";
+			temp.text = "商城";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.x = 1;
@@ -412,7 +421,7 @@ package org.mokylin.skin.app.systemSet
 		private function __kuaijiejian_Skin_Label20_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "I";
+			temp.text = "S";
 			temp.textAlign = "center";
 			temp.color = 0xe8c958;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
@@ -473,7 +482,7 @@ package org.mokylin.skin.app.systemSet
 		private function __kuaijiejian_Skin_Label25_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "排行榜";
+			temp.text = "屏蔽";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.x = 1;
@@ -484,7 +493,7 @@ package org.mokylin.skin.app.systemSet
 		private function __kuaijiejian_Skin_Label26_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "J";
+			temp.text = "F9";
 			temp.textAlign = "center";
 			temp.color = 0xe8c958;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
@@ -497,7 +506,7 @@ package org.mokylin.skin.app.systemSet
 		private function __kuaijiejian_Skin_Label27_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "快速拾取";
+			temp.text = "排行榜";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.x = 1;
@@ -508,7 +517,7 @@ package org.mokylin.skin.app.systemSet
 		private function __kuaijiejian_Skin_Label28_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "Z";
+			temp.text = "J";
 			temp.textAlign = "center";
 			temp.color = 0xe8c958;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
@@ -521,7 +530,7 @@ package org.mokylin.skin.app.systemSet
 		private function __kuaijiejian_Skin_Label29_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "系统设置";
+			temp.text = "快速拾取";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.x = 1;
@@ -545,7 +554,7 @@ package org.mokylin.skin.app.systemSet
 		private function __kuaijiejian_Skin_Label30_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "O";
+			temp.text = "~";
 			temp.textAlign = "center";
 			temp.color = 0xe8c958;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
@@ -558,7 +567,7 @@ package org.mokylin.skin.app.systemSet
 		private function __kuaijiejian_Skin_Label31_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "切换目标";
+			temp.text = "系统设置";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.x = 1;
@@ -569,7 +578,7 @@ package org.mokylin.skin.app.systemSet
 		private function __kuaijiejian_Skin_Label32_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "~";
+			temp.text = "O";
 			temp.textAlign = "center";
 			temp.color = 0xe8c958;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
@@ -665,7 +674,7 @@ package org.mokylin.skin.app.systemSet
 		private function __kuaijiejian_Skin_Label3_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "技能";
+			temp.text = "武学";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.x = 1;
@@ -860,6 +869,30 @@ package org.mokylin.skin.app.systemSet
 			temp.text = "4";
 			temp.textAlign = "center";
 			temp.color = 0xe8c958;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.width = 36;
+			temp.x = 145;
+			temp.y = 3;
+			return temp;
+		}
+
+		private function __kuaijiejian_Skin_Label55_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.text = "切换目标";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.x = 1;
+			temp.y = 4;
+			return temp;
+		}
+
+		private function __kuaijiejian_Skin_Label56_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.text = "Tab";
+			temp.textAlign = "center";
+			temp.color = 0xE8C958;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 36;
 			temp.x = 145;
@@ -1150,7 +1183,7 @@ package org.mokylin.skin.app.systemSet
 		private function __kuaijiejian_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 332;
+			temp.height = 368;
 			temp.styleName = "ui/common/tips/tips_2.png";
 			temp.width = 192;
 			temp.x = 208;
@@ -1443,6 +1476,27 @@ package org.mokylin.skin.app.systemSet
 		}
 
 		private function __kuaijiejian_Skin_UIAsset56_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.height = 24;
+			temp.styleName = "ui/common/background/xiaobiaotibeijing.png";
+			temp.width = 39;
+			temp.x = 142;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function __kuaijiejian_Skin_UIAsset57_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/common/tips/tips_1fengexian.png";
+			temp.width = 180;
+			temp.x = 0;
+			temp.y = 25;
+			return temp;
+		}
+
+		private function __kuaijiejian_Skin_UIAsset58_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 24;
