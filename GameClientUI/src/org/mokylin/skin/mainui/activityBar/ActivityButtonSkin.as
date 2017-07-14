@@ -64,11 +64,11 @@ package org.mokylin.skin.mainui.activityBar
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			skinItem = temp;
 			temp.name = "skinItem";
-			temp.height = 20;
+			temp.height = 18;
 			var skin:StateSkin = new org.mokylin.skin.mainui.activityBar.ActivityItem()
 			temp.skin = skin
-			temp.width = 113;
-			temp.x = -13;
+			temp.width = 73;
+			temp.x = 8;
 			temp.y = 67;
 			return temp;
 		}
@@ -78,10 +78,9 @@ package org.mokylin.skin.mainui.activityBar
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiJinXing = temp;
 			temp.name = "uiJinXing";
-			temp.height = 40;
 			temp.styleName = "ui/common/jinxingzhong.png";
 			temp.x = 46;
-			temp.y = -6;
+			temp.y = -5;
 			return temp;
 		}
 		
