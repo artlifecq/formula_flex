@@ -175,6 +175,7 @@
 			
 			data.totalStat.hp = info.hp;
 			data.totalStat.life = info.maxHp;
+			data.direction=info.dir;
 //			data.mp = info;
 //			data.totalStat.mana = ;
             var i : int = 0;

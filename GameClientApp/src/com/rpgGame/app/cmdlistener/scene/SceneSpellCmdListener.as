@@ -10,6 +10,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.fight.spell.SpellHitHelper;
 	import com.rpgGame.app.fight.spell.SpellResultInfo;
 	import com.rpgGame.app.manager.CharAttributeManager;
+	import com.rpgGame.app.manager.FightHeadEffectManager;
 	import com.rpgGame.app.manager.LostSkillManager;
 	import com.rpgGame.app.manager.SkillCDManager;
 	import com.rpgGame.app.manager.TrusteeshipFightSoulManager;
@@ -48,6 +49,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.connection.SocketConnection;
+	import org.game.netCore.data.long;
 	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
@@ -353,7 +355,8 @@ package com.rpgGame.app.cmdlistener.scene
         }
 		
 		/**预警消息*/
-		private function onSCSkillWarningInfoMessage(msg : SCSkillWarningInfoMessage) : void {
+		private function onSCSkillWarningInfoMessage(msg : SCSkillWarningInfoMessage) : void 
+		{
 			
 			var role : SceneRole = SceneManager.getSceneObjByID(msg.monsterId.ToGID()) as SceneRole;
 			if (null == role || !role.usable) {
@@ -370,16 +373,29 @@ package com.rpgGame.app.cmdlistener.scene
 			{
 				return;
 			}
-			var animationData : Q_SpellAnimation = AnimationDataManager.getData(warningData.q_warn_effect);
-			if (animationData == null)
+			
+			if(msg.targets&&msg.targets.length>0)
 			{
-				return;
+				for each(var targets:long in msg.targets)
+				{
+					var targetsRole : SceneRole = SceneManager.getSceneObjByID(targets.ToGID()) as SceneRole;
+					if (role &&role.usable) {
+						FightHeadEffectManager.addHeadWarningEffect(role,warningData.q_time);
+					}
+					
+				}
 			}
 			
-			for each(var point:Position in msg.posList)
+			var animationData : Q_SpellAnimation = AnimationDataManager.getData(warningData.q_warn_effect);
+			if (msg.posList&&msg.posList.length>0&&animationData)
 			{
-				SpellAnimationHelper.addWarningEffect(role,point.x, point.y, 0, animationData);
+				for each(var point:Position in msg.posList)
+				{
+					SpellAnimationHelper.addWarningEffect(role,point.x, point.y, 0, animationData);
+				}
 			}
+			
+			
 			
 			
 			

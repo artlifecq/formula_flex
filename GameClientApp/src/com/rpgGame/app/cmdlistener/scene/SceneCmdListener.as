@@ -776,7 +776,8 @@ package com.rpgGame.app.cmdlistener.scene
 				collectData.name = qData.q_name;
 				collectData.avatarRes = qData.q_body_res;
 				collectData.sizeScale = qData.q_scale > 0 ? (qData.q_scale * 0.01) : 1;
-				collectData.direction = qData.q_direction;
+				//collectData.direction = qData.q_direction;
+				collectData.direction=info.dir;
 				collectData.x = info.position.x;
 				collectData.y = info.position.y;
 				collectData.isDynamicCreate =true;
