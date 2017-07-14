@@ -1,16 +1,17 @@
 package com.rpgGame.app.manager.mount
 {
 	import com.gameClient.utils.JSONUtil;
-	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.manager.role.SceneRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.shop.ShopManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.ui.alert.SomeSystemNoticePanel;
+	import com.rpgGame.core.events.ItemEvent;
+	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.coreData.UNIQUEID;
 	import com.rpgGame.coreData.cfg.SourceGetCfg;
 	import com.rpgGame.coreData.clientConfig.Q_source;
@@ -131,7 +132,7 @@ package com.rpgGame.app.manager.mount
 			if(role)
 			{
 				(role.data as HeroData).zhanqiLv=msg.warFlagModelid;
-//				AvatarManager.callEquipmentChange(role);
+				//				AvatarManager.callEquipmentChange(role);
 				AvatarManager.updateAvatar(role,false);
 			}
 		}
@@ -204,7 +205,7 @@ package com.rpgGame.app.manager.mount
 		public function updateZhanQiShow():void
 		{	
 			var role:SceneRole=MainRoleManager.actor;
-//			AvatarManager.callEquipmentChange(role);
+			//			AvatarManager.callEquipmentChange(role);
 			AvatarManager.updateAvatar(role,false);
 		}
 		private var _showdata:ZhanQiShowData;
@@ -222,14 +223,39 @@ package com.rpgGame.app.manager.mount
 			}
 			return (_showdata.canUpLevel());
 		}
+		
+		private  function isShowSystemLevelUp(item:*):void
+		{
+			if(canZhanqiLevelUp())
+			{
+				var data:Object={};
+				data.sys=SomeSystemNoticePanel.SYS_ZHANQI;
+				data.desc="战旗可以进阶";
+				data.btnText="立即进阶";
+				EventManager.dispatchEvent(MainPlayerEvent.SYS_CAN_LEVEL_UP,data); 
+			}
+		}
+		
+		private function onAddHandler(info:ClientItemInfo):void
+		{
+			isShowSystemLevelUp(null);
+		}
+		
 		private static var _instance:ZhanQiManager;
 		public static function instance():ZhanQiManager
 		{
 			if(_instance==null)
 			{
 				_instance = new ZhanQiManager();
+				_instance.init();
 			}
 			return _instance;
+		}
+		
+		private function init():void
+		{
+			EventManager.addEvent(ItemEvent.ITEM_INIT,isShowSystemLevelUp);
+			EventManager.addEvent(ItemEvent.ITEM_ADD,onAddHandler);
 		}
 	}
 }

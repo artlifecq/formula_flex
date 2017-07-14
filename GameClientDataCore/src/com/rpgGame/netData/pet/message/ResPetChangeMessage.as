@@ -1,5 +1,5 @@
 package com.rpgGame.netData.pet.message{
-	import org.game.netCore.data.long;
+	import com.rpgGame.netData.pet.bean.PetInfo;
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -9,20 +9,20 @@ package com.rpgGame.netData.pet.message{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * 宠物死亡广播
+	 * 单个美人变化消息
 	 */
-	public class ResPetDieBroadcastMessage extends Message {
+	public class ResPetChangeMessage extends Message {
 	
-		//死亡宠物ID
-		private var _petId: long;
+		//单个美人消息
+		private var _pets: PetInfo;
 		
 		
 		/**
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
-			//死亡宠物ID
-			writeLong(_petId);
+			//单个美人消息
+			writeBean(_pets);
 			return true;
 		}
 		
@@ -30,8 +30,8 @@ package com.rpgGame.netData.pet.message{
 		 * 读取字节缓存
 		 */
 		override protected function reading(): Boolean{
-			//死亡宠物ID
-			_petId = readLong();
+			//单个美人消息
+			_pets = readBean(PetInfo) as PetInfo;
 			return true;
 		}
 		
@@ -40,22 +40,22 @@ package com.rpgGame.netData.pet.message{
 		 * @return 
 		 */
 		override public function getId(): int {
-			return 148101;
+			return 148109;
 		}
 		
 		/**
-		 * get 死亡宠物ID
+		 * get 单个美人消息
 		 * @return 
 		 */
-		public function get petId(): long{
-			return _petId;
+		public function get pets(): PetInfo{
+			return _pets;
 		}
 		
 		/**
-		 * set 死亡宠物ID
+		 * set 单个美人消息
 		 */
-		public function set petId(value: long): void{
-			this._petId = value;
+		public function set pets(value: PetInfo): void{
+			this._pets = value;
 		}
 		
 	}

@@ -7,7 +7,7 @@ package org.mokylin.skin.app.mail
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.common.Erji_panelbg_Skin;
+	import org.mokylin.skin.common.TongYongPanelbg3;
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 
@@ -45,7 +45,7 @@ package org.mokylin.skin.app.mail
 			
 			this.currentState = "normal";
 			this.height = 586;
-			this.width = 434;
+			this.width = 437;
 			this.elementsContent = [__MailRead_Skin_SkinnableContainer1_i(),__MailRead_Skin_UIAsset1_i(),__MailRead_Skin_UIAsset2_i(),__MailRead_Skin_UIAsset3_i(),btnCancel_i(),btnTiqu_i(),__MailRead_Skin_UIAsset4_i(),__MailRead_Skin_UIAsset5_i(),__MailRead_Skin_UIAsset6_i(),__MailRead_Skin_UIAsset7_i(),__MailRead_Skin_UIAsset8_i(),__MailRead_Skin_UIAsset9_i(),lbName_i(),lbZhuti_i(),lbTime_i(),lbXiangqing_i(),fujianList_i(),__MailRead_Skin_UIAsset22_i()];
 			
 			states = {
@@ -61,9 +61,9 @@ package org.mokylin.skin.app.mail
 		{
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			temp.height = 586;
-			var skin:StateSkin = new org.mokylin.skin.common.Erji_panelbg_Skin()
+			var skin:StateSkin = new org.mokylin.skin.common.TongYongPanelbg3()
 			temp.skin = skin
-			temp.width = 434;
+			temp.width = 437;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -165,8 +165,8 @@ package org.mokylin.skin.app.mail
 			temp.height = 440;
 			temp.styleName = "ui/common/background/neikuang_1.png";
 			temp.width = 404;
-			temp.x = 14;
-			temp.y = 71;
+			temp.x = 18;
+			temp.y = 82;
 			return temp;
 		}
 
@@ -194,8 +194,8 @@ package org.mokylin.skin.app.mail
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/mail/dqyj.png";
-			temp.x = 186;
-			temp.y = 12;
+			temp.x = 173;
+			temp.y = 16;
 			return temp;
 		}
 
@@ -205,8 +205,8 @@ package org.mokylin.skin.app.mail
 			temp.height = 194;
 			temp.styleName = "ui/common/background/neikuang_2.png";
 			temp.width = 388;
-			temp.x = 22;
-			temp.y = 160;
+			temp.x = 26;
+			temp.y = 171;
 			return temp;
 		}
 
@@ -216,8 +216,8 @@ package org.mokylin.skin.app.mail
 			temp.height = 118;
 			temp.styleName = "ui/common/background/neikuang_2.png";
 			temp.width = 388;
-			temp.x = 22;
-			temp.y = 386;
+			temp.x = 26;
+			temp.y = 397;
 			return temp;
 		}
 
@@ -225,8 +225,8 @@ package org.mokylin.skin.app.mail
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/mail/loumingtiao.png";
-			temp.x = 24;
-			temp.y = 79;
+			temp.x = 28;
+			temp.y = 90;
 			return temp;
 		}
 
@@ -234,8 +234,8 @@ package org.mokylin.skin.app.mail
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/mail/loumingtiao.png";
-			temp.x = 24;
-			temp.y = 108;
+			temp.x = 28;
+			temp.y = 119;
 			return temp;
 		}
 
@@ -243,8 +243,8 @@ package org.mokylin.skin.app.mail
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/mail/fajianren.png";
-			temp.x = 28;
-			temp.y = 84;
+			temp.x = 32;
+			temp.y = 95;
 			return temp;
 		}
 
@@ -252,8 +252,8 @@ package org.mokylin.skin.app.mail
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/mail/zhuti.png";
-			temp.x = 28;
-			temp.y = 113;
+			temp.x = 32;
+			temp.y = 124;
 			return temp;
 		}
 
@@ -261,8 +261,8 @@ package org.mokylin.skin.app.mail
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/mail/zhengyi.png";
-			temp.x = 28;
-			temp.y = 138;
+			temp.x = 32;
+			temp.y = 149;
 			return temp;
 		}
 
@@ -270,8 +270,8 @@ package org.mokylin.skin.app.mail
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/mail/fujian.png";
-			temp.x = 28;
-			temp.y = 362;
+			temp.x = 32;
+			temp.y = 373;
 			return temp;
 		}
 
@@ -284,9 +284,9 @@ package org.mokylin.skin.app.mail
 			temp.label = "删除";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
 			temp.color = 0xCFC6AE;
-			temp.width = 79;
-			temp.x = 138;
-			temp.y = 528;
+			temp.width = 90;
+			temp.x = 129;
+			temp.y = 533;
 			return temp;
 		}
 
@@ -299,9 +299,9 @@ package org.mokylin.skin.app.mail
 			temp.label = "提取附件";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xCFC6AE;
-			temp.width = 73;
-			temp.x = 225;
-			temp.y = 531;
+			temp.width = 90;
+			temp.x = 227;
+			temp.y = 533;
 			return temp;
 		}
 
@@ -310,8 +310,8 @@ package org.mokylin.skin.app.mail
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			fujianList = temp;
 			temp.name = "fujianList";
-			temp.x = 44;
-			temp.y = 393;
+			temp.x = 48;
+			temp.y = 404;
 			temp.elementsContent = [__MailRead_Skin_UIAsset10_i(),__MailRead_Skin_UIAsset11_i(),__MailRead_Skin_UIAsset12_i(),__MailRead_Skin_UIAsset13_i(),__MailRead_Skin_UIAsset14_i(),__MailRead_Skin_UIAsset15_i(),__MailRead_Skin_UIAsset16_i(),__MailRead_Skin_UIAsset17_i(),__MailRead_Skin_UIAsset18_i(),__MailRead_Skin_UIAsset19_i(),__MailRead_Skin_UIAsset20_i(),__MailRead_Skin_UIAsset21_i()];
 			return temp;
 		}
@@ -325,8 +325,8 @@ package org.mokylin.skin.app.mail
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 198;
-			temp.x = 89;
-			temp.y = 83;
+			temp.x = 93;
+			temp.y = 94;
 			return temp;
 		}
 
@@ -340,8 +340,8 @@ package org.mokylin.skin.app.mail
 			temp.color = 0xD02525;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 109;
-			temp.x = 309;
-			temp.y = 83;
+			temp.x = 313;
+			temp.y = 94;
 			return temp;
 		}
 
@@ -357,8 +357,8 @@ package org.mokylin.skin.app.mail
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 372;
-			temp.x = 31;
-			temp.y = 169;
+			temp.x = 35;
+			temp.y = 180;
 			return temp;
 		}
 
@@ -371,8 +371,8 @@ package org.mokylin.skin.app.mail
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 198;
-			temp.x = 89;
-			temp.y = 113;
+			temp.x = 93;
+			temp.y = 124;
 			return temp;
 		}
 
