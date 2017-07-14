@@ -527,6 +527,10 @@ package com.rpgGame.app.state.role.action
 				if (!force && !_attackBroken)
 					return false;
 			}
+			else if (force) 
+			{
+				return true;
+			}
 			else
 			{
 				if (!_attackFinished)

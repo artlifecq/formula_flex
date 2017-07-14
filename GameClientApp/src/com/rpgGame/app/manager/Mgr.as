@@ -50,5 +50,9 @@ package com.rpgGame.app.manager
 		{
 			return NineTowerMgr.ins;
 		}
+		public static function get petMgr():PetManager
+		{
+			return PetManager.ins;
+		}
 	}
 }

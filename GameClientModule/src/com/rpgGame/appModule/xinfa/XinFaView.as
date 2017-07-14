@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.xinfa
 {
 	import com.gameClient.utils.HashMap;
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -30,6 +31,7 @@ package com.rpgGame.appModule.xinfa
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_buff;
 	import com.rpgGame.coreData.clientConfig.Q_cheats;
+	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.cheats.CheatsNodeVo;
 	import com.rpgGame.coreData.info.cheats.CheatsVo;
@@ -366,7 +368,8 @@ package com.rpgGame.appModule.xinfa
 		private function onHeCheng(eve:Event):void
 		{
 			// TODO Auto Generated method stub
-			AppManager.showAppNoHide(AppConstant.EQUIP_PANL,{tab:4});
+			//AppManager.showAppNoHide(AppConstant.EQUIP_PANL,{tab:EmFunctionID.EM_HECHENG});
+			FunctionOpenManager.openAppPaneById(EmFunctionID.EM_HECHENG);
 		}
 		
 	

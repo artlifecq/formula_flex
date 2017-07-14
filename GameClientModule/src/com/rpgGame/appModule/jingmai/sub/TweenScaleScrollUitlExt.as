@@ -143,9 +143,7 @@ package com.rpgGame.appModule.jingmai.sub
 					{
 						TweenMax.to(dis,time,{scale:toScale});
 					}
-					
 				}
-				
 			}
 		}
 		override public function onTweenEnd():void

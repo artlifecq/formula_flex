@@ -1,5 +1,6 @@
 package com.rpgGame.app.manager
 {
+	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.view.uiComponent.face.cd.CDDataManager;
 	import com.rpgGame.coreData.cfg.GCDCfgData;
@@ -17,6 +18,7 @@ package com.rpgGame.app.manager
 		/** 全局技能CD KEY **/
 		//private static const GLOBAL_SKILL_KEY : String = "GLOBAL_SKILL_KEY";
 		
+		private var cdRecord:HashMap=new HashMap();
 		
 		public function SkillCDManager()
 		{
@@ -109,7 +111,61 @@ package com.rpgGame.app.manager
 		}
 		
 		//--------------------------------------------
-		
+		/**
+		*取消技能cd这个是技能被打断的时候重置当前技能cd,其他技能也要重置当前技能添加的公共cd
+		**/
+		public function cancelSkillCD(spellData : Q_skill_model):void
+		{
+			if (spellData == null)
+			{
+				return;
+			}
+			var curGcd : int = GCDCfgData.getGcd(spellData.q_public_cd_level);
+			var isGlobal : Boolean = curGcd > 0;
+			
+			if (isGlobal) //清楚全局cd
+			{
+				CDDataManager.playCD(FaceTypeEnum.SKILL_PUBLIC, 0);
+			}
+			
+			//清除当前技能的cd
+			CDDataManager.playCD(getSkillKey(spellData.q_skillID),0);
+			
+			if (!isGlobal)
+				return;
+			//
+			//cd换回原来的，新剩余cd=原cd-(公共cd-剩余cd)
+			var spellList : Array = MainRoleManager.actorInfo.getActiveSpells();
+			var len : int = spellList.length;
+			var oldCD : int;
+			var tmp:Q_skill_model;
+			var past:int=0;
+			for (var i : int = 0; i < len; i++)
+			{
+				tmp = spellList[i];
+				if (tmp.q_skillID==spellData.q_skillID) 
+				{
+					continue;
+				}
+				if (!cdRecord.containsKey(tmp.q_skillID)) 
+				{
+					continue;
+				}
+				oldCD = cdRecord.remove(tmp.q_skillID);
+				var key:String=getSkillKey(tmp.q_skillID);
+				if (oldCD!=0)//使用了公共cd作为cd
+				{
+					//经过实践
+					past=curGcd-CDDataManager.getCdLostTm(key);
+					CDDataManager.playCD(key,Math.max(0,oldCD-past));
+				}
+				//公共cd
+				else
+				{
+					CDDataManager.playCD(key,0);
+				}
+			}
+		}
 		/**
 		 * 添加技能CD
 		 * @param skillID
@@ -146,6 +202,11 @@ package com.rpgGame.app.manager
 				if (skillLastCd < curGcd)//技能cd比公共cd小才播公共cd
 				{
 					CDDataManager.playCD(getSkillKey(spellData.q_skillID), curGcd, 0);
+					cdRecord.put(spellData.q_skillID,skillLastCd);
+				}
+				else
+				{
+					cdRecord.remove(spellData.q_skillID);
 				}
 			}
 		}

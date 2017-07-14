@@ -71,6 +71,7 @@ package com.rpgGame.coreData.type
 		
 		/**美人**/
 		public static const GIRL_PET:String=rEnum.next.toString();
+		public static const SPRITE_EFFECT:String=rEnum.next.toString();
 		//		/** 召唤怪  3 **/
 //		public static const SUMMON_MONSTER:String = rEnum.next.toString();
 //		/** 宝袋（精英怪或BOSS死后出现） 4 **/

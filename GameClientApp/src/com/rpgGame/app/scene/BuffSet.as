@@ -474,7 +474,7 @@ package com.rpgGame.app.scene
 						_role.stateMachine.transition(RoleStateType.CONTROL_VIP,buffRef);
 						break;
 					case 121://冲刺
-						_role.stateMachine.transition(RoleStateType.CONTROL_BUFF_SPRITEUP);
+						//_role.stateMachine.transition(RoleStateType.CONTROL_BUFF_SPRITEUP);
 						break;
 					default:
 						/*buffRef = _role.stateMachine.getReference(UnmovableStateReference) as UnmovableStateReference;

@@ -467,6 +467,11 @@ package com.rpgGame.app.state.role
 			var state : IState = getCurrState(MysteryManState);
 			return state != null;
 		}
+		public function get isSpriteUp():Boolean
+		{
+			var state : IState = getCurrState(SpriteUpBuffState);
+			return state != null;
+		}
 		override protected function createState(type : int) : IState
 		{
 			var state : IState = null;
