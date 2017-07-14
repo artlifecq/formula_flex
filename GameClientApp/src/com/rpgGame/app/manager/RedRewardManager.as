@@ -136,7 +136,7 @@ package com.rpgGame.app.manager
 				return ;
 			}
 			_sendCount -= count;
-			EventManager.dispatchEvent(RedRewardEvent.UPDATA_REDREWARDGETINFO);
+			EventManager.dispatchEvent(RedRewardEvent.UPDATA_COUNTINFO);
 			RedRewardSender.sendReward(count);
 		}
 		

@@ -26,7 +26,7 @@ package com.rpgGame.appModule.redreward
 		
 		private function initView():void
 		{
-			_itemPage1 = new NumSelectUICtrl(_skin.btn_max,_skin.btn_min,_skin.btn_all,null,_skin.lbBuyNum,1,int.MAX_VALUE,null);
+			_itemPage1 = new NumSelectUICtrl(_skin.btn_max,_skin.btn_min,_skin.btn_all,null,_skin.lbBuyNum,1,int.MAX_VALUE,null,0);
 			_skin.container.addEventListener(Event.ADDED_TO_STAGE,addTostageHandler);
 			_skin.container.addEventListener(Event.REMOVED_FROM_STAGE,removeformstageHandler);
 		}
@@ -43,13 +43,14 @@ package com.rpgGame.appModule.redreward
 		{
 			var count:int = RedRewardManager.instance().sendCount;
 			_itemPage1.updateMax(count ,count,false);
+			_itemPage1.maxValue();
 			_skin.lbItem.text = count.toString();
 		}
 		public function refeashView():void
 		{
 			var count:int = RedRewardManager.instance().sendCount;
 			_itemPage1.updateMax(count ,count,false);
-			_skin.btn_all.dispatchEventWith(Event.TRIGGERED);
+			_itemPage1.maxValue();
 			_skin.lbItem.text = count.toString();
 		}
 		
