@@ -1,7 +1,6 @@
 package com.rpgGame.app.state.ai
 {
 	import com.game.engine3D.state.IState;
-	import com.gameClient.log.Lyt;
 	import com.rpgGame.app.manager.ItemCDManager;
 	import com.rpgGame.app.manager.SystemSetManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;

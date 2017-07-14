@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.mount
 {
+	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.mount.ZhanQiManager;
 	import com.rpgGame.app.manager.mount.ZhanQiShowData;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -9,6 +10,8 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.ui.tip.RTNodeID;
+	import com.rpgGame.core.utils.MCUtil;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	
 	import flash.utils.setTimeout;
@@ -50,9 +53,12 @@ package com.rpgGame.appModule.mount
 			_zhanqiProps=new ZhanQiProps(_skin);
 			_zhanqiUpExpConent=new ZhanQiUpExpConent(_skin);
 			_zhanqiExtraItemList=new Vector.<ZhanQiExtraButton>();
-			_zhanqiExtraItemList.push(new ZhanQiExtraButton(_skin.btn_zizhidan,519));
-			_zhanqiExtraItemList.push(new ZhanQiExtraButton(_skin.btn_chengzhangdan,520));
+			_zhanqiExtraItemList.push(new ZhanQiExtraButton(_skin.btn_zizhidan,519,_skin.lbZhizi));
+			_zhanqiExtraItemList.push(new ZhanQiExtraButton(_skin.btn_chengzhangdan,520,_skin.lbJinjie));
 			_touchState=new TouchToState(_skin.lab_xuyaowupin,labTouchHandler);
+			
+			MCUtil.removeSelf(_skin.num_lv);
+			MCUtil.removeSelf(_skin.ico_up);
 		}
 		
 		private function initEvent():void
@@ -87,6 +93,7 @@ package com.rpgGame.appModule.mount
 			_zhanqiContent.refeashMode(_zhanqiShowData.zhanqiLevel);
 			refeashPropHandler();
 			refeashExpHandler();
+			updatedanyaoShow();
 			_zhanqiUpExpConent.isAutoing = false;
 			initEvent();
 		}
@@ -171,6 +178,10 @@ package com.rpgGame.appModule.mount
 		
 		private function addItemHandler(info:ClientItemInfo):void
 		{
+			if(info.cfgId==406||info.cfgId==407)
+			{
+				updatedanyaoShow();
+			}
 			if(info.cfgId!= _zhanqiShowData.upLevelItem.cfgId)
 				return ;
 			refeashExpHandler();
@@ -183,6 +194,20 @@ package com.rpgGame.appModule.mount
 			//			_zhanqiUpExpConent.updataInfo(_zhanqiShowData);
 		}
 		
+		private function updatedanyaoShow():void
+		{
+			var num:int=BackPackManager.instance.getBagItemsCountById(406);
+			_skin.lbZhizi.text=num.toString();
+			if(num>0) _skin.lbZhizi.color=StaticValue.A_UI_GREEN_TEXT;
+			else _skin.lbZhizi.color=StaticValue.A_UI_RED_TEXT;
+			
+			num=BackPackManager.instance.getBagItemsCountById(407);
+			_skin.lbJinjie.text=num.toString();
+			if(num>0) _skin.lbJinjie.color=StaticValue.A_UI_GREEN_TEXT;
+			else _skin.lbJinjie.color=StaticValue.A_UI_RED_TEXT;
+			
+		}
+		
 		private var _uplevelSuccess:ZhanQiUpLevelSucessPanelExt;
 		private function showUplevel():void
 		{
@@ -190,7 +215,8 @@ package com.rpgGame.appModule.mount
 			{
 				_uplevelSuccess = new ZhanQiUpLevelSucessPanelExt();
 				_uplevelSuccess.addEventListener(Event.REMOVED_FROM_STAGE,removePropHandler);
-				StarlingLayerManager.topUILayer.addChild(_uplevelSuccess);
+//				StarlingLayerManager.topUILayer.addChild();
+				_uplevelSuccess.show();
 				_uplevelSuccess.x = int((_uplevelSuccess.stage.stageWidth - _uplevelSuccess.width) / 2);
 				_uplevelSuccess.y = int((_uplevelSuccess.stage.stageHeight - _uplevelSuccess.height) / 2);
 			}
@@ -227,9 +253,10 @@ package com.rpgGame.appModule.mount
 			{
 				eb.refeash(_zhanqiShowData);
 			}
+			_skin.ui_text.visible=_skin.btn_zizhidan.visible;
 		}
 		
-		private function refeashExpHandler():void
+		private function refeashExpHandler(issever:Boolean=false):void
 		{
 			//			_zhanqiShowData.zhanqidataInfo=ZhanQiManager.instance().zhanqiDataInfo;
 			_zhanqiUpExpConent.updataInfo(_zhanqiShowData);
@@ -238,9 +265,17 @@ package com.rpgGame.appModule.mount
 			for each(var eb:ZhanQiExtraButton in _zhanqiExtraItemList)
 			{
 				eb.refeash(_zhanqiShowData);
-			}
-			setTimeout(isAutoing,30);
+			}		
+			_skin.ui_text.visible=_skin.btn_zizhidan.visible;
 			setRTNState(RTNodeID.FIGHTFLAG_UP,_zhanqiShowData.isSelf&&_zhanqiShowData.canUpLevel());
+			if(issever)
+			{
+				//				if(_zhanqiShowData.isAutoing)
+				//				{
+				//					_zhanqiUpExpConent.isAutoing =ZhanQiManager.instance().eatItemZhanQi(_zhanqiShowData);
+				//				}
+				setTimeout(isAutoing,30);
+			}
 		}
 		
 		private function isAutoing():void

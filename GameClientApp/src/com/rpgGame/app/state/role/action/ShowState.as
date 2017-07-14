@@ -37,6 +37,7 @@ package com.rpgGame.app.state.role.action
 				case RenderUnitType.HAIR:
 				case RenderUnitType.WEAPON:
 				case RenderUnitType.DEPUTY_WEAPON:
+				case RenderUnitType.ZHANQI:
 					render.visible = true;
 					render.repeat = _repeatNum;
 					render.setStatus(statusType, _useCrossfadeTransition ? 0.2 : null, time);

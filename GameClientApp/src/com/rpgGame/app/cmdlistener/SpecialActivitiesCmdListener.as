@@ -1,6 +1,5 @@
 package com.rpgGame.app.cmdlistener
 {
-	import com.gameClient.log.Lyt;
 	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.manager.MibaoManager;
 	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
@@ -199,15 +198,12 @@ package com.rpgGame.app.cmdlistener
 		{//Lyt.a("刷新时间:"+msg.remainRefreshTime);
 			if(msg.remainRefreshTime>0)
 			{
-				AppManager.showApp(AppConstant.ACTIVETY_LIJIN_TIMER,msg.remainRefreshTime);
+				AppManager.showAppNoHide(AppConstant.ACTIVETY_LIJIN_TIMER,msg.remainRefreshTime);
 			}
 			else
 			{
 				AppManager.hideApp(AppConstant.ACTIVETY_LIJIN_TIMER);
-				if (!AppManager.isAppInScene(AppConstant.ACTIVETY_LIJIN_REFRESH))
-				{
-					AppManager.showApp(AppConstant.ACTIVETY_LIJIN_REFRESH);
-				}
+				AppManager.showAppNoHide(AppConstant.ACTIVETY_LIJIN_REFRESH);
 			}
 		}
 		/**奖励信息*/

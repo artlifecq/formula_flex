@@ -1,8 +1,11 @@
 package com.rpgGame.coreData.cfg {
+    import com.gameClient.utils.JSONUtil;
+    import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.coreData.clientConfig.Q_map_transfer;
     import com.rpgGame.coreData.role.RoleType;
     import com.rpgGame.coreData.role.SceneTranportData;
     
+    import flash.geom.Point;
     import flash.geom.Vector3D;
     import flash.utils.ByteArray;
     import flash.utils.Dictionary;
@@ -48,7 +51,7 @@ package com.rpgGame.coreData.cfg {
 		/**返回当前地图的所有传送点列表
 		 * 数据为Obj  目的地 destMapId  x y
 		 * */
-		public static function getSceneTransportObj(sceneID : uint) : Array
+		public static function getSceneTransportObj(sceneID : uint,job:int) : Array
 		{
 			var arr : Array = new Array();
 			var list : Vector3D.<Q_map_transfer> = _dataDic[sceneID];
@@ -59,13 +62,39 @@ package com.rpgGame.coreData.cfg {
 			{
 				if (data.q_map_id == sceneID)
 				{
-					var did:int=AreaCfgData.getAreaMapidByID(data.q_tran_dest_area_id);
-					if(did>0)
+					var did:int;
+					var destareaid:int;
+					if(data.q_tran_dest_area_id==0)
+					{
+						var jobArea:Array=JSONUtil.decode(data.q_tran_dest_area_by_job);
+						var destAid:int=0;
+						if(jobArea&&jobArea.length>0)
+						{
+							for(var i:int=0;i<jobArea.length;i++)
+							{
+								if(jobArea[i][0]==job)
+								{
+									destareaid=jobArea[i][1];
+									break;
+								}
+							}
+						}
+					}
+					else
+					{
+						destareaid=data.q_tran_dest_area_id;
+					}
+					did=AreaCfgData.getAreaMapidByID(destareaid);
+					var sourceArea:Vector.<Point>=AreaCfgData.getAreaPointsByID(data.q_tran_source_area_id);//传送区域点
+					var centerPoint:Point=AreaCfgData.getAreaPointsCenter(sourceArea);//传送区域中点
+					if(did>0&&centerPoint)
 					{
 						var tranportData :Object=new Object();
 						tranportData.destMapId=did;
-						tranportData.x=data.q_tran_res_x;
-						tranportData.y=data.q_tran_res_y;
+						//tranportData.x=data.q_tran_res_x;
+						//tranportData.y=data.q_tran_res_y;
+						tranportData.x=centerPoint.x;
+						tranportData.y=centerPoint.y;
 						arr.push(tranportData);
 					}
 					

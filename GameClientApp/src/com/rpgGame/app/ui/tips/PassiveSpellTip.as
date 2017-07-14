@@ -4,6 +4,7 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.app.view.icon.BgIcon;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
+	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
@@ -45,11 +46,12 @@ package com.rpgGame.app.ui.tips
 		
 		public function setTipData(data:*):void
 		{
+			var infodata:* = DynamicTipData(data).data;
 			var id:int;
-			if(data is int){
-				id=data;
-			}else if(data is BaseFaceInfo){
-				id=data.cfgId;
+			if(infodata is int){
+				id=infodata;
+			}else if(infodata is BaseFaceInfo){
+				id=infodata.cfgId;
 			}
 			
 			var cfg:Q_skill_model=SpellDataManager.getSpellData(id,1);

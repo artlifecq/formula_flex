@@ -1,15 +1,39 @@
 package com.rpgGame.app.manager {
-    import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.manager.time.SystemTimeManager;
-    import com.rpgGame.core.events.SystemEvent;
+    import com.rpgGame.app.ui.main.buff.BuffBar;
     import com.rpgGame.coreData.UNIQUEID;
+    import com.rpgGame.coreData.info.buff.BuffData;
     
     import org.client.mainCore.manager.EventManager;
-    
-    import starling.core.Starling;
 
     public class RollManager {
-		private static var _instance:RollManager
+		private static var _instance:RollManager;
+		
+		private var _buff:BuffData;
+
+		public function get buff():BuffData
+		{
+			return _buff;
+		}
+
+		public function set buff(value:BuffData):void
+		{
+			if(value==null)
+				return ;
+			if(value.cfgId == 6003)
+				_buff = value;
+		}
+		
+		public function clearBuff(value:BuffData):void
+		{
+			if(value==null)
+				return ;
+			if(value.cfgId !=6003)
+				return ;
+			_buff = null;
+		}
+
+		
 		public static function getinstance():RollManager
 		{
 			if(_instance == null)
@@ -28,7 +52,7 @@ package com.rpgGame.app.manager {
 		public static const RoleState_Normal:int = 0;
 		
         public static const TOTAL_TIMES : int = 3;
-        public static const CD_TIMES : int = 15000;
+        private static const CD_TIMES : int = 15000;
 		public static const USE_TIMES : int = 15000;
         private var _curCount : int;
         private var _beginUseTime :Number = -1;
@@ -91,15 +115,25 @@ package com.rpgGame.app.manager {
 			if((curpassTime>=0)&&(curpassTime<USE_TIMES))
 			{
 				_currentState = RoleState_User;
-			}else if((curpassTime>=USE_TIMES)&&(curpassTime<(USE_TIMES+CD_TIMES)))
+			}else if((curpassTime>=USE_TIMES)&&(curpassTime<(USE_TIMES+cdTimes)))
 			{
 				_currentState = RoleState_CD;
-				_curCount =Math.floor( (curpassTime-USE_TIMES)/(CD_TIMES/TOTAL_TIMES));
+				_curCount =Math.floor( (curpassTime-USE_TIMES)/(cdTimes/TOTAL_TIMES));
 			}else{
 				reset();
 			}
 		}
 		
+		
+		public function get cdTimes():int
+		{
+			if(_buff!=null)
+			{
+				return CD_TIMES - _buff.buffInfo.value;
+			}else{
+				return CD_TIMES;
+			}
+		}
         private function reset() : void {
 			_currentState = RoleState_Normal;
 			_curCount = TOTAL_TIMES;

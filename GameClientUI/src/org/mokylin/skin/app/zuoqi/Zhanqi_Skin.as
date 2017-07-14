@@ -19,8 +19,10 @@ package org.mokylin.skin.app.zuoqi
 	import org.mokylin.skin.app.zuoqi.progress_zhufuzhiSkin;
 	import org.mokylin.skin.component.button.ButtonSkin_jiantou;
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
+	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 	import org.mokylin.skin.component.check.CheckBoxSkin_1;
-	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow2;
+	import org.mokylin.skin.component.uinumber.UINumberJuese_zhanli;
+	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_lv;
 
 	/**
 	 * @private
@@ -33,8 +35,6 @@ package org.mokylin.skin.app.zuoqi
 		//                                定义成员变量
 		//==========================================================================
 		public var NumZhanli:feathers.controls.UINumber;
-
-		public var bg_1:feathers.controls.UIAsset;
 
 		public var bg_2:feathers.controls.UIAsset;
 
@@ -56,13 +56,19 @@ package org.mokylin.skin.app.zuoqi
 
 		public var expgroup:feathers.controls.Group;
 
+		public var gprShuxing:feathers.controls.Group;
+
 		public var grid_1:feathers.controls.UIAsset;
 
 		public var grid_2:feathers.controls.UIAsset;
 
+		public var grpFoot:feathers.controls.Group;
+
+		public var grpZhanli:feathers.controls.Group;
+
 		public var grp_jinjie:feathers.controls.Group;
 
-		public var jinjie:feathers.controls.UIAsset;
+		public var ico_up:feathers.controls.UIAsset;
 
 		public var lab_1:feathers.controls.SkinnableContainer;
 
@@ -74,17 +80,15 @@ package org.mokylin.skin.app.zuoqi
 
 		public var lab_5:feathers.controls.SkinnableContainer;
 
-		public var lab_6:feathers.controls.SkinnableContainer;
-
-		public var lab_7:feathers.controls.SkinnableContainer;
-
-		public var lab_8:feathers.controls.SkinnableContainer;
-
 		public var lab_progressbar:feathers.controls.Label;
 
 		public var lab_xuyaowupin:feathers.controls.Label;
 
 		public var lab_zhufuzhi:feathers.controls.Label;
+
+		public var lbJinjie:feathers.controls.Label;
+
+		public var lbZhizi:feathers.controls.Label;
 
 		public var maximg:feathers.controls.UIAsset;
 
@@ -92,13 +96,15 @@ package org.mokylin.skin.app.zuoqi
 
 		public var mc_name:feathers.controls.UIMovieClip;
 
-		public var progressbar:feathers.controls.ProgressBar;
+		public var num_lv:feathers.controls.UINumber;
 
-		public var progressbar_light:feathers.controls.UIAsset;
+		public var progressbar1:feathers.controls.ProgressBar;
+
+		public var ui_text:feathers.controls.UIAsset;
+
+		public var ui_zhandou:feathers.controls.UIAsset;
 
 		public var uplevelgroup:feathers.controls.Group;
-
-		public var zuoqijineng:feathers.controls.Group;
 
 
 		//==========================================================================
@@ -111,9 +117,20 @@ package org.mokylin.skin.app.zuoqi
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [bg_1_i(),bg_2_i(),uplevelgroup_i(),__Zhanqi_Skin_UIAsset6_i(),__Zhanqi_Skin_UIAsset7_i(),NumZhanli_i(),__Zhanqi_Skin_Group1_i(),btn_zizhidan_i(),btn_chengzhangdan_i(),zuoqijineng_i(),btn_prev_i(),btn_next_i(),mc_name_i(),mc_jieshu_i(),maximg_i(),grp_jinjie_i()];
+			this.elementsContent = [__Zhanqi_Skin_Group1_i(),bg_2_i(),grpFoot_i(),__Zhanqi_Skin_UIAsset12_i(),__Zhanqi_Skin_UIAsset13_i(),grpZhanli_i(),gprShuxing_i(),ui_text_i(),btn_zizhidan_i(),btn_chengzhangdan_i(),lbZhizi_i(),lbJinjie_i(),btn_prev_i(),btn_next_i(),mc_name_i(),mc_jieshu_i(),maximg_i()];
 			
 			states = {
+				normal:[
+						{target:"chk_zidonggoumai",
+							name:"width",
+							value:24
+						}
+						,
+						{target:"chk_zidonggoumai",
+							name:"textAlign",
+							value:"left"
+						}
+					]
 			};
 			skinNames={};
 		}
@@ -127,22 +144,23 @@ package org.mokylin.skin.app.zuoqi
 			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
 			NumZhanli = temp;
 			temp.name = "NumZhanli";
-			temp.gap = -13;
-			temp.height = 33;
-			temp.label = "1364364";
-			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow2;
-			temp.width = 148;
-			temp.x = 759;
-			temp.y = 109;
+			temp.gap = -15;
+			temp.height = 40;
+			temp.label = "62984567";
+			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberJuese_zhanli;
+			temp.textAlign = "center";
+			temp.width = 162;
+			temp.x = 0;
+			temp.y = 36;
 			return temp;
 		}
 
 		private function __Zhanqi_Skin_Group1_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
-			temp.x = 697;
-			temp.y = 184;
-			temp.elementsContent = [lab_1_i(),lab_2_i(),lab_3_i(),lab_4_i(),lab_5_i(),lab_6_i(),lab_7_i(),lab_8_i()];
+			temp.x = 688;
+			temp.y = 86;
+			temp.elementsContent = [__Zhanqi_Skin_UIAsset2_i(),__Zhanqi_Skin_UIAsset3_i(),__Zhanqi_Skin_UIAsset4_i(),__Zhanqi_Skin_UIAsset5_i(),__Zhanqi_Skin_UIAsset6_i(),__Zhanqi_Skin_UIAsset7_i()];
 			return temp;
 		}
 
@@ -150,7 +168,7 @@ package org.mokylin.skin.app.zuoqi
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "需要：";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 0;
 			temp.y = 3;
@@ -161,76 +179,219 @@ package org.mokylin.skin.app.zuoqi
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "自动购买";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 186;
-			temp.y = 1;
+			temp.x = 165;
+			temp.y = 3;
 			return temp;
 		}
 
-		private function __Zhanqi_Skin_UIAsset2_i():feathers.controls.UIAsset
+		private function __Zhanqi_Skin_UIAsset10_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zuoqi/huidi.png";
-			temp.x = 0;
-			temp.y = 75;
-			return temp;
-		}
-
-		private function __Zhanqi_Skin_UIAsset3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zuoqi/jindutiao_kuang1.png";
+			temp.styleName = "ui/app/zuoqi/jdt_di.png";
 			temp.width = 228;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
 
+		private function __Zhanqi_Skin_UIAsset11_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/zuoqi/jinjiehaoli.png";
+			temp.x = 21;
+			temp.y = 21;
+			return temp;
+		}
+
+		private function __Zhanqi_Skin_UIAsset12_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/zuoqi/jiachengshuxing.png";
+			temp.x = 789;
+			temp.y = 170;
+			return temp;
+		}
+
+		private function __Zhanqi_Skin_UIAsset13_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/zuoqi/zhanqijinjie.png";
+			temp.x = 789;
+			temp.y = 324;
+			return temp;
+		}
+
+		private function __Zhanqi_Skin_UIAsset14_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/common/itembg.png";
+			temp.width = 165;
+			temp.x = 51;
+			temp.y = 10;
+			return temp;
+		}
+
+		private function __Zhanqi_Skin_UIAsset15_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/common/itembg.png";
+			temp.width = 165;
+			temp.x = 51;
+			temp.y = 35;
+			return temp;
+		}
+
+		private function __Zhanqi_Skin_UIAsset16_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/common/itembg.png";
+			temp.width = 165;
+			temp.x = 51;
+			temp.y = 61;
+			return temp;
+		}
+
+		private function __Zhanqi_Skin_UIAsset17_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/common/itembg.png";
+			temp.width = 165;
+			temp.x = 51;
+			temp.y = 86;
+			return temp;
+		}
+
+		private function __Zhanqi_Skin_UIAsset18_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/common/itembg.png";
+			temp.width = 164;
+			temp.x = 51;
+			temp.y = 111;
+			return temp;
+		}
+
+		private function __Zhanqi_Skin_UIAsset19_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/zuoqi/gj.png";
+			temp.x = 0;
+			temp.y = 11;
+			return temp;
+		}
+
+		private function __Zhanqi_Skin_UIAsset20_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/zuoqi/sf.png";
+			temp.x = 0;
+			temp.y = 37;
+			return temp;
+		}
+
+		private function __Zhanqi_Skin_UIAsset21_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/zuoqi/qx.png";
+			temp.x = 0;
+			temp.y = 62;
+			return temp;
+		}
+
+		private function __Zhanqi_Skin_UIAsset22_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/zuoqi/fy.png";
+			temp.x = 0;
+			temp.y = 88;
+			return temp;
+		}
+
+		private function __Zhanqi_Skin_UIAsset23_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/zuoqi/mz.png";
+			temp.x = 0;
+			temp.y = 113;
+			return temp;
+		}
+
+		private function __Zhanqi_Skin_UIAsset2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.height = 445;
+			temp.styleName = "ui/common/background/neikuang_2.png";
+			temp.width = 248;
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function __Zhanqi_Skin_UIAsset3_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/zuoqi/mzd.png";
+			temp.x = 3;
+			temp.y = 79;
+			return temp;
+		}
+
 		private function __Zhanqi_Skin_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zuoqi/jinjiezhufuzhi.png";
-			temp.x = 3;
-			temp.y = 85;
+			temp.styleName = "ui/app/zuoqi/fenyexian.png";
+			temp.width = 248;
+			temp.x = 0;
+			temp.y = 69;
 			return temp;
 		}
 
 		private function __Zhanqi_Skin_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zuoqi/jinjiehaoli.png";
-			temp.x = 3;
-			temp.y = 42;
+			temp.styleName = "ui/app/zuoqi/fenyexian.png";
+			temp.width = 248;
+			temp.x = 0;
+			temp.y = 222;
 			return temp;
 		}
 
 		private function __Zhanqi_Skin_UIAsset6_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zuoqi/jiachengshuxing.png";
-			temp.x = 717;
-			temp.y = 162;
+			temp.styleName = "ui/app/zuoqi/mzd.png";
+			temp.x = 3;
+			temp.y = 233;
 			return temp;
 		}
 
 		private function __Zhanqi_Skin_UIAsset7_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/zdl2.png";
-			temp.x = 688;
-			temp.y = 99;
+			temp.styleName = "ui/app/zuoqi/zdldi.jpg";
+			temp.x = 3;
+			temp.y = 3;
 			return temp;
 		}
 
-		private function bg_1_i():feathers.controls.UIAsset
+		private function __Zhanqi_Skin_UIAsset8_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			bg_1 = temp;
-			temp.name = "bg_1";
-			temp.styleName = "ui/big_bg/zuoqi/bg.jpg";
-			temp.x = 673;
-			temp.y = 85;
+			temp.height = 58;
+			temp.styleName = "ui/app/zuoqi/guangdi.png";
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function __Zhanqi_Skin_UIAsset9_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/zuoqi/jinjiezhufuzhi.png";
+			temp.x = 11;
+			temp.y = 68;
 			return temp;
 		}
 
@@ -239,9 +400,9 @@ package org.mokylin.skin.app.zuoqi
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg_2 = temp;
 			temp.name = "bg_2";
-			temp.styleName = "ui/big_bg/zuoqi/zhanqi_bg.jpg";
-			temp.x = 22;
-			temp.y = 85;
+			temp.styleName = "ui/big_bg/zuoqi/zuoqi_bg.jpg";
+			temp.x = 20;
+			temp.y = 84;
 			return temp;
 		}
 
@@ -251,8 +412,8 @@ package org.mokylin.skin.app.zuoqi
 			btn_chengzhangdan = temp;
 			temp.name = "btn_chengzhangdan";
 			temp.styleClass = org.mokylin.skin.app.zuoqi.button.ButtonZhanqijinjiedan;
-			temp.x = 513;
-			temp.y = 456;
+			temp.x = 542;
+			temp.y = 440;
 			return temp;
 		}
 
@@ -262,13 +423,13 @@ package org.mokylin.skin.app.zuoqi
 			btn_kaishi = temp;
 			temp.name = "btn_kaishi";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.label = "开始进阶";
-			temp.fontSize = 14;
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
-			temp.color = 0xFFFFFF;
+			temp.label = "进  阶";
+			temp.fontSize = 16;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
+			temp.color = 0xEAEABC;
 			temp.width = 110;
-			temp.x = 8;
-			temp.y = 22;
+			temp.x = 2;
+			temp.y = 27;
 			return temp;
 		}
 
@@ -278,8 +439,8 @@ package org.mokylin.skin.app.zuoqi
 			btn_next = temp;
 			temp.name = "btn_next";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jiantou;
-			temp.x = 609;
-			temp.y = 300;
+			temp.x = 644;
+			temp.y = 283;
 			return temp;
 		}
 
@@ -290,8 +451,8 @@ package org.mokylin.skin.app.zuoqi
 			temp.name = "btn_prev";
 			temp.scaleX = -1;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jiantou;
-			temp.x = 92;
-			temp.y = 300;
+			temp.x = 72;
+			temp.y = 283;
 			return temp;
 		}
 
@@ -303,11 +464,12 @@ package org.mokylin.skin.app.zuoqi
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.height = 37;
 			temp.label = "停止进阶";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
-			temp.color = 0xFFFFFF;
+			temp.fontSize = 16;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
+			temp.color = 0xEAEABC;
 			temp.width = 110;
 			temp.x = 59;
-			temp.y = 22;
+			temp.y = 27;
 			return temp;
 		}
 
@@ -318,12 +480,12 @@ package org.mokylin.skin.app.zuoqi
 			temp.name = "btn_zidong";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "自动进阶";
-			temp.fontSize = 14;
+			temp.fontSize = 16;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
-			temp.color = 0xFFFFFF;
+			temp.color = 0xEAEABC;
 			temp.width = 110;
-			temp.x = 131;
-			temp.y = 22;
+			temp.x = 117;
+			temp.y = 27;
 			return temp;
 		}
 
@@ -333,8 +495,8 @@ package org.mokylin.skin.app.zuoqi
 			btn_zizhidan = temp;
 			temp.name = "btn_zizhidan";
 			temp.styleClass = org.mokylin.skin.app.zuoqi.button.ButtonZhanqizizhidan;
-			temp.x = 587;
-			temp.y = 456;
+			temp.x = 613;
+			temp.y = 440;
 			return temp;
 		}
 
@@ -348,9 +510,11 @@ package org.mokylin.skin.app.zuoqi
 			temp.labelOffsetY = -2;
 			temp.isSelected = true;
 			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
+			temp.textAlign = "left";
 			temp.color = 0x8B8D7B;
-			temp.x = 164;
-			temp.y = 0;
+			temp.width = 24;
+			temp.x = 143;
+			temp.y = 1;
 			return temp;
 		}
 
@@ -359,9 +523,20 @@ package org.mokylin.skin.app.zuoqi
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			expgroup = temp;
 			temp.name = "expgroup";
-			temp.x = 0;
-			temp.y = 101;
-			temp.elementsContent = [__Zhanqi_Skin_UIAsset3_i(),progressbar_i(),progressbar_light_i(),lab_progressbar_i()];
+			temp.x = 6;
+			temp.y = 87;
+			temp.elementsContent = [__Zhanqi_Skin_UIAsset10_i(),progressbar1_i(),lab_progressbar_i()];
+			return temp;
+		}
+
+		private function gprShuxing_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			gprShuxing = temp;
+			temp.name = "gprShuxing";
+			temp.x = 704;
+			temp.y = 184;
+			temp.elementsContent = [__Zhanqi_Skin_UIAsset14_i(),__Zhanqi_Skin_UIAsset15_i(),__Zhanqi_Skin_UIAsset16_i(),__Zhanqi_Skin_UIAsset17_i(),__Zhanqi_Skin_UIAsset18_i(),lab_1_i(),lab_2_i(),lab_3_i(),lab_4_i(),lab_5_i(),__Zhanqi_Skin_UIAsset19_i(),__Zhanqi_Skin_UIAsset20_i(),__Zhanqi_Skin_UIAsset21_i(),__Zhanqi_Skin_UIAsset22_i(),__Zhanqi_Skin_UIAsset23_i()];
 			return temp;
 		}
 
@@ -370,9 +545,9 @@ package org.mokylin.skin.app.zuoqi
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			grid_1 = temp;
 			temp.name = "grid_1";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 114;
-			temp.y = 20;
+			temp.styleName = "ui/common/grid/normal/42.png";
+			temp.x = 94;
+			temp.y = 4;
 			return temp;
 		}
 
@@ -381,9 +556,31 @@ package org.mokylin.skin.app.zuoqi
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			grid_2 = temp;
 			temp.name = "grid_2";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 167;
-			temp.y = 20;
+			temp.styleName = "ui/common/grid/normal/42.png";
+			temp.x = 149;
+			temp.y = 4;
+			return temp;
+		}
+
+		private function grpFoot_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			grpFoot = temp;
+			temp.name = "grpFoot";
+			temp.x = 691;
+			temp.y = 346;
+			temp.elementsContent = [uplevelgroup_i(),grp_jinjie_i()];
+			return temp;
+		}
+
+		private function grpZhanli_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			grpZhanli = temp;
+			temp.name = "grpZhanli";
+			temp.x = 729;
+			temp.y = 89;
+			temp.elementsContent = [ui_zhandou_i(),NumZhanli_i(),ico_up_i(),num_lv_i()];
 			return temp;
 		}
 
@@ -392,20 +589,20 @@ package org.mokylin.skin.app.zuoqi
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grp_jinjie = temp;
 			temp.name = "grp_jinjie";
-			temp.x = 681;
-			temp.y = 467;
+			temp.x = 8;
+			temp.y = 114;
 			temp.elementsContent = [btn_kaishi_i(),btn_zidong_i(),__Zhanqi_Skin_Label1_i(),lab_xuyaowupin_i(),chk_zidonggoumai_i(),__Zhanqi_Skin_Label2_i(),btn_tingzhi_i()];
 			return temp;
 		}
 
-		private function jinjie_i():feathers.controls.UIAsset
+		private function ico_up_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			jinjie = temp;
-			temp.name = "jinjie";
-			temp.styleName = "ui/app/zuoqi/zhanqijinjie.png";
-			temp.x = 26;
-			temp.y = 0;
+			ico_up = temp;
+			temp.name = "ico_up";
+			temp.styleName = "ui/common/tubiao/jobup.png";
+			temp.x = 145;
+			temp.y = 50;
 			return temp;
 		}
 
@@ -414,12 +611,10 @@ package org.mokylin.skin.app.zuoqi
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			lab_1 = temp;
 			temp.name = "lab_1";
-			temp.height = 21;
 			var skin:StateSkin = new org.mokylin.skin.app.zuoqi.Shuxing_Item()
 			temp.skin = skin
-			temp.width = 200;
-			temp.x = 0;
-			temp.y = 0;
+			temp.x = 62;
+			temp.y = 9;
 			return temp;
 		}
 
@@ -428,12 +623,10 @@ package org.mokylin.skin.app.zuoqi
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			lab_2 = temp;
 			temp.name = "lab_2";
-			temp.height = 21;
 			var skin:StateSkin = new org.mokylin.skin.app.zuoqi.Shuxing_Item()
 			temp.skin = skin
-			temp.width = 200;
-			temp.x = 0;
-			temp.y = 18;
+			temp.x = 62;
+			temp.y = 34;
 			return temp;
 		}
 
@@ -442,12 +635,10 @@ package org.mokylin.skin.app.zuoqi
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			lab_3 = temp;
 			temp.name = "lab_3";
-			temp.height = 21;
 			var skin:StateSkin = new org.mokylin.skin.app.zuoqi.Shuxing_Item()
 			temp.skin = skin
-			temp.width = 200;
-			temp.x = 0;
-			temp.y = 35;
+			temp.x = 62;
+			temp.y = 60;
 			return temp;
 		}
 
@@ -456,12 +647,10 @@ package org.mokylin.skin.app.zuoqi
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			lab_4 = temp;
 			temp.name = "lab_4";
-			temp.height = 21;
 			var skin:StateSkin = new org.mokylin.skin.app.zuoqi.Shuxing_Item()
 			temp.skin = skin
-			temp.width = 200;
-			temp.x = 0;
-			temp.y = 53;
+			temp.x = 62;
+			temp.y = 85;
 			return temp;
 		}
 
@@ -470,54 +659,10 @@ package org.mokylin.skin.app.zuoqi
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			lab_5 = temp;
 			temp.name = "lab_5";
-			temp.height = 21;
 			var skin:StateSkin = new org.mokylin.skin.app.zuoqi.Shuxing_Item()
 			temp.skin = skin
-			temp.width = 200;
-			temp.x = 0;
-			temp.y = 70;
-			return temp;
-		}
-
-		private function lab_6_i():feathers.controls.SkinnableContainer
-		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			lab_6 = temp;
-			temp.name = "lab_6";
-			temp.height = 21;
-			var skin:StateSkin = new org.mokylin.skin.app.zuoqi.Shuxing_Item()
-			temp.skin = skin
-			temp.width = 200;
-			temp.x = 0;
-			temp.y = 88;
-			return temp;
-		}
-
-		private function lab_7_i():feathers.controls.SkinnableContainer
-		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			lab_7 = temp;
-			temp.name = "lab_7";
-			temp.height = 21;
-			var skin:StateSkin = new org.mokylin.skin.app.zuoqi.Shuxing_Item()
-			temp.skin = skin
-			temp.width = 200;
-			temp.x = 0;
-			temp.y = 106;
-			return temp;
-		}
-
-		private function lab_8_i():feathers.controls.SkinnableContainer
-		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			lab_8 = temp;
-			temp.name = "lab_8";
-			temp.height = 21;
-			var skin:StateSkin = new org.mokylin.skin.app.zuoqi.Shuxing_Item()
-			temp.skin = skin
-			temp.width = 200;
-			temp.x = 0;
-			temp.y = 123;
+			temp.x = 62;
+			temp.y = 110;
 			return temp;
 		}
 
@@ -528,11 +673,11 @@ package org.mokylin.skin.app.zuoqi
 			temp.name = "lab_progressbar";
 			temp.text = "160/200";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 74;
-			temp.x = 87;
-			temp.y = 2;
+			temp.width = 166;
+			temp.x = 36;
+			temp.y = 3;
 			return temp;
 		}
 
@@ -542,12 +687,12 @@ package org.mokylin.skin.app.zuoqi
 			lab_xuyaowupin = temp;
 			temp.name = "lab_xuyaowupin";
 			temp.height = 19;
-			temp.text = "战旗进阶丹*10(999)";
-			temp.color = 0xE1201C;
+			temp.text = "坐骑进阶丹*1";
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
 			temp.width = 137;
-			temp.x = 35;
+			temp.x = 41;
 			temp.y = 3;
 			return temp;
 		}
@@ -558,10 +703,42 @@ package org.mokylin.skin.app.zuoqi
 			lab_zhufuzhi = temp;
 			temp.name = "lab_zhufuzhi";
 			temp.text = "本阶祝福值不清零";
-			temp.color = 0x5CB006;
+			temp.color = 0xFF0D0D;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 110;
-			temp.y = 82;
+			temp.x = 105;
+			temp.y = 65;
+			return temp;
+		}
+
+		private function lbJinjie_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbJinjie = temp;
+			temp.name = "lbJinjie";
+			temp.fontSize = 11;
+			temp.text = "100";
+			temp.textAlign = "right";
+			temp.color = 0xEEEEEE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 60;
+			temp.x = 547;
+			temp.y = 490;
+			return temp;
+		}
+
+		private function lbZhizi_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbZhizi = temp;
+			temp.name = "lbZhizi";
+			temp.fontSize = 11;
+			temp.text = "100";
+			temp.textAlign = "right";
+			temp.color = 0xEEEEEE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 60;
+			temp.x = 619;
+			temp.y = 490;
 			return temp;
 		}
 
@@ -570,9 +747,9 @@ package org.mokylin.skin.app.zuoqi
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			maximg = temp;
 			temp.name = "maximg";
-			temp.styleName = "ui/app/zuoqi/yimanji.png";
-			temp.x = 742;
-			temp.y = 471;
+			temp.styleName = "ui/app/zuoqi/yimianjie.png";
+			temp.x = 762;
+			temp.y = 411;
 			return temp;
 		}
 
@@ -585,8 +762,8 @@ package org.mokylin.skin.app.zuoqi
 			temp.height = 59;
 			temp.styleClass = org.mokylin.skin.app.zuoqi.mc.UIMovieClipJieshu;
 			temp.width = 29;
-			temp.x = 553;
-			temp.y = 96;
+			temp.x = 609;
+			temp.y = 101;
 			return temp;
 		}
 
@@ -596,38 +773,59 @@ package org.mokylin.skin.app.zuoqi
 			mc_name = temp;
 			temp.name = "mc_name";
 			temp.autoPlay = false;
-			temp.height = 196;
 			temp.styleClass = org.mokylin.skin.app.zuoqi.mc.UIMovieClipZhanqiName;
-			temp.width = 83;
-			temp.x = 585;
-			temp.y = 85;
+			temp.x = 629;
+			temp.y = 87;
 			return temp;
 		}
 
-		private function progressbar_i():feathers.controls.ProgressBar
+		private function num_lv_i():feathers.controls.UINumber
+		{
+			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
+			num_lv = temp;
+			temp.name = "num_lv";
+			temp.gap = -4;
+			temp.height = 25;
+			temp.label = "1000";
+			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_lv;
+			temp.width = 75;
+			temp.x = 156;
+			temp.y = 46;
+			return temp;
+		}
+
+		private function progressbar1_i():feathers.controls.ProgressBar
 		{
 			var temp:feathers.controls.ProgressBar = new feathers.controls.ProgressBar();
-			progressbar = temp;
-			temp.name = "progressbar";
-			temp.height = 14;
-			temp.maximum = 200;
-			temp.minimum = 0;
+			progressbar1 = temp;
+			temp.name = "progressbar1";
+			temp.isEnabled = true;
 			temp.styleClass = org.mokylin.skin.app.zuoqi.progress_zhufuzhiSkin;
-			temp.value = 160;
-			temp.width = 220;
-			temp.x = 4;
-			temp.y = 4;
+			temp.value = 10;
+			temp.x = 21;
+			temp.y = 3;
 			return temp;
 		}
 
-		private function progressbar_light_i():feathers.controls.UIAsset
+		private function ui_text_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			progressbar_light = temp;
-			temp.name = "progressbar_light";
-			temp.styleName = "ui/app/zuoqi/tiao.png";
-			temp.x = 177;
-			temp.y = 2;
+			ui_text = temp;
+			temp.name = "ui_text";
+			temp.styleName = "ui/app/zuoqi/dianjidanyao.png";
+			temp.x = 535;
+			temp.y = 510;
+			return temp;
+		}
+
+		private function ui_zhandou_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ui_zhandou = temp;
+			temp.name = "ui_zhandou";
+			temp.styleName = "ui/common/zhandouli1.png";
+			temp.x = 43;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -636,19 +834,9 @@ package org.mokylin.skin.app.zuoqi
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			uplevelgroup = temp;
 			temp.name = "uplevelgroup";
-			temp.x = 691;
-			temp.y = 333;
-			temp.elementsContent = [__Zhanqi_Skin_UIAsset2_i(),expgroup_i(),__Zhanqi_Skin_UIAsset4_i(),lab_zhufuzhi_i(),__Zhanqi_Skin_UIAsset5_i(),grid_1_i(),grid_2_i(),jinjie_i()];
-			return temp;
-		}
-
-		private function zuoqijineng_i():feathers.controls.Group
-		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
-			zuoqijineng = temp;
-			temp.name = "zuoqijineng";
-			temp.x = 182;
-			temp.y = 425;
+			temp.x = 0;
+			temp.y = 0;
+			temp.elementsContent = [__Zhanqi_Skin_UIAsset8_i(),__Zhanqi_Skin_UIAsset9_i(),expgroup_i(),lab_zhufuzhi_i(),__Zhanqi_Skin_UIAsset11_i(),grid_1_i(),grid_2_i()];
 			return temp;
 		}
 

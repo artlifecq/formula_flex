@@ -42,10 +42,9 @@ package org.mokylin.skin.app.zuoqi
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			thumb = temp;
 			temp.name = "thumb";
-			temp.height = 20;
 			temp.styleName = "ui/app/zuoqi/jdt_dtiao.png";
-			temp.x = 0;
-			temp.y = 0;
+			temp.x = 3;
+			temp.y = -1;
 			return temp;
 		}
 
@@ -55,10 +54,9 @@ package org.mokylin.skin.app.zuoqi
 			track = temp;
 			temp.name = "track";
 			temp.alpha = 0;
-			temp.height = 20;
 			temp.styleName = "ui/app/zuoqi/jdt_dtiao.png";
 			temp.x = 0;
-			temp.y = 0;
+			temp.y = 1;
 			return temp;
 		}
 
