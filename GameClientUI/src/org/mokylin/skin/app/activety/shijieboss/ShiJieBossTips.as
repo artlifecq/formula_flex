@@ -17,8 +17,6 @@ package org.mokylin.skin.app.activety.shijieboss
 		//==========================================================================
 		public var bg:feathers.controls.UIAsset;
 
-		public var icon1:feathers.controls.UIAsset;
-
 		public var lbXiaJie:feathers.controls.Label;
 
 		public var line1:feathers.controls.UIAsset;
@@ -38,7 +36,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			this.currentState = "normal";
 			this.height = 173;
 			this.width = 298;
-			this.elementsContent = [bg_i(),lbXiaJie_i(),line1_i(),icon1_i(),uiLiBao_i(),uiHead_i()];
+			this.elementsContent = [bg_i(),lbXiaJie_i(),line1_i(),uiLiBao_i(),uiHead_i()];
 			
 			states = {
 			};
@@ -59,17 +57,6 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.width = 298;
 			temp.x = 0;
 			temp.y = 0;
-			return temp;
-		}
-
-		private function icon1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon1 = temp;
-			temp.name = "icon1";
-			temp.styleName = "ui/common/grid/normal/42.png";
-			temp.x = 12;
-			temp.y = 110;
 			return temp;
 		}
 
