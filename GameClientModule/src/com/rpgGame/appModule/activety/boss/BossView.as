@@ -5,10 +5,12 @@ package com.rpgGame.appModule.activety.boss
 	import com.rpgGame.app.display3D.InterAvatar3D;
 	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.core.events.AvatarEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
@@ -20,6 +22,7 @@ package com.rpgGame.appModule.activety.boss
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleType;
+	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.activity.ActivityJoinStateEnum;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	
@@ -86,7 +89,6 @@ package com.rpgGame.appModule.activety.boss
 			var bossCfg:Q_monster=MonsterDataManager.getData(bossId);
 			_avatardata.avatarInfo.setBodyResID(bossCfg ? bossCfg.q_body_res : "", null);
 			_avatar.setRoleData(this._avatardata);
-			this._avatar.curRole.setScale(Number(selectedInfo.worldBossCfg.q_monster_scale));	
 		}
 		
 		override public function show(data:Object=null):void
@@ -138,6 +140,14 @@ package com.rpgGame.appModule.activety.boss
 		{
 			_skin.ListItem.addEventListener(Event.CHANGE,onChange);
 			EventManager.addEvent(MainPlayerEvent.STAT_CHANGE,updateList);
+			EventManager.addEvent(AvatarEvent.AVATAR_CHANGE_COMPLETE,onUpateAvatarScale);
+		}
+		
+		private function onUpateAvatarScale(role:SceneRole,id:int):void
+		{
+			if(role&&_avatar.curRole&&_avatar.curRole==role&&id==RenderUnitID.BODY){
+				this._avatar.curRole.setScale(Number(selectedInfo.worldBossCfg.q_monster_scale));	
+			}
 		}
 		
 		private function updateList():void
@@ -223,6 +233,10 @@ package com.rpgGame.appModule.activety.boss
 				icon=rewardIcon.pop();
 				icon.destroy();
 			}
+			
+			_skin.ListItem.removeEventListener(Event.CHANGE,onChange);
+			EventManager.removeEvent(MainPlayerEvent.STAT_CHANGE,updateList);
+			EventManager.removeEvent(AvatarEvent.AVATAR_CHANGE_COMPLETE,onUpateAvatarScale);
 		}
 	}
 }

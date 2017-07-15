@@ -39,7 +39,8 @@ package com.rpgGame.app.graphics
 		private var _isDisposed:Boolean;
 		
 		private var weiczbItems:Array=[5088,5089,5090];
-		private var maps:Array=[900];
+		private var wangczbItems:Array=[5091,5092];
+		private var maps:Array=[900,901];
 		private var items:Array;
 		private var dataMap:HashMap=new HashMap();
 		
@@ -56,6 +57,13 @@ package com.rpgGame.app.graphics
 					setItemRes(_skin["skin2"].skin as HeadInfoItem,"yin");
 					setItemRes(_skin["skin3"].skin as HeadInfoItem,"jin");
 					items=weiczbItems;
+					break;
+				case maps[1]:
+					_skin=new Head_Info();
+					setItemRes(_skin["skin1"].skin as HeadInfoItem,"tong");
+					setItemRes(_skin["skin2"].skin as HeadInfoItem,"yin");
+					setItemRes(_skin["skin3"].skin as HeadInfoItem,"jin");
+					items=wangczbItems;
 					break;
 			}
 			_skin.toSprite(this);

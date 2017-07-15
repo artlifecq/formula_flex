@@ -795,6 +795,7 @@ package com.rpgGame.app.manager
 		/**部件添加完成*/
 		private static function partAddedCallBack(role : SceneRole, ru : RenderUnit3D) : void
 		{
+			EventManager.dispatchEvent(AvatarEvent.AVATAR_CHANGE_COMPLETE,role,ru.id);//通知外面对应的角色的对应部位更新完成
 			ru.removeAddedCallBack(partAddedCallBack);
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
 			var rpd_body : RenderParamData3D = avatarInfo.rpd_body;

@@ -51,8 +51,6 @@ package com.rpgGame.app.ui.scene
 	{
 		private var _skin:HuangCheng_ZhuiZong;
 		
-		private var items:Array=[5088,5089,5090];
-		
 		private var icon1:IconCDFace;
 		private var icon2:IconCDFace;
 		private var icon3:IconCDFace;
@@ -69,16 +67,33 @@ package com.rpgGame.app.ui.scene
 		private var defendCmapId:int;
 		
 		private var weiczbItems:Array=[5088,5089,5090];
+		private var wangczbItems:Array=[5091,5092];
 		private var oreID:Array=[];
+		
+		private var maps:Array=[900,901];
+		private var items:Array;
 		
 		public function GuildWarTrackerUI()
 		{
 			_skin=new HuangCheng_ZhuiZong();
 			super(_skin);
 			
-			iteminfo1=new ClientItemInfo(items[0]);
-			iteminfo2=new ClientItemInfo(items[1]);
-			iteminfo3=new ClientItemInfo(items[2]);
+			var mapId:int=MainRoleManager.actorInfo.mapID;
+			switch(mapId){
+				case maps[0]:
+					items=weiczbItems;
+					iteminfo1=new ClientItemInfo(items[0]);
+					iteminfo2=new ClientItemInfo(items[1]);
+					iteminfo3=new ClientItemInfo(items[2]);
+					break;
+				case maps[1]:
+					items=wangczbItems;
+					iteminfo1=new ClientItemInfo(items[0]);
+					iteminfo2=new ClientItemInfo(items[1]);
+					iteminfo3=new ClientItemInfo(items[2]);
+					break;
+			}
+			
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -166,6 +181,9 @@ package com.rpgGame.app.ui.scene
 					break;
 				case EnumCity.DONG_WEI:
 					name="东卫";
+					break;
+				case EnumCity.WANG_CHENG:
+					name="王城";
 					break;
 			}
 			return name;
