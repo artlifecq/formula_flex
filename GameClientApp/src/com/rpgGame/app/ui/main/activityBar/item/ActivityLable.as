@@ -6,12 +6,14 @@ package com.rpgGame.app.ui.main.activityBar.item
 	import org.mokylin.skin.mainui.activityBar.ActiveLabelDg;
 	import org.mokylin.skin.mainui.activityBar.ActivityItem;
 	
+	import starling.display.DisplayObject;
+	
 	public class ActivityLable
 	{
 		private var _skin:ActivityItem;
 		private var _iconList:Vector.<SkinnableContainer>;
 		private var _lastLine:int = 0;
-		private var _width:int;
+		private var _width:Number = 65;
 		public function ActivityLable(skin:ActivityItem):void
 		{
 			_skin = skin;
@@ -23,10 +25,25 @@ package com.rpgGame.app.ui.main.activityBar.item
 		{
 			_iconList = new Vector.<SkinnableContainer>();
 			_skin.skinBg.visible = false;
-//			_iconList.push(_skin.skinBg);
 		}
 		
+		public function updataWidth(value:Number):void
+		{
+			if(_width== value)
+				return ;
+			refeashSize();
+		}
 		
+		private function refeashSize():void
+		{
+			var length:int = _skin.container.numChildren;
+			for(var i:int = 0;i<length;i++)
+			{
+				var child:DisplayObject = _skin.container.getChildAt(i);
+				child.width = _width;
+				child.x = 0;
+			}
+		}
 		public function set text(value:String):void
 		{
 			_skin.txtTitle.htmlText = value;
@@ -53,9 +70,7 @@ package com.rpgGame.app.ui.main.activityBar.item
 					skincontent = createSkin();
 				}
 				skincontent.visible = true;
-				skincontent.y = 17*i;
-				skincontent.width = 60;
-				skincontent.x = 25;
+				skincontent.y = 18*i;
 			}
 			
 			length= _iconList.length;
@@ -66,11 +81,12 @@ package com.rpgGame.app.ui.main.activityBar.item
 				skincontent = _iconList[i];
 				skincontent.visible = false;
 			}
+			refeashSize();
 		}
 		private function createSkin():SkinnableContainer
 		{
 			var temp:SkinnableContainer = new SkinnableContainer();
-			temp.height = 17;
+			temp.height = 16;
 			var skin:StateSkin = new ActiveLabelDg();
 			temp.skin = skin;
 			this._skin.container.addChildAt(temp,0);
