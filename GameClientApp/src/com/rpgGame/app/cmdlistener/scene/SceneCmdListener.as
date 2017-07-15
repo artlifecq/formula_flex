@@ -480,7 +480,8 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function RecvSCSceneObjMoveMessage(msg:SCSceneObjMoveMessage):void
 		{
-			if(msg.objId.ToGID() == MainRoleManager.actorID)
+			//chongci
+			if(msg.objId.ToGID() == MainRoleManager.actorID&&msg.type!=1)
 			{
 				trace("这里不应该有主角自己的呀！主角自己的移动不需要同步到自己吧！！！");
 				return;
@@ -775,7 +776,8 @@ package com.rpgGame.app.cmdlistener.scene
 				collectData.name = qData.q_name;
 				collectData.avatarRes = qData.q_body_res;
 				collectData.sizeScale = qData.q_scale > 0 ? (qData.q_scale * 0.01) : 1;
-				collectData.direction = qData.q_direction;
+				//collectData.direction = qData.q_direction;
+				collectData.direction=info.dir;
 				collectData.x = info.position.x;
 				collectData.y = info.position.y;
 				collectData.isDynamicCreate =true;

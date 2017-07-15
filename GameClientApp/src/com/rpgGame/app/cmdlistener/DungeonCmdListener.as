@@ -215,10 +215,7 @@ package com.rpgGame.app.cmdlistener
 			if(DungeonManager.passReward==1||DungeonManager.extraReward==1)
 			{
 				DungeonManager.isReward=true;
-				if (!AppManager.isAppInScene(AppConstant.MULTY_PANL))
-				{
-					AppManager.showApp(AppConstant.MULTY_PANL);
-				}
+				AppManager.showAppNoHide(AppConstant.MULTY_PANL);
 			}
 			//EventManager.dispatchEvent(DungeonEvent.ZONE_REWARD);
 		}
@@ -258,10 +255,7 @@ package com.rpgGame.app.cmdlistener
 				DungeonManager.teamZid=0;
 				DungeonManager.voteZid=0;
 				AppManager.hideApp(AppConstant.MULTY_TEAM_PANL);
-				if (!msg.playerId.EqualTo(MainRoleManager.actorInfo.serverID)&&!AppManager.isAppInScene(AppConstant.MULTY_TEAM_CANCEL_PANL))
-				{
-					AppManager.showApp(AppConstant.MULTY_TEAM_CANCEL_PANL,msg.playerId.ToGID());
-				}
+				AppManager.showAppNoHide(AppConstant.MULTY_TEAM_CANCEL_PANL,msg.playerId.ToGID());
 				
 			}
 			else
@@ -274,10 +268,7 @@ package com.rpgGame.app.cmdlistener
 				}
 				else
 				{
-					if (!AppManager.isAppInScene(AppConstant.MULTY_TEAM_PANL))
-					{
-						AppManager.showApp(AppConstant.MULTY_TEAM_PANL);
-					}
+					AppManager.showAppNoHide(AppConstant.MULTY_TEAM_PANL);
 					EventManager.dispatchEvent(DungeonEvent.ZONE_TEAM_VOTE);
 				}
 			}		

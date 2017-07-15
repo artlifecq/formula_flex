@@ -22,6 +22,7 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.coreData.clientConfig.Q_SpellEffect;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.info.fight.FightHurtResult;
+	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
@@ -737,7 +738,10 @@ package com.rpgGame.app.fight.spell
 		 * 
 		 */		
 		public static function addFlyEffect(info : ReleaseSpellInfo) : void
+		{try{if((info.atkor.data as MonsterData).modelID==6206)
 		{
+			Lyt.a("弹道特效："+info.flyTargetPosList.length);
+		}}catch(e:Error){}
 			if (SceneManager.isSceneOtherRenderLimit)
 				return;
 			var animatData : Q_SpellAnimation = info.passAni;
@@ -751,6 +755,10 @@ package com.rpgGame.app.fight.spell
 					for (var i : int = 0; i < info.flyTargetPosList.length; i++)
 					{
 						var targetPosition:Vector3D = new Vector3D(info.flyTargetPosList[i].x,0,info.flyTargetPosList[i].y);
+						try{if((info.atkor.data as MonsterData).modelID==6206)
+						{
+							Lyt.a("弹道点："+targetPosition.x+":"+targetPosition.y+":"+targetPosition.z);
+						}}catch(e:Error){}
 						TweenLite.delayedCall((info.throwDelayTime + info.flyInterval * i) * 0.001, addFlyEffectOnce, [info, animatData.scene_res, targetPosition,null, 0, 0,effectQueue, locusPoints]);
 					}
 					
@@ -1020,11 +1028,12 @@ package com.rpgGame.app.fight.spell
 			//如果场景中存在此类型此ID的角色，则移除之
 			var rud : RenderParamData3D = new RenderParamData3D(id, type, ClientConfig.getEffect(effectRes));
 			var effectRu : RenderUnit3D = RenderUnit3D.create(rud,true);
-			effectRu.repeat = 0;
+			effectRu.repeat = 1;
 			effectRu.mouseEnable = false;
 			effectRu.play(0);
 			effectRu.visible = true;
 			effectRu.setGroundXY(x, y);
+			effectRu.setPlayCompleteCallBack(SceneManager.removeSceneObjFromScene);
 			SceneManager.addSceneObjToScene(effectRu, true, false, false);
 			return effectRu;
 		}

@@ -14,6 +14,9 @@ package com.rpgGame.appModule.mount
 	
 	import starling.animation.IAnimatable;
 	import starling.core.Starling;
+	import starling.events.Touch;
+	import starling.events.TouchEvent;
+	import starling.events.TouchPhase;
 	
 	import utils.TimerServer;
 	
@@ -27,6 +30,8 @@ package com.rpgGame.appModule.mount
 		private var _amationInfos:Vector.<TargetAmationInfo>;
 		private static const TotalTime:Number = 0.6;
 		private static var _passTime:Number = 0;
+		private var _touchID:int;
+		private var startX:Number;
 		private var _list:Vector.<RenderUnit3D>;
 		public function MountContent(skin:ZuoqiCont_Skin):void
 		{
@@ -65,7 +70,7 @@ package com.rpgGame.appModule.mount
 		public function show():void
 		{
 			if(!TimerServer.has(updateTime))
-				TimerServer.addLoop(updateTime,10000);
+				TimerServer.addLoop(updateTime,20000);
 			updateTime();
 		}
 		
@@ -158,6 +163,32 @@ package com.rpgGame.appModule.mount
 			}
 			completeHandler();
 			
+		}
+		
+		public function onTouch(e:TouchEvent):void
+		{
+			var touch : Touch;
+			if(_touchID!=-1){
+				touch = e.getTouch(_skin.roleZone,null,this._touchID);
+				if (!touch)
+					return;
+				if (touch.phase == TouchPhase.MOVED)
+				{
+					var movex:Number=touch.globalX-startX;
+					//this._avatar.curRole.rotationY=movex;
+					this._curtentInter3D.rotationY = movex;
+				}else if (touch.phase == TouchPhase.ENDED)	{
+					this._touchID = -1;
+					//this._avatar.curRole.rotationY=0;
+					this._curtentInter3D.rotationY = 60;
+				}
+			}else{
+				touch = e.getTouch(_skin.roleZone, TouchPhase.BEGAN);
+				if(touch){
+					this._touchID=touch.id;
+					startX=touch.globalX;
+				}
+			}
 		}
 		
 		private function addRenderUnitWith(rend : RenderParamData3D,src3d:InterObject3D):RenderUnit3D

@@ -108,6 +108,8 @@ package org.mokylin.skin.app.zuoqi
 
 		public var progressbar:feathers.controls.ProgressBar;
 
+		public var roleZone:feathers.controls.UIAsset;
+
 		public var ui_zhandou:feathers.controls.UIAsset;
 
 		public var uplevelgroup:feathers.controls.Group;
@@ -125,7 +127,7 @@ package org.mokylin.skin.app.zuoqi
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [__ZuoqiCont_Skin_Group1_i(),bg_2_i(),grpFoot_i(),__ZuoqiCont_Skin_UIAsset12_i(),__ZuoqiCont_Skin_UIAsset13_i(),grpZhanli_i(),gprShuxing_i(),lberror_i(),btn_zizhidan_i(),btn_chengzhangdan_i(),lbZhizi_i(),lbJinjie_i(),zuoqijineng_i(),btn_prev_i(),btn_next_i(),mc_name_i(),mc_jieshu_i(),maximg_i()];
+			this.elementsContent = [__ZuoqiCont_Skin_Group1_i(),bg_2_i(),grpFoot_i(),__ZuoqiCont_Skin_UIAsset12_i(),__ZuoqiCont_Skin_UIAsset13_i(),grpZhanli_i(),gprShuxing_i(),lberror_i(),btn_zizhidan_i(),btn_chengzhangdan_i(),lbZhizi_i(),lbJinjie_i(),zuoqijineng_i(),btn_prev_i(),btn_next_i(),mc_name_i(),mc_jieshu_i(),maximg_i(),roleZone_i()];
 			
 			states = {
 			};
@@ -419,7 +421,7 @@ package org.mokylin.skin.app.zuoqi
 			btn_chengzhangdan = temp;
 			temp.name = "btn_chengzhangdan";
 			temp.styleClass = org.mokylin.skin.app.zuoqi.button.ButtonZuoqichengzhangdan;
-			temp.x = 542;
+			temp.x = 614;
 			temp.y = 440;
 			return temp;
 		}
@@ -502,7 +504,7 @@ package org.mokylin.skin.app.zuoqi
 			btn_zizhidan = temp;
 			temp.name = "btn_zizhidan";
 			temp.styleClass = org.mokylin.skin.app.zuoqi.button.ButtonZuoqidan;
-			temp.x = 613;
+			temp.x = 538;
 			temp.y = 440;
 			return temp;
 		}
@@ -763,7 +765,7 @@ package org.mokylin.skin.app.zuoqi
 			temp.color = 0xEEEEEE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 60;
-			temp.x = 547;
+			temp.x = 619;
 			temp.y = 490;
 			return temp;
 		}
@@ -779,7 +781,7 @@ package org.mokylin.skin.app.zuoqi
 			temp.color = 0xEEEEEE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 60;
-			temp.x = 619;
+			temp.x = 544;
 			temp.y = 490;
 			return temp;
 		}
@@ -858,6 +860,20 @@ package org.mokylin.skin.app.zuoqi
 			temp.value = 50;
 			temp.x = 21;
 			temp.y = 3;
+			return temp;
+		}
+
+		private function roleZone_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			roleZone = temp;
+			temp.name = "roleZone";
+			temp.alpha = 0;
+			temp.height = 325;
+			temp.styleName = "ui/common/hover/xuanqukuang2_alpha.png";
+			temp.width = 541;
+			temp.x = 86;
+			temp.y = 95;
 			return temp;
 		}
 

@@ -27,6 +27,8 @@ package org.mokylin.skin.app.hongbao
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var bg:feathers.controls.UIAsset;
+		
 		public var btnChai:feathers.controls.Button;
 		
 		public var btnClose:feathers.controls.Button;
@@ -80,7 +82,7 @@ package org.mokylin.skin.app.hongbao
 			this.currentState = "normal";
 			this.height = 502;
 			this.width = 271;
-			this.elementsContent = [__HongBao_Chai_UIAsset1_i(),uiLijing_i(),numL_i(),skinFlip_i(),btnEixt_i(),btnContinue_i(),itemgroup_i(),uiDown_i(),uiUp_i(),__HongBao_Chai_UIAsset2_i(),lbName_i(),grpChai_i(),uiIcon_i(),btnClose_i()];
+			this.elementsContent = [bg_i(),uiLijing_i(),numL_i(),skinFlip_i(),btnEixt_i(),btnContinue_i(),itemgroup_i(),uiDown_i(),uiUp_i(),__HongBao_Chai_UIAsset1_i(),lbName_i(),grpChai_i(),uiIcon_i(),btnClose_i()];
 			
 			states = {
 			};
@@ -105,8 +107,10 @@ package org.mokylin.skin.app.hongbao
 		private function __HongBao_Chai_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/hongbao/bg.jpg";
-			temp.x = 0;
+			temp.touchable = false;
+			temp.touchGroup = true;
+			temp.styleName = "ui/app/hongbao/gaoguang.png";
+			temp.x = 2;
 			temp.y = 0;
 			return temp;
 		}
@@ -114,17 +118,19 @@ package org.mokylin.skin.app.hongbao
 		private function __HongBao_Chai_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/hongbao/gaoguang.png";
-			temp.x = 2;
+			temp.styleName = "ui/app/hongbao/dibanhuitiao.png";
+			temp.width = 235;
+			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
 		
-		private function __HongBao_Chai_UIAsset3_i():feathers.controls.UIAsset
+		private function bg_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/hongbao/dibanhuitiao.png";
-			temp.width = 235;
+			bg = temp;
+			temp.name = "bg";
+			temp.styleName = "ui/app/hongbao/bg.jpg";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -198,8 +204,8 @@ package org.mokylin.skin.app.hongbao
 			faBg = temp;
 			temp.name = "faBg";
 			temp.styleName = "ui/app/hongbao/dibanhuitiao.png";
-			temp.width = 235;
-			temp.x = 0;
+			temp.width = 280;
+			temp.x = -10;
 			temp.y = 0;
 			return temp;
 		}
@@ -220,7 +226,7 @@ package org.mokylin.skin.app.hongbao
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grpFa = temp;
 			temp.name = "grpFa";
-			temp.x = 6;
+			temp.x = -7;
 			temp.y = 99;
 			temp.elementsContent = [faBg_i(),lbItem_i()];
 			return temp;
@@ -233,7 +239,7 @@ package org.mokylin.skin.app.hongbao
 			temp.name = "grpMsg";
 			temp.x = 6;
 			temp.y = 333;
-			temp.elementsContent = [__HongBao_Chai_UIAsset3_i(),__HongBao_Chai_Label1_i()];
+			temp.elementsContent = [__HongBao_Chai_UIAsset2_i(),__HongBao_Chai_Label1_i()];
 			return temp;
 		}
 		
@@ -283,8 +289,8 @@ package org.mokylin.skin.app.hongbao
 			temp.textAlign = "center";
 			temp.color = 0xFF0D0D;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 225;
-			temp.x = 6;
+			temp.width = 260;
+			temp.x = 0;
 			temp.y = 7;
 			return temp;
 		}
@@ -294,6 +300,8 @@ package org.mokylin.skin.app.hongbao
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbName = temp;
 			temp.name = "lbName";
+			temp.touchable = false;
+			temp.touchGroup = true;
 			temp.fontSize = 16;
 			temp.text = "项少龙红包";
 			temp.textAlign = "center";
@@ -356,6 +364,8 @@ package org.mokylin.skin.app.hongbao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiDown = temp;
 			temp.name = "uiDown";
+			temp.touchable = false;
+			temp.touchGroup = true;
 			temp.styleName = "ui/app/hongbao/xia.png";
 			temp.x = 2;
 			temp.y = 227;
@@ -389,6 +399,8 @@ package org.mokylin.skin.app.hongbao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiUp = temp;
 			temp.name = "uiUp";
+			temp.touchable = false;
+			temp.touchGroup = true;
 			temp.styleName = "ui/app/hongbao/shang.png";
 			temp.width = 268;
 			temp.x = 2;

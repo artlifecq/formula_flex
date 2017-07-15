@@ -171,9 +171,9 @@ package com.rpgGame.app.ui.main.shortcut
 			{
 				_skin.fangun_tishi.visible =false;
 				_lbl_times.visible = true;
-				passTime = RollManager.CD_TIMES-passTime;
+				passTime = RollManager.getinstance().cdTimes-passTime;
 				_lbl_times.text = formatNumber(passTime/1000)+"s";
-				endAngle = Math.PI+Math.PI*(passTime)/RollManager.CD_TIMES
+				endAngle = Math.PI+Math.PI*(passTime)/RollManager.getinstance().cdTimes
 			}else if(state==RollManager.RoleState_CD)
 			{
 				_skin.fangun_tishi.visible =false;

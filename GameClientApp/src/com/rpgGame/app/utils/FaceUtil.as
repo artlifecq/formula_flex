@@ -1,8 +1,6 @@
 package com.rpgGame.app.utils
 {
-	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.goods.RoleEquipmentManager;
-	import com.rpgGame.app.manager.mount.MountEquipmentManager;
 	import com.rpgGame.app.manager.mount.MountManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.view.icon.DragDropItem;
@@ -10,6 +8,7 @@ package com.rpgGame.app.utils
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
@@ -17,7 +16,6 @@ package com.rpgGame.app.utils
 	import com.rpgGame.coreData.cfg.mount.MountUnitData;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.face.FaceTypeEnum;
-	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.info.face.BaseFaceInfo;
 	import com.rpgGame.coreData.info.face.IBaseFaceInfo;
@@ -29,7 +27,6 @@ package com.rpgGame.app.utils
 	import com.rpgGame.coreData.type.AssetUrl;
 	import com.rpgGame.coreData.type.ShopType;
 	import com.rpgGame.coreData.type.TipType;
-	import com.rpgGame.coreData.type.item.GridBGType;
 	
 	import flash.geom.Point;
 	
@@ -253,7 +250,7 @@ package com.rpgGame.app.utils
 				{
 					TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.SPELL_TIP, data,false,new Point(grid.x,grid.y)) );
 				}else{
-					TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.PASSIVESKILL_TIP, data,false,new Point(grid.x,grid.y)) );
+					TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.PASSIVESKILL_TIP, new DynamicTipData(data),false,new Point(grid.x,grid.y)) );
 				}
 				
 			}else

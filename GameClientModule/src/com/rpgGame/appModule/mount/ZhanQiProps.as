@@ -34,6 +34,8 @@ package com.rpgGame.appModule.mount
 			
 			_attType=[CharAttributeType.WAI_GONG,CharAttributeType.SHENFA,CharAttributeType.MAX_HP,
 				CharAttributeType.DEFENSE_PER,CharAttributeType.HIT];//14,3,12,16,23];
+			_skin.num_lv.visible = false;
+			_skin.ico_up.visible = false;
 		}
 		
 		private var _isSHowNext:Boolean = true;
@@ -49,6 +51,8 @@ package com.rpgGame.appModule.mount
 			{
 				view.showUpLevelView(bool);
 			}
+			_skin.num_lv.visible = bool;
+			_skin.ico_up.visible = bool;
 		}
 		private var _foundIndex:int;
 		private var _currentProp:Vector.<Number>;
@@ -68,6 +72,8 @@ package com.rpgGame.appModule.mount
 			_skin.NumZhanli.number = Math.floor(_currentPower+_nextPower*_zhanqiShowData.percent);
 			_foundIndex = 0;
 			_disProps = _zhanqiShowData.disProps;
+			var dispower:int= FightValueUtil.calAtrributeFightPower(_disProps.concat(),_zhanqiShowData.zhanqiJob);
+			_skin.num_lv.number = dispower;
 			for each(var view:ZhanQiPropView in _propList)
 			{
 				var nextType:int = _attType[_foundIndex];//nextPropIndex();

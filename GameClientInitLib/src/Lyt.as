@@ -1,4 +1,4 @@
-package com.gameClient.log 
+package  
 {
 	
 	import flash.display.BitmapData;
@@ -15,6 +15,9 @@ package com.gameClient.log
 	import flash.net.LocalConnection;
 	import flash.system.System;
 	import flash.text.TextField;
+	import com.gameClient.log.GameLog;
+	import com.gameClient.log.LogDoubleClick;
+	import com.gameClient.log.LogTextScrollBar;
 	
 	/**
 	 * YT的日志打印窗口   
