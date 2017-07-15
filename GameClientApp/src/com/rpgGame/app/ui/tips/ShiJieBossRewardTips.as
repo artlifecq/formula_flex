@@ -39,7 +39,7 @@ package com.rpgGame.app.ui.tips
 				FaceUtil.SetItemGrid(icon,itemInfo);
 				row=Math.floor(i/4);
 				icon.x=15+(i%4)*60-5;
-				icon.y=90+row*60;
+				icon.y=110+row*60;
 				_skins.container.addChild(icon);
 			}
 			if(icon){
