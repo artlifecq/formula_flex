@@ -265,16 +265,26 @@ package com.rpgGame.appModule.dungeon.multy
 		
 		private function setSelctItem(id:int):void
 		{
-			if(selectId>=0)
+			/*if(selectId>=0)
 			{
 				cloSelectItem(itemList[selectId]);
-			}
+			}*/
+			cloAllItem();
 			selectId=id;
 			selectZid=ZoneMultyCfgData.getZoneIdByID(selectId);
 			unSelectItem(itemList[selectId]);
 			setSite();
 			selectItemInfo();
 		}
+		/**收缩所有元素*/
+		private function cloAllItem():void
+		{
+			for(var i:int=0;i<itemList.length;i++)
+			{
+				cloSelectItem(itemList[i]);
+			}
+		}
+		
 		
 		/**设置右边信息*/
 		private function selectItemInfo():void
