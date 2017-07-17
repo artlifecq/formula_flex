@@ -153,19 +153,19 @@ package com.rpgGame.app.ui.main.smallmap {
 		}
 		
 		private function initSmallMap() : void {
-			var mask : Shape = new Shape();
-			mask.graphics.beginFill(0x00FF00);
-			mask.graphics.drawCircle(0, 0, (this._skin.UIMap.width+50)/2);//, this._skin.UIMap.height, 5);
-			mask.graphics.endFill();
-			mask.x = this._skin.UIMap.x+this._skin.UIMap.width/2;
-			mask.y = this._skin.UIMap.y+this._skin.UIMap.height/2;
-			this._skin.grp_cont.addChildAt(mask, this._skin.grp_cont.getChildIndex(this._skin.UIMap) + 1);
+//			var mask : Shape = new Shape();
+//			mask.graphics.beginFill(0x00FF00);
+//			mask.graphics.drawCircle(0, 0, (this._skin.UIMap.width+50)/2);//, this._skin.UIMap.height, 5);
+//			mask.graphics.endFill();
+//			mask.x = this._skin.UIMap.x+this._skin.UIMap.width/2;
+//			mask.y = this._skin.UIMap.y+this._skin.UIMap.height/2;
+//			this._skin.grp_cont.addChildAt(mask, this._skin.grp_cont.getChildIndex(this._skin.UIMap) + 1);
 			
 			this._smallMap = new SmallMap(this, SmallMap.RadarMap, (this._skin.UIMap.width+30), (this._skin.UIMap.height+30), this._mapScale);
 			this._smallMap.x = this._skin.UIMap.x;
 			this._smallMap.y = this._skin.UIMap.y;
 			this._skin.grp_cont.addChildAt(this._smallMap, this._skin.grp_cont.getChildIndex(this._skin.UIMap) + 1);
-			this._smallMap.mask = mask;
+//			this._smallMap.mask = mask;
 			
 			this._skin.lbLocation.width=110;
 			this._skin.lbLocation.wordWrap=false;

@@ -577,42 +577,33 @@ package com.rpgGame.app.ui.main.taskbar
 					skinList[i].y=0;
 				}
 			}
-			for(i=0;i<3;i++)
+			for(i=0;i<1;i++)
 			{
 				ico1BgList[i].y=ico1BgList[0].y;
 				ico1List[i].y=ico1BgList[0].y+3;
 			}
-			for(i=3;i<ico1BgList.length;i++)
-			{
-				ico1BgList[i].y=ico1BgList[3].y;
-				ico1List[i].y=ico1BgList[3].y+3;
-			}
-			for(i=0;i<3;i++)
+//			for(i=3;i<ico1BgList.length;i++)
+//			{
+//				ico1BgList[i].y=ico1BgList[3].y;
+//				ico1List[i].y=ico1BgList[3].y+3;
+//			}
+			for(i=0;i<1;i++)
 			{
 				ico2BgList[i].y=ico2BgList[0].y;
 				ico2List[i].y=ico2BgList[0].y+3;
 			}
-			for(i=3;i<ico2BgList.length;i++)
-			{
-				ico2BgList[i].y=ico2BgList[3].y;
-				ico2List[i].y=ico2BgList[3].y+3;
-			}
+//			for(i=3;i<ico2BgList.length;i++)
+//			{
+//				ico2BgList[i].y=ico2BgList[3].y;
+//				ico2List[i].y=ico2BgList[3].y+3;
+//			}
 			if(count>=0)
 			{
 				scrollBack.height=skinList[count].y+skinList[count].height+3;
 			}
 			
 			scrollBar.addChild(scrollBack);
-			scrollBar.addChild(scrollBox);
-			
-			
-			
+			scrollBar.addChild(scrollBox);		
 		}
-		
-		
-		
-		
-		
-
 	}
 }
