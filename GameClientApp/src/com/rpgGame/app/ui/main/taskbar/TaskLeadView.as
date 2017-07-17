@@ -1,24 +1,16 @@
 package com.rpgGame.app.ui.main.taskbar
 {
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
-	import com.rpgGame.app.utils.FaceUtil;
+	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.utils.TaskUtil;
-	import com.rpgGame.app.view.icon.IconCDFace;
-	import com.rpgGame.coreData.cfg.ClientConfig;
-	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
-	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.clientConfig.Q_mission_base;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
-	import com.rpgGame.coreData.info.item.ClientItemInfo;
-	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.type.TaskType;
-	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.task.bean.TaskInfo;
 	import com.rpgGame.netData.task.bean.TaskSubRateInfo;
-	
-	import flash.utils.setTimeout;
 	
 	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
@@ -42,15 +34,13 @@ package com.rpgGame.app.ui.main.taskbar
 		private var navi1Lable:Label;
 		private var navi2Lable:Label;
 		private var navi3Lable:Label;
-		/*private var kill1Label:Label;
-		private var kill2Label:Label;
-		private var kill3Label:Label;*/
 		private var priLabel:Label
 		private var jindu:RenWu_jindu;
 		private var killButList:Vector.<SkinnableContainer>;
 		private var killLabelList:Vector.<Label>;
 		private var icoBgList:Vector.<UIAsset>;
-		private var icoList:Vector.<IconCDFace>;
+		//private var icoList:Vector.<IconCDFace>;
+		private var icoListGroup:RewardGroup;
 		public function TaskLeadView(skin:RenWuZhuiZong_Skin)
 		{
 			_skin=skin;
@@ -59,6 +49,8 @@ package com.rpgGame.app.ui.main.taskbar
 		}
 		private function init():void
 		{
+			icoListGroup=new RewardGroup(IcoSizeEnum.ICON_42,_skin.pri_ico0,RewardGroup.ALIN_CENTER,4,6,6);
+			
 			skinList=new Array();
 			skinList.push(_skin.pri_navi1);
 			skinList.push(_skin.pri_probar);
@@ -68,7 +60,8 @@ package com.rpgGame.app.ui.main.taskbar
 			skinList.push(_skin.pri_killbut1);
 			skinList.push(_skin.pri_killbut2);
 			skinList.push(_skin.pri_killbut3);
-			skinList.push(_skin.pri_ico0);
+			skinList.push(icoListGroup);
+			//skinList.push(_skin.pri_ico3);
 			titleLable=_skin.pri_title;
 			navi1Lable=_skin.pri_navi1;
 			navi2Lable=_skin.pri_navi2;
@@ -88,8 +81,9 @@ package com.rpgGame.app.ui.main.taskbar
 			priLabel=_skin.pri_txt;
 			icoBgList=new Vector.<UIAsset>();
 			icoBgList.push(_skin.pri_ico0);
-			icoList=new Vector.<IconCDFace>();
 			var i:int;
+			/*icoList=new Vector.<IconCDFace>();
+			
 			for(i=0;i<icoBgList.length;i++)
 			{
 				var ico:IconCDFace=IconCDFace.create(IcoSizeEnum.ICON_42);
@@ -100,7 +94,10 @@ package com.rpgGame.app.ui.main.taskbar
 				icoBgList[i].visible=false;
 				icoList.push(ico);
 				_skin.primary_box.addChild(ico);
-			}
+			}*/
+			
+			
+			
 			for(i=0;i<killButList.length;i++)
 			{
 				killButList[i].visible=false;
@@ -151,12 +148,12 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				killButList[i].visible=false;
 			}
-			for(i=0;i<icoBgList.length;i++)
+			/*for(i=0;i<icoBgList.length;i++)
 			{
 				icoBgList[i].visible=false;
 				icoList[i].visible=false;
-			}
-			
+			}*/
+			icoListGroup.visible=false;
 		}
 		
 		public function hideKillBut():void
@@ -183,7 +180,9 @@ package com.rpgGame.app.ui.main.taskbar
 				setTitle(taskData.q_party_name,taskData.q_name,taskData.q_describe);
 				setParcent(taskData.q_party_id,taskData.q_node_id);
 				setTaskButView(taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,MonsterDataManager.getMonsterModeidByAreaid(taskData.q_finish_npc));
-				TaskUtil.setRewordInfo(taskData.q_reword_id,icoList,icoBgList);
+				//TaskUtil.setRewordInfo(taskData.q_reword_id,icoList,icoBgList);
+				icoListGroup.setRewardByArray(TaskMissionCfgData.getRewordById(taskData.q_reword_id,MainRoleManager.actorInfo.job));
+				icoListGroup.visible=true;
 				setUisite();
 			}
 			
@@ -202,7 +201,11 @@ package com.rpgGame.app.ui.main.taskbar
 			}
 			
 		}
-		
+		public function leadTaskFilish():void
+		{
+			if(!_skin.primary_box.visible)return;
+			//icoListGroup.tweeRewardInBag(2);
+		}
 		
 		/**设置标题详情*/
 		private function setTitle(party:String,name:String,describe:String):void
@@ -263,7 +266,7 @@ package com.rpgGame.app.ui.main.taskbar
 			_skin.uibg.height=_skin.btnContinue.y+45;
 			
 			
-			for(i=0;i<3;i++)
+			/*for(i=0;i<3;i++)
 			{
 				if(icoBgList[i].visible==true)
 				{
@@ -279,7 +282,7 @@ package com.rpgGame.app.ui.main.taskbar
 					icoList[i].y=icoBgList[3].y+3;
 				}
 			}
-			
+			*/
 			
 			
 		}

@@ -1,9 +1,12 @@
 package com.rpgGame.app.ui.main.taskbar
 {
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
+	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
+	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_mission_base;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.type.TaskType;
@@ -42,10 +45,12 @@ package com.rpgGame.app.ui.main.taskbar
 		private var killBut3List:Vector.<SkinnableContainer>;
 		private var killLabel3List:Vector.<Label>;
 		private var extraLabel:Label;
-		private var ico1BgList:Vector.<UIAsset>;
+		/*private var ico1BgList:Vector.<UIAsset>;
 		private var ico1List:Vector.<IconCDFace>;
 		private var ico2BgList:Vector.<UIAsset>;
-		private var ico2List:Vector.<IconCDFace>;
+		private var ico2List:Vector.<IconCDFace>;*/
+		private var icoList1Group:RewardGroup;
+		private var icoList2Group:RewardGroup;
 		private var subBut1:Button;
 		private var subBut2:Button;
 		public function TaskLoopView(skin:RenWuZhuiZong_Skin)
@@ -57,6 +62,11 @@ package com.rpgGame.app.ui.main.taskbar
 		{
 			var i:int;
 			scrollInit();
+			//_skin.sec_ico1_0.x=253*0.5;
+			//_skin.sec_ico2_0.x=253*0.5;
+			icoList1Group=new RewardGroup(IcoSizeEnum.ICON_42,_skin.sec_ico1_0,RewardGroup.ALIN_LEFT,4,6,6);
+			icoList2Group=new RewardGroup(IcoSizeEnum.ICON_42,_skin.sec_ico2_0,RewardGroup.ALIN_LEFT,4,6,6);
+			
 			skinList=new Array();
 			skinList.push(_skin.sec_navi1);
 			skinList.push(_skin.sec_killbut1_1);
@@ -66,14 +76,14 @@ package com.rpgGame.app.ui.main.taskbar
 			skinList.push(_skin.sec_killbut2_1);
 			skinList.push(_skin.sec_killbut2_2);
 			skinList.push(_skin.sec_killbut2_3);
-			skinList.push(_skin.sec_ico1_0);
+			skinList.push(icoList1Group);
 			skinList.push(_skin.sec_subbut1);
 			skinList.push(_skin.sec_navi3);
 			skinList.push(_skin.sec_killbut3_1);
 			skinList.push(_skin.sec_killbut3_2);
 			skinList.push(_skin.sec_killbut3_3);
 			skinList.push(_skin.sec_info);
-			skinList.push(_skin.sec_ico2_0);
+			skinList.push(icoList2Group);
 			skinList.push(_skin.sec_subbut2);
 			
 			navi1=_skin.sec_navi1;
@@ -116,8 +126,13 @@ package com.rpgGame.app.ui.main.taskbar
 			subBut2=_skin.sec_subbut2;
 			
 			var ico:IconCDFace
-			ico1BgList=new Vector.<UIAsset>();
+			/*ico1BgList=new Vector.<UIAsset>();
 			ico1BgList.push(_skin.sec_ico1_0);
+			ico1BgList.push(_skin.sec_ico1_1);
+			ico1BgList.push(_skin.sec_ico1_2);
+			ico1BgList.push(_skin.sec_ico1_3);
+			ico1BgList.push(_skin.sec_ico1_4);
+			ico1BgList.push(_skin.sec_ico1_5);
 			ico1List=new Vector.<IconCDFace>();
 			for(i=0;i<ico1BgList.length;i++)
 			{
@@ -132,6 +147,11 @@ package com.rpgGame.app.ui.main.taskbar
 			}
 			ico2BgList=new Vector.<UIAsset>();
 			ico2BgList.push(_skin.sec_ico2_0);
+			ico2BgList.push(_skin.sec_ico2_1);
+			ico2BgList.push(_skin.sec_ico2_2);
+			ico2BgList.push(_skin.sec_ico2_3);
+			ico2BgList.push(_skin.sec_ico2_4);
+			ico2BgList.push(_skin.sec_ico2_5);
 			ico2List=new Vector.<IconCDFace>();
 			for(i=0;i<ico2BgList.length;i++)
 			{
@@ -145,7 +165,7 @@ package com.rpgGame.app.ui.main.taskbar
 				scrollBox.addChild(ico);
 			}
 			
-			
+			*/
 			
 			
 			
@@ -206,6 +226,8 @@ package com.rpgGame.app.ui.main.taskbar
 			_skin.secondary_box.visible=key;
 			if(key)
 			{
+				_skin.scroll_bar.visible=true;
+				_skin.scroll_box.visible=true;
 				_skin.uibg.height=335;
 			}
 			else
@@ -290,7 +312,22 @@ package com.rpgGame.app.ui.main.taskbar
 			}
 		}
 		
-		
+		public function loopTaskFilish(type:int=0):void
+		{
+			if(!_skin.secondary_box.visible)return;
+			else if(type==1)
+			{
+				
+			}
+			else if(type==2)
+			{
+				//icoList1Group.tweeRewardInBag(2);
+			}
+			else if(type==3)
+			{
+				//icoList2Group.tweeRewardInBag(2);
+			}
+		}
 		
 		/**设置主线任务显示*/
 		public function setMainTaskView():void
@@ -343,8 +380,9 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				setNavView(TaskType.MAINTYPE_DAILYTASK,taskData.q_party_name,taskData.q_name,TaskMissionManager.getDailyTaskIsFinish(),navi2,subBut1);
 				TaskUtil.setGotargetInfo(taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killBut2List);
-				TaskUtil.setRewordInfo(taskData.q_reword_id,ico1List,ico1BgList);
-				
+				//TaskUtil.setRewordInfo(taskData.q_reword_id,ico1List,ico1BgList);
+				icoList1Group.setRewardByArray(TaskMissionCfgData.getRewordById(taskData.q_reword_id,MainRoleManager.actorInfo.job));
+				icoList1Group.visible=true;
 			}
 			setUisite();
 		}
@@ -357,11 +395,12 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				killBut2List[i].visible=false;
 			}
-			for(i=0;i<ico1BgList.length;i++)
+			icoList1Group.visible=false;
+			/*for(i=0;i<ico1BgList.length;i++)
 			{
 				ico1BgList[i].visible=false;
 				ico1List[i].visible=false;
-			}
+			}*/
 			subBut1.visible=false;
 		}
 		
@@ -394,7 +433,9 @@ package com.rpgGame.app.ui.main.taskbar
 				var reward:Object=TaskMissionManager.getTreasuerTaskExtraReward();
 				if(reward!=null)
 				{
-					TaskUtil.setRewordInfo(reward.r,ico2List,ico2BgList);
+					//TaskUtil.setRewordInfo(reward.r,ico2List,ico2BgList);
+					icoList2Group.setRewardByArray(TaskMissionCfgData.getRewordById(reward.r,MainRoleManager.actorInfo.job));
+					icoList2Group.visible=true;
 					setExtraLabel(reward.l);
 				}
 				
@@ -412,11 +453,12 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				killBut3List[i].visible=false;
 			}
-			for(i=0;i<ico2BgList.length;i++)
+			/*for(i=0;i<ico2BgList.length;i++)
 			{
 				ico2BgList[i].visible=false;
 				ico2List[i].visible=false;
-			}
+			}*/
+			icoList2Group.visible=false;
 			subBut2.visible=false;
 			extraLabel.visible=false;
 		}
@@ -537,7 +579,7 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				killBut3List[i].visible=false;
 			}
-			for(i=0;i<ico1BgList.length;i++)
+			/*for(i=0;i<ico1BgList.length;i++)
 			{
 				ico1BgList[i].visible=false;
 				ico1List[i].visible=false;
@@ -546,8 +588,9 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				ico2BgList[i].visible=false;
 				ico2List[i].visible=false;
-			}
-			
+			}*/
+			icoList1Group.visible=false;
+			icoList2Group.visible=false;
 			extraLabel.visible=false;
 			subBut1.visible=false;
 			subBut2.visible=false;
@@ -577,33 +620,42 @@ package com.rpgGame.app.ui.main.taskbar
 					skinList[i].y=0;
 				}
 			}
-			for(i=0;i<1;i++)
+			/*for(i=0;i<3;i++)
 			{
 				ico1BgList[i].y=ico1BgList[0].y;
 				ico1List[i].y=ico1BgList[0].y+3;
 			}
-//			for(i=3;i<ico1BgList.length;i++)
-//			{
-//				ico1BgList[i].y=ico1BgList[3].y;
-//				ico1List[i].y=ico1BgList[3].y+3;
-//			}
-			for(i=0;i<1;i++)
+			for(i=3;i<ico1BgList.length;i++)
+			{
+				ico1BgList[i].y=ico1BgList[3].y;
+				ico1List[i].y=ico1BgList[3].y+3;
+			}
+			for(i=0;i<3;i++)
 			{
 				ico2BgList[i].y=ico2BgList[0].y;
 				ico2List[i].y=ico2BgList[0].y+3;
 			}
-//			for(i=3;i<ico2BgList.length;i++)
-//			{
-//				ico2BgList[i].y=ico2BgList[3].y;
-//				ico2List[i].y=ico2BgList[3].y+3;
-//			}
+			for(i=3;i<ico2BgList.length;i++)
+			{
+				ico2BgList[i].y=ico2BgList[3].y;
+				ico2List[i].y=ico2BgList[3].y+3;
+			}*/
 			if(count>=0)
 			{
 				scrollBack.height=skinList[count].y+skinList[count].height+3;
 			}
 			
 			scrollBar.addChild(scrollBack);
-			scrollBar.addChild(scrollBox);		
+			scrollBar.addChild(scrollBox);
+			
+			
+			
 		}
+		
+		
+		
+		
+		
+
 	}
 }

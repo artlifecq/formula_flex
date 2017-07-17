@@ -2,8 +2,10 @@ package com.rpgGame.appModule.task
 {
 
 	import com.game.mainCore.core.timer.GameTimer;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
+	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.sender.TaskSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.TaskUtil;
@@ -33,9 +35,9 @@ package com.rpgGame.appModule.task
 		private var speakLabel:Label;
 		private var timerLabel:Label;
 		private var okBut:Button;
-		private var icoBgList:Vector.<UIAsset>;
-
-		private var icoList:Vector.<IconCDFace>;
+		//private var icoBgList:Vector.<UIAsset>;
+		//private var icoList:Vector.<IconCDFace>;
+		private var icoListGroup:RewardGroup;
 		private var timer:GameTimer;
 		private var currtimer:int;
 		private var TIMERDATA_1:int=15//倒计时时间
@@ -56,7 +58,10 @@ package com.rpgGame.appModule.task
 			speakLabel=_skin.lb_speak;
 			timerLabel=_skin.lb_time;
 			okBut=_skin.btn_ok;
-			icoBgList=new Vector.<UIAsset>();
+			icoListGroup=new RewardGroup(IcoSizeEnum.ICON_42,_skin.ioc_0,RewardGroup.ALIN_LEFT,4,6,6);
+			
+			
+			/*icoBgList=new Vector.<UIAsset>();
 			icoBgList.push(_skin.ioc_0);
 
 			icoList=new Vector.<IconCDFace>();
@@ -71,7 +76,7 @@ package com.rpgGame.appModule.task
 				icoBgList[i].visible=false;
 				icoList.push(ico);
 				this.addChild(ico);
-			}
+			}*/
 			
 			//titleLabel.htmlText="主线任务";
 			//nameLabel.htmlText="第一章:新手村";
@@ -160,8 +165,9 @@ package com.rpgGame.appModule.task
 			if(task!=null&&taskData!=null)
 			{
 				setTitle(taskData.q_party_name,taskData.q_name,taskData.q_deal_mission);
-				TaskUtil.setRewordInfo(taskData.q_reword_id,icoList,icoBgList,true);
-				
+				//TaskUtil.setRewordInfo(taskData.q_reword_id,icoList,icoBgList,true);
+				icoListGroup.setRewardByArray(TaskMissionCfgData.getRewordById(taskData.q_reword_id,MainRoleManager.actorInfo.job));
+				icoListGroup.visible=true;
 				if(TaskMissionManager.getMainTaskIsFinish())
 				{
 					okBut.isEnabled=true;
@@ -226,14 +232,7 @@ package com.rpgGame.appModule.task
 		
 		private function hideView():void
 		{
-			var i:int,length:int;
-			length=icoList.length;
-			for(i=0;i<length;i++)
-			{
-				icoList[i].visible=false;
-				icoBgList[i].visible=false;
-				
-			}
+			icoListGroup.visible=false;
 		}
 	}
 }
