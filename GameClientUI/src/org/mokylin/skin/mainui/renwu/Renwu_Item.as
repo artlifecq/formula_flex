@@ -48,7 +48,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.name = "btn_send";
 			temp.right = 0;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_send;
-			temp.top = 0;
+			temp.top = -4;
 			return temp;
 		}
 
@@ -57,9 +57,9 @@ package org.mokylin.skin.mainui.renwu
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			labelDisplay = temp;
 			temp.name = "labelDisplay";
-			temp.htmlText = "击杀：<u>少林杖僧</u><font color='#cfc6ae'>(0/30)</font>";
+			temp.htmlText = "击杀：<u><font color='#ff0d0d'>少林杖僧(15/40)</font></u>";
 			temp.left = 0;
-			temp.color = 0x6BCC08;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.top = 3;
 			return temp;

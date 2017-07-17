@@ -1,28 +1,25 @@
-package org.mokylin.skin.mainui.guaji
+package org.mokylin.skin.mainui.head
 {
-	import feathers.controls.Button;
 	import feathers.controls.StateSkin;
-	import org.mokylin.skin.mainui.guaji.button.ButtonGuaji;
+	import feathers.controls.UIAsset;
 
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class GuaJi_Skin extends feathers.controls.StateSkin
+	public class Head_Min_Select extends feathers.controls.StateSkin
 	{
-		public var btnGuaji:feathers.controls.Button;
-
 
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function GuaJi_Skin()
+		public function Head_Min_Select()
 		{
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [btnGuaji_i()];
+			this.elementsContent = [__Head_Min_Select_UIAsset1_i()];
 			
 			states = {
 			};
@@ -30,12 +27,10 @@ package org.mokylin.skin.mainui.guaji
 		}
 
 
-		private function btnGuaji_i():feathers.controls.Button
+		private function __Head_Min_Select_UIAsset1_i():feathers.controls.UIAsset
 		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btnGuaji = temp;
-			temp.name = "btnGuaji";
-			temp.styleClass = org.mokylin.skin.mainui.guaji.button.ButtonGuaji;
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/mainui/head/touxiang/small_select.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

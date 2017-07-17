@@ -1574,7 +1574,7 @@
 		 */
 		private function getTextByteLen(info : String) : int
 		{
-			return toByteArray(info).length;
+			return info.length;//toByteArray(info).length;
 		}
 		
 		/**

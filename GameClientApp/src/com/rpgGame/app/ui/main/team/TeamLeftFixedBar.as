@@ -11,11 +11,6 @@ package  com.rpgGame.app.ui.main.team
 	
 	import away3d.events.Event;
 	
-	import feathers.controls.List;
-	import feathers.controls.Scroller;
-	import feathers.core.IFeathersControl;
-	import feathers.data.ListCollection;
-	
 	import org.mokylin.skin.mainui.duiwu.DuiWu_Skin;
 	
 	import starling.display.Sprite;
@@ -34,14 +29,14 @@ package  com.rpgGame.app.ui.main.team
 			
 			this.addChild(con);
 			con.x=6;
-			con.y=42;
+			con.y=30;
 			var cell:TeamBarListItemExt;
 			for (var i:int = 0; i < 5; i++) 
 			{
 				cell=new TeamBarListItemExt();
 				cellList.push(cell);
 				cell.x=0;
-				cell.y=i*(cell.height+2);
+				cell.y=i*(cell.height-2);
 				cell.visible=false;
 				this.con.addChild(cell);
 			}
@@ -51,8 +46,8 @@ package  com.rpgGame.app.ui.main.team
 		}
 		private function registerListener():void
 		{
-			_skin.btn_close.addEventListener(Event.TRIGGERED,onHideList);
-			_skin.btn_open.addEventListener(Event.TRIGGERED,onShowList);
+//			_skin.btn_close.addEventListener(Event.TRIGGERED,onHideList);
+//			_skin.btn_open.addEventListener(Event.TRIGGERED,onShowList);
 			_skin.btnExit.addEventListener(Event.TRIGGERED,onExit);
 			Mgr.teamMgr.addEventListener(TeamEvent.GET_TEAM_INFO,updateTeam);
 			
@@ -68,7 +63,7 @@ package  com.rpgGame.app.ui.main.team
 		
 		public function resize(w : int, h : int) : void 
 		{
-			this.y =200;
+			this.y =170;
 			this.x = 0;
 		}
 		private function onHideList(eve:Event):void
@@ -85,8 +80,8 @@ package  com.rpgGame.app.ui.main.team
 		private function showHideList(bShow:Boolean):void
 		{
 			_curState=bShow;
-			this._skin.btn_close.visible=bShow;
-			this._skin.btn_open.visible=!bShow;
+//			this._skin.btn_close.visible=bShow;
+//			this._skin.btn_open.visible=!bShow;
 			this.con.visible=bShow;
 		}
 		override protected function onShow():void
@@ -130,7 +125,7 @@ package  com.rpgGame.app.ui.main.team
 				{
 					setCellData(cellList[i],(i<len)?arr[i]:null);
 				}
-				this._skin.lbNum.text=teamInfo.memberinfo.length+"/"+TeamManager.MAXMEMBER;
+//				this._skin.lbNum.text=teamInfo.memberinfo.length+"/"+TeamManager.MAXMEMBER;
 				//只有自己
 			}
 			

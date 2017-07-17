@@ -144,8 +144,8 @@ package com.rpgGame.app.ui.main.shortcut
 //			_gridF1.x = 194;
 //			_gridF1.y =-64;
 //			_gridF1.setBg(GridBGType.GRID_SIZE_48);
-			_skin.Iconbg0.addChild(_gridF1);
-			_skin.Iconbg0.touchGroup=false;
+//			_skin.Iconbg0.addChild(_gridF1);
+//			_skin.Iconbg0.touchGroup=false;
 			_gridVect.push(_gridF1);
 		}
 		

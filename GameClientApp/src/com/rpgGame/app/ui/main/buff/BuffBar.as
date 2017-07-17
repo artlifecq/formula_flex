@@ -247,7 +247,7 @@ package com.rpgGame.app.ui.main.buff
 			/*this.x=(w-this.width)/2;
 			this.y=h-150;*/
 			this.x=w/2;
-			this.y=h-118;
+			this.y=h-132;
 		}
 	}
 }

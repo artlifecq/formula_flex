@@ -1,4 +1,4 @@
-package org.mokylin.skin.mainui.duiwu.button
+package org.mokylin.skin.mainui.map.button
 {
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
@@ -9,7 +9,7 @@ package org.mokylin.skin.mainui.duiwu.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class ButtonShang extends feathers.controls.StateSkin
+	public class ButtonYincang extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -22,11 +22,11 @@ package org.mokylin.skin.mainui.duiwu.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function ButtonShang()
+		public function ButtonYincang()
 		{
 			super();
 			
-			this.currentState = "down";
+			this.currentState = "upAndSelected";
 			this.elementsContent = [];
 			
 			states = {
@@ -47,7 +47,12 @@ package org.mokylin.skin.mainui.duiwu.button
 						}
 					]
 			};
-			skinNames={"down":"ui/mainui/duiwu/button/shang/down.png", "hover":"ui/mainui/duiwu/button/shang/over.png", "up":"ui/mainui/duiwu/button/shang/up.png"};
+			skinNames={"down":"ui/mainui/map/button/yincang/down.png",
+			"downAndSelected":"ui/mainui/map/button/yincang/select.png",
+			"hover":"ui/mainui/map/button/yincang/over.png",
+			"hoverAndSelected":"ui/mainui/map/button/yincang/select.png",
+			"up":"ui/mainui/map/button/yincang/up.png",
+			"upAndSelected":"ui/mainui/map/button/yincang/select.png"};
 		}
 
 

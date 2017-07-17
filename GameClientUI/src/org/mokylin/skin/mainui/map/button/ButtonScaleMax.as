@@ -1,4 +1,4 @@
-package org.mokylin.skin.mainui.chat.button
+package org.mokylin.skin.mainui.map.button
 {
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
@@ -9,7 +9,7 @@ package org.mokylin.skin.mainui.chat.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class ButtonChat_shejiao extends feathers.controls.StateSkin
+	public class ButtonScaleMax extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -22,36 +22,14 @@ package org.mokylin.skin.mainui.chat.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function ButtonChat_shejiao()
+		public function ButtonScaleMax()
 		{
 			super();
 			
-			this.currentState = "upAndSelected";
+			this.currentState = "down";
 			this.elementsContent = [];
 			
 			states = {
-				up:[
-						{target:"labelDisplay",
-							name:"left",
-							value:0
-						}
-						,
-						{target:"labelDisplay",
-							name:"right",
-							value:0
-						}
-						,
-						{target:"labelDisplay",
-							name:"top",
-							value:0
-						}
-						,
-						{target:"labelDisplay",
-							name:"bottom",
-							value:0
-						}
-					]
-				,
 				init:[
 						{target:"labelDisplay",
 							name:"textAlign",
@@ -69,12 +47,7 @@ package org.mokylin.skin.mainui.chat.button
 						}
 					]
 			};
-			skinNames={"down":"ui/mainui/chat/button/chat_shejiao/down.png",
-			"downAndSelected":"ui/mainui/chat/button/chat_shejiao/select_down.png",
-			"hover":"ui/mainui/chat/button/chat_shejiao/over.png",
-			"overAndSelected":"ui/mainui/chat/button/chat_shejiao/select_over.png",
-			"up":"ui/mainui/chat/button/chat_shejiao/up.png",
-			"upAndSelected":"ui/mainui/chat/button/chat_shejiao/select.png"};
+			skinNames={"down":"ui/mainui/map/button/scaleMax/down.png", "hover":"ui/mainui/map/button/scaleMax/over.png", "up":"ui/mainui/map/button/scaleMax/up.png"};
 		}
 
 

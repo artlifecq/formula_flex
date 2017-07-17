@@ -4,14 +4,11 @@ package org.mokylin.skin.mainui.head
 	import feathers.controls.Button;
 	import feathers.controls.Group;
 	import feathers.controls.Label;
-	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import org.mokylin.skin.mainui.head.button.ButtonMoreMiddle;
 	import org.mokylin.skin.mainui.head.button.ButtonSkin_cha;
-	import org.mokylin.skin.mainui.head.button.ButtonSkin_gengduo;
-	import org.mokylin.skin.mainui.head.button.ButtonSkin_yi;
 	import org.mokylin.skin.mainui.head.button.ButtonSkin_zu;
-	import org.mokylin.skin.mainui.head.npc_xuecao1;
 
 	/**
 	 * @private
@@ -23,29 +20,23 @@ package org.mokylin.skin.mainui.head
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var UI_bingjia:feathers.controls.UIAsset;
-
-		public var UI_mojia:feathers.controls.UIAsset;
-
-		public var UI_yijia:feathers.controls.UIAsset;
-
 		public var btn_cha:feathers.controls.Button;
 
 		public var btn_more:feathers.controls.Button;
-
-		public var btn_yi:feathers.controls.Button;
 
 		public var btn_zu:feathers.controls.Button;
 
 		public var grp_more:feathers.controls.Group;
 
-		public var grp_zhiye:feathers.controls.Group;
+		public var icon:feathers.controls.UIAsset;
+
+		public var lbLevel:feathers.controls.Label;
 
 		public var lbl_num:feathers.controls.Label;
 
 		public var role_name:feathers.controls.Label;
 
-		public var role_xuecao:feathers.controls.SkinnableContainer;
+		public var role_xuecao:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -56,9 +47,9 @@ package org.mokylin.skin.mainui.head
 			super();
 			
 			this.currentState = "normal";
-			this.height = 91;
-			this.width = 310;
-			this.elementsContent = [__head_max_Skin_UIAsset1_i(),role_xuecao_i(),__head_max_Skin_UIAsset2_i(),role_name_i(),grp_zhiye_i(),grp_more_i(),lbl_num_i()];
+			this.height = 80;
+			this.width = 242;
+			this.elementsContent = [__head_max_Skin_UIAsset1_i(),__head_max_Skin_UIAsset2_i(),role_xuecao_i(),__head_max_Skin_UIAsset3_i(),icon_i(),role_name_i(),grp_more_i(),lbl_num_i(),__head_max_Skin_UIAsset4_i(),lbLevel_i()];
 			
 			states = {
 			};
@@ -69,60 +60,44 @@ package org.mokylin.skin.mainui.head
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function UI_bingjia_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			UI_bingjia = temp;
-			temp.name = "UI_bingjia";
-			temp.styleName = "ui/mainui/head/zhiye/bingjia.png";
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function UI_mojia_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			UI_mojia = temp;
-			temp.name = "UI_mojia";
-			temp.styleName = "ui/mainui/head/zhiye/mojia.png";
-			temp.visible = false;
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function UI_yijia_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			UI_yijia = temp;
-			temp.name = "UI_yijia";
-			temp.styleName = "ui/mainui/head/zhiye/yijia.png";
-			temp.visible = false;
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
 		private function __head_max_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
-			temp.touchGroup = false;
-			temp.styleName = "ui/mainui/head/npcxuechao.png";
-			temp.x = 64;
-			temp.y = 10;
+			temp.touchGroup = true;
+			temp.styleName = "ui/mainui/head/headBg_middle_tiao.png";
+			temp.x = 74;
+			temp.y = 33;
 			return temp;
 		}
 
 		private function __head_max_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/mainui/head/xuetiao/xuetiaobg_middle.png";
+			temp.width = 180;
+			temp.x = 62;
+			temp.y = 17;
+			return temp;
+		}
+
+		private function __head_max_Skin_UIAsset3_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
-			temp.touchGroup = false;
-			temp.styleName = "ui/mainui/head/npctouxiangkuang.png";
-			temp.x = 2;
-			temp.y = 9;
+			temp.touchGroup = true;
+			temp.styleName = "ui/mainui/head/headBg_middle_quan.png";
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function __head_max_Skin_UIAsset4_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/mainui/head/dengjikuang.png";
+			temp.x = 0;
+			temp.y = 53;
 			return temp;
 		}
 
@@ -141,19 +116,8 @@ package org.mokylin.skin.mainui.head
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_more = temp;
 			temp.name = "btn_more";
-			temp.styleClass = org.mokylin.skin.mainui.head.button.ButtonSkin_gengduo;
-			temp.x = 84;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function btn_yi_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_yi = temp;
-			temp.name = "btn_yi";
-			temp.styleClass = org.mokylin.skin.mainui.head.button.ButtonSkin_yi;
-			temp.x = 56;
+			temp.styleClass = org.mokylin.skin.mainui.head.button.ButtonMoreMiddle;
+			temp.x = 46;
 			temp.y = 0;
 			return temp;
 		}
@@ -164,7 +128,7 @@ package org.mokylin.skin.mainui.head
 			btn_zu = temp;
 			temp.name = "btn_zu";
 			temp.styleClass = org.mokylin.skin.mainui.head.button.ButtonSkin_zu;
-			temp.x = 28;
+			temp.x = 23;
 			temp.y = 0;
 			return temp;
 		}
@@ -174,20 +138,38 @@ package org.mokylin.skin.mainui.head
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grp_more = temp;
 			temp.name = "grp_more";
-			temp.x = 187;
-			temp.y = 53;
-			temp.elementsContent = [btn_cha_i(),btn_zu_i(),btn_yi_i(),btn_more_i()];
+			temp.x = 77;
+			temp.y = 55;
+			temp.elementsContent = [btn_cha_i(),btn_zu_i(),btn_more_i()];
 			return temp;
 		}
 
-		private function grp_zhiye_i():feathers.controls.Group
+		private function icon_i():feathers.controls.UIAsset
 		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
-			grp_zhiye = temp;
-			temp.name = "grp_zhiye";
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icon = temp;
+			temp.name = "icon";
+			temp.styleName = "ui/mainui/head/touxiang/mojia/middle.png";
+			temp.x = 9;
+			temp.y = 6;
+			return temp;
+		}
+
+		private function lbLevel_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbLevel = temp;
+			temp.name = "lbLevel";
+			temp.bold = false;
+			temp.height = 16;
+			temp.fontSize = 12;
+			temp.text = "100";
+			temp.textAlign = "center";
+			temp.color = 0xE1D4A9;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.width = 22;
 			temp.x = 0;
-			temp.y = 0;
-			temp.elementsContent = [UI_bingjia_i(),UI_mojia_i(),UI_yijia_i()];
+			temp.y = 57;
 			return temp;
 		}
 
@@ -196,11 +178,14 @@ package org.mokylin.skin.mainui.head
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbl_num = temp;
 			temp.name = "lbl_num";
-			temp.text = "标签";
+			temp.fontSize = 12;
+			temp.text = "2000/3000";
 			temp.textAlign = "center";
-			temp.width = 196;
-			temp.x = 93;
-			temp.y = 30;
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 148;
+			temp.x = 76;
+			temp.y = 18;
 			return temp;
 		}
 
@@ -210,25 +195,26 @@ package org.mokylin.skin.mainui.head
 			role_name = temp;
 			temp.name = "role_name";
 			temp.bold = false;
-			temp.text = "角色名六个字 (120级)";
-			temp.color = 0xC3C198;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack2"];
-			temp.x = 92;
-			temp.y = 10;
+			temp.fontSize = 12;
+			temp.text = "名字是六个字";
+			temp.textAlign = "left";
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 99;
+			temp.x = 79;
+			temp.y = 34;
 			return temp;
 		}
 
-		private function role_xuecao_i():feathers.controls.SkinnableContainer
+		private function role_xuecao_i():feathers.controls.UIAsset
 		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			role_xuecao = temp;
 			temp.name = "role_xuecao";
-			temp.height = 12;
-			var skin:StateSkin = new org.mokylin.skin.mainui.head.npc_xuecao1()
-			temp.skin = skin
-			temp.width = 200;
-			temp.x = 90;
-			temp.y = 33;
+			temp.styleName = "ui/mainui/head/xuetiao/xuetiaobar_middle.png";
+			temp.width = 155;
+			temp.x = 74;
+			temp.y = 21;
 			return temp;
 		}
 

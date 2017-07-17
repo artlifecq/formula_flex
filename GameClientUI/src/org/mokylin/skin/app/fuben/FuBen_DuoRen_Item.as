@@ -34,20 +34,6 @@ package org.mokylin.skin.app.fuben
 
 		public var prob_ioc_0:feathers.controls.UIAsset;
 
-		public var prob_ioc_1:feathers.controls.UIAsset;
-
-		public var prob_ioc_2:feathers.controls.UIAsset;
-
-		public var prob_ioc_3:feathers.controls.UIAsset;
-
-		public var prob_ioc_4:feathers.controls.UIAsset;
-
-		public var prob_ioc_5:feathers.controls.UIAsset;
-
-		public var prob_ioc_6:feathers.controls.UIAsset;
-
-		public var prob_ioc_7:feathers.controls.UIAsset;
-
 		public var uiName1:feathers.controls.UIAsset;
 
 		public var uiName2:feathers.controls.UIAsset;
@@ -115,7 +101,7 @@ package org.mokylin.skin.app.fuben
 			temp.name = "grpIcon";
 			temp.x = 3;
 			temp.y = 75;
-			temp.elementsContent = [__FuBen_DuoRen_Item_UIAsset1_i(),__FuBen_DuoRen_Item_Label1_i(),prob_ioc_0_i(),prob_ioc_1_i(),prob_ioc_2_i(),prob_ioc_3_i(),prob_ioc_4_i(),prob_ioc_5_i(),prob_ioc_6_i(),prob_ioc_7_i()];
+			temp.elementsContent = [__FuBen_DuoRen_Item_UIAsset1_i(),__FuBen_DuoRen_Item_Label1_i(),prob_ioc_0_i()];
 			return temp;
 		}
 
@@ -187,83 +173,6 @@ package org.mokylin.skin.app.fuben
 			temp.name = "prob_ioc_0";
 			temp.styleName = "ui/common/grid/normal/36.png";
 			temp.x = 101;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function prob_ioc_1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			prob_ioc_1 = temp;
-			temp.name = "prob_ioc_1";
-			temp.styleName = "ui/common/grid/normal/36.png";
-			temp.x = 154;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function prob_ioc_2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			prob_ioc_2 = temp;
-			temp.name = "prob_ioc_2";
-			temp.styleName = "ui/common/grid/normal/36.png";
-			temp.x = 207;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function prob_ioc_3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			prob_ioc_3 = temp;
-			temp.name = "prob_ioc_3";
-			temp.styleName = "ui/common/grid/normal/36.png";
-			temp.x = 260;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function prob_ioc_4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			prob_ioc_4 = temp;
-			temp.name = "prob_ioc_4";
-			temp.styleName = "ui/common/grid/normal/36.png";
-			temp.x = 312;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function prob_ioc_5_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			prob_ioc_5 = temp;
-			temp.name = "prob_ioc_5";
-			temp.styleName = "ui/common/grid/normal/36.png";
-			temp.x = 365;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function prob_ioc_6_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			prob_ioc_6 = temp;
-			temp.name = "prob_ioc_6";
-			temp.styleName = "ui/common/grid/normal/36.png";
-			temp.x = 418;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function prob_ioc_7_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			prob_ioc_7 = temp;
-			temp.name = "prob_ioc_7";
-			temp.styleName = "ui/common/grid/normal/36.png";
-			temp.x = 471;
 			temp.y = 0;
 			return temp;
 		}

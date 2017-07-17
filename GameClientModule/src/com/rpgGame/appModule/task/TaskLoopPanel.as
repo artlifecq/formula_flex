@@ -1,12 +1,15 @@
 package com.rpgGame.appModule.task
 {
 	import com.game.mainCore.core.timer.GameTimer;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
+	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.sender.TaskSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
+	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	
 	import feathers.controls.Label;
@@ -27,10 +30,12 @@ package com.rpgGame.appModule.task
 		private var money1Label:Label;
 		private var money2Label:Label;
 		private var timerLabel:Label;
-		private var ico1BgList:Vector.<UIAsset>;
+		/*private var ico1BgList:Vector.<UIAsset>;
 		private var ico1List:Vector.<IconCDFace>;
 		private var ico2BgList:Vector.<UIAsset>;
-		private var ico2List:Vector.<IconCDFace>;
+		private var ico2List:Vector.<IconCDFace>;*/
+		private var icoList1Group:RewardGroup;
+		private var icoList2Group:RewardGroup;
 		private var timer:GameTimer;
 		private var currtimer:int;
 		private var TIMERDATA:int=15;//倒计时时间
@@ -56,7 +61,7 @@ package com.rpgGame.appModule.task
 			
 			var i:int;
 			var ico:IconCDFace;
-			ico1BgList=new Vector.<UIAsset>();
+			/*ico1BgList=new Vector.<UIAsset>();
 			ico1BgList.push(_skin.ioc_1_0);
 			ico1BgList.push(_skin.ioc_1_1);
 			ico1BgList.push(_skin.ioc_1_2);
@@ -89,7 +94,10 @@ package com.rpgGame.appModule.task
 				ico2BgList[i].visible=false;
 				ico2List.push(ico);
 				this.addChild(ico);
-			}
+			}*/
+			icoList1Group=new RewardGroup(IcoSizeEnum.ICON_42,_skin.ioc_1_0,RewardGroup.ALIN_LEFT,4,6,6);
+			icoList2Group=new RewardGroup(IcoSizeEnum.ICON_42,_skin.ioc_2_0,RewardGroup.ALIN_LEFT,4,6,6);
+			
 			titleLabel.htmlText="环式任务";
 			planLabel.htmlText="";
 			nav1Label.htmlText="本环任务奖励：";
@@ -247,14 +255,17 @@ package com.rpgGame.appModule.task
 		}
 		private function setReward():void
 		{
-			TaskUtil.setRewordInfo(TaskMissionManager.treasuerTaskData.q_reword_id,ico1List,ico1BgList,true);
-			
+			//TaskUtil.setRewordInfo(TaskMissionManager.treasuerTaskData.q_reword_id,ico1List,ico1BgList,true);
+			icoList1Group.setRewardByArray(TaskMissionCfgData.getRewordById(TaskMissionManager.treasuerTaskData.q_reword_id,MainRoleManager.actorInfo.job));
+			icoList1Group.visible=true;
 		}
 		private function setkExtraReward():void
 		{
 			var reward:Object=TaskMissionManager.getTreasuerTaskExtraReward();
 			nav2Label.htmlText="今日完成<font color='#5DBD37'>"+reward.l+"</font>环后，额外奖励";
-			TaskUtil.setRewordInfo(reward.r,ico2List,ico2BgList,true);
+			//TaskUtil.setRewordInfo(reward.r,ico2List,ico2BgList,true);
+			icoList2Group.setRewardByArray(TaskMissionCfgData.getRewordById(reward.r,MainRoleManager.actorInfo.job));
+			icoList2Group.visible=true;
 		}
 		
 	
@@ -266,7 +277,7 @@ package com.rpgGame.appModule.task
 		
 		private function hideView():void
 		{
-			var i:int;
+			/*var i:int;
 			for(i=0;i<ico1BgList.length;i++)
 			{
 				ico1BgList[i].visible=false;
@@ -277,8 +288,9 @@ package com.rpgGame.appModule.task
 			{
 				ico2BgList[i].visible=false;
 				ico2List[i].visible=false;
-			}
-	
+			}*/
+			icoList1Group.visible=false;
+			icoList2Group.visible=false;
 			planLabel.htmlText="";
 			nav2Label.htmlText="";
 			timerLabel.htmlText="";

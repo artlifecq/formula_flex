@@ -62,8 +62,8 @@ package org.mokylin.skin.mainui.head
 			temp.fontSize = 16;
 			temp.text = "角色名六个字 (120级)";
 			temp.textAlign = "center";
-			temp.color = 0xC3C198;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack2"];
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 195;
 			temp.x = 31;
 			temp.y = 0;
@@ -77,7 +77,7 @@ package org.mokylin.skin.mainui.head
 			temp.name = "lbl_num";
 			temp.text = "标签";
 			temp.textAlign = "center";
-			temp.color = 0xE1D4A9;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 189;
 			temp.x = 33;

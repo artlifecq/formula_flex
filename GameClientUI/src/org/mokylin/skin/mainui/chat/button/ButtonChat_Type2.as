@@ -1,4 +1,4 @@
-package org.mokylin.skin.mainui.chat
+package org.mokylin.skin.mainui.chat.button
 {
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Label;
@@ -10,12 +10,12 @@ package org.mokylin.skin.mainui.chat
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class pingdaoItems extends feathers.controls.StateSkin
+	public class ButtonChat_Type2 extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var __pingdaoItems_UIAsset1:feathers.controls.UIAsset;
+		public var iconDisplay:feathers.controls.UIAsset;
 
 		public var labelDisplay:feathers.controls.Label;
 
@@ -23,68 +23,74 @@ package org.mokylin.skin.mainui.chat
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function pingdaoItems()
+		public function ButtonChat_Type2()
 		{
 			super();
 			
-			this.currentState = "down";
-			this.height = 20;
-			this.width = 40;
-			this.elementsContent = [__pingdaoItems_UIAsset1_i(),labelDisplay_i()];
+			this.currentState = "upAndSelected";
+			this.elementsContent = [];
 			
 			states = {
-				down:[
-						{target:"labelDisplay",
-							name:"color",
-							value:0x868276
-						}
-					]
-				,
 				hover:[
 						{target:"labelDisplay",
 							name:"color",
-							value:0xcfc6ae
+							value:0xbca78a
+						}
+					]
+				,
+				down:[
+						{target:"labelDisplay",
+							name:"color",
+							value:0x7a6d5a
 						}
 					]
 				,
 				up:[
-						{target:"__pingdaoItems_UIAsset1",
-							name:"alpha",
-							value:0
+						{target:"labelDisplay",
+							name:"color",
+							value:0xbca78a
+						}
+					]
+				,
+				init:[
+						{target:"labelDisplay",
+							name:"textAlign",
+							value:"center"
 						}
 						,
 						{target:"labelDisplay",
 							name:"color",
-							value:0x8b8d7b
+							value:0xbca78a
 						}
-					]
-				,
-				select:[
+						,
 						{target:"labelDisplay",
-							name:"color",
-							value:0xcfc6ae
+							name:"nativeFilters",
+							value:Fontter.filterObj["textFilterBlackGreen"]
+						}
+						,
+						{target:"labelDisplay",
+							name:"verticalAlign",
+							value:"middle"
 						}
 					]
 			};
-			skinNames={"down":"ui/common/tips/tips_di.png",
-				"hover":"ui/common/tips/tips_di.png",
-				"select":"ui/common/tips/tips_di.png",
-				"up":"ui/common/tips/tips_di.png"};
+			skinNames={"down":"ui/mainui/chat/button/chat_Type2/down.png",
+			"downAndSelected":"ui/mainui/chat/button/chat_Type2/select.png",
+			"hover":"ui/mainui/chat/button/chat_Type2/over.png",
+			"hoverAndSelected":"ui/mainui/chat/button/chat_Type2/select.png",
+			"up":"ui/mainui/chat/button/chat_Type2/up.png",
+			"upAndSelected":"ui/mainui/chat/button/chat_Type2/select.png"};
 		}
 
 
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __pingdaoItems_UIAsset1_i():feathers.controls.UIAsset
+		private function iconDisplay_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			__pingdaoItems_UIAsset1 = temp;
-			temp.height = 20;
-			temp.styleName = "ui/common/tips/tips_di.png";
-			temp.width = 41;
-			temp.x = 0;
-			temp.y = 0;
+			iconDisplay = temp;
+			temp.name = "iconDisplay";
 			return temp;
 		}
 
@@ -93,13 +99,15 @@ package org.mokylin.skin.mainui.chat
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			labelDisplay = temp;
 			temp.name = "labelDisplay";
-			temp.height = 18;
-			temp.text = "文本";
+			temp.bottom = 0;
+			temp.left = 0;
+			temp.right = 0;
+			temp.text = "世";
 			temp.textAlign = "center";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xbca78a;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.top = 0;
 			temp.verticalAlign = "middle";
-			temp.verticalCenter = 0;
-			temp.width = 40;
 			return temp;
 		}
 
