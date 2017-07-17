@@ -141,12 +141,12 @@ package com.rpgGame.app.cmdlistener.scene
 			//GameLog.addShow("技能流水号为： 对目标\t" + msg.uid);
 			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
 			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg, true);
-			ReleaseSpellHelper.releaseSpell(info);
+			
 			if (msg.personId.ToGID()==MainRoleManager.actorID) 
 			{
 				GameLog.addShow("主玩家释放技能：\t" + info.spellData.q_skillID);
 			}
-			
+			ReleaseSpellHelper.releaseSpell(info);
 			var skillId:int=msg.skillModelId&0xffffff;
 			var skillData:Q_skill_model=SpellDataManager.getSpellData(skillId);
 			if(skillData!=null&&skillData.q_performType==0&&msg.personId.ToGID() == MainRoleManager.actorID)//判断是否是自己的技能但不是战魂的技能  ---yt
