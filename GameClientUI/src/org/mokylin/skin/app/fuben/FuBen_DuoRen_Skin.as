@@ -43,20 +43,6 @@ package org.mokylin.skin.app.fuben
 
 		public var reward_ico_0:feathers.controls.UIAsset;
 
-		public var reward_ico_1:feathers.controls.UIAsset;
-
-		public var reward_ico_2:feathers.controls.UIAsset;
-
-		public var reward_ico_3:feathers.controls.UIAsset;
-
-		public var reward_ico_4:feathers.controls.UIAsset;
-
-		public var reward_ico_5:feathers.controls.UIAsset;
-
-		public var reward_ico_6:feathers.controls.UIAsset;
-
-		public var reward_ico_7:feathers.controls.UIAsset;
-
 		public var reward_ico_list:feathers.controls.Group;
 
 		public var scroll_Bar:feathers.controls.ScrollContainer;
@@ -341,83 +327,6 @@ package org.mokylin.skin.app.fuben
 			return temp;
 		}
 
-		private function reward_ico_1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			reward_ico_1 = temp;
-			temp.name = "reward_ico_1";
-			temp.styleName = "ui/common/grid/normal/36.png";
-			temp.x = 52;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function reward_ico_2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			reward_ico_2 = temp;
-			temp.name = "reward_ico_2";
-			temp.styleName = "ui/common/grid/normal/36.png";
-			temp.x = 103;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function reward_ico_3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			reward_ico_3 = temp;
-			temp.name = "reward_ico_3";
-			temp.styleName = "ui/common/grid/normal/36.png";
-			temp.x = 155;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function reward_ico_4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			reward_ico_4 = temp;
-			temp.name = "reward_ico_4";
-			temp.styleName = "ui/common/grid/normal/36.png";
-			temp.x = 206;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function reward_ico_5_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			reward_ico_5 = temp;
-			temp.name = "reward_ico_5";
-			temp.styleName = "ui/common/grid/normal/36.png";
-			temp.x = 258;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function reward_ico_6_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			reward_ico_6 = temp;
-			temp.name = "reward_ico_6";
-			temp.styleName = "ui/common/grid/normal/36.png";
-			temp.x = 309;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function reward_ico_7_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			reward_ico_7 = temp;
-			temp.name = "reward_ico_7";
-			temp.styleName = "ui/common/grid/normal/36.png";
-			temp.x = 361;
-			temp.y = 0;
-			return temp;
-		}
-
 		private function reward_ico_list_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
@@ -425,7 +334,7 @@ package org.mokylin.skin.app.fuben
 			temp.name = "reward_ico_list";
 			temp.x = 251;
 			temp.y = 529;
-			temp.elementsContent = [reward_ico_0_i(),reward_ico_1_i(),reward_ico_2_i(),reward_ico_3_i(),reward_ico_4_i(),reward_ico_5_i(),reward_ico_6_i(),reward_ico_7_i()];
+			temp.elementsContent = [reward_ico_0_i()];
 			return temp;
 		}
 

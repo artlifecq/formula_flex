@@ -26,16 +26,6 @@ package org.mokylin.skin.mainui.renwu
 
 		public var ioc_0:feathers.controls.UIAsset;
 
-		public var ioc_1:feathers.controls.UIAsset;
-
-		public var ioc_2:feathers.controls.UIAsset;
-
-		public var ioc_3:feathers.controls.UIAsset;
-
-		public var ioc_4:feathers.controls.UIAsset;
-
-		public var ioc_5:feathers.controls.UIAsset;
-
 		public var lb_jiangli:feathers.controls.Label;
 
 		public var lb_name:feathers.controls.Label;
@@ -57,7 +47,7 @@ package org.mokylin.skin.mainui.renwu
 			this.currentState = "normal";
 			this.height = 378;
 			this.width = 298;
-			this.elementsContent = [bg_i(),__Zhuxian_Renwu_UIAsset1_i(),lbl_title_i(),btnClose_i(),btn_ok_i(),__Zhuxian_Renwu_UIAsset2_i(),lb_name_i(),__Zhuxian_Renwu_UIAsset3_i(),lb_jiangli_i(),lb_speak_i(),ioc_0_i(),ioc_1_i(),ioc_2_i(),ioc_3_i(),ioc_4_i(),ioc_5_i(),lb_time_i()];
+			this.elementsContent = [bg_i(),__Zhuxian_Renwu_UIAsset1_i(),lbl_title_i(),btnClose_i(),btn_ok_i(),__Zhuxian_Renwu_UIAsset2_i(),lb_name_i(),__Zhuxian_Renwu_UIAsset3_i(),lb_jiangli_i(),lb_speak_i(),ioc_0_i(),lb_time_i()];
 			
 			states = {
 			};
@@ -141,63 +131,10 @@ package org.mokylin.skin.mainui.renwu
 			ioc_0 = temp;
 			temp.name = "ioc_0";
 			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
+			temp.width = 48;
+			temp.height = 48;
 			temp.x = 22;
 			temp.y = 186;
-			return temp;
-		}
-
-		private function ioc_1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ioc_1 = temp;
-			temp.name = "ioc_1";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 74;
-			temp.y = 186;
-			return temp;
-		}
-
-		private function ioc_2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ioc_2 = temp;
-			temp.name = "ioc_2";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 127;
-			temp.y = 186;
-			return temp;
-		}
-
-		private function ioc_3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ioc_3 = temp;
-			temp.name = "ioc_3";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 22;
-			temp.y = 237;
-			return temp;
-		}
-
-		private function ioc_4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ioc_4 = temp;
-			temp.name = "ioc_4";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 74;
-			temp.y = 237;
-			return temp;
-		}
-
-		private function ioc_5_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ioc_5 = temp;
-			temp.name = "ioc_5";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 127;
-			temp.y = 237;
 			return temp;
 		}
 
