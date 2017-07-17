@@ -2,13 +2,12 @@ package org.mokylin.skin.mainui.head
 {
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
-	import feathers.controls.Group;
 	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.mainui.head.button.ButtonSkin_cha;
-	import org.mokylin.skin.mainui.head.npc_xuecao2;
+	import org.mokylin.skin.mainui.head.Head_Min_Select;
+	import org.mokylin.skin.mainui.head.button.ButtonMoreSmall;
 
 	/**
 	 * @private
@@ -20,15 +19,11 @@ package org.mokylin.skin.mainui.head
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var UI_bing:feathers.controls.UIAsset;
+		public var btn_more:feathers.controls.Button;
 
-		public var UI_mo:feathers.controls.UIAsset;
+		public var icon:feathers.controls.UIAsset;
 
-		public var UI_yi:feathers.controls.UIAsset;
-
-		public var btn_cha:feathers.controls.Button;
-
-		public var grp_zhiye:feathers.controls.Group;
+		public var lbLevel:feathers.controls.Label;
 
 		public var qizi:feathers.controls.UIAsset;
 
@@ -36,7 +31,9 @@ package org.mokylin.skin.mainui.head
 
 		public var role_name:feathers.controls.Label;
 
-		public var xuecao_bar:feathers.controls.SkinnableContainer;
+		public var skinSelect:feathers.controls.SkinnableContainer;
+
+		public var xuecao_bar:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -47,9 +44,9 @@ package org.mokylin.skin.mainui.head
 			super();
 			
 			this.currentState = "normal";
-			this.height = 56;
-			this.width = 243;
-			this.elementsContent = [__head_min_Skin_UIAsset1_i(),grp_zhiye_i(),qizi_i(),role_buffer_i(),role_name_i(),xuecao_bar_i(),btn_cha_i()];
+			this.height = 73;
+			this.width = 222;
+			this.elementsContent = [__head_min_Skin_UIAsset1_i(),xuecao_bar_i(),__head_min_Skin_UIAsset2_i(),__head_min_Skin_UIAsset3_i(),icon_i(),skinSelect_i(),qizi_i(),role_buffer_i(),role_name_i(),btn_more_i(),__head_min_Skin_UIAsset4_i(),lbLevel_i()];
 			
 			states = {
 			};
@@ -60,73 +57,84 @@ package org.mokylin.skin.mainui.head
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function UI_bing_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			UI_bing = temp;
-			temp.name = "UI_bing";
-			temp.styleName = "ui/mainui/head/zhiye/bing.png";
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function UI_mo_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			UI_mo = temp;
-			temp.name = "UI_mo";
-			temp.styleName = "ui/mainui/head/zhiye/mo.png";
-			temp.visible = false;
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function UI_yi_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			UI_yi = temp;
-			temp.name = "UI_yi";
-			temp.styleName = "ui/mainui/head/zhiye/yi.png";
-			temp.visible = false;
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
 		private function __head_min_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 49;
+			temp.styleName = "ui/mainui/head/xuetiao/xuetiaobg_small.png";
+			temp.width = 148;
+			temp.x = 49;
+			temp.y = 19;
+			return temp;
+		}
+
+		private function __head_min_Skin_UIAsset2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/mainui/head/duiyoutouxiangkuang.png";
-			temp.width = 210;
-			temp.x = 7;
-			temp.y = 5;
+			temp.styleName = "ui/mainui/head/headBg_small_tiao.png";
+			temp.x = 62;
+			temp.y = 33;
 			return temp;
 		}
 
-		private function btn_cha_i():feathers.controls.Button
+		private function __head_min_Skin_UIAsset3_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.touchable = false;
+			temp.touchGroup = true;
+			temp.styleName = "ui/mainui/head/headBg_small_quan.png";
+			temp.x = 7;
+			temp.y = 10;
+			return temp;
+		}
+
+		private function __head_min_Skin_UIAsset4_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/mainui/head/dengjikuang.png";
+			temp.x = 0;
+			temp.y = 45;
+			return temp;
+		}
+
+		private function btn_more_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_cha = temp;
-			temp.name = "btn_cha";
-			temp.styleClass = org.mokylin.skin.mainui.head.button.ButtonSkin_cha;
-			temp.x = 214;
-			temp.y = 2;
+			btn_more = temp;
+			temp.name = "btn_more";
+			temp.styleClass = org.mokylin.skin.mainui.head.button.ButtonMoreSmall;
+			temp.x = 202;
+			temp.y = 25;
 			return temp;
 		}
 
-		private function grp_zhiye_i():feathers.controls.Group
+		private function icon_i():feathers.controls.UIAsset
 		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
-			grp_zhiye = temp;
-			temp.name = "grp_zhiye";
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icon = temp;
+			temp.name = "icon";
+			temp.styleName = "ui/mainui/head/touxiang/mojia/small.png";
+			temp.x = 14;
+			temp.y = 14;
+			return temp;
+		}
+
+		private function lbLevel_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbLevel = temp;
+			temp.name = "lbLevel";
+			temp.bold = false;
+			temp.height = 16;
+			temp.fontSize = 12;
+			temp.text = "100";
+			temp.textAlign = "center";
+			temp.color = 0xE1D4A9;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.width = 22;
 			temp.x = 0;
-			temp.y = 0;
-			temp.elementsContent = [UI_bing_i(),UI_mo_i(),UI_yi_i()];
+			temp.y = 49;
 			return temp;
 		}
 
@@ -136,8 +144,8 @@ package org.mokylin.skin.mainui.head
 			qizi = temp;
 			temp.name = "qizi";
 			temp.styleName = "ui/mainui/head/duiyou.png";
-			temp.x = 1;
-			temp.y = 38;
+			temp.x = 63;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -147,10 +155,10 @@ package org.mokylin.skin.mainui.head
 			role_buffer = temp;
 			temp.name = "role_buffer";
 			temp.height = 18;
-			temp.styleName = "ui/mainui/head/BAFF/17.png";
+			temp.styleName = "ui/mainui/head/BAFF/buffBg_16.png";
 			temp.width = 18;
-			temp.x = 57;
-			temp.y = 34;
+			temp.x = 67;
+			temp.y = 52;
 			return temp;
 		}
 
@@ -159,28 +167,40 @@ package org.mokylin.skin.mainui.head
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			role_name = temp;
 			temp.name = "role_name";
-			temp.height = 22;
 			temp.fontSize = 12;
-			temp.text = "角色名六个字 (120级)";
-			temp.color = 0xC3C198;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack2"];
-			temp.width = 144;
-			temp.x = 58;
-			temp.y = 8;
+			temp.text = "名字是六个字";
+			temp.textAlign = "left";
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 97;
+			temp.x = 69;
+			temp.y = 32;
 			return temp;
 		}
 
-		private function xuecao_bar_i():feathers.controls.SkinnableContainer
+		private function skinSelect_i():feathers.controls.SkinnableContainer
 		{
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			skinSelect = temp;
+			temp.name = "skinSelect";
+			temp.height = 47;
+			var skin:StateSkin = new org.mokylin.skin.mainui.head.Head_Min_Select()
+			temp.skin = skin
+			temp.width = 47;
+			temp.x = 14;
+			temp.y = 16;
+			return temp;
+		}
+
+		private function xuecao_bar_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			xuecao_bar = temp;
 			temp.name = "xuecao_bar";
-			temp.height = 11;
-			var skin:StateSkin = new org.mokylin.skin.mainui.head.npc_xuecao2()
-			temp.skin = skin
-			temp.width = 155;
-			temp.x = 57;
-			temp.y = 24;
+			temp.styleName = "ui/mainui/head/xuetiao/xuetiaobar_small.png";
+			temp.width = 124;
+			temp.x = 61;
+			temp.y = 23;
 			return temp;
 		}
 

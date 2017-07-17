@@ -9,7 +9,7 @@ package org.mokylin.skin.mainui.map.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class ButtonSkin_jian extends feathers.controls.StateSkin
+	public class ButtonShengyin extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -22,11 +22,11 @@ package org.mokylin.skin.mainui.map.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function ButtonSkin_jian()
+		public function ButtonShengyin()
 		{
 			super();
 			
-			this.currentState = "down";
+			this.currentState = "upAndSelected";
 			this.elementsContent = [];
 			
 			states = {
@@ -47,7 +47,12 @@ package org.mokylin.skin.mainui.map.button
 						}
 					]
 			};
-			skinNames={"down":"ui/mainui/map/button/skin_jian/down.png", "hover":"ui/mainui/map/button/skin_jian/over.png", "up":"ui/mainui/map/button/skin_jian/up.png"};
+			skinNames={"down":"ui/mainui/map/button/shengyin/down.png",
+			"downAndSelected":"ui/mainui/map/button/shengyin/select.png",
+			"hover":"ui/mainui/map/button/shengyin/over.png",
+			"hoverAndSelected":"ui/mainui/map/button/shengyin/select.png",
+			"up":"ui/mainui/map/button/shengyin/up.png",
+			"upAndSelected":"ui/mainui/map/button/shengyin/select.png"};
 		}
 
 

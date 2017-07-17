@@ -146,7 +146,7 @@ package org.mokylin.skin.mainui.head
 			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
 			uim_zhandouli = temp;
 			temp.name = "uim_zhandouli";
-			temp.gap = -3;
+			temp.gap = -6;
 			temp.height = 25;
 			temp.label = "6521478";
 			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhujuezhandouli;
@@ -216,9 +216,9 @@ package org.mokylin.skin.mainui.head
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			zhan_bg = temp;
 			temp.name = "zhan_bg";
-			temp.styleName = "ui/mainui/head/zhandi.png";
-			temp.x = 360;
-			temp.y = 48;
+			temp.styleName = "ui/common/zhandouli2.png";
+			temp.x = 342;
+			temp.y = 63;
 			return temp;
 		}
 

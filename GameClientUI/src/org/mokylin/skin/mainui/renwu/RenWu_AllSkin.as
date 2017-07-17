@@ -83,7 +83,6 @@ package org.mokylin.skin.mainui.renwu
 			temp.height = 135;
 			var skin:StateSkin = new org.mokylin.skin.mainui.renwu.RenWu_open()
 			temp.skin = skin
-			temp.visible = false;
 			temp.width = 21;
 			temp.x = 234;
 			temp.y = 0;

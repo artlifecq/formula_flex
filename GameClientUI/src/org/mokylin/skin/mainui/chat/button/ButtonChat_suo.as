@@ -48,9 +48,9 @@ package org.mokylin.skin.mainui.chat.button
 					]
 			};
 			skinNames={"down":"ui/mainui/chat/button/chat_suo/down.png",
-			"downAndSelected":"ui/mainui/chat/button/chat_suo/select_down.png",
+			"downAndSelected":"ui/mainui/chat/button/chat_suo/select.png",
 			"hover":"ui/mainui/chat/button/chat_suo/over.png",
-			"overAndSelected":"ui/mainui/chat/button/chat_suo/select_over.png",
+			"hoverAndSelected":"ui/mainui/chat/button/chat_suo/select.png",
 			"up":"ui/mainui/chat/button/chat_suo/up.png",
 			"upAndSelected":"ui/mainui/chat/button/chat_suo/select.png"};
 		}

@@ -46,21 +46,13 @@ package com.rpgGame.appModule.task
 		
 		private function init():void
 		{
-			titleLabel=_skin.lbl_title;
 			planLabel=_skin.lb_wancheng;
 			nav1Label=_skin.lab_navi1;
 			nav2Label=_skin.lab_navi2;
-			money1Label=_skin.lb_yuanbao;
-			money2Label=_skin.lb_yinliang;
-			timerLabel=_skin.lb_time;
 			
 			var i:int;
 			var ico:IconCDFace;
 			ico1BgList=new Vector.<UIAsset>();
-			ico1BgList.push(_skin.ioc_1_0);
-			ico1BgList.push(_skin.ioc_1_1);
-			ico1BgList.push(_skin.ioc_1_2);
-			ico1BgList.push(_skin.ioc_1_3);
 			ico1List=new Vector.<IconCDFace>();
 			for(i=0;i<ico1BgList.length;i++)
 			{
@@ -74,10 +66,6 @@ package com.rpgGame.appModule.task
 				this.addChild(ico);
 			}
 			ico2BgList=new Vector.<UIAsset>();
-			ico2BgList.push(_skin.ioc_2_0);
-			ico2BgList.push(_skin.ioc_2_1);
-			ico2BgList.push(_skin.ioc_2_2);
-			ico2BgList.push(_skin.ioc_2_3);
 			ico2List=new Vector.<IconCDFace>();
 			for(i=0;i<ico2BgList.length;i++)
 			{
@@ -90,7 +78,6 @@ package com.rpgGame.appModule.task
 				ico2List.push(ico);
 				this.addChild(ico);
 			}
-			titleLabel.htmlText="环式任务";
 			planLabel.htmlText="";
 			nav1Label.htmlText="本环任务奖励：";
 			nav2Label.htmlText="";
@@ -132,18 +119,18 @@ package com.rpgGame.appModule.task
 		}
 		override protected function onTouchTarget(target : DisplayObject) : void {
 			super.onTouchTarget(target);
-			switch (target) {
-				
-				case this._skin.one_but:
-					subFinishBut(1);
-					break;
-				case this._skin.two_but:
-					subFinishBut(2);
-					break;
-				case this._skin.three_but:
-					subFinishBut(3);
-					break;
-			}
+//			switch (target) {
+//				
+//				case this._skin.one_but:
+//					subFinishBut(1);
+//					break;
+//				case this._skin.two_but:
+//					subFinishBut(2);
+//					break;
+//				case this._skin.three_but:
+//					subFinishBut(3);
+//					break;
+//			}
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void 

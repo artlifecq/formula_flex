@@ -1,9 +1,15 @@
 package com.rpgGame.app.ui.main.smallmap {
+	import com.app.media.AudioInterface;
 	import com.game.mainCore.core.timer.GameTimer;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MapEvent;
+	import com.rpgGame.core.events.SystemTimeEvent;
+	import com.rpgGame.core.manager.AudioConfigType;
+	import com.rpgGame.core.manager.BGMManager;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.TransCfgData;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
@@ -11,6 +17,7 @@ package com.rpgGame.app.ui.main.smallmap {
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.role.MonsterBornData;
+	import com.rpgGame.netData.login.message.ResHeartMessage;
 	
 	import gs.TweenLite;
 	
@@ -21,8 +28,8 @@ package com.rpgGame.app.ui.main.smallmap {
 	import starling.display.Shape;
 	
 	public class SmallMapBar extends SkinUI {
-		private static const MAXMAPSCALE : Number = 1.50;
-		private static const MINMAPSCALE : Number = 0.50;
+		private static const MAXMAPSCALE : Number = 2.00;
+		private static const MINMAPSCALE : Number = 0.25;
 		private static const STEPMAPSCALE : Number = 0.25;
 		private var _skin : map_Skin;
 		
@@ -40,25 +47,24 @@ package com.rpgGame.app.ui.main.smallmap {
 		private var _timer : GameTimer;
 		
 		private var _mapScale : Number = 1;
+		private var isPlay:Boolean;
 		
 		public function SmallMapBar() {
 			this._skin = new map_Skin();
 			super(this._skin);
-			
+			isPlay=true;
 			this._initBgX = this._skin.grp_cont.x;
 			
-			this._gapDecX = this._skin.btnDecrease.x - this._skin.grp_cont.x;
-			this._gapIncX = this._skin.btnIncrease.x - this._skin.grp_cont.x;
-			this._gapMX = this._skin.btnM.x - this._skin.grp_cont.x;
-			this._gapWX = this._skin.btnWord.x - this._skin.grp_cont.x;
+			//			this._gapDecX = this._skin.btnDecrease.x - this._skin.grp_cont.x;
+			//			this._gapIncX = this._skin.btnIncrease.x - this._skin.grp_cont.x;
+			//			this._gapMX = this._skin.btnM.x - this._skin.grp_cont.x;
+			//			this._gapWX = this._skin.btnWord.x - this._skin.grp_cont.x;
 			
 			this.initSmallMap();
 			this.setState(true);
-			this.startTimer();
+			this.startTimer();			
 			
-			this._skin.btnWord.visible=false;
-			
-			
+			EventManager.addEvent(SystemTimeEvent.SEVER_TIMR,updateTime);
 			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE, this.onMapSwitchCompleteHandler);
 		}
 		
@@ -88,16 +94,41 @@ package com.rpgGame.app.ui.main.smallmap {
 				case this._skin.btnOpen:
 					this.setState(true);
 					break;
-				case this._skin.btnIncrease:
+				case this._skin.btnSMax:
 					this.setMapScale(true);
 					break;
-				case this._skin.btnDecrease:
+				case this._skin.btnSMin:
 					this.setMapScale(false);
 					break;
-				case this._skin.btnWord://打开大地图世界地图
-					break;
-				case this._skin.btnM://打开大地图世当前地图
+				case this._skin.btnMap://打开大地图世当前地图
 					AppManager.showApp(AppConstant.BIGMAP_PANEL);
+					break;
+				case this._skin.btnMail://打开邮件
+					AppManager.showApp(AppConstant.MAIL_PANEL);
+					break;
+				case this._skin.btnSet://打开设置
+					AppManager.showApp(AppConstant.SYSTEMSET_PANEL);
+					break;
+				case this._skin.btnSound://打开声音
+					isPlay=!isPlay;
+					BGMManager.setMusicIsPlay(isPlay);
+					if(isPlay)  BGMManager.playMusic(SceneManager.clientMapData.bgSoundRes);
+					else AudioInterface.track(AudioConfigType.MUSIC_CHANNEL).stop(true);
+					break;
+				case this._skin.btnPaiHang://打开排行榜
+//					AppManager.showApp(AppConstant.SYSTEMSET_PANEL);
+					break;
+				case this._skin.btnGm://GM
+//					AppManager.showApp(AppConstant.SYSTEMSET_PANEL);
+					break;
+				case this._skin.btnHide://屏蔽场景
+//					AppManager.showApp(AppConstant.SYSTEMSET_PANEL);
+					break;
+				case this._skin.btnWeb://打开官网
+					AppManager.showApp(AppConstant.SYSTEMSET_PANEL);
+					break;
+				case this._skin.btnSelect://换线
+//					AppManager.showApp(AppConstant.SYSTEMSET_PANEL);
 					break;
 			}
 		}
@@ -107,16 +138,30 @@ package com.rpgGame.app.ui.main.smallmap {
 			this.showSmallMap();
 		}
 		
+		public function updateTime(msg:ResHeartMessage):void
+		{
+			var date:Date = new Date(msg.time.fValue);
+			var hour:String=date.hours>9?date.hours.toString():"0"+date.hours;
+			var fen:String=date.minutes>9?date.minutes.toString():"0"+date.minutes;
+			_skin.lbTime.text=hour+":"+fen;
+			
+			//显示延迟格
+//			var delay:Number=msg.time.fValue-SystemTimeManager.delayTiemByServer;
+//			if(delay<=100) _skin.UI_net.styleName = "ui/mainui/top/signal00.png";
+//			else if(delay>100&&delay<=200) _skin.UI_net.styleName = "ui/mainui/top/signal01.png";
+//			else _skin.UI_net.styleName = "ui/mainui/top/signal02.png";
+		}
+		
 		private function initSmallMap() : void {
 			var mask : Shape = new Shape();
 			mask.graphics.beginFill(0x00FF00);
-			mask.graphics.drawRoundRect(0, 0, this._skin.UIMap.width, this._skin.UIMap.height, 5);
+			mask.graphics.drawCircle(0, 0, (this._skin.UIMap.width+50)/2);//, this._skin.UIMap.height, 5);
 			mask.graphics.endFill();
-			mask.x = this._skin.UIMap.x;
-			mask.y = this._skin.UIMap.y;
+			mask.x = this._skin.UIMap.x+this._skin.UIMap.width/2;
+			mask.y = this._skin.UIMap.y+this._skin.UIMap.height/2;
 			this._skin.grp_cont.addChildAt(mask, this._skin.grp_cont.getChildIndex(this._skin.UIMap) + 1);
 			
-			this._smallMap = new SmallMap(this, SmallMap.RadarMap, this._skin.UIMap.width, this._skin.UIMap.height, this._mapScale);
+			this._smallMap = new SmallMap(this, SmallMap.RadarMap, (this._skin.UIMap.width+30), (this._skin.UIMap.height+30), this._mapScale);
 			this._smallMap.x = this._skin.UIMap.x;
 			this._smallMap.y = this._skin.UIMap.y;
 			this._skin.grp_cont.addChildAt(this._smallMap, this._skin.grp_cont.getChildIndex(this._skin.UIMap) + 1);
@@ -131,16 +176,9 @@ package com.rpgGame.app.ui.main.smallmap {
 				this._tween.kill();
 			}
 			var targetX : int = isOpen ? this._initBgX : this._skin.width + this._initBgX;
-			this._tween = TweenLite.to(this._skin.grp_cont, 0.5, {x : targetX, onUpdate : onUpdateDisplayObjectsPos});
+			this._tween = TweenLite.to(this._skin.grp_cont, 0.5, {x : targetX});
 			this._skin.btnClose.visible = isOpen;
 			this._skin.btnOpen.visible = !isOpen;
-		}
-		
-		private function onUpdateDisplayObjectsPos() : void {
-			this._skin.btnDecrease.x = this._skin.grp_cont.x + this._gapDecX;
-			this._skin.btnIncrease.x = this._skin.grp_cont.x + this._gapIncX;
-			this._skin.btnM.x = this._skin.grp_cont.x + this._gapMX;
-			this._skin.btnWord.x = this._skin.grp_cont.x + this._gapWX;
 		}
 		
 		private function setMapScale(add : Boolean) : void {
@@ -159,7 +197,7 @@ package com.rpgGame.app.ui.main.smallmap {
 				return;
 			}
 			this._smallMap.showMap(sceneData.sceneId);
-//			this._smallMap.openRoad();
+			//			this._smallMap.openRoad();
 			var npcs : Vector.<MonsterBornData> = NpcCfgData.getSceneNpcDatas(sceneData.sceneId);
 			var monsters : Array = MonsterDataManager.getSceneMonsterDatas(sceneData.sceneId);
 			var transports : Array = TransCfgData.getSceneTransportDatas(sceneData.sceneId);

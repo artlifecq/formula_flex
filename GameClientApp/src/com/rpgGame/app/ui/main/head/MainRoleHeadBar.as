@@ -1,6 +1,5 @@
 package com.rpgGame.app.ui.main.head {
 	import com.game.engine3D.display.Inter3DContainer;
-	import com.game.engine3D.display.InterObject3D;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -10,18 +9,18 @@ package com.rpgGame.app.ui.main.head {
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.RoleData;
-	import com.rpgGame.coreData.type.AssetUrl;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.PKModeType;
+	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import feathers.controls.SkinnableContainer;
-	import feathers.controls.UIAsset;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.mainui.head.Head_Select;
@@ -34,8 +33,7 @@ package com.rpgGame.app.ui.main.head {
 		private var _skin : head_main_Skin;
 		
 		private var _zhandouliEftContaner:Inter3DContainer;
-		private var _zhandouliEft:InterObject3D;
-		private var _headImg:UIAsset;
+		//		private var _headImg:UIAsset;
 		private var _pkBtns:Array;
 		
 		private var gridW:int;
@@ -50,21 +48,21 @@ package com.rpgGame.app.ui.main.head {
 			this._skin.btn_duiwu.visible = false;
 			this._skin.btn_heping.visible = true;
 			this._skin.btn_quanti.visible = false;
-			_headImg=new UIAsset();
-			_headImg.x=18;
-			_headImg.y=4;
-			_skin.container.addChildAt(_headImg,1);
+			//			_headImg=new UIAsset();
+			//			_headImg.x=18;
+			//			_headImg.y=4;
+			//			_skin.container.addChildAt(_headImg,1);
 			_zhandouliEftContaner=new Inter3DContainer();
 			_skin.container.addChildAt(_zhandouliEftContaner,1);
-			_zhandouliEftContaner.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JIEMIAN_ZHANDOULI),160,55,0);
+			_zhandouliEftContaner.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JIEMIAN_ZHANDOULI),190,107,0);
 			
 			_buffContainer=new Sprite();
 			_skin.container.addChild(_buffContainer);
-			_buffContainer.x=104;
-			_buffContainer.y=65;
+			_buffContainer.x=128;
+			_buffContainer.y=106;
 			gridW=IcoSizeEnum.ICON_24+9;
-			// event
-		
+			_skin.container.addChild(_skin.grp_select);
+			
 			updateAll();
 			initPK();
 			initBuff();
@@ -112,45 +110,48 @@ package com.rpgGame.app.ui.main.head {
 			{
 				case PKModeType.PEACE:
 				{
-					str="ui/mainui/head/button/skin_heping/up.png";
-					text="【和平模式】您的攻击不会对任何玩家造成伤害"
+					str="ui/mainui/head/mode/he.png";
+					text=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"【和平】")+HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"您的攻击不会对任何玩家造成伤害");
 					break;
 				}
 				case PKModeType.TEAM:
 				{
-					str="ui/mainui/head/button/skin_duiwu/up.png";
-					text="【组队模式】您的攻击不会误伤同队伍玩家"
-					break;
-					
+					str="ui/mainui/head/mode/dui.png";
+					text=HtmlTextUtil.getTextColor(StaticValue.A_UI_BLUE_TEXT,"【组队】")+HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"您的攻击不会误伤同队伍玩家");
+					break;		
 				}
 				case PKModeType.GUILD:
 				{
-					str="ui/mainui/head/button/skin_banghui/up.png";
-					text="【帮会模式】您的攻击不会误伤同帮会玩家"
+					str="ui/mainui/head/mode/bang.png";
+					text=HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,"【帮会】")+HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"您的攻击不会误伤同帮会玩家");
 					break;
 				}
 				case PKModeType.ALL:
 				{
-					str="ui/mainui/head/button/skin_quanti/up.png";
-					text="【全体模式】您的攻击会对任何玩家造成伤害"
+					str="ui/mainui/head/mode/quan.png";
+					text=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,"【全体】")+HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"您的攻击会对任何玩家造成伤害");
 					break;
 				}
 				default:
-				{
-					
-					str="ui/mainui/head/button/skin_heping/up.png";
-					text="【和平模式】您的攻击不会对任何玩家造成伤害"
+				{				
+					str="ui/mainui/head/mode/he.png";
+					text=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"【和平模式】")+HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"您的攻击不会对任何玩家造成伤害");
 					break;
 				}
 			}
 			(s.skin as Head_Select).Icon_heping.styleName=str;
+			(s.skin as Head_Select).labelDisplay.isHtmlText=true;
 			(s.skin as Head_Select).labelDisplay.text=text;
 		}
 		private function updateFight():void
 		{
 			var info:HeroData=MainRoleManager.actorInfo;
 			this._skin.role_zhandouli.number = info.totalStat.getStatValue(CharAttributeType.FIGHTING);
-			this._skin.role_name.text = info.name + " (" + info.totalStat.level +"级)";
+			this._skin.lbLevel.text=info.totalStat.level.toString();
+			var arr:Array= info.name.split(']');
+			if(arr.length>1)	
+				this._skin.role_name.text = arr[1];
+			else this._skin.role_name.text = info.name;
 		}
 		
 		private function updateAll():void
@@ -160,19 +161,19 @@ package com.rpgGame.app.ui.main.head {
 			this._skin.UI_bingjia.visible = JobEnum.ROLE_1_TYPE==info.job;
 			this._skin.UI_mojia.visible = JobEnum.ROLE_2_TYPE==info.job||JobEnum.ROLE_3_TYPE==info.job;
 			this._skin.UI_yijia.visible = JobEnum.ROLE_4_TYPE==info.job;
-			//styleName = "ui/mainui/head/zhiye/bingjia.png";
+			
 			switch(info.job){
 				case JobEnum.ROLE_1_TYPE:
-					_headImg.styleName=AssetUrl.HEAD_ICON_1;
+					this._skin.icon.styleName="ui/mainui/head/touxiang/bingjia/big.png";
 					break;
 				case JobEnum.ROLE_2_TYPE:
-					_headImg.styleName=AssetUrl.HEAD_ICON_2;
+					this._skin.icon.styleName="ui/mainui/head/touxiang/mojia/big.png";
 					break;
 				case JobEnum.ROLE_3_TYPE:
-					_headImg.styleName=AssetUrl.HEAD_ICON_3;
+					this._skin.icon.styleName="ui/mainui/head/touxiang/mojia/big.png";
 					break;
 				case JobEnum.ROLE_4_TYPE:
-					_headImg.styleName=AssetUrl.HEAD_ICON_4;
+					this._skin.icon.styleName="ui/mainui/head/touxiang/yijia/big.png";
 					break;
 			}
 			
@@ -192,7 +193,7 @@ package com.rpgGame.app.ui.main.head {
 				case this._skin.btn_quanti:
 					this.showPKMode(target);
 					break;
-				case this._headImg:
+				case this._skin.icon:
 					// 医家
 					if (JobEnum.ROLE_4_TYPE == MainRoleManager.actorInfo.job) {
 						SceneRoleSelectManager.selectedRole = MainRoleManager.actor;

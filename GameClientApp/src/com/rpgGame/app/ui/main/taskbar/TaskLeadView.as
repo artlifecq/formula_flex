@@ -69,7 +69,6 @@ package com.rpgGame.app.ui.main.taskbar
 			skinList.push(_skin.pri_killbut2);
 			skinList.push(_skin.pri_killbut3);
 			skinList.push(_skin.pri_ico0);
-			skinList.push(_skin.pri_ico3);
 			titleLable=_skin.pri_title;
 			navi1Lable=_skin.pri_navi1;
 			navi2Lable=_skin.pri_navi2;
@@ -89,11 +88,6 @@ package com.rpgGame.app.ui.main.taskbar
 			priLabel=_skin.pri_txt;
 			icoBgList=new Vector.<UIAsset>();
 			icoBgList.push(_skin.pri_ico0);
-			icoBgList.push(_skin.pri_ico1);
-			icoBgList.push(_skin.pri_ico2);
-			icoBgList.push(_skin.pri_ico3);
-			icoBgList.push(_skin.pri_ico4);
-			icoBgList.push(_skin.pri_ico5);
 			icoList=new Vector.<IconCDFace>();
 			var i:int;
 			for(i=0;i<icoBgList.length;i++)

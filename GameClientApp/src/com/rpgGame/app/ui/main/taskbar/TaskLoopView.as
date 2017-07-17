@@ -67,7 +67,6 @@ package com.rpgGame.app.ui.main.taskbar
 			skinList.push(_skin.sec_killbut2_2);
 			skinList.push(_skin.sec_killbut2_3);
 			skinList.push(_skin.sec_ico1_0);
-			skinList.push(_skin.sec_ico1_3);
 			skinList.push(_skin.sec_subbut1);
 			skinList.push(_skin.sec_navi3);
 			skinList.push(_skin.sec_killbut3_1);
@@ -75,7 +74,6 @@ package com.rpgGame.app.ui.main.taskbar
 			skinList.push(_skin.sec_killbut3_3);
 			skinList.push(_skin.sec_info);
 			skinList.push(_skin.sec_ico2_0);
-			skinList.push(_skin.sec_ico2_3);
 			skinList.push(_skin.sec_subbut2);
 			
 			navi1=_skin.sec_navi1;
@@ -120,11 +118,6 @@ package com.rpgGame.app.ui.main.taskbar
 			var ico:IconCDFace
 			ico1BgList=new Vector.<UIAsset>();
 			ico1BgList.push(_skin.sec_ico1_0);
-			ico1BgList.push(_skin.sec_ico1_1);
-			ico1BgList.push(_skin.sec_ico1_2);
-			ico1BgList.push(_skin.sec_ico1_3);
-			ico1BgList.push(_skin.sec_ico1_4);
-			ico1BgList.push(_skin.sec_ico1_5);
 			ico1List=new Vector.<IconCDFace>();
 			for(i=0;i<ico1BgList.length;i++)
 			{
@@ -139,11 +132,6 @@ package com.rpgGame.app.ui.main.taskbar
 			}
 			ico2BgList=new Vector.<UIAsset>();
 			ico2BgList.push(_skin.sec_ico2_0);
-			ico2BgList.push(_skin.sec_ico2_1);
-			ico2BgList.push(_skin.sec_ico2_2);
-			ico2BgList.push(_skin.sec_ico2_3);
-			ico2BgList.push(_skin.sec_ico2_4);
-			ico2BgList.push(_skin.sec_ico2_5);
 			ico2List=new Vector.<IconCDFace>();
 			for(i=0;i<ico2BgList.length;i++)
 			{

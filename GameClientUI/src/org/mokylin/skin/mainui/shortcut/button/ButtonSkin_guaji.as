@@ -1,4 +1,4 @@
-package org.mokylin.skin.mainui.chat.button
+package org.mokylin.skin.mainui.shortcut.button
 {
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
@@ -9,7 +9,7 @@ package org.mokylin.skin.mainui.chat.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class ButtonChat_duiwu extends feathers.controls.StateSkin
+	public class ButtonSkin_guaji extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -22,7 +22,7 @@ package org.mokylin.skin.mainui.chat.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function ButtonChat_duiwu()
+		public function ButtonSkin_guaji()
 		{
 			super();
 			
@@ -47,7 +47,7 @@ package org.mokylin.skin.mainui.chat.button
 						}
 					]
 			};
-			skinNames={"down":"ui/mainui/chat/button/chat_duiwu/down.png", "hover":"ui/mainui/chat/button/chat_duiwu/over.png", "up":"ui/mainui/chat/button/chat_duiwu/up.png"};
+			skinNames={"down":"ui/mainui/shortcut/button/skin_guaji/down.png", "hover":"ui/mainui/shortcut/button/skin_guaji/over.png", "up":"ui/mainui/shortcut/button/skin_guaji/up.png"};
 		}
 
 
