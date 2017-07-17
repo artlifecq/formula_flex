@@ -13,6 +13,7 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.PKMamager;
+	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.chat.ChatManager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.fightsoul.FightSoulManager;
@@ -64,7 +65,7 @@ package   com.rpgGame.app.manager.debug
 		public function ClientCommend():void
 		{
 			initCommend();
-			_isDevelop=MessageMgr.Ins.ip.indexOf("192.168")!=-1
+			_isDevelop=MessageMgr.Ins.ip.indexOf("192.168")!=-1||MessageMgr.Ins.ip.indexOf("127.0.0.1");
 		}
 		
 		private  var commandList:com.gameClient.utils.HashMap = new com.gameClient.utils.HashMap();
@@ -252,6 +253,11 @@ package   com.rpgGame.app.manager.debug
 //				data.setServerData(petInfo);
 //				SceneRoleManager.getInstance().createGirlPet(data);
 			});
+			commandList.put( ".sset", function (...arg):void
+			{
+				TrusteeshipManager.getInstance().autoSkillCtrl.resetSkill();
+			});
+			
 		}
 		
 		

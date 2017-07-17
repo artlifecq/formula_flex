@@ -366,7 +366,7 @@ package com.rpgGame.app.state.role
 		public function get isAttackHarding() : Boolean
 		{
 			var state : IState = getCurrState(AttackHardState);
-			return state != null;
+			return state != null&&AttackHardState(state).isHard();
 		}
 		
 		public function get isLockCaseSpell() : Boolean

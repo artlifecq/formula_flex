@@ -4,7 +4,9 @@ package com.rpgGame.app.state.role.control
 	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.core.state.role.control.ControlState;
 	import com.rpgGame.coreData.type.RoleStateType;
-
+	
+	import flash.utils.getTimer;
+	
 	import gs.TweenLite;
 
 	/**
@@ -16,6 +18,7 @@ package com.rpgGame.app.state.role.control
 	 */
 	public class AttackHardState extends ControlState
 	{
+		private var endTime:Number;
 		public function AttackHardState()
 		{
 			super(RoleStateType.CONTROL_ATTACK_HARD);
@@ -32,7 +35,10 @@ package com.rpgGame.app.state.role.control
 					if (_ref is AttackHardStateReference)
 					{
 						if ((_ref as AttackHardStateReference).hardTime > 0)
+						{
+							endTime=getTimer()+(_ref as AttackHardStateReference).hardTime;
 							TweenLite.delayedCall((_ref as AttackHardStateReference).hardTime * 0.001, onStopHardStraight);
+						}
 						else
 							removeSelf();
 					}
@@ -41,7 +47,10 @@ package com.rpgGame.app.state.role.control
 				}
 			}
 		}
-
+		public function isHard():Boolean
+		{
+			return getTimer()<endTime;
+		}
 		private function onStopHardStraight() : void
 		{
 			removeSelf();

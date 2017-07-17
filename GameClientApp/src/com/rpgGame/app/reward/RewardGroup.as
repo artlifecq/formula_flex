@@ -206,7 +206,7 @@ package  com.rpgGame.app.reward
 			var maxX:int=0;
 			for (var i:int = 0; i < len; i++) 
 			{
-				dis=icons[i].bg;
+				dis=icons[i];
 				tmpX=maxX-(i%cellMaxNum)*(initW+dX);
 				tmpY=int(i/cellMaxNum)*(initH+dY);	
 				dis.x=tmpX;
@@ -236,7 +236,7 @@ package  com.rpgGame.app.reward
 			var nowRowIndex:int=0;
 			for (var i:int = 0; i < len; i++) 
 			{
-				dis=icons[i].bg;
+				dis=icons[i];
 				nowCellIndex=i%cellMaxNum;
 				if (nowCellIndex==0) 
 				{
