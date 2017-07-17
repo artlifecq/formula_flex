@@ -1,5 +1,6 @@
 package com.rpgGame.app.ui.main.shortcut
 {
+	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.SkillEvent;
 	import com.rpgGame.core.events.UserMoveEvent;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
@@ -27,7 +28,7 @@ package com.rpgGame.app.ui.main.shortcut
 		
 		private var barMask:Shape;
 		private var barLoac:Number;
-		private var widnthLoac:Number;
+		private var widthLoac:Number;
 		private var singTime:Number;
 		private var isSinging:Boolean=false;
 		public function SingBar()
@@ -59,7 +60,7 @@ package com.rpgGame.app.ui.main.shortcut
 			barMask.y=_skin.bar_scroll.y;
 			_skin.bar_scroll.mask=barMask;
 			_skin.container.addChild(barMask);
-			widnthLoac=barMask.width;
+			widthLoac=barMask.width;
 			
 		}
 		private function addEvent() : void
@@ -67,8 +68,8 @@ package com.rpgGame.app.ui.main.shortcut
 			EventManager.addEvent(SkillEvent.SKILL_ATTACK,slillAttack);//技能开始吟唱
 			EventManager.addEvent(SkillEvent.SKILL_CANCEL,slillCancel);//技能被打断，取消吟唱
 			EventManager.addEvent(SkillEvent.SKILL_RESULT,slillCancel);//技能释放成功，吟唱没完的话也取消吟唱
-			//EventManager.addEvent(UserMoveEvent.MOVE_START, slillCancel);//人物移动，取消吟唱
-			
+			EventManager.addEvent(UserMoveEvent.MOVE_START, slillCancel);//人物移动，取消吟唱
+			EventManager.addEvent(MainPlayerEvent.PLAYER_DIE,slillCancel);//人物死亡，取消吟唱
 			EventManager.addEvent(SkillEvent.SING_START,startSing);
 			EventManager.addEvent(SkillEvent.SING_STOP,onCompFun);
 		}
@@ -100,7 +101,7 @@ package com.rpgGame.app.ui.main.shortcut
 			if(type==1)
 			{
 				_skin.bar.x=barLoac;
-				barMask.width=widnthLoac;
+				barMask.width=widthLoac;
 				TweenMax.to(barMask,singTime,{width:0,ease:Linear.easeNone,onUpdate :onUpFun,onComplete :onCompFun});
 				TweenMax.to(_skin.bar,singTime,{x:_skin.bar_scroll.x,ease:Linear.easeNone});
 			}
@@ -108,7 +109,7 @@ package com.rpgGame.app.ui.main.shortcut
 			{
 				_skin.bar.x=_skin.bar_scroll.x;
 				barMask.width=0;
-				TweenMax.to(barMask,singTime,{width:widnthLoac,ease:Linear.easeNone,onUpdate :onUpFun,onComplete :onCompFun});
+				TweenMax.to(barMask,singTime,{width:widthLoac,ease:Linear.easeNone,onUpdate :onUpFun,onComplete :onCompFun});
 				TweenMax.to(_skin.bar,singTime,{x:barLoac,ease:Linear.easeNone});
 			}
 		}
@@ -116,7 +117,7 @@ package com.rpgGame.app.ui.main.shortcut
 		
 		private function onUpFun():void
 		{
-			_skin.lbl_progress.text=((barMask.width/widnthLoac)*singTime).toFixed(1);	
+			_skin.lbl_progress.text=((barMask.width/widthLoac)*singTime).toFixed(1);	
 		}
 		
 		/**取设置技能名称*/
@@ -130,7 +131,7 @@ package com.rpgGame.app.ui.main.shortcut
 			if(!isSinging)return;
 			isSinging=false;
 			_skin.bar.x=barLoac;
-			barMask.width=widnthLoac;
+			barMask.width=widthLoac;
 			this.visible=false;
 			TweenMax.killTweensOf(barMask);
 			TweenMax.killTweensOf(_skin.bar);

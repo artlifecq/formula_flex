@@ -22,6 +22,8 @@ package com.rpgGame.appModule.mount
 	
 	import feathers.utils.filter.GrayFilter;
 	
+	import gs.TweenLite;
+	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.zuoqi.ZuoqiCont_Skin;
 	
@@ -53,7 +55,11 @@ package com.rpgGame.appModule.mount
 			_mountShowData = new MountShowData();
 			initView();
 		}
-		
+		override protected function onTouch(e:TouchEvent):void
+		{
+			super.onTouch(e);
+			_mountContent.onTouch(e);
+		}
 		override public function show(data:Object=null):void
 		{
 			super.show(data);
@@ -199,8 +205,8 @@ package com.rpgGame.appModule.mount
 		
 		private function initEvent():void
 		{
-			_skin.btn_kaishi.addEventListener(TouchEvent.TOUCH, onTouch);
-			_skin.btn_zidong.addEventListener(TouchEvent.TOUCH, onTouch);
+			_skin.btn_kaishi.addEventListener(TouchEvent.TOUCH, onTouchHandler);
+			_skin.btn_zidong.addEventListener(TouchEvent.TOUCH, onTouchHandler);
 			EventManager.addEvent(HorseManager.HorseUpLevel,refeashLevel);
 			EventManager.addEvent(HorseManager.HorseChangeExp,refeashExpHandler);
 			EventManager.addEvent(HorseManager.HorseExtraItemNum,refeashPropHandler);
@@ -228,11 +234,21 @@ package com.rpgGame.appModule.mount
 					bool = true;
 			}
 			_skin.lberror.visible = bool;
-			if(_mountShowData.isAutoing&&needeat)
+			
+			setRTNState(RTNodeID.HORSE_UP,_mountShowData.isSelf&&_mountShowData.canUpLevel());
+			if(needeat)
+			{
+				TweenLite.delayedCall(0.3,refeashsendMsg);
+			}
+		}
+		
+		private function refeashsendMsg():void
+		{
+			if(_mountShowData.isAutoing)
 			{
 				_mountupContent.isAutoing =HorseManager.instance().eatItemHorse(_mountShowData)
 			}
-			setRTNState(RTNodeID.HORSE_UP,_mountShowData.isSelf&&_mountShowData.canUpLevel());
+			
 		}
 		private function refeashLevel():void
 		{
@@ -241,8 +257,8 @@ package com.rpgGame.appModule.mount
 		}
 		private function removeEvent():void
 		{
-			_skin.btn_kaishi.removeEventListener(TouchEvent.TOUCH, onTouch);
-			_skin.btn_zidong.removeEventListener(TouchEvent.TOUCH, onTouch);
+			_skin.btn_kaishi.removeEventListener(TouchEvent.TOUCH, onTouchHandler);
+			_skin.btn_zidong.removeEventListener(TouchEvent.TOUCH, onTouchHandler);
 			EventManager.removeEvent(HorseManager.HorseUpLevel,refeashLevel);
 			EventManager.removeEvent(HorseManager.HorseChangeExp,refeashExpHandler);
 			EventManager.removeEvent(HorseManager.HorseExtraItemNum,refeashPropHandler);
@@ -260,7 +276,7 @@ package com.rpgGame.appModule.mount
 				eb.refeash(_mountShowData);
 			}
 		}
-		private function onTouch(e : TouchEvent) : void
+		private function onTouchHandler(e : TouchEvent) : void
 		{
 			var target : DisplayObject = e.currentTarget as DisplayObject;
 			var touch : Touch;

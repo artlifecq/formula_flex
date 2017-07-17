@@ -232,7 +232,7 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				TaskUtil.setGotargetInfo(type,describe,information,sub,killButList);
 			}
-			
+			setUisite();
 		}
 		
 		private function setSubbutView(npcid:int):void
@@ -240,7 +240,7 @@ package com.rpgGame.app.ui.main.taskbar
 			hideKillBut();
 			var text:String="回复:<u>"+MonsterDataManager.getMonsterName(npcid)+"</u><font color='#55bd15'>(已完成)</font>";
 			TaskUtil.setGotargetLabelText(1,killButList[0],text);
-			setUisite();
+			
 		}
 		
 		

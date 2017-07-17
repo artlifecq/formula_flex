@@ -3,6 +3,7 @@ package com.rpgGame.app.ui.main.activityBar.item
 	
 	import com.rpgGame.app.manager.RedRewardManager;
 	import com.rpgGame.core.events.RedRewardEvent;
+	import com.rpgGame.coreData.cfg.RedRewardCfgData;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.common.YuanDian_Skin;
@@ -13,6 +14,7 @@ package com.rpgGame.app.ui.main.activityBar.item
 	{
 		private var _lableContent:Sprite;
 		private var _labSkin:YuanDian_Skin;
+		private var _maxCount:int;
 		public function ActivityRedRewardButton():void
 		{
 			super();
@@ -27,6 +29,7 @@ package com.rpgGame.app.ui.main.activityBar.item
 			_lableContent.x = 55;
 			_labSkin.toSprite(_lableContent);
 			this.addChild(_lableContent);
+			_maxCount = RedRewardCfgData.getdataById(5).q_count;
 		}
 		
 		override protected function onShow():void
@@ -38,17 +41,17 @@ package com.rpgGame.app.ui.main.activityBar.item
 		
 		private function refeashCount():void
 		{
-			var count:int = RedRewardManager.instance().redCount;
-			_labSkin.lbnum.text = count.toString();
-			var minValie:int = Math.min(RedRewardManager.instance().haveRewardCount,count)
-			if((RedRewardManager.instance().isMaxVipLevel&&minValie==0)
-				||(!RedRewardManager.instance().isMaxVipLevel&&count==0))
+			var count:int = RedRewardManager.instance().haveRewardCount;
+			if(RedRewardManager.instance().vipInfo==null)
 			{
-				_lableContent.visible = false;
+				count = _maxCount;
 			}else{
-				_lableContent.visible = true;
+				count +=_maxCount - RedRewardManager.instance().vipInfo.q_count;
 			}
-				
+			
+			var minValue:int = Math.min(RedRewardManager.instance().redCount,count);
+			_labSkin.lbnum.text = minValue.toString();
+			_lableContent.visible = minValue>0;
 		}
 		
 		override protected function onHide():void

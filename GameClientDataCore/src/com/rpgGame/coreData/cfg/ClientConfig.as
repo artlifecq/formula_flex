@@ -523,6 +523,19 @@ package com.rpgGame.coreData.cfg
 			var url : String = "avatar/pc/fightsoul/" + avatarName + eName_AWD;
 			return baseDir + resURL + url;
 		}
+		
+		/**
+		 *获取战旗资源 
+		 * @param res
+		 * @return 
+		 * 
+		 */
+		public static function getZhanqi(res:String):String
+		{
+			var url : String = "avatar/pc/flag/"+res+ eName_AWD;
+			return baseDir + resURL + url;
+		}
+		
 		/**
 		 * 获取effect资源路径
 		 * @return

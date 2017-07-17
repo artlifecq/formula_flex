@@ -22,6 +22,8 @@ package org.mokylin.skin.app.hongbao
 
 		public var lbNum:feathers.controls.Label;
 
+		public var lbmsg:feathers.controls.Label;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -31,9 +33,9 @@ package org.mokylin.skin.app.hongbao
 			super();
 			
 			this.currentState = "normal";
-			this.height = 31;
+			this.height = 29;
 			this.width = 263;
-			this.elementsContent = [bg_i(),lbNum_i(),lbName_i(),__HongBao_Item1_Label1_i()];
+			this.elementsContent = [bg_i(),lbNum_i(),lbName_i(),lbmsg_i()];
 			
 			states = {
 			};
@@ -44,24 +46,12 @@ package org.mokylin.skin.app.hongbao
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __HongBao_Item1_Label1_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "来自土豪";
-			temp.color = 0xEAEABC;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 66;
-			temp.x = 77;
-			temp.y = 7;
-			return temp;
-		}
-
 		private function bg_i():feathers.controls.SkinnableContainer
 		{
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 31;
+			temp.height = 29;
 			var skin:StateSkin = new org.mokylin.skin.app.hongbao.HongBao_ItemBg()
 			temp.skin = skin
 			temp.width = 263;
@@ -90,10 +80,24 @@ package org.mokylin.skin.app.hongbao
 			lbNum = temp;
 			temp.name = "lbNum";
 			temp.text = "20礼金";
-			temp.color = 0xEAEABC;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 57;
 			temp.x = 14;
+			temp.y = 7;
+			return temp;
+		}
+
+		private function lbmsg_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbmsg = temp;
+			temp.name = "lbmsg";
+			temp.text = "来自土豪";
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.width = 66;
+			temp.x = 77;
 			temp.y = 7;
 			return temp;
 		}

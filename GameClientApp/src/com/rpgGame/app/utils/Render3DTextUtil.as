@@ -30,45 +30,7 @@ package com.rpgGame.app.utils
 		public function Render3DTextUtil()
 		{
 		}
-		public static function addHeadKillToTarget( target : SceneRole):Render3DText
-		{
-			var rud : RenderParamData3D = new RenderParamData3D(RenderUnitID.BLEED, RenderUnitType.HEADKILL, ClientConfig.getEffect("tx_liuxuexiaoguo"));
-			var effectRu : RenderUnit3D;
-			effectRu = target.avatar.addRenderUnitToChild(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_name_01, rud);
-			//effectRu.renderParamData.
-			effectRu.allowCameraAnimator = target.isMainChar;
-			effectRu.repeat = 0;
-			effectRu.x = 0;
-			effectRu.y = 0;
-			effectRu.z = 0;
-			effectRu.rotationY = 0;
-			effectRu.setPlayCompleteCallBack(avatarRuPlayComplete, target.avatar);
-			effectRu.play(1);
-			
-			var rudText : RenderParamData3D = new RenderParamData3D(RenderUnitID.BLEED_TEXT, RenderUnitType.HEADKILL, ClientConfig.getEffect("tx_shuzi_bai"));
-			var effectRuText : RenderUnit3D;
-			effectRuText = target.avatar.addRenderUnitToChild(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_name_01, rudText);
-			//effectRu.renderParamData.
-			effectRuText.allowCameraAnimator = target.isMainChar;
-			effectRuText.repeat = 0;
-			effectRuText.x = 0;
-			effectRuText.y = 0;
-			effectRuText.z = 0;
-			effectRuText.rotationY = 0;
-			effectRuText.scaleX=0.5;
-			effectRuText.scaleY=0.5;
-			effectRuText.scaleZ=0.5;
-			effectRuText.setPlayCompleteCallBack(avatarRuPlayComplete, target.avatar);
-			effectRuText.play(1100);
-			effectRuText.stop(1100);
-			//effectRu.setStatus();
-			
-			return null;
-		}
-		private static function avatarRuPlayComplete(avatar : RenderSet3D, ru : RenderUnit3D) : void
-		{
-			avatar.removeRenderUnit(ru);
-		}
+		
 		
 		public static const styleName_Meigui:String = "meigui";
 		public static const styleName_Shuzi:String = "shuzi";

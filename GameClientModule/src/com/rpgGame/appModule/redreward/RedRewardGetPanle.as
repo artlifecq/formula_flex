@@ -5,6 +5,8 @@ package com.rpgGame.appModule.redreward
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.RedRewardSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.RedRewardEvent;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.type.AssetUrl;
@@ -44,6 +46,7 @@ package com.rpgGame.appModule.redreward
 			_headImg=new UIAsset();
 			_headImg.x=101;
 			_headImg.y=32;
+			_headImg.touchable = false;
 			_skin.container.addChild(_headImg);
 			var mask:Sprite = new Sprite();
 			mask.graphics.drawRect(0,0,this.width,this.height);
@@ -58,6 +61,7 @@ package com.rpgGame.appModule.redreward
 		{
 			super.show(data,openTable,parentContiner);
 			EventManager.addEvent(RedRewardEvent.UPDATA_REDREWARDINFO,refeashOpenValue);
+			EventManager.addEvent(RedRewardEvent.UPDATA_COUNTINFO,refeashOpenValue);
 			EventManager.addEvent(RedRewardEvent.UPDATA_REDREWARDGETINFO,updataRedRewardOpenList);
 			refeashOpenValue();
 		}
@@ -146,7 +150,10 @@ package com.rpgGame.appModule.redreward
 					refeashPageView(_currentPage+1);
 					break;
 				case _skin.lbVip:
-					GlobalFunction.iWantRecharge();
+					if(redmgr.rechaged)
+						AppManager.showApp(AppConstant.VIP_PANEL);
+					else
+						GlobalFunction.iWantRecharge();
 					break;
 			}
 		}
@@ -174,7 +181,8 @@ package com.rpgGame.appModule.redreward
 			for(var i:int = 0;i<pageMaxCellCount;i++)
 			{
 				var cell:RedRewardMoreCell = getMoreNextCell(i);
-				cell.y = 31*i;
+				cell.y = 29*i;
+				cell.updata(i,_playerInfolist);
 				_skin.itemgroup.addChild(cell);
 			}
 			var count:int = 0;
@@ -196,7 +204,7 @@ package com.rpgGame.appModule.redreward
 			Flip1_Skin(_skin.skinFlip.skin).btnDec.visible = _currentPage>1;
 			Flip1_Skin(_skin.skinFlip.skin).btnAdd.visible = _currentPage<_totalPage;
 			Flip1_Skin(_skin.skinFlip.skin).textDisplay.text = _currentPage.toString()+"/"+_totalPage.toString();
-			var startIndex:int = _currentPage*pageMaxCellCount;
+			var startIndex:int = (_currentPage-1)*pageMaxCellCount;
 			for(var i:int = 0;i<pageMaxCellCount;i++)
 			{
 				var cell:RedRewardMoreCell = getMoreNextCell(i);
@@ -212,7 +220,7 @@ package com.rpgGame.appModule.redreward
 			for(var i:int = 0;i<8;i++)
 			{
 				var cell:RedRewardOneCell = getOneNextCell(i);
-				cell.y = 31*i;
+				cell.y = 29*i;
 				_skin.itemgroup.addChild(cell);
 				cell.updata(i,_playerInfolist,_redRewardInfo.sendPlayerId.IsZero());
 			}
@@ -246,6 +254,7 @@ package com.rpgGame.appModule.redreward
 			super.hide();
 			EventManager.removeEvent(RedRewardEvent.UPDATA_REDREWARDINFO,refeashOpenValue);
 			EventManager.removeEvent(RedRewardEvent.UPDATA_REDREWARDGETINFO,updataRedRewardOpenList);
+			EventManager.removeEvent(RedRewardEvent.UPDATA_COUNTINFO,refeashOpenValue);
 		}
 	}
 }

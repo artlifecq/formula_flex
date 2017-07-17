@@ -175,7 +175,7 @@ package com.rpgGame.coreData.role
 			var zhanqiInfo:Q_warflag = ZhanQiConfigData.getZhanQiDataById(_zhanqiLv);
 			if(zhanqiInfo)
 			{
-				this.avatarInfo.zhanqiSouleeffId = zhanqiInfo.q_panel_show_id;
+				this.avatarInfo.zhanqiResID = zhanqiInfo.q_panel_show_id;
 			}
 		}
 

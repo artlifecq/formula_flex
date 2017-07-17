@@ -2,6 +2,8 @@ package com.rpgGame.app.manager
 {
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.sender.RedRewardSender;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.RedRewardEvent;
 	import com.rpgGame.core.events.VipEvent;
 	import com.rpgGame.coreData.cfg.RedRewardCfgData;
@@ -17,6 +19,7 @@ package com.rpgGame.app.manager
 
 	public class RedRewardManager
 	{
+		private var _firstAutoOpen:Boolean = true;
 		private var _vipInfo:Q_redreward;
 
 		public function get vipInfo():Q_redreward
@@ -70,6 +73,12 @@ package com.rpgGame.app.manager
 				FunctionOpenManager.openAppPaneById(EmFunctionID.EM_SENDREDREWARD);
 			refeashVipData();
 			EventManager.dispatchEvent(RedRewardEvent.UPDATA_COUNTINFO);
+			if(_firstAutoOpen&&canGetReward)
+			{
+				AppManager.showAppNoHide(AppConstant.REDREWARD_OPEN);
+				_firstAutoOpen = false;
+			}
+			
 		}
 		
 		public function get rechaged():Boolean
@@ -112,6 +121,23 @@ package com.rpgGame.app.manager
 			}
 			EventManager.dispatchEvent(RedRewardEvent.UPDATA_COUNTINFO);*/
 			EventManager.dispatchEvent(RedRewardEvent.UPDATA_REDREWARDGETINFO);
+		}
+		
+		public function sendReward(count:int):void
+		{
+			if(count==0)
+			{
+				NoticeManager.showNotifyById(91001);
+				return ;
+			}
+			if(RedRewardManager.instance().sendCount<=0)
+			{
+				NoticeManager.showNotifyById(91002);
+				return ;
+			}
+			_sendCount -= count;
+			EventManager.dispatchEvent(RedRewardEvent.UPDATA_COUNTINFO);
+			RedRewardSender.sendReward(count);
 		}
 		
 		private function refeashVipData():void
@@ -207,7 +233,10 @@ package com.rpgGame.app.manager
 				return ;
 			if(!this.isMaxVipLevel&&_redCount>0&&_dayCount==0)
 			{
-				NoticeManager.showNotifyById(91003);
+				if(_recharged)
+					NoticeManager.showNotifyById(91003);
+				else
+					NoticeManager.showNotifyById(91007);
 				return ;
 			}
 			var type:int = 0;

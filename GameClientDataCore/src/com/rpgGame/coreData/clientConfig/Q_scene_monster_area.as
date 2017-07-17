@@ -44,6 +44,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_patrol_pro:int;
 		 /**  是否隐藏 */
 		public var q_whether_display:int;
+		 /**  怪物朝向角度(不填为随机,值为:右, 右下, 下, 左下, 左, 左上, 上, 右上) */
+		public var q_direction:String;
 
 	}
 }

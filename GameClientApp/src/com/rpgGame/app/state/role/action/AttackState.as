@@ -169,6 +169,10 @@ package com.rpgGame.app.state.role.action
 					if (isFreeze)
 						render.stop(time);
 					break;
+				case RenderUnitType.ZHANQI:
+					render.repeat = 0;
+					render.setStatus(RoleActionType.RUN, _useCrossfadeTransition ? 0.2 : null, time, speedRatio);
+					break;
 				case RenderUnitType.MOUNT:
 					render.repeat = 1;
 					render.setStatus(status, _useCrossfadeTransition ? 0.2 : null, time, speedRatio);
@@ -526,6 +530,10 @@ package com.rpgGame.app.state.role.action
 			{
 				if (!force && !_attackBroken)
 					return false;
+			}
+			else if (force) 
+			{
+				return true;
 			}
 			else
 			{

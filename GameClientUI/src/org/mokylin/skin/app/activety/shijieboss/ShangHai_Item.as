@@ -84,7 +84,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.textAlign = "left";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 85;
+			temp.width = 103;
 			temp.x = 172;
 			temp.y = 6;
 			return temp;

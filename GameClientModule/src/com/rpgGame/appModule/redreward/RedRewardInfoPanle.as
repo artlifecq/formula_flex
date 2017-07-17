@@ -3,7 +3,11 @@ package com.rpgGame.appModule.redreward
 	import com.rpgGame.app.manager.RedRewardManager;
 	import com.rpgGame.app.ui.TabBarPanel;
 	import com.rpgGame.core.events.RedRewardEvent;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.coreData.cfg.TipsCfgData;
 	import com.rpgGame.coreData.enum.EmFunctionID;
+	import com.rpgGame.coreData.type.TipType;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.hongbao.HongBao_Fa;
@@ -27,6 +31,7 @@ package com.rpgGame.appModule.redreward
 		private function initView():void
 		{
 			_view = new RedRewardSendView(_skin.skinFa.skin as HongBao_Fa,false);
+			TipTargetManager.show( _skin.btnInfo,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(31)));
 		}
 		
 		override protected function initTabBarDatas():void

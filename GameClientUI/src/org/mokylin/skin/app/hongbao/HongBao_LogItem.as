@@ -29,6 +29,8 @@ package org.mokylin.skin.app.hongbao
 			super();
 			
 			this.currentState = "normal";
+			this.height = 33;
+			this.width = 619;
 			this.elementsContent = [bg_i(),lbName_i()];
 			
 			states = {
@@ -61,7 +63,7 @@ package org.mokylin.skin.app.hongbao
 			temp.name = "lbName";
 			temp.text = "[2017-6-17 13:38:39]";
 			temp.textAlign = "left";
-			temp.color = 0xEAEABC;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 600;
 			temp.x = 15;

@@ -11,7 +11,7 @@ package org.mokylin.skin.app.zuoqi
 	import org.mokylin.skin.app.zuoqi.mc.UIMovieClipZuoqiName;
 	import org.mokylin.skin.component.uinumber.UINumberJuese_zhanli;
 	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_lv;
-
+	
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
@@ -23,32 +23,34 @@ package org.mokylin.skin.app.zuoqi
 		//                                定义成员变量
 		//==========================================================================
 		public var bg:feathers.controls.UIAsset;
-
+		
 		public var btnOk:feathers.controls.Button;
-
+		
 		public var ico1:feathers.controls.UIAsset;
-
+		
 		public var ico2:feathers.controls.UIAsset;
-
+		
 		public var ico3:feathers.controls.UIAsset;
-
+		
 		public var ico_up:feathers.controls.UIAsset;
-
+		
 		public var mc_jieshu:feathers.controls.UIMovieClip;
-
+		
 		public var mc_name:feathers.controls.UIMovieClip;
-
+		
 		public var mc_zhanqiname:feathers.controls.UIMovieClip;
-
+		
 		public var num_lv:feathers.controls.UINumber;
-
+		
 		public var uiGuangquan:feathers.controls.UIAsset;
-
+		
+		public var uiName:feathers.controls.UIAsset;
+		
 		public var ui_zhandouli:feathers.controls.UIAsset;
-
+		
 		public var userData:feathers.controls.UINumber;
-
-
+		
+		
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
@@ -59,14 +61,14 @@ package org.mokylin.skin.app.zuoqi
 			this.currentState = "normal";
 			this.height = 558;
 			this.width = 1048;
-			this.elementsContent = [bg_i(),uiGuangquan_i(),__Zuoqi_JingjieOk_Skin_UIAsset1_i(),mc_name_i(),mc_jieshu_i(),mc_zhanqiname_i(),btnOk_i(),ui_zhandouli_i(),userData_i(),num_lv_i(),ico_up_i()];
+			this.elementsContent = [bg_i(),uiGuangquan_i(),__Zuoqi_JingjieOk_Skin_UIAsset1_i(),mc_name_i(),mc_jieshu_i(),mc_zhanqiname_i(),btnOk_i(),ui_zhandouli_i(),userData_i(),num_lv_i(),ico_up_i(),uiName_i()];
 			
 			states = {
 			};
 			skinNames={};
 		}
-
-
+		
+		
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
@@ -78,7 +80,7 @@ package org.mokylin.skin.app.zuoqi
 			temp.y = 127;
 			return temp;
 		}
-
+		
 		private function bg_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -86,10 +88,10 @@ package org.mokylin.skin.app.zuoqi
 			temp.name = "bg";
 			temp.styleName = "ui/big_bg/zuoqi/bg3.png";
 			temp.x = 386;
-			temp.y = 108;
+			temp.y = 206;
 			return temp;
 		}
-
+		
 		private function btnOk_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
@@ -100,7 +102,7 @@ package org.mokylin.skin.app.zuoqi
 			temp.y = 436;
 			return temp;
 		}
-
+		
 		private function ico_up_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -111,7 +113,7 @@ package org.mokylin.skin.app.zuoqi
 			temp.y = 256;
 			return temp;
 		}
-
+		
 		private function mc_jieshu_i():feathers.controls.UIMovieClip
 		{
 			var temp:feathers.controls.UIMovieClip = new feathers.controls.UIMovieClip();
@@ -125,7 +127,7 @@ package org.mokylin.skin.app.zuoqi
 			temp.y = 402;
 			return temp;
 		}
-
+		
 		private function mc_name_i():feathers.controls.UIMovieClip
 		{
 			var temp:feathers.controls.UIMovieClip = new feathers.controls.UIMovieClip();
@@ -137,7 +139,7 @@ package org.mokylin.skin.app.zuoqi
 			temp.y = 382;
 			return temp;
 		}
-
+		
 		private function mc_zhanqiname_i():feathers.controls.UIMovieClip
 		{
 			var temp:feathers.controls.UIMovieClip = new feathers.controls.UIMovieClip();
@@ -150,7 +152,7 @@ package org.mokylin.skin.app.zuoqi
 			temp.y = 382;
 			return temp;
 		}
-
+		
 		private function num_lv_i():feathers.controls.UINumber
 		{
 			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
@@ -165,7 +167,7 @@ package org.mokylin.skin.app.zuoqi
 			temp.y = 254;
 			return temp;
 		}
-
+		
 		private function uiGuangquan_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -176,7 +178,18 @@ package org.mokylin.skin.app.zuoqi
 			temp.y = 0;
 			return temp;
 		}
-
+		
+		private function uiName_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiName = temp;
+			temp.name = "uiName";
+			temp.styleName = "ui/app/zuoqi/jjcg.png";
+			temp.x = 603;
+			temp.y = 108;
+			return temp;
+		}
+		
 		private function ui_zhandouli_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -187,7 +200,7 @@ package org.mokylin.skin.app.zuoqi
 			temp.y = 244;
 			return temp;
 		}
-
+		
 		private function userData_i():feathers.controls.UINumber
 		{
 			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
@@ -202,6 +215,6 @@ package org.mokylin.skin.app.zuoqi
 			temp.y = 246;
 			return temp;
 		}
-
+		
 	}
 }

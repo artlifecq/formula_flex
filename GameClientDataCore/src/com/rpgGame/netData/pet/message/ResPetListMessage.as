@@ -9,22 +9,27 @@ package com.rpgGame.netData.pet.message{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * 所以侍宠信息列表
+	 * 所有美人信息列表
 	 */
 	public class ResPetListMessage extends Message {
 	
+		//当前出战美人ID
+		private var _petId: int;
+		
 		//侍宠属性
-		private var _player: Vector.<PetInfo> = new Vector.<PetInfo>();
+		private var _pets: Vector.<PetInfo> = new Vector.<PetInfo>();
 		
 		/**
 		 * 写入字节缓存
 		 */
 		override protected function writing(): Boolean{
 			var i: int = 0;
+			//当前出战美人ID
+			writeShort(_petId);
 			//侍宠属性
-			writeShort(_player.length);
-			for (i = 0; i < _player.length; i++) {
-				writeBean(_player[i]);
+			writeShort(_pets.length);
+			for (i = 0; i < _pets.length; i++) {
+				writeBean(_pets[i]);
 			}
 			return true;
 		}
@@ -34,10 +39,12 @@ package com.rpgGame.netData.pet.message{
 		 */
 		override protected function reading(): Boolean{
 			var i: int = 0;
+			//当前出战美人ID
+			_petId = readShort();
 			//侍宠属性
-			var player_length : int = readShort();
-			for (i = 0; i < player_length; i++) {
-				_player[i] = readBean(PetInfo) as PetInfo;
+			var pets_length : int = readShort();
+			for (i = 0; i < pets_length; i++) {
+				_pets[i] = readBean(PetInfo) as PetInfo;
 			}
 			return true;
 		}
@@ -51,18 +58,33 @@ package com.rpgGame.netData.pet.message{
 		}
 		
 		/**
+		 * get 当前出战美人ID
+		 * @return 
+		 */
+		public function get petId(): int{
+			return _petId;
+		}
+		
+		/**
+		 * set 当前出战美人ID
+		 */
+		public function set petId(value: int): void{
+			this._petId = value;
+		}
+		
+		/**
 		 * get 侍宠属性
 		 * @return 
 		 */
-		public function get player(): Vector.<PetInfo>{
-			return _player;
+		public function get pets(): Vector.<PetInfo>{
+			return _pets;
 		}
 		
 		/**
 		 * set 侍宠属性
 		 */
-		public function set player(value: Vector.<PetInfo>): void{
-			this._player = value;
+		public function set pets(value: Vector.<PetInfo>): void{
+			this._pets = value;
 		}
 		
 	}

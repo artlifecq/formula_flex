@@ -112,7 +112,12 @@ package com.rpgGame.app.view.icon
 				{
 					info.q_describe=_buffData.buffData.q_description;
 				}else{
-					info.q_describe=lostSkiLL.q_desc.replace("$",LostSkillManager.instance().getValueByType(lostSkiLL.q_type,_buffData.buffInfo.percent))
+					var value1:int = 0;
+					if(_buffData.buffInfo.percent>0)
+						value1 = _buffData.buffInfo.percent;
+					else
+						value1 = _buffData.buffInfo.value;
+					info.q_describe=lostSkiLL.q_desc.replace("$",LostSkillManager.instance().getValueByType(lostSkiLL.q_type,value1))
 				}
 				
 				TipTargetManager.remove(this);
