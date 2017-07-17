@@ -221,7 +221,7 @@ package com.rpgGame.app.manager.role
 			data.sizeScale = (bornData && bornData.q_scale > 0) ? (bornData.q_scale * 0.01) : 1;
 			//			data.totalStat.level = bornData ? bornData.q_grade : 0;
 			data.bodyRadius = bornData ? bornData.q_body_radius_pixel : 0;
-			data.direction = bornData ? bornData.q_direction : 0;
+			//data.direction = bornData ? bornData.q_direction : 0;
 			data.immuneDeadBeat = bornData ? (bornData.q_immune_dead_beat==0): false;
 			
 			if(bornData.q_born_animation)//有出生特效
@@ -264,7 +264,7 @@ package com.rpgGame.app.manager.role
 			
 			role.setScale(data.sizeScale);
 			role.setGroundXY(data.x, data.y);
-			role.rotationY = data.direction;
+			role.rotationY = (270 + data.direction) % 360;;
 			if (charType == SceneCharType.NPC)
 			{
 				SceneManager.addSceneObjToScene(role, true, false, false);
@@ -362,7 +362,7 @@ package com.rpgGame.app.manager.role
 			data.sizeScale = (bornData && bornData.q_scale > 0) ? (bornData.q_scale * 0.01) : 1;
 			//			data.totalStat.level = bornData ? bornData.q_grade : 0;
 			data.bodyRadius = bornData ? bornData.q_body_radius_pixel : 0;
-			data.direction = bornData ? bornData.q_direction : 0;
+			//data.direction = bornData ? bornData.q_direction : 0;
 			AvatarManager.updateAvatar(role);
 			
 			if (data.totalStat.hp <= 0)
@@ -571,7 +571,7 @@ package com.rpgGame.app.manager.role
 			
 			role.setScale(data.sizeScale);
 			role.setGroundXY(data.x, data.y);
-			role.rotationY = data.direction;
+			role.rotationY = (270 + data.direction) % 360;
 			SceneManager.addSceneObjToScene(role, true, true, false);
 			ClientTriggerManager.addTriggerCollectEffect(role);
 			EventManager.dispatchEvent(MapEvent.UPDATE_MAP_ROLE_ADD, role);

@@ -15,9 +15,9 @@ package com.rpgGame.coreData.type
 		/** 个性待机状态 **/
 		public static const IDLE : String = "stand";//暂时把个性待机动作调为stand，因为现在美术还没有做这个动作
 		/** 展示状态1 **/
-		public static const SHOW1 : String = "show1";
+		public static const SHOW1 : String = "show_stand";
 		/** 展示状态2 **/
-		public static const SHOW2 : String = "show2";
+		public static const SHOW2 : String = "show_idle";
 		/** 行走 **/
 		public static const WALK : String = "walk";
 		/** 跑步 **/
