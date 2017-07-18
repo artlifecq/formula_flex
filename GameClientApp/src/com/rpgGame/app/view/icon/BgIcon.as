@@ -1,5 +1,6 @@
 package com.rpgGame.app.view.icon
 {
+	import com.rpgGame.app.manager.EftMcManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
@@ -13,9 +14,6 @@ package com.rpgGame.app.view.icon
 	import feathers.controls.UIAsset;
 	import feathers.controls.UIMovieClip;
 	import feathers.controls.text.Fontter;
-	
-	import org.mokylin.skin.common.mc.UIMovieClipQ_quality_huang;
-	import org.mokylin.skin.common.mc.UIMovieClipQ_quality_zi;
 	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
@@ -117,7 +115,6 @@ package com.rpgGame.app.view.icon
 					_qualityEft.removeChildren();
 				}
 			}
-			setQualityImageIconPoint();
 			sortLayer();
 		}
 		
@@ -130,9 +127,9 @@ package com.rpgGame.app.view.icon
 			}
 			_qualityEft.touchable=false;
 			if(_qualityId==Quality.GREEN){
-				_qualityEft.styleClass = org.mokylin.skin.common.mc.UIMovieClipQ_quality_zi;
+				EftMcManager.setMcStyle(_qualityEft,"UIMovieClipQ_quality_zi");
 			}else{
-				_qualityEft.styleClass = org.mokylin.skin.common.mc.UIMovieClipQ_quality_huang;
+				EftMcManager.setMcStyle(_qualityEft,"UIMovieClipQ_quality_huang");
 			}
 			_qualityEft.frameRate=20;
 			_qualityEft.autoPlay=true;
@@ -354,7 +351,10 @@ package com.rpgGame.app.view.icon
 				_iconImage.x = _iconPositionX;
 				_iconImage.y = _iconPositionY;
 			}
-			setQualityImageIconPoint();
+			if(_qualityImage){
+				_qualityImage.x = _iconPositionX;
+				_qualityImage.y = _iconPositionY;
+			}
 		}
 		
 		/**
@@ -393,25 +393,6 @@ package com.rpgGame.app.view.icon
 				_selectImage.y = _iconPositionY;
 			}
 			updateIconImagePosition( x, y );
-		}
-		
-		/**
-		 * 设置物品品质框的偏移值 
-		 * @param x
-		 * @param y
-		 * 
-		 */		
-		private function setQualityImageIconPoint():void
-		{
-			if( _qualityImage != null )
-			{
-				_qualityImage.x = _iconPositionX;
-				_qualityImage.y = _iconPositionY;
-				if(_qualityEft){
-					_qualityEft.x=_iconPositionX;
-					_qualityEft.y=_iconPositionY;
-				}
-			}
 		}
 		
 		/**

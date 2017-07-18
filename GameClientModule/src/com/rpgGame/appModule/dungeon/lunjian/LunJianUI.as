@@ -113,7 +113,6 @@ package com.rpgGame.appModule.dungeon.lunjian
 		{
 			EventManager.addEvent(DungeonEvent.UPDATE_LUNJIAN_PANEL,onGetLunJianDatas);
 			_skin.list_map.addEventListener(Event.CHANGE,onChangeSelectedMap);
-			EventManager.addEvent(AvatarEvent.AVATAR_CHANGE_COMPLETE,onUpateAvatarScale);
 			
 			TipTargetManager.show( _skin.btnShuoming,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(28)));
 		}

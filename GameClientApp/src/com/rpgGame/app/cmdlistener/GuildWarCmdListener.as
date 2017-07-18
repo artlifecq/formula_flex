@@ -1,8 +1,10 @@
 package com.rpgGame.app.cmdlistener
 {
+	import com.rpgGame.app.cmdlistener.enum.OpaqueEnum;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.sender.GuildWarSender;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.GuildEvent;
@@ -105,7 +107,11 @@ package com.rpgGame.app.cmdlistener
 		
 		private function getResGuildWarOperateResultMessage(msg:ResGuildWarOperateResultMessage):void
 		{
-			
+			switch(msg.opaque){
+				case OpaqueEnum.GUILDWAR_GIFT:
+					GuildWarSender.reqGuildWarCityInfo();//领取帮会战奖励成功之后
+					break;
+			}
 		}
 		
 		private function getResGuildWarCityInfoMessage(msg:ResGuildWarCityInfoMessage):void

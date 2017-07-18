@@ -11,6 +11,7 @@ package com.rpgGame.app.graphics
 	import org.client.mainCore.ds.HashMap;
 	import org.mokylin.skin.app.banghui.huangcheng.HeadInfoItem;
 	import org.mokylin.skin.app.banghui.huangcheng.Head_Info;
+	import org.mokylin.skin.app.banghui.huangcheng.Head_Info2;
 	
 	import starling.display.Sprite;
 	
@@ -59,10 +60,9 @@ package com.rpgGame.app.graphics
 					items=weiczbItems;
 					break;
 				case maps[1]:
-					_skin=new Head_Info();
-					setItemRes(_skin["skin1"].skin as HeadInfoItem,"tong");
-					setItemRes(_skin["skin2"].skin as HeadInfoItem,"yin");
-					setItemRes(_skin["skin3"].skin as HeadInfoItem,"jin");
+					_skin=new Head_Info2();
+					setItemRes(_skin["skin1"].skin as HeadInfoItem,"kuang");
+					setItemRes(_skin["skin2"].skin as HeadInfoItem,"zuan");
 					items=wangczbItems;
 					break;
 			}
@@ -115,10 +115,10 @@ package com.rpgGame.app.graphics
 			for(var i:int=0;i<oreList.length;i++){
 				dataMap.add(oreList[i].key,oreList[i].value);
 			}
-			if(_skin is Head_Info){
-				setItemNum(_skin["skin1"].skin as HeadInfoItem,items[0]);
-				setItemNum(_skin["skin2"].skin as HeadInfoItem,items[1]);
-				setItemNum(_skin["skin3"].skin as HeadInfoItem,items[2]);
+			
+			for(i=0;i<items.length;i++){
+				var key:String=i+1+"";
+				setItemNum(_skin["skin"+key].skin as HeadInfoItem,items[i]);
 			}
 		}
 		

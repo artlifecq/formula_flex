@@ -1,5 +1,6 @@
 package com.rpgGame.app.sender
 {
+	import com.rpgGame.app.cmdlistener.enum.OpaqueEnum;
 	import com.rpgGame.netData.guildWar.message.ReqGetOrePositionMessage;
 	import com.rpgGame.netData.guildWar.message.ReqGuildWarApplyMessage;
 	import com.rpgGame.netData.guildWar.message.ReqGuildWarCityApplyInfoMessage;
@@ -97,7 +98,7 @@ package com.rpgGame.app.sender
 		public static function reqGuildWarGiveDailyGift(opaque:int=0):void
 		{
 			var msg:ReqGuildWarGiveDailyGiftMessage=new ReqGuildWarGiveDailyGiftMessage();
-			msg.opaque=opaque;
+			msg.opaque=OpaqueEnum.GUILDWAR_GIFT;
 			sendMsg(msg);
 		}
 		

@@ -24,6 +24,7 @@ package com.rpgGame.appModule.guild.war
 	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.controls.UIAsset;
 	import feathers.data.ListCollection;
+	import feathers.utils.filter.GrayFilter;
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
@@ -181,6 +182,8 @@ package com.rpgGame.appModule.guild.war
 			_infoMsg=msg;
 			cityHold=null;
 			var nextTime:int=_infoMsg.nextWarTime*1000;
+			
+			city=msg.applyCityId;//自己参与的城池
 			for(i=0;i<num;i++){
 				info=_citys[i];
 				_cityData.add(info.id,info);
@@ -193,23 +196,15 @@ package com.rpgGame.appModule.guild.war
 				tipsData.nextTime=nextTime;
 				tipsData.rewardState=_infoMsg.haveDailyGift;
 				tipsData.isOwner=false;
-				if(info.id==EnumCity.WANG_CHENG&&info.state!=1&&info.state!=5){//是王城
-					if(info.state==3){
-						state=PRE_WAR_WC;
-						fightInfo=info;
-					}else if(info.state==4){
-						state=WAR_WC;
-						fightInfo=info;
-					}
-				}else{
-					var result:int=getCityStateForData(info,myGuildId);
-					state=result!=-1?result:state;
-					if(state==DEF_STATE||state==HOLD_STATE){
-						cityHold=_cityIcon.getValue(fightInfo.id);
-						tipsData.isOwner=true;
-					}
+				
+				var result:int=getCityStateForData(info,myGuildId);
+				state=result!=-1?result:state;
+				if(state==DEF_STATE||state==HOLD_STATE){
+					cityHold=_cityIcon.getValue(fightInfo.id);
+					tipsData.isOwner=true;
 				}
 			}
+			
 			if(!fightInfo){
 				if(msg.applyCityId==-1){
 					city=-1;
@@ -244,30 +239,43 @@ package com.rpgGame.appModule.guild.war
 			if(!info.occupyGuildId&&!info.attackGuildId){//进攻方和防守方都没有那就是空城
 				return -1;
 			}
-			if(info.attackGuildId.hexValue!=myGuildId&&info.attackGuildId.hexValue!=myGuildId){//攻方不是自己守方不是自己
+			if(info.attackGuildId.hexValue!=myGuildId&&info.occupyGuildId.hexValue!=myGuildId){//攻方不是自己守方不是自己
 				return -1;
 			}
 			var result:int=1;
 			fightInfo=info;
 			switch(info.state){
-				case 1:
-					result=UNAPPLY_STATE;
+				case 1://未申请
+					if(info.occupyGuildId.hexValue==myGuildId){//自己占领
+						result=HOLD_STATE;
+					}else{
+						result=UNAPPLY_STATE;
+					}
 					break;
-				case 2:
+				case 2://申请中
 					result=APPLYING_STATE;
+					if(info.occupyGuildId.hexValue==myGuildId){//自己占领
+						result=HOLD_STATE;
+					}else{
+						result=APPLYING_STATE;
+					}
 					break;
-				case 3:
-					result=PRE_WAR_STATE;
+				case 3://准备战斗
+					if(info.occupyGuildId.hexValue==myGuildId){//自己占领
+						result=HOLD_STATE;
+					}else{
+						result=PRE_WAR_STATE;
+					}
 					break;
-				case 4:
+				case 4://战斗中
 					if(info.occupyGuildId.hexValue==myGuildId){//防守
 						result=DEF_STATE;
 					}else if(info.attackGuildId.hexValue==myGuildId){//攻击
 						result=ATTACK_STATE;
 					}
 					break;
-				case 5:
-					if(info.attackGuildId.hexValue==myGuildId){//自己占领
+				case 5://应该是拥有阶段
+					if(info.occupyGuildId.hexValue==myGuildId){//自己占领
 						result=HOLD_STATE;
 					}
 					break;
@@ -302,7 +310,7 @@ package com.rpgGame.appModule.guild.war
 				nmItem.lbBangName.text="未占领";
 				nmItem.lbZhan.text="";
 			}else{
-				if(info.attackGuildName){
+				if(info.attackGuildName&&(info.state==3||info.state==4)){
 					nm.guild0.visible=nm.guild1.visible=true;
 					nmItem.lbBangName.text=info.occupyGuildName;
 					nmItem.lbZhan.text="守";
@@ -330,6 +338,8 @@ package com.rpgGame.appModule.guild.war
 		{
 			_skin.btnBaoming.touchable=true;
 			_skin.btnBaoming.filter=null;
+			_skin.btnJinru.filter=null;
+			_skin.btnJinru.touchable=true;
 			_skin.uiCheng.x=28;
 			_skin.uiMyFlag.x=56;
 			switch(state){
@@ -385,7 +395,7 @@ package com.rpgGame.appModule.guild.war
 			_skin.uiCheng.x=100;
 			_skin.uiMyFlag.x=128;
 			_skin.btnBaoming.touchable=false;
-			_skin.btnBaoming.filter=FilterUtil.getGrayFilter();
+			GrayFilter.gray(_skin.btnBaoming);
 		}
 		
 		private function preWarWC():void
@@ -462,7 +472,7 @@ package com.rpgGame.appModule.guild.war
 			_skin.lbHead.htmlText="占领"+getCityName(city);
 			_skin.lbName1.htmlText="";
 			_skin.lbName2.htmlText="";
-			_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,"本帮已占领"+fightInfo.occupyGuildName);
+			_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,"本帮已占领"+getCityName(city));
 			_skin.lbTime.text="";
 			
 			var cityStyleName:String="weicheng1";
@@ -480,7 +490,16 @@ package com.rpgGame.appModule.guild.war
 					cityStyleName="weicheng3";
 					flagStyleName="dongwei";
 					break;
+				case EnumCity.WANG_CHENG:
+					cityStyleName="wangcheng3";
+					flagStyleName="wangcheng";
+					_skin.btnJinru.filter=FilterUtil.getGrayFilter();
+					_skin.btnJinru.touchable=false;
+					break;
 			}
+			
+			_skin.btnBaoming.touchable=false;
+			_skin.btnBaoming.filter=FilterUtil.getGrayFilter();
 			
 			_skin.uiCheng.styleName="ui/app/banghui/wangcheng/xiaocheng/"+cityStyleName+".png";
 			_skin.uiMyFlag.styleName="ui/app/banghui/wangcheng/"+flagStyleName+".png";
@@ -563,6 +582,9 @@ package com.rpgGame.appModule.guild.war
 					break;
 				case EnumCity.DONG_WEI:
 					name="东卫";
+					break;
+				case EnumCity.WANG_CHENG:
+					name="王城";
 					break;
 			}
 			return name;
@@ -656,7 +678,9 @@ package com.rpgGame.appModule.guild.war
 					toEnterWar();
 					break;
 				case cityHold:
-					GuildWarSender.reqGuildWarGiveDailyGift();
+					if(_infoMsg.haveDailyGift==1){
+						GuildWarSender.reqGuildWarGiveDailyGift();
+					}
 					break;
 				case _skin.btnJone:
 					AppManager.showAppNoHide(AppConstant.GUILD_PANEL,null,EmFunctionID.EM_BANGHUI_LIEBIAO);

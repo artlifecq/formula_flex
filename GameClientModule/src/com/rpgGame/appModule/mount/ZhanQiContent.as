@@ -86,7 +86,6 @@ package com.rpgGame.appModule.mount
 			_curtentInterEff.x=357;
 			_curtentInterEff.y=400;
 			unit.setScale(scaleXY);
-			unit.addUnitAtComposite(unit);
 			unit.setStatus(RoleActionType.STAND);
 			this.addChild3D(_curtentInterEff);
 			
@@ -118,7 +117,6 @@ package com.rpgGame.appModule.mount
 			_nextInterEff.x=590;
 			_nextInterEff.y=310;
 			unit.setScale(scaleXY);
-			unit.addUnitAtComposite(unit);
 			this.addChild3D(_nextInterEff);
 			
 			anation = new TargetAmationInfo();
