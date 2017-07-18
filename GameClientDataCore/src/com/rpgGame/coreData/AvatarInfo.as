@@ -72,6 +72,21 @@ package com.rpgGame.coreData
 			_priority = priority;
 		}
 		
+		public function get fightsoulEffectResID():String
+		{
+			return _fightsoulEffectResID;
+		}
+
+		public function get fightsoulResID():String
+		{
+			return _fightsoulResID;
+		}
+
+		public function get bodyMethodTypeEffectResID():String
+		{
+			return _bodyMethodTypeEffectResID;
+		}
+
 		/**衣服换装资源*/
 		public function setBodyResID(body : String, animat : String) : void
 		{
@@ -284,7 +299,7 @@ package com.rpgGame.coreData
 			}
 		}
 		/**战魂换装资源ID*/
-		public function setFightSoulResID(value : String) : void
+		public function set fightsoulResID(value : String) : void
 		{
 			if (_fightsoulResID == value)
 				return;
@@ -302,7 +317,7 @@ package com.rpgGame.coreData
 			}
 		}
 		
-		public function set fightSoulefffectID(value:String):void
+		public function set fightsoulEffectResID(value:String):void
 		{
 			if (_fightsoulEffectResID == value)
 				return;
@@ -566,8 +581,8 @@ package com.rpgGame.coreData
 			weaponResID = null;
 			deputyWeaponResID = null;
 			setMountResID(null, null);
-			setFightSoulResID(null);
-			fightSoulefffectID = null;
+			fightsoulResID=null;
+			fightsoulEffectResID = null;
 			weaponEffectID = null;
 			weaponEffectScale = 0;
 			weaponEffectOffset = null;

@@ -154,13 +154,6 @@ package com.rpgGame.coreData.role
 		public function set mount(value:int):void
 		{
 			_mount = value;
-			var mountModel :Q_horse = HorseConfigData.getMountDataById(_mount);
-			if (mountModel)
-			{
-				var mountResID:String = mountModel.q_skinResID;
-				var mountAnimatResID:String = mountModel.q_animatResID;
-				this.avatarInfo.setMountResID(mountResID, mountAnimatResID);
-			}
 		}
 
 		/**战旗等级*/
@@ -216,7 +209,7 @@ package com.rpgGame.coreData.role
 		public function set cloths(value:int):void
 		{
 			_cloths = value;
-			var clothesRes : AvatarClothesRes = AvatarClothesResCfgData.getInfo(_cloths);
+			/*var clothesRes : AvatarClothesRes = AvatarClothesResCfgData.getInfo(_cloths);
 			if (!clothesRes)
 			{
 				clothesRes = AvatarClothesResCfgData.getInfo(this.job);
@@ -224,7 +217,7 @@ package com.rpgGame.coreData.role
 			if(clothesRes){
 				this.avatarInfo.setBodyResID(clothesRes.bodyRes, this.avatarInfo.bodyAnimatResID);
 				this.avatarInfo.bodyEffectID = clothesRes.effectRes;
-			}
+			}*/
 		}
 
 		/**
@@ -242,13 +235,6 @@ package com.rpgGame.coreData.role
 		public function set hair(value:int):void
 		{
 			_hair = value;
-			var hairRes : AvatarHairRes = AvatarHairResCfgData.getInfo(_hair);
-			if (hairRes)
-			{
-				this.avatarInfo.hairResID = hairRes.hairRes;
-			}else{
-				this.avatarInfo.hairResID=null;
-			}
 		}
 
 		/**
@@ -292,7 +278,7 @@ package com.rpgGame.coreData.role
 		public function set weapon(value:int):void
 		{
 			_weapon = value;
-			var weaponRes : AvatarWeaponRes = AvatarWeapontResCfgData.getInfo(_weapon);
+		/*	var weaponRes : AvatarWeaponRes = AvatarWeapontResCfgData.getInfo(_weapon);
 			if (weaponRes)
 			{
 				this.avatarInfo.weaponResID = weaponRes.res;
@@ -302,7 +288,7 @@ package com.rpgGame.coreData.role
 			}else{
 				this.avatarInfo.weaponResID = null;
 				this.avatarInfo.weaponEffectID = null;
-			}
+			}*/
 		}
 
 		public static function setUserSingleInfo(info : HeroData, nick : String = null) : void
