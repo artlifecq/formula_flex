@@ -354,6 +354,7 @@ package com.rpgGame.app.ui.scene
 			icon1=null;
 			icon2=null;
 			icon3=null;
+			(MainRoleManager.actor.headFace as HeadFace).updateGuildWarInfoBar(null);
 		}
 	}
 }

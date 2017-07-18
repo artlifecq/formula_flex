@@ -228,7 +228,7 @@ package com.rpgGame.app.manager
 				}
 				else
 				{
-					if(collectData.faction==MainRoleManager.actorInfo.faction)
+					if(collectData.faction==MainRoleManager.actorInfo.faction||collectData.faction==0||collectData.modelID==2263)//祝福石特殊处理
 					{
 						TaskSender.sendStartGatherMessage(collectData.serverID);
 					}else{

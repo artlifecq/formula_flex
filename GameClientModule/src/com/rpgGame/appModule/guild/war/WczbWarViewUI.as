@@ -22,6 +22,7 @@ package com.rpgGame.appModule.guild.war
 	import com.rpgGame.netData.guildWar.message.ResGuildWarCityInfoMessage;
 	
 	import feathers.controls.ScrollBarDisplayMode;
+	import feathers.controls.SkinnableContainer;
 	import feathers.controls.UIAsset;
 	import feathers.data.ListCollection;
 	import feathers.utils.filter.GrayFilter;
@@ -68,6 +69,7 @@ package com.rpgGame.appModule.guild.war
 		private var _timeStr:String;
 		private var fightInfo:GuildWarCityInfo;
 		private var cityHold:UIAsset;
+		private var baoXiang:WangCheng_BaoXiang;
 //		private var applyCityId:int;
 		
 		public function WczbWarViewUI()
@@ -201,6 +203,7 @@ package com.rpgGame.appModule.guild.war
 				state=result!=-1?result:state;
 				if(state==DEF_STATE||state==HOLD_STATE){
 					cityHold=_cityIcon.getValue(fightInfo.id);
+					baoXiang=_rewardMap.getValue(fightInfo.id);
 					tipsData.isOwner=true;
 				}
 			}
@@ -317,6 +320,9 @@ package com.rpgGame.appModule.guild.war
 					nmItem=(nm.guild1.skin as WangChengInfo_Item);
 					nmItem.lbBangName.text=info.attackGuildName;
 					nmItem.lbZhan.text="攻";
+					if(city==4){
+						nm.guild1.visible=false;
+					}
 				}else{
 					nm.guild0.visible=true;
 					nmItem.lbBangName.text=info.occupyGuildName;
@@ -565,6 +571,12 @@ package com.rpgGame.appModule.guild.war
 					cityStyleName="weicheng3";
 					flagStyleName="dongwei";
 					break;
+				case EnumCity.WANG_CHENG:
+					cityStyleName="wangcheng3";
+					flagStyleName="wangcheng";
+					_skin.btnBaoming.filter=FilterUtil.getGrayFilter();
+					_skin.btnBaoming.touchable=false;
+					break;
 			}
 			_skin.uiCheng.styleName="ui/app/banghui/wangcheng/xiaocheng/"+cityStyleName+".png";
 			_skin.uiMyFlag.styleName="ui/app/banghui/wangcheng/"+flagStyleName+".png";
@@ -678,6 +690,7 @@ package com.rpgGame.appModule.guild.war
 					toEnterWar();
 					break;
 				case cityHold:
+				case baoXiang:
 					if(_infoMsg.haveDailyGift==1){
 						GuildWarSender.reqGuildWarGiveDailyGift();
 					}
