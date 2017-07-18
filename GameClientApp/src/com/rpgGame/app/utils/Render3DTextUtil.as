@@ -141,7 +141,42 @@ package com.rpgGame.app.utils
 		
 		public static function addHeadFlowerTextToTarget(entity:SceneRole, meiguiRes:String, colorRes:String, cgfId:int, str:String, disappearTime:Number=0):Render3DText
 		{
-			var renderText:Render3DText = Render3DText.create( RenderUnitType.BODY_HEAD_FLOWER_TEXT, 100 );
+			var textDatas:Vector.<Render3DTextData> = getRender3DTextDataList(meiguiRes, colorRes);
+			var renderText:Render3DText = entity.getBaseObjByID("body_head_flower_text", cgfId) as Render3DText;
+			if (renderText == null)
+			{
+				renderText = Render3DText.create("body_head_flower_text", cgfId);
+				renderText.align = "center";
+				renderText.setAddedCallBack(function (_arg1:Render3DText):void
+				{
+					refreshHeadFlowerTextLayout(entity);
+				});
+				if (entity.stateMachine.isShowRiding)
+				{
+					entity.addBaseObjToUnitChild(RenderUnitType.MOUNT, RenderUnitID.MOUNT, BoneNameEnum.c_0_name_01, renderText, true);
+				}
+				else
+				{
+					entity.addBaseObjToUnitChild(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_name_01, renderText, true);
+				}
+			}
+			renderText.setTextDatas(textDatas);
+			renderText.setStyle(styleName_Meigui, "style1");
+			renderText.setStyle(styleName_Shuzi, "style1");
+			renderText.text = "hx" + str;
+			refreshHeadFlowerTextLayout(entity);
+			if (disappearTime > 0)
+			{
+				var duration:Number = disappearTime - SystemTimeManager.curtTm;
+				var tween:TweenLite = TweenLite.delayedCall((duration * 0.001), onRemoveHeadFlowerText, [entity, cgfId]);
+				effectTweenMap.add((entity.id + cgfId), tween);
+			}
+			return renderText;
+			
+			
+			
+			
+		/*	var renderText:Render3DText = Render3DText.create( RenderUnitType.BODY_HEAD_FLOWER_TEXT, 100 );
 			//			renderText.billboardMode = true;
 			renderText.align = "center";
 			entity.addBaseObjToUnitChild(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_name_01, renderText);
@@ -202,7 +237,7 @@ package com.rpgGame.app.utils
 				var tween:TweenLite = TweenLite.delayedCall((duration * 0.001), onRemoveHeadFlowerText, [entity, cgfId]);
 				effectTweenMap.add((entity.id + cgfId), tween);
 			}
-			return renderText;
+			return renderText;*/
 		}
 		
 		private static function onRemoveHeadFlowerText(entity:BaseEntity, cgfId:int):void
