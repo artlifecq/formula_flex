@@ -13,7 +13,6 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.ItemSender;
-	import com.rpgGame.app.view.icon.BgIcon;
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.app.view.uiComponent.menu.Menu;
@@ -39,8 +38,6 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.CharAttributeType;
-	import com.rpgGame.coreData.type.EffectUrl;
-	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.type.item.GridBGType;
@@ -99,7 +96,7 @@ package com.rpgGame.appModule.role
 		private var _roleData:HeroData;
 		private var isMainRole:Boolean;
 		private var otherItems:Vector.<ItemInfo>;
-		private var _touchID:int;
+		private var _touchID:int=-1;
 
 		private var startX:Number;
 
