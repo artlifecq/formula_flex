@@ -801,7 +801,7 @@ package com.game.engine2D
 		{
 			$baseObj.parent = _avatarContainer as ObjectContainer3D;
 			$baseObj.isInViewDistance = true;
-			$baseObj.mouseEnable = this.mouseEnabled;
+//			$baseObj.mouseEnable = this.mouseEnabled;
 			$baseObj.startRender();
 			_baseObj3DList.push($baseObj);
 			if (autoRecycle && $baseObj is RenderUnit3D)
