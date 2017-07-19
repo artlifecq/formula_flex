@@ -289,7 +289,7 @@ package com.rpgGame.app.cmdlistener.scene
 			if(!role){
 				return;
 			}
-			role.updateBody(msg.armorResId);
+			role.updateCloth(msg.armorResId);
 		}
 		
 		private function onResHelmChangeMessage(msg:ResHelmChangeMessage):void

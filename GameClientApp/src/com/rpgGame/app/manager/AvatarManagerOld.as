@@ -1,7 +1,5 @@
 package com.rpgGame.app.manager
 {
-	import com.editor.data.RenderUnitID;
-	import com.editor.data.RenderUnitType;
 	import com.game.engine3D.core.GameScene3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.BaseObjChild;
@@ -63,35 +61,10 @@ package com.rpgGame.app.manager
 			if (role == null || !role.usable)
 				return;
 			
-			var objChild : BaseObjChild;
-			var objChildDatas : Vector.<BaseObjChild>;
-			var unitChild : RenderUnitChild;
-			var unitChildDatas : Vector.<RenderUnitChild>;
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
-			if (avatarInfo.rpd_body)
-			{
-				//将坐骑头顶的绑点子部件转到body上
-				objChildDatas = role.getChildDatasByName(RenderUnitType.MOUNT, RenderUnitID.MOUNT, BoneNameEnum.c_0_name_01);
-				for each (objChild in objChildDatas)
-				{
-					role.addObjChildDataToUnitChild(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_name_01, objChild);
-				}
-				unitChildDatas = role.avatar.getUnitChildDatasByName(RenderUnitType.MOUNT, RenderUnitID.MOUNT, BoneNameEnum.c_0_name_01);
-				for each (unitChild in unitChildDatas)
-				{
-					role.avatar.addUnitChildData(RenderUnitType.BODY, RenderUnitID.BODY, unitChild);
-				}
-			}
-			
 			role.avatar.secondStatusGetter = getSecondStatus;
-			role.avatar.buildSyncInfo(RenderUnitType.BODY, RenderUnitID.BODY);
-			role.avatar.buildSyncInfo(RenderUnitType.HAIR, RenderUnitID.HAIR);
-			role.avatar.buildSyncInfo(RenderUnitType.WEAPON, RenderUnitID.WEAPON);
-			role.avatar.buildSyncInfo(RenderUnitType.DEPUTY_WEAPON, RenderUnitID.DEPUTY_WEAPON);
-			role.avatar.buildSyncInfo(RenderUnitType.MOUNT, RenderUnitID.MOUNT);
-			role.avatar.buildSyncInfo(RenderUnitType.EFFECT, RenderUnitID.EFFECT);
 			role.avatar.buildSyncInfo(RenderUnitType.FIGHTSOUL, RenderUnitID.FIGHTSOUL);
-			role.avatar.buildSyncInfo(RenderUnitType.ZHANQI, RenderUnitID.ZHANQI);
+			
 			//上“坐骑”
 			updateMount(role);
 			//穿“主体”
@@ -108,20 +81,6 @@ package com.rpgGame.app.manager
 			updateZhanQiRole(role);
 			//穿“效果方法类型特效”
 			updateMethodTypeEffect(role);
-			if (role.avatar.hasIDRenderUnit(RenderUnitType.MOUNT, RenderUnitID.MOUNT))
-			{
-				//将body头顶的绑点子部件转到坐骑上
-				objChildDatas = role.getChildDatasByName(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_name_01);
-				for each (objChild in objChildDatas)
-				{
-					role.addObjChildDataToUnitChild(RenderUnitType.MOUNT, RenderUnitID.MOUNT, BoneNameEnum.c_0_name_01, objChild);
-				}
-				unitChildDatas = role.avatar.getUnitChildDatasByName(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_name_01);
-				for each (unitChild in unitChildDatas)
-				{
-					role.avatar.addUnitChildData(RenderUnitType.MOUNT, RenderUnitID.MOUNT, unitChild);
-				}
-			}
 			
 			role.stateMachine.transition(RoleStateType.CONTROL_AVATAR);
 			if(updataBuff)
@@ -170,7 +129,7 @@ package com.rpgGame.app.manager
 				}
 			}
 			updateRoleSimpleShadow(role);
-			EventManager.dispatchEvent(AvatarEvent.EQUIP_CHANGE, role);
+//			EventManager.dispatchEvent(AvatarEvent.EQUIP_CHANGE, role);
 		}
 		
 		public static function updateSimpleShadow() : void
@@ -245,6 +204,7 @@ package com.rpgGame.app.manager
 		
 		private static function updateBody(role : SceneRole) : void
 		{
+			role.avatar.buildSyncInfo(RenderUnitType.BODY, RenderUnitID.BODY);
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
 			var rpd_body : RenderParamData3D = avatarInfo.rpd_body;
 			var rpd_mount : RenderParamData3D = role.stateMachine.canShowRiding ? avatarInfo.rpd_mount : null;
@@ -415,6 +375,7 @@ package com.rpgGame.app.manager
 		
 		private static function updateHair(role : SceneRole) : void
 		{
+			role.avatar.buildSyncInfo(RenderUnitType.HAIR, RenderUnitID.HAIR);
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
 			var rpd_hair : RenderParamData3D = avatarInfo.rpd_hair;
 			if (rpd_hair != null)
@@ -460,6 +421,7 @@ package com.rpgGame.app.manager
 		
 		private static function updateWeapon(role : SceneRole) : void
 		{
+			role.avatar.buildSyncInfo(RenderUnitType.WEAPON, RenderUnitID.WEAPON);
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
 			var ru : RenderUnit3D;
 			var rpd_weapon : RenderParamData3D = avatarInfo.rpd_weapon;
@@ -577,6 +539,7 @@ package com.rpgGame.app.manager
 		
 		private static function updateDeputyWeapon(role : SceneRole) : void
 		{
+			role.avatar.buildSyncInfo(RenderUnitType.DEPUTY_WEAPON, RenderUnitID.DEPUTY_WEAPON);
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
 			var rpd_deputy_weapon : RenderParamData3D = avatarInfo.rpd_deputy_weapon;
 			if (rpd_deputy_weapon != null)
@@ -677,6 +640,7 @@ package com.rpgGame.app.manager
 		
 		private static function updateEffect(role : SceneRole) : void
 		{
+			role.avatar.buildSyncInfo(RenderUnitType.EFFECT, RenderUnitID.EFFECT);
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
 			var rpd_effect : RenderParamData3D = avatarInfo.rpd_effect;
 			if (rpd_effect != null)
@@ -700,10 +664,30 @@ package com.rpgGame.app.manager
 		
 		private static function updateMount(role : SceneRole) : void
 		{
+			role.avatar.buildSyncInfo(RenderUnitType.MOUNT, RenderUnitID.MOUNT);
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
 			var rpd_mount : RenderParamData3D = role.stateMachine.canShowRiding ? avatarInfo.rpd_mount : null;
 			if (rpd_mount != null)
 			{
+				var objChild : BaseObjChild;
+				var objChildDatas : Vector.<BaseObjChild>;
+				var unitChild : RenderUnitChild;
+				var unitChildDatas : Vector.<RenderUnitChild>;
+				if (avatarInfo.rpd_body)
+				{
+					//将坐骑头顶的绑点子部件转到body上
+					objChildDatas = role.getChildDatasByName(RenderUnitType.MOUNT, RenderUnitID.MOUNT, BoneNameEnum.c_0_name_01);
+					for each (objChild in objChildDatas)
+					{
+						role.addObjChildDataToUnitChild(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_name_01, objChild);
+					}
+					unitChildDatas = role.avatar.getUnitChildDatasByName(RenderUnitType.MOUNT, RenderUnitID.MOUNT, BoneNameEnum.c_0_name_01);
+					for each (unitChild in unitChildDatas)
+					{
+						role.avatar.addUnitChildData(RenderUnitType.BODY, RenderUnitID.BODY, unitChild);
+					}
+				}
+				
 				var ru : RenderUnit3D = role.avatar.addRenderUnit(rpd_mount);
 				if (rpd_mount.animatorSourchPath)
 				{
@@ -735,6 +719,20 @@ package com.rpgGame.app.manager
 					role.isWheel = false;
 				}
 				role.avatar.applySyncInfo(RenderUnitType.MOUNT, RenderUnitID.MOUNT);
+				if (role.avatar.hasIDRenderUnit(RenderUnitType.MOUNT, RenderUnitID.MOUNT))
+				{
+					//将body头顶的绑点子部件转到坐骑上
+					objChildDatas = role.getChildDatasByName(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_name_01);
+					for each (objChild in objChildDatas)
+					{
+						role.addObjChildDataToUnitChild(RenderUnitType.MOUNT, RenderUnitID.MOUNT, BoneNameEnum.c_0_name_01, objChild);
+					}
+					unitChildDatas = role.avatar.getUnitChildDatasByName(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_name_01);
+					for each (unitChild in unitChildDatas)
+					{
+						role.avatar.addUnitChildData(RenderUnitType.MOUNT, RenderUnitID.MOUNT, unitChild);
+					}
+				}
 			}
 			else
 			{
@@ -745,6 +743,7 @@ package com.rpgGame.app.manager
 		/**创建战旗特效*/
 		private static function updateZhanQiRole(role:SceneRole):void
 		{
+			role.avatar.buildSyncInfo(RenderUnitType.ZHANQI, RenderUnitID.ZHANQI);
 			var avatarInfo : AvatarInfo = (role.data as RoleData).avatarInfo;
 			var ru : RenderUnit3D;
 			var rpd_body : RenderParamData3D = avatarInfo.rpd_body;
@@ -981,7 +980,7 @@ package com.rpgGame.app.manager
 			roleData.avatarInfo.deputyWeaponEffectScale = deputyWeaponEffectScale;//5
 			roleData.avatarInfo.deputyWeaponEffectOffset = deputyWeaponEffectOffset;//5
 			roleData.avatarInfo.fightsoulResID=fightsoulModeID;//8
-			roleData.avatarInfo.fightsoulEffectResID= fightsoulEffectResId;//8
+//			roleData.avatarInfo.fightsoulEffectResID= fightsoulEffectResId;//8
 			roleData.avatarInfo.zhanqiResID = zhanqiResID;//7
 		}
 		
@@ -1143,7 +1142,7 @@ package com.rpgGame.app.manager
 			roleData.avatarInfo.deputyWeaponEffectScale = deputyWeaponEffectScale;
 			roleData.avatarInfo.deputyWeaponEffectOffset = deputyWeaponEffectOffset;
 			roleData.avatarInfo.fightsoulResID=fightsoulModeID;
-			roleData.avatarInfo.fightsoulEffectResID= fightsoulEffectResId;
+//			roleData.avatarInfo.fightsoulEffectResID= fightsoulEffectResId;
 			roleData.avatarInfo.zhanqiResID = zhanqiResID;
 			
 			if (mountResID)

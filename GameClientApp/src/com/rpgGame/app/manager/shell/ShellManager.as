@@ -436,21 +436,20 @@ package com.rpgGame.app.manager.shell
                 role.ownerIsMainChar = true;
                 
                 data.avatarInfo.clear();
-                data.avatarInfo.setBodyResID("monster/pt_bing_1/pt_bing_1", null);
+//                data.avatarInfo.setBodyResID("monster/pt_bing_1/pt_bing_1", null);
+				role.updateBody("monster/pt_bing_1/pt_bing_1", null);
                 //data.avatarInfo.setBodyResID("pc/body/mojia_m_pl04_skin", "pc/body/mojia_m_pl04_animat");
-                AvatarManager.updateAvatar(role);
+//                AvatarManager.updateAvatar(role);
                 role.setGroundXY(data.x, data.y);
                 SceneManager.addSceneObjToScene(role, true, true, true);
                 role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true);
             } else {
                 //(role.data as HeroData).avatarInfo.setBodyResID("monster/pt_bing_1/pt_bing_1", null);
                 if (0 == index++ % 2) {
-                    (role.data as HeroData).avatarInfo.setBodyResID("pc/body/mojia_m_pl04_skin", "pc/body/mojia_m_pl04_animat");
+					role.updateBody("pc/body/mojia_m_pl04_skin", "pc/body/mojia_m_pl04_animat");
                 } else {
-                    (role.data as HeroData).avatarInfo.setBodyResID("monster/pt_bing_1/pt_bing_1", null);
+					role.updateBody("monster/pt_bing_1/pt_bing_1", null);
                 }
-                
-                AvatarManager.updateAvatar(role);
             }
         }
         
@@ -475,13 +474,11 @@ package com.rpgGame.app.manager.shell
             role.name = data.name = "";
             role.ownerIsMainChar = true;
             data.avatarInfo.clear();
-            data.avatarInfo.setBodyResID("monster/pt_bing_2/pt_bing_2", null);
-            AvatarManager.updateAvatar(role);
+			role.updateBody("monster/pt_bing_2/pt_bing_2", null);
             role.setGroundXY(data.x, data.y);
             SceneManager.addSceneObjToScene(role, true, true, true);
             role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true);
-            data.avatarInfo.setBodyResID("monster/pt_bing_1/pt_bing_1", null);
-            AvatarManager.updateAvatar(role);
+			role.updateBody("monster/pt_bing_1/pt_bing_1", null);
         }
         
         private function skill(id : int) : void {
@@ -776,7 +773,7 @@ package com.rpgGame.app.manager.shell
                 heroData.avatarInfo.setMountResID(null, null);
                 MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_RIDING);
             }
-            AvatarManager.updateAvatar(MainRoleManager.actor, false);
+            AvatarManager.updateMount(MainRoleManager.actor);
         }
         
         private function showCd() : void {

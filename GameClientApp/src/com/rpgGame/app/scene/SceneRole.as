@@ -7,8 +7,10 @@ package com.rpgGame.app.scene
 	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.state.role.RoleStateMachine;
+	import com.rpgGame.coreData.AvatarInfo;
 	import com.rpgGame.coreData.cfg.EvilConfig;
 	import com.rpgGame.coreData.cfg.HorseConfigData;
+	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
 	import com.rpgGame.coreData.cfg.model.AvatarClothesResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarDeputyWeaponResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarHairResCfgData;
@@ -18,8 +20,10 @@ package com.rpgGame.app.scene
 	import com.rpgGame.coreData.clientConfig.AvatarHairRes;
 	import com.rpgGame.coreData.clientConfig.AvatarWeaponRes;
 	import com.rpgGame.coreData.clientConfig.Q_horse;
+	import com.rpgGame.coreData.clientConfig.Q_warflag;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.RoleData;
+	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import flash.geom.Vector3D;
@@ -236,22 +240,51 @@ package com.rpgGame.app.scene
 		
 		
 		//换装逻辑
-		/**
-		 *衣服换装 
-		 * @param body
-		 * @param animat
-		 * 
-		 */
-		public function updateBody(cloths : int):void
+		
+		public function updateWithRenderUnitID(ID:int,data:AvatarInfo):void
 		{
 			if(!roleData){
 				return;
 			}
-			
-			var clothesRes : AvatarClothesRes = AvatarClothesResCfgData.getInfo(cloths);
+			switch(ID){
+				case RenderUnitID.BODY:
+					roleData.avatarInfo.setBodyResID(data.bodyResID, data.bodyAnimatResID);
+					AvatarManager.updateBody(this);
+					break;
+				case RenderUnitID.HAIR:
+					roleData.avatarInfo.hairResID = data.hairResID;
+					AvatarManager.updateHair(this);
+					break;
+				case RenderUnitID.WEAPON:
+					roleData.avatarInfo.weaponResID = data.weaponResID;
+					roleData.avatarInfo.weaponEffectID = data.weaponEffectID;
+					roleData.avatarInfo.weaponEffectScale = data.weaponEffectScale;
+					AvatarManager.updateWeapon(this);
+					break;
+				case RenderUnitID.DEPUTY_WEAPON:
+					roleData.avatarInfo.deputyWeaponResID = data.deputyWeaponResID;
+					roleData.avatarInfo.deputyWeaponEffectID=data.deputyWeaponEffectID;
+					roleData.avatarInfo.deputyWeaponEffectScale=data.deputyWeaponEffectScale;
+					AvatarManager.updateDeputyWeapon(this);
+					break;
+				case RenderUnitID.ZHANQI:
+					roleData.avatarInfo.zhanqiResID=data.zhanqiResID;
+					AvatarManager.updateFlag(this);
+					break;
+			}
+		}
+		
+		/**
+		 *更新服装 
+		 * @param cloth
+		 * 
+		 */
+		public function updateCloth(cloth:int):void
+		{
+			var clothesRes : AvatarClothesRes = AvatarClothesResCfgData.getInfo(cloth);
 			var heroData:HeroData=data as HeroData;
 			if(heroData){
-				heroData.cloths=cloths;
+				heroData.cloths=cloth;
 			}
 			if (!clothesRes&&heroData)
 			{
@@ -267,6 +300,25 @@ package com.rpgGame.app.scene
 					AvatarManager.updateBodyEft(this);
 				}
 			}
+		}
+		
+		/**
+		 *衣服换装 
+		 * @param body
+		 * @param animat
+		 * 
+		 */
+		public function updateBody(body : String, animat : String):void
+		{
+			if(!roleData){
+				return;
+			}
+			
+			if(roleData.avatarInfo.bodyResID==body&&roleData.avatarInfo.bodyAnimatResID==animat){
+				return;
+			}
+			roleData.avatarInfo.setBodyResID(body,animat);
+			AvatarManager.updateBody(this);
 		}
 		
 		/**
@@ -291,15 +343,16 @@ package com.rpgGame.app.scene
 		 * @param bodyEffectResID
 		 * 
 		 */
-		public function updateBodyEft(bodyEffectResID : String):void
+		public function updateBodyEft(bodyEffectResID : String,bodyEffectID2:String=null):void
 		{
 			if(!roleData){
 				return;
 			}
-			if(roleData.avatarInfo.bodyEffectID==bodyEffectResID){
+			if(roleData.avatarInfo.bodyEffectID==bodyEffectResID&&roleData.avatarInfo.bodyEffectID2==bodyEffectID2){
 				return;
 			}
 			roleData.avatarInfo.bodyEffectID = bodyEffectResID;
+			roleData.avatarInfo.bodyEffectID2 = bodyEffectID2;
 			AvatarManager.updateBodyEft(this);
 		}
 		
@@ -315,7 +368,7 @@ package com.rpgGame.app.scene
 			}
 			
 			var hairRes : AvatarHairRes = AvatarHairResCfgData.getInfo(hair);
-			if(roleData.avatarInfo.hairResID==hairRes.hairRes){
+			if(hairRes&&roleData.avatarInfo.hairResID==hairRes.hairRes){
 				return;
 			}
 			
@@ -323,7 +376,7 @@ package com.rpgGame.app.scene
 			if(heroData){
 				heroData.hair=hair;
 			}
-			roleData.avatarInfo.hairResID=hairRes.hairRes;
+			roleData.avatarInfo.hairResID=hairRes?hairRes.hairRes:null;
 			AvatarManager.updateHair(this);
 		}
 		
@@ -348,6 +401,7 @@ package com.rpgGame.app.scene
 				roleData.avatarInfo.weaponResID = null;
 				roleData.avatarInfo.weaponEffectID = null;
 			}
+			heroData.weapon=weapon;
 			AvatarManager.updateWeapon(this);
 		}
 		
@@ -373,6 +427,8 @@ package com.rpgGame.app.scene
 				roleData.avatarInfo.deputyWeaponResID = null;
 				roleData.avatarInfo.deputyWeaponEffectID = null;
 			}
+			
+			heroData.deputyWeapon=deputyWeapon;
 			AvatarManager.updateDeputyWeapon(this);
 		}
 		
@@ -381,35 +437,43 @@ package com.rpgGame.app.scene
 		 * @param zhanqiResID
 		 * 
 		 */
-		public function updateFlag(zhanqiResID:String):void
+		public function updateFlag(zhanqiLv:int):void
 		{
-			if(!roleData){
+			var heroData:HeroData=data as HeroData;
+			if(!heroData){
 				return;
 			}
-			if(roleData.avatarInfo.zhanqiResID==zhanqiResID){
+			
+			var zhanqiInfo:Q_warflag = ZhanQiConfigData.getZhanQiDataById(zhanqiLv);
+			if(!zhanqiInfo)
+			{
 				return;
 			}
-			roleData.avatarInfo.zhanqiResID=zhanqiResID;
+			
+			if(roleData.avatarInfo.zhanqiResID== zhanqiInfo.q_panel_show_id){
+				return;
+			}
+			heroData.zhanqiLv=zhanqiLv;
+			roleData.avatarInfo.zhanqiResID=zhanqiInfo.q_panel_show_id;
 			AvatarManager.updateFlag(this);
 		}
 		
-		/**
-		 * 更新战魂
-		 * @param fightsoulResID
-		 * @param eftResID
-		 * 
-		 */
-		public function updateFightSoul(fightsoulResID:String,eftResID:String):void
+		
+		public function updateMountRes(mountResID : String, mountAnimatResID : String):void
 		{
-			if(!roleData){
+			var heroData:HeroData=data as HeroData;
+			if(!heroData){
 				return;
 			}
-			if(roleData.avatarInfo.fightsoulResID==fightsoulResID&&roleData.avatarInfo.fightsoulEffectResID==eftResID){
+			if(roleData.avatarInfo.mountResID==mountResID&&roleData.avatarInfo.mountAnimatResID==mountAnimatResID){
 				return;
 			}
-			roleData.avatarInfo.fightsoulResID=fightsoulResID;
-			roleData.avatarInfo.fightsoulEffectResID=eftResID;
-			AvatarManager.updateFightSoul(this);
+			roleData.avatarInfo.setMountResID(mountResID,mountAnimatResID);
+			if(!mountResID){
+				AvatarManager.updateAllPart(this);
+			}else{
+				AvatarManager.updateMount(this);
+			}
 		}
 		
 		/**
@@ -425,20 +489,25 @@ package com.rpgGame.app.scene
 			}
 			
 			var mountModel :Q_horse = HorseConfigData.getMountDataById(mount);
-			if (!mountModel)
+			var mountResID:String;
+			var mountAnimatResID:String;
+			if (mountModel)
 			{
-				return;
+				mountResID = mountModel.q_skinResID;
+				mountAnimatResID = mountModel.q_animatResID;			
 			}
 			
 			heroData.mount=mount;
 			
-			var mountResID:String = mountModel.q_skinResID;
-			var mountAnimatResID:String = mountModel.q_animatResID;			
 			if(roleData.avatarInfo.mountResID==mountResID&&roleData.avatarInfo.mountAnimatResID==mountAnimatResID){
 				return;
 			}
 			roleData.avatarInfo.setMountResID(mountResID,mountAnimatResID);
-			AvatarManager.updateMount(this);
+			if(!mountResID){
+				AvatarManager.updateAllPart(this);
+			}else{
+				AvatarManager.updateMount(this);
+			}
 		}
 		
 		/**
@@ -455,7 +524,7 @@ package com.rpgGame.app.scene
 				return;
 			}
 			roleData.avatarInfo.effectResID=effectResID;
-			AvatarManager.updateMount(this);
+			AvatarManager.updateEffect(this);
 		}
 	}
 }

@@ -165,11 +165,11 @@ package com.rpgGame.coreData.role
 		public function set zhanqiLv(value:int):void
 		{
 			_zhanqiLv = value;
-			var zhanqiInfo:Q_warflag = ZhanQiConfigData.getZhanQiDataById(_zhanqiLv);
+			/*var zhanqiInfo:Q_warflag = ZhanQiConfigData.getZhanQiDataById(_zhanqiLv);
 			if(zhanqiInfo)
 			{
 				this.avatarInfo.zhanqiResID = zhanqiInfo.q_panel_show_id;
-			}
+			}*/
 		}
 
 		public function get trailMountAnimat():String
