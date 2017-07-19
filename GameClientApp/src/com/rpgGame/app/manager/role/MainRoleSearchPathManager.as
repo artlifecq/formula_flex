@@ -61,7 +61,7 @@ package com.rpgGame.app.manager.role
 		private static var currentSceneId : int;
 		private static var _data : Object;
 		private static var _onArrive:Function;
-		
+		private static var _needSprite:Boolean
 		/**当前要去的目标地图编号，只为跨地图寻路引导面板使用*/
 		public static var gotoTargetData : GotoTargetData = new GotoTargetData();
 		/**是否使用传送*/
@@ -139,7 +139,7 @@ package com.rpgGame.app.manager.role
 		//跨场景寻路静态方法
 		//===========================================================================================================
 
-		public static function walkToScene(targetSceneId : int, posx : Number = -1, posy : Number = -1, onArrive : Function = null, spacing : int = 0, data : Object = null) : void
+		public static function walkToScene(targetSceneId : int, posx : Number = -1, posy : Number = -1, onArrive : Function = null, spacing : int = 0, data : Object = null,needSprite:Boolean=false) : void
 		{
 
 			TrusteeshipManager.getInstance().stopAll();
@@ -147,7 +147,7 @@ package com.rpgGame.app.manager.role
 			posy=-Math.abs(posy);
 			var position : Vector3D = new Vector3D(posx, posy, 0);
 			EventManager.dispatchEvent(TaskEvent.AUTO_WALK_START);
-			walkToScenePos(role, targetSceneId, position,walkOver, spacing, data);
+			walkToScenePos(role, targetSceneId, position,walkOver, spacing, data,needSprite);
 			function walkOver(_data : *):void
 			{
 				if(onArrive!=null)
@@ -166,15 +166,16 @@ package com.rpgGame.app.manager.role
 		 * @param pos
 		 * @param onArrive
 		 */
-		public static function walkToScenePos(role : SceneRole, targetSceneId : int, pos : Vector3D, onArrive : Function = null, spacing : int = 0, data : Object = null) : void
+		public static function walkToScenePos(role : SceneRole, targetSceneId : int, pos : Vector3D, onArrive : Function = null, spacing : int = 0, data : Object = null,needSprite:Boolean=false) : void
 		{
 			_data = data;
+			_needSprite=needSprite;
 			var mapID : int = SceneSwitchManager.currentMapId;
 			if (mapID == targetSceneId)
 			{
 				if (pos.x > -1 && (-pos.y)> -1)//if (pos.x > -1 && pos.z> -1)
 				{
-					RoleStateUtil.walkToPos(role, pos, spacing, _data, onArrive);
+					RoleStateUtil.walkToPos(role, pos, spacing, _data, onArrive,null,null,_needSprite);
 					EventManager.dispatchEvent(WorldMapEvent.MAP_WAYS_GUILD_UPDATA_PATHS);
 				}
 			}
@@ -260,13 +261,13 @@ package com.rpgGame.app.manager.role
 					var pos : Vector3D = new Vector3D(searchMapData.posX, searchMapData.posY, 0);
 					if (_scenePath.length == 0)
 					{
-						RoleStateUtil.walkToPos(MainRoleManager.actor, pos, searchMapData.spacing, _data, _onArrive);
+						RoleStateUtil.walkToPos(MainRoleManager.actor, pos, searchMapData.spacing, _data, _onArrive,null,null,_needSprite);
 						_onArrive=null;
 					}
 					else
 					{
 						//RoleStateUtil.walkToPos(MainRoleManager.actor, pos, searchMapData.spacing, _data);
-						RoleStateUtil.walkToPos(MainRoleManager.actor, pos, 0, _data);
+						RoleStateUtil.walkToPos(MainRoleManager.actor, pos, 0, _data,null,null,null,_needSprite);
 					}
 					//RoleStateUtil.walk(MainRoleManager.actor, searchMapData.posX, searchMapData.posY, searchMapData.spacing, _data);
 				}
@@ -359,7 +360,7 @@ package com.rpgGame.app.manager.role
 			
 			//寻路
 			//获取$fromScene所在场景的所有出口
-			var transOuts : Array = TransCfgData.getSceneTransportObj($fromScene);
+			var transOuts : Array = TransCfgData.getSceneTransportObj($fromScene,MainRoleManager.actorInfo.job);
 			//var transOuts : Array = TranportsDataManager.getSceneTransportProtos($fromScene, MainRoleManager.actorInfo.sceneSequence);
 			
 			if (!transOuts || transOuts.length == 0)

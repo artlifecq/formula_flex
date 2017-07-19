@@ -17,6 +17,8 @@ package com.rpgGame.app.view.icon
 	import flash.text.TextFormat;
 	import flash.text.TextFormatAlign;
 	
+	import feathers.controls.UIAsset;
+	
 	/**
 	 *buff图标 
 	 * @author dik
@@ -69,6 +71,14 @@ package com.rpgGame.app.view.icon
 			this.setChildIndex(effectSk,this.numChildren-1);
 		}
 		
+		override protected function onBgImgComplete(uiasset:UIAsset):void
+		{
+			_bgImage.onImageLoaded=null;
+			this._bgImage.width=_iconSize+6;
+			this._bgImage.height=_iconSize+6;
+			calIconPos();
+		}
+		
 		public function get buffData():BuffData
 		{
 			return _buffData;
@@ -102,7 +112,12 @@ package com.rpgGame.app.view.icon
 				{
 					info.q_describe=_buffData.buffData.q_description;
 				}else{
-					info.q_describe=lostSkiLL.q_desc.replace("$",LostSkillManager.instance().getValueByType(lostSkiLL.q_type,_buffData.buffInfo.percent))
+					var value1:int = 0;
+					if(_buffData.buffInfo.percent>0)
+						value1 = _buffData.buffInfo.percent;
+					else
+						value1 = _buffData.buffInfo.value;
+					info.q_describe=lostSkiLL.q_desc.replace("$",LostSkillManager.instance().getValueByType(lostSkiLL.q_type,value1))
 				}
 				
 				TipTargetManager.remove(this);

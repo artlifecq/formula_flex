@@ -64,8 +64,8 @@ package com.rpgGame.coreData
 		private var _fightsoulEffectResID:String = null;
 		private var _fightsoulEffectMode:RenderParamData3D;
 		
-		private var _zhanqiEffResID:String=null;
-		private var _zhanqiEffMode:RenderParamData3D;
+		private var _zhanqiResID:String=null;
+		private var _zhanqiMode:RenderParamData3D;
 		
 		public function AvatarInfo(priority:int=100)
 		{
@@ -321,20 +321,21 @@ package com.rpgGame.coreData
 		}
 		
 		/**战旗换装资源*/
-		public function set zhanqiSouleeffId(value:String):void
+		public function set zhanqiResID(value:String):void
 		{
-			if(_zhanqiEffResID == value) return;
-			_zhanqiEffResID = value;
-			if(_zhanqiEffResID != null && _zhanqiEffResID != "")
+			if(_zhanqiResID == value) return;
+			_zhanqiResID = value;
+			if(_zhanqiResID != null && _zhanqiResID != "")
 			{
-				_zhanqiEffMode = new RenderParamData3D(RenderUnitID.ZHANQI_EFFECT, RenderUnitType.ZHANQI_EFF, ClientConfig.getEffect(_zhanqiEffResID));
-				_zhanqiEffMode.mouseEnable = false;
-				_zhanqiEffMode.clearSameType = false;
+				_zhanqiMode = new RenderParamData3D(RenderUnitID.ZHANQI, RenderUnitType.ZHANQI, ClientConfig.getZhanqi(_zhanqiResID));
+				_zhanqiMode.mouseEnable = false;
+				_zhanqiMode.clearSameType = false;
+				_zhanqiMode.priority = _priority;
 			}
 			else
 			{
-				_zhanqiEffMode = null;
-				_zhanqiEffResID = null;
+				_zhanqiMode = null;
+				_zhanqiResID = null;
 			}
 		}
 		
@@ -473,9 +474,9 @@ package com.rpgGame.coreData
 			return _mountAnimatResID;
 		}
 		
-		public function get zhanqiEffResID():String
+		public function get zhanqiResID():String
 		{
-			return _zhanqiEffResID;
+			return _zhanqiResID;
 		}
 		
 		/**主体*/
@@ -553,9 +554,9 @@ package com.rpgGame.coreData
 			return _fightsoulEffectMode;
 		}
 		
-		public function get zhanqiEffMode():RenderParamData3D
+		public function get zhanqiMode():RenderParamData3D
 		{
-			return _zhanqiEffMode;
+			return _zhanqiMode;
 		}
 		/**清空*/
 		public function clear() : void
@@ -575,7 +576,7 @@ package com.rpgGame.coreData
 			deputyWeaponEffectOffset = null;
 			effectResID = null;
 			bodyEffectID = null;
-			zhanqiSouleeffId = null;
+			zhanqiResID = null;
 		}
 		
 		public function clone() : AvatarInfo {
@@ -610,8 +611,8 @@ package com.rpgGame.coreData
 			info._weaponResID = this._weaponResID;
 			info._fightsoulMode = this._fightsoulMode;
 			info._fightsoulResID = this._fightsoulResID;
-			info._zhanqiEffResID = this._zhanqiEffResID;
-			info._zhanqiEffMode = this._zhanqiEffMode;
+			info._zhanqiResID = this._zhanqiResID;
+			info._zhanqiMode = this._zhanqiMode;
 			return info;
 		}
 	}

@@ -161,6 +161,7 @@ package com.rpgGame.app.view.icon
 			if(_bgImage){
 				_bgImage.removeFromParent();
 				_bgImage=null;
+				_bgResName=null;
 			}
 			super.destroy();
 		}
@@ -362,7 +363,7 @@ package com.rpgGame.app.view.icon
 		 * @param uiasset
 		 * 
 		 */
-		private function onBgImgComplete(uiasset:UIAsset):void
+		protected function onBgImgComplete(uiasset:UIAsset):void
 		{
 			_bgImage.onImageLoaded=null;
 			this.width=_bgImage.width;

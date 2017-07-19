@@ -216,7 +216,11 @@ package com.rpgGame.app.ui.main.taskbar
 		public function show(key:Boolean):void
 		{
 			_skin.secondary_box.visible=key;
-			if(!key)
+			if(key)
+			{
+				_skin.uibg.height=335;
+			}
+			else
 			{
 				isInit=false;
 			}

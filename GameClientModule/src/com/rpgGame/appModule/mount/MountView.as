@@ -22,10 +22,13 @@ package com.rpgGame.appModule.mount
 	
 	import feathers.utils.filter.GrayFilter;
 	
+	import gs.TweenLite;
+	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.zuoqi.ZuoqiCont_Skin;
 	
 	import starling.display.DisplayObject;
+	import starling.display.DisplayObjectContainer;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -52,13 +55,18 @@ package com.rpgGame.appModule.mount
 			_mountShowData = new MountShowData();
 			initView();
 		}
-		
+		override protected function onTouch(e:TouchEvent):void
+		{
+			super.onTouch(e);
+			_mountContent.onTouch(e);
+		}
 		override public function show(data:Object=null):void
 		{
 			super.show(data);
 			_mountShowData.heroJob = MainRoleManager.actorInfo.job;
 			_mountShowData.horsedataInfo =  HorseManager.instance().horsedataInfo;
 			_mountContent.refeashMode(_mountShowData.mountLevel);
+			_mountContent.show();
 			refeashPropHandler();
 			/*_propContent.refeashPropShow(false);
 			_mountupContent.updataInfo(_mountShowData);*/
@@ -84,6 +92,7 @@ package com.rpgGame.appModule.mount
 						}
 						_mountupContent.isAutoing = false;
 					}
+//					showUplevel();
 					break;
 				case "btn_zidong":
 					onMouseOut();
@@ -154,25 +163,30 @@ package com.rpgGame.appModule.mount
 		{
 			_spellIconList = new Vector.<IconCDFace>();
 			var spellList:Vector.<BaseFaceInfo> = HorseManager.instance().spellList; 
-			var icon:IconCDFace = FaceUtil.creatIconCDFaceByUIAsset(_skin.kuang_1,IcoSizeEnum.ICON_48);
+			var partner:DisplayObjectContainer = _skin.kuang_1.parent;
+			var icon:IconCDFace = IconCDFace.create(IcoSizeEnum.ICON_42);
+			icon.bindBg(_skin.kuang_1);
 			FaceUtil.SetSkillGrid(icon, spellList[0], true);
-			icon.setIconPoint(6,6);
+			partner.addChild(icon);
 			_spellIconList.push(icon);
-			icon = FaceUtil.creatIconCDFaceByUIAsset(_skin.kuang_2,IcoSizeEnum.ICON_48);
+			icon = IconCDFace.create(IcoSizeEnum.ICON_42);
+			icon.bindBg(_skin.kuang_2);
 			FaceUtil.SetSkillGrid(icon, spellList[1], true);
-			icon.setIconPoint(6,6);
+			partner.addChild(icon);
 			_spellIconList.push(icon);
-			icon = FaceUtil.creatIconCDFaceByUIAsset(_skin.kuang_3,IcoSizeEnum.ICON_48);
+			
+			icon = IconCDFace.create(IcoSizeEnum.ICON_42);
+			icon.bindBg(_skin.kuang_3);
 			FaceUtil.SetSkillGrid(icon, spellList[2], true);
-			icon.setIconPoint(6,6);
+			partner.addChild(icon);
 			_spellIconList.push(icon);
 			
 			_mountContent = new MountContent(_skin);
 			_propContent = new MountProps(_skin);
 			_mountupContent = new MountUpExpConent(_skin);
 			_extraItemList = new Vector.<ExtraButton>();
-			_extraItemList.push(new ExtraButton(_skin.btn_zizhidan,506));
-			_extraItemList.push(new ExtraButton(_skin.btn_chengzhangdan,507));
+			_extraItemList.push(new ExtraButton(_skin.btn_zizhidan,_skin.lbZhizi,507));
+			_extraItemList.push(new ExtraButton(_skin.btn_chengzhangdan,_skin.lbJinjie,506));
 			_touchState = new TouchToState(_skin.lab_xuyaowupin,labTouchHandler);
 			
 			addNode(RTNodeID.HORSE,RTNodeID.HORSE_UP,_skin.btn_kaishi,110,null);
@@ -191,8 +205,8 @@ package com.rpgGame.appModule.mount
 		
 		private function initEvent():void
 		{
-			_skin.btn_kaishi.addEventListener(TouchEvent.TOUCH, onTouch);
-			_skin.btn_zidong.addEventListener(TouchEvent.TOUCH, onTouch);
+			_skin.btn_kaishi.addEventListener(TouchEvent.TOUCH, onTouchHandler);
+			_skin.btn_zidong.addEventListener(TouchEvent.TOUCH, onTouchHandler);
 			EventManager.addEvent(HorseManager.HorseUpLevel,refeashLevel);
 			EventManager.addEvent(HorseManager.HorseChangeExp,refeashExpHandler);
 			EventManager.addEvent(HorseManager.HorseExtraItemNum,refeashPropHandler);
@@ -203,24 +217,38 @@ package com.rpgGame.appModule.mount
 		
 		private function addItemHandler(info:ClientItemInfo):void
 		{
-			if(info.cfgId!= _mountShowData.upLevelItem.cfgId)
-				return ;
-			refeashExpHandler();
+			/*if(info.cfgId!= _mountShowData.upLevelItem.cfgId)
+				return ;*/
+			refeashExpHandler(false);
 		}
-		private function refeashExpHandler():void
+		private function refeashExpHandler(needeat:Boolean= true):void
 		{
 			_mountupContent.updataInfo(_mountShowData);
 			_propContent.refeashPropValue();
 			_mountContent.refeashMode(_mountShowData.mountLevel);
+			var bool:Boolean = false;
 			for each(var eb:ExtraButton in _extraItemList)
 			{
 				eb.refeash(_mountShowData);
+				if(eb.canShow)
+					bool = true;
 			}
+			_skin.lberror.visible = bool;
+			
+			setRTNState(RTNodeID.HORSE_UP,_mountShowData.isSelf&&_mountShowData.canUpLevel());
+			if(needeat)
+			{
+				TweenLite.delayedCall(0.3,refeashsendMsg);
+			}
+		}
+		
+		private function refeashsendMsg():void
+		{
 			if(_mountShowData.isAutoing)
 			{
 				_mountupContent.isAutoing =HorseManager.instance().eatItemHorse(_mountShowData)
 			}
-			setRTNState(RTNodeID.HORSE_UP,_mountShowData.isSelf&&_mountShowData.canUpLevel());
+			
 		}
 		private function refeashLevel():void
 		{
@@ -229,14 +257,15 @@ package com.rpgGame.appModule.mount
 		}
 		private function removeEvent():void
 		{
-			_skin.btn_kaishi.removeEventListener(TouchEvent.TOUCH, onTouch);
-			_skin.btn_zidong.removeEventListener(TouchEvent.TOUCH, onTouch);
+			_skin.btn_kaishi.removeEventListener(TouchEvent.TOUCH, onTouchHandler);
+			_skin.btn_zidong.removeEventListener(TouchEvent.TOUCH, onTouchHandler);
 			EventManager.removeEvent(HorseManager.HorseUpLevel,refeashLevel);
 			EventManager.removeEvent(HorseManager.HorseChangeExp,refeashExpHandler);
 			EventManager.removeEvent(HorseManager.HorseExtraItemNum,refeashPropHandler);
 			EventManager.removeEvent(ItemEvent.ITEM_ADD,addItemHandler);
 			EventManager.addEvent(ItemEvent.ITEM_REMOVE,addItemHandler);
 			EventManager.addEvent(ItemEvent.ITEM_CHANG,addItemHandler);
+			_mountContent.hide();
 		}
 		private function refeashPropHandler():void
 		{
@@ -247,7 +276,7 @@ package com.rpgGame.appModule.mount
 				eb.refeash(_mountShowData);
 			}
 		}
-		private function onTouch(e : TouchEvent) : void
+		private function onTouchHandler(e : TouchEvent) : void
 		{
 			var target : DisplayObject = e.currentTarget as DisplayObject;
 			var touch : Touch;
@@ -282,15 +311,9 @@ package com.rpgGame.appModule.mount
 		
 		override public function hide():void
 		{
-			//			if(_shopPane!=null)
-			//			{
-			//				_shopPane.removeEventListener(Event.REMOVED,panleremoveFormSatgeHander);
-			//				if(_shopPane.parent!=null)
-			//					_shopPane.parent.removeChild(_shopPane,true);
-			//				_shopPane = null;
-			//			}
 			ItemGetAdvisePanelExt.hidePanel();
 			removeEvent();
+			
 			super.hide();
 		}
 	}

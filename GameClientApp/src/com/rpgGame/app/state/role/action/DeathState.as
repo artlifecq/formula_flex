@@ -20,6 +20,8 @@ package com.rpgGame.app.state.role.action
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
+	import flash.utils.getTimer;
+	
 	import away3d.enum.LoadPriorityType;
 	import away3d.materials.methods.CorrodeMethod;
 	
@@ -207,6 +209,11 @@ package com.rpgGame.app.state.role.action
 				case RenderUnitType.DEPUTY_WEAPON:
 					render.repeat = 1;
 					render.setStatus(statusType, _useCrossfadeTransition ? 0.2 : null, time);
+				/*	if (role.type == SceneCharType.MONSTER)
+					{
+						var monsterData : MonsterData = role.data as MonsterData;
+						trace("死亡了开始播放:"+getTimer()+",id:"+monsterData.id);
+					}*/
 					if (isFreeze)
 						render.stop(time);
 					render.visible = true;

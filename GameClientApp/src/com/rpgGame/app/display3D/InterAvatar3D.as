@@ -32,6 +32,7 @@ package com.rpgGame.app.display3D
 				role.rotationX = 45;
 			}
 			this.role.data = data;
+			
 			//Render3DTextUtil.addHeadFlowerTextToTarget(role);
 			role.avatar.shareMaterials = false;
 			role.avatar.lightPicker = Stage3DLayerManager.screenLightPicker;

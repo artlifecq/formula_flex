@@ -1,10 +1,7 @@
 package com.rpgGame.app.utils
 {
 	import com.game.engine3D.scene.display.Render3DText;
-	import com.game.engine3D.scene.render.RenderSet3D;
-	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.BaseEntity;
-	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.engine3D.vo.Render3DTextData;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
@@ -30,45 +27,7 @@ package com.rpgGame.app.utils
 		public function Render3DTextUtil()
 		{
 		}
-		public static function addHeadKillToTarget( target : SceneRole):Render3DText
-		{
-			var rud : RenderParamData3D = new RenderParamData3D(RenderUnitID.BLEED, RenderUnitType.HEADKILL, ClientConfig.getEffect("tx_liuxuexiaoguo"));
-			var effectRu : RenderUnit3D;
-			effectRu = target.avatar.addRenderUnitToChild(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_name_01, rud);
-			//effectRu.renderParamData.
-			effectRu.allowCameraAnimator = target.isMainChar;
-			effectRu.repeat = 0;
-			effectRu.x = 0;
-			effectRu.y = 0;
-			effectRu.z = 0;
-			effectRu.rotationY = 0;
-			effectRu.setPlayCompleteCallBack(avatarRuPlayComplete, target.avatar);
-			effectRu.play(1);
-			
-			var rudText : RenderParamData3D = new RenderParamData3D(RenderUnitID.BLEED_TEXT, RenderUnitType.HEADKILL, ClientConfig.getEffect("tx_shuzi_bai"));
-			var effectRuText : RenderUnit3D;
-			effectRuText = target.avatar.addRenderUnitToChild(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_name_01, rudText);
-			//effectRu.renderParamData.
-			effectRuText.allowCameraAnimator = target.isMainChar;
-			effectRuText.repeat = 0;
-			effectRuText.x = 0;
-			effectRuText.y = 0;
-			effectRuText.z = 0;
-			effectRuText.rotationY = 0;
-			effectRuText.scaleX=0.5;
-			effectRuText.scaleY=0.5;
-			effectRuText.scaleZ=0.5;
-			effectRuText.setPlayCompleteCallBack(avatarRuPlayComplete, target.avatar);
-			effectRuText.play(1100);
-			effectRuText.stop(1100);
-			//effectRu.setStatus();
-			
-			return null;
-		}
-		private static function avatarRuPlayComplete(avatar : RenderSet3D, ru : RenderUnit3D) : void
-		{
-			avatar.removeRenderUnit(ru);
-		}
+		
 		
 		public static const styleName_Meigui:String = "meigui";
 		public static const styleName_Shuzi:String = "shuzi";
@@ -139,82 +98,13 @@ package com.rpgGame.app.utils
 		 * @return
 		 *
 		 */
-//		public static function addHeadFlowerTextToTarget1( entity:BaseEntity ):Render3DText
-//		{
-//			var renderText:Render3DText = Render3DText.create( RenderUnitType.BODY_HEAD_FLOWER_TEXT, 100 );
-////			renderText.billboardMode = true;
-//			renderText.align = "center";
-//			entity.addBaseObjToUnitChild(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_name_01, renderText);
-//			
-//			
-//			
-//			var textDatas : Vector.<Render3DTextData> = new Vector.<Render3DTextData>();
-//			
-//			var meigui:Render3DTextData = new Render3DTextData(styleName_Meigui,200 );
-//			meigui.addStyle("style1", ClientConfig.getEffect("tx_shuzi_meigui"));
-//			meigui.addCharSet( "h", 100 );
-//			textDatas.push( meigui );
-//			
-//			//			for (var i : int = 0; i < 10; i++)
-//			//			{
-//			var data : Render3DTextData = new Render3DTextData(styleName_Shuzi, 20);
-//			data.addStyle("style1", ClientConfig.getEffect("tx_shuzi_bai"));
-//			data.addCharSet("x", 100);
-//			data.addCharSet("0", 1100);
-//			data.addCharSet("1", 2100);
-//			data.addCharSet("2", 3100);
-//			data.addCharSet("3", 4100);
-//			data.addCharSet("4", 5100);
-//			data.addCharSet("5", 6100);
-//			data.addCharSet("6", 7100);
-//			data.addCharSet("7", 8100);
-//			data.addCharSet("8", 9100);
-//			data.addCharSet("9", 11000);
-//			textDatas.push(data);
-//			//			}
-//			renderText.setTextDatas(textDatas);
-//			
-//			return renderText;
-//		}
-		
 		public static function addHeadFlowerTextToTarget(entity:SceneRole, meiguiRes:String, colorRes:String, cgfId:int, str:String, disappearTime:Number=0):Render3DText
 		{
-			var renderText:Render3DText = Render3DText.create( RenderUnitType.BODY_HEAD_FLOWER_TEXT, 100 );
-			//			renderText.billboardMode = true;
-			renderText.align = "center";
-			entity.addBaseObjToUnitChild(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_name_01, renderText);
-			
-			
-			
-			var textDatas : Vector.<Render3DTextData> = new Vector.<Render3DTextData>();
-			
-			var meigui:Render3DTextData = new Render3DTextData("meigui",200 );
-			meigui.addStyle("style1", ClientConfig.getEffect("tx_dianmingyujing"));
-			meigui.addCharSet( "h", 100 );
-			textDatas.push( meigui );
-			
-			//			for (var i : int = 0; i < 10; i++)
-			//			{
-			var data : Render3DTextData = new Render3DTextData("shuzi", 20);
-			data.addStyle("style1", ClientConfig.getEffect("tx_shuzi_bai"));
-			data.addCharSet("x", 100);
-			data.addCharSet("0", 1100);
-			data.addCharSet("1", 2100);
-			data.addCharSet("2", 3100);
-			data.addCharSet("3", 4100);
-			data.addCharSet("4", 5100);
-			data.addCharSet("5", 6100);
-			data.addCharSet("6", 7100);
-			data.addCharSet("7", 8100);
-			data.addCharSet("8", 9100);
-			data.addCharSet("9", 11000);
-			textDatas.push(data);
-			//			}
 			var textDatas:Vector.<Render3DTextData> = getRender3DTextDataList(meiguiRes, colorRes);
-			var renderText:Render3DText = entity.getBaseObjByID("body_head_flower_text", cgfId) as Render3DText;
+			var renderText:Render3DText = entity.getBaseObjByID(RenderUnitType.BODY_HEAD_FLOWER_TEXT, cgfId) as Render3DText;
 			if (renderText == null)
 			{
-				renderText = Render3DText.create("body_head_flower_text", cgfId);
+				renderText = Render3DText.create(RenderUnitType.BODY_HEAD_FLOWER_TEXT, cgfId);
 				renderText.align = "center";
 				renderText.setAddedCallBack(function (_arg1:Render3DText):void
 				{
@@ -248,7 +138,7 @@ package com.rpgGame.app.utils
 			var tw:TweenLite = null;
 			if (entity != null)
 			{
-				entity.removeBaseObjByID("body_head_flower_text", cgfId);
+				entity.removeBaseObjByID(RenderUnitType.BODY_HEAD_FLOWER_TEXT, cgfId);
 				tw = effectTweenMap.getValue(entity.id) as TweenLite;
 				if (tw)
 				{
@@ -264,7 +154,7 @@ package com.rpgGame.app.utils
 			var i:int = 0;
 			var j:int = 0;
 			var render3DText:Render3DText = null;
-			var texts:Array = entity.getBaseObjsByType("body_head_flower_text");
+			var texts:Array = entity.getBaseObjsByType(RenderUnitType.BODY_HEAD_FLOWER_TEXT);
 			texts.sort(sortOnText);
 			while (i < texts.length)
 			{
@@ -298,7 +188,7 @@ package com.rpgGame.app.utils
 			var i:int = 0;
 			var txt:Render3DText = null;
 			var offsetY:int;
-			var txts:Array = entity.getBaseObjsByType("body_head_flower_text");
+			var txts:Array = entity.getBaseObjsByType(RenderUnitType.BODY_HEAD_FLOWER_TEXT);
 			while (i < txts.length)
 			{
 				txt = txts[i] as Render3DText;

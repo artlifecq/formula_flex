@@ -59,6 +59,8 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
+	import flash.utils.getTimer;
+	
 	import app.message.StallTypeDataProto;
 	
 	import gs.TweenMax;
@@ -219,7 +221,7 @@ package com.rpgGame.app.manager.role
 			data.sizeScale = (bornData && bornData.q_scale > 0) ? (bornData.q_scale * 0.01) : 1;
 			//			data.totalStat.level = bornData ? bornData.q_grade : 0;
 			data.bodyRadius = bornData ? bornData.q_body_radius_pixel : 0;
-			data.direction = bornData ? bornData.q_direction : 0;
+			//data.direction = bornData ? bornData.q_direction : 0;
 			data.immuneDeadBeat = bornData ? (bornData.q_immune_dead_beat==0): false;
 			
 			if(bornData.q_born_animation)//有出生特效
@@ -262,7 +264,7 @@ package com.rpgGame.app.manager.role
 			
 			role.setScale(data.sizeScale);
 			role.setGroundXY(data.x, data.y);
-			role.rotationY = data.direction;
+			role.rotationY = (270 + data.direction) % 360;;
 			if (charType == SceneCharType.NPC)
 			{
 				SceneManager.addSceneObjToScene(role, true, false, false);
@@ -360,7 +362,7 @@ package com.rpgGame.app.manager.role
 			data.sizeScale = (bornData && bornData.q_scale > 0) ? (bornData.q_scale * 0.01) : 1;
 			//			data.totalStat.level = bornData ? bornData.q_grade : 0;
 			data.bodyRadius = bornData ? bornData.q_body_radius_pixel : 0;
-			data.direction = bornData ? bornData.q_direction : 0;
+			//data.direction = bornData ? bornData.q_direction : 0;
 			AvatarManager.updateAvatar(role);
 			
 			if (data.totalStat.hp <= 0)
@@ -569,7 +571,7 @@ package com.rpgGame.app.manager.role
 			
 			role.setScale(data.sizeScale);
 			role.setGroundXY(data.x, data.y);
-			role.rotationY = data.direction;
+			role.rotationY = (270 + data.direction) % 360;
 			SceneManager.addSceneObjToScene(role, true, true, false);
 			ClientTriggerManager.addTriggerCollectEffect(role);
 			EventManager.dispatchEvent(MapEvent.UPDATE_MAP_ROLE_ADD, role);
@@ -680,11 +682,11 @@ package com.rpgGame.app.manager.role
 		/**创建战旗特效*/
 		public function updateZhanQiRole(owner:SceneRole):SceneRole
 		{
-			if(owner.avatar.hasTypeRenderUnits(RenderUnitType.ZHANQI_EFF))
-				owner.avatar.removeRenderUnitByID(RenderUnitType.ZHANQI_EFF,0);
+			if(owner.avatar.hasTypeRenderUnits(RenderUnitType.ZHANQI))
+				owner.avatar.removeRenderUnitByID(RenderUnitType.ZHANQI,RenderUnitID.ZHANQI);
 			var zhanqilv:int=(owner.data as HeroData).zhanqiLv;			
 			var q_warflag:Q_warflag=ZhanQiConfigData.getZhanQiDataById(zhanqilv);
-			var rud : RenderParamData3D = new RenderParamData3D(0, RenderUnitType.ZHANQI_EFF, ClientConfig.getEffect(q_warflag.q_panel_show_id));
+			var rud : RenderParamData3D = new RenderParamData3D(0, RenderUnitType.ZHANQI, ClientConfig.getEffect(q_warflag.q_panel_show_id));
 			var effectRu : RenderUnit3D=owner.avatar.addRenderUnitToChild(RenderUnitType.BODY,RenderUnitID.BODY,BoneNameEnum.c_0_body_01,rud);
 			effectRu.setScale(1.5);
 			effectRu.play(1);

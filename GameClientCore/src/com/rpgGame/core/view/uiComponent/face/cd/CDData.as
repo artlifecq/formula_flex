@@ -57,7 +57,7 @@ package com.rpgGame.core.view.uiComponent.face.cd
 		 * */
 		public function play( $cd:int, $start:int = 0 ):void
 		{
-			if($cd <= 0 || $start < 0)
+			if($cd <0 || $start < 0)
 			{
 				return;
 			}

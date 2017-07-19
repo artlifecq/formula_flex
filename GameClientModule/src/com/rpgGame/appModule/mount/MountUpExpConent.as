@@ -12,7 +12,12 @@ package com.rpgGame.appModule.mount
 	
 	import away3d.events.Event;
 	
+	import gs.TimelineLite;
+	import gs.TweenLite;
+	
 	import org.mokylin.skin.app.zuoqi.ZuoqiCont_Skin;
+	
+	import starling.display.DisplayObjectContainer;
 
 	public class MountUpExpConent
 	{
@@ -27,10 +32,15 @@ package com.rpgGame.appModule.mount
 		private function initView():void
 		{
 			_itemIconList = new Vector.<IconCDFace>();
-			var icon:IconCDFace = FaceUtil.creatIconCDFaceByUIAsset(_skin.grid_1,IcoSizeEnum.ICON_48,1,5,5);
+			var partner:DisplayObjectContainer = _skin.grid_1.parent;
+			var icon:IconCDFace = IconCDFace.create(IcoSizeEnum.ICON_42);
+			icon.bindBg(_skin.grid_1);
 			_itemIconList.push(icon);
-			icon = FaceUtil.creatIconCDFaceByUIAsset(_skin.grid_2,IcoSizeEnum.ICON_48,1,5,5);
+			partner.addChild(icon);
+			icon = IconCDFace.create(IcoSizeEnum.ICON_42);
+			icon.bindBg(_skin.grid_2);
 			_itemIconList.push(icon);
+			partner.addChild(icon);
 			_skin.chk_zidonggoumai.addEventListener(Event.CHANGE,checkChangeHandler);
 		}
 		
@@ -81,7 +91,6 @@ package com.rpgGame.appModule.mount
 				}
 				const percent:Number = _mountShowData.percent;
 				_skin.progressbar.value = _skin.progressbar.maximum*percent;
-				_skin.progressbar_light.x = _skin.progressbar.x +_skin.progressbar.width*percent-3;
 				_skin.lab_progressbar.text = _mountShowData.exp.toString()+"/"+housedata.q_blessnum_limit.toString();
 				TipTargetManager.remove(_skin.expgroup);
 				TipTargetManager.show(_skin.expgroup,TargetTipsMaker.makeTips(TipType.BLESS_TIP,_mountShowData));
@@ -91,9 +100,9 @@ package com.rpgGame.appModule.mount
 				_skin.maximg.visible = true;
 			}
 		}
+		private var _isAutoing:Boolean;
 		public function set isAutoing(value:Boolean):void
 		{
-			
 			if(_mountShowData.isMaxLevel)
 			{
 				value = false;
@@ -101,12 +110,26 @@ package com.rpgGame.appModule.mount
 				_skin.btn_kaishi.visible = !value;
 				_skin.btn_zidong.visible = !value;
 				_skin.btn_tingzhi.visible = value;
+				
 			}
 			
 			if(_mountShowData!=null)
 				_mountShowData.isAutoing = value;
 			
+			if(_isAutoing != value)
+			{
+				updateButtonTouchState(false);
+				TweenLite.delayedCall(0.1,updateButtonTouchState,[true]);
+			}else{
+				updateButtonTouchState(true);
+			}
+			_isAutoing = value;
 		}
-		
+		private function updateButtonTouchState(bool:Boolean):void
+		{
+			_skin.btn_kaishi.touchable = bool;
+			_skin.btn_zidong.touchable = bool;
+			_skin.btn_tingzhi.touchable = bool;
+		}
 	}
 }

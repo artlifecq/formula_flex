@@ -29,6 +29,8 @@
 		{
 			ui.btnBar.x = (this.width-ui.btnBar.width)/2;
 			ui.skinItem.y = ui.btnBar.y+ui.btnBar.height-5;
+			_item.updataWidth(ui.btnBar.width);
+			ui.skinItem.x = ui.btnBar.x;
 		}
 
         override public function set styleClass(cl:Class):void

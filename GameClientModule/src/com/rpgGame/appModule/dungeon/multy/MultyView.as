@@ -417,8 +417,8 @@ package com.rpgGame.appModule.dungeon.multy
 					{
 						ico=IconCDFace.create(IcoSizeEnum.ICON_36);
 						ico.showCD=false;
-						ico.x=_skin["reward_ico_"+i].x+6;
-						ico.y=_skin["reward_ico_"+i].y+6;
+						ico.x=_skin["reward_ico_"+i].x+4;
+						ico.y=_skin["reward_ico_"+i].y+4;
 						ico.setIconResName(ClientConfig.getItemIcon(item.q_icon.toString(),IcoSizeEnum.ICON_36));
 						TaskUtil.setItemTips(ico,item,reward[i].num);
 						allRewardIcon.push(ico);
@@ -505,8 +505,8 @@ package com.rpgGame.appModule.dungeon.multy
 				{
 					ico=IconCDFace.create(IcoSizeEnum.ICON_48);
 					ico.showCD=false;
-					ico.x=temp.pass_ico.x;
-					ico.y=temp.pass_ico.y;
+					ico.x=temp.pass_ico.x+4;
+					ico.y=temp.pass_ico.y+4;
 					ico.setIconResName(ClientConfig.getItemIcon(item.q_icon.toString(),IcoSizeEnum.ICON_48));
 					TaskUtil.setItemTips(ico,item,reward.num);
 					passRewardIcon.push(ico);
@@ -532,8 +532,8 @@ package com.rpgGame.appModule.dungeon.multy
 						{
 							ico=IconCDFace.create(IcoSizeEnum.ICON_36);
 							ico.showCD=false;
-							ico.x=temp["prob_ioc_"+add].x+6;
-							ico.y=temp["prob_ioc_"+add].y+6;
+							ico.x=temp["prob_ioc_"+add].x+4;
+							ico.y=temp["prob_ioc_"+add].y+4;
 							ico.setIconResName(ClientConfig.getItemIcon(item.q_icon.toString(),IcoSizeEnum.ICON_36));
 							TaskUtil.setItemTips(ico,item,passReward[i].num);
 							temp["prob_ioc_"+add].visible=true;
@@ -549,10 +549,7 @@ package com.rpgGame.appModule.dungeon.multy
 		
 		private function tweeReward():void
 		{
-			if (!AppManager.isAppInScene(AppConstant.MULTY_PANL))
-			{
-				AppManager.showApp(AppConstant.MULTY_PANL);
-			}
+			AppManager.showAppNoHide(AppConstant.MULTY_PANL);
 			var i:int;
 			if(DungeonManager.passReward==1)
 			{

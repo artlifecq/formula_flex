@@ -133,7 +133,7 @@ package com.game.engine3D.vo
 		private var _isDestroyed : Boolean;
 		private var _isDisposed : Boolean;
 		
-		public var isHiding:Boolean = false;
+		private var _isHiding:Boolean = false;
 
 		public function BaseObj3D(parameters : Array = null)
 		{
@@ -929,10 +929,6 @@ package com.game.engine3D.vo
 
 		public function faceToGround(x : Number, y : Number, angularVelocity : Number = 0.001, minTweenDuration : Number = 0.05, maxTweenDuration : Number = 0.1) : void
 		{
-			if(id==10001)
-			{
-				trace(10001);
-			}
 			if (_graphicDis)
 			{
 				if (x == _position.x && y == _position.z)
@@ -1370,7 +1366,7 @@ package com.game.engine3D.vo
 			name = null;
 			_isRendering = false;
 			_parent = null;
-			
+			_isHiding=false;
 			recycleGraphic();
 			//if (_staticGraphicDis) {
 			//	if (_staticGraphicDis.parent) {
@@ -1767,5 +1763,16 @@ package com.game.engine3D.vo
 		{
 			_planarRenderLayer = value;
 		}
+
+		public function get isHiding():Boolean
+		{
+			return _isHiding;
+		}
+
+		public function set isHiding(value:Boolean):void
+		{
+			_isHiding = value;
+		}
+
 	}
 }

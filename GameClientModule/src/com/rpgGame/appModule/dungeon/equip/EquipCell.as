@@ -47,7 +47,7 @@ package com.rpgGame.appModule.dungeon.equip
 			_rewardIcons.push(FaceUtil.creatIconCDFaceByUIAsset(_skin.icon_3,IcoSizeEnum.ICON_48,1,5,5));
 			_skin.btnEnter.addEventListener(Event.TRIGGERED,triggeredHandler);
 			_skin.btnReset.addEventListener(Event.TRIGGERED,resetHandler);
-			EventManager.removeEvent(DailyZoneDataManager.UPDATEDAILYZONEINFO,commitData);
+			EventManager.addEvent(DailyZoneDataManager.UPDATEDAILYZONEINFO,commitData);
 		}
 	
 		override protected function draw():void

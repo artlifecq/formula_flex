@@ -5,6 +5,7 @@
     import com.rpgGame.app.manager.guild.GuildManager;
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.core.app.AppConstant;
+    import com.rpgGame.core.app.AppInfo;
     import com.rpgGame.core.app.AppManager;
     import com.rpgGame.core.events.FunctionOpenEvent;
     import com.rpgGame.coreData.cfg.FuncionBarCfgData;
@@ -180,6 +181,19 @@
 			openFunctionId(info,data,isAutoHide);
 		}
 		
+		public static function getAppInfoByFunctionId(id:String):AppInfo
+		{
+			var info:Q_newfunc = NewFuncCfgData.getdataById(id);
+			if(info==null)
+			{
+				return null;
+			}
+			var ids:Array = JSONUtil.decode(info.q_main_id) as Array;
+			var modeInfo:FunctionBarInfo = FuncionBarCfgData.getActivityBarInfo(ids[0]);
+			if(modeInfo == null)
+				return null;
+			return AppConstant.getAppinfoByAppName( modeInfo.clickarg);
+		}
 		/**
 		 * 打开面板
 		 * @param info

@@ -2,7 +2,10 @@ package com.rpgGame.app.scene
 {
 	import com.game.engine3D.core.poolObject.IInstancePoolClass;
 	import com.game.engine3D.core.poolObject.InstancePool;
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
+	import com.rpgGame.app.manager.RollManager;
+	import com.rpgGame.app.manager.SkillCDManager;
 	import com.rpgGame.app.state.role.control.BingDongStateReference;
 	import com.rpgGame.app.state.role.control.BuffStateReference;
 	import com.rpgGame.app.state.role.control.FlyUpStateReference;
@@ -178,6 +181,7 @@ package com.rpgGame.app.scene
 			if (!buffList || buffList.length == 0)
 				return;
 			var len : int = buffList.length;
+			var isRemove:Boolean=false;
 			for (var i : int = 0; i < len; i++)
 			{
 				var currData : BuffData = buffList[i];
@@ -188,8 +192,13 @@ package com.rpgGame.app.scene
 					removeRoleState(currData);
 					removeBuffEffect(currData.cfgId);
 					EventManager.dispatchEvent(BuffEvent.REMOVE_BUFF, currData);
+					isRemove=true;
 					break;
 				}
+			}
+			if (!isRemove) 
+			{
+				GameLog.addShow("移除buff失败");
 			}
 		}
 		
@@ -240,11 +249,11 @@ package com.rpgGame.app.scene
 			var stateTypes:Array = buffStatesStr.split(",");
 			for(var i:uint=0;i<stateTypes.length;i++)
 			{
-				removeRoleBuffState(int(stateTypes[i]));
+				removeRoleBuffState(int(stateTypes[i]),buffData);
 			}
 		}
 		
-		private function removeRoleBuffState(stateType:int):void
+		private function removeRoleBuffState(stateType:int,buffData : BuffData):void
 		{
 			if (_role)
 			{
@@ -280,6 +289,13 @@ package com.rpgGame.app.scene
 					case 36:// 疯狂连弩
 						_role.stateMachine.removeState(RoleStateType.CONTROL_SHORTCUTGRID);
 						break;
+					case 40:// 
+						if(_role.isMainChar)
+						{
+							SkillCDManager.getInstance().removeCDBuff(buffData);
+							RollManager.getinstance().clearBuff(buffData);
+						}
+						break;
 					case 42:// 预警
 						_role.stateMachine.removeState(RoleStateType.CONTROL_SKILL_WARNING);
 						break;
@@ -295,6 +311,9 @@ package com.rpgGame.app.scene
 						break;
 					case 74://vip
 						_role.stateMachine.removeState(RoleStateType.CONTROL_VIP);
+						break;
+					case 121://冲刺
+						_role.stateMachine.removeState(RoleStateType.CONTROL_BUFF_SPRITEUP);
 						break;
 					default:
 						/*buffRef = _role.stateMachine.getReference(UnmovableStateReference) as UnmovableStateReference;
@@ -316,7 +335,7 @@ package com.rpgGame.app.scene
 			var stateTypes:Array = buffStatesStr.split(",");
 			for(var i:uint=0;i<stateTypes.length;i++)
 			{
-				removeRoleBuffState(int(stateTypes[i]));
+				removeRoleBuffState(int(stateTypes[i]),buffData);
 				everyRoleBuffState(int(stateTypes[i]),buffData);
 			}
 		}
@@ -437,7 +456,13 @@ package com.rpgGame.app.scene
 						buffRef.setParams(buffData);
 						_role.stateMachine.transition(RoleStateType.CONTROL_SHORTCUTGRID, buffRef);
 						break;
-					
+					case 40://技能cd时间减少
+						if(_role.isMainChar)
+						{
+							SkillCDManager.getInstance().addCDBuff(buffData);
+							RollManager.getinstance().buff = buffData;
+						}
+						break;
 					/*case 42:// 预警状态-------------------预警状态已经去掉不用了 后面如果加上的话再开启    yt
 					buffRef = _role.stateMachine.getReference(SkillWarningStateReference) as SkillWarningStateReference;
 					buffRef.setParams(buffData);
@@ -462,6 +487,9 @@ package com.rpgGame.app.scene
 						buffRef = _role.stateMachine.getReference(VipBuffStateReference) as VipBuffStateReference;
 						buffRef.setParams(buffData);
 						_role.stateMachine.transition(RoleStateType.CONTROL_VIP,buffRef);
+						break;
+					case 121://冲刺
+						//_role.stateMachine.transition(RoleStateType.CONTROL_BUFF_SPRITEUP);
 						break;
 					default:
 						/*buffRef = _role.stateMachine.getReference(UnmovableStateReference) as UnmovableStateReference;

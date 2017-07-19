@@ -405,8 +405,8 @@ package com.rpgGame.appModule.equip
 				_leftSkin.lb_yinzi.text=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT27),0);
 			}
 			
-			_goodsContainerTarget.dataProvider.updateAll();
-			_goodsContainerUse.dataProvider.updateAll();
+//			_goodsContainerTarget.dataProvider.updateAll();
+//			_goodsContainerUse.dataProvider.updateAll();
 		}
 		
 		private function getTitleText(title:String,value:*,value1:int=-1,noSlip:Boolean=true):String

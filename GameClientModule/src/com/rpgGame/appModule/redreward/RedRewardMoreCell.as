@@ -25,6 +25,22 @@ package com.rpgGame.appModule.redreward
 			}
 			
 			bgskin.bg2.visible = false;
+			
+			var info:RedRewardPlayerInfo;
+			if(playerInfolist!=null&&playerInfolist.length>index)
+				info = playerInfolist[index];
+			if(info!=null)
+			{
+				_skin.lbName.text = info.playerName;
+				_skin.lbNum.text = info.count.toString()+"礼金";
+				_skin.lbName.visible = true;
+				_skin.lbNum.visible = true;
+				_skin.lbmsg.visible = true;
+			}else{
+				_skin.lbName.visible = false;
+				_skin.lbNum.visible = false;
+				_skin.lbmsg.visible = false;
+			}
 		}
 	}
 }

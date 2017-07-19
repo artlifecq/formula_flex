@@ -2,6 +2,7 @@ package com.rpgGame.app.manager.mount
 {
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.goods.BackPackManager;
+	import com.rpgGame.app.utils.FightValueUtil;
 	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.ZhanQiConfigData;

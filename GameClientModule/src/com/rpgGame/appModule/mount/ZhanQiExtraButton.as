@@ -12,15 +12,18 @@ package com.rpgGame.appModule.mount
 	import away3d.events.Event;
 	
 	import feathers.controls.Button;
+	import feathers.controls.Label;
 	
 	public class ZhanQiExtraButton
 	{
 		private var _button:Button;
 		private var _type:int;
-		public function ZhanQiExtraButton(button:Button,type:int)
+		private var _lab:Label;
+		public function ZhanQiExtraButton(button:Button,type:int,lab:Label)
 		{
 			_button = button;
 			_type = type;
+			_lab=lab;
 			_button.addEventListener(Event.TRIGGERED,triggeedHandler);
 		}
 		
@@ -31,6 +34,7 @@ package com.rpgGame.appModule.mount
 			_zhanqiShowData = zhanqiShowData;
 			_zhanqiExtraItem = _zhanqiShowData.getOpenLevelBytype(_type);
 			_button.visible = _zhanqiExtraItem.getMaxByLevel(_zhanqiShowData.zhanqiLevel)>0;
+			_lab.visible = _zhanqiExtraItem.getMaxByLevel(_zhanqiShowData.zhanqiLevel)>0;
 			TipTargetManager.remove(_button);
 			TipTargetManager.show(_button,TargetTipsMaker.makeTips(TipType.EXTARITEM_TIP,[_zhanqiShowData,_type],false,new Point(_button.x,_button.y)));
 		}

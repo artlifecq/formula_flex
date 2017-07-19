@@ -193,6 +193,7 @@ package com.rpgGame.app.utils
 				var monster : MonsterData = _role.data as MonsterData;
 				if (monster)
 					return _role.name + "[" + monster.totalStat.level + "级]";
+//					return "id:"+monster.serverID.fValue+"("+_role.pos.x+","+_role.pos.y+")";
 			}
 			if (_role.type == SceneCharType.COLLECT)
 			{

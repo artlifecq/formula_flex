@@ -56,6 +56,8 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.NewFuncCfgData;
 	import com.rpgGame.coreData.cfg.NineTowerCfg;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
+	import com.rpgGame.coreData.cfg.PetAdvanceCfg;
+	import com.rpgGame.coreData.cfg.PetCfg;
 	import com.rpgGame.coreData.cfg.QBattleRewardCfgData;
 	import com.rpgGame.coreData.cfg.QSinglecitybaseCfgData;
 	import com.rpgGame.coreData.cfg.RaceCfgData;
@@ -326,6 +328,8 @@ package com.rpgGame.app.data
 			
 			VipCfg.setup(dic[ConfigClassRegister.Q_vip]);//多人副本
 			RedRewardCfgData.setup(dic[ConfigClassRegister.Q_redreward]);//红包
+			PetCfg.setup(dic[ConfigClassRegister.Q_girl_pet]);//美人
+			PetAdvanceCfg.setup(dic[ConfigClassRegister.Q_girl_advance]);//美人进阶
 		}
 		
 		/**

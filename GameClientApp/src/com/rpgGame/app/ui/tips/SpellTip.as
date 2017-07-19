@@ -60,7 +60,7 @@ package com.rpgGame.app.ui.tips
 			_spellTip.container.addChildAt(mainIco,4);
 			_spellTip.grpContent.addChild(riseIco);
 			_spellTip.lbJinjie2.wordWrap=true;
-			
+			_spellTip.lbXiaohao.width=120;
 			mainIco.bindBg(_spellTip.Icon1);
 			riseIco.bindBg(_spellTip.Icon2);
 		}		

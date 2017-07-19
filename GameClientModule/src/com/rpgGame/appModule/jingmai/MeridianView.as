@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.jingmai
 {
 	import com.gameClient.utils.HashMap;
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.appModule.jingmai.sub.MeridianMap;
@@ -13,7 +14,9 @@ package com.rpgGame.appModule.jingmai
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.ui.tip.IRewardCheck;
 	import com.rpgGame.core.ui.tip.RTNodeID;
+	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
 	import com.rpgGame.coreData.cfg.meridian.MeridianCfg;
+	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.meridian.MeridianVo;
 	import com.rpgGame.coreData.type.CharAttributeType;
@@ -191,7 +194,8 @@ package com.rpgGame.appModule.jingmai
 		private function onHeCheng(eve:Event):void
 		{
 			// TODO Auto Generated method stub
-			AppManager.showAppNoHide(AppConstant.EQUIP_PANL,{tab:4});
+			//AppManager.showAppNoHide(AppConstant.EQUIP_PANL,{tab:EmFunctionID.EM_HECHENG});
+			FunctionOpenManager.openAppPaneById(EmFunctionID.EM_HECHENG);
 		}
 		
 		private function tweenCompleteCallBack(map:*):void

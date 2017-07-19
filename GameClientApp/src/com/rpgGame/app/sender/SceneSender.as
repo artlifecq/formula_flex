@@ -1,6 +1,7 @@
 package com.rpgGame.app.sender
 {
 	import com.gameClient.log.GameLog;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.FirstEnterSceneManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
@@ -16,6 +17,7 @@ package com.rpgGame.app.sender
 	import com.rpgGame.netData.map.message.ReqPlayerStopMessage;
 	import com.rpgGame.netData.map.message.ReqSmallFlyShoesMessage;
 	import com.rpgGame.netData.map.message.SCOutMapMessage;
+	import com.rpgGame.netData.player.message.ReqClientLogicTriggerEffectMessage;
 	import com.rpgGame.netData.player.message.ReqLocalReviveMessage;
 	import com.rpgGame.netData.player.message.ReqReviveMessage;
 	import com.rpgGame.netData.structs.Position;
@@ -85,6 +87,9 @@ package com.rpgGame.app.sender
 		public static function SendPlayerStopMessage():void
 		{
 			var msg:ReqPlayerStopMessage = new ReqPlayerStopMessage();
+			msg.pos=new Position();
+			msg.pos.x=MainRoleManager.actor.x;
+			msg.pos.y=MainRoleManager.actor.z;
 			SocketConnection.send(msg);
 		}
 		
@@ -318,6 +323,14 @@ package com.rpgGame.app.sender
 		{
 			var msg:*;
 			sendMsg(msg);
+		}
+		public static function reqSpriteUp():void
+		{
+			var msg:ReqClientLogicTriggerEffectMessage=new ReqClientLogicTriggerEffectMessage();
+			msg.type=1;
+			msg.value=1;
+			msg.strJson="前端请求加速";
+			SocketConnection.send(msg);
 		}
 	}
 }

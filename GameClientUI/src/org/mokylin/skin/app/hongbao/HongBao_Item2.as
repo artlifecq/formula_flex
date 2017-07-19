@@ -34,6 +34,7 @@ package org.mokylin.skin.app.hongbao
 			super();
 			
 			this.currentState = "normal";
+			this.height = 29;
 			this.elementsContent = [bg_i(),lbName_i(),lbNum_i(),uiNo1_i()];
 			
 			states = {
@@ -50,7 +51,7 @@ package org.mokylin.skin.app.hongbao
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 31;
+			temp.height = 29;
 			var skin:StateSkin = new org.mokylin.skin.app.hongbao.HongBao_ItemBg()
 			temp.skin = skin
 			temp.width = 263;
@@ -69,7 +70,7 @@ package org.mokylin.skin.app.hongbao
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 119;
 			temp.x = 76;
-			temp.y = 7;
+			temp.y = 5;
 			return temp;
 		}
 
@@ -79,11 +80,11 @@ package org.mokylin.skin.app.hongbao
 			lbNum = temp;
 			temp.name = "lbNum";
 			temp.text = "20礼金";
-			temp.color = 0xEAEABC;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 64;
 			temp.x = 195;
-			temp.y = 7;
+			temp.y = 5;
 			return temp;
 		}
 
@@ -94,7 +95,7 @@ package org.mokylin.skin.app.hongbao
 			temp.name = "uiNo1";
 			temp.styleName = "ui/app/hongbao/shouqiwang.png";
 			temp.x = 12;
-			temp.y = 5;
+			temp.y = 3;
 			return temp;
 		}
 

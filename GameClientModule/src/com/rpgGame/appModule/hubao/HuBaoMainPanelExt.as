@@ -98,9 +98,6 @@ package com.rpgGame.appModule.hubao
 					showModle(q_convoy);
 				}
 			}
-			var usearr:Array=JSONUtil.decode(q_convoy.q_refresh_item);
-			_useItemId=parseInt(usearr[0].mod);
-			_useNum=parseInt(usearr[0].num);
 			_maxnum=q_convoy.q_day_times;
 		}
 		
@@ -315,6 +312,10 @@ package com.rpgGame.appModule.hubao
 		private function updateNowSelectBaoWu(lv:int):void
 		{
 			_q_con=HuBaoData.getmodByLv(lv);
+			var usearr:Array=JSONUtil.decode(_q_con.q_refresh_item);
+			_useItemId=parseInt(usearr[0].mod);
+			_useNum=parseInt(usearr[0].num);
+			updateShowUseItem();
 			clearChenHaoEff();		
 			switch(lv)
 			{
@@ -347,14 +348,13 @@ package com.rpgGame.appModule.hubao
 					break;
 				}			
 			}
-			//			_chenhaoEft.addEventListener(Event.ENTER_FRAME,onRotaion);
 		}
 		
 		private function onRotaion1(e:Event):void
 		{
 			if(_moxing1)
 			{
-				_moxing1.baseObj3D.rotationY+=20;
+				_moxing1.baseObj3D.rotationY+=10;
 			}
 		}
 		
@@ -362,7 +362,7 @@ package com.rpgGame.appModule.hubao
 		{
 			if(_moxing2)
 			{
-				_moxing2.baseObj3D.rotationY+=20;
+				_moxing2.baseObj3D.rotationY+=10;
 			}
 		}
 		
@@ -370,7 +370,7 @@ package com.rpgGame.appModule.hubao
 		{
 			if(_moxing3)
 			{
-				_moxing3.baseObj3D.rotationY+=20;
+				_moxing3.baseObj3D.rotationY+=10;
 			}
 		}
 		
@@ -378,7 +378,7 @@ package com.rpgGame.appModule.hubao
 		{
 			if(_moxing4)
 			{
-				_moxing4.baseObj3D.rotationY+=20;
+				_moxing4.baseObj3D.rotationY+=10;
 			}
 		}
 		

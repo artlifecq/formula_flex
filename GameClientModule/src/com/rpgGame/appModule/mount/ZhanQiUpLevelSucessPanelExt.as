@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.mount
 {
+	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
@@ -10,6 +11,7 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.utils.FightValueUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
 	import com.rpgGame.coreData.clientConfig.Q_warflag;
@@ -27,35 +29,57 @@ package com.rpgGame.appModule.mount
 		private var _curtentInterEff:InterObject3D;
 		private var _zhanqidata:ZhanQiShowData;
 		private var _itemIcons:Vector.<IconCDFace>;
-		
+		private var _chengGongEftContaner:Inter3DContainer;	
+		private var _chengGongEff:InterObject3D;
 		public function ZhanQiUpLevelSucessPanelExt():void
 		{
 			_skin = new Zuoqi_JingjieOk_Skin();
 			super(_skin);
 			this.dragAble =false;
+			this.model=true;
+			MCUtil.removeSelf(_skin.mc_name);
 			initView();
 		}
 		
 		private function initView():void
 		{
 			_itemIcons = new Vector.<IconCDFace>();
+			_chengGongEftContaner=new Inter3DContainer();
+			_skin.uiGuangquan.addChild(_chengGongEftContaner);
+		}
+		
+		override protected function onShow():void
+		{
+			super.onShow();
+			_chengGongEff=_chengGongEftContaner.playInter3DAt(ClientConfig.getEffect("ui_zuoqi_jinjiechenggongguangquan"),350,300,0);
+		}
+		
+		override protected function onHide():void
+		{
+			super.onHide();
+			if(_chengGongEff!=null)
+			{
+				_chengGongEff.dispose();
+				_chengGongEff=null;
+			}
 		}
 		
 		public function updateinfo(zhanqidata:ZhanQiShowData):void
 		{
 			_zhanqidata = zhanqidata;
 			refeashModle();
-			_skin.mc_name.gotoAndStop(zhanqiLevel);
+			_skin.mc_zhanqiname.gotoAndStop(zhanqiLevel-1);
+			_skin.mc_jieshu.gotoAndStop(zhanqiLevel-1);
 			var rewards:Vector.<ClientItemInfo> = zhanqidata.rewardItems;
 			var length:int = rewards.length;
 			_rewardIconLength = 0;
-			const gap:Number = 13;
-			var startx:Number = 590-(length*IcoSizeEnum.ICON_64-gap*(length-1))/2;
+//			const gap:Number = 13;
+			var startx:Number = 653;//590-(length*IcoSizeEnum.ICON_64-gap*(length-1))/2;
 			for(var i:int = 0;i<length;i++)
 			{
 				var icon:IconCDFace = getNextIcon();
-				icon.y = 251;
-				icon.x = startx+i*(gap+IcoSizeEnum.ICON_64);
+				icon.y = 351;
+				icon.x = startx+i*(17+IcoSizeEnum.ICON_48);
 				FaceUtil.SetItemGrid(icon,rewards[i],true);
 			}
 			
@@ -83,10 +107,10 @@ package com.rpgGame.appModule.mount
 			{
 				icon = _itemIcons[_rewardIconLength];
 			}else{
-				icon = IconCDFace.create(IcoSizeEnum.ICON_64);
-				icon.width = icon.height = IcoSizeEnum.ICON_64;
-				icon.setBg(GridBGType.GRID_SIZE_64);
-				this.addChild(icon);
+				icon = IconCDFace.create(IcoSizeEnum.ICON_48);
+				icon.width = icon.height = IcoSizeEnum.ICON_48;
+				icon.setBg(GridBGType.GRID_SIZE_48);
+				this._skin.container.addChild(icon);
 				_itemIcons.push(icon);
 			}
 			_rewardIconLength++;
@@ -106,9 +130,9 @@ package com.rpgGame.appModule.mount
 			var data : RenderParamData3D = new RenderParamData3D(0, "effect_ui", ClientConfig.getEffect(currentName));
 			data.forceLoad=true;//ui上的3d特效强制加载
 			var unit : RenderUnit3D = _curtentInterEff.addRenderUnitWith(data, 0);	
-			_curtentInterEff.x=260;
-			_curtentInterEff.y=360;
-			unit.setScale(2.5);
+			_curtentInterEff.x=350;
+			_curtentInterEff.y=330;
+			unit.setScale(2);
 			unit.addUnitAtComposite(unit);
 			this.addChild3D(_curtentInterEff);
 		}

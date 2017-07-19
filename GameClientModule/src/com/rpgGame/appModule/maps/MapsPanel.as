@@ -12,6 +12,8 @@ package com.rpgGame.appModule.maps
 	
 	import flash.geom.Point;
 	
+	import gs.TweenLite;
+	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.component.text.textInput2_Skin;
 	
@@ -107,8 +109,7 @@ package com.rpgGame.appModule.maps
 			
 			if (touch != null)
 			{
-				touchOldPoint.x=touchPoint.x;
-				touchOldPoint.y=touchPoint.y;
+				
 				_bigMap.showTips(touchOldPoint.x,touchOldPoint.y);
 				
 			}
@@ -134,14 +135,19 @@ package com.rpgGame.appModule.maps
 					{
 						_bigMap.hideTips();
 						_timer.stop();
-						_timer.start();
+						//_timer.start();
+						touchOldPoint.x=touchPoint.x;
+						touchOldPoint.y=touchPoint.y;
+						TweenLite.killDelayedCallsTo(onTimer);
+						TweenLite.delayedCall(0.5, onTimer);
+						
 					}
 				}
 				else if(touch.phase=="began")
 				{
 					topchDownPoint.x=touchPoint.x;
 					topchDownPoint.y=touchPoint.y;
-					
+					TweenLite.killDelayedCallsTo(onTimer);
 				}
 				else if(touch.phase=="ended")
 				{

@@ -144,8 +144,8 @@ package org.mokylin.skin.app.systemSet
 			temp.text = "快捷键：A";
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 252;
-			temp.y = 454;
+			temp.x = 245;
+			temp.y = 458;
 			return temp;
 		}
 
@@ -363,12 +363,13 @@ package org.mokylin.skin.app.systemSet
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_start = temp;
 			temp.name = "btn_start";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "开始挂机";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
-			temp.width = 79;
-			temp.x = 163;
-			temp.y = 445;
+			temp.color = 0xFFFFFF;
+			temp.width = 90;
+			temp.x = 157;
+			temp.y = 449;
 			return temp;
 		}
 
