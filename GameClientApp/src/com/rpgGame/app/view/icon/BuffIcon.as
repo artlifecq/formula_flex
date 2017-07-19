@@ -34,7 +34,7 @@ package com.rpgGame.app.view.icon
 		/**
 		 * @ isshowBG 是否显示CD时的遮罩
 		 * */
-		public function BuffIcon($iconSize:int=IcoSizeEnum.ICON_36,isShowBG:Boolean=false)
+		public function BuffIcon($iconSize:int=IcoSizeEnum.ICON_19,isShowBG:Boolean=false)
 		{
 			super($iconSize);
 			var txtFormat:TextFormat=new TextFormat(null, 12, 0x8b8d7b, true, null, null, null, null, TextFormatAlign.CENTER);

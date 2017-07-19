@@ -1,9 +1,12 @@
 package com.rpgGame.app.ui.main.smallmap {
 	import com.app.media.AudioInterface;
 	import com.game.mainCore.core.timer.GameTimer;
+	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
-	import com.rpgGame.app.manager.time.SystemTimeManager;
+	import com.rpgGame.app.utils.MenuUtil;
+	import com.rpgGame.app.utils.SystemSetUtil;
+	import com.rpgGame.app.view.uiComponent.menu.ShieldingMenu;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MapEvent;
@@ -28,9 +31,9 @@ package com.rpgGame.app.ui.main.smallmap {
 	import starling.display.Shape;
 	
 	public class SmallMapBar extends SkinUI {
-		private static const MAXMAPSCALE : Number = 2.00;
-		private static const MINMAPSCALE : Number = 0.25;
-		private static const STEPMAPSCALE : Number = 0.25;
+		private static const MAXMAPSCALE : Number = 1;
+		private static const MINMAPSCALE : Number = 0.3;
+		private static const STEPMAPSCALE : Number = 0.10;
 		private var _skin : map_Skin;
 		
 		private var _initBgX : int;
@@ -46,7 +49,7 @@ package com.rpgGame.app.ui.main.smallmap {
 		
 		private var _timer : GameTimer;
 		
-		private var _mapScale : Number = 1;
+		private var _mapScale : Number = 0.3;
 		private var isPlay:Boolean;
 		
 		public function SmallMapBar() {
@@ -116,19 +119,21 @@ package com.rpgGame.app.ui.main.smallmap {
 					else AudioInterface.track(AudioConfigType.MUSIC_CHANNEL).stop(true);
 					break;
 				case this._skin.btnPaiHang://打开排行榜
-//					AppManager.showApp(AppConstant.SYSTEMSET_PANEL);
+					//					AppManager.showApp(AppConstant.SYSTEMSET_PANEL);
 					break;
 				case this._skin.btnGm://GM
-//					AppManager.showApp(AppConstant.SYSTEMSET_PANEL);
+					//					AppManager.showApp(AppConstant.SYSTEMSET_PANEL);
 					break;
 				case this._skin.btnHide://屏蔽场景
-//					AppManager.showApp(AppConstant.SYSTEMSET_PANEL);
+					var menus : Array = SystemSetUtil.getShieldingMenu();
+					ShieldingMenu.GetInstance().show(menus,-1,-1,80);
 					break;
 				case this._skin.btnWeb://打开官网
 					AppManager.showApp(AppConstant.SYSTEMSET_PANEL);
 					break;
 				case this._skin.btnSelect://换线
-//					AppManager.showApp(AppConstant.SYSTEMSET_PANEL);
+					menus = MenuUtil.getsystemChangeLine();
+					MenuManager.showMenu(menus,null, -1, -1, 80);
 					break;
 			}
 		}
@@ -146,28 +151,31 @@ package com.rpgGame.app.ui.main.smallmap {
 			_skin.lbTime.text=hour+":"+fen;
 			
 			//显示延迟格
-//			var delay:Number=msg.time.fValue-SystemTimeManager.delayTiemByServer;
-//			if(delay<=100) _skin.UI_net.styleName = "ui/mainui/top/signal00.png";
-//			else if(delay>100&&delay<=200) _skin.UI_net.styleName = "ui/mainui/top/signal01.png";
-//			else _skin.UI_net.styleName = "ui/mainui/top/signal02.png";
+			//			var delay:Number=msg.time.fValue-SystemTimeManager.delayTiemByServer;
+			//			if(delay<=100) _skin.UI_net.styleName = "ui/mainui/top/signal00.png";
+			//			else if(delay>100&&delay<=200) _skin.UI_net.styleName = "ui/mainui/top/signal01.png";
+			//			else _skin.UI_net.styleName = "ui/mainui/top/signal02.png";
 		}
 		
+		private var _offsetValue:int=30;
 		private function initSmallMap() : void {
-//			var mask : Shape = new Shape();
-//			mask.graphics.beginFill(0x00FF00);
-//			mask.graphics.drawCircle(0, 0, (this._skin.UIMap.width+50)/2);//, this._skin.UIMap.height, 5);
-//			mask.graphics.endFill();
-//			mask.x = this._skin.UIMap.x+this._skin.UIMap.width/2;
-//			mask.y = this._skin.UIMap.y+this._skin.UIMap.height/2;
-//			this._skin.grp_cont.addChildAt(mask, this._skin.grp_cont.getChildIndex(this._skin.UIMap) + 1);
+			var mask : Shape = new Shape();
+			mask.graphics.beginFill(0x00FF00);
+			mask.graphics.drawCircle(0, 0, (this._skin.UIMap.width+50)/2);//, this._skin.UIMap.height, 5);
+			mask.graphics.endFill();
+			mask.x = this._skin.UIMap.x+this._skin.UIMap.width/2;
+			mask.y = this._skin.UIMap.y+this._skin.UIMap.height/2;
+			this._skin.grp_cont.addChildAt(mask, this._skin.grp_cont.getChildIndex(this._skin.UIMap) + 1);
 			
-			this._smallMap = new SmallMap(this, SmallMap.RadarMap, (this._skin.UIMap.width+30), (this._skin.UIMap.height+30), this._mapScale);
+			this._smallMap = new SmallMap(this, SmallMap.RadarMap, (this._skin.UIMap.width+60), (this._skin.UIMap.height+60), this._mapScale);
 			this._smallMap.x = this._skin.UIMap.x;
 			this._smallMap.y = this._skin.UIMap.y;
 			this._skin.grp_cont.addChildAt(this._smallMap, this._skin.grp_cont.getChildIndex(this._skin.UIMap) + 1);
-//			this._smallMap.mask = mask;
+			this._smallMap.x=this._smallMap.x-_offsetValue;
+			this._smallMap.y=this._smallMap.y-_offsetValue;
+			this._smallMap.mask = mask;
 			
-			this._skin.lbLocation.width=110;
+			//			this._skin.lbLocation.width=110;
 			this._skin.lbLocation.wordWrap=false;
 		}
 		

@@ -36,7 +36,6 @@ package com.rpgGame.app.ui.main.chat {
 	import feathers.controls.text.Fontter;
 	import feathers.data.ListCollection;
 	import feathers.events.FeathersEventType;
-	import feathers.layout.VerticalLayout;
 	
 	import gs.TweenLite;
 	
@@ -125,11 +124,11 @@ package com.rpgGame.app.ui.main.chat {
 			_skin.listBar.scrollBarDisplayMode=ScrollBarDisplayMode.FIXED;
 			_skin.listBar.itemRendererType = ChatBarItemRender;
 			_skin.listBar.dataProvider = new ListCollection();
-			var layout:VerticalLayout = new VerticalLayout();
+			/*var layout:VerticalLayout = new VerticalLayout();
 			layout.useVirtualLayout = true;
 			layout.gap = 1;
 			layout.hasVariableItemDimensions = true;
-			_skin.listBar.layout = layout;
+			_skin.listBar.layout = layout;*/
 			
 			this._initBgY = this._skin.bg.y;		
 			

@@ -110,27 +110,27 @@ package com.rpgGame.app.ui.main.head
 			if(data.buffData.q_icon_show==0||isCreate(data)){
 				return;
 			}
-			var icon:BuffIcon=new BuffIcon(IcoSizeEnum.ICON_24);
+			var icon:BuffIcon=new BuffIcon(IcoSizeEnum.ICON_19);
 			icon.buffData=data;
-			
+			icon.setUrlBg("ui/mainui/head/BAFF/buffBg_20.png");
 			if(data.buffData.q_effect_type==2){//负面
 				badBuffs.push(icon);
 			}else{
 				goodBuffs.push(icon);
 			}
-			var gridW:int=IcoSizeEnum.ICON_24+2;
+			var gridW:int=IcoSizeEnum.ICON_19+2;
 			var startX:int=151;
 			for(var i:int=0;i<goodBuffs.length;i++){//buff
 				icon=goodBuffs[i];
 				icon.x=startX;
-				icon.y=53;
+				icon.y=56;
 				this.addChild(icon);
 				startX=icon.x+gridW;
 			}
 			for(i=0;i<badBuffs.length;i++){//debuff
 				icon=badBuffs[i];
 				icon.x=startX;
-				icon.y=53;
+				icon.y=56;
 				this.addChild(icon);
 				startX=icon.x+gridW;
 			}
@@ -171,21 +171,21 @@ package com.rpgGame.app.ui.main.head
 			}
 			num=datas.length;
 			var changW:int;
-			var gridW:int=IcoSizeEnum.ICON_24+2;
+			var gridW:int=IcoSizeEnum.ICON_19+2;
 			changW=-1*gridW;
 			
 			var startX:int=95;
 			for(i=0;i<goodBuffs.length;i++){//buff
 				icon=goodBuffs[i];
 				icon.x=startX;
-				icon.y=52;
+				icon.y=62;
 				this.addChild(icon);
 				startX=icon.x+gridW;
 			}
 			for(i=0;i<badBuffs.length;i++){//debuff
 				icon=badBuffs[i];
 				icon.x=startX;
-				icon.y=52;
+				icon.y=62;
 				this.addChild(icon);
 				startX=icon.x+gridW;
 			}

@@ -20,7 +20,9 @@ package com.rpgGame.app.ui.main.head {
 	import com.rpgGame.coreData.type.PKModeType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
+	import feathers.controls.Button;
 	import feathers.controls.SkinnableContainer;
+	import feathers.utils.filter.GrayFilter;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.mainui.head.Head_Select;
@@ -28,17 +30,22 @@ package com.rpgGame.app.ui.main.head {
 	
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
+	import starling.events.Touch;
+	import starling.events.TouchEvent;
+	import starling.events.TouchPhase;
+	
+	import utils.TimerServer;
 	
 	public class MainRoleHeadBar extends SkinUI {
 		private var _skin : head_main_Skin;
 		
 		private var _zhandouliEftContaner:Inter3DContainer;
-		//		private var _headImg:UIAsset;
 		private var _pkBtns:Array;
 		
 		private var gridW:int;
 		private var _buffList:Vector.<BuffIcon>;
 		private var _buffContainer:Sprite;
+		private var _timenum:int=5;
 		private const MAX_SHOW_NUM:int=4;
 		
 		public function MainRoleHeadBar() {
@@ -48,19 +55,15 @@ package com.rpgGame.app.ui.main.head {
 			this._skin.btn_duiwu.visible = false;
 			this._skin.btn_heping.visible = true;
 			this._skin.btn_quanti.visible = false;
-			//			_headImg=new UIAsset();
-			//			_headImg.x=18;
-			//			_headImg.y=4;
-			//			_skin.container.addChildAt(_headImg,1);
 			_zhandouliEftContaner=new Inter3DContainer();
 			_skin.container.addChildAt(_zhandouliEftContaner,1);
 			_zhandouliEftContaner.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JIEMIAN_ZHANDOULI),190,107,0);
 			
 			_buffContainer=new Sprite();
 			_skin.container.addChild(_buffContainer);
-			_buffContainer.x=128;
-			_buffContainer.y=106;
-			gridW=IcoSizeEnum.ICON_24+9;
+			_buffContainer.x=130;
+			_buffContainer.y=110;
+			gridW=IcoSizeEnum.ICON_19+9;
 			_skin.container.addChild(_skin.grp_select);
 			
 			updateAll();
@@ -70,7 +73,8 @@ package com.rpgGame.app.ui.main.head {
 		
 		override protected function onShow():void
 		{
-			super.onShow();
+			super.onShow();		
+			this.addEventListener(starling.events.TouchEvent.TOUCH,onTouch);
 			EventManager.addEvent(BuffEvent.ADD_BUFF, addBuff);
 			EventManager.addEvent(BuffEvent.REMOVE_BUFF, removeBuff);
 			EventManager.addEvent(MainPlayerEvent.STAT_CHANGE,updateFight);//基本属性改变
@@ -80,6 +84,8 @@ package com.rpgGame.app.ui.main.head {
 		override protected function onHide() : void
 		{
 			super.onHide();
+			TimerServer.remove(updateTimeBtnShow);
+			this.removeEventListener(starling.events.TouchEvent.TOUCH,onTouch);
 			EventManager.removeEvent(BuffEvent.ADD_BUFF, addBuff);
 			EventManager.removeEvent(BuffEvent.REMOVE_BUFF, removeBuff);
 			EventManager.removeEvent(MainPlayerEvent.STAT_CHANGE,updateFight);//基本属性改变
@@ -99,6 +105,8 @@ package com.rpgGame.app.ui.main.head {
 			setPkCellData(_skin.banghui,PKModeType.GUILD);
 			setPkCellData(_skin.quanti,PKModeType.ALL);
 			onPKModelChange();
+			_skin.heping.width=_skin.duiwu.width=_skin.banghui.width=_skin.quanti.width=295;
+			this._skin.grp_select.width=305;
 			this._skin.grp_select.visible=false;
 		}
 		private function setPkCellData(s:SkinnableContainer,pk:int):void
@@ -229,6 +237,37 @@ package com.rpgGame.app.ui.main.head {
 		{
 			this._skin.grp_select.visible=false;
 			PKMamager.HeroSetPKMode(pk);
+			_timenum=PKMamager.PK_MODE_CHANG_LIMIT_TIME/1000;
+			TimerServer.addLoop(updateTimeBtnShow,1000);
+			updateTimeBtnShow();
+		}
+		
+		private function updateTimeBtnShow():void
+		{
+			_timenum--;
+			if(_timenum==0)
+			{
+				TimerServer.remove(updateTimeBtnShow);
+				setPKModeState(true);
+			}
+			else
+			{
+				setPKModeState(false);
+			}
+		}
+		
+		public function setPKModeState(bool:Boolean):void
+		{
+			var len:int=_pkBtns.length;
+			for (var i:int = 0; i < len; i++) 
+			{
+				if(bool)
+				{
+					(_pkBtns[i] as Button).filter=null;
+				}
+				else
+					GrayFilter.gray(_pkBtns[i]);
+			}
 		}
 		// private
 		private function showPKMode(target : DisplayObject) : void 
@@ -262,9 +301,9 @@ package com.rpgGame.app.ui.main.head {
 			if(data.buffData.q_icon_show==0||isCreate(data)){
 				return;
 			}
-			var icon:BuffIcon=new BuffIcon(IcoSizeEnum.ICON_24);
+			var icon:BuffIcon=new BuffIcon(IcoSizeEnum.ICON_19);
 			icon.buffData=data;
-			icon.setUrlBg("ui/mainui/shortcut/buffkuang.png");
+			icon.setUrlBg("ui/mainui/head/BAFF/buffBg_20.png");
 			_buffList.push(icon);
 			_buffContainer.addChild(icon);		
 			updatePoint();
@@ -305,6 +344,57 @@ package com.rpgGame.app.ui.main.head {
 					_buffList.splice(i,1);
 					updatePoint();
 					break;
+				}
+			}
+		}
+		
+		private function onTouch(e:TouchEvent):void
+		{
+			var t:Touch=e.getTouch(_skin.heping);
+			if(!t){
+				(_skin.heping.skin as Head_Select).ui_conver.visible=false;
+			}
+			else
+			{
+				t=e.getTouch(_skin.heping,TouchPhase.HOVER);
+				if(t){			
+					(_skin.heping.skin as Head_Select).ui_conver.visible=true;
+				}
+			}
+			
+			t=e.getTouch(_skin.duiwu);
+			if(!t){
+				(_skin.duiwu.skin as Head_Select).ui_conver.visible=false;
+			}
+			else
+			{
+				t=e.getTouch(_skin.duiwu,TouchPhase.HOVER);
+				if(t){			
+					(_skin.duiwu.skin as Head_Select).ui_conver.visible=true;
+				}
+			}
+			
+			t=e.getTouch(_skin.banghui);
+			if(!t){
+				(_skin.banghui.skin as Head_Select).ui_conver.visible=false;
+			}
+			else
+			{
+				t=e.getTouch(_skin.banghui,TouchPhase.HOVER);
+				if(t){			
+					(_skin.banghui.skin as Head_Select).ui_conver.visible=true;
+				}
+			}
+			
+			t=e.getTouch(_skin.quanti);
+			if(!t){
+				(_skin.quanti.skin as Head_Select).ui_conver.visible=false;
+			}
+			else
+			{
+				t=e.getTouch(_skin.quanti,TouchPhase.HOVER);
+				if(t){			
+					(_skin.quanti.skin as Head_Select).ui_conver.visible=true;
 				}
 			}
 		}
