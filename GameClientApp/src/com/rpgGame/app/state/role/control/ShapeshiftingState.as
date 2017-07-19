@@ -87,8 +87,7 @@ package com.rpgGame.app.state.role.control
 			if (_machine && !_machine.isInPool)
 			{
 				var role : SceneRole = _machine.owner as SceneRole;
-				//AvatarManager.updateAvatar(role);
-				AvatarManager.updateAllPart(role);
+				AvatarManager.createAvatar(role);
                 if (role.isMainChar)
 				{
                     ShortcutsManger.getInstance().reset();
