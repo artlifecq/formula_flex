@@ -52,6 +52,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.role.SceneDropGoodsData;
 	import com.rpgGame.coreData.role.SceneJumpPointData;
 	import com.rpgGame.coreData.role.SceneTranportData;
+	import com.rpgGame.coreData.role.SculptureData;
 	import com.rpgGame.coreData.role.ZhanCheData;
 	import com.rpgGame.coreData.type.AttachDisplayType;
 	import com.rpgGame.coreData.type.HeadBloodStateType;
@@ -163,6 +164,7 @@ package com.rpgGame.app.manager.role
 				(role.headFace as HeadFace).updateTitle(data.junjieLv);
 				(role.headFace as HeadFace).updateHuBaoTitle(data.baowuLv);
 				(role.headFace as HeadFace).updateFuQiTitle();
+				(role.headFace as HeadFace).addAndUpdataRankTitle(data.topLeaderTypes)
 			}
 			
 			CharAttributeManager.setCharHp(data, data.totalStat.hp);
@@ -625,6 +627,7 @@ package com.rpgGame.app.manager.role
 			role.data = data;
 			role.name = data.name;
 			role.headFace = HeadFace.create(role);
+			//data.avatarInfo.effectResID = data.effectRes;
 			//执行主换装更新
 			role.updateEffect(data.effectRes);
 			role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true); //切换到“站立状态”
@@ -707,6 +710,38 @@ package com.rpgGame.app.manager.role
 			fightSoulFollowAnimator.radius = model.q_radius;
 			owner.setRenderAnimator(fightSoulFollowAnimator);
 			return fightSoulRole;
+		}
+		
+		/**创建雕塑*/
+		public function createSculpture(data :SculptureData):void
+		{
+			removeSceneRoleByIdAndType(data.id, SceneCharType.SCULPTURE);
+			var role : SceneRole = SceneRole.create(SceneCharType.SCULPTURE, data.id);
+			//设置VO
+			role.data = data;
+			var name:String = data.name;
+			if(name==null||name == "")
+				name = "虚位以待";
+			role.name = data.name= name;
+			role.headFace = HeadFace.create(role);
+			HeadFace(role.headFace).addAndUpdataRankTitle(data.topLeaderTypes);
+			role.headFace.show();
+//			role.headFace.showHead();
+			
+			data.avatarInfo.setBodyResID(data.avatarRes, null);
+			var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(data.avatarRes);
+			if (avatarResConfig)
+			{
+				data.avatarInfo.effectResID = avatarResConfig.idleEffect;
+			}
+			//执行主换装更新
+			AvatarManager.resetAvatar(role);
+			role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true); //切换到“站立状态”
+			
+			role.setScale(data.sizeScale);
+			role.setGroundXY(data.x, data.y);
+			role.rotationY = data.direction;
+			SceneManager.addSceneObjToScene(role, true, false, false);
 		}
 
 		/**创建战旗特效*/

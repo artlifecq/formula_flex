@@ -18,7 +18,7 @@ package com.rpgGame.netData.player.bean{
 	 * 玩家外观展示信息
 	 */
 	public class PlayerBriefInfo extends Bean {
-	
+		
 		//玩家id
 		private var _playerid: long;
 		
@@ -37,33 +37,42 @@ package com.rpgGame.netData.player.bean{
 		//玩家职业
 		private var _job: int;
 		
-		//神器ID(时装关联)
-		private var _artifactModelid: int;
+		//玩家性别 1男 2女
+		private var _sex: int;
+		
+		//阶段
+		private var _body: int;
+		
+		//衣服套装
+		private var _cloths: int;
+		
+		//头发
+		private var _hair: int;
+		
+		//主武器
+		private var _weapon: int;
+		
+		//副武器
+		private var _second_weapon: int;
 		
 		//美人ID
 		private var _beautyModelid: int;
 		
+		//军阶Id
+		private var _junJieModelId: int;
+		
+		//战旗
+		private var _warFlagModelId: int;
+		
 		//美人技能信息
 		private var _beautySkillInfos: Vector.<com.rpgGame.netData.skill.bean.SkillInfo> = new Vector.<com.rpgGame.netData.skill.bean.SkillInfo>();
-		//美人装备信息列表
-		private var _beautyEquips: Vector.<com.rpgGame.netData.backpack.bean.ItemInfo> = new Vector.<com.rpgGame.netData.backpack.bean.ItemInfo>();
 		//坐骑ID
 		private var _horseModelid: int;
 		
 		//坐骑技能信息
 		private var _horseSkillInfos: Vector.<com.rpgGame.netData.skill.bean.SkillInfo> = new Vector.<com.rpgGame.netData.skill.bean.SkillInfo>();
-		//坐骑装备信息列表
-		private var _horseEquips: Vector.<com.rpgGame.netData.backpack.bean.ItemInfo> = new Vector.<com.rpgGame.netData.backpack.bean.ItemInfo>();
-		//骑兵ID
-		private var _weaponRideModelid: int;
-		
-		//骑兵技能信息
-		private var _weaponRideSkillInfos: Vector.<com.rpgGame.netData.skill.bean.SkillInfo> = new Vector.<com.rpgGame.netData.skill.bean.SkillInfo>();
 		//帮会名字
 		private var _guildName: String;
-		
-		//崇拜值
-		private var _worshipValue: int;
 		
 		//玩家技能
 		private var _playerSkillInfos: Vector.<com.rpgGame.netData.skill.bean.SkillInfo> = new Vector.<com.rpgGame.netData.skill.bean.SkillInfo>();
@@ -73,17 +82,6 @@ package com.rpgGame.netData.player.bean{
 		private var _equips: Vector.<com.rpgGame.netData.backpack.bean.ItemInfo> = new Vector.<com.rpgGame.netData.backpack.bean.ItemInfo>();
 		//玩家使用的加属性类道具
 		private var _playerUseItems: Vector.<com.rpgGame.netData.player.bean.PlayerUseItem> = new Vector.<com.rpgGame.netData.player.bean.PlayerUseItem>();
-		//金身阶数
-		private var _goldenBodyLevel: int;
-		
-		//金身点数
-		private var _goldenBodyPoint: int;
-		
-		//神装套装ID
-		private var _godEquipSuitId: int;
-		
-		//翅膀技能
-		private var _wingSkillInfos: Vector.<com.rpgGame.netData.skill.bean.SkillInfo> = new Vector.<com.rpgGame.netData.skill.bean.SkillInfo>();
 		/**
 		 * 写入字节缓存
 		 */
@@ -100,19 +98,28 @@ package com.rpgGame.netData.player.bean{
 			writeInt(_level);
 			//玩家职业
 			writeByte(_job);
-			//神器ID(时装关联)
-			writeInt(_artifactModelid);
+			//玩家性别 1男 2女
+			writeByte(_sex);
+			//阶段
+			writeByte(_body);
+			//衣服套装
+			writeInt(_cloths);
+			//头发
+			writeInt(_hair);
+			//主武器
+			writeInt(_weapon);
+			//副武器
+			writeInt(_second_weapon);
 			//美人ID
 			writeInt(_beautyModelid);
+			//军阶Id
+			writeInt(_junJieModelId);
+			//战旗
+			writeInt(_warFlagModelId);
 			//美人技能信息
 			writeShort(_beautySkillInfos.length);
 			for (var i: int = 0; i < _beautySkillInfos.length; i++) {
 				writeBean(_beautySkillInfos[i]);
-			}
-			//美人装备信息列表
-			writeShort(_beautyEquips.length);
-			for (var i: int = 0; i < _beautyEquips.length; i++) {
-				writeBean(_beautyEquips[i]);
 			}
 			//坐骑ID
 			writeInt(_horseModelid);
@@ -121,22 +128,8 @@ package com.rpgGame.netData.player.bean{
 			for (var i: int = 0; i < _horseSkillInfos.length; i++) {
 				writeBean(_horseSkillInfos[i]);
 			}
-			//坐骑装备信息列表
-			writeShort(_horseEquips.length);
-			for (var i: int = 0; i < _horseEquips.length; i++) {
-				writeBean(_horseEquips[i]);
-			}
-			//骑兵ID
-			writeInt(_weaponRideModelid);
-			//骑兵技能信息
-			writeShort(_weaponRideSkillInfos.length);
-			for (var i: int = 0; i < _weaponRideSkillInfos.length; i++) {
-				writeBean(_weaponRideSkillInfos[i]);
-			}
 			//帮会名字
 			writeString(_guildName);
-			//崇拜值
-			writeInt(_worshipValue);
 			//玩家技能
 			writeShort(_playerSkillInfos.length);
 			for (var i: int = 0; i < _playerSkillInfos.length; i++) {
@@ -157,17 +150,6 @@ package com.rpgGame.netData.player.bean{
 			for (var i: int = 0; i < _playerUseItems.length; i++) {
 				writeBean(_playerUseItems[i]);
 			}
-			//金身阶数
-			writeInt(_goldenBodyLevel);
-			//金身点数
-			writeInt(_goldenBodyPoint);
-			//神装套装ID
-			writeByte(_godEquipSuitId);
-			//翅膀技能
-			writeShort(_wingSkillInfos.length);
-			for (var i: int = 0; i < _wingSkillInfos.length; i++) {
-				writeBean(_wingSkillInfos[i]);
-			}
 			return true;
 		}
 		
@@ -187,19 +169,28 @@ package com.rpgGame.netData.player.bean{
 			_level = readInt();
 			//玩家职业
 			_job = readByte();
-			//神器ID(时装关联)
-			_artifactModelid = readInt();
+			//玩家性别 1男 2女
+			_sex = readByte();
+			//阶段
+			_body = readByte();
+			//衣服套装
+			_cloths = readInt();
+			//头发
+			_hair = readInt();
+			//主武器
+			_weapon = readInt();
+			//副武器
+			_second_weapon = readInt();
 			//美人ID
 			_beautyModelid = readInt();
+			//军阶Id
+			_junJieModelId = readInt();
+			//战旗
+			_warFlagModelId = readInt();
 			//美人技能信息
 			var beautySkillInfos_length : int = readShort();
 			for (var i: int = 0; i < beautySkillInfos_length; i++) {
 				_beautySkillInfos[i] = readBean(com.rpgGame.netData.skill.bean.SkillInfo) as com.rpgGame.netData.skill.bean.SkillInfo;
-			}
-			//美人装备信息列表
-			var beautyEquips_length : int = readShort();
-			for (var i: int = 0; i < beautyEquips_length; i++) {
-				_beautyEquips[i] = readBean(com.rpgGame.netData.backpack.bean.ItemInfo) as com.rpgGame.netData.backpack.bean.ItemInfo;
 			}
 			//坐骑ID
 			_horseModelid = readInt();
@@ -208,22 +199,8 @@ package com.rpgGame.netData.player.bean{
 			for (var i: int = 0; i < horseSkillInfos_length; i++) {
 				_horseSkillInfos[i] = readBean(com.rpgGame.netData.skill.bean.SkillInfo) as com.rpgGame.netData.skill.bean.SkillInfo;
 			}
-			//坐骑装备信息列表
-			var horseEquips_length : int = readShort();
-			for (var i: int = 0; i < horseEquips_length; i++) {
-				_horseEquips[i] = readBean(com.rpgGame.netData.backpack.bean.ItemInfo) as com.rpgGame.netData.backpack.bean.ItemInfo;
-			}
-			//骑兵ID
-			_weaponRideModelid = readInt();
-			//骑兵技能信息
-			var weaponRideSkillInfos_length : int = readShort();
-			for (var i: int = 0; i < weaponRideSkillInfos_length; i++) {
-				_weaponRideSkillInfos[i] = readBean(com.rpgGame.netData.skill.bean.SkillInfo) as com.rpgGame.netData.skill.bean.SkillInfo;
-			}
 			//帮会名字
 			_guildName = readString();
-			//崇拜值
-			_worshipValue = readInt();
 			//玩家技能
 			var playerSkillInfos_length : int = readShort();
 			for (var i: int = 0; i < playerSkillInfos_length; i++) {
@@ -243,17 +220,6 @@ package com.rpgGame.netData.player.bean{
 			var playerUseItems_length : int = readShort();
 			for (var i: int = 0; i < playerUseItems_length; i++) {
 				_playerUseItems[i] = readBean(com.rpgGame.netData.player.bean.PlayerUseItem) as com.rpgGame.netData.player.bean.PlayerUseItem;
-			}
-			//金身阶数
-			_goldenBodyLevel = readInt();
-			//金身点数
-			_goldenBodyPoint = readInt();
-			//神装套装ID
-			_godEquipSuitId = readByte();
-			//翅膀技能
-			var wingSkillInfos_length : int = readShort();
-			for (var i: int = 0; i < wingSkillInfos_length; i++) {
-				_wingSkillInfos[i] = readBean(com.rpgGame.netData.skill.bean.SkillInfo) as com.rpgGame.netData.skill.bean.SkillInfo;
 			}
 			return true;
 		}
@@ -349,18 +315,93 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * get 神器ID(时装关联)
+		 * get 玩家性别 1男 2女
 		 * @return 
 		 */
-		public function get artifactModelid(): int{
-			return _artifactModelid;
+		public function get sex(): int{
+			return _sex;
 		}
 		
 		/**
-		 * set 神器ID(时装关联)
+		 * set 玩家性别 1男 2女
 		 */
-		public function set artifactModelid(value: int): void{
-			this._artifactModelid = value;
+		public function set sex(value: int): void{
+			this._sex = value;
+		}
+		
+		/**
+		 * get 阶段
+		 * @return 
+		 */
+		public function get body(): int{
+			return _body;
+		}
+		
+		/**
+		 * set 阶段
+		 */
+		public function set body(value: int): void{
+			this._body = value;
+		}
+		
+		/**
+		 * get 衣服套装
+		 * @return 
+		 */
+		public function get cloths(): int{
+			return _cloths;
+		}
+		
+		/**
+		 * set 衣服套装
+		 */
+		public function set cloths(value: int): void{
+			this._cloths = value;
+		}
+		
+		/**
+		 * get 头发
+		 * @return 
+		 */
+		public function get hair(): int{
+			return _hair;
+		}
+		
+		/**
+		 * set 头发
+		 */
+		public function set hair(value: int): void{
+			this._hair = value;
+		}
+		
+		/**
+		 * get 主武器
+		 * @return 
+		 */
+		public function get weapon(): int{
+			return _weapon;
+		}
+		
+		/**
+		 * set 主武器
+		 */
+		public function set weapon(value: int): void{
+			this._weapon = value;
+		}
+		
+		/**
+		 * get 副武器
+		 * @return 
+		 */
+		public function get second_weapon(): int{
+			return _second_weapon;
+		}
+		
+		/**
+		 * set 副武器
+		 */
+		public function set second_weapon(value: int): void{
+			this._second_weapon = value;
 		}
 		
 		/**
@@ -379,6 +420,36 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
+		 * get 军阶Id
+		 * @return 
+		 */
+		public function get junJieModelId(): int{
+			return _junJieModelId;
+		}
+		
+		/**
+		 * set 军阶Id
+		 */
+		public function set junJieModelId(value: int): void{
+			this._junJieModelId = value;
+		}
+		
+		/**
+		 * get 战旗
+		 * @return 
+		 */
+		public function get warFlagModelId(): int{
+			return _warFlagModelId;
+		}
+		
+		/**
+		 * set 战旗
+		 */
+		public function set warFlagModelId(value: int): void{
+			this._warFlagModelId = value;
+		}
+		
+		/**
 		 * get 美人技能信息
 		 * @return 
 		 */
@@ -391,21 +462,6 @@ package com.rpgGame.netData.player.bean{
 		 */
 		public function set beautySkillInfos(value: Vector.<com.rpgGame.netData.skill.bean.SkillInfo>): void{
 			this._beautySkillInfos = value;
-		}
-		
-		/**
-		 * get 美人装备信息列表
-		 * @return 
-		 */
-		public function get beautyEquips(): Vector.<com.rpgGame.netData.backpack.bean.ItemInfo>{
-			return _beautyEquips;
-		}
-		
-		/**
-		 * set 美人装备信息列表
-		 */
-		public function set beautyEquips(value: Vector.<com.rpgGame.netData.backpack.bean.ItemInfo>): void{
-			this._beautyEquips = value;
 		}
 		
 		/**
@@ -439,51 +495,6 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
-		 * get 坐骑装备信息列表
-		 * @return 
-		 */
-		public function get horseEquips(): Vector.<com.rpgGame.netData.backpack.bean.ItemInfo>{
-			return _horseEquips;
-		}
-		
-		/**
-		 * set 坐骑装备信息列表
-		 */
-		public function set horseEquips(value: Vector.<com.rpgGame.netData.backpack.bean.ItemInfo>): void{
-			this._horseEquips = value;
-		}
-		
-		/**
-		 * get 骑兵ID
-		 * @return 
-		 */
-		public function get weaponRideModelid(): int{
-			return _weaponRideModelid;
-		}
-		
-		/**
-		 * set 骑兵ID
-		 */
-		public function set weaponRideModelid(value: int): void{
-			this._weaponRideModelid = value;
-		}
-		
-		/**
-		 * get 骑兵技能信息
-		 * @return 
-		 */
-		public function get weaponRideSkillInfos(): Vector.<com.rpgGame.netData.skill.bean.SkillInfo>{
-			return _weaponRideSkillInfos;
-		}
-		
-		/**
-		 * set 骑兵技能信息
-		 */
-		public function set weaponRideSkillInfos(value: Vector.<com.rpgGame.netData.skill.bean.SkillInfo>): void{
-			this._weaponRideSkillInfos = value;
-		}
-		
-		/**
 		 * get 帮会名字
 		 * @return 
 		 */
@@ -496,21 +507,6 @@ package com.rpgGame.netData.player.bean{
 		 */
 		public function set guildName(value: String): void{
 			this._guildName = value;
-		}
-		
-		/**
-		 * get 崇拜值
-		 * @return 
-		 */
-		public function get worshipValue(): int{
-			return _worshipValue;
-		}
-		
-		/**
-		 * set 崇拜值
-		 */
-		public function set worshipValue(value: int): void{
-			this._worshipValue = value;
 		}
 		
 		/**
@@ -571,66 +567,6 @@ package com.rpgGame.netData.player.bean{
 		 */
 		public function set playerUseItems(value: Vector.<com.rpgGame.netData.player.bean.PlayerUseItem>): void{
 			this._playerUseItems = value;
-		}
-		
-		/**
-		 * get 金身阶数
-		 * @return 
-		 */
-		public function get goldenBodyLevel(): int{
-			return _goldenBodyLevel;
-		}
-		
-		/**
-		 * set 金身阶数
-		 */
-		public function set goldenBodyLevel(value: int): void{
-			this._goldenBodyLevel = value;
-		}
-		
-		/**
-		 * get 金身点数
-		 * @return 
-		 */
-		public function get goldenBodyPoint(): int{
-			return _goldenBodyPoint;
-		}
-		
-		/**
-		 * set 金身点数
-		 */
-		public function set goldenBodyPoint(value: int): void{
-			this._goldenBodyPoint = value;
-		}
-		
-		/**
-		 * get 神装套装ID
-		 * @return 
-		 */
-		public function get godEquipSuitId(): int{
-			return _godEquipSuitId;
-		}
-		
-		/**
-		 * set 神装套装ID
-		 */
-		public function set godEquipSuitId(value: int): void{
-			this._godEquipSuitId = value;
-		}
-		
-		/**
-		 * get 翅膀技能
-		 * @return 
-		 */
-		public function get wingSkillInfos(): Vector.<com.rpgGame.netData.skill.bean.SkillInfo>{
-			return _wingSkillInfos;
-		}
-		
-		/**
-		 * set 翅膀技能
-		 */
-		public function set wingSkillInfos(value: Vector.<com.rpgGame.netData.skill.bean.SkillInfo>): void{
-			this._wingSkillInfos = value;
 		}
 		
 	}

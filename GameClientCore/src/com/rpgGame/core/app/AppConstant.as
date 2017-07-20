@@ -527,5 +527,9 @@ package com.rpgGame.core.app
 		
 		/**红包信息**/
 		public static var PET_PANLE:String = createAppInfo("pet.PetMainPanelExt","meiren");
+		/**排行榜**/
+		public static var RANKLISTPANLE:String = createAppInfo("rank.RankListPanle","paihangbang");
+		/**全平台排行榜**/
+		public static var RANKALLPLATFORMLISTPANLE:String = createAppInfo("rank.RankAllPlatformListPanle","paihangbang");
 	}
 }

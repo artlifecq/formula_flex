@@ -5,6 +5,7 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
 	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
+	import com.rpgGame.core.view.ui.tip.vo.SpellDynamicTipdata;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
@@ -46,20 +47,16 @@ package com.rpgGame.app.ui.tips
 		
 		public function setTipData(data:*):void
 		{
+			var dataTip:SpellDynamicTipdata = SpellDynamicTipdata(data);
 			var infodata:* = DynamicTipData(data).data;
-			var id:int;
-			if(infodata is int){
-				id=infodata;
-			}else if(infodata is BaseFaceInfo){
-				id=infodata.cfgId;
-			}
+			var id:int = dataTip.data.cfgId;
 			
 			var cfg:Q_skill_model=SpellDataManager.getSpellData(id,1);
 			mainIco.setIconResName(ClientConfig.getSkillIcon(cfg.q_icon,64));
 			_skin.skill_name.text = cfg.q_skillName;
 			_skin.lbShuoming.text = cfg.q_skillpanel_description1;
 			_skin.jihuogroup.isEnabled = false;
-			if(MainRoleManager.actorInfo.spellList.getSkillInfo(id)==null)
+			if(!dataTip.isActivation)
 			{
 				_skin.lbJIhuo.text = LanguageConfig.getText(LangUI_2.Skill_weijihuo);
 				_skin.lbJIhuo.color = StaticValue.A_UI_RED_TEXT;
