@@ -3,7 +3,6 @@ package com.rpgGame.app.ui.main.shortcut
 	import com.game.engine3D.display.EffectObject3D;
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.rpgGame.app.manager.TrusteeshipManager;
-	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.TaskEvent;
@@ -13,14 +12,12 @@ package com.rpgGame.app.ui.main.shortcut
 	import feathers.controls.SkinnableContainer;
 	
 	import org.client.mainCore.manager.EventManager;
-	import org.mokylin.skin.mainui.guaji.GuaJi_Skin;
 	import org.mokylin.skin.mainui.guaji.ZiDongZhanDou;
 	
 	import starling.display.Sprite;
 
 	/**
 	 * 自动战斗动画类
-	 * 
 	 * */
 	public class AutoBar extends Sprite
 	{
@@ -29,8 +26,6 @@ package com.rpgGame.app.ui.main.shortcut
 		private var walkEffect:EffectObject3D;
 		private var setUI:SkinnableContainer;
 		public var setSkin:ZiDongZhanDou;
-		private var guajiUI:SkinnableContainer;
-		public var guajiSkin:GuaJi_Skin;
 		public function AutoBar()
 		{
 			this.x=225;
@@ -53,15 +48,6 @@ package com.rpgGame.app.ui.main.shortcut
 			setSkin=new ZiDongZhanDou();
 			setUI.skin=setSkin;
 			this.addChild(setUI);
-			
-			guajiUI= new SkinnableContainer();
-			guajiUI.x=-435;
-			guajiUI.y=220;
-			guajiUI.visible=true;
-			guajiSkin=new GuaJi_Skin();
-			guajiUI.skin=guajiSkin;
-			this.addChild(guajiUI);
-			
 			
 			fightEffect=effectSk.addInter3D(ClientConfig.getEffect(EffectUrl.UI_ZIDONGZHANDOU));
 			walkEffect=effectSk.addInter3D(ClientConfig.getEffect(EffectUrl.UI_ZIDONGXUNLU));

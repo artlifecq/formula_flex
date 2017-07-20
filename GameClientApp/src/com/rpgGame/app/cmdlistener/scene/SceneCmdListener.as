@@ -91,6 +91,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.netData.map.message.ResRoundMonsterDisappearMessage;
 	import com.rpgGame.netData.map.message.ResRoundObjectsMessage;
 	import com.rpgGame.netData.map.message.ResWeaponChangeMessage;
+	import com.rpgGame.netData.map.message.SCAreaJumpMessage;
 	import com.rpgGame.netData.map.message.SCAttachStateChangeMessage;
 	import com.rpgGame.netData.map.message.SCSceneObjMoveMessage;
 	import com.rpgGame.netData.map.message.SCUpdateTopLeaderMessage;
@@ -168,6 +169,8 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			// 陷阱状态改变
 			SocketConnection.addCmdListener(101151, onRecvSCAttachStateChangeMessage);
+			
+			SocketConnection.addCmdListener(101221, onSCAreaJumpMessage);//地图跳跃
 			
 			SocketConnection.addCmdListener(103110, onResChangePKStateMessage);
 			SocketConnection.addCmdListener(114108, onResMonterDieMessage);
@@ -290,6 +293,21 @@ package com.rpgGame.app.cmdlistener.scene
 			info.state = msg.state;
 			SceneManager.addSceneObjToScene(info.effect, true, false, false);
 		}
+		
+		/**地图跳跃*///-------yt
+		private function onSCAreaJumpMessage(msg : SCAreaJumpMessage) : void 
+		{
+			Lyt.a("====跳跃消息"+msg.costTime+"x:"+msg.jumpPos.x+"y:"+msg.jumpPos.y);
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.playerId.ToGID()) as SceneRole;
+			if (role && role.usable)
+			{
+				var ref : JumpStateReference = role.stateMachine.getReference(JumpStateReference) as JumpStateReference;
+				var destPoint:Vector3D=new Vector3D(msg.jumpPos.x,0,msg.jumpPos.y);
+				ref.setParams(1,msg.costTime,destPoint);
+				role.stateMachine.transition(RoleStateType.ACTION_JUMP, ref);
+			}
+		}
+		
 		
 		private function onResPlayerDieMessage(msg:ResPlayerDieMessage):void
 		{
@@ -967,6 +985,10 @@ package com.rpgGame.app.cmdlistener.scene
 					ActivetyDataManager.checkOpenAct();//检测最新活动开启
 				}
 				//				ReliveManager.autoHideRelive();
+			}
+			if (CharAttributeType.SPEED==msg.attributeChange.type) 
+			{
+				RoleStateUtil.updateMoveBySpeedChange(role);
 			}
 		}
 		

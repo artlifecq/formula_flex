@@ -154,11 +154,8 @@ package com.rpgGame.app.ui.main.chat
 				case EnumChatChannelType.CHAT_CHANNEL_WORLD:
 					info = LanguageConfig.getText(LangChat.CHAT_CHANNEL_WORLD);
 					break;
-				/*	case EnumChatChannelType.CHAT_CHANNEL_COUNTRY:
-				info = LanguageConfig.getText(LangChat.CHAT_CHANNEL_ALLY);
-				break;*/
 				case EnumChatChannelType.CHAT_CHANNEL_NORMAL:
-					info = LanguageConfig.getText(LangChat.CHAT_CHANNEL_NORMAL);
+					info = "当前";//LanguageConfig.getText(LangChat.CHAT_CHANNEL_NORMAL);
 					break;
 				case EnumChatChannelType.CHAT_CHANNEL_PARTY:
 					info = LanguageConfig.getText(LangChat.CHAT_CHANNEL_PARTY);

@@ -17,9 +17,6 @@ package com.rpgGame.app.ui.main.head
 	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.RoleData;
-	import com.rpgGame.coreData.type.AssetUrl;
-	
-	import feathers.controls.UIAsset;
 	
 	import gs.TweenLite;
 	import gs.easing.Bounce;
@@ -37,7 +34,7 @@ package com.rpgGame.app.ui.main.head
 	public class RoleHeadBar extends SkinUI
 	{
 		private var _skin:head_max_Skin;
-		private var _headImg:UIAsset;
+		//		private var _headImg:UIAsset;
 		private var _roleData:HeroData;
 		private var tween:TweenLite;
 		private var goodBuffs:Vector.<BuffIcon>;
@@ -53,16 +50,14 @@ package com.rpgGame.app.ui.main.head
 		
 		private function initView():void
 		{
-			_headImg=new UIAsset();
-			_headImg.x=18;
-			_headImg.y=-9;
-			_skin.container.addChildAt(_headImg,3);
+			//			_headImg=new UIAsset();
+			//			_headImg.x=18;
+			//			_headImg.y=-9;
+			//			_skin.container.addChildAt(_headImg,3);
 			goodBuffs=new Vector.<BuffIcon>();
 			badBuffs=new Vector.<BuffIcon>();
-
+			
 		}
-		
-	
 		
 		override public function refresh():void
 		{
@@ -72,10 +67,10 @@ package com.rpgGame.app.ui.main.head
 			updateAttInfo();
 			updateBuff();
 			
-			this.x=330;
-			this.y=42;
+			this.x=283;
+			this.y=56;
 			this.alpha=0.5;
-			tween=	TweenLite.to(this, 0.5, {x:283,y:42,alpha:1, ease:Bounce.easeOut,onComplete:onTween});
+			tween = TweenLite.to(this, 0.5, {x:380,y:52,alpha:1, ease:Bounce.easeOut,onComplete:onTween});
 			initEvent();
 			_skin.grp_more.visible=_roleData.id!=MainRoleManager.actorInfo.id;
 		}
@@ -106,8 +101,7 @@ package com.rpgGame.app.ui.main.head
 				if(icon.buffData.buffData.q_buff_id==data.buffData.q_buff_id){
 					return true;
 				}
-			}
-			
+			}			
 			return false;
 		}
 		
@@ -125,18 +119,18 @@ package com.rpgGame.app.ui.main.head
 				goodBuffs.push(icon);
 			}
 			var gridW:int=IcoSizeEnum.ICON_24+2;
-			var startX:int=95;
+			var startX:int=151;
 			for(var i:int=0;i<goodBuffs.length;i++){//buff
 				icon=goodBuffs[i];
 				icon.x=startX;
-				icon.y=52;
+				icon.y=53;
 				this.addChild(icon);
 				startX=icon.x+gridW;
 			}
 			for(i=0;i<badBuffs.length;i++){//debuff
 				icon=badBuffs[i];
 				icon.x=startX;
-				icon.y=52;
+				icon.y=53;
 				this.addChild(icon);
 				startX=icon.x+gridW;
 			}
@@ -213,8 +207,8 @@ package com.rpgGame.app.ui.main.head
 			if(tween){
 				return;
 			}
-			this.x = 283;
-			this.y = 42;//28;
+			this.x = 380;
+			this.y = 56;//28;
 		}
 		
 		private function initEvent():void
@@ -227,20 +221,18 @@ package com.rpgGame.app.ui.main.head
 		
 		override protected function onTouchTarget(target : DisplayObject) : void 
 		{
-				switch (target) {
-					case this._skin.btn_cha:
-						LookSender.lookOtherPlayer(_roleData.serverID);
-						break;
-					case this._skin.btn_zu:
-						Mgr.teamMgr.reqCreateTeamWithPlayer(_roleData.serverID);
-						break;
-					case this._skin.btn_more:
-//						Mgr.teamMgr.reqCreateTeamWithPlayer(_roleData.serverID);
-						
-						var menus : Array = MenuUtil.getPlayerTargetMenu(_roleData.serverID.ToGID(), true);
-						MenuManager.showMenu(menus, [_roleData.serverID, _roleData.name], -1, -1, 80);
-						break;
-				}
+			switch (target) {
+				case this._skin.btn_cha:
+					LookSender.lookOtherPlayer(_roleData.serverID);
+					break;
+				case this._skin.btn_zu:
+					Mgr.teamMgr.reqCreateTeamWithPlayer(_roleData.serverID);
+					break;
+				case this._skin.btn_more:
+					var menus : Array = MenuUtil.getPlayerTargetMenu(_roleData.serverID.ToGID(), true);
+					MenuManager.showMenu(menus, [_roleData.serverID, _roleData.name], -1, -1, 80);
+					break;
+			}
 		}
 		
 		override protected function onHide():void
@@ -286,23 +278,27 @@ package com.rpgGame.app.ui.main.head
 		 */
 		private function updateNormal():void
 		{
-			this._skin.role_name.text = _roleData.name + " (" + _roleData.totalStat.level +"级)";
-			this._skin.UI_bingjia.visible = JobEnum.ROLE_1_TYPE==_roleData.job;
-			this._skin.UI_mojia.visible = JobEnum.ROLE_2_TYPE==_roleData.job||JobEnum.ROLE_3_TYPE==_roleData.job;
-			this._skin.UI_yijia.visible = JobEnum.ROLE_4_TYPE==_roleData.job;
+			this._skin.lbLevel.text = _roleData.totalStat.level.toString();
+			var arr:Array= _roleData.name.split(']');
+			if(arr.length>1)	
+				this._skin.role_name.text = arr[1];
+			else this._skin.role_name.text = _roleData.name;
+			//			this._skin.UI_bingjia.visible = JobEnum.ROLE_1_TYPE==_roleData.job;
+			//			this._skin.UI_mojia.visible = JobEnum.ROLE_2_TYPE==_roleData.job||JobEnum.ROLE_3_TYPE==_roleData.job;
+			//			this._skin.UI_yijia.visible = JobEnum.ROLE_4_TYPE==_roleData.job;
 			
 			switch(_roleData.job){
 				case JobEnum.ROLE_1_TYPE:
-					_headImg.styleName=AssetUrl.HEAD_ICON_1;
+					this._skin.icon.styleName = "ui/mainui/head/touxiang/bingjia/middle.png";
 					break;
 				case JobEnum.ROLE_2_TYPE:
-					_headImg.styleName=AssetUrl.HEAD_ICON_2;
+					this._skin.icon.styleName = "ui/mainui/head/touxiang/mojia/middle.png";
 					break;
 				case JobEnum.ROLE_3_TYPE:
-					_headImg.styleName=AssetUrl.HEAD_ICON_3;
+					this._skin.icon.styleName = "ui/mainui/head/touxiang/mojia/middle.png";
 					break;
 				case JobEnum.ROLE_4_TYPE:
-					_headImg.styleName=AssetUrl.HEAD_ICON_4;
+					this._skin.icon.styleName = "ui/mainui/head/touxiang/yijia/middle.png";
 					break;
 			}
 		}

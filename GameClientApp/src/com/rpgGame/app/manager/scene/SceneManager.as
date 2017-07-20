@@ -20,16 +20,19 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.cfg.ClientSceneNpcCfgData;
+	import com.rpgGame.coreData.cfg.MapJumpCfgData;
 	import com.rpgGame.coreData.cfg.TransCfgData;
 	import com.rpgGame.coreData.cfg.collect.CollectCfgData;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.ClientSceneNPC;
+	import com.rpgGame.coreData.clientConfig.Q_map_jump;
 	import com.rpgGame.coreData.clientConfig.Q_map_transfer;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.info.collect.CollectObjcetInfo;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleType;
 	import com.rpgGame.coreData.role.SceneCollectData;
+	import com.rpgGame.coreData.role.SceneJumpPointData;
 	import com.rpgGame.coreData.role.SceneTranportData;
 	import com.rpgGame.coreData.type.AttachDisplayType;
 	import com.rpgGame.coreData.type.GameScene3DType;
@@ -373,6 +376,7 @@ package com.rpgGame.app.manager.scene
 			if (SceneSwitchManager.isChangeSceneComplete)
 			{
 				AreaMapManager.updateTransportAreaMap();
+				AreaMapManager.updateJumppointAreaMap();
 				AreaMapManager.updateEscortAreaMap();
 				AreaMapManager.updateExplorationAreaMap();
 				AreaMapManager.updateMapDataAreaMap();
@@ -424,7 +428,23 @@ package com.rpgGame.app.manager.scene
 			//	SceneRoleManager.getInstance().createTranport(tranportData);
 			//}
 		}
-
+		/**
+		 * 生成场景跳跃点---yt
+		 *
+		 */
+		public static function generateSceneJumppoint() : void
+		{
+			var mapID : int = SceneSwitchManager.currentMapId;
+			var jumppointList : Vector.<Q_map_jump> = MapJumpCfgData.getJumpBySceneID(mapID);
+			if(!jumppointList){
+				return;
+			}
+			for each(var info : Q_map_jump in jumppointList) {
+				var jumpPointData : SceneJumpPointData = new SceneJumpPointData(RoleType.TYPE_JUMP);
+				jumpPointData.setConfigData(info);
+				SceneRoleManager.getInstance().createJumppoint(jumpPointData);
+			}
+		}
 		/**
 		 * 通过ID获取场景对象.(只有服务器发过来的场景对象,才可以通过ID获取...其它的都不行...比如id+type)
 		 * @param id

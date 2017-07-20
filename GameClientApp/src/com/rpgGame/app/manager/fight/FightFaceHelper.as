@@ -18,6 +18,7 @@ package com.rpgGame.app.manager.fight
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.role.RoleData;
+	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.EnumHurtType;
 	import com.rpgGame.netData.player.bean.AttributeItem;
 	
@@ -299,8 +300,15 @@ package com.rpgGame.app.manager.fight
 							break;
 						case EnumHurtType.SPELL_HURT_TYPE_CRIT: //暴击
 							typeRes = ROOT+USESFUL_EFFECT+"bao_ji_piao_zi.png";
-							tweenFun=SpellResultTweenUtil.TweenCirt;
 							numberType = NUMBER_NPC_CRIT;
+							//治疗
+							if (hurtAmount>0) 
+							{
+								typeRes = ROOT+USESFUL_EFFECT+"zhiliao_baoji.png";
+								numberType = NUMBER_PC_HPREC;
+							}
+							tweenFun=SpellResultTweenUtil.TweenCirt;
+							
 							extAtf=LostSkillManager.instance().hasBossHurtAddAtf(hurter.data.serverID,atkor.data.serverID,hurtAmount);
 							if (!extAtf) 
 							{
@@ -578,6 +586,11 @@ package com.rpgGame.app.manager.fight
 			for (var i:int = 0; i <len; i++) 
 			{
 				key=keys[i];
+				//移动速度不显示
+				if (CharAttributeType.SPEED==key) 
+				{
+					continue;
+				}
 				val=hash.getValue(key);
 				typeRes=getAttributeUrl(key,val>0);
 				numberColor=val>0?ATTRIBUTE_USESFUL_NUM:ATTRIBUTE_HARMFUL_NUM;

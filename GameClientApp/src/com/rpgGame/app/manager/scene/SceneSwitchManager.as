@@ -677,6 +677,7 @@ package com.rpgGame.app.manager.scene
 			//SceneManager.generateSceneNpcs();//不再使用客户端生成，服务器方案已改！
 			SceneManager.generateSceneCollects();
 			SceneManager.generateSceneTransports();
+			SceneManager.generateSceneJumppoint();
 			SceneManager.generateEventArea();
 			
 		}

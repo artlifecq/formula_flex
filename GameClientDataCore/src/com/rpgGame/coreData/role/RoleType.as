@@ -76,6 +76,11 @@
 		public static const GIRL_PET:int = rEnum.next;
 		
 		public static const Type_SCULPTURE:int = rEnum.next;
+		/**
+		 * 跳跃点 18
+		 */		
+		public static const TYPE_JUMP:int = rEnum.next;
+		
 		public function RoleType()
 		{
 		}

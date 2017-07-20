@@ -50,6 +50,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_map:String = "data.map.Q_map";
 		/**  场景特效动态生成表						 */
 		public static const Q_map_effect:String = "data.map.Q_map_effect";
+		/**  地图跳跃点数据库								 */
+		public static const Q_map_jump:String = "data.map.Q_map_jump";
 		/**  预加载资源表		 */
 		public static const Q_map_preload:String = "data.map.Q_map_preload";
 		/**  地图传送点数据库												 */
@@ -275,6 +277,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.map.Q_area", com.rpgGame.coreData.clientConfig.Q_area);
 			regClass("data.map.Q_map", com.rpgGame.coreData.clientConfig.Q_map);
 			regClass("data.map.Q_map_effect", com.rpgGame.coreData.clientConfig.Q_map_effect);
+			regClass("data.map.Q_map_jump", com.rpgGame.coreData.clientConfig.Q_map_jump);
 			regClass("data.map.Q_map_preload", com.rpgGame.coreData.clientConfig.Q_map_preload);
 			regClass("data.map.Q_map_transfer", com.rpgGame.coreData.clientConfig.Q_map_transfer);
 			regClass("data.map.SceneSoundInfo", com.rpgGame.coreData.clientConfig.SceneSoundInfo);

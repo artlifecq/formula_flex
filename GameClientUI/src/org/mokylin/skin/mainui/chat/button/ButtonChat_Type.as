@@ -53,7 +53,7 @@ package org.mokylin.skin.mainui.chat.button
 						,
 						{target:"labelDisplay",
 							name:"color",
-							value:0xbca78a
+							value:0xCFC6AE
 						}
 						,
 						{target:"labelDisplay",
@@ -70,7 +70,7 @@ package org.mokylin.skin.mainui.chat.button
 			skinNames={"down":"ui/mainui/chat/button/chat_Type/down.png",
 			"downAndSelected":"ui/mainui/chat/button/chat_Type/select_down.png",
 			"hover":"ui/mainui/chat/button/chat_Type/over.png",
-			"overAndSelected":"ui/mainui/chat/button/chat_Type/select_over.png",
+			"hoverAndSelected":"ui/mainui/chat/button/chat_Type/select_over.png",
 			"up":"ui/mainui/chat/button/chat_Type/up.png",
 			"upAndSelected":"ui/mainui/chat/button/chat_Type/select_up.png"};
 		}
@@ -96,7 +96,7 @@ package org.mokylin.skin.mainui.chat.button
 			temp.right = 1;
 			temp.text = "按钮";
 			temp.textAlign = "center";
-			temp.color = 0xbca78a;
+			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.verticalAlign = "middle";
 			temp.y = 5;

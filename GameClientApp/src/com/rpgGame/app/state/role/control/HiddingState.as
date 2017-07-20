@@ -8,6 +8,7 @@ package com.rpgGame.app.state.role.control
 	import com.rpgGame.coreData.type.RoleStateType;
 	
 	import flash.utils.getQualifiedClassName;
+	import flash.utils.getTimer;
 
 	/**
 	 * 隐身状态处理 
@@ -16,6 +17,7 @@ package com.rpgGame.app.state.role.control
 	 */	
 	public class HiddingState extends BuffState
 	{
+		private var _enterTime:int;
 		public function HiddingState()
 		{
 			super(RoleStateType.CONTROL_HIDDING);
@@ -23,10 +25,10 @@ package com.rpgGame.app.state.role.control
 		
 		override public function execute() : void
 		{
-			
+			_enterTime=getTimer();
 			if (_machine && !_machine.isInPool)
 			{
-//				super.execute();
+				super.execute();
 //				if (_stateReference)
 //				{
 //					if (_stateReference is HiddingStateReference)
@@ -127,6 +129,7 @@ package com.rpgGame.app.state.role.control
 					role.headFace.headVisible=true;
 				}
 			}
+			trace("time diff:"+(getTimer()-_enterTime));
 		}
 	}
 }

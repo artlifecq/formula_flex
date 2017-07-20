@@ -25,20 +25,8 @@ package org.mokylin.skin.mainui.renwu
 
 		public var ioc_1_0:feathers.controls.UIAsset;
 
-		public var ioc_1_1:feathers.controls.UIAsset;
-
-		public var ioc_1_2:feathers.controls.UIAsset;
-
-		public var ioc_1_3:feathers.controls.UIAsset;
-
 		public var ioc_2_0:feathers.controls.UIAsset;
-
-		public var ioc_2_1:feathers.controls.UIAsset;
-
-		public var ioc_2_2:feathers.controls.UIAsset;
-
-		public var ioc_2_3:feathers.controls.UIAsset;
-
+		
 		public var lab_navi1:feathers.controls.Label;
 
 		public var lab_navi2:feathers.controls.Label;
@@ -76,7 +64,7 @@ package org.mokylin.skin.mainui.renwu
 			this.currentState = "normal";
 			this.height = 376;
 			this.width = 298;
-			this.elementsContent = [bg_i(),__Huanshi_Renwu_UIAsset1_i(),lbl_title_i(),btnClose_i(),__Huanshi_Renwu_UIAsset2_i(),lb_wancheng_i(),lab_navi1_i(),ioc_1_0_i(),ioc_1_1_i(),ioc_1_2_i(),ioc_1_3_i(),lab_navi2_i(),ioc_2_0_i(),ioc_2_1_i(),ioc_2_2_i(),ioc_2_3_i(),lab_txt1_i(),__Huanshi_Renwu_UIAsset3_i(),__Huanshi_Renwu_UIAsset4_i(),lb_yuanbao_i(),lab_txt2_i(),__Huanshi_Renwu_UIAsset5_i(),__Huanshi_Renwu_UIAsset6_i(),lb_yinliang_i(),__Huanshi_Renwu_UIAsset7_i(),lab_txt3_i(),lb_time_i(),three_but_i(),two_but_i(),one_but_i()];
+			this.elementsContent = [bg_i(),__Huanshi_Renwu_UIAsset1_i(),lbl_title_i(),btnClose_i(),__Huanshi_Renwu_UIAsset2_i(),lb_wancheng_i(),lab_navi1_i(),ioc_1_0_i(),lab_navi2_i(),ioc_2_0_i(),lab_txt1_i(),__Huanshi_Renwu_UIAsset3_i(),__Huanshi_Renwu_UIAsset4_i(),lb_yuanbao_i(),lab_txt2_i(),__Huanshi_Renwu_UIAsset5_i(),__Huanshi_Renwu_UIAsset6_i(),lb_yinliang_i(),__Huanshi_Renwu_UIAsset7_i(),lab_txt3_i(),lb_time_i(),three_but_i(),two_but_i(),one_but_i()];
 			
 			states = {
 			};
@@ -187,39 +175,6 @@ package org.mokylin.skin.mainui.renwu
 			return temp;
 		}
 
-		private function ioc_1_1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ioc_1_1 = temp;
-			temp.name = "ioc_1_1";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 77;
-			temp.y = 98;
-			return temp;
-		}
-
-		private function ioc_1_2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ioc_1_2 = temp;
-			temp.name = "ioc_1_2";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 130;
-			temp.y = 98;
-			return temp;
-		}
-
-		private function ioc_1_3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ioc_1_3 = temp;
-			temp.name = "ioc_1_3";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 182;
-			temp.y = 98;
-			return temp;
-		}
-
 		private function ioc_2_0_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -230,40 +185,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.y = 174;
 			return temp;
 		}
-
-		private function ioc_2_1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ioc_2_1 = temp;
-			temp.name = "ioc_2_1";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 77;
-			temp.y = 174;
-			return temp;
-		}
-
-		private function ioc_2_2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ioc_2_2 = temp;
-			temp.name = "ioc_2_2";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 130;
-			temp.y = 174;
-			return temp;
-		}
-
-		private function ioc_2_3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ioc_2_3 = temp;
-			temp.name = "ioc_2_3";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 182;
-			temp.y = 174;
-			return temp;
-		}
-
+		
 		private function lab_navi1_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();

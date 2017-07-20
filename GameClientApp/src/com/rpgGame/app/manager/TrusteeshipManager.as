@@ -219,6 +219,7 @@ package com.rpgGame.app.manager
 				_targetRoles.length = 0;
 				_targetRoles = null;
 			}
+			_stateMachine.transition(AIStateType.AI_NONE);
 			if (_isAutoFightRunning)
 				return;
 			stop();
@@ -238,6 +239,7 @@ package com.rpgGame.app.manager
 			TweenLite.killDelayedCallsTo(actorFight);
 			EventManager.dispatchEvent(TaskEvent.AUTO_FIGHT_STOP);
 			_isAutoFightRunning = false;
+			_stateMachine.transition(AIStateType.AI_NONE);
 			if (_isFightActorRunning||_isFightTargetRunning)
 				return;
 			stop();
