@@ -105,7 +105,7 @@ package com.rpgGame.app.state.role.action
 					}
 					
 					_destPoint=_stateReference.destPoint;
-					_jumpTime=_stateReference.jumpTime;
+					_jumpTime=_stateReference.jumpTime>100?_stateReference.jumpTime-100:0;//客户端减100毫秒防止两次跳跃冲突
 					
 					var speedRatio : Number = _isSecondJump ? (SECOND_JUMP_SPEED_RATIO > 0 ? SECOND_JUMP_SPEED_RATIO : 1) : (JUMP_SPEED_RATIO > 0 ? JUMP_SPEED_RATIO : 1);
 					syncAnimationSpeed(speedRatio);
@@ -431,8 +431,8 @@ package com.rpgGame.app.state.role.action
 			}
 			else if (nextState.type == RoleStateType.ACTION_JUMP)
 			{
-				if (!force && !_jumpFinished)
-					return false;
+				/*if (!force && !_jumpFinished)
+					return false;*/
 			}
 			else if (nextState.type == RoleStateType.ACTION_BEAT_BACK)
 			{

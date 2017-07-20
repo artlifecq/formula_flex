@@ -39,6 +39,8 @@ package com.rpgGame.app.cmdlistener
 	
 	import flash.geom.Vector3D;
 	
+	import gs.TweenLite;
+	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
 
@@ -86,7 +88,12 @@ package com.rpgGame.app.cmdlistener
 			if (SceneRoleSelectManager.selectedRole == role && SceneCharType.PLAYER != role.type)
 				SceneRoleSelectManager.selectedRole = null;
 		}
-
+		private var jumpBink:Boolean=false;
+		private function sendJump(jumpid:int):void
+		{
+			jumpBink=false;
+			SceneSender.jumppointTrigger(jumpid);
+		}
 		private function mainCharMoveThroughHandler() : void
 		{
 			var actor : SceneRole = MainRoleManager.actor;
@@ -118,10 +125,16 @@ package com.rpgGame.app.cmdlistener
 					if (!jump.isInViewDistance)
 						return;
 					var jumpData : SceneJumpPointData = jump.data as SceneJumpPointData;
-					Lyt.a("触发跳跃点");
+					Lyt.a("触发跳跃点:"+MainRoleManager.actor.stateMachine.isRunning+"=="+MainRoleManager.actor.stateMachine.isIdle);
 					if(MainRoleManager.actor.stateMachine.isRunning||MainRoleManager.actor.stateMachine.isIdle)
 					{
-						SceneSender.jumppointTrigger(jumpData.id);
+						if(!jumpBink)
+						{
+							jumpBink=true;
+							TweenLite.killDelayedCallsTo(sendJump);
+							TweenLite.delayedCall(0.2, sendJump,[jumpData.id]);
+						}
+						
 						/*var role : SceneRole = MainRoleManager.actor;
 						if (role && role.usable)
 						{
