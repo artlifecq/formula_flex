@@ -33,8 +33,7 @@ package com.rpgGame.app.state.role.control
 					if (_ref is RidingStateReference)
 					{
 						_stateReference = _ref as RidingStateReference;
-						((_machine.owner as SceneRole).data as RoleData).avatarInfo.setMountResID(_stateReference.mountResID, _stateReference.mountAnimatResID);
-						AvatarManager.updateAvatar(_machine.owner as SceneRole);
+						(_machine.owner as SceneRole).updateMountRes(_stateReference.mountResID, _stateReference.mountAnimatResID);
 					}
 					else
 						throw new Error("角色骑乘状态引用必须是RidingStateReference类型！");
@@ -45,8 +44,7 @@ package com.rpgGame.app.state.role.control
 		override public function afterLeave() : void
 		{
 			super.afterLeave();
-			((_machine.owner as SceneRole).data as RoleData).avatarInfo.setMountResID(null, null);
-			AvatarManager.updateAvatar(_machine.owner as SceneRole);
+			(_machine.owner as SceneRole).updateMountRes(null, null);
 		}
 
 		override public function dispose() : void

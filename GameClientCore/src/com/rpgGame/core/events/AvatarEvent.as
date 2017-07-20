@@ -14,11 +14,15 @@ package com.rpgGame.core.events
 		/**
 		 * 装备改变
 		 */
+<<<<<<< HEAD
 		public static const EQUIP_CHANGE : int = UNIQUEID.NEXT;
 		/**
 		 * 装备改变完成
 		 */
 		public static const AVATAR_CHANGE_COMPLETE : int = UNIQUEID.NEXT;
+=======
+		public static const AVATAR_CHANGE : int = UNIQUEID.NEXT;
+>>>>>>> 08f5e42f0910994541888ca60b04e073096f607a
 
 		public function AvatarEvent()
 		{
