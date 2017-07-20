@@ -2,9 +2,11 @@ package com.rpgGame.app.ui.scene
 {
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.WalkToRoleManager;
+	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.sender.GuildWarSender;
@@ -14,6 +16,7 @@ package com.rpgGame.app.ui.scene
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.GuildEvent;
+	import com.rpgGame.core.events.SpellEvent;
 	import com.rpgGame.coreData.cfg.QSinglecitybaseCfgData;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.clientConfig.Q_singlecitybase;
@@ -30,6 +33,9 @@ package com.rpgGame.app.ui.scene
 	import com.rpgGame.netData.guildWar.message.ResGuildWarPersionInfoMessage;
 	import com.rpgGame.netData.guildWar.message.ResGuildWarPersonRankMessage;
 	import com.rpgGame.netData.guildWar.message.ResGuildWarResultMessage;
+	import com.rpgGame.netData.structs.Position;
+	
+	import feathers.controls.Label;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.data.long;
@@ -49,8 +55,6 @@ package com.rpgGame.app.ui.scene
 	{
 		private var _skin:HuangCheng_ZhuiZong;
 		
-		private var items:Array=[5088,5089,5090];
-		
 		private var icon1:IconCDFace;
 		private var icon2:IconCDFace;
 		private var icon3:IconCDFace;
@@ -67,16 +71,46 @@ package com.rpgGame.app.ui.scene
 		private var defendCmapId:int;
 		
 		private var weiczbItems:Array=[5088,5089,5090];
+		private var wangczbItems:Array=[5091,5092,5095];
 		private var oreID:Array=[];
+		
+		private var maps:Array=[900,901];
+		private var items:Array;
+		private var toPoint:Position;
 		
 		public function GuildWarTrackerUI()
 		{
 			_skin=new HuangCheng_ZhuiZong();
 			super(_skin);
+			toPoint=new Position();
+			var mapId:int=MainRoleManager.actorInfo.mapID;
+			var labelNum:int;
+			switch(mapId){
+				case maps[0]:
+					items=weiczbItems;
+					iteminfo1=new ClientItemInfo(items[0]);
+					iteminfo2=new ClientItemInfo(items[1]);
+					iteminfo3=new ClientItemInfo(items[2]);
+					labelNum=2;
+					break;
+				case maps[1]:
+					items=wangczbItems;
+					iteminfo1=new ClientItemInfo(items[0]);
+					iteminfo2=new ClientItemInfo(items[1]);
+					iteminfo3=new ClientItemInfo(items[2]);
+					labelNum=4;
+					break;
+			}
 			
-			iteminfo1=new ClientItemInfo(items[0]);
-			iteminfo2=new ClientItemInfo(items[1]);
-			iteminfo3=new ClientItemInfo(items[2]);
+			for(var i:int=0;i<labelNum;i++){
+				var label:Label=new Label();
+				label.width=247;
+				label.height=18;
+				_skin.scroll_box.addChild(label);
+				_skin.scroll_box.height=i*20;
+			}
+			_skin.grpFoot.y=_skin.scroll_box.y+_skin.scroll_box.height+20;
+			_skin.bg.height=_skin.scroll_box.height+_skin.grpFoot.height+60;
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -88,13 +122,22 @@ package com.rpgGame.app.ui.scene
 					(MainRoleManager.actor.headFace as HeadFace).updateGuildWarInfoBar(null);
 					break;
 				case _skin.lbInfo1:
-					GuildWarSender.reqGetOrePosition(oreID[0]);
+					if(leftTime1==0){
+						GuildWarSender.reqGetOrePosition(oreID[0]);
+					}
 					break;
 				case _skin.lbInfo3:
-					GuildWarSender.reqGetOrePosition(oreID[1]);
+					if(leftTime2==0){
+						GuildWarSender.reqGetOrePosition(oreID[1]);
+					}
 					break;
 				case _skin.lbInfo4:
-					GuildWarSender.reqGetOrePosition(oreID[2]);
+					if(leftTime3==0){
+						GuildWarSender.reqGetOrePosition(oreID[2]);
+					}
+					break;
+				case _skin.lbShangjiao:
+					MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, toPoint.x, toPoint.y);
 					break;
 			}
 		}
@@ -108,7 +151,6 @@ package com.rpgGame.app.ui.scene
 			FaceUtil.SetItemGrid(icon1,iteminfo1);
 			FaceUtil.SetItemGrid(icon2,iteminfo2);
 			FaceUtil.SetItemGrid(icon3,iteminfo3);
-			
 			initEvent();
 		}
 		
@@ -135,6 +177,11 @@ package com.rpgGame.app.ui.scene
 			defendCmapId=msg.defendCmapId;
 			leftTime=msg.endTime;
 			TimerServer.addLoop(updateTime,1000);
+			if(GuildManager.instance().isLeader){//是统帅
+				EventManager.dispatchEvent(SpellEvent.SHOW_GUILD_LEADER_SPELL);
+			}
+			
+			
 			
 			/*var myCamp:int=MainRoleManager.actorInfo.faction;
 			var testMsg:ResGuildWarResultMessage=new ResGuildWarResultMessage();
@@ -162,6 +209,9 @@ package com.rpgGame.app.ui.scene
 				case EnumCity.DONG_WEI:
 					name="东卫";
 					break;
+				case EnumCity.WANG_CHENG:
+					name="王城";
+					break;
 			}
 			return name;
 		}
@@ -183,13 +233,18 @@ package com.rpgGame.app.ui.scene
 		private function getCampScore(msg:ResGuildWarCampScoreMessage):void
 		{
 			var myCamp:int=MainRoleManager.actorInfo.faction;
+			var upP:Array=QSinglecitybaseCfgData.getSubmitPoint(cfg,myCamp);
+			if(upP){
+				toPoint.x=upP[0];
+				toPoint.y=upP[1];
+			}
 			var max:int=cfg.q_integral_victory;
 			for(var i:int=0;i<msg.infos.length;i++){
 				var info:CampScoreInfo=msg.infos[i];
 				if(info.campId==myCamp){
-					_skin.lbName.htmlText=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,info.name)+"总积分:"+info.score+"/"+max;
+					(_skin.scroll_box.getChildAt(i) as Label).htmlText=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,info.name)+"总积分:"+info.score+"/"+max;
 				}else{
-					_skin.lbName0.htmlText=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,info.name)+"总积分:"+info.score+"/"+max;
+					(_skin.scroll_box.getChildAt(i) as Label).htmlText=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,info.name)+"总积分:"+info.score+"/"+max;
 				}
 			}
 		}
@@ -275,7 +330,7 @@ package com.rpgGame.app.ui.scene
 			
 			if(leftTime>0){
 				leftTime--;
-				_skin.lbTime.text="活动结束倒计时:"+TimeUtil.formatTimeToTimeString(leftTime);
+				_skin.lbTime.text="活动结束倒计时:"+TimeUtil.format3TimeType(leftTime);
 			}
 		}
 		
@@ -290,12 +345,16 @@ package com.rpgGame.app.ui.scene
 			EventManager.removeEvent(GuildEvent.GUILD_WAR_FINDORE,toOre);
 			EventManager.removeEvent(GuildEvent.GUILD_WCZB_OVER,overWczb);
 			TimerServer.remove(updateTime);
+			if(GuildManager.instance().isLeader){//是统帅
+				EventManager.dispatchEvent(SpellEvent.HIDE_GUILD_LEADER_SPELL);
+			}
 			icon1.destroy();
 			icon2.destroy();
 			icon3.destroy();
 			icon1=null;
 			icon2=null;
 			icon3=null;
+			(MainRoleManager.actor.headFace as HeadFace).updateGuildWarInfoBar(null);
 		}
 	}
 }

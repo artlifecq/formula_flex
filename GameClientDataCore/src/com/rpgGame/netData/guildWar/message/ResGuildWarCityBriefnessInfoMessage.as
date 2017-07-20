@@ -21,6 +21,9 @@ package com.rpgGame.netData.guildWar.message{
 		//防守阵营id
 		private var _defendCmapId: int;
 		
+		//统帅技能冷却时间(s)
+		private var _leaderSkillCooling: int;
+		
 		
 		/**
 		 * 写入字节缓存
@@ -32,6 +35,8 @@ package com.rpgGame.netData.guildWar.message{
 			writeInt(_endTime);
 			//防守阵营id
 			writeInt(_defendCmapId);
+			//统帅技能冷却时间(s)
+			writeInt(_leaderSkillCooling);
 			return true;
 		}
 		
@@ -45,6 +50,8 @@ package com.rpgGame.netData.guildWar.message{
 			_endTime = readInt();
 			//防守阵营id
 			_defendCmapId = readInt();
+			//统帅技能冷却时间(s)
+			_leaderSkillCooling = readInt();
 			return true;
 		}
 		
@@ -99,6 +106,21 @@ package com.rpgGame.netData.guildWar.message{
 		 */
 		public function set defendCmapId(value: int): void{
 			this._defendCmapId = value;
+		}
+		
+		/**
+		 * get 统帅技能冷却时间(s)
+		 * @return 
+		 */
+		public function get leaderSkillCooling(): int{
+			return _leaderSkillCooling;
+		}
+		
+		/**
+		 * set 统帅技能冷却时间(s)
+		 */
+		public function set leaderSkillCooling(value: int): void{
+			this._leaderSkillCooling = value;
 		}
 		
 	}

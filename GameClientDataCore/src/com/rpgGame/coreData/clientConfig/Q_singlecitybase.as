@@ -40,6 +40,12 @@ package com.rpgGame.coreData.clientConfig
 		public var q_bidding:int;
 		 /**  胜利积分 */
 		public var q_integral_victory:int;
+		 /**  群体传送技能冷却时间（时间：毫秒） */
+		public var q_cooling:int;
+		 /**  群体传送有效时间 */
+		public var q_transfer_valid_time:int;
+		 /**  矿石上交点坐标[[坐标,阵营]] */
+		public var q_submit_point:String;
 
 	}
 }

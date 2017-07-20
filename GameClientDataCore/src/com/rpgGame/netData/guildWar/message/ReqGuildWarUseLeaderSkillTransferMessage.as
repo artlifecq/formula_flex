@@ -9,18 +9,15 @@ package com.rpgGame.netData.guildWar.message{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * 通知统帅使用技能
+	 * 请求使用统帅技能传送
 	 */
-	public class ResGuildWarLeaderSkillUseMessage extends Message {
+	public class ReqGuildWarUseLeaderSkillTransferMessage extends Message {
 	
 		//统帅Id
 		private var _leaderPlayerId: long;
 		
-		//统帅名字
-		private var _leaderPlayerName: String;
-		
-		//统帅职业
-		private var _leaderPlayerJob: int;
+		//本次操作标识
+		private var _opaque: int;
 		
 		
 		/**
@@ -29,10 +26,8 @@ package com.rpgGame.netData.guildWar.message{
 		override protected function writing(): Boolean{
 			//统帅Id
 			writeLong(_leaderPlayerId);
-			//统帅名字
-			writeString(_leaderPlayerName);
-			//统帅职业
-			writeByte(_leaderPlayerJob);
+			//本次操作标识
+			writeInt(_opaque);
 			return true;
 		}
 		
@@ -42,10 +37,8 @@ package com.rpgGame.netData.guildWar.message{
 		override protected function reading(): Boolean{
 			//统帅Id
 			_leaderPlayerId = readLong();
-			//统帅名字
-			_leaderPlayerName = readString();
-			//统帅职业
-			_leaderPlayerJob = readByte();
+			//本次操作标识
+			_opaque = readInt();
 			return true;
 		}
 		
@@ -54,7 +47,7 @@ package com.rpgGame.netData.guildWar.message{
 		 * @return 
 		 */
 		override public function getId(): int {
-			return 253113;
+			return 253209;
 		}
 		
 		/**
@@ -73,33 +66,18 @@ package com.rpgGame.netData.guildWar.message{
 		}
 		
 		/**
-		 * get 统帅名字
+		 * get 本次操作标识
 		 * @return 
 		 */
-		public function get leaderPlayerName(): String{
-			return _leaderPlayerName;
+		public function get opaque(): int{
+			return _opaque;
 		}
 		
 		/**
-		 * set 统帅名字
+		 * set 本次操作标识
 		 */
-		public function set leaderPlayerName(value: String): void{
-			this._leaderPlayerName = value;
-		}
-		
-		/**
-		 * get 统帅职业
-		 * @return 
-		 */
-		public function get leaderPlayerJob(): int{
-			return _leaderPlayerJob;
-		}
-		
-		/**
-		 * set 统帅职业
-		 */
-		public function set leaderPlayerJob(value: int): void{
-			this._leaderPlayerJob = value;
+		public function set opaque(value: int): void{
+			this._opaque = value;
 		}
 		
 	}

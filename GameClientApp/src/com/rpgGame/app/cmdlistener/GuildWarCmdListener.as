@@ -1,8 +1,10 @@
 package com.rpgGame.app.cmdlistener
 {
+	import com.rpgGame.app.cmdlistener.enum.OpaqueEnum;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.sender.GuildWarSender;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.GuildEvent;
@@ -12,6 +14,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.guildWar.message.ResGuildWarCityApplyInfoMessage;
 	import com.rpgGame.netData.guildWar.message.ResGuildWarCityBriefnessInfoMessage;
 	import com.rpgGame.netData.guildWar.message.ResGuildWarCityInfoMessage;
+	import com.rpgGame.netData.guildWar.message.ResGuildWarLeaderSkillUseMessage;
 	import com.rpgGame.netData.guildWar.message.ResGuildWarOperateResultMessage;
 	import com.rpgGame.netData.guildWar.message.ResGuildWarOreInfoMessage;
 	import com.rpgGame.netData.guildWar.message.ResGuildWarOrePositionMessage;
@@ -24,7 +27,7 @@ package com.rpgGame.app.cmdlistener
 	import org.game.netCore.connection.SocketConnection;
 	
 	/**
-	 *
+	 *帮派战消息处理
 	 *@author dik
 	 *2017-7-4
 	 **/
@@ -49,8 +52,14 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(253110, getResGuildWarCityBriefnessInfoMessage);
 			SocketConnection.addCmdListener(253111, getResGuildWarOrePositionMessage);
 			SocketConnection.addCmdListener(253112, getResGuildWarResultMessage);
+			SocketConnection.addCmdListener(253113, getResGuildWarLeaderSkillUseMessage);
 			
 			finish();
+		}
+		
+		private function getResGuildWarLeaderSkillUseMessage(msg:ResGuildWarLeaderSkillUseMessage):void
+		{
+			AppManager.showAppNoHide(AppConstant.GUILD_LEADER_SKILL_NOTICE,msg);
 		}
 		
 		private function getResGuildWarResultMessage(msg:ResGuildWarResultMessage):void
@@ -98,7 +107,11 @@ package com.rpgGame.app.cmdlistener
 		
 		private function getResGuildWarOperateResultMessage(msg:ResGuildWarOperateResultMessage):void
 		{
-			
+			switch(msg.opaque){
+				case OpaqueEnum.GUILDWAR_GIFT:
+					GuildWarSender.reqGuildWarCityInfo();//领取帮会战奖励成功之后
+					break;
+			}
 		}
 		
 		private function getResGuildWarCityInfoMessage(msg:ResGuildWarCityInfoMessage):void

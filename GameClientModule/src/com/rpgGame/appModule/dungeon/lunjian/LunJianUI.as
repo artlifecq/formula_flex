@@ -3,6 +3,7 @@ package com.rpgGame.appModule.dungeon.lunjian
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.ui.common.PageContainerUI;
 	import com.rpgGame.app.ui.tab.ViewUI;
+	import com.rpgGame.core.events.AvatarEvent;
 	import com.rpgGame.core.events.DungeonEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;

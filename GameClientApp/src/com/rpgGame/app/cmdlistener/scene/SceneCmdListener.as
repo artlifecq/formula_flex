@@ -4,7 +4,6 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.game.engine3D.vo.BaseObj3D;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
-	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.manager.CharAttributeManager;
@@ -219,7 +218,7 @@ package com.rpgGame.app.cmdlistener.scene
 		{
 			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;			
 			if(role){
-				(role.data as HeroData).faction=msg.faction;
+				(role.data as RoleData).faction=msg.faction;
 			}
 		}
 		

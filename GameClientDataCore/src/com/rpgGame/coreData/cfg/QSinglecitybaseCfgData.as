@@ -1,5 +1,6 @@
 package com.rpgGame.coreData.cfg
 {
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.coreData.clientConfig.Q_singlecitybase;
 	
 	import flash.utils.ByteArray;
@@ -37,6 +38,28 @@ package com.rpgGame.coreData.cfg
 		public static function getCityCfg(cityID:int):Q_singlecitybase
 		{
 			return _typeMap.getValue(cityID);
+		}
+		
+		/**
+		 * 通过配置和阵营获取上交位置
+		 * @param cfg
+		 * @param camp
+		 * @return 
+		 * 
+		 */
+		public static function getSubmitPoint(cfg:Q_singlecitybase,camp:int):Array
+		{
+			var result:Array;
+			var points:Array=JSONUtil.decode(cfg.q_submit_point);
+			if(!points){
+				return result;
+			}
+			for(var i:int=0;i<points.length;i++){
+				if(points[i][2]==camp){
+					result=points[i];
+				}
+			}
+			return result;
 		}
 	}
 }
