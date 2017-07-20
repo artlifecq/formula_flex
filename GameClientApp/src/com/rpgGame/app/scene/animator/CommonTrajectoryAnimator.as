@@ -8,13 +8,17 @@ package com.rpgGame.app.scene.animator
 	import com.game.engine3D.vo.BaseObj3D;
 	import com.game.mainCore.libCore.utils.ZMath;
 	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
+	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.animat.EffectAnimationCfgData;
 	import com.rpgGame.coreData.clientConfig.EffectAnimation;
+	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
+	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
@@ -110,7 +114,7 @@ package com.rpgGame.app.scene.animator
 		 * 施法者当前的位置与施法者身上骨骼当前位置得   偏移量
 		 */		
 		private var _offsetDest : Vector3D;
-		
+
 		public function CommonTrajectoryAnimator(spellInfo : ReleaseSpellInfo, targetPos : Vector3D, targetRole : SceneRole, 
 												 totalTime : int, speed : int, isTrackTarget : Boolean, matchTerrain : Boolean, 
 												 isFlyCross : Boolean, isAdaptiveTargetHeight : Boolean, moveDelay : int, 
@@ -133,7 +137,7 @@ package com.rpgGame.app.scene.animator
 			
 			_throwHeight = throwHeight;
 			_throwWeightRatio = throwWeightRatio;
-			
+		
 			_isMoving = false;
 			_isPlaying = false;
 		}
@@ -264,7 +268,18 @@ package com.rpgGame.app.scene.animator
 			_locusPoints.push(locusPoint);
 			return locusPoint;
 		}
-		
+		private function getTargetPos():Vector3D
+		{
+			var pt:Vector3D=new Vector3D();
+			if (_targetRole && _targetRole.usable)
+			{
+				if (_matchTerrain)
+					pt.setTo(_targetRole.x, 0, _targetRole.z);
+				else
+					pt.setTo(_targetRole.x, _targetRole.y, _targetRole.z);
+			}
+			return pt;
+		}
 		/**
 		 *  
 		 * @param isReached 是否一定要把策划填的总得飞行时间，飞完---此值受isflycross影响。技能基础表的q_is_fly_cross字段来控制
@@ -285,6 +300,7 @@ package com.rpgGame.app.scene.animator
 			POINT_2.setTo(_targetPos.x, _targetPos.z);
 			var angle : Number = ZMath.getTowPointsAngle(POINT_1, POINT_2);
 			var dist : Number = MathUtil.getDistance(POINT_1.x, POINT_1.y, POINT_2.x, POINT_2.y);
+			
 			_collideTime = dist / (_speed * 0.001);//到目标点所需要的时间，根据速度算出来的
 			_renderSet.rotationY = 270 - angle;
 			
@@ -301,7 +317,7 @@ package com.rpgGame.app.scene.animator
 			_startTime = getTimer();
 			_lastTime = _startTime;
 			_lastUpdateTime = _startTime;
-			
+			//TweenLite.killTweensOf(_renderSet);
 			if (isReached)
 			{
 				if (_matchTerrain)
@@ -346,7 +362,12 @@ package com.rpgGame.app.scene.animator
 						else
 						{
 							//这个控制飞向目标点的
-							TweenLite.to(_renderSet, hitTime * 0.001, {x: _endPosX, z: _endPosZ, ease: Linear.easeNone, overwrite: 0, onUpdate: onUpdateAnimation, onComplete: onReachRemoveEffect});
+							var varObj:Object={x: _endPosX, z: _endPosZ, ease: Linear.easeNone, overwrite: 0, onUpdate: onUpdateAnimation, onComplete: onReachRemoveEffect,onUpdateParams:[POINT_2.x,POINT_2.y]};
+							if (_isTrackTarget&&_locusPointIndex==1) 
+							{
+								varObj.bezierThrough=[{x:(_endPosX+locusPoint.position.x)/2,z:(_endPosZ+locusPoint.position.z)/2+200*(1-Math.random()*2)}];
+							}
+							TweenLite.to(_renderSet, hitTime * 0.001, varObj);
 							var scene : GameScene3D;
 							var currThrowHeight : int;
 							if (_throwHeight > 0)
@@ -398,8 +419,9 @@ package com.rpgGame.app.scene.animator
 				_renderSet.y = _endPosY;
 				_renderSet.offsetY = _endOffsetY;
 				_renderSet.rotationX = _endRotationX;
-				onUpdateAnimation();
-				
+				//onUpdateAnimation();
+				var effectCfg : EffectAnimation;
+				effectCfg = EffectAnimationCfgData.getInfo(_renderUnit.renderParamData.sourceName);
 				if (_isFlyCross)
 				{
 					_isTrackTarget = false;
@@ -410,7 +432,7 @@ package com.rpgGame.app.scene.animator
 					stopAnimation();
 					if (_renderUnit)
 					{
-						var effectCfg : EffectAnimation = EffectAnimationCfgData.getInfo(_renderUnit.renderParamData.sourceName);
+						
 						if (effectCfg && effectCfg.dissipateTime > 0)
 						{
 							var childNames : Array = effectCfg.collideHideNodes.split(";");
@@ -430,6 +452,14 @@ package com.rpgGame.app.scene.animator
 						onRemoveRender();
 					}
 				}
+				if (effectCfg&&effectCfg.hitEffect!=0) 
+				{
+					var qAni:Q_SpellAnimation=AnimationDataManager.getData(effectCfg.hitEffect);
+					if (qAni.scene_res) 
+					{
+						SpellAnimationHelper.createSceneEffect(qAni.scene_res,1,SceneCharType.SCENE_DEST_EFFECT,_endPosX,_endPosZ);
+					}
+				}
 			}
 		}
 		
@@ -441,7 +471,7 @@ package com.rpgGame.app.scene.animator
 			}
 		}
 		
-		protected function onUpdateAnimation() : void
+		protected function onUpdateAnimation(...arg) : void
 		{
 			if (_renderSet && _renderSet.usable)
 			{
@@ -465,6 +495,12 @@ package com.rpgGame.app.scene.animator
 					dist = MathUtil.getDistance(_renderSet.x, _renderSet.z, _lastPos.x, _lastPos.z);
 					_renderSet.rotationX = dist > 0 ? Math.atan((_renderSet.y - _lastPos.y) / dist) * 57.33 : 0;
 				}
+				else if (_isTrackTarget) 
+				{
+					//dist = MathUtil.getDistance(_renderSet.x, _renderSet.z, _lastPos.x, _lastPos.z);
+//					_renderSet.rotationX = dist > 0 ? Math.atan((_renderSet.y - _lastPos.y) / dist) * 57.33 : 0;
+					_renderSet.rotationX =Math.atan2(_renderSet.z-_lastPos.z,_renderSet.x-_lastOffset.x);
+				}
 				_lastPos.setTo(_renderSet.x, _renderSet.y, _renderSet.z);
 				_lastOffset.setTo(_renderSet.offsetX, _renderSet.offsetY, _renderSet.offsetZ);
 				
@@ -472,6 +508,16 @@ package com.rpgGame.app.scene.animator
 				{
 					if (currTime - _lastUpdateTime >= UPDATE_DELAY)
 					{
+						//有参数
+						if (arg.length==2) 
+						{
+							var tarPt:Vector3D=getTargetPos();
+							//位置没更新
+							if (tarPt.x==arg[0]&&tarPt.z==arg[1]) 
+							{
+								return;
+							}
+						}
 						updateMove();
 						_lastUpdateTime = currTime;
 					}
@@ -544,6 +590,7 @@ package com.rpgGame.app.scene.animator
 			_isPlaying = false;
 			_spellInfo = null;
 			_offsetDest = null;
+			
 		}
 	}
 }

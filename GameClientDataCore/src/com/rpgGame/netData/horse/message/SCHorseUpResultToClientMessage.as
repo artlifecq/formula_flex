@@ -8,7 +8,7 @@ package com.rpgGame.netData.horse.message{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * 发送升阶结果信息
+	 * 发送升阶结果信息消息
 	 */
 	public class SCHorseUpResultToClientMessage extends Message {
 	
@@ -17,6 +17,9 @@ package com.rpgGame.netData.horse.message{
 		
 		//本次升阶后的祝福值
 		private var _exp: int;
+		
+		//增加的次数
+		private var _count: int;
 		
 		
 		/**
@@ -27,6 +30,8 @@ package com.rpgGame.netData.horse.message{
 			writeByte(_isSuccess);
 			//本次升阶后的祝福值
 			writeInt(_exp);
+			//增加的次数
+			writeInt(_count);
 			return true;
 		}
 		
@@ -38,6 +43,8 @@ package com.rpgGame.netData.horse.message{
 			_isSuccess = readByte();
 			//本次升阶后的祝福值
 			_exp = readInt();
+			//增加的次数
+			_count = readInt();
 			return true;
 		}
 		
@@ -77,6 +84,21 @@ package com.rpgGame.netData.horse.message{
 		 */
 		public function set exp(value: int): void{
 			this._exp = value;
+		}
+		
+		/**
+		 * get 增加的次数
+		 * @return 
+		 */
+		public function get count(): int{
+			return _count;
+		}
+		
+		/**
+		 * set 增加的次数
+		 */
+		public function set count(value: int): void{
+			this._count = value;
 		}
 		
 	}

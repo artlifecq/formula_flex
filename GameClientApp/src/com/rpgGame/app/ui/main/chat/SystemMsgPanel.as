@@ -52,7 +52,7 @@ package com.rpgGame.app.ui.main.chat
 		
 		private function initEvent():void
 		{
-			_skin.tab_zizhi.addEventListener(Event.SELECT,onSelected);
+//			_skin.tab_zizhi.addEventListener(Event.SELECT,onSelected);
 			ChatManager.sysHearsayMsgChange=onSendSuccess;
 		}
 		
@@ -68,21 +68,21 @@ package com.rpgGame.app.ui.main.chat
 			}
 		}
 		
-		private function onSelected(e:Event=null):void
-		{
-			switch(_skin.tab_zizhi.selectedIndex){
-				case 0:
-					_showDatas=ChatManager.systemHearsayMsg;
-					break;
-				case 1:
-					_showDatas=ChatManager.hearsayMsg;
-					break;
-				case 2:
-					_showDatas=ChatManager.systemMsg;
-					break;
-			}
-			updateTxt();
-		}
+//		private function onSelected(e:Event=null):void
+//		{
+//			switch(_skin.tab_zizhi.selectedIndex){
+//				case 0:
+//					_showDatas=ChatManager.systemHearsayMsg;
+//					break;
+//				case 1:
+//					_showDatas=ChatManager.hearsayMsg;
+//					break;
+//				case 2:
+//					_showDatas=ChatManager.systemMsg;
+//					break;
+//			}
+//			updateTxt();
+//		}
 		
 		private function updateTxt():void
 		{
@@ -126,7 +126,6 @@ package com.rpgGame.app.ui.main.chat
 			layout.gap = 1;
 			layout.hasVariableItemDimensions = true;
 			_skin.msg_list.layout = layout;
-			this._skin.titleDisplay.y=12;
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
@@ -141,7 +140,7 @@ package com.rpgGame.app.ui.main.chat
 		override public function hide():void
 		{
 			super.hide();
-			_skin.tab_zizhi.removeEventListener(Event.SELECT,onSelected);
+//			_skin.tab_zizhi.removeEventListener(Event.SELECT,onSelected);
 			ChatManager.sysHearsayMsgChange=null;
 		}
 		

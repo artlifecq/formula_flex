@@ -49,7 +49,7 @@ package org.mokylin.skin.mainui.head.button
 						}
 					]
 			};
-			skinNames={"down":"ui/mainui/head/di.png", "hover":"ui/mainui/head/di.png", "up":"ui/common/hover/xuanqukuang2_alpha.png"};
+			skinNames={"down":"ui/mainui/head/mode/di.png", "hover":"ui/mainui/head/mode/di.png", "up":"ui/common/hover/xuanqukuang2_alpha.png"};
 		}
 
 

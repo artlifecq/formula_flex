@@ -26,10 +26,11 @@ package com.rpgGame.appModule.pet.sub
 			if (nextArrId!=0) 
 			{
 				var nextHash:HashMap=AttValueConfig.getAttrHash(nextArrId);
-				if (!nextHash) 
-				{
-					nextHash=attrHash;
-				}
+				
+			}
+			if (!nextHash) 
+			{
+				nextHash=attrHash;
 			}
 			var keys:Array=attrHash.keys();
 			var len:int=keys.length;

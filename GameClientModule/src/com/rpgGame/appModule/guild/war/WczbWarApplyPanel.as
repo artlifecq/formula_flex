@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.guild.war
 {
+	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.sender.GuildWarSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.ui.common.PageContainerUI;
@@ -27,9 +28,7 @@ package com.rpgGame.appModule.guild.war
 	{
 		private var _skin:ZhengBaBaoMing;
 		private var pageContainer:PageContainerUI;
-
-		private var applayCityId:int;
-		
+		private var applyCityId:int;
 		public function WczbWarApplyPanel()
 		{
 			_skin=new ZhengBaBaoMing();
@@ -74,7 +73,6 @@ package com.rpgGame.appModule.guild.war
 			super.show(data,openTable,parentContiner);
 			initEvent();
 			GuildWarSender.reqGuildWarCityApplyInfo(1);			
-			applayCityId=data;
 			TimerServer.addLoop(updateTime,1000,null,0);
 		}
 		
@@ -99,12 +97,20 @@ package com.rpgGame.appModule.guild.war
 		{
 			var index:int=-1;
 			var num:int=_skin.List.dataProvider.length;
+			var myGuildId:String;
+			if(GuildManager.instance().haveGuild){
+				myGuildId=GuildManager.instance().guildData.id.hexValue;
+			}
 			for(var i:int=0;i<num;i++){
 				var obj:Object=_skin.List.dataProvider.getItemAt(i);
 				if(obj.info.id==msg.cityId){
 					obj.info.curMaxPriceGuildId=msg.guildId;
 					obj.info.curMaxPriceGuildName=msg.guildName;
 					obj.info.curMaxPrice=msg.price;
+					if(msg.guildId.hexValue==myGuildId){
+						obj.applayCityId=msg.cityId;
+						GuildWarSender.reqGuildWarCityInfo();
+					}
 					index=i;
 					break;
 				}
@@ -119,8 +125,9 @@ package com.rpgGame.appModule.guild.war
 			_skin.List.dataProvider.removeAll();
 			var i:int;
 			var num:int=msg.citys.length;
+			applyCityId=msg.applyCityId;
 			for(i=0;i<num;i++){
-				_skin.List.dataProvider.addItem({info:msg.citys[i],applayCityId:applayCityId});
+				_skin.List.dataProvider.addItem({info:msg.citys[i],applayCityId:msg.applyCityId});
 			}
 		}
 	}

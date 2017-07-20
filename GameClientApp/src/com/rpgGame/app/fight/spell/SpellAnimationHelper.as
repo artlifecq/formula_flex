@@ -802,7 +802,7 @@ package com.rpgGame.app.fight.spell
             {
                 //						var scene : GameScene3D = SceneManager.getScene();
                 //						var posY : Number = scene.sceneMapLayer.queryHeightAt(info.atkorPos.x, info.atkorPos.y);
-                var posY:Number = 0;//2.5d没有高度值，因为只有2维的，默认为0
+                var posY:Number = info.atkorPos.y;//2.5d没有高度值，因为只有2维的，默认为0
                 atkorPosition = new Vector3D(info.atkorPos.x, posY, info.atkorPos.y);
                 atkorRotationY = info.releaseAngle;
                 destPosition = new Vector3D(info.atkorPos.x, posY, info.atkorPos.y);

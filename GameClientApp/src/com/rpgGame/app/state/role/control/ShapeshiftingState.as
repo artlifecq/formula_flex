@@ -70,7 +70,7 @@ package com.rpgGame.app.state.role.control
 						heroData.avatarInfo.deputyWeaponEffectOffset = new Vector3D(deputyWeaponRes.effectOffsetX, deputyWeaponRes.effectOffsetY, deputyWeaponRes.effectOffsetZ);
 					}
 
-					AvatarManager.updateAvatar(role,false);
+					AvatarManager.updateAllPart(role,false);
                     if (role.isMainChar)
 					{
                         ShortcutsManger.getInstance().replaceToTempSpellByVector(MainRoleManager.actorInfo.spellList.getShortcutSpellList());
@@ -87,8 +87,7 @@ package com.rpgGame.app.state.role.control
 			if (_machine && !_machine.isInPool)
 			{
 				var role : SceneRole = _machine.owner as SceneRole;
-				//AvatarManager.updateAvatar(role);
-				AvatarManager.callEquipmentChange(role);
+				AvatarManager.resetAvatar(role);
                 if (role.isMainChar)
 				{
                     ShortcutsManger.getInstance().reset();

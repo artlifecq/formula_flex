@@ -32,8 +32,8 @@ package org.mokylin.skin.mainui.head
 			super();
 			
 			this.currentState = "normal";
-			this.height = 24;
-			this.width = 332;
+			this.height = 28;
+			this.width = 248;
 			this.elementsContent = [btn_Select_i(),labelDisplay_i(),Icon_heping_i()];
 			
 			states = {
@@ -52,7 +52,7 @@ package org.mokylin.skin.mainui.head
 			temp.name = "Icon_heping";
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/mainui/head/button/skin_heping/up.png";
+			temp.styleName = "ui/mainui/head/mode/he.png";
 			temp.x = 4;
 			temp.y = 2;
 			return temp;
@@ -63,9 +63,9 @@ package org.mokylin.skin.mainui.head
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_Select = temp;
 			temp.name = "btn_Select";
-			temp.height = 24;
+			temp.height = 28;
 			temp.styleClass = org.mokylin.skin.mainui.head.button.ButtonSelect;
-			temp.width = 332;
+			temp.width = 248;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -76,14 +76,14 @@ package org.mokylin.skin.mainui.head
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			labelDisplay = temp;
 			temp.name = "labelDisplay";
+			temp.htmlText = "<font color='#00ff33'>【和平】</font>不会对任何玩家招财伤害</font>";
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.letterSpacing = 0;
-			temp.text = "【和平模式】您的攻击不会对任何玩家招财伤害";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 27;
-			temp.y = 3;
+			temp.x = 25;
+			temp.y = 6;
 			return temp;
 		}
 

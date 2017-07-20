@@ -191,7 +191,7 @@ package org.mokylin.skin.mainui.renwu
 			pri_ico0 = temp;
 			temp.name = "pri_ico0";
 			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 101;
+			temp.x = 20;
 			temp.y = 194;
 			return temp;
 		}
@@ -332,7 +332,6 @@ package org.mokylin.skin.mainui.renwu
 			primary_box = temp;
 			temp.name = "primary_box";
 			temp.height = 335;
-			temp.visible = false;
 			temp.width = 253;
 			temp.x = 0;
 			temp.y = 0;
@@ -372,8 +371,6 @@ package org.mokylin.skin.mainui.renwu
 			sec_ico1_0 = temp;
 			temp.name = "sec_ico1_0";
 			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.width = 48;
-			temp.height = 48;
 			temp.x = 19;
 			temp.y = 77;
 			return temp;
@@ -600,6 +597,7 @@ package org.mokylin.skin.mainui.renwu
 			secondary_box = temp;
 			temp.name = "secondary_box";
 			temp.height = 335;
+			temp.visible = false;
 			temp.width = 253;
 			temp.x = 0;
 			temp.y = 0;

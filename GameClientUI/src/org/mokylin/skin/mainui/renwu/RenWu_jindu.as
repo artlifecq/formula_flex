@@ -4,6 +4,7 @@ package org.mokylin.skin.mainui.renwu
 	import feathers.controls.Label;
 	import feathers.controls.ProgressBar;
 	import feathers.controls.StateSkin;
+	import feathers.controls.UIAsset;
 	import org.mokylin.skin.component.progress.pro_renwu;
 
 	/**
@@ -30,8 +31,8 @@ package org.mokylin.skin.mainui.renwu
 			
 			this.currentState = "normal";
 			this.height = 20;
-			this.width = 215;
-			this.elementsContent = [pro_jindu_i(),labelDisplay_i()];
+			this.width = 196;
+			this.elementsContent = [__RenWu_jindu_UIAsset1_i(),pro_jindu_i(),labelDisplay_i()];
 			
 			states = {
 			};
@@ -42,15 +43,27 @@ package org.mokylin.skin.mainui.renwu
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
+		private function __RenWu_jindu_UIAsset1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/component/progress/skin_renwu/jdt_di.png";
+			temp.width = 196;
+			temp.x = 0;
+			temp.y = 1;
+			return temp;
+		}
+
 		private function labelDisplay_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			labelDisplay = temp;
 			temp.name = "labelDisplay";
-			temp.text = "100%";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 182;
+			temp.text = "80%";
+			temp.textAlign = "center";
+			temp.color = 0xEEEEEE;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.width = 57;
+			temp.x = 71;
 			temp.y = 0;
 			return temp;
 		}
@@ -63,9 +76,9 @@ package org.mokylin.skin.mainui.renwu
 			temp.height = 10;
 			temp.styleClass = org.mokylin.skin.component.progress.pro_renwu;
 			temp.value = 80;
-			temp.width = 177;
-			temp.x = 0;
-			temp.y = 4;
+			temp.width = 178;
+			temp.x = 9;
+			temp.y = 5;
 			return temp;
 		}
 

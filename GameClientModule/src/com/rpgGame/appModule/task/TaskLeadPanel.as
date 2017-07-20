@@ -53,7 +53,6 @@ package com.rpgGame.appModule.task
 		
 		private function init():void
 		{
-			titleLabel=_skin.lbl_title;
 			nameLabel=_skin.lb_name;
 			navLabel=_skin.lb_jiangli;
 			speakLabel=_skin.lb_speak;
@@ -64,11 +63,6 @@ package com.rpgGame.appModule.task
 			
 			/*icoBgList=new Vector.<UIAsset>();
 			icoBgList.push(_skin.ioc_0);
-			icoBgList.push(_skin.ioc_1);
-			icoBgList.push(_skin.ioc_2);
-			icoBgList.push(_skin.ioc_3);
-			icoBgList.push(_skin.ioc_4);
-			icoBgList.push(_skin.ioc_5);
 
 			icoList=new Vector.<IconCDFace>();
 			var i:int;

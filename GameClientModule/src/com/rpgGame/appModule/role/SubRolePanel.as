@@ -9,7 +9,6 @@ package com.rpgGame.appModule.role
 	import org.mokylin.skin.app.beibao.juese_Skin;
 	
 	import starling.display.DisplayObject;
-	import starling.events.TouchEvent;
 	
 	public class SubRolePanel extends ViewUI 
 	{
@@ -57,11 +56,6 @@ package com.rpgGame.appModule.role
 			packsView=new PacksView(_stateSkin as juese_Skin);			
 			attConstrastView=new AttContrastView(_stateSkin as juese_Skin);
 		}
-		override protected function onTouch(e:TouchEvent):void
-		{
-			super.onTouch(e);
-			avatarView.onTouch(e);
-		}
 		private function showCompareData(data:*):void
 		{
 			_roleData=data.roleData as HeroData;
@@ -77,10 +71,6 @@ package com.rpgGame.appModule.role
 			super.onTouchTarget(target);
 			
 			if(packsView.onTouchTarget(target)){
-				return;
-			}
-			
-			if(avatarView.onTouchTarget(target)){
 				return;
 			}
 		}

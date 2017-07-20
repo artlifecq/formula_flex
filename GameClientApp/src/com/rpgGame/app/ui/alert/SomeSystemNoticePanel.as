@@ -60,7 +60,7 @@ package com.rpgGame.app.ui.alert
 				}
 				case SYS_ZHANQI:
 				{
-					url="ui/common/icon/erjikuang/zuoqijinjie.png";
+					url="ui/common/icon/erjikuang/zhanqijinjie.png";
 					break;
 				}
 				default:

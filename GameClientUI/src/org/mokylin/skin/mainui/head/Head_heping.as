@@ -14,6 +14,15 @@ package org.mokylin.skin.mainui.head
 	 */
 	public class Head_heping extends feathers.controls.StateSkin
 	{
+		//==========================================================================
+		//                                定义成员变量
+		//==========================================================================
+		public var Icon_heping:feathers.controls.UIAsset;
+
+		public var btn_Select:feathers.controls.Button;
+
+		public var labelDisplay:feathers.controls.Label;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -23,7 +32,9 @@ package org.mokylin.skin.mainui.head
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [__Head_heping_Button1_i(),__Head_heping_Label1_i(),__Head_heping_UIAsset1_i()];
+			this.height = 34;
+			this.width = 332;
+			this.elementsContent = [btn_Select_i(),labelDisplay_i(),Icon_heping_i()];
 			
 			states = {
 			};
@@ -34,37 +45,45 @@ package org.mokylin.skin.mainui.head
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __Head_heping_Button1_i():feathers.controls.Button
+		private function Icon_heping_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			Icon_heping = temp;
+			temp.name = "Icon_heping";
+			temp.touchable = false;
+			temp.touchGroup = true;
+			temp.styleName = "ui/mainui/head/mode/he.png";
+			temp.x = 4;
+			temp.y = 2;
+			return temp;
+		}
+
+		private function btn_Select_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btn_Select = temp;
+			temp.name = "btn_Select";
+			temp.height = 34;
 			temp.styleClass = org.mokylin.skin.mainui.head.button.ButtonSelect;
+			temp.width = 332;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
 
-		private function __Head_heping_Label1_i():feathers.controls.Label
+		private function labelDisplay_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
+			labelDisplay = temp;
+			temp.name = "labelDisplay";
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.letterSpacing = 0;
 			temp.text = "【和平模式】您的攻击不会对任何玩家招财伤害";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 27;
-			temp.y = 3;
-			return temp;
-		}
-
-		private function __Head_heping_UIAsset1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.touchable = false;
-			temp.touchGroup = false;
-			temp.styleName = "ui/mainui/head/button/skin_heping/up.png";
-			temp.x = 4;
-			temp.y = 2;
+			temp.x = 33;
+			temp.y = 9;
 			return temp;
 		}
 

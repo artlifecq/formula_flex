@@ -77,12 +77,12 @@ package com.rpgGame.appModule.guild.war
 			if(_skin){
 				var info:GuildWarCityApplyInfo=_data.info as GuildWarCityApplyInfo;
 				skin.lbCityName.text=info.name;
-				skin.lbTeamName1.text=info.occupyGuildName&&info.occupyGuildName.length!=0?info.curMaxPriceGuildName:"无";
+				skin.lbTeamName1.text=info.occupyGuildName&&info.occupyGuildName.length!=0?info.occupyGuildName:"无";
 				skin.lbTeamName2.text=info.curMaxPriceGuildName&&info.curMaxPriceGuildName.length!=0?info.curMaxPriceGuildName:"无";
 				skin.lbJiage.text=info.curMaxPrice.toString();
 				_leftTime=info.overTime;
 				skin.lbTime.text=TimeUtil.format3TimeType(_leftTime);
-				if(info.id==_data.applayCityId){
+				if(info.id==_data.applayCityId||_data.applayCityId==-1){
 					GrayFilter.unGray(skin.btnPai);
 				}else{
 					GrayFilter.gray(skin.btnPai);
@@ -93,6 +93,7 @@ package com.rpgGame.appModule.guild.war
 		public function updateTime():void
 		{
 			_leftTime--;
+			_data.info.overTime=_leftTime;
 			if(_leftTime<0){//竞拍结束自动关闭
 				AppManager.hideApp(AppConstant.GUILD_WCZB_APPLY);
 				return;
