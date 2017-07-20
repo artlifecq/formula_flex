@@ -98,6 +98,8 @@ package com.rpgGame.coreData.enum
 		public static const EM_AllCOMBATPOWERRANK:String="350";
 		/** 巅峰对决排行榜 **/
 		public static const EM_ALLDUIJUERANK:String="351";
+		/** 模拜 **/
+		public static const EM_WORSHIP:String="360";
 		
 	}
 }

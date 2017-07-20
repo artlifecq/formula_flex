@@ -6,7 +6,6 @@ package com.rpgGame.app.display3D
 	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.AvatarInfo;
-	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
