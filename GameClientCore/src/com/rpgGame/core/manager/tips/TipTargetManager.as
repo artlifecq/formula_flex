@@ -1,15 +1,16 @@
 package com.rpgGame.core.manager.tips
 {
 	import com.rpgGame.core.view.ui.tip.implement.IBaseTipsInfo;
-
+	
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
-
+	
+	import away3d.events.Event;
+	
 	import org.client.mainCore.ds.HashMap;
-
+	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
-	import away3d.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -101,6 +102,14 @@ package com.rpgGame.core.manager.tips
 		public static function hasTipsEventListener(target : DisplayObject) : Boolean
 		{
 			return _tipDatas.containsKey(target);
+		}
+		
+		public static function getTiipsByTarget(target:DisplayObject):*
+		{
+			if(_tipDatas.containsKey(target))
+				return IBaseTipsInfo(_tipDatas.getValue(target)).getData();
+			else
+				return null;
 		}
 
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

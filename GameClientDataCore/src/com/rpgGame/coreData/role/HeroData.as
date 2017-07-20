@@ -132,6 +132,8 @@ package com.rpgGame.coreData.role
 		
 		public var loginDay:int = 0;
 		
+		public var topLeaderTypes: Vector.<int>;
+		
 		public function HeroData(priority:int=100)
 		{
 			super(RoleType.TYPE_HERO,priority);
@@ -386,6 +388,7 @@ package com.rpgGame.coreData.role
 			data.curExp=heroInfo.exp.fValue;
 			data.guildMemberType = heroInfo.guildMemberType;
 			data.guildName = heroInfo.guildName;
+			data.topLeaderTypes = heroInfo.topLeaderTypes;
 			
 			///角色属性信息
 			data.totalStat.setData(heroInfo.attributes);
@@ -467,6 +470,7 @@ package com.rpgGame.coreData.role
 			data.junjieLv=info.junJieId;
 			data.zhanqiLv=info.warflag;
 			data.baowuLv=info.convoy;
+			data.topLeaderTypes = info.topLeaderTypes;
 			data.totalStat.setData(info.attributes);
 			
 			//			data.hp = info.hp;

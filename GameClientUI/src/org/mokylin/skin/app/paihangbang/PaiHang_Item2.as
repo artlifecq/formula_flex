@@ -40,7 +40,7 @@ package org.mokylin.skin.app.paihangbang
 			this.currentState = "normal";
 			this.height = 30;
 			this.width = 546;
-			this.elementsContent = [icon_i(),vip_i(),lbName_i(),lbLevel_i(),lbZhiye_i(),lbContent_i(),lbNum_i()];
+			this.elementsContent = [__PaiHang_Item2_UIAsset1_i(),icon_i(),vip_i(),lbName_i(),lbLevel_i(),lbZhiye_i(),lbContent_i(),lbNum_i()];
 			
 			states = {
 			};
@@ -51,6 +51,16 @@ package org.mokylin.skin.app.paihangbang
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
+		private function __PaiHang_Item2_UIAsset1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/paihangbang/list.png";
+			temp.width = 546;
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
 		private function icon_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();

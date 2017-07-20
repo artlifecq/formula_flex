@@ -2,12 +2,12 @@ package org.mokylin.skin.app.paihangbang
 {
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
+	import feathers.controls.Group;
 	import feathers.controls.Label;
 	import feathers.controls.List;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.app.paihangbang.PaiHang_Dengji;
 	import org.mokylin.skin.common.TongYongPanelbg1;
 	import org.mokylin.skin.component.button.ButtonSkin_jiantou2;
 
@@ -27,11 +27,11 @@ package org.mokylin.skin.app.paihangbang
 
 		public var btnPrev:feathers.controls.Button;
 
+		public var content:feathers.controls.Group;
+
 		public var lbmsg:feathers.controls.Label;
 
 		public var list:feathers.controls.List;
-
-		public var skinContent:feathers.controls.SkinnableContainer;
 
 
 		//==========================================================================
@@ -44,7 +44,7 @@ package org.mokylin.skin.app.paihangbang
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [bg_i(),__PaiHangBang_Skin_UIAsset1_i(),__PaiHangBang_Skin_UIAsset2_i(),__PaiHangBang_Skin_UIAsset3_i(),list_i(),btnPrev_i(),btnNext_i(),lbmsg_i(),__PaiHangBang_Skin_UIAsset4_i(),skinContent_i()];
+			this.elementsContent = [bg_i(),__PaiHangBang_Skin_UIAsset1_i(),__PaiHangBang_Skin_UIAsset2_i(),__PaiHangBang_Skin_UIAsset3_i(),list_i(),btnPrev_i(),btnNext_i(),lbmsg_i(),__PaiHangBang_Skin_UIAsset4_i(),content_i()];
 			
 			states = {
 			};
@@ -136,6 +136,18 @@ package org.mokylin.skin.app.paihangbang
 			return temp;
 		}
 
+		private function content_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			content = temp;
+			temp.name = "content";
+			temp.height = 522;
+			temp.width = 766;
+			temp.x = 173;
+			temp.y = 69;
+			return temp;
+		}
+
 		private function lbmsg_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -160,20 +172,6 @@ package org.mokylin.skin.app.paihangbang
 			temp.width = 149;
 			temp.x = 22;
 			temp.y = 109;
-			return temp;
-		}
-
-		private function skinContent_i():feathers.controls.SkinnableContainer
-		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			skinContent = temp;
-			temp.name = "skinContent";
-			temp.height = 522;
-			var skin:StateSkin = new org.mokylin.skin.app.paihangbang.PaiHang_Dengji()
-			temp.skin = skin
-			temp.width = 766;
-			temp.x = 173;
-			temp.y = 69;
 			return temp;
 		}
 
