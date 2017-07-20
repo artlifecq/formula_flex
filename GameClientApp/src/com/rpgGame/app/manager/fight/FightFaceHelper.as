@@ -18,6 +18,7 @@ package com.rpgGame.app.manager.fight
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.role.RoleData;
+	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.EnumHurtType;
 	import com.rpgGame.netData.player.bean.AttributeItem;
 	
@@ -585,6 +586,11 @@ package com.rpgGame.app.manager.fight
 			for (var i:int = 0; i <len; i++) 
 			{
 				key=keys[i];
+				//移动速度不显示
+				if (CharAttributeType.SPEED==key) 
+				{
+					continue;
+				}
 				val=hash.getValue(key);
 				typeRes=getAttributeUrl(key,val>0);
 				numberColor=val>0?ATTRIBUTE_USESFUL_NUM:ATTRIBUTE_HARMFUL_NUM;
