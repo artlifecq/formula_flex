@@ -18,7 +18,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_name:String;
 		 /**  身体资源 */
 		public var q_body_res:String;
-		 /**  怪物类型(1普通小怪,2精英,3BOSS 4NPC 5采集物资) */
+		 /**  怪物类型(1普通小怪,2精英,3BOSS 4NPC 5采集物资 6、排行榜雕像) */
 		public var q_monster_type:int;
 		 /**  怪物等级 */
 		public var q_level:int;
