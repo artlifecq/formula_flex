@@ -156,7 +156,7 @@ package org.mokylin.skin.mainui.head
 			temp.skin = skin
 			temp.width = 332;
 			temp.x = 5;
-			temp.y = 61;
+			temp.y = 60;
 			return temp;
 		}
 
@@ -259,7 +259,7 @@ package org.mokylin.skin.mainui.head
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grp_select = temp;
 			temp.name = "grp_select";
-			temp.height = 122;
+			temp.height = 118;
 			temp.width = 344;
 			temp.x = 38;
 			temp.y = 102;
@@ -331,7 +331,7 @@ package org.mokylin.skin.mainui.head
 			temp.skin = skin
 			temp.width = 332;
 			temp.x = 5;
-			temp.y = 88;
+			temp.y = 87;
 			return temp;
 		}
 
@@ -372,7 +372,7 @@ package org.mokylin.skin.mainui.head
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ui_select_bg = temp;
 			temp.name = "ui_select_bg";
-			temp.height = 122;
+			temp.height = 118;
 			temp.styleName = "ui/common/tips/tips_2.png";
 			temp.width = 305;
 			temp.x = 0;

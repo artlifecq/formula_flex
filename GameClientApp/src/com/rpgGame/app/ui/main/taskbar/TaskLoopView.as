@@ -77,14 +77,14 @@ package com.rpgGame.app.ui.main.taskbar
 			skinList.push(_skin.sec_killbut2_2);
 			skinList.push(_skin.sec_killbut2_3);
 			skinList.push(icoList1Group);
-			skinList.push(_skin.sec_subbut1);
+//			skinList.push(_skin.sec_subbut1);
 			skinList.push(_skin.sec_navi3);
 			skinList.push(_skin.sec_killbut3_1);
 			skinList.push(_skin.sec_killbut3_2);
 			skinList.push(_skin.sec_killbut3_3);
 			skinList.push(_skin.sec_info);
 			skinList.push(icoList2Group);
-			skinList.push(_skin.sec_subbut2);
+//			skinList.push(_skin.sec_subbut2);
 			
 			navi1=_skin.sec_navi1;
 			navi2=_skin.sec_navi2;
@@ -122,8 +122,8 @@ package com.rpgGame.app.ui.main.taskbar
 			
 			
 			extraLabel=_skin.sec_info;
-			subBut1=_skin.sec_subbut1;
-			subBut2=_skin.sec_subbut2;
+//			subBut1=_skin.sec_subbut1;
+//			subBut2=_skin.sec_subbut2;
 			
 			var ico:IconCDFace
 			/*ico1BgList=new Vector.<UIAsset>();
@@ -378,7 +378,7 @@ package com.rpgGame.app.ui.main.taskbar
 			var taskData:Q_mission_base=TaskMissionManager.dailyTaskData;
 			if(task!=null&&taskData!=null)
 			{
-				setNavView(TaskType.MAINTYPE_DAILYTASK,taskData.q_party_name,taskData.q_name,TaskMissionManager.getDailyTaskIsFinish(),navi2,subBut1);
+//				setNavView(TaskType.MAINTYPE_DAILYTASK,taskData.q_party_name,taskData.q_name,TaskMissionManager.getDailyTaskIsFinish(),navi2,subBut1);
 				TaskUtil.setGotargetInfo(taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killBut2List);
 				//TaskUtil.setRewordInfo(taskData.q_reword_id,ico1List,ico1BgList);
 				icoList1Group.setRewardByArray(TaskMissionCfgData.getRewordById(taskData.q_reword_id,MainRoleManager.actorInfo.job));
@@ -401,7 +401,7 @@ package com.rpgGame.app.ui.main.taskbar
 				ico1BgList[i].visible=false;
 				ico1List[i].visible=false;
 			}*/
-			subBut1.visible=false;
+//			subBut1.visible=false;
 		}
 		
 		/**更新支线任务显示*/
@@ -411,7 +411,7 @@ package com.rpgGame.app.ui.main.taskbar
 			var taskData:Q_mission_base=TaskMissionManager.dailyTaskData;
 			if(task!=null&&taskData!=null)
 			{
-				setNavView(TaskType.MAINTYPE_DAILYTASK,taskData.q_party_name,taskData.q_name,TaskMissionManager.getDailyTaskIsFinish(),navi2,subBut1);
+//				setNavView(TaskType.MAINTYPE_DAILYTASK,taskData.q_party_name,taskData.q_name,TaskMissionManager.getDailyTaskIsFinish(),navi2,subBut1);
 				TaskUtil.setGotargetInfo(taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killBut2List);
 				setUisite();
 			}
@@ -428,7 +428,7 @@ package com.rpgGame.app.ui.main.taskbar
 			
 			if(task!=null&&taskData!=null)
 			{
-				setNavView(TaskType.MAINTYPE_TREASUREBOX,taskData.q_party_name,taskData.q_name,TaskMissionManager.getTreasuerTaskIsFinish(),navi3,subBut2);
+//				setNavView(TaskType.MAINTYPE_TREASUREBOX,taskData.q_party_name,taskData.q_name,TaskMissionManager.getTreasuerTaskIsFinish(),navi3,subBut2);
 				TaskUtil.setGotargetInfo(taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killBut3List);
 				var reward:Object=TaskMissionManager.getTreasuerTaskExtraReward();
 				if(reward!=null)
@@ -459,7 +459,7 @@ package com.rpgGame.app.ui.main.taskbar
 				ico2List[i].visible=false;
 			}*/
 			icoList2Group.visible=false;
-			subBut2.visible=false;
+//			subBut2.visible=false;
 			extraLabel.visible=false;
 		}
 		/**更新环式任务显示*/
@@ -469,7 +469,7 @@ package com.rpgGame.app.ui.main.taskbar
 			var taskData:Q_mission_base=TaskMissionManager.treasuerTaskData;
 			if(task!=null&&taskData!=null)
 			{
-				setNavView(TaskType.MAINTYPE_TREASUREBOX,taskData.q_party_name,taskData.q_name,TaskMissionManager.getTreasuerTaskIsFinish(),navi3,subBut2);
+//				setNavView(TaskType.MAINTYPE_TREASUREBOX,taskData.q_party_name,taskData.q_name,TaskMissionManager.getTreasuerTaskIsFinish(),navi3,subBut2);
 				TaskUtil.setGotargetInfo(taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killBut3List);
 				setUisite();
 			}
@@ -592,8 +592,8 @@ package com.rpgGame.app.ui.main.taskbar
 			icoList1Group.visible=false;
 			icoList2Group.visible=false;
 			extraLabel.visible=false;
-			subBut1.visible=false;
-			subBut2.visible=false;
+//			subBut1.visible=false;
+//			subBut2.visible=false;
 			
 		}
 		/**设置UI位置*/

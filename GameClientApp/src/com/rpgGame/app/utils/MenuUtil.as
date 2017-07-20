@@ -83,6 +83,32 @@ package com.rpgGame.app.utils
 			return menus;
 		}
 		
+		/**
+		 * 获取队伍菜单 fromChat（是否是队长）
+		 * */		
+		public static function getPlayerTeamMenu(targetID:Number,fromChat:Boolean = false):Array
+		{
+			var selfMemberData : SocietyMemberData = SocietyManager.getSelfMemberData();
+			var officerDataProto : FamilyOfficerDataProto = selfMemberData ? SocietyStaticConfigData.getFamilyOfficerDataByPos(selfMemberData.societyPos) : null;
+			var menus : Array = [];
+			menus.push(LangMenu.LOOK_HERO);
+			if(fromChat)
+			{
+				menus.push(LangMenu.TRANSFER_THE_CAPTAIN);
+			}
+			menus.push(LangMenu.SI_LIAO);
+			if(GuildManager.instance().haveGuild&&GuildManager.instance().canInvite
+				&&GuildManager.instance().getGuildMemberInfoById(targetID.toString())==null)//能否邀请他人加入帮派
+			{
+				menus.push(LangMenu.INVITE_JOIN_GUILD);
+			}
+			if(fromChat)
+			{
+				menus.push(LangMenu.PLEASE_FROM_THE_TEAM);
+			}
+			return menus;
+		}
+		
 		
 		public static function getPlayerTargetGuildMenu(targetID:String,fromChat:Boolean = false):Array
 		{
@@ -122,6 +148,16 @@ package com.rpgGame.app.utils
 			{
 				menus.push(LangMenu.SETUP_LEADER);
 			}
+			return menus;
+		}
+		
+		public static function getsystemChangeLine():Array
+		{
+			var menus : Array = [];
+			menus.push(LangMenu.ONELINE);
+			menus.push(LangMenu.TOWLINE);
+			menus.push(LangMenu.THREELINE);
+			menus.push(LangMenu.FORELINE);
 			return menus;
 		}
 		
@@ -166,7 +202,21 @@ package com.rpgGame.app.utils
 			var data : Object = MenuManager.curData;
 			
 			if (data == null)
+			{
+				switch (type)
+				{
+					case LangMenu.ONELINE:
+						break;
+					case LangMenu.TOWLINE:
+						break;
+					case LangMenu.THREELINE:
+						break;
+					case LangMenu.FORELINE:
+						break;
+				}
 				return;
+			}
+			
 			
 			if (data is ClientItemInfo)
 			{
@@ -329,7 +379,7 @@ package com.rpgGame.app.utils
 					}
 					break;
 				case LangMenu.REMOVE_VICE_LEADER:
-//					GuildManager.instance.removeViceLeader();
+					//					GuildManager.instance.removeViceLeader();
 					break;
 				case LangMenu.SET_UP_VICE_LEADER:
 					if(GuildManager.instance().haveGuild&&GuildManager.instance().canNormal)

@@ -31,6 +31,9 @@ package org.mokylin.skin.component.button
 			this.height = 24;
 			this.width = 60;
 			this.elementsContent = [];
+			labelDisplay_i();
+			iconDisplay_i();
+			
 			
 			states = {
 				init:[
@@ -55,10 +58,7 @@ package org.mokylin.skin.component.button
 						}
 					]
 			};
-			skinNames={"disabled":"ui/component/button/skin_putong3/disabled.png",
-			"down":"ui/component/button/skin_putong3/down.png",
-			"hover":"ui/component/button/skin_putong3/over.png",
-			"up":"ui/component/button/skin_putong3/up.png"};
+			skinNames={"down":"ui/component/button/skin_putong3/down.png", "hover":"ui/component/button/skin_putong3/over.png", "up":"ui/component/button/skin_putong3/up.png"};
 		}
 
 

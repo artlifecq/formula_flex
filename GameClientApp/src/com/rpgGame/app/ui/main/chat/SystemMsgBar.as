@@ -115,8 +115,8 @@ package com.rpgGame.app.ui.main.chat
 		
 		private function onSendSuccess( info:ResChatMessage):void
 		{
-			//只显示系统和传闻
-			if(info.type==EnumChatChannelType.CHAT_CHANNEL_HEARSAY||info.type==EnumChatChannelType.CHAT_CHANNEL_SYSTEM){
+			//只显示系统
+			if(info.type==EnumChatChannelType.CHAT_CHANNEL_SYSTEM){
 				ChatManager.recordSystemHearsayMsg(info);
 				showChatMsg( info );	
 			}
@@ -134,7 +134,7 @@ package com.rpgGame.app.ui.main.chat
 		public function resize(w : int, h : int) : void {
 			stageW=w;
 			stageH=h;
-			this.x = w-this._skin.bg.width
+			this.x = w-this._skin.bg.width-2;
 			this.y = h - this._skin.bg.height-10;
 		}
 	}

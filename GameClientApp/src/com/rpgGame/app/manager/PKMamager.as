@@ -27,7 +27,7 @@ package com.rpgGame.app.manager
 	 */	
 	public class PKMamager
 	{
-		private static var PK_MODE_CHANG_LIMIT_TIME:int = 5*1000;
+		public static var PK_MODE_CHANG_LIMIT_TIME:int = 5*1000;
 		private static var _curPK:int;
 		public function PKMamager()
 		{
@@ -86,7 +86,7 @@ package com.rpgGame.app.manager
 			
 			if(!TimerServer.hasPassedTime(HeroSetPKMode,PK_MODE_CHANG_LIMIT_TIME))
 			{
-				NoticeManager.systemSwitchNotify("您才切换过PK模式，请稍后再试");
+				NoticeManager.mouseFollowNotify("您才切换过PK模式，请稍后再试");
 				return;
 			}
 			
@@ -94,7 +94,7 @@ package com.rpgGame.app.manager
 			{
 				if(sceneData.fixedPkMode > 0)
 				{
-					NoticeManager.systemSwitchNotify("当前场景不能切换PK模式");
+					NoticeManager.mouseFollowNotify("当前场景不能切换PK模式");
 					return;
 				}
 			}
@@ -106,7 +106,7 @@ package com.rpgGame.app.manager
 			var curPkMode:int = MainRoleManager.actorInfo.pkMode;
 			var modeName:String = PKModeUtil.getPKModeInfo(curPkMode);
 			var color:String = StaticValue.tran16ToStr(PKModeUtil.getPKModeColor(curPkMode));
-			NoticeManager.systemSwitchNotify("您的PK模式切换为：<font color='"+color+"'>"+modeName+"模式</font>");
+			NoticeManager.rizhiNotify("您的PK模式切换为：<font color='"+color+"'>"+modeName+"模式</font>");
 		}
 		/**
 		 *策划要求，改了攻击模式，周围玩家血条颜色对应调整 

@@ -7,9 +7,11 @@ package com.rpgGame.app.ui.main.top
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.EffectUrl;
+	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import flash.utils.clearTimeout;
 	import flash.utils.setTimeout;
@@ -27,6 +29,7 @@ package com.rpgGame.app.ui.main.top
 		private var maxW:int;
 		
 		private const YELLOW_SHOW_TIME:int = 500;	//黄色显示时间
+		private const DESCRIBE:String = "获得途径:主线任务、日常任务、支线任务、经验副本、日常活动、挂机打怪";
 		
 		public function ExpBar()
 		{
@@ -55,9 +58,12 @@ package com.rpgGame.app.ui.main.top
 		private function addTips():void
 		{
 			TipTargetManager.remove(this);
-			TipTargetManager.show(this, TargetTipsMaker.makeSimpleTextTips("升级经验："+MainRoleManager.actorInfo.curExp+"/"+MainRoleManager.actorInfo.maxExp));
-		}
-		
+			var percentage:Number=MainRoleManager.actorInfo.curExp/MainRoleManager.actorInfo.maxExp;
+			var num:String="    ("+(percentage*100).toFixed(2)+"%)";
+			var text:String=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"经验值   "+MainRoleManager.actorInfo.curExp+"/"+MainRoleManager.actorInfo.maxExp)+
+				HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,num)+"\n"+DESCRIBE;
+			TipTargetManager.show(this, TargetTipsMaker.makeSimpleTextTips(text));
+		}		
 			
 		private function initEvent():void
 		{
@@ -76,7 +82,7 @@ package com.rpgGame.app.ui.main.top
 		
 		public function resize(w : int, h : int) : void {
 			this.x=this.y = 0;
-			_skin.top_bg.width=w;
+//			_skin.top_bg.width=w;
 			maxW=w;
 			updateExpBar();
 		}

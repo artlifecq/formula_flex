@@ -19,6 +19,8 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.coreData.type.RoleActionType;
 	import com.rpgGame.coreData.type.item.GridBGType;
 	
+	import feathers.controls.UIAsset;
+	
 	import org.mokylin.skin.app.zuoqi.Zuoqi_JingjieOk_Skin;
 	
 	import starling.display.DisplayObject;
@@ -53,6 +55,13 @@ package com.rpgGame.appModule.mount
 			sr3D.x = 340;
 			sr3D.y = 316;
 			addChild3D(sr3D,2);
+			_skin.uiName.imageScaleMode = UIAsset.IMAGE_SCALE_MODE_NO_SCALE;
+			_skin.uiName.onImageLoaded = imageloadereHander;
+		}
+		
+		private function imageloadereHander(img:UIAsset):void
+		{
+			img.x = 753- img.width/2;
 		}
 		
 		public function updateinfo(mountdata:MountShowData):void
@@ -78,7 +87,7 @@ package com.rpgGame.appModule.mount
 				_skin.uiName.styleName = "ui/app/zuoqi/rpbftqjj.png";
 			else
 				_skin.uiName.styleName = "ui/app/zuoqi/jjcg.png";
-			_skin.uiName.x = 753-_skin.uiName.width/2;
+//			_skin.uiName.x = 753-_skin.uiName.width/2;
 			while(_itemIcons.length>_rewardIconLength)
 			{
 				this.removeChild(_itemIcons.pop(),true);
@@ -134,6 +143,9 @@ package com.rpgGame.appModule.mount
 				_curtentInter3D = null;
 			}
 			var nextShet:Q_horse = HorseConfigData.getMountDataById(mountLevel);
+			if(!nextShet){
+				return;
+			}
 			_curtentInter3D = new InterObject3D();
 			var data : RenderParamData3D = new RenderParamData3D(0, "mount2",ClientConfig.getAvatar(nextShet.q_skinResID));
 			data.animatorSourchPath = ClientConfig.getAvatar(nextShet.q_animatResID);

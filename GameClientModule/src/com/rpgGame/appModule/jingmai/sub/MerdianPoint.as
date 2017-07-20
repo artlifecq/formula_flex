@@ -393,11 +393,11 @@ package com.rpgGame.appModule.jingmai.sub
 						//
 						if (config.q_showtype==0) 
 						{
-							NoticeManager.showNotifyById(11001,[config.q_name]);
+							NoticeManager.showNotifyById(11001,"",[config.q_name]);
 						}
 						else
 						{
-							NoticeManager.showNotifyById(11006,[config.q_name]);
+							NoticeManager.showNotifyById(11006,"",[config.q_name]);
 						}
 						return;
 					}

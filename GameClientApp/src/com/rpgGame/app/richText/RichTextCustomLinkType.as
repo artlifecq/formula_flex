@@ -16,7 +16,7 @@ package com.rpgGame.app.richText
 		public static const POSITION_FLY_TYPE : String = "3";
 		/** 物品展示	需要参数：data:cfgid,quality */
 		public static const ITEM_SHOW_TYPE : String = "4";
-		/** 文本类型我要进阶*/
+		/** 文本类型超链接（liaotianlan）*/
 		public static const JINJIE_SHOW_TYPE : String = "5";
 		/** 称号展示	需要参数：data:TitleTreeData */
 		public static const TITLE_TYPE : String = "6";

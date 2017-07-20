@@ -27,7 +27,10 @@ package   com.rpgGame.app.ui.main.team
 	import com.rpgGame.netData.team.bean.TeamMemberBriefInfo;
 	import com.rpgGame.netData.team.bean.TeamMemberInfo;
 	
+	import app.message.BoolArrayProto;
+	
 	import feathers.controls.UIAsset;
+	import feathers.utils.filter.GrayFilter;
 	
 	import org.mokylin.skin.mainui.head.head_min_Skin;
 	
@@ -62,9 +65,10 @@ package   com.rpgGame.app.ui.main.team
 		
 		override protected function onTouchTarget(target : DisplayObject) : void 
 		{
+			var isduizhang:Boolean=_data.memberId.EqualTo(Mgr.teamMgr.captain.memberId);
 			switch (target) {
 				case this._skin.btn_more:
-					var menus : Array = MenuUtil.getPlayerTargetMenu(_data.memberId.ToGID(), true);
+					var menus : Array = MenuUtil.getPlayerTeamMenu(_data.memberId.ToGID(), isduizhang);
 					MenuManager.showMenu(menus, [_data.memberId, _data.memberName], -1, -1, 80);
 					break;
 			}
@@ -182,27 +186,39 @@ package   com.rpgGame.app.ui.main.team
 		{
 			if (state==0) 
 			{
+				_skin.icon.filter=null;
+				_skin.xuecao_bar.filter=null;
 				if (_stateImg) 
 				{
 					_stateImg.visible=false;
 				}
 			}
 			else
-			{
-				if (!_stateImg) 
-				{
-					_stateImg=new UIAsset();
-					this.addChild(_stateImg);
-				}
+			{	
 				if (state==1) 
 				{
-					_stateImg.styleName="ui/common/yinzhang.png";
+					if (!_stateImg) 
+					{
+						_stateImg=new UIAsset();
+						this.addChild(_stateImg);
+						_stateImg.x=18;
+						_stateImg.y=38;
+					}
+					_stateImg.styleName="ui/common/yinzhang3.png";
+					_stateImg.visible=true;
+					_skin.icon.filter=null;
+					_skin.xuecao_bar.filter=null;
 				}
 				else
 				{
-					_stateImg.styleName="ui/common/lixianyinzhang.png";
+					if (_stateImg) 
+					{
+						_stateImg.visible=false;
+					}
+					GrayFilter.gray(_skin.icon);
+					GrayFilter.gray(_skin.xuecao_bar);
 				}
-				_stateImg.visible=true;
+				
 			}
 		}
 		public function updateDynamic(hp:int,buff:Vector.<int>):void

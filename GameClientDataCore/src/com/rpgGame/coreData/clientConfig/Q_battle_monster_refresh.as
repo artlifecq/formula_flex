@@ -18,9 +18,11 @@ package com.rpgGame.coreData.clientConfig
 		public var q_mapid:int;
 		 /**  档案ID */
 		public var q_map_cfg_id:int;
+		 /**  出生时间（毫秒） */
+		public var q_born_time:int;
 		 /**  重生时间(毫秒) */
-		public var q_time:int;
-		 /**  刷新类型（1道具、2怪物、3采集物） */
+		public var q_time:String;
+		 /**  刷新类型（1道具、2怪物、3采集物、4钻石矿、5祝福石） */
 		public var q_type:int;
 		 /**  阵营属性 */
 		public var q_camp:int;

@@ -1,25 +1,41 @@
 package com.rpgGame.coreData.cfg
 {
+	import com.rpgGame.app.richText.RichTextCustomLinkType;
+	import com.rpgGame.app.richText.RichTextCustomUtil;
 	import com.rpgGame.coreData.enum.AlertTypeEnum;
 	import com.rpgGame.coreData.info.alert.AlertInfo;
+	import com.rpgGame.coreData.lang.LangHyperlinksMenu;
 	
 	import flash.utils.Dictionary;
-
+	
 	public class LanguageConfig
 	{
 		private static var _textDic : Dictionary;
 		private static var _alertDic : Dictionary;
-
+		private static var _menus:Array;
 		public function LanguageConfig()
 		{
 		}
-
+		
 		public static function parseData(dic : Dictionary) : void
 		{
 			_textDic = dic;
 			_alertDic = new Dictionary();
+			inithyperLinkMenu();
 		}
-
+		
+		private static function inithyperLinkMenu():void
+		{
+			_menus=new Array();
+			_menus=[LangHyperlinksMenu.WOYAOJIERUDUIWU,LangHyperlinksMenu.WOYAOJINJIEZHANQI,LangHyperlinksMenu.WOYAOJINJIEZUOQI,
+				LangHyperlinksMenu.WOYAOQIANGHUA,LangHyperlinksMenu.WOYAORUBANG];
+		}
+		
+		public static function get menus():Array
+		{
+			return _menus;
+		}
+		
 		public static function getLanguage($key : *, ... args) : Object
 		{
 			args = getArrAgs(args);
@@ -30,7 +46,7 @@ package com.rpgGame.coreData.cfg
 			words = replaceStr(words, args);
 			return {value: words, type: type, sceneType: sceneType};
 		}
-
+		
 		public static function getText($key : *, ... args) : String
 		{
 			args = getArrAgs(args);
@@ -66,7 +82,7 @@ package com.rpgGame.coreData.cfg
 			alertInfo.rightValue = language&&language.rightValue?language.rightValue:"取 消";
 			return alertInfo;
 		}
-
+		
 		private static function getArrAgs(args : Array) : Array
 		{
 			if (args.length == 1 && args[0] is Array)
@@ -75,7 +91,7 @@ package com.rpgGame.coreData.cfg
 			}
 			return args;
 		}
-
+		
 		public static function replaceStr(str : String, ... args) : String
 		{
 			args = getArrAgs(args);
@@ -118,12 +134,12 @@ package com.rpgGame.coreData.cfg
 				}
 			}
 			return str;
-		}
+		}		
 		
 		public static function replaceColor(str:String):String
 		{
 			
-//			str.replace(
+			//			str.replace(
 			return "";
 		}
 		

@@ -156,7 +156,7 @@ package org.mokylin.skin.mainui.renwu
 			lb_jiangli = temp;
 			temp.name = "lb_jiangli";
 			temp.text = "任务奖励：";
-			temp.color = 0xBEA757;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 252;
 			temp.x = 25;
@@ -170,7 +170,7 @@ package org.mokylin.skin.mainui.renwu
 			lb_name = temp;
 			temp.name = "lb_name";
 			temp.text = "第九十九章：章节名称六子";
-			temp.color = 0xBEA757;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 252;
 			temp.x = 24;
@@ -200,7 +200,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.name = "lb_time";
 			temp.text = "n秒后自动领取奖励";
 			temp.textAlign = "center";
-			temp.color = 0x25931B;
+			temp.color = 0xFF0D0D;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 210;
 			temp.x = 47;

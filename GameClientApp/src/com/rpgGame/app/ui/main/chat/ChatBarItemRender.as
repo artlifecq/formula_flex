@@ -19,6 +19,7 @@ package com.rpgGame.app.ui.main.chat
 	public class ChatBarItemRender extends BaseDefaultListItemRenderer
 	{
 		public static var WIDTH:int = 412;
+		public static var HEIGHT:int = 37;
 		private static var _defaultFormat:TextFormat;
 		private var _richText:RichTextArea3D;
 		
@@ -31,7 +32,7 @@ package com.rpgGame.app.ui.main.chat
 		{
 			if(_richText)
 			{
-				return _richText.height - 3;
+				return _richText.height-3;
 			}
 			return super.height;
 		}
@@ -59,7 +60,7 @@ package com.rpgGame.app.ui.main.chat
 					_defaultFormat.size = 14;
 					_defaultFormat.align = TextFieldAutoSize.LEFT;
 					_defaultFormat.letterSpacing = 1;
-					_defaultFormat.leading = 4;
+					_defaultFormat.leading = 6;
 				}
 				
 				textFormat = _defaultFormat;
@@ -73,7 +74,7 @@ package com.rpgGame.app.ui.main.chat
 			var info:ResChatMessage=this._data as ResChatMessage;
 			if(info && this._owner)
 			{
-				_richText.text = ChatUtil.getHTMLChatMessage(info);//getChatMessageByChannel(info.type,info.name,info.chatText);
+				_richText.text = ChatUtil.getHTMLChatMessage(info);
 				_richText.setSize(this._owner.width-5);
 				this.width = _richText.width;
 			}

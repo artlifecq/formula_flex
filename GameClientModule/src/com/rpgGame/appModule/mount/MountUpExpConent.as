@@ -24,6 +24,7 @@ package com.rpgGame.appModule.mount
 	{
 		private var _skin:ZuoqiCont_Skin;
 		private var _itemIconList:Vector.<IconCDFace>;
+		private var _updateTime:int=1000/40;
 		public function MountUpExpConent(skin:ZuoqiCont_Skin):void
 		{
 			_skin = skin;
@@ -68,33 +69,6 @@ package com.rpgGame.appModule.mount
 					_skin.lab_xuyaowupin.color = 0xd02525;
 				}
 				_skin.uplevelgroup.visible = true;
-				const housedata:Q_horse = _mountShowData.housedata;
-				if(_mountShowData.haveChange)
-				{
-					var rewards:Vector.<ClientItemInfo> = _mountShowData.rewardItems;
-					for(var index:int = 0;index<rewards.length;index++)
-					{
-						_itemIconList[index].visible = true;
-						FaceUtil.SetItemGrid(_itemIconList[index], rewards[index], true);
-					}
-					for(;index<_itemIconList.length;index++)
-					{
-						_itemIconList[index].visible = false;
-					}
-					if(_mountShowData.needClearExp())
-					{
-						_skin.lab_zhufuzhi.text = "本阶祝福值不清零";
-						_skin.lab_zhufuzhi.color = 0x5cb006;
-					}else{
-						_skin.lab_zhufuzhi.text = "祝福值每日0点清零";
-						_skin.lab_zhufuzhi.color = 0xe1201c;
-					}
-				}
-				const percent:Number = _mountShowData.percent;
-				_skin.progressbar.value = _skin.progressbar.maximum*percent;
-				_skin.lab_progressbar.text = _mountShowData.exp.toString()+"/"+housedata.q_blessnum_limit.toString();
-				TipTargetManager.remove(_skin.expgroup);
-				TipTargetManager.show(_skin.expgroup,TargetTipsMaker.makeTips(TipType.BLESS_TIP,_mountShowData));
 			}else{
 				_skin.grp_jinjie.visible = false;
 				_skin.uplevelgroup.visible = false;
@@ -102,20 +76,55 @@ package com.rpgGame.appModule.mount
 			}
 		}
 		
-		public function updateExp(exp:int,count:int):void
+		protected function updataReward():void
 		{
+			const housedata:Q_horse = _mountShowData.housedata;
+			if(_mountShowData.haveChange)
+			{
+				var rewards:Vector.<ClientItemInfo> = _mountShowData.rewardItems;
+				for(var index:int = 0;index<rewards.length;index++)
+				{
+					_itemIconList[index].visible = true;
+					FaceUtil.SetItemGrid(_itemIconList[index], rewards[index], true);
+				}
+				for(;index<_itemIconList.length;index++)
+				{
+					_itemIconList[index].visible = false;
+				}
+				if(_mountShowData.needClearExp())
+				{
+					_skin.lab_zhufuzhi.text = "本阶祝福值不清零";
+					_skin.lab_zhufuzhi.color = 0x5cb006;
+				}else{
+					_skin.lab_zhufuzhi.text = "祝福值每日0点清零";
+					_skin.lab_zhufuzhi.color = 0xe1201c;
+				}
+			}
+			TipTargetManager.show(_skin.expgroup,TargetTipsMaker.makeTips(TipType.BLESS_TIP,_mountShowData));
+		}
+		
+		public function updateExp(exp:int=0,count:int=0):void
+		{
+			if(exp==0&&count==0){
+				_skin.progressbar.value = _skin.progressbar.maximum*_mountShowData.percent;
+				_skin.progressbar.maximum=_mountShowData.housedata.q_blessnum_limit;
+				_skin.lab_progressbar.text =_skin.progressbar.value+"/"+_skin.progressbar.maximum;
+				TimerServer.remove(showExpAnimation);
+				updataReward();
+				return;
+			}
 			var changeExp:int=exp-_skin.progressbar.value;
-			if(changeExp==0){
+			if(changeExp<=0){
 				return;
 			}
 			var addExp:int=changeExp/count;
-			TimerServer.addLoop(showExpAnimation,25,[addExp],count);
+			TimerServer.addLoop(showExpAnimation,_updateTime,[addExp],count);
 			_skin.progressbar.maximum =_mountShowData.housedata.q_blessnum_limit;
 		}
 		
 		private function showExpAnimation(exp:int):void
 		{
-			_skin.progressbar.value += exp;
+			_skin.progressbar.value = int(_skin.progressbar.value)+exp;
 			_skin.lab_progressbar.text =_skin.progressbar.value+"/"+_skin.progressbar.maximum;
 		}
 		
@@ -149,6 +158,11 @@ package com.rpgGame.appModule.mount
 			_skin.btn_kaishi.touchable = bool;
 			_skin.btn_zidong.touchable = bool;
 			_skin.btn_tingzhi.touchable = bool;
+		}
+		
+		public function hide():void
+		{
+			TimerServer.remove(showExpAnimation);
 		}
 	}
 }

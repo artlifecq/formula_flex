@@ -62,7 +62,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_effect_maxvalue:int;
 		 /**  效果分次作用间隔时间（单位：毫秒） */
 		public var q_effect_cooldown:int;
-		 /**  效果重复选项（1效果叠加，2效果替换，3容量叠加(属性,层数）,4时间叠加，5重复无效） */
+		 /**  效果重复选项（1效果叠加，2效果替换，6容量叠加(属性,层数）,4时间叠加，5重复无效,6叠加效果,刷新时间） */
 		public var q_overlay:int;
 		 /**  叠加次数上限（-1为无限） */
 		public var q_overlay_maxcount:int;
