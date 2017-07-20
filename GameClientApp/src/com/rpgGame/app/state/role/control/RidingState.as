@@ -1,9 +1,9 @@
 package com.rpgGame.app.state.role.control
 {
-	import com.rpgGame.app.manager.AvatarManager;
+	import com.game.engine3D.state.IState;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.core.state.role.control.ControlState;
-	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RoleStateType;
 
 	/**
@@ -39,6 +39,15 @@ package com.rpgGame.app.state.role.control
 						throw new Error("角色骑乘状态引用必须是RidingStateReference类型！");
 				}
 			}
+		}
+		
+		override public function enterPass(prevState:IState, force:Boolean=false):Boolean
+		{
+			if ((_machine as RoleStateMachine).isRiding)
+			{
+				return false;
+			}
+			return true;
 		}
 
 		override public function afterLeave() : void
