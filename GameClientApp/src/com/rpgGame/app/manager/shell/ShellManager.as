@@ -63,6 +63,8 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.coreData.type.RenderUnitType;
     import com.rpgGame.coreData.type.RoleStateType;
     import com.rpgGame.coreData.type.SceneCharType;
+    import com.rpgGame.netData.cross.message.ReqEnterCrossClientToGameMessage;
+    import com.rpgGame.netData.task.message.ReqAcceptTaskMessage;
     
     import flash.display.BitmapData;
     import flash.display.BlendMode;
@@ -78,6 +80,7 @@ package com.rpgGame.app.manager.shell
     import gs.TweenLite;
     import gs.easing.Linear;
     
+    import org.game.netCore.connection.SocketConnection;
     import org.game.netCore.data.long;
     import org.game.netCore.net_protobuff.ByteBuffer;
 
@@ -131,6 +134,9 @@ package com.rpgGame.app.manager.shell
             this._funcs["&getView".toLowerCase()] = this.getView;
 			this._funcs["&tasklevel".toLowerCase()] = this.testTaskLevel;
 			this._funcs["&autofight".toLowerCase()] = this.testStopFight;
+            
+            // cross
+            this._funcs["enterCross".toLowerCase()] = this.enterCross;
 			this._funcs["&showDistrictWireframe".toLowerCase()] = this.showDistrictWireframe;
         }
 		
@@ -922,6 +928,10 @@ package com.rpgGame.app.manager.shell
 			TrusteeshipManager.getInstance().testStop();
 		}
 		
+		private function enterCross() : void {
+            var  message : ReqEnterCrossClientToGameMessage = new ReqEnterCrossClientToGameMessage();
+            SocketConnection.send(message);
+        }
 		private function showDistrictWireframe() : void {
 			SceneManager.getScene().sceneMapLayer.showDistrictWireframe = true;
 		}
