@@ -106,7 +106,7 @@ package com.rpgGame.app.manager
 			var curPkMode:int = MainRoleManager.actorInfo.pkMode;
 			var modeName:String = PKModeUtil.getPKModeInfo(curPkMode);
 			var color:String = StaticValue.tran16ToStr(PKModeUtil.getPKModeColor(curPkMode));
-			NoticeManager.systemSwitchNotify("您的PK模式切换为：<font color='"+color+"'>"+modeName+"模式</font>");
+			NoticeManager.rizhiNotify("您的PK模式切换为：<font color='"+color+"'>"+modeName+"模式</font>");
 		}
 		/**
 		 *策划要求，改了攻击模式，周围玩家血条颜色对应调整 

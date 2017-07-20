@@ -82,7 +82,7 @@ package com.rpgGame.app.ui.main.top
 		
 		public function resize(w : int, h : int) : void {
 			this.x=this.y = 0;
-			_skin.top_bg.width=w;
+//			_skin.top_bg.width=w;
 			maxW=w;
 			updateExpBar();
 		}

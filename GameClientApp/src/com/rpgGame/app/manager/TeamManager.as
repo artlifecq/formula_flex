@@ -542,7 +542,7 @@ package com.rpgGame.app.manager
 					else if (qMap.q_map_max_level<MainRoleManager.actorInfo.totalStat.level) 
 					{
 						//NoticeManager.mouseFollowNotify("等级大于"+qMap.q_map_max_level+"级，无法进入地图"+qMap.q_map_name);
-						NoticeManager.showNotifyById(13042,qMap.q_map_max_level,qMap.q_map_name);
+						NoticeManager.showNotifyById(13042,"",qMap.q_map_max_level,qMap.q_map_name);
 					}
 					else
 					{
@@ -552,7 +552,7 @@ package com.rpgGame.app.manager
 				else
 				{
 					//NoticeManager.mouseFollowNotify("找不到地图"+mem.memberMapModelID);
-					NoticeManager.showNotifyById(13043,mem.memberMapModelID);
+					NoticeManager.showNotifyById(13043,"",mem.memberMapModelID);
 				}
 			}
 		}

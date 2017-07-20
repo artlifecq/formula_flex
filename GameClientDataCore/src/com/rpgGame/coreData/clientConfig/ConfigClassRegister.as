@@ -42,7 +42,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const GmInfo:String = "data.GmInfo";
 		/**  广播，提示语				 */
 		public static const HintInfo:String = "data.HintInfo";
-		/**  消息提示类型配置表																													 */
+		/**  消息提示类型配置表	*/
 		public static const HintTypeSetInfo:String = "data.HintTypeSetInfo";
 		/**  区域数据库						 */
 		public static const Q_area:String = "data.map.Q_area";

@@ -708,8 +708,8 @@ package com.rpgGame.app.manager.scene
 				var countryName : String = sceneSequence > 0 ? CountryNameCfgData.getCountryNameById(sceneSequence) : "";
 				if (countryName)
 					NoticeManager.showNotify(LangText.SCENE_ENTER_COUNTRY_NOTIFY_TEXT, countryName, sceneName);
-				else
-					NoticeManager.showNotify(LangText.SCENE_ENTER_NOTIFY_TEXT, sceneName);
+//				else
+//					NoticeManager.showNotify(LangText.SCENE_ENTER_NOTIFY_TEXT, sceneName);
 			}
 		}
 		

@@ -208,7 +208,7 @@ package com.rpgGame.app.ui.main.head
 				return;
 			}
 			this.x = 380;
-			this.y = 56;//28;
+			this.y = 35;//28;
 		}
 		
 		private function initEvent():void

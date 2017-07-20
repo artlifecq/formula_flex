@@ -14,6 +14,7 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.chat.ChatManager;
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.fightsoul.FightSoulManager;
 	import com.rpgGame.app.manager.hint.FloatingText;
@@ -165,6 +166,10 @@ package   com.rpgGame.app.manager.debug
 				msg.type=parseInt(arg[0]);
 				FangChenMiManager.OnSCNonagePromptMessage(msg);
 			});		
+			commandList.put( ".send", function (...arg):void
+			{
+				NoticeManager.showNotifyById(parseInt(arg[0]));
+			});		
 			commandList.put( ".qiuhun", function (...arg):void
 			{
 				var str:String=ItemUtil.getJobName(MainRoleManager.actorInfo.job)+" "+MainRoleManager.actorInfo.totalStat.getStatValue(CharAttributeType.LV)+"级,"
@@ -240,17 +245,17 @@ package   com.rpgGame.app.manager.debug
 			commandList.put( ".pet", function (...arg):void
 			{
 				AppManager.showApp(AppConstant.PET_PANLE);
-//				var mod:int = arg[0];
-//				
-//				var petInfo:PetInfo=new PetInfo();
-//				petInfo.petId=new long(9999);
-//				petInfo.ownerId=(MainRoleManager.actor.data as HeroData).serverID;
-//				petInfo.petModelId=mod;
-//				petInfo.x=MainRoleManager.actor.pos.x;
-//				petInfo.y=-MainRoleManager.actor.pos.y;
-//				var data:GirlPetData=new GirlPetData();
-//				data.setServerData(petInfo);
-//				SceneRoleManager.getInstance().createGirlPet(data);
+				//				var mod:int = arg[0];
+				//				
+				//				var petInfo:PetInfo=new PetInfo();
+				//				petInfo.petId=new long(9999);
+				//				petInfo.ownerId=(MainRoleManager.actor.data as HeroData).serverID;
+				//				petInfo.petModelId=mod;
+				//				petInfo.x=MainRoleManager.actor.pos.x;
+				//				petInfo.y=-MainRoleManager.actor.pos.y;
+				//				var data:GirlPetData=new GirlPetData();
+				//				data.setServerData(petInfo);
+				//				SceneRoleManager.getInstance().createGirlPet(data);
 			});
 		}
 		

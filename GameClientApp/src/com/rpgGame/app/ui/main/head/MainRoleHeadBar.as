@@ -190,7 +190,7 @@ package com.rpgGame.app.ui.main.head {
 		
 		public function resize(w : int, h : int) : void {
 			this.x = 0;
-			this.y = 29;//28;
+			this.y = 7;//28;
 		}
 		
 		override protected function onTouchTarget(target : DisplayObject) : void {

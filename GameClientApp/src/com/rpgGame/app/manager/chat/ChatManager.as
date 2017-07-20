@@ -120,7 +120,7 @@ package com.rpgGame.app.manager.chat
 		}
 		
 		/**
-		 * 记录系统传闻消息 
+		 * 记录系统消息 
 		 * @param msg
 		 * 
 		 */
@@ -857,6 +857,17 @@ package com.rpgGame.app.manager.chat
 				_gerenHearsayMsg.shift();
 			}
 			_gerenHearsayMsg.push(msg);
+		}
+		
+		/**
+		 * 添加一条消息显示
+		 * */
+		public static function onShowChatInChatBar(text : String, channel : int):void
+		{
+			var msg:ResChatMessage=new ResChatMessage();
+			msg.type=channel;
+			msg.chatText=text;
+			onResChatMessage(msg);
 		}
 		
 		/**

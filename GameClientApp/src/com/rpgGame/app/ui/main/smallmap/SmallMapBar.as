@@ -72,7 +72,7 @@ package com.rpgGame.app.ui.main.smallmap {
 		}
 		
 		public function resize(w : int, h : int) : void {
-			this.y = 28;
+			this.y = 7;
 			this.x = w - this._skin.width;
 		}
 		

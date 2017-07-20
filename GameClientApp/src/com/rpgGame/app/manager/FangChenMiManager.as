@@ -82,7 +82,7 @@ package com.rpgGame.app.manager
 			}
 			else
 				_fangchenmiPanel = FangChenMiPanelExt.showFangChenMiUtil(msg);
-			NoticeManager.chatSystemNotify(msg);
+//			NoticeManager.chatSystemNotify(msg);
 		}
 		
 		private function showChenMiClick(gameAlert:GameAlert):void
