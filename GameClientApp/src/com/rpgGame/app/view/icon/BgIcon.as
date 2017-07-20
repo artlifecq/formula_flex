@@ -158,6 +158,7 @@ package com.rpgGame.app.view.icon
 			if(_bgImage){
 				_bgImage.removeFromParent();
 				_bgImage=null;
+				_bgResName=null;
 			}
 			super.destroy();
 		}

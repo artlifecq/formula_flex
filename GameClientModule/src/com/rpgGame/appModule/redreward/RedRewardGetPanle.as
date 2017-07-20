@@ -181,7 +181,7 @@ package com.rpgGame.appModule.redreward
 			for(var i:int = 0;i<pageMaxCellCount;i++)
 			{
 				var cell:RedRewardMoreCell = getMoreNextCell(i);
-				cell.y = 31*i;
+				cell.y = 29*i;
 				cell.updata(i,_playerInfolist);
 				_skin.itemgroup.addChild(cell);
 			}
@@ -220,7 +220,7 @@ package com.rpgGame.appModule.redreward
 			for(var i:int = 0;i<8;i++)
 			{
 				var cell:RedRewardOneCell = getOneNextCell(i);
-				cell.y = 31*i;
+				cell.y = 29*i;
 				_skin.itemgroup.addChild(cell);
 				cell.updata(i,_playerInfolist,_redRewardInfo.sendPlayerId.IsZero());
 			}

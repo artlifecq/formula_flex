@@ -26,7 +26,7 @@ package org.mokylin.skin.app.hongbao
 			super();
 			
 			this.currentState = "normal";
-			this.height = 31;
+			this.height = 29;
 			this.width = 263;
 			this.elementsContent = [bg1_i(),bg2_i()];
 			
@@ -44,10 +44,11 @@ package org.mokylin.skin.app.hongbao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg1 = temp;
 			temp.name = "bg1";
+			temp.bottom = 0;
 			temp.styleName = "ui/app/hongbao/huitiao.png";
+			temp.top = 0;
 			temp.width = 263;
 			temp.x = 0;
-			temp.y = 0;
 			return temp;
 		}
 
@@ -56,10 +57,10 @@ package org.mokylin.skin.app.hongbao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg2 = temp;
 			temp.name = "bg2";
+			temp.bottom = 0;
 			temp.styleName = "ui/app/hongbao/chengtiao.png";
-			temp.visible = false;
+			temp.top = 0;
 			temp.x = 0;
-			temp.y = 0;
 			return temp;
 		}
 

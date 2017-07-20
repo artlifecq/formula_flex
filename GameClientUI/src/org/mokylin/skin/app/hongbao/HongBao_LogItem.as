@@ -5,7 +5,7 @@ package org.mokylin.skin.app.hongbao
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import org.mokylin.skin.common.ItemBg;
-	
+
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
@@ -17,10 +17,10 @@ package org.mokylin.skin.app.hongbao
 		//                                定义成员变量
 		//==========================================================================
 		public var bg:feathers.controls.SkinnableContainer;
-		
+
 		public var lbName:feathers.controls.Label;
-		
-		
+
+
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
@@ -37,8 +37,8 @@ package org.mokylin.skin.app.hongbao
 			};
 			skinNames={};
 		}
-		
-		
+
+
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
@@ -55,7 +55,7 @@ package org.mokylin.skin.app.hongbao
 			temp.y = 0;
 			return temp;
 		}
-		
+
 		private function lbName_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -70,6 +70,6 @@ package org.mokylin.skin.app.hongbao
 			temp.y = 9;
 			return temp;
 		}
-		
+
 	}
 }
