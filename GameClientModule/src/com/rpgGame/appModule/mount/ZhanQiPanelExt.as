@@ -101,8 +101,6 @@ package com.rpgGame.appModule.mount
 			_zhanqiUpExpConent.updateExp();
 			_zhanqiUpExpConent.isAutoing = false;
 			initEvent();
-			
-			showUplevel();
 		}
 		
 		override public function hide():void
