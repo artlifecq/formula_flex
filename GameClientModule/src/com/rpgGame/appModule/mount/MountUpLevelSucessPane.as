@@ -134,6 +134,9 @@ package com.rpgGame.appModule.mount
 				_curtentInter3D = null;
 			}
 			var nextShet:Q_horse = HorseConfigData.getMountDataById(mountLevel);
+			if(!nextShet){
+				return;
+			}
 			_curtentInter3D = new InterObject3D();
 			var data : RenderParamData3D = new RenderParamData3D(0, "mount2",ClientConfig.getAvatar(nextShet.q_skinResID));
 			data.animatorSourchPath = ClientConfig.getAvatar(nextShet.q_animatResID);

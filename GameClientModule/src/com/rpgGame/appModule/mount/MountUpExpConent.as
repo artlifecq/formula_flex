@@ -24,6 +24,7 @@ package com.rpgGame.appModule.mount
 	{
 		private var _skin:ZuoqiCont_Skin;
 		private var _itemIconList:Vector.<IconCDFace>;
+		private var _updateTime:int=1000/40;
 		public function MountUpExpConent(skin:ZuoqiCont_Skin):void
 		{
 			_skin = skin;
@@ -90,10 +91,6 @@ package com.rpgGame.appModule.mount
 						_skin.lab_zhufuzhi.color = 0xe1201c;
 					}
 				}
-				const percent:Number = _mountShowData.percent;
-				_skin.progressbar.value = _skin.progressbar.maximum*percent;
-				_skin.lab_progressbar.text = _mountShowData.exp.toString()+"/"+housedata.q_blessnum_limit.toString();
-				TipTargetManager.remove(_skin.expgroup);
 				TipTargetManager.show(_skin.expgroup,TargetTipsMaker.makeTips(TipType.BLESS_TIP,_mountShowData));
 			}else{
 				_skin.grp_jinjie.visible = false;
@@ -102,20 +99,26 @@ package com.rpgGame.appModule.mount
 			}
 		}
 		
-		public function updateExp(exp:int,count:int):void
+		public function updateExp(exp:int=0,count:int=0):void
 		{
+			if(exp==0&&count==0){
+				_skin.progressbar.value = _skin.progressbar.maximum*_mountShowData.percent;
+				_skin.progressbar.maximum=_mountShowData.housedata.q_blessnum_limit;
+				_skin.lab_progressbar.text =_skin.progressbar.value+"/"+_skin.progressbar.maximum;
+				return;
+			}
 			var changeExp:int=exp-_skin.progressbar.value;
 			if(changeExp==0){
 				return;
 			}
 			var addExp:int=changeExp/count;
-			TimerServer.addLoop(showExpAnimation,25,[addExp],count);
+			TimerServer.addLoop(showExpAnimation,_updateTime,[addExp],count);
 			_skin.progressbar.maximum =_mountShowData.housedata.q_blessnum_limit;
 		}
 		
 		private function showExpAnimation(exp:int):void
 		{
-			_skin.progressbar.value += exp;
+			_skin.progressbar.value = int(_skin.progressbar.value)+exp;
 			_skin.lab_progressbar.text =_skin.progressbar.value+"/"+_skin.progressbar.maximum;
 		}
 		

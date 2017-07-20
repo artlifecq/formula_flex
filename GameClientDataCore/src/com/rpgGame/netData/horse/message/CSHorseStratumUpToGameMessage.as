@@ -8,12 +8,15 @@ package com.rpgGame.netData.horse.message{
 	 * 
 	 * @since 2011-5-8
 	 * 
-	 * 请求坐骑升阶
+	 * 请求坐骑升阶消息
 	 */
 	public class CSHorseStratumUpToGameMessage extends Message {
 	
 		//自动购买材料
 		private var _Automatic: int;
+		
+		//自动进阶 1 手动0
+		private var _AutoUp: int;
 		
 		
 		/**
@@ -22,6 +25,8 @@ package com.rpgGame.netData.horse.message{
 		override protected function writing(): Boolean{
 			//自动购买材料
 			writeByte(_Automatic);
+			//自动进阶 1 手动0
+			writeByte(_AutoUp);
 			return true;
 		}
 		
@@ -31,6 +36,8 @@ package com.rpgGame.netData.horse.message{
 		override protected function reading(): Boolean{
 			//自动购买材料
 			_Automatic = readByte();
+			//自动进阶 1 手动0
+			_AutoUp = readByte();
 			return true;
 		}
 		
@@ -55,6 +62,21 @@ package com.rpgGame.netData.horse.message{
 		 */
 		public function set Automatic(value: int): void{
 			this._Automatic = value;
+		}
+		
+		/**
+		 * get 自动进阶 1 手动0
+		 * @return 
+		 */
+		public function get AutoUp(): int{
+			return _AutoUp;
+		}
+		
+		/**
+		 * set 自动进阶 1 手动0
+		 */
+		public function set AutoUp(value: int): void{
+			this._AutoUp = value;
 		}
 		
 	}

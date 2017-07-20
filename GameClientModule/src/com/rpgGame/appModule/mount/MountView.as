@@ -67,6 +67,7 @@ package com.rpgGame.appModule.mount
 			_mountContent.show();
 			refeashPropHandler();
 			_mountupContent.updataInfo(_mountShowData);
+			_mountupContent.updateExp();
 			refeashSpellIcon();
 			initEvent();
 		}
@@ -93,6 +94,7 @@ package com.rpgGame.appModule.mount
 					onMouseOut();
 					if(_mountShowData.isSelf)
 					{
+						_mountShowData.isAutoing=true;
 						if(HorseManager.instance().eatItemHorse(_mountShowData))
 						{
 							_mountupContent.isAutoing = true;
@@ -263,7 +265,7 @@ package com.rpgGame.appModule.mount
 		{
 			_mountupContent.isAutoing = false;
 			showUplevel();
-			refeashExpHandler();
+			_mountupContent.updateExp();
 			if(autoReq){
 				autoReq.kill();
 				autoReq=null;
