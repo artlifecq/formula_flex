@@ -27,7 +27,6 @@ package com.rpgGame.app.state.ai
 		override public function execute() : void
 		{
 			super.execute();
-			
 			if (SceneRoleSelectManager.selectedRole != null)
 			{
 				var monsterData : MonsterData = SceneRoleSelectManager.selectedRole.data as MonsterData;
@@ -35,7 +34,7 @@ package com.rpgGame.app.state.ai
 			//	RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 200, null, onArrive);
 				//walkrun=true;
 				var position : Vector3D = new Vector3D(targerPos.x, targerPos.z, 0, MainRoleManager.actor.position.w);
-				RoleStateUtil.walkToPos(MainRoleManager.actor, position, 200,null, onArrive,null,null,true);
+				RoleStateUtil.walkToPos(MainRoleManager.actor, position, 100,null, onArrive,null,null,true);
 			}
 			else
 			{
@@ -54,26 +53,32 @@ package com.rpgGame.app.state.ai
 				return true;
 			if (!isWalk())
 				return true;
-			if(!MainRoleManager.actor.stateMachine.isRunning&&!MainRoleManager.actor.stateMachine.isWalking&&!MainRoleManager.actor.stateMachine.isWalkMoving)
+			if (MainRoleManager.actor.stateMachine.isWalkMoving)
 				return true;
+			/*if(!MainRoleManager.actor.stateMachine.isRunning&&!MainRoleManager.actor.stateMachine.isWalking&&!MainRoleManager.actor.stateMachine.isWalkMoving)
+				return true;*/
 			return false;
 		}
 		override public function enterPass(prevState : IState, force : Boolean = false) : Boolean
 		{
-			
-			if(!force)
+			if(force)
 			{
-				return false;
+				return true;
 			}
+			
 			if(!isWalk())
 			{
-				return false;
+				if(!force)
+				{
+					return false;
+				}
 			}
-			
 			if (MainRoleManager.actor.stateMachine.isWalkMoving)
 			{
 				return false;	
 			}
+			/*
+			
 			if (MainRoleManager.actor.stateMachine.isJumpRising)
 			{
 				return false;
@@ -85,11 +90,11 @@ package com.rpgGame.app.state.ai
 			if (MainRoleManager.actor.stateMachine.isBeatMoving)
 			{
 				return false;
-			}
-			if (!MainRoleManager.actor.stateMachine.passTo(RoleStateType.ACTION_ATTACK))
+			}*/
+			/*if (!MainRoleManager.actor.stateMachine.passTo(RoleStateType.ACTION_ATTACK))
 			{
 				return false;
-			}
+			}*/
 			if (MainRoleManager.actor.stateMachine.isDeadState)
 			{
 				return false;

@@ -1,9 +1,7 @@
 package org.mokylin.skin.common
 {
-	import feathers.controls.text.Fontter;
 	import feathers.data.ListCollection;
 	import feathers.controls.Button;
-	import feathers.controls.Label;
 	import feathers.controls.List;
 	import feathers.controls.StateSkin;
 	import feathers.controls.TabBar;
@@ -31,8 +29,6 @@ package org.mokylin.skin.common
 
 		public var tab_zizhi:feathers.controls.TabBar;
 
-		public var titleDisplay:feathers.controls.Label;
-
 
 		//==========================================================================
 		//                                定义构造函数
@@ -42,7 +38,7 @@ package org.mokylin.skin.common
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [bg_i(),titleDisplay_i(),btnClose_i(),__panel_ziriSkin_UIAsset1_i(),tab_zizhi_i(),msg_list_i()];
+			this.elementsContent = [bg_i(),__panel_ziriSkin_UIAsset1_i(),btnClose_i(),tab_zizhi_i(),msg_list_i(),__panel_ziriSkin_UIAsset2_i()];
 			
 			states = {
 			};
@@ -56,25 +52,36 @@ package org.mokylin.skin.common
 		private function __panel_ziriSkin_ArrayCollection1_i():feathers.data.ListCollection
 		{
 			var temp:feathers.data.ListCollection = new feathers.data.ListCollection();
-			temp.data = ['全部','传闻','系统'];
+			temp.data = ['全部'];
 			return temp;
 		}
 
 		private function __panel_ziriSkin_HorizontalLayout1_i():feathers.layout.HorizontalLayout
 		{
 			var temp:feathers.layout.HorizontalLayout = new feathers.layout.HorizontalLayout();
-			temp.gap = -1;
+			temp.gap = 1;
 			return temp;
 		}
 
 		private function __panel_ziriSkin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 492;
+			temp.height = 500;
 			temp.styleName = "ui/common/background/neikuang_2.png";
-			temp.width = 315;
-			temp.x = 13;
+			temp.width = 317;
+			temp.x = 10;
 			temp.y = 69;
+			return temp;
+		}
+
+		private function __panel_ziriSkin_UIAsset2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.touchable = false;
+			temp.touchGroup = true;
+			temp.styleName = "ui/common/background/rizijilu.png";
+			temp.x = 124;
+			temp.y = 7;
 			return temp;
 		}
 
@@ -107,11 +114,11 @@ package org.mokylin.skin.common
 			var temp:feathers.controls.List = new feathers.controls.List();
 			msg_list = temp;
 			temp.name = "msg_list";
-			temp.height = 474;
+			temp.height = 481;
 			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
 			temp.width = 308;
 			temp.x = 18;
-			temp.y = 76;
+			temp.y = 73;
 			return temp;
 		}
 
@@ -126,26 +133,6 @@ package org.mokylin.skin.common
 			temp.y = 41;
 			temp.layout = __panel_ziriSkin_HorizontalLayout1_i();
 			temp.dataProvider = __panel_ziriSkin_ArrayCollection1_i();
-			return temp;
-		}
-
-		private function titleDisplay_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			titleDisplay = temp;
-			temp.name = "titleDisplay";
-			temp.bold = true;
-			temp.height = 26;
-			temp.touchable = false;
-			temp.touchGroup = true;
-			temp.fontSize = 16;
-			temp.text = "日志记录";
-			temp.textAlign = "center";
-			temp.color = 0xb8ad80;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 91;
-			temp.x = 114;
-			temp.y = 11;
 			return temp;
 		}
 

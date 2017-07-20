@@ -4,6 +4,7 @@ package com.rpgGame.appModule.dungeon.multy
 	import com.rpgGame.app.manager.DungeonManager;
 	import com.rpgGame.app.manager.ItemActionManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.TaskUtil;
@@ -21,6 +22,7 @@ package com.rpgGame.appModule.dungeon.multy
 	import com.rpgGame.coreData.clientConfig.Q_zone;
 	import com.rpgGame.coreData.clientConfig.Q_zone_multy;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
+	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.netData.zone.bean.MultiZonePanelInfo;
 	
 	import flash.utils.Dictionary;
@@ -40,7 +42,7 @@ package com.rpgGame.appModule.dungeon.multy
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.fuben.FuBen_DuoRen_Item;
 	import org.mokylin.skin.app.fuben.FuBen_DuoRen_Skin;
-	import com.rpgGame.coreData.type.CharAttributeType;
+	
 	import starling.display.DisplayObject;
 	import starling.display.Shape;
 	import starling.display.Sprite;
@@ -58,6 +60,7 @@ package com.rpgGame.appModule.dungeon.multy
 		private var passRewardIcon:Vector.<IconCDFace>;
 		private var passRewardList:Dictionary;
 		private var allRewardIcon:Vector.<IconCDFace>;
+		private var passAllreward:RewardGroup;
 		
 		public function MultyView():void
 		{
@@ -265,16 +268,26 @@ package com.rpgGame.appModule.dungeon.multy
 		
 		private function setSelctItem(id:int):void
 		{
-			if(selectId>=0)
+			/*if(selectId>=0)
 			{
 				cloSelectItem(itemList[selectId]);
-			}
+			}*/
+			cloAllItem();
 			selectId=id;
 			selectZid=ZoneMultyCfgData.getZoneIdByID(selectId);
 			unSelectItem(itemList[selectId]);
 			setSite();
 			selectItemInfo();
 		}
+		/**收缩所有元素*/
+		private function cloAllItem():void
+		{
+			for(var i:int=0;i<itemList.length;i++)
+			{
+				cloSelectItem(itemList[i]);
+			}
+		}
+		
 		
 		/**设置右边信息*/
 		private function selectItemInfo():void
@@ -389,16 +402,28 @@ package com.rpgGame.appModule.dungeon.multy
 				item.lbNum.text=info.rewardCount+"/"+multyData.q_front+"通关奖励：";
 			}
 			
-			var allpass:int=GlobalSheetData.getSettingInfo(515).q_int_value;
-			_skin.lbTiaozhan.text="每日挑战"+allpass+"次可领取（"+DungeonManager.challengeCount+"/"+allpass+"）：";
+			
 			
 		}
 		
 		/**设置全局奖励文字*/
 		private function creatGlobalReward():void
 		{
-			if(GlobalSheetData.getSettingInfo(515)==null||GlobalSheetData.getSettingInfo(516)==null) return;
-			var reward:Array=JSONUtil.decode(GlobalSheetData.getSettingInfo(516).q_string_value);
+			if(GlobalSheetData.getSettingInfo(516))
+			{
+				var allpass:int=GlobalSheetData.getSettingInfo(515).q_int_value;
+				_skin.lbTiaozhan.text="每日挑战"+allpass+"次可领取（"+DungeonManager.challengeCount+"/"+allpass+"）：";
+			}
+			
+			
+			if(GlobalSheetData.getSettingInfo(516));
+			{
+				passAllreward=new RewardGroup(IcoSizeEnum.ICON_36,_skin.reward_ico_0,RewardGroup.ALIN_LEFT,10,2,2);
+				passAllreward.setRewardByJsonStr(GlobalSheetData.getSettingInfo(516).q_string_value);
+			}
+			
+			
+			/*var reward:Array=JSONUtil.decode(GlobalSheetData.getSettingInfo(516).q_string_value);
 			if(reward==null||reward.length==0)return;
 			var i:int;
 			for(i=0;i<8;i++)
@@ -427,7 +452,7 @@ package com.rpgGame.appModule.dungeon.multy
 						
 					}
 				}
-			}
+			}*/
 			
 			
 		}
@@ -505,8 +530,9 @@ package com.rpgGame.appModule.dungeon.multy
 				{
 					ico=IconCDFace.create(IcoSizeEnum.ICON_48);
 					ico.showCD=false;
-					ico.x=temp.pass_ico.x+4;
-					ico.y=temp.pass_ico.y+4;
+					/*ico.x=temp.pass_ico.x+4;
+					ico.y=temp.pass_ico.y+4;*/
+					ico.bindBg(temp.pass_ico);
 					ico.setIconResName(ClientConfig.getItemIcon(item.q_icon.toString(),IcoSizeEnum.ICON_48));
 					TaskUtil.setItemTips(ico,item,reward.num);
 					passRewardIcon.push(ico);
@@ -515,7 +541,9 @@ package com.rpgGame.appModule.dungeon.multy
 					
 				}
 			}
-			var passReward:Array=JSONUtil.decode(multyData.q_prob_reward);
+			var _rewardNow:RewardGroup=new RewardGroup(IcoSizeEnum.ICON_36,temp.prob_ioc_0,RewardGroup.ALIN_LEFT,10,2,2);
+			_rewardNow.setRewardByJsonStr(multyData.q_prob_reward);
+			/*var passReward:Array=JSONUtil.decode(multyData.q_prob_reward);
 			for(i=0;i<8;i++)
 			{
 				temp["prob_ioc_"+i].visible=false;
@@ -542,7 +570,7 @@ package com.rpgGame.appModule.dungeon.multy
 						}
 					}
 				}
-			}
+			}*/
 			
 			return skin;
 		}
@@ -567,6 +595,12 @@ package com.rpgGame.appModule.dungeon.multy
 			if(DungeonManager.extraReward==1)
 			{
 				DungeonManager.extraReward=0;
+				passAllreward.tweeRewardInBag(3);
+			}
+			
+			/*if(DungeonManager.extraReward==1)
+			{
+				DungeonManager.extraReward=0;
 				for(i=0;i<allRewardIcon.length;i++)
 				{
 					if(allRewardIcon[i].visible)
@@ -577,7 +611,7 @@ package com.rpgGame.appModule.dungeon.multy
 					}
 					
 				}
-			}
+			}*/
 			
 			
 			
@@ -586,10 +620,10 @@ package com.rpgGame.appModule.dungeon.multy
 		private function gainReward():void
 		{
 			var i:int;
-			for(i=0;i<allRewardIcon.length;i++)
+			/*for(i=0;i<allRewardIcon.length;i++)
 			{
 				GrayFilter.unGray(allRewardIcon[i]);
-			}
+			}*/
 			if(DungeonManager.isReward)
 			{
 				DungeonManager.isReward=false;

@@ -48,7 +48,7 @@ package com.rpgGame.app.state.ai
 			{
 				if (!SceneRoleSelectManager.selectedRole.stateMachine.isDeadState)
 				{
-					transition(AIStateType.ATTACK_TARGET);
+					//transition(AIStateType.ATTACK_TARGET);
 					return;
 				}
 			}
@@ -59,7 +59,7 @@ package com.rpgGame.app.state.ai
 				SceneRoleSelectManager.selectedRole = role;
 				TrusteeshipManager.getInstance().setRoleList(role);
 				var monsterData : MonsterData = role.data as MonsterData;
-				transition(AIStateType.AI_NONE);
+				//transition(AIStateType.AI_NONE);
 			}
 		}
 
@@ -191,11 +191,9 @@ package com.rpgGame.app.state.ai
 				return -1;
 			return 0;
 		}
-
-		private function onArrive(ref : WalkMoveStateReference) : void
-		{
-			transition(AIStateType.AI_NONE);
-		}
+		
+		
+		
 		override public function enterPass(prevState : IState, force : Boolean = false) : Boolean
 		{
 			if(TrusteeshipManager.getInstance().getHasRole()&&SceneRoleSelectManager.selectedRole !=null)
@@ -203,6 +201,7 @@ package com.rpgGame.app.state.ai
 				if (!force)
 					return false;
 			}
+			
 			if (MainRoleManager.actor.stateMachine.isWalkMoving)
 			{
 				if (!force)

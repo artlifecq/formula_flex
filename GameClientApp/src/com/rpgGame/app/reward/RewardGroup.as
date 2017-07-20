@@ -1,6 +1,7 @@
 package  com.rpgGame.app.reward
 {
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.manager.ItemActionManager;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.utils.MCUtil;
@@ -9,6 +10,7 @@ package  com.rpgGame.app.reward
 	import com.rpgGame.netData.backpack.bean.TempItemInfo;
 	
 	import feathers.controls.UIAsset;
+	import feathers.utils.filter.GrayFilter;
 	
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
@@ -163,6 +165,45 @@ package  com.rpgGame.app.reward
 				setReward(rewards);
 			}
 		}
+		/**
+		 * 缓动进背包
+		 *  @param type 缓动类型 0：缓动，1：置灰并缓动，2：消失并缓动，3：置灰并缓动后恢复，4：消失并缓动后恢复
+		 * 
+		 */		
+		public function tweeRewardInBag(type:int=0):void
+		{
+			for each (var icon:IconCDFace in icons) 
+			{
+				tweeInBag(icon,type);
+			}
+		}
+		private function tweeInBag(icon:IconCDFace,type:int=0):void
+		{
+			switch(type)
+			{
+				case 0:
+					ItemActionManager.tweenItemInBag(icon);
+					break;
+				case 1:
+					GrayFilter.gray(icon);
+					ItemActionManager.tweenItemInBag(icon);
+					break;
+				case 2:
+					icon.visible=false;
+					ItemActionManager.tweenItemInBag(icon);
+					break;
+				case 3:
+					GrayFilter.gray(icon);
+					ItemActionManager.tweenItemInBag(icon,null,function onCmp():void{if(icon&&icon.isDestroyed)GrayFilter.unGray(icon)});
+					break;
+				case 4:
+					icon.visible=false;
+					ItemActionManager.tweenItemInBag(icon,null,function onCmp():void{if(icon&&icon.isDestroyed)icon.visible=true});
+					break;
+				default:
+					break;
+			}
+		}
 		
 		private function layout():void
 		{
@@ -206,7 +247,7 @@ package  com.rpgGame.app.reward
 			var maxX:int=0;
 			for (var i:int = 0; i < len; i++) 
 			{
-				dis=icons[i].bg;
+				dis=icons[i];
 				tmpX=maxX-(i%cellMaxNum)*(initW+dX);
 				tmpY=int(i/cellMaxNum)*(initH+dY);	
 				dis.x=tmpX;
@@ -236,7 +277,7 @@ package  com.rpgGame.app.reward
 			var nowRowIndex:int=0;
 			for (var i:int = 0; i < len; i++) 
 			{
-				dis=icons[i].bg;
+				dis=icons[i];
 				nowCellIndex=i%cellMaxNum;
 				if (nowCellIndex==0) 
 				{

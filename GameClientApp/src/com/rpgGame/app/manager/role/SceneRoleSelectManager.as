@@ -120,7 +120,7 @@ package com.rpgGame.app.manager.role
 				_selectedRole.avatar.removeRenderUnitByID(RenderUnitType.SELECTED_RING, RenderUnitID.SELECTED_RING);
 			}
 			_selectedRole = value;
-			if (_selectedRole && _selectedRole.usable && (!_selectedRole.stateMachine.isDeadState||MainRoleManager.actorInfo.job==JobEnum.ROLE_4_TYPE))
+			if (isCanSelected(_selectedRole))
 			{
 				if (_selectedRole.headFace is HeadFace)
 					(_selectedRole.headFace as HeadFace).isSelected = true;
@@ -135,6 +135,14 @@ package com.rpgGame.app.manager.role
 				_selectedRole = null;
 			}
 			EventManager.dispatchEvent(SceneInteractiveEvent.SELECTED_SCENE_ROLE, _selectedRole);
+		}
+		
+		private static function isCanSelected(role:SceneRole):Boolean
+		{
+			var result:Boolean;
+			result=role && role.usable;
+			result=result&&(!role.stateMachine.isDeadState||MainRoleManager.actorInfo.job==JobEnum.ROLE_4_TYPE);
+			return result;
 		}
 		
 		public static function updateRoleRingEffect(role : SceneRole) : void

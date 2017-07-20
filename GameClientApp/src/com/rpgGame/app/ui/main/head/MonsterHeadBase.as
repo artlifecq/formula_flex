@@ -34,8 +34,8 @@ package com.rpgGame.app.ui.main.head
 		private var goodBuffs:Vector.<BuffIcon>;
 		private var badBuffs:Vector.<BuffIcon>;
 
-		private var startX:int=52;
-		private var startY:int=60;
+		private var startX:int=75;
+		private var startY:int=61;
 		
 		public function MonsterHeadBase(skin:StateSkin=null)
 		{
@@ -106,7 +106,7 @@ package com.rpgGame.app.ui.main.head
 			}
 			
 			var gridW:int=IcoSizeEnum.ICON_24+10;
-			startX=52;
+			startX=75;
 			for(var i:int=0;i<goodBuffs.length;i++){//buff
 				icon=goodBuffs[i];
 				icon.x=startX;

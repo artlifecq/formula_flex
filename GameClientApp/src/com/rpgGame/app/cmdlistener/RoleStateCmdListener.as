@@ -16,6 +16,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.sender.TaskSender;
 	import com.rpgGame.app.state.role.RoleStateUtil;
+	import com.rpgGame.app.state.role.action.JumpStateReference;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
@@ -31,8 +32,12 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleType;
 	import com.rpgGame.coreData.role.SceneDropGoodsData;
+	import com.rpgGame.coreData.role.SceneJumpPointData;
 	import com.rpgGame.coreData.role.SceneTranportData;
+	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
+	
+	import flash.geom.Vector3D;
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
@@ -90,24 +95,54 @@ package com.rpgGame.app.cmdlistener
 			var areaMapData : AreaMapData = _otherAreaMap.getFlag(actor.x, actor.z);
 			var flagObj : Object = areaMapData ? areaMapData.data : null;
 			if (flagObj is SceneRole)
-			{GameLog.addShow("----------触发场景物"+actor.x+","+actor.z);
+			{
 				if ((flagObj as SceneRole).type == SceneCharType.TRANS)
-				{GameLog.addShow("----------触发传送门了"+actor.x+","+actor.z);
+				{
 					var trans : SceneRole = flagObj as SceneRole;
 					if (!trans.isInViewDistance)
 						return;
 					var tranportData : SceneTranportData = trans.data as SceneTranportData;
-					GameLog.addShow("[RoleStateCmdListener] [mainCharMoveThroughHandler]" + tranportData.id);
 					switch (tranportData.type)
 					{
 						case RoleType.TYPE_TRANPORT_NORMAL:
-							GameLog.addShow("----------TYPE_TRANPORT_NORMAL" +tranportData.id);
 							SceneSender.transportChgMap(tranportData.id);
 							break;
 						case RoleType.TYPE_TRANPORT_MAZE:
 							MazeSender.tryTrans(tranportData.id);
 							break;
 					}
+				}
+				else if ((flagObj as SceneRole).type == SceneCharType.SCENE_JUMP)//触发跳跃点---yt
+				{
+					var jump : SceneRole = flagObj as SceneRole;
+					if (!jump.isInViewDistance)
+						return;
+					var jumpData : SceneJumpPointData = jump.data as SceneJumpPointData;
+					Lyt.a("触发跳跃点");
+					
+					
+					if(MainRoleManager.actor.stateMachine.isRunning||MainRoleManager.actor.stateMachine.isIdle)
+					{Lyt.a("跳跃动作");
+						SceneSender.jumppointTrigger(jumpData.id);
+						/*var role : SceneRole = MainRoleManager.actor;
+						if (role && role.usable)
+						{
+							var ref : JumpStateReference = role.stateMachine.getReference(JumpStateReference) as JumpStateReference;
+							var destPoint:Vector3D=new Vector3D(jumpData.destPoint[0].x,0,jumpData.destPoint[0].y);
+							ref.setParams(0,destPoint);
+							role.stateMachine.transition(RoleStateType.ACTION_JUMP, ref);
+						}*/
+					}
+					
+					
+					/*
+					switch (jumpData.type)
+					{
+						case RoleType.TYPE_JUMP:
+							
+							break;
+						
+					}*/
 				}
 			}
 			else if (flagObj is TaskFollowEscortInfo)

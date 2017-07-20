@@ -5,9 +5,12 @@ package com.rpgGame.app.state.role.control
 	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.core.state.role.control.ControlState;
 	import com.rpgGame.coreData.type.RoleStateType;
-
+	
+	import flash.geom.Vector3D;
+	
 	import gs.TweenLite;
 	import gs.easing.Cubic;
+	import gs.easing.Linear;
 
 	/**
 	 *
@@ -26,9 +29,8 @@ package com.rpgGame.app.state.role.control
 		 * 二级跳跃高度
 		 */
 		public static var SECOND_JUMP_HEIGHT : int = 100;
-
 		private var _stateReference : JumpRiseStateReference;
-
+		private var _destPoint:Vector3D;
 		public function JumpRiseState()
 		{
 			super(RoleStateType.CONTROL_JUMP_RISE);
@@ -41,6 +43,7 @@ package com.rpgGame.app.state.role.control
 			if (_ref is JumpRiseStateReference)
 			{
 				_stateReference = _ref as JumpRiseStateReference;
+				_destPoint=_stateReference.destPoint;
 				doJump();
 			}
 			else
@@ -55,10 +58,20 @@ package com.rpgGame.app.state.role.control
 		{
 			if (_machine && !_machine.isInPool)
 			{
-				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {offsetY: true});
+				
 				var jumpHeight : int = _stateReference.isSecondJump ? SECOND_JUMP_HEIGHT : JUMP_HEIGHT;
 				var totalTime : int = _stateReference.totalTime;
-				TweenLite.to(_machine.owner as SceneRole, totalTime * 0.5 * 0.001, {offsetY: jumpHeight, ease: Cubic.easeOut, overwrite: 0, onComplete: onJumpOffComplete});
+				if(_destPoint)//有目的点的跳跃位移也停掉  缓动改变位置
+				{Lyt.a("++++开始跳到目的地："+totalTime+"x:"+_destPoint.x+"y:"+_destPoint.z);
+					TweenLite.killTweensOf(_machine.owner as SceneRole, false, {x:true,z:true,offsetZ: true});
+					(_machine.owner as SceneRole).faceToGround(_destPoint.x, _destPoint.z);
+					TweenLite.to(_machine.owner as SceneRole, totalTime * 0.001, {x:_destPoint.x,z:_destPoint.z, ease: Linear.easeNone, overwrite: 0});
+				}
+				else //没有有目的点的跳跃 不用停位移
+				{
+					TweenLite.killTweensOf(_machine.owner as SceneRole, false, {offsetZ: true});
+				}
+				TweenLite.to(_machine.owner as SceneRole, totalTime * 0.5 * 0.001, {offsetZ: jumpHeight, ease: Cubic.easeOut, overwrite: 0, onComplete: onJumpOffComplete});
 			}
 		}
 
@@ -71,7 +84,7 @@ package com.rpgGame.app.state.role.control
 			if (_machine && !_machine.isInPool)
 			{
 				var totalTime : int = _stateReference.totalTime;
-				TweenLite.to(_machine.owner as SceneRole, totalTime * 0.5 * 0.001, {offsetY: 0, ease: Cubic.easeIn, overwrite: 0, onComplete: onJumpFallComplete});
+				TweenLite.to(_machine.owner as SceneRole, totalTime * 0.5 * 0.001, {offsetZ: 0, ease: Cubic.easeIn, overwrite: 0, onComplete: onJumpFallComplete});
 			}
 		}
 
@@ -84,9 +97,13 @@ package com.rpgGame.app.state.role.control
 			if (_machine && !_machine.isInPool)
 			{
 				removeSelf();
-				if ((_machine as RoleStateMachine).isWalkMoving)
+				if ((_machine as RoleStateMachine).isWalkMoving&&!_destPoint)
 				{
 					transition(RoleStateType.ACTION_RUN);
+				}
+				else//有目的点的位移不用切换到 run
+				{
+					transition(RoleStateType.ACTION_IDLE);
 				}
 			}
 		}
@@ -102,11 +119,16 @@ package com.rpgGame.app.state.role.control
 		 * 
 		 */		
 		private function stopJump() : void
-		{
+		{Lyt.a("++++跳完了：");
 			if (_machine && !_machine.isInPool)
 			{
-				(_machine.owner as SceneRole).offsetY = 0;
-				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {offsetY: true});
+				(_machine.owner as SceneRole).offsetZ = 0;
+				if(_destPoint)
+				{
+					_machine.owner.x=_destPoint.x;
+					_machine.owner.z=_destPoint.z;
+				}
+				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {x:true,z:true,offsetZ: true});
 			}
 		}
 

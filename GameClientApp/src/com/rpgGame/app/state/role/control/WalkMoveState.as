@@ -122,13 +122,14 @@ package com.rpgGame.app.state.role.control
 			}
 		}
 
-		private function startMove(nextPos : Vector3D, nextGridPos : Vector3D, nextPosGapTm : int) : void
+		private function startMove(nextPos : Vector3D, nextGridPos : Vector3D, nextPosGapTm : int,path:Vector.<Vector3D>) : void
 		{
 			if (_stateReference)
 			{
 				_stateReference.nextPos = nextPos;
 				_stateReference.nextGridPos = nextGridPos;
 				_stateReference.nextPosGapTm = nextPosGapTm;
+				_stateReference.leftPath=path;
 				move();
 			}
 		}
@@ -411,7 +412,7 @@ package com.rpgGame.app.state.role.control
 					{
 //						trace(nextPosGapTm + "    =======================真正一步用的时间");
 						(_machine.owner as SceneRole).faceToGround(_nextPos.x, _nextPos.z);
-						startMove(_nextPos, _nextPos, nextPosGapTm);
+						startMove(_nextPos, _nextPos, nextPosGapTm,path);
 						TweenLite.to(_machine.owner as SceneRole, nextPosGapTm * 0.001, {x: _nextPos.x, z: _nextPos.z, onComplete: moveStep, onCompleteParams: [path, timeStamps], onUpdate: onWalkStepUpdate, onUpdateParams: [], ease: Linear.easeNone, overwrite: 0});
 					}
 					else

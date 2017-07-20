@@ -17,7 +17,7 @@ package  com.rpgGame.coreData.cfg
 			_dataDic = new Dictionary();
 			
 			_dataArr = data.readObject();
-			
+			_dataArr.sortOn("q_id");
 			for each(var info :Q_girl_pet in _dataArr) {
 				_dataDic[info.q_id] = info;
 			}

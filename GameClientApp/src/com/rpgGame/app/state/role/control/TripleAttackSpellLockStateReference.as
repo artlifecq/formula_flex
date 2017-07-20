@@ -1,6 +1,7 @@
 package com.rpgGame.app.state.role.control
 {
 	import com.game.engine3D.state.role.RoleStateReference;
+	import com.rpgGame.app.manager.SpellManager;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	
@@ -20,7 +21,7 @@ package com.rpgGame.app.state.role.control
 		public function setParams(skill:int):void
 		{
 			this.startSkill=skill;
-			var qSkill:Q_skill_model=SpellDataManager.getSpellData(skill);
+			var qSkill:Q_skill_model=SpellDataManager.getSpellData(skill,SpellManager.getSkillGrade(skill));
 			_skills=null;
 			if (qSkill.q_relate_spells!="") 
 			{

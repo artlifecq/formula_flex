@@ -72,7 +72,6 @@ package com.rpgGame.app.state.role.action
 			if (_machine && !_machine.isInPool)
 			{
 				super.execute();
-				transition(RoleStateType.ACTION_IDLE,null,true);
 				_showType=RoleActionType.SHOW2;
 				_repeatNum=1;
 			}

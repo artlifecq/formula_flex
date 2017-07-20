@@ -1,11 +1,13 @@
 package   com.rpgGame.app.ui.main.team
 {
+	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.hint.FloatingText;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.utils.MenuUtil;
 	import com.rpgGame.app.view.icon.BgIcon;
 	import com.rpgGame.core.events.TeamEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
@@ -14,34 +16,31 @@ package   com.rpgGame.app.ui.main.team
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.BuffStateDataManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.clientConfig.Q_buff;
 	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.clientConfig.Q_tipsinfo;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.MapDataManager;
-	import com.rpgGame.coreData.type.AssetUrl;
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.netData.team.bean.TeamMemberBriefInfo;
 	import com.rpgGame.netData.team.bean.TeamMemberInfo;
-	
-	import away3d.events.Event;
 	
 	import feathers.controls.UIAsset;
 	
 	import org.mokylin.skin.mainui.head.head_min_Skin;
 	
 	import starling.display.DisplayObject;
-	
-	
-	
+	import starling.events.Touch;
+	import starling.events.TouchEvent;
+	import starling.events.TouchPhase;
 	
 	public class TeamBarListItemExt extends SkinUI
 	{
-		
 		private var _data:TeamMemberInfo;
 		private var _skin:head_min_Skin;
-		private var _headImg:UIAsset;
+		//		private var _headImg:UIAsset;
 		private var tipData:Array=["未知","未知",0,0];
 		private var buffIcon:Array=[];
 		private var _stateImg:UIAsset;
@@ -49,37 +48,40 @@ package   com.rpgGame.app.ui.main.team
 		{
 			_skin=new head_min_Skin();
 			super(_skin);
-			
-			_headImg=new UIAsset();
-			_headImg.x=10;
-			_headImg.y=8;
-			_skin.container.addChildAt(_headImg,3);
+			_skin.skinSelect.visible=false;
+			//			_headImg=new UIAsset();
+			//			_headImg.x=10;
+			//			_headImg.y=8;
+			//			_skin.container.addChildAt(_headImg,3);
 			var str:String="所在地图：$<br>";
 			str+="等级：$<br>"+"气血：$/$";
 			TipTargetManager.show(this,TargetTipsMaker.makeSimplePropChangeTextTips(str,tipData));
 			Mgr.teamMgr.addEventListener(TeamEvent.TEAM_MEM_ATTR_CHANGE,onTeamAttrChange);
 			MCUtil.removeSelf(_skin.role_buffer);
-			
-			
 		}	
-		override protected function onTouchTarget(target:DisplayObject):void
+		
+		override protected function onTouchTarget(target : DisplayObject) : void 
 		{
-			super.onTouchTarget(target);
-			switch(target)
-			{
-				case _skin.btn_cha:
-				{
-					onView();
+			switch (target) {
+				case this._skin.btn_more:
+					var menus : Array = MenuUtil.getPlayerTargetMenu(_data.memberId.ToGID(), true);
+					MenuManager.showMenu(menus, [_data.memberId, _data.memberName], -1, -1, 80);
 					break;
-				}
-					
-				default:
-				{
-					onSelectPlayer();
-					break;
-				}
 			}
 		}
+		
+		override protected function onShow():void
+		{
+			super.onShow();
+			this.addEventListener(starling.events.TouchEvent.TOUCH, onTouchItem);
+		}
+		
+		override protected function onHide():void
+		{
+			super.onHide();
+			this.removeEventListener(starling.events.TouchEvent.TOUCH, onTouchItem);
+		}
+		
 		private function onView():void
 		{
 			// TODO Auto Generated method stub
@@ -138,28 +140,40 @@ package   com.rpgGame.app.ui.main.team
 		public function setData(team:*):void
 		{
 			this._data=team as TeamMemberInfo;
-			_skin.btn_cha.visible=!_data.memberId.EqualTo(MainRoleManager.actorInfo.serverID);
+			//			_skin.btn_cha.visible=!_data.memberId.EqualTo(MainRoleManager.actorInfo.serverID);
 			var job:int=data.appearanceInfo.job;
-			_skin.UI_bing.visible=job==JobEnum.ROLE_1_TYPE;
-			_skin.UI_yi.visible=job==JobEnum.ROLE_4_TYPE;
-			_skin.UI_mo.visible=(job==JobEnum.ROLE_2_TYPE)||(job==JobEnum.ROLE_3_TYPE);
+			//			_skin.UI_bing.visible=job==JobEnum.ROLE_1_TYPE;
+			//			_skin.UI_yi.visible=job==JobEnum.ROLE_4_TYPE;
+			//			_skin.UI_mo.visible=(job==JobEnum.ROLE_2_TYPE)||(job==JobEnum.ROLE_3_TYPE);
 			
 			switch(job){
 				case JobEnum.ROLE_1_TYPE:
-					_headImg.styleName=AssetUrl.HEAD_ICON_1_SMALL;
+					this._skin.icon.styleName = "ui/mainui/head/touxiang/bingjia/small.png";
 					break;
 				case JobEnum.ROLE_2_TYPE:
-					_headImg.styleName=AssetUrl.HEAD_ICON_2_SMALL;
+					this._skin.icon.styleName = "ui/mainui/head/touxiang/mojia/small.png";
 					break;
 				case JobEnum.ROLE_3_TYPE:
-					_headImg.styleName=AssetUrl.HEAD_ICON_3_SMALL;
+					this._skin.icon.styleName = "ui/mainui/head/touxiang/mojia/small.png";
 					break;
 				case JobEnum.ROLE_4_TYPE:
-					_headImg.styleName=AssetUrl.HEAD_ICON_4_SMALL;
+					this._skin.icon.styleName = "ui/mainui/head/touxiang/yijia/small.png";
 					break;
 			}
 			updateDynamic(_data.maxhp,null);
-			_skin.role_name.text=_data.memberName+" ("+data.memberLevel+"级)";
+			_skin.lbLevel.text = data.memberLevel.toString();
+			var arr:Array=  _data.memberName.split(']');
+			if(arr.length>1)	
+				this._skin.role_name.text = arr[1];
+			else this._skin.role_name.text =  _data.memberName;
+			if(data.memberId.ToGID()==MainRoleManager.actorID){
+				this._skin.btn_more.visible=false;
+				this._skin.role_name.color = StaticValue.A_UI_YELLOW_TEXT;
+			}
+			else{
+				this._skin.btn_more.visible=true;
+				this._skin.role_name.color = StaticValue.A_UI_BEIGE_TEXT;
+			}
 			_skin.qizi.visible=_data.memberId.EqualTo(Mgr.teamMgr.captain.memberId);
 			var state:int=Mgr.teamMgr.getNearState(_data.memberId);
 			setState(state);
@@ -223,6 +237,19 @@ package   com.rpgGame.app.ui.main.team
 						buffIcon.push(icon);
 					}
 				}
+			}
+		}
+		
+		public function onTouchItem(e:TouchEvent):void
+		{
+			var t:Touch=e.getTouch(this);
+			if(!t){
+				_skin.skinSelect.visible=false;
+				return;
+			}
+			t=e.getTouch(this,TouchPhase.HOVER);
+			if(t){
+				_skin.skinSelect.visible=true;
 			}
 		}
 		

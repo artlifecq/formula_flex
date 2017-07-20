@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.pet
 {
 	import com.rpgGame.app.manager.Mgr;
+	import com.rpgGame.app.manager.PetManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.FightValueUtil;
@@ -9,6 +10,7 @@ package com.rpgGame.appModule.pet
 	import com.rpgGame.appModule.jingmai.sub.TweenScaleScrollUitlExt;
 	import com.rpgGame.appModule.pet.sub.PetAttrCon;
 	import com.rpgGame.appModule.pet.sub.PetZoneBall;
+	import com.rpgGame.core.events.PetEvent;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.ClientConfig;
@@ -23,6 +25,7 @@ package com.rpgGame.appModule.pet
 	
 	import feathers.utils.filter.GrayFilter;
 	
+	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.meiren.MeiRen_Skin;
 	
 	import starling.display.Sprite;
@@ -63,7 +66,7 @@ package com.rpgGame.appModule.pet
 				tmp=new PetHeadItemExt(qPet);
 				tmp.x=0;
 				tmp.y=(2+tmp.height)*i;
-				tmp.setServerData(Mgr.petMgr.getPet(qPet.q_id));
+				//tmp.setServerData(Mgr.petMgr.getPet(qPet.q_id));
 				_headCon.addChild(tmp);
 				_headItems.push(tmp);
 			}
@@ -76,8 +79,8 @@ package com.rpgGame.appModule.pet
 				_zoneBalls.push(new PetZoneBall(_skin["icon"+(j+1)]));
 			}
 			_attrCon=new PetAttrCon();
-			_attrCon.x=235;
-			_attrCon.y=24;
+			_attrCon.x=687;
+			_attrCon.y=257;
 			this.addChild(_attrCon);
 			
 			_bgIco=new BgIcon(IcoSizeEnum.ICON_42);
@@ -94,13 +97,13 @@ package com.rpgGame.appModule.pet
 		private function onHideAttrAdd():void
 		{
 			// TODO Auto Generated method stub
-			_attrCon.showAttrAdd(true);
+			_attrCon.showAttrAdd(false);
 		}
 		
 		private function onShowAttrAdd():void
 		{
 			// TODO Auto Generated method stub
-			_attrCon.showAttrAdd(false);
+			_attrCon.showAttrAdd(true);
 		}
 		
 		private function onShowLevelUpPanel():void
@@ -152,9 +155,9 @@ package com.rpgGame.appModule.pet
 			// TODO Auto Generated method stub
 			selectItem(item);
 		}
-		private function selectItem(item:PetHeadItemExt):void
+		private function selectItem(item:PetHeadItemExt,force:Boolean=false):void
 		{
-			if (item==_curSelectItem) 
+			if (!force&&item==_curSelectItem) 
 			{
 				return;
 			}
@@ -285,7 +288,15 @@ package com.rpgGame.appModule.pet
 		}
 		override protected function onShow():void
 		{
+			EventManager.addEvent(PetEvent.PET_DATA_CHANGE,onPetChange);
 			super.onShow();
+			//重新设置数据
+			for each (var item:PetHeadItemExt in _headItems) 
+			{
+				item.setServerData(Mgr.petMgr.getPet(item.config.q_id))
+			}
+			
+			
 			var tmp:PetHeadItemExt=null;
 			if (_curSelectItem!=null) 
 			{
@@ -325,9 +336,28 @@ package com.rpgGame.appModule.pet
 			selectItem(tmp);
 			_tweenS.scroll2Index(_headItems.indexOf(tmp));
 		}
+		
+		private function onPetChange(pet:PetInfo):void
+		{
+			// TODO Auto Generated method stub
+			for each (var item:PetHeadItemExt in _headItems) 
+			{
+				if (item.data.modelId==pet.modelId) 
+				{
+					item.setServerData(pet);
+					if (item==_curSelectItem) 
+					{
+						selectItem(item,true);
+					}
+					break;
+				}
+			}
+			
+		}
 		override protected function onHide():void
 		{
 			super.onHide();
+			EventManager.removeEvent(PetEvent.PET_DATA_CHANGE,onPetChange);
 		}
 		public function updatePos():void
 		{

@@ -13,11 +13,9 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.info.move.TrailPathPoint;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.RoleStateType;
-
+	
 	import flash.utils.getTimer;
-
-	import app.message.RaceId;
-
+	
 	import org.client.mainCore.manager.EventManager;
 
 	/**
@@ -90,8 +88,7 @@ package com.rpgGame.app.manager
 			}
 			(role.data as HeroData).trailMount = mountRes;
 			(role.data as HeroData).trailMountAnimat = mountAnimatRes;
-//			AvatarManager.callEquipmentChange(role);
-			AvatarManager.updateAvatar(role);
+			AvatarManager.updateMount(role);
 			doTrailToPos(role, trailPathPoints, isClingGround, startTime, null, onTrailToComplete);
 		}
 
@@ -101,8 +98,7 @@ package com.rpgGame.app.manager
 			role.clingGroundCalculate = SceneManager.getScene().clingGround;
 			(role.data as HeroData).trailMount = null;
 			(role.data as HeroData).trailMountAnimat = null;
-//			AvatarManager.callEquipmentChange(role);
-			AvatarManager.updateAvatar(role);
+			AvatarManager.updateMount(role);
 		}
 
 		public static function doTrailToPos(role : SceneRole, trailPathPoints : Vector.<TrailPathPoint>, isClingGround : Boolean, startTime : Number, data : Object = null, onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null) : Boolean

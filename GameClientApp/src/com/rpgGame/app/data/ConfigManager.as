@@ -50,6 +50,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.LostSkillUpData;
 	import com.rpgGame.coreData.cfg.LunJianCfg;
 	import com.rpgGame.coreData.cfg.MailCfgData;
+	import com.rpgGame.coreData.cfg.MapJumpCfgData;
 	import com.rpgGame.coreData.cfg.MapPreLoadData;
 	import com.rpgGame.coreData.cfg.MazeCfgData;
 	import com.rpgGame.coreData.cfg.MibaoCfgData;
@@ -246,7 +247,8 @@ package com.rpgGame.app.data
 			AreaCfgData.setup(dic[ConfigClassRegister.Q_area]);
 			// 传送门
 			TransCfgData.setup(dic[ConfigClassRegister.Q_map_transfer]);
-			
+			// 跳跃点
+			MapJumpCfgData.setup(dic[ConfigClassRegister.Q_map_jump]);
 			//怪物//NPC
 			MonsterDataManager.setMonsterConfig(dic[ConfigClassRegister.Q_monster]);//怪物总表
 			MonsterDataManager.setSceneAreaMonsterConfig(dic[ConfigClassRegister.Q_scene_monster_area]);//怪物刷新表

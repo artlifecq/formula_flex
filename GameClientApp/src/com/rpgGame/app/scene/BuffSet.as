@@ -17,6 +17,7 @@ package com.rpgGame.app.scene
 	import com.rpgGame.app.state.role.control.ShapeshiftingStateReference;
 	import com.rpgGame.app.state.role.control.ShortcutGridStateReference;
 	import com.rpgGame.app.state.role.control.SkillWarningStateReference;
+	import com.rpgGame.app.state.role.control.SpriteUpBuffStateReference;
 	import com.rpgGame.app.state.role.control.StiffStateReference;
 	import com.rpgGame.app.state.role.control.StunStateReference;
 	import com.rpgGame.app.state.role.control.SyncSpellActionStateReference;
@@ -315,6 +316,9 @@ package com.rpgGame.app.scene
 					case 121://冲刺
 						_role.stateMachine.removeState(RoleStateType.CONTROL_BUFF_SPRITEUP);
 						break;
+					case 7://减少技能cd
+						_role.stateMachine.removeState(RoleStateType.CONTROL_BUFF_SKILLCD);
+						break;
 					default:
 						/*buffRef = _role.stateMachine.getReference(UnmovableStateReference) as UnmovableStateReference;
 						buffRef.setParams(buffData);
@@ -489,8 +493,14 @@ package com.rpgGame.app.scene
 						_role.stateMachine.transition(RoleStateType.CONTROL_VIP,buffRef);
 						break;
 					case 121://冲刺
-						//_role.stateMachine.transition(RoleStateType.CONTROL_BUFF_SPRITEUP);
+						buffRef = _role.stateMachine.getReference(SpriteUpBuffStateReference) as SpriteUpBuffStateReference;
+						buffRef.setParams(buffData);
+						_role.stateMachine.transition(RoleStateType.CONTROL_BUFF_SPRITEUP,buffRef);
 						break;
+					case 7://减少技能cd
+						buffRef = _role.stateMachine.getReference(BuffStateReference) as BuffStateReference;
+						buffRef.setParams(buffData);
+						_role.stateMachine.transition(RoleStateType.CONTROL_BUFF_SKILLCD,buffRef);
 					default:
 						/*buffRef = _role.stateMachine.getReference(UnmovableStateReference) as UnmovableStateReference;
 						buffRef.setParams(buffData);

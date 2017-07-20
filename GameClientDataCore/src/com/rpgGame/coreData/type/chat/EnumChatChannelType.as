@@ -31,7 +31,6 @@ package com.rpgGame.coreData.type.chat
 		/** 传闻 **/
 		public static const CHAT_CHANNEL_HEARSAY:int = 8;
 		/** 跨服 **/
-		public static const CHAT_CHANNEL_KUA_FU:int = 9;
-		
+		public static const CHAT_CHANNEL_KUA_FU:int = 9;	
 	}
 }
