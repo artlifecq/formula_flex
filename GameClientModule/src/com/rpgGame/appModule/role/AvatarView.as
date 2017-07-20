@@ -2,8 +2,7 @@ package com.rpgGame.appModule.role
 {
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
-	import com.game.engine3D.manager.Stage3DLayerManager;
-	import com.rpgGame.app.display3D.InterAvatar3D;
+	import com.rpgGame.app.display3D.UIAvatar3D;
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
@@ -43,12 +42,9 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.coreData.type.item.GridBGType;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	
-	import flash.events.Event;
 	import flash.geom.Point;
 	
 	import app.message.EquipType;
-	
-	import away3d.events.MouseEvent3D;
 	
 	import feathers.data.ListCollection;
 	import feathers.dragDrop.DragData;
@@ -59,10 +55,6 @@ package com.rpgGame.appModule.role
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.beibao.juese_Skin;
 	
-	import starling.display.DisplayObject;
-	import starling.events.Touch;
-	import starling.events.TouchEvent;
-	import starling.events.TouchPhase;
 	import starling.filters.GlowFilter;
 
 	/**
@@ -74,9 +66,8 @@ package com.rpgGame.appModule.role
 	{
 		private var _skin : juese_Skin;
 		
-		private var _avatar : InterAvatar3D;
 		private var _showAvatarData : RoleData;
-		private var _avatarContainer:Inter3DContainer;
+		private var _avatarRole:UIAvatar3D;
 		private var equipNum:int=10;
 		private var bgList:Array=[GridBGType.EQUIP_WEAPON,GridBGType.EQUIP_HELM,GridBGType.EQUIP_ARMOR,GridBGType.EQUIP_LEGHARNESS,GridBGType.EQUIP_SHOE,GridBGType.EQUIP_SCAPULA,
 			GridBGType.EQUIP_RING,GridBGType.EQUIP_NECKLACE,GridBGType.EQUIP_BRACER,GridBGType.EQUIP_JADE];
@@ -96,9 +87,6 @@ package com.rpgGame.appModule.role
 		private var _roleData:HeroData;
 		private var isMainRole:Boolean;
 		private var otherItems:Vector.<ItemInfo>;
-		private var _touchID:int=-1;
-
-		private var startX:Number;
 
 		private var glowfilter:GlowFilter;
 		private var glowTween:TweenLite;
@@ -110,11 +98,9 @@ package com.rpgGame.appModule.role
 		{
 			acceptDropFromContainerIdArr=[ItemContainerID.BackPack];
 			_skin=skin;
-			_avatarContainer=new Inter3DContainer();
+			_avatarRole=new UIAvatar3D(_skin.avatarGrp);
 			_zhandouliEftContaner=new Inter3DContainer();
 			var index:int=_skin.container.getChildIndex(_skin.weapons);
-			_skin.container.addChildAt(_avatarContainer,index);
-			index=_skin.container.getChildIndex(_skin.weapons);
 			_skin.container.addChildAt(_zhandouliEftContaner,index);
 			_mgr=RoleEquipmentManager.instance;
 			initAvatar();
@@ -179,32 +165,15 @@ package com.rpgGame.appModule.role
 		
 		private function initAvatar():void
 		{
-			_avatar = new InterAvatar3D();
+		/*	_avatar = new InterAvatar3D();
 			_avatar.x = _skin.weapons.x + (_skin.weapons.width >> 1);
 			_avatar.y = _skin.weapons.y + _skin.weapons.height-20;
-			_avatarContainer.addChild3D(_avatar);
+			_avatarRole.addChild3D(_avatar);*/
 			_showAvatarData = new RoleData(0);
 			_showAvatarData.bodyRadius=25;
 			glowfilter=new GlowFilter(0xdfb612,1,1,1);
 			
 			_zhandouliEft= _zhandouliEftContaner.playInter3DAt(ClientConfig.getEffect("ui_zhandouli_jiemian"),_skin.footMsg.x+180,_skin.footMsg.y+42,0);
-			Stage3DLayerManager.screenView.mouseChildren=Stage3DLayerManager.screenView.mouseEnabled=true;
-			Stage3DLayerManager.screenView.addEventListener(MouseEvent3D.MOUSE_DOWN,onMs);
-//			Stage3DLayerManager.screenView.addEventListener("mouseDown",onMs);
-		}
-		
-		protected function onMs(event:Event):void
-		{
-			trace(event);
-		}
-		
-		internal function onTouchTarget(target : DisplayObject):Boolean
-		{
-			if(_skin.roleZone==target){
-				_avatar.curRole.stateMachine.transition(RoleStateType.ACTION_SHOW);
-				return true;
-			}
-			return false;
 		}
 		
 		public function show(data:HeroData,items:Vector.<ItemInfo>=null):void
@@ -221,7 +190,7 @@ package com.rpgGame.appModule.role
 			}
 			
 			updateRole();
-			_avatar.curRole.stateMachine.transition(RoleStateType.ACTION_SHOW);
+			_avatarRole.transition(RoleStateType.ACTION_SHOW);
 			updateBaseInfo();
 			
 			if(isMainRole)
@@ -552,39 +521,13 @@ package com.rpgGame.appModule.role
 				this._showAvatarData.avatarInfo.deputyWeaponEffectID=_roleData.avatarInfo.deputyWeaponEffectID;
 				this._showAvatarData.avatarInfo.deputyWeaponEffectScale=_roleData.avatarInfo.deputyWeaponEffectScale;
 				this._showAvatarData.avatarInfo.zhanqiResID=_roleData.avatarInfo.zhanqiResID;
-				this._avatar.setRoleData(this._showAvatarData);
-				this._avatar.curRole.setScale(1.7);	
+				this._avatarRole.setRoleData(this._showAvatarData);
+				this._avatarRole.setScale(1.7);	
 			}else{
-				this._avatar.curRole.updateWithRenderUnitID(type,_roleData.avatarInfo);
+				this._avatarRole.updateWithRenderUnitID(type,_roleData.avatarInfo);
 			}
 			
 //			RoleFaceMaskEffectUtil.addAvatarMask(AvatarMaskType.DIALOG_MASK,_avatar,144,-371,1.7);
-		}
-		
-		public function onTouch(e:TouchEvent):void
-		{
-			var touch : Touch;
-			if(_touchID!=-1){
-				touch = e.getTouch(_skin.roleZone,null,this._touchID);
-				if (!touch)
-					return;
-				if (touch.phase == TouchPhase.MOVED)
-				{
-					var movex:Number=touch.globalX-startX;
-					//this._avatar.curRole.rotationY=movex;
-                    this._avatar.rotationY = movex;
-				}else if (touch.phase == TouchPhase.ENDED)	{
-					this._touchID = -1;
-					//this._avatar.curRole.rotationY=0;
-                    this._avatar.rotationY = 0;
-				}
-			}else{
-				touch = e.getTouch(_skin.roleZone, TouchPhase.BEGAN);
-				if(touch){
-					this._touchID=touch.id;
-					startX=touch.globalX;
-				}
-			}
 		}
 	}
 }
