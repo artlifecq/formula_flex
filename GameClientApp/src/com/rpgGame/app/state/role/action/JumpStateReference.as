@@ -21,7 +21,11 @@ package com.rpgGame.app.state.role.action
 		{
 			super();
 		}
-
+		/**
+		 * @param costTime 跳跃时间
+		 * @param destPoint 跳跃目的点
+		* 传入时间和目的点就按目的点跳，没有就按原地跳规则
+		*/
 		public function setParams(jumpAction:int,costTime:int=0,destPoint:Vector3D=null) : void
 		{
 			_jumpAction = jumpAction;

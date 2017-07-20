@@ -21,6 +21,7 @@ package com.rpgGame.app.ui.main.taskbar
 	import feathers.controls.UIAsset;
 	import feathers.themes.GuiThemeStyle;
 	
+	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_chat;
 	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
 	import org.mokylin.skin.mainui.renwu.RenWuZhuiZong_Skin;
 	import org.mokylin.skin.mainui.renwu.Renwu_Item;
@@ -64,8 +65,8 @@ package com.rpgGame.app.ui.main.taskbar
 			scrollInit();
 			//_skin.sec_ico1_0.x=253*0.5;
 			//_skin.sec_ico2_0.x=253*0.5;
-			icoList1Group=new RewardGroup(IcoSizeEnum.ICON_42,_skin.sec_ico1_0,RewardGroup.ALIN_LEFT,4,6,6);
-			icoList2Group=new RewardGroup(IcoSizeEnum.ICON_42,_skin.sec_ico2_0,RewardGroup.ALIN_LEFT,4,6,6);
+			icoList1Group=new RewardGroup(IcoSizeEnum.ICON_42,_skin.sec_ico1_0,RewardGroup.ALIN_CENTER,4,6,6);
+			icoList2Group=new RewardGroup(IcoSizeEnum.ICON_42,_skin.sec_ico2_0,RewardGroup.ALIN_CENTER,4,6,6);
 			
 			skinList=new Array();
 			skinList.push(_skin.sec_navi1);
@@ -77,14 +78,14 @@ package com.rpgGame.app.ui.main.taskbar
 			skinList.push(_skin.sec_killbut2_2);
 			skinList.push(_skin.sec_killbut2_3);
 			skinList.push(icoList1Group);
-//			skinList.push(_skin.sec_subbut1);
+			skinList.push(_skin.sec_subbut1);
 			skinList.push(_skin.sec_navi3);
 			skinList.push(_skin.sec_killbut3_1);
 			skinList.push(_skin.sec_killbut3_2);
 			skinList.push(_skin.sec_killbut3_3);
 			skinList.push(_skin.sec_info);
 			skinList.push(icoList2Group);
-//			skinList.push(_skin.sec_subbut2);
+			skinList.push(_skin.sec_subbut2);
 			
 			navi1=_skin.sec_navi1;
 			navi2=_skin.sec_navi2;
@@ -122,8 +123,8 @@ package com.rpgGame.app.ui.main.taskbar
 			
 			
 			extraLabel=_skin.sec_info;
-//			subBut1=_skin.sec_subbut1;
-//			subBut2=_skin.sec_subbut2;
+			subBut1=_skin.sec_subbut1;
+			subBut2=_skin.sec_subbut2;
 			
 			var ico:IconCDFace
 			/*ico1BgList=new Vector.<UIAsset>();
@@ -172,7 +173,7 @@ package com.rpgGame.app.ui.main.taskbar
 			navi1.htmlText="[主线]第一章 <u>新手村</u><font color='#8b8d7b'>(未完成)</font>";
 			navi2.htmlText="[支线]强化装备<font color='#8b8d7b'>(未完成)</font>";
 			navi3.htmlText="[环式]<u>采矿</u><font color='#ffffff'>(10/20)</font><font color='#8b8d7b'>(未完成)</font>";
-			
+			_skin.sec_navi0.visible=false;
 			/*kill1Label.htmlText="交谈：<u>项少龙交谈</u><font color='#cfc6ae'>(0/30)</font>";
 			kill2Label.htmlText="击杀：<u>击杀强盗</u><font color='#cfc6ae'>(0/10)</font>";
 			kill3Label.htmlText="采集：<u>采集铁矿</u><font color='#cfc6ae'>(0/20)</font>";
@@ -378,7 +379,7 @@ package com.rpgGame.app.ui.main.taskbar
 			var taskData:Q_mission_base=TaskMissionManager.dailyTaskData;
 			if(task!=null&&taskData!=null)
 			{
-//				setNavView(TaskType.MAINTYPE_DAILYTASK,taskData.q_party_name,taskData.q_name,TaskMissionManager.getDailyTaskIsFinish(),navi2,subBut1);
+				setNavView(TaskType.MAINTYPE_DAILYTASK,taskData.q_party_name,taskData.q_name,TaskMissionManager.getDailyTaskIsFinish(),navi2,subBut1);
 				TaskUtil.setGotargetInfo(taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killBut2List);
 				//TaskUtil.setRewordInfo(taskData.q_reword_id,ico1List,ico1BgList);
 				icoList1Group.setRewardByArray(TaskMissionCfgData.getRewordById(taskData.q_reword_id,MainRoleManager.actorInfo.job));
@@ -401,7 +402,7 @@ package com.rpgGame.app.ui.main.taskbar
 				ico1BgList[i].visible=false;
 				ico1List[i].visible=false;
 			}*/
-//			subBut1.visible=false;
+			subBut1.visible=false;
 		}
 		
 		/**更新支线任务显示*/
@@ -411,7 +412,7 @@ package com.rpgGame.app.ui.main.taskbar
 			var taskData:Q_mission_base=TaskMissionManager.dailyTaskData;
 			if(task!=null&&taskData!=null)
 			{
-//				setNavView(TaskType.MAINTYPE_DAILYTASK,taskData.q_party_name,taskData.q_name,TaskMissionManager.getDailyTaskIsFinish(),navi2,subBut1);
+				setNavView(TaskType.MAINTYPE_DAILYTASK,taskData.q_party_name,taskData.q_name,TaskMissionManager.getDailyTaskIsFinish(),navi2,subBut1);
 				TaskUtil.setGotargetInfo(taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killBut2List);
 				setUisite();
 			}
@@ -428,7 +429,7 @@ package com.rpgGame.app.ui.main.taskbar
 			
 			if(task!=null&&taskData!=null)
 			{
-//				setNavView(TaskType.MAINTYPE_TREASUREBOX,taskData.q_party_name,taskData.q_name,TaskMissionManager.getTreasuerTaskIsFinish(),navi3,subBut2);
+				setNavView(TaskType.MAINTYPE_TREASUREBOX,taskData.q_party_name,taskData.q_name,TaskMissionManager.getTreasuerTaskIsFinish(),navi3,subBut2);
 				TaskUtil.setGotargetInfo(taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killBut3List);
 				var reward:Object=TaskMissionManager.getTreasuerTaskExtraReward();
 				if(reward!=null)
@@ -459,7 +460,7 @@ package com.rpgGame.app.ui.main.taskbar
 				ico2List[i].visible=false;
 			}*/
 			icoList2Group.visible=false;
-//			subBut2.visible=false;
+			subBut2.visible=false;
 			extraLabel.visible=false;
 		}
 		/**更新环式任务显示*/
@@ -469,7 +470,7 @@ package com.rpgGame.app.ui.main.taskbar
 			var taskData:Q_mission_base=TaskMissionManager.treasuerTaskData;
 			if(task!=null&&taskData!=null)
 			{
-//				setNavView(TaskType.MAINTYPE_TREASUREBOX,taskData.q_party_name,taskData.q_name,TaskMissionManager.getTreasuerTaskIsFinish(),navi3,subBut2);
+				setNavView(TaskType.MAINTYPE_TREASUREBOX,taskData.q_party_name,taskData.q_name,TaskMissionManager.getTreasuerTaskIsFinish(),navi3,subBut2);
 				TaskUtil.setGotargetInfo(taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killBut3List);
 				setUisite();
 			}
@@ -478,19 +479,17 @@ package com.rpgGame.app.ui.main.taskbar
 		private function setNavView(type:int,party:String,name:String,isFinish:Boolean,nav:Label,subBut:Button=null):void
 		{
 			nav.visible=true;
-			
-			
 			if(type==1)
 			{
-				nav.htmlText="[主线]";
+				nav.htmlText="<font color='#ffea00'>【主线】</font>";
 			}
 			else if(type==2)
 			{
-				nav.htmlText="[支线]";
+				nav.htmlText="<font color='#ffea00'>【支线】</font>";
 			}
 			else if(type==3)
 			{
-				nav.htmlText="[环式]";
+				nav.htmlText="<font color='#ffea00'>【环式】</font>";
 			}
 			nav.htmlText+=party+name;
 			if(type==3)
@@ -592,8 +591,8 @@ package com.rpgGame.app.ui.main.taskbar
 			icoList1Group.visible=false;
 			icoList2Group.visible=false;
 			extraLabel.visible=false;
-//			subBut1.visible=false;
-//			subBut2.visible=false;
+			subBut1.visible=false;
+			subBut2.visible=false;
 			
 		}
 		/**设置UI位置*/
@@ -640,13 +639,13 @@ package com.rpgGame.app.ui.main.taskbar
 				ico2BgList[i].y=ico2BgList[3].y;
 				ico2List[i].y=ico2BgList[3].y+3;
 			}*/
-			if(count>=0)
+			/*if(count>=0)
 			{
 				scrollBack.height=skinList[count].y+skinList[count].height+3;
 			}
 			
 			scrollBar.addChild(scrollBack);
-			scrollBar.addChild(scrollBox);
+			scrollBar.addChild(scrollBox);*/
 			
 			
 			
