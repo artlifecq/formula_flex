@@ -28,10 +28,11 @@ package com.rpgGame.app.sender
 			sendMsg(msg);
 		}
 		/** 请求坐骑升阶  */
-		public static function horseStratumUp(automatic:int):void
+		public static function horseStratumUp(automatic:Boolean,autoUp:Boolean):void
 		{
 			var msg:CSHorseStratumUpToGameMessage = new CSHorseStratumUpToGameMessage();
-			msg.Automatic = automatic;
+			msg.Automatic = automatic?1:0;
+			msg.AutoUp = autoUp?1:0;
 			sendMsg(msg);
 		}
 	}

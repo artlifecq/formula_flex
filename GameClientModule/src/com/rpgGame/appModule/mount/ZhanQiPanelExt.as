@@ -98,6 +98,7 @@ package com.rpgGame.appModule.mount
 			refeashPropHandler();
 			refeashExpHandler();
 			updatedanyaoShow();
+			_zhanqiUpExpConent.updateExp();
 			_zhanqiUpExpConent.isAutoing = false;
 			initEvent();
 		}
@@ -110,6 +111,7 @@ package com.rpgGame.appModule.mount
 				autoReq.kill();
 				autoReq=null;
 			}
+			_zhanqiUpExpConent.hide();
 			super.hide();
 		}
 		
@@ -135,6 +137,7 @@ package com.rpgGame.appModule.mount
 					onMouseOut();
 					if(_zhanqiShowData.isSelf)
 					{
+						_zhanqiShowData.isAutoing=true;
 						if(ZhanQiManager.instance().eatItemZhanQi(_zhanqiShowData))
 						{
 							_zhanqiUpExpConent.isAutoing = true;
@@ -209,6 +212,7 @@ package com.rpgGame.appModule.mount
 			_zhanqiUpExpConent.isAutoing = false;
 			showUplevel();
 			refeashExpHandler();
+			_zhanqiUpExpConent.updateExp();
 			if(autoReq){
 				autoReq.kill();
 				autoReq=null;

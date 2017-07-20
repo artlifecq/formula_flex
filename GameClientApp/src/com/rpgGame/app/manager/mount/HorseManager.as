@@ -170,7 +170,7 @@ package com.rpgGame.app.manager.mount
 					return false;
 				}
 			}
-			HorseSender.horseStratumUp(showdata.isAutoBuyItem?1:0);
+			HorseSender.horseStratumUp(showdata.isAutoBuyItem,showdata.isAutoing);
 			return true;
 		}
 		
