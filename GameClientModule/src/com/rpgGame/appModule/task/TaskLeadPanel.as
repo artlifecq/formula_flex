@@ -29,7 +29,7 @@ package com.rpgGame.appModule.task
 	public class TaskLeadPanel  extends SkinUIPanel
 	{
 		private var _skin :Zhuxian_Renwu;
-		private var titleLabel:Label;
+		//private var titleLabel:Label;
 		private var nameLabel:Label;
 		private var navLabel:Label;
 		private var speakLabel:Label;
@@ -83,7 +83,7 @@ package com.rpgGame.appModule.task
 			//navLabel.htmlText="任务奖励";
 			//speakLabel.htmlText="狗贼宇文拓在会稽郡释放万灵血阵，会稽镇一夜之间只剩血光一片，他们聚集在此欲找官府讨要说法，却遭官兵残杀。";
 			//timerLabel.htmlText="10秒后自动领取奖励";
-			titleLabel.htmlText="主线任务";
+			//titleLabel.htmlText="主线任务";
 			nameLabel.htmlText="";
 			navLabel.htmlText="任务奖励";
 			speakLabel.htmlText="";

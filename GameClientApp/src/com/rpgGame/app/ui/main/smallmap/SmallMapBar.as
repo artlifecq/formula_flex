@@ -1,6 +1,7 @@
 package com.rpgGame.app.ui.main.smallmap {
 	import com.app.media.AudioInterface;
 	import com.game.mainCore.core.timer.GameTimer;
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
@@ -17,6 +18,7 @@ package com.rpgGame.app.ui.main.smallmap {
 	import com.rpgGame.coreData.cfg.TransCfgData;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.npc.NpcCfgData;
+	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.role.MonsterBornData;
@@ -119,7 +121,7 @@ package com.rpgGame.app.ui.main.smallmap {
 					else AudioInterface.track(AudioConfigType.MUSIC_CHANNEL).stop(true);
 					break;
 				case this._skin.btnPaiHang://打开排行榜
-					//					AppManager.showApp(AppConstant.SYSTEMSET_PANEL);
+					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_FIGHTFLAGRANK);
 					break;
 				case this._skin.btnGm://GM
 					//					AppManager.showApp(AppConstant.SYSTEMSET_PANEL);
