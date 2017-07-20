@@ -2200,7 +2200,6 @@ package com.game.engine3D.scene.render
 					_renderUnitData = SceneRenderCache.getRenderUnitData(resData, this.type, this.id);
 					
 					_renderUnitData.blendMode = _blendMode;
-
 					validateGraphic();
 					validateProperties();
 					validateUnitChildren();

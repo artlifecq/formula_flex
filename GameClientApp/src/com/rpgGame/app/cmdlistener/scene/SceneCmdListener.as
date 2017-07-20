@@ -223,7 +223,7 @@ package com.rpgGame.app.cmdlistener.scene
 		{
 			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;			
 			if(role){
-				(role.data as HeroData).faction=msg.faction;
+				(role.data as RoleData).faction=msg.faction;
 			}
 		}
 		
@@ -306,9 +306,7 @@ package com.rpgGame.app.cmdlistener.scene
 			if(!role){
 				return;
 			}
-			var heroData : HeroData = role.data as HeroData; 
-			heroData.cloths=msg.armorResId;
-			AvatarManager.updateAvatar(role);
+			role.updateCloth(msg.armorResId);
 		}
 		
 		private function onResHelmChangeMessage(msg:ResHelmChangeMessage):void
@@ -317,9 +315,7 @@ package com.rpgGame.app.cmdlistener.scene
 			if(!role){
 				return;
 			}
-			var heroData : HeroData = role.data as HeroData; 
-			heroData.hair=msg.helmResId;
-			AvatarManager.updateAvatar(role);
+			role.updateHair(msg.helmResId);
 		}
 		private function onResWeaponChangeMessage(msg:ResWeaponChangeMessage):void
 		{
@@ -327,10 +323,8 @@ package com.rpgGame.app.cmdlistener.scene
 			if(!role){
 				return;
 			}
-			var heroData : HeroData = role.data as HeroData; 
-			heroData.weapon=msg.weaponResId;
-			heroData.deputyWeapon=msg.deputyWeaponResId;
-			AvatarManager.updateAvatar(role);
+			role.updateWeapon(msg.weaponResId);
+			role.updateDeputyWeapon(msg.weaponResId);
 		}
 		
 		/**
@@ -814,7 +808,8 @@ package com.rpgGame.app.cmdlistener.scene
 				collectData.name = qData.q_name;
 				collectData.avatarRes = qData.q_body_res;
 				collectData.sizeScale = qData.q_scale > 0 ? (qData.q_scale * 0.01) : 1;
-				collectData.direction = qData.q_direction;
+				//collectData.direction = qData.q_direction;
+				collectData.direction=info.dir;
 				collectData.x = info.position.x;
 				collectData.y = info.position.y;
 				collectData.isDynamicCreate =true;

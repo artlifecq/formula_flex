@@ -86,7 +86,6 @@ package com.rpgGame.appModule.mount
 			_curtentInterEff.x=357;
 			_curtentInterEff.y=400;
 			unit.setScale(scaleXY);
-			unit.addUnitAtComposite(unit);
 			unit.setStatus(RoleActionType.STAND);
 			this.addChild3D(_curtentInterEff);
 			
@@ -105,20 +104,19 @@ package com.rpgGame.appModule.mount
 			anation = new TargetAmationInfo();
 			anation.target = unit;
 			anation.propName = "scale";
-			anation.setValue(2,1);
+			anation.setValue(scaleXY,1);
 			_amationInfos.push(anation);
 			
 			if(next==null) return;
 			var nextName:String=next.q_panel_show_id;
 			_nextInterEff=new InterObject3D();
-			data = new RenderParamData3D(0, "effect_ui", ClientConfig.getEffect(nextName));
+			data = new RenderParamData3D(0, "effect_ui", ClientConfig.getZhanqi(nextName));
 			data.forceLoad=true;//ui上的3d特效强制加载
 			unit = _nextInterEff.addRenderUnitWith(data, 0);
 			unit.setStatus(RoleActionType.STAND);
 			_nextInterEff.x=590;
 			_nextInterEff.y=310;
 			unit.setScale(scaleXY);
-			unit.addUnitAtComposite(unit);
 			this.addChild3D(_nextInterEff);
 			
 			anation = new TargetAmationInfo();
@@ -136,7 +134,7 @@ package com.rpgGame.appModule.mount
 			anation = new TargetAmationInfo();
 			anation.target = unit;
 			anation.propName = "scale";
-			anation.setValue(1,2);
+			anation.setValue(1,scaleXY);
 			_amationInfos.push(anation);
 			for each(var info:TargetAmationInfo in _amationInfos)
 			{

@@ -7,6 +7,7 @@ package com.rpgGame.appModule.guild.war
 	import com.rpgGame.coreData.enum.EnumCity;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	
+	import gs.TweenLite;
 	import gs.TweenMax;
 	import gs.easing.Back;
 	
@@ -23,7 +24,7 @@ package com.rpgGame.appModule.guild.war
 	public class WczbRewardPanel extends SkinUIPanel
 	{
 		private var _skin:WangChengJiangLi;
-		private var tween:TweenMax;
+		private var tween:TweenLite;
 		
 		private var wangGRe:RewardGroup;
 		private var wangBRe:RewardGroup;
@@ -78,7 +79,7 @@ package com.rpgGame.appModule.guild.war
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
 			if(target==_skin.btnClose1){
-				tween=TweenMax.to(this,0.5,{scaleY:0,alpha:0,y:500,onComplete:tweenCom,ease: Back.easeInOut});
+				tween=TweenLite.to(this,0.5,{scaleY:0,alpha:0,y:500,onComplete:tweenCom,ease: Back.easeInOut});
 			}
 		}
 		

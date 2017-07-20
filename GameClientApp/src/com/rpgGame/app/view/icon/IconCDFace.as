@@ -79,6 +79,22 @@ package com.rpgGame.app.view.icon
 		public function IconCDFace($iconSize : int)
 		{
 			super($iconSize);
+			var bg:String;
+			switch(this.iconSize){
+				case IcoSizeEnum.ICON_36:
+					bg=GridBGType.GRID_SIZE_36;
+					break;
+				case IcoSizeEnum.ICON_42:
+					bg=GridBGType.GRID_SIZE_42;
+					break;
+				case IcoSizeEnum.ICON_48:
+					bg=GridBGType.GRID_SIZE_48;
+					break;
+				case IcoSizeEnum.ICON_64:
+					bg=GridBGType.GRID_SIZE_64;
+					break;
+			}
+			this.setBg(bg);
 			sortLayer();
 		}
 		

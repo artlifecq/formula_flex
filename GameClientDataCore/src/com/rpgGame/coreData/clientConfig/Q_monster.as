@@ -34,9 +34,9 @@ package com.rpgGame.coreData.clientConfig
 		public var q_chenhao:String;
 		 /**  受击特效，如果配置了此处，那么怪物受到攻击时只会播放这个特效，而忽略本来的受击特效 */
 		public var q_been_hurt_animation:int;
-		 /**  怪物朝向角度，配置0-359 */
-		public var q_direction:int;
-		 /**  方向是否固定(-2固定方向前端控制,-1随机方向，怪物朝向角度，配置0-359) */
+		 /**  怪物朝向角度(不填为随机,值为:右, 右下, 下, 左下, 左, 左上, 上, 右上) */
+		public var q_direction:String;
+		 /**  是否固定不固定0 固定1 */
 		public var q_is_direction_fixed:int;
 		 /**  是否在小地图中显示（1是，2否） */
 		public var q_isminimap:int;
