@@ -15,7 +15,8 @@ package com.rpgGame.app.scene.trigger.handler
 	 **/
 	public class WczbTriggerHandler extends TriggerHandler
 	{
-		private var areaids:Array=[10053,10054];
+		private var areaids_900:Array=[10053,10054];
+		private var areaids_901:Array=[10059,10060,10061,10062];
 		
 		public function WczbTriggerHandler()
 		{
@@ -32,6 +33,7 @@ package com.rpgGame.app.scene.trigger.handler
 		
 		override public function  trigger(areaid:int):void
 		{
+			var areaids:Array=this["areaids_"+MainRoleManager.actorInfo.mapID];
 			var checkId:int=areaids[MainRoleManager.actorInfo.faction-1];
 			if(areaid==checkId){//是自己的矿石上缴区
 				if((MainRoleManager.actor.headFace as HeadFace).hasGuildWarOre()){//有矿石

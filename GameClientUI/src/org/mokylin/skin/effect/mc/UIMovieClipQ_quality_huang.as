@@ -1,4 +1,4 @@
-package org.mokylin.skin.common.mc
+package org.mokylin.skin.effect.mc
 {
 	import feathers.controls.StateSkin;
 
@@ -22,18 +22,18 @@ package org.mokylin.skin.common.mc
 			
 			states = {
 			};
-			skinNames={"00000":"ui/common/mc/Q_quality_huang/00000.png",
-			"00001":"ui/common/mc/Q_quality_huang/00001.png",
-			"00002":"ui/common/mc/Q_quality_huang/00002.png",
-			"00003":"ui/common/mc/Q_quality_huang/00003.png",
-			"00004":"ui/common/mc/Q_quality_huang/00004.png",
-			"00005":"ui/common/mc/Q_quality_huang/00005.png",
-			"00006":"ui/common/mc/Q_quality_huang/00006.png",
-			"00007":"ui/common/mc/Q_quality_huang/00007.png",
-			"00008":"ui/common/mc/Q_quality_huang/00008.png",
-			"00009":"ui/common/mc/Q_quality_huang/00009.png",
-			"00010":"ui/common/mc/Q_quality_huang/00010.png",
-			"00011":"ui/common/mc/Q_quality_huang/00011.png"};
+			skinNames={"00000":"ui/effect/mc/Q_quality_huang/00000.png",
+			"00001":"ui/effect/mc/Q_quality_huang/00001.png",
+			"00002":"ui/effect/mc/Q_quality_huang/00002.png",
+			"00003":"ui/effect/mc/Q_quality_huang/00003.png",
+			"00004":"ui/effect/mc/Q_quality_huang/00004.png",
+			"00005":"ui/effect/mc/Q_quality_huang/00005.png",
+			"00006":"ui/effect/mc/Q_quality_huang/00006.png",
+			"00007":"ui/effect/mc/Q_quality_huang/00007.png",
+			"00008":"ui/effect/mc/Q_quality_huang/00008.png",
+			"00009":"ui/effect/mc/Q_quality_huang/00009.png",
+			"00010":"ui/effect/mc/Q_quality_huang/00010.png",
+			"00011":"ui/effect/mc/Q_quality_huang/00011.png"};
 		}
 
 

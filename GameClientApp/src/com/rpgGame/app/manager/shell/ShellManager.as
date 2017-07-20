@@ -63,6 +63,8 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.coreData.type.RenderUnitType;
     import com.rpgGame.coreData.type.RoleStateType;
     import com.rpgGame.coreData.type.SceneCharType;
+    import com.rpgGame.netData.cross.message.ReqEnterCrossClientToGameMessage;
+    import com.rpgGame.netData.task.message.ReqAcceptTaskMessage;
     
     import flash.display.BitmapData;
     import flash.display.BlendMode;
@@ -78,6 +80,7 @@ package com.rpgGame.app.manager.shell
     import gs.TweenLite;
     import gs.easing.Linear;
     
+    import org.game.netCore.connection.SocketConnection;
     import org.game.netCore.data.long;
     import org.game.netCore.net_protobuff.ByteBuffer;
 
@@ -131,6 +134,9 @@ package com.rpgGame.app.manager.shell
             this._funcs["&getView".toLowerCase()] = this.getView;
 			this._funcs["&tasklevel".toLowerCase()] = this.testTaskLevel;
 			this._funcs["&autofight".toLowerCase()] = this.testStopFight;
+            
+            // cross
+            this._funcs["enterCross".toLowerCase()] = this.enterCross;
 			this._funcs["&showDistrictWireframe".toLowerCase()] = this.showDistrictWireframe;
         }
 		
@@ -436,21 +442,20 @@ package com.rpgGame.app.manager.shell
                 role.ownerIsMainChar = true;
                 
                 data.avatarInfo.clear();
-                data.avatarInfo.setBodyResID("monster/pt_bing_1/pt_bing_1", null);
+//                data.avatarInfo.setBodyResID("monster/pt_bing_1/pt_bing_1", null);
+				role.updateBody("monster/pt_bing_1/pt_bing_1", null);
                 //data.avatarInfo.setBodyResID("pc/body/mojia_m_pl04_skin", "pc/body/mojia_m_pl04_animat");
-                AvatarManager.updateAvatar(role);
+//                AvatarManager.updateAvatar(role);
                 role.setGroundXY(data.x, data.y);
                 SceneManager.addSceneObjToScene(role, true, true, true);
                 role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true);
             } else {
                 //(role.data as HeroData).avatarInfo.setBodyResID("monster/pt_bing_1/pt_bing_1", null);
                 if (0 == index++ % 2) {
-                    (role.data as HeroData).avatarInfo.setBodyResID("pc/body/mojia_m_pl04_skin", "pc/body/mojia_m_pl04_animat");
+					role.updateBody("pc/body/mojia_m_pl04_skin", "pc/body/mojia_m_pl04_animat");
                 } else {
-                    (role.data as HeroData).avatarInfo.setBodyResID("monster/pt_bing_1/pt_bing_1", null);
+					role.updateBody("monster/pt_bing_1/pt_bing_1", null);
                 }
-                
-                AvatarManager.updateAvatar(role);
             }
         }
         
@@ -475,13 +480,11 @@ package com.rpgGame.app.manager.shell
             role.name = data.name = "";
             role.ownerIsMainChar = true;
             data.avatarInfo.clear();
-            data.avatarInfo.setBodyResID("monster/pt_bing_2/pt_bing_2", null);
-            AvatarManager.updateAvatar(role);
+			role.updateBody("monster/pt_bing_2/pt_bing_2", null);
             role.setGroundXY(data.x, data.y);
             SceneManager.addSceneObjToScene(role, true, true, true);
             role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true);
-            data.avatarInfo.setBodyResID("monster/pt_bing_1/pt_bing_1", null);
-            AvatarManager.updateAvatar(role);
+			role.updateBody("monster/pt_bing_1/pt_bing_1", null);
         }
         
         private function skill(id : int) : void {
@@ -776,7 +779,7 @@ package com.rpgGame.app.manager.shell
                 heroData.avatarInfo.setMountResID(null, null);
                 MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_RIDING);
             }
-            AvatarManager.updateAvatar(MainRoleManager.actor, false);
+            AvatarManager.updateMount(MainRoleManager.actor);
         }
         
         private function showCd() : void {
@@ -925,6 +928,10 @@ package com.rpgGame.app.manager.shell
 			TrusteeshipManager.getInstance().testStop();
 		}
 		
+		private function enterCross() : void {
+            var  message : ReqEnterCrossClientToGameMessage = new ReqEnterCrossClientToGameMessage();
+            SocketConnection.send(message);
+        }
 		private function showDistrictWireframe() : void {
 			SceneManager.getScene().sceneMapLayer.showDistrictWireframe = true;
 		}

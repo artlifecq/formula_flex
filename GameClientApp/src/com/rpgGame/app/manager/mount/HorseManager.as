@@ -85,12 +85,12 @@ package com.rpgGame.app.manager.mount
 		public function uplevel(msg:SCHorseUpResultToClientMessage):void
 		{
 			_horsedataInfo.exp = msg.exp;
-			if(_horsedataInfo.horseModelId !=msg.isSuccess)
+			if(msg.isSuccess)
 			{
-				_horsedataInfo.horseModelId=msg.isSuccess;
+				_horsedataInfo.horseModelId+=1;
 				EventManager.dispatchEvent(HorseUpLevel);
 			}else{
-				EventManager.dispatchEvent(HorseChangeExp);
+				EventManager.dispatchEvent(HorseChangeExp,msg.exp,msg.count);
 			}
 		}
 		public function updateExtraItemNum(msg:SCExtraItemNumMessage):void

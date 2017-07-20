@@ -114,10 +114,10 @@ package com.rpgGame.app.ui.tips
 			_spellTip.grpContent.visible=true;
 			_spellTip.tipbg.height = 380;
 			_spellTip.lbName.text=riseCfg.q_grade_name;
+			riseIco.setIconResName(ClientConfig.getRiseSkillIcon(cfg.q_icon.toString(),64));
 			if(info.skillLevel==1){
 				GrayFilter.gray(riseIco);
 				riseIco.width=riseIco.height=80;
-				riseIco.setIconResName(ClientConfig.getRiseSkillIcon(cfg.q_icon.toString(),64));
 				if(riseCfg.q_need_skill_level!=0){
 					_spellTip.lbJinjie.text="("+riseCfg.q_skillName+riseCfg.q_need_skill_level+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT17)+")";
 					if(riseCfg.q_level_up!=0){

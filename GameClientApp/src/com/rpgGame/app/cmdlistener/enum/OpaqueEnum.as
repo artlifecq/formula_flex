@@ -14,6 +14,7 @@ package com.rpgGame.app.cmdlistener.enum
 		public static const XI_WEI:int=rEnum.next;//西卫 竞拍
 		public static const ZHONG_WEI:int=rEnum.next;//中卫 竞拍
 		public static const DONG_WEI:int=rEnum.next;//东卫 竞拍
+		public static const GUILDWAR_GIFT:int=rEnum.next;//争霸战奖励
 		
 		
 		public function OpaqueEnum()
