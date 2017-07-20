@@ -124,15 +124,15 @@ package com.rpgGame.appModule.role
 				_skin.weapons.addChild(equipGrids[i]);
 			}
 			_vipIcon=new DragDropItem(IcoSizeEnum.ICON_48,-1);
-//			_vipIcon.setBg(GridBGType.VIP);
-			_vipIcon.x=301;
-			_vipIcon.y=(10-5)*59;
+			_vipIcon.bindBg(_skin.Icbg11);
+		/*	_vipIcon.x=301;
+			_vipIcon.y=(10-5)*59;*/
 			_skin.weapons.addChild(_vipIcon);
 			
 			_marryIcon=new DragDropItem(IcoSizeEnum.ICON_48,-1);
-//			_marryIcon.setBg(GridBGType.VIP);
-			_marryIcon.x=7;
-			_marryIcon.y=5*59;
+			_marryIcon.bindBg(_skin.Icbg10);
+			/*_marryIcon.x=7;
+			_marryIcon.y=5*59;*/
 			_skin.weapons.addChild(_marryIcon);
 		}
 		

@@ -28,5 +28,13 @@ package com.rpgGame.core.events
 		 *技能升阶
 		 */
 		public static const SPELL_RISE:int = UNIQUEID.NEXT;
+		/**
+		 *显示帮派统帅技能
+		 */
+		public static const SHOW_GUILD_LEADER_SPELL:int = UNIQUEID.NEXT;
+		/**
+		 *隐藏帮派统帅技能
+		 */
+		public static const HIDE_GUILD_LEADER_SPELL:int = UNIQUEID.NEXT;
 	}
 }

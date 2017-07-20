@@ -68,7 +68,10 @@ package com.rpgGame.app.view.icon
 			
 			if( _iconImage != null )
 				addChild( _iconImage );
-			this.setChildIndex(effectSk,this.numChildren-1);
+			if( effectSk)
+			{
+				this.setChildIndex(effectSk,this.numChildren-1);
+			}
 		}
 		
 		override protected function onBgImgComplete(uiasset:UIAsset):void

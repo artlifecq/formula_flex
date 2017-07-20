@@ -1,5 +1,6 @@
 package com.rpgGame.app.sender
 {
+	import com.rpgGame.app.cmdlistener.enum.OpaqueEnum;
 	import com.rpgGame.netData.guildWar.message.ReqGetOrePositionMessage;
 	import com.rpgGame.netData.guildWar.message.ReqGuildWarApplyMessage;
 	import com.rpgGame.netData.guildWar.message.ReqGuildWarCityApplyInfoMessage;
@@ -8,10 +9,14 @@ package com.rpgGame.app.sender
 	import com.rpgGame.netData.guildWar.message.ReqGuildWarEnterMessage;
 	import com.rpgGame.netData.guildWar.message.ReqGuildWarGiveDailyGiftMessage;
 	import com.rpgGame.netData.guildWar.message.ReqGuildWarLeaveApplyMessage;
+	import com.rpgGame.netData.guildWar.message.ReqGuildWarUseLeaderSkillMessage;
+	import com.rpgGame.netData.guildWar.message.ReqGuildWarUseLeaderSkillTransferMessage;
 	import com.rpgGame.netData.guildWar.message.ReqTrunInOreMessage;
+	
+	import org.game.netCore.data.long;
 
 	/**
-	 *
+	 *帮会战发送器
 	 *@author dik
 	 *2017-7-4
 	 **/
@@ -93,7 +98,7 @@ package com.rpgGame.app.sender
 		public static function reqGuildWarGiveDailyGift(opaque:int=0):void
 		{
 			var msg:ReqGuildWarGiveDailyGiftMessage=new ReqGuildWarGiveDailyGiftMessage();
-			msg.opaque=opaque;
+			msg.opaque=OpaqueEnum.GUILDWAR_GIFT;
 			sendMsg(msg);
 		}
 		
@@ -131,6 +136,31 @@ package com.rpgGame.app.sender
 			var msg:ReqGetOrePositionMessage=new ReqGetOrePositionMessage();
 			msg.oreId=oreId;
 			msg.opaque=opaque;
+			sendMsg(msg);
+		}
+		
+		/**
+		 *请求释放统帅技能 
+		 * 
+		 */
+		public static function reqUseLeaderSkill(opaque:int=0):void
+		{
+			var msg:ReqGuildWarUseLeaderSkillMessage=new ReqGuildWarUseLeaderSkillMessage();
+			msg.opaque=opaque;
+			sendMsg(msg);
+		}
+		
+		/**
+		 *接受指定统帅的技能 
+		 * @param leaderPlayerId
+		 * @param opaque
+		 * 
+		 */
+		public static function reqAcceptLeaderSkill(leaderPlayerId:long,opaque:int=0):void
+		{
+			var msg:ReqGuildWarUseLeaderSkillTransferMessage=new ReqGuildWarUseLeaderSkillTransferMessage();
+			msg.opaque=opaque;
+			msg.leaderPlayerId=leaderPlayerId;
 			sendMsg(msg);
 		}
 	}
