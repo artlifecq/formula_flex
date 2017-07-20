@@ -117,7 +117,7 @@
                 _tweenLiteToFold = null;
             }
             x = (sWidth - _activityButtonList.width) - 260;
-            y = 25;
+            y = 10;
         }
 
         private function tweenToClose():void

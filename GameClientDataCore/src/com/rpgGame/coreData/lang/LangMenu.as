@@ -100,6 +100,14 @@ package com.rpgGame.coreData.lang
 		public static const MOVE_TO_HERO:String = "MOVE_TO_HERO";
 		 /**  统帅任命 */
 		public static const SETUP_LEADER:String = "SETUP_LEADER";
+		 /**  一线 */
+		public static const ONELINE:String = "ONELINE";
+		 /**  二线 */
+		public static const TOWLINE:String = "TOWLINE";
+		 /**  三线 */
+		public static const THREELINE:String = "THREELINE";
+		 /**  四线 */
+		public static const FORELINE:String = "FORELINE";
 
 	}
 }

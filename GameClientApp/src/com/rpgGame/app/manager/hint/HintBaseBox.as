@@ -1,5 +1,6 @@
 package com.rpgGame.app.manager.hint
 {
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.coreData.cfg.HintCfgData;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.clientConfig.HintTypeSetInfo;
@@ -8,7 +9,11 @@ package com.rpgGame.app.manager.hint
 	import flash.utils.getTimer;
 	
 	import feathers.controls.Button;
+	import feathers.controls.Label;
 	import feathers.controls.UIAsset;
+	
+	import gs.TweenMax;
+	import gs.easing.Expo;
 	
 	import starling.display.DisplayObject;
 	import starling.display.Quad;
@@ -18,7 +23,7 @@ package com.rpgGame.app.manager.hint
 	import starling.events.TouchPhase;
 	
 	import utils.TimerServer;
-
+	
 	/**
 	 * 提示
 	 * @author Mandragora
@@ -42,8 +47,8 @@ package com.rpgGame.app.manager.hint
 		private var _bgMarginRight : int;
 		private var _topOffset : int;
 		private var _lastHintValue : String;
-
-
+		
+		
 		public function HintBaseBox(noticeType : int)
 		{
 			super();
@@ -54,7 +59,7 @@ package com.rpgGame.app.manager.hint
 			this.addEventListener(TouchEvent.TOUCH, onTouch);
 			initSprite();
 		}
-
+		
 		private function initSprite() : void
 		{
 			var bgMargins : Array = _hintTypeSet.bgMargin.split(";");
@@ -74,7 +79,7 @@ package com.rpgGame.app.manager.hint
 				_bgMarginRight = bgMargins[3];
 			else
 				_bgMarginRight = 0;
-
+			
 			this.visible = false;
 			if (_hintTypeSet.bg)
 			{
@@ -83,12 +88,12 @@ package com.rpgGame.app.manager.hint
 				_bg.styleName = _hintTypeSet.bg;
 				addChild(_bg);
 			}
-
+			
 			_labelContainer = new Sprite();
 			addChild(_labelContainer);
 			updateLabels();
 		}
-
+		
 		private function readjustSize() : void
 		{
 			var currBoxWidth : int = boxWidth;
@@ -128,7 +133,7 @@ package com.rpgGame.app.manager.hint
 				}
 			}
 		}
-
+		
 		public function get boxWidth() : int
 		{
 			if (_hintTypeSet)
@@ -144,12 +149,12 @@ package com.rpgGame.app.manager.hint
 			}
 			return 0;
 		}
-
+		
 		public function get boxHeight() : int
 		{
 			return _bgMarginTop + _bgMarginBottom + getLinesHeight();
 		}
-
+		
 		public function getLinesWidth() : int
 		{
 			var result : int = 0;
@@ -170,7 +175,7 @@ package com.rpgGame.app.manager.hint
 			}
 			return result;
 		}
-
+		
 		public function getLinesHeight() : int
 		{
 			var result : int = 0;
@@ -186,11 +191,11 @@ package com.rpgGame.app.manager.hint
 			}
 			return result;
 		}
-
+		
 		private function onTouch(e : TouchEvent) : void
 		{
 			var currentTarget : DisplayObject = e.target as DisplayObject;
-
+			
 			var touch : Touch = e.getTouch(currentTarget);
 			touch = e.getTouch(currentTarget, TouchPhase.BEGAN);
 			if (touch == null)
@@ -215,7 +220,7 @@ package com.rpgGame.app.manager.hint
 				}
 			}
 		}
-
+		
 		private function addLabel(label : HintLineSprite) : void
 		{
 			_labelContainer.addChild(label);
@@ -224,7 +229,7 @@ package com.rpgGame.app.manager.hint
 			else
 				_hintLines.push(label);
 		}
-
+		
 		private function removeLabel(label : HintLineSprite) : void
 		{
 			if (label.parent != null)
@@ -238,7 +243,7 @@ package com.rpgGame.app.manager.hint
 			}
 			_labelPools.push(label);
 		}
-
+		
 		/**
 		 * 增加一条系统切出提示
 		 * @param $value 支持HTML文本
@@ -249,7 +254,7 @@ package com.rpgGame.app.manager.hint
 			updateLabels();
 			play();
 		}
-
+		
 		private function onAddHint(value : String) : void
 		{
 			var isPushNew : Boolean = false;
@@ -298,7 +303,7 @@ package com.rpgGame.app.manager.hint
 			if (isPushNew)
 			{
 				_lastHintValue = value;
-				var label : HintLineSprite = getSprite();
+				var label : HintLineSprite = getSprite();			
 				label.setText(value, StaticValue.tranStrTo16(_hintTypeSet.defaultColor));
 				if (_hintTypeSet.refreshInterval > 0)
 				{
@@ -308,10 +313,23 @@ package com.rpgGame.app.manager.hint
 				{
 					label.alpha = 1;
 				}
+				if(_hintTypeSet.type==NoticeManager.SYSTEM_SWITCH)
+				{
+					var w:int=label.width;
+					label.scale=1.3;
+					label.x=-(label.width-w)/2;
+					TweenMax.to(label,0.3,{delay:0.1,scale:1,onUpdate:updatePostion,onUpdateParams:[label,w]});
+				}
 				addLabel(label);
 			}
 		}
-
+		
+		private function updatePostion(... args):void
+		{
+			var w:int=parseInt(args[1]);
+			args[0].x=-(args[0].width-w)/2;
+		}
+		
 		private function updateLabels() : void
 		{
 			_topOffset = 0;
@@ -358,7 +376,7 @@ package com.rpgGame.app.manager.hint
 			}
 			readjustSize();
 		}
-
+		
 		private function update() : void
 		{
 			var needUpdateLabels : Boolean = false;
@@ -388,14 +406,14 @@ package com.rpgGame.app.manager.hint
 				{
 					label.alpha = 1;
 				}
-
+				
 				if (label.isFinished)
 				{
 					removeLabel(label);
 					needUpdateLabels = true;
 				}
 			}
-
+			
 			while (_hintLines.length < _hintTypeSet.maxShowCount && _waitShowMsg.length > 0)
 			{
 				onAddHint(_waitShowMsg.shift());
@@ -411,13 +429,13 @@ package com.rpgGame.app.manager.hint
 				updateLabels();
 			}
 		}
-
+		
 		private function stop() : void
 		{
 			TimerServer.remove(update);
 			this.visible = false;
 		}
-
+		
 		private function play() : void
 		{
 			if (_hintTypeSet.refreshInterval > 0)
@@ -429,7 +447,7 @@ package com.rpgGame.app.manager.hint
 			}
 			this.visible = true;
 		}
-
+		
 		/**
 		 * 控制移动
 		 * @param pre 当前时间
@@ -459,7 +477,7 @@ package com.rpgGame.app.manager.hint
 					break;
 			}
 		}
-
+		
 		private function getSprite() : HintLineSprite
 		{
 			var label : HintLineSprite;
@@ -474,17 +492,17 @@ package com.rpgGame.app.manager.hint
 			}
 			return label;
 		}
-
+		
 		public function get hintTypeSet() : HintTypeSetInfo
 		{
 			return _hintTypeSet;
 		}
-
+		
 		public function get noticeType() : int
 		{
 			return _noticeType;
 		}
-
+		
 		override public function get height() : Number
 		{
 			return boxHeight;

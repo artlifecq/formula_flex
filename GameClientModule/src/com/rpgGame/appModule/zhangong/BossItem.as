@@ -185,12 +185,21 @@ package com.rpgGame.appModule.zhangong
 		private function updateShow():void
 		{
 			clearData();
+			updateZhanLiNumber();
+			if(_q_meritorious)
+			{
+				showMonster(_q_meritorious.q_monsterID);
+			}
+			updateNumber();
+		}
+		
+		private function updateZhanLiNumber():void
+		{
 			_info=ZhanGongManager.getInfoByType(_type);
 			if(_info==null) return ;
 			var id:String=_info.level.toString()+"_"+_type;
 			_q_meritorious= ZhanGongData.getmeritoriousById(id);
 			if(_q_meritorious==null) return ;
-			showMonster(_q_meritorious.q_monsterID);
 			var name:String=MonsterDataManager.getMonsterName(_q_meritorious.q_monsterID);
 			_skin.lbName.text=name;
 			_skin.lbLevelCurrent.text="LV."+_info.level;
@@ -202,10 +211,14 @@ package com.rpgGame.appModule.zhangong
 			var values:Array=maps.values();
 			setUIType(keys[0]);
 			_skin.numZhanli.label="x"+values[0];
-			
+			updateNumber();
+		}
+		
+		private function updateNumber():void
+		{
+			if(_q_meritorious==null) return;
 			var haveNum:int=MainRoleManager.actorInfo.totalStat.getResData(_q_meritorious.q_materil);
 			_skin.lbNum.text=haveNum.toString()+"/"+_q_meritorious.q_num;
-			//			_skin.btnUp.isEnabled=haveNum>=_q_meritorious.q_num;
 			_isCanUp=_skin.uiDian.visible=haveNum>=_q_meritorious.q_num;
 			
 			if(_isCanUp) _skin.btnUp.filter=null;
@@ -327,13 +340,13 @@ package com.rpgGame.appModule.zhangong
 			if(msg.flag==1&&msg.meritoriousInfo.type==_type)
 			{
 				UIPopManager.showAlonePopUI(CenterEftPop,"ui_shengjichenggong");
-				updateShow();
+				updateZhanLiNumber();
 			}
 		}
 		
 		private function resChange(type:int=1):void
 		{
-			updateShow();
+			updateNumber();
 		}
 		
 		public function clearData():void

@@ -57,24 +57,22 @@ package com.rpgGame.app.ui.main.taskbar
 			skinList.push(_skin.pri_navi2);
 			skinList.push(_skin.pri_txt);
 			skinList.push(_skin.pri_navi3);
-			skinList.push(_skin.pri_killbut1);
-			skinList.push(_skin.pri_killbut2);
-			skinList.push(_skin.pri_killbut3);
+			skinList.push(_skin.pri_killbut_1);
+			skinList.push(_skin.pri_killbut_2);
+			skinList.push(_skin.pri_killbut_3);
 			skinList.push(icoListGroup);
 			//skinList.push(_skin.pri_ico3);
-			titleLable=_skin.pri_title;
-			navi1Lable=_skin.pri_navi1;
-			navi2Lable=_skin.pri_navi2;
-			navi3Lable=_skin.pri_navi3;
+//			titleLable=_skin.pri_title;
+//			navi1Lable=_skin.pri_navi1_txt;
 			jindu=_skin.pri_probar.skin as RenWu_jindu;
 			killButList=new Vector.<SkinnableContainer>();
-			killButList.push(_skin.pri_killbut1);
-			killButList.push(_skin.pri_killbut2);
-			killButList.push(_skin.pri_killbut3);
+			killButList.push(_skin.pri_killbut_1);
+			killButList.push(_skin.pri_killbut_2);
+			killButList.push(_skin.pri_killbut_3);
 			killLabelList=new Vector.<Label>();
-			killLabelList.push(Renwu_Item(_skin.pri_killbut1.skin).labelDisplay);
-			killLabelList.push(Renwu_Item(_skin.pri_killbut2.skin).labelDisplay);
-			killLabelList.push(Renwu_Item(_skin.pri_killbut3.skin).labelDisplay);
+			killLabelList.push(Renwu_Item(_skin.pri_killbut_1.skin).labelDisplay);
+			killLabelList.push(Renwu_Item(_skin.pri_killbut_2.skin).labelDisplay);
+			killLabelList.push(Renwu_Item(_skin.pri_killbut_3.skin).labelDisplay);
 		/*	kill1Label=Renwu_Item(_skin.pri_killbut1.skin).labelDisplay;
 			kill2Label=Renwu_Item(_skin.pri_killbut2.skin).labelDisplay;
 			kill3Label=Renwu_Item(_skin.pri_killbut3.skin).labelDisplay;*/
@@ -107,10 +105,10 @@ package com.rpgGame.app.ui.main.taskbar
 			
 			
 			
-			titleLable.htmlText="";
-			navi1Lable.htmlText="章节进度";
-			navi2Lable.htmlText="任务描述";
-			navi3Lable.htmlText="任务进度";
+//			titleLable.htmlText="";
+//			navi1Lable.htmlText="章节进度";
+//			navi2Lable.htmlText="任务描述";
+//			navi3Lable.htmlText="任务进度";
 			jindu.labelDisplay.text="0%";
 			jindu.pro_jindu.maximum=100;
 			jindu.pro_jindu.value=0;
@@ -138,7 +136,7 @@ package com.rpgGame.app.ui.main.taskbar
 		
 		public function hideInfo():void
 		{
-			titleLable.htmlText="";
+//			titleLable.htmlText="";
 			jindu.labelDisplay.text="";
 			jindu.pro_jindu.maximum=100;
 			jindu.pro_jindu.value=0;
@@ -210,7 +208,7 @@ package com.rpgGame.app.ui.main.taskbar
 		/**设置标题详情*/
 		private function setTitle(party:String,name:String,describe:String):void
 		{
-			titleLable.htmlText=party+name;
+//			titleLable.htmlText=party+name;
 			priLabel.htmlText=describe;
 		}
 		/**设置完成进度*/

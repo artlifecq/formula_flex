@@ -192,7 +192,7 @@ package org.mokylin.skin.mainui.renwu
 			lab_navi1 = temp;
 			temp.name = "lab_navi1";
 			temp.text = "本环任务奖励：";
-			temp.color = 0xBEA757;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 32;
 			temp.y = 79;
@@ -205,7 +205,7 @@ package org.mokylin.skin.mainui.renwu
 			lab_navi2 = temp;
 			temp.name = "lab_navi2";
 			temp.htmlText = "今日完成<font color='#5DBD37'>5</font>环后，额外奖励";
-			temp.color = 0xBEA757;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 220;
 			temp.x = 32;
@@ -277,7 +277,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.horizontalCenter = 5.5;
 			temp.text = "已完成环数：第2/20环";
 			temp.textAlign = "center";
-			temp.color = 0x25931B;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 229;
 			temp.y = 51;

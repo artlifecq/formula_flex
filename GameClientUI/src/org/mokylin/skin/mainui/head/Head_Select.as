@@ -1,11 +1,9 @@
 package org.mokylin.skin.mainui.head
 {
 	import feathers.controls.text.Fontter;
-	import feathers.controls.Button;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.mainui.head.button.ButtonSelect;
 
 	/**
 	 * @private
@@ -19,9 +17,11 @@ package org.mokylin.skin.mainui.head
 		//==========================================================================
 		public var Icon_heping:feathers.controls.UIAsset;
 
-		public var btn_Select:feathers.controls.Button;
-
 		public var labelDisplay:feathers.controls.Label;
+
+		public var ui_bg:feathers.controls.UIAsset;
+
+		public var ui_conver:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -34,7 +34,7 @@ package org.mokylin.skin.mainui.head
 			this.currentState = "normal";
 			this.height = 28;
 			this.width = 248;
-			this.elementsContent = [btn_Select_i(),labelDisplay_i(),Icon_heping_i()];
+			this.elementsContent = [ui_bg_i(),ui_conver_i(),labelDisplay_i(),Icon_heping_i()];
 			
 			states = {
 			};
@@ -58,19 +58,6 @@ package org.mokylin.skin.mainui.head
 			return temp;
 		}
 
-		private function btn_Select_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_Select = temp;
-			temp.name = "btn_Select";
-			temp.height = 28;
-			temp.styleClass = org.mokylin.skin.mainui.head.button.ButtonSelect;
-			temp.width = 248;
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
 		private function labelDisplay_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -84,6 +71,32 @@ package org.mokylin.skin.mainui.head
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 25;
 			temp.y = 6;
+			return temp;
+		}
+
+		private function ui_bg_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ui_bg = temp;
+			temp.name = "ui_bg";
+			temp.bottom = 0;
+			temp.left = 0;
+			temp.right = 0;
+			temp.styleName = "ui/common/hover/xuanqukuang2_alpha.png";
+			temp.top = 0;
+			return temp;
+		}
+
+		private function ui_conver_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ui_conver = temp;
+			temp.name = "ui_conver";
+			temp.bottom = 0;
+			temp.left = 0;
+			temp.right = 0;
+			temp.styleName = "ui/mainui/head/mode/di.png";
+			temp.top = 0;
 			return temp;
 		}
 
