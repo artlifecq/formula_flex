@@ -12,12 +12,13 @@ package com.rpgGame.appModule.mount
 	
 	import away3d.events.Event;
 	
-	import gs.TimelineLite;
 	import gs.TweenLite;
 	
 	import org.mokylin.skin.app.zuoqi.ZuoqiCont_Skin;
 	
 	import starling.display.DisplayObjectContainer;
+	
+	import utils.TimerServer;
 
 	public class MountUpExpConent
 	{
@@ -100,6 +101,24 @@ package com.rpgGame.appModule.mount
 				_skin.maximg.visible = true;
 			}
 		}
+		
+		public function updateExp(exp:int,count:int):void
+		{
+			var changeExp:int=exp-_skin.progressbar.value;
+			if(changeExp==0){
+				return;
+			}
+			var addExp:int=changeExp/count;
+			TimerServer.addLoop(showExpAnimation,25,[addExp],count);
+			_skin.progressbar.maximum =_mountShowData.housedata.q_blessnum_limit;
+		}
+		
+		private function showExpAnimation(exp:int):void
+		{
+			_skin.progressbar.value += exp;
+			_skin.lab_progressbar.text =_skin.progressbar.value+"/"+_skin.progressbar.maximum;
+		}
+		
 		private var _isAutoing:Boolean;
 		public function set isAutoing(value:Boolean):void
 		{

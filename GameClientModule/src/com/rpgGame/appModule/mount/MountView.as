@@ -1,6 +1,5 @@
 package com.rpgGame.appModule.mount
 {
-	import com.rpgGame.app.fight.spell.NumberChangeEffect;
 	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.manager.mount.MountShowData;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -10,7 +9,6 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.appModule.shop.ItemGetAdvisePanelExt;
 	import com.rpgGame.appModule.systemset.TouchToState;
 	import com.rpgGame.core.events.ItemEvent;
-	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.coreData.cfg.HorseSpellData;
 	import com.rpgGame.coreData.clientConfig.Q_horse_skills;
@@ -68,11 +66,8 @@ package com.rpgGame.appModule.mount
 			_mountContent.refeashMode(_mountShowData.mountLevel);
 			_mountContent.show();
 			refeashPropHandler();
-			/*_propContent.refeashPropShow(false);
-			_mountupContent.updataInfo(_mountShowData);*/
-			refeashExpHandler();
+			_mountupContent.updataInfo(_mountShowData);
 			refeashSpellIcon();
-			_mountupContent.isAutoing = false;
 			initEvent();
 		}
 		override protected function onTouchTarget(target : DisplayObject) : void
@@ -101,10 +96,15 @@ package com.rpgGame.appModule.mount
 						if(HorseManager.instance().eatItemHorse(_mountShowData))
 						{
 							_mountupContent.isAutoing = true;
+							autoReq=TweenLite.delayedCall(0.25,refeashsendMsg);
 						}else{
 							if(!_mountShowData.canUpLevel())
 								showShopPane();
 							_mountupContent.isAutoing = false;
+							if(autoReq){
+								autoReq.kill();
+								autoReq=null;
+							}
 						}
 					}
 					break;
@@ -116,11 +116,16 @@ package com.rpgGame.appModule.mount
 					break;
 				case "btn_tingzhi":
 					_mountupContent.isAutoing = false;
+					if(autoReq){
+						autoReq.kill();
+						autoReq=null;
+					}
 					break;
 			}
 		}
 		
 		private var _uplevelSuccess:MountUpLevelSucessPane;
+		private var autoReq:TweenLite;
 		private function showUplevel():void
 		{
 			if(_uplevelSuccess==null)
@@ -207,9 +212,11 @@ package com.rpgGame.appModule.mount
 		{
 			_skin.btn_kaishi.addEventListener(TouchEvent.TOUCH, onTouchHandler);
 			_skin.btn_zidong.addEventListener(TouchEvent.TOUCH, onTouchHandler);
+			
 			EventManager.addEvent(HorseManager.HorseUpLevel,refeashLevel);
-			EventManager.addEvent(HorseManager.HorseChangeExp,refeashExpHandler);
+			EventManager.addEvent(HorseManager.HorseChangeExp,updateExp);
 			EventManager.addEvent(HorseManager.HorseExtraItemNum,refeashPropHandler);
+			
 			EventManager.addEvent(ItemEvent.ITEM_ADD,addItemHandler);
 			EventManager.addEvent(ItemEvent.ITEM_REMOVE,addItemHandler);
 			EventManager.addEvent(ItemEvent.ITEM_CHANG,addItemHandler);
@@ -217,11 +224,16 @@ package com.rpgGame.appModule.mount
 		
 		private function addItemHandler(info:ClientItemInfo):void
 		{
-			/*if(info.cfgId!= _mountShowData.upLevelItem.cfgId)
-				return ;*/
-			refeashExpHandler(false);
+			refeashExpHandler();
 		}
-		private function refeashExpHandler(needeat:Boolean= true):void
+		
+		private function updateExp(exp:int,count:int):void
+		{
+			refeashExpHandler();
+			_mountupContent.updateExp(exp,count);
+		}
+		
+		private function refeashExpHandler():void
 		{
 			_mountupContent.updataInfo(_mountShowData);
 			_propContent.refeashPropValue();
@@ -236,31 +248,33 @@ package com.rpgGame.appModule.mount
 			_skin.lberror.visible = bool;
 			
 			setRTNState(RTNodeID.HORSE_UP,_mountShowData.isSelf&&_mountShowData.canUpLevel());
-			if(needeat)
-			{
-				TweenLite.delayedCall(0.3,refeashsendMsg);
-			}
 		}
 		
 		private function refeashsendMsg():void
 		{
 			if(_mountShowData.isAutoing)
 			{
-				_mountupContent.isAutoing =HorseManager.instance().eatItemHorse(_mountShowData)
+				_mountupContent.isAutoing =HorseManager.instance().eatItemHorse(_mountShowData);
+				autoReq=TweenLite.delayedCall(0.25,refeashsendMsg);
 			}
-			
 		}
+		
 		private function refeashLevel():void
 		{
 			_mountupContent.isAutoing = false;
 			showUplevel();
+			refeashExpHandler();
+			if(autoReq){
+				autoReq.kill();
+				autoReq=null;
+			}
 		}
 		private function removeEvent():void
 		{
 			_skin.btn_kaishi.removeEventListener(TouchEvent.TOUCH, onTouchHandler);
 			_skin.btn_zidong.removeEventListener(TouchEvent.TOUCH, onTouchHandler);
 			EventManager.removeEvent(HorseManager.HorseUpLevel,refeashLevel);
-			EventManager.removeEvent(HorseManager.HorseChangeExp,refeashExpHandler);
+			EventManager.removeEvent(HorseManager.HorseChangeExp,updateExp);
 			EventManager.removeEvent(HorseManager.HorseExtraItemNum,refeashPropHandler);
 			EventManager.removeEvent(ItemEvent.ITEM_ADD,addItemHandler);
 			EventManager.addEvent(ItemEvent.ITEM_REMOVE,addItemHandler);
@@ -313,7 +327,11 @@ package com.rpgGame.appModule.mount
 		{
 			ItemGetAdvisePanelExt.hidePanel();
 			removeEvent();
-			
+			if(autoReq){
+				autoReq.kill();
+				autoReq=null;
+			}
+			_mountupContent.isAutoing = false;
 			super.hide();
 		}
 	}
