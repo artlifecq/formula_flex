@@ -1,21 +1,22 @@
-package org.mokylin.skin.component.button
+package org.mokylin.skin.mainui.map
 {
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
-	import feathers.controls.UIAsset;
+	import feathers.controls.ToggleButton;
+	import org.mokylin.skin.component.check.CheckBoxSkin_1;
 
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class ButtonSkin_putong3 extends feathers.controls.StateSkin
+	public class ShieldingitemSkin extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var iconDisplay:feathers.controls.UIAsset;
+		public var btn_shield:feathers.controls.ToggleButton;
 
 		public var labelDisplay:feathers.controls.Label;
 
@@ -23,53 +24,31 @@ package org.mokylin.skin.component.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function ButtonSkin_putong3()
+		public function ShieldingitemSkin()
 		{
 			super();
 			
-			this.currentState = "down";
-			this.height = 24;
-			this.width = 60;
-			this.elementsContent = [];
-			labelDisplay_i();
-			iconDisplay_i();
-			
+			this.currentState = "normal";
+			this.elementsContent = [btn_shield_i(),labelDisplay_i()];
 			
 			states = {
-				init:[
-						{target:"labelDisplay",
-							name:"textAlign",
-							value:"center"
-						}
-						,
-						{target:"labelDisplay",
-							name:"color",
-							value:0xE1D4A9
-						}
-						,
-						{target:"labelDisplay",
-							name:"nativeFilters",
-							value:Fontter.filterObj["textFilterBlackGreen"]
-						}
-						,
-						{target:"labelDisplay",
-							name:"verticalAlign",
-							value:"middle"
-						}
-					]
 			};
-			skinNames={"down":"ui/component/button/skin_putong3/down.png", "hover":"ui/component/button/skin_putong3/over.png", "up":"ui/component/button/skin_putong3/up.png"};
+			skinNames={};
 		}
 
 
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function iconDisplay_i():feathers.controls.UIAsset
+		private function btn_shield_i():feathers.controls.ToggleButton
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			iconDisplay = temp;
-			temp.name = "iconDisplay";
+			var temp:feathers.controls.ToggleButton = new feathers.controls.ToggleButton();
+			btn_shield = temp;
+			temp.name = "btn_shield";
+			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
+			temp.textAlign = "left";
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -78,15 +57,13 @@ package org.mokylin.skin.component.button
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			labelDisplay = temp;
 			temp.name = "labelDisplay";
-			temp.bottom = 0;
-			temp.left = 0;
-			temp.right = 0;
-			temp.text = "按 钮";
-			temp.textAlign = "center";
-			temp.color = 0xE1D4A9;
+			temp.height = 18;
+			temp.text = "屏蔽场景特效";
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.top = 0;
-			temp.verticalAlign = "middle";
+			temp.width = 160;
+			temp.x = 26;
+			temp.y = 2;
 			return temp;
 		}
 

@@ -51,13 +51,13 @@ package com.rpgGame.appModule.task
 		
 		private function init():void
 		{
-			titleLabel=_skin.lbl_title;
+//			titleLabel=_skin.lbl_title;
 			planLabel=_skin.lb_wancheng;
 			nav1Label=_skin.lab_navi1;
 			nav2Label=_skin.lab_navi2;
-			money1Label=_skin.lb_yuanbao;
-			money2Label=_skin.lb_yinliang;
-			timerLabel=_skin.lb_time;
+//			money1Label=_skin.lb_yuanbao;
+//			money2Label=_skin.lb_yinliang;
+//			timerLabel=_skin.lb_time;
 			
 			var i:int;
 			var ico:IconCDFace;
@@ -142,15 +142,15 @@ package com.rpgGame.appModule.task
 			super.onTouchTarget(target);
 			switch (target) {
 				
-				case this._skin.one_but:
-					subFinishBut(1);
-					break;
-				case this._skin.two_but:
-					subFinishBut(2);
-					break;
-				case this._skin.three_but:
-					subFinishBut(3);
-					break;
+//				case this._skin.one_but:
+//					subFinishBut(1);
+//					break;
+//				case this._skin.two_but:
+//					subFinishBut(2);
+//					break;
+//				case this._skin.three_but:
+//					subFinishBut(3);
+//					break;
 			}
 		}
 		

@@ -1,8 +1,6 @@
 package com.rpgGame.app.ui.main.buff
 {
-	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.view.icon.BuffIcon;
 	import com.rpgGame.core.events.BuffEvent;
 	import com.rpgGame.core.ui.SkinUI;
@@ -50,7 +48,7 @@ package com.rpgGame.app.ui.main.buff
 			roleId=MainRoleManager.actor.id;
 			var buffList : Vector.<BuffData>=(MainRoleManager.actor.data as RoleData).buffList;
 			var num:int=buffList.length;
-			gridW=IcoSizeEnum.ICON_36+9;
+			gridW=IcoSizeEnum.ICON_19+9;
 			buffSp=new Sprite();
 			buffSp.x=-30-gridW;
 			buffSp.y=0;
@@ -95,9 +93,9 @@ package com.rpgGame.app.ui.main.buff
 				return;
 			}
 			var isShowBG:Boolean=(data.buffData.q_buff_id==9||data.buffData.q_buff_id==10);
-			var icon:BuffIcon=new BuffIcon(IcoSizeEnum.ICON_36,!isShowBG);
+			var icon:BuffIcon=new BuffIcon(IcoSizeEnum.ICON_19,!isShowBG);
 			icon.buffData=data;
-			icon.setUrlBg("ui/mainui/shortcut/buffkuang.png");
+			icon.setUrlBg("ui/mainui/head/BAFF/buffBg_20.png");
 			//			icon.setBg(GridBGType.GRID_SIZE_44);
 			var xx:int;
 			var length:int,line:int,row:int;
@@ -244,10 +242,8 @@ package com.rpgGame.app.ui.main.buff
 		
 		public function resize(w : int, h : int) : void 
 		{
-			/*this.x=(w-this.width)/2;
-			this.y=h-150;*/
 			this.x=w/2;
-			this.y=h-132;
+			this.y=h-155;
 		}
 	}
 }

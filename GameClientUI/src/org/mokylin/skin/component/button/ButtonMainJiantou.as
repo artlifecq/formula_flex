@@ -1,6 +1,5 @@
 package org.mokylin.skin.component.button
 {
-	import feathers.controls.text.Fontter;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
@@ -10,7 +9,7 @@ package org.mokylin.skin.component.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class ButtonSkin_putong3 extends feathers.controls.StateSkin
+	public class ButtonMainJiantou extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -23,17 +22,12 @@ package org.mokylin.skin.component.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function ButtonSkin_putong3()
+		public function ButtonMainJiantou()
 		{
 			super();
 			
 			this.currentState = "down";
-			this.height = 24;
-			this.width = 60;
 			this.elementsContent = [];
-			labelDisplay_i();
-			iconDisplay_i();
-			
 			
 			states = {
 				init:[
@@ -44,12 +38,7 @@ package org.mokylin.skin.component.button
 						,
 						{target:"labelDisplay",
 							name:"color",
-							value:0xE1D4A9
-						}
-						,
-						{target:"labelDisplay",
-							name:"nativeFilters",
-							value:Fontter.filterObj["textFilterBlackGreen"]
+							value:0xFFFFFF
 						}
 						,
 						{target:"labelDisplay",
@@ -58,7 +47,7 @@ package org.mokylin.skin.component.button
 						}
 					]
 			};
-			skinNames={"down":"ui/component/button/skin_putong3/down.png", "hover":"ui/component/button/skin_putong3/over.png", "up":"ui/component/button/skin_putong3/up.png"};
+			skinNames={"down":"ui/component/button/mainJiantou/down.png", "hover":"ui/component/button/mainJiantou/over.png", "up":"ui/component/button/mainJiantou/up.png"};
 		}
 
 
@@ -81,10 +70,9 @@ package org.mokylin.skin.component.button
 			temp.bottom = 0;
 			temp.left = 0;
 			temp.right = 0;
-			temp.text = "按 钮";
+			temp.text = "";
 			temp.textAlign = "center";
-			temp.color = 0xE1D4A9;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.color = 0xFFFFFF;
 			temp.top = 0;
 			temp.verticalAlign = "middle";
 			return temp;

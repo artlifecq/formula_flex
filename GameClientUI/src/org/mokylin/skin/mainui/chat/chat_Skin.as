@@ -18,12 +18,16 @@ package org.mokylin.skin.mainui.chat
 	import org.mokylin.skin.mainui.chat.button.ButtonChatClose;
 	import org.mokylin.skin.mainui.chat.button.ButtonChatInfo;
 	import org.mokylin.skin.mainui.chat.button.ButtonChat_Type1;
-	import org.mokylin.skin.mainui.chat.button.ButtonChat_Type3;
+	import org.mokylin.skin.mainui.chat.button.ButtonChat_banghui;
 	import org.mokylin.skin.mainui.chat.button.ButtonChat_biaoqiang;
+	import org.mokylin.skin.mainui.chat.button.ButtonChat_dangqian;
 	import org.mokylin.skin.mainui.chat.button.ButtonChat_dinwei;
+	import org.mokylin.skin.mainui.chat.button.ButtonChat_duiwu;
 	import org.mokylin.skin.mainui.chat.button.ButtonChat_fasong;
 	import org.mokylin.skin.mainui.chat.button.ButtonChat_laba1;
 	import org.mokylin.skin.mainui.chat.button.ButtonChat_sanjiao;
+	import org.mokylin.skin.mainui.chat.button.ButtonChat_shijie;
+	import org.mokylin.skin.mainui.chat.button.ButtonChat_siliao;
 	import org.mokylin.skin.mainui.chat.button.ButtonChat_suo;
 
 	/**
@@ -149,8 +153,7 @@ package org.mokylin.skin.mainui.chat
 			btnBang = temp;
 			temp.name = "btnBang";
 			temp.groupName = "radioGroupChat";
-			temp.label = "帮";
-			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_Type3;
+			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_banghui;
 			temp.x = 27;
 			temp.y = 0;
 			return temp;
@@ -162,8 +165,7 @@ package org.mokylin.skin.mainui.chat
 			btnDang = temp;
 			temp.name = "btnDang";
 			temp.groupName = "radioGroupChat";
-			temp.label = "当";
-			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_Type3;
+			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_dangqian;
 			temp.x = 108;
 			temp.y = 0;
 			return temp;
@@ -175,8 +177,7 @@ package org.mokylin.skin.mainui.chat
 			btnDui = temp;
 			temp.name = "btnDui";
 			temp.groupName = "radioGroupChat";
-			temp.label = "队";
-			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_Type3;
+			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_duiwu;
 			temp.x = 54;
 			temp.y = 0;
 			return temp;
@@ -187,11 +188,8 @@ package org.mokylin.skin.mainui.chat
 			var temp:feathers.controls.Radio = new feathers.controls.Radio();
 			btnShi = temp;
 			temp.name = "btnShi";
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.groupName = "radioGroupChat";
-			temp.label = "世";
-			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_Type3;
-			temp.color = 0xEAEABC;
+			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_shijie;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -203,8 +201,7 @@ package org.mokylin.skin.mainui.chat
 			btnSi = temp;
 			temp.name = "btnSi";
 			temp.groupName = "radioGroupChat";
-			temp.label = "私";
-			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_Type3;
+			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_siliao;
 			temp.x = 81;
 			temp.y = 0;
 			return temp;

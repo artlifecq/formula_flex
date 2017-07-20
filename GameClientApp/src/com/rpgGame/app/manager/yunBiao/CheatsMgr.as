@@ -256,7 +256,7 @@ package com.rpgGame.app.manager.yunBiao
 			{
 				if (bShowNotice) 
 				{
-					NoticeManager.showNotifyById(12000,node.levelUpNeedPlayerLevel);
+					NoticeManager.showNotifyById(12000,"",node.levelUpNeedPlayerLevel);
 				}
 				return false;
 			}

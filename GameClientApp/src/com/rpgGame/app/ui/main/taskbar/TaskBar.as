@@ -63,13 +63,13 @@ package com.rpgGame.app.ui.main.taskbar
 						// 关闭
 						setState(false);
 						break;
-					case Renwu_Item(_skin.pri_killbut1.skin).labelDisplay:
+					case Renwu_Item(_skin.pri_killbut_1.skin).labelDisplay:
 						TaskControl.killWalkBut(1,0,1);
 						break;
-					case Renwu_Item(_skin.pri_killbut2.skin).labelDisplay:
+					case Renwu_Item(_skin.pri_killbut_2.skin).labelDisplay:
 						TaskControl.killWalkBut(1,1,1);
 						break;
-					case Renwu_Item(_skin.pri_killbut3.skin).labelDisplay:
+					case Renwu_Item(_skin.pri_killbut_3.skin).labelDisplay:
 						TaskControl.killWalkBut(1,2,1);
 						break;
 					case Renwu_Item(_skin.sec_killbut1_1.skin).labelDisplay:
@@ -100,13 +100,13 @@ package com.rpgGame.app.ui.main.taskbar
 						TaskControl.killWalkBut(3,2,1);
 						break;
 					
-					case Renwu_Item(_skin.pri_killbut1.skin).btn_send:
+					case Renwu_Item(_skin.pri_killbut_1.skin).btn_send:
 						TaskControl.killWalkBut(1,0,2);
 						break;
-					case Renwu_Item(_skin.pri_killbut2.skin).btn_send:
+					case Renwu_Item(_skin.pri_killbut_2.skin).btn_send:
 						TaskControl.killWalkBut(1,1,2);
 						break;
-					case Renwu_Item(_skin.pri_killbut3.skin).btn_send:
+					case Renwu_Item(_skin.pri_killbut_3.skin).btn_send:
 						TaskControl.killWalkBut(1,2,2);
 						break;
 					case Renwu_Item(_skin.sec_killbut1_1.skin).btn_send:
@@ -137,12 +137,12 @@ package com.rpgGame.app.ui.main.taskbar
 						TaskControl.killWalkBut(3,2,2);
 						break;
 					
-					case _skin.sec_subbut1:
-						receiveRewordBut(1);
-						break;
-					case _skin.sec_subbut2:
-						receiveRewordBut(2);
-						break;
+//					case _skin.sec_subbut1:
+//						receiveRewordBut(1);
+//						break;
+//					case _skin.sec_subbut2:
+//						receiveRewordBut(2);
+//						break;
 					case _skin.btnContinue:
 						TaskControl.killWalkBut(1,0,1);
 						break;
