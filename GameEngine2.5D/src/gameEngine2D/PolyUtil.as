@@ -63,7 +63,14 @@ package gameEngine2D {
 //					}
 //				}
 //			}
-            var points : Vector.<Vector3D> = getSegmentIntersect0(district, start, end, district.boundPointsSet);
+            var polygon : PointsSet = district.boundPointsSet;
+            for each (var temp : PointsSet in district.internalPointsSets) {
+                if (isPointInside(temp.points, end)) {
+                    polygon = temp;
+                    break;
+                }
+            }
+            var points : Vector.<Vector3D> = getSegmentIntersect0(district, start, end, polygon);
 			if (points.length > 0) {
 				for each(var point : Vector3D in points) {
 					allIntersect.push(point);
@@ -123,5 +130,40 @@ package gameEngine2D {
 			}
 			return a.x * b.y - a.y * b.x;
 		}
+        
+        public static function isPointInside(polygon : Vector.<Vector3D>, point : Vector3D) : Boolean {
+            var minX : int = int.MAX_VALUE;
+            var minY : int = int.MAX_VALUE;
+            var minZ : int = int.MAX_VALUE;
+            var maxX : int = int.MIN_VALUE;
+            var maxY : int = int.MIN_VALUE;
+            var maxZ : int = int.MIN_VALUE;
+            for each (var temp : Vector3D in polygon) {
+                if (minX > temp.x) {
+                    minX = temp.x;
+                }
+                if (minY > temp.y) {
+                    minY = temp.y;
+                }
+                if (minZ > temp.z) {
+                    minZ = temp.z;
+                }
+                if (maxX < temp.x) {
+                    maxX = temp.x;
+                }
+                if (maxY < temp.y) {
+                    maxY = temp.y;
+                }
+                if (maxZ < temp.z) {
+                    maxZ = temp.z;
+                }
+            }
+            if (point.x >= minX && point.x <= maxX
+                && point.y >= minY && point.y <= maxY
+                && point.z >= minZ && point.z <= maxZ) {
+                return true;
+            }
+            return false;
+        }
 	}
 }
