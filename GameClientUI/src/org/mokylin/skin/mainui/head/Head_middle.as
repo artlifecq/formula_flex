@@ -24,7 +24,7 @@ package org.mokylin.skin.mainui.head
 
 		public var lbl_num:feathers.controls.Label;
 
-		public var uim_zhandouli:feathers.controls.UINumber;
+		public var uim_zhandouli0:feathers.controls.UINumber;
 
 		public var xuetiao_hong:feathers.controls.UIAsset;
 
@@ -41,7 +41,7 @@ package org.mokylin.skin.mainui.head
 			this.currentState = "normal";
 			this.height = 92;
 			this.width = 434;
-			this.elementsContent = [__Head_middle_UIAsset1_i(),xuetiao_hong_i(),lbl_name_i(),grp_buff_i(),zhan_bg_i(),uim_zhandouli_i(),lbl_num_i()];
+			this.elementsContent = [__Head_middle_UIAsset1_i(),xuetiao_hong_i(),lbl_name_i(),grp_buff_i(),lbl_num_i(),zhan_bg_i(),uim_zhandouli0_i()];
 			
 			states = {
 			};
@@ -81,8 +81,8 @@ package org.mokylin.skin.mainui.head
 			temp.fontSize = 16;
 			temp.text = "角色名六个字 (120级)";
 			temp.textAlign = "center";
-			temp.color = 0xC3C198;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack2"];
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 234;
 			temp.x = 106;
 			temp.y = 0;
@@ -96,7 +96,7 @@ package org.mokylin.skin.mainui.head
 			temp.name = "lbl_num";
 			temp.text = "标签";
 			temp.textAlign = "center";
-			temp.color = 0xE1D4A9;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 355;
 			temp.x = 46;
@@ -104,12 +104,12 @@ package org.mokylin.skin.mainui.head
 			return temp;
 		}
 
-		private function uim_zhandouli_i():feathers.controls.UINumber
+		private function uim_zhandouli0_i():feathers.controls.UINumber
 		{
 			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
-			uim_zhandouli = temp;
-			temp.name = "uim_zhandouli";
-			temp.gap = -3;
+			uim_zhandouli0 = temp;
+			temp.name = "uim_zhandouli0";
+			temp.gap = -6;
 			temp.height = 25;
 			temp.label = "6521478";
 			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhujuezhandouli;
@@ -135,9 +135,9 @@ package org.mokylin.skin.mainui.head
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			zhan_bg = temp;
 			temp.name = "zhan_bg";
-			temp.styleName = "ui/mainui/head/zhandi.png";
-			temp.x = 279;
-			temp.y = 43;
+			temp.styleName = "ui/common/zhandouli2.png";
+			temp.x = 261;
+			temp.y = 58;
 			return temp;
 		}
 

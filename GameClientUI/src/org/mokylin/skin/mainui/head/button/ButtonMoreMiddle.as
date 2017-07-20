@@ -1,4 +1,4 @@
-package org.mokylin.skin.mainui.duiwu.button
+package org.mokylin.skin.mainui.head.button
 {
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
@@ -9,7 +9,7 @@ package org.mokylin.skin.mainui.duiwu.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class ButtonXia extends feathers.controls.StateSkin
+	public class ButtonMoreMiddle extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -22,7 +22,7 @@ package org.mokylin.skin.mainui.duiwu.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function ButtonXia()
+		public function ButtonMoreMiddle()
 		{
 			super();
 			
@@ -47,7 +47,7 @@ package org.mokylin.skin.mainui.duiwu.button
 						}
 					]
 			};
-			skinNames={"down":"ui/mainui/duiwu/button/xia/down.png", "hover":"ui/mainui/duiwu/button/xia/over.png", "up":"ui/mainui/duiwu/button/xia/up.png"};
+			skinNames={"down":"ui/mainui/head/button/moreMiddle/down.png", "hover":"ui/mainui/head/button/moreMiddle/over.png", "up":"ui/mainui/head/button/moreMiddle/up.png"};
 		}
 
 

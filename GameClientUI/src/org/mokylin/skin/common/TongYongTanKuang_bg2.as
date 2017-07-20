@@ -1,4 +1,4 @@
-package org.mokylin.skin.mainui.head
+package org.mokylin.skin.common
 {
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
@@ -8,20 +8,22 @@ package org.mokylin.skin.mainui.head
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class npc_xuecao1 extends feathers.controls.StateSkin
+	public class TongYongTanKuang_bg2 extends feathers.controls.StateSkin
 	{
+		public var bg:feathers.controls.UIAsset;
+
 
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function npc_xuecao1()
+		public function TongYongTanKuang_bg2()
 		{
 			super();
 			
 			this.currentState = "normal";
-			this.height = 12;
-			this.width = 8;
-			this.elementsContent = [__npc_xuecao1_UIAsset1_i()];
+			this.height = 264;
+			this.width = 326;
+			this.elementsContent = [bg_i()];
 			
 			states = {
 			};
@@ -29,13 +31,16 @@ package org.mokylin.skin.mainui.head
 		}
 
 
-		private function __npc_xuecao1_UIAsset1_i():feathers.controls.UIAsset
+		private function bg_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg = temp;
+			temp.name = "bg";
+			temp.bottom = 0;
 			temp.left = 0;
 			temp.right = 0;
-			temp.styleName = "ui/mainui/head/npcxuetiao.png";
-			temp.y = 0;
+			temp.styleName = "ui/common/background/erji_kuang.png";
+			temp.top = 0;
 			return temp;
 		}
 

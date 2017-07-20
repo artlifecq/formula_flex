@@ -1,4 +1,4 @@
-package org.mokylin.skin.mainui.systemMsg.button
+package org.mokylin.skin.mainui.chat.button
 {
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
@@ -9,7 +9,7 @@ package org.mokylin.skin.mainui.systemMsg.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class ButtonSkin_jiahao extends feathers.controls.StateSkin
+	public class ButtonChatClose extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -22,7 +22,7 @@ package org.mokylin.skin.mainui.systemMsg.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function ButtonSkin_jiahao()
+		public function ButtonChatClose()
 		{
 			super();
 			
@@ -47,7 +47,7 @@ package org.mokylin.skin.mainui.systemMsg.button
 						}
 					]
 			};
-			skinNames={"down":"ui/mainui/systemMsg/button/skin_jiahao/down.png", "hover":"ui/mainui/systemMsg/button/skin_jiahao/over.png", "up":"ui/mainui/systemMsg/button/skin_jiahao/up.png"};
+			skinNames={"down":"ui/mainui/chat/button/chatClose/down.png", "hover":"ui/mainui/chat/button/chatClose/over.png", "up":"ui/mainui/chat/button/chatClose/up.png"};
 		}
 
 

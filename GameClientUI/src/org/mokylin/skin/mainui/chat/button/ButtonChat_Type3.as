@@ -1,5 +1,6 @@
-package org.mokylin.skin.mainui.map.button
+package org.mokylin.skin.mainui.chat.button
 {
+	import feathers.controls.text.Fontter;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
@@ -9,12 +10,12 @@ package org.mokylin.skin.mainui.map.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class ButtonSkin_m extends feathers.controls.StateSkin
+	public class ButtonChat_Type3 extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var iconDisplay:feathers.controls.UIAsset;
+		public var iconDispla:feathers.controls.UIAsset;
 
 		public var labelDisplay:feathers.controls.Label;
 
@@ -22,15 +23,20 @@ package org.mokylin.skin.mainui.map.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function ButtonSkin_m()
+		public function ButtonChat_Type3()
 		{
 			super();
 			
-			this.currentState = "down";
+			this.currentState = "upAndSelected";
 			this.elementsContent = [];
 			
 			states = {
 				init:[
+						{target:"labelDisplay",
+							name:"fontSize",
+							value:14
+						}
+						,
 						{target:"labelDisplay",
 							name:"textAlign",
 							value:"center"
@@ -38,27 +44,34 @@ package org.mokylin.skin.mainui.map.button
 						,
 						{target:"labelDisplay",
 							name:"color",
-							value:0xFFFFFF
+							value:0xEAEABC
 						}
 						,
 						{target:"labelDisplay",
-							name:"verticalAlign",
-							value:"middle"
+							name:"nativeFilters",
+							value:Fontter.filterObj["textFilterBlackGreen"]
 						}
 					]
 			};
-			skinNames={"down":"ui/mainui/map/button/skin_m/down.png", "hover":"ui/mainui/map/button/skin_m/over.png", "up":"ui/mainui/map/button/skin_m/up.png"};
+			skinNames={"down":"ui/mainui/chat/button/chat_Type2/down.png",
+			"hover":"ui/mainui/chat/button/chat_Type2/over.png",
+			"up":"ui/mainui/chat/button/chat_Type2/up.png",
+			"upAndSelected":"ui/mainui/chat/button/chat_Type2/select.png"};
 		}
 
 
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function iconDisplay_i():feathers.controls.UIAsset
+		private function iconDispla_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			iconDisplay = temp;
-			temp.name = "iconDisplay";
+			iconDispla = temp;
+			temp.name = "iconDispla";
+			temp.height = 26;
+			temp.width = 26;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -67,14 +80,15 @@ package org.mokylin.skin.mainui.map.button
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			labelDisplay = temp;
 			temp.name = "labelDisplay";
-			temp.bottom = 0;
-			temp.left = 0;
-			temp.right = 0;
-			temp.text = "";
+			temp.height = 20;
+			temp.left = 2;
+			temp.fontSize = 14;
+			temp.text = "标";
 			temp.textAlign = "center";
-			temp.color = 0xFFFFFF;
-			temp.top = 0;
-			temp.verticalAlign = "middle";
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.top = 4;
+			temp.width = 22;
 			return temp;
 		}
 

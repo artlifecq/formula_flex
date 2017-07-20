@@ -1,4 +1,4 @@
-package org.mokylin.skin.mainui.guaji.button
+package org.mokylin.skin.mainui.head.button
 {
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
@@ -9,7 +9,7 @@ package org.mokylin.skin.mainui.guaji.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class ButtonGuaji extends feathers.controls.StateSkin
+	public class ButtonVip extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -22,7 +22,7 @@ package org.mokylin.skin.mainui.guaji.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function ButtonGuaji()
+		public function ButtonVip()
 		{
 			super();
 			
@@ -47,7 +47,7 @@ package org.mokylin.skin.mainui.guaji.button
 						}
 					]
 			};
-			skinNames={"down":"ui/mainui/guaji/button/guaji/down.png", "hover":"ui/mainui/guaji/button/guaji/over.png", "up":"ui/mainui/guaji/button/guaji/up.png"};
+			skinNames={"down":"ui/mainui/head/button/vip/down.png", "hover":"ui/mainui/head/button/vip/over.png", "up":"ui/mainui/head/button/vip/up.png"};
 		}
 
 

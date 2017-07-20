@@ -10,10 +10,12 @@ package org.mokylin.skin.mainui.head
 	import feathers.controls.UINumber;
 	import org.mokylin.skin.component.uinumber.UINumberSkin_zhujuezhandouli;
 	import org.mokylin.skin.mainui.head.Head_Select;
+	import org.mokylin.skin.mainui.head.button.ButtonChongzhi;
 	import org.mokylin.skin.mainui.head.button.ButtonSkin_banghui;
 	import org.mokylin.skin.mainui.head.button.ButtonSkin_duiwu;
 	import org.mokylin.skin.mainui.head.button.ButtonSkin_heping;
 	import org.mokylin.skin.mainui.head.button.ButtonSkin_quanti;
+	import org.mokylin.skin.mainui.head.button.ButtonVip;
 
 	/**
 	 * @private
@@ -32,6 +34,8 @@ package org.mokylin.skin.mainui.head
 		public var UI_yijia:feathers.controls.UIAsset;
 
 		public var banghui:feathers.controls.SkinnableContainer;
+
+		public var btnChongzhi:feathers.controls.Button;
 
 		public var btnVip:feathers.controls.Button;
 
@@ -53,11 +57,17 @@ package org.mokylin.skin.mainui.head
 
 		public var heping:feathers.controls.SkinnableContainer;
 
+		public var icon:feathers.controls.UIAsset;
+
+		public var lbLevel:feathers.controls.Label;
+
 		public var quanti:feathers.controls.SkinnableContainer;
 
 		public var role_name:feathers.controls.Label;
 
 		public var role_zhandouli:feathers.controls.UINumber;
+
+		public var ui_select_bg:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -68,9 +78,9 @@ package org.mokylin.skin.mainui.head
 			super();
 			
 			this.currentState = "normal";
-			this.height = 220;
-			this.width = 435;
-			this.elementsContent = [__head_main_Skin_UIAsset1_i(),__head_main_Skin_UIAsset2_i(),role_zhandouli_i(),role_name_i(),grp_zhiye_i(),grp_mode_i(),grp_select_i(),btnVip_i()];
+			this.height = 148;
+			this.width = 384;
+			this.elementsContent = [__head_main_Skin_UIAsset1_i(),icon_i(),__head_main_Skin_UIAsset2_i(),role_zhandouli_i(),role_name_i(),grp_zhiye_i(),grp_mode_i(),btnVip_i(),btnChongzhi_i(),lbLevel_i(),grp_select_i()];
 			
 			states = {
 			};
@@ -87,6 +97,7 @@ package org.mokylin.skin.mainui.head
 			UI_bingjia = temp;
 			temp.name = "UI_bingjia";
 			temp.styleName = "ui/mainui/head/zhiye/bingjia.png";
+			temp.visible = false;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -98,7 +109,6 @@ package org.mokylin.skin.mainui.head
 			UI_mojia = temp;
 			temp.name = "UI_mojia";
 			temp.styleName = "ui/mainui/head/zhiye/mojia.png";
-			temp.visible = false;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -119,33 +129,20 @@ package org.mokylin.skin.mainui.head
 		private function __head_main_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 98;
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/mainui/head/zhujuetouxiangkuang.png";
-			temp.width = 281;
-			temp.x = 2;
-			temp.y = 4;
+			temp.styleName = "ui/mainui/head/headBg_big.png";
+			temp.x = 1;
+			temp.y = 0;
 			return temp;
 		}
 
 		private function __head_main_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/mainui/head/zhandouli.png";
-			temp.x = 101;
-			temp.y = 28;
-			return temp;
-		}
-
-		private function __head_main_Skin_UIAsset8_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 122;
-			temp.styleName = "ui/common/tips/tips_2.png";
-			temp.width = 344;
-			temp.x = 0;
-			temp.y = 0;
+			temp.styleName = "ui/common/zhandouli2.png";
+			temp.x = 137;
+			temp.y = 74;
 			return temp;
 		}
 
@@ -163,14 +160,25 @@ package org.mokylin.skin.mainui.head
 			return temp;
 		}
 
+		private function btnChongzhi_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btnChongzhi = temp;
+			temp.name = "btnChongzhi";
+			temp.styleClass = org.mokylin.skin.mainui.head.button.ButtonChongzhi;
+			temp.x = 276;
+			temp.y = 46;
+			return temp;
+		}
+
 		private function btnVip_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnVip = temp;
 			temp.name = "btnVip";
-			temp.styleClass = org.mokylin.skin.mainui.head.button.ButtonSkin_heping;
-			temp.x = 12;
-			temp.y = 100;
+			temp.styleClass = org.mokylin.skin.mainui.head.button.ButtonVip;
+			temp.x = 20;
+			temp.y = 97;
 			return temp;
 		}
 
@@ -240,8 +248,8 @@ package org.mokylin.skin.mainui.head
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grp_mode = temp;
 			temp.name = "grp_mode";
-			temp.x = 74;
-			temp.y = 80;
+			temp.x = 13;
+			temp.y = 74;
 			temp.elementsContent = [btn_heping_i(),btn_banghui_i(),btn_duiwu_i(),btn_quanti_i()];
 			return temp;
 		}
@@ -253,9 +261,9 @@ package org.mokylin.skin.mainui.head
 			temp.name = "grp_select";
 			temp.height = 122;
 			temp.width = 344;
-			temp.x = 91;
-			temp.y = 98;
-			temp.elementsContent = [__head_main_Skin_UIAsset8_i(),heping_i(),duiwu_i(),banghui_i(),quanti_i()];
+			temp.x = 38;
+			temp.y = 102;
+			temp.elementsContent = [ui_select_bg_i(),heping_i(),duiwu_i(),banghui_i(),quanti_i()];
 			return temp;
 		}
 
@@ -265,7 +273,7 @@ package org.mokylin.skin.mainui.head
 			grp_zhiye = temp;
 			temp.name = "grp_zhiye";
 			temp.x = 0;
-			temp.y = 12;
+			temp.y = 15;
 			temp.elementsContent = [UI_bingjia_i(),UI_mojia_i(),UI_yijia_i()];
 			return temp;
 		}
@@ -281,6 +289,35 @@ package org.mokylin.skin.mainui.head
 			temp.width = 332;
 			temp.x = 5;
 			temp.y = 6;
+			return temp;
+		}
+
+		private function icon_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icon = temp;
+			temp.name = "icon";
+			temp.styleName = "ui/mainui/head/touxiang/mojia/big.png";
+			temp.x = 31;
+			temp.y = 22;
+			return temp;
+		}
+
+		private function lbLevel_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbLevel = temp;
+			temp.name = "lbLevel";
+			temp.bold = false;
+			temp.height = 16;
+			temp.fontSize = 14;
+			temp.text = "100";
+			temp.textAlign = "center";
+			temp.color = 0xE1D4A9;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.width = 29;
+			temp.x = 116;
+			temp.y = 22;
 			return temp;
 		}
 
@@ -304,12 +341,14 @@ package org.mokylin.skin.mainui.head
 			role_name = temp;
 			temp.name = "role_name";
 			temp.bold = false;
-			temp.text = "角色名六个字 (120级)";
-			temp.color = 0xC3C198;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack2"];
+			temp.text = "角色名六个字";
+			temp.textAlign = "center";
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.verticalAlign = "-2";
-			temp.x = 88;
-			temp.y = 3;
+			temp.width = 108;
+			temp.x = 150;
+			temp.y = 51;
 			return temp;
 		}
 
@@ -318,13 +357,26 @@ package org.mokylin.skin.mainui.head
 			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
 			role_zhandouli = temp;
 			temp.name = "role_zhandouli";
-			temp.gap = -3;
+			temp.gap = -6;
 			temp.height = 25;
-			temp.label = "6521478";
+			temp.label = "629845";
 			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhujuezhandouli;
-			temp.width = 109;
-			temp.x = 155;
-			temp.y = 31;
+			temp.width = 142;
+			temp.x = 190;
+			temp.y = 77;
+			return temp;
+		}
+
+		private function ui_select_bg_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ui_select_bg = temp;
+			temp.name = "ui_select_bg";
+			temp.height = 122;
+			temp.styleName = "ui/common/tips/tips_2.png";
+			temp.width = 305;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
