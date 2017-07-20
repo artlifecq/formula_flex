@@ -13,6 +13,9 @@ package com.rpgGame.app.state.role.action
 	import com.rpgGame.coreData.type.RoleActionType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	
+	import flash.geom.Point;
+	import flash.geom.Vector3D;
+	
 	import gs.TweenLite;
 
 	/**
@@ -68,6 +71,8 @@ package com.rpgGame.app.state.role.action
 		
 		private var _jumpFinished : Boolean;
 		private var _isSecondJump : Boolean;
+		private var _jumpTime : int = 0;//花费时间
+		private var _destPoint:Vector3D;// 目的点
 		private var _stateReference : JumpStateReference;
 
 		public function JumpState()
@@ -98,6 +103,10 @@ package com.rpgGame.app.state.role.action
 						_isSecondJump = Math.random() * 100 < SECOND_JUMP_PROBABILITY;
 						_stateReference.jumpAction = _isSecondJump ? 2 : 1;
 					}
+					
+					_destPoint=_stateReference.destPoint;
+					_jumpTime=_stateReference.jumpTime;
+					
 					var speedRatio : Number = _isSecondJump ? (SECOND_JUMP_SPEED_RATIO > 0 ? SECOND_JUMP_SPEED_RATIO : 1) : (JUMP_SPEED_RATIO > 0 ? JUMP_SPEED_RATIO : 1);
 					syncAnimationSpeed(speedRatio);
 				}
@@ -108,7 +117,10 @@ package com.rpgGame.app.state.role.action
 
 		override public function playAnimation(role : BaseRole, render : RenderUnit3D, isFreeze : Boolean = false, time : int = -1, speedRatio : Number = 1) : void
 		{
-			super.playAnimation(role, render, isFreeze, time, speedRatio);
+			var jumpTime:int
+			//jumpTime=_jumpTime>0?_jumpTime:time
+			jumpTime=time;
+			super.playAnimation(role, render, isFreeze, jumpTime, speedRatio);
 
 			var jumpState : String = _isSecondJump ? RoleActionType.SECOND_JUMP : RoleActionType.JUMP;
 			var statusType : String = RoleActionType.getActionType(jumpState, (_machine as RoleStateMachine).isRiding);
@@ -120,19 +132,19 @@ package com.rpgGame.app.state.role.action
 				case RenderUnitType.DEPUTY_WEAPON:
 					render.visible = true;
 					render.repeat = 1;
-					render.setStatus(statusType, _useCrossfadeTransition ? 0.2 : null, time, speedRatio);
+					render.setStatus(statusType, _useCrossfadeTransition ? 0.2 : null, jumpTime, speedRatio);
 					if (isFreeze)
-						render.stop(time);
+						render.stop(jumpTime);
 					break;
 				case RenderUnitType.ZHANQI:
 					render.repeat = 0;
-					render.setStatus(RoleActionType.RUN, _useCrossfadeTransition ? 0.2 : null, time, speedRatio);
+					render.setStatus(RoleActionType.RUN, _useCrossfadeTransition ? 0.2 : null, jumpTime, speedRatio);
 					break;
 				case RenderUnitType.MOUNT:
 					render.repeat = 1;
-					render.setStatus(jumpState, _useCrossfadeTransition ? 0.2 : null, time, speedRatio);
+					render.setStatus(jumpState, _useCrossfadeTransition ? 0.2 : null, jumpTime, speedRatio);
 					if (isFreeze)
-						render.stop(time);
+						render.stop(jumpTime);
 					break;
 				case RenderUnitType.KNIFE_LIGHT:
 					break;
@@ -208,55 +220,67 @@ package com.rpgGame.app.state.role.action
 					_totalFrameTween.kill();
 					_totalFrameTween = null;
 				}
-				var bodyAp : RenderUnit3D = (_machine.owner as SceneRole).avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY, true);
-				var totalFrameTm : uint = (bodyAp ? bodyAp.totalDuration : 0);//动画的总时间
-				if (totalFrameTm > 0)
+				if(_jumpTime>0)
 				{
-					var breakFrameTm : int = _isSecondJump ? JUMP_BREAK_TIME : SECOND_JUMP_BREAK_TIME;
-					breakFrameTm = (breakFrameTm > 0 ? breakFrameTm : totalFrameTm);
-					if (breakFrameTm > totalFrameTm)
-						breakFrameTm = totalFrameTm;
-					_totalFrameTween = TweenLite.delayedCall(totalFrameTm / speedRatio * 0.001, onPlayJumpCmp);
-					_breakFrameTween = TweenLite.delayedCall(breakFrameTm / speedRatio * 0.001, onBreakFrameCmp);
-
-					var totalTime : int = totalFrameTm;
-					if (_isSecondJump)
+					onStartJumpRise(_jumpTime);
+					_totalFrameTween = TweenLite.delayedCall(_jumpTime * 0.001, onPlayJumpCmp);
+					_breakFrameTween = TweenLite.delayedCall(_jumpTime * 0.001, onBreakFrameCmp);
+					
+					
+				}
+				else
+				{
+					var bodyAp : RenderUnit3D = (_machine.owner as SceneRole).avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY, true);
+					var totalFrameTm:uint=(bodyAp ? bodyAp.totalDuration : 0);//动画的总时间
+					if (totalFrameTm > 0)
 					{
-						if (SECOND_JUMP_END_TIME > 0)
-							totalTime = SECOND_JUMP_END_TIME - SECOND_JUMP_START_TIME;
-						else
-							totalTime = totalFrameTm - SECOND_JUMP_START_TIME;
-
-						if (SECOND_JUMP_START_TIME > 0)
+						var breakFrameTm : int = _isSecondJump ? JUMP_BREAK_TIME : SECOND_JUMP_BREAK_TIME;
+						breakFrameTm = (breakFrameTm > 0 ? breakFrameTm : totalFrameTm);
+						if (breakFrameTm > totalFrameTm)
+							breakFrameTm = totalFrameTm;
+						_totalFrameTween = TweenLite.delayedCall(totalFrameTm / speedRatio * 0.001, onPlayJumpCmp);
+						_breakFrameTween = TweenLite.delayedCall(breakFrameTm / speedRatio * 0.001, onBreakFrameCmp);
+						
+						var totalTime : int = totalFrameTm;
+						if (_isSecondJump)
 						{
-							_startRiseTween = TweenLite.delayedCall(SECOND_JUMP_START_TIME * 0.001, onStartJumpRise, [totalTime / speedRatio]);
+							if (SECOND_JUMP_END_TIME > 0)
+								totalTime = SECOND_JUMP_END_TIME - SECOND_JUMP_START_TIME;
+							else
+								totalTime = totalFrameTm - SECOND_JUMP_START_TIME;
+							
+							if (SECOND_JUMP_START_TIME > 0)
+							{
+								_startRiseTween = TweenLite.delayedCall(SECOND_JUMP_START_TIME * 0.001, onStartJumpRise, [totalTime / speedRatio]);
+							}
+							else
+							{
+								onStartJumpRise(totalTime / speedRatio);
+							}
 						}
 						else
 						{
-							onStartJumpRise(totalTime / speedRatio);
+							if (JUMP_END_TIME > 0)
+								totalTime = JUMP_END_TIME - JUMP_START_TIME;
+							else
+								totalTime = totalFrameTm - JUMP_START_TIME;
+							
+							if (/*JUMP_START_TIME > 0*/false)
+							{
+								_startRiseTween = TweenLite.delayedCall(JUMP_START_TIME * 0.001, onStartJumpRise, [totalTime / speedRatio]);
+							}
+							else
+							{
+								onStartJumpRise(totalTime / speedRatio);
+							}
 						}
 					}
 					else
 					{
-						if (JUMP_END_TIME > 0)
-							totalTime = JUMP_END_TIME - JUMP_START_TIME;
-						else
-							totalTime = totalFrameTm - JUMP_START_TIME;
-
-						if (JUMP_START_TIME > 0)
-						{
-							_startRiseTween = TweenLite.delayedCall(JUMP_START_TIME * 0.001, onStartJumpRise, [totalTime / speedRatio]);
-						}
-						else
-						{
-							onStartJumpRise(totalTime / speedRatio);
-						}
+						onPlayJumpCmp();
 					}
 				}
-				else
-				{
-					onPlayJumpCmp();
-				}
+				
 			}
 		}
 
@@ -265,7 +289,7 @@ package com.rpgGame.app.state.role.action
 			if (totalTime > 0)
 			{
 				var ref : JumpRiseStateReference = _machine.getReference(JumpRiseStateReference) as JumpRiseStateReference;
-				ref.setParams(totalTime, _isSecondJump);
+				ref.setParams(totalTime, _isSecondJump,_destPoint);
 				transition(RoleStateType.CONTROL_JUMP_RISE, ref);
 			}
 		}

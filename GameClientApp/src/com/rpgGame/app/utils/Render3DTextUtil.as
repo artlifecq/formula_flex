@@ -122,8 +122,9 @@ package com.rpgGame.app.utils
 			renderText.setTextDatas(textDatas);
 			renderText.setStyle(styleName_Meigui, "style1");
 			renderText.setStyle(styleName_Shuzi, "style1");
-			renderText.text = "hx" + str;
 			refreshHeadFlowerTextLayout(entity);
+			renderText.text = "hx" + str;
+			//renderText.text = str;
 			if (disappearTime > 0)
 			{
 				var duration:Number = disappearTime - SystemTimeManager.curtTm;

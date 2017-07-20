@@ -50,6 +50,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.role.RoleType;
 	import com.rpgGame.coreData.role.SceneCollectData;
 	import com.rpgGame.coreData.role.SceneDropGoodsData;
+	import com.rpgGame.coreData.role.SceneJumpPointData;
 	import com.rpgGame.coreData.role.SceneTranportData;
 	import com.rpgGame.coreData.role.ZhanCheData;
 	import com.rpgGame.coreData.type.AttachDisplayType;
@@ -609,7 +610,35 @@ package com.rpgGame.app.manager.role
 			ClientTriggerManager.addTriggerCollectEffect(role);
 			return role;
 		}
-		
+		/**
+		 * 创建跳跃点
+		 * @param data
+		 * @return
+		 *
+		 */
+		public function createJumppoint(data : SceneJumpPointData) : SceneRole
+		{
+			//如果场景中存在此类型此ID的角色，则移除之
+			removeSceneRoleByIdAndType(data.id, SceneCharType.SCENE_JUMP);
+			var role : SceneRole = SceneRole.create(SceneCharType.SCENE_JUMP, data.id);
+			//设置VO
+			role.data = data;
+			role.name = data.name;
+			role.headFace = HeadFace.create(role);
+			data.avatarInfo.effectResID = data.effectRes;
+			
+			//执行主换装更新
+			AvatarManager.updateAvatar(role);
+			role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true); //切换到“站立状态”
+			
+			role.setScale(data.sizeScale);
+			role.setGroundXY(data.x, data.y);
+			role.rotationY = data.direction;
+			role.offsetY = data.offsetUp;
+			SceneManager.addSceneObjToScene(role, true, false, false);
+			//ClientTriggerManager.addTriggerCollectEffect(role);
+			return role;
+		}
 		/**
 		 * 创建场景特效
 		 * @param data

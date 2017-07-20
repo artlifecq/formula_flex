@@ -15,6 +15,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.cfg.TriggerCfgData;
 	import com.rpgGame.coreData.enum.AreaMapTypeEnum;
 	import com.rpgGame.coreData.enum.EnumAreaMapType;
+	import com.rpgGame.coreData.role.SceneJumpPointData;
 	import com.rpgGame.coreData.role.SceneTranportData;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
@@ -79,7 +80,22 @@ package com.rpgGame.app.manager
                 }
 			}
 		}
-
+		/**
+		 * 更新地图跳跃点区域图
+		 *
+		 */
+		public static function updateJumppointAreaMap() : void
+		{
+			var otherAreaMap : AreaMap = SceneManager.getScene().getAreaMap(EnumAreaMapType.OTHER_AREA);
+			var JumppointtList : Array = SceneManager.getScene().getSceneObjsByType(SceneCharType.SCENE_JUMP);
+			for each (var jumpRole : SceneRole in JumppointtList)
+			{
+				var info : SceneJumpPointData = jumpRole.data as SceneJumpPointData;
+				var polygon : Vector.<Point> = info.polygon.slice();
+				var areaMapData : AreaMapData = new AreaMapData(polygon, AreaMapTypeEnum.TRANS, info.id, jumpRole);
+				var color : String = otherAreaMap.addFlag(areaMapData);
+			}
+		}
 		/**
 		 * 更新护送区域图
 		 *

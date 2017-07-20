@@ -41,7 +41,7 @@ package com.rpgGame.app.fight.spell
 		}
 		public static function releaseSpell(spellInfo : ReleaseSpellInfo) : void
 		{
-			//TweenLite.killDelayedCallsTo(releaseSpellPlay);
+			
 			var warningData:Q_skill_warning=SpellDataManager.getWarningData(spellInfo.spellData.q_skillID);//获取预警技能关联
 			if(warningData&&warningData.q_time>0)//有预警技能先放预警技能，没有预警技能走正常流程
 			{
@@ -54,6 +54,7 @@ package com.rpgGame.app.fight.spell
 					info.readWarningFrom(warningSkillID,spellInfo);
 					releaseSpellPlay(info);
 				}
+				TweenLite.killDelayedCallsTo(releaseSpellPlay);
 				TweenLite.delayedCall(warningTime * 0.001, releaseSpellPlay, [spellInfo]);
 			}
 			else

@@ -707,7 +707,7 @@ package com.rpgGame.app.fight.spell
 			if (SceneManager.isSceneOtherRenderLimit)
 				return;
 			var imgUrl:String = info.ribbonImg;
-			if(imgUrl != null || imgUrl != null)
+			if(imgUrl != ""&&info.flyTargets&&info.flyTargets.length>0)//没有目标也不播放----yt---以前的条件if(imgUrl != null || imgUrl != null)
 			{
 				var effectSet : RenderSet3D = RenderSet3D.create(SceneCharType.SCENE_RIBBON_SPELL, ribbonEffectID,true);
 				effectSet.setGroundXY(info.atkor.x,info.atkor.z);
