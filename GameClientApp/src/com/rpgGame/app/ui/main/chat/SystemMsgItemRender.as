@@ -13,7 +13,7 @@ package com.rpgGame.app.ui.main.chat
 
 	public class SystemMsgItemRender extends BaseDefaultListItemRenderer
 	{
-		public static var WIDTH:int = 412;
+		public static var WIDTH:int = 185;
 		private static var _defaultFormat:TextFormat;
 		private var _richText:RichTextArea3D;
 		
@@ -51,7 +51,7 @@ package com.rpgGame.app.ui.main.chat
 				{
 					_defaultFormat = new TextFormat(Fontter.FONT_Hei);
 					_defaultFormat.color = 0xF9F0CC;
-					_defaultFormat.size = 14;
+					_defaultFormat.size = 12;
 					_defaultFormat.align = TextFieldAutoSize.LEFT;
 					_defaultFormat.letterSpacing = 1;
 					_defaultFormat.leading = 4;

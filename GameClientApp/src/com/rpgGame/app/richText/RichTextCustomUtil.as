@@ -79,6 +79,7 @@ RichTextCustomUtil.updateRichUnit
 */
 package com.rpgGame.app.richText
 {
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.ChatManager;
@@ -95,6 +96,7 @@ package com.rpgGame.app.richText
 	import com.rpgGame.app.richText.component.RichTextUnitConfigData;
 	import com.rpgGame.app.richText.component.RichTextUnitData;
 	import com.rpgGame.app.sender.SceneSender;
+	import com.rpgGame.app.ui.main.chat.ChatUtil;
 	import com.rpgGame.app.utils.MenuUtil;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.core.app.AppConstant;
@@ -322,6 +324,9 @@ package com.rpgGame.app.richText
 						TipTargetManager.show( unit.displayObj, TargetTipsMaker.makeTips( TipType.ITEM_TIP, info ,true) );
 					break;
 				case RichTextCustomLinkType.JINJIE_SHOW_TYPE:
+					var t:String=unitData.linkData;
+					var id:String=ChatUtil.getPanel(t);
+					FunctionOpenManager.openAppPaneById(id,null,false);
 					AppManager.showAppNoHide(AppConstant.MOUNT_PANEL);	
 					break;
 				case RichTextCustomLinkType.TASK_NPC_NAME_TYPE:

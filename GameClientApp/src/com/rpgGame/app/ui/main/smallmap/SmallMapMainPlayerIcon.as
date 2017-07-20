@@ -18,7 +18,7 @@ package com.rpgGame.app.ui.main.smallmap {
             super();
             this._ico = new UIAsset();
             this._ico.imageScaleMode = UIAsset.IMAGE_SCALE_MODE_NO_SCALE;
-            this._ico.styleName = "ui/mainui/map/guangquan.png";
+            this._ico.styleName = "ui/mainui/map/jiantou.png";
             this._ico.x = -12;
             this._ico.y = -15;
             this.addChild(this._ico);
@@ -43,9 +43,9 @@ package com.rpgGame.app.ui.main.smallmap {
             this.y = point.y;
             var player : SceneRole = MainRoleManager.actor;
             var r : Number;
-            r = 180 + player.rotationY;
+            r = player.rotationY;
             r += mapData.miniCorrectRoll;
-            this.rotation = (r + 180) * Math.PI / 180;
+            this.rotation = (r + 90) * Math.PI / 180;
         }
     }
 }

@@ -180,7 +180,7 @@ package com.rpgGame.coreData.type
 		/**
 		 *战斗力特效 
 		 */
-		public static const UI_JIEMIAN_ZHANDOULI:String="ui_jiemian_zhandouli";
+		public static const UI_JIEMIAN_ZHANDOULI:String="ui_zhandouli";
 		/**
 		 *进阶成功 
 		 */

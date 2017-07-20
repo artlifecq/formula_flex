@@ -96,16 +96,16 @@ package com.rpgGame.app.ui.main.head
 			if(data.buffData.q_icon_show==0||isCreate(data)){
 				return;
 			}
-			var icon:BuffIcon=new BuffIcon(IcoSizeEnum.ICON_24);
+			var icon:BuffIcon=new BuffIcon(IcoSizeEnum.ICON_19);
 			icon.buffData=data;
-			
+			icon.setUrlBg("ui/mainui/head/BAFF/buffBg_20.png");
 			if(data.buffData.q_effect_type==2){//负面
 				badBuffs.push(icon);
 			}else{
 				goodBuffs.push(icon);
 			}
 			
-			var gridW:int=IcoSizeEnum.ICON_24+10;
+			var gridW:int=IcoSizeEnum.ICON_19+10;
 			startX=75;
 			for(var i:int=0;i<goodBuffs.length;i++){//buff
 				icon=goodBuffs[i];
@@ -172,7 +172,7 @@ package com.rpgGame.app.ui.main.head
 			}
 			num=datas.length;
 			var changW:int;
-			var gridW:int=IcoSizeEnum.ICON_24+2;
+			var gridW:int=IcoSizeEnum.ICON_19+2;
 			changW=-1*gridW;
 			
 			startX=52;

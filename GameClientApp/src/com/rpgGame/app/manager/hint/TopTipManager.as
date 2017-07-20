@@ -47,7 +47,11 @@ package com.rpgGame.app.manager.hint
 					hintBox.touchable = false;
 				}
 				_hintMap.add(hintset.type, hintBox);
-				if (hintset.type != NoticeManager.BATTLE_HINT)
+//				if (hintset.type != NoticeManager.BATTLE_HINT)
+//				{
+//					StarlingLayerManager.hintUILayer.addChild(hintBox);
+//				}
+				if (hintset.type != NoticeManager.BATTLE_CHUANWEN)
 				{
 					StarlingLayerManager.hintUILayer.addChild(hintBox);
 				}

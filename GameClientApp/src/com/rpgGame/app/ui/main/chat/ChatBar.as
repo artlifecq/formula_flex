@@ -127,7 +127,7 @@ package com.rpgGame.app.ui.main.chat {
 			_skin.listBar.dataProvider = new ListCollection();
 			var layout:VerticalLayout = new VerticalLayout();
 			layout.useVirtualLayout = true;
-			layout.gap = 1;
+			layout.gap = 3;
 			layout.hasVariableItemDimensions = true;
 			_skin.listBar.layout = layout;
 			
@@ -233,7 +233,7 @@ package com.rpgGame.app.ui.main.chat {
 		 */		
 		private function onSendSuccess( info:ResChatMessage ):void 
 		{
-			if(info.type==EnumChatChannelType.CHAT_CHANNEL_HEARSAY||info.type==EnumChatChannelType.CHAT_CHANNEL_SYSTEM){
+			if(info.type==EnumChatChannelType.CHAT_CHANNEL_SYSTEM){
 				return;	
 			}
 			if(info.type==EnumChatChannelType.CHAT_CHANNEL_LABA)
