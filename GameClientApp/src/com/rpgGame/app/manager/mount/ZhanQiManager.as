@@ -194,6 +194,7 @@ package com.rpgGame.app.manager.mount
 			}
 			var msg:CSWarFlagStratumUpToGameMessage = new CSWarFlagStratumUpToGameMessage();
 			msg.Automatic = showdata.isAutoBuyItem?1:0;
+			msg.AutoUp = showdata.isAutoing?1:0;
 			SocketConnection.send(msg);
 			return true;
 		}
