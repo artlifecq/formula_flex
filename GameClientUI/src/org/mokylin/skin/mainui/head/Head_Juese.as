@@ -134,7 +134,7 @@ package org.mokylin.skin.mainui.head
 			temp.height = 16;
 			temp.fontSize = 12;
 			temp.text = "100";
-			temp.textAlign = "center";
+			temp.textAlign = "left";
 			temp.color = 0xE1D4A9;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 22;
