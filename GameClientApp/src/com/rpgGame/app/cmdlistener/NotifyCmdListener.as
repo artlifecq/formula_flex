@@ -35,7 +35,7 @@ package com.rpgGame.app.cmdlistener
 			{
 				arr.push(msg.values[i]);
 			}
-			NoticeManager.showNotifyById.apply(null,arr);
+			NoticeManager.showNotifyById(msg.noticeIndex,"",arr);
 //			NoticeManager.showNotifyById(msg.noticeIndex,msg.values);
 			
 			

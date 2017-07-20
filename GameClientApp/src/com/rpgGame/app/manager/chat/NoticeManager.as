@@ -1,16 +1,12 @@
 package com.rpgGame.app.manager.chat
 {
 	import com.rpgGame.app.manager.hint.TopTipManager;
-	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.ui.main.chat.ChatUtil;
-	import com.rpgGame.core.events.HintEvent;
 	import com.rpgGame.coreData.rEnum;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_notify;
 	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
-	
-	import org.client.mainCore.manager.EventManager;
 	
 	/**
 	 *提示消息管理器
@@ -215,7 +211,7 @@ package com.rpgGame.app.manager.chat
 							else
 							{
 								var words : String = LanguageConfig.replaceStr1(notiMsg.q_content,args);
-								words=ChatUtil.getPanel(words);
+								words=ChatUtil.replaceStr2(words);
 								notify(tp, words);
 							}
 						}					

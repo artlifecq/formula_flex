@@ -151,7 +151,7 @@ package com.rpgGame.app.manager.mount
 			}
 			if(!showdata.isAutoBuyItem&&!showdata.canUpLevel())
 			{
-				NoticeManager.showNotifyById(9002,showdata.upLevelItem.qItem.q_name);
+				NoticeManager.showNotifyById(9002,"",showdata.upLevelItem.qItem.q_name);
 				return false;
 			}
 			if(showdata.isAutoBuyItem&&!showdata.canUpLevel())
@@ -180,14 +180,14 @@ package com.rpgGame.app.manager.mount
 			var useCount:int = showdata.getUseExtralItem(type);
 			if(!extraItemInfo.canUseItem(showdata.mountLevel,useCount))
 			{
-				NoticeManager.showNotifyById(9004,extraItemInfo.clientItemInfo.qItem.q_name);
+				NoticeManager.showNotifyById(9004,"",extraItemInfo.clientItemInfo.qItem.q_name);
 				return false;
 			}
 			
 			var clientitem:ClientItemInfo = extraItemInfo.clientItemInfo;
 			if(BackPackManager.instance.getBagItemsCountById(clientitem.cfgId)<=0)
 			{
-				NoticeManager.showNotifyById(9002,clientitem.qItem.q_name);
+				NoticeManager.showNotifyById(9002,"",clientitem.qItem.q_name);
 				return false;
 			}
 			HorseSender.useHorseAddtion(extraItemInfo.eatType,1);
