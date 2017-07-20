@@ -2,7 +2,6 @@ package com.rpgGame.app.ui.main.shortcut {
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
-	import com.rpgGame.app.manager.HunYinManager;
 	import com.rpgGame.app.manager.LostSkillManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -13,7 +12,6 @@ package com.rpgGame.app.ui.main.shortcut {
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.SkinUI;
-	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.LostSkillData;
 	import com.rpgGame.coreData.cfg.LostSkillUpData;
@@ -44,7 +42,7 @@ package com.rpgGame.app.ui.main.shortcut {
 		private var _jumpState:Vector.<UIAsset>;
 		
 		private var renderUint:RenderUnit3D;
-		private var _rollprogress:RollProgress;
+		private var _rollprogress:DodgeProgress;
 		private var _jinzhencontent:Inter3DContainer;
 		private var _jinzhenList:Vector.<JinZhenControl>;
 		
@@ -55,7 +53,6 @@ package com.rpgGame.app.ui.main.shortcut {
 			super(this._skin);
 			
 			init();
-			
 		}
 		public function skin():shortcut_Skin
 		{
@@ -104,7 +101,7 @@ package com.rpgGame.app.ui.main.shortcut {
 			
 			_shortcutMessageBar=ShortcutMessageBar.instence;
 			
-			_rollprogress = new RollProgress(this._skin);
+			_rollprogress = new DodgeProgress(this._skin);
 			var leftp:HpPropgressBar = new HpPropgressBar(this,0,_skin);
 			var rightp:HpPropgressBar = new HpPropgressBar(this,1,_skin);
 			
@@ -278,10 +275,10 @@ package com.rpgGame.app.ui.main.shortcut {
 				case autoBar.setSkin.btnClose:
 					autoBar.fightStop();
 					break;
-				case autoBar.guajiSkin.btnGuaji:
+				case _skin.btnGuaJi:
 					autoBar.guajiClick();
 					break;		
-				case _skin.btn_jiehun:
+				case _skin.btnJieHun:
 					if(Mgr.hunyinMgr.marriageInfos==null||Mgr.hunyinMgr.marriageInfos.state==5)
 					{
 						AppManager.showApp(AppConstant.HUNYIN_QIUHUN);

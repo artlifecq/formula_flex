@@ -86,6 +86,7 @@ package com.rpgGame.app.ui.main.head
 				firstBlood=_monsterData.totalStat.life%_monsterCfg.q_per_blood;
 			}
 			
+//			_skin.lbl_name.text=_monsterCfg.q_name;
 			changeHp(_monsterData);
 		}
 		
@@ -107,6 +108,7 @@ package com.rpgGame.app.ui.main.head
 			leftNum=leftNum<0?0:leftNum;
 			showBloodIndex=leftNum%bloodBarNum;
 //			showBloodIndex=1;
+//			_skin.lbl_num.text=data.totalStat.hp+"/"+data.totalStat.life;
 			_skin.uim_xuetiao.label="x"+leftNum;
 			_skin.uim_xuetiao.visible=leftNum==0?false:true;
 			var leftHp:int;

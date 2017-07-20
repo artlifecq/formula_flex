@@ -231,12 +231,12 @@ package com.rpgGame.app.manager.mount
 		public function autoRiding(walkRole:SceneRole, pos:Vector3D):void
 		{
 			if(_horsedataInfo==null)
-				return ;
+				return;
 			var scenedata:SceneData = MapDataManager.currentScene;
 			if (scenedata== null ||!scenedata.isMountLimit)
 			{
 				return;
-			};
+			}
 			var hoseId:int = HeroData(walkRole.data).mount;
 			if(hoseId>0)
 				return ;
@@ -279,6 +279,7 @@ package com.rpgGame.app.manager.mount
 		 */
 		public function onRequestSetUpMountRide(isRide:Boolean):void
 		{
+			return;
 			//坐骑未开放
 			if(_horsedataInfo == null)
 				return ;

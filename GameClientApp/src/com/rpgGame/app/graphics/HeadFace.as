@@ -17,12 +17,15 @@ package com.rpgGame.app.graphics
 	import com.rpgGame.coreData.cfg.GuildCfgData;
 	import com.rpgGame.coreData.cfg.HuBaoData;
 	import com.rpgGame.coreData.cfg.JunJieData;
+	import com.rpgGame.coreData.cfg.RankDesignationData;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.FaceInfo;
 	import com.rpgGame.coreData.clientConfig.Q_guild_permission;
 	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
+	import com.rpgGame.coreData.clientConfig.Q_rank_designation;
+	import com.rpgGame.coreData.enum.RankListType;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.map.EnumMapType;
 	import com.rpgGame.coreData.info.map.SceneData;
@@ -195,6 +198,10 @@ package com.rpgGame.app.graphics
 				case SceneCharType.GIRL_PET:
 					addAndUpdateName();
 					break;
+				case SceneCharType.SCULPTURE:
+					addAndUpdateName();
+
+					break;
 				//				case SceneCharType.RACING_HERO:
 				//				case SceneCharType.ROBOT:
 				//addAndUpdateName();
@@ -236,6 +243,8 @@ package com.rpgGame.app.graphics
 			addElement(_biaoFlagIcon);
 			addElement(_familyWarIcon);
 			addElement(_moodMC);
+			addElement(_rankTitle1);
+			addElement(_rankTitle2);
 		}
 		
 		//---------------------------------------------
@@ -347,6 +356,8 @@ package com.rpgGame.app.graphics
 				}
 				showAndHideElement(_fuqititle, true,DecorCtrl.TOP_FUQI);
 				showAndHideElement(_title, !isMysteryMan&&!_isCamouflage,DecorCtrl.TOP_CHENGHAO);
+				showAndHideElement(_rankTitle1, !isMysteryMan&&!_isCamouflage,DecorCtrl.TOP_CHENGHAO);
+				showAndHideElement(_rankTitle2, !isMysteryMan&&!_isCamouflage,DecorCtrl.TOP_CHENGHAO);
 				showAndHideElement(_office, !isMysteryMan&&!_isCamouflage);
 				showAndHideElement(_huabotitle, !isMysteryMan&&_nameBar && _nameBar.parent && _nameBar.visible,DecorCtrl.TOP_HUBAOCHENGHAO);
 				updateTeamFlag(!isMysteryMan&&Mgr.teamMgr.isMyCaptian(HeroData(_role.data).serverID));
@@ -1092,6 +1103,18 @@ package com.rpgGame.app.graphics
 				_title.dispose();
 				_title = null;
 			}
+			
+			if (_rankTitle1 != null)
+			{
+				_rankTitle1.dispose();
+				_rankTitle1 = null;
+			}
+			
+			if (_rankTitle2 != null)
+			{
+				_rankTitle2.dispose();
+				_rankTitle2 = null;
+			}
 			if(_huabotitle != null)
 			{
 				_huabotitle.dispose();
@@ -1362,6 +1385,107 @@ package com.rpgGame.app.graphics
 				}
 				updateAllBarPosition();
 			}
+		}
+		
+		private static var RankTypeOriderList:Vector.<int>;
+		private var _lastType:int;
+		private var _rankTitle1:InterObject3D;
+		private var _rankTitle2:InterObject3D;
+		/** 排行榜称号 */
+		public function addAndUpdataRankTitle(list:Vector.<int>):void
+		{
+			if(list==null)
+				return ;
+			if(RankTypeOriderList==null)
+			{
+				RankTypeOriderList = new Vector.<int>();
+				RankTypeOriderList.push(RankListType.All_COMBATPOWER_TYPE);
+				RankTypeOriderList.push(RankListType.MOUNT_TYPE);
+				RankTypeOriderList.push(RankListType.WARFLAG_TYPE);
+				RankTypeOriderList.push(RankListType.BEAUTY_TYPE);
+				RankTypeOriderList.push(RankListType.COMBATPOWER_TYPE);
+			}
+			
+			var type:int = 0;
+			var length:int = RankTypeOriderList.length;
+			for(var i:int = 0;i<length;i++)
+			{
+				if(list.indexOf(RankTypeOriderList[i])>=0)
+				{
+					type = RankTypeOriderList[i];
+					break;
+				}
+			}
+//			type = 3;
+			var q_info:Q_rank_designation;
+			var rud:RenderParamData3D;
+			var scale:int;
+			//其它称号
+			if (type > 0)
+			{
+				if(type != _lastType)
+				{
+					if (_rankTitle1)
+					{
+						_rankTitle1.removeFromParent();
+						_rankTitle1 = null;
+					}
+					_rankTitle1 = new InterObject3D();
+					q_info= RankDesignationData.getinfoById(type);
+					if(_role.type == SceneCharType.SCULPTURE)
+					{
+						scale = q_info.q_modle_scale;
+					}else{
+						scale = q_info.q_hero_scale;
+					}
+					rud = new RenderParamData3D(RenderUnitID.RANKTITLE, RenderUnitType.RANKTITLE, ClientConfig.getEffect(q_info.q_modle));
+					_rankTitle1.addRenderUnitWith(rud, 0);
+					_rankTitle1.scale = scale/100;
+					this.deCtrl.addTop(_rankTitle1,DecorCtrl.TOP_RANKDESIGNATION);
+					_rankTitle1.start();
+					_lastType = type;
+				}
+			}else{
+				if (_rankTitle1)
+				{
+					_rankTitle1.removeFromParent();
+					_rankTitle1 = null;
+				}
+			}
+			type =  RankListType.ALL_DIANFENG_TYPE;
+			if(list.indexOf(type)<0)
+			{
+				type = 0;
+			}
+//			type = 8;
+			if (type > 0)
+			{
+				if (_rankTitle2 == null)
+				{
+					_rankTitle2 = new InterObject3D();
+					q_info= RankDesignationData.getinfoById(type);
+					if(_role.type == SceneCharType.SCULPTURE)
+					{
+						scale = q_info.q_modle_scale;
+					}else{
+						scale = q_info.q_hero_scale;
+					}
+					rud = new RenderParamData3D(RenderUnitID.RANKTITLE, RenderUnitType.RANKTITLE, ClientConfig.getEffect(q_info.q_modle));
+					_rankTitle2.addRenderUnitWith(rud, 0);
+					_rankTitle2.scale = scale/100;
+					this.deCtrl.addTop(_rankTitle2,DecorCtrl.TOP_RANKDESIGNATION1);
+					_rankTitle2.start();
+				}
+				
+			}else{
+				if (_rankTitle2)
+				{
+					_rankTitle2.removeFromParent();
+					_rankTitle2 = null;
+				}
+			}
+			
+			updateAllBarPosition();
 		}
 		
 		//---------------------------------------------

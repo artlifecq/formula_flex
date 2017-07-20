@@ -16,6 +16,8 @@ package com.rpgGame.app.state.ai
 	import com.rpgGame.coreData.type.AIStateType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	
+	import flash.geom.Point;
+	
 	import app.message.SpellProto;
 
 	/**
@@ -125,18 +127,20 @@ package com.rpgGame.app.state.ai
 
 		override public function leavePass(nextState : IState, force : Boolean = false) : Boolean
 		{
-			if (nextState.type == AIStateType.AI_NONE)
+			/*if (nextState.type == AIStateType.AI_NONE)
 				return true;
 			if(!TrusteeshipManager.getInstance().getHasRole()&&SceneRoleSelectManager.selectedRole ==null)
 				return true;
 			if (TrusteeshipManager.getInstance().isAutoFightRunning&&FightManager.getFightRoleState(SceneRoleSelectManager.selectedRole as SceneRole) == FightManager.FIGHT_ROLE_STATE_CAN_NOT_FIGHT )
 				return true;
-			return false;
+			return false;*/
+			return true;
 		}
 
 		override public function enterPass(prevState : IState, force : Boolean = false) : Boolean
 		{
-			
+			if (prevState.type==AIStateType.ATTACK_WALK&&!isFight())
+				return false;
 			if(!TrusteeshipManager.getInstance().getHasRole()&&SceneRoleSelectManager.selectedRole ==null)
 			{
 				transition(AIStateType.AI_NONE);
@@ -184,7 +188,18 @@ package com.rpgGame.app.state.ai
 			}
 			return true;
 		}
-		
+		private function isFight():Boolean
+		{
+			if (SceneRoleSelectManager.selectedRole != null)
+			{
+				var dist:int = Point.distance(new Point(MainRoleManager.actor.position.x,MainRoleManager.actor.position.z),new Point(SceneRoleSelectManager.selectedRole.position.x,SceneRoleSelectManager.selectedRole.position.z));
+				if(dist<150)
+				{
+					return true;
+				}
+			}
+			return false;
+		}
 		
 	}
 }

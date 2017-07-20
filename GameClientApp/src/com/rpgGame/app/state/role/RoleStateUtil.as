@@ -11,6 +11,7 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.manager.scene.SceneCursorHelper;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.stall.StallManager;
+	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.state.role.action.BlinkStateReference;
@@ -25,9 +26,11 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.coreData.clientConfig.AvatarResConfig;
 	import com.rpgGame.coreData.info.move.RoleMoveInfo;
 	import com.rpgGame.coreData.lang.LangQ_NoticeInfo;
+	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SpellBlinkType;
+	import com.rpgGame.netData.structs.Position;
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
@@ -36,6 +39,7 @@ package com.rpgGame.app.state.role
 	import flash.utils.setTimeout;
 	
 	import org.client.mainCore.manager.EventManager;
+	import org.game.netCore.data.long;
 
 	/**
 	 *
@@ -471,6 +475,32 @@ package com.rpgGame.app.state.role
 		public static function isTargetInMyEye(target : SceneRole) : Boolean
 		{
 			return isTargetInEye(target);
+		}
+		public static function updateMoveBySpeedChange(player:SceneRole):void
+		{
+			if (player.stateMachine.isWalkMoving) 
+			{
+				var ref:WalkMoveStateReference=player.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
+				var moveInfo:RoleMoveInfo=new RoleMoveInfo();
+				var posNow:Position=new Position();
+				posNow.x=player.pos.x;
+				posNow.y=player.pos.y;
+				var path:Vector.<Position>=new Vector.<Position>();
+				var pos:Position=new Position();
+				pos.x=ref.nextPos.x;
+				pos.y=-ref.nextPos.z;
+				path.push(pos);
+				var len:int=ref.leftPath.length;
+				for (var i:int = 0; i < len; i++) 
+				{
+					pos=new Position();
+					pos.x=ref.leftPath[i].x;
+					pos.y=-ref.leftPath[i].z;
+					path.push(pos);
+				}
+				moveInfo.setValues(MainRoleManager.actorID,(player.data as HeroData).totalStat.moveSpeed,SystemTimeManager.curtTm,posNow,path);
+				RoleStateUtil.walkByInfos(moveInfo);
+			}
 		}
 	}
 }

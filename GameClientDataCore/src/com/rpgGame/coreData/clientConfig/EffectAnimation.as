@@ -18,6 +18,8 @@ package com.rpgGame.coreData.clientConfig
 		public var res:String;
 		 /**  动画名称 */
 		public var animatorName:String;
+		 /**  命中特效 */
+		public var hitEffect:int;
 		 /**  碰撞隐藏节点，用;分割多个节点 */
 		public var collideHideNodes:String;
 		 /**  消散时间 */

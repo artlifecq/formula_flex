@@ -53,7 +53,7 @@ package com.game.engine3D.vo
 				url = GlobalConfig.version(url);
 			}
 			_mapDataUrl = url;
-			var ld : MultiLoadData = new MultiLoadData(_mapDataUrl, onMapDataComplete, null, onMapDataError, "", "", uint.MAX_VALUE, MultiLoadData.URLLOADER_BINARY);
+			var ld : MultiLoadData = new MultiLoadData(_mapDataUrl, onMapDataComplete, null, onMapDataError, "", "", 10000, MultiLoadData.URLLOADER_BINARY);
 			MultiUrlLoadManager.load(ld);
 		}
 		

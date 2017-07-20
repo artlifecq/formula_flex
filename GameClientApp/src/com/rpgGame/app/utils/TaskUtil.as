@@ -1001,6 +1001,7 @@ package com.rpgGame.app.utils
 		{
 			if(labelDisplay)
 			{
+				labelDisplay.autoSize="isMouseOut";
 				labelDisplay.addEventListener(TouchEvent.TOUCH, onTouch);
 			}
 			
@@ -1014,33 +1015,38 @@ package com.rpgGame.app.utils
 			
 		}
 		
-		private static var isMouseOut : Boolean = true;
-		private static var outY:int=0;
-		private static var outColor:int=0;
 		private static var overClolor:int=16751616;
 		private static function onTouch(e:TouchEvent):void
 		{
 			var target : Label  = e.currentTarget as Label;
-			var touch : Touch;
-			touch = e.getTouch(target);
-			if (touch == null&&target!= null )
+			if(!target)
+				return;
+			var key:Array
+			var overTouch : Touch;
+			var endTouch : Touch;
+			overTouch = e.getTouch(target, TouchPhase.HOVER);
+			if (overTouch != null&&target.autoSize=="isMouseOut")
 			{
-				isMouseOut = true;
-				target.y=outY;
-				target.color=outColor;
-				//target.color
+				target.autoSize="isMouseOver:"+target.y+":"+target.color;//只为保存属性
+				target.y-=1;
+				target.color=overClolor;
+				return;
+			}
+			overTouch = e.getTouch(target);
+			endTouch = e.getTouch(target, TouchPhase.ENDED);
+			if (overTouch == null||endTouch != null)
+			{
+				key=target.autoSize.split(":");
+				if(key.length==3)
+				{
+					target.autoSize="isMouseOut";
+					target.y=int(key[1]);
+					target.color=int(key[2]);
+				}
+				
 				return;
 			}
 			
-			touch = e.getTouch(target, TouchPhase.HOVER);
-			if (touch != null&&target!= null && isMouseOut)
-			{
-				outY=target.y;
-				outColor=target.color;
-				isMouseOut = false;
-				target.y=outY-1;
-				target.color=overClolor;
-			}
 		}
 		
 		/**设置奖励物品*/

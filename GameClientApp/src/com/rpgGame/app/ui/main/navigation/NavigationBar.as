@@ -1,10 +1,9 @@
 package com.rpgGame.app.ui.main.navigation {
-	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.main.buttons.IOpen;
 	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
 	import com.rpgGame.core.events.FunctionOpenEvent;
 	import com.rpgGame.core.ui.SkinUI;
-	import com.rpgGame.core.ui.tip.RTNodeID;
+	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
 	
 	import flash.geom.Point;
@@ -16,7 +15,6 @@ package com.rpgGame.app.ui.main.navigation {
 	import org.mokylin.skin.mainui.navigation.navigation_main_Skin;
 	
 	import starling.display.DisplayObject;
-	import starling.display.DisplayObjectContainer;
 	
 	public class NavigationBar extends SkinUI {
 		private var _skin : navigation_main_Skin;
@@ -32,10 +30,11 @@ package com.rpgGame.app.ui.main.navigation {
 		public function NavigationBar() {
 			this._skin = new navigation_main_Skin();
 			super(this._skin);
-			
+			MCUtil.removeSelf(this._skin.btn_close);
+			MCUtil.removeSelf(this._skin.btn_open);
 			_content = new ContengGroup(_skin.width,_skin.height);
 			this.addChildAt(_content,0);
-			this.setState(true);
+//			this.setState(true);
 			EventManager.addEvent(FunctionOpenEvent.FUNCTIONOPENID,refeashButton);
 			refeashButton();
 			
@@ -58,8 +57,8 @@ package com.rpgGame.app.ui.main.navigation {
 		}
 		
 		public function resize(w : int, h : int) : void {
-			this.x = w - this._skin.width;
-			this.y = h - this._skin.height;
+			this.x = ((w - this._skin.width)>>1)+225;
+			this.y = h - this._skin.height-75;
 		}
 		
 		override protected function onTouchTarget(target : DisplayObject) : void {

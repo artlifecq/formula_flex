@@ -50,6 +50,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_map:String = "data.map.Q_map";
 		/**  场景特效动态生成表						 */
 		public static const Q_map_effect:String = "data.map.Q_map_effect";
+		/**  地图跳跃点数据库								 */
+		public static const Q_map_jump:String = "data.map.Q_map_jump";
 		/**  预加载资源表		 */
 		public static const Q_map_preload:String = "data.map.Q_map_preload";
 		/**  地图传送点数据库												 */
@@ -80,13 +82,13 @@ package com.rpgGame.coreData.clientConfig
 		public static const HeroModel:String = "data.model.HeroModel";
 		/**  坐骑模型表	功能名称	动画资源名称 */
 		public static const MountModel:String = "data.model.MountModel";
-		/**  3 怪物基本信息数据库																																																																			绑定器			 */
+		/**  3 怪物基本信息数据库																																																																		绑定器			 */
 		public static const Q_monster:String = "data.monster.Q_monster";
 		/**  NPC配置数据库																											 */
 		public static const Q_npc:String = "data.monster.Q_npc";
 		/**  定点刷怪数据库 -- 编辑器录入									 */
 		public static const Q_scene_monster:String = "data.monster.Q_scene_monster";
-		/**  区域刷怪数据库 -- 编辑器录入															 */
+		/**  区域刷怪数据库 -- 编辑器录入																 */
 		public static const Q_scene_monster_area:String = "data.monster.Q_scene_monster_area";
 		/**  婚戒升阶表							 */
 		public static const Q_advance_wedding:String = "data.Q_advance_wedding";
@@ -194,6 +196,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_nine_tower:String = "data.Q_nine_tower";
 		/**  通知列表			 */
 		public static const Q_notify:String = "data.Q_notify";
+		/**  排行榜称号	 */
+		public static const Q_rank_designation:String = "data.Q_rank_designation";
 		/**  红包配置		 */
 		public static const Q_redreward:String = "data.Q_redreward";
 		/**  阵营关系				 */
@@ -273,6 +277,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.map.Q_area", com.rpgGame.coreData.clientConfig.Q_area);
 			regClass("data.map.Q_map", com.rpgGame.coreData.clientConfig.Q_map);
 			regClass("data.map.Q_map_effect", com.rpgGame.coreData.clientConfig.Q_map_effect);
+			regClass("data.map.Q_map_jump", com.rpgGame.coreData.clientConfig.Q_map_jump);
 			regClass("data.map.Q_map_preload", com.rpgGame.coreData.clientConfig.Q_map_preload);
 			regClass("data.map.Q_map_transfer", com.rpgGame.coreData.clientConfig.Q_map_transfer);
 			regClass("data.map.SceneSoundInfo", com.rpgGame.coreData.clientConfig.SceneSoundInfo);
@@ -345,6 +350,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_newfunc", com.rpgGame.coreData.clientConfig.Q_newfunc);
 			regClass("data.Q_nine_tower", com.rpgGame.coreData.clientConfig.Q_nine_tower);
 			regClass("data.Q_notify", com.rpgGame.coreData.clientConfig.Q_notify);
+			regClass("data.Q_rank_designation", com.rpgGame.coreData.clientConfig.Q_rank_designation);
 			regClass("data.Q_redreward", com.rpgGame.coreData.clientConfig.Q_redreward);
 			regClass("data.Q_relation", com.rpgGame.coreData.clientConfig.Q_relation);
 			regClass("data.Q_singlecitybase", com.rpgGame.coreData.clientConfig.Q_singlecitybase);

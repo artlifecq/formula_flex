@@ -16,6 +16,9 @@ package com.rpgGame.netData.top.message{
 		//玩家Id
 		private var _playerid: long;
 		
+		//1 金币膜拜   2 元宝膜拜
+		private var _type: int;
+		
 		
 		/**
 		 * 写入字节缓存
@@ -23,6 +26,8 @@ package com.rpgGame.netData.top.message{
 		override protected function writing(): Boolean{
 			//玩家Id
 			writeLong(_playerid);
+			//1 金币膜拜   2 元宝膜拜
+			writeByte(_type);
 			return true;
 		}
 		
@@ -32,6 +37,8 @@ package com.rpgGame.netData.top.message{
 		override protected function reading(): Boolean{
 			//玩家Id
 			_playerid = readLong();
+			//1 金币膜拜   2 元宝膜拜
+			_type = readByte();
 			return true;
 		}
 		
@@ -56,6 +63,21 @@ package com.rpgGame.netData.top.message{
 		 */
 		public function set playerid(value: long): void{
 			this._playerid = value;
+		}
+		
+		/**
+		 * get 1 金币膜拜   2 元宝膜拜
+		 * @return 
+		 */
+		public function get type(): int{
+			return _type;
+		}
+		
+		/**
+		 * set 1 金币膜拜   2 元宝膜拜
+		 */
+		public function set type(value: int): void{
+			this._type = value;
 		}
 		
 	}

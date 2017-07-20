@@ -21,6 +21,7 @@ package com.rpgGame.app.ui.main.navigation
 			super();
 		}
 		private var _openState:Boolean;
+		private var _postionY:int;
 
 		public function set openState(value:Boolean):void
 		{
@@ -83,13 +84,13 @@ package com.rpgGame.app.ui.main.navigation
 					(item as FeathersControl).validate();
 				item.x = postion;
 				item.y = _helph-item.height;
-				postion+= item.width;
+				postion+= item.width-7;
 				this.addChildAt(item as DisplayObject,i);
 			}
 			this.setSize(postion,_helph);
 			this.y = _helph  - height;
-			if(_openState)
-				this.x = -this.width;
+//			if(_openState)
+				this.x = -postion;
 		}
 
 		public function get buttonList():Vector.<IOpen>

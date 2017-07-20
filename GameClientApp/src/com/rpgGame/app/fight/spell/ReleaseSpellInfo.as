@@ -850,5 +850,11 @@ package com.rpgGame.app.fight.spell
 		{
 			return _spellData.q_performType==1;
 		}
+
+		public function set atkorPos(value:Point):void
+		{
+			_atkorPos = value;
+		}
+
 	}
 }

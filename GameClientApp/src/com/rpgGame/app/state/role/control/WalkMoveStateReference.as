@@ -48,6 +48,7 @@ package com.rpgGame.app.state.role.control
 		public var startPos : Vector3D;
 		public var endPos : Vector3D;
 		public var isServerStop : Boolean;
+		public var leftPath:Vector.<Vector3D>;
 		/**
 		 *是否需要冲刺 
 		 */		
@@ -236,6 +237,7 @@ package com.rpgGame.app.state.role.control
 			_spacing = 0;
 			isServerStop = false;
 			needSpriteUp=false;
+			leftPath=null;
 			super.dispose();
 		}
 	}

@@ -1,11 +1,14 @@
 package   com.rpgGame.app.manager.debug
 {	
 	import com.game.engine3D.manager.Stage3DLayerManager;
+	import com.game.engine3D.state.role.RoleState;
 	import com.game.engine3D.utils.StatsUtil;
 	import com.game.mainCore.core.manager.LayerManager;
 	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.HashMap;
+	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
 	import com.rpgGame.app.fight.spell.SkillAddPop;
+	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.fight.spell.SpellHitHelper;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.ActivetyDataManager;
@@ -13,6 +16,7 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.PKMamager;
+	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.chat.ChatManager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.fightsoul.FightSoulManager;
@@ -20,32 +24,45 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleManager;
+	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
+	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.richText.RichTextCustomLinkType;
 	import com.rpgGame.app.richText.RichTextCustomUtil;
+	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.app.state.role.control.SpriteUpBuffStateReference;
 	import com.rpgGame.app.state.role.control.VipBuffStateReference;
+	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
 	import com.rpgGame.app.ui.main.dungeon.JiXianTiaoZhanExtPop;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
+	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.info.item.ItemUtil;
+	import com.rpgGame.coreData.info.move.RoleMoveInfo;
 	import com.rpgGame.coreData.role.GirlPetData;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
 	import com.rpgGame.netData.backpack.bean.TempItemInfo;
+	import com.rpgGame.netData.fight.message.SCBuffSkillMessage;
 	import com.rpgGame.netData.map.bean.PetInfo;
 	import com.rpgGame.netData.player.message.SCNonagePromptMessage;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
+	import com.rpgGame.netData.structs.Position;
 	import com.rpgGame.netData.vip.bean.VipCardInfo;
 	import com.rpgGame.netData.vip.message.SCVipDataMessage;
 	import com.rpgGame.netData.yaota.bean.YaoTaInfo;
 	import com.rpgGame.netData.yaota.message.SCYaoTaAwardMessage;
+	
+	import flash.geom.Point;
+	import flash.utils.setTimeout;
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
@@ -64,7 +81,7 @@ package   com.rpgGame.app.manager.debug
 		public function ClientCommend():void
 		{
 			initCommend();
-			_isDevelop=MessageMgr.Ins.ip.indexOf("192.168")!=-1
+			_isDevelop=MessageMgr.Ins.ip.indexOf("192.168")!=-1||MessageMgr.Ins.ip.indexOf("127.0.0.1");
 		}
 		
 		private  var commandList:com.gameClient.utils.HashMap = new com.gameClient.utils.HashMap();
@@ -227,19 +244,45 @@ package   com.rpgGame.app.manager.debug
 			});
 			commandList.put( ".sprite", function (...arg):void
 			{
-				if (MainRoleManager.actor.stateMachine.isSpriteUp) 
+				var speed:int=arg[0];
+				MainRoleManager.actorInfo.totalStat.moveSpeed=speed;
+				if (MainRoleManager.actor.stateMachine.isWalkMoving) 
 				{
-					MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_BUFF_SPRITEUP);
+					var ref:WalkMoveStateReference=MainRoleManager.actor.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
+					var moveInfo:RoleMoveInfo=new RoleMoveInfo();
+					var posNow:Position=new Position();
+					posNow.x=MainRoleManager.actor.pos.x;
+					posNow.y=MainRoleManager.actor.pos.y;
+					var path:Vector.<Position>=new Vector.<Position>();
+					var pos:Position=new Position();
+					pos.x=ref.nextPos.x;
+					pos.y=-ref.nextPos.z;
+					path.push(pos);
+					var len:int=ref.leftPath.length;
+					for (var i:int = 0; i < len; i++) 
+					{
+						pos=new Position();
+						pos.x=ref.leftPath[i].x;
+						pos.y=-ref.leftPath[i].z;
+						path.push(pos);
+					}
+					moveInfo.setValues(MainRoleManager.actorID,speed,SystemTimeManager.curtTm,posNow,path);
+					RoleStateUtil.walkByInfos(moveInfo);
 				}
-				else
-				{
-					var buffRef:SpriteUpBuffStateReference = MainRoleManager.actor.stateMachine.getReference(SpriteUpBuffStateReference) as SpriteUpBuffStateReference;
-					MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_BUFF_SPRITEUP,buffRef);
-				}
+				MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_BUFF_SPRITEUP,MainRoleManager.actor.stateMachine.getReference(SpriteUpBuffStateReference));
+//				if (MainRoleManager.actor.stateMachine.isSpriteUp) 
+//				{
+//					MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_BUFF_SPRITEUP);
+//				}
+//				else
+//				{
+//					var buffRef:SpriteUpBuffStateReference = MainRoleManager.actor.stateMachine.getReference(SpriteUpBuffStateReference) as SpriteUpBuffStateReference;
+//					MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_BUFF_SPRITEUP,buffRef);
+//				}
 			});
 			commandList.put( ".pet", function (...arg):void
 			{
-				AppManager.showApp(AppConstant.PET_PANLE);
+				AppManager.showApp(AppConstant.RANKLISTPANLE);
 //				var mod:int = arg[0];
 //				
 //				var petInfo:PetInfo=new PetInfo();
@@ -251,6 +294,61 @@ package   com.rpgGame.app.manager.debug
 //				var data:GirlPetData=new GirlPetData();
 //				data.setServerData(petInfo);
 //				SceneRoleManager.getInstance().createGirlPet(data);
+			});
+			commandList.put( ".sset", function (...arg):void
+			{
+				TrusteeshipManager.getInstance().autoSkillCtrl.resetSkill();
+			});
+			commandList.put( ".bullet", function (...arg):void
+			{
+				if (SceneRoleSelectManager.selectedRole) 
+				{
+					var msg:SCBuffSkillMessage=new SCBuffSkillMessage();
+					msg.playerId=SceneRoleSelectManager.selectedRole.data.serverID;
+					msg.skillId= 16779233;
+					msg.targets.push(MainRoleManager.actorInfo.serverID);
+					
+					var role : SceneRole = SceneManager.getSceneObjByID(msg.playerId.ToGID()) as SceneRole;
+					if (null == role || !role.usable) {
+						return;
+					}
+					if (msg.targets.length < 1) {
+						return;
+					}
+					var skillInfo : Q_skill_model = SpellDataManager.getSpellDataWithID(msg.skillId);
+					if (null == skillInfo) {
+						return;
+					}
+					var info : ReleaseSpellInfo = new ReleaseSpellInfo();
+					info.spellData = skillInfo;
+					info.atkor = role;
+					info.atkorPos=new Point(role.x,role.z);
+					info.flyTargetPosList = new Vector.<Position>();
+					info.flyTargets = new Vector.<SceneRole>();
+					for (var i : int = 0, len : int = msg.targets.length; i < len; ++i) {
+						var targetRole : SceneRole = SceneManager.getSceneObjByID(msg.targets[i].ToGID()) as SceneRole;
+						if (null == targetRole || !targetRole.usable) {
+							continue;
+						}
+						info.flyTargets.push(targetRole);
+					}
+					info.readSpellEffectData(info.spellData.q_spell_effect);
+					SpellAnimationHelper.addFlyEffect(info);
+				}
+				else
+				{
+					FloatingText.showUp("请选择目标测试");
+				}
+				
+			});
+			commandList.put( ".bullet3", function (...arg):void
+			{
+				
+				for (var i:int = 0; i <arg[0]; i++) 
+				{
+					setTimeout(doCommand,1000*i,".bullet");
+				}
+				
 			});
 		}
 		
