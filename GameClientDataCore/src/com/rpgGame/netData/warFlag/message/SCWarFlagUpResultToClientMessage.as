@@ -18,6 +18,9 @@ package com.rpgGame.netData.warFlag.message{
 		//本次升阶后的祝福值
 		private var _exp: int;
 		
+		//增加的次数
+		private var _count: int;
+		
 		
 		/**
 		 * 写入字节缓存
@@ -27,6 +30,8 @@ package com.rpgGame.netData.warFlag.message{
 			writeByte(_isSuccess);
 			//本次升阶后的祝福值
 			writeInt(_exp);
+			//增加的次数
+			writeInt(_count);
 			return true;
 		}
 		
@@ -38,6 +43,8 @@ package com.rpgGame.netData.warFlag.message{
 			_isSuccess = readByte();
 			//本次升阶后的祝福值
 			_exp = readInt();
+			//增加的次数
+			_count = readInt();
 			return true;
 		}
 		
@@ -77,6 +84,21 @@ package com.rpgGame.netData.warFlag.message{
 		 */
 		public function set exp(value: int): void{
 			this._exp = value;
+		}
+		
+		/**
+		 * get 增加的次数
+		 * @return 
+		 */
+		public function get count(): int{
+			return _count;
+		}
+		
+		/**
+		 * set 增加的次数
+		 */
+		public function set count(value: int): void{
+			this._count = value;
 		}
 		
 	}

@@ -176,19 +176,19 @@ package com.rpgGame.app.ui.main
 		 */
 		private function initBar() : void
 		{
-			this._topBar = new TopBar();
+//			this._topBar = new TopBar();
+//			_topBar.y=5;
+//			this.addChild(this._topBar);
 			_expBar=new ExpBar();
-			this.addChild(this._expBar);
-			_topBar.y=5;
-			this.addChild(this._topBar);
+			this.addChild(this._expBar);		
 			this._headBar = new MainRoleHeadBar();
 			this.addChild(this._headBar);
 			this._smallMapBar = new SmallMapBar();
 			this.addChild(this._smallMapBar);
-			this._navigationBar = new NavigationBar();
-			this.addChild(this._navigationBar);
 			this._shortcutBar = new ShortcutBar();
 			this.addChild(this._shortcutBar);
+			this._navigationBar = new NavigationBar();
+			this.addChild(this._navigationBar);
 			this._chatBar = new ChatBar();
 			this.addChild(this._chatBar);
 			this._systemMsgBar=new SystemMsgBar();
@@ -515,7 +515,7 @@ package com.rpgGame.app.ui.main
 		
 		private function resize(sWidth : int, sHeight : int) : void
 		{
-			this._topBar.resize(sWidth, sHeight);
+//			this._topBar.resize(sWidth, sHeight);
 			this._headBar.resize(sWidth, sHeight);
 			this._smallMapBar.resize(sWidth, sHeight);
 			this._shortcutBar.resize(sWidth, sHeight);

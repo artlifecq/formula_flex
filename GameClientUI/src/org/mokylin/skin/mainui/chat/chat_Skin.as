@@ -1,29 +1,30 @@
 package org.mokylin.skin.mainui.chat
 {
+	import feathers.controls.text.Fontter;
+	import feathers.data.ListCollection;
 	import feathers.controls.Button;
 	import feathers.controls.Group;
+	import feathers.controls.Label;
 	import feathers.controls.List;
+	import feathers.controls.Radio;
+	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
+	import feathers.controls.TabBar;
 	import feathers.controls.ToggleButton;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.component.list.ListSkin1;
-	import org.mokylin.skin.mainui.chat.button.ButtonChat_banghui;
+	import feathers.layout.HorizontalLayout;
+	import org.mokylin.skin.component.list.ListSkin2;
+	import org.mokylin.skin.mainui.chat.Chat_bg;
+	import org.mokylin.skin.mainui.chat.button.ButtonChatClose;
+	import org.mokylin.skin.mainui.chat.button.ButtonChatInfo;
+	import org.mokylin.skin.mainui.chat.button.ButtonChat_Type1;
+	import org.mokylin.skin.mainui.chat.button.ButtonChat_Type3;
 	import org.mokylin.skin.mainui.chat.button.ButtonChat_biaoqiang;
-	import org.mokylin.skin.mainui.chat.button.ButtonChat_dangqian;
 	import org.mokylin.skin.mainui.chat.button.ButtonChat_dinwei;
-	import org.mokylin.skin.mainui.chat.button.ButtonChat_duiwu;
 	import org.mokylin.skin.mainui.chat.button.ButtonChat_fasong;
-	import org.mokylin.skin.mainui.chat.button.ButtonChat_geren;
 	import org.mokylin.skin.mainui.chat.button.ButtonChat_laba1;
 	import org.mokylin.skin.mainui.chat.button.ButtonChat_sanjiao;
-	import org.mokylin.skin.mainui.chat.button.ButtonChat_shejiao;
-	import org.mokylin.skin.mainui.chat.button.ButtonChat_shijie;
-	import org.mokylin.skin.mainui.chat.button.ButtonChat_shouhui;
-	import org.mokylin.skin.mainui.chat.button.ButtonChat_siliao;
 	import org.mokylin.skin.mainui.chat.button.ButtonChat_suo;
-	import org.mokylin.skin.mainui.chat.button.ButtonChat_zhankai;
-	import org.mokylin.skin.mainui.chat.button.ButtonChat_zonghe;
-	import org.mokylin.skin.mainui.chat.pingdaoItems;
 
 	/**
 	 * @private
@@ -35,21 +36,23 @@ package org.mokylin.skin.mainui.chat
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var bg:feathers.controls.UIAsset;
+		public var bg:feathers.controls.SkinnableContainer;
 
-		public var btn_banghui:feathers.controls.Button;
+		public var btnBang:feathers.controls.Radio;
+
+		public var btnDang:feathers.controls.Radio;
+
+		public var btnDui:feathers.controls.Radio;
+
+		public var btnShi:feathers.controls.Radio;
+
+		public var btnSi:feathers.controls.Radio;
 
 		public var btn_close:feathers.controls.Button;
 
-		public var btn_dangqian:feathers.controls.Button;
-
-		public var btn_duiwu:feathers.controls.Button;
-
 		public var btn_face:feathers.controls.Button;
 
-		public var btn_geren:feathers.controls.ToggleButton;
-
-		public var btn_laba:feathers.controls.Button;
+		public var btn_laba2:feathers.controls.Radio;
 
 		public var btn_location:feathers.controls.Button;
 
@@ -61,47 +64,25 @@ package org.mokylin.skin.mainui.chat
 
 		public var btn_send:feathers.controls.Button;
 
-		public var btn_shejiao:feathers.controls.ToggleButton;
-
-		public var btn_shijie:feathers.controls.Button;
-
-		public var btn_siliao:feathers.controls.Button;
-
-		public var btn_zonghe:feathers.controls.ToggleButton;
-
-		public var chat_list:feathers.controls.List;
+		public var btns:feathers.controls.Group;
 
 		public var grp_buttom:feathers.controls.Group;
-
-		public var grp_channel:feathers.controls.Group;
 
 		public var grp_laba:feathers.controls.Group;
 
 		public var grp_laba_bg:feathers.controls.UIAsset;
 
-		public var grp_select:feathers.controls.Group;
-
-		public var grp_top:feathers.controls.Group;
-
 		public var grp_txt:feathers.controls.Group;
 
 		public var inputbg:feathers.controls.UIAsset;
 
+		public var lb_pindao:feathers.controls.Label;
+
 		public var lb_tishi:feathers.controls.UIAsset;
 
-		public var select_banghui:feathers.controls.Button;
+		public var listBar:feathers.controls.List;
 
-		public var select_bg:feathers.controls.UIAsset;
-
-		public var select_dangqian:feathers.controls.Button;
-
-		public var select_duiwu:feathers.controls.Button;
-
-		public var select_laba:feathers.controls.Button;
-
-		public var select_shijie:feathers.controls.Button;
-
-		public var select_siliao:feathers.controls.Button;
+		public var tab_Type:feathers.controls.TabBar;
 
 
 		//==========================================================================
@@ -113,8 +94,8 @@ package org.mokylin.skin.mainui.chat
 			
 			this.currentState = "normal";
 			this.height = 335;
-			this.width = 366;
-			this.elementsContent = [grp_txt_i(),grp_top_i(),chat_list_i(),btn_lock_i(),grp_buttom_i(),lb_tishi_i(),grp_laba_i(),grp_select_i()];
+			this.width = 365;
+			this.elementsContent = [grp_txt_i(),btn_lock_i(),grp_buttom_i(),lb_tishi_i(),grp_laba_i(),tab_Type_i(),btns_i()];
 			
 			states = {
 			};
@@ -125,28 +106,107 @@ package org.mokylin.skin.mainui.chat
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function bg_i():feathers.controls.UIAsset
+		private function __chat_Skin_ArrayCollection1_i():feathers.data.ListCollection
+		{
+			var temp:feathers.data.ListCollection = new feathers.data.ListCollection();
+			temp.data = ['综合','社交','个人'];
+			return temp;
+		}
+
+		private function __chat_Skin_HorizontalLayout1_i():feathers.layout.HorizontalLayout
+		{
+			var temp:feathers.layout.HorizontalLayout = new feathers.layout.HorizontalLayout();
+			temp.gap = 1;
+			return temp;
+		}
+
+		private function __chat_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/mainui/chat/dalaba.png";
+			temp.x = 1;
+			temp.y = -7;
+			return temp;
+		}
+
+		private function bg_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 282;
-			temp.styleName = "ui/mainui/chat/di.png";
-			temp.width = 366;
+			temp.height = 307;
+			var skin:StateSkin = new org.mokylin.skin.mainui.chat.Chat_bg()
+			temp.skin = skin
+			temp.width = 365;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
 
-		private function btn_banghui_i():feathers.controls.Button
+		private function btnBang_i():feathers.controls.Radio
 		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_banghui = temp;
-			temp.name = "btn_banghui";
-			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_banghui;
-			temp.width = 50;
-			temp.x = 1;
-			temp.y = 145;
+			var temp:feathers.controls.Radio = new feathers.controls.Radio();
+			btnBang = temp;
+			temp.name = "btnBang";
+			temp.groupName = "radioGroupChat";
+			temp.label = "帮";
+			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_Type3;
+			temp.x = 27;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function btnDang_i():feathers.controls.Radio
+		{
+			var temp:feathers.controls.Radio = new feathers.controls.Radio();
+			btnDang = temp;
+			temp.name = "btnDang";
+			temp.groupName = "radioGroupChat";
+			temp.label = "当";
+			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_Type3;
+			temp.x = 108;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function btnDui_i():feathers.controls.Radio
+		{
+			var temp:feathers.controls.Radio = new feathers.controls.Radio();
+			btnDui = temp;
+			temp.name = "btnDui";
+			temp.groupName = "radioGroupChat";
+			temp.label = "队";
+			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_Type3;
+			temp.x = 54;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function btnShi_i():feathers.controls.Radio
+		{
+			var temp:feathers.controls.Radio = new feathers.controls.Radio();
+			btnShi = temp;
+			temp.name = "btnShi";
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.groupName = "radioGroupChat";
+			temp.label = "世";
+			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_Type3;
+			temp.color = 0xEAEABC;
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function btnSi_i():feathers.controls.Radio
+		{
+			var temp:feathers.controls.Radio = new feathers.controls.Radio();
+			btnSi = temp;
+			temp.name = "btnSi";
+			temp.groupName = "radioGroupChat";
+			temp.label = "私";
+			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_Type3;
+			temp.x = 81;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -155,34 +215,10 @@ package org.mokylin.skin.mainui.chat
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_close = temp;
 			temp.name = "btn_close";
-			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_shouhui;
+			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChatClose;
 			temp.width = 20;
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function btn_dangqian_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_dangqian = temp;
-			temp.name = "btn_dangqian";
-			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_dangqian;
-			temp.width = 50;
 			temp.x = 1;
-			temp.y = 145;
-			return temp;
-		}
-
-		private function btn_duiwu_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_duiwu = temp;
-			temp.name = "btn_duiwu";
-			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_duiwu;
-			temp.width = 50;
-			temp.x = 1;
-			temp.y = 145;
+			temp.y = 2;
 			return temp;
 		}
 
@@ -192,31 +228,20 @@ package org.mokylin.skin.mainui.chat
 			btn_face = temp;
 			temp.name = "btn_face";
 			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_biaoqiang;
-			temp.x = 294;
+			temp.x = 293;
 			temp.y = 3;
 			return temp;
 		}
 
-		private function btn_geren_i():feathers.controls.ToggleButton
+		private function btn_laba2_i():feathers.controls.Radio
 		{
-			var temp:feathers.controls.ToggleButton = new feathers.controls.ToggleButton();
-			btn_geren = temp;
-			temp.name = "btn_geren";
-			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_geren;
-			temp.x = 100;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function btn_laba_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_laba = temp;
-			temp.name = "btn_laba";
+			var temp:feathers.controls.Radio = new feathers.controls.Radio();
+			btn_laba2 = temp;
+			temp.name = "btn_laba2";
+			temp.groupName = "radioGroupChat";
 			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_laba1;
-			temp.width = 50;
-			temp.x = 1;
-			temp.y = 145;
+			temp.x = 135;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -226,8 +251,8 @@ package org.mokylin.skin.mainui.chat
 			btn_location = temp;
 			temp.name = "btn_location";
 			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_dinwei;
-			temp.x = 270;
-			temp.y = 1;
+			temp.x = 272;
+			temp.y = 3;
 			return temp;
 		}
 
@@ -237,8 +262,8 @@ package org.mokylin.skin.mainui.chat
 			btn_lock = temp;
 			temp.name = "btn_lock";
 			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_suo;
-			temp.x = 319;
-			temp.y = 54;
+			temp.x = 318;
+			temp.y = 53;
 			return temp;
 		}
 
@@ -247,10 +272,9 @@ package org.mokylin.skin.mainui.chat
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_open = temp;
 			temp.name = "btn_open";
-			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_zhankai;
-			temp.width = 20;
-			temp.x = 0;
-			temp.y = 0;
+			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChatInfo;
+			temp.x = 1;
+			temp.y = -6;
 			return temp;
 		}
 
@@ -261,7 +285,7 @@ package org.mokylin.skin.mainui.chat
 			temp.name = "btn_scale";
 			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_sanjiao;
 			temp.x = 344;
-			temp.y = 0;
+			temp.y = 24;
 			return temp;
 		}
 
@@ -273,67 +297,19 @@ package org.mokylin.skin.mainui.chat
 			temp.height = 26;
 			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_fasong;
 			temp.width = 49;
-			temp.x = 317;
-			temp.y = 0;
+			temp.x = 318;
+			temp.y = 1;
 			return temp;
 		}
 
-		private function btn_shejiao_i():feathers.controls.ToggleButton
+		private function btns_i():feathers.controls.Group
 		{
-			var temp:feathers.controls.ToggleButton = new feathers.controls.ToggleButton();
-			btn_shejiao = temp;
-			temp.name = "btn_shejiao";
-			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_shejiao;
-			temp.x = 50;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function btn_shijie_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_shijie = temp;
-			temp.name = "btn_shijie";
-			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_shijie;
-			temp.width = 50;
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			btns = temp;
+			temp.name = "btns";
 			temp.x = 1;
-			temp.y = 145;
-			return temp;
-		}
-
-		private function btn_siliao_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_siliao = temp;
-			temp.name = "btn_siliao";
-			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_siliao;
-			temp.width = 50;
-			temp.x = 1;
-			temp.y = 145;
-			return temp;
-		}
-
-		private function btn_zonghe_i():feathers.controls.ToggleButton
-		{
-			var temp:feathers.controls.ToggleButton = new feathers.controls.ToggleButton();
-			btn_zonghe = temp;
-			temp.name = "btn_zonghe";
-			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_zonghe;
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function chat_list_i():feathers.controls.List
-		{
-			var temp:feathers.controls.List = new feathers.controls.List();
-			chat_list = temp;
-			temp.name = "chat_list";
-			temp.height = 222;
-			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
-			temp.width = 359;
-			temp.x = 2;
-			temp.y = 82;
+			temp.y = 282;
+			temp.elementsContent = [btnShi_i(),btnBang_i(),btnDui_i(),btnSi_i(),btnDang_i(),btn_laba2_i()];
 			return temp;
 		}
 
@@ -344,19 +320,7 @@ package org.mokylin.skin.mainui.chat
 			temp.name = "grp_buttom";
 			temp.x = 0;
 			temp.y = 308;
-			temp.elementsContent = [btn_close_i(),btn_open_i(),btn_send_i(),inputbg_i(),btn_location_i(),btn_face_i()];
-			return temp;
-		}
-
-		private function grp_channel_i():feathers.controls.Group
-		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
-			grp_channel = temp;
-			temp.name = "grp_channel";
-			temp.height = 149;
-			temp.width = 54;
-			temp.x = 0;
-			temp.y = -5;
+			temp.elementsContent = [btn_close_i(),btn_open_i(),btn_send_i(),inputbg_i(),btn_location_i(),btn_face_i(),lb_pindao_i()];
 			return temp;
 		}
 
@@ -366,8 +330,8 @@ package org.mokylin.skin.mainui.chat
 			grp_laba_bg = temp;
 			temp.name = "grp_laba_bg";
 			temp.height = 28;
-			temp.styleName = "ui/mainui/chat/di_laba.png";
-			temp.width = 364;
+			temp.styleName = "ui/mainui/chat/liaotiankuang1.png";
+			temp.width = 365;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -378,31 +342,9 @@ package org.mokylin.skin.mainui.chat
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grp_laba = temp;
 			temp.name = "grp_laba";
-			temp.x = 1;
+			temp.x = 0;
 			temp.y = 0;
-			temp.elementsContent = [grp_laba_bg_i()];
-			return temp;
-		}
-
-		private function grp_select_i():feathers.controls.Group
-		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
-			grp_select = temp;
-			temp.name = "grp_select";
-			temp.x = 17;
-			temp.y = 163;
-			temp.elementsContent = [btn_laba_i(),btn_shijie_i(),btn_banghui_i(),btn_duiwu_i(),btn_siliao_i(),btn_dangqian_i(),select_laba_i(),select_shijie_i(),select_banghui_i(),select_duiwu_i(),select_siliao_i(),select_dangqian_i(),select_bg_i(),grp_channel_i()];
-			return temp;
-		}
-
-		private function grp_top_i():feathers.controls.Group
-		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
-			grp_top = temp;
-			temp.name = "grp_top";
-			temp.x = 1;
-			temp.y = 53;
-			temp.elementsContent = [btn_zonghe_i(),btn_geren_i(),btn_shejiao_i()];
+			temp.elementsContent = [grp_laba_bg_i(),__chat_Skin_UIAsset1_i()];
 			return temp;
 		}
 
@@ -413,8 +355,8 @@ package org.mokylin.skin.mainui.chat
 			temp.name = "grp_txt";
 			temp.width = 364;
 			temp.x = 0;
-			temp.y = 52;
-			temp.elementsContent = [bg_i(),btn_scale_i()];
+			temp.y = 28;
+			temp.elementsContent = [bg_i(),btn_scale_i(),listBar_i()];
 			return temp;
 		}
 
@@ -424,9 +366,23 @@ package org.mokylin.skin.mainui.chat
 			inputbg = temp;
 			temp.name = "inputbg";
 			temp.styleName = "ui/component/text/chat_input.png";
-			temp.width = 249;
+			temp.width = 250;
 			temp.x = 67;
-			temp.y = 1;
+			temp.y = 2;
+			return temp;
+		}
+
+		private function lb_pindao_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lb_pindao = temp;
+			temp.name = "lb_pindao";
+			temp.text = "世界";
+			temp.color = 0xBCA78A;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 39;
+			temp.x = 27;
+			temp.y = 4;
 			return temp;
 		}
 
@@ -436,105 +392,35 @@ package org.mokylin.skin.mainui.chat
 			lb_tishi = temp;
 			temp.name = "lb_tishi";
 			temp.styleName = "ui/mainui/chat/meishuzi.png";
-			temp.x = 4;
+			temp.x = 5;
 			temp.y = 30;
 			return temp;
 		}
 
-		private function select_banghui_i():feathers.controls.Button
+		private function listBar_i():feathers.controls.List
 		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			select_banghui = temp;
-			temp.name = "select_banghui";
-			temp.height = 20;
-			temp.label = "帮会";
-			temp.styleClass = org.mokylin.skin.mainui.chat.pingdaoItems;
-			temp.width = 40;
-			temp.x = 6;
-			temp.y = 48;
-			return temp;
-		}
-
-		private function select_bg_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			select_bg = temp;
-			temp.name = "select_bg";
-			temp.height = 148;
-			temp.styleName = "ui/common/tips/tips_2.png";
-			temp.width = 52;
+			var temp:feathers.controls.List = new feathers.controls.List();
+			listBar = temp;
+			temp.name = "listBar";
+			temp.height = 197;
+			temp.styleClass = org.mokylin.skin.component.list.ListSkin2;
+			temp.width = 363;
 			temp.x = 1;
-			temp.y = 1;
+			temp.y = 54;
 			return temp;
 		}
 
-		private function select_dangqian_i():feathers.controls.Button
+		private function tab_Type_i():feathers.controls.TabBar
 		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			select_dangqian = temp;
-			temp.name = "select_dangqian";
-			temp.height = 20;
-			temp.label = "当前";
-			temp.styleClass = org.mokylin.skin.mainui.chat.pingdaoItems;
-			temp.width = 40;
-			temp.x = 6;
-			temp.y = 119;
-			return temp;
-		}
-
-		private function select_duiwu_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			select_duiwu = temp;
-			temp.name = "select_duiwu";
-			temp.height = 20;
-			temp.label = "队伍";
-			temp.styleClass = org.mokylin.skin.mainui.chat.pingdaoItems;
-			temp.width = 40;
-			temp.x = 6;
-			temp.y = 72;
-			return temp;
-		}
-
-		private function select_laba_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			select_laba = temp;
-			temp.name = "select_laba";
-			temp.height = 20;
-			temp.label = "喇叭";
-			temp.styleClass = org.mokylin.skin.mainui.chat.pingdaoItems;
-			temp.width = 40;
-			temp.x = 6;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function select_shijie_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			select_shijie = temp;
-			temp.name = "select_shijie";
-			temp.height = 20;
-			temp.label = "世界";
-			temp.styleClass = org.mokylin.skin.mainui.chat.pingdaoItems;
-			temp.width = 40;
-			temp.x = 6;
-			temp.y = 24;
-			return temp;
-		}
-
-		private function select_siliao_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			select_siliao = temp;
-			temp.name = "select_siliao";
-			temp.height = 20;
-			temp.label = "私聊";
-			temp.styleClass = org.mokylin.skin.mainui.chat.pingdaoItems;
-			temp.width = 40;
-			temp.x = 6;
-			temp.y = 96;
+			var temp:feathers.controls.TabBar = new feathers.controls.TabBar();
+			tab_Type = temp;
+			temp.name = "tab_Type";
+			temp.btnWidth = 49;
+			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_Type1;
+			temp.x = 2;
+			temp.y = 53;
+			temp.layout = __chat_Skin_HorizontalLayout1_i();
+			temp.dataProvider = __chat_Skin_ArrayCollection1_i();
 			return temp;
 		}
 

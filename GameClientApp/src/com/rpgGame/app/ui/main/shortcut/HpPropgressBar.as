@@ -40,6 +40,8 @@ package com.rpgGame.app.ui.main.shortcut
 			_shor = content;
 			_diection = diection;
 			_skin = skin;
+			_skin.left_red.alpha=0;
+			_skin.right_blue.alpha=0;
 			init();
 		}
 		private var _tipinfodata:TextTipsPropChangeData
@@ -56,11 +58,13 @@ package com.rpgGame.app.ui.main.shortcut
 					effectuls =EffectUrl.XUE_TIAO_JIN;
 					effectuls1 = EffectUrl.XUE_TIAO_JIN1;
 					_skin.right_jintiao.visible =true;
+					_skin.right_nengliang.visible =false;
 					EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,statResChangeHandler);
 				}
 				else{
 					effectuls =EffectUrl.XUE_TIAO_LAN;
 					effectuls1 = EffectUrl.XUE_TIAO_LAN1;
+					_skin.right_nengliang.visible =true;
 					_skin.right_jintiao.visible =false;
 					EventManager.addEvent(MainPlayerEvent.NOWMP_CHANGE,MpCHangeHandler);
 					EventManager.addEvent(MainPlayerEvent.MAXMP_CHANGE,MpCHangeHandler);
@@ -92,18 +96,18 @@ package com.rpgGame.app.ui.main.shortcut
 				renderUint.setAddedCallBack(onAddEftTop,_mask3d);
 			}
 			
-			_mask = new DrawBow(80,80);
+			_mask = new DrawBow(82,82);
 			if(_diection==1)
 			{
-				_mask.x = 681;
-				_mask.drawAngle(Math.PI*1.3,0);
+				_mask.x = 708;
+				_mask.drawAngle(Math.PI*1.15,0);
 				_diectionoff = -1;
 			}else{
-				_mask.x = 130;   
-				_mask.drawAngle(Math.PI,Math.PI*1.70);
+				_mask.x = 122;   
+				_mask.drawAngle(Math.PI*0.95,Math.PI*1.85);
 				_diectionoff = 1;
 			}
-			_mask.y = 117;
+			_mask.y = 125;
 			_display.mask = _mask;
 			_shor.addChild(_mask);
 			
@@ -119,12 +123,12 @@ package com.rpgGame.app.ui.main.shortcut
 					tipString = "能量：$/$<br/>施放技能会消耗能量<br/>每秒恢复$点能量";
 				}
 				tipinfo = TargetTipsMaker.makeSimplePropChangeTextTips(tipString,null,tipHandler)
-				TipTargetManager.show(_skin.mask_blue,tipinfo);
+				TipTargetManager.show(_skin.right_blue,tipinfo);
 			}else{
 				HpCHangeHandler(_info);
 				tipString ="血量：$/$<br/>使用药品可以恢复血量";
 				tipinfo = TargetTipsMaker.makeSimplePropChangeTextTips(tipString,null,tipHandler)
-				TipTargetManager.show(_skin.mask_red, tipinfo);
+				TipTargetManager.show(_skin.left_red, tipinfo);
 			}
 			
 			_tipinfodata = tipinfo.getData() as TextTipsPropChangeData
@@ -173,27 +177,27 @@ package com.rpgGame.app.ui.main.shortcut
 		private function onAddHpEft(sr3D:InterObject3D,renderUint:RenderUnit3D):void
 		{
 			renderUint.removeAddedCallBack(onAddHpEft);
-			renderUint.scaleX=renderUint.scaleY=_display.width/270;
+			renderUint.scaleX=renderUint.scaleY=1;//_display.width/270;
 			if(_diection==1)
 			{
-				sr3D.x=_display.x+_display.width-22;
+				sr3D.x=_display.x+_display.width-82;
 			}else{
 				sr3D.x=130
 			}
-			sr3D.y=_display.y+_display.height-8;
+			sr3D.y=_display.y+_display.height;
 		}
 		
 		private function onAddEftTop(sr3D:InterObject3D,renderUint:RenderUnit3D):void
 		{
 			renderUint.removeAddedCallBack(onAddEftTop);
-			renderUint.scaleX=renderUint.scaleY=_display.width/275;
+			renderUint.scaleX=renderUint.scaleY=1;//_display.width/270;
 			if(_diection==1)
 			{
-				sr3D.x= 681;
-				sr3D.y=_display.y+_display.height;
+				sr3D.x= 700;
+				sr3D.y=_display.y+_display.height-10;
 			}else{
 				sr3D.x= 127;
-				sr3D.y=_display.y+_display.height-5;
+				sr3D.y=_display.y+_display.height;
 			}
 		}
 		
@@ -207,12 +211,12 @@ package com.rpgGame.app.ui.main.shortcut
 				value = 0;
 			else if(value>1)
 				value = 1;
-			_mask.rotation = _diectionoff*Math.PI*0.7*value;
+			_mask.rotation = _diectionoff*Math.PI*0.9*value;
 			if(_diection==1)
 			{
-				_mask3d.baseObj3D.rotationZ =-(_diectionoff*180*0.7*value)+3;
+				_mask3d.baseObj3D.rotationZ =-(_diectionoff*180*0.82*value);
 			}else{
-				_mask3d.baseObj3D.rotationZ =-(_diectionoff*180*0.74*value-1);
+				_mask3d.baseObj3D.rotationZ =-(_diectionoff*180*0.82*value);
 			}
 			if(_tipinfodata!=null)
 				_tipinfodata.refeashValue();

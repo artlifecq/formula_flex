@@ -95,10 +95,6 @@ package com.rpgGame.app.fight.spell
 					ref.onStartFrame(onSelfEffectFrame);
 					ref.onHitFrame(onAttackHitFrame);
 //					ref.onBreakFrame(onBreakFrame);
-					try{if((spellInfo.atkor.data as MonsterData).modelID==6206)
-					{
-						Lyt.a(spellInfo.spellData.q_skillName);
-					}}catch(e:Error){}
 					spellInfo.atkor.stateMachine.transition(RoleStateType.ACTION_ATTACK, ref);
 				}
 				else
@@ -143,7 +139,7 @@ package com.rpgGame.app.fight.spell
 			if (spellInfo.atkor && spellInfo.atkor.usable && spellInfo.atkor.isMainChar)
 			{
 				var hardRef : AttackHardStateReference = spellInfo.atkor.stateMachine.getReference(AttackHardStateReference) as AttackHardStateReference;
-				hardRef.setParams(spellInfo.castTime-50);
+				hardRef.setParams(spellInfo.castTime);
 				spellInfo.atkor.stateMachine.transition(RoleStateType.CONTROL_ATTACK_HARD, hardRef, true);
 				SkillCDManager.getInstance().addSkillCDTime(spellInfo.spellData);
 			}

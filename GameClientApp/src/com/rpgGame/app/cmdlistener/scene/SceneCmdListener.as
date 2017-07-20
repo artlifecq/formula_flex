@@ -929,6 +929,10 @@ package com.rpgGame.app.cmdlistener.scene
 				}
 				//				ReliveManager.autoHideRelive();
 			}
+			if (CharAttributeType.SPEED==msg.attributeChange.type) 
+			{
+				RoleStateUtil.updateMoveBySpeedChange(role);
+			}
 		}
 		
 		/**

@@ -34,19 +34,16 @@ package com.rpgGame.app.manager
 		{
 			// TODO Auto Generated method stub
 			var newInfo:PetInfo=msg.pets;
-			var old:PetInfo=_petHash.getValue(newInfo.modelId);
+			var old:PetInfo=_petHash.remove(newInfo.modelId);
+			_petHash.put(newInfo.modelId,newInfo);
 			if (old) 
 			{
 				if (old.actived!=newInfo.actived) 
 				{
 					EventManager.dispatchEvent(PetEvent.PET_ACTIVE,newInfo.modelId);
 				}
-				else if (old.rank!=newInfo.rank) 
-				{
-					EventManager.dispatchEvent(PetEvent.PET_LEVEL_CHANGE,newInfo.modelId);
-				}
-				EventManager.dispatchEvent(PetEvent.PET_DATA_CHANGE,newInfo);
 			}
+			EventManager.dispatchEvent(PetEvent.PET_DATA_CHANGE,newInfo);
 		}
 		
 		public function ResPetListHandler(msg:ResPetListMessage):void

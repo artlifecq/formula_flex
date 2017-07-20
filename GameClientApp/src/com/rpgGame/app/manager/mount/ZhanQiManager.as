@@ -110,14 +110,14 @@ package com.rpgGame.app.manager.mount
 		public function onSCWarFlagUpResultToClientMessage(msg:SCWarFlagUpResultToClientMessage):void
 		{
 			zhanqiDataInfo.exp = msg.exp;
-			if(zhanqiDataInfo.warFlagModelId !=msg.isSuccess)
+			if(msg.isSuccess)
 			{
-				zhanqiDataInfo.warFlagModelId=msg.isSuccess;
+				zhanqiDataInfo.warFlagModelId+=1;
 				EventManager.dispatchEvent(ZhanQiUpLevel);
 				var role:SceneRole=MainRoleManager.actor;
-				role.updateFlag(msg.isSuccess);
+				role.updateFlag(zhanqiDataInfo.warFlagModelId);
 			}else{
-				EventManager.dispatchEvent(ZhanQiChangeExp,true);
+				EventManager.dispatchEvent(ZhanQiChangeExp,msg.exp,msg.count);
 			}
 		}
 		
