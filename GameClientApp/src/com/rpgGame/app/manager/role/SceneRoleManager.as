@@ -625,10 +625,8 @@ package com.rpgGame.app.manager.role
 			role.data = data;
 			role.name = data.name;
 			role.headFace = HeadFace.create(role);
-			data.avatarInfo.effectResID = data.effectRes;
-			
 			//执行主换装更新
-			AvatarManager.updateAvatar(role);
+			role.updateEffect(data.effectRes);
 			role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true); //切换到“站立状态”
 			
 			role.setScale(data.sizeScale);
