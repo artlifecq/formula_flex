@@ -62,7 +62,7 @@ package com.rpgGame.app.ui.main.taskbar
 			skinList.push(_skin.pri_killbut_3);
 			skinList.push(icoListGroup);
 			//skinList.push(_skin.pri_ico3);
-//			titleLable=_skin.pri_title;
+			titleLable=_skin.pri_navi1_txt;
 //			navi1Lable=_skin.pri_navi1_txt;
 			jindu=_skin.pri_probar.skin as RenWu_jindu;
 			killButList=new Vector.<SkinnableContainer>();
@@ -105,7 +105,7 @@ package com.rpgGame.app.ui.main.taskbar
 			
 			
 			
-//			titleLable.htmlText="";
+			titleLable.htmlText="";
 //			navi1Lable.htmlText="章节进度";
 //			navi2Lable.htmlText="任务描述";
 //			navi3Lable.htmlText="任务进度";
@@ -136,7 +136,7 @@ package com.rpgGame.app.ui.main.taskbar
 		
 		public function hideInfo():void
 		{
-//			titleLable.htmlText="";
+			titleLable.htmlText="";
 			jindu.labelDisplay.text="";
 			jindu.pro_jindu.maximum=100;
 			jindu.pro_jindu.value=0;
@@ -208,7 +208,7 @@ package com.rpgGame.app.ui.main.taskbar
 		/**设置标题详情*/
 		private function setTitle(party:String,name:String,describe:String):void
 		{
-//			titleLable.htmlText=party+name;
+			titleLable.htmlText=party+name;
 			priLabel.htmlText=describe;
 		}
 		/**设置完成进度*/

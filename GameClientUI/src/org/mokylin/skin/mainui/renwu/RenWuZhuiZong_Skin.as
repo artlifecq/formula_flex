@@ -92,6 +92,10 @@ package org.mokylin.skin.mainui.renwu
 
 		public var sec_navi3:feathers.controls.Label;
 
+		public var sec_subbut1:feathers.controls.Button;
+
+		public var sec_subbut2:feathers.controls.Button;
+
 		public var secondary_box:feathers.controls.Group;
 
 		public var task_box:feathers.controls.Group;
@@ -325,6 +329,7 @@ package org.mokylin.skin.mainui.renwu
 			primary_box = temp;
 			temp.name = "primary_box";
 			temp.height = 335;
+			temp.visible = false;
 			temp.width = 253;
 			temp.x = 0;
 			temp.y = 0;
@@ -337,10 +342,11 @@ package org.mokylin.skin.mainui.renwu
 			var temp:feathers.controls.ScrollContainer = new feathers.controls.ScrollContainer();
 			scroll_bar = temp;
 			temp.name = "scroll_bar";
-			temp.height = 293;
+			temp.height = 295;
 			temp.styleClass = org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
-			temp.x = 239;
-			temp.y = 36;
+			temp.width = 243;
+			temp.x = 10;
+			temp.y = 39;
 			return temp;
 		}
 
@@ -364,7 +370,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.width = 250;
 			temp.x = 10;
 			temp.y = 39;
-			temp.elementsContent = [sec_navi1_i(),sec_killbut1_1_i(),sec_killbut1_2_i(),sec_killbut1_3_i(),sec_navi2_i(),sec_killbut2_1_i(),sec_killbut2_2_i(),sec_killbut2_3_i(),sec_ico1_0_i(),sec_navi3_i(),sec_navi0_i(),sec_info_i(),sec_killbut3_1_i(),sec_killbut3_2_i(),sec_killbut3_3_i(),sec_ico2_0_i()];
+			temp.elementsContent = [sec_navi1_i(),sec_killbut1_1_i(),sec_killbut1_2_i(),sec_killbut1_3_i(),sec_navi2_i(),sec_killbut2_1_i(),sec_killbut2_2_i(),sec_killbut2_3_i(),sec_ico1_0_i(),sec_navi3_i(),sec_navi0_i(),sec_info_i(),sec_killbut3_1_i(),sec_killbut3_2_i(),sec_killbut3_3_i(),sec_ico2_0_i(),sec_subbut1_i(),sec_subbut2_i()];
 			return temp;
 		}
 
@@ -581,6 +587,36 @@ package org.mokylin.skin.mainui.renwu
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 1;
 			temp.y = 144;
+			return temp;
+		}
+
+		private function sec_subbut1_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			sec_subbut1 = temp;
+			temp.name = "sec_subbut1";
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.label = "领取奖励";
+			temp.fontSize = 16;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
+			temp.color = 0xEAEABC;
+			temp.x = 74;
+			temp.y = 138;
+			return temp;
+		}
+
+		private function sec_subbut2_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			sec_subbut2 = temp;
+			temp.name = "sec_subbut2";
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.label = "领取奖励";
+			temp.fontSize = 16;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
+			temp.color = 0xEAEABC;
+			temp.x = 74;
+			temp.y = 258;
 			return temp;
 		}
 
