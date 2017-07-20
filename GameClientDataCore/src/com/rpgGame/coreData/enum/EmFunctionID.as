@@ -82,5 +82,22 @@ package com.rpgGame.coreData.enum
 		public static const EM_TOWERS:String="325";
 		/** 极限挑战 **/
 		public static const EM_JIXIAN:String="326";
+		/** 等级排行 **/
+		public static const EM_LEVELRANK:String="330";
+		/** 战力排行 **/
+		public static const EM_COMBATPOAERRANK:String="331";
+		/** 战旗排行 **/
+		public static const EM_FIGHTFLAGRANK:String="332";
+		/** 坐骑排行 **/
+		public static const EM_MOUNTRANK:String="333";
+		/** 婚戒排行 **/
+		public static const EM_WEDDINGRINGRANK:String="334";
+		/** 美人排行 **/
+		public static const EM_BEAUTYRANK:String="335";
+		/** 战力榜 **/
+		public static const EM_AllCOMBATPOWERRANK:String="350";
+		/** 巅峰对决排行榜 **/
+		public static const EM_ALLDUIJUERANK:String="351";
+		
 	}
 }

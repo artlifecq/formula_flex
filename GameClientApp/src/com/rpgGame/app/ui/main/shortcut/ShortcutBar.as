@@ -44,7 +44,7 @@ package com.rpgGame.app.ui.main.shortcut {
 		private var _jumpState:Vector.<UIAsset>;
 		
 		private var renderUint:RenderUnit3D;
-		private var _rollprogress:RollProgress;
+		private var _rollprogress:DodgeProgress;
 		private var _jinzhencontent:Inter3DContainer;
 		private var _jinzhenList:Vector.<JinZhenControl>;
 		
@@ -104,7 +104,7 @@ package com.rpgGame.app.ui.main.shortcut {
 			
 			_shortcutMessageBar=ShortcutMessageBar.instence;
 			
-			_rollprogress = new RollProgress(this._skin);
+			_rollprogress = new DodgeProgress(this._skin);
 			var leftp:HpPropgressBar = new HpPropgressBar(this,0,_skin);
 			var rightp:HpPropgressBar = new HpPropgressBar(this,1,_skin);
 			

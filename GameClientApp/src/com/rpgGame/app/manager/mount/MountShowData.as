@@ -87,8 +87,6 @@ package com.rpgGame.app.manager.mount
 		public function set horsedataInfo(info:HorseDataInfo):void
 		{
 			_horsedataInfo = info;
-			if(_lastLevel== mountLevel)
-				return ;
 			if(housedata.q_need_items!="")
 			{
 				var iteminfo:Object = JSONUtil.decode( housedata.q_need_items)[0];

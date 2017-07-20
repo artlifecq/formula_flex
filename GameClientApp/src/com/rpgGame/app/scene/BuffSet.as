@@ -4,7 +4,7 @@ package com.rpgGame.app.scene
 	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
-	import com.rpgGame.app.manager.RollManager;
+	import com.rpgGame.app.manager.DodgeManager;
 	import com.rpgGame.app.manager.SkillCDManager;
 	import com.rpgGame.app.state.role.control.BingDongStateReference;
 	import com.rpgGame.app.state.role.control.BuffStateReference;
@@ -293,7 +293,7 @@ package com.rpgGame.app.scene
 						if(_role.isMainChar)
 						{
 							SkillCDManager.getInstance().removeCDBuff(buffData);
-							RollManager.getinstance().clearBuff(buffData);
+							DodgeManager.getinstance().clearBuff(buffData);
 						}
 						break;
 					case 42:// 预警
@@ -460,7 +460,7 @@ package com.rpgGame.app.scene
 						if(_role.isMainChar)
 						{
 							SkillCDManager.getInstance().addCDBuff(buffData);
-							RollManager.getinstance().buff = buffData;
+							DodgeManager.getinstance().buff = buffData;
 						}
 						break;
 					/*case 42:// 预警状态-------------------预警状态已经去掉不用了 后面如果加上的话再开启    yt

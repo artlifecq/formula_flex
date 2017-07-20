@@ -9,6 +9,7 @@ package com.rpgGame.app.utils
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
+	import com.rpgGame.core.view.ui.tip.vo.SpellDynamicTipdata;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
@@ -250,7 +251,7 @@ package com.rpgGame.app.utils
 				{
 					TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.SPELL_TIP, data,false,new Point(grid.x,grid.y)) );
 				}else{
-					TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.PASSIVESKILL_TIP, new DynamicTipData(data),false,new Point(grid.x,grid.y)) );
+					TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.PASSIVESKILL_TIP, new SpellDynamicTipdata(data),false,new Point(grid.x,grid.y)) );
 				}
 				
 			}else

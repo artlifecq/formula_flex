@@ -61,6 +61,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.QBattleRewardCfgData;
 	import com.rpgGame.coreData.cfg.QSinglecitybaseCfgData;
 	import com.rpgGame.coreData.cfg.RaceCfgData;
+	import com.rpgGame.coreData.cfg.RankDesignationData;
 	import com.rpgGame.coreData.cfg.RedRewardCfgData;
 	import com.rpgGame.coreData.cfg.RelationCfgData;
 	import com.rpgGame.coreData.cfg.ReliveCfgData;
@@ -330,6 +331,7 @@ package com.rpgGame.app.data
 			RedRewardCfgData.setup(dic[ConfigClassRegister.Q_redreward]);//红包
 			PetCfg.setup(dic[ConfigClassRegister.Q_girl_pet]);//美人
 			PetAdvanceCfg.setup(dic[ConfigClassRegister.Q_girl_advance]);//美人进阶
+			RankDesignationData.setup(dic[ConfigClassRegister.Q_rank_designation]);//排行榜名称
 		}
 		
 		/**

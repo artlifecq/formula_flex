@@ -11,12 +11,18 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.appModule.systemset.TouchToState;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.manager.StarlingLayerManager;
+	import com.rpgGame.core.manager.tips.TipManager;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.tip.RTNodeID;
+	import com.rpgGame.core.view.ui.tip.vo.SpellDynamicTipdata;
 	import com.rpgGame.coreData.cfg.HorseSpellData;
 	import com.rpgGame.coreData.clientConfig.Q_horse_skills;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.face.BaseFaceInfo;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	
+	import flash.utils.setInterval;
+	import flash.utils.setTimeout;
 	
 	import away3d.events.Event;
 	
@@ -147,6 +153,8 @@ package com.rpgGame.appModule.mount
 			for(var i:int = 0;i<_spellIconList.length;i++)
 			{
 				var icon:IconCDFace = _spellIconList[i];
+				
+				var isActivation:Boolean = false;
 				var qdata:Q_horse_skills = arr[i];
 				if(qdata.q_study_needhorselevel>_mountShowData.mountLevel)
 				{
@@ -156,6 +164,13 @@ package com.rpgGame.appModule.mount
 					}
 				}else{
 					icon.filter = null;
+					isActivation = true;
+				}
+				
+				var data:SpellDynamicTipdata = TipTargetManager.getTiipsByTarget(icon) as SpellDynamicTipdata;
+				if(data!=null)
+				{
+					data.isActivation = isActivation;
 				}
 			}
 		}
@@ -238,7 +253,8 @@ package com.rpgGame.appModule.mount
 			setRTNState(RTNodeID.HORSE_UP,_mountShowData.isSelf&&_mountShowData.canUpLevel());
 			if(needeat)
 			{
-				TweenLite.delayedCall(0.3,refeashsendMsg);
+//				setInterval(refeashsendMsg,300);
+				setTimeout(refeashsendMsg,30);
 			}
 		}
 		
