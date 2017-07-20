@@ -469,11 +469,8 @@ package com.rpgGame.app.scene
 				return;
 			}
 			roleData.avatarInfo.setMountResID(mountResID,mountAnimatResID);
-			if(!mountResID){
-				AvatarManager.updateAllPart(this);
-			}else{
-				AvatarManager.updateMount(this);
-			}
+			
+			AvatarManager.updateMount(this);
 		}
 		
 		/**
@@ -503,11 +500,7 @@ package com.rpgGame.app.scene
 				return;
 			}
 			roleData.avatarInfo.setMountResID(mountResID,mountAnimatResID);
-			if(!mountResID){
-				AvatarManager.updateAllPart(this);
-			}else{
-				AvatarManager.updateMount(this);
-			}
+			AvatarManager.updateMount(this);	
 		}
 		
 		/**
