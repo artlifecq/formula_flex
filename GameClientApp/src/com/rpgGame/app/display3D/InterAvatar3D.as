@@ -3,10 +3,7 @@ package com.rpgGame.app.display3D
 	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.rpgGame.app.manager.AvatarManager;
-	import com.rpgGame.app.manager.role.SceneRoleManager;
-	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.app.utils.Render3DTextUtil;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
@@ -37,7 +34,7 @@ package com.rpgGame.app.display3D
 			role.avatar.shareMaterials = false;
 			role.avatar.lightPicker = Stage3DLayerManager.screenLightPicker;
 			//执行主换装更新
-			AvatarManager.updateAvatar(role);
+			AvatarManager.updateAllPart(role);
 
 			transition(RoleStateType.ACTION_IDLE); //切换到“站立状态”
 

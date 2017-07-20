@@ -105,7 +105,7 @@ package com.rpgGame.app.fight.spell
 				{
 					var targetPos : Point = (spellInfo.targetRole && spellInfo.targetRole.usable) ? new Point(spellInfo.targetRole.x, spellInfo.targetRole.z) : spellInfo.targetPos;
 					var atkorPos : Point = (spellInfo.atkor && spellInfo.atkor.usable) ? new Point(spellInfo.atkor.x, spellInfo.atkor.z) : spellInfo.atkorPos;
-					if(targetPos == null || atkorPos == null)
+					if(targetPos == null || atkorPos == null||spellInfo.flyTargets.length==0)
 					{
 						GameLog.addShow("这个技能数据有异常，服务器给的施法者为空，有可能这个施法者可能已经被通知删掉了！！！");
 						return;

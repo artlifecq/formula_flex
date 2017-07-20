@@ -61,9 +61,6 @@ package com.rpgGame.coreData
 		private var _fightsoulResID:String = null;
 		private var _fightsoulMode:RenderParamData3D;
 		
-		private var _fightsoulEffectResID:String = null;
-		private var _fightsoulEffectMode:RenderParamData3D;
-		
 		private var _zhanqiResID:String=null;
 		private var _zhanqiMode:RenderParamData3D;
 		
@@ -72,6 +69,17 @@ package com.rpgGame.coreData
 			_priority = priority;
 		}
 		
+
+		public function get fightsoulResID():String
+		{
+			return _fightsoulResID;
+		}
+
+		public function get bodyMethodTypeEffectResID():String
+		{
+			return _bodyMethodTypeEffectResID;
+		}
+
 		/**衣服换装资源*/
 		public function setBodyResID(body : String, animat : String) : void
 		{
@@ -284,7 +292,7 @@ package com.rpgGame.coreData
 			}
 		}
 		/**战魂换装资源ID*/
-		public function setFightSoulResID(value : String) : void
+		public function set fightsoulResID(value : String) : void
 		{
 			if (_fightsoulResID == value)
 				return;
@@ -299,24 +307,6 @@ package com.rpgGame.coreData
 			{
 				_fightsoulMode = null;
 				_fightsoulResID = null;
-			}
-		}
-		
-		public function set fightSoulefffectID(value:String):void
-		{
-			if (_fightsoulEffectResID == value)
-				return;
-			_fightsoulEffectResID = value;
-			if (_fightsoulEffectResID!=null&&_fightsoulEffectResID!="")
-			{
-				_fightsoulEffectMode = new RenderParamData3D(RenderUnitID.FIGHTSOUL_EFFECT, RenderUnitType.FIGHTSOUL_EFFECT, ClientConfig.getEffect(_fightsoulEffectResID));
-				_fightsoulEffectMode.mouseEnable = true;
-				_fightsoulEffectMode.clearSameType = false;
-			}
-			else
-			{
-				_fightsoulEffectMode = null;
-				_fightsoulEffectResID = null;
 			}
 		}
 		
@@ -549,10 +539,6 @@ package com.rpgGame.coreData
 			return _fightsoulMode;
 		}
 		
-		public function get fightsoulEffect():RenderParamData3D
-		{
-			return _fightsoulEffectMode;
-		}
 		
 		public function get zhanqiMode():RenderParamData3D
 		{
@@ -566,8 +552,7 @@ package com.rpgGame.coreData
 			weaponResID = null;
 			deputyWeaponResID = null;
 			setMountResID(null, null);
-			setFightSoulResID(null);
-			fightSoulefffectID = null;
+			fightsoulResID=null;
 			weaponEffectID = null;
 			weaponEffectScale = 0;
 			weaponEffectOffset = null;

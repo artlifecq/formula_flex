@@ -22,7 +22,7 @@
                 {
                     SceneRole(initiator).isSwimming = true;
 //                    AvatarManager.callEquipmentChange(SceneRole(initiator));
-					AvatarManager.updateAvatar(SceneRole(initiator));
+					AvatarManager.updateAllPart(SceneRole(initiator));
                     SceneRole(initiator).clingGroundCalculate = null;
                     SceneRole(initiator).y = clientMapAreaData.depth;
                 }
@@ -33,7 +33,7 @@
                 {
                     SceneRole(initiator).isSwimming = false;
 //                    AvatarManager.callEquipmentChange(SceneRole(initiator));
-					AvatarManager.updateAvatar(SceneRole(initiator));
+					AvatarManager.updateAllPart(SceneRole(initiator));
                     SceneRole(initiator).clingGroundCalculate = SceneManager.getScene().clingGround;
                 }
             }

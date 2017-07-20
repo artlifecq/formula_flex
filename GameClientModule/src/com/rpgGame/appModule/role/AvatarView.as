@@ -13,7 +13,6 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.ItemSender;
-	import com.rpgGame.app.view.icon.BgIcon;
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.app.view.uiComponent.menu.Menu;
@@ -39,7 +38,6 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.CharAttributeType;
-	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.type.item.GridBGType;
@@ -98,7 +96,7 @@ package com.rpgGame.appModule.role
 		private var _roleData:HeroData;
 		private var isMainRole:Boolean;
 		private var otherItems:Vector.<ItemInfo>;
-		private var _touchID:int;
+		private var _touchID:int=-1;
 
 		private var startX:Number;
 
@@ -338,7 +336,7 @@ package com.rpgGame.appModule.role
 			EventManager.addEvent(ItemEvent.ITEM_CHANG,onFreshItems);
 			EventManager.addEvent(ItemEvent.ITEM_GET, getItem);
 			
-			EventManager.addEvent(AvatarEvent.EQUIP_CHANGE, equipChange);
+			EventManager.addEvent(AvatarEvent.AVATAR_CHANGE, equipChange);
 			
 			EventManager.addEvent(DragDropEvent.DRAG_START,onDragStart);
 			EventManager.addEvent(DragDropEvent.DRAG_COMPLETE,onDragEnd);
@@ -384,7 +382,7 @@ package com.rpgGame.appModule.role
 		}
 		
 		
-		private function equipChange(role:SceneRole):void
+		private function equipChange(role:SceneRole,type:int):void
 		{
 			if(role== MainRoleManager.actor){
 				updateRole();
@@ -416,7 +414,7 @@ package com.rpgGame.appModule.role
 			EventManager.removeEvent(ItemEvent.UNWEAR_EQUIPITEM,onFreshItems);
 			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onFreshItems);
 			EventManager.removeEvent(ItemEvent.ITEM_GET, getItem);
-			EventManager.removeEvent(AvatarEvent.EQUIP_CHANGE, equipChange);
+			EventManager.removeEvent(AvatarEvent.AVATAR_CHANGE, equipChange);
 			EventManager.removeEvent(DragDropEvent.DRAG_START,onDragStart);
 			EventManager.removeEvent(DragDropEvent.DRAG_COMPLETE,onDragEnd);
 			EventManager.removeEvent(VipEvent.GET_VIP_DATA,onGetVipData);
@@ -537,25 +535,29 @@ package com.rpgGame.appModule.role
 //			_skin.NumZhanli.x=128+(135-_skin.NumZhanli.width)/2;
 		}
 		
-		private function updateRole():void
+		private function updateRole(type:int=-1):void
 		{
 			var player : SceneRole = MainRoleManager.actor;
 			if (null == player || !player.usable) {
 				return;
 			}
 			
-			this._showAvatarData.avatarInfo.setBodyResID(_roleData.avatarInfo.bodyResID, _roleData.avatarInfo.bodyAnimatResID);
-			this._showAvatarData.avatarInfo.hairResID = _roleData.avatarInfo.hairResID;
-			this._showAvatarData.avatarInfo.weaponResID = _roleData.avatarInfo.weaponResID;
-			this._showAvatarData.avatarInfo.weaponEffectID = _roleData.avatarInfo.weaponEffectID;
-			this._showAvatarData.avatarInfo.weaponEffectScale = _roleData.avatarInfo.weaponEffectScale;
-			this._showAvatarData.avatarInfo.deputyWeaponResID = _roleData.avatarInfo.deputyWeaponResID;
-			this._showAvatarData.avatarInfo.deputyWeaponEffectID=_roleData.avatarInfo.deputyWeaponEffectID;
-			this._showAvatarData.avatarInfo.deputyWeaponEffectScale=_roleData.avatarInfo.deputyWeaponEffectScale;
-			this._showAvatarData.avatarInfo.zhanqiResID=_roleData.avatarInfo.zhanqiResID;
-			this._avatar.setRoleData(this._showAvatarData);
+			if(type==-1){
+				this._showAvatarData.avatarInfo.setBodyResID(_roleData.avatarInfo.bodyResID, _roleData.avatarInfo.bodyAnimatResID);
+				this._showAvatarData.avatarInfo.hairResID = _roleData.avatarInfo.hairResID;
+				this._showAvatarData.avatarInfo.weaponResID = _roleData.avatarInfo.weaponResID;
+				this._showAvatarData.avatarInfo.weaponEffectID = _roleData.avatarInfo.weaponEffectID;
+				this._showAvatarData.avatarInfo.weaponEffectScale = _roleData.avatarInfo.weaponEffectScale;
+				this._showAvatarData.avatarInfo.deputyWeaponResID = _roleData.avatarInfo.deputyWeaponResID;
+				this._showAvatarData.avatarInfo.deputyWeaponEffectID=_roleData.avatarInfo.deputyWeaponEffectID;
+				this._showAvatarData.avatarInfo.deputyWeaponEffectScale=_roleData.avatarInfo.deputyWeaponEffectScale;
+				this._showAvatarData.avatarInfo.zhanqiResID=_roleData.avatarInfo.zhanqiResID;
+				this._avatar.setRoleData(this._showAvatarData);
+				this._avatar.curRole.setScale(1.7);	
+			}else{
+				this._avatar.curRole.updateWithRenderUnitID(type,_roleData.avatarInfo);
+			}
 			
-			this._avatar.curRole.setScale(1.7);	
 //			RoleFaceMaskEffectUtil.addAvatarMask(AvatarMaskType.DIALOG_MASK,_avatar,144,-371,1.7);
 		}
 		

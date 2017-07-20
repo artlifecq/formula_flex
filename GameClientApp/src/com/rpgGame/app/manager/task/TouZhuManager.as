@@ -256,7 +256,7 @@ package com.rpgGame.app.manager.task
 //			}
 
 			//执行主换装更新
-			AvatarManager.updateAvatar(atkor);
+//			AvatarManager.updateAvatar(atkor);
 		}
 
 		//---------------------------------
