@@ -128,7 +128,7 @@ package com.rpgGame.app.manager.role
 			(role.headFace as HeadFace).bloodPercent= (data.totalStat.hp / data.totalStat.life);
 			role.dialogFace=BubbleDialogFace.create(role);
 			//执行主换装更新
-			AvatarManager.createAvatar(role, false, false, false);
+			AvatarManager.resetAvatar(role, false, false, false);
 			var renderLimitable : Boolean = false;
 			if (!isMainChar)
 			{

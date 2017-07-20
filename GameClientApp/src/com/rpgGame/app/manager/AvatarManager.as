@@ -57,14 +57,14 @@ package com.rpgGame.app.manager
 		}
 		
 		/**
-		 *创建模型 
+		 *根据角色数据重置avatar
 		 * @param role
 		 * @param isUseforAvatar
 		 * @param isMountBlank
 		 * @param updateBuff
 		 * 
 		 */
-		public static function createAvatar(role : SceneRole, isUseforAvatar : Boolean = false, isMountBlank : Boolean = false, updateBuff : Boolean = true) : void
+		public static function resetAvatar(role : SceneRole, isUseforAvatar : Boolean = false, isMountBlank : Boolean = false, updateBuff : Boolean = true) : void
 		{
 			if (!role || !role.usable)
 				return;
