@@ -59,7 +59,7 @@ package com.rpgGame.appModule.shop
 		{
 			// TODO Auto-generated method stub
 			var vo:ShopItemVo=event.data;
-			for each (var cell:MallItemExt in cellList) 
+			for each (var cell:BattleShopItemExt in cellList) 
 			{
 				if (cell.data==vo) 
 				{
