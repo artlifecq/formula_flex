@@ -334,6 +334,7 @@ package com.rpgGame.appModule.mount
 				autoReq=null;
 			}
 			_mountupContent.isAutoing = false;
+			_mountupContent.hide();
 			super.hide();
 		}
 	}

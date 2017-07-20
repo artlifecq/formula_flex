@@ -111,6 +111,7 @@ package com.rpgGame.appModule.mount
 				autoReq.kill();
 				autoReq=null;
 			}
+			_zhanqiUpExpConent.hide();
 			super.hide();
 		}
 		

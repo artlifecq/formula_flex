@@ -108,10 +108,11 @@ package com.rpgGame.appModule.mount
 				_skin.progressbar1.maximum = _zhanqiShowData.zhanqidata.q_blessnum_limit;
 				_skin.progressbar1.value = _zhanqiShowData.exp;
 				_skin.lab_progressbar.text = _zhanqiShowData.exp.toString()+"/"+_zhanqiShowData.zhanqidata.q_blessnum_limit.toString();
+				TimerServer.remove(showExpAnimation);
 				return;
 			}
 			var changeExp:int=exp-_skin.progressbar1.value;
-			if(changeExp==0){
+			if(changeExp<=0){
 				return;
 			}
 			var addExp:int=changeExp/count;

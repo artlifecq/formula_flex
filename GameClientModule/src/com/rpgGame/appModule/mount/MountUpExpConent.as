@@ -105,10 +105,11 @@ package com.rpgGame.appModule.mount
 				_skin.progressbar.value = _skin.progressbar.maximum*_mountShowData.percent;
 				_skin.progressbar.maximum=_mountShowData.housedata.q_blessnum_limit;
 				_skin.lab_progressbar.text =_skin.progressbar.value+"/"+_skin.progressbar.maximum;
+				TimerServer.remove(showExpAnimation);
 				return;
 			}
 			var changeExp:int=exp-_skin.progressbar.value;
-			if(changeExp==0){
+			if(changeExp<=0){
 				return;
 			}
 			var addExp:int=changeExp/count;
@@ -152,6 +153,11 @@ package com.rpgGame.appModule.mount
 			_skin.btn_kaishi.touchable = bool;
 			_skin.btn_zidong.touchable = bool;
 			_skin.btn_tingzhi.touchable = bool;
+		}
+		
+		public function hide():void
+		{
+			TimerServer.remove(showExpAnimation);
 		}
 	}
 }
