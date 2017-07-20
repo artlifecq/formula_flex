@@ -94,6 +94,9 @@ package com.rpgGame.coreData.type
 		 * */
 		public static const HUNYIN_JIEZI : String = "jiehunjiezi";
 		
+		
+		public static const RANKTITLE:String = "rankTitle";
+		
 //		/**打坐特效*/
 //		public static const SIT:String = "sit";
 //		/**怪物光环*/

@@ -32,6 +32,7 @@
 	import com.rpgGame.app.cmdlistener.NotifyCmdListener;
 	import com.rpgGame.app.cmdlistener.NpcCmdListener;
 	import com.rpgGame.app.cmdlistener.PetCmdListerner;
+	import com.rpgGame.app.cmdlistener.RankCmdListener;
 	import com.rpgGame.app.cmdlistener.RedRewardCmdListener;
 	import com.rpgGame.app.cmdlistener.RoleStateCmdListener;
 	import com.rpgGame.app.cmdlistener.RollCmdListener;
@@ -173,6 +174,7 @@
 			register("VipCmdListerner",VipCmdListerner);
 			register("RedRewardCmdListener",RedRewardCmdListener);
 			register("PetCmdListerner",PetCmdListerner);
+			register("RankCmdListener",RankCmdListener);
 		}
 	}
 }

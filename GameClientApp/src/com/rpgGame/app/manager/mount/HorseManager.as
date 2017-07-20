@@ -85,12 +85,12 @@ package com.rpgGame.app.manager.mount
 		public function uplevel(msg:SCHorseUpResultToClientMessage):void
 		{
 			_horsedataInfo.exp = msg.exp;
-			if(_horsedataInfo.horseModelId !=msg.isSuccess)
+			if(msg.isSuccess)
 			{
-				_horsedataInfo.horseModelId=msg.isSuccess;
+				_horsedataInfo.horseModelId+=1;
 				EventManager.dispatchEvent(HorseUpLevel);
 			}else{
-				EventManager.dispatchEvent(HorseChangeExp);
+				EventManager.dispatchEvent(HorseChangeExp,msg.exp,msg.count);
 			}
 		}
 		public function updateExtraItemNum(msg:SCExtraItemNumMessage):void
@@ -170,7 +170,7 @@ package com.rpgGame.app.manager.mount
 					return false;
 				}
 			}
-			HorseSender.horseStratumUp(showdata.isAutoBuyItem?1:0);
+			HorseSender.horseStratumUp(showdata.isAutoBuyItem,showdata.isAutoing);
 			return true;
 		}
 		
@@ -231,12 +231,12 @@ package com.rpgGame.app.manager.mount
 		public function autoRiding(walkRole:SceneRole, pos:Vector3D):void
 		{
 			if(_horsedataInfo==null)
-				return ;
+				return;
 			var scenedata:SceneData = MapDataManager.currentScene;
 			if (scenedata== null ||!scenedata.isMountLimit)
 			{
 				return;
-			};
+			}
 			var hoseId:int = HeroData(walkRole.data).mount;
 			if(hoseId>0)
 				return ;
@@ -279,6 +279,7 @@ package com.rpgGame.app.manager.mount
 		 */
 		public function onRequestSetUpMountRide(isRide:Boolean):void
 		{
+			return;
 			//坐骑未开放
 			if(_horsedataInfo == null)
 				return ;

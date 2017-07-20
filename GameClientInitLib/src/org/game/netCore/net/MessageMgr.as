@@ -1184,7 +1184,9 @@ package org.game.netCore.net
 					_socket.removeEventListener( ProgressEvent.SOCKET_DATA, recv );	
 					_orgSendMsgNum = 0;
 				}
-				_socket.close();
+				if(_socket.connected){
+					_socket.close();
+				}
 				_socket = null;
 			}
 			//Mgr.loginMgr.isLoginSuccess = false;

@@ -426,6 +426,8 @@ package com.rpgGame.core.app
 		public static var GUILD_WCZB_REWARD : String = createAppInfo("guild.war.WczbRewardPanel","banghui");
 		/**帮会王城争霸结果 **/
 		public static var GUILD_WCZB_RESULT : String = createAppInfo("guild.war.WczbResultPanel","banghui");
+		/**帮会统帅通知 **/
+		public static var GUILD_LEADER_SKILL_NOTICE : String = createAppInfo("guild.war.GuildLeaderSkillNoticePanel","banghui");
 		
 		/**迷宫排行**/
 		public static var MAZE_RANK_PANEL : String = createAppInfo("maze.MazeInfoPanel","maze",PanelPosType.MIDDLE_RIGHT);
@@ -525,5 +527,9 @@ package com.rpgGame.core.app
 		
 		/**红包信息**/
 		public static var PET_PANLE:String = createAppInfo("pet.PetMainPanelExt","meiren");
+		/**排行榜**/
+		public static var RANKLISTPANLE:String = createAppInfo("rank.RankListPanle","paihangbang");
+		/**全平台排行榜**/
+		public static var RANKALLPLATFORMLISTPANLE:String = createAppInfo("rank.RankAllPlatformListPanle","paihangbang");
 	}
 }

@@ -2,7 +2,7 @@ package com.rpgGame.app.manager.input
 {
 	import com.game.engine3D.utils.PathFinderUtil;
 	import com.rpgGame.app.fight.spell.CastSpellHelper;
-	import com.rpgGame.app.manager.RollManager;
+	import com.rpgGame.app.manager.DodgeManager;
 	import com.rpgGame.app.manager.TrailManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
@@ -105,11 +105,11 @@ package com.rpgGame.app.manager.input
 			{
 				return ;
 			}
-            var canRoll : Boolean = RollManager.getinstance().canUseRoll();
+            var canRoll : Boolean = DodgeManager.getinstance().canUseRoll();
             if (canRoll)
 			{
                 CastSpellHelper.shortcutsTryCaseSpell(1, true);
-				RollManager.getinstance().useRoll();
+				DodgeManager.getinstance().useRoll();
              } 
 			else 
 			{

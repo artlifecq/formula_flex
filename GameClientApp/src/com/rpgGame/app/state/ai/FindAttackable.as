@@ -196,7 +196,7 @@ package com.rpgGame.app.state.ai
 		
 		override public function enterPass(prevState : IState, force : Boolean = false) : Boolean
 		{
-			if(/*TrusteeshipManager.getInstance().getHasRole()&&*/SceneRoleSelectManager.selectedRole !=null)
+			if(TrusteeshipManager.getInstance().getHasRole()&&SceneRoleSelectManager.selectedRole !=null)
 			{
 				if (!force)
 					return false;

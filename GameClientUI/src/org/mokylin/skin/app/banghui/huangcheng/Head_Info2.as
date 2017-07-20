@@ -1,7 +1,9 @@
 package org.mokylin.skin.app.banghui.huangcheng
 {
+	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import org.mokylin.skin.app.banghui.huangcheng.HeadInfoItem;
 
 	/**
 	 * @private
@@ -10,6 +12,13 @@ package org.mokylin.skin.app.banghui.huangcheng
 	 */
 	public class Head_Info2 extends feathers.controls.StateSkin
 	{
+		//==========================================================================
+		//                                定义成员变量
+		//==========================================================================
+		public var skin1:feathers.controls.SkinnableContainer;
+
+		public var skin2:feathers.controls.SkinnableContainer;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -21,7 +30,7 @@ package org.mokylin.skin.app.banghui.huangcheng
 			this.currentState = "normal";
 			this.height = 30;
 			this.width = 162;
-			this.elementsContent = [__Head_Info2_UIAsset1_i()];
+			this.elementsContent = [__Head_Info2_UIAsset1_i(),skin1_i(),skin2_i()];
 			
 			states = {
 			};
@@ -29,6 +38,9 @@ package org.mokylin.skin.app.banghui.huangcheng
 		}
 
 
+		//==========================================================================
+		//                                定义成员方法
+		//==========================================================================
 		private function __Head_Info2_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -36,6 +48,34 @@ package org.mokylin.skin.app.banghui.huangcheng
 			temp.width = 162;
 			temp.x = 0;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function skin1_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			skin1 = temp;
+			temp.name = "skin1";
+			temp.height = 24;
+			var skin:StateSkin = new org.mokylin.skin.app.banghui.huangcheng.HeadInfoItem()
+			temp.skin = skin
+			temp.width = 51;
+			temp.x = 37;
+			temp.y = 2;
+			return temp;
+		}
+
+		private function skin2_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			skin2 = temp;
+			temp.name = "skin2";
+			temp.height = 24;
+			var skin:StateSkin = new org.mokylin.skin.app.banghui.huangcheng.HeadInfoItem()
+			temp.skin = skin
+			temp.width = 51;
+			temp.x = 88;
+			temp.y = 2;
 			return temp;
 		}
 

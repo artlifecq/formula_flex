@@ -202,6 +202,17 @@ package com.rpgGame.app.manager
 				}
 			}
 		}
+		
+		/**
+		 *单纯的重置单个技能cd
+		 * @param skillId
+		 * @param cdTime
+		 * 
+		 */		
+		public function resetSkillCD(skillId:int,cdTime:int):void
+		{
+			CDDataManager.playCD(getSkillKey(skillId), cdTime, 0);
+		}
 		/**
 		 * 添加技能CD
 		 * @param skillID

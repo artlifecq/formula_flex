@@ -16,11 +16,15 @@ package com.rpgGame.appModule.mount
 	
 	import org.mokylin.skin.app.zuoqi.Zhanqi_Skin;
 	
+	import utils.TimerServer;
+	
 	public class ZhanQiUpExpConent
 	{
 		private var _skin:Zhanqi_Skin;
 		
 		private var _itemIconList:Vector.<IconCDFace>;
+		
+		private var _updateTime:int=1000/40;
 		
 		public function ZhanQiUpExpConent(skin:Zhanqi_Skin)
 		{
@@ -90,10 +94,6 @@ package com.rpgGame.appModule.mount
 					}
 				}
 				//				const percent:Number = _zhanqiShowData.percent;
-				_skin.progressbar1.maximum = zhanqidata.q_blessnum_limit;
-				_skin.progressbar1.value = _zhanqiShowData.exp;//_skin.progressbar1.maximum*percent;
-				//				_skin.progressbar_light.x = _skin.progressbar.x +_skin.progressbar.width*percent-3;
-				_skin.lab_progressbar.text = _zhanqiShowData.exp.toString()+"/"+zhanqidata.q_blessnum_limit.toString();
 				TipTargetManager.show(_skin.expgroup,TargetTipsMaker.makeTips(TipType.BLESS_TIP,_zhanqiShowData));
 			}else{
 				_skin.grp_jinjie.visible = false;
@@ -101,6 +101,31 @@ package com.rpgGame.appModule.mount
 				_skin.maximg.visible = true;
 			}
 		}
+		
+		public function updateExp(exp:int=0,count:int=0):void
+		{
+			if(exp==0&&count==0){
+				_skin.progressbar1.maximum = _zhanqiShowData.zhanqidata.q_blessnum_limit;
+				_skin.progressbar1.value = _zhanqiShowData.exp;
+				_skin.lab_progressbar.text = _zhanqiShowData.exp.toString()+"/"+_zhanqiShowData.zhanqidata.q_blessnum_limit.toString();
+				TimerServer.remove(showExpAnimation);
+				return;
+			}
+			var changeExp:int=exp-_skin.progressbar1.value;
+			if(changeExp<=0){
+				return;
+			}
+			var addExp:int=changeExp/count;
+			TimerServer.addLoop(showExpAnimation,_updateTime,[addExp],count);
+			_skin.progressbar1.maximum =_zhanqiShowData.zhanqidata.q_blessnum_limit;
+		}
+		
+		private function showExpAnimation(exp:int):void
+		{
+			_skin.progressbar1.value =int(_skin.progressbar1.value)+ exp;
+			_skin.lab_progressbar.text =_skin.progressbar1.value+"/"+_skin.progressbar1.maximum;
+		}
+		
 		private var _isAutoing:Boolean;
 		
 		public function set isAutoing(value:Boolean):void
@@ -131,6 +156,11 @@ package com.rpgGame.appModule.mount
 			_skin.btn_kaishi.touchable = bool;
 			_skin.btn_zidong.touchable = bool;
 			_skin.btn_tingzhi.touchable = bool;
+		}
+		
+		public function hide():void
+		{
+			TimerServer.remove(showExpAnimation);
 		}
 	}
 }

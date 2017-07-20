@@ -2,17 +2,11 @@ package com.rpgGame.app.manager
 {
 	import com.rpgGame.app.manager.hint.FloatingText;
 	import com.rpgGame.app.sender.NineTowerSender;
-	import com.rpgGame.app.ui.main.dungeon.NineTowerTrackUIExt;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.NineTowerEvent;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.enum.EmFunctionID;
-	import com.rpgGame.netData.yaota.message.CSEnterYaoTaMessage;
-	import com.rpgGame.netData.yaota.message.CSOpenYaoTaPanelMessage;
-	import com.rpgGame.netData.yaota.message.CSQuitYaoTaMessage;
-	import com.rpgGame.netData.yaota.message.CSYaoTaIntegralMessage;
-	import com.rpgGame.netData.yaota.message.CSYaoTaLogMessage;
 	import com.rpgGame.netData.yaota.message.SCDrawYaoTaAwardMessage;
 	import com.rpgGame.netData.yaota.message.SCEnterYaoTaResultMessage;
 	import com.rpgGame.netData.yaota.message.SCOpenYaoTaPanelMessage;
@@ -24,7 +18,6 @@ package com.rpgGame.app.manager
 	import com.rpgGame.netData.yaota.message.SCYaoTaLogMessage;
 	
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.connection.SocketConnection;
 	
 	public class NineTowerMgr
 	{

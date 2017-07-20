@@ -50,6 +50,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.LostSkillUpData;
 	import com.rpgGame.coreData.cfg.LunJianCfg;
 	import com.rpgGame.coreData.cfg.MailCfgData;
+	import com.rpgGame.coreData.cfg.MapJumpCfgData;
 	import com.rpgGame.coreData.cfg.MapPreLoadData;
 	import com.rpgGame.coreData.cfg.MazeCfgData;
 	import com.rpgGame.coreData.cfg.MibaoCfgData;
@@ -61,6 +62,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.QBattleRewardCfgData;
 	import com.rpgGame.coreData.cfg.QSinglecitybaseCfgData;
 	import com.rpgGame.coreData.cfg.RaceCfgData;
+	import com.rpgGame.coreData.cfg.RankDesignationData;
 	import com.rpgGame.coreData.cfg.RedRewardCfgData;
 	import com.rpgGame.coreData.cfg.RelationCfgData;
 	import com.rpgGame.coreData.cfg.ReliveCfgData;
@@ -246,7 +248,8 @@ package com.rpgGame.app.data
 			AreaCfgData.setup(dic[ConfigClassRegister.Q_area]);
 			// 传送门
 			TransCfgData.setup(dic[ConfigClassRegister.Q_map_transfer]);
-			
+			// 跳跃点
+			MapJumpCfgData.setup(dic[ConfigClassRegister.Q_map_jump]);
 			//怪物//NPC
 			MonsterDataManager.setMonsterConfig(dic[ConfigClassRegister.Q_monster]);//怪物总表
 			MonsterDataManager.setSceneAreaMonsterConfig(dic[ConfigClassRegister.Q_scene_monster_area]);//怪物刷新表
@@ -330,6 +333,7 @@ package com.rpgGame.app.data
 			RedRewardCfgData.setup(dic[ConfigClassRegister.Q_redreward]);//红包
 			PetCfg.setup(dic[ConfigClassRegister.Q_girl_pet]);//美人
 			PetAdvanceCfg.setup(dic[ConfigClassRegister.Q_girl_advance]);//美人进阶
+			RankDesignationData.setup(dic[ConfigClassRegister.Q_rank_designation]);//排行榜名称
 		}
 		
 		/**

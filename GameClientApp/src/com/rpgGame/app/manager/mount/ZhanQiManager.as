@@ -86,8 +86,7 @@ package com.rpgGame.app.manager.mount
 			if(zhanqiDataInfo.warFlagModelId>0) 
 			{
 				var role:SceneRole=MainRoleManager.actor;
-				(role.data as HeroData).zhanqiLv=zhanqiDataInfo.warFlagModelId;
-				updateZhanQiShow();
+				role.updateFlag(zhanqiDataInfo.warFlagModelId);
 			}
 		}
 		
@@ -111,15 +110,14 @@ package com.rpgGame.app.manager.mount
 		public function onSCWarFlagUpResultToClientMessage(msg:SCWarFlagUpResultToClientMessage):void
 		{
 			zhanqiDataInfo.exp = msg.exp;
-			if(zhanqiDataInfo.warFlagModelId !=msg.isSuccess)
+			if(msg.isSuccess)
 			{
-				zhanqiDataInfo.warFlagModelId=msg.isSuccess;
+				zhanqiDataInfo.warFlagModelId+=1;
 				EventManager.dispatchEvent(ZhanQiUpLevel);
 				var role:SceneRole=MainRoleManager.actor;
-				(role.data as HeroData).zhanqiLv=msg.isSuccess;
-				updateZhanQiShow();
+				role.updateFlag(zhanqiDataInfo.warFlagModelId);
 			}else{
-				EventManager.dispatchEvent(ZhanQiChangeExp,true);
+				EventManager.dispatchEvent(ZhanQiChangeExp,msg.exp,msg.count);
 			}
 		}
 		
@@ -131,9 +129,7 @@ package com.rpgGame.app.manager.mount
 			var role:SceneRole=SceneManager.getSceneObjByID(msg.playerId.ToGID())as SceneRole;
 			if(role)
 			{
-				(role.data as HeroData).zhanqiLv=msg.warFlagModelid;
-				//				AvatarManager.callEquipmentChange(role);
-				AvatarManager.updateAvatar(role,false);
+				role.updateFlag(msg.warFlagModelid);
 			}
 		}
 		
@@ -198,16 +194,11 @@ package com.rpgGame.app.manager.mount
 			}
 			var msg:CSWarFlagStratumUpToGameMessage = new CSWarFlagStratumUpToGameMessage();
 			msg.Automatic = showdata.isAutoBuyItem?1:0;
+			msg.AutoUp = showdata.isAutoing?1:0;
 			SocketConnection.send(msg);
 			return true;
 		}
 		
-		public function updateZhanQiShow():void
-		{	
-			var role:SceneRole=MainRoleManager.actor;
-			//			AvatarManager.callEquipmentChange(role);
-			AvatarManager.updateAvatar(role,false);
-		}
 		private var _showdata:ZhanQiShowData;
 		public function canZhanqiLevelUp():Boolean
 		{

@@ -458,5 +458,15 @@ package com.rpgGame.app.manager
 			}
 			return false;
 		}
+		
+		public static function getSkillGrade(skillId:int):int
+		{
+			var data:HeroData=MainRoleManager.actorInfo;
+			var skillInfo:SkillInfo=data.spellList.getSkillInfo(skillId);
+			if(!skillInfo){//没学习的技能
+				return 0;
+			}
+			return skillInfo.skillLevel;
+		}
 	}
 }

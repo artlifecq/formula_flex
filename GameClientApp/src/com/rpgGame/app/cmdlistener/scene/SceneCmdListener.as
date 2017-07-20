@@ -4,7 +4,6 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.game.engine3D.vo.BaseObj3D;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
-	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.manager.CharAttributeManager;
@@ -62,6 +61,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.coreData.role.SceneCollectData;
 	import com.rpgGame.coreData.role.SceneDropGoodsData;
 	import com.rpgGame.coreData.role.SceneDropGoodsItem;
+	import com.rpgGame.coreData.role.SculptureData;
 	import com.rpgGame.coreData.role.TrapInfo;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.EffectUrl;
@@ -76,6 +76,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.netData.map.bean.PetInfo;
 	import com.rpgGame.netData.map.bean.PlayerInfo;
 	import com.rpgGame.netData.map.bean.SceneObjInfo;
+	import com.rpgGame.netData.map.bean.TopLeaderInfo;
 	import com.rpgGame.netData.map.message.ResArmorChangeMessage;
 	import com.rpgGame.netData.map.message.ResChangeMapFailedMessage;
 	import com.rpgGame.netData.map.message.ResChangeMapMessage;
@@ -90,8 +91,10 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.netData.map.message.ResRoundMonsterDisappearMessage;
 	import com.rpgGame.netData.map.message.ResRoundObjectsMessage;
 	import com.rpgGame.netData.map.message.ResWeaponChangeMessage;
+	import com.rpgGame.netData.map.message.SCAreaJumpMessage;
 	import com.rpgGame.netData.map.message.SCAttachStateChangeMessage;
 	import com.rpgGame.netData.map.message.SCSceneObjMoveMessage;
+	import com.rpgGame.netData.map.message.SCUpdateTopLeaderMessage;
 	import com.rpgGame.netData.monster.message.ResMonsterDieMessage;
 	import com.rpgGame.netData.player.message.BroadcastPlayerAttriChangeMessage;
 	import com.rpgGame.netData.player.message.ResChangeFactionMessage;
@@ -99,6 +102,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.netData.player.message.ResPlayerDieMessage;
 	import com.rpgGame.netData.player.message.ResReviveSuccessMessage;
 	import com.rpgGame.netData.structs.Position;
+	import com.rpgGame.netData.top.bean.TopInfo;
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
@@ -166,8 +170,11 @@ package com.rpgGame.app.cmdlistener.scene
 			// 陷阱状态改变
 			SocketConnection.addCmdListener(101151, onRecvSCAttachStateChangeMessage);
 			
+			SocketConnection.addCmdListener(101221, onSCAreaJumpMessage);//地图跳跃
+			
 			SocketConnection.addCmdListener(103110, onResChangePKStateMessage);
 			SocketConnection.addCmdListener(114108, onResMonterDieMessage);
+			SocketConnection.addCmdListener(101220, onSCUpdateTopLeaderMessage);
 			//			SocketConnection.addCmdListener(SceneModuleMessages.S2C_TRIGGER_CLIENT_EVENT, onTriggerClientEvent);
 			
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -219,7 +226,7 @@ package com.rpgGame.app.cmdlistener.scene
 		{
 			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;			
 			if(role){
-				(role.data as HeroData).faction=msg.faction;
+				(role.data as RoleData).faction=msg.faction;
 			}
 		}
 		
@@ -230,6 +237,19 @@ package com.rpgGame.app.cmdlistener.scene
 			EventManager.dispatchEvent(MapEvent.ROLE_DIE,msg.monsterId);
 		}
 		
+		private function onSCUpdateTopLeaderMessage(msg:SCUpdateTopLeaderMessage):void
+		{
+			var info:TopLeaderInfo = msg.topLeaderInfo;
+			var sculp:SculptureData = new SculptureData(RoleType.Type_SCULPTURE);
+			sculp.id = info.id.fValue;
+			sculp.modleId = info.modelId;
+			sculp.name = info.playerName;
+			sculp.roleId = info.playerId;
+			sculp.updataTopType(info.topType);
+			var qData : Q_monster = MonsterDataManager.getData(info.modelId);
+			sculp.avatarRes = qData.q_body_res;
+			SceneRoleManager.getInstance().createSculpture(sculp);
+		}
 		private function onResChangePKStateMessage(msg:ResChangePKStateMessage):void
 		{
 			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;
@@ -274,6 +294,21 @@ package com.rpgGame.app.cmdlistener.scene
 			SceneManager.addSceneObjToScene(info.effect, true, false, false);
 		}
 		
+		/**地图跳跃*///-------yt
+		private function onSCAreaJumpMessage(msg : SCAreaJumpMessage) : void 
+		{
+			Lyt.a("====跳跃消息"+msg.costTime+"x:"+msg.jumpPos.x+"y:"+msg.jumpPos.y);
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.playerId.ToGID()) as SceneRole;
+			if (role && role.usable)
+			{
+				var ref : JumpStateReference = role.stateMachine.getReference(JumpStateReference) as JumpStateReference;
+				var destPoint:Vector3D=new Vector3D(msg.jumpPos.x,0,msg.jumpPos.y);
+				ref.setParams(1,msg.costTime,destPoint);
+				role.stateMachine.transition(RoleStateType.ACTION_JUMP, ref);
+			}
+		}
+		
+		
 		private function onResPlayerDieMessage(msg:ResPlayerDieMessage):void
 		{
 			if(msg.personId.ToGID()==MainRoleManager.actor.id){
@@ -289,9 +324,7 @@ package com.rpgGame.app.cmdlistener.scene
 			if(!role){
 				return;
 			}
-			var heroData : HeroData = role.data as HeroData; 
-			heroData.cloths=msg.armorResId;
-			AvatarManager.updateAvatar(role);
+			role.updateCloth(msg.armorResId);
 		}
 		
 		private function onResHelmChangeMessage(msg:ResHelmChangeMessage):void
@@ -300,9 +333,7 @@ package com.rpgGame.app.cmdlistener.scene
 			if(!role){
 				return;
 			}
-			var heroData : HeroData = role.data as HeroData; 
-			heroData.hair=msg.helmResId;
-			AvatarManager.updateAvatar(role);
+			role.updateHair(msg.helmResId);
 		}
 		private function onResWeaponChangeMessage(msg:ResWeaponChangeMessage):void
 		{
@@ -310,10 +341,8 @@ package com.rpgGame.app.cmdlistener.scene
 			if(!role){
 				return;
 			}
-			var heroData : HeroData = role.data as HeroData; 
-			heroData.weapon=msg.weaponResId;
-			heroData.deputyWeapon=msg.deputyWeaponResId;
-			AvatarManager.updateAvatar(role);
+			role.updateWeapon(msg.weaponResId);
+			role.updateDeputyWeapon(msg.weaponResId);
 		}
 		
 		/**
@@ -602,6 +631,12 @@ package com.rpgGame.app.cmdlistener.scene
 							addGirlPet(addArr[j].bytesList[k]);
 						}
 						break;
+					case SceneCharType.SCULPTURE:
+						for(k=0;k<len;k++)
+						{
+							addSculpture(addArr[j].bytesList[k]);
+						}
+						break;
 				}
 			}
 		}
@@ -620,7 +655,22 @@ package com.rpgGame.app.cmdlistener.scene
 			
 		}
 		
-		
+		private function addSculpture(buffer:ByteArray):void
+		{
+			var info:TopLeaderInfo=new TopLeaderInfo();
+			info.read(buffer);
+			var sculp:SculptureData = new SculptureData(RoleType.Type_SCULPTURE);
+			sculp.id = info.id.fValue;
+			sculp.modleId = info.modelId;
+			sculp.name = info.playerName;
+			sculp.roleId = info.playerId;
+			sculp.updataTopType(info.topType);
+			var qData : Q_monster = MonsterDataManager.getData(info.modelId);
+			sculp.avatarRes = qData.q_body_res;
+			sculp.x = info.position.x;
+			sculp.y = info.position.y;
+			SceneRoleManager.getInstance().createSculpture(sculp);
+		}
 		
 		private function addGirlPet(buffer:ByteArray):void
 		{
@@ -935,6 +985,10 @@ package com.rpgGame.app.cmdlistener.scene
 					ActivetyDataManager.checkOpenAct();//检测最新活动开启
 				}
 				//				ReliveManager.autoHideRelive();
+			}
+			if (CharAttributeType.SPEED==msg.attributeChange.type) 
+			{
+				RoleStateUtil.updateMoveBySpeedChange(role);
 			}
 		}
 		

@@ -1,17 +1,20 @@
 package com.rpgGame.app.state.role.control
 {
-	import com.game.mainCore.core.timer.GameTimer;
+	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.coreData.type.EffectUrl;
+	import com.rpgGame.coreData.cfg.AnimationDataManager;
+	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
+	import com.rpgGame.coreData.clientConfig.Q_buff;
+	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleStateType;
-	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import flash.utils.getQualifiedClassName;
 
 	public class SpriteUpBuffState extends BuffState
 	{
-		private var timer:GameTimer;
+	
+		public static var EFFECT_ID:int=221;
 		private static var id:int=0;
 		/**
 		 *冲刺buff 
@@ -24,32 +27,31 @@ package com.rpgGame.app.state.role.control
 		}
 		override public function execute():void
 		{
-			//super.execute();
-			if (!timer) 
+			super.execute();
+			if (_ref) 
 			{
-				timer=new GameTimer("SpriteUpBuffState",60);
-				timer.onUpdate=onTimer;
+				
+				var role:SceneRole=_ref.owner as SceneRole;
+				var animatData : Q_SpellAnimation =AnimationDataManager.getData(EFFECT_ID);
+				if (animatData)
+				{
+					var ru:RenderUnit3D=SpellAnimationHelper.addBuffEffect(role, 0, RenderUnitType.BUFF +EFFECT_ID, animatData.role_res, animatData.bind_bone, 0);
+					if (ru) 
+					{
+						ru.rotationY=role.rotationY;
+					}
+				}
 			}
-			timer.start();
 		}
 		
-		private function onTimer():void
-		{
-			// TODO Auto Generated method stub
-			var role:SceneRole=_ref.owner as SceneRole;
-			if (role) 
-			{
-				id++;
-				SpellAnimationHelper.createSceneEffect(EffectUrl.EFFECT_SPRITE,id,SceneCharType.SPRITE_EFFECT+"_"+id,role.x,role.z);
-			}
-		}
+		
 		override public function leave():void
 		{
 			super.leave();
-			if (timer) 
+			var role:SceneRole=_ref.owner as SceneRole;
+			if (role) 
 			{
-				timer.destroy();
-				timer=null;
+				role.avatar.removeRenderUnitsByType(RenderUnitType.BUFF + EFFECT_ID);
 			}
 		}
 		override public function get tribe():String

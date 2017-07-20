@@ -9,13 +9,12 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.appModule.systemset.TouchToState;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.ui.tip.RTNodeID;
-	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	
-	import flash.utils.setTimeout;
-	
 	import away3d.events.Event;
+	
+	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.zuoqi.Zhanqi_Skin;
@@ -61,20 +60,29 @@ package com.rpgGame.appModule.mount
 		{
 			_skin.btn_kaishi.addEventListener(TouchEvent.TOUCH, onTouch);
 			_skin.btn_zidong.addEventListener(TouchEvent.TOUCH, onTouch);
+			
 			EventManager.addEvent(ZhanQiManager.ZhanQiUpLevel,refeashLevel);
-			EventManager.addEvent(ZhanQiManager.ZhanQiChangeExp,refeashExpHandler);
+			EventManager.addEvent(ZhanQiManager.ZhanQiChangeExp,updateExp);
 			EventManager.addEvent(ZhanQiManager.ZhanQiExtraItemNum,refeashPropHandler);
+			
 			EventManager.addEvent(ItemEvent.ITEM_ADD,addItemHandler);
 			EventManager.addEvent(ItemEvent.ITEM_REMOVE,addItemHandler);
 			EventManager.addEvent(ItemEvent.ITEM_CHANG,addItemHandler);
 		}
+		
+		private function updateExp(exp:int,count:int):void
+		{
+			refeashExpHandler();
+			_zhanqiUpExpConent.updateExp(exp,count);
+		}
+		
 		
 		private function removeEvent():void
 		{
 			_skin.btn_kaishi.removeEventListener(TouchEvent.TOUCH, onTouch);
 			_skin.btn_zidong.removeEventListener(TouchEvent.TOUCH, onTouch);
 			EventManager.removeEvent(ZhanQiManager.ZhanQiUpLevel,refeashLevel);
-			EventManager.removeEvent(ZhanQiManager.ZhanQiChangeExp,refeashExpHandler);
+			EventManager.removeEvent(ZhanQiManager.ZhanQiChangeExp,updateExp);
 			EventManager.removeEvent(ZhanQiManager.ZhanQiExtraItemNum,refeashPropHandler);
 			EventManager.removeEvent(ItemEvent.ITEM_ADD,addItemHandler);
 			EventManager.removeEvent(ItemEvent.ITEM_REMOVE,addItemHandler);
@@ -90,6 +98,7 @@ package com.rpgGame.appModule.mount
 			refeashPropHandler();
 			refeashExpHandler();
 			updatedanyaoShow();
+			_zhanqiUpExpConent.updateExp();
 			_zhanqiUpExpConent.isAutoing = false;
 			initEvent();
 		}
@@ -98,6 +107,11 @@ package com.rpgGame.appModule.mount
 		{
 			ItemGetAdvisePanelExt.hidePanel();
 			removeEvent();
+			if(autoReq){
+				autoReq.kill();
+				autoReq=null;
+			}
+			_zhanqiUpExpConent.hide();
 			super.hide();
 		}
 		
@@ -123,13 +137,19 @@ package com.rpgGame.appModule.mount
 					onMouseOut();
 					if(_zhanqiShowData.isSelf)
 					{
+						_zhanqiShowData.isAutoing=true;
 						if(ZhanQiManager.instance().eatItemZhanQi(_zhanqiShowData))
 						{
 							_zhanqiUpExpConent.isAutoing = true;
+							autoReq=TweenLite.delayedCall(0.25,isAutoing);
 						}else{
 							if(!_zhanqiShowData.canUpLevel())
 								showShopPane();
 							_zhanqiUpExpConent.isAutoing = false;
+							if(autoReq){
+								autoReq.kill();
+								autoReq=null;
+							}
 						}
 					}
 					break;
@@ -141,6 +161,10 @@ package com.rpgGame.appModule.mount
 					break;
 				case "btn_tingzhi":
 					_zhanqiUpExpConent.isAutoing = false;
+					if(autoReq){
+						autoReq.kill();
+						autoReq=null;
+					}
 					break;
 			}
 		}
@@ -187,7 +211,12 @@ package com.rpgGame.appModule.mount
 		{
 			_zhanqiUpExpConent.isAutoing = false;
 			showUplevel();
-			//			_zhanqiUpExpConent.updataInfo(_zhanqiShowData);
+			refeashExpHandler();
+			_zhanqiUpExpConent.updateExp();
+			if(autoReq){
+				autoReq.kill();
+				autoReq=null;
+			}
 		}
 		
 		private function updatedanyaoShow():void
@@ -205,6 +234,7 @@ package com.rpgGame.appModule.mount
 		}
 		
 		private var _uplevelSuccess:ZhanQiUpLevelSucessPanelExt;
+		private var autoReq:TweenLite;
 		private function showUplevel():void
 		{
 			if(_uplevelSuccess==null)	
@@ -252,9 +282,8 @@ package com.rpgGame.appModule.mount
 			_skin.ui_text.visible=_skin.btn_zizhidan.visible;
 		}
 		
-		private function refeashExpHandler(issever:Boolean=false):void
+		private function refeashExpHandler():void
 		{
-			//			_zhanqiShowData.zhanqidataInfo=ZhanQiManager.instance().zhanqiDataInfo;
 			_zhanqiUpExpConent.updataInfo(_zhanqiShowData);
 			_zhanqiProps.refeashPropValue();
 			_zhanqiContent.refeashMode(_zhanqiShowData.zhanqiLevel);
@@ -264,14 +293,6 @@ package com.rpgGame.appModule.mount
 			}		
 			_skin.ui_text.visible=_skin.btn_zizhidan.visible;
 			setRTNState(RTNodeID.FIGHTFLAG_UP,_zhanqiShowData.isSelf&&_zhanqiShowData.canUpLevel());
-			if(issever)
-			{
-				//				if(_zhanqiShowData.isAutoing)
-				//				{
-				//					_zhanqiUpExpConent.isAutoing =ZhanQiManager.instance().eatItemZhanQi(_zhanqiShowData);
-				//				}
-				setTimeout(isAutoing,30);
-			}
 		}
 		
 		private function isAutoing():void
@@ -279,6 +300,7 @@ package com.rpgGame.appModule.mount
 			if(_zhanqiShowData.isAutoing)
 			{
 				_zhanqiUpExpConent.isAutoing =ZhanQiManager.instance().eatItemZhanQi(_zhanqiShowData);
+				autoReq=TweenLite.delayedCall(0.25,isAutoing);
 			}
 		}
 		

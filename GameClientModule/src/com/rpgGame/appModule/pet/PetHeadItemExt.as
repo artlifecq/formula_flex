@@ -56,5 +56,9 @@ package com.rpgGame.appModule.pet
 				clickMe(this);
 			}
 		}
+		public function get config():Q_girl_pet
+		{
+			return _config;
+		}
 	}
 }

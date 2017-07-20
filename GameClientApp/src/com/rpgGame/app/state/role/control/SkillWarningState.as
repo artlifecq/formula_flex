@@ -1,26 +1,12 @@
 package com.rpgGame.app.state.role.control
 {
-	import com.game.engine3D.state.IState;
-	import com.rpgGame.app.manager.AvatarManager;
-	import com.rpgGame.app.manager.ShortcutsManger;
-	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.action.PlayActionStateReference;
-	import com.rpgGame.coreData.cfg.hunyin.ChangeModelCfgData;
-	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.cfg.SpellEffectDataManager;
-	import com.rpgGame.coreData.cfg.model.AvatarDeputyWeaponResCfgData;
-	import com.rpgGame.coreData.cfg.model.AvatarWeapontResCfgData;
-	import com.rpgGame.coreData.clientConfig.AvatarDeputyWeaponRes;
-	import com.rpgGame.coreData.clientConfig.AvatarWeaponRes;
-	import com.rpgGame.coreData.clientConfig.ChangeModel;
 	import com.rpgGame.coreData.clientConfig.Q_SpellEffect;
 	import com.rpgGame.coreData.info.buff.BuffData;
-	import com.rpgGame.coreData.role.HeroData;
-	import com.rpgGame.coreData.type.RoleActionType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	
-	import flash.geom.Vector3D;
 	import flash.utils.getQualifiedClassName;
 
 	/**
