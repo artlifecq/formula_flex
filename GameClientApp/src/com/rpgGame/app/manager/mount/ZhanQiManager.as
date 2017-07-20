@@ -86,8 +86,7 @@ package com.rpgGame.app.manager.mount
 			if(zhanqiDataInfo.warFlagModelId>0) 
 			{
 				var role:SceneRole=MainRoleManager.actor;
-				(role.data as HeroData).zhanqiLv=zhanqiDataInfo.warFlagModelId;
-				updateZhanQiShow();
+				role.updateFlag(zhanqiDataInfo.warFlagModelId);
 			}
 		}
 		
@@ -116,8 +115,7 @@ package com.rpgGame.app.manager.mount
 				zhanqiDataInfo.warFlagModelId+=1;
 				EventManager.dispatchEvent(ZhanQiUpLevel);
 				var role:SceneRole=MainRoleManager.actor;
-				(role.data as HeroData).zhanqiLv=zhanqiDataInfo.warFlagModelId;
-				updateZhanQiShow();
+				role.updateFlag(zhanqiDataInfo.warFlagModelId);
 			}else{
 				EventManager.dispatchEvent(ZhanQiChangeExp,msg.exp,msg.count);
 			}
@@ -131,9 +129,7 @@ package com.rpgGame.app.manager.mount
 			var role:SceneRole=SceneManager.getSceneObjByID(msg.playerId.ToGID())as SceneRole;
 			if(role)
 			{
-				(role.data as HeroData).zhanqiLv=msg.warFlagModelid;
-				//				AvatarManager.callEquipmentChange(role);
-				AvatarManager.updateAvatar(role,false);
+				role.updateFlag(msg.warFlagModelid);
 			}
 		}
 		
@@ -202,12 +198,6 @@ package com.rpgGame.app.manager.mount
 			return true;
 		}
 		
-		public function updateZhanQiShow():void
-		{	
-			var role:SceneRole=MainRoleManager.actor;
-			//			AvatarManager.callEquipmentChange(role);
-			AvatarManager.updateAvatar(role,false);
-		}
 		private var _showdata:ZhanQiShowData;
 		public function canZhanqiLevelUp():Boolean
 		{

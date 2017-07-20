@@ -1,11 +1,9 @@
 package com.rpgGame.app.cmdlistener.mount
 {
-	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.role.HeroData;
-	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.netData.horse.message.SCExtraItemNumMessage;
 	import com.rpgGame.netData.horse.message.SCHorseAllInfoToClientMessage;
 	import com.rpgGame.netData.horse.message.SCHorseIllusionToClientMessage;
@@ -46,11 +44,7 @@ package com.rpgGame.app.cmdlistener.mount
 			if (null == role || role.data ==null) {
 				return;
 			}
-			var heroData : HeroData = role.data as HeroData; 
-			heroData.mount = msg.horseModelid;
-			
-//			HorseManager.instance().setRoleRideState(role,Boolean(msg.horseModelid));
-			AvatarManager.callEquipmentChange(role);
+			role.updateMount(msg.horseModelid);
 		}
 		
 		/**
