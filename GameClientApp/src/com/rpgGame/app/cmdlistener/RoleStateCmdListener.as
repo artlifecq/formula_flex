@@ -119,10 +119,8 @@ package com.rpgGame.app.cmdlistener
 						return;
 					var jumpData : SceneJumpPointData = jump.data as SceneJumpPointData;
 					Lyt.a("触发跳跃点");
-					
-					
 					if(MainRoleManager.actor.stateMachine.isRunning||MainRoleManager.actor.stateMachine.isIdle)
-					{Lyt.a("跳跃动作");
+					{
 						SceneSender.jumppointTrigger(jumpData.id);
 						/*var role : SceneRole = MainRoleManager.actor;
 						if (role && role.usable)

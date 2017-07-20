@@ -220,13 +220,11 @@ package com.rpgGame.app.state.role.action
 					_totalFrameTween.kill();
 					_totalFrameTween = null;
 				}
-				if(_jumpTime>0)
+				if(_jumpTime>0)//定时间和目的点
 				{
-					onStartJumpRise(_jumpTime);
 					_totalFrameTween = TweenLite.delayedCall(_jumpTime * 0.001, onPlayJumpCmp);
 					_breakFrameTween = TweenLite.delayedCall(_jumpTime * 0.001, onBreakFrameCmp);
-					
-					
+					onStartJumpRise(_jumpTime);
 				}
 				else
 				{
@@ -265,7 +263,7 @@ package com.rpgGame.app.state.role.action
 							else
 								totalTime = totalFrameTm - JUMP_START_TIME;
 							
-							if (/*JUMP_START_TIME > 0*/false)
+							if (JUMP_START_TIME > 0)
 							{
 								_startRiseTween = TweenLite.delayedCall(JUMP_START_TIME * 0.001, onStartJumpRise, [totalTime / speedRatio]);
 							}
@@ -344,7 +342,8 @@ package com.rpgGame.app.state.role.action
 		{
 			if ((_machine as RoleStateMachine).isJumpRising)
 			{
-				return false;
+				if(!force)
+					return false;
 			}
 			else if ((_machine as RoleStateMachine).isBlinkMoving)
 			{

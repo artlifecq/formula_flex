@@ -286,7 +286,7 @@ package com.rpgGame.app.cmdlistener.scene
 				var ref : JumpStateReference = role.stateMachine.getReference(JumpStateReference) as JumpStateReference;
 				var destPoint:Vector3D=new Vector3D(msg.jumpPos.x,0,msg.jumpPos.y);
 				ref.setParams(1,msg.costTime,destPoint);
-				role.stateMachine.transition(RoleStateType.ACTION_JUMP, ref);
+				role.stateMachine.transition(RoleStateType.ACTION_JUMP, ref,true);
 			}
 		}
 		
