@@ -206,6 +206,8 @@ package com.rpgGame.app.utils
 			}
 			if (_role.type != SceneCharType.PLAYER)
 				return _role.name;
+			if(_role.type == SceneCharType.SCULPTURE)
+				return _role.name;
 			
 			var heroData : HeroData = _role.data as HeroData;
 			if (heroData == null)

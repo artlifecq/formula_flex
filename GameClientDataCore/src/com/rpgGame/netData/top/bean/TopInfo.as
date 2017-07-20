@@ -1,4 +1,5 @@
 package com.rpgGame.netData.top.bean{
+	import com.rpgGame.netData.player.bean.PlayerBriefInfo;
 	
 	import org.game.netCore.data.long;
 	
@@ -24,14 +25,11 @@ package com.rpgGame.netData.top.bean{
 		//vip等级
 		private var _vipId: int;
 		
-		//武器造型ID_衣服造型ID_性别 注:武器低15位，衣服依次15位，性别2位 0女 1男
-		private var _weapon_clothes_sex: int;
+		//玩家职业
+		private var _job: int;
 		
 		//排名
 		private var _rank: int;
-		
-		//昨天排名
-		private var _oldrank: int;
 		
 		//排行类型 1等级 2坐骑 3 战斗力 ....
 		private var _toptype: int;
@@ -39,8 +37,8 @@ package com.rpgGame.netData.top.bean{
 		//排行参数(等级榜对应等级 战力对应战斗力)
 		private var _param: int;
 		
-		//崇拜值
-		private var _value: int;
+		//角色外观
+		private var _playerBriefInfo: com.rpgGame.netData.player.bean.PlayerBriefInfo;
 		
 		/**
 		 * 写入字节缓存
@@ -52,18 +50,16 @@ package com.rpgGame.netData.top.bean{
 			writeString(_playername);
 			//vip等级
 			writeShort(_vipId);
-			//武器造型ID_衣服造型ID_性别 注:武器低15位，衣服依次15位，性别2位 0女 1男
-			writeInt(_weapon_clothes_sex);
+			//玩家职业
+			writeInt(_job);
 			//排名
 			writeInt(_rank);
-			//昨天排名
-			writeInt(_oldrank);
 			//排行类型 1等级 2坐骑 3 战斗力 ....
 			writeInt(_toptype);
 			//排行参数(等级榜对应等级 战力对应战斗力)
 			writeInt(_param);
-			//崇拜值
-			writeInt(_value);
+			//角色外观
+			writeBean(_playerBriefInfo);
 			return true;
 		}
 		
@@ -77,18 +73,16 @@ package com.rpgGame.netData.top.bean{
 			_playername = readString();
 			//vip等级
 			_vipId = readShort();
-			//武器造型ID_衣服造型ID_性别 注:武器低15位，衣服依次15位，性别2位 0女 1男
-			_weapon_clothes_sex = readInt();
+			//玩家职业
+			_job = readInt();
 			//排名
 			_rank = readInt();
-			//昨天排名
-			_oldrank = readInt();
 			//排行类型 1等级 2坐骑 3 战斗力 ....
 			_toptype = readInt();
 			//排行参数(等级榜对应等级 战力对应战斗力)
 			_param = readInt();
-			//崇拜值
-			_value = readInt();
+			//角色外观
+			_playerBriefInfo = readBean(com.rpgGame.netData.player.bean.PlayerBriefInfo) as com.rpgGame.netData.player.bean.PlayerBriefInfo;
 			return true;
 		}
 		
@@ -138,18 +132,18 @@ package com.rpgGame.netData.top.bean{
 		}
 		
 		/**
-		 * get 武器造型ID_衣服造型ID_性别 注:武器低15位，衣服依次15位，性别2位 0女 1男
+		 * get 玩家职业
 		 * @return 
 		 */
-		public function get weapon_clothes_sex(): int{
-			return _weapon_clothes_sex;
+		public function get job(): int{
+			return _job;
 		}
 		
 		/**
-		 * set 武器造型ID_衣服造型ID_性别 注:武器低15位，衣服依次15位，性别2位 0女 1男
+		 * set 玩家职业
 		 */
-		public function set weapon_clothes_sex(value: int): void{
-			this._weapon_clothes_sex = value;
+		public function set job(value: int): void{
+			this._job = value;
 		}
 		
 		/**
@@ -165,21 +159,6 @@ package com.rpgGame.netData.top.bean{
 		 */
 		public function set rank(value: int): void{
 			this._rank = value;
-		}
-		
-		/**
-		 * get 昨天排名
-		 * @return 
-		 */
-		public function get oldrank(): int{
-			return _oldrank;
-		}
-		
-		/**
-		 * set 昨天排名
-		 */
-		public function set oldrank(value: int): void{
-			this._oldrank = value;
 		}
 		
 		/**
@@ -213,18 +192,18 @@ package com.rpgGame.netData.top.bean{
 		}
 		
 		/**
-		 * get 崇拜值
+		 * get 角色外观
 		 * @return 
 		 */
-		public function get value(): int{
-			return _value;
+		public function get playerBriefInfo(): com.rpgGame.netData.player.bean.PlayerBriefInfo{
+			return _playerBriefInfo;
 		}
 		
 		/**
-		 * set 崇拜值
+		 * set 角色外观
 		 */
-		public function set value(value: int): void{
-			this._value = value;
+		public function set playerBriefInfo(value: com.rpgGame.netData.player.bean.PlayerBriefInfo): void{
+			this._playerBriefInfo = value;
 		}
 		
 	}

@@ -70,6 +70,8 @@ package com.rpgGame.netData.map.bean{
 		//帮会职位
 		private var _guildMemberType: int;
 		
+		//排行榜称号
+		private var _topLeaderTypes: Vector.<int> = new Vector.<int>();
 		//PK类型(0-和平 1-组队 2-帮会 3-全体 4-阵营 5-善恶)
 		private var _pkType: int;
 		
@@ -125,6 +127,11 @@ package com.rpgGame.netData.map.bean{
 			writeString(_guildName);
 			//帮会职位
 			writeInt(_guildMemberType);
+			//排行榜称号
+			writeShort(_topLeaderTypes.length);
+			for (var i: int = 0; i < _topLeaderTypes.length; i++) {
+				writeInt(_topLeaderTypes[i]);
+			}
 			//PK类型(0-和平 1-组队 2-帮会 3-全体 4-阵营 5-善恶)
 			writeByte(_pkType);
 			//阵营关系，为0则检查默认敌对关系，大于0则和相同阵营友好，不同阵营敌对
@@ -192,6 +199,11 @@ package com.rpgGame.netData.map.bean{
 			_guildName = readString();
 			//帮会职位
 			_guildMemberType = readInt();
+			//排行榜称号
+			var topLeaderTypes_length : int = readShort();
+			for (var i: int = 0; i < topLeaderTypes_length; i++) {
+				_topLeaderTypes[i] = readInt();
+			}
 			//PK类型(0-和平 1-组队 2-帮会 3-全体 4-阵营 5-善恶)
 			_pkType = readByte();
 			//阵营关系，为0则检查默认敌对关系，大于0则和相同阵营友好，不同阵营敌对
@@ -474,6 +486,21 @@ package com.rpgGame.netData.map.bean{
 		 */
 		public function set guildMemberType(value: int): void{
 			this._guildMemberType = value;
+		}
+		
+		/**
+		 * get 排行榜称号
+		 * @return 
+		 */
+		public function get topLeaderTypes(): Vector.<int>{
+			return _topLeaderTypes;
+		}
+		
+		/**
+		 * set 排行榜称号
+		 */
+		public function set topLeaderTypes(value: Vector.<int>): void{
+			this._topLeaderTypes = value;
 		}
 		
 		/**

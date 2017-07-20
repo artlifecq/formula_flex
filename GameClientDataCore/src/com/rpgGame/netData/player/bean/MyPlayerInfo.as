@@ -1,3 +1,4 @@
+
 package com.rpgGame.netData.player.bean{
 	import com.rpgGame.netData.player.bean.ResourceDataItem;
 	import com.rpgGame.netData.player.bean.AttributeItem;
@@ -18,7 +19,7 @@ package com.rpgGame.netData.player.bean{
 	 * 本人玩家详细信息
 	 */
 	public class MyPlayerInfo extends Bean {
-	
+		
 		//角色Id
 		private var _personId: long;
 		
@@ -58,6 +59,8 @@ package com.rpgGame.netData.player.bean{
 		//坐骑
 		private var _mount: int;
 		
+		//排行榜称号
+		private var _topLeaderTypes: Vector.<int> = new Vector.<int>();
 		//PK类型(0-和平 1-组队 2-帮会 3-全体 4-阵营 5-善恶)
 		private var _pkType: int;
 		
@@ -121,6 +124,11 @@ package com.rpgGame.netData.player.bean{
 			writeInt(_second_weapon);
 			//坐骑
 			writeInt(_mount);
+			//排行榜称号
+			writeShort(_topLeaderTypes.length);
+			for (var i: int = 0; i < _topLeaderTypes.length; i++) {
+				writeInt(_topLeaderTypes[i]);
+			}
 			//PK类型(0-和平 1-组队 2-帮会 3-全体 4-阵营 5-善恶)
 			writeByte(_pkType);
 			//阵营关系，为0则检查默认敌对关系，大于0则和相同阵营友好，不同阵营敌对
@@ -187,6 +195,11 @@ package com.rpgGame.netData.player.bean{
 			_second_weapon = readInt();
 			//坐骑
 			_mount = readInt();
+			//排行榜称号
+			var topLeaderTypes_length : int = readShort();
+			for (var i: int = 0; i < topLeaderTypes_length; i++) {
+				_topLeaderTypes[i] = readInt();
+			}
 			//PK类型(0-和平 1-组队 2-帮会 3-全体 4-阵营 5-善恶)
 			_pkType = readByte();
 			//阵营关系，为0则检查默认敌对关系，大于0则和相同阵营友好，不同阵营敌对
@@ -416,6 +429,21 @@ package com.rpgGame.netData.player.bean{
 		 */
 		public function set mount(value: int): void{
 			this._mount = value;
+		}
+		
+		/**
+		 * get 排行榜称号
+		 * @return 
+		 */
+		public function get topLeaderTypes(): Vector.<int>{
+			return _topLeaderTypes;
+		}
+		
+		/**
+		 * set 排行榜称号
+		 */
+		public function set topLeaderTypes(value: Vector.<int>): void{
+			this._topLeaderTypes = value;
 		}
 		
 		/**

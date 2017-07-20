@@ -2,13 +2,13 @@ package org.mokylin.skin.common
 {
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
+	import feathers.controls.text.TextFieldTextEditor;
 	import feathers.controls.StateSkin;
-	import feathers.controls.TextInput;
+	import feathers.controls.UIAsset;
 	import org.mokylin.skin.component.button.ButtonSkin_you;
 	import org.mokylin.skin.component.button.ButtonSkin_youmax;
 	import org.mokylin.skin.component.button.ButtonSkin_zuo;
 	import org.mokylin.skin.component.button.ButtonSkin_zuomax;
-	import org.mokylin.skin.component.text.textInput3_Skin;
 
 	/**
 	 * @private
@@ -20,6 +20,8 @@ package org.mokylin.skin.common
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var bg:feathers.controls.UIAsset;
+
 		public var btnAdd:feathers.controls.Button;
 
 		public var btnDec:feathers.controls.Button;
@@ -28,7 +30,7 @@ package org.mokylin.skin.common
 
 		public var btnMin:feathers.controls.Button;
 
-		public var textInput:feathers.controls.TextInput;
+		public var textDisplay:feathers.controls.text.TextFieldTextEditor;
 
 
 		//==========================================================================
@@ -41,23 +43,37 @@ package org.mokylin.skin.common
 			this.currentState = "normal";
 			this.height = 25;
 			this.width = 146;
-			this.elementsContent = [textInput_i(),btnDec_i(),btnMin_i(),btnAdd_i(),btnMax_i()];
+			this.elementsContent = [textDisplay_i(),btnDec_i(),btnMin_i(),btnAdd_i(),btnMax_i()];
+			bg_i();
+			
 			
 			states = {
 			};
-			skinNames={};
+			skinNames={"disabled":"ui/component/text/flip_bg.png", "enabled":"ui/component/text/flip_bg.png", "focused":"ui/component/text/flip_bg.png"};
 		}
 
 
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
+		private function bg_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg = temp;
+			temp.name = "bg";
+			temp.left = 46;
+			temp.right = 46;
+			temp.styleName = "ui/component/text/flip_bg.png";
+			temp.y = 2;
+			return temp;
+		}
+
 		private function btnAdd_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnAdd = temp;
 			temp.name = "btnAdd";
-			temp.right = 21;
+			temp.right = 23;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_you;
 			temp.y = 2;
 			return temp;
@@ -68,7 +84,7 @@ package org.mokylin.skin.common
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnDec = temp;
 			temp.name = "btnDec";
-			temp.left = 21;
+			temp.left = 23;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_zuo;
 			temp.y = 2;
 			return temp;
@@ -96,17 +112,19 @@ package org.mokylin.skin.common
 			return temp;
 		}
 
-		private function textInput_i():feathers.controls.TextInput
+		private function textDisplay_i():feathers.controls.text.TextFieldTextEditor
 		{
-			var temp:feathers.controls.TextInput = new feathers.controls.TextInput();
-			textInput = temp;
-			temp.name = "textInput";
-			temp.left = 16;
-			temp.right = 16;
-			temp.styleClass = org.mokylin.skin.component.text.textInput3_Skin;
+			var temp:feathers.controls.text.TextFieldTextEditor = new feathers.controls.text.TextFieldTextEditor();
+			textDisplay = temp;
+			temp.name = "textDisplay";
+			temp.height = 18;
+			temp.left = 46;
+			temp.right = 46;
+			temp.text = "100";
+			temp.textAlign = "center";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.y = 0;
+			temp.y = 4;
 			return temp;
 		}
 

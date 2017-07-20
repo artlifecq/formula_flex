@@ -4,7 +4,7 @@ package com.rpgGame.app.ui.main.shortcut
 	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
-	import com.rpgGame.app.manager.RollManager;
+	import com.rpgGame.app.manager.DodgeManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	
 	import feathers.controls.Label;
@@ -18,7 +18,7 @@ package com.rpgGame.app.ui.main.shortcut
 	import starling.animation.IAnimatable;
 	import starling.core.Starling;
 	
-	public class RollProgress implements IAnimatable
+	public class DodgeProgress implements IAnimatable
 	{
 		private var _skin:shortcut_Skin;
 		private var _mask:DrawBow;
@@ -27,7 +27,7 @@ package com.rpgGame.app.ui.main.shortcut
 		private var _fanguncontent:Inter3DContainer;
 		private var _effect3d:InterObject3D;
 		private var renderUint:RenderUnit3D;
-		public function RollProgress(skin:shortcut_Skin):void
+		public function DodgeProgress(skin:shortcut_Skin):void
 		{
 			_skin = skin
 			init();
@@ -35,12 +35,12 @@ package com.rpgGame.app.ui.main.shortcut
 		}
 		private function initEvent():void
 		{
-			EventManager.addEvent(RollManager.ROLL_STARTROLL,rollStartHandler);
+			EventManager.addEvent(DodgeManager.ROLL_STARTROLL,rollStartHandler);
 		}
 		
 		private function rollStartHandler():void
 		{
-			var count:int = RollManager.getinstance().curCount;
+			var count:int = DodgeManager.getinstance().curCount;
 			addFrameHandler();
 		}
 		
@@ -86,7 +86,7 @@ package com.rpgGame.app.ui.main.shortcut
 		{
 			if(_fanguncontent==null)
 				return ;
-			var count:int = RollManager.getinstance().curCount;
+			var count:int = DodgeManager.getinstance().curCount;
 			if(count<3)
 				return ;
 			if(_effect3d!=null)
@@ -114,7 +114,7 @@ package com.rpgGame.app.ui.main.shortcut
 		{
 			if(_fanguncontent==null)
 				return ;
-			var count:int = RollManager.getinstance().curCount;
+			var count:int = DodgeManager.getinstance().curCount;
 			if(count<3)
 				return ;
 			if(_effect3d!=null)
@@ -153,34 +153,34 @@ package com.rpgGame.app.ui.main.shortcut
 		}
 		public function advanceTime(time:Number):void
 		{
-			RollManager.getinstance().refeash();
-			var count:int = RollManager.getinstance().curCount;
-			var state:int = RollManager.getinstance().currentState;
+			DodgeManager.getinstance().refeash();
+			var count:int = DodgeManager.getinstance().curCount;
+			var state:int = DodgeManager.getinstance().currentState;
 			for(var i:int = 0;i<_stateList.length;i++)
 			{
 				_stateList[i].visible = i<count;
-				if(state == RollManager.RoleState_CD)
+				if(state == DodgeManager.RoleState_CD)
 					GrayFilter.gray( _stateList[i].getChildAt(0));
 				else
 					_stateList[i].getChildAt(0).filter = null;
 			}
 			
-			var passTime:Number = RollManager.getinstance().passTime;
+			var passTime:Number = DodgeManager.getinstance().passTime;
 			var endAngle:Number;
-			if(state==RollManager.RoleState_User)
+			if(state==DodgeManager.RoleState_User)
 			{
 				_skin.fangun_tishi.visible =false;
 				_lbl_times.visible = true;
-				passTime = RollManager.getinstance().cdTimes-passTime;
+				passTime = DodgeManager.getinstance().cdTimes-passTime;
 				_lbl_times.text = formatNumber(passTime/1000)+"s";
-				endAngle = Math.PI+Math.PI*(passTime)/RollManager.getinstance().cdTimes
-			}else if(state==RollManager.RoleState_CD)
+				endAngle = Math.PI+Math.PI*(passTime)/DodgeManager.getinstance().cdTimes
+			}else if(state==DodgeManager.RoleState_CD)
 			{
 				_skin.fangun_tishi.visible =false;
 				_lbl_times.visible = true;
-				passTime -= RollManager.USE_TIMES;
+				passTime -= DodgeManager.USE_TIMES;
 				_lbl_times.text = formatNumber(passTime/1000)+"s";
-				endAngle = Math.PI+Math.PI*(passTime/RollManager.USE_TIMES);
+				endAngle = Math.PI+Math.PI*(passTime/DodgeManager.USE_TIMES);
 			}else{
 				this.removeFrameHandler();
 				_lbl_times.visible = false;
