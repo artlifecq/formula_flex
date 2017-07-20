@@ -18,6 +18,7 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.chat.ChatManager;
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.fightsoul.FightSoulManager;
 	import com.rpgGame.app.manager.hint.FloatingText;
@@ -227,7 +228,11 @@ package   com.rpgGame.app.manager.debug
 					AppManager.showAppNoHide(AppConstant.ACTIVETY_OPEN,info);
 				}
 			});
-			
+			commandList.put( ".send", function (...arg):void
+			{
+				var id:int = arg[0];
+				NoticeManager.showNotifyById(id);
+			});
 			commandList.put( ".acts", function (...arg):void
 			{
 				var id:int = arg[0];
