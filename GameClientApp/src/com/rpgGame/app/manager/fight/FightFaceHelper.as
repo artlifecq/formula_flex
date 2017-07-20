@@ -299,8 +299,15 @@ package com.rpgGame.app.manager.fight
 							break;
 						case EnumHurtType.SPELL_HURT_TYPE_CRIT: //暴击
 							typeRes = ROOT+USESFUL_EFFECT+"bao_ji_piao_zi.png";
-							tweenFun=SpellResultTweenUtil.TweenCirt;
 							numberType = NUMBER_NPC_CRIT;
+							//治疗
+							if (hurtAmount>0) 
+							{
+								typeRes = ROOT+USESFUL_EFFECT+"zhiliao_baoji.png";
+								numberType = NUMBER_PC_HPREC;
+							}
+							tweenFun=SpellResultTweenUtil.TweenCirt;
+							
 							extAtf=LostSkillManager.instance().hasBossHurtAddAtf(hurter.data.serverID,atkor.data.serverID,hurtAmount);
 							if (!extAtf) 
 							{

@@ -576,7 +576,12 @@ package com.rpgGame.app.ui.main.shortcut
 		{
 			showAutoImg(false);
 			showAutoEff(false);
-			
+			if(readyEffect!=null)
+			{
+				readyEffect.stopEffect();
+				cdEffectIsPlay=false;
+				_now=0;
+			}
 			super.clear();
 		}
 		override public function setGridEmpty() : void

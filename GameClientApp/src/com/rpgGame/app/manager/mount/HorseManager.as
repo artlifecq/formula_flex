@@ -279,6 +279,7 @@ package com.rpgGame.app.manager.mount
 		 */
 		public function onRequestSetUpMountRide(isRide:Boolean):void
 		{
+			return;
 			//坐骑未开放
 			if(_horsedataInfo == null)
 				return ;

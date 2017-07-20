@@ -342,6 +342,7 @@ package com.rpgGame.app.cmdlistener.scene
             var info : ReleaseSpellInfo = new ReleaseSpellInfo();
             info.spellData = skillInfo;
             info.atkor = role;
+			info.atkorPos=new Point(role.x,role.z);
             info.flyTargetPosList = new Vector.<Position>();
             info.flyTargets = new Vector.<SceneRole>();
             for (var i : int = 0, len : int = msg.targets.length; i < len; ++i) {

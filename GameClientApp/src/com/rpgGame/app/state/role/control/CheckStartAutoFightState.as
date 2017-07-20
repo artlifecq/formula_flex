@@ -53,6 +53,11 @@ package com.rpgGame.app.state.role.control
 			if ((_machine.owner as SceneRole).isMainChar)
 			{
 				var role:SceneRole=_machine.owner as SceneRole;
+				var scene:SceneData=MapDataManager.currentScene;
+				if (!scene) 
+				{
+					return false;
+				}
 				var map:Q_map=MapDataManager.currentScene.getData();
 				if (map&&EnumMapType.MAP_TYPE_TOWERS==map.q_map_type) 
 				{

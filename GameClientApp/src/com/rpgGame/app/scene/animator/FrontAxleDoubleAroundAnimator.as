@@ -85,9 +85,9 @@ package com.rpgGame.app.scene.animator
 			}
 		}
 		
-		override protected function onUpdateAnimation() : void
+		override protected function onUpdateAnimation(...arg) : void
 		{
-			super.onUpdateAnimation();
+			super.onUpdateAnimation(arg);
 			
 			var angle : Number = _collidePerTime * _totalAngle;
 			_currAroundRadius += _currAroundFlip * _diffTime * _currAroundFlipSpeed;

@@ -28,7 +28,7 @@ package com.rpgGame.app.state.role.control
 			_enterTime=getTimer();
 			if (_machine && !_machine.isInPool)
 			{
-//				super.execute();
+				super.execute();
 //				if (_stateReference)
 //				{
 //					if (_stateReference is HiddingStateReference)

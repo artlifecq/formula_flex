@@ -786,7 +786,7 @@ package com.rpgGame.app.ui.main.chat {
 			}
 			if (ClientCommend.doCommand(_inputText.text)) 
 			{
-				_inputText.text="";
+				//_inputText.text="";
 				return;
 			}
 			var sendMsg:String = _inputText.text;
