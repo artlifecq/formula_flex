@@ -69,34 +69,38 @@ package com.rpgGame.appModule.mount
 					_skin.lab_xuyaowupin.color = 0xd02525;
 				}
 				_skin.uplevelgroup.visible = true;
-				const housedata:Q_horse = _mountShowData.housedata;
-				if(_mountShowData.haveChange)
-				{
-					var rewards:Vector.<ClientItemInfo> = _mountShowData.rewardItems;
-					for(var index:int = 0;index<rewards.length;index++)
-					{
-						_itemIconList[index].visible = true;
-						FaceUtil.SetItemGrid(_itemIconList[index], rewards[index], true);
-					}
-					for(;index<_itemIconList.length;index++)
-					{
-						_itemIconList[index].visible = false;
-					}
-					if(_mountShowData.needClearExp())
-					{
-						_skin.lab_zhufuzhi.text = "本阶祝福值不清零";
-						_skin.lab_zhufuzhi.color = 0x5cb006;
-					}else{
-						_skin.lab_zhufuzhi.text = "祝福值每日0点清零";
-						_skin.lab_zhufuzhi.color = 0xe1201c;
-					}
-				}
-				TipTargetManager.show(_skin.expgroup,TargetTipsMaker.makeTips(TipType.BLESS_TIP,_mountShowData));
 			}else{
 				_skin.grp_jinjie.visible = false;
 				_skin.uplevelgroup.visible = false;
 				_skin.maximg.visible = true;
 			}
+		}
+		
+		protected function updataReward():void
+		{
+			const housedata:Q_horse = _mountShowData.housedata;
+			if(_mountShowData.haveChange)
+			{
+				var rewards:Vector.<ClientItemInfo> = _mountShowData.rewardItems;
+				for(var index:int = 0;index<rewards.length;index++)
+				{
+					_itemIconList[index].visible = true;
+					FaceUtil.SetItemGrid(_itemIconList[index], rewards[index], true);
+				}
+				for(;index<_itemIconList.length;index++)
+				{
+					_itemIconList[index].visible = false;
+				}
+				if(_mountShowData.needClearExp())
+				{
+					_skin.lab_zhufuzhi.text = "本阶祝福值不清零";
+					_skin.lab_zhufuzhi.color = 0x5cb006;
+				}else{
+					_skin.lab_zhufuzhi.text = "祝福值每日0点清零";
+					_skin.lab_zhufuzhi.color = 0xe1201c;
+				}
+			}
+			TipTargetManager.show(_skin.expgroup,TargetTipsMaker.makeTips(TipType.BLESS_TIP,_mountShowData));
 		}
 		
 		public function updateExp(exp:int=0,count:int=0):void
@@ -106,6 +110,7 @@ package com.rpgGame.appModule.mount
 				_skin.progressbar.maximum=_mountShowData.housedata.q_blessnum_limit;
 				_skin.lab_progressbar.text =_skin.progressbar.value+"/"+_skin.progressbar.maximum;
 				TimerServer.remove(showExpAnimation);
+				updataReward();
 				return;
 			}
 			var changeExp:int=exp-_skin.progressbar.value;

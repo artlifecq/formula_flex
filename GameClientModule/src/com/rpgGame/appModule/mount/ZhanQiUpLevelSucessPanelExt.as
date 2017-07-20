@@ -20,6 +20,8 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.coreData.type.RoleActionType;
 	import com.rpgGame.coreData.type.item.GridBGType;
 	
+	import feathers.controls.UIAsset;
+	
 	import org.mokylin.skin.app.zuoqi.Zuoqi_JingjieOk_Skin;
 	
 	import starling.display.DisplayObject;
@@ -47,6 +49,13 @@ package com.rpgGame.appModule.mount
 			_itemIcons = new Vector.<IconCDFace>();
 			_chengGongEftContaner=new Inter3DContainer();
 			_skin.uiGuangquan.addChild(_chengGongEftContaner);
+			_skin.uiName.imageScaleMode = UIAsset.IMAGE_SCALE_MODE_NO_SCALE;
+			_skin.uiName.onImageLoaded = imageloadereHander;
+		}
+		
+		private function imageloadereHander(img:UIAsset):void
+		{
+			img.x = 753- img.width/2;
 		}
 		
 		override protected function onShow():void
@@ -83,6 +92,10 @@ package com.rpgGame.appModule.mount
 				icon.x = startx+i*(17+IcoSizeEnum.ICON_48);
 				FaceUtil.SetItemGrid(icon,rewards[i],true);
 			}
+			if(_zhanqidata.percent<0.9)
+				_skin.uiName.styleName = "ui/app/zuoqi/rpbftqjj.png";
+			else
+				_skin.uiName.styleName = "ui/app/zuoqi/jjcg.png";
 			
 			while(_itemIcons.length>_rewardIconLength)
 			{
