@@ -728,20 +728,21 @@ package com.rpgGame.app.manager.role
 			role.headFace.show();
 //			role.headFace.showHead();
 			
-			data.avatarInfo.setBodyResID(data.avatarRes, null);
 			var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(data.avatarRes);
 			if (avatarResConfig)
 			{
-				data.avatarInfo.effectResID = avatarResConfig.idleEffect;
+				role.updateBody(data.avatarRes, avatarResConfig.idleEffect);
+			}else{
+				role.updateBody(data.avatarRes, null);
 			}
 			//执行主换装更新
-			AvatarManager.resetAvatar(role);
+			
 			role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true); //切换到“站立状态”
 			
 			role.setScale(data.sizeScale);
 			role.setGroundXY(data.x, data.y);
 			role.rotationY = data.direction;
-			SceneManager.addSceneObjToScene(role, true, false, false);
+			SceneManager.addSceneObjToScene(role, true, true, true);
 		}
 
 		/**创建战旗特效*/
