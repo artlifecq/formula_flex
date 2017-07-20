@@ -6,7 +6,6 @@ package gameEngine2D {
 	
 	import away3d.pathFinding.DistrictWithPath;
 	import away3d.pathFinding.PointsSet;
-	import away3d.pathFinding.PointsSetType;
 
 	public class PolyUtil {
 		public function PolyUtil() {
@@ -71,8 +70,8 @@ package gameEngine2D {
 				}
 			}
 			allIntersect.sort(function (a : Vector3D, b : Vector3D) : Number {
-				var dx1 : Number = Math.abs(a.x - start.x);
-				var dx2 : Number = Math.abs(b.x - start.x);
+				var dx1 : Number = Math.abs(a.x - end.x);
+				var dx2 : Number = Math.abs(b.x - end.x);
 				return dx1 - dx2;
 			});
 			if (allIntersect.length > 0) {
