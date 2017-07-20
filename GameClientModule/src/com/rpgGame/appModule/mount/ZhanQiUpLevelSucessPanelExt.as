@@ -17,6 +17,7 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.coreData.clientConfig.Q_warflag;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.type.RoleActionType;
 	import com.rpgGame.coreData.type.item.GridBGType;
 	
 	import org.mokylin.skin.app.zuoqi.Zuoqi_JingjieOk_Skin;
@@ -108,8 +109,6 @@ package com.rpgGame.appModule.mount
 				icon = _itemIcons[_rewardIconLength];
 			}else{
 				icon = IconCDFace.create(IcoSizeEnum.ICON_48);
-				icon.width = icon.height = IcoSizeEnum.ICON_48;
-				icon.setBg(GridBGType.GRID_SIZE_48);
 				this._skin.container.addChild(icon);
 				_itemIcons.push(icon);
 			}
@@ -127,11 +126,12 @@ package com.rpgGame.appModule.mount
 			var nextShet:Q_warflag = ZhanQiConfigData.getZhanQiDataById(zhanqiLevel);
 			var currentName:String=nextShet.q_panel_show_id;
 			_curtentInterEff=new InterObject3D();
-			var data : RenderParamData3D = new RenderParamData3D(0, "effect_ui", ClientConfig.getEffect(currentName));
+			var data : RenderParamData3D = new RenderParamData3D(0, "effect_ui", ClientConfig.getZhanqi(currentName));
 			data.forceLoad=true;//ui上的3d特效强制加载
 			var unit : RenderUnit3D = _curtentInterEff.addRenderUnitWith(data, 0);	
 			_curtentInterEff.x=350;
 			_curtentInterEff.y=330;
+			unit.setStatus(RoleActionType.STAND);
 			unit.setScale(2);
 			unit.addUnitAtComposite(unit);
 			this.addChild3D(_curtentInterEff);
