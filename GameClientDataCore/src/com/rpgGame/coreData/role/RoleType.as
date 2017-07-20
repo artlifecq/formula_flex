@@ -74,6 +74,11 @@
 		
 		public static const TYPE_FIGHT_SOUL:int = rEnum.next;
 		public static const GIRL_PET:int = rEnum.next;
+		/**
+		 * 跳跃点 18
+		 */		
+		public static const TYPE_JUMP:int = rEnum.next;
+		
 		public function RoleType()
 		{
 		}

@@ -10,6 +10,7 @@ package com.rpgGame.app.sender
 	import com.rpgGame.coreData.type.CostItemType;
 	import com.rpgGame.netData.backpack.message.ReqTakeUpMessage;
 	import com.rpgGame.netData.login.message.ReqLoadFinishMessage;
+	import com.rpgGame.netData.map.message.CSAreaJumpMessage;
 	import com.rpgGame.netData.map.message.ReqChangeMapByMoveMessage;
 	import com.rpgGame.netData.map.message.ReqChangeMapCommonMessage;
 	import com.rpgGame.netData.map.message.ReqLoadFinishForChangeMapMessage;
@@ -51,6 +52,7 @@ package com.rpgGame.app.sender
 				(msg as ReqLoadFinishForChangeMapMessage).width = SceneManager.scene.sceneConfig.width;
 				(msg as ReqLoadFinishForChangeMapMessage).height = SceneManager.scene.sceneConfig.height;
 			}
+			trace("加载完成向服务器请求");
 			SocketConnection.send(msg);
 		}
 		
@@ -110,7 +112,16 @@ package com.rpgGame.app.sender
 			msg.tranId = transId;
 			SocketConnection.send(msg);
 		}
-		
+		/**向服务器发送触发跳跃点*/
+		public static function jumppointTrigger(jumpId : uint):void
+		{
+			if (ReqLockUtil.isReqLocked(101220))
+				return;
+			ReqLockUtil.lockReq(101220, 3000);
+			var msg:CSAreaJumpMessage = new CSAreaJumpMessage();
+			msg.jumpId = jumpId;
+			SocketConnection.send(msg);
+		}
 		/**
 		 * 地图传送
 		 * varint32 场景ID

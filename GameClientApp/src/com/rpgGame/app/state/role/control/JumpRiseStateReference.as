@@ -1,6 +1,8 @@
 package com.rpgGame.app.state.role.control
 {
 	import com.game.engine3D.state.role.RoleStateReference;
+	
+	import flash.geom.Vector3D;
 
 	/**
 	 *
@@ -15,16 +17,19 @@ package com.rpgGame.app.state.role.control
 		private var _totalTime : int;
 			
 		private var _isSecondJump : Boolean;
-
+		
+		private var _destPoint:Vector3D;
+		
 		public function JumpRiseStateReference()
 		{
 			super();
 		}
 
-		public function setParams(totalTime : int, isSecondJump : Boolean) : void
+		public function setParams(totalTime : int, isSecondJump : Boolean,destPoint:Vector3D=null) : void
 		{
 			_totalTime = totalTime;
 			_isSecondJump = isSecondJump;
+			_destPoint=destPoint;
 		}
 
 		/**
@@ -49,5 +54,16 @@ package com.rpgGame.app.state.role.control
 			_isSecondJump = false;
 			super.dispose();
 		}
+
+		public function get destPoint():Vector3D
+		{
+			return _destPoint;
+		}
+
+		public function set destPoint(value:Vector3D):void
+		{
+			_destPoint = value;
+		}
+
 	}
 }
