@@ -14,6 +14,8 @@ package com.rpgGame.coreData.clientConfig
 	{
 		 /**  ID */
 		public var q_id:int;
+		 /**  对应争霸战（1卫城争霸战、王城争霸战、皇城争霸战） */
+		public var q_battle_type:int;
 		 /**  数值段(开始) */
 		public var q_integral_start:int;
 		 /**  数值段(结束) */
