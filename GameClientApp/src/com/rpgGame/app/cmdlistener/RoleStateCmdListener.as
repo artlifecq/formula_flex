@@ -134,15 +134,6 @@ package com.rpgGame.app.cmdlistener
 							TweenLite.killDelayedCallsTo(sendJump);
 							TweenLite.delayedCall(0.2, sendJump,[jumpData.id]);
 						}
-						
-						/*var role : SceneRole = MainRoleManager.actor;
-						if (role && role.usable)
-						{
-							var ref : JumpStateReference = role.stateMachine.getReference(JumpStateReference) as JumpStateReference;
-							var destPoint:Vector3D=new Vector3D(jumpData.destPoint[0].x,0,jumpData.destPoint[0].y);
-							ref.setParams(0,destPoint);
-							role.stateMachine.transition(RoleStateType.ACTION_JUMP, ref);
-						}*/
 					}
 					
 					
