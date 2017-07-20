@@ -4,6 +4,7 @@ package com.rpgGame.appModule.mount
 	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
+	import com.rpgGame.app.display3D.UIAvatar3D;
 	import com.rpgGame.app.manager.mount.ZhanQiManager;
 	import com.rpgGame.app.manager.mount.ZhanQiShowData;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -17,10 +18,8 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.coreData.clientConfig.Q_warflag;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RoleActionType;
-	import com.rpgGame.coreData.type.item.GridBGType;
-	
-	import feathers.controls.UIAsset;
 	
 	import org.mokylin.skin.app.zuoqi.Zuoqi_JingjieOk_Skin;
 	
@@ -30,6 +29,7 @@ package com.rpgGame.appModule.mount
 	{
 		private var _skin:Zuoqi_JingjieOk_Skin;
 		private var _curtentInterEff:InterObject3D;
+		private var _avateUI:UIAvatar3D;
 		private var _zhanqidata:ZhanQiShowData;
 		private var _itemIcons:Vector.<IconCDFace>;
 		private var _chengGongEftContaner:Inter3DContainer;	
@@ -49,13 +49,7 @@ package com.rpgGame.appModule.mount
 			_itemIcons = new Vector.<IconCDFace>();
 			_chengGongEftContaner=new Inter3DContainer();
 			_skin.uiGuangquan.addChild(_chengGongEftContaner);
-			_skin.uiName.imageScaleMode = UIAsset.IMAGE_SCALE_MODE_NO_SCALE;
-			_skin.uiName.onImageLoaded = imageloadereHander;
-		}
-		
-		private function imageloadereHander(img:UIAsset):void
-		{
-			img.x = 753- img.width/2;
+			_avateUI=new UIAvatar3D(_skin.roleGrp);
 		}
 		
 		override protected function onShow():void
@@ -92,10 +86,6 @@ package com.rpgGame.appModule.mount
 				icon.x = startx+i*(17+IcoSizeEnum.ICON_48);
 				FaceUtil.SetItemGrid(icon,rewards[i],true);
 			}
-			if(_zhanqidata.percent<0.9)
-				_skin.uiName.styleName = "ui/app/zuoqi/rpbftqjj.png";
-			else
-				_skin.uiName.styleName = "ui/app/zuoqi/jjcg.png";
 			
 			while(_itemIcons.length>_rewardIconLength)
 			{
@@ -138,16 +128,11 @@ package com.rpgGame.appModule.mount
 			
 			var nextShet:Q_warflag = ZhanQiConfigData.getZhanQiDataById(zhanqiLevel);
 			var currentName:String=nextShet.q_panel_show_id;
-			_curtentInterEff=new InterObject3D();
-			var data : RenderParamData3D = new RenderParamData3D(0, "effect_ui", ClientConfig.getZhanqi(currentName));
-			data.forceLoad=true;//ui上的3d特效强制加载
-			var unit : RenderUnit3D = _curtentInterEff.addRenderUnitWith(data, 0);	
-			_curtentInterEff.x=350;
-			_curtentInterEff.y=330;
-			unit.setStatus(RoleActionType.STAND);
-			unit.setScale(2);
-			unit.addUnitAtComposite(unit);
-			this.addChild3D(_curtentInterEff);
+			
+			var roleData:RoleData=new RoleData(0);
+			roleData.avatarInfo.setBodyResID("pc/flag/"+currentName,null);
+			_avateUI.setRoleData(roleData);
+			_avateUI.setScale(2);
 		}
 		
 		private function get zhanqiLevel():int
