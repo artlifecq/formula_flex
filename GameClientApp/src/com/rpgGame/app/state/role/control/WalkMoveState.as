@@ -147,6 +147,7 @@ package com.rpgGame.app.state.role.control
 			if (_machine && !_machine.isInPool)
 			{
 				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {x: true, z: true});
+				_machine.removeState(RoleStateType.CONTROL_BUFF_SPRITEUP);
 				transition(RoleStateType.CONTROL_STOP_WALK_MOVE);
 				if ((_machine as RoleStateMachine).isPrewarWaiting)
 					transition(RoleStateType.ACTION_PREWAR);
