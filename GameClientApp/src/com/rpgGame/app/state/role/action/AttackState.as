@@ -9,6 +9,7 @@ package com.rpgGame.app.state.role.action
 	import com.rpgGame.app.state.role.control.CheckTripleAttackStateReference;
 	import com.rpgGame.app.state.role.control.TripleAttackSpellLockStateReference;
 	import com.rpgGame.core.state.role.action.ActionState;
+	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
@@ -143,7 +144,10 @@ package com.rpgGame.app.state.role.action
 			super.playAnimation(role, render, isFreeze, time, speedRatio);
 
 			var status : String = _statusType ? _statusType : RoleActionType.STAND;
-			
+			try{if((((_machine as RoleStateMachine).owner as SceneRole).data as MonsterData).modelID==9008)
+			{
+				Lyt.a("++++播放动作:"+status+"-----"+AttackStateReference(_ref).spellInfo.spellData.q_skillName);
+			}}catch(e:Error){}
 			if(_canWalkRelease)
 			{
 				if((_machine.owner as SceneRole).stateMachine.isWalkMoving)
@@ -329,6 +333,10 @@ package com.rpgGame.app.state.role.action
 					_breakFrameTween.kill();
 					_breakFrameTween = null;
 				}
+				try{if((((_machine as RoleStateMachine).owner as SceneRole).data as MonsterData).modelID==9008)
+				{
+					Lyt.a("~~~~锁定：castTime:"+castTime+"totalFrameTm:"+totalFrameTm+"-----"+AttackStateReference(_ref).spellInfo.spellData.q_skillName);
+				}}catch(e:Error){}
 				if (totalFrameTm > 0)
 				{
 					_startSelfFrameTween = TweenLite.delayedCall(startSelfFrameTime * 0.001,onStartFrameCmp);
@@ -347,6 +355,10 @@ package com.rpgGame.app.state.role.action
 
 		private function stopAttack() : void
 		{
+			try{if((((_machine as RoleStateMachine).owner as SceneRole).data as MonsterData).modelID==9008)
+			{
+				Lyt.a("@@@@攻击完成:"+"-----"+AttackStateReference(_ref).spellInfo.spellData.q_skillName);
+			}}catch(e:Error){}
 			_attackBroken = true;
 			_attackFinished = true;
 			_canWalkRelease = false;
@@ -441,6 +453,10 @@ package com.rpgGame.app.state.role.action
 
 		private function onBreakFrameCmp() : void
 		{
+			try{if((((_machine as RoleStateMachine).owner as SceneRole).data as MonsterData).modelID==9008)
+			{
+				Lyt.a("@@@@@解除锁定：-----"+AttackStateReference(_ref).spellInfo.spellData.q_skillName);
+			}}catch(e:Error){}
 			_attackBroken = true;
 			_attackFinished = true;
 			if (_machine && !_machine.isInPool)
@@ -499,7 +515,14 @@ package com.rpgGame.app.state.role.action
 			else if (nextState.type == RoleStateType.ACTION_ATTACK)
 			{
 				if (/*!force && */!_attackBroken)
+				{
+					try{if((((_machine as RoleStateMachine).owner as SceneRole).data as MonsterData).modelID==9008)
+					{
+						Lyt.a("？？？？我没攻击完  你不能来:"+"-----"+AttackStateReference(_ref).spellInfo.spellData.q_skillName);
+					}}catch(e:Error){}
 					return false;
+				}
+					
 			}
 			else if (nextState.type == RoleStateType.ACTION_HIT)
 			{
@@ -552,7 +575,15 @@ package com.rpgGame.app.state.role.action
 			if (!force && (_machine as RoleStateMachine).isJumpRising)
 				return false;
 			if (!force && (_machine as RoleStateMachine).isBlinkMoving)
+			{
+				
+				try{if((((_machine as RoleStateMachine).owner as SceneRole).data as MonsterData).modelID==9008)
+				{
+					Lyt.a("？？？？正在冲锋  我不能放");
+				}}catch(e:Error){}
 				return false;
+			}
+				
 			if (!force && (_machine as RoleStateMachine).isBeatMoving)
 				return false;
 			if (!force && (_machine as RoleStateMachine).isStun)
