@@ -136,6 +136,10 @@ package com.rpgGame.app.state.role.action
 			{
 				return false;
 			}
+			else if ((_machine as RoleStateMachine).isSpriteUp)
+			{
+				return false;
+			}
 			else if ((_machine as RoleStateMachine).isTrailMoving)
 			{
 				return false;
