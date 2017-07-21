@@ -41,5 +41,8 @@ package com.rpgGame.core.events
 		
 		public static const OPEN_NEW_FUNCTION:int = UNIQUEID.NEXT;
 		public static const SYS_CAN_LEVEL_UP:int = UNIQUEID.NEXT;
+		
+		public static const FIGHT_ENTER:int = UNIQUEID.NEXT;
+		public static const FIGHT_LEAVE:int = UNIQUEID.NEXT;
 	}
 }
