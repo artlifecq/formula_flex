@@ -1,24 +1,16 @@
 package com.rpgGame.app.manager.fight
 {
 	import com.rpgGame.app.manager.Mgr;
-	import com.rpgGame.app.manager.TeamManager;
-	import com.rpgGame.app.manager.friend.FriendManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.cfg.RelationCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.JobEnum;
-	import com.rpgGame.coreData.enum.RoleEnum;
 	import com.rpgGame.coreData.role.HeroData;
-	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleData;
-	import com.rpgGame.coreData.role.RoleType;
-	import com.rpgGame.coreData.role.ZhanCheData;
 	import com.rpgGame.coreData.type.PKModeType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.coreData.type.SpellTargetType;
-	
-	import feathers.core.IFeathersControl;
 	
 	/**
 	 *
@@ -50,7 +42,7 @@ package com.rpgGame.app.manager.fight
 		public function FightManager()
 		{
 		}
-
+		
 		/**
 		 * 阵营，PK模式判断写这里
 		 * @param role
@@ -153,5 +145,8 @@ package com.rpgGame.app.manager.fight
             } while (false);
             return modeState;
 		}
+
+	
+
 	}
 }
