@@ -40,8 +40,8 @@ package com.rpgGame.app.ui.main.shortcut
 			_shor = content;
 			_diection = diection;
 			_skin = skin;
-			_skin.left_red.alpha=0;
-			_skin.right_blue.alpha=0;
+			_skin.left_red.alpha=0.5;
+			_skin.right_blue.alpha=0.5;
 			init();
 		}
 		private var _tipinfodata:TextTipsPropChangeData

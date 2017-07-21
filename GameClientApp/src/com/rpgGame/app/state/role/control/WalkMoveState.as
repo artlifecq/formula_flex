@@ -406,7 +406,9 @@ package com.rpgGame.app.state.role.control
 					{
 						var distance : Number = MathUtil.getDistance((_machine.owner as SceneRole).x, (_machine.owner as SceneRole).z, _nextPos.x, _nextPos.z);
 						nextPosGapTm = (distance / _stateReference.speed * 1000);
-//						trace("   else   " + nextPosGapTm);
+						trace("主角一步用的时间:  " + nextPosGapTm + "   主角一步的距离:  " + distance + "   主角一步的速度:  " + _stateReference.speed);
+						trace("主角当前位置：         " + (_machine.owner as SceneRole).x + "   " + (_machine.owner as SceneRole).z);
+						trace("主角下一步的目标点："  + _nextPos.x + "   " + _nextPos.z);
 					}
 					if (nextPosGapTm > 0)
 					{
