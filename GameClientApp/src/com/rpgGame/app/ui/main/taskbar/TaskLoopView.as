@@ -210,16 +210,12 @@ package com.rpgGame.app.ui.main.taskbar
 			scrollBack.visible=false;
 			scrollBox.addChild(scrollBack);
 			GuiThemeStyle.setScrollerStyle(scrollBar, org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack);
-			
-			
-			
-			
+			scrollBar.x=scrollBox.x;
+			scrollBar.y=scrollBox.y;
+			scrollBar.width=scrollBox.width;
+			scrollBox.x=0;
 			scrollBox.y=0;
 			scrollBar.addChild(scrollBox);
-			
-			
-			
-			
 		}
 		
 		public function show(key:Boolean):void

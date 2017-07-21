@@ -344,8 +344,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.name = "scroll_bar";
 			temp.height = 295;
 			temp.styleClass = org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
-			temp.width = 243;
-			temp.x = 10;
+			temp.x = 236;
 			temp.y = 39;
 			return temp;
 		}
@@ -367,7 +366,7 @@ package org.mokylin.skin.mainui.renwu
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			scroll_box = temp;
 			temp.name = "scroll_box";
-			temp.width = 250;
+			temp.width = 243;
 			temp.x = 10;
 			temp.y = 39;
 			temp.elementsContent = [sec_navi1_i(),sec_killbut1_1_i(),sec_killbut1_2_i(),sec_killbut1_3_i(),sec_navi2_i(),sec_killbut2_1_i(),sec_killbut2_2_i(),sec_killbut2_3_i(),sec_ico1_0_i(),sec_navi3_i(),sec_navi0_i(),sec_info_i(),sec_killbut3_1_i(),sec_killbut3_2_i(),sec_killbut3_3_i(),sec_ico2_0_i(),sec_subbut1_i(),sec_subbut2_i()];
