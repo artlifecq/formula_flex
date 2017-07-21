@@ -113,9 +113,24 @@ package  com.rpgGame.app.reward
 			}
 			layout();
 		}
-		private function setRewardByItemInfo(items:Vector.<ItemInfo>):void
+		public function setRewardByItemInfo(items:Vector.<ItemInfo>):void
 		{
+			if (items==null) 
+			{
+				return;
+			}
+			var len:int=items.length;
+			var rewards:Vector.<ClientItemInfo>=new Vector.<ClientItemInfo>();
+			var tmpi:ItemInfo;
+			for (var i:int = 0; i < len; i++) 
+			{
+				tmpi=items[i];
+				var tmp:ClientItemInfo=new ClientItemInfo(tmpi.itemModelId);
+				tmp.count=tmpi.num;
+				rewards.push(tmp);
+			}
 			
+			setReward(rewards);
 		}
 		public function setRewardByTeamItemInfo(temps:Vector.<TempItemInfo>):void
 		{

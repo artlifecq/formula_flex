@@ -63,8 +63,6 @@ package com.rpgGame.app.ui.main.taskbar
 		{
 			var i:int;
 			scrollInit();
-			//_skin.sec_ico1_0.x=253*0.5;
-			//_skin.sec_ico2_0.x=253*0.5;
 			icoList1Group=new RewardGroup(IcoSizeEnum.ICON_42,_skin.sec_ico1_0,RewardGroup.ALIN_CENTER,4,6,6);
 			icoList2Group=new RewardGroup(IcoSizeEnum.ICON_42,_skin.sec_ico2_0,RewardGroup.ALIN_CENTER,4,6,6);
 			
@@ -121,75 +119,17 @@ package com.rpgGame.app.ui.main.taskbar
 				TaskUtil.setTextEvet(killBut3List[i]);
 			}
 			
-			
 			extraLabel=_skin.sec_info;
 			subBut1=_skin.sec_subbut1;
 			subBut2=_skin.sec_subbut2;
 			
 			var ico:IconCDFace
-			/*ico1BgList=new Vector.<UIAsset>();
-			ico1BgList.push(_skin.sec_ico1_0);
-			ico1BgList.push(_skin.sec_ico1_1);
-			ico1BgList.push(_skin.sec_ico1_2);
-			ico1BgList.push(_skin.sec_ico1_3);
-			ico1BgList.push(_skin.sec_ico1_4);
-			ico1BgList.push(_skin.sec_ico1_5);
-			ico1List=new Vector.<IconCDFace>();
-			for(i=0;i<ico1BgList.length;i++)
-			{
-				ico=IconCDFace.create(IcoSizeEnum.ICON_42);
-				ico.showCD=false;
-				ico.x=ico1BgList[i].x+3;
-				ico.y=ico1BgList[i].y+3;
-				//ico.visible=false;
-				//ico1BgList[i].visible=false;
-				ico1List.push(ico);
-				scrollBox.addChild(ico);
-			}
-			ico2BgList=new Vector.<UIAsset>();
-			ico2BgList.push(_skin.sec_ico2_0);
-			ico2BgList.push(_skin.sec_ico2_1);
-			ico2BgList.push(_skin.sec_ico2_2);
-			ico2BgList.push(_skin.sec_ico2_3);
-			ico2BgList.push(_skin.sec_ico2_4);
-			ico2BgList.push(_skin.sec_ico2_5);
-			ico2List=new Vector.<IconCDFace>();
-			for(i=0;i<ico2BgList.length;i++)
-			{
-				ico=IconCDFace.create(IcoSizeEnum.ICON_42);
-				ico.showCD=false;
-				ico.x=ico2BgList[i].x+3;
-				ico.y=ico2BgList[i].y+3;
-				//ico.visible=false;
-				//ico2BgList[i].visible=false;
-				ico2List.push(ico);
-				scrollBox.addChild(ico);
-			}
-			
-			*/
-			
-			
 			
 			navi1.htmlText="[主线]第一章 <u>新手村</u><font color='#8b8d7b'>(未完成)</font>";
 			navi2.htmlText="[支线]强化装备<font color='#8b8d7b'>(未完成)</font>";
 			navi3.htmlText="[环式]<u>采矿</u><font color='#ffffff'>(10/20)</font><font color='#8b8d7b'>(未完成)</font>";
 			_skin.sec_navi0.visible=false;
-			/*kill1Label.htmlText="交谈：<u>项少龙交谈</u><font color='#cfc6ae'>(0/30)</font>";
-			kill2Label.htmlText="击杀：<u>击杀强盗</u><font color='#cfc6ae'>(0/10)</font>";
-			kill3Label.htmlText="采集：<u>采集铁矿</u><font color='#cfc6ae'>(0/20)</font>";
-			extraLabel.htmlText="完成<font color='#ff0000'>38</font>环可获得额外奖励：";*/
-			
-			
-		/*	ico1List[0].setIconResName(ClientConfig.getItemIcon("201",IcoSizeEnum.ICON_48));
-			ico1List[0].visible=true;
-			ico1BgList[0].visible=true;
-			ico2List[0].setIconResName(ClientConfig.getItemIcon("203",IcoSizeEnum.ICON_48));
-			ico2List[0].visible=true;
-			ico2BgList[0].visible=true;*/
-			
-			//_skin.sec_killbut1
-			//viewSet();
-			
+		
 			hideMainTaskView();
 			hideDailyTaskView();
 			hideTreasuerTaskView();
@@ -210,16 +150,12 @@ package com.rpgGame.app.ui.main.taskbar
 			scrollBack.visible=false;
 			scrollBox.addChild(scrollBack);
 			GuiThemeStyle.setScrollerStyle(scrollBar, org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack);
-			
-			
-			
-			
+			scrollBar.x=scrollBox.x;
+			scrollBar.y=scrollBox.y;
+			scrollBar.width=scrollBox.width;
+			scrollBox.x=0;
 			scrollBox.y=0;
 			scrollBar.addChild(scrollBox);
-			
-			
-			
-			
 		}
 		
 		public function show(key:Boolean):void
@@ -397,11 +333,7 @@ package com.rpgGame.app.ui.main.taskbar
 				killBut2List[i].visible=false;
 			}
 			icoList1Group.visible=false;
-			/*for(i=0;i<ico1BgList.length;i++)
-			{
-				ico1BgList[i].visible=false;
-				ico1List[i].visible=false;
-			}*/
+			
 			subBut1.visible=false;
 		}
 		
@@ -454,11 +386,7 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				killBut3List[i].visible=false;
 			}
-			/*for(i=0;i<ico2BgList.length;i++)
-			{
-				ico2BgList[i].visible=false;
-				ico2List[i].visible=false;
-			}*/
+			
 			icoList2Group.visible=false;
 			subBut2.visible=false;
 			extraLabel.visible=false;
@@ -578,16 +506,7 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				killBut3List[i].visible=false;
 			}
-			/*for(i=0;i<ico1BgList.length;i++)
-			{
-				ico1BgList[i].visible=false;
-				ico1List[i].visible=false;
-			}
-			for(i=0;i<ico2BgList.length;i++)
-			{
-				ico2BgList[i].visible=false;
-				ico2List[i].visible=false;
-			}*/
+			
 			icoList1Group.visible=false;
 			icoList2Group.visible=false;
 			extraLabel.visible=false;
@@ -619,33 +538,14 @@ package com.rpgGame.app.ui.main.taskbar
 					skinList[i].y=0;
 				}
 			}
-			/*for(i=0;i<3;i++)
-			{
-				ico1BgList[i].y=ico1BgList[0].y;
-				ico1List[i].y=ico1BgList[0].y+3;
-			}
-			for(i=3;i<ico1BgList.length;i++)
-			{
-				ico1BgList[i].y=ico1BgList[3].y;
-				ico1List[i].y=ico1BgList[3].y+3;
-			}
-			for(i=0;i<3;i++)
-			{
-				ico2BgList[i].y=ico2BgList[0].y;
-				ico2List[i].y=ico2BgList[0].y+3;
-			}
-			for(i=3;i<ico2BgList.length;i++)
-			{
-				ico2BgList[i].y=ico2BgList[3].y;
-				ico2List[i].y=ico2BgList[3].y+3;
-			}*/
-			/*if(count>=0)
+		
+			if(count>=0)
 			{
 				scrollBack.height=skinList[count].y+skinList[count].height+3;
 			}
 			
 			scrollBar.addChild(scrollBack);
-			scrollBar.addChild(scrollBox);*/
+			scrollBar.addChild(scrollBox);
 			
 			
 			

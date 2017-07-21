@@ -1,11 +1,15 @@
 package com.rpgGame.appModule.activety.zonghe.mibao
 {
 	import com.rpgGame.app.manager.ItemActionManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.task.TaskMissionManager;
+	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
+	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
@@ -32,8 +36,10 @@ package com.rpgGame.appModule.activety.zonghe.mibao
 	public class MibaoResultPanel extends SkinUIPanel
 	{
 		private var _skin:TiaoZhanChengGong;
-		private var icoBgList:Vector.<UIAsset>;
-		private var icoList:Vector.<IconCDFace>;
+		/*private var icoBgList:Vector.<UIAsset>;
+		private var icoList:Vector.<IconCDFace>;*/
+		private var icoList1Group:RewardGroup;
+		
 		public function MibaoResultPanel()
 		{
 			_skin = new TiaoZhanChengGong();
@@ -49,18 +55,7 @@ package com.rpgGame.appModule.activety.zonghe.mibao
 			setTime(10);
 			setInfo(msg);
 			setReword(msg.reward);
-			/*var dataInfo:Vector.<ItemInfo>;
-			hideItem();
-			if(data)
-			{
-				dataInfo= data as Vector.<ItemInfo>;
-			}
-			if(dataInfo)
-			{
-				setReword(dataInfo);
-			}*/
-			//setReword2();
-			//TweenLite.delayedCall(6, hide);
+			
 		}
 		override public function hide():void
 		{
@@ -79,7 +74,8 @@ package com.rpgGame.appModule.activety.zonghe.mibao
 		}
 		private function init():void
 		{
-			var i:int;
+			icoList1Group=new RewardGroup(IcoSizeEnum.ICON_48,_skin.icon,RewardGroup.ALIN_LEFT,10,6,6);
+			/*var i:int;
 			icoBgList=new Vector.<UIAsset>();
 			for(i=0;i<6;i++)
 			{
@@ -99,7 +95,7 @@ package com.rpgGame.appModule.activety.zonghe.mibao
 				icoList.push(ico);
 				_skin.grpIcon.addChild(ico);
 				//spr.addChild(ico);
-			}
+			}*/
 			
 			//icoBgList[0].visible=true;
 			//icoList[0].visible=true;
@@ -117,6 +113,9 @@ package com.rpgGame.appModule.activety.zonghe.mibao
 		/**设置奖励物品*/
 		private function setReword(dataInfo:Vector.<ItemInfo>):void
 		{
+			icoList1Group.setRewardByItemInfo(dataInfo);
+			icoList1Group.visible=true;
+			/*
 			var i:int;
 			var lenght:int=dataInfo.length<icoList.length?dataInfo.length:icoList.length;
 			for(i=0;i<lenght;i++)
@@ -124,18 +123,9 @@ package com.rpgGame.appModule.activety.zonghe.mibao
 				setIcon(icoList[i],dataInfo[i].itemModelId,dataInfo[i].num,icoBgList[i]);
 				icoList[i].x=icoBgList[i].x=i*56;
 			}
-			_skin.grpIcon.x=(469-56*lenght)*0.5;
+			_skin.grpIcon.x=(469-56*lenght)*0.5;*/
 		}
-		private function setReword2():void
-		{
-			var i:int;
-			for(i=0;i<5;i++)
-			{
-				setIcon(icoList[i],201,10,icoBgList[i]);
-				icoList[i].x=icoBgList[i].x=i*56;
-			}
-			_skin.grpIcon.x=(469-56*5)*0.5;
-		}
+		
 		private function setIcon(icon:IconCDFace,tiemId:int,num:int,bg:UIAsset=null):void
 		{
 			var item:Q_item=ItemConfig.getQItemByID(tiemId);
@@ -153,24 +143,12 @@ package com.rpgGame.appModule.activety.zonghe.mibao
 		}
 		private function hideItem():void
 		{
-			var i:int;
-			for(i=0;i<icoBgList.length;i++)
-			{
-				icoBgList[i].visible=false;
-				icoList[i].visible=false;
-			}
+			icoList1Group.visible=false;
 		}
 		private function subReword():void
 		{
-			for(var i:int=0;i<icoList.length;i++)
-			{
-				if(icoList[i].visible)
-				{
-					GrayFilter.gray(icoList[i]);
-					ItemActionManager.tweenItemInBag(icoList[i]);
-				}
-				
-			}
+			TweenLite.delayedCall(3, hide);
+			icoList1Group.tweeRewardInBag();
 			
 		}
 		
