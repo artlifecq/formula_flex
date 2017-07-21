@@ -4,6 +4,7 @@ package com.rpgGame.appModule.mount
 	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
+	import com.rpgGame.app.display3D.UIAvatar3D;
 	import com.rpgGame.app.manager.mount.ZhanQiManager;
 	import com.rpgGame.app.manager.mount.ZhanQiShowData;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -17,7 +18,8 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.coreData.clientConfig.Q_warflag;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
-	import com.rpgGame.coreData.type.item.GridBGType;
+	import com.rpgGame.coreData.role.RoleData;
+	import com.rpgGame.coreData.type.RoleActionType;
 	
 	import org.mokylin.skin.app.zuoqi.Zuoqi_JingjieOk_Skin;
 	
@@ -27,6 +29,7 @@ package com.rpgGame.appModule.mount
 	{
 		private var _skin:Zuoqi_JingjieOk_Skin;
 		private var _curtentInterEff:InterObject3D;
+		private var _avateUI:UIAvatar3D;
 		private var _zhanqidata:ZhanQiShowData;
 		private var _itemIcons:Vector.<IconCDFace>;
 		private var _chengGongEftContaner:Inter3DContainer;	
@@ -46,6 +49,7 @@ package com.rpgGame.appModule.mount
 			_itemIcons = new Vector.<IconCDFace>();
 			_chengGongEftContaner=new Inter3DContainer();
 			_skin.uiGuangquan.addChild(_chengGongEftContaner);
+			_avateUI=new UIAvatar3D(_skin.roleGrp);
 		}
 		
 		override protected function onShow():void
@@ -108,8 +112,6 @@ package com.rpgGame.appModule.mount
 				icon = _itemIcons[_rewardIconLength];
 			}else{
 				icon = IconCDFace.create(IcoSizeEnum.ICON_48);
-				icon.width = icon.height = IcoSizeEnum.ICON_48;
-				icon.setBg(GridBGType.GRID_SIZE_48);
 				this._skin.container.addChild(icon);
 				_itemIcons.push(icon);
 			}
@@ -126,15 +128,11 @@ package com.rpgGame.appModule.mount
 			
 			var nextShet:Q_warflag = ZhanQiConfigData.getZhanQiDataById(zhanqiLevel);
 			var currentName:String=nextShet.q_panel_show_id;
-			_curtentInterEff=new InterObject3D();
-			var data : RenderParamData3D = new RenderParamData3D(0, "effect_ui", ClientConfig.getEffect(currentName));
-			data.forceLoad=true;//ui上的3d特效强制加载
-			var unit : RenderUnit3D = _curtentInterEff.addRenderUnitWith(data, 0);	
-			_curtentInterEff.x=350;
-			_curtentInterEff.y=330;
-			unit.setScale(2);
-			unit.addUnitAtComposite(unit);
-			this.addChild3D(_curtentInterEff);
+			
+			var roleData:RoleData=new RoleData(0);
+			roleData.avatarInfo.setBodyResID("pc/flag/"+currentName,null);
+			_avateUI.setRoleData(roleData);
+			_avateUI.setScale(2);
 		}
 		
 		private function get zhanqiLevel():int

@@ -32,6 +32,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_need_zone:int;
 		 /**  关卡对应奖励 */
 		public var q_zone_reward:String;
+		 /**  每关挑战时间(秒) */
+		public var q_chanllenge_time:int;
 		 /**  获得方法0首冲1挑战副本 */
 		public var q_need_first_pay:int;
 		 /**  公告内容 */

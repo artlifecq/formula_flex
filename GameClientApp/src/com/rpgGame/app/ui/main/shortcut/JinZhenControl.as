@@ -33,25 +33,25 @@ package com.rpgGame.app.ui.main.shortcut
 			renderUint.removeAddedCallBack(onAddHpEft);
 			if(_index==0)
 			{
-				_effect3d.x = 43;
-				_effect3d.y = 54;
+				_effect3d.x = 65;
+				_effect3d.y = 71;
 				renderUint.rotationZ = 81;
 			}else if(_index==1)
 			{
-				_effect3d.x = 44;
-				_effect3d.y = 25;
-				renderUint.rotationZ = 30;
+				_effect3d.x = 73;
+				_effect3d.y = 48;
+				renderUint.rotationZ = 46;
 			}else if(_index ==2){
-				_effect3d.x = 78;
-				_effect3d.y = 17;
+				_effect3d.x = 102;
+				_effect3d.y = 36;
 				renderUint.rotationZ = 0;
 			}else if(_index ==3){
-				_effect3d.x = 113;
-				_effect3d.y = 27;
-				renderUint.rotationZ = -31;
+				_effect3d.x = 129;
+				_effect3d.y = 50;
+				renderUint.rotationZ = -50;
 			}else if(_index ==4){
-				_effect3d.x = 115;
-				_effect3d.y = 54;
+				_effect3d.x = 138;
+				_effect3d.y = 71;
 				renderUint.rotationZ = -81;
 			}
 		}

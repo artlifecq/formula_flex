@@ -804,7 +804,6 @@ package com.rpgGame.app.manager
 				var ref : RidingStateReference = role.stateMachine.getReference(RidingStateReference) as RidingStateReference;
 				ref.setParams(avatarInfo.mountResID, avatarInfo.mountAnimatResID);
 				role.stateMachine.transition(RoleStateType.CONTROL_RIDING, ref);
-				updateBody(role);
 				
 				if (role.avatar.hasIDRenderUnit(RenderUnitType.MOUNT, RenderUnitID.MOUNT))
 				{
@@ -822,7 +821,7 @@ package com.rpgGame.app.manager
 				}
 			}
 			else
-			{
+			{			
 				role.avatar.removeRenderUnitByID(RenderUnitType.MOUNT, RenderUnitID.MOUNT);
 				if ((role.stateMachine as RoleStateMachine).isRiding)
 				{
@@ -831,7 +830,7 @@ package com.rpgGame.app.manager
 				}
 			}
 			
-			role.stateMachine.transition(RoleStateType.CONTROL_AVATAR);
+			updateBody(role);
 		}
 		
 		/**部件添加完成*/

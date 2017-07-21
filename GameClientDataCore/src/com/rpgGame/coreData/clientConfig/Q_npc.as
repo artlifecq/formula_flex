@@ -50,7 +50,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_collecttime:int;
 		 /**  最大采集上限 */
 		public var q_collectup:int;
-		 /**  采集是否移除(0不移除，1移除) */
+		 /**  采集是否移除(0不移除，1永久删除,2采集后重生) */
 		public var q_collectremove:int;
 		 /**  是否显示NPC */
 		public var q_displaynpc:String;

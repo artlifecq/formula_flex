@@ -44,8 +44,8 @@ package com.rpgGame.appModule.redreward
 		private function initView():void
 		{
 			_headImg=new UIAsset();
-			_headImg.x=101;
-			_headImg.y=32;
+			_headImg.x=105;
+			_headImg.y=65;
 			_headImg.touchable = false;
 			_skin.container.addChild(_headImg);
 			var mask:Sprite = new Sprite();
@@ -90,16 +90,16 @@ package com.rpgGame.appModule.redreward
 			
 			switch(job){
 				case JobEnum.ROLE_1_TYPE:
-					_headImg.styleName=AssetUrl.HEAD_ICON_1;
+					this._headImg.styleName="ui/mainui/head/touxiang/bingjia/middle.png";
 					break;
 				case JobEnum.ROLE_2_TYPE:
-					_headImg.styleName=AssetUrl.HEAD_ICON_2;
+					this._headImg.styleName="ui/mainui/head/touxiang/mojia/middle.png";
 					break;
 				case JobEnum.ROLE_3_TYPE:
-					_headImg.styleName=AssetUrl.HEAD_ICON_3;
+					this._headImg.styleName="ui/mainui/head/touxiang/mojia/middle.png";
 					break;
 				case JobEnum.ROLE_4_TYPE:
-					_headImg.styleName=AssetUrl.HEAD_ICON_4;
+					this._headImg.styleName="ui/mainui/head/touxiang/yijia/middle.png";
 					break;
 			}
 			

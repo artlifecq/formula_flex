@@ -39,6 +39,8 @@ package com.rpgGame.app.cmdlistener
 	
 	import flash.geom.Vector3D;
 	
+	import gs.TweenLite;
+	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
 
@@ -86,7 +88,12 @@ package com.rpgGame.app.cmdlistener
 			if (SceneRoleSelectManager.selectedRole == role && SceneCharType.PLAYER != role.type)
 				SceneRoleSelectManager.selectedRole = null;
 		}
-
+		private var jumpBink:Boolean=false;
+		private function sendJump(jumpid:int):void
+		{
+			jumpBink=false;
+			SceneSender.jumppointTrigger(jumpid);
+		}
 		private function mainCharMoveThroughHandler() : void
 		{
 			var actor : SceneRole = MainRoleManager.actor;
@@ -118,20 +125,15 @@ package com.rpgGame.app.cmdlistener
 					if (!jump.isInViewDistance)
 						return;
 					var jumpData : SceneJumpPointData = jump.data as SceneJumpPointData;
-					Lyt.a("触发跳跃点");
-					
-					
+					Lyt.a("触发跳跃点:"+MainRoleManager.actor.stateMachine.isRunning+"=="+MainRoleManager.actor.stateMachine.isIdle);
 					if(MainRoleManager.actor.stateMachine.isRunning||MainRoleManager.actor.stateMachine.isIdle)
-					{Lyt.a("跳跃动作");
-						SceneSender.jumppointTrigger(jumpData.id);
-						/*var role : SceneRole = MainRoleManager.actor;
-						if (role && role.usable)
+					{
+						if(!jumpBink)
 						{
-							var ref : JumpStateReference = role.stateMachine.getReference(JumpStateReference) as JumpStateReference;
-							var destPoint:Vector3D=new Vector3D(jumpData.destPoint[0].x,0,jumpData.destPoint[0].y);
-							ref.setParams(0,destPoint);
-							role.stateMachine.transition(RoleStateType.ACTION_JUMP, ref);
-						}*/
+							jumpBink=true;
+							TweenLite.killDelayedCallsTo(sendJump);
+							TweenLite.delayedCall(0.2, sendJump,[jumpData.id]);
+						}
 					}
 					
 					
