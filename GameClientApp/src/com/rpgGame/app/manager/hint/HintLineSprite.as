@@ -4,9 +4,9 @@ package com.rpgGame.app.manager.hint
 	import com.rpgGame.coreData.clientConfig.HintTypeSetInfo;
 	import com.rpgGame.coreData.enum.HintMoveDirectionEnum;
 	import com.rpgGame.coreData.utils.ColorUtils;
-
+	
 	import flash.utils.getDefinitionByName;
-
+	
 	import feathers.controls.Button;
 	import feathers.controls.Label;
 	import feathers.controls.UIAsset;
@@ -14,7 +14,7 @@ package com.rpgGame.app.manager.hint
 	import feathers.layout.HorizontalAlign;
 	import feathers.layout.VerticalAlign;
 	import feathers.themes.GuiThemeStyle;
-
+	
 	import starling.display.Sprite;
 
 	/**
@@ -36,6 +36,8 @@ package com.rpgGame.app.manager.hint
 		private var _bgMarginRight : int;
 		private var _isFinished : Boolean;
 		public var preTime : int;
+		
+		private var initHeight:int;
 
 		public function HintLineSprite(hintTypeSet : HintTypeSetInfo)
 		{
@@ -84,6 +86,7 @@ package com.rpgGame.app.manager.hint
 			_label.touchable = false;
 			_label.isHtmlText = true;
 			_label.nativeFilters = ColorUtils.getDefaultStrokeFilter();
+			_label.y=-2;
 			this.addChild(_label);
 
 			if (_hintTypeSet.canClose && _hintTypeSet.closeBtnSkin != "")
@@ -323,6 +326,11 @@ package com.rpgGame.app.manager.hint
 					bgHeight = _label.height + _bgMarginTop + _bgMarginBottom;
 				}
 				_itemBg.setSize(bgWidth, bgHeight);
+				initHeight=_itemBg.height;
+			}
+			else
+			{
+				initHeight=_label.height;
 			}
 			resetLine();
 		}
@@ -358,6 +366,11 @@ package com.rpgGame.app.manager.hint
 			{
 				return _hintTypeSet.height;
 			}
+		}
+		
+		public function get bgHeight():int
+		{
+			return initHeight;
 		}
 	}
 }

@@ -4,6 +4,7 @@ package org.mokylin.skin.mainui.top
 	import feathers.controls.StateSkin;
 	import org.mokylin.skin.mainui.top.jinyan_bar_green;
 	import org.mokylin.skin.mainui.top.jinyan_bar_yellow;
+	import org.mokylin.skin.mainui.top.topBG_Skin;
 
 	/**
 	 * @private
@@ -19,6 +20,8 @@ package org.mokylin.skin.mainui.top
 
 		public var top_bar2:feathers.controls.SkinnableContainer;
 
+		public var top_bg:feathers.controls.SkinnableContainer;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -28,7 +31,9 @@ package org.mokylin.skin.mainui.top
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [top_bar_i(),top_bar2_i()];
+			this.height = 9;
+			this.width = 200;
+			this.elementsContent = [top_bg_i(),top_bar_i(),top_bar2_i()];
 			
 			states = {
 			};
@@ -63,6 +68,20 @@ package org.mokylin.skin.mainui.top
 			temp.skin = skin
 			temp.width = 200;
 			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function top_bg_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			top_bg = temp;
+			temp.name = "top_bg";
+			temp.height = 9;
+			temp.left = 0;
+			temp.right = 0;
+			var skin:StateSkin = new org.mokylin.skin.mainui.top.topBG_Skin()
+			temp.skin = skin
 			temp.y = 0;
 			return temp;
 		}
