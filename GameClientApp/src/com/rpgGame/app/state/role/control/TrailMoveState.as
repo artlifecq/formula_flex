@@ -369,6 +369,10 @@ package com.rpgGame.app.state.role.control
 				if (!force)
 					return false;
 			}
+			else if ((_machine as RoleStateMachine).isSpriteUp) 
+			{
+				return false;
+			}
 			else if (!(_machine as RoleStateMachine).passTo(RoleStateType.ACTION_TRAIL))
 			{
 				if (!force)

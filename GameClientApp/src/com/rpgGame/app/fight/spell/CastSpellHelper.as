@@ -299,6 +299,10 @@ package com.rpgGame.app.fight.spell
 				GameLog.addShow("技能僵直中不能释放=============");
 				return CASE_STATE_FAIL;
 			}
+			else if (MainRoleManager.actor.stateMachine.isSpriteUp)
+			{
+				return CASE_STATE_FAIL;
+			}
 			else if (MainRoleManager.actor.stateMachine.isLockCaseSpell)
 			{
 				if (!_autoAtkNearRole)

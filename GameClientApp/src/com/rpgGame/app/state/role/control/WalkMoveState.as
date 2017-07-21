@@ -147,6 +147,7 @@ package com.rpgGame.app.state.role.control
 			if (_machine && !_machine.isInPool)
 			{
 				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {x: true, z: true});
+				_machine.removeState(RoleStateType.CONTROL_BUFF_SPRITEUP);
 				transition(RoleStateType.CONTROL_STOP_WALK_MOVE);
 				if ((_machine as RoleStateMachine).isPrewarWaiting)
 					transition(RoleStateType.ACTION_PREWAR);
@@ -406,7 +407,9 @@ package com.rpgGame.app.state.role.control
 					{
 						var distance : Number = MathUtil.getDistance((_machine.owner as SceneRole).x, (_machine.owner as SceneRole).z, _nextPos.x, _nextPos.z);
 						nextPosGapTm = (distance / _stateReference.speed * 1000);
-//						trace("   else   " + nextPosGapTm);
+						trace("主角一步用的时间:  " + nextPosGapTm + "   主角一步的距离:  " + distance + "   主角一步的速度:  " + _stateReference.speed);
+						trace("主角当前位置：         " + (_machine.owner as SceneRole).x + "   " + (_machine.owner as SceneRole).z);
+						trace("主角下一步的目标点："  + _nextPos.x + "   " + _nextPos.z);
 					}
 					if (nextPosGapTm > 0)
 					{
@@ -483,6 +486,10 @@ package com.rpgGame.app.state.role.control
 			{
 				if (!force)
 					return false;
+			}
+			else if ((_machine as RoleStateMachine).isSpriteUp) 
+			{
+				return false;
 			}
 			else if ((_machine as RoleStateMachine).isLockCaseSpell)
 			{
