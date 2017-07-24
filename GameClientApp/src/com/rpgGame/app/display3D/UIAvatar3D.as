@@ -23,6 +23,7 @@ package com.rpgGame.app.display3D
 	
 	/**
 	 *用于UI上的带动作的3d模型展示
+	 * 模型位置默认和容器底部居中对齐
 	 * @author dik
 	 * 
 	 */
@@ -37,23 +38,54 @@ package com.rpgGame.app.display3D
 		
 		/**
 		 * 
-		 * @param container avatar显示的父容器,交互区域有多大，在编辑器里面就拉多大
+		 * @param container avatar显示的父容器,交互区域有多大，在编辑器里面就拉多大,方便布局
 		 * 
 		 */
-		public function UIAvatar3D(container:DisplayObjectContainer)
+		public function UIAvatar3D(container:DisplayObjectContainer=null)
 		{
 			super();
 			avatar3d=new InterObject3D();
 			this.addChild3D(avatar3d);
-			this.touchZone=new UIAsset();
-			touchZone.styleName="ui/common/hover/xuanqukuang2_alpha.png";//一张透明九宫作为交互背景图
-			touchZone.addEventListener(TouchEvent.TOUCH,onTouch);
-			touchZone.width=container.width;
-			touchZone.height=container.height;
-			container.addChild(touchZone);
-			container.addChild(this);
-			this.x=touchZone.width>>1;
-			this.y=touchZone.height;
+			initForContainer();
+		}
+		
+		private function initForContainer(container:DisplayObjectContainer=null):void
+		{
+			if(container){
+				container.addChild(this);
+				this.x=container.width>>1;
+				this.y=container.height;
+				updateTouchZone();
+			}			
+		}
+		
+		/**
+		 *绑定到对应的容器 
+		 * @param container
+		 * 
+		 */
+		public function bindContainer(container:DisplayObjectContainer):void
+		{
+			if(container){
+				container.addChild(this);
+				this.x=container.width>>1;
+				this.y=container.height;
+				updateTouchZone();
+			}
+		}
+		
+		private function updateTouchZone():void
+		{
+			if(touchable&&parent){
+				if(!touchZone){
+					this.touchZone=new UIAsset();
+					touchZone.styleName="ui/common/hover/xuanqukuang2_alpha.png";//一张透明九宫作为交互背景图
+					touchZone.addEventListener(TouchEvent.TOUCH,onTouch);
+				}
+				touchZone.width=parent.width;
+				touchZone.height=parent.height;
+				parent.addChild(touchZone);
+			}
 		}
 		
 		private function onTouch(e : TouchEvent) : void

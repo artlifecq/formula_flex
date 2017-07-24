@@ -138,7 +138,7 @@ package com.rpgGame.app.ui.main.chat {
 			defaultFormat.size = 14;
 			defaultFormat.align = TextFormatAlign.LEFT;
 			defaultFormat.letterSpacing = 1;
-			defaultFormat.leading = 5;
+			defaultFormat.leading = 2;
 			
 			this._inputText = new RichTextArea3D(this._skin.inputbg.width, this._skin.inputbg.height, ColorUtils.getDefaultStrokeFilter());
 			this._inputText.maxChars = ChatCfgData.MAX_CHAR_LENGTH;
