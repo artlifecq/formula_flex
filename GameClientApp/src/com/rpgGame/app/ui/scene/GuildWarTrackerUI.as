@@ -1,5 +1,6 @@
 package com.rpgGame.app.ui.scene
 {
+	import com.rpgGame.app.cmdlistener.enum.EGuildMemberType;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.WalkToRoleManager;
 	import com.rpgGame.app.manager.guild.GuildManager;
@@ -151,6 +152,12 @@ package com.rpgGame.app.ui.scene
 			FaceUtil.SetItemGrid(icon1,iteminfo1);
 			FaceUtil.SetItemGrid(icon2,iteminfo2);
 			FaceUtil.SetItemGrid(icon3,iteminfo3);
+			
+			
+			if(MainRoleManager.actorInfo.guildMemberType==EGuildMemberType.LEADER){
+				EventManager.dispatchEvent(GuildEvent.GUILD_LEADER_SKILL_SHOW,true);
+			}
+			
 			initEvent();
 		}
 		
@@ -355,6 +362,7 @@ package com.rpgGame.app.ui.scene
 			icon2=null;
 			icon3=null;
 			(MainRoleManager.actor.headFace as HeadFace).updateGuildWarInfoBar(null);
+			EventManager.dispatchEvent(GuildEvent.GUILD_LEADER_SKILL_SHOW,false);
 		}
 	}
 }

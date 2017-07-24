@@ -103,8 +103,13 @@ package com.rpgGame.app.ui.tips
 			_spellTip.lbTime.text=cfg.q_cd==0?LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT12):(cfg.q_cd/1000)+"s";
 			_spellTip.lbXiaohao.text=cfg.q_recovers_detail.length==0?LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT12):cfg.q_recovers_detail;
 			var lvData:Q_skill_ignore=SkillLvLDataManager.getData(info.skillModelId+"_"+info.skillChildLv);
-			_spellTip.lbShuoming.text=lvData.q_skillpanel_description;
-			_spellTip.lbShuoming.isHtmlText=true;
+			if(!lvData){
+				_spellTip.lbShuoming.text=cfg.q_skillpanel_description1;
+				_spellTip.lbShuoming.isHtmlText=true;
+			}else{
+				_spellTip.lbShuoming.text=lvData.q_skillpanel_description;
+				_spellTip.lbShuoming.isHtmlText=true;
+			}
 			
 			if(!riseCfg){
 				_spellTip.tipbg.height=_spellTip.lbShuoming.y+_spellTip.lbShuoming.textHeight+20;

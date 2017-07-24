@@ -122,6 +122,7 @@ package com.rpgGame.app.view.icon
 		{
 			if(_qualityEft==null){
 				_qualityEft=new UIMovieClip();
+				_qualityEft.frameRate=4;
 			}else{
 				_qualityEft.removeChildren();
 			}
@@ -131,8 +132,6 @@ package com.rpgGame.app.view.icon
 			}else{
 				EftMcManager.setMcStyle(_qualityEft,"UIMovieClipQ_quality_huang");
 			}
-			_qualityEft.frameRate=20;
-			_qualityEft.autoPlay=true;
 			//			var scaleV:Number=(90/64);
 			_qualityEft.width=this.width;
 			_qualityEft.height=this.width;
