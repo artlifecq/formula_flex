@@ -16,11 +16,11 @@ package org.mokylin.skin.app.zuoqi
 	import org.mokylin.skin.app.zuoqi.button.ButtonZhanqizizhidan;
 	import org.mokylin.skin.app.zuoqi.mc.UIMovieClipJieshu;
 	import org.mokylin.skin.app.zuoqi.mc.UIMovieClipZhanqiName;
-	import org.mokylin.skin.app.zuoqi.progress_zhufuzhiSkin;
 	import org.mokylin.skin.component.button.ButtonSkin_jiantou;
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 	import org.mokylin.skin.component.check.CheckBoxSkin_1;
+	import org.mokylin.skin.component.progress.progress_jindutiao2;
 	import org.mokylin.skin.component.uinumber.UINumberJuese_zhanli;
 	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_lv;
 
@@ -189,7 +189,7 @@ package org.mokylin.skin.app.zuoqi
 		private function __Zhanqi_Skin_UIAsset10_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zuoqi/jdt_di.png";
+			temp.styleName = "ui/component/progress/jindutiao2/jdt_di.png";
 			temp.width = 228;
 			temp.x = 0;
 			temp.y = 0;
@@ -400,7 +400,7 @@ package org.mokylin.skin.app.zuoqi
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg_2 = temp;
 			temp.name = "bg_2";
-			temp.styleName = "ui/big_bg/zuoqi/zuoqi_bg.jpg";
+			temp.styleName = "ui/big_bg/zuoqi/zhanqi_bg.jpg";
 			temp.x = 20;
 			temp.y = 84;
 			return temp;
@@ -762,8 +762,8 @@ package org.mokylin.skin.app.zuoqi
 			temp.height = 59;
 			temp.styleClass = org.mokylin.skin.app.zuoqi.mc.UIMovieClipJieshu;
 			temp.width = 29;
-			temp.x = 609;
-			temp.y = 101;
+			temp.x = 596;
+			temp.y = 102;
 			return temp;
 		}
 
@@ -800,7 +800,7 @@ package org.mokylin.skin.app.zuoqi
 			progressbar1 = temp;
 			temp.name = "progressbar1";
 			temp.isEnabled = true;
-			temp.styleClass = org.mokylin.skin.app.zuoqi.progress_zhufuzhiSkin;
+			temp.styleClass = org.mokylin.skin.component.progress.progress_jindutiao2;
 			temp.value = 10;
 			temp.x = 21;
 			temp.y = 3;

@@ -227,6 +227,10 @@ package com.rpgGame.app.state.role
 					//NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsHarding); //"技能硬直中"
 					return false;
 				}
+				else if (walkRole.stateMachine.isSpriteUp) 
+				{
+					return false;
+				}
 				else if (walkRole.stateMachine.isStun)
 				{
 					NoticeManager.showNotify(LangQ_NoticeInfo.WalkMoveIsStun); //"眩晕中不能移动"
@@ -498,7 +502,7 @@ package com.rpgGame.app.state.role
 					pos.y=-ref.leftPath[i].z;
 					path.push(pos);
 				}
-				moveInfo.setValues(MainRoleManager.actorID,(player.data as HeroData).totalStat.moveSpeed,SystemTimeManager.curtTm,posNow,path);
+				moveInfo.setValues((player.data as HeroData).id,(player.data as HeroData).totalStat.moveSpeed,SystemTimeManager.curtTm,posNow,path);
 				RoleStateUtil.walkByInfos(moveInfo);
 			}
 		}

@@ -14,7 +14,7 @@ package com.rpgGame.coreData.clientConfig
 	public class ConfigClassRegister
 	{
 		private static var _classMap:HashMap = new HashMap();
-				/**  名称备注	资源路径#资源路径	动画名称#动画名称	碰撞隐藏节点#碰撞隐藏节点，用;分割多个节点	消散时间#消散时间	前轴围绕半径#前轴围绕半径	前轴围绕角速度#前轴围绕角速度（度/秒）	收敛次数#收敛次数	围绕半径#围绕半径	围绕角速度#围绕角速度（度/秒） */
+				/**  弹道效果										 */
 		public static const EffectAnimation:String = "data.animat.EffectAnimation";
 		/**  客户端区域数据			 */
 		public static const ClientArea:String = "data.ClientArea";
@@ -42,7 +42,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const GmInfo:String = "data.GmInfo";
 		/**  广播，提示语				 */
 		public static const HintInfo:String = "data.HintInfo";
-		/**  消息提示类型配置表	*/
+		/**  消息提示类型配置表																													 */
 		public static const HintTypeSetInfo:String = "data.HintTypeSetInfo";
 		/**  区域数据库						 */
 		public static const Q_area:String = "data.map.Q_area";
@@ -82,7 +82,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const HeroModel:String = "data.model.HeroModel";
 		/**  坐骑模型表	功能名称	动画资源名称 */
 		public static const MountModel:String = "data.model.MountModel";
-		/**  3 怪物基本信息数据库																																																																		绑定器			 */
+		/**  3 怪物基本信息数据库																																																																			绑定器			 */
 		public static const Q_monster:String = "data.monster.Q_monster";
 		/**  NPC配置数据库																											 */
 		public static const Q_npc:String = "data.monster.Q_npc";
@@ -96,11 +96,11 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_att_transfer:String = "data.Q_att_transfer";
 		/**  所有属性相关的数据																														 */
 		public static const Q_att_values:String = "data.Q_att_values";
-		/**  争霸战刷怪表										 */
+		/**  争霸战刷怪表											 */
 		public static const Q_battle_monster_refresh:String = "data.Q_battle_monster_refresh";
 		/**  巅峰等级段位升级表						 */
 		public static const Q_battle_rank:String = "data.Q_battle_rank";
-		/**  争霸战积分奖励表			 */
+		/**  争霸战积分奖励表				 */
 		public static const Q_battle_reward:String = "data.Q_battle_reward";
 		/**  争霸战积分事件表	 */
 		public static const Q_battleincident:String = "data.Q_battleincident";
@@ -136,7 +136,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_fightsoul_path:String = "data.Q_fightsoul_path";
 		/**  美人基本信息数据库																								 */
 		public static const Q_girl_advance:String = "data.Q_girl_advance";
-		/**  美人基本信息数据库											 */
+		/**  美人基本信息数据库												 */
 		public static const Q_girl_pet:String = "data.Q_girl_pet";
 		/**  全局变量表		 */
 		public static const Q_global:String = "data.Q_global";
@@ -196,13 +196,13 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_nine_tower:String = "data.Q_nine_tower";
 		/**  通知列表			 */
 		public static const Q_notify:String = "data.Q_notify";
-		/**  排行榜称号	 */
+		/**  排行榜称号			 */
 		public static const Q_rank_designation:String = "data.Q_rank_designation";
 		/**  红包配置		 */
 		public static const Q_redreward:String = "data.Q_redreward";
 		/**  阵营关系				 */
 		public static const Q_relation:String = "data.Q_relation";
-		/**  城池基础表															 */
+		/**  城池基础表																 */
 		public static const Q_singlecitybase:String = "data.Q_singlecitybase";
 		/**  购买界面其他途径提示数据库				 */
 		public static const Q_source:String = "data.Q_source";

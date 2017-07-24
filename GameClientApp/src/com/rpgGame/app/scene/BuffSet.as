@@ -315,6 +315,9 @@ package com.rpgGame.app.scene
 					case 7://减少技能cd
 						_role.stateMachine.removeState(RoleStateType.CONTROL_BUFF_SKILLCD);
 						break;
+					case 75://战斗状态
+						_role.stateMachine.removeState(RoleStateType.CONTROL_ENTER_LEAVE_FIGHT);
+						break;
 					default:
 						/*buffRef = _role.stateMachine.getReference(UnmovableStateReference) as UnmovableStateReference;
 						buffRef.setParams(buffData);
@@ -495,6 +498,9 @@ package com.rpgGame.app.scene
 						buffRef = _role.stateMachine.getReference(BuffStateReference) as BuffStateReference;
 						buffRef.setParams(buffData);
 						_role.stateMachine.transition(RoleStateType.CONTROL_BUFF_SKILLCD,buffRef);
+					case 75://减少技能cd
+						_role.stateMachine.transition(RoleStateType.CONTROL_ENTER_LEAVE_FIGHT);
+						break;
 					default:
 						/*buffRef = _role.stateMachine.getReference(UnmovableStateReference) as UnmovableStateReference;
 						buffRef.setParams(buffData);

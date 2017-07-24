@@ -18,6 +18,7 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.chat.ChatManager;
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.fightsoul.FightSoulManager;
 	import com.rpgGame.app.manager.hint.FloatingText;
@@ -227,7 +228,12 @@ package   com.rpgGame.app.manager.debug
 					AppManager.showAppNoHide(AppConstant.ACTIVETY_OPEN,info);
 				}
 			});
-			
+			commandList.put( ".send", function (...arg):void
+			{
+				var id:int = arg[0];
+				arg.shift();
+				NoticeManager.showNotifyById(id,null,arg);
+			});
 			commandList.put( ".acts", function (...arg):void
 			{
 				var id:int = arg[0];
@@ -270,30 +276,30 @@ package   com.rpgGame.app.manager.debug
 					RoleStateUtil.walkByInfos(moveInfo);
 				}
 				MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_BUFF_SPRITEUP,MainRoleManager.actor.stateMachine.getReference(SpriteUpBuffStateReference));
-//				if (MainRoleManager.actor.stateMachine.isSpriteUp) 
-//				{
-//					MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_BUFF_SPRITEUP);
-//				}
-//				else
-//				{
-//					var buffRef:SpriteUpBuffStateReference = MainRoleManager.actor.stateMachine.getReference(SpriteUpBuffStateReference) as SpriteUpBuffStateReference;
-//					MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_BUFF_SPRITEUP,buffRef);
-//				}
+				//				if (MainRoleManager.actor.stateMachine.isSpriteUp) 
+				//				{
+				//					MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_BUFF_SPRITEUP);
+				//				}
+				//				else
+				//				{
+				//					var buffRef:SpriteUpBuffStateReference = MainRoleManager.actor.stateMachine.getReference(SpriteUpBuffStateReference) as SpriteUpBuffStateReference;
+				//					MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_BUFF_SPRITEUP,buffRef);
+				//				}
 			});
 			commandList.put( ".pet", function (...arg):void
 			{
 				AppManager.showApp(AppConstant.RANKLISTPANLE);
-//				var mod:int = arg[0];
-//				
-//				var petInfo:PetInfo=new PetInfo();
-//				petInfo.petId=new long(9999);
-//				petInfo.ownerId=(MainRoleManager.actor.data as HeroData).serverID;
-//				petInfo.petModelId=mod;
-//				petInfo.x=MainRoleManager.actor.pos.x;
-//				petInfo.y=-MainRoleManager.actor.pos.y;
-//				var data:GirlPetData=new GirlPetData();
-//				data.setServerData(petInfo);
-//				SceneRoleManager.getInstance().createGirlPet(data);
+				//				var mod:int = arg[0];
+				//				
+				//				var petInfo:PetInfo=new PetInfo();
+				//				petInfo.petId=new long(9999);
+				//				petInfo.ownerId=(MainRoleManager.actor.data as HeroData).serverID;
+				//				petInfo.petModelId=mod;
+				//				petInfo.x=MainRoleManager.actor.pos.x;
+				//				petInfo.y=-MainRoleManager.actor.pos.y;
+				//				var data:GirlPetData=new GirlPetData();
+				//				data.setServerData(petInfo);
+				//				SceneRoleManager.getInstance().createGirlPet(data);
 			});
 			commandList.put( ".sset", function (...arg):void
 			{

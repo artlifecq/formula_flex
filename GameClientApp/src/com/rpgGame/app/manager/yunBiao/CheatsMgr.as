@@ -245,7 +245,7 @@ package com.rpgGame.app.manager.yunBiao
 					}
 					else
 					{
-						NoticeManager.showNotifyById(11002,cheat.cheatsConfig.q_name,cheat.level+1);
+						NoticeManager.showNotifyById(11002,"",cheat.cheatsConfig.q_name,cheat.level+1);
 					}
 					
 				}

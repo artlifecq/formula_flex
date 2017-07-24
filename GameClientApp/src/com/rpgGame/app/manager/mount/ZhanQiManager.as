@@ -9,6 +9,7 @@ package com.rpgGame.app.manager.mount
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.shop.ShopManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.sender.HorseSender;
 	import com.rpgGame.app.ui.alert.SomeSystemNoticePanel;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
@@ -144,20 +145,17 @@ package com.rpgGame.app.manager.mount
 			var useCount:int = showdata.getUseExtralItem(type);
 			if(!extraItemInfo.canUseItem(showdata.zhanqiLevel,useCount))
 			{
-				NoticeManager.showNotifyById(9004,extraItemInfo.clientItemInfo.qItem.q_name);
+				NoticeManager.showNotifyById(9004,"",extraItemInfo.clientItemInfo.qItem.q_name);
 				return false;
 			}
 			
 			var clientitem:ClientItemInfo = extraItemInfo.clientItemInfo;
 			if(BackPackManager.instance.getBagItemsCountById(clientitem.cfgId)<=0)
 			{
-				NoticeManager.showNotifyById(9002,clientitem.qItem.q_name);
+				NoticeManager.showNotifyById(9002,"",clientitem.qItem.q_name);
 				return false;
 			}
-			var msg:CSUseWarFlagAddtionMessage = new CSUseWarFlagAddtionMessage();
-			msg.type = extraItemInfo.eatType;
-			msg.num = 1;
-			SocketConnection.send(msg);
+			HorseSender.onCSUseWarFlagAddtionMessage(extraItemInfo.eatType);
 			return true;
 		}
 		
@@ -173,7 +171,7 @@ package com.rpgGame.app.manager.mount
 			}
 			if(!showdata.isAutoBuyItem&&!showdata.canUpLevel())
 			{
-				NoticeManager.showNotifyById(9002,showdata.upLevelItem.qItem.q_name);
+				NoticeManager.showNotifyById(9002,"",showdata.upLevelItem.qItem.q_name);
 				return false;
 			}
 			if(showdata.isAutoBuyItem&&!showdata.canUpLevel())
@@ -188,14 +186,11 @@ package com.rpgGame.app.manager.mount
 				var needNum:int=showdata.upLevelNeedItemCount-showdata.bagHaveItemCount;
 				if(!ShopManager.ins.isCanBuy(shopItems,needNum))
 				{
-					NoticeManager.showNotifyById(9002,"元宝");
+					NoticeManager.showNotifyById(9002,"","元宝");
 					return false;
 				}
 			}
-			var msg:CSWarFlagStratumUpToGameMessage = new CSWarFlagStratumUpToGameMessage();
-			msg.Automatic = showdata.isAutoBuyItem?1:0;
-			msg.AutoUp = showdata.isAutoing?1:0;
-			SocketConnection.send(msg);
+			HorseSender.onCSWarFlagStratumUpToGameMessage(showdata.isAutoBuyItem?1:0,showdata.isAutoing?1:0);
 			return true;
 		}
 		

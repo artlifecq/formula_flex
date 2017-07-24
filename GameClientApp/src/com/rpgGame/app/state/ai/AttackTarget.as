@@ -178,6 +178,10 @@ package com.rpgGame.app.state.ai
 			{
 				return false;
 			}
+			 if (MainRoleManager.actor.stateMachine.isSpriteUp)
+			{
+				return false;
+			}
 			if (MainRoleManager.actor.stateMachine.isLockCaseSpell)
 			{
 				return false;

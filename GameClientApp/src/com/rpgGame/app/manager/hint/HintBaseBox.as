@@ -355,7 +355,8 @@ package com.rpgGame.app.manager.hint
 						var maxHeight : int = _hintTypeSet.maxShowCount * _hintTypeSet.height;
 						pageHeight = maxHeight;
 					}
-					var nextPos : int = label.y + label.height;
+					var nextPos : int = label.y + label.bgHeight;
+					trace( "```````````````"+label.y.toString()+"——"+ label.bgHeight);
 					if (label == bottomLabel)
 					{
 						_topOffset = pageHeight - nextPos;

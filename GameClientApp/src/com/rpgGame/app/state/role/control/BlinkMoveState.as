@@ -6,6 +6,7 @@ package com.rpgGame.app.state.role.control
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.core.state.role.control.MoveState;
+	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SpellBlinkType;
@@ -56,6 +57,10 @@ package com.rpgGame.app.state.role.control
 		{
 			if (_machine && !_machine.isInPool)
 			{
+				try{if((((_machine as RoleStateMachine).owner as SceneRole).data as MonsterData).modelID==9008)
+				{
+					Lyt.a("%%%%冲锋时间:"+_stateReference.totalTime+"::"+_stateReference.throwDelayTime);
+				}}catch(e:Error){}
 				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {x: true, z: true, offsetY: true});
 				TweenLite.killDelayedCallsTo(onReleaseDelayComplete);
 				if (_stateReference.throwDelayTime > 0)
@@ -140,6 +145,7 @@ package com.rpgGame.app.state.role.control
 			var targetZ : int = _stateReference.targetPos.y;
 			_stateReference.move();
 			var totalTime : int = _stateReference.totalTime;
+			
 			if (totalTime > 0)
 				TweenLite.to(_machine.owner as SceneRole, totalTime * 0.001, {x: targetX, z: targetZ, ease: Linear.easeNone, overwrite: 0, onComplete: onMoveComplete});
 			else
@@ -188,6 +194,10 @@ package com.rpgGame.app.state.role.control
 
 		private function onMoveComplete() : void
 		{
+			try{if((((_machine as RoleStateMachine).owner as SceneRole).data as MonsterData).modelID==9008)
+			{
+				Lyt.a("%%%%冲锋完成");
+			}}catch(e:Error){}
 			if (_machine && !_machine.isInPool)
 			{
 				var targetX : int = _stateReference.targetPos.x;

@@ -44,8 +44,8 @@ package com.rpgGame.app.ui.main.top
 		private function addEft():void
 		{
 			
-			_greenEffect= this.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINGYANTIAO_JINDULV),0,0,0);
-			_yellowEffect= this.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINGYANTIAO_JINDUHUANG),0,0,0);
+			_greenEffect= this.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINGYANTIAO_JINDULV),0,5,0);
+			_yellowEffect= this.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINGYANTIAO_JINDUHUANG),0,5,0);
 			
 		}
 		/**屏蔽事件*/
@@ -82,7 +82,7 @@ package com.rpgGame.app.ui.main.top
 		
 		public function resize(w : int, h : int) : void {
 			this.x=this.y = 0;
-//			_skin.top_bg.width=w;
+			_skin.top_bg.width=w;
 			maxW=w;
 			updateExpBar();
 		}

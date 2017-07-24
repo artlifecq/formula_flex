@@ -16,6 +16,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.manager.TrusteeshipFightSoulManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.fight.FightManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
@@ -160,6 +161,7 @@ package com.rpgGame.app.cmdlistener.scene
 			}
 			
 			
+			
 		}
 		
 		private function onResAttackVentToClientMessage(msg:ResAttackVentToClientMessage):void
@@ -185,7 +187,6 @@ package com.rpgGame.app.cmdlistener.scene
 				ReleaseSpellHelper.fightSoulSpell(info);
 			else
 				ReleaseSpellHelper.releaseSpell(info);
-			
 			
 			
 		}

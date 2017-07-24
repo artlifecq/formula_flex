@@ -327,7 +327,7 @@ package com.rpgGame.app.richText
 					var t:String=unitData.linkData;
 					var id:String=ChatUtil.getPanel(t);
 					FunctionOpenManager.openAppPaneById(id,null,false);
-					AppManager.showAppNoHide(AppConstant.MOUNT_PANEL);	
+//					AppManager.showAppNoHide(AppConstant.MOUNT_PANEL);	
 					break;
 				case RichTextCustomLinkType.TASK_NPC_NAME_TYPE:
 					var npcId : int = parseInt(unitData.linkData); //任务，npc的id
