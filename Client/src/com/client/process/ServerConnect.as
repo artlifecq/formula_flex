@@ -187,7 +187,7 @@ package com.client.process
 		private function closeSocket(deley : int, msg : String) : void
 		{
 			_connectDelay = deley;
-			GameLog.addShow("服务器连接" + msg);
+			GameLog.addShow("服务器连接关闭:" + msg);
 			//			SenderReferenceSet.stop();
 			//
 //			if (_retryTimer)
@@ -232,6 +232,7 @@ package com.client.process
 		
 		private function reconnect() : void
 		{
+            GameLog.addShow("[ServerConnect] [reconnect]");
 			if (isProcessing)
 			{
 				connect();
