@@ -129,7 +129,7 @@ package com.client.process
 			SocketConnection.messageMgr.addEventListener(MessageMgr.CLIENT_CONNECT_TO_SERVER, socketConnectHandle);
 			SocketConnection.messageMgr.addEventListener(MessageMgr.CLIENT_FAILD_TO_SERVER, socketConnectFailHandle);
             
-			SocketConnection.messageMgr.Connect(ClientConfig.loginIP, ClientConfig.loginPort, 5000);
+			SocketConnection.messageMgr.Connect(ClientConfig.loginIP, ClientConfig.loginPort, 10000);
 //			_retryConnectCnt = 0;
 //			if (!_retryTimer)
 //			{
