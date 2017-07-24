@@ -122,7 +122,7 @@ package com.rpgGame.app.view.icon
 		{
 			if(_qualityEft==null){
 				_qualityEft=new UIMovieClip();
-				_qualityEft.frameRate=4;
+				_qualityEft.frameRate=8;
 			}else{
 				_qualityEft.removeChildren();
 			}
