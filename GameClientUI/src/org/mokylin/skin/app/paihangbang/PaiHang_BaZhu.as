@@ -26,6 +26,8 @@ package org.mokylin.skin.app.paihangbang
 
 		public var btnYuanbao:feathers.controls.Button;
 
+		public var content:feathers.controls.Group;
+
 		public var grpHead:feathers.controls.Group;
 
 		public var headbg:feathers.controls.UIAsset;
@@ -51,7 +53,7 @@ package org.mokylin.skin.app.paihangbang
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [bg_i(),__PaiHang_BaZhu_UIAsset1_i(),__PaiHang_BaZhu_UIAsset2_i(),__PaiHang_BaZhu_UIAsset3_i(),__PaiHang_BaZhu_UIAsset4_i(),grpHead_i(),btnPutong_i(),btnYuanbao_i(),lbAdd_i(),__PaiHang_BaZhu_UIAsset5_i(),__PaiHang_BaZhu_UIAsset6_i(),__PaiHang_BaZhu_Group1_i(),__PaiHang_BaZhu_Group2_i(),__PaiHang_BaZhu_Label1_i(),__PaiHang_BaZhu_Label2_i(),__PaiHang_BaZhu_Label3_i(),__PaiHang_BaZhu_Label4_i(),lbPutong_i(),__PaiHang_BaZhu_Label5_i(),lbYuanbao_i(),lbJiacheng_i()];
+			this.elementsContent = [bg_i(),__PaiHang_BaZhu_UIAsset1_i(),__PaiHang_BaZhu_UIAsset2_i(),__PaiHang_BaZhu_UIAsset3_i(),__PaiHang_BaZhu_UIAsset4_i(),grpHead_i(),content_i(),btnPutong_i(),btnYuanbao_i(),lbAdd_i(),__PaiHang_BaZhu_UIAsset5_i(),__PaiHang_BaZhu_UIAsset6_i(),__PaiHang_BaZhu_Group1_i(),__PaiHang_BaZhu_Group2_i(),__PaiHang_BaZhu_Label1_i(),__PaiHang_BaZhu_Label2_i(),__PaiHang_BaZhu_Label3_i(),__PaiHang_BaZhu_Label4_i(),lbPutong_i(),__PaiHang_BaZhu_Label5_i(),lbYuanbao_i(),lbJiacheng_i()];
 			
 			states = {
 			};
@@ -184,7 +186,7 @@ package org.mokylin.skin.app.paihangbang
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/app/paihangbang/word/huanyubazhu.png";
+			temp.styleName = "ui/app/paihangbang/word/weiwoduzun.png";
 			temp.x = 438;
 			temp.y = 18;
 			return temp;
@@ -300,6 +302,18 @@ package org.mokylin.skin.app.paihangbang
 			temp.width = 88;
 			temp.x = 404;
 			temp.y = 521;
+			return temp;
+		}
+
+		private function content_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			content = temp;
+			temp.name = "content";
+			temp.height = 400;
+			temp.width = 586;
+			temp.x = 68;
+			temp.y = 119;
 			return temp;
 		}
 
