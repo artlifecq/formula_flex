@@ -53,9 +53,9 @@ package com.rpgGame.app.state.role.control
 			}
 			return false;
 		}
-		override public function beforeLeave():void
+		override public function afterLeave():void
 		{
-			super.beforeLeave();
+			super.afterLeave();
 			var ref:BuffStateReference=_ref as BuffStateReference;
 			var qBuff:Q_buff=ref.buffData._data;
 			if (qBuff) 
