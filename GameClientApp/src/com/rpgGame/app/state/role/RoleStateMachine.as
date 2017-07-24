@@ -476,6 +476,11 @@ package com.rpgGame.app.state.role
 			var state : IState = getCurrState(SpriteUpBuffState);
 			return state != null;
 		}
+		public function get isInFightState():Boolean
+		{
+			var state : IState = getCurrState(FightLeaveEnterBuffState);
+			return state != null;
+		}
 		override protected function createState(type : int) : IState
 		{
 			var state : IState = null;

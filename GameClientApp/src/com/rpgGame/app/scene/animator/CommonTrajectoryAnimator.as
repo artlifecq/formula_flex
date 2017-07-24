@@ -366,6 +366,7 @@ package com.rpgGame.app.scene.animator
 							if (_isTrackTarget&&_locusPointIndex==1) 
 							{
 								varObj.bezierThrough=[{x:(_endPosX+locusPoint.position.x)/2,z:(_endPosZ+locusPoint.position.z)/2+200*(1-Math.random()*2)}];
+								//varObj.orientToBezier=true
 							}
 							TweenLite.to(_renderSet, hitTime * 0.001, varObj);
 							var scene : GameScene3D;
@@ -497,9 +498,8 @@ package com.rpgGame.app.scene.animator
 				}
 				else if (_isTrackTarget) 
 				{
-					//dist = MathUtil.getDistance(_renderSet.x, _renderSet.z, _lastPos.x, _lastPos.z);
-//					_renderSet.rotationX = dist > 0 ? Math.atan((_renderSet.y - _lastPos.y) / dist) * 57.33 : 0;
-					_renderSet.rotationY =Math.atan2(_renderSet.z-_lastPos.z,_renderSet.x-_lastOffset.x);
+					dist = MathUtil.getDistance(_renderSet.x, _renderSet.z, _lastPos.x, _lastPos.z);
+					//_renderSet.rotationZ = dist > 0 ? Math.atan((_renderSet.y - _lastPos.y) / dist) * 57.33 : 0;
 				}
 				_lastPos.setTo(_renderSet.x, _renderSet.y, _renderSet.z);
 				_lastOffset.setTo(_renderSet.offsetX, _renderSet.offsetY, _renderSet.offsetZ);

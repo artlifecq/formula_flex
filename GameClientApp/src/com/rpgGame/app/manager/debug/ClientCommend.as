@@ -355,6 +355,17 @@ package   com.rpgGame.app.manager.debug
 				}
 				
 			});
+			commandList.put( ".ft", function (...arg):void
+			{
+				if (MainRoleManager.actor.stateMachine.isInFightState) 
+				{
+					MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_ENTER_LEAVE_FIGHT);
+				}
+				else
+				{
+					MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_ENTER_LEAVE_FIGHT);
+				}
+			});
 		}
 		
 		
