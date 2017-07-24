@@ -46,7 +46,7 @@ package com.rpgGame.app.display3D
 			super();
 			avatar3d=new InterObject3D();
 			this.addChild3D(avatar3d);
-			initForContainer();
+			initForContainer(container);
 		}
 		
 		private function initForContainer(container:DisplayObjectContainer=null):void

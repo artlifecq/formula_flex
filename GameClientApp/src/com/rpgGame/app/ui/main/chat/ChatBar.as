@@ -127,7 +127,7 @@ package com.rpgGame.app.ui.main.chat {
 			_skin.listBar.dataProvider = new ListCollection();
 			var layout:VerticalLayout = new VerticalLayout();
 			layout.useVirtualLayout = true;
-			layout.gap = 3;
+			layout.gap = 0;
 			layout.hasVariableItemDimensions = true;
 			_skin.listBar.layout = layout;
 			

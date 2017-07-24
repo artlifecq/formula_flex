@@ -29,7 +29,7 @@ package com.rpgGame.app.ui.main.chat
 		 * @return
 		 *
 		 */
-		public static function getChatMessageByChannel(channel : int,name:String,message:String) : String
+		public static function getChatMessageByChannel(channel :int,name:String,message:String) :String
 		{
 			var chanelImageName:String = "pu_tong";
 			switch(channel)
@@ -71,7 +71,7 @@ package com.rpgGame.app.ui.main.chat
 			var channelImageUrl:String = "ui/mainui/chat/chanel/" + chanelImageName + ".png";
 			var channelImageCode:String = RichTextCustomUtil.getImageLinkCode(channelImageUrl,null,null,2);
 			//			return HtmlTextUtil.getTextColor(getChannelColor(channel), "【" + ChatUtil.getChannelTitle(channel) + "】" + message);
-			return HtmlTextUtil.getTextColor(0xf7ff15,"【" + ChatUtil.getChannelTitle(channel) + "】"+HtmlTextUtil.underLine(name)+": ")+HtmlTextUtil.getTextColor(0xd7d7d7,message);
+			return HtmlTextUtil.getTextColor(0xf7ff15,"【" + ChatUtil.getChannelTitle(channel) + "】"+HtmlTextUtil.underLine(name)+":")+HtmlTextUtil.getTextColor(0xd7d7d7,message);
 			//			return channelImageCode + HtmlTextUtil.getTextColor(getChannelColor(channel), message);
 		}
 		
@@ -83,7 +83,7 @@ package com.rpgGame.app.ui.main.chat
 			return chatHtml;
 		}
 		
-		public static function getChannelColor(channelType : int) : uint
+		public static function getChannelColor(channelType :int) :uint
 		{
 			switch (channelType)
 			{
@@ -121,7 +121,7 @@ package com.rpgGame.app.ui.main.chat
 		 */
 		public static function getTabsName(channelType:int):String
 		{
-			var info : String;
+			var info :String;
 			switch (channelType)
 			{
 				case EnumChatTabsType.TABS_ALL:
@@ -146,9 +146,9 @@ package com.rpgGame.app.ui.main.chat
 		 * @return
 		 *
 		 */
-		public static function getChannelTitle(channelType : int) : String
+		public static function getChannelTitle(channelType :int) :String
 		{
-			var info : String;
+			var info :String;
 			switch (channelType)
 			{
 				case EnumChatChannelType.CHAT_CHANNEL_SYSTEM:
@@ -188,9 +188,9 @@ package com.rpgGame.app.ui.main.chat
 			return info;
 		}
 		
-		public static function getCheckTitle(channelType : int):String
+		public static function getCheckTitle(channelType :int):String
 		{
-			var info : String = "接收" + getChannelTitle(channelType) + "频道信息";
+			var info :String = "接收" + getChannelTitle(channelType) + "频道信息";
 			return info;
 		}
 		
@@ -201,10 +201,10 @@ package com.rpgGame.app.ui.main.chat
 		 * @return
 		 *
 		 */
-		public static function trim(str : String) : String
+		public static function trim(str :String) :String
 		{
-			var r1 : RegExp = /^\s*/g;
-			var r2 : RegExp = /\s*$/g;
+			var r1 :RegExp = /^\s*/g;
+			var r2 :RegExp = /\s*$/g;
 			return str.replace(r1, "").replace(r2, "");
 		}
 		
@@ -215,12 +215,12 @@ package com.rpgGame.app.ui.main.chat
 		 * @return
 		 *
 		 */
-		public static function deleteStringblankSpace(str : String, maxLen : int = 14, isBytes : Boolean = true) : String
+		public static function deleteStringblankSpace(str :String, maxLen :int = 14, isBytes :Boolean = true) :String
 		{
-			var info : String = "";
-			var s : String = "";
-			var len : int = str.length;
-			for (var i : int = 0; i < len; i++)
+			var info :String = "";
+			var s :String = "";
+			var len :int = str.length;
+			for (var i :int = 0; i < len; i++)
 			{
 				s = str.substring(i, i + 1);
 				if (s != " ")
@@ -252,13 +252,13 @@ package com.rpgGame.app.ui.main.chat
 		 * @return
 		 *
 		 */
-		public static function getStrByByteLen(_info : String, maxlen : int = 96) : String
+		public static function getStrByByteLen(_info :String, maxlen :int = 96) :String
 		{
 			_info = trim(_info);
 			
-			var info : String = "";
-			var len : int = _info.length;
-			for (var i : int = 0; i < len; i++)
+			var info :String = "";
+			var len :int = _info.length;
+			for (var i :int = 0; i < len; i++)
 			{
 				info = _info.substring(0, i + 1);
 				if (getTextByteLen(info) >= maxlen)
@@ -274,7 +274,7 @@ package com.rpgGame.app.ui.main.chat
 		 * @param	info
 		 * @return
 		 */
-		public static function getTextByteLen(info : String) : int
+		public static function getTextByteLen(info :String) :int
 		{
 			return toByteArray(info).length;
 		}
@@ -284,9 +284,9 @@ package com.rpgGame.app.ui.main.chat
 		 * @param	info
 		 * @return
 		 */
-		private static function toByteArray(info : String) : ByteArray
+		private static function toByteArray(info :String) :ByteArray
 		{
-			var bay : ByteArray = new ByteArray();
+			var bay :ByteArray = new ByteArray();
 			bay.writeMultiByte(info, "utf8");
 			bay.position = 0;
 			return bay;
@@ -306,7 +306,7 @@ package com.rpgGame.app.ui.main.chat
 						str=str.replace(ChatManager.MSG_GOODS_CODE,goodsCode);
 					}
 				}
-				str=str.replace(ChatManager.MSG_GOODS_CODE,"道具数据异常: 包含的道具_"+info.extraResInfo.itemInfos.length);
+				str=str.replace(ChatManager.MSG_GOODS_CODE,"道具数据异常:包含的道具_"+info.extraResInfo.itemInfos.length);
 			}
 			str=str.replace(ChatManager.MSG_GOODS_CODE,"后台数据异常");
 			return str;
@@ -398,34 +398,34 @@ package com.rpgGame.app.ui.main.chat
 			switch(msgInfo.type)
 			{
 				case EnumChatChannelType.CHAT_CHANNEL_SYSTEM:				
-					return HtmlTextUtil.getTextColor(0xFFFFFF,getPinDaoShow(msgInfo.type)+" "+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue))+": ")+HtmlTextUtil.getTextColor(0xFFFFFF,str);
+					return HtmlTextUtil.getTextColor(0xFFFFFF,getPinDaoShow(msgInfo.type)+" "+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue))+":")+HtmlTextUtil.getTextColor(0xFFFFFF,str);
 					
 				case EnumChatChannelType.CHAT_CHANNEL_WORLD:				
-					return HtmlTextUtil.getTextColor(0xdfb612,getPinDaoShow(msgInfo.type)+" "+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue))+": ")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
+					return HtmlTextUtil.getTextColor(0xdfb612,getPinDaoShow(msgInfo.type)+" "+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue))+":")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
 					
 				case EnumChatChannelType.CHAT_CHANNEL_NORMAL:
-					return HtmlTextUtil.getTextColor(0xcdcb9d,getPinDaoShow(msgInfo.type)+" "+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue))+": ")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
+					return HtmlTextUtil.getTextColor(0xcdcb9d,getPinDaoShow(msgInfo.type)+" "+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue))+":")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
 					
 				case EnumChatChannelType.CHAT_CHANNEL_PARTY:
-					return HtmlTextUtil.getTextColor(0x18b2cf,getPinDaoShow(msgInfo.type)+" "+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue))+": ")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
+					return HtmlTextUtil.getTextColor(0x18b2cf,getPinDaoShow(msgInfo.type)+" "+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue))+":")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
 					
 				case EnumChatChannelType.CHAT_CHANNEL_TEAM:
-					return HtmlTextUtil.getTextColor(0x2dcfab,getPinDaoShow(msgInfo.type)+" "+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue))+": ")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
+					return HtmlTextUtil.getTextColor(0x2dcfab,getPinDaoShow(msgInfo.type)+" "+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue))+":")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
 					
 				case EnumChatChannelType.CHAT_CHANNEL_LABA:
-					return HtmlTextUtil.getTextColor(0xf7ff15,getPinDaoShow(msgInfo.type)+" "+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue))+": ")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
+					return HtmlTextUtil.getTextColor(0xf7ff15,getPinDaoShow(msgInfo.type)+" "+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue))+":")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
 					
 				case EnumChatChannelType.CHAT_CHANNEL_KUA_FU:
-					return HtmlTextUtil.getTextColor(0xFFFFFF,getPinDaoShow(msgInfo.type)+" "+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue))+": ")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
+					return HtmlTextUtil.getTextColor(0xFFFFFF,getPinDaoShow(msgInfo.type)+" "+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue))+":")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
 					
 				case EnumChatChannelType.CHAT_CHANNEL_SILIAO:
 				{
 					if(msgInfo.playerId.ToGID()==MainRoleManager.actorID)
 					{
-						return HtmlTextUtil.getTextColor(0xe58bff,getPinDaoShow(msgInfo.type))+" "+HtmlTextUtil.getTextColor(0xFFFFFF,"你对")+getPlayerVipShow(vip)+HtmlTextUtil.getTextColor(0xe58bff,(replacePlayerShow(ChatManager.currentSiLiaoTargetName,0xFFFFFF,msgInfo.playerId.hexValue)))+HtmlTextUtil.getTextColor(0xFFFFFF,"说 : ")+HtmlTextUtil.getTextColor(0xe58bff,str);
+						return HtmlTextUtil.getTextColor(0xe58bff,getPinDaoShow(msgInfo.type))+" "+HtmlTextUtil.getTextColor(0xFFFFFF,"你对")+getPlayerVipShow(vip)+HtmlTextUtil.getTextColor(0xe58bff,(replacePlayerShow(ChatManager.currentSiLiaoTargetName,0xFFFFFF,msgInfo.playerId.hexValue)))+HtmlTextUtil.getTextColor(0xFFFFFF,"说 :")+HtmlTextUtil.getTextColor(0xe58bff,str);
 					}
 					else
-						return HtmlTextUtil.getTextColor(0xe58bff,getPinDaoShow(msgInfo.type)+" "+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue)))+HtmlTextUtil.getTextColor(0xFFFFFF,"对你说 : ")+HtmlTextUtil.getTextColor(0xe58bff,str);
+						return HtmlTextUtil.getTextColor(0xe58bff,getPinDaoShow(msgInfo.type)+" "+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue)))+HtmlTextUtil.getTextColor(0xFFFFFF,"对你说 :")+HtmlTextUtil.getTextColor(0xe58bff,str);
 				}
 					
 				case EnumChatChannelType.CHAT_CHANNEL_NOTICE:
@@ -440,7 +440,7 @@ package com.rpgGame.app.ui.main.chat
 		/**
 		 * 替换超链接
 		 * */
-		public static function replaceStr2(str : String):String
+		public static function replaceStr2(str :String):String
 		{
 			var arr:Array=LanguageConfig.menus;
 			for(var i:int=0;i<arr.length;i++)
@@ -471,10 +471,10 @@ package com.rpgGame.app.ui.main.chat
 					var str:String=args[arr[i].i];
 					switch(arr[i].t)
 					{
-						case 1: //人物
+						case 1://人物
 							args[arr[i].i]=replacePlayerShow(str,0xFFFFFF,arr[i].p.id);
 							break;
-						case 2: //物品
+						case 2://物品
 							args[arr[i].i]=replaceItemShowByMod(arr[i].p.mod);
 							break;
 					}
