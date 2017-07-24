@@ -142,6 +142,7 @@ package com.client.process
 		
 		protected function socketConnectHandle(event:NetEvent):void
 		{
+            GameLog.addShow("[ServerConnect] [socketConnectHandle]");
 			_allowReconnect = true;
 			_errMsg = "";
 			GameAlert.hide();
@@ -381,6 +382,7 @@ package com.client.process
 		
 		private function socketDropsHandle(event:NetEvent):void
 		{
+            GameLog.addShow("[ServerConnect] [socketDropsHandle]");
 			ReconnectionPanelExt.Show();
 		}
 		
