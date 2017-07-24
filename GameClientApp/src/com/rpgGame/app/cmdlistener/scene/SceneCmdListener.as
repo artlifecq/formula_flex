@@ -333,7 +333,7 @@ package com.rpgGame.app.cmdlistener.scene
 			if(!role){
 				return;
 			}
-			role.updateHair(msg.helmResId);//该协议其实作废了
+			role.updateHair(msg.helmResId);
 		}
 		private function onResWeaponChangeMessage(msg:ResWeaponChangeMessage):void
 		{
