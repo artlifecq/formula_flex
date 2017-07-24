@@ -392,6 +392,7 @@ package  com.rpgGame.netData {
 	import com.rpgGame.netData.map.handler.SCAreaJumpHandler;
 	import com.rpgGame.netData.map.handler.SCAttachStateChangeHandler;
 	import com.rpgGame.netData.map.handler.SCSceneObjMoveHandler;
+	import com.rpgGame.netData.map.handler.SCUpdateTopLeaderHandler;
 	import com.rpgGame.netData.map.message.ResArmorChangeMessage;
 	import com.rpgGame.netData.map.message.ResChangeDirectMessage;
 	import com.rpgGame.netData.map.message.ResChangeMapFailedMessage;
@@ -444,6 +445,7 @@ package  com.rpgGame.netData {
 	import com.rpgGame.netData.map.message.SCAreaJumpMessage;
 	import com.rpgGame.netData.map.message.SCAttachStateChangeMessage;
 	import com.rpgGame.netData.map.message.SCSceneObjMoveMessage;
+	import com.rpgGame.netData.map.message.SCUpdateTopLeaderMessage;
 	import com.rpgGame.netData.marriage.handler.SCDivorceHandler;
 	import com.rpgGame.netData.marriage.handler.SCInteractionHandler;
 	import com.rpgGame.netData.marriage.handler.SCMarriageInfoHandler;
@@ -771,13 +773,17 @@ package  com.rpgGame.netData {
 	import com.rpgGame.netData.top.handler.ResListLeaderToClientHandler;
 	import com.rpgGame.netData.top.handler.ResRankRewardHandler;
 	import com.rpgGame.netData.top.handler.ResToplistToClientHandler;
+	import com.rpgGame.netData.top.handler.ResUpdateTopLeaderHandler;
 	import com.rpgGame.netData.top.handler.ResWorshipCountHandler;
 	import com.rpgGame.netData.top.handler.ResWorshipValueHandler;
+	import com.rpgGame.netData.top.handler.SCTopLeaderHandler;
 	import com.rpgGame.netData.top.message.ResListLeaderToClientMessage;
 	import com.rpgGame.netData.top.message.ResRankRewardMessage;
 	import com.rpgGame.netData.top.message.ResToplistToClientMessage;
+	import com.rpgGame.netData.top.message.ResUpdateTopLeaderMessage;
 	import com.rpgGame.netData.top.message.ResWorshipCountMessage;
 	import com.rpgGame.netData.top.message.ResWorshipValueMessage;
+	import com.rpgGame.netData.top.message.SCTopLeaderMessage;
 	import com.rpgGame.netData.transactions.handler.ResTmpYuanbaoLogHandler;
 	import com.rpgGame.netData.transactions.handler.ResTransactionsCanceledHandler;
 	import com.rpgGame.netData.transactions.handler.ResTransactionsChangeGoldHandler;
@@ -996,6 +1002,7 @@ package  com.rpgGame.netData {
 			register(101150, ResHelmChangeMessage, ResHelmChangeHandler);
 			register(101151, SCAttachStateChangeMessage, SCAttachStateChangeHandler);
 			register(101221, SCAreaJumpMessage, SCAreaJumpHandler);
+			register(101222, SCUpdateTopLeaderMessage, SCUpdateTopLeaderHandler);
 			register(101701, ResSynPlayerPositionMessage, ResSynPlayerPositionHandler);
 			register(101702, ResSynMonsterPositionMessage, ResSynMonsterPositionHandler);
 			register(101703, ResMapBlocksMessage, ResMapBlocksHandler);
@@ -1210,6 +1217,8 @@ package  com.rpgGame.netData {
 			register(141103, ResWorshipValueMessage, ResWorshipValueHandler);
 			register(141104, ResRankRewardMessage, ResRankRewardHandler);
 			register(141105, ResWorshipCountMessage, ResWorshipCountHandler);
+			register(141106, ResUpdateTopLeaderMessage, ResUpdateTopLeaderHandler);
+			register(141107, SCTopLeaderMessage, SCTopLeaderHandler);
 			register(142101, ResStallGoodsMessage, ResStallGoodsHandler);
 			register(142102, ResStallInfoMessage, ResStallInfoHandler);
 			register(142103, ResChangeStallNameMessage, ResChangeStallNameHandler);

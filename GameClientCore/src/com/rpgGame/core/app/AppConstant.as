@@ -531,5 +531,7 @@ package com.rpgGame.core.app
 		public static var RANKLISTPANLE:String = createAppInfo("rank.RankListPanle","paihangbang");
 		/**全平台排行榜**/
 		public static var RANKALLPLATFORMLISTPANLE:String = createAppInfo("rank.RankAllPlatformListPanle","paihangbang");
+		/**膜拜**/
+		public static var WORSHIP_PANLE:String = createAppInfo("rank.WorshipPanle","paihangbang");
 	}
 }
