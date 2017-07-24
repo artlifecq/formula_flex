@@ -161,7 +161,6 @@ package com.rpgGame.app.state.role
 		stateMapping[RoleStateType.CONTROL_CHECK_AUTO_FIGHT] = CheckStartAutoFightState;
 		stateMapping[RoleStateType.CONTROL_MASTERY_MAN] = MysteryManState;
 		stateMapping[RoleStateType.CONTROL_VIP] = VipBuffState;
-		stateMapping[RoleStateType.CONTROL_TRIPLE_ATTACK_LOCK] = TripleAttackSpellLockState;
 		stateMapping[RoleStateType.CONTROL_TRIPLE_ATTACK_CHECK] = CheckTripleAttackState;
 		stateMapping[RoleStateType.CONTROL_BUFF_SPRITEUP] = SpriteUpBuffState;
 		stateMapping[RoleStateType.CONTROL_BUFF_SKILLCD] = SkillCDResetState;
@@ -378,11 +377,7 @@ package com.rpgGame.app.state.role
 			var state : IState = getCurrState(CastSpellLockState);
 			return state != null;
 		}
-		public function get isTripleLockCaseSpell() : Boolean
-		{
-			var state : IState = getCurrState(TripleAttackSpellLockState);
-			return state != null;
-		}
+		
 		public function get isBingDong() : Boolean
 		{
 			var state : IState = getCurrState(BingDongState);

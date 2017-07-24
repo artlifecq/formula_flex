@@ -4,6 +4,7 @@ package com.rpgGame.app.state.role.action
 	import com.game.engine3D.state.IState;
 	import com.game.engine3D.vo.BaseRole;
 	import com.gameClient.log.GameLog;
+	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.app.state.role.control.CheckTripleAttackStateReference;
@@ -375,11 +376,6 @@ package com.rpgGame.app.state.role.action
 		override public function leave() : void
 		{
 			super.leave();
-			if ((_machine as RoleStateMachine).isTripleLockCaseSpell) 
-			{
-				GameLog.add("三连击非正常打断");
-				_machine.removeState(RoleStateType.CONTROL_TRIPLE_ATTACK_LOCK);
-			}
 			stopAttack();
 			_attackBroken = false;
 			_attackFinished = false;
@@ -425,7 +421,7 @@ package com.rpgGame.app.state.role.action
 				if (_stateReference)
 					_stateReference.totalFrame();
 				stopAttack();
-				if((_machine as RoleStateMachine).isTripleLockCaseSpell&&(_machine.getReference(TripleAttackSpellLockStateReference) as TripleAttackSpellLockStateReference).isLockSkill(AttackStateReference(_ref).spellInfo.spellData.q_skillID))
+				if((_ref.owner as SceneRole).isMainChar&&TrusteeshipManager.getInstance().tripleSkillCtrl.isLockSkill(AttackStateReference(_ref).spellInfo.spellData.q_skillID))
 				{
 					var ref:CheckTripleAttackStateReference=_machine.getReference(CheckTripleAttackStateReference) as CheckTripleAttackStateReference;
 					ref.setParams(AttackStateReference(_ref).spellInfo.spellData.q_skillID);
@@ -596,11 +592,6 @@ package com.rpgGame.app.state.role.action
 			{
 				_totalFrameTween.kill();
 				_totalFrameTween = null;
-			}
-			if ((_machine as RoleStateMachine).isTripleLockCaseSpell) 
-			{
-				GameLog.add("三连击非正常打断2");
-				_machine.removeState(RoleStateType.CONTROL_TRIPLE_ATTACK_LOCK);
 			}
 			super.dispose();
 		}
