@@ -49,8 +49,8 @@ package com.client.process
 			_allowReconnect = false;
 		}
 		
-		private var _retryTimer : Timer;
-		private var _retryConnectCnt : uint = 0;
+		//private var _retryTimer : Timer;
+		//private var _retryConnectCnt : uint = 0;
 		/** 腾讯oid*/
 		private var _tencentOid : int = 199;
 		private var _connectDelay : int = 0;
@@ -89,9 +89,7 @@ package com.client.process
 				completeProcess();
 				return;
 			}
-			//
 			loadPolicys();
-			//
 			connect();
 		}
 		
@@ -102,10 +100,8 @@ package com.client.process
 				Security.allowDomain("*");
 				Security.allowInsecureDomain("*");
 			}
-			//
 			var policyFileUrl : String = "xmlsocket://" + ClientConfig.loginIP + ":" + ClientConfig.policyPort;
 			Security.loadPolicyFile(policyFileUrl);
-			//
 			GameLog.addShow("加载跨域文件 : ", policyFileUrl);
 		}
 		
@@ -132,16 +128,16 @@ package com.client.process
 		{
 			SocketConnection.messageMgr.addEventListener(MessageMgr.CLIENT_CONNECT_TO_SERVER, socketConnectHandle);
 			SocketConnection.messageMgr.addEventListener(MessageMgr.CLIENT_FAILD_TO_SERVER, socketConnectFailHandle);
-			SocketConnection.messageMgr.Connect(ClientConfig.loginIP, ClientConfig.loginPort);
-			//
-			_retryConnectCnt = 0;
-			if (!_retryTimer)
-			{
-				_retryTimer = new Timer(1000, 0);
-			}
-			_retryTimer.addEventListener(TimerEvent.TIMER, onRetryConnect);
-			_retryTimer.reset();
-			_retryTimer.start();
+            
+			SocketConnection.messageMgr.Connect(ClientConfig.loginIP, ClientConfig.loginPort, 1000);
+//			_retryConnectCnt = 0;
+//			if (!_retryTimer)
+//			{
+//				_retryTimer = new Timer(1000, 0);
+//			}
+//			_retryTimer.addEventListener(TimerEvent.TIMER, onRetryConnect);
+//			_retryTimer.reset();
+//			_retryTimer.start();
 		}
 		
 		protected function socketConnectHandle(event:NetEvent):void
@@ -152,12 +148,12 @@ package com.client.process
 			SocketConnection.messageMgr.removeEventListener(MessageMgr.CLIENT_CONNECT_TO_SERVER, socketConnectHandle);
 			SocketConnection.messageMgr.removeEventListener(MessageMgr.CLIENT_FAILD_TO_SERVER, socketConnectFailHandle);
 			
-			if (_retryTimer)
-			{
-				_retryTimer.stop();
-				_retryTimer.removeEventListener(TimerEvent.TIMER, onRetryConnect);
-				_retryTimer = null;
-			}
+//			if (_retryTimer)
+//			{
+//				_retryTimer.stop();
+//				_retryTimer.removeEventListener(TimerEvent.TIMER, onRetryConnect);
+//				_retryTimer = null;
+//			}
 			//
 			if (isProcessed)
 			{
@@ -194,12 +190,12 @@ package com.client.process
 			GameLog.addShow("服务器连接" + msg);
 			//			SenderReferenceSet.stop();
 			//
-			if (_retryTimer)
-			{
-				_retryTimer.stop();
-				_retryTimer.removeEventListener(TimerEvent.TIMER, onRetryConnect);
-				_retryTimer = null;
-			}
+//			if (_retryTimer)
+//			{
+//				_retryTimer.stop();
+//				_retryTimer.removeEventListener(TimerEvent.TIMER, onRetryConnect);
+//				_retryTimer = null;
+//			}
 			//
 			if (_allowReconnect && (isProcessing || (!isProcessing && !ProcessStateMachine.getInstance().isProcessing)))
 			{
@@ -326,17 +322,17 @@ package com.client.process
 			}
 		}
 		
-		private function onRetryConnect(evt : TimerEvent = null) : void
-		{
-			_retryConnectCnt++;
-			GameLog.addShow("连接Socket，第" + _retryConnectCnt + "次尝试: ", ClientConfig.loginIP, ClientConfig.loginPort);
-			//
-			SocketConnection_protoBuffer.mainSocket.connect(ClientConfig.loginIP, ClientConfig.loginPort);
-			if (_retryConnectCnt > 60)
-			{
-				showErrorMessage("服务器连接不上，继续尝试重新连接中，请检查您的网络环境！");
-			}
-		}
+//		private function onRetryConnect(evt : TimerEvent = null) : void
+//		{
+//			_retryConnectCnt++;
+//			GameLog.addShow("连接Socket，第" + _retryConnectCnt + "次尝试: ", ClientConfig.loginIP, ClientConfig.loginPort);
+//			//
+//			SocketConnection_protoBuffer.mainSocket.connect(ClientConfig.loginIP, ClientConfig.loginPort);
+//			if (_retryConnectCnt > 60)
+//			{
+//				showErrorMessage("服务器连接不上，继续尝试重新连接中，请检查您的网络环境！");
+//			}
+//		}
 		
 		private var _sound:Sound;
 		private var _soundTransform:SoundTransform;
