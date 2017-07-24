@@ -62,6 +62,10 @@ package com.rpgGame.app.state.role.control
 				if (!force)
 					return false;
 			}
+			else if ((_machine as RoleStateMachine).isSpriteUp)
+			{
+				return false;
+			}
 			return true;
 		}
 

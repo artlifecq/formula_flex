@@ -419,7 +419,7 @@ package  com.rpgGame.app.manager.ctrl
 				return true;
 			}
 			_isArrivePk=false;
-			var isMoving:Boolean=_mainplayer.stateMachine.isRunning||_mainplayer.stateMachine.isWalking||_mainplayer.stateMachine.isWalkMoving;
+			var isMoving:Boolean=_mainplayer.stateMachine.isRunning||_mainplayer.stateMachine.isWalking||_mainplayer.stateMachine.isWalkMoving||_mainplayer.stateMachine.isSpriteUp;
 			if (isMoving)
 			{
 				return false;

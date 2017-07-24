@@ -67,6 +67,10 @@ package com.rpgGame.app.fight.spell
 		}
 		public static function releaseSpellPlay(spellInfo : ReleaseSpellInfo) : void
 		{
+			try{if((spellInfo.atkor.data as MonsterData).modelID==9008)
+			{
+				Lyt.a("****"+spellInfo.spellData.q_skillName+"*******");
+			}}catch(e:Error){}
 			/** 施法者 **/
 			var ref : AttackStateReference = null;
 			if (spellInfo.atkor && spellInfo.atkor.usable)
@@ -96,6 +100,7 @@ package com.rpgGame.app.fight.spell
 					ref.onStartFrame(onSelfEffectFrame);
 					ref.onHitFrame(onAttackHitFrame);
 //					ref.onBreakFrame(onBreakFrame);
+					
 					spellInfo.atkor.stateMachine.transition(RoleStateType.ACTION_ATTACK, ref);
 				}
 				else

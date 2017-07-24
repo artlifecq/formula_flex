@@ -23,17 +23,12 @@ package com.rpgGame.appModule.task
 	public class TaskLoopPanel  extends SkinUIPanel
 	{
 		protected var _skin :Huanshi_Renwu;
-		private var titleLabel:Label;
 		private var planLabel:Label;
 		private var nav1Label:Label;
 		private var nav2Label:Label;
 		private var money1Label:Label;
 		private var money2Label:Label;
 		private var timerLabel:Label;
-		/*private var ico1BgList:Vector.<UIAsset>;
-		private var ico1List:Vector.<IconCDFace>;
-		private var ico2BgList:Vector.<UIAsset>;
-		private var ico2List:Vector.<IconCDFace>;*/
 		private var icoList1Group:RewardGroup;
 		private var icoList2Group:RewardGroup;
 		private var timer:GameTimer;
@@ -51,76 +46,25 @@ package com.rpgGame.appModule.task
 		
 		private function init():void
 		{
-//			titleLabel=_skin.lbl_title;
 			planLabel=_skin.lb_wancheng;
 			nav1Label=_skin.lab_navi1;
 			nav2Label=_skin.lab_navi2;
-//			money1Label=_skin.lb_yuanbao;
-//			money2Label=_skin.lb_yinliang;
-//			timerLabel=_skin.lb_time;
+			money1Label=_skin.lb_yuanbao;
+			money2Label=_skin.lb_yinliang;
+			timerLabel=_skin.lb_time;
 			
 			var i:int;
 			var ico:IconCDFace;
-			/*ico1BgList=new Vector.<UIAsset>();
-			ico1BgList.push(_skin.ioc_1_0);
-			ico1BgList.push(_skin.ioc_1_1);
-			ico1BgList.push(_skin.ioc_1_2);
-			ico1BgList.push(_skin.ioc_1_3);
-			ico1List=new Vector.<IconCDFace>();
-			for(i=0;i<ico1BgList.length;i++)
-			{
-				ico=IconCDFace.create(IcoSizeEnum.ICON_42);
-				ico.showCD=false;
-				ico.x=ico1BgList[i].x+3;
-				ico.y=ico1BgList[i].y+3;
-				ico.visible=false;
-				ico1BgList[i].visible=false;
-				ico1List.push(ico);
-				this.addChild(ico);
-			}
-			ico2BgList=new Vector.<UIAsset>();
-			ico2BgList.push(_skin.ioc_2_0);
-			ico2BgList.push(_skin.ioc_2_1);
-			ico2BgList.push(_skin.ioc_2_2);
-			ico2BgList.push(_skin.ioc_2_3);
-			ico2List=new Vector.<IconCDFace>();
-			for(i=0;i<ico2BgList.length;i++)
-			{
-				ico=IconCDFace.create(IcoSizeEnum.ICON_42);
-				ico.showCD=false;
-				ico.x=ico2BgList[i].x+3;
-				ico.y=ico2BgList[i].y+3;
-				ico.visible=false;
-				ico2BgList[i].visible=false;
-				ico2List.push(ico);
-				this.addChild(ico);
-			}*/
+			
 			icoList1Group=new RewardGroup(IcoSizeEnum.ICON_42,_skin.ioc_1_0,RewardGroup.ALIN_LEFT,4,6,6);
 			icoList2Group=new RewardGroup(IcoSizeEnum.ICON_42,_skin.ioc_2_0,RewardGroup.ALIN_LEFT,4,6,6);
 			
-			titleLabel.htmlText="环式任务";
 			planLabel.htmlText="";
 			nav1Label.htmlText="本环任务奖励：";
 			nav2Label.htmlText="";
 			timerLabel.htmlText="";
 			money1Label.text="";
 			money2Label.text="";
-			
-			
-			/*titleLabel.htmlText="环式任务";
-			planLabel.htmlText="已完成环数：第2/20环";
-			nav1Label.htmlText="本环任务奖励：";
-			nav2Label.htmlText="今日完成<font color='#5DBD37'>5</font>环后，额外奖励";
-			timerLabel.htmlText="10秒后自动领取奖励";
-			money1Label.text="500";
-			money2Label.text="200";
-			
-			ico1List[0].setIconResName(ClientConfig.getItemIcon("201",IcoSizeEnum.ICON_42));
-			ico1List[0].visible=true;
-			ico1BgList[0].visible=true;
-			ico2List[0].setIconResName(ClientConfig.getItemIcon("203",IcoSizeEnum.ICON_42));
-			ico2List[0].visible=true;
-			ico2BgList[0].visible=true;*/
 			
 			var mach:String=GlobalSheetData.getSettingInfo(508).q_string_value;
 			var machArr:Array;
@@ -142,15 +86,15 @@ package com.rpgGame.appModule.task
 			super.onTouchTarget(target);
 			switch (target) {
 				
-//				case this._skin.one_but:
-//					subFinishBut(1);
-//					break;
-//				case this._skin.two_but:
-//					subFinishBut(2);
-//					break;
-//				case this._skin.three_but:
-//					subFinishBut(3);
-//					break;
+				case this._skin.one_but:
+					subFinishBut(1);
+					break;
+				case this._skin.two_but:
+					subFinishBut(2);
+					break;
+				case this._skin.three_but:
+					subFinishBut(3);
+					break;
 			}
 		}
 		
@@ -246,8 +190,7 @@ package com.rpgGame.appModule.task
 				setMoney();
 			}
 
-			/*timerLabel.htmlText="";
-			*/
+			
 		}
 		private function setPlanText():void
 		{
@@ -255,7 +198,6 @@ package com.rpgGame.appModule.task
 		}
 		private function setReward():void
 		{
-			//TaskUtil.setRewordInfo(TaskMissionManager.treasuerTaskData.q_reword_id,ico1List,ico1BgList,true);
 			icoList1Group.setRewardByArray(TaskMissionCfgData.getRewordById(TaskMissionManager.treasuerTaskData.q_reword_id,MainRoleManager.actorInfo.job));
 			icoList1Group.visible=true;
 		}
@@ -263,7 +205,6 @@ package com.rpgGame.appModule.task
 		{
 			var reward:Object=TaskMissionManager.getTreasuerTaskExtraReward();
 			nav2Label.htmlText="今日完成<font color='#5DBD37'>"+reward.l+"</font>环后，额外奖励";
-			//TaskUtil.setRewordInfo(reward.r,ico2List,ico2BgList,true);
 			icoList2Group.setRewardByArray(TaskMissionCfgData.getRewordById(reward.r,MainRoleManager.actorInfo.job));
 			icoList2Group.visible=true;
 		}
@@ -277,18 +218,6 @@ package com.rpgGame.appModule.task
 		
 		private function hideView():void
 		{
-			/*var i:int;
-			for(i=0;i<ico1BgList.length;i++)
-			{
-				ico1BgList[i].visible=false;
-				ico1List[i].visible=false;
-			}
-			
-			for(i=0;i<ico2BgList.length;i++)
-			{
-				ico2BgList[i].visible=false;
-				ico2List[i].visible=false;
-			}*/
 			icoList1Group.visible=false;
 			icoList2Group.visible=false;
 			planLabel.htmlText="";
