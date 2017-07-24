@@ -52,7 +52,7 @@ package com.rpgGame.core.ui.tip
 		public static const ZH_UP:String=MAIN_ZHANHUN+"-up";
 		public static const ZH_REWARD:String=MAIN_ZHANHUN+"-reward";
 		
-		//社交
+		//帮会
 		public static const MAIN_SOCAIL:String="mainsocial";
 		public static const GUILD:String=MAIN_SOCAIL+"-guild";
 		public static const GUILD_INFO:String=GUILD+"-info";
