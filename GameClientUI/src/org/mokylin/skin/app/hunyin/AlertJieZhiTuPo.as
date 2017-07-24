@@ -38,6 +38,8 @@ package org.mokylin.skin.app.hunyin
 
 		public var cboxCailiao:feathers.controls.Check;
 
+		public var cboxHunjie:feathers.controls.Check;
+
 		public var grpBar:feathers.controls.Group;
 
 		public var lbCailiao:feathers.controls.Label;
@@ -45,8 +47,6 @@ package org.mokylin.skin.app.hunyin
 		public var lbDanyao:feathers.controls.Label;
 
 		public var lbJindu:feathers.controls.Label;
-
-		public var lb_xiaohao:feathers.controls.Label;
 
 
 		//==========================================================================
@@ -57,7 +57,7 @@ package org.mokylin.skin.app.hunyin
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [bg_i(),btnClose_i(),btn_ok_i(),btn_cancel_i(),grpBar_i(),lb_xiaohao_i(),lbDanyao_i(),cboxCailiao_i(),lbCailiao_i(),__AlertJieZhiTuPo_UIAsset2_i(),__AlertJieZhiTuPo_UIAsset3_i()];
+			this.elementsContent = [bg_i(),btnClose_i(),btn_ok_i(),btn_cancel_i(),grpBar_i(),cboxHunjie_i(),lbDanyao_i(),cboxCailiao_i(),lbCailiao_i(),__AlertJieZhiTuPo_UIAsset2_i(),__AlertJieZhiTuPo_UIAsset3_i()];
 			
 			states = {
 			};
@@ -71,9 +71,9 @@ package org.mokylin.skin.app.hunyin
 		private function __AlertJieZhiTuPo_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/hunyin/pro_bg.png";
-			temp.width = 226;
-			temp.x = 0;
+			temp.styleName = "ui/component/progress/jindutiao2/jdt_di.png";
+			temp.width = 228;
+			temp.x = -1;
 			temp.y = 0;
 			return temp;
 		}
@@ -175,10 +175,24 @@ package org.mokylin.skin.app.hunyin
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.labelOffsetY = 3;
 			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
-			temp.textAlign = "left";
 			temp.color = 0x00FF33;
-			temp.width = 24;
-			temp.x = 187;
+			temp.width = 111;
+			temp.x = 191;
+			temp.y = 163;
+			return temp;
+		}
+
+		private function cboxHunjie_i():feathers.controls.Check
+		{
+			var temp:feathers.controls.Check = new feathers.controls.Check();
+			cboxHunjie = temp;
+			temp.name = "cboxHunjie";
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.labelOffsetY = 3;
+			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
+			temp.color = 0x00FF33;
+			temp.width = 111;
+			temp.x = 25;
 			temp.y = 163;
 			return temp;
 		}
@@ -204,7 +218,7 @@ package org.mokylin.skin.app.hunyin
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = false;
 			temp.width = 94;
-			temp.x = 212;
+			temp.x = 216;
 			temp.y = 165;
 			return temp;
 		}
@@ -218,8 +232,8 @@ package org.mokylin.skin.app.hunyin
 			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.underline = true;
-			temp.width = 120;
-			temp.x = 66;
+			temp.width = 150;
+			temp.x = 50;
 			temp.y = 165;
 			return temp;
 		}
@@ -236,17 +250,6 @@ package org.mokylin.skin.app.hunyin
 			temp.width = 106;
 			temp.x = 59;
 			temp.y = 3;
-			return temp;
-		}
-
-		private function lb_xiaohao_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lb_xiaohao = temp;
-			temp.name = "lb_xiaohao";
-			temp.text = "消耗:";
-			temp.x = 30;
-			temp.y = 165;
 			return temp;
 		}
 

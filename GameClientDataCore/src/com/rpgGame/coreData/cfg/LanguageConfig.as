@@ -83,13 +83,13 @@ package com.rpgGame.coreData.cfg
 			return alertInfo;
 		}
 		
-		private static function getArrAgs(args : Array) : Array
+		private static function getArrAgs( arr:Array) : Array
 		{
-			if (args.length == 1 && args[0] is Array)
-			{
-				args = args[0];
+			if (arr.length == 1 && arr[0] is Array)
+			{				
+				arr = arr[0];
 			}
-			return args;
+			return arr;
 		}
 		
 		public static function replaceStr(str : String, ... args) : String
@@ -120,17 +120,17 @@ package com.rpgGame.coreData.cfg
 			return str;
 		}
 		
-		public static function replaceStr1(str : String, ... args) : String
+		public static function replaceStr1(str : String,arr:Array) : String
 		{
-			args = getArrAgs(args);
-			if (args != null && args.length > 0 && str != null)
+			arr = getArrAgs(arr);
+			if (arr != null && arr.length > 0 && str != null)
 			{
 				var i : int;
-				var len : int = args.length;
+				var len : int = arr.length;
 				for (i = 0; i < len; i++)
 				{
-					//					var reg : RegExp = new RegExp("\\$");
-					str = str.replace("{"+i.toString()+"}", args[i]);
+					//					var reg : RegExp = new RegExp("\\$");;
+					str = str.replace("{"+i.toString()+"}",arr[i]);
 				}
 			}
 			return str;
