@@ -345,7 +345,7 @@ package com.rpgGame.app.manager.role
 				case RenderUnitType.HAIR:
 				case RenderUnitType.WEAPON:
 				case RenderUnitType.DEPUTY_WEAPON:
-				case RenderUnitType.MOUNT:
+//				case RenderUnitType.MOUNT:
 					var modeState : int = FightManager.getFightRoleState(role);
 					if (modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY)
 					{
