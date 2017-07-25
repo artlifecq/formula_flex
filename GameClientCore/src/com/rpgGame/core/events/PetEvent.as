@@ -16,5 +16,7 @@ package com.rpgGame.core.events
 		public static const PET_ACTIVE:int=UNIQUEID.NEXT;
 		
 		public static const PET_LEVEL_CHANGE:int=UNIQUEID.NEXT;
+		
+		public static const PET_BUYNUM_CHANGE:int = UNIQUEID.NEXT;
 	}
 }

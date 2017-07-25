@@ -47,6 +47,7 @@ package com.rpgGame.app.ui.scene.dungeon
 			uiClsMap.add(EnumMapType.MAP_TYPE_MIBAO,MibaoTrackerUI);
 			uiClsMap.add(EnumMapType.MAP_TYPE_FQFB,FuQiFuBenTtackerBar);
 			uiClsMap.add(EnumMapType.MAP_TYPE_WCZB,GuildWarTrackerUI);
+			uiClsMap.add(EnumMapType.MAP_TYPE_MEIREN,MeiRenTrackerBar);
 		}
 		
 		override protected function onShow() : void

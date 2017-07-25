@@ -73,7 +73,7 @@ package org.mokylin.skin.app.meiren
 			temp.text = "每次消耗：";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 25;
+			temp.x = 20;
 			temp.y = 478;
 			return temp;
 		}
@@ -112,9 +112,9 @@ package org.mokylin.skin.app.meiren
 		private function __MeiRen_JinJie_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/meiren/pro_bg.png";
-			temp.width = 263;
-			temp.x = 0;
+			temp.styleName = "ui/component/progress/jindutiao2/jdt_di.png";
+			temp.width = 265;
+			temp.x = -1;
 			temp.y = 0;
 			return temp;
 		}
@@ -206,8 +206,8 @@ package org.mokylin.skin.app.meiren
 			temp.labelOffsetY = 3;
 			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
 			temp.color = 0x00FF33;
-			temp.width = 117;
-			temp.x = 179;
+			temp.width = 23;
+			temp.x = 184;
 			temp.y = 476;
 			return temp;
 		}
@@ -232,7 +232,7 @@ package org.mokylin.skin.app.meiren
 			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 91;
-			temp.x = 90;
+			temp.x = 85;
 			temp.y = 478;
 			return temp;
 		}
@@ -246,7 +246,7 @@ package org.mokylin.skin.app.meiren
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 111;
-			temp.x = 202;
+			temp.x = 207;
 			temp.y = 478;
 			return temp;
 		}
