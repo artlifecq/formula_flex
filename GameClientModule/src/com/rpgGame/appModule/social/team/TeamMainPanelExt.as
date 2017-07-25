@@ -74,8 +74,8 @@ package  com.rpgGame.appModule.social.team
 				MCUtil.removeSelf(_curSub as DisplayObject);
 			}
 			_curSub=sub;
-			(_curSub as DisplayObject).x=20;
-			(_curSub as DisplayObject).y=74;
+			(_curSub as DisplayObject).x=24;
+			(_curSub as DisplayObject).y=87;
 			this.addChild(_curSub);
 		}
 		private function showSubPanelIndex(panelIndex:int):void

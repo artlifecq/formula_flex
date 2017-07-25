@@ -410,6 +410,9 @@ package com.rpgGame.app.state.role.control
 						trace("主角一步用的时间:  " + nextPosGapTm + "   主角一步的距离:  " + distance + "   主角一步的速度:  " + _stateReference.speed);
 						trace("主角当前位置：         " + (_machine.owner as SceneRole).x + "   " + (_machine.owner as SceneRole).z);
 						trace("主角下一步的目标点："  + _nextPos.x + "   " + _nextPos.z);
+						var timeDiff:int=WalkMoveStateReference(_ref).getServerClientTimeDiff((_machine.owner as SceneRole).x, (_machine.owner as SceneRole).z);
+						nextPosGapTm+=timeDiff;
+						trace("客户端服务器时间修正："+timeDiff+" 最终时间："+nextPosGapTm);
 					}
 					if (nextPosGapTm > 0)
 					{
@@ -495,10 +498,6 @@ package com.rpgGame.app.state.role.control
 			{
 				if (!force)
 					return false;
-			}
-			else if ((_machine as RoleStateMachine).isTripleLockCaseSpell)
-			{
-				return false;
 			}
 			else if ((_machine as RoleStateMachine).isStiff)
 			{

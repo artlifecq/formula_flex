@@ -117,8 +117,8 @@ package com.rpgGame.appModule.equip
 		{
 			_leftSkin=_skin.left.skin as Zhuangbei_left;
 			
-			(_leftSkin.title1.skin as TitileHead).labelDisplay.text=LanguageConfig.getText(LangUI.UI_TEXT1);
-			(_leftSkin.title2.skin as TitileHead).labelDisplay.text=LanguageConfig.getText(LangUI.UI_TEXT2);
+			(_leftSkin.title1.skin as TitileHead).labelDisplay.text=LanguageConfig.getText(LangUI.UI_TEXT13);
+			(_leftSkin.title2.skin as TitileHead).labelDisplay.text=LanguageConfig.getText(LangUI.UI_TEXT35);
 			
 			_goodsContainerTarget=new GoodsContainerPanel(_leftSkin.list1,ItemContainerID.SMELT_LIST,createItemRender);
 			_goodsContainerUse=new GoodsContainerPanel(_leftSkin.list2,ItemContainerID.SMELT_USE,createItemRender);
@@ -127,8 +127,10 @@ package com.rpgGame.appModule.equip
 			_targetEquip.selectImgVisible=false;
 			_useItem=IconCDFace.create(64);
 			_useItem.selectImgVisible=false;
+			_useItem.bindBg(null);
 			_targetEquip.x=485;
 			_targetEquip.y=150;
+			_targetEquip.bindBg(null);
 			_skin.container.addChild(_targetEquip);
 			_skin.container.addChild(_useItem);
 			_skin.container.addChild(_skin.lb_num);
@@ -595,7 +597,7 @@ package com.rpgGame.appModule.equip
 			num=targetEquips.length;
 			num=num>MIN_GRID?num:MIN_GRID;
 			_goodsContainerTarget.setGridsCount(num,false);
-			_goodsContainerTarget.refleshGridsByDatas(targetEquips);
+			onTab(null);
 			
 			BackPackManager.instance.setCheckType([GoodsType.MATERIAL_COMBO]);//筛选出合成材料
 			var backDatas:Array=BackPackManager.instance.getAllItem();

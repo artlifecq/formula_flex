@@ -46,6 +46,8 @@ package org.mokylin.skin.app.paihangbang
 
 		public var bg_img:feathers.controls.UIAsset;
 
+		public var content:feathers.controls.Group;
+
 		public var gprNo:feathers.controls.Group;
 
 		public var grpHead:feathers.controls.Group;
@@ -285,6 +287,18 @@ package org.mokylin.skin.app.paihangbang
 			return temp;
 		}
 
+		private function content_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			content = temp;
+			temp.name = "content";
+			temp.height = 400;
+			temp.width = 260;
+			temp.x = 54;
+			temp.y = 51;
+			return temp;
+		}
+
 		private function gprNo_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
@@ -325,7 +339,7 @@ package org.mokylin.skin.app.paihangbang
 			temp.name = "grpRight";
 			temp.x = 0;
 			temp.y = 0;
-			temp.elementsContent = [__PaiHang_Right_UIAsset1_i(),bg_img_i(),grpHead_i(),gprNo_i(),grpZhanli_i(),grpKillIcon_i(),weapons_i()];
+			temp.elementsContent = [__PaiHang_Right_UIAsset1_i(),bg_img_i(),grpHead_i(),gprNo_i(),content_i(),grpZhanli_i(),grpKillIcon_i(),weapons_i()];
 			return temp;
 		}
 
@@ -345,7 +359,7 @@ package org.mokylin.skin.app.paihangbang
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			headName = temp;
 			temp.name = "headName";
-			temp.styleName = "ui/app/paihangbang/word/zhanqi/silongchihuang.png";
+			temp.styleName = "ui/app/paihangbang/word/zhanqi/1.png";
 			temp.x = 75;
 			temp.y = 5;
 			return temp;

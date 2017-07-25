@@ -32,6 +32,7 @@ package com.rpgGame.app.fight.spell
 	import flash.utils.Dictionary;
 	
 	import gs.TweenLite;
+	import com.rpgGame.app.scene.animator.CommonTrajectoryAnimator2;
 	
 	/**
 	 *
@@ -772,7 +773,7 @@ package com.rpgGame.app.fight.spell
 		
 		private static var flySceneObjID : int = 1;
 		
-		
+		public static var use2:Boolean=false;
 		/**
 		 * 添加一个弹道特效 
 		 * @param info
@@ -844,29 +845,53 @@ package com.rpgGame.app.fight.spell
 					renderSetAnimator = new FrontAxleDoubleAroundAnimator(info, targetPosition, info.targetRole, info.flyTm, info.flySpeed, info.isTrackTarget, 
 						info.matchTerrain, info.isFlyCross, info.isAdaptiveTargetHeight, moveDelay, playDelay, info.throwHeight,
 						info.throwWeightRatio, effectCfg.frontAxleAroundRadius, effectCfg.frontAxleAroundAngularVelocity, effectCfg.convergenceTimes);
-					(renderSetAnimator as FrontAxleDoubleAroundAnimator).setAtkorData(atkorPosition, atkorRotationY, destPosition);
+					(renderSetAnimator as FrontAxleDoubleAroundAnimator).setAtkorData(atkor,atkorPosition, atkorRotationY, destPosition);
 					(renderSetAnimator as FrontAxleDoubleAroundAnimator).setQueue(effectQueue, locusPoints);
 					effectSet.setRenderAnimator(renderSetAnimator);
 				}
 			}
 			if (!renderSetAnimator)
 			{
-				renderSetAnimator = new CommonTrajectoryAnimator(
-                    info, 
-                    targetPosition, 
-                    targetRole, 
-                    info.flyTm, 
-                    info.flySpeed, 
-                    info.isTrackTarget, 
-					info.matchTerrain, 
-                    info.isFlyCross, 
-                    info.isAdaptiveTargetHeight, 
-                    moveDelay, 
-                    playDelay, 
-                    info.throwHeight, 
-                    info.throwWeightRatio);
-				(renderSetAnimator as CommonTrajectoryAnimator).setAtkorData(atkorPosition, atkorRotationY, destPosition);
-				(renderSetAnimator as CommonTrajectoryAnimator).setQueue(effectQueue, locusPoints);
+				if (use2) 
+				{
+					renderSetAnimator = new CommonTrajectoryAnimator2(
+						info, 
+						targetPosition, 
+						targetRole, 
+						info.flyTm, 
+						info.flySpeed, 
+						info.isTrackTarget, 
+						info.matchTerrain, 
+						info.isFlyCross, 
+						info.isAdaptiveTargetHeight, 
+						moveDelay, 
+						playDelay, 
+						info.throwHeight, 
+						info.throwWeightRatio);
+					(renderSetAnimator as CommonTrajectoryAnimator2).setQueue(effectQueue, locusPoints);
+					(renderSetAnimator as CommonTrajectoryAnimator2).setAtkorData(atkorPosition, atkorRotationY, destPosition);
+				}
+				else
+				{
+					renderSetAnimator = new CommonTrajectoryAnimator(
+						info, 
+						targetPosition, 
+						targetRole, 
+						info.flyTm, 
+						info.flySpeed, 
+						info.isTrackTarget, 
+						info.matchTerrain, 
+						info.isFlyCross, 
+						info.isAdaptiveTargetHeight, 
+						moveDelay, 
+						playDelay, 
+						info.throwHeight, 
+						info.throwWeightRatio);
+					(renderSetAnimator as CommonTrajectoryAnimator).setQueue(effectQueue, locusPoints);
+					(renderSetAnimator as CommonTrajectoryAnimator).setAtkorData(atkor,atkorPosition, atkorRotationY, destPosition);
+				}
+				
+				
 				effectSet.setRenderAnimator(renderSetAnimator);
 			}
 			flySceneObjID++;

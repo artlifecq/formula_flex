@@ -261,7 +261,7 @@ package com.rpgGame.app.manager.chat
 		 */
 		public static function textNotify(type : int, msg : String) : void
 		{
-			//			notify(type, msg);
+						notify(type, msg);
 		}
 		
 		/**

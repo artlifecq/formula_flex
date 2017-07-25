@@ -1,6 +1,8 @@
 package com.rpgGame.app.state.role.control
 {
 	import com.rpgGame.app.fight.spell.CastSpellHelper;
+	import com.rpgGame.app.manager.TrusteeshipManager;
+	import com.rpgGame.app.manager.ctrl.ControlTripleSkill;
 	import com.rpgGame.core.state.role.control.ControlState;
 	import com.rpgGame.coreData.type.RoleStateType;
 
@@ -15,22 +17,17 @@ package com.rpgGame.app.state.role.control
 			super.execute();
 			if (_ref) 
 			{
-				var skill:int=CheckTripleAttackStateReference(_ref).skill;
-				var ref:TripleAttackSpellLockStateReference=_machine.getReference(TripleAttackSpellLockStateReference) as TripleAttackSpellLockStateReference;
+				var skill:int=CheckTripleAttackStateReference(_ref).startSkill;
+				var ctrl:ControlTripleSkill=TrusteeshipManager.getInstance().tripleSkillCtrl;
 				//放完了
-				if (ref.isLast(skill))
+				if (ctrl.isLast(skill))
 				{
-					_machine.removeState(RoleStateType.CONTROL_TRIPLE_ATTACK_LOCK);
 					transition(RoleStateType.ACTION_PREWAR, null, false, false, [RoleStateType.CONTROL_WALK_MOVE]);
 				}
 				else
 				{
-					var nextSkill:int=ref.getNextSkill(skill);
+					var nextSkill:int=ctrl.getNextSkill(skill);
 					CastSpellHelper.shortcutsTryCaseSpell(nextSkill);
-					if (ref.isLast(nextSkill)) 
-					{
-						_machine.removeState(RoleStateType.CONTROL_TRIPLE_ATTACK_LOCK);
-					}
 				}
 			}
 			removeSelf();

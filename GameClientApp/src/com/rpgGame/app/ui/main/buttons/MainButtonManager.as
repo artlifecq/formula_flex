@@ -27,6 +27,7 @@ package com.rpgGame.app.ui.main.buttons
 	import org.mokylin.skin.mainui.activityBar.button.ButtonTianjianglijing;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonWangchengzhengba;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonZhanchangdating;
+	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_bangpai;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_jinjie;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_renwu;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_shangcheng;
@@ -34,6 +35,7 @@ package com.rpgGame.app.ui.main.buttons
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_wuxue;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_zhanhun;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_zhuangbei;
+	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_zudui;
 
 	/**
 	 *主按钮配置管理器 
@@ -53,8 +55,9 @@ package com.rpgGame.app.ui.main.buttons
 			regClass(3,MainButton_Equip,ButtonSkin_zhuangbei);
 			regClass(4,MainButton_WuXue,ButtonSkin_wuxue);
 			regClass(5,MainButton_ZhanHun,ButtonSkin_zhanhun);
-			regClass(6,MainButton_Gang,ButtonSkin_shejiao);
+			regClass(6,MainButton_Gang,ButtonSkin_bangpai);
 			regClass(7,MainButtonBases,ButtonSkin_shangcheng);
+			regClass(8,MainButton_Team,ButtonSkin_zudui);
 			regClass(101,ActivityButton,ButtonHuodongtating);
 			regClass(102,ActivityButton,ButtonLunjian);
 			regClass(103,ActivityButton,ButtonFubendating);

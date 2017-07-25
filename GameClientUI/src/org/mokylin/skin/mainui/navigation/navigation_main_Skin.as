@@ -3,8 +3,7 @@ package org.mokylin.skin.mainui.navigation
 	import feathers.controls.Button;
 	import feathers.controls.Group;
 	import feathers.controls.StateSkin;
-	import org.mokylin.skin.component.button.ButtonSkin_shouhui;
-	import org.mokylin.skin.component.button.ButtonSkin_zhankai;
+	import org.mokylin.skin.component.button.ButtonMainJiantou;
 
 	/**
 	 * @private
@@ -16,9 +15,9 @@ package org.mokylin.skin.mainui.navigation
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var btn_close:feathers.controls.Button;
+		public var btnClose:feathers.controls.Button;
 
-		public var btn_open:feathers.controls.Button;
+		public var btnOpen:feathers.controls.Button;
 
 		public var btns:feathers.controls.Group;
 
@@ -33,7 +32,7 @@ package org.mokylin.skin.mainui.navigation
 			this.currentState = "normal";
 			this.height = 112;
 			this.width = 20;
-			this.elementsContent = [btns_i(),btn_close_i(),btn_open_i()];
+			this.elementsContent = [btns_i(),btnOpen_i(),btnClose_i()];
 			
 			states = {
 			};
@@ -44,23 +43,24 @@ package org.mokylin.skin.mainui.navigation
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function btn_close_i():feathers.controls.Button
+		private function btnClose_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_close = temp;
-			temp.name = "btn_close";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_shouhui;
-			temp.x = 0;
+			btnClose = temp;
+			temp.name = "btnClose";
+			temp.scaleX = -1;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonMainJiantou;
+			temp.x = 21;
 			temp.y = 67;
 			return temp;
 		}
 
-		private function btn_open_i():feathers.controls.Button
+		private function btnOpen_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_open = temp;
-			temp.name = "btn_open";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_zhankai;
+			btnOpen = temp;
+			temp.name = "btnOpen";
+			temp.styleClass = org.mokylin.skin.component.button.ButtonMainJiantou;
 			temp.x = 0;
 			temp.y = 67;
 			return temp;

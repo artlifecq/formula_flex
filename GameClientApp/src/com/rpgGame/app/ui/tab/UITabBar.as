@@ -139,10 +139,10 @@ package com.rpgGame.app.ui.tab
 		public function switchTabKey(key:String):void
 		{
 			var index:int = getTabDataIndexByTabKey(key);
-			if(index>0)
+			if(index>=0)
 			{
 				var item:UITabBarData = _allDatas[index];
-				if(!item.isShow)
+				if(item==null||!item.isShow)
 					index = -1;
 			}
 			if(index<0)
@@ -158,7 +158,7 @@ package com.rpgGame.app.ui.tab
 					}
 				}
 			}
-			if(_currentKey == key && _currentIndex == index)
+			if(_currentView!=null&&_currentKey == key && _currentIndex == index)
 			{
 				_currentView.show(_data);
 				return ;

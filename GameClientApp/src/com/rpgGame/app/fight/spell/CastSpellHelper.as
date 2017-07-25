@@ -1,7 +1,6 @@
 package com.rpgGame.app.fight.spell
 {
 	import com.game.engine2D.config.SceneConfig;
-	import com.game.engine3D.controller.CameraController;
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.game.engine3D.utils.MathUtil;
 	import com.game.engine3D.utils.PathFinderUtil;
@@ -11,20 +10,16 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.app.manager.ShortcutsManger;
 	import com.rpgGame.app.manager.SkillCDManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
-	import com.rpgGame.app.manager.chat.ChatManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.ctrl.ControlAutoFightSelectSkill;
 	import com.rpgGame.app.manager.fight.FightManager;
-	import com.rpgGame.app.manager.input.KeyMoveManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
-	import com.rpgGame.app.manager.scene.SceneCursorHelper;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.SpellSender;
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.app.state.role.control.CastSpellLockStateReference;
-	import com.rpgGame.app.state.role.control.TripleAttackSpellLockStateReference;
 	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
 	import com.rpgGame.core.events.SpellEvent;
 	import com.rpgGame.core.fight.spell.CastSpellInfo;
@@ -51,7 +46,6 @@ package com.rpgGame.app.fight.spell
 	
 	import gameEngine2D.PolyUtil;
 	
-	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.data.long;
 	import org.game.netCore.net_protobuff.ByteBuffer;
@@ -179,7 +173,7 @@ package com.rpgGame.app.fight.spell
 			else if (caseState == CASE_STATE_NOT_IN_RELEASE_RANGE)//距离过远
 			{
 				//三连击的话直接发送请求
-				if (MainRoleManager.actor.stateMachine.isTripleLockCaseSpell) 
+				if (TrusteeshipManager.getInstance().tripleSkillCtrl.isLockSkill(caseInfo.spellData.q_skillID)) 
 				{
 					caseInfo.targetServerID=null;//改成空放
 					caseInfo.releasePos.x=MainRoleManager.actor.x;
@@ -224,9 +218,10 @@ package com.rpgGame.app.fight.spell
 					MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_CAST_SPELL_LOCK, ref);
 					if (spellData.q_relate_spells!="") 
 					{
-						var reft:TripleAttackSpellLockStateReference=MainRoleManager.actor.stateMachine.getReference(TripleAttackSpellLockStateReference) as TripleAttackSpellLockStateReference;
-						reft.setParams(spellData.q_skillID);
-						MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_TRIPLE_ATTACK_LOCK, reft);
+//						var reft:CheckTripleAttackStateReference=MainRoleManager.actor.stateMachine.getReference(CheckTripleAttackStateReference) as CheckTripleAttackStateReference;
+//						reft.setParams(spellData.q_skillID);
+//						MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_TRIPLE_ATTACK_CHECK, reft);
+						TrusteeshipManager.getInstance().tripleSkillCtrl.setParams(spellData.q_skillID);
 					}
 					
 					SpellSender.releaseSpell(caseInfo.caseSpellData.q_skillID, caseInfo.releasePos.x, caseInfo.releasePos.y, angle, caseInfo.targetServerID);

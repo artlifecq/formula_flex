@@ -241,6 +241,8 @@ package com.rpgGame.app.cmdlistener.engine
 					}
 					else if(role.type==SceneCharType.COLLECT){//采集物
 						WalkToRoleManager.walkToRole(role);
+					}else if(role.type==SceneCharType.SCULPTURE){//雕塑
+						WalkToRoleManager.walkToRole(role);
 					}
 					else 
 					{
