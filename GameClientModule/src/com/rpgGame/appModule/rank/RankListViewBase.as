@@ -54,6 +54,7 @@ package com.rpgGame.appModule.rank
 			}
 			
 			_selfCell = new RankListPlayerCell(triggeredHandler);
+			_selfCell.color(0x55bd15);
 			_selfCell.y = 397;
 			_selfCell.updatCellByInfo(_type,null);
 			_cellGroup.addChild(_selfCell);

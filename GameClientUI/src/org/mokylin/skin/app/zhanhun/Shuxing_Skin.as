@@ -50,7 +50,7 @@ package org.mokylin.skin.app.zhanhun
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			arrow_up = temp;
 			temp.name = "arrow_up";
-			temp.styleName = "ui/common/tubiao/tu_up.png";
+			temp.styleName = "ui/common/tubiao/jobup.png";
 			temp.x = 0;
 			temp.y = 3;
 			return temp;
@@ -61,7 +61,7 @@ package org.mokylin.skin.app.zhanhun
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grp_up = temp;
 			temp.name = "grp_up";
-			temp.x = 82;
+			temp.x = 49;
 			temp.y = 0;
 			temp.elementsContent = [arrow_up_i(),lb_Num_i()];
 			return temp;
@@ -73,11 +73,11 @@ package org.mokylin.skin.app.zhanhun
 			lb_Num = temp;
 			temp.name = "lb_Num";
 			temp.text = "20";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 53;
-			temp.x = 10;
-			temp.y = 0;
+			temp.x = 12;
+			temp.y = 1;
 			return temp;
 		}
 
@@ -86,12 +86,12 @@ package org.mokylin.skin.app.zhanhun
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb_name = temp;
 			temp.name = "lb_name";
-			temp.htmlText = "攻击：<font color='#CFC6AE'>9999</font>";
+			temp.text = "32157";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 120;
+			temp.width = 81;
 			temp.x = 0;
-			temp.y = 0;
+			temp.y = 1;
 			return temp;
 		}
 

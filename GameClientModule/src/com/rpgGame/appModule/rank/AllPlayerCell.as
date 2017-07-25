@@ -2,8 +2,10 @@ package com.rpgGame.appModule.rank
 {
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.HorseConfigData;
+	import com.rpgGame.coreData.cfg.RankDesignationData;
 	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
 	import com.rpgGame.coreData.clientConfig.Q_horse;
+	import com.rpgGame.coreData.clientConfig.Q_rank_designation;
 	import com.rpgGame.coreData.clientConfig.Q_warflag;
 	import com.rpgGame.coreData.enum.RankListType;
 	import com.rpgGame.coreData.info.item.ItemUtil;
@@ -57,10 +59,18 @@ package com.rpgGame.appModule.rank
 			}else{
 				_skin.icon.visible = false;
 				_skin.lbNum.visible = true;
-				_skin.lbNum.text = info.rank.toString();
+				var q_data:Q_rank_designation = RankDesignationData.getinfoById(_topInfo.toptype);
+				if(q_data!=null&&q_data.q_Info_max<info.rank)
+				{
+					_skin.lbNum.text ="未上榜";
+				}else{
+					_skin.lbNum.text = info.rank.toString();
+				}
 			}
 			
+			
 			_skin.vip.visible = info.vipId>0;
+			_skin.vip.styleName = "ui/common/tubiao/vips"+info.vipId+".png";
 			_skin.lbName.text = info.playername;
 			_skin.lbZhiye.text = ItemUtil.getJobName(info.playerBriefInfo.job);
 			if(info.toptype == RankListType.MOUNT_TYPE)
@@ -83,6 +93,15 @@ package com.rpgGame.appModule.rank
 			}else{
 				_skin.lbContent.text = info.param.toString();
 			}
+		}
+		
+		public function color(value:uint):void
+		{
+			_skin.lbNum.color = value;
+			_skin.lbName.color = value;
+			_skin.lbLevel.color = value;
+			_skin.lbZhiye.color = value;
+			_skin.lbContent.color = value;
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void
