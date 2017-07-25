@@ -29,19 +29,7 @@ package org.mokylin.skin.app.activety.zonghe
 
 		public var gZQ:feathers.controls.Group;
 
-		public var grpIcon:feathers.controls.Group;
-
-		public var icon0:feathers.controls.UIAsset;
-
-		public var icon1:feathers.controls.UIAsset;
-
-		public var icon2:feathers.controls.UIAsset;
-
-		public var icon3:feathers.controls.UIAsset;
-
-		public var icon4:feathers.controls.UIAsset;
-
-		public var icon5:feathers.controls.UIAsset;
+		public var icon:feathers.controls.UIAsset;
 
 		public var imLose:feathers.controls.UIAsset;
 
@@ -66,7 +54,7 @@ package org.mokylin.skin.app.activety.zonghe
 			this.currentState = "normal";
 			this.height = 534;
 			this.width = 469;
-			this.elementsContent = [__TiaoZhanChengGong_UIAsset1_i(),imLose_i(),imgWin_i(),__TiaoZhanChengGong_UIAsset2_i(),__TiaoZhanChengGong_UIAsset3_i(),gSW_i(),gZQ_i(),gMoney_i(),gExp_i(),btnOk_i(),grpIcon_i()];
+			this.elementsContent = [__TiaoZhanChengGong_UIAsset1_i(),imgWin_i(),imLose_i(),__TiaoZhanChengGong_UIAsset2_i(),__TiaoZhanChengGong_UIAsset3_i(),gSW_i(),gZQ_i(),gMoney_i(),gExp_i(),btnOk_i(),icon_i()];
 			
 			states = {
 			};
@@ -200,80 +188,14 @@ package org.mokylin.skin.app.activety.zonghe
 			return temp;
 		}
 
-		private function grpIcon_i():feathers.controls.Group
+		private function icon_i():feathers.controls.UIAsset
 		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
-			grpIcon = temp;
-			temp.name = "grpIcon";
-			temp.x = 59;
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icon = temp;
+			temp.name = "icon";
+			temp.styleName = "ui/common/grid/normal/48.png";
+			temp.x = 206.5;
 			temp.y = 411;
-			temp.elementsContent = [icon0_i(),icon1_i(),icon2_i(),icon3_i(),icon4_i(),icon5_i()];
-			return temp;
-		}
-
-		private function icon0_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon0 = temp;
-			temp.name = "icon0";
-			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 281;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function icon1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon1 = temp;
-			temp.name = "icon1";
-			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function icon2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon2 = temp;
-			temp.name = "icon2";
-			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 56;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function icon3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon3 = temp;
-			temp.name = "icon3";
-			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 112;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function icon4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon4 = temp;
-			temp.name = "icon4";
-			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 169;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function icon5_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon5 = temp;
-			temp.name = "icon5";
-			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 225;
-			temp.y = 0;
 			return temp;
 		}
 

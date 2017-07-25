@@ -7,6 +7,7 @@ package com.rpgGame.app.ui.scene
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
+	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.utils.TaskUtil;
@@ -57,10 +58,8 @@ package com.rpgGame.app.ui.scene
 		private var skinList:Array;
 		private var killButList:Vector.<Label>;
 		private var killOkList:Vector.<UIAsset>;
-		private var ico1List:Vector.<IconCDFace>;
-		private var icoBg1List:Vector.<UIAsset>;
-		private var ico2List:Vector.<IconCDFace>;
-		private var icoBg2List:Vector.<UIAsset>;
+		private var icoList1Group:RewardGroup;
+		private var icoList2Group:RewardGroup;
 		private var hitList:Vector.<PaiMing_Item>;
 		private var alertOk:AlertSetInfo;
 		public function MibaoTrackerUI()
@@ -104,16 +103,10 @@ package com.rpgGame.app.ui.scene
 		{
 			super.onHide();
 			removeEvent();
-			var icon:IconCDFace;
-			while(ico1List.length>0){
-				icon=ico1List.pop();
-				icon.destroy();
-			}
-			while(ico2List.length>0){
-				icon=ico2List.pop();
-				icon.destroy();
-			}
-			icon=null;
+			icoList1Group.clear();
+			icoList1Group=null;
+			icoList2Group.clear();
+			icoList2Group=null;
 			alertOk=null;
 		}
 		private function addEvent():void
@@ -296,41 +289,16 @@ package com.rpgGame.app.ui.scene
 			{
 				_skin.zq_num.text=zhenqiReward[0].num;
 			}
-			var passReward:Array=JSONUtil.decode(rewardData.q_reward_item);
-			var i:int;
-			var ico:IconCDFace; 
-			var item:Q_item;
-			if(passReward&&passReward.length>0)
-			{
-				for(i=0;i<passReward.length;i++)
-				{
-					if(i<ico1List.length&&passReward[i]!=null)
-					{
-						item=ItemConfig.getQItemByID(passReward[i].mod);
-						ico=ico1List[i];
-						if(item!=null&&ico!=null)
-						{
-							ico.setIconResName(ClientConfig.getItemIcon(item.q_icon.toString(),IcoSizeEnum.ICON_42));
-							ico.visible=true;
-							icoBg1List[i].visible=true;
-							TaskUtil.setItemTips(ico,item,passReward[i].num);
-						}
-					}
-				}
-			}
+			icoList1Group.setRewardByJsonStr(rewardData.q_reward_item);
+			icoList1Group.visible=true;
+			
 			setUisite();
 		}
 		private function hideJifenReword():void
 		{
 			_skin.zq_num.text="0";
-			var i:int=0;
-			for(i=0;i<icoBg1List.length;i++)
-			{
-				icoBg1List[i].visible=false;
-				ico1List[i].visible=false;
-				icoBg2List[i].visible=false;
-				ico2List[i].visible=false;
-			}
+			icoList1Group.visible=false;
+			icoList2Group.visible=false;
 		}
 		
 		/**设置伤害排行*/
@@ -356,29 +324,8 @@ package com.rpgGame.app.ui.scene
 			var rewardData:Q_mibao_reward=MibaoCfgData.getRewardDataBydamage(damage);
 			if(!rewardData)
 				return;
-			var passReward:Array=JSONUtil.decode(rewardData.q_reward_item);
-			var i:int;
-			var ico:IconCDFace; 
-			var item:Q_item;
-			if(passReward&&passReward.length>0)
-			{
-				for(i=0;i<passReward.length;i++)
-				{
-					if(i<ico2List.length&&passReward[i]!=null)
-					{
-						item=ItemConfig.getQItemByID(passReward[i].mod);
-						ico=ico2List[i];
-						if(item!=null&&ico!=null)
-						{
-							ico.setIconResName(ClientConfig.getItemIcon(item.q_icon.toString(),IcoSizeEnum.ICON_42));
-							ico.visible=true;
-							icoBg2List[i].visible=true;
-							TaskUtil.setItemTips(ico,item,passReward[i].num);
-						}
-					}
-				}
-			}
-			
+			icoList2Group.setRewardByJsonStr(rewardData.q_reward_item);
+			icoList2Group.visible=true;
 		}
 		/**设置伤害排行*/
 		private function setShanghaiRank():void
@@ -418,6 +365,9 @@ package com.rpgGame.app.ui.scene
 		}
 		private function initUI():void
 		{
+			icoList1Group=new RewardGroup(IcoSizeEnum.ICON_42,_skin.sec_ico1_0,RewardGroup.ALIN_CENTER,4,6,6);
+			icoList2Group=new RewardGroup(IcoSizeEnum.ICON_42,_skin.sec_ico2_0,RewardGroup.ALIN_CENTER,4,6,6);
+			
 			skinList=new Array();
 			skinList.push(_skin.lbHeadName);
 			skinList.push(_skin.sec_navi0);
@@ -427,12 +377,10 @@ package com.rpgGame.app.ui.scene
 			skinList.push(_skin.sec_navi1);
 			skinList.push(_skin.lbJifen);
 			skinList.push(_skin.lbZhenqi);
-			skinList.push(_skin.ico1_0);
-			skinList.push(_skin.ico1_4);
+			skinList.push(icoList1Group);
 			skinList.push(_skin.sec_navi2);
 			skinList.push(_skin.shanghai_List);
-			skinList.push(_skin.ico2_0);
-			skinList.push(_skin.ico2_4);
+			skinList.push(icoList2Group);
 			skinList.push(_skin.sec_info);
 			skinList.push(_skin.sec_subbut1);
 			var i:int;
@@ -443,39 +391,7 @@ package com.rpgGame.app.ui.scene
 				killButList.push(_skin["lbItem"+i]);
 				killOkList.push(_skin["jisha"+i]);
 			}
-			var ico:IconCDFace;
-			icoBg1List=new Vector.<UIAsset>();
-			for(i=0;i<8;i++)
-			{
-				icoBg1List.push(_skin["ico1_"+i]);
-			}
-			ico1List=new Vector.<IconCDFace>();
-			for(i=0;i<icoBg1List.length;i++)
-			{
-				ico=IconCDFace.create(IcoSizeEnum.ICON_42);
-				ico.showCD=false;
-				ico.x=icoBg1List[i].x+3;
-				ico.y=icoBg1List[i].y+3;
-				ico.visible=false;
-				ico1List.push(ico);
-				_skin.task_box.addChild(ico);
-			}
-			icoBg2List=new Vector.<UIAsset>();
-			for(i=0;i<8;i++)
-			{
-				icoBg2List.push(_skin["ico2_"+i]);
-			}
-			ico2List=new Vector.<IconCDFace>();
-			for(i=0;i<icoBg2List.length;i++)
-			{
-				ico=IconCDFace.create(IcoSizeEnum.ICON_42);
-				ico.showCD=false;
-				ico.x=icoBg2List[i].x+3;
-				ico.y=icoBg2List[i].y+3;
-				ico.visible=false;
-				ico2List.push(ico);
-				_skin.task_box.addChild(ico);
-			}
+			
 			hitList=new Vector.<PaiMing_Item>();
 			for(i=0;i<4;i++)
 			{
@@ -545,13 +461,8 @@ package com.rpgGame.app.ui.scene
 				killButList[i].visible=false;
 				killOkList[i].visible=false;
 			}
-			for(i=0;i<icoBg1List.length;i++)
-			{
-				icoBg1List[i].visible=false;
-				ico1List[i].visible=false;
-				icoBg2List[i].visible=false;
-				ico2List[i].visible=false;
-			}
+			icoList1Group.visible=false;
+			icoList2Group.visible=false;
 			_skin.sec_navi2.visible=false;
 			_skin.shanghai_List.visible=false;
 			for(i=0;i<hitList.length;i++)
@@ -591,21 +502,6 @@ package com.rpgGame.app.ui.scene
 			for(i=0;i<killButList.length;i++)
 			{
 				killOkList[i].y=killButList[i].y-26;
-			}
-			var id:int;
-			for(i=0;i<icoBg1List.length;i++)
-			{
-				id=int(i/4)*4;
-				if(icoBg1List[i].visible)
-				{
-					icoBg1List[i].y=icoBg1List[id].y;
-					ico1List[i].y=icoBg1List[id].y+3;
-				}
-				if(icoBg2List[i].visible)
-				{
-					icoBg2List[i].y=icoBg2List[id].y;
-					ico2List[i].y=icoBg2List[id].y+3;
-				}
 			}
 		}
 		

@@ -45,7 +45,7 @@ package
         
         private var _useVersion : Boolean = false;
         private var _isJson : Boolean = true;
-        private var _useBpgFormat : Boolean = true;
+        private var _useBpgFormat : Boolean = false;
         
         // web params
         /** 资源根目录*/

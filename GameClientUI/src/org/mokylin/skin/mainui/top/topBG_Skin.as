@@ -19,8 +19,9 @@ package org.mokylin.skin.mainui.top
 			super();
 			
 			this.currentState = "normal";
+			this.height = 8;
 			this.width = 7;
-			this.elementsContent = [__topBG_Skin_UIAsset1_i(),__topBG_Skin_UIAsset2_i()];
+			this.elementsContent = [__topBG_Skin_UIAsset1_i()];
 			
 			states = {
 			};
@@ -28,26 +29,14 @@ package org.mokylin.skin.mainui.top
 		}
 
 
-		//==========================================================================
-		//                                定义成员方法
-		//==========================================================================
 		private function __topBG_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.bottom = 0;
 			temp.left = 0;
 			temp.right = 0;
 			temp.styleName = "ui/mainui/top/tongyongdi.png";
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __topBG_Skin_UIAsset2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.left = 0;
-			temp.right = 0;
-			temp.styleName = "ui/mainui/top/jinyantiao_di.png";
-			temp.y = 0;
+			temp.top = 0;
 			return temp;
 		}
 

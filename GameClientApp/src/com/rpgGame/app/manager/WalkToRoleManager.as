@@ -24,6 +24,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.TranportsDataManager;
 	import com.rpgGame.coreData.cfg.task.TouZhuCfgData;
+	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.info.stall.StallData;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.SceneCollectData;
@@ -85,10 +86,19 @@ package com.rpgGame.app.manager
 				case SceneCharType.STALL:
 					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onWalkToStall);
 					break;
+				case SceneCharType.SCULPTURE:
+					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, walkToSculpture);
+					break;
 			}
 			return ret;
 		}
 		
+		
+		private static function walkToSculpture(ref : WalkMoveStateReference) : void
+		{
+//			FunctionOpenManager.openAppPaneById(EmFunctionID.EM_WORSHIP,ref.data);
+			RankListManager.instance.requestworshop(ref.data as SceneRole);
+		}
 		private static function onWalkToStall(ref : WalkMoveStateReference):void
 		{
 			var role : SceneRole = ref.data as SceneRole;

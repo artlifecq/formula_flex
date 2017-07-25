@@ -299,6 +299,7 @@ package com.rpgGame.app.scene
 					roleData.avatarInfo.bodyEffectID = clothesRes.effectRes;
 					AvatarManager.updateBodyEft(this);
 				}
+				updateHair(clothesRes.hairResId);
 			}
 		}
 		

@@ -18,8 +18,7 @@ package com.rpgGame.app.ui.main.chat
 	 */	
 	public class ChatBarItemRender extends BaseDefaultListItemRenderer
 	{
-		public static var WIDTH:int = 412;
-		public static var HEIGHT:int = 37;
+		public static var WIDTH:int = 410;
 		private static var _defaultFormat:TextFormat;
 		private var _richText:RichTextArea3D;
 		
