@@ -392,6 +392,7 @@ package  com.rpgGame.netData {
 	import com.rpgGame.netData.map.handler.SCAreaJumpHandler;
 	import com.rpgGame.netData.map.handler.SCAttachStateChangeHandler;
 	import com.rpgGame.netData.map.handler.SCSceneObjMoveHandler;
+	import com.rpgGame.netData.map.handler.SCSyncPlayerPosHandler;
 	import com.rpgGame.netData.map.message.ResArmorChangeMessage;
 	import com.rpgGame.netData.map.message.ResChangeDirectMessage;
 	import com.rpgGame.netData.map.message.ResChangeMapFailedMessage;
@@ -444,6 +445,7 @@ package  com.rpgGame.netData {
 	import com.rpgGame.netData.map.message.SCAreaJumpMessage;
 	import com.rpgGame.netData.map.message.SCAttachStateChangeMessage;
 	import com.rpgGame.netData.map.message.SCSceneObjMoveMessage;
+	import com.rpgGame.netData.map.message.SCSyncPlayerPosMessage;
 	import com.rpgGame.netData.marriage.handler.SCDivorceHandler;
 	import com.rpgGame.netData.marriage.handler.SCInteractionHandler;
 	import com.rpgGame.netData.marriage.handler.SCMarriageInfoHandler;
@@ -995,6 +997,7 @@ package  com.rpgGame.netData {
 			register(101148, SCSceneObjMoveMessage, SCSceneObjMoveHandler);
 			register(101150, ResHelmChangeMessage, ResHelmChangeHandler);
 			register(101151, SCAttachStateChangeMessage, SCAttachStateChangeHandler);
+			register(101152, SCSyncPlayerPosMessage, SCSyncPlayerPosHandler);
 			register(101221, SCAreaJumpMessage, SCAreaJumpHandler);
 			register(101701, ResSynPlayerPositionMessage, ResSynPlayerPositionHandler);
 			register(101702, ResSynMonsterPositionMessage, ResSynMonsterPositionHandler);

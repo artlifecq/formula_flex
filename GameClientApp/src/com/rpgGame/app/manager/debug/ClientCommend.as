@@ -366,6 +366,10 @@ package   com.rpgGame.app.manager.debug
 					MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_ENTER_LEAVE_FIGHT);
 				}
 			});
+			commandList.put( ".b2", function (...arg):void
+			{
+				SpellAnimationHelper.use2=!SpellAnimationHelper.use2;
+			});
 		}
 		
 		
