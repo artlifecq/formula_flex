@@ -155,28 +155,22 @@ package com.rpgGame.appModule.jingmai
 			tweenScroll=new TweenScaleScrollUitlExt(content,_maps,_skin.btn_prev,_skin.btn_next,0.5,_skin.imgBg.width,_skin.imgBg.height,startX);
 			tweenScroll.setCallBack(tweenCompleteCallBack);
 			_skin.mc_name.gotoAndStop(0);
-			this._skin.chk_dengji.isSelected=true;
-			this._skin.chk_shuxing.isSelected=true;
+	
 			this._skin.btn_hecheng.addEventListener(Event.TRIGGERED,onHeCheng);
-			this._skin.chk_shuxing.addEventListener(Event.CHANGE,showHideAttr);
-			this._skin.chk_dengji.addEventListener(Event.CHANGE,showHideLv);
+			this._skin.btnOpen.addEventListener(Event.TRIGGERED,showAttr);
+			this._skin.btnClose.addEventListener(Event.TRIGGERED,hideAttr);
 			_attrView._skin.btnClose.addEventListener(Event.TRIGGERED,onCloseAttr);
+			showAttr(null);
 		}
 		
 		private function onCloseAttr(eve:Event):void
 		{
 			// TODO Auto Generated method stub
-			this._skin.chk_shuxing.isSelected=false;
+			//this._skin.chk_shuxing.isSelected=false;
+			hideAttr(null);
 		}
 		
-		private function showHideLv(eve:Event):void
-		{
-			// TODO Auto Generated method stub
-			_mapsHash.eachValue(function(map:MeridianMap):void{
-				map.showHideLv(_skin.chk_dengji.isSelected);
-			});
-			
-		}
+		
 		private function clearEffect():void
 		{
 			// TODO Auto Generated method stub
@@ -185,12 +179,20 @@ package com.rpgGame.appModule.jingmai
 			});
 			
 		}
-		private function showHideAttr(eve:Event):void
+		private function showAttr(eve:Event):void
 		{
 			// TODO Auto Generated method stub
-			_attrView.visible=_skin.chk_shuxing.isSelected;
+			_attrView.visible=true;
+			_skin.btnOpen.visible=false;
+			_skin.btnClose.visible=true;
 		}
-		
+		private function hideAttr(eve:Event):void
+		{
+			// TODO Auto Generated method stub
+			_attrView.visible=false;
+			_skin.btnOpen.visible=true;
+			_skin.btnClose.visible=false;
+		}
 		private function onHeCheng(eve:Event):void
 		{
 			// TODO Auto Generated method stub

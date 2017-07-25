@@ -32,7 +32,7 @@ package com.rpgGame.appModule.jingmai.sub
 			this._key=nodeKey;
 			linesContianer=new Sprite();
 			linesContianer.touchable=false;
-			this._stateSkin["grp_icon"].addChildAt(linesContianer,0);
+			this._stateSkin["grp_icondi"].addChildAt(linesContianer,0);
 			this.meridianId=mid;
 			configList.sort(sortData);
 			
@@ -49,30 +49,32 @@ package com.rpgGame.appModule.jingmai.sub
 			var centerPos:Point;
 			var tmpC:Q_meridian;
 			var drawLine:MeridianMapLine;
+			var pointBG:UIAsset;
 			for (var i:int = 0; i <len; i++) 
 			{
 				tmpPoint=_stateSkin["ico"+(1+i)];
+				pointBG=_stateSkin["icd"+(1+i)];
 				tmpC=configList[i];
 				if (_stateSkin.hasOwnProperty("ico"+(2+i))) 
 				{
 					next=_stateSkin["ico"+(2+i)];
 					if (next) 
 					{
-						posA=[new Point(tmpPoint.x+tmpPoint.width/2,tmpPoint.y+tmpPoint.height/2)];
+						posA=[new Point(pointBG.x+pointBG.width/2,pointBG.y+pointBG.height/2)];
 						
 						//有中间拐点
 						if (tmpC.q_coord!=null&&tmpC.q_coord!="") 
 						{
 							var coodA:Array=tmpC.q_coord.split(",");
-							posA.push(new Point(int(coodA[0])+tmpPoint.width/2,int(coodA[1])+tmpPoint.height/2));
+							posA.push(new Point(int(coodA[0])+pointBG.width/2,int(coodA[1])+pointBG.height/2));
 						}
 						posA.push(new Point(next.x+next.width/2,next.y+next.height/2));
-						drawLine=new MeridianMapLine("ui/app/beibao/jingmai/line/shang.png","ui/app/beibao/jingmai/line/d2.png",posA);
+						drawLine=new MeridianMapLine("ui/app/beibao/jingmai/line/liang/cheng.png","ui/app/beibao/jingmai/line/an/cheng.png",posA);
 						linesContianer.addChild(drawLine);
 					}
 				}
 				tmpLab=_stateSkin["lb_"+(1+i)];
-				mp=new MerdianPoint(tmpPoint,tmpLab,configList[i].q_meridian_id,drawLine,tmpC.q_showtype);
+				mp=new MerdianPoint(pointBG,tmpPoint,tmpLab,configList[i].q_meridian_id,drawLine,tmpC.q_showtype);
 				tmpArr=configList[i].q_meridian_id.split("_");
 				key=int(tmpArr[1]);
 				nameDic[tmpPoint.name]=mp;

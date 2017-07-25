@@ -17,9 +17,9 @@ package org.mokylin.skin.app.beibao.jingmai
 		//==========================================================================
 		public var imgBg:feathers.controls.UIAsset;
 
-		public var imgLine0:feathers.controls.UIAsset;
+		public var imgLine:feathers.controls.UIAsset;
 
-		public var imgLine1:feathers.controls.UIAsset;
+		public var imgLine2:feathers.controls.UIAsset;
 
 		public var imgStone:feathers.controls.UIAsset;
 
@@ -48,7 +48,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			this.currentState = "normal";
 			this.height = 187;
 			this.width = 280;
-			this.elementsContent = [imgBg_i(),lb_name_i(),lb_jihuo_i(),lb_dengji_i(),imgLine1_i(),imgLine0_i(),lb_shengming_i(),lb_Stone_i(),imgStone_i(),uiName1_i(),uiName2_i()];
+			this.elementsContent = [imgBg_i(),lb_name_i(),lb_jihuo_i(),lb_dengji_i(),imgLine2_i(),imgLine_i(),lb_shengming_i(),lb_Stone_i(),imgStone_i(),uiName1_i(),uiName2_i()];
 			
 			states = {
 			};
@@ -71,27 +71,27 @@ package org.mokylin.skin.app.beibao.jingmai
 			return temp;
 		}
 
-		private function imgLine0_i():feathers.controls.UIAsset
+		private function imgLine2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			imgLine0 = temp;
-			temp.name = "imgLine0";
-			temp.styleName = "ui/common/tips/xian.png";
-			temp.width = 264;
-			temp.x = 9;
-			temp.y = 39;
-			return temp;
-		}
-
-		private function imgLine1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			imgLine1 = temp;
-			temp.name = "imgLine1";
+			imgLine2 = temp;
+			temp.name = "imgLine2";
 			temp.styleName = "ui/common/tips/xian.png";
 			temp.width = 264;
 			temp.x = 9;
 			temp.y = 95;
+			return temp;
+		}
+
+		private function imgLine_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			imgLine = temp;
+			temp.name = "imgLine";
+			temp.styleName = "ui/common/tips/xian.png";
+			temp.width = 264;
+			temp.x = 9;
+			temp.y = 39;
 			return temp;
 		}
 
@@ -146,7 +146,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.name = "lb_jihuo";
 			temp.leading = 0;
 			temp.letterSpacing = -1;
-			temp.text = "未激活";
+			temp.text = "未冲穴";
 			temp.color = 0xD02525;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 226;
@@ -177,7 +177,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			lb_shengming = temp;
 			temp.name = "lb_shengming";
 			temp.letterSpacing = 0;
-			temp.text = "生命+50";
+			temp.text = "生命 +50";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 213;

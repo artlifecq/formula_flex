@@ -258,10 +258,13 @@ package com.rpgGame.coreData.type
 		private static var enMap:Dictionary;
 		public static var baseAttrIdArr:Array=[];
 		
+		public static var attrRes:Dictionary;
+		public static var attrIconRes:Dictionary;
 		private static function setup():void
 		{
 			idMap = new Dictionary();
-			
+			attrRes = new Dictionary();
+			attrIconRes = new Dictionary();
 			//对应SpriteStat
 			pushAttir(LIDAO,"力道");//1
 			pushAttir(GENGU,"根骨");//2
@@ -293,6 +296,29 @@ package com.rpgGame.coreData.type
 			pushAttir(HURT_SUB_PERCENT,"伤害减免百分比",10);//33		
 			pushAttir(FIGHTING,"战斗力");//44
 			pushAttir(HURT_SEC,"秒伤");//45
+			
+			attrIconRes[3]="shenfa";
+			attrIconRes[12]="qixue";
+			attrIconRes[14]="gongji";
+			attrIconRes[16]="fangyu";
+			attrIconRes[17]="baoji";
+			attrIconRes[18]="baoshang";
+			attrIconRes[23]="mingzhong";
+			attrIconRes[24]="shanbi";
+			
+			attrRes[1]="ld";
+			attrRes[2]="gg";
+			attrRes[3]="sf";
+			attrRes[4]="hg";
+			attrRes[12]="qx";
+			attrRes[14]="gjl";
+			attrRes[16]="fyz";
+			attrRes[17]="bjz";
+			attrRes[18]="bjjc";
+			attrRes[23]="mz";
+			attrRes[24]="sb";
+			attrRes[26]="gjsd";
+
 		}
 		
 		setup();
@@ -303,7 +329,22 @@ package com.rpgGame.coreData.type
 			var attri:Object = {id:id, cn:cn,per:per,unit:unit};
 			idMap[id] = attri;
 		}
-		
+		public static function getAttrNameUrl(attrId:int):String
+		{
+			if (attrRes[attrId]==undefined) 
+			{
+				return "";
+			}
+			return attrRes[attrId];
+		}
+		public static function getAttrIconUrl(attrId:int):String
+		{
+			if (attrIconRes[attrId]==undefined) 
+			{
+				return "";
+			}
+			return attrIconRes[attrId];
+		}
 		/**
 		 *获取对应属性的转换值 
 		 * @param attributeID

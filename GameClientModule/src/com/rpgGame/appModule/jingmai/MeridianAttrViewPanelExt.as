@@ -4,6 +4,7 @@ package com.rpgGame.appModule.jingmai
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.utils.FightValueUtil;
+	import com.rpgGame.appModule.jingmai.sub.JinMaiAttrExt;
 	import com.rpgGame.core.events.MeridianEvent;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.AttrUtil;
@@ -15,10 +16,8 @@ package com.rpgGame.appModule.jingmai
 	import com.rpgGame.coreData.clientConfig.Q_meridian;
 	import com.rpgGame.netData.meridian.bean.AcuPointInfo;
 	
-	import flash.events.Event;
 	import flash.geom.Point;
 	
-	import feathers.controls.Label;
 	import feathers.controls.UINumber;
 	
 	import org.mokylin.skin.app.beibao.jingmai.Jingmai_Shuxin;
@@ -31,12 +30,13 @@ package com.rpgGame.appModule.jingmai
 		private var _totalCHash:HashMap=new HashMap();
 		private var _totalJHash:HashMap=new HashMap();
 		private var labArr:Array=[];
+		private var pool:Array=[];
 		public function MeridianAttrViewPanelExt(uiNum:UINumber)
 		{
 			_skin=new Jingmai_Shuxin();
 			super(_skin);
-			MCUtil.removeSelf(_skin.lb_att0);
-			MCUtil.removeSelf(_skin.ib_att1);
+			MCUtil.removeSelf(_skin.skin1_1);
+			MCUtil.removeSelf(_skin.skin2_1);
 			this._fightPower=uiNum;
 			Mgr.meridianMgr.addEventListener(MeridianEvent.ALL_DATA_UPATE,onUpdateAll);
 			Mgr.meridianMgr.addEventListener(MeridianEvent.MERIDIAN_CHANGE,onMeridianChange);
@@ -94,15 +94,16 @@ package com.rpgGame.appModule.jingmai
 			{
 				MCUtil.mergeValueHashMap(tmpJ,_totalJHash.getValue(key2))
 			}
-			for each (var lab:Label in labArr) 
+			for each (var lab:JinMaiAttrExt in labArr) 
 			{
 				MCUtil.removeSelf(lab);
 			}
+			pool=pool.concat(labArr);
 			labArr.length=0;
-			var startPos:Point=new Point(_skin.lb_att0.x,_skin.lb_att0.y);
-			labArr=labArr.concat(AttrUtil.showAttr(tmpC,this,_skin.lb_att0,1,startPos,_skin.lb_att0.width,_skin.lb_att0.height+2));
-			startPos.y=_skin.ib_att1.y;
-			labArr=labArr.concat(AttrUtil.showAttr(tmpJ,this,_skin.lb_att0,1,startPos,_skin.lb_att0.width,_skin.lb_att0.height+2));
+			var startPos:Point=new Point(_skin.skin1_1.x,_skin.skin1_1.y);
+			labArr=labArr.concat(AttrUtil.showAttrByItem(tmpC,this._skin.grpXueWei,JinMaiAttrExt,1,startPos,_skin.skin1_1.width,_skin.skin1_1.height+5,pool));
+			startPos.y=_skin.skin2_1.y;
+			labArr=labArr.concat(AttrUtil.showAttrByItem(tmpJ,this._skin.grpBianShi,JinMaiAttrExt,1,startPos,_skin.skin1_1.width,_skin.skin1_1.height+5,pool));
 			_fightPower.number=FightValueUtil.calFightPowerByHash(tmpC,MainRoleManager.actorInfo.job)+FightValueUtil.calFightPowerByHash(tmpJ,MainRoleManager.actorInfo.job);
 		}
 		protected function onUpdateAll(event:MeridianEvent):void

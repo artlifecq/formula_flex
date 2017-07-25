@@ -38,7 +38,7 @@ package com.rpgGame.app.ui.tips.cheats
 		/**
 		 *冲穴条件
 		 */		
-		public static const URL_ChongXue_Con:String="ui/common/tips/tipswenzi/jineng/chongxuetiaojian.png";
+		public static const URL_ChongXue_Con:String="ui/common/tips/tipswenzi/jineng/jihuotiaojian.png";
 		/**
 		 *冲穴条件
 		 */		

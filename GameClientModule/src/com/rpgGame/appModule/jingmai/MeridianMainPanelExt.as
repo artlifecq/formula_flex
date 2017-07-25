@@ -6,6 +6,7 @@ package com.rpgGame.appModule.jingmai
 	
 	import org.mokylin.skin.app.beibao.jingmai.Jingmai_Skin;
 	
+	import starling.display.DisplayObject;
 	import starling.events.TouchEvent;
 
 	/**
@@ -68,7 +69,10 @@ package com.rpgGame.appModule.jingmai
 			trace("touch main");
 			
 		}
-		
+		override protected function onTouchTarget(target:DisplayObject):void
+		{
+			
+		}
 		override public function hide():void
 		{
 			super.hide();

@@ -1,12 +1,11 @@
 package org.mokylin.skin.app.beibao.jingmai
 {
-	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
 	import feathers.controls.Group;
-	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import org.mokylin.skin.app.beibao.jingmai.Shuxing_Item;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
 
 	/**
@@ -23,11 +22,13 @@ package org.mokylin.skin.app.beibao.jingmai
 
 		public var btnClose:feathers.controls.Button;
 
-		public var ib_att1:feathers.controls.Label;
+		public var grpBianShi:feathers.controls.Group;
 
-		public var lb_att0:feathers.controls.Label;
+		public var grpXueWei:feathers.controls.Group;
 
-		public var titleDisplay:feathers.controls.Label;
+		public var skin1_1:feathers.controls.SkinnableContainer;
+
+		public var skin2_1:feathers.controls.SkinnableContainer;
 
 
 		//==========================================================================
@@ -38,9 +39,9 @@ package org.mokylin.skin.app.beibao.jingmai
 			super();
 			
 			this.currentState = "normal";
-			this.height = 555;
-			this.width = 245;
-			this.elementsContent = [bg_i(),titleDisplay_i(),btnClose_i(),__Jingmai_Shuxin_UIAsset1_i(),ib_att1_i(),lb_att0_i()];
+			this.height = 557;
+			this.width = 292;
+			this.elementsContent = [bg_i(),__Jingmai_Shuxin_UIAsset1_i(),__Jingmai_Shuxin_UIAsset2_i(),btnClose_i(),grpXueWei_i(),grpBianShi_i(),__Jingmai_Shuxin_Group1_i(),__Jingmai_Shuxin_Group2_i(),__Jingmai_Shuxin_UIAsset9_i()];
 			
 			states = {
 			};
@@ -51,12 +52,106 @@ package org.mokylin.skin.app.beibao.jingmai
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
+		private function __Jingmai_Shuxin_Group1_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			temp.x = 30;
+			temp.y = 50;
+			temp.elementsContent = [__Jingmai_Shuxin_UIAsset3_i(),__Jingmai_Shuxin_UIAsset4_i(),__Jingmai_Shuxin_UIAsset5_i()];
+			return temp;
+		}
+
+		private function __Jingmai_Shuxin_Group2_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			temp.x = 30;
+			temp.y = 264;
+			temp.elementsContent = [__Jingmai_Shuxin_UIAsset6_i(),__Jingmai_Shuxin_UIAsset7_i(),__Jingmai_Shuxin_UIAsset8_i()];
+			return temp;
+		}
+
 		private function __Jingmai_Shuxin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.height = 515;
+			temp.styleName = "ui/common/background/neikuang_1.png";
+			temp.width = 278;
+			temp.x = 7;
+			temp.y = 33;
+			return temp;
+		}
+
+		private function __Jingmai_Shuxin_UIAsset2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/big_bg/beibao/jingmai/shuxingbeijing.jpg";
-			temp.x = 8;
+			temp.x = 11;
 			temp.y = 37;
+			return temp;
+		}
+
+		private function __Jingmai_Shuxin_UIAsset3_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/beibao/jingmai/meishuzi/xueweijiachengshuxing.png";
+			temp.x = 72;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function __Jingmai_Shuxin_UIAsset4_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/common/wenshi/huawen_1.png";
+			temp.x = 0;
+			temp.y = 8;
+			return temp;
+		}
+
+		private function __Jingmai_Shuxin_UIAsset5_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/common/wenshi/huawen_2.png";
+			temp.x = 172;
+			temp.y = 8;
+			return temp;
+		}
+
+		private function __Jingmai_Shuxin_UIAsset6_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/beibao/jingmai/meishuzi/bianshijiachengshuxing.png";
+			temp.x = 72;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function __Jingmai_Shuxin_UIAsset7_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/common/wenshi/huawen_1.png";
+			temp.x = 0;
+			temp.y = 8;
+			return temp;
+		}
+
+		private function __Jingmai_Shuxin_UIAsset8_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/common/wenshi/huawen_2.png";
+			temp.x = 172;
+			temp.y = 8;
+			return temp;
+		}
+
+		private function __Jingmai_Shuxin_UIAsset9_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.touchable = false;
+			temp.touchGroup = true;
+			temp.styleName = "ui/app/beibao/jingmai/jiachengzongshuxing.png";
+			temp.x = 89;
+			temp.y = 7;
 			return temp;
 		}
 
@@ -65,9 +160,9 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 555;
+			temp.height = 557;
 			temp.styleName = "ui/common/background/erji_kuang.png";
-			temp.width = 245;
+			temp.width = 292;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -79,58 +174,55 @@ package org.mokylin.skin.app.beibao.jingmai
 			btnClose = temp;
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.x = 212;
-			temp.y = 7;
+			temp.x = 258;
+			temp.y = 5;
 			return temp;
 		}
 
-		private function ib_att1_i():feathers.controls.Label
+		private function grpBianShi_i():feathers.controls.Group
 		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			ib_att1 = temp;
-			temp.name = "ib_att1";
-			temp.htmlText = "攻击：12";
-			temp.text = "攻击：12";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 147;
-			temp.x = 62;
-			temp.y = 355;
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			grpBianShi = temp;
+			temp.name = "grpBianShi";
+			temp.width = 228;
+			temp.x = 31;
+			temp.y = 304;
+			temp.elementsContent = [skin2_1_i()];
 			return temp;
 		}
 
-		private function lb_att0_i():feathers.controls.Label
+		private function grpXueWei_i():feathers.controls.Group
 		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lb_att0 = temp;
-			temp.name = "lb_att0";
-			temp.htmlText = "攻击：12";
-			temp.text = "攻击：12";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 147;
-			temp.x = 62;
-			temp.y = 93;
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			grpXueWei = temp;
+			temp.name = "grpXueWei";
+			temp.x = 31;
+			temp.y = 87;
+			temp.elementsContent = [skin1_1_i()];
 			return temp;
 		}
 
-		private function titleDisplay_i():feathers.controls.Label
+		private function skin1_1_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			titleDisplay = temp;
-			temp.name = "titleDisplay";
-			temp.bold = true;
-			temp.height = 26;
-			temp.touchable = false;
-			temp.touchGroup = true;
-			temp.fontSize = 16;
-			temp.text = "经脉加成总属性";
-			temp.textAlign = "center";
-			temp.color = 0xB8AD80;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 210;
-			temp.x = 20;
-			temp.y = 9;
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			skin1_1 = temp;
+			temp.name = "skin1_1";
+			var skin:StateSkin = new org.mokylin.skin.app.beibao.jingmai.Shuxing_Item()
+			temp.skin = skin
+			temp.x = 0;
+			temp.y = 3;
+			return temp;
+		}
+
+		private function skin2_1_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			skin2_1 = temp;
+			temp.name = "skin2_1";
+			var skin:StateSkin = new org.mokylin.skin.app.beibao.jingmai.Shuxing_Item()
+			temp.skin = skin
+			temp.x = 0;
+			temp.y = 3;
 			return temp;
 		}
 

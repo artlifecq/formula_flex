@@ -115,7 +115,7 @@ package com.rpgGame.app.ui.tips
 			startY+=this._skin.uiName1.height+2;
 			if(serverData.level==0)
 			{
-				this._skin.lb_jihuo.visible=true;
+				this._skin.lb_jihuo.visible=false;
 				var canActive:Boolean=Mgr.meridianMgr.getCanActive(serverData);
 				if (!canActive) 
 				{
@@ -126,7 +126,7 @@ package com.rpgGame.app.ui.tips
 				else
 				{
 					//冲穴
-					this._skin.lb_jihuo.text="未冲穴";
+					this._skin.lb_jihuo.text="未激活";
 				//	this._skin.uiName1.text="【冲穴条件】";
 					this._skin.uiName1.styleName=TipUrl.URL_ChongXue_Con;
 				}
@@ -135,6 +135,8 @@ package com.rpgGame.app.ui.tips
 			{
 				//this._skin.uiName1.text="【升级条件】";
 				this._skin.uiName1.styleName=TipUrl.URL_ShengJi_CON;
+				this._skin.lb_jihuo.visible=true;
+				this._skin.lb_jihuo.text=serverData.level+"/";
 			}
 			var isMax:Boolean=Mgr.meridianMgr.isMaxAcuLevel(serverData);
 			//不是最高级
@@ -152,8 +154,8 @@ package com.rpgGame.app.ui.tips
 				lb.width=lb.textWidth;
 				//
 			}
-			this._skin.imgLine1.y=startY;
-			startY+=_skin.imgLine1.height+2;
+			this._skin.imgLine2.y=startY;
+			startY+=_skin.imgLine2.height+2;
 			var canLevelUp:Boolean=Mgr.meridianMgr.getCanLevelUp(serverData);
 			_skin.uiName2.visible=false;
 			
@@ -356,8 +358,8 @@ package com.rpgGame.app.ui.tips
 				}
 				startY=startPos.y;
 			}
-			_skin.imgLine1.y=startY;
-			startY+=_skin.imgLine1.height+2;
+			_skin.imgLine2.y=startY;
+			startY+=_skin.imgLine2.height+2;
 			//镶嵌说明
 			_skin.uiName2.y=startY;
 			_skin.uiName2.visible=true;
