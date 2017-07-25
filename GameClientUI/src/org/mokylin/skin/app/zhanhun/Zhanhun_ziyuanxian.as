@@ -5,8 +5,8 @@ package org.mokylin.skin.app.zhanhun
 	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
-	import feathers.controls.UIAsset;
 	import org.mokylin.skin.common.ItemBg;
+	import org.mokylin.skin.component.button.ButtonSelect_Skin;
 	import org.mokylin.skin.component.button.ButtonSkin_send;
 
 	/**
@@ -23,7 +23,7 @@ package org.mokylin.skin.app.zhanhun
 
 		public var btn_send:feathers.controls.Button;
 
-		public var conOver:feathers.controls.UIAsset;
+		public var conOver:feathers.controls.Button;
 
 		public var lb_cishu:feathers.controls.Label;
 
@@ -42,7 +42,7 @@ package org.mokylin.skin.app.zhanhun
 			this.currentState = "normal";
 			this.height = 33;
 			this.width = 265;
-			this.elementsContent = [bg_i(),lb_name_i(),lb_cishu_i(),lb_jinyan_i(),conOver_i(),btn_send_i()];
+			this.elementsContent = [bg_i(),lb_name_i(),lb_cishu_i(),lb_jinyan_i(),btn_send_i(),conOver_i()];
 			
 			states = {
 			};
@@ -73,18 +73,18 @@ package org.mokylin.skin.app.zhanhun
 			btn_send = temp;
 			temp.name = "btn_send";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_send;
-			temp.x = 235;
-			temp.y = 3;
+			temp.x = 223;
+			temp.y = 6;
 			return temp;
 		}
 
-		private function conOver_i():feathers.controls.UIAsset
+		private function conOver_i():feathers.controls.Button
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			var temp:feathers.controls.Button = new feathers.controls.Button();
 			conOver = temp;
 			temp.name = "conOver";
 			temp.height = 33;
-			temp.styleName = "ui/common/hover/liangkuang2.png";
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSelect_Skin;
 			temp.width = 265;
 			temp.x = 0;
 			temp.y = 0;
@@ -103,7 +103,7 @@ package org.mokylin.skin.app.zhanhun
 			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 54;
-			temp.x = 128;
+			temp.x = 109;
 			temp.y = 8;
 			return temp;
 		}
@@ -121,7 +121,7 @@ package org.mokylin.skin.app.zhanhun
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
 			temp.width = 44;
-			temp.x = 197;
+			temp.x = 181;
 			temp.y = 8;
 			return temp;
 		}
@@ -133,11 +133,11 @@ package org.mokylin.skin.app.zhanhun
 			temp.name = "lb_name";
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.text = "跨服皇城争霸战";
+			temp.text = "皇城争霸";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 117;
-			temp.x = 6;
+			temp.width = 89;
+			temp.x = 27;
 			temp.y = 8;
 			return temp;
 		}
