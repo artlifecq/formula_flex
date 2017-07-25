@@ -1,6 +1,8 @@
 package gameEngine2D {
 	import com.game.engine3D.config.GlobalConfig;
 	import com.game.engine3D.utils.PathFinderUtil;
+	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.state.role.RoleStateUtil;
 	
 	import flash.geom.Vector3D;
 	
@@ -45,6 +47,17 @@ package gameEngine2D {
 			
 			return PathFinderUtil.findPath(district, position, targetPos);
 		}
+		
+		public static function isFindPath(district : DistrictWithPath, position : Vector3D, targetPos : Vector3D) :Boolean
+		{
+			var path : Vector.<Vector3D> = PolyUtil.findPath(district, position, targetPos);
+			if (path&& path.length >= 2)///有寻路路径直接走
+			{
+				return true;
+			}
+			return false;
+		}
+		
 		
 		public static function getSegmentIntersect(district : DistrictWithPath, start : Vector3D, end : Vector3D) : Vector3D {
 //			var allPolygon : Vector.<PointsSet> = district.internalPointsSets;

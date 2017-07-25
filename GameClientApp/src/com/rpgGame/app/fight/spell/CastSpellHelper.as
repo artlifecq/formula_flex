@@ -342,7 +342,10 @@ package com.rpgGame.app.fight.spell
 			{
 				return CASE_STATE_FAIL;
 			}
-			
+			else if (MainRoleManager.actor.stateMachine.isJumping||MainRoleManager.actor.stateMachine.isJumpRising)//跳跃中不不能放技能
+			{
+				return CASE_STATE_FAIL;
+			}
 			
 			
 			if (_caseSpell)
