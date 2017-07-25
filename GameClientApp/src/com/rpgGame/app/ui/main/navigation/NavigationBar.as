@@ -30,8 +30,8 @@ package com.rpgGame.app.ui.main.navigation {
 		public function NavigationBar() {
 			this._skin = new navigation_main_Skin();
 			super(this._skin);
-			MCUtil.removeSelf(this._skin.btn_close);
-			MCUtil.removeSelf(this._skin.btn_open);
+			MCUtil.removeSelf(this._skin.btnClose);
+			MCUtil.removeSelf(this._skin.btnOpen);
 			_content = new ContengGroup(_skin.width,_skin.height);
 			this.addChildAt(_content,0);
 //			this.setState(true);
@@ -65,16 +65,16 @@ package com.rpgGame.app.ui.main.navigation {
 			CONFIG::netDebug {
 				NetDebug.LOG("[MainUI] [NavigationBar] [onTouchTarget] target:" + target.name);
 			}
-				switch (target) {
-					case this._skin.btn_open:
-						// 打开
-						this.setState(true);
-						break;
-					case this._skin.btn_close:
-						// 关闭
-						this.setState(false);
-						break;
-				}
+//				switch (target) {
+//					case this._skin.btn_open:
+//						// 打开
+//						this.setState(true);
+//						break;
+//					case this._skin.btn_close:
+//						// 关闭
+//						this.setState(false);
+//						break;
+//				}
 		}
 		
 		private function setState(isOpen : Boolean) : void {
@@ -96,8 +96,8 @@ package com.rpgGame.app.ui.main.navigation {
 				}
 					this._tween = TweenLite.to(_content, 0.5, {x : targetX,ease:Expo.easeIn});
 			}	
-			this._skin.btn_close.visible = isOpen;
-			this._skin.btn_open.visible = !isOpen;
+//			this._skin.btn_close.visible = isOpen;
+//			this._skin.btn_open.visible = !isOpen;
 		}
 		public function getBtnGlobalPos(btnName : String) : Point
 		{

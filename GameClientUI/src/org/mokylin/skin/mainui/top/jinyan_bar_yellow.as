@@ -21,7 +21,7 @@ package org.mokylin.skin.mainui.top
 			this.currentState = "normal";
 			this.height = 5;
 			this.width = 100;
-			this.elementsContent = [__jinyan_bar_yellow_UIAsset1_i(),__jinyan_bar_yellow_UIAsset2_i()];
+			this.elementsContent = [__jinyan_bar_yellow_UIAsset1_i()];
 			
 			states = {
 			};
@@ -29,25 +29,12 @@ package org.mokylin.skin.mainui.top
 		}
 
 
-		//==========================================================================
-		//                                定义成员方法
-		//==========================================================================
 		private function __jinyan_bar_yellow_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.left = 0;
 			temp.right = 0;
 			temp.styleName = "ui/mainui/top/jinyantiao_yellow.png";
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __jinyan_bar_yellow_UIAsset2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.right = 0;
-			temp.styleName = "ui/mainui/top/dian_yellow.png";
-			temp.width = 39;
 			temp.y = 0;
 			return temp;
 		}

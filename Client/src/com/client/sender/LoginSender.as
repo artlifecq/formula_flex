@@ -78,7 +78,7 @@ package com.client.sender
 			msg.agent = ClientConfig.agent;
 			msg.ad = "";
 			msg.time = ClientConfig.loginTime + "";
-			msg.isadult = ClientConfig.urlParmar["isadult"];///"1";
+			msg.isadult = ClientConfig.urlParmar["adult"];///"1";
 			msg.sign = ClientConfig.loginKey;
 			msg.localref = "";
 			msg.reserva1 = "";

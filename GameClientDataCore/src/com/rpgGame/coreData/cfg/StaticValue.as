@@ -113,7 +113,7 @@ package com.rpgGame.coreData.cfg
 		 *@param 描述内容使用此色值
 		 * @return  
 		 * */
-		public static const A_UI_WHITE_TEXT:uint = 0x000000;
+		public static const A_UI_WHITE_TEXT:uint = 0xeeeeee;
 		/**
 		 * 绿(面板UI绿色系都用此色值)
 		 *@param 连接文字、属性加成、特殊提示、安全状态、在线等使用此色值
@@ -150,6 +150,30 @@ package com.rpgGame.coreData.cfg
 		 * @return  
 		 * */
 		public static const A_UI_RED_TEXT:uint = 0xff0d0d;
+		/**
+		 * 橙色(面板UI橙色系都用此色值)
+		 *@param 聊天等使用此色值
+		 * @return  
+		 * */
+		public static const A_UI_OEANGE_TEXT:uint = 0xff9000;
+		/**
+		 * 玫瑰粉色(面板UI玫瑰粉色系都用此色值)
+		 *@param 聊天等使用此色值
+		 * @return  
+		 * */
+		public static const A_UI_ROSEPOWDER_TEXT:uint = 0xe58bff;
+		/**
+		 * 浅蓝色(面板UI浅蓝色系都用此色值)
+		 *@param 聊天等使用此色值
+		 * @return  
+		 * */
+		public static const A_UI_LIGHTBLUE_TEXT:uint = 0x00ecc8;
+		/**
+		 * 天蓝色(面板UI天蓝色系都用此色值)
+		 *@param 聊天等使用此色值
+		 * @return  
+		 * */
+		public static const A_UI_SKYBLUE_TEXT:uint = 0x27bbff;
 		
 		//////////////////////////////品质色///////////////////////////////////////////
 		/**品质白*/		

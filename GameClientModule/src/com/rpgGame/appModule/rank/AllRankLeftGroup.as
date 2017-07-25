@@ -106,7 +106,6 @@ package com.rpgGame.appModule.rank
 		private function updataTypeInfoHandler(msg:ResToplistToClientMessage):void
 		{
 			_totalPage = Math.floor(msg.length/_length);
-			
 			_selfCell.updatCellByInfo(msg.meTopInfo);
 			refeashPageValue();
 		}

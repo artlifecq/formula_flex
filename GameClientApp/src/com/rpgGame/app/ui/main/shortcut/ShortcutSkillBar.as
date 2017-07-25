@@ -126,6 +126,7 @@ package com.rpgGame.app.ui.main.shortcut
 				
 				//cd.setBg(GridBGType.GRID_SIZE_48);
 				_skin["Iconbg"+(i+1)].addChild(cd);
+				cd.y=-2;
 				_skin["Iconbg"+(i+1)].touchGroup=false;
 				_gridVect.push(cd);
 				//

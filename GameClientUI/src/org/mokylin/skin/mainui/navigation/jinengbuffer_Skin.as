@@ -30,9 +30,7 @@ package org.mokylin.skin.mainui.navigation
 		private function __jinengbuffer_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 38;
-			temp.styleName = "ui/mainui/shortcut/kuang_1.png";
-			temp.width = 38;
+			temp.styleName = "ui/mainui/head/BAFF/buffBg_20.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

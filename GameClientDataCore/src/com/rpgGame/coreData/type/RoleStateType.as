@@ -84,6 +84,8 @@ package com.rpgGame.coreData.type
 		public static const CONTROL_TRIPLE_ATTACK_LOCK:int = rEnum.next;// 三连击锁定
 		public static const CONTROL_TRIPLE_ATTACK_CHECK:int = rEnum.next;// 三连击锁定
 		public static const CONTROL_BUFF_SPRITEUP:int = rEnum.next;// 冲刺
-		public static const CONTROL_BUFF_SKILLCD:int = rEnum.next;// 技能cd
+		public static const CONTROL_BUFF_SKILLCD:int = rEnum.next;// 技能cd,已施放技能cd时间减少
+		public static const CONTROL_BUFF_SKILLCD2:int = rEnum.next;// 技能cd,未释放技能cd时间减少
+		public static const CONTROL_ENTER_LEAVE_FIGHT:int = rEnum.next;// 战斗状态
 	}
 }

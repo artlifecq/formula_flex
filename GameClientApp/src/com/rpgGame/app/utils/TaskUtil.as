@@ -1001,7 +1001,7 @@ package com.rpgGame.app.utils
 		{
 			if(labelDisplay)
 			{
-				labelDisplay.autoSize="isMouseOut";
+				labelDisplay.mesh2DTraceContinaerName="isMouseOut";
 				labelDisplay.addEventListener(TouchEvent.TOUCH, onTouch);
 			}
 			
@@ -1025,9 +1025,9 @@ package com.rpgGame.app.utils
 			var overTouch : Touch;
 			var endTouch : Touch;
 			overTouch = e.getTouch(target, TouchPhase.HOVER);
-			if (overTouch != null&&target.autoSize=="isMouseOut")
+			if (overTouch != null&&target.mesh2DTraceContinaerName=="isMouseOut")
 			{
-				target.autoSize="isMouseOver:"+target.y+":"+target.color;//只为保存属性
+				target.mesh2DTraceContinaerName="isMouseOver:"+target.y+":"+target.color;//只为保存属性
 				target.y-=1;
 				target.color=overClolor;
 				return;
@@ -1036,10 +1036,10 @@ package com.rpgGame.app.utils
 			endTouch = e.getTouch(target, TouchPhase.ENDED);
 			if (overTouch == null||endTouch != null)
 			{
-				key=target.autoSize.split(":");
+				key=target.mesh2DTraceContinaerName.split(":");
 				if(key.length==3)
 				{
-					target.autoSize="isMouseOut";
+					target.mesh2DTraceContinaerName="isMouseOut";
 					target.y=int(key[1]);
 					target.color=int(key[2]);
 				}

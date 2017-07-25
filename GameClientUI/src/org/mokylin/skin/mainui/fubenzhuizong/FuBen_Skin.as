@@ -7,9 +7,8 @@ package org.mokylin.skin.mainui.fubenzhuizong
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import org.mokylin.skin.component.button.ButtonSkin_hide;
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
-	import org.mokylin.skin.component.button.ButtonSkin_shouhui;
-	import org.mokylin.skin.component.button.ButtonSkin_zhankai;
 	import org.mokylin.skin.mainui.renwu.Renwu_Item2;
 
 	/**
@@ -46,35 +45,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 
 		public var sec_ico1_0:feathers.controls.UIAsset;
 
-		public var sec_ico1_1:feathers.controls.UIAsset;
-
-		public var sec_ico1_2:feathers.controls.UIAsset;
-
-		public var sec_ico1_3:feathers.controls.UIAsset;
-
-		public var sec_ico1_4:feathers.controls.UIAsset;
-
-		public var sec_ico1_5:feathers.controls.UIAsset;
-
-		public var sec_ico1_6:feathers.controls.UIAsset;
-
-		public var sec_ico1_7:feathers.controls.UIAsset;
-
 		public var sec_ico2_0:feathers.controls.UIAsset;
-
-		public var sec_ico2_1:feathers.controls.UIAsset;
-
-		public var sec_ico2_2:feathers.controls.UIAsset;
-
-		public var sec_ico2_3:feathers.controls.UIAsset;
-
-		public var sec_ico2_4:feathers.controls.UIAsset;
-
-		public var sec_ico2_5:feathers.controls.UIAsset;
-
-		public var sec_ico2_6:feathers.controls.UIAsset;
-
-		public var sec_ico2_7:feathers.controls.UIAsset;
 
 		public var sec_info:feathers.controls.Label;
 
@@ -117,7 +88,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 		private function __FuBen_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/mainui/renwu/hengtiao.png";
+			temp.styleName = "ui/mainui/renwu/renwuzhuizongbg.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -128,9 +99,9 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_close = temp;
 			temp.name = "btn_close";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_shouhui;
-			temp.x = 234;
-			temp.y = 0;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_hide;
+			temp.x = 221;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -139,9 +110,10 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_open = temp;
 			temp.name = "btn_open";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_zhankai;
-			temp.x = 234;
-			temp.y = 0;
+			temp.scaleX = -1;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_hide;
+			temp.x = 243;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -196,7 +168,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.skin = skin
 			temp.width = 169;
 			temp.x = 50;
-			temp.y = 101;
+			temp.y = 79;
 			return temp;
 		}
 
@@ -210,7 +182,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.skin = skin
 			temp.width = 169;
 			temp.x = 50;
-			temp.y = 123;
+			temp.y = 79;
 			return temp;
 		}
 
@@ -224,7 +196,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.skin = skin
 			temp.width = 169;
 			temp.x = 50;
-			temp.y = 128;
+			temp.y = 79;
 			return temp;
 		}
 
@@ -238,7 +210,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.skin = skin
 			temp.width = 169;
 			temp.x = 50;
-			temp.y = 134;
+			temp.y = 79;
 			return temp;
 		}
 
@@ -253,8 +225,8 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.color = 0xFFF2B7;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlue"];
 			temp.width = 205;
-			temp.x = 27;
-			temp.y = 6;
+			temp.x = 26;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -264,11 +236,11 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			lbMiaoshu = temp;
 			temp.name = "lbMiaoshu";
 			temp.text = "此处为当前阶段的剧情描述文字，";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 215;
-			temp.x = 21;
-			temp.y = 58;
+			temp.x = 27;
+			temp.y = 60;
 			return temp;
 		}
 
@@ -278,85 +250,8 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			sec_ico1_0 = temp;
 			temp.name = "sec_ico1_0";
 			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 21;
-			temp.y = 159;
-			return temp;
-		}
-
-		private function sec_ico1_1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			sec_ico1_1 = temp;
-			temp.name = "sec_ico1_1";
-			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 73;
-			temp.y = 159;
-			return temp;
-		}
-
-		private function sec_ico1_2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			sec_ico1_2 = temp;
-			temp.name = "sec_ico1_2";
-			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 125;
-			temp.y = 159;
-			return temp;
-		}
-
-		private function sec_ico1_3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			sec_ico1_3 = temp;
-			temp.name = "sec_ico1_3";
-			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 177;
-			temp.y = 159;
-			return temp;
-		}
-
-		private function sec_ico1_4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			sec_ico1_4 = temp;
-			temp.name = "sec_ico1_4";
-			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 21;
-			temp.y = 212;
-			return temp;
-		}
-
-		private function sec_ico1_5_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			sec_ico1_5 = temp;
-			temp.name = "sec_ico1_5";
-			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 73;
-			temp.y = 212;
-			return temp;
-		}
-
-		private function sec_ico1_6_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			sec_ico1_6 = temp;
-			temp.name = "sec_ico1_6";
-			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 125;
-			temp.y = 212;
-			return temp;
-		}
-
-		private function sec_ico1_7_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			sec_ico1_7 = temp;
-			temp.name = "sec_ico1_7";
-			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 177;
-			temp.y = 212;
+			temp.x = 100;
+			temp.y = 119;
 			return temp;
 		}
 
@@ -366,85 +261,8 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			sec_ico2_0 = temp;
 			temp.name = "sec_ico2_0";
 			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 21;
-			temp.y = 287;
-			return temp;
-		}
-
-		private function sec_ico2_1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			sec_ico2_1 = temp;
-			temp.name = "sec_ico2_1";
-			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 73;
-			temp.y = 287;
-			return temp;
-		}
-
-		private function sec_ico2_2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			sec_ico2_2 = temp;
-			temp.name = "sec_ico2_2";
-			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 125;
-			temp.y = 287;
-			return temp;
-		}
-
-		private function sec_ico2_3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			sec_ico2_3 = temp;
-			temp.name = "sec_ico2_3";
-			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 177;
-			temp.y = 287;
-			return temp;
-		}
-
-		private function sec_ico2_4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			sec_ico2_4 = temp;
-			temp.name = "sec_ico2_4";
-			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 21;
-			temp.y = 340;
-			return temp;
-		}
-
-		private function sec_ico2_5_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			sec_ico2_5 = temp;
-			temp.name = "sec_ico2_5";
-			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 73;
-			temp.y = 340;
-			return temp;
-		}
-
-		private function sec_ico2_6_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			sec_ico2_6 = temp;
-			temp.name = "sec_ico2_6";
-			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 125;
-			temp.y = 340;
-			return temp;
-		}
-
-		private function sec_ico2_7_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			sec_ico2_7 = temp;
-			temp.name = "sec_ico2_7";
-			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 177;
-			temp.y = 340;
+			temp.x = 100;
+			temp.y = 187;
 			return temp;
 		}
 
@@ -454,13 +272,14 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			sec_info = temp;
 			temp.name = "sec_info";
 			temp.letterSpacing = -1;
-			temp.fontSize = 16;
+			temp.fontSize = 14;
 			temp.text = "副本剩余时间：00：22：08";
 			temp.textAlign = "center";
-			temp.color = 0xD23735;
+			temp.color = 0xFF0D0D;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 202;
 			temp.x = 23;
-			temp.y = 397;
+			temp.y = 240;
 			return temp;
 		}
 
@@ -469,11 +288,11 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			sec_navi1 = temp;
 			temp.name = "sec_navi1";
-			temp.htmlText = "[阶段1]";
-			temp.color = 0xE8C958;
+			temp.htmlText = "【阶段1】";
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 0;
-			temp.y = 33;
+			temp.x = 1;
+			temp.y = 41;
 			return temp;
 		}
 
@@ -484,7 +303,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.name = "sec_navi2";
 			temp.styleName = "ui/mainui/fubenzhuizong/fuben/tgjl.png";
 			temp.x = 3;
-			temp.y = 144;
+			temp.y = 98;
 			return temp;
 		}
 
@@ -495,7 +314,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.name = "sec_navi3";
 			temp.styleName = "ui/mainui/fubenzhuizong/fuben/bossyjldl.png";
 			temp.x = 3;
-			temp.y = 262;
+			temp.y = 170;
 			return temp;
 		}
 
@@ -510,7 +329,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
 			temp.color = 0xE1D4A9;
 			temp.x = 81;
-			temp.y = 423;
+			temp.y = 266;
 			return temp;
 		}
 
@@ -519,11 +338,10 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			task_box = temp;
 			temp.name = "task_box";
-			temp.height = 391;
 			temp.width = 253;
 			temp.x = 0;
 			temp.y = 0;
-			temp.elementsContent = [ui_bg_i(),__FuBen_Skin_UIAsset1_i(),lbHeadName_i(),head_left_i(),head_right_i(),uiXiangxi_i(),sec_navi1_i(),killbut_0_i(),killbut_1_i(),killbut_2_i(),killbut_3_i(),killbut_4_i(),sec_ico1_0_i(),sec_ico1_1_i(),sec_ico1_2_i(),sec_ico1_3_i(),sec_ico1_4_i(),sec_ico1_5_i(),sec_ico1_6_i(),sec_ico1_7_i(),sec_ico2_0_i(),sec_ico2_1_i(),sec_ico2_2_i(),sec_ico2_3_i(),sec_ico2_4_i(),sec_ico2_5_i(),sec_ico2_6_i(),sec_ico2_7_i(),sec_subbut1_i(),sec_info_i(),sec_navi2_i(),sec_navi3_i(),lbMiaoshu_i()];
+			temp.elementsContent = [ui_bg_i(),__FuBen_Skin_UIAsset1_i(),head_left_i(),head_right_i(),uiXiangxi_i(),sec_navi1_i(),killbut_0_i(),killbut_1_i(),killbut_2_i(),killbut_3_i(),killbut_4_i(),sec_ico1_0_i(),sec_ico2_0_i(),sec_subbut1_i(),sec_info_i(),sec_navi2_i(),sec_navi3_i(),lbMiaoshu_i(),lbHeadName_i()];
 			return temp;
 		}
 
@@ -545,7 +363,7 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			temp.name = "ui_bg";
 			temp.height = 335;
 			temp.styleName = "ui/mainui/renwu/bg.png";
-			temp.width = 253;
+			temp.width = 248;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

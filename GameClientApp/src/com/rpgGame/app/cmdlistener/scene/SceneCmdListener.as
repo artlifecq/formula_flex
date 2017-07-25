@@ -174,7 +174,7 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			SocketConnection.addCmdListener(103110, onResChangePKStateMessage);
 			SocketConnection.addCmdListener(114108, onResMonterDieMessage);
-			SocketConnection.addCmdListener(101220, onSCUpdateTopLeaderMessage);
+			SocketConnection.addCmdListener(101222, onSCUpdateTopLeaderMessage);
 			//			SocketConnection.addCmdListener(SceneModuleMessages.S2C_TRIGGER_CLIENT_EVENT, onTriggerClientEvent);
 			
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -333,7 +333,7 @@ package com.rpgGame.app.cmdlistener.scene
 			if(!role){
 				return;
 			}
-			role.updateHair(msg.helmResId);
+			role.updateHair(msg.helmResId);//该协议其实作废了
 		}
 		private function onResWeaponChangeMessage(msg:ResWeaponChangeMessage):void
 		{

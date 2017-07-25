@@ -222,8 +222,12 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 		private function enterBtnHandler():void
 		{
 			var info:ActivetyInfo = ActivetyCfgData.getActInfoById(ActivetyDataManager.jixianVo.activityid);
-			if(info.info.joinState==0){
-				NoticeManager.showNotifyById(61003);
+			if(info.info.joinState==0||info.info.joinState==1){
+				NoticeManager.showNotifyById(70006);
+				return;
+			}
+			if(info.info.joinState==4){
+				NoticeManager.showNotifyById(70007);
 				return;
 			}
 			SpecialActivitySender.reqJoinAct(info.info.activityId);
