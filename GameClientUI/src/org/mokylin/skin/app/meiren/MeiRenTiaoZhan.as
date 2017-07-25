@@ -1,6 +1,8 @@
 package org.mokylin.skin.app.meiren
 {
+	import feathers.controls.text.Fontter;
 	import feathers.controls.Group;
+	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
@@ -17,6 +19,8 @@ package org.mokylin.skin.app.meiren
 		//                                定义成员变量
 		//==========================================================================
 		public var bgQuan:feathers.controls.UIAsset;
+
+		public var btn_next:feathers.controls.SkinnableContainer;
 
 		public var grpIcon1:feathers.controls.Group;
 
@@ -48,6 +52,8 @@ package org.mokylin.skin.app.meiren
 
 		public var icon9:feathers.controls.UIAsset;
 
+		public var lb_time:feathers.controls.Label;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -57,9 +63,8 @@ package org.mokylin.skin.app.meiren
 			super();
 			
 			this.currentState = "normal";
-			this.height = 553;
 			this.width = 529;
-			this.elementsContent = [bgQuan_i(),grpIcon1_i(),grpIcon2_i(),__MeiRenTiaoZhan_SkinnableContainer1_i()];
+			this.elementsContent = [bgQuan_i(),grpIcon1_i(),grpIcon2_i(),btn_next_i(),lb_time_i()];
 			
 			states = {
 			};
@@ -70,18 +75,6 @@ package org.mokylin.skin.app.meiren
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __MeiRenTiaoZhan_SkinnableContainer1_i():feathers.controls.SkinnableContainer
-		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			temp.height = 59;
-			var skin:StateSkin = new org.mokylin.skin.app.meiren.BtnTiaoZhan()
-			temp.skin = skin
-			temp.width = 176;
-			temp.x = 176;
-			temp.y = 494;
-			return temp;
-		}
-
 		private function __MeiRenTiaoZhan_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -99,6 +92,20 @@ package org.mokylin.skin.app.meiren
 			temp.styleName = "ui/app/meiren/tiaozhan/xiaoguodi.png";
 			temp.x = 18;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function btn_next_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			btn_next = temp;
+			temp.name = "btn_next";
+			temp.height = 59;
+			var skin:StateSkin = new org.mokylin.skin.app.meiren.BtnTiaoZhan()
+			temp.skin = skin
+			temp.width = 176;
+			temp.x = 176;
+			temp.y = 494;
 			return temp;
 		}
 
@@ -264,6 +271,21 @@ package org.mokylin.skin.app.meiren
 			temp.styleName = "ui/app/meiren/icon/guangqiuxiao.png";
 			temp.x = 417;
 			temp.y = 304;
+			return temp;
+		}
+
+		private function lb_time_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lb_time = temp;
+			temp.name = "lb_time";
+			temp.text = "继续挑战下一关倒计时：30";
+			temp.textAlign = "center";
+			temp.color = 0xFF0D0D;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 230;
+			temp.x = 149;
+			temp.y = 559;
 			return temp;
 		}
 

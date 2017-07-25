@@ -63,6 +63,10 @@ package com.rpgGame.coreData.info.map
 		 * 夫妻副本
 		 */
 		public static const MAP_TYPE_FQFB:int = rEnum.next;//13
+		/**
+		 * 美人副本
+		 */
+		public static const MAP_TYPE_MEIREN:int = rEnum.next;//14
 
 	}
 }

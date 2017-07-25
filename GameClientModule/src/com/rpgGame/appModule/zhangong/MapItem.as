@@ -14,16 +14,11 @@ package com.rpgGame.appModule.zhangong
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.beibao.zhangong.MapItem_Skin;
-	import org.mokylin.skin.app.beibao.zhangong.button.ButtonChangpingwanrenkeng;
-	import org.mokylin.skin.app.beibao.zhangong.button.ButtonDaliangcheng;
-	import org.mokylin.skin.app.beibao.zhangong.button.ButtonEfanggong;
-	import org.mokylin.skin.app.beibao.zhangong.button.ButtonHandanjinjiao;
-	import org.mokylin.skin.app.beibao.zhangong.button.ButtonQinshihuangling;
-	import org.mokylin.skin.app.beibao.zhangong.button.ButtonSaiwai;
-	import org.mokylin.skin.app.beibao.zhangong.button.ButtonWanlichangcheng;
-	import org.mokylin.skin.app.beibao.zhangong.button.ButtonWujiabaomuchang;
 	
 	import starling.display.DisplayObject;
+	import starling.events.Touch;
+	import starling.events.TouchEvent;
+	import starling.events.TouchPhase;
 	
 	public class MapItem extends SkinUI
 	{
@@ -34,13 +29,15 @@ package com.rpgGame.appModule.zhangong
 		{
 			_skin=new MapItem_Skin();
 			super(_skin);
-			_skin.numDengji.textAlign = "center";
+			_skin.uiOver.visible=false;
+			_skin.uiSelect.visible=false;
 		}
 		
 		override protected function onShow():void
 		{
 			super.onShow();
 			updatePanel();
+			this.addEventListener(starling.events.TouchEvent.TOUCH, onTouchItem);
 			EventManager.addEvent(ZhanGongEvent.BOSSITEM_CHANGE,bossItemChange);
 			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,resChange);
 			EventManager.addEvent(MainPlayerEvent.LEVEL_CHANGE,updateBtnState);
@@ -49,6 +46,7 @@ package com.rpgGame.appModule.zhangong
 		override protected function onHide():void
 		{
 			super.onHide();
+			this.removeEventListener(starling.events.TouchEvent.TOUCH, onTouchItem);
 			EventManager.removeEvent(ZhanGongEvent.BOSSITEM_CHANGE,bossItemChange);
 			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,resChange);
 			EventManager.removeEvent(MainPlayerEvent.LEVEL_CHANGE,updateBtnState);
@@ -69,42 +67,42 @@ package com.rpgGame.appModule.zhangong
 			{
 				case 21:
 				{
-					_skin.btnBG.styleClass=org.mokylin.skin.app.beibao.zhangong.button.ButtonWujiabaomuchang;
+					_skin.bg.styleName = "ui/app/beibao/zhangong/name/wujiabao.png";
 					break;
 				}		
 				case 31:
 				{
-					_skin.btnBG.styleClass=org.mokylin.skin.app.beibao.zhangong.button.ButtonHandanjinjiao;
+					_skin.bg.styleName = "ui/app/beibao/zhangong/name/handanjinjiao.png";
 					break;
 				}
 				case 41:
 				{
-					_skin.btnBG.styleClass=org.mokylin.skin.app.beibao.zhangong.button.ButtonDaliangcheng;
+					_skin.bg.styleName = "ui/app/beibao/zhangong/name/daliangcheng.png";
 					break;
 				}
 				case 51:
 				{
-					_skin.btnBG.styleClass=org.mokylin.skin.app.beibao.zhangong.button.ButtonChangpingwanrenkeng;
+					_skin.bg.styleName = "ui/app/beibao/zhangong/name/changpingwanrenkeng.png";
 					break;
 				}
 				case 61:
 				{
-					_skin.btnBG.styleClass=org.mokylin.skin.app.beibao.zhangong.button.ButtonWanlichangcheng;
+					_skin.bg.styleName = "ui/app/beibao/zhangong/name/wanlichangcheng.png";
 					break;
 				}
 				case 71:
 				{
-					_skin.btnBG.styleClass=org.mokylin.skin.app.beibao.zhangong.button.ButtonSaiwai;
+					_skin.bg.styleName = "ui/app/beibao/zhangong/name/saiwai.png";
 					break;
 				}
 				case 81:
 				{
-					_skin.btnBG.styleClass=org.mokylin.skin.app.beibao.zhangong.button.ButtonEfanggong;
+					_skin.bg.styleName = "ui/app/beibao/zhangong/name/handanjinjiao.png";
 					break;
 				}
 				case 91:
 				{
-					_skin.btnBG.styleClass=org.mokylin.skin.app.beibao.zhangong.button.ButtonQinshihuangling;
+					_skin.bg.styleName = "ui/app/beibao/zhangong/name/handanjinjiao.png";
 					break;
 				}
 			}
@@ -120,19 +118,17 @@ package com.rpgGame.appModule.zhangong
 		private function updateBtnState(type:int=0):void
 		{
 			if(_lv>MainRoleManager.actorInfo.totalStat.level){
-				_skin.btnBG.isEnabled=false;
-				GrayFilter.gray(_skin.btnBG);
+				GrayFilter.gray(this._skin.bg);
 			}
 			else{
-				_skin.btnBG.isEnabled=true;
-				_skin.btnBG.filter=null;
+				this._skin.bg.filter=null;
 			}
 			updatePanel();
 		}
 		
-		public function setBtnState():void
+		public function setBtnState(bool:Boolean):void
 		{
-			onTouchTarget(_skin.btnBG);
+			_skin.uiOver.visible=bool;
 		}
 		
 		public function get level():int
@@ -144,10 +140,24 @@ package com.rpgGame.appModule.zhangong
 		{
 			super.onTouchTarget(target);
 			switch(target){
-				case _skin.btnBG:
+				case _skin.uiSelect:
+					if(_lv>MainRoleManager.actorInfo.totalStat.level) return;
 					EventManager.dispatchEvent(ZhanGongEvent.MAPITEM_SELECT,this);
 					break;
 			}			
+		}
+		
+		public function onTouchItem(e:TouchEvent):void
+		{
+			var t:Touch=e.getTouch(this);
+			if(!t){
+				_skin.uiSelect.visible=false;
+				return;
+			}
+			t=e.getTouch(this,TouchPhase.HOVER);
+			if(t){
+				_skin.uiSelect.visible=true;
+			}
 		}
 		
 		private function bossItemChange(msg:SCMeritoriousUpgradeResultMessage):void
@@ -164,13 +174,15 @@ package com.rpgGame.appModule.zhangong
 		{
 			if(_lv>MainRoleManager.actorInfo.totalStat.level)
 			{
-				_skin.lbMsg.text="等级不足";
-				_skin.lbMsg.color=StaticValue.A_UI_RED_TEXT;
+				_skin.lbMsg.visible=false;
+				_skin.lbBuzu.visible=true;
 			}
 			else
 			{
 				_skin.lbMsg.text=ZhanGongManager.getProgressByLv(_lv);
 				_skin.lbMsg.color=StaticValue.A_UI_GREEN_TEXT;
+				_skin.lbMsg.visible=true;
+				_skin.lbBuzu.visible=false;
 			}
 			var num:int=ZhanGongManager.getCanUpNumByLv(_lv);
 			if(num<=0)
@@ -180,11 +192,10 @@ package com.rpgGame.appModule.zhangong
 			}
 			else
 			{
-				_skin.numDengji.label=num.toString();
+				_skin.lbNum.text=num.toString();
 				_skin.grp_dengji.visible=true;
 				setRTNState(RTNodeID.ZG,true);
-			}
-			
+			}		
 		}
 	}
 }
