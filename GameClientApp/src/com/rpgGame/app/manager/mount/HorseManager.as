@@ -279,6 +279,10 @@ package com.rpgGame.app.manager.mount
 		 */
 		public function onRequestSetUpMountRide(isRide:Boolean):void
 		{
+			if(isInRideCD && isRide)
+			{
+				return;
+			}
 			//坐骑未开放
 			if(_horsedataInfo == null)
 				return ;
@@ -305,7 +309,7 @@ package com.rpgGame.app.manager.mount
 				if (isRide)
 				{
 					isInRideCD = true;
-//					_tweenLite = TweenLite.delayedCall((MountMiscData.upOrDownCd * 0.001), onDelayedCD);
+					_tweenLite = TweenLite.delayedCall((200 * 0.001), onDelayedCD);
 				}
 				ref = (MainRoleManager.actor.stateMachine.getReference(MountRideStateReference) as MountRideStateReference);
 				ref.setParams(isRide,hoseId);
