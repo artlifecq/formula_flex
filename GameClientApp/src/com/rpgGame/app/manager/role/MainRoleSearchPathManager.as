@@ -580,7 +580,7 @@ package com.rpgGame.app.manager.role
 			var _districtWithPath : DistrictWithPath = SceneManager.getDistrict(role.sceneName);
 			if (PolyUtil.isFindPath(_districtWithPath, role.position, pos))///有寻路路径直接走
 			{
-				return RoleStateUtil.walkToPos(role, pos);
+				return RoleStateUtil.walkToPos(role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite);
 			}
 			//没有路径开有没有跳跃点
 			clearJumpPath();
@@ -596,7 +596,7 @@ package com.rpgGame.app.manager.role
 				return true;
 			}
 			//如果跳跃也没有就直接按阻挡点处理
-			return RoleStateUtil.walkToPos(role, pos);
+			return RoleStateUtil.walkToPos(role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite);
 		}
 		private static function searchJumpToPonit(district : DistrictWithPath, position : Vector3D, target : Vector3D, crossJumpArr : Vector.<Vector3D>) : Boolean
 		{
