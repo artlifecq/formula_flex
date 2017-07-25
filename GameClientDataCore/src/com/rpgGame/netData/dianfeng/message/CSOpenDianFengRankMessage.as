@@ -12,7 +12,7 @@ package com.rpgGame.netData.dianfeng.message{
 	 */
 	public class CSOpenDianFengRankMessage extends Message {
 	
-		//页数
+		//页数azz
 		private var _page: int;
 		
 		

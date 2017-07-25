@@ -1,9 +1,13 @@
 package com.rpgGame.app.state.role.control
 {
 	import com.game.engine3D.state.role.RoleStateReference;
+	import com.gameClient.utils.HashMap;
 	import com.rpgGame.coreData.info.move.RoleMoveInfo;
+	import com.rpgGame.netData.structs.Position;
 	
 	import flash.geom.Vector3D;
+	import flash.utils.Dictionary;
+	import flash.utils.getTimer;
 
 	/**
 	 *
@@ -53,13 +57,30 @@ package com.rpgGame.app.state.role.control
 		 *是否需要冲刺 
 		 */		
 		public var needSpriteUp:Boolean=false;
+		
+		public var serverRunTimeHash:HashMap;
 		public function WalkMoveStateReference()
 		{
 			super();
+			serverRunTimeHash=new HashMap();
 		}
-
+		public function setServerTime(pos:Position):void
+		{
+			serverRunTimeHash.put(pos.x+"_"+pos.y,getTimer());
+		}
+		internal function getServerClientTimeDiff(x:int,y:int):int
+		{
+			var key:String=x+"_"+y;
+			var serverTime:int=serverRunTimeHash.remove(key);
+			if (serverTime==0) 
+			{
+				return 0;
+			}
+			return serverTime-getTimer();
+		}
 		public function setParams(speed : int, spacing : int, vectorPath : Vector3D = null, moveInfo : RoleMoveInfo = null) : void
 		{
+			serverRunTimeHash.clear();
 			_speed = speed;
 			_spacing = spacing;
 			_vectorPath = vectorPath;

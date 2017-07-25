@@ -81,6 +81,12 @@
 		 */		
 		public static const TYPE_JUMP:int = rEnum.next;
 		
+		
+		/**
+		 * 坐骑 
+		 */
+		public static const TYPE_MOUNT:int = rEnum.next;
+		
 		public function RoleType()
 		{
 		}

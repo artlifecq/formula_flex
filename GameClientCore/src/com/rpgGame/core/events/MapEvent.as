@@ -37,6 +37,9 @@ package com.rpgGame.core.events
 		/** 地图区域触发事件**/
 		public static const AREA_TRIGGER : int = UNIQUEID.NEXT;
 		
+		/** 跳跃完成 **/
+		public static const MAP_JUMP_COMPLETE : int = UNIQUEID.NEXT;
+		
 	}
 }
 

@@ -60,6 +60,7 @@ package com.rpgGame.appModule.rank
 				_cellList.push(cell);
 			}
 			_selfCell = new AllPlayerCell(triggeredHandler);
+			_selfCell.color(0x55bd15);
 			_selfCell.updatCellByInfo(null);
 			_content.addChild(_selfCell);
 			if(_type == RankListType.All_COMBATPOWER_TYPE)
@@ -106,7 +107,6 @@ package com.rpgGame.appModule.rank
 		private function updataTypeInfoHandler(msg:ResToplistToClientMessage):void
 		{
 			_totalPage = Math.floor(msg.length/_length);
-			
 			_selfCell.updatCellByInfo(msg.meTopInfo);
 			refeashPageValue();
 		}

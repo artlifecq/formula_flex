@@ -126,7 +126,11 @@ package com.rpgGame.app.manager.goods
 			if(RoleEquipmentManager.isEquip(item.type))//人物面板在舞台，并且类型是装备
 			{
 				if(item.qItem.q_job!=MainRoleManager.actorInfo.job){
-					NoticeManager.showNotifyById(12009);
+					NoticeManager.showNotifyById(12009);//穿戴职业不符
+					return;
+				}
+				if(item.qItem.q_level>MainRoleManager.actorInfo.totalStat.level){
+					NoticeManager.showNotifyById(12010);//穿戴等级不足
 					return;
 				}
 				

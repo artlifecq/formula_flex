@@ -18,5 +18,10 @@ package com.rpgGame.core.events
 		 * 更新每页列表信息
 		 */
 		public static const UPDATAEVERYPAGELIST:int = UNIQUEID.NEXT;
+		
+		/**
+		 * 更新膜拜信息
+		 */
+		public static const UPDATAWORSHIPCOUNT:int = UNIQUEID.NEXT;
 	}
 }

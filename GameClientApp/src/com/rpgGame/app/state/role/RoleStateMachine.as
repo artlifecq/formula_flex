@@ -52,6 +52,7 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.state.role.control.ShadowState;
 	import com.rpgGame.app.state.role.control.ShapeshiftingState;
 	import com.rpgGame.app.state.role.control.ShortcutGridState;
+	import com.rpgGame.app.state.role.control.SkillCDReduceState;
 	import com.rpgGame.app.state.role.control.SkillCDResetState;
 	import com.rpgGame.app.state.role.control.SkillWarningState;
 	import com.rpgGame.app.state.role.control.SpriteUpBuffState;
@@ -161,10 +162,10 @@ package com.rpgGame.app.state.role
 		stateMapping[RoleStateType.CONTROL_CHECK_AUTO_FIGHT] = CheckStartAutoFightState;
 		stateMapping[RoleStateType.CONTROL_MASTERY_MAN] = MysteryManState;
 		stateMapping[RoleStateType.CONTROL_VIP] = VipBuffState;
-		stateMapping[RoleStateType.CONTROL_TRIPLE_ATTACK_LOCK] = TripleAttackSpellLockState;
 		stateMapping[RoleStateType.CONTROL_TRIPLE_ATTACK_CHECK] = CheckTripleAttackState;
 		stateMapping[RoleStateType.CONTROL_BUFF_SPRITEUP] = SpriteUpBuffState;
 		stateMapping[RoleStateType.CONTROL_BUFF_SKILLCD] = SkillCDResetState;
+		stateMapping[RoleStateType.CONTROL_BUFF_SKILLCD2] = SkillCDReduceState;
 		stateMapping[RoleStateType.CONTROL_ENTER_LEAVE_FIGHT] = FightLeaveEnterBuffState;
 		private var _role : SceneRole;
 		private var _lastCanShowRiding : Boolean;
@@ -378,11 +379,7 @@ package com.rpgGame.app.state.role
 			var state : IState = getCurrState(CastSpellLockState);
 			return state != null;
 		}
-		public function get isTripleLockCaseSpell() : Boolean
-		{
-			var state : IState = getCurrState(TripleAttackSpellLockState);
-			return state != null;
-		}
+		
 		public function get isBingDong() : Boolean
 		{
 			var state : IState = getCurrState(BingDongState);
@@ -474,6 +471,11 @@ package com.rpgGame.app.state.role
 		public function get isSpriteUp():Boolean
 		{
 			var state : IState = getCurrState(SpriteUpBuffState);
+			return state != null;
+		}
+		public function get isInFightState():Boolean
+		{
+			var state : IState = getCurrState(FightLeaveEnterBuffState);
 			return state != null;
 		}
 		override protected function createState(type : int) : IState

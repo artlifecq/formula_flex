@@ -80,6 +80,8 @@ package com.rpgGame.coreData.lang
 		public static const UI_TEXT33:String = "UI_TEXT33";
 		 /**  无 */
 		public static const UI_TEXT34:String = "UI_TEXT34";
+		 /**  鉴定图纸 */
+		public static const UI_TEXT35:String = "UI_TEXT35";
 
 	}
 }
