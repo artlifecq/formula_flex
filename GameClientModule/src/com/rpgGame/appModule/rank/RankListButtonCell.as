@@ -22,25 +22,15 @@ package com.rpgGame.appModule.rank
 			_skin = new PaiHang_Btn();
 			_skin.toSprite(this);
 		}
-		
 		override public function set  isSelected(value:Boolean):void
 		{
 			if(!FunctionOpenManager.checkOpenByLevel(infodata.q_level))
 			{
-				if(value)
-				{
-					NoticeManager.showNotifyById(70006);
-				}
 				super.isSelected = false;
 				_skin.btn.isSelected = false;
-				return ;
 			}else{
 				super.isSelected = value;
 				_skin.btn.isSelected = value;
-				if(value)
-				{
-					EventManager.dispatchEvent(RankListEvent.SELECTCHANGEEVENT,this.data);
-				}
 			}
 		}
 		

@@ -4,6 +4,7 @@ package com.rpgGame.app.state.role.action
 	import com.game.engine3D.state.IState;
 	import com.game.engine3D.vo.BaseRole;
 	import com.rpgGame.app.manager.input.KeyMoveManager;
+	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.app.state.role.control.JumpRiseStateReference;

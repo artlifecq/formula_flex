@@ -400,10 +400,7 @@ package com.rpgGame.app.ui.main.taskbar
 		}
 		public function resize(w : int, h : int) : void {
 			this.x = w - this._skin.width;
-			this.y = (h - this._skin.height)>>1;
-			CONFIG::netDebug{
-				NetDebug.LOG("[TaskBar] [resize] x:" + this.x + ", y:" + this.y + ", w:" + this._skin.width + ", h:" + this._skin.height);
-			}
+			this.y = 273;
 		}
 	}
 }

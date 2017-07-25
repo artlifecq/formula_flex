@@ -22,6 +22,8 @@ package com.rpgGame.coreData.info.map.map2d
             this.numBlocksY = byteArr.readInt();
             this.thumbnailWidth = byteArr.readInt();
             this.thumbnailHeight = byteArr.readInt();
+			
+			trace("地图ID:  " + ID + "\t" + (numBlocksX * 50) + "\t" + (numBlocksY*50));
 		}
 	}
 }

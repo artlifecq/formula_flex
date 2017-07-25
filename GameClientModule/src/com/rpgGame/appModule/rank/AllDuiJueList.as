@@ -53,7 +53,7 @@ package com.rpgGame.appModule.rank
 			EventManager.addEvent(D1v1Event.GET_PANEL_DATA,ongetPanelData);
 			Mgr.d1v1Mgr.reqPanelData();
 		}
-		private function ongetPanelData():void
+		private function ongetPanelData(state:int=0):void
 		{
 			// TODO Auto Generated method stub
 			var data:DianFengDataInfo=Mgr.d1v1Mgr.data;

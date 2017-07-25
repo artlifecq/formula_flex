@@ -2,7 +2,6 @@ package com.rpgGame.appModule.rank
 {
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
-	import com.rpgGame.app.display3D.InterAvatar3D;
 	import com.rpgGame.app.display3D.UIAvatar3D;
 	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.manager.Mgr;
@@ -11,8 +10,13 @@ package com.rpgGame.appModule.rank
 	import com.rpgGame.app.manager.goods.RoleEquipmentManager;
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.appModule.common.itemRender.GridItemRender;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.JunJieData;
+	import com.rpgGame.coreData.cfg.VipCfg;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.enum.RankListType;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
@@ -21,6 +25,7 @@ package com.rpgGame.appModule.rank
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.RoleData;
+	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.type.item.GridBGType;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.junjie.bean.JunJieInfo;
@@ -113,14 +118,28 @@ package com.rpgGame.appModule.rank
 		private function refeashValue():void
 		{
 			initData();
-			refeashJunjie();
 			refeashName();
 			refeashModle();
+			refeashJunjie();
 			refeashEquip();
 			refeashSkill();
 			refeashPower();
 		}
 		
+		private function setVipData(vip:int):void
+		{
+			TipTargetManager.remove(_vipIcon);
+			if (vip>0) 
+			{
+				_vipIcon.setIconResName(ClientConfig.getItemIcon(ItemConfig.getQItemByID(VipCfg.getVip(vip).q_mo_tokenID).q_icon+"",IcoSizeEnum.ICON_48));
+				TipTargetManager.show(_vipIcon,TargetTipsMaker.makeTips(TipType.VIP_LEVEL_TIP,new DynamicTipData(vip)));
+			}
+			else
+			{
+				_vipIcon.clear();
+				TipTargetManager.show(_vipIcon,TargetTipsMaker.makeTips(TipType.VIP_NONE_TIP,null));
+			}
+		}
 		private var _lastId:int = 0;
 		private var _chenhaoEft:InterObject3D;
 		protected function refeashJunjie():void
@@ -136,7 +155,7 @@ package com.rpgGame.appModule.rank
 			if(info == null)
 				return ;
 			var effName:String=JunJieData.getEffById(info.modelId);
-			_chenhaoEft=_modleContent.playInter3DAt(ClientConfig.getEffect(effName),120,50,0);
+			_chenhaoEft=_modleContent.playInter3DAt(ClientConfig.getEffect(effName),200,100,0);
 		}
 		
 		
@@ -210,7 +229,7 @@ package com.rpgGame.appModule.rank
 					setGridInfo(index,info);
 				}
 			}
-			
+			setVipData(_topInfo.vipId);
 		}
 		
 		private function setGridInfo(index:int, itemInfo:ClientItemInfo, gridIndex:int = -1):void

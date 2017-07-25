@@ -17,6 +17,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.map.MapUnitDataManager;
+	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.manager.role.DropGoodsManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneDropGoodsManager;
@@ -361,7 +362,7 @@ package com.rpgGame.app.cmdlistener.scene
 			if(!role){
 				return;
 			}
-			role.updateHair(msg.helmResId);//该协议其实作废了
+			role.updateHair(msg.helmResId);
 		}
 		private function onResWeaponChangeMessage(msg:ResWeaponChangeMessage):void
 		{
@@ -381,7 +382,7 @@ package com.rpgGame.app.cmdlistener.scene
 		private function RecvEnterMapMessage(msg:ResEnterMapMessage):void
 		{
 			GameLog.addShow("收到成功进入地图消息");
-			
+			Lyt.a("进入地图");
 			//			var infoID : uint = buffer.readVarint32();
 			//			var pkMode : uint = infoID & 15;
 			var line : uint = msg.line;
@@ -550,6 +551,7 @@ package com.rpgGame.app.cmdlistener.scene
 			{
 				var elapseTm : int = SystemTimeManager.curtTm - mInfo.startTm;
 				//trace("寻路开始时间：" + mInfo.startTm, "_差值：" + elapseTm + "_服务器时间 ：" + SystemTimeManager.curtTm);
+				Lyt.a("%%%%收到走路信息了%%%%%");
 				RoleStateUtil.walkByInfos(mInfo);
 				
 				//调试bug用，可以删除！！！！

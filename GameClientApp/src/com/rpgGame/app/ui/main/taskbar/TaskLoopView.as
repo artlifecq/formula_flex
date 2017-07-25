@@ -23,6 +23,7 @@ package com.rpgGame.app.ui.main.taskbar
 	
 	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_chat;
 	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
+	import org.mokylin.skin.mainui.renwu.RenWuTitle_Skin;
 	import org.mokylin.skin.mainui.renwu.RenWuZhuiZong_Skin;
 	import org.mokylin.skin.mainui.renwu.Renwu_Item;
 	
@@ -36,9 +37,9 @@ package com.rpgGame.app.ui.main.taskbar
 		private var scrollBar :ScrollContainer;
 		private var scrollBox:Group;
 		private var scrollBack : Shape;
-		private var navi1:Label;
-		private var navi2:Label;
-		private var navi3:Label;
+		private var navi1:SkinnableContainer;
+		private var navi2:SkinnableContainer;
+		private var navi3:SkinnableContainer;
 		private var killBut1List:Vector.<SkinnableContainer>;
 		private var killLabel1List:Vector.<Label>;
 		private var killBut2List:Vector.<SkinnableContainer>;
@@ -65,7 +66,6 @@ package com.rpgGame.app.ui.main.taskbar
 			scrollInit();
 			icoList1Group=new RewardGroup(IcoSizeEnum.ICON_42,_skin.sec_ico1_0,RewardGroup.ALIN_CENTER,4,6,6);
 			icoList2Group=new RewardGroup(IcoSizeEnum.ICON_42,_skin.sec_ico2_0,RewardGroup.ALIN_CENTER,4,6,6);
-			
 			skinList=new Array();
 			skinList.push(_skin.sec_navi1);
 			skinList.push(_skin.sec_killbut1_1);
@@ -84,7 +84,13 @@ package com.rpgGame.app.ui.main.taskbar
 			skinList.push(_skin.sec_info);
 			skinList.push(icoList2Group);
 			skinList.push(_skin.sec_subbut2);
-			
+			RenWuTitle_Skin(_skin.sec_navi1.skin).sec_navi1.touchable=false;
+			RenWuTitle_Skin(_skin.sec_navi1.skin).sec_navi1.touchGroup=false;
+			RenWuTitle_Skin(_skin.sec_navi2.skin).sec_navi1.touchable=false;
+			RenWuTitle_Skin(_skin.sec_navi3.skin).sec_navi1.touchable=false;
+		/*	navi1=RenWuTitle_Skin(_skin.sec_navi1.skin).sec_navi1;
+			navi2=RenWuTitle_Skin(_skin.sec_navi2.skin).sec_navi1;
+			navi3=RenWuTitle_Skin(_skin.sec_navi3.skin).sec_navi1;*/
 			navi1=_skin.sec_navi1;
 			navi2=_skin.sec_navi2;
 			navi3=_skin.sec_navi3;
@@ -125,9 +131,9 @@ package com.rpgGame.app.ui.main.taskbar
 			
 			var ico:IconCDFace
 			
-			navi1.htmlText="[主线]第一章 <u>新手村</u><font color='#8b8d7b'>(未完成)</font>";
-			navi2.htmlText="[支线]强化装备<font color='#8b8d7b'>(未完成)</font>";
-			navi3.htmlText="[环式]<u>采矿</u><font color='#ffffff'>(10/20)</font><font color='#8b8d7b'>(未完成)</font>";
+			//navi1.htmlText="[主线]第一章 <u>新手村</u><font color='#8b8d7b'>(未完成)</font>";
+			//navi2.htmlText="[支线]强化装备<font color='#8b8d7b'>(未完成)</font>";
+			//navi3.htmlText="[环式]<u>采矿</u><font color='#ffffff'>(10/20)</font><font color='#8b8d7b'>(未完成)</font>";
 			_skin.sec_navi0.visible=false;
 		
 			hideMainTaskView();
@@ -404,9 +410,10 @@ package com.rpgGame.app.ui.main.taskbar
 			}
 			
 		}
-		private function setNavView(type:int,party:String,name:String,isFinish:Boolean,nav:Label,subBut:Button=null):void
+		private function setNavView(type:int,party:String,name:String,isFinish:Boolean,navSkin:SkinnableContainer,subBut:Button=null):void
 		{
-			nav.visible=true;
+			navSkin.visible=true;
+			var nav:Label=RenWuTitle_Skin(navSkin.skin).sec_navi1;
 			if(type==1)
 			{
 				nav.htmlText="<font color='#ffea00'>【主线】</font>";
@@ -458,7 +465,7 @@ package com.rpgGame.app.ui.main.taskbar
 			setUisite();
 		}
 		/**处理卡点*/
-		private function setKadianNavView(name:String,nav:Label):void
+		private function setKadianNavView(name:String,nav:SkinnableContainer):void
 		{
 			//nav.htmlText="[主线]"+name+"<font color='#8b8d7b'>(未完成)</font>";
 			

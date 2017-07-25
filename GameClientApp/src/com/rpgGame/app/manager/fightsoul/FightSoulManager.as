@@ -89,8 +89,8 @@ package com.rpgGame.app.manager.fightsoul
 				fightSoulLevel = (owner.data as HeroData).fightSoulLevel;
 				var model:Q_fightsoul_mode = FightsoulModeData.getModeInfoById(fightSoulLevel);
 				fightSoulRole.updateBody("pc/fightsoul/"+model.q_mode,null);
-				fightSoulRole.updateBodyEft(model.q_effect);
-				fightSoulRole.data.avatarInfo.bodyEffectID2 = model.q_effect1;
+				fightSoulRole.updateBodyEft(model.q_effect,model.q_effect1);
+//				fightSoulRole.data.avatarInfo.bodyEffectID2 = model.q_effect1;
 				var fightSoulFollowAnimator:FightSoulFollowAnimator = new FightSoulFollowAnimator(fightSoulRole);
 				fightSoulFollowAnimator.radius = model.q_radius;
 				owner.setRenderAnimator(fightSoulFollowAnimator);

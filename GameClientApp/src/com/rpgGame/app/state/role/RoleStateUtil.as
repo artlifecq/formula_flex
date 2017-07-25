@@ -127,7 +127,6 @@ package com.rpgGame.app.state.role
 		 * @param role
 		 * @param gridPos
 		 * @param onArrive
-		 *@param noWalk 寻路路径小不用寻路，也返回方法 返回 role   任务上用到 ---------yt
 		 */
 		public static function walkToPos(role : SceneRole, pos : Vector3D, spacing : int = 0, data : Object = null, 
 										 onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null,needSprite:Boolean=false) : Boolean
@@ -242,6 +241,11 @@ package com.rpgGame.app.state.role
 					NoticeManager.showNotify(LangQ_NoticeInfo.WalkMoveIsStiff); //"定身中不能移动"
 					return false;
 				}
+				else if (walkRole.stateMachine.isJumping||walkRole.stateMachine.isJumpRising)//跳跃中不能移动
+				{
+					return false;
+				}
+				
 				RoleStateUtil.lastWalkTime = nowTime;
 			}
 			var moveSpeed : int = (walkRole.data as RoleData).totalStat.moveSpeed;
