@@ -19,6 +19,8 @@
 	import flash.utils.ByteArray;
 	import flash.utils.setTimeout;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.Label;
 	import feathers.controls.text.Fontter;
 	import feathers.events.FeathersEventType;
@@ -27,7 +29,6 @@
 	import starling.display.Image;
 	import starling.display.Quad;
 	import starling.display.Sprite;
-	import away3d.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -1045,7 +1046,8 @@
 								unit.displayObj.x = Math.round( $_rect.x + ($_rect.width - unit.displayObj.width) * 0.5 );
 						}
 						
-						unit.displayObj.y = Math.round( $_rect.y +  offsetY);
+//						unit.displayObj.y = Math.round( $_rect.y +  offsetY);
+						unit.displayObj.y=($_txtLineMetrics.height-unit.displayObj.height)/2+4;
 					}
 //					else
 //					{
@@ -1054,6 +1056,18 @@
 				}
 			}
 			setContainerPos();
+		}
+		
+		private function getPlaceholderHeight():int
+		{
+			if(!_tempTextField)
+			{
+				_tempTextField = new TextField();
+			}
+			_tempTextFormat.font = _defaultFormat.font;
+			_tempTextField.setTextFormat(_unitTextFormat);
+			_tempTextField.text=PLACEHOLDER;
+			return _tempTextField.textHeight;
 		}
 		
 		/**
