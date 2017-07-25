@@ -3,6 +3,7 @@ package com.rpgGame.appModule.rank
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
 	import com.rpgGame.app.display3D.InterAvatar3D;
+	import com.rpgGame.app.display3D.UIAvatar3D;
 	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
@@ -42,7 +43,7 @@ package com.rpgGame.appModule.rank
 		protected var _type:int;
 		protected var _topInfo:TopInfo;
 		protected var _modleContent:Inter3DContainer;
-		protected var _avatar : InterAvatar3D;
+		protected var _avatar:UIAvatar3D;
 		protected var _roleData:RoleData;
 		private var equipGrids:Vector.<DragDropItem>;
 		private var _vipIcon:DragDropItem;
@@ -58,6 +59,7 @@ package com.rpgGame.appModule.rank
 		private var containerId:int=ItemContainerID.Role;
 		
 		protected var _power:int;
+		protected var _scale:Number = 1.7;
 		public function RightGroupBase(skin:PaiHang_Right,type:int)
 		{
 			_skin = skin;
@@ -80,6 +82,7 @@ package com.rpgGame.appModule.rank
 			_skin.grpRight.addChildAt(_modleContent,4);
 			_skin.headName.imageScaleMode = UIAsset.IMAGE_SCALE_MODE_NO_SCALE;
 			_skin.headName.addEventListener(Event.RESIZE,sizeHandler);
+			_avatar = new UIAvatar3D(_skin.content);
 		}
 		private function sizeHandler(e:Event):void
 		{
@@ -180,15 +183,8 @@ package com.rpgGame.appModule.rank
 		}
 		protected function refeashModle():void
 		{
-			if(_avatar==null)
-			{
-				_avatar = new InterAvatar3D();
-				_avatar.x = _skin.weapons.x + (_skin.weapons.width >> 1);
-				_avatar.y = _skin.weapons.y + _skin.weapons.height+20;
-				_modleContent.addChild3D(_avatar);
-			}
 			this._avatar.setRoleData(this._roleData);
-			this._avatar.curRole.setScale(1.7);
+			this._avatar.setScale(_scale);	
 		}
 		
 		protected function refeashEquip():void
@@ -259,13 +255,15 @@ package com.rpgGame.appModule.rank
 				_skin.weapons.addChild(equipGrids[i]);
 			}
 			_vipIcon=new DragDropItem(IcoSizeEnum.ICON_48,-1);
-			_vipIcon.x=301;
-			_vipIcon.y=(10-5)*59;
+			/*_vipIcon.x=301;
+			_vipIcon.y=(10-5)*59;*/
+			_vipIcon.bindBg(_skin.Icbg11);
 			_skin.weapons.addChild(_vipIcon);
 			
 			_marryIcon=new DragDropItem(IcoSizeEnum.ICON_48,-1);
-			_marryIcon.x=7;
-			_marryIcon.y=5*59;
+			/*_marryIcon.x=7;
+			_marryIcon.y=5*59;*/
+			_marryIcon.bindBg(_skin.Icbg10);
 			_skin.weapons.addChild(_marryIcon);
 			
 			_mgr=RoleEquipmentManager.instance;

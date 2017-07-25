@@ -62,7 +62,7 @@ package com.rpgGame.appModule.rank
 			
 			_skin.vip.visible = info.vipId>0;
 			_skin.lbName.text = info.playername;
-			_skin.lbZhiye.text = ItemUtil.getJobName(info.job);
+			_skin.lbZhiye.text = ItemUtil.getJobName(info.playerBriefInfo.job);
 			if(info.toptype == RankListType.MOUNT_TYPE)
 			{
 				var horsedata:Q_horse = HorseConfigData.getMountDataById(info.param);

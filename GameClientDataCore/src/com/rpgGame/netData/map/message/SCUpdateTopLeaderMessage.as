@@ -1,5 +1,6 @@
 package com.rpgGame.netData.map.message{
 	import com.rpgGame.netData.map.bean.TopLeaderInfo;
+	
 	import org.game.netCore.net.Message;
 	
 	/** 
@@ -12,7 +13,7 @@ package com.rpgGame.netData.map.message{
 	 * 更新雕像数据
 	 */
 	public class SCUpdateTopLeaderMessage extends Message {
-	
+		
 		//雕像数据
 		private var _topLeaderInfo: TopLeaderInfo;
 		
@@ -40,7 +41,7 @@ package com.rpgGame.netData.map.message{
 		 * @return 
 		 */
 		override public function getId(): int {
-			return 101220;
+			return 101222;
 		}
 		
 		/**

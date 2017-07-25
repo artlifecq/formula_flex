@@ -5,16 +5,18 @@ package com.rpgGame.appModule.rank
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.manager.mount.MountShowData;
+	import com.rpgGame.app.state.role.action.PlayActionStateReference;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.utils.FightValueUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.view.ui.tip.vo.SpellDynamicTipdata;
-	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.clientConfig.Q_horse;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.face.BaseFaceInfo;
+	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RoleActionType;
+	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.netData.horse.bean.HorseDataInfo;
 	
 	import feathers.utils.filter.GrayFilter;
@@ -26,7 +28,6 @@ package com.rpgGame.appModule.rank
 	public class MountRightGroup extends RightGroupBase
 	{
 		private var _modeData:Q_horse;
-		private var _curtentInter3D:InterObject3D;
 		public function MountRightGroup(skin:PaiHang_Right, type:int)
 		{
 			super(skin, type);
@@ -39,6 +40,7 @@ package com.rpgGame.appModule.rank
 		override protected function initView():void
 		{
 			super.initView();
+			this._scale = 1.0;
 			_spellIconList = new Vector.<IconCDFace>();
 			
 			var partner:DisplayObjectContainer = _skin.icon1.parent;
@@ -75,29 +77,18 @@ package com.rpgGame.appModule.rank
 			_showdata.horsedataInfo = _horsedataInfo;
 			var props:Vector.<Number> =  _showdata.currentProp(null);
 			_power = FightValueUtil.calAtrributeFightPower(props,_showdata.heroJob);
+			if(_roleData==null)
+			{
+				_roleData = new RoleData(0);
+			}
+			var current:Q_horse = _showdata.housedata;
+			_roleData.avatarInfo.setBodyResID(current.q_skinResID,current.q_animatResID);
 		}
 		
 		override protected function refeashModle():void
 		{
-			if(_curtentInter3D!=null)
-			{
-				this._modleContent.removeChild3D(_curtentInter3D,true);
-				_curtentInter3D = null;
-			}
-			
-			var current:Q_horse = _showdata.housedata;
-			_curtentInter3D = new InterObject3D();
-			var data : RenderParamData3D = new RenderParamData3D(0, "mount1",ClientConfig.getAvatar(current.q_skinResID));
-			data.animatorSourchPath = ClientConfig.getAvatar( current.q_animatResID);
-			data.forceLoad=true;//ui上的3d特效强制加载
-			_currentUnit = addRenderUnitWith(data,_curtentInter3D);
-			_curtentInter3D.x = _skin.weapons.x + (_skin.weapons.width >> 1);
-			_curtentInter3D.y = _skin.weapons.y + _skin.weapons.height+20;
-			_curtentInter3D.rotationY = 60;
-//			_currentUnit.setScale(1.8);
-			_currentUnit.addUnitAtComposite(_currentUnit);
-			this._modleContent.addChild3D(_curtentInter3D);
-			showModeSate(RoleActionType.SHOW_IDLE);
+			super.refeashModle();
+			_avatar.transition(RoleStateType.ACTION_SHOW);
 		}
 		
 		override protected function refeashName():void
@@ -152,35 +143,11 @@ package com.rpgGame.appModule.rank
 			return false;
 		}
 		
-		private function addRenderUnitWith(rend : RenderParamData3D,src3d:InterObject3D):RenderUnit3D
-		{
-			var unit : RenderUnit3D;
-			unit = RenderUnit3D.create(rend);
-			unit.repeat = 1;
-			unit.setPlayCompleteCallBack(onPlayComplete, src3d);
-			unit.setAddedCallBack(addComplete);
-			src3d.setRenderUnit(unit);
-			return unit;
-		}
-		private function addComplete(unit : RenderUnit3D):void
-		{
-			showModeSate(RoleActionType.SHOW_IDLE);
-		}
 		
 		private function updateTime():void
 		{
-			showModeSate(RoleActionType.SHOW_IDLE);
-		}
-		private function onPlayComplete(iter3d:InterObject3D,unit : RenderUnit3D ):void
-		{
-			showModeSate(RoleActionType.STAND);
+			_avatar.transition(RoleStateType.ACTION_SHOW);
 		}
 		
-		private function showModeSate(state:String):void
-		{
-			if(_currentUnit==null)
-				return ;
-			_currentUnit.setStatus(state);
-		}
 	}
 }
