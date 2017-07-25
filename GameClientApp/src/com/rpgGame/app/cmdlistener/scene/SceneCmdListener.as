@@ -94,6 +94,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.netData.map.message.SCAreaJumpMessage;
 	import com.rpgGame.netData.map.message.SCAttachStateChangeMessage;
 	import com.rpgGame.netData.map.message.SCSceneObjMoveMessage;
+	import com.rpgGame.netData.map.message.SCSyncPlayerPosMessage;
 	import com.rpgGame.netData.map.message.SCUpdateTopLeaderMessage;
 	import com.rpgGame.netData.monster.message.ResMonsterDieMessage;
 	import com.rpgGame.netData.player.message.BroadcastPlayerAttriChangeMessage;
@@ -175,6 +176,7 @@ package com.rpgGame.app.cmdlistener.scene
 			SocketConnection.addCmdListener(103110, onResChangePKStateMessage);
 			SocketConnection.addCmdListener(114108, onResMonterDieMessage);
 			SocketConnection.addCmdListener(101222, onSCUpdateTopLeaderMessage);
+			SocketConnection.addCmdListener(101152, onSCSyncPlayerPosMessage);
 			//			SocketConnection.addCmdListener(SceneModuleMessages.S2C_TRIGGER_CLIENT_EVENT, onTriggerClientEvent);
 			
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -220,6 +222,16 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			
 			finish();
+		}
+		
+		private function onSCSyncPlayerPosMessage(msg:SCSyncPlayerPosMessage):void
+		{
+			// TODO Auto Generated method stub
+			if (MainRoleManager.actor.stateMachine.isWalkMoving) 
+			{
+				var ref:WalkMoveStateReference=MainRoleManager.actor.stateMachine.getReference(WalkMoveStateReference) as WalkMoveStateReference;
+				ref.setServerTime(msg.pos);
+			}
 		}
 		
 		private function onResChangeFactionMessage(msg:ResChangeFactionMessage):void

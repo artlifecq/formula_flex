@@ -22,6 +22,7 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.UserMoveEvent;
+	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.res.AvatarResConfigSetData;
 	import com.rpgGame.coreData.clientConfig.AvatarResConfig;
 	import com.rpgGame.coreData.info.move.RoleMoveInfo;
@@ -52,7 +53,7 @@ package com.rpgGame.app.state.role
 	{
 		public static var lastWalkTime : int = 0;
 		public static const WALK_DELAY : int = 100;
-		public static const MAX_WALK_SPEED : int = 500;
+		public static const MAX_WALK_SPEED : int = GlobalSheetData.getIntValue(116);
 
 		public static const DEATH_STATE_EFFECT_CORRODE : int = 1;
 		public static const DEATH_STATE_EFFECT_COLOR : int = 2;
