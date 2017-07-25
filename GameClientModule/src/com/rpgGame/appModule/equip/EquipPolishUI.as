@@ -32,6 +32,7 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.clientConfig.Q_equip_polish;
+	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
 	import com.rpgGame.coreData.info.face.IBaseFaceInfo;
@@ -39,6 +40,7 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
+	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.coreData.lang.LangSpell;
 	import com.rpgGame.coreData.lang.LangUI;
 	import com.rpgGame.coreData.type.CharAttributeType;
@@ -113,6 +115,8 @@ package com.rpgGame.appModule.equip
 
 		private var eftCon:Inter3DContainer;
 		private var zuomoEft:InterObject3D;
+		private static var noAlertUse:Boolean;
+		private var alertOkTips:AlertSetInfo;
 		
 		public function EquipPolishUI()
 		{
@@ -124,6 +128,9 @@ package com.rpgGame.appModule.equip
 		
 		private function initView():void
 		{
+			alertOkTips=new AlertSetInfo(LangAlertInfo.EQUIP_USE_TIPS);
+			alertOkTips.isShowCBox=true;
+			
 			useListIds=new Vector.<long>();
 			_leftSkin=_skin.left.skin as Zhuangbei_left;
 			
@@ -165,6 +172,9 @@ package com.rpgGame.appModule.equip
 			_targetEquip.dragAble = true;
 			_targetEquip.checkDrag=checkDrag;
 			_skin.container.addChild(_targetEquip);
+			_targetEquip.x=624;
+			_targetEquip.y=195;
+			_targetEquip.bindBg(null);
 			
 			eftCon=new Inter3DContainer();
 			zuomoEft=eftCon.playInter3DAt(ClientConfig.getEffect("ui_zhuomo"),-45,10,0);
@@ -347,7 +357,10 @@ package com.rpgGame.appModule.equip
 			for each(var info:GridInfo in datas){
 				if(info.data){
 					item=info.data as ClientItemInfo;
-					if(item.qItem.q_levelnum<=lv&&item.quality<=quality&&item!=targetEquipInfo&&item["polishLevel"]==0&&item["polishExp"]==0){//符合阶数和品质筛选
+					if(isDuanZao(item as EquipInfo)){//具有锻造属性
+						continue;
+					}
+					if(item.qItem.q_levelnum<=lv&&item.quality<=quality&&item!=targetEquipInfo){//符合阶数和品质筛选
 						result.push(item);
 					}
 				}
@@ -427,6 +440,29 @@ package com.rpgGame.appModule.equip
 			}
 			
 			var itemInfo:ClientItemInfo=gridInfo.data as ClientItemInfo;
+			var equip:EquipInfo=itemInfo as EquipInfo;
+			if(isDuanZao(equip)&&!noAlertUse){
+				GameAlert.showAlert(alertOkTips,onAlert,[itemInfo]);
+			}else{
+				setUseItem(itemInfo);
+			}
+		}
+		
+		private function isDuanZao(equipInfo:EquipInfo):Boolean
+		{
+			return equipInfo.strengthExp!=0||equipInfo.polishExp!=0||equipInfo.smeltAtt1!=0||equipInfo.smeltAtt2!=0;
+		}
+		
+		private  function onAlert(gameAlert:GameAlert,datas:Array):void
+		{
+			if(gameAlert.clickType==AlertClickTypeEnum.TYPE_SURE){
+				noAlertUse=gameAlert.isCheckSelected;
+				setUseItem(datas[0]);
+			}
+		}
+		
+		private function setUseItem(itemInfo:ClientItemInfo):void
+		{
 			_goodsContainerUse.setGrayForData(itemInfo,true);
 			
 			if(isPolish(itemInfo as EquipInfo)){
@@ -436,7 +472,7 @@ package com.rpgGame.appModule.equip
 			selectedUse.push(itemInfo);
 			refreshUseEquipGrid();
 			addExp+=itemInfo.qItem.q_polish_num;
-			updateView();
+			updateView();			
 		}
 		
 		private function refreshUseEquipGrid():void
@@ -585,9 +621,9 @@ package com.rpgGame.appModule.equip
 			canUpNum=0;
 			while(currentLv<=maxLv){
 				currentLv++;
-				upCfg=nextCfg;
 				nextCfg=EquipPolishCfg.getPolishCfg(currentLv);//下一级的配置
 				upExp=nextCfg.q_exp;//升级所需
+				upCfg=nextCfg;
 				
 				if(exp<upExp){//不够升级不查找
 					break;
@@ -795,7 +831,7 @@ package com.rpgGame.appModule.equip
 			num=targetEquips.length;
 			num=num>MIN_GRID?num:MIN_GRID;
 			_goodsContainerTarget.setGridsCount(num,false);
-			_goodsContainerTarget.refleshGridsByDatas(targetEquips);
+			onTab(null);
 			
 			useEquips=getUseEquips(allEquips);
 			useEquips.sort(sortForUse);

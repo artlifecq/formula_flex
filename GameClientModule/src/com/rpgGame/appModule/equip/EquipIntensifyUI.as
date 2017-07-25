@@ -31,6 +31,7 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.clientConfig.Q_att_values;
 	import com.rpgGame.coreData.clientConfig.Q_equip_strength;
+	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
@@ -152,6 +153,7 @@ package com.rpgGame.appModule.equip
 			_targetEquip.onTouchEndCallBack=onCancelIntensify;
 			_targetEquip.dragAble = true;
 			_targetEquip.checkDrag=checkDrag;
+			_targetEquip.bindBg(null);
 			_skin.container.addChild(_targetEquip);
 			
 			_goodsContainerUse1.setGridsCount(6,false);
@@ -324,12 +326,23 @@ package com.rpgGame.appModule.equip
 			}
 			var itemInfo:ClientItemInfo=gridInfo.data as ClientItemInfo;
 			var equip:EquipInfo=itemInfo as EquipInfo;
-			if(equip.strengthExp!=0&&!noAlertUse){
+			if(isDuanZao(equip)&&!noAlertUse){
 				GameAlert.showAlert(alertOk,onAlert,[itemInfo]);
 			}else{
 				setUseItem(itemInfo);
 			}
 				
+		}
+		
+		/**
+		 *是否具有锻造属性 
+		 * @param equipInfo
+		 * @return 
+		 * 
+		 */
+		private function isDuanZao(equipInfo:EquipInfo):Boolean
+		{
+			return equipInfo.strengthExp!=0||equipInfo.polishExp!=0||equipInfo.smeltAtt1!=0||equipInfo.smeltAtt2!=0;
 		}
 		
 		private function setUseItem(itemInfo:ClientItemInfo):void
@@ -348,8 +361,10 @@ package com.rpgGame.appModule.equip
 		
 		private  function onAlert(gameAlert:GameAlert,datas:Array):void
 		{
-			noAlertUse=gameAlert.isCheckSelected;
-			setUseItem(datas[0]);
+			if(gameAlert.clickType==AlertClickTypeEnum.TYPE_SURE){
+				noAlertUse=gameAlert.isCheckSelected;
+				setUseItem(datas[0]);
+			}
 		}
 		
 		private function onCompleteTweenUse(tweenGrid:DragDropItem,grid:DragDropItem):void
@@ -499,9 +514,9 @@ package com.rpgGame.appModule.equip
 			canUpNum=0;
 			while(currentLv<=maxLv){
 				currentLv++;
-				upCfg=nextCfg;
 				nextCfg=EquipStrengthCfg.getStrengthCfg(targetEquipInfo.qItem.q_kind,targetEquipInfo.qItem.q_job,currentLv);//下一级的配置
 				upExp=nextCfg.q_exp;//升级所需强化值
+				upCfg=nextCfg;
 				
 				if(exp<upExp){//不够升级不查找
 					break;
@@ -509,11 +524,7 @@ package com.rpgGame.appModule.equip
 				canUpNum++;
 			}
 			
-			if(!upCfg){
-				upCfg=nextCfg;
-			}
-			
-			allExp=upCfg.q_exp-currCfg.q_exp;
+			allExp=upCfg.q_exp-currCfg.q_exp;//当前级所需的总经验
 			currentExp=exp-currCfg.q_exp;
 		}
 		
@@ -597,7 +608,10 @@ package com.rpgGame.appModule.equip
 			for each(var info:GridInfo in datas){
 				if(info.data){
 					item=info.data as ClientItemInfo;
-					if(item.qItem.q_levelnum<=lv&&item.quality<=quality&&item!=targetEquipInfo&&item["strengthLevel"]==0&&item["strengthExp"]==0){//符合阶数和品质筛选
+					if(isDuanZao(item as EquipInfo)){//具有锻造属性
+						continue;
+					}
+					if(item.qItem.q_levelnum<=lv&&item.quality<=quality&&item!=targetEquipInfo){
 						result.push(item);
 					}
 				}
@@ -831,7 +845,9 @@ package com.rpgGame.appModule.equip
 			num=targetEquips.length;
 			num=num>MIN_GRID?num:MIN_GRID;
 			_goodsContainerTarget.setGridsCount(num,false);
-			_goodsContainerTarget.refleshGridsByDatas(targetEquips);
+			onTab(null);
+			
+			
 			
 			useEquips=getUseEquips(allEquips);
 			useEquips.sort(sortForUse);
