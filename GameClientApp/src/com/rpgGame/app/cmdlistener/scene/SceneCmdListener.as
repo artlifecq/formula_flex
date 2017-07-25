@@ -10,12 +10,14 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.manager.ClientTriggerManager;
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.GameCameraManager;
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.RankManager;
 	import com.rpgGame.app.manager.ReliveManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.map.MapUnitDataManager;
+	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.manager.role.DropGoodsManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneDropGoodsManager;
@@ -101,6 +103,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.netData.player.message.ResChangeFactionMessage;
 	import com.rpgGame.netData.player.message.ResChangePKStateMessage;
 	import com.rpgGame.netData.player.message.ResPlayerDieMessage;
+	import com.rpgGame.netData.player.message.ResPlayerStateChangeMessage;
 	import com.rpgGame.netData.player.message.ResReviveSuccessMessage;
 	import com.rpgGame.netData.structs.Position;
 	import com.rpgGame.netData.top.bean.TopInfo;
@@ -175,8 +178,9 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			SocketConnection.addCmdListener(103110, onResChangePKStateMessage);
 			SocketConnection.addCmdListener(114108, onResMonterDieMessage);
-			SocketConnection.addCmdListener(101220, onSCUpdateTopLeaderMessage);
+			SocketConnection.addCmdListener(101222, onSCUpdateTopLeaderMessage);
 			SocketConnection.addCmdListener(101152, onSCSyncPlayerPosMessage);
+			SocketConnection.addCmdListener(103109, onResPlayerStateChangeMessage);
 			//			SocketConnection.addCmdListener(SceneModuleMessages.S2C_TRIGGER_CLIENT_EVENT, onTriggerClientEvent);
 			
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -222,6 +226,19 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			
 			finish();
+		}
+		
+		private function onResPlayerStateChangeMessage(msg:ResPlayerStateChangeMessage):void
+		{
+			// TODO Auto Generated method stub
+			if (msg.state==1) 
+			{
+				MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_ENTER_LEAVE_FIGHT);
+			}
+			else
+			{
+				MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_ENTER_LEAVE_FIGHT);
+			}
 		}
 		
 		private function onSCSyncPlayerPosMessage(msg:SCSyncPlayerPosMessage):void
@@ -365,7 +382,7 @@ package com.rpgGame.app.cmdlistener.scene
 		private function RecvEnterMapMessage(msg:ResEnterMapMessage):void
 		{
 			GameLog.addShow("收到成功进入地图消息");
-			
+			Lyt.a("进入地图");
 			//			var infoID : uint = buffer.readVarint32();
 			//			var pkMode : uint = infoID & 15;
 			var line : uint = msg.line;
@@ -534,6 +551,7 @@ package com.rpgGame.app.cmdlistener.scene
 			{
 				var elapseTm : int = SystemTimeManager.curtTm - mInfo.startTm;
 				//trace("寻路开始时间：" + mInfo.startTm, "_差值：" + elapseTm + "_服务器时间 ：" + SystemTimeManager.curtTm);
+				Lyt.a("%%%%收到走路信息了%%%%%");
 				RoleStateUtil.walkByInfos(mInfo);
 				
 				//调试bug用，可以删除！！！！

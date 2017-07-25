@@ -2,7 +2,7 @@ package com.rpgGame.appModule.rank
 {
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
-	import com.rpgGame.app.display3D.InterAvatar3D;
+	import com.rpgGame.app.display3D.UIAvatar3D;
 	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
@@ -10,8 +10,13 @@ package com.rpgGame.appModule.rank
 	import com.rpgGame.app.manager.goods.RoleEquipmentManager;
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.appModule.common.itemRender.GridItemRender;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.JunJieData;
+	import com.rpgGame.coreData.cfg.VipCfg;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.enum.RankListType;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
@@ -20,6 +25,7 @@ package com.rpgGame.appModule.rank
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.RoleData;
+	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.type.item.GridBGType;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.junjie.bean.JunJieInfo;
@@ -42,7 +48,7 @@ package com.rpgGame.appModule.rank
 		protected var _type:int;
 		protected var _topInfo:TopInfo;
 		protected var _modleContent:Inter3DContainer;
-		protected var _avatar : InterAvatar3D;
+		protected var _avatar:UIAvatar3D;
 		protected var _roleData:RoleData;
 		private var equipGrids:Vector.<DragDropItem>;
 		private var _vipIcon:DragDropItem;
@@ -58,6 +64,7 @@ package com.rpgGame.appModule.rank
 		private var containerId:int=ItemContainerID.Role;
 		
 		protected var _power:int;
+		protected var _scale:Number = 1.7;
 		public function RightGroupBase(skin:PaiHang_Right,type:int)
 		{
 			_skin = skin;
@@ -80,6 +87,7 @@ package com.rpgGame.appModule.rank
 			_skin.grpRight.addChildAt(_modleContent,4);
 			_skin.headName.imageScaleMode = UIAsset.IMAGE_SCALE_MODE_NO_SCALE;
 			_skin.headName.addEventListener(Event.RESIZE,sizeHandler);
+			_avatar = new UIAvatar3D(_skin.content);
 		}
 		private function sizeHandler(e:Event):void
 		{
@@ -110,14 +118,28 @@ package com.rpgGame.appModule.rank
 		private function refeashValue():void
 		{
 			initData();
-			refeashJunjie();
 			refeashName();
 			refeashModle();
+			refeashJunjie();
 			refeashEquip();
 			refeashSkill();
 			refeashPower();
 		}
 		
+		private function setVipData(vip:int):void
+		{
+			TipTargetManager.remove(_vipIcon);
+			if (vip>0) 
+			{
+				_vipIcon.setIconResName(ClientConfig.getItemIcon(ItemConfig.getQItemByID(VipCfg.getVip(vip).q_mo_tokenID).q_icon+"",IcoSizeEnum.ICON_48));
+				TipTargetManager.show(_vipIcon,TargetTipsMaker.makeTips(TipType.VIP_LEVEL_TIP,new DynamicTipData(vip)));
+			}
+			else
+			{
+				_vipIcon.clear();
+				TipTargetManager.show(_vipIcon,TargetTipsMaker.makeTips(TipType.VIP_NONE_TIP,null));
+			}
+		}
 		private var _lastId:int = 0;
 		private var _chenhaoEft:InterObject3D;
 		protected function refeashJunjie():void
@@ -133,7 +155,7 @@ package com.rpgGame.appModule.rank
 			if(info == null)
 				return ;
 			var effName:String=JunJieData.getEffById(info.modelId);
-			_chenhaoEft=_modleContent.playInter3DAt(ClientConfig.getEffect(effName),120,50,0);
+			_chenhaoEft=_modleContent.playInter3DAt(ClientConfig.getEffect(effName),200,100,0);
 		}
 		
 		
@@ -180,15 +202,8 @@ package com.rpgGame.appModule.rank
 		}
 		protected function refeashModle():void
 		{
-			if(_avatar==null)
-			{
-				_avatar = new InterAvatar3D();
-				_avatar.x = _skin.weapons.x + (_skin.weapons.width >> 1);
-				_avatar.y = _skin.weapons.y + _skin.weapons.height+20;
-				_modleContent.addChild3D(_avatar);
-			}
 			this._avatar.setRoleData(this._roleData);
-			this._avatar.curRole.setScale(1.7);
+			this._avatar.setScale(_scale);	
 		}
 		
 		protected function refeashEquip():void
@@ -214,7 +229,7 @@ package com.rpgGame.appModule.rank
 					setGridInfo(index,info);
 				}
 			}
-			
+			setVipData(_topInfo.vipId);
 		}
 		
 		private function setGridInfo(index:int, itemInfo:ClientItemInfo, gridIndex:int = -1):void
@@ -259,13 +274,15 @@ package com.rpgGame.appModule.rank
 				_skin.weapons.addChild(equipGrids[i]);
 			}
 			_vipIcon=new DragDropItem(IcoSizeEnum.ICON_48,-1);
-			_vipIcon.x=301;
-			_vipIcon.y=(10-5)*59;
+			/*_vipIcon.x=301;
+			_vipIcon.y=(10-5)*59;*/
+			_vipIcon.bindBg(_skin.Icbg11);
 			_skin.weapons.addChild(_vipIcon);
 			
 			_marryIcon=new DragDropItem(IcoSizeEnum.ICON_48,-1);
-			_marryIcon.x=7;
-			_marryIcon.y=5*59;
+			/*_marryIcon.x=7;
+			_marryIcon.y=5*59;*/
+			_marryIcon.bindBg(_skin.Icbg10);
 			_skin.weapons.addChild(_marryIcon);
 			
 			_mgr=RoleEquipmentManager.instance;

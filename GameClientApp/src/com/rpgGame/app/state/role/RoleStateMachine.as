@@ -52,6 +52,7 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.state.role.control.ShadowState;
 	import com.rpgGame.app.state.role.control.ShapeshiftingState;
 	import com.rpgGame.app.state.role.control.ShortcutGridState;
+	import com.rpgGame.app.state.role.control.SkillCDReduceState;
 	import com.rpgGame.app.state.role.control.SkillCDResetState;
 	import com.rpgGame.app.state.role.control.SkillWarningState;
 	import com.rpgGame.app.state.role.control.SpriteUpBuffState;
@@ -164,6 +165,7 @@ package com.rpgGame.app.state.role
 		stateMapping[RoleStateType.CONTROL_TRIPLE_ATTACK_CHECK] = CheckTripleAttackState;
 		stateMapping[RoleStateType.CONTROL_BUFF_SPRITEUP] = SpriteUpBuffState;
 		stateMapping[RoleStateType.CONTROL_BUFF_SKILLCD] = SkillCDResetState;
+		stateMapping[RoleStateType.CONTROL_BUFF_SKILLCD2] = SkillCDReduceState;
 		stateMapping[RoleStateType.CONTROL_ENTER_LEAVE_FIGHT] = FightLeaveEnterBuffState;
 		private var _role : SceneRole;
 		private var _lastCanShowRiding : Boolean;

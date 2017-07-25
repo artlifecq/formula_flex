@@ -8,6 +8,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.manager.fight.FightManager;
 	import com.rpgGame.app.manager.mount.MountManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.role.SceneDropGoodsManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.stall.StallManager;
@@ -24,6 +25,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.TranportsDataManager;
 	import com.rpgGame.coreData.cfg.task.TouZhuCfgData;
+	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.info.stall.StallData;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.SceneCollectData;
@@ -62,33 +64,42 @@ package com.rpgGame.app.manager
 			switch (role.type)
 			{
 				case SceneCharType.PLAYER:
-					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role);
+					ret=MainRoleSearchPathManager.jumpWalkToPos(MainRoleManager.actor, targerPos, 100, role);
 					break;
 				case SceneCharType.MONSTER:
 					ret=wakMonster(role,targerPos);
 					break;
 				case SceneCharType.LIANG_CANG:
-					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveMonster);
+					ret=MainRoleSearchPathManager.jumpWalkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveMonster);
 					break;
 				case SceneCharType.NPC:
-					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveNpc);
+					ret=MainRoleSearchPathManager.jumpWalkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveNpc);
 					break;
 				case SceneCharType.PROTECT_NPC:
-					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveNpc);
+					ret=MainRoleSearchPathManager.jumpWalkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveNpc);
 					break;
 				case SceneCharType.COLLECT:
-					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveCollect);
+					ret=MainRoleSearchPathManager.jumpWalkToPos(MainRoleManager.actor, targerPos, 100, role, onArriveCollect);
 					break;
 				case SceneCharType.DROP_GOODS:
-					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, ControlAutoPick.AUTO_DIRECT_SEND_PICK, role, onArriveDropGoods);
+					ret=MainRoleSearchPathManager.jumpWalkToPos(MainRoleManager.actor, targerPos, ControlAutoPick.AUTO_DIRECT_SEND_PICK, role, onArriveDropGoods);
 					break;
 				case SceneCharType.STALL:
-					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, onWalkToStall);
+					ret=MainRoleSearchPathManager.jumpWalkToPos(MainRoleManager.actor, targerPos, 100, role, onWalkToStall);
+					break;
+				case SceneCharType.SCULPTURE:
+					ret=RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 100, role, walkToSculpture);
 					break;
 			}
 			return ret;
 		}
 		
+		
+		private static function walkToSculpture(ref : WalkMoveStateReference) : void
+		{
+//			FunctionOpenManager.openAppPaneById(EmFunctionID.EM_WORSHIP,ref.data);
+			RankListManager.instance.requestworshop(ref.data as SceneRole);
+		}
 		private static function onWalkToStall(ref : WalkMoveStateReference):void
 		{
 			var role : SceneRole = ref.data as SceneRole;

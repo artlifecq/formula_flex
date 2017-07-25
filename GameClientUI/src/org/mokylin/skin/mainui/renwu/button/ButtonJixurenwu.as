@@ -1,4 +1,4 @@
-package org.mokylin.skin.app.zhanhun.button
+package org.mokylin.skin.mainui.renwu.button
 {
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
@@ -9,7 +9,7 @@ package org.mokylin.skin.app.zhanhun.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class ButtonHuanhua extends feathers.controls.StateSkin
+	public class ButtonJixurenwu extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -22,7 +22,7 @@ package org.mokylin.skin.app.zhanhun.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function ButtonHuanhua()
+		public function ButtonJixurenwu()
 		{
 			super();
 			
@@ -47,10 +47,7 @@ package org.mokylin.skin.app.zhanhun.button
 						}
 					]
 			};
-			skinNames={"disabled":"ui/app/zhanhun/button/huanhua/yihuanhua.png",
-			"down":"ui/app/zhanhun/button/huanhua/yihuanhua.png",
-			"hover":"ui/app/zhanhun/button/huanhua/yihuanhua.png",
-			"up":"ui/app/zhanhun/button/huanhua/yihuanhua.png"};
+			skinNames={"down":"ui/mainui/renwu/button/jixurenwu/down.png", "hover":"ui/mainui/renwu/button/jixurenwu/over.png", "up":"ui/mainui/renwu/button/jixurenwu/up.png"};
 		}
 
 

@@ -7,6 +7,7 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.ItemSender;
+	import com.rpgGame.app.ui.MinMaxValueBar;
 	import com.rpgGame.app.ui.common.CenterEftPop;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.FaceUtil;
@@ -64,12 +65,13 @@ package com.rpgGame.appModule.equip
 		
 		private var icon:IconCDFace;
 		private var _cailiao:Vector.<IconCDFace>;
+		
+		private var minMaxBar:MinMaxValueBar;
+		
 		//合成连接线
 		private var _exisList:Vector.<UIAsset>;
 		//合成数量
 		private var _hechengNum:int=1;
-		//能合成的最大数量
-		private var _hechengMaxNum:int=1;
 		
 		private var _nowSelect:Q_hecheng;
 
@@ -183,11 +185,14 @@ package com.rpgGame.appModule.equip
 			icon.selectImgVisible=false;
 			icon.x=582;
 			icon.y=193;
+			icon.bindBg(null);
 			_exisList.push(_skin.exist1);
 			_exisList.push(_skin.exist2);
 			_exisList.push(_skin.exist3);
 			_skin.container.addChild(icon);
 			_skin.container.addChild(_skin.equip_num);
+			
+			minMaxBar=new MinMaxValueBar(_skin,changeHecheng);
 			
 			for(var i:int=0;i<CAILIAO_NUM;i++)
 			{
@@ -203,10 +208,17 @@ package com.rpgGame.appModule.equip
 			clearPanel();
 		}
 		
+		private function changeHecheng():void
+		{
+			_hechengNum==minMaxBar.value;
+			updateShowNum();
+		}
+		
 		override public function show(data:Object=null):void
 		{
 			super.show();
 			initEvent();
+			minMaxBar.onShow();
 			userGold=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_GOLD)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_GOLD);
 			userMoney=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
 			
@@ -343,6 +355,7 @@ package com.rpgGame.appModule.equip
 			_skin.tree.selectedItem=null;
 			_skin.tree.dataProvider.updateItemAt(oldindex);
 			_nowSelect=null;
+			minMaxBar.onHide();
 		}
 		
 		//显示合成的对象
@@ -370,7 +383,7 @@ package com.rpgGame.appModule.equip
 			cailiaoId=parseInt(cailiao[0]);
 			var cailiaoNum:int=parseInt(cailiao[1]);
 			var itemByBagNum:int=BackPackManager.instance.getBagItemsCountById(cailiaoId);
-			_hechengMaxNum=itemByBagNum/cailiaoNum;
+			minMaxBar.setMinMax(1,itemByBagNum/cailiaoNum);
 			if(itemByBagNum>=cailiaoNum)
 			{
 				_skin.existall.visible=true;
@@ -407,9 +420,6 @@ package com.rpgGame.appModule.equip
 		
 		private function initEvent():void
 		{
-			_skin.btn_min.addEventListener(Event.TRIGGERED,btnminHandler);
-			_skin.btn_max.addEventListener(Event.TRIGGERED,btnmaxHandler);
-			_skin.btnMax.addEventListener(Event.TRIGGERED,btnTomaxHandler);
 			_skin.btn_hecheng.addEventListener(Event.TRIGGERED,btnHeChengHandler);
 			
 			EventManager.addEvent(ItemEvent.ITEM_COMBO_MSG,updateHechengHandler);
@@ -463,6 +473,13 @@ package com.rpgGame.appModule.equip
 				return;
 			var data:DetailNodeInfo=treeNode.data as DetailNodeInfo;
 			if(!data){
+				if(_nowSelect){
+					var oldindex:int=_skin.tree.selectedIndex;
+					_skin.tree.selectedItem=getDataById(_nowSelect.q_item_id);
+					_skin.tree.dataProvider.updateItemAt(oldindex);
+					_skin.tree.dataProvider.updateItemAt(_skin.tree.selectedIndex);
+					_skin.tree.validate();
+				}
 				return;
 			}
 			
@@ -471,9 +488,6 @@ package com.rpgGame.appModule.equip
 		
 		private function clearEvent():void
 		{
-			_skin.btn_min.removeEventListener(Event.TRIGGERED,btnminHandler);
-			_skin.btn_max.removeEventListener(Event.TRIGGERED,btnmaxHandler);
-			_skin.btnMax.removeEventListener(Event.TRIGGERED,btnTomaxHandler);
 			_skin.btn_hecheng.removeEventListener(Event.TRIGGERED,btnHeChengHandler);
 			_skin.tree.removeEventListener(Event.SELECT,onSelected);
 			
@@ -518,42 +532,6 @@ package com.rpgGame.appModule.equip
 			return title+":"+des;
 		}
 		
-		/**合成减*/
-		private function btnminHandler(e:Event):void
-		{
-			if(_hechengNum>1)
-			{
-				_hechengNum--;
-				updateShowNum();
-			}else{
-				NoticeManager.showNotifyById(2012);
-			}
-		}
-		
-		/**合成加*/
-		private function btnmaxHandler(e:Event):void
-		{
-			if(_hechengNum<_hechengMaxNum)
-			{
-				_hechengNum++;
-				updateShowNum();
-			}else{
-				NoticeManager.showNotifyById(2011);
-			}
-		}
-		
-		/**合成最大数量*/
-		private function btnTomaxHandler(e:Event):void
-		{
-			if(_hechengNum!=_hechengMaxNum)
-			{
-				_hechengNum=_hechengMaxNum;
-				if(_hechengNum==0) _hechengNum=1;
-				updateShowNum();
-			}else{
-				NoticeManager.showNotifyById(2011);
-			}
-		}
 		
 		/**合成请求*/
 		private function btnHeChengHandler(e:Event):void

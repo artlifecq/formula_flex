@@ -26,8 +26,8 @@ package org.mokylin.skin.app.zhanhun
 			super();
 			
 			this.currentState = "normal";
-			this.height = 10;
-			this.width = 241;
+			this.height = 16;
+			this.width = 425;
 			this.elementsContent = [track_i(),thumb_i()];
 			
 			states = {

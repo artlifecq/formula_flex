@@ -15,7 +15,7 @@ package com.rpgGame.coreData.role
 		public var modleId:int ;
 		
 		/** 排行榜类型*/
-//		public var topType:int ;
+		public var topType:int ;
 		
 		public var avatarRes : String;
 		
@@ -30,6 +30,7 @@ package com.rpgGame.coreData.role
 		{
 			topLeaderTypes = new Vector.<int>();
 			topLeaderTypes.push(value);
+			topType = value;
 		}
 	}
 }

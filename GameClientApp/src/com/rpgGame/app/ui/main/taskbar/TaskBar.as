@@ -141,7 +141,7 @@ package com.rpgGame.app.ui.main.taskbar
 						receiveRewordBut(1);
 						break;
 					case _skin.sec_subbut2:
-						//receiveRewordBut(2);
+						receiveRewordBut(2);
 						break;
 					case _skin.btnContinue:
 						TaskControl.killWalkBut(1,0,1);
@@ -400,10 +400,7 @@ package com.rpgGame.app.ui.main.taskbar
 		}
 		public function resize(w : int, h : int) : void {
 			this.x = w - this._skin.width;
-			this.y = (h - this._skin.height)>>1;
-			CONFIG::netDebug{
-				NetDebug.LOG("[TaskBar] [resize] x:" + this.x + ", y:" + this.y + ", w:" + this._skin.width + ", h:" + this._skin.height);
-			}
+			this.y = 273;
 		}
 	}
 }

@@ -198,120 +198,8 @@ package org.mokylin.skin.mainui.shortcut
 			Icons = temp;
 			temp.name = "Icons";
 			temp.x = 191;
-			temp.y = 74;
-			temp.elementsContent = [Iconbg1_i(),Iconbg2_i(),Iconbg3_i(),Iconbg4_i(),Iconbg5_i(),Iconbg6_i(),Iconbg7_i(),Iconbg8_i(),__shortcut_Skin_Label1_i(),__shortcut_Skin_Label2_i(),__shortcut_Skin_Label3_i(),__shortcut_Skin_Label4_i(),__shortcut_Skin_Label5_i(),__shortcut_Skin_Label6_i(),__shortcut_Skin_Label7_i(),__shortcut_Skin_Label8_i()];
-			return temp;
-		}
-
-		private function __shortcut_Skin_Label1_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.bold = false;
-			temp.fontSize = 12;
-			temp.text = "1";
-			temp.color = 0xb8b2a4;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack2"];
-			temp.width = 12;
-			temp.x = 23;
-			temp.y = 50;
-			return temp;
-		}
-
-		private function __shortcut_Skin_Label2_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.bold = false;
-			temp.fontSize = 12;
-			temp.text = "2";
-			temp.color = 0xb8b2a4;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack2"];
-			temp.width = 12;
-			temp.x = 78;
-			temp.y = 50;
-			return temp;
-		}
-
-		private function __shortcut_Skin_Label3_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.bold = false;
-			temp.fontSize = 12;
-			temp.text = "3";
-			temp.color = 0xb8b2a4;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack2"];
-			temp.width = 12;
-			temp.x = 134;
-			temp.y = 50;
-			return temp;
-		}
-
-		private function __shortcut_Skin_Label4_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.bold = false;
-			temp.fontSize = 12;
-			temp.text = "4";
-			temp.color = 0xb8b2a4;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack2"];
-			temp.width = 12;
-			temp.x = 190;
-			temp.y = 50;
-			return temp;
-		}
-
-		private function __shortcut_Skin_Label5_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.bold = false;
-			temp.fontSize = 12;
-			temp.text = "Q";
-			temp.color = 0xb8b2a4;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack2"];
-			temp.width = 15;
-			temp.x = 246;
-			temp.y = 50;
-			return temp;
-		}
-
-		private function __shortcut_Skin_Label6_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.bold = false;
-			temp.fontSize = 12;
-			temp.text = "W";
-			temp.color = 0xb8b2a4;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack2"];
-			temp.width = 20;
-			temp.x = 302;
-			temp.y = 50;
-			return temp;
-		}
-
-		private function __shortcut_Skin_Label7_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.bold = false;
-			temp.fontSize = 12;
-			temp.text = "E";
-			temp.color = 0xb8b2a4;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack2"];
-			temp.width = 12;
-			temp.x = 358;
-			temp.y = 50;
-			return temp;
-		}
-
-		private function __shortcut_Skin_Label8_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.bold = false;
-			temp.fontSize = 12;
-			temp.text = "R";
-			temp.color = 0xb8b2a4;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack2"];
-			temp.width = 12;
-			temp.x = 414;
-			temp.y = 50;
+			temp.y = 77;
+			temp.elementsContent = [Iconbg1_i(),Iconbg2_i(),Iconbg3_i(),Iconbg4_i(),Iconbg5_i(),Iconbg6_i(),Iconbg7_i(),Iconbg8_i()];
 			return temp;
 		}
 
@@ -322,7 +210,7 @@ package org.mokylin.skin.mainui.shortcut
 			temp.touchGroup = true;
 			temp.styleName = "ui/mainui/shortcut/dikuang.png";
 			temp.x = 0;
-			temp.y = 38;
+			temp.y = 41;
 			return temp;
 		}
 
@@ -342,7 +230,7 @@ package org.mokylin.skin.mainui.shortcut
 			temp.name = "btnGuaJi";
 			temp.styleClass = org.mokylin.skin.mainui.shortcut.button.ButtonSkin_guaji;
 			temp.x = 17;
-			temp.y = 86;
+			temp.y = 89;
 			return temp;
 		}
 
@@ -353,7 +241,7 @@ package org.mokylin.skin.mainui.shortcut
 			temp.name = "btnJieHun";
 			temp.styleClass = org.mokylin.skin.mainui.shortcut.button.ButtonSkin_jiehun;
 			temp.x = 34;
-			temp.y = 55;
+			temp.y = 58;
 			return temp;
 		}
 
@@ -376,7 +264,7 @@ package org.mokylin.skin.mainui.shortcut
 			temp.height = 48;
 			temp.width = 80;
 			temp.x = 84;
-			temp.y = 90;
+			temp.y = 93;
 			temp.elementsContent = [fangun_n1_i(),fangun_n2_i(),fangun_n3_i(),fangun_tiao_i(),fangun_tishi_i(),lbl_times_i()];
 			return temp;
 		}
@@ -442,7 +330,7 @@ package org.mokylin.skin.mainui.shortcut
 			jingzhen_yijia = temp;
 			temp.name = "jingzhen_yijia";
 			temp.x = 602;
-			temp.y = 62;
+			temp.y = 65;
 			temp.elementsContent = [__shortcut_Skin_UIAsset2_i(),lbl_lastNum_i()];
 			return temp;
 		}
@@ -453,7 +341,7 @@ package org.mokylin.skin.mainui.shortcut
 			juexuegroup = temp;
 			temp.name = "juexuegroup";
 			temp.x = 781;
-			temp.y = 87;
+			temp.y = 90;
 			temp.elementsContent = [mc_juexue_i(),btn_juexue_i()];
 			return temp;
 		}
@@ -498,7 +386,7 @@ package org.mokylin.skin.mainui.shortcut
 			temp.name = "left_red";
 			temp.styleName = "ui/mainui/shortcut/hongdi.png";
 			temp.x = 44;
-			temp.y = 51;
+			temp.y = 54;
 			return temp;
 		}
 
@@ -509,7 +397,7 @@ package org.mokylin.skin.mainui.shortcut
 			temp.name = "left_xuecaoMask";
 			temp.styleName = "ui/mainui/shortcut/hongdizhezhao.png";
 			temp.x = 44;
-			temp.y = 51;
+			temp.y = 54;
 			return temp;
 		}
 
@@ -520,7 +408,7 @@ package org.mokylin.skin.mainui.shortcut
 			temp.name = "left_xuecao";
 			temp.styleName = "ui/mainui/shortcut/hongtiao.png";
 			temp.x = 44;
-			temp.y = 51;
+			temp.y = 54;
 			return temp;
 		}
 
@@ -545,7 +433,7 @@ package org.mokylin.skin.mainui.shortcut
 			temp.name = "right_blue";
 			temp.styleName = "ui/mainui/shortcut/landi.png";
 			temp.x = 647;
-			temp.y = 51;
+			temp.y = 54;
 			return temp;
 		}
 
@@ -556,7 +444,7 @@ package org.mokylin.skin.mainui.shortcut
 			temp.name = "right_jintiao";
 			temp.styleName = "ui/mainui/shortcut/huangtiao.png";
 			temp.x = 647;
-			temp.y = 51;
+			temp.y = 54;
 			return temp;
 		}
 
@@ -567,7 +455,7 @@ package org.mokylin.skin.mainui.shortcut
 			temp.name = "right_nengliangMask";
 			temp.styleName = "ui/mainui/shortcut/landizhezhao.png";
 			temp.x = 647;
-			temp.y = 51;
+			temp.y = 54;
 			return temp;
 		}
 
@@ -578,7 +466,7 @@ package org.mokylin.skin.mainui.shortcut
 			temp.name = "right_nengliang";
 			temp.styleName = "ui/mainui/shortcut/lantiao.png";
 			temp.x = 647;
-			temp.y = 51;
+			temp.y = 54;
 			return temp;
 		}
 

@@ -105,6 +105,7 @@ package org.game.netCore.net
 		
 		public var ip:String;
 		public var port:int;
+        private var _connectTimeout : uint = 1000;
 		// 安全策略文件端口
 		public var SANDBOX_PORT:int = 8002;
 		// 登录时线号
@@ -270,12 +271,13 @@ package org.game.netCore.net
 		/**
 		 * 开始连接
 		 */
-		public function Connect($host:String, $port:int):void 
+		public function Connect($host:String, $port:int, timeout : uint):void 
 		{
 			//			Security.allowDomain( "*" );
 			
 			ip = $host;
 			port = $port;
+            this._connectTimeout = timeout;
 			
 			_phpPortErrKey = "phpsandboxerror";
 			//			_phpPortErrKey += Mgr.stageMgr.STAGE.loaderInfo.parameters[ "agent" ];
@@ -304,7 +306,7 @@ package org.game.netCore.net
 			//				}
 			//			}
 			
-			trace( "GAME_SERVER_IP:" + this.ip + ":" + this.port + " " + SANDBOX_PORT + "     GameConfig.gameline " + GAME_LINE );
+			//trace( "GAME_SERVER_IP:" + this.ip + ":" + this.port + " " + SANDBOX_PORT + "     GameConfig.gameline " + GAME_LINE );
 			
 			//			var policyPath:String = "xmlsocket://" + this.ip + ":" + SANDBOX_PORT;
 			//			Security.loadPolicyFile( policyPath );
@@ -715,6 +717,7 @@ package org.game.netCore.net
 				_socket.addEventListener( SecurityErrorEvent.SECURITY_ERROR, errorHandler );
 				_socket.addEventListener( Event.CLOSE, closeHandler, false, 0, true );
 				_socket.addEventListener( ProgressEvent.SOCKET_DATA, recv );
+                (_socket as Socket).timeout = this._connectTimeout;
 				_socket.connect( this.ip, this.port );	
 			}
 			_connectTime = getTimer();

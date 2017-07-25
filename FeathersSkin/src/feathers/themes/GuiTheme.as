@@ -916,13 +916,13 @@ package feathers.themes{
 				skinSelector.defaultTexture =  texture;
 				
 				//如果stateSkin没有指定大小，btn本身也未设置大小,则默认使用up/normal帧原图大小
-				var sub:Object = getSubThemeInfo( key );
+				var scaleName:String=splitIconSkinName(key, isIcon);
+				var sub:Object = getSubThemeInfo( scaleName );
 				if(sub)
 				{
 					skinSelector.readjustSize(sub.width, sub.height);
 				}
 				
-				var scaleName:String=splitIconSkinName(key, isIcon);
 				if(isScale9Textue(scaleName))
 				{
 					applayScale9Gird(skinSelector, scaleName);
