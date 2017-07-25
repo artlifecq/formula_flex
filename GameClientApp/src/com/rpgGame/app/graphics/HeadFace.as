@@ -1400,9 +1400,9 @@ package com.rpgGame.app.graphics
 			{
 				RankTypeOriderList = new Vector.<int>();
 				RankTypeOriderList.push(RankListType.All_COMBATPOWER_TYPE);
-				RankTypeOriderList.push(RankListType.MOUNT_TYPE);
-				RankTypeOriderList.push(RankListType.WARFLAG_TYPE);
-				RankTypeOriderList.push(RankListType.BEAUTY_TYPE);
+				RankTypeOriderList.push(RankListType.All_MOUNT_TYPE);
+				RankTypeOriderList.push(RankListType.All_WARFLAG_TYPE);
+				RankTypeOriderList.push(RankListType.All_BEAUTY_TYPE);
 				RankTypeOriderList.push(RankListType.COMBATPOWER_TYPE);
 			}
 			
@@ -1438,7 +1438,7 @@ package com.rpgGame.app.graphics
 					}else{
 						scale = q_info.q_hero_scale;
 					}
-					rud = new RenderParamData3D(RenderUnitID.RANKTITLE, RenderUnitType.RANKTITLE, ClientConfig.getEffect(q_info.q_modle));
+					rud = new RenderParamData3D(RenderUnitID.RANKTITLE, RenderUnitType.RANKTITLE, ClientConfig.getEffect(q_info.q_effects));
 					_rankTitle1.addRenderUnitWith(rud, 0);
 					_rankTitle1.scale = scale/100;
 					this.deCtrl.addTop(_rankTitle1,DecorCtrl.TOP_RANKDESIGNATION);
@@ -1470,7 +1470,7 @@ package com.rpgGame.app.graphics
 					}else{
 						scale = q_info.q_hero_scale;
 					}
-					rud = new RenderParamData3D(RenderUnitID.RANKTITLE, RenderUnitType.RANKTITLE, ClientConfig.getEffect(q_info.q_modle));
+					rud = new RenderParamData3D(RenderUnitID.RANKTITLE, RenderUnitType.RANKTITLE, ClientConfig.getEffect(q_info.q_effects));
 					_rankTitle2.addRenderUnitWith(rud, 0);
 					_rankTitle2.scale = scale/100;
 					this.deCtrl.addTop(_rankTitle2,DecorCtrl.TOP_RANKDESIGNATION1);

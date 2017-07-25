@@ -13,7 +13,6 @@ package com.rpgGame.appModule.fightsoul
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.tip.RTNodeID;
-	import com.rpgGame.core.ui.tip.RewardMarkTip;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.FightsoulData;
@@ -30,12 +29,14 @@ package com.rpgGame.appModule.fightsoul
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.lang.LangUI_2;
 	import com.rpgGame.coreData.role.RoleData;
+	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.TipType;
-	import com.rpgGame.coreData.type.item.GridBGType;
 	import com.rpgGame.netData.fightsoul.bean.FightSoulInfo;
 	
 	import away3d.events.Event;
 	
+	import feathers.controls.ScrollBarDisplayMode;
+	import feathers.controls.Scroller;
 	import feathers.data.ListCollection;
 	import feathers.events.FeathersEventType;
 	import feathers.layout.VerticalLayout;
@@ -47,7 +48,6 @@ package com.rpgGame.appModule.fightsoul
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
-	import starling.display.Sprite;
 	import starling.events.Touch;
 	import starling.events.TouchPhase;
 	
@@ -153,7 +153,7 @@ package com.rpgGame.appModule.fightsoul
 			if(!FightSoulManager.instance().FightSoulLevelUp())
 			{
 				if(_bigEffect==null)
-					_bigEffect=this.playInter3DAt(ClientConfig.getEffect("ui_zhanhun_da"),-20,-15,1,completeHandle);
+					_bigEffect=this.playInter3DAt(ClientConfig.getEffect("ui_zhanhun_da"),-15,0,1,completeHandle);
 			}
 		}
 		private function completeHandle(sr3D : InterObject3D):void
@@ -224,49 +224,47 @@ package com.rpgGame.appModule.fightsoul
 			_showAvatarData = new RoleData(0);
 			
 			_propList = new Vector.<PropView>();
-			_propList.push(new PropView(_skin.lab_prop1.skin as Shuxing_Skin,1));
-			_propList.push(new PropView(_skin.lab_prop2.skin as Shuxing_Skin,2));
-			_propList.push(new PropView(_skin.lab_prop3.skin as Shuxing_Skin,3));
-			_propList.push(new PropView(_skin.lab_prop4.skin as Shuxing_Skin,4));
-			_propList.push(new PropView(_skin.lab_prop5.skin as Shuxing_Skin,5));
-			_propList.push(new PropView(_skin.lab_prop6.skin as Shuxing_Skin,6));
+			_propList.push(new PropView(_skin.lab_prop1.skin as Shuxing_Skin,CharAttributeType.WAI_GONG));
+			_propList.push(new PropView(_skin.lab_prop2.skin as Shuxing_Skin,CharAttributeType.LIDAO));
+			_propList.push(new PropView(_skin.lab_prop3.skin as Shuxing_Skin,CharAttributeType.MAX_HP));
+			_propList.push(new PropView(_skin.lab_prop4.skin as Shuxing_Skin,CharAttributeType.GENGU));
+			_propList.push(new PropView(_skin.lab_prop5.skin as Shuxing_Skin,CharAttributeType.DEFENSE_PER));
+			_propList.push(new PropView(_skin.lab_prop6.skin as Shuxing_Skin,CharAttributeType.HIT));
 			
 			
 			_skin.List.itemRendererType = FightSoulActityCell;
+			_skin.List.scrollBarDisplayMode = ScrollBarDisplayMode.ALWAYS_VISIBLE;
+			_skin.List.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
+			_skin.List.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
 			var layout:VerticalLayout = new VerticalLayout();
 			layout.gap = 5;
 			_skin.List.layout = layout;
 			_skin.List.dataProvider = new ListCollection();
 			_skin.lb_progress.touchable = false;
 			
-			_skillIcon = IconCDFace.create(IcoSizeEnum.ICON_64);
-			_skillIcon.setBg(GridBGType.GRID_SIZE_64);
-			_skillIcon.x = 558;
-			_skillIcon.y = 433;
+			_skillIcon = IconCDFace.create(IcoSizeEnum.ICON_42);
+			_skillIcon.bindBg(_skin.icon);
 			addChild(_skillIcon);
 			
 			var length:int = FightSoulManager.instance().RewardInfos.length;
 			var icon:IconCDFace
 			_itemIconLists = new Vector.<IconCDFace>();
 			
-			var tmp:Sprite;
+			var iconList:Array = new Array();
+			iconList.push(_skin.item_icon1);
+			iconList.push(_skin.item_icon2);
+			iconList.push(_skin.item_icon3);
+			iconList.push(_skin.item_icon4);
 			for(var i:int = 0;i<length;i++)
 			{
-				icon= IconCDFace.create(IcoSizeEnum.ICON_48);
-				icon.width = icon.height = IcoSizeEnum.ICON_48;
-				icon.setBg(GridBGType.GRID_SIZE_48);
-				tmp=new Sprite();
-				tmp.x = 669+61*i;
-				tmp.y = 465;
-				tmp.addChild(icon);
-				icon.x =0;
-				icon.y = 0;
-				addChild(tmp);
+				icon= IconCDFace.create(IcoSizeEnum.ICON_42);
+				icon.bindBg(iconList[i]);
+				_skin.itemGroup.addChild(icon);
 				/*var touch:TouchToState = new TouchToState(icon,rewardIconTriggeredHandler);
 				touch.data = i;*/
 				_itemIconLists.push(icon);
 				
-				addNode(RTNodeID.MAIN_ZHANHUN,RTNodeID.ZH_REWARD+"-"+i,tmp,56,null);
+				addNode(RTNodeID.MAIN_ZHANHUN,RTNodeID.ZH_REWARD+"-"+i,icon,56,null);
 			}
 			addNode(RTNodeID.MAIN_ZHANHUN,RTNodeID.ZH_UP,_skin.btn_up,112,FightSoulManager.instance().canLevelUp,false,null,true);
 			TipTargetManager.show( _skin.btn_shuoming,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(27)));
@@ -291,13 +289,13 @@ package com.rpgGame.appModule.fightsoul
 			_skin.num_lv.visible = false;
 			listrefeash();
 			FaceUtil.SetSkillGrid(_skillIcon, FaceUtil.chanceSpellToFaceInfo(_skillData), true);//目前Tips有bug,待修改
-			_skillIcon.setIconPoint(5,5);
+//			_skillIcon.setIconPoint(5,5);
 			var icon:IconCDFace
 			for(var index:int = 0;index<_itemIconLists.length;index++)
 			{
 				icon = _itemIconLists[index];
 				FaceUtil.setGridData(icon,FightSoulManager.instance().RewardInfos[index],true);
-				icon.setIconPoint(4,4);
+//				icon.setIconPoint(4,4);
 			}
 			refeashRewards();
 		}
@@ -343,8 +341,14 @@ package com.rpgGame.appModule.fightsoul
 		{
 			_skin.num_current.number = fightSoulInfo.level;
 			_skin.num_next.number = fightSoulInfo.level+1;
-			_skin.pro_jindu.maximum = currentMode.q_exp;
-			_skin.pro_jindu.value = fightSoulInfo.exp;
+			
+			var parcent:Number = fightSoulInfo.exp/currentMode.q_exp;
+			if(parcent<0)
+				parcent=0;
+			else if(parcent>1)
+				parcent = 1;
+			_skin.pro_jindu.value = _skin.pro_jindu.maximum*parcent;
+			_skin.lbTiao.x = _skin.pro_jindu.x+_skin.pro_jindu.width*parcent-5;
 			_skin.lb_progress.text = fightSoulInfo.exp.toString()+"/"+currentMode.q_exp;
 			notifyUpdate(RTNodeID.ZH_UP);
 		}
@@ -374,6 +378,7 @@ package com.rpgGame.appModule.fightsoul
 				_skin.btn_huanhua.visible = false;
 				_skin.ui_huanhua.visible = false;
 				_skin.grp_dengji.visible = true;
+				_skin.uiLv.visible = true;
 				_skin.lb_time.visible = true;
 				_skin.Num_dengji.visible = true;
 				_skin.Num_dengji.label = cshowshet.q_level.toString();
@@ -382,12 +387,14 @@ package com.rpgGame.appModule.fightsoul
 				_skin.btn_huanhua.visible = false;
 				_skin.ui_huanhua.visible = true;
 				_skin.grp_dengji.visible = false;
+				_skin.uiLv.visible = false;
 				_skin.lb_time.visible = false;
 				_skin.Num_dengji.visible = false;
 			}else{
 				_skin.btn_huanhua.visible = true;
 				_skin.ui_huanhua.visible = false;
 				_skin.grp_dengji.visible = false;
+				_skin.uiLv.visible = false;
 				_skin.lb_time.visible = false;
 				_skin.Num_dengji.visible = false;
 			}

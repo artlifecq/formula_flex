@@ -413,5 +413,13 @@ package com.rpgGame.app.display2D
 			dispose();
 			_isDestroyed = true;
 		}
+		public function recycleSub():void
+		{
+			if (_extendsData) 
+			{
+				FightFaceHelper.onAtackFaceComplete(_extendsData);
+				_extendsData=null;
+			}
+		}
 	}
 }

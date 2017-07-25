@@ -91,6 +91,8 @@ package com.rpgGame.app.manager
 			var role :SculptureData = scene.data as SculptureData;
 			if(role==null)
 				return ;
+			/*if(role.topType != RankListType.COMBATPOWER_TYPE)
+				return ;*/
 			RankTopSender.reqRankListTopInfo(RankListType.COMBATPOWER_TYPE);
 		}
 		

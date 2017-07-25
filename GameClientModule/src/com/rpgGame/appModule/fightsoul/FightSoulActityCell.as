@@ -10,6 +10,8 @@ package com.rpgGame.appModule.fightsoul
 	import com.rpgGame.coreData.clientConfig.Q_newfunc;
 	import com.rpgGame.coreData.lang.LangUI_2;
 	
+	import feathers.controls.Button;
+	import feathers.controls.ButtonState;
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	import feathers.utils.filter.GrayFilter;
 	
@@ -30,6 +32,7 @@ package com.rpgGame.appModule.fightsoul
 			_skin = new Zhanhun_ziyuanxian();
 			_skin.toSprite(this);
 			this.setSize(_skin.width,_skin.height);
+			_skin.conOver.visible = false;
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -62,6 +65,13 @@ package com.rpgGame.appModule.fightsoul
 				_skin.lb_jinyan.filter = null;
 				_skin.btn_send.filter = null;
 			}
+		}
+		
+		
+		override protected function changeState(value:String):void
+		{
+			super.changeState(value);
+			_skin.conOver.visible = (value!=ButtonState.UP);
 		}
 		
 		private function get pathinfoData():FightSoulPathInfoData

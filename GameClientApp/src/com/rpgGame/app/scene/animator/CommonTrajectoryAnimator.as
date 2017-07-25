@@ -133,7 +133,6 @@ package com.rpgGame.app.scene.animator
 			
 			_moveDelay = moveDelay;
 			_playDelay = playDelay;
-//			_releaseDelayTime = releaseDelayTime;
 			
 			_throwHeight = throwHeight;
 			_throwWeightRatio = throwWeightRatio;
@@ -152,14 +151,11 @@ package com.rpgGame.app.scene.animator
 			var scene : GameScene3D = SceneManager.getScene();
 			var posY : Number = 0;//scene.sceneMapLayer.queryHeightAt(_destPosition.x, _destPosition.z);2.5D没有高度值，因为只有2维
 			_destHeightOffset = _destPosition.y - posY;
-			
 			_renderSet.position.x = _destPosition.x;
 			_renderSet.position.y = _destPosition.z;
 			_renderSet.position.z = _destPosition.y;
-			
 			_renderSet.offsetY = 0;
 			_renderSet.rotationX = 0;
-			_renderSet.rotationY = _atkorRotationY;
 			_targetOffsetY = _targetPos.z;
 			
 			var targetDestPosition : Vector3D = null;
@@ -188,7 +184,33 @@ package com.rpgGame.app.scene.animator
 				onStartPlay();
 			}
 		}
-		
+		private function updateDestPosition(locusPoint : AnimatorLocusPoint = null) : void
+		{
+			if (locusPoint)
+			{
+				_destPosition = locusPoint.position.clone();
+			}
+			else
+			{
+				if (_atkor && _atkor.usable)
+				{
+					_atkorRotationY = _atkor.rotationY;
+					var destPosition : Vector3D = null;
+					
+					destPosition = _atkor.getChildScenePositionByName(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_body_02);
+					if (!destPosition)
+						destPosition = _atkor.position;
+					_destPosition = destPosition.clone();
+					_atkorPosition = _atkor.position.clone();
+				}
+				_offsetDest.setTo(_destPosition.x - _atkorPosition.x, _destPosition.y - _atkorPosition.y, _destPosition.z - _atkorPosition.z);
+			}
+			if (_renderSet)
+			{
+				_renderSet.position = _destPosition;
+				_renderSet.rotationY = _atkorRotationY;
+			}
+		}
 		/**
 		 * 设置弹道其实数据 
 		 * @param position         施法者当前场景位置
@@ -196,12 +218,14 @@ package com.rpgGame.app.scene.animator
 		 * @param destPosition     施法者身上的某一个骨骼在场景中位置
 		 * 
 		 */		
-		public function setAtkorData(position : Vector3D, rotationY : Number, destPosition : Vector3D) : void
+		public function setAtkorData(atkor : SceneRole,position : Vector3D, rotationY : Number, destPosition : Vector3D) : void
 		{
+			_atkor=atkor;
 			_atkorPosition = position.clone();
-			_atkorRotationY = rotationY;
+			_atkorRotationY = 0;
 			_destPosition = destPosition.clone();
-			_offsetDest = new Vector3D(_destPosition.x - _atkorPosition.x, _destPosition.y - _atkorPosition.y, _destPosition.z - _atkorPosition.z);
+			_offsetDest = new Vector3D();
+		
 		}
 		
 		public function setQueue(queue : Vector.<IRenderAnimator>, locusPoints : Vector.<AnimatorLocusPoint>) : void
@@ -254,7 +278,7 @@ package com.rpgGame.app.scene.animator
 			SceneManager.removeSceneObjFromScene(_renderSet);
 		}
 		
-		private function addLocusPoint() : AnimatorLocusPoint
+		private function addLocusPoint(currX : Number, currY : Number, currZ : Number) : AnimatorLocusPoint
 		{
 			if (_targetRole && _targetRole.usable)
 			{
@@ -263,7 +287,7 @@ package com.rpgGame.app.scene.animator
 				else
 					_targetPos.setTo(_targetRole.x, _targetRole.y, _targetRole.z);
 			}
-			_destPosition.setTo(_renderSet.x, _renderSet.y, _renderSet.z);
+			_destPosition.setTo(currX, currY, currZ);
 			var locusPoint : AnimatorLocusPoint = new AnimatorLocusPoint(_destPosition.clone(), _targetPos.clone());
 			_locusPoints.push(locusPoint);
 			return locusPoint;
@@ -291,7 +315,7 @@ package com.rpgGame.app.scene.animator
 			_locusPointIndex++;
 			if (!locusPoint)
 			{
-				locusPoint = addLocusPoint();
+				locusPoint = addLocusPoint(_renderSet.x, _renderSet.y, _renderSet.z);
 			}
 			_destPosition.setTo(locusPoint.position.x, locusPoint.position.y, locusPoint.position.z);
 			_targetPos.setTo(locusPoint.targetPos.x, locusPoint.targetPos.y, locusPoint.targetPos.z);
@@ -366,6 +390,7 @@ package com.rpgGame.app.scene.animator
 							if (_isTrackTarget&&_locusPointIndex==1) 
 							{
 								varObj.bezierThrough=[{x:(_endPosX+locusPoint.position.x)/2,z:(_endPosZ+locusPoint.position.z)/2+200*(1-Math.random()*2)}];
+								//varObj.orientToBezier=true
 							}
 							TweenLite.to(_renderSet, hitTime * 0.001, varObj);
 							var scene : GameScene3D;
@@ -497,9 +522,8 @@ package com.rpgGame.app.scene.animator
 				}
 				else if (_isTrackTarget) 
 				{
-					//dist = MathUtil.getDistance(_renderSet.x, _renderSet.z, _lastPos.x, _lastPos.z);
-//					_renderSet.rotationX = dist > 0 ? Math.atan((_renderSet.y - _lastPos.y) / dist) * 57.33 : 0;
-					_renderSet.rotationY =Math.atan2(_renderSet.z-_lastPos.z,_renderSet.x-_lastOffset.x);
+					dist = MathUtil.getDistance(_renderSet.x, _renderSet.z, _lastPos.x, _lastPos.z);
+					//_renderSet.rotationZ = dist > 0 ? Math.atan((_renderSet.y - _lastPos.y) / dist) * 57.33 : 0;
 				}
 				_lastPos.setTo(_renderSet.x, _renderSet.y, _renderSet.z);
 				_lastOffset.setTo(_renderSet.offsetX, _renderSet.offsetY, _renderSet.offsetZ);

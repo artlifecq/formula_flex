@@ -69,6 +69,7 @@ package com.rpgGame.appModule.mount
 			_mountupContent.updataInfo(_mountShowData);
 			_mountupContent.updateExp();
 			refeashSpellIcon();
+			refeashExpHandler();
 			initEvent();
 		}
 		override protected function onTouchTarget(target : DisplayObject) : void
