@@ -36,6 +36,7 @@ package org.mokylin.skin.component.list
 			vBar = temp;
 			temp.name = "vBar";
 			temp.height = 193;
+			temp.width=22;
 			temp.styleClass = org.mokylin.skin.component.scrollbar.ScrollBarSkin_chat;
 			temp.x = 0;
 			temp.y = 0;

@@ -134,7 +134,7 @@ package org.mokylin.skin.component.check
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.top = 0;
 			temp.verticalAlign = "middle";
-			temp.width = 96;
+			temp.width = 190;
 			return temp;
 		}
 
