@@ -94,6 +94,8 @@ package com.rpgGame.app.manager
 			updateMount(role);
 			//穿“主体”
 			updateBody(role);
+			//bodyEffect
+			updateBodyEft(role);
 			//穿“头发”
 			updateHair(role);
 			//穿“武器”

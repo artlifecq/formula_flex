@@ -1,9 +1,11 @@
 package org.mokylin.skin.app.paihangbang
 {
 	import feathers.controls.text.Fontter;
+	import feathers.controls.Button;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import org.mokylin.skin.component.button.ButtonSelect2_Skin;
 
 	/**
 	 * @private
@@ -40,7 +42,7 @@ package org.mokylin.skin.app.paihangbang
 			this.currentState = "normal";
 			this.height = 30;
 			this.width = 546;
-			this.elementsContent = [__PaiHang_Item2_UIAsset1_i(),icon_i(),vip_i(),lbName_i(),lbLevel_i(),lbZhiye_i(),lbContent_i(),lbNum_i()];
+			this.elementsContent = [__PaiHang_Item2_UIAsset1_i(),icon_i(),vip_i(),lbName_i(),lbLevel_i(),lbZhiye_i(),lbContent_i(),lbNum_i(),__PaiHang_Item2_Button1_i()];
 			
 			states = {
 			};
@@ -51,6 +53,17 @@ package org.mokylin.skin.app.paihangbang
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
+		private function __PaiHang_Item2_Button1_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			temp.height = 30;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSelect2_Skin;
+			temp.width = 546;
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
 		private function __PaiHang_Item2_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();

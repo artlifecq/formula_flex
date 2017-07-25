@@ -9,12 +9,12 @@ package com.rpgGame.appModule.fightsoul
 	public class PropView
 	{
 		private var _skin:Shuxing_Skin;
-		private var _index:int;
+		private var _typeId:int;
 		private var _isSHow:Boolean = false;
-		public function PropView(skin:Shuxing_Skin,index:int):void
+		public function PropView(skin:Shuxing_Skin,typeId:int):void
 		{
 			_skin = skin;
-			_index = index;
+			_typeId = typeId;
 			_skin.lb_name.width = NaN;
 		}
 		private var _currentatt:Q_att_values;
@@ -29,21 +29,21 @@ package com.rpgGame.appModule.fightsoul
 		private var _disace:int;
 		private function refeashView():void
 		{
-			var attpropId:int = _currentatt["q_type"+_index];
-			if(attpropId ==0)
+			var currentPropValue:int;
+			var nextPropValue:int;
+			for(var i:int = 1;i<=15;i++)
 			{
-				attpropId = _nextAtt["q_type"+_index];
-				_skin.container.visible = false;
-			}else{
-				_skin.container.visible = true;
+				if(_currentatt["q_type"+i]==_typeId)
+				{
+					currentPropValue = _currentatt["q_value"+i];
+				}
+				
+				if(_nextAtt["q_type"+i]==_typeId)
+				{
+					nextPropValue = _nextAtt["q_value"+i];
+				}
 			}
-			if(attpropId==0)
-				return ;
-			var currentPropValue:int = _currentatt["q_value"+_index];
-			var nextPropValue:int = _nextAtt["q_value"+_index];
-			var attname:String = CharAttributeType.getCNName(attpropId);
-			_skin.lb_name.htmlText = attname+":"+HtmlTextUtil.getTextColor(0xCFC6AE,currentPropValue.toString());
-			_skin.lb_name.measureText();
+			_skin.lb_name.text = currentPropValue.toString();
 			_skin.grp_up.x = _skin.lb_name.x +_skin.lb_name.width+5;
 			_disace = nextPropValue-currentPropValue;
 			_skin.lb_Num.text = _disace.toString();

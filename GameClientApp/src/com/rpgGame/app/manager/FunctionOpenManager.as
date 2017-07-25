@@ -156,14 +156,10 @@
 		 * @return 
 		 * 
 		 */
-		public static function openFunctionId(info:Q_newfunc,data:Object = null,isAutoHide:Boolean = true):void
+		public static function openFunctionId(info:Q_newfunc,data:Object = null,isAutoHide:Boolean = true,isError:Boolean = true):void
 		{
 			if(info==null)
 				return ;
-			if(!functionIsOpen(info.q_id.toString()))
-			{
-				return ;
-			}
 			var ids:Array = JSONUtil.decode(info.q_main_id) as Array;
 			var modeInfo:FunctionBarInfo = FuncionBarCfgData.getActivityBarInfo(ids[0]);
 			openModeByInfo(modeInfo,info.q_id.toString(),data,isAutoHide);
@@ -174,11 +170,10 @@
 			var info:Q_newfunc = NewFuncCfgData.getdataById(id);
 			if(info==null)
 			{
-				if(isError)
-					NoticeManager.showNotifyById(61040);
+				NoticeManager.mouseFollowNotify("未找到配置:"+id);
 				return ;
 			}
-			openFunctionId(info,data,isAutoHide);
+			openFunctionId(info,data,isAutoHide,isError);
 		}
 		
 		public static function getAppInfoByFunctionId(id:String):AppInfo
@@ -202,8 +197,15 @@
 		 * @param isAutoHide
 		 * 
 		 */
-		public static function openModeByInfo(info:FunctionBarInfo,id:String= "",data:Object = null,isAutoHide:Boolean = true):void
+		public static function openModeByInfo(info:FunctionBarInfo,id:String= "",data:Object = null,isAutoHide:Boolean = true,isError:Boolean = true):void
 		{
+			var minlevel:int = getOpenLevelByFunBarInfo(info)
+			if(!checkOpenByLevel(minlevel))
+			{
+				if(isError)
+					NoticeManager.showNotifyById(61040);
+				return ;
+			}
 			var openId:String=id?id:"";
 			if(info.clickType==1)
 			{
