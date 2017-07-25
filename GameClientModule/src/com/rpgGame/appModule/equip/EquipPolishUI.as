@@ -56,6 +56,7 @@ package com.rpgGame.appModule.equip
 	import feathers.controls.List;
 	import feathers.controls.Scroller;
 	import feathers.data.ListCollection;
+	import feathers.events.FeathersEventType;
 	
 	import gs.TweenMax;
 	import gs.easing.Expo;
@@ -139,13 +140,13 @@ package com.rpgGame.appModule.equip
 			for(var i:int=1;i<11;i++){
 				lvDatas.push(ItemUtil.getLevele(i));
 			}
-			_skin.cmb_dengjie.addEventListener("creationComplete",onCreate);
+			_skin.cmb_dengjie.addEventListener(FeathersEventType.CREATION_COMPLETE,onCreate);
 			
 			qualityDatas=new Array();
 			for(i=1;i<4;i++){
 				qualityDatas.push(ItemUtil.getQualityName(i)+LanguageConfig.getText(LangUI.UI_TEXT5));
 			}
-			_skin.cmb_pinzhi.addEventListener("creationComplete",onCreatePinZhi);
+			_skin.cmb_pinzhi.addEventListener(FeathersEventType.CREATION_COMPLETE,onCreatePinZhi);
 			
 			_useEquipGrids=new Vector.<DragDropItem>();
 			for(i=0;i<6;i++){
@@ -223,7 +224,7 @@ package com.rpgGame.appModule.equip
 		
 		private function onCreate(e:Event):void
 		{
-			_skin.cmb_dengjie.removeEventListener("creationComplete",onCreate);
+			_skin.cmb_dengjie.removeEventListener(FeathersEventType.CREATION_COMPLETE,onCreate);
 			var list:List=_skin.cmb_dengjie.getList();
 			list.itemRendererFactory = createComBoxRender1;
 			list.clipContent = true;
@@ -238,7 +239,7 @@ package com.rpgGame.appModule.equip
 		
 		private function onCreatePinZhi(e:Event):void
 		{
-			_skin.cmb_pinzhi.removeEventListener("creationComplete",onCreatePinZhi);
+			_skin.cmb_pinzhi.removeEventListener(FeathersEventType.CREATION_COMPLETE,onCreatePinZhi);
 			_skin.cmb_pinzhi.dataProvider=new ListCollection(qualityDatas);
 			_skin.cmb_pinzhi.selectedIndex=0;
 			var list:List=_skin.cmb_pinzhi.getList();

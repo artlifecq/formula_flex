@@ -32,15 +32,21 @@ package com.rpgGame.app.ui.main.chat {
 	
 	import away3d.events.Event;
 	
+	import feathers.controls.List;
+	import feathers.controls.ScrollBar;
 	import feathers.controls.ScrollBarDisplayMode;
+	import feathers.controls.ScrollPolicy;
 	import feathers.controls.text.Fontter;
 	import feathers.data.ListCollection;
 	import feathers.events.FeathersEventType;
+	import feathers.layout.RelativePosition;
 	import feathers.layout.VerticalLayout;
+	import feathers.themes.GuiThemeStyle;
 	
 	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
+	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_chat;
 	import org.mokylin.skin.mainui.chat.chat_Skin;
 	
 	import starling.core.Starling;
@@ -119,12 +125,14 @@ package com.rpgGame.app.ui.main.chat {
 			this._initGroupTopY = this._skin.tab_Type.y;
 			
 			
-			_skin.listBar.verticalScrollBarPosition = "right";
-			_skin.listBar.horizontalScrollPolicy = "off";
-			_skin.listBar.verticalScrollPolicy = "on";
+			GuiThemeStyle.setScrollerStyle(_skin.listBar,ScrollBarSkin_chat);
+			_skin.listBar.verticalScrollBarPosition = RelativePosition.LEFT;
+			_skin.listBar.horizontalScrollPolicy =ScrollPolicy.OFF;
+			_skin.listBar.verticalScrollPolicy = ScrollPolicy.ON;
 			_skin.listBar.scrollBarDisplayMode=ScrollBarDisplayMode.FIXED;
 			_skin.listBar.itemRendererType = ChatBarItemRender;
 			_skin.listBar.dataProvider = new ListCollection();
+			_skin.listBar.addEventListener(FeathersEventType.CREATION_COMPLETE,onCreateList);
 			var layout:VerticalLayout = new VerticalLayout();
 			layout.useVirtualLayout = true;
 			layout.gap = 0;
@@ -173,6 +181,14 @@ package com.rpgGame.app.ui.main.chat {
 			initEvent();
 			setGroubState(false);
 		}
+		
+		private function onCreateList(e:Event):void
+		{
+			_skin.listBar.removeEventListener(FeathersEventType.CREATION_COMPLETE,onCreateList);
+			var vb:ScrollBar=(e.currentTarget as List).getVerticalScrollBar() as ScrollBar;
+			vb.alwaysVisible=true;
+			vb.thumbAutoResize=false;
+		}			
 		
 		private function initEvent():void
 		{
@@ -307,7 +323,8 @@ package com.rpgGame.app.ui.main.chat {
 		{
 			if(!iskeepOrto)
 			{
-				_skin.listBar.scrollToBottom(0);
+//				_skin.listBar.scrollToBottom(0);
+				_skin.listBar.scrollToDisplayIndex(_skin.listBar.dataProvider.length-1);
 			}
 		}
 		
