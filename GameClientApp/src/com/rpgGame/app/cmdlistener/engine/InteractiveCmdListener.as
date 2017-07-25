@@ -11,6 +11,7 @@ package com.rpgGame.app.cmdlistener.engine
 	import com.rpgGame.app.manager.fight.FightManager;
 	import com.rpgGame.app.manager.input.KeyMoveManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.scene.SceneCursorHelper;
 	import com.rpgGame.app.manager.stall.StallManager;
@@ -146,7 +147,8 @@ package com.rpgGame.app.cmdlistener.engine
 			if (!KeyMoveManager.getInstance().keyMoving)
 			{
 				SceneCursorHelper.getInstance().showCursor(position);
-				RoleStateUtil.doWalkTo(MainRoleManager.actor, position);
+				//RoleStateUtil.doWalkTo(MainRoleManager.actor, position);
+				MainRoleSearchPathManager.jumpWalkToPos(MainRoleManager.actor, position);//走路改为了可以跨跳跃点-------yt
 				EventManager.dispatchEvent(SkillEvent.SKILL_CANCEL);	
 			}
 		}
