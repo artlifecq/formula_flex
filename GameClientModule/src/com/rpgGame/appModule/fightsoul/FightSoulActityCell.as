@@ -16,6 +16,7 @@ package com.rpgGame.appModule.fightsoul
 	import feathers.utils.filter.GrayFilter;
 	
 	import org.mokylin.skin.app.zhanhun.Zhanhun_ziyuanxian;
+	import org.mokylin.skin.common.ItemBg;
 	
 	import starling.display.DisplayObject;
 	
@@ -65,9 +66,8 @@ package com.rpgGame.appModule.fightsoul
 				_skin.lb_jinyan.filter = null;
 				_skin.btn_send.filter = null;
 			}
+			ItemBg(_skin.bg.skin).bg1.visible = (this.index%2==0);
 		}
-		
-		
 		override protected function changeState(value:String):void
 		{
 			super.changeState(value);
