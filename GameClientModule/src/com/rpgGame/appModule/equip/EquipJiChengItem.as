@@ -78,7 +78,9 @@ package com.rpgGame.appModule.equip
 			{			
 				return;
 			}
-			if(_labContainer.numChildren>0) _labContainer.removeChildAt(0);
+			while(_labContainer.numChildren){
+				_labContainer.removeChildAt(0);
+			}
 			_labList.length=0;
 			var lab:Label;
 			switch(_type)
@@ -101,9 +103,12 @@ package com.rpgGame.appModule.equip
 					maps2=AttValueConfig.getTypeValueMap(attValues2);
 					keys=maps2.keys();
 					values2=maps2.values();
+					var changV:*; 
 					if(useInfo.strengthLevel>0&&values2!=null)
 					{
-						_skin.labelDisplay.htmlText=LanguageConfig.getText(LangUI.UI_TEXT22)+HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,tragetInfo.strengthLevel.toString())+HtmlTextUtil.getTextColor(0x5DBD37,"(+"+((useInfo.strengthLevel-tragetInfo.strengthLevel)+")"));
+						changV=useInfo.strengthLevel-tragetInfo.strengthLevel;
+						changV=changV>0?"+"+changV:changV;
+						_skin.labelDisplay.htmlText=LanguageConfig.getText(LangUI.UI_TEXT22)+HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,tragetInfo.strengthLevel.toString())+HtmlTextUtil.getTextColor(0x5DBD37,"("+changV+")");
 						for(var i:int=0;i<values2.length;i++)
 						{
 							if(i<values1.length&&values2[i]-values1[i]>0)

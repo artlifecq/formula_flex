@@ -8,15 +8,11 @@ package com.rpgGame.app.fight.spell.ui
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.scene.animator.AnimatorLocusPoint;
-	import com.rpgGame.app.scene.animator.CommonTrajectoryAnimator;
-	import com.rpgGame.app.scene.animator.FrontAxleDoubleAroundAnimator;
 	import com.rpgGame.app.scene.animator.RibbonAnimator;
 	import com.rpgGame.coreData.AvatarInfo;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
-	import com.rpgGame.coreData.cfg.animat.EffectAnimationCfgData;
-	import com.rpgGame.coreData.clientConfig.EffectAnimation;
 	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
 	import com.rpgGame.coreData.clientConfig.Q_SpellEffect;
 	import com.rpgGame.coreData.enum.BoneNameEnum;

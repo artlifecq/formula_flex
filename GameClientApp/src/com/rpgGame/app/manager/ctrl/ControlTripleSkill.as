@@ -1,26 +1,21 @@
-package com.rpgGame.app.state.role.control
+package com.rpgGame.app.manager.ctrl
 {
-	import com.game.engine3D.state.role.RoleStateReference;
 	import com.rpgGame.app.manager.SpellManager;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
-	
-	import away3d.bounds.NullBounds;
-	
-	public class TripleAttackSpellLockStateReference extends RoleStateReference
+
+	public class ControlTripleSkill
 	{
-		public var startSkill:int;
+		public function ControlTripleSkill()
+		{
+		}
 		/**
 		 *三连击技能列表 
-		 */		
+		 */        
 		private var _skills:Array;
-		public function TripleAttackSpellLockStateReference()
-		{
-			super();
-		}
+		
 		public function setParams(skill:int):void
 		{
-			this.startSkill=skill;
 			var qSkill:Q_skill_model=SpellDataManager.getSpellData(skill,SpellManager.getSkillGrade(skill));
 			_skills=null;
 			if (qSkill.q_relate_spells!="") 

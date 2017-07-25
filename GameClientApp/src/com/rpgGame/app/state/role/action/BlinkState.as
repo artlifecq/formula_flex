@@ -442,10 +442,6 @@ package com.rpgGame.app.state.role.action
 				return false;
 			if (!force && (_machine as RoleStateMachine).isLockCaseSpell)
 				return false;
-			if (!force&&(_machine as RoleStateMachine).isTripleLockCaseSpell)
-			{
-				return false;
-			}
 			 if (!force&&(_machine as RoleStateMachine).isSpriteUp)
 			{
 				return false;

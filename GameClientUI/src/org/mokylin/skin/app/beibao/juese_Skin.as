@@ -1378,8 +1378,6 @@ package org.mokylin.skin.app.beibao
 			weapons = temp;
 			temp.name = "weapons";
 			temp.height = 364;
-			temp.touchable = false;
-			temp.touchGroup = true;
 			temp.width = 368;
 			temp.x = 234;
 			temp.y = 137;

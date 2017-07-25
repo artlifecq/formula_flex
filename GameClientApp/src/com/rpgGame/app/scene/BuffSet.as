@@ -16,7 +16,7 @@ package com.rpgGame.app.scene
 	import com.rpgGame.app.state.role.control.NineTowerFightFlagStateReference;
 	import com.rpgGame.app.state.role.control.ShapeshiftingStateReference;
 	import com.rpgGame.app.state.role.control.ShortcutGridStateReference;
-	import com.rpgGame.app.state.role.control.SkillWarningStateReference;
+	import com.rpgGame.app.state.role.control.SkillCDReduceState;
 	import com.rpgGame.app.state.role.control.SpriteUpBuffStateReference;
 	import com.rpgGame.app.state.role.control.StiffStateReference;
 	import com.rpgGame.app.state.role.control.StunStateReference;
@@ -291,11 +291,7 @@ package com.rpgGame.app.scene
 						_role.stateMachine.removeState(RoleStateType.CONTROL_SHORTCUTGRID);
 						break;
 					case 40:// 
-						if(_role.isMainChar)
-						{
-							SkillCDManager.getInstance().removeCDBuff(buffData);
-							DodgeManager.getinstance().clearBuff(buffData);
-						}
+						_role.stateMachine.removeState(RoleStateType.CONTROL_BUFF_SKILLCD2);
 						break;
 					case 42:// 预警
 						_role.stateMachine.removeState(RoleStateType.CONTROL_SKILL_WARNING);
@@ -464,11 +460,9 @@ package com.rpgGame.app.scene
 						_role.stateMachine.transition(RoleStateType.CONTROL_SHORTCUTGRID, buffRef);
 						break;
 					case 40://技能cd时间减少
-						if(_role.isMainChar)
-						{
-							SkillCDManager.getInstance().addCDBuff(buffData);
-							DodgeManager.getinstance().buff = buffData;
-						}
+						buffRef = _role.stateMachine.getReference(BuffStateReference) as BuffStateReference;
+						buffRef.setParams(buffData);
+						_role.stateMachine.transition(RoleStateType.CONTROL_BUFF_SKILLCD2,buffRef);
 						break;
 					/*case 42:// 预警状态-------------------预警状态已经去掉不用了 后面如果加上的话再开启    yt
 					buffRef = _role.stateMachine.getReference(SkillWarningStateReference) as SkillWarningStateReference;

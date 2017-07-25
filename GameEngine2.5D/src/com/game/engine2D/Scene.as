@@ -122,8 +122,8 @@ package com.game.engine2D
 			_current = this;
 			_view = view;
 			_screenView = Stage3DLayerManager.screenView;
-			_cameraOrthographicLens = new CameraOrthographicLens(1000);
-			_cameraOrthographicLens.viewportScale = 1.15;
+			_cameraOrthographicLens = new CameraOrthographicLens(1200);
+//			_cameraOrthographicLens.viewportScale = 1.15;
 			
 			//场景引擎配置
 			sceneConfig = new SceneConfig($width,$height);

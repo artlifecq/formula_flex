@@ -21,11 +21,11 @@ package com.rpgGame.app.manager
 		//private static const GLOBAL_SKILL_KEY : String = "GLOBAL_SKILL_KEY";
 		
 		private var cdRecord:HashMap=new HashMap();
-		private var _bufflist:Vector.<BuffData>;
+		private var _reduceCDMap:HashMap=new HashMap();
 		
 		public function SkillCDManager()
 		{
-			_bufflist = new Vector.<BuffData>();
+			
 		}
 		
 		private static var _instance : SkillCDManager;
@@ -38,38 +38,18 @@ package com.rpgGame.app.manager
 			return _instance;
 		}
 		
-		public function addCDBuff(buff:BuffData):void
+		public function reduceCDTime(skillid:int,time:Number,isreset:Boolean = true):void
 		{
-			var arr:Array = JSONUtil.decode( buff._data.q_action_type) as Array;
-			if(arr.indexOf(40)<0)
-				return ;
-			var type:int = buff._data.q_overlay_maxcount;
-			var length:int = _bufflist.length;
-			for(var i:int = 0;i<length;i++)
+			if(isreset&&!_reduceCDMap.containsKey(skillid))
 			{
-				if(_bufflist[i].buffId== buff.buffId)
-				{
-					_bufflist[i] = buff;
-					return ;
-				}
+				time += _reduceCDMap.get(skillid) as Number;
 			}
-			_bufflist.push(buff);
+			_reduceCDMap.put(skillid,time);
 		}
 		
-		public function removeCDBuff(buff:BuffData):void
+		public function removeCDTime(skillid:int):void
 		{
-			var type:int = buff._data.q_overlay_maxcount;
-			var length:int = _bufflist.length;
-			var index:int;
-			for(var i:int = 0;i<length;i++)
-			{
-				if(_bufflist[i].buffId== buff.buffId)
-				{
-					index = i;
-					break ;
-				}
-			}
-			_bufflist.splice(index,1);
+			_reduceCDMap.remove(skillid);
 		}
 		//---------------------------------------------
 		/**
@@ -234,7 +214,7 @@ package com.rpgGame.app.manager
 			
 			var cdTime : int = 0; //已经经过的时间
 			var configCDTime :Number = spellData.q_cd; //配置的CD时间
-			var length:int = _bufflist.length;
+			/*var length:int = _bufflist.length;
 			for(var index:int = 0;index<length;index++)
 			{
 				var buffdata:BuffData = _bufflist[i];
@@ -245,8 +225,11 @@ package com.rpgGame.app.manager
 				{
 					configCDTime -=buffdata.buffInfo.value/1000;
 				}
-			}
-			CDDataManager.playCD(getSkillKey(spellData.q_skillID), configCDTime, cdTime);
+			}*/
+			var skillid:int = spellData.q_skillID;
+			if(_reduceCDMap.containsKey(skillid))
+				configCDTime -= _reduceCDMap.getValue(skillid) as Number;
+			CDDataManager.playCD(getSkillKey(skillid), configCDTime, cdTime);
 			
 			if (!isGlobal)
 				return;

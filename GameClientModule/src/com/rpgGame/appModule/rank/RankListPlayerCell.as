@@ -62,14 +62,15 @@ package com.rpgGame.appModule.rank
 			}
 			
 			_skin.vip.visible = info.vipId>0;
+			_skin.vip.styleName = "ui/common/tubiao/vips"+info.vipId+".png";
 			_skin.lbName.text = info.playername;
-			_skin.lbZhiye.text = ItemUtil.getJobName(info.job);
+			_skin.lbZhiye.text = ItemUtil.getJobName(info.playerBriefInfo.job);
 			if(info.toptype == RankListType.MOUNT_TYPE)
 			{
 				var horsedata:Q_horse = HorseConfigData.getMountDataById(info.param);
 				if(horsedata!=null)
 				{
-					_skin.lbContent.text = horsedata.q_name+"."+horsedata.q_id.toString();
+					_skin.lbContent.text = horsedata.q_name+"."+horsedata.q_id.toString()+"阶";
 				}else{
 					_skin.lbContent.text = "无";
 				}
@@ -77,13 +78,21 @@ package com.rpgGame.appModule.rank
 				var warflag:Q_warflag=ZhanQiConfigData.getZhanQiDataById(info.param);
 				if(warflag!=null)
 				{
-					_skin.lbContent.text = warflag.q_name+"."+warflag.q_id.toString();
+					_skin.lbContent.text = warflag.q_name+"."+warflag.q_id.toString()+"阶";
 				}else{
 					_skin.lbContent.text = "无";
 				}
 			}else{
 				_skin.lbContent.text = info.param.toString();
 			}
+		}
+		
+		public function color(value:uint):void
+		{
+			_skin.lbNum.color = value;
+			_skin.lbName.color = value;
+			_skin.lbZhiye.color = value;
+			_skin.lbContent.color = value;
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void

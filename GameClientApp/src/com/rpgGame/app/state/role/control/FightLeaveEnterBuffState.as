@@ -2,6 +2,8 @@ package com.rpgGame.app.state.role.control
 {
 	import com.rpgGame.app.ui.main.fight.FightStateView;
 	import com.rpgGame.coreData.type.RoleStateType;
+	
+	import flash.utils.getQualifiedClassName;
 
 	public class FightLeaveEnterBuffState extends BuffState
 	{
@@ -18,6 +20,10 @@ package com.rpgGame.app.state.role.control
 		{
 			super.afterLeave();
 			FightStateView.show(false);
+		}
+		override public function get tribe():String
+		{
+			return getQualifiedClassName(FightLeaveEnterBuffState);
 		}
 	}
 }

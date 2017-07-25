@@ -18,15 +18,11 @@ package org.mokylin.skin.component.scrollbar.skin_chat.button
 			super();
 			
 			this.currentState = "up";
-			this.height = 34;
-			this.width = 22;
 			this.elementsContent = [];
 			
 			states = {
 			};
 			skinNames={"down":"ui/component/scrollbar/skin_chat/button/skin_thumb/down.png,ui/component/scrollbar/skin_chat/button/skin_thumb/down_1.png", "hover":"ui/component/scrollbar/skin_chat/button/skin_thumb/over.png,ui/component/scrollbar/skin_chat/button/skin_thumb/over_1.png", "up":"ui/component/scrollbar/skin_chat/button/skin_thumb/up.png,ui/component/scrollbar/skin_chat/button/skin_thumb/up_1.png"};
 		}
-
-
 	}
 }

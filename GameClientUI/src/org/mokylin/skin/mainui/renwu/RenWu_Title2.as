@@ -1,4 +1,4 @@
-package org.mokylin.skin.app.zhanhun.button
+package org.mokylin.skin.mainui.renwu
 {
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
@@ -9,7 +9,7 @@ package org.mokylin.skin.app.zhanhun.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class ButtonJiantou extends feathers.controls.StateSkin
+	public class RenWu_Title2 extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -22,7 +22,7 @@ package org.mokylin.skin.app.zhanhun.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function ButtonJiantou()
+		public function RenWu_Title2()
 		{
 			super();
 			
@@ -30,10 +30,17 @@ package org.mokylin.skin.app.zhanhun.button
 			this.elementsContent = [];
 			
 			states = {
+				up:[
+						{target:"labelDisplay",
+							name:"bottom",
+							value:0
+						}
+					]
+				,
 				init:[
 						{target:"labelDisplay",
 							name:"textAlign",
-							value:"center"
+							value:"left"
 						}
 						,
 						{target:"labelDisplay",
@@ -47,7 +54,7 @@ package org.mokylin.skin.app.zhanhun.button
 						}
 					]
 			};
-			skinNames={"done":"ui/app/zhanhun/button/jiantou/done.png", "hover":"ui/app/zhanhun/button/jiantou/over.png", "up":"ui/app/zhanhun/button/jiantou/up.png"};
+			skinNames={"down":"ui/mainui/renwu/xuanzhong.png", "hover":"ui/mainui/renwu/xuanzhong.png", "up":"ui/mainui/renwu/xuanzhong_alpha.png"};
 		}
 
 
@@ -59,6 +66,7 @@ package org.mokylin.skin.app.zhanhun.button
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			iconDisplay = temp;
 			temp.name = "iconDisplay";
+			temp.visible = false;
 			return temp;
 		}
 
@@ -71,7 +79,7 @@ package org.mokylin.skin.app.zhanhun.button
 			temp.left = 0;
 			temp.right = 0;
 			temp.text = "";
-			temp.textAlign = "center";
+			temp.textAlign = "left";
 			temp.color = 0xFFFFFF;
 			temp.top = 0;
 			temp.verticalAlign = "middle";

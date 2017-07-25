@@ -201,11 +201,16 @@ package com.rpgGame.app.view.icon
 				_bgImage.removeFromParent();
 			}
 			_bgImage=bg;
-			this.x=_bgImage.x;
-			this.y=_bgImage.y;
-			_bgImage.x=_bgImage.y=0;
-			this.width=_bgImage.width;
-			this.height=_bgImage.height;
+			if(_bgImage){
+				this.x=_bgImage.x;
+				this.y=_bgImage.y;
+				_bgImage.x=_bgImage.y=0;
+				this.width=_bgImage.width;
+				this.height=_bgImage.height;
+			}else{
+				this.width=_iconSize;
+				this.height=_iconSize;
+			}
 			if(_qualityEft){
 				_qualityEft.width=this.width;
 				_qualityEft.height=this.width;

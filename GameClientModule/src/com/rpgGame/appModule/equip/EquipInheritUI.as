@@ -35,10 +35,12 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.lang.LangSpell;
 	import com.rpgGame.coreData.lang.LangUI;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.item.GridBGType;
+	import com.rpgGame.coreData.type.item.ItemQualityType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.equip.message.ResEquipOperateResultMessage;
 	
@@ -175,8 +177,10 @@ package com.rpgGame.appModule.equip
 			
 			_targetEquip=IconCDFace.create(IcoSizeEnum.ICON_64);
 			_targetEquip.selectImgVisible=false;
+			_targetEquip.bindBg(null);
 			_useEquip=IconCDFace.create(IcoSizeEnum.ICON_64);
 			_useEquip.selectImgVisible=false;
+			_useEquip.bindBg(null);
 			
 			_skin.container.addChild(_targetEquip);
 			_skin.container.addChild(_useEquip);
@@ -214,7 +218,7 @@ package com.rpgGame.appModule.equip
 		private function onTouchGrid( grid:DragDropItem ):void
 		{
 			var gridInfo:GridInfo=grid.gridInfo;
-			if(gridInfo.data==null){
+			if(gridInfo.data==null||grid.isGary){
 				return;
 			}
 			if(gridInfo.containerID==ItemContainerID.IHT_LIST){
@@ -538,7 +542,7 @@ package com.rpgGame.appModule.equip
 		private function isCanInheritanceTo(info:EquipInfo):Boolean
 		{
 			var job:int=MainRoleManager.actorInfo.job;
-			if(_targetEquipInfo!=null)
+			if(_targetEquipInfo!=null&&info!=_targetEquipInfo)
 			{
 				if((info.qItem.q_job==job||info.qItem.q_job==0)&&info.qItem.q_kind==_targetEquipInfo.qItem.q_kind&&(info.strengthLevel>_targetEquipInfo.strengthLevel||
 					info.polishLevel>_targetEquipInfo.polishLevel||info.smeltAtt1!=0||info.smeltAtt2!=0))
@@ -627,6 +631,9 @@ package com.rpgGame.appModule.equip
 				var type:int=RoleEquipmentManager.equipIsWearing(_targetEquipInfo)?0:1;
 				var lock:int=getLock();
 				var alertSet:AlertSetInfo= new AlertSetInfo( LangUI.UI_TEXT15);
+				alertSet.alertInfo.value=alertSet.alertInfo.value.replace("$",HtmlTextUtil.getTextColor(ItemQualityType.getColorValue(_targetEquipInfo.quality),_useEuipInfo.name));
+				alertSet.alertInfo.checkText=LanguageConfig.getText(LangUI.UI_TEXT31);
+				alertSet.alertInfo.align="left";
 				alertSet.isShowCBox = true;
 				GameAlert.showAlert(alertSet,onToUp,EquipOperateType.JICHENG_NORMAL,_useEuipInfo.itemInfo.itemId,_targetEquipInfo.itemInfo.itemId,type,lock);
 				

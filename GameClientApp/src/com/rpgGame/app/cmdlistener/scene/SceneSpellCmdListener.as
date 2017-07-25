@@ -108,14 +108,6 @@ package com.rpgGame.app.cmdlistener.scene
 		private function onResFightFailedBroadcastMessage(msg:ResFightFailedBroadcastMessage):void
 		{
 			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
-			if (MainRoleManager.actor.stateMachine.isTripleLockCaseSpell) 
-			{
-				MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_TRIPLE_ATTACK_LOCK);
-				if (MainRoleManager.actor.stateMachine.isPrewarWaiting)
-					MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_PREWAR);
-				else
-					MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE);
-			}
 			
 			var failID : int = msg.failType;
 			var failReason : String;
@@ -317,10 +309,7 @@ package com.rpgGame.app.cmdlistener.scene
 					EventManager.dispatchEvent(SkillEvent.SKILL_CANCEL);
 				}
 				MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_ATTACK_HARD);
-				if (MainRoleManager.actor.stateMachine.isTripleLockCaseSpell) 
-				{
-					MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_TRIPLE_ATTACK_LOCK);
-				}
+				
 				if (MainRoleManager.actor.stateMachine.isPrewarWaiting)
 					MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_PREWAR,null,true);
 				else

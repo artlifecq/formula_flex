@@ -3,6 +3,7 @@ package com.rpgGame.app.state.role.control
 	import com.game.engine3D.state.IState;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateMachine;
+	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.state.role.control.ControlState;
 	import com.rpgGame.coreData.type.RoleStateType;
 	
@@ -11,6 +12,8 @@ package com.rpgGame.app.state.role.control
 	import gs.TweenLite;
 	import gs.easing.Cubic;
 	import gs.easing.Linear;
+	
+	import org.client.mainCore.manager.EventManager;
 
 	/**
 	 *
@@ -39,6 +42,7 @@ package com.rpgGame.app.state.role.control
 		override public function execute() : void
 		{
 			super.execute();
+			
 			_stateReference = null;
 			if (_ref is JumpRiseStateReference)
 			{
@@ -104,6 +108,7 @@ package com.rpgGame.app.state.role.control
 				else//有目的点的位移不用切换到 run
 				{
 					transition(RoleStateType.ACTION_IDLE);
+					EventManager.dispatchEvent(MapEvent.MAP_JUMP_COMPLETE);// 用于有跳跃点的寻路 继续跑
 				}
 			}
 		}
@@ -123,11 +128,11 @@ package com.rpgGame.app.state.role.control
 			if (_machine && !_machine.isInPool)
 			{
 				(_machine.owner as SceneRole).offsetZ = 0;
-				if(_destPoint)
+				/*if(_destPoint)
 				{
 					_machine.owner.x=_destPoint.x;
 					_machine.owner.z=_destPoint.z;
-				}
+				}*/
 				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {x:true,z:true,offsetZ: true});
 			}
 		}
