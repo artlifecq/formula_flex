@@ -460,7 +460,7 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				killButList[i].visible=false;
 			}
-			var text:String="回复:<u>"+MonsterDataManager.getMonsterName(npcid)+"</u>";
+			var text:String="<font color='#eaeabc'>回复：</font><u>"+MonsterDataManager.getMonsterName(npcid)+"</u>";
 			TaskUtil.setGotargetLabelText(TaskType.MAINTYPE_MAINTASK,killButList[0],text);
 			setUisite();
 		}
@@ -479,7 +479,7 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				killButList[i].visible=false;
 			}
-			var text:String="回复:<u>"+MonsterDataManager.getMonsterName(npcid)+"</u>";
+			var text:String="<font color='#eaeabc'>回复：</font><u>"+MonsterDataManager.getMonsterName(npcid)+"</u>";
 			TaskUtil.setGotargetLabelText(TaskType.MAINTYPE_MAINTASK,killButList[0],text);
 			setUisite();*/
 		}

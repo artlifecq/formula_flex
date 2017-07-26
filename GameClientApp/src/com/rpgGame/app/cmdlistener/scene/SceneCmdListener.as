@@ -551,7 +551,6 @@ package com.rpgGame.app.cmdlistener.scene
 			{
 				var elapseTm : int = SystemTimeManager.curtTm - mInfo.startTm;
 				//trace("寻路开始时间：" + mInfo.startTm, "_差值：" + elapseTm + "_服务器时间 ：" + SystemTimeManager.curtTm);
-				Lyt.a("%%%%收到走路信息了%%%%%");
 				RoleStateUtil.walkByInfos(mInfo);
 				
 				//调试bug用，可以删除！！！！

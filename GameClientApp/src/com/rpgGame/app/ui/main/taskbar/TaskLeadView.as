@@ -247,7 +247,7 @@ package com.rpgGame.app.ui.main.taskbar
 		private function setSubbutView(npcid:int):void
 		{
 			hideKillBut();
-			var text:String="回复:<u>"+MonsterDataManager.getMonsterName(npcid)+"</u><font color='#55bd15'>(已完成)</font>";
+			var text:String="<font color='#eaeabc'>回复：</font><u>"+MonsterDataManager.getMonsterName(npcid)+"</u><font color='#55bd15'>(已完成)</font>";
 			TaskUtil.setGotargetLabelText(1,killButList[0],text);
 			
 		}
