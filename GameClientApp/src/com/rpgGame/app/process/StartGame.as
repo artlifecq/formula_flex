@@ -36,6 +36,7 @@ package com.rpgGame.app.process
     import com.rpgGame.app.ui.tips.JiXianPanelTip;
     import com.rpgGame.app.ui.tips.LostSkillTip;
     import com.rpgGame.app.ui.tips.MapAreaTip;
+    import com.rpgGame.app.ui.tips.MeiRenGuiZeTip;
     import com.rpgGame.app.ui.tips.MeridainPointTip;
     import com.rpgGame.app.ui.tips.MountBeastCardTip;
     import com.rpgGame.app.ui.tips.MountSpellTips;
@@ -241,6 +242,8 @@ package com.rpgGame.app.process
 			TipManager.registerTipsParserClass(TipType.TWOER_TIP,NineTowerTipExt);
 			TipManager.registerTipsParserClass(TipType.VIP_LEVEL_TIP,VipMoTipExt);
 			TipManager.registerTipsParserClass(TipType.VIP_NONE_TIP,VipNoneTipExt);
+			
+			TipManager.registerTipsParserClass(TipType.MEIREN_GUIZE_TIP,MeiRenGuiZeTip);
 		}
 
 		private function onSwitchCmp() : void

@@ -26,6 +26,8 @@ package com.rpgGame.appModule.hubao
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
+	import flash.utils.getTimer;
+	
 	import away3d.events.Event;
 	
 	import feathers.controls.SkinnableContainer;
@@ -348,42 +350,50 @@ package com.rpgGame.appModule.hubao
 					break;
 				}			
 			}
+			_time=getTimer()+_interval;
 		}
 		
+		private var _interval:int=50;
+		private var _time:int=0;
 		private function onRotaion1(e:Event):void
 		{
-			if(_moxing1)
+			if(_moxing1&&_time<getTimer())
 			{
 				_moxing1.baseObj3D.rotationY+=10;
+				_time=getTimer()+_interval;
 			}
 		}
 		
 		private function onRotaion2(e:Event):void
 		{
-			if(_moxing2)
+			if(_moxing2&&_time<getTimer())
 			{
 				_moxing2.baseObj3D.rotationY+=10;
+				_time=getTimer()+_interval;
 			}
 		}
 		
 		private function onRotaion3(e:Event):void
 		{
-			if(_moxing3)
+			if(_moxing3&&_time<getTimer())
 			{
 				_moxing3.baseObj3D.rotationY+=10;
+				_time=getTimer()+_interval;
 			}
 		}
 		
 		private function onRotaion4(e:Event):void
 		{
-			if(_moxing4)
+			if(_moxing4&&_time<getTimer())
 			{
 				_moxing4.baseObj3D.rotationY+=10;
+				_time=getTimer()+_interval;
 			}
 		}
 		
 		private function clearChenHaoEff():void
 		{
+			_time=0;
 			_chenhaoEftContaner1.removeChild3D(_chenhaoEft);
 			_chenhaoEftContaner1.removeChild3D(_diEft);
 			_chenhaoEftContaner2.removeChild3D(_chenhaoEft);

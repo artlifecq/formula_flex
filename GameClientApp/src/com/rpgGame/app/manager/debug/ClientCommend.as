@@ -288,7 +288,7 @@ package   com.rpgGame.app.manager.debug
 			});
 			commandList.put( ".pet", function (...arg):void
 			{
-				AppManager.showApp(AppConstant.RANKLISTPANLE);
+				AppManager.showApp(AppConstant.PET_PANLE);
 				//				var mod:int = arg[0];
 				//				
 				//				var petInfo:PetInfo=new PetInfo();
