@@ -22,12 +22,10 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(148105,  Mgr.petMgr.ResPetListHandler);
 			SocketConnection.addCmdListener(148109,  Mgr.petMgr.ResPetChangeHandler);
 			SocketConnection.addCmdListener(148110, Mgr.petMgr.ResPetUpResultHandler);
-			
+			SocketConnection.addCmdListener(148111, Mgr.petMgr.resPetZoneResultHandler);
+			SocketConnection.addCmdListener(148112, Mgr.petMgr.resExtraBuyHandler);
 			
 			finish();
 		}
-		
-		
-		
 	}
 }

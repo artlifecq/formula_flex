@@ -136,7 +136,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_fightsoul_path:String = "data.Q_fightsoul_path";
 		/**  美人基本信息数据库																								 */
 		public static const Q_girl_advance:String = "data.Q_girl_advance";
-		/**  美人基本信息数据库												 */
+		/**  美人基本信息数据库									前端显示对应关卡战斗力				 */
 		public static const Q_girl_pet:String = "data.Q_girl_pet";
 		/**  全局变量表		 */
 		public static const Q_global:String = "data.Q_global";
@@ -196,7 +196,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_nine_tower:String = "data.Q_nine_tower";
 		/**  通知列表			 */
 		public static const Q_notify:String = "data.Q_notify";
-		/**  排行榜称号			 */
+		/**  排行榜称号							 */
 		public static const Q_rank_designation:String = "data.Q_rank_designation";
 		/**  红包配置		 */
 		public static const Q_redreward:String = "data.Q_redreward";

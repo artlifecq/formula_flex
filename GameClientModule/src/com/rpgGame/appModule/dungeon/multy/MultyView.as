@@ -166,6 +166,7 @@ package com.rpgGame.appModule.dungeon.multy
 			setPassRewardText();
 			changeTeamItem();
 			gainReward();
+			creatGlobalReward();
 		}
 		override public function hide():void
 		{

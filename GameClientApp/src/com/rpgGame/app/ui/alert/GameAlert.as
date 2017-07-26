@@ -218,8 +218,8 @@ package com.rpgGame.app.ui.alert
 				}
 			}
 			if(gameAlert.lbTip){
-				gameAlert.lbTip.y=50+(125-gameAlert.lbTip.textHeight)/2;
-				gameAlert.lbTip.x=(330-gameAlert.lbTip.textWidth)/2
+				gameAlert.lbTip.y=50+(124-gameAlert.lbTip.textHeight)/2;
+//				gameAlert.lbTip.x=(330-gameAlert.lbTip.textWidth)/2
 			}
 		}		
 		

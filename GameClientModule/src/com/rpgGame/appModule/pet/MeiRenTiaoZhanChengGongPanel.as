@@ -22,6 +22,8 @@ package com.rpgGame.appModule.pet
 	import com.rpgGame.netData.pet.bean.PetInfo;
 	import com.rpgGame.netData.pet.message.ResPetZoneResultMessage;
 	
+	import flash.events.MouseEvent;
+	
 	import feathers.controls.UIAsset;
 	
 	import org.mokylin.skin.app.meiren.BtnTiaoZhan;
@@ -76,7 +78,9 @@ package com.rpgGame.appModule.pet
 		
 		public override function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
+			//			_skin.btn_next.addEventListener(MouseEvent.CLICK,onMouseclickHandler);
 			super.show();
+			
 			_msg=data as ResPetZoneResultMessage;
 			_info=Mgr.petMgr.getPet(_msg.petId);
 			showZoneBall(_msg.level);
@@ -90,6 +94,7 @@ package com.rpgGame.appModule.pet
 		override protected function onHide():void
 		{
 			super.onHide();
+			//			_skin.btn_next.removeEventListener(MouseEvent.CLICK,onMouseclickHandler);
 			clearPanel();
 		}
 		
@@ -97,7 +102,7 @@ package com.rpgGame.appModule.pet
 		{
 			super.onTouchTarget(target);
 			switch(target){
-				case _skin.btn_next:
+				case (_skin.btn_next.skin as BtnTiaoZhan).btnBg:
 					toNextMessage();
 					break;
 			}			
@@ -107,8 +112,8 @@ package com.rpgGame.appModule.pet
 		private function initModEff():void
 		{
 			_avatar=new InterAvatar3D();
-			_avatar.x = 166;
-			_avatar.y =121;
+			_avatar.x = 270;
+			_avatar.y =360;
 			_modContaner.addChild3D(_avatar);
 			_avatarData=new RoleData(0);
 			
@@ -125,6 +130,11 @@ package com.rpgGame.appModule.pet
 			this._avatar.curRole.stateMachine.transition(RoleStateType.ACTION_SHOW);
 		}
 		
+		private function onMouseclickHandler(e:MouseEvent):void
+		{
+			toNextMessage();
+		}
+		
 		private function toNextMessage():void
 		{
 			PetSender.reqEnterNextLevelMessage(_msg.zoneModelId);
@@ -133,24 +143,32 @@ package com.rpgGame.appModule.pet
 		
 		private function showPrize():void
 		{
-			var q_girl_pet:Q_girl_pet=PetCfg.getPet(_msg.petId);
-			var arr:Array=JSONUtil.decode(q_girl_pet.q_zone_reward);
-			arr=arr[(_msg.level-1)]; 
-			if(arr is Array)
+			if(_info.passlevel<_msg.level)
 			{
-				for(var i:int=0;i<_items.length;i++)
+				var q_girl_pet:Q_girl_pet=PetCfg.getPet(_msg.petId);
+				var arr:Array=JSONUtil.decode(q_girl_pet.q_zone_reward);
+				arr=arr[(_msg.level-1)]; 
+				if(arr is Array)
 				{
-					if(i<arr.length)
+					for(var i:int=0;i<_items.length;i++)
 					{
-						var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(arr[i].mod,arr[i].num);
-						FaceUtil.SetItemGrid(_items[i],itemInfo);
-						_items[i].visible=true;
-					}
-					else
-					{
-						_items[i].visible=false;
+						if(i<arr.length)
+						{
+							var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(arr[i].mod,arr[i].num);
+							FaceUtil.SetItemGrid(_items[i],itemInfo);
+							_items[i].visible=true;
+						}
+						else
+						{
+							_items[i].visible=false;
+						}
 					}
 				}
+				_skin.grpIcon1.visible=true;
+			}
+			else
+			{
+				_skin.grpIcon1.visible=false;
 			}
 		}
 		

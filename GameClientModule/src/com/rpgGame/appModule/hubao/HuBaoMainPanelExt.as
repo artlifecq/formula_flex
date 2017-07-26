@@ -4,6 +4,7 @@ package com.rpgGame.appModule.hubao
 	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
+	import com.game.mainCore.core.timer.GameTimer;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.HuBaoManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
@@ -67,11 +68,15 @@ package com.rpgGame.appModule.hubao
 		
 		private var _q_con:Q_convoy;
 		
+		private var timer:GameTimer;
+		
 		public function HuBaoMainPanelExt()
 		{
 			_skin=new HuBao_Skin();
 			super(_skin);
 			initView();
+			timer=new GameTimer("HuBaoMainPanelExt",50,0,ontimer);
+			timer.stop();
 		}
 		
 		private function initView():void
@@ -194,6 +199,7 @@ package com.rpgGame.appModule.hubao
 		override public function hide():void
 		{
 			super.hide();
+			if(timer) timer.stop();
 			_skin.btnTiSheng.removeEventListener(Event.TRIGGERED,btnTiShengHandler);
 			_skin.btnHuSong.removeEventListener(Event.TRIGGERED,btnHuSongHandler);
 			EventManager.removeEvent(HuBaoEvent.HUBAO_UPDATEPINZHI,updateNowSelectBaoWu);
@@ -325,75 +331,43 @@ package com.rpgGame.appModule.hubao
 				{
 					_chenhaoEft = _chenhaoEftContaner1.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,50,0);
 					_diEft = _chenhaoEftContaner1.playInter3DAt(ClientConfig.getEffect("tx_ui_yabiao_xuanzhong"),100,300,0);
-					_moxing1.addEventListener(Event.ENTER_FRAME,onRotaion1);
+					_traget=_moxing1;
 					break;
 				}
 				case 2:
 				{
 					_chenhaoEft = _chenhaoEftContaner2.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,50,0);
 					_diEft = _chenhaoEftContaner2.playInter3DAt(ClientConfig.getEffect("tx_ui_yabiao_xuanzhong"),100,300,0);
-					_moxing2.addEventListener(Event.ENTER_FRAME,onRotaion2);
+					_traget=_moxing2;
 					break;
 				}
 				case 3:
 				{
 					_chenhaoEft = _chenhaoEftContaner3.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,50,0);
 					_diEft = _chenhaoEftContaner3.playInter3DAt(ClientConfig.getEffect("tx_ui_yabiao_xuanzhong"),100,300,0);
-					_moxing3.addEventListener(Event.ENTER_FRAME,onRotaion3);
+					_traget=_moxing3;
 					break;
 				}
 				case 4:
 				{
 					_chenhaoEft = _chenhaoEftContaner4.playInter3DAt(ClientConfig.getEffect(_q_con.q_nameurl),100,50,0);
 					_diEft = _chenhaoEftContaner4.playInter3DAt(ClientConfig.getEffect("tx_ui_yabiao_xuanzhong"),100,300,0);
-					_moxing4.addEventListener(Event.ENTER_FRAME,onRotaion4);				
+					_traget=_moxing4;
 					break;
 				}			
 			}
-			_time=getTimer()+_interval;
+			timer.start();
 		}
 		
-		private var _interval:int=50;
-		private var _time:int=0;
-		private function onRotaion1(e:Event):void
+		private var _traget:InterObject3D;
+		private function ontimer():void
 		{
-			if(_moxing1&&_time<getTimer())
-			{
-				_moxing1.baseObj3D.rotationY+=10;
-				_time=getTimer()+_interval;
-			}
-		}
-		
-		private function onRotaion2(e:Event):void
-		{
-			if(_moxing2&&_time<getTimer())
-			{
-				_moxing2.baseObj3D.rotationY+=10;
-				_time=getTimer()+_interval;
-			}
-		}
-		
-		private function onRotaion3(e:Event):void
-		{
-			if(_moxing3&&_time<getTimer())
-			{
-				_moxing3.baseObj3D.rotationY+=10;
-				_time=getTimer()+_interval;
-			}
-		}
-		
-		private function onRotaion4(e:Event):void
-		{
-			if(_moxing4&&_time<getTimer())
-			{
-				_moxing4.baseObj3D.rotationY+=10;
-				_time=getTimer()+_interval;
-			}
+			if(_traget) _traget.baseObj3D.rotationY+=8;
 		}
 		
 		private function clearChenHaoEff():void
 		{
-			_time=0;
+			timer.stop();
 			_chenhaoEftContaner1.removeChild3D(_chenhaoEft);
 			_chenhaoEftContaner1.removeChild3D(_diEft);
 			_chenhaoEftContaner2.removeChild3D(_chenhaoEft);
@@ -402,10 +376,6 @@ package com.rpgGame.appModule.hubao
 			_chenhaoEftContaner3.removeChild3D(_diEft);
 			_chenhaoEftContaner4.removeChild3D(_chenhaoEft);
 			_chenhaoEftContaner4.removeChild3D(_diEft);
-			_moxing1.removeEventListener(Event.ENTER_FRAME,onRotaion1);
-			_moxing2.removeEventListener(Event.ENTER_FRAME,onRotaion2);
-			_moxing3.removeEventListener(Event.ENTER_FRAME,onRotaion3);
-			_moxing4.removeEventListener(Event.ENTER_FRAME,onRotaion4);
 			_moxing1.baseObj3D.rotationY=0;
 			_moxing2.baseObj3D.rotationY=0;
 			_moxing3.baseObj3D.rotationY=0;
@@ -448,6 +418,7 @@ package com.rpgGame.appModule.hubao
 		private function close():void
 		{
 			MCUtil.removeSelf(this);
+			if(timer) timer.stop();
 		}
 	}
 }

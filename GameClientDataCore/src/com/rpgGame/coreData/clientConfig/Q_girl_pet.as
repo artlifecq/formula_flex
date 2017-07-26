@@ -30,6 +30,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_zones_id:int;
 		 /**  副本关卡总数 */
 		public var q_need_zone:int;
+		 /**    */
+		public var q_need_power:String;
 		 /**  关卡对应奖励 */
 		public var q_zone_reward:String;
 		 /**  每关挑战时间(秒) */

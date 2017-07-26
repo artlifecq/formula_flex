@@ -2,8 +2,6 @@ package com.rpgGame.appModule.dungeon.exp
 {
 	import com.rpgGame.app.manager.DailyZoneDataManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.ui.SkinUIModePanel;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
@@ -11,7 +9,6 @@ package com.rpgGame.appModule.dungeon.exp
 	import com.rpgGame.coreData.clientConfig.Q_daily_zone;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ItemUtil;
-	import com.rpgGame.coreData.type.item.GridBGType;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.dailyzone.bean.DailyZonePanelInfo;
 	
@@ -46,7 +43,7 @@ package com.rpgGame.appModule.dungeon.exp
 			for(var i:int = 0;i<length;i++)
 			{
 				var grid:IconCDFace = IconCDFace.create(IcoSizeEnum.ICON_48);
-				grid.setUrlBg( "ui/common/gezikuang/tubiaodikuang/48.png");
+//				grid.setUrlBg( "ui/common/gezikuang/tubiaodikuang/48.png");
 				_skin.container.addChild(grid);
 				grid.x = startX+60*i;
 				grid.y = 507;
