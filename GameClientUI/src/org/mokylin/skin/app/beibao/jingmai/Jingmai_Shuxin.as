@@ -2,10 +2,8 @@ package org.mokylin.skin.app.beibao.jingmai
 {
 	import feathers.controls.Button;
 	import feathers.controls.Group;
-	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.app.beibao.jingmai.Shuxing_Item;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
 
 	/**
@@ -25,10 +23,6 @@ package org.mokylin.skin.app.beibao.jingmai
 		public var grpBianShi:feathers.controls.Group;
 
 		public var grpXueWei:feathers.controls.Group;
-
-		public var skin1_1:feathers.controls.SkinnableContainer;
-
-		public var skin2_1:feathers.controls.SkinnableContainer;
 
 
 		//==========================================================================
@@ -187,7 +181,6 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.width = 228;
 			temp.x = 31;
 			temp.y = 304;
-			temp.elementsContent = [skin2_1_i()];
 			return temp;
 		}
 
@@ -198,31 +191,6 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.name = "grpXueWei";
 			temp.x = 31;
 			temp.y = 87;
-			temp.elementsContent = [skin1_1_i()];
-			return temp;
-		}
-
-		private function skin1_1_i():feathers.controls.SkinnableContainer
-		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			skin1_1 = temp;
-			temp.name = "skin1_1";
-			var skin:StateSkin = new org.mokylin.skin.app.beibao.jingmai.Shuxing_Item()
-			temp.skin = skin
-			temp.x = 0;
-			temp.y = 3;
-			return temp;
-		}
-
-		private function skin2_1_i():feathers.controls.SkinnableContainer
-		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			skin2_1 = temp;
-			temp.name = "skin2_1";
-			var skin:StateSkin = new org.mokylin.skin.app.beibao.jingmai.Shuxing_Item()
-			temp.skin = skin
-			temp.x = 0;
-			temp.y = 3;
 			return temp;
 		}
 

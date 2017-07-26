@@ -31,12 +31,15 @@ package com.rpgGame.appModule.jingmai
 		private var _totalJHash:HashMap=new HashMap();
 		private var labArr:Array=[];
 		private var pool:Array=[];
+		private var _cxHash:HashMap;//值都是0
+		private var _stoneHash:HashMap;
 		public function MeridianAttrViewPanelExt(uiNum:UINumber)
 		{
 			_skin=new Jingmai_Shuxin();
 			super(_skin);
-			MCUtil.removeSelf(_skin.skin1_1);
-			MCUtil.removeSelf(_skin.skin2_1);
+			
+			_cxHash=AttValueConfig.getAttrHash(120101);
+			_stoneHash=AttValueConfig.getAttrHash(120102);
 			this._fightPower=uiNum;
 			Mgr.meridianMgr.addEventListener(MeridianEvent.ALL_DATA_UPATE,onUpdateAll);
 			Mgr.meridianMgr.addEventListener(MeridianEvent.MERIDIAN_CHANGE,onMeridianChange);
@@ -89,21 +92,23 @@ package com.rpgGame.appModule.jingmai
 			{
 				MCUtil.mergeValueHashMap(tmpC,_totalCHash.getValue(key));
 			}
+			MCUtil.mergeValueHashMap(tmpC,_cxHash);
 			keys=_totalJHash.keys();
 			for each (var key2:int in keys) 
 			{
 				MCUtil.mergeValueHashMap(tmpJ,_totalJHash.getValue(key2))
 			}
+			MCUtil.mergeValueHashMap(tmpJ,_stoneHash);
 			for each (var lab:JinMaiAttrExt in labArr) 
 			{
 				MCUtil.removeSelf(lab);
 			}
 			pool=pool.concat(labArr);
 			labArr.length=0;
-			var startPos:Point=new Point(_skin.skin1_1.x,_skin.skin1_1.y);
-			labArr=labArr.concat(AttrUtil.showAttrByItem(tmpC,this._skin.grpXueWei,JinMaiAttrExt,1,startPos,_skin.skin1_1.width,_skin.skin1_1.height+5,pool));
-			startPos.y=_skin.skin2_1.y;
-			labArr=labArr.concat(AttrUtil.showAttrByItem(tmpJ,this._skin.grpBianShi,JinMaiAttrExt,1,startPos,_skin.skin1_1.width,_skin.skin1_1.height+5,pool));
+			var startPos:Point=new Point(0,0);
+			labArr=labArr.concat(AttrUtil.showAttrByItem(tmpC,this._skin.grpXueWei,JinMaiAttrExt,1,startPos,228,24+5,pool));
+			startPos.y=0;
+			labArr=labArr.concat(AttrUtil.showAttrByItem(tmpJ,this._skin.grpBianShi,JinMaiAttrExt,1,startPos,228,24+5,pool));
 			_fightPower.number=FightValueUtil.calFightPowerByHash(tmpC,MainRoleManager.actorInfo.job)+FightValueUtil.calFightPowerByHash(tmpJ,MainRoleManager.actorInfo.job);
 		}
 		protected function onUpdateAll(event:MeridianEvent):void

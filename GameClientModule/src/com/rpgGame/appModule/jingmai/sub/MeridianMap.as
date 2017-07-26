@@ -45,7 +45,9 @@ package com.rpgGame.appModule.jingmai.sub
 			var key:int;
 			var tmpArr:Array;
 			var posA:Array;
-			var next:UIAsset;
+			//var next:UIAsset;
+			var pre:UIAsset;
+			var preConfig:Q_meridian;
 			var centerPos:Point;
 			var tmpC:Q_meridian;
 			var drawLine:MeridianMapLine;
@@ -55,20 +57,27 @@ package com.rpgGame.appModule.jingmai.sub
 				tmpPoint=_stateSkin["ico"+(1+i)];
 				pointBG=_stateSkin["icd"+(1+i)];
 				tmpC=configList[i];
-				if (_stateSkin.hasOwnProperty("ico"+(2+i))) 
+				//if (_stateSkin.hasOwnProperty("ico"+(2+i))) 
+				if (_stateSkin.hasOwnProperty("ico"+(i))&&i>0) 
 				{
-					next=_stateSkin["icd"+(2+i)];
-					if (next) 
+					//next=_stateSkin["icd"+(2+i)];
+					pre=_stateSkin["icd"+(i)];
+					preConfig=configList[i-1];
+					//if (next)
+					if (pre)
 					{
-						posA=[new Point(pointBG.x+24,pointBG.y+24)];
-						
+						//posA=[new Point(pointBG.x+24,pointBG.y+24)];
+						posA=[new Point(pre.x+24,pre.y+24)];
 						//有中间拐点
-						if (tmpC.q_coord!=null&&tmpC.q_coord!="") 
+						//if (tmpC.q_coord!=null&&tmpC.q_coord!="") 
+						if (preConfig.q_coord!=null&&preConfig.q_coord!="") 
 						{
-							var coodA:Array=tmpC.q_coord.split(",");
+							//var coodA:Array=tmpC.q_coord.split(",");
+							var coodA:Array=preConfig.q_coord.split(",");
 							posA.push(new Point(int(coodA[0])+24,int(coodA[1])+24));
 						}
-						posA.push(new Point(next.x+24,next.y+24));
+						//posA.push(new Point(next.x+24,next.y+24));
+						posA.push(new Point(pointBG.x+24,pointBG.y+24));
 						drawLine=new MeridianMapLine("ui/app/beibao/jingmai/line/lang/"+meridianId+".png","ui/app/beibao/jingmai/line/an/"+meridianId+".png",posA);
 						linesContianer.addChild(drawLine);
 					}

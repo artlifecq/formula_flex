@@ -440,7 +440,7 @@ package com.rpgGame.appModule.jingmai.sub
 										return;
 									}
 								}
-								AppManager.showApp(AppConstant.JINGMAI_STONE);
+								AppManager.showApp(AppConstant.JINGMAI_STONE,config.q_stone_type);
 								//NoticeManager.mouseFollowNotify(NotifyCfgData.getNotifyTextByID(7017));
 							}
 						}

@@ -414,7 +414,7 @@ package com.rpgGame.app.ui.tips
 			startY+=_skin.uiName2.height+2;
 			_skin.imgStone.y=startY;
 			_skin.imgStone.styleName="ui/app/beibao/icons/bianshi/5/"+qAcu.q_stone_type+".png";
-			_skin.lb_Stone.y=startY;
+			_skin.lb_Stone.y=startY+4;
 			_skin.lb_Stone.htmlText=_initStr.replace("$",HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,EnumMStoneType.getStoneTypeName(qAcu.q_stone_type)));
 			startY+=Math.max(_skin.lb_Stone.height,_skin.imgStone.height)+2;
 			//满级

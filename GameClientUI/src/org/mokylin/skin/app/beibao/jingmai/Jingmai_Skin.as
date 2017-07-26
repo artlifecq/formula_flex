@@ -113,7 +113,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.text = "显示加成总属性";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 773;
+			temp.x = 798;
 			temp.y = 97;
 			return temp;
 		}
@@ -166,7 +166,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			btnClose = temp;
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_zuo;
-			temp.x = 877;
+			temp.x = 902;
 			temp.y = 96;
 			return temp;
 		}
@@ -177,7 +177,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			btnOpen = temp;
 			temp.name = "btnOpen";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_you;
-			temp.x = 877;
+			temp.x = 902;
 			temp.y = 95;
 			return temp;
 		}
