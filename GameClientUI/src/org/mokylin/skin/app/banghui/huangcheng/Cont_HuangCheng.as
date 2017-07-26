@@ -4,8 +4,8 @@ package org.mokylin.skin.app.banghui.huangcheng
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import org.mokylin.skin.app.banghui.wangcheng.WangChengInfo_Item;
 	import org.mokylin.skin.app.banghui.wangcheng.WangCheng_BaoXiang;
-	import org.mokylin.skin.app.banghui.wangcheng.ZhengBaVsNameItemSkin;
 
 	/**
 	 * @private
@@ -159,8 +159,8 @@ package org.mokylin.skin.app.banghui.huangcheng
 			var skin:StateSkin = new org.mokylin.skin.app.banghui.wangcheng.WangCheng_BaoXiang()
 			temp.skin = skin
 			temp.width = 154;
-			temp.x = 313;
-			temp.y = 165;
+			temp.x = 284;
+			temp.y = 176;
 			return temp;
 		}
 
@@ -169,12 +169,12 @@ package org.mokylin.skin.app.banghui.huangcheng
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			skinName1 = temp;
 			temp.name = "skinName1";
-			temp.height = 49;
-			var skin:StateSkin = new org.mokylin.skin.app.banghui.wangcheng.ZhengBaVsNameItemSkin()
+			temp.height = 24;
+			var skin:StateSkin = new org.mokylin.skin.app.banghui.wangcheng.WangChengInfo_Item()
 			temp.skin = skin
 			temp.width = 187;
 			temp.x = 0;
-			temp.y = -2;
+			temp.y = 21;
 			return temp;
 		}
 
@@ -183,12 +183,12 @@ package org.mokylin.skin.app.banghui.huangcheng
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			skinName2 = temp;
 			temp.name = "skinName2";
-			temp.height = 47;
-			var skin:StateSkin = new org.mokylin.skin.app.banghui.wangcheng.ZhengBaVsNameItemSkin()
+			temp.height = 24;
+			var skin:StateSkin = new org.mokylin.skin.app.banghui.wangcheng.WangChengInfo_Item()
 			temp.skin = skin
 			temp.width = 187;
-			temp.x = -29;
-			temp.y = 1;
+			temp.x = -26;
+			temp.y = 21;
 			return temp;
 		}
 
@@ -197,12 +197,12 @@ package org.mokylin.skin.app.banghui.huangcheng
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			skinName3 = temp;
 			temp.name = "skinName3";
-			temp.height = 45;
-			var skin:StateSkin = new org.mokylin.skin.app.banghui.wangcheng.ZhengBaVsNameItemSkin()
+			temp.height = 24;
+			var skin:StateSkin = new org.mokylin.skin.app.banghui.wangcheng.WangChengInfo_Item()
 			temp.skin = skin
 			temp.width = 187;
 			temp.x = -1;
-			temp.y = 2;
+			temp.y = 21;
 			return temp;
 		}
 
@@ -211,12 +211,12 @@ package org.mokylin.skin.app.banghui.huangcheng
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			skinName4 = temp;
 			temp.name = "skinName4";
-			temp.height = 45;
-			var skin:StateSkin = new org.mokylin.skin.app.banghui.wangcheng.ZhengBaVsNameItemSkin()
+			temp.height = 24;
+			var skin:StateSkin = new org.mokylin.skin.app.banghui.wangcheng.WangChengInfo_Item()
 			temp.skin = skin
 			temp.width = 187;
 			temp.x = -8;
-			temp.y = 138;
+			temp.y = 137;
 			return temp;
 		}
 
@@ -226,7 +226,7 @@ package org.mokylin.skin.app.banghui.huangcheng
 			skinName = temp;
 			temp.name = "skinName";
 			temp.height = 24;
-			var skin:StateSkin = new org.mokylin.skin.app.banghui.wangcheng.ZhengBaVsNameItemSkin()
+			var skin:StateSkin = new org.mokylin.skin.app.banghui.wangcheng.WangChengInfo_Item()
 			temp.skin = skin
 			temp.width = 187;
 			temp.x = 102;

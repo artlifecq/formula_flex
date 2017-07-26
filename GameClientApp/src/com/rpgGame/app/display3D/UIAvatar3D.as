@@ -132,7 +132,7 @@ package com.rpgGame.app.display3D
 		
 		private function onTouchTarget(target : DisplayObject) : void
 		{
-			if(touchZone==target){
+			if(touchZone==target&&this.role){
 				this.role.stateMachine.transition(RoleStateType.ACTION_SHOW);
 			}
 		}

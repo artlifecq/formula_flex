@@ -18,9 +18,33 @@ package com.rpgGame.coreData.enum
 		 * 王城
 		 */
 		public static const WANG_CHENG:int=4;
+		/**
+		 * 皇城
+		 */
+		public static const HUANG_CHENG:int=6;
 		
 		public function EnumCity()
 		{
+		}
+		
+		public static function getCityName(city):String
+		{
+			var name:String="";
+			switch(city){
+				case EnumCity.WANG_CHENG:
+					name="【大梁】";
+					break;
+				case EnumCity.XI_WEI:
+					name="【会稽】";
+					break;
+				case EnumCity.ZHONG_WEI:
+					name="【姑苏】";
+					break;
+				case EnumCity.DONG_WEI:
+					name="【曲阜】";
+					break;
+			}
+			return name;
 		}
 	}
 }

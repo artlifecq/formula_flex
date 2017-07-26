@@ -28,7 +28,7 @@ package com.rpgGame.app.ui.main.shortcut
 	{
 		private var _shortcutBar : ShortcutBar;
 		private const GRID_COUNT : int = 8;
-		private const  GUILD_LEADER_SKILL:int=2001;
+		private const  GUILD_LEADER_SKILL:int=8551;
 
 		private const SHORTCUTS_KEY : Array = ["1", "2", "3", "4","Q", "W", "E", "R","F1"];
 
