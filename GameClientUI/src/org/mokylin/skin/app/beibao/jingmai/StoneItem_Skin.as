@@ -5,7 +5,7 @@ package org.mokylin.skin.app.beibao.jingmai
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.component.button.ButtonSkin_Select;
+	import org.mokylin.skin.component.button.ButtonSelect_Skin;
 
 	/**
 	 * @private
@@ -18,6 +18,8 @@ package org.mokylin.skin.app.beibao.jingmai
 		//                                定义成员变量
 		//==========================================================================
 		public var Icon:feathers.controls.UIAsset;
+
+		public var bg:feathers.controls.UIAsset;
 
 		public var lbJiacheng:feathers.controls.Label;
 
@@ -34,9 +36,9 @@ package org.mokylin.skin.app.beibao.jingmai
 			super();
 			
 			this.currentState = "normal";
-			this.height = 36;
-			this.width = 370;
-			this.elementsContent = [Icon_i(),lbName_i(),lbJiacheng_i(),rdo_select_i(),__StoneItem_Skin_UIAsset2_i()];
+			this.height = 53;
+			this.width = 282;
+			this.elementsContent = [bg_i(),Icon_i(),lbName_i(),lbJiacheng_i(),rdo_select_i()];
 			
 			states = {
 			};
@@ -52,19 +54,22 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			Icon = temp;
 			temp.name = "Icon";
-			temp.styleName = "ui/app/beibao/jingmai/di_tubiao.png";
-			temp.x = 1;
-			temp.y = 1;
+			temp.styleName = "ui/app/beibao/icons/bianshi/hong/baoji.png";
+			temp.x = 14;
+			temp.y = 8;
 			return temp;
 		}
 
-		private function __StoneItem_Skin_UIAsset2_i():feathers.controls.UIAsset
+		private function bg_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/tips/xian2.png";
-			temp.width = 369;
+			bg = temp;
+			temp.name = "bg";
+			temp.height = 53;
+			temp.styleName = "ui/common/background/neikuang_2.png";
+			temp.width = 282;
 			temp.x = 0;
-			temp.y = 34;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -73,12 +78,12 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbJiacheng = temp;
 			temp.name = "lbJiacheng";
-			temp.text = "属性加成明细";
-			temp.color = 0xCFC6AE;
+			temp.htmlText = "暴击:<font color='#ffea00'>+0.60%</font>";
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 184;
-			temp.x = 177;
-			temp.y = 9;
+			temp.width = 108;
+			temp.x = 169;
+			temp.y = 18;
 			return temp;
 		}
 
@@ -87,12 +92,12 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbName = temp;
 			temp.name = "lbName";
-			temp.text = "砭石名称·1层 LV.3";
-			temp.color = 0x9D4AA8;
+			temp.text = "5级暴击砭石";
+			temp.color = 0xFF0D0D;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 137;
-			temp.x = 38;
-			temp.y = 9;
+			temp.width = 130;
+			temp.x = 50;
+			temp.y = 18;
 			return temp;
 		}
 
@@ -101,11 +106,11 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			rdo_select = temp;
 			temp.name = "rdo_select";
-			temp.height = 32;
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_Select;
-			temp.width = 366;
-			temp.x = 2;
-			temp.y = 2;
+			temp.height = 53;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSelect_Skin;
+			temp.width = 282;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 

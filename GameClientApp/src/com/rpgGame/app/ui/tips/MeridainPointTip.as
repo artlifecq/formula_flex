@@ -1,6 +1,7 @@
 package com.rpgGame.app.ui.tips
 {
 	import com.gameClient.utils.HashMap;
+	import com.rpgGame.app.manager.MeridianMgr;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.tips.cheats.TipUrl;
@@ -49,7 +50,7 @@ package com.rpgGame.app.ui.tips
 		}
 		private var _skin:Jingmai_Tips;
 		private var labList:Array;
-		private var _stoneIcon:BgIcon;
+		private var _stoneIcon:UIAsset;
 		private var _initStr:String;
 		private var _chacheData:*;
 		public function MeridainPointTip()
@@ -109,13 +110,19 @@ package com.rpgGame.app.ui.tips
 			//穴位名字
 			this._skin.lb_name.text=qAcu.q_name;
 			//未激活
-			this._skin.lb_jihuo.visible=false;
+			this._skin.lb_jihuo.visible=true;
 			var startY:int=this._skin.uiName1.y;
 			//this._skin.uiName1.y=startY;
 			startY+=this._skin.uiName1.height+2;
+			var startPos:Point;
+			var curAttrId:int;
+			var qAtt:Q_att_values;
+			var getTypeValueMap:HashMap;
+			var labs:Array;
+			//锁定或者未激活
 			if(serverData.level==0)
 			{
-				this._skin.lb_jihuo.visible=true;
+				this._skin.uiName1.visible=true;
 				var canActive:Boolean=Mgr.meridianMgr.getCanActive(serverData);
 				if (!canActive) 
 				{
@@ -126,91 +133,128 @@ package com.rpgGame.app.ui.tips
 				else
 				{
 					//冲穴
-					this._skin.lb_jihuo.text="未冲穴";
+					this._skin.lb_jihuo.text="未激活";
 				//	this._skin.uiName1.text="【冲穴条件】";
-					this._skin.uiName1.styleName=TipUrl.URL_ChongXue_Con;
+					this._skin.uiName1.styleName=TipUrl.URL_JiHuo_CON;
 				}
+				//激活条件
+				startY=createCondition(qAcu,startY);
+				this._skin.imgLine2.visible=true;
+				this._skin.imgLine2.y=startY;
+				startY+=_skin.imgLine2.height+2;
+				//激活属性
+				startPos=new Point(_skin.lb_shengming.x,startY);
+				curAttrId=qAcu.q_stone_attribute;
+				//如果是0级显示1级的属性
+				if (serverData.level==0) 
+				{
+					curAttrId=Mgr.meridianMgr.getNextLevelAcu(serverData).q_stone_attribute;
+				}
+				if (curAttrId!=0) 
+				{
+					_skin.uiName2.visible=true;
+					_skin.uiName2.y=startY;
+					startY+=_skin.uiName2.height+2;
+					//属性
+					//_skin.uiName2.text=canLevelUp?"【当前属性】":"【冲穴属性】";
+					_skin.uiName2.styleName=TipUrl.URL_JiHuo;
+					qAtt=AttValueConfig.getAttInfoById(curAttrId);
+					if (qAtt) 
+					{
+						startPos.y=startY;
+						getTypeValueMap= AttValueConfig.getTypeValueMap(qAtt);
+						labs=AttrUtil.showAttr(getTypeValueMap,this,_skin.lb_shengming,1,startPos,_skin.lb_shengming.width,_skin.lb_shengming.height+2);
+						labList=labList.concat(labs);
+					}
+					startY=startPos.y+2;
+				}
+				
 			}
+			//激活过了
 			else
 			{
 				//this._skin.uiName1.text="【升级条件】";
-				this._skin.uiName1.styleName=TipUrl.URL_ShengJi_CON;
-			}
-			var isMax:Boolean=Mgr.meridianMgr.isMaxAcuLevel(serverData);
-			//不是最高级
-			if (!isMax) 
-			{
-				startY=createCondition(qAcu,startY);
-			}
-			else
-			{
-				var lb:Label=clonelab(_skin.lb_shengming);
-				this.addChild(lb);
-				lb.y=startY;
-				startY+=lb.height+2;
-				lb.htmlText=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,"已达到最高层");
-				lb.width=lb.textWidth;
-				//
-			}
-			this._skin.imgLine1.y=startY;
-			startY+=_skin.imgLine1.height+2;
-			var canLevelUp:Boolean=Mgr.meridianMgr.getCanLevelUp(serverData);
-			_skin.uiName2.visible=false;
-			
-			var startPos:Point=new Point(_skin.lb_shengming.x,startY);
-			var curAttrId:int=qAcu.q_stone_attribute;
-			//如果是0级显示1级的属性
-			if (serverData.level==0) 
-			{
-				curAttrId=Mgr.meridianMgr.getNextLevelAcu(serverData).q_stone_attribute;
-			}
-			if (curAttrId!=0) 
-			{
-				_skin.uiName2.visible=true;
-				_skin.uiName2.y=startY;
-				startY+=_skin.uiName2.height+2;
-				//属性
-				//_skin.uiName2.text=canLevelUp?"【当前属性】":"【冲穴属性】";
-				_skin.uiName2.styleName=canLevelUp?TipUrl.URL_XiangQian:TipUrl.URL_ChongXue_Attr;
-				var qAtt:Q_att_values=AttValueConfig.getAttInfoById(curAttrId);
-				if (qAtt) 
-				{
-					startPos.y=startY;
-					var getTypeValueMap:HashMap = AttValueConfig.getTypeValueMap(qAtt);
-					var labs:Array=AttrUtil.showAttr(getTypeValueMap,this,_skin.lb_shengming,1,startPos,_skin.lb_shengming.width,_skin.lb_shengming.height+2);
-					labList=labList.concat(labs);
-				}
-				startY=startPos.y+2;
 				
-			}
-			//下一阶属性
-			if (canLevelUp) 
-			{
-				var nextTitle:UIAsset=cloneImg(_skin.uiName2);
-				nextTitle.y=startY;
-				startY+=nextTitle.height;
-				this.addChild(nextTitle);
-				nextTitle.styleName=TipUrl.URL_XiaCheng;
-				var nextMeri:Q_meridian=Mgr.meridianMgr.getNextLevelAcu(serverData);
-				if (nextMeri) 
+				
+				this._skin.lb_jihuo.text=serverData.level+"/"+MeridianCfg.getMaxLevel(serverData.MeridId,serverData.acuPointId)+"层";
+				var isMax:Boolean=Mgr.meridianMgr.isMaxAcuLevel(serverData);
+				//不是最高级
+				if (!isMax) 
 				{
-					var qAttNext:Q_att_values=AttValueConfig.getAttInfoById(nextMeri.q_stone_attribute);
-					var nexth:HashMap = AttValueConfig.getTypeValueMap(qAttNext);
-					startPos.y=startY;
-					var labsn:Array=AttrUtil.showAttr(nexth,this,_skin.lb_shengming,1,startPos,_skin.lb_shengming.width,_skin.lb_shengming.height+2);
-					labList=labList.concat(labsn);
-					startY=startPos.y+2;
+					this._skin.uiName1.styleName=TipUrl.URL_ShengJi_CON;
+					this._skin.uiName1.visible=true;
+					startY=createCondition(qAcu,startY);
+					this._skin.imgLine2.visible=true;
+					this._skin.imgLine2.y=startY;
+					startY+=_skin.imgLine2.height+2;
 				}
 				else
 				{
-					lb=clonelab(_skin.lb_shengming);
-					this.addChild(lb);
-					lb.text="无";
-					lb.y=startY;
-					startY+=lb.height+2;
+					this._skin.uiName1.visible=false;
+					this._skin.imgLine2.visible=false;
+					startY=_skin.uiName1.y;
+					//
 				}
-			
+				
+				_skin.uiName2.visible=false;
+				
+				startPos=new Point(_skin.lb_shengming.x,startY);
+				curAttrId=qAcu.q_stone_attribute;
+				//如果是0级显示1级的属性
+				if (serverData.level==0) 
+				{
+					curAttrId=Mgr.meridianMgr.getNextLevelAcu(serverData).q_stone_attribute;
+				}
+				if (curAttrId!=0) 
+				{
+					_skin.uiName2.visible=true;
+					_skin.uiName2.y=startY;
+					startY+=_skin.uiName2.height+2;
+					//属性
+					//_skin.uiName2.text=canLevelUp?"【当前属性】":"【冲穴属性】";
+					_skin.uiName2.styleName=TipUrl.URL_DangQian;
+					qAtt=AttValueConfig.getAttInfoById(curAttrId);
+					if (qAtt) 
+					{
+						startPos.y=startY;
+						getTypeValueMap = AttValueConfig.getTypeValueMap(qAtt);
+						labs=AttrUtil.showAttr(getTypeValueMap,this,_skin.lb_shengming,1,startPos,_skin.lb_shengming.width,_skin.lb_shengming.height+2);
+						labList=labList.concat(labs);
+					}
+					startY=startPos.y+2;
+					
+				}
+				
+				//下一阶属性
+				if (true) 
+				{
+					var nextTitle:UIAsset=cloneImg(_skin.uiName2);
+					nextTitle.y=startY;
+					startY+=nextTitle.height;
+					this.addChild(nextTitle);
+					nextTitle.styleName=TipUrl.URL_XiaCheng;
+					var nextMeri:Q_meridian=Mgr.meridianMgr.getNextLevelAcu(serverData);
+					if (nextMeri) 
+					{
+						var qAttNext:Q_att_values=AttValueConfig.getAttInfoById(nextMeri.q_stone_attribute);
+						var nexth:HashMap = AttValueConfig.getTypeValueMap(qAttNext);
+						startPos.y=startY;
+						var labsn:Array=AttrUtil.showAttr(nexth,this,_skin.lb_shengming,1,startPos,_skin.lb_shengming.width,_skin.lb_shengming.height+2);
+						labList=labList.concat(labsn);
+						startY=startPos.y+2;
+					}
+					else
+					{
+						var lb:Label=clonelab(_skin.lb_shengming);
+						this.addChild(lb);
+						lb.y=startY;
+						startY+=lb.height+2;
+						lb.htmlText=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,"已满级");
+						lb.width=lb.textWidth;
+					}
+				}
 			}
+			
 			//this._skin.imgBg.height=startY;
 		//	this.height=startY;
 			_skin.imgBg.height=startY+2;
@@ -249,7 +293,7 @@ package com.rpgGame.app.ui.tips
 						//冲穴
 						if (need.q_showtype==0) 
 						{
-							str=need.q_name+":"+qMer.q_prelvl;
+							str=need.q_name+":"+qMer.q_prelvl+"层";
 							isOk=needInfo.level>=need.q_prelvl;
 						}
 						else
@@ -295,58 +339,60 @@ package com.rpgGame.app.ui.tips
 			startY+=this._skin.uiName1.height+2;
 			//this._skin.uiName1.text="【砭石效果】";
 			this._skin.uiName1.styleName=TipUrl.URL_Stone;
+			this._skin.uiName1.visible=true;
 			var canActive:Boolean;
+			var isMaxStone:Boolean=false;
 			//奇穴等级一直为0,判断解锁没有
 			if (serverData.stone.length==0) 
 			{
-				this._skin.lb_jihuo.visible=true;
+				
 				canActive=Mgr.meridianMgr.getCanActive(serverData);
 				if (!canActive) 
 				{
 					this._skin.lb_jihuo.text="锁定";
+					this._skin.lb_jihuo.visible=true;
 					//this._skin.uiName1.text="【解锁条件】";
 					this._skin.uiName1.styleName=TipUrl.URL_JiHuo_CON;
 					startY=createCondition(qAcu,startY);
 				}
-				
+				_skin.imgLine2.visible=true;
+				_skin.imgLine2.y=startY;
+				startY+=_skin.imgLine2.height+2;
 				
 			}//激活了
-			//没镶嵌
+			//没镶嵌,不显示镶嵌效果
 			var lb:Label;
 			if(canActive&&serverData.stone.length==0)
 			{
-				//冲穴
 				this._skin.lb_jihuo.text="未镶嵌";
 				this._skin.lb_jihuo.visible=true;
-				lb=clonelab(_skin.lb_shengming);
-				this.addChild(lb);
-				lb.text="空";
-				lb.y=startY;
-				startY+=lb.height+2;
+				//冲穴
+				this._skin.uiName1.visible=false;
+				startY=_skin.uiName1.y;
+				_skin.imgLine2.visible=false;
 			}
 			else if(serverData.stone.length>0)
 			{
+				startY+=2;
 				//图标。
-				var citemInfo:ClientItemInfo=new ClientItemInfo(serverData.stone[0].itemModelId);
-				citemInfo.cfgId=serverData.stone[0].itemModelId;
-				citemInfo.itemInfo=serverData.stone[0];
-				stoneIcon.setIconResName(ClientConfig.getItemIcon(citemInfo.qItem.q_icon.toString(),IcoSizeEnum.ICON_48));
+				var qStone:Q_item=ItemConfig.getQItemByID(serverData.stone[0].itemModelId);
+				stoneIcon.styleName="ui/app/beibao/icons/bianshi/"+qStone.q_default+"/"+qAcu.q_stone_type+".png";
 				stoneIcon.x=this._skin.uiName1.x;
 				stoneIcon.y=startY;
 				this.addChild(stoneIcon);
 				labList.push(stoneIcon);
-				
+				isMaxStone=qStone.q_levelnum>=MeridianMgr.MAX_STONE_LV;
 				//名字
 				lb=clonelab(_skin.lb_shengming);
 				this.addChild(lb);
-				lb.color=ItemConfig.getItemQualityColor(citemInfo.cfgId);
-				lb.text=citemInfo.qItem.q_name;
+				lb.color=ItemConfig.getItemQualityColor(serverData.stone[0].itemModelId);
+				lb.text=qStone.q_name;
 				//lb.text="空";
-				lb.x=stoneIcon.x+stoneIcon.width+2;
+				lb.x=stoneIcon.x+35;
 				lb.y=stoneIcon.y+(stoneIcon.height-lb.height)/2;
 				startY+=stoneIcon.height+2;
 				//石头属性
-				var qAtt:Q_att_values=AttValueConfig.getAttInfoById(citemInfo.qItem.q_att_type);
+				var qAtt:Q_att_values=AttValueConfig.getAttInfoById(qStone.q_att_type);
 				var startPos:Point=new Point(lb.x,startY);
 				if (qAtt) 
 				{
@@ -355,9 +401,11 @@ package com.rpgGame.app.ui.tips
 					labList=labList.concat(labsn);
 				}
 				startY=startPos.y;
+				_skin.imgLine2.visible=true;
+				_skin.imgLine2.y=startY;
+				startY+=_skin.imgLine2.height+2;
 			}
-			_skin.imgLine1.y=startY;
-			startY+=_skin.imgLine1.height+2;
+			
 			//镶嵌说明
 			_skin.uiName2.y=startY;
 			_skin.uiName2.visible=true;
@@ -365,11 +413,23 @@ package com.rpgGame.app.ui.tips
 			_skin.uiName2.styleName=TipUrl.URL_XiangQian;
 			startY+=_skin.uiName2.height+2;
 			_skin.imgStone.y=startY;
-			
-			_skin.lb_Stone.y=startY;
-			_skin.lb_Stone.htmlText=_initStr.replace("$",HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,EnumMStoneType.getStoneTypeName(qAcu.q_stone_type)));
-			startY+=_skin.lb_Stone.height;
-			_skin.imgBg.height=startY+2;
+			_skin.imgStone.styleName="ui/app/beibao/icons/bianshi/5/"+qAcu.q_stone_type+".png";
+			_skin.lb_Stone.y=startY+4;
+			_skin.lb_Stone.htmlText=_initStr.replace("$",HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,EnumMStoneType.getStoneTypeName(qAcu.q_stone_type)));
+			startY+=Math.max(_skin.lb_Stone.height,_skin.imgStone.height)+2;
+			//满级
+			if (isMaxStone) 
+			{
+				lb=clonelab(_skin.lb_shengming);
+				this.addChild(lb);
+				lb.color=GameColorUtil.COLOR_YELLOW;
+				lb.text="已镶嵌最高等级砭石";
+				//lb.text="空";
+				lb.x=_skin.uiName1.x;
+				lb.y=startY;
+				startY+=lb.height+2;
+			}
+			_skin.imgBg.height=Math.max(106,startY+2);
 		}
 		
 		private function clonelab(lab:Label):Label
@@ -442,11 +502,11 @@ package com.rpgGame.app.ui.tips
 			EventManager.removeEvent(MainPlayerEvent.LEVEL_CHANGE,playerAttrChange);
 			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,playerAttrChange);
 		}
-		public function get stoneIcon():BgIcon
+		public function get stoneIcon():UIAsset
 		{
 			if (_stoneIcon==null) 
 			{
-				_stoneIcon=new BgIcon(IcoSizeEnum.ICON_48);
+				_stoneIcon=new UIAsset();
 			}
 			return _stoneIcon;
 		}

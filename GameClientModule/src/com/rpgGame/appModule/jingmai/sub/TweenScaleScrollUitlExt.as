@@ -2,19 +2,20 @@ package com.rpgGame.appModule.jingmai.sub
 {
 	import com.rpgGame.coreData.utils.FilterUtil;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.Button;
 	
 	import gs.TweenMax;
 	
 	import starling.display.DisplayObject;
-	import away3d.events.Event;
 	
 	public class TweenScaleScrollUitlExt extends TweenScrollUtil
 	{
 		private var leftBtn:Button;
 		private var rightBtn:Button;
 		private var dataArr:Array;
-		private var curIndex:int=0;
+		private var _curIndex:int=0;
 		private var nextIndex:int=0;
 		private var _indexStep:int=1;
 		private var tweenScale:Number=1;
@@ -61,14 +62,14 @@ package com.rpgGame.appModule.jingmai.sub
 		private function onTriggeredRight(e:Event):void
 		{
 			// TODO Auto Generated method stub
-			nextIndex=Math.min(dataArr.length-_indexStep,curIndex+_indexStep);
+			nextIndex=Math.min(dataArr.length-_indexStep,_curIndex+_indexStep);
 			scroll2Index(nextIndex);
 		}
 		
 		private function onTriggeredLeft(e:Event):void
 		{
 			// TODO Auto Generated method stub
-			nextIndex=Math.max(0,curIndex-_indexStep);
+			nextIndex=Math.max(0,_curIndex-_indexStep);
 			scroll2Index(nextIndex);
 		}
 		
@@ -81,8 +82,8 @@ package com.rpgGame.appModule.jingmai.sub
 		private function checkBtnState():void
 		{
 			var dataLen:int=dataArr.length;
-			leftBtn.visible=leftBtn.touchable=curIndex>0;
-			rightBtn.visible=rightBtn.touchable=curIndex<(dataLen-_indexStep)&&dataLen>1;
+			leftBtn.visible=leftBtn.touchable=_curIndex>0;
+			rightBtn.visible=rightBtn.touchable=_curIndex<(dataLen-_indexStep)&&dataLen>1;
 			//
 			return;
 			if (!leftBtn.touchable) 
@@ -108,13 +109,13 @@ package com.rpgGame.appModule.jingmai.sub
 			{
 				return;
 			}
-			if (targetIndex==curIndex) 
+			if (targetIndex==_curIndex) 
 			{
 				return;
 			}
 			nextIndex=targetIndex;
 			var tx:Number=-targetIndex*scrollWidth;
-			var t:int=Math.abs(targetIndex-curIndex);
+			var t:int=Math.abs(targetIndex-_curIndex);
 			if (isHorizon) 
 			{
 				this.scrollToX(tx,t);
@@ -131,7 +132,7 @@ package com.rpgGame.appModule.jingmai.sub
 			leftBtn.touchable=false;
 			if (tweenScale!=1.0) 
 			{
-				var time:Number=Math.abs(nextIndex-curIndex)*this.scrollTime;
+				var time:Number=Math.abs(nextIndex-_curIndex)*this.scrollTime;
 				var len:int=dataArr.length;
 				var dis:DisplayObject;
 				var toScale:Number;
@@ -150,15 +151,21 @@ package com.rpgGame.appModule.jingmai.sub
 		{
 			super.onTweenEnd();
 			
-			curIndex=nextIndex;
+			_curIndex=nextIndex;
 			checkBtnState();
-			if (curIndex>=0&&curIndex<dataArr.length) 
+			if (_curIndex>=0&&_curIndex<dataArr.length) 
 			{
 				if (callBack) 
 				{
-					callBack(dataArr[curIndex]);
+					callBack(dataArr[_curIndex]);
 				}
 			}
 		}
+
+		public function get curIndex():int
+		{
+			return _curIndex;
+		}
+
 	}
 }

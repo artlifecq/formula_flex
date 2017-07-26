@@ -68,6 +68,8 @@ package org.mokylin.skin.app.vip
 
 		public var skinVip3:feathers.controls.SkinnableContainer;
 
+		public var uiModel:feathers.controls.UIAsset;
+
 		public var uiVipLevel:feathers.controls.UIAsset;
 
 
@@ -81,7 +83,7 @@ package org.mokylin.skin.app.vip
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [bg_i(),__Vip_Skin_UIAsset1_i(),__Vip_Skin_UIAsset2_i(),__Vip_Skin_UIAsset3_i(),__Vip_Skin_UIAsset4_i(),__Vip_Skin_UIAsset5_i(),__Vip_Skin_UIAsset6_i(),uiVipLevel_i(),imgTQ_i(),btnChongzhi_i(),imgMo_i(),imgAcitve_i(),__Vip_Skin_UIAsset7_i(),NumZhanli_i(),skinVip1_i(),skinVip2_i(),skinVip3_i(),__Vip_Skin_UIAsset8_i(),__Vip_Skin_UIAsset9_i(),imgRewardType_i(),imgVipPrivilegs_i(),__Vip_Skin_UIAsset10_i(),__Vip_Skin_UIAsset11_i(),imgBuy_i(),grpIcon_i(),btnLIngQu_i(),__Vip_Skin_UIAsset12_i(),imgAttr_i(),lb1_i(),__Vip_Skin_UIAsset14_i(),__Vip_Skin_UIAsset15_i(),__Vip_Skin_UIAsset16_i(),__Vip_Skin_UIAsset17_i(),__Vip_Skin_Label3_i(),__Vip_Skin_Label4_i(),lbTime_i(),lbTime0_i(),listVip_i()];
+			this.elementsContent = [bg_i(),__Vip_Skin_UIAsset1_i(),__Vip_Skin_UIAsset2_i(),__Vip_Skin_UIAsset3_i(),__Vip_Skin_UIAsset4_i(),uiModel_i(),__Vip_Skin_UIAsset5_i(),uiVipLevel_i(),imgTQ_i(),btnChongzhi_i(),imgMo_i(),imgAcitve_i(),__Vip_Skin_UIAsset6_i(),NumZhanli_i(),skinVip1_i(),skinVip2_i(),skinVip3_i(),__Vip_Skin_UIAsset7_i(),__Vip_Skin_UIAsset8_i(),imgRewardType_i(),imgVipPrivilegs_i(),__Vip_Skin_UIAsset9_i(),__Vip_Skin_UIAsset10_i(),imgBuy_i(),grpIcon_i(),btnLIngQu_i(),__Vip_Skin_UIAsset11_i(),imgAttr_i(),lb1_i(),__Vip_Skin_UIAsset13_i(),__Vip_Skin_UIAsset14_i(),__Vip_Skin_UIAsset15_i(),__Vip_Skin_UIAsset16_i(),__Vip_Skin_Label3_i(),__Vip_Skin_Label4_i(),lbTime_i(),lbTime0_i(),listVip_i()];
 			
 			states = {
 			};
@@ -134,22 +136,13 @@ package org.mokylin.skin.app.vip
 		private function __Vip_Skin_UIAsset10_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/vip/tequanshuoming.png";
-			temp.x = 265;
-			temp.y = 342;
-			return temp;
-		}
-
-		private function __Vip_Skin_UIAsset11_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/vip/vipkelingqufuli.png";
 			temp.x = 295;
 			temp.y = 200;
 			return temp;
 		}
 
-		private function __Vip_Skin_UIAsset12_i():feathers.controls.UIAsset
+		private function __Vip_Skin_UIAsset11_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/vip/bg2.png";
@@ -158,7 +151,7 @@ package org.mokylin.skin.app.vip
 			return temp;
 		}
 
-		private function __Vip_Skin_UIAsset14_i():feathers.controls.UIAsset
+		private function __Vip_Skin_UIAsset13_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/vip/wenzitiao-bg.png";
@@ -167,7 +160,7 @@ package org.mokylin.skin.app.vip
 			return temp;
 		}
 
-		private function __Vip_Skin_UIAsset15_i():feathers.controls.UIAsset
+		private function __Vip_Skin_UIAsset14_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/vip/shuoming.png";
@@ -176,7 +169,7 @@ package org.mokylin.skin.app.vip
 			return temp;
 		}
 
-		private function __Vip_Skin_UIAsset16_i():feathers.controls.UIAsset
+		private function __Vip_Skin_UIAsset15_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/common/fenyefu.png";
@@ -185,7 +178,7 @@ package org.mokylin.skin.app.vip
 			return temp;
 		}
 
-		private function __Vip_Skin_UIAsset17_i():feathers.controls.UIAsset
+		private function __Vip_Skin_UIAsset16_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/common/fenyefu.png";
@@ -235,22 +228,13 @@ package org.mokylin.skin.app.vip
 		private function __Vip_Skin_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/vip/wupinbeijing.png";
-			temp.x = 711;
-			temp.y = 197;
-			return temp;
-		}
-
-		private function __Vip_Skin_UIAsset6_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/vip/dangqianjibie.png";
 			temp.x = 56;
 			temp.y = 124;
 			return temp;
 		}
 
-		private function __Vip_Skin_UIAsset7_i():feathers.controls.UIAsset
+		private function __Vip_Skin_UIAsset6_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/common/zdl2.png";
@@ -259,7 +243,7 @@ package org.mokylin.skin.app.vip
 			return temp;
 		}
 
-		private function __Vip_Skin_UIAsset8_i():feathers.controls.UIAsset
+		private function __Vip_Skin_UIAsset7_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/vip/wenzitiao-bg.png";
@@ -268,12 +252,21 @@ package org.mokylin.skin.app.vip
 			return temp;
 		}
 
-		private function __Vip_Skin_UIAsset9_i():feathers.controls.UIAsset
+		private function __Vip_Skin_UIAsset8_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/vip/wenzitiao-bg.png";
 			temp.x = 222;
 			temp.y = 338;
+			return temp;
+		}
+
+		private function __Vip_Skin_UIAsset9_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/vip/tequanshuoming.png";
+			temp.x = 265;
+			temp.y = 342;
 			return temp;
 		}
 
@@ -511,6 +504,17 @@ package org.mokylin.skin.app.vip
 			temp.width = 190;
 			temp.x = 30;
 			temp.y = 394;
+			return temp;
+		}
+
+		private function uiModel_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiModel = temp;
+			temp.name = "uiModel";
+			temp.styleName = "ui/app/vip/wupinbeijing.png";
+			temp.x = 711;
+			temp.y = 197;
 			return temp;
 		}
 
