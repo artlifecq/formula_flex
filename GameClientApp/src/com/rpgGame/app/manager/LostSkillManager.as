@@ -9,6 +9,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.sender.LostSkillSender;
 	import com.rpgGame.app.ui.common.CenterEftPop;
 	import com.rpgGame.coreData.UNIQUEID;
 	import com.rpgGame.coreData.cfg.LostSkillData;
@@ -98,9 +99,7 @@ package com.rpgGame.app.manager
 				NoticeManager.showNotifyById(7011);
 				return ;
 			}
-			var msg:CSActivitSkillMessage = new CSActivitSkillMessage();
-			msg.skillId = data.q_id;
-			SocketConnection.send(msg);
+			LostSkillSender.activitSkill(data.q_id);
 		}
 		
 		public function changeState(state:SkillStateInfo):void
@@ -114,9 +113,8 @@ package com.rpgGame.app.manager
 				return ;
 			}
 			
-			var msg:CSChangeSkillMessage = new CSChangeSkillMessage();
-			msg.skillId = state.skillId;
-			SocketConnection.send(msg);
+			
+			LostSkillSender.changeSkill(state.skillId);
 		}
 		
 		private static var _instance:LostSkillManager;

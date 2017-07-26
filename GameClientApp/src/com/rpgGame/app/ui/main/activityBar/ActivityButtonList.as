@@ -11,7 +11,6 @@
 	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
 	import com.rpgGame.coreData.clientConfig.FunctionBarInfo;
 	import com.rpgGame.coreData.info.MapDataManager;
-	import com.rpgGame.coreData.info.map.SceneData;
 	
 	import gs.TweenLite;
 	
@@ -23,7 +22,7 @@
 	{
 		private const SIZE_WIDTH:uint = 360;
 		private const SIZE_HEIGHT:uint = 320;
-		private const GRID_WIDTH:Array = [70,70,70,70]
+		private const GRID_WIDTH:Array = [80,80,80,80]
 		private const GRID_HEIGHT:uint = 80;
 		private const ALIGN:String = "right";
 		public function ActivityButtonList()

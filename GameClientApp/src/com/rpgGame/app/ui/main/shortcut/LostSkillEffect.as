@@ -5,14 +5,13 @@ package com.rpgGame.app.ui.main.shortcut
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.LostSkillManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.core.app.AppConstant;
-	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.LostSkillData;
+	import com.rpgGame.coreData.cfg.NewFuncCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
+	import com.rpgGame.coreData.clientConfig.Q_newfunc;
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.lang.LangUI_2;
 	import com.rpgGame.netData.lostSkill.bean.SkillStateInfo;
@@ -87,14 +86,14 @@ package com.rpgGame.app.ui.main.shortcut
 			var partner:ConcreteTexture = texture.parent as ConcreteTexture;
 		}
 		
-		private function triggeredHandler(state:SkillStateInfo):void
+		private function triggeredHandler(state:SkillStateInfo,qopenData:Q_lostskill_open):void
 		{
 			if(state!=null&&state.level>0)
 				LostSkillManager.instance().changeState(state);
 			else{
 				NoticeManager.showNotifyById(7012);
 //				AppManager.showApp(AppConstant.SKILL_PANL,null,"lostskill");
-				FunctionOpenManager.openAppPaneById(EmFunctionID.EM_JUEXUE);
+				FunctionOpenManager.openAppPaneById(EmFunctionID.EM_JUEXUE,qopenData);
 			}
 			playEnd();
 		}
@@ -128,9 +127,10 @@ package com.rpgGame.app.ui.main.shortcut
 			{
 				_effect.stopEffect();
 			}
-			if(MainRoleManager.actorInfo.totalStat.level<LostSkillManager.instance().openLevel)
+			var func:Q_newfunc = NewFuncCfgData.getdataById(EmFunctionID.EM_JUEXUE);
+			if(!FunctionOpenManager.checkOpenByLevel(func.q_level))
 			{
-				NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP,LanguageConfig.getText(LangUI_2.Lostskill_Opentips).replace("$",LostSkillManager.instance().openLevel));
+				NoticeManager.showNotifyById(90203,"",func.q_string_name,func.q_level);
 				return ;
 			}
 			if(this.parent==null)
@@ -208,7 +208,7 @@ package com.rpgGame.app.ui.main.shortcut
 			{
 				if(_lostSkillLists[i].checkTouch(p))
 				{
-					triggeredHandler(_lostSkillLists[i].state);
+					triggeredHandler(_lostSkillLists[i].state,_lostSkillLists[i].data);
 					break;
 				}
 			}

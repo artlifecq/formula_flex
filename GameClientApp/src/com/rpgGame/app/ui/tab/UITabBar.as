@@ -226,6 +226,8 @@ package com.rpgGame.app.ui.tab
 		private function selectChangeHandler():void
 		{
 			var index:int=_touchGroup.selectedIndex;
+			if(index<0)
+				return ;
 			var item:UITabBarData=_allDatas[index];
 			if(_currentView){
 				_currentView.removeFromParent();
