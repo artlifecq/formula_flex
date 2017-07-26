@@ -10,6 +10,9 @@ package com.rpgGame.core.utils
 		public static const COLOR_YELLOW:uint=0xe8c958;
 		public static const COLOR_BLUE:uint=0x2c87b0;
 		public static const COLOR_ORANGE:uint=0xf09e01;
+		
+		public static const COLOR_ATTR_NAME:uint=0xeaeabc;
+		public static const COLOR_ATTR_VALUE:uint=0xffea00;
 		public function GameColorUtil()
 		{
 		}

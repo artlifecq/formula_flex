@@ -47,12 +47,12 @@ package org.mokylin.skin.app.beibao.jingmai.button
 						}
 					]
 			};
-			skinNames={"down":"ui/app/beibao/jingmai/button/yangqiaomai/down.jpg",
-			"downAndSelected":"ui/app/beibao/jingmai/button/yangqiaomai/over.jpg",
-			"hover":"ui/app/beibao/jingmai/button/yangqiaomai/over.jpg",
-			"overAndSelected":"ui/app/beibao/jingmai/button/yangqiaomai/over.jpg",
-			"up":"ui/app/beibao/jingmai/button/yangqiaomai/up.jpg",
-			"upAndSelected":"ui/app/beibao/jingmai/button/yangqiaomai/over.jpg"};
+			skinNames={"down":"ui/app/beibao/jingmai/button/yangqiaomai/down.png",
+			"downAndSelected":"ui/app/beibao/jingmai/button/yangqiaomai/over.png",
+			"hover":"ui/app/beibao/jingmai/button/yangqiaomai/over.png",
+			"hoverAndSelected":"ui/app/beibao/jingmai/button/yangqiaomai/over.png",
+			"up":"ui/app/beibao/jingmai/button/yangqiaomai/up.png",
+			"upAndSelected":"ui/app/beibao/jingmai/button/yangqiaomai/over.png"};
 		}
 
 

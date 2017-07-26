@@ -7,6 +7,10 @@ package com.rpgGame.app.ui.tips.cheats
 		 */		
 		public static const URL_JiHuo_CON:String="ui/common/tips/tipswenzi/jineng/jihuotiaojian.png";
 		/**
+		 *激活属性
+		 */		
+		public static const URL_JiHuo:String="ui/common/tips/tipswenzi/jineng/jihuoshuxing.png";
+		/**
 		 *升级条件 
 		 */		
 		public static const URL_ShengJi_CON:String="ui/common/tips/tipswenzi/jineng/shengjitiaojian.png";
@@ -35,13 +39,6 @@ package com.rpgGame.app.ui.tips.cheats
 		 *镶嵌效果
 		 */		
 		public static const URL_XiangQian:String="ui/common/tips/tipswenzi/jineng/xiangqianshuoming.png";
-		/**
-		 *冲穴条件
-		 */		
-		public static const URL_ChongXue_Con:String="ui/common/tips/tipswenzi/jineng/chongxuetiaojian.png";
-		/**
-		 *冲穴条件
-		 */		
-		public static const URL_ChongXue_Attr:String="ui/common/tips/tipswenzi/jineng/chongxueshuxing.png";
+
 	}
 }
