@@ -510,7 +510,7 @@ package org.mokylin.skin.app.beibao
 		private function __juese_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/beibao/shuxing/lv.png";
+			temp.styleName = "ui/common/shuxing/lv.png";
 			temp.x = 9;
 			temp.y = 0;
 			return temp;
