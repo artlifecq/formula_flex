@@ -37,7 +37,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			
 			this.currentState = "normal";
 			this.height = 53;
-			this.width = 288;
+			this.width = 282;
 			this.elementsContent = [bg_i(),Icon_i(),lbName_i(),lbJiacheng_i(),rdo_select_i()];
 			
 			states = {
@@ -67,7 +67,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.name = "bg";
 			temp.height = 53;
 			temp.styleName = "ui/common/background/neikuang_2.png";
-			temp.width = 288;
+			temp.width = 282;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -82,7 +82,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 108;
-			temp.x = 176;
+			temp.x = 169;
 			temp.y = 18;
 			return temp;
 		}
@@ -108,7 +108,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.name = "rdo_select";
 			temp.height = 53;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSelect_Skin;
-			temp.width = 288;
+			temp.width = 282;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

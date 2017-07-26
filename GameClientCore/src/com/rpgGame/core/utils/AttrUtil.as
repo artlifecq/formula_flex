@@ -3,6 +3,7 @@ package com.rpgGame.core.utils
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.core.interfaces.IAttrShow;
 	import com.rpgGame.coreData.type.CharAttributeType;
+	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import flash.geom.Point;
 	
@@ -26,6 +27,7 @@ package com.rpgGame.core.utils
 		public static function showAttrByItem(attHash:HashMap,contianer:DisplayObjectContainer,itemc:Class,cellNum:int,startPos:Point,xGe:int,yGe:int,pool:Array=null):Array
 		{
 			var keys:Array=attHash.keys();
+			keys.sort(Array.NUMERIC);
 			var len:int=keys.length;
 			var tmpLab:*;
 			var ret:Array=[];
@@ -132,13 +134,13 @@ package com.rpgGame.core.utils
 			for (var i:int = 0; i < len; i++) 
 			{
 			
-				str+=CharAttributeType.getCNName(keys[i])+splitStr+attHash.getValue(keys[i]);
+				str+=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_ATTR_NAME,CharAttributeType.getCNName(keys[i]))+splitStr+HtmlTextUtil.getTextColor(GameColorUtil.COLOR_ATTR_VALUE,attHash.getValue(keys[i]));
 				if (i!=len-1) 
 				{
 					str+=devide;
 				}
 			}
-			lab.text=str;
+			lab.htmlText=str;
 		}
 	
 	}

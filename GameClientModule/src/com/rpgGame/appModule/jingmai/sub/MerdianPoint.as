@@ -2,8 +2,10 @@ package com.rpgGame.appModule.jingmai.sub
 {
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.scene.render.RenderUnit3D;
+	import com.rpgGame.app.manager.MeridianMgr;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.hint.FloatingText;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.MeridianSender;
 	import com.rpgGame.appModule.jingmai.MeridianStoneSelectPanelExt;
@@ -23,6 +25,7 @@ package com.rpgGame.appModule.jingmai.sub
 	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.clientConfig.Q_meridian;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.utils.FilterUtil;
@@ -428,6 +431,15 @@ package com.rpgGame.appModule.jingmai.sub
 							}
 							else
 							{
+								if (data.stone.length>0) 
+								{
+									var isMaxStone:Boolean=ItemConfig.getQItemByID(_data.stone[0].itemModelId).q_levelnum>=MeridianMgr.MAX_STONE_LV;
+									if (isMaxStone) 
+									{
+										FloatingText.showUp("已镶嵌最高等级砭石");
+										return;
+									}
+								}
 								AppManager.showApp(AppConstant.JINGMAI_STONE);
 								//NoticeManager.mouseFollowNotify(NotifyCfgData.getNotifyTextByID(7017));
 							}

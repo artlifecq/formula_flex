@@ -1,9 +1,13 @@
 package com.rpgGame.appModule.jingmai
 {
+	import com.game.engine3D.display.Inter3DContainer;
+	import com.game.engine3D.display.InterObject3D;
+	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.appModule.jingmai.sub.JinMaiBtnEffect;
 	import com.rpgGame.appModule.jingmai.sub.MeridianMap;
 	import com.rpgGame.appModule.jingmai.sub.TweenScaleScrollUitlExt;
 	import com.rpgGame.core.app.AppConstant;
@@ -14,12 +18,15 @@ package com.rpgGame.appModule.jingmai
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.ui.tip.IRewardCheck;
 	import com.rpgGame.core.ui.tip.RTNodeID;
+	import com.rpgGame.core.utils.MCUtil;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
 	import com.rpgGame.coreData.cfg.meridian.MeridianCfg;
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.meridian.MeridianVo;
 	import com.rpgGame.coreData.type.CharAttributeType;
+	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.netData.meridian.bean.AcuPointInfo;
 	
 	import app.message.GoodsType;
@@ -49,6 +56,10 @@ package com.rpgGame.appModule.jingmai
 		private var _mapsHash:HashMap;
 		private var _attrView:MeridianAttrViewPanelExt;
 		private var _container:SkinUI;
+		private var _effect3dCon:Inter3DContainer;
+		private var _effect3d:InterObject3D;
+		private var _btnEffectArr:Array=[];
+		private var _curEffect:JinMaiBtnEffect;
 		public function MeridianView()
 		{
 			//tweenScroll=new TweenScaleScrollUitlExt(con,
@@ -61,9 +72,12 @@ package com.rpgGame.appModule.jingmai
 			this._container=con;
 			this._skin=skin;
 			sbtnArr=[_skin.rdo_renmai,_skin.rdo_dumai,_skin.rdo_chongmai,_skin.rdo_daimai,_skin.rdo_yinqiaomai,_skin.rdo_yangqiaomai];
+			var id:int=1;
 			for each (var sbtn:Radio in sbtnArr) 
 			{
 				sbtn.addEventListener(Event.TRIGGERED,onTriggered);
+				_btnEffectArr.push(new JinMaiBtnEffect(sbtn,id));
+				id++;
 			}
 			_attrView=new MeridianAttrViewPanelExt(_skin.NumZhanli);
 			_attrView.x=955;
@@ -128,6 +142,10 @@ package com.rpgGame.appModule.jingmai
 			//选取等级为1的数据
 			var hash:HashMap=MeridianCfg.getInitCfg();
 			var keys:Array=hash.keys();
+			_effect3dCon=new Inter3DContainer();
+			_skin.imgBg.addChild(_effect3dCon);
+			_effect3dCon.x=_skin.imgBg.width/2;
+			_effect3dCon.y=_skin.imgBg.height/2;
 			var content:Sprite=new Sprite();
 			_skin.imgBg.addChild(content);
 			_skin.imgBg.touchGroup=false;
@@ -177,7 +195,16 @@ package com.rpgGame.appModule.jingmai
 			_mapsHash.eachValue(function(map:MeridianMap):void{
 				map.hideEffect();
 			});
-			
+			if (_effect3d) 
+			{
+				_effect3d.dispose();
+				_effect3d=null;
+			}
+			if (_curEffect) 
+			{
+				_curEffect.clearEffect();
+				_curEffect=null;
+			}
 		}
 		private function showAttr(eve:Event):void
 		{
@@ -209,6 +236,15 @@ package com.rpgGame.appModule.jingmai
 				btn.isSelected=true;
 			}
 			_skin.mc_name.gotoAndStop(sbtnArr.indexOf(btn));
+			if (_curEffect) 
+			{
+				_curEffect.clearEffect();
+			}
+			_curEffect=_btnEffectArr[MeridianMap(map).pos];
+			if (_curEffect) 
+			{
+				_curEffect.showEffect();
+			}
 		}
 		
 		private function getSkinn(meridianType:int):StateSkin
@@ -249,6 +285,12 @@ package com.rpgGame.appModule.jingmai
 			Mgr.meridianMgr.addEventListener(MeridianEvent.MERIDIAN_CHANGE,onDataChange);
 			
 			onZhenQiChange(CharAttributeType.RES_ZHENQI);
+			_effect3d=_effect3dCon.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINGMAI_STAR),0,0,0,null,addEft);
+			_curEffect=_btnEffectArr[tweenScroll.curIndex];
+			if (_curEffect) 
+			{
+				_curEffect.showEffect();
+			}
 		}
 		
 		private function onAddItem(itemInfo : ClientItemInfo):void
@@ -309,6 +351,10 @@ package com.rpgGame.appModule.jingmai
 				_skin.proZhenqi.value=MainRoleManager.actorInfo.curZhenqi;
 			}
 			checkForUpdate();
+		}
+		private function addEft(render:RenderUnit3D):void
+		{
+			render.play(0);
 		}
 		public function onHide():void
 		{

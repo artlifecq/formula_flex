@@ -266,9 +266,9 @@ package org.mokylin.skin.app.beibao.jingmai
 			mc_name = temp;
 			temp.name = "mc_name";
 			temp.autoPlay = false;
-			temp.height = 133;
+			temp.height = 109;
 			temp.styleClass = org.mokylin.skin.app.beibao.jingmai.mc.UIMovieClipJingmai;
-			temp.width = 52;
+			temp.width = 57;
 			temp.x = 640;
 			temp.y = 124;
 			return temp;

@@ -54,12 +54,12 @@ package com.rpgGame.appModule.jingmai
 		//	TipTargetManager.show(this,TargetTipsMaker.makeTips(TipType.MERIDIAN_TIP,"sssss"));
 			//this.addEventListener(TouchEvent.TOUCH,onTouchMain);
 			_view=new MeridianView();
-			addNode(RTNodeID.JM,RTNodeID.JM_RENM,_skin.rdo_renmai,50,_view.checkRenM,false);
-			addNode(RTNodeID.JM,RTNodeID.JM_DUM,_skin.rdo_dumai,50,_view.checkDuM,false);
-			addNode(RTNodeID.JM,RTNodeID.JM_CHONGM,_skin.rdo_chongmai,50,_view.checkChongM,false);
-			addNode(RTNodeID.JM,RTNodeID.JM_DAIM,_skin.rdo_daimai,50,_view.checkDaiM,false);
-			addNode(RTNodeID.JM,RTNodeID.JM_YINGM,_skin.rdo_yinqiaomai,50,_view.checkYinM,false);
-			addNode(RTNodeID.JM,RTNodeID.JM_YANGM,_skin.rdo_yangqiaomai,50,_view.checkYangM,false);
+			addNode(RTNodeID.JM,RTNodeID.JM_RENM,_skin.rdo_renmai,52,_view.checkRenM,false);
+			addNode(RTNodeID.JM,RTNodeID.JM_DUM,_skin.rdo_dumai,52,_view.checkDuM,false);
+			addNode(RTNodeID.JM,RTNodeID.JM_CHONGM,_skin.rdo_chongmai,52,_view.checkChongM,false);
+			addNode(RTNodeID.JM,RTNodeID.JM_DAIM,_skin.rdo_daimai,52,_view.checkDaiM,false);
+			addNode(RTNodeID.JM,RTNodeID.JM_YINGM,_skin.rdo_yinqiaomai,52,_view.checkYinM,false);
+			addNode(RTNodeID.JM,RTNodeID.JM_YANGM,_skin.rdo_yangqiaomai,52,_view.checkYangM,false);
 			_view.setUi(_skin as Jingmai_Skin,this);
 		}
 		
