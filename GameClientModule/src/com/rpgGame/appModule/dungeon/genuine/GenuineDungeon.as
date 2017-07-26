@@ -1,8 +1,6 @@
 package com.rpgGame.appModule.dungeon.genuine
 {
 	import com.rpgGame.app.manager.DailyZoneDataManager;
-	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.ui.SkinUIModePanel;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
@@ -70,7 +68,7 @@ package com.rpgGame.appModule.dungeon.genuine
 			{
 				var grid:IconCDFace = IconCDFace.create(IcoSizeEnum.ICON_48);
 				grid.setBg( GridBGType.GRID_SIZE_48,1 );
-				grid.setUrlBg("ui/common/gezikuang/tubiaodikuang/48.png");
+//				grid.setUrlBg("ui/common/gezikuang/tubiaodikuang/48.png");
 				_skin.container.addChild(grid);
 				grid.x = startX+60*i;
 				grid.y = 507;

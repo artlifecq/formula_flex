@@ -1,13 +1,14 @@
 package com.rpgGame.appModule.pet
 {
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.hint.FloatingText;
 	import com.rpgGame.app.sender.PetSender;
-	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.appModule.shop.ItemGetAdvisePanelExt;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.PetEvent;
+	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.GameColorUtil;
 	import com.rpgGame.coreData.cfg.PetAdvanceCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
@@ -20,8 +21,9 @@ package com.rpgGame.appModule.pet
 	
 	import starling.display.DisplayObject;
 	
-	public class PetLevelUPPanelExt extends SkinUIPanel
+	public class PetLevelUPPanelExt extends SkinUI
 	{
+		private static var _ins:PetLevelUPPanelExt;
 		private var _skin:MeiRen_JinJie;
 		private var _data:PetInfo;
 		private var _needItem:int;
@@ -33,6 +35,7 @@ package com.rpgGame.appModule.pet
 			_skin=new MeiRen_JinJie();
 			super(_skin);
 		}
+		
 		public function setData(data:PetInfo):void
 		{
 			this._data=data;
@@ -46,7 +49,7 @@ package com.rpgGame.appModule.pet
 			_petAdvConfig=PetAdvanceCfg.getPet(_data.modelId,_data.rank);
 			if (_petAdvConfig) 
 			{
-				var obj:Object=JSONUtil.decode(_petAdvConfig.q_need_items)[0];
+				var obj:Object=JSONUtil.decode(_petAdvConfig.q_need_items);
 				if (obj) 
 				{
 					_needItem=obj.mod;
@@ -90,6 +93,10 @@ package com.rpgGame.appModule.pet
 					{
 						setAutoState(true);
 					}
+					else
+					{
+						setAutoState(false);
+					}
 					break;
 				}
 				case _skin.btnStop:
@@ -115,7 +122,8 @@ package com.rpgGame.appModule.pet
 			var itemNum:int=BackPackManager.instance.getItemCount(_needItem);
 			if (_skin.cboxTip.isSelected==false&&itemNum<_needItemNum)
 			{
-				FloatingText.showUp("材料不足");
+//				FloatingText.showUp("材料不足");
+				NoticeManager.showNotifyById(1);
 				return false;
 			}
 			PetSender.reqPetLevelUp(_data.modelId,1,_skin.cboxTip.isSelected?1:0);
@@ -144,6 +152,8 @@ package com.rpgGame.appModule.pet
 			EventManager.removeEvent(ItemEvent.ITEM_REMOVE,onItemChange);
 			_data=null;
 			setAutoState(false);
+			if(this.parent)
+				(this.parent as PetMainPanelExt).updatePos();
 		}
 		override protected function onShow():void
 		{

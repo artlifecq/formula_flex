@@ -1,18 +1,24 @@
 package com.rpgGame.app.manager
 {
 	import com.gameClient.utils.HashMap;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.PetEvent;
 	import com.rpgGame.netData.pet.bean.PetInfo;
+	import com.rpgGame.netData.pet.message.ResExtraBuyMessage;
 	import com.rpgGame.netData.pet.message.ResPetChangeMessage;
 	import com.rpgGame.netData.pet.message.ResPetListMessage;
 	import com.rpgGame.netData.pet.message.ResPetUpResultMessage;
+	import com.rpgGame.netData.pet.message.ResPetZoneResultMessage;
 	
 	import org.client.mainCore.manager.EventManager;
-
+	
 	public class PetManager
 	{
 		public static var ins:PetManager=new PetManager();
 		private var _petHash:HashMap;
+		private var _bindGlodNum:int=0;
+		private var _glodNum:int=0;
 		private var _curPetId:int;
 		public function PetManager()
 		{
@@ -22,6 +28,27 @@ package com.rpgGame.app.manager
 		{
 			return _petHash.getValue(pet) as PetInfo;
 		}
+		
+		public function get bindGlodNum():int
+		{
+			return _bindGlodNum;
+		}
+		
+		public function get glodNum():int
+		{
+			return _glodNum;
+		}
+		
+		public function resExtraBuyHandler(msg:ResExtraBuyMessage):void
+		{
+			if(_bindGlodNum!=msg.cashBuy||_glodNum!=msg.goldBuy)
+			{
+				_bindGlodNum=msg.cashBuy;
+				_glodNum=msg.goldBuy;
+				EventManager.dispatchEvent(PetEvent.PET_BUYNUM_CHANGE);
+			}
+		}
+		
 		public function ResPetUpResultHandler(msg:ResPetUpResultMessage):void
 		{
 			// TODO Auto Generated method stub
@@ -57,11 +84,29 @@ package com.rpgGame.app.manager
 			this._curPetId=msg.petId;
 			EventManager.dispatchEvent(PetEvent.GET_PETS_DATA);
 		}	
-
+		
+		public function resPetZoneResultHandler(msg:ResPetZoneResultMessage):void
+		{
+			AppManager.showAppNoHide(AppConstant.PET_TIAOZHAN_PANLE,msg);
+		}
+		
 		public function get curPetId():int
 		{
 			return _curPetId;
 		}
-
+		
+		public function get petListByJiHuo():Vector.<PetInfo>
+		{
+			var list:Vector.<PetInfo>=new Vector.<PetInfo>();
+			for each(var info:PetInfo in _petHash.values())
+			{
+				if(info.actived==1&&info.modelId!=_curPetId)
+				{
+					list.push(info);
+				}
+			}		
+			return list;
+		}
+		
 	}
 }

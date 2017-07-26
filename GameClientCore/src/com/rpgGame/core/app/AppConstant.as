@@ -525,8 +525,10 @@ package com.rpgGame.core.app
 		/**红包信息**/
 		public static var REDREWARD_PANLE:String = createAppInfo("redreward.RedRewardInfoPanle","hongbao");
 		
-		/**红包信息**/
+		/**美人**/
 		public static var PET_PANLE:String = createAppInfo("pet.PetMainPanelExt","meiren");
+		/**美人挑战成功面板**/
+		public static var PET_TIAOZHAN_PANLE:String = createAppInfo("pet.MeiRenTiaoZhanChengGongPanel","meiren");
 		/**排行榜**/
 		public static var RANKLISTPANLE:String = createAppInfo("rank.RankListPanle","paihangbang");
 		/**全平台排行榜**/

@@ -4,7 +4,6 @@ package com.rpgGame.appModule.zhangong
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.display3D.InterAvatar3D;
-	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.ZhanGongManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.pop.UIPopManager;
@@ -12,7 +11,6 @@ package com.rpgGame.appModule.zhangong
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.sender.ZhanGongSender;
 	import com.rpgGame.app.ui.common.CenterEftPop;
-	import com.rpgGame.app.utils.MenuUtil;
 	import com.rpgGame.app.utils.RoleFaceMaskEffectUtil;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.ZhanGongEvent;
@@ -20,7 +18,6 @@ package com.rpgGame.appModule.zhangong
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.AwdProgressBar;
 	import com.rpgGame.core.ui.SkinUI;
-	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
@@ -81,8 +78,12 @@ package com.rpgGame.appModule.zhangong
 			_skin.uiBg.addChild(_avatarContainer);
 			
 			_progressBar=new AwdProgressBar(_skin.pro_bar,"ui_zhangongtexiao");
-			_progressBar.x=_progressBar.y=0;
-			_skin.bar_cont.addChild(_progressBar);
+			_progressBar.x=16;
+			_progressBar.y=154;
+			_progressBar.maximum=100;
+			_progressBar.minimum=0;
+			_skin.container.addChild(_progressBar);
+			_skin.container.addChild(_skin.lbNum);
 			_skin.lbNumUp.visible=false;
 			_skin.uiUp.visible=false;
 			//			_skin.container.addChild(_avatarContainer);
@@ -202,6 +203,7 @@ package com.rpgGame.appModule.zhangong
 			if(_q_meritorious==null) return ;
 			var name:String=MonsterDataManager.getMonsterName(_q_meritorious.q_monsterID);
 			_skin.lbName.text=name;
+			_skin.btnDao.x=_skin.lbName.textWidth+_skin.lbName.x;
 			_skin.lbLevelCurrent.text="LV."+_info.level;
 			_skin.lbLevelNext.text="LV."+(_info.level+1);
 			
@@ -224,7 +226,6 @@ package com.rpgGame.appModule.zhangong
 			if(_isCanUp) _skin.btnUp.filter=null;
 			else GrayFilter.gray(_skin.btnUp);
 			
-			_progressBar.maximum=100;
 			_progressBar.value=(haveNum/_q_meritorious.q_num)*100<=100?(haveNum/_q_meritorious.q_num)*100:100;	
 			if(_skin.lbNumUp.visible) updateShuxingShow();
 		}
@@ -246,6 +247,9 @@ package com.rpgGame.appModule.zhangong
 				case CharAttributeType.HP:
 					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/shengming.png";
 					break;
+				case CharAttributeType.MAX_HP:
+					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/shengming.png";
+					break;
 				case CharAttributeType.CRIT_PER:
 					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/baoji.png";
 					break;
@@ -253,7 +257,7 @@ package com.rpgGame.appModule.zhangong
 					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/baojikangxing.png";
 					break;
 				case CharAttributeType.CRIT:
-					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/baojishanghai.png";
+					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/baojisanghai.png";
 					break;
 				case CharAttributeType.DEFENSE_PER:
 					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/fangyu.png";
@@ -271,7 +275,7 @@ package com.rpgGame.appModule.zhangong
 					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/lidao.png";
 					break;
 				case CharAttributeType.HIT:
-					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/mingzhonglv.png";
+					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/gzhonglv.png";
 					break;
 				case CharAttributeType.NEI_GONG:
 					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/neigong.png";
@@ -298,7 +302,10 @@ package com.rpgGame.appModule.zhangong
 					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/yidongsudu.png";
 					break;
 				case CharAttributeType.WAI_GONG:
-					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/zhangong.png";
+					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/waigong.png";
+					break;
+				default:
+					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/shengming.png";
 					break;
 			}
 		}

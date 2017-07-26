@@ -1,11 +1,11 @@
 package   com.rpgGame.app.manager.debug
 {	
 	import com.game.engine3D.manager.Stage3DLayerManager;
-	import com.game.engine3D.state.role.RoleState;
 	import com.game.engine3D.utils.StatsUtil;
 	import com.game.mainCore.core.manager.LayerManager;
 	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.HashMap;
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
 	import com.rpgGame.app.fight.spell.SkillAddPop;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
@@ -33,7 +33,6 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.app.state.role.control.SpriteUpBuffStateReference;
-	import com.rpgGame.app.state.role.control.VipBuffStateReference;
 	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
 	import com.rpgGame.app.ui.main.dungeon.JiXianTiaoZhanExtPop;
 	import com.rpgGame.core.app.AppConstant;
@@ -46,14 +45,11 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.info.move.RoleMoveInfo;
-	import com.rpgGame.coreData.role.GirlPetData;
-	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
 	import com.rpgGame.netData.backpack.bean.TempItemInfo;
 	import com.rpgGame.netData.fight.message.SCBuffSkillMessage;
-	import com.rpgGame.netData.map.bean.PetInfo;
 	import com.rpgGame.netData.player.message.SCNonagePromptMessage;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
 	import com.rpgGame.netData.structs.Position;
@@ -67,7 +63,6 @@ package   com.rpgGame.app.manager.debug
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.MessageMgr;
 	
 	
@@ -224,7 +219,8 @@ package   com.rpgGame.app.manager.debug
 			commandList.put( ".actopen", function (...arg):void
 			{
 				var info:ActivetyInfo=ActivetyCfgData.getActInfoById(arg[0]); 
-				if(info.actCfg.q_show_notice==1){
+				var list:Array=JSONUtil.decode(info.actCfg.q_notice_trans);
+				if(info.actCfg.q_show_notice==1&&FunctionOpenManager.checkOpenBuyFunId(list[1])){
 					AppManager.showAppNoHide(AppConstant.ACTIVETY_OPEN,info);
 				}
 			});
@@ -288,7 +284,7 @@ package   com.rpgGame.app.manager.debug
 			});
 			commandList.put( ".pet", function (...arg):void
 			{
-				AppManager.showApp(AppConstant.RANKLISTPANLE);
+				AppManager.showApp(AppConstant.PET_PANLE);
 				//				var mod:int = arg[0];
 				//				
 				//				var petInfo:PetInfo=new PetInfo();

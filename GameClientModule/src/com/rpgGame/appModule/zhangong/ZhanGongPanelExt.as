@@ -50,12 +50,12 @@ package com.rpgGame.appModule.zhangong
 			var list:List=_skin.ListMap;
 			list.itemRendererFactory = creatMapItemCell;
 			list.clipContent = true;
-//			list.scrollBarDisplayMode = "fixed";
+			//			list.scrollBarDisplayMode = "fixed";
 			list.verticalScrollBarPosition = "right";
 			list.scrollBarDisplayMode=ScrollBarDisplayMode.ALWAYS_VISIBLE;
 			list.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			list.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
-			list.padding=0;
+			list.padding=4;
 			
 			//			var list1:List=_skin.ListBoss;
 			//			list1.itemRendererFactory = creatBossItemCell;
@@ -72,8 +72,8 @@ package com.rpgGame.appModule.zhangong
 		private function initView():void
 		{
 			_isFirst=true;
-			_skin.num_lv0.visible=false;
-//			_skin.uiUp.visible=false;
+			_skin.NumZhanli.visible=false;
+			//			_skin.uiUp.visible=false;
 			_skin.ListMap.addEventListener(FeathersEventType.CREATION_COMPLETE,toShouShow);
 			var mapItemList:Vector.<int>=ZhanGongData.getMapItemLvList();
 			_skin.ListMap.dataProvider=new ListCollection(mapItemList);
@@ -82,8 +82,8 @@ package com.rpgGame.appModule.zhangong
 			for(var i:int=0;i<MaxShowNum;i++)
 			{
 				bossitem=new BossItem();
-				bossitem.x=(i%3)*(bossitem.width+8)+10;
-				bossitem.y=(int(i/3))*(bossitem.height+4)+5;
+				bossitem.x=(i%3)*(bossitem.width+2)+4;
+				bossitem.y=(int(i/3))*(bossitem.height+2)+2;
 				_bossItemList.push(bossitem);
 				_skin.bossItemRongQi.addChild(bossitem);
 			}
@@ -105,8 +105,8 @@ package com.rpgGame.appModule.zhangong
 		
 		private function initEvent():void
 		{
-			_skin.btnPrev.addEventListener(Event.TRIGGERED,leftHandler);
-			_skin.btnNext.addEventListener(Event.TRIGGERED,rightHandler);
+			//			_skin.btnPrev.addEventListener(Event.TRIGGERED,leftHandler);
+			//			_skin.btnNext.addEventListener(Event.TRIGGERED,rightHandler);
 			EventManager.addEvent(ZhanGongEvent.MAPITEM_SELECT,selecteSpell);
 			EventManager.addEvent(ZhanGongEvent.BOSSITEN_SHOW,showNextAtt);
 			EventManager.addEvent(ZhanGongEvent.BOSSITEN_CLOSE,closeNextAtt);
@@ -115,8 +115,8 @@ package com.rpgGame.appModule.zhangong
 		
 		private function clearEvent():void
 		{
-			_skin.btnPrev.removeEventListener(Event.TRIGGERED,leftHandler);
-			_skin.btnNext.removeEventListener(Event.TRIGGERED,rightHandler);
+			//			_skin.btnPrev.removeEventListener(Event.TRIGGERED,leftHandler);
+			//			_skin.btnNext.removeEventListener(Event.TRIGGERED,rightHandler);
 			EventManager.removeEvent(ZhanGongEvent.MAPITEM_SELECT,selecteSpell);
 			EventManager.removeEvent(ZhanGongEvent.BOSSITEN_SHOW,showNextAtt);
 			EventManager.removeEvent(ZhanGongEvent.BOSSITEN_CLOSE,closeNextAtt);
@@ -141,13 +141,13 @@ package com.rpgGame.appModule.zhangong
 			}
 		}
 		
-		private function updateBtnState():void
-		{
-			if(yeqian==0) _skin.btnPrev.visible=false;
-			else  _skin.btnPrev.visible=true;
-			if((yeqian+1)>=maxNum) _skin.btnNext.visible=false;
-			else _skin.btnNext.visible=true;
-		}
+		//		private function updateBtnState():void
+		//		{
+		//			if(yeqian==0) _skin.btnPrev.visible=false;
+		//			else  _skin.btnPrev.visible=true;
+		//			if((yeqian+1)>=maxNum) _skin.btnNext.visible=false;
+		//			else _skin.btnNext.visible=true;
+		//		}
 		
 		private function showPower(bool:Boolean=false):void
 		{
@@ -221,8 +221,9 @@ package com.rpgGame.appModule.zhangong
 		{
 			if(_mapItemList!=null&&_mapItemList.length>0&&_mapItemList.length>index)
 			{
-				_mapItemList[index].setBtnState();
-				_nowSelectMapItem=_mapItemList[index];
+//				_mapItemList[index].setBtnState(true);
+//				_nowSelectMapItem=_mapItemList[index];
+				selecteSpell(_mapItemList[index]);
 			}
 		}
 		
@@ -241,7 +242,7 @@ package com.rpgGame.appModule.zhangong
 		{
 			var list:Vector.<int>=ZhanGongData.getBossItemTypeList(lv,yeqian);
 			maxNum=ZhanGongData.getMaxYeQian();		
-			updateBtnState();
+			//			updateBtnState();
 			for(var i:int=0;i<_bossItemList.length;i++)
 			{
 				if(i<list.length)
@@ -273,7 +274,9 @@ package com.rpgGame.appModule.zhangong
 		private function selecteSpell(mapitem:MapItem):void
 		{
 			if(_nowSelectMapItem!=null&&_nowSelectMapItem.level==mapitem.level) return;
+			if(_nowSelectMapItem!=null) _nowSelectMapItem.setBtnState(false);
 			_nowSelectMapItem=mapitem;
+			_nowSelectMapItem.setBtnState(true);
 			showBossItemByLv(_nowSelectMapItem.level);			
 		}
 		
@@ -285,15 +288,15 @@ package com.rpgGame.appModule.zhangong
 			var has:HashMap=new HashMap();
 			has.put(type,num);
 			var pow:int=FightValueUtil.calFightPowerByHash(has,MainRoleManager.actorInfo.job);
-			_skin.num_lv0.label="x"+pow.toString();
-			_skin.num_lv0.visible=true;
-//			_skin.uiUp.visible=true;
+			_skin.NumZhanli.label="x"+pow.toString();
+			_skin.NumZhanli.visible=true;
+			//			_skin.uiUp.visible=true;
 		}
 		
 		private function closeNextAtt():void
 		{
-			_skin.num_lv0.visible=false;
-//			_skin.uiUp.visible=false;
+			_skin.NumZhanli.visible=false;
+			//			_skin.uiUp.visible=false;
 		}
 		
 		private function updatePower(msg:SCMeritoriousUpgradeResultMessage):void

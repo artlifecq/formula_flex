@@ -1,5 +1,6 @@
 package org.mokylin.skin.app.beibao.zhangong.button
 {
+	import feathers.controls.text.Fontter;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
@@ -9,7 +10,7 @@ package org.mokylin.skin.app.beibao.zhangong.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class ButtonWanlichangcheng extends feathers.controls.StateSkin
+	public class ButtonShengjibtn extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -22,11 +23,11 @@ package org.mokylin.skin.app.beibao.zhangong.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function ButtonWanlichangcheng()
+		public function ButtonShengjibtn()
 		{
 			super();
 			
-			this.currentState = "upAndSelected";
+			this.currentState = "down";
 			this.elementsContent = [];
 			
 			states = {
@@ -38,7 +39,12 @@ package org.mokylin.skin.app.beibao.zhangong.button
 						,
 						{target:"labelDisplay",
 							name:"color",
-							value:0xFFFFFF
+							value:0xEAEABC
+						}
+						,
+						{target:"labelDisplay",
+							name:"nativeFilters",
+							value:Fontter.filterObj["textFilterBlackGreen"]
 						}
 						,
 						{target:"labelDisplay",
@@ -47,12 +53,7 @@ package org.mokylin.skin.app.beibao.zhangong.button
 						}
 					]
 			};
-			skinNames={"down":"ui/app/beibao/zhangong/button/wanlichangcheng/down.jpg",
-			"downAndSelected":"ui/app/beibao/zhangong/button/wanlichangcheng/select.jpg",
-			"hover":"ui/app/beibao/zhangong/button/wanlichangcheng/over.jpg",
-			"overAndSelected":"ui/app/beibao/zhangong/button/wanlichangcheng/select.jpg",
-			"up":"ui/app/beibao/zhangong/button/wanlichangcheng/up.jpg",
-			"upAndSelected":"ui/app/beibao/zhangong/button/wanlichangcheng/select.jpg"};
+			skinNames={"down":"ui/app/beibao/zhangong/button/shengjibtn/down.png", "hover":"ui/app/beibao/zhangong/button/shengjibtn/over.png", "up":"ui/app/beibao/zhangong/button/shengjibtn/up.png"};
 		}
 
 
@@ -75,9 +76,10 @@ package org.mokylin.skin.app.beibao.zhangong.button
 			temp.bottom = 0;
 			temp.left = 0;
 			temp.right = 0;
-			temp.text = "";
+			temp.text = "升 级";
 			temp.textAlign = "center";
-			temp.color = 0xFFFFFF;
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.top = 0;
 			temp.verticalAlign = "middle";
 			return temp;

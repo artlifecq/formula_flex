@@ -13,7 +13,7 @@ package com.rpgGame.app.ui.main.activityBar.item
 		private var _skin:ActivityItem;
 		private var _iconList:Vector.<SkinnableContainer>;
 		private var _lastLine:int = 0;
-		private var _width:Number = 65;
+		private var _width:Number = 73;
 		public function ActivityLable(skin:ActivityItem):void
 		{
 			_skin = skin;
