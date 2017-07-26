@@ -405,6 +405,7 @@ package com.rpgGame.appModule.pet
 			EventManager.addEvent(PetEvent.PET_DATA_CHANGE,onPetChange);
 			EventManager.addEvent(PetEvent.PET_BUYNUM_CHANGE,onBuyNumChange);
 			super.onShow();
+			onBuyNumChange();
 			//重新设置数据
 			for each (var item:PetHeadItemExt in _headItems) 
 			{
@@ -508,7 +509,7 @@ package com.rpgGame.appModule.pet
 			{
 				goldBuyText=HtmlTextUtil.getTextColor(StaticValue.A_UI_GRAY_TEXT,"已达上限");					
 			}
-			TipTargetManager.show( _skin.btnYuanbao, TargetTipsMaker.makeSimpleTextTips(goldBuyText));
+			TipTargetManager.show( _skin.btnLijin, TargetTipsMaker.makeSimpleTextTips(goldBuyText));
 		}
 		
 		override protected function onHide():void

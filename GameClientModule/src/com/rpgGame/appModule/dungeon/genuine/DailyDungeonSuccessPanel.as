@@ -68,7 +68,7 @@ package com.rpgGame.appModule.dungeon.genuine
 			for(var i:int = 0;i<length;i++)
 			{
 				var grid:IconCDFace = IconCDFace.create(IcoSizeEnum.ICON_64);
-				grid.setUrlBg( "ui/common/gezikuang/tubiaodikuang/64.png");
+//				grid.setUrlBg( "ui/common/gezikuang/tubiaodikuang/64.png");
 				this.addChild(grid);
 				grid.x = startX+70*i;
 				grid.y = 347;
