@@ -35,6 +35,7 @@ package org.mokylin.skin.component.scrollbar
 			
 			this.currentState = "normal";
 			this.height = 193;
+			this.width = 22;
 			this.elementsContent = [track_i(),decrement_i(),increment_i(),thumb_i()];
 			
 			states = {
@@ -51,9 +52,9 @@ package org.mokylin.skin.component.scrollbar
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			decrement = temp;
 			temp.name = "decrement";
-			temp.left = 0;
 			temp.styleClass = org.mokylin.skin.component.scrollbar.skin_chat.button.ScrollBarSkin_decre;
 			temp.top = 0;
+			temp.x = 0;
 			return temp;
 		}
 
@@ -63,8 +64,8 @@ package org.mokylin.skin.component.scrollbar
 			increment = temp;
 			temp.name = "increment";
 			temp.bottom = 0;
-			temp.left = 0;
 			temp.styleClass = org.mokylin.skin.component.scrollbar.skin_chat.button.ScrollBarSkin_incre;
+			temp.x = 0;
 			return temp;
 		}
 
@@ -73,9 +74,9 @@ package org.mokylin.skin.component.scrollbar
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			thumb = temp;
 			temp.name = "thumb";
-			temp.left = 0;
 			temp.styleClass = org.mokylin.skin.component.scrollbar.skin_chat.button.ScrollBarSkin_thumb;
-			temp.top = 63;
+			temp.x = 0;
+			temp.y = 63;
 			return temp;
 		}
 

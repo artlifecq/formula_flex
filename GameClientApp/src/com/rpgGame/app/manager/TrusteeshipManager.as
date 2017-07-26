@@ -4,6 +4,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.fight.spell.CastSpellHelper;
 	import com.rpgGame.app.manager.ctrl.ControlAutoFightSelectSkill;
 	import com.rpgGame.app.manager.ctrl.ControlAutoPick;
+	import com.rpgGame.app.manager.ctrl.ControlTripleSkill;
 	import com.rpgGame.app.manager.fight.FightManager;
 	import com.rpgGame.app.manager.fightsoul.FightSoulManager;
 	import com.rpgGame.app.manager.input.KeyMoveManager;
@@ -65,6 +66,7 @@ package com.rpgGame.app.manager
 		private var ACTORTIME:int=4;
 		private var _autoPickCtrl:ControlAutoPick;
 		private var _autoSkillCtrl:ControlAutoFightSelectSkill;
+		private var _tripleSkillCtrl:ControlTripleSkill;
 		public function TrusteeshipManager()
 		{
 			_gTimer = new GameTimer("TrusteeshipManager", 500, 0, onUpdate);
@@ -85,6 +87,7 @@ package com.rpgGame.app.manager
 			_stateMachine = new AIStateMachine(role);
 			_autoPickCtrl=new ControlAutoPick(role);
 			_autoSkillCtrl=new ControlAutoFightSelectSkill(role,(role.data as HeroData).job);
+			_tripleSkillCtrl=new ControlTripleSkill();
 			TrusteeshipFightSoulManager.getInstance().setup(role);
 		}
 		public  function get autoPickCtrl():ControlAutoPick
@@ -457,6 +460,11 @@ package com.rpgGame.app.manager
 		public function get autoSkillCtrl():ControlAutoFightSelectSkill
 		{
 			return _autoSkillCtrl;
+		}
+
+		public function get tripleSkillCtrl():ControlTripleSkill
+		{
+			return _tripleSkillCtrl;
 		}
 		
 		

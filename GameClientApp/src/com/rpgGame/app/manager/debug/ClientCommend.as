@@ -284,7 +284,7 @@ package   com.rpgGame.app.manager.debug
 			});
 			commandList.put( ".pet", function (...arg):void
 			{
-				AppManager.showApp(AppConstant.RANKLISTPANLE);
+				AppManager.showApp(AppConstant.PET_PANLE);
 				//				var mod:int = arg[0];
 				//				
 				//				var petInfo:PetInfo=new PetInfo();
@@ -351,6 +351,21 @@ package   com.rpgGame.app.manager.debug
 					setTimeout(doCommand,1000*i,".bullet");
 				}
 				
+			});
+			commandList.put( ".ft", function (...arg):void
+			{
+				if (MainRoleManager.actor.stateMachine.isInFightState) 
+				{
+					MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_ENTER_LEAVE_FIGHT);
+				}
+				else
+				{
+					MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_ENTER_LEAVE_FIGHT);
+				}
+			});
+			commandList.put( ".b2", function (...arg):void
+			{
+				SpellAnimationHelper.use2=!SpellAnimationHelper.use2;
 			});
 		}
 		

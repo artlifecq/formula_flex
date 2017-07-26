@@ -1,8 +1,13 @@
 package com.rpgGame.coreData.cfg
 {
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.coreData.clientConfig.Q_map_jump;
 	import com.rpgGame.coreData.role.RoleType;
+	import com.rpgGame.coreData.role.SceneJumpPointData;
+	import com.rpgGame.coreData.role.SceneTranportData;
 	
+	import flash.geom.Point;
+	import flash.geom.Vector3D;
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 
@@ -32,7 +37,11 @@ package com.rpgGame.coreData.cfg
 			return _dataDic[sceneID];
 		}
 		
-		/*public static function getSceneJumpportDatas(sceneID : uint) : Array
+		
+		
+		
+		/**返回场景中跳跃点数据*/
+		public static function getSceneJumpportDatas(sceneID : uint) : Array
 		{
 			var arr : Array = new Array();
 			var list : Vector3D.<Q_map_jump> = _dataDic[sceneID];
@@ -43,13 +52,25 @@ package com.rpgGame.coreData.cfg
 			{
 				if (data.q_map_id == sceneID)
 				{
-					var tranportData : SceneTranportData = new SceneTranportData(RoleType.TYPE_TRANPORT_NORMAL);
-					tranportData.setConfigData(data);
-					arr.push(tranportData);
+					var jumpData:SceneJumpPointData=new SceneJumpPointData(RoleType.TYPE_JUMP);
+					jumpData.setConfigData(data);
+					arr.push(jumpData);
+					
+					/*var sourceArea:Vector.<Point>=AreaCfgData.getAreaPointsByID(data.q_jump_source_area_id);//传送区域点
+					var centerPoint:Point=AreaCfgData.getAreaPointsCenter(sourceArea);//传送区域中点
+					if(!centerPoint)
+						continue;
+					var startPoint:Vector3D=new Vector3D(centerPoint.x,0,centerPoint.y);
+					var destList:Array=JSONUtil.decode(data.q_jump_dest_list);
+					if(!destList||destList.length==0)
+						continue;
+					var stopPoint:Vector3D=new Vector3D(destList[destList.length-1][0],0,destList[destList.length-1][1]);
+					arr.push([startPoint,stopPoint]);*/
+					
 				}
 			}
 			return arr;
-		}*/
+		}
 		
 		
 		public function MapJumpCfgData()

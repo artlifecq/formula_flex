@@ -875,7 +875,7 @@ package com.rpgGame.app.manager.task
 				}
 				var information:String=taskData.q_finish_information_str;
 				var informationList:Array=information.split(";");
-				if(informationList.length>num)
+				if(informationList.length>num&&taskInfo.taskSubRateInfolist.length>num)
 				{
 					return getTaskOneIsFinish(informationList[num],taskInfo.taskSubRateInfolist[num]);
 				}

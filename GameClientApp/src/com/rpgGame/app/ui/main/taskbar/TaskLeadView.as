@@ -49,9 +49,15 @@ package com.rpgGame.app.ui.main.taskbar
 		}
 		private function init():void
 		{
+			_skin.but_openBg.visible=false;
+			_skin.btn_open.visible=false;
+			_skin.btn_close.visible=true;
+			_skin.task_effect.visible=true;
 			icoListGroup=new RewardGroup(IcoSizeEnum.ICON_42,_skin.pri_ico0,RewardGroup.ALIN_CENTER,4,6,6);
 			
 			skinList=new Array();
+			skinList.push(_skin.pri_navi0);
+			skinList.push(_skin.pri_navi1_txt);
 			skinList.push(_skin.pri_navi1);
 			skinList.push(_skin.pri_probar);
 			skinList.push(_skin.pri_navi2);
@@ -209,7 +215,9 @@ package com.rpgGame.app.ui.main.taskbar
 		private function setTitle(party:String,name:String,describe:String):void
 		{
 			titleLable.htmlText=party+name;
+			priLabel.height=300;
 			priLabel.htmlText=describe;
+			priLabel.height=priLabel.textHeight;
 		}
 		/**设置完成进度*/
 		private function setParcent(pid:int,nid:int):void
@@ -261,7 +269,7 @@ package com.rpgGame.app.ui.main.taskbar
 			}
 			
 			_skin.btnContinue.y=skinList[count].y+skinList[count].height+15;
-			_skin.uibg.height=_skin.btnContinue.y+45;
+			_skin.uibg.height=_skin.btnContinue.y+_skin.btnContinue.height+15;
 			
 			
 			/*for(i=0;i<3;i++)

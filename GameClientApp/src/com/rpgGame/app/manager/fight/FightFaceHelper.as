@@ -730,6 +730,7 @@ package com.rpgGame.app.manager.fight
 		{
 			if (showContainer == null)
 				return;
+			
 			var attackFace : AttackFace = AttackFace.createAttackFace(typeRes, numberRes, $attackValue, $specialType, $specialPos,extendData);
 			attackFace.touchAcross = true;
 			attackFace.touchable = false;
@@ -878,7 +879,7 @@ package com.rpgGame.app.manager.fight
 			var attackFace : AttackFace = $displayObject as AttackFace;
 			if (null == attackFace)
 				return;
-
+			attackFace.recycleSub();
 			attackFace.alpha = attackFace.scaleX = attackFace.scaleY = 1;
 			//
 			TweenLite.killTweensOf(attackFace);

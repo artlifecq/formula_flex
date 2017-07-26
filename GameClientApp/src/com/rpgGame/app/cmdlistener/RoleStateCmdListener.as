@@ -7,6 +7,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.manager.AreaMapManager;
 	import com.rpgGame.app.manager.ClientTriggerManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
+	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
@@ -92,6 +93,7 @@ package com.rpgGame.app.cmdlistener
 		private function sendJump(jumpid:int):void
 		{
 			jumpBink=false;
+			HorseManager.instance().setMountRideDown();//跳跃之前下马
 			SceneSender.jumppointTrigger(jumpid);
 		}
 		private function mainCharMoveThroughHandler() : void

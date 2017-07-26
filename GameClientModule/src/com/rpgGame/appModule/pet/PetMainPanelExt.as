@@ -1,8 +1,11 @@
 package com.rpgGame.appModule.pet
 {
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.PetManager;
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.sender.PetSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.FightValueUtil;
 	import com.rpgGame.app.view.icon.BgIcon;
@@ -11,14 +14,22 @@ package com.rpgGame.appModule.pet
 	import com.rpgGame.appModule.pet.sub.PetAttrCon;
 	import com.rpgGame.appModule.pet.sub.PetZoneBall;
 	import com.rpgGame.core.events.PetEvent;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.PetAdvanceCfg;
 	import com.rpgGame.coreData.cfg.PetCfg;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.clientConfig.Q_girl_advance;
 	import com.rpgGame.coreData.clientConfig.Q_girl_pet;
+	import com.rpgGame.coreData.clientConfig.Q_global;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
+	import com.rpgGame.coreData.type.CharAttributeType;
+	import com.rpgGame.coreData.type.TipType;
+	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.pet.bean.PetInfo;
 	
 	import away3d.events.Event;
@@ -42,6 +53,10 @@ package com.rpgGame.appModule.pet
 		private var _bgIco:BgIcon;
 		private var _touchCtrl:TouchCtrl;
 		private var _blessPanel:PetLevelUPPanelExt;
+		
+		private var goldBuyText:String="";
+		private var goldBuyMod:Q_global;
+		private var bindGoldBuyMod:Q_global;
 		public function PetMainPanelExt()
 		{
 			_skin=new MeiRen_Skin();
@@ -50,6 +65,8 @@ package com.rpgGame.appModule.pet
 		}
 		private function initConfig():void
 		{
+			goldBuyMod=GlobalSheetData.getSettingInfo(845);
+			bindGoldBuyMod=GlobalSheetData.getSettingInfo(846);
 			var pets:Array=PetCfg.dataArr;
 			var len:int=pets.length;
 			_headItems=[];
@@ -89,9 +106,10 @@ package com.rpgGame.appModule.pet
 			this._skin.btnTiaozhan.addEventListener(Event.TRIGGERED,onFightBtnClick);
 			this._skin.btnYuanbao.addEventListener(Event.TRIGGERED,onGoldAdd);
 			this._skin.btnLijin.addEventListener(Event.TRIGGERED,onBindGoldAdd);
-			this._skin.btnJinjie.addEventListener(Event.TRIGGERED,onJinjie);
+			//			this._skin.btnJinjie.addEventListener(Event.TRIGGERED,onJinjie);
 			
 			_touchCtrl=new TouchCtrl(_skin.btnJinjie,onShowLevelUpPanel,onShowAttrAdd,onHideAttrAdd);
+			TipTargetManager.show( _skin.btnInfo, TargetTipsMaker.makeTips( TipType.MEIREN_GUIZE_TIP, "" ,true) );
 		}
 		
 		private function onHideAttrAdd():void
@@ -109,12 +127,31 @@ package com.rpgGame.appModule.pet
 		private function onShowLevelUpPanel():void
 		{
 			// TODO Auto Generated method stub
+			//			if(_curSelectItem == null) return;
+			//			if(_curSelectItem.data.actived!=1)
+			//			{
+			//				NoticeManager.showNotifyById(1);
+			//				return;
+			//			}	
 			
+			if(_blessPanel==null || _blessPanel.stage==null) 
+			{
+				_blessPanel = new PetLevelUPPanelExt();
+				this.addChild(_blessPanel);
+				_blessPanel.x=this._skin.width;
+				_blessPanel.y=46;
+			}
+			onStageResize(_stage.stageWidth-_blessPanel.width,_stage.stageHeight);
+			_blessPanel.setData(_curSelectItem.data);
 		}
+		
 		private function onBindGoldAdd(eve:Event):void
 		{
 			// TODO Auto Generated method stub
-			
+			if(isCanChangeNum(2))
+			{
+				PetSender.reqExaBuyMessage(2);
+			}
 		}
 		
 		private function onJinjie(eve:Event):void
@@ -122,17 +159,87 @@ package com.rpgGame.appModule.pet
 			// TODO Auto Generated method stub
 			
 		}
+		
 		private function onGoldAdd(eve:Event):void
 		{
 			// TODO Auto Generated method stub
-			
+			if(isCanChangeNum(1))
+			{
+				PetSender.reqExaBuyMessage(1);
+			}
 		}
 		
 		private function onFightBtnClick(eve:Event):void
 		{
 			// TODO Auto Generated method stub
+			if(_curSelectItem==null) return;
+			if (_curSelectItem.data.actived==0) 
+			{
+				var qPet:Q_girl_pet=_curSelectItem.config;
+				//首冲
+				if (qPet.q_need_first_pay==0) 
+				{
+					//充值链接
+				}
+				else
+				{
+					//挑战请求
+					PetSender.reqEnterNextLevelMessage(qPet.q_zones_id);
+				}
+			}
+			else
+			{
+				if (Mgr.petMgr.curPetId==_curSelectItem.data.modelId) 
+				{
+					//休息请求
+					PetSender.reqPetDebut(Mgr.petMgr.curPetId);
+				}
+				else
+				{
+					//出战请求
+					PetSender.reqPetDebut(Mgr.petMgr.curPetId);
+				}
+			}
 			
 		}
+		
+		private function isCanChangeNum(type:int):Boolean
+		{
+			if(type==1)
+			{
+				var arr:Array=JSONUtil.decode(goldBuyMod.q_string_value);
+				var nowNum:int=Mgr.petMgr.glodNum;
+				var maxNum:int=arr.length;
+				if(nowNum>=maxNum)
+				{
+					NoticeManager.showNotifyById(21000);
+					return false;
+				}
+				else if(arr[nowNum]>MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_GOLD))
+				{
+					NoticeManager.showNotifyById(21005);
+					return false;
+				}
+			}
+			else
+			{
+				 arr=JSONUtil.decode(bindGoldBuyMod.q_string_value);
+				 nowNum=Mgr.petMgr.bindGlodNum;
+				 maxNum=arr.length;
+				if(nowNum>=maxNum)
+				{
+					NoticeManager.showNotifyById(21000);
+					return false;
+				}
+				else if(arr[nowNum]>MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_GOLD))
+				{
+					NoticeManager.showNotifyById(2013);
+					return false;
+				}
+			}
+			return true;
+		}
+		
 		private function hideZoneBall():void
 		{
 			_skin.grpIcon.visible=false;
@@ -148,6 +255,7 @@ package com.rpgGame.appModule.pet
 			for (var i:int = 0; i < len; i++) 
 			{
 				_zoneBalls[i].setEffect(i<num);
+				_zoneBalls[i].setData(_curSelectItem.data,(i+1));
 			}
 		}
 		private function onPetClick(item:PetHeadItemExt):void
@@ -188,7 +296,7 @@ package com.rpgGame.appModule.pet
 				else
 				{
 					showZoneBall(data.passlevel);
-				}
+				}	
 			}
 			updateRightData(data);
 		}
@@ -257,6 +365,7 @@ package com.rpgGame.appModule.pet
 		{
 			_skin.gBuy.visible=false;
 			_skin.lbContent.visible=false;
+			var tipStr:String="";
 			if (pet.actived==0) 
 			{
 				_skin.lbContent.visible=true;
@@ -266,12 +375,14 @@ package com.rpgGame.appModule.pet
 				{
 					_skin.btnTiaozhan.label="充值";
 					_skin.lbContent.text="参与首冲可获得";
+					tipStr="参与首冲可获得";
 				}
 				else
 				{
 					_skin.btnTiaozhan.label="挑战";
 					_skin.gBuy.visible=true;
 					_skin.lbContent.text="一次性通关副本可获得";
+					tipStr="点击进入挑战，一次性通关所有关卡可获得美人";
 				}
 			}
 			else
@@ -279,23 +390,27 @@ package com.rpgGame.appModule.pet
 				if (Mgr.petMgr.curPetId==pet.modelId) 
 				{
 					_skin.btnTiaozhan.label="休息";
+					tipStr="点击休息按钮美人停止作战\n无论美人出战与否都会永久提升主角属性";
 				}
 				else
 				{
-					_skin.btnTiaozhan.label="出站";
+					_skin.btnTiaozhan.label="出战";
+					tipStr="点击出战按钮美人协助作战\n无论美人出战与否都会永久提升主角属性";
 				}
-			}
+			}			
+			TipTargetManager.show( _skin.btnTiaozhan, TargetTipsMaker.makeSimpleTextTips(tipStr));
 		}
 		override protected function onShow():void
 		{
 			EventManager.addEvent(PetEvent.PET_DATA_CHANGE,onPetChange);
+			EventManager.addEvent(PetEvent.PET_BUYNUM_CHANGE,onBuyNumChange);
 			super.onShow();
+			onBuyNumChange();
 			//重新设置数据
 			for each (var item:PetHeadItemExt in _headItems) 
 			{
 				item.setServerData(Mgr.petMgr.getPet(item.config.q_id))
 			}
-			
 			
 			var tmp:PetHeadItemExt=null;
 			if (_curSelectItem!=null) 
@@ -354,10 +469,56 @@ package com.rpgGame.appModule.pet
 			}
 			
 		}
+		
+		private function onBuyNumChange():void
+		{
+			// TODO Auto Generated method stub
+			var price:int;
+			var nowNum:int;
+			var maxNum:int;
+			var arr:Array;
+			arr=JSONUtil.decode(goldBuyMod.q_string_value);
+			nowNum=Mgr.petMgr.glodNum;
+			maxNum=arr.length;
+			if(nowNum<maxNum)
+			{
+				price=arr[nowNum];
+				goldBuyText=HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"消耗")+HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,price.toString())+
+					HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"元宝临时提高实力")+HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"（已使用"+nowNum+"/"+maxNum+"次）\n")+
+					HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"可获得伤害加深")+HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"+3%")+
+					HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"或防御提升")+HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"+3%");
+			}
+			else
+			{
+				goldBuyText=HtmlTextUtil.getTextColor(StaticValue.A_UI_GRAY_TEXT,"已达上限");					
+			}
+			TipTargetManager.show( _skin.btnYuanbao, TargetTipsMaker.makeSimpleTextTips(goldBuyText));
+			
+			arr=JSONUtil.decode(bindGoldBuyMod.q_string_value);
+			nowNum=Mgr.petMgr.bindGlodNum;
+			maxNum=arr.length;
+			if(nowNum<maxNum)
+			{
+				price=arr[nowNum];
+				goldBuyText=HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"消耗")+HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,price.toString())+
+					HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"礼金临时提高实力")+HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"（已使用"+nowNum+"/"+maxNum+"次）\n")+
+					HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"可获得伤害加深")+HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"+3%")+
+					HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"或防御提升")+HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"+3%");
+			}
+			else
+			{
+				goldBuyText=HtmlTextUtil.getTextColor(StaticValue.A_UI_GRAY_TEXT,"已达上限");					
+			}
+			TipTargetManager.show( _skin.btnLijin, TargetTipsMaker.makeSimpleTextTips(goldBuyText));
+		}
+		
 		override protected function onHide():void
 		{
 			super.onHide();
+			if(_blessPanel)
+				MCUtil.removeSelf(_blessPanel);
 			EventManager.removeEvent(PetEvent.PET_DATA_CHANGE,onPetChange);
+			EventManager.removeEvent(PetEvent.PET_BUYNUM_CHANGE,onBuyNumChange);
 		}
 		public function updatePos():void
 		{

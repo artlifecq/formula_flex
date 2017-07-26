@@ -177,6 +177,7 @@ package com.rpgGame.app.manager
 		}
 		public function hasExpAddAtf(heroId:long,value:int):AttackFace
 		{
+			
 			var need:Boolean=needShowNotice(6001,heroId);
 			if (need) 
 			{
@@ -198,6 +199,7 @@ package com.rpgGame.app.manager
 		}
 		public function hasBossHurtAddAtf(bossId:long,heroId:long,value:int):AttackFace
 		{
+			
 			var target:SceneRole=SceneManager.getSceneObjByID(bossId.ToGID()) as SceneRole;
 			if (!target||SceneCharType.MONSTER!=target.type) 
 			{
@@ -247,6 +249,7 @@ package com.rpgGame.app.manager
 		}
 		public function hasAttackPlayerAddAtf(bossId:long,heroId:long,value:int):AttackFace
 		{
+			
 			var target:SceneRole=SceneManager.getSceneObjByID(bossId.ToGID()) as SceneRole;
 			if (!target||SceneCharType.PLAYER!=target.type) 
 			{
@@ -264,6 +267,7 @@ package com.rpgGame.app.manager
 	
 		public function hasXiQuHpAtf(heroId:long,value:int):AttackFace
 		{
+			
 			var need:Boolean=needShowNotice(6007,heroId);
 			if (need) 
 			{

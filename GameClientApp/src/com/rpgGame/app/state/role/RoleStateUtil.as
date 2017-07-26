@@ -22,6 +22,7 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.UserMoveEvent;
+	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.res.AvatarResConfigSetData;
 	import com.rpgGame.coreData.clientConfig.AvatarResConfig;
 	import com.rpgGame.coreData.info.move.RoleMoveInfo;
@@ -52,7 +53,7 @@ package com.rpgGame.app.state.role
 	{
 		public static var lastWalkTime : int = 0;
 		public static const WALK_DELAY : int = 100;
-		public static const MAX_WALK_SPEED : int = 500;
+		public static const MAX_WALK_SPEED : int = GlobalSheetData.getIntValue(116);
 
 		public static const DEATH_STATE_EFFECT_CORRODE : int = 1;
 		public static const DEATH_STATE_EFFECT_COLOR : int = 2;
@@ -126,7 +127,6 @@ package com.rpgGame.app.state.role
 		 * @param role
 		 * @param gridPos
 		 * @param onArrive
-		 *@param noWalk 寻路路径小不用寻路，也返回方法 返回 role   任务上用到 ---------yt
 		 */
 		public static function walkToPos(role : SceneRole, pos : Vector3D, spacing : int = 0, data : Object = null, 
 										 onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null,needSprite:Boolean=false) : Boolean
@@ -241,6 +241,11 @@ package com.rpgGame.app.state.role
 					NoticeManager.showNotify(LangQ_NoticeInfo.WalkMoveIsStiff); //"定身中不能移动"
 					return false;
 				}
+				else if (walkRole.stateMachine.isJumping||walkRole.stateMachine.isJumpRising)//跳跃中不能移动
+				{
+					return false;
+				}
+				
 				RoleStateUtil.lastWalkTime = nowTime;
 			}
 			var moveSpeed : int = (walkRole.data as RoleData).totalStat.moveSpeed;

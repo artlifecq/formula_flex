@@ -101,10 +101,6 @@ package com.rpgGame.app.manager.input
             if (!bool) {
                 return;
             }
-			if (MainRoleManager.actor.stateMachine.isTripleLockCaseSpell) 
-			{
-				return ;
-			}
             var canRoll : Boolean = DodgeManager.getinstance().canUseRoll();
             if (canRoll)
 			{

@@ -245,6 +245,7 @@ package com.rpgGame.app.manager.mount
 			var disance:Number = Point.distance(new Point(walkRole.x, walkRole.z), new Point(pos.x, pos.y));
 			if(disance <q_mount.q_distance)
 				return ;
+			
 			clearDelatAutoRideMount();
 			var rideTime:int = q_mount.q_ride_time;
 			TweenLite.delayedCall(rideTime * 0.001, delayRideMount);
@@ -272,6 +273,27 @@ package com.rpgGame.app.manager.mount
 				onRequestSetUpMountRide(true);
 			}
 		}
+		/**不管有么有上马，都上马*/
+		public function setMountRideUp():void
+		{
+			var currentHouseid:int = HeroData(MainRoleManager.actor.data).mount;
+			
+			if (currentHouseid == 0)
+			{
+				onRequestSetUpMountRide(true);
+			}
+		}
+		/**不管有么有上马，都下马*/
+		public function setMountRideDown():void
+		{
+			var currentHouseid:int = HeroData(MainRoleManager.actor.data).mount;
+			
+			if (currentHouseid > 0)
+			{
+				onRequestSetUpMountRide(false);
+			}
+		}
+		
 		
 		/**
 		 * 请求坐骑切换/上马/下马 
@@ -279,6 +301,11 @@ package com.rpgGame.app.manager.mount
 		 */
 		public function onRequestSetUpMountRide(isRide:Boolean):void
 		{
+			if(isInRideCD && isRide)
+			{
+				return;
+			}
+			
 			//坐骑未开放
 			if(_horsedataInfo == null)
 				return ;
@@ -298,14 +325,13 @@ package com.rpgGame.app.manager.mount
 				return;
 			}*/
 			
-			trace(MainRoleManager.actor.stateMachine.isRiding);
 			var ref:MountRideStateReference = null;
 			if (MainRoleManager.actor.stateMachine.passTo(RoleStateType.CONTROL_MOUNT_RIDE))
 			{
 				if (isRide)
 				{
 					isInRideCD = true;
-//					_tweenLite = TweenLite.delayedCall((MountMiscData.upOrDownCd * 0.001), onDelayedCD);
+					_tweenLite = TweenLite.delayedCall((200 * 0.001), onDelayedCD);
 				}
 				ref = (MainRoleManager.actor.stateMachine.getReference(MountRideStateReference) as MountRideStateReference);
 				ref.setParams(isRide,hoseId);
@@ -323,8 +349,18 @@ package com.rpgGame.app.manager.mount
 			}
 		}
 		
+		/**
+		 * 专门针对行走距离过长，要骑马做的延时回调函数 
+		 * 
+		 */		
 		public function delayRideMount():void
 		{
+			if(isInRideCD)
+				return;
+			if(MainRoleManager.actor.stateMachine.isRiding)
+			{
+				return;
+			}
 			onRequestSetUpMountRide(true);
 		}
 		
