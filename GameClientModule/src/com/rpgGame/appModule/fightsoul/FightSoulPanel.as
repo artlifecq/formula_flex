@@ -237,12 +237,13 @@ package com.rpgGame.appModule.fightsoul
 			_skin.List.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			_skin.List.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
 			var layout:VerticalLayout = new VerticalLayout();
-			layout.gap = 5;
+			layout.gap = 0;
 			_skin.List.layout = layout;
 			_skin.List.dataProvider = new ListCollection();
 			_skin.lb_progress.touchable = false;
 			
 			_skillIcon = IconCDFace.create(IcoSizeEnum.ICON_42);
+			_skillIcon.showCD = false;
 			_skillIcon.bindBg(_skin.icon);
 			addChild(_skillIcon);
 			

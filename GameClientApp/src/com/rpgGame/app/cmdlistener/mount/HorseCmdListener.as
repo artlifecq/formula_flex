@@ -3,7 +3,6 @@ package com.rpgGame.app.cmdlistener.mount
 	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.netData.horse.message.SCExtraItemNumMessage;
 	import com.rpgGame.netData.horse.message.SCHorseAllInfoToClientMessage;
 	import com.rpgGame.netData.horse.message.SCHorseIllusionToClientMessage;

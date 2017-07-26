@@ -19,7 +19,6 @@ package com.rpgGame.app.ui.scene.dungeon
 	import com.rpgGame.coreData.cfg.ZoneMultyCfgData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
-	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_dailyzone_monster;
 	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.clientConfig.Q_zone;
@@ -28,13 +27,10 @@ package com.rpgGame.app.ui.scene.dungeon
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
-	import com.rpgGame.coreData.type.TaskType;
-	import com.rpgGame.netData.task.bean.TaskSubRateInfo;
 	import com.rpgGame.netData.zone.bean.KillMonsterInfo;
 	
 	import flash.geom.Point;
 	
-	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.UIAsset;
 	
