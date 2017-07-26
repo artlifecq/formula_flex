@@ -24,7 +24,7 @@ package org.mokylin.skin.mainui.head
 
 		public var lbl_num:feathers.controls.Label;
 
-		public var uim_zhandouli0:feathers.controls.UINumber;
+		public var uim_zhandouli:feathers.controls.UINumber;
 
 		public var xuetiao_hong:feathers.controls.UIAsset;
 
@@ -41,7 +41,7 @@ package org.mokylin.skin.mainui.head
 			this.currentState = "normal";
 			this.height = 92;
 			this.width = 434;
-			this.elementsContent = [__Head_middle_UIAsset1_i(),xuetiao_hong_i(),lbl_name_i(),grp_buff_i(),lbl_num_i(),zhan_bg_i(),uim_zhandouli0_i()];
+			this.elementsContent = [__Head_middle_UIAsset1_i(),xuetiao_hong_i(),lbl_name_i(),grp_buff_i(),lbl_num_i(),zhan_bg_i(),uim_zhandouli_i()];
 			
 			states = {
 			};
@@ -104,11 +104,11 @@ package org.mokylin.skin.mainui.head
 			return temp;
 		}
 
-		private function uim_zhandouli0_i():feathers.controls.UINumber
+		private function uim_zhandouli_i():feathers.controls.UINumber
 		{
 			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
-			uim_zhandouli0 = temp;
-			temp.name = "uim_zhandouli0";
+			uim_zhandouli = temp;
+			temp.name = "uim_zhandouli";
 			temp.gap = -6;
 			temp.height = 25;
 			temp.label = "6521478";
