@@ -81,7 +81,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [imgBg_i(),__Jingmai_Skin_UIAsset3_i(),grpZhenqi_i(),mc_name_i(),btn_prev_i(),btn_next_i(),rdo_renmai_i(),rdo_dumai_i(),rdo_chongmai_i(),rdo_daimai_i(),rdo_yinqiaomai_i(),rdo_yangqiaomai_i(),__Jingmai_Skin_SkinnableContainer2_i(),__Jingmai_Skin_SkinnableContainer3_i(),btnClose_i(),btnOpen_i(),__Jingmai_Skin_Label1_i(),btn_hecheng_i(),__Jingmai_Skin_UIAsset5_i(),NumZhanli_i()];
+			this.elementsContent = [imgBg_i(),__Jingmai_Skin_UIAsset3_i(),grpZhenqi_i(),mc_name_i(),btn_prev_i(),btn_next_i(),rdo_renmai_i(),rdo_dumai_i(),rdo_chongmai_i(),rdo_daimai_i(),rdo_yinqiaomai_i(),rdo_yangqiaomai_i(),__Jingmai_Skin_SkinnableContainer2_i(),btnClose_i(),btn_hecheng_i(),__Jingmai_Skin_UIAsset5_i(),NumZhanli_i(),__Jingmai_Skin_Label1_i(),btnOpen_i()];
 			
 			states = {
 			};
@@ -114,24 +114,11 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 773;
-			temp.y = 98;
+			temp.y = 97;
 			return temp;
 		}
 
 		private function __Jingmai_Skin_SkinnableContainer2_i():feathers.controls.SkinnableContainer
-		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			temp.height = 442;
-			temp.touchable = false;
-			temp.touchGroup = true;
-			var skin:StateSkin = new org.mokylin.skin.app.beibao.jingmai.Jianmai_Bianxian()
-			temp.skin = skin
-			temp.x = 744;
-			temp.y = 88;
-			return temp;
-		}
-
-		private function __Jingmai_Skin_SkinnableContainer3_i():feathers.controls.SkinnableContainer
 		{
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			temp.height = 442;
@@ -191,7 +178,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.name = "btnOpen";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_you;
 			temp.x = 877;
-			temp.y = 96;
+			temp.y = 95;
 			return temp;
 		}
 

@@ -100,7 +100,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			imgStone = temp;
 			temp.name = "imgStone";
-			temp.styleName = "ui/app/beibao/icons/icon/baojibianshi/huangse.png";
+			temp.styleName = "ui/app/beibao/icons/bianshi/5/4.png";
 			temp.x = 11;
 			temp.y = 146;
 			return temp;
@@ -111,15 +111,15 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb_Stone = temp;
 			temp.name = "lb_Stone";
-			temp.height = 34;
+			temp.height = 19;
 			temp.letterSpacing = 0;
-			temp.text = "可镶嵌$获得砭石属性加成。砭石类型一致才可镶嵌";
+			temp.text = "可镶嵌$获得砭石属性加成";
 			temp.textAlign = "left";
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 229;
 			temp.x = 48;
-			temp.y = 146;
+			temp.y = 150;
 			return temp;
 		}
 
@@ -202,7 +202,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiName2 = temp;
 			temp.name = "uiName2";
-			temp.styleName = "ui/common/tips/tipswenzi/jineng/chongxueshuxing.png";
+			temp.styleName = "ui/common/tips/tipswenzi/jineng/jihuoshuxing.png";
 			temp.x = 13;
 			temp.y = 109;
 			return temp;

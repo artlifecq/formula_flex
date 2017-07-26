@@ -66,8 +66,8 @@ package com.rpgGame.appModule.jingmai
 				sbtn.addEventListener(Event.TRIGGERED,onTriggered);
 			}
 			_attrView=new MeridianAttrViewPanelExt(_skin.NumZhanli);
-			_attrView.x=940;
-			_attrView.y=32;
+			_attrView.x=955;
+			_attrView.y=42;
 			_container.addChild(_attrView);
 			initData();
 		}
@@ -304,7 +304,9 @@ package com.rpgGame.appModule.jingmai
 			// TODO Auto Generated method stub
 			if (CharAttributeType.RES_ZHENQI==type) 
 			{
-				_skin.lb_zhenqi.text=MainRoleManager.actorInfo.curZhenqi.toString();
+				_skin.lb_zhenqi.text=MainRoleManager.actorInfo.curZhenqi.toString()+"/"+MainRoleManager.actorInfo.maxZhenqi;
+				_skin.proZhenqi.maximum=MainRoleManager.actorInfo.maxZhenqi;
+				_skin.proZhenqi.value=MainRoleManager.actorInfo.curZhenqi;
 			}
 			checkForUpdate();
 		}

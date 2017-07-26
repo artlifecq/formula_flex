@@ -148,7 +148,7 @@ package com.rpgGame.appModule.jingmai.sub
 				{
 					var stoneLv:int=ItemConfig.getItemLevelNum(_data.stone[0].itemModelId);
 					var qitem:Q_item=ItemConfig.getQItemByID(_data.stone[0].itemModelId);
-					setIcoUrl("ui/app/beibao/icons/bianshi/"+qitem.q_default+"/"+config.q_stone_type+".png",34,36);
+					setIcoUrl("ui/app/beibao/icons/bianshi/"+qitem.q_default+"/"+config.q_stone_type+".png",27,27);
 					labAtt.text=stoneLv+"";
 					if (hasBetter) 
 					{
@@ -178,7 +178,7 @@ package com.rpgGame.appModule.jingmai.sub
 			else
 			{
 				this.labAtt.visible=false;
-				setIcoUrl("ui/app/beibao/icons/suo.png",34,25);
+				setIcoUrl("ui/app/beibao/icons/suo.png",27,19);
 			}
 			setStoneBg(canActive);
 			showLoopEffect(hasBetter);
@@ -202,7 +202,7 @@ package com.rpgGame.appModule.jingmai.sub
 				if (canActive) 
 				{
 				
-					setIcoUrl("ui/app/beibao/icons/jingmai/weijihuo/"+config.q_huponameurl+".png",32,32);
+					setIcoUrl("ui/app/beibao/icons/jingmai/weijihuo/"+config.q_huponameurl+".png",23,23);
 					//setIconFilter(true);
 					needFilter=true;
 					//判断能否升级
@@ -222,12 +222,12 @@ package com.rpgGame.appModule.jingmai.sub
 				else
 				{
 					labAtt.visible=false;
-					setIcoUrl("ui/app/beibao/icons/suo.png",34,25);
+					setIcoUrl("ui/app/beibao/icons/suo.png",27,19);
 				}
 			}
 			else
 			{
-				setIcoUrl("ui/app/beibao/icons/jingmai/jihuo/"+config.q_huponameurl+".png",32,32);
+				setIcoUrl("ui/app/beibao/icons/jingmai/jihuo/"+config.q_huponameurl+".png",23,23);
 				needEff=Mgr.meridianMgr.getCanLevelUp(_data);
 				if (needEff) 
 				{

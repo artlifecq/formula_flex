@@ -57,19 +57,19 @@ package com.rpgGame.appModule.jingmai.sub
 				tmpC=configList[i];
 				if (_stateSkin.hasOwnProperty("ico"+(2+i))) 
 				{
-					next=_stateSkin["ico"+(2+i)];
+					next=_stateSkin["icd"+(2+i)];
 					if (next) 
 					{
-						posA=[new Point(pointBG.x+pointBG.width/2,pointBG.y+pointBG.height/2)];
+						posA=[new Point(pointBG.x+24,pointBG.y+24)];
 						
 						//有中间拐点
 						if (tmpC.q_coord!=null&&tmpC.q_coord!="") 
 						{
 							var coodA:Array=tmpC.q_coord.split(",");
-							posA.push(new Point(int(coodA[0])+pointBG.width/2,int(coodA[1])+pointBG.height/2));
+							posA.push(new Point(int(coodA[0])+24,int(coodA[1])+24));
 						}
-						posA.push(new Point(next.x+next.width/2,next.y+next.height/2));
-						drawLine=new MeridianMapLine("ui/app/beibao/jingmai/line/liang/cheng.png","ui/app/beibao/jingmai/line/an/cheng.png",posA);
+						posA.push(new Point(next.x+24,next.y+24));
+						drawLine=new MeridianMapLine("ui/app/beibao/jingmai/line/lang/"+meridianId+".png","ui/app/beibao/jingmai/line/an/"+meridianId+".png",posA);
 						linesContianer.addChild(drawLine);
 					}
 				}

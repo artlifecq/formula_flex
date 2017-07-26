@@ -133,8 +133,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grp_icon = temp;
 			temp.name = "grp_icon";
-			temp.x = 72;
-			temp.y = 39;
+			temp.x = 76;
+			temp.y = 42;
 			temp.elementsContent = [ico1_i(),ico12_i(),ico13_i(),ico14_i(),ico2_i(),ico3_i(),ico4_i(),ico5_i(),ico6_i(),ico7_i(),ico8_i(),ico9_i(),ico10_i(),ico11_i()];
 			return temp;
 		}
@@ -166,7 +166,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icd10 = temp;
 			temp.name = "icd10";
-			temp.styleName = "ui/app/beibao/icons/bianxian/cheng/an/0.png";
+			temp.styleName = "ui/app/beibao/icons/bianxian/1/an/0.png";
 			temp.x = 214;
 			temp.y = 210;
 			return temp;
@@ -177,7 +177,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icd11 = temp;
 			temp.name = "icd11";
-			temp.styleName = "ui/app/beibao/icons/bianxian/cheng/an/0.png";
+			temp.styleName = "ui/app/beibao/icons/bianxian/1/an/0.png";
 			temp.x = 171;
 			temp.y = 169;
 			return temp;
@@ -188,7 +188,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icd12 = temp;
 			temp.name = "icd12";
-			temp.styleName = "ui/app/beibao/icons/bianxian/cheng/an/0.png";
+			temp.styleName = "ui/app/beibao/icons/bianxian/1/an/0.png";
 			temp.x = 191;
 			temp.y = 125;
 			return temp;
@@ -199,7 +199,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icd13 = temp;
 			temp.name = "icd13";
-			temp.styleName = "ui/app/beibao/icons/bianxian/cheng/an/0.png";
+			temp.styleName = "ui/app/beibao/icons/bianxian/1/an/0.png";
 			temp.x = 125;
 			temp.y = 61;
 			return temp;
@@ -210,7 +210,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icd14 = temp;
 			temp.name = "icd14";
-			temp.styleName = "ui/app/beibao/icons/bianxian/cheng/an/0.png";
+			temp.styleName = "ui/app/beibao/icons/bianxian/1/an/0.png";
 			temp.x = 60;
 			temp.y = 125;
 			return temp;
@@ -221,7 +221,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icd1 = temp;
 			temp.name = "icd1";
-			temp.styleName = "ui/app/beibao/icons/bianxian/cheng/an/0.png";
+			temp.styleName = "ui/app/beibao/icons/bianxian/1/an/0.png";
 			temp.x = 125;
 			temp.y = 125;
 			return temp;
@@ -232,7 +232,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icd2 = temp;
 			temp.name = "icd2";
-			temp.styleName = "ui/app/beibao/icons/bianxian/cheng/an/0.png";
+			temp.styleName = "ui/app/beibao/icons/bianxian/1/an/0.png";
 			temp.x = 125;
 			temp.y = 190;
 			return temp;
@@ -243,7 +243,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icd3 = temp;
 			temp.name = "icd3";
-			temp.styleName = "ui/app/beibao/icons/bianxian/cheng/an/0.png";
+			temp.styleName = "ui/app/beibao/icons/bianxian/1/an/0.png";
 			temp.x = 125;
 			temp.y = 249;
 			return temp;
@@ -254,7 +254,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icd4 = temp;
 			temp.name = "icd4";
-			temp.styleName = "ui/app/beibao/icons/bianxian/cheng/an/0.png";
+			temp.styleName = "ui/app/beibao/icons/bianxian/1/an/0.png";
 			temp.x = 40;
 			temp.y = 210;
 			return temp;
@@ -265,7 +265,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icd5 = temp;
 			temp.name = "icd5";
-			temp.styleName = "ui/app/beibao/icons/bianxian/cheng/an/0.png";
+			temp.styleName = "ui/app/beibao/icons/bianxian/1/an/0.png";
 			temp.x = 1;
 			temp.y = 125;
 			return temp;
@@ -276,7 +276,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icd6 = temp;
 			temp.name = "icd6";
-			temp.styleName = "ui/app/beibao/icons/bianxian/cheng/an/0.png";
+			temp.styleName = "ui/app/beibao/icons/bianxian/1/an/0.png";
 			temp.x = 40;
 			temp.y = 37;
 			return temp;
@@ -287,7 +287,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icd7 = temp;
 			temp.name = "icd7";
-			temp.styleName = "ui/app/beibao/icons/bianxian/cheng/an/0.png";
+			temp.styleName = "ui/app/beibao/icons/bianxian/1/an/0.png";
 			temp.x = 125;
 			temp.y = 2;
 			return temp;
@@ -298,7 +298,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icd8 = temp;
 			temp.name = "icd8";
-			temp.styleName = "ui/app/beibao/icons/bianxian/cheng/an/0.png";
+			temp.styleName = "ui/app/beibao/icons/bianxian/1/an/0.png";
 			temp.x = 214;
 			temp.y = 37;
 			return temp;
@@ -309,7 +309,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icd9 = temp;
 			temp.name = "icd9";
-			temp.styleName = "ui/app/beibao/icons/bianxian/cheng/an/0.png";
+			temp.styleName = "ui/app/beibao/icons/bianxian/1/an/0.png";
 			temp.x = 247;
 			temp.y = 125;
 			return temp;
