@@ -12,7 +12,7 @@ package com.rpgGame.coreData.cfg.meridian
 		public function MeridianCfg()
 		{
 		}
-		
+		private static var _maxHash:HashMap;
 		private static var _dataDic:Dictionary;
 		private static var _dataArr:Array;
 		public static function setup( data:ByteArray ):void
@@ -63,6 +63,31 @@ package com.rpgGame.coreData.cfg.meridian
 		{
 			return _dataArr;
 		}
-
+		public static function getMaxLevel(merdianId:int,posId:int):int
+		{
+			if (!_maxHash) 
+			{
+				_maxHash=new HashMap();
+				var len:int=_dataArr.length;
+				var tmp:Q_meridian;
+				var key:String;
+				var lv:int=0;
+				var tmpArr:Array;
+				var oldLv:int;
+				for (var i:int = 0; i < len; i++) 
+				{
+					tmp=_dataArr[i];
+					tmpArr=tmp.q_meridian_id.split("_");
+					key=tmpArr[0]+"_"+tmpArr[1];
+					lv=tmpArr[2];
+					oldLv=_maxHash.getValue(key);
+					if (lv>oldLv) 
+					{
+						_maxHash.put(key,lv);
+					}
+				}
+			}
+			return _maxHash.getValue(merdianId+"_"+posId);
+		}
 	}
 }

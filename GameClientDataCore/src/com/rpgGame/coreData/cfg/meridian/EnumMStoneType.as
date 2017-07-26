@@ -29,7 +29,7 @@ package com.rpgGame.coreData.cfg.meridian
 				}
 				case T_HP:
 				{
-					return "生命砭石"
+					return "气血砭石"
 					break;
 				}
 				case T_CRIT:

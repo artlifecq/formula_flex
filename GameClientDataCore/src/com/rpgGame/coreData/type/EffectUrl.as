@@ -231,6 +231,8 @@ package com.rpgGame.coreData.type
 		public static const EFFECT_HEAD_BLEED:String="tx_liuxuexiaoguo";
 		
 		public static const UI_PET_BALL:String="ui_meiren_xiaoqiu";
+		
+		public static const UI_JINGMAI_STAR:String="ui_jingmai_liuxing";
 		public function EffectUrl()
 		{
 		}
