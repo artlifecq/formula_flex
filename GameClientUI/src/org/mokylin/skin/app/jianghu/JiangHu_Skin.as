@@ -5,7 +5,7 @@ package org.mokylin.skin.app.jianghu
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import feathers.layout.HorizontalLayout;
-	import org.mokylin.skin.common.yiji_panelbg2_Skin;
+	import org.mokylin.skin.common.TongYongPanelbg1;
 
 	/**
 	 * @private
@@ -26,7 +26,7 @@ package org.mokylin.skin.app.jianghu
 			
 			this.currentState = "normal";
 			this.height = 587;
-			this.width = 947;
+			this.width = 956;
 			this.elementsContent = [bg_i(),__JiangHu_Skin_UIAsset1_i()];
 			
 			states = {
@@ -44,8 +44,8 @@ package org.mokylin.skin.app.jianghu
 			temp.height = 499;
 			temp.styleName = "ui/common/background/neikuang_1.png";
 			temp.width = 922;
-			temp.x = 14;
-			temp.y = 69;
+			temp.x = 18;
+			temp.y = 82;
 			return temp;
 		}
 
@@ -55,9 +55,9 @@ package org.mokylin.skin.app.jianghu
 			bg = temp;
 			temp.name = "bg";
 			temp.height = 587;
-			var skin:StateSkin = new org.mokylin.skin.common.yiji_panelbg2_Skin()
+			var skin:StateSkin = new org.mokylin.skin.common.TongYongPanelbg1()
 			temp.skin = skin
-			temp.width = 947;
+			temp.width = 956;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
