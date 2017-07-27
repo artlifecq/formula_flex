@@ -389,7 +389,7 @@ package com.rpgGame.app.manager.role
 				case RenderUnitType.HAIR:
 				case RenderUnitType.WEAPON:
 				case RenderUnitType.DEPUTY_WEAPON:
-				case RenderUnitType.MOUNT:
+//				case RenderUnitType.MOUNT:
 					ru.setSoftOutline(null);
 					break;
 			}

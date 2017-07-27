@@ -221,11 +221,6 @@ package com.rpgGame.app.state.role.action
 				case RenderUnitType.DEPUTY_WEAPON:
 					render.repeat = 1;
 					render.setStatus(statusType, _useCrossfadeTransition ? 0.2 : null, time);
-				/*	if (role.type == SceneCharType.MONSTER)
-					{
-						var monsterData : MonsterData = role.data as MonsterData;
-						trace("死亡了开始播放:"+getTimer()+",id:"+monsterData.id);
-					}*/
 					if (isFreeze)
 						render.stop(time);
 					render.visible = true;

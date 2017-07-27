@@ -35,7 +35,6 @@ package com.rpgGame.app.state.role.action
 		{
 			super.playAnimation(role, render, isFreeze, time, speedRatio);
 
-			var isHideState:Boolean=(_machine.owner as SceneRole).stateMachine.isHiding;
 			var statusType : String = RoleActionType.getActionType(RoleActionType.PREWAR, (_machine as RoleStateMachine).isRiding);
 			switch (render.type)
 			{
@@ -43,10 +42,7 @@ package com.rpgGame.app.state.role.action
 				case RenderUnitType.HAIR:
 				case RenderUnitType.WEAPON:
 				case RenderUnitType.DEPUTY_WEAPON:
-					if (!isHideState) 
-					{
-						render.visible = true;
-					}
+					render.visible = true;
 					render.repeat = 0;
 					render.setStatus(statusType, _useCrossfadeTransition ? 0.2 : null, time);
 					break;
@@ -61,10 +57,7 @@ package com.rpgGame.app.state.role.action
 				case RenderUnitType.KNIFE_LIGHT:
 					break;
 				case RenderUnitType.WEAPON_EFFECT:
-					if (!isHideState) 
-					{
-						render.visible = true;
-					}
+					render.visible = true;
 					break;
 				case RenderUnitType.EFFECT:
 					render.visible = false;

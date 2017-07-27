@@ -887,7 +887,6 @@ package com.rpgGame.app.cmdlistener.scene
 			}
 			else//走怪物创建流程
 			{
-				
 				data = new MonsterData(RoleType.TYPE_MONSTER);
 				data.serverID = info.monsterId;
 				data.id = info.monsterId.ToGID();
