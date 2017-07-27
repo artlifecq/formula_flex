@@ -140,9 +140,9 @@ package com.rpgGame.app.ui.main.taskbar
 					case _skin.sec_subbut1:
 						receiveRewordBut(1);
 						break;
-					case _skin.sec_subbut2:
+					/*case _skin.sec_subbut2:
 						receiveRewordBut(2);
-						break;
+						break;*/
 					case _skin.btnContinue:
 						TaskControl.killWalkBut(1,0,1);
 						break;

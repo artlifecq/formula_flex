@@ -30,12 +30,6 @@ package com.rpgGame.coreData.type
 		/**6副本*/
 		public static var SUB_QUIT_ZONE:int = 6;
 		
-		/**10其它挂机*/
-		public static var SUB_GUAJI:int = 10;
-		
-		
-		
-		
 		
 		/** 主线任务 */
 		public static const TASK_TYPE_MAIN_LINE : int = 1;

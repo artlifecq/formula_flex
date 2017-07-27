@@ -382,7 +382,6 @@ package com.rpgGame.app.cmdlistener.scene
 		private function RecvEnterMapMessage(msg:ResEnterMapMessage):void
 		{
 			GameLog.addShow("收到成功进入地图消息");
-			Lyt.a("进入地图");
 			//			var infoID : uint = buffer.readVarint32();
 			//			var pkMode : uint = infoID & 15;
 			var line : uint = msg.line;

@@ -78,7 +78,7 @@ package com.rpgGame.appModule.activety.zonghe.lijin
 		private function init():void
 		{
 			var i:int;
-			icoList1Group=new RewardGroup(IcoSizeEnum.ICON_64,_skin.icon0,RewardGroup.ALIN_LEFT,10,6,6);
+			icoList1Group=new RewardGroup(IcoSizeEnum.ICON_64,_skin.icon0,RewardGroup.ALIN_CENTER,10,6,6);
 			
 			
 		}

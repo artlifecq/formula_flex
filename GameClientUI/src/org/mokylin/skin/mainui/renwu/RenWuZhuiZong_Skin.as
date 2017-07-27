@@ -98,7 +98,9 @@ package org.mokylin.skin.mainui.renwu
 
 		public var sec_subbut1:feathers.controls.Button;
 
-		public var sec_subbut2:feathers.controls.Button;
+		public var sec_tuijian:feathers.controls.Label;
+
+		public var sec_txt:feathers.controls.Label;
 
 		public var secondary_box:feathers.controls.Group;
 
@@ -296,7 +298,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.htmlText = "第4章 觉醒(未完成)";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 167;
+			temp.width = 208;
 			temp.x = 32;
 			temp.y = 64;
 			return temp;
@@ -345,7 +347,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.leading = 3;
 			temp.letterSpacing = 0;
 			temp.text = "任务描述任务描述任务描述任务描述任务描述任务描述任务";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 199;
 			temp.x = 32;
@@ -358,6 +360,7 @@ package org.mokylin.skin.mainui.renwu
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			primary_box = temp;
 			temp.name = "primary_box";
+			temp.visible = false;
 			temp.width = 253;
 			temp.x = 0;
 			temp.y = 0;
@@ -385,7 +388,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.width = 243;
 			temp.x = 10;
 			temp.y = 39;
-			temp.elementsContent = [sec_killbut1_1_i(),sec_killbut1_2_i(),sec_killbut1_3_i(),sec_killbut2_1_i(),sec_killbut2_2_i(),sec_killbut2_3_i(),sec_ico1_0_i(),sec_info_i(),sec_killbut3_1_i(),sec_killbut3_2_i(),sec_killbut3_3_i(),sec_ico2_0_i(),sec_subbut1_i(),sec_subbut2_i(),sec_navi1_i(),sec_navi2_i(),sec_navi3_i(),sec_navi0_i(),lbInfo_i()];
+			temp.elementsContent = [sec_txt_i(),sec_tuijian_i(),sec_killbut1_1_i(),sec_killbut1_2_i(),sec_killbut1_3_i(),sec_killbut2_1_i(),sec_killbut2_2_i(),sec_killbut2_3_i(),sec_ico1_0_i(),sec_info_i(),sec_killbut3_1_i(),sec_killbut3_2_i(),sec_killbut3_3_i(),sec_ico2_0_i(),sec_subbut1_i(),sec_navi1_i(),sec_navi2_i(),sec_navi3_i(),sec_navi0_i(),lbInfo_i()];
 			return temp;
 		}
 
@@ -396,7 +399,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.name = "sec_ico1_0";
 			temp.styleName = "ui/mainui/renwu/tbk.png";
 			temp.x = 90;
-			temp.y = 100;
+			temp.y = 121;
 			return temp;
 		}
 
@@ -407,7 +410,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.name = "sec_ico2_0";
 			temp.styleName = "ui/mainui/renwu/tbk.png";
 			temp.x = 90;
-			temp.y = 240;
+			temp.y = 269;
 			return temp;
 		}
 
@@ -419,11 +422,11 @@ package org.mokylin.skin.mainui.renwu
 			temp.height = 18;
 			temp.text = "完成N环可获得额外奖励：";
 			temp.textAlign = "left";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 210;
 			temp.x = 11;
-			temp.y = 209;
+			temp.y = 249;
 			return temp;
 		}
 
@@ -437,7 +440,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.skin = skin
 			temp.width = 170;
 			temp.x = 12;
-			temp.y = 21;
+			temp.y = 57;
 			return temp;
 		}
 
@@ -451,7 +454,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.skin = skin
 			temp.width = 170;
 			temp.x = 12;
-			temp.y = 21;
+			temp.y = 57;
 			return temp;
 		}
 
@@ -465,7 +468,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.skin = skin
 			temp.width = 170;
 			temp.x = 12;
-			temp.y = 21;
+			temp.y = 57;
 			return temp;
 		}
 
@@ -479,7 +482,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.skin = skin
 			temp.width = 170;
 			temp.x = 12;
-			temp.y = 66;
+			temp.y = 99;
 			return temp;
 		}
 
@@ -493,7 +496,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.skin = skin
 			temp.width = 170;
 			temp.x = 12;
-			temp.y = 66;
+			temp.y = 99;
 			return temp;
 		}
 
@@ -507,7 +510,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.skin = skin
 			temp.width = 170;
 			temp.x = 12;
-			temp.y = 66;
+			temp.y = 99;
 			return temp;
 		}
 
@@ -521,7 +524,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.skin = skin
 			temp.width = 170;
 			temp.x = 12;
-			temp.y = 182;
+			temp.y = 222;
 			return temp;
 		}
 
@@ -535,7 +538,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.skin = skin
 			temp.width = 170;
 			temp.x = 12;
-			temp.y = 182;
+			temp.y = 222;
 			return temp;
 		}
 
@@ -549,7 +552,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.skin = skin
 			temp.width = 170;
 			temp.x = 12;
-			temp.y = 182;
+			temp.y = 222;
 			return temp;
 		}
 
@@ -562,7 +565,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = -4;
-			temp.y = 301;
+			temp.y = 321;
 			return temp;
 		}
 
@@ -590,7 +593,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.skin = skin
 			temp.width = 238;
 			temp.x = 0;
-			temp.y = 44;
+			temp.y = 80;
 			return temp;
 		}
 
@@ -604,7 +607,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.skin = skin
 			temp.width = 238;
 			temp.x = 0;
-			temp.y = 158;
+			temp.y = 198;
 			return temp;
 		}
 
@@ -614,27 +617,46 @@ package org.mokylin.skin.mainui.renwu
 			sec_subbut1 = temp;
 			temp.name = "sec_subbut1";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.height = 25;
 			temp.label = "领取奖励";
 			temp.fontSize = 16;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong4;
 			temp.color = 0xEAEABC;
 			temp.x = 74;
-			temp.y = 112;
+			temp.y = 171;
 			return temp;
 		}
 
-		private function sec_subbut2_i():feathers.controls.Button
+		private function sec_tuijian_i():feathers.controls.Label
 		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			sec_subbut2 = temp;
-			temp.name = "sec_subbut2";
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.label = "领取奖励";
-			temp.fontSize = 16;
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong4;
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			sec_tuijian = temp;
+			temp.name = "sec_tuijian";
+			temp.leading = 3;
+			temp.letterSpacing = 0;
+			temp.text = "推荐：";
 			temp.color = 0xEAEABC;
-			temp.x = 74;
-			temp.y = 252;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.visible = false;
+			temp.width = 53;
+			temp.x = 12;
+			temp.y = 23;
+			return temp;
+		}
+
+		private function sec_txt_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			sec_txt = temp;
+			temp.name = "sec_txt";
+			temp.leading = 3;
+			temp.letterSpacing = 0;
+			temp.text = "描述任务描述任务描述任务描述任务描述任务描述任务";
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 199;
+			temp.x = 12;
+			temp.y = 23;
 			return temp;
 		}
 
@@ -643,7 +665,6 @@ package org.mokylin.skin.mainui.renwu
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			secondary_box = temp;
 			temp.name = "secondary_box";
-			temp.visible = false;
 			temp.width = 253;
 			temp.x = 0;
 			temp.y = 0;

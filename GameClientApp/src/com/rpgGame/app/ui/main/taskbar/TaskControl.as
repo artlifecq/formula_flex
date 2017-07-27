@@ -2,6 +2,7 @@ package com.rpgGame.app.ui.main.taskbar
 {
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.fight.spell.CastSpellHelper;
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.HuBaoManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.WalkToRoleManager;
@@ -60,7 +61,7 @@ package com.rpgGame.app.ui.main.taskbar
 		}
 		public static function showLoopPanel():void
 		{
-			AppManager.showApp(AppConstant.TASK_LOOP_PANEL);
+			AppManager.showAppNoHide(AppConstant.TASK_LOOP_PANEL);
 		}
 		public static function hideLoopPanel():void
 		{
@@ -124,6 +125,14 @@ package com.rpgGame.app.ui.main.taskbar
 						TaskUtil.monsterTaskFly(monsterId,type);
 					}
 					
+				}
+				else if(type==TaskType.MAINTYPE_DAILYTASK&&TaskMissionManager.dailyTaskData.q_emid!="")//支线打开面板任务
+				{
+					var emidArr:Array=TaskMissionManager.dailyTaskData.q_emid.split(",");
+					if(emidArr.length>num)
+					{
+						FunctionOpenManager.openAppPaneById(emidArr[num]);
+					}					
 				}
 				else//主线和支线的怪取配置坐标点
 				{
