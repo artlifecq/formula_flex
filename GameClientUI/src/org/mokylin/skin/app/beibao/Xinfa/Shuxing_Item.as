@@ -45,7 +45,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.name = "lab_shuxing";
 			temp.letterSpacing = -1;
 			temp.text = "攻击：";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 0;
 			temp.y = 0;
@@ -58,7 +58,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			num_shuxing = temp;
 			temp.name = "num_shuxing";
 			temp.text = "0123456789";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 38;
 			temp.y = 0;

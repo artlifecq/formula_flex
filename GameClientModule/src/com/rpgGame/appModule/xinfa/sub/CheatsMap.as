@@ -30,8 +30,12 @@ package  com.rpgGame.appModule.xinfa.sub
 	
 	import feathers.controls.Label;
 	import feathers.controls.Radio;
+	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import feathers.utils.filter.GrayFilter;
+	
+	import org.mokylin.skin.app.beibao.Xinfa.XinfaIconSkin;
 	
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
@@ -48,9 +52,9 @@ package  com.rpgGame.appModule.xinfa.sub
 		private var linesContianer:Sprite;
 		private var firstLine:MeridianMapLine;
 		private var imgIcon:BgIcon;
-		private var _btn:Radio;
+		private var _btn:XinFaBtnExt;
 		private var _grayFilter:FragmentFilter=null;
-		public function CheatsMap(skin:StateSkin,data:CheatsVo,btn:Radio)
+		public function CheatsMap(skin:StateSkin,data:CheatsVo,btn:XinFaBtnExt)
 		{
 			super(skin);
 			linesContianer=new Sprite();
@@ -59,50 +63,52 @@ package  com.rpgGame.appModule.xinfa.sub
 			_stateSkin["ico_xinfa"].width=_stateSkin["ico_xinfa"].height=72;
 			imgIcon.bindBg(_stateSkin["ico_xinfa"]);
 			skin.container.addChild(imgIcon);
-			this._stateSkin["grp_icon"].addChildAt(linesContianer,0);
+			this._stateSkin["grp_icondi"].addChildAt(linesContianer,0);
 			this._cheatsVo=data;
 			this._btn=btn;
 			this._btn.userData=_cheatsVo;
 			var keys:Array=_cheatsVo.subNodeHash.keys();
 			pointHash=new HashMap();
 			var len:int=keys.length;
-			var tmpPoint:UIAsset;
+			var tmpPoint:SkinnableContainer;
 		
-			var tmpLab:Label;
+
 			var mp:CheatsNodePoint;
 		
 		
 			var posA:Array;
-			var next:UIAsset;
+			var prePoint:SkinnableContainer;
 			var centerPos:Point;
 			var tmpC:CheatsNodeVo;
 			var drawLine:MeridianMapLine;
 			var nodeMap:Dictionary=new Dictionary();
 			for (var i:int = 0; i <len; i++) 
 			{
-				tmpPoint=_stateSkin["ico_"+(1+i)];
+				tmpPoint=_stateSkin["icd_"+(1+i)];
 				tmpC=_cheatsVo.getSubNode(keys[i]);
 				nodeMap[tmpC.getConfig().q_node_id]=tmpPoint;
-				tmpLab=_stateSkin["lab_"+(1+i)];
-				mp=new CheatsNodePoint(tmpPoint,tmpLab);
+				mp=new CheatsNodePoint(tmpPoint.skin as XinfaIconSkin);
 				nameDic[tmpPoint.name]=mp;
 				pointHash.put(tmpC.chetasNodeId,mp);
 			}
-			tmpPoint=_stateSkin["ico_1"];
+			tmpPoint=_stateSkin["icd_1"];
 			var firstStartPt:Point=imgIcon.localToGlobal(new Point(imgIcon.width/2,imgIcon.height/2));
-			firstStartPt=_stateSkin["grp_icon"].globalToLocal(firstStartPt);
-			firstLine=new MeridianMapLine("ui/app/beibao/jingmai/line/shang.png","ui/app/beibao/tu/xiaoguoxian/dixian2.png",[firstStartPt.clone(),new Point(tmpPoint.x+tmpPoint.width/2,tmpPoint.y+tmpPoint.height/2)]);
+			var lineUrl:String="ui/app/beibao/jingmai/line/lang/"+_cheatsVo.cheatsConfig.q_default+".png";
+			var lineUrl2:String="ui/app/beibao/jingmai/line/an/"+_cheatsVo.cheatsConfig.q_default+".png";
+			//第一段线的起点
+			firstStartPt=_stateSkin["grp_icondi"].globalToLocal(firstStartPt);
+			firstLine=new MeridianMapLine(lineUrl,lineUrl2,[firstStartPt.clone(),new Point(tmpPoint.x+tmpPoint.width/2,tmpPoint.y+tmpPoint.height/2)]);
 			linesContianer.addChild(firstLine);
 			//计算链接
 			for (var j:int = 0; j < len; j++) 
 			{
-				var lines:Array;
+				//var lines:Array;
 				tmpC=_cheatsVo.getSubNode(keys[j]);
 				var linkStr:String=tmpC.getConfig().q_link_nodes;
 				var coord:String=tmpC.getConfig().q_coord;
 				if (linkStr!=null&&linkStr!="") 
 				{
-					lines=[];
+					//lines=[];
 					var idArr:Array=linkStr.split(",") as Array;
 					var coordsArr:Array;
 					if (coord!=null&&coord!="") 
@@ -111,12 +117,14 @@ package  com.rpgGame.appModule.xinfa.sub
 					}
 					var num:int=idArr.length;
 					var startObj:DisplayObject=nodeMap[tmpC.getConfig().q_node_id];
+					var nextNodeId:int;
 					for (var k:int = 0; k < num; k++) 
 					{
 						if (idArr[k]==tmpC.getConfig().q_node_id) 
 						{
 							continue;
 						}
+						nextNodeId=String(idArr[k]).split("_")[1];
 						var endObj:DisplayObject=nodeMap[idArr[k]];
 						if (endObj) 
 						{
@@ -126,13 +134,14 @@ package  com.rpgGame.appModule.xinfa.sub
 								posA.push(new Point(int(coordsArr[k][0])+startObj.width/2,int(coordsArr[k][1])+startObj.height/2));
 							}
 							posA.push(new Point(endObj.x+endObj.width/2,endObj.y+endObj.height/2));
-							drawLine=new MeridianMapLine("ui/app/beibao/jingmai/line/shang.png","ui/app/beibao/tu/xiaoguoxian/dixian2.png",posA);
-							lines.push(drawLine);
+							drawLine=new MeridianMapLine(lineUrl,lineUrl2,posA);
+							//lines.push(drawLine);
 							linesContianer.addChild(drawLine);
+							(pointHash.getValue(nextNodeId) as CheatsNodePoint).addLine(drawLine);
 						}
 					}
 				}
-				(pointHash.getValue(tmpC.chetasNodeId) as CheatsNodePoint).setLineArr(lines);
+//				(pointHash.getValue(tmpC.chetasNodeId) as CheatsNodePoint).setLineArr(lines);
 				(pointHash.getValue(tmpC.chetasNodeId) as CheatsNodePoint).setData(tmpC);
 			}
 			imgIcon.userData=this;
@@ -167,7 +176,9 @@ package  com.rpgGame.appModule.xinfa.sub
 			{
 				noGray=Mgr.cheatsMgr.getCanActive(_cheatsVo.cheatsConfig.q_id);
 			}
-			_btn.filter=noGray>0?null:grayFilter;
+			//_btn.filter=noGray?null:FilterUtil.getGrayFilter();
+			_btn.setData(_cheatsVo.level);
+			_btn.setGary(!noGray);
 			notifyUpdate(RTNodeID.XF+"_"+_cheatsVo.cheatsConfig.q_id);
 		}
 		private function updateFirstLine(useTween:Boolean):void
@@ -349,6 +360,14 @@ package  com.rpgGame.appModule.xinfa.sub
 				}
 			}
 			return false;
+		}
+		public function get offsetX():int
+		{
+			return -(imgIcon.x+imgIcon.width/2);
+		}
+		public function get offsetY():int
+		{
+			return -(imgIcon.y+imgIcon.height/2);
 		}
 	}
 }
