@@ -298,10 +298,6 @@ package com.game.engine3D.scene.render
 		
 		override public function set blendMode(value:String):void
 		{
-			if(value == BlendMode.NORMAL)
-			{
-				trace(1);
-			}
 			if (this.blendMode == value)return;
 			super.blendMode = value;
 			if (_renderUnitData)
@@ -3673,6 +3669,8 @@ package com.game.engine3D.scene.render
 				}
 				if(_isAlpha)
 				{
+					if(_alpha == 1)
+						_alpha = 0.3;
 					if(blendMode != BlendMode.LAYER)
 					{
 						blendMode = BlendMode.LAYER;
