@@ -37,7 +37,7 @@ package com.rpgGame.app.state.role.control
 						role.forEachRenderUnit(eachUnVisible);
 						if (role.headFace) 
 						{
-							role.headFace.headVisible=false;
+//							role.headFace.headVisible=false;
 						}
 					}
 					else
@@ -106,7 +106,7 @@ package com.rpgGame.app.state.role.control
 				role.forEachRenderUnit(eachVisible);
 				if (role.headFace) 
 				{
-					role.headFace.headVisible=true;
+//					role.headFace.headVisible=true;
 				}
 			}
 			trace("time diff:"+(getTimer()-_enterTime));
