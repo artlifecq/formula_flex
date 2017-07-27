@@ -38,7 +38,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "1.心法是提升属性的主要途径之一";
-			temp.color = 0xE1D4A9;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 10;
 			temp.y = 10;
@@ -49,7 +49,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "2.心法来源于：任务奖励、副本掉落的残卷合成等";
-			temp.color = 0xE1D4A9;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 10;
 			temp.y = 30;
@@ -60,7 +60,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "3.心法激活时其附带技能也将激活";
-			temp.color = 0xE1D4A9;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 10;
 			temp.y = 50;
@@ -71,7 +71,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "4.每本心法都有相生组合，获得相生关系的心法后可获得额外属性";
-			temp.color = 0xE1D4A9;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 10;
 			temp.y = 70;
@@ -82,7 +82,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "5.每多收集一本心法还将获得心法收集的属性奖励";
-			temp.color = 0xE1D4A9;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 10;
 			temp.y = 90;
@@ -93,7 +93,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "6.砭石可通过砭石合成来获得更高级的砭石";
-			temp.color = 0xE1D4A9;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 10;
 			temp.y = 110;

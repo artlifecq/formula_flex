@@ -137,14 +137,14 @@ package com.rpgGame.appModule.jingmai.sub
 					//setIconFilter(true);
 					setIcoUrl("");
 					needFilter=true;
-					labAtt.text="0";
+					labAtt.text="";
 					if (hasBetter) 
 					{
-						labAtt.color=GameColorUtil.COLOR_GREEN;
+						labAtt.color=GameColorUtil.C_GREEN;
 					}
 					else
 					{
-						labAtt.color=GameColorUtil.COLOR_GRAY;
+						labAtt.color=GameColorUtil.C_NORMAL;
 					}
 				}
 				else 
@@ -155,7 +155,7 @@ package com.rpgGame.appModule.jingmai.sub
 					labAtt.text=stoneLv+"";
 					if (hasBetter) 
 					{
-						labAtt.color=GameColorUtil.COLOR_GREEN;
+						labAtt.color=GameColorUtil.C_GREEN;
 					}
 					else
 					{
@@ -167,11 +167,11 @@ package com.rpgGame.appModule.jingmai.sub
 						}
 						if (stoneLv>=maxStoneLv) 
 						{
-							labAtt.color=GameColorUtil.COLOR_YELLOW;
+							labAtt.color=GameColorUtil.C_YELLOW;
 						}
 						else
 						{
-							labAtt.color=GameColorUtil.COLOR_NORMAL;
+							labAtt.color=GameColorUtil.C_NORMAL;
 						}
 					}
 				}
@@ -213,11 +213,11 @@ package com.rpgGame.appModule.jingmai.sub
 					if (canLevelUp) 
 					{
 						needEff=true;
-						labAtt.color=GameColorUtil.COLOR_GREEN;
+						labAtt.color=GameColorUtil.C_GREEN;
 					}
 					else
 					{
-						labAtt.color=GameColorUtil.COLOR_NORMAL;
+						labAtt.color=GameColorUtil.C_NORMAL;
 					}
 					setLineLink(useTween);
 				}
@@ -234,18 +234,18 @@ package com.rpgGame.appModule.jingmai.sub
 				needEff=Mgr.meridianMgr.getCanLevelUp(_data);
 				if (needEff) 
 				{
-					labAtt.color=GameColorUtil.COLOR_GREEN;
+					labAtt.color=GameColorUtil.C_GREEN;
 				}
 				else
 				{
 					var isMax:Boolean=Mgr.meridianMgr.isMaxAcuLevel(_data);
 					if (isMax) 
 					{
-						labAtt.color=GameColorUtil.COLOR_YELLOW;
+						labAtt.color=GameColorUtil.C_YELLOW;
 					}
 					else
 					{
-						labAtt.color=GameColorUtil.COLOR_NORMAL;
+						labAtt.color=GameColorUtil.C_NORMAL;
 					}
 				}
 				setLineLink(useTween);
