@@ -51,31 +51,22 @@ package com.rpgGame.app.state.role.control
 			return getQualifiedClassName(HiddingState);
 		}
 		
-		private var layerType:int = 0;
-		
 		private function eachVisible(role : BaseRole, render : RenderUnit3D) : void
 		{
 			role.isHiding = false;
 			render.castsShadows = true;
 			switch(render.type)
 			{
+				case RenderUnitType.BODY:
+				case RenderUnitType.HAIR:
+				case RenderUnitType.WEAPON:
+				case RenderUnitType.DEPUTY_WEAPON:
 				case RenderUnitType.WEAPON_EFFECT:
 				case RenderUnitType.DEPUTY_WEAPON_EFFECT:
-					render.blendMode = BlendMode.NORMAL;
-					render.visible = true;
-					render.alpha = 1;
-					break;
-				case RenderUnitType.BODY:
-					if(render.compositeMesh)
-					{
-						render.compositeMesh.layerType = layerType;
-					}
-//					render.isHiding=false;
-					render.visible = true;
-					break;
-				default:
-//					render.isHiding=false;
-					render.visible = true;
+				case RenderUnitType.ZHANQI:
+				case RenderUnitType.EFFECT:
+				case RenderUnitType.HURT:
+					render.isHiding = false;
 					break;
 			}
 		}
@@ -92,27 +83,16 @@ package com.rpgGame.app.state.role.control
 			render.castsShadows = false;
 			switch(render.type)
 			{
-				/*case RenderUnitType.WEAPON_EFFECT:
+				case RenderUnitType.BODY:
+				case RenderUnitType.HAIR:
+				case RenderUnitType.WEAPON:
+				case RenderUnitType.DEPUTY_WEAPON:
+				case RenderUnitType.WEAPON_EFFECT:
 				case RenderUnitType.DEPUTY_WEAPON_EFFECT:
-					render.blendMode = BlendMode.LAYER;
-					render.visible = false;
-					render.alpha = 0;
-					break;*/
-			//	case RenderUnitType.BODY:
-//					if(render.compositeMesh)
-//					{
-//						layerType = render.compositeMesh.layerType;
-//						render.compositeMesh.layerType = 0;
-//					}
-		//			render.visible = true;
-	//				break;
-				default:
-					if (render.type.indexOf(RenderUnitType.BUFF)!=-1) 
-					{
-						return;
-					}
-					render.visible = false;
-					render.isHiding=true;
+				case RenderUnitType.ZHANQI:
+				case RenderUnitType.EFFECT:
+				case RenderUnitType.HURT:
+					render.isHiding = true;
 					break;
 			}
 		}
