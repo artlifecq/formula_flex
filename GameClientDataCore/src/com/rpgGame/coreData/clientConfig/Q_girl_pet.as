@@ -17,15 +17,9 @@ package com.rpgGame.coreData.clientConfig
 		 /**  美人名称 */
 		public var q_name:String;
 		 /**  美人面板展示用造型资源编号 */
-		public var q_panel_show_id:int;
-		 /**  场景中骑乘用造型资源路径 */
-		public var q_skinResID:String;
-		 /**  场景中骑乘动画资源路径 */
-		public var q_animatResID:String;
+		public var q_panel_show_id:String;
 		 /**  美人最大阶数 */
 		public var q_max_grade:int;
-		 /**    */
-		public var q_zones_rewards:String;
 		 /**  挑战的副本ID */
 		public var q_zones_id:int;
 		 /**  副本关卡总数 */

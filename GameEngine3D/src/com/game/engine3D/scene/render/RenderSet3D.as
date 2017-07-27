@@ -1241,6 +1241,15 @@ package com.game.engine3D.scene.render
 			}
 		}
 		
+		override public function set isAlpha(value:Boolean):void
+		{
+			super.isAlpha = value;
+			for (var ru : * in _renderUnitMap)
+			{
+				ru.isAlpha = value;
+			}
+		}
+		
 		override public function set alpha(value:Number):void
 		{
 			super.alpha = value;

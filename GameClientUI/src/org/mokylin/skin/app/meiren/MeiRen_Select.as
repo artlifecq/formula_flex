@@ -3,6 +3,7 @@ package org.mokylin.skin.app.meiren
 	import feathers.controls.Button;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
+	import feathers.controls.UIAsset;
 	import org.mokylin.skin.component.button.ButtonSkin_jiantou2;
 
 	/**
@@ -19,6 +20,8 @@ package org.mokylin.skin.app.meiren
 
 		public var btnPrev:feathers.controls.Button;
 
+		public var imgBG:feathers.controls.UIAsset;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -28,9 +31,9 @@ package org.mokylin.skin.app.meiren
 			super();
 			
 			this.currentState = "normal";
-			this.height = 85;
-			this.width = 552;
-			this.elementsContent = [btnPrev_i(),btnNext_i()];
+			this.height = 101;
+			this.width = 521;
+			this.elementsContent = [imgBG_i(),btnPrev_i(),btnNext_i()];
 			
 			states = {
 			};
@@ -50,7 +53,7 @@ package org.mokylin.skin.app.meiren
 			temp.scaleX = -1;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jiantou2;
 			temp.x = 519;
-			temp.y = 52;
+			temp.y = 64;
 			return temp;
 		}
 
@@ -61,8 +64,21 @@ package org.mokylin.skin.app.meiren
 			temp.name = "btnPrev";
 			temp.rotation = 4.71238898038469;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jiantou2;
-			temp.x = 0;
-			temp.y = 52;
+			temp.x = 2;
+			temp.y = 64;
+			return temp;
+		}
+
+		private function imgBG_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			imgBG = temp;
+			temp.name = "imgBG";
+			temp.bottom = 0;
+			temp.left = 0;
+			temp.right = 0;
+			temp.styleName = "ui/common/tips/tips_2.png";
+			temp.top = 0;
 			return temp;
 		}
 
