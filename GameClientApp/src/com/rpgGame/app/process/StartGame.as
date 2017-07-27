@@ -46,6 +46,7 @@ package com.rpgGame.app.process
     import com.rpgGame.app.ui.tips.OpenGridTip;
     import com.rpgGame.app.ui.tips.PKModeTip;
     import com.rpgGame.app.ui.tips.PassiveSpellTip;
+    import com.rpgGame.app.ui.tips.PetTip;
     import com.rpgGame.app.ui.tips.ShiJieBossRewardTips;
     import com.rpgGame.app.ui.tips.SocietyBuildItemTip;
     import com.rpgGame.app.ui.tips.SocietySpellTotalTip;
@@ -59,7 +60,6 @@ package com.rpgGame.app.process
     import com.rpgGame.app.ui.tips.VipNoneTipExt;
     import com.rpgGame.app.ui.tips.WangChengRewardTips;
     import com.rpgGame.app.ui.tips.cheats.CheatsIntraductTipExt;
-    import com.rpgGame.app.ui.tips.cheats.CheatsNodePointTip;
     import com.rpgGame.app.ui.tips.cheats.CheatsNodePointTipNew;
     import com.rpgGame.app.ui.tips.cheats.CheatsTipExt;
     import com.rpgGame.core.events.MapEvent;
@@ -247,6 +247,7 @@ package com.rpgGame.app.process
 			TipManager.registerTipsParserClass(TipType.VIP_NONE_TIP,VipNoneTipExt);
 			
 			TipManager.registerTipsParserClass(TipType.MEIREN_GUIZE_TIP,MeiRenGuiZeTip);
+			TipManager.registerTipsParserClass(TipType.MEIREN_TIP,PetTip);
 			TipManager.registerTipsParserClass(TipType.TASK_LEAD_TIP,TaskLeadTips);
 			TipManager.registerTipsParserClass(TipType.TASK_LOOP_TIP,TaskloopTips);
 		}

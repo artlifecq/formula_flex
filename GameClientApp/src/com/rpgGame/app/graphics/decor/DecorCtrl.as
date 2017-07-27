@@ -33,6 +33,7 @@ package  com.rpgGame.app.graphics.decor
 		private static var SORT_VALUE:int=100;
 		
 		public static const TOP_HPMP :int = SORT_VALUE--;
+		public static const TOP_MEIREN_GUISHU :int = SORT_VALUE--;
 		public static const TOP_NAME :int = SORT_VALUE--;
 		public static const TOP_FUQI :int = SORT_VALUE--;
 		public static const TOP_GUILD :int = SORT_VALUE--;

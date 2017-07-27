@@ -17,6 +17,8 @@ package org.mokylin.skin.app.meiren
 		//==========================================================================
 		public var bg:feathers.controls.UIAsset;
 
+		public var lb_type:feathers.controls.Label;
+
 		public var lbl_gongj1:feathers.controls.Label;
 
 		public var uiLevel:feathers.controls.UIAsset;
@@ -32,7 +34,7 @@ package org.mokylin.skin.app.meiren
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [bg_i(),__Tips_MeiRen_Label1_i(),lbl_gongj1_i(),uiName_i(),uiLevel_i()];
+			this.elementsContent = [bg_i(),lb_type_i(),lbl_gongj1_i(),uiName_i(),uiLevel_i()];
 			
 			states = {
 			};
@@ -43,17 +45,6 @@ package org.mokylin.skin.app.meiren
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __Tips_MeiRen_Label1_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "攻  击：";
-			temp.color = 0xA3A594;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 20;
-			temp.y = 57;
-			return temp;
-		}
-
 		private function bg_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -64,6 +55,19 @@ package org.mokylin.skin.app.meiren
 			temp.width = 280;
 			temp.x = 0;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function lb_type_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lb_type = temp;
+			temp.name = "lb_type";
+			temp.text = "攻  击：";
+			temp.color = 0xA3A594;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 20;
+			temp.y = 57;
 			return temp;
 		}
 

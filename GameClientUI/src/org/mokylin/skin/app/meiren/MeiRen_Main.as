@@ -34,7 +34,7 @@ package org.mokylin.skin.app.meiren
 			this.currentState = "normal";
 			this.height = 122;
 			this.width = 123;
-			this.elementsContent = [bg_i(),icon_i(),uiName_i(),btnSelect_i()];
+			this.elementsContent = [bg_i(),uiName_i(),icon_i(),btnSelect_i()];
 			
 			states = {
 			};
@@ -50,7 +50,7 @@ package org.mokylin.skin.app.meiren
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg = temp;
 			temp.name = "bg";
-			temp.styleName = "ui/app/meiren/touxiangkuang.png";
+			temp.styleName = "ui/app/meiren/kuang.png";
 			temp.x = 0;
 			temp.y = 15;
 			return temp;
@@ -83,8 +83,8 @@ package org.mokylin.skin.app.meiren
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiName = temp;
 			temp.name = "uiName";
-			temp.styleName = "ui/app/meiren/head_icon/name2.png";
-			temp.x = 18;
+			temp.styleName = "ui/app/meiren/head_icon/xiaolvtu.png";
+			temp.x = 39;
 			temp.y = 0;
 			return temp;
 		}

@@ -12,6 +12,7 @@ package com.game.engine3D.scene.render.vo
 	import com.game.engine3D.vo.BaseObj3D;
 	import com.game.engine3D.vo.BaseObjSyncInfo;
 	
+	import flash.display.BlendMode;
 	import flash.geom.Matrix3D;
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
@@ -50,6 +51,24 @@ package com.game.engine3D.scene.render.vo
 			_baseObjList = new Vector.<BaseObjChild>();
 		}
 
+		override public function set isAlpha(value:Boolean):void
+		{
+			if (_isAlpha != value)
+			{
+				_isAlpha = value;
+				_renderSet.isAlpha = _isAlpha;
+				if(_isAlpha)
+				{
+					_renderSet.blendMode = BlendMode.LAYER;
+					_renderSet.alpha = 0.3;
+				}
+				else
+				{
+					_renderSet.blendMode = BlendMode.NORMAL;
+					_renderSet.alpha = 1;
+				}
+			}
+		}
 
 		override public function set alpha(value : Number) : void
 		{
@@ -63,17 +82,17 @@ package com.game.engine3D.scene.render.vo
 			}
 		}
 		
-		override public function set blendMode(value:String):void
-		{
-			super.blendMode = value;
-			_renderSet.blendMode = value;
-			var len : int = _baseObjList.length;
-			while (len-- > 0)
-			{
-				var obj : BaseObj3D = _baseObjList[len].baseObj;
-				obj.blendMode = value;
-			}
-		}
+//		override public function set blendMode(value:String):void
+//		{
+//			super.blendMode = value;
+//			_renderSet.blendMode = value;
+//			var len : int = _baseObjList.length;
+//			while (len-- > 0)
+//			{
+//				var obj : BaseObj3D = _baseObjList[len].baseObj;
+//				obj.blendMode = value;
+//			}
+//		}
 		
 		override public function set planarRenderLayer(value:uint):void
 		{

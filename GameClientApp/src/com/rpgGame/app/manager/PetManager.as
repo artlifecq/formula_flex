@@ -7,6 +7,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.netData.pet.bean.PetInfo;
 	import com.rpgGame.netData.pet.message.ResExtraBuyMessage;
 	import com.rpgGame.netData.pet.message.ResPetChangeMessage;
+	import com.rpgGame.netData.pet.message.ResPetDebutResultMessage;
 	import com.rpgGame.netData.pet.message.ResPetListMessage;
 	import com.rpgGame.netData.pet.message.ResPetUpResultMessage;
 	import com.rpgGame.netData.pet.message.ResPetZoneResultMessage;
@@ -82,12 +83,31 @@ package com.rpgGame.app.manager
 				_petHash.put(pet.modelId,pet);
 			}
 			this._curPetId=msg.petId;
-			EventManager.dispatchEvent(PetEvent.GET_PETS_DATA);
+			if(this._curPetId!=0)
+			{
+				EventManager.dispatchEvent(PetEvent.PET_PANELSHOWORHIDE,true);
+			}
+			//			EventManager.dispatchEvent(PetEvent.GET_PETS_DATA);
 		}	
 		
 		public function resPetZoneResultHandler(msg:ResPetZoneResultMessage):void
 		{
-			AppManager.showAppNoHide(AppConstant.PET_TIAOZHAN_PANLE,msg);
+			AppManager.showApp(AppConstant.PET_TIAOZHAN_PANLE,msg);
+		}
+		
+		public function resPetDebutResultMessage(msg:ResPetDebutResultMessage):void
+		{
+			this._curPetId=msg.modelId;
+			
+			if(this._curPetId==0)
+			{
+				EventManager.dispatchEvent(PetEvent.PET_PANELSHOWORHIDE,false);
+			}
+			else
+			{
+				EventManager.dispatchEvent(PetEvent.PET_PANELSHOWORHIDE,true);
+			}
+			EventManager.dispatchEvent(PetEvent.PET_CHANGE);
 		}
 		
 		public function get curPetId():int
