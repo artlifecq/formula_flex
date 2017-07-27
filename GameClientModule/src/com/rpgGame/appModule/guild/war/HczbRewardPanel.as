@@ -2,6 +2,9 @@ package com.rpgGame.appModule.guild.war
 {
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.coreData.cfg.QSinglecitybaseCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_singlecitybase;
+	import com.rpgGame.coreData.enum.EnumCity;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	
 	import gs.TweenLite;
@@ -56,7 +59,15 @@ package com.rpgGame.appModule.guild.war
 		
 		override protected function onShow():void
 		{
-			
+			var cfg:Q_singlecitybase=QSinglecitybaseCfgData.getCityCfg(EnumCity.HUANG_CHENG);
+			var str:String=cfg.q_rewards2;
+			guanRe.setRewardByJsonStr(str);
+			str=cfg.q_rewards1;
+			bangRe.setRewardByJsonStr(str);
+			str=cfg.q_reward4;
+			jinRe.setRewardByJsonStr(str);
+			str=cfg.q_reward4;
+			allServerRe.setRewardByJsonStr(str);
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void
