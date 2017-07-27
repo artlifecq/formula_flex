@@ -139,10 +139,7 @@ package com.rpgGame.app.ui.main.taskbar
 			//subBut2=_skin.sec_subbut2;
 			guideLabelList=new Vector.<Label>();
 			
-			hideMainTaskView();
-			hideDailyTaskView();
-			hideTreasuerTaskView();
-			hideGuideTaskView();
+			hideInfo();
 		}
 		
 		private function scrollInit():void
@@ -264,14 +261,13 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				hideTreasuerTaskView();
 			}
+			setUisite();
 		}
 		
 		/**设置主线任务显示*/
 		public function setMainTaskView():void
 		{
 			hideMainTaskView();
-			/*stKajibutView()
-			return;*/
 			var task:TaskInfo=TaskMissionManager.mainTaskInfo;
 			var taskData:Q_mission_base=TaskMissionManager.mainTaskData;
 			if(task!=null&&taskData!=null)
@@ -548,34 +544,12 @@ package com.rpgGame.app.ui.main.taskbar
 			extraLabel.visible=true;
 			
 		}
-		
-		
-		
 		public function hideInfo():void
 		{
-			navi1.visible=false;
-			navi2.visible=false;
-			navi3.visible=false;
-			var i:int;
-			for(i=0;i<killBut1List.length;i++)
-			{
-				killBut1List[i].visible=false;
-			}
-			for(i=0;i<killBut2List.length;i++)
-			{
-				killBut2List[i].visible=false;
-			}
-			for(i=0;i<killBut3List.length;i++)
-			{
-				killBut3List[i].visible=false;
-			}
-			
-			icoList1Group.visible=false;
-			icoList2Group.visible=false;
-			extraLabel.visible=false;
-			subBut1.visible=false;
-			//subBut2.visible=false;
-			
+			hideMainTaskView();
+			hideDailyTaskView();
+			hideTreasuerTaskView();
+			hideGuideTaskView();
 		}
 		/**设置UI位置*/
 		private function setUisite():void
