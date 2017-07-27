@@ -240,15 +240,5 @@ package com.rpgGame.appModule.open
 				_button.runAnimation();
 			refeashView();
 		}
-		
-		override public function get width():Number
-		{
-			return _skin.width;
-		}
-		
-		override public function get height():Number
-		{
-			return _skin.height;
-		}
 	}
 }
