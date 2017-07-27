@@ -2,6 +2,7 @@ package com.rpgGame.app.ui.main.shortcut {
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.LostSkillManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -17,6 +18,7 @@ package com.rpgGame.app.ui.main.shortcut {
 	import com.rpgGame.coreData.cfg.LostSkillUpData;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_up;
+	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.lang.LangUI_2;
 	import com.rpgGame.coreData.type.CharAttributeType;
@@ -279,13 +281,7 @@ package com.rpgGame.app.ui.main.shortcut {
 					autoBar.guajiClick();
 					break;		
 				case _skin.btnJieHun:
-					if(Mgr.hunyinMgr.marriageInfos==null||Mgr.hunyinMgr.marriageInfos.state==5)
-					{
-						AppManager.showApp(AppConstant.HUNYIN_QIUHUN);
-					}
-					else{
-						AppManager.showApp(AppConstant.HUNYIN_JIEHUN);
-					}
+					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_HUNYIN);
 					break;
 				//				case _skin.btnBackpack://背包
 				//					AppManager.showApp(AppConstant.BACK_PACK_PANEL);

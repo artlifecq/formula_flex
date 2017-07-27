@@ -13,31 +13,13 @@ package com.rpgGame.app.manager {
     public class DodgeManager {
 		private static var _instance:DodgeManager;
 		
-		private var _buff:BuffData;
+		private var _reduceTime:Number = 0;
 
-		public function get buff():BuffData
+		public function set reduceTime(value:Number):void
 		{
-			return _buff;
+			_reduceTime = value;
 		}
 
-		public function set buff(value:BuffData):void
-		{
-			if(value==null)
-				return ;
-			if(value.cfgId == 6003)
-				_buff = value;
-		}
-		
-		public function clearBuff(value:BuffData):void
-		{
-			if(value==null)
-				return ;
-			if(value.cfgId !=6003)
-				return ;
-			_buff = null;
-		}
-
-		
 		public static function getinstance():DodgeManager
 		{
 			if(_instance == null)
@@ -131,12 +113,7 @@ package com.rpgGame.app.manager {
 		
 		public function get cdTimes():int
 		{
-			if(_buff!=null)
-			{
-				return CD_TIMES - _buff.buffInfo.value;
-			}else{
-				return CD_TIMES;
-			}
+			return CD_TIMES - _reduceTime;
 		}
         private function reset() : void {
 			_currentState = RoleState_Normal;
