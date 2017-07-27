@@ -94,11 +94,24 @@ package com.rpgGame.appModule.skill
 		
 		override public function show(data:Object=null):void
 		{
+			var qopenData:Q_lostskill_open = data as Q_lostskill_open;
+			if(qopenData!=null)
+			{
+				var length:int = _skillIconList.length;
+				for(var i:int = 0;i<length;i++)
+				{
+					if(_skillIconList[i].data == qopenData)
+					{
+						_radioGroup.selectedIndex = i;
+						break;
+					}
+				}
+			}
 			refeashIconsList();
 			selecteChangeHandler();
 			EventManager.addEvent(LostSkillManager.LostSkill_ChangeSkillId,changeStateHandler);
 			EventManager.addEvent(LostSkillManager.LostSkill_ChangeSkillState,changeStateHandler);
-			EventManager.addEvent(LostSkillManager.LostSkill_UpLevelSkillId,selecteChangeHandler);
+			EventManager.addEvent(LostSkillManager.LostSkill_UpLevelSkillId,updataLevelHandler);
 			EventManager.addEvent(ItemEvent.ITEM_ADD,onItemChange);
 			EventManager.addEvent(ItemEvent.ITEM_CHANG,onItemChange);
 			EventManager.addEvent(ItemEvent.ITEM_REMOVE,onItemChange);
@@ -113,7 +126,7 @@ package com.rpgGame.appModule.skill
 		{
 			EventManager.removeEvent(LostSkillManager.LostSkill_ChangeSkillId,changeStateHandler);
 			EventManager.removeEvent(LostSkillManager.LostSkill_ChangeSkillState,changeStateHandler);
-			EventManager.removeEvent(LostSkillManager.LostSkill_UpLevelSkillId,selecteChangeHandler);
+			EventManager.removeEvent(LostSkillManager.LostSkill_UpLevelSkillId,updataLevelHandler);
 			EventManager.removeEvent(ItemEvent.ITEM_ADD,onItemChange);
 			EventManager.removeEvent(ItemEvent.ITEM_CHANG,onItemChange);
 			EventManager.removeEvent(ItemEvent.ITEM_REMOVE,onItemChange);
@@ -153,6 +166,17 @@ package com.rpgGame.appModule.skill
 			for(var i:int = 0;i<_bgList.length;i++)
 			{
 				_bgList[i].visible = i==index;
+			}
+		}
+		
+		private function updataLevelHandler():void
+		{
+			selecteChangeHandler();
+			var index:int = _radioGroup.selectedIndex;
+			var icon:LostSkillIcon = _skillIconList[index];
+			if(icon!=null)
+			{
+				icon.showUpLevel();
 			}
 		}
 	}

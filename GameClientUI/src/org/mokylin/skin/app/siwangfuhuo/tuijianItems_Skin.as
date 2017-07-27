@@ -69,7 +69,7 @@ package org.mokylin.skin.app.siwangfuhuo
 			temp.name = "lbl_name";
 			temp.bold = true;
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.letterSpacing = 1;
 			temp.text = "获取神器";
 			temp.textAlign = "center";
@@ -88,7 +88,7 @@ package org.mokylin.skin.app.siwangfuhuo
 			temp.autoPlay = false;
 			temp.height = 20;
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.styleClass = org.mokylin.skin.app.siwangfuhuo.mc.xingxing_Skin;
 			temp.width = 20;
 			temp.x = 13;
@@ -104,7 +104,7 @@ package org.mokylin.skin.app.siwangfuhuo
 			temp.autoPlay = false;
 			temp.height = 20;
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.styleClass = org.mokylin.skin.app.siwangfuhuo.mc.xingxing_Skin;
 			temp.width = 20;
 			temp.x = 38;
@@ -120,7 +120,7 @@ package org.mokylin.skin.app.siwangfuhuo
 			temp.autoPlay = false;
 			temp.height = 20;
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.styleClass = org.mokylin.skin.app.siwangfuhuo.mc.xingxing_Skin;
 			temp.width = 20;
 			temp.x = 63;
@@ -136,7 +136,7 @@ package org.mokylin.skin.app.siwangfuhuo
 			temp.autoPlay = false;
 			temp.height = 20;
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.styleClass = org.mokylin.skin.app.siwangfuhuo.mc.xingxing_Skin;
 			temp.width = 20;
 			temp.x = 87;
@@ -152,7 +152,7 @@ package org.mokylin.skin.app.siwangfuhuo
 			temp.autoPlay = false;
 			temp.height = 20;
 			temp.touchable = false;
-			temp.touchGroup = false;
+			temp.touchGroup = true;
 			temp.styleClass = org.mokylin.skin.app.siwangfuhuo.mc.xingxing_Skin;
 			temp.width = 20;
 			temp.x = 112;

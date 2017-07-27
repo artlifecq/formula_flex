@@ -1,6 +1,8 @@
 package com.rpgGame.app.cmdlistener
 {
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.ActivetyDataManager;
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.MibaoManager;
 	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
 	import com.rpgGame.core.app.AppConstant;
@@ -163,7 +165,16 @@ package com.rpgGame.app.cmdlistener
 			EventManager.dispatchEvent(ActivityEvent.UPDATE_ACTIVITY,msg.activityId);
 			var info:ActivetyInfo=ActivetyCfgData.getActInfoById(msg.activityId); 
 			if(info.actCfg.q_show_notice==1){
-				AppManager.showAppNoHide(AppConstant.ACTIVETY_OPEN,info);
+				if(info.actCfg.q_notice_trans){
+					var list:Array=JSONUtil.decode(info.actCfg.q_notice_trans);
+					if(FunctionOpenManager.checkOpenBuyFunId(list[1]))
+					{
+						AppManager.showAppNoHide(AppConstant.ACTIVETY_OPEN,info);
+					}
+				}else{
+					AppManager.showAppNoHide(AppConstant.ACTIVETY_OPEN,info);
+				}
+				
 			}
 		}
 		
@@ -185,17 +196,17 @@ package com.rpgGame.app.cmdlistener
 		}
 		/**抢夺怪物*/
 		private function onSCCashGiftClientMessage(msg:SCCashGiftClientMessage):void
-		{//Lyt.a("抢夺怪物:"+msg.monsterNum+"+"+msg.refresh+"死亡："+msg.dieList.toString());
+		{Lyt.a("抢夺怪物:"+msg.monsterNum+"+"+msg.refresh+"死亡："+msg.dieList.toString());
 			EventManager.dispatchEvent(ActivityEvent.LIJIN_MONSTER_CHANGE,msg.monsterNum,msg.refresh,msg.dieList);
 		}
 		/**剩余时间*/
 		private function onSCActivityTimeMessage(msg:SCActivityTimeMessage):void
-		{//Lyt.a("剩余时间:"+msg.remainingTime);
+		{Lyt.a("剩余时间:"+msg.remainingTime);
 			EventManager.dispatchEvent(ActivityEvent.LIJIN_ACTIVITY_TIME,msg.remainingTime);
 		}
 		/**刷新时间*/
 		private function onSCRemainRefreshTimeMessage(msg:SCRemainRefreshTimeMessage):void
-		{//Lyt.a("刷新时间:"+msg.remainRefreshTime);
+		{Lyt.a("刷新时间:"+msg.remainRefreshTime);
 			if(msg.remainRefreshTime>0)
 			{
 				AppManager.showAppNoHide(AppConstant.ACTIVETY_LIJIN_TIMER,msg.remainRefreshTime);
@@ -208,12 +219,12 @@ package com.rpgGame.app.cmdlistener
 		}
 		/**奖励信息*/
 		private function onSCRewardInfoMessage(msg:SCRewardInfoMessage):void
-		{//Lyt.a("奖励信息:"+msg.reward.length);
+		{Lyt.a("奖励信息:"+msg.reward.length);
 			AppManager.showApp(AppConstant.ACTIVETY_LIJIN_RESULT,msg.reward);
 		}
 		/**元宝变化*/
 		private function onSCCashGiftChangeMessage(msg:SCCashGiftChangeMessage):void
-		{//Lyt.a("元宝变化:"+msg.cashGiftNum);
+		{Lyt.a("元宝变化:"+msg.cashGiftNum);
 			EventManager.dispatchEvent(ActivityEvent.LIJIN_CASHGIFT_CHANGE,msg.cashGiftNum);
 		}
 		/*----------------秦陵秘宝   yt---------------------------------------------*/

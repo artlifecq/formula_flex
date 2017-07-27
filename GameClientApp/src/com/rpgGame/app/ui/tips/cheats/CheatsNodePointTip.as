@@ -300,6 +300,7 @@ package  com.rpgGame.app.ui.tips.cheats
 			this._skin.lb_name.text=qAcu.q_name;
 			//未激活
 			this._skin.lb_jihuo.visible=false;
+			this._skin.lb_jihuo.color=GameColorUtil.COLOR_RED;
 			var startY:int=this._skin.uiName1.y;
 			//this._skin.uiName1.y=startY;
 			startY+=this._skin.uiName1.height+2;

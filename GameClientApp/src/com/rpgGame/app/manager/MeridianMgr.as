@@ -4,6 +4,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.events.MeridianEvent;
+	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.meridian.EnumMStoneType;
@@ -25,12 +26,17 @@ package com.rpgGame.app.manager
 
 	public class MeridianMgr extends EventDispatcher
 	{
+		public static var MAX_STONE_LV:int=10;
 		public  static var ins:MeridianMgr=new MeridianMgr();
 	
 		public var vo:MeridianVo=new MeridianVo();
 		private var maxLevelDic:Dictionary;
 		public function MeridianMgr()
 		{
+			if (GlobalSheetData.getIntValue(505)!=0) 
+			{
+				MAX_STONE_LV=GlobalSheetData.getIntValue(505);
+			}
 		}
 		public function recMeridianInfoList(list:Vector.<AcuPointInfo>):void
 		{

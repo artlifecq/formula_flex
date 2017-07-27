@@ -1,7 +1,9 @@
 package com.rpgGame.core.utils
 {
 	import com.gameClient.utils.HashMap;
+	import com.rpgGame.core.interfaces.IAttrShow;
 	import com.rpgGame.coreData.type.CharAttributeType;
+	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import flash.geom.Point;
 	
@@ -21,6 +23,37 @@ package com.rpgGame.core.utils
 	{
 		public function AttrUtil()
 		{
+		}
+		public static function showAttrByItem(attHash:HashMap,contianer:DisplayObjectContainer,itemc:Class,cellNum:int,startPos:Point,xGe:int,yGe:int,pool:Array=null):Array
+		{
+			var keys:Array=attHash.keys();
+			keys.sort(Array.NUMERIC);
+			var len:int=keys.length;
+			var tmpLab:*;
+			var ret:Array=[];
+			var sty:int=startPos.y;
+			for (var i:int = 0; i < len; i++) 
+			{
+				if (pool&&pool.length>0) 
+				{
+					tmpLab=pool.pop();
+				}
+				else
+				{
+					tmpLab=new itemc();
+				}
+				
+				tmpLab.x=startPos.x+(i%cellNum)*xGe;
+				
+				startPos.y=sty+int(i/cellNum)*yGe;
+				tmpLab.y=startPos.y;
+				contianer.addChild(tmpLab);
+				(tmpLab as IAttrShow).setData(keys[i],attHash.getValue(keys[i]));
+				//tmpLab.text=CharAttributeType.getCNName(keys[i])+splitStr+attHash.getValue(keys[i]);
+				ret.push(tmpLab);
+			}
+			startPos.y=sty+Math.ceil(len/cellNum)*yGe;
+			return ret;
 		}
 		public static function showAttr(attHash:HashMap,contianer:DisplayObjectContainer,lab:Label,cellNum:int,startPos:Point,xGe:int,yGe:int,splitStr:String=":",pool:Array=null):Array
 		{
@@ -45,7 +78,8 @@ package com.rpgGame.core.utils
 				startPos.y=sty+int(i/cellNum)*yGe;
 				tmpLab.y=startPos.y;
 				contianer.addChild(tmpLab);
-				tmpLab.text=CharAttributeType.getCNName(keys[i])+splitStr+attHash.getValue(keys[i]);
+				tmpLab.htmlText=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_ATTR_NAME,CharAttributeType.getCNName(keys[i])+splitStr)+HtmlTextUtil.getTextColor(GameColorUtil.COLOR_ATTR_VALUE,attHash.getValue(keys[i]))
+				tmpLab.width=tmpLab.textWidth;				
 				ret.push(tmpLab);
 			}
 			startPos.y=sty+Math.ceil(len/cellNum)*yGe;
@@ -101,13 +135,13 @@ package com.rpgGame.core.utils
 			for (var i:int = 0; i < len; i++) 
 			{
 			
-				str+=CharAttributeType.getCNName(keys[i])+splitStr+attHash.getValue(keys[i]);
+				str+=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_ATTR_NAME,CharAttributeType.getCNName(keys[i]))+splitStr+HtmlTextUtil.getTextColor(GameColorUtil.COLOR_ATTR_VALUE,attHash.getValue(keys[i]));
 				if (i!=len-1) 
 				{
 					str+=devide;
 				}
 			}
-			lab.text=str;
+			lab.htmlText=str;
 		}
 	
 	}

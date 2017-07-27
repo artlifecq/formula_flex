@@ -334,7 +334,7 @@ package com.rpgGame.coreData.type
 			{
 				return "";
 			}
-			return attrRes[attrId];
+			return "ui/common/shuxing/"+attrRes[attrId]+".png";
 		}
 		public static function getAttrIconUrl(attrId:int):String
 		{
@@ -342,7 +342,7 @@ package com.rpgGame.coreData.type
 			{
 				return "";
 			}
-			return attrIconRes[attrId];
+			return "ui/common/shuxingIcon/tubiao/"+attrIconRes[attrId]+".png";
 		}
 		/**
 		 *获取对应属性的转换值 

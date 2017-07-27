@@ -726,15 +726,24 @@ package com.rpgGame.app.manager.fight
 		{
 			_queueThread.push(showAttackFaceNew, [attacker, hurter, showContainer,typeRes,numberRes, $attackValue, $specialType, $specialPos, $tweenFun,extendData], $queueTm);
 		}
+		private static var _showAttackFaceList:HashMap = new HashMap();
 		public static function showAttackFaceNew(attacker:SceneRole,hurter:SceneRole,showContainer : *, typeRes : String = "", numberRes : String = "", $attackValue : * = 0, $specialType : String = null, $specialPos : Point = null, $tweenFun : Function = null,extendData:Object=null) : void
 		{
 			if (showContainer == null)
 				return;
+			var attackFace : AttackFace;
+			if(_showAttackFaceList.containsKey(typeRes))
+			{
+				attackFace = _showAttackFaceList.getValue(typeRes) as AttackFace;
+				attackFace.visible = false
+			}
 			
-			var attackFace : AttackFace = AttackFace.createAttackFace(typeRes, numberRes, $attackValue, $specialType, $specialPos,extendData);
+			attackFace= AttackFace.createAttackFace(typeRes, numberRes, $attackValue, $specialType, $specialPos,extendData);
 			attackFace.touchAcross = true;
 			attackFace.touchable = false;
 			attackFace.touchGroup = false;
+			attackFace.visible = true;
+			_showAttackFaceList.add(typeRes,attackFace);
 			tweenFromSceneCharNew(attacker,hurter,showContainer, attackFace, $tweenFun, onAtackFaceComplete);
 		}
 		private static function tweenFromSceneCharNew(attacker:SceneRole,hurter:SceneRole,showContainer : *, $displayObject : AttackFace, $tweenFun : Function = null, $onComplete : Function = null) : void
@@ -888,6 +897,8 @@ package com.rpgGame.app.manager.fight
 				attackFace.parent.removeChild(attackFace);
 			//池回收
 			AttackFace.recycleAttackFace(attackFace);
+			if(attackFace == _showAttackFaceList.getValue(attackFace.typeRes))
+				_showAttackFaceList.remove(attackFace.typeRes);
 		}
 
 		//---------------------------------------------------     --------以下是运动轨迹函数----   -------------------------------------------------------//

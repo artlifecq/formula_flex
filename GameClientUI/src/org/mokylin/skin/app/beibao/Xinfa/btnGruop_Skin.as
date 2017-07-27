@@ -1,17 +1,8 @@
 package org.mokylin.skin.app.beibao.Xinfa
 {
-	import feathers.controls.Radio;
+	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
-	import org.mokylin.skin.app.beibao.Xinfa.button.ButtonChunyang;
-	import org.mokylin.skin.app.beibao.Xinfa.button.ButtonJiuxiao;
-	import org.mokylin.skin.app.beibao.Xinfa.button.ButtonLongxiang;
-	import org.mokylin.skin.app.beibao.Xinfa.button.ButtonMingxin;
-	import org.mokylin.skin.app.beibao.Xinfa.button.ButtonQiankun;
-	import org.mokylin.skin.app.beibao.Xinfa.button.ButtonShijue;
-	import org.mokylin.skin.app.beibao.Xinfa.button.ButtonWanji;
-	import org.mokylin.skin.app.beibao.Xinfa.button.ButtonXiaoyao;
-	import org.mokylin.skin.app.beibao.Xinfa.button.ButtonXidong;
-	import org.mokylin.skin.app.beibao.Xinfa.button.ButtonZhenyuan;
+	import org.mokylin.skin.app.beibao.Xinfa.XinFaSelect_Item;
 
 	/**
 	 * @private
@@ -23,25 +14,25 @@ package org.mokylin.skin.app.beibao.Xinfa
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var btn_chunyang:feathers.controls.Radio;
+		public var btn_chunyang:feathers.controls.SkinnableContainer;
 
-		public var btn_jiuxiao:feathers.controls.Radio;
+		public var btn_jiuxiao:feathers.controls.SkinnableContainer;
 
-		public var btn_longxiang:feathers.controls.Radio;
+		public var btn_longxiang:feathers.controls.SkinnableContainer;
 
-		public var btn_mingxin:feathers.controls.Radio;
+		public var btn_mingxin:feathers.controls.SkinnableContainer;
 
-		public var btn_qiankun:feathers.controls.Radio;
+		public var btn_qiankun:feathers.controls.SkinnableContainer;
 
-		public var btn_shijue:feathers.controls.Radio;
+		public var btn_shijue:feathers.controls.SkinnableContainer;
 
-		public var btn_wanji:feathers.controls.Radio;
+		public var btn_wanji:feathers.controls.SkinnableContainer;
 
-		public var btn_xiaoyao:feathers.controls.Radio;
+		public var btn_xiaoyao:feathers.controls.SkinnableContainer;
 
-		public var btn_xijing:feathers.controls.Radio;
+		public var btn_xijing:feathers.controls.SkinnableContainer;
 
-		public var btn_zhenyuan:feathers.controls.Radio;
+		public var btn_zhenyuan:feathers.controls.SkinnableContainer;
 
 
 		//==========================================================================
@@ -63,123 +54,123 @@ package org.mokylin.skin.app.beibao.Xinfa
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function btn_chunyang_i():feathers.controls.Radio
+		private function btn_chunyang_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.Radio = new feathers.controls.Radio();
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			btn_chunyang = temp;
 			temp.name = "btn_chunyang";
-			temp.groupName = "xfradioGroup";
-			temp.styleClass = org.mokylin.skin.app.beibao.Xinfa.button.ButtonChunyang;
+			var skin:StateSkin = new org.mokylin.skin.app.beibao.Xinfa.XinFaSelect_Item()
+			temp.skin = skin
 			temp.x = 0;
-			temp.y = 380;
+			temp.y = 355;
 			return temp;
 		}
 
-		private function btn_jiuxiao_i():feathers.controls.Radio
+		private function btn_jiuxiao_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.Radio = new feathers.controls.Radio();
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			btn_jiuxiao = temp;
 			temp.name = "btn_jiuxiao";
-			temp.groupName = "xfradioGroup";
-			temp.styleClass = org.mokylin.skin.app.beibao.Xinfa.button.ButtonJiuxiao;
+			var skin:StateSkin = new org.mokylin.skin.app.beibao.Xinfa.XinFaSelect_Item()
+			temp.skin = skin
 			temp.x = 0;
-			temp.y = 532;
+			temp.y = 497;
 			return temp;
 		}
 
-		private function btn_longxiang_i():feathers.controls.Radio
+		private function btn_longxiang_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.Radio = new feathers.controls.Radio();
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			btn_longxiang = temp;
 			temp.name = "btn_longxiang";
-			temp.groupName = "xfradioGroup";
-			temp.styleClass = org.mokylin.skin.app.beibao.Xinfa.button.ButtonLongxiang;
+			var skin:StateSkin = new org.mokylin.skin.app.beibao.Xinfa.XinFaSelect_Item()
+			temp.skin = skin
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
 
-		private function btn_mingxin_i():feathers.controls.Radio
+		private function btn_mingxin_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.Radio = new feathers.controls.Radio();
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			btn_mingxin = temp;
 			temp.name = "btn_mingxin";
-			temp.groupName = "xfradioGroup";
-			temp.styleClass = org.mokylin.skin.app.beibao.Xinfa.button.ButtonMingxin;
+			var skin:StateSkin = new org.mokylin.skin.app.beibao.Xinfa.XinFaSelect_Item()
+			temp.skin = skin
 			temp.x = 0;
-			temp.y = 608;
+			temp.y = 568;
 			return temp;
 		}
 
-		private function btn_qiankun_i():feathers.controls.Radio
+		private function btn_qiankun_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.Radio = new feathers.controls.Radio();
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			btn_qiankun = temp;
 			temp.name = "btn_qiankun";
-			temp.groupName = "xfradioGroup";
-			temp.styleClass = org.mokylin.skin.app.beibao.Xinfa.button.ButtonQiankun;
+			var skin:StateSkin = new org.mokylin.skin.app.beibao.Xinfa.XinFaSelect_Item()
+			temp.skin = skin
 			temp.x = 0;
-			temp.y = 228;
+			temp.y = 213;
 			return temp;
 		}
 
-		private function btn_shijue_i():feathers.controls.Radio
+		private function btn_shijue_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.Radio = new feathers.controls.Radio();
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			btn_shijue = temp;
 			temp.name = "btn_shijue";
-			temp.groupName = "xfradioGroup";
-			temp.styleClass = org.mokylin.skin.app.beibao.Xinfa.button.ButtonShijue;
+			var skin:StateSkin = new org.mokylin.skin.app.beibao.Xinfa.XinFaSelect_Item()
+			temp.skin = skin
 			temp.x = 0;
-			temp.y = 76;
+			temp.y = 71;
 			return temp;
 		}
 
-		private function btn_wanji_i():feathers.controls.Radio
+		private function btn_wanji_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.Radio = new feathers.controls.Radio();
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			btn_wanji = temp;
 			temp.name = "btn_wanji";
-			temp.groupName = "xfradioGroup";
-			temp.styleClass = org.mokylin.skin.app.beibao.Xinfa.button.ButtonWanji;
+			var skin:StateSkin = new org.mokylin.skin.app.beibao.Xinfa.XinFaSelect_Item()
+			temp.skin = skin
 			temp.x = 0;
-			temp.y = 684;
+			temp.y = 639;
 			return temp;
 		}
 
-		private function btn_xiaoyao_i():feathers.controls.Radio
+		private function btn_xiaoyao_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.Radio = new feathers.controls.Radio();
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			btn_xiaoyao = temp;
 			temp.name = "btn_xiaoyao";
-			temp.groupName = "xfradioGroup";
-			temp.styleClass = org.mokylin.skin.app.beibao.Xinfa.button.ButtonXiaoyao;
+			var skin:StateSkin = new org.mokylin.skin.app.beibao.Xinfa.XinFaSelect_Item()
+			temp.skin = skin
 			temp.x = 0;
-			temp.y = 152;
+			temp.y = 142;
 			return temp;
 		}
 
-		private function btn_xijing_i():feathers.controls.Radio
+		private function btn_xijing_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.Radio = new feathers.controls.Radio();
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			btn_xijing = temp;
 			temp.name = "btn_xijing";
-			temp.groupName = "xfradioGroup";
-			temp.styleClass = org.mokylin.skin.app.beibao.Xinfa.button.ButtonXidong;
+			var skin:StateSkin = new org.mokylin.skin.app.beibao.Xinfa.XinFaSelect_Item()
+			temp.skin = skin
 			temp.x = 0;
-			temp.y = 304;
+			temp.y = 284;
 			return temp;
 		}
 
-		private function btn_zhenyuan_i():feathers.controls.Radio
+		private function btn_zhenyuan_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.Radio = new feathers.controls.Radio();
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			btn_zhenyuan = temp;
 			temp.name = "btn_zhenyuan";
-			temp.groupName = "xfradioGroup";
-			temp.styleClass = org.mokylin.skin.app.beibao.Xinfa.button.ButtonZhenyuan;
+			var skin:StateSkin = new org.mokylin.skin.app.beibao.Xinfa.XinFaSelect_Item()
+			temp.skin = skin
 			temp.x = 0;
-			temp.y = 456;
+			temp.y = 426;
 			return temp;
 		}
 

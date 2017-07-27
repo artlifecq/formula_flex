@@ -5,17 +5,12 @@ package com.rpgGame.appModule.jingmai.render
 	import com.rpgGame.appModule.jingmai.MeridianStoneSelectPanelExt;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.AttrUtil;
-	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
-	
-	import flash.geom.Point;
-	
-	import feathers.controls.Label;
 	
 	import org.mokylin.skin.app.beibao.jingmai.StoneItem_Skin;
 	
@@ -44,7 +39,7 @@ package com.rpgGame.appModule.jingmai.render
 			{
 				var qItem:Q_item=_item.qItem;
 				_icon.setIconResName(ClientConfig.getItemIcon(_item.qItem.q_icon.toString(),IcoSizeEnum.ICON_36));
-				_skin.lbName.text=qItem.q_name+" Lv"+qItem.q_levelnum;
+				_skin.lbName.text=qItem.q_name;
 				_skin.lbName.color=ItemConfig.getItemQualityColor(qItem.q_id);
 				if (qItem.q_att_type!=0) 
 				{
@@ -52,7 +47,7 @@ package com.rpgGame.appModule.jingmai.render
 					AttValueConfig.getTypeValue(qItem.q_att_type,attr);
 					if (attr.size()>0) 
 					{
-						AttrUtil.showAttrInSingleLab(attr,_skin.lbJiacheng,",","+");
+						AttrUtil.showAttrInSingleLab(attr,_skin.lbJiacheng,",","：");
 					}
 				}
 			}

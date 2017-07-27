@@ -50,6 +50,14 @@ package com.rpgGame.coreData.clientConfig
 		public var q_map_pkprotection:int;
 		 /**  夜晚挂机是否开启挂机保护（0不开启，1开启） */
 		public var q_map_hangprotection:int;
+		 /**  可否选择尸体(0否,1是) */
+		public var q_select_corpse:int;
+		 /**  进入后自动战斗(0否,1是) */
+		public var q_enter_autofight:int;
+		 /**  重生后自动战斗(0否,1是) */
+		public var q_rebirth_autofight:int;
+		 /**  自动战斗位置[x,y] */
+		public var q_autofight_seat:String;
 		 /**  死亡回到地图ID */
 		public var q_map_die:int;
 		 /**  回到X坐标 */

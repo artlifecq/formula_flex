@@ -35,7 +35,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "角色等级：";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xA3A594;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 0;
 			temp.y = 0;
@@ -46,7 +46,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "50级";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 117;
 			temp.x = 67;

@@ -1,11 +1,14 @@
 package   com.rpgGame.app.manager.debug
 {	
 	import com.game.engine3D.manager.Stage3DLayerManager;
-	import com.game.engine3D.state.role.RoleState;
+	import com.game.engine3D.scene.render.RenderSet3D;
+	import com.game.engine3D.scene.render.RenderUnit3D;
+	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.engine3D.utils.StatsUtil;
 	import com.game.mainCore.core.manager.LayerManager;
 	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.HashMap;
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
 	import com.rpgGame.app.fight.spell.SkillAddPop;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
@@ -33,27 +36,28 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.app.state.role.control.SpriteUpBuffStateReference;
-	import com.rpgGame.app.state.role.control.VipBuffStateReference;
 	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
 	import com.rpgGame.app.ui.main.dungeon.JiXianTiaoZhanExtPop;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
+	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.info.move.RoleMoveInfo;
-	import com.rpgGame.coreData.role.GirlPetData;
-	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.CharAttributeType;
+	import com.rpgGame.coreData.type.RenderUnitID;
+	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleStateType;
+	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
 	import com.rpgGame.netData.backpack.bean.TempItemInfo;
 	import com.rpgGame.netData.fight.message.SCBuffSkillMessage;
-	import com.rpgGame.netData.map.bean.PetInfo;
 	import com.rpgGame.netData.player.message.SCNonagePromptMessage;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
 	import com.rpgGame.netData.structs.Position;
@@ -63,11 +67,13 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.netData.yaota.message.SCYaoTaAwardMessage;
 	
 	import flash.geom.Point;
+	import flash.geom.Vector3D;
 	import flash.utils.setTimeout;
+	
+	import gs.TweenLite;
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.MessageMgr;
 	
 	
@@ -224,7 +230,8 @@ package   com.rpgGame.app.manager.debug
 			commandList.put( ".actopen", function (...arg):void
 			{
 				var info:ActivetyInfo=ActivetyCfgData.getActInfoById(arg[0]); 
-				if(info.actCfg.q_show_notice==1){
+				var list:Array=JSONUtil.decode(info.actCfg.q_notice_trans);
+				if(info.actCfg.q_show_notice==1&&FunctionOpenManager.checkOpenBuyFunId(list[1])){
 					AppManager.showAppNoHide(AppConstant.ACTIVETY_OPEN,info);
 				}
 			});
@@ -371,6 +378,24 @@ package   com.rpgGame.app.manager.debug
 			{
 				SpellAnimationHelper.use2=!SpellAnimationHelper.use2;
 			});
+			commandList.put( ".fb", function (...arg):void
+			{
+				var effectSet : RenderSet3D = RenderSet3D.create(SceneCharType.SCENE_FLY_SPELL/* + info.flySceneObjID*/, 1,true);
+				var rud : RenderParamData3D = new RenderParamData3D(1, "effect", ClientConfig.getEffect("tx_role_jishujian_03"), "tx_role_jishujian_03");
+				
+				var effectRu : RenderUnit3D = effectSet.addRenderUnit(rud);
+				SceneManager.addSceneObjToScene(effectSet);
+				var pos:Vector3D=MainRoleManager.actor.getChildScenePositionByName(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_body_02)
+				//var pos:Vector3D=MainRoleManager.actor.position;
+				effectSet.x=pos.x;
+				effectSet.y=pos.y;
+				effectSet.z=pos.y;
+				effectRu.repeat = 0;
+				effectRu.mouseEnable = false;
+				effectRu.play(0);
+				TweenLite.to(effectSet,Number(arg[0]),{x:pos.x+int(arg[1])});
+			});
+			
 		}
 		
 		

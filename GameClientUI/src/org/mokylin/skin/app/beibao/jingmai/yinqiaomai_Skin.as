@@ -18,7 +18,43 @@ package org.mokylin.skin.app.beibao.jingmai
 		//==========================================================================
 		public var grp_icon:feathers.controls.Group;
 
+		public var grp_icondi:feathers.controls.Group;
+
 		public var grp_label:feathers.controls.Group;
+
+		public var icd1:feathers.controls.UIAsset;
+
+		public var icd10:feathers.controls.UIAsset;
+
+		public var icd11:feathers.controls.UIAsset;
+
+		public var icd12:feathers.controls.UIAsset;
+
+		public var icd13:feathers.controls.UIAsset;
+
+		public var icd14:feathers.controls.UIAsset;
+
+		public var icd15:feathers.controls.UIAsset;
+
+		public var icd16:feathers.controls.UIAsset;
+
+		public var icd17:feathers.controls.UIAsset;
+
+		public var icd2:feathers.controls.UIAsset;
+
+		public var icd3:feathers.controls.UIAsset;
+
+		public var icd4:feathers.controls.UIAsset;
+
+		public var icd5:feathers.controls.UIAsset;
+
+		public var icd6:feathers.controls.UIAsset;
+
+		public var icd7:feathers.controls.UIAsset;
+
+		public var icd8:feathers.controls.UIAsset;
+
+		public var icd9:feathers.controls.UIAsset;
 
 		public var ico1:feathers.controls.UIAsset;
 
@@ -99,7 +135,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			this.currentState = "normal";
 			this.height = 431;
 			this.width = 431;
-			this.elementsContent = [__yinqiaomai_Skin_UIAsset1_i(),grp_icon_i(),grp_label_i()];
+			this.elementsContent = [grp_icondi_i(),grp_icon_i(),grp_label_i()];
 			
 			states = {
 			};
@@ -110,23 +146,25 @@ package org.mokylin.skin.app.beibao.jingmai
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __yinqiaomai_Skin_UIAsset1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/big_bg/beibao/jingmai/bg2.png";
-			temp.x = -31;
-			temp.y = 0;
-			return temp;
-		}
-
 		private function grp_icon_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grp_icon = temp;
 			temp.name = "grp_icon";
-			temp.x = 72;
-			temp.y = 39;
+			temp.x = 76;
+			temp.y = 42;
 			temp.elementsContent = [ico1_i(),ico16_i(),ico17_i(),ico3_i(),ico2_i(),ico4_i(),ico5_i(),ico6_i(),ico7_i(),ico8_i(),ico11_i(),ico12_i(),ico13_i(),ico14_i(),ico15_i(),ico10_i(),ico9_i()];
+			return temp;
+		}
+
+		private function grp_icondi_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			grp_icondi = temp;
+			temp.name = "grp_icondi";
+			temp.x = 67;
+			temp.y = 34;
+			temp.elementsContent = [icd1_i(),icd16_i(),icd17_i(),icd3_i(),icd2_i(),icd4_i(),icd5_i(),icd6_i(),icd7_i(),icd8_i(),icd11_i(),icd12_i(),icd13_i(),icd14_i(),icd15_i(),icd10_i(),icd9_i()];
 			return temp;
 		}
 
@@ -141,12 +179,199 @@ package org.mokylin.skin.app.beibao.jingmai
 			return temp;
 		}
 
+		private function icd10_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icd10 = temp;
+			temp.name = "icd10";
+			temp.styleName = "ui/app/beibao/icons/bianxian/1/an/0.png";
+			temp.x = 125;
+			temp.y = 63;
+			return temp;
+		}
+
+		private function icd11_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icd11 = temp;
+			temp.name = "icd11";
+			temp.styleName = "ui/app/beibao/icons/bianxian/1/an/0.png";
+			temp.x = 125;
+			temp.y = 2;
+			return temp;
+		}
+
+		private function icd12_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icd12 = temp;
+			temp.name = "icd12";
+			temp.styleName = "ui/app/beibao/icons/bianxian/1/an/0.png";
+			temp.x = 214;
+			temp.y = 37;
+			return temp;
+		}
+
+		private function icd13_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icd13 = temp;
+			temp.name = "icd13";
+			temp.styleName = "ui/app/beibao/icons/bianxian/1/an/0.png";
+			temp.x = 247;
+			temp.y = 125;
+			return temp;
+		}
+
+		private function icd14_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icd14 = temp;
+			temp.name = "icd14";
+			temp.styleName = "ui/app/beibao/icons/bianxian/1/an/0.png";
+			temp.x = 214;
+			temp.y = 210;
+			return temp;
+		}
+
+		private function icd15_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icd15 = temp;
+			temp.name = "icd15";
+			temp.styleName = "ui/app/beibao/icons/bianxian/1/an/0.png";
+			temp.x = 172;
+			temp.y = 169;
+			return temp;
+		}
+
+		private function icd16_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icd16 = temp;
+			temp.name = "icd16";
+			temp.styleName = "ui/app/beibao/icons/bianxian/1/an/0.png";
+			temp.x = 189;
+			temp.y = 125;
+			return temp;
+		}
+
+		private function icd17_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icd17 = temp;
+			temp.name = "icd17";
+			temp.styleName = "ui/app/beibao/icons/bianxian/1/an/0.png";
+			temp.x = 170;
+			temp.y = 81;
+			return temp;
+		}
+
+		private function icd1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icd1 = temp;
+			temp.name = "icd1";
+			temp.styleName = "ui/app/beibao/icons/bianxian/1/an/0.png";
+			temp.x = 125;
+			temp.y = 125;
+			return temp;
+		}
+
+		private function icd2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icd2 = temp;
+			temp.name = "icd2";
+			temp.styleName = "ui/app/beibao/icons/bianxian/1/an/0.png";
+			temp.x = 60;
+			temp.y = 125;
+			return temp;
+		}
+
+		private function icd3_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icd3 = temp;
+			temp.name = "icd3";
+			temp.styleName = "ui/app/beibao/icons/bianxian/1/an/0.png";
+			temp.x = 78;
+			temp.y = 171;
+			return temp;
+		}
+
+		private function icd4_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icd4 = temp;
+			temp.name = "icd4";
+			temp.styleName = "ui/app/beibao/icons/bianxian/1/an/0.png";
+			temp.x = 125;
+			temp.y = 190;
+			return temp;
+		}
+
+		private function icd5_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icd5 = temp;
+			temp.name = "icd5";
+			temp.styleName = "ui/app/beibao/icons/bianxian/1/an/0.png";
+			temp.x = 125;
+			temp.y = 249;
+			return temp;
+		}
+
+		private function icd6_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icd6 = temp;
+			temp.name = "icd6";
+			temp.styleName = "ui/app/beibao/icons/bianxian/1/an/0.png";
+			temp.x = 40;
+			temp.y = 210;
+			return temp;
+		}
+
+		private function icd7_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icd7 = temp;
+			temp.name = "icd7";
+			temp.styleName = "ui/app/beibao/icons/bianxian/1/an/0.png";
+			temp.x = 1;
+			temp.y = 125;
+			return temp;
+		}
+
+		private function icd8_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icd8 = temp;
+			temp.name = "icd8";
+			temp.styleName = "ui/app/beibao/icons/bianxian/1/an/0.png";
+			temp.x = 40;
+			temp.y = 37;
+			return temp;
+		}
+
+		private function icd9_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			icd9 = temp;
+			temp.name = "icd9";
+			temp.styleName = "ui/app/beibao/icons/bianxian/1/an/0.png";
+			temp.x = 79;
+			temp.y = 81;
+			return temp;
+		}
+
 		private function ico10_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ico10 = temp;
 			temp.name = "ico10";
-			temp.styleName = "ui/app/beibao/jingmai/di_icon.png";
+			temp.styleName = "ui/app/beibao/icons/kuang/putong/0.png";
 			temp.x = 125;
 			temp.y = 63;
 			return temp;
@@ -157,7 +382,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ico11 = temp;
 			temp.name = "ico11";
-			temp.styleName = "ui/app/beibao/jingmai/di_icon.png";
+			temp.styleName = "ui/app/beibao/icons/kuang/putong/0.png";
 			temp.x = 125;
 			temp.y = 2;
 			return temp;
@@ -168,7 +393,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ico12 = temp;
 			temp.name = "ico12";
-			temp.styleName = "ui/app/beibao/jingmai/di_icon.png";
+			temp.styleName = "ui/app/beibao/icons/kuang/putong/0.png";
 			temp.x = 214;
 			temp.y = 37;
 			return temp;
@@ -179,7 +404,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ico13 = temp;
 			temp.name = "ico13";
-			temp.styleName = "ui/app/beibao/jingmai/di_icon.png";
+			temp.styleName = "ui/app/beibao/icons/kuang/putong/0.png";
 			temp.x = 247;
 			temp.y = 125;
 			return temp;
@@ -190,7 +415,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ico14 = temp;
 			temp.name = "ico14";
-			temp.styleName = "ui/app/beibao/jingmai/di_icon.png";
+			temp.styleName = "ui/app/beibao/icons/kuang/putong/0.png";
 			temp.x = 214;
 			temp.y = 210;
 			return temp;
@@ -201,7 +426,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ico15 = temp;
 			temp.name = "ico15";
-			temp.styleName = "ui/app/beibao/jingmai/di_icon.png";
+			temp.styleName = "ui/app/beibao/icons/kuang/putong/0.png";
 			temp.x = 172;
 			temp.y = 169;
 			return temp;
@@ -212,7 +437,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ico16 = temp;
 			temp.name = "ico16";
-			temp.styleName = "ui/app/beibao/jingmai/di_icon.png";
+			temp.styleName = "ui/app/beibao/icons/kuang/putong/0.png";
 			temp.x = 189;
 			temp.y = 125;
 			return temp;
@@ -223,7 +448,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ico17 = temp;
 			temp.name = "ico17";
-			temp.styleName = "ui/app/beibao/jingmai/di_icon.png";
+			temp.styleName = "ui/app/beibao/icons/kuang/putong/0.png";
 			temp.x = 170;
 			temp.y = 81;
 			return temp;
@@ -234,7 +459,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ico1 = temp;
 			temp.name = "ico1";
-			temp.styleName = "ui/app/beibao/jingmai/di_icon.png";
+			temp.styleName = "ui/app/beibao/icons/kuang/putong/0.png";
 			temp.x = 125;
 			temp.y = 125;
 			return temp;
@@ -245,7 +470,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ico2 = temp;
 			temp.name = "ico2";
-			temp.styleName = "ui/app/beibao/jingmai/di_icon.png";
+			temp.styleName = "ui/app/beibao/icons/kuang/putong/0.png";
 			temp.x = 60;
 			temp.y = 125;
 			return temp;
@@ -256,7 +481,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ico3 = temp;
 			temp.name = "ico3";
-			temp.styleName = "ui/app/beibao/jingmai/di_icon.png";
+			temp.styleName = "ui/app/beibao/icons/kuang/putong/0.png";
 			temp.x = 78;
 			temp.y = 171;
 			return temp;
@@ -267,7 +492,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ico4 = temp;
 			temp.name = "ico4";
-			temp.styleName = "ui/app/beibao/jingmai/di_icon.png";
+			temp.styleName = "ui/app/beibao/icons/kuang/putong/0.png";
 			temp.x = 125;
 			temp.y = 190;
 			return temp;
@@ -278,7 +503,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ico5 = temp;
 			temp.name = "ico5";
-			temp.styleName = "ui/app/beibao/jingmai/di_icon.png";
+			temp.styleName = "ui/app/beibao/icons/kuang/putong/0.png";
 			temp.x = 125;
 			temp.y = 249;
 			return temp;
@@ -289,7 +514,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ico6 = temp;
 			temp.name = "ico6";
-			temp.styleName = "ui/app/beibao/jingmai/di_icon.png";
+			temp.styleName = "ui/app/beibao/icons/kuang/putong/0.png";
 			temp.x = 40;
 			temp.y = 210;
 			return temp;
@@ -300,7 +525,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ico7 = temp;
 			temp.name = "ico7";
-			temp.styleName = "ui/app/beibao/jingmai/di_icon.png";
+			temp.styleName = "ui/app/beibao/icons/kuang/putong/0.png";
 			temp.x = 1;
 			temp.y = 125;
 			return temp;
@@ -311,7 +536,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ico8 = temp;
 			temp.name = "ico8";
-			temp.styleName = "ui/app/beibao/jingmai/di_icon.png";
+			temp.styleName = "ui/app/beibao/icons/kuang/putong/0.png";
 			temp.x = 40;
 			temp.y = 37;
 			return temp;
@@ -322,7 +547,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ico9 = temp;
 			temp.name = "ico9";
-			temp.styleName = "ui/app/beibao/jingmai/di_icon.png";
+			temp.styleName = "ui/app/beibao/icons/kuang/putong/0.png";
 			temp.x = 79;
 			temp.y = 81;
 			return temp;
@@ -335,8 +560,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.name = "lb_10";
 			temp.fontSize = 16;
 			temp.text = "2";
-			temp.color = 0xE1D4A9;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 60;
 			temp.x = 162;
 			temp.y = 60;
@@ -350,8 +575,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.name = "lb_11";
 			temp.fontSize = 16;
 			temp.text = "2";
-			temp.color = 0xE1D4A9;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 60;
 			temp.x = 167;
 			temp.y = 6;
@@ -365,8 +590,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.name = "lb_12";
 			temp.fontSize = 16;
 			temp.text = "2";
-			temp.color = 0xE1D4A9;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 60;
 			temp.x = 230;
 			temp.y = 81;
@@ -380,8 +605,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.name = "lb_13";
 			temp.fontSize = 16;
 			temp.text = "2";
-			temp.color = 0xE1D4A9;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 60;
 			temp.x = 266;
 			temp.y = 170;
@@ -395,8 +620,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.name = "lb_14";
 			temp.fontSize = 16;
 			temp.text = "2";
-			temp.color = 0xE1D4A9;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 60;
 			temp.x = 218;
 			temp.y = 253;
@@ -410,8 +635,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.name = "lb_15";
 			temp.fontSize = 16;
 			temp.text = "2";
-			temp.color = 0xE1D4A9;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 60;
 			temp.x = 185;
 			temp.y = 210;
@@ -425,8 +650,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.name = "lb_16";
 			temp.fontSize = 16;
 			temp.text = "2";
-			temp.color = 0xE1D4A9;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 60;
 			temp.x = 219;
 			temp.y = 169;
@@ -440,8 +665,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.name = "lb_17";
 			temp.fontSize = 16;
 			temp.text = "2";
-			temp.color = 0xE1D4A9;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 60;
 			temp.x = 212;
 			temp.y = 103;
@@ -455,8 +680,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.name = "lb_1";
 			temp.fontSize = 16;
 			temp.text = "2";
-			temp.color = 0xE1D4A9;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 60;
 			temp.x = 160;
 			temp.y = 158;
@@ -470,8 +695,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.name = "lb_2";
 			temp.fontSize = 16;
 			temp.text = "2";
-			temp.color = 0xE1D4A9;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 60;
 			temp.x = 95;
 			temp.y = 158;
@@ -485,8 +710,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.name = "lb_3";
 			temp.fontSize = 16;
 			temp.text = "2";
-			temp.color = 0xE1D4A9;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 60;
 			temp.x = 120;
 			temp.y = 178;
@@ -500,8 +725,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.name = "lb_4";
 			temp.fontSize = 16;
 			temp.text = "2";
-			temp.color = 0xE1D4A9;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 60;
 			temp.x = 156;
 			temp.y = 230;
@@ -515,8 +740,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.name = "lb_5";
 			temp.fontSize = 16;
 			temp.text = "2";
-			temp.color = 0xE1D4A9;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 60;
 			temp.x = 166;
 			temp.y = 275;
@@ -530,8 +755,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.name = "lb_6";
 			temp.fontSize = 16;
 			temp.text = "2";
-			temp.color = 0xE1D4A9;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 60;
 			temp.x = 67;
 			temp.y = 253;
@@ -545,8 +770,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.name = "lb_7";
 			temp.fontSize = 16;
 			temp.text = "2";
-			temp.color = 0xE1D4A9;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 60;
 			temp.x = 8;
 			temp.y = 170;
@@ -560,8 +785,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.name = "lb_8";
 			temp.fontSize = 16;
 			temp.text = "2";
-			temp.color = 0xE1D4A9;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 60;
 			temp.x = 57;
 			temp.y = 80;
@@ -575,8 +800,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.name = "lb_9";
 			temp.fontSize = 16;
 			temp.text = "2";
-			temp.color = 0xE1D4A9;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 60;
 			temp.x = 117;
 			temp.y = 111;

@@ -285,6 +285,8 @@ package com.rpgGame.app.data
 			TaskMissionCfgData.setup(dic[ConfigClassRegister.Q_mission_base]);
 			TaskMissionCfgData.setupReword(dic[ConfigClassRegister.Q_mission_reword]);
 			TaskMissionCfgData.setupSegment(dic[ConfigClassRegister.Q_mission_segment]);
+			TaskMissionCfgData.setupSuggest(dic[ConfigClassRegister.Q_suggest]);
+			
 			
 			//窗口信息配置
 			FuncionBarCfgData.setup(dic[ConfigClassRegister.FunctionBarInfo]);

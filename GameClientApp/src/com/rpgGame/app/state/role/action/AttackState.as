@@ -3,12 +3,10 @@ package com.rpgGame.app.state.role.action
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.state.IState;
 	import com.game.engine3D.vo.BaseRole;
-	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.app.state.role.control.CheckTripleAttackStateReference;
-	import com.rpgGame.app.state.role.control.TripleAttackSpellLockStateReference;
 	import com.rpgGame.core.state.role.action.ActionState;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleData;
@@ -156,7 +154,6 @@ package com.rpgGame.app.state.role.action
 					status = RoleActionType.RUN;
 				}
 			}
-			var isHideState:Boolean=(_machine.owner as SceneRole).stateMachine.isHiding;
 			var matchStatus : String = RoleActionType.getActionType(status, (_machine as RoleStateMachine).isRiding);
 			switch (render.type)
 			{
@@ -164,11 +161,7 @@ package com.rpgGame.app.state.role.action
 				case RenderUnitType.HAIR:
 				case RenderUnitType.WEAPON:
 				case RenderUnitType.DEPUTY_WEAPON:
-					if (!isHideState) 
-					{
-						render.visible = true;
-					}
-					
+					render.visible = true;
 					render.repeat = 1;
 					render.setStatus(matchStatus, _useCrossfadeTransition ? 0.2 : null, time, speedRatio);
 					if (isFreeze)
@@ -189,16 +182,10 @@ package com.rpgGame.app.state.role.action
 					render.play(time, speedRatio);
 					break;
 				case RenderUnitType.WEAPON_EFFECT:
-					if (!isHideState) 
-					{
-						render.visible = true;
-					}
+					render.visible = true;
 					break;
 				case RenderUnitType.EFFECT:
-					if (!isHideState) 
-					{
-						render.visible = true;
-					}
+					render.visible = true;
 					break;
 				case RenderUnitType.HURT:
 					break;

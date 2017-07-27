@@ -1,6 +1,7 @@
 package com.rpgGame.app.manager.task
 {
 	import com.game.mainCore.core.timer.GameTimer;
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
@@ -100,6 +101,7 @@ package com.rpgGame.app.manager.task
 			_otherType=1;
 			changeSub();
 			TrusteeshipManager.getInstance().stopAll();
+			SceneRoleSelectManager.selectedRole=null;
 			if(!_isTaskRunning)
 			{
 				_isTaskRunning = true;
@@ -121,8 +123,10 @@ package com.rpgGame.app.manager.task
 			_otherType=type;
 			//changeSub();
 			TrusteeshipManager.getInstance().stopAll();
+			SceneRoleSelectManager.selectedRole=null;
 			if(!_isOtherTaskRunning)
 			{
+				
 				_isOtherTaskRunning = true;
 				_isTaskRunning=false;
 				_isAutoing=true;
@@ -130,7 +134,6 @@ package com.rpgGame.app.manager.task
 				TweenLite.killDelayedCallsTo(onDelayedUnbroken);
 				onUpdate(true);
 			}
-			
 			
 		}
 		public function broken() : void
@@ -225,6 +228,10 @@ package com.rpgGame.app.manager.task
 			}
 		}
 		
+		public function get isTasking():Boolean
+		{
+			return _isTaskRunning||_isOtherTaskRunning;
+		}
 		
 		public function get isTaskRunning():Boolean
 		{
@@ -277,7 +284,7 @@ package com.rpgGame.app.manager.task
 			var i:int,length:int;
 			var taskData:Q_mission_base=TaskMissionManager.getTaskDataByType(otherType);
 			var information:String=taskData.q_finish_information_str;
-			var informationList:Array=information.split(";");
+			var informationList:Array=JSONUtil.decode(information);
 			length=informationList.length;
 			for(i=0;i<length;i++)
 			{

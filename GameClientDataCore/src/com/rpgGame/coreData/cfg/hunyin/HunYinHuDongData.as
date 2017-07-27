@@ -26,12 +26,10 @@ package com.rpgGame.coreData.cfg.hunyin
 		 * */
 		public static function isCanClick(type:int,num:int,vipLv:int):Boolean
 		{
-			return true;
 			var id:String=type.toString()+"_"+num.toString();
 			var q_interaction:Q_interaction=_dataDic[id];
 			if(q_interaction==null) return false;
-			if(q_interaction.q_vip_Num >= vipLv) return true;
-			return false;
+			return q_interaction.q_vip_Num <= vipLv;
 		}
 		
 		/**
