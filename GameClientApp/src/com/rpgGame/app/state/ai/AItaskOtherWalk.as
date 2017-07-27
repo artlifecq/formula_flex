@@ -17,6 +17,7 @@ package com.rpgGame.app.state.ai
 	public class AItaskOtherWalk extends AIState
 	{
 		private var taskType:int
+		private var taskTarget:int;
 		public function AItaskOtherWalk()
 		{
 			super(AIStateType.TASK_OTHER_WALK);
@@ -26,6 +27,7 @@ package com.rpgGame.app.state.ai
 		{
 			super.execute();
 			taskType=TaskAutoManager.getInstance().otherType;
+			taskTarget=TaskAutoManager.getInstance().taskTarget;
 			var taskData:Q_mission_base=TaskMissionManager.getTaskDataByType(taskType);
 			if(taskData==null)return;
 			var missionType:int=taskData.q_mission_type;
@@ -41,11 +43,16 @@ package com.rpgGame.app.state.ai
 					onArrive();
 				}
 			}
+			else if(taskType==TaskType.MAINTYPE_TREASUREBOX)
+			{
+				var monsterId:int=TaskMissionManager.getTreasuerMonsterId(taskTarget);
+				TaskUtil.monsterTaskWalk(monsterId,subMonster);
+			}
 			else
 			{
 				if(missionType==TaskType.SUB_USEITEM)//是使用道具任务且没有完成
 				{
-					var modeid:int=TaskUtil.getMonsterByType(taskType,TaskAutoManager.getInstance().taskTarget);
+					var modeid:int=TaskUtil.getMonsterByType(taskType,taskTarget);
 					GatherAutoManager.getInstance().startGatherAuto(modeid);
 				}
 				else if(missionType==TaskType.SUB_CONVERSATION)
@@ -54,13 +61,13 @@ package com.rpgGame.app.state.ai
 				}
 				else if(missionType==TaskType.SUB_MONSTER||missionType==TaskType.SUB_ITEM)
 				{
-					var post:Array=TaskMissionManager.getPathingByType(taskType,TaskAutoManager.getInstance().taskTarget);
+					var post:Array=TaskMissionManager.getPathingByType(taskType,taskTarget);
 					TaskUtil.postTaskWalk(post,subMonster,null,missionType==TaskType.SUB_MONSTER);
 				}
 				else if(missionType==TaskType.SUB_GATHER)
 				{
-					var post2:Array=TaskMissionManager.getPathingByType(taskType,TaskAutoManager.getInstance().taskTarget);
-					var modeid2:int=TaskUtil.getMonsterByType(taskType,TaskAutoManager.getInstance().taskTarget);
+					var post2:Array=TaskMissionManager.getPathingByType(taskType,taskTarget);
+					var modeid2:int=TaskUtil.getMonsterByType(taskType,taskTarget);
 					var obj:Object=new Object();
 					obj.subType=TaskUtil.getSubtypeByType(taskType);
 					obj.modeid=modeid2;

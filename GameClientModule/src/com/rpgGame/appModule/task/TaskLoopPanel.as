@@ -106,6 +106,7 @@ package com.rpgGame.appModule.task
 				initKey=true;
 				init();
 			}
+			selectId=1;
 			setView();
 			timeInit()	
 			
@@ -118,10 +119,10 @@ package com.rpgGame.appModule.task
 		}
 		override public function hide():void 
 		{
-			super.hide();
 			timer.stop();
 			currtimer=TIMERDATA;
 			subFinish();
+			super.hide();
 		}
 		private function onTimer() : void 
 		{
@@ -150,7 +151,7 @@ package com.rpgGame.appModule.task
 		/**判断倒计时*/
 		private function timeInit():void
 		{
-			selectId=1;
+			
 			if(TaskMissionManager.getTreasuerTaskIsFinish())
 			{
 				timer.start();
@@ -165,17 +166,17 @@ package com.rpgGame.appModule.task
 		}
 		private function subFinishBut(type:int):void
 		{
-			if(TaskMissionManager.treasuerTaskInfo!=null&&TaskMissionManager.getTreasuerTaskIsFinish()&&this.visible&&this.parent!=null)
-			{
-				selectId=type;
-				hide();
-				
-			}
+			selectId=type;
+			hide();
 			
 		}
 		private function subFinish():void
 		{
-			TaskSender.sendfinishTaskMessage(TaskMissionManager.treasuerTaskInfo.taskId,selectId);	
+			if(TaskMissionManager.treasuerTaskInfo!=null&&TaskMissionManager.getTreasuerTaskIsFinish()&&this.visible&&this.parent!=null)
+			{
+				TaskSender.sendfinishTaskMessage(TaskMissionManager.treasuerTaskInfo.taskId,selectId);
+			}
+				
 		}
 		private var loopNumber:int=-1;
 		private function setView():void
