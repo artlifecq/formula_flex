@@ -21,10 +21,14 @@ package com.rpgGame.app.ui.main.taskbar
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.HuBaoData;
+	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_mission_base;
+	import com.rpgGame.coreData.clientConfig.Q_suggest;
+	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.SceneCollectData;
 	import com.rpgGame.coreData.type.TaskType;
+	import com.rpgGame.netData.task.bean.TaskInfo;
 	
 	public class TaskControl
 	{
@@ -80,15 +84,66 @@ package com.rpgGame.app.ui.main.taskbar
 			AppManager.hideApp(AppConstant.ROLE_PANEL);
 			
 		}
+		
+		public static function guideBut(num:int):void
+		{
+			var task:Vector.<TaskInfo>=TaskMissionManager.getGuideTaskInfo();
+			var taskInfo:TaskInfo=task[num];
+			var taskData:Q_mission_base;
+			if(taskInfo)
+			{
+				taskData=TaskMissionCfgData.getTaskByID(taskInfo.taskModelId);
+			}
+			if(taskData&&taskData.q_emid!="")
+			{
+				FunctionOpenManager.openAppPaneById(taskData.q_emid);
+			}
+			
+		}
 		/**目标按钮任务处理*/
 		public static function killWalkBut(type:int,num:int,key:int):void
 		{
+			
+			if(type==TaskType.MAINTYPE_MAINTASK&&TaskMissionManager.noMainTaskId!=0)//卡级
+			{
+				var add:int=1;
+				if(FunctionOpenManager.checkOpenBuyFunId(EmFunctionID.EM_ZHANHUN))
+				{
+					add--;
+				}
+				add+=num;
+				if(add==0)//打开战魂面板
+				{
+					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ZHANHUN);
+				}
+				else if(add==1)
+				{
+					var post:Array=TaskMissionCfgData.getSuggestPotByLevel(MainRoleManager.actorInfo.totalStat.level);
+					if(post)
+					{
+						if(key==1)
+						{
+							TaskUtil.postTaskWalk(post,startFight,null,true);
+						}
+						else
+						{
+							TaskUtil.postTaskFly(post,0,TaskType.SUB_MONSTER);
+						}
+					}
+				}
+				return;
+			}
+			
 			if(key==1&&type==TaskType.MAINTYPE_MAINTASK&&MainRoleManager.actorInfo.totalStat.level<=TaskAutoManager.AUTOLVE)//
 			{
 				TaskAutoManager.getInstance().startTaskAuto(num);
 				return;
 			}
-			
+			if(key==1&&type==TaskType.MAINTYPE_TREASUREBOX)//
+			{
+				TaskAutoManager.getInstance().startOtherTaskAuto(type,num);
+				return;
+			}
 			if(TaskUtil.getSubtypeByType(type)==TaskType.SUB_USEITEM&&!TaskUtil.getIsfinishByType(type))//是使用道具任务且没有完成
 			{
 				showBagPanel();
@@ -172,7 +227,12 @@ package com.rpgGame.app.ui.main.taskbar
 		{		
 			HuBaoManager.instance().onHuBaoHandler();
 			
-			if(TaskMissionManager.flyTaskType>0)
+			if(TaskMissionManager.flyMissionType>0)
+			{
+				taskFlishNot(0,TaskMissionManager.flyMissionType);
+				TaskMissionManager.flyMissionType=0;
+			}
+			else if(TaskMissionManager.flyTaskType>0)
 			{
 				var taskType:int=TaskMissionManager.flyTaskType;
 				var taskData:Q_mission_base=TaskMissionManager.getTaskDataByType(taskType);

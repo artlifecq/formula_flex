@@ -208,6 +208,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_source:String = "data.Q_source";
 		/**  活动配置表																														 */
 		public static const Q_special_activities:String = "data.Q_special_activities";
+		/**  任务卡级挂机点表				 */
+		public static const Q_suggest:String = "data.Q_suggest";
 		/**  tipsid	标题	描述	来源 */
 		public static const Q_tipsinfo:String = "data.Q_tipsinfo";
 		/**  											 */
@@ -356,6 +358,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_singlecitybase", com.rpgGame.coreData.clientConfig.Q_singlecitybase);
 			regClass("data.Q_source", com.rpgGame.coreData.clientConfig.Q_source);
 			regClass("data.Q_special_activities", com.rpgGame.coreData.clientConfig.Q_special_activities);
+			regClass("data.Q_suggest", com.rpgGame.coreData.clientConfig.Q_suggest);
 			regClass("data.Q_tipsinfo", com.rpgGame.coreData.clientConfig.Q_tipsinfo);
 			regClass("data.Q_vip", com.rpgGame.coreData.clientConfig.Q_vip);
 			regClass("data.Q_warflag", com.rpgGame.coreData.clientConfig.Q_warflag);

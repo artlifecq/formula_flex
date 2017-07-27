@@ -1,5 +1,6 @@
 package com.rpgGame.app.ui.main.taskbar
 {
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
@@ -10,12 +11,14 @@ package com.rpgGame.app.ui.main.taskbar
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
+	import com.rpgGame.coreData.cfg.task.TaskCfgData;
 	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_mission_base;
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.type.TaskType;
 	import com.rpgGame.coreData.type.TipType;
+	import com.rpgGame.netData.task.bean.NoMainTaskInfo;
 	import com.rpgGame.netData.task.bean.TaskInfo;
 	
 	import feathers.controls.Button;
@@ -59,6 +62,8 @@ package com.rpgGame.app.ui.main.taskbar
 		private var icoList2Group:RewardGroup;
 		private var subBut1:Button;
 		//private var subBut2:Button;
+		private var guideLabelList:Vector.<Label>;
+		
 		public function TaskLoopView(skin:RenWuZhuiZong_Skin)
 		{
 			_skin=skin;
@@ -89,6 +94,8 @@ package com.rpgGame.app.ui.main.taskbar
 			skinList.push(_skin.sec_killbut3_3);
 			skinList.push(_skin.sec_info);
 			skinList.push(icoList2Group);
+			
+			
 			//skinList.push(_skin.sec_subbut2);
 		/*	navi1=RenWuTitle_Skin(_skin.sec_navi1.skin).sec_navi1;
 			navi2=RenWuTitle_Skin(_skin.sec_navi2.skin).sec_navi1;
@@ -130,11 +137,12 @@ package com.rpgGame.app.ui.main.taskbar
 			extraLabel=_skin.sec_info;
 			subBut1=_skin.sec_subbut1;
 			//subBut2=_skin.sec_subbut2;
-			
+			guideLabelList=new Vector.<Label>();
 			
 			hideMainTaskView();
 			hideDailyTaskView();
 			hideTreasuerTaskView();
+			hideGuideTaskView();
 		}
 		
 		private function scrollInit():void
@@ -190,6 +198,7 @@ package com.rpgGame.app.ui.main.taskbar
 				setMainTaskView();
 				setDailyTaskView();
 				setTreasuerTaskView();
+				setGuideTaskView();
 			}
 			else if(type==1)
 			{
@@ -203,7 +212,10 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				setTreasuerTaskView();
 			}
-			
+			else if(type==6)
+			{
+				setGuideTaskView();
+			}
 		}
 		public function upLoopTaskView(type:int=0):void
 		{
@@ -226,7 +238,10 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				upTreasuerTaskView();
 			}
-			
+			else if(type==6)
+			{
+				setGuideTaskView();
+			}
 		}
 		public function hideTaskView(type:int=0):void
 		{
@@ -303,8 +318,10 @@ package com.rpgGame.app.ui.main.taskbar
 				killBut1List[i].x=12;
 				killBut1List[i].visible=false;
 			}
-			_skin.sec_navi0.visible=false;
 			_skin.sec_txt.visible=false;
+			_skin.sec_navi1.visible=false;
+			_skin.lbInfo.visible=false;
+			_skin.sec_tuijian.visible=false;
 		}
 		
 		/**设置支线任务显示*/
@@ -378,10 +395,11 @@ package com.rpgGame.app.ui.main.taskbar
 			}
 			setUisite();
 		}
-		/**设置支线环式隐藏*/
+		/**设置环式隐藏*/
 		public function hideTreasuerTaskView():void
 		{
 			navi3.visible=false;
+			_skin.chkAuto.visible=false;
 			var i:int;
 			for(i=0;i<killBut3List.length;i++)
 			{
@@ -406,6 +424,50 @@ package com.rpgGame.app.ui.main.taskbar
 			}
 			
 		}
+		/**设置引导任务显示*/
+		public function setGuideTaskView():void
+		{
+			hideGuideTaskView()
+			var task:Vector.<TaskInfo>=TaskMissionManager.getGuideTaskInfo();
+			var taskData:Q_mission_base;
+			var glabe:Label;
+			if(task!=null)
+			{
+				for(var i:int=0;i<task.length;i++)
+				{
+					if(i<guideLabelList.length)
+					{
+						glabe=guideLabelList[i];
+					}
+					else
+					{
+						glabe=new Label();
+						glabe.name=TaskType.MAINTYPE_GUIDETASK+"AA"+guideLabelList.length;
+						guideLabelList.push(glabe);
+						skinList.push(glabe);
+						scrollBox.addChild(glabe);
+					}
+					glabe.x=_skin.sec_navi1.x;
+					glabe.visible=true;
+					taskData=TaskMissionCfgData.getTaskByID(task[i].taskModelId);
+					var finish:Array=JSONUtil.decode(taskData.q_finish_information_str);
+					glabe.htmlText="<font color='#ffea00'>【"+taskData.q_name+"】</font>"+taskData.q_finish_describe+"("+task[i].taskSubRateInfolist[0].num+"/"+finish[0][1]+")";
+				}
+			}
+			setUisite();
+		}
+	
+		/**设置引导任务隐藏*/
+		public function hideGuideTaskView():void
+		{
+			var i:int;
+			for(i=0;i<guideLabelList.length;i++)
+			{
+				guideLabelList[i].visible=false;
+			}
+		}
+		
+		
 		private function setNavView(type:int,party:String,name:String,isFinish:Boolean,navSkin:SkinnableContainer,subBut:Button=null,describe:String=""):void
 		{
 			navSkin.visible=true;
@@ -479,27 +541,47 @@ package com.rpgGame.app.ui.main.taskbar
 		}
 		
 		/**处理卡点显示*/
-		public function stKajibutView():void
+		public function setKajibutView(taskId: int,noInfo: Vector.<NoMainTaskInfo>):void
 		{
+			if(!_skin.secondary_box.visible)return;
 			var i:int;
 			_skin.sec_txt.visible=false;
 			_skin.sec_navi1.visible=true;
 			_skin.lbInfo.visible=true;
 			_skin.sec_tuijian.visible=true;
+			var nav:Label=RenWuTitle_Skin(_skin.sec_navi1.skin).sec_navi1;
 			for(i=0;i<killBut1List.length;i++)
 			{
 				killBut1List[i].x=52;
 				killBut1List[i].visible=false;
 			}
-			//killBut1List[0]
-			var text:String="";
-			text="<u>战魂</u>"
-			TaskUtil.setGotargetLabelText(0,killBut1List[0],text);
-			text="<u>推荐挂机点</u>"
-			TaskUtil.setGotargetLabelText(10,killBut1List[1],text);
+			var taskData:Q_mission_base=TaskMissionCfgData.getTaskByID(taskId);
+			if(taskData!=null)
+			{
+				nav.htmlText="<font color='#ffea00'>【主线】</font>"+taskData.q_party_name+taskData.q_name+"<font color='#ff0d0d'>(未完成)</font>";
+				_skin.lbInfo.htmlText="本任务需要"+taskData.q_needLevel+"级开启";
+			}
+			setKajiGoter();
+			TipTargetManager.show( _skin.sec_navi1, TargetTipsMaker.makeTips( TipType.TASK_LEAD_TIP,{name:taskData.q_party_name+taskData.q_name,rewordid:taskData.q_reword_id}));
+			
 			setUisite();
 		}
-		
+		/**处理卡点显示*/
+		public function setKajiGoter():void
+		{
+			if(!_skin.secondary_box.visible)return;
+			if(!_skin.lbInfo.visible)return;
+			var text:String="";
+			var add:int=0;
+			if(FunctionOpenManager.checkOpenBuyFunId(EmFunctionID.EM_ZHANHUN))
+			{
+				text="<u>战魂</u>"
+				TaskUtil.setGotargetLabelText(add,killBut1List[add],text);
+				add++;
+			}
+			text="<u>推荐挂机点</u>"
+			TaskUtil.setGotargetLabelText(10,killBut1List[add],text);
+		}
 		
 		
 		private function setExtraLabel(num:int):void
@@ -562,9 +644,11 @@ package com.rpgGame.app.ui.main.taskbar
 				}
 			}
 			_skin.sec_tuijian.y=killBut1List[0].y+3;
+			_skin.chkAuto.y=_skin.sec_navi3.y+1;
+			_skin.chkAuto.x=_skin.sec_navi3.x+RenWuTitle_Skin(_skin.sec_navi3.skin).sec_navi1.textWidth+3;
 			if(count>=0)
 			{
-				scrollBack.height=skinList[count].y+skinList[count].height+3;
+				scrollBack.height=skinList[count].y+skinList[count].height+10;
 			}
 			
 			scrollBar.addChild(scrollBack);

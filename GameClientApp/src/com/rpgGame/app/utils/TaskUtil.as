@@ -3,6 +3,7 @@ package com.rpgGame.app.utils
 	import com.game.engine3D.core.AreaMap;
 	import com.game.engine3D.utils.MathUtil;
 	import com.game.engine3D.vo.AreaMapData;
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.fight.spell.CastSpellHelper;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.manager.chat.NoticeManager;
@@ -303,11 +304,10 @@ package com.rpgGame.app.utils
 			{
 				
 				finish=taskData.q_finish_information_str;
-				finishArr=finish.split(";");
+				finishArr=JSONUtil.decode(finish);
 				if(finishArr.length>ite)
 				{
-					finish=finishArr[ite];
-					finishArr=finish.split(",");
+					finishArr=finishArr[ite];
 					if(finishArr.length==2)
 					{
 						monsterId=int(finishArr[0]);
@@ -363,11 +363,10 @@ package com.rpgGame.app.utils
 				
 				
 				finish=taskData.q_finish_information_str;
-				finishArr=finish.split(";");
+				finishArr=JSONUtil.decode(finish);
 				if(finishArr.length>ite)
 				{
-					finish=finishArr[ite];
-					finishArr=finish.split(",");
+					finishArr=finishArr[ite];
 					if(finishArr.length==2)
 					{
 						monsterId=int(finishArr[0]);
@@ -548,12 +547,13 @@ package com.rpgGame.app.utils
 		 * @param modeId
 		 *
 		 */
-		public static function postTaskFly(post :Array,mainType : int,onArrive:Function=null,noWalk:Function=null) : void
+		public static function postTaskFly(post :Array,mainType : int,missionType:int=0,onArrive:Function=null,noWalk:Function=null) : void
 		{
 			
 			if (post!=null&&post.length==3)
 			{
 				TaskMissionManager.flyTaskType=mainType;
+				TaskMissionManager.flyMissionType=missionType;
 				SceneSender.sceneMapTransport(post[0], post[1], post[2]);
 			}
 		}
@@ -905,17 +905,17 @@ package com.rpgGame.app.utils
 			else
 			{
 				var finiStr:Array;
-				var informationList:Array=finisstr.split(";");
+				var informationList:Array=JSONUtil.decode(finisstr);;
 				
 				length=informationList.length;
 				for(i=0;i<length;i++)
 				{
-					if(informationList[i]&&informationList[i]!="")
+					if(informationList[i]&&informationList[i]!=null)
 					{
 						
 						var modeid:int=0;
 						var count:int=0,finish:int;
-						var modeArr:Array=informationList[i].split(",");
+						var modeArr:Array=informationList[i];
 						if(modeArr.length==2)
 						{
 							modeid=int(modeArr[0]);

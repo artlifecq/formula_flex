@@ -2,12 +2,14 @@ package org.mokylin.skin.mainui.renwu
 {
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
+	import feathers.controls.Check;
 	import feathers.controls.Group;
 	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import feathers.controls.ScrollContainer;
+	import org.mokylin.skin.app.banghui.check.CheckBoxSkin_2;
 	import org.mokylin.skin.component.button.ButtonSkin_hide;
 	import org.mokylin.skin.component.button.ButtonSkin_putong4;
 	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
@@ -33,6 +35,8 @@ package org.mokylin.skin.mainui.renwu
 		public var btn_open:feathers.controls.Button;
 
 		public var but_openBg:feathers.controls.UIAsset;
+
+		public var chkAuto:feathers.controls.Check;
 
 		public var lbInfo:feathers.controls.Label;
 
@@ -87,8 +91,6 @@ package org.mokylin.skin.mainui.renwu
 		public var sec_killbut3_2:feathers.controls.SkinnableContainer;
 
 		public var sec_killbut3_3:feathers.controls.SkinnableContainer;
-
-		public var sec_navi0:feathers.controls.Label;
 
 		public var sec_navi1:feathers.controls.SkinnableContainer;
 
@@ -200,6 +202,25 @@ package org.mokylin.skin.mainui.renwu
 			return temp;
 		}
 
+		private function chkAuto_i():feathers.controls.Check
+		{
+			var temp:feathers.controls.Check = new feathers.controls.Check();
+			chkAuto = temp;
+			temp.name = "chkAuto";
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.label = "自动";
+			temp.labelOffsetX = 0;
+			temp.leading = 0;
+			temp.letterSpacing = -1;
+			temp.styleClass = org.mokylin.skin.app.banghui.check.CheckBoxSkin_2;
+			temp.textAlign = "center";
+			temp.color = 0xEAEABC;
+			temp.width = 72;
+			temp.x = 163;
+			temp.y = 199;
+			return temp;
+		}
+
 		private function lbInfo_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -208,7 +229,6 @@ package org.mokylin.skin.mainui.renwu
 			temp.text = "本任务需要60级开启";
 			temp.color = 0xFF0D0D;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.visible = false;
 			temp.width = 206;
 			temp.x = 12;
 			temp.y = 24;
@@ -388,7 +408,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.width = 243;
 			temp.x = 10;
 			temp.y = 39;
-			temp.elementsContent = [sec_txt_i(),sec_tuijian_i(),sec_killbut1_1_i(),sec_killbut1_2_i(),sec_killbut1_3_i(),sec_killbut2_1_i(),sec_killbut2_2_i(),sec_killbut2_3_i(),sec_ico1_0_i(),sec_info_i(),sec_killbut3_1_i(),sec_killbut3_2_i(),sec_killbut3_3_i(),sec_ico2_0_i(),sec_subbut1_i(),sec_navi1_i(),sec_navi2_i(),sec_navi3_i(),sec_navi0_i(),lbInfo_i()];
+			temp.elementsContent = [sec_killbut1_1_i(),sec_killbut1_2_i(),sec_killbut1_3_i(),sec_killbut2_1_i(),sec_killbut2_2_i(),sec_killbut2_3_i(),sec_ico1_0_i(),sec_info_i(),sec_killbut3_1_i(),sec_killbut3_2_i(),sec_killbut3_3_i(),chkAuto_i(),sec_ico2_0_i(),sec_subbut1_i(),sec_navi1_i(),sec_navi2_i(),sec_navi3_i(),sec_txt_i(),sec_tuijian_i(),lbInfo_i()];
 			return temp;
 		}
 
@@ -556,19 +576,6 @@ package org.mokylin.skin.mainui.renwu
 			return temp;
 		}
 
-		private function sec_navi0_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			sec_navi0 = temp;
-			temp.name = "sec_navi0";
-			temp.text = "【经验】通关经验副本(0/10)";
-			temp.color = 0xFFEA00;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = -4;
-			temp.y = 321;
-			return temp;
-		}
-
 		private function sec_navi1_i():feathers.controls.SkinnableContainer
 		{
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
@@ -637,10 +644,9 @@ package org.mokylin.skin.mainui.renwu
 			temp.text = "推荐：";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.visible = false;
 			temp.width = 53;
 			temp.x = 12;
-			temp.y = 23;
+			temp.y = 39;
 			return temp;
 		}
 
@@ -654,6 +660,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.text = "描述任务描述任务描述任务描述任务描述任务描述任务";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.visible = false;
 			temp.width = 199;
 			temp.x = 12;
 			temp.y = 23;
