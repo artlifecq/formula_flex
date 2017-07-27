@@ -1,10 +1,7 @@
 package com.rpgGame.app.ui.main.head
 {
-	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.sender.LookSender;
-	import com.rpgGame.app.utils.MenuUtil;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.PetEvent;
@@ -42,15 +39,22 @@ package com.rpgGame.app.ui.main.head
 		
 		override protected function onShow():void
 		{
+			//			EventManager.addEvent(PetEvent.PET_CHANGE,updatePetChange);
+			//			super.onShow();
+			//			toTweenMax();
+			//			updateShow();
+		}
+		
+		public function show():void
+		{
+			_skin.bg.styleName = "ui/app/meiren/kuang.png";
 			EventManager.addEvent(PetEvent.PET_CHANGE,updatePetChange);
-			super.onShow();
 			toTweenMax();
 			updateShow();
 		}
 		
-		override protected function onHide():void
+		public function hide():void
 		{		
-			super.onHide();
 			EventManager.removeEvent(PetEvent.PET_CHANGE,updatePetChange);
 		}
 		
@@ -60,35 +64,38 @@ package com.rpgGame.app.ui.main.head
 			switch(target)
 			{
 				case _skin.icon:
-					AppManager.showAppNoHide(AppConstant.PET_TIAOZHAN_PANLE);
+					AppManager.showAppNoHide(AppConstant.PET_PANLE);
 					break;
 				case _skin.btnSelect:
 					if(!_petHeadPanel.visible)
 					{
-						getPetListAndShow();
+						if(getPetListAndShow())
+							_petHeadPanel.visible=true;
 					}
-					_petHeadPanel.visible=!_petHeadPanel.visible;
+					else						
+						_petHeadPanel.visible=false;
 					break;
 			}
 		}
 		
-		private function getPetListAndShow():void
+		private function getPetListAndShow():Boolean
 		{
 			var list:Vector.<PetInfo>=Mgr.petMgr.petListByJiHuo;
 			if(list.length==0)
 			{
 				NoticeManager.showNotifyById(1);
-				return;
+				return false;
 			}			
 			_petHeadPanel.SetData(list);
+			return true;
 		}
 		
 		public function resize(w : int, h : int) : void {
 			this.x = 0;
-			this.y = 384;
+			this.y = 148;
 		}
 		
-		private function toTweenMax():void
+		public function toTweenMax():void
 		{
 			if(tween)
 			{
