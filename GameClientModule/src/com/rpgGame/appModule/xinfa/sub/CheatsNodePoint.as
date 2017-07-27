@@ -2,8 +2,10 @@ package  com.rpgGame.appModule.xinfa.sub
 {
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.scene.render.RenderUnit3D;
+	import com.rpgGame.app.manager.MeridianMgr;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.hint.FloatingText;
 	import com.rpgGame.app.sender.CheatsSender;
 	import com.rpgGame.appModule.jingmai.MeridianStoneSelectPanelExt;
 	import com.rpgGame.appModule.jingmai.sub.IStoneSelector;
@@ -19,8 +21,10 @@ package  com.rpgGame.appModule.xinfa.sub
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.cheats.CheatsCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
+	import com.rpgGame.coreData.clientConfig.Q_cheats;
 	import com.rpgGame.coreData.clientConfig.Q_cheats_node;
 	import com.rpgGame.coreData.clientConfig.Q_global;
+	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.info.cheats.CheatsNodeVo;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.type.EffectUrl;
@@ -32,6 +36,7 @@ package  com.rpgGame.appModule.xinfa.sub
 	import feathers.controls.UIMovieClip;
 	
 	import org.game.netCore.data.long;
+	import org.mokylin.skin.app.beibao.Xinfa.XinfaIconSkin;
 	import org.mokylin.skin.app.beibao.mc.UIMovieClipBianshi_guang;
 	
 	import starling.display.DisplayObject;
@@ -39,6 +44,8 @@ package  com.rpgGame.appModule.xinfa.sub
 
 	public class CheatsNodePoint implements IStoneSelector
 	{
+		public static const W:int=48;
+		public static const H:int=48;
 		private var _GRAY_FILTER:FragmentFilter;
 		public var imgPoint:UIAsset;
 		//有可能是空，没得下一个点的链接了
@@ -54,16 +61,18 @@ package  com.rpgGame.appModule.xinfa.sub
 		private var _drawLine:Array;
 		private var _tipsInfo:BaseTipsInfo;
 		private var _hasReward:Boolean;
-		public function CheatsNodePoint(point:UIAsset,lab:Label)
+		private var _skin:XinfaIconSkin;
+		public function CheatsNodePoint(s:XinfaIconSkin)
 		{
-			this.imgPoint=point;
+			this._skin=s;
+			this.imgPoint=_skin.icok;
 			this.imgPoint.touchGroup=true;
 			
 			//this.linkLine.visible=false;
 			//
-			this.labAtt=lab;
+			this.labAtt=_skin.lab;
 			this.labAtt.bold=true;
-			
+			this._imgIcon=_skin.ico;
 			_tipsInfo=TargetTipsMaker.makeTips( TipType.CHEATS_NODE_TIP, this );
 			TipTargetManager.show( imgPoint, _tipsInfo);
 			
@@ -93,31 +102,36 @@ package  com.rpgGame.appModule.xinfa.sub
 				}
 			}
 		}
-		private var imgQuan:UIAsset;
+		
+		//设置节点底框
 		private function setIcoBg(isUnLock:Boolean):void
 		{
-			if (0==_data.getNodeType()) 
+			var config:Q_cheats_node=_data.getConfig();
+			var qCheat:Q_cheats=CheatsCfg.getCheats(_data.cheatsId);
+			if (isUnLock) 
 			{
-				if (!isUnLock||imgQuan!=null) 
-				{
-					return;
-				}
-				imgQuan=new UIAsset();
-				imgQuan.styleName="ui/app/beibao/tu/quan/"+CheatsCfg.getCheats(_data.cheatsId).q_default+".png";
-				MCUtil.addBefore(imgPoint,imgQuan,_imgIcon);
+				this._skin.icod.styleName="ui/app/beibao/icons/bianxian/"+qCheat.q_default+"/liang/"+config.q_stone_type+".png";
+			}
+			else
+			{
+				this._skin.icod.styleName="ui/app/beibao/icons/bianxian/"+qCheat.q_default+"/an/"+config.q_stone_type+".png";
 			}
 			
 		}
-		private function setStoneBg():void
+		//设置节点外框,主要是砭石
+		private function setStoneBg(isUnLock:Boolean):void
 		{
 			if (1==_data.getNodeType()) 
 			{
-				var url:String="ui/app/beibao/icons/icon_bg/"+_data.getConfig().q_stone_type+".png";
+				var config:Q_cheats_node=_data.getConfig();
+				var url:String="ui/app/beibao/icons/kuang/putong/"+config.q_stone_type+".png";
+				if (isUnLock) 
+				{
+					url="ui/app/beibao/icons/kuang/tuijian/"+config.q_stone_type+".png";
+				}
 				if (imgPoint.styleName!=url) 
 				{
 					imgPoint.styleName=url;
-					imgPoint.width=29;
-					imgPoint.height=29;
 				}
 			}
 		}
@@ -151,7 +165,8 @@ package  com.rpgGame.appModule.xinfa.sub
 				else 
 				{
 					var stoneLv:int=ItemConfig.getItemLevelNum(_data.getStone().itemModelId);
-					setIcoUrl("ui/app/beibao/icons/icon/bianshi/"+config.q_stone_type+"_"+stoneLv+".png",30,32);
+					var qitem:Q_item=ItemConfig.getQItemByID(_data.getStone.itemModelId);
+					setIcoUrl("ui/app/beibao/icons/icon/bianshi/"+qitem.q_default+"_"+stoneLv+".png",27,27);
 					labAtt.text=stoneLv+"";
 					if (hasBetter) 
 					{
@@ -181,10 +196,11 @@ package  com.rpgGame.appModule.xinfa.sub
 			else
 			{
 				this.labAtt.visible=false;
-				setIcoUrl("ui/app/beibao/icons/suo.png",19,26);
+				setIcoUrl("ui/app/beibao/icons/suo.png",27,19);
 			}
 			showLoopEffect(hasBetter);
 			setIcoBg(hasUnlock);
+			setStoneBg(hasUnlock);
 			//setIconFilter(needFilter);
 		}
 		private function showSubCX(config:Q_cheats_node,useTween:Boolean):void
@@ -198,7 +214,15 @@ package  com.rpgGame.appModule.xinfa.sub
 			var hasUnlock:Boolean=Mgr.cheatsMgr.getNodeIsUnlock(_data);
 			if (hasUnlock) 
 			{
-				setIcoUrl("ui/app/beibao/icons/icon/bianshi/"+config.q_huponameurl+".png",28,28);
+				if (_data.curLevel==0) 
+				{
+					setIcoUrl("ui/app/beibao/icons/jingmai/weijihuo/"+config.q_huponameurl+".png",23,23);
+				}
+				else
+				{
+					setIcoUrl("ui/app/beibao/icons/jingmai/jihuo/"+config.q_huponameurl+".png",23,23);
+				}
+				
 				//setIconFilter(true);
 				//判断能否升级
 				labAtt.text=data.curLevel.toString();
@@ -217,7 +241,7 @@ package  com.rpgGame.appModule.xinfa.sub
 			else
 			{
 				labAtt.visible=false;
-				setIcoUrl("ui/app/beibao/icons/suo.png",19,26);
+				setIcoUrl("ui/app/beibao/icons/suo.png",27,19);
 			}
 			showLoopEffect(needEff);
 			setIcoBg(hasUnlock);
@@ -229,7 +253,7 @@ package  com.rpgGame.appModule.xinfa.sub
 			{
 				return;
 			}
-			setStoneBg();
+			
 			var config:Q_cheats_node=_data.getConfig();
 			this._careAcuId=config.q_need_node_id;
 			if (config.q_type==0) 
@@ -241,27 +265,6 @@ package  com.rpgGame.appModule.xinfa.sub
 				showSubJX(config,useTween);
 			}
 			
-		}
-		private function setIconFilter(bool:Boolean):void
-		{
-			if (_imgIcon) 
-			{
-				if (bool) 
-				{
-					if (_imgIcon.filter==null) 
-					{
-						_imgIcon.filter=GRAY_FILTER;
-					}
-				}
-				else
-				{
-					if (_imgIcon.filter!=null) 
-					{
-						_imgIcon.filter=null;
-					}
-					
-				}
-			}
 		}
 		public  function showLoopEffect(bool:Boolean):void
 		{
@@ -337,15 +340,9 @@ package  com.rpgGame.appModule.xinfa.sub
 			}
 			else
 			{
-				if (!_imgIcon) 
-				{
-					_imgIcon=new UIAsset();
-					_imgIcon.name="_imgIcon";
-					
-					this.imgPoint.addChild(_imgIcon);
-				}
-				_imgIcon.x=(imgPoint.width-w)/2;
-				_imgIcon.y=(imgPoint.height-h)/2;
+			
+				_imgIcon.x=(W-w)/2;
+				_imgIcon.y=(H-h)/2;
 				_imgIcon.styleName=url;
 				_imgIcon.width=w;
 				_imgIcon.height=h;
@@ -397,6 +394,15 @@ package  com.rpgGame.appModule.xinfa.sub
 							}
 							else
 							{
+								if (data.getStone()!=null) 
+								{
+									var isMaxStone:Boolean=ItemConfig.getQItemByID(_data.getStone().itemModelId).q_levelnum>=MeridianMgr.MAX_STONE_LV;
+									if (isMaxStone) 
+									{
+										FloatingText.showUp("已镶嵌最高等级砭石");
+										return;
+									}
+								}
 								AppManager.showApp(AppConstant.JINGMAI_STONE);
 								//NoticeManager.mouseFollowNotify(NotifyCfgData.getNotifyTextByID(7017));
 							}

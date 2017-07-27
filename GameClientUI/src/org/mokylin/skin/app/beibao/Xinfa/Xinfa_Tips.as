@@ -185,7 +185,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiName2 = temp;
 			temp.name = "uiName2";
-			temp.styleName = "ui/common/tips/tipswenzi/jineng/chongxueshuxing.png";
+			temp.styleName = "ui/common/tips/tipswenzi/jineng/jihuoshuxing.png";
 			temp.x = 13;
 			temp.y = 109;
 			return temp;
