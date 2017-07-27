@@ -23,5 +23,8 @@ package com.rpgGame.core.events
 		
 		/**美人状态改变（切换，出战，休战）*/
 		public static const PET_CHANGE:int = UNIQUEID.NEXT;
+		
+		/**美人面板显示还是隐藏(带参数)*/
+		public static const PET_PANELSHOWORHIDE:int =  UNIQUEID.NEXT;
 	}
 }

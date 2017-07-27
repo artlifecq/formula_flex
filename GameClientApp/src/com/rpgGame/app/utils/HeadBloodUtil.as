@@ -138,6 +138,8 @@ package com.rpgGame.app.utils
 
 			if (_role.type == SceneCharType.NPC)
 				return StaticValue.COLOR_CODE_4;
+			if (_role.type == SceneCharType.GIRL_PET)
+				return StaticValue.A_UI_BLUE_TEXT;
 			if (_role.type == SceneCharType.PROTECT_NPC)
 				return StaticValue.COLOR_CODE_4;
 

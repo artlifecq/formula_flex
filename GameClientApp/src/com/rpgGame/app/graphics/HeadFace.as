@@ -29,6 +29,7 @@ package com.rpgGame.app.graphics
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.map.EnumMapType;
 	import com.rpgGame.coreData.info.map.SceneData;
+	import com.rpgGame.coreData.role.GirlPetData;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.AttachDisplayType;
@@ -139,6 +140,8 @@ package com.rpgGame.app.graphics
 		private var _teamCaptainFlag:UIAsset;
 		private var _towerFlag:UIAsset;
 		private var _vipFlag:UIAsset;
+		
+		private var _meirenTitle:HeadNameBar;
 		public function HeadFace(role : SceneRole)
 		{
 			super();
@@ -200,7 +203,7 @@ package com.rpgGame.app.graphics
 					break;
 				case SceneCharType.SCULPTURE:
 					addAndUpdateName();
-
+					
 					break;
 				//				case SceneCharType.RACING_HERO:
 				//				case SceneCharType.ROBOT:
@@ -245,6 +248,7 @@ package com.rpgGame.app.graphics
 			addElement(_moodMC);
 			addElement(_rankTitle1);
 			addElement(_rankTitle2);
+			addElement(_meirenTitle);
 		}
 		
 		//---------------------------------------------
@@ -297,6 +301,10 @@ package com.rpgGame.app.graphics
 				}*/
 				
 				showAndHideElement(_nameBar, _isSelected && nameVisible,DecorCtrl.TOP_NAME);
+			}
+			else if (_role.type == SceneCharType.GIRL_PET) //美人
+			{
+				showAndHideElement(_meirenTitle, true,DecorCtrl.TOP_MEIREN_GUISHU);
 			}
 				//			else if (_role.type == SceneCharType.SUMMON_MONSTER) //召唤怪物，全显示或者全隐藏
 				//			{
@@ -750,6 +758,33 @@ package com.rpgGame.app.graphics
 			//更新一下数据
 			_guildNameBar.setName(guildName);
 			updateAllBarPosition();
+		}
+		
+		/**美人归属*/
+		public function addAndUpdateGuiShu():void
+		{
+			if(_role.type==SceneCharType.GIRL_PET)
+			{
+				var guishu:String=(_role.data as GirlPetData).ownerName+"的美人";
+				if(_meirenTitle==null)
+				{
+					_meirenTitle = HeadNameBar.create();
+				}
+				_meirenTitle.setName(guishu);
+				_meirenTitle.setColor(StaticValue.A_UI_GREEN_TEXT);
+				updateAllBarPosition();
+			}
+				
+			else
+			{
+				if(_meirenTitle!=null)
+				{
+					deCtrl.removeTop(_meirenTitle);
+					HeadNameBar.recycle(_meirenTitle);
+					_meirenTitle = null;
+					updateAllBarPosition();
+				}
+			}
 		}
 		
 		//---------------------------------------------家族
@@ -1416,7 +1451,7 @@ package com.rpgGame.app.graphics
 					break;
 				}
 			}
-//			type = 3;
+			//			type = 3;
 			var q_info:Q_rank_designation;
 			var rud:RenderParamData3D;
 			var scale:int;
@@ -1457,7 +1492,7 @@ package com.rpgGame.app.graphics
 			{
 				type = 0;
 			}
-//			type = 8;
+			//			type = 8;
 			if (type > 0)
 			{
 				if (_rankTitle2 == null)
