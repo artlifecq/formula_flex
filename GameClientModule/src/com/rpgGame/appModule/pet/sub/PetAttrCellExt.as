@@ -32,7 +32,7 @@ package com.rpgGame.appModule.pet.sub
 				_skin.lbAdd.color=GameColorUtil.COLOR_RED;
 				_skin.lbAdd.text=""+_diff;
 			}
-			_skin.uiName.styleName="ui/common/shuxing/"+CharAttributeType.getAttrNameUrl(attrType)+".png";
+			_skin.uiName.styleName=CharAttributeType.getAttrNameUrl(attrType);
 			_skin.uiUp.visible=false;
 			_skin.lbAdd.visible=false;
 		}
