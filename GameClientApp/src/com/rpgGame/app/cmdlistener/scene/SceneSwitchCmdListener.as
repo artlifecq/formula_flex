@@ -2,7 +2,10 @@ package com.rpgGame.app.cmdlistener.scene
 {
 	import com.game.engine3D.events.MapLoadEvent;
 	import com.gameClient.log.GameLog;
+	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.ui.ResLoadingView;
 	import com.rpgGame.app.ui.alert.GameAlert;
@@ -11,6 +14,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.core.app.AppLoadManager;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
 	import com.rpgGame.coreData.info.map.SceneData;
@@ -181,6 +185,19 @@ package com.rpgGame.app.cmdlistener.scene
 		private static function onShowScene() : void
 		{
 			ResLoadingView.instance.hide();
+			var mapID : int = SceneSwitchManager.currentMapId;
+			var cfg : SceneData = MapDataManager.getMapInfo(mapID);
+			var qmap:Q_map=cfg.getData();
+			if(qmap.q_enter_autofight==1&&cfg.getData().q_autofight_seat){//进入后自动战斗
+				var p:Array=JSONUtil.decode(cfg.getData().q_autofight_seat);
+				MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, p[0], p[1],finishWalk, 100);
+			}
+		}
+		
+		private static function finishWalk(data:Object):void
+		{
+			TrusteeshipManager.getInstance().findDist=1000;
+			TrusteeshipManager.getInstance().startAutoFight();
 		}
 	}
 }

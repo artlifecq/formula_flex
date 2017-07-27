@@ -32,9 +32,9 @@ package com.rpgGame.appModule.mail
 			{
 				var ico:IconCDFace=IconCDFace.create(IcoSizeEnum.ICON_48);		
 				ico.selectImgVisible=false;
-				ico.x=(int(i/6))*(ico.width+4);
-				ico.y=(int(i/6))*(ico.height+4);
-				_skin.fujianList.addChild(ico);
+				ico.x=(i%6)*58;
+				ico.y=Math.floor(i/6)*58-4;
+//				_skin.fujianList.addChild(ico);
 				_fujianList.push(ico);
 			}
 		}	
@@ -117,6 +117,7 @@ package com.rpgGame.appModule.mail
 						var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(_info.attachments[i].tempItemInfo.mod,_info.attachments[i].tempItemInfo.num);
 						FaceUtil.SetItemGrid(_fujianList[i],itemInfo);
 						_fujianList[i].selectImgVisible=false;
+						_skin.fujianList.addChild(_fujianList[i]);
 					}
 				}
 				_skin.btnTiqu.visible=true;
@@ -135,6 +136,7 @@ package com.rpgGame.appModule.mail
 		
 		private function clearIcoList():void
 		{
+			_skin.fujianList.removeChildren();
 			for(var i:int=0;i<_fujianList.length;i++)
 			{
 				_fujianList[i].clear();				

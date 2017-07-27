@@ -113,48 +113,6 @@ package com.rpgGame.app.manager
 			if(updataBuff)
 				role.buffSet.updateBuffEffects();
 			RoleStateUtil.updateRoleBaseWalkActionSpeed(role);
-			
-			if (avatarInfo.rpd_body)
-			{
-				var data : RoleData = RoleData(role.data);
-				var avatarResConfig : AvatarResConfig;
-				var bodyRu : RenderUnit3D = role.avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY);
-				var mountRu : RenderUnit3D = role.avatar.getRenderUnitByID(RenderUnitType.MOUNT, RenderUnitID.MOUNT);
-				if (mountRu)
-				{
-					if (role.headFace)
-					{
-						if (!mountRu.resReady)
-							role.headFace.setBodyRender(null); //无模型时添加血条
-						else
-							role.headFace.setBodyRender(mountRu);
-					}
-				}
-				else if (bodyRu)
-				{
-					if (role.headFace)
-					{
-						if (!bodyRu.resReady)
-							role.headFace.setBodyRender(null); //无模型时添加血条
-						else
-							role.headFace.setBodyRender(bodyRu);
-					}
-				}
-			}
-			else if (avatarInfo.rpd_effect)
-			{
-				var effectRu : RenderUnit3D = role.avatar.getRenderUnitByID(RenderUnitType.EFFECT, RenderUnitID.EFFECT);
-				if (effectRu)
-				{
-					if (role.headFace)
-					{
-						if (!effectRu.resReady)
-							role.headFace.setBodyRender(null); //无模型时添加血条
-						else
-							role.headFace.setBodyRender(effectRu);
-					}
-				}
-			}
 		}
 		
 		public static function updateSimpleShadow() : void
@@ -323,16 +281,44 @@ package com.rpgGame.app.manager
 			{
 				role.avatar.buildSyncInfo(RenderUnitType.BODY, RenderUnitID.BODY);
 				var ru : RenderUnit3D;
+				var objChild : BaseObjChild;
+				var objChildDatas : Vector.<BaseObjChild>;
+				var unitChild : RenderUnitChild;
+				var unitChildDatas : Vector.<RenderUnitChild>;
 				if (rpd_mount) //坐骑作为换装主体
 				{
+					//将body头顶的绑点子部件转到坐骑上
+					objChildDatas = role.getChildDatasByName(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_name_01);
+					for each (objChild in objChildDatas)
+					{
+						role.addObjChildDataToUnitChild(RenderUnitType.MOUNT, RenderUnitID.MOUNT, BoneNameEnum.c_0_name_01, objChild);
+					}
+					unitChildDatas = role.avatar.getUnitChildDatasByName(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_name_01);
+					for each (unitChild in unitChildDatas)
+					{
+						role.avatar.addUnitChildData(RenderUnitType.MOUNT, RenderUnitID.MOUNT, unitChild);
+					}
 					if (rpd_mount.animatorSourchPath)
+					{
 						ru = role.avatar.addRenderUnitToChild(RenderUnitType.MOUNT, RenderUnitID.MOUNT, BoneNameEnum.c_0_body_02, rpd_body);
-					else
+					}else{
 						ru = role.avatar.addRenderUnitToBone(RenderUnitType.MOUNT, RenderUnitID.MOUNT, BoneNameEnum.b_0_saddle_01, rpd_body);
+					}
 				}
 				else
 				{
+					//将坐骑头顶的绑点子部件转到body上
 					ru = role.avatar.addRenderUnit(rpd_body);
+					objChildDatas = role.getChildDatasByName(RenderUnitType.MOUNT, RenderUnitID.MOUNT, BoneNameEnum.c_0_name_01);
+					for each (objChild in objChildDatas)
+					{
+						role.addObjChildDataToUnitChild(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_name_01, objChild);
+					}
+					unitChildDatas = role.avatar.getUnitChildDatasByName(RenderUnitType.MOUNT, RenderUnitID.MOUNT, BoneNameEnum.c_0_name_01);
+					for each (unitChild in unitChildDatas)
+					{
+						role.avatar.addUnitChildData(RenderUnitType.BODY, RenderUnitID.BODY, unitChild);
+					}
 				}
 				if (ru)
 				{
@@ -376,6 +362,50 @@ package com.rpgGame.app.manager
 			{
 				role.avatar.removeRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY);
 			}
+			
+			if (avatarInfo.rpd_body)
+			{
+				var data : RoleData = RoleData(role.data);
+				var avatarResConfig : AvatarResConfig;
+				var bodyRu : RenderUnit3D = role.avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY);
+				var mountRu : RenderUnit3D = role.avatar.getRenderUnitByID(RenderUnitType.MOUNT, RenderUnitID.MOUNT);
+				if (mountRu)
+				{
+					if (role.headFace)
+					{
+						if (!mountRu.resReady)
+							role.headFace.setBodyRender(null); //无模型时添加血条
+						else
+							role.headFace.setBodyRender(mountRu);
+					}
+				}
+				else if (bodyRu)
+				{
+					if (role.headFace)
+					{
+						if (!bodyRu.resReady)
+							role.headFace.setBodyRender(null); //无模型时添加血条
+						else
+							role.headFace.setBodyRender(bodyRu);
+					}
+				}
+			}
+			else if (avatarInfo.rpd_effect)
+			{
+				var effectRu : RenderUnit3D = role.avatar.getRenderUnitByID(RenderUnitType.EFFECT, RenderUnitID.EFFECT);
+				if (effectRu)
+				{
+					if (role.headFace)
+					{
+						if (!effectRu.resReady)
+							role.headFace.setBodyRender(null); //无模型时添加血条
+						else
+							role.headFace.setBodyRender(effectRu);
+					}
+				}
+			}
+			
+			
 			role.stateMachine.transition(RoleStateType.CONTROL_AVATAR);
 			EventManager.dispatchEvent(AvatarEvent.AVATAR_CHANGE, role,RenderUnitID.BODY);
 		}
@@ -751,26 +781,6 @@ package com.rpgGame.app.manager
 			if (rpd_mount != null)
 			{
 				role.avatar.buildSyncInfo(RenderUnitType.MOUNT, RenderUnitID.MOUNT);
-				
-				var objChild : BaseObjChild;
-				var objChildDatas : Vector.<BaseObjChild>;
-				var unitChild : RenderUnitChild;
-				var unitChildDatas : Vector.<RenderUnitChild>;
-				if (avatarInfo.rpd_body)
-				{
-					//将坐骑头顶的绑点子部件转到body上
-					objChildDatas = role.getChildDatasByName(RenderUnitType.MOUNT, RenderUnitID.MOUNT, BoneNameEnum.c_0_name_01);
-					for each (objChild in objChildDatas)
-					{
-						role.addObjChildDataToUnitChild(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_name_01, objChild);
-					}
-					unitChildDatas = role.avatar.getUnitChildDatasByName(RenderUnitType.MOUNT, RenderUnitID.MOUNT, BoneNameEnum.c_0_name_01);
-					for each (unitChild in unitChildDatas)
-					{
-						role.avatar.addUnitChildData(RenderUnitType.BODY, RenderUnitID.BODY, unitChild);
-					}
-				}
-				
 				var ru : RenderUnit3D = role.avatar.addRenderUnit(rpd_mount);
 				if (rpd_mount.animatorSourchPath)
 				{
@@ -806,21 +816,6 @@ package com.rpgGame.app.manager
 				var ref : RidingStateReference = role.stateMachine.getReference(RidingStateReference) as RidingStateReference;
 				ref.setParams(avatarInfo.mountResID, avatarInfo.mountAnimatResID);
 				role.stateMachine.transition(RoleStateType.CONTROL_RIDING, ref);
-				
-				if (role.avatar.hasIDRenderUnit(RenderUnitType.MOUNT, RenderUnitID.MOUNT))
-				{
-					//将body头顶的绑点子部件转到坐骑上
-					objChildDatas = role.getChildDatasByName(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_name_01);
-					for each (objChild in objChildDatas)
-					{
-						role.addObjChildDataToUnitChild(RenderUnitType.MOUNT, RenderUnitID.MOUNT, BoneNameEnum.c_0_name_01, objChild);
-					}
-					unitChildDatas = role.avatar.getUnitChildDatasByName(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_name_01);
-					for each (unitChild in unitChildDatas)
-					{
-						role.avatar.addUnitChildData(RenderUnitType.MOUNT, RenderUnitID.MOUNT, unitChild);
-					}
-				}
 			}
 			else
 			{			

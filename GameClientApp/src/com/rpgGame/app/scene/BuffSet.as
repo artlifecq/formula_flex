@@ -4,8 +4,6 @@ package com.rpgGame.app.scene
 	import com.game.engine3D.core.poolObject.InstancePool;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
-	import com.rpgGame.app.manager.DodgeManager;
-	import com.rpgGame.app.manager.SkillCDManager;
 	import com.rpgGame.app.state.role.control.BingDongStateReference;
 	import com.rpgGame.app.state.role.control.BuffStateReference;
 	import com.rpgGame.app.state.role.control.FlyUpStateReference;
@@ -16,7 +14,6 @@ package com.rpgGame.app.scene
 	import com.rpgGame.app.state.role.control.NineTowerFightFlagStateReference;
 	import com.rpgGame.app.state.role.control.ShapeshiftingStateReference;
 	import com.rpgGame.app.state.role.control.ShortcutGridStateReference;
-	import com.rpgGame.app.state.role.control.SkillCDReduceState;
 	import com.rpgGame.app.state.role.control.SpriteUpBuffStateReference;
 	import com.rpgGame.app.state.role.control.StiffStateReference;
 	import com.rpgGame.app.state.role.control.StunStateReference;

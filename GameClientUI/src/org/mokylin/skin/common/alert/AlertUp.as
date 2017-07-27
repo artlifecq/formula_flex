@@ -61,7 +61,7 @@ package org.mokylin.skin.common.alert
 		private function __AlertUp_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/background/erji_bg.png";
+			temp.styleName = "ui/big_bg/erji_bg.png";
 			temp.x = 12;
 			temp.y = 39;
 			return temp;

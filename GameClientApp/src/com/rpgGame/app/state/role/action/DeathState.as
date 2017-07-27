@@ -8,11 +8,15 @@ package com.rpgGame.app.state.role.action
 	import com.game.engine3D.vo.BaseRole;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.role.SceneRoleManager;
+	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.core.state.role.action.ActionState;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.country.CountryWarCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_map;
+	import com.rpgGame.coreData.info.MapDataManager;
+	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
@@ -53,6 +57,14 @@ package com.rpgGame.app.state.role.action
 			{
 				super.execute();
 				var role : SceneRole = _machine.owner as SceneRole;
+				var mapID : int = SceneSwitchManager.currentMapId;
+				var cfg : SceneData = MapDataManager.getMapInfo(mapID);
+				var qmap:Q_map=cfg.getData();
+				if(qmap.q_select_corpse==1){
+					role.mouseEnable=true;
+				}else{
+					role.mouseEnable=false;
+				}
 				transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
 				if (_corrodeTween)
 				{
@@ -209,11 +221,6 @@ package com.rpgGame.app.state.role.action
 				case RenderUnitType.DEPUTY_WEAPON:
 					render.repeat = 1;
 					render.setStatus(statusType, _useCrossfadeTransition ? 0.2 : null, time);
-				/*	if (role.type == SceneCharType.MONSTER)
-					{
-						var monsterData : MonsterData = role.data as MonsterData;
-						trace("死亡了开始播放:"+getTimer()+",id:"+monsterData.id);
-					}*/
 					if (isFreeze)
 						render.stop(time);
 					render.visible = true;
@@ -320,6 +327,7 @@ package com.rpgGame.app.state.role.action
 			{
 				stopCorrode();
 				var role : SceneRole = _machine.owner as SceneRole;
+				role.mouseEnable=true;
 				if (role.type != SceneCharType.PLAYER)
 				{
 					roleDied();

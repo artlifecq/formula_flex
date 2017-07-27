@@ -3,6 +3,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.vo.BaseObj3D;
 	import com.gameClient.log.GameLog;
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.manager.AvatarManager;
@@ -20,6 +21,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.manager.role.DropGoodsManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.role.SceneDropGoodsManager;
 	import com.rpgGame.app.manager.role.SceneRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
@@ -47,10 +49,13 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.Attach_effect;
 	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
+	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
+	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.map.EnumMapUnitType;
+	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.info.move.RoleMoveInfo;
 	import com.rpgGame.coreData.info.task.target.TaskFollowEscortInfo;
 	import com.rpgGame.coreData.lang.LangQ_NoticeInfo;
@@ -880,7 +885,6 @@ package com.rpgGame.app.cmdlistener.scene
 			}
 			else//走怪物创建流程
 			{
-				
 				data = new MonsterData(RoleType.TYPE_MONSTER);
 				data.serverID = info.monsterId;
 				data.id = info.monsterId.ToGID();
@@ -1146,12 +1150,25 @@ package com.rpgGame.app.cmdlistener.scene
                 ReliveManager.autoHideRelive();
 				EventManager.dispatchEvent(MainPlayerEvent.SELFHP_CHANGE);
 				EventManager.dispatchEvent(MainPlayerEvent.REVIVE_SUCCESS);
+				var mapID : int = SceneSwitchManager.currentMapId;
+				var cfg : SceneData = MapDataManager.getMapInfo(mapID);
+				var qmap:Q_map=cfg.getData();
+				if(qmap.q_rebirth_autofight==1&&cfg.getData().q_autofight_seat){//进入后自动战斗
+					var p:Array=JSONUtil.decode(cfg.getData().q_autofight_seat);
+					MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, p[0], p[1],finishWalk, 100);
+				}
 			}
 			else
 			{
 				role.mouseEnable = true;
 			}
 			TaskAutoManager.getInstance().stopAll();//死亡复活终止挂机
+		}
+		
+		private static function finishWalk(data:Object):void
+		{
+			TrusteeshipManager.getInstance().findDist=1000;
+			TrusteeshipManager.getInstance().startAutoFight();
 		}
 		
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -56,6 +56,7 @@ package com.rpgGame.appModule.role
 	
 	import away3d.events.Event;
 	
+	import feathers.controls.ScrollBar;
 	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.controls.Scroller;
 	import feathers.data.ListCollection;
@@ -530,7 +531,7 @@ package com.rpgGame.appModule.role
 			
 			currentListData.removeAll();
 			currentListData.addAll(BackPackManager.instance.gridInfoDatas);
-			
+			var oldV:Number=(_skin.lst_pack.getVerticalScrollBar() as ScrollBar).value;
 			if(_skin.tab_pack.selectedIndex == 0)
 			{
 				BackPackManager.instance.setCheckType(null);
@@ -543,7 +544,9 @@ package com.rpgGame.appModule.role
 				BackPackManager.instance.setUnusableGrid(false);
 				goodsContainer.refleshGrids();
 			}			
-			_skin.lst_pack.scrollToDisplayIndex(getScrollIndex(info));
+			
+			_skin.lst_pack.scrollToPosition(0,oldV,0);
+//			_skin.lst_pack.scrollToDisplayIndex(getScrollIndex(info));//滚动到最新操作物品处
 			//切换页
 			if (!info&&Mouse.cursor == MouseCursorEnum.SELL) 
 			{
