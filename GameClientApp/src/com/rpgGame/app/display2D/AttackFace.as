@@ -63,6 +63,11 @@ package com.rpgGame.app.display2D
 		private var _isDestroyed:Boolean;
 		private var _isDisposed:Boolean;
 		
+		
+		public function get typeRes():String
+		{
+			return _typeRes;
+		}
 		/**
 		 *  
 		 * @param $typeRes
