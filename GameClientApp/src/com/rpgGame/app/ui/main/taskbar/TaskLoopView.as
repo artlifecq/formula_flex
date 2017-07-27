@@ -252,34 +252,17 @@ package com.rpgGame.app.ui.main.taskbar
 				hideDailyTaskView();
 				hideTreasuerTaskView();
 			}
-			else if(type==1)
+			else if(type==TaskType.MAINTYPE_MAINTASK)
 			{
 				hideMainTaskView();
 			}
-			else if(type==2)
+			else if(type==TaskType.MAINTYPE_DAILYTASK)
 			{
 				hideDailyTaskView();
 			}
-			else if(type==3)
+			else if(type==TaskType.MAINTYPE_TREASUREBOX)
 			{
 				hideTreasuerTaskView();
-			}
-		}
-		
-		public function loopTaskFilish(type:int=0):void
-		{
-			if(!_skin.secondary_box.visible)return;
-			else if(type==1)
-			{
-				
-			}
-			else if(type==2)
-			{
-				//icoList1Group.tweeRewardInBag(2);
-			}
-			else if(type==3)
-			{
-				//icoList2Group.tweeRewardInBag(2);
 			}
 		}
 		
@@ -472,57 +455,38 @@ package com.rpgGame.app.ui.main.taskbar
 		{
 			navSkin.visible=true;
 			var nav:Label=RenWuTitle_Skin(navSkin.skin).sec_navi1;
-			if(type==1)
+			if(type==TaskType.MAINTYPE_MAINTASK&&describe!="")
 			{
-				nav.htmlText="<font color='#ffea00'>【主线】</font>";
-				if(describe!="")
-				{
-					_skin.sec_txt.height=300;
-					_skin.sec_txt.htmlText=describe;
-					_skin.sec_txt.height=_skin.sec_txt.textHeight;
-					_skin.sec_txt.visible=true;
-					
-				}
-				else
-				{
-					_skin.sec_txt.visible=false;
-				}
-				
+				_skin.sec_txt.height=300;
+				_skin.sec_txt.htmlText=describe;
+				_skin.sec_txt.height=_skin.sec_txt.textHeight;
+				_skin.sec_txt.visible=true;
 			}
-			else if(type==2)
+			var lead:String="";
+			var end:String="";
+			switch(type)
 			{
-				nav.htmlText="<font color='#ffea00'>【支线】</font>";
+				case TaskType.MAINTYPE_MAINTASK:
+					lead="<font color='#ffea00'>【主线】</font>";
+					end=isFinish?"<font color='#00ff0c'>(已完成)</font>":"<font color='#ff0d0d'>(未完成)</font>";
+					break;
+				case TaskType.MAINTYPE_DAILYTASK:
+					lead="<font color='#ffea00'>【支线】</font>";
+					end=isFinish?"<font color='#00ff0c'>(已完成)</font>":"<font color='#ff0d0d'>(未完成)</font>";
+					break;
+				case TaskType.MAINTYPE_TREASUREBOX:
+					lead="<font color='#ffea00'>【环式】</font>";
+					end="<font color='#eaeabc'>("+TaskMissionManager.treasuerTaskInfo.loopNumber+"/"+TaskMissionManager.getTreasuerAllNum()+")</font>";
+					break;
 			}
-			else if(type==3)
+			nav.htmlText=lead+party+name+end;
+			if(subBut!=null)
 			{
-				nav.htmlText="<font color='#ffea00'>【环式】</font>";
+				subBut.visible=isFinish;
 			}
-			nav.htmlText+=party+name;
-			if(type==3)
+			if(type==TaskType.MAINTYPE_TREASUREBOX&&isFinish)
 			{
-				nav.htmlText+="<font color='#eaeabc'>("+TaskMissionManager.treasuerTaskInfo.loopNumber+"/"+TaskMissionManager.getTreasuerAllNum()+")</font>";
-			}
-			
-			if(isFinish)
-			{
-				nav.htmlText+="<font color='#00ff0c'>(已完成)</font>";
-				if(subBut!=null)
-				{
-					subBut.visible=true;
-				}
-				if(type==3)
-				{
-					TaskControl.showLoopPanel();
-				}
-				
-			}
-			else
-			{
-				nav.htmlText+="<font color='#ff0d0d'>(未完成)</font>";
-				if(subBut!=null)
-				{
-					subBut.visible=false;
-				}
+				TaskControl.showLoopPanel();
 			}
 		}
 		
@@ -532,12 +496,6 @@ package com.rpgGame.app.ui.main.taskbar
 			var text:String="<font color='#eaeabc'>回复：</font><u>"+MonsterDataManager.getMonsterName(npcid)+"</u>";
 			TaskUtil.setGotargetLabelText(TaskType.SUB_CONVERSATION,killButList[0],text);
 			setUisite();
-		}
-		/**处理卡点*/
-		private function setKadianNavView(name:String,nav:SkinnableContainer):void
-		{
-			//nav.htmlText="[主线]"+name+"<font color='#8b8d7b'>(未完成)</font>";
-			
 		}
 		
 		/**处理卡点显示*/
