@@ -544,8 +544,8 @@ package com.rpgGame.appModule.equip
 			var job:int=MainRoleManager.actorInfo.job;
 			if(_targetEquipInfo!=null&&info!=_targetEquipInfo)
 			{
-				if((info.qItem.q_job==job||info.qItem.q_job==0)&&info.qItem.q_kind==_targetEquipInfo.qItem.q_kind&&(info.strengthLevel>_targetEquipInfo.strengthLevel||
-					info.polishLevel>_targetEquipInfo.polishLevel||info.smeltAtt1!=0||info.smeltAtt2!=0))
+				if((info.qItem.q_job==job||info.qItem.q_job==0)&&info.qItem.q_kind==_targetEquipInfo.qItem.q_kind&&((info.strengthExp!=0&&info.strengthExp<_targetEquipInfo.strengthExp)||
+					(info.polishExp!=0&&info.polishExp<_targetEquipInfo.polishExp)||info.smeltAtt1!=0||info.smeltAtt2!=0))
 				{
 					return true;
 				}

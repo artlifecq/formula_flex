@@ -505,6 +505,21 @@ package com.rpgGame.app.manager.goods
 			}
 			return -1;
 		}
+		
+		public function getEmptyGridNum():int
+		{
+			var len:int = _goodsList.length;
+			var num:int=0;
+			for(var i:int=0; i<hasOpenCount; i++)
+			{
+				if(!_goodsList[i])
+				{
+					num++;
+				}
+			}
+			return num;
+		}
+		
 		/**
 		 * 是不是还有空的格子 
 		 * @return 

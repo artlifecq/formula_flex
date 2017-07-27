@@ -34,7 +34,7 @@ package com.rpgGame.appModule.activety
 		override public function show(data : * = null, openTable : String = "", parentContiner : DisplayObjectContainer = null) : void
 		{
 			actInfo=data as ActivetyInfo;
-			_skin.icons.styleName="ui/common/icon/activity/open/"+actInfo.actCfg.q_activity_id+".png";
+			_skin.icons.styleName="icon/activity/open/"+actInfo.actCfg.q_activity_id+".png";
 			_skin.labContent.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,actInfo.actCfg.q_activity_name)+"活动已开始，是否前往？";
 			super.show(data,openTable,parentContiner);
 		}

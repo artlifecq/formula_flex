@@ -1,4 +1,4 @@
-package org.mokylin.skin.app.siwangfuhuo.button
+package org.mokylin.skin.app.beibao.Xinfa.button
 {
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
@@ -9,7 +9,7 @@ package org.mokylin.skin.app.siwangfuhuo.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class ButtonSkin_jiantou extends feathers.controls.StateSkin
+	public class ButtonDayeqian extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -22,11 +22,11 @@ package org.mokylin.skin.app.siwangfuhuo.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function ButtonSkin_jiantou()
+		public function ButtonDayeqian()
 		{
 			super();
 			
-			this.currentState = "down";
+			this.currentState = "upAndSelected";
 			this.elementsContent = [];
 			
 			states = {
@@ -47,7 +47,12 @@ package org.mokylin.skin.app.siwangfuhuo.button
 						}
 					]
 			};
-			skinNames={"down":"ui/app/siwangfuhuo/button/skin_jiantou/down.png", "hover":"ui/app/siwangfuhuo/button/skin_jiantou/over.png", "up":"ui/app/siwangfuhuo/button/skin_jiantou/up.png"};
+			skinNames={"down":"ui/app/beibao/xinfa/button/dayeqian/down.png",
+			"downAndSelected":"ui/app/beibao/xinfa/button/dayeqian/select.png",
+			"hover":"ui/app/beibao/xinfa/button/dayeqian/over.png",
+			"hoverAndSelected":"ui/app/beibao/xinfa/button/dayeqian/select.png",
+			"up":"ui/app/beibao/xinfa/button/dayeqian/up.png",
+			"upAndSelected":"ui/app/beibao/xinfa/button/dayeqian/select.png"};
 		}
 
 

@@ -48,6 +48,7 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.coreData.cfg.TransCfgData;
     import com.rpgGame.coreData.clientConfig.Q_map_transfer;
     import com.rpgGame.coreData.clientConfig.Q_skill_model;
+    import com.rpgGame.coreData.enum.BoneNameEnum;
     import com.rpgGame.coreData.enum.EnumAreaMapType;
     import com.rpgGame.coreData.enum.ShortcutsTypeEnum;
     import com.rpgGame.coreData.info.buff.BuffData;
@@ -296,8 +297,63 @@ package com.rpgGame.app.manager.shell
 				}		
 		}
 		
+		private function eachUnVisible(role : BaseRole, render : RenderUnit3D) : void
+		{
+			role.isHiding = true;
+			render.castsShadows = false;
+			switch(render.type)
+			{
+				case RenderUnitType.BODY:
+				case RenderUnitType.HAIR:
+				case RenderUnitType.WEAPON:
+				case RenderUnitType.DEPUTY_WEAPON:
+				case RenderUnitType.WEAPON_EFFECT:
+				case RenderUnitType.DEPUTY_WEAPON_EFFECT:
+				case RenderUnitType.ZHANQI:
+				case RenderUnitType.EFFECT:
+				case RenderUnitType.HURT:
+					render.isHiding = true;
+					break;
+			}
+		}
+		
+		private function eachVisible(role : BaseRole, render : RenderUnit3D) : void
+		{
+			role.isHiding = false;
+			render.castsShadows = true;
+			switch(render.type)
+			{
+				case RenderUnitType.BODY:
+				case RenderUnitType.HAIR:
+				case RenderUnitType.WEAPON:
+				case RenderUnitType.DEPUTY_WEAPON:
+				case RenderUnitType.WEAPON_EFFECT:
+				case RenderUnitType.DEPUTY_WEAPON_EFFECT:
+				case RenderUnitType.ZHANQI:
+				case RenderUnitType.EFFECT:
+				case RenderUnitType.HURT:
+					render.isHiding = false;
+					break;
+			}
+		}
+		
 		private function test(alpha:Number):void
 		{
+			if(alpha == 9)
+			{
+				MainRoleManager.actor.forEachRenderUnit(eachVisible);
+				return;
+			}
+			if(alpha == 8)
+			{
+				MainRoleManager.actor.forEachRenderUnit(eachUnVisible);
+				return;
+			}
+			if(alpha == 7)
+			{
+				SpellAnimationHelper.addTargetEffect(MainRoleManager.actor, RenderUnitID.TASKMARK, RenderUnitType.TASKMARK, EffectUrl.UI_WENHAO, BoneNameEnum.c_0_name_01, 0, null, false);
+				return;
+			}
 			if(alpha > 0)
 			{	
 				SceneManager.scene.view3d.colorFilter.adjustSaturation(-1);
@@ -343,7 +399,7 @@ package com.rpgGame.app.manager.shell
 					render.visible = true;
 					break;
 				case RenderUnitType.BODY:
-					render.compositeMesh.layerType = layerType;
+//					render.compositeMesh.layerType = layerType;
 					break;
 			}
 		}
@@ -360,8 +416,8 @@ package com.rpgGame.app.manager.shell
 					render.visible = false;
 					break;
 				case RenderUnitType.BODY:
-					layerType = render.compositeMesh.layerType;
-					render.compositeMesh.layerType = 0;
+//					layerType = render.compositeMesh.layerType;
+//					render.compositeMesh.layerType = 0;
 					break;
 			}
 		}

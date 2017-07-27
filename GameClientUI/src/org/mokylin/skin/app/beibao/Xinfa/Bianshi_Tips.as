@@ -21,7 +21,13 @@ package org.mokylin.skin.app.beibao.Xinfa
 
 		public var btnClose:feathers.controls.Button;
 
-		public var lb_hecheng:feathers.controls.Label;
+		public var lbBoss:feathers.controls.Label;
+
+		public var lbCailiao:feathers.controls.Label;
+
+		public var lbFuben:feathers.controls.Label;
+
+		public var lbJixian:feathers.controls.Label;
 
 
 		//==========================================================================
@@ -34,7 +40,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			this.currentState = "normal";
 			this.height = 217;
 			this.width = 331;
-			this.elementsContent = [bg_i(),btnClose_i(),__Bianshi_Tips_Label1_i(),lb_hecheng_i(),__Bianshi_Tips_Label3_i(),__Bianshi_Tips_Label4_i(),__Bianshi_Tips_Label5_i(),__Bianshi_Tips_Label6_i(),__Bianshi_Tips_UIAsset1_i()];
+			this.elementsContent = [bg_i(),btnClose_i(),__Bianshi_Tips_Label1_i(),lbFuben_i(),lbJixian_i(),lbBoss_i(),__Bianshi_Tips_UIAsset1_i(),__Bianshi_Tips_UIAsset2_i(),lbCailiao_i()];
 			
 			states = {
 			};
@@ -49,57 +55,10 @@ package org.mokylin.skin.app.beibao.Xinfa
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "砭石获得途径：";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 30;
-			temp.y = 60;
-			return temp;
-		}
-
-		private function __Bianshi_Tips_Label3_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "1、副本掉落";
-			temp.color = 0x5CB006;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.underline = true;
-			temp.x = 47;
-			temp.y = 84;
-			return temp;
-		}
-
-		private function __Bianshi_Tips_Label4_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "2、极限挑战";
-			temp.color = 0x5CB006;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.underline = true;
-			temp.x = 47;
-			temp.y = 109;
-			return temp;
-		}
-
-		private function __Bianshi_Tips_Label5_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "3、世界BOSS掉落";
-			temp.color = 0x5CB006;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.underline = true;
-			temp.x = 47;
-			temp.y = 134;
-			return temp;
-		}
-
-		private function __Bianshi_Tips_Label6_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "4、商城礼包";
-			temp.color = 0x5CB006;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.underline = true;
-			temp.x = 47;
-			temp.y = 159;
+			temp.y = 83;
 			return temp;
 		}
 
@@ -108,9 +67,18 @@ package org.mokylin.skin.app.beibao.Xinfa
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/common/background/head_tishi.png";
-			temp.x = 142;
-			temp.y = 9;
+			temp.styleName = "ui/common/background/bianshiliebiao.png";
+			temp.x = 119;
+			temp.y = 7;
+			return temp;
+		}
+
+		private function __Bianshi_Tips_UIAsset2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/beibao/xinfa/pomo2.png";
+			temp.x = 83;
+			temp.y = 44;
 			return temp;
 		}
 
@@ -138,17 +106,60 @@ package org.mokylin.skin.app.beibao.Xinfa
 			return temp;
 		}
 
-		private function lb_hecheng_i():feathers.controls.Label
+		private function lbBoss_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lb_hecheng = temp;
-			temp.name = "lb_hecheng";
-			temp.text = "前往合成";
-			temp.color = 0x6BCC08;
+			lbBoss = temp;
+			temp.name = "lbBoss";
+			temp.text = "3、世界BOSS掉落";
+			temp.color = 0x00FF33;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
-			temp.visible = false;
 			temp.x = 47;
-			temp.y = 83;
+			temp.y = 157;
+			return temp;
+		}
+
+		private function lbCailiao_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbCailiao = temp;
+			temp.name = "lbCailiao";
+			temp.htmlText = "需要<font color='#ff0d0d'>攻击砭石</font>";
+			temp.textAlign = "center";
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 140;
+			temp.x = 97;
+			temp.y = 50;
+			return temp;
+		}
+
+		private function lbFuben_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbFuben = temp;
+			temp.name = "lbFuben";
+			temp.text = "1、多人副本";
+			temp.color = 0x00FF33;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.underline = true;
+			temp.x = 47;
+			temp.y = 107;
+			return temp;
+		}
+
+		private function lbJixian_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbJixian = temp;
+			temp.name = "lbJixian";
+			temp.text = "2、装备副本";
+			temp.color = 0x00FF33;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.underline = true;
+			temp.x = 47;
+			temp.y = 132;
 			return temp;
 		}
 

@@ -22,7 +22,6 @@ package com.rpgGame.appModule.guild.war
 	import com.rpgGame.netData.guildWar.message.ResGuildWarCityInfoMessage;
 	
 	import feathers.controls.ScrollBarDisplayMode;
-	import feathers.controls.SkinnableContainer;
 	import feathers.controls.UIAsset;
 	import feathers.data.ListCollection;
 	import feathers.utils.filter.GrayFilter;
