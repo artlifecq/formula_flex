@@ -27,9 +27,9 @@ package com.rpgGame.app.manager
 
 		private function init():void
 		{
-			var itemInfos:Object = JSONUtil.decode( GlobalSheetData.getSettingInfo(840).q_string_value);
+			var itemInfos:Object = JSONUtil.decode( GlobalSheetData.getSettingInfo(839).q_string_value);
 			_addExp = itemInfos[0]["num"] ;
-			itemInfos = JSONUtil.decode( GlobalSheetData.getSettingInfo(841).q_string_value);
+			itemInfos = JSONUtil.decode( GlobalSheetData.getSettingInfo(840).q_string_value);
 			_glodExp = itemInfos[0]["num"] ;
 			_glodAddPercent = 0;
 		}

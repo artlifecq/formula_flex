@@ -41,14 +41,10 @@ package com.rpgGame.app.state.role.control
 			}
 		}
 		
-		override public function enterPass(prevState:IState, force:Boolean=false):Boolean
-		{
-//			if ((_machine as RoleStateMachine).isRiding)
-//			{
-//				return false;
-//			}
-			return true;
-		}
+//		override public function enterPass(prevState:IState, force:Boolean=false):Boolean
+//		{
+//			return true;
+//		}
 
 		override public function afterLeave() : void
 		{

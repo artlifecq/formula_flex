@@ -11,13 +11,14 @@ package com.rpgGame.app.ui.main.shortcut
 	import flash.display.BitmapData;
 	import flash.geom.Point;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.Button;
 	import feathers.controls.UIAsset;
 	import feathers.themes.GuiTheme;
 	import feathers.utils.filter.GrayFilter;
 	
 	import starling.display.Image;
-	import away3d.events.Event;
 
 	public class LostSkillCell
 	{
@@ -44,7 +45,7 @@ package com.rpgGame.app.ui.main.shortcut
 		{
 			if(_triggerFun!=null)
 			{
-				_triggerFun(_state);
+				_triggerFun(_state,_qopenData);
 			}
 		}
 		private var _level:int = -1;
@@ -54,6 +55,11 @@ package com.rpgGame.app.ui.main.shortcut
 		public function get state():SkillStateInfo
 		{
 			return _state;
+		}
+		
+		public function get data():Q_lostskill_open
+		{
+			return _qopenData;
 		}
 
 		public function refeasView():void
