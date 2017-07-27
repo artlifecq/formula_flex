@@ -3667,6 +3667,22 @@ package com.game.engine3D.scene.render
 //                    }
 					
 				}
+				if(_isAlpha)
+				{
+					if(blendMode != BlendMode.LAYER)
+					{
+						blendMode = BlendMode.LAYER;
+						alpha = 0.3;
+					}
+				}
+				else
+				{
+					if(blendMode != BlendMode.NORMAL)
+					{
+						blendMode = BlendMode.NORMAL;
+						alpha = 1;
+					}
+				}
 			}
 		}
 		
