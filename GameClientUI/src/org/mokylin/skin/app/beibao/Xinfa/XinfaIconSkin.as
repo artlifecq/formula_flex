@@ -86,14 +86,15 @@ package org.mokylin.skin.app.beibao.Xinfa
 			lab = temp;
 			temp.name = "lab";
 			temp.bold = true;
-			temp.height = 20;
+			temp.height = 17;
 			temp.fontSize = 14;
 			temp.text = "12";
+			temp.textAlign = "right";
 			temp.color = 0x55BD15;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 25;
-			temp.x = 22;
-			temp.y = 27;
+			temp.x = 23;
+			temp.y = 31;
 			return temp;
 		}
 

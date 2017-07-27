@@ -13,7 +13,7 @@ package com.rpgGame.appModule.xinfa.sub
 	public class XinFaBtnExt extends SkinUI
 	{
 		private var _skin:XinFaSelect_Item;
-		private var _vo:CheatsVo;
+		
 		public static var clickCall:Function;
 		public var userData:*;
 		public function XinFaBtnExt(config:Q_cheats)
@@ -21,22 +21,34 @@ package com.rpgGame.appModule.xinfa.sub
 			_skin=new XinFaSelect_Item();
 			super(_skin);
 			_skin.icon.styleName="ui/app/beibao/xinfa/icon/"+config.q_id+".png";
-			_skin.uiName.styleName="ui/app/beibao/xinfa/mingzi1/"+config+".png";
+			_skin.uiName.styleName="ui/app/beibao/xinfa/mingzi1/"+config.q_id+".png";
+			_hitArea=null;
 		}
 		
-		public function setData(vo:CheatsVo):void
+		public function setData(level:int):void
 		{
-			this._vo=vo;
-			if (_vo.isActive()) 
+			
+			if (level>0) 
 			{
-				GrayFilter.unGray(this);
-				_skin.mcNum.gotoAndStop(_vo.level+"");
+				_skin.uiJihuo.visible=false;
+				_skin.mcNum.gotoAndStop(level+"");
 				_skin.gLevel.visible=true;
 			}
 			else
 			{
-				GrayFilter.gray(this);
+				_skin.uiJihuo.visible=true;
 				_skin.gLevel.visible=false;
+			}
+		}
+		public function setGary(bool:Boolean):void
+		{
+			if (bool) 
+			{
+				GrayFilter.gray(this);
+			}
+			else
+			{
+				GrayFilter.unGray(this);
 			}
 		}
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -46,11 +58,13 @@ package com.rpgGame.appModule.xinfa.sub
 				clickCall(this);
 			}
 		}
-
-		public function get vo():CheatsVo
+		public function get isSelected():Boolean
 		{
-			return _vo;
+			return _skin.btns.isSelected;
 		}
-
+		public function set isSelected(value:Boolean):void
+		{
+			_skin.btns.isSelected=value;
+		}
 	}
 }

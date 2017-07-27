@@ -17,6 +17,7 @@ package  com.rpgGame.appModule.xinfa.sub
 	import com.rpgGame.core.utils.GameColorUtil;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.core.view.ui.tip.vo.BaseTipsInfo;
+	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.cheats.CheatsCfg;
@@ -42,7 +43,7 @@ package  com.rpgGame.appModule.xinfa.sub
 	import starling.display.DisplayObject;
 	import starling.filters.FragmentFilter;
 
-	public class CheatsNodePoint implements IStoneSelector
+	public class CheatsNodePoint extends DynamicTipData implements IStoneSelector
 	{
 		public static const W:int=48;
 		public static const H:int=48;
@@ -58,15 +59,16 @@ package  com.rpgGame.appModule.xinfa.sub
 		private var _effect:UIMovieClip;
 
 		private var _careAcuId:String;
-		private var _drawLine:Array;
+		private var _drawLine:Array=[];
 		private var _tipsInfo:BaseTipsInfo;
 		private var _hasReward:Boolean;
 		private var _skin:XinfaIconSkin;
+		private var _upArrow:UIAsset;
 		public function CheatsNodePoint(s:XinfaIconSkin)
 		{
 			this._skin=s;
 			this.imgPoint=_skin.icok;
-			this.imgPoint.touchGroup=true;
+			this._skin.container.touchGroup=true;
 			
 			//this.linkLine.visible=false;
 			//
@@ -74,12 +76,12 @@ package  com.rpgGame.appModule.xinfa.sub
 			this.labAtt.bold=true;
 			this._imgIcon=_skin.ico;
 			_tipsInfo=TargetTipsMaker.makeTips( TipType.CHEATS_NODE_TIP, this );
-			TipTargetManager.show( imgPoint, _tipsInfo);
+			TipTargetManager.show( _skin.container, _tipsInfo);
 			
 		}
-		public function setLineArr(mapLine:Array):void
+		public function addLine(mapLine:MeridianMapLine):void
 		{
-			this._drawLine=mapLine;
+			this._drawLine.push(mapLine);
 		}
 		private function setLineLink(useTween:Boolean):void
 		{
@@ -151,26 +153,26 @@ package  com.rpgGame.appModule.xinfa.sub
 				if (_data.getStone()==null) 
 				{
 					//setIconFilter(true);
-					labAtt.text="0";
+					labAtt.text="";
 					if (hasBetter) 
 					{
-						labAtt.color=GameColorUtil.COLOR_GREEN;
+						labAtt.color=GameColorUtil.C_GREEN;
 					}
 					else
 					{
-						labAtt.color=GameColorUtil.COLOR_GRAY;
+						labAtt.color=GameColorUtil.C_NORMAL;
 					}
 					setIcoUrl("");
 				}
 				else 
 				{
 					var stoneLv:int=ItemConfig.getItemLevelNum(_data.getStone().itemModelId);
-					var qitem:Q_item=ItemConfig.getQItemByID(_data.getStone.itemModelId);
-					setIcoUrl("ui/app/beibao/icons/icon/bianshi/"+qitem.q_default+"_"+stoneLv+".png",27,27);
+					var qitem:Q_item=ItemConfig.getQItemByID(_data.getStone().itemModelId);
+					setIcoUrl("ui/app/beibao/icons/bianshi/"+qitem.q_default+"/"+config.q_stone_type+".png",27,27);
 					labAtt.text=stoneLv+"";
 					if (hasBetter) 
 					{
-						labAtt.color=GameColorUtil.COLOR_GREEN;
+						labAtt.color=GameColorUtil.C_GREEN;
 					}
 					else
 					{
@@ -182,11 +184,11 @@ package  com.rpgGame.appModule.xinfa.sub
 						}
 						if (stoneLv>=maxStoneLv) 
 						{
-							labAtt.color=GameColorUtil.COLOR_YELLOW;
+							labAtt.color=GameColorUtil.C_YELLOW;
 						}
 						else
 						{
-							labAtt.color=GameColorUtil.COLOR_NORMAL;
+							labAtt.color=GameColorUtil.C_NORMAL;
 						}
 					}
 				}
@@ -230,11 +232,11 @@ package  com.rpgGame.appModule.xinfa.sub
 				if (canLevelUp) 
 				{
 					needEff=true;
-					labAtt.color=GameColorUtil.COLOR_GREEN;
+					labAtt.color=GameColorUtil.C_GREEN;
 				}
 				else
 				{
-					labAtt.color=GameColorUtil.COLOR_NORMAL;
+					labAtt.color=GameColorUtil.C_NORMAL;
 				}
 				setLineLink(useTween);
 			}
@@ -285,6 +287,17 @@ package  com.rpgGame.appModule.xinfa.sub
 					_effect.play();
 					this.imgPoint.addChild(_effect);
 				}
+				if (!_upArrow) 
+				{
+					_upArrow=new UIAsset();
+					_upArrow.styleName="ui/common/tubiao/jobup2.png";
+					
+					_upArrow.height =14;
+					_upArrow.width = 14;
+					_upArrow.x=(this._skin.icod.width-14);
+					_upArrow.y=2;
+				}
+				_skin.container.addChild(_upArrow);
 			}
 			else
 			{
@@ -294,6 +307,10 @@ package  com.rpgGame.appModule.xinfa.sub
 					_effect.stop();
 					_effect.dispose();
 					_effect=null;
+				}
+				if (_upArrow) 
+				{
+					MCUtil.removeSelf(_upArrow);
 				}
 			}
 		}
@@ -403,7 +420,7 @@ package  com.rpgGame.appModule.xinfa.sub
 										return;
 									}
 								}
-								AppManager.showApp(AppConstant.JINGMAI_STONE);
+								AppManager.showApp(AppConstant.JINGMAI_STONE,_data.getConfig().q_stone_type);
 								//NoticeManager.mouseFollowNotify(NotifyCfgData.getNotifyTextByID(7017));
 							}
 						}
@@ -413,7 +430,7 @@ package  com.rpgGame.appModule.xinfa.sub
 			}
 		}
 
-		public function get data():CheatsNodeVo
+		override public function get data():*
 		{
 			return _data;
 		}

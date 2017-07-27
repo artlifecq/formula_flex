@@ -58,6 +58,7 @@ package com.rpgGame.app.process
     import com.rpgGame.app.ui.tips.WangChengRewardTips;
     import com.rpgGame.app.ui.tips.cheats.CheatsIntraductTipExt;
     import com.rpgGame.app.ui.tips.cheats.CheatsNodePointTip;
+    import com.rpgGame.app.ui.tips.cheats.CheatsNodePointTipNew;
     import com.rpgGame.app.ui.tips.cheats.CheatsTipExt;
     import com.rpgGame.core.events.MapEvent;
     import com.rpgGame.core.manager.tips.TipManager;
@@ -228,7 +229,7 @@ package com.rpgGame.app.process
 
 			TipManager.registerTipsParserClass(TipType.PASSIVESKILL_TIP,PassiveSpellTip);
 			TipManager.registerTipsParserClass(TipType.EXTARITEM_TIP,ExtarItemTip);
-			TipManager.registerTipsParserClass(TipType.CHEATS_NODE_TIP,CheatsNodePointTip);
+			TipManager.registerTipsParserClass(TipType.CHEATS_NODE_TIP,CheatsNodePointTipNew);
 			TipManager.registerTipsParserClass(TipType.CHEATS_TIP,CheatsTipExt);
 			TipManager.registerTipsParserClass(TipType.CHEATS_INTRADUCTION_TIP,CheatsIntraductTipExt);
 			TipManager.registerTipsParserClass(TipType.BLESS_TIP,BlessTip);

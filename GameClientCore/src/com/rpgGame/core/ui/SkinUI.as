@@ -38,7 +38,7 @@ package com.rpgGame.core.ui
 		protected var _stage : Stage;
 		protected var _stateSkin : StateSkin;
 		protected var _parentContainer : DisplayObjectContainer;
-		private var _hitArea : Rectangle;
+		protected var _hitArea : Rectangle;
 		
 		public function SkinUI(skin : StateSkin = null)
 		{

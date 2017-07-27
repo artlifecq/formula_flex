@@ -850,9 +850,9 @@ package org.mokylin.skin.app.beibao.Xinfa
 			mc_Level = temp;
 			temp.name = "mc_Level";
 			temp.autoPlay = false;
-			temp.height = 51;
+			temp.height = 41;
 			temp.styleClass = org.mokylin.skin.app.beibao.Xinfa.mc.UIMovieClipDengji;
-			temp.width = 20;
+			temp.width = 21;
 			temp.x = 68;
 			temp.y = 0;
 			return temp;

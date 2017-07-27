@@ -33,6 +33,7 @@ package  com.rpgGame.appModule.xinfa.sub
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import feathers.utils.filter.GrayFilter;
 	
 	import org.mokylin.skin.app.beibao.Xinfa.XinfaIconSkin;
 	
@@ -101,13 +102,13 @@ package  com.rpgGame.appModule.xinfa.sub
 			//计算链接
 			for (var j:int = 0; j < len; j++) 
 			{
-				var lines:Array;
+				//var lines:Array;
 				tmpC=_cheatsVo.getSubNode(keys[j]);
 				var linkStr:String=tmpC.getConfig().q_link_nodes;
 				var coord:String=tmpC.getConfig().q_coord;
 				if (linkStr!=null&&linkStr!="") 
 				{
-					lines=[];
+					//lines=[];
 					var idArr:Array=linkStr.split(",") as Array;
 					var coordsArr:Array;
 					if (coord!=null&&coord!="") 
@@ -116,12 +117,14 @@ package  com.rpgGame.appModule.xinfa.sub
 					}
 					var num:int=idArr.length;
 					var startObj:DisplayObject=nodeMap[tmpC.getConfig().q_node_id];
+					var nextNodeId:int;
 					for (var k:int = 0; k < num; k++) 
 					{
 						if (idArr[k]==tmpC.getConfig().q_node_id) 
 						{
 							continue;
 						}
+						nextNodeId=String(idArr[k]).split("_")[1];
 						var endObj:DisplayObject=nodeMap[idArr[k]];
 						if (endObj) 
 						{
@@ -132,12 +135,13 @@ package  com.rpgGame.appModule.xinfa.sub
 							}
 							posA.push(new Point(endObj.x+endObj.width/2,endObj.y+endObj.height/2));
 							drawLine=new MeridianMapLine(lineUrl,lineUrl2,posA);
-							lines.push(drawLine);
+							//lines.push(drawLine);
 							linesContianer.addChild(drawLine);
+							(pointHash.getValue(nextNodeId) as CheatsNodePoint).addLine(drawLine);
 						}
 					}
 				}
-				(pointHash.getValue(tmpC.chetasNodeId) as CheatsNodePoint).setLineArr(lines);
+//				(pointHash.getValue(tmpC.chetasNodeId) as CheatsNodePoint).setLineArr(lines);
 				(pointHash.getValue(tmpC.chetasNodeId) as CheatsNodePoint).setData(tmpC);
 			}
 			imgIcon.userData=this;
@@ -172,7 +176,9 @@ package  com.rpgGame.appModule.xinfa.sub
 			{
 				noGray=Mgr.cheatsMgr.getCanActive(_cheatsVo.cheatsConfig.q_id);
 			}
-			_btn.filter=noGray>0?null:grayFilter;
+			//_btn.filter=noGray?null:FilterUtil.getGrayFilter();
+			_btn.setData(_cheatsVo.level);
+			_btn.setGary(!noGray);
 			notifyUpdate(RTNodeID.XF+"_"+_cheatsVo.cheatsConfig.q_id);
 		}
 		private function updateFirstLine(useTween:Boolean):void
@@ -357,11 +363,11 @@ package  com.rpgGame.appModule.xinfa.sub
 		}
 		public function get offsetX():int
 		{
-			return -(_stateSkin["ico_xinfa"].x+_stateSkin["ico_xinfa"].width/2);
+			return -(imgIcon.x+imgIcon.width/2);
 		}
 		public function get offsetY():int
 		{
-			return -(_stateSkin["ico_xinfa"].y+_stateSkin["ico_xinfa"].height/2);
+			return -(imgIcon.y+imgIcon.height/2);
 		}
 	}
 }
