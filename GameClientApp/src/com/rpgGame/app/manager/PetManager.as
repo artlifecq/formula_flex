@@ -1,6 +1,8 @@
 package com.rpgGame.app.manager
 {
 	import com.gameClient.utils.HashMap;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.PetEvent;
 	import com.rpgGame.netData.pet.bean.PetInfo;
 	import com.rpgGame.netData.pet.message.ResExtraBuyMessage;
@@ -85,12 +87,25 @@ package com.rpgGame.app.manager
 		
 		public function resPetZoneResultHandler(msg:ResPetZoneResultMessage):void
 		{
-			
+			AppManager.showAppNoHide(AppConstant.PET_TIAOZHAN_PANLE,msg);
 		}
 		
 		public function get curPetId():int
 		{
 			return _curPetId;
+		}
+		
+		public function get petListByJiHuo():Vector.<PetInfo>
+		{
+			var list:Vector.<PetInfo>=new Vector.<PetInfo>();
+			for each(var info:PetInfo in _petHash.values())
+			{
+				if(info.actived==1&&info.modelId!=_curPetId)
+				{
+					list.push(info);
+				}
+			}		
+			return list;
 		}
 		
 	}

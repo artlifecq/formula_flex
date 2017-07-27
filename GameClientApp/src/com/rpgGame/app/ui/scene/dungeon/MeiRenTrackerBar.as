@@ -26,7 +26,7 @@ package com.rpgGame.app.ui.scene.dungeon
 	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
-	import org.mokylin.skin.app.hunyin.FuQiFuBen_Item;
+	import org.mokylin.skin.app.meiren.MeiRenBoss_Item;
 	import org.mokylin.skin.app.meiren.MeiRen_ZhuiZong;
 	
 	import starling.display.DisplayObject;
@@ -48,6 +48,7 @@ package com.rpgGame.app.ui.scene.dungeon
 		{
 			_skin=new MeiRen_ZhuiZong();
 			super(_skin);
+			initPanel();
 		}
 		
 		private function initPanel():void
@@ -209,7 +210,7 @@ package com.rpgGame.app.ui.scene.dungeon
 					qzm=DailyZoneMonsterCfgData.getZoneCfg(killList[i].monsterModelId);
 					if(qzm&&i<killButList.length)
 					{
-						(killButList[i].skin as FuQiFuBen_Item).labelDisplay.htmlText="击杀：<u>"+MonsterDataManager.getMonsterName(qzm.q_monsterId)+"</u><font color='#cfc6ae'>("+killList[i].count+"/"+qzm.q_monsterNum+")</font>";
+						(killButList[i].skin as MeiRenBoss_Item).labelDisplay.htmlText="击杀：<u>"+MonsterDataManager.getMonsterName(qzm.q_monsterId)+"</u><font color='#cfc6ae'>("+killList[i].count+"/"+qzm.q_monsterNum+")</font>";
 						killButList[i].visible=true;
 					}				
 				}

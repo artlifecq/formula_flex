@@ -1,6 +1,8 @@
 package com.rpgGame.app.cmdlistener
 {
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.ActivetyDataManager;
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.MibaoManager;
 	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
 	import com.rpgGame.core.app.AppConstant;
@@ -163,7 +165,16 @@ package com.rpgGame.app.cmdlistener
 			EventManager.dispatchEvent(ActivityEvent.UPDATE_ACTIVITY,msg.activityId);
 			var info:ActivetyInfo=ActivetyCfgData.getActInfoById(msg.activityId); 
 			if(info.actCfg.q_show_notice==1){
-				AppManager.showAppNoHide(AppConstant.ACTIVETY_OPEN,info);
+				if(info.actCfg.q_notice_trans){
+					var list:Array=JSONUtil.decode(info.actCfg.q_notice_trans);
+					if(FunctionOpenManager.checkOpenBuyFunId(list[1]))
+					{
+						AppManager.showAppNoHide(AppConstant.ACTIVETY_OPEN,info);
+					}
+				}else{
+					AppManager.showAppNoHide(AppConstant.ACTIVETY_OPEN,info);
+				}
+				
 			}
 		}
 		

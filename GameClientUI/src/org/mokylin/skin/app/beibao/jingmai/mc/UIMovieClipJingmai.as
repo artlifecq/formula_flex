@@ -18,6 +18,8 @@ package org.mokylin.skin.app.beibao.jingmai.mc
 			super();
 			
 			this.currentState = "4";
+			this.height = 109;
+			this.width = 57;
 			this.elementsContent = [];
 			
 			states = {

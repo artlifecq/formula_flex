@@ -6,6 +6,7 @@ package com.rpgGame.appModule.jingmai
 	
 	import org.mokylin.skin.app.beibao.jingmai.Jingmai_Skin;
 	
+	import starling.display.DisplayObject;
 	import starling.events.TouchEvent;
 
 	/**
@@ -53,12 +54,12 @@ package com.rpgGame.appModule.jingmai
 		//	TipTargetManager.show(this,TargetTipsMaker.makeTips(TipType.MERIDIAN_TIP,"sssss"));
 			//this.addEventListener(TouchEvent.TOUCH,onTouchMain);
 			_view=new MeridianView();
-			addNode(RTNodeID.JM,RTNodeID.JM_RENM,_skin.rdo_renmai,46,_view.checkRenM,false);
-			addNode(RTNodeID.JM,RTNodeID.JM_DUM,_skin.rdo_dumai,46,_view.checkDuM,false);
-			addNode(RTNodeID.JM,RTNodeID.JM_CHONGM,_skin.rdo_chongmai,46,_view.checkChongM,false);
-			addNode(RTNodeID.JM,RTNodeID.JM_DAIM,_skin.rdo_daimai,46,_view.checkDaiM,false);
-			addNode(RTNodeID.JM,RTNodeID.JM_YINGM,_skin.rdo_yinqiaomai,46,_view.checkYinM,false);
-			addNode(RTNodeID.JM,RTNodeID.JM_YANGM,_skin.rdo_yangqiaomai,46,_view.checkYangM,false);
+			addNode(RTNodeID.JM,RTNodeID.JM_RENM,_skin.rdo_renmai,52,_view.checkRenM,false);
+			addNode(RTNodeID.JM,RTNodeID.JM_DUM,_skin.rdo_dumai,52,_view.checkDuM,false);
+			addNode(RTNodeID.JM,RTNodeID.JM_CHONGM,_skin.rdo_chongmai,52,_view.checkChongM,false);
+			addNode(RTNodeID.JM,RTNodeID.JM_DAIM,_skin.rdo_daimai,52,_view.checkDaiM,false);
+			addNode(RTNodeID.JM,RTNodeID.JM_YINGM,_skin.rdo_yinqiaomai,52,_view.checkYinM,false);
+			addNode(RTNodeID.JM,RTNodeID.JM_YANGM,_skin.rdo_yangqiaomai,52,_view.checkYangM,false);
 			_view.setUi(_skin as Jingmai_Skin,this);
 		}
 		
@@ -68,7 +69,10 @@ package com.rpgGame.appModule.jingmai
 			trace("touch main");
 			
 		}
-		
+		override protected function onTouchTarget(target:DisplayObject):void
+		{
+			
+		}
 		override public function hide():void
 		{
 			super.hide();

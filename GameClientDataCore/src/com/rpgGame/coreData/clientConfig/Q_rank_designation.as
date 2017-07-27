@@ -18,6 +18,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_ifshow:int;
 		/**  榜单统计人数 */
 		public var q_Info_max:int;
+		/**  最低进榜条件 */
+		public var q_condition:int;
 		/**  榜单模型编号（对应monster表中的ID） */
 		public var q_model:int;
 		/**  榜单称号特效 */

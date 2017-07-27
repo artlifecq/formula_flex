@@ -1,5 +1,8 @@
 package com.rpgGame.appModule.vip
 {
+	import com.game.engine3D.display.Inter3DContainer;
+	import com.game.engine3D.display.InterObject3D;
+	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.mainCore.core.timer.GameTimer;
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.GlobalFunction;
@@ -13,6 +16,7 @@ package com.rpgGame.appModule.vip
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.core.utils.TextUtil;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.VipCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
@@ -55,6 +59,9 @@ package com.rpgGame.appModule.vip
 		private var _timer:GameTimer;
 		private var _rewardStr:String;
 		private var _curVip:int;
+		private var _effectCon:Inter3DContainer;
+		private var _effect3d:InterObject3D;
+		private static const VIPMODELS:String="tx_ui_vip_mozheling0";
 		public function VipMainPanelExt()
 		{
 			_skin=new Vip_Skin();
@@ -126,6 +133,11 @@ package com.rpgGame.appModule.vip
 			
 			_timer=new GameTimer("VipMainPanelExt",1000);
 			_timer.onUpdate=onTimer;
+			
+			_effectCon=new Inter3DContainer();
+			_effectCon.y=280+20;
+			_effectCon.x=_skin.uiModel.width/2;
+			_skin.uiModel.addChild(_effectCon);
 		}
 		
 		private function onTimer():void
@@ -145,8 +157,12 @@ package com.rpgGame.appModule.vip
 		{
 			return new VipTQCellRender();
 		}
-		private function showVipItem(vipLv:int):void
+		private function showVipItem(vipLv:int,bForce:Boolean=false):void
 		{
+			if (_curVip==vipLv&&!bForce) 
+			{
+				return;
+			}
 			for each (var lab:Label in _labs) 
 			{
 				MCUtil.removeSelf(lab);
@@ -186,6 +202,15 @@ package com.rpgGame.appModule.vip
 			_skin.imgRewardType.styleName="ui/app/vip/vip_name"+vipLv+".png";
 			_skin.lbTime0.text=LanguageConfig.replaceStr(_rewardStr,[Mgr.vipMgr.getCardRewardCount(vipLv)]);
 			_rewardBtnCtrl.hasReward=Mgr.vipMgr.getCardRewardCount(vipLv);
+			if (_effect3d) 
+			{
+				_effect3d.dispose();
+			}
+			_effect3d=_effectCon.playInter3DAt(ClientConfig.getEffect(VIPMODELS+vipLv),0,0,0,null,addEft)
+		}
+		private  function addEft(render:RenderUnit3D):void
+		{
+			render.play(0);
 		}
 		override protected function onShow():void
 		{
@@ -250,11 +275,11 @@ package com.rpgGame.appModule.vip
 			
 			if (_curVip==0&&nowVip==0) 
 			{
-				showVipItem(EnumVip.VIP3);
+				showVipItem(EnumVip.VIP3,true);
 			}
 			else
 			{
-				showVipItem(_curVip!=0?_curVip:nowVip);
+				showVipItem(_curVip!=0?_curVip:nowVip,true);
 			}
 		}
 		override protected function onHide():void
@@ -264,6 +289,11 @@ package com.rpgGame.appModule.vip
 			EventManager.removeEvent(VipEvent.GET_VIP_DATA,onGetVipData);
 			_timer.stop();
 			_curVip=0;
+			if (_effect3d) 
+			{
+				_effect3d.dispose();
+				_effect3d=null;
+			}
 		}
 	}
 }
