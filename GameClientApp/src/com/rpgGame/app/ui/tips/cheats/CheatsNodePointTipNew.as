@@ -317,7 +317,7 @@ package  com.rpgGame.app.ui.tips.cheats
 			}
 			var needSprit:int=qMer.levelUpNeedSpirit;
 			//解锁不消耗
-			if (needSprit!=0&&!isUnlockCondion) 
+			if (needSprit!=0) 
 			{
 				lb=clonelab(_skin.lb_dengji);
 				this.addChild(lb);

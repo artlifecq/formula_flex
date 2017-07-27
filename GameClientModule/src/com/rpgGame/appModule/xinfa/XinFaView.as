@@ -24,6 +24,7 @@ package com.rpgGame.appModule.xinfa
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.ui.tip.IRewardCheck;
 	import com.rpgGame.core.ui.tip.RTNodeID;
+	import com.rpgGame.core.ui.tip.RewardMarkTip;
 	import com.rpgGame.core.utils.GameColorUtil;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.BuffStateDataManager;
@@ -133,6 +134,9 @@ package com.rpgGame.appModule.xinfa
 			this._skin.btnClose.addEventListener(Event.TRIGGERED,hideAttr);
 			_attrView._skin.btnClose.addEventListener(Event.TRIGGERED,onCloseAttr);
 			showAttr(null);
+			
+			var rew:RewardMarkTip=new RewardMarkTip(_skin.btn_jihuo,110);
+			rew.hasReward=true;
 		}
 		private function onCloseAttr(eve:Event):void
 		{
