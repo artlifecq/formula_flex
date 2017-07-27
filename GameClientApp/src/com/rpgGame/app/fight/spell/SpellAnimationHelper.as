@@ -827,14 +827,7 @@ package com.rpgGame.app.fight.spell
 			effectRu.allowCameraAnimator = (info.atkor && info.atkor.isMainChar);
 			
 			
-			if (info.matchTerrain)
-			{
-				SceneManager.addSceneObjToScene(effectSet, true);
-			}
-			else
-			{
-				SceneManager.addSceneObjToScene(effectSet);
-			}
+		
 			
 			var renderSetAnimator : IRenderAnimator;
 			var effectCfg : EffectAnimation = EffectAnimationCfgData.getInfo(effectRu.renderParamData.sourceName);
@@ -895,6 +888,14 @@ package com.rpgGame.app.fight.spell
 				effectSet.setRenderAnimator(renderSetAnimator);
 			}
 			flySceneObjID++;
+			if (info.matchTerrain)
+			{
+				SceneManager.addSceneObjToScene(effectSet, true);
+			}
+			else
+			{
+				SceneManager.addSceneObjToScene(effectSet);
+			}
 		}
 		
 		/**
