@@ -241,5 +241,14 @@ package com.rpgGame.appModule.open
 			refeashView();
 		}
 		
+		override public function get width():Number
+		{
+			return _skin.width;
+		}
+		
+		override public function get height():Number
+		{
+			return _skin.height;
+		}
 	}
 }
