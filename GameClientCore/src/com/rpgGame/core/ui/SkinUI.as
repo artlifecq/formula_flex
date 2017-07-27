@@ -42,7 +42,8 @@ package com.rpgGame.core.ui
 		public function SkinUI(skin : StateSkin = null)
 		{
 			_stateSkin = skin;
-			_stateSkin.toSprite(this);
+			if(skin != null)
+				_stateSkin.toSprite(this);
 			_stage = Starling.current.nativeStage;
 			this.addEventListener(Event.ADDED_TO_STAGE, __onAddedToStage);
 			this.addEventListener(Event.REMOVED_FROM_STAGE, __onRemoveFromStage);
