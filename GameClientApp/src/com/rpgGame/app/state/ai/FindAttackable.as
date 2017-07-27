@@ -67,7 +67,7 @@ package com.rpgGame.app.state.ai
 		{
 			var role:SceneRole;
 			role=findNearestPlayer();//先搜寻可攻击玩家
-			if(role==null&&TaskAutoManager.getInstance().isTaskRunning)//任务中先搜寻任务怪
+			if(role==null&&TaskAutoManager.getInstance().isTasking)//任务中先搜寻任务怪
 			{
 				role=findNearestTaskMonster();
 			}
@@ -123,23 +123,27 @@ package com.rpgGame.app.state.ai
 				var role : SceneRole = roleList.shift();
 				var monsterData : MonsterData = role.data as MonsterData;
 				var modeState : int = FightManager.getFightRoleState(role);
-				if (role &&monsterData&& role.usable &&TaskMissionManager.isMainTaskMonster(monsterData.modelID)&& monsterData.monsterData.q_monster_type>=1&&monsterData.monsterData.q_monster_type<=3&& !role.stateMachine.isDeadState&&modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY ||modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND)//if (role && role.usable && role.isInViewDistance && !role.stateMachine.isDeadState)
+				if (role &&monsterData&& role.usable && monsterData.monsterData.q_monster_type>=1&&monsterData.monsterData.q_monster_type<=3&& !role.stateMachine.isDeadState&&(modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY ||modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND))//if (role && role.usable && role.isInViewDistance && !role.stateMachine.isDeadState)
 				{
-					var dist:int = Point.distance(new Point(MainRoleManager.actor.x,MainRoleManager.actor.z),new Point(role.x,role.z));
-					var max:int;
-					if(TrusteeshipManager.getInstance().findDist>0)
+					if(TaskMissionManager.isTaskMonster(monsterData.modelID,TaskAutoManager.getInstance().otherType))
 					{
-						max=TrusteeshipManager.getInstance().findDist*50;
+						var dist:int = Point.distance(new Point(MainRoleManager.actor.x,MainRoleManager.actor.z),new Point(role.x,role.z));
+						var max:int;
+						if(TrusteeshipManager.getInstance().findDist>0)
+						{
+							max=TrusteeshipManager.getInstance().findDist*50;
+						}
+						else
+						{
+							max=int(SystemSetManager.getinstance().getValueByIndex(SystemSetManager.SYSTEMSET_HOOK_TYPE)*50);
+						}
+						if(dist<=max&&dist<currDist)
+						{
+							rerlle= role;
+							currDist=dist;
+						}
 					}
-					else
-					{
-						max=int(SystemSetManager.getinstance().getValueByIndex(SystemSetManager.SYSTEMSET_HOOK_TYPE)*50);
-					}
-					if(dist<=max&&dist<currDist)
-					{
-						rerlle= role;
-						currDist=dist;
-					}
+					
 				}
 			}
 			/*if(rerlle==null&&istask)

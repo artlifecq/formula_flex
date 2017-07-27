@@ -13,8 +13,10 @@ package com.rpgGame.core.utils
 		
 		public static const COLOR_ATTR_NAME:uint=0xeaeabc;
 		public static const COLOR_ATTR_VALUE:uint=0xffea00;
-		public function GameColorUtil()
-		{
-		}
+		
+		
+		public static const C_NORMAL:int=0xeaeabc;
+		public static const C_GREEN:int=0x00ff0c;
+		public static const C_YELLOW:int=0xffea00;
 	}
 }

@@ -78,7 +78,8 @@ package com.rpgGame.core.utils
 				startPos.y=sty+int(i/cellNum)*yGe;
 				tmpLab.y=startPos.y;
 				contianer.addChild(tmpLab);
-				tmpLab.text=CharAttributeType.getCNName(keys[i])+splitStr+attHash.getValue(keys[i]);
+				tmpLab.htmlText=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_ATTR_NAME,CharAttributeType.getCNName(keys[i])+splitStr)+HtmlTextUtil.getTextColor(GameColorUtil.COLOR_ATTR_VALUE,attHash.getValue(keys[i]))
+				tmpLab.width=tmpLab.textWidth;				
 				ret.push(tmpLab);
 			}
 			startPos.y=sty+Math.ceil(len/cellNum)*yGe;
