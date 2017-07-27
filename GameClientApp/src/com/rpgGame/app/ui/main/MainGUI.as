@@ -14,6 +14,7 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.app.ui.main.head.MonsterBossBar;
 	import com.rpgGame.app.ui.main.head.MonsterEliteBar;
 	import com.rpgGame.app.ui.main.head.MonsterNormalBar;
+	import com.rpgGame.app.ui.main.head.PetHeadBar;
 	import com.rpgGame.app.ui.main.head.RoleHeadBar;
 	import com.rpgGame.app.ui.main.hubaozhuizong.HuBaoTracjerBar;
 	import com.rpgGame.app.ui.main.navigation.NavigationBar;
@@ -30,6 +31,7 @@ package com.rpgGame.app.ui.main
 	import com.rpgGame.core.events.HuBaoEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.MapEvent;
+	import com.rpgGame.core.events.PetEvent;
 	import com.rpgGame.core.events.SceneInteractiveEvent;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
@@ -93,6 +95,11 @@ package com.rpgGame.app.ui.main
 		private var _bossHead:MonsterBossBar;
 		private var _eliteHead:MonsterEliteBar;
 		private var _normalHead:MonsterNormalBar;
+		
+		/**
+		 * 美人头像
+		 * */
+		private var _meirenHead:PetHeadBar;
 		
 		// 小地图
 		private var _smallMapBar : SmallMapBar;
@@ -176,9 +183,9 @@ package com.rpgGame.app.ui.main
 		 */
 		private function initBar() : void
 		{
-//			this._topBar = new TopBar();
-//			_topBar.y=5;
-//			this.addChild(this._topBar);
+			//			this._topBar = new TopBar();
+			//			_topBar.y=5;
+			//			this.addChild(this._topBar);
 			_expBar=new ExpBar();
 			this.addChild(this._expBar);		
 			this._headBar = new MainRoleHeadBar();
@@ -206,6 +213,7 @@ package com.rpgGame.app.ui.main
 			_bossHead=new MonsterBossBar();
 			_eliteHead=new MonsterEliteBar();
 			_normalHead=new MonsterNormalBar();
+			_meirenHead = new PetHeadBar();
 			
 			_lowBloodBg=new UIAsset();
 			_lowBloodBg.touchable=false;
@@ -279,12 +287,28 @@ package com.rpgGame.app.ui.main
 			EventManager.addEvent(HuBaoEvent.HUBAO_ZHUIZONG,onhubao);
 			EventManager.addEvent(HuBaoEvent.HUBAO_HUSONGSHIBAI,onhubao);
 			EventManager.addEvent(HuBaoEvent.HUBAO_HUSONGCHENGGONG,onhubao);
+			
+			EventManager.addEvent(PetEvent.PET_PANELSHOWORHIDE,onMeiRenHeadShow);
 		}
 		
 		//护宝
 		private function onhubao(msg:*):void
 		{
 			onSwitchCmp();
+		}
+		
+		private function onMeiRenHeadShow(bool:Boolean):void
+		{
+			if(!bool)
+			{		
+				this.removeChild(_meirenHead);
+				_meirenHead.hide();
+			}
+			else if(this.getChildIndex(_meirenHead)==-1)
+			{
+				this.addChild(_meirenHead);
+				_meirenHead.show();
+			}
 		}
 		
 		private function showLowBlood():void
@@ -387,6 +411,7 @@ package com.rpgGame.app.ui.main
 			EventManager.removeEvent(HuBaoEvent.HUBAO_ZHUIZONG,onhubao);
 			EventManager.removeEvent(HuBaoEvent.HUBAO_HUSONGSHIBAI,onhubao);
 			EventManager.removeEvent(HuBaoEvent.HUBAO_HUSONGCHENGGONG,onhubao);
+			EventManager.removeEvent(PetEvent.PET_CHANGE,onMeiRenHeadShow);
 		}
 		
 		private function onAppLoadError(e:AppEvent):void
@@ -515,7 +540,7 @@ package com.rpgGame.app.ui.main
 		
 		private function resize(sWidth : int, sHeight : int) : void
 		{
-//			this._topBar.resize(sWidth, sHeight);
+			//			this._topBar.resize(sWidth, sHeight);
 			this._headBar.resize(sWidth, sHeight);
 			this._smallMapBar.resize(sWidth, sHeight);
 			this._shortcutBar.resize(sWidth, sHeight);
@@ -529,7 +554,7 @@ package com.rpgGame.app.ui.main
 			/*if(_taskBar.parent){
 			
 			}*/
-			
+			this._meirenHead.resize(sWidth, sHeight);
 			this._bossHead.resize(sWidth, sHeight);
 			this._eliteHead.resize(sWidth, sHeight);
 			this._normalHead.resize(sWidth, sHeight);

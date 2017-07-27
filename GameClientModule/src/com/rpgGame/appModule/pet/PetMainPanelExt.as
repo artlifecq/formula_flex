@@ -1,8 +1,9 @@
 package com.rpgGame.appModule.pet
 {
+	import com.game.engine3D.display.Inter3DContainer;
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.display3D.InterAvatar3D;
 	import com.rpgGame.app.manager.Mgr;
-	import com.rpgGame.app.manager.PetManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.PetSender;
@@ -27,7 +28,10 @@ package com.rpgGame.appModule.pet
 	import com.rpgGame.coreData.clientConfig.Q_girl_pet;
 	import com.rpgGame.coreData.clientConfig.Q_global;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
+	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.CharAttributeType;
+	import com.rpgGame.coreData.type.RoleStateType;
+	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.pet.bean.PetInfo;
@@ -57,6 +61,10 @@ package com.rpgGame.appModule.pet
 		private var goldBuyText:String="";
 		private var goldBuyMod:Q_global;
 		private var bindGoldBuyMod:Q_global;
+		
+		private var _modContaner:Inter3DContainer;
+		private var _avatar : InterAvatar3D;
+		private var _avatarData : RoleData;
 		public function PetMainPanelExt()
 		{
 			_skin=new MeiRen_Skin();
@@ -65,6 +73,13 @@ package com.rpgGame.appModule.pet
 		}
 		private function initConfig():void
 		{
+			_modContaner=new Inter3DContainer();
+			this._skin.container.addChildAt(_modContaner,4);
+			_avatar=new InterAvatar3D();
+			_avatar.x = 408;
+			_avatar.y =490;
+			_modContaner.addChild3D(_avatar);
+			_avatarData=new RoleData(0);
 			goldBuyMod=GlobalSheetData.getSettingInfo(845);
 			bindGoldBuyMod=GlobalSheetData.getSettingInfo(846);
 			var pets:Array=PetCfg.dataArr;
@@ -141,7 +156,7 @@ package com.rpgGame.appModule.pet
 				_blessPanel.x=this._skin.width;
 				_blessPanel.y=46;
 			}
-			onStageResize(_stage.stageWidth-_blessPanel.width,_stage.stageHeight);
+			onStageResize(_stage.stageWidth-_blessPanel.getwidth(),_stage.stageHeight);
 			_blessPanel.setData(_curSelectItem.data);
 		}
 		
@@ -192,15 +207,14 @@ package com.rpgGame.appModule.pet
 				if (Mgr.petMgr.curPetId==_curSelectItem.data.modelId) 
 				{
 					//休息请求
-					PetSender.reqPetDebut(Mgr.petMgr.curPetId);
+					PetSender.reqPetDebut(_curSelectItem.data.modelId);
 				}
 				else
 				{
 					//出战请求
-					PetSender.reqPetDebut(Mgr.petMgr.curPetId);
+					PetSender.reqPetDebut(_curSelectItem.data.modelId);
 				}
-			}
-			
+			}			
 		}
 		
 		private function isCanChangeNum(type:int):Boolean
@@ -223,9 +237,9 @@ package com.rpgGame.appModule.pet
 			}
 			else
 			{
-				 arr=JSONUtil.decode(bindGoldBuyMod.q_string_value);
-				 nowNum=Mgr.petMgr.bindGlodNum;
-				 maxNum=arr.length;
+				arr=JSONUtil.decode(bindGoldBuyMod.q_string_value);
+				nowNum=Mgr.petMgr.bindGlodNum;
+				maxNum=arr.length;
 				if(nowNum>=maxNum)
 				{
 					NoticeManager.showNotifyById(21000);
@@ -274,9 +288,28 @@ package com.rpgGame.appModule.pet
 				_curSelectItem.setSelect(false);
 			}
 			_curSelectItem=item;
+			showPetModEff(_curSelectItem.data);
 			_curSelectItem.setSelect(true);
-			showSubPetData(_curSelectItem.data);
+			showSubPetData(_curSelectItem.data);			
+			if(_blessPanel&&_blessPanel.visible&&_curSelectItem.data.actived==1)
+			{
+				_blessPanel.setData(_curSelectItem.data);
+			}
+			else
+			{
+				MCUtil.removeSelf(_blessPanel);
+			}
 		}
+		
+		private function showPetModEff(data:PetInfo):void
+		{
+			var qPet:Q_girl_pet=PetCfg.getPet(data.modelId);
+			this._avatarData.avatarInfo.setBodyResID(qPet.q_panel_show_id, null);
+			this._avatar.setRoleData(this._avatarData);
+			this._avatar.curRole.setScale(1.7);	
+			this._avatar.curRole.stateMachine.transition(RoleStateType.ACTION_IDLE);
+		}
+		
 		private function showSubPetData(data:PetInfo):void
 		{
 			updateBtnState(data);
@@ -357,7 +390,6 @@ package com.rpgGame.appModule.pet
 				if (_blessPanel&&this.contains(_blessPanel)) 
 				{
 					MCUtil.removeSelf(_blessPanel);
-					updatePos();
 				}
 			}
 		}
@@ -404,6 +436,7 @@ package com.rpgGame.appModule.pet
 		{
 			EventManager.addEvent(PetEvent.PET_DATA_CHANGE,onPetChange);
 			EventManager.addEvent(PetEvent.PET_BUYNUM_CHANGE,onBuyNumChange);
+			EventManager.addEvent(PetEvent.PET_CHANGE,onUpdatePetChuZhanOrXiuzhan);
 			super.onShow();
 			onBuyNumChange();
 			//重新设置数据
@@ -470,6 +503,12 @@ package com.rpgGame.appModule.pet
 			
 		}
 		
+		private function onUpdatePetChuZhanOrXiuzhan():void
+		{
+			if(_curSelectItem!=null)
+				updateBtnState(_curSelectItem.data);
+		}
+		
 		private function onBuyNumChange():void
 		{
 			// TODO Auto Generated method stub
@@ -517,8 +556,11 @@ package com.rpgGame.appModule.pet
 			super.onHide();
 			if(_blessPanel)
 				MCUtil.removeSelf(_blessPanel);
+			if(this._avatar)
+				this._avatar.dispose();
 			EventManager.removeEvent(PetEvent.PET_DATA_CHANGE,onPetChange);
 			EventManager.removeEvent(PetEvent.PET_BUYNUM_CHANGE,onBuyNumChange);
+			EventManager.removeEvent(PetEvent.PET_CHANGE,onUpdatePetChuZhanOrXiuzhan);
 		}
 		public function updatePos():void
 		{

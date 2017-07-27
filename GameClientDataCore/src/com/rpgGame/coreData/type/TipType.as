@@ -110,5 +110,7 @@ package com.rpgGame.coreData.type
 		
 		/** 美人规则tips */
 		public static const MEIREN_GUIZE_TIP : int = rEnum.next;
+		/** 美人tips */
+		public static const MEIREN_TIP : int = rEnum.next;
 	}
 }

@@ -2,6 +2,7 @@ package com.rpgGame.appModule.pet.sub
 {
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.GameColorUtil;
+	import com.rpgGame.coreData.type.CharAttributeType;
 	
 	import org.mokylin.skin.app.meiren.MeiRen_Item;
 	
@@ -31,7 +32,7 @@ package com.rpgGame.appModule.pet.sub
 				_skin.lbAdd.color=GameColorUtil.COLOR_RED;
 				_skin.lbAdd.text=""+_diff;
 			}
-			
+			_skin.uiName.styleName="ui/common/shuxing/"+CharAttributeType.getAttrNameUrl(attrType)+".png";
 			_skin.uiUp.visible=false;
 			_skin.lbAdd.visible=false;
 		}
