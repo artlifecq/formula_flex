@@ -56,6 +56,7 @@ package com.game.engine3D.scene.render.vo
 			if (_isAlpha != value)
 			{
 				_isAlpha = value;
+				_renderSet.isAlpha = _isAlpha;
 				if(_isAlpha)
 				{
 					_renderSet.blendMode = BlendMode.LAYER;
