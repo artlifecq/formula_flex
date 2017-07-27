@@ -3,12 +3,10 @@ package com.rpgGame.app.state.role.action
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.state.IState;
 	import com.game.engine3D.vo.BaseRole;
-	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.app.state.role.control.CheckTripleAttackStateReference;
-	import com.rpgGame.app.state.role.control.TripleAttackSpellLockStateReference;
 	import com.rpgGame.core.state.role.action.ActionState;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleData;

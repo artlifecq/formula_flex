@@ -29,20 +29,20 @@ package com.rpgGame.app.state.role.control
 			if (_machine && !_machine.isInPool)
 			{
 				super.execute();
-//				if (_stateReference)
-//				{
-//					if (_stateReference is HiddingStateReference)
-//					{
+				if (_stateReference)
+				{
+					if (_stateReference is HiddingStateReference)
+					{
 						var role : SceneRole = _machine.owner as SceneRole;
 						role.forEachRenderUnit(eachUnVisible);
 						if (role.headFace) 
 						{
 							role.headFace.headVisible=false;
 						}
-//					}
-//					else
-//						throw new Error("场景隐身状态引用必须是HiddingStateReference类型！");
-//				}
+					}
+					else
+						throw new Error("场景隐身状态引用必须是HiddingStateReference类型！");
+				}
 			}
 		}
 		
@@ -59,22 +59,22 @@ package com.rpgGame.app.state.role.control
 			render.castsShadows = true;
 			switch(render.type)
 			{
-				/*case RenderUnitType.WEAPON_EFFECT:
+				case RenderUnitType.WEAPON_EFFECT:
 				case RenderUnitType.DEPUTY_WEAPON_EFFECT:
 					render.blendMode = BlendMode.NORMAL;
 					render.visible = true;
 					render.alpha = 1;
-					break;*/
+					break;
 				case RenderUnitType.BODY:
-					/*if(render.compositeMesh)
+					if(render.compositeMesh)
 					{
 						render.compositeMesh.layerType = layerType;
-					}*/
-					render.isHiding=false;
+					}
+//					render.isHiding=false;
 					render.visible = true;
 					break;
 				default:
-					render.isHiding=false;
+//					render.isHiding=false;
 					render.visible = true;
 					break;
 			}
