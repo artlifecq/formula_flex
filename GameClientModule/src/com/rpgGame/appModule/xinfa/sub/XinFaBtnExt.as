@@ -22,7 +22,7 @@ package com.rpgGame.appModule.xinfa.sub
 			super(_skin);
 			_skin.icon.styleName="ui/app/beibao/xinfa/icon/"+config.q_id+".png";
 			_skin.uiName.styleName="ui/app/beibao/xinfa/mingzi1/"+config.q_id+".png";
-			_hitArea=null;
+			//_hitArea=null;
 		}
 		
 		public function setData(level:int):void

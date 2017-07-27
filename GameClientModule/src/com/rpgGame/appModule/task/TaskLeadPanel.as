@@ -117,6 +117,10 @@ package com.rpgGame.appModule.task
 		}
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void 
 		{
+			if(!TaskMissionManager.haveMainTask)
+			{
+				return;
+			}
 			super.show(data, openTable, parentContiner);
 			if(!initKey)
 			{

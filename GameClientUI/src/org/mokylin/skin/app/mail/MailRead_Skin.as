@@ -69,96 +69,6 @@ package org.mokylin.skin.app.mail
 			return temp;
 		}
 
-		private function __MailRead_Skin_UIAsset10_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __MailRead_Skin_UIAsset11_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 58;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __MailRead_Skin_UIAsset12_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 118;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __MailRead_Skin_UIAsset13_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 176;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __MailRead_Skin_UIAsset14_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 234;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __MailRead_Skin_UIAsset15_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 293;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __MailRead_Skin_UIAsset16_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 0;
-			temp.y = 52;
-			return temp;
-		}
-
-		private function __MailRead_Skin_UIAsset17_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 58;
-			temp.y = 52;
-			return temp;
-		}
-
-		private function __MailRead_Skin_UIAsset18_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 118;
-			temp.y = 52;
-			return temp;
-		}
-
-		private function __MailRead_Skin_UIAsset19_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 176;
-			temp.y = 52;
-			return temp;
-		}
-
 		private function __MailRead_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -167,24 +77,6 @@ package org.mokylin.skin.app.mail
 			temp.width = 404;
 			temp.x = 18;
 			temp.y = 82;
-			return temp;
-		}
-
-		private function __MailRead_Skin_UIAsset20_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 234;
-			temp.y = 52;
-			return temp;
-		}
-
-		private function __MailRead_Skin_UIAsset21_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 293;
-			temp.y = 52;
 			return temp;
 		}
 
@@ -312,7 +204,7 @@ package org.mokylin.skin.app.mail
 			temp.name = "fujianList";
 			temp.x = 48;
 			temp.y = 404;
-			temp.elementsContent = [__MailRead_Skin_UIAsset10_i(),__MailRead_Skin_UIAsset11_i(),__MailRead_Skin_UIAsset12_i(),__MailRead_Skin_UIAsset13_i(),__MailRead_Skin_UIAsset14_i(),__MailRead_Skin_UIAsset15_i(),__MailRead_Skin_UIAsset16_i(),__MailRead_Skin_UIAsset17_i(),__MailRead_Skin_UIAsset18_i(),__MailRead_Skin_UIAsset19_i(),__MailRead_Skin_UIAsset20_i(),__MailRead_Skin_UIAsset21_i()];
+			temp.elementsContent = [];
 			return temp;
 		}
 

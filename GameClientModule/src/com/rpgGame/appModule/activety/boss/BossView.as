@@ -156,9 +156,9 @@ package com.rpgGame.appModule.activety.boss
 				if(actList[i].info&&actList[i].info.joinState!=ActivityJoinStateEnum.OVER){
 					if(actList[i].actCfg.q_activity_limit_level>MainRoleManager.actorInfo.totalStat.level){
 						actList[i].info.joinState=ActivityJoinStateEnum.UN_OPEN;//未开启
-					}else{
+					}/*else{
 						actList[i].info.joinState=ActivityJoinStateEnum.JOINING;//开启
-					}
+					}*/
 					_skin.ListItem.dataProvider.updateItemAt(i);
 				}
 			}

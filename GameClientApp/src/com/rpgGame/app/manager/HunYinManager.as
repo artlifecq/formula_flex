@@ -178,7 +178,15 @@ package com.rpgGame.app.manager
 			if(msg.result==1)
 			{
 				_marriageInfo.intimacyValue=msg.intimacyValue;
-				_marriageInfo.interactionInfos.push(msg.interactionInfo);
+				var length:int = _marriageInfo.interactionInfos.length;
+				for(var i:int = 0;i<length;i++)
+				{
+					if(_marriageInfo.interactionInfos[i].type == msg.interactionInfo.type)
+					{
+						_marriageInfo.interactionInfos[i].subNumber = msg.interactionInfo.subNumber;
+						break;
+					}
+				}
 				EventManager.dispatchEvent(HunYinEvent.HUNYIN_HUDONG,msg);
 			}
 		}

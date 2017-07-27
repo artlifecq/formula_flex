@@ -2,10 +2,11 @@ package com.rpgGame.app.manager.goods
 {
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.ItemSender;
-	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.coreData.cfg.item.EquipStrengthCfg;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
+	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
 	
@@ -25,6 +26,41 @@ package com.rpgGame.app.manager.goods
 		{
 		}
 
+		/**
+		 *能否全部放入背包 
+		 * @param id
+		 * @param num
+		 * @return 
+		 * 
+		 */
+		public static function isCanPushPack(id:int,num:int):Boolean
+		{
+			var qItem:Q_item=ItemConfig.getQItemByID(id);
+			var result:Boolean;
+			var hold:int=BackPackManager.instance.getBagItemsCountById(id);
+			var useGridNum:int;
+			var leftNum:int;
+			var leftGridNum:int=BackPackManager.instance.getEmptyGridNum();
+			if(qItem.q_max>1){//可堆叠
+				if(hold!=0){
+					if(hold+num<qItem.q_max){
+						result=true;
+					}else{
+						leftNum=num-(qItem.q_max-hold);
+						useGridNum=Math.ceil(leftNum/qItem.q_max);
+						result=useGridNum<=leftGridNum;
+					}
+				}else{
+					leftNum=num;
+					useGridNum=Math.ceil(leftNum/qItem.q_max);
+					result=useGridNum<=leftGridNum;
+				}
+			}else{
+				result=useGridNum<=num;
+			}
+			return result;
+		}
+		
 		/**
 		 *获取背包和装备 
 		 * @param complete

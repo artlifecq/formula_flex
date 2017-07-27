@@ -20,6 +20,7 @@ package com.rpgGame.app.manager.task
 	public class TaskMissionManager
 	{
 		public static var flyTaskType:int;
+		public static var flyMissionType:int;
 		
 		/**最后完成主线任务id*/
 		private static var _taskModelId: int;
@@ -36,9 +37,15 @@ package com.rpgGame.app.manager.task
 		/**当前环式任务服务器信息*/
 		private static var _treasuerTaskInfo : TaskInfo;
 		private static var _treasuerTaskData : Q_mission_base;
+		/**当前引导任务信息*/
+		private static var _guideTaskInfo : Vector.<TaskInfo>;
+		
+		
 		
 		private static var _otherTaskInfoList :Dictionary=new Dictionary();
 		private static var _otherTaskDataList : Dictionary = new Dictionary();
+		public static var noMainTaskId:int=0;
+		
 		
 		/**当前环式任务客户端信息*/
 		public static function get treasuerTaskData():Q_mission_base
@@ -120,6 +127,10 @@ package com.rpgGame.app.manager.task
 					setTreasuerTaskInfo(task,taskData);
 					
 					//currentMainTaskInfo(task);
+				}
+				else if(taskData.q_mission_mainType==TaskType.MAINTYPE_GUIDETASK)
+				{
+					setGuideTaskInfo(task,taskData);
 				}
 				else
 				{
@@ -280,13 +291,12 @@ package com.rpgGame.app.manager.task
 				{
 					var path:String=taskdata.q_finish_information_str;
 					var pathArr:Array
-					var pashArr:Array=path.split(";");
+					var pashArr:Array=JSONUtil.decode(path);
 					for(j=0;j<pashArr.length;j++)
 					{
-						if(pashArr[j]!=null&&pashArr[j]!="")
+						if(pashArr[j]!=null&&pashArr[j]!=null)
 						{
-							path=pashArr[j];
-							pathArr=path.split(",");
+							pathArr=pashArr[j];
 							if(pathArr.length==2&&int(pathArr[0])==id)
 							{
 								return true;
@@ -329,7 +339,7 @@ package com.rpgGame.app.manager.task
 					return true;
 				}
 				var information:String=mainTaskData.q_finish_information_str;
-				var informationList:Array=information.split(";");
+				var informationList:Array=JSONUtil.decode(information);
 				if(informationList.length>num)
 				{
 					return getTaskOneIsFinish(informationList[num],mainTaskInfo.taskSubRateInfolist[num]);
@@ -346,7 +356,7 @@ package com.rpgGame.app.manager.task
 			if(mainTaskData!=null&&mainTaskInfo!=null)
 			{
 				var information:String=mainTaskData.q_finish_information_str;
-				var informationList:Array=information.split(";");
+				var informationList:Array=JSONUtil.decode(information);
 				return informationList.length;
 				
 			}
@@ -420,15 +430,13 @@ package com.rpgGame.app.manager.task
 			var j:int;
 			if(mainTaskData!=null)
 			{
-				var path:String=mainTaskData.q_finish_information_str;
 				var pathArr:Array
-				var pashArr:Array=path.split(";");
+				var pashArr:Array=JSONUtil.decode(mainTaskData.q_finish_information_str);
 				for(j=0;j<pashArr.length;j++)
 				{
 					if(pashArr[j]!=null&&pashArr[j]!="")
 					{
-						path=pashArr[j];
-						pathArr=path.split(",");
+						pathArr=pashArr[j];
 						if(pathArr.length==2&&int(pathArr[0])==mid)
 						{
 							return true;
@@ -518,10 +526,10 @@ package com.rpgGame.app.manager.task
 					
 					var i:int,length:int;
 					var information:String=data.q_finish_information_str;
-					var informationList:Array=information.split(";");
+					var informationList:Array=JSONUtil.decode(information);
 					for(i=0;i<informationList.length;i++)
 					{
-						if(informationList[i]!=null&&informationList[i]!="")
+						if(informationList[i]!=null&&informationList[i]!=null)
 						{
 							if(!getTaskOneIsFinish(informationList[i],info.taskSubRateInfolist[i]))
 							{
@@ -541,15 +549,15 @@ package com.rpgGame.app.manager.task
 		
 		
 		/**判断任务单个条件是否完成*/
-		public static function getTaskOneIsFinish(info:String,sub:TaskSubRateInfo):Boolean
+		public static function getTaskOneIsFinish(info:Array,sub:TaskSubRateInfo):Boolean
 		{
-			if(info!="")
+			if(info!=null&&info.length>0)
 			{
 				var i:int;
 				var text:String="";
 				var modeid:int=0;
 				var count:int=0,finish:int;
-				var modeArr:Array=info.split(",");
+				var modeArr:Array=info;
 				if(modeArr.length==2)
 				{
 					modeid=int(modeArr[0]);
@@ -598,6 +606,26 @@ package com.rpgGame.app.manager.task
 
 			_treasuerTaskInfo=value;
 			_treasuerTaskData=taskData;
+		}
+		
+		
+		/**设置引导任务信息*/
+		public static function setGuideTaskInfo(value : TaskInfo,taskData:Q_mission_base) : void
+		{
+			if(!_guideTaskInfo)
+			{
+				_guideTaskInfo=new Vector.<TaskInfo>(); 
+			}
+			for(var i:int=0;i<_guideTaskInfo.length;i++)
+			{
+				if(_guideTaskInfo[i].taskModelId==value.taskModelId)
+				{
+					_guideTaskInfo[i]=value;
+					return;
+				}
+			}
+			_guideTaskInfo.push(value);
+			
 		}
 		
 		/**设置其它任务类型 任务信息*/
@@ -792,6 +820,7 @@ package com.rpgGame.app.manager.task
 			{
 				//currentMainTaskIsfinish=false;
 			}
+			noMainTaskId=0;
 			_mainTaskInfo = value;
 			_mainTaskData=taskData;
 		}
@@ -874,7 +903,7 @@ package com.rpgGame.app.manager.task
 					return true;
 				}
 				var information:String=taskData.q_finish_information_str;
-				var informationList:Array=information.split(";");
+				var informationList:Array=JSONUtil.decode(information);
 				if(informationList.length>num&&taskInfo.taskSubRateInfolist.length>num)
 				{
 					return getTaskOneIsFinish(informationList[num],taskInfo.taskSubRateInfolist[num]);
@@ -921,9 +950,31 @@ package com.rpgGame.app.manager.task
 			}
 		}
 
+		/**判定是否是任务怪*/
+		public static function isTaskMonster(mid:int,type:int):Boolean
+		{
+			var task:TaskInfo=TaskMissionManager.getTaskInfoByType(type);
+			if(task)
+			{
+				for(var i:int=0;i<task.taskSubRateInfolist.length;i++)
+				{
+					if(task.taskSubRateInfolist[i].modelId==mid)
+					{
+						return true;
+					}
+				}
+			}
+			
+			return false;
+		}
 		
 		
-		
+		/**返回额外任务信息*/
+		public static function getGuideTaskInfo():Vector.<TaskInfo>
+		{
+			return _guideTaskInfo;
+			//_otherTaskDataList[taskData.q_mission_mainType] = taskData;
+		}
 		/**返回额外任务信息*/
 		public static function getOtherTaskInfo(type:int):TaskInfo
 		{

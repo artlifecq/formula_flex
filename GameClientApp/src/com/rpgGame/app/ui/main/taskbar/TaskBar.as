@@ -24,6 +24,7 @@ package com.rpgGame.app.ui.main.taskbar
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.type.TaskType;
+	import com.rpgGame.netData.task.bean.NoMainTaskInfo;
 	
 	import gs.TweenMax;
 	
@@ -54,15 +55,17 @@ package com.rpgGame.app.ui.main.taskbar
 			CONFIG::netDebug {
 				NetDebug.LOG("[MainUI] [onTouchTarget]:" + target.name);
 			}
-				switch (target) {
-					case this._skin.btn_open:
-						// 打开
-						setState(true);
-						break;
-					case this._skin.btn_close:
-						// 关闭
-						setState(false);
-						break;
+			var name:String=target.name;
+			var nameArr:Array=name.split("AA");
+			if(nameArr[0]==TaskType.MAINTYPE_GUIDETASK)//引导任务先特殊处理
+			{
+				TaskControl.guideBut(int(nameArr[1]));
+			}
+			else
+			{
+				switch (target) 
+				{
+					
 					case Renwu_Item(_skin.pri_killbut_1.skin).labelDisplay:
 						TaskControl.killWalkBut(1,0,1);
 						break;
@@ -136,19 +139,27 @@ package com.rpgGame.app.ui.main.taskbar
 					case Renwu_Item(_skin.sec_killbut3_3.skin).btn_send:
 						TaskControl.killWalkBut(3,2,2);
 						break;
-					
+					case this._skin.btn_open:
+						// 打开
+						setState(true);
+						break;
+					case this._skin.btn_close:
+						// 关闭
+						setState(false);
+						break;
 					case _skin.sec_subbut1:
 						receiveRewordBut(1);
 						break;
-					case _skin.sec_subbut2:
-						receiveRewordBut(2);
-						break;
+					/*case _skin.sec_subbut2:
+					receiveRewordBut(2);
+					break;*/
 					case _skin.btnContinue:
 						TaskControl.killWalkBut(1,0,1);
 						break;
 					
 					
 				}
+			}
 		}
 		override protected function onShow() : void
 		{
@@ -177,12 +188,14 @@ package com.rpgGame.app.ui.main.taskbar
 			EventManager.addEvent(TaskEvent.TASK_FINISH_MATION,finishMation);
 			EventManager.addEvent(TaskEvent.TASK_NEW_MATION,newMation);
 			EventManager.addEvent(TaskEvent.TASK_CHANGE_MATION,changeMation);
+			EventManager.addEvent(TaskEvent.TASK_NO_MAIN,noMainTask);
+			
 			
 			EventManager.addEvent(TaskEvent.TASK_CLICK_NPC,taskNpc);
 			EventManager.addEvent(UserMoveEvent.MOVE_THROUGH, moveReschange);
 			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE,flyComplete);
 			EventManager.addEvent(MainPlayerEvent.PLAYER_DIE,playerDie);
-			
+			EventManager.addEvent(MainPlayerEvent.LEVEL_CHANGE,levelChange);
 			
 		}
 		private function removeEvent():void
@@ -191,11 +204,12 @@ package com.rpgGame.app.ui.main.taskbar
 			EventManager.removeEvent(TaskEvent.TASK_FINISH_MATION,finishMation);
 			EventManager.removeEvent(TaskEvent.TASK_NEW_MATION,newMation);
 			EventManager.removeEvent(TaskEvent.TASK_CHANGE_MATION,changeMation);
-
+			EventManager.removeEvent(TaskEvent.TASK_NO_MAIN,noMainTask);
 			EventManager.removeEvent(TaskEvent.TASK_CLICK_NPC,taskNpc);
 			EventManager.removeEvent(UserMoveEvent.MOVE_THROUGH, moveReschange);
 			EventManager.removeEvent(MapEvent.MAP_SWITCH_COMPLETE,flyComplete);
 			EventManager.removeEvent(MainPlayerEvent.PLAYER_DIE,playerDie);
+			EventManager.removeEvent(MainPlayerEvent.LEVEL_CHANGE,levelChange);
 		}
 		private var panlIsopen:Boolean=false;
 		/**玩家移动*/
@@ -292,6 +306,19 @@ package com.rpgGame.app.ui.main.taskbar
 					TaskAutoManager.getInstance().stopAll();
 				}
 			}
+			else if(type==TaskType.MAINTYPE_TREASUREBOX)
+			{
+				if(TaskMissionManager.haveTreasuerTask)
+				{
+					TaskAutoManager.getInstance().startOtherTaskAuto(TaskType.MAINTYPE_TREASUREBOX)
+				}
+				else
+				{
+					TaskAutoManager.getInstance().stopAll();
+				}
+			}
+				
+			
 			
 			setViewShow();
 			leadCont.leadTaskView();
@@ -331,6 +358,21 @@ package com.rpgGame.app.ui.main.taskbar
 			}
 			
 		}
+		/**任务卡级*/
+		private function noMainTask(taskId: int,noInfo: Vector.<NoMainTaskInfo>):void
+		{
+			leadCont.show(false);
+			loopCont.show(true);
+			loopCont.setKajibutView(taskId,noInfo);
+		}
+		/**任务时等级变化*/
+		private function levelChange():void
+		{
+			loopCont.setKajiGoter();
+		}
+		
+		
+		
 		/**飞鞋完成*/
 		public static function flyComplete():void
 		{

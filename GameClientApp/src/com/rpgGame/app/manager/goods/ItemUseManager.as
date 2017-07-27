@@ -11,6 +11,7 @@ package com.rpgGame.app.manager.goods
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.configEnum.EnumHintInfo;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
+	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ComboItemInfo;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
@@ -310,7 +311,7 @@ package com.rpgGame.app.manager.goods
 				{
 					var info:ComboItemInfo=new ComboItemInfo();
 					info.sourceId=item.cfgId;
-					AppManager.showAppNoHide(AppConstant.EQUIP_PANL,{tab:4,data:info});
+					AppManager.showAppNoHide(AppConstant.EQUIP_PANL,info,EmFunctionID.EM_HECHENG);
 					return;
 				}
 				case GoodsType.CHAT:

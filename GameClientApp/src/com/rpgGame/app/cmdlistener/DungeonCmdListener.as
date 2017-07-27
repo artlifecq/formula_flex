@@ -225,7 +225,7 @@ package com.rpgGame.app.cmdlistener
 			DungeonManager.panelInfos=msg.panelInfos;
 		}
 		private function onSCMultiZonePanelSingleInfoMessage(msg:SCMultiZonePanelSingleInfoMessage):void
-		{
+		{Lyt.a("多人副本："+msg.zoneId+":"+msg.count+":"+msg.rewardCount);
 			DungeonManager.challengeCount=msg.challengeCount;
 			DungeonManager.setPanelInfos(msg.zoneId,msg.count,msg.rewardCount);
 			
