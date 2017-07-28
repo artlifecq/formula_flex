@@ -257,7 +257,7 @@ package com.rpgGame.app.cmdlistener.scene
 						var mdata:MonsterData=attacker.data as MonsterData;
 						if(mdata!=null&&mdata.monsterData.q_monster_type>=1&&mdata.monsterData.q_monster_type<=3)
 						{
-							TrusteeshipManager.getInstance().killActor();
+							TrusteeshipManager.getInstance().killActor(attacker);
 						}
                     }
                 }

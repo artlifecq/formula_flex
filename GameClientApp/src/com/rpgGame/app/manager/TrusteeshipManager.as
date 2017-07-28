@@ -98,7 +98,7 @@ package com.rpgGame.app.manager
 		
 		private var _isFightSelect:Boolean=false;
 		/**玩家被攻击*/
-		public function killActor() : void
+		public function killActor(role:SceneRole) : void
 		{
 			if(!isAutoFightRunning&&!isFightTargetRunning&&!isFightActorRunning)
 			{
@@ -118,8 +118,10 @@ package com.rpgGame.app.manager
 					_isFightSelect=false;
 				}
 			}
-			
-			
+			if(isFightActorRunning||_isFightSelect)
+			{
+				setRoleList(role);
+			}
 		}
 		/**被动防御*/
 		private function actorFight() : void
@@ -129,7 +131,7 @@ package com.rpgGame.app.manager
 			if(!isAutoFightRunning&&!MainRoleManager.actor.stateMachine.isRunning&&!_isLeftDown)
 			{
 				_isFightActorRunning=true;
-				startFightTarget();
+				startFightTarget(_targetRoles);
 			}
 			
 		}
@@ -297,8 +299,11 @@ package com.rpgGame.app.manager
 			var isCompleted : Boolean = true;
 			for each (var role : SceneRole in _targetRoles)
 			{
-				if (role.usable && role.isInViewDistance && !role.stateMachine.isDeadState)
+				if (role.usable && !role.stateMachine.isDeadState)
+				{
 					isCompleted = false;
+					break;
+				}
 			}
 			if (isCompleted)
 			{
@@ -314,11 +319,15 @@ package com.rpgGame.app.manager
 		
 		public function setRoleList(role:SceneRole):void
 		{
-			_targetRoles=new Vector.<SceneRole>();
-			if(_targetRoles!=null)
+			_targetRoles=_targetRoles?_targetRoles:new Vector.<SceneRole>();
+			for(var i:int=0;i<_targetRoles.length;i++)
 			{
-				_targetRoles.push(role);
+				if(_targetRoles[i].id==role.id)
+				{
+					return;
+				}
 			}
+			_targetRoles.push(role);
 		}
 		
 		private function onUpdate(force : Boolean = false) : void
@@ -378,9 +387,17 @@ package com.rpgGame.app.manager
 				
 			else if(_isFightActorRunning)
 			{
-				_stateMachine.transition(AIStateType.USE_ITEM, null, force);
-				_stateMachine.transition(AIStateType.FIND_ATTACKABLE, null, force);
-				_stateMachine.transition(AIStateType.ATTACK_TARGET, null, force);
+				if(getHasRole())
+				{
+					_stateMachine.transition(AIStateType.USE_ITEM, null, force);
+					_stateMachine.transition(AIStateType.FIND_ATTACKABLE, null, force);
+					_stateMachine.transition(AIStateType.ATTACK_TARGET, null, force);
+				}
+				else
+				{
+					stopFightTarget();
+				}
+				
 			}
 			else if(_isFightTargetRunning)
 			{

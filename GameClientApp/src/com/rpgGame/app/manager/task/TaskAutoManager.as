@@ -283,17 +283,21 @@ package com.rpgGame.app.manager.task
 			_taskTarget=0;
 			var i:int,length:int;
 			var taskData:Q_mission_base=TaskMissionManager.getTaskDataByType(otherType);
-			var information:String=taskData.q_finish_information_str;
-			var informationList:Array=JSONUtil.decode(information);
-			length=informationList.length;
-			for(i=0;i<length;i++)
+			if(taskData!=null)
 			{
-				if(TaskMissionManager.getTaskSubIsFinish(otherType,i))
+				var information:String=taskData.q_finish_information_str;
+				var informationList:Array=JSONUtil.decode(information);
+				length=informationList.length;
+				for(i=0;i<length;i++)
 				{
-					_taskTarget=i;
-					break;
+					if(TaskMissionManager.getTaskSubIsFinish(otherType,i))
+					{
+						_taskTarget=i;
+						break;
+					}
 				}
 			}
+			
 			
 		}
 		
