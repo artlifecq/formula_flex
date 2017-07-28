@@ -471,6 +471,7 @@ package com.rpgGame.app.scene.animator
 		
 		protected function onUpdateAnimation(...arg) : void
 		{
+			
 			if (_renderSet && _renderSet.usable)
 			{
 				var currTime : int = getTimer();

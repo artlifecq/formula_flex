@@ -96,7 +96,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.name = "icon";
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/app/beibao/xinfa/icon/longxiang.png";
+			temp.styleName = "ui/app/beibao/xinfa/icon/1.png";
 			temp.x = 8;
 			temp.y = -3;
 			return temp;
@@ -164,7 +164,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.name = "uiName";
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/app/beibao/xinfa/mingzi1/longxiang.png";
+			temp.styleName = "ui/app/beibao/xinfa/mingzi1/1.png";
 			temp.x = 72;
 			temp.y = 17;
 			return temp;
