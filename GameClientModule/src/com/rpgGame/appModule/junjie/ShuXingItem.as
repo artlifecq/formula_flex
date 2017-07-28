@@ -26,7 +26,7 @@ package com.rpgGame.appModule.junjie
 			_lv=lv;
 			_type=type;
 			_value=value;
-			_skin.lbName.text=CharAttributeType.getCNName(_type);
+			_skin.uiname.styleName=CharAttributeType.getAttrNameUrl(_type);
 			_skin.lbTotal.text=_value.toString();
 //			contrastAttr(_lv);
 		}

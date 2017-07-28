@@ -29,6 +29,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.FightsoulModeData;
+	import com.rpgGame.coreData.cfg.PetCfg;
 	import com.rpgGame.coreData.cfg.StallCfgData;
 	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
 	import com.rpgGame.coreData.cfg.country.CountryWarCfgData;
@@ -37,6 +38,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.clientConfig.AvatarResConfig;
 	import com.rpgGame.coreData.clientConfig.ClientSceneEffect;
 	import com.rpgGame.coreData.clientConfig.Q_fightsoul_mode;
+	import com.rpgGame.coreData.clientConfig.Q_girl_pet;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.clientConfig.Q_warflag;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
@@ -495,23 +497,15 @@ package com.rpgGame.app.manager.role
 			{
 				(role.headFace as HeadFace).addAndUpdateGuiShu();
 			}
-			//			role.headFace.showHead();
-			//data.avatarInfo.setBodyResID(data.avatarRes, null);
-			//			var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(data.avatarRes);
-			//			if (avatarResConfig)
-			//			{
-			//				data.avatarInfo.effectResID = avatarResConfig.idleEffect;
-			//			}
-			
-			//执行主换装更新
-			//			AvatarManager.updateAvatar(role);
+			var q_gril_pet:Q_girl_pet=PetCfg.getPet(data.modId);
+			role.updateBody(q_gril_pet ? q_gril_pet.q_panel_show_id : "", null);
 			role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true); //切换到“站立状态”
 			
 			role.setScale(data.sizeScale);
-			role.setGroundXY(data.x, data.y);
+			role.setGroundXY(data.x-1, data.y);
 			role.rotationY = data.direction;
 			SceneManager.addSceneObjToScene(role, true, false, false);
-			
+			EventManager.dispatchEvent(MapEvent.UPDATE_MAP_ROLE_ADD, role);
 		}
 		/**
 		 * 创建掉落物

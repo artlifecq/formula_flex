@@ -31,7 +31,6 @@ package com.rpgGame.appModule.pet
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.RoleStateType;
-	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.pet.bean.PetInfo;

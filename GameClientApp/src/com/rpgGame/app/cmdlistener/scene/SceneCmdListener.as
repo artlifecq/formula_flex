@@ -659,7 +659,6 @@ package com.rpgGame.app.cmdlistener.scene
 						}
 						break;
 					case SceneCharType.GIRL_PET:
-						return;
 						for(k=0;k<len;k++)
 						{
 							addGirlPet(addArr[j].bytesList[k]);

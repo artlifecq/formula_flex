@@ -284,7 +284,6 @@ package com.rpgGame.netData {
 			register(131103, SCMosterNumChangeMessage, SCMosterNumChangeHandler);
 			register(131104, SCJiFenChangeMessage, SCJiFenChangeHandler);
 			register(131105, SCMiBaoRewardInfoMessage, SCMiBaoRewardInfoHandler);
-//			register(131106, SCCloseActivityCountDownMessage, SCCloseActivityCountDownHandler);
 			register(137201, ResCardToClientMessage, ResCardToClientHandler);
 			register(141101, ResToplistToClientMessage, ResToplistToClientHandler);
 			register(141102, ResListLeaderToClientMessage, ResListLeaderToClientHandler);
