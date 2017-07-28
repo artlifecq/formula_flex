@@ -35,6 +35,7 @@ package com.rpgGame.app.display3D
 		private var touchZone:UIAsset;
 		private var _touchID:int=-1;
 		private var startX:Number;
+		private var defaultRotationY:int;
 		
 		/**
 		 * 
@@ -46,21 +47,12 @@ package com.rpgGame.app.display3D
 			super();
 			avatar3d=new InterObject3D();
 			this.addChild3D(avatar3d);
-			initForContainer(container);
-		}
-		
-		private function initForContainer(container:DisplayObjectContainer=null):void
-		{
-			if(container){
-				container.addChild(this);
-				this.x=container.width>>1;
-				this.y=container.height;
-				updateTouchZone();
-			}			
+			bindContainer(container);
 		}
 		
 		/**
 		 *绑定到对应的容器 
+		 * 默认和容器底部居中对齐
 		 * @param container
 		 * 
 		 */
@@ -90,6 +82,10 @@ package com.rpgGame.app.display3D
 		
 		private function onTouch(e : TouchEvent) : void
 		{
+			if(!this.touchable){
+				return;
+			}
+			
 			var touch : Touch;
 			if(_touchID!=-1){
 				touch = e.getTouch(touchZone,null,this._touchID);
@@ -98,10 +94,10 @@ package com.rpgGame.app.display3D
 				if (touch.phase == TouchPhase.MOVED)
 				{
 					var movex:Number=touch.globalX-startX;
-					avatar3d.rotationY = movex;
+					avatar3d.rotationY = avatar3d.rotationY+movex;
 				}else if (touch.phase == TouchPhase.ENDED)	{
 					this._touchID = -1;
-					avatar3d.rotationY = 0;
+					avatar3d.rotationY = defaultRotationY;
 				}
 			}else{
 				touch = e.getTouch(this.touchZone, TouchPhase.BEGAN);
@@ -137,6 +133,11 @@ package com.rpgGame.app.display3D
 			}
 		}
 		
+		/**
+		 *配置数据 
+		 * @param data
+		 * 
+		 */
 		public function setRoleData(data : RoleData) : void
 		{
 			if (this.role == null)
@@ -156,12 +157,22 @@ package com.rpgGame.app.display3D
 			avatar3d.setRenderUnit(role);
 		}
 		
+		/**
+		 *转换动作 
+		 * @param actionType
+		 * 
+		 */
 		public function transition(actionType : int) : void
 		{
 			if (role != null)
 				role.stateMachine.transition(actionType); //切换到“站立状态”
 		}
 		
+		/**
+		 *设置可见性 
+		 * @param value
+		 * 
+		 */
 		override public function set visible(value : Boolean) : void
 		{
 			super.visible = value;
@@ -186,11 +197,33 @@ package com.rpgGame.app.display3D
 			super.dispose();
 		}
 		
+		/**
+		 *缩放 
+		 * @param num
+		 * 
+		 */
 		public function setScale(num:Number):void
 		{
 			role.setScale(num);
 		}
 		
+		/**
+		 *设置旋转
+		 * @param value
+		 * 
+		 */
+		public function setRotationY(value:int):void
+		{
+			defaultRotationY=value;
+			avatar3d.rotationY=defaultRotationY;
+		}
+		
+		/**
+		 *根据部位和信息更新
+		 * @param ID
+		 * @param data
+		 * 
+		 */
 		public function updateWithRenderUnitID(ID:int,data:AvatarInfo):void
 		{
 			role.updateWithRenderUnitID(ID,data);
