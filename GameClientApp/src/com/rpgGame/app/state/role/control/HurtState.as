@@ -95,6 +95,8 @@ package com.rpgGame.app.state.role.control
 				_effectTween = null;
 			}
 			var role : SceneRole = _machine.owner as SceneRole;
+			if(role.isAlpha)
+				return;
 			role.avatar.forEachRenderUnit(function(render : RenderUnit3D) : void
 			{
 				switch (render.type)

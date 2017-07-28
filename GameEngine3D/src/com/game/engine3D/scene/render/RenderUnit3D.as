@@ -3669,10 +3669,11 @@ package com.game.engine3D.scene.render
 				}
 				if(_isAlpha)
 				{
+					if(_alpha == 1)
+						_alpha = 0.3;
 					if(blendMode != BlendMode.LAYER)
 					{
 						blendMode = BlendMode.LAYER;
-						alpha = 0.3;
 					}
 				}
 				else
@@ -3680,7 +3681,6 @@ package com.game.engine3D.scene.render
 					if(blendMode != BlendMode.NORMAL)
 					{
 						blendMode = BlendMode.NORMAL;
-						alpha = 1;
 					}
 				}
 			}
