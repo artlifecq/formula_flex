@@ -9,6 +9,7 @@ package com.rpgGame.app.manager.fight
 	import com.rpgGame.app.fight.spell.SpellResultTweenUtil;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.LostSkillManager;
+	import com.rpgGame.app.manager.hint.FloatingText;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
@@ -49,6 +50,7 @@ package com.rpgGame.app.manager.fight
 	 */
 	public class FightFaceHelper
 	{
+		public static var useScene:Boolean=true;
 		public static var layer:FightFaceLayer=new FightFaceLayer();
 		public static function bindTarget(mainPlayer:ObjectContainer3D):void
 		{
@@ -755,6 +757,7 @@ package com.rpgGame.app.manager.fight
 		{
 			tweenFromNew(attacker,hurter,showContainer, $displayObject, $tweenFun,$onComplete);
 		}
+		
 		private static function tweenFromNew(attacker:SceneRole,hurter:SceneRole,$displayObjectContainer : *, attackFace : AttackFace,$tweenFun : Function = null,$onComplete : Function = null) : void
 		{
 			if (null == $displayObjectContainer)
@@ -762,10 +765,11 @@ package com.rpgGame.app.manager.fight
 				$onComplete(attackFace); // 动画就算不播放，也要调用完成函数
 				return;
 			}
+		
 			var start:Point;
 			var end:Point;
 			//走场景
-			if (SpellResultTweenUtil.TweenCirt==$tweenFun||SpellResultTweenUtil.TweenHurt==$tweenFun) 
+			if (useScene&&(SpellResultTweenUtil.TweenCirt==$tweenFun||SpellResultTweenUtil.TweenHurt==$tweenFun)) 
 			{
 				layer.addChild(attackFace);
 				if (null != $tweenFun)

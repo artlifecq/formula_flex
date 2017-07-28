@@ -3,6 +3,7 @@ package com.rpgGame.appModule.shop.backpackShop
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.appModule.common.touch.TouchCtrl;
 	import com.rpgGame.appModule.shop.ItemBuyPanelExt;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
@@ -25,6 +26,7 @@ package com.rpgGame.appModule.shop.backpackShop
 		private var _skin:ShangDian_Item;
 		private var _data:Object;
 		private var _grid:IconCDFace;
+		private var _touchCtrl:TouchCtrl;
 		public function BackPackShopItemExt(t:int)
 		{
 			this._type=t;
@@ -33,6 +35,20 @@ package com.rpgGame.appModule.shop.backpackShop
 			_grid=IconCDFace.create(IcoSizeEnum.ICON_42);
 			_skin.container.addChild(_grid);
 			_grid.bindBg(_skin.Icon);
+			_touchCtrl=new TouchCtrl(this,null,onOver,onOut);
+			_skin.uiOver.visible=false;
+		}
+		
+		private function onOut():void
+		{
+			// TODO Auto Generated method stub
+			_skin.uiOver.visible=false;
+		}
+		
+		private function onOver():void
+		{
+			// TODO Auto Generated method stub
+			_skin.uiOver.visible=true;
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -48,6 +64,7 @@ package com.rpgGame.appModule.shop.backpackShop
 			{
 				Mgr.shopMgr.rebuyItem(_data.item as ItemInfo);
 			}
+			_skin.uiOver.visible=false;
 		}
 		
 		public function setData(data:Object):void
@@ -94,6 +111,7 @@ package com.rpgGame.appModule.shop.backpackShop
 			// TODO Auto Generated method stub
 			_grid.clear();
 			this._data=null;
+			_skin.uiOver.visible=false;
 		}
 	}
 }

@@ -15,6 +15,8 @@ package org.mokylin.skin.app.beibao.jingmai
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var iconbg:feathers.controls.UIAsset;
+
 		public var imgBg:feathers.controls.UIAsset;
 
 		public var imgLine:feathers.controls.UIAsset;
@@ -48,7 +50,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			this.currentState = "normal";
 			this.height = 187;
 			this.width = 280;
-			this.elementsContent = [imgBg_i(),lb_name_i(),lb_jihuo_i(),lb_dengji_i(),imgLine2_i(),imgLine_i(),lb_shengming_i(),lb_Stone_i(),imgStone_i(),uiName1_i(),uiName2_i()];
+			this.elementsContent = [imgBg_i(),lb_name_i(),lb_jihuo_i(),lb_dengji_i(),imgLine2_i(),imgLine_i(),lb_shengming_i(),lb_Stone_i(),iconbg_i(),imgStone_i(),uiName1_i(),uiName2_i()];
 			
 			states = {
 			};
@@ -59,6 +61,17 @@ package org.mokylin.skin.app.beibao.jingmai
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
+		private function iconbg_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			iconbg = temp;
+			temp.name = "iconbg";
+			temp.styleName = "ui/common/grid/normal/bianshi_icon.png";
+			temp.x = 10;
+			temp.y = 145;
+			return temp;
+		}
+
 		private function imgBg_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -101,8 +114,8 @@ package org.mokylin.skin.app.beibao.jingmai
 			imgStone = temp;
 			temp.name = "imgStone";
 			temp.styleName = "ui/app/beibao/icons/bianshi/5/4.png";
-			temp.x = 11;
-			temp.y = 146;
+			temp.x = 12;
+			temp.y = 147;
 			return temp;
 		}
 

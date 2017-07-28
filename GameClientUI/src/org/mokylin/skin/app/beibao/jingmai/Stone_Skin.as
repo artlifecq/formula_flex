@@ -36,7 +36,7 @@ package org.mokylin.skin.app.beibao.jingmai
 			this.currentState = "normal";
 			this.height = 210;
 			this.width = 326;
-			this.elementsContent = [__Stone_Skin_SkinnableContainer1_i(),__Stone_Skin_UIAsset1_i(),lst_pack_i(),btnClose_i()];
+			this.elementsContent = [__Stone_Skin_SkinnableContainer1_i(),__Stone_Skin_UIAsset1_i(),lst_pack_i(),btnClose_i(),__Stone_Skin_UIAsset2_i()];
 			
 			states = {
 			};
@@ -75,6 +75,17 @@ package org.mokylin.skin.app.beibao.jingmai
 			temp.width = 312;
 			temp.x = 7;
 			temp.y = 34;
+			return temp;
+		}
+
+		private function __Stone_Skin_UIAsset2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.touchable = false;
+			temp.touchGroup = true;
+			temp.styleName = "ui/common/background/bianshiliebiao.png";
+			temp.x = 119;
+			temp.y = 7;
 			return temp;
 		}
 
