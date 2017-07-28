@@ -596,6 +596,12 @@ package com.rpgGame.app.manager.fight
 				val=hash.getValue(key);
 				typeRes=getAttributeUrl(key,val>0);
 				numberColor=val>0?ATTRIBUTE_USESFUL_NUM:ATTRIBUTE_HARMFUL_NUM;
+				var attackFace : AttackFace;
+				if(_showAttackFaceList.containsKey(typeRes))
+				{
+					attackFace = _showAttackFaceList.getValue(typeRes) as AttackFace;
+					attackFace.visible = false
+				}
 				showQueueAttackFaceNew(MainRoleManager.actor,null,MainRoleManager.actor.headFace, typeRes, numberColor, val,  null, null,SpellResultTweenUtil.TweenAttrChange)
 			}
 			
@@ -733,14 +739,13 @@ package com.rpgGame.app.manager.fight
 		{
 			if (showContainer == null)
 				return;
-			var attackFace : AttackFace;
-			if(_showAttackFaceList.containsKey(typeRes))
+			/*if(_showAttackFaceList.containsKey(typeRes))
 			{
 				attackFace = _showAttackFaceList.getValue(typeRes) as AttackFace;
 				attackFace.visible = false
-			}
+			}*/
 			
-			attackFace= AttackFace.createAttackFace(typeRes, numberRes, $attackValue, $specialType, $specialPos,extendData);
+			var attackFace : AttackFace= AttackFace.createAttackFace(typeRes, numberRes, $attackValue, $specialType, $specialPos,extendData);
 			attackFace.touchAcross = true;
 			attackFace.touchable = false;
 			attackFace.touchGroup = false;

@@ -87,6 +87,11 @@
 		 */
 		public static const TYPE_MOUNT:int = rEnum.next;
 		
+		/**
+		 * 美人(侍宠)
+		 */
+		public static const TYPE_MEIREN:int = rEnum.next;
+		
 		public function RoleType()
 		{
 		}

@@ -318,7 +318,6 @@ package com.rpgGame.coreData.type
 			attrRes[23]="mz";
 			attrRes[24]="sb";
 			attrRes[26]="gjsd";
-
 		}
 		
 		setup();

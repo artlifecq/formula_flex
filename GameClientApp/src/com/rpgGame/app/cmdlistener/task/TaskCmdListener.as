@@ -106,7 +106,7 @@ package com.rpgGame.app.cmdlistener.task
 		}
 		/**任务卡级消息	*/
 		private function onSCNoMainTaskMessage(msg:SCNoMainTaskMessage):void
-		{
+		{Lyt.a("卡级消息来了")
 			if(msg!=null)
 			{
 				TaskMissionManager.noMainTaskId=msg.taskModelId;

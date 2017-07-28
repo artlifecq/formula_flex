@@ -240,6 +240,5 @@ package com.rpgGame.appModule.open
 				_button.runAnimation();
 			refeashView();
 		}
-		
 	}
 }

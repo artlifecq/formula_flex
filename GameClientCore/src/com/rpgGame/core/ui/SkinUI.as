@@ -41,9 +41,10 @@ package com.rpgGame.core.ui
 		
 		public function SkinUI(skin : StateSkin = null)
 		{
-			_stateSkin = skin;
-			if(skin != null)
+			if(skin){
+				_stateSkin = skin;
 				_stateSkin.toSprite(this);
+			}
 			_stage = Starling.current.nativeStage;
 			this.addEventListener(Event.ADDED_TO_STAGE, __onAddedToStage);
 			this.addEventListener(Event.REMOVED_FROM_STAGE, __onRemoveFromStage);
@@ -55,6 +56,17 @@ package com.rpgGame.core.ui
 			if (_stage != null)
 				onStageResize(_stage.stageWidth, _stage.stageHeight);
 		}
+		
+		override public function get height():Number
+		{
+			return _stateSkin?_stateSkin.height:super.height;
+		}
+		
+		override public function get width():Number
+		{
+			return _stateSkin?_stateSkin.width:super.width;
+		}
+		
 
 		private function __onAddedToStage(e : Event = null) : void
 		{
