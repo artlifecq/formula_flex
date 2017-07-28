@@ -199,14 +199,14 @@ package com.rpgGame.appModule.task
 		}
 		private function setReward():void
 		{
-			icoList1Group.setRewardByArray(TaskMissionCfgData.getRewordById(TaskMissionManager.treasuerTaskData.q_reword_id,MainRoleManager.actorInfo.job));
+			icoList1Group.setRewardByArray(TaskMissionCfgData.getRewordById(TaskMissionManager.treasuerTaskData.q_reword_id,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex));
 			icoList1Group.visible=true;
 		}
 		private function setkExtraReward():void
 		{
 			var reward:Object=TaskMissionManager.getTreasuerTaskExtraReward();
 			nav2Label.htmlText="今日完成<font color='#5DBD37'>"+reward.l+"</font>环后，额外奖励";
-			icoList2Group.setRewardByArray(TaskMissionCfgData.getRewordById(reward.r,MainRoleManager.actorInfo.job));
+			icoList2Group.setRewardByArray(TaskMissionCfgData.getRewordById(reward.r,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex));
 			icoList2Group.visible=true;
 		}
 		

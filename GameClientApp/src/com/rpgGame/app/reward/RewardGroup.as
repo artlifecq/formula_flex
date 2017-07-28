@@ -6,6 +6,7 @@ package  com.rpgGame.app.reward
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.backpack.bean.TempItemInfo;
 	
@@ -62,7 +63,7 @@ package  com.rpgGame.app.reward
 		
 		private var icons:Vector.<IconCDFace>=new Vector.<IconCDFace>();
 		
-		
+		private var max:int;
 		
 		private var initW:int;
 		private var initH:int;
@@ -77,9 +78,9 @@ package  com.rpgGame.app.reward
 		 * @param dx
 		 * @param dy
 		 * @param needTip
-		 * 
+		 * @param max 最大个数  0为最大    应策划需求加的 ---yt
 		 */		
-		public function RewardGroup(size:int,g:UIAsset,ali:int=ALIN_LEFT,cellNum:int=9,dx:int=2,dy:int=2,needTip:Boolean=true)
+		public function RewardGroup(size:int,g:UIAsset,ali:int=ALIN_LEFT,cellNum:int=9,dx:int=2,dy:int=2,needTip:Boolean=true,max:int=0)
 		{
 			super();
 			_iconSize=size;
@@ -90,6 +91,7 @@ package  com.rpgGame.app.reward
 			this.cellMaxNum=cellNum;
 			this.dX=dx;
 			this.dY=dy;
+			this.max=max>0?max:int.MAX_VALUE;
 			if (g.parent) 
 			{
 				this.x=g.x;
@@ -119,14 +121,13 @@ package  com.rpgGame.app.reward
 			{
 				return;
 			}
-			var len:int=items.length;
+			var len:int=items.length<max?items.length:max;
 			var rewards:Vector.<ClientItemInfo>=new Vector.<ClientItemInfo>();
 			var tmpi:ItemInfo;
 			for (var i:int = 0; i < len; i++) 
 			{
 				tmpi=items[i];
-				var tmp:ClientItemInfo=new ClientItemInfo(tmpi.itemModelId);
-				tmp.count=tmpi.num;
+				var tmp:ClientItemInfo=ItemUtil.convertClientItemInfoById(tmpi.itemModelId,tmpi.num,tmpi.isbind);//new ClientItemInfo(tmpi.itemModelId);
 				rewards.push(tmp);
 			}
 			
@@ -138,14 +139,13 @@ package  com.rpgGame.app.reward
 			{
 				return;
 			}
-			var len:int=temps.length;
+			var len:int=temps.length<max?temps.length:max;
 			var rewards:Vector.<ClientItemInfo>=new Vector.<ClientItemInfo>();
 			var tmpi:TempItemInfo;
 			for (var i:int = 0; i < len; i++) 
 			{
 				tmpi=temps[i];
-				var tmp:ClientItemInfo=new ClientItemInfo(tmpi.mod);
-				tmp.count=tmpi.num;
+				var tmp:ClientItemInfo=ItemUtil.convertClientItemInfoById(tmpi.mod,tmpi.num,tmpi.isbind);//new ClientItemInfo(tmpi.mod);
 				rewards.push(tmp);
 			}
 			
@@ -165,15 +165,15 @@ package  com.rpgGame.app.reward
 		{
 			if (arr&&arr.length) 
 			{
-				var len:int=arr.length;
+				var len:int=arr.length<max?arr.length:max;
 				var obj:Object;
 				var rewards:Vector.<ClientItemInfo>=new Vector.<ClientItemInfo>();
 				for (var i:int = 0; i < len; i++) 
 				{
 					obj=arr[i];
-					var tmp:ClientItemInfo=new ClientItemInfo(obj.mod);
-					tmp.count=obj.num;
-					
+					var num:int=obj.num?obj.num:0;
+					var bind:int=obj.bind?obj.bind:0;
+					var tmp:ClientItemInfo=ItemUtil.convertClientItemInfoById(obj.mod,num,bind);//new ClientItemInfo(obj.mod);	
 					rewards.push(tmp);
 				}
 				
@@ -255,7 +255,7 @@ package  com.rpgGame.app.reward
 		}
 		private function layoutR():void
 		{
-			var len:int=icons.length;
+			/*var len:int=icons.length;
 			var tmpX:int;
 			var tmpY:int;
 			var dis:DisplayObject;
@@ -268,11 +268,49 @@ package  com.rpgGame.app.reward
 				dis.x=tmpX;
 				dis.y=tmpY;
 				this.addChild(dis);
+			}*/
+			var len:int=icons.length;
+			var lex:int=0;
+			var lexth:int=0;
+			var tmp:int;
+			var starX:int;
+			var tmpX:int;
+			var tmpY:int;
+			var dis:DisplayObject;
+			for (var i:int = 0; i < len; i++) 
+			{
+				dis=icons[i];
+				lex=int(i/cellMaxNum);
+				lexth=len-lex*cellMaxNum;
+				tmp=Math.min(cellMaxNum,lexth);
+				starX=(1-tmp)*(initW+dX)-dX;
+				tmpX=(i%cellMaxNum)*(initW+dX)+starX;
+				tmpY=int(i/cellMaxNum)*(initH+dY);
+				dis.x=tmpX;
+				dis.y=tmpY;
+				this.addChild(dis);
 			}
+			
 		}
 		private function layoutC():void
 		{
-			var add:int=0;
+			var len:int=icons.length;
+			var tmp:int=Math.min(cellMaxNum,len);
+			var starX:int=((1-tmp)*(initW+dX)-dX)/2;
+			var tmpX:int;
+			var tmpY:int;
+			var dis:DisplayObject;
+			for (var i:int = 0; i < len; i++) 
+			{
+				dis=icons[i];
+				tmpX=(i%cellMaxNum)*(initW+dX)+starX;
+				tmpY=int(i/cellMaxNum)*(initH+dY);
+				dis.x=tmpX;
+				dis.y=tmpY;
+				this.addChild(dis);
+			}
+			
+			/*var add:int=0;
 			var len:int=icons.length;
 			var tmp:int=Math.min(cellMaxNum,len);
 			//偶数
@@ -306,8 +344,9 @@ package  com.rpgGame.app.reward
 				dis.y=tmpY;
 				mul*=-1;
 				last=tmpX;
+				
 				this.addChild(dis);
-			}
+			}*/
 		}
 		public function clear():void
 		{

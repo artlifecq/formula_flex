@@ -305,6 +305,7 @@ package com.rpgGame.app.ui.scene.dungeon
 					{
 						modeid=subList[i].modelId;
 						count=subList[i].num;
+						finish=subList[i].maxNum;
 					}
 					if(modeid!=0)
 					{

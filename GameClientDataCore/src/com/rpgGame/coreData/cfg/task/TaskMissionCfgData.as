@@ -137,8 +137,36 @@ package com.rpgGame.coreData.cfg.task
 			
 		}
 		/**根据任务ID获取奖励物品列表*/
-		public static function getRewordById(id : int,job:int) :Array 
+		public static function getRewordById(id : int,job:int,sex:int) :Array 
 		{
+			var reword:Q_mission_reword=getRewordByID(id);
+			if(reword!=null)
+			{
+				var rewordList:Array=new Array();
+				var reObj:Array=JSONUtil.decode(reword.q_reward);
+				for each(var obj:Object in reObj)
+				{
+					if(obj.jod==null&&obj.sex==null)
+					{
+						rewordList.push(obj);
+					}
+					else if(obj.jod!=null&&obj.sex==null&&obj.jod==job)
+					{
+						rewordList.push(obj)
+					}
+					else if(obj.jod==null&&obj.sex!=null&&obj.sex==sex)
+					{
+						rewordList.push(obj)
+					}
+					else if(obj.jod!=null&&obj.sex!=null&&obj.jod==job&&obj.sex==sex)
+					{
+						rewordList.push(obj)
+					}
+				}
+				
+				return rewordList;
+			}
+			return null;
 			/*var task:Q_mission_base=getTaskByID(id);
 			var reword:Q_mission_reword;
 			if(task!=null)
@@ -146,7 +174,7 @@ package com.rpgGame.coreData.cfg.task
 				reword=getRewordByID(task.q_reword_id);
 			}*/
 			
-			var reword:Q_mission_reword=getRewordByID(id);
+			/*var reword:Q_mission_reword=getRewordByID(id);
 			if(reword!=null)
 			{
 				var reObj:Array;
@@ -179,7 +207,7 @@ package com.rpgGame.coreData.cfg.task
 					}
 				}
 			}
-			return null;
+			return null;*/
 		}
 		
 		/**根据章节ID统计章节总数量*/
