@@ -28,6 +28,7 @@ package com.rpgGame.appModule.pet
 	import feathers.controls.UIAsset;
 	
 	import org.mokylin.skin.app.meiren.BtnTiaoZhan;
+	import org.mokylin.skin.app.meiren.BtnTiaoZhan2;
 	import org.mokylin.skin.app.meiren.MeiRenTiaoZhan;
 	
 	import starling.display.DisplayObject;
@@ -95,11 +96,13 @@ package com.rpgGame.appModule.pet
 			if(_msg.level==_q_girl_pet.q_need_zone)
 			{
 				_skin.btn_next.visible=false;
+				_skin.skinJihuo.visible=true;
 				TimerServer.addLoop(onExtTimer,1000);		
 			}
 			else
 			{
 				_skin.btn_next.visible=true;
+				_skin.skinJihuo.visible=false;
 				updateBtnShow(_msg.level);	
 				TimerServer.addLoop(onTimer,1000);
 			}
@@ -117,6 +120,9 @@ package com.rpgGame.appModule.pet
 			switch(target){
 				case (_skin.btn_next.skin as BtnTiaoZhan).btnBg:
 					toNextMessage();
+					break;
+				case (_skin.skinJihuo.skin as BtnTiaoZhan2).btnBg:
+					toOutTheZone();
 					break;
 			}			
 		}
@@ -138,6 +144,12 @@ package com.rpgGame.appModule.pet
 		private function toNextMessage():void
 		{
 			PetSender.reqEnterNextLevelMessage(_msg.zoneModelId);
+			this.hide();
+		}
+		
+		private function toOutTheZone():void
+		{
+			DungeonSender.zoneOutToGame();
 			this.hide();
 		}
 		
@@ -211,7 +223,7 @@ package com.rpgGame.appModule.pet
 			}
 			else{
 				TimerServer.remove(onExtTimer);
-				DungeonSender.zoneOutToGame();
+				toOutTheZone();
 			}
 		}
 		

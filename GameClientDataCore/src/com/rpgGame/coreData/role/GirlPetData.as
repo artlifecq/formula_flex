@@ -30,6 +30,11 @@ package com.rpgGame.coreData.role
 			this.avatarInfo.setBodyResID(q_pet.q_skinResID,null);
 		}
 		
+		public function get modId():int
+		{
+			return _modelId;
+		}
+		
 		public function get ownerName():String
 		{
 			return _ownerName;

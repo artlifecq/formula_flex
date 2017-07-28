@@ -70,7 +70,7 @@ package com.rpgGame.appModule.junjie
 			super(_skin);
 			_skin.roleCont.addChild(_avatarContainer);
 			_skin.roleCont.addChild(_chenhaoEftContaner);
-			_pointXArr=[72,53,40,36,38];
+			_pointXArr=[70,51,37,34,34];
 			initView();
 			initAvatar();
 			_skin.conTiaojian.x=_skin.conTiaojian.x-14;
@@ -89,7 +89,7 @@ package com.rpgGame.appModule.junjie
 			var shuxingItem:ShuXingItem;
 			var tiaojianItem:TiaoJianItem;
 			var initX:int=0;
-			var initY:int=106;
+			var initY:int=99;
 			for(var i:int=0;i<_maxShowNum;i++)
 			{
 				initX=parseInt(_pointXArr[(i)]);
@@ -97,17 +97,17 @@ package com.rpgGame.appModule.junjie
 				item.setInitPoint(initX,initY);
 				_junjieItemList.push(item);
 				_skin.container.addChild(item);
-				initY+=63;
+				initY+=62;
 				
 				shuxingItem=new ShuXingItem();
 				shuxingItem.x=0;
-				shuxingItem.y=i*(shuxingItem.height+2);
+				shuxingItem.y=i*(shuxingItem.height+4);
 				_shuxingItemList.push(shuxingItem);
 				_skin.contShuxing.addChild(shuxingItem);
 				
 				tiaojianItem=new TiaoJianItem();
-				tiaojianItem.x=0;
-				tiaojianItem.y=i*(tiaojianItem.height+2);
+				tiaojianItem.x=15;
+				tiaojianItem.y=i*(tiaojianItem.height+4);
 				_tiaojianItemList.push(tiaojianItem);
 				_skin.conTiaojian.addChild(tiaojianItem);
 			}	

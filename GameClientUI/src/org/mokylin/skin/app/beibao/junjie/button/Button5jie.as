@@ -48,11 +48,11 @@ package org.mokylin.skin.app.beibao.junjie.button
 					]
 			};
 			skinNames={"down":"ui/app/beibao/junjie/button/5jie/down.png",
-			"downAndSelected":"ui/app/beibao/junjie/button/5jie/select.png",
+			"downAndSelected":"ui/app/beibao/junjie/button/5jie/over.png",
 			"hover":"ui/app/beibao/junjie/button/5jie/over.png",
-			"overAndSelected":"ui/app/beibao/junjie/button/5jie/select.png",
+			"overAndSelected":"ui/app/beibao/junjie/button/5jie/over.png",
 			"up":"ui/app/beibao/junjie/button/5jie/up.png",
-			"upAndSelected":"ui/app/beibao/junjie/button/5jie/select.png"};
+			"upAndSelected":"ui/app/beibao/junjie/button/5jie/over.png"};
 		}
 
 
