@@ -29,6 +29,8 @@ package org.mokylin.skin.app.beibao.junjie
 			super();
 			
 			this.currentState = "normal";
+			this.height = 20;
+			this.width = 272;
 			this.elementsContent = [lbName_i(),lbNum_i(),lbWancheng_i()];
 			
 			states = {
@@ -46,7 +48,7 @@ package org.mokylin.skin.app.beibao.junjie
 			lbName = temp;
 			temp.name = "lbName";
 			temp.text = "绝学技能手动激活>>";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
 			temp.width = 150;
@@ -62,7 +64,7 @@ package org.mokylin.skin.app.beibao.junjie
 			temp.name = "lbNum";
 			temp.text = "54/54";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 67;
 			temp.x = 145;
@@ -76,7 +78,7 @@ package org.mokylin.skin.app.beibao.junjie
 			lbWancheng = temp;
 			temp.name = "lbWancheng";
 			temp.text = "已完成";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 52;
 			temp.x = 220;
