@@ -28,7 +28,7 @@ package com.rpgGame.appModule.jingmai.sub
 		}
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
-			super.onTouchTarget(target);
+			//super.onTouchTarget(target);
 			switch(target)
 			{
 				case _skin.lbFuben:
@@ -51,6 +51,7 @@ package com.rpgGame.appModule.jingmai.sub
 					break;
 				}
 			}
+			hide();
 		}
 	}
 }

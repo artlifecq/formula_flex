@@ -122,6 +122,10 @@ package com.rpgGame.app.cmdlistener.scene
 			if(failID==1014&&TrusteeshipManager.getInstance().isAuto)return;//---------------yt 客户端已经规避目标死亡还是出现，所有在挂机的时候不要这个提示
 				
 			NoticeManager.showNotify(failReason, failID);
+			if (MainRoleManager.actor.stateMachine.isPrewarWaiting)
+				MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_PREWAR,null,true);
+			else
+				MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE,null,true);
 		}
 		
 		/**

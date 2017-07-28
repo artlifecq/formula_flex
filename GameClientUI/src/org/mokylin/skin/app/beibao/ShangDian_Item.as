@@ -1,11 +1,9 @@
 package org.mokylin.skin.app.beibao
 {
 	import feathers.controls.text.Fontter;
-	import feathers.controls.Button;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.app.beibao.button.ItemBtnSkin;
 
 	/**
 	 * @private
@@ -19,13 +17,13 @@ package org.mokylin.skin.app.beibao
 		//==========================================================================
 		public var Icon:feathers.controls.UIAsset;
 
-		public var btnOver:feathers.controls.Button;
-
 		public var imgPrice:feathers.controls.UIAsset;
 
 		public var lbName:feathers.controls.Label;
 
 		public var lbNum:feathers.controls.Label;
+
+		public var uiOver:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -38,7 +36,7 @@ package org.mokylin.skin.app.beibao
 			this.currentState = "normal";
 			this.height = 59;
 			this.width = 162;
-			this.elementsContent = [__ShangDian_Item_UIAsset1_i(),btnOver_i(),Icon_i(),lbName_i(),imgPrice_i(),lbNum_i()];
+			this.elementsContent = [__ShangDian_Item_UIAsset1_i(),uiOver_i(),Icon_i(),lbName_i(),imgPrice_i(),lbNum_i()];
 			
 			states = {
 			};
@@ -66,19 +64,6 @@ package org.mokylin.skin.app.beibao
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/beibao/shangdian/dikuang.png";
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function btnOver_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btnOver = temp;
-			temp.name = "btnOver";
-			temp.height = 59;
-			temp.styleClass = org.mokylin.skin.app.beibao.button.ItemBtnSkin;
-			temp.width = 162;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -126,6 +111,19 @@ package org.mokylin.skin.app.beibao
 			temp.width = 73;
 			temp.x = 85;
 			temp.y = 34;
+			return temp;
+		}
+
+		private function uiOver_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiOver = temp;
+			temp.name = "uiOver";
+			temp.height = 59;
+			temp.styleName = "ui/common/hover/xuanzhong.png";
+			temp.width = 162;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 

@@ -368,42 +368,38 @@ package com.rpgGame.appModule.xinfa
 			{
 				_skin.btn_jihuo.visible=true;
 			}
-			else
-			{
-				
-				var qChe:Q_cheats=data.cheatsConfig;
-				
-				if (_curMap.cheatsVo.needItemHash.size()!=0) 
-				{
-					_skin.lbCailiao.visible=true;
-					//var str:String="收集@可激活心法";
-					var str:String=NotifyCfgData.getNotifyTextByID(61004);
-					var arr:Array=_curMap.cheatsVo.needItemHash.keys();
-					if (arr&&arr.length>0) 
-					{
-						var len:int=arr.length;
-						var itemMid:int;
-						var itemNum:int;
-						var backNum:int=0;
-						var strArr:Array=[];
-						for (var i:int = 0; i < len; i++) 
-						{
-							var color:uint=GameColorUtil.COLOR_GREEN;
-							itemMid=arr[i];
-							itemNum=_curMap.cheatsVo.needItemHash.getValue(itemMid);
-							backNum=BackPackManager.instance.getItemCount(itemMid);
-							if (itemNum>backNum)
-							{
-								color=GameColorUtil.COLOR_RED;
-							}
-							strArr.push(HtmlTextUtil.getTextColor(color,backNum+"/"+itemNum)+NotifyCfgData.getNotifyTextByID(61005)+ItemConfig.getItemNameWithQualityColor(itemMid));
-						}
-					}
-					str=str.replace("@",strArr.join("、"));
-					_skin.lbCailiao.htmlText=str;
-				}
-			}
+		
+			var qChe:Q_cheats=data.cheatsConfig;
 			
+			if (_curMap.cheatsVo.needItemHash.size()!=0) 
+			{
+				_skin.lbCailiao.visible=true;
+				//var str:String="收集@可激活心法";
+				var str:String=NotifyCfgData.getNotifyTextByID(61004);
+				var arr:Array=_curMap.cheatsVo.needItemHash.keys();
+				if (arr&&arr.length>0) 
+				{
+					var len:int=arr.length;
+					var itemMid:int;
+					var itemNum:int;
+					var backNum:int=0;
+					var strArr:Array=[];
+					for (var i:int = 0; i < len; i++) 
+					{
+						var color:uint=GameColorUtil.COLOR_GREEN;
+						itemMid=arr[i];
+						itemNum=_curMap.cheatsVo.needItemHash.getValue(itemMid);
+						backNum=BackPackManager.instance.getItemCount(itemMid);
+						if (itemNum>backNum)
+						{
+							color=GameColorUtil.COLOR_RED;
+						}
+						strArr.push(HtmlTextUtil.getTextColor(color,backNum+"/"+itemNum)+NotifyCfgData.getNotifyTextByID(61005)+ItemConfig.getItemNameWithQualityColor(itemMid));
+					}
+				}
+				str=str.replace("@",strArr.join("、"));
+				_skin.lbCailiao.htmlText=str;
+			}	
 		}
 		private function checkReward(id:int):Boolean
 		{

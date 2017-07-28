@@ -159,10 +159,12 @@ package com.rpgGame.appModule.battle.dfdj
 				if (data.drawAward==1) 
 				{
 					TouchableUtil.gray(_skin.btnJiangli);
+					_skin.btnJiangli.label="已领取";
 				}
 				else 
 				{
 					TouchableUtil.ungray(_skin.btnJiangli);
+					_skin.btnJiangli.label="领取奖励";
 				}
 			}
 			
