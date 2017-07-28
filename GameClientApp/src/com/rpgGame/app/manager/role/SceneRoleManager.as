@@ -274,7 +274,7 @@ package com.rpgGame.app.manager.role
 			}
 			else
 			{
-				SceneManager.addSceneObjToScene(role, true, true, true);
+				SceneManager.addSceneObjToScene(role, true, false, true);
 			}
 			MainRoleSearchPathManager.trySetSearchRoleData(data);
 			if (charType == SceneCharType.NPC)

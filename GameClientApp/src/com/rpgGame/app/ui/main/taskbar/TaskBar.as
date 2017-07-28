@@ -55,110 +55,110 @@ package com.rpgGame.app.ui.main.taskbar
 			CONFIG::netDebug {
 				NetDebug.LOG("[MainUI] [onTouchTarget]:" + target.name);
 			}
-			var name:String=target.name;
-			var nameArr:Array=name.split("AA");
-			if(nameArr[0]==TaskType.MAINTYPE_GUIDETASK)//引导任务先特殊处理
+			if(target.name!=null)
 			{
-				TaskControl.guideBut(int(nameArr[1]));
-			}
-			else
-			{
-				switch (target) 
+				var nameArr:Array=target.name.split("AA");
+				if(nameArr[0]==TaskType.MAINTYPE_GUIDETASK)//引导任务先特殊处理
 				{
-					
-					case Renwu_Item(_skin.pri_killbut_1.skin).labelDisplay:
-						TaskControl.killWalkBut(1,0,1);
-						break;
-					case Renwu_Item(_skin.pri_killbut_2.skin).labelDisplay:
-						TaskControl.killWalkBut(1,1,1);
-						break;
-					case Renwu_Item(_skin.pri_killbut_3.skin).labelDisplay:
-						TaskControl.killWalkBut(1,2,1);
-						break;
-					case Renwu_Item(_skin.sec_killbut1_1.skin).labelDisplay:
-						TaskControl.killWalkBut(1,0,1);
-						break;
-					case Renwu_Item(_skin.sec_killbut1_2.skin).labelDisplay:
-						TaskControl.killWalkBut(1,1,1);
-						break;
-					case Renwu_Item(_skin.sec_killbut1_3.skin).labelDisplay:
-						TaskControl.killWalkBut(1,2,1);
-						break;
-					case Renwu_Item(_skin.sec_killbut2_1.skin).labelDisplay:
-						TaskControl.killWalkBut(2,0,1);
-						break;
-					case Renwu_Item(_skin.sec_killbut2_2.skin).labelDisplay:
-						TaskControl.killWalkBut(2,1,1);
-						break;
-					case Renwu_Item(_skin.sec_killbut2_3.skin).labelDisplay:
-						TaskControl.killWalkBut(2,2,1);
-						break;
-					case Renwu_Item(_skin.sec_killbut3_1.skin).labelDisplay:
-						TaskControl.killWalkBut(3,0,1);
-						break;
-					case Renwu_Item(_skin.sec_killbut3_2.skin).labelDisplay:
-						TaskControl.killWalkBut(3,1,1);
-						break;
-					case Renwu_Item(_skin.sec_killbut3_3.skin).labelDisplay:
-						TaskControl.killWalkBut(3,2,1);
-						break;
-					
-					case Renwu_Item(_skin.pri_killbut_1.skin).btn_send:
-						TaskControl.killWalkBut(1,0,2);
-						break;
-					case Renwu_Item(_skin.pri_killbut_2.skin).btn_send:
-						TaskControl.killWalkBut(1,1,2);
-						break;
-					case Renwu_Item(_skin.pri_killbut_3.skin).btn_send:
-						TaskControl.killWalkBut(1,2,2);
-						break;
-					case Renwu_Item(_skin.sec_killbut1_1.skin).btn_send:
-						TaskControl.killWalkBut(1,0,2);
-						break;
-					case Renwu_Item(_skin.sec_killbut1_2.skin).btn_send:
-						TaskControl.killWalkBut(1,1,2);
-						break;
-					case Renwu_Item(_skin.sec_killbut1_3.skin).btn_send:
-						TaskControl.killWalkBut(1,2,2);
-						break;
-					case Renwu_Item(_skin.sec_killbut2_1.skin).btn_send:
-						TaskControl.killWalkBut(2,0,2);
-						break;
-					case Renwu_Item(_skin.sec_killbut2_2.skin).btn_send:
-						TaskControl.killWalkBut(2,1,2);
-						break;
-					case Renwu_Item(_skin.sec_killbut2_3.skin).btn_send:
-						TaskControl.killWalkBut(2,2,2);
-						break;
-					case Renwu_Item(_skin.sec_killbut3_1.skin).btn_send:
-						TaskControl.killWalkBut(3,0,2);
-						break;
-					case Renwu_Item(_skin.sec_killbut3_2.skin).btn_send:
-						TaskControl.killWalkBut(3,1,2);
-						break;
-					case Renwu_Item(_skin.sec_killbut3_3.skin).btn_send:
-						TaskControl.killWalkBut(3,2,2);
-						break;
-					case this._skin.btn_open:
-						// 打开
-						setState(true);
-						break;
-					case this._skin.btn_close:
-						// 关闭
-						setState(false);
-						break;
-					case _skin.sec_subbut1:
-						receiveRewordBut(1);
-						break;
-					/*case _skin.sec_subbut2:
-					receiveRewordBut(2);
-					break;*/
-					case _skin.btnContinue:
-						TaskControl.killWalkBut(1,0,1);
-						break;
-					
-					
+					TaskControl.guideBut(int(nameArr[1]));
+					return;
 				}
+			}
+			switch (target) 
+			{
+				
+				case Renwu_Item(_skin.pri_killbut_1.skin).labelDisplay:
+					TaskControl.killWalkBut(1,0,1);
+					break;
+				case Renwu_Item(_skin.pri_killbut_2.skin).labelDisplay:
+					TaskControl.killWalkBut(1,1,1);
+					break;
+				case Renwu_Item(_skin.pri_killbut_3.skin).labelDisplay:
+					TaskControl.killWalkBut(1,2,1);
+					break;
+				case Renwu_Item(_skin.sec_killbut1_1.skin).labelDisplay:
+					TaskControl.killWalkBut(1,0,1);
+					break;
+				case Renwu_Item(_skin.sec_killbut1_2.skin).labelDisplay:
+					TaskControl.killWalkBut(1,1,1);
+					break;
+				case Renwu_Item(_skin.sec_killbut1_3.skin).labelDisplay:
+					TaskControl.killWalkBut(1,2,1);
+					break;
+				case Renwu_Item(_skin.sec_killbut2_1.skin).labelDisplay:
+					TaskControl.killWalkBut(2,0,1);
+					break;
+				case Renwu_Item(_skin.sec_killbut2_2.skin).labelDisplay:
+					TaskControl.killWalkBut(2,1,1);
+					break;
+				case Renwu_Item(_skin.sec_killbut2_3.skin).labelDisplay:
+					TaskControl.killWalkBut(2,2,1);
+					break;
+				case Renwu_Item(_skin.sec_killbut3_1.skin).labelDisplay:
+					TaskControl.killWalkBut(3,0,1);
+					break;
+				case Renwu_Item(_skin.sec_killbut3_2.skin).labelDisplay:
+					TaskControl.killWalkBut(3,1,1);
+					break;
+				case Renwu_Item(_skin.sec_killbut3_3.skin).labelDisplay:
+					TaskControl.killWalkBut(3,2,1);
+					break;
+				
+				case Renwu_Item(_skin.pri_killbut_1.skin).btn_send:
+					TaskControl.killWalkBut(1,0,2);
+					break;
+				case Renwu_Item(_skin.pri_killbut_2.skin).btn_send:
+					TaskControl.killWalkBut(1,1,2);
+					break;
+				case Renwu_Item(_skin.pri_killbut_3.skin).btn_send:
+					TaskControl.killWalkBut(1,2,2);
+					break;
+				case Renwu_Item(_skin.sec_killbut1_1.skin).btn_send:
+					TaskControl.killWalkBut(1,0,2);
+					break;
+				case Renwu_Item(_skin.sec_killbut1_2.skin).btn_send:
+					TaskControl.killWalkBut(1,1,2);
+					break;
+				case Renwu_Item(_skin.sec_killbut1_3.skin).btn_send:
+					TaskControl.killWalkBut(1,2,2);
+					break;
+				case Renwu_Item(_skin.sec_killbut2_1.skin).btn_send:
+					TaskControl.killWalkBut(2,0,2);
+					break;
+				case Renwu_Item(_skin.sec_killbut2_2.skin).btn_send:
+					TaskControl.killWalkBut(2,1,2);
+					break;
+				case Renwu_Item(_skin.sec_killbut2_3.skin).btn_send:
+					TaskControl.killWalkBut(2,2,2);
+					break;
+				case Renwu_Item(_skin.sec_killbut3_1.skin).btn_send:
+					TaskControl.killWalkBut(3,0,2);
+					break;
+				case Renwu_Item(_skin.sec_killbut3_2.skin).btn_send:
+					TaskControl.killWalkBut(3,1,2);
+					break;
+				case Renwu_Item(_skin.sec_killbut3_3.skin).btn_send:
+					TaskControl.killWalkBut(3,2,2);
+					break;
+				case this._skin.btn_open:
+					// 打开
+					setState(true);
+					break;
+				case this._skin.btn_close:
+					// 关闭
+					setState(false);
+					break;
+				case _skin.sec_subbut1:
+					receiveRewordBut(1);
+					break;
+				/*case _skin.sec_subbut2:
+				receiveRewordBut(2);
+				break;*/
+				case _skin.btnContinue:
+					TaskControl.killWalkBut(1,0,1);
+					break;
+				
+				
 			}
 		}
 		override protected function onShow() : void
