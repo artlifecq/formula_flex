@@ -216,6 +216,7 @@ package com.rpgGame.appModule.equip
 		
 		private function onCancelTarget(grid:DragDropItem ):void
 		{
+			cancelAllUse();
 			var targetGrid:DragDropItem;
 			if(targetEquipInfo){
 				_goodsContainerTarget.setGrayForData(targetEquipInfo,false);
@@ -230,7 +231,6 @@ package com.rpgGame.appModule.equip
 			
 			_targetEquip.setGridEmpty();
 			updateView();
-			cancelAllUse();
 		}
 		
 		private function onCreate(e:Event):void
@@ -654,11 +654,11 @@ package com.rpgGame.appModule.equip
 					
 					var info:GridInfo=getGridInfo(_goodsContainerTarget.dataProvider,grid.gridInfo.data);
 					if(info){
-						info.isGray=false;
+						_goodsContainerTarget.setGrayForData(item,false);
 					}
 					info=getGridInfo(_goodsContainerUse.dataProvider,grid.gridInfo.data);
 					if(info){
-						info.isGray=false;
+						_goodsContainerUse.setGrayForData(item,false);
 					}
 				}
 				grid.setGridEmpty();
@@ -986,19 +986,18 @@ package com.rpgGame.appModule.equip
 			var num:int=_goodsContainerTarget.dataProvider.length;
 			var info:GridInfo;
 			var i:int;
+			var item:ClientItemInfo
 			for(i=0;i<num;i++){
 				info=_goodsContainerTarget.dataProvider.getItemAt(i) as  GridInfo;
-				if(info){
-					info.isGray=false;
-				}
+				item=info.data as ClientItemInfo;
+				_goodsContainerTarget.setGrayForData(item,false);
 			}
 			num=_goodsContainerUse.dataProvider.length;
 			
 			for(i=0;i<num;i++){
 				info=_goodsContainerUse.dataProvider.getItemAt(i) as  GridInfo;
-				if(info){
-					info.isGray=false;
-				}
+				item=info.data as ClientItemInfo;
+				_goodsContainerUse.setGrayForData(item,false);
 			}
 			
 			if(targetEquipInfo){
