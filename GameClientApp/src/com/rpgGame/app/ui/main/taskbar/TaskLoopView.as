@@ -314,7 +314,7 @@ package com.rpgGame.app.ui.main.taskbar
 				setNavView(TaskType.MAINTYPE_DAILYTASK,taskData.q_party_name,taskData.q_name,TaskMissionManager.getDailyTaskIsFinish(),navi2,subBut1);
 				TaskUtil.setGotargetInfo(taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killBut2List);
 				//TaskUtil.setRewordInfo(taskData.q_reword_id,ico1List,ico1BgList);
-				icoList1Group.setRewardByArray(TaskMissionCfgData.getRewordById(taskData.q_reword_id,MainRoleManager.actorInfo.job));
+				icoList1Group.setRewardByArray(TaskMissionCfgData.getRewordById(taskData.q_reword_id,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex));
 				icoList1Group.visible=true;
 				TipTargetManager.show( _skin.sec_navi2, TargetTipsMaker.makeTips( TipType.TASK_LEAD_TIP,{name:taskData.q_party_name+taskData.q_name,rewordid:taskData.q_reword_id}));
 				
@@ -365,7 +365,7 @@ package com.rpgGame.app.ui.main.taskbar
 				if(reward!=null)
 				{
 					//TaskUtil.setRewordInfo(reward.r,ico2List,ico2BgList);
-					icoList2Group.setRewardByArray(TaskMissionCfgData.getRewordById(reward.r,MainRoleManager.actorInfo.job));
+					icoList2Group.setRewardByArray(TaskMissionCfgData.getRewordById(reward.r,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex));
 					icoList2Group.visible=true;
 					setExtraLabel(reward.l);
 				}
@@ -429,8 +429,7 @@ package com.rpgGame.app.ui.main.taskbar
 					glabe.x=_skin.sec_navi1.x;
 					glabe.visible=true;
 					taskData=TaskMissionCfgData.getTaskByID(task[i].taskModelId);
-					var finish:Array=JSONUtil.decode(taskData.q_finish_information_str);
-					glabe.htmlText="<font color='#ffea00'>【"+taskData.q_name+"】</font>"+taskData.q_finish_describe+"("+task[i].taskSubRateInfolist[0].num+"/"+finish[0][1]+")";
+					glabe.htmlText="<font color='#ffea00'>【"+taskData.q_name+"】</font>"+taskData.q_finish_describe+"("+task[i].taskSubRateInfolist[0].num+"/"+task[i].taskSubRateInfolist[0].maxNum+")";
 				}
 			}
 			setUisite();
@@ -512,8 +511,8 @@ package com.rpgGame.app.ui.main.taskbar
 			var taskData:Q_mission_base=TaskMissionCfgData.getTaskByID(taskId);
 			if(taskData!=null)
 			{
-				nav.htmlText="<font color='#ffea00'>【主线】</font>"+taskData.q_party_name+taskData.q_name+"<font color='#ff0d0d'>(未完成)</font>";
-				_skin.lbInfo.htmlText="本任务需要"+taskData.q_needLevel+"级开启";
+				nav.htmlText="<font color='#ffea00'>【主线】</font>"+taskData.q_party_name+taskData.q_name;
+				_skin.lbInfo.htmlText="本任务需要"+taskData.q_needLevel+"级才能接取";
 			}
 			setKajiGoter();
 			TipTargetManager.show( _skin.sec_navi1, TargetTipsMaker.makeTips( TipType.TASK_LEAD_TIP,{name:taskData.q_party_name+taskData.q_name,rewordid:taskData.q_reword_id}));

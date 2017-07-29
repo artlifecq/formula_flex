@@ -163,7 +163,8 @@ package com.rpgGame.app.ui.main.taskbar
 				}
 				else
 				{
-					showLeadPanel();
+					//showLeadPanel();主线任务没有回复npc不弹框了
+					TaskSender.sendfinishTaskMessage(TaskMissionManager.mainTaskInfo.taskId);	
 				}
 			}
 			else

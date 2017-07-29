@@ -325,14 +325,14 @@ package com.rpgGame.app.ui.scene
 			{//L.l("任务："+task.taskModelId);
 				//setNavView(TaskType.MAINTYPE_TREASUREBOX,taskData.q_party_name,taskData.q_name,TaskMissionManager.getTreasuerTaskIsFinish(),navi3,subBut2);
 				setGotargetInfo();
-				icoList1Group.setRewardByArray(TaskMissionCfgData.getRewordById(taskData.q_reword_id,MainRoleManager.actorInfo.job));
+				icoList1Group.setRewardByArray(TaskMissionCfgData.getRewordById(taskData.q_reword_id,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex));
 				icoList1Group.visible=true;
 				var reward:Object=TaskMissionManager.getTaskExtraReward(TaskType.LIJIN_TASK);
 				_skin.sec_navi0.visible=false;
 				if(reward!=null)
 				{
 					//TaskUtil.setRewordInfo(reward.r,ico2List,icoBg2List);
-					icoList2Group.setRewardByArray(TaskMissionCfgData.getRewordById(reward.r,MainRoleManager.actorInfo.job));
+					icoList2Group.setRewardByArray(TaskMissionCfgData.getRewordById(reward.r,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex));
 					icoList2Group.visible=true;
 					
 					setExtraLabel(task.loopNumber,reward.l);
