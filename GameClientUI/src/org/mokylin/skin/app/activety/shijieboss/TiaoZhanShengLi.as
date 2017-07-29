@@ -38,6 +38,8 @@ package org.mokylin.skin.app.activety.shijieboss
 			super();
 			
 			this.currentState = "normal";
+			this.height = 422;
+			this.width = 469;
 			this.elementsContent = [__TiaoZhanShengLi_UIAsset1_i(),imgWin_i(),__TiaoZhanShengLi_UIAsset2_i(),__TiaoZhanShengLi_UIAsset3_i(),grpIcon_i(),btnOk_i(),__TiaoZhanShengLi_UIAsset4_i(),numPaiming_i()];
 			
 			states = {

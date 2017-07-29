@@ -60,7 +60,7 @@ package com.rpgGame.appModule.rank
 				_cellList.push(cell);
 			}
 			_selfCell = new AllPlayerCell(triggeredHandler);
-			_selfCell.color(0x55bd15);
+			_selfCell.color = 0x55bd15;
 			_selfCell.updatCellByInfo(null);
 			_content.addChild(_selfCell);
 			if(_type == RankListType.All_COMBATPOWER_TYPE)
@@ -76,6 +76,12 @@ package com.rpgGame.appModule.rank
 				return ;
 			_selectinfo = info;
 			_rightGroup.updateModle(info);
+			var length:int = _cellList.length;
+			for(var i:int = 0;i<length;i++)
+			{
+				_cellList[i].updatCellByInfo(info);
+			}
+			_selfCell.updatCellByInfo(info);
 		}
 		protected var _totalPage:int;
 		protected var _currentPage:int;
