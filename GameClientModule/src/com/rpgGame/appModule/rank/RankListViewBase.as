@@ -71,6 +71,7 @@ package com.rpgGame.appModule.rank
 			{
 				_cellList[i].chackItem(info);
 			}
+			_selfCell.chackItem(info);
 			_rightGroup.updateModle(info);
 		}
 		override protected function onShow():void

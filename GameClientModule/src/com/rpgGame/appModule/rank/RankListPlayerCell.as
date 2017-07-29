@@ -1,10 +1,8 @@
 package com.rpgGame.appModule.rank
 {
 	import com.rpgGame.app.manager.MenuManager;
-	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.utils.MenuUtil;
-	import com.rpgGame.app.view.uiComponent.menu.Menu;
 	import com.rpgGame.coreData.cfg.HorseConfigData;
 	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
 	import com.rpgGame.coreData.clientConfig.Q_horse;

@@ -145,7 +145,7 @@ package com.rpgGame.app.utils
 			{
 				_rankMenyList = new Array();
 				_rankMenyList.push(LangMenu.LOOK_HERO);
-				_rankMenyList.push(LangMenu.INVITE_TEAM);
+				_rankMenyList.push(LangMenu.THE_PRIVATE_CHAT);
 			}
 			return _rankMenyList;
 		}
