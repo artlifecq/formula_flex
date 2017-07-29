@@ -381,19 +381,19 @@ package   com.rpgGame.app.manager.debug
 			commandList.put( ".fb", function (...arg):void
 			{
 				var effectSet : RenderSet3D = RenderSet3D.create(SceneCharType.SCENE_FLY_SPELL/* + info.flySceneObjID*/, 1,true);
-				var rud : RenderParamData3D = new RenderParamData3D(1, "effect", ClientConfig.getEffect("tx_role_jishujian_03"), "tx_role_jishujian_03");
+				var rud : RenderParamData3D = new RenderParamData3D(1, "effect", ClientConfig.getEffect("tx_role_qianjibian_03"), "tx_role_qianjibian_03");
 				
 				var effectRu : RenderUnit3D = effectSet.addRenderUnit(rud);
 				SceneManager.addSceneObjToScene(effectSet);
 				var pos:Vector3D=MainRoleManager.actor.getChildScenePositionByName(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_body_02)
 				//var pos:Vector3D=MainRoleManager.actor.position;
 				effectSet.x=pos.x;
-				effectSet.y=pos.y;
+				//effectSet.y=pos.y;
 				effectSet.z=pos.y;
 				effectRu.repeat = 0;
 				effectRu.mouseEnable = false;
 				effectRu.play(0);
-				TweenLite.to(effectSet,Number(arg[0]),{x:pos.x+int(arg[1])});
+				TweenLite.to(effectSet,Number(arg[0]),{x:pos.x+int(arg[1]),z:pos.y+int(arg[2])});
 			});
 			commandList.put( ".pz", function (...arg):void
 			{

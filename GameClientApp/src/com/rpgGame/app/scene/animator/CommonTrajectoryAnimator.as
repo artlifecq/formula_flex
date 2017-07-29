@@ -151,9 +151,9 @@ package com.rpgGame.app.scene.animator
 			var scene : GameScene3D = SceneManager.getScene();
 			var posY : Number = 0;//scene.sceneMapLayer.queryHeightAt(_destPosition.x, _destPosition.z);2.5D没有高度值，因为只有2维
 			_destHeightOffset = _destPosition.y - posY;
-			_renderSet.position.x = _destPosition.x;
-			_renderSet.position.y = _destPosition.y;
-			_renderSet.position.z = _destPosition.y;
+			_renderSet.x = _destPosition.x;
+			//_renderSet.position.y = _destPosition.y;
+			_renderSet.z = _destPosition.y;
 			_renderSet.offsetY = 0;
 			_renderSet.rotationX = 0;
 			_targetOffsetY = _targetPos.z;
@@ -257,7 +257,7 @@ package com.rpgGame.app.scene.animator
 				if (_matchTerrain)
 					_targetPos.setTo(_targetRole.x, 0, _targetRole.z);
 				else
-					_targetPos.setTo(_targetRole.x, _targetRole.z, _targetRole.y);
+					_targetPos.setTo(_targetRole.x,0, _targetRole.z);
 			}
 			_destPosition.setTo(currX, currY, currZ);
 			var locusPoint : AnimatorLocusPoint = new AnimatorLocusPoint(_destPosition.clone(), _targetPos.clone());
@@ -496,8 +496,8 @@ package com.rpgGame.app.scene.animator
 				}
 				else if (_isTrackTarget) 
 				{
-					dist = MathUtil.getDistance(_renderSet.x, _renderSet.z, _lastPos.x, _lastPos.z);
-					//_renderSet.rotationZ = dist > 0 ? Math.atan((_renderSet.y - _lastPos.y) / dist) * 57.33 : 0;
+					dist = MathUtil.getDistance(_renderSet.x, _renderSet.y, _lastPos.x, _lastPos.y);
+					_renderSet.rotationZ= dist > 0 ? Math.atan((_renderSet.x - _lastPos.x) / dist) * 57.33 : 0;
 				}
 				_lastPos.setTo(_renderSet.x, _renderSet.y, _renderSet.z);
 				_lastOffset.setTo(_renderSet.offsetX, _renderSet.offsetY, _renderSet.offsetZ);
