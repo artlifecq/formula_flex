@@ -42,9 +42,9 @@ package com.rpgGame.app.fight.spell
 		override  protected function onShow() : void
 		{
 			skin.num_yellow1.number=beforeFight;
-			skin.num_hong.visible=false;
+//			skin.num_hong.visible=false;
 			skin.num_lv.visible=false;
-			skin.num_hong.x=skin.num_lv.x=skin.num_yellow1.x+skin.num_yellow1.width+20;
+//			skin.num_hong.x=skin.num_lv.x=skin.num_yellow1.x+skin.num_yellow1.width+20;
 			
 			var change:int=afterFight-beforeFight;
 			changeList=getChangeList(change);
@@ -52,11 +52,11 @@ package com.rpgGame.app.fight.spell
 			if(change>0){
 				changNumber=skin.num_lv;
 				changNumber.label="x"+change;
-				skin.num_hong.visible=false;
+//				skin.num_hong.visible=false;
 				changNumber.y=75;
 				endY=35;
 			}else{
-				changNumber=skin.num_hong;
+//				changNumber=skin.num_hong;
 				changNumber.label=String(change);
 				skin.num_lv.visible=false;
 				changNumber.y=35;
@@ -66,7 +66,7 @@ package com.rpgGame.app.fight.spell
 			changNumber.alpha=0;
 			skin.container.y-=20;
 			
-			skin.bg.width=skin.num_yellow1.x+skin.num_yellow1.width+20+changNumber.width+55;
+//			skin.bg.width=skin.num_yellow1.x+skin.num_yellow1.width+20+changNumber.width+55;
 			
 			
 			TweenMax.to(skin.container,0.0,{scale:2,alpha:0});
