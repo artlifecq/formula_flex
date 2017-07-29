@@ -16,7 +16,7 @@ package  com.rpgGame.app.ui.common
 
 	public class NumSelectUICtrl
 	{
-	
+		private static var id:int=0;
 		private  var MAX_ALLOW:int=999;
 		private var _maxCount:int=900;
 		private var price:int;
@@ -63,7 +63,7 @@ package  com.rpgGame.app.ui.common
 			_maxCount=maxValue;
 			callBack=changeCall;
 			initEvent();
-			gTimer=new GameTimer("NumSelectUICtrl",100,0,onTime);
+			gTimer=new GameTimer("NumSelectUICtrl"+id++,100,0,onTime);
 			setcurNum(_deflatMin);
 		}
 		

@@ -1060,7 +1060,7 @@ package com.game.engine3D.scene.render
 				animatStatus = _secondStatusGetter(_currentStatus);
 			if (_visible && (!_isElementStatus || mesh.name == animatStatus))
 			{
-				layerType = getLayerType(mesh.name);
+//				layerType = getLayerType(mesh.name);
 			}
 			else
 			{
@@ -1072,7 +1072,7 @@ package com.game.engine3D.scene.render
 			}
 			else
 			{
-				layerType = getLayerType(mesh.name);
+//				layerType = getLayerType(mesh.name);
 			}
 			mesh.layerType = layerType;
 		}
