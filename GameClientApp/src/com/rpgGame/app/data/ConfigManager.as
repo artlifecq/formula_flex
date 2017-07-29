@@ -11,6 +11,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.AttFormulaConfig;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.AttachEffectCfgData;
+	import com.rpgGame.coreData.cfg.AttributeCfg;
 	import com.rpgGame.coreData.cfg.BattleRankCfg;
 	import com.rpgGame.coreData.cfg.BuffStateDataManager;
 	import com.rpgGame.coreData.cfg.ChangeModelCfgData;
@@ -336,6 +337,7 @@ package com.rpgGame.app.data
 			PetCfg.setup(dic[ConfigClassRegister.Q_girl_pet]);//美人
 			PetAdvanceCfg.setup(dic[ConfigClassRegister.Q_girl_advance]);//美人进阶
 			RankDesignationData.setup(dic[ConfigClassRegister.Q_rank_designation]);//排行榜名称
+			AttributeCfg.setup(dic[ConfigClassRegister.Q_shuxing]);//属性
 		}
 		
 		/**

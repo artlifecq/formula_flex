@@ -5,6 +5,7 @@ package com.rpgGame.app.manager.yunBiao
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.utils.FightValueUtil;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.CheatsEvent;
@@ -32,6 +33,16 @@ package com.rpgGame.app.manager.yunBiao
 		public static var ins:CheatsMgr=new CheatsMgr();
 		private var _cheatsHash:HashMap=new HashMap();
 		
+		public function getFightPower():int
+		{
+			var ret:int=0;
+			var cheats:Array=_cheatsHash.values();
+			for each (var vo:CheatsVo in cheats) 
+			{
+				ret+=vo.fightPower;
+			}
+			return ret;
+		}
 		public function recCheatsChange(info:CheatsInfo):void
 		{
 			// TODO Auto Generated method stub
@@ -81,6 +92,7 @@ package com.rpgGame.app.manager.yunBiao
 	
 		public function CheatsMgr()
 		{
+			CheatsVo.FIGHT_POWER_CALL=calculateFightPower;
 			var arr:Array=CheatsCfg.dataArr;
 			var len:int=arr.length;
 			var qCh:Q_cheats;
@@ -90,7 +102,10 @@ package com.rpgGame.app.manager.yunBiao
 				_cheatsHash.put(qCh.q_id,new CheatsVo(qCh,getCheatVo));
 			}
 		}
-		
+		private function calculateFightPower(hash:HashMap):int
+		{
+			return FightValueUtil.calFightPowerByHash(hash,MainRoleManager.actorInfo.job);
+		}
 		/**
 		 *心法能否激活
 		 * @return 

@@ -380,9 +380,10 @@ package com.rpgGame.app.ui.tips
 				startY+=2;
 				//图标。
 				var qStone:Q_item=ItemConfig.getQItemByID(serverData.stone[0].itemModelId);
-				_ico.styleName="ui/app/beibao/icons/bianshi/"+qStone.q_default+"/"+qAcu.q_stone_type+".png";
+				
 				stoneIcon.x=this._skin.uiName1.x;
 				stoneIcon.y=startY;
+				_ico.styleName="ui/app/beibao/icons/bianshi/"+qStone.q_default+"/"+qAcu.q_stone_type+".png";
 				this.addChild(stoneIcon);
 				labList.push(stoneIcon);
 				isMaxStone=qStone.q_levelnum>=MeridianMgr.MAX_STONE_LV;
