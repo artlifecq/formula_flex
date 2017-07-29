@@ -222,6 +222,7 @@ package com.rpgGame.appModule.xinfa
 					updateMapAttr();
 				}
 				Mgr.cheatsMgr.dispatchEvent(new CheatsEvent(CheatsEvent.CHEATS_NODE_TIP_CHANGE,data));
+				_skin.NumZhanli.label=Mgr.cheatsMgr.getFightPower()+"";
 			}
 		}
 		
@@ -265,13 +266,13 @@ package com.rpgGame.appModule.xinfa
 			{
 				_skin.mc_Level.gotoAndStop(data.level+"");
 				_skin.lbJihuo.visible=false;
-				_skin.grpZhanli.visible=true;
+				//_skin.grpZhanli.visible=true;
 				
 			}
 			else
 			{
 				_skin.lbJihuo.visible=true;
-				_skin.grpZhanli.visible=false;
+				//_skin.grpZhanli.visible=false;
 			}
 			var buffObj:Array=_curMap.cheatsVo.getCurBuff();
 			
@@ -300,7 +301,6 @@ package com.rpgGame.appModule.xinfa
 			if (_curMap.cheatsVo.level>0) 
 			{
 				color=GameColorUtil.COLOR_NORMAL;
-				_skin.NumZhanli.label=FightValueUtil.calFightPowerByHash(_curMap.cheatsVo.totalValue,MainRoleManager.actorInfo.job)+"";
 			}
 			if (_curMap.cheatsVo.level==0) 
 			{
@@ -470,7 +470,7 @@ package com.rpgGame.appModule.xinfa
 		
 		public function onShow():void
 		{
-			EventManager.addEvent(MainPlayerEvent.STAT_CHANGE,updateTxt);//基本属性改变
+			
 			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,onZhenQiChange);
 			EventManager.addEvent(MainPlayerEvent.LEVEL_CHANGE,onLevelChange);
 			EventManager.addEvent(ItemEvent.ITEM_ADD,onAddItem);
@@ -478,7 +478,7 @@ package com.rpgGame.appModule.xinfa
 			Mgr.cheatsMgr.addEventListener(CheatsEvent.CHEATS_NODE_CHANGE,onCheatsNodeDataChange);
 			Mgr.cheatsMgr.addEventListener(CheatsEvent.CHEATS_CHANGE,onCheatsChange);
 			onZhenQiChange(CharAttributeType.RES_ZHENQI);
-			updateTxt();
+			
 			if (_curMap==null) 
 			{
 				showCurrentMap((sbtnArr[0]).userData)
@@ -486,16 +486,13 @@ package com.rpgGame.appModule.xinfa
 				_curBtn.isSelected=true;
 			}
 			_effect3d=_effect3dCon.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINGMAI_STAR),0,0,0,null,addEft);
+			_skin.NumZhanli.label=Mgr.cheatsMgr.getFightPower()+"";
 		}
 		private function addEft(render:RenderUnit3D):void
 		{
 			render.play(0);
 		}
-		private function updateTxt():void
-		{
-			// TODO Auto Generated method stub
-			_skin.NumZhanli.number=MainRoleManager.actorInfo.totalStat.getStatValue(CharAttributeType.FIGHTING);
-		}
+		
 		
 		private function onAddItem(itemInfo : ClientItemInfo):void
 		{
@@ -584,7 +581,7 @@ package com.rpgGame.appModule.xinfa
 		}
 		public function onHide():void
 		{
-			EventManager.removeEvent(MainPlayerEvent.STAT_CHANGE,updateTxt);
+		
 			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,onZhenQiChange);
 			EventManager.removeEvent(MainPlayerEvent.LEVEL_CHANGE,onLevelChange);
 			EventManager.removeEvent(ItemEvent.ITEM_ADD,onAddItem);
@@ -611,7 +608,7 @@ package com.rpgGame.appModule.xinfa
 				{
 					showCurrentMap(map,true);
 				}
-				
+				_skin.NumZhanli.label=Mgr.cheatsMgr.getFightPower()+"";
 				//更新总战力
 			}
 		}

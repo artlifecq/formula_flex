@@ -60,7 +60,7 @@ package org.mokylin.skin.app.shejiao
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/shejiao/shejiao.png";
 			temp.x = 450;
-			temp.y = 17;
+			temp.y = 18;
 			return temp;
 		}
 
