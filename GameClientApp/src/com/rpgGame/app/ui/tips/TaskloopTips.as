@@ -51,7 +51,7 @@ package com.rpgGame.app.ui.tips
 		public function setTipData(data:*):void
 		{
 			_skin.lbHead.htmlText=data.name;//{rewordid:taskData.q_reword_id,exId:task.loopRewardId,nowTrea:task.loopNumber}
-			icoListGroup.setRewardByArray(TaskMissionCfgData.getRewordById(data.rewordid,MainRoleManager.actorInfo.job));
+			icoListGroup.setRewardByArray(TaskMissionCfgData.getRewordById(data.rewordid,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex));
 			icoListGroup.visible=true;
 			var exId:String=data.loopRewardId;
 			var nowTrea:int=data.loopNumber;//当前环数
@@ -90,7 +90,7 @@ package com.rpgGame.app.ui.tips
 					}
 					skinItem.y=height;
 					rewItem.lbName.htmlText="今日完成<font color='#00ff33'>"+reArr[i].l+"</font>环任务奖励";
-					iconItem.setRewardByArray(TaskMissionCfgData.getRewordById(reArr[i].r,MainRoleManager.actorInfo.job));
+					iconItem.setRewardByArray(TaskMissionCfgData.getRewordById(reArr[i].r,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex));
 					rewItem.uiOk.visible=reArr[i].l<=nowTrea;
 					height+=iconItem.y+iconItem.height;
 				}

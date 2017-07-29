@@ -6,6 +6,7 @@ package com.rpgGame.app.state.ai
 	import com.rpgGame.app.manager.task.GatherAutoManager;
 	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
+	import com.rpgGame.app.sender.TaskSender;
 	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
 	import com.rpgGame.app.ui.main.taskbar.TaskControl;
 	import com.rpgGame.app.utils.TaskUtil;
@@ -32,7 +33,10 @@ package com.rpgGame.app.state.ai
 				}
 				else
 				{
-					TaskControl.showLeadPanel();
+					
+					//TaskControl.showLeadPanel();;主线任务没有回复npc不弹框了
+					TaskSender.sendfinishTaskMessage(TaskMissionManager.mainTaskInfo.taskId);	
+					
 				}
 			}
 			else

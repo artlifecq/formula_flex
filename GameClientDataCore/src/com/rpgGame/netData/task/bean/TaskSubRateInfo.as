@@ -20,6 +20,9 @@ package com.rpgGame.netData.task.bean{
 		//完成进度
 		private var _num: int;
 		
+		//最大值
+		private var _maxNum: int;
+		
 		/**
 		 * 写入字节缓存
 		 */
@@ -28,6 +31,8 @@ package com.rpgGame.netData.task.bean{
 			writeInt(_modelId);
 			//完成进度
 			writeInt(_num);
+			//最大值
+			writeInt(_maxNum);
 			return true;
 		}
 		
@@ -39,6 +44,8 @@ package com.rpgGame.netData.task.bean{
 			_modelId = readInt();
 			//完成进度
 			_num = readInt();
+			//最大值
+			_maxNum = readInt();
 			return true;
 		}
 		
@@ -70,6 +77,21 @@ package com.rpgGame.netData.task.bean{
 		 */
 		public function set num(value: int): void{
 			this._num = value;
+		}
+		
+		/**
+		 * get 最大值
+		 * @return 
+		 */
+		public function get maxNum(): int{
+			return _maxNum;
+		}
+		
+		/**
+		 * set 最大值
+		 */
+		public function set maxNum(value: int): void{
+			this._maxNum = value;
 		}
 		
 	}

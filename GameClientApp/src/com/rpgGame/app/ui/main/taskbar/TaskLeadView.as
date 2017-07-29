@@ -189,7 +189,7 @@ package com.rpgGame.app.ui.main.taskbar
 				setParcent(taskData.q_party_id,taskData.q_node_id);
 				setTaskButView(taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,MonsterDataManager.getMonsterModeidByAreaid(taskData.q_finish_npc));
 				//TaskUtil.setRewordInfo(taskData.q_reword_id,icoList,icoBgList);
-				icoListGroup.setRewardByArray(TaskMissionCfgData.getRewordById(taskData.q_reword_id,MainRoleManager.actorInfo.job));
+				icoListGroup.setRewardByArray(TaskMissionCfgData.getRewordById(taskData.q_reword_id,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex));
 				icoListGroup.visible=true;
 				setUisite();
 			}

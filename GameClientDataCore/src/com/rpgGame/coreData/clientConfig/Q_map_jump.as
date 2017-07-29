@@ -18,6 +18,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_name:String;
 		 /**  跳跃点所在地图ID */
 		public var q_map_id:int;
+		 /**  跳跃速度 */
+		public var q_jump_speed:int;
 		 /**  跳跃起始区域(区域表) */
 		public var q_jump_source_area_id:int;
 		 /**  跳跃目的点列表，格式：[[0,0],[1,1,]] */

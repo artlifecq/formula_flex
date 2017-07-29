@@ -395,7 +395,10 @@ package   com.rpgGame.app.manager.debug
 				effectRu.play(0);
 				TweenLite.to(effectSet,Number(arg[0]),{x:pos.x+int(arg[1])});
 			});
-			
+			commandList.put( ".pz", function (...arg):void
+			{
+				FightFaceHelper.useScene=arg[0]==1;
+			});
 		}
 		
 		

@@ -462,7 +462,6 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.fontSize = 16;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
 			temp.color = 0xEAEABC;
-			temp.visible = false;
 			temp.width = 110;
 			temp.x = 430;
 			temp.y = 476;
@@ -888,7 +887,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiName = temp;
 			temp.name = "uiName";
-			temp.styleName = "ui/app/beibao/xinfa/mingzi2/longxiang.png";
+			temp.styleName = "ui/app/beibao/xinfa/mingzi2/1.png";
 			temp.x = 21;
 			temp.y = 7;
 			return temp;

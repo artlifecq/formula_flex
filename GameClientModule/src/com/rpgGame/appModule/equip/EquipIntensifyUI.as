@@ -229,6 +229,7 @@ package com.rpgGame.appModule.equip
 		
 		private function onCancelIntensify(grid:DragDropItem ):void
 		{
+			cancelAllUse();
 			var targetGrid:DragDropItem;
 			if(targetEquipInfo){
 				_goodsContainerTarget.setGrayForData(targetEquipInfo,false);
@@ -243,7 +244,6 @@ package com.rpgGame.appModule.equip
 			
 			_targetEquip.setGridEmpty();
 			updateView();
-			cancelAllUse();
 		}
 		
 		private function createItemRender1():GridItemRender

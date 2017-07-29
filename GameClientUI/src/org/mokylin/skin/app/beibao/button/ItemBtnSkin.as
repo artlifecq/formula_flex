@@ -28,13 +28,39 @@ package org.mokylin.skin.app.beibao.button
 			
 			this.currentState = "down";
 			this.height = 59;
-			this.width = 241;
+			this.width = 162;
 			this.elementsContent = [];
 			
 			states = {
+				down:[
+						{target:"labelDisplay",
+							name:"right",
+							value:0
+						}
+					]
+				,
+				hover:[
+						{target:"labelDisplay",
+							name:"right",
+							value:0
+						}
+					]
+				,
 				up:[
 						{target:"labelDisplay",
 							name:"bottom",
+							value:0
+						}
+						,
+						{target:"labelDisplay",
+							name:"width",
+							value:162
+						}
+					]
+				,
+				disabled:[
+						{target:"labelDisplay",
+							name:"right",
 							value:0
 						}
 					]
@@ -78,7 +104,6 @@ package org.mokylin.skin.app.beibao.button
 			temp.name = "labelDisplay";
 			temp.bottom = 0;
 			temp.left = 0;
-			temp.right = 0;
 			temp.text = "";
 			temp.textAlign = "center";
 			temp.color = 0xFFFFFF;
