@@ -219,12 +219,19 @@ package com.rpgGame.app.manager.task
 				return;
 			if(MapDataManager.getMapInfo(MainRoleManager.actorInfo.mapID).mapType!=EnumMapType.MAP_TYPE_NORMAL)
 				return;
-			if(MainRoleManager.actor.stateMachine.isIdle||(!isTasking&&TrusteeshipManager.getInstance().isAutoing))//站着的时候拉，挂机的时候也拉
+			if(MainRoleManager.actor.stateMachine.isIdle||(TrusteeshipManager.getInstance().isAutoing))//站着的时候拉，挂机的时候也拉
 			{
 				if((getTimer()-_techSta)>=AUTOIDE)
 				{
 					_techSta=getTimer();
-					startTaskAuto();
+					if(TaskMissionManager.treasuerCheck&&TaskMissionManager.haveTreasuerTask)
+					{
+						startOtherTaskAuto(TaskType.MAINTYPE_TREASUREBOX);
+					}
+					else if(TaskMissionManager.haveMainTask)
+					{
+						startTaskAuto();
+					}
 				}
 			}
 			else
