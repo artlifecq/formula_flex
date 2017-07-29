@@ -9,9 +9,9 @@ package org.mokylin.skin.mainui.renwu
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import feathers.controls.ScrollContainer;
-	import org.mokylin.skin.app.banghui.check.CheckBoxSkin_2;
 	import org.mokylin.skin.component.button.ButtonSkin_hide;
 	import org.mokylin.skin.component.button.ButtonSkin_putong4;
+	import org.mokylin.skin.component.check.CheckBoxSkin_1;
 	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
 	import org.mokylin.skin.mainui.renwu.RenWuTitle_Skin;
 	import org.mokylin.skin.mainui.renwu.RenWu_jindu;
@@ -28,6 +28,8 @@ package org.mokylin.skin.mainui.renwu
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var auto:feathers.controls.Group;
+
 		public var btnContinue:feathers.controls.Button;
 
 		public var btn_close:feathers.controls.Button;
@@ -133,6 +135,17 @@ package org.mokylin.skin.mainui.renwu
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
+		private function __RenWuZhuiZong_Skin_Label1_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.text = "自动";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 24;
+			temp.y = 2.5;
+			return temp;
+		}
+
 		private function __RenWuZhuiZong_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -148,6 +161,17 @@ package org.mokylin.skin.mainui.renwu
 			temp.styleName = "ui/mainui/renwu/renwuzhuizong.png";
 			temp.x = 67;
 			temp.y = 6;
+			return temp;
+		}
+
+		private function auto_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			auto = temp;
+			temp.name = "auto";
+			temp.x = 180;
+			temp.y = 198;
+			temp.elementsContent = [chkAuto_i(),__RenWuZhuiZong_Skin_Label1_i()];
 			return temp;
 		}
 
@@ -207,17 +231,9 @@ package org.mokylin.skin.mainui.renwu
 			var temp:feathers.controls.Check = new feathers.controls.Check();
 			chkAuto = temp;
 			temp.name = "chkAuto";
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.label = "自动";
-			temp.labelOffsetX = 0;
-			temp.leading = 0;
-			temp.letterSpacing = -1;
-			temp.styleClass = org.mokylin.skin.app.banghui.check.CheckBoxSkin_2;
-			temp.textAlign = "center";
-			temp.color = 0xEAEABC;
-			temp.width = 72;
-			temp.x = 163;
-			temp.y = 199;
+			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -408,7 +424,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.width = 243;
 			temp.x = 10;
 			temp.y = 39;
-			temp.elementsContent = [sec_killbut1_1_i(),sec_killbut1_2_i(),sec_killbut1_3_i(),sec_killbut2_1_i(),sec_killbut2_2_i(),sec_killbut2_3_i(),sec_ico1_0_i(),sec_info_i(),sec_killbut3_1_i(),sec_killbut3_2_i(),sec_killbut3_3_i(),chkAuto_i(),sec_ico2_0_i(),sec_subbut1_i(),sec_navi1_i(),sec_navi2_i(),sec_navi3_i(),sec_txt_i(),sec_tuijian_i(),lbInfo_i()];
+			temp.elementsContent = [sec_killbut1_1_i(),sec_killbut1_2_i(),sec_killbut1_3_i(),sec_killbut2_1_i(),sec_killbut2_2_i(),sec_killbut2_3_i(),sec_ico1_0_i(),sec_info_i(),sec_killbut3_1_i(),sec_killbut3_2_i(),sec_killbut3_3_i(),sec_ico2_0_i(),sec_subbut1_i(),sec_navi1_i(),sec_navi2_i(),sec_navi3_i(),auto_i(),sec_txt_i(),sec_tuijian_i(),lbInfo_i()];
 			return temp;
 		}
 
