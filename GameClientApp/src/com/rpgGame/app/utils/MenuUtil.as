@@ -138,7 +138,17 @@ package com.rpgGame.app.utils
 			
 			return menus;
 		}
-		
+		private static var _rankMenyList:Array;
+		public static function getPlayerTargetRank():Array
+		{
+			if(_rankMenyList==null)
+			{
+				_rankMenyList = new Array();
+				_rankMenyList.push(LangMenu.LOOK_HERO);
+				_rankMenyList.push(LangMenu.INVITE_TEAM);
+			}
+			return _rankMenyList;
+		}
 		public static function getPlayerTargetGuildMenu2(targetID:String,fromChat:Boolean = false):Array
 		{
 			var menus : Array = [];
