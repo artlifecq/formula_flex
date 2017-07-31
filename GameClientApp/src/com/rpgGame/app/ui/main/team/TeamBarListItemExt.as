@@ -235,6 +235,7 @@ package   com.rpgGame.app.ui.main.team
 			if (buff&&buff.length>0) 
 			{
 				var len:int=buff.length;
+				var index:int = 0;
 				for (var i:int = 0; i < len; i++) 
 				{
 					var q_buff:Q_buff=BuffStateDataManager.getData(buff[i]);
@@ -242,9 +243,10 @@ package   com.rpgGame.app.ui.main.team
 					{
 						var icon:BgIcon=new BgIcon(IcoSizeEnum.ICON_16);				
 						icon.setIconResName(ClientConfig.getBuffIcon(q_buff.q_icon, IcoSizeEnum.ICON_16 ));
-						icon.x=_skin.role_buffer.x+i*26;
+						icon.x=_skin.role_buffer.x+index*26;
 						icon.y=_skin.role_buffer.y;
 						this.addChild(icon);
+						index++;
 						var info:Q_tipsinfo=new Q_tipsinfo();
 						info.q_describe_tittle=q_buff.q_buff_name;
 						info.q_describe=q_buff.q_description;
