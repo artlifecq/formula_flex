@@ -2,6 +2,8 @@ package com.rpgGame.app.fight.spell
 {
 	import com.rpgGame.app.display2D.PopSkinUI;
 	
+	import gs.TimelineLite;
+	import gs.TweenLite;
 	import gs.TweenMax;
 	import gs.easing.Expo;
 	
@@ -69,24 +71,20 @@ package com.rpgGame.app.fight.spell
 			addTextImage.startRolling();
 		}
 		
-		
 		private function numRunCompleteHandler():void
 		{
 			if(!fightTextImage.isRollerEnd)
 				return ;
 			if(!addTextImage.isRollerEnd)
 				return ;
-			skin.container.filter = new GlowFilter(0xffff00,1,50,1);
-			TweenMax.to(this,0.1,{scale:3,alpha:1});
-			TweenMax.to(this,0.3,{scale:1,ease:Expo.easeOut});
-			TweenMax.to(this,0.6,{onComplete:completeHandler});	
+			skin.container.filter = new GlowFilter(0xffff00,1,70,1);
+			var timeLine:TimelineLite = new TimelineLite();
+			timeLine.insert(TweenLite.to(skin.container,0.5,{scale:1.3,ease:Expo.easeOut}));
+			timeLine.append(TweenLite.to(skin.container,0.5,{}));
+			timeLine.append(TweenLite.to(skin.container,0.3,{alpha:0,ease:Expo.easeOut,onComplete:popComplete}));
+			
 		}
 		
-		
-		private function completeHandler():void
-		{
-			TweenMax.to(skin.container,0.3,{y:skin.container.y+20,alpha:0,ease:Expo.easeOut,onComplete:popComplete});
-		}
 		private function updateSeate():void
 		{
 			if(_stage){
