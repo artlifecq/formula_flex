@@ -570,6 +570,7 @@ package com.rpgGame.app.manager.role
 		/*-----------------------跨跳跃点寻路--------------------------------------------*/
 		private static var _jumpPash:Vector.<Vector3D>;
 		private static var _isAutoJumping : Boolean = false;
+		private static var _jumpPass:Array;
 		/**
 		 *  跨跳跃点寻路
 		 **/
@@ -605,7 +606,7 @@ package com.rpgGame.app.manager.role
 				crossJumpArr.push(target);
 				return true;
 			}
-			var jumpList:Vector.<SceneJumpPointData>=getJumpPiontTotarget(district,position,true);
+			var jumpList:Vector.<SceneJumpPointData>=getJumpPiontTotarget(district,position);
 			if(jumpList.length>0)
 			{
 				var jumpData:SceneJumpPointData;
@@ -613,6 +614,8 @@ package com.rpgGame.app.manager.role
 				var start:Vector3D;
 				for each(jumpData in jumpList)
 				{
+					_jumpPass.push(jumpData.id);
+					_jumpPass.push(jumpData.equalPash);
 					stop=new Vector3D(jumpData.stopPoint.x,jumpData.stopPoint.y,jumpData.stopPoint.y);
 					if(searchJumpToPonit(district,stop,target,crossJumpArr))
 					{
@@ -626,39 +629,46 @@ package com.rpgGame.app.manager.role
 			return false;
 		}
 		
-		/**寻找能够到达终点的跳跃点*/
-		private static function getJumpPiontTotarget(district : DistrictWithPath,targetPos : Vector3D,startORstop:Boolean):Vector.<SceneJumpPointData>
+		/**寻找能够到达起点的跳跃点*/
+		private static function getJumpPiontTotarget(district : DistrictWithPath,targetPos : Vector3D,jumpid:int=0):Vector.<SceneJumpPointData>
 		{
 			var jumpList:Array=MapJumpCfgData.getSceneJumpportDatas(SceneSwitchManager.currentMapId);
 			var jumpData:SceneJumpPointData;
 			var spot:Vector3D;
 			var potList:Vector.<SceneJumpPointData>=new Vector.<SceneJumpPointData>();
-			//找出所有可以到达起点的跳跃点
+			
 			for each(jumpData in jumpList)
 			{
-				if(startORstop)
+				if(!isJumpPass(jumpData.id))//寻过的不用再寻
 				{
 					spot=new Vector3D(jumpData.startPoint.x,jumpData.startPoint.y,jumpData.startPoint.y);
+					if (PolyUtil.isFindPath(district, targetPos, spot))
+					{
+						potList.push(jumpData);
+					}
 				}
-				else
-				{
-					spot=new Vector3D(jumpData.stopPoint.x,jumpData.stopPoint.y,jumpData.stopPoint.y);
-				}
-				if (PolyUtil.isFindPath(district, targetPos, spot))
-				{
-					potList.push(jumpData);
-				}
+				
 			}
 			return potList;
 		}
-		
+		/**跳跃路径是否寻过*/
+		private static function isJumpPass(jumpid):Boolean
+		{
+			for(var i:int=0;i<_jumpPass.length;i++)
+			{
+				if(_jumpPass[i]==jumpid)
+				{
+					return true;
+				}
+			}
+			return false;
+		}
 		private static function onNextJump() : void
 		{
 			if (!_isAutoJumping)
 			{
 				return;
 			}
-			
 			if (!_jumpPash || _jumpPash.length==0)
 			{
 				clearJumpPath();
@@ -695,6 +705,7 @@ package com.rpgGame.app.manager.role
 			TweenLite.killDelayedCallsTo(onNextJump);
 			_isAutoJumping = false;
 			_jumpPash = null;
+			_jumpPass=new Array();
 		}
 		
 		

@@ -2,9 +2,11 @@ package  com.rpgGame.app.reward
 {
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.ItemActionManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.utils.MCUtil;
+	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
@@ -64,7 +66,7 @@ package  com.rpgGame.app.reward
 		private var icons:Vector.<IconCDFace>=new Vector.<IconCDFace>();
 		
 		private var max:int;
-		
+		private var showCD:Boolean;
 		private var initW:int;
 		private var initH:int;
 		private var _data:Vector.<ClientItemInfo>;
@@ -79,8 +81,9 @@ package  com.rpgGame.app.reward
 		 * @param dy
 		 * @param needTip
 		 * @param max 最大个数  0为最大    应策划需求加的 ---yt
+		 * @param showCD 是否显示CD转框---yt
 		 */		
-		public function RewardGroup(size:int,g:UIAsset,ali:int=ALIN_LEFT,cellNum:int=9,dx:int=2,dy:int=2,needTip:Boolean=true,max:int=0)
+		public function RewardGroup(size:int,g:UIAsset,ali:int=ALIN_LEFT,cellNum:int=9,dx:int=2,dy:int=2,needTip:Boolean=true,max:int=0,showCD:Boolean=false)
 		{
 			super();
 			_iconSize=size;
@@ -92,6 +95,7 @@ package  com.rpgGame.app.reward
 			this.dX=dx;
 			this.dY=dy;
 			this.max=max>0?max:int.MAX_VALUE;
+			this.showCD=showCD;
 			if (g.parent) 
 			{
 				this.x=g.x;
@@ -110,6 +114,7 @@ package  com.rpgGame.app.reward
 			for (var i:int = 0; i < len; i++) 
 			{
 				obj=getIcon();
+				obj.showCD=showCD;
 				icons.push(obj);
 				FaceUtil.SetItemGrid(obj,items[i],_needTips);
 			}
@@ -157,7 +162,9 @@ package  com.rpgGame.app.reward
 			{
 				return;
 			}
-			var arr:Array=JSONUtil.decode(reward);
+			
+			var arr:Array=TaskMissionCfgData.getRewordByJobsex(reward,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex)
+			
 			setRewardByArray(arr);
 		}
 		

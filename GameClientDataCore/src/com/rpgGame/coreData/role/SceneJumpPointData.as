@@ -18,6 +18,7 @@ package com.rpgGame.coreData.role
 		public var destPointList:Vector.<Point>;
 		public var startPoint:Point;
 		public var stopPoint:Point;
+		public var equalPash:int;
 		public function SceneJumpPointData(type : int)
 		{
 			super(type);
@@ -29,6 +30,7 @@ package com.rpgGame.coreData.role
 			this.x = data.q_jump_res_x;
 			this.y = data.q_jump_res_y;
 			this.offsetUp = 0;
+			this.equalPash=data.q_equal_pash;
 			this.direction = data.q_jump_res_direction;
 			this.sizeScale = 1;
 			this.polygon = AreaCfgData.getAreaPointsByID(data.q_jump_source_area_id);

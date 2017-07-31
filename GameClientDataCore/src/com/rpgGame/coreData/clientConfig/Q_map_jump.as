@@ -24,6 +24,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_jump_source_area_id:int;
 		 /**  跳跃目的点列表，格式：[[0,0],[1,1,]] */
 		public var q_jump_dest_list:String;
+		 /**  和那一条路是一个来回 */
+		public var q_equal_pash:int;
 		 /**  跳跃点造型资源编号 */
 		public var q_jump_res:String;
 		 /**  跳跃点资源X坐标 */
