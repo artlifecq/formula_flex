@@ -28,8 +28,8 @@ package com.rpgGame.app.fight.spell
 		private static var _HelpH:Number = 0;
 		public function FightChangePop(data:*):void
 		{
-			beforeFight=data[0];
-			afterFight=data[1];
+			beforeFight=data[1];
+			afterFight=data[0];
 			_skin=new ZhandouliTipSkin();
 			super(data);
 			init();
