@@ -15,6 +15,7 @@ package com.rpgGame.app.ui.main.head {
 	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.RoleData;
+	import com.rpgGame.coreData.type.AssetUrl;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.PKModeType;
@@ -169,22 +170,7 @@ package com.rpgGame.app.ui.main.head {
 			this._skin.UI_bingjia.visible = JobEnum.ROLE_1_TYPE==info.job;
 			this._skin.UI_mojia.visible = JobEnum.ROLE_2_TYPE==info.job||JobEnum.ROLE_3_TYPE==info.job;
 			this._skin.UI_yijia.visible = JobEnum.ROLE_4_TYPE==info.job;
-			
-			switch(info.job){
-				case JobEnum.ROLE_1_TYPE:
-					this._skin.icon.styleName="ui/mainui/head/touxiang/bingjia/big.png";
-					break;
-				case JobEnum.ROLE_2_TYPE:
-					this._skin.icon.styleName="ui/mainui/head/touxiang/mojia/big.png";
-					break;
-				case JobEnum.ROLE_3_TYPE:
-					this._skin.icon.styleName="ui/mainui/head/touxiang/mojia/big.png";
-					break;
-				case JobEnum.ROLE_4_TYPE:
-					this._skin.icon.styleName="ui/mainui/head/touxiang/yijia/big.png";
-					break;
-			}
-			
+			this._skin.icon.styleName=AssetUrl.getRoleHeadUrl(info.job,info.sex);		
 			updateFight();
 		}
 		
