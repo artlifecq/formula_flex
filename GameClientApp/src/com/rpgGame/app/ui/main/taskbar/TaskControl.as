@@ -192,7 +192,7 @@ package com.rpgGame.app.ui.main.taskbar
 				}
 				else//主线和支线的怪取配置坐标点
 				{
-					var post:Array=TaskMissionManager.getPathingByType(type,num);
+					var postPath:Array=TaskMissionManager.getPathingByType(type,num);
 					if(key==1)
 					{
 						var modeid:int=TaskUtil.getMonsterByType(type,num);
@@ -201,16 +201,16 @@ package com.rpgGame.app.ui.main.taskbar
 						obj.modeid=modeid;
 						if(TaskUtil.getSubtypeByType(type)==TaskType.SUB_GATHER)//采集任务寻路完成开始采集
 						{
-							TaskUtil.postTaskWalk(post,walkStartGather,obj);
+							TaskUtil.postTaskWalk(postPath,walkStartGather,obj);
 						}
 						else
 						{
-							TaskUtil.postTaskWalk(post,startFight,null,true);
+							TaskUtil.postTaskWalk(postPath,startFight,null,true);
 						}
 					}
 					else
 					{
-						TaskUtil.postTaskFly(post,type);
+						TaskUtil.postTaskFly(postPath,type);
 					}
 				}
 			}

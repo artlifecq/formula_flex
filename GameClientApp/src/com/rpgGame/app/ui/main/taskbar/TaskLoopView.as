@@ -594,6 +594,7 @@ package com.rpgGame.app.ui.main.taskbar
 				}
 			}
 			_skin.sec_tuijian.y=killBut1List[0].y+3;
+			_skin.auto.visible=_skin.sec_navi3.visible;
 			_skin.auto.y=_skin.sec_navi3.y+1;
 			_skin.auto.x=_skin.sec_navi3.x+RenWuTitle_Skin(_skin.sec_navi3.skin).sec_navi1.textWidth+3;
 			if(count>=0)
