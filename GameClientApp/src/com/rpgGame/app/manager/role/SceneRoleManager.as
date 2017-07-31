@@ -17,6 +17,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.app.manager.yunBiao.YunBiaoManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.scene.animator.FightSoulFollowAnimator;
+	import com.rpgGame.app.scene.animator.GirlPetFollowAnimator;
 	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.app.state.role.action.PlayActionStateReference;
 	import com.rpgGame.app.state.role.control.RidingStateReference;
@@ -497,15 +498,20 @@ package com.rpgGame.app.manager.role
 			{
 				(role.headFace as HeadFace).addAndUpdateGuiShu();
 			}
-			var q_gril_pet:Q_girl_pet=PetCfg.getPet(data.modId);
-			role.updateBody(q_gril_pet ? q_gril_pet.q_panel_show_id : "", null);
+			//			var q_gril_pet:Q_girl_pet=PetCfg.getPet(data.modId);
+			//			role.updateBody(q_gril_pet ? q_gril_pet.q_panel_show_id : "", null);
+			//执行主换装更新
+			AvatarManager.updateBody(role);
 			role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true); //切换到“站立状态”
 			
 			role.setScale(data.sizeScale);
 			role.setGroundXY(data.x-1, data.y);
 			role.rotationY = data.direction;
 			SceneManager.addSceneObjToScene(role, true, false, false);
-			EventManager.dispatchEvent(MapEvent.UPDATE_MAP_ROLE_ADD, role);
+			var girlPet:GirlPetFollowAnimator=new GirlPetFollowAnimator();
+			girlPet.setOwner(role);
+			role.setRenderAnimator(girlPet);
+			//			EventManager.dispatchEvent(MapEvent.UPDATE_MAP_ROLE_ADD, role);
 		}
 		/**
 		 * 创建掉落物

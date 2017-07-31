@@ -151,11 +151,11 @@ package com.rpgGame.appModule.junjie
 			{
 				
 				_showFirstLv=(Mgr.junjieMgr.getActivationLv()+1);
-				if(_showFirstLv<=_maxShowNum){
+				if(_showFirstLv<_maxShowNum-1){
 					_showFirstLv=1;
 				}
 				else{
-					_showFirstLv=_showFirstLv-(_maxShowNum-1);
+					_showFirstLv=_showFirstLv-(_maxShowNum-3);
 				}
 				updateBtnState();
 				showItemList(_showFirstLv);

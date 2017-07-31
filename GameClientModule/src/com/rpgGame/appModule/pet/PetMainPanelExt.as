@@ -557,6 +557,7 @@ package com.rpgGame.appModule.pet
 				MCUtil.removeSelf(_blessPanel);
 			if(this._avatar)
 				this._avatar.dispose();
+			_curSelectItem=null;
 			EventManager.removeEvent(PetEvent.PET_DATA_CHANGE,onPetChange);
 			EventManager.removeEvent(PetEvent.PET_BUYNUM_CHANGE,onBuyNumChange);
 			EventManager.removeEvent(PetEvent.PET_CHANGE,onUpdatePetChuZhanOrXiuzhan);
