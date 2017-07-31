@@ -9,6 +9,7 @@ package com.rpgGame.appModule.open
 	import com.rpgGame.app.ui.main.buttons.IOpen;
 	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
 	import com.rpgGame.appModule.systemset.TouchToState;
+	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
 	import com.rpgGame.coreData.cfg.NewFuncCfgData;
@@ -22,9 +23,9 @@ package com.rpgGame.appModule.open
 	
 	import gs.easing.Bounce;
 	
+	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.xingongneng.KaiQi_Skin;
 	
-	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 	import starling.display.Stage;
 	import starling.events.Touch;
@@ -185,9 +186,10 @@ package com.rpgGame.appModule.open
 			refeashView();
 		}
 		
-		
 		private function refeashView():void
 		{
+			if(this.parent==null)
+				return ;
 			_qdata = _idlist.pop();
 			if(_qdata==null)
 			{
@@ -209,7 +211,6 @@ package com.rpgGame.appModule.open
 				this.changeState(ButtonState.UP);
 			else
 				this.changeState(ButtonState.HOVER);
-			trace(this._touchPointID);
 		}
 		protected function runFly():void
 		{

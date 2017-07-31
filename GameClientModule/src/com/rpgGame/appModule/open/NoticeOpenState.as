@@ -28,7 +28,7 @@ package com.rpgGame.appModule.open
 				_skin.uiTouxian.alpha = 0;
 			else{
 				_skin.uiTouxian.alpha = 1;
-				_skin.uiTouxian.styleName = "ui/app/xingongneng/"+data.q_openIcon+"/word.png";
+				_skin.uiTouxian.styleName = "ui/app/xingongneng/icon/"+data.q_openIcon+"/word.png";
 			}
 		}
 		

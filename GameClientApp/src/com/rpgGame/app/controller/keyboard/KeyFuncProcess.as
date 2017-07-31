@@ -101,7 +101,7 @@ package com.rpgGame.app.controller.keyboard
 //						AppManager.showApp(AppConstant.FRIEND_PANEL);
 					break;
 				case "9": //P 队伍
-						AppManager.showApp(AppConstant.EQUIP_PANL);
+					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ZUDUI,null,true,false);
 					break;
 				case "10": //O 商城
 					/*if (!ClientConfig.isBanShu)
@@ -121,7 +121,7 @@ package com.rpgGame.app.controller.keyboard
 //					CountryWarChengMenManager.testAddChengMen();
 					break;
 				case "17": //H
-					
+					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_BANGHUI,null,true,false);
 					break;
 				case "18": //I
 //					CountryWarChengMenManager.testRemoveChengMen();

@@ -45,7 +45,7 @@ package com.rpgGame.app.utils
 	public class MenuUtil
 	{
 		
-		public static function getPlayerTargetMenu(targetID:Number,fromChat:Boolean = false):Array
+		public static function getPlayerTargetMenu(targetID:Number,fromChat:Boolean = false,isTeam:Boolean= true):Array
 		{
 			var selfMemberData : SocietyMemberData = SocietyManager.getSelfMemberData();
 			var officerDataProto : FamilyOfficerDataProto = selfMemberData ? SocietyStaticConfigData.getFamilyOfficerDataByPos(selfMemberData.societyPos) : null;
@@ -62,7 +62,8 @@ package com.rpgGame.app.utils
 			//			if(!TeamManager.isInTeam(targetID))
 			//			{
 			//这个需要一直显示 
-			menus.push(LangMenu.INVITE_TEAM);
+			if(isTeam)
+				menus.push(LangMenu.INVITE_TEAM);
 			//			}
 			//			menus.push(LangMenu.TRADE);
 			if(!fromChat)

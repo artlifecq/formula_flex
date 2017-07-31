@@ -123,7 +123,7 @@ package com.rpgGame.app.ui.main.shortcut
 			}
 			_effect3d= new InterObject3D();
 			var data : RenderParamData3D = new RenderParamData3D(0, "ui_tiaoyueshijian", ClientConfig.getEffect("ui_tiaoyueshijian"));
-			_effect3d.addRenderUnitWith(data, 0, null);
+			_effect3d.addRenderUnitWith(data, 2, null);
 			_effect3d.touchable = false;
 			_effect3d.x = 40; 
 			_effect3d.y = 42;
