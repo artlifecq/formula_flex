@@ -65,7 +65,7 @@ package   com.rpgGame.app.ui.main.team
 		
 		override protected function onTouchTarget(target : DisplayObject) : void 
 		{
-			var isduizhang:Boolean=_data.memberId.EqualTo(Mgr.teamMgr.captain.memberId);
+			var isduizhang:Boolean=Mgr.teamMgr.isCaptain;
 			switch (target) {
 				case this._skin.btn_more:
 					var menus : Array = MenuUtil.getPlayerTeamMenu(_data.memberId.ToGID(), isduizhang);

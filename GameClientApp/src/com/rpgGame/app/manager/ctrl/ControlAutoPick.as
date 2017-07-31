@@ -25,6 +25,8 @@ package  com.rpgGame.app.manager.ctrl
 	import flash.geom.Point;
 	import flash.utils.getTimer;
 	
+	import org.game.netCore.data.long;
+	
 
 
 	
@@ -128,6 +130,17 @@ package  com.rpgGame.app.manager.ctrl
 		private function isOthers(sitem:SceneRole):Boolean
 		{
 			var data:SceneDropGoodsData = sitem.data as SceneDropGoodsData;
+			if (data.goodsDatas.validPickups.length>0) 
+			{
+				for each (var id:long in data.goodsDatas.validPickups) 
+				{
+					if (id.EqualTo(MainRoleManager.actorInfo.serverID)) 
+					{
+						return false;
+					}
+				}
+				
+			}
 			var owerId:Number=data.goodsDatas.ownerId.ToGID();
 			var myId:int=MainRoleManager.actorInfo.id;
 			if (owerId==0) 
@@ -137,10 +150,10 @@ package  com.rpgGame.app.manager.ctrl
 			else if (owerId!=myId) 
 			{
 				//策划要求可以见队友的
-				if (Mgr.teamMgr.isInMyTeam(data.goodsDatas.ownerId)) 
-				{
-					return false;
-				}
+//				if (Mgr.teamMgr.isInMyTeam(data.goodsDatas.ownerId)) 
+//				{
+//					return false;
+//				}
 				return true;
 			}
 			return false;

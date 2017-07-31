@@ -143,6 +143,11 @@ package com.rpgGame.app.manager.goods
 		}
 		public function isBetterEquipCompareWithEquiped(item:ClientItemInfo):Boolean
 		{
+			var sex:int=item.qItem.q_sex;
+			if (sex!=0&&sex!=MainRoleManager.actorInfo.sex) 
+			{
+				return false;
+			}
 			if((item.qItem.q_job==0||item.qItem.q_job==MainRoleManager.actorInfo.job)&&item.qItem.q_level<=MainRoleManager.actorInfo.totalStat.level)
 			{
 				var equ:EquipInfo=getEquipByPos(item.qItem.q_kind);

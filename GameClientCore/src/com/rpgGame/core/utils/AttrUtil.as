@@ -2,6 +2,7 @@ package com.rpgGame.core.utils
 {
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.core.interfaces.IAttrShow;
+	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
@@ -78,7 +79,7 @@ package com.rpgGame.core.utils
 				startPos.y=sty+int(i/cellNum)*yGe;
 				tmpLab.y=startPos.y;
 				contianer.addChild(tmpLab);
-				tmpLab.htmlText=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_ATTR_NAME,CharAttributeType.getCNName(keys[i])+splitStr)+HtmlTextUtil.getTextColor(GameColorUtil.COLOR_ATTR_VALUE,attHash.getValue(keys[i]))
+				tmpLab.htmlText=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_ATTR_NAME,CharAttributeType.getCNName(keys[i])+splitStr)+HtmlTextUtil.getTextColor(GameColorUtil.COLOR_ATTR_VALUE,AttValueConfig.getDisAttValueStr(keys[i],attHash.getValue(keys[i])))
 				tmpLab.width=tmpLab.textWidth;				
 				ret.push(tmpLab);
 			}
@@ -118,7 +119,7 @@ package com.rpgGame.core.utils
 				imgArrow.addChild(tmpLab);
 				tmpLab.x=12;
 				
-				tmpLab.text=attHash.getValue(keys[i])+CharAttributeType.getCNName(keys[i]);
+				tmpLab.text=AttValueConfig.getDisAttValueStr(keys[i],attHash.getValue(keys[i]))+CharAttributeType.getCNName(keys[i]);
 				tmpLab.y=(imgArrow.height-tmpLab.height)*0.5;
 				ret.push(imgArrow);
 			}
@@ -135,7 +136,7 @@ package com.rpgGame.core.utils
 			for (var i:int = 0; i < len; i++) 
 			{
 			
-				str+=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_ATTR_NAME,CharAttributeType.getCNName(keys[i]))+splitStr+HtmlTextUtil.getTextColor(GameColorUtil.COLOR_ATTR_VALUE,attHash.getValue(keys[i]));
+				str+=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_ATTR_NAME,CharAttributeType.getCNName(keys[i]))+splitStr+HtmlTextUtil.getTextColor(GameColorUtil.COLOR_ATTR_VALUE,AttValueConfig.getDisAttValueStr(keys[i],attHash.getValue(keys[i])));
 				if (i!=len-1) 
 				{
 					str+=devide;

@@ -42,6 +42,8 @@ package com.rpgGame.netData.map.bean{
 		//坐标Y
 		private var _y: int;
 		
+		//有效的拾取列表
+		private var _validPickups: Vector.<long> = new Vector.<long>();
 		/**
 		 * 写入字节缓存
 		 */
@@ -64,6 +66,11 @@ package com.rpgGame.netData.map.bean{
 			writeShort(_x);
 			//坐标Y
 			writeShort(_y);
+			//有效的拾取列表
+			writeShort(_validPickups.length);
+			for (var i: int = 0; i < _validPickups.length; i++) {
+				writeLong(_validPickups[i]);
+			}
 			return true;
 		}
 		
@@ -89,6 +96,11 @@ package com.rpgGame.netData.map.bean{
 			_x = readShort();
 			//坐标Y
 			_y = readShort();
+			//有效的拾取列表
+			var validPickups_length : int = readShort();
+			for (var i: int = 0; i < validPickups_length; i++) {
+				_validPickups[i] = readLong();
+			}
 			return true;
 		}
 		
@@ -225,6 +237,21 @@ package com.rpgGame.netData.map.bean{
 		 */
 		public function set y(value: int): void{
 			this._y = value;
+		}
+		
+		/**
+		 * get 有效的拾取列表
+		 * @return 
+		 */
+		public function get validPickups(): Vector.<long>{
+			return _validPickups;
+		}
+		
+		/**
+		 * set 有效的拾取列表
+		 */
+		public function set validPickups(value: Vector.<long>): void{
+			this._validPickups = value;
 		}
 		
 	}

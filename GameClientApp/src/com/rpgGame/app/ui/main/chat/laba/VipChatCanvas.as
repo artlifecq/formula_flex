@@ -1,10 +1,12 @@
 package com.rpgGame.app.ui.main.chat.laba
 {
-	import com.rpgGame.coreData.info.chat.ChatInfo;
 	import com.rpgGame.netData.chat.message.ResChatMessage;
+	
+	import away3d.events.Event;
 	
 	import feathers.controls.Group;
 	import feathers.controls.UIAsset;
+	import feathers.events.FeathersEventType;
 	
 	import starling.display.Sprite;
 	
@@ -38,6 +40,17 @@ package com.rpgGame.app.ui.main.chat.laba
 			chuanyinCup = new Sprite();
 			chuanyinCup.name = "chuanyinCup";
 			_skin.addChild(chuanyinCup);
+			_bg.addEventListener(FeathersEventType.RESIZE,onResize);
+		}
+		
+		private function onResize(e:Event):void
+		{
+			var len:int = chuanyinList.length;
+			var vipChatInfoItem:VipChatInfoItem;
+			for(var i:int=0;i<len;i++){
+				vipChatInfoItem=chuanyinList[i];
+				vipChatInfoItem.width=_bg.width;
+			}
 		}
 		
 		public function displayVIPChat(display:Boolean):void
@@ -109,11 +122,25 @@ package com.rpgGame.app.ui.main.chat.laba
 				chuanyinCup.removeChild(item);
 				chuanyinList.splice(index, 1);
 				_chuanyinPool.push(item);
-				setbgWith();
+//				setbgWith();
+				resetItemPosition();
+				if(chuanyinList.length==0){
+					displayVIPChat(false);
+				}
 				return true;
 			}
 			displayVIPChat(false);
 			return false
+		}
+		
+		private function resetItemPosition():void
+		{
+			var num:int=chuanyinList.length;
+			for(var i:int=0;i<num;i++){
+				var item:VipChatInfoItem=chuanyinList[i];
+				item.y=item.height;
+				toOffsetPos(item.y);		
+			}
 		}
 		
 		private function setbgWith():void
@@ -127,7 +154,7 @@ package com.rpgGame.app.ui.main.chat.laba
 				}
 				hight=hight+(chuanyinList.length-1)*2;
 				_bg.setSize(_bg.width,hight+5);
-				_bg.y=-hight+11;
+				_bg.y=-hight+24;
 			}
 			else
 			{

@@ -226,7 +226,8 @@ package com.rpgGame.app.ui.main.head
 					LookSender.lookOtherPlayer(_roleData.serverID);
 					break;
 				case this._skin.btn_zu:
-					Mgr.teamMgr.reqCreateTeamWithPlayer(_roleData.serverID);
+					//Mgr.teamMgr.reqCreateTeamWithPlayer(_roleData.serverID);
+					Mgr.teamMgr.InvitePlayerJoinTeam(_roleData.serverID);
 					break;
 				case this._skin.btn_more:
 					var menus : Array = MenuUtil.getPlayerTargetMenu(_roleData.serverID.ToGID(), true);

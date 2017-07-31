@@ -9,6 +9,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.marriage.message.SCNoticeZoneMessage;
 	import com.rpgGame.netData.marriage.message.SCProposalResultMessage;
 	import com.rpgGame.netData.marriage.message.SCRefuseNtoiceMessage;
+	import com.rpgGame.netData.marriage.message.SCRoundChangeMarriageMessage;
 	import com.rpgGame.netData.marriage.message.SCTargetProposalMessage;
 	import com.rpgGame.netData.marriage.message.SCUpGradeMessage;
 	import com.rpgGame.netData.marriage.message.SCUpdateZoneSubNumMessage;
@@ -35,7 +36,14 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(150118,onSCRefuseNtoiceMessage);
 			SocketConnection.addCmdListener(150119,onSCUpdateZoneSubNumMessage);
 			SocketConnection.addCmdListener(150121,onSCNoticeByDivorceMessage);
+			SocketConnection.addCmdListener(150122,onSCRoundChangeMarriageHandler);
 			super.finish();
+		}
+		
+		private function onSCRoundChangeMarriageHandler(msg:SCRoundChangeMarriageMessage):void
+		{
+			// TODO Auto Generated method stub
+			Mgr.hunyinMgr.onSCRoundChangeMarriageHandler(msg);
 		}
 		
 		/**
