@@ -1,6 +1,8 @@
 package com.rpgGame.appModule.rank
 {
-	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.app.manager.MenuManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.utils.MenuUtil;
 	import com.rpgGame.coreData.cfg.HorseConfigData;
 	import com.rpgGame.coreData.cfg.RankDesignationData;
 	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
@@ -11,19 +13,29 @@ package com.rpgGame.appModule.rank
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.netData.top.bean.TopInfo;
 	
+	import feathers.controls.ButtonState;
+	import feathers.controls.renderers.DefaultListItemRenderer;
+	
 	import org.mokylin.skin.app.paihangbang.PaiHang_Item2;
 	
 	import starling.display.DisplayObject;
 	
-	public class AllPlayerCell extends SkinUI
+	public class AllPlayerCell extends DefaultListItemRenderer
 	{
 		private var _skin:PaiHang_Item2;
 		private var _triggeredFun:Function;
 		public function AllPlayerCell(calFun:Function):void
 		{
 			_triggeredFun = calFun;
+			super();
+			init();
+		}
+		
+		protected function init():void
+		{
 			_skin = new PaiHang_Item2();
-			super(_skin);
+			_skin.toSprite(this);
+			_skin.uiOver.touchable = false;
 		}
 		private var _topInfo:TopInfo;
 		
@@ -42,6 +54,7 @@ package com.rpgGame.appModule.rank
 				_skin.lbLevel.visible = false;
 				_skin.lbZhiye.visible = false;
 				_skin.lbContent.visible = false;
+				_skin.uiOver.touchable = false;
 				_topInfo = null;
 				return ;
 			}else{
@@ -95,7 +108,7 @@ package com.rpgGame.appModule.rank
 			}
 		}
 		
-		public function color(value:uint):void
+		override public function set color(value:uint):void
 		{
 			_skin.lbNum.color = value;
 			_skin.lbName.color = value;
@@ -106,9 +119,44 @@ package com.rpgGame.appModule.rank
 		
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
-			if(_triggeredFun!=null)
+			super.onTouchTarget(target);
+			if(target == _skin.lbName)
 			{
-				_triggeredFun(_topInfo);
+				var uise:*= _topInfo.playerid.hexValue;
+				var userName : String = _topInfo.playername;
+				if(!MainRoleManager.isSelf(_topInfo.playerid.ToGID()))
+				{
+					MenuManager.showMenu(MenuUtil.getPlayerTargetRank(), [uise, userName], -1, -1, 80);
+				}
+			}
+		}
+		private var _isSelect:Boolean;
+		public function chackItem(topInfo:TopInfo):void
+		{
+			if(_topInfo==null)
+				return ;
+			_isSelect = (_topInfo == topInfo);
+			_skin.uiOver.visible = _isSelect;
+		}
+		
+		override protected function changeState(state:String):void
+		{
+			if(_topInfo==null)
+				return ;
+			super.changeState(state);
+			if(_isSelect)
+			{
+				_skin.uiOver.visible = _isSelect;
+			}else{
+				_skin.uiOver.visible = !(state==ButtonState.UP);
+			}
+			
+			if(state== ButtonState.DOWN)
+			{
+				if(_triggeredFun!=null)
+				{
+					_triggeredFun(_topInfo);
+				}
 			}
 		}
 	}

@@ -31,7 +31,7 @@ package com.rpgGame.app.ui.main.chat
 		{
 			if(_richText)
 			{
-				return _richText.height-3;
+				return _richText.height;
 			}
 			return super.height;
 		}
@@ -59,7 +59,7 @@ package com.rpgGame.app.ui.main.chat
 					_defaultFormat.size = 14;
 					_defaultFormat.align = TextFieldAutoSize.LEFT;
 					_defaultFormat.letterSpacing = 1;
-					_defaultFormat.leading = 6;
+					_defaultFormat.leading = 0;
 				}
 				
 				textFormat = _defaultFormat;

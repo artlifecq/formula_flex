@@ -3,8 +3,6 @@ package org.mokylin.skin.mainui.zhandouli
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import feathers.controls.UINumber;
-	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_hong;
-	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_lv;
 	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow;
 
 	/**
@@ -17,10 +15,6 @@ package org.mokylin.skin.mainui.zhandouli
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var bg:feathers.controls.UIAsset;
-
-		public var num_hong:feathers.controls.UINumber;
-
 		public var num_lv:feathers.controls.UINumber;
 
 		public var num_yellow1:feathers.controls.UINumber;
@@ -34,9 +28,9 @@ package org.mokylin.skin.mainui.zhandouli
 			super();
 			
 			this.currentState = "normal";
-			this.height = 141;
-			this.width = 394;
-			this.elementsContent = [bg_i(),__ZhandouliTipSkin_UIAsset1_i(),num_yellow1_i(),num_lv_i(),num_hong_i()];
+			this.height = 57;
+			this.width = 326;
+			this.elementsContent = [__ZhandouliTipSkin_UIAsset1_i(),num_yellow1_i(),num_lv_i()];
 			
 			states = {
 			};
@@ -51,35 +45,8 @@ package org.mokylin.skin.mainui.zhandouli
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/common/zdl.png";
-			temp.x = 7;
-			temp.y = 18;
-			return temp;
-		}
-
-		private function bg_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			bg = temp;
-			temp.name = "bg";
-			temp.left = 0;
-			temp.right = 0;
-			temp.styleName = "ui/common/zdlbg.png";
+			temp.x = 0;
 			temp.y = 0;
-			return temp;
-		}
-
-		private function num_hong_i():feathers.controls.UINumber
-		{
-			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
-			num_hong = temp;
-			temp.name = "num_hong";
-			temp.gap = -4;
-			temp.height = 25;
-			temp.label = "-1000";
-			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_hong;
-			temp.width = 102;
-			temp.x = 265;
-			temp.y = 56;
 			return temp;
 		}
 
@@ -88,13 +55,13 @@ package org.mokylin.skin.mainui.zhandouli
 			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
 			num_lv = temp;
 			temp.name = "num_lv";
-			temp.gap = -4;
-			temp.height = 25;
-			temp.label = "x1000";
-			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_lv;
-			temp.width = 102;
-			temp.x = 265;
-			temp.y = 56;
+			temp.gap = -5;
+			temp.height = 38;
+			temp.label = "x364";
+			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow;
+			temp.width = 97;
+			temp.x = 219;
+			temp.y = 10;
 			return temp;
 		}
 
@@ -103,13 +70,13 @@ package org.mokylin.skin.mainui.zhandouli
 			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
 			num_yellow1 = temp;
 			temp.name = "num_yellow1";
-			temp.gap = -17;
+			temp.gap = -6;
 			temp.height = 38;
-			temp.label = "1364";
+			temp.label = "5364";
 			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow;
 			temp.width = 97;
-			temp.x = 160;
-			temp.y = 49;
+			temp.x = 118;
+			temp.y = 10;
 			return temp;
 		}
 

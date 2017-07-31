@@ -201,6 +201,10 @@ package com.rpgGame.app.ui.tips
 				var attValues1:Q_att_values=AttValueConfig.getAttInfoById(int(_itemInfo.qItem.q_att_type));//基本属性
 				var stren:Q_equip_strength=EquipStrengthCfg.getStrengthCfg(_itemInfo.qItem.q_kind,_itemInfo.qItem.q_job,_itemInfo.strengthLevel);
 				var strenValues:Q_att_values=AttValueConfig.getAttInfoById(stren.q_att_type);//强化属性
+				if(equipFight==0)//如果战斗力为0 都去算一次战斗力
+				{
+					_itemTip.numbers.number=FightValueUtil.calFightPowerByAttValue(attValues1,0);
+				}
 			}
 			if(!attValues1){
 				return ;
