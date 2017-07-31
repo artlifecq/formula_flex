@@ -142,6 +142,13 @@ package com.rpgGame.app.ui
 				_stage.removeEventListener(Event.RESIZE,onStageResize);
 			}
 		}
-		
+		public function clear():void
+		{
+			showModelArray.length = 0;
+			if(this.parent!=null){
+				PARTNER.removeChild(this);
+				_stage.removeEventListener(Event.RESIZE,onStageResize);
+			}
+		}
 	}
 }

@@ -29,6 +29,7 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.app.map.BaseMapProcess;
 	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.ui.ResLoadingView;
+	import com.rpgGame.app.ui.UIModel;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppInfo;
 	import com.rpgGame.core.app.AppLoadManager;
@@ -398,6 +399,7 @@ package com.rpgGame.app.manager.scene
 			SceneManager.getScene().removeAllSceneObj();
 			TaskAutoManager.getInstance().stopSwitchAll();
 			TrusteeshipManager.getInstance().stopAll();
+			UIModel.instence.clear();
 		}
 		
 		/**
