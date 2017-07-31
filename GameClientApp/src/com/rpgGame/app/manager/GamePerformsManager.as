@@ -13,14 +13,17 @@
     import org.client.mainCore.manager.EventManager;
     import org.client.mainCore.utils.Tick;
 
+	/**
+	 * 游戏性能监控 
+	 * @author NEIL
+	 * 
+	 */	
     public class GamePerformsManager 
     {
-
         private static const ADJUST_DISPLAY_AVERAGE_SAMP:int = 60;
         private static const ADJUST_DISPLAY_INTERVAL:int = 10000;
         private static const ADJUST_VIEW_INTERVAL:int = 5000;
 
-        private static var _kernelCheckInterval:int = 1800000;
         private static var _serverHeroCounts:Array = [20, 50, 100, 200];
         private static var _serverHeroCountIndex:int = 0;
         private static var _lastViewAdjustAverageFps:int = 0;
@@ -34,14 +37,14 @@
         private static var _memCheckTime:int = 0;
         private static var _adjustDisplayCheckTime:int = 0;
         private static var _adjustViewCheckTime:int = 0;
+		
         private static var _kernelCheckTime:int = 0;
+		private static var _kernelCheckInterval:int = 1800000;
         public static var canAdjustView:Boolean = true;
-
 
         public static function init():void
         {
-            var _local1:int = getTimer();
-            _kernelCheckTime = _local1;
+            _kernelCheckTime = getTimer();
             _kernelCheckInterval = 600000;
             Tick.addCallback(onTick);
         }
@@ -58,9 +61,9 @@
             {
                 return;
             }
-            var _local1:int = getTimer();
-            _lastTime = _local1;
-            _memCheckTime = _local1;
+            var lastTime:int = getTimer();
+            _lastTime = lastTime;
+            _memCheckTime = lastTime;
             resetDisplayAdjust();
             resetViewAdjust();
             readMemory();
