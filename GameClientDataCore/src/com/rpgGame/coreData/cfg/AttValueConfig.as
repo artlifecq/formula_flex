@@ -79,7 +79,7 @@ package com.rpgGame.coreData.cfg
 		}
 		
 		/**
-		 *获取要显示的数值 
+		 *获取要显示的数值，显示必须强制转换
 		 * @param type
 		 * @param value
 		 * @return 

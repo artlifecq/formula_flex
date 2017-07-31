@@ -343,7 +343,7 @@ package com.rpgGame.app.utils
 					EventManager.dispatchEvent(ChatEvent.SWITCH_PRIVATE_CHANNEL,heroId,heroName);
 					break;
 				case LangMenu.INVITE_TEAM://组队
-					Mgr.teamMgr.InvitePlayerJoinTeam(new long(heroId));
+					Mgr.teamMgr.InvitePlayerJoinTeam(heroId);
 					//					TeamManager.InvitePlayerJoinTeam( heroId );
 					break;
 				case LangMenu.PLAY://切磋

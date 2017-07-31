@@ -233,7 +233,7 @@ package com.rpgGame.app.graphics
 			addElement(_nameBar);
 			//			addElement(_countryNameBar);
 			addElement(_junXianBar);
-			addElement(_fuqititle);
+		
 			addElement(_guildNameBar);
 			addElement(_familNameBar);
 			addElement(_icoImage);
@@ -362,7 +362,7 @@ package com.rpgGame.app.graphics
 					showAndHideElement(_guildNameBar, true,DecorCtrl.TOP_GUILD);
 					showAndHideElement(_familNameBar, !isMysteryMan&&_isSelected && !_isCamouflage);
 				}
-				showAndHideElement(_fuqititle, true,DecorCtrl.TOP_FUQI);
+				
 				showAndHideElement(_title, !isMysteryMan&&!_isCamouflage,DecorCtrl.TOP_CHENGHAO);
 				showAndHideElement(_rankTitle1, !isMysteryMan&&!_isCamouflage,DecorCtrl.TOP_CHENGHAO);
 				showAndHideElement(_rankTitle2, !isMysteryMan&&!_isCamouflage,DecorCtrl.TOP_CHENGHAO);
@@ -445,14 +445,6 @@ package com.rpgGame.app.graphics
 			//				_countryNameBar.x = _nameBar.x + _nameBar.realWidth;
 			//				_countryNameBar.y = _nameBar.y;
 			//			}
-			if (_fuqititle != null)
-			{
-				_fuqititle.x = int(-_fuqititle.realWidth * 0.5);
-				_fuqititle.y = int(upPosy - _fuqititle.realHeight);
-				upPosy = _fuqititle.y;
-				offsetY = _fuqititle.y;
-				downPosy = _fuqititle.y + _fuqititle.realHeight;
-			}
 			
 			if (_junXianBar != null)
 			{
@@ -633,6 +625,13 @@ package com.rpgGame.app.graphics
 			if (_isSelected)
 			{
 				EventManager.dispatchEvent(UPDATE_HEAD_FIGHT_INFO, _role, _bloodPercent);
+			}
+		}
+		public function showBloodStr(str:String):void
+		{
+			if (_bloodBar) 
+			{
+				_bloodBar.showBloodText(str);
 			}
 		}
 		public function set level(value : int) : void
@@ -1298,29 +1297,32 @@ package com.rpgGame.app.graphics
 		/**
 		 * 增加夫妻称号
 		 */
-		public function updateFuQiTitle() : void
+		public function updateFuQiTitle(otherName:String) : void
 		{
-			if(Mgr.hunyinMgr.marriageInfos==null||Mgr.hunyinMgr.marriageInfos.state==5)
+			if (!_role||SceneCharType.PLAYER!=_role.type) 
 			{
-				if (_fuqititle != null)
+				return;
+			}
+			if (otherName!=null&&otherName!="") 
+			{
+				if (!_fuqititle) 
+				{
+					_fuqititle=HeadNameBar.create();
+				}
+				
+				var fuqiName:String=otherName+"的"+((_role.data as HeroData).sex==1?"老公":"老婆");
+				_fuqititle.setName(fuqiName);
+				_fuqititle.setColor(StaticValue.A_UI_BEIGE_TEXT);
+				deCtrl.addTop(_fuqititle,DecorCtrl.TOP_FUQI);
+			}
+			else
+			{
+				if (_fuqititle) 
 				{
 					deCtrl.removeTop(_fuqititle);
 					HeadNameBar.recycle(_fuqititle);
-					_fuqititle = null;
-					updateAllBarPosition();
+					_fuqititle=null;
 				}
-				return;
-			}
-			var fuqiName:String=Mgr.hunyinMgr.marriageInfos.marriagePlayerName+"的";
-			var text:String=MainRoleManager.actorInfo.sex==1?"老公":"老婆";
-			fuqiName+=text;
-			if (_fuqititle == null)
-			{
-				_fuqititle = HeadNameBar.create();
-				_fuqititle.setName(fuqiName);
-				_fuqititle.setColor(StaticValue.A_UI_BEIGE_TEXT);
-				updateAllBarPosition();
-				deCtrl.sortTop();
 			}
 		}
 		

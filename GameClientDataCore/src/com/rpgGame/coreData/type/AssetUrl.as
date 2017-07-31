@@ -1,5 +1,7 @@
 package com.rpgGame.coreData.type
 {
+	import com.rpgGame.coreData.enum.JobEnum;
+
 	/**
 	 * 图片配置URL
 	 * @author 陈鹉光
@@ -95,15 +97,15 @@ package com.rpgGame.coreData.type
 		/** 小队跟随头像 **/
 		public static const TEAM_FOLLOW_HEAD_ICON:String = "ui/mainui/head/renwutouxiang.png";
 		/** 头像兵家 **/
-		public static const HEAD_ICON_1:String = "ui/mainui/head/touxiang/bingjia/zhujue.png";
+		public static const HEAD_ICON_1:String = "ui/mainui/head/touxiang/bingjia/";
 		/** 头像墨家男 **/
-		public static const HEAD_ICON_2:String = "ui/mainui/head/touxiang/mojia/zhujue.png";
+		public static const HEAD_ICON_2:String = "ui/mainui/head/touxiang/mojia/";
 		/** 头像墨家女**/
-		public static const HEAD_ICON_3:String = "ui/mainui/head/touxiang/mojia/zhujue.png";
+		public static const HEAD_ICON_3:String = "ui/mainui/head/touxiang/mojia2/";
 		/** 头像医家**/
-		public static const HEAD_ICON_4:String = "ui/mainui/head/touxiang/yijia/zhujue.png";
+		public static const HEAD_ICON_4:String = "ui/mainui/head/touxiang/yijia/";
 		/** 喇叭图标 **/
-		public static const LA_BA_ICON:String = "ui/mainui/chat/di_laba.png";
+		public static const LA_BA_ICON:String = "ui/mainui/chat/dalaba.png";
 		/** 上升箭头 **/
 		public static const ADD_ICON:String = "ui/common/icon/jiantou_add.png";
 		/** 下降箭头 **/
@@ -157,6 +159,34 @@ package com.rpgGame.coreData.type
 		public static const HEAD_ICON_4_SMALL:String = "ui/mainui/head/touxiang/yijia/zudui.png";
 		public function AssetUrl()
 		{
+		}
+		/**
+		 *获取角色头像 
+		 * @param job 职业
+		 * @param sex 性别
+		 * @param size big/middle/small
+		 * 
+		 */		
+		public static function getRoleHeadUrl(job:int,sex:int,size:String="big"):String
+		{
+			var ret:String=size+".png";
+			switch(job)
+			{
+				case JobEnum.ROLE_1_TYPE:
+					return AssetUrl.HEAD_ICON_1+ret;
+					break;
+				case JobEnum.ROLE_2_TYPE:
+					if (sex==1) 
+					{
+						return AssetUrl.HEAD_ICON_2+ret;
+					}
+					return AssetUrl.HEAD_ICON_3+ret;		
+					break;
+				case JobEnum.ROLE_4_TYPE:
+					return AssetUrl.HEAD_ICON_4+ret;
+					break;
+			}
+			return "";
 		}
 	}
 }

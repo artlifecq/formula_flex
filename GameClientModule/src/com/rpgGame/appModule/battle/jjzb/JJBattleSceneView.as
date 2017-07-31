@@ -2,6 +2,7 @@ package com.rpgGame.appModule.battle.jjzb
 {
 
 	import com.game.engine3D.display.Inter3DContainer;
+	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.rpgGame.app.manager.ctrl.ControlAutoFightSelectSkill;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -28,7 +29,6 @@ package com.rpgGame.appModule.battle.jjzb
 	import org.mokylin.skin.app.zhanchang.Head_Role_Left;
 	import org.mokylin.skin.app.zhanchang.Head__Role_Right;
 	import org.mokylin.skin.app.zhanchang.ZhangCheng_Scene;
-	import com.game.engine3D.display.InterObject3D;
 
 	public class JJBattleSceneView implements ISubBattleView
 	{
@@ -183,26 +183,7 @@ package com.rpgGame.appModule.battle.jjzb
 				_leftHeadIcon.y=-17;
 				skin.container.addChild(_leftHeadIcon);
 			}
-			_leftHeadIcon.styleName=getHeadUrl(brief.playerAppearanceInfo.job);
-		}
-		private function getHeadUrl(job:int):String
-		{
-			switch(job)
-			{
-				case JobEnum.ROLE_1_TYPE:
-					return AssetUrl.HEAD_ICON_1;
-					break;
-				case JobEnum.ROLE_2_TYPE:
-					return AssetUrl.HEAD_ICON_2;
-					break;
-				case JobEnum.ROLE_3_TYPE:
-					return AssetUrl.HEAD_ICON_3;
-					break;
-				case JobEnum.ROLE_4_TYPE:
-					return AssetUrl.HEAD_ICON_4;
-					break;
-			}
-			return "";
+			_leftHeadIcon.styleName=AssetUrl.getRoleHeadUrl(brief.playerAppearanceInfo.job,brief.playerAppearanceInfo.sex);
 		}
 		private function setRightHeadData(brief:ZhengBaBriefInfo,skin:Head__Role_Right):void
 		{
@@ -216,7 +197,7 @@ package com.rpgGame.appModule.battle.jjzb
 				
 				skin.container.addChild(_rightHeadIcon);
 			}
-			_rightHeadIcon.styleName=getHeadUrl(brief.playerAppearanceInfo.job);
+			_rightHeadIcon.styleName=AssetUrl.getRoleHeadUrl(brief.playerAppearanceInfo.job,brief.playerAppearanceInfo.sex);
 			_rightHeadIcon.scaleX=-1;
 		}
 	}

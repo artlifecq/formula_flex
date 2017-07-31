@@ -287,7 +287,7 @@ package com.rpgGame.app.ui.tips
 					label.y=curY;
 				}else{
 					var cfg:Q_equip_polish=EquipPolishCfg.getPolishCfg(_itemInfo.polishLevel);
-					name=HtmlTextUtil.getTextColor(StaticValue.A_UI_GRAY_TEXT,"装备基础属性提升:");
+					name=HtmlTextUtil.getTextColor(StaticValue.A_UI_GRAY_TEXT,"装备属性提升:");
 					value=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,(cfg.q_promote/100).toFixed(1)+"%");
 					label=createLabel(name,value);
 					label.x=curX;

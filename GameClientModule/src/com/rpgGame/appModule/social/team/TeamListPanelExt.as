@@ -85,7 +85,8 @@ package  com.rpgGame.appModule.social.team
 			 super.onShow();
 			 update();
 			 timer.start();
-			 onTimer();
+			 //onTimer();
+			 TeamSender.ReqSearchNearTeam("",true);
 			 TeamSender.ReqOpenOrCloseTeamPanel(1,0);
 		 }
 		 override protected function onHide():void

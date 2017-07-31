@@ -9,11 +9,11 @@ package   com.rpgGame.app.manager.debug
 	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.HashMap;
 	import com.gameClient.utils.JSONUtil;
-	import com.rpgGame.app.fight.spell.FightChangePop;
 	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
 	import com.rpgGame.app.fight.spell.SkillAddPop;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.fight.spell.SpellHitHelper;
+	import com.rpgGame.app.graphics.HeadBloodBar;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.manager.FangChenMiManager;
@@ -400,11 +400,10 @@ package   com.rpgGame.app.manager.debug
 			{
 				FightFaceHelper.useScene=arg[0]==1;
 			});
-			commandList.put( ".power", function (...arg):void
+			commandList.put( ".blood", function (...arg):void
 			{
-				UIPopManager.showAlonePopUI(FightChangePop,[arg[0],arg[1]]);
+				HeadBloodBar.isShowText=!HeadBloodBar.isShowText;
 			});
-			
 		}
 		
 		

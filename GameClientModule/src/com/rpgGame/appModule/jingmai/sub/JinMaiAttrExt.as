@@ -2,6 +2,7 @@ package com.rpgGame.appModule.jingmai.sub
 {
 	import com.rpgGame.core.interfaces.IAttrShow;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	
 	import org.mokylin.skin.app.beibao.jingmai.Shuxing_Item;
@@ -19,7 +20,7 @@ package com.rpgGame.appModule.jingmai.sub
 		{
 			_skin.imgAttr.styleName=CharAttributeType.getAttrNameUrl(attrType);
 			_skin.imgIco.styleName=CharAttributeType.getAttrIconUrl(attrType);
-			_skin.labAttr.text=attrValue+"";
+			_skin.labAttr.text=AttValueConfig.getDisAttValueStr(attrType,attrValue)+"";
 		}
 	}
 }

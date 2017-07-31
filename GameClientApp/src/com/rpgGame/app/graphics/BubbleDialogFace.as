@@ -286,7 +286,7 @@ package com.rpgGame.app.graphics
 			if (_wordFrame && _wordFrame.parent)
 			{
 				_wordFrame.x = -_wordFrame.width / 2;
-				_wordFrame.y = -_wordFrame.height-20;
+				_wordFrame.y = -_wordFrame.height-(_owner as SceneRole).headFace.height;
 			}
 		}
 	}

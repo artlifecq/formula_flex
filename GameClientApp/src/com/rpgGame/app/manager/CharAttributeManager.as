@@ -110,7 +110,10 @@ package com.rpgGame.app.manager
 			if (role)
 			{
 				if (role.headFace is HeadFace)
+				{
 					(role.headFace as HeadFace).bloodPercent = (data.totalStat.hp / data.totalStat.life);
+					(role.headFace as HeadFace).showBloodStr(data.totalStat.hp +"/"+ data.totalStat.life);
+				}
 				if (role == SceneRoleSelectManager.selectedRole)
 				{
 					EventManager.dispatchEvent(SceneCharacterEvent.SCENE_CHAR_DATA_UPDATE, role);

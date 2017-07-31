@@ -124,15 +124,6 @@ package org.mokylin.skin.mainui.chat
 			return temp;
 		}
 
-		private function __chat_Skin_UIAsset1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/mainui/chat/dalaba.png";
-			temp.x = 1;
-			temp.y = -7;
-			return temp;
-		}
-
 		private function bg_i():feathers.controls.SkinnableContainer
 		{
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
@@ -225,7 +216,7 @@ package org.mokylin.skin.mainui.chat
 			btn_face = temp;
 			temp.name = "btn_face";
 			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_biaoqiang;
-			temp.x = 293;
+			temp.x = 295;
 			temp.y = 3;
 			return temp;
 		}
@@ -248,7 +239,7 @@ package org.mokylin.skin.mainui.chat
 			btn_location = temp;
 			temp.name = "btn_location";
 			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_dinwei;
-			temp.x = 272;
+			temp.x = 274;
 			temp.y = 3;
 			return temp;
 		}
@@ -281,7 +272,7 @@ package org.mokylin.skin.mainui.chat
 			btn_scale = temp;
 			temp.name = "btn_scale";
 			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_sanjiao;
-			temp.x = 344;
+			temp.x = 346;
 			temp.y = 24;
 			return temp;
 		}
@@ -293,8 +284,7 @@ package org.mokylin.skin.mainui.chat
 			temp.name = "btn_send";
 			temp.height = 26;
 			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_fasong;
-			temp.width = 49;
-			temp.x = 318;
+			temp.x = 320;
 			temp.y = 1;
 			return temp;
 		}
@@ -341,7 +331,7 @@ package org.mokylin.skin.mainui.chat
 			temp.name = "grp_laba";
 			temp.x = 0;
 			temp.y = 0;
-			temp.elementsContent = [grp_laba_bg_i(),__chat_Skin_UIAsset1_i()];
+			temp.elementsContent = [grp_laba_bg_i()];
 			return temp;
 		}
 
@@ -363,7 +353,7 @@ package org.mokylin.skin.mainui.chat
 			inputbg = temp;
 			temp.name = "inputbg";
 			temp.styleName = "ui/component/text/chat_input.png";
-			temp.width = 250;
+			temp.width = 252;
 			temp.x = 67;
 			temp.y = 2;
 			return temp;

@@ -1,14 +1,16 @@
 package com.rpgGame.app.ui.main.chat
 {
+	import com.game.engine2D.config.MapConfig;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.chat.ChatGoodsManager;
 	import com.rpgGame.app.manager.chat.ChatManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.richText.RichTextCustomLinkType;
 	import com.rpgGame.app.richText.RichTextCustomUtil;
-	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.StaticValue;
+	import com.rpgGame.coreData.clientConfig.Q_map;
+	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.lang.LangChat;
@@ -16,6 +18,7 @@ package com.rpgGame.app.ui.main.chat
 	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
 	import com.rpgGame.coreData.type.chat.EnumChatTabsType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
+	import com.rpgGame.netData.chat.bean.HyperInfo;
 	import com.rpgGame.netData.chat.message.ResChatMessage;
 	
 	import flash.utils.ByteArray;
@@ -77,7 +80,7 @@ package com.rpgGame.app.ui.main.chat
 		
 		public static function getHTMLSystemMsg(msgInfo:ResChatMessage):String
 		{
-			var str:String=replaceItemShow(msgInfo);
+			var str:String=replaceHyperShow(msgInfo);
 			var chatHtml:String=str;
 			chatHtml=HtmlTextUtil.getTextColor(getChannelColor(msgInfo.type),chatHtml);
 			return chatHtml;
@@ -292,20 +295,33 @@ package com.rpgGame.app.ui.main.chat
 			return bay;
 		}
 		
-		public static function replaceItemShow(info:ResChatMessage):String
+		public static function replaceHyperShow(info:ResChatMessage):String
 		{
 			var str:String=info.chatText;
 			if(info.extraResInfo!=null&&info.extraResInfo.itemInfos!=null){
+				var newCode:String;
 				for(var i:int=0;i<info.extraResInfo.itemInfos.length;i++)
 				{
 					var cinfo:ClientItemInfo=  ItemUtil.convertClientItemInfo(info.extraResInfo.itemInfos[i].itemInfos);
 					if(cinfo)
 					{
 						var key:String = ChatGoodsManager.addItemInfo(cinfo);
-						var goodsCode:String = RichTextCustomUtil.getItemCode(key,cinfo.name,cinfo.quality);
-						str=str.replace(ChatManager.MSG_GOODS_CODE,goodsCode);
+						newCode = RichTextCustomUtil.getItemCode(key,cinfo.name,cinfo.quality);
+						str=str.replace(ChatManager.MSG_GOODS_CODE,newCode);
 					}
 				}
+				
+				var list:Vector.<HyperInfo>=info.extraResInfo.hyperInfos;
+				for(i=0;i<list.length;i++){
+					var hyperInfo:HyperInfo=list[i];
+					var listD:Array=hyperInfo.params.split(",");
+					var mapCfg:Q_map=MapDataManager.getMapInfo(int(listD[0])).getData();
+					var mapName:String=mapCfg.q_map_name+"("+listD[1]+","+listD[2]+")";
+					var linkStr:String= RichTextCustomUtil.getTextLinkCode(mapName,StaticValue.A_UI_GREEN_TEXT,RichTextCustomLinkType.WALK_TO_SCENE_POS_TYPE,hyperInfo.params);
+					newCode=linkStr+RichTextCustomUtil.getButtonLinkCode("org.mokylin.skin.component.button.ButtonSkin_send",RichTextCustomLinkType.FLY_TO_SCENE_POS_TYPE,hyperInfo.params);
+					str=str.replace(ChatManager.MSG_POSITION_CODE,newCode);
+				}
+				
 				str=str.replace(ChatManager.MSG_GOODS_CODE,"道具数据异常: 包含的道具_"+info.extraResInfo.itemInfos.length);
 			}
 			str=str.replace(ChatManager.MSG_GOODS_CODE,"后台数据异常");
@@ -392,7 +408,7 @@ package com.rpgGame.app.ui.main.chat
 		 */
 		public static function getHTMLChatMessage(msgInfo:ResChatMessage):String
 		{
-			var str:String=replaceItemShow(msgInfo);
+			var str:String=replaceHyperShow(msgInfo);
 			if(msgInfo.extraResInfo!=null)
 				var vip:int=msgInfo.extraResInfo.viplevel;
 //			var maohao:String=HtmlTextUtil.getTextColor(StaticValue.A_UI_WHITE_TEXT,": ");

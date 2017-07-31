@@ -60,7 +60,7 @@ package com.rpgGame.app.manager.chat
 		
 		
 		public static const MSG_GOODS_CODE : String = "{goods}";
-		private static const MSG_POSITION_CODE : String = "{pos}";
+		public static const MSG_POSITION_CODE : String = "{pos}";
 		
 		
 		private static var _chatItemHash : HashMap = new HashMap();
@@ -477,6 +477,7 @@ package com.rpgGame.app.manager.chat
 		/**当前私聊对象名称*/
 		public static var currentSiLiaoTargetName:String;
 		private static var _showGoodsList : Array = [];
+		private static var _positionList:Array=[];
 		private static var _posInfoProto : PosInfoProto;
 		
 		/**
@@ -520,7 +521,7 @@ package com.rpgGame.app.manager.chat
 				return;
 			
 			var newContent : String = setShowGoodFormat(content,channel); //解析里面所有的物品
-			hyperInfos=assemblyItem();
+			hyperInfos=assemblyHyperInfo();
 			var sendMsgStr : String = newContent;
 			sendMsgStr = StringFilter.match(sendMsgStr, "*"); //发送前就把敏感字去掉
 			ChatSender.cs_sendChat(sendMsgStr, channel, targetName, hyperInfos);	
@@ -600,6 +601,7 @@ package com.rpgGame.app.manager.chat
 		private static function setShowGoodFormat(msgStr : String, channel : int) : String
 		{
 			_showGoodsList.length = 0;
+			_positionList.length=0;
 			_posInfoProto = null;
 			
 			var separator : String = RichTextConfig.SEPARATOR;
@@ -622,14 +624,16 @@ package com.rpgGame.app.manager.chat
 					_showGoodsList.push(getShowItemInfo(unitData));
 				}
 				
-				if (unitData.linkType == RichTextCustomLinkType.POSITION_FLY_TYPE)
+			/*	if (unitData.linkType == RichTextCustomLinkType.POSITION_FLY_TYPE)
 				{
 					data[i] = MSG_POSITION_CODE;
 					updatePositonInfo(unitData);
-				}
+				}*/
 				if(unitData.linkType == RichTextCustomLinkType.POSITION_TYPE)//给文本位置数据加上频道颜色
 				{
-					data[i] = addColorToPositionData(unitData,channel);
+					data[i]=MSG_POSITION_CODE;
+//					data[i] = addColorToPositionData(unitData,channel);
+					_positionList.push(unitData);
 				}
 				if(unitData.linkType == RichTextCustomLinkType.QIUHUN)//如果是求婚直接返回源数据
 				{
@@ -646,39 +650,41 @@ package com.rpgGame.app.manager.chat
 		}
 		
 		/**
-		 * 组装物品消息
+		 * 组装额外信息
 		 * */
-		private static function assemblyItem():Vector.<HyperInfo>
+		private static function assemblyHyperInfo():Vector.<HyperInfo>
 		{
 			var hypList:Vector.<HyperInfo>=new Vector.<HyperInfo>();
-			if(_showGoodsList==null||_showGoodsList.length==0) return hypList;
+			var hyp:HyperInfo;
+			var index:int=0;
 			for(var i:int=0;i<_showGoodsList.length;i++)
 			{
 				var itemInfo:ClientItemInfo=_showGoodsList[i] as ClientItemInfo;
-				var hyp:HyperInfo=new HyperInfo();
-				hyp.hyperType=3;
-				hyp.index=i;
+				hyp=new HyperInfo();
+				hyp.hyperType=3;//物品类型必须发3
+				hyp.index=index;
 				hyp.params=itemInfo.itemInfo.itemId.ToString();
 				hypList.push(hyp);
+				index++;
+			}
+			for(i=0;i<_positionList.length;i++){
+				var data:RichTextUnitData=_positionList[i];
+				hyp=new HyperInfo();
+//				hyp.hyperType=3;
+				hyp.index=index;
+				hyp.params=data.linkData;
+				hypList.push(hyp);
+				index++;
 			}
 			return hypList;
-		}
-		
-		private static function updatePositonInfo(specialMsg:RichTextUnitData) : void
-		{
-			var pos : Array = specialMsg.linkData.split(",");
-			_posInfoProto = new PosInfoProto();
-			_posInfoProto.sceneId = pos[0];
-			_posInfoProto.sceneX = pos[1];
-			_posInfoProto.sceneY = pos[2];
-			_posInfoProto.sceneLine = pos[3];
-			_posInfoProto.sceneCountry = pos[4];
 		}
 		
 		private static function addColorToPositionData(specialMsg:RichTextUnitData, channel:int):String
 		{
 			var labelColor:uint = 0x55bb17;//ChatUtil.getChannelColor(channel);
-			return RichTextCustomUtil.getTextLinkCode(specialMsg.label,labelColor,specialMsg.linkType,specialMsg.linkData);
+			var linkStr:String= RichTextCustomUtil.getTextLinkCode(specialMsg.label,labelColor,specialMsg.linkType,specialMsg.linkData);
+//			var btnStr:String=RichTextCustomUtil.getButtonLinkCode("org.mokylin.skin.component.button.ButtonSkin_send",RichTextCustomLinkType.FLY_TO_SCENE_POS_TYPE,specialMsg.linkData);
+			return linkStr;
 		}
 		
 		/**
@@ -887,7 +893,7 @@ package com.rpgGame.app.manager.chat
 		
 		private static function playDialog(msg:ResChatMessage):void
 		{
-			var str:String=ChatUtil.replaceItemShow(msg);
+			var str:String=ChatUtil.replaceHyperShow(msg);
 			if(msg.playerId.ToGID()==MainRoleManager.actorID)
 				var sceneRole:SceneRole=MainRoleManager.actor;
 			else sceneRole=SceneManager.getSceneObjByID(msg.playerId.ToGID())as SceneRole;
