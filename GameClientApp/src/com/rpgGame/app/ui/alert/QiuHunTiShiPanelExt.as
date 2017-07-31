@@ -85,6 +85,7 @@ package com.rpgGame.app.ui.alert
 		private function setData():void
 		{
 			var str:String;
+			var istsr:String="";
 			switch(_type)
 			{
 				case 1:
@@ -128,7 +129,7 @@ package com.rpgGame.app.ui.alert
 					_skin.btn_jieshou.visible=false;
 					_skin.btn_jujue.visible=false;
 					var ms:SCProposalResultMessage=_msg as SCProposalResultMessage;
-					var istsr:String=ms.result==0?"拒绝":"接受";
+					istsr=ms.result==0?"拒绝":"接受";
 					str=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,ms.targetName)+HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,istsr+"了你的求婚");
 					_skin.lbInfo1.htmlText=str;
 					_skin.lbInfo2.visible=false;

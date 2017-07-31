@@ -1,4 +1,3 @@
-
 package com.rpgGame.netData.player.bean{
 	import com.rpgGame.netData.player.bean.ResourceDataItem;
 	import com.rpgGame.netData.player.bean.AttributeItem;
@@ -19,7 +18,7 @@ package com.rpgGame.netData.player.bean{
 	 * 本人玩家详细信息
 	 */
 	public class MyPlayerInfo extends Bean {
-		
+	
 		//角色Id
 		private var _personId: long;
 		
@@ -94,6 +93,9 @@ package com.rpgGame.netData.player.bean{
 		//帮会职位
 		private var _guildMemberType: int;
 		
+		//帮会职位(统帅,1:是,0:不是)
+		private var _guildIsLeader: int;
+		
 		/**
 		 * 写入字节缓存
 		 */
@@ -162,6 +164,8 @@ package com.rpgGame.netData.player.bean{
 			writeString(_guildName);
 			//帮会职位
 			writeInt(_guildMemberType);
+			//帮会职位(统帅,1:是,0:不是)
+			writeByte(_guildIsLeader);
 			return true;
 		}
 		
@@ -233,6 +237,8 @@ package com.rpgGame.netData.player.bean{
 			_guildName = readString();
 			//帮会职位
 			_guildMemberType = readInt();
+			//帮会职位(统帅,1:是,0:不是)
+			_guildIsLeader = readByte();
 			return true;
 		}
 		
@@ -624,6 +630,21 @@ package com.rpgGame.netData.player.bean{
 		 */
 		public function set guildMemberType(value: int): void{
 			this._guildMemberType = value;
+		}
+		
+		/**
+		 * get 帮会职位(统帅,1:是,0:不是)
+		 * @return 
+		 */
+		public function get guildIsLeader(): int{
+			return _guildIsLeader;
+		}
+		
+		/**
+		 * set 帮会职位(统帅,1:是,0:不是)
+		 */
+		public function set guildIsLeader(value: int): void{
+			this._guildIsLeader = value;
 		}
 		
 	}
