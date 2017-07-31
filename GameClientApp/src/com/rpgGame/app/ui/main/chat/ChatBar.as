@@ -1,4 +1,5 @@
 package com.rpgGame.app.ui.main.chat {
+	import com.rpgGame.app.manager.TeamManager;
 	import com.rpgGame.app.manager.chat.ChatGoodsManager;
 	import com.rpgGame.app.manager.chat.ChatInputManager;
 	import com.rpgGame.app.manager.chat.ChatManager;
@@ -6,6 +7,7 @@ package com.rpgGame.app.ui.main.chat {
 	import com.rpgGame.app.manager.chat.FaceGroupManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.debug.ClientCommend;
+	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.richText.RichTextCustomLinkType;
 	import com.rpgGame.app.richText.RichTextCustomUtil;
@@ -33,6 +35,7 @@ package com.rpgGame.app.ui.main.chat {
 	import away3d.events.Event;
 	
 	import feathers.controls.List;
+	import feathers.controls.Radio;
 	import feathers.controls.ScrollBar;
 	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.controls.ScrollPolicy;
@@ -138,6 +141,8 @@ package com.rpgGame.app.ui.main.chat {
 			layout.gap = 0;
 			layout.hasVariableItemDimensions = true;
 			_skin.listBar.layout = layout;
+			_skin.btn_lock.isSelected=true;
+			setListIstoOrKeep();
 			
 			this._initBgY = this._skin.bg.y;		
 			
@@ -146,9 +151,9 @@ package com.rpgGame.app.ui.main.chat {
 			defaultFormat.size = 14;
 			defaultFormat.align = TextFormatAlign.LEFT;
 			defaultFormat.letterSpacing = 1;
-			defaultFormat.leading = 2;
+			defaultFormat.leading = 0
 			
-			this._inputText = new RichTextArea3D(this._skin.inputbg.width, this._skin.inputbg.height, ColorUtils.getDefaultStrokeFilter());
+			this._inputText = new RichTextArea3D(this._skin.inputbg.width-50, this._skin.inputbg.height, ColorUtils.getDefaultStrokeFilter());
 			this._inputText.maxChars = ChatCfgData.MAX_CHAR_LENGTH;
 			this._inputText.isEditable = true;
 			this._inputText.x = this._skin.inputbg.x;
@@ -443,6 +448,8 @@ package com.rpgGame.app.ui.main.chat {
 				_skin.lb_pindao.color=ChatUtil.getChannelColor(pingdao);
 				_curSendChannel=pingdao;
 				return true;
+			}else{
+				(_skin.btns.getChildAt(CHANNEL_TYPES.indexOf(_curSendChannel)) as Radio).isSelected=true;
 			}
 			return false;
 		}	
@@ -475,6 +482,16 @@ package com.rpgGame.app.ui.main.chat {
 						NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, "90级开放跨服聊天");
 						return false;
 					}
+				case EnumChatChannelType.CHAT_CHANNEL_PARTY:
+					if(!GuildManager.instance().haveGuild){
+						NoticeManager.showNotifyById(60010);
+					}
+					return GuildManager.instance().haveGuild;
+				case EnumChatChannelType.CHAT_CHANNEL_TEAM:
+					if(!TeamManager.ins.hasTeam){
+						NoticeManager.showNotifyById(13023);
+					}
+					return TeamManager.ins.hasTeam;
 			}
 			return true;
 		}
@@ -672,7 +689,7 @@ package com.rpgGame.app.ui.main.chat {
 			this._skin.tab_Type.y = this._initGroupTopY + dy;
 			
 			this._skin.inputbg.width = this._initInputBgWidth + dx;
-			this._inputText.setSize(this._skin.inputbg.width, this._skin.inputbg.height);
+			this._inputText.setSize(this._skin.inputbg.width-50, this._skin.inputbg.height);
 			this._skin.btn_send.x = this._initSendX + dx;
 			this._curWidth = this._skin.bg.width;
 			
@@ -732,7 +749,7 @@ package com.rpgGame.app.ui.main.chat {
 		private function setListIstoOrKeep():void
 		{
 //			_skin.btn_lock.isSelected=!_skin.btn_lock.isSelected;
-			iskeepOrto=_skin.btn_lock.isSelected;
+			iskeepOrto=!_skin.btn_lock.isSelected;
 		}
 			
 		private function sendMsg() : void 
