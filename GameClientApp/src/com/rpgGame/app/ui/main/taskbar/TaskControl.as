@@ -48,20 +48,17 @@ package com.rpgGame.app.ui.main.taskbar
 		{
 		}
 		
-		public static var panlIsopen:Boolean=false;
 		public static function showLeadPanel():void
 		{
 			if (!AppManager.isAppInScene(AppConstant.TASK_LEAD_PANEL))
 			{
 				AppManager.showApp(AppConstant.TASK_LEAD_PANEL);
-				panlIsopen=true;
 			}
 			
 		}
 		public static function hideLeadPanel():void
 		{
 			AppManager.hideApp(AppConstant.TASK_LEAD_PANEL);
-			panlIsopen=false;
 		}
 		public static function showLoopPanel():void
 		{

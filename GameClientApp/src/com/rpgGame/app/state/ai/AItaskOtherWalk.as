@@ -14,6 +14,8 @@ package com.rpgGame.app.state.ai
 	import com.rpgGame.coreData.type.AIStateType;
 	import com.rpgGame.coreData.type.TaskType;
 	
+	import flash.utils.getTimer;
+	
 	public class AItaskOtherWalk extends AIState
 	{
 		private var taskType:int
@@ -36,7 +38,8 @@ package com.rpgGame.app.state.ai
 				if(TaskMissionManager.getTaskHaveNpc(taskType))
 				{
 					TaskUtil.npcTaskWalk(TaskMissionManager.getTaskNpcAreaId(taskType),onArrive);
-					isWalking=1;
+					isWalking=true;
+					isWalkTime=getTimer();
 				}
 				else
 				{
@@ -73,13 +76,15 @@ package com.rpgGame.app.state.ai
 					obj.modeid=modeid2;
 					TaskUtil.postTaskWalk(post2,walkStartGather,obj);
 				}
-				isWalking=1;
+				isWalking=true;
+				isWalkTime=getTimer();
 			}
 			
 			
 			
 		}
-		private var isWalking:int=0;
+		private var isWalking:Boolean=false;
+		private var isWalkTime:int;
 		private function onArrive(data :Object=null) : void
 		{
 			if(taskType==TaskType.MAINTYPE_MAINTASK)
@@ -98,12 +103,12 @@ package com.rpgGame.app.state.ai
 			{
 				TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);	
 			}
-			isWalking=0;
+			isWalking=false;
 		}
 		private function subMonster(data : Object=null) : void
 		{
 			TrusteeshipManager.getInstance().startAutoFight();
-			isWalking=0;
+			isWalking=false;
 		}
 		/**采集寻路完成开始采集了*/
 		private function walkStartGather(data :Object):void
@@ -111,7 +116,7 @@ package com.rpgGame.app.state.ai
 			
 			var modeid:int=data.modeid;
 			GatherAutoManager.getInstance().startGatherAuto(modeid,taskType);
-			isWalking=0;
+			isWalking=false;
 		}
 		
 		
@@ -120,10 +125,9 @@ package com.rpgGame.app.state.ai
 		{
 			if (nextState.type == AIStateType.AI_NONE)
 				return true;
-			if(isWalking>0&&!MainRoleManager.actor.stateMachine.isRunning&&!MainRoleManager.actor.stateMachine.isWalking&&!MainRoleManager.actor.stateMachine.isWalkMoving)
+			if(isWalking&&!MainRoleManager.actor.stateMachine.isRunning&&!MainRoleManager.actor.stateMachine.isWalking&&!MainRoleManager.actor.stateMachine.isWalkMoving)
 			{
-				isWalking++;
-				if(isWalking>=10)
+				if((getTimer()-isWalkTime)>=TaskAutoManager.AUTOMAIN)
 				{
 					return true;
 				}

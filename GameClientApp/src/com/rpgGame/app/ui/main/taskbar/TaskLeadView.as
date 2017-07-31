@@ -57,7 +57,7 @@ package com.rpgGame.app.ui.main.taskbar
 			_skin.btn_open.visible=false;
 			_skin.btn_close.visible=true;
 			_skin.task_effect.visible=true;
-			icoListGroup=new RewardGroup(IcoSizeEnum.ICON_42,_skin.pri_ico0,RewardGroup.ALIN_CENTER,4,6,6);
+			icoListGroup=new RewardGroup(IcoSizeEnum.ICON_42,_skin.pri_ico0,RewardGroup.ALIN_CENTER,4,6,6,true,4);
 			
 			skinList=new Array();
 			skinList.push(_skin.pri_navi0);

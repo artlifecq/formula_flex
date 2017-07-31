@@ -75,8 +75,8 @@ package com.rpgGame.app.ui.main.taskbar
 		{
 			var i:int;
 			scrollInit();
-			icoList1Group=new RewardGroup(IcoSizeEnum.ICON_42,_skin.sec_ico1_0,RewardGroup.ALIN_CENTER,4,6,6);
-			icoList2Group=new RewardGroup(IcoSizeEnum.ICON_42,_skin.sec_ico2_0,RewardGroup.ALIN_CENTER,4,6,6);
+			icoList1Group=new RewardGroup(IcoSizeEnum.ICON_42,_skin.sec_ico1_0,RewardGroup.ALIN_CENTER,4,6,6,true,4);
+			icoList2Group=new RewardGroup(IcoSizeEnum.ICON_42,_skin.sec_ico2_0,RewardGroup.ALIN_CENTER,4,6,6,true,4);
 			skinList=new Array();
 			skinList.push(_skin.sec_navi1);
 			skinList.push(_skin.lbInfo);
@@ -550,7 +550,6 @@ package com.rpgGame.app.ui.main.taskbar
 		public function setTreasuerCheck(check:Boolean):void
 		{
 			TaskMissionManager.treasuerCheck=check;
-			Lyt.a("check:"+check);
 			TaskAutoManager.getInstance().stopTaskAuto();
 			if(check)
 			{

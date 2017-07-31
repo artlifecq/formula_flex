@@ -17,6 +17,7 @@ package com.rpgGame.app.state.role.action
 		private var _jumpAction : int = 0;
 		private var _jumpTime : int = 0;
 		private var _destPoint:Vector3D;//跳跃目的地
+		private var _isEnd:Boolean;
 		public function JumpStateReference()
 		{
 			super();
@@ -26,11 +27,12 @@ package com.rpgGame.app.state.role.action
 		 * @param destPoint 跳跃目的点
 		* 传入时间和目的点就按目的点跳，没有就按原地跳规则
 		*/
-		public function setParams(jumpAction:int,costTime:int=0,destPoint:Vector3D=null) : void
+		public function setParams(jumpAction:int,costTime:int=0,destPoint:Vector3D=null,isEnd:Boolean=false) : void
 		{
 			_jumpAction = jumpAction;
 			_jumpTime=costTime;
 			_destPoint=destPoint;
+			_isEnd=isEnd;
 		}
 
 		public function set jumpAction(value : int) : void
@@ -72,6 +74,10 @@ package com.rpgGame.app.state.role.action
 			_jumpTime = value;
 		}
 
+		public function get isEnd():Boolean
+		{
+			return _isEnd;
+		}
 		
 
 	}

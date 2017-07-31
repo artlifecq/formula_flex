@@ -115,7 +115,6 @@ package com.rpgGame.app.sender
 		/**向服务器发送触发跳跃点*/
 		public static function jumppointTrigger(jumpId : uint):void
 		{
-			Lyt.a("请求跳跃消息:"+ReqLockUtil.isReqLocked(101220));
 			if (ReqLockUtil.isReqLocked(101220))
 				return;
 			ReqLockUtil.lockReq(101220, 3000);
