@@ -91,6 +91,8 @@ package org.mokylin.skin.common.alert
 			super();
 			
 			this.currentState = "normal";
+			this.height = 557;
+			this.width = 292;
 			this.elementsContent = [bg_i(),__Alert_WuPinHuoQu_UIAsset1_i(),btnClose_i(),btn_goumai_i(),btn_chongzhi_i(),zongjia_i(),bizhong_i(),shuliang_i(),__Alert_WuPinHuoQu_Group1_i(),__Alert_WuPinHuoQu_Group2_i(),gGetPath_i(),itembg_i(),grp_diejia_i(),grp_danjia_i(),itemname_i(),__Alert_WuPinHuoQu_UIAsset12_i()];
 			
 			states = {

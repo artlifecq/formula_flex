@@ -58,6 +58,8 @@ package  com.rpgGame.app.ui.tips.cheats
 			MCUtil.removeSelf(_skin.lb_dengji);
 			_initStr=_skin.lb_Stone.text;
 			labList=[];
+			_skin.iconbg.addChild(_skin.imgStone);
+			_skin.imgStone.x=_skin.imgStone.y=1;
 		}
 		
 		public function setTipData(data:*):void
@@ -96,7 +98,7 @@ package  com.rpgGame.app.ui.tips.cheats
 		}
 		private function showChongXueTips(serverData:CheatsNodeVo,qAcu:Q_cheats_node):void
 		{
-			MCUtil.removeSelf(_skin.imgStone);
+			MCUtil.removeSelf(_skin.iconbg);
 			MCUtil.removeSelf(_skin.lb_Stone);
 			//穴位名字
 			this._skin.lb_name.text=qAcu.q_name;
@@ -331,7 +333,7 @@ package  com.rpgGame.app.ui.tips.cheats
 		}
 		private function showJXTips(serverData:CheatsNodeVo,qAcu:Q_cheats_node):void
 		{
-			this.addChild(_skin.imgStone);
+			this.addChild(_skin.iconbg);
 			this.addChild(_skin.lb_Stone);
 			//穴位名字
 			this._skin.lb_name.text=qAcu.q_name;
@@ -380,8 +382,9 @@ package  com.rpgGame.app.ui.tips.cheats
 				startY+=2;
 				//图标。
 				var qStone:Q_item=ItemConfig.getQItemByID(serverData.getStone().itemModelId);
-				stoneIcon.styleName="ui/app/beibao/icons/bianshi/"+qStone.q_default+"/"+qAcu.q_stone_type+".png";
+			
 				stoneIcon.x=this._skin.uiName1.x;
+				_ico.styleName="ui/app/beibao/icons/bianshi/"+qStone.q_default+"/"+qAcu.q_stone_type+".png";
 				stoneIcon.y=startY;
 				this.addChild(stoneIcon);
 				labList.push(stoneIcon);
@@ -416,11 +419,11 @@ package  com.rpgGame.app.ui.tips.cheats
 			//_skin.uiName2.text="【镶嵌说明】";
 			_skin.uiName2.styleName=TipUrl.URL_XiangQian;
 			startY+=_skin.uiName2.height+2;
-			_skin.imgStone.y=startY;
+			_skin.iconbg.y=startY;
 			_skin.imgStone.styleName="ui/app/beibao/icons/bianshi/5/"+qAcu.q_stone_type+".png";
 			_skin.lb_Stone.y=startY+4;
 			_skin.lb_Stone.htmlText=_initStr.replace("$",HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,EnumMStoneType.getStoneTypeName(qAcu.q_stone_type)));
-			startY+=Math.max(_skin.lb_Stone.height,_skin.imgStone.height)+2;
+			startY+=Math.max(_skin.lb_Stone.height,_skin.iconbg.height)+2;
 			//满级
 			if (isMaxStone) 
 			{
@@ -494,11 +497,16 @@ package  com.rpgGame.app.ui.tips.cheats
 			EventManager.removeEvent(MainPlayerEvent.LEVEL_CHANGE,playerAttrChange);
 			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,playerAttrChange);
 		}
+		private var _ico:UIAsset;
 		public function get stoneIcon():UIAsset
 		{
 			if (_stoneIcon==null) 
 			{
 				_stoneIcon=new UIAsset();
+				_stoneIcon.styleName="ui/common/grid/normal/bianshi_icon.png";
+				_ico=new UIAsset();
+				_ico.x=_ico.y=1;
+				_stoneIcon.addChild(_ico);
 			}
 			return _stoneIcon;
 		}

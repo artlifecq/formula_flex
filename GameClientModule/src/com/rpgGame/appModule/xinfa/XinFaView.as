@@ -63,6 +63,8 @@ package com.rpgGame.appModule.xinfa
 	import org.mokylin.skin.app.beibao.Xinfa.Xijing_Skin;
 	import org.mokylin.skin.app.beibao.Xinfa.Zhenyuan_Skin;
 	import org.mokylin.skin.app.beibao.Xinfa.xinfa_Skin;
+	
+	import starling.display.Sprite;
 
 	public class XinFaView
 	{
@@ -84,6 +86,8 @@ package com.rpgGame.appModule.xinfa
 		private var _attrView:XinFaAttrViewPanelExt;
 		private var _effect3dCon:Inter3DContainer;
 		private var _effect3d:InterObject3D;
+		//在封装一层，策划蛋疼
+		private var _btnCons:Array;
 		public function XinFaView(s:xinfa_Skin)
 		{
 			
@@ -97,13 +101,17 @@ package com.rpgGame.appModule.xinfa
 			
 			var len:int=cheatsArr.length;
 			XinFaBtnExt.clickCall=onTriggered;
+			_btnCons=[];
 			for (var i:int = 0; i < len; i++) 
 			{
+				var sp:Sprite=new Sprite();
 				var sbtn:XinFaBtnExt=new XinFaBtnExt(cheatsArr[i]);
 				sbtnArr[i]=sbtn;
-				sbtn.x=0;
-				sbtn.y=75*i;
-				_skin.btnGroup.addChild(sbtn);
+				sp.addChild(sbtn);
+				sp.x=0;
+				sp.y=75*i;
+				_btnCons.push(sp);
+				_skin.btnGroup.addChild(sp);
 			}
 			_effectCheatsGridArr=[new CheatsIcon(_skin.grid_1),new CheatsIcon(_skin.grid_2),new CheatsIcon(_skin.grid_3)];
 			_skillIcon=new BgIcon(IcoSizeEnum.ICON_36);
@@ -115,7 +123,6 @@ package com.rpgGame.appModule.xinfa
 			
 			TipTargetManager.show(_skin.btn_shuoming,TargetTipsMaker.makeTips(TipType.CHEATS_INTRADUCTION_TIP,null));
 			_skin.btn_jihuo.addEventListener(Event.TRIGGERED,onStartLevelUp);
-			
 			_attrLabHash=new HashMap();
 			_attrLabHash.put(CharAttributeType.SHENFA,_skin.lbSF);
 			_attrLabHash.put(CharAttributeType.MAX_HP,_skin.lbQX);
@@ -138,6 +145,8 @@ package com.rpgGame.appModule.xinfa
 			var rew:RewardMarkTip=new RewardMarkTip(_skin.btn_jihuo,110);
 			rew.hasReward=true;
 		}
+		
+		
 		private function onCloseAttr(eve:Event):void
 		{
 			// TODO Auto Generated method stub
@@ -213,6 +222,7 @@ package com.rpgGame.appModule.xinfa
 					updateMapAttr();
 				}
 				Mgr.cheatsMgr.dispatchEvent(new CheatsEvent(CheatsEvent.CHEATS_NODE_TIP_CHANGE,data));
+				_skin.NumZhanli.label=Mgr.cheatsMgr.getFightPower()+"";
 			}
 		}
 		
@@ -256,13 +266,13 @@ package com.rpgGame.appModule.xinfa
 			{
 				_skin.mc_Level.gotoAndStop(data.level+"");
 				_skin.lbJihuo.visible=false;
-				_skin.grpZhanli.visible=true;
+				//_skin.grpZhanli.visible=true;
 				
 			}
 			else
 			{
 				_skin.lbJihuo.visible=true;
-				_skin.grpZhanli.visible=false;
+				//_skin.grpZhanli.visible=false;
 			}
 			var buffObj:Array=_curMap.cheatsVo.getCurBuff();
 			
@@ -291,7 +301,6 @@ package com.rpgGame.appModule.xinfa
 			if (_curMap.cheatsVo.level>0) 
 			{
 				color=GameColorUtil.COLOR_NORMAL;
-				_skin.NumZhanli.label=FightValueUtil.calFightPowerByHash(_curMap.cheatsVo.totalValue,MainRoleManager.actorInfo.job)+"";
 			}
 			if (_curMap.cheatsVo.level==0) 
 			{
@@ -307,19 +316,23 @@ package com.rpgGame.appModule.xinfa
 			//_skin.gExtends.visible=_curMap.cheatsVo.extendAttr.size()>0;
 			//_extendsLabArr=_extendsLabArr.concat(AttrUtil.showAttr(_curMap.cheatsVo.extendAttr,this._skin.btn_next.parent,_skin.lab_jiangli,1,new Point(_skin.lab_jiangli.x,_skin.lab_jiangli.y),0,_skin.lab_jiangli.height+2,":",_extendsLabArr));
 		}
+		
 		private function setAttr(hash:HashMap):void
 		{
-			var keys:Array=hash.keys();
+			
+			var keys:Array=_attrLabHash.keys();
 			var lab:Label;
 			for each (var key:int in keys) 
 			{
 				lab=_attrLabHash.getValue(key);
-				if (lab==null) 
+				if (hash.containsKey(key)) 
 				{
-					GameLog.addError("心法属性不对呀"+key);
-					continue;
+					lab.text=hash.getValue(key)+"";
 				}
-				lab.text=hash.getValue(key)+"";
+				else
+				{
+					lab.text="0";
+				}
 			}
 			
 		}
@@ -344,6 +357,7 @@ package com.rpgGame.appModule.xinfa
 			var data:CheatsVo=_curMap.cheatsVo;
 			_skin.lbCailiao.visible=false;
 			_skin.btn_jihuo.visible=false;
+			_skin.btn_hecheng.visible=data.level>0;
 			if (data.level>0) 
 			{
 				return;
@@ -354,41 +368,38 @@ package com.rpgGame.appModule.xinfa
 			{
 				_skin.btn_jihuo.visible=true;
 			}
-			else
+		
+			var qChe:Q_cheats=data.cheatsConfig;
+			
+			if (_curMap.cheatsVo.needItemHash.size()!=0) 
 			{
-				
-				var qChe:Q_cheats=data.cheatsConfig;
-				
-				if (_curMap.cheatsVo.needItemHash.size()!=0) 
+				_skin.lbCailiao.visible=true;
+				//var str:String="收集@可激活心法";
+				var str:String=NotifyCfgData.getNotifyTextByID(61004);
+				var arr:Array=_curMap.cheatsVo.needItemHash.keys();
+				if (arr&&arr.length>0) 
 				{
-					_skin.lbCailiao.visible=true;
-					//var str:String="收集@可激活心法";
-					var str:String=NotifyCfgData.getNotifyTextByID(61004);
-					var arr:Array=_curMap.cheatsVo.needItemHash.keys();
-					if (arr&&arr.length>0) 
+					var len:int=arr.length;
+					var itemMid:int;
+					var itemNum:int;
+					var backNum:int=0;
+					var strArr:Array=[];
+					for (var i:int = 0; i < len; i++) 
 					{
-						var len:int=arr.length;
-						var itemMid:int;
-						var itemNum:int;
-						var backNum:int=0;
-						var strArr:Array=[];
-						for (var i:int = 0; i < len; i++) 
+						var color:uint=GameColorUtil.COLOR_GREEN;
+						itemMid=arr[i];
+						itemNum=_curMap.cheatsVo.needItemHash.getValue(itemMid);
+						backNum=BackPackManager.instance.getItemCount(itemMid);
+						if (itemNum>backNum)
 						{
-							var color:uint=GameColorUtil.COLOR_GREEN;
-							itemMid=arr[i];
-							itemNum=_curMap.cheatsVo.needItemHash.getValue(itemMid);
-							backNum=BackPackManager.instance.getItemCount(itemMid);
-							if (itemNum>backNum)
-							{
-								color=GameColorUtil.COLOR_RED;
-							}
-							strArr.push(HtmlTextUtil.getTextColor(color,backNum+"/"+itemNum)+NotifyCfgData.getNotifyTextByID(61005)+ItemConfig.getItemNameWithQualityColor(itemMid));
+							color=GameColorUtil.COLOR_RED;
 						}
+						strArr.push(HtmlTextUtil.getTextColor(color,backNum+"/"+itemNum)+NotifyCfgData.getNotifyTextByID(61005)+ItemConfig.getItemNameWithQualityColor(itemMid));
 					}
-					str=str.replace("@",strArr.join("、"));
-					_skin.lbCailiao.htmlText=str;
 				}
-			}
+				str=str.replace("@",strArr.join("、"));
+				_skin.lbCailiao.htmlText=str;
+			}	
 		}
 		private function checkReward(id:int):Boolean
 		{
@@ -416,14 +427,14 @@ package com.rpgGame.appModule.xinfa
 			{
 				meridianType=keys[i];
 				tmp=new CheatsMap(_skinArr[i],hash.getValue(meridianType),sbtnArr[i]);
-				SkinUI.addNode(RTNodeID.XF,RTNodeID.XF+"_"+meridianType,sbtnArr[i],200,checkReward,false,meridianType);
+				SkinUI.addNode(RTNodeID.XF,RTNodeID.XF+"_"+meridianType,_btnCons[i],200,checkReward,false,meridianType);
 				tmp.pos=i;
 				tmp.x=200;
 				tmp.y=70;
 				//_btnStateLabelHash.put(meridianType,_skin.btnGroup.skin.s
 				_mapsHash.put(meridianType,tmp);
 			}
-			tweenScroll=new TweenScaleScrollUitlExt(_skin.btnGroup,sbtnArr,_skin.btn_prev,_skin.btn_next,1,_skin.btnGroup.width,75*5,75,0.6/4,false);
+			tweenScroll=new TweenScaleScrollUitlExt(_skin.btnGroup,_btnCons,_skin.btn_prev,_skin.btn_next,1,_skin.btnGroup.width,75*5,75,0.6/4,false);
 			
 			tweenScroll.setStep(5);
 			_skin.mc_Level.gotoAndStop(0);
@@ -459,7 +470,7 @@ package com.rpgGame.appModule.xinfa
 		
 		public function onShow():void
 		{
-			EventManager.addEvent(MainPlayerEvent.STAT_CHANGE,updateTxt);//基本属性改变
+			
 			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,onZhenQiChange);
 			EventManager.addEvent(MainPlayerEvent.LEVEL_CHANGE,onLevelChange);
 			EventManager.addEvent(ItemEvent.ITEM_ADD,onAddItem);
@@ -467,7 +478,7 @@ package com.rpgGame.appModule.xinfa
 			Mgr.cheatsMgr.addEventListener(CheatsEvent.CHEATS_NODE_CHANGE,onCheatsNodeDataChange);
 			Mgr.cheatsMgr.addEventListener(CheatsEvent.CHEATS_CHANGE,onCheatsChange);
 			onZhenQiChange(CharAttributeType.RES_ZHENQI);
-			updateTxt();
+			
 			if (_curMap==null) 
 			{
 				showCurrentMap((sbtnArr[0]).userData)
@@ -475,16 +486,13 @@ package com.rpgGame.appModule.xinfa
 				_curBtn.isSelected=true;
 			}
 			_effect3d=_effect3dCon.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JINGMAI_STAR),0,0,0,null,addEft);
+			_skin.NumZhanli.label=Mgr.cheatsMgr.getFightPower()+"";
 		}
 		private function addEft(render:RenderUnit3D):void
 		{
 			render.play(0);
 		}
-		private function updateTxt():void
-		{
-			// TODO Auto Generated method stub
-			_skin.NumZhanli.number=MainRoleManager.actorInfo.totalStat.getStatValue(CharAttributeType.FIGHTING);
-		}
+		
 		
 		private function onAddItem(itemInfo : ClientItemInfo):void
 		{
@@ -573,7 +581,7 @@ package com.rpgGame.appModule.xinfa
 		}
 		public function onHide():void
 		{
-			EventManager.removeEvent(MainPlayerEvent.STAT_CHANGE,updateTxt);
+		
 			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,onZhenQiChange);
 			EventManager.removeEvent(MainPlayerEvent.LEVEL_CHANGE,onLevelChange);
 			EventManager.removeEvent(ItemEvent.ITEM_ADD,onAddItem);
@@ -600,7 +608,7 @@ package com.rpgGame.appModule.xinfa
 				{
 					showCurrentMap(map,true);
 				}
-				
+				_skin.NumZhanli.label=Mgr.cheatsMgr.getFightPower()+"";
 				//更新总战力
 			}
 		}

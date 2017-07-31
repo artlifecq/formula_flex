@@ -3,7 +3,6 @@ package com.rpgGame.appModule.rank
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
-	import com.rpgGame.core.events.RankListEvent;
 	import com.rpgGame.coreData.cfg.NewFuncCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_newfunc;
 	import com.rpgGame.coreData.enum.EmFunctionID;
@@ -14,7 +13,6 @@ package com.rpgGame.appModule.rank
 	import feathers.data.ListCollection;
 	
 	import org.client.mainCore.ds.HashMap;
-	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.paihangbang.PaiHangBang_Skin;
 	
 	public class RankListPanle extends SkinUIPanel

@@ -124,7 +124,7 @@ package com.rpgGame.app.ui.scene
 			EventManager.removeEvent(ActivityEvent.MIBAO_MONSTER_LIST,killInfoManage);
 			EventManager.removeEvent(ActivityEvent.MIBAO_MONSTER_CHANGE,killInfoManage);
 			EventManager.removeEvent(ActivityEvent.MIBAO_JIFEN_CHANGE,setJifenReword);
-			EventManager.removeEvent(ActivityEvent.MIBAO_JIFEN_CHANGE,setHurtRank);
+			EventManager.removeEvent(ActivityEvent.MIBAO__HURT_RANK,setHurtRank);
 		}
 		
 		

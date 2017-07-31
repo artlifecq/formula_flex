@@ -7,7 +7,7 @@ package com.rpgGame.appModule.common.touch
 
 	/**
 	 *starling 鼠标事件统一接口，减少冗余代码 
-	 * @author Administrator
+	 * @author yfl
 	 * 
 	 */	
 	public class TouchCtrl

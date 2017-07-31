@@ -42,7 +42,7 @@ package com.rpgGame.app.ui.tips
 		public function setTipData(data:*):void
 		{
 			_skin.lbHead.htmlText=data.name;
-			icoListGroup.setRewardByArray(TaskMissionCfgData.getRewordById(data.rewordid,MainRoleManager.actorInfo.job));
+			icoListGroup.setRewardByArray(TaskMissionCfgData.getRewordById(data.rewordid,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex));
 			icoListGroup.visible=true;
 			_skin.imgBG.height=icoListGroup.y+icoListGroup.height+15;
 			

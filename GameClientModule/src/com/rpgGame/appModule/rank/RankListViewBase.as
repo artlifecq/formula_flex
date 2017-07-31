@@ -54,7 +54,7 @@ package com.rpgGame.appModule.rank
 			}
 			
 			_selfCell = new RankListPlayerCell(triggeredHandler);
-			_selfCell.color(0x55bd15);
+			_selfCell.color=0x55bd15;
 			_selfCell.y = 397;
 			_selfCell.updatCellByInfo(_type,null);
 			_cellGroup.addChild(_selfCell);
@@ -66,6 +66,12 @@ package com.rpgGame.appModule.rank
 			if(_selectinfo == info)
 				return ;
 			_selectinfo = info;
+			var length:int = _cellList.length;
+			for(var i:int = 0;i<length;i++)
+			{
+				_cellList[i].chackItem(info);
+			}
+			_selfCell.chackItem(info);
 			_rightGroup.updateModle(info);
 		}
 		override protected function onShow():void

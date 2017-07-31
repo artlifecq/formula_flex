@@ -13,6 +13,11 @@ package com.rpgGame.coreData.enum
 		/** 医家 */		
 		public static const ROLE_4_TYPE:int = 4;
 		
+		/** 职业性别 男*/		
+		public static const ROLE_1_SEX:int =1;
+		/** 职业性别女 */		
+		public static const ROLE_2_SEX:int =2;
+		
 		/** 兵家 */		
 		public static const ROLE_1_NAME:String = "兵家";
 		/** 墨家 */		

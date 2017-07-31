@@ -4,6 +4,7 @@ package com.rpgGame.app.utils
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.coreData.cfg.AttFormulaConfig;
 	import com.rpgGame.coreData.clientConfig.ClientAttFormula;
+	import com.rpgGame.coreData.clientConfig.Q_att_transfer;
 	import com.rpgGame.coreData.clientConfig.Q_att_values;
 	import com.rpgGame.coreData.type.CharAttributeType;
 
@@ -18,11 +19,15 @@ package com.rpgGame.app.utils
 			list[CharAttributeType.HIT] =list[CharAttributeType.HIT]/BASE_NUM;
 			list[CharAttributeType.CRIT] =list[CharAttributeType.CRIT]/BASE_NUM;
 			//一级属性转二级属性
-			calFistAtrributeFightByType(list,job,CharAttributeType.LIDAO);
-			calFistAtrributeFightByType(list,job,CharAttributeType.GENGU);
-			calFistAtrributeFightByType(list,job,CharAttributeType.SHENFA);
-			calFistAtrributeFightByType(list,job,CharAttributeType.HUIGEN);
+//			calFistAtrributeFightByType(list,job,CharAttributeType.LIDAO);
+//			calFistAtrributeFightByType(list,job,CharAttributeType.GENGU);
+//			calFistAtrributeFightByType(list,job,CharAttributeType.SHENFA);
+//			calFistAtrributeFightByType(list,job,CharAttributeType.HUIGEN);
 			var combat:Number = 0;
+			combat+=calFistAtrributeFightPower(list,job,CharAttributeType.LIDAO);
+			combat+=calFistAtrributeFightPower(list,job,CharAttributeType.GENGU);
+			combat+=calFistAtrributeFightPower(list,job,CharAttributeType.SHENFA);
+			combat+=calFistAtrributeFightPower(list,job,CharAttributeType.HUIGEN);
 			//物理攻击
 			combat += list[CharAttributeType.WAI_GONG]/1;
 //			trace(CharAttributeType.WAI_GONG,list[CharAttributeType.WAI_GONG]/1);
@@ -90,6 +95,21 @@ package com.rpgGame.app.utils
 				proplist[formula.type] +=  base*formula.value/BASE_NUM;
 				
 			}
+		}
+		private static function calFistAtrributeFightPower(proplist:Vector.<Number>,job:int,type:int):Number
+		{
+			var ret:Number=0;
+			var jobType:String = job+"_"+type;
+			var base:int = proplist[type];
+			var qTrans:Q_att_transfer=AttFormulaConfig.getAttrTrans(jobType);
+			
+			ret=base*(qTrans?qTrans.q_fight_power:0)/BASE_NUM;
+//			var list:Vector.<ClientAttFormula>=AttFormulaConfig.getAttFormula(jobType);
+//			for each(var formula:ClientAttFormula in list){
+//				proplist[formula.type] +=  base*formula.value/BASE_NUM;
+//				
+//			}
+			return ret;
 		}
 	}
 }

@@ -15,12 +15,16 @@ package com.rpgGame.app.manager.task
 	
 	import app.message.BoolArrayProto;
 	
+	import feathers.controls.Check;
+	
 	import org.game.netCore.data.long;
 
 	public class TaskMissionManager
 	{
 		public static var flyTaskType:int;
 		public static var flyMissionType:int;
+		
+		public static var treasuerCheck :Boolean=false;
 		
 		/**最后完成主线任务id*/
 		private static var _taskModelId: int;
@@ -338,11 +342,9 @@ package com.rpgGame.app.manager.task
 				{
 					return true;
 				}
-				var information:String=mainTaskData.q_finish_information_str;
-				var informationList:Array=JSONUtil.decode(information);
-				if(informationList.length>num)
+				if(mainTaskInfo.taskSubRateInfolist.length>num)
 				{
-					return getTaskOneIsFinish(informationList[num],mainTaskInfo.taskSubRateInfolist[num]);
+					return getTaskOneIsFinish(mainTaskInfo.taskSubRateInfolist[num]);
 				}
 				
 			}
@@ -525,18 +527,12 @@ package com.rpgGame.app.manager.task
 				{
 					
 					var i:int,length:int;
-					var information:String=data.q_finish_information_str;
-					var informationList:Array=JSONUtil.decode(information);
-					for(i=0;i<informationList.length;i++)
+					for(i=0;i<info.taskSubRateInfolist.length;i++)
 					{
-						if(informationList[i]!=null&&informationList[i]!=null)
+						if(!getTaskOneIsFinish(info.taskSubRateInfolist[i]))
 						{
-							if(!getTaskOneIsFinish(informationList[i],info.taskSubRateInfolist[i]))
-							{
-								return false;
-							}
+							return false;
 						}
-						
 					}
 					return true;
 					
@@ -549,29 +545,13 @@ package com.rpgGame.app.manager.task
 		
 		
 		/**判断任务单个条件是否完成*/
-		public static function getTaskOneIsFinish(info:Array,sub:TaskSubRateInfo):Boolean
+		public static function getTaskOneIsFinish(sub:TaskSubRateInfo):Boolean
 		{
-			if(info!=null&&info.length>0)
+			if(sub!=null)
 			{
-				var i:int;
-				var text:String="";
-				var modeid:int=0;
 				var count:int=0,finish:int;
-				var modeArr:Array=info;
-				if(modeArr.length==2)
-				{
-					modeid=int(modeArr[0]);
-					finish=int(modeArr[1]);
-				}
 				count=sub.num;
-				/*for(i=0;i<sub.length;i++)
-				{
-					if(modeid==sub[i].modelId)
-					{
-						count=sub[i].num;
-						break;
-					}
-				}*/
+				finish=sub.maxNum;
 				if(count>=finish)
 				{
 					return true;
@@ -902,11 +882,9 @@ package com.rpgGame.app.manager.task
 				{
 					return true;
 				}
-				var information:String=taskData.q_finish_information_str;
-				var informationList:Array=JSONUtil.decode(information);
-				if(informationList.length>num&&taskInfo.taskSubRateInfolist.length>num)
+				if(taskInfo.taskSubRateInfolist.length>num)
 				{
-					return getTaskOneIsFinish(informationList[num],taskInfo.taskSubRateInfolist[num]);
+					return getTaskOneIsFinish(taskInfo.taskSubRateInfolist[num]);
 				}
 				
 			}

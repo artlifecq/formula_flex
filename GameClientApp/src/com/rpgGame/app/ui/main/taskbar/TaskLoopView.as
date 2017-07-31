@@ -2,7 +2,9 @@ package com.rpgGame.app.ui.main.taskbar
 {
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.FunctionOpenManager;
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.utils.TaskUtil;
@@ -137,6 +139,7 @@ package com.rpgGame.app.ui.main.taskbar
 			extraLabel=_skin.sec_info;
 			subBut1=_skin.sec_subbut1;
 			//subBut2=_skin.sec_subbut2;
+			_skin.chkAuto.isSelected=false;
 			guideLabelList=new Vector.<Label>();
 			
 			hideInfo();
@@ -314,7 +317,7 @@ package com.rpgGame.app.ui.main.taskbar
 				setNavView(TaskType.MAINTYPE_DAILYTASK,taskData.q_party_name,taskData.q_name,TaskMissionManager.getDailyTaskIsFinish(),navi2,subBut1);
 				TaskUtil.setGotargetInfo(taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killBut2List);
 				//TaskUtil.setRewordInfo(taskData.q_reword_id,ico1List,ico1BgList);
-				icoList1Group.setRewardByArray(TaskMissionCfgData.getRewordById(taskData.q_reword_id,MainRoleManager.actorInfo.job));
+				icoList1Group.setRewardByArray(TaskMissionCfgData.getRewordById(taskData.q_reword_id,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex));
 				icoList1Group.visible=true;
 				TipTargetManager.show( _skin.sec_navi2, TargetTipsMaker.makeTips( TipType.TASK_LEAD_TIP,{name:taskData.q_party_name+taskData.q_name,rewordid:taskData.q_reword_id}));
 				
@@ -365,20 +368,21 @@ package com.rpgGame.app.ui.main.taskbar
 				if(reward!=null)
 				{
 					//TaskUtil.setRewordInfo(reward.r,ico2List,ico2BgList);
-					icoList2Group.setRewardByArray(TaskMissionCfgData.getRewordById(reward.r,MainRoleManager.actorInfo.job));
+					icoList2Group.setRewardByArray(TaskMissionCfgData.getRewordById(reward.r,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex));
 					icoList2Group.visible=true;
 					setExtraLabel(reward.l);
 				}
 				
 				TipTargetManager.show( _skin.sec_navi3, TargetTipsMaker.makeTips( TipType.TASK_LOOP_TIP,{name:taskData.q_party_name+taskData.q_name,rewordid:taskData.q_reword_id,loopRewardId:task.loopRewardId,loopNumber:task.loopNumber}));
 			}
+			_skin.auto.visible=true;
 			setUisite();
 		}
 		/**设置环式隐藏*/
 		public function hideTreasuerTaskView():void
 		{
 			navi3.visible=false;
-			_skin.chkAuto.visible=false;
+			_skin.auto.visible=false;
 			var i:int;
 			for(i=0;i<killBut3List.length;i++)
 			{
@@ -429,8 +433,7 @@ package com.rpgGame.app.ui.main.taskbar
 					glabe.x=_skin.sec_navi1.x;
 					glabe.visible=true;
 					taskData=TaskMissionCfgData.getTaskByID(task[i].taskModelId);
-					var finish:Array=JSONUtil.decode(taskData.q_finish_information_str);
-					glabe.htmlText="<font color='#ffea00'>【"+taskData.q_name+"】</font>"+taskData.q_finish_describe+"("+task[i].taskSubRateInfolist[0].num+"/"+finish[0][1]+")";
+					glabe.htmlText="<font color='#ffea00'>【"+taskData.q_name+"】</font>"+taskData.q_finish_describe+"("+task[i].taskSubRateInfolist[0].num+"/"+task[i].taskSubRateInfolist[0].maxNum+")";
 				}
 			}
 			setUisite();
@@ -512,8 +515,8 @@ package com.rpgGame.app.ui.main.taskbar
 			var taskData:Q_mission_base=TaskMissionCfgData.getTaskByID(taskId);
 			if(taskData!=null)
 			{
-				nav.htmlText="<font color='#ffea00'>【主线】</font>"+taskData.q_party_name+taskData.q_name+"<font color='#ff0d0d'>(未完成)</font>";
-				_skin.lbInfo.htmlText="本任务需要"+taskData.q_needLevel+"级开启";
+				nav.htmlText="<font color='#ffea00'>【主线】</font>"+taskData.q_party_name+taskData.q_name;
+				_skin.lbInfo.htmlText="本任务需要"+taskData.q_needLevel+"级才能接取";
 			}
 			setKajiGoter();
 			TipTargetManager.show( _skin.sec_navi1, TargetTipsMaker.makeTips( TipType.TASK_LEAD_TIP,{name:taskData.q_party_name+taskData.q_name,rewordid:taskData.q_reword_id}));
@@ -543,6 +546,21 @@ package com.rpgGame.app.ui.main.taskbar
 			extraLabel.htmlText="完成<font color='#00ff33'>"+num+"</font>环可获得额外奖励：";
 			extraLabel.visible=true;
 			
+		}
+		public function setTreasuerCheck(check:Boolean):void
+		{
+			TaskMissionManager.treasuerCheck=check;
+			Lyt.a("check:"+check);
+			TaskAutoManager.getInstance().stopTaskAuto();
+			if(check)
+			{
+				TaskAutoManager.getInstance().startOtherTaskAuto(TaskType.MAINTYPE_TREASUREBOX);
+			}
+			NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, check?"开启自动进行环式任务":"取消自动进行环式任务");
+		}
+		public function clearTreasuerCheck():void
+		{
+			_skin.chkAuto.isSelected=false;
 		}
 		public function hideInfo():void
 		{
@@ -576,8 +594,8 @@ package com.rpgGame.app.ui.main.taskbar
 				}
 			}
 			_skin.sec_tuijian.y=killBut1List[0].y+3;
-			_skin.chkAuto.y=_skin.sec_navi3.y+1;
-			_skin.chkAuto.x=_skin.sec_navi3.x+RenWuTitle_Skin(_skin.sec_navi3.skin).sec_navi1.textWidth+3;
+			_skin.auto.y=_skin.sec_navi3.y+1;
+			_skin.auto.x=_skin.sec_navi3.x+RenWuTitle_Skin(_skin.sec_navi3.skin).sec_navi1.textWidth+3;
 			if(count>=0)
 			{
 				scrollBack.height=skinList[count].y+skinList[count].height+10;

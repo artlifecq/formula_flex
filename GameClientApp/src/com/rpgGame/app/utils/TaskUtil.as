@@ -925,6 +925,7 @@ package com.rpgGame.app.utils
 						{
 							modeid=subList[i].modelId;
 							count=subList[i].num;
+							finish=subList[i].maxNum;
 						}
 						text=TaskMissionCfgData.getTaskDescribe(type,describe,modeid);
 						text+="<font color='#cfc6ae'>("+count+"/"+finish+")</font>";
@@ -1034,7 +1035,7 @@ package com.rpgGame.app.utils
 		/**设置奖励物品*/
 		public static function setRewordInfo(rid:int,icoList:Vector.<IconCDFace>,icoBgList:Vector.<UIAsset>,show:Boolean=false):void
 		{
-			var rewordList:Array=TaskMissionCfgData.getRewordById(rid,MainRoleManager.actorInfo.job);
+			var rewordList:Array=TaskMissionCfgData.getRewordById(rid,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex);
 			if(rewordList==null)return;
 			var item:Q_item;
 			var i:int,length:int,idd:int;

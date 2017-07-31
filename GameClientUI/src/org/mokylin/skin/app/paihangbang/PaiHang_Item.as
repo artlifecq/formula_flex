@@ -1,11 +1,9 @@
 package org.mokylin.skin.app.paihangbang
 {
 	import feathers.controls.text.Fontter;
-	import feathers.controls.Button;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.component.button.ButtonSelect2_Skin;
 
 	/**
 	 * @private
@@ -27,6 +25,8 @@ package org.mokylin.skin.app.paihangbang
 
 		public var lbZhiye:feathers.controls.Label;
 
+		public var uiOver:feathers.controls.UIAsset;
+
 		public var vip:feathers.controls.UIAsset;
 
 
@@ -40,7 +40,7 @@ package org.mokylin.skin.app.paihangbang
 			this.currentState = "normal";
 			this.height = 30;
 			this.width = 394;
-			this.elementsContent = [__PaiHang_Item_UIAsset1_i(),icon_i(),vip_i(),lbName_i(),lbZhiye_i(),lbContent_i(),lbNum_i(),__PaiHang_Item_Button1_i()];
+			this.elementsContent = [__PaiHang_Item_UIAsset1_i(),icon_i(),vip_i(),lbName_i(),lbZhiye_i(),lbContent_i(),lbNum_i(),uiOver_i()];
 			
 			states = {
 			};
@@ -51,17 +51,6 @@ package org.mokylin.skin.app.paihangbang
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __PaiHang_Item_Button1_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			temp.height = 30;
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSelect2_Skin;
-			temp.width = 394;
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
 		private function __PaiHang_Item_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -138,6 +127,19 @@ package org.mokylin.skin.app.paihangbang
 			temp.width = 42;
 			temp.x = 208;
 			temp.y = 6;
+			return temp;
+		}
+
+		private function uiOver_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiOver = temp;
+			temp.name = "uiOver";
+			temp.bottom = 0;
+			temp.left = 0;
+			temp.right = 0;
+			temp.styleName = "ui/common/hover/liangkuang2.png";
+			temp.top = 0;
 			return temp;
 		}
 

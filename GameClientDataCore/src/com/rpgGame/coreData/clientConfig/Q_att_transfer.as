@@ -18,6 +18,8 @@ package com.rpgGame.coreData.clientConfig
 		public var name:String;
 		 /**  属性换算比例（十万分比,转换属性类型不能填一级属性，填进去的一级属性只会增加一级属性值不会增强二级属性） */
 		public var q_attributes:String;
+		 /**  每点值对应的战斗力(十万分比) */
+		public var q_fight_power:int;
 
 	}
 }

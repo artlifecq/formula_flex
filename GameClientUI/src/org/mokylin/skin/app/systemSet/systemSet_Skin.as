@@ -44,6 +44,8 @@ package org.mokylin.skin.app.systemSet
 			super();
 			
 			this.currentState = "normal";
+			this.height = 580;
+			this.width = 425;
 			this.elementsContent = [bg_i(),__systemSet_Skin_UIAsset2_i(),guaji_i(),xitong_i(),pingbi_i(),kuaijie_i(),tab_set_i()];
 			
 			states = {

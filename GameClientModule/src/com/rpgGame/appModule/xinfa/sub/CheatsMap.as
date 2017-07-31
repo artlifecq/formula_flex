@@ -172,10 +172,10 @@ package  com.rpgGame.appModule.xinfa.sub
 			{
 				noGray=true;
 			}
-			else
-			{
-				noGray=Mgr.cheatsMgr.getCanActive(_cheatsVo.cheatsConfig.q_id);
-			}
+//			else
+//			{
+//				noGray=Mgr.cheatsMgr.getCanActive(_cheatsVo.cheatsConfig.q_id);
+//			}
 			//_btn.filter=noGray?null:FilterUtil.getGrayFilter();
 			_btn.setData(_cheatsVo.level);
 			_btn.setGary(!noGray);
