@@ -19,17 +19,18 @@ package com.rpgGame.app.state.role.control
 		private var _isSecondJump : Boolean;
 		
 		private var _destPoint:Vector3D;
-		
+		private var _isEnd:Boolean;
 		public function JumpRiseStateReference()
 		{
 			super();
 		}
 
-		public function setParams(totalTime : int, isSecondJump : Boolean,destPoint:Vector3D=null) : void
+		public function setParams(totalTime : int, isSecondJump : Boolean,destPoint:Vector3D=null,isEnd:Boolean=false) : void
 		{
 			_totalTime = totalTime;
 			_isSecondJump = isSecondJump;
 			_destPoint=destPoint;
+			_isEnd=isEnd;
 		}
 
 		/**
@@ -63,6 +64,11 @@ package com.rpgGame.app.state.role.control
 		public function set destPoint(value:Vector3D):void
 		{
 			_destPoint = value;
+		}
+
+		public function get isEnd():Boolean
+		{
+			return _isEnd;
 		}
 
 	}

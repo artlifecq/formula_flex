@@ -14,6 +14,8 @@ package com.rpgGame.app.state.ai
 	import com.rpgGame.coreData.type.AIStateType;
 	import com.rpgGame.coreData.type.TaskType;
 	
+	import flash.utils.getTimer;
+	
 	public class AItaskWalk extends AIState
 	{
 		public function AItaskWalk()
@@ -29,7 +31,8 @@ package com.rpgGame.app.state.ai
 				if(TaskMissionManager.getMainTaskHaveNpc())
 				{
 					TaskUtil.npcTaskWalk(TaskMissionManager.getMainTaskNpcAreaId(),onArrive);
-					isWalking=1;
+					isWalking=true;
+					isWalkTime=getTimer();
 				}
 				else
 				{
@@ -64,22 +67,24 @@ package com.rpgGame.app.state.ai
 					obj.modeid=modeid2;
 					TaskUtil.postTaskWalk(post2,walkStartGather,obj);
 				}
-				isWalking=1;
+				isWalking=true;
+				isWalkTime=getTimer();
 			}
 			
 			
 			
 		}
-		private var isWalking:int=0;
+		private var isWalking:Boolean=false;
+		private var isWalkTime:int;
 		private function onArrive(data :Object) : void
 		{
 			TaskControl.showLeadPanel();
-			isWalking=0;
+			isWalking=false;
 		}
 		private function subMonster(data : Object) : void
 		{
 			TrusteeshipManager.getInstance().startAutoFight();
-			isWalking=0;
+			isWalking=false;
 		}
 		/**采集寻路完成开始采集了*/
 		private function walkStartGather(data :Object):void
@@ -87,7 +92,7 @@ package com.rpgGame.app.state.ai
 			
 			var modeid:int=data.modeid;
 			GatherAutoManager.getInstance().startGatherAuto(modeid);
-			isWalking=0;
+			isWalking=false;
 		}
 		
 		
@@ -96,10 +101,9 @@ package com.rpgGame.app.state.ai
 		{
 			if (nextState.type == AIStateType.AI_NONE)
 				return true;
-			if(isWalking>0&&!MainRoleManager.actor.stateMachine.isRunning&&!MainRoleManager.actor.stateMachine.isWalking&&!MainRoleManager.actor.stateMachine.isWalkMoving)
+			if(isWalking&&!MainRoleManager.actor.stateMachine.isRunning&&!MainRoleManager.actor.stateMachine.isWalking&&!MainRoleManager.actor.stateMachine.isWalkMoving)
 			{
-				isWalking++;
-				if(isWalking>=10)
+				if((getTimer()-isWalkTime)>=TaskAutoManager.AUTOMAIN)
 				{
 					return true;
 				}

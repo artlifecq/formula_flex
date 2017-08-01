@@ -87,6 +87,8 @@ package com.rpgGame.app.ui.main.head
 		
 		private function isCreate(data:BuffData):Boolean
 		{
+			if(data._data.q_effect_type!=1||data._data.q_effect_type!=2)
+				return false;
 			var icon:BuffIcon;
 			var num:int=goodBuffs.length;
 			for(var i:int=0;i<num;i++){
@@ -230,7 +232,7 @@ package com.rpgGame.app.ui.main.head
 					Mgr.teamMgr.InvitePlayerJoinTeam(_roleData.serverID);
 					break;
 				case this._skin.btn_more:
-					var menus : Array = MenuUtil.getPlayerTargetMenu(_roleData.serverID.ToGID(), true);
+					var menus : Array = MenuUtil.getPlayerTargetMenu(_roleData.serverID.ToGID(), true,false);
 					MenuManager.showMenu(menus, [_roleData.serverID, _roleData.name], -1, -1, 80);
 					break;
 			}

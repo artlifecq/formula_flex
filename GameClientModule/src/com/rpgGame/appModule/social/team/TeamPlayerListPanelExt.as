@@ -5,6 +5,7 @@ package  com.rpgGame.appModule.social.team
 	import com.rpgGame.app.ctrl.EnumCustomCoolDown;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.sender.LookSender;
 	import com.rpgGame.app.sender.TeamSender;
 	import com.rpgGame.appModule.social.TimeCountUtil;
 	import com.rpgGame.core.events.TeamEvent;
@@ -57,7 +58,7 @@ package  com.rpgGame.appModule.social.team
 		{
 			// TODO Auto Generated method stub
 			var now:int=getTimer();
-			if (lastAutoTime==0||now-lastAutoTime>=10000) 
+			if (lastAutoTime==0||now-lastAutoTime>=30000) 
 			{
 				doRefresh(true);
 				lastAutoTime=now;
@@ -95,14 +96,13 @@ package  com.rpgGame.appModule.social.team
 			super.onHide();
 			timer.stop();
 			TeamSender.ReqOpenOrCloseTeamPanel(2,1);
-			lastAutoTime=0;
 		}
 		private function doRefresh(isAuto:Boolean):void
 		{
 			TeamSender.ReqSearchNearPlayer("",isAuto);
 			if (!isAuto) 
 			{
-				TimeCountUtil.ins.addButtonTimeCountDown(_skin.btn_shuaixin,NotifyCfgData.getNotifyByID(13044).q_content,10);
+				TimeCountUtil.ins.addButtonTimeCountDown(_skin.btn_shuaixin,NotifyCfgData.getNotifyByID(13044).q_content,30);
 			}
 			
 		}
@@ -112,7 +112,7 @@ package  com.rpgGame.appModule.social.team
 			
 			_skin.btn_shuaixin.addEventListener( Event.TRIGGERED , OnSearchPlayer);
 			_skin.btn_chakan.addEventListener(Event.TRIGGERED , OnViewPlayer);
-			//_skin.btn_tianjia.addEventListener(Event.TRIGGERED , OnAddFriend);
+			/*_skin.btn_tianjia.addEventListener(Event.TRIGGERED , OnAddFriend);*/
 			_skin.btn_yaoqing.addEventListener(Event.TRIGGERED , OnInviteJoinTeam);
 			Mgr.teamMgr.addEventListener(TeamEvent.GET_MAP_PLAYERS , OnGetPlayers);
 
@@ -122,8 +122,7 @@ package  com.rpgGame.appModule.social.team
 		{
 			if( TeamPlayerListItemExt.curItem != null && TeamPlayerListItemExt.curItem.data != null)
 			{
-				//Mgr.playerMgr.ReqOthersPlayerInfo( TeamPlayerListItemExt.curItem.data.playerid );
-				Mgr.teamMgr.loopPlayer(TeamPlayerListItemExt.curItem.data.playerid);
+				LookSender.lookOtherPlayer( TeamPlayerListItemExt.curItem.data.playerid );
 			}
 			else	
 			{

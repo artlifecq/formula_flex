@@ -4,6 +4,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.SpriteStat;
+	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.info.stat.StatData;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.netData.player.bean.AttributeItem;
@@ -66,7 +67,7 @@ package com.rpgGame.app.manager
 				{
 					continue;
 				}
-				change.add(key,newV-oldV);
+				change.add(key,AttValueConfig.getDisAttValue(key,newV-oldV));
 			}
 			FightFaceHelper.showPlayerBaseAttrChange(change);
 //			showChangeAttribute( CharAttributeType.MAX_HP, oldMap, newMap );

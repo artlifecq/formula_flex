@@ -29,12 +29,9 @@ package com.rpgGame.appModule.maps
 	 */	
 	public class MapsPanel extends MapsView
 	{
-		private var _timer : GameTimer;
 		public function MapsPanel()
 		{
 			super();
-			
-			listenerEvent()
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void 
@@ -56,15 +53,14 @@ package com.rpgGame.appModule.maps
 				siteView();
 				setMapName(sceneData.name);
 				changeTab();
-				_bigMap.skinSpr.addEventListener(TouchEvent.TOUCH, onTouch);
+				addEvent();
 			}
 			
 		}
 		override public function hide():void 
 		{
 			super.hide();
-			_bigMap.skinSpr.removeEventListener(TouchEvent.TOUCH, onTouch);
-			_timer.stop();
+			removeEvent();
 		}
 		override protected function onTouchTarget(target:DisplayObject):void 
 		{
@@ -90,14 +86,22 @@ package com.rpgGame.appModule.maps
 		}
 		
 		
-		private function listenerEvent() : void
+		private function addEvent() : void
 		{
-			_timer = new GameTimer("bigmap", 500, 0, onTimer);
+			_bigMap.skinSpr.addEventListener(TouchEvent.TOUCH, onTouch);
 			EventManager.addEvent(MapEvent.MAP_SWITCH_START, onMapChangeCompleteHandler);
-			
 			EventManager.addEvent(UserMoveEvent.MOVE_THROUGH, onDrawPath);
 			EventManager.addEvent(UserMoveEvent.MOVE_RESCHANGE, onDrawPath);
+			EventManager.addEvent(MapEvent.MAP_JUMP_COMPLETE, onDrawPath);
 			
+		}
+		private function removeEvent() : void
+		{
+			_bigMap.skinSpr.removeEventListener(TouchEvent.TOUCH, onTouch);
+			EventManager.removeEvent(MapEvent.MAP_SWITCH_START, onMapChangeCompleteHandler);
+			EventManager.removeEvent(UserMoveEvent.MOVE_THROUGH, onDrawPath);
+			EventManager.removeEvent(UserMoveEvent.MOVE_RESCHANGE, onDrawPath);
+			EventManager.removeEvent(MapEvent.MAP_JUMP_COMPLETE, onDrawPath);
 		}
 		private function onMapChangeCompleteHandler() : void 
 		{
@@ -134,8 +138,6 @@ package com.rpgGame.appModule.maps
 					if(touchPoint.x!=touchOldPoint.x||touchPoint.y!=touchOldPoint.y)//over到不同地方就隐藏显示
 					{
 						_bigMap.hideTips();
-						_timer.stop();
-						//_timer.start();
 						touchOldPoint.x=touchPoint.x;
 						touchOldPoint.y=touchPoint.y;
 						TweenLite.killDelayedCallsTo(onTimer);

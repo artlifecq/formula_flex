@@ -288,7 +288,7 @@ package com.rpgGame.app.state.role.action
 			if (totalTime > 0)
 			{
 				var ref : JumpRiseStateReference = _machine.getReference(JumpRiseStateReference) as JumpRiseStateReference;
-				ref.setParams(totalTime, _isSecondJump,_destPoint);
+				ref.setParams(totalTime, _isSecondJump,_destPoint,_stateReference.isEnd);
 				transition(RoleStateType.CONTROL_JUMP_RISE, ref);
 			}
 		}

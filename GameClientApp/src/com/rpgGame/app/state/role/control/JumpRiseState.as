@@ -3,11 +3,14 @@ package com.rpgGame.app.state.role.control
 	import com.game.engine3D.state.IState;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateMachine;
+	import com.rpgGame.app.state.role.action.TrailStateReference;
 	import com.rpgGame.core.events.MapEvent;
+	import com.rpgGame.core.events.UserMoveEvent;
 	import com.rpgGame.core.state.role.control.ControlState;
 	import com.rpgGame.coreData.type.RoleStateType;
 	
 	import flash.geom.Vector3D;
+	import flash.utils.getTimer;
 	
 	import gs.TweenLite;
 	import gs.easing.Cubic;
@@ -69,7 +72,7 @@ package com.rpgGame.app.state.role.control
 				{Lyt.a("++++开始跳到目的地："+totalTime+"x:"+_destPoint.x+"y:"+_destPoint.z);
 					TweenLite.killTweensOf(_machine.owner as SceneRole, false, {x:true,z:true,offsetZ: true});
 					(_machine.owner as SceneRole).faceToGround(_destPoint.x, _destPoint.z);
-					TweenLite.to(_machine.owner as SceneRole, totalTime * 0.001, {x:_destPoint.x,z:_destPoint.z, ease: Linear.easeNone, overwrite: 0});
+					TweenLite.to(_machine.owner as SceneRole, totalTime * 0.001, {x:_destPoint.x,z:_destPoint.z, ease: Linear.easeNone, overwrite: 0,onUpdate: onJumpUpdate});
 				}
 				else //没有有目的点的跳跃 不用停位移
 				{
@@ -78,7 +81,20 @@ package com.rpgGame.app.state.role.control
 				TweenLite.to(_machine.owner as SceneRole, totalTime * 0.5 * 0.001, {offsetZ: jumpHeight, ease: Cubic.easeOut, overwrite: 0, onComplete: onJumpOffComplete});
 			}
 		}
-
+		private function onJumpUpdate() : void//用于地图同步玩家位置
+		{
+			if (_machine && !_machine.isInPool)
+			{
+				if ((ref.owner as SceneRole).isMainChar)
+				{
+					EventManager.dispatchEvent(UserMoveEvent.MOVE_THROUGH);
+				}
+				else
+				{
+					EventManager.dispatchEvent(MapEvent.UPDATE_MAP_ROLE_MOVE, ref.owner);
+				}
+			}
+		}
 		/**
 		 * 下降阶段 
 		 * 
@@ -108,7 +124,7 @@ package com.rpgGame.app.state.role.control
 				else//有目的点的位移不用切换到 run
 				{
 					transition(RoleStateType.ACTION_IDLE);
-					EventManager.dispatchEvent(MapEvent.MAP_JUMP_COMPLETE);// 用于有跳跃点的寻路 继续跑
+					
 				}
 			}
 		}
@@ -134,6 +150,11 @@ package com.rpgGame.app.state.role.control
 					_machine.owner.z=_destPoint.z;
 				}*/
 				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {x:true,z:true,offsetZ: true});
+				if(_stateReference&&_stateReference.isEnd)
+				{
+					EventManager.dispatchEvent(MapEvent.MAP_JUMP_COMPLETE);// 用于有跳跃点的寻路 继续跑
+				}
+				
 			}
 		}
 

@@ -134,18 +134,64 @@ package com.rpgGame.appModule.zhangong
 			_type=type;
 			updateShow();
 		}
-		
-		public function onTouchItem(e:TouchEvent):void
+		private static const HELPER_POINT:Point = new Point();
+		protected var touchPointID:int = -1;
+		public function onTouchItem(event:TouchEvent):void
 		{
-			var t:Touch=e.getTouch(this);
-			if(!t){
-				_skin.conver.visible=false;
+			if(this.touchPointID >= 0)
+			{
+				var touch:Touch = event.getTouch(this, null, this.touchPointID);
+				if(!touch || !this.stage)
+				{
+					//this should never happen
+					return;
+				}
+				
+				touch.getLocation(this.stage, HELPER_POINT);
+				var isInBounds:Boolean = this.contains(this.stage.hitTest(HELPER_POINT));
+				if(touch.phase === TouchPhase.MOVED)
+				{
+					if(isInBounds)
+					{
+						_skin.conver.visible=true;
+					}
+					else
+					{
+						_skin.conver.visible=false;
+					}
+				}else if(touch.phase === TouchPhase.ENDED){
+					this.touchPointID = -1;
+					if(isInBounds)
+					{
+						_skin.conver.visible=true;
+					}
+					else
+					{
+						_skin.conver.visible=false;
+					}
+				}
 				return;
 			}
-			t=e.getTouch(this,TouchPhase.HOVER);
-			if(t){
-				_skin.conver.visible=true;
+			else //if we get here, we don't have a saved touch ID yet
+			{
+				touch = event.getTouch(this, TouchPhase.BEGAN);
+				if(touch)
+				{
+					_skin.conver.visible=true;
+					this.touchPointID = touch.id;
+					return;
+				}
+				touch = event.getTouch(this, TouchPhase.HOVER);
+				if(touch)
+				{
+					_skin.conver.visible=true;
+					return;
+				}
+				
+				//end of hover
+				_skin.conver.visible=false;
 			}
+			
 		}
 		
 		public function onTouchBtn(e:TouchEvent):void
