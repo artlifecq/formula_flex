@@ -262,6 +262,7 @@ package com.rpgGame.app.graphics
 			if (_role.type==SceneCharType.GIRL_PET) 
 			{
 				showAndHideElement(_nameBar, true,DecorCtrl.TOP_NAME);
+				showAndHideElement(_meirenTitle, true,DecorCtrl.TOP_MEIREN_GUISHU);
 			}
 			if (_role.type == SceneCharType.NPC) //NPC，不管是否被选中都显示
 			{
@@ -301,10 +302,6 @@ package com.rpgGame.app.graphics
 				}*/
 				
 				showAndHideElement(_nameBar, _isSelected && nameVisible,DecorCtrl.TOP_NAME);
-			}
-			else if (_role.type == SceneCharType.GIRL_PET) //美人
-			{
-				showAndHideElement(_meirenTitle, true,DecorCtrl.TOP_MEIREN_GUISHU);
 			}
 				//			else if (_role.type == SceneCharType.SUMMON_MONSTER) //召唤怪物，全显示或者全隐藏
 				//			{
@@ -1165,6 +1162,11 @@ package com.rpgGame.app.graphics
 				_moodTween.kill();
 				_moodTween = null;
 			}
+			if(	_meirenTitle!=null)
+			{
+				_meirenTitle.dispose();
+				_meirenTitle = null;
+			}
 			removeIco();
 			removeBodyIco();
 			TweenLite.killDelayedCallsTo(hideMoodMC);
@@ -1230,6 +1232,7 @@ package com.rpgGame.app.graphics
 				return;
 			
 			showAndHideElement(_nameBar, false,DecorCtrl.TOP_NAME);
+			showAndHideElement(_meirenTitle, false,DecorCtrl.TOP_MEIREN_GUISHU);
 			showAndHideElement(_fuqititle, false,DecorCtrl.TOP_FUQI);
 			//			showAndHideElement(_countryNameBar, false);
 			showAndHideElement(_junXianBar, false);

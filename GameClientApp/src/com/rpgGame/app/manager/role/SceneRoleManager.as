@@ -65,6 +65,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
+	import flash.geom.Point;
 	import flash.utils.getTimer;
 	
 	import app.message.StallTypeDataProto;
@@ -505,13 +506,26 @@ package com.rpgGame.app.manager.role
 			role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true); //切换到“站立状态”
 			
 			role.setScale(data.sizeScale);
-			role.setGroundXY(data.x-1, data.y);
-			role.rotationY = data.direction;
+			var p:Point=getPetPoint(data.x,data.y,data.direction);
+			role.setGroundXY(p.x, p.y);
+			role.rotationY = (270 + data.direction) % 360;
 			SceneManager.addSceneObjToScene(role, true, false, false);
 			var girlPet:GirlPetFollowAnimator=new GirlPetFollowAnimator();
 			girlPet.setOwner(role);
 			role.setRenderAnimator(girlPet);
+//			trace("美人创建成功_美人位子："+p.x+"_"+p.y);
 			//			EventManager.dispatchEvent(MapEvent.UPDATE_MAP_ROLE_ADD, role);
+		}
+		
+		private static var arrX : Array = [0, -1, -1, -1, 0, 1, 1, 1];
+		private static var arrY : Array = [1, 1, 0, -1, -1, -1, 0, 1];
+		public function getPetPoint(pointX:Number,pointY:Number,rotationY:int=0):Point
+		{
+			var dirX:int= (int)((rotationY+180)/45);
+			if(dirX<0) dirX=0;
+			else if(dirX>7) dirX=7;
+			var po:Point=new Point(pointX+arrX[dirX]*100,pointY+arrY[dirX]*100);
+			return po;
 		}
 		/**
 		 * 创建掉落物

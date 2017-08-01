@@ -6,11 +6,13 @@ package com.rpgGame.coreData.role
 	import com.rpgGame.netData.map.bean.PetInfo;
 	
 	import org.game.netCore.data.LongIdMap;
+	import org.game.netCore.data.long;
 	
 	public class GirlPetData extends RoleData
 	{
 		private var _modelId:int;
 		private var _ownerName:String;
+		private var _ownerId:long;
 		public function GirlPetData( priority:int=100)
 		{
 			super(RoleType.GIRL_PET, priority);
@@ -20,13 +22,15 @@ package com.rpgGame.coreData.role
 			this.serverID=info.petId;
 			this.id=LongIdMap.ToGID(serverID);
 			this._modelId=info.petModelId;
+			this._ownerId=info.ownerId;
 			this.ownerId=info.ownerId.ToGID();
 			this._ownerName=info.ownerName;
 			this.name=PetCfg.getPet(info.petModelId).q_name;
 			this.x=info.x;
 			this.y=-info.y;
 			this.direction=info.dir;
-//			this.avatarInfo.setBodyResID("monster/pt_shiwei_006/pt_shiwei_006",null);
+			trace("美人ID："+info.petId.ToString());
+			//			this.avatarInfo.setBodyResID("monster/pt_shiwei_006/pt_shiwei_006",null);
 			var q_pet:Q_girl_advance=PetAdvanceCfg.getPet(info.petModelId,info.rank);
 			this.avatarInfo.setBodyResID(q_pet.q_skinResID,null);
 		}
@@ -39,6 +43,11 @@ package com.rpgGame.coreData.role
 		public function get ownerName():String
 		{
 			return _ownerName;
+		}
+		
+		public function get ownerLongId():long
+		{
+			return _ownerId;
 		}
 	}
 }

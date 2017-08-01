@@ -70,6 +70,9 @@ package com.rpgGame.netData.map.bean{
 		//帮会职位
 		private var _guildMemberType: int;
 		
+		//帮会职位(统帅,1:是,0:不是)
+		private var _guildIsLeader: int;
+		
 		//排行榜称号
 		private var _topLeaderTypes: Vector.<int> = new Vector.<int>();
 		//PK类型(0-和平 1-组队 2-帮会 3-全体 4-阵营 5-善恶)
@@ -89,6 +92,9 @@ package com.rpgGame.netData.map.bean{
 		private var _buffs: Vector.<com.rpgGame.netData.buff.bean.BuffInfo> = new Vector.<com.rpgGame.netData.buff.bean.BuffInfo>();
 		//额外需要显示的参数
 		private var _keyValueList: Vector.<com.rpgGame.netData.structs.IntKeyValue> = new Vector.<com.rpgGame.netData.structs.IntKeyValue>();
+		//结婚对象名字
+		private var _marriageName: String;
+		
 		/**
 		 * 写入字节缓存
 		 */
@@ -127,6 +133,8 @@ package com.rpgGame.netData.map.bean{
 			writeString(_guildName);
 			//帮会职位
 			writeInt(_guildMemberType);
+			//帮会职位(统帅,1:是,0:不是)
+			writeByte(_guildIsLeader);
 			//排行榜称号
 			writeShort(_topLeaderTypes.length);
 			for (var i: int = 0; i < _topLeaderTypes.length; i++) {
@@ -158,6 +166,8 @@ package com.rpgGame.netData.map.bean{
 			for (var i: int = 0; i < _keyValueList.length; i++) {
 				writeBean(_keyValueList[i]);
 			}
+			//结婚对象名字
+			writeString(_marriageName);
 			return true;
 		}
 		
@@ -199,6 +209,8 @@ package com.rpgGame.netData.map.bean{
 			_guildName = readString();
 			//帮会职位
 			_guildMemberType = readInt();
+			//帮会职位(统帅,1:是,0:不是)
+			_guildIsLeader = readByte();
 			//排行榜称号
 			var topLeaderTypes_length : int = readShort();
 			for (var i: int = 0; i < topLeaderTypes_length; i++) {
@@ -230,6 +242,8 @@ package com.rpgGame.netData.map.bean{
 			for (var i: int = 0; i < keyValueList_length; i++) {
 				_keyValueList[i] = readBean(com.rpgGame.netData.structs.IntKeyValue) as com.rpgGame.netData.structs.IntKeyValue;
 			}
+			//结婚对象名字
+			_marriageName = readString();
 			return true;
 		}
 		
@@ -489,6 +503,21 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
+		 * get 帮会职位(统帅,1:是,0:不是)
+		 * @return 
+		 */
+		public function get guildIsLeader(): int{
+			return _guildIsLeader;
+		}
+		
+		/**
+		 * set 帮会职位(统帅,1:是,0:不是)
+		 */
+		public function set guildIsLeader(value: int): void{
+			this._guildIsLeader = value;
+		}
+		
+		/**
 		 * get 排行榜称号
 		 * @return 
 		 */
@@ -606,6 +635,21 @@ package com.rpgGame.netData.map.bean{
 		 */
 		public function set keyValueList(value: Vector.<com.rpgGame.netData.structs.IntKeyValue>): void{
 			this._keyValueList = value;
+		}
+		
+		/**
+		 * get 结婚对象名字
+		 * @return 
+		 */
+		public function get marriageName(): String{
+			return _marriageName;
+		}
+		
+		/**
+		 * set 结婚对象名字
+		 */
+		public function set marriageName(value: String): void{
+			this._marriageName = value;
 		}
 		
 	}

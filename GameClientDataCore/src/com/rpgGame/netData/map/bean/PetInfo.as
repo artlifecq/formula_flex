@@ -1,5 +1,6 @@
 package com.rpgGame.netData.map.bean{
 	import com.rpgGame.netData.buff.bean.BuffInfo;
+	import com.rpgGame.netData.structs.Position;
 	
 	import org.game.netCore.data.long;
 	
@@ -44,7 +45,7 @@ package com.rpgGame.netData.map.bean{
 		private var _dir: int;
 		
 		//跑步坐标集合
-		private var _positions: Vector.<int> = new Vector.<int>();
+		private var _positions: Vector.<com.rpgGame.netData.structs.Position> = new Vector.<com.rpgGame.netData.structs.Position>();
 		//buff集合
 		private var _buffs: Vector.<com.rpgGame.netData.buff.bean.BuffInfo> = new Vector.<com.rpgGame.netData.buff.bean.BuffInfo>();
 		/**
@@ -72,7 +73,7 @@ package com.rpgGame.netData.map.bean{
 			//跑步坐标集合
 			writeShort(_positions.length);
 			for (var i: int = 0; i < _positions.length; i++) {
-				writeByte(_positions[i]);
+				writeBean(_positions[i]);
 			}
 			//buff集合
 			writeShort(_buffs.length);
@@ -107,7 +108,7 @@ package com.rpgGame.netData.map.bean{
 			//跑步坐标集合
 			var positions_length : int = readShort();
 			for (var i: int = 0; i < positions_length; i++) {
-				_positions[i] = readByte();
+				_positions[i] = readBean(com.rpgGame.netData.structs.Position) as com.rpgGame.netData.structs.Position;
 			}
 			//buff集合
 			var buffs_length : int = readShort();
@@ -256,14 +257,14 @@ package com.rpgGame.netData.map.bean{
 		 * get 跑步坐标集合
 		 * @return 
 		 */
-		public function get positions(): Vector.<int>{
+		public function get positions(): Vector.<com.rpgGame.netData.structs.Position>{
 			return _positions;
 		}
 		
 		/**
 		 * set 跑步坐标集合
 		 */
-		public function set positions(value: Vector.<int>): void{
+		public function set positions(value: Vector.<com.rpgGame.netData.structs.Position>): void{
 			this._positions = value;
 		}
 		

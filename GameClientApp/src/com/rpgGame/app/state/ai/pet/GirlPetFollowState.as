@@ -2,17 +2,18 @@ package com.rpgGame.app.state.ai.pet
 {
 	import com.game.engine3D.state.IState;
 	import com.game.engine3D.utils.MathUtil;
-	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.role.SceneRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.scene.animator.GirlPetFollowAnimator;
+	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.state.ai.AIStateMachine;
 	import com.rpgGame.app.state.role.RoleStateMachine;
-	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.core.state.ai.AIState;
 	import com.rpgGame.coreData.role.GirlPetData;
 	import com.rpgGame.coreData.type.AIStateType;
 	
+	import flash.geom.Point;
 	import flash.geom.Vector3D;
 	
 	public class GirlPetFollowState extends AIState
@@ -20,6 +21,7 @@ package com.rpgGame.app.state.ai.pet
 		private var _isMoving : Boolean;
 		private var _petOwner:SceneRole;
 		private var _pet:SceneRole;
+		
 		
 		public function GirlPetFollowState()
 		{
@@ -40,17 +42,23 @@ package com.rpgGame.app.state.ai.pet
 			if(_petOwner)
 			{
 				var dis:int=MathUtil.getDistanceNoSqrt(_pet.pos.x,_pet.pos.y,_petOwner.pos.x,_petOwner.pos.y);
-				if(dis>GirlPetFollowAnimator.MIN_TRANS_DIS)  //大于最小传送距离直接传送到身边
+				if(dis>GirlPetFollowAnimator.MIN_TRANS_DIS)
 				{
-			//传送
-					_pet.setGroundXY(_petOwner.pos.x-1,_petOwner.pos.y);
+					//超出视野了  执行待机
+//					onArrive();
+					SceneSender.reqPetTransferMessage((_pet.data as GirlPetData).ownerLongId);
 				}
-				else if(dis>2)
+				else if(dis> 25000)
 				{
 					_isMoving=true;
 					//给服务器发送同步坐标
-					var position : Vector3D = new Vector3D(_petOwner.x, _petOwner.z, 0, _pet.position.w);
-					RoleStateUtil.walkToPos(_pet, position, 50,null, onArrive,null,null,true);
+					var targetPos3D : Vector3D =  new Vector3D(_pet.pos.x,0,_pet.pos.y, _pet.position.w);
+					var p:Point=SceneRoleManager.getInstance().getPetPoint(_petOwner.pos.x,_petOwner.pos.y,_petOwner.rotationY);
+					var position : Vector3D = new Vector3D(p.x,0,p.y, _petOwner.position.w);
+					var list:Vector.<Vector3D>=new Vector.<Vector3D>();
+					list.push(targetPos3D);
+					list.push(position);
+					SceneSender.reqPetNewRunningMessage(list);
 				}
 				else
 				{
@@ -59,7 +67,6 @@ package com.rpgGame.app.state.ai.pet
 			}
 			else
 			{
-				//主角不在场景里了 传送到主角身边
 				onArrive();			
 			}
 		}

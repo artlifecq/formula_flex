@@ -300,16 +300,16 @@ package   com.rpgGame.app.manager.debug
 			commandList.put( ".pet", function (...arg):void
 			{
 				AppManager.showApp(AppConstant.PET_PANLE);
-				//				var mod:int = arg[0];				
-				//				var petInfo:PetInfo=new PetInfo();
-				//				petInfo.petId=new long(9999);
-				//				petInfo.ownerId=(MainRoleManager.actor.data as HeroData).serverID;
-				//				petInfo.petModelId=mod;
-				//				petInfo.x=MainRoleManager.actor.pos.x;
-				//				petInfo.y=MainRoleManager.actor.pos.y;
-				//				var data:GirlPetData=new GirlPetData();
-				//				data.setServerData(petInfo);
-				//				SceneRoleManager.getInstance().createGirlPet(data);
+//				var mod:int = arg[0];				
+//				var petInfo:PetInfo=new PetInfo();
+//				petInfo.petId=new long(9999);
+//				petInfo.ownerId=(MainRoleManager.actor.data as HeroData).serverID;
+//				petInfo.petModelId=mod;
+//				petInfo.x=MainRoleManager.actor.pos.x;
+//				petInfo.y=MainRoleManager.actor.pos.y;
+//				var data:GirlPetData=new GirlPetData();
+//				data.setServerData(petInfo);
+//				SceneRoleManager.getInstance().createGirlPet(data);
 			});
 			commandList.put( ".sset", function (...arg):void
 			{
