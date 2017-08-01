@@ -55,7 +55,8 @@ package com.rpgGame.coreData.info.item
 		
 		override public function set cfgId(value:int):void
 		{
-			_cfgId = value;
+			//_cfgId = value;
+			super.cfgId=value;
 			_qItem=ItemConfig.getQItemByID(cfgId);
 		}
 

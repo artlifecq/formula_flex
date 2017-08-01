@@ -18,13 +18,13 @@ package org.mokylin.skin.app.wuxue.jineng.button
 			super();
 			
 			this.currentState = "down";
-			this.height = 59;
-			this.width = 241;
+			this.height = 73;
+			this.width = 237;
 			this.elementsContent = [];
 			
 			states = {
 			};
-			skinNames={"down":"ui/common/hover/xuanzhong.png", "hover":"ui/common/hover/xuanzhong.png", "up":"ui/common/hover/xuanzhong.png"};
+			skinNames={"down":"ui/app/wuxue/jineng/xuanzhong.png", "hover":"ui/app/wuxue/jineng/xuanzhong.png", "up":"ui/app/wuxue/jineng/xuanzhong.png"};
 		}
 
 

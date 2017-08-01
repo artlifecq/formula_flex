@@ -38,6 +38,8 @@ package org.mokylin.skin.common
 			temp.name = "btn";
 			temp.label = "文本";
 			temp.styleClass = org.mokylin.skin.common.erjiItem2_Skin;
+			temp.textAlign = "right";
+			temp.width = 123;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

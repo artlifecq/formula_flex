@@ -52,6 +52,8 @@ package org.mokylin.skin.app.shangcheng
 
 		public var uiLijing:feathers.controls.UIAsset;
 
+		public var uiMeiren:feathers.controls.UIAsset;
+
 		public var uiYuanbao:feathers.controls.UIAsset;
 
 
@@ -63,9 +65,9 @@ package org.mokylin.skin.app.shangcheng
 			super();
 			
 			this.currentState = "normal";
-			this.height = 600;
-			this.width = 1061;
-			this.elementsContent = [bg_i(),__ShangCheng_Skin_UIAsset1_i(),tab_nv_i(),btn_min_i(),btn_max_i(),grpYuanbao_i(),grpLijing_i(),btnChongZhi_i(),__ShangCheng_Skin_UIAsset2_i(),btnClose_i(),bg0_i(),lbPage_i()];
+			this.height = 664;
+			this.width = 1033;
+			this.elementsContent = [bg_i(),tab_nv_i(),bg0_i(),lbPage_i(),btn_min_i(),btn_max_i(),grpYuanbao_i(),grpLijing_i(),btnChongZhi_i(),uiMeiren_i(),btnClose_i(),__ShangCheng_Skin_UIAsset5_i()];
 			
 			states = {
 			};
@@ -86,27 +88,54 @@ package org.mokylin.skin.app.shangcheng
 		private function __ShangCheng_Skin_HorizontalLayout1_i():feathers.layout.HorizontalLayout
 		{
 			var temp:feathers.layout.HorizontalLayout = new feathers.layout.HorizontalLayout();
-			temp.gap = -2;
+			temp.gap = 1;
 			return temp;
 		}
 
 		private function __ShangCheng_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.touchable = false;
-			temp.touchGroup = true;
-			temp.styleName = "ui/app/shangcheng/sd.png";
-			temp.x = 520;
-			temp.y = 13;
+			temp.styleName = "ui/component/text/flip_bg.png";
+			temp.width = 116;
+			temp.x = 60;
+			temp.y = 2;
 			return temp;
 		}
 
 		private function __ShangCheng_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/shangcheng/ren.png";
-			temp.x = -64;
-			temp.y = -15;
+			temp.styleName = "ui/common/shuxing/yb.png";
+			temp.x = 25;
+			temp.y = 3;
+			return temp;
+		}
+
+		private function __ShangCheng_Skin_UIAsset3_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/component/text/flip_bg.png";
+			temp.width = 116;
+			temp.x = 60;
+			temp.y = 2;
+			return temp;
+		}
+
+		private function __ShangCheng_Skin_UIAsset4_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/common/shuxing/lj.png";
+			temp.x = 25;
+			temp.y = 3;
+			return temp;
+		}
+
+		private function __ShangCheng_Skin_UIAsset5_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/shangcheng/zs.png";
+			temp.x = -136;
+			temp.y = 247;
 			return temp;
 		}
 
@@ -115,10 +144,10 @@ package org.mokylin.skin.app.shangcheng
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg0 = temp;
 			temp.name = "bg0";
-			temp.left = 545;
-			temp.styleName = "ui/component/text/input_bg.png";
-			temp.width = 56;
-			temp.y = 528;
+			temp.left = 547;
+			temp.styleName = "ui/component/text/flip_bg.png";
+			temp.width = 76;
+			temp.y = 607;
 			return temp;
 		}
 
@@ -139,8 +168,8 @@ package org.mokylin.skin.app.shangcheng
 			btnChongZhi = temp;
 			temp.name = "btnChongZhi";
 			temp.styleClass = org.mokylin.skin.app.shangcheng.button.ButtonCz;
-			temp.x = 818;
-			temp.y = 539;
+			temp.x = 786;
+			temp.y = 595;
 			return temp;
 		}
 
@@ -150,8 +179,8 @@ package org.mokylin.skin.app.shangcheng
 			btnClose = temp;
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.x = 954;
-			temp.y = 41;
+			temp.x = 955;
+			temp.y = 89;
 			return temp;
 		}
 
@@ -161,8 +190,8 @@ package org.mokylin.skin.app.shangcheng
 			btn_max = temp;
 			temp.name = "btn_max";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_you;
-			temp.x = 603;
-			temp.y = 531;
+			temp.x = 624;
+			temp.y = 607;
 			return temp;
 		}
 
@@ -172,8 +201,8 @@ package org.mokylin.skin.app.shangcheng
 			btn_min = temp;
 			temp.name = "btn_min";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_zuo;
-			temp.x = 522;
-			temp.y = 531;
+			temp.x = 524;
+			temp.y = 607;
 			return temp;
 		}
 
@@ -182,9 +211,9 @@ package org.mokylin.skin.app.shangcheng
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grpLijing = temp;
 			temp.name = "grpLijing";
-			temp.x = 583;
-			temp.y = 555;
-			temp.elementsContent = [uiLijing_i(),lbLijing_i()];
+			temp.x = 260;
+			temp.y = 618;
+			temp.elementsContent = [__ShangCheng_Skin_UIAsset3_i(),uiLijing_i(),lbLijing_i(),__ShangCheng_Skin_UIAsset4_i()];
 			return temp;
 		}
 
@@ -193,9 +222,9 @@ package org.mokylin.skin.app.shangcheng
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grpYuanbao = temp;
 			temp.name = "grpYuanbao";
-			temp.x = 510;
-			temp.y = 555;
-			temp.elementsContent = [uiYuanbao_i(),lbYuanbao_i()];
+			temp.x = 260;
+			temp.y = 591;
+			temp.elementsContent = [__ShangCheng_Skin_UIAsset1_i(),uiYuanbao_i(),lbYuanbao_i(),__ShangCheng_Skin_UIAsset2_i()];
 			return temp;
 		}
 
@@ -207,9 +236,9 @@ package org.mokylin.skin.app.shangcheng
 			temp.text = "100";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 68;
-			temp.x = 28;
-			temp.y = 3;
+			temp.width = 106;
+			temp.x = 63;
+			temp.y = 4;
 			return temp;
 		}
 
@@ -222,9 +251,9 @@ package org.mokylin.skin.app.shangcheng
 			temp.textAlign = "center";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 56;
-			temp.x = 545;
-			temp.y = 533;
+			temp.width = 68;
+			temp.x = 550;
+			temp.y = 609;
 			return temp;
 		}
 
@@ -236,9 +265,9 @@ package org.mokylin.skin.app.shangcheng
 			temp.text = "100";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 68;
-			temp.x = 24;
-			temp.y = 3;
+			temp.width = 106;
+			temp.x = 63;
+			temp.y = 4;
 			return temp;
 		}
 
@@ -247,11 +276,11 @@ package org.mokylin.skin.app.shangcheng
 			var temp:feathers.controls.TabBar = new feathers.controls.TabBar();
 			tab_nv = temp;
 			temp.name = "tab_nv";
-			temp.btnWidth = 77;
+			temp.btnWidth = 74;
 			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_pack;
 			temp.width = 326;
-			temp.x = 281;
-			temp.y = 42;
+			temp.x = 266;
+			temp.y = 109;
 			temp.layout = __ShangCheng_Skin_HorizontalLayout1_i();
 			temp.dataProvider = __ShangCheng_Skin_ArrayCollection1_i();
 			return temp;
@@ -265,6 +294,17 @@ package org.mokylin.skin.app.shangcheng
 			temp.styleName = "ui/common/tubiao/lijin_24.png";
 			temp.x = 0;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function uiMeiren_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiMeiren = temp;
+			temp.name = "uiMeiren";
+			temp.styleName = "ui/app/shangcheng/ren.png";
+			temp.x = -176;
+			temp.y = -70;
 			return temp;
 		}
 

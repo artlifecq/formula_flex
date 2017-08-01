@@ -189,7 +189,7 @@ package com.rpgGame.appModule.pet
 			for (var i:int = 0; i < len; i++) 
 			{
 				_zoneBalls[i].setEffect(i<num);
-				_zoneBalls[i].setData(_info,(i+1));
+				_zoneBalls[i].setData(_info,(i+1),true);
 			}
 		}
 		

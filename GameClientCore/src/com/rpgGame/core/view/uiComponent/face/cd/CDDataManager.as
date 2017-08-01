@@ -54,7 +54,7 @@ package com.rpgGame.core.view.uiComponent.face.cd
 		public static function playCD( $cdType:* , $cd:Number, $startTm:Number = 0 ):void
 		{
 			var cdData:CDData = _map.getValue( $cdType );
-			cdData = cdData  || new CDData( $cdType );
+			cdData = cdData  || CDData.create($cdType);
 			cdData.startCallBack = cdStart;
 			cdData.updateCallBack = cdUpdata;
 			cdData.completeCallBack = cdComplete;
@@ -78,6 +78,7 @@ package com.rpgGame.core.view.uiComponent.face.cd
 			EventManager.dispatchEvent( CDDataEvent.COMPLETE, $cdData );
 			
 			_map.remove( $cdData.id );
+			CDData.recycle($cdData);
 		}
 	}
 }

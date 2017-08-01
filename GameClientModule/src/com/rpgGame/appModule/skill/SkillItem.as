@@ -25,9 +25,6 @@ package com.rpgGame.appModule.skill
 	import org.mokylin.skin.app.wuxue.jineng.jinengItemsSkin;
 	
 	import starling.display.DisplayObject;
-	import starling.events.Touch;
-	import starling.events.TouchEvent;
-	import starling.events.TouchPhase;
 	
 	/**
 	 *技能描述元素 
@@ -41,7 +38,7 @@ package com.rpgGame.appModule.skill
 		private var _skillCfg:Q_skill_model;
 		private var _selected:Boolean;
 		private var _icon:BgIcon;
-
+		
 		private var eft:InterObject3D;
 		
 		public function SkillItem()
@@ -49,12 +46,12 @@ package com.rpgGame.appModule.skill
 			_skin=new jinengItemsSkin();
 			selected=false;
 			super(_skin);
-			_icon=new BgIcon(IcoSizeEnum.ICON_42);
-			_skin.container.addChildAt(_icon,9);
+			_icon=new BgIcon(IcoSizeEnum.ICON_42);		
+			_skin.container.addChild(_icon);
+			_icon.bindBg(_skin.Icon);
 			_icon.touchable=false;
-			_icon.x=9;
-			_icon.y=7;
 			MCUtil.BringToTop(_skin.mc_dengjie);
+			MCUtil.removeSelf(_skin.rdo_select);
 		}
 		
 		
@@ -62,12 +59,12 @@ package com.rpgGame.appModule.skill
 		{
 			return _skillCfg;
 		}
-
+		
 		public function get skillInfo():SkillInfo
 		{
 			return _skillInfo;
 		}
-
+		
 		public function updateItem(cfg:Q_skill_model,info:SkillInfo=null):void
 		{
 			_skin.txt_Name.text=cfg.q_skillName;
@@ -148,7 +145,7 @@ package com.rpgGame.appModule.skill
 				}
 			}
 		}
-			
+		
 		
 		override protected function onTouchTarget(target:DisplayObject):void
 		{

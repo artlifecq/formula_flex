@@ -36,7 +36,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_been_hurt_animation:int;
 		 /**  怪物朝向角度(不填为随机,值为:右, 右下, 下, 左下, 左, 左上, 上, 右上) */
 		public var q_direction:String;
-		 /**  是否固定不固定0 固定1 */
+		 /**  怪物受击是否转向（转向0 不转向1） */
 		public var q_is_direction_fixed:int;
 		 /**  是否在小地图中显示（1是，2否） */
 		public var q_isminimap:int;
@@ -46,6 +46,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_drop_type:int;
 		 /**  控制怪物模型大小参数为百分比，100为标准体型不填为原始大小 */
 		public var q_scale:int;
+		 /**  怪物为召唤物时归属于谁（0非召唤物，1归为角色召唤，2归为怪物召唤），用于被攻击时自动反击机制触发 */
+		public var q_owner:int;
 		 /**  怪物在场景中的发言频率间隔(单位：毫秒) */
 		public var q_tosay_timeinterval:int;
 		 /**  怪物在场景中的发言内容([{id:标识ID,content:说话内容,sound:音效编号,patrol:是否巡逻时说的},{...}]) */

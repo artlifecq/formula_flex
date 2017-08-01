@@ -44,7 +44,17 @@ package com.rpgGame.app.view.icon
 			effectSk.y=this.height/2;
 			this.addChild(effectSk);
 			_isshowbg=isShowBG;
+			//this.alwayShowCount=true;
 			
+		}
+		override public function set count( value:int ):void
+		{
+			if( value <= 1 &&!alwayShowCount)
+			{
+				setSubString("");
+				return;
+			}
+			setSubString("x"+value);
 		}
 		override protected function calIconPos():void
 		{
@@ -71,6 +81,10 @@ package com.rpgGame.app.view.icon
 			if( effectSk)
 			{
 				this.setChildIndex(effectSk,this.numChildren-1);
+			}
+			if (_countText&&_countText.text!="") 
+			{
+				addChild( _countText );
 			}
 		}
 		
@@ -99,6 +113,7 @@ package com.rpgGame.app.view.icon
 					readyEffect=effectSk.addInter3D(ClientConfig.getEffect(EffectUrl.BUFF_JIANYI));
 			}
 			//			this.setIconResName(ClientConfig.getItemIcon("101", IcoSizeEnum.ICON_36 ));
+			this.count=buffData.curtStackCount;
 			sortLayer();
 			this.faceInfo=buffData;
 			if(value._data.q_buff_id==9||value._data.q_buff_id==10)
