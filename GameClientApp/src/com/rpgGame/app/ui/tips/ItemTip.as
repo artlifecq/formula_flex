@@ -189,6 +189,7 @@ package com.rpgGame.app.ui.tips
 				_itemTip.lbXiuwei.color=StaticValue.A_UI_BEIGE_TEXT;
 				_itemTip.lb3.visible=true;
 				_itemTip.lbXiuwei.visible=true;
+				_itemTip.lb3.x=168;
 				_itemTip.lb3.y=_itemTip.lbXiuwei.y=curY;
 				curY+=20;
 			}
@@ -232,7 +233,8 @@ package com.rpgGame.app.ui.tips
 				curX=13;
 				createUiAsset("wupinshuoming");
 				curY+=17;
-				label=createLabel(_itemInfo.qItem.q_describe,"");
+				name=HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,_itemInfo.qItem.q_describe);
+				label=createLabel(name,"");
 				label.width=250;
 				label.leading=5;
 				label.wordWrap=true;

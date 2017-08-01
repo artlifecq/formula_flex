@@ -6,19 +6,16 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.manager.ActivetyDataManager;
-	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.manager.CharAttributeManager;
 	import com.rpgGame.app.manager.ClientTriggerManager;
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.GameCameraManager;
-	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.RankManager;
 	import com.rpgGame.app.manager.ReliveManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.map.MapUnitDataManager;
-	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.manager.role.DropGoodsManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
@@ -92,6 +89,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.netData.map.message.ResChangePositionMessage;
 	import com.rpgGame.netData.map.message.ResEnterMapMessage;
 	import com.rpgGame.netData.map.message.ResHelmChangeMessage;
+	import com.rpgGame.netData.map.message.ResPetTranMoveMessage;
 	import com.rpgGame.netData.map.message.ResPlayerRunEndMessage;
 	import com.rpgGame.netData.map.message.ResPlayerRunFailMessage;
 	import com.rpgGame.netData.map.message.ResPlayerStopMessage;
@@ -99,6 +97,8 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.netData.map.message.ResRoundGoodsMessage;
 	import com.rpgGame.netData.map.message.ResRoundMonsterDisappearMessage;
 	import com.rpgGame.netData.map.message.ResRoundObjectsMessage;
+	import com.rpgGame.netData.map.message.ResRoundPetDisappearMessage;
+	import com.rpgGame.netData.map.message.ResRoundPetMessage;
 	import com.rpgGame.netData.map.message.ResWeaponChangeMessage;
 	import com.rpgGame.netData.map.message.SCAreaJumpMessage;
 	import com.rpgGame.netData.map.message.SCAttachStateChangeMessage;
@@ -113,7 +113,6 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.netData.player.message.ResPlayerStateChangeMessage;
 	import com.rpgGame.netData.player.message.ResReviveSuccessMessage;
 	import com.rpgGame.netData.structs.Position;
-	import com.rpgGame.netData.top.bean.TopInfo;
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
@@ -188,6 +187,10 @@ package com.rpgGame.app.cmdlistener.scene
 			SocketConnection.addCmdListener(101222, onSCUpdateTopLeaderMessage);
 			SocketConnection.addCmdListener(101152, onSCSyncPlayerPosMessage);
 			SocketConnection.addCmdListener(103109, onResPlayerStateChangeMessage);
+			
+			SocketConnection.addCmdListener(101104, onResRoundPetMessage);
+			SocketConnection.addCmdListener(101108, onResRoundPetDisappearMessage);
+			SocketConnection.addCmdListener(101134, onResPetTranMoveMessage);
 			//			SocketConnection.addCmdListener(SceneModuleMessages.S2C_TRIGGER_CLIENT_EVENT, onTriggerClientEvent);
 			
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -695,6 +698,50 @@ package com.rpgGame.app.cmdlistener.scene
 			
 		}
 		
+		private function onResRoundPetMessage(msg:ResRoundPetMessage):void
+		{
+			GameLog.addShow("onResRoundPetMessage  通知来了！ 同步美人");
+			
+			var data:GirlPetData=new GirlPetData();
+			data.setServerData(msg.pet);
+			SceneRoleManager.getInstance().createGirlPet(data);
+			if (msg.pet.positions.length>0) 
+			{
+				var mInfo : RoleMoveInfo = new RoleMoveInfo();
+				mInfo.setValues(data.id,data.totalStat.getStatValue(CharAttributeType.SPEED), SystemTimeManager.curtTm,Position.FromXY(msg.pet.x,msg.pet.y),msg.pet.positions);
+				RoleStateUtil.walkByInfos(mInfo);
+			}
+			GameLog.addShow("同步对象服务器id：" + msg.pet.petId.ToString()+"\n"+"美人位子:"+msg.pet.x+"_"+msg.pet.y);
+		}
+		
+		private function onResRoundPetDisappearMessage(msg:ResRoundPetDisappearMessage):void
+		{
+			GameLog.addShow("onResRoundPetDisappearMessage  通知来了！ 删除美人");		
+			var delArr:Vector.<long> = msg.petIds;
+			for(var i:int=0;i<delArr.length;i++)
+			{
+				var roleID:uint = delArr[i].ToGID();
+				onSceneRemoveObject(roleID);
+				GameLog.addShow("删除对象客户端id：" + roleID);
+				GameLog.addShow("删除对象服务器id：" + delArr[i].ToString());
+			}
+		}
+		
+		private function onResPetTranMoveMessage(msg:ResPetTranMoveMessage):void
+		{
+			GameLog.addShow("onResPetTranMoveMessage 美人传送：" + msg.petId.ToString());
+			var role:SceneRole=SceneManager.getSceneObjByID(msg.petId.ToGID()) as SceneRole;	
+			if(role)
+			{
+				var p:Point=SceneRoleManager.getInstance().getPetPoint(msg.position..x,msg.position.y,0);
+				role.setGroundXY(msg.position.x,msg.position.y);
+			}
+			else
+			{
+				GameLog.addShow("场景中已经没有这个对象了：" + msg.petId.ToString());
+			}
+		}
+		
 		private function addSculpture(buffer:ByteArray):void
 		{
 			var info:TopLeaderInfo=new TopLeaderInfo();
@@ -722,7 +769,7 @@ package com.rpgGame.app.cmdlistener.scene
 			if (info.positions.length>0) 
 			{
 				var mInfo : RoleMoveInfo = new RoleMoveInfo();
-				mInfo.setValues(data.id,data.totalStat.getStatValue(CharAttributeType.SPEED), SystemTimeManager.curtTm,Position.FromXY(info.x,info.y),null);
+				mInfo.setValues(data.id,data.totalStat.getStatValue(CharAttributeType.SPEED), SystemTimeManager.curtTm,Position.FromXY(info.x,info.y),info.positions);
 				RoleStateUtil.walkByInfos(mInfo);
 			}
 		}
@@ -885,7 +932,7 @@ package com.rpgGame.app.cmdlistener.scene
 				RoleData.readMonster(data,info);
 				sceneRole =SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
 				addTaskmark(sceneRole);			
-//				(sceneRole.headFace as HeadFace).updateNPCTitle();
+				//				(sceneRole.headFace as HeadFace).updateNPCTitle();
 				
 				GameLog.addShow("添加NPC客户端id：" + data.id);
 				GameLog.addShow("添加NPC服务器id：" + data.serverID.ToString());
@@ -1151,10 +1198,10 @@ package com.rpgGame.app.cmdlistener.scene
 			{
 				ReliveManager.autoHideRelive();
 			}
-            if(roleData.id == MainRoleManager.actorID)
-            {
+			if(roleData.id == MainRoleManager.actorID)
+			{
 				SceneManager.scene.removeGrayScene();
-                ReliveManager.autoHideRelive();
+				ReliveManager.autoHideRelive();
 				EventManager.dispatchEvent(MainPlayerEvent.SELFHP_CHANGE);
 				EventManager.dispatchEvent(MainPlayerEvent.REVIVE_SUCCESS);
 				var mapID : int = SceneSwitchManager.currentMapId;

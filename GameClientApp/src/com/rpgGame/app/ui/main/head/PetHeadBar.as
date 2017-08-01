@@ -83,7 +83,7 @@ package com.rpgGame.app.ui.main.head
 			var list:Vector.<PetInfo>=Mgr.petMgr.petListByJiHuo;
 			if(list.length==0)
 			{
-				NoticeManager.showNotifyById(1);
+				NoticeManager.showNotifyById(90301);
 				return false;
 			}			
 			_petHeadPanel.SetData(list);
