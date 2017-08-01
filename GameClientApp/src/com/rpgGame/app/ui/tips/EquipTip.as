@@ -322,18 +322,20 @@ package com.rpgGame.app.ui.tips
 				label.y=curY;
 				curY+=27;
 			}
-			//装备产出
-			createLine(curX,curY,263);
-			curY+=13;
-			titleui=createUiAsset("zhuangbeichanchu");
-			titleui.x=curX;
-			titleui.y=curY;
-			curY+=17;
-			name=HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,_itemInfo.qItem.q_output);
-			label=createLabel(name,"");
-			label.x=curX;
-			label.y=curY;
-			
+			if (_itemInfo.qItem.q_output!="") 
+			{
+				//装备产出
+				createLine(curX,curY,263);
+				curY+=13;
+				titleui=createUiAsset("zhuangbeichanchu");
+				titleui.x=curX;
+				titleui.y=curY;
+				curY+=17;
+				name=HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,_itemInfo.qItem.q_output);
+				label=createLabel(name,"");
+				label.x=curX;
+				label.y=curY;
+			}
 			//装备价值
 			if (_itemInfo.qItem.q_sell==1) 
 			{
