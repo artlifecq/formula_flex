@@ -74,7 +74,7 @@ package com.rpgGame.appModule.activety.zonghe.mibao
 		}
 		private function init():void
 		{
-			icoList1Group=new RewardGroup(IcoSizeEnum.ICON_48,_skin.icon,RewardGroup.ALIN_LEFT,10,6,6);
+			icoList1Group=new RewardGroup(IcoSizeEnum.ICON_48,_skin.icon,RewardGroup.ALIN_CENTER,10,6,6);
 			/*var i:int;
 			icoBgList=new Vector.<UIAsset>();
 			for(i=0;i<6;i++)

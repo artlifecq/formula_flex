@@ -70,7 +70,6 @@ package com.rpgGame.appModule.dungeon.lunjian
 			rewardList.push(_skin.sk_kunnan.skin);
 			rewardList.push(_skin.sk_emeng.skin);
 			rewardIcon=new Vector.<IconCDFace>();
-			
 			_avatarContainer=new Inter3DContainer();
 			_avatar = new InterAvatar3D();
 			_avatarContainer.addChild3D(_avatar);
@@ -85,16 +84,9 @@ package com.rpgGame.appModule.dungeon.lunjian
 				bgList.push(rewardList[i].Icon);
 				points.push(new Point(bgList[i].x,bgList[i].y));
 			}
-			alertOk=new AlertSetInfo(LangAlertInfo.LUNJIAN_FIGHT_MIN);
-		}
-		
-		override protected function onShow():void
-		{
+			
 			var icon:IconCDFace;
-			if(rewardIcon.length==3){
-				return;
-			}
-			for(var i:int=0;i<3;i++){
+			for(i=0;i<3;i++){
 				icon=IconCDFace.create(IcoSizeEnum.ICON_48);
 				rewardIcon.push(icon);
 				rewardList[i].container.addChildAt(icon,2);
@@ -102,16 +94,8 @@ package com.rpgGame.appModule.dungeon.lunjian
 				icon.x=points[i].x;
 				icon.y=points[i].y;
 			}
+			alertOk=new AlertSetInfo(LangAlertInfo.LUNJIAN_FIGHT_MIN);
 		}
-		
-		override protected function onHide():void
-		{
-			while(rewardIcon.length>0){
-				var icon:IconCDFace=rewardIcon.pop();
-				icon.destroy();
-			}
-		}
-		
 		
 		override protected function onTouchTarget(target:DisplayObject):void
 		{

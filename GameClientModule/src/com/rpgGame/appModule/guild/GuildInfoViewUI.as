@@ -51,7 +51,6 @@ package com.rpgGame.appModule.guild
 			_guildInfo = new GuildInfoPanel();
 			_guildInfo.x = 19;
 			_guildInfo.y = 81;
-			this.addChild(_guildInfo);
 			_showAvatarData = new RoleData(0);
 			initAvatar();
 		}
@@ -74,6 +73,8 @@ package com.rpgGame.appModule.guild
 		override protected function onHide():void
 		{
 			EventManager.removeEvent(GuildEvent.GUILD_DATA_INIT,refeashView);
+			if(_guildInfo.parent != null)
+				this.removeChild(_guildInfo);
 		}
 		
 		private function refeashView():void
@@ -83,6 +84,8 @@ package com.rpgGame.appModule.guild
 			refeashPanleInfo();
 			updateRole();
 			refeashReward();
+			if(_guildInfo.parent == null)
+				this.addChild(_guildInfo);
 		}
 		
 		private function refeashReward():void

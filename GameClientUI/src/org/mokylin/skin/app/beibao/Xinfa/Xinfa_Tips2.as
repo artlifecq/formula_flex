@@ -215,11 +215,11 @@ package org.mokylin.skin.app.beibao.Xinfa
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lab_shuxing = temp;
 			temp.name = "lab_shuxing";
-			temp.text = "+100";
+			temp.text = "最大气血：1000";
 			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 80;
-			temp.x = 54;
+			temp.width = 120;
+			temp.x = 17;
 			temp.y = 108;
 			return temp;
 		}

@@ -50,7 +50,7 @@ package com.game.engine3D.vo
 		{
 			if (_vertexList)
 			{
-				_vertexList.length = 0;
+				//_vertexList.length = 0;区域数据不用不用清空-------yt
 				_vertexList = null;
 			}
 			_type = 0;

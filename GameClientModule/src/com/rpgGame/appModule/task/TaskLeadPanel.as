@@ -117,6 +117,10 @@ package com.rpgGame.appModule.task
 		}
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void 
 		{
+			if(!TaskMissionManager.haveMainTask)
+			{
+				return;
+			}
 			super.show(data, openTable, parentContiner);
 			if(!initKey)
 			{
@@ -166,7 +170,7 @@ package com.rpgGame.appModule.task
 			{
 				setTitle(taskData.q_party_name,taskData.q_name,taskData.q_deal_mission);
 				//TaskUtil.setRewordInfo(taskData.q_reword_id,icoList,icoBgList,true);
-				icoListGroup.setRewardByArray(TaskMissionCfgData.getRewordById(taskData.q_reword_id,MainRoleManager.actorInfo.job));
+				icoListGroup.setRewardByArray(TaskMissionCfgData.getRewordById(taskData.q_reword_id,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex));
 				icoListGroup.visible=true;
 				if(TaskMissionManager.getMainTaskIsFinish())
 				{

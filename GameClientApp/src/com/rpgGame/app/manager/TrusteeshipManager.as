@@ -98,7 +98,7 @@ package com.rpgGame.app.manager
 		
 		private var _isFightSelect:Boolean=false;
 		/**玩家被攻击*/
-		public function killActor() : void
+		public function killActor(role:SceneRole) : void
 		{
 			if(!isAutoFightRunning&&!isFightTargetRunning&&!isFightActorRunning)
 			{
@@ -118,8 +118,10 @@ package com.rpgGame.app.manager
 					_isFightSelect=false;
 				}
 			}
-			
-			
+			if(isFightActorRunning||_isFightSelect)
+			{
+				setRoleList(role);
+			}
 		}
 		/**被动防御*/
 		private function actorFight() : void
@@ -129,7 +131,7 @@ package com.rpgGame.app.manager
 			if(!isAutoFightRunning&&!MainRoleManager.actor.stateMachine.isRunning&&!_isLeftDown)
 			{
 				_isFightActorRunning=true;
-				startFightTarget();
+				startFightTarget(_targetRoles);
 			}
 			
 		}
@@ -295,18 +297,32 @@ package com.rpgGame.app.manager
 				return false;
 			}
 			var isCompleted : Boolean = true;
-			for each (var role : SceneRole in _targetRoles)
-			{
-				if (role.usable && role.isInViewDistance && !role.stateMachine.isDeadState)
+			
+			for(var i:int=0,flag:Boolean=true;i<_targetRoles.length;flag?i++:i){
+				
+				if (_targetRoles[i].usable && !_targetRoles[i].stateMachine.isDeadState)
+				{
 					isCompleted = false;
+					flag=true;
+				}
+				else
+				{
+					Lyt.a("getHasRole:false"+_targetRoles[i].id);
+					_targetRoles.splice(i,1);
+					Lyt.a("getHasRole:length"+_targetRoles.length);
+					flag=false;
+				}
 			}
+			
 			if (isCompleted)
 			{
 				_targetRoles.length = 0;
 				_targetRoles = null;
+				Lyt.a("getHasRole:isCompleted");
 				return false;
 				
 			}
+			
 			return true;
 		}
 		
@@ -314,11 +330,17 @@ package com.rpgGame.app.manager
 		
 		public function setRoleList(role:SceneRole):void
 		{
-			_targetRoles=new Vector.<SceneRole>();
-			if(_targetRoles!=null)
+			_targetRoles=_targetRoles?_targetRoles:new Vector.<SceneRole>();
+			for(var i:int=0;i<_targetRoles.length;i++)
 			{
-				_targetRoles.push(role);
+				if(_targetRoles[i].id==role.id)
+				{
+					return;
+				}
 			}
+			
+			_targetRoles.push(role);
+			Lyt.a("targetRoles:"+role.id+"::"+_targetRoles.length);
 		}
 		
 		private function onUpdate(force : Boolean = false) : void
@@ -378,9 +400,17 @@ package com.rpgGame.app.manager
 				
 			else if(_isFightActorRunning)
 			{
-				_stateMachine.transition(AIStateType.USE_ITEM, null, force);
-				_stateMachine.transition(AIStateType.FIND_ATTACKABLE, null, force);
-				_stateMachine.transition(AIStateType.ATTACK_TARGET, null, force);
+				if(getHasRole())
+				{
+					_stateMachine.transition(AIStateType.USE_ITEM, null, force);
+					_stateMachine.transition(AIStateType.FIND_ATTACKABLE, null, force);
+					_stateMachine.transition(AIStateType.ATTACK_TARGET, null, force);
+				}
+				else
+				{
+					stopFightTarget();
+				}
+				
 			}
 			else if(_isFightTargetRunning)
 			{
@@ -419,7 +449,7 @@ package com.rpgGame.app.manager
 			_isFightActorRunning = value;
 		}
 		
-		public function get isAuto():Boolean
+		public function get isAutoing():Boolean
 		{
 			if(_isFightActorRunning||_isAutoFightRunning||_isFightTargetRunning)
 			{

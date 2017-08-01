@@ -984,10 +984,10 @@ package com.game.engine3D.scene.render
 			{
 				return;
 			}
-			if (!_setVisibleMap || !_setVisibleMap.hasOwnProperty(mesh.name))
-			{
-				return;
-			}
+//			if (!_setVisibleMap || !_setVisibleMap.hasOwnProperty(mesh.name))
+//			{
+//				return;
+//			}
 			if (!_layerTypeByName.hasOwnProperty(mesh.name))
 			{
 				_layerTypeByName[mesh.name] = mesh.layerType;
@@ -1003,10 +1003,19 @@ package com.game.engine3D.scene.render
 			}
 			if (_visible)
 			{
+				layerType = getLayerType(mesh.name);
 			}
 			else
 			{
 				layerType = 0;
+			}
+			if(_isHiding)
+			{
+				layerType = 0;
+			}
+			else
+			{
+				layerType = getLayerType(mesh.name);
 			}
 			mesh.layerType = layerType;
 		}
@@ -1051,10 +1060,19 @@ package com.game.engine3D.scene.render
 				animatStatus = _secondStatusGetter(_currentStatus);
 			if (_visible && (!_isElementStatus || mesh.name == animatStatus))
 			{
+//				layerType = getLayerType(mesh.name);
 			}
 			else
 			{
 				layerType = 0;
+			}
+			if(_isHiding)
+			{
+				layerType = 0;
+			}
+			else
+			{
+//				layerType = getLayerType(mesh.name);
 			}
 			mesh.layerType = layerType;
 		}
@@ -1081,10 +1099,10 @@ package com.game.engine3D.scene.render
 			{
 				return;
 			}
-			if (!_setVisibleMap || !_setVisibleMap.hasOwnProperty(obj.name))
-			{
-				return;
-			}
+//			if (!_setVisibleMap || !_setVisibleMap.hasOwnProperty(obj.name))
+//			{
+//				return;
+//			}
 			if (!_visibleByName.hasOwnProperty(obj.name))
 			{
 				_visibleByName[obj.name] = obj.visible;
@@ -1106,10 +1124,19 @@ package com.game.engine3D.scene.render
 				animatStatus = _secondStatusGetter(_currentStatus);
 			if (_visible && (!_isElementStatus || obj.name == animatStatus))
 			{
+				objVisible = getVisible(obj.name);
 			}
 			else
 			{
 				objVisible = false;
+			}
+			if(_isHiding)
+			{
+				objVisible = false;
+			}
+			else
+			{
+				objVisible = getVisible(obj.name);
 			}
 			obj.visible = objVisible;
 		}
@@ -2033,13 +2060,17 @@ package com.game.engine3D.scene.render
 			validateAnimation();
 		}
 		
+		override public function set isHiding(value:Boolean):void
+		{
+			if (_isHiding != value)
+			{
+				super.isHiding = value;
+				validateEffect();
+			}
+		}
+		
 		override public function set visible(value : Boolean) : void
 		{
-//			//隐藏状态yfl
-//			if (isHiding&&value==true) 
-//			{
-//				return;
-//			}
 			if (_visible != value)
 			{
 				super.visible = value;
@@ -2786,7 +2817,7 @@ package com.game.engine3D.scene.render
 			}
 		}
 		
-		private function onNextSyncResProgress(progress,resData : RenderResourceData) : void
+		private function onNextSyncResProgress(progress:*,resData : RenderResourceData) : void
 		{
 			if (_asyncResourceProgressCallBackList)
 				CallBackUtil.exceteCallBackData(this, _asyncResourceProgressCallBackList, progress);
@@ -3636,6 +3667,22 @@ package com.game.engine3D.scene.render
 //                    }
 					
 				}
+				if(_isAlpha)
+				{
+					if(_alpha == 1)
+						_alpha = 0.3;
+					if(blendMode != BlendMode.LAYER)
+					{
+						blendMode = BlendMode.LAYER;
+					}
+				}
+				else
+				{
+					if(blendMode != BlendMode.NORMAL)
+					{
+						blendMode = BlendMode.NORMAL;
+					}
+				}
 			}
 		}
 		
@@ -4022,10 +4069,9 @@ package com.game.engine3D.scene.render
 				}
 			}
 		}
-
-		public function get compositeMesh():CompositeMesh
-		{
-			return _compositeMesh;
-		}
+//		public function get compositeMesh():CompositeMesh
+//		{
+//			return _compositeMesh;
+//		}
 	}
 }

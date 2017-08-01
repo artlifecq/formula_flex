@@ -1,10 +1,10 @@
 package org.mokylin.skin.app.beibao.Xinfa
 {
-	import feathers.controls.text.Fontter;
 	import feathers.controls.Group;
-	import feathers.controls.Label;
+	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import org.mokylin.skin.app.beibao.Xinfa.XinfaIconSkin;
 
 	/**
 	 * @private
@@ -16,55 +16,31 @@ package org.mokylin.skin.app.beibao.Xinfa
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var grp_icon:feathers.controls.Group;
+		public var grp_icondi:feathers.controls.Group;
 
-		public var grp_lab:feathers.controls.Group;
+		public var icd_1:feathers.controls.SkinnableContainer;
 
-		public var ico_1:feathers.controls.UIAsset;
+		public var icd_10:feathers.controls.SkinnableContainer;
 
-		public var ico_10:feathers.controls.UIAsset;
+		public var icd_11:feathers.controls.SkinnableContainer;
 
-		public var ico_11:feathers.controls.UIAsset;
+		public var icd_2:feathers.controls.SkinnableContainer;
 
-		public var ico_2:feathers.controls.UIAsset;
+		public var icd_3:feathers.controls.SkinnableContainer;
 
-		public var ico_3:feathers.controls.UIAsset;
+		public var icd_4:feathers.controls.SkinnableContainer;
 
-		public var ico_4:feathers.controls.UIAsset;
+		public var icd_5:feathers.controls.SkinnableContainer;
 
-		public var ico_5:feathers.controls.UIAsset;
+		public var icd_6:feathers.controls.SkinnableContainer;
 
-		public var ico_6:feathers.controls.UIAsset;
+		public var icd_7:feathers.controls.SkinnableContainer;
 
-		public var ico_7:feathers.controls.UIAsset;
+		public var icd_8:feathers.controls.SkinnableContainer;
 
-		public var ico_8:feathers.controls.UIAsset;
-
-		public var ico_9:feathers.controls.UIAsset;
+		public var icd_9:feathers.controls.SkinnableContainer;
 
 		public var ico_xinfa:feathers.controls.UIAsset;
-
-		public var lab_1:feathers.controls.Label;
-
-		public var lab_10:feathers.controls.Label;
-
-		public var lab_11:feathers.controls.Label;
-
-		public var lab_2:feathers.controls.Label;
-
-		public var lab_3:feathers.controls.Label;
-
-		public var lab_4:feathers.controls.Label;
-
-		public var lab_5:feathers.controls.Label;
-
-		public var lab_6:feathers.controls.Label;
-
-		public var lab_7:feathers.controls.Label;
-
-		public var lab_8:feathers.controls.Label;
-
-		public var lab_9:feathers.controls.Label;
 
 
 		//==========================================================================
@@ -75,7 +51,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [ico_xinfa_i(),grp_icon_i(),grp_lab_i()];
+			this.elementsContent = [grp_icondi_i(),ico_xinfa_i()];
 			
 			states = {
 			};
@@ -86,144 +62,166 @@ package org.mokylin.skin.app.beibao.Xinfa
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function grp_icon_i():feathers.controls.Group
+		private function grp_icondi_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
-			grp_icon = temp;
-			temp.name = "grp_icon";
-			temp.x = 103;
-			temp.y = 43;
-			temp.elementsContent = [ico_1_i(),ico_2_i(),ico_3_i(),ico_4_i(),ico_5_i(),ico_6_i(),ico_7_i(),ico_8_i(),ico_9_i(),ico_10_i(),ico_11_i()];
+			grp_icondi = temp;
+			temp.name = "grp_icondi";
+			temp.x = 0;
+			temp.y = 0;
+			temp.elementsContent = [icd_1_i(),icd_2_i(),icd_3_i(),icd_4_i(),icd_5_i(),icd_6_i(),icd_7_i(),icd_8_i(),icd_9_i(),icd_10_i(),icd_11_i()];
 			return temp;
 		}
 
-		private function grp_lab_i():feathers.controls.Group
+		private function icd_10_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
-			grp_lab = temp;
-			temp.name = "grp_lab";
-			temp.x = 106;
-			temp.y = 75;
-			temp.elementsContent = [lab_1_i(),lab_2_i(),lab_3_i(),lab_4_i(),lab_5_i(),lab_6_i(),lab_7_i(),lab_8_i(),lab_9_i(),lab_10_i(),lab_11_i()];
-			return temp;
-		}
-
-		private function ico_10_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_10 = temp;
-			temp.name = "ico_10";
-			temp.styleName = "ui/app/beibao/xinfa/yuan.png";
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			icd_10 = temp;
+			temp.name = "icd_10";
+			temp.height = 48;
+			var skin:StateSkin = new org.mokylin.skin.app.beibao.Xinfa.XinfaIconSkin()
+			temp.skin = skin
+			temp.width = 48;
 			temp.x = 173;
 			temp.y = 73;
 			return temp;
 		}
 
-		private function ico_11_i():feathers.controls.UIAsset
+		private function icd_11_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_11 = temp;
-			temp.name = "ico_11";
-			temp.styleName = "ui/app/beibao/xinfa/yuan.png";
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			icd_11 = temp;
+			temp.name = "icd_11";
+			temp.height = 48;
+			var skin:StateSkin = new org.mokylin.skin.app.beibao.Xinfa.XinfaIconSkin()
+			temp.skin = skin
+			temp.width = 48;
 			temp.x = 246;
 			temp.y = 123;
 			return temp;
 		}
 
-		private function ico_1_i():feathers.controls.UIAsset
+		private function icd_1_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_1 = temp;
-			temp.name = "ico_1";
-			temp.styleName = "ui/app/beibao/xinfa/yuan.png";
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			icd_1 = temp;
+			temp.name = "icd_1";
+			temp.height = 48;
+			var skin:StateSkin = new org.mokylin.skin.app.beibao.Xinfa.XinfaIconSkin()
+			temp.skin = skin
+			temp.width = 48;
 			temp.x = 56;
 			temp.y = 123;
 			return temp;
 		}
 
-		private function ico_2_i():feathers.controls.UIAsset
+		private function icd_2_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_2 = temp;
-			temp.name = "ico_2";
-			temp.styleName = "ui/app/beibao/xinfa/yuan.png";
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			icd_2 = temp;
+			temp.name = "icd_2";
+			temp.height = 48;
+			var skin:StateSkin = new org.mokylin.skin.app.beibao.Xinfa.XinfaIconSkin()
+			temp.skin = skin
+			temp.width = 48;
 			temp.x = 0;
 			temp.y = 123;
 			return temp;
 		}
 
-		private function ico_3_i():feathers.controls.UIAsset
+		private function icd_3_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_3 = temp;
-			temp.name = "ico_3";
-			temp.styleName = "ui/app/beibao/xinfa/yuan.png";
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			icd_3 = temp;
+			temp.name = "icd_3";
+			temp.height = 48;
+			var skin:StateSkin = new org.mokylin.skin.app.beibao.Xinfa.XinfaIconSkin()
+			temp.skin = skin
+			temp.width = 48;
 			temp.x = 39;
 			temp.y = 208;
 			return temp;
 		}
 
-		private function ico_4_i():feathers.controls.UIAsset
+		private function icd_4_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_4 = temp;
-			temp.name = "ico_4";
-			temp.styleName = "ui/app/beibao/xinfa/yuan.png";
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			icd_4 = temp;
+			temp.name = "icd_4";
+			temp.height = 48;
+			var skin:StateSkin = new org.mokylin.skin.app.beibao.Xinfa.XinfaIconSkin()
+			temp.skin = skin
+			temp.width = 48;
 			temp.x = 123;
 			temp.y = 247;
 			return temp;
 		}
 
-		private function ico_5_i():feathers.controls.UIAsset
+		private function icd_5_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_5 = temp;
-			temp.name = "ico_5";
-			temp.styleName = "ui/app/beibao/xinfa/yuan.png";
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			icd_5 = temp;
+			temp.name = "icd_5";
+			temp.height = 48;
+			var skin:StateSkin = new org.mokylin.skin.app.beibao.Xinfa.XinfaIconSkin()
+			temp.skin = skin
+			temp.width = 48;
 			temp.x = 39;
 			temp.y = 35;
 			return temp;
 		}
 
-		private function ico_6_i():feathers.controls.UIAsset
+		private function icd_6_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_6 = temp;
-			temp.name = "ico_6";
-			temp.styleName = "ui/app/beibao/xinfa/yuan.png";
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			icd_6 = temp;
+			temp.name = "icd_6";
+			temp.height = 48;
+			var skin:StateSkin = new org.mokylin.skin.app.beibao.Xinfa.XinfaIconSkin()
+			temp.skin = skin
+			temp.width = 48;
 			temp.x = 73;
 			temp.y = 73;
 			return temp;
 		}
 
-		private function ico_7_i():feathers.controls.UIAsset
+		private function icd_7_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_7 = temp;
-			temp.name = "ico_7";
-			temp.styleName = "ui/app/beibao/xinfa/yuan.png";
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			icd_7 = temp;
+			temp.name = "icd_7";
+			temp.height = 48;
+			var skin:StateSkin = new org.mokylin.skin.app.beibao.Xinfa.XinfaIconSkin()
+			temp.skin = skin
+			temp.width = 48;
 			temp.x = 123;
 			temp.y = 59;
 			return temp;
 		}
 
-		private function ico_8_i():feathers.controls.UIAsset
+		private function icd_8_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_8 = temp;
-			temp.name = "ico_8";
-			temp.styleName = "ui/app/beibao/xinfa/yuan.png";
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			icd_8 = temp;
+			temp.name = "icd_8";
+			temp.height = 48;
+			var skin:StateSkin = new org.mokylin.skin.app.beibao.Xinfa.XinfaIconSkin()
+			temp.skin = skin
+			temp.width = 48;
 			temp.x = 123;
 			temp.y = 0;
 			return temp;
 		}
 
-		private function ico_9_i():feathers.controls.UIAsset
+		private function icd_9_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ico_9 = temp;
-			temp.name = "ico_9";
-			temp.styleName = "ui/app/beibao/xinfa/yuan.png";
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			icd_9 = temp;
+			temp.name = "icd_9";
+			temp.height = 48;
+			var skin:StateSkin = new org.mokylin.skin.app.beibao.Xinfa.XinfaIconSkin()
+			temp.skin = skin
+			temp.width = 48;
 			temp.x = 207;
 			temp.y = 35;
 			return temp;
@@ -235,162 +233,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			ico_xinfa = temp;
 			temp.name = "ico_xinfa";
 			temp.styleName = "ui/app/beibao/xinfa/daojukuang.png";
-			temp.x = 210;
-			temp.y = 148;
-			return temp;
-		}
-
-		private function lab_10_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lab_10 = temp;
-			temp.name = "lab_10";
-			temp.text = "1";
-			temp.color = 0xE1D4A9;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 36;
-			temp.x = 199;
-			temp.y = 72;
-			return temp;
-		}
-
-		private function lab_11_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lab_11 = temp;
-			temp.name = "lab_11";
-			temp.text = "1";
-			temp.color = 0xE1D4A9;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 36;
-			temp.x = 266;
-			temp.y = 128;
-			return temp;
-		}
-
-		private function lab_1_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lab_1 = temp;
-			temp.name = "lab_1";
-			temp.text = "1";
-			temp.color = 0xE1D4A9;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 36;
-			temp.x = 58;
-			temp.y = 124;
-			return temp;
-		}
-
-		private function lab_2_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lab_2 = temp;
-			temp.name = "lab_2";
-			temp.text = "1";
-			temp.color = 0xE1D4A9;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 36;
-			temp.x = 0;
-			temp.y = 125;
-			return temp;
-		}
-
-		private function lab_3_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lab_3 = temp;
-			temp.name = "lab_3";
-			temp.text = "1";
-			temp.color = 0xE1D4A9;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 36;
-			temp.x = 37;
-			temp.y = 214;
-			return temp;
-		}
-
-		private function lab_4_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lab_4 = temp;
-			temp.name = "lab_4";
-			temp.text = "1";
-			temp.color = 0xE1D4A9;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 36;
-			temp.x = 154;
-			temp.y = 240;
-			return temp;
-		}
-
-		private function lab_5_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lab_5 = temp;
-			temp.name = "lab_5";
-			temp.text = "1";
-			temp.color = 0xE1D4A9;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 36;
-			temp.x = 28;
-			temp.y = 31;
-			return temp;
-		}
-
-		private function lab_6_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lab_6 = temp;
-			temp.name = "lab_6";
-			temp.text = "1";
-			temp.color = 0xE1D4A9;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 36;
-			temp.x = 65;
-			temp.y = 69;
-			return temp;
-		}
-
-		private function lab_7_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lab_7 = temp;
-			temp.name = "lab_7";
-			temp.text = "1";
-			temp.color = 0xE1D4A9;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 36;
-			temp.x = 149;
-			temp.y = 53;
-			return temp;
-		}
-
-		private function lab_8_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lab_8 = temp;
-			temp.name = "lab_8";
-			temp.text = "1";
-			temp.color = 0xE1D4A9;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 36;
-			temp.x = 149;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function lab_9_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lab_9 = temp;
-			temp.name = "lab_9";
-			temp.text = "1";
-			temp.color = 0xE1D4A9;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 36;
-			temp.x = 229;
-			temp.y = 35;
+			temp.x = 114;
+			temp.y = 120;
 			return temp;
 		}
 

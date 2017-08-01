@@ -5,10 +5,13 @@ package com.rpgGame.app.ui.main.head
 	import com.rpgGame.app.sender.LookSender;
 	import com.rpgGame.app.sender.PetSender;
 	import com.rpgGame.app.utils.MenuUtil;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.PetCfg;
 	import com.rpgGame.coreData.clientConfig.Q_girl_pet;
+	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.netData.pet.bean.PetInfo;
 	
 	import org.mokylin.skin.app.meiren.MeiRen_Head;
@@ -78,6 +81,7 @@ package com.rpgGame.app.ui.main.head
 			_info=info;
 			_skin.icon.styleName = "ui/app/meiren/head_icon/head"+_info.modelId+"s.png";
 			_skin.uiName.styleName =  "ui/app/meiren/head_icon/name"+_info.modelId+"s.png";
+			TipTargetManager.show(this, TargetTipsMaker.makeTips( TipType.MEIREN_TIP, _info ,true) );
 		}
 	}
 }

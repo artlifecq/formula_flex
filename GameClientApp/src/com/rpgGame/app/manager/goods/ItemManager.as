@@ -1,11 +1,16 @@
 package com.rpgGame.app.manager.goods
 {
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.ItemSender;
-	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.core.events.ItemEvent;
+	import com.rpgGame.coreData.cfg.HeChengData;
 	import com.rpgGame.coreData.cfg.item.EquipStrengthCfg;
+	import com.rpgGame.coreData.cfg.item.EquipWashCfg;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
+	import com.rpgGame.coreData.clientConfig.Q_hecheng;
+	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
 	
@@ -25,6 +30,41 @@ package com.rpgGame.app.manager.goods
 		{
 		}
 
+		/**
+		 *能否全部放入背包 
+		 * @param id
+		 * @param num
+		 * @return 
+		 * 
+		 */
+		public static function isCanPushPack(id:int,num:int):Boolean
+		{
+			var qItem:Q_item=ItemConfig.getQItemByID(id);
+			var result:Boolean;
+			var hold:int=BackPackManager.instance.getBagItemsCountById(id);
+			var useGridNum:int;
+			var leftNum:int;
+			var leftGridNum:int=BackPackManager.instance.getEmptyGridNum();
+			if(qItem.q_max>1){//可堆叠
+				if(hold!=0){
+					if(hold+num<qItem.q_max){
+						result=true;
+					}else{
+						leftNum=num-(qItem.q_max-hold);
+						useGridNum=Math.ceil(leftNum/qItem.q_max);
+						result=useGridNum<=leftGridNum;
+					}
+				}else{
+					leftNum=num;
+					useGridNum=Math.ceil(leftNum/qItem.q_max);
+					result=useGridNum<=leftGridNum;
+				}
+			}else{
+				result=useGridNum<=num;
+			}
+			return result;
+		}
+		
 		/**
 		 *获取背包和装备 
 		 * @param complete
@@ -189,20 +229,177 @@ package com.rpgGame.app.manager.goods
 			}
 			return false;
 		}
+		
+		
+		/**
+		 *能强化 
+		 * @param info
+		 * @return 
+		 * 
+		 */
+		public static function   isStren(info:EquipInfo):Boolean
+		{
+			var job:int=MainRoleManager.actorInfo.job;
+			if(info.qItem.q_max_strengthen!=0&&info.strengthLevel<info.qItem.q_max_strengthen&&info.qItem.q_job==job){//可强化的
+				return true;
+			}
+			return false;
+		}
+		
+		/**
+		 *被用作强化 
+		 * @param info
+		 * @return 
+		 * 
+		 */
+		public static function isUseStren(info:ClientItemInfo):Boolean
+		{
+			var equip:EquipInfo=info as EquipInfo;
+			if(equip.qItem.q_strengthen_num!=0&&RoleEquipmentManager.equipIsWearing(equip)==false){//消耗获得的值不为0
+				return true;
+			}
+			return false;
+		}
+		
+		/**
+		 *有装备可被强化 
+		 * @return 
+		 * 
+		 */
 		public static function checkHasEquip2Strengthen():Boolean
 		{
+			var allEquips:Array=getAllEquipDatas();
+			var num:int=allEquips.length;
+			var equip:EquipInfo;
+			var useEquip:EquipInfo;
+			for(var i:int=0;i<num;i++){
+				equip=allEquips[i];
+				if(isStren(equip)){
+					for(var j:int=0;j<num;j++){
+						useEquip=allEquips[j];
+						if(equip!=useEquip&&isUseStren(useEquip)){
+							return true;
+						}
+					}
+				}
+			}
 			return false;
 		}
+		/**
+		 *有装备可被琢磨 
+		 * @return 
+		 * 
+		 */
 		public static function checkHasEquip2ZM():Boolean
 		{
+			var allEquips:Array=getAllEquipDatas();
+			var num:int=allEquips.length;
+			var equip:EquipInfo;
+			var useEquip:EquipInfo;
+			for(var i:int=0;i<num;i++){
+				equip=allEquips[i];
+				if(isPolish(equip)){
+					for(var j:int=0;j<num;j++){
+						useEquip=allEquips[j];
+						if(equip!=useEquip&&isPolishUse(useEquip)){
+							return true;
+						}
+					}
+				}
+			}
 			return false;
 		}
+		
+		private static function isPolishUse(info:ClientItemInfo):Boolean
+		{
+			var equip:EquipInfo=info as EquipInfo;
+			if(equip.qItem.q_polish_num!=0&&RoleEquipmentManager.equipIsWearing(equip)==false){//消耗获得的值不为0
+				return true;
+			}
+			return false;
+		}
+		
+		private static function isPolish(info:EquipInfo):Boolean
+		{
+			var job:int=MainRoleManager.actorInfo.job;
+			if(info.qItem.q_job==job){
+				return true;
+			}
+			return false;
+		}
+		
+		/**
+		 *有装备可被洗练 
+		 * @return 
+		 * 
+		 */
 		public static function checkHasEquip2XILIAN():Boolean
 		{
+			var allEquips:Array=getAllEquipDatas();
+			var num:int=allEquips.length;
+			var equip:EquipInfo;
+			var useEquip:EquipInfo;
+			for(var i:int=0;i<num;i++){
+				equip=allEquips[i];
+				if(isSmelt(equip)){
+					for(var j:int=0;j<num;j++){
+						useEquip=allEquips[j];
+						if(equip!=useEquip&&isSmeltUse(useEquip)){
+							return true;
+						}
+					}
+				}
+			}
 			return false;
 		}
+		
+		private static function isSmeltUse(info:ClientItemInfo):Boolean
+		{
+			if(EquipWashCfg.washItems.indexOf(info.cfgId)!=-1){
+				return true;
+			}
+			return false;
+		}
+		
+		private static function isSmelt(info:EquipInfo):Boolean
+		{
+			var job:int=MainRoleManager.actorInfo.job;
+			if(info.qItem.q_job==job){
+				return true;
+			}
+			return false;
+		}
+		
+		/**
+		 *有装备可被合成 
+		 * @return 
+		 * 
+		 */
 		public static function checkHasEquip2HC():Boolean
 		{
+			BackPackManager.instance.setCheckType(null);
+			var backDatas:Array=BackPackManager.instance.getAllItem();
+			var num:int=backDatas.length;
+			var itemInfo:ClientItemInfo;
+			var targetHeCheng:Q_hecheng;
+			var caiList:Array;
+			for(var i:int=0;i<num;i++){
+				itemInfo=backDatas[i];
+				targetHeCheng=HeChengData.getHeChengTargetByTragetId(itemInfo.qItem.q_id); 
+				if(targetHeCheng){
+					caiList=JSONUtil.decode(targetHeCheng.q_cost_items);
+					if(BackPackManager.instance.getBagItemsCountById(itemInfo.qItem.q_id)>=caiList[1]){
+						return true;
+					}
+				}
+				targetHeCheng=HeChengData.getHeChengTargetByCaiLiao(itemInfo.qItem.q_id);
+				if(targetHeCheng){
+					caiList=JSONUtil.decode(targetHeCheng.q_cost_items);
+					if(BackPackManager.instance.getBagItemsCountById(itemInfo.qItem.q_id)>=caiList[1]){
+						return true;
+					}
+				}
+			}
 			return false;
 		}
 		public static function checkEquip2HCByType(type:int):Boolean

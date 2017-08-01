@@ -216,6 +216,7 @@ package com.rpgGame.appModule.equip
 		
 		private function onCancelTarget(grid:DragDropItem ):void
 		{
+			cancelAllUse();
 			var targetGrid:DragDropItem;
 			if(targetEquipInfo){
 				_goodsContainerTarget.setGrayForData(targetEquipInfo,false);
@@ -223,13 +224,13 @@ package com.rpgGame.appModule.equip
 					useEquips.push(targetEquipInfo);
 					useEquips.sort(sortForUse);
 					_goodsContainerUse.refleshGridsByDatas(useEquips);
+					_goodsContainerUse.setGrayForData(targetEquipInfo,false);
 				}
 				targetEquipInfo=null;
 			}
 			
 			_targetEquip.setGridEmpty();
 			updateView();
-			cancelAllUse();
 		}
 		
 		private function onCreate(e:Event):void
@@ -496,6 +497,7 @@ package com.rpgGame.appModule.equip
 					useEquips.push(targetEquipInfo);
 					useEquips.sort(sortForUse);
 					_goodsContainerUse.refleshGridsByDatas(useEquips);
+					_goodsContainerUse.setGrayForData(targetEquipInfo,false);
 				}
 			}
 			
@@ -516,7 +518,6 @@ package com.rpgGame.appModule.equip
 			tweenEquip=TweenMax.to(_targetEquip,1,{x:624,y:195,ease:Expo.easeOut});
 			
 			if(isUse(targetEquipInfo)){
-//				_goodsContainerUse.setGrayForData(targetEquipInfo,true);
 				deleteItems(useEquips,targetEquipInfo);
 				_goodsContainerUse.refleshGridsByDatas(useEquips);
 			}
@@ -653,11 +654,11 @@ package com.rpgGame.appModule.equip
 					
 					var info:GridInfo=getGridInfo(_goodsContainerTarget.dataProvider,grid.gridInfo.data);
 					if(info){
-						info.isGray=false;
+						_goodsContainerTarget.setGrayForData(item,false);
 					}
 					info=getGridInfo(_goodsContainerUse.dataProvider,grid.gridInfo.data);
 					if(info){
-						info.isGray=false;
+						_goodsContainerUse.setGrayForData(item,false);
 					}
 				}
 				grid.setGridEmpty();
@@ -985,25 +986,25 @@ package com.rpgGame.appModule.equip
 			var num:int=_goodsContainerTarget.dataProvider.length;
 			var info:GridInfo;
 			var i:int;
+			var item:ClientItemInfo
 			for(i=0;i<num;i++){
 				info=_goodsContainerTarget.dataProvider.getItemAt(i) as  GridInfo;
-				if(info){
-					info.isGray=false;
-				}
+				item=info.data as ClientItemInfo;
+				_goodsContainerTarget.setGrayForData(item,false);
 			}
 			num=_goodsContainerUse.dataProvider.length;
 			
 			for(i=0;i<num;i++){
 				info=_goodsContainerUse.dataProvider.getItemAt(i) as  GridInfo;
-				if(info){
-					info.isGray=false;
-				}
+				item=info.data as ClientItemInfo;
+				_goodsContainerUse.setGrayForData(item,false);
 			}
 			
 			if(targetEquipInfo){
 				_goodsContainerTarget.setGrayForData(targetEquipInfo,true);
 				if(isUse(targetEquipInfo)){
-					_goodsContainerUse.setGrayForData(targetEquipInfo,true);
+					deleteItems(useEquips,targetEquipInfo);//在消耗列表移除掉
+					_goodsContainerUse.refleshGridsByDatas(useEquips);
 				}
 			}
 			updateView();

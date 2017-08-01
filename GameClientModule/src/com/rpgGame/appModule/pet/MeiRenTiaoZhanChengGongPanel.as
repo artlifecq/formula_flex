@@ -6,6 +6,7 @@ package com.rpgGame.appModule.pet
 	import com.rpgGame.app.display3D.InterAvatar3D;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.sender.HuBaoSender;
 	import com.rpgGame.app.sender.PetSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
@@ -27,6 +28,7 @@ package com.rpgGame.appModule.pet
 	import feathers.controls.UIAsset;
 	
 	import org.mokylin.skin.app.meiren.BtnTiaoZhan;
+	import org.mokylin.skin.app.meiren.BtnTiaoZhan2;
 	import org.mokylin.skin.app.meiren.MeiRenTiaoZhan;
 	
 	import starling.display.DisplayObject;
@@ -46,6 +48,7 @@ package com.rpgGame.appModule.pet
 		private var _modContaner:Inter3DContainer;
 		private var _avatar : InterAvatar3D;
 		private var _avatarData : RoleData;
+		private var _q_girl_pet:Q_girl_pet;
 		
 		public function MeiRenTiaoZhanChengGongPanel()
 		{
@@ -60,6 +63,10 @@ package com.rpgGame.appModule.pet
 			_items=new Vector.<IconCDFace>();
 			_modContaner=new Inter3DContainer();
 			this._skin.container.addChildAt(_modContaner,1);
+			_avatar=new InterAvatar3D();
+			_avatar.x = 270;
+			_avatar.y =360;
+			_modContaner.addChild3D(_avatar);
 			for (var j:int = 0; j < 9; j++) 
 			{
 				_zoneBalls.push(new PetZoneBall(_skin["icon"+(j+1)]));
@@ -78,23 +85,32 @@ package com.rpgGame.appModule.pet
 		
 		public override function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
-			//			_skin.btn_next.addEventListener(MouseEvent.CLICK,onMouseclickHandler);
-			super.show();
-			
+			super.show();		
 			_msg=data as ResPetZoneResultMessage;
 			_info=Mgr.petMgr.getPet(_msg.petId);
-			showZoneBall(_msg.level);
-			updateBtnShow(_msg.level);
-			showPrize();
+			_q_girl_pet=PetCfg.getPet(_msg.petId);
 			initModEff();
+			showZoneBall(_msg.level);			
+			showPrize();			
 			_time=_msg.time;
-			TimerServer.addLoop(onTimer,1000);
+			if(_msg.level==_q_girl_pet.q_need_zone)
+			{
+				_skin.btn_next.visible=false;
+				_skin.skinJihuo.visible=true;
+				TimerServer.addLoop(onExtTimer,1000);		
+			}
+			else
+			{
+				_skin.btn_next.visible=true;
+				_skin.skinJihuo.visible=false;
+				updateBtnShow(_msg.level);	
+				TimerServer.addLoop(onTimer,1000);
+			}
 		}
 		
 		override protected function onHide():void
 		{
 			super.onHide();
-			//			_skin.btn_next.removeEventListener(MouseEvent.CLICK,onMouseclickHandler);
 			clearPanel();
 		}
 		
@@ -105,29 +121,19 @@ package com.rpgGame.appModule.pet
 				case (_skin.btn_next.skin as BtnTiaoZhan).btnBg:
 					toNextMessage();
 					break;
+				case (_skin.skinJihuo.skin as BtnTiaoZhan2).btnBg:
+					toOutTheZone();
+					break;
 			}			
 		}
 		
-		
 		private function initModEff():void
-		{
-			_avatar=new InterAvatar3D();
-			_avatar.x = 270;
-			_avatar.y =360;
-			_modContaner.addChild3D(_avatar);
+		{			
 			_avatarData=new RoleData(0);
-			
-			this._avatarData.avatarInfo.setBodyResID(MainRoleManager.actorInfo.avatarInfo.bodyResID, MainRoleManager.actorInfo.avatarInfo.bodyAnimatResID);
-			this._avatarData.avatarInfo.hairResID = MainRoleManager.actorInfo.avatarInfo.hairResID;
-			this._avatarData.avatarInfo.weaponResID = MainRoleManager.actorInfo.avatarInfo.weaponResID;
-			this._avatarData.avatarInfo.weaponEffectID = MainRoleManager.actorInfo.avatarInfo.weaponEffectID;
-			this._avatarData.avatarInfo.weaponEffectScale = MainRoleManager.actorInfo.avatarInfo.weaponEffectScale;
-			this._avatarData.avatarInfo.deputyWeaponResID = MainRoleManager.actorInfo.avatarInfo.deputyWeaponResID;
-			this._avatarData.avatarInfo.deputyWeaponEffectID=MainRoleManager.actorInfo.avatarInfo.deputyWeaponEffectID;
-			this._avatarData.avatarInfo.deputyWeaponEffectScale=MainRoleManager.actorInfo.avatarInfo.deputyWeaponEffectScale;
+			this._avatarData.avatarInfo.setBodyResID(_q_girl_pet.q_panel_show_id,null);
 			this._avatar.setRoleData(this._avatarData);
 			this._avatar.curRole.setScale(1.5);	
-			this._avatar.curRole.stateMachine.transition(RoleStateType.ACTION_SHOW);
+			this._avatar.curRole.stateMachine.transition(RoleStateType.ACTION_IDLE);
 		}
 		
 		private function onMouseclickHandler(e:MouseEvent):void
@@ -141,12 +147,17 @@ package com.rpgGame.appModule.pet
 			this.hide();
 		}
 		
+		private function toOutTheZone():void
+		{
+			DungeonSender.zoneOutToGame();
+			this.hide();
+		}
+		
 		private function showPrize():void
 		{
 			if(_info.passlevel<_msg.level)
 			{
-				var q_girl_pet:Q_girl_pet=PetCfg.getPet(_msg.petId);
-				var arr:Array=JSONUtil.decode(q_girl_pet.q_zone_reward);
+				var arr:Array=JSONUtil.decode(_q_girl_pet.q_zone_reward);
 				arr=arr[(_msg.level-1)]; 
 				if(arr is Array)
 				{
@@ -203,14 +214,27 @@ package com.rpgGame.appModule.pet
 			}
 		}
 		
+		private function onExtTimer():void
+		{
+			if(_time>0) 
+			{
+				_skin.lb_time.text="退出倒计时:"+_time.toString();
+				_time--;
+			}
+			else{
+				TimerServer.remove(onExtTimer);
+				toOutTheZone();
+			}
+		}
+		
 		private function clearPanel():void
 		{
 			TimerServer.remove(onTimer);
+			TimerServer.remove(onExtTimer);
 			if(_avatar!=null)
 			{
 				_modContaner.removeChild3D(_avatar);
 				_avatar.dispose();
-				_avatar=null;
 			}
 			for (var i:int = 0; i < _zoneBalls.length; i++) 
 			{

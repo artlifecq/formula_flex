@@ -11,6 +11,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.AttFormulaConfig;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.AttachEffectCfgData;
+	import com.rpgGame.coreData.cfg.AttributeCfg;
 	import com.rpgGame.coreData.cfg.BattleRankCfg;
 	import com.rpgGame.coreData.cfg.BuffStateDataManager;
 	import com.rpgGame.coreData.cfg.ChangeModelCfgData;
@@ -285,6 +286,8 @@ package com.rpgGame.app.data
 			TaskMissionCfgData.setup(dic[ConfigClassRegister.Q_mission_base]);
 			TaskMissionCfgData.setupReword(dic[ConfigClassRegister.Q_mission_reword]);
 			TaskMissionCfgData.setupSegment(dic[ConfigClassRegister.Q_mission_segment]);
+			TaskMissionCfgData.setupSuggest(dic[ConfigClassRegister.Q_suggest]);
+			
 			
 			//窗口信息配置
 			FuncionBarCfgData.setup(dic[ConfigClassRegister.FunctionBarInfo]);
@@ -334,6 +337,7 @@ package com.rpgGame.app.data
 			PetCfg.setup(dic[ConfigClassRegister.Q_girl_pet]);//美人
 			PetAdvanceCfg.setup(dic[ConfigClassRegister.Q_girl_advance]);//美人进阶
 			RankDesignationData.setup(dic[ConfigClassRegister.Q_rank_designation]);//排行榜名称
+			AttributeCfg.setup(dic[ConfigClassRegister.Q_shuxing]);//属性
 		}
 		
 		/**

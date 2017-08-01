@@ -28,20 +28,14 @@ package com.rpgGame.netData.map.bean{
 		//所有者名称
 		private var _ownerName: String;
 		
-		//宠物等级
-		private var _level: int;
+		//宠物等阶
+		private var _rank: int;
 		
 		//宠物所在X
 		private var _x: int;
 		
 		//宠物所在Y
 		private var _y: int;
-		
-		//宠物HP
-		private var _hp: int;
-		
-		//宠物最大HP
-		private var _maxHp: int;
 		
 		//宠物速度
 		private var _speed: int;
@@ -65,16 +59,12 @@ package com.rpgGame.netData.map.bean{
 			writeLong(_ownerId);
 			//所有者名称
 			writeString(_ownerName);
-			//宠物等级
-			writeShort(_level);
+			//宠物等阶
+			writeShort(_rank);
 			//宠物所在X
 			writeShort(_x);
 			//宠物所在Y
 			writeShort(_y);
-			//宠物HP
-			writeInt(_hp);
-			//宠物最大HP
-			writeInt(_maxHp);
 			//宠物速度
 			writeShort(_speed);
 			//宠物面对方向
@@ -104,16 +94,12 @@ package com.rpgGame.netData.map.bean{
 			_ownerId = readLong();
 			//所有者名称
 			_ownerName = readString();
-			//宠物等级
-			_level = readShort();
+			//宠物等阶
+			_rank = readShort();
 			//宠物所在X
 			_x = readShort();
 			//宠物所在Y
 			_y = readShort();
-			//宠物HP
-			_hp = readInt();
-			//宠物最大HP
-			_maxHp = readInt();
 			//宠物速度
 			_speed = readShort();
 			//宠物面对方向
@@ -192,18 +178,18 @@ package com.rpgGame.netData.map.bean{
 		}
 		
 		/**
-		 * get 宠物等级
+		 * get 宠物等阶
 		 * @return 
 		 */
-		public function get level(): int{
-			return _level;
+		public function get rank(): int{
+			return _rank;
 		}
 		
 		/**
-		 * set 宠物等级
+		 * set 宠物等阶
 		 */
-		public function set level(value: int): void{
-			this._level = value;
+		public function set rank(value: int): void{
+			this._rank = value;
 		}
 		
 		/**
@@ -234,36 +220,6 @@ package com.rpgGame.netData.map.bean{
 		 */
 		public function set y(value: int): void{
 			this._y = value;
-		}
-		
-		/**
-		 * get 宠物HP
-		 * @return 
-		 */
-		public function get hp(): int{
-			return _hp;
-		}
-		
-		/**
-		 * set 宠物HP
-		 */
-		public function set hp(value: int): void{
-			this._hp = value;
-		}
-		
-		/**
-		 * get 宠物最大HP
-		 * @return 
-		 */
-		public function get maxHp(): int{
-			return _maxHp;
-		}
-		
-		/**
-		 * set 宠物最大HP
-		 */
-		public function set maxHp(value: int): void{
-			this._maxHp = value;
 		}
 		
 		/**

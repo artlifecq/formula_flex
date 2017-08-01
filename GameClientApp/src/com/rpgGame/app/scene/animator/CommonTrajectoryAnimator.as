@@ -151,9 +151,9 @@ package com.rpgGame.app.scene.animator
 			var scene : GameScene3D = SceneManager.getScene();
 			var posY : Number = 0;//scene.sceneMapLayer.queryHeightAt(_destPosition.x, _destPosition.z);2.5D没有高度值，因为只有2维
 			_destHeightOffset = _destPosition.y - posY;
-			_renderSet.position.x = _destPosition.x;
-			_renderSet.position.y = _destPosition.z;
-			_renderSet.position.z = _destPosition.y;
+			_renderSet.x = _destPosition.x;
+			//_renderSet.position.y = _destPosition.y;
+			_renderSet.z = _destPosition.y;
 			_renderSet.offsetY = 0;
 			_renderSet.rotationX = 0;
 			_targetOffsetY = _targetPos.z;
@@ -184,33 +184,6 @@ package com.rpgGame.app.scene.animator
 				onStartPlay();
 			}
 		}
-		private function updateDestPosition(locusPoint : AnimatorLocusPoint = null) : void
-		{
-			if (locusPoint)
-			{
-				_destPosition = locusPoint.position.clone();
-			}
-			else
-			{
-				if (_atkor && _atkor.usable)
-				{
-					_atkorRotationY = _atkor.rotationY;
-					var destPosition : Vector3D = null;
-					
-					destPosition = _atkor.getChildScenePositionByName(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_body_02);
-					if (!destPosition)
-						destPosition = _atkor.position;
-					_destPosition = destPosition.clone();
-					_atkorPosition = _atkor.position.clone();
-				}
-				_offsetDest.setTo(_destPosition.x - _atkorPosition.x, _destPosition.y - _atkorPosition.y, _destPosition.z - _atkorPosition.z);
-			}
-			if (_renderSet)
-			{
-				_renderSet.position = _destPosition;
-				_renderSet.rotationY = _atkorRotationY;
-			}
-		}
 		/**
 		 * 设置弹道其实数据 
 		 * @param position         施法者当前场景位置
@@ -224,8 +197,7 @@ package com.rpgGame.app.scene.animator
 			_atkorPosition = position.clone();
 			_atkorRotationY = 0;
 			_destPosition = destPosition.clone();
-			_offsetDest = new Vector3D();
-		
+			_offsetDest = new Vector3D(_destPosition.x - _atkorPosition.x, _destPosition.y - _atkorPosition.y, _destPosition.z - _atkorPosition.z);
 		}
 		
 		public function setQueue(queue : Vector.<IRenderAnimator>, locusPoints : Vector.<AnimatorLocusPoint>) : void
@@ -285,7 +257,7 @@ package com.rpgGame.app.scene.animator
 				if (_matchTerrain)
 					_targetPos.setTo(_targetRole.x, 0, _targetRole.z);
 				else
-					_targetPos.setTo(_targetRole.x, _targetRole.y, _targetRole.z);
+					_targetPos.setTo(_targetRole.x,0, _targetRole.z);
 			}
 			_destPosition.setTo(currX, currY, currZ);
 			var locusPoint : AnimatorLocusPoint = new AnimatorLocusPoint(_destPosition.clone(), _targetPos.clone());
@@ -320,7 +292,7 @@ package com.rpgGame.app.scene.animator
 			_destPosition.setTo(locusPoint.position.x, locusPoint.position.y, locusPoint.position.z);
 			_targetPos.setTo(locusPoint.targetPos.x, locusPoint.targetPos.y, locusPoint.targetPos.z);
 			
-			POINT_1.setTo(_destPosition.x + _offsetDest.x, _destPosition.z + _offsetDest.z);
+			POINT_1.setTo(_destPosition.x, _destPosition.z);
 			POINT_2.setTo(_targetPos.x, _targetPos.z);
 			var angle : Number = ZMath.getTowPointsAngle(POINT_1, POINT_2);
 			var dist : Number = MathUtil.getDistance(POINT_1.x, POINT_1.y, POINT_2.x, POINT_2.y);
@@ -341,6 +313,7 @@ package com.rpgGame.app.scene.animator
 			_startTime = getTimer();
 			_lastTime = _startTime;
 			_lastUpdateTime = _startTime;
+			
 			//TweenLite.killTweensOf(_renderSet);
 			if (isReached)
 			{
@@ -498,6 +471,7 @@ package com.rpgGame.app.scene.animator
 		
 		protected function onUpdateAnimation(...arg) : void
 		{
+			
 			if (_renderSet && _renderSet.usable)
 			{
 				var currTime : int = getTimer();
@@ -522,8 +496,8 @@ package com.rpgGame.app.scene.animator
 				}
 				else if (_isTrackTarget) 
 				{
-					dist = MathUtil.getDistance(_renderSet.x, _renderSet.z, _lastPos.x, _lastPos.z);
-					//_renderSet.rotationZ = dist > 0 ? Math.atan((_renderSet.y - _lastPos.y) / dist) * 57.33 : 0;
+					dist = MathUtil.getDistance(_renderSet.x, _renderSet.y, _lastPos.x, _lastPos.y);
+					_renderSet.rotationZ= dist > 0 ? Math.atan((_renderSet.x - _lastPos.x) / dist) * 57.33 : 0;
 				}
 				_lastPos.setTo(_renderSet.x, _renderSet.y, _renderSet.z);
 				_lastOffset.setTo(_renderSet.offsetX, _renderSet.offsetY, _renderSet.offsetZ);

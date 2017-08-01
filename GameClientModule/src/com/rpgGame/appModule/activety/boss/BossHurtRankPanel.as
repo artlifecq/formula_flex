@@ -132,7 +132,7 @@ package com.rpgGame.appModule.activety.boss
 				var info:BossHurtInfo=_skin.ListItem.dataProvider.getItemAt(i) as BossHurtInfo;
 				if(i<num){
 					info.bossDamageInfo=msg.BossDamageInfos[i];
-					info.perDamage=(info.bossDamageInfo.damage/msg.totalHp).toFixed(2);
+					info.perDamage=(info.bossDamageInfo.damage*100/msg.totalHp).toFixed(2);
 				}
 			}
 			_skin.ListItem.dataProvider.updateAll();

@@ -106,6 +106,7 @@ package com.rpgGame.appModule.task
 				initKey=true;
 				init();
 			}
+			selectId=1;
 			setView();
 			timeInit()	
 			
@@ -118,10 +119,10 @@ package com.rpgGame.appModule.task
 		}
 		override public function hide():void 
 		{
-			super.hide();
 			timer.stop();
 			currtimer=TIMERDATA;
 			subFinish();
+			super.hide();
 		}
 		private function onTimer() : void 
 		{
@@ -150,7 +151,7 @@ package com.rpgGame.appModule.task
 		/**判断倒计时*/
 		private function timeInit():void
 		{
-			selectId=1;
+			
 			if(TaskMissionManager.getTreasuerTaskIsFinish())
 			{
 				timer.start();
@@ -165,17 +166,17 @@ package com.rpgGame.appModule.task
 		}
 		private function subFinishBut(type:int):void
 		{
-			if(TaskMissionManager.treasuerTaskInfo!=null&&TaskMissionManager.getTreasuerTaskIsFinish()&&this.visible&&this.parent!=null)
-			{
-				selectId=type;
-				hide();
-				
-			}
+			selectId=type;
+			hide();
 			
 		}
 		private function subFinish():void
 		{
-			TaskSender.sendfinishTaskMessage(TaskMissionManager.treasuerTaskInfo.taskId,selectId);	
+			if(TaskMissionManager.treasuerTaskInfo!=null&&TaskMissionManager.getTreasuerTaskIsFinish()&&this.visible&&this.parent!=null)
+			{
+				TaskSender.sendfinishTaskMessage(TaskMissionManager.treasuerTaskInfo.taskId,selectId);
+			}
+				
 		}
 		private var loopNumber:int=-1;
 		private function setView():void
@@ -198,14 +199,14 @@ package com.rpgGame.appModule.task
 		}
 		private function setReward():void
 		{
-			icoList1Group.setRewardByArray(TaskMissionCfgData.getRewordById(TaskMissionManager.treasuerTaskData.q_reword_id,MainRoleManager.actorInfo.job));
+			icoList1Group.setRewardByArray(TaskMissionCfgData.getRewordById(TaskMissionManager.treasuerTaskData.q_reword_id,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex));
 			icoList1Group.visible=true;
 		}
 		private function setkExtraReward():void
 		{
 			var reward:Object=TaskMissionManager.getTreasuerTaskExtraReward();
 			nav2Label.htmlText="今日完成<font color='#5DBD37'>"+reward.l+"</font>环后，额外奖励";
-			icoList2Group.setRewardByArray(TaskMissionCfgData.getRewordById(reward.r,MainRoleManager.actorInfo.job));
+			icoList2Group.setRewardByArray(TaskMissionCfgData.getRewordById(reward.r,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex));
 			icoList2Group.visible=true;
 		}
 		

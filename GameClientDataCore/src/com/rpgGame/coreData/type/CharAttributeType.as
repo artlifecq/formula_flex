@@ -2,6 +2,7 @@ package com.rpgGame.coreData.type
 {
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
+	import com.rpgGame.coreData.cfg.AttributeCfg;
 	import com.rpgGame.coreData.cfg.BuffStateDataManager;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.cfg.StaticValue;
@@ -258,13 +259,13 @@ package com.rpgGame.coreData.type
 		private static var enMap:Dictionary;
 		public static var baseAttrIdArr:Array=[];
 		
-		public static var attrRes:Dictionary;
-		public static var attrIconRes:Dictionary;
+//		public static var attrRes:Dictionary;
+//		public static var attrIconRes:Dictionary;
 		private static function setup():void
 		{
 			idMap = new Dictionary();
-			attrRes = new Dictionary();
-			attrIconRes = new Dictionary();
+//			attrRes = new Dictionary();
+//			attrIconRes = new Dictionary();
 			//对应SpriteStat
 			pushAttir(LIDAO,"力道");//1
 			pushAttir(GENGU,"根骨");//2
@@ -297,28 +298,27 @@ package com.rpgGame.coreData.type
 			pushAttir(FIGHTING,"战斗力");//44
 			pushAttir(HURT_SEC,"秒伤");//45
 			
-			attrIconRes[3]="shenfa";
-			attrIconRes[12]="qixue";
-			attrIconRes[14]="gongji";
-			attrIconRes[16]="fangyu";
-			attrIconRes[17]="baoji";
-			attrIconRes[18]="baoshang";
-			attrIconRes[23]="mingzhong";
-			attrIconRes[24]="shanbi";
-			
-			attrRes[1]="ld";
-			attrRes[2]="gg";
-			attrRes[3]="sf";
-			attrRes[4]="hg";
-			attrRes[12]="qx";
-			attrRes[14]="gjl";
-			attrRes[16]="fyz";
-			attrRes[17]="bjz";
-			attrRes[18]="bjjc";
-			attrRes[23]="mz";
-			attrRes[24]="sb";
-			attrRes[26]="gjsd";
-
+//			attrIconRes[3]="shenfa";
+//			attrIconRes[12]="qixue";
+//			attrIconRes[14]="gongji";
+//			attrIconRes[16]="fangyu";
+//			attrIconRes[17]="baoji";
+//			attrIconRes[18]="baoshang";
+//			attrIconRes[23]="mingzhong";
+//			attrIconRes[24]="shanbi";
+//			
+//			attrRes[1]="ld";
+//			attrRes[2]="gg";
+//			attrRes[3]="sf";
+//			attrRes[4]="hg";
+//			attrRes[12]="qx";
+//			attrRes[14]="gjl";
+//			attrRes[16]="fyz";
+//			attrRes[17]="bjz";
+//			attrRes[18]="bjjc";
+//			attrRes[23]="mz";
+//			attrRes[24]="sb";
+//			attrRes[26]="gjsd";
 		}
 		
 		setup();
@@ -331,19 +331,21 @@ package com.rpgGame.coreData.type
 		}
 		public static function getAttrNameUrl(attrId:int):String
 		{
-			if (attrRes[attrId]==undefined) 
+			var res:String= AttributeCfg.getAttrNameUrl(attrId);
+			if (res=="") 
 			{
 				return "";
 			}
-			return "ui/common/shuxing/"+attrRes[attrId]+".png";
+			return "ui/common/shuxing/"+res+".png";
 		}
 		public static function getAttrIconUrl(attrId:int):String
 		{
-			if (attrIconRes[attrId]==undefined) 
+			var res:String=AttributeCfg.getAttrIconUrl(attrId);
+			if (res=="") 
 			{
 				return "";
 			}
-			return "ui/common/shuxingIcon/tubiao/"+attrIconRes[attrId]+".png";
+			return "ui/common/shuxingIcon/tubiao/"+res+".png";
 		}
 		/**
 		 *获取对应属性的转换值 
@@ -376,7 +378,8 @@ package com.rpgGame.coreData.type
 		 */		
 		public static function getCNName(attributeID:uint):String
 		{
-			return idMap[attributeID]["cn"];
+			return AttributeCfg.getAttrName(attributeID);
+			//return idMap[attributeID]["cn"];
 		}
 		
 		public static function getAttrTips(attributeID:uint):String

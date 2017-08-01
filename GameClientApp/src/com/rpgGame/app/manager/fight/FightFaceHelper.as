@@ -9,6 +9,7 @@ package com.rpgGame.app.manager.fight
 	import com.rpgGame.app.fight.spell.SpellResultTweenUtil;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.LostSkillManager;
+	import com.rpgGame.app.manager.hint.FloatingText;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
@@ -49,6 +50,7 @@ package com.rpgGame.app.manager.fight
 	 */
 	public class FightFaceHelper
 	{
+		public static var useScene:Boolean=true;
 		public static var layer:FightFaceLayer=new FightFaceLayer();
 		public static function bindTarget(mainPlayer:ObjectContainer3D):void
 		{
@@ -594,6 +596,12 @@ package com.rpgGame.app.manager.fight
 				val=hash.getValue(key);
 				typeRes=getAttributeUrl(key,val>0);
 				numberColor=val>0?ATTRIBUTE_USESFUL_NUM:ATTRIBUTE_HARMFUL_NUM;
+				var attackFace : AttackFace;
+				if(_showAttackFaceList.containsKey(typeRes))
+				{
+					attackFace = _showAttackFaceList.getValue(typeRes) as AttackFace;
+					attackFace.visible = false
+				}
 				showQueueAttackFaceNew(MainRoleManager.actor,null,MainRoleManager.actor.headFace, typeRes, numberColor, val,  null, null,SpellResultTweenUtil.TweenAttrChange)
 			}
 			
@@ -726,21 +734,30 @@ package com.rpgGame.app.manager.fight
 		{
 			_queueThread.push(showAttackFaceNew, [attacker, hurter, showContainer,typeRes,numberRes, $attackValue, $specialType, $specialPos, $tweenFun,extendData], $queueTm);
 		}
+		private static var _showAttackFaceList:HashMap = new HashMap();
 		public static function showAttackFaceNew(attacker:SceneRole,hurter:SceneRole,showContainer : *, typeRes : String = "", numberRes : String = "", $attackValue : * = 0, $specialType : String = null, $specialPos : Point = null, $tweenFun : Function = null,extendData:Object=null) : void
 		{
 			if (showContainer == null)
 				return;
+			/*if(_showAttackFaceList.containsKey(typeRes))
+			{
+				attackFace = _showAttackFaceList.getValue(typeRes) as AttackFace;
+				attackFace.visible = false
+			}*/
 			
-			var attackFace : AttackFace = AttackFace.createAttackFace(typeRes, numberRes, $attackValue, $specialType, $specialPos,extendData);
+			var attackFace : AttackFace= AttackFace.createAttackFace(typeRes, numberRes, $attackValue, $specialType, $specialPos,extendData);
 			attackFace.touchAcross = true;
 			attackFace.touchable = false;
 			attackFace.touchGroup = false;
+			attackFace.visible = true;
+			_showAttackFaceList.add(typeRes,attackFace);
 			tweenFromSceneCharNew(attacker,hurter,showContainer, attackFace, $tweenFun, onAtackFaceComplete);
 		}
 		private static function tweenFromSceneCharNew(attacker:SceneRole,hurter:SceneRole,showContainer : *, $displayObject : AttackFace, $tweenFun : Function = null, $onComplete : Function = null) : void
 		{
 			tweenFromNew(attacker,hurter,showContainer, $displayObject, $tweenFun,$onComplete);
 		}
+		
 		private static function tweenFromNew(attacker:SceneRole,hurter:SceneRole,$displayObjectContainer : *, attackFace : AttackFace,$tweenFun : Function = null,$onComplete : Function = null) : void
 		{
 			if (null == $displayObjectContainer)
@@ -748,10 +765,11 @@ package com.rpgGame.app.manager.fight
 				$onComplete(attackFace); // 动画就算不播放，也要调用完成函数
 				return;
 			}
+		
 			var start:Point;
 			var end:Point;
 			//走场景
-			if (SpellResultTweenUtil.TweenCirt==$tweenFun||SpellResultTweenUtil.TweenHurt==$tweenFun) 
+			if (useScene&&(SpellResultTweenUtil.TweenCirt==$tweenFun||SpellResultTweenUtil.TweenHurt==$tweenFun)) 
 			{
 				layer.addChild(attackFace);
 				if (null != $tweenFun)
@@ -888,6 +906,8 @@ package com.rpgGame.app.manager.fight
 				attackFace.parent.removeChild(attackFace);
 			//池回收
 			AttackFace.recycleAttackFace(attackFace);
+			if(attackFace == _showAttackFaceList.getValue(attackFace.typeRes))
+				_showAttackFaceList.remove(attackFace.typeRes);
 		}
 
 		//---------------------------------------------------     --------以下是运动轨迹函数----   -------------------------------------------------------//

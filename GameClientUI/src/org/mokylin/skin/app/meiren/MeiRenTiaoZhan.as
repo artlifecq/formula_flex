@@ -7,6 +7,7 @@ package org.mokylin.skin.app.meiren
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.app.meiren.BtnTiaoZhan;
+	import org.mokylin.skin.app.meiren.BtnTiaoZhan2;
 
 	/**
 	 * @private
@@ -54,6 +55,8 @@ package org.mokylin.skin.app.meiren
 
 		public var lb_time:feathers.controls.Label;
 
+		public var skinJihuo:feathers.controls.SkinnableContainer;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -64,7 +67,7 @@ package org.mokylin.skin.app.meiren
 			
 			this.currentState = "normal";
 			this.width = 529;
-			this.elementsContent = [bgQuan_i(),grpIcon1_i(),grpIcon2_i(),btn_next_i(),lb_time_i()];
+			this.elementsContent = [bgQuan_i(),grpIcon1_i(),grpIcon2_i(),btn_next_i(),skinJihuo_i(),lb_time_i()];
 			
 			states = {
 			};
@@ -286,6 +289,20 @@ package org.mokylin.skin.app.meiren
 			temp.width = 230;
 			temp.x = 149;
 			temp.y = 559;
+			return temp;
+		}
+
+		private function skinJihuo_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			skinJihuo = temp;
+			temp.name = "skinJihuo";
+			temp.height = 59;
+			var skin:StateSkin = new org.mokylin.skin.app.meiren.BtnTiaoZhan2()
+			temp.skin = skin
+			temp.width = 176;
+			temp.x = 176;
+			temp.y = 494;
 			return temp;
 		}
 

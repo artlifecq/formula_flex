@@ -111,6 +111,11 @@ package com.game.engine3D.display
 		{
 			root3D.rotationY = value;
 		}
+		
+		public function get rotationY() : Number
+		{
+			return root3D.rotationY;
+		}
         
         public function play(timer : uint = 0) : void {
             if (this.parent && !this.parent.contains(this))

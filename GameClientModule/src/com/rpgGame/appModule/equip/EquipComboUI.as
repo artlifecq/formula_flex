@@ -4,6 +4,7 @@ package com.rpgGame.appModule.equip
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
+	import com.rpgGame.app.manager.goods.ItemManager;
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.ItemSender;
@@ -210,7 +211,7 @@ package com.rpgGame.appModule.equip
 		
 		private function changeHecheng():void
 		{
-			_hechengNum==minMaxBar.value;
+			_hechengNum=minMaxBar.value;
 			updateShowNum();
 		}
 		
@@ -555,8 +556,16 @@ package com.rpgGame.appModule.equip
 				NoticeManager.showNotifyById(6018);
 				return;
 			}
+			
+			if(ItemManager.isCanPushPack(_nowSelect.q_id,_hechengNum)==false){
+				NoticeManager.showNotifyById(5004);
+				return;
+			}
+			
 			ItemSender.reqItemCompositionMessage(EquipOperateType.COMBO_NORMAL,_nowSelect.q_id,_hechengNum);
 		}
+		
+		
 		
 		/**合成结果反馈*/
 		private function updateHechengHandler(msg:ResEquipOperateResultMessage):void

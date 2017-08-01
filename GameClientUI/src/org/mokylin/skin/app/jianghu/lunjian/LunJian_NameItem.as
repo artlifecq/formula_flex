@@ -100,6 +100,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.textAlign = "center";
 			temp.color = 0xEFD872;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 20;
 			temp.x = 123;
 			temp.y = 7;
 			return temp;

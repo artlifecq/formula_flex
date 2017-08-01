@@ -29,6 +29,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.FightsoulModeData;
+	import com.rpgGame.coreData.cfg.PetCfg;
 	import com.rpgGame.coreData.cfg.StallCfgData;
 	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
 	import com.rpgGame.coreData.cfg.country.CountryWarCfgData;
@@ -37,6 +38,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.clientConfig.AvatarResConfig;
 	import com.rpgGame.coreData.clientConfig.ClientSceneEffect;
 	import com.rpgGame.coreData.clientConfig.Q_fightsoul_mode;
+	import com.rpgGame.coreData.clientConfig.Q_girl_pet;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.clientConfig.Q_warflag;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
@@ -189,7 +191,7 @@ package com.rpgGame.app.manager.role
 			else
 			{
 				//执行主换装更新
-//				AvatarManager.updateAvatar(role);
+				//				AvatarManager.updateAvatar(role);
 			}
 		}
 		/**
@@ -274,7 +276,7 @@ package com.rpgGame.app.manager.role
 			}
 			else
 			{
-				SceneManager.addSceneObjToScene(role, true, true, true);
+				SceneManager.addSceneObjToScene(role, true, false, true);
 			}
 			MainRoleSearchPathManager.trySetSearchRoleData(data);
 			if (charType == SceneCharType.NPC)
@@ -357,13 +359,13 @@ package com.rpgGame.app.manager.role
 			var roleNameStr : String = monsterNameStr + "(" + data.ownerName + ")";
 			role.name = data.name = roleNameStr;
 			role.ownerIsMainChar = (data.ownerId == MainRoleManager.actorID);
-//			data.avatarInfo.setBodyResID(bornData ? bornData.q_body_res : "", null);
+			//			data.avatarInfo.setBodyResID(bornData ? bornData.q_body_res : "", null);
 			role.updateBody(bornData ? bornData.q_body_res : "", null);
 			data.sizeScale = (bornData && bornData.q_scale > 0) ? (bornData.q_scale * 0.01) : 1;
 			//			data.totalStat.level = bornData ? bornData.q_grade : 0;
 			data.bodyRadius = bornData ? bornData.q_body_radius_pixel : 0;
 			//data.direction = bornData ? bornData.q_direction : 0;
-//			AvatarManager.updateAvatar(role);
+			//			AvatarManager.updateAvatar(role);
 			
 			if (data.totalStat.hp <= 0)
 			{
@@ -431,7 +433,7 @@ package com.rpgGame.app.manager.role
 			role.name = YunBiaoManager.setBiaoName(role);
 			
 			//执行主换装更新
-//			AvatarManager.updateAvatar(role);
+			//			AvatarManager.updateAvatar(role);
 			
 			if (data.totalStat.hp <= 0)
 			{
@@ -461,10 +463,10 @@ package com.rpgGame.app.manager.role
 			if (biaoCheData != null){
 				role.updateBody(resPath, null);
 			}
-//				biaoCheData.avatarInfo.setBodyResID(resPath, null);
+			//				biaoCheData.avatarInfo.setBodyResID(resPath, null);
 			
 			//执行主换装更新
-//			AvatarManager.updateAvatar(role);
+			//			AvatarManager.updateAvatar(role);
 		}
 		
 		/**
@@ -480,6 +482,8 @@ package com.rpgGame.app.manager.role
 			if (role.headFace is HeadFace)
 				(role.headFace as HeadFace).updateName();
 		}
+		
+		/**创建一个美人*/
 		public function createGirlPet(data:GirlPetData):void
 		{
 			removeSceneRoleByIdAndType(data.id, SceneCharType.GIRL_PET);
@@ -488,24 +492,20 @@ package com.rpgGame.app.manager.role
 			role.data = data;
 			role.name = data.name;
 			role.headFace = HeadFace.create(role);
-			//role.headFace.show();
-			//role.headFace.showHead();
-			//data.avatarInfo.setBodyResID(data.avatarRes, null);
-//			var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(data.avatarRes);
-//			if (avatarResConfig)
-//			{
-//				data.avatarInfo.effectResID = avatarResConfig.idleEffect;
-//			}
-			
-			//执行主换装更新
-//			AvatarManager.updateAvatar(role);
+			role.headFace.show();
+			if(role.headFace is HeadFace)
+			{
+				(role.headFace as HeadFace).addAndUpdateGuiShu();
+			}
+			var q_gril_pet:Q_girl_pet=PetCfg.getPet(data.modId);
+			role.updateBody(q_gril_pet ? q_gril_pet.q_panel_show_id : "", null);
 			role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true); //切换到“站立状态”
 			
 			role.setScale(data.sizeScale);
-			role.setGroundXY(data.x, data.y);
+			role.setGroundXY(data.x-1, data.y);
 			role.rotationY = data.direction;
 			SceneManager.addSceneObjToScene(role, true, false, false);
-			
+			EventManager.dispatchEvent(MapEvent.UPDATE_MAP_ROLE_ADD, role);
 		}
 		/**
 		 * 创建掉落物
@@ -526,7 +526,7 @@ package com.rpgGame.app.manager.role
 			role.name = data.name;
 			role.headFace = DropItemHeadFace.create(role);
 			role.updateBody(data.avatarRes, null);
-//			data.avatarInfo.setBodyResID(data.avatarRes, null);
+			//			data.avatarInfo.setBodyResID(data.avatarRes, null);
 			var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(data.avatarRes);
 			if (avatarResConfig)
 			{
@@ -534,7 +534,7 @@ package com.rpgGame.app.manager.role
 			}
 			
 			//执行主换装更新
-//			AvatarManager.updateAvatar(role);
+			//			AvatarManager.updateAvatar(role);
 			var ref : PlayActionStateReference = role.stateMachine.getReference(PlayActionStateReference) as PlayActionStateReference;
 			ref.setParams(RoleActionType.STAND, 0, data.isDroped ? int.MAX_VALUE : 0);
 			role.stateMachine.transition(RoleStateType.ACTION_PLAY_ACTION, ref, true); //切换到“播放状态”
@@ -563,7 +563,7 @@ package com.rpgGame.app.manager.role
 			//role.headFace.show();
 			//role.headFace.showHead();
 			role.updateBody(data.avatarRes, null);
-//			data.avatarInfo.setBodyResID(data.avatarRes, null);
+			//			data.avatarInfo.setBodyResID(data.avatarRes, null);
 			var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(data.avatarRes);
 			if (avatarResConfig)
 			{
@@ -571,7 +571,7 @@ package com.rpgGame.app.manager.role
 			}
 			
 			//执行主换装更新
-//			AvatarManager.updateAvatar(role);
+			//			AvatarManager.updateAvatar(role);
 			role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true); //切换到“站立状态”
 			
 			role.setScale(data.sizeScale);
@@ -597,11 +597,11 @@ package com.rpgGame.app.manager.role
 			role.data = data;
 			role.name = data.name;
 			role.headFace = HeadFace.create(role);
-//			data.avatarInfo.effectResID = data.effectRes;
+			//			data.avatarInfo.effectResID = data.effectRes;
 			role.updateEffect(data.effectRes);
 			
 			//执行主换装更新
-//			AvatarManager.updateAvatar(role);
+			//			AvatarManager.updateAvatar(role);
 			role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true); //切换到“站立状态”
 			
 			role.setScale(data.sizeScale);
@@ -726,7 +726,7 @@ package com.rpgGame.app.manager.role
 			role.headFace = HeadFace.create(role);
 			HeadFace(role.headFace).addAndUpdataRankTitle(data.topLeaderTypes);
 			role.headFace.show();
-//			role.headFace.showHead();
+			//			role.headFace.showHead();
 			
 			var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(data.avatarRes);
 			if (avatarResConfig)
@@ -744,7 +744,7 @@ package com.rpgGame.app.manager.role
 			role.rotationY = data.direction;
 			SceneManager.addSceneObjToScene(role, true, true, true);
 		}
-
+		
 		/**创建战旗特效*/
 		public function updateZhanQiRole(owner:SceneRole):SceneRole
 		{
@@ -809,33 +809,33 @@ package com.rpgGame.app.manager.role
 			var tmp:RenderUnit3D
 			if (newVal>oldVal) 
 			{
-//				var add:int=newVal-oldVal;
-//				for (i = 0; i < add;i++) 
-//				{
-//					tmp=SpellAnimationHelper.addTargetEffect(role, oldVal+i, RenderUnitType.NEEDLEEFFECT, "tx_role_mieshijinzhen_01_5", BoneNameEnum.c_crossbow, 0);
-//					tmp.x = needleRoleX[oldVal+i];
-//					tmp.y =0;
-//					tmp.z = 0;
-//					var data:Object={y:needleRoleY[oldVal+i]-30,delay:i*0.3,ease:Sine.easeInOut};
-//					data["yoyo"] = true;
-//					data["repeat"] = -1;
-//					TweenMax.to(tmp,1.5,data);
-//				}
+				//				var add:int=newVal-oldVal;
+				//				for (i = 0; i < add;i++) 
+				//				{
+				//					tmp=SpellAnimationHelper.addTargetEffect(role, oldVal+i, RenderUnitType.NEEDLEEFFECT, "tx_role_mieshijinzhen_01_5", BoneNameEnum.c_crossbow, 0);
+				//					tmp.x = needleRoleX[oldVal+i];
+				//					tmp.y =0;
+				//					tmp.z = 0;
+				//					var data:Object={y:needleRoleY[oldVal+i]-30,delay:i*0.3,ease:Sine.easeInOut};
+				//					data["yoyo"] = true;
+				//					data["repeat"] = -1;
+				//					TweenMax.to(tmp,1.5,data);
+				//				}
 			}
 			else
 			{
-//				var dec:int=oldVal-newVal;	
-//				for (i = 0; i < dec; ++i) 
-//				{
-//					tmp=role.avatar.getRenderUnitByID(RenderUnitType.NEEDLEEFFECT,oldVal-1-i);
-//					TweenMax.killTweensOf(tmp);
-//					role.avatar.removeRenderUnit(tmp);
-//				}
-//				for (i = 0; i < newVal; ++i) 
-//				{
-//					tmp=role.avatar.getRenderUnitByID(RenderUnitType.NEEDLEEFFECT,i);
-//					tmp.x = needleRoleX[i];
-//				}
+				//				var dec:int=oldVal-newVal;	
+				//				for (i = 0; i < dec; ++i) 
+				//				{
+				//					tmp=role.avatar.getRenderUnitByID(RenderUnitType.NEEDLEEFFECT,oldVal-1-i);
+				//					TweenMax.killTweensOf(tmp);
+				//					role.avatar.removeRenderUnit(tmp);
+				//				}
+				//				for (i = 0; i < newVal; ++i) 
+				//				{
+				//					tmp=role.avatar.getRenderUnitByID(RenderUnitType.NEEDLEEFFECT,i);
+				//					tmp.x = needleRoleX[i];
+				//				}
 			}
 			
 		}

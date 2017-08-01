@@ -9,7 +9,7 @@ package org.mokylin.skin.common.alert
 	import org.mokylin.skin.common.TongYongTanKuang_bg;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
-	
+
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
@@ -21,16 +21,16 @@ package org.mokylin.skin.common.alert
 		//                                定义成员变量
 		//==========================================================================
 		public var bg:feathers.controls.SkinnableContainer;
-		
+
 		public var btnClose:feathers.controls.Button;
-		
+
 		public var btn_ok:feathers.controls.Button;
-		
+
 		public var icons:feathers.controls.UIAsset;
-		
+
 		public var labContent:feathers.controls.Label;
-		
-		
+
+
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
@@ -47,20 +47,20 @@ package org.mokylin.skin.common.alert
 			};
 			skinNames={};
 		}
-		
-		
+
+
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
 		private function __AlertActiveyOpen_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/background/erji_bg.png";
+			temp.styleName = "ui/big_bg/erji_bg.png";
 			temp.x = 12;
 			temp.y = 39;
 			return temp;
 		}
-		
+
 		private function __AlertActiveyOpen_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -71,7 +71,7 @@ package org.mokylin.skin.common.alert
 			temp.y = 9;
 			return temp;
 		}
-		
+
 		private function __AlertActiveyOpen_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -80,7 +80,7 @@ package org.mokylin.skin.common.alert
 			temp.y = 53;
 			return temp;
 		}
-		
+
 		private function bg_i():feathers.controls.SkinnableContainer
 		{
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
@@ -94,7 +94,7 @@ package org.mokylin.skin.common.alert
 			temp.y = 0;
 			return temp;
 		}
-		
+
 		private function btnClose_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
@@ -105,7 +105,7 @@ package org.mokylin.skin.common.alert
 			temp.y = 5;
 			return temp;
 		}
-		
+
 		private function btn_ok_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
@@ -121,7 +121,7 @@ package org.mokylin.skin.common.alert
 			temp.y = 216;
 			return temp;
 		}
-		
+
 		private function icons_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -132,7 +132,7 @@ package org.mokylin.skin.common.alert
 			temp.y = 56;
 			return temp;
 		}
-		
+
 		private function labContent_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -149,6 +149,6 @@ package org.mokylin.skin.common.alert
 			temp.y = 163;
 			return temp;
 		}
-		
+
 	}
 }

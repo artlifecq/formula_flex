@@ -179,7 +179,6 @@ package com.rpgGame.app.ui.main.chat {
 			initChatChannel();
 			initTabBar();
 			initEvent();
-			setGroubState(false);
 		}
 		
 		private function onCreateList(e:Event):void
@@ -188,6 +187,7 @@ package com.rpgGame.app.ui.main.chat {
 			var vb:ScrollBar=(e.currentTarget as List).getVerticalScrollBar() as ScrollBar;
 			vb.alwaysVisible=true;
 			vb.thumbAutoResize=false;
+			setGroubState(false);
 		}			
 		
 		private function initEvent():void
@@ -536,10 +536,13 @@ package com.rpgGame.app.ui.main.chat {
 		
 		private function setGroubState(bool:Boolean):void
 		{
+			var vb:ScrollBar=_skin.listBar.getVerticalScrollBar() as ScrollBar;
+			if(vb){
+				vb.visible=bool;
+			}
 			if(bool){
 				_skin.bg.alpha=1;
 				_skin.btn_scale.alpha=1;
-				
 			}else {
 				_skin.bg.alpha=0;
 				_skin.btn_scale.alpha=0;

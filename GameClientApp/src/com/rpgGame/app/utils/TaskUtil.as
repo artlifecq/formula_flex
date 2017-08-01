@@ -3,6 +3,7 @@ package com.rpgGame.app.utils
 	import com.game.engine3D.core.AreaMap;
 	import com.game.engine3D.utils.MathUtil;
 	import com.game.engine3D.vo.AreaMapData;
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.fight.spell.CastSpellHelper;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.manager.chat.NoticeManager;
@@ -303,11 +304,10 @@ package com.rpgGame.app.utils
 			{
 				
 				finish=taskData.q_finish_information_str;
-				finishArr=finish.split(";");
+				finishArr=JSONUtil.decode(finish);
 				if(finishArr.length>ite)
 				{
-					finish=finishArr[ite];
-					finishArr=finish.split(",");
+					finishArr=finishArr[ite];
 					if(finishArr.length==2)
 					{
 						monsterId=int(finishArr[0]);
@@ -363,11 +363,10 @@ package com.rpgGame.app.utils
 				
 				
 				finish=taskData.q_finish_information_str;
-				finishArr=finish.split(";");
+				finishArr=JSONUtil.decode(finish);
 				if(finishArr.length>ite)
 				{
-					finish=finishArr[ite];
-					finishArr=finish.split(",");
+					finishArr=finishArr[ite];
 					if(finishArr.length==2)
 					{
 						monsterId=int(finishArr[0]);
@@ -548,12 +547,13 @@ package com.rpgGame.app.utils
 		 * @param modeId
 		 *
 		 */
-		public static function postTaskFly(post :Array,mainType : int,onArrive:Function=null,noWalk:Function=null) : void
+		public static function postTaskFly(post :Array,mainType : int,missionType:int=0,onArrive:Function=null,noWalk:Function=null) : void
 		{
 			
 			if (post!=null&&post.length==3)
 			{
 				TaskMissionManager.flyTaskType=mainType;
+				TaskMissionManager.flyMissionType=missionType;
 				SceneSender.sceneMapTransport(post[0], post[1], post[2]);
 			}
 		}
@@ -902,32 +902,20 @@ package com.rpgGame.app.utils
 				text=TaskMissionCfgData.getTaskDescribe(type,describe,TaskMissionManager.getMainTaskNpcModeId());
 				setGotargetLabelText(type,txtButList[0],text);
 			}
-			else if(type==TaskType.SUB_GUAJI)
-			{
-				//text=TaskMissionCfgData.getTaskDescribe(type,describe,TaskMissionManager.getMainTaskNpcModeId());
-				var textArr:Array=describe.split(";");
-				for(i=0;i<textArr.length;i++)
-				{
-					if(textArr[i]&&textArr[i]!="")
-					{
-						setGotargetLabelText(type,txtButList[i],textArr[i]);
-					}
-				}
-			}
 			else
 			{
 				var finiStr:Array;
-				var informationList:Array=finisstr.split(";");
+				var informationList:Array=JSONUtil.decode(finisstr);;
 				
 				length=informationList.length;
 				for(i=0;i<length;i++)
 				{
-					if(informationList[i]&&informationList[i]!="")
+					if(informationList[i]&&informationList[i]!=null)
 					{
 						
 						var modeid:int=0;
 						var count:int=0,finish:int;
-						var modeArr:Array=informationList[i].split(",");
+						var modeArr:Array=informationList[i];
 						if(modeArr.length==2)
 						{
 							modeid=int(modeArr[0]);
@@ -937,14 +925,9 @@ package com.rpgGame.app.utils
 						{
 							modeid=subList[i].modelId;
 							count=subList[i].num;
+							finish=subList[i].maxNum;
 						}
-						if(modeid!=0)
-						{
-							text=TaskMissionCfgData.getTaskDescribe(type,describe,modeid);
-							
-							
-						}
-						
+						text=TaskMissionCfgData.getTaskDescribe(type,describe,modeid);
 						text+="<font color='#cfc6ae'>("+count+"/"+finish+")</font>";
 						
 						setGotargetLabelText(type,txtButList[i],text);
@@ -972,12 +955,12 @@ package com.rpgGame.app.utils
 				rItme.labelDisplay.width=300;
 				rItme.labelDisplay.htmlText=t;
 				rItme.labelDisplay.width=rItme.labelDisplay.textWidth+10;
-				but.width=rItme.labelDisplay.textWidth+25;
+				but.width=rItme.labelDisplay.textWidth+15;
 				but.visible=true;
-				rItme.btn_send.visible=false;
-				if(type==1||type==2||type==3||type==4||type==10)
+				rItme.btn_send.visible=true;
+				if(type==0||type==5||type==6)
 				{
-					rItme.btn_send.visible=true;
+					rItme.btn_send.visible=false;
 				}
 				
 			}
@@ -1052,7 +1035,7 @@ package com.rpgGame.app.utils
 		/**设置奖励物品*/
 		public static function setRewordInfo(rid:int,icoList:Vector.<IconCDFace>,icoBgList:Vector.<UIAsset>,show:Boolean=false):void
 		{
-			var rewordList:Array=TaskMissionCfgData.getRewordById(rid,MainRoleManager.actorInfo.job);
+			var rewordList:Array=TaskMissionCfgData.getRewordById(rid,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex);
 			if(rewordList==null)return;
 			var item:Q_item;
 			var i:int,length:int,idd:int;

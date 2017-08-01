@@ -50,8 +50,8 @@ package com.rpgGame.app.ui.tips.cheats
 			MCUtil.removeSelf(_skin.lab_shuoming);
 			MCUtil.removeSelf(_skin.lab_Ctrl);
 			_skillIcon=new BgIcon(IcoSizeEnum.ICON_36);
-			_skillIcon.x=0;
-			_skillIcon.y=0;
+			_skillIcon.x=4;
+			_skillIcon.y=4;
 			_skin.gridSkill.addChild(_skillIcon);
 			labList=[];
 			Mgr.cheatsMgr.addEventListener(CheatsEvent.CHEATS_TIP_CHANGE,onDataChange);
@@ -95,13 +95,13 @@ package com.rpgGame.app.ui.tips.cheats
 				}
 				var starty:int=_skin.mcLevel.y+_skin.mcLevel.height+8;
 				var startPos:Point=new Point(11,starty);
-				//属性
-				if (cheatVo.level>0) 
-				{					
-					labList=labList.concat(AttrUtil.showAttr(cheatVo.totalValue,this,_skin.lab_shuxing,2,startPos,_skin.lab_shuxing.width,_skin.lab_shuxing.height+2,":"));
-					starty=startPos.y;
-				}
-				starty+=10;			
+//				//属性
+//				if (cheatVo.level>0) 
+//				{					
+//					labList=labList.concat(AttrUtil.showAttr(cheatVo.totalValue,this,_skin.lab_shuxing,2,startPos,_skin.lab_shuxing.width,_skin.lab_shuxing.height+2,":"));
+//					starty=startPos.y;
+//				}
+//				starty+=10;			
 				if (cheatVo.extendAttr.size()>0) 
 				{
 					_skin.line2.visible=true;
@@ -113,7 +113,7 @@ package com.rpgGame.app.ui.tips.cheats
 					starty+=_skin.imgJiHuoTitle.height+2;
 					startPos.y=starty;
 					//激活属性
-					labList=labList.concat(AttrUtil.showAttr(cheatVo.extendAttr,this,_skin.lab_shuxing,2,startPos,_skin.lab_shuxing.width,_skin.lab_shuxing.height+2,":"));
+					labList=labList.concat(AttrUtil.showAttr(cheatVo.extendAttr,this,_skin.lab_shuxing,2,startPos,120,_skin.lab_shuxing.height+2,":"));
 					starty=startPos.y;
 				}
 				else

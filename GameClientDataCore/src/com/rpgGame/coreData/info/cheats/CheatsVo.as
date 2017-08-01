@@ -17,12 +17,14 @@ package com.rpgGame.coreData.info.cheats
 	 */	
 	public class CheatsVo
 	{
+		public static var FIGHT_POWER_CALL:Function;
+		private var _fightPower:int=0;
 		private var _cheatsConfig:Q_cheats;
 		
 		private var _subNodeHash:HashMap=new HashMap();
-		//不算相生的属性
+		/**不算相生的属性*/
 		private var _attrHash:HashMap=new HashMap();
-		//激活属性
+		/**激活属性*/
 		private var _extendAttr:HashMap=new HashMap();
 		//基本属性每集基本属性
 		//private var _baseAttrHash:HashMap=new HashMap(); 
@@ -127,6 +129,7 @@ package com.rpgGame.coreData.info.cheats
 		public function updateAttr():void
 		{
 			_attrHash.clear();
+			_fightPower=0;
 			//_extendAttr.clear();
 			if (isActive()) 
 			{
@@ -186,7 +189,10 @@ package com.rpgGame.coreData.info.cheats
 					}
 				}
 			}
-			
+			if (FIGHT_POWER_CALL) 
+			{
+				_fightPower=FIGHT_POWER_CALL(_totalValue);
+			}
 		}
 		public function checkEffectCheatUpdate(cheatId:int):void
 		{
@@ -259,6 +265,12 @@ package com.rpgGame.coreData.info.cheats
 			}
 			return ret;
 		}
+
+		public function get fightPower():int
+		{
+			return _fightPower;
+		}
+
 
 	}
 }

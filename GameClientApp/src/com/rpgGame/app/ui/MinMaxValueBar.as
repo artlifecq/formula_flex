@@ -79,6 +79,7 @@ package com.rpgGame.app.ui
 				btn_min.addEventListener(TouchEvent.TOUCH,onTouch);
 				btn_max.addEventListener(TouchEvent.TOUCH,onTouch);
 			}
+			value=_min;
 		}
 		
 		private function onTouch(e:TouchEvent):void
@@ -131,9 +132,12 @@ package com.rpgGame.app.ui
 		
 		private function btnTomaxHandler(e:Event):void
 		{
+			if(_value==_max){
+				NoticeManager.showNotifyById(_maxNotify);
+				return;
+			}
 			value=_max;
 			txt.text=_value.toString();
-			
 		}
 		
 		private function btnmaxHandler(e:Event):void
@@ -161,7 +165,7 @@ package com.rpgGame.app.ui
 		public function setMinMax(min:int,max:int):void
 		{
 			_min=min;
-			_max=max<_min?_min:_max;
+			_max=max<_min?_min:max;
 		}
 		
 		public function set step(value:int):void

@@ -136,7 +136,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_fightsoul_path:String = "data.Q_fightsoul_path";
 		/**  美人基本信息数据库																								 */
 		public static const Q_girl_advance:String = "data.Q_girl_advance";
-		/**  美人基本信息数据库									前端显示对应关卡战斗力				 */
+		/**  美人基本信息数据库						前端显示对应关卡战斗力				 */
 		public static const Q_girl_pet:String = "data.Q_girl_pet";
 		/**  全局变量表		 */
 		public static const Q_global:String = "data.Q_global";
@@ -202,12 +202,16 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_redreward:String = "data.Q_redreward";
 		/**  阵营关系				 */
 		public static const Q_relation:String = "data.Q_relation";
-		/**  城池基础表																 */
+		/**  属性对应属性ID_前端			 */
+		public static const Q_shuxing:String = "data.Q_shuxing";
+		/**  城池基础表																		 */
 		public static const Q_singlecitybase:String = "data.Q_singlecitybase";
 		/**  购买界面其他途径提示数据库				 */
 		public static const Q_source:String = "data.Q_source";
 		/**  活动配置表																														 */
 		public static const Q_special_activities:String = "data.Q_special_activities";
+		/**  任务卡级挂机点表				 */
+		public static const Q_suggest:String = "data.Q_suggest";
 		/**  tipsid	标题	描述	来源 */
 		public static const Q_tipsinfo:String = "data.Q_tipsinfo";
 		/**  											 */
@@ -353,9 +357,11 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_rank_designation", com.rpgGame.coreData.clientConfig.Q_rank_designation);
 			regClass("data.Q_redreward", com.rpgGame.coreData.clientConfig.Q_redreward);
 			regClass("data.Q_relation", com.rpgGame.coreData.clientConfig.Q_relation);
+			regClass("data.Q_shuxing", com.rpgGame.coreData.clientConfig.Q_shuxing);
 			regClass("data.Q_singlecitybase", com.rpgGame.coreData.clientConfig.Q_singlecitybase);
 			regClass("data.Q_source", com.rpgGame.coreData.clientConfig.Q_source);
 			regClass("data.Q_special_activities", com.rpgGame.coreData.clientConfig.Q_special_activities);
+			regClass("data.Q_suggest", com.rpgGame.coreData.clientConfig.Q_suggest);
 			regClass("data.Q_tipsinfo", com.rpgGame.coreData.clientConfig.Q_tipsinfo);
 			regClass("data.Q_vip", com.rpgGame.coreData.clientConfig.Q_vip);
 			regClass("data.Q_warflag", com.rpgGame.coreData.clientConfig.Q_warflag);

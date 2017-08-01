@@ -3,17 +3,22 @@ package com.rpgGame.app.manager.role
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.engine3D.vo.SoftOutlineData;
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.graphics.DropItemHeadFace;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.fight.FightManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.core.controller.MouseCursorController;
 	import com.rpgGame.core.events.SceneInteractiveEvent;
 	import com.rpgGame.core.manager.EscActionManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.enum.JobEnum;
+	import com.rpgGame.coreData.info.MapDataManager;
+	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.RenderUnitID;
@@ -141,7 +146,15 @@ package com.rpgGame.app.manager.role
 		{
 			var result:Boolean;
 			result=role && role.usable;
-			result=result&&(!role.stateMachine.isDeadState||MainRoleManager.actorInfo.job==JobEnum.ROLE_4_TYPE);
+			if(role&&role.stateMachine.isDeadState){
+				var mapID : int = SceneSwitchManager.currentMapId;
+				var cfg : SceneData = MapDataManager.getMapInfo(mapID);
+				var qmap:Q_map=cfg.getData();
+				result=result&&(qmap.q_select_corpse==1)&&(MainRoleManager.actorInfo.job==JobEnum.ROLE_4_TYPE);//可以选择尸体职业是医家
+			}else{
+				result=result&&!role.stateMachine.isDeadState;
+			}
+			
 			return result;
 		}
 		
@@ -376,7 +389,7 @@ package com.rpgGame.app.manager.role
 				case RenderUnitType.HAIR:
 				case RenderUnitType.WEAPON:
 				case RenderUnitType.DEPUTY_WEAPON:
-				case RenderUnitType.MOUNT:
+//				case RenderUnitType.MOUNT:
 					ru.setSoftOutline(null);
 					break;
 			}

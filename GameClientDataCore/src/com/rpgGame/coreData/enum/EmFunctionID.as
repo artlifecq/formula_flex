@@ -100,6 +100,9 @@ package com.rpgGame.coreData.enum
 		public static const EM_ALLDUIJUERANK:String="351";
 		/** 模拜 **/
 		public static const EM_WORSHIP:String="360";
+		/** 结婚 **/
+		public static const EM_HUNYIN:String="370";
+		
 		
 	}
 }

@@ -54,6 +54,9 @@ package com.game.engine3D.vo
 		protected var _staticGraphicDis : ObjectContainer3D;
 		protected var _parent : ObjectContainer3D;
 		protected var _visible : Boolean;
+		protected var _isHiding:Boolean = false;
+		protected var _isAlpha:Boolean = false;
+		
 		protected var _disposing : Boolean;
 		protected var _usable : Boolean;
 		/**
@@ -133,8 +136,6 @@ package com.game.engine3D.vo
 		private var _isDestroyed : Boolean;
 		private var _isDisposed : Boolean;
 		
-		private var _isHiding:Boolean = false;
-
 		public function BaseObj3D(parameters : Array = null)
 		{
 			super();
@@ -1774,5 +1775,14 @@ package com.game.engine3D.vo
 			_isHiding = value;
 		}
 
+		public function get isAlpha():Boolean
+		{
+			return _isAlpha;
+		}
+
+		public function set isAlpha(value:Boolean):void
+		{
+			_isAlpha = value;
+		}
 	}
 }

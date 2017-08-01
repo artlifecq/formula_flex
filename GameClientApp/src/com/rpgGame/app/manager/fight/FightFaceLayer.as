@@ -49,7 +49,7 @@ package com.rpgGame.app.manager.fight
 				var getData:Q_map = MapDataManager.currentScene.getData();
 				
 				var tx:int=viewRect.width/2-pos.x;
-				var ty:int=viewRect.height/2-(-pos.z);
+				var ty:int=viewRect.height/2-(-pos.y);
 				var minX:int=viewRect.width-getData.q_map_width;
 				var minY:int=viewRect.height-getData.q_map_height;
 				if (tx>0) 

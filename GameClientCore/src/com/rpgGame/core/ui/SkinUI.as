@@ -38,21 +38,13 @@ package com.rpgGame.core.ui
 		protected var _stage : Stage;
 		protected var _stateSkin : StateSkin;
 		protected var _parentContainer : DisplayObjectContainer;
-		private var _hitArea : Rectangle;
 		
 		public function SkinUI(skin : StateSkin = null)
 		{
-			if (skin != null)
-			{
-				skin.toSprite(this);
-				if (skin.width && skin.height)
-				{
-					_hitArea = new Rectangle();
-					_hitArea.width = skin.width;
-					_hitArea.height = skin.height;
-				}
+			if(skin){
+				_stateSkin = skin;
+				_stateSkin.toSprite(this);
 			}
-			_stateSkin = skin;
 			_stage = Starling.current.nativeStage;
 			this.addEventListener(Event.ADDED_TO_STAGE, __onAddedToStage);
 			this.addEventListener(Event.REMOVED_FROM_STAGE, __onRemoveFromStage);
@@ -64,6 +56,17 @@ package com.rpgGame.core.ui
 			if (_stage != null)
 				onStageResize(_stage.stageWidth, _stage.stageHeight);
 		}
+		
+		override public function get height():Number
+		{
+			return _stateSkin?_stateSkin.height:super.height;
+		}
+		
+		override public function get width():Number
+		{
+			return _stateSkin?_stateSkin.width:super.width;
+		}
+		
 
 		private function __onAddedToStage(e : Event = null) : void
 		{
@@ -151,11 +154,6 @@ package com.rpgGame.core.ui
 			//移除事件监听
 			//停止计时器
 			//..
-		}
-
-		override public function getBounds(targetSpace : DisplayObject, resultRect : Rectangle = null) : Rectangle
-		{
-			return _hitArea ? _hitArea : super.getBounds(targetSpace, resultRect);
 		}
 
 		/**

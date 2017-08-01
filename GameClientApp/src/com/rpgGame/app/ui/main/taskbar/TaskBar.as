@@ -2,6 +2,7 @@ package com.rpgGame.app.ui.main.taskbar
 {
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.HuBaoManager;
+	import com.rpgGame.app.manager.SystemSetManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.task.TaskAutoManager;
@@ -24,6 +25,11 @@ package com.rpgGame.app.ui.main.taskbar
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.type.TaskType;
+	import com.rpgGame.netData.task.bean.NoMainTaskInfo;
+	
+	import away3d.events.Event;
+	
+	import feathers.controls.Check;
 	
 	import gs.TweenMax;
 	
@@ -54,102 +60,123 @@ package com.rpgGame.app.ui.main.taskbar
 			CONFIG::netDebug {
 				NetDebug.LOG("[MainUI] [onTouchTarget]:" + target.name);
 			}
-				switch (target) {
-					case this._skin.btn_open:
-						// 打开
-						setState(true);
-						break;
-					case this._skin.btn_close:
-						// 关闭
-						setState(false);
-						break;
-					case Renwu_Item(_skin.pri_killbut_1.skin).labelDisplay:
-						TaskControl.killWalkBut(1,0,1);
-						break;
-					case Renwu_Item(_skin.pri_killbut_2.skin).labelDisplay:
-						TaskControl.killWalkBut(1,1,1);
-						break;
-					case Renwu_Item(_skin.pri_killbut_3.skin).labelDisplay:
-						TaskControl.killWalkBut(1,2,1);
-						break;
-					case Renwu_Item(_skin.sec_killbut1_1.skin).labelDisplay:
-						TaskControl.killWalkBut(1,0,1);
-						break;
-					case Renwu_Item(_skin.sec_killbut1_2.skin).labelDisplay:
-						TaskControl.killWalkBut(1,1,1);
-						break;
-					case Renwu_Item(_skin.sec_killbut1_3.skin).labelDisplay:
-						TaskControl.killWalkBut(1,2,1);
-						break;
-					case Renwu_Item(_skin.sec_killbut2_1.skin).labelDisplay:
-						TaskControl.killWalkBut(2,0,1);
-						break;
-					case Renwu_Item(_skin.sec_killbut2_2.skin).labelDisplay:
-						TaskControl.killWalkBut(2,1,1);
-						break;
-					case Renwu_Item(_skin.sec_killbut2_3.skin).labelDisplay:
-						TaskControl.killWalkBut(2,2,1);
-						break;
-					case Renwu_Item(_skin.sec_killbut3_1.skin).labelDisplay:
-						TaskControl.killWalkBut(3,0,1);
-						break;
-					case Renwu_Item(_skin.sec_killbut3_2.skin).labelDisplay:
-						TaskControl.killWalkBut(3,1,1);
-						break;
-					case Renwu_Item(_skin.sec_killbut3_3.skin).labelDisplay:
-						TaskControl.killWalkBut(3,2,1);
-						break;
-					
-					case Renwu_Item(_skin.pri_killbut_1.skin).btn_send:
-						TaskControl.killWalkBut(1,0,2);
-						break;
-					case Renwu_Item(_skin.pri_killbut_2.skin).btn_send:
-						TaskControl.killWalkBut(1,1,2);
-						break;
-					case Renwu_Item(_skin.pri_killbut_3.skin).btn_send:
-						TaskControl.killWalkBut(1,2,2);
-						break;
-					case Renwu_Item(_skin.sec_killbut1_1.skin).btn_send:
-						TaskControl.killWalkBut(1,0,2);
-						break;
-					case Renwu_Item(_skin.sec_killbut1_2.skin).btn_send:
-						TaskControl.killWalkBut(1,1,2);
-						break;
-					case Renwu_Item(_skin.sec_killbut1_3.skin).btn_send:
-						TaskControl.killWalkBut(1,2,2);
-						break;
-					case Renwu_Item(_skin.sec_killbut2_1.skin).btn_send:
-						TaskControl.killWalkBut(2,0,2);
-						break;
-					case Renwu_Item(_skin.sec_killbut2_2.skin).btn_send:
-						TaskControl.killWalkBut(2,1,2);
-						break;
-					case Renwu_Item(_skin.sec_killbut2_3.skin).btn_send:
-						TaskControl.killWalkBut(2,2,2);
-						break;
-					case Renwu_Item(_skin.sec_killbut3_1.skin).btn_send:
-						TaskControl.killWalkBut(3,0,2);
-						break;
-					case Renwu_Item(_skin.sec_killbut3_2.skin).btn_send:
-						TaskControl.killWalkBut(3,1,2);
-						break;
-					case Renwu_Item(_skin.sec_killbut3_3.skin).btn_send:
-						TaskControl.killWalkBut(3,2,2);
-						break;
-					
-					case _skin.sec_subbut1:
-						receiveRewordBut(1);
-						break;
-					case _skin.sec_subbut2:
-						receiveRewordBut(2);
-						break;
-					case _skin.btnContinue:
-						TaskControl.killWalkBut(1,0,1);
-						break;
-					
-					
+			if(target.name!=null)
+			{
+				var nameArr:Array=target.name.split("AA");
+				if(nameArr[0]==TaskType.MAINTYPE_GUIDETASK)//引导任务先特殊处理
+				{
+					TaskControl.guideBut(int(nameArr[1]));
+					return;
 				}
+			}
+			switch (target) 
+			{
+				
+				case Renwu_Item(_skin.pri_killbut_1.skin).labelDisplay:
+					killWalkBut(1,0,1);
+					break;
+				case Renwu_Item(_skin.pri_killbut_2.skin).labelDisplay:
+					killWalkBut(1,1,1);
+					break;
+				case Renwu_Item(_skin.pri_killbut_3.skin).labelDisplay:
+					killWalkBut(1,2,1);
+					break;
+				case Renwu_Item(_skin.sec_killbut1_1.skin).labelDisplay:
+					killWalkBut(1,0,1);
+					break;
+				case Renwu_Item(_skin.sec_killbut1_2.skin).labelDisplay:
+					killWalkBut(1,1,1);
+					break;
+				case Renwu_Item(_skin.sec_killbut1_3.skin).labelDisplay:
+					killWalkBut(1,2,1);
+					break;
+				case Renwu_Item(_skin.sec_killbut2_1.skin).labelDisplay:
+					killWalkBut(2,0,1);
+					break;
+				case Renwu_Item(_skin.sec_killbut2_2.skin).labelDisplay:
+					killWalkBut(2,1,1);
+					break;
+				case Renwu_Item(_skin.sec_killbut2_3.skin).labelDisplay:
+					killWalkBut(2,2,1);
+					break;
+				case Renwu_Item(_skin.sec_killbut3_1.skin).labelDisplay:
+					killWalkBut(3,0,1);
+					break;
+				case Renwu_Item(_skin.sec_killbut3_2.skin).labelDisplay:
+					killWalkBut(3,1,1);
+					break;
+				case Renwu_Item(_skin.sec_killbut3_3.skin).labelDisplay:
+					killWalkBut(3,2,1);
+					break;
+				
+				case Renwu_Item(_skin.pri_killbut_1.skin).btn_send:
+					killWalkBut(1,0,2);
+					break;
+				case Renwu_Item(_skin.pri_killbut_2.skin).btn_send:
+					killWalkBut(1,1,2);
+					break;
+				case Renwu_Item(_skin.pri_killbut_3.skin).btn_send:
+					killWalkBut(1,2,2);
+					break;
+				case Renwu_Item(_skin.sec_killbut1_1.skin).btn_send:
+					killWalkBut(1,0,2);
+					break;
+				case Renwu_Item(_skin.sec_killbut1_2.skin).btn_send:
+					killWalkBut(1,1,2);
+					break;
+				case Renwu_Item(_skin.sec_killbut1_3.skin).btn_send:
+					killWalkBut(1,2,2);
+					break;
+				case Renwu_Item(_skin.sec_killbut2_1.skin).btn_send:
+					killWalkBut(2,0,2);
+					break;
+				case Renwu_Item(_skin.sec_killbut2_2.skin).btn_send:
+					killWalkBut(2,1,2);
+					break;
+				case Renwu_Item(_skin.sec_killbut2_3.skin).btn_send:
+					killWalkBut(2,2,2);
+					break;
+				case Renwu_Item(_skin.sec_killbut3_1.skin).btn_send:
+					killWalkBut(3,0,2);
+					break;
+				case Renwu_Item(_skin.sec_killbut3_2.skin).btn_send:
+					killWalkBut(3,1,2);
+					break;
+				case Renwu_Item(_skin.sec_killbut3_3.skin).btn_send:
+					killWalkBut(3,2,2);
+					break;
+				case this._skin.btn_open:
+					// 打开
+					setState(true);
+					break;
+				case this._skin.btn_close:
+					// 关闭
+					setState(false);
+					break;
+				case _skin.sec_subbut1:
+					receiveRewordBut(1);
+					break;
+				/*case _skin.sec_subbut2:
+				receiveRewordBut(2);
+				break;*/
+				case _skin.btnContinue:
+					killWalkBut(1,0,1);
+					break;
+				
+				
+			}
 		}
+		/**目标按钮任务处理*/
+		private function killWalkBut(type:int,num:int,key:int):void
+		{
+			TaskControl.killWalkBut(type,num,key);
+			if(type==TaskType.MAINTYPE_MAINTASK)
+			{
+				loopCont.clearTreasuerCheck();
+			}
+		}
+		
+		
 		override protected function onShow() : void
 		{
 			super.onShow();
@@ -177,12 +204,15 @@ package com.rpgGame.app.ui.main.taskbar
 			EventManager.addEvent(TaskEvent.TASK_FINISH_MATION,finishMation);
 			EventManager.addEvent(TaskEvent.TASK_NEW_MATION,newMation);
 			EventManager.addEvent(TaskEvent.TASK_CHANGE_MATION,changeMation);
+			EventManager.addEvent(TaskEvent.TASK_NO_MAIN,noMainTask);
+			
 			
 			EventManager.addEvent(TaskEvent.TASK_CLICK_NPC,taskNpc);
 			EventManager.addEvent(UserMoveEvent.MOVE_THROUGH, moveReschange);
 			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE,flyComplete);
 			EventManager.addEvent(MainPlayerEvent.PLAYER_DIE,playerDie);
-			
+			EventManager.addEvent(MainPlayerEvent.LEVEL_CHANGE,levelChange);
+			_skin.chkAuto.addEventListener(Event.CHANGE,checkChangeHandler)
 			
 		}
 		private function removeEvent():void
@@ -191,11 +221,13 @@ package com.rpgGame.app.ui.main.taskbar
 			EventManager.removeEvent(TaskEvent.TASK_FINISH_MATION,finishMation);
 			EventManager.removeEvent(TaskEvent.TASK_NEW_MATION,newMation);
 			EventManager.removeEvent(TaskEvent.TASK_CHANGE_MATION,changeMation);
-
+			EventManager.removeEvent(TaskEvent.TASK_NO_MAIN,noMainTask);
 			EventManager.removeEvent(TaskEvent.TASK_CLICK_NPC,taskNpc);
 			EventManager.removeEvent(UserMoveEvent.MOVE_THROUGH, moveReschange);
 			EventManager.removeEvent(MapEvent.MAP_SWITCH_COMPLETE,flyComplete);
 			EventManager.removeEvent(MainPlayerEvent.PLAYER_DIE,playerDie);
+			EventManager.removeEvent(MainPlayerEvent.LEVEL_CHANGE,levelChange);
+			_skin.chkAuto.removeEventListener(Event.CHANGE,checkChangeHandler)
 		}
 		private var panlIsopen:Boolean=false;
 		/**玩家移动*/
@@ -266,6 +298,7 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				effetCont.playFinishEffect();
 				TaskControl.hideLeadPanel();
+				loopCont.clearTreasuerCheck();
 			}
 			else if(type==TaskType.MAINTYPE_TREASUREBOX)
 			{
@@ -292,6 +325,15 @@ package com.rpgGame.app.ui.main.taskbar
 					TaskAutoManager.getInstance().stopAll();
 				}
 			}
+			else if(type==TaskType.MAINTYPE_TREASUREBOX)
+			{
+				if(TaskMissionManager.haveTreasuerTask&&TaskMissionManager.treasuerCheck)
+				{
+					TaskAutoManager.getInstance().startOtherTaskAuto(TaskType.MAINTYPE_TREASUREBOX)
+				}
+			}
+				
+			
 			
 			setViewShow();
 			leadCont.leadTaskView();
@@ -325,12 +367,29 @@ package com.rpgGame.app.ui.main.taskbar
 					else
 					{
 						
-						TaskControl.showLeadPanel();
+						//TaskControl.showLeadPanel();主线任务没有回复npc不弹框了
+						TaskSender.sendfinishTaskMessage(TaskMissionManager.mainTaskInfo.taskId);	
+						
 					}
 				}
 			}
 			
 		}
+		/**任务卡级*/
+		private function noMainTask(taskId: int,noInfo: Vector.<NoMainTaskInfo>):void
+		{
+			leadCont.show(false);
+			loopCont.show(true);
+			loopCont.setKajibutView(taskId,noInfo);
+		}
+		/**任务时等级变化*/
+		private function levelChange():void
+		{
+			loopCont.setKajiGoter();
+		}
+		
+		
+		
 		/**飞鞋完成*/
 		public static function flyComplete():void
 		{
@@ -368,7 +427,11 @@ package com.rpgGame.app.ui.main.taskbar
 			}
 		}
 		
-		
+		private function checkChangeHandler(e:Event):void
+		{
+			var check:Check = e.target as Check;
+			loopCont.setTreasuerCheck(check.isSelected);
+		}
 		
 		/**追踪栏开启关闭操作*/
 		private function setState(isOpen : Boolean) : void {

@@ -1,5 +1,6 @@
 package org.mokylin.skin.app.beibao.Xinfa
 {
+	import feathers.controls.Group;
 	import feathers.controls.StateSkin;
 	import feathers.controls.ToggleButton;
 	import feathers.controls.UIAsset;
@@ -19,6 +20,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 		//==========================================================================
 		public var btns:feathers.controls.ToggleButton;
 
+		public var gLevel:feathers.controls.Group;
+
 		public var icon:feathers.controls.UIAsset;
 
 		public var mcNum:feathers.controls.UIMovieClip;
@@ -26,6 +29,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 		public var uiChong:feathers.controls.UIAsset;
 
 		public var uiDi:feathers.controls.UIAsset;
+
+		public var uiJihuo:feathers.controls.UIAsset;
 
 		public var uiName:feathers.controls.UIAsset;
 
@@ -38,9 +43,9 @@ package org.mokylin.skin.app.beibao.Xinfa
 			super();
 			
 			this.currentState = "normal";
-			this.height = 75;
-			this.width = 202;
-			this.elementsContent = [btns_i(),__XinFaSelect_Item_UIAsset1_i(),mcNum_i(),uiDi_i(),uiChong_i(),icon_i(),uiName_i()];
+			this.height = 83;
+			this.width = 209;
+			this.elementsContent = [btns_i(),__XinFaSelect_Item_UIAsset1_i(),gLevel_i(),icon_i(),uiName_i(),uiJihuo_i()];
 			
 			states = {
 			};
@@ -57,8 +62,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/beibao/xinfa/yuanquan.png";
-			temp.x = 15;
-			temp.y = 2;
+			temp.x = 18;
+			temp.y = 6;
 			return temp;
 		}
 
@@ -73,6 +78,17 @@ package org.mokylin.skin.app.beibao.Xinfa
 			return temp;
 		}
 
+		private function gLevel_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			gLevel = temp;
+			temp.name = "gLevel";
+			temp.x = 138;
+			temp.y = 19;
+			temp.elementsContent = [mcNum_i(),uiDi_i(),uiChong_i()];
+			return temp;
+		}
+
 		private function icon_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -80,9 +96,9 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.name = "icon";
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/app/beibao/xinfa/icon/longxiang.png";
-			temp.x = 8;
-			temp.y = -3;
+			temp.styleName = "ui/app/beibao/xinfa/icon/1.png";
+			temp.x = 11;
+			temp.y = 1;
 			return temp;
 		}
 
@@ -97,8 +113,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.touchGroup = true;
 			temp.styleClass = org.mokylin.skin.app.beibao.Xinfa.mc.UIMovieClipChongshu2;
 			temp.width = 20;
-			temp.x = 149;
-			temp.y = 15;
+			temp.x = 14;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -110,8 +126,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/beibao/xinfa/chong.png";
-			temp.x = 163;
-			temp.y = 15;
+			temp.x = 28;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -123,8 +139,21 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/beibao/xinfa/di.png";
-			temp.x = 135;
-			temp.y = 15;
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function uiJihuo_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiJihuo = temp;
+			temp.name = "uiJihuo";
+			temp.touchable = false;
+			temp.touchGroup = true;
+			temp.styleName = "ui/app/beibao/xinfa/weijihuo.png";
+			temp.x = 138;
+			temp.y = 19;
 			return temp;
 		}
 
@@ -135,9 +164,9 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.name = "uiName";
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/app/beibao/xinfa/mingzi1/longxiang.png";
-			temp.x = 72;
-			temp.y = 17;
+			temp.styleName = "ui/app/beibao/xinfa/mingzi1/1.png";
+			temp.x = 75;
+			temp.y = 21;
 			return temp;
 		}
 

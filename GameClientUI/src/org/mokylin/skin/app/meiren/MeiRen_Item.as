@@ -63,7 +63,7 @@ package org.mokylin.skin.app.meiren
 			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 40;
-			temp.x = 165;
+			temp.x = 166;
 			temp.y = 4;
 			return temp;
 		}
@@ -77,7 +77,7 @@ package org.mokylin.skin.app.meiren
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 85;
-			temp.x = 68;
+			temp.x = 71;
 			temp.y = 4;
 			return temp;
 		}
@@ -87,9 +87,9 @@ package org.mokylin.skin.app.meiren
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiName = temp;
 			temp.name = "uiName";
-			temp.styleName = "ui/app/meiren/shuxing/qixue.png";
-			temp.x = 28;
-			temp.y = 6;
+			temp.styleName = "ui/common/shuxing/qx.png";
+			temp.x = 20;
+			temp.y = 4;
 			return temp;
 		}
 
@@ -99,7 +99,7 @@ package org.mokylin.skin.app.meiren
 			uiUp = temp;
 			temp.name = "uiUp";
 			temp.styleName = "ui/common/tubiao/jobup.png";
-			temp.x = 148;
+			temp.x = 153;
 			temp.y = 6;
 			return temp;
 		}

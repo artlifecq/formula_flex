@@ -336,6 +336,7 @@ package com.rpgGame.appModule.hunyin
 					}
 					else GrayFilter.gray(_skin.btnSonghua);
 					var tipStr:String=Mgr.hunyinMgr.getBtnTip(type,num);
+					TipTargetManager.remove(_skin.btnSonghua);
 					TipTargetManager.show( _skin.btnSonghua, TargetTipsMaker.makeSimpleTextTips(tipStr));
 					break;
 				case HunYinEnum.HD_YONGBAO:
@@ -345,6 +346,7 @@ package com.rpgGame.appModule.hunyin
 					}
 					else GrayFilter.gray(_skin.btnYongbao);
 					tipStr=Mgr.hunyinMgr.getBtnTip(type,num);
+					TipTargetManager.remove(_skin.btnYongbao);
 					TipTargetManager.show( _skin.btnYongbao, TargetTipsMaker.makeSimpleTextTips(tipStr));
 					break;
 				case HunYinEnum.HD_QINWEN:
@@ -354,6 +356,7 @@ package com.rpgGame.appModule.hunyin
 					}
 					else GrayFilter.gray(_skin.btnQinwen);
 					tipStr=Mgr.hunyinMgr.getBtnTip(type,num);
+					TipTargetManager.remove(_skin.btnQinwen);
 					TipTargetManager.show( _skin.btnQinwen, TargetTipsMaker.makeSimpleTextTips(tipStr));
 					break;
 				case HunYinEnum.HD_DONGFANG:
@@ -363,6 +366,7 @@ package com.rpgGame.appModule.hunyin
 					}
 					else GrayFilter.gray(_skin.btnDongfang);
 					tipStr=Mgr.hunyinMgr.getBtnTip(type,num);
+					TipTargetManager.remove(_skin.btnDongfang);
 					TipTargetManager.show( _skin.btnDongfang, TargetTipsMaker.makeSimpleTextTips(tipStr));
 					break;
 			}

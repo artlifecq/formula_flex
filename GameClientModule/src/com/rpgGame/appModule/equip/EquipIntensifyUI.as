@@ -229,21 +229,21 @@ package com.rpgGame.appModule.equip
 		
 		private function onCancelIntensify(grid:DragDropItem ):void
 		{
+			cancelAllUse();
 			var targetGrid:DragDropItem;
 			if(targetEquipInfo){
 				_goodsContainerTarget.setGrayForData(targetEquipInfo,false);
 				if(isUse(targetEquipInfo)){//是消耗品
-//					_goodsContainerUse.setGrayForData(targetEquipInfo,false);
 					useEquips.push(targetEquipInfo);
 					useEquips.sort(sortForUse);
 					_goodsContainerUse.refleshGridsByDatas(useEquips);
+					_goodsContainerUse.setGrayForData(targetEquipInfo,false);
 				}
 				targetEquipInfo=null;
 			}
 			
 			_targetEquip.setGridEmpty();
 			updateView();
-			cancelAllUse();
 		}
 		
 		private function createItemRender1():GridItemRender
@@ -383,9 +383,10 @@ package com.rpgGame.appModule.equip
 			if(targetEquipInfo){
 				_goodsContainerTarget.setGrayForData(targetEquipInfo,false);
 				if(isUse(targetEquipInfo)){
-					useEquips.push(targetEquipInfo);
+					useEquips.push(targetEquipInfo);//放回去
 					useEquips.sort(sortForUse);
 					_goodsContainerUse.refleshGridsByDatas(useEquips);
+					_goodsContainerUse.setGrayForData(targetEquipInfo,false);
 				}
 			}
 			cancelAllUse();
@@ -406,8 +407,7 @@ package com.rpgGame.appModule.equip
 			tweenEquip=TweenMax.to(_targetEquip,1,{x:621,y:150,ease:Expo.easeOut});
 			
 			if(isUse(targetEquipInfo)){
-//				_goodsContainerUse.setGrayForData(targetEquipInfo,true);
-				deleteItems(useEquips,targetEquipInfo);
+				deleteItems(useEquips,targetEquipInfo);//在消耗列表移除掉
 				_goodsContainerUse.refleshGridsByDatas(useEquips);
 			}
 			currCfg=EquipStrengthCfg.getStrengthCfg(targetEquipInfo.qItem.q_kind,targetEquipInfo.qItem.q_job,targetEquipInfo.strengthLevel);
@@ -1017,7 +1017,8 @@ package com.rpgGame.appModule.equip
 			if(targetEquipInfo){
 				_goodsContainerTarget.setGrayForData(targetEquipInfo,true);
 				if(isUse(targetEquipInfo)){
-					_goodsContainerUse.setGrayForData(targetEquipInfo,true);
+					deleteItems(useEquips,targetEquipInfo);//在消耗列表移除掉
+					_goodsContainerUse.refleshGridsByDatas(useEquips);
 				}
 			}
 			

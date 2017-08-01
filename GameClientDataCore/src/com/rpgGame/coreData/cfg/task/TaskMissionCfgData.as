@@ -8,6 +8,7 @@ package com.rpgGame.coreData.cfg.task
 	import com.rpgGame.coreData.clientConfig.Q_mission_reword;
 	import com.rpgGame.coreData.clientConfig.Q_mission_section;
 	import com.rpgGame.coreData.clientConfig.Q_mission_segment;
+	import com.rpgGame.coreData.clientConfig.Q_suggest;
 	import com.rpgGame.coreData.enum.JobEnum;
 	
 	import flash.utils.ByteArray;
@@ -25,6 +26,7 @@ package com.rpgGame.coreData.cfg.task
 		private static var _rewordDic : Dictionary = new Dictionary();
 		private static var _segmentDic : Dictionary = new Dictionary();
 		private static var _sectionDic : Dictionary = new Dictionary();
+		private static var _suggestVec :Vector.<Q_suggest>=new Vector.<Q_suggest>();
 		public static function setup(data : ByteArray) : void {
 			var arr : Array = data.readObject();
 			
@@ -63,7 +65,52 @@ package com.rpgGame.coreData.cfg.task
 				_sectionDic[info.q_mission_lvsec] = info;
 			}
 		}
+		/**挂机点表*/
+		public static function setupSuggest(data : ByteArray) : void {
+			var arr : Array = data.readObject();
+			for each(var info :Q_suggest in arr) {
+				_suggestVec.push(info);
+			}
+		}
 		
+		/**根据等级获取挂机数据*/
+		public static function getSuggestByLevel(level: int) : Q_suggest 
+		{
+			var sug:Q_suggest;
+			for each(var info :Q_suggest in _suggestVec) {
+				if(level>=info.q_level)
+				{
+					if(!sug)
+					{
+						sug=info;
+					}
+					else if(sug.q_level<info.q_level)
+					{
+						sug=info;
+					}
+				}
+			}
+			return sug;
+		}
+		/**根据等级获取挂机点*/
+		public static function getSuggestPotByLevel(level: int) : Array
+		{
+			var sug:Q_suggest;
+			for each(var info :Q_suggest in _suggestVec) {
+				if(level>=info.q_level)
+				{
+					if(!sug)
+					{
+						sug=info;
+					}
+					else if(sug.q_level<info.q_level)
+					{
+						sug=info;
+					}
+				}
+			}
+			return [sug.q_map_id,sug.q_move_x,sug.q_move_y];
+		}
 		
 		/**根据任务ID获取任务信息*/
 		public static function getTaskByID(id : uint) : Q_mission_base 
@@ -90,8 +137,36 @@ package com.rpgGame.coreData.cfg.task
 			
 		}
 		/**根据任务ID获取奖励物品列表*/
-		public static function getRewordById(id : int,job:int) :Array 
+		public static function getRewordById(id : int,job:int,sex:int) :Array 
 		{
+			var reword:Q_mission_reword=getRewordByID(id);
+			if(reword!=null)
+			{
+				var rewordList:Array=new Array();
+				var reObj:Array=JSONUtil.decode(reword.q_reward);
+				for each(var obj:Object in reObj)
+				{
+					if(obj.job==null&&obj.sex==null)
+					{
+						rewordList.push(obj);
+					}
+					else if(obj.job!=null&&obj.sex==null&&obj.job==job)
+					{
+						rewordList.push(obj)
+					}
+					else if(obj.job==null&&obj.sex!=null&&obj.sex==sex)
+					{
+						rewordList.push(obj)
+					}
+					else if(obj.job!=null&&obj.sex!=null&&obj.job==job&&obj.sex==sex)
+					{
+						rewordList.push(obj)
+					}
+				}
+				
+				return rewordList;
+			}
+			return null;
 			/*var task:Q_mission_base=getTaskByID(id);
 			var reword:Q_mission_reword;
 			if(task!=null)
@@ -99,7 +174,7 @@ package com.rpgGame.coreData.cfg.task
 				reword=getRewordByID(task.q_reword_id);
 			}*/
 			
-			var reword:Q_mission_reword=getRewordByID(id);
+			/*var reword:Q_mission_reword=getRewordByID(id);
 			if(reword!=null)
 			{
 				var reObj:Array;
@@ -132,7 +207,7 @@ package com.rpgGame.coreData.cfg.task
 					}
 				}
 			}
-			return null;
+			return null;*/
 		}
 		
 		/**根据章节ID统计章节总数量*/

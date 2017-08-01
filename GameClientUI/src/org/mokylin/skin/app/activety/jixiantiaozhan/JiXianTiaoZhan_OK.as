@@ -53,6 +53,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			super();
 			
 			this.currentState = "normal";
+			this.height = 444;
+			this.width = 469;
 			this.elementsContent = [__JiXianTiaoZhan_OK_UIAsset1_i(),imgWin_i(),__JiXianTiaoZhan_OK_UIAsset2_i(),__JiXianTiaoZhan_OK_UIAsset3_i(),grpIcon_i(),btnOk_i(),__JiXianTiaoZhan_OK_UIAsset4_i(),numPaiming_i(),__JiXianTiaoZhan_OK_Label1_i(),lb_player_damage_i(),lb_damagethan_i()];
 			
 			states = {

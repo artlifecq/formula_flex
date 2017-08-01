@@ -4,11 +4,15 @@ package com.rpgGame.app.ui.main.taskbar
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.utils.TaskUtil;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_mission_base;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.type.TaskType;
+	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.netData.task.bean.TaskInfo;
 	import com.rpgGame.netData.task.bean.TaskSubRateInfo;
 	
@@ -185,7 +189,7 @@ package com.rpgGame.app.ui.main.taskbar
 				setParcent(taskData.q_party_id,taskData.q_node_id);
 				setTaskButView(taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,MonsterDataManager.getMonsterModeidByAreaid(taskData.q_finish_npc));
 				//TaskUtil.setRewordInfo(taskData.q_reword_id,icoList,icoBgList);
-				icoListGroup.setRewardByArray(TaskMissionCfgData.getRewordById(taskData.q_reword_id,MainRoleManager.actorInfo.job));
+				icoListGroup.setRewardByArray(TaskMissionCfgData.getRewordById(taskData.q_reword_id,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex));
 				icoListGroup.visible=true;
 				setUisite();
 			}
@@ -210,11 +214,12 @@ package com.rpgGame.app.ui.main.taskbar
 			if(!_skin.primary_box.visible)return;
 			//icoListGroup.tweeRewardInBag(2);
 		}
-		
+		private var title:String;
 		/**设置标题详情*/
 		private function setTitle(party:String,name:String,describe:String):void
 		{
-			titleLable.htmlText=party+name;
+			title=party+name;
+			titleLable.htmlText=title;
 			priLabel.height=300;
 			priLabel.htmlText=describe;
 			priLabel.height=priLabel.textHeight;
@@ -235,10 +240,12 @@ package com.rpgGame.app.ui.main.taskbar
 		{
 			if(type!=TaskType.SUB_CONVERSATION&&TaskMissionManager.getMainTaskIsFinish()&&TaskMissionManager.getMainTaskHaveNpc())
 			{
+				titleLable.htmlText=title+"<font color='#00ff0c'>(已完成)</font>";
 				setSubbutView(npc);
 			}
 			else
 			{
+				titleLable.htmlText=title+"<font color='#ff0d0d'>(未完成)</font>";
 				TaskUtil.setGotargetInfo(type,describe,information,sub,killButList);
 			}
 			setUisite();
@@ -247,8 +254,8 @@ package com.rpgGame.app.ui.main.taskbar
 		private function setSubbutView(npcid:int):void
 		{
 			hideKillBut();
-			var text:String="回复:<u>"+MonsterDataManager.getMonsterName(npcid)+"</u><font color='#55bd15'>(已完成)</font>";
-			TaskUtil.setGotargetLabelText(1,killButList[0],text);
+			var text:String="<font color='#eaeabc'>回复：</font><u>"+MonsterDataManager.getMonsterName(npcid)+"</u>";
+			TaskUtil.setGotargetLabelText(TaskType.SUB_CONVERSATION,killButList[0],text);
 			
 		}
 		

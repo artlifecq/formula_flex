@@ -8,6 +8,7 @@ package org.mokylin.skin.app.meiren
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import feathers.controls.UINumber;
+	import org.mokylin.skin.app.meiren.MeiRen_Item;
 	import org.mokylin.skin.common.TongYongPanelbg1;
 	import org.mokylin.skin.component.button.ButtonSkin_info;
 	import org.mokylin.skin.component.button.ButtonSkin_jia;
@@ -97,7 +98,7 @@ package org.mokylin.skin.app.meiren
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [bg_i(),__MeiRen_Skin_UIAsset1_i(),__MeiRen_Skin_UIAsset2_i(),__MeiRen_Skin_UIAsset3_i(),btnPrev_i(),btnNext_i(),grpIcon_i(),gBuy_i(),btnTiaozhan_i(),uiName_i(),uiLevel_i(),ui_zhandou_i(),NumZhanli_i(),__MeiRen_Skin_Group1_i(),__MeiRen_Skin_Group2_i(),__MeiRen_Skin_Group3_i(),icon_i(),btnJinjie_i(),btnInfo_i(),uiOK_i(),lbContent_i()];
+			this.elementsContent = [bg_i(),__MeiRen_Skin_UIAsset1_i(),__MeiRen_Skin_UIAsset2_i(),__MeiRen_Skin_UIAsset3_i(),btnPrev_i(),btnNext_i(),grpIcon_i(),gBuy_i(),btnTiaozhan_i(),uiName_i(),uiLevel_i(),ui_zhandou_i(),NumZhanli_i(),__MeiRen_Skin_Group1_i(),__MeiRen_Skin_Group2_i(),__MeiRen_Skin_Group3_i(),icon_i(),btnJinjie_i(),btnInfo_i(),uiOK_i(),lbContent_i(),__MeiRen_Skin_SkinnableContainer5_i()];
 			
 			states = {
 			};
@@ -147,6 +148,18 @@ package org.mokylin.skin.app.meiren
 			temp.x = 683;
 			temp.y = 516;
 			temp.elementsContent = [__MeiRen_Skin_UIAsset10_i(),__MeiRen_Skin_UIAsset11_i(),__MeiRen_Skin_UIAsset12_i()];
+			return temp;
+		}
+
+		private function __MeiRen_Skin_SkinnableContainer5_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			temp.height = 200;
+			var skin:StateSkin = new org.mokylin.skin.app.meiren.MeiRen_Item()
+			temp.skin = skin
+			temp.width = 200;
+			temp.x = 694;
+			temp.y = 257;
 			return temp;
 		}
 
@@ -346,8 +359,8 @@ package org.mokylin.skin.app.meiren
 			temp.fontSize = 16;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
 			temp.color = 0xEAEABC;
-			temp.x = 356;
-			temp.y = 543;
+			temp.x = 347;
+			temp.y = 553;
 			return temp;
 		}
 
@@ -574,8 +587,8 @@ package org.mokylin.skin.app.meiren
 			uiOK = temp;
 			temp.name = "uiOK";
 			temp.styleName = "ui/app/meiren/yidadaozuigaojie.png";
-			temp.x = 753;
-			temp.y = 554;
+			temp.x = 757;
+			temp.y = 610;
 			return temp;
 		}
 

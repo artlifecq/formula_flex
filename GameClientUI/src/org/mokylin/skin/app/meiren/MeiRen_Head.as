@@ -32,6 +32,8 @@ package org.mokylin.skin.app.meiren
 			super();
 			
 			this.currentState = "normal";
+			this.height = 99;
+			this.width = 109;
 			this.elementsContent = [uiNormal_i(),uiSelect_i(),uiName_i(),icon_i(),uiZhan_i()];
 			
 			states = {

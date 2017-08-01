@@ -14,6 +14,7 @@ package com.rpgGame.app.cmdlistener.task
 	import com.rpgGame.netData.task.message.ResTaskChangeMessage;
 	import com.rpgGame.netData.task.message.ResTaskInformationMessage;
 	import com.rpgGame.netData.task.message.ResTaskSubmitedMessage;
+	import com.rpgGame.netData.task.message.SCNoMainTaskMessage;
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
@@ -37,6 +38,7 @@ package com.rpgGame.app.cmdlistener.task
 			SocketConnection.addCmdListener(124102,onResTaskAcceptedMessage);//新任务
 			SocketConnection.addCmdListener(124103,onResTaskChangeMessage);//任务进度改变
 			SocketConnection.addCmdListener(124104,onResTaskSubmitedMessage);//任务完成
+			SocketConnection.addCmdListener(124108,onSCNoMainTaskMessage);//卡级任务消息
 			SocketConnection.addCmdListener(104102,onResStartGatherMessage);//采集开始
 			SocketConnection.addCmdListener(104103,onResStopGatherMessage);//采集打断
 			
@@ -102,6 +104,16 @@ package com.rpgGame.app.cmdlistener.task
 				AppManager.hideApp(AppConstant.TASK_FLY_PANEL);
 			}
 		}
+		/**任务卡级消息	*/
+		private function onSCNoMainTaskMessage(msg:SCNoMainTaskMessage):void
+		{Lyt.a("卡级消息来了")
+			if(msg!=null)
+			{
+				TaskMissionManager.noMainTaskId=msg.taskModelId;
+				EventManager.dispatchEvent(TaskEvent.TASK_NO_MAIN,msg.taskModelId,msg.noMainTaskInfo);
+			}
+		}
+		
 		
 		
 		/**开始采集	*/

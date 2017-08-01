@@ -30,17 +30,11 @@ package com.rpgGame.app.cmdlistener
 		private function onNoticeMessage(msg:SCNoticeMessage):void
 		{
 			var arr:Array = [];
-			arr.push(msg.noticeIndex);
 			for(var i:int = 0;i<msg.values.length;i++)
 			{
 				arr.push(msg.values[i]);
 			}
 			NoticeManager.showNotifyById(msg.noticeIndex,"",arr);
-//			NoticeManager.showNotifyById(msg.noticeIndex,msg.values);
-			
-			
-			///NoticeManager.showNotify("SCENE_ENTER_NOTIFY_TEXT", ["提示信息"]);
-			//EventManager.dispatchEvent(ChatEvent.SEND_SUCCESS,msg);
 		}
 	}
 }

@@ -97,12 +97,12 @@ package com.rpgGame.appModule.zhangong
 				}
 				case 81:
 				{
-					_skin.bg.styleName = "ui/app/beibao/zhangong/name/handanjinjiao.png";
+					_skin.bg.styleName = "ui/app/beibao/zhangong/name/epanggong.png";
 					break;
 				}
 				case 91:
 				{
-					_skin.bg.styleName = "ui/app/beibao/zhangong/name/handanjinjiao.png";
+					_skin.bg.styleName = "ui/app/beibao/zhangong/name/qinshihuangling.png";
 					break;
 				}
 			}

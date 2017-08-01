@@ -170,6 +170,12 @@
 				NoticeManager.mouseFollowNotify("未找到配置:"+id);
 				return ;
 			}
+			if(!checkOpenByLevel(info.q_level))
+			{
+				if(isError)
+					NoticeManager.showNotifyById(90203,"",info.q_string_name,info.q_level);
+				return ;
+			}
 			openFunctionId(info,data,isAutoHide,isError);
 		}
 		
@@ -196,11 +202,16 @@
 		 */
 		public static function openModeByInfo(info:FunctionBarInfo,id:String= "",data:Object = null,isAutoHide:Boolean = true,isError:Boolean = true):void
 		{
+			if(info.isshow ==1)
+			{
+				NoticeManager.showNotifyById(20);
+				return ;
+			}
 			var minlevel:int = getOpenLevelByFunBarInfo(info)
 			if(!checkOpenByLevel(minlevel))
 			{
 				if(isError)
-					NoticeManager.showNotifyById(61040);
+					NoticeManager.showNotifyById(90203,"",info.name,minlevel);
 				return ;
 			}
 			var openId:String=id?id:"";
@@ -219,6 +230,14 @@
 						AppManager.showAppNoHide(AppConstant.REDREWARD_OPEN);
 					}else{
 						AppManager.showAppNoHide(AppConstant.REDREWARD_PANLE);
+					}
+				}else if(info.id == 20){
+					if(Mgr.hunyinMgr.marriageInfos==null||Mgr.hunyinMgr.marriageInfos.state==5)
+					{
+						AppManager.showApp(AppConstant.HUNYIN_QIUHUN);
+					}
+					else{
+						AppManager.showApp(AppConstant.HUNYIN_JIEHUN);
 					}
 				}
 			}

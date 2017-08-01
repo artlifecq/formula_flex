@@ -33,9 +33,9 @@ package com.rpgGame.app.manager
 		private var maxLevelDic:Dictionary;
 		public function MeridianMgr()
 		{
-			if (GlobalSheetData.getIntValue(847)!=0) 
+			if (GlobalSheetData.getIntValue(505)!=0) 
 			{
-				MAX_STONE_LV=GlobalSheetData.getIntValue(847);
+				MAX_STONE_LV=GlobalSheetData.getIntValue(505);
 			}
 		}
 		public function recMeridianInfoList(list:Vector.<AcuPointInfo>):void

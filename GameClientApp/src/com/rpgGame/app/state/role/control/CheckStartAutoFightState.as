@@ -61,7 +61,7 @@ package com.rpgGame.app.state.role.control
 				var map:Q_map=MapDataManager.currentScene.getData();
 				if (map&&EnumMapType.MAP_TYPE_TOWERS==map.q_map_type) 
 				{
-					if (!TrusteeshipManager.getInstance().isAuto) 
+					if (!TrusteeshipManager.getInstance().isAutoing) 
 					{
 						return true;
 					}
