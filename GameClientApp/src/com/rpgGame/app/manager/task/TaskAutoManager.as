@@ -69,7 +69,7 @@ package com.rpgGame.app.manager.task
 			_stateMachine = new AIStateMachine(role);
 			_gTimer.reset();
 			_gTimer.start();
-			_techSta=getTimer();
+			resetTechTime();
 			if(GlobalSheetData.getSettingInfo(511)!=null)
 			{
 				//AUTOLVE=GlobalSheetData.getSettingInfo(511).q_int_value;
@@ -100,8 +100,9 @@ package com.rpgGame.app.manager.task
 		
 		public function startSwitchTaskAuto(tar:int=0) : void
 		{
-			if(!_isAutoing)return;
-			startTaskAuto(tar);
+			return;
+			if(!_isAutoing)
+				startTaskAuto(tar);
 		}
 		
 		public function startTaskAuto(tar:int=0) : void
@@ -114,6 +115,8 @@ package com.rpgGame.app.manager.task
 			changeSub();
 			TrusteeshipManager.getInstance().stopAll();
 			SceneRoleSelectManager.selectedRole=null;
+			resetTechTime();
+			walkOver=false;
 			if(!_isTaskRunning)
 			{
 				_isTaskRunning = true;
@@ -136,6 +139,8 @@ package com.rpgGame.app.manager.task
 			//changeSub();
 			TrusteeshipManager.getInstance().stopAll();
 			SceneRoleSelectManager.selectedRole=null;
+			resetTechTime();
+			walkOver=false;
 			if(!_isOtherTaskRunning)
 			{
 				
@@ -162,7 +167,6 @@ package com.rpgGame.app.manager.task
 		}
 		public function stopSwitchAll() : void
 		{
-			_isAutoing=_isTaskRunning||_isOtherTaskRunning;
 			stopAll();
 		}
 		public function stopAll() : void
@@ -175,6 +179,7 @@ package com.rpgGame.app.manager.task
 		public function stopTaskAuto() : void
 		{
 			_stateMachine.transition(AIStateType.AI_NONE);
+			_isAutoing=_isTaskRunning||_isOtherTaskRunning;
 			if (!_isTaskRunning&&!_isOtherTaskRunning)
 			return;
 			_isBroken = false;
@@ -210,43 +215,51 @@ package com.rpgGame.app.manager.task
 			}
 			
 		}
-		
+		public var walkOver:Boolean=false;
 		public var actTaskMonster:Boolean=false;
-		private var _techSta:int=0;
+		private var _techTime:int=0;
+		private function resetTechTime():void
+		{
+			_techTime=getTimer();
+		}
 		private function techState():void
 		{
 			if(testStopKey)
 				return;
-			if ((_isTaskRunning||_isOtherTaskRunning)&&!MainRoleManager.actor.stateMachine.isIdle)
-				return;
+			
 			if(MainRoleManager.actorInfo.totalStat.level>AUTOLVE)
 				return;
 			if(MapDataManager.getMapInfo(MainRoleManager.actorInfo.mapID).mapType!=EnumMapType.MAP_TYPE_NORMAL)
 				return;
+			if ((_isTaskRunning||_isOtherTaskRunning)&&walkOver)//!MainRoleManager.actor.stateMachine.isIdle
+			{
+				resetTechTime();
+				return;
+			}
 			if(actTaskMonster)//杀任务怪的时候不拉
 			{
-				_techSta=getTimer();
+				resetTechTime();
 				actTaskMonster=false;
 				return;
 			}
 			if(!MainRoleManager.actor.stateMachine.isIdle&&!TrusteeshipManager.getInstance().isAutoing)//没有站着且不是挂机的时候不拉
 			{
-				_techSta=getTimer();
+				resetTechTime();
 				return;
 			}
 			if(TaskMissionManager.treasuerCheck&&TaskMissionManager.haveTreasuerTask)
 			{
-				if((getTimer()-_techSta)>=AUTOTREASEUER)
+				if((getTimer()-_techTime)>=AUTOTREASEUER)
 				{
-					_techSta=getTimer();
+					resetTechTime();
 					startOtherTaskAuto(TaskType.MAINTYPE_TREASUREBOX);
 				}
 			}
 			else if(TaskMissionManager.haveMainTask)
 			{
-				if((getTimer()-_techSta)>=AUTOMAIN)
+				if((getTimer()-_techTime)>=AUTOMAIN)
 				{
-					_techSta=getTimer();
+					resetTechTime();
 					startTaskAuto();
 				}
 				
