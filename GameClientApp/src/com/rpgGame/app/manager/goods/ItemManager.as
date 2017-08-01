@@ -385,6 +385,9 @@ package com.rpgGame.app.manager.goods
 			var caiList:Array;
 			for(var i:int=0;i<num;i++){
 				itemInfo=backDatas[i];
+				if(!itemInfo){
+					continue;
+				}
 				targetHeCheng=HeChengData.getHeChengTargetByTragetId(itemInfo.qItem.q_id); 
 				if(targetHeCheng){
 					caiList=JSONUtil.decode(targetHeCheng.q_cost_items);
