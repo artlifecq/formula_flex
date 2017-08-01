@@ -73,9 +73,10 @@ package com.rpgGame.app.ui.scene
 		
 		private var weiczbItems:Array=[5088,5089,5090];
 		private var wangczbItems:Array=[5091,5092,5095];
+		private var huangczbItems:Array=[5093,5094,5096];
 		private var oreID:Array=[];
 		
-		private var maps:Array=[900,901];
+		private var maps:Array=[900,901,902];
 		private var items:Array;
 		private var toPoint:Position;
 		
@@ -96,6 +97,13 @@ package com.rpgGame.app.ui.scene
 					break;
 				case maps[1]:
 					items=wangczbItems;
+					iteminfo1=new ClientItemInfo(items[0]);
+					iteminfo2=new ClientItemInfo(items[1]);
+					iteminfo3=new ClientItemInfo(items[2]);
+					labelNum=4;
+					break;
+				case maps[2]:
+					items=huangczbItems;
 					iteminfo1=new ClientItemInfo(items[0]);
 					iteminfo2=new ClientItemInfo(items[1]);
 					iteminfo3=new ClientItemInfo(items[2]);

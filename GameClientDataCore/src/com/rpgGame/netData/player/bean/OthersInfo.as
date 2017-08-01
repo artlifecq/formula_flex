@@ -63,6 +63,9 @@ package com.rpgGame.netData.player.bean{
 		//帮会职位
 		private var _guildMemberType: int;
 		
+		//结婚对象名字
+		private var _marriageName: String;
+		
 		//当前经验值
 		private var _exp: long;
 		
@@ -112,6 +115,8 @@ package com.rpgGame.netData.player.bean{
 			writeString(_guildName);
 			//帮会职位
 			writeInt(_guildMemberType);
+			//结婚对象名字
+			writeString(_marriageName);
 			//当前经验值
 			writeLong(_exp);
 			//最大经验值
@@ -170,6 +175,8 @@ package com.rpgGame.netData.player.bean{
 			_guildName = readString();
 			//帮会职位
 			_guildMemberType = readInt();
+			//结婚对象名字
+			_marriageName = readString();
 			//当前经验值
 			_exp = readLong();
 			//最大经验值
@@ -417,6 +424,21 @@ package com.rpgGame.netData.player.bean{
 		 */
 		public function set guildMemberType(value: int): void{
 			this._guildMemberType = value;
+		}
+		
+		/**
+		 * get 结婚对象名字
+		 * @return 
+		 */
+		public function get marriageName(): String{
+			return _marriageName;
+		}
+		
+		/**
+		 * set 结婚对象名字
+		 */
+		public function set marriageName(value: String): void{
+			this._marriageName = value;
 		}
 		
 		/**

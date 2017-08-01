@@ -91,10 +91,13 @@ package com.rpgGame.coreData.role
 		public var guildMemberType: int;
 		/**帮会Id**/
 		public var guildId:long;
+		//帮会职位(统帅,1:是,0:不是)
+		public var guildIsLeader: int;
 		/**伴侣**/
 		public var loveName : String = "";
 		/**今天接了几次镖车任务**/
 		public var biaoTimes : int;
+		
 		/**
 		 * 角色阶段---每个阶段对应的骨骼不一样，动作有所升级 
 		 * @return 
@@ -388,6 +391,7 @@ package com.rpgGame.coreData.role
 			data.curExp=heroInfo.exp.fValue;
 			data.guildMemberType = heroInfo.guildMemberType;
 			data.guildName = heroInfo.guildName;
+			data.guildIsLeader=heroInfo.guildIsLeader;
 			data.topLeaderTypes = heroInfo.topLeaderTypes;
 			
 			///角色属性信息
