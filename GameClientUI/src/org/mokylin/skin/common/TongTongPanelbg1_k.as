@@ -30,7 +30,7 @@ package org.mokylin.skin.common
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [bg_i(),__TongTongPanelbg1_k_UIAsset1_i(),btnClose_i()];
+			this.elementsContent = [__TongTongPanelbg1_k_UIAsset1_i(),bg_i(),__TongTongPanelbg1_k_UIAsset2_i(),btnClose_i()];
 			
 			states = {
 			};
@@ -42,6 +42,17 @@ package org.mokylin.skin.common
 		//                                定义成员方法
 		//==========================================================================
 		private function __TongTongPanelbg1_k_UIAsset1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.height = 518;
+			temp.styleName = "ui/common/background/tongyong_di.png";
+			temp.width = 936;
+			temp.x = 11;
+			temp.y = 83;
+			return temp;
+		}
+
+		private function __TongTongPanelbg1_k_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 453;
@@ -57,11 +68,9 @@ package org.mokylin.skin.common
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg = temp;
 			temp.name = "bg";
-			temp.bottom = 0;
-			temp.left = 0;
-			temp.right = 0;
-			temp.styleName = "ui/common/background/tongyongdi.png";
-			temp.top = 0;
+			temp.styleName = "ui/common/background/tongyong_1.png";
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -70,9 +79,9 @@ package org.mokylin.skin.common
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnClose = temp;
 			temp.name = "btnClose";
-			temp.right = 6;
+			temp.right = 10;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.top = 31;
+			temp.top = 35;
 			return temp;
 		}
 

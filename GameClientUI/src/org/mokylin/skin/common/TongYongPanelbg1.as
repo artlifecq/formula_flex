@@ -28,7 +28,9 @@ package org.mokylin.skin.common
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [bg_i(),btnClose_i()];
+			this.height = 601;
+			this.width = 956;
+			this.elementsContent = [__TongYongPanelbg1_UIAsset1_i(),bg_i(),btnClose_i()];
 			
 			states = {
 			};
@@ -39,15 +41,25 @@ package org.mokylin.skin.common
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
+		private function __TongYongPanelbg1_UIAsset1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.height = 518;
+			temp.styleName = "ui/common/background/tongyong_di.png";
+			temp.width = 936;
+			temp.x = 11;
+			temp.y = 83;
+			return temp;
+		}
+
 		private function bg_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg = temp;
 			temp.name = "bg";
-			temp.bottom = 0;
-			temp.styleName = "ui/common/background/tongyongdi.png";
-			temp.top = 0;
+			temp.styleName = "ui/common/background/tongyong_1.png";
 			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -57,8 +69,8 @@ package org.mokylin.skin.common
 			btnClose = temp;
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.top = 31;
-			temp.x = 922;
+			temp.top = 35;
+			temp.x = 918;
 			return temp;
 		}
 
