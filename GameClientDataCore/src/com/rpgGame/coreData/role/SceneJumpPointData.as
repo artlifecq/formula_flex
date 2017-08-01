@@ -16,6 +16,7 @@ package com.rpgGame.coreData.role
 		public var polygon : Vector.<Point>;
 		public var offsetUp : int = 0;
 		public var destPointList:Vector.<Point>;
+		public var sceneID:int;
 		public var startPoint:Point;
 		public var stopPoint:Point;
 		public var equalPash:int;
@@ -33,6 +34,7 @@ package com.rpgGame.coreData.role
 			this.equalPash=data.q_equal_pash;
 			this.direction = data.q_jump_res_direction;
 			this.sizeScale = 1;
+			this.sceneID=data.q_map_id;
 			this.polygon = AreaCfgData.getAreaPointsByID(data.q_jump_source_area_id);
 			this.startPoint=AreaCfgData.getAreaPointsCenter(AreaCfgData.getAreaPointsByID(data.q_jump_source_area_id));//传送区域中点;
 			this.destPointList=new Vector.<Point>();

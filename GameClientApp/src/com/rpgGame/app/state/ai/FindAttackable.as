@@ -66,7 +66,7 @@ package com.rpgGame.app.state.ai
 		private function findAttackableTarget() : SceneRole
 		{
 			var role:SceneRole;
-			role=findNearestPlayer();//先搜寻可攻击玩家
+			//role=findNearestPlayer();//先搜寻可攻击玩家
 			if(role==null&&TaskAutoManager.getInstance().isTasking)//任务中先搜寻任务怪
 			{
 				role=findNearestTaskMonster();

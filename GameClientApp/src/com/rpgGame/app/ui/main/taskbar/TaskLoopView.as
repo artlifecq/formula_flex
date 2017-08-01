@@ -425,11 +425,11 @@ package com.rpgGame.app.ui.main.taskbar
 					else
 					{
 						glabe=new Label();
-						glabe.name=TaskType.MAINTYPE_GUIDETASK+"AA"+guideLabelList.length;
 						guideLabelList.push(glabe);
 						skinList.push(glabe);
 						scrollBox.addChild(glabe);
 					}
+					glabe.name=TaskType.MAINTYPE_GUIDETASK+"AA"+guideLabelList.length;
 					glabe.x=_skin.sec_navi1.x;
 					glabe.visible=true;
 					taskData=TaskMissionCfgData.getTaskByID(task[i].taskModelId);
