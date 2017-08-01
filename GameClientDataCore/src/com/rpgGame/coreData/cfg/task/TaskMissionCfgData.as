@@ -142,8 +142,17 @@ package com.rpgGame.coreData.cfg.task
 			var reword:Q_mission_reword=getRewordByID(id);
 			if(reword!=null)
 			{
-				var rewordList:Array=new Array();
-				var reObj:Array=JSONUtil.decode(reword.q_reward);
+				return getRewordByJobsex(reword.q_reward,job,sex);
+			}
+			return null;
+		}
+		/**根据任务ID获取奖励物品列表*/
+		public static function getRewordByJobsex(reward:String,job:int,sex:int) :Array 
+		{
+			var rewordList:Array=new Array();
+			var reObj:Array=JSONUtil.decode(reward);
+			if(reObj)
+			{
 				for each(var obj:Object in reObj)
 				{
 					if(obj.job==null&&obj.sex==null)
@@ -163,51 +172,9 @@ package com.rpgGame.coreData.cfg.task
 						rewordList.push(obj)
 					}
 				}
-				
-				return rewordList;
-			}
-			return null;
-			/*var task:Q_mission_base=getTaskByID(id);
-			var reword:Q_mission_reword;
-			if(task!=null)
-			{
-				reword=getRewordByID(task.q_reword_id);
-			}*/
 			
-			/*var reword:Q_mission_reword=getRewordByID(id);
-			if(reword!=null)
-			{
-				var reObj:Array;
-				var reo:Object;
-				if(job==JobEnum.ROLE_1_TYPE&&reword.q_reward!="")
-				{
-					reo=JSONUtil.decode(reword.q_reward);
-					if(reo!=null)
-					{
-						reObj=reo as Array;
-						return reObj;
-					}
-				}
-				else if((job==JobEnum.ROLE_2_TYPE||job==JobEnum.ROLE_3_TYPE)&&reword.q_reward_2!="")
-				{
-					reo=JSONUtil.decode(reword.q_reward_2);
-					if(reo!=null)
-					{
-						reObj=reo as Array;
-						return reObj;
-					}
-				}
-				else if(job==JobEnum.ROLE_4_TYPE&&reword.q_reward_1!="")
-				{
-					reo=JSONUtil.decode(reword.q_reward_1);
-					if(reo!=null)
-					{
-						reObj=reo as Array;
-						return reObj;
-					}
-				}
 			}
-			return null;*/
+			return rewordList;
 		}
 		
 		/**根据章节ID统计章节总数量*/

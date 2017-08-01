@@ -871,7 +871,7 @@ package com.rpgGame.app.manager
 			//无模型时添加血条
 			if (!ru.resReady && role.headFace)
 			{
-				role.headFace.setBodyRender(null);
+//				role.headFace.setBodyRender(null);
 			}
 		}
 		

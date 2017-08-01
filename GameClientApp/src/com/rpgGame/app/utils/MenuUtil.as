@@ -45,7 +45,7 @@ package com.rpgGame.app.utils
 	public class MenuUtil
 	{
 		
-		public static function getPlayerTargetMenu(targetID:Number,fromChat:Boolean = false):Array
+		public static function getPlayerTargetMenu(targetID:Number,fromChat:Boolean = false,isTeam:Boolean= true):Array
 		{
 			var selfMemberData : SocietyMemberData = SocietyManager.getSelfMemberData();
 			var officerDataProto : FamilyOfficerDataProto = selfMemberData ? SocietyStaticConfigData.getFamilyOfficerDataByPos(selfMemberData.societyPos) : null;
@@ -62,7 +62,8 @@ package com.rpgGame.app.utils
 			//			if(!TeamManager.isInTeam(targetID))
 			//			{
 			//这个需要一直显示 
-			menus.push(LangMenu.INVITE_TEAM);
+			if(isTeam)
+				menus.push(LangMenu.INVITE_TEAM);
 			//			}
 			//			menus.push(LangMenu.TRADE);
 			if(!fromChat)
@@ -342,7 +343,7 @@ package com.rpgGame.app.utils
 					EventManager.dispatchEvent(ChatEvent.SWITCH_PRIVATE_CHANNEL,heroId,heroName);
 					break;
 				case LangMenu.INVITE_TEAM://组队
-					Mgr.teamMgr.InvitePlayerJoinTeam(new long(heroId));
+					Mgr.teamMgr.InvitePlayerJoinTeam(heroId);
 					//					TeamManager.InvitePlayerJoinTeam( heroId );
 					break;
 				case LangMenu.PLAY://切磋

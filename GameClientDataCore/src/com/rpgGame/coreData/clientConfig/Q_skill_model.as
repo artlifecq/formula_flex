@@ -68,7 +68,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_target_max:int;
 		 /**  作用目标类型(0怪物和玩家，1怪物，2玩家) */
 		public var q_target_type:int;
-		 /**  技能表现类型（服务端区分） 0.常规类型 2.召唤类型  4有位移类型,5灭世金针6多段伤害,3矩形辐射递进伤害 */
+		 /**  技能表现类型（服务端区分） 0.常规类型 2.召唤类型  4有位移类型,5灭世金针6多段伤害,3矩形辐射递进伤害 7. 预警技能 */
 		public var q_skill_type:int;
 		 /**  使用方式（1主动技能，2被动技能） */
 		public var q_trigger_type:int;
@@ -128,6 +128,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_warn_type:int;
 		 /**  延迟命中时间（单位：毫秒） */
 		public var q_delay_time:int;
+		 /**  技能释放时间 */
+		public var q_show_time:int;
 		 /**  飞行特效的飞行速度。 有飞行特效才能填。 有飞行特效必须填 */
 		public var q_fly_speed:int;
 		 /**  是否飞行穿越（0不穿越，1是穿越） */

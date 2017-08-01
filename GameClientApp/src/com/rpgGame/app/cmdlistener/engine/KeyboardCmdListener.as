@@ -82,11 +82,11 @@ package com.rpgGame.app.cmdlistener.engine
 				return;
 			}
 			/////////////////////////////////////////////////////
-			if (info.code == Keyboard.H)
+			/*if (info.code == Keyboard.H)
 			{
 				
 				return;
-			}
+			}*/
 			
 			var index : int = _downKeyList.indexOf(info.code);
 			if (index == -1)

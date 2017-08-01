@@ -343,10 +343,10 @@ package com.rpgGame.app.state.role.action
 
 		private function stopAttack() : void
 		{
-			try{if((((_machine as RoleStateMachine).owner as SceneRole).data as MonsterData).modelID==9008)
-			{
-				Lyt.a("@@@@攻击完成:"+"-----"+AttackStateReference(_ref).spellInfo.spellData.q_skillName);
-			}}catch(e:Error){}
+//			try{if((((_machine as RoleStateMachine).owner as SceneRole).data as MonsterData).modelID==9008)
+//			{
+//				Lyt.a("@@@@攻击完成:"+"-----"+AttackStateReference(_ref).spellInfo.spellData.q_skillName);
+//			}}catch(e:Error){}
 			_attackBroken = true;
 			_attackFinished = true;
 			_canWalkRelease = false;

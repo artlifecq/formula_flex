@@ -18,6 +18,7 @@ package com.rpgGame.app.ui.main.chat.laba
 	
 	import gs.TweenLite;
 	
+	import starling.display.Quad;
 	import starling.display.Sprite;
 	
 	/**
@@ -34,6 +35,7 @@ package com.rpgGame.app.ui.main.chat.laba
 		/**喇叭图标**/
 		private var _ico:UIAsset;
 		private var _deleteHandler:Function;
+		private var _unitsMask:Quad;
 		private var _richText:RichTextArea3D;
 		private var _totalHeight:int;
 		
@@ -45,19 +47,30 @@ package com.rpgGame.app.ui.main.chat.laba
 			var defaultFormat:TextFormat = new TextFormat(Fontter.FONT_Hei);
 			defaultFormat.color = 0xded8c7;
 			defaultFormat.size = 14;
-			_richText = new RichTextArea3D( 430, 70,ColorUtils.getDefaultStrokeFilter() );
+			_richText = new RichTextArea3D( 365, 70,ColorUtils.getDefaultStrokeFilter() );
 			_richText.setConfig(RichTextCustomUtil.getChatUnitConfigVec());
-			_richText.x = 23;
+			_richText.x = 33;
 			_richText.y = 0;
-			_richText.wordWrap = true;
-			_richText.multiline = true;
+			_richText.wordWrap = false;
+			_richText.multiline = false;
 			_richText.defaultTextFormat = defaultFormat;
 			addChild(_richText);
+			_unitsMask=new Quad(4,4);
+			_unitsMask.x=33;
+			_unitsMask.width=_richText.width-33;
+			_unitsMask.height=_richText.height;
+			_richText.mask=_unitsMask;
 			
 			_ico = new UIAsset();
 			_ico.styleName = AssetUrl.LA_BA_ICON;
-			_ico.y = 5;
+			_ico.y = -7;
 			addChild( _ico );
+			addChild( _unitsMask );
+		}
+		
+		override public function set width(value:Number):void
+		{
+			_unitsMask.width=value-33;
 		}
 		
 		override public function get height():Number
@@ -71,11 +84,11 @@ package com.rpgGame.app.ui.main.chat.laba
 			var userName:String = info.name;//info.realShowName;
 			var showStr:String = ChatUtil.getHTMLChatMessage(info);//ChatUtil.getChatMessageByChannel(info.type,info.name,info.chatText);//ChatUtil.getChatMessageByChannel(info.channel, userName + message);
 			updateShow(showStr);
-			var rec:Rectangle = _richText.textfield.getCharBoundaries(0);
+			/*var rec:Rectangle = _richText.textfield.getCharBoundaries(0);
 			var $_txtLineMetrics:TextLineMetrics = _richText.textfield.getLineMetrics(_richText.textfield.getLineIndexOfChar(0));
-			_ico.y = $_txtLineMetrics.height - $_txtLineMetrics.descent - 12;
+			_ico.y = $_txtLineMetrics.height - $_txtLineMetrics.descent - 12;*/
 			_totalHeight = _richText.textHeight;
-			playShowEffect();
+			_richText.setSize(_richText.textWidth+10,_richText.height);
 		}
 		
 		private function updateShow(message:String):void
@@ -84,21 +97,29 @@ package com.rpgGame.app.ui.main.chat.laba
 			_richText.appendRichText(message);
 		}
 		
-		private function playShowEffect():void
-		{
-			
-		}
-		
-		private function onShowEffectPlayComplete(thisObj:*,args:*):void
-		{
-			
-		}
-		
 		/** 渐隐出现 */
 		public function show():void
 		{
 			alpha = 0;
-			TweenLite.to(this, ALPHA_TIME, { alpha:1} );
+			_richText.x=33;
+			TweenLite.to(this, ALPHA_TIME, { alpha:1,onComplete:onAlphaComplete} );
+		}
+		
+		private function onAlphaComplete():void
+		{
+			var moveX:int=_richText.textWidth+10-_unitsMask.width;
+			moveX=moveX<0?0:moveX;
+			var time:int=moveX/10;
+			addChild(_richText);
+			if(time!=0){
+				TweenLite.to(_richText,time,{x:-moveX,onComplete:moveXComplete});
+			}else{
+				moveXComplete();
+			}
+		}
+		
+		private function moveXComplete():void
+		{
 			_timeOutId = setTimeout(onShowComplete,TOTAL_SHOW_TIME);
 		}
 		
@@ -125,8 +146,8 @@ package com.rpgGame.app.ui.main.chat.laba
 		public function toOffsetPos(offsetY:int):void
 		{
 			TweenLite.killTweensOf(this,true,{y:true});
-			var topPos:int = this.y - offsetY-2;
-			TweenLite.to(this, ALPHA_TIME, { y:topPos});
+//			var topPos:int = this.y - offsetY-2;
+			this.y= this.y - offsetY-2;
 		}
 		
 		private function deleteSelf():void

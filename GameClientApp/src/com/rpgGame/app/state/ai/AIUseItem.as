@@ -11,7 +11,7 @@ package com.rpgGame.app.state.ai
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.type.AIStateType;
 	
-	import flash.utils.setTimeout;
+	import gs.TweenLite;
 
 	public class AIUseItem extends AIState
 	{
@@ -23,23 +23,20 @@ package com.rpgGame.app.state.ai
 		override public function execute() : void
 		{
 			super.execute();
-			if(isUseDead())
+			if(isUseDead())//使用复活药
 			{
 				
 				var deaditem:ClientItemInfo=BackPackManager.instance.getResurgenceItem();
 				if(deaditem!=null&&!ItemCDManager.getInstance().getSkillHasCDTime(deaditem.qItem))//做CD判断
 				{
 					usedealsure=true;
-					var timeID:uint = setTimeout(function():void{
-						if(MainRoleManager.actor&&MainRoleManager.actor.stateMachine.isDeadState)
-						{
-							SceneSender.reqReviveLocalRole(deaditem.qItem.q_id,1);
-						}
-					},3000);
+
+					TweenLite.killDelayedCallsTo(useDeadItem);
+					TweenLite.delayedCall(3,useDeadItem,[deaditem]);
 				}
 			}
 			
-			if(isUseHp())
+			if(isUseHp())//使用回血药
 			{
 				//Lyt.a("使用回血药")
 				var item:ClientItemInfo=BackPackManager.instance.searchHPSuitDrugItem();
@@ -51,7 +48,13 @@ package com.rpgGame.app.state.ai
 			}
 			
 		}
-		
+		private function useDeadItem(deaditem:ClientItemInfo):void
+		{
+			if(MainRoleManager.actor&&MainRoleManager.actor.stateMachine.isDeadState)
+			{
+				SceneSender.reqReviveLocalRole(deaditem.qItem.q_id,1);
+			}
+		}
 		override public function leavePass(nextState : IState, force : Boolean = false) : Boolean
 		{
 			return true;

@@ -301,9 +301,7 @@ package com.rpgGame.app.manager
 				}
 				else
 				{
-					Lyt.a("getHasRole:false"+_targetRoles[i].id);
 					_targetRoles.splice(i,1);
-					Lyt.a("getHasRole:length"+_targetRoles.length);
 					flag=false;
 				}
 			}
@@ -312,7 +310,6 @@ package com.rpgGame.app.manager
 			{
 				_targetRoles.length = 0;
 				_targetRoles = null;
-				Lyt.a("getHasRole:isCompleted");
 				return false;
 				
 			}
@@ -333,8 +330,7 @@ package com.rpgGame.app.manager
 				}
 			}
 			
-			_targetRoles.push(role);
-			Lyt.a("targetRoles:"+role.id+"::"+_targetRoles.length);
+			_targetRoles.push(role);;
 		}
 		
 		private function onUpdate(force : Boolean = false) : void
