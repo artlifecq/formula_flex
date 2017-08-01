@@ -64,6 +64,9 @@ package com.rpgGame.netData.map.bean{
 		//军阶头顶显示
 		private var _junJieId: int;
 		
+		//帮派Id
+		private var _guildId: long;
+		
 		//帮会名称
 		private var _guildName: String;
 		
@@ -129,6 +132,8 @@ package com.rpgGame.netData.map.bean{
 			writeInt(_convoy);
 			//军阶头顶显示
 			writeInt(_junJieId);
+			//帮派Id
+			writeLong(_guildId);
 			//帮会名称
 			writeString(_guildName);
 			//帮会职位
@@ -205,6 +210,8 @@ package com.rpgGame.netData.map.bean{
 			_convoy = readInt();
 			//军阶头顶显示
 			_junJieId = readInt();
+			//帮派Id
+			_guildId = readLong();
 			//帮会名称
 			_guildName = readString();
 			//帮会职位
@@ -470,6 +477,21 @@ package com.rpgGame.netData.map.bean{
 		 */
 		public function set junJieId(value: int): void{
 			this._junJieId = value;
+		}
+		
+		/**
+		 * get 帮派Id
+		 * @return 
+		 */
+		public function get guildId(): long{
+			return _guildId;
+		}
+		
+		/**
+		 * set 帮派Id
+		 */
+		public function set guildId(value: long): void{
+			this._guildId = value;
 		}
 		
 		/**
