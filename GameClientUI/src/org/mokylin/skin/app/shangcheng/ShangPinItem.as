@@ -6,7 +6,7 @@ package org.mokylin.skin.app.shangcheng
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.component.button.ButtonSkin_putong;
+	import org.mokylin.skin.component.button.ButtonSkin_putong4;
 
 	/**
 	 * @private
@@ -32,13 +32,13 @@ package org.mokylin.skin.app.shangcheng
 
 		public var lbXiangou:feathers.controls.Label;
 
-		public var lbYuanbao:feathers.controls.Label;
+		public var lbYuanbao0:feathers.controls.Label;
 
 		public var lbYuanbao2:feathers.controls.Label;
 
 		public var uiLine:feathers.controls.UIAsset;
 
-		public var uiYuanbao:feathers.controls.UIAsset;
+		public var uiYuanbao0:feathers.controls.UIAsset;
 
 		public var uiYuanbao2:feathers.controls.UIAsset;
 
@@ -51,8 +51,8 @@ package org.mokylin.skin.app.shangcheng
 			super();
 			
 			this.currentState = "normal";
-			this.height = 124;
-			this.width = 210;
+			this.height = 118;
+			this.width = 232;
 			this.elementsContent = [__ShangPinItem_UIAsset1_i(),icons_i(),lbName_i(),lbXiangou_i(),grpJiage_i(),grpJiage2_i(),btnBuy_i()];
 			
 			states = {
@@ -78,8 +78,8 @@ package org.mokylin.skin.app.shangcheng
 		private function __ShangPinItem_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/shangcheng/kuai.jpg";
-			temp.x = 0;
+			temp.styleName = "ui/app/shangcheng/kuang.png";
+			temp.x = 3;
 			temp.y = 0;
 			return temp;
 		}
@@ -91,10 +91,10 @@ package org.mokylin.skin.app.shangcheng
 			temp.name = "btnBuy";
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.label = "购 买";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong4;
 			temp.color = 0xCFC6AE;
 			temp.width = 110;
-			temp.x = 91;
+			temp.x = 103;
 			temp.y = 84;
 			return temp;
 		}
@@ -104,7 +104,7 @@ package org.mokylin.skin.app.shangcheng
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grpJiage2 = temp;
 			temp.name = "grpJiage2";
-			temp.x = 91;
+			temp.x = 102;
 			temp.y = 40;
 			temp.elementsContent = [lbNowPrice_i(),uiYuanbao2_i(),lbYuanbao2_i()];
 			return temp;
@@ -115,9 +115,9 @@ package org.mokylin.skin.app.shangcheng
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grpJiage = temp;
 			temp.name = "grpJiage";
-			temp.x = 91;
+			temp.x = 102;
 			temp.y = 40;
-			temp.elementsContent = [__ShangPinItem_Label1_i(),uiYuanbao_i(),lbYuanbao_i(),uiLine_i()];
+			temp.elementsContent = [__ShangPinItem_Label1_i(),uiYuanbao0_i(),lbYuanbao0_i(),uiLine_i()];
 			return temp;
 		}
 
@@ -129,7 +129,7 @@ package org.mokylin.skin.app.shangcheng
 			temp.height = 72;
 			temp.styleName = "ui/common/grid/normal/64.png";
 			temp.width = 72;
-			temp.x = 9;
+			temp.x = 21;
 			temp.y = 36;
 			return temp;
 		}
@@ -140,13 +140,14 @@ package org.mokylin.skin.app.shangcheng
 			lbName = temp;
 			temp.name = "lbName";
 			temp.bold = false;
+			temp.fontSize = 16;
 			temp.text = "装备名字六字";
 			temp.textAlign = "center";
-			temp.color = 0xBEA757;
+			temp.color = 0x14A3F3;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 151;
-			temp.x = 35;
-			temp.y = 6;
+			temp.x = 50;
+			temp.y = 4;
 			return temp;
 		}
 
@@ -169,18 +170,18 @@ package org.mokylin.skin.app.shangcheng
 			lbXiangou = temp;
 			temp.name = "lbXiangou";
 			temp.text = "每日限购： 0/10";
-			temp.color = 0x2083B9;
+			temp.color = 0x14A3F3;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 91;
+			temp.x = 102;
 			temp.y = 66;
 			return temp;
 		}
 
-		private function lbYuanbao2_i():feathers.controls.Label
+		private function lbYuanbao0_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbYuanbao2 = temp;
-			temp.name = "lbYuanbao2";
+			lbYuanbao0 = temp;
+			temp.name = "lbYuanbao0";
 			temp.text = "750";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
@@ -190,11 +191,11 @@ package org.mokylin.skin.app.shangcheng
 			return temp;
 		}
 
-		private function lbYuanbao_i():feathers.controls.Label
+		private function lbYuanbao2_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbYuanbao = temp;
-			temp.name = "lbYuanbao";
+			lbYuanbao2 = temp;
+			temp.name = "lbYuanbao2";
 			temp.text = "750";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
@@ -215,22 +216,22 @@ package org.mokylin.skin.app.shangcheng
 			return temp;
 		}
 
-		private function uiYuanbao2_i():feathers.controls.UIAsset
+		private function uiYuanbao0_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			uiYuanbao2 = temp;
-			temp.name = "uiYuanbao2";
+			uiYuanbao0 = temp;
+			temp.name = "uiYuanbao0";
 			temp.styleName = "ui/common/tubiao/yuanbao_24.png";
 			temp.x = 40;
 			temp.y = 0;
 			return temp;
 		}
 
-		private function uiYuanbao_i():feathers.controls.UIAsset
+		private function uiYuanbao2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			uiYuanbao = temp;
-			temp.name = "uiYuanbao";
+			uiYuanbao2 = temp;
+			temp.name = "uiYuanbao2";
 			temp.styleName = "ui/common/tubiao/yuanbao_24.png";
 			temp.x = 40;
 			temp.y = 0;
