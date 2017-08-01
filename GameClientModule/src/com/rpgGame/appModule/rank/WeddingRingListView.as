@@ -37,6 +37,7 @@ package com.rpgGame.appModule.rank
 }
 
 
+import com.rpgGame.app.manager.HunYinManager;
 import com.rpgGame.app.utils.FightValueUtil;
 import com.rpgGame.appModule.rank.RightGroupBase;
 import com.rpgGame.coreData.cfg.AttValueConfig;
@@ -59,7 +60,7 @@ class WeddingRingRightGroup extends RightGroupBase
 		var qdata:Q_advance_wedding = JieHunJieZiData.getModByLv(_topInfo.param);
 		if(qdata!=null)
 		{
-			var attValues1:Q_att_values=AttValueConfig.getAttInfoById(qdata.q_att_type);
+			var attValues1:Q_att_values=AttValueConfig.getAttInfoById(HunYinManager.ins.getAttId(qdata));
 			_power = FightValueUtil.calFightPowerByAttValue(attValues1,_topInfo.job);
 		}else{
 			_power = 0;

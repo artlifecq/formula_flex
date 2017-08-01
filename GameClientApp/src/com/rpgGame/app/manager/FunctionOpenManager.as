@@ -3,7 +3,9 @@
     import com.gameClient.utils.JSONUtil;
     import com.rpgGame.app.manager.chat.NoticeManager;
     import com.rpgGame.app.manager.guild.GuildManager;
+    import com.rpgGame.app.manager.pop.UIPopManager;
     import com.rpgGame.app.manager.role.MainRoleManager;
+    import com.rpgGame.app.ui.OpenPanel;
     import com.rpgGame.core.app.AppConstant;
     import com.rpgGame.core.app.AppInfo;
     import com.rpgGame.core.app.AppManager;
@@ -45,10 +47,12 @@
 			{
 				if(needShowOpenMode)
 				{
-					if(itemlist.length>0)
+					/*if(itemlist.length>0)
 						AppManager.showAppNoHide(AppConstant.OPEN_FUNCTION,itemlist.concat());
 					else
-						AppManager.hideApp(AppConstant.OPEN_FUNCTION);
+						AppManager.hideApp(AppConstant.OPEN_FUNCTION);*/
+					if(itemlist.length>0)
+						UIPopManager.showAlonePopUI(OpenPanel,itemlist.concat());
 				}
 				EventManager.dispatchEvent(FunctionOpenEvent.FUNCTIONOPENID,itemlist);
 			}
@@ -116,10 +120,6 @@
 			}
 		}
 		
-		public static function openFunctionById(id:String):void
-		{
-			AppManager.showApp(AppConstant.OPEN_FUNCTION,id);
-		}
 		
 		public static function checkOpenByLevel(level:int):Boolean
 		{

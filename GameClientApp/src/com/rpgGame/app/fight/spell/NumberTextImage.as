@@ -217,11 +217,8 @@ package com.rpgGame.app.fight.spell
 		{
 			if(_rollItem==null&&_rollerTextArr.length==0)
 			{
-				Starling.juggler.remove(this);
-				isRollerEnd = true;
-				if(_completeHandler!=null)
-					_completeHandler();
-				this.mask = null;
+				stopRun();
+				
 				return ;
 			}
 			if(_rollItem!=null&&_rollItem.isRunOver())
@@ -233,6 +230,16 @@ package com.rpgGame.app.fight.spell
 				_rollItem = _rollerTextArr.pop();
 			if(_rollItem!=null)
 				_rollItem.run();
+		}
+		
+		public function stopRun(iscall:Boolean=true):void
+		{
+			if(Starling.juggler.contains(this))
+				Starling.juggler.remove(this);
+			isRollerEnd = true;
+			if(_completeHandler!=null)
+				_completeHandler();
+			this.mask = null;
 		}
 	}
 }
