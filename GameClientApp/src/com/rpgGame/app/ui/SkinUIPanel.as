@@ -327,6 +327,8 @@ package com.rpgGame.app.ui
 		public function hide() : void
 		{
 			_isSHowing = false;
+			if(_model)
+				UIModel.instence.switchModel(this,false,_blackType);
 			preHide();
 			appinfo ? dispatchEventWith(Event.CLOSE) : this.removeFromParent();
 		}

@@ -1,6 +1,7 @@
 package com.rpgGame.app.ui.tips
 {
 	import com.gameClient.utils.HashMap;
+	import com.rpgGame.app.manager.HunYinManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.goods.RoleEquipmentManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -193,7 +194,7 @@ package com.rpgGame.app.ui.tips
 			if(_itemInfo.qItem.q_type==GoodsType.EQUIPMENT2&&_itemInfo.qItem.q_location==5)
 			{
 				var info2:Q_advance_wedding=JieHunJieZiData.getModByLv(Mgr.hunyinMgr.JieZiLv);
-				attValues1=AttValueConfig.getAttInfoById(info2.q_att_type);
+				attValues1=AttValueConfig.getAttInfoById(HunYinManager.ins.getAttId(info2));
 				_itemTip.numbers.number=FightValueUtil.calFightPowerByAttValue(attValues1,0);
 			}
 			else

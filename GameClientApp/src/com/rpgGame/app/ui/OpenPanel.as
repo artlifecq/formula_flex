@@ -8,7 +8,7 @@ package com.rpgGame.app.ui
 	import com.rpgGame.app.manager.ItemActionManager;
 	import com.rpgGame.app.ui.main.buttons.IOpen;
 	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
-	import com.rpgGame.appModule.systemset.TouchToState;
+	import com.rpgGame.core.app.AppLoadManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
 	import com.rpgGame.coreData.cfg.NewFuncCfgData;
@@ -40,6 +40,7 @@ package com.rpgGame.app.ui
 		private var _effect:InterObject3D;
 		private var _info:FunctionBarInfo;
 		private var _list:Vector.<String>;
+		private static var _isLoading:Boolean=false;
 		public function OpenPanel(list:Vector.<String>):void
 		{
 			_skin = new KaiQi_Skin();
@@ -48,9 +49,28 @@ package com.rpgGame.app.ui
 			_list = list;
 			this.touchable=true;
 			UIModel.instence.switchModel(this,true,2);
+			if(!_isLoading)
+			{
+				var loadUrl : String = ClientConfig.getUI("xingongneng");
+				AppLoadManager.instace().loadByUrl(loadUrl, "", onLoadComplete, onError);
+			}
+		}
+		
+		public function onLoadComplete(_appUrl : String = null) : void
+		{
+			_isLoading = true;
+			onShow();
+		}
+		private function onError(url : String) : void
+		{
+			dispose();
+			_isLoading = false;
+			GameLog.add("应用模块加载出错" + url);
 		}
 		override protected function onShow():void
 		{
+			if(!_isLoading)
+				return ;
 			_idlist = new Vector.<Q_newfunc>();
 			var length:int = _list.length;
 			var qfun:Q_newfunc;
@@ -160,7 +180,7 @@ package com.rpgGame.app.ui
 		
 		private function initView():void
 		{
-			this.visible = true;
+			setViesible(true);
 			if(_effect!=null)
 			{
 				this.removeChild3D(_effect);
@@ -209,7 +229,7 @@ package com.rpgGame.app.ui
 		}
 		protected function runFly():void
 		{
-			this.visible = false;
+			setViesible(false);
 //			var startPos:Point = this.localToGlobal(new Point(0,0));
 			var icon:UIAsset = new UIAsset();
 			icon.x = this.x +m_skin.Icons.x;
@@ -223,10 +243,13 @@ package com.rpgGame.app.ui
 			}
 			var timeobj:Object = {x:endpos.x - 5, y:endpos.y,scaleX:0.3,scaleY:0.3,ease:Bounce.easeOut};
 			ItemActionManager.addTweenDisplay(endpos,icon,timeobj,onTweenFlyComplete);
-			if(_idlist.length ==0)
-			{
-				this.popComplete();
-			}
+			
+		}
+		
+		private function setViesible(value:Boolean):void
+		{
+			m_skin.Icons.visible = value;
+			m_skin.uiName.visible = value;
 		}
 		private function onTweenFlyComplete():void
 		{

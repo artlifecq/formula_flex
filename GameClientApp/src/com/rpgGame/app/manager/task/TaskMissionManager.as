@@ -580,6 +580,12 @@ package com.rpgGame.app.manager.task
 			return false;
 		}
 		
+		
+		/**当前是否有帮会任务*/
+		public static function get haveGuildTask():Boolean
+		{
+			return false;
+		}
 		/**设置环式任务信息*/
 		public static function setTreasuerTaskInfo(value : TaskInfo,taskData:Q_mission_base) : void
 		{

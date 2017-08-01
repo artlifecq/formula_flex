@@ -51,7 +51,8 @@
 						AppManager.showAppNoHide(AppConstant.OPEN_FUNCTION,itemlist.concat());
 					else
 						AppManager.hideApp(AppConstant.OPEN_FUNCTION);*/
-					UIPopManager.showAlonePopUI(OpenPanel,itemlist.concat());
+					if(itemlist.length>0)
+						UIPopManager.showAlonePopUI(OpenPanel,itemlist.concat());
 				}
 				EventManager.dispatchEvent(FunctionOpenEvent.FUNCTIONOPENID,itemlist);
 			}

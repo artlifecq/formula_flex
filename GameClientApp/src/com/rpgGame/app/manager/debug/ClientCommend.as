@@ -409,6 +409,7 @@ package   com.rpgGame.app.manager.debug
 			{
 				var list:Vector.<String> = new Vector.<String>();
 				list.push("2");
+				list.push("10");
 				UIPopManager.showAlonePopUI(OpenPanel,list);
 			});
 		}

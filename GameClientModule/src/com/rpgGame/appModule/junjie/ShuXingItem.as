@@ -2,6 +2,7 @@ package com.rpgGame.appModule.junjie
 {
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.utils.JunJieUtil;
 	
@@ -27,7 +28,7 @@ package com.rpgGame.appModule.junjie
 			_type=type;
 			_value=value;
 			_skin.uiname.styleName=CharAttributeType.getAttrNameUrl(_type);
-			_skin.lbTotal.text=_value.toString();
+			_skin.lbTotal.text=AttValueConfig.getDisAttValueStr(_type,_value);
 //			contrastAttr(_lv);
 		}
 		
@@ -37,7 +38,7 @@ package com.rpgGame.appModule.junjie
 				var has:HashMap=JunJieUtil.getShuXingJiaCheng(lv);
 				var num:int=has.getValue(_type);
 				if(num-_value>0){
-					_skin.lbAdd.text="+"+(num-_value);
+					_skin.lbAdd.text="+"+AttValueConfig.getDisAttValueStr(_type,(num-_value));
 					_skin.uiUp.visible=true;
 					_skin.lbAdd.visible=true;
 				}
