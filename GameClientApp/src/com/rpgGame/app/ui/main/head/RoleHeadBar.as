@@ -229,7 +229,7 @@ package com.rpgGame.app.ui.main.head
 					Mgr.teamMgr.reqCreateTeamWithPlayer(_roleData.serverID);
 					break;
 				case this._skin.btn_more:
-					var menus : Array = MenuUtil.getPlayerTargetMenu(_roleData.serverID.ToGID(), true);
+					var menus : Array = MenuUtil.getPlayerTargetMenu(_roleData.serverID.ToGID(), true,false);
 					MenuManager.showMenu(menus, [_roleData.serverID, _roleData.name], -1, -1, 80);
 					break;
 			}

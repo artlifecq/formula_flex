@@ -9,6 +9,7 @@ package   com.rpgGame.app.manager.debug
 	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.HashMap;
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.fight.spell.FightChangePop;
 	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
 	import com.rpgGame.app.fight.spell.SkillAddPop;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
@@ -399,6 +400,11 @@ package   com.rpgGame.app.manager.debug
 			{
 				FightFaceHelper.useScene=arg[0]==1;
 			});
+			commandList.put( ".power", function (...arg):void
+			{
+				UIPopManager.showAlonePopUI(FightChangePop,[arg[0],arg[1]]);
+			});
+			
 		}
 		
 		

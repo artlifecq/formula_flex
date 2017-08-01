@@ -5,6 +5,7 @@ package  com.rpgGame.appModule.social.team
 	import com.rpgGame.app.ctrl.EnumCustomCoolDown;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.sender.LookSender;
 	import com.rpgGame.app.sender.TeamSender;
 	import com.rpgGame.appModule.social.TimeCountUtil;
 	import com.rpgGame.core.events.TeamEvent;
@@ -120,7 +121,7 @@ package  com.rpgGame.appModule.social.team
 		{
 			if( TeamPlayerListItemExt.curItem != null && TeamPlayerListItemExt.curItem.data != null)
 			{
-				//Mgr.playerMgr.ReqOthersPlayerInfo( TeamPlayerListItemExt.curItem.data.playerid );
+				LookSender.lookOtherPlayer( TeamPlayerListItemExt.curItem.data.playerid );
 			}
 			else	
 			{

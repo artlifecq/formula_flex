@@ -5,6 +5,7 @@ package  com.rpgGame.appModule.social.team
 	import com.rpgGame.app.ctrl.EnumCustomCoolDown;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.sender.LookSender;
 	import com.rpgGame.app.sender.TeamSender;
 	import com.rpgGame.appModule.social.TimeCountUtil;
 	import com.rpgGame.core.events.TeamEvent;
@@ -13,15 +14,14 @@ package  com.rpgGame.appModule.social.team
 	import com.rpgGame.netData.team.bean.MapTeamInfo;
 	
 	import flash.utils.getTimer;
-	import flash.utils.setTimeout;
+	
+	import away3d.events.Event;
 	
 	import feathers.controls.List;
 	import feathers.controls.Scroller;
 	import feathers.data.ListCollection;
 	
 	import org.mokylin.skin.app.shejiao.zudui.Zudui_fujin;
-	
-	import away3d.events.Event;
 
 	
 	
@@ -107,7 +107,7 @@ package  com.rpgGame.appModule.social.team
 		{
 			if(TeamListItemExt.curItem != null)
 			{
-				//Mgr.playerMgr.ReqOthersPlayerInfo( current.Data.captainid );
+				LookSender.lookOtherPlayer( TeamListItemExt.curItem.data.captainid );
 			}
 			else
 			{
