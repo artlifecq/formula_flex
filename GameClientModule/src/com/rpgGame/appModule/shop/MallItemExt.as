@@ -61,8 +61,8 @@ package com.rpgGame.appModule.shop
 				this._skin.grpJiage2.y=48;
 				this._skin.lbXiangou.y=68;
 				//原价
-				this._skin.lbYuanbao.text=_data.data.price+"";
-				this._skin.uiYuanbao.styleName=ItemUtil.getResURL(_data.data.priceType);
+				this._skin.lbYuanbao0.text=_data.data.price+"";
+				this._skin.uiYuanbao0.styleName=ItemUtil.getResURL(_data.data.priceType);
 				//现价
 				this._skin.lbYuanbao2.text=_data.data.discountPrice+"";
 				this._skin.uiYuanbao2.styleName=ItemUtil.getResURL(_data.data.priceType);

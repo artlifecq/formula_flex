@@ -636,5 +636,11 @@ package com.rpgGame.app.view.icon
 				}
 			}
 		}
+
+		public function get alwayShowCount():Boolean
+		{
+			return _alwayShowCount;
+		}
+
 	}
 }
