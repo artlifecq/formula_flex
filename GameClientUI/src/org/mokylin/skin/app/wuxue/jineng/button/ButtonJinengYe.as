@@ -1,5 +1,6 @@
 package org.mokylin.skin.app.wuxue.jineng.button
 {
+	import feathers.controls.text.Fontter;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
@@ -9,7 +10,7 @@ package org.mokylin.skin.app.wuxue.jineng.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class ItemBg extends feathers.controls.StateSkin
+	public class ButtonJinengYe extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -22,13 +23,11 @@ package org.mokylin.skin.app.wuxue.jineng.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function ItemBg()
+		public function ButtonJinengYe()
 		{
 			super();
 			
 			this.currentState = "upAndSelected";
-			this.height = 73;
-			this.width = 237;
 			this.elementsContent = [];
 			
 			states = {
@@ -40,7 +39,12 @@ package org.mokylin.skin.app.wuxue.jineng.button
 						,
 						{target:"labelDisplay",
 							name:"color",
-							value:0xFFFFFF
+							value:0xEAEABC
+						}
+						,
+						{target:"labelDisplay",
+							name:"nativeFilters",
+							value:Fontter.filterObj["textFilterBlackGreen"]
 						}
 						,
 						{target:"labelDisplay",
@@ -49,12 +53,12 @@ package org.mokylin.skin.app.wuxue.jineng.button
 						}
 					]
 			};
-			skinNames={"down":"ui/app/wuxue/jineng/xuanzhong.png",
-			"downAndSelected":"ui/app/wuxue/jineng/xuanzhong.png",
-			"hover":"ui/app/wuxue/jineng/xuanzhong.png",
-			"overAndSelected":"ui/app/wuxue/jineng/xuanzhong.png",
-			"up":"ui/app/wuxue/jineng/xuanzhong.png",
-			"upAndSelected":"ui/app/wuxue/jineng/xuanzhong.png"};
+			skinNames={"down":"ui/app/wuxue/jineng/button/jinengYe/down.png",
+			"downAndSelected":"ui/app/wuxue/jineng/button/jinengYe/select.png",
+			"hover":"ui/app/wuxue/jineng/button/jinengYe/over.png",
+			"hoverAndSelected":"ui/app/wuxue/jineng/button/jinengYe/select.png",
+			"up":"ui/app/wuxue/jineng/button/jinengYe/up.png",
+			"upAndSelected":"ui/app/wuxue/jineng/button/jinengYe/select.png"};
 		}
 
 
@@ -79,7 +83,8 @@ package org.mokylin.skin.app.wuxue.jineng.button
 			temp.right = 0;
 			temp.text = "";
 			temp.textAlign = "center";
-			temp.color = 0xFFFFFF;
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.top = 0;
 			temp.verticalAlign = "middle";
 			return temp;

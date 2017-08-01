@@ -3,10 +3,12 @@ package org.mokylin.skin.common
 	import feathers.data.ListCollection;
 	import feathers.controls.Button;
 	import feathers.controls.List;
+	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.TabBar;
 	import feathers.controls.UIAsset;
 	import feathers.layout.HorizontalLayout;
+	import org.mokylin.skin.common.TongYongTanKuang_bg;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
 	import org.mokylin.skin.component.list.ListSkin1;
 	import org.mokylin.skin.component.tabbar.TabBarSkin_pack;
@@ -21,7 +23,7 @@ package org.mokylin.skin.common
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var bg:feathers.controls.UIAsset;
+		public var bg:feathers.controls.SkinnableContainer;
 
 		public var btnClose:feathers.controls.Button;
 
@@ -38,8 +40,6 @@ package org.mokylin.skin.common
 			super();
 			
 			this.currentState = "normal";
-			this.height = 561;
-			this.width = 337;
 			this.elementsContent = [bg_i(),__panel_ziriSkin_UIAsset1_i(),btnClose_i(),tab_zizhi_i(),msg_list_i(),__panel_ziriSkin_UIAsset2_i()];
 			
 			states = {
@@ -87,13 +87,14 @@ package org.mokylin.skin.common
 			return temp;
 		}
 
-		private function bg_i():feathers.controls.UIAsset
+		private function bg_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
 			temp.height = 581;
-			temp.styleName = "ui/common/background/erji_kuang.png";
+			var skin:StateSkin = new org.mokylin.skin.common.TongYongTanKuang_bg()
+			temp.skin = skin
 			temp.width = 337;
 			temp.x = 0;
 			temp.y = 0;

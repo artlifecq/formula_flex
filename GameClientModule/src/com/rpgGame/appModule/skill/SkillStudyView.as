@@ -3,9 +3,7 @@ package com.rpgGame.appModule.skill
 	import com.rpgGame.app.manager.SpellManager;
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.ui.tab.ViewUI;
-	import com.rpgGame.appModule.vip.RewardMarkCtrl;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.SpellEvent;
@@ -46,10 +44,10 @@ package com.rpgGame.appModule.skill
 		private var _skin:jineng_Skin;
 		private var _skillContainer:Sprite;
 		
-		private var _jobTitle1:Title_Skin;
-		private var _jobTitle2:Title_Skin;
-		private var _jobTl1:Sprite;
-		private var _jobTl2:Sprite;
+//		private var _jobTitle1:Title_Skin;
+//		private var _jobTitle2:Title_Skin;
+//		private var _jobTl1:Sprite;
+//		private var _jobTl2:Sprite;
 		private var _lastSp:Sprite;
 		private var selectedItem:SkillItem;
 		
@@ -72,21 +70,21 @@ package com.rpgGame.appModule.skill
 		private function initView():void
 		{
 			_skillContainer=new Sprite();
-			this._skin.vs_bar.width=550;
-			this._skin.vs_bar.x=20;
-			this._skin.vs_bar.scrollBarDisplayMode = ScrollBarDisplayMode.ALWAYS_VISIBLE;
+			this._skin.vs_bar.width=520;
+			this._skin.vs_bar.x=25;
+			this._skin.vs_bar.scrollBarDisplayMode = ScrollBarDisplayMode.FIXED_FLOAT;
 			this._skin.vs_bar.horizontalScrollPolicy=ScrollPolicy.OFF;
 			
-			_jobTitle1=new Title_Skin();
-			_jobTitle2=new Title_Skin();
-			_jobTitle2.labelDisplay.text=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT13);
-			_jobTl1=_jobTitle1.toSprite();
-			_jobTl2=_jobTitle2.toSprite();
-			_skillContainer.addChild(_jobTl1);
-			_skillContainer.addChild(_jobTl2);
+//			_jobTitle1=new Title_Skin();
+//			_jobTitle2=new Title_Skin();
+//			_jobTitle2.labelDisplay.text=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT13);
+//			_jobTl1=_skin.grp_name1.toSprite();
+//			_jobTl2=_jobTitle2.toSprite();
+			_skillContainer.addChild(_skin.grp_name1);
+			_skillContainer.addChild(_skin.grp_name2);
 			skillUpgrade=new SkillUpgradeView(_skin.shengji.skin as jineng_shengji,this);
 			skillRise=new SkillRiseView(_skin.jinjie.skin as jineng_jinjie,this);
-			
+			_skin.grp_name1.y=0;
 			var skillNum:int;
 			var job:int=MainRoleManager.actorInfo.job;
 			var item:SkillItem;
@@ -108,10 +106,10 @@ package com.rpgGame.appModule.skill
 					data=list[i];
 				}
 				item.updateItem(data,skillInfo);
-				item.y=row*(item.height+10)+40;
+				item.y=row*(item.height+5)+25;
 				_skillContainer.addChild(item);
 				if(i%2==0){
-					item.x=10;
+					item.x=25;
 				}else{
 					item.x=item.width+30;
 				}
@@ -120,7 +118,7 @@ package com.rpgGame.appModule.skill
 				}
 			}
 			row++;
-			_jobTl2.y=row*(item.height+10)+40;
+			_skin.grp_name2.y=row*(item.height+5)+25;
 			
 			_skin.jinjie.visible=false;
 			list=SpellDataManager.getBasicSkills(JobEnum.ROLE_0_TYPE);
@@ -135,16 +133,16 @@ package com.rpgGame.appModule.skill
 					data=list[i];
 				}
 				item.updateItem(data,skillInfo);
-				item.y=row*(item.height+10)+_jobTl2.y+40;
+				item.y=row*(item.height+10)+_skin.grp_name2.y+25;
 				_skillContainer.addChild(item);
 				if(i%2==0){
-					item.x=10;
+					item.x=25;
 				}else{
 					item.x=item.width+30;
 				}
 			}
 			_lastSp=new Sprite();
-			_lastSp.y=item.y+item.height+40;
+			_lastSp.y=item.y+item.height+5;
 			_skillContainer.addChild(_lastSp);
 			this._skin.vs_bar.addChild(_skillContainer);
 			

@@ -23,7 +23,7 @@ package org.mokylin.skin.common
 			this.currentState = "normal";
 			this.height = 264;
 			this.width = 326;
-			this.elementsContent = [bg_i()];
+			this.elementsContent = [__TongYongTanKuang_bg2_UIAsset1_i(),bg_i()];
 			
 			states = {
 			};
@@ -31,15 +31,28 @@ package org.mokylin.skin.common
 		}
 
 
+		//==========================================================================
+		//                                定义成员方法
+		//==========================================================================
+		private function __TongYongTanKuang_bg2_UIAsset1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.bottom = 0;
+			temp.left = 0;
+			temp.right = 0;
+			temp.styleName = "ui/common/background/tongyong_di.png";
+			temp.top = 37;
+			return temp;
+		}
+
 		private function bg_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg = temp;
 			temp.name = "bg";
-			temp.bottom = 0;
 			temp.left = 0;
 			temp.right = 0;
-			temp.styleName = "ui/common/background/erji_kuang.png";
+			temp.styleName = "ui/common/background/tongyong_4.png";
 			temp.top = 0;
 			return temp;
 		}
