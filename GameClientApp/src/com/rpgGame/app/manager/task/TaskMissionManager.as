@@ -426,6 +426,15 @@ package com.rpgGame.app.manager.task
 			return 0;
 		}
 		
+		/**是否主线任务有过跳跃点*/
+		public static function isMainTaskJump():int
+		{
+			if(mainTaskData!=null&&mainTaskData.q_jump_id>0)
+			{
+				return mainTaskData.q_jump_id
+			}
+			return 0;
+		}
 		/**判定是否是主线任务怪*/
 		public static function isMainTaskMonster(mid:int):Boolean
 		{
@@ -947,6 +956,25 @@ package com.rpgGame.app.manager.task
 						return true;
 					}
 				}
+			}
+			
+			return false;
+		}
+		
+		/**判定是否是任意任务怪*/
+		public static function isWillTaskMonster(mid:int):Boolean
+		{
+			if(isTaskMonster(mid,TaskType.MAINTYPE_MAINTASK))
+			{
+				return true;
+			}
+			if(isTaskMonster(mid,TaskType.MAINTYPE_DAILYTASK))
+			{
+				return true;
+			}
+			if(isTaskMonster(mid,TaskType.MAINTYPE_TREASUREBOX))
+			{
+				return true;
 			}
 			
 			return false;

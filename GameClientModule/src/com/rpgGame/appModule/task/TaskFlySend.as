@@ -3,10 +3,12 @@ package com.rpgGame.appModule.task
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_mission_base;
+	import com.rpgGame.coreData.type.TaskType;
 	
 	import gs.TweenLite;
 	
@@ -30,36 +32,10 @@ package com.rpgGame.appModule.task
 			_skin=new AlertSend();
 			super(_skin);
 		}
-		private var taskType:int;
-		private var mapid:int=0;
-		private var sendX:int=0;
-		private var sendY:int=0;
-		private var sendKey:Boolean=false;
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
-			sendKey=false;
-			
-			var taskModelId:int=int(data);
-			var taskData:Q_mission_base=TaskMissionCfgData.getTaskByID(taskModelId);
-			if(taskData)
-			{
-				var pathing:String=taskData.q_pathing;
-				var pathArr:Array=pathing.split(",");
-				if(pathArr.length==3)
-				{
-					super.show(data,openTable,parentContiner);
-					taskType=taskData.q_mission_mainType;
-					mapid=int(pathArr[0]);
-					sendX=int(pathArr[1]);
-					sendY=int(pathArr[2]);
-					sendKey=true;
-					setTime(5);
-				}
-			
-			}
-			
-			
-			//TweenLite.delayedCall(3, hide);
+			super.show(data,openTable,parentContiner);
+			setTime(5);
 		}
 		override public function hide():void
 		{
@@ -103,13 +79,17 @@ package com.rpgGame.appModule.task
 		}
 		private function send():void
 		{
-			if(sendKey)
+			hide();
+			if(TaskMissionManager.getMainTaskIsFinish()&&TaskMissionManager.getMainTaskHaveNpc())
 			{
-				TaskMissionManager.flyTaskType=taskType;
-				SceneSender.sceneMapTransport(mapid, sendX,sendY,25,false,null,1);
+				TaskUtil.npcTaskFly(TaskMissionManager.getMainTaskNpcAreaId(),TaskType.MAINTYPE_MAINTASK);
+			}
+			else
+			{
+				var postPath:Array=TaskMissionManager.getPathingByType(TaskType.MAINTYPE_MAINTASK,0);
+				TaskUtil.postTaskFly(postPath,TaskType.MAINTYPE_MAINTASK);
 			}
 			
-			hide();
 		}
 	}
 }

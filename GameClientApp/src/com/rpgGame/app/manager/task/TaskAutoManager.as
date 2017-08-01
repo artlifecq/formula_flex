@@ -192,10 +192,10 @@ package com.rpgGame.app.manager.task
 
 		private function onUpdate(force : Boolean = false) : void
 		{
-			
+			techState();
 			if (!_isTaskRunning&&!_isOtherTaskRunning)
 			{
-				techState();
+				
 				return;
 			}
 			if (_isBroken)
@@ -211,39 +211,45 @@ package com.rpgGame.app.manager.task
 			
 		}
 		
-		
+		public var actTaskMonster:Boolean=false;
 		private var _techSta:int=0;
 		private function techState():void
 		{
 			if(testStopKey)
 				return;
+			if ((_isTaskRunning||_isOtherTaskRunning)&&!MainRoleManager.actor.stateMachine.isIdle)
+				return;
 			if(MainRoleManager.actorInfo.totalStat.level>AUTOLVE)
 				return;
 			if(MapDataManager.getMapInfo(MainRoleManager.actorInfo.mapID).mapType!=EnumMapType.MAP_TYPE_NORMAL)
 				return;
-			if(MainRoleManager.actor.stateMachine.isIdle||(TrusteeshipManager.getInstance().isAutoing))//站着的时候拉，挂机的时候也拉
-			{
-				if(TaskMissionManager.treasuerCheck&&TaskMissionManager.haveTreasuerTask)
-				{
-					if((getTimer()-_techSta)>=AUTOTREASEUER)
-					{
-						_techSta=getTimer();
-						startOtherTaskAuto(TaskType.MAINTYPE_TREASUREBOX);
-					}
-				}
-				else if(TaskMissionManager.haveMainTask)
-				{
-					if((getTimer()-_techSta)>=AUTOMAIN)
-					{
-						_techSta=getTimer();
-						startTaskAuto();
-					}
-					
-				}
-			}
-			else
+			if(actTaskMonster)//杀任务怪的时候不拉
 			{
 				_techSta=getTimer();
+				actTaskMonster=false;
+				return;
+			}
+			if(!MainRoleManager.actor.stateMachine.isIdle&&!TrusteeshipManager.getInstance().isAutoing)//没有站着且不是挂机的时候不拉
+			{
+				_techSta=getTimer();
+				return;
+			}
+			if(TaskMissionManager.treasuerCheck&&TaskMissionManager.haveTreasuerTask)
+			{
+				if((getTimer()-_techSta)>=AUTOTREASEUER)
+				{
+					_techSta=getTimer();
+					startOtherTaskAuto(TaskType.MAINTYPE_TREASUREBOX);
+				}
+			}
+			else if(TaskMissionManager.haveMainTask)
+			{
+				if((getTimer()-_techSta)>=AUTOMAIN)
+				{
+					_techSta=getTimer();
+					startTaskAuto();
+				}
+				
 			}
 		}
 		

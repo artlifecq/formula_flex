@@ -24,7 +24,7 @@ package  com.rpgGame.app.graphics.decor
 		
 		private var offsetY:int = -DecorCtrl.CONTAINER_HEIGHT;
 		private var offsetX:int = 0;
-		
+		private var _totalH:int=0;
 		public function SortLayer( sourceContainer:DisplayObjectContainer, type:int )
 		{
 			_sourceContainer = sourceContainer;
@@ -158,6 +158,7 @@ package  com.rpgGame.app.graphics.decor
 			var disH:int;
 			var offX:int;
 			var offY:int;
+			_totalH=0;
 			if ( _type ==LAYOUT_U )
 			{
 				offY = offsetY;
@@ -169,6 +170,7 @@ package  com.rpgGame.app.graphics.decor
 					offY -= display.height + gap;
 					display.y = offY;
 				}
+				_totalH=-offY;
 			}
 			else if ( _type ==LAYOUT_RB )
 			{
@@ -207,11 +209,18 @@ package  com.rpgGame.app.graphics.decor
 				}
 			}
 		}
+
+		public function get totalH():int
+		{
+			return _totalH;
+		}
+
 	}
 }
 
  
 import flash.geom.Point;
+
 import starling.display.DisplayObject;
 
 internal class SortObject

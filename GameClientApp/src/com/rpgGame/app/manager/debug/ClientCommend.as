@@ -52,6 +52,8 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.info.move.RoleMoveInfo;
+	import com.rpgGame.coreData.role.GirlPetData;
+	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
@@ -60,6 +62,7 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
 	import com.rpgGame.netData.backpack.bean.TempItemInfo;
 	import com.rpgGame.netData.fight.message.SCBuffSkillMessage;
+	import com.rpgGame.netData.map.bean.PetInfo;
 	import com.rpgGame.netData.player.message.SCNonagePromptMessage;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
 	import com.rpgGame.netData.structs.Position;
@@ -76,6 +79,7 @@ package   com.rpgGame.app.manager.debug
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
+	import org.game.netCore.data.long;
 	import org.game.netCore.net.MessageMgr;
 	
 	
@@ -298,17 +302,16 @@ package   com.rpgGame.app.manager.debug
 			commandList.put( ".pet", function (...arg):void
 			{
 				AppManager.showApp(AppConstant.PET_PANLE);
-				//				var mod:int = arg[0];
-				//				
-				//				var petInfo:PetInfo=new PetInfo();
-				//				petInfo.petId=new long(9999);
-				//				petInfo.ownerId=(MainRoleManager.actor.data as HeroData).serverID;
-				//				petInfo.petModelId=mod;
-				//				petInfo.x=MainRoleManager.actor.pos.x;
-				//				petInfo.y=-MainRoleManager.actor.pos.y;
-				//				var data:GirlPetData=new GirlPetData();
-				//				data.setServerData(petInfo);
-				//				SceneRoleManager.getInstance().createGirlPet(data);
+//				var mod:int = arg[0];				
+//				var petInfo:PetInfo=new PetInfo();
+//				petInfo.petId=new long(9999);
+//				petInfo.ownerId=(MainRoleManager.actor.data as HeroData).serverID;
+//				petInfo.petModelId=mod;
+//				petInfo.x=MainRoleManager.actor.pos.x;
+//				petInfo.y=MainRoleManager.actor.pos.y;
+//				var data:GirlPetData=new GirlPetData();
+//				data.setServerData(petInfo);
+//				SceneRoleManager.getInstance().createGirlPet(data);
 			});
 			commandList.put( ".sset", function (...arg):void
 			{
@@ -411,6 +414,10 @@ package   com.rpgGame.app.manager.debug
 				list.push("2");
 				list.push("10");
 				UIPopManager.showAlonePopUI(OpenPanel,list);
+			});
+			commandList.put( ".hsort", function (...arg):void
+			{
+				HeadFace(MainRoleManager.actor.headFace).sort(); 
 			});
 		}
 		

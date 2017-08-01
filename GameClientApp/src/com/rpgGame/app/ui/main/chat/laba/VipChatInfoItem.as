@@ -50,7 +50,7 @@ package com.rpgGame.app.ui.main.chat.laba
 			_richText = new RichTextArea3D( 365, 70,ColorUtils.getDefaultStrokeFilter() );
 			_richText.setConfig(RichTextCustomUtil.getChatUnitConfigVec());
 			_richText.x = 33;
-			_richText.y = 0;
+			_richText.y = 4;
 			_richText.wordWrap = false;
 			_richText.multiline = false;
 			_richText.defaultTextFormat = defaultFormat;
@@ -89,6 +89,7 @@ package com.rpgGame.app.ui.main.chat.laba
 			_ico.y = $_txtLineMetrics.height - $_txtLineMetrics.descent - 12;*/
 			_totalHeight = _richText.textHeight;
 			_richText.setSize(_richText.textWidth+10,_richText.height);
+			_richText.y=4;
 		}
 		
 		private function updateShow(message:String):void

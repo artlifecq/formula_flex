@@ -14,7 +14,7 @@ package com.rpgGame.coreData.clientConfig
 	{
 		 /**  编号 */
 		public var q_id:int;
-		 /**  城池类型（1卫城 2王城） */
+		 /**  城池类型（1卫城 2王城 3皇城） */
 		public var q_type:int;
 		 /**  城池名称 */
 		public var q_name:String;
@@ -22,10 +22,14 @@ package com.rpgGame.coreData.clientConfig
 		public var q_rewards1:String;
 		 /**  每日占领福利（官员） */
 		public var q_rewards2:String;
+		 /**  每日服务器奖励 */
+		public var q_rewards3:String;
 		 /**  Tips中展示官员奖励 */
 		public var q_tipsaward1:String;
 		 /**  Tips中展示帮众奖励 */
 		public var q_tipsaward2:String;
+		 /**  Tips中展示服务器奖励 */
+		public var q_tipsaward3:String;
 		 /**  参战奖励 */
 		public var q_reward3:String;
 		 /**  进攻奖励 */

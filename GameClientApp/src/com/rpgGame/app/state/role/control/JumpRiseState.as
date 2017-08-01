@@ -65,7 +65,7 @@ package com.rpgGame.app.state.role.control
 		{
 			if (_machine && !_machine.isInPool)
 			{
-				
+				(_machine.owner as SceneRole).isJump=true;//用于跳的时候不用半透明
 				var jumpHeight : int = _stateReference.isSecondJump ? SECOND_JUMP_HEIGHT : JUMP_HEIGHT;
 				var totalTime : int = _stateReference.totalTime;
 				if(_destPoint)//有目的点的跳跃位移也停掉  缓动改变位置
@@ -143,6 +143,7 @@ package com.rpgGame.app.state.role.control
 		{Lyt.a("++++跳完了：");
 			if (_machine && !_machine.isInPool)
 			{
+				(_machine.owner as SceneRole).isJump=false;
 				(_machine.owner as SceneRole).offsetZ = 0;
 				/*if(_destPoint)
 				{
