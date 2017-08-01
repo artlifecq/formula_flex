@@ -407,6 +407,10 @@ package   com.rpgGame.app.manager.debug
 			{
 				HeadBloodBar.isShowText=!HeadBloodBar.isShowText;
 			});
+			commandList.put( ".hsort", function (...arg):void
+			{
+				HeadFace(MainRoleManager.actor.headFace).sort(); 
+			});
 		}
 		
 		

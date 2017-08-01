@@ -44,6 +44,8 @@ package com.rpgGame.app.fight.spell
 	
 	import away3d.pathFinding.DistrictWithPath;
 	
+	import feathers.core.IFeathersControl;
+	
 	import gameEngine2D.PolyUtil;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -159,6 +161,15 @@ package com.rpgGame.app.fight.spell
 			_autoAtkNearRole = autoAtkNearRole;
             var info : HeroData = MainRoleManager.actorInfo;
 			var caseState : int = caseSpell(caseInfo, true, ignoreLock);
+			//三连击释放失败
+			if (CASE_STATE_FAIL==caseState) 
+			{
+				//把动作切换为战斗待机状态
+				if (TrusteeshipManager.getInstance().tripleSkillCtrl.isLockSkill(caseInfo.spellData.q_skillID)) 
+				{
+					MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_PREWAR, null, false, false, [RoleStateType.CONTROL_WALK_MOVE]);
+				}
+			}
 			if (!caseInfo.caseSpellData)
 				return false;
             if (caseInfo.caseSpellData.q_need_mp > info.totalStat.mp) {
