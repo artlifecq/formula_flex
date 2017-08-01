@@ -110,7 +110,7 @@ package com.rpgGame.app.graphics
 		private var _moodMC : UIMovieClip;
 		
 		/**称号*/
-		private var _title : InterObject3D;
+		private var _title : HeadFaceEffect;
 		
 		/**护宝称号*/
 		private var _huabotitle : InterObject3D;
@@ -1270,23 +1270,27 @@ package com.rpgGame.app.graphics
 			{
 				if (_title)
 				{
-					_title.removeFromParent();
+					this.deCtrl.removeTop(_title)
+					_title.dispose();
 					_title = null;
 				}
-				_title = new InterObject3D();
+				_title = new HeadFaceEffect();
 				//				var titleData : TitleTreeData = TitleCfgData.titleHM.getValue(titleID);
 				var effName:String=JunJieData.getEffById(titleID);
-				var rud:RenderParamData3D = new RenderParamData3D(RenderUnitID.JUNJIE, RenderUnitType.JUNJIE, ClientConfig.getEffect(effName));
-				_title.addRenderUnitWith(rud, 0);
+				_title.playEffect(170,65,ClientConfig.getEffect(effName),0,65,0);
+				//var rud:RenderParamData3D = new RenderParamData3D(RenderUnitID.JUNJIE, RenderUnitType.JUNJIE, ClientConfig.getEffect(effName));
+				//_title.addRenderUnitWith(rud, 0);
 				//				this.addChild(_title);
 				this.deCtrl.addTop(_title,DecorCtrl.TOP_CHENGHAO);
-				_title.start();
-			}
+				//_title.start();
+			} 
 			else
 			{
 				if (_title)
 				{
-					_title.removeFromParent();
+					this.deCtrl.removeTop(_title);
+					_title.dispose();
+					//_title.removeFromParent();
 					_title = null;
 				}
 			}
@@ -1650,6 +1654,14 @@ package com.rpgGame.app.graphics
 					deCtrl.sortTop();
 				}
 			}
+		}
+		public function sort():void
+		{
+			deCtrl.sortTop();
+		}
+		override public function get height():Number
+		{
+			return deCtrl.topHeight;
 		}
 	}
 }
