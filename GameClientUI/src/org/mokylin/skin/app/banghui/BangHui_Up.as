@@ -54,7 +54,7 @@ package org.mokylin.skin.app.banghui
 			super();
 			
 			this.currentState = "normal";
-			this.height = 600;
+			this.height = 601;
 			this.width = 956;
 			this.elementsContent = [__BangHui_Up_UIAsset2_i(),__BangHui_Up_UIAsset3_i(),__BangHui_Up_UIAsset4_i(),__BangHui_Up_UIAsset5_i(),__BangHui_Up_UIAsset6_i(),__BangHui_Up_UIAsset7_i(),__BangHui_Up_UIAsset8_i(),__BangHui_Up_UIAsset9_i(),__BangHui_Up_UIAsset10_i(),__BangHui_Up_UIAsset11_i(),__BangHui_Up_Group1_i(),lbMsg1_i(),lbMsg2_i(),btnRenwu_i(),btnZhengba_i(),btnJuanxian_i(),proJindu_i(),lbJindu_i(),__BangHui_Up_Label1_i(),lbBanhuiZhanli_i(),lbBanhuiDengji_i(),__BangHui_Up_Label2_i(),btnUp_i(),imgmax_i()];
 			
@@ -71,7 +71,7 @@ package org.mokylin.skin.app.banghui
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 57;
-			temp.y = 502;
+			temp.y = 496;
 			temp.elementsContent = [__BangHui_Up_UIAsset12_i(),__BangHui_Up_UIAsset13_i(),__BangHui_Up_UIAsset14_i()];
 			return temp;
 		}
@@ -82,8 +82,8 @@ package org.mokylin.skin.app.banghui
 			temp.text = "帮派战力：";
 			temp.color = 0xD2CA78;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 309;
-			temp.y = 545;
+			temp.x = 307;
+			temp.y = 551;
 			return temp;
 		}
 
@@ -93,8 +93,8 @@ package org.mokylin.skin.app.banghui
 			temp.text = "帮派等级：";
 			temp.color = 0xD2CA78;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 461;
-			temp.y = 545;
+			temp.x = 459;
+			temp.y = 551;
 			return temp;
 		}
 
@@ -103,7 +103,7 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/banghui/itembg1.png";
 			temp.x = 69;
-			temp.y = 313;
+			temp.y = 312;
 			return temp;
 		}
 
@@ -112,7 +112,7 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/banghui/word/xiajitequan.png";
 			temp.x = 127;
-			temp.y = 316;
+			temp.y = 315;
 			return temp;
 		}
 
@@ -148,8 +148,8 @@ package org.mokylin.skin.app.banghui
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/big_bg/banghui/bg3.png";
-			temp.x = 290;
-			temp.y = 86;
+			temp.x = 291;
+			temp.y = 59;
 			return temp;
 		}
 
@@ -174,7 +174,8 @@ package org.mokylin.skin.app.banghui
 		private function __BangHui_Up_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/banghui/titlebg1.png";
+			temp.styleName = "ui/common/titilebg/headbg1.png";
+			temp.width = 261;
 			temp.x = 28;
 			temp.y = 91;
 			return temp;
@@ -196,7 +197,7 @@ package org.mokylin.skin.app.banghui
 			temp.styleName = "ui/app/banghui/kuang2.png";
 			temp.width = 240;
 			temp.x = 38;
-			temp.y = 123;
+			temp.y = 122;
 			return temp;
 		}
 
@@ -205,7 +206,7 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/banghui/itembg1.png";
 			temp.x = 69;
-			temp.y = 132;
+			temp.y = 131;
 			return temp;
 		}
 
@@ -214,7 +215,7 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/banghui/word/dangqiantequan.png";
 			temp.x = 127;
-			temp.y = 135;
+			temp.y = 134;
 			return temp;
 		}
 
@@ -225,7 +226,7 @@ package org.mokylin.skin.app.banghui
 			temp.name = "btnJuanxian";
 			temp.styleClass = org.mokylin.skin.app.banghui.button.ButtonBh_juanxian;
 			temp.x = 203;
-			temp.y = 512;
+			temp.y = 513;
 			return temp;
 		}
 
@@ -236,7 +237,7 @@ package org.mokylin.skin.app.banghui
 			temp.name = "btnRenwu";
 			temp.styleClass = org.mokylin.skin.app.banghui.button.ButtonBh_renwu;
 			temp.x = 37;
-			temp.y = 512;
+			temp.y = 513;
 			return temp;
 		}
 
@@ -245,13 +246,13 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnUp = temp;
 			temp.name = "btnUp";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "升级";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.color = 0xCFC6AE;
-			temp.width = 112;
-			temp.x = 798;
-			temp.y = 541;
+			temp.color = 0xEAEABC;
+			temp.width = 88;
+			temp.x = 815;
+			temp.y = 542;
 			return temp;
 		}
 
@@ -262,7 +263,7 @@ package org.mokylin.skin.app.banghui
 			temp.name = "btnZhengba";
 			temp.styleClass = org.mokylin.skin.app.banghui.button.ButtonBh_zhengba;
 			temp.x = 121;
-			temp.y = 512;
+			temp.y = 513;
 			return temp;
 		}
 
@@ -286,8 +287,8 @@ package org.mokylin.skin.app.banghui
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 81;
-			temp.x = 533;
-			temp.y = 545;
+			temp.x = 531;
+			temp.y = 551;
 			return temp;
 		}
 
@@ -300,8 +301,8 @@ package org.mokylin.skin.app.banghui
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 81;
-			temp.x = 380;
-			temp.y = 545;
+			temp.x = 378;
+			temp.y = 551;
 			return temp;
 		}
 
@@ -315,8 +316,8 @@ package org.mokylin.skin.app.banghui
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 183;
-			temp.x = 517;
-			temp.y = 462;
+			temp.x = 522;
+			temp.y = 466;
 			return temp;
 		}
 
@@ -326,12 +327,12 @@ package org.mokylin.skin.app.banghui
 			lbMsg1 = temp;
 			temp.name = "lbMsg1";
 			temp.height = 146;
-			temp.htmlText = "1.帮派人数可提升至<font color='#5DBD37'>900</font>人";
+			temp.text = "1.帮派人数可提升至900人";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 190;
 			temp.x = 68;
-			temp.y = 162;
+			temp.y = 161;
 			return temp;
 		}
 
@@ -341,12 +342,12 @@ package org.mokylin.skin.app.banghui
 			lbMsg2 = temp;
 			temp.name = "lbMsg2";
 			temp.height = 146;
-			temp.htmlText = "1.帮派人数可提升至<font color='#5DBD37'>900</font>人";
+			temp.text = "1.帮派人数可提升至900人";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 190;
 			temp.x = 64;
-			temp.y = 338;
+			temp.y = 337;
 			return temp;
 		}
 
@@ -357,8 +358,8 @@ package org.mokylin.skin.app.banghui
 			temp.name = "proJindu";
 			temp.styleClass = org.mokylin.skin.app.banghui.ProJindu_Up;
 			temp.value = 50;
-			temp.x = 404;
-			temp.y = 463;
+			temp.x = 409;
+			temp.y = 467;
 			return temp;
 		}
 
