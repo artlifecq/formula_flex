@@ -534,6 +534,9 @@ package com.rpgGame.app.manager.goods
 		public function removeItemByIndex(index:int):ClientItemInfo
 		{
 			var info:ClientItemInfo = getItemInfoByIndex(index);
+			if(!info){
+				return null;
+			}
 			_goodsList[index] = null;
 			if(info.containerID==ItemContainerID.Role){
 				EventManager.dispatchEvent(ItemEvent.UNWEAR_EQUIPITEM,info);//卸载装备
