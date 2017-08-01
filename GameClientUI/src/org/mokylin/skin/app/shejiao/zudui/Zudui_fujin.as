@@ -27,8 +27,6 @@ package org.mokylin.skin.app.shejiao.zudui
 
 		public var btn_shuaixin:feathers.controls.Button;
 
-		public var btn_tianjia:feathers.controls.Button;
-
 		public var sk_head:feathers.controls.SkinnableContainer;
 
 
@@ -42,7 +40,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			this.currentState = "normal";
 			this.height = 429;
 			this.width = 911;
-			this.elementsContent = [btn_shuaixin_i(),btn_chakan_i(),btn_tianjia_i(),btn_shenqing_i(),Duiwu_list_i(),sk_head_i()];
+			this.elementsContent = [btn_shuaixin_i(),btn_chakan_i(),btn_shenqing_i(),Duiwu_list_i(),sk_head_i()];
 			
 			states = {
 			};
@@ -76,7 +74,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
 			temp.color = 0xFFFFFF;
 			temp.width = 90;
-			temp.x = 610;
+			temp.x = 709;
 			temp.y = 393;
 			return temp;
 		}
@@ -107,21 +105,6 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.color = 0xFFFFFF;
 			temp.width = 90;
 			temp.x = 7;
-			temp.y = 393;
-			return temp;
-		}
-
-		private function btn_tianjia_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_tianjia = temp;
-			temp.name = "btn_tianjia";
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.label = "加为队长";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
-			temp.color = 0xFFFFFF;
-			temp.width = 90;
-			temp.x = 709;
 			temp.y = 393;
 			return temp;
 		}

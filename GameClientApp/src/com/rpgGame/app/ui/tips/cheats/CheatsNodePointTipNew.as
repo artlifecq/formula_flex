@@ -382,8 +382,9 @@ package  com.rpgGame.app.ui.tips.cheats
 				startY+=2;
 				//图标。
 				var qStone:Q_item=ItemConfig.getQItemByID(serverData.getStone().itemModelId);
-				_ico.styleName="ui/app/beibao/icons/bianshi/"+qStone.q_default+"/"+qAcu.q_stone_type+".png";
+			
 				stoneIcon.x=this._skin.uiName1.x;
+				_ico.styleName="ui/app/beibao/icons/bianshi/"+qStone.q_default+"/"+qAcu.q_stone_type+".png";
 				stoneIcon.y=startY;
 				this.addChild(stoneIcon);
 				labList.push(stoneIcon);

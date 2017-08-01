@@ -87,6 +87,8 @@ package com.rpgGame.app.ui.main.head
 		
 		private function isCreate(data:BuffData):Boolean
 		{
+			if(data._data.q_effect_type!=1||data._data.q_effect_type!=2)
+				return false;
 			var icon:BuffIcon;
 			var num:int=goodBuffs.length;
 			for(var i:int=0;i<num;i++){

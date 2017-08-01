@@ -98,7 +98,7 @@ package  com.rpgGame.appModule.social.team
 		{
 			_skin.btn_shuaixin.addEventListener( Event.TRIGGERED , OnSearchTeam);
 			_skin.btn_chakan.addEventListener(Event.TRIGGERED , OnViewPlayer);
-			_skin.btn_tianjia.addEventListener(Event.TRIGGERED , OnAddFriend);
+			/*_skin.btn_tianjia.addEventListener(Event.TRIGGERED , OnAddFriend);*/
 			_skin.btn_shenqing.addEventListener(Event.TRIGGERED , OnApplyJoinTeam);
 			
 			Mgr.teamMgr.addEventListener(TeamEvent.GET_MAP_TEAMS , OnGetTeams);

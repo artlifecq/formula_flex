@@ -15,12 +15,16 @@ package com.rpgGame.app.manager.task
 	
 	import app.message.BoolArrayProto;
 	
+	import feathers.controls.Check;
+	
 	import org.game.netCore.data.long;
 
 	public class TaskMissionManager
 	{
 		public static var flyTaskType:int;
 		public static var flyMissionType:int;
+		
+		public static var treasuerCheck :Boolean=false;
 		
 		/**最后完成主线任务id*/
 		private static var _taskModelId: int;
