@@ -1,6 +1,7 @@
 package com.rpgGame.app.ui
 {
 	import com.rpgGame.core.manager.StarlingLayerManager;
+	import com.rpgGame.core.ui.SkinUI;
 	
 	import flash.display.Stage;
 	
@@ -30,7 +31,7 @@ package com.rpgGame.app.ui
 		
 		private function init():void
 		{
-			showModelArray = new Vector.<SkinUIPanel>();
+			showModelArray = new Vector.<SkinUI>();
 			_stage = Starling.current.nativeStage;
 			drawBlack();
 			
@@ -44,7 +45,7 @@ package com.rpgGame.app.ui
 			_bottonPng.x = _topPng.x = (_stage.stageWidth - _topPng.width)/2;
 		}
 		
-		private var showModelArray :Vector.<SkinUIPanel>;
+		private var showModelArray :Vector.<SkinUI>;
 		private static var ins : UIModel;
 		/**模态单例**/
 		public static function get instence():UIModel
@@ -82,7 +83,7 @@ package com.rpgGame.app.ui
 			this.addChild(_bottonPng);
 		}
 		
-		public function switchModel(panel:SkinUIPanel,isadd:Boolean,type:int):void
+		public function switchModel(panel:SkinUI,isadd:Boolean,type:int):void
 		{
 			var index:int = showModelArray.indexOf(panel);
 			if(!isadd)
@@ -122,7 +123,7 @@ package com.rpgGame.app.ui
 			var havePartnerCount:int = 0;
 			for(var i:int = 0;i<length;i++)
 			{
-				if(showModelArray[i].isSHowing)
+				if(showModelArray[i].parent)
 				{
 					havePartnerCount++;
 					break;

@@ -329,5 +329,25 @@ package com.rpgGame.app.manager
 				(role.headFace as HeadFace).updateFuQiTitle(msg.marriageName);
 			}
 		}
+		
+		
+		public function getAttId(qdata:Q_advance_wedding):int
+		{
+			var attTypes:Array = JSONUtil.decode(qdata.q_att_type);
+			var id:int ;
+			var length:int = attTypes.length;
+			var job:int = MainRoleManager.actorInfo.job;
+			if(job == 3)
+				job = 2;
+			for(var i:int=0;i<length;i++)
+			{
+				if(attTypes[i][0]==job)
+				{
+					id = attTypes[i][1];
+					break;
+				}
+			}
+			return id;
+		}
 	}
 }
