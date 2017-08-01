@@ -126,7 +126,7 @@
                 _local1.functonSet.showFamilyTitle = FunctionSetManager.showFamilyTitle;
                 _local1.functonSet.showGuildTitle = FunctionSetManager.showGuildTitle;
                 _local1.functonSet.showRoleTitle = FunctionSetManager.showRoleTitle;
-            };
+            }
             return _local1.functonSet;
         }
 
