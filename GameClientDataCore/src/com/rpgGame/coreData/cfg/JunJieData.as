@@ -43,9 +43,9 @@ package com.rpgGame.coreData.cfg
 		public static function getShowItemList(starLv:int,num:int):Vector.<int>
 		{
 			var list:Vector.<int>=new Vector.<int>();
-			if((starLv+num)>_maxLv)
+			if((starLv+num)>=_maxLv)
 			{
-				starLv=_maxLv-1-num;
+				starLv=_maxLv-num;
 			}
 			for(var i:int=0;i<num;i++)
 			{
