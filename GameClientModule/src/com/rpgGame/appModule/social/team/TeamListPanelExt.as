@@ -13,7 +13,6 @@ package  com.rpgGame.appModule.social.team
 	import com.rpgGame.netData.team.bean.MapTeamInfo;
 	
 	import flash.utils.getTimer;
-	import flash.utils.setTimeout;
 	
 	import away3d.events.Event;
 	

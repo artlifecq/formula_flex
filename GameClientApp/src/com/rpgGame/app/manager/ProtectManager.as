@@ -58,16 +58,16 @@
             var goodID:int;
             var _local4:int;
             var _local1:int;
-            var _local3:int;
+            var itemID:int;
             var hpGoodsIDs:Vector.<int> = ClientGuaJiCfgData.hpGoodsIDs;
             if (hpGoodsIDs && hpGoodsIDs.length)
             {
-                for each (_local3 in hpGoodsIDs)
+                for each (itemID in hpGoodsIDs)
                 {
-                    _local4 = ItemCfgData.getItemRequireLevel(_local3);
+                    _local4 = ItemCfgData.getItemRequireLevel(itemID);
                     if (MainRoleManager.actorInfo.totalStat.level >= _local4 && _local4 > _local1)
                     {
-						goodID = _local3;
+						goodID = itemID;
                         _local1 = _local4;
                     }
                 }
@@ -81,12 +81,12 @@
             var _local5:Vector.<int> = ClientGuaJiCfgData.mpGoodsIDs;
             if (_local5 && _local5.length)
             {
-                for each (_local3 in _local5)
+                for each (itemID in _local5)
                 {
-                    _local4 = ItemCfgData.getItemRequireLevel(_local3);
+                    _local4 = ItemCfgData.getItemRequireLevel(itemID);
                     if (MainRoleManager.actorInfo.totalStat.level >= _local4 && _local4 > _local1)
                     {
-						goodID = _local3;
+						goodID = itemID;
                         _local1 = _local4;
                     }
                 }

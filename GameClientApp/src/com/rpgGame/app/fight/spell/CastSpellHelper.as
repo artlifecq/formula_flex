@@ -39,8 +39,6 @@ package com.rpgGame.app.fight.spell
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
-	import flash.utils.clearTimeout;
-	import flash.utils.setTimeout;
 	
 	import away3d.pathFinding.DistrictWithPath;
 	
@@ -112,45 +110,16 @@ package com.rpgGame.app.fight.spell
 			
 			return relateSpells[_relateSpellIndex];
 		}
-		private static var _shortIng:Boolean=false;
-		private static var _timeOutId:uint;
-		private static var _timeOutNum:int=0;
+		
 		/**玩家主动放技能优先*/
-		public static function shortcutsTryCaseSpell(spellID : int, ignoreLock : Boolean = false) : Boolean
+		public static function shortcutsTryCaseSpell(spellID : int, ignoreLock : Boolean = false) : void
 		{
-			clearTimeout(_timeOutId);
-			_shortIng=true;
 			var caseInfo : CastSpellInfo = new CastSpellInfo(getSpellData(spellID));
 			var spKey:Boolean=tryCaseSpell(caseInfo, null, false, ignoreLock);
 			if(!spKey)
 			{
-				_timeOutNum++;
-				if(_timeOutNum<=10)
-				{
-					_timeOutId=setTimeout(function():void{shortcutsTryCaseSpell(spellID, ignoreLock);},200);
-				}
-				else
-				{
-					_shortIng=false;
-					_timeOutNum=0;
-				}
+				TrusteeshipManager.getInstance().nextSpell = getSpellData(spellID);
 			}
-			else
-			{
-				_shortIng=false;
-				_timeOutNum=0;
-			}
-			return false
-		}
-			
-		
-		public static function autoTryCaseSpell(caseInfo : CastSpellInfo, roleList : Vector.<SceneRole> = null, autoAtkNearRole : Boolean = false, ignoreLock : Boolean = false) : Boolean
-		{
-			if(!_shortIng)
-			{
-				return tryCaseSpell(caseInfo,roleList,autoAtkNearRole,ignoreLock);
-			}
-			return false;
 		}
 		
 		public static function tryCaseSpell(caseInfo : CastSpellInfo, roleList : Vector.<SceneRole> = null, autoAtkNearRole : Boolean = false, ignoreLock : Boolean = false) : Boolean
@@ -1344,6 +1313,12 @@ package com.rpgGame.app.fight.spell
 			}
 			return castSpell;
 		}
+		
+		public static function checkCanUseSpell(spellData:Q_skill_model):Boolean
+		{
+			return spellData && !SkillCDManager.getInstance().getSkillHasCDTime(spellData) && getspellIsOK(spellData);
+		}
+		
 		/**找一个合适的技能释放。根据优先级*/
 		public static function getSortCastSpell() : Q_skill_model
 		{
@@ -1365,7 +1340,7 @@ package com.rpgGame.app.fight.spell
 					continue;
 				}
 				spellData=MainRoleManager.actorInfo.spellList.getSpell(skillId);
-				if (spellData && !SkillCDManager.getInstance().getSkillHasCDTime(spellData)&&getspellIsOK(spellData))
+				if (spellData && checkCanUseSpell(spellData))
 				{
 					castSpell = spellData;
 					break;
@@ -1482,16 +1457,10 @@ package com.rpgGame.app.fight.spell
 								return false;
 							}
 							break;
-						
 					}
-					
-					
 				}
 			}
 			return isGary;
-			
 		}
-		
-		
 	}
 }

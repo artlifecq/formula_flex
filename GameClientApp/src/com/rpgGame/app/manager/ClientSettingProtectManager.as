@@ -9,11 +9,9 @@
 
     public class ClientSettingProtectManager 
     {
-
         private static var _initedData:Boolean;
         private static var _byteArray:ByteArray;
         private static var _protectSetProto:Object = new Object();
-
 
         public static function initData(byteArray:ByteArray):void
         {
@@ -25,8 +23,8 @@
                 {
                     _protectSetProto.mergeFrom(byteArray);
                     _initedData = true;
-                };
-            };
+                }
+            }
         }
 
         public static function saveToServer():void
@@ -38,7 +36,7 @@
             else
             {
                 _byteArray.clear();
-            };
+            }
             _protectSetProto.writeTo(_byteArray);
             _byteArray.compress();
             MiscSender.reqSetClientOnlyIntConfig(3, _byteArray);
@@ -46,32 +44,32 @@
 
         public static function get toUseGoods():Boolean
         {
-            return (_protectSetProto.toUseGoods);
+            return _protectSetProto.toUseGoods;
         }
 
         public static function get toBuyGoods():Boolean
         {
-            return (_protectSetProto.toBuyGoods);
+            return _protectSetProto.toBuyGoods;
         }
 
         public static function get hpPercentToUseGoods():int
         {
-            return (_protectSetProto.hpPercentToUseGoods);
+            return _protectSetProto.hpPercentToUseGoods;
         }
 
         public static function get mpPercentToUseGoods():int
         {
-            return (_protectSetProto.mpPercentToUseGoods);
+            return _protectSetProto.mpPercentToUseGoods;
         }
 
         public static function get hpGoodsIDToUse():int
         {
-            return (_protectSetProto.hpGoodsIDToUse);
+            return _protectSetProto.hpGoodsIDToUse;
         }
 
         public static function get mpGoodsIDToUse():int
         {
-            return (_protectSetProto.mpGoodsIDToUse);
+            return _protectSetProto.mpGoodsIDToUse;
         }
 
         public static function set toUseGoods(value:Boolean):void
@@ -82,9 +80,9 @@
                 if (_protectSetProto.toUseGoods)
                 {
                     ProtectManager.tryStartTimer();
-                };
+                }
                 saveToServer();
-            };
+            }
         }
 
         public static function set toBuyGoods(value:Boolean):void
@@ -93,7 +91,7 @@
             {
                 _protectSetProto.toBuyGoods = value;
                 saveToServer();
-            };
+            }
         }
 
         public static function set hpPercentToUseGoods(value:int):void
@@ -103,7 +101,7 @@
                 _protectSetProto.hpPercentToUseGoods = value;
                 ProtectManager.tryStartTimer();
                 saveToServer();
-            };
+            }
         }
 
         public static function set mpPercentToUseGoods(value:int):void
@@ -113,7 +111,7 @@
                 _protectSetProto.mpPercentToUseGoods = value;
                 ProtectManager.tryStartTimer();
                 saveToServer();
-            };
+            }
         }
 
         public static function set hpGoodsIDToUse(value:int):void
@@ -156,11 +154,11 @@
                         {
                             _protectSetProto.hpGoodsIDToUse = _local2;
                             break;
-                        };
-                    };
-                };
+                        }
+                    }
+                }
                 _local3 = ClientGuaJiCfgData.mpGoodsIDs;
-                if (((_local3) && (_local3.length)))
+                if (_local3 && _local3.length)
                 {
                     for each (var _local1:int in _local3)
                     {

@@ -30,7 +30,7 @@ package com.rpgGame.app.state.ai
 				if(deaditem!=null&&!ItemCDManager.getInstance().getSkillHasCDTime(deaditem.qItem))//做CD判断
 				{
 					usedealsure=true;
-					setTimeout(function():void{
+					var timeID:uint = setTimeout(function():void{
 						if(MainRoleManager.actor&&MainRoleManager.actor.stateMachine.isDeadState)
 						{
 							SceneSender.reqReviveLocalRole(deaditem.qItem.q_id,1);
