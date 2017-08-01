@@ -92,6 +92,8 @@ package com.rpgGame.app.cmdlistener
 				herodata.guildName = msg.guildName;
 				if(role.headFace is HeadFace)
 					(role.headFace as HeadFace).addAndUpdateGuildName();
+				if(role.headFace is HeadFace)
+					(role.headFace as HeadFace).checkBloodState();
 			}
 		}
 		private function getResGuildChangeMemberType(msg:ResGuildChangeMemberTypeMessage):void

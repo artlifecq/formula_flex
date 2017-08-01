@@ -9,6 +9,7 @@ package com.rpgGame.app.manager.ctrl
 		public function ControlTripleSkill()
 		{
 		}
+		private var _originSkill:int;
 		/**
 		 *三连击技能列表 
 		 */        
@@ -16,6 +17,7 @@ package com.rpgGame.app.manager.ctrl
 		
 		public function setParams(skill:int):void
 		{
+			_originSkill=skill;
 			var qSkill:Q_skill_model=SpellDataManager.getSpellData(skill,SpellManager.getSkillGrade(skill));
 			_skills=null;
 			if (qSkill.q_relate_spells!="") 

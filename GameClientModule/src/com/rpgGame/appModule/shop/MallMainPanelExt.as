@@ -48,11 +48,11 @@ package com.rpgGame.appModule.shop
 		private function init():void
 		{
 			var cell:MallItemExt;
-			var startX:int=300;
-			var startY:int=85;
+			var startX:int=267;
+			var startY:int=145;
 			for (var i:int = 0; i < maxCount; i++) 
 			{
-				cell=new MallItemExt(startX+int(i%3)*225,startY+int(i/3)*150);
+				cell=new MallItemExt(startX+int(i%3)*232,startY+int(i/3)*150);
 				cellList.push(cell);
 				cell.visible=false;
 				this.addChild(cell);

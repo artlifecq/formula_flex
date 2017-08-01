@@ -165,7 +165,26 @@ package com.rpgGame.app.manager.role
 			}
 			
 		}
-
+		
+		/**
+		 * //任务 跨场景寻路 + 有跳跃点
+		 * */
+		public static function walkToSceneAndJump(targetSceneId : int, posx : Number = -1, posy : Number = -1, onArrive : Function = null, spacing : int = 0, data : Object = null,needSprite:Boolean=false) : void
+		{
+			walkToScene(targetSceneId,posx,posy,walkOver,spacing,data,needSprite);
+			function walkOver(_data : *):void
+			{
+				EventManager.dispatchEvent(TaskEvent.AUTO_WALK_STOP);
+				_jumpPash = null;
+				_isAutoJumping = true;
+				_onArrive=onArrive;
+				_data=data;
+			}
+			
+			
+		}
+		
+		
 		/**
 		 * 跨场景寻路
 		 * @param role
@@ -205,6 +224,7 @@ package com.rpgGame.app.manager.role
 						_isAutoFinding = true;
 						trace("auto_SearchPath_CrossScene_Start");
 						_onArrive=onArrive;
+						_data=data;
 						onNextScene(mapID);
 					}
 				}
@@ -571,6 +591,22 @@ package com.rpgGame.app.manager.role
 		private static var _jumpPash:Vector.<Vector3D>;
 		private static var _isAutoJumping : Boolean = false;
 		private static var _jumpPass:Array;
+		
+		/**
+		 *  跨跳跃点走路，不用寻路直接走，策划用于任务
+		 **/
+		public static function jumpWalkToTask(role : SceneRole, pos :Vector.<Vector3D>, spacing : int = 0, data : Object = null, 
+											 onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null,needSprite:Boolean=false) : Boolean
+		{
+			clearJumpPath();
+			_jumpPash = pos;
+			_isAutoJumping = true;
+			_onArrive=onArrive;
+			onNextJump();
+			return true;
+		}
+		
+		
 		/**
 		 *  跨跳跃点寻路
 		 **/
@@ -671,6 +707,11 @@ package com.rpgGame.app.manager.role
 			}
 			if (!_jumpPash || _jumpPash.length==0)
 			{
+				if(_onArrive)
+				{
+					_onArrive(_data);
+				}
+				_onArrive=null;
 				clearJumpPath();
 				return;
 			}
@@ -680,7 +721,7 @@ package com.rpgGame.app.manager.role
 			if (_jumpPash.length == 0)
 			{
 				RoleStateUtil.walkToPos(MainRoleManager.actor, targetPos, 100, _data, _onArrive);
-				_onArrive=null;
+				
 				clearAutoFindPath();
 			}
 			else

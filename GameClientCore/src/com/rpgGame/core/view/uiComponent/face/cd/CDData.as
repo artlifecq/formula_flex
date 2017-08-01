@@ -1,10 +1,68 @@
 package com.rpgGame.core.view.uiComponent.face.cd
 {
+	import com.game.engine3D.core.poolObject.IInstancePoolClass;
+	import com.game.engine3D.core.poolObject.InstancePool;
+	
 	import gs.TweenLite;
 	import gs.easing.Linear;
 
-	public class CDData
+	public class CDData  implements IInstancePoolClass
 	{
+		private static var cdDataPool : InstancePool = new InstancePool("CDData", 20);
+		
+		/**
+		 * 生成一个HeadFace
+		 */
+		public static function create($id:* = null, $onStart:Function = null, $onUpdate:Function = null, $onComplete:Function = null ) : CDData
+		{
+			//利用池生成HeadFace
+			return cdDataPool.createObj(CDData, $id,$onStart,$onUpdate,$onComplete) as CDData;
+		}
+		
+		/**
+		 * @private
+		 * 回收一个HeadFace
+		 * @param headFace
+		 */
+		public static function recycle(cd : CDData) : void
+		{
+			//利用池回收HeadFace
+			cdDataPool.recycleObj(cd);
+		}
+		private var _isDestroyed : Boolean;
+		private var _isDisposed : Boolean;
+		
+		public function get isDestroyed():Boolean
+		{
+			return _isDestroyed;
+		}
+		
+		public function get isInPool():Boolean
+		{
+			return _isDisposed;
+		}
+		
+		public function reSet(parameters : Array) : void
+		{
+			_isDisposed = false;
+			id = parameters[0];
+			_onStartFun =parameters[1];
+			_onUpdateFun = parameters[2];
+			_onCompleteFun = parameters[3];
+		}
+		public function instanceDestroy() : void
+		{
+			putInPool();
+			dispose();
+			_isDestroyed = true;
+		}
+		
+		public function putInPool() : void
+		{
+			dispose();
+			_isDisposed = true;
+		}
+		//========================================================
 		public var id:*;//标识...
 		public var now:Number = 0;//目前时间
 		public var cd:Number = 0; //总CD时间
@@ -20,10 +78,7 @@ package com.rpgGame.core.view.uiComponent.face.cd
 		
 		public function CDData( $id:* = null, $onStart:Function = null, $onUpdate:Function = null, $onComplete:Function = null )
 		{
-			id = $id;
-			_onStartFun = $onStart;
-			_onUpdateFun = $onUpdate;
-			_onCompleteFun = $onComplete;
+			reSet([$id,$onStart,$onUpdate,$onComplete]);
 		}
 		
 		public function dispose():void
@@ -33,6 +88,7 @@ package com.rpgGame.core.view.uiComponent.face.cd
 			_obj = {angle:0};
 			_onUpdateFun = null;
 			_onCompleteFun = null;
+			_onStartFun=null;
 		}
 		
 		public function set startCallBack(value:Function):void

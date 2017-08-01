@@ -110,8 +110,11 @@ package com.rpgGame.app.scene.animator
 				var ribbon:LightningRibbon = _lightList.shift();
 				if(ribbon)
 				{
+					
 					ribbon.stop();
+					ribbon.geometry.dispose();
 					ribbon.dispose();
+					
 					//					SceneManager.scene.gameScene3d.removeChild(ribbon);
 				}
 				//一次销毁两个
@@ -119,7 +122,9 @@ package com.rpgGame.app.scene.animator
 				if(ribbon)
 				{
 					ribbon.stop();
+					ribbon.geometry.dispose();
 					ribbon.dispose();
+					
 					//					SceneManager.scene.gameScene3d.removeChild(ribbon);
 				}
 				if (_lightList.length==0) 
@@ -137,6 +142,7 @@ package com.rpgGame.app.scene.animator
 			for each(var ribbon:LightningRibbon in _lightList)
 			{
 				ribbon.stop();
+				ribbon.geometry.dispose();
 				ribbon.dispose();
 				//				SceneManager.scene.gameScene3d.removeChild(ribbon);
 			}
