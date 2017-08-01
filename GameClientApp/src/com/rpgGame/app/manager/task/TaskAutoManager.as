@@ -5,6 +5,7 @@ package com.rpgGame.app.manager.task
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
+	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.ai.AIStateMachine;
 	import com.rpgGame.core.app.AppDispather;
@@ -17,6 +18,8 @@ package com.rpgGame.app.manager.task
 	import com.rpgGame.coreData.type.AIStateType;
 	import com.rpgGame.coreData.type.TaskType;
 	import com.rpgGame.netData.task.bean.TaskInfo;
+	
+	import flash.utils.getTimer;
 	
 	import gs.TweenLite;
 	
@@ -48,23 +51,32 @@ package com.rpgGame.app.manager.task
 		private var _taskTarget:int=0;
 		private var _otherType:int;
 		public static var AUTOLVE:int=30;
-		public static var AUTOIDE:int=90;
+		public static var AUTOIDE:int=60000;
 		public function TaskAutoManager()
 		{
+			
+			_gTimer = new GameTimer("TaskAutoManager", 500, 0, onUpdate);
+			_isTaskRunning = false;
+			_isOtherTaskRunning =false;
+			_isBroken = false;
+			
+			AppDispather.instance.addEventListener( AppEvent.APP_HIDE, onApphide );
+			EventManager.addEvent(TaskEvent.TASK_CHANGE_MATION,changeMation);
+		}
+		public function setup(role : SceneRole) : void
+		{
+			_stateMachine = new AIStateMachine(role);
+			_gTimer.reset();
+			_gTimer.start();
+			_techSta=getTimer();
 			if(GlobalSheetData.getSettingInfo(511)!=null)
 			{
 				AUTOLVE=GlobalSheetData.getSettingInfo(511).q_int_value;
 			}
 			if(GlobalSheetData.getSettingInfo(512)!=null)
 			{
-				AUTOIDE=GlobalSheetData.getSettingInfo(512).q_int_value*2;
+				AUTOIDE=GlobalSheetData.getSettingInfo(512).q_int_value*1000;
 			}
-			_gTimer = new GameTimer("TaskAutoManager", 500, 0, onUpdate);
-			_isTaskRunning = false;
-			_isOtherTaskRunning =false;
-			_isBroken = false;
-			AppDispather.instance.addEventListener( AppEvent.APP_HIDE, onApphide );
-			EventManager.addEvent(TaskEvent.TASK_CHANGE_MATION,changeMation);
 		}
 		private function onApphide( ev:AppEvent ):void
 		{
@@ -80,12 +92,7 @@ package com.rpgGame.app.manager.task
 				return;
 			setTaskChange();
 		}
-		public function setup(role : SceneRole) : void
-		{
-			_stateMachine = new AIStateMachine(role);
-			_gTimer.reset();
-			_gTimer.start();
-		}
+		
 		public function startSwitchTaskAuto(tar:int=0) : void
 		{
 			if(!_isAutoing)return;
@@ -183,8 +190,10 @@ package com.rpgGame.app.manager.task
 		{
 			
 			if (!_isTaskRunning&&!_isOtherTaskRunning)
+			{
+				techState();
 				return;
-				
+			}	
 			if (_isBroken)
 				return;
 			if (_isTaskRunning)
@@ -195,10 +204,7 @@ package com.rpgGame.app.manager.task
 			{
 				_stateMachine.transition(AIStateType.TASK_OTHER_WALK, null, force);
 			}
-			else
-			{
-				techState();
-			}
+			
 		}
 		
 		
@@ -213,18 +219,24 @@ package com.rpgGame.app.manager.task
 				return;
 			if(MapDataManager.getMapInfo(MainRoleManager.actorInfo.mapID).mapType!=EnumMapType.MAP_TYPE_NORMAL)
 				return;
-			if(MainRoleManager.actor.stateMachine.isIdle)
+			if(MainRoleManager.actor.stateMachine.isIdle||(TrusteeshipManager.getInstance().isAutoing))//站着的时候拉，挂机的时候也拉
 			{
-				_techSta++;
-				if(_techSta>=AUTOIDE)
+				if((getTimer()-_techSta)>=AUTOIDE)
 				{
-					_techSta=0;
-					startTaskAuto();
+					_techSta=getTimer();
+					if(TaskMissionManager.treasuerCheck&&TaskMissionManager.haveTreasuerTask)
+					{
+						startOtherTaskAuto(TaskType.MAINTYPE_TREASUREBOX);
+					}
+					else if(TaskMissionManager.haveMainTask)
+					{
+						startTaskAuto();
+					}
 				}
 			}
 			else
 			{
-				_techSta=0;
+				_techSta=getTimer();
 			}
 		}
 		
@@ -303,16 +315,21 @@ package com.rpgGame.app.manager.task
 		
 		public function taskLevel(level:int):void
 		{
-			if(level<0)
+			if(level==-1)
+			{
+				testStopKey=true;
+			}
+			else if(level==0)
 			{
 				AUTOLVE=GlobalSheetData.getSettingInfo(511).q_int_value;
+				testStopKey=false;
 			}
 			else
 			{
 				AUTOLVE=level;
-				
+				testStopKey=false;
 			}
-			testStopKey=false;
+			
 		}
 
 		public function get otherType():int

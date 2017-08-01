@@ -15,13 +15,13 @@ package  com.rpgGame.appModule.social.team
 	import flash.utils.getTimer;
 	import flash.utils.setTimeout;
 	
+	import away3d.events.Event;
+	
 	import feathers.controls.List;
 	import feathers.controls.Scroller;
 	import feathers.data.ListCollection;
 	
 	import org.mokylin.skin.app.shejiao.zudui.Zudui_fujin;
-	
-	import away3d.events.Event;
 
 	
 	
@@ -57,7 +57,7 @@ package  com.rpgGame.appModule.social.team
 		{
 			// TODO Auto Generated method stub
 			var now:int=getTimer();
-			if (lastAutoTime==0||now-lastAutoTime>=30000) 
+			if (lastAutoTime==0||now-lastAutoTime>=10000) 
 			{
 				doRefresh(true);
 				lastAutoTime=now;
@@ -93,12 +93,13 @@ package  com.rpgGame.appModule.social.team
 			 super.onHide();
 			 timer.stop();
 			 TeamSender.ReqOpenOrCloseTeamPanel(1,1);
+			 lastAutoTime=0;
 		 }
 		private function registerListeners():void
 		{
 			_skin.btn_shuaixin.addEventListener( Event.TRIGGERED , OnSearchTeam);
 			_skin.btn_chakan.addEventListener(Event.TRIGGERED , OnViewPlayer);
-			_skin.btn_tianjia.addEventListener(Event.TRIGGERED , OnAddFriend);
+			//_skin.btn_tianjia.addEventListener(Event.TRIGGERED , OnAddFriend);
 			_skin.btn_shenqing.addEventListener(Event.TRIGGERED , OnApplyJoinTeam);
 			
 			Mgr.teamMgr.addEventListener(TeamEvent.GET_MAP_TEAMS , OnGetTeams);
@@ -108,6 +109,7 @@ package  com.rpgGame.appModule.social.team
 			if(TeamListItemExt.curItem != null)
 			{
 				//Mgr.playerMgr.ReqOthersPlayerInfo( current.Data.captainid );
+				Mgr.teamMgr.loopPlayer(TeamListItemExt.curItem.data.captainid);
 			}
 			else
 			{
@@ -144,7 +146,7 @@ package  com.rpgGame.appModule.social.team
 			TeamSender.ReqSearchNearTeam("",isAtuo);
 			if (!isAtuo) 
 			{
-				TimeCountUtil.ins.addButtonTimeCountDown(_skin.btn_shuaixin,NotifyCfgData.getNotifyByID(13044).q_content,30);
+				TimeCountUtil.ins.addButtonTimeCountDown(_skin.btn_shuaixin,NotifyCfgData.getNotifyByID(13044).q_content,10);
 			}
 			
 		}

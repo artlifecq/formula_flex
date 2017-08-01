@@ -297,21 +297,32 @@ package com.rpgGame.app.manager
 				return false;
 			}
 			var isCompleted : Boolean = true;
-			for each (var role : SceneRole in _targetRoles)
-			{
-				if (role.usable && !role.stateMachine.isDeadState)
+			
+			for(var i:int=0,flag:Boolean=true;i<_targetRoles.length;flag?i++:i){
+				
+				if (_targetRoles[i].usable && !_targetRoles[i].stateMachine.isDeadState)
 				{
 					isCompleted = false;
-					break;
+					flag=true;
+				}
+				else
+				{
+					Lyt.a("getHasRole:false"+_targetRoles[i].id);
+					_targetRoles.splice(i,1);
+					Lyt.a("getHasRole:length"+_targetRoles.length);
+					flag=false;
 				}
 			}
+			
 			if (isCompleted)
 			{
 				_targetRoles.length = 0;
 				_targetRoles = null;
+				Lyt.a("getHasRole:isCompleted");
 				return false;
 				
 			}
+			
 			return true;
 		}
 		
@@ -327,7 +338,9 @@ package com.rpgGame.app.manager
 					return;
 				}
 			}
+			
 			_targetRoles.push(role);
+			Lyt.a("targetRoles:"+role.id+"::"+_targetRoles.length);
 		}
 		
 		private function onUpdate(force : Boolean = false) : void
@@ -436,7 +449,7 @@ package com.rpgGame.app.manager
 			_isFightActorRunning = value;
 		}
 		
-		public function get isAuto():Boolean
+		public function get isAutoing():Boolean
 		{
 			if(_isFightActorRunning||_isAutoFightRunning||_isFightTargetRunning)
 			{

@@ -673,14 +673,13 @@ package org.game.netCore.net
 					}
 					else
 					{
-						//						AlertPanel.showMsg( TextUtil.changeDateToDateStr( new Date() ) 
-						//							+ "您的账号在IP:[" 
-						//							+ _replaceIP 
-						//							+ "]处登录上线了", 
-						//							Mgr.layerMgr.alertLayer, 
-						//							false, 
-						//							flushPage 
-						//						);
+						AlertPanel.showMsg( "您的账号在IP:[" 
+							+ _replaceIP 
+							+ "]处登录上线了", 
+							null,
+							false, 
+							flushPage 
+						);
 					}
 				}
 			}

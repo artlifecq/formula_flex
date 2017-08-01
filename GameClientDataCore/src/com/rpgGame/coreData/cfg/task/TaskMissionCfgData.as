@@ -146,19 +146,19 @@ package com.rpgGame.coreData.cfg.task
 				var reObj:Array=JSONUtil.decode(reword.q_reward);
 				for each(var obj:Object in reObj)
 				{
-					if(obj.jod==null&&obj.sex==null)
+					if(obj.job==null&&obj.sex==null)
 					{
 						rewordList.push(obj);
 					}
-					else if(obj.jod!=null&&obj.sex==null&&obj.jod==job)
+					else if(obj.job!=null&&obj.sex==null&&obj.job==job)
 					{
 						rewordList.push(obj)
 					}
-					else if(obj.jod==null&&obj.sex!=null&&obj.sex==sex)
+					else if(obj.job==null&&obj.sex!=null&&obj.sex==sex)
 					{
 						rewordList.push(obj)
 					}
-					else if(obj.jod!=null&&obj.sex!=null&&obj.jod==job&&obj.sex==sex)
+					else if(obj.job!=null&&obj.sex!=null&&obj.job==job&&obj.sex==sex)
 					{
 						rewordList.push(obj)
 					}
