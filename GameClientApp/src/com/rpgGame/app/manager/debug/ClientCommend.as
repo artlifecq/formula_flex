@@ -38,6 +38,7 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.app.state.role.control.SpriteUpBuffStateReference;
 	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
+	import com.rpgGame.app.ui.OpenPanel;
 	import com.rpgGame.app.ui.main.dungeon.JiXianTiaoZhanExtPop;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
@@ -403,6 +404,12 @@ package   com.rpgGame.app.manager.debug
 			commandList.put( ".blood", function (...arg):void
 			{
 				HeadBloodBar.isShowText=!HeadBloodBar.isShowText;
+			});
+			commandList.put( ".newfun", function (...arg):void
+			{
+				var list:Vector.<String> = new Vector.<String>();
+				list.push("2");
+				UIPopManager.showAlonePopUI(OpenPanel,list);
 			});
 		}
 		

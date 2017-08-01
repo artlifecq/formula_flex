@@ -191,7 +191,7 @@ package com.rpgGame.core.app
 		/**
 		 * 开启新功能 
 		 */
-		public static var OPEN_FUNCTION:String = createAppInfo( "open.OpenPanel","xingongneng");
+		/*public static var OPEN_FUNCTION:String = createAppInfo( "open.OpenPanel","xingongneng");*/
 		
 		public static var NOTIVE_FUNCTION:String = createAppInfo( "open.NoticePanel","xingongneng");
 		

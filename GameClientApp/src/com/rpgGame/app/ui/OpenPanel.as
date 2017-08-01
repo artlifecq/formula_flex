@@ -1,15 +1,14 @@
-package com.rpgGame.appModule.open
+package com.rpgGame.app.ui
 {
 	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.display2D.PopSkinUI;
 	import com.rpgGame.app.manager.ItemActionManager;
-	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.ui.main.buttons.IOpen;
 	import com.rpgGame.app.ui.main.buttons.MainButtonManager;
 	import com.rpgGame.appModule.systemset.TouchToState;
-	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.FuncionBarCfgData;
 	import com.rpgGame.coreData.cfg.NewFuncCfgData;
@@ -23,33 +22,52 @@ package com.rpgGame.appModule.open
 	
 	import gs.easing.Bounce;
 	
-	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.xingongneng.KaiQi_Skin;
 	
-	import starling.display.DisplayObjectContainer;
 	import starling.display.Stage;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 	import starling.utils.Pool;
 	
-	public class OpenPanel extends SkinUIPanel
+	public class OpenPanel extends PopSkinUI
 	{
-		private var _skin:KaiQi_Skin;
+		private var m_skin:KaiQi_Skin;
 		private var _qdata:Q_newfunc;
 		private var _button:IOpen;
 		private var _needCreate:Boolean= true;
 		private var _idlist:Vector.<Q_newfunc>;
 		private var _effect:InterObject3D;
 		private var _info:FunctionBarInfo;
-		private var _touchstate:TouchToState;
-		public function OpenPanel():void
+		private var _list:Vector.<String>;
+		public function OpenPanel(list:Vector.<String>):void
 		{
 			_skin = new KaiQi_Skin();
-			super(_skin);
-			this._blackType = 0;
-			this.model = true;
+			super(null);
+			m_skin = _skin as KaiQi_Skin;
+			_list = list;
+			this.touchable=true;
+			UIModel.instence.switchModel(this,true,2);
+		}
+		override protected function onShow():void
+		{
 			_idlist = new Vector.<Q_newfunc>();
+			var length:int = _list.length;
+			var qfun:Q_newfunc;
+			for(var i:int=0;i<length;i++)
+			{
+				qfun = NewFuncCfgData.getdataById(_list[i]);
+				if(qfun.q_show_panel == 1)
+				{
+					_idlist.push(qfun);
+				}
+			}
+			if(_idlist.length == 0)
+			{
+				this.popComplete();
+			}else{
+				refeashView();
+			}			
 		}
 		protected var _touchPointID:int = -1;
 		override protected function onTouch(e:TouchEvent):void
@@ -63,7 +81,7 @@ package com.rpgGame.appModule.open
 					return;
 				}
 				
-				var stage:Stage = _skin.Icons.stage;
+				var stage:Stage = m_skin.Icons.stage;
 				if(stage !== null)
 				{
 					var point:Point = Pool.getPoint();
@@ -117,15 +135,15 @@ package com.rpgGame.appModule.open
 		{
 			if(value == ButtonState.UP)
 			{
-				_skin.Icons.width = 145;
-				_skin.Icons.height = 135;
-				_skin.Icons.x = 49;
-				_skin.Icons.y = 22;
+				m_skin.Icons.width = 145;
+				m_skin.Icons.height = 135;
+				m_skin.Icons.x = 49;
+				m_skin.Icons.y = 22;
 			}else{
-				_skin.Icons.width = 160;
-				_skin.Icons.height = 149;
-				_skin.Icons.x = 40;
-				_skin.Icons.y = 16;
+				m_skin.Icons.width = 160;
+				m_skin.Icons.height = 149;
+				m_skin.Icons.x = 40;
+				m_skin.Icons.y = 16;
 			}
 			
 			if(value == ButtonState.DOWN)
@@ -162,30 +180,7 @@ package com.rpgGame.appModule.open
 			_effect = null;
 			runFly();
 		}
-		
-		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
-		{
-			_idlist.length = 0;
-			var list:Vector.<String> = data as Vector.<String>;
-			var length:int = list.length;
-			var qfun:Q_newfunc;
-			for(var i:int=0;i<length;i++)
-			{
-				qfun = NewFuncCfgData.getdataById(list[i]);
-				if(qfun.q_show_panel == 1)
-				{
-					_idlist.push(qfun);
-				}
-			}
-			if(_idlist.length == 0)
-			{
-				this.hide();
-				return ;
-			}
-			super.show(data,openTable,parentContiner);
-			refeashView();
-		}
-		
+	
 		private function refeashView():void
 		{
 			if(this.parent==null)
@@ -193,7 +188,7 @@ package com.rpgGame.appModule.open
 			_qdata = _idlist.pop();
 			if(_qdata==null)
 			{
-				this.hide();
+				this.popComplete();
 				return ;
 			}else{
 				initView();
@@ -204,9 +199,9 @@ package com.rpgGame.appModule.open
 			_button= MainButtonManager.getButtonBuyInfo(_info);
 			if(_button==null)
 				GameLog.add("配置错误提示:图标id="+_info.id+",功能:"+_info.name+"按钮未找到");
-			_skin.Icons.styleName = "ui/app/xingongneng/icon/"+_qdata.q_openIcon+"/145.png";
-			_skin.uiName.styleName = "ui/app/xingongneng/icon/"+_qdata.q_openIcon+"/name.png";
-			_skin.uiName.x = (this.width - _skin.uiName.width)/2;
+			m_skin.Icons.styleName = "ui/app/xingongneng/icon/"+_qdata.q_openIcon+"/145.png";
+			m_skin.uiName.styleName = "ui/app/xingongneng/icon/"+_qdata.q_openIcon+"/name.png";
+			m_skin.uiName.x = (this.width - m_skin.uiName.width)/2;
 			if(this._touchPointID<0)
 				this.changeState(ButtonState.UP);
 			else
@@ -215,15 +210,14 @@ package com.rpgGame.appModule.open
 		protected function runFly():void
 		{
 			this.visible = false;
-			var startPos:Point = _skin.Icons.localToGlobal(new Point(0,0));
+//			var startPos:Point = this.localToGlobal(new Point(0,0));
 			var icon:UIAsset = new UIAsset();
-			icon.x = startPos.x;
-			icon.y = startPos.y;
-			icon.styleName = _skin.Icons.styleName;
+			icon.x = this.x +m_skin.Icons.x;
+			icon.y = this.y +m_skin.Icons.y;
+			icon.styleName = m_skin.Icons.styleName;
 			var endpos:Point;
 			if(!_button){//容错处理
 				endpos = new Point();
-				
 			}else{
 				endpos = _button.localToGlobal(new Point(_button.width/2,_button.height/2));
 			}
@@ -231,8 +225,7 @@ package com.rpgGame.appModule.open
 			ItemActionManager.addTweenDisplay(endpos,icon,timeobj,onTweenFlyComplete);
 			if(_idlist.length ==0)
 			{
-				this.hide();
-				return ;
+				this.popComplete();
 			}
 		}
 		private function onTweenFlyComplete():void
@@ -240,6 +233,26 @@ package com.rpgGame.appModule.open
 			if(_button!=null)
 				_button.runAnimation();
 			refeashView();
+		}
+		override protected function popComplete():void
+		{
+			super.popComplete();
+			UIModel.instence.switchModel(this,false,1);
+		}
+		override protected function onStageResize(sw : int, sh : int) : void
+		{
+			this.x = (sw - this.width) / 2;
+			this.y = (sh - this.height) / 2;
+		}
+		
+		override public function get width():Number
+		{
+			return _skin.width;
+		}
+		
+		override public function get height():Number
+		{
+			return _skin.height
 		}
 	}
 }
