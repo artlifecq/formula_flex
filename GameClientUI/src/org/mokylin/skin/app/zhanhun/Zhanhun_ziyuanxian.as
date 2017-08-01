@@ -42,7 +42,7 @@ package org.mokylin.skin.app.zhanhun
 			this.currentState = "normal";
 			this.height = 33;
 			this.width = 265;
-			this.elementsContent = [bg_i(),lb_name_i(),lb_cishu_i(),lb_jinyan_i(),btn_send_i(),conOver_i()];
+			this.elementsContent = [bg_i(),lb_name_i(),lb_cishu_i(),lb_jinyan_i(),conOver_i(),btn_send_i()];
 			
 			states = {
 			};
@@ -119,7 +119,7 @@ package org.mokylin.skin.app.zhanhun
 			temp.textAlign = "center";
 			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.underline = true;
+			temp.underline = false;
 			temp.width = 44;
 			temp.x = 181;
 			temp.y = 8;

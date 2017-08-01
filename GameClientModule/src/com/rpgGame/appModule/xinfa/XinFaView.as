@@ -27,6 +27,7 @@ package com.rpgGame.appModule.xinfa
 	import com.rpgGame.core.ui.tip.RewardMarkTip;
 	import com.rpgGame.core.utils.GameColorUtil;
 	import com.rpgGame.core.utils.MCUtil;
+	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.BuffStateDataManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
@@ -327,7 +328,7 @@ package com.rpgGame.appModule.xinfa
 				lab=_attrLabHash.getValue(key);
 				if (hash.containsKey(key)) 
 				{
-					lab.text=hash.getValue(key)+"";
+					lab.text=AttValueConfig.getDisAttValueStr(key,hash.getValue(key));
 				}
 				else
 				{

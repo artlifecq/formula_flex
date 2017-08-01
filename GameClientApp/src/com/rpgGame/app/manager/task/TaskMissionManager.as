@@ -426,6 +426,15 @@ package com.rpgGame.app.manager.task
 			return 0;
 		}
 		
+		/**是否主线任务有过跳跃点*/
+		public static function isMainTaskJump():int
+		{
+			if(mainTaskData!=null&&mainTaskData.q_jump_id>0)
+			{
+				return mainTaskData.q_jump_id
+			}
+			return 0;
+		}
 		/**判定是否是主线任务怪*/
 		public static function isMainTaskMonster(mid:int):Boolean
 		{
@@ -580,6 +589,12 @@ package com.rpgGame.app.manager.task
 			return false;
 		}
 		
+		
+		/**当前是否有帮会任务*/
+		public static function get haveGuildTask():Boolean
+		{
+			return false;
+		}
 		/**设置环式任务信息*/
 		public static function setTreasuerTaskInfo(value : TaskInfo,taskData:Q_mission_base) : void
 		{
@@ -941,6 +956,25 @@ package com.rpgGame.app.manager.task
 						return true;
 					}
 				}
+			}
+			
+			return false;
+		}
+		
+		/**判定是否是任意任务怪*/
+		public static function isWillTaskMonster(mid:int):Boolean
+		{
+			if(isTaskMonster(mid,TaskType.MAINTYPE_MAINTASK))
+			{
+				return true;
+			}
+			if(isTaskMonster(mid,TaskType.MAINTYPE_DAILYTASK))
+			{
+				return true;
+			}
+			if(isTaskMonster(mid,TaskType.MAINTYPE_TREASUREBOX))
+			{
+				return true;
 			}
 			
 			return false;

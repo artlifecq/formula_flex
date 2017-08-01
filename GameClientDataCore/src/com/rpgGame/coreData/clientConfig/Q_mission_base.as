@@ -32,6 +32,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_finish_describe:String;
 		 /**  自动寻路信息 */
 		public var q_pathing:String;
+		 /**  经过跳跃点ID*/
+		public var q_jump_id:int;
 		 /**  支线任务对应打开面板编号 */
 		public var q_emid:String;
 		 /**  是否使用系统神行符(1使用，0不使用。默认 0)为1时必须配寻路点 */

@@ -4,7 +4,6 @@ package com.rpgGame.app.fight.spell
 	
 	import gs.TimelineLite;
 	import gs.TweenLite;
-	import gs.TweenMax;
 	import gs.easing.Expo;
 	
 	import org.mokylin.skin.mainui.zhandouli.ZhandouliTipSkin;
@@ -26,6 +25,7 @@ package com.rpgGame.app.fight.spell
 		private var addTextImage:NumberTextImage;
 		private static var _HelpW:Number = 0;
 		private static var _HelpH:Number = 0;
+		private static var _last:FightChangePop;
 		public function FightChangePop(data:*):void
 		{
 			beforeFight=data[1];
@@ -36,6 +36,11 @@ package com.rpgGame.app.fight.spell
 		}
 		private function init():void
 		{
+			if(_last!=null)
+			{
+				_last.popComplete();
+			}
+			_last = this;
 			fightTextImage = new NumberTextImage(skin.num_yellow1,numRunCompleteHandler);
 			skin.container.addChild(fightTextImage);
 			addTextImage = new NumberTextImage(skin.num_lv,numRunCompleteHandler,true,true);
@@ -61,12 +66,15 @@ package com.rpgGame.app.fight.spell
 			_skin.container.pivotX = _HelpW/2;
 			_skin.container.pivotY = _HelpH/2;
 			updateSeate();
-			TweenMax.to(skin.container,0.0,{scaleX:10,alpha:1});
-			TweenMax.to(skin.container,0.6,{scale:1,alpha:1,ease:Expo.easeOut,onUpdate:updateSeate,onComplete:scaleComplete});
+			scaleComplete();
+			/*TweenMax.to(skin.container,0.0,{scaleX:10,alpha:1});
+			TweenMax.to(skin.container,0.6,{scale:1,alpha:1,ease:Expo.easeOut,onUpdate:updateSeate,onComplete:scaleComplete});*/
 		}
 		
 		private function scaleComplete():void
 		{
+			if(this.parent==null)
+				return ;
 			fightTextImage.startRolling();
 			addTextImage.startRolling();
 		}
@@ -77,12 +85,26 @@ package com.rpgGame.app.fight.spell
 				return ;
 			if(!addTextImage.isRollerEnd)
 				return ;
+			if(this.parent==null)
+				return ;
 			skin.container.filter = new GlowFilter(0xffff00,1,70,1);
 			var timeLine:TimelineLite = new TimelineLite();
 			timeLine.insert(TweenLite.to(skin.container,0.5,{scale:1.3,ease:Expo.easeOut}));
 			timeLine.append(TweenLite.to(skin.container,0.5,{}));
 			timeLine.append(TweenLite.to(skin.container,0.3,{alpha:0,ease:Expo.easeOut,onComplete:popComplete}));
 			
+		}
+		
+		override protected function popComplete():void
+		{
+			if(this.parent==null)
+				return ;
+			_last = null;
+			if(fightTextImage.isRollerEnd)
+				fightTextImage.stopRun(false);
+			if(addTextImage.isRollerEnd)
+				addTextImage.stopRun(false);
+			super.popComplete();
 		}
 		
 		private function updateSeate():void

@@ -40,7 +40,7 @@ package com.rpgGame.appModule.rank
 		override protected function initView():void
 		{
 			super.initView();
-			this._scale = 1.0;
+			this._scale = 1.3;
 			_spellIconList = new Vector.<IconCDFace>();
 			
 			var partner:DisplayObjectContainer = _skin.icon1.parent;
@@ -62,7 +62,7 @@ package com.rpgGame.appModule.rank
 			FaceUtil.SetSkillGrid(icon, spellList[2], true);
 			partner.addChild(icon);
 			_spellIconList.push(icon);
-			
+			_avatar.setRotationY(-90);
 		}
 		override protected function initData():void
 		{
@@ -83,8 +83,12 @@ package com.rpgGame.appModule.rank
 			}
 			var current:Q_horse = _showdata.housedata;
 			_roleData.avatarInfo.setBodyResID(current.q_skinResID,current.q_animatResID);
+			
 		}
-		
+		override protected function refeashJunjie():void
+		{
+			
+		}
 		override protected function refeashModle():void
 		{
 			super.refeashModle();

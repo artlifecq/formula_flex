@@ -5,11 +5,8 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.fight.spell.FightChangePop;
 	import com.rpgGame.app.fight.spell.SkillAddPop;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
-	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.manager.ClientSettingManager;
 	import com.rpgGame.app.manager.FangChenMiManager;
-	import com.rpgGame.app.manager.FunctionOpenManager;
-	import com.rpgGame.app.manager.PlayerAttributeManager;
 	import com.rpgGame.app.manager.ShortcutsManger;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
@@ -27,7 +24,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.core.events.SystemTimeEvent;
 	import com.rpgGame.core.events.role.RoleEvent;
 	import com.rpgGame.core.ui.tip.RewardTipTree;
-	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.lang.LangText;
@@ -38,7 +35,6 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.netData.client.bean.SystemHint;
-	import com.rpgGame.netData.client.handler.SCSystemHintHandler;
 	import com.rpgGame.netData.client.message.ResClientCustomTagMessage;
 	import com.rpgGame.netData.client.message.SCSystemHintMessage;
 	import com.rpgGame.netData.player.bean.AttributeItem;
@@ -47,6 +43,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.player.message.ResPlayerAttributesChangeMessage;
 	import com.rpgGame.netData.player.message.SCCurrencyChangeMessage;
 	import com.rpgGame.netData.player.message.SCMaxValueChangeMessage;
+	import com.rpgGame.netData.player.message.SCModuleAttributesChangeMessage;
 	import com.rpgGame.netData.player.message.SCNonagePromptMessage;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
 	import com.rpgGame.netData.skill.message.ResSkillAddMessage;
@@ -56,6 +53,7 @@ package com.rpgGame.app.cmdlistener
 	import app.cmd.HeroMiscModuleMessages;
 	
 	import org.client.mainCore.bean.BaseBean;
+	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.connection.SocketConnection_protoBuffer;
@@ -80,6 +78,7 @@ package com.rpgGame.app.cmdlistener
 		override public function start() : void
 		{
 			SocketConnection.addCmdListener(103106,RecvPlayerAttributesChangeMessage);
+			SocketConnection.addCmdListener(103130,RecvSCModuleAttributesChangeMessage);
 			SocketConnection.addCmdListener(123101,RecvResSkillInfosMessage);
 			SocketConnection.addCmdListener(123102,RecvResSkillAddMessage);
 			SocketConnection.addCmdListener(123107,RecvResSkillChangeMessage);
@@ -122,7 +121,7 @@ package com.rpgGame.app.cmdlistener
 		private function SCSystemHintHandler(msg:SCSystemHintMessage):void
 		{
 			// TODO Auto Generated method stub
-			var hash:HashMap=new HashMap();
+			var hash:com.gameClient.utils.HashMap=new com.gameClient.utils.HashMap();
 			for each (var item:SystemHint in msg.systemHints) 
 			{
 				hash.put(item.key,item.value==1);
@@ -246,7 +245,7 @@ package com.rpgGame.app.cmdlistener
 			
 		
 			//
-			PlayerAttributeManager.showSpriteStatChg(MainRoleManager.actorInfo.totalStat, msg.attributeChangeList);
+//			PlayerAttributeManager.showSpriteStatChg(MainRoleManager.actorInfo.totalStat, msg.attributeChangeList);
 			//
 			MainRoleManager.actorInfo.totalStat.setData(msg.attributeChangeList);
 			
@@ -267,6 +266,18 @@ package com.rpgGame.app.cmdlistener
 			//				FightFaceHelper.showAttChange(attr.type,attr.value);
 			//			}
 			
+		}
+		
+		private function RecvSCModuleAttributesChangeMessage(msg:SCModuleAttributesChangeMessage):void
+		{
+			var change:org.client.mainCore.ds.HashMap=new org.client.mainCore.ds.HashMap();
+			var length:int=msg.attributeChangeList.length;
+			for(var i:int = 0;i<length;i++)
+			{
+				var item:AttributeItem = msg.attributeChangeList[i];
+				change.add(item.type,AttValueConfig.getDisAttValue(item.type,item.value));
+			}
+			FightFaceHelper.showPlayerBaseAttrChange(change);
 		}
 		
 		private function RecvResSkillInfosMessage(msg:ResSkillInfosMessage):void

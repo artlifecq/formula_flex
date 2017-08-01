@@ -57,6 +57,8 @@ package org.mokylin.skin.app.hunyin
 			super();
 			
 			this.currentState = "normal";
+			this.height = 264;
+			this.width = 326;
 			this.elementsContent = [bg_i(),btnClose_i(),btn_ok_i(),btn_cancel_i(),grpBar_i(),cboxHunjie_i(),lbDanyao_i(),cboxCailiao_i(),lbCailiao_i(),__AlertJieZhiTuPo_UIAsset2_i(),__AlertJieZhiTuPo_UIAsset3_i()];
 			
 			states = {
@@ -176,7 +178,7 @@ package org.mokylin.skin.app.hunyin
 			temp.labelOffsetY = 3;
 			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
 			temp.color = 0x00FF33;
-			temp.width = 111;
+			temp.width = 24;
 			temp.x = 191;
 			temp.y = 163;
 			return temp;
@@ -191,7 +193,7 @@ package org.mokylin.skin.app.hunyin
 			temp.labelOffsetY = 3;
 			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
 			temp.color = 0x00FF33;
-			temp.width = 111;
+			temp.width = 24;
 			temp.x = 25;
 			temp.y = 163;
 			return temp;
