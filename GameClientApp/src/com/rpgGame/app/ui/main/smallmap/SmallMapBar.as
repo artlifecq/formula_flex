@@ -115,10 +115,11 @@ package com.rpgGame.app.ui.main.smallmap {
 					AppManager.showApp(AppConstant.SYSTEMSET_PANEL);
 					break;
 				case this._skin.btnSound://打开声音
-					isPlay=!isPlay;
-					BGMManager.setMusicIsPlay(isPlay);
-					if(isPlay)  BGMManager.playMusic(SceneManager.clientMapData.bgSoundRes);
-					else AudioInterface.track(AudioConfigType.MUSIC_CHANNEL).stop(true);
+					BGMManager.isMuteAll = !(BGMManager.isMuteAll);
+//					isPlay=!isPlay;
+//					BGMManager.setMusicIsPlay(isPlay);
+//					if(isPlay)  BGMManager.playMusic(SceneManager.clientMapData.bgSoundRes);
+//					else AudioInterface.track(AudioConfigType.MUSIC_CHANNEL).stop(true);
 					break;
 				case this._skin.btnPaiHang://打开排行榜
 					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_FIGHTFLAGRANK);

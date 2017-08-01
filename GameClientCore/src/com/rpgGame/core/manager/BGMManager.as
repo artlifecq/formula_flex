@@ -1,9 +1,11 @@
 package com.rpgGame.core.manager
 {
+	import com.app.AudioInterface;
 	import com.app.events.AudioEvent;
-	import com.app.media.AudioInfo;
-	import com.app.media.AudioInterface;
+	import com.rpgGame.core.events.GameSettingEvent;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	
+	import org.client.mainCore.manager.EventManager;
 	
 	/**
 	 * 游戏音乐管理器
@@ -14,41 +16,197 @@ package com.rpgGame.core.manager
 	 */
 	public class BGMManager
 	{
-		private static var _isPlay:Boolean=true;
+		private static var _disabledBgm:Boolean = true;
+		private static var _muteDic:Object = {};
+		private static var _soundVolume:Number = 100;
+		private static var _musicVolume:Number = 100;
+		private static var _currEnv2D:String = null;
+		private static var _currMusic:String = null;
+		
 		public function BGMManager()
 		{
 		}
 		
-		public static function playMusic(fileName : String) : void
+		public static function defaultSetting():void
 		{
-			if (!fileName||!_isPlay)
+			BGMManager.soundMute = false;
+			BGMManager.musicMute = false;
+			BGMManager.soundVolume = 100;
+			BGMManager.musicVolume = 100;
+		}
+		
+		public static function applySetting(soundSet:Object):void
+		{
+			if (soundSet != null)
 			{
-				AudioInterface.track(AudioConfigType.MUSIC_CHANNEL).stop(true);
+				BGMManager.soundMute = soundSet.openSound;
+				BGMManager.musicMute = soundSet.openMusic;
+				BGMManager.soundVolume = soundSet.soundVolume;
+				BGMManager.musicVolume = soundSet.musicVolume;
+			}
+		}
+		
+		public static function playEnv2D(fileName:String):void
+		{
+			if (_disabledBgm)
+			{
 				return;
 			}
-			var url : String = ClientConfig.getSound(fileName);
-			var info : AudioInfo = new AudioInfo(url);
-			info.fadeInTime = 500;
-			info.fadeOutTime = 500;
-			info.loop = 0;
-			AudioInterface.track(AudioConfigType.MUSIC_CHANNEL).playAudio(info);
+			if (_currEnv2D == fileName)
+			{
+				return;
+			}
+			_currEnv2D = fileName;
+			if (musicMute)
+			{
+				return;
+			}
+			if (!fileName)
+			{
+				AudioInterface.stopAudio(AudioConfigType.ENV2D_CHANNEL);
+				return;
+			}
+			var _local2:String = ClientConfig.getSound(fileName);
+			AudioInterface.playAudio(AudioConfigType.ENV2D_CHANNEL, _local2);
 		}
 		
-		public static function playUIEffectSound(fileName : String) : void
+		public static function playMusic(fileName:String):void
 		{
-			if(!_isPlay) return;
-			var url : String = ClientConfig.getSound(fileName);
-			var info : AudioInfo = new AudioInfo(url);
-			info.fadeInTime = 0;
-			info.fadeOutTime = 0;
-			info.loop = 1;
-			AudioInterface.track(AudioConfigType.UI_EFFECT_CHANNEL).playAudio(info);
+			if (_disabledBgm)
+			{
+				return;
+			}
+			if (_currMusic == fileName)
+			{
+				return;
+			}
+			_currMusic = fileName;
+			if (musicMute)
+			{
+				return;
+			}
+			if (!fileName)
+			{
+				AudioInterface.stopAudio(AudioConfigType.MUSIC_CHANNEL);
+				return;
+			}
+			var _local2:String = ClientConfig.getSound(fileName);
+			AudioInterface.playAudio(AudioConfigType.MUSIC_CHANNEL, _local2);
 		}
 		
-		public static function setMusicIsPlay(bool:Boolean):void
+//		public static function playMusic(fileName : String) : void
+//		{
+//			if (!fileName||!_isPlay)
+//			{
+//				AudioInterface.track(AudioConfigType.MUSIC_CHANNEL).stop(true);
+//				return;
+//			}
+//			var url : String = ClientConfig.getSound(fileName);
+//			var info : AudioInfo = new AudioInfo(url);
+//			info.fadeInTime = 500;
+//			info.fadeOutTime = 500;
+//			info.loop = 0;
+//			AudioInterface.track(AudioConfigType.MUSIC_CHANNEL).playAudio(info);
+//		}
+		
+		public static function playUIEffectSound(fileName:String):void
 		{
-			_isPlay=bool;
+			if (_disabledBgm)
+			{
+				return;
+			}
+			if (soundMute)
+			{
+				return;
+			}
+			if (!fileName)
+			{
+				AudioInterface.stopAudio(AudioConfigType.MUSIC_CHANNEL);
+				return;
+			}
+			var _local2:String = ClientConfig.getSound(fileName);
+			AudioInterface.playSoundEffect(AudioConfigType.UI_EFFECT_CHANNEL, _local2);
 		}
+		
+//		public static function playUIEffectSound(fileName : String) : void
+//		{
+//			if(!_isPlay) return;
+//			var url : String = ClientConfig.getSound(fileName);
+//			var info : AudioInfo = new AudioInfo(url);
+//			info.fadeInTime = 0;
+//			info.fadeOutTime = 0;
+//			info.loop = 1;
+//			AudioInterface.track(AudioConfigType.UI_EFFECT_CHANNEL).playAudio(info);
+//		}
+		
+		public static function set isMuteAll(isMute:Boolean):void
+		{
+			musicMute = isMute;
+			soundMute = isMute;
+			EventManager.dispatchEvent(GameSettingEvent.SOUND_MUTE_ALL);
+		}
+		
+		public static function get isMuteAll():Boolean
+		{
+			return musicMute && soundMute;
+		}
+		
+		public static function get musicMute():Boolean
+		{
+			return _muteDic[AudioConfigType.MUSIC_CHANNEL];
+		}
+		
+		public static function set musicMute(value:Boolean):void
+		{
+			AudioInterface.setAudioMute(AudioConfigType.MUSIC_CHANNEL, value);
+			_muteDic[AudioConfigType.MUSIC_CHANNEL] = value;
+			if (value)
+			{
+				AudioInterface.stopAudio(AudioConfigType.MUSIC_CHANNEL);
+				AudioInterface.stopAudio(AudioConfigType.ENV2D_CHANNEL);
+			}
+			else
+			{
+				playMusic(_currMusic);
+				playEnv2D(_currEnv2D);
+			}
+			EventManager.dispatchEvent(GameSettingEvent.SOUND_MUTE_ONE);
+		}
+		
+		public static function get soundMute():Boolean
+		{
+			return _muteDic[AudioConfigType.UI_EFFECT_CHANNEL];
+		}
+		
+		public static function set soundMute(value:Boolean):void
+		{
+			AudioInterface.setAudioMute(AudioConfigType.UI_EFFECT_CHANNEL, value);
+			_muteDic[AudioConfigType.UI_EFFECT_CHANNEL] = value;
+			EventManager.dispatchEvent(GameSettingEvent.SOUND_MUTE_ONE);
+		}
+		
+		public static function get musicVolume():uint
+		{
+			return _musicVolume;
+		}
+		
+		public static function set musicVolume(value:uint):void
+		{
+			_musicVolume = value;
+			AudioInterface.setAudioVolume(AudioConfigType.MUSIC_CHANNEL, (value / 100));
+		}
+		
+		public static function get soundVolume():uint
+		{
+			return _soundVolume;
+		}
+		
+		public static function set soundVolume(value:uint):void
+		{
+			_soundVolume = value;
+			AudioInterface.setAudioVolume(AudioConfigType.UI_EFFECT_CHANNEL, (value / 100));
+		}
+		
 		//开始播放一个节点
 		private static function onSubStartPlayHandler(evt : AudioEvent) : void
 		{
@@ -84,6 +242,5 @@ package com.rpgGame.core.manager
 		{
 			//trace(evt.data, "play end");
 		}
-		
 	}
 }

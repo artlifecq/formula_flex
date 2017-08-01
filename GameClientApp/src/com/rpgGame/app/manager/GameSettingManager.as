@@ -2,16 +2,18 @@
 {
     import com.game.engine3D.vo.BaseObj3D;
     import com.game.engine3D.vo.BaseRole;
+    import com.gameClient.utils.JSONUtil;
     import com.rpgGame.app.manager.role.MainRoleManager;
-    import com.rpgGame.app.sender.MiscSender;
+    import com.rpgGame.app.sender.HeroMiscSender;
     import com.rpgGame.core.events.GameSettingEvent;
     import com.rpgGame.core.manager.BGMManager;
+    import com.rpgGame.coreData.enum.EnumCustomTagType;
+    import com.rpgGame.coreData.info.shortcuts.ShortcutsData;
     import com.rpgGame.coreData.role.BiaoCheData;
     import com.rpgGame.coreData.role.HeroData;
     import com.rpgGame.coreData.type.SceneCharType;
     
-    import flash.utils.ByteArray;
-    
+    import org.client.mainCore.ds.HashMap;
     import org.client.mainCore.manager.EventManager;
 
     public class GameSettingManager 
@@ -43,18 +45,12 @@
 		 */		
         public static var checkFiltrateBenGuo:Boolean = false;
 
+		private static var gameSetObj:Object;
+		private static var gameSetHash:HashMap;
 
-        public static function initData(byteArray:ByteArray):void
+        public static function initData(dataStr:String):void
         {
-            if (byteArray != null)
-            {
-                byteArray.uncompress();
-                if (byteArray.bytesAvailable)
-                {
-                    gameSetProtoC = new GameSetProtoC();
-                    gameSetProtoC.mergeFrom(byteArray);
-                };
-            };
+			gameSetObj  = JSONUtil.decode(dataStr);
             _initedData = true;
         }
 
@@ -63,7 +59,7 @@
             var _local3 = null;
             var _local2 = null;
             var _local1 = null;
-            if (_initedData == true)
+            if (_initedData)
             {
                 _local3 = getSoundSetProtoC();
                 _local2 = getDisplaySetProtoC();
@@ -72,13 +68,12 @@
                 BGMManager.applySetting(_local3);
                 DisplaySetUpManager.applySetting(_local2);
                 FunctionSetManager.applySetting(_local1);
-            };
+            }
         }
 
         public static function isInitedData():Boolean
         {
-            _initedData = true;
-            return true;
+            return _initedData;
         }
 
         public static function getGameSetProtoC():GameSetProtoC
@@ -86,7 +81,7 @@
             return (((gameSetProtoC) || ((gameSetProtoC = new GameSetProtoC()))));
         }
 
-        public static function getSoundSetProtoC():SoundSetProtoC
+        public static function getSoundSet():SoundSetProtoC
         {
             var _local1:GameSetProtoC = getGameSetProtoC();
             if (_local1.soundSet == null)
@@ -97,11 +92,11 @@
                 _local1.soundSet.openMusic = BGMManager.musicMute;
                 _local1.soundSet.soundVolume = BGMManager.soundVolume;
                 _local1.soundSet.musicVolume = BGMManager.musicVolume;
-            };
-            return (_local1.soundSet);
+            }
+            return _local1.soundSet;
         }
 
-        public static function getDisplaySetProtoC():DisplaySetProtoC
+        public static function getDisplaySet():DisplaySetProtoC
         {
             var _local1:GameSetProtoC = getGameSetProtoC();
             if (_local1.dispaySet == null)
@@ -124,24 +119,32 @@
 
         public static function getFunctionSetProtoC():FunctionSetProtoC
         {
-//            var _local1:GameSetProtoC = getGameSetProtoC();
-//            if (_local1.functonSet == null)
-//            {
-//                _local1.functonSet = new FunctionSetProtoC();
-//                _local1.functonSet.showFamilyTitle = FunctionSetManager.showFamilyTitle;
-//                _local1.functonSet.showGuildTitle = FunctionSetManager.showGuildTitle;
-//                _local1.functonSet.showRoleTitle = FunctionSetManager.showRoleTitle;
-//            };
-//            return _local1.functonSet;
+            var _local1:GameSet = getGameSetProtoC();
+            if (_local1.functonSet == null)
+            {
+                _local1.functonSet = new FunctionSetProtoC();
+                _local1.functonSet.showFamilyTitle = FunctionSetManager.showFamilyTitle;
+                _local1.functonSet.showGuildTitle = FunctionSetManager.showGuildTitle;
+                _local1.functonSet.showRoleTitle = FunctionSetManager.showRoleTitle;
+            };
+            return _local1.functonSet;
         }
 
-        public static function savaMainToServer():void
+		/**
+		 * 保存数据到服务器上去 
+		 * @param map
+		 * 
+		 */		
+        public static function savaMainToServer(map:HashMap):void
         {
-//            var _local1:ByteArray = new ByteArray();
-//            gameSetProtoC = getGameSetProtoC();
-//            gameSetProtoC.writeTo(_local1);
-//            _local1.compress();
-//            MiscSender.reqSetClientOnlyIntConfig(8, _local1);
+			var data :Array = [];
+			var values :Array = map.getValues();
+			var vo :ShortcutsData;
+			for each ( vo in values ) 
+			{
+				data.push( {t :vo.type , mid :vo.id , k :vo.shortcutPos,bind:vo.itemBind} );
+			}
+			HeroMiscSender.reqSetClientCustomTag(EnumCustomTagType.SYSTEM_SET , JSONUtil.encode(data));
         }
 
         public static function filtrateAll():void

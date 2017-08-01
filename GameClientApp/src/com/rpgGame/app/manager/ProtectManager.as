@@ -3,8 +3,6 @@
     import com.game.mainCore.core.timer.GameTimer;
     import com.rpgGame.app.manager.goods.BackPackManager;
     import com.rpgGame.app.manager.role.MainRoleManager;
-    import com.rpgGame.app.manager.shop.ShopManager;
-    import com.rpgGame.app.ui.alert.GameAlert;
     import com.rpgGame.core.events.CharAttributeUpdateEvent;
     import com.rpgGame.core.events.MainPlayerEvent;
     import com.rpgGame.core.view.uiComponent.face.cd.CDDataManager;
@@ -16,6 +14,12 @@
     
     import org.client.mainCore.manager.EventManager;
 
+	
+	/**
+	 * 挂机设置（自动吃药，自动买药，自动复活） 
+	 * @author NEIL
+	 * 
+	 */	
     public class ProtectManager 
     {
         private static var _gTimer:GameTimer;

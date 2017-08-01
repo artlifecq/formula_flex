@@ -71,8 +71,7 @@
 
         private static function resetViewAdjust():void
         {
-            var _local1:int = getTimer();
-            _adjustViewCheckTime = _local1;
+            _adjustViewCheckTime = getTimer();
             _lastViewAdjustAverageFps = 0;
             _serverHeroCountIndex = 0;
             SceneManager.serverHeroCount = _serverHeroCounts[_serverHeroCountIndex];
@@ -80,9 +79,9 @@
 
         private static function resetDisplayAdjust():void
         {
-            var _local1:int = getTimer();
-            _adjustDisplayCheckTime = _local1;
-            _currDisplayAdjustTime = _local1;
+            var resetTime:int = getTimer();
+            _adjustDisplayCheckTime = resetTime;
+            _currDisplayAdjustTime = resetTime;
             _canAdjustDisplay = true;
         }
 
@@ -93,7 +92,7 @@
 
         private static function readMemory():void
         {
-            _totalMem = Math.round(((System.totalMemory * 0.001) * 0.001));
+            _totalMem = Math.round((System.totalMemory * 0.001) * 0.001);
         }
 
         private static function onTick(inv:uint=0):void
@@ -102,25 +101,25 @@
             {
                 return;
             }
-            var _local3:int = getTimer();
-            var _local2:int = (_local3 - _lastTime);
-            if (_local2 >= 1000)
+            var currentTime:int = getTimer();
+            var diffTime:int = (currentTime - _lastTime);
+            if (diffTime >= 1000)
             {
-                _lastTime = _local3;
+                _lastTime = currentTime;
                 readMemory();
                 if (_autoDisplayAdjust)
                 {
-                    checkDisplayAdjust(_local3);
+                    checkDisplayAdjust(currentTime);
                 }
-                checkViewAdjust(_local3);
-                checkMemory(_local3);
+                checkViewAdjust(currentTime);
+                checkMemory(currentTime);
             }
         }
 
         private static function checkMemory(currTime:int):void
         {
-            var _local2:int = (currTime - _memCheckTime);
-            if (_local2 > 60000)
+            var diffTime:int = (currTime - _memCheckTime);
+            if (diffTime > 60000)
             {
                 if (_totalMem > 1300)
                 {
@@ -136,8 +135,8 @@
 
         private static function checkKernel(currTime:int):void
         {
-            var _local2:int = (currTime - _kernelCheckTime);
-            if (_local2 > _kernelCheckInterval)
+            var diffTime:int = (currTime - _kernelCheckTime);
+            if (diffTime > _kernelCheckInterval)
             {
                 _kernelCheckTime = currTime;
                 if (!ClientConfig.isWeiDuan && Stage3DLayerManager.isOpenGL)
@@ -157,28 +156,28 @@
 
         private static function checkViewAdjust(currTime:int):void
         {
-            var _local3:int;
-            var _local2:int;
+            var frameRate:int;
+            var fps:int;
             if (!canAdjustView)
             {
                 return;
             }
-            var _local4:int = (currTime - _adjustViewCheckTime);
-            if (_local4 > 5000)
+            var diffTime:int = (currTime - _adjustViewCheckTime);
+            if (diffTime > 5000)
             {
                 _adjustViewCheckTime = currTime;
-                _local3 = Stage3DLayerManager.frameRate;
-                if (_local3 >= 50)
+				frameRate = Stage3DLayerManager.frameRate;
+                if (frameRate >= 50)
                 {
-                    _local2 = seconds_10_averageFps;
-                    if (_local2 < _lastViewAdjustAverageFps)
+					fps = seconds_10_averageFps;
+                    if (fps < _lastViewAdjustAverageFps)
                     {
-                        if (_local2 > 40)
+                        if (fps > 40)
                         {
                             _serverHeroCountIndex = 2;
                             _lastViewAdjustAverageFps = 40;
                         }
-                        else if (_local2 > 25)
+                        else if (fps > 25)
 						{
 							_serverHeroCountIndex = 1;
 							_lastViewAdjustAverageFps = 25;
@@ -205,21 +204,21 @@
 					{
 						_lastViewAdjustAverageFps = 0;
 					}
-                    if (_local2 > 50)
+                    if (fps > 50)
                     {
                         if (_serverHeroCountIndex == 2)
                         {
                             _serverHeroCountIndex = 3;
                         }
                     }
-                    else if (_local2 > 40)
+                    else if (fps > 40)
 					{
 						if (_serverHeroCountIndex == 1)
 						{
 							_serverHeroCountIndex = 2;
 						}
 					}
-					else if (_local2 > 25)
+					else if (fps > 25)
 					{
 						if (_serverHeroCountIndex == 0)
 						{
@@ -241,22 +240,21 @@
 
         private static function checkDisplayAdjust(currTime:int):void
         {
-            var _local4:int;
-            var _local3:int;
-            var _local2:Number;
+            var diffTime:int;
+            var frameRate:int;
+            var fps:Number;
             if (_canAdjustDisplay)
             {
-                _local3 = Stage3DLayerManager.frameRate;
-                if (_local3 >= 50)
+				frameRate = Stage3DLayerManager.frameRate;
+                if (frameRate >= 50)
                 {
-                    _local4 = (currTime - _adjustDisplayCheckTime);
-                    if (_local4 > (60 * 1000))
+					diffTime = (currTime - _adjustDisplayCheckTime);
+                    if (diffTime > (60 * 1000))
                     {
-                        _local2 = 0;
-                        _local2 = minute_1_averageFps;
-                        if (_local2 > 0)
+						fps = minute_1_averageFps;
+                        if (fps > 0)
                         {
-                            if (_local2 < 40)
+                            if (fps < 40)
                             {
                                 reducedDisplayPerforms();
                             }
@@ -273,8 +271,8 @@
             }
             else
             {
-                _local4 = (currTime - _currDisplayAdjustTime);
-                if (_local4 > 10000)
+				diffTime = (currTime - _currDisplayAdjustTime);
+                if (diffTime > 10000)
                 {
                     _adjustDisplayCheckTime = currTime;
                     _currDisplayAdjustTime = currTime;
@@ -285,11 +283,11 @@
 
         private static function reducedDisplayPerforms():void
         {
-            var _local1:Boolean;
+            var canReduce:Boolean;
             if (DisplaySetUpManager.autoSetting == true)
             {
-                _local1 = DisplaySetUpManager.reducedPerforms();
-                if (_local1)
+				canReduce = DisplaySetUpManager.reducedPerforms();
+                if (canReduce)
                 {
                     EventManager.dispatchEvent(SystemEvent.DISPLAY_SET_UP_CHANGE);
                 }
@@ -298,11 +296,11 @@
 
         private static function improveDisplayPerforms():void
         {
-            var _local1:Boolean;
+            var canImprove:Boolean;
             if (DisplaySetUpManager.autoSetting == true)
             {
-                _local1 = DisplaySetUpManager.improvePerforms();
-                if (_local1)
+				canImprove = DisplaySetUpManager.improvePerforms();
+                if (canImprove)
                 {
                     EventManager.dispatchEvent(SystemEvent.DISPLAY_SET_UP_CHANGE);
                 }
