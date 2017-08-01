@@ -132,6 +132,7 @@ package com.rpgGame.app.manager.role
 			data.bodyRadius = radiusForHero;
 			role.headFace = HeadFace.create(role);
 			(role.headFace as HeadFace).bloodPercent= (data.totalStat.hp / data.totalStat.life);
+			(role.headFace as HeadFace).showBloodStr(data.totalStat.hp +"/"+ data.totalStat.life);
 			role.dialogFace=BubbleDialogFace.create(role);
 			//执行主换装更新
 			AvatarManager.resetAvatar(role, false, false, false);
@@ -167,7 +168,7 @@ package com.rpgGame.app.manager.role
 			{
 				(role.headFace as HeadFace).updateTitle(data.junjieLv);
 				(role.headFace as HeadFace).updateHuBaoTitle(data.baowuLv);
-				(role.headFace as HeadFace).updateFuQiTitle();
+				(role.headFace as HeadFace).updateFuQiTitle(data.coupleName);
 				(role.headFace as HeadFace).addAndUpdataRankTitle(data.topLeaderTypes)
 			}
 			
@@ -219,6 +220,7 @@ package com.rpgGame.app.manager.role
 			role.ownerIsMainChar = (data.ownerId == MainRoleManager.actorID);
 			role.headFace = HeadFace.create(role);
 			(role.headFace as HeadFace).bloodPercent= (data.totalStat.hp / data.totalStat.life);
+			(role.headFace as HeadFace).showBloodStr(data.totalStat.hp +"/"+ data.totalStat.life);
 			role.updateBody(bornData ? bornData.q_body_res : "", null);
 			//			var avatarResConfig : AvatarResConfig = AvatarResConfigSetData.getInfo(bornData ? bornData.q_body_res : "");
 			if (bornData.q_animation>0)

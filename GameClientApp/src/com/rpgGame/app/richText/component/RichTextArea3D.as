@@ -1047,7 +1047,8 @@
 						}
 						
 //						unit.displayObj.y = Math.round( $_rect.y +  offsetY);
-						unit.displayObj.y=($_txtLineMetrics.height-unit.displayObj.height)/2+4;
+						var rowH:int=Math.ceil($_rect.height);
+						unit.displayObj.y=$_rect.y+(rowH-unit.displayObj.height)/2+$_txtLineMetrics.descent;
 					}
 //					else
 //					{

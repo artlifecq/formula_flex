@@ -36,6 +36,8 @@ package org.mokylin.skin.app.zhanchang
 			super();
 			
 			this.currentState = "normal";
+			this.height = 140;
+			this.width = 916;
 			this.elementsContent = [skinLeft_i(),skinRight_i(),grpVS_i()];
 			
 			states = {

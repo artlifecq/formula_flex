@@ -133,7 +133,10 @@ package com.rpgGame.coreData.role
 		public var loginDay:int = 0;
 		
 		public var topLeaderTypes: Vector.<int>;
-		
+		/**
+		 *夫妻名字 
+		 */		
+		public var coupleName:String;
 		public function HeroData(priority:int=100)
 		{
 			super(RoleType.TYPE_HERO,priority);
@@ -451,7 +454,7 @@ package com.rpgGame.coreData.role
 			{
 				//				data.guildName = info.guildName;
 			}
-			
+			data.sex=info.sex;
 			data.job = info.job; // 职业，按照原来的就可以了
 			data.direction=info.dir;
 			//			data.vipLv = info.viplevel; // vip等级
@@ -472,7 +475,7 @@ package com.rpgGame.coreData.role
 			data.baowuLv=info.convoy;
 			data.topLeaderTypes = info.topLeaderTypes;
 			data.totalStat.setData(info.attributes);
-			
+			data.coupleName=info.marriageName;
 			//			data.hp = info.hp;
 			//			data.totalStat.life = info.maxHp;
 			//			data.mp = info.mp;

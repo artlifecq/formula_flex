@@ -20,6 +20,8 @@ package com.rpgGame.appModule.task
 	import feathers.controls.Label;
 	import feathers.controls.UIAsset;
 	
+	import gs.TweenLite;
+	
 	import org.mokylin.skin.mainui.renwu.Zhuxian_Renwu;
 	
 	import starling.display.DisplayObject;
@@ -141,7 +143,8 @@ package com.rpgGame.appModule.task
 			super.hide();
 			timer.stop();
 			currtimer=TIMERDATA_1;
-			subFinish();
+			TweenLite.killDelayedCallsTo(subFinish);
+			TweenLite.delayedCall(0.5, subFinish);
 		}
 		
 		

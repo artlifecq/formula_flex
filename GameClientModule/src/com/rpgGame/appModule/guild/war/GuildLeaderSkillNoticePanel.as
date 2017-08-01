@@ -61,20 +61,21 @@ package com.rpgGame.appModule.guild.war
 		{
 			var item:LeaderHead_Skin=head.skin as LeaderHead_Skin;
 			item.lbName.text=data.leaderPlayerName;
-			switch(data.leaderPlayerJob){
-				case JobEnum.ROLE_1_TYPE:
-					item.headImg.styleName=AssetUrl.HEAD_ICON_1;
-					break;
-				case JobEnum.ROLE_2_TYPE:
-					item.headImg.styleName=AssetUrl.HEAD_ICON_2;
-					break;
-				case JobEnum.ROLE_3_TYPE:
-					item.headImg.styleName=AssetUrl.HEAD_ICON_3;
-					break;
-				case JobEnum.ROLE_4_TYPE:
-					item.headImg.styleName=AssetUrl.HEAD_ICON_4;
-					break;
-			}
+//			switch(data.leaderPlayerJob){
+//				case JobEnum.ROLE_1_TYPE:
+//					item.headImg.styleName=AssetUrl.HEAD_ICON_1;
+//					break;
+//				case JobEnum.ROLE_2_TYPE:
+//					item.headImg.styleName=AssetUrl.HEAD_ICON_2;
+//					break;
+//				case JobEnum.ROLE_3_TYPE:
+//					item.headImg.styleName=AssetUrl.HEAD_ICON_3;
+//					break;
+//				case JobEnum.ROLE_4_TYPE:
+//					item.headImg.styleName=AssetUrl.HEAD_ICON_4;
+//					break;
+//			}
+			item.headImg.styleName=AssetUrl.getRoleHeadUrl(data.leaderPlayerJob,1,"middle");
 			_skin.headGrp.addChild(head);
 		}
 		

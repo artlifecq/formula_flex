@@ -50,8 +50,9 @@ package com.rpgGame.app.manager.task
 		private var _stateMachine : AIStateMachine;
 		private var _taskTarget:int=0;
 		private var _otherType:int;
-		public static var AUTOLVE:int=30;
-		public static var AUTOIDE:int=60000;
+		public static var AUTOLVE:int=100;
+		public static var AUTOMAIN:int=60000;//拉主线任务时间
+		public static var AUTOTREASEUER:int=120000;//拉环式任务时间
 		public function TaskAutoManager()
 		{
 			
@@ -71,11 +72,15 @@ package com.rpgGame.app.manager.task
 			_techSta=getTimer();
 			if(GlobalSheetData.getSettingInfo(511)!=null)
 			{
-				AUTOLVE=GlobalSheetData.getSettingInfo(511).q_int_value;
+				//AUTOLVE=GlobalSheetData.getSettingInfo(511).q_int_value;
 			}
 			if(GlobalSheetData.getSettingInfo(512)!=null)
 			{
-				AUTOIDE=GlobalSheetData.getSettingInfo(512).q_int_value*1000;
+				AUTOMAIN=GlobalSheetData.getSettingInfo(512).q_int_value*1000;
+			}
+			if(GlobalSheetData.getSettingInfo(521)!=null)
+			{
+				AUTOTREASEUER=GlobalSheetData.getSettingInfo(521).q_int_value*1000;
 			}
 		}
 		private function onApphide( ev:AppEvent ):void
@@ -169,8 +174,7 @@ package com.rpgGame.app.manager.task
 		}
 		public function stopTaskAuto() : void
 		{
-			TrusteeshipManager.getInstance().stopAll();
-			GatherAutoManager.getInstance().stopGatherAuto();
+			_stateMachine.transition(AIStateType.AI_NONE);
 			if (!_isTaskRunning&&!_isOtherTaskRunning)
 			return;
 			_isBroken = false;
@@ -193,7 +197,7 @@ package com.rpgGame.app.manager.task
 			{
 				techState();
 				return;
-			}	
+			}
 			if (_isBroken)
 				return;
 			if (_isTaskRunning)
@@ -213,25 +217,28 @@ package com.rpgGame.app.manager.task
 		{
 			if(testStopKey)
 				return;
-			if(!TaskMissionManager.haveMainTask)
-				return;
 			if(MainRoleManager.actorInfo.totalStat.level>AUTOLVE)
 				return;
 			if(MapDataManager.getMapInfo(MainRoleManager.actorInfo.mapID).mapType!=EnumMapType.MAP_TYPE_NORMAL)
 				return;
 			if(MainRoleManager.actor.stateMachine.isIdle||(TrusteeshipManager.getInstance().isAutoing))//站着的时候拉，挂机的时候也拉
 			{
-				if((getTimer()-_techSta)>=AUTOIDE)
+				if(TaskMissionManager.treasuerCheck&&TaskMissionManager.haveTreasuerTask)
 				{
-					_techSta=getTimer();
-					if(TaskMissionManager.treasuerCheck&&TaskMissionManager.haveTreasuerTask)
+					if((getTimer()-_techSta)>=AUTOTREASEUER)
 					{
+						_techSta=getTimer();
 						startOtherTaskAuto(TaskType.MAINTYPE_TREASUREBOX);
 					}
-					else if(TaskMissionManager.haveMainTask)
+				}
+				else if(TaskMissionManager.haveMainTask)
+				{
+					if((getTimer()-_techSta)>=AUTOMAIN)
 					{
+						_techSta=getTimer();
 						startTaskAuto();
 					}
+					
 				}
 			}
 			else
@@ -342,7 +349,7 @@ package com.rpgGame.app.manager.task
 			_otherType = value;
 		}
 
-		private var testStopKey:Boolean=true;
+		private var testStopKey:Boolean=false;
 		
 	}
 }

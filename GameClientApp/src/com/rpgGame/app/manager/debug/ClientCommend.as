@@ -13,6 +13,7 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.app.fight.spell.SkillAddPop;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.fight.spell.SpellHitHelper;
+	import com.rpgGame.app.graphics.HeadBloodBar;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.manager.FangChenMiManager;
@@ -401,6 +402,10 @@ package   com.rpgGame.app.manager.debug
 			commandList.put( ".pz", function (...arg):void
 			{
 				FightFaceHelper.useScene=arg[0]==1;
+			});
+			commandList.put( ".blood", function (...arg):void
+			{
+				HeadBloodBar.isShowText=!HeadBloodBar.isShowText;
 			});
 		}
 		

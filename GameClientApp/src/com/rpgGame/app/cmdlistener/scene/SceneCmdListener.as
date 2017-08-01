@@ -43,6 +43,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.AttachEffectCfgData;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.cfg.MapJumpCfgData;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.Attach_effect;
 	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
@@ -65,6 +66,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.coreData.role.SceneCollectData;
 	import com.rpgGame.coreData.role.SceneDropGoodsData;
 	import com.rpgGame.coreData.role.SceneDropGoodsItem;
+	import com.rpgGame.coreData.role.SceneJumpPointData;
 	import com.rpgGame.coreData.role.SculptureData;
 	import com.rpgGame.coreData.role.TrapInfo;
 	import com.rpgGame.coreData.type.CharAttributeType;
@@ -334,13 +336,18 @@ package com.rpgGame.app.cmdlistener.scene
 		/**地图跳跃*///-------yt
 		private function onSCAreaJumpMessage(msg : SCAreaJumpMessage) : void 
 		{
-			Lyt.a("====跳跃消息"+msg.costTime+"x:"+msg.jumpPos.x+"y:"+msg.jumpPos.y);
 			var role : SceneRole = SceneManager.getSceneObjByID(msg.playerId.ToGID()) as SceneRole;
 			if (role && role.usable)
 			{
 				var ref : JumpStateReference = role.stateMachine.getReference(JumpStateReference) as JumpStateReference;
 				var destPoint:Vector3D=new Vector3D(msg.jumpPos.x,0,msg.jumpPos.y);
-				ref.setParams(1,msg.costTime,destPoint);
+				var isEnd:Boolean=false;
+				var jumpData:SceneJumpPointData=MapJumpCfgData.getJumpportData(msg.jumpId);
+				if(jumpData&&jumpData.stopPoint.x==msg.jumpPos.x&&jumpData.stopPoint.y==msg.jumpPos.y)
+				{
+					isEnd=true;
+				}
+				ref.setParams(1,msg.costTime,destPoint,isEnd);
 				role.stateMachine.transition(RoleStateType.ACTION_JUMP, ref,true);
 			}
 		}

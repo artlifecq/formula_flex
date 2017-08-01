@@ -127,7 +127,6 @@ package com.rpgGame.app.cmdlistener
 					if (!jump.isInViewDistance)
 						return;
 					var jumpData : SceneJumpPointData = jump.data as SceneJumpPointData;
-					Lyt.a("触发跳跃点:"+MainRoleManager.actor.stateMachine.isRunning+"=="+MainRoleManager.actor.stateMachine.isIdle);
 					if(MainRoleManager.actor.stateMachine.isRunning||MainRoleManager.actor.stateMachine.isIdle)
 					{
 						if(!jumpBink)

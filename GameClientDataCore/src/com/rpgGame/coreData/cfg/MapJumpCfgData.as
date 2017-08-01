@@ -1,6 +1,7 @@
 package com.rpgGame.coreData.cfg
 {
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.coreData.clientConfig.Q_map_jump;
 	import com.rpgGame.coreData.role.RoleType;
 	import com.rpgGame.coreData.role.SceneJumpPointData;
@@ -18,25 +19,35 @@ package com.rpgGame.coreData.cfg
 	 */	
 	public class MapJumpCfgData
 	{
-		
 		private static var _dataDic : Dictionary = new Dictionary();
-		
+		private static var _dataSenceDic : Dictionary = new Dictionary();
 		public static function setup(data : ByteArray) : void {
 			var arr : Array = data.readObject();
 			var list : Vector.<Q_map_jump>;
 			for each(var info : Q_map_jump in arr) {
-				list = _dataDic[info.q_map_id];
+				_dataDic[info.q_jump_id]=info;
+				list = _dataSenceDic[info.q_map_id];
 				if (null == list) {
 					list = new Vector.<Q_map_jump>();
-					_dataDic[info.q_map_id] = list;
+					_dataSenceDic[info.q_map_id] = list;
 				}
 				list.push(info);
 			}
 		}
 		public static function getJumpBySceneID(sceneID : uint) : Vector.<Q_map_jump> {
-			return _dataDic[sceneID];
+			return _dataSenceDic[sceneID];
 		}
-		
+		/**返回场景中跳跃点数据*/
+		public static function getJumpportData(jumpid:int) : SceneJumpPointData
+		{
+			var data : Q_map_jump=_dataDic[jumpid];
+			if (data) {
+				var jumpData:SceneJumpPointData=new SceneJumpPointData(RoleType.TYPE_JUMP);
+				jumpData.setConfigData(data);
+				return jumpData;
+			}
+			return null;
+		}
 		
 		
 		
@@ -44,7 +55,7 @@ package com.rpgGame.coreData.cfg
 		public static function getSceneJumpportDatas(sceneID : uint) : Array
 		{
 			var arr : Array = new Array();
-			var list : Vector3D.<Q_map_jump> = _dataDic[sceneID];
+			var list : Vector3D.<Q_map_jump> = _dataSenceDic[sceneID];
 			if (!list) {
 				return [];
 			}
