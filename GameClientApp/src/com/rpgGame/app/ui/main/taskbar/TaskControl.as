@@ -85,14 +85,18 @@ package com.rpgGame.app.ui.main.taskbar
 		public static function guideBut(num:int):void
 		{
 			var task:Vector.<TaskInfo>=TaskMissionManager.getGuideTaskInfo();
-			var taskInfo:TaskInfo=task[num];
+			var taskInfo:TaskInfo;
 			var taskData:Q_mission_base;
+			if(task.length>num)
+			{
+				taskInfo=task[num];
+			}
 			if(taskInfo)
 			{
 				taskData=TaskMissionCfgData.getTaskByID(taskInfo.taskModelId);
 			}
 			if(taskData&&taskData.q_emid!="")
-			{
+			{Lyt.a("emid:"+taskData.q_emid);
 				FunctionOpenManager.openAppPaneById(taskData.q_emid);
 			}
 			
@@ -133,12 +137,12 @@ package com.rpgGame.app.ui.main.taskbar
 			
 			if(key==1&&type==TaskType.MAINTYPE_MAINTASK&&MainRoleManager.actorInfo.totalStat.level<=TaskAutoManager.AUTOLVE)//
 			{
-				TaskAutoManager.getInstance().startTaskAuto(num);
+				TaskAutoManager.getInstance().startTaskAuto(type,num);
 				return;
 			}
 			if(key==1&&type==TaskType.MAINTYPE_TREASUREBOX)//
 			{
-				TaskAutoManager.getInstance().startOtherTaskAuto(type,num);
+				TaskAutoManager.getInstance().startTaskAuto(type,num);
 				return;
 			}
 			if(TaskUtil.getSubtypeByType(type)==TaskType.SUB_USEITEM&&!TaskUtil.getIsfinishByType(type))//是使用道具任务且没有完成
