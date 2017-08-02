@@ -84,7 +84,7 @@ package com.rpgGame.appModule.battle.dfdj
 				_leftHeadIcon.y=-17;
 				skinL.container.addChild(_leftHeadIcon);
 			}
-			_leftHeadIcon.styleName=getHeadUrl(MainRoleManager.actorInfo.job);
+			_leftHeadIcon.styleName=AssetUrl.getRoleHeadUrl(MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex);
 			var skinR:Head__Role_Right=_skin.skinRight.skin as Head__Role_Right;
 			if (_rightHeadIcon==null) 
 			{
@@ -99,7 +99,7 @@ package com.rpgGame.appModule.battle.dfdj
 			skinR.numZhandouli.label=msg.enemyFightPower+"";
 			skinR.role_xuecao.scaleX=1;
 			skinR.role_xuecao.x=_rightHpX;
-			_rightHeadIcon.styleName=getHeadUrl(msg.enemyJob);
+			_rightHeadIcon.styleName=AssetUrl.getRoleHeadUrl(msg.enemyJob,msg.enemySex);
 			_rightHeadIcon.scaleX=-1;
 			_otherGid=msg.enemyPlayerId.ToGID();
 			CharAttributeManager.addEvent(MainRoleManager.actorInfo.id,CharAttributeType.HP,myHpChange);
@@ -130,25 +130,7 @@ package com.rpgGame.appModule.battle.dfdj
 			_rightHpImg.scaleX=per;
 			_rightHpImg.x=_rightHpX+_initW*(1-per);
 		}
-		private function getHeadUrl(job:int):String
-		{
-			switch(job)
-			{
-				case JobEnum.ROLE_1_TYPE:
-					return AssetUrl.HEAD_ICON_1;
-					break;
-				case JobEnum.ROLE_2_TYPE:
-					return AssetUrl.HEAD_ICON_2;
-					break;
-				case JobEnum.ROLE_3_TYPE:
-					return AssetUrl.HEAD_ICON_3;
-					break;
-				case JobEnum.ROLE_4_TYPE:
-					return AssetUrl.HEAD_ICON_4;
-					break;
-			}
-			return "";
-		}
+
 		override protected function onStageResize(sw:int, sh:int):void
 		{
 			this.x=(sw-this.width)*0.5;

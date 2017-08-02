@@ -8,7 +8,6 @@ package com.rpgGame.app.graphics
 	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import feathers.controls.Label;
-	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	
 	import gs.TweenMax;
@@ -16,9 +15,6 @@ package com.rpgGame.app.graphics
 	import org.mokylin.skin.mainui.head.Head_Juese;
 	import org.mokylin.skin.mainui.head.guai_head_mini;
 	
-	import starling.display.BlendMode;
-	import starling.display.DisplayObject;
-	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.text.TextField;
 	import starling.text.TextFieldAutoSize;
@@ -32,6 +28,7 @@ package com.rpgGame.app.graphics
 	 */
 	public class HeadBloodBar extends Sprite implements IInstancePoolClass
 	{
+		public static var isShowText:Boolean=false;
 		private static var headBloodBarPool : InstancePool = new InstancePool("HeadBloodBar", 300);
 		/**因为怪物的血条皮肤不一样**/
 		private static var monsterBloodBarPool : InstancePool = new InstancePool("monsterHeadBloodBar", 300);
@@ -187,7 +184,7 @@ package com.rpgGame.app.graphics
 			var arr : Array = HeadBloodUtil.getTypeData(_state);
 			
 			color = arr[0];
-			updateStateText(arr[1]);
+			//updateStateText(arr[1]);
 			_hpSkinClass.barRed.visible=false;
 			_hpSkinClass.barBlue.visible=false;
 			if (!_isMonster) 
@@ -265,6 +262,13 @@ package com.rpgGame.app.graphics
 //			tw=TweenMax.to(_hpSkinClass.bar,0.5,{scaleX:value,onComplete:onTweenComplete});
 			
 			_lastPercent = value;
+		}
+		public function showBloodText(str:String):void
+		{
+			if (isShowText) 
+			{
+				updateStateText(str);
+			}
 		}
 		public function updateLevel(lv:int):void
 		{

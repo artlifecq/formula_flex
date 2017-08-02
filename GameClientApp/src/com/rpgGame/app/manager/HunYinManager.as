@@ -3,6 +3,8 @@ package com.rpgGame.app.manager
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.role.SceneRoleManager;
+	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.HunYinSender;
 	import com.rpgGame.app.ui.alert.QiuHunTiShiPanelExt;
@@ -28,6 +30,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.netData.marriage.message.SCNoticeZoneMessage;
 	import com.rpgGame.netData.marriage.message.SCProposalResultMessage;
 	import com.rpgGame.netData.marriage.message.SCRefuseNtoiceMessage;
+	import com.rpgGame.netData.marriage.message.SCRoundChangeMarriageMessage;
 	import com.rpgGame.netData.marriage.message.SCTargetProposalMessage;
 	import com.rpgGame.netData.marriage.message.SCUpGradeMessage;
 	import com.rpgGame.netData.marriage.message.SCUpdateZoneSubNumMessage;
@@ -159,7 +162,7 @@ package com.rpgGame.app.manager
 			showQiuHunTiShiPanel(8,msg,null);
 			var role:SceneRole=MainRoleManager.actor;
 			if (role.headFace is HeadFace)
-				(role.headFace as HeadFace).updateFuQiTitle();
+				(role.headFace as HeadFace).updateFuQiTitle(_marriageInfo.marriagePlayerName);
 		}
 		
 		/**
@@ -199,7 +202,7 @@ package com.rpgGame.app.manager
 			_marriageInfo=msg.marriageInfo;
 			var role:SceneRole=MainRoleManager.actor;
 			if (role.headFace is HeadFace)
-				(role.headFace as HeadFace).updateFuQiTitle();
+				(role.headFace as HeadFace).updateFuQiTitle(_marriageInfo.marriagePlayerName);
 		}
 		
 		/**
@@ -315,6 +318,16 @@ package com.rpgGame.app.manager
 				HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"点亲密度")+"\n";
 			
 			return text;
+		}
+		
+		public function onSCRoundChangeMarriageHandler(msg:SCRoundChangeMarriageMessage):void
+		{
+			// TODO Auto Generated method stub
+			var role:SceneRole=SceneManager.getSceneObjByID(msg.playerId.ToGID()) as SceneRole;
+			if (role&&role.headFace) 
+			{
+				(role.headFace as HeadFace).updateFuQiTitle(msg.marriageName);
+			}
 		}
 	}
 }
