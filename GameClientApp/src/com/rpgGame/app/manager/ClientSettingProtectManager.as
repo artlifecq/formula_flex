@@ -17,17 +17,22 @@
 
         public static function get toUseGoods():Boolean
         {
-            return _protectSet.toUseGoods;
+            return SystemSetManager.getinstance().getBooleanByIndex(SystemSetManager.SYSTEMSET_LIFE);;
         }
 
         public static function get toBuyGoods():Boolean
         {
-            return _protectSet.toBuyGoods;
+            return SystemSetManager.getinstance().getBooleanByIndex(SystemSetManager.SYSTEMSET_AUOTBUYITEM);
         }
+		
+		public static function get toAutoRelive():Boolean
+		{
+			return SystemSetManager.getinstance().getBooleanByIndex(SystemSetManager.SYSTEMSET_AUOT_USE_ITEM_ISDEAD);
+		}
 
         public static function get hpPercentToUseGoods():int
         {
-            return _protectSet.hpPercentToUseGoods;
+            return SystemSetManager.getinstance().getValueByIndex(SystemSetManager.SYSTEMSET_HP_PERCENT);
         }
 
         public static function get mpPercentToUseGoods():int
@@ -35,15 +40,15 @@
             return _protectSet.mpPercentToUseGoods;
         }
 
-        public static function get hpGoodsIDToUse():int
-        {
-            return _protectSet.hpGoodsIDToUse;
-        }
-
-        public static function get mpGoodsIDToUse():int
-        {
-            return _protectSet.mpGoodsIDToUse;
-        }
+//        public static function get hpGoodsIDToUse():int
+//        {
+//            return _protectSet.hpGoodsIDToUse;
+//        }
+//
+//        public static function get mpGoodsIDToUse():int
+//        {
+//            return _protectSet.mpGoodsIDToUse;
+//        }
 
         public static function set toUseGoods(value:Boolean):void
         {
@@ -66,6 +71,15 @@
                 saveToServer();
             }
         }
+		
+		public static function set toAutoRelive(value:Boolean):void
+		{
+			if (_protectSet.toAutoRelive != value)
+			{
+				_protectSet.toAutoRelive = value;
+				saveToServer();
+			}
+		}
 
         public static function set hpPercentToUseGoods(value:int):void
         {
@@ -116,6 +130,7 @@
                 _initedData = true;
 				_protectSet.toUseGoods = true;
 				_protectSet.toBuyGoods = true;
+				_protectSet.toAutoRelive = true;
 				_protectSet.hpPercentToUseGoods = 65;
 				_protectSet.mpPercentToUseGoods = 65;
 //				hpGoodsIDs = ClientGuaJiCfgData.hpGoodsIDs;

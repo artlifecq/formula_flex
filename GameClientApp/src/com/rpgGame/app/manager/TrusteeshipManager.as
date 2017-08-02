@@ -402,7 +402,7 @@ package com.rpgGame.app.manager
 			
 			if(_isAutoFightRunning)
 			{
-				_stateMachine.transition(AIStateType.USE_ITEM, null, force);
+//				_stateMachine.transition(AIStateType.USE_ITEM, null, force);
 				_stateMachine.transition(AIStateType.FIND_ATTACKABLE, null, force);
 				_stateMachine.transition(AIStateType.ATTACK_WALK, null, force);
 				_stateMachine.transition(AIStateType.ATTACK_TARGET, null, force);
@@ -412,7 +412,7 @@ package com.rpgGame.app.manager
 			{
 				if(getHasRole())
 				{
-					_stateMachine.transition(AIStateType.USE_ITEM, null, force);
+//					_stateMachine.transition(AIStateType.USE_ITEM, null, force);
 					_stateMachine.transition(AIStateType.FIND_ATTACKABLE, null, force);
 					_stateMachine.transition(AIStateType.ATTACK_TARGET, null, force);
 				}
@@ -501,9 +501,6 @@ package com.rpgGame.app.manager
 		{
 			_findDist = value;
 		}
-		
-		
-		
 		
 		private var testStopKey:Boolean=false;
 		public function testStop():void

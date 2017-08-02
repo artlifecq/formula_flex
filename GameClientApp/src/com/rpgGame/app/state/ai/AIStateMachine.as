@@ -4,7 +4,6 @@ package com.rpgGame.app.state.ai
 	import com.game.engine3D.state.StateMachine;
 	import com.game.engine3D.state.StateReference;
 	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.app.scene.animator.GirlPetFollowAnimator;
 	import com.rpgGame.app.state.ai.pet.GirlPetFollowState;
 	import com.rpgGame.app.state.ai.pet.GirlPetTransLockState;
 	import com.rpgGame.core.state.ai.AINone;
@@ -73,9 +72,9 @@ package com.rpgGame.app.state.ai
 				case AIStateType.ATTACK_WALK:
 					state = new AIAttackWalk();
 					break;
-				case AIStateType.USE_ITEM:
-					state = new AIUseItem();
-					break;
+//				case AIStateType.USE_ITEM:
+//					state = new AIUseItem();
+//					break;
 				
 				case AIStateType.TASK_WALK:
 					state = new AItaskWalk();

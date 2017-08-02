@@ -56,18 +56,16 @@
 
         public static function setup():void
         {
-            var _local3 = null;
-            var _local2 = null;
-            var _local1 = null;
+            var soundSetData:Object = null;
+            var displaySetData:Object = null;
             if (_initedData)
             {
-                _local3 = getSoundSetProtoC();
-                _local2 = getDisplaySetProtoC();
-                _local1 = getFunctionSetProtoC();
-                FunctionSetManager.defaultSetting();
-                BGMManager.applySetting(_local3);
-                DisplaySetUpManager.applySetting(_local2);
-                FunctionSetManager.applySetting(_local1);
+				soundSetData = getSoundSet();
+				displaySetData = getDisplaySet();
+				
+                BGMManager.applySetting(soundSetData);
+                DisplaySetUpManager.applySetting(displaySetData);
+//                FunctionSetManager.applySetting(_local1);
             }
         }
 
@@ -76,58 +74,45 @@
             return _initedData;
         }
 
-        public static function getGameSetProtoC():GameSetProtoC
+        public static function getGameSet():Object
         {
-            return (((gameSetProtoC) || ((gameSetProtoC = new GameSetProtoC()))));
+            return gameSetObj || (gameSetObj = new Object());
         }
 
-        public static function getSoundSet():SoundSetProtoC
+        public static function getSoundSet():Object
         {
-            var _local1:GameSetProtoC = getGameSetProtoC();
-            if (_local1.soundSet == null)
+            var soundSetObj:Object = getGameSet();
+            if (soundSetObj.soundSet == null)
             {
-                _local1.soundSet = new SoundSetProtoC();
+				soundSetObj.soundSet = new Object();
                 BGMManager.defaultSetting();
-                _local1.soundSet.openSound = BGMManager.soundMute;
-                _local1.soundSet.openMusic = BGMManager.musicMute;
-                _local1.soundSet.soundVolume = BGMManager.soundVolume;
-                _local1.soundSet.musicVolume = BGMManager.musicVolume;
+				soundSetObj.soundSet.openSound = BGMManager.soundMute;
+				soundSetObj.soundSet.openMusic = BGMManager.musicMute;
+				soundSetObj.soundSet.soundVolume = BGMManager.soundVolume;
+				soundSetObj.soundSet.musicVolume = BGMManager.musicVolume;
             }
-            return _local1.soundSet;
+            return soundSetObj.soundSet;
         }
 
-        public static function getDisplaySet():DisplaySetProtoC
+        public static function getDisplaySet():Object
         {
-            var _local1:GameSetProtoC = getGameSetProtoC();
-            if (_local1.dispaySet == null)
+            var displaySetObject:Object = getGameSet();
+            if (displaySetObject.dispaySet == null)
             {
-                _local1.dispaySet = new DisplaySetProtoC();
+				displaySetObject.dispaySet = new Object();
                 DisplaySetUpManager.defaultSetting();
-                _local1.dispaySet.quality = DisplaySetUpManager.configLevel;
-                _local1.dispaySet.antiAlias = DisplaySetUpManager.viewAntiAlias;
-                _local1.dispaySet.displayLevel = DisplaySetUpManager.displayLevel;
-                _local1.dispaySet.shadowLevel = DisplaySetUpManager.shadowLevel;
-                _local1.dispaySet.openPhantom = DisplaySetUpManager.openPhantom;
-                _local1.dispaySet.openBlendPass = DisplaySetUpManager.openBlend;
-                _local1.dispaySet.openHeightEffect = DisplaySetUpManager.openHeightEffect;
-                _local1.dispaySet.openHeat = DisplaySetUpManager.openHeat;
-                _local1.dispaySet.openGlow = DisplaySetUpManager.openGlow;
-                _local1.dispaySet.filterQuality = DisplaySetUpManager.filterQuality;
+				displaySetObject.dispaySet.quality = DisplaySetUpManager.configLevel;
+				displaySetObject.dispaySet.antiAlias = DisplaySetUpManager.viewAntiAlias;
+				displaySetObject.dispaySet.displayLevel = DisplaySetUpManager.displayLevel;
+				displaySetObject.dispaySet.shadowLevel = DisplaySetUpManager.shadowLevel;
+				displaySetObject.dispaySet.openPhantom = DisplaySetUpManager.openPhantom;
+				displaySetObject.dispaySet.openBlendPass = DisplaySetUpManager.openBlend;
+				displaySetObject.dispaySet.openHeightEffect = DisplaySetUpManager.openHeightEffect;
+				displaySetObject.dispaySet.openHeat = DisplaySetUpManager.openHeat;
+				displaySetObject.dispaySet.openGlow = DisplaySetUpManager.openGlow;
+				displaySetObject.dispaySet.filterQuality = DisplaySetUpManager.filterQuality;
             }
-            return _local1.dispaySet;
-        }
-
-        public static function getFunctionSetProtoC():FunctionSetProtoC
-        {
-            var _local1:GameSet = getGameSetProtoC();
-            if (_local1.functonSet == null)
-            {
-                _local1.functonSet = new FunctionSetProtoC();
-                _local1.functonSet.showFamilyTitle = FunctionSetManager.showFamilyTitle;
-                _local1.functonSet.showGuildTitle = FunctionSetManager.showGuildTitle;
-                _local1.functonSet.showRoleTitle = FunctionSetManager.showRoleTitle;
-            }
-            return _local1.functonSet;
+            return displaySetObject.dispaySet;
         }
 
 		/**
