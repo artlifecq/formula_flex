@@ -520,7 +520,7 @@ package com.rpgGame.app.utils
 			
 			if (post!=null&&post.length==3)
 			{
-				MainRoleSearchPathManager.walkToSceneAndJump(post[0], post[1], post[2],onArrive, 100,data,needSprite);
+				MainRoleSearchPathManager.walkToSceneAndJump(post[0], post[1], post[2],onArrive, 0,data,needSprite);
 			}
 		}
 		
