@@ -483,10 +483,7 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				subBut.visible=isFinish;
 			}
-			if(type==TaskType.MAINTYPE_TREASUREBOX&&isFinish)
-			{
-				TaskControl.showLoopPanel();
-			}
+			
 		}
 		
 		/**主线任务完成后收成一条目标*/
@@ -554,7 +551,7 @@ package com.rpgGame.app.ui.main.taskbar
 			TaskAutoManager.getInstance().stopTaskAuto();
 			if(check)
 			{
-				TaskAutoManager.getInstance().startOtherTaskAuto(TaskType.MAINTYPE_TREASUREBOX);
+				TaskAutoManager.getInstance().startTaskAuto(TaskType.MAINTYPE_TREASUREBOX);
 			}
 			NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, check?"开启自动进行环式任务":"取消自动进行环式任务");
 		}

@@ -575,7 +575,7 @@ package com.rpgGame.app.ui.scene
 			if(taskAutoKey||key)
 			{
 				taskAutoKey=true;
-				TaskAutoManager.getInstance().startOtherTaskAuto(TaskType.LIJIN_TASK);
+				TaskAutoManager.getInstance().startTaskAuto(TaskType.LIJIN_TASK);
 			}
 			
 		}

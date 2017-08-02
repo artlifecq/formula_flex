@@ -44,8 +44,8 @@ package com.rpgGame.app.manager.task
 		
 		private var _gTimer : GameTimer;
 		private var _isTaskRunning : Boolean;
-		private var _isOtherTaskRunning : Boolean;
-		private var _isAutoing:Boolean=false;
+		//private var _isOtherTaskRunning : Boolean;
+		//private var _isAutoing:Boolean=false;
 		private var _isBroken : Boolean;
 		private var _stateMachine : AIStateMachine;
 		private var _taskTarget:int=0;
@@ -58,7 +58,6 @@ package com.rpgGame.app.manager.task
 			
 			_gTimer = new GameTimer("TaskAutoManager", 500, 0, onUpdate);
 			_isTaskRunning = false;
-			_isOtherTaskRunning =false;
 			_isBroken = false;
 			
 			AppDispather.instance.addEventListener( AppEvent.APP_HIDE, onApphide );
@@ -92,7 +91,7 @@ package com.rpgGame.app.manager.task
 		/**任务进度改变*/
 		private function changeMation(type:int):void
 		{
-			if (!_isTaskRunning&&!_isOtherTaskRunning)
+			if (!_isTaskRunning)
 				return;
 			setTaskChange();
 		}
@@ -101,18 +100,18 @@ package com.rpgGame.app.manager.task
 		{
 			_gTimer.reset();
 			_gTimer.start();
-			return;
+			/*return;
 			if(!_isAutoing)
-				startTaskAuto(tar);
+				startTaskAuto(tar);*/
 		}
 		
-		public function startTaskAuto(tar:int=0) : void
+		public function startTaskAuto(type:int,tar:int=0) : void
 		{
 			
 			testStopKey=false;
 			_stateMachine.transition(AIStateType.AI_NONE);
+			_otherType=type;
 			_taskTarget=tar;
-			_otherType=1;
 			changeSub();
 			TrusteeshipManager.getInstance().stopAll();
 			SceneRoleSelectManager.selectedRole=null;
@@ -121,8 +120,6 @@ package com.rpgGame.app.manager.task
 			if(!_isTaskRunning)
 			{
 				_isTaskRunning = true;
-				_isOtherTaskRunning=false;
-				_isAutoing=true;
 				_isBroken = false;
 				TweenLite.killDelayedCallsTo(onDelayedUnbroken);
 				onUpdate(true);
@@ -130,33 +127,10 @@ package com.rpgGame.app.manager.task
 			
 			
 		}
-		public function startOtherTaskAuto(type:int,tar:int=0) : void
-		{
-			
-			testStopKey=false;
-			_stateMachine.transition(AIStateType.AI_NONE);
-			_taskTarget=tar;
-			_otherType=type;
-			//changeSub();
-			TrusteeshipManager.getInstance().stopAll();
-			SceneRoleSelectManager.selectedRole=null;
-			resetTechTime();
-			walkOver=false;
-			if(!_isOtherTaskRunning)
-			{
-				
-				_isOtherTaskRunning = true;
-				_isTaskRunning=false;
-				_isAutoing=true;
-				_isBroken = false;
-				TweenLite.killDelayedCallsTo(onDelayedUnbroken);
-				onUpdate(true);
-			}
-			
-		}
+		
 		public function broken() : void
 		{
-			if (!_isTaskRunning&&!_isOtherTaskRunning)
+			if (!_isTaskRunning)
 				return;
 			_isBroken = true;
 			TweenLite.killDelayedCallsTo(onDelayedUnbroken);
@@ -180,12 +154,11 @@ package com.rpgGame.app.manager.task
 		public function stopTaskAuto() : void
 		{
 			_stateMachine.transition(AIStateType.AI_NONE);
-			_isAutoing=_isTaskRunning||_isOtherTaskRunning;
-			if (!_isTaskRunning&&!_isOtherTaskRunning)
-			return;
+			walkOver=false;
+			if (!_isTaskRunning)
+				return;
 			_isBroken = false;
 			_isTaskRunning = false;
-			_isOtherTaskRunning= false;
 			TweenLite.killDelayedCallsTo(onDelayedUnbroken);
 			//stop();
 		}
@@ -199,7 +172,7 @@ package com.rpgGame.app.manager.task
 		private function onUpdate(force : Boolean = false) : void
 		{
 			techState();
-			if (!_isTaskRunning&&!_isOtherTaskRunning)
+			if (!_isTaskRunning)
 			{
 				
 				return;
@@ -209,10 +182,6 @@ package com.rpgGame.app.manager.task
 			if (_isTaskRunning)
 			{
 				_stateMachine.transition(AIStateType.TASK_WALK, null, force);
-			}
-			else if(_isOtherTaskRunning)
-			{
-				_stateMachine.transition(AIStateType.TASK_OTHER_WALK, null, force);
 			}
 			
 		}
@@ -239,7 +208,7 @@ package com.rpgGame.app.manager.task
 					if((getTimer()-_techTime)>=AUTOTREASEUER)
 					{
 						resetTechTime();
-						startOtherTaskAuto(TaskType.MAINTYPE_TREASUREBOX);
+						startTaskAuto(TaskType.MAINTYPE_TREASUREBOX);
 					}
 				}
 				else if(TaskMissionManager.haveMainTask)
@@ -247,7 +216,7 @@ package com.rpgGame.app.manager.task
 					if((getTimer()-_techTime)>=AUTOMAIN)
 					{
 						resetTechTime();
-						startTaskAuto();
+						startTaskAuto(TaskType.MAINTYPE_MAINTASK);
 					}
 					
 				}
@@ -278,7 +247,7 @@ package com.rpgGame.app.manager.task
 		}
 		public function get isTasking():Boolean
 		{
-			return _isTaskRunning||_isOtherTaskRunning;
+			return _isTaskRunning;
 		}
 		
 		public function get isTaskRunning():Boolean
@@ -304,9 +273,8 @@ package com.rpgGame.app.manager.task
 		
 		public function setTaskChange():void
 		{
-			if (!_isTaskRunning&&!_isOtherTaskRunning)
+			if (!_isTaskRunning)
 				return;
-			
 			var missionType:int=TaskMissionManager.getTaskMissionType(otherType);
 			if(missionType==TaskType.SUB_GATHER||missionType==TaskType.SUB_USEITEM)
 			{
@@ -327,8 +295,8 @@ package com.rpgGame.app.manager.task
 		private function changeSub():void
 		{
 			if(TaskMissionManager.getTaskSubIsFinish(otherType,_taskTarget))
-			return;
-			_taskTarget=0;
+				return;
+			_taskTarget=0; 
 			var i:int,length:int;
 			var taskData:Q_mission_base=TaskMissionManager.getTaskDataByType(otherType);
 			if(taskData!=null)

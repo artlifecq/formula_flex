@@ -980,6 +980,17 @@ package com.rpgGame.app.manager.task
 			return false;
 		}
 		
+		/**是否任务有过跳跃点*/
+		public static function isTaskJump(type:int):int
+		{
+			var taskData:Q_mission_base=TaskMissionManager.getTaskDataByType(type);
+			
+			if(taskData!=null&&taskData.q_jump_id>0)
+			{
+				return mainTaskData.q_jump_id
+			}
+			return 0;
+		}
 		
 		/**返回额外任务信息*/
 		public static function getGuideTaskInfo():Vector.<TaskInfo>

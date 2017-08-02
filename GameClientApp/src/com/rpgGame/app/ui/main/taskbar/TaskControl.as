@@ -137,12 +137,12 @@ package com.rpgGame.app.ui.main.taskbar
 			
 			if(key==1&&type==TaskType.MAINTYPE_MAINTASK&&MainRoleManager.actorInfo.totalStat.level<=TaskAutoManager.AUTOLVE)//
 			{
-				TaskAutoManager.getInstance().startTaskAuto(num);
+				TaskAutoManager.getInstance().startTaskAuto(type,num);
 				return;
 			}
 			if(key==1&&type==TaskType.MAINTYPE_TREASUREBOX)//
 			{
-				TaskAutoManager.getInstance().startOtherTaskAuto(type,num);
+				TaskAutoManager.getInstance().startTaskAuto(type,num);
 				return;
 			}
 			if(TaskUtil.getSubtypeByType(type)==TaskType.SUB_USEITEM&&!TaskUtil.getIsfinishByType(type))//是使用道具任务且没有完成

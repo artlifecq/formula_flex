@@ -12,6 +12,7 @@ package com.rpgGame.app.state.ai
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.core.state.ai.AIState;
 	import com.rpgGame.coreData.cfg.MapJumpCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_mission_base;
 	import com.rpgGame.coreData.role.SceneJumpPointData;
 	import com.rpgGame.coreData.type.AIStateType;
 	import com.rpgGame.coreData.type.TaskType;
@@ -22,7 +23,7 @@ package com.rpgGame.app.state.ai
 	{
 		private var taskType:int
 		private var taskTarget:int;
-		
+		private var missionType:int
 		public function AItaskWalk()
 		{
 			super(AIStateType.TASK_WALK);
@@ -33,17 +34,14 @@ package com.rpgGame.app.state.ai
 			super.execute();
 			taskType=TaskAutoManager.getInstance().otherType;
 			taskTarget=TaskAutoManager.getInstance().taskTarget;
-			
-			var jumpid:int=TaskMissionManager.isMainTaskJump();
-			var jumpData:SceneJumpPointData=MapJumpCfgData.getJumpportData(jumpid);
-			var post:Array;
-			if(jumpData!=null)
+			var taskData:Q_mission_base=TaskMissionManager.getTaskDataByType(taskType);
+			if(taskData==null)
+				return;
+			missionType=taskData.q_mission_type;
+			var post:Array=getJumpPos();
+			if(TaskMissionManager.getTaskIsFinishByType(taskType))
 			{
-				post=[jumpData.sceneID,jumpData.startPoint.x,jumpData.startPoint.y];
-			}
-			if(TaskMissionManager.getMainTaskIsFinish())
-			{
-				if(TaskMissionManager.getMainTaskHaveNpc())
+				if(TaskMissionManager.getTaskHaveNpc(taskType))
 				{
 					if(post!=null)
 					{
@@ -58,8 +56,7 @@ package com.rpgGame.app.state.ai
 				}
 				else
 				{
-					//TaskControl.showLeadPanel();;主线任务没有回复npc不弹框了
-					TaskSender.sendfinishTaskMessage(TaskMissionManager.mainTaskInfo.taskId);	
+					onArrive(null);
 				}
 			}
 			else
@@ -78,30 +75,38 @@ package com.rpgGame.app.state.ai
 		}
 		private function gotoNpc(data :Object=null):void
 		{
-			TaskUtil.npcTaskWalk(TaskMissionManager.getMainTaskNpcAreaId(),onArrive);
+			TaskUtil.npcTaskWalk(TaskMissionManager.getTaskNpcAreaId(taskType),onArrive);
 		}
 		private function gotoTask(data :Object=null):void
 		{
-			if(TaskMissionManager.getMainTaskMissionType()==TaskType.SUB_USEITEM)//是使用道具任务且没有完成
+			if(missionType==TaskType.SUB_USEITEM)//是使用道具任务且没有完成
 			{
-				var modeid:int=TaskUtil.getMonsterByType(TaskType.MAINTYPE_MAINTASK,TaskAutoManager.getInstance().taskTarget);
+				var modeid:int=TaskUtil.getMonsterByType(taskType,taskTarget);
 				GatherAutoManager.getInstance().startGatherAuto(modeid);
 			}
-			else if(TaskMissionManager.getMainTaskMissionType()==TaskType.SUB_CONVERSATION)
+			else if(missionType==TaskType.SUB_CONVERSATION)
 			{
-				TaskUtil.npcTaskWalk(TaskMissionManager.getMainTaskNpcAreaId(),onArrive);
+				TaskUtil.npcTaskWalk(TaskMissionManager.getTaskNpcAreaId(taskType),onArrive);
 			}
-			else if(TaskMissionManager.getMainTaskMissionType()==TaskType.SUB_MONSTER||TaskMissionManager.getMainTaskMissionType()==TaskType.SUB_ITEM)
+			else if(missionType==TaskType.SUB_MONSTER||missionType==TaskType.SUB_ITEM)
 			{
-				var post:Array=TaskMissionManager.getPathingByType(TaskType.MAINTYPE_MAINTASK,TaskAutoManager.getInstance().taskTarget);
-				TaskUtil.postTaskWalk(post,subMonster,null,TaskMissionManager.getMainTaskMissionType()==TaskType.SUB_MONSTER);
+				if(taskType==TaskType.MAINTYPE_TREASUREBOX)
+				{
+					var monsterId:int=TaskMissionManager.getTreasuerMonsterId(taskTarget);
+					TaskUtil.monsterTaskWalk(monsterId,subMonster);
+				}
+				else
+				{
+					var post:Array=TaskMissionManager.getPathingByType(taskType,taskTarget);
+					TaskUtil.postTaskWalk(post,subMonster,null,true);
+				}
 			}
-			else if(TaskMissionManager.getMainTaskMissionType()==TaskType.SUB_GATHER)
+			else if(missionType==TaskType.SUB_GATHER)
 			{
-				var post2:Array=TaskMissionManager.getPathingByType(TaskType.MAINTYPE_MAINTASK,TaskAutoManager.getInstance().taskTarget);
-				var modeid2:int=TaskUtil.getMonsterByType(TaskType.MAINTYPE_MAINTASK,TaskAutoManager.getInstance().taskTarget);
+				var post2:Array=TaskMissionManager.getPathingByType(taskType,taskTarget);
+				var modeid2:int=TaskUtil.getMonsterByType(taskType,taskTarget);
 				var obj:Object=new Object();
-				obj.subType=TaskUtil.getSubtypeByType(TaskType.MAINTYPE_MAINTASK);
+				obj.subType=TaskUtil.getSubtypeByType(taskType);
 				obj.modeid=modeid2;
 				TaskUtil.postTaskWalk(post2,walkStartGather,obj);
 			}
@@ -111,7 +116,29 @@ package com.rpgGame.app.state.ai
 		private var isWalkTime:int;
 		private function onArrive(data :Object) : void
 		{
-			TaskControl.showLeadPanel();
+			if(taskType==TaskType.MAINTYPE_MAINTASK)
+			{
+				if(TaskMissionManager.getTaskHaveNpc(taskType))	
+				{
+					TaskControl.showLeadPanel();
+				}
+				else//TaskControl.showLeadPanel();;主线任务没有回复npc不弹框了
+				{
+					TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);	
+				}
+			}
+			else if(taskType==TaskType.MAINTYPE_DAILYTASK)
+			{
+				TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);	
+			}
+			else if(taskType==TaskType.MAINTYPE_TREASUREBOX)
+			{
+				TaskControl.showLoopPanel();
+			}
+			else if(taskType==TaskType.LIJIN_TASK)
+			{
+				TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);	
+			}
 			isWalking=false;
 			TaskAutoManager.getInstance().walkOver=true;
 		}
@@ -126,9 +153,21 @@ package com.rpgGame.app.state.ai
 		{
 			
 			var modeid:int=data.modeid;
-			GatherAutoManager.getInstance().startGatherAuto(modeid);
+			GatherAutoManager.getInstance().startGatherAuto(modeid,taskType);
 			isWalking=false;
 			TaskAutoManager.getInstance().walkOver=true;
+		}
+		
+		private function getJumpPos():Array
+		{
+			var jumpid:int=TaskMissionManager.isTaskJump(taskType);
+			var jumpData:SceneJumpPointData=MapJumpCfgData.getJumpportData(jumpid);
+			var post:Array;
+			if(jumpData!=null)
+			{
+				post=[jumpData.sceneID,jumpData.startPoint.x,jumpData.startPoint.y];
+			}
+			return post;
 		}
 		
 		
