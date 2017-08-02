@@ -1,10 +1,9 @@
 package com.rpgGame.appModule.mount
 {
-	import com.rpgGame.app.manager.fight.AttChangePanle;
 	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.manager.mount.MountShowData;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.ui.tab.ViewUI;
+	import com.rpgGame.app.ui.AttChangeView;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.appModule.shop.ItemGetAdvisePanelExt;
@@ -33,7 +32,7 @@ package com.rpgGame.appModule.mount
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 	
-	public class MountView extends ViewUI
+	public class MountView extends AttChangeView
 	{
 		private static var isMouseOut : Boolean = true;
 		private var _skin:ZuoqiCont_Skin;
@@ -46,17 +45,15 @@ package com.rpgGame.appModule.mount
 		private var _touchState:TouchToState;
 		public function MountView():void
 		{
+			attChangeModuleId=AttChangeEnum.MOUNT_MODLE;
 			_skin = new ZuoqiCont_Skin();
 			super(_skin);
 			init();
 		}
-		private var _attchangePanle:AttChangePanle;
 		private function init():void
 		{
 			_mountShowData = new MountShowData();
 			initView();
-			_attchangePanle = new AttChangePanle(AttChangeEnum.MOUNT_MODLE,this.width/2,this.height/2);
-			this.addChild(_attchangePanle);
 		}
 		override protected function onTouch(e:TouchEvent):void
 		{

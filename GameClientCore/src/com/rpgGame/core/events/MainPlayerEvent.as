@@ -30,6 +30,8 @@ package com.rpgGame.core.events
 		
 		/** 属性变化*/
 		public static const STAT_CHANGE:int = UNIQUEID.NEXT;
+		/** 模块属性变化*/
+		public static const MODULE_STAT_CHANGE:int = UNIQUEID.NEXT;
 		/** 最大属性变化*/
 		public static const STAT_MAX_CHANGE:int = UNIQUEID.NEXT;
 		/** RES属性变化*/
