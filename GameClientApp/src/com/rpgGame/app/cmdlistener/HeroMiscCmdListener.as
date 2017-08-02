@@ -216,7 +216,7 @@ package com.rpgGame.app.cmdlistener
 				default:
 					return;
 			}
-			NoticeManager.showNotifyById(noticeId,"",change);
+			NoticeManager.showNotifyById(noticeId,"",Math.abs(change));
 		}
 		
 		private function RecvResPlayerAddMPMessage(msg:*):void
