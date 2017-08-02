@@ -3,9 +3,18 @@ package com.rpgGame.app.utils
 	import com.game.engine2D.config.staticdata.CharAngleType;
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.coreData.cfg.AttFormulaConfig;
+	import com.rpgGame.coreData.cfg.AttValueConfig;
+	import com.rpgGame.coreData.cfg.item.EquipPolishCfg;
+	import com.rpgGame.coreData.cfg.item.EquipStrengthCfg;
+	import com.rpgGame.coreData.cfg.item.EquipWashAttCfg;
 	import com.rpgGame.coreData.clientConfig.ClientAttFormula;
 	import com.rpgGame.coreData.clientConfig.Q_att_transfer;
 	import com.rpgGame.coreData.clientConfig.Q_att_values;
+	import com.rpgGame.coreData.clientConfig.Q_equip_polish;
+	import com.rpgGame.coreData.clientConfig.Q_equip_strength;
+	import com.rpgGame.coreData.clientConfig.Q_equip_wash_attr;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.type.CharAttributeType;
 
 	public class FightValueUtil
@@ -68,6 +77,43 @@ package com.rpgGame.app.utils
 			}
 			return calAtrributeFightPower(list,job);
 		}
+		
+		/**
+		 * 通过物品信息计算战斗力
+		 * @param item
+		 * @return 
+		 * 
+		 */
+		public static function calFightPowerByEquip(equip:EquipInfo):int
+		{
+			var result:int=0;
+			var attValues:Q_att_values=AttValueConfig.getAttInfoById(int(equip.qItem.q_att_type));
+			result=calFightPowerByAttValue(attValues,equip.qItem.q_job);//基本属性
+			var stren:Q_equip_strength=EquipStrengthCfg.getStrengthCfg(equip.qItem.q_kind,equip.qItem.q_job,equip.strengthLevel);
+			attValues=AttValueConfig.getAttInfoById(stren.q_att_type);//强化属性
+			result+=calFightPowerByAttValue(attValues,equip.qItem.q_job);
+			var washcfg:Q_equip_wash_attr=EquipWashAttCfg.getEquipWashAttr(equip.smeltAtt1);
+			if(washcfg.q_attr_id!=0){
+				attValues=AttValueConfig.getAttInfoById(washcfg.q_attr_id);//洗练属性
+				result+=calFightPowerByAttValue(attValues,equip.qItem.q_job);
+			}
+			result+=calFightPowerByAttValue(attValues,equip.qItem.q_job);
+			washcfg=EquipWashAttCfg.getEquipWashAttr(equip.smeltAtt2);
+			if(washcfg.q_attr_id!=0){
+				attValues=AttValueConfig.getAttInfoById(washcfg.q_attr_id);//洗练属性
+				result+=calFightPowerByAttValue(attValues,equip.qItem.q_job);
+			}
+			
+			return result;
+		}
+		
+		/**
+		 * 通过配置属性计算战斗力
+		 * @param att
+		 * @param job
+		 * @return 
+		 * 
+		 */
 		public static function calFightPowerByAttValue(att:Q_att_values,job:int):int
 		{
 			if(att==null)

@@ -104,6 +104,7 @@ package com.rpgGame.app.ui.tips
 			_spellTip.lbXiaohao.text=cfg.q_recovers_detail.length==0?LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT12):cfg.q_recovers_detail;
 			var lvData:Q_skill_ignore=SkillLvLDataManager.getData(info.skillModelId+"_"+info.skillChildLv);
 			_spellTip.lbShuoming.text=lvData.q_skillpanel_description;
+			_spellTip.lbShuoming.wordWrap=true;
 			_spellTip.lbShuoming.isHtmlText=true;
 			
 			if(!riseCfg){

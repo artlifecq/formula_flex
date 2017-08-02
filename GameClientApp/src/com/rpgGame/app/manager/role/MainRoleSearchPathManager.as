@@ -279,7 +279,6 @@ package com.rpgGame.app.manager.role
 			{
 				return;
 			}
-
 			//取得最上一个(走到当前场景的某个传送点)
 			var searchMapData : SearchMapData = _scenePath.shift();
 			if (sceneId == searchMapData.mapId)
@@ -287,7 +286,7 @@ package com.rpgGame.app.manager.role
 				currentSceneId = sceneId;
 				if (searchMapData.posX > -1 && searchMapData.posY < 0)
 				{
-					var pos : Vector3D = new Vector3D(searchMapData.posX, searchMapData.posY, 0);
+					var pos : Vector3D = new Vector3D(searchMapData.posX, searchMapData.posY, searchMapData.posY);
 					if (_scenePath.length == 0)
 					{
 						jumpWalkToPos(MainRoleManager.actor, pos, searchMapData.spacing, _data, _onArrive,null,null,_needSprite);
@@ -296,7 +295,7 @@ package com.rpgGame.app.manager.role
 					else
 					{
 						//RoleStateUtil.walkToPos(MainRoleManager.actor, pos, searchMapData.spacing, _data);
-						jumpWalkToPos(MainRoleManager.actor, pos, 0, _data,null,null,null,_needSprite);
+						jumpWalkToPos(MainRoleManager.actor, pos, 0, _data);
 					}
 					//RoleStateUtil.walk(MainRoleManager.actor, searchMapData.posX, searchMapData.posY, searchMapData.spacing, _data);
 				}
@@ -722,7 +721,7 @@ package com.rpgGame.app.manager.role
 			{
 				RoleStateUtil.walkToPos(MainRoleManager.actor, targetPos, 100, _data, _onArrive);
 				
-				clearAutoFindPath();
+				clearJumpPath();
 			}
 			else
 			{

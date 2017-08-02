@@ -20,6 +20,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.ui.alert.FangChenMiPanelExt;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.utils.TimeUtil;
+	import com.rpgGame.core.events.AttChangeEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.SpellEvent;
 	import com.rpgGame.core.events.SystemTimeEvent;
@@ -28,6 +29,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
+	import com.rpgGame.coreData.enum.AttChangeEnum;
 	import com.rpgGame.coreData.lang.LangText;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.CharAttributeType;
@@ -279,7 +281,14 @@ package com.rpgGame.app.cmdlistener
 				var item:AttributeItem = msg.attributeChangeList[i];
 				change.add(item.type,AttValueConfig.getDisAttValue(item.type,item.value));
 			}
-			FightFaceHelper.showPlayerBaseAttrChange(change);
+			
+			if(msg.modelId == AttChangeEnum.UPLEVEL_MODLE)
+			{
+				FightFaceHelper.showPlayerBaseAttrChange(change);
+			}else{
+				EventManager.dispatchEvent(AttChangeEvent.CHANGEPROPVALUE,msg.modelId,change);
+			}
+			
 		}
 		
 		private function RecvResSkillInfosMessage(msg:ResSkillInfosMessage):void

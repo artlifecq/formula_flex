@@ -3,8 +3,10 @@ package org.mokylin.skin.app.beibao.Xinfa
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
 	import feathers.controls.Label;
+	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import org.mokylin.skin.common.TongYongTanKuang_bg2;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
 
 	/**
@@ -17,7 +19,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var bg:feathers.controls.UIAsset;
+		public var bg:feathers.controls.SkinnableContainer;
 
 		public var btnClose:feathers.controls.Button;
 
@@ -40,7 +42,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			this.currentState = "normal";
 			this.height = 217;
 			this.width = 331;
-			this.elementsContent = [bg_i(),btnClose_i(),__Bianshi_Tips_Label1_i(),lbFuben_i(),lbJixian_i(),lbBoss_i(),__Bianshi_Tips_UIAsset1_i(),__Bianshi_Tips_UIAsset2_i(),lbCailiao_i()];
+			this.elementsContent = [bg_i(),__Bianshi_Tips_UIAsset1_i(),btnClose_i(),__Bianshi_Tips_Label1_i(),lbFuben_i(),lbJixian_i(),lbBoss_i(),__Bianshi_Tips_UIAsset2_i(),__Bianshi_Tips_UIAsset3_i(),lbCailiao_i()];
 			
 			states = {
 			};
@@ -65,6 +67,17 @@ package org.mokylin.skin.app.beibao.Xinfa
 		private function __Bianshi_Tips_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.height = 169;
+			temp.styleName = "ui/common/background/neikuang_1.png";
+			temp.width = 316;
+			temp.x = 7;
+			temp.y = 35;
+			return temp;
+		}
+
+		private function __Bianshi_Tips_UIAsset2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/common/background/bianshiliebiao.png";
@@ -73,7 +86,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			return temp;
 		}
 
-		private function __Bianshi_Tips_UIAsset2_i():feathers.controls.UIAsset
+		private function __Bianshi_Tips_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/beibao/xinfa/pomo2.png";
@@ -82,13 +95,14 @@ package org.mokylin.skin.app.beibao.Xinfa
 			return temp;
 		}
 
-		private function bg_i():feathers.controls.UIAsset
+		private function bg_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
 			temp.height = 217;
-			temp.styleName = "ui/common/background/erji_kuang.png";
+			var skin:StateSkin = new org.mokylin.skin.common.TongYongTanKuang_bg2()
+			temp.skin = skin
 			temp.width = 331;
 			temp.x = 0;
 			temp.y = 0;

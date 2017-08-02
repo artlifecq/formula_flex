@@ -494,7 +494,7 @@ package com.rpgGame.app.utils
 			var monsterData : Q_scene_monster_area = MonsterDataManager.getMonsterByModelId(modeId,SceneSwitchManager.currentMapId);
 			if (monsterData)
 			{
-				MainRoleSearchPathManager.walkToScene(monsterData.q_mapid, monsterData.q_center_x, monsterData.q_center_y,onArrive, 100);
+				MainRoleSearchPathManager.walkToScene(monsterData.q_mapid, monsterData.q_center_x, monsterData.q_center_y,onArrive, 100,null,true);
 			}
 		}
 		/**
@@ -520,7 +520,7 @@ package com.rpgGame.app.utils
 			
 			if (post!=null&&post.length==3)
 			{
-				MainRoleSearchPathManager.walkToSceneAndJump(post[0], post[1], post[2],onArrive, 100,data,needSprite);
+				MainRoleSearchPathManager.walkToSceneAndJump(post[0], post[1], post[2],onArrive, 0,data,needSprite);
 			}
 		}
 		

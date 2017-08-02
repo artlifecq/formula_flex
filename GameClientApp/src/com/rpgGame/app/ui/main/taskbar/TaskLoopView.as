@@ -429,7 +429,7 @@ package com.rpgGame.app.ui.main.taskbar
 						skinList.push(glabe);
 						scrollBox.addChild(glabe);
 					}
-					glabe.name=TaskType.MAINTYPE_GUIDETASK+"AA"+guideLabelList.length;
+					glabe.name=TaskType.MAINTYPE_GUIDETASK+"II"+i;
 					glabe.x=_skin.sec_navi1.x;
 					glabe.visible=true;
 					taskData=TaskMissionCfgData.getTaskByID(task[i].taskModelId);
@@ -483,10 +483,7 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				subBut.visible=isFinish;
 			}
-			if(type==TaskType.MAINTYPE_TREASUREBOX&&isFinish)
-			{
-				TaskControl.showLoopPanel();
-			}
+			
 		}
 		
 		/**主线任务完成后收成一条目标*/
@@ -517,9 +514,10 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				nav.htmlText="<font color='#ffea00'>【主线】</font>"+taskData.q_party_name+taskData.q_name;
 				_skin.lbInfo.htmlText="本任务需要"+taskData.q_needLevel+"级才能接取";
+				TipTargetManager.show( _skin.sec_navi1, TargetTipsMaker.makeTips( TipType.TASK_LEAD_TIP,{name:taskData.q_party_name+taskData.q_name,rewordid:taskData.q_reword_id}));
+				
 			}
 			setKajiGoter();
-			TipTargetManager.show( _skin.sec_navi1, TargetTipsMaker.makeTips( TipType.TASK_LEAD_TIP,{name:taskData.q_party_name+taskData.q_name,rewordid:taskData.q_reword_id}));
 			
 			setUisite();
 		}
@@ -553,7 +551,7 @@ package com.rpgGame.app.ui.main.taskbar
 			TaskAutoManager.getInstance().stopTaskAuto();
 			if(check)
 			{
-				TaskAutoManager.getInstance().startOtherTaskAuto(TaskType.MAINTYPE_TREASUREBOX);
+				TaskAutoManager.getInstance().startTaskAuto(TaskType.MAINTYPE_TREASUREBOX);
 			}
 			NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, check?"开启自动进行环式任务":"取消自动进行环式任务");
 		}
