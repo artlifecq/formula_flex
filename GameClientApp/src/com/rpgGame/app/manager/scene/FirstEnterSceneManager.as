@@ -3,6 +3,7 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.app.manager.DailyResetManager;
 	import com.rpgGame.app.manager.MainUIManager;
 	import com.rpgGame.app.manager.MenuManager;
+	import com.rpgGame.app.manager.ProtectManager;
 	import com.rpgGame.app.manager.collect.CollectManager;
 	import com.rpgGame.app.manager.hud.ActivityBarManager;
 	import com.rpgGame.app.manager.map.MapUnitDataManager;
@@ -84,6 +85,7 @@ package com.rpgGame.app.manager.scene
 
 			MapUnitDataManager.setup();
 //			CountryTaoNiManager.setup();
+			ProtectManager.setup();
 		}
 
 		public static function get isEnterScene() : Boolean

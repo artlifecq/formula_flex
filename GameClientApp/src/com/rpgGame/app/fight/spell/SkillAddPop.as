@@ -13,7 +13,6 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.ShortcutsTypeEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
-	import com.rpgGame.coreData.info.shortcuts.ShortcutsData;
 	import com.rpgGame.coreData.lang.LangSpell;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
 	

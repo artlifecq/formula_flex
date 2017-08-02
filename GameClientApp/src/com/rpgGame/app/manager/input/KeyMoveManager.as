@@ -76,7 +76,7 @@ package com.rpgGame.app.manager.input
 		{
 			if (info.funcID == 225) //SPACE
 			{
-                roll(isDown);
+				dodge(isDown);
 			}
 
 			if (info.funcID == 1 || info.funcID == 5) //W,UP
@@ -97,15 +97,15 @@ package com.rpgGame.app.manager.input
 			}
 		}
         
-        private function roll(bool : Boolean) : void {
+        private function dodge(bool : Boolean) : void {
             if (!bool) {
                 return;
             }
-            var canRoll : Boolean = DodgeManager.getinstance().canUseRoll();
-            if (canRoll)
+            var canDodge : Boolean = DodgeManager.getinstance().canUseDodge();
+            if (canDodge)
 			{
                 CastSpellHelper.shortcutsTryCaseSpell(1, true);
-				DodgeManager.getinstance().useRoll();
+				DodgeManager.getinstance().useDodge();
              } 
 			else 
 			{

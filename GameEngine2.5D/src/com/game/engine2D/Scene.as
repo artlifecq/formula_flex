@@ -114,7 +114,7 @@ package com.game.engine2D
 		private var _cameraInit:Boolean = false;
 		private var _cameraOrthographicLens:CameraOrthographicLens;
 		
-		public function Scene($width:Number, $height:Number, name : String, view : View3D, viewDistance : int=1, areaMapLayer : int=0, view3dEvent:Boolean = true)
+		public function Scene($width:Number, $height:Number, name : String, view : View3D, viewDistance : int=1, areaMapLayer : int=0,viewFilter:Function=null, view3dEvent:Boolean = true)
 		{
 			if(_current != null) {   
 				throw new Error("单例!");   
@@ -152,7 +152,7 @@ package com.game.engine2D
 			sceneStarlingLayer.addChild(sceneNameLayer);
 			
 			//初始化GameScene3D			
-			_scene3d = GameScene3DManager.createScene(name, _view, viewDistance, areaMapLayer);
+			_scene3d = GameScene3DManager.createScene(name, _view, viewDistance, areaMapLayer,viewFilter);
 			_scene3d.glow = view3dEvent;
 			_scene3d.phantom = view3dEvent;
 			_scene3d.heat = view3dEvent;
