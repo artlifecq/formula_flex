@@ -70,7 +70,7 @@ package org.mokylin.skin.app.banghui.huangcheng
 			this.currentState = "normal";
 			this.height = 455;
 			this.width = 634;
-			this.elementsContent = [__Cont_HuangCheng_UIAsset1_i(),grpWangCheng_i(),grpCheng1_i(),grpCheng2_i(),grpCheng3_i(),grpCheng4_i(),skinBaoXiang_i()];
+			this.elementsContent = [__Cont_HuangCheng_UIAsset1_i(),grpWangCheng_i(),grpCheng1_i(),grpCheng2_i(),grpCheng3_i(),grpCheng4_i()];
 			
 			states = {
 			};
@@ -146,7 +146,7 @@ package org.mokylin.skin.app.banghui.huangcheng
 			temp.height = 214;
 			temp.x = 278;
 			temp.y = 140;
-			temp.elementsContent = [uiWangCheng_i(),uiFlag_i(),skinName_i()];
+			temp.elementsContent = [uiWangCheng_i(),uiFlag_i(),skinBaoXiang_i(),skinName_i()];
 			return temp;
 		}
 
@@ -159,8 +159,8 @@ package org.mokylin.skin.app.banghui.huangcheng
 			var skin:StateSkin = new org.mokylin.skin.app.banghui.wangcheng.WangCheng_BaoXiang()
 			temp.skin = skin
 			temp.width = 154;
-			temp.x = 284;
-			temp.y = 176;
+			temp.x = 15;
+			temp.y = 27;
 			return temp;
 		}
 
@@ -229,8 +229,8 @@ package org.mokylin.skin.app.banghui.huangcheng
 			var skin:StateSkin = new org.mokylin.skin.app.banghui.wangcheng.WangChengInfo_Item()
 			temp.skin = skin
 			temp.width = 187;
-			temp.x = 102;
-			temp.y = 41;
+			temp.x = 128;
+			temp.y = 65;
 			return temp;
 		}
 

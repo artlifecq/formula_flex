@@ -24,6 +24,8 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 		//==========================================================================
 		public var btnShuoMing:feathers.controls.Button;
 
+		public var cityImg:feathers.controls.UIAsset;
+
 		public var gPlayer1:feathers.controls.Group;
 
 		public var gPlayer2:feathers.controls.Group;
@@ -48,17 +50,9 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 
 		public var icon1:feathers.controls.UIAsset;
 
-		public var icon2:feathers.controls.UIAsset;
-
-		public var icon3:feathers.controls.UIAsset;
-
-		public var icon4:feathers.controls.UIAsset;
-
 		public var lbBangName:feathers.controls.Label;
 
 		public var lbJiangli:feathers.controls.Label;
-
-		public var lbZhan:feathers.controls.Label;
 
 		public var playerGrp1:feathers.controls.Group;
 
@@ -76,6 +70,8 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 
 		public var uiLingQu:feathers.controls.UIAsset;
 
+		public var xuwei:feathers.controls.SkinnableContainer;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -87,7 +83,7 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [__WangChengZhengBa_UIAsset2_i(),__WangChengZhengBa_UIAsset3_i(),__WangChengZhengBa_SkinnableContainer1_i(),gPlayer1_i(),gPlayer2_i(),gPlayer3_i(),gPlayer4_i(),gPlayer5_i(),grpCheng0_i(),uiBaoXiang_i(),uiLingQu_i(),lbZhan_i(),lbBangName_i(),__WangChengZhengBa_UIAsset6_i(),icon1_i(),icon2_i(),icon3_i(),icon4_i(),lbJiangli_i(),toZhanChang_i(),btnShuoMing_i()];
+			this.elementsContent = [__WangChengZhengBa_UIAsset2_i(),__WangChengZhengBa_UIAsset3_i(),xuwei_i(),gPlayer1_i(),gPlayer2_i(),gPlayer3_i(),gPlayer4_i(),gPlayer5_i(),grpCheng0_i(),lbBangName_i(),__WangChengZhengBa_UIAsset4_i(),icon1_i(),lbJiangli_i(),toZhanChang_i(),btnShuoMing_i()];
 			
 			states = {
 			};
@@ -98,18 +94,6 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __WangChengZhengBa_SkinnableContainer1_i():feathers.controls.SkinnableContainer
-		{
-			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			temp.height = 340;
-			var skin:StateSkin = new org.mokylin.skin.app.banghui.wangcheng.XuWeiSkin()
-			temp.skin = skin
-			temp.width = 216;
-			temp.x = 372;
-			temp.y = 141;
-			return temp;
-		}
-
 		private function __WangChengZhengBa_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -131,15 +115,6 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 		private function __WangChengZhengBa_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhanchang/weicheng/wangcheng4.png";
-			temp.x = 13;
-			temp.y = 34;
-			return temp;
-		}
-
-		private function __WangChengZhengBa_UIAsset6_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/weicheng/wodejiangli.png";
 			temp.x = 28;
 			temp.y = 548;
@@ -154,6 +129,17 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_info;
 			temp.x = 902;
 			temp.y = 94;
+			return temp;
+		}
+
+		private function cityImg_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			cityImg = temp;
+			temp.name = "cityImg";
+			temp.styleName = "ui/app/zhanchang/weicheng/wangcheng4.png";
+			temp.x = 13;
+			temp.y = 34;
 			return temp;
 		}
 
@@ -219,7 +205,7 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 			temp.name = "grpCheng0";
 			temp.x = 402;
 			temp.y = 363;
-			temp.elementsContent = [__WangChengZhengBa_UIAsset4_i()];
+			temp.elementsContent = [cityImg_i(),uiBaoXiang_i(),uiLingQu_i()];
 			return temp;
 		}
 
@@ -304,39 +290,6 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 			return temp;
 		}
 
-		private function icon2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon2 = temp;
-			temp.name = "icon2";
-			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 152;
-			temp.y = 526;
-			return temp;
-		}
-
-		private function icon3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon3 = temp;
-			temp.name = "icon3";
-			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 207;
-			temp.y = 526;
-			return temp;
-		}
-
-		private function icon4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon4 = temp;
-			temp.name = "icon4";
-			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 262;
-			temp.y = 526;
-			return temp;
-		}
-
 		private function lbBangName_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -361,19 +314,6 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 			temp.underline = true;
 			temp.x = 323;
 			temp.y = 550;
-			return temp;
-		}
-
-		private function lbZhan_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbZhan = temp;
-			temp.name = "lbZhan";
-			temp.text = "[占]";
-			temp.color = 0x5CB006;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 412;
-			temp.y = 495;
 			return temp;
 		}
 
@@ -457,9 +397,10 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiBaoXiang = temp;
 			temp.name = "uiBaoXiang";
+			temp.height = 47;
 			temp.styleName = "ui/app/zhanchang/weicheng/baoxiang.png";
-			temp.x = 502;
-			temp.y = 395;
+			temp.x = 70;
+			temp.y = -2;
 			return temp;
 		}
 
@@ -469,8 +410,22 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 			uiLingQu = temp;
 			temp.name = "uiLingQu";
 			temp.styleName = "ui/app/zhanchang/weicheng/jinrifuliyilingqu.png";
-			temp.x = 424;
-			temp.y = 389;
+			temp.x = 9;
+			temp.y = 2;
+			return temp;
+		}
+
+		private function xuwei_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			xuwei = temp;
+			temp.name = "xuwei";
+			temp.height = 340;
+			var skin:StateSkin = new org.mokylin.skin.app.banghui.wangcheng.XuWeiSkin()
+			temp.skin = skin
+			temp.width = 216;
+			temp.x = 372;
+			temp.y = 141;
 			return temp;
 		}
 

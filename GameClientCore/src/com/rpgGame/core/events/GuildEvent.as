@@ -62,6 +62,8 @@ package com.rpgGame.core.events
 		public static const GUILD_WCZB_FIGHTCITY:uint = UNIQUEID.NEXT;
 		/**王城争霸结束**/
 		public static const GUILD_WCZB_OVER:uint = UNIQUEID.NEXT;
+		/**跨服帮会战占领信息**/
+		public static const GUILD_HCZB_AVATAR_LIST:uint = UNIQUEID.NEXT;
 		/**显示统帅技能**/
 		public static const GUILD_LEADER_SKILL_SHOW:uint=UNIQUEID.NEXT;
 	}

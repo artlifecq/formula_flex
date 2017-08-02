@@ -1,6 +1,9 @@
 package com.rpgGame.appModule.guild.war
 {
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.coreData.cfg.QKindomnameCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_kindomname;
+	import com.rpgGame.coreData.enum.EnumCity;
 	import com.rpgGame.netData.guildWar.message.ResGuildWarCityInfoMessage;
 	
 	import feathers.controls.StateSkin;
@@ -32,7 +35,12 @@ package com.rpgGame.appModule.guild.war
 		{
 			_msg=msg;
 			for(var i:int=0;i<msg.citys.length;i++){
-				_cityData.add(msg.citys[i].id,msg.citys[i]);
+				var cityId:int=msg.citys[i].id;
+				if(msg.cityType==3&&cityId!=EnumCity.HUANG_CHENG){
+					var cfg:Q_kindomname=QKindomnameCfgData.getInfoByZone(msg.citys[i].areaId);
+					cityId=cfg.q_id;
+				}
+				_cityData.add(cityId,msg.citys[i]);
 			}
 		}
 	}

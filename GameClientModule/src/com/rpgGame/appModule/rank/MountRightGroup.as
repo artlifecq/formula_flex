@@ -77,12 +77,8 @@ package com.rpgGame.appModule.rank
 			_showdata.horsedataInfo = _horsedataInfo;
 			var props:Vector.<Number> =  _showdata.currentProp(null);
 			_power = FightValueUtil.calAtrributeFightPower(props,_showdata.heroJob);
-			if(_roleData==null)
-			{
-				_roleData = new RoleData(0);
-			}
 			var current:Q_horse = _showdata.housedata;
-			_roleData.avatarInfo.setBodyResID(current.q_skinResID,current.q_animatResID);
+			_avatar.updateBodyWithRes(current.q_skinResID,current.q_animatResID);
 		}
 		
 		override protected function refeashModle():void

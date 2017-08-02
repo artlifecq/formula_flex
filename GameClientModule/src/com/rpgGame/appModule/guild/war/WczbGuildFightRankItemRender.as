@@ -36,7 +36,7 @@ package com.rpgGame.appModule.guild.war
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
 			super.onTouchTarget(target);
-			if(target==skin.lbBanghui){
+			if(target==skin.lbBanghui&&this.owner.customData is WczbMapUI){
 				var info:GuildWarGuildRank=_data as GuildWarGuildRank;
 				GuildSender.reqGuildBriefnessInfo(info.guildId);
 			}

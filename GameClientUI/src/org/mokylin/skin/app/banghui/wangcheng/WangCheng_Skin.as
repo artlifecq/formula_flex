@@ -26,6 +26,8 @@ package org.mokylin.skin.app.banghui.wangcheng
 		//==========================================================================
 		public var List:feathers.controls.List;
 
+		public var actName:feathers.controls.Label;
+
 		public var btnBaoming:feathers.controls.Button;
 
 		public var btnInfo:feathers.controls.Button;
@@ -81,7 +83,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			this.currentState = "normal";
 			this.height = 600;
 			this.width = 956;
-			this.elementsContent = [__WangCheng_Skin_UIAsset2_i(),__WangCheng_Skin_UIAsset3_i(),__WangCheng_Skin_UIAsset4_i(),__WangCheng_Skin_UIAsset5_i(),__WangCheng_Skin_UIAsset6_i(),__WangCheng_Skin_UIAsset7_i(),lbHead_i(),__WangCheng_Skin_UIAsset8_i(),__WangCheng_Skin_UIAsset9_i(),grpList_i(),mapGrp_i(),btnJiangli_i(),btnInfo_i(),__WangCheng_Skin_Label3_i(),lbHuoYue_i(),nextTitle_i(),lbDate_i(),btnBaoming_i(),btnJinru_i(),btnShuoMing_i(),grpCheng_i(),grpTo_i()];
+			this.elementsContent = [__WangCheng_Skin_UIAsset2_i(),__WangCheng_Skin_UIAsset3_i(),__WangCheng_Skin_UIAsset4_i(),__WangCheng_Skin_UIAsset5_i(),__WangCheng_Skin_UIAsset6_i(),__WangCheng_Skin_UIAsset7_i(),lbHead_i(),__WangCheng_Skin_UIAsset8_i(),__WangCheng_Skin_UIAsset9_i(),grpList_i(),mapGrp_i(),btnJiangli_i(),btnInfo_i(),actName_i(),lbHuoYue_i(),nextTitle_i(),lbDate_i(),btnBaoming_i(),btnJinru_i(),btnShuoMing_i(),grpCheng_i(),grpTo_i()];
 			
 			states = {
 			};
@@ -124,17 +126,6 @@ package org.mokylin.skin.app.banghui.wangcheng
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 150;
 			temp.y = 4;
-			return temp;
-		}
-
-		private function __WangCheng_Skin_Label3_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "帮派活跃：";
-			temp.color = 0xE8C958;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 58;
-			temp.y = 559;
 			return temp;
 		}
 
@@ -227,6 +218,19 @@ package org.mokylin.skin.app.banghui.wangcheng
 			temp.styleName = "ui/app/banghui/wangcheng/zhanlipaiming.png";
 			temp.x = 119;
 			temp.y = 274;
+			return temp;
+		}
+
+		private function actName_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			actName = temp;
+			temp.name = "actName";
+			temp.text = "帮派活跃：";
+			temp.color = 0xE8C958;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 58;
+			temp.y = 559;
 			return temp;
 		}
 

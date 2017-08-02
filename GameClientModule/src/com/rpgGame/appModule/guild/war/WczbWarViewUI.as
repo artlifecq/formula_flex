@@ -10,8 +10,10 @@ package com.rpgGame.appModule.guild.war
 	import com.rpgGame.core.events.GuildEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.coreData.cfg.QKindomnameCfgData;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.TipsCfgData;
+	import com.rpgGame.coreData.clientConfig.Q_kindomname;
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.enum.EnumCity;
 	import com.rpgGame.coreData.utils.FilterUtil;
@@ -89,7 +91,7 @@ package com.rpgGame.appModule.guild.war
 			_gTimer=new GameTimer("WczbWarViewUI",1000,0,updateTime);
 			_gTimer.stop();
 			_skin.btnInfo.label="皇城争霸";
-			currentMap=wczbMap;
+//			currentMap=wczbMap;
 		}
 		
 		override public function show(data:Object=null):void
@@ -98,7 +100,12 @@ package com.rpgGame.appModule.guild.war
 			
 			initEvent();
 			
-			GuildWarSender.reqGuildWarCityInfo();
+			if(data&&data==EnumCity.HUANG_CHENG){
+				GuildWarSender.reqGuildWarCityInfo(1);
+			}else if(!_currentMap){
+				GuildWarSender.reqGuildWarCityInfo(-1);
+			}
+			
 			GuildWarSender.reqEnterGuildWarPanel();
 		}
 		
@@ -221,6 +228,20 @@ package com.rpgGame.appModule.guild.war
 			
 			var cityStyleName:String="wangcheng3";
 			var flagStyleName:String="wangcheng";
+			
+			var cityInfo:GuildWarCityInfo;
+			for(var i:int=0;i<	_infoMsg.citys.length;i++){
+				if(_infoMsg.citys[i].id==EnumCity.WANG_CHENG){
+					cityInfo=_infoMsg.citys[i];
+					break;
+				}
+			}
+			var wangChengNames:Array=["handan","daliang","chengdu","linzi"];
+			if(currentCityId==EnumCity.WANG_CHENG){
+				var cfg:Q_kindomname=QKindomnameCfgData.getInfoByZone(cityInfo.areaId);
+				flagStyleName="ui/app/banghui/wangcheng/"+wangChengNames[cfg.q_id-1]+".png";
+			}
+			
 			_skin.uiCheng.styleName="ui/app/banghui/wangcheng/xiaocheng/"+cityStyleName+".png";
 			_skin.uiMyFlag.styleName="ui/app/banghui/wangcheng/"+flagStyleName+".png";
 			_skin.uiCheng.x=100;
@@ -416,7 +437,11 @@ package com.rpgGame.appModule.guild.war
 			_skin.lbTime.text=_timeStr+TimeUtil.format3TimeType(_leftTime);
 			if(_leftTime<=0){
 				_gTimer.stop();
-				GuildWarSender.reqGuildWarCityInfo();//重新获取城池信息
+				if(currentMap==wczbMap){
+					GuildWarSender.reqGuildWarCityInfo(0);
+				}else{
+					GuildWarSender.reqGuildWarCityInfo(1);
+				}
 			}
 		}
 		
@@ -521,13 +546,25 @@ package com.rpgGame.appModule.guild.war
 		
 		private function showMap():void
 		{
-			wczbMap.setCityData(_infoMsg);
-			hczbMap.setCityData(_infoMsg);
+			if(_infoMsg.cityType==3){
+				hczbMap.setCityData(_infoMsg);
+				currentMap=hczbMap;
+				_skin.actName.visible=_skin.lbHuoYue.visible=false;
+				_skin.btnBaoming.visible=false;
+				_skin.btnShuoMing.x=58;
+			}else{
+				wczbMap.setCityData(_infoMsg);
+				currentMap=wczbMap;
+				_skin.btnShuoMing.x=323;
+				_skin.actName.visible=_skin.lbHuoYue.visible=true;
+				_skin.btnBaoming.visible=true;
+			}
 		}
 		
 		private function showRank():void
 		{
 			_skin.List.dataProvider.removeAll();
+			_skin.List.customData=currentMap;
 			var num:int=_infoMsg.ranks.length;
 			for(var i:int=0;i<num;i++){
 				_skin.List.dataProvider.addItem(_infoMsg.ranks[i]);
@@ -572,9 +609,11 @@ package com.rpgGame.appModule.guild.war
 					if(_currentMap==wczbMap){
 						currentMap=hczbMap;
 						_skin.btnInfo.label="王城争霸";
+						GuildWarSender.reqGuildWarCityInfo(1);
 					}else{
 						currentMap=wczbMap;
 						_skin.btnInfo.label="皇城争霸";
+						GuildWarSender.reqGuildWarCityInfo(0);
 					}
 					break;
 			}
@@ -582,7 +621,6 @@ package com.rpgGame.appModule.guild.war
 		
 		private function toEnterWar():void
 		{
-			AppManager.closeAllApp();
 			GuildWarSender.reqGuildWarEnter();
 		}
 	}

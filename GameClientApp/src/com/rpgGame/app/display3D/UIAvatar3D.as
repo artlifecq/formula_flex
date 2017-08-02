@@ -6,11 +6,26 @@ package com.rpgGame.app.display3D
 	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.AvatarInfo;
+	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
+	import com.rpgGame.coreData.cfg.model.AvatarClothesResCfgData;
+	import com.rpgGame.coreData.cfg.model.AvatarDeputyWeaponResCfgData;
+	import com.rpgGame.coreData.cfg.model.AvatarHairResCfgData;
+	import com.rpgGame.coreData.cfg.model.AvatarWeapontResCfgData;
+	import com.rpgGame.coreData.cfg.model.HeroModelCfgData;
+	import com.rpgGame.coreData.clientConfig.AvatarClothesRes;
+	import com.rpgGame.coreData.clientConfig.AvatarDeputyWeaponRes;
+	import com.rpgGame.coreData.clientConfig.AvatarHairRes;
+	import com.rpgGame.coreData.clientConfig.AvatarWeaponRes;
+	import com.rpgGame.coreData.clientConfig.HeroModel;
+	import com.rpgGame.coreData.clientConfig.Q_warflag;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
+	import com.rpgGame.netData.player.bean.PlayerAppearanceInfo;
+	import com.rpgGame.netData.player.bean.PlayerBriefInfo;
 	
 	import flash.geom.Point;
+	import flash.geom.Vector3D;
 	
 	import feathers.controls.UIAsset;
 	import feathers.core.FeathersControl;
@@ -36,20 +51,43 @@ package com.rpgGame.app.display3D
 		private var _touchID:int=-1;
 		private var startX:Number;
 		private var defaultRotationY:int;
+		private var _roleData:RoleData;
 		
 		/**
 		 * 
 		 * @param container avatar显示的父容器,交互区域有多大，在编辑器里面就拉多大,方便布局
 		 * 
 		 */
-		public function UIAvatar3D(container:DisplayObjectContainer=null)
+		public function UIAvatar3D(container:DisplayObjectContainer=null,scale:Number=1.0)
 		{
 			super();
 			avatar3d=new InterObject3D();
+			_roleData= new RoleData(0);
+			this.role = SceneRole.create(SceneCharType.DUMMY, _roleData.id);
+			role.rotationX = 45;
+			this.role.data = _roleData;
+			avatar3d.setRenderUnit(role);
+			role.setScale(scale);
+			
+			role.avatar.shareMaterials = false;
+			role.avatar.lightPicker = Stage3DLayerManager.screenLightPicker;
 			this.addChild3D(avatar3d);
 			bindContainer(container);
+			
+			transition(RoleStateType.ACTION_IDLE); //切换到“站立状态”
+			transition(RoleStateType.ACTION_SHOW); //切换到“站立状态”
 		}
 		
+		/**
+		 *获取换装信息  
+		 * @return 
+		 * 
+		 */
+		public function get avatarInfo():AvatarInfo
+		{
+			return _roleData.avatarInfo;
+		}
+
 		/**
 		 *绑定到对应的容器 
 		 * 默认和容器底部居中对齐
@@ -134,30 +172,6 @@ package com.rpgGame.app.display3D
 		}
 		
 		/**
-		 *配置数据 
-		 * @param data
-		 * 
-		 */
-		public function setRoleData(data : RoleData) : void
-		{
-			if (this.role == null)
-			{
-				this.role = SceneRole.create(SceneCharType.DUMMY, data.id);
-				role.rotationX = 45;
-			}
-			this.role.data = data;
-			
-			role.avatar.shareMaterials = false;
-			role.avatar.lightPicker = Stage3DLayerManager.screenLightPicker;
-			//执行主换装更新
-			AvatarManager.updateAllPart(role);
-			
-			transition(RoleStateType.ACTION_IDLE); //切换到“站立状态”
-			
-			avatar3d.setRenderUnit(role);
-		}
-		
-		/**
 		 *转换动作 
 		 * @param actionType
 		 * 
@@ -165,7 +179,7 @@ package com.rpgGame.app.display3D
 		public function transition(actionType : int) : void
 		{
 			if (role != null)
-				role.stateMachine.transition(actionType); //切换到“站立状态”
+				role.stateMachine.transition(actionType);
 		}
 		
 		/**
@@ -217,6 +231,247 @@ package com.rpgGame.app.display3D
 			defaultRotationY=value;
 			avatar3d.rotationY=defaultRotationY;
 		}
+		
+		/**
+		 *更新主体 
+		 * @param res
+		 * 
+		 */
+		public function updateBodyWithRes(res:String,animat:String=null):void
+		{
+			avatarInfo.setBodyResID(res,null);
+			AvatarManager.updateBody(role);
+		}
+		
+		/**
+		 *根据AvatarInfo更新
+		 * 
+		 */
+		public function updateWithAvatarInfo(info:AvatarInfo):void
+		{
+			avatarInfo.setBodyResID(info.bodyResID, info.bodyAnimatResID);
+			avatarInfo.hairResID = info.hairResID;
+			avatarInfo.weaponResID = info.weaponResID;
+			avatarInfo.weaponEffectID = info.weaponEffectID;
+			avatarInfo.weaponEffectScale = info.weaponEffectScale;
+			avatarInfo.deputyWeaponResID = info.deputyWeaponResID;
+			avatarInfo.deputyWeaponEffectID=info.deputyWeaponEffectID;
+			avatarInfo.deputyWeaponEffectScale=info.deputyWeaponEffectScale;
+			avatarInfo.zhanqiResID=info.zhanqiResID;
+			AvatarManager.updateAllPart(role);			//执行主换装更新
+		}
+		
+		
+		public function updateWithPlayerAppearanceInfo(info:PlayerAppearanceInfo):void
+		{
+			var animatResID : String = null;
+			
+			var clothesRes : AvatarClothesRes = AvatarClothesResCfgData.getInfo(info.cloths);
+			if (!clothesRes)
+			{
+				clothesRes = AvatarClothesResCfgData.getInfo(info.job);
+			}
+			
+			var bodyResID:String = clothesRes.bodyRes;
+			var bodyEffectResID:String = clothesRes.effectRes;
+			
+			var hairRes : AvatarHairRes = AvatarHairResCfgData.getInfo(info.hair);
+			if (!hairRes)
+			{
+				hairRes = AvatarHairResCfgData.getInfo(clothesRes.hairResId);
+			}
+			var hairResID:String = hairRes.hairRes;
+			var heroModel : HeroModel = HeroModelCfgData.getInfo(info.body);
+			switch (info.job)
+			{
+				case 1:
+					animatResID = heroModel.animatRes_bingjia;	
+					break;
+				case 2:
+					if(info.sex)
+					{
+						animatResID = heroModel.animatRes_mojia_man;
+					}
+					else
+					{
+						animatResID = heroModel.animatRes_mojia_woman;
+					}
+					break;
+				case 3:
+					if(info.sex)
+					{
+						animatResID = heroModel.animatRes_mojia_man;
+					}
+					else
+					{
+						animatResID = heroModel.animatRes_mojia_woman;
+					}
+					break;
+				case 4:
+					animatResID = heroModel.animatRes_yijia;
+					break;
+				case 5:
+					animatResID = heroModel.animatRes_waibao;
+					break;
+			}
+			
+			
+			var weaponResID : String = null;
+			var weaponEffectResID : String = "";
+			var weaponEffectScale : int = 0;
+			var weaponEffectOffset : Vector3D = null;
+			var deputyWeaponResID : String = null;
+			var deputyWeaponEffectResID : String = "";
+			var deputyWeaponEffectScale : int = 0;
+			var deputyWeaponEffectOffset : Vector3D = null;
+			var weaponRes : AvatarWeaponRes = AvatarWeapontResCfgData.getInfo(info.weapon);
+			if (weaponRes)
+			{
+				weaponResID = weaponRes.res;
+				weaponEffectResID = weaponRes.effectRes;
+				weaponEffectScale = weaponRes.effectScale;
+				weaponEffectOffset = new Vector3D(weaponRes.effectOffsetX, weaponRes.effectOffsetY, weaponRes.effectOffsetZ);
+			}
+			var deputyWeaponRes : AvatarDeputyWeaponRes = AvatarDeputyWeaponResCfgData.getInfo(info.second_weapon);
+			if (deputyWeaponRes)
+			{
+				deputyWeaponResID = deputyWeaponRes.res;
+				deputyWeaponEffectResID = deputyWeaponRes.effectRes;
+				deputyWeaponEffectScale = deputyWeaponRes.effectScale;
+				deputyWeaponEffectOffset = new Vector3D(deputyWeaponRes.effectOffsetX, deputyWeaponRes.effectOffsetY, deputyWeaponRes.effectOffsetZ);
+			}
+			
+			//战旗暂时没给
+			/*var zhanqiResID:String = "";
+			var zhanqiInfo:Q_warflag = ZhanQiConfigData.getZhanQiDataById(info.warFlagModelId);
+			if(zhanqiInfo)
+			{
+				zhanqiResID=zhanqiInfo.q_panel_show_id;
+			}*/
+			
+			avatarInfo.setBodyResID(bodyResID, animatResID);
+			avatarInfo.hairResID = hairResID;
+			avatarInfo.bodyEffectID = bodyEffectResID;
+			avatarInfo.weaponResID = weaponResID;
+			avatarInfo.weaponEffectID = weaponEffectResID;
+			avatarInfo.weaponEffectScale = weaponEffectScale;
+			avatarInfo.weaponEffectOffset = weaponEffectOffset;
+			avatarInfo.deputyWeaponResID = deputyWeaponResID;
+			avatarInfo.deputyWeaponEffectID = deputyWeaponEffectResID;
+			avatarInfo.deputyWeaponEffectScale = deputyWeaponEffectScale;
+			avatarInfo.deputyWeaponEffectOffset = deputyWeaponEffectOffset;
+//			avatarInfo.zhanqiResID = zhanqiResID;
+			
+			AvatarManager.updateAllPart(role);			//执行主换装更新
+		}
+		
+		/**
+		 *根据PlayerBriefInfo更新 
+		 * @param info
+		 * 
+		 */
+		public function updateWithPlayerBriefInfo(info:PlayerBriefInfo):void
+		{
+			var animatResID : String = null;
+			
+			var clothesRes : AvatarClothesRes = AvatarClothesResCfgData.getInfo(info.cloths);
+			if (!clothesRes)
+			{
+				clothesRes = AvatarClothesResCfgData.getInfo(info.job);
+			}
+			
+			var bodyResID:String = clothesRes.bodyRes;
+			var bodyEffectResID:String = clothesRes.effectRes;
+			
+			var hairRes : AvatarHairRes = AvatarHairResCfgData.getInfo(info.hair);
+			if (!hairRes)
+			{
+				hairRes = AvatarHairResCfgData.getInfo(clothesRes.hairResId);
+			}
+			var hairResID:String = hairRes.hairRes;
+			var heroModel : HeroModel = HeroModelCfgData.getInfo(info.body);
+			var zhanqiInfo:Q_warflag = ZhanQiConfigData.getZhanQiDataById(info.warFlagModelId);
+			switch (info.job)
+			{
+				case 1:
+					animatResID = heroModel.animatRes_bingjia;	
+					break;
+				case 2:
+					if(info.sex)
+					{
+						animatResID = heroModel.animatRes_mojia_man;
+					}
+					else
+					{
+						animatResID = heroModel.animatRes_mojia_woman;
+					}
+					break;
+				case 3:
+					if(info.sex)
+					{
+						animatResID = heroModel.animatRes_mojia_man;
+					}
+					else
+					{
+						animatResID = heroModel.animatRes_mojia_woman;
+					}
+					break;
+				case 4:
+					animatResID = heroModel.animatRes_yijia;
+					break;
+				case 5:
+					animatResID = heroModel.animatRes_waibao;
+					break;
+			}
+			
+			
+			var weaponResID : String = null;
+			var weaponEffectResID : String = "";
+			var weaponEffectScale : int = 0;
+			var weaponEffectOffset : Vector3D = null;
+			var deputyWeaponResID : String = null;
+			var deputyWeaponEffectResID : String = "";
+			var deputyWeaponEffectScale : int = 0;
+			var deputyWeaponEffectOffset : Vector3D = null;
+			var weaponRes : AvatarWeaponRes = AvatarWeapontResCfgData.getInfo(info.weapon);
+			if (weaponRes)
+			{
+				weaponResID = weaponRes.res;
+				weaponEffectResID = weaponRes.effectRes;
+				weaponEffectScale = weaponRes.effectScale;
+				weaponEffectOffset = new Vector3D(weaponRes.effectOffsetX, weaponRes.effectOffsetY, weaponRes.effectOffsetZ);
+			}
+			var deputyWeaponRes : AvatarDeputyWeaponRes = AvatarDeputyWeaponResCfgData.getInfo(info.second_weapon);
+			if (deputyWeaponRes)
+			{
+				deputyWeaponResID = deputyWeaponRes.res;
+				deputyWeaponEffectResID = deputyWeaponRes.effectRes;
+				deputyWeaponEffectScale = deputyWeaponRes.effectScale;
+				deputyWeaponEffectOffset = new Vector3D(deputyWeaponRes.effectOffsetX, deputyWeaponRes.effectOffsetY, deputyWeaponRes.effectOffsetZ);
+			}
+			
+			var zhanqiResID:String = "";
+			if(zhanqiInfo)
+			{
+				zhanqiResID=zhanqiInfo.q_panel_show_id;
+			}
+			
+			avatarInfo.setBodyResID(bodyResID, animatResID);
+			avatarInfo.hairResID = hairResID;
+			avatarInfo.bodyEffectID = bodyEffectResID;
+			avatarInfo.weaponResID = weaponResID;
+			avatarInfo.weaponEffectID = weaponEffectResID;
+			avatarInfo.weaponEffectScale = weaponEffectScale;
+			avatarInfo.weaponEffectOffset = weaponEffectOffset;
+			avatarInfo.deputyWeaponResID = deputyWeaponResID;
+			avatarInfo.deputyWeaponEffectID = deputyWeaponEffectResID;
+			avatarInfo.deputyWeaponEffectScale = deputyWeaponEffectScale;
+			avatarInfo.deputyWeaponEffectOffset = deputyWeaponEffectOffset;
+			avatarInfo.zhanqiResID = zhanqiResID;
+			
+			AvatarManager.updateAllPart(role);			//执行主换装更新
+		}
+	
 		
 		/**
 		 *根据部位和信息更新

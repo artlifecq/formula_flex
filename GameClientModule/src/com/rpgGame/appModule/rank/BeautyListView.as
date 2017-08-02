@@ -101,16 +101,12 @@ class BeautyRightGroup extends RightGroupBase
 	}
 	override protected function initData():void
 	{
-		if(_roleData == null)
-		{
-			_roleData = new RoleData(0);
-		}
 		_girlData = PetAdvanceCfg.getPet(_topInfo.playerBriefInfo.beautyModelid,_topInfo.param);
 		if(_girlData!=null)
 		{
 			var attValues1:Q_att_values=AttValueConfig.getAttInfoById(_girlData.q_attid_master);
 			_power = FightValueUtil.calFightPowerByAttValue(attValues1,_topInfo.job);
-			_roleData.avatarInfo.setBodyResID(_girlData.q_skill_id,null);
+			_avatar.updateBodyWithRes(_girlData.q_skill_id);
 		}else{
 			_power = 0;
 		}

@@ -5,7 +5,9 @@ package com.rpgGame.appModule.guild.war
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
+	import com.rpgGame.coreData.cfg.QKindomnameCfgData;
 	import com.rpgGame.coreData.cfg.StaticValue;
+	import com.rpgGame.coreData.clientConfig.Q_kindomname;
 	import com.rpgGame.coreData.enum.EnumCity;
 	import com.rpgGame.coreData.info.tip.WczbTipsData;
 	import com.rpgGame.coreData.type.TipType;
@@ -39,6 +41,7 @@ package com.rpgGame.appModule.guild.war
 		private var cityHold:UIAsset;
 		private var baoXiang:UIAsset;
 		
+		private var wangChengNames:Array=["handan","daliang","chengdu","linzi"];
 		private var wczb_citys:Array=[EnumCity.XI_WEI,EnumCity.DONG_WEI,EnumCity.ZHONG_WEI,EnumCity.WANG_CHENG];
 		
 		public function WczbMapUI()
@@ -79,7 +82,6 @@ package com.rpgGame.appModule.guild.war
 		{
 			var bao:WangCheng_BaoXiang=_rewardMap.getValue(city);
 			bao.uiLingQu.visible=bao.uiBaoXiang.visible=false;
-			var nm:WangChengInfo_Item=_nameMap.getValue(city);
 		}
 		
 		override public function refresh() : void
@@ -167,6 +169,12 @@ package com.rpgGame.appModule.guild.war
 				if(wczb_citys.indexOf(cityInfo.id)==-1){//不是王城争霸的城池
 					continue;
 				}
+				
+				if(cityInfo.id==EnumCity.WANG_CHENG){
+					var cfg:Q_kindomname=QKindomnameCfgData.getInfoByZone(cityInfo.areaId);
+					_skin.uiFlag.styleName="ui/app/banghui/wangcheng/"+wangChengNames[cfg.q_id-1]+".png";
+				}
+				
 				if(cityInfo.occupyGuildId.hexValue==myGuildId){//是自己的城
 					cityHold=_cityIcon.getValue(cityInfo.id);
 					baoXiang=_rewardMap.getValue(cityInfo.id).uiBaoXiang;

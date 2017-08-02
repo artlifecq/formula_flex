@@ -1,15 +1,11 @@
 package com.rpgGame.appModule.rank
 {
 	import com.rpgGame.app.display3D.UIAvatar3D;
-	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.manager.RankListManager;
-	import com.rpgGame.app.manager.RankManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.core.events.RankListEvent;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
-	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.RoleData;
-	import com.rpgGame.netData.player.bean.PlayerBriefInfo;
 	import com.rpgGame.netData.top.bean.TopInfo;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -24,7 +20,6 @@ package com.rpgGame.appModule.rank
 		private var _avater:UIAvatar3D;
 		private var _showAvatarData : RoleData;
 		private var _topInfo:TopInfo;
-		protected var _roleData:HeroData;
 		public function WorshipPanle():void
 		{
 			_skin = new PaiHang_BaZhu();
@@ -34,11 +29,9 @@ package com.rpgGame.appModule.rank
 		
 		private function initView():void
 		{
-			_avater = new UIAvatar3D(_skin.content);
+			_avater = new UIAvatar3D(_skin.content,1.7);
 			_showAvatarData = new RoleData(0);
 			_showAvatarData.bodyRadius=25;
-			_roleData = new HeroData(0);
-			
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
@@ -48,23 +41,8 @@ package com.rpgGame.appModule.rank
 			if(_topInfo == null)
 				return ;
 			_skin.lbName.text = _topInfo.playername;
-			var info:PlayerBriefInfo = _topInfo.playerBriefInfo;
-			HeroData(_roleData).totalStat.setData(info.attributeList);
-			HeroData(_roleData).sex=info.sex;
-			HeroData(_roleData).job=info.job;
-			HeroData(_roleData).body=info.body;
-			HeroData(_roleData).hair=info.hair;
-			HeroData(_roleData).cloths=info.cloths;
-			HeroData(_roleData).weapon=info.weapon;
-			HeroData(_roleData).deputyWeapon=info.second_weapon;
-			HeroData(_roleData).name=info.playerName
-			HeroData(_roleData).societyName=info.guildName;
-			HeroData(_roleData).guildName = info.guildName;
-			HeroData(_roleData).zhanqiLv = info.warFlagModelId;
-			AvatarManager.updateHeroAvatarInfo(HeroData(_roleData));
 			
-			_avater.setRoleData(this._roleData);
-			_avater.setScale(1.7);
+			_avater.updateWithPlayerBriefInfo(_topInfo.playerBriefInfo);
 			EventManager.addEvent(RankListEvent.UPDATAWORSHIPCOUNT,updataWorshipHandler);
 			updataWorshipHandler();
 		}
