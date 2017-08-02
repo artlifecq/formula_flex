@@ -85,14 +85,18 @@ package com.rpgGame.app.ui.main.taskbar
 		public static function guideBut(num:int):void
 		{
 			var task:Vector.<TaskInfo>=TaskMissionManager.getGuideTaskInfo();
-			var taskInfo:TaskInfo=task[num];
+			var taskInfo:TaskInfo;
 			var taskData:Q_mission_base;
+			if(task.length>num)
+			{
+				taskInfo=task[num];
+			}
 			if(taskInfo)
 			{
 				taskData=TaskMissionCfgData.getTaskByID(taskInfo.taskModelId);
 			}
 			if(taskData&&taskData.q_emid!="")
-			{
+			{Lyt.a("emid:"+taskData.q_emid);
 				FunctionOpenManager.openAppPaneById(taskData.q_emid);
 			}
 			

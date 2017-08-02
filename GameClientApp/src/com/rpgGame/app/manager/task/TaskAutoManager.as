@@ -67,8 +67,7 @@ package com.rpgGame.app.manager.task
 		public function setup(role : SceneRole) : void
 		{
 			_stateMachine = new AIStateMachine(role);
-			_gTimer.reset();
-			_gTimer.start();
+			
 			resetTechTime();
 			if(GlobalSheetData.getSettingInfo(511)!=null)
 			{
@@ -100,6 +99,8 @@ package com.rpgGame.app.manager.task
 		
 		public function startSwitchTaskAuto(tar:int=0) : void
 		{
+			_gTimer.reset();
+			_gTimer.start();
 			return;
 			if(!_isAutoing)
 				startTaskAuto(tar);
@@ -226,46 +227,55 @@ package com.rpgGame.app.manager.task
 		{
 			if(testStopKey)
 				return;
-			
 			if(MainRoleManager.actorInfo.totalStat.level>AUTOLVE)
 				return;
 			if(MapDataManager.getMapInfo(MainRoleManager.actorInfo.mapID).mapType!=EnumMapType.MAP_TYPE_NORMAL)
 				return;
-			if ((_isTaskRunning||_isOtherTaskRunning)&&walkOver)//!MainRoleManager.actor.stateMachine.isIdle
+			
+			if(istech())
 			{
-				resetTechTime();
-				return;
-			}
-			if(actTaskMonster)//杀任务怪的时候不拉
-			{
-				resetTechTime();
-				actTaskMonster=false;
-				return;
-			}
-			if(!MainRoleManager.actor.stateMachine.isIdle&&!TrusteeshipManager.getInstance().isAutoing)//没有站着且不是挂机的时候不拉
-			{
-				resetTechTime();
-				return;
-			}
-			if(TaskMissionManager.treasuerCheck&&TaskMissionManager.haveTreasuerTask)
-			{
-				if((getTimer()-_techTime)>=AUTOTREASEUER)
+				if(TaskMissionManager.treasuerCheck&&TaskMissionManager.haveTreasuerTask)
 				{
-					resetTechTime();
-					startOtherTaskAuto(TaskType.MAINTYPE_TREASUREBOX);
+					if((getTimer()-_techTime)>=AUTOTREASEUER)
+					{
+						resetTechTime();
+						startOtherTaskAuto(TaskType.MAINTYPE_TREASUREBOX);
+					}
+				}
+				else if(TaskMissionManager.haveMainTask)
+				{
+					if((getTimer()-_techTime)>=AUTOMAIN)
+					{
+						resetTechTime();
+						startTaskAuto();
+					}
+					
 				}
 			}
-			else if(TaskMissionManager.haveMainTask)
+			else
 			{
-				if((getTimer()-_techTime)>=AUTOMAIN)
-				{
-					resetTechTime();
-					startTaskAuto();
-				}
-				
+				resetTechTime();
 			}
+			
+			
+			
 		}
-		
+		private function istech():Boolean
+		{
+			if(TrusteeshipManager.getInstance().isAutoing&&!actTaskMonster)
+			{
+				return true;
+			}
+			if(MainRoleManager.actor.stateMachine.isIdle&&!isTasking)
+			{
+				return true;
+			}
+			if(MainRoleManager.actor.stateMachine.isIdle&&isTasking&&!walkOver)
+			{
+				return true;
+			}
+			return false;
+		}
 		public function get isTasking():Boolean
 		{
 			return _isTaskRunning||_isOtherTaskRunning;

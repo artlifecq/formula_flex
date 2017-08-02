@@ -62,7 +62,7 @@ package com.rpgGame.app.ui.main.taskbar
 			}
 			if(target.name!=null)
 			{
-				var nameArr:Array=target.name.split("AA");
+				var nameArr:Array=target.name.split("II");
 				if(nameArr[0]==TaskType.MAINTYPE_GUIDETASK)//引导任务先特殊处理
 				{
 					TaskControl.guideBut(int(nameArr[1]));

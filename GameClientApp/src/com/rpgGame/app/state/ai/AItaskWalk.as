@@ -20,6 +20,9 @@ package com.rpgGame.app.state.ai
 	
 	public class AItaskWalk extends AIState
 	{
+		private var taskType:int
+		private var taskTarget:int;
+		
 		public function AItaskWalk()
 		{
 			super(AIStateType.TASK_WALK);
@@ -28,6 +31,9 @@ package com.rpgGame.app.state.ai
 		override public function execute() : void
 		{
 			super.execute();
+			taskType=TaskAutoManager.getInstance().otherType;
+			taskTarget=TaskAutoManager.getInstance().taskTarget;
+			
 			var jumpid:int=TaskMissionManager.isMainTaskJump();
 			var jumpData:SceneJumpPointData=MapJumpCfgData.getJumpportData(jumpid);
 			var post:Array;
