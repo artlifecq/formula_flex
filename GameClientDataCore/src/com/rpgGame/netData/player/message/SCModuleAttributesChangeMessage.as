@@ -12,9 +12,6 @@ package com.rpgGame.netData.player.message{
 	 * 玩家属性发生变变化单个模块 (坐骑，婚戒等)
 	 */
 	public class SCModuleAttributesChangeMessage extends Message {
-	
-		//变化的属性原因
-		private var _attributeChangeReason: int;
 		
 		//模型Id
 		private var _modelId: int;
@@ -27,10 +24,8 @@ package com.rpgGame.netData.player.message{
 		 */
 		override protected function writing(): Boolean{
 			var i: int = 0;
-			//变化的属性原因
-			writeInt(_attributeChangeReason);
 			//模型Id
-			writeInt(_modelId);
+			writeByte(_modelId);
 			//变化的属性列表
 			writeShort(_attributeChangeList.length);
 			for (i = 0; i < _attributeChangeList.length; i++) {
@@ -44,10 +39,8 @@ package com.rpgGame.netData.player.message{
 		 */
 		override protected function reading(): Boolean{
 			var i: int = 0;
-			//变化的属性原因
-			_attributeChangeReason = readInt();
 			//模型Id
-			_modelId = readInt();
+			_modelId = readByte();
 			//变化的属性列表
 			var attributeChangeList_length : int = readShort();
 			for (i = 0; i < attributeChangeList_length; i++) {
@@ -62,21 +55,6 @@ package com.rpgGame.netData.player.message{
 		 */
 		override public function getId(): int {
 			return 103130;
-		}
-		
-		/**
-		 * get 变化的属性原因
-		 * @return 
-		 */
-		public function get attributeChangeReason(): int{
-			return _attributeChangeReason;
-		}
-		
-		/**
-		 * set 变化的属性原因
-		 */
-		public function set attributeChangeReason(value: int): void{
-			this._attributeChangeReason = value;
 		}
 		
 		/**

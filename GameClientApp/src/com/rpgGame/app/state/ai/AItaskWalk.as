@@ -107,11 +107,13 @@ package com.rpgGame.app.state.ai
 		{
 			TaskControl.showLeadPanel();
 			isWalking=false;
+			TaskAutoManager.getInstance().walkOver=true;
 		}
 		private function subMonster(data : Object) : void
 		{
 			TrusteeshipManager.getInstance().startAutoFight();
 			isWalking=false;
+			TaskAutoManager.getInstance().walkOver=true;
 		}
 		/**采集寻路完成开始采集了*/
 		private function walkStartGather(data :Object):void
@@ -120,6 +122,7 @@ package com.rpgGame.app.state.ai
 			var modeid:int=data.modeid;
 			GatherAutoManager.getInstance().startGatherAuto(modeid);
 			isWalking=false;
+			TaskAutoManager.getInstance().walkOver=true;
 		}
 		
 		

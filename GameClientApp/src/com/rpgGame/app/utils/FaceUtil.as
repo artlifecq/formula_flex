@@ -170,7 +170,7 @@ package com.rpgGame.app.utils
 					case GoodsType.EQUIPMENT2://装备
 						TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.EQUIP_TIP, itemInfo ) );
 						if(itemInfo.containerID==ItemContainerID.BackPack){
-							if(hero.job!=itemInfo.qItem.q_job&&itemInfo.qItem.q_job!=0){
+							if((hero.job!=itemInfo.qItem.q_job&&itemInfo.qItem.q_job!=0)||(hero.sex!=itemInfo.qItem.q_sex&&itemInfo.qItem.q_sex!=0)||hero.totalStat.level<itemInfo.qItem.q_level){
 								grid.setJobState(AssetUrl.EQUIP_JOB_NO);
 							}else{
 								var equipItemInfo:ClientItemInfo=RoleEquipmentManager.instance.getEquipInfoByIndex(itemInfo.qItem.q_kind);
