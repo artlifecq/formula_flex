@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.mount
 {
+	import com.rpgGame.app.manager.fight.AttChangePanle;
 	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.manager.mount.MountShowData;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -12,6 +13,7 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.coreData.cfg.HorseSpellData;
 	import com.rpgGame.coreData.clientConfig.Q_horse_skills;
+	import com.rpgGame.coreData.enum.AttChangeEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.face.BaseFaceInfo;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
@@ -48,10 +50,13 @@ package com.rpgGame.appModule.mount
 			super(_skin);
 			init();
 		}
+		private var _attchangePanle:AttChangePanle;
 		private function init():void
 		{
 			_mountShowData = new MountShowData();
 			initView();
+			_attchangePanle = new AttChangePanle(AttChangeEnum.MOUNT_MODLE,this.width/2,this.height/2);
+			this.addChild(_attchangePanle);
 		}
 		override protected function onTouch(e:TouchEvent):void
 		{
