@@ -334,9 +334,15 @@ package com.rpgGame.app.manager
 					captain = null;
 				}
 				TeamInfoChange( teamInfo , false , isDismiss );
+				
+				var scenePlayer:SceneRole=SceneManager.getSceneObjByID(playreId.ToGID()) as SceneRole;
+				if(scenePlayer)
+				{
+					(scenePlayer.headFace as HeadFace).checkBloodState();
+				}
 			}
 		}
-		public function SetTeamInfoMap( teamInfo:TeamInfo ):void
+		private function SetTeamInfoMap( teamInfo:TeamInfo ):void
 		{
 			_teamMemberMap.clear();
 			if(teamInfo!= null && teamInfo.teamId != null && !teamInfo.teamId.IsZero())
@@ -346,6 +352,11 @@ package com.rpgGame.app.manager
 				{
 					gid = mem.memberId.ToGID();
 					_teamMemberMap.put( mem.memberId.ToGID() , mem);
+					var scenePlayer:SceneRole=SceneManager.getSceneObjByID(gid) as SceneRole;
+					if(scenePlayer)
+					{
+						(scenePlayer.headFace as HeadFace).checkBloodState();
+					}
 				}
 			}
 		}
@@ -368,6 +379,7 @@ package com.rpgGame.app.manager
 			for each (var tp:SceneRole in players) 
 			{
 				HeadFace(tp.headFace).updateTeamFlag(isMyCaptian((tp.data as HeroData).serverID));
+				
 			}
 			
 		}
