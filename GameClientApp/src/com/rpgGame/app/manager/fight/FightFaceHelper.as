@@ -594,6 +594,11 @@ package com.rpgGame.app.manager.fight
 					continue;
 				}
 				val=hash.getValue(key);
+				if(val == 0)
+				{
+					continue;
+				}
+				
 				typeRes=getAttributeUrl(key,val>0);
 				numberColor=val>0?ATTRIBUTE_USESFUL_NUM:ATTRIBUTE_HARMFUL_NUM;
 				var attackFace : AttackFace;

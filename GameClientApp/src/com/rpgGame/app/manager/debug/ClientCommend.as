@@ -42,6 +42,7 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.app.ui.main.dungeon.JiXianTiaoZhanExtPop;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.core.events.AttChangeEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
@@ -418,6 +419,18 @@ package   com.rpgGame.app.manager.debug
 			commandList.put( ".hsort", function (...arg):void
 			{
 				HeadFace(MainRoleManager.actor.headFace).sort(); 
+			});
+			
+			commandList.put( ".fc", function (...arg):void
+			{
+				var hash:org.client.mainCore.ds.HashMap = new org.client.mainCore.ds.HashMap();
+				hash.add(14,40);
+				hash.add(17,40);
+				hash.add(11,40);
+				hash.add(12,40);
+				hash.add(13,40);
+				hash.add(16,40);
+				EventManager.dispatchEvent(AttChangeEvent.CHANGEPROPVALUE,2,hash);
 			});
 		}
 		
