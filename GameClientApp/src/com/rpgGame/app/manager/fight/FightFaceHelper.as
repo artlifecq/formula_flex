@@ -786,15 +786,14 @@ package com.rpgGame.app.manager.fight
 			}
 			else
 			{
-				if (SpellResultTweenUtil.TweenAttrChange==$tweenFun) 
+				/*if (SpellResultTweenUtil.TweenAttrChange==$tweenFun) 
 				{
 					StarlingLayerManager.topUILayer.addChild(attackFace);
 				}
 				else
-				{
-					StarlingLayerManager.headFaceLayer.addChild(attackFace);
-				}
-				
+				{*/
+				StarlingLayerManager.headFaceLayer.addChild(attackFace);
+//				}
 				if (null != $tweenFun)
 				{
 					start=new Point(attacker.headFace.x,attacker.headFace.y);
