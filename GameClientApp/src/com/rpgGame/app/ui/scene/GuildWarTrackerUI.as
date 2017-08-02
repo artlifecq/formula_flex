@@ -182,7 +182,12 @@ package com.rpgGame.app.ui.scene
 		
 		private function overWczb(msg:ResGuildWarResultMessage):void
 		{
-			AppManager.showApp(AppConstant.GUILD_WCZB_RESULT,[msg,cfg,defendCmapId]);
+			var mapId:int=MainRoleManager.actorInfo.mapID;
+			if(mapId==maps[2]){
+				AppManager.showApp(AppConstant.GUILD_HCZB_RESULT,msg);
+			}else{
+				AppManager.showApp(AppConstant.GUILD_WCZB_RESULT,[msg,cfg,defendCmapId]);
+			}
 		}
 		
 		private function getCityInfo(msg:ResGuildWarCityBriefnessInfoMessage):void

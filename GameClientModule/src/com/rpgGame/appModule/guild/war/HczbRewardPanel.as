@@ -66,7 +66,7 @@ package com.rpgGame.appModule.guild.war
 			bangRe.setRewardByJsonStr(str);
 			str=cfg.q_reward4;
 			jinRe.setRewardByJsonStr(str);
-			str=cfg.q_reward4;
+			str=cfg.q_rewards3;
 			allServerRe.setRewardByJsonStr(str);
 		}
 		

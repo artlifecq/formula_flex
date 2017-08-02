@@ -3,8 +3,10 @@ package com.rpgGame.appModule.guild.war
 	import com.game.mainCore.core.manager.TimerManager;
 	import com.game.mainCore.libCore.timer.TimerData;
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.reward.RewardGroup;
+	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.coreData.cfg.QBattleRewardCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_singlecitybase;
@@ -57,6 +59,7 @@ package com.rpgGame.appModule.guild.war
 		{
 			super.hide();
 			TimerManager.deleteTimer(timer);
+			(MainRoleManager.actor.headFace as HeadFace).updateGuildWarInfoBar(null);
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
@@ -131,6 +134,7 @@ package com.rpgGame.appModule.guild.war
 			super.onTouchTarget(target);
 			if(target==_skin.btnLingQu){
 				this.hide();
+				DungeonSender.reqQuitDungeon();
 			}
 		}
 	}
