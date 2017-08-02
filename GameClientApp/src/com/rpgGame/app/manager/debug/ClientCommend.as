@@ -9,6 +9,8 @@ package   com.rpgGame.app.manager.debug
 	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.HashMap;
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.fight.spell.FightChangePop;
+	import com.rpgGame.app.fight.spell.FightPowerChangePopPanelExt;
 	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
 	import com.rpgGame.app.fight.spell.SkillAddPop;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
@@ -418,6 +420,10 @@ package   com.rpgGame.app.manager.debug
 			commandList.put( ".hsort", function (...arg):void
 			{
 				HeadFace(MainRoleManager.actor.headFace).sort(); 
+			});
+			commandList.put( ".fp", function (...arg):void
+			{
+				FightPowerChangePopPanelExt.showFightPowerChange(arg[0],arg[1]);
 			});
 		}
 		
