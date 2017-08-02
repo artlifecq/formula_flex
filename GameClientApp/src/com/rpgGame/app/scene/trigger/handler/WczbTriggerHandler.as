@@ -17,7 +17,7 @@ package com.rpgGame.app.scene.trigger.handler
 	{
 		private var areaids_900:Array=[10053,10054];
 		private var areaids_901:Array=[10059,10060,10061,10062];
-		private var areaids_902:Array=[10059,10060,10061,10062];
+		private var areaids_902:Array=[10067,10068,10069,10070];
 		
 		public function WczbTriggerHandler()
 		{

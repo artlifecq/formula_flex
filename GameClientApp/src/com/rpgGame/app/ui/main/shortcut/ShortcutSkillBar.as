@@ -63,6 +63,7 @@ package com.rpgGame.app.ui.main.shortcut
 			createGrid();
 			addEvent();
 			updateAllGridData();
+			showSkillBtn(false);
 		}
 
 		private function addEvent() : void

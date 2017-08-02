@@ -162,7 +162,7 @@ package com.rpgGame.app.ui.scene
 			FaceUtil.SetItemGrid(icon3,iteminfo3);
 			
 			
-			if(MainRoleManager.actorInfo.guildMemberType==EGuildMemberType.LEADER){
+			if(GuildManager.instance().isLeader==EGuildMemberType.LEADER){
 				EventManager.dispatchEvent(GuildEvent.GUILD_LEADER_SKILL_SHOW,true);
 			}
 			
