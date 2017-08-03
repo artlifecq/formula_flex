@@ -1,8 +1,6 @@
 package com.rpgGame.app.manager {
     import com.rpgGame.app.manager.time.SystemTimeManager;
-    import com.rpgGame.app.ui.main.buff.BuffBar;
     import com.rpgGame.coreData.UNIQUEID;
-    import com.rpgGame.coreData.info.buff.BuffData;
     
     import org.client.mainCore.manager.EventManager;
 	/**
@@ -48,7 +46,7 @@ package com.rpgGame.app.manager {
 			if(_instance!=null)
 				throw new Error("老大，这是单例，别在初始化了");
 		}
-        public function canUseRoll() : Boolean 
+        public function canUseDodge() : Boolean 
 		{
 			
 			if(_currentState == RoleState_CD)
@@ -57,7 +55,7 @@ package com.rpgGame.app.manager {
 				return curCount>0;
         }
 		
-		public function useRoll():Boolean
+		public function useDodge():Boolean
 		{
 			if(_currentState == RoleState_CD)
 				return false;

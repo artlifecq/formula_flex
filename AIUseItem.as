@@ -11,8 +11,6 @@ package com.rpgGame.app.state.ai
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.type.AIStateType;
 	
-	import flash.utils.setTimeout;
-	
 	import gs.TweenLite;
 
 	public class AIUseItem extends AIState
@@ -32,6 +30,7 @@ package com.rpgGame.app.state.ai
 				if(deaditem!=null&&!ItemCDManager.getInstance().getSkillHasCDTime(deaditem.qItem))//做CD判断
 				{
 					usedealsure=true;
+
 					TweenLite.killDelayedCallsTo(useDeadItem);
 					TweenLite.delayedCall(3,useDeadItem,[deaditem]);
 				}

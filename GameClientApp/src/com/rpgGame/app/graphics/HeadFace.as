@@ -639,7 +639,7 @@ package com.rpgGame.app.graphics
 				_bloodBar.updateLevel(value);
 			}
 		}
-		public function checkBloodState() : void
+		override public function checkBloodState() : void
 		{
 			
 			if (_bloodBar)

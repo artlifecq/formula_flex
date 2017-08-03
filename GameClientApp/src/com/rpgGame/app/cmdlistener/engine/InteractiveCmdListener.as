@@ -22,15 +22,12 @@ package com.rpgGame.app.cmdlistener.engine
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.controller.MouseCursorController;
 	import com.rpgGame.core.events.SkillEvent;
-	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.coreData.info.stall.StallData;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import flash.events.Event;
 	import flash.geom.Vector3D;
-	import flash.utils.clearTimeout;
 	import flash.utils.getTimer;
-	import flash.utils.setTimeout;
 	
 	import away3d.events.MouseEvent3D;
 	

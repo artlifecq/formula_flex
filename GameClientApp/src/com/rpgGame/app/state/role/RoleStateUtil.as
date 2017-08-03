@@ -35,12 +35,9 @@ package com.rpgGame.app.state.role
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
-	import flash.utils.clearTimeout;
 	import flash.utils.getTimer;
-	import flash.utils.setTimeout;
 	
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.data.long;
 
 	/**
 	 *
@@ -162,40 +159,28 @@ package com.rpgGame.app.state.role
 			return doWalkTo(role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite);
 			
 		}
-		private static var _timeOutId:uint;
-		private static var _timeOutNum:int=0;
-		public static function doWalkTo(role : SceneRole, pos : Vector3D, spacing : int = 0, data : Object = null, 
+
+		private static function doWalkTo(role : SceneRole, pos : Vector3D, spacing : int = 0, data : Object = null, 
 										   onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null,needSprite:Boolean=false) : Boolean
 		{
-			clearTimeout(_timeOutId);
 			if (!role || !role.usable)
 				return false;
 			var camouflageEntity : SceneRole = SceneRole(role.getCamouflageEntity());
 			var walkRole : SceneRole = camouflageEntity || role;
-			if (walkRole.stateMachine.isAttackHarding)
+			if (walkRole.stateMachine.isAttackHarding && (walkRole.isMainChar || walkRole.isMainCamouflage))
 			{
-				_timeOutNum++;
-				if(_timeOutNum<=20)
-				{
-					_timeOutId=setTimeout(function():void{doWalkTo(role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite);},500);
-					return true;
-				}
-				else
-				{
-					_timeOutNum=0;
-				}
+				return doWalkToPos(role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite,true);
 			}
 			else
 			{
-				_timeOutNum=0;
 				return doWalkToPos(role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite);
 			}
-			_timeOutNum=0;
 			return false
 		}
 		
 		public static function doWalkToPos(role : SceneRole, pos : Vector3D, spacing : int = 0, data : Object = null, 
-										   onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null,needSprite:Boolean=false) : Boolean
+										   onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null,
+										   needSprite:Boolean=false,isForceMove:Boolean =false) : Boolean
 		{
             /*CONFIG::netDebug {
                 NetDebug.LOG("[RoleStateUtil] [doWalkToPos]");
@@ -265,7 +250,7 @@ package com.rpgGame.app.state.role
 			ref.onEnd(onWalkEnd);
 			ref.onSync(onWalkSync);
 //			walkRole.stateMachine.transition(RoleStateType.CONTROL_WALK_MOVE, ref);
-			walkRole.stateMachine.transition(RoleStateType.CONTROL_WALK_MOVE, ref);
+			walkRole.stateMachine.transition(RoleStateType.CONTROL_WALK_MOVE, ref,isForceMove);
 			if (role.isMainChar || role.isMainCamouflage)
 			{
 				if (walkRole.stateMachine.isWalkMoving)
@@ -276,7 +261,6 @@ package com.rpgGame.app.state.role
 			}
 			
 			return walkRole.stateMachine.isWalkMoving;
-
 		}
 		
 		private static function nullFunc():void

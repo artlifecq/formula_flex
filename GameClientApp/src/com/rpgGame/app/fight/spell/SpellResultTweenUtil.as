@@ -3,6 +3,7 @@
 	
 	
 	import com.rpgGame.app.fight.spell.time.TimeDelay;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.core.utils.MCUtil;
 	
@@ -505,21 +506,26 @@
 			{
 				return;
 			}
-			start.x=Starling.current.nativeStage.stageWidth/2;
-			start.y=Starling.current.nativeStage.stageHeight/2-220;
+//			start.x=Starling.current.nativeStage.stageWidth/2;
+//			start.y=Starling.current.nativeStage.stageHeight/2-220;
 			showobj.x=start.x;
 			var i:int=timeIndex(TweenAttrChange);
 			showobj.y=start.y+28*i+20;
 			showobj.alpha=0.0;
 			showobj.scaleX=showobj.scaleY=0.7;
 			var myTimeline:TimelineLite;
-			myTimeline = new TimelineLite({delay:i*0.05,onComplete:callBack,onCompleteParams:[showobj]});
+			myTimeline = new TimelineLite({delay:i*0.05,onUpdate:updateAttr,onUpdateParams:[showobj],onComplete:callBack,onCompleteParams:[showobj]});
 			
-			myTimeline.append(new TweenLite(showobj, 0.3, {alpha:1,x:start.x+70,y:start.y+35*i,scaleX:1.0,scaleY:1.0,ease:Circ.easeOut}));
+			myTimeline.append(new TweenLite(showobj, 0.3, {alpha:1,y:start.y+35*i,scaleX:1.0,scaleY:1.0,ease:Circ.easeOut}));
 			//myTimeline.addLabel("alpha1", 0);
 			//myTimeline.addLabel("alpha0", 0.4);
-			myTimeline.append(new TweenLite(showobj, 0.2, {delay:1.0+0.03*i,alpha:0,x:start.x+120,y:start.y+35*i-30,scaleX:0.8,scaleY:0.8,ease:Expo.easeIn}));
+			myTimeline.append(new TweenLite(showobj, 0.2, {delay:1.0+0.03*i,alpha:0,y:start.y+35*i-30,scaleX:0.8,scaleY:0.8,ease:Expo.easeIn}));
 			
+		}
+		
+		private static function updateAttr(showobj:DisplayObject):void
+		{
+			showobj.x=MainRoleManager.actor.headFace.x-30;
 		}
 	}
 }

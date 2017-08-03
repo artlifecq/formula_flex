@@ -148,8 +148,8 @@ package com.rpgGame.appModule.skill
 			
 			
 			_tabBtns=[new ToggleButton(),new ToggleButton()];
-			_levelUpTip=new RewardMarkTip(_tabBtns[0],85,false);
-			_upGradeTip=new RewardMarkTip(_tabBtns[1],85,false);
+			_levelUpTip=new RewardMarkTip(_tabBtns[0],70,false);
+			_upGradeTip=new RewardMarkTip(_tabBtns[1],70,false);
 			_skin.tab_zizhi.tabFactory=onTabCreate;
 		}
 		

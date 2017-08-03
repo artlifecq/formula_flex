@@ -3,6 +3,7 @@ package com.rpgGame.app.cmdlistener
 	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.fight.spell.FightChangePop;
+	import com.rpgGame.app.fight.spell.FightPowerChangePopPanelExt;
 	import com.rpgGame.app.fight.spell.SkillAddPop;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.manager.ClientSettingManager;
@@ -27,6 +28,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
+	import com.rpgGame.coreData.enum.AttChangeEnum;
 	import com.rpgGame.coreData.lang.LangText;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.CharAttributeType;
@@ -215,7 +217,7 @@ package com.rpgGame.app.cmdlistener
 				default:
 					return;
 			}
-			NoticeManager.showNotifyById(noticeId,"",change);
+			NoticeManager.showNotifyById(noticeId,"",Math.abs(change));
 		}
 		
 		private function RecvResPlayerAddMPMessage(msg:*):void
@@ -256,7 +258,8 @@ package com.rpgGame.app.cmdlistener
 			var afterFight:int=MainRoleManager.actorInfo.totalStat.getStatValue(CharAttributeType.FIGHTING);
 			var fightChange:int=afterFight-beforeFight;
 			if(fightChange!=0){
-				UIPopManager.showAlonePopUI(FightChangePop,[afterFight,beforeFight]);
+				//UIPopManager.showAlonePopUI(FightChangePop,[afterFight,beforeFight]);
+				FightPowerChangePopPanelExt.showFightPowerChange(afterFight,beforeFight);
 			}
 			//如果这个协议，改变的属性，包括hp，mp，maxhp，maxmp的话，就要在下面还要写一段逻辑，来更新角色的血条。因为现在还不确定，是不是这样的，所以，暂时先不写。等以后，真正
 			//用上的时候，检查下这里，再补上代码吧！
@@ -277,7 +280,14 @@ package com.rpgGame.app.cmdlistener
 				var item:AttributeItem = msg.attributeChangeList[i];
 				change.add(item.type,AttValueConfig.getDisAttValue(item.type,item.value));
 			}
-			FightFaceHelper.showPlayerBaseAttrChange(change);
+			
+			if(msg.modelId == AttChangeEnum.UPLEVEL_MODLE)
+			{
+				FightFaceHelper.showPlayerBaseAttrChange(change);
+			}else{
+				EventManager.dispatchEvent(MainPlayerEvent.MODULE_STAT_CHANGE,msg.modelId,change);
+			}
+			
 		}
 		
 		private function RecvResSkillInfosMessage(msg:ResSkillInfosMessage):void

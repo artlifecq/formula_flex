@@ -1,11 +1,8 @@
 package com.rpgGame.app.manager
 {
-	import com.game.engine3D.manager.SceneMapDataManager;
-	import com.game.engine3D.utils.MathUtil;
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.manager.friend.FriendManager;
 	import com.rpgGame.app.manager.map.MapUnitDataManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
@@ -15,17 +12,13 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.sender.TeamSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.ui.alert.GameAlertExt;
-	import com.rpgGame.core.app.AppConstant;
-	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.FunctionMessageBarEvent;
 	import com.rpgGame.core.events.SystemEvent;
 	import com.rpgGame.core.events.TeamEvent;
-	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.info.MapDataManager;
-	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.EnumFunctionMessageBarIcoType;
@@ -334,9 +327,15 @@ package com.rpgGame.app.manager
 					captain = null;
 				}
 				TeamInfoChange( teamInfo , false , isDismiss );
+				
+				var scenePlayer:SceneRole=SceneManager.getSceneObjByID(playreId.ToGID()) as SceneRole;
+				if(scenePlayer)
+				{
+					(scenePlayer.headFace as HeadFace).checkBloodState();
+				}
 			}
 		}
-		public function SetTeamInfoMap( teamInfo:TeamInfo ):void
+		private function SetTeamInfoMap( teamInfo:TeamInfo ):void
 		{
 			_teamMemberMap.clear();
 			if(teamInfo!= null && teamInfo.teamId != null && !teamInfo.teamId.IsZero())
@@ -346,6 +345,11 @@ package com.rpgGame.app.manager
 				{
 					gid = mem.memberId.ToGID();
 					_teamMemberMap.put( mem.memberId.ToGID() , mem);
+					var scenePlayer:SceneRole=SceneManager.getSceneObjByID(gid) as SceneRole;
+					if(scenePlayer)
+					{
+						(scenePlayer.headFace as HeadFace).checkBloodState();
+					}
 				}
 			}
 		}
@@ -368,6 +372,7 @@ package com.rpgGame.app.manager
 			for each (var tp:SceneRole in players) 
 			{
 				HeadFace(tp.headFace).updateTeamFlag(isMyCaptian((tp.data as HeroData).serverID));
+				
 			}
 			
 		}

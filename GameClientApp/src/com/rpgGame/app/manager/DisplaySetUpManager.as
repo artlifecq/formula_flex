@@ -6,6 +6,11 @@ package com.rpgGame.app.manager
 	
 	import away3d.Away3D;
 	
+	/**
+	 * 根据设置的值来调整游戏的质量 
+	 * @author NEIL
+	 * 
+	 */	
 	public class DisplaySetUpManager 
 	{
 		

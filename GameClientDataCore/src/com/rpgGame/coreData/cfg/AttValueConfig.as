@@ -17,7 +17,6 @@ package com.rpgGame.coreData.cfg
 	public class AttValueConfig
 	{
 		private static var _dataDic:Dictionary;
-		private static var _attrDic:Dictionary=new Dictionary();
 		public function AttValueConfig()
 		{
 		}
@@ -103,17 +102,12 @@ package com.rpgGame.coreData.cfg
 		 */
 		public static function getTypeValueMap(att:Q_att_values):HashMap
 		{
-			if (_attrDic[att.id]!=undefined) 
-			{
-				return _attrDic[att.id] as HashMap;
-			}
 			var maps:HashMap=new HashMap();
 			for(var i:int=1;i<CharAttributeType.TYPE_NUM;i++){
 				if(att["q_type"+i]!=0){//值和类型都存在
 					maps.put(att["q_type"+i],att["q_value"+i]);	//type为key，value为value			
 				}
 			}
-			_attrDic[att.id] =maps;
 			return maps;
 		}
 		public static function getAttrHash(attId:int):HashMap

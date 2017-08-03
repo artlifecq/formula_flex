@@ -121,12 +121,9 @@ package com.rpgGame.app.manager.fight
                         case PKModeType.GUILD:
                             // 帮派
 							var hd:HeroData=roleInfo as HeroData;
-							if (hd) 
+							if (hd&&hd.guildId&&hd.guildId.EqualTo(heroData.guildId)) 
 							{
-								if (hd.guildId&&hd.guildId.EqualTo(heroData.guildId)) 
-								{
-									modeState=FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
-								}
+								modeState=FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
 							}
 							else
 							{
