@@ -13,7 +13,6 @@ package com.rpgGame.app.state.role.control
 	import com.rpgGame.core.state.role.action.ActionState;
 	import com.rpgGame.core.state.role.control.MoveState;
 	import com.rpgGame.coreData.info.move.RoleMoveInfo;
-	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.RoleStateType;
 	
 	import flash.geom.Point;

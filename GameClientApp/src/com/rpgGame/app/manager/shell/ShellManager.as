@@ -21,19 +21,20 @@ package com.rpgGame.app.manager.shell
     import com.game.engine3D.vo.BaseRole;
     import com.game.mainCore.core.manager.LayerManager;
     import com.gameClient.log.GameLog;
+    import com.rpgGame.app.cmdlistener.GMCmdListener;
     import com.rpgGame.app.fight.spell.ReleaseSpellHelper;
     import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
     import com.rpgGame.app.fight.spell.SpellAnimationHelper;
     import com.rpgGame.app.graphics.HeadFace;
     import com.rpgGame.app.manager.AreaMapManager;
     import com.rpgGame.app.manager.AvatarManager;
+    import com.rpgGame.app.manager.FunctionOpenManager;
     import com.rpgGame.app.manager.MainUIManager;
     import com.rpgGame.app.manager.ShortcutsManger;
     import com.rpgGame.app.manager.TrusteeshipManager;
-    import com.rpgGame.app.manager.fight.FightManager;
+    import com.rpgGame.app.manager.chat.ChatManager;
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.manager.role.SceneRoleManager;
-    import com.rpgGame.app.manager.role.SceneRoleSelectManager;
     import com.rpgGame.app.manager.scene.SceneManager;
     import com.rpgGame.app.manager.task.TaskAutoManager;
     import com.rpgGame.app.manager.task.TouJingManager;
@@ -50,7 +51,6 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.coreData.cfg.ClientConfig;
     import com.rpgGame.coreData.cfg.TransCfgData;
     import com.rpgGame.coreData.clientConfig.Q_map_transfer;
-    import com.rpgGame.coreData.clientConfig.Q_skill_model;
     import com.rpgGame.coreData.enum.BoneNameEnum;
     import com.rpgGame.coreData.enum.EnumAreaMapType;
     import com.rpgGame.coreData.enum.ShortcutsTypeEnum;
@@ -61,17 +61,14 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.coreData.role.SceneDropGoodsData;
     import com.rpgGame.coreData.role.SceneTranportData;
     import com.rpgGame.coreData.role.TrapInfo;
-    import com.rpgGame.coreData.type.AvatarUrl;
     import com.rpgGame.coreData.type.EffectUrl;
     import com.rpgGame.coreData.type.RenderUnitID;
     import com.rpgGame.coreData.type.RenderUnitType;
     import com.rpgGame.coreData.type.RoleStateType;
     import com.rpgGame.coreData.type.SceneCharType;
     import com.rpgGame.netData.cross.message.ReqEnterCrossClientToGameMessage;
-    import com.rpgGame.netData.task.message.ReqAcceptTaskMessage;
     
     import flash.display.BitmapData;
-    import flash.display.BlendMode;
     import flash.geom.Point;
     import flash.geom.Vector3D;
     import flash.net.URLRequest;
@@ -172,6 +169,7 @@ package com.rpgGame.app.manager.shell
             this._funcs["&getView".toLowerCase()] = this.getView;
 			this._funcs["&tasklevel".toLowerCase()] = this.testTaskLevel;
 			this._funcs["&autofight".toLowerCase()] = this.testStopFight;
+			this._funcs["&Whosyourdaddy".toLowerCase()] = this.whosyourdaddy;
             
             // cross
             this._funcs["&enterCross".toLowerCase()] = this.enterCross;
@@ -1017,6 +1015,14 @@ package com.rpgGame.app.manager.shell
 		private function testTaskLevel(level:int=-1) : void {
 			TaskAutoManager.getInstance().taskLevel(level);	
 		} 
+		
+		private function whosyourdaddy() : void {
+			TaskAutoManager.getInstance().taskLevel(-1);	
+			FunctionOpenManager.needShowOpenMode = false;
+			ChatManager.sendGMMsg("&level 100");
+			ChatManager.sendGMMsg("&gold 9999999");
+			ChatManager.sendGMMsg("&money 9999999");
+		}
 		private function testStopFight(level:int=-1) : void {
 			TrusteeshipManager.getInstance().testStop();
 		}

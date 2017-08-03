@@ -13,6 +13,8 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.TipType;
 	
+	import feathers.controls.UIAsset;
+	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.beibao.juese_Skin;
 
@@ -34,6 +36,7 @@ package com.rpgGame.appModule.role
 			_msEftC=new Inter3DContainer();
 			_skin.container.addChild(_msEftC);
 			_msEft=_msEftC.playInter3DAt(ClientConfig.getEffect("ui_jiemian_miaoshang"),120,125,0);
+			_skin.uiLd.imageScaleMode=UIAsset.IMAGE_SCALE_MODE_NO_SCALE;
 		}
 		
 		public function show(data:HeroData):void
@@ -62,10 +65,10 @@ package com.rpgGame.appModule.role
 			
 			if(MainRoleManager.actorInfo.job==JobEnum.ROLE_4_TYPE){//医家
 				_skin.txt_lidao.text=_roleData.totalStat.getStatValueString(CharAttributeType.HUIGEN);
-				_skin.uiLd.styleName="ui/app/beibao/shuxing/hg.png";
+				_skin.uiLd.styleName="ui/common/shuxing/hg.png";
 			}else{
 				_skin.txt_lidao.text=_roleData.totalStat.getStatValueString(CharAttributeType.LIDAO);
-				_skin.uiLd.styleName="ui/app/beibao/shuxing/ld.png";
+				_skin.uiLd.styleName="ui/common/shuxing/ld.png";
 			}
 		}
 		

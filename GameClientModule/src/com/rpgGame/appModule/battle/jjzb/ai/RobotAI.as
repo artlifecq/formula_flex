@@ -9,16 +9,13 @@ package com.rpgGame.appModule.battle.jjzb.ai
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.action.BlinkStateReference;
-	import com.rpgGame.app.state.role.action.RunStateReference;
 	import com.rpgGame.appModule.common.RoleModelShow;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.type.RoleStateType;
-	import com.rpgGame.coreData.type.SpellBlinkType;
 	
 	import flash.geom.Point;
 	import flash.utils.Dictionary;
 	
-	import feathers.controls.SkinnableContainer;
 	import feathers.controls.UIAsset;
 	
 	import gs.TweenMax;

@@ -288,7 +288,7 @@ package com.game.engine3D.core
 		
 		private function validateShadow() : void
 		{
-			if (!_entityAreaDirectionalLight || GlobalConfig.use2DMap|| _disableShadowLevel)
+			if (!_entityAreaDirectionalLight /*|| GlobalConfig.use2DMap*/|| _disableShadowLevel)
 			{
 				return;
 			}

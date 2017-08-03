@@ -61,7 +61,6 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.state.role.control.StunState;
 	import com.rpgGame.app.state.role.control.SyncSpellActionState;
 	import com.rpgGame.app.state.role.control.TrailMoveState;
-	import com.rpgGame.app.state.role.control.TripleAttackSpellLockState;
 	import com.rpgGame.app.state.role.control.UnmovableState;
 	import com.rpgGame.app.state.role.control.UseSpellState;
 	import com.rpgGame.app.state.role.control.VipBuffState;

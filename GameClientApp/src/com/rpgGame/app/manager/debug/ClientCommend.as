@@ -9,6 +9,7 @@ package   com.rpgGame.app.manager.debug
 	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.HashMap;
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.fight.spell.FightPowerChangePopPanelExt;
 	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
 	import com.rpgGame.app.fight.spell.SkillAddPop;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
@@ -42,7 +43,6 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.app.ui.main.dungeon.JiXianTiaoZhanExtPop;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
-	import com.rpgGame.core.events.AttChangeEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
@@ -53,8 +53,6 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.info.move.RoleMoveInfo;
-	import com.rpgGame.coreData.role.GirlPetData;
-	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
@@ -63,7 +61,6 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
 	import com.rpgGame.netData.backpack.bean.TempItemInfo;
 	import com.rpgGame.netData.fight.message.SCBuffSkillMessage;
-	import com.rpgGame.netData.map.bean.PetInfo;
 	import com.rpgGame.netData.player.message.SCNonagePromptMessage;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
 	import com.rpgGame.netData.structs.Position;
@@ -80,7 +77,6 @@ package   com.rpgGame.app.manager.debug
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.MessageMgr;
 	
 	
@@ -430,7 +426,11 @@ package   com.rpgGame.app.manager.debug
 				hash.add(12,40);
 				hash.add(13,40);
 				hash.add(16,40);
-				EventManager.dispatchEvent(AttChangeEvent.CHANGEPROPVALUE,2,hash);
+				//EventManager.dispatchEvent(AttChangeEvent.CHANGEPROPVALUE,2,hash);
+			});
+			commandList.put( ".fp", function (...arg):void
+			{
+				FightPowerChangePopPanelExt.showFightPowerChange(arg[0],arg[1]);
 			});
 		}
 		
