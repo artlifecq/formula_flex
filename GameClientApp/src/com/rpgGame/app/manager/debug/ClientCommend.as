@@ -425,12 +425,12 @@ package   com.rpgGame.app.manager.debug
 			{
 				var hash:org.client.mainCore.ds.HashMap = new org.client.mainCore.ds.HashMap();
 				hash.add(14,40);
-				hash.add(17,40);
-				hash.add(11,40);
+				hash.add(17,60);
+				hash.add(10,40);
 				hash.add(12,40);
-				hash.add(13,40);
-				hash.add(16,40);
-				EventManager.dispatchEvent(AttChangeEvent.CHANGEPROPVALUE,2,hash);
+				hash.add(15,30);
+				hash.add(16,10);
+				EventManager.dispatchEvent(MainPlayerEvent.MODULE_STAT_CHANGE,2,hash);
 			});
 		}
 		

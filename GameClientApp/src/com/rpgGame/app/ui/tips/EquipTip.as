@@ -166,7 +166,7 @@ package com.rpgGame.app.ui.tips
 			if(equipItemInfo){
 				if(_itemInfo.itemInfo==equipItemInfo.itemInfo){
 					_itemTip.yizhuangbei.visible=true;
-				}else if((_itemInfo.qItem.q_job==0||_itemInfo.qItem.q_job==equipItemInfo.qItem.q_job)&&(_itemInfo.qItem.q_type!=GoodsType.EQUIPMENT2&&_itemInfo.qItem.q_location!=5)){//职业符合
+				}else if((_itemInfo.qItem.q_job==0||_itemInfo.qItem.q_job==equipItemInfo.qItem.q_job)){//职业符合
 					isShowDuiBi=true;
 				}
 			}
@@ -191,18 +191,9 @@ package com.rpgGame.app.ui.tips
 			var titleui:UIAsset;
 			var name:String;
 			var value:String;
-			if(_itemInfo.qItem.q_type==GoodsType.EQUIPMENT2&&_itemInfo.qItem.q_location==5)
-			{
-				var info2:Q_advance_wedding=JieHunJieZiData.getModByLv(Mgr.hunyinMgr.JieZiLv);
-				attValues1=AttValueConfig.getAttInfoById(HunYinManager.ins.getAttId(info2));
-				_itemTip.numbers.number=FightValueUtil.calFightPowerByAttValue(attValues1,_itemInfo.qItem.q_job);
-			}
-			else
-			{
-				var attValues1:Q_att_values=AttValueConfig.getAttInfoById(int(_itemInfo.qItem.q_att_type));//基本属性
-				var stren:Q_equip_strength=EquipStrengthCfg.getStrengthCfg(_itemInfo.qItem.q_kind,_itemInfo.qItem.q_job,_itemInfo.strengthLevel);
-				var strenValues:Q_att_values=AttValueConfig.getAttInfoById(stren.q_att_type);//强化属性
-			}
+			var attValues1:Q_att_values=AttValueConfig.getAttInfoById(int(_itemInfo.qItem.q_att_type));//基本属性
+			var stren:Q_equip_strength=EquipStrengthCfg.getStrengthCfg(_itemInfo.qItem.q_kind,_itemInfo.qItem.q_job,_itemInfo.strengthLevel);
+			var strenValues:Q_att_values=AttValueConfig.getAttInfoById(stren.q_att_type);//强化属性
 			
 			if(equipFight==0)//如果战斗力为0 都去算一次战斗力
 			{
@@ -266,65 +257,64 @@ package com.rpgGame.app.ui.tips
 				}
 				curY+=20;
 			}
-			if(_itemInfo.qItem.q_type!=GoodsType.EQUIPMENT2&&_itemInfo.qItem.q_location!=5)
-			{
-				curY+=4;
-				//琢磨等级
-				createLine(curX,curY,263);
-				curY+=13;
-				titleui=createUiAsset("zhuomodengji");
-				titleui.x=curX;
-				titleui.y=curY;
-				curY+=17;
-				
-				name=HtmlTextUtil.getTextColor(StaticValue.A_UI_GRAY_TEXT,"琢磨等级:");
-				value=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,_itemInfo.polishLevel+"");
+			
+			curY+=4;
+			//琢磨等级
+			createLine(curX,curY,263);
+			curY+=13;
+			titleui=createUiAsset("zhuomodengji");
+			titleui.x=curX;
+			titleui.y=curY;
+			curY+=17;
+			
+			name=HtmlTextUtil.getTextColor(StaticValue.A_UI_GRAY_TEXT,"琢磨等级:");
+			value=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,_itemInfo.polishLevel+"");
+			label=createLabel(name,value);
+			label.x=curX;
+			label.y=curY;
+			curY+=20;
+			if(_itemInfo.polishLevel==0){
+				name=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,"未激活");
+				label=createLabel(name,"");
+				label.x=curX;
+				label.y=curY;
+			}else{
+				var cfg:Q_equip_polish=EquipPolishCfg.getPolishCfg(_itemInfo.polishLevel);
+				name=HtmlTextUtil.getTextColor(StaticValue.A_UI_GRAY_TEXT,"装备属性提升:");
+				value=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,(cfg.q_promote/100).toFixed(1)+"%");
 				label=createLabel(name,value);
 				label.x=curX;
 				label.y=curY;
-				curY+=20;
-				if(_itemInfo.polishLevel==0){
-					name=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,"未激活");
-					label=createLabel(name,"");
-					label.x=curX;
-					label.y=curY;
-				}else{
-					var cfg:Q_equip_polish=EquipPolishCfg.getPolishCfg(_itemInfo.polishLevel);
-					name=HtmlTextUtil.getTextColor(StaticValue.A_UI_GRAY_TEXT,"装备属性提升:");
-					value=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,(cfg.q_promote/100).toFixed(1)+"%");
-					label=createLabel(name,value);
-					label.x=curX;
-					label.y=curY;
-				}
-				
-				//洗练属性
-				curY+=27;
-				createLine(curX,curY,263);
-				curY+=13;
-				titleui=createUiAsset("xilianshuxing");
-				titleui.x=curX;
-				titleui.y=curY;
-				curY+=17;
-				name=HtmlTextUtil.getTextColor(StaticValue.A_UI_GRAY_TEXT,"");
-				if(_itemInfo.smeltAtt1!=0){
-					value=CharAttributeType.getWashAttDes(_itemInfo.smeltAtt1);
-				}else{
-					value=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,"未激活");
-				}
-				label=createLabel(name,value);
-				label.x=curX;
-				label.y=curY;
-				curY+=20;
-				if(_itemInfo.smeltAtt2!=0){
-					value=CharAttributeType.getWashAttDes(_itemInfo.smeltAtt2);
-				}else{
-					value=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,"未激活");
-				}
-				label=createLabel(name,value);
-				label.x=curX;
-				label.y=curY;
-				curY+=27;
 			}
+			
+			//洗练属性
+			curY+=27;
+			createLine(curX,curY,263);
+			curY+=13;
+			titleui=createUiAsset("xilianshuxing");
+			titleui.x=curX;
+			titleui.y=curY;
+			curY+=17;
+			name=HtmlTextUtil.getTextColor(StaticValue.A_UI_GRAY_TEXT,"");
+			if(_itemInfo.smeltAtt1!=0){
+				value=CharAttributeType.getWashAttDes(_itemInfo.smeltAtt1);
+			}else{
+				value=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,"未激活");
+			}
+			label=createLabel(name,value);
+			label.x=curX;
+			label.y=curY;
+			curY+=20;
+			if(_itemInfo.smeltAtt2!=0){
+				value=CharAttributeType.getWashAttDes(_itemInfo.smeltAtt2);
+			}else{
+				value=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,"未激活");
+			}
+			label=createLabel(name,value);
+			label.x=curX;
+			label.y=curY;
+			curY+=27;
+			
 			//装备产出
 			createLine(curX,curY,263);
 			curY+=13;
@@ -358,6 +348,8 @@ package com.rpgGame.app.ui.tips
 			}else{
 				MCUtil.removeSelf(yinIcon);
 			}
+			
+//			_itemTip.lbl_titile.text=FightValueUtil.calFightPowerByEquip(_itemInfo).toString();
 			
 			//装备对比
 			if(isShowDuiBi&&!_isDuibiShow){
