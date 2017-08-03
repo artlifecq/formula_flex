@@ -50,7 +50,7 @@ package com.rpgGame.appModule.guild
 			var data:Q_guildskill = GuildSkillCfgData.getSkill(_skillId,currentLevel);
 			var att:Q_att_values;
 			var attpropId:int ;
-			var attpropValue:int;
+			var attpropValue:String;
 			var attname:String;
 			if(data==null)
 			{
@@ -58,9 +58,9 @@ package com.rpgGame.appModule.guild
 			}else{
 				att = AttValueConfig.getAttInfoById(data.q_property);
 				attpropId= att.q_type1;
-				attpropValue= att.q_value1;
+				attpropValue= AttValueConfig.getDisAttValueStr(att.q_type1,att.q_value1);
 				attname= CharAttributeType.getCNName(attpropId);
-				_skin.lbXiaoguo.htmlText = attname+HtmlTextUtil.getTextColor(0xCFC6AE," +"+attpropValue.toString());
+				_skin.lbXiaoguo.htmlText = attname+HtmlTextUtil.getTextColor(0xCFC6AE," +"+attpropValue);
 			}
 			
 			_nextdata = GuildSkillCfgData.getSkill(_skillId,currentLevel+1);
@@ -74,9 +74,9 @@ package com.rpgGame.appModule.guild
 				_skin.grpHide.visible = true;
 				att = AttValueConfig.getAttInfoById(_nextdata.q_property);
 				attpropId= att.q_type1;
-				attpropValue= att.q_value1;
+				attpropValue= AttValueConfig.getDisAttValueStr(att.q_type1,att.q_value1);
 				attname= CharAttributeType.getCNName(attpropId);
-				_skin.lbNextXiaguo.htmlText = attname+" +"+HtmlTextUtil.getTextColor(0xCFC6AE,attpropValue.toString());
+				_skin.lbNextXiaguo.htmlText = attname+" +"+HtmlTextUtil.getTextColor(0xCFC6AE,attpropValue);
 				
 				var contribution:int =0;
 				if(GuildManager.instance().haveGuild)

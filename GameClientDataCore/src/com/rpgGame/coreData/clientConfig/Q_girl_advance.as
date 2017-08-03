@@ -30,8 +30,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_skill_id:String;
 		 /**  自身属性id */
 		public var q_attid_self:int;
-		 /**  主人属性id */
-		public var q_attid_master:int;
+		 /**  主人属性id([兵家,墨家,医家]) */
+		public var q_attid_master:String;
 		 /**  召唤读条时间（毫秒） */
 		public var q_ride_time:int;
 		 /**  本阶美人允许的最大技能等级 */

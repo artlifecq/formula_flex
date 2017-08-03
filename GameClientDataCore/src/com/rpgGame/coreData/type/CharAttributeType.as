@@ -69,10 +69,6 @@ package com.rpgGame.coreData.type
 		 */
 		public static const WAI_GONG:int = 14;
 		/**
-		 * 内功,影响法系攻击伤害及治疗效果(废弃)
-		 */
-		public static const NEI_GONG:int = 15;
-		/**
 		 * 防御百分比,按照百分比形式减少受到的伤害
 		 */
 		public static const DEFENSE_PER:int = 16;
@@ -136,6 +132,9 @@ package com.rpgGame.coreData.type
 		public static const FIGHTING:int =44;
 		/**秒伤**/	
 		public static const HURT_SEC:int =45;
+		
+		public static const BAISC_HIT:int=9500;
+		public static const BAISC_CRIT:int=5000;
 		
 		
 		//资源属性
@@ -276,7 +275,6 @@ package com.rpgGame.coreData.type
 			pushAttir(MAX_HP,"最大气血");//12
 			pushAttir(MAX_MP,"最大能量");//13
 			pushAttir(WAI_GONG,"攻击");//14
-			pushAttir(NEI_GONG,"攻击");//15
 			pushAttir(DEFENSE_PER,"防御值",10);//16
 			pushAttir(CRIT_PER,"暴击率",10);//17
 			pushAttir(CRIT,"暴击伤害",10);//18
@@ -413,7 +411,7 @@ package com.rpgGame.coreData.type
 		public static function getWashAttDes(att:int):String
 		{
 			var cfg:Q_equip_wash_attr=EquipWashAttCfg.getEquipWashAttr(att);
-			var title:String="属性:";
+//			var title:String="属性:";
 			var des:String="";
 			if(cfg.q_attr_id!=0){
 				des+= CharAttributeType.getCNNameAddValue(cfg.q_attr_id);
@@ -423,7 +421,7 @@ package com.rpgGame.coreData.type
 				des+= CharAttributeType.getDesBySkill(cfg.q_skill_id);
 			}
 			var color:int=ItemQualityType.getColorValue(cfg.q_quality);
-			return HtmlTextUtil.getTextColor(StaticValue.Q_WHITE,title)+HtmlTextUtil.getTextColor(color,des);
+			return HtmlTextUtil.getTextColor(color,des);
 		}
 		
 		public static function getDesBySkill(q_skill_id:int):String

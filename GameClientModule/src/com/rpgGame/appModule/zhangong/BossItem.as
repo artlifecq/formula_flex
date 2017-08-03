@@ -324,9 +324,9 @@ package com.rpgGame.appModule.zhangong
 				case CharAttributeType.HIT:
 					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/gzhonglv.png";
 					break;
-				case CharAttributeType.NEI_GONG:
+				/*case CharAttributeType.NEI_GONG:
 					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/neigong.png";
-					break;
+					break;*/
 				case CharAttributeType.MP:
 					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/nengliang.png";
 					break;

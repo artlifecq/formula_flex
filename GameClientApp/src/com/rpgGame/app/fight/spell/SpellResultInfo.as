@@ -2,14 +2,12 @@ package com.rpgGame.app.fight.spell
 {
 	import com.game.engine3D.vo.BaseRole;
 	import com.gameClient.log.GameLog;
-	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.info.fight.FightHurtResult;
 	import com.rpgGame.coreData.info.fight.FightSingleHurt;
-	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.netData.fight.bean.AttackResultInfo;
 	import com.rpgGame.netData.fight.message.ResAttackResultMessage;
 	
@@ -28,6 +26,8 @@ package com.rpgGame.app.fight.spell
 		public var isMainCharHited : Boolean = false; //主角是否被打了
 		
 		public var singleHurtVo:FightHurtResult;
+		
+		public var hurtDelay:Number;
 		
 		//		//施法结果列表，结果的类型分两种：1、状态改变效果，2、伤害效果
 		public var stateList : Vector.<BuffData>;
@@ -112,11 +112,8 @@ package com.rpgGame.app.fight.spell
 					if (hurtResultVO.atkor /*&& hurtResultVO.atkor.data is HeroData*/) //是玩家才自动反击
 					{
 						isHited = true;
-						
-						
 					}
 				}
-				
 				
 				var hurtType : int = resultInfo.fightResult
 				var hurtAmount : int = resultInfo.damage / hurtResultVO.hurtTimes; //本次
@@ -132,6 +129,7 @@ package com.rpgGame.app.fight.spell
 					hurtResultVO.addHurt(sVo);
 				}
 				hurtList.push(hurtResultVO);
+				info.hurtDelay = hurtResultVO.hurtDelay;
 //			}
 			
 			info.hurtList = hurtList;

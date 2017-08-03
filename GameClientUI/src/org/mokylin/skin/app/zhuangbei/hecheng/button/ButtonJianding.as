@@ -27,32 +27,18 @@ package org.mokylin.skin.app.zhuangbei.hecheng.button
 			super();
 			
 			this.currentState = "upAndSelected";
+			this.height = 43;
+			this.width = 244;
 			this.elementsContent = [];
 			
 			states = {
-				init:[
-						{target:"labelDisplay",
-							name:"textAlign",
-							value:"center"
-						}
-						,
-						{target:"labelDisplay",
-							name:"color",
-							value:0xFFFFFF
-						}
-						,
-						{target:"labelDisplay",
-							name:"verticalAlign",
-							value:"middle"
-						}
-					]
 			};
-			skinNames={"down":"ui/app/zhuangbei/hecheng/button/jianding/down.png",
-			"downAndSelected":"ui/app/zhuangbei/hecheng/button/jianding/select.png",
-			"hover":"ui/app/zhuangbei/hecheng/button/jianding/over.png",
-			"overAndSelected":"ui/app/zhuangbei/hecheng/button/jianding/select.png",
-			"up":"ui/app/zhuangbei/hecheng/button/jianding/up.png",
-			"upAndSelected":"ui/app/zhuangbei/hecheng/button/jianding/select.png"};
+			skinNames={"down":"ui/app/zhuangbei/hecheng/button/hechengBase/down.png",
+			"downAndSelected":"ui/app/zhuangbei/hecheng/button/hechengBase/over.png,ui/app/zhuangbei/hecheng/button/jiandingtuzhihecheng/up.png",
+			"hover":"ui/app/zhuangbei/hecheng/button/hechengBase/over.png,ui/app/zhuangbei/hecheng/button/jiandingtuzhihecheng/up.png",
+			"hoverAndSelected":"ui/app/zhuangbei/hecheng/button/hechengBase/over.png,ui/app/zhuangbei/hecheng/button/jiandingtuzhihecheng/up.png",
+			"up":"ui/app/zhuangbei/hecheng/button/hechengBase/up.png,ui/app/zhuangbei/hecheng/button/jiandingtuzhihecheng/up.png",
+			"upAndSelected":"ui/app/zhuangbei/hecheng/button/hechengBase/over.png,ui/app/zhuangbei/hecheng/button/jiandingtuzhihecheng/up.png"};
 		}
 
 
@@ -75,11 +61,7 @@ package org.mokylin.skin.app.zhuangbei.hecheng.button
 			temp.bottom = 0;
 			temp.left = 0;
 			temp.right = 0;
-			temp.text = "";
-			temp.textAlign = "center";
-			temp.color = 0xFFFFFF;
 			temp.top = 0;
-			temp.verticalAlign = "middle";
 			return temp;
 		}
 
