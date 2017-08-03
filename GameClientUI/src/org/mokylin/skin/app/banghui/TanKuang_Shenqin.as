@@ -9,6 +9,7 @@ package org.mokylin.skin.app.banghui
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.app.banghui.button.ButtonJiantou;
+	import org.mokylin.skin.common.TongYongTanKuang_bg2;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 
@@ -22,7 +23,7 @@ package org.mokylin.skin.app.banghui
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var bg:feathers.controls.UIAsset;
+		public var bg:feathers.controls.SkinnableContainer;
 
 		public var btnCancel:feathers.controls.Button;
 
@@ -51,9 +52,9 @@ package org.mokylin.skin.app.banghui
 			super();
 			
 			this.currentState = "normal";
-			this.height = 361;
-			this.width = 580;
-			this.elementsContent = [bg_i(),__TanKuang_Shenqin_UIAsset1_i(),btnClose_i(),grpFlip_i(),btnOk_i(),btnCancel_i(),__TanKuang_Shenqin_Group1_i(),list_i(),uiNull_i(),__TanKuang_Shenqin_UIAsset8_i()];
+			this.height = 357;
+			this.width = 578;
+			this.elementsContent = [bg_i(),__TanKuang_Shenqin_UIAsset1_i(),btnClose_i(),grpFlip_i(),btnOk_i(),btnCancel_i(),__TanKuang_Shenqin_Group1_i(),list_i(),__TanKuang_Shenqin_UIAsset8_i(),uiNull_i()];
 			
 			states = {
 			};
@@ -68,7 +69,7 @@ package org.mokylin.skin.app.banghui
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 12;
-			temp.y = 43;
+			temp.y = 40;
 			temp.elementsContent = [__TanKuang_Shenqin_UIAsset3_i(),__TanKuang_Shenqin_UIAsset4_i(),__TanKuang_Shenqin_UIAsset5_i(),__TanKuang_Shenqin_UIAsset6_i(),__TanKuang_Shenqin_UIAsset7_i()];
 			return temp;
 		}
@@ -79,8 +80,8 @@ package org.mokylin.skin.app.banghui
 			temp.height = 264;
 			temp.styleName = "ui/app/banghui/kuang1.png";
 			temp.width = 566;
-			temp.x = 7;
-			temp.y = 38;
+			temp.x = 6;
+			temp.y = 34;
 			return temp;
 		}
 
@@ -96,7 +97,7 @@ package org.mokylin.skin.app.banghui
 		private function __TanKuang_Shenqin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/banghui/titlebg2.png";
+			temp.styleName = "ui/common/titilebg/headbg1.png";
 			temp.width = 558;
 			temp.x = 0;
 			temp.y = 0;
@@ -150,14 +151,15 @@ package org.mokylin.skin.app.banghui
 			return temp;
 		}
 
-		private function bg_i():feathers.controls.UIAsset
+		private function bg_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 361;
-			temp.styleName = "ui/common/background/erji_kuang.png";
-			temp.width = 580;
+			temp.height = 357;
+			var skin:StateSkin = new org.mokylin.skin.common.TongYongTanKuang_bg2()
+			temp.skin = skin
+			temp.width = 578;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -168,13 +170,13 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnCancel = temp;
 			temp.name = "btnCancel";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "全部拒绝";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.color = 0xCFC6AE;
-			temp.width = 112;
-			temp.x = 324;
-			temp.y = 313;
+			temp.color = 0xEAEABC;
+			temp.width = 88;
+			temp.x = 367;
+			temp.y = 307;
 			return temp;
 		}
 
@@ -185,7 +187,7 @@ package org.mokylin.skin.app.banghui
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
 			temp.x = 545;
-			temp.y = 7;
+			temp.y = 5;
 			return temp;
 		}
 
@@ -206,13 +208,13 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnOk = temp;
 			temp.name = "btnOk";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "全部同意";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.color = 0xCFC6AE;
-			temp.width = 112;
-			temp.x = 443;
-			temp.y = 313;
+			temp.color = 0xEAEABC;
+			temp.width = 88;
+			temp.x = 462;
+			temp.y = 307;
 			return temp;
 		}
 
@@ -233,7 +235,7 @@ package org.mokylin.skin.app.banghui
 			grpFlip = temp;
 			temp.name = "grpFlip";
 			temp.x = 253;
-			temp.y = 287;
+			temp.y = 284;
 			temp.elementsContent = [__TanKuang_Shenqin_UIAsset2_i(),lbNum_i(),btnPrev_i(),btnNext_i()];
 			return temp;
 		}
@@ -259,10 +261,11 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.List = new feathers.controls.List();
 			list = temp;
 			temp.name = "list";
-			temp.height = 220;
-			temp.width = 549;
-			temp.x = 16;
-			temp.y = 72;
+			temp.height = 222;
+			temp.visible = false;
+			temp.width = 552;
+			temp.x = 13;
+			temp.y = 68;
 			return temp;
 		}
 

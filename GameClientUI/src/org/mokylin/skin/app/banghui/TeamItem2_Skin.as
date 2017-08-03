@@ -46,8 +46,8 @@ package org.mokylin.skin.app.banghui
 			super();
 			
 			this.currentState = "normal";
-			this.height = 36;
-			this.width = 896;
+			this.height = 33;
+			this.width = 908;
 			this.elementsContent = [bg_i(),uiFirt_i(),numList2_i(),lbTeamName_i(),lbZhanli_i(),lbRolenName_i(),lbZhouHuoYue_i(),lbZongHuoYue_i(),lbOnLine_i(),uiTongShuai_i()];
 			
 			states = {
@@ -64,10 +64,10 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 36;
+			temp.height = 33;
 			var skin:StateSkin = new org.mokylin.skin.common.ItemBg()
 			temp.skin = skin
-			temp.width = 896;
+			temp.width = 908;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -109,12 +109,12 @@ package org.mokylin.skin.app.banghui
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.text = "[00000]玩家名六个字";
-			temp.textAlign = "left";
+			temp.textAlign = "center";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
 			temp.width = 160;
-			temp.x = 138;
+			temp.x = 126;
 			temp.y = 8;
 			return temp;
 		}
@@ -169,9 +169,10 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			numList2 = temp;
 			temp.name = "numList2";
-			temp.text = "帮主";
+			temp.text = "帮主删掉";
 			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 62;
 			temp.x = 53;
 			temp.y = 9;
 			return temp;
@@ -184,7 +185,7 @@ package org.mokylin.skin.app.banghui
 			temp.name = "uiFirt";
 			temp.styleName = "ui/app/banghui/huawen.png";
 			temp.x = 0;
-			temp.y = 14;
+			temp.y = 11;
 			return temp;
 		}
 
@@ -195,7 +196,7 @@ package org.mokylin.skin.app.banghui
 			temp.name = "uiTongShuai";
 			temp.styleName = "ui/app/banghui/tongshuaitubiao.png";
 			temp.x = 22;
-			temp.y = 1;
+			temp.y = 0;
 			return temp;
 		}
 
