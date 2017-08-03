@@ -21,6 +21,8 @@ package org.mokylin.skin.app.zhuangbei.jicheng
 
 		public var rdo_type:feathers.controls.ToggleButton;
 
+		public var uiHead:feathers.controls.UIAsset;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -32,7 +34,7 @@ package org.mokylin.skin.app.zhuangbei.jicheng
 			this.currentState = "normal";
 			this.height = 27;
 			this.width = 520;
-			this.elementsContent = [__JiChengType_Item_UIAsset1_i(),rdo_type_i(),labelDisplay_i()];
+			this.elementsContent = [rdo_type_i(),labelDisplay_i(),uiHead_i()];
 			
 			states = {
 			};
@@ -43,25 +45,16 @@ package org.mokylin.skin.app.zhuangbei.jicheng
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __JiChengType_Item_UIAsset1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhuangbei/jicheng/wenzitiao.png";
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
 		private function labelDisplay_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			labelDisplay = temp;
 			temp.name = "labelDisplay";
 			temp.htmlText = "强化等级：<font color='#cfc6ae'>1</font><font color='#5DBD37'>(+3)</font>";
-			temp.color = 0xBEA757;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 170;
-			temp.x = 333;
+			temp.x = 154;
 			temp.y = 4;
 			return temp;
 		}
@@ -72,14 +65,24 @@ package org.mokylin.skin.app.zhuangbei.jicheng
 			rdo_type = temp;
 			temp.name = "rdo_type";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.label = "选择强化继承";
 			temp.labelOffsetX = 0;
 			temp.styleClass = org.mokylin.skin.component.radio.RadioButtonSkin_1;
 			temp.textAlign = "left";
 			temp.color = 0xCFC6AE;
-			temp.width = 154;
+			temp.width = 20;
 			temp.x = 7;
 			temp.y = 3;
+			return temp;
+		}
+
+		private function uiHead_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiHead = temp;
+			temp.name = "uiHead";
+			temp.styleName = "ui/app/zhuangbei/jicheng/qianghua.png";
+			temp.x = 35;
+			temp.y = 4;
 			return temp;
 		}
 

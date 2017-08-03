@@ -44,7 +44,7 @@ package org.mokylin.skin.app.roll
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			thumb = temp;
 			temp.name = "thumb";
-			temp.styleName = "ui/common/roll/jdt.png";
+			temp.styleName = "ui/app/roll/jdt.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -56,7 +56,7 @@ package org.mokylin.skin.app.roll
 			track = temp;
 			temp.name = "track";
 			temp.alpha = 0;
-			temp.styleName = "ui/common/roll/jdt.png";
+			temp.styleName = "ui/app/roll/jdt.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

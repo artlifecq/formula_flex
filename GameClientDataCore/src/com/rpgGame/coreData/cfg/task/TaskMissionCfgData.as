@@ -123,13 +123,13 @@ package com.rpgGame.coreData.cfg.task
 		public static function getTaskDescribe(type:int,describe:String,modeid:int) :String 
 		{
 			var mosterName:String;
-			if(type==1||type==2||type==3||type==4)
-			{
-				mosterName=MonsterDataManager.getMonsterName(modeid);
-			}
-			else if(type==5)
+			if(type==5)
 			{
 				mosterName=ItemConfig.getItemName(modeid);
+			}
+			else//if(type==1||type==2||type==3||type==4)
+			{
+				mosterName=MonsterDataManager.getMonsterName(modeid);
 			}
 					
 			return substitute(describe,mosterName);
@@ -239,7 +239,7 @@ package com.rpgGame.coreData.cfg.task
 		
 		
 		/**字符串替换*/		
-		private static function substitute(string:String, value:String="", start:String="{", end:String="}"):String  
+		public static function substitute(string:String, value:String="", start:String="{", end:String="}"):String  
 		{  
 			if (value == null) return string;  
 			var pattern:RegExp=new RegExp(start + "(.*?)" + end, "g");  

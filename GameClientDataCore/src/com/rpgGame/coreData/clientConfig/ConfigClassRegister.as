@@ -46,11 +46,11 @@ package com.rpgGame.coreData.clientConfig
 		public static const HintTypeSetInfo:String = "data.HintTypeSetInfo";
 		/**  区域数据库						 */
 		public static const Q_area:String = "data.map.Q_area";
-		/**  							本列取消，安全区改为刷格方式							本列取消																																											 */
+		/**  							本列取消，安全区改为刷格方式							本列取消																																															 */
 		public static const Q_map:String = "data.map.Q_map";
 		/**  场景特效动态生成表						 */
 		public static const Q_map_effect:String = "data.map.Q_map_effect";
-		/**  地图跳跃点数据库								 */
+		/**  地图跳跃点数据库										 */
 		public static const Q_map_jump:String = "data.map.Q_map_jump";
 		/**  预加载资源表		 */
 		public static const Q_map_preload:String = "data.map.Q_map_preload";
@@ -82,7 +82,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const HeroModel:String = "data.model.HeroModel";
 		/**  坐骑模型表	功能名称	动画资源名称 */
 		public static const MountModel:String = "data.model.MountModel";
-		/**  3 怪物基本信息数据库																																																																			绑定器			 */
+		/**  3 怪物基本信息数据库																																																																				绑定器			 */
 		public static const Q_monster:String = "data.monster.Q_monster";
 		/**  NPC配置数据库																											 */
 		public static const Q_npc:String = "data.monster.Q_npc";
@@ -92,7 +92,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_scene_monster_area:String = "data.monster.Q_scene_monster_area";
 		/**  婚戒升阶表							 */
 		public static const Q_advance_wedding:String = "data.Q_advance_wedding";
-		/**  每个职业一级属性换算二级属性表		 */
+		/**  每个职业一级属性换算二级属性表			 */
 		public static const Q_att_transfer:String = "data.Q_att_transfer";
 		/**  所有属性相关的数据																														 */
 		public static const Q_att_values:String = "data.Q_att_values";
@@ -132,7 +132,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_fightsoul:String = "data.Q_fightsoul";
 		/**  战魂模型数据							 */
 		public static const Q_fightsoul_mode:String = "data.Q_fightsoul_mode";
-		/**  战魂升级数据			 */
+		/**  战魂升级数据					 */
 		public static const Q_fightsoul_path:String = "data.Q_fightsoul_path";
 		/**  美人基本信息数据库																								 */
 		public static const Q_girl_advance:String = "data.Q_girl_advance";
@@ -158,6 +158,8 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_item:String = "data.Q_item";
 		/**  军阶数据表					 */
 		public static const Q_junjie:String = "data.Q_junjie";
+		/**  王城名称对照表（仅客户端使用）		 */
+		public static const Q_kindomname:String = "data.Q_kindomname";
 		/**  极限挑战活动配置													 */
 		public static const Q_limitchallenge:String = "data.Q_limitchallenge";
 		/**  绝学开放表							 */
@@ -182,7 +184,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_mibao_point:String = "data.Q_mibao_point";
 		/**  秦陵秘宝怪物配置					 */
 		public static const Q_mibao_reward:String = "data.Q_mibao_reward";
-		/**  任务表(所有任务都这里)																																											 */
+		/**  任务表(所有任务都这里)																																													 */
 		public static const Q_mission_base:String = "data.Q_mission_base";
 		/**  任务奖励配置表			 */
 		public static const Q_mission_reword:String = "data.Q_mission_reword";
@@ -204,7 +206,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_relation:String = "data.Q_relation";
 		/**  属性对应属性ID_前端			 */
 		public static const Q_shuxing:String = "data.Q_shuxing";
-		/**  城池基础表																		 */
+		/**  城池基础表																			 */
 		public static const Q_singlecitybase:String = "data.Q_singlecitybase";
 		/**  购买界面其他途径提示数据库				 */
 		public static const Q_source:String = "data.Q_source";
@@ -248,7 +250,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_GCD:String = "data.spell.Q_GCD";
 		/**  技能无视防御伤害数据库																		 */
 		public static const Q_skill_ignore:String = "data.spell.Q_skill_ignore";
-		/**  技能基本信息配置数据表																																																																																																																																										 */
+		/**  技能基本信息配置数据表																																																																																																																																											 */
 		public static const Q_skill_model:String = "data.spell.Q_skill_model";
 		/**  预警技能关联表			 */
 		public static const Q_skill_warning:String = "data.spell.Q_skill_warning";
@@ -335,6 +337,7 @@ package com.rpgGame.coreData.clientConfig
 			regClass("data.Q_interaction", com.rpgGame.coreData.clientConfig.Q_interaction);
 			regClass("data.Q_item", com.rpgGame.coreData.clientConfig.Q_item);
 			regClass("data.Q_junjie", com.rpgGame.coreData.clientConfig.Q_junjie);
+			regClass("data.Q_kindomname", com.rpgGame.coreData.clientConfig.Q_kindomname);
 			regClass("data.Q_limitchallenge", com.rpgGame.coreData.clientConfig.Q_limitchallenge);
 			regClass("data.Q_lostskill_open", com.rpgGame.coreData.clientConfig.Q_lostskill_open);
 			regClass("data.Q_lostskill_up", com.rpgGame.coreData.clientConfig.Q_lostskill_up);

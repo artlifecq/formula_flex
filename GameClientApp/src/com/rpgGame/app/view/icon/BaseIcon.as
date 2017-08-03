@@ -218,6 +218,7 @@ package com.rpgGame.app.view.icon
 				if(!_bindImage)
 				{
 					_bindImage = new UIAsset();
+					_bindImage.imageScaleMode=UIAsset.IMAGE_SCALE_MODE_NO_SCALE;
 					addChild(_bindImage);
 				}
 				_bindImage.onImageLoaded=onBindLoad;
@@ -245,7 +246,7 @@ package com.rpgGame.app.view.icon
 		private function onBindLoad(res:UIAsset):void
 		{
 			_bindImage.x = 2;
-			_bindImage.y = _iconSize-_bindImage.height;
+			_bindImage.y = this.height-_bindImage.height-2;
 		}
 		
 		public function setJobState(state:String):void

@@ -2,8 +2,8 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 {
 	import feathers.controls.Button;
 	import feathers.controls.StateSkin;
+	import org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonJiahao;
 	import org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonJianding;
-	import org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonJianhao;
 
 	/**
 	 * @private
@@ -28,6 +28,8 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			super();
 			
 			this.currentState = "normal";
+			this.height = 44;
+			this.width = 244;
 			this.elementsContent = [btnCont_i(),btnFlag_i()];
 			
 			states = {
@@ -57,9 +59,9 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnFlag = temp;
 			temp.name = "btnFlag";
-			temp.right = 201;
-			temp.styleClass = org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonJianhao;
-			temp.y = 13;
+			temp.styleClass = org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonJiahao;
+			temp.x = 24;
+			temp.y = 14;
 			return temp;
 		}
 

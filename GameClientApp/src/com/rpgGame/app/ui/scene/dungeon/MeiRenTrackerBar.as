@@ -1,6 +1,7 @@
 package com.rpgGame.app.ui.scene.dungeon
 {
 	import com.rpgGame.app.manager.DungeonManager;
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
@@ -78,6 +79,7 @@ package com.rpgGame.app.ui.scene.dungeon
 		{
 			addEvent();
 			enterZone();
+			finishWalk(null);
 		}
 		
 		override protected function onHide():void
@@ -164,10 +166,19 @@ package com.rpgGame.app.ui.scene.dungeon
 			setKillInfo();
 			setTime();
 			setUisite();
+			updateAtt();
 			if(DungeonManager.zoneStage==1)
 			{
 				UIPopManager.showAlonePopUI(DungeonFightPop);
 			}		
+		}
+		
+		private function updateAtt():void
+		{
+			var golbAtt:int=3*Mgr.petMgr.glodNum;
+			var bindGolbAtt:int=3*Mgr.petMgr.bindGlodNum;
+			_skin.sec_shanghai.text="伤害加深:"+golbAtt+"%";
+			_skin.sec_fangyu.text="防御提升:"+bindGolbAtt+"%";
 		}
 		
 		private function outZone():void

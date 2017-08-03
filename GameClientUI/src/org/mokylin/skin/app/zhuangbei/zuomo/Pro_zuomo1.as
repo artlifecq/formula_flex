@@ -1,7 +1,5 @@
-package org.mokylin.skin.common
+package org.mokylin.skin.app.zhuangbei.zuomo
 {
-	import feathers.controls.text.Fontter;
-	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 
@@ -10,25 +8,27 @@ package org.mokylin.skin.common
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class YuanDian_Skin extends feathers.controls.StateSkin
+	public class Pro_zuomo1 extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var bg:feathers.controls.UIAsset;
+		public var thumb:feathers.controls.UIAsset;
 
-		public var lbnum:feathers.controls.Label;
+		public var track:feathers.controls.UIAsset;
 
 
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function YuanDian_Skin()
+		public function Pro_zuomo1()
 		{
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [bg_i(),lbnum_i()];
+			this.height = 18;
+			this.width = 259;
+			this.elementsContent = [track_i(),thumb_i()];
 			
 			states = {
 			};
@@ -39,32 +39,26 @@ package org.mokylin.skin.common
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function bg_i():feathers.controls.UIAsset
+		private function thumb_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			bg = temp;
-			temp.name = "bg";
-			temp.styleName = "ui/common/tubiao/yuandian.png";
+			thumb = temp;
+			temp.name = "thumb";
+			temp.styleName = "ui/app/zhuangbei/zuomo/lvtiao.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
 
-		private function lbnum_i():feathers.controls.Label
+		private function track_i():feathers.controls.UIAsset
 		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbnum = temp;
-			temp.name = "lbnum";
-			temp.height = 20;
-			temp.leading = 0;
-			temp.letterSpacing = 0;
-			temp.text = "5";
-			temp.textAlign = "center";
-			temp.color = 0xFFEA00;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 20;
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			track = temp;
+			temp.name = "track";
+			temp.alpha = 0;
+			temp.styleName = "ui/app/zhuangbei/zuomo/lvtiao.png";
 			temp.x = 0;
-			temp.y = 2;
+			temp.y = 0;
 			return temp;
 		}
 

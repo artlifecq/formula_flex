@@ -3,9 +3,11 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Label;
 	import feathers.controls.Radio;
+	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.common.over.SelectBtn;
+	import org.mokylin.skin.common.ItemBg;
+	import org.mokylin.skin.component.button.ButtonSelect2_Skin;
 
 	/**
 	 * @private
@@ -17,13 +19,13 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var bg1:feathers.controls.UIAsset;
-
-		public var bg2:feathers.controls.UIAsset;
+		public var bg:feathers.controls.SkinnableContainer;
 
 		public var lb_Dispaly:feathers.controls.Label;
 
 		public var selectedBtn:feathers.controls.Radio;
+
+		public var ui_tishi:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -36,7 +38,7 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			this.currentState = "normal";
 			this.height = 32;
 			this.width = 245;
-			this.elementsContent = [bg1_i(),bg2_i(),lb_Dispaly_i(),selectedBtn_i()];
+			this.elementsContent = [bg_i(),lb_Dispaly_i(),selectedBtn_i(),ui_tishi_i()];
 			
 			states = {
 			};
@@ -47,26 +49,14 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function bg1_i():feathers.controls.UIAsset
+		private function bg_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			bg1 = temp;
-			temp.name = "bg1";
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			bg = temp;
+			temp.name = "bg";
 			temp.height = 32;
-			temp.styleName = "ui/app/zhuangbei/hecheng/qianse_di.jpg";
-			temp.width = 245;
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function bg2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			bg2 = temp;
-			temp.name = "bg2";
-			temp.height = 32;
-			temp.styleName = "ui/app/zhuangbei/hecheng/shense_di.jpg";
+			var skin:StateSkin = new org.mokylin.skin.common.ItemBg()
+			temp.skin = skin
 			temp.width = 245;
 			temp.x = 0;
 			temp.y = 0;
@@ -86,7 +76,7 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 210;
-			temp.x = 32;
+			temp.x = 20;
 			temp.y = 6;
 			return temp;
 		}
@@ -98,10 +88,21 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			temp.name = "selectedBtn";
 			temp.groupName = "radioGroup2";
 			temp.height = 32;
-			temp.styleClass = org.mokylin.skin.common.over.SelectBtn;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSelect2_Skin;
 			temp.width = 245;
 			temp.x = 0;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function ui_tishi_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ui_tishi = temp;
+			temp.name = "ui_tishi";
+			temp.styleName = "ui/common/tubiao/tishi.png";
+			temp.x = 227;
+			temp.y = 3;
 			return temp;
 		}
 

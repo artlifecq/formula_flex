@@ -196,7 +196,7 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				setTitle(taskData.q_party_name,taskData.q_name,taskData.q_describe);
 				setParcent(taskData.q_party_id,taskData.q_node_id);
-				setTaskButView(taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,MonsterDataManager.getMonsterModeidByAreaid(taskData.q_finish_npc));
+				setTaskButView(taskData.q_mission_mainType,taskData.q_mission_mainType,taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist);
 				//TaskUtil.setRewordInfo(taskData.q_reword_id,icoList,icoBgList);
 				icoListGroup.setRewardByArray(TaskMissionCfgData.getRewordById(taskData.q_reword_id,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex));
 				icoListGroup.visible=true;
@@ -213,7 +213,7 @@ package com.rpgGame.app.ui.main.taskbar
 			
 			if(task!=null&&taskData!=null)
 			{
-				setTaskButView(taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,MonsterDataManager.getMonsterModeidByAreaid(taskData.q_finish_npc));
+				setTaskButView(taskData.q_mission_mainType,taskData.q_mission_mainType,taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist);
 				
 			}
 			
@@ -245,17 +245,17 @@ package com.rpgGame.app.ui.main.taskbar
 			
 		}
 		
-		private function setTaskButView(type:int,describe:String,information:String,sub:Vector.<TaskSubRateInfo>,npc:int):void
+		private function setTaskButView(mainType,int,type:int,describe:String,information:String,sub:Vector.<TaskSubRateInfo>):void
 		{
 			if(type!=TaskType.SUB_CONVERSATION&&TaskMissionManager.getMainTaskIsFinish()&&TaskMissionManager.getMainTaskHaveNpc())
 			{
 				titleLable.htmlText=title+"<font color='#00ff0c'>(已完成)</font>";
-				setSubbutView(npc);
+				setSubbutView(TaskMissionManager.getTaskNpcModeId(mainType));
 			}
 			else
 			{
 				titleLable.htmlText=title+"<font color='#ff0d0d'>(未完成)</font>";
-				TaskUtil.setGotargetInfo(type,describe,information,sub,killButList);
+				TaskUtil.setGotargetInfo(mainType,type,describe,information,sub,killButList);
 			}
 			setUisite();
 		}

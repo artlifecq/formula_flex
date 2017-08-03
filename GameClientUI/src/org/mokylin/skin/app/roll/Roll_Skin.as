@@ -68,7 +68,7 @@ package org.mokylin.skin.app.roll
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			Icon = temp;
 			temp.name = "Icon";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
+			temp.styleName = "ui/common/grid/normal/42.png";
 			temp.x = 18;
 			temp.y = 14;
 			return temp;
@@ -100,7 +100,7 @@ package org.mokylin.skin.app.roll
 		private function __Roll_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/roll/jianbiandi.png";
+			temp.styleName = "ui/app/roll/jianbiandi.png";
 			temp.width = 285;
 			temp.x = 7;
 			temp.y = 93;
@@ -140,7 +140,7 @@ package org.mokylin.skin.app.roll
 		private function __Roll_Skin_UIAsset6_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/roll/jbd.png";
+			temp.styleName = "ui/app/roll/jbd.png";
 			temp.x = 2;
 			temp.y = 243;
 			return temp;
@@ -149,7 +149,7 @@ package org.mokylin.skin.app.roll
 		private function __Roll_Skin_UIAsset7_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/roll/wphdz.png";
+			temp.styleName = "ui/app/roll/wphdz.png";
 			temp.x = 67;
 			temp.y = 249;
 			return temp;
@@ -159,7 +159,7 @@ package org.mokylin.skin.app.roll
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 44;
-			temp.styleName = "ui/common/roll/mingzidi.png";
+			temp.styleName = "ui/app/roll/mingzidi.png";
 			temp.width = 167;
 			temp.x = 73;
 			temp.y = 18;
@@ -169,7 +169,7 @@ package org.mokylin.skin.app.roll
 		private function __Roll_Skin_UIAsset9_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/roll/jdt_di.png";
+			temp.styleName = "ui/app/roll/jdt_di.png";
 			temp.width = 265;
 			temp.x = 17;
 			temp.y = 70;

@@ -1,8 +1,7 @@
-package org.mokylin.skin.app.hubao
+package org.mokylin.skin.mainui.renwu
 {
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
-	import feathers.controls.Check;
 	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
@@ -10,14 +9,13 @@ package org.mokylin.skin.app.hubao
 	import org.mokylin.skin.common.TongYongTanKuang_bg2;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
-	import org.mokylin.skin.component.check.CheckBoxSkin_1;
 
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class HuBaoTanKuang_Skin extends feathers.controls.StateSkin
+	public class BangPai_RenWu extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -28,22 +26,28 @@ package org.mokylin.skin.app.hubao
 
 		public var btn_ok:feathers.controls.Button;
 
-		public var chk_ok:feathers.controls.Check;
+		public var ioc_0:feathers.controls.UIAsset;
 
-		public var lb_text:feathers.controls.Label;
+		public var lb_jiangli:feathers.controls.Label;
+
+		public var lb_name:feathers.controls.Label;
+
+		public var lb_speak:feathers.controls.Label;
+
+		public var lb_time:feathers.controls.Label;
 
 
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function HuBaoTanKuang_Skin()
+		public function BangPai_RenWu()
 		{
 			super();
 			
 			this.currentState = "normal";
-			this.height = 217;
-			this.width = 326;
-			this.elementsContent = [bg_i(),btnClose_i(),lb_text_i(),__HuBaoTanKuang_Skin_UIAsset1_i(),__HuBaoTanKuang_Skin_Label1_i(),chk_ok_i(),btn_ok_i(),__HuBaoTanKuang_Skin_UIAsset2_i()];
+			this.height = 376;
+			this.width = 298;
+			this.elementsContent = [bg_i(),__BangPai_RenWu_UIAsset1_i(),__BangPai_RenWu_UIAsset2_i(),btnClose_i(),btn_ok_i(),lb_name_i(),lb_jiangli_i(),lb_speak_i(),ioc_0_i(),lb_time_i()];
 			
 			states = {
 			};
@@ -54,33 +58,24 @@ package org.mokylin.skin.app.hubao
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __HuBaoTanKuang_Skin_Label1_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "今日不再提示";
-			temp.color = 0x00FF0C;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 125;
-			temp.y = 120;
-			return temp;
-		}
-
-		private function __HuBaoTanKuang_Skin_UIAsset1_i():feathers.controls.UIAsset
+		private function __BangPai_RenWu_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/xian_heng.png";
-			temp.x = 35;
-			temp.y = 147;
+			temp.bottom = 59;
+			temp.left = 7;
+			temp.right = 7;
+			temp.styleName = "ui/common/background/neikuang_1.png";
+			temp.top = 34;
 			return temp;
 		}
 
-		private function __HuBaoTanKuang_Skin_UIAsset2_i():feathers.controls.UIAsset
+		private function __BangPai_RenWu_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/common/background/head_tishi.png";
-			temp.x = 142;
+			temp.styleName = "ui/common/background/bangpairenwu.png";
+			temp.x = 106;
 			temp.y = 9;
 			return temp;
 		}
@@ -90,10 +85,10 @@ package org.mokylin.skin.app.hubao
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 217;
+			temp.height = 376;
 			var skin:StateSkin = new org.mokylin.skin.common.TongYongTanKuang_bg2()
 			temp.skin = skin
-			temp.width = 326;
+			temp.width = 298;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -105,8 +100,8 @@ package org.mokylin.skin.app.hubao
 			btnClose = temp;
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.x = 293;
-			temp.y = 5;
+			temp.x = 264;
+			temp.y = 7;
 			return temp;
 		}
 
@@ -116,42 +111,82 @@ package org.mokylin.skin.app.hubao
 			btn_ok = temp;
 			temp.name = "btn_ok";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.label = "确 认";
+			temp.label = "领取奖励";
 			temp.fontSize = 16;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xEAEABC;
-			temp.width = 100;
-			temp.x = 108;
-			temp.y = 167;
+			temp.width = 105;
+			temp.x = 100;
+			temp.y = 325;
 			return temp;
 		}
 
-		private function chk_ok_i():feathers.controls.Check
+		private function ioc_0_i():feathers.controls.UIAsset
 		{
-			var temp:feathers.controls.Check = new feathers.controls.Check();
-			chk_ok = temp;
-			temp.name = "chk_ok";
-			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
-			temp.x = 99;
-			temp.y = 118;
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ioc_0 = temp;
+			temp.name = "ioc_0";
+			temp.styleName = "ui/mainui/renwu/tbk.png";
+			temp.x = 22;
+			temp.y = 186;
 			return temp;
 		}
 
-		private function lb_text_i():feathers.controls.Label
+		private function lb_jiangli_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lb_text = temp;
-			temp.name = "lb_text";
-			temp.height = 60;
-			temp.htmlText = "现在不是双倍奖励时间<font color='#00ff33'>(15:30-16:00、18:30-19:00)</font>是否继续？";
-			temp.leading = 5;
-			temp.fontSize = 14;
-			temp.textAlign = "center";
+			lb_jiangli = temp;
+			temp.name = "lb_jiangli";
+			temp.text = "任务奖励：";
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 252;
+			temp.x = 25;
+			temp.y = 164;
+			return temp;
+		}
+
+		private function lb_name_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lb_name = temp;
+			temp.name = "lb_name";
+			temp.text = "第九十九章：章节名称六子";
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 252;
+			temp.x = 24;
+			temp.y = 52;
+			return temp;
+		}
+
+		private function lb_speak_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lb_speak = temp;
+			temp.name = "lb_speak";
+			temp.height = 80;
+			temp.text = "NPC对话框";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 251;
-			temp.x = 37;
-			temp.y = 63;
+			temp.width = 246;
+			temp.x = 25;
+			temp.y = 75;
+			return temp;
+		}
+
+		private function lb_time_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lb_time = temp;
+			temp.name = "lb_time";
+			temp.text = "n秒后自动领取奖励";
+			temp.textAlign = "center";
+			temp.color = 0xFF0D0D;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 210;
+			temp.x = 47;
+			temp.y = 291;
 			return temp;
 		}
 
