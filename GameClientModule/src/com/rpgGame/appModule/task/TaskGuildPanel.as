@@ -1,6 +1,5 @@
 package com.rpgGame.appModule.task
 {
-
 	import com.game.mainCore.core.timer.GameTimer;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.task.TaskAutoManager;
@@ -14,6 +13,7 @@ package com.rpgGame.appModule.task
 	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_mission_base;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
+	import com.rpgGame.coreData.type.TaskType;
 	import com.rpgGame.netData.task.bean.TaskInfo;
 	
 	import feathers.controls.Button;
@@ -22,15 +22,19 @@ package com.rpgGame.appModule.task
 	
 	import gs.TweenLite;
 	
+	import org.mokylin.skin.mainui.renwu.BangPai_RenWu;
 	import org.mokylin.skin.mainui.renwu.Zhuxian_Renwu;
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 
-	
-	public class TaskLeadPanel  extends SkinUIPanel
+	/**
+	 * 帮派任务面板
+	 * 
+	 * */
+	public class TaskGuildPanel  extends SkinUIPanel
 	{
-		private var _skin :Zhuxian_Renwu;
+		private var _skin :BangPai_RenWu;
 		//private var titleLabel:Label;
 		private var nameLabel:Label;
 		private var navLabel:Label;
@@ -45,11 +49,11 @@ package com.rpgGame.appModule.task
 		private var TIMERDATA_1:int=15//倒计时时间
 		private var TIMERDATA_2:int=5//倒计时时间
 		private var initKey:Boolean=false;
-		public function TaskLeadPanel()
+		public function TaskGuildPanel()
 		{
-			_skin=new Zhuxian_Renwu();
+			_skin=new BangPai_RenWu();
 			super(_skin);
-
+			
 			
 		}
 		
@@ -61,31 +65,6 @@ package com.rpgGame.appModule.task
 			timerLabel=_skin.lb_time;
 			okBut=_skin.btn_ok;
 			icoListGroup=new RewardGroup(IcoSizeEnum.ICON_42,_skin.ioc_0,RewardGroup.ALIN_LEFT,4,6,6);
-			
-			
-			/*icoBgList=new Vector.<UIAsset>();
-			icoBgList.push(_skin.ioc_0);
-
-			icoList=new Vector.<IconCDFace>();
-			var i:int;
-			for(i=0;i<icoBgList.length;i++)
-			{
-				var ico:IconCDFace=IconCDFace.create(IcoSizeEnum.ICON_42);
-				ico.showCD=false;
-				ico.x=icoBgList[i].x+3;
-				ico.y=icoBgList[i].y+3;
-				ico.visible=false;
-				icoBgList[i].visible=false;
-				icoList.push(ico);
-				this.addChild(ico);
-			}*/
-			
-			//titleLabel.htmlText="主线任务";
-			//nameLabel.htmlText="第一章:新手村";
-			//navLabel.htmlText="任务奖励";
-			//speakLabel.htmlText="狗贼宇文拓在会稽郡释放万灵血阵，会稽镇一夜之间只剩血光一片，他们聚集在此欲找官府讨要说法，却遭官兵残杀。";
-			//timerLabel.htmlText="10秒后自动领取奖励";
-			//titleLabel.htmlText="主线任务";
 			nameLabel.htmlText="";
 			navLabel.htmlText="任务奖励";
 			speakLabel.htmlText="";
@@ -99,14 +78,14 @@ package com.rpgGame.appModule.task
 				TIMERDATA_2=GlobalSheetData.getSettingInfo(513).q_int_value;
 			}
 			
-			timer = new GameTimer("TaskLeadPanel", 1000, 0, onTimer);
+			timer = new GameTimer("TaskGuildPanel", 1000, 0, onTimer);
 			timer.stop();
 		}
 		private function onTimer() : void 
 		{
 			setTimeText();
 		}
-	
+		
 		
 		override protected function onTouchTarget(target : DisplayObject) : void {
 			super.onTouchTarget(target);
@@ -119,10 +98,7 @@ package com.rpgGame.appModule.task
 		}
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void 
 		{
-			if(!TaskMissionManager.haveMainTask)
-			{
-				return;
-			}
+			
 			super.show(data, openTable, parentContiner);
 			if(!initKey)
 			{
@@ -140,21 +116,18 @@ package com.rpgGame.appModule.task
 		}
 		override public function hide():void 
 		{
+			super.hide();
 			timer.stop();
 			currtimer=TIMERDATA_1;
-			if(this.visible&&this.parent!=null)
-			{
-				TweenLite.killDelayedCallsTo(subFinish);
-				TweenLite.delayedCall(0.5, subFinish);
-			}
-			super.hide();
+			TweenLite.killDelayedCallsTo(subFinish);
+			TweenLite.delayedCall(0.5, subFinish);
 		}
 		
 		
 		
 		private function subFinishBut():void
 		{
-			if(TaskMissionManager.mainTaskInfo!=null&&TaskMissionManager.getMainTaskIsFinish())
+			if(this.visible&&this.parent!=null)
 			{
 				hide();
 			}
@@ -162,16 +135,15 @@ package com.rpgGame.appModule.task
 		
 		private function subFinish():void
 		{
-			//okBut.isEnabled=false;
-			TaskSender.sendfinishTaskMessage(TaskMissionManager.mainTaskInfo.taskId);
-			icoListGroup.tweeRewardInBag();
+			okBut.isEnabled=false;
+			TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(TaskType.MAINTYPE_GUILDDAILYTASK).taskId);	
 		}
 		
 		private function setView():void
 		{
 			hideView();
-			var task:TaskInfo=TaskMissionManager.mainTaskInfo;
-			var taskData:Q_mission_base=TaskMissionManager.mainTaskData;
+			var task:TaskInfo=TaskMissionManager.getTaskInfoByType(TaskType.MAINTYPE_GUILDDAILYTASK);
+			var taskData:Q_mission_base=TaskMissionManager.getTaskDataByType(TaskType.MAINTYPE_GUILDDAILYTASK);
 			
 			if(task!=null&&taskData!=null)
 			{
@@ -179,14 +151,14 @@ package com.rpgGame.appModule.task
 				//TaskUtil.setRewordInfo(taskData.q_reword_id,icoList,icoBgList,true);
 				icoListGroup.setRewardByArray(TaskMissionCfgData.getRewordById(taskData.q_reword_id,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex));
 				icoListGroup.visible=true;
-				/*if(TaskMissionManager.getMainTaskIsFinish())
+				if(TaskMissionManager.getTaskIsFinishByType(TaskType.MAINTYPE_GUILDDAILYTASK))
 				{
 					okBut.isEnabled=true;
 				}
 				else
 				{
 					okBut.isEnabled=false;
-				}*/
+				}
 				
 			}
 			
@@ -210,7 +182,7 @@ package com.rpgGame.appModule.task
 				currtimer=TIMERDATA_1;
 			}
 			
-			if(TaskMissionManager.getMainTaskIsFinish())
+			if(TaskMissionManager.getTaskIsFinishByType(TaskType.MAINTYPE_GUILDDAILYTASK))
 			{
 				timer.start();
 				setTimeText();

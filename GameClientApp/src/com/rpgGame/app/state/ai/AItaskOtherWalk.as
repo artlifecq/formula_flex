@@ -103,6 +103,11 @@ package com.rpgGame.app.state.ai
 			{
 				TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);	
 			}
+			else if(taskType==TaskType.MAINTYPE_GUILDDAILYTASK)
+			{
+				TaskControl.showGuildPanel();
+			}
+			
 			isWalking=false;
 		}
 		private function subMonster(data : Object=null) : void
