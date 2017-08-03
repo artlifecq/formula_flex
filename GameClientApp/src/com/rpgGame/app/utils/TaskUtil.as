@@ -364,7 +364,7 @@ package com.rpgGame.app.utils
 				
 				finish=taskData.q_finish_information_str;
 				finishArr=JSONUtil.decode(finish);
-				if(finishArr.length>ite)
+				if(finishArr&&finishArr.length>ite)
 				{
 					finishArr=finishArr[ite];
 					if(finishArr.length==2)
@@ -907,54 +907,49 @@ package com.rpgGame.app.utils
 		
 		
 		/**设置任务目标内容*/
-		public static  function setGotargetInfo(type:int,describe:String,finisstr:String,subList:Vector.<TaskSubRateInfo>,txtButList:Vector.<SkinnableContainer>):void
+		public static  function setGotargetInfo(mainType:int,missionType:int,describe:String,finisstr:String,subList:Vector.<TaskSubRateInfo>,txtButList:Vector.<SkinnableContainer>):void
 		{
 			var i:int,j:int,length:int;
 			var text:String="";
-			if(type==TaskType.SUB_CONVERSATION)
+			if(missionType==TaskType.SUB_CONVERSATION)
 			{
-				text=TaskMissionCfgData.getTaskDescribe(type,describe,TaskMissionManager.getMainTaskNpcModeId());
-				setGotargetLabelText(type,txtButList[0],text);
+				text=TaskMissionCfgData.getTaskDescribe(missionType,describe,TaskMissionManager.getTaskNpcModeId(mainType));
+				setGotargetLabelText(missionType,txtButList[0],text);
 			}
 			else
 			{
 				var finiStr:Array;
 				var informationList:Array=JSONUtil.decode(finisstr);;
-				
-				length=informationList.length;
-				for(i=0;i<length;i++)
+				if(informationList&&informationList.length>0)
 				{
-					if(informationList[i]&&informationList[i]!=null)
+					length=informationList.length;
+					for(i=0;i<length;i++)
 					{
-						
-						var modeid:int=0;
-						var count:int=0,finish:int;
-						var modeArr:Array=informationList[i];
-						if(modeArr.length==2)
+						if(informationList[i]&&informationList[i]!=null)
 						{
-							modeid=int(modeArr[0]);
-							finish=int(modeArr[1]);
+							
+							var modeid:int=0;
+							var count:int=0,finish:int;
+							var modeArr:Array=informationList[i];
+							if(modeArr.length==2)
+							{
+								modeid=int(modeArr[0]);
+								finish=int(modeArr[1]);
+							}
+							if(subList[i]!=null)
+							{
+								modeid=subList[i].modelId;
+								count=subList[i].num;
+								finish=subList[i].maxNum;
+							}
+							text=TaskMissionCfgData.getTaskDescribe(missionType,describe,modeid);
+							text+="<font color='#cfc6ae'>("+count+"/"+finish+")</font>";
+							
+							setGotargetLabelText(missionType,txtButList[i],text);
 						}
-						if(subList[i]!=null)
-						{
-							modeid=subList[i].modelId;
-							count=subList[i].num;
-							finish=subList[i].maxNum;
-						}
-						text=TaskMissionCfgData.getTaskDescribe(type,describe,modeid);
-						text+="<font color='#cfc6ae'>("+count+"/"+finish+")</font>";
-						
-						setGotargetLabelText(type,txtButList[i],text);
-						
-						
 					}
-					
 				}
-				
 			}
-			
-			
-			
 		}
 		public static function setGotargetLabelText(type:int,but:SkinnableContainer,t:String):void
 		{

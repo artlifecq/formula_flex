@@ -321,5 +321,49 @@ package  com.rpgGame.app.manager.shop
 			}
 			return null;
 		}
+		
+		/**
+		 *获取背包中购买物品列表
+		 */	
+		public function getBackPackShopItemList(shop:int):Array
+		{
+			var shopVo:ShopVo=getShopVo(EnumShopType.SHOP_BACKPACK);
+			if (shopVo) 
+			{
+				var shopsItems:Array=shopVo.getPageShopItems(shop);
+				return shopsItems;
+			}
+			
+			return null
+		}
+		/**
+		 *购买商品会检查是否满足条件
+		 * 
+		 */		
+		public function isCanbuyShopItem(vo:ShopItemVo,buyNum:int):Boolean
+		{
+			if (vo) 
+			{
+				//先判断是否是需要vip
+				if (vo.data.vipLevel>Mgr.vipMgr.vipLv) 
+				{
+					return false;
+				}
+				var price:int=vo.data.price;
+				if (vo.data.discountPrice!=0) 
+				{
+					price=vo.data.discountPrice;
+				}
+				var needGold:int=0;
+				var allNeed:int=buyNum*price;
+				var priceType:int=vo.data.priceType;
+				var have:int=Mgr.shopMgr.getCurrency(priceType);
+				return allNeed<=have;
+			}
+			
+			return false;
+		}
+		
+		
 	}
 }

@@ -142,7 +142,7 @@ package com.rpgGame.app.manager.task
 		}
 		public function stopSwitchAll() : void
 		{
-			stopAll();
+			stop();
 		}
 		public function stopAll() : void
 		{
@@ -273,8 +273,6 @@ package com.rpgGame.app.manager.task
 		
 		public function setTaskChange():void
 		{
-			if (!_isTaskRunning)
-				return;
 			var missionType:int=TaskMissionManager.getTaskMissionType(otherType);
 			if(missionType==TaskType.SUB_GATHER||missionType==TaskType.SUB_USEITEM)
 			{
@@ -287,14 +285,15 @@ package com.rpgGame.app.manager.task
 				TrusteeshipManager.getInstance().stopAll();
 				GatherAutoManager.getInstance().stopGatherAuto();
 				SceneRoleSelectManager.selectedRole=null;
-				_stateMachine.transition(AIStateType.AI_NONE);
+				TweenLite.killDelayedCallsTo(startTaskAuto);
+				TweenLite.delayedCall(1, startTaskAuto,[otherType]);
 			}
 			
 		}
 		
 		private function changeSub():void
 		{
-			if(TaskMissionManager.getTaskSubIsFinish(otherType,_taskTarget))
+			if(TaskMissionManager.getTaskIsFinishByType(otherType))
 				return;
 			_taskTarget=0; 
 			var i:int,length:int;
@@ -303,15 +302,19 @@ package com.rpgGame.app.manager.task
 			{
 				var information:String=taskData.q_finish_information_str;
 				var informationList:Array=JSONUtil.decode(information);
-				length=informationList.length;
-				for(i=0;i<length;i++)
+				if(informationList)
 				{
-					if(TaskMissionManager.getTaskSubIsFinish(otherType,i))
+					length=informationList.length;
+					for(i=0;i<length;i++)
 					{
-						_taskTarget=i;
-						break;
+						if(!TaskMissionManager.getTaskSubIsFinish(otherType,i))
+						{
+							_taskTarget=i;
+							break;
+						}
 					}
 				}
+				
 			}
 			
 			

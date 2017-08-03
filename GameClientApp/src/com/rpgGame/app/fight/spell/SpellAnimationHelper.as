@@ -9,6 +9,7 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.scene.animator.AnimatorLocusPoint;
 	import com.rpgGame.app.scene.animator.CommonTrajectoryAnimator;
+	import com.rpgGame.app.scene.animator.CommonTrajectoryAnimator2;
 	import com.rpgGame.app.scene.animator.FrontAxleDoubleAroundAnimator;
 	import com.rpgGame.app.scene.animator.RibbonAnimator;
 	import com.rpgGame.coreData.AvatarInfo;
@@ -16,13 +17,11 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.cfg.animat.EffectAnimationCfgData;
-	import com.rpgGame.coreData.clientConfig.ClientSceneEffect;
 	import com.rpgGame.coreData.clientConfig.EffectAnimation;
 	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
 	import com.rpgGame.coreData.clientConfig.Q_SpellEffect;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.info.fight.FightHurtResult;
-	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
@@ -32,7 +31,6 @@ package com.rpgGame.app.fight.spell
 	import flash.utils.Dictionary;
 	
 	import gs.TweenLite;
-	import com.rpgGame.app.scene.animator.CommonTrajectoryAnimator2;
 	
 	/**
 	 *

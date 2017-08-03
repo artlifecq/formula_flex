@@ -55,10 +55,10 @@ package com.rpgGame.appModule.role
 			_skin.txt_shenfa.text=_roleData.totalStat.getStatValueString(CharAttributeType.SHENFA);
 			_skin.txt_gongji.text=_roleData.totalStat.getStatValueString(CharAttributeType.WAI_GONG);
 			_skin.txt_fangyu.text=_roleData.totalStat.getStatValueString(CharAttributeType.DEFENSE_PER);
-			_skin.txt_mingzhong.text=_roleData.totalStat.getStatValueString(CharAttributeType.HIT);
+			_skin.txt_mingzhong.text=int(_roleData.totalStat.getStatValueString(CharAttributeType.HIT))-CharAttributeType.BAISC_HIT+"";
 			_skin.txt_shanbi.text=_roleData.totalStat.getStatValueString(CharAttributeType.MISS);
 			_skin.txt_baoji.text=_roleData.totalStat.getStatValueString(CharAttributeType.CRIT_PER);
-			_skin.txt_baoshang.text=_roleData.totalStat.getStatValueString(CharAttributeType.CRIT);		
+			_skin.txt_baoshang.text=int(_roleData.totalStat.getStatValueString(CharAttributeType.CRIT))-CharAttributeType.BAISC_CRIT+"";		
 			_skin.txt_gongsu.text=_roleData.totalStat.getStatValueString(CharAttributeType.ATT_SPEED);
 			
 			_skin.num_miaoshang.bounds.width=_skin.num_miaoshang.width;

@@ -14,7 +14,7 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.app.view.icon.IconCDFace;
-	import com	.rpgGame.appModule.bag.ItemGetPathPanel;
+	import com.rpgGame.appModule.bag.ItemGetPathPanel;
 	import com.rpgGame.appModule.common.GoodsContainerPanel;
 	import com.rpgGame.appModule.common.itemRender.GridItemRender;
 	import com.rpgGame.core.events.ItemEvent;
@@ -117,8 +117,8 @@ package com.rpgGame.appModule.equip
 		{
 			_leftSkin=_skin.left.skin as Zhuangbei_left;
 			
-			(_leftSkin.title1.skin as TitileHead).labelDisplay.text=LanguageConfig.getText(LangUI.UI_TEXT13);
-			(_leftSkin.title2.skin as TitileHead).labelDisplay.text=LanguageConfig.getText(LangUI.UI_TEXT35);
+			(_leftSkin.title1.skin as TitileHead).uiLabel.styleName="ui/app/zhuangbei/daixilian.png";
+			(_leftSkin.title2.skin as TitileHead).uiLabel.styleName="ui/app/zhuangbei/kexiaohao.png";
 			
 			_goodsContainerTarget=new GoodsContainerPanel(_leftSkin.list1,ItemContainerID.SMELT_LIST,createItemRender);
 			_goodsContainerUse=new GoodsContainerPanel(_leftSkin.list2,ItemContainerID.SMELT_USE,createItemRender);
@@ -128,14 +128,14 @@ package com.rpgGame.appModule.equip
 			_useItem=IconCDFace.create(64);
 			_useItem.selectImgVisible=false;
 			_useItem.bindBg(null);
-			_targetEquip.x=485;
-			_targetEquip.y=150;
+			_targetEquip.x=506;
+			_targetEquip.y=193;
 			_targetEquip.bindBg(null);
 			_skin.container.addChild(_targetEquip);
 			_skin.container.addChild(_useItem);
 			_skin.container.addChild(_skin.lb_num);
-			_useItem.x=740;
-			_useItem.y=147;
+			_useItem.x=723;
+			_useItem.y=193;
 			_skin.lb_cailiao.text=LanguageConfig.getText(LangUI.UI_TEXT26);
 			
 			useItemInfo=new ClientItemInfo();
@@ -195,7 +195,7 @@ package com.rpgGame.appModule.equip
 			if(tweenEquip){
 				tweenEquip.kill();
 			}
-			tweenEquip=TweenMax.to(_targetEquip,1,{x:490,y:150,ease:Expo.easeOut});
+			tweenEquip=TweenMax.to(_targetEquip,1,{x:506,y:193,ease:Expo.easeOut});
 			
 			showUseItem();
 			
@@ -390,9 +390,9 @@ package com.rpgGame.appModule.equip
 				_skin.lb_item2.text=useItemInfo.name;
 				_skin.lb_num.text=useItemInfo.count+"/"+washCfg.q_item_num;
 				if(useItemInfo.count<washCfg.q_item_num){
-					_skin.lb_num.color=StaticValue.UI_RED1;
+					_skin.lb_num.color=StaticValue.A_UI_RED_TEXT;
 				}else{
-					_skin.lb_num.color=StaticValue.Q_GREEN;
+					_skin.lb_num.color=StaticValue.A_UI_GREEN_TEXT;
 				}
 				
 				_leftSkin.lb_yinzi.text=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT27),needMon,userMon);
@@ -431,7 +431,7 @@ package com.rpgGame.appModule.equip
 		
 		private function changeAttState(Item:SkinnableContainer,state:Boolean):void
 		{
-				getItemSkin(Item).lb_name.text=LanguageConfig.getText(LangUI.UI_TEXT32);
+				getItemSkin(Item).lb_name.text="";
 				getItemSkin(Item).chk_suoding.isSelected=state;
 				getItemSkin(Item).chk_suoding.visible=state;
 				getItemSkin(Item).lb_yuanbao.visible=state;

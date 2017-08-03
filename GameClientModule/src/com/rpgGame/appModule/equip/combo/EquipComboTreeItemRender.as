@@ -22,6 +22,7 @@ package com.rpgGame.appModule.equip.combo
 	import org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonJianhao;
 	import org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonSanjiao_down;
 	import org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonSanjiao_right;
+	import org.mokylin.skin.common.ItemBg;
 	import org.mokylin.skin.common.over.SelectBtn;
 	
 	import starling.display.DisplayObject;
@@ -114,6 +115,7 @@ package com.rpgGame.appModule.equip.combo
 				var subSkin:HedSub_Item=_skin.sub_item.skin as HedSub_Item;
 				var subInfo:SubNodeInfo=node.data as SubNodeInfo;
 				subSkin.labelDisplay.text=HeChengData.getSubName(subInfo.type,subInfo.subType);
+				subSkin.ui_tishi.visible=ItemManager.chackIsCanHC(subInfo.type,subInfo.subType);
 				if(node.expanded){
 					subSkin.btnFlag.styleClass=ButtonSanjiao_down;
 				}else{
@@ -136,8 +138,9 @@ package com.rpgGame.appModule.equip.combo
 				var qianSkin:Cont_Item=_skin.detail_item.skin as Cont_Item;
 				qianSkin.lb_Dispaly.color=ItemConfig.getItemQualityColor(itemId);
 				qianSkin.lb_Dispaly.text=ItemConfig.getItemName(itemId)+"("+max+")";
-				qianSkin.bg1.visible=detailInfo.data.q_subson_type%2==0;
-				qianSkin.bg2.visible=!qianSkin.bg1.visible;
+				qianSkin.ui_tishi.visible=max>0;
+				(qianSkin.bg.skin as ItemBg).bg1.visible=detailInfo.data.q_subson_type%2==0;
+				(qianSkin.bg.skin as ItemBg).bg2.visible=!(qianSkin.bg.skin as ItemBg).bg1.visible;
 				var isSelected:Boolean
 				if(this.owner&&this.owner.selectedItem){
 					isSelected=this.owner.selectedItem.data==node.data;

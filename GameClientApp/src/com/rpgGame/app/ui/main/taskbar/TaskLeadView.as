@@ -80,9 +80,22 @@ package com.rpgGame.app.ui.main.taskbar
 			killButList.push(_skin.pri_killbut_2);
 			killButList.push(_skin.pri_killbut_3);
 			killLabelList=new Vector.<Label>();
-			killLabelList.push(Renwu_Item(_skin.pri_killbut_1.skin).labelDisplay);
+			for(i=0;i<killButList.length;i++)
+			{
+				Renwu_Item(killButList[i].skin).labelDisplay.name="KILLII"+TaskType.MAINTYPE_MAINTASK+"II"+i+"II1";
+				Renwu_Item(killButList[i].skin).btn_send.name="KILLII"+TaskType.MAINTYPE_MAINTASK+"II"+i+"II2";
+				killLabelList.push(Renwu_Item(killButList[i].skin).labelDisplay);
+				TaskUtil.setTextEvet(killButList[i]);
+				killButList[i].visible=false;
+			}
+			/*for(i=0;i<killButList.length;i++)
+			{
+				killButList[i].visible=false;
+				TaskUtil.setTextEvet(killButList[i]);
+			}*/
+			/*killLabelList.push(Renwu_Item(_skin.pri_killbut_1.skin).labelDisplay);
 			killLabelList.push(Renwu_Item(_skin.pri_killbut_2.skin).labelDisplay);
-			killLabelList.push(Renwu_Item(_skin.pri_killbut_3.skin).labelDisplay);
+			killLabelList.push(Renwu_Item(_skin.pri_killbut_3.skin).labelDisplay);*/
 		/*	kill1Label=Renwu_Item(_skin.pri_killbut1.skin).labelDisplay;
 			kill2Label=Renwu_Item(_skin.pri_killbut2.skin).labelDisplay;
 			kill3Label=Renwu_Item(_skin.pri_killbut3.skin).labelDisplay;*/
@@ -106,11 +119,7 @@ package com.rpgGame.app.ui.main.taskbar
 			
 			
 			
-			for(i=0;i<killButList.length;i++)
-			{
-				killButList[i].visible=false;
-				TaskUtil.setTextEvet(killButList[i]);
-			}
+			
 			
 			
 			
@@ -187,7 +196,7 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				setTitle(taskData.q_party_name,taskData.q_name,taskData.q_describe);
 				setParcent(taskData.q_party_id,taskData.q_node_id);
-				setTaskButView(taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,MonsterDataManager.getMonsterModeidByAreaid(taskData.q_finish_npc));
+				setTaskButView(taskData.q_mission_mainType,taskData.q_mission_mainType,taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist);
 				//TaskUtil.setRewordInfo(taskData.q_reword_id,icoList,icoBgList);
 				icoListGroup.setRewardByArray(TaskMissionCfgData.getRewordById(taskData.q_reword_id,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex));
 				icoListGroup.visible=true;
@@ -204,7 +213,7 @@ package com.rpgGame.app.ui.main.taskbar
 			
 			if(task!=null&&taskData!=null)
 			{
-				setTaskButView(taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,MonsterDataManager.getMonsterModeidByAreaid(taskData.q_finish_npc));
+				setTaskButView(taskData.q_mission_mainType,taskData.q_mission_mainType,taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist);
 				
 			}
 			
@@ -236,17 +245,17 @@ package com.rpgGame.app.ui.main.taskbar
 			
 		}
 		
-		private function setTaskButView(type:int,describe:String,information:String,sub:Vector.<TaskSubRateInfo>,npc:int):void
+		private function setTaskButView(mainType,int,type:int,describe:String,information:String,sub:Vector.<TaskSubRateInfo>):void
 		{
 			if(type!=TaskType.SUB_CONVERSATION&&TaskMissionManager.getMainTaskIsFinish()&&TaskMissionManager.getMainTaskHaveNpc())
 			{
 				titleLable.htmlText=title+"<font color='#00ff0c'>(已完成)</font>";
-				setSubbutView(npc);
+				setSubbutView(TaskMissionManager.getTaskNpcModeId(mainType));
 			}
 			else
 			{
 				titleLable.htmlText=title+"<font color='#ff0d0d'>(未完成)</font>";
-				TaskUtil.setGotargetInfo(type,describe,information,sub,killButList);
+				TaskUtil.setGotargetInfo(mainType,type,describe,information,sub,killButList);
 			}
 			setUisite();
 		}

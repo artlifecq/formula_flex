@@ -1,5 +1,7 @@
 package org.mokylin.skin.common
 {
+	import feathers.controls.text.Fontter;
+	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 
@@ -10,7 +12,12 @@ package org.mokylin.skin.common
 	 */
 	public class YuanDian_Skin extends feathers.controls.StateSkin
 	{
+		//==========================================================================
+		//                                定义成员变量
+		//==========================================================================
 		public var bg:feathers.controls.UIAsset;
+
+		public var lbnum:feathers.controls.Label;
 
 
 		//==========================================================================
@@ -21,7 +28,7 @@ package org.mokylin.skin.common
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [bg_i()];
+			this.elementsContent = [bg_i(),lbnum_i()];
 			
 			states = {
 			};
@@ -29,6 +36,9 @@ package org.mokylin.skin.common
 		}
 
 
+		//==========================================================================
+		//                                定义成员方法
+		//==========================================================================
 		private function bg_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -37,6 +47,24 @@ package org.mokylin.skin.common
 			temp.styleName = "ui/common/tubiao/yuandian.png";
 			temp.x = 0;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function lbnum_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbnum = temp;
+			temp.name = "lbnum";
+			temp.height = 20;
+			temp.leading = 0;
+			temp.letterSpacing = 0;
+			temp.text = "5";
+			temp.textAlign = "center";
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 20;
+			temp.x = 0;
+			temp.y = 2;
 			return temp;
 		}
 

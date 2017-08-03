@@ -59,6 +59,7 @@ package org.mokylin.skin.mainui.activityBar.button
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			iconDisplay = temp;
 			temp.name = "iconDisplay";
+			temp.styleName = "ui/mainui/activityBar/button/fubenduilie/up.png";
 			return temp;
 		}
 
@@ -75,6 +76,7 @@ package org.mokylin.skin.mainui.activityBar.button
 			temp.color = 0xFFFFFF;
 			temp.top = 0;
 			temp.verticalAlign = "middle";
+			temp.visible = false;
 			return temp;
 		}
 

@@ -16,7 +16,7 @@ package com.rpgGame.app.ui
 	 */
 	public class AttChangeView extends ViewUI
 	{
-		protected var attChangeModuleId:int
+		protected var attChangeTypes:Array;
 		protected var attChangeEft:AttChangePanle;
 		
 		public function AttChangeView(skin:StateSkin=null)
@@ -39,7 +39,7 @@ package com.rpgGame.app.ui
 		
 		private function statChange(type:int,hash:HashMap):void
 		{
-			if(attChangeModuleId!=type)
+			if(attChangeTypes.indexOf(type)==-1)
 				return ;			
 			attChangeEft.addChangeHandler(hash);
 		}

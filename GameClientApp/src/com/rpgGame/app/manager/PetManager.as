@@ -1,9 +1,12 @@
 package com.rpgGame.app.manager
 {
 	import com.gameClient.utils.HashMap;
+	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.PetEvent;
+	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.netData.pet.bean.PetInfo;
 	import com.rpgGame.netData.pet.message.ResExtraBuyMessage;
 	import com.rpgGame.netData.pet.message.ResPetChangeMessage;
@@ -126,6 +129,21 @@ package com.rpgGame.app.manager
 				}
 			}		
 			return list;
+		}
+		
+		/**依据职业获取属性*/
+		public function getAttId(str:String):int
+		{
+			var arr:Array=JSONUtil.decode(str);
+			var job:int=MainRoleManager.actorInfo.job;
+			switch(job)
+			{
+				case JobEnum.ROLE_1_TYPE: return arr[0];
+				case JobEnum.ROLE_2_TYPE:
+				case JobEnum.ROLE_3_TYPE: return arr[1];
+				case JobEnum.ROLE_4_TYPE: return arr[2];
+			}
+			return 0;
 		}
 		
 	}
