@@ -166,7 +166,7 @@ package com.rpgGame.app.manager.mount
 				var needNum:int=showdata.upLevelNeedItemCount-showdata.bagHaveItemCount;
 				if(!ShopManager.ins.isCanBuy(shopItems,needNum))
 				{
-					NoticeManager.showNotifyById(9002,"元宝");
+					NoticeManager.showNotifyById(9002,"","元宝");
 					return false;
 				}
 			}

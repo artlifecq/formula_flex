@@ -89,16 +89,18 @@ package com.rpgGame.appModule.fightsoul
 		
 		private function sortList(q1:FightSoulPathInfoData,q2:FightSoulPathInfoData):int
 		{
-			if(!q1.isOver&&q2.isOver)
-				return -1;
-			else if(q1.isOver&&!q2.isOver)
+			if((q1.isOver||q1.isOpen()==false)&&(q2.isOpen()&&q2.isOver==false)){
 				return 1;
-			else if(q1.isOpen()&&!q2.isOpen())
+			}
+			if((q1.isOpen()&&q1.isOver==false)&&(q2.isOpen()==false||q2.isOver)){
 				return -1;
-			else if(!q1.isOver&&q2.isOver)
+			}
+			if(q1.path.q_id<q2.path.q_id){
+				return -1;
+			}else {
 				return 1;
-			else 
-				return 0;
+			}
+			return 0;
 		}
 		
 		private function initEvent():void
@@ -331,6 +333,14 @@ package com.rpgGame.appModule.fightsoul
 				_skin.num_lv.label = "+0";
 			}
 			
+			if(FightSoulManager.instance().fightSoulInfo.level==FightsoulData.FightSoulMaxLevel){
+				_skin.uiOk.visible=true;
+				_skin.grp_jindu.visible=false;
+			}else{
+				_skin.uiOk.visible=false;
+				_skin.grp_jindu.visible=true;
+			}
+			
 			
 			for each(var view:PropView in _propList)
 			{
@@ -342,6 +352,8 @@ package com.rpgGame.appModule.fightsoul
 		{
 			_skin.num_current.number = fightSoulInfo.level;
 			_skin.num_next.number = fightSoulInfo.level+1;
+			_skin.num_current.width=_skin.num_current.number.toString().length*16+5;
+			_skin.num_next.width=_skin.num_next.number.toString().length*16+5;
 			
 			var parcent:Number = fightSoulInfo.exp/currentMode.q_exp;
 			if(parcent<0)

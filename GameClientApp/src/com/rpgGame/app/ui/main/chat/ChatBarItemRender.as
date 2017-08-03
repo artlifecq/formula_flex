@@ -74,7 +74,7 @@ package com.rpgGame.app.ui.main.chat
 			if(info && this._owner)
 			{
 				_richText.text = ChatUtil.getHTMLChatMessage(info);
-				_richText.setSize(this._owner.width-5);
+				_richText.setSize(this._owner.width-25);//减去滚动条的宽度
 				this.width = _richText.width;
 			}
 		}
