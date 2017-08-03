@@ -46,7 +46,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const HintTypeSetInfo:String = "data.HintTypeSetInfo";
 		/**  区域数据库						 */
 		public static const Q_area:String = "data.map.Q_area";
-		/**  							本列取消，安全区改为刷格方式							本列取消																																															 */
+		/**  							本列取消，安全区改为刷格方式								本列取消																																															 */
 		public static const Q_map:String = "data.map.Q_map";
 		/**  场景特效动态生成表						 */
 		public static const Q_map_effect:String = "data.map.Q_map_effect";
@@ -176,7 +176,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_meridian:String = "data.Q_meridian";
 		/**  战功表												 */
 		public static const Q_meritorious:String = "data.Q_meritorious";
-		/**  战功表					 */
+		/**  战功模型配置表			 */
 		public static const Q_meritorious_monster:String = "data.Q_meritorious_monster";
 		/**  秦陵秘宝刷怪配置表				 */
 		public static const Q_mibao_monster:String = "data.Q_mibao_monster";
