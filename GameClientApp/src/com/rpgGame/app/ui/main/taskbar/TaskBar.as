@@ -67,7 +67,7 @@ package com.rpgGame.app.ui.main.taskbar
 				{
 					if(nameArr[1]==TaskType.MAINTYPE_GUIDETASK)
 					{
-						TaskControl.guideBut(int(nameArr[1]));
+						TaskControl.guideBut(int(nameArr[2]));
 					}
 					else
 					{
