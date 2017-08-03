@@ -210,7 +210,7 @@ package com.rpgGame.app.state.role
 				else if (walkRole.stateMachine.isAttackHarding)
 				{
 					//NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsHarding); //"技能硬直中"
-					return false;
+					//return false;
 				}
 				else if (walkRole.stateMachine.isSpriteUp) 
 				{

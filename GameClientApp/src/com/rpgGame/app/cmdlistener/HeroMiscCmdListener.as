@@ -20,7 +20,6 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.ui.alert.FangChenMiPanelExt;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.utils.TimeUtil;
-	import com.rpgGame.core.events.AttChangeEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.SpellEvent;
 	import com.rpgGame.core.events.SystemTimeEvent;
@@ -286,7 +285,7 @@ package com.rpgGame.app.cmdlistener
 			{
 				FightFaceHelper.showPlayerBaseAttrChange(change);
 			}else{
-				EventManager.dispatchEvent(AttChangeEvent.CHANGEPROPVALUE,msg.modelId,change);
+				EventManager.dispatchEvent(MainPlayerEvent.MODULE_STAT_CHANGE,msg.modelId,change);
 			}
 			
 		}

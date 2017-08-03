@@ -2,55 +2,32 @@ package com.rpgGame.app.manager.fight
 {
 	import com.game.mainCore.libCore.handle.HandleThread;
 	import com.rpgGame.app.display2D.AttackFace;
-	import com.rpgGame.app.fight.spell.time.TimeDelay;
-	import com.rpgGame.core.events.AttChangeEvent;
 	import com.rpgGame.coreData.type.CharAttributeType;
-	
-	import away3d.events.Event;
 	
 	import gs.TimelineLite;
 	import gs.TweenLite;
-	import gs.easing.Circ;
 	import gs.easing.Expo;
 	
 	import org.client.mainCore.ds.HashMap;
-	import org.client.mainCore.manager.EventManager;
 	
 	import starling.display.Sprite;
 	
 	public class AttChangePanle extends Sprite
 	{
-		private var _modeType:int;
-		private var _queueThread : HandleThread = new HandleThread(null, true, 20);
 		private var _newdMoveList:Vector.<AttackFace>;
-		private var _timedalay:TimeDelay;
-		public function AttChangePanle(modeType:int,x:int,y:int):void
+		private var _queueThread : HandleThread = new HandleThread(null, true, 20);
+		private var tweenMap:HashMap;
+		public function AttChangePanle(x:int,y:int):void
 		{
-			_modeType = modeType;
 			super();
 			this.x = x;
 			this.y = y;
-			_timedalay = new TimeDelay("");
-			init();
-		}
-		private function init():void
-		{
-			this.addEventListener(Event.ADDED_TO_STAGE,addToStageHandler);
-			this.addEventListener(Event.REMOVED_FROM_STAGE,removeFromStageHandler);
 			_newdMoveList = new Vector.<AttackFace>();
+			tweenMap=new HashMap();
 		}
-		private function addToStageHandler():void
+		
+		public function addChangeHandler(hash:HashMap):void
 		{
-			EventManager.addEvent(AttChangeEvent.CHANGEPROPVALUE,addChangeHandler);
-		}
-		private function removeFromStageHandler():void
-		{
-			EventManager.removeEvent(AttChangeEvent.CHANGEPROPVALUE,addChangeHandler);
-		}
-		private function addChangeHandler(type:int,hash:HashMap):void
-		{
-			if(_modeType!=type)
-				return ;
 			var keys:Array=hash.keys();
 			keys.sort();
 			var len:int=keys.length;
@@ -68,14 +45,14 @@ package com.rpgGame.app.manager.fight
 				val=hash.getValue(key);
 				typeRes=FightFaceHelper.getAttributeUrl(key,val>0);
 				numberColor=val>0?FightFaceHelper.ATTRIBUTE_USESFUL_NUM:FightFaceHelper.ATTRIBUTE_HARMFUL_NUM;
-				addAttackFaceNew(typeRes, numberColor, val)
+				showAttackFaceNew(typeRes, numberColor, val);
 			}
 		}
-		
-		private function addAttackFaceNew(typeRes : String = "", numberRes : String = "", $attackValue : * = 0):void
+
+		/*private function addAttackFaceNew(typeRes : String = "", numberRes : String = "", $attackValue : * = 0):void
 		{
 			_queueThread.push(showAttackFaceNew, [typeRes,numberRes, $attackValue], 100);
-		}
+		}*/
 		
 		private function showAttackFaceNew(typeRes : String = "", numberRes : String = "", $attackValue : * = 0):void
 		{
@@ -89,40 +66,47 @@ package com.rpgGame.app.manager.fight
 		
 		private function TweenAttrChange(showobj:AttackFace):void
 		{
-			addToStageHanlder(showobj);
+			addFace(showobj);
 			var myTimeline:TimelineLite;
-			myTimeline = new TimelineLite();
-			myTimeline.append(new TweenLite(showobj, 0.2, {delay:0.3,y:-150,ease:Expo.easeIn,onComplete:standCompleteHandler,onCompleteParams:[showobj]}));
-			myTimeline.append(TweenLite.delayedCall(0.5,timeCompleteHandler,[myTimeline,showobj]));
+			myTimeline = new TimelineLite({onComplete:standCompleteHandler,onCompleteParams:[showobj]});
+			myTimeline.append(new TweenLite(showobj, 0.2, {delay:0.2,y:showobj.y-50,ease:Expo.easeIn}));
+			myTimeline.append(new TweenLite(showobj, 0.1, {alpha:0,y:showobj.y-80,ease:Expo.easeOut}));
+			tweenMap.add(showobj,myTimeline);
 		}
+		
 		private function standCompleteHandler(attackFace:AttackFace):void
 		{
 			var index:int = _newdMoveList.indexOf(attackFace);
 			if(index>=0)
 				_newdMoveList.splice(index,1);
-		}
-		private function addToStageHanlder(attackFace:AttackFace):void
-		{
-			var height:Number = attackFace.height;
-			var length:int = _newdMoveList.length;
-			for(var i:int = 0;i<length;i++)
-			{
-				_newdMoveList[i].y -= height;
-			}
-			attackFace.y=0;
-			this.addChild(attackFace);
-			_newdMoveList.push(attackFace);
-		}
-		private function timeCompleteHandler(myTimeline:TimelineLite,attackFace:AttackFace):void
-		{
+			tweenMap.remove(attackFace);
 			attackFace.recycleSub();
 			attackFace.alpha = attackFace.scaleX = attackFace.scaleY = 1;
-			TweenLite.killTweensOf(attackFace);
+			attackFace.y=0;
 			//从场景中移除
 			if (attackFace != null && attackFace.parent != null)
 				attackFace.parent.removeChild(attackFace);
 			//池回收
 			AttackFace.recycleAttackFace(attackFace);
+		}
+		
+		private function addFace(attackFace:AttackFace):void
+		{
+			var height:Number = attackFace.height;
+			var length:int = _newdMoveList.length;
+			attackFace.y=0;
+			for(var i:int = 0;i<length;i++)
+			{
+				_newdMoveList[i].y = attackFace.y-(i+1)*height;
+				var showobj:AttackFace=_newdMoveList[i];
+				/*var myTimeline:TimelineLite=tweenMap.getValue(_newdMoveList[i]);
+				myTimeline.kill();
+				myTimeline.append(new TweenLite(showobj, 0.1, {delay:0.2,y:showobj.y-50,ease:Expo.easeIn}));
+				myTimeline.append(new TweenLite(showobj, 0.1, {alpha:0,y:showobj.y-80,ease:Expo.easeOut}));
+				myTimeline.play();*/
+			}
+			this.addChild(attackFace);
+			_newdMoveList.push(attackFace);
 		}
 	}
 }

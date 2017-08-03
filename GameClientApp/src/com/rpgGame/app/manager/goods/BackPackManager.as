@@ -1,6 +1,7 @@
 package com.rpgGame.app.manager.goods
 {
 	import com.rpgGame.app.manager.ItemCDManager;
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.mount.MountEquipmentManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -13,9 +14,11 @@ package com.rpgGame.app.manager.goods
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.cfg.item.StaticItem;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
+	import com.rpgGame.coreData.enum.EnumShopType;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
+	import com.rpgGame.coreData.info.shop.ShopItemVo;
 	import com.rpgGame.coreData.info.upgrade.AmountInfo;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.coreData.lang.LangQ_BackPack;
@@ -248,55 +251,23 @@ package com.rpgGame.app.manager.goods
 		{
 			var itemInfoList:Array = _goodsList;
 			var returnItem:ClientItemInfo;
-			if( isAutoBuy )
+			var cfgId:int;
+			var requireLevel:int;
+			var quality:int;
+			var cfgId1:int;
+			var requireLevel1:int;
+			var quality1:int;
+			var backHaveHpitem:Boolean=false;
+			for each(var item:ClientItemInfo in itemInfoList)
 			{
-				for each(var item:ClientItemInfo in itemInfoList)
+				if(item!=null)
 				{
-					if(item!=null)
+					cfgId = item.cfgId;
+					requireLevel = ItemConfig.getItemRequireLevel( cfgId ) ;
+					if(ItemConfig.isAddHpItem(cfgId) && MainRoleManager.actorInfo.totalStat.level >= requireLevel)
 					{
-						var cfgId:int = item.cfgId;
-						var requireLevel:int = ItemConfig.getItemRequireLevel( cfgId ) ;
-						var quality:int = ItemConfig.getItemQuality( cfgId );
-						var cfgId1:int;
-						var requireLevel1:int;
-						var quality1:int;
-						
-						if(ItemConfig.isAddHpItem(cfgId) && MainRoleManager.actorInfo.totalStat.level >= requireLevel&&ItemCDManager.getInstance().getSkillHasCDTime(item.qItem))
-						{
-							if( returnItem )
-							{
-								cfgId1 = returnItem.cfgId;
-								requireLevel1 = ItemConfig.getItemRequireLevel( cfgId1 ) ;
-							}
-							else
-							{
-								//cfgId1 = _drugShopInfo.itemInfo.cfgId;
-								requireLevel1 = ItemConfig.getItemRequireLevel( cfgId1 ) - 1 ;
-							}
-							quality1 = ItemConfig.getItemQuality( cfgId1 );
-							if( requireLevel > requireLevel1 )
-							{
-								returnItem = item;
-							}
-							else if( (requireLevel == requireLevel1) && (quality > quality1) )
-							{
-								returnItem = item;
-							}
-							
-						}
-					}
-					
-				}
-			}
-			else
-			{
-				for each(item in itemInfoList)
-				{
-					if(item!=null)
-					{
-						cfgId = item.cfgId;
-						requireLevel = ItemConfig.getItemRequireLevel( cfgId ) ;
-						if(ItemConfig.isAddHpItem(cfgId) && MainRoleManager.actorInfo.totalStat.level >= requireLevel&&!ItemCDManager.getInstance().getSkillHasCDTime(item.qItem))
+						backHaveHpitem=true;
+						if(!ItemCDManager.getInstance().getSkillHasCDTime(item.qItem))
 						{
 							quality = ItemConfig.getItemQuality( cfgId );
 							if( returnItem )
@@ -311,25 +282,63 @@ package com.rpgGame.app.manager.goods
 								{
 									returnItem = item;
 								}
-								/*if( quality > quality1 )
-								{
-									returnItem = item;
-								}
-								else if( (quality == quality1) && (requireLevel > requireLevel1) )
-								{
-									returnItem = item;
-								}*/
 							}
 							else
 							{
 								returnItem = item;
 							}
 						}
+						
+					}
+				}
+				
+			}
+			if (returnItem!=null)
+			{
+				return returnItem;
+			}
+			if(!backHaveHpitem&&isAutoBuy )//包里面没有加血药要且自动购买
+			{
+				var shopsItems:Array=Mgr.shopMgr.getBackPackShopItemList(EnumShopType.BKSHOP_NORMAL);
+				var buyItem:ShopItemVo;
+				for each(var itemVo:ShopItemVo in shopsItems)
+				{
+					if(itemVo!=null)
+					{
+						cfgId= itemVo.data.item.mod;
+						requireLevel= ItemConfig.getItemRequireLevel( cfgId ) ;
+						quality= ItemConfig.getItemQuality( cfgId );
+						if(ItemConfig.isAddHpItem(cfgId) && MainRoleManager.actorInfo.totalStat.level >= requireLevel&&Mgr.shopMgr.isCanbuyShopItem(itemVo,1)&&!ItemCDManager.getInstance().getSkillHasCDTime(itemVo.getItemConfig()))
+						{
+							if( buyItem )
+							{
+								requireLevel1 = ItemConfig.getItemRequireLevel( itemVo.data.item.mod );
+								quality1 = ItemConfig.getItemQuality(itemVo.data.item.mod );
+								if( requireLevel > requireLevel1 )
+								{
+									buyItem = itemVo;
+								}
+								else if( (requireLevel == requireLevel1) && (quality > quality1) )
+								{
+									buyItem = itemVo;
+								}
+							}
+							else
+							{
+								buyItem = itemVo;
+							}
+						}
 					}
 					
 				}
+				if(buyItem!=null)
+				{
+					Mgr.shopMgr.ReqBuyItem(buyItem.data,1,null,1);
+				}
+				
 			}
-			return returnItem;
+			
+			return null;
 		}
 		
 		
