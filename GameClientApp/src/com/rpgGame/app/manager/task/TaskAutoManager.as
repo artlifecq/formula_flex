@@ -294,7 +294,7 @@ package com.rpgGame.app.manager.task
 		
 		private function changeSub():void
 		{
-			if(TaskMissionManager.getTaskSubIsFinish(otherType,_taskTarget))
+			if(TaskMissionManager.getTaskIsFinishByType(otherType))
 				return;
 			_taskTarget=0; 
 			var i:int,length:int;
@@ -303,15 +303,19 @@ package com.rpgGame.app.manager.task
 			{
 				var information:String=taskData.q_finish_information_str;
 				var informationList:Array=JSONUtil.decode(information);
-				length=informationList.length;
-				for(i=0;i<length;i++)
+				if(informationList)
 				{
-					if(TaskMissionManager.getTaskSubIsFinish(otherType,i))
+					length=informationList.length;
+					for(i=0;i<length;i++)
 					{
-						_taskTarget=i;
-						break;
+						if(!TaskMissionManager.getTaskSubIsFinish(otherType,i))
+						{
+							_taskTarget=i;
+							break;
+						}
 					}
 				}
+				
 			}
 			
 			

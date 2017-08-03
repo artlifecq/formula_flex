@@ -409,7 +409,7 @@ package com.rpgGame.app.manager
 			{
 				_stateMachine.transition(AIStateType.USE_ITEM, null, force);
 				_stateMachine.transition(AIStateType.FIND_ATTACKABLE, null, force);
-				_stateMachine.transition(AIStateType.ATTACK_WALK, null, force);
+				//_stateMachine.transition(AIStateType.ATTACK_WALK, null, force);
 				_stateMachine.transition(AIStateType.ATTACK_TARGET, null, force);
 			}
 				
