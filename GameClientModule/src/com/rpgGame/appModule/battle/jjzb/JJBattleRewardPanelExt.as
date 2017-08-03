@@ -45,7 +45,7 @@ package com.rpgGame.appModule.battle.jjzb
 			list.itemRendererFactory = createStoneCell;
 			//list.touchAcross=true;
 			list.clipContent = true;
-			list.scrollBarDisplayMode = "fixed";
+			list.scrollBarDisplayMode = Scroller.SCROLL_BAR_DISPLAY_MODE_ALWAYS_VISIBLE;
 			list.verticalScrollBarPosition = "right";
 			list.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			list.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;

@@ -1,5 +1,6 @@
 package com.rpgGame.app.manager
 {
+	import com.game.engine2D.Scene;
 	import com.game.engine3D.core.GameScene3D;
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
@@ -208,6 +209,11 @@ package com.rpgGame.app.manager
 			if (gameScene3D)
 			{
 				gameScene3D.shadowLevel = value;
+			}
+			var scene:Scene = SceneManager.scene;
+			if(scene)
+			{
+				scene.shadowLevel = value;
 			}
 			AvatarManager.updateSimpleShadow();
 		}

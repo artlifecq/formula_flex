@@ -8,6 +8,7 @@ package com.rpgGame.appModule.hunyin
 	import com.rpgGame.app.sender.HunYinSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.core.events.HunYinEvent;
+	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.SourceGetCfg;
 	import com.rpgGame.coreData.cfg.StaticValue;
@@ -20,6 +21,7 @@ package com.rpgGame.appModule.hunyin
 	import org.mokylin.skin.app.hunyin.AlertJieZhiTuPo;
 	
 	import starling.display.DisplayObject;
+	import starling.display.DisplayObjectContainer;
 	
 	public class HunJieTuPoPanelExt extends SkinUIPanel
 	{
@@ -39,7 +41,10 @@ package com.rpgGame.appModule.hunyin
 			super(_skin);
 //			_skin.cboxCailiao.x=
 		}
-		
+		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
+		{
+			super.show(data,openTable,StarlingLayerManager.topUILayer);
+		}
 		private function initView():void
 		{
 			_info=JieHunJieZiData.getModByLv(Mgr.hunyinMgr.JieZiLv);		

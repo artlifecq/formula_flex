@@ -299,7 +299,10 @@ package com.rpgGame.app.manager
 			}
 			for each (var skill:SkillStateInfo in _infos) 
 			{
-				return isLostSkillCanLevelUp(skill.skillId);
+				if(isLostSkillCanLevelUp(skill.skillId))
+				{
+					return true;	
+				}
 			}
 			return false;
 		}

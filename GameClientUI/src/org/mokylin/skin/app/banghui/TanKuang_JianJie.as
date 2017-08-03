@@ -157,8 +157,8 @@ package org.mokylin.skin.app.banghui
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.label = "申请加入";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.width = 100;
-			temp.x = 108;
+			temp.width = 88;
+			temp.x = 119;
 			temp.y = 216;
 			return temp;
 		}

@@ -6,7 +6,7 @@ package org.mokylin.skin.app.banghui
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import org.mokylin.skin.common.ItemBg;
-	import org.mokylin.skin.component.button.ButtonSkin_putong;
+	import org.mokylin.skin.component.button.ButtonSkin_putong3;
 
 	/**
 	 * @private
@@ -43,7 +43,7 @@ package org.mokylin.skin.app.banghui
 			super();
 			
 			this.currentState = "normal";
-			this.height = 36;
+			this.height = 33;
 			this.width = 549;
 			this.elementsContent = [bg_i(),lbTeamName_i(),lbLevel_i(),lbRoleName_i(),lbNum_i(),lbZhanli_i(),btnOk_i(),lbZhanli0_i()];
 			
@@ -61,7 +61,7 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 36;
+			temp.height = 33;
 			var skin:StateSkin = new org.mokylin.skin.common.ItemBg()
 			temp.skin = skin
 			temp.width = 549;
@@ -77,11 +77,11 @@ package org.mokylin.skin.app.banghui
 			temp.name = "btnOk";
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.label = "加入";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong3;
 			temp.color = 0xCFC6AE;
-			temp.width = 79;
-			temp.x = 465;
-			temp.y = 0;
+			temp.width = 68;
+			temp.x = 473;
+			temp.y = 6;
 			return temp;
 		}
 
@@ -155,7 +155,7 @@ package org.mokylin.skin.app.banghui
 			temp.color = 0xE1201C;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 68;
-			temp.x = 470;
+			temp.x = 473;
 			temp.y = 9;
 			return temp;
 		}

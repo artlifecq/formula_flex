@@ -6,6 +6,7 @@ package com.rpgGame.app.ui.scene.dungeon
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
+	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.sender.HunYinSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
@@ -50,10 +51,9 @@ package com.rpgGame.app.ui.scene.dungeon
 		
 		private var skinList:Array;
 		
-		private var icoBg1List:Vector.<UIAsset>;
-		private var ico1List:Vector.<IconCDFace>;
-		private var icoBg2List:Vector.<UIAsset>;
-		private var ico2List:Vector.<IconCDFace>;
+
+		private var _rewardG1:RewardGroup;
+		private var _rewardG2:RewardGroup;
 		private var killButList:Vector.<SkinnableContainer>;
 		private var zoneId:int=0;
 		private var remainTime:int;
@@ -87,41 +87,8 @@ package com.rpgGame.app.ui.scene.dungeon
 				TaskUtil.addLabelEvet(_skin["killbut_"+i].skin.labelDisplay);			
 			}
 			
-			var ico:IconCDFace;
-			icoBg1List=new Vector.<UIAsset>();
-			for(i=0;i<2;i++)
-			{
-				icoBg1List.push(_skin["sec_ico1_"+i]);
-			}
-			ico1List=new Vector.<IconCDFace>();
-			for(i=0;i<icoBg1List.length;i++)
-			{
-				ico=IconCDFace.create(IcoSizeEnum.ICON_48);
-				ico.showCD=false;
-				ico.x=icoBg1List[i].x;
-				ico.y=icoBg1List[i].y;
-				ico.visible=false;
-				icoBg1List[i].visible=false;
-				ico1List.push(ico);
-				_skin.task_box.addChild(ico);
-			}
-			icoBg2List=new Vector.<UIAsset>();
-			for(i=0;i<3;i++)
-			{
-				icoBg2List.push(_skin["sec_ico2_"+i]);
-			}
-			ico2List=new Vector.<IconCDFace>();
-			for(i=0;i<icoBg2List.length;i++)
-			{
-				ico=IconCDFace.create(IcoSizeEnum.ICON_48);
-				ico.showCD=false;
-				ico.x=icoBg2List[i].x;
-				ico.y=icoBg2List[i].y;
-				ico.visible=false;
-				icoBg2List[i].visible=false;
-				ico2List.push(ico);
-				_skin.task_box.addChild(ico);
-			}
+			_rewardG1=new RewardGroup(IcoSizeEnum.ICON_48,_skin.sec_ico1_0);
+			_rewardG2=new RewardGroup(IcoSizeEnum.ICON_48,_skin.sec_ico2_0);
 			setUisite();
 			alertOk=new AlertSetInfo(LangAlertInfo.ZONE_EXIT_SURE);
 		}
@@ -170,13 +137,7 @@ package com.rpgGame.app.ui.scene.dungeon
 			_skin.sec_navi1.htmlText="";
 			_skin.lbMiaoshu.htmlText="";
 			_skin.sec_info.text="";
-			for(var i:int=0;i<icoBg1List.length;i++)
-			{
-				icoBg1List[i].visible=false;
-				ico1List[i].visible=false;
-				icoBg2List[i].visible=false;
-				ico2List[i].visible=false;
-			}
+			
 		}
 		
 		private function addEvent():void
@@ -307,47 +268,8 @@ package com.rpgGame.app.ui.scene.dungeon
 			var zoneData:Q_zone=ZoneCfgData.getZoneCfg(zoneId);
 			var multyData:Q_zone_multy=ZoneMultyCfgData.getZoneMultyByID(zoneId);
 			if(zoneData==null||multyData==null)return;
-			var passReward:Array=JSONUtil.decode(multyData.q_all_reward);
-			var i:int;
-			var ico:IconCDFace; 
-			var item:Q_item;
-			if(passReward&&passReward.length>0)
-			{
-				for(i=0;i<passReward.length;i++)
-				{
-					if(i<ico1List.length&&passReward[i]!=null)
-					{
-						item=ItemConfig.getQItemByID(passReward[i].mod);
-						ico=ico1List[i];
-						if(item!=null&&ico!=null)
-						{
-							ico.setIconResName(ClientConfig.getItemIcon(item.q_icon.toString(),IcoSizeEnum.ICON_48));
-							ico.visible=true;
-							icoBg1List[i].visible=true;
-							TaskUtil.setItemTips(ico,item,passReward[i].num);
-						}
-					}
-				}
-			}
-			
-			var reward:Array=JSONUtil.decode(multyData.q_prob_reward);
-			if(reward==null||reward.length==0)return;
-			for(i=0;i<reward.length;i++)
-			{
-				if(i<ico2List.length&&reward[i]!=null)
-				{
-					item=ItemConfig.getQItemByID(reward[i].mod);
-					ico=ico2List[i];
-					if(item!=null&&ico!=null)
-					{
-						ico.setIconResName(ClientConfig.getItemIcon(item.q_icon.toString(),IcoSizeEnum.ICON_48));
-						ico.visible=true;
-						icoBg2List[i].visible=true;
-						TaskUtil.setItemTips(ico,item,reward[i].num);
-					}
-				}
-			}
-			
+			_rewardG1.setRewardByJsonStr(multyData.q_all_reward);
+			_rewardG2.setRewardByJsonStr(multyData.q_prob_reward);
 		}
 		
 		private function setTime():void
@@ -393,67 +315,22 @@ package com.rpgGame.app.ui.scene.dungeon
 		/**设置UI位置*/
 		private function setUisite():void
 		{
-			var i:int,count:int=0;
-			for(i=1;i<skinList.length;i++)
-			{
-				if(skinList[i].visible==true)
-				{
-					skinList[i].y=skinList[count].y+skinList[count].height+3;
-					count=i;
-				}
-			}
-			
-			_skin.ui_bg.height=skinList[count].y+skinList[count].height+7;
-			
-			
-			for(i=0;i<icoBg1List.length;i++)
-			{
-				if(icoBg1List[i].visible==true)
-				{
-					icoBg1List[i].y=icoBg1List[0].y;
-					ico1List[i].y=icoBg1List[0].y;
-				}
-			}
-			for(i=0;i<icoBg2List.length;i++)
-			{
-				if(icoBg2List[i].visible==true)
-				{
-					icoBg2List[i].y=icoBg2List[0].y;
-					ico2List[i].y=icoBg2List[0].y;
-				}
-			}	
-			
-			_skin.sec_subbut2.y=_skin.sec_subbut1.y;
+//			var i:int,count:int=0;
+//			for(i=1;i<skinList.length;i++)
+//			{
+//				if(skinList[i].visible==true)
+//				{
+//					skinList[i].y=skinList[count].y+skinList[count].height+3;
+//					count=i;
+//				}
+//			}
 		}
 		private function clear():void
 		{
 			var i:int,lenth:int;
-			var iocn:IconCDFace;
-			skinList=null;
-			lenth=icoBg1List.length;
-			var img:UIAsset;
-			for(i=0;i<lenth;i++)
-			{
-				img=icoBg1List.pop();
-				img.dispose();
-			}
-			icoBg1List=null;
-			lenth=ico1List.length;
-			for(i=0;i<lenth;i++)
-			{
-				iocn=ico1List.pop();
-				iocn.destroy();
-			}
-			ico1List=null;
-			lenth=ico2List.length;
-			for(i=0;i<lenth;i++)
-			{
-				iocn=ico2List.pop();
-				iocn.destroy();
-			}
-			ico2List=null;
+			_rewardG1.clear();
+			_rewardG2.clear();
 			killButList=null;
-			iocn=null;
 			GameAlert.closeAlert(LangAlertInfo.ZONE_EXIT_SURE);
 			alertOk=null;
 			_skin.dispose();

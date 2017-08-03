@@ -52,7 +52,7 @@ package org.mokylin.skin.common.alert
 			this.currentState = "normal";
 			this.height = 264;
 			this.width = 326;
-			this.elementsContent = [bg_i(),imgLine1_i(),btnClose_i(),icons_i(),lbl_name_i(),lbMiaoshu_i(),__AlertNewWeapon_Group1_i(),uiUP_i(),btn_ok_i(),__AlertNewWeapon_UIAsset2_i()];
+			this.elementsContent = [bg_i(),imgLine1_i(),btnClose_i(),icons_i(),lbl_name_i(),lbMiaoshu_i(),__AlertNewWeapon_Group1_i(),btn_ok_i(),__AlertNewWeapon_UIAsset2_i()];
 			
 			states = {
 			};
@@ -83,7 +83,7 @@ package org.mokylin.skin.common.alert
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 67;
 			temp.y = 147;
-			temp.elementsContent = [__AlertNewWeapon_UIAsset1_i(),NumZhanli_i()];
+			temp.elementsContent = [__AlertNewWeapon_UIAsset1_i(),NumZhanli_i(),uiUP_i()];
 			return temp;
 		}
 
@@ -211,8 +211,8 @@ package org.mokylin.skin.common.alert
 			uiUP = temp;
 			temp.name = "uiUP";
 			temp.styleName = "ui/common/tubiao/jobup.png";
-			temp.x = 225;
-			temp.y = 168;
+			temp.x = 159;
+			temp.y = 19;
 			return temp;
 		}
 
