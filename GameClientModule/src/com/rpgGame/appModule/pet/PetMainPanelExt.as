@@ -27,6 +27,7 @@ package com.rpgGame.appModule.pet
 	import com.rpgGame.coreData.clientConfig.Q_girl_advance;
 	import com.rpgGame.coreData.clientConfig.Q_girl_pet;
 	import com.rpgGame.coreData.clientConfig.Q_global;
+	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.CharAttributeType;
@@ -354,11 +355,13 @@ package com.rpgGame.appModule.pet
 			}
 			//战斗力
 			var qPetAdv:Q_girl_advance=PetAdvanceCfg.getPet(data.modelId,data.rank);
+			var addid:int=0;
 			if (!qPetAdv) 
 			{
 				return;
 			}
-			_skin.NumZhanli.label=FightValueUtil.calFightPowerByAttValue(AttValueConfig.getAttInfoById(qPetAdv.q_attid_master),MainRoleManager.actorInfo.job)+"";
+			addid=Mgr.petMgr.getAttId(qPetAdv.q_attid_master);
+			_skin.NumZhanli.label=FightValueUtil.calFightPowerByAttValue(AttValueConfig.getAttInfoById(addid),MainRoleManager.actorInfo.job)+"";
 			var nextAttrId:int=0;
 			if(!data.actived||data.rank==qPet.q_max_grade) 
 			{
@@ -369,10 +372,10 @@ package com.rpgGame.appModule.pet
 				var qPetAdvNext:Q_girl_advance=PetAdvanceCfg.getPet(data.modelId,data.rank+1);
 				if (qPetAdvNext) 
 				{
-					nextAttrId=qPetAdvNext.q_attid_master;
+					nextAttrId=Mgr.petMgr.getAttId(qPetAdvNext.q_attid_master);
 				}
 			}
-			_attrCon.setData(qPetAdv.q_attid_master,nextAttrId);
+			_attrCon.setData(addid,nextAttrId);
 			_bgIco.setIconResName(ClientConfig.getSkillIcon(qPetAdv.q_skill_id.split("_")[0].toString(),IcoSizeEnum.ICON_42));
 			if (!data.actived) 
 			{
@@ -395,6 +398,7 @@ package com.rpgGame.appModule.pet
 				}
 			}
 		}
+		
 		private function updateBtnState(pet:PetInfo):void
 		{
 			_skin.gBuy.visible=false;

@@ -60,9 +60,9 @@ package org.mokylin.skin.app.wuxue.jineng
 			super();
 			
 			this.currentState = "normal";
-			this.height = 385;
+			this.height = 394;
 			this.width = 340;
-			this.elementsContent = [Icon_jineng_i(),__jineng_shengji_UIAsset2_i(),lb_name_i(),lb_dengji_i(),lb_xiaohao_i(),lb_leixing_i(),lb_lengque_i(),__jineng_shengji_UIAsset3_i(),ms_txt_i(),eft1_i(),eft2_i(),arrow1_i(),arrow2_i(),lb_renwudengji_i(),lb_zhenqi_i(),lb_yinliang_i(),btn_shengji_i(),eft_name_i(),tj_name_i()];
+			this.elementsContent = [__jineng_shengji_UIAsset2_i(),Icon_jineng_i(),__jineng_shengji_UIAsset3_i(),lb_name_i(),lb_dengji_i(),lb_xiaohao_i(),lb_leixing_i(),lb_lengque_i(),__jineng_shengji_UIAsset4_i(),ms_txt_i(),eft1_i(),eft2_i(),arrow1_i(),arrow2_i(),lb_renwudengji_i(),lb_zhenqi_i(),lb_yinliang_i(),btn_shengji_i(),eft_name_i(),tj_name_i()];
 			
 			states = {
 			};
@@ -79,16 +79,17 @@ package org.mokylin.skin.app.wuxue.jineng
 			Icon_jineng = temp;
 			temp.name = "Icon_jineng";
 			temp.styleName = "ui/common/grid/normal/64.png";
-			temp.x = 2;
-			temp.y = 1;
+			temp.x = 4;
+			temp.y = 11;
 			return temp;
 		}
 
 		private function __jineng_shengji_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/wuxue/jineng/mzd.png";
-			temp.x = 83;
+			temp.styleName = "ui/app/wuxue/jineng/kuantiao.png";
+			temp.width = 331;
+			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
@@ -96,9 +97,18 @@ package org.mokylin.skin.app.wuxue.jineng
 		private function __jineng_shengji_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/wuxue/jineng/mzd.png";
+			temp.x = 85;
+			temp.y = 10;
+			return temp;
+		}
+
+		private function __jineng_shengji_UIAsset4_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/wuxue/jineng/jnxg.png";
-			temp.x = 2;
-			temp.y = 85;
+			temp.x = 4;
+			temp.y = 95;
 			return temp;
 		}
 
@@ -108,8 +118,8 @@ package org.mokylin.skin.app.wuxue.jineng
 			arrow1 = temp;
 			temp.name = "arrow1";
 			temp.styleName = "ui/common/tubiao/jobup.png";
-			temp.x = 3;
-			temp.y = 195;
+			temp.x = 5;
+			temp.y = 205;
 			return temp;
 		}
 
@@ -119,8 +129,8 @@ package org.mokylin.skin.app.wuxue.jineng
 			arrow2 = temp;
 			temp.name = "arrow2";
 			temp.styleName = "ui/common/tubiao/jobup.png";
-			temp.x = 3;
-			temp.y = 214;
+			temp.x = 5;
+			temp.y = 224;
 			return temp;
 		}
 
@@ -135,8 +145,8 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xEAEABC;
 			temp.width = 88;
-			temp.x = 130;
-			temp.y = 347;
+			temp.x = 132;
+			temp.y = 357;
 			return temp;
 		}
 
@@ -149,8 +159,8 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.text = "技能可升至31级";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 18;
-			temp.y = 193;
+			temp.x = 20;
+			temp.y = 203;
 			return temp;
 		}
 
@@ -163,8 +173,8 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.text = "8%单次伤害秒伤";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 21;
-			temp.y = 212;
+			temp.x = 23;
+			temp.y = 222;
 			return temp;
 		}
 
@@ -174,8 +184,8 @@ package org.mokylin.skin.app.wuxue.jineng
 			eft_name = temp;
 			temp.name = "eft_name";
 			temp.styleName = "ui/app/wuxue/jineng/xyjxg.png";
-			temp.x = 2;
-			temp.y = 173;
+			temp.x = 4;
+			temp.y = 183;
 			return temp;
 		}
 
@@ -187,8 +197,8 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.text = "等级:1/30";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 86;
-			temp.y = 30;
+			temp.x = 88;
+			temp.y = 40;
 			return temp;
 		}
 
@@ -200,8 +210,8 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.text = "技能类型：瞬发";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 180;
-			temp.y = 30;
+			temp.x = 182;
+			temp.y = 40;
 			return temp;
 		}
 
@@ -213,8 +223,8 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.text = "时间冷却：无";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 180;
-			temp.y = 52;
+			temp.x = 182;
+			temp.y = 62;
 			return temp;
 		}
 
@@ -228,8 +238,8 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 93;
-			temp.x = 90;
-			temp.y = 1;
+			temp.x = 92;
+			temp.y = 11;
 			return temp;
 		}
 
@@ -245,8 +255,8 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 330;
-			temp.x = 1;
-			temp.y = 263;
+			temp.x = 3;
+			temp.y = 273;
 			return temp;
 		}
 
@@ -258,8 +268,8 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.text = "消耗：无";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 86;
-			temp.y = 52;
+			temp.x = 88;
+			temp.y = 62;
 			return temp;
 		}
 
@@ -273,8 +283,8 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 330;
-			temp.x = 1;
-			temp.y = 309;
+			temp.x = 3;
+			temp.y = 319;
 			return temp;
 		}
 
@@ -288,8 +298,8 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 330;
-			temp.x = 1;
-			temp.y = 285;
+			temp.x = 3;
+			temp.y = 295;
 			return temp;
 		}
 
@@ -305,8 +315,8 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 337;
-			temp.x = 0;
-			temp.y = 104;
+			temp.x = 2;
+			temp.y = 114;
 			return temp;
 		}
 
@@ -316,8 +326,8 @@ package org.mokylin.skin.app.wuxue.jineng
 			tj_name = temp;
 			temp.name = "tj_name";
 			temp.styleName = "ui/app/wuxue/jineng/jnjjtj.png";
-			temp.x = 2;
-			temp.y = 244;
+			temp.x = 4;
+			temp.y = 254;
 			return temp;
 		}
 

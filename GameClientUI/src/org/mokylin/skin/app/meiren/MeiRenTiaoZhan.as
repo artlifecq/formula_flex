@@ -66,6 +66,7 @@ package org.mokylin.skin.app.meiren
 			super();
 			
 			this.currentState = "normal";
+			this.height = 577;
 			this.width = 529;
 			this.elementsContent = [bgQuan_i(),grpIcon1_i(),grpIcon2_i(),btn_next_i(),skinJihuo_i(),lb_time_i()];
 			

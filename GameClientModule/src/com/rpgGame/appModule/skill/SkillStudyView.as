@@ -26,6 +26,7 @@ package com.rpgGame.appModule.skill
 	import feathers.controls.ToggleButton;
 	
 	import org.client.mainCore.manager.EventManager;
+	import org.mokylin.skin.app.wuxue.jineng.JiNeng_Head;
 	import org.mokylin.skin.app.wuxue.jineng.jineng_Skin;
 	import org.mokylin.skin.app.wuxue.jineng.jineng_jinjie;
 	import org.mokylin.skin.app.wuxue.jineng.jineng_shengji;
@@ -33,7 +34,7 @@ package com.rpgGame.appModule.skill
 	
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
-
+	
 	/**
 	 *技能学习 
 	 * @author dik
@@ -44,16 +45,18 @@ package com.rpgGame.appModule.skill
 		private var _skin:jineng_Skin;
 		private var _skillContainer:Sprite;
 		
-//		private var _jobTitle1:Title_Skin;
-//		private var _jobTitle2:Title_Skin;
-//		private var _jobTl1:Sprite;
-//		private var _jobTl2:Sprite;
+		//		private var _jobTitle1:Title_Skin;
+		//		private var _jobTitle2:Title_Skin;
+		private var _jobTl1:Sprite;
+		private var _jobTl2:Sprite;
+		private var _jobTitle1:JiNeng_Head;
+		private var _jobTitle2:JiNeng_Head;
 		private var _lastSp:Sprite;
 		private var selectedItem:SkillItem;
 		
 		private var skillUpgrade:SkillUpgradeView;
 		private var skillRise:SkillRiseView;
-
+		
 		private var basicItems:Vector.<SkillItem>;
 		private var otherItems:Vector.<SkillItem>;
 		
@@ -75,27 +78,30 @@ package com.rpgGame.appModule.skill
 			this._skin.vs_bar.scrollBarDisplayMode = ScrollBarDisplayMode.FIXED_FLOAT;
 			this._skin.vs_bar.horizontalScrollPolicy=ScrollPolicy.OFF;
 			
-//			_jobTitle1=new Title_Skin();
-//			_jobTitle2=new Title_Skin();
-//			_jobTitle2.labelDisplay.text=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT13);
-//			_jobTl1=_skin.grp_name1.toSprite();
-//			_jobTl2=_jobTitle2.toSprite();
-			_skillContainer.addChild(_skin.grp_name1);
-			_skillContainer.addChild(_skin.grp_name2);
+			_jobTitle1=new JiNeng_Head();
+			_jobTitle2=new JiNeng_Head();
+			_jobTitle2.labelDisplay.styleName= "ui/app/wuxue/jineng/name2.png";
+			_jobTl1=_jobTitle1.toSprite();
+			_jobTl2=_jobTitle2.toSprite();
+			_skillContainer.addChild(_jobTl1);
+			_skillContainer.addChild(_jobTl2);
 			skillUpgrade=new SkillUpgradeView(_skin.shengji.skin as jineng_shengji,this);
 			skillRise=new SkillRiseView(_skin.jinjie.skin as jineng_jinjie,this);
-			_skin.grp_name1.y=0;
+			_jobTl1.x=25;
+			_jobTl1.y=10;
 			var skillNum:int;
 			var job:int=MainRoleManager.actorInfo.job;
 			var item:SkillItem;
 			var i:int;
 			var row:int;
+			var poinY:int;
 			var list:Vector.<Q_skill_model>=SpellDataManager.getBasicSkills(MainRoleManager.actorInfo.job);//基本职业技能
 			var data:Q_skill_model;
 			skillNum=list.length;
 			var skillInfo:SkillInfo;
 			basicItems=new Vector.<SkillItem>();
 			otherItems=new Vector.<SkillItem>();
+			poinY=_jobTl1.y+_jobTl1.height+5;
 			for(i=0;i<skillNum;i++){
 				item=new SkillItem();
 				basicItems.push(item);
@@ -106,23 +112,27 @@ package com.rpgGame.appModule.skill
 					data=list[i];
 				}
 				item.updateItem(data,skillInfo);
-				item.y=row*(item.height+5)+25;
+				item.y=poinY;
 				_skillContainer.addChild(item);
 				if(i%2==0){
 					item.x=25;
 				}else{
-					item.x=item.width+30;
+					poinY+=item.height-4;
+					item.x=item.width+25;
 				}
 				if(i==0){
 					selecteSpell(item);					
 				}
 			}
 			row++;
-			_skin.grp_name2.y=row*(item.height+5)+25;
+			poinY=item.y+item.height+5;
+			_jobTl2.x=25;
+			_jobTl2.y=poinY;//row*(item.height+5)+25;
 			
 			_skin.jinjie.visible=false;
 			list=SpellDataManager.getBasicSkills(JobEnum.ROLE_0_TYPE);
 			skillNum=list.length;
+			poinY=_jobTl2.y+_jobTl2.height+5;
 			for(i=0;i<skillNum;i++){
 				item=new SkillItem();
 				otherItems.push(item);
@@ -133,16 +143,17 @@ package com.rpgGame.appModule.skill
 					data=list[i];
 				}
 				item.updateItem(data,skillInfo);
-				item.y=row*(item.height+10)+_skin.grp_name2.y+25;
+				item.y=poinY;
 				_skillContainer.addChild(item);
 				if(i%2==0){
 					item.x=25;
 				}else{
+					poinY+=item.height-4;
 					item.x=item.width+30;
 				}
 			}
 			_lastSp=new Sprite();
-			_lastSp.y=item.y+item.height+5;
+			_lastSp.y=item.y+item.height+2;
 			_skillContainer.addChild(_lastSp);
 			this._skin.vs_bar.addChild(_skillContainer);
 			
