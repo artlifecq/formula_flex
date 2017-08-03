@@ -144,6 +144,7 @@ package com.rpgGame.appModule.task
 			currtimer=TIMERDATA_1;
 			if(this.visible&&this.parent!=null)
 			{
+				icoListGroup.tweeRewardInBag();
 				TweenLite.killDelayedCallsTo(subFinish);
 				TweenLite.delayedCall(0.5, subFinish);
 			}
@@ -164,7 +165,7 @@ package com.rpgGame.appModule.task
 		{
 			//okBut.isEnabled=false;
 			TaskSender.sendfinishTaskMessage(TaskMissionManager.mainTaskInfo.taskId);
-			icoListGroup.tweeRewardInBag();
+			
 		}
 		
 		private function setView():void
