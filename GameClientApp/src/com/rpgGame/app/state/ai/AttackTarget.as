@@ -8,7 +8,6 @@ package com.rpgGame.app.state.ai
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.core.fight.spell.CastSpellInfo;
 	import com.rpgGame.core.state.ai.AIState;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
@@ -44,7 +43,18 @@ package com.rpgGame.app.state.ai
 
 		private function findUseableSpell() : Q_skill_model
 		{
-			var castSpell : Q_skill_model = CastSpellHelper.getSortCastSpell();
+			var castSpell : Q_skill_model;
+			var nextSpell : Q_skill_model = TrusteeshipManager.getInstance().nextSpell;
+			if (nextSpell && CastSpellHelper.checkCanUseSpell(nextSpell))
+			{
+				castSpell = nextSpell;
+			}
+			TrusteeshipManager.getInstance().nextSpell = null;
+			if (!castSpell)
+			{
+				castSpell = CastSpellHelper.getSortCastSpell();
+			}
+			
 			if (false) //旧的挂机模式，先留着。@L.L.M.Sunny 
 			{
 				if (!castSpell)
@@ -104,11 +114,16 @@ package com.rpgGame.app.state.ai
 		}
 		private function releaseSpell() : void
 		{
+//			if(TrusteeshipManager.getInstance().isClickMap)
+//			{
+//				RoleStateUtil.walkToPos();
+//				return;
+//			}
 			var spellData : Q_skill_model = findUseableSpell();
 			if (spellData)
 			{
 				var roleList : Vector.<SceneRole> = TrusteeshipManager.getInstance().getRoleList();
-				CastSpellHelper.autoTryCaseSpell(new CastSpellInfo(spellData), roleList, true);
+				CastSpellHelper.tryCaseSpell(new CastSpellInfo(spellData), roleList, true);
 			}
 			transition(AIStateType.AI_NONE);
 		}
@@ -135,8 +150,8 @@ package com.rpgGame.app.state.ai
 
 		override public function enterPass(prevState : IState, force : Boolean = false) : Boolean
 		{
-			if (prevState.type==AIStateType.ATTACK_WALK&&!isFight())
-				return false;
+			/*if (prevState.type==AIStateType.ATTACK_WALK)//&&!isFight()
+				return false;*/
 			if(!TrusteeshipManager.getInstance().getHasRole()&&SceneRoleSelectManager.selectedRole ==null)
 			{
 				transition(AIStateType.AI_NONE);

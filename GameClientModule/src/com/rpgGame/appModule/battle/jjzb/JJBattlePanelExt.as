@@ -13,6 +13,7 @@ package com.rpgGame.appModule.battle.jjzb
 	import com.rpgGame.core.events.JJBattleEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipManager;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.utils.GameColorUtil;
 	import com.rpgGame.core.utils.MCUtil;
@@ -77,6 +78,12 @@ package com.rpgGame.appModule.battle.jjzb
 			_logSkin.imgBg.height=27;
 			
 			_costArr=JSONUtil.decode(GlobalSheetData.getStrValue(809));
+			
+			TipTargetManager.show(_infoSkin.btnAdd1,TargetTipsMaker.makeSimpleTextTips(LanguageConfig.replaceStr("花费{0}礼金，购买1次挑战次数",[_costArr[0]])));
+			var str:String=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,NotifyCfgData.getNotifyTextByID(61030));
+			var numStr:String=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,_costArr[1]+"");
+			str+=LanguageConfig.replaceStr(NotifyCfgData.getNotifyTextByID(61031),[numStr,numStr]);
+			TipTargetManager.show(_infoSkin.btnAdd2,TargetTipsMaker.makeSimpleTextTips(str));
 			regEvent();
 		}
 		private function regEvent():void

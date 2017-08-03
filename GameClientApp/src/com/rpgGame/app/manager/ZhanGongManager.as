@@ -171,7 +171,7 @@ package com.rpgGame.app.manager
 			}
 			for each(var key:int in zongMaps.keys())
 			{
-				str+=HtmlTextUtil.getTextColor(0x8B8D7B,CharAttributeType.getCNName(key))+": "+HtmlTextUtil.getTextColor(0x5cb006,"+"+zongMaps.getValue(key))+"\n";
+				str+=HtmlTextUtil.getTextColor(0x8B8D7B,CharAttributeType.getCNName(key))+": "+HtmlTextUtil.getTextColor(0x5cb006,"+"+AttValueConfig.getDisAttValue(key,zongMaps.getValue(key)))+"\n";
 			}
 			if(str==null||str=="") str="当前无属性加成";
 			return str;

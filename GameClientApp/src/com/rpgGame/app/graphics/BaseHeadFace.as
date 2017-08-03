@@ -358,5 +358,9 @@ package com.rpgGame.app.graphics
 		{
 			
 		}
+		public function checkBloodState():void
+		{
+			
+		}
 	}
 }

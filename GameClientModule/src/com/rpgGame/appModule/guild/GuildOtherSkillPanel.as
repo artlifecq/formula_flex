@@ -134,6 +134,7 @@ package com.rpgGame.appModule.guild
 		}
 	}
 }
+import com.rpgGame.coreData.cfg.AttValueConfig;
 import com.rpgGame.coreData.clientConfig.Q_att_values;
 import com.rpgGame.coreData.type.CharAttributeType;
 
@@ -158,11 +159,11 @@ class SkillPropCell
 		if(currentatt!=null)
 		{
 			if(CharAttributeType.WAI_GONG== _attid)
-				_currentValue = currentatt.q_value1;
+				_currentValue =  AttValueConfig.getDisAttValue(_attid,currentatt.q_value1);
 			else if(CharAttributeType.DEFENSE_PER== _attid)
-				_currentValue = currentatt.q_value2;
+				_currentValue =  AttValueConfig.getDisAttValue(_attid,currentatt.q_value2);
 			else
-				_currentValue = currentatt.q_value3;
+				_currentValue = AttValueConfig.getDisAttValue(_attid,currentatt.q_value3);
 			
 		}else{
 			_currentValue = 0;
@@ -171,11 +172,11 @@ class SkillPropCell
 		if(nextatt!=null)
 		{
 			if(CharAttributeType.WAI_GONG== _attid)
-				_nextValue = nextatt.q_value1;
+				_nextValue = AttValueConfig.getDisAttValue(_attid,currentatt.q_value1);
 			else if(CharAttributeType.DEFENSE_PER== _attid)
-				_nextValue = nextatt.q_value2;
+				_nextValue = AttValueConfig.getDisAttValue(_attid,currentatt.q_value2);
 			else
-				_nextValue = nextatt.q_value3;
+				_nextValue = AttValueConfig.getDisAttValue(_attid,currentatt.q_value3);
 		}else{
 			_nextValue = 0;
 		}

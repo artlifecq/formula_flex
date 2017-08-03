@@ -62,89 +62,23 @@ package com.rpgGame.app.ui.main.taskbar
 			}
 			if(target.name!=null)
 			{
-				var nameArr:Array=target.name.split("AA");
-				if(nameArr[0]==TaskType.MAINTYPE_GUIDETASK)//引导任务先特殊处理
+				var nameArr:Array=target.name.split("II");
+				if(nameArr[0]=="KILL")//引导任务先特殊处理
 				{
-					TaskControl.guideBut(int(nameArr[1]));
+					if(nameArr[1]==TaskType.MAINTYPE_GUIDETASK)
+					{
+						TaskControl.guideBut(int(nameArr[2]));
+					}
+					else
+					{
+						killWalkBut(nameArr[1],nameArr[2],nameArr[3]);
+					}
 					return;
 				}
+				
 			}
 			switch (target) 
 			{
-				
-				case Renwu_Item(_skin.pri_killbut_1.skin).labelDisplay:
-					killWalkBut(1,0,1);
-					break;
-				case Renwu_Item(_skin.pri_killbut_2.skin).labelDisplay:
-					killWalkBut(1,1,1);
-					break;
-				case Renwu_Item(_skin.pri_killbut_3.skin).labelDisplay:
-					killWalkBut(1,2,1);
-					break;
-				case Renwu_Item(_skin.sec_killbut1_1.skin).labelDisplay:
-					killWalkBut(1,0,1);
-					break;
-				case Renwu_Item(_skin.sec_killbut1_2.skin).labelDisplay:
-					killWalkBut(1,1,1);
-					break;
-				case Renwu_Item(_skin.sec_killbut1_3.skin).labelDisplay:
-					killWalkBut(1,2,1);
-					break;
-				case Renwu_Item(_skin.sec_killbut2_1.skin).labelDisplay:
-					killWalkBut(2,0,1);
-					break;
-				case Renwu_Item(_skin.sec_killbut2_2.skin).labelDisplay:
-					killWalkBut(2,1,1);
-					break;
-				case Renwu_Item(_skin.sec_killbut2_3.skin).labelDisplay:
-					killWalkBut(2,2,1);
-					break;
-				case Renwu_Item(_skin.sec_killbut3_1.skin).labelDisplay:
-					killWalkBut(3,0,1);
-					break;
-				case Renwu_Item(_skin.sec_killbut3_2.skin).labelDisplay:
-					killWalkBut(3,1,1);
-					break;
-				case Renwu_Item(_skin.sec_killbut3_3.skin).labelDisplay:
-					killWalkBut(3,2,1);
-					break;
-				
-				case Renwu_Item(_skin.pri_killbut_1.skin).btn_send:
-					killWalkBut(1,0,2);
-					break;
-				case Renwu_Item(_skin.pri_killbut_2.skin).btn_send:
-					killWalkBut(1,1,2);
-					break;
-				case Renwu_Item(_skin.pri_killbut_3.skin).btn_send:
-					killWalkBut(1,2,2);
-					break;
-				case Renwu_Item(_skin.sec_killbut1_1.skin).btn_send:
-					killWalkBut(1,0,2);
-					break;
-				case Renwu_Item(_skin.sec_killbut1_2.skin).btn_send:
-					killWalkBut(1,1,2);
-					break;
-				case Renwu_Item(_skin.sec_killbut1_3.skin).btn_send:
-					killWalkBut(1,2,2);
-					break;
-				case Renwu_Item(_skin.sec_killbut2_1.skin).btn_send:
-					killWalkBut(2,0,2);
-					break;
-				case Renwu_Item(_skin.sec_killbut2_2.skin).btn_send:
-					killWalkBut(2,1,2);
-					break;
-				case Renwu_Item(_skin.sec_killbut2_3.skin).btn_send:
-					killWalkBut(2,2,2);
-					break;
-				case Renwu_Item(_skin.sec_killbut3_1.skin).btn_send:
-					killWalkBut(3,0,2);
-					break;
-				case Renwu_Item(_skin.sec_killbut3_2.skin).btn_send:
-					killWalkBut(3,1,2);
-					break;
-				case Renwu_Item(_skin.sec_killbut3_3.skin).btn_send:
-					killWalkBut(3,2,2);
-					break;
 				case this._skin.btn_open:
 					// 打开
 					setState(true);
@@ -307,6 +241,7 @@ package com.rpgGame.app.ui.main.taskbar
 			
 			
 			showNpcMark(false);
+			TaskAutoManager.getInstance().walkOver=false;
 		}
 		/**新任务*/
 		private function newMation(type:int):void
@@ -316,7 +251,7 @@ package com.rpgGame.app.ui.main.taskbar
 				if(TaskMissionManager.haveMainTask)
 				{
 					effetCont.playNewtaskEffect();
-					TaskAutoManager.getInstance().startTaskAuto();
+					TaskAutoManager.getInstance().startTaskAuto(TaskType.MAINTYPE_MAINTASK);
 					
 					
 				}
@@ -329,7 +264,7 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				if(TaskMissionManager.haveTreasuerTask&&TaskMissionManager.treasuerCheck)
 				{
-					TaskAutoManager.getInstance().startOtherTaskAuto(TaskType.MAINTYPE_TREASUREBOX)
+					TaskAutoManager.getInstance().startTaskAuto(TaskType.MAINTYPE_TREASUREBOX)
 				}
 			}
 				
@@ -373,6 +308,15 @@ package com.rpgGame.app.ui.main.taskbar
 					}
 				}
 			}
+			else if(type==TaskType.MAINTYPE_TREASUREBOX)
+			{
+				if(TaskMissionManager.getTreasuerTaskIsFinish())
+				{
+					TaskControl.showLoopPanel();
+				}
+				
+			}
+			
 			
 		}
 		/**任务卡级*/

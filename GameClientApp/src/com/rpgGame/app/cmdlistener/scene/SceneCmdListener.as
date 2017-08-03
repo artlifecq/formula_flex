@@ -355,7 +355,8 @@ package com.rpgGame.app.cmdlistener.scene
 		
 		private function onResPlayerDieMessage(msg:ResPlayerDieMessage):void
 		{
-			if(msg.personId.ToGID()==MainRoleManager.actor.id){
+			if(msg.personId.ToGID()==MainRoleManager.actor.id)
+			{
 				AppManager.showApp(AppConstant.DIE_PANEL,msg);
 				EventManager.dispatchEvent(MainPlayerEvent.PLAYER_DIE);
 				SceneManager.scene.addGrayScene();
@@ -1061,7 +1062,8 @@ package com.rpgGame.app.cmdlistener.scene
 			
 			if(roleData.id == MainRoleManager.actorID)
 			{
-				if(msg.attributeChange.type==CharAttributeType.HP){
+				if(msg.attributeChange.type==CharAttributeType.HP)
+				{
 					EventManager.dispatchEvent(MainPlayerEvent.SELFHP_CHANGE);
 				}
 				else if (msg.attributeChange.type==CharAttributeType.LV) 

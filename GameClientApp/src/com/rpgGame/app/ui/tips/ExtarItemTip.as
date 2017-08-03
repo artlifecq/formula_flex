@@ -93,14 +93,14 @@ package com.rpgGame.app.ui.tips
 			if(_item.clientItemInfo.cfgId!=403&&_item.clientItemInfo.cfgId!=406)
 				return ;
 			if(_item is HorseExtraItemInfo)
-				_skin.lbShuxing.text = "每颗资质丹永久增加战骑属性：";
+				_skin.lbShuxing.text = "每颗资质丹永久增加战旗属性：";
 			else if(_item is ZhanQiExtraItemInfo)
 				_skin.lbShuxing.text = "每颗资质丹永久增加战旗属性：";
 			_skin.grp_type.visible = true; 
 			var currentatt:Q_att_values = AttValueConfig.getAttInfoById(_show.exartPropId);
-			_skin.lbGongJi.text = "+"+currentatt.q_value1;
-			_skin.lbFangYu.text = "+"+(currentatt.q_value2/10);
-			_skin.lbShengMing.text = "+"+currentatt.q_value3;
+			_skin.lbGongJi.text = "+"+AttValueConfig.getDisAttValue(currentatt.q_type1,currentatt.q_value1);
+			_skin.lbFangYu.text = "+"+AttValueConfig.getDisAttValue(currentatt.q_type2,currentatt.q_value2);
+			_skin.lbShengMing.text = "+"+AttValueConfig.getDisAttValue(currentatt.q_type3,currentatt.q_value3);
 			
 			_skin.ui_xian3.y=259;	
 			_skin.grp_foot.y = _skin.ui_xian3.y + 11;

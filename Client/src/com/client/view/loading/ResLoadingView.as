@@ -1,10 +1,8 @@
 package com.client.view.loading
 {
-	import com.client.loader.BmpLoader;
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.game.mainCore.core.timer.GameTimer;
 	import com.gameClient.log.GameLog;
-	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	
 	import flash.display.MovieClip;
@@ -19,7 +17,6 @@ package com.client.view.loading
 	import away3d.loaders.multi.MultiLoadData;
 	
 	import feathers.controls.UIAsset;
-	import feathers.core.IFeathersControl;
 	import feathers.themes.GuiTheme;
 	import feathers.themes.ThemeLoader;
 	

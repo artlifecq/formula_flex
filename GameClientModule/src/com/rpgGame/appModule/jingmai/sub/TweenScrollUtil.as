@@ -1,11 +1,7 @@
 package  com.rpgGame.appModule.jingmai.sub
 {
 
-	import flash.utils.clearTimeout;
-	import flash.utils.setTimeout;
-	
 	import gs.TweenMax;
-	import gs.easing.Expo;
 	
 	import starling.display.DisplayObject;
 	import starling.display.Quad;

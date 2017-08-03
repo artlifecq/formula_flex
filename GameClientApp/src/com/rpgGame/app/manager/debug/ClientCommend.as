@@ -9,6 +9,7 @@ package   com.rpgGame.app.manager.debug
 	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.HashMap;
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.fight.spell.FightPowerChangePopPanelExt;
 	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
 	import com.rpgGame.app.fight.spell.SkillAddPop;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
@@ -52,8 +53,6 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.info.move.RoleMoveInfo;
-	import com.rpgGame.coreData.role.GirlPetData;
-	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
@@ -62,7 +61,6 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
 	import com.rpgGame.netData.backpack.bean.TempItemInfo;
 	import com.rpgGame.netData.fight.message.SCBuffSkillMessage;
-	import com.rpgGame.netData.map.bean.PetInfo;
 	import com.rpgGame.netData.player.message.SCNonagePromptMessage;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
 	import com.rpgGame.netData.structs.Position;
@@ -79,7 +77,6 @@ package   com.rpgGame.app.manager.debug
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.data.long;
 	import org.game.netCore.net.MessageMgr;
 	
 	
@@ -418,6 +415,22 @@ package   com.rpgGame.app.manager.debug
 			commandList.put( ".hsort", function (...arg):void
 			{
 				HeadFace(MainRoleManager.actor.headFace).sort(); 
+			});
+			
+			commandList.put( ".fc", function (...arg):void
+			{
+				var hash:org.client.mainCore.ds.HashMap = new org.client.mainCore.ds.HashMap();
+				hash.add(14,40);
+				hash.add(17,40);
+				hash.add(11,40);
+				hash.add(12,40);
+				hash.add(13,40);
+				hash.add(16,40);
+				EventManager.dispatchEvent(MainPlayerEvent.MODULE_STAT_CHANGE,2,hash);
+			});
+			commandList.put( ".fp", function (...arg):void
+			{
+				FightPowerChangePopPanelExt.showFightPowerChange(arg[0],arg[1]);
 			});
 		}
 		

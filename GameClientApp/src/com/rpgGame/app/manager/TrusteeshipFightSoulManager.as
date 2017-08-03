@@ -1,20 +1,11 @@
 package com.rpgGame.app.manager
 {
 	import com.game.mainCore.core.timer.GameTimer;
-	import com.rpgGame.app.fight.spell.CastSpellHelper;
-	import com.rpgGame.app.manager.ctrl.ControlAutoFightSelectSkill;
-	import com.rpgGame.app.manager.ctrl.ControlAutoPick;
 	import com.rpgGame.app.manager.fight.FightManager;
-	import com.rpgGame.app.manager.fightsoul.FightSoulManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
-	import com.rpgGame.app.manager.task.GatherAutoManager;
 	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.app.sender.SpellSender;
 	import com.rpgGame.app.state.ai.AIStateMachine;
-	import com.rpgGame.core.fight.spell.CastSpellInfo;
-	import com.rpgGame.coreData.clientConfig.Q_skill_model;
-	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.AIStateType;
 	import com.rpgGame.coreData.type.SceneCharType;
 	

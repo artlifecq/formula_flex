@@ -1,26 +1,15 @@
 package com.rpgGame.app.manager
 {
 	import com.game.mainCore.core.timer.GameTimer;
-	import com.rpgGame.app.fight.spell.CastSpellHelper;
 	import com.rpgGame.app.manager.ctrl.ControlAutoFightSelectSkill;
 	import com.rpgGame.app.manager.ctrl.ControlAutoPick;
 	import com.rpgGame.app.manager.ctrl.ControlTripleSkill;
 	import com.rpgGame.app.manager.fight.FightManager;
-	import com.rpgGame.app.manager.fightsoul.FightSoulManager;
-	import com.rpgGame.app.manager.input.KeyMoveManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
-	import com.rpgGame.app.manager.scene.SceneManager;
-	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.app.sender.SpellSender;
-	import com.rpgGame.app.state.ai.AIAttackWalk;
 	import com.rpgGame.app.state.ai.AIStateMachine;
-	import com.rpgGame.app.state.ai.AIUseItem;
-	import com.rpgGame.app.state.ai.FindAttackable;
-	import com.rpgGame.core.app.AppConstant;
-	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
@@ -30,12 +19,9 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.type.AIStateType;
 	import com.rpgGame.coreData.type.RoleStateType;
 	
-	import flash.utils.getTimer;
-	
 	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
-	import org.game.netCore.data.long;
 	
 	/**
 	 *
@@ -71,6 +57,8 @@ package com.rpgGame.app.manager
 		private var _autoPickCtrl:ControlAutoPick;
 		private var _autoSkillCtrl:ControlAutoFightSelectSkill;
 		private var _tripleSkillCtrl:ControlTripleSkill;
+		public var nextSpell:Q_skill_model;
+		
 		public function TrusteeshipManager()
 		{
 			_gTimer = new GameTimer("TrusteeshipManager", 500, 0, onUpdate);
@@ -82,8 +70,6 @@ package com.rpgGame.app.manager
 			{
 				ACTORTIME=GlobalSheetData.getSettingInfo(514).q_int_value;
 			}
-			
-			
 		}
 		
 		public function setup(role : SceneRole) : void
@@ -93,7 +79,7 @@ package com.rpgGame.app.manager
 			_autoSkillCtrl=new ControlAutoFightSelectSkill(role,(role.data as HeroData).job);
 			_tripleSkillCtrl=new ControlTripleSkill();
 			TrusteeshipFightSoulManager.getInstance().setup(role);
-			_gTimer.start();
+			
 		}
 		public  function get autoPickCtrl():ControlAutoPick
 		{
@@ -119,6 +105,7 @@ package com.rpgGame.app.manager
 							{
 								_isFightSelect=true;
 								_actorTime=SystemTimeManager.curtTm + ACTORTIME*1000;
+								_gTimer.start();
 								setRoleList();
 							}
 						}
@@ -175,6 +162,7 @@ package com.rpgGame.app.manager
 			_isFightSelect=false;
 			_targetRoles = targetRoles;
 			_stateMachine.transition(AIStateType.AI_NONE);
+			_gTimer.start();
 			onUpdate(true);
 		}
 		
@@ -187,6 +175,7 @@ package com.rpgGame.app.manager
 			{
 				SceneRoleSelectManager.selectedRole = null;
 			}
+			nextSpell = null;
 			_targetRoles=null;
 			_isAutoFightRunning = true;
 			_isBroken = false;
@@ -196,6 +185,7 @@ package com.rpgGame.app.manager
 			_stateMachine.transition(AIStateType.AI_NONE);
 			EventManager.dispatchEvent(TaskEvent.AUTO_FIGHT_START);
 			_isAutoFhist=true;
+			_gTimer.start();
 			onUpdate(true);
 		}
 		
@@ -247,6 +237,9 @@ package com.rpgGame.app.manager
 			if (!_isAutoFightRunning)
 				return;
 			_isBroken = false;
+			
+			nextSpell = null;
+			
 			TweenLite.killDelayedCallsTo(onDelayedUnbroken);
 			TweenLite.killDelayedCallsTo(actorFight);
 			EventManager.dispatchEvent(TaskEvent.AUTO_FIGHT_STOP);
@@ -269,7 +262,12 @@ package com.rpgGame.app.manager
 		
 		private function stop() : void
 		{
-			//_gTimer.reset();
+
+			nextSpell = null;
+			
+			_gTimer.reset();
+			_gTimer.stop();
+
 			MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE);
 			if (MainRoleManager.actor.stateMachine.isPrewarWaiting)
 				MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_PREWAR);
@@ -407,9 +405,9 @@ package com.rpgGame.app.manager
 			
 			if(_isAutoFightRunning)
 			{
-				_stateMachine.transition(AIStateType.USE_ITEM, null, force);
+//				_stateMachine.transition(AIStateType.USE_ITEM, null, force);
 				_stateMachine.transition(AIStateType.FIND_ATTACKABLE, null, force);
-				_stateMachine.transition(AIStateType.ATTACK_WALK, null, force);
+				//_stateMachine.transition(AIStateType.ATTACK_WALK, null, force);
 				_stateMachine.transition(AIStateType.ATTACK_TARGET, null, force);
 			}
 				
@@ -417,7 +415,7 @@ package com.rpgGame.app.manager
 			{
 				if(getHasRole())
 				{
-					_stateMachine.transition(AIStateType.USE_ITEM, null, force);
+//					_stateMachine.transition(AIStateType.USE_ITEM, null, force);
 					_stateMachine.transition(AIStateType.FIND_ATTACKABLE, null, force);
 					_stateMachine.transition(AIStateType.ATTACK_TARGET, null, force);
 				}
@@ -507,9 +505,6 @@ package com.rpgGame.app.manager
 			_findDist = value;
 		}
 		
-		
-		
-		
 		private var testStopKey:Boolean=false;
 		public function testStop():void
 		{
@@ -525,9 +520,5 @@ package com.rpgGame.app.manager
 		{
 			return _tripleSkillCtrl;
 		}
-		
-		
-		
-		
 	}
 }

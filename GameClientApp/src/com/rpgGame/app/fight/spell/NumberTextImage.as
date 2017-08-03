@@ -209,7 +209,7 @@ package com.rpgGame.app.fight.spell
 			if(_rollerIn)
 				return ;
 			_rollerIn = true;
-			Starling.juggler.add(this);
+			
 		}
 		
 		private var _rollItem:ImageList;

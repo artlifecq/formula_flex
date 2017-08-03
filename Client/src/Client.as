@@ -142,7 +142,7 @@ package
 			
 			initProcess();
 			//initMenu();
-			BGMManager.setup();
+			BGMManager.setup(this.stage);
 			//引擎设置
 			EngineSetting.init();
 			
@@ -205,8 +205,8 @@ package
 					GameLog.addShow("profile type：" + Stage3DLayerManager.stage3DProxy.profile);
 					
 					Parsers.enableAllBundled();
-					Stage3DLayerManager.screenAntiAlias = 0;
-					Stage3DLayerManager.viewAntiAlias = 0;
+					Stage3DLayerManager.screenAntiAlias = 2;
+					Stage3DLayerManager.viewAntiAlias = 2;
 					Stage3DLayerManager.startRender();
 					Stage3DLayerManager.starlingLayer.setLayer("alert", 9);
 					Stage3DLayerManager.starlingLayer.setLayer("loading", 8);
