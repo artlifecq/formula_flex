@@ -1,6 +1,7 @@
 package com.rpgGame.app.manager.shell
 {
     import com.game.engine2D.Scene;
+    import com.game.engine3D.config.GlobalConfig;
     import com.game.engine3D.core.AreaMap;
     import com.game.engine3D.display.EffectObject3D;
     import com.game.engine3D.display.Inter3DContainer;
@@ -14,6 +15,7 @@ package com.rpgGame.app.manager.shell
     import com.game.engine3D.scene.render.vo.RenderParamData3D;
     import com.game.engine3D.utils.EffectMethodUtil;
     import com.game.engine3D.utils.MathUtil;
+    import com.game.engine3D.utils.PathFinderUtil;
     import com.game.engine3D.vo.AreaMapData;
     import com.game.engine3D.vo.BaseObj3D;
     import com.game.engine3D.vo.BaseRole;
@@ -38,6 +40,7 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.app.scene.SceneRole;
     import com.rpgGame.app.scene.animator.RibbonAnimator;
     import com.rpgGame.app.sender.SceneSender;
+    import com.rpgGame.app.state.role.RoleStateUtil;
     import com.rpgGame.app.state.role.control.HiddingStateReference;
     import com.rpgGame.app.state.role.control.RidingStateReference;
     import com.rpgGame.app.state.role.control.ShapeshiftingStateReference;
@@ -71,12 +74,46 @@ package com.rpgGame.app.manager.shell
     import flash.display.BlendMode;
     import flash.geom.Point;
     import flash.geom.Vector3D;
+    import flash.net.URLRequest;
     import flash.utils.Dictionary;
     import flash.utils.getTimer;
     import flash.utils.setTimeout;
     
+    import away3d.Away3D;
+    import away3d.animators.IAnimator;
+    import away3d.animators.IAnimatorOwner;
+    import away3d.audio.SoundBox;
+    import away3d.cameras.lenses.PerspectiveLens;
+    import away3d.containers.ObjectContainer3D;
+    import away3d.containers.PlanarContainer3D;
+    import away3d.containers.View3DAsset;
+    import away3d.core.base.Geometry;
+    import away3d.core.base.SubGeometryBase;
     import away3d.core.math.Plane3D;
+    import away3d.core.partition.PlanarPartition3D;
+    import away3d.entities.SparticleMesh;
+    import away3d.events.AssetEvent;
+    import away3d.events.LoaderEvent;
+    import away3d.filters.Filter3DBase;
+    import away3d.library.assets.AssetType;
+    import away3d.library.assets.IAsset;
+    import away3d.lights.LightBase;
+    import away3d.lights.PointLight;
+    import away3d.loaders.AssetLoader;
+    import away3d.loaders.ResourceBundleInstance;
+    import away3d.loaders.parsers.AWD2Parser;
+    import away3d.materials.SinglePassMaterialBase;
+    import away3d.materials.lightpickers.LightPickerBase;
     import away3d.materials.methods.CorrodeMethod;
+    import away3d.materials.methods.FogByHeightMethod;
+    import away3d.materials.methods.FogMethod;
+    import away3d.materials.methods.RimLightMethod;
+    import away3d.pathFinding.DistrictWithPath;
+    import away3d.plant.PlantGroup;
+    import away3d.primitives.SkyBox;
+    import away3d.weather.Weather;
+    
+    import gameEngine2D.PolyUtil;
     
     import gs.TweenLite;
     import gs.easing.Linear;
@@ -137,7 +174,7 @@ package com.rpgGame.app.manager.shell
 			this._funcs["&autofight".toLowerCase()] = this.testStopFight;
             
             // cross
-            this._funcs["enterCross".toLowerCase()] = this.enterCross;
+            this._funcs["&enterCross".toLowerCase()] = this.enterCross;
 			this._funcs["&showDistrictWireframe".toLowerCase()] = this.showDistrictWireframe;
         }
 		
@@ -985,8 +1022,35 @@ package com.rpgGame.app.manager.shell
 		}
 		
 		private function enterCross() : void {
-            var  message : ReqEnterCrossClientToGameMessage = new ReqEnterCrossClientToGameMessage();
-            SocketConnection.send(message);
+//            var  message : ReqEnterCrossClientToGameMessage = new ReqEnterCrossClientToGameMessage();
+//            SocketConnection.send(message);
+            var _district : DistrictWithPath;
+            var _loader : AssetLoader = new AssetLoader();
+            _loader.addEventListener(LoaderEvent.RESOURCE_COMPLETE, function() : void {
+            });
+            _loader.addEventListener(AssetEvent.ASSET_COMPLETE, function onAssetComplete(e : AssetEvent) : void {
+                if (e.type == AssetEvent.ASSET_COMPLETE)
+                {
+                    var obj : IAsset = e.asset as IAsset;
+                    switch (e.asset.assetType)
+                    {
+                        case AssetType.DISTRICT:
+                            _district = obj as DistrictWithPath;
+                            _district.showWireframe = true;
+                            _district.radiusForEntity = GlobalConfig.radiusForEntity;
+                            _district.generateNavMesh(function():void{
+                                var _districtWithPath : DistrictWithPath = SceneManager.getDistrict(MainRoleManager.actor.sceneName);
+                                var targetPos : Vector3D = new Vector3D(2559, -5029, 0);
+                                var temp : Boolean = PathFinderUtil.isPointInSide(_district, targetPos);
+                                GameLog.add(temp);
+                            });
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            });
+            _loader.load(new URLRequest("../res/map/xqj_scene01_bj_cfys/xqj_scene01_bj_cfys.awd"), null, null, new AWD2Parser(), 100);
         }
 		private function showDistrictWireframe() : void {
 			SceneManager.getScene().sceneMapLayer.showDistrictWireframe = true;
