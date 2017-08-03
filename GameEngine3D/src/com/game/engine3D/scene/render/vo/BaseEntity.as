@@ -124,28 +124,27 @@ package com.game.engine3D.scene.render.vo
 		}
 
 		
-		public function addBaseObj(baseObj : BaseObj3D, billboardMode : Boolean = false) : void
+		public function addBaseObj(baseObj : BaseObj3D, billboardMode : Boolean = false, recycleWithParent:Boolean = true) : void
 		{
 			removeBaseObjByID(baseObj.type, baseObj.id);
-			var childData : BaseObjChild = new BaseObjChild(null, baseObj, null, billboardMode);
+			var childData : BaseObjChild = new BaseObjChild(null, baseObj, null, billboardMode,recycleWithParent);
 			addChildDataToList(childData);
 			//
 			doWaitAddChild(childData);
 			setBaseObjState(baseObj);
 		}
 		
-		public function addBaseObjToUnitChild(renderUnitType : String, renderUnitId : int, childName : String, baseObj : BaseObj3D, billboardMode : Boolean = false) : void
+		public function addBaseObjToUnitChild(renderUnitType : String, renderUnitId : int, childName : String, baseObj : BaseObj3D, billboardMode : Boolean = false,recycleWithParent:Boolean = true) : void
 		{
 			if (!_renderSet)
 			{
 				return;
 			}
-			
 			var ru : RenderUnit3D = _renderSet.getRenderUnitByID(renderUnitType, renderUnitId);
 			if (ru != baseObj)
 			{
 				removeBaseObjByID(baseObj.type, baseObj.id, false);
-				var childData : BaseObjChild = new BaseObjChild(ru, baseObj, childName, billboardMode);
+				var childData : BaseObjChild = new BaseObjChild(ru, baseObj, childName, billboardMode,recycleWithParent);
 				addChildDataToList(childData);
 				if (ru.resReady && !ru.resSwitch)
 				{
@@ -171,7 +170,7 @@ package com.game.engine3D.scene.render.vo
 		
 		public function addObjChildDataToUnitChild(renderUnitType : String, renderUnitId : int, childName : String, childData : BaseObjChild) : void
 		{
-			addBaseObjToUnitChild(renderUnitType, renderUnitId, childName, childData.baseObj, childData.billboardMode);
+			addBaseObjToUnitChild(renderUnitType, renderUnitId, childName, childData.baseObj, childData.billboardMode,childData.recycleWithParent);
 		}
 		
 		/**
@@ -396,10 +395,10 @@ package com.game.engine3D.scene.render.vo
 					childData.renderUnit.removeAddedCallBack(doUnitChildAdded);
 					childData.renderUnit.removeRemovedCallBack(doUnitChildRemoved);
 				}
-				if (recycle)
-				{
+				if (recycle && childData.recycleWithParent)
 					childData.baseObj.destroy();
-				}
+				else
+					childData.baseObj.parent = null;
 				childData.destroy();
 				_baseObjList.splice(index, 1);
 			}
@@ -706,7 +705,7 @@ package com.game.engine3D.scene.render.vo
 			}
 		}
 
-		final override public function set needInViewDist(value : Boolean) : void
+		override public function set needInViewDist(value : Boolean) : void
 		{
 			if (_needInViewDist != value)
 			{
@@ -723,7 +722,7 @@ package com.game.engine3D.scene.render.vo
 			}
 		}
 
-		final override public function set renderLimitable(value : Boolean) : void
+		override public function set renderLimitable(value : Boolean) : void
 		{
 			if (_renderLimitable != value)
 			{
@@ -744,7 +743,7 @@ package com.game.engine3D.scene.render.vo
 		 * 是否在可视范围内
 		 * @param value
 		 */
-		final override public function set isInViewDistance(value : Boolean) : void
+		override public function set isInViewDistance(value : Boolean) : void
 		{
 			if (_isInViewDistance != value)
 			{
@@ -1049,7 +1048,10 @@ package com.game.engine3D.scene.render.vo
 					childData.renderUnit.removeAddedCallBack(doUnitChildAdded);
 					childData.renderUnit.removeRemovedCallBack(doUnitChildRemoved);
 				}
-				childData.baseObj.destroy();
+				if(childData.recycleWithParent)
+					childData.baseObj.destroy();
+				else
+					childData.baseObj.parent = null;
 				childData.destroy();
 			}
 			_baseObjList.length = 0;
