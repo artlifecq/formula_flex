@@ -17,12 +17,13 @@ package org.mokylin.skin.component.uinumber
 		{
 			super();
 			
-			this.currentState = "5";
+			this.currentState = "6";
 			this.elementsContent = [];
 			
 			states = {
 			};
-			skinNames={"0":"ui/component/uinumber/skin_zhujuezhandouli/0.png",
+			skinNames={"-":"ui/component/uinumber/skin_zhujuezhandouli/-.png",
+			"0":"ui/component/uinumber/skin_zhujuezhandouli/0.png",
 			"1":"ui/component/uinumber/skin_zhujuezhandouli/1.png",
 			"2":"ui/component/uinumber/skin_zhujuezhandouli/2.png",
 			"3":"ui/component/uinumber/skin_zhujuezhandouli/3.png",
@@ -31,7 +32,8 @@ package org.mokylin.skin.component.uinumber
 			"6":"ui/component/uinumber/skin_zhujuezhandouli/6.png",
 			"7":"ui/component/uinumber/skin_zhujuezhandouli/7.png",
 			"8":"ui/component/uinumber/skin_zhujuezhandouli/8.png",
-			"9":"ui/component/uinumber/skin_zhujuezhandouli/9.png"};
+			"9":"ui/component/uinumber/skin_zhujuezhandouli/9.png",
+			"x":"ui/component/uinumber/skin_zhujuezhandouli/x.png"};
 		}
 
 

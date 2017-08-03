@@ -639,6 +639,14 @@ package com.rpgGame.app.manager.guild
 			_guildLevelUpOpaque = opaque;
 			GuildSender.guildLevelup(_guildLevelUpOpaque);
 		}
+		public function hasApplyList():Boolean
+		{
+			if (!haveGuild) 
+			{
+				return false;
+			}
+			return false;
+		}
 		public function hasGuildLevelUp():Boolean
 		{
 			if (!haveGuild) 
