@@ -16,7 +16,7 @@ package org.mokylin.skin.app.vip
 	import org.mokylin.skin.common.TongYongPanelbg1;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 	import org.mokylin.skin.component.list.ListSkin1;
-	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow2;
+	import org.mokylin.skin.component.uinumber.UINumberSkin_zhujuezhandouli;
 
 	/**
 	 * @private
@@ -28,7 +28,7 @@ package org.mokylin.skin.app.vip
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var NumZhanli:feathers.controls.UINumber;
+		public var NumZhanli0:feathers.controls.UINumber;
 
 		public var bg:feathers.controls.SkinnableContainer;
 
@@ -83,7 +83,7 @@ package org.mokylin.skin.app.vip
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [bg_i(),__Vip_Skin_UIAsset1_i(),__Vip_Skin_UIAsset2_i(),__Vip_Skin_UIAsset3_i(),__Vip_Skin_UIAsset4_i(),uiModel_i(),__Vip_Skin_UIAsset5_i(),uiVipLevel_i(),imgTQ_i(),btnChongzhi_i(),imgMo_i(),imgAcitve_i(),__Vip_Skin_UIAsset6_i(),NumZhanli_i(),skinVip1_i(),skinVip2_i(),skinVip3_i(),__Vip_Skin_UIAsset7_i(),__Vip_Skin_UIAsset8_i(),imgRewardType_i(),imgVipPrivilegs_i(),__Vip_Skin_UIAsset9_i(),__Vip_Skin_UIAsset10_i(),imgBuy_i(),grpIcon_i(),btnLIngQu_i(),__Vip_Skin_UIAsset11_i(),imgAttr_i(),lb1_i(),__Vip_Skin_UIAsset13_i(),__Vip_Skin_UIAsset14_i(),__Vip_Skin_UIAsset15_i(),__Vip_Skin_UIAsset16_i(),__Vip_Skin_Label3_i(),__Vip_Skin_Label4_i(),lbTime_i(),lbTime0_i(),listVip_i()];
+			this.elementsContent = [bg_i(),__Vip_Skin_UIAsset1_i(),__Vip_Skin_UIAsset2_i(),__Vip_Skin_UIAsset3_i(),__Vip_Skin_UIAsset4_i(),uiModel_i(),__Vip_Skin_UIAsset5_i(),uiVipLevel_i(),imgTQ_i(),btnChongzhi_i(),imgMo_i(),imgAcitve_i(),__Vip_Skin_UIAsset6_i(),NumZhanli0_i(),skinVip1_i(),skinVip2_i(),skinVip3_i(),__Vip_Skin_UIAsset7_i(),__Vip_Skin_UIAsset8_i(),imgRewardType_i(),imgVipPrivilegs_i(),__Vip_Skin_UIAsset9_i(),__Vip_Skin_UIAsset10_i(),imgBuy_i(),grpIcon_i(),btnLIngQu_i(),__Vip_Skin_UIAsset11_i(),imgAttr_i(),lb1_i(),__Vip_Skin_UIAsset13_i(),__Vip_Skin_UIAsset14_i(),__Vip_Skin_UIAsset15_i(),__Vip_Skin_UIAsset16_i(),__Vip_Skin_Label3_i(),__Vip_Skin_Label4_i(),lbTime_i(),lbTime0_i(),listVip_i()];
 			
 			states = {
 			};
@@ -94,18 +94,18 @@ package org.mokylin.skin.app.vip
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function NumZhanli_i():feathers.controls.UINumber
+		private function NumZhanli0_i():feathers.controls.UINumber
 		{
 			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
-			NumZhanli = temp;
-			temp.name = "NumZhanli";
-			temp.gap = -13;
-			temp.height = 33;
-			temp.label = "x6457";
-			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow2;
-			temp.width = 133;
-			temp.x = 811;
-			temp.y = 510;
+			NumZhanli0 = temp;
+			temp.name = "NumZhanli0";
+			temp.gap = -5;
+			temp.height = 25;
+			temp.label = "x29845";
+			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhujuezhandouli;
+			temp.width = 129;
+			temp.x = 810;
+			temp.y = 512;
 			return temp;
 		}
 
@@ -237,9 +237,9 @@ package org.mokylin.skin.app.vip
 		private function __Vip_Skin_UIAsset6_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/zdl2.png";
-			temp.x = 739;
-			temp.y = 500;
+			temp.styleName = "ui/common/zhandouli2.png";
+			temp.x = 755;
+			temp.y = 509;
 			return temp;
 		}
 
