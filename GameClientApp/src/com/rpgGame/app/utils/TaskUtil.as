@@ -364,7 +364,7 @@ package com.rpgGame.app.utils
 				
 				finish=taskData.q_finish_information_str;
 				finishArr=JSONUtil.decode(finish);
-				if(finishArr.length>ite)
+				if(finishArr&&finishArr.length>ite)
 				{
 					finishArr=finishArr[ite];
 					if(finishArr.length==2)
@@ -920,41 +920,36 @@ package com.rpgGame.app.utils
 			{
 				var finiStr:Array;
 				var informationList:Array=JSONUtil.decode(finisstr);;
-				
-				length=informationList.length;
-				for(i=0;i<length;i++)
+				if(informationList&&informationList.length>0)
 				{
-					if(informationList[i]&&informationList[i]!=null)
+					length=informationList.length;
+					for(i=0;i<length;i++)
 					{
-						
-						var modeid:int=0;
-						var count:int=0,finish:int;
-						var modeArr:Array=informationList[i];
-						if(modeArr.length==2)
+						if(informationList[i]&&informationList[i]!=null)
 						{
-							modeid=int(modeArr[0]);
-							finish=int(modeArr[1]);
+							
+							var modeid:int=0;
+							var count:int=0,finish:int;
+							var modeArr:Array=informationList[i];
+							if(modeArr.length==2)
+							{
+								modeid=int(modeArr[0]);
+								finish=int(modeArr[1]);
+							}
+							if(subList[i]!=null)
+							{
+								modeid=subList[i].modelId;
+								count=subList[i].num;
+								finish=subList[i].maxNum;
+							}
+							text=TaskMissionCfgData.getTaskDescribe(type,describe,modeid);
+							text+="<font color='#cfc6ae'>("+count+"/"+finish+")</font>";
+							
+							setGotargetLabelText(type,txtButList[i],text);
 						}
-						if(subList[i]!=null)
-						{
-							modeid=subList[i].modelId;
-							count=subList[i].num;
-							finish=subList[i].maxNum;
-						}
-						text=TaskMissionCfgData.getTaskDescribe(type,describe,modeid);
-						text+="<font color='#cfc6ae'>("+count+"/"+finish+")</font>";
-						
-						setGotargetLabelText(type,txtButList[i],text);
-						
-						
 					}
-					
 				}
-				
 			}
-			
-			
-			
 		}
 		public static function setGotargetLabelText(type:int,but:SkinnableContainer,t:String):void
 		{

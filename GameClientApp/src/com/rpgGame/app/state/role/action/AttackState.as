@@ -143,10 +143,6 @@ package com.rpgGame.app.state.role.action
 			super.playAnimation(role, render, isFreeze, time, speedRatio);
 
 			var status : String = _statusType ? _statusType : RoleActionType.STAND;
-			try{if((((_machine as RoleStateMachine).owner as SceneRole).data as MonsterData).modelID==9008)
-			{
-				Lyt.a("++++播放动作:"+status+"-----"+AttackStateReference(_ref).spellInfo.spellData.q_skillName);
-			}}catch(e:Error){}
 			if(_canWalkRelease)
 			{
 				if((_machine.owner as SceneRole).stateMachine.isWalkMoving)
@@ -321,10 +317,6 @@ package com.rpgGame.app.state.role.action
 					_breakFrameTween.kill();
 					_breakFrameTween = null;
 				}
-				try{if((((_machine as RoleStateMachine).owner as SceneRole).data as MonsterData).modelID==9008)
-				{
-					Lyt.a("~~~~锁定：castTime:"+castTime+"totalFrameTm:"+totalFrameTm+"-----"+AttackStateReference(_ref).spellInfo.spellData.q_skillName);
-				}}catch(e:Error){}
 				if (totalFrameTm > 0)
 				{
 					_startSelfFrameTween = TweenLite.delayedCall(startSelfFrameTime * 0.001,onStartFrameCmp);

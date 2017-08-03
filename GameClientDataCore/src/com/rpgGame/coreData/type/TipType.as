@@ -118,5 +118,7 @@ package com.rpgGame.coreData.type
 		public static const TASK_LEAD_TIP : int = rEnum.next;
 		/** 环式任务tips */
 		public static const TASK_LOOP_TIP : int = rEnum.next;
+		/** 帮会任务tips */
+		public static const TASK_GUILD_TIP : int = rEnum.next;
 	}
 }

@@ -150,8 +150,8 @@ package com.rpgGame.app.state.ai
 
 		override public function enterPass(prevState : IState, force : Boolean = false) : Boolean
 		{
-			if (prevState.type==AIStateType.ATTACK_WALK)//&&!isFight()
-				return false;
+			/*if (prevState.type==AIStateType.ATTACK_WALK)//&&!isFight()
+				return false;*/
 			if(!TrusteeshipManager.getInstance().getHasRole()&&SceneRoleSelectManager.selectedRole ==null)
 			{
 				transition(AIStateType.AI_NONE);

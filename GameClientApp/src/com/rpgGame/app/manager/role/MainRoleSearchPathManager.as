@@ -3,6 +3,7 @@ package com.rpgGame.app.manager.role
 	import com.game.engine3D.events.SceneEvent;
 	import com.game.engine3D.events.SceneEventAction3D;
 	import com.game.engine3D.utils.MathUtil;
+	import com.game.engine3D.utils.PathFinderUtil;
 	import com.game.engine3D.vo.BaseObj3D;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
@@ -614,25 +615,32 @@ package com.rpgGame.app.manager.role
 		{
 			
 			var _districtWithPath : DistrictWithPath = SceneManager.getDistrict(role.sceneName);
-			if (PolyUtil.isFindPath(_districtWithPath, role.position, pos))///有寻路路径直接走
+			if(PathFinderUtil.isPointInSide(_districtWithPath, pos))//阻挡点正常寻路
 			{
 				return RoleStateUtil.walkToPos(role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite);
 			}
-			//没有路径开有没有跳跃点
-			clearJumpPath();
-			var jumpPash : Vector.<Vector3D>=new Vector.<Vector3D>();
-			searchJumpToPonit(_districtWithPath,role.position, pos,jumpPash);
-			if (jumpPash && jumpPash.length > 0)//如果可以跳跃
+			else
 			{
-				//jumpPash.pop();
-				_jumpPash = jumpPash;
-				_isAutoJumping = true;
-				_onArrive=onArrive;
-				onNextJump();
-				return true;
+				if (PolyUtil.isFindPath(_districtWithPath, role.position, pos))///有寻路路径直接走
+				{
+					return RoleStateUtil.walkToPos(role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite);
+				}
+				//没有路径开有没有跳跃点
+				clearJumpPath();
+				var jumpPash : Vector.<Vector3D>=new Vector.<Vector3D>();
+				searchJumpToPonit(_districtWithPath,role.position, pos,jumpPash);
+				if (jumpPash && jumpPash.length > 0)//如果可以跳跃
+				{
+					_jumpPash = jumpPash;
+					_isAutoJumping = true;
+					_onArrive=onArrive;
+					onNextJump();
+					return true;
+				}
+				//如果跳跃也没有就直接按阻挡点处理
+				return RoleStateUtil.walkToPos(role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite);
 			}
-			//如果跳跃也没有就直接按阻挡点处理
-			return RoleStateUtil.walkToPos(role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite);
+			
 		}
 		private static function searchJumpToPonit(district : DistrictWithPath, position : Vector3D, target : Vector3D, crossJumpArr : Vector.<Vector3D>) : Boolean
 		{
