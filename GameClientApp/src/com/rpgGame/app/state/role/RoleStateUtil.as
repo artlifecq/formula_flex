@@ -154,7 +154,6 @@ package com.rpgGame.app.state.role
 				{
 					return false;
 				}
-				SceneCursorHelper.getInstance().hideCursor();
 			}
 			return doWalkTo(role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite);
 			
@@ -191,6 +190,7 @@ package com.rpgGame.app.state.role
 			var walkRole : SceneRole = camouflageEntity || role;
 			if (walkRole.isMainChar || walkRole.isMainCamouflage)
 			{
+				SceneCursorHelper.getInstance().hideCursor();
 				if (MainRoleManager.isTakeZhanChe) //乘坐他人战车时不能移动
 				{
 					return false;
@@ -210,7 +210,7 @@ package com.rpgGame.app.state.role
 				else if (walkRole.stateMachine.isAttackHarding)
 				{
 					//NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsHarding); //"技能硬直中"
-					//return false;
+					return false;
 				}
 				else if (walkRole.stateMachine.isSpriteUp) 
 				{

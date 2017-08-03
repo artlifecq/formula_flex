@@ -2,6 +2,7 @@ package com.rpgGame.app.state.ai
 {
 	import com.game.engine3D.state.IState;
 	import com.rpgGame.app.manager.TrusteeshipManager;
+	import com.rpgGame.app.manager.chat.ChatManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.task.GatherAutoManager;
 	import com.rpgGame.app.manager.task.TaskAutoManager;
@@ -12,10 +13,12 @@ package com.rpgGame.app.state.ai
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.core.state.ai.AIState;
 	import com.rpgGame.coreData.cfg.MapJumpCfgData;
+	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_mission_base;
 	import com.rpgGame.coreData.role.SceneJumpPointData;
 	import com.rpgGame.coreData.type.AIStateType;
 	import com.rpgGame.coreData.type.TaskType;
+	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
 	
 	import flash.utils.getTimer;
 	
@@ -79,6 +82,7 @@ package com.rpgGame.app.state.ai
 		}
 		private function gotoTask(data :Object=null):void
 		{
+			var postPath:Array=TaskMissionManager.getTaskPathingByType(taskType,taskTarget);
 			if(missionType==TaskType.SUB_USEITEM)//是使用道具任务且没有完成
 			{
 				var modeid:int=TaskUtil.getMonsterByType(taskType,taskTarget);
@@ -86,11 +90,19 @@ package com.rpgGame.app.state.ai
 			}
 			else if(missionType==TaskType.SUB_CONVERSATION)
 			{
-				TaskUtil.npcTaskWalk(TaskMissionManager.getTaskNpcAreaId(taskType),onArrive);
+				if(postPath&&postPath.length>0)
+				{
+					TaskUtil.postTaskWalk(postPath,onArrive);
+				}
 			}
 			else if(missionType==TaskType.SUB_MONSTER||missionType==TaskType.SUB_ITEM)
 			{
-				if(taskType==TaskType.MAINTYPE_TREASUREBOX)
+				if(postPath&&postPath.length>0)
+				{
+					TaskUtil.postTaskWalk(postPath,subMonster,null,true);
+				}
+				
+				/*if(taskType==TaskType.MAINTYPE_TREASUREBOX)
 				{
 					var monsterId:int=TaskMissionManager.getTreasuerMonsterId(taskTarget);
 					TaskUtil.monsterTaskWalk(monsterId,subMonster);
@@ -99,16 +111,37 @@ package com.rpgGame.app.state.ai
 				{
 					var post:Array=TaskMissionManager.getPathingByType(taskType,taskTarget);
 					TaskUtil.postTaskWalk(post,subMonster,null,true);
-				}
+				}*/
 			}
 			else if(missionType==TaskType.SUB_GATHER)
 			{
-				var post2:Array=TaskMissionManager.getPathingByType(taskType,taskTarget);
-				var modeid2:int=TaskUtil.getMonsterByType(taskType,taskTarget);
-				var obj:Object=new Object();
-				obj.subType=TaskUtil.getSubtypeByType(taskType);
-				obj.modeid=modeid2;
-				TaskUtil.postTaskWalk(post2,walkStartGather,obj);
+				/*var post2:Array=TaskMissionManager.getPathingByType(taskType,taskTarget);
+				
+				TaskUtil.postTaskWalk(post2,walkStartGather,obj);*/
+				
+				if(postPath&&postPath.length>0)
+				{
+					var modeid2:int=TaskUtil.getMonsterByType(taskType,taskTarget);
+					var obj:Object=new Object();
+					obj.subType=TaskUtil.getSubtypeByType(taskType);
+					obj.modeid=modeid2;
+					TaskUtil.postTaskWalk(postPath,walkStartGather,obj);
+				}
+				
+			}
+			else if(missionType==TaskType.SUB_SPEAK)
+			{
+				/*var post3:Array=TaskMissionManager.getPathingByType(taskType,taskTarget);
+				
+				TaskUtil.postTaskWalk(post3,walkStartSpeak,obj3);*/
+				if(postPath&&postPath.length>0)
+				{
+					var obj3:Object=new Object();
+					obj3.subType=TaskUtil.getSubtypeByType(taskType);
+					obj3.describe=TaskMissionManager.getOtherTaskData(taskType).q_describe;
+					TaskUtil.postTaskWalk(postPath,walkStartSpeak,obj3);
+				}
+				
 			}
 		}
 		
@@ -139,6 +172,17 @@ package com.rpgGame.app.state.ai
 			{
 				TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);	
 			}
+			else if(taskType==TaskType.MAINTYPE_GUILDDAILYTASK)
+			{
+				if(TaskMissionManager.getTaskHaveNpc(taskType))	
+				{
+					TaskControl.showGuildPanel();
+				}
+				else
+				{
+					TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);	
+				}
+			}
 			isWalking=false;
 			TaskAutoManager.getInstance().walkOver=true;
 		}
@@ -157,6 +201,15 @@ package com.rpgGame.app.state.ai
 			isWalking=false;
 			TaskAutoManager.getInstance().walkOver=true;
 		}
+		private function walkStartSpeak(data :Object):void
+		{
+			var speak:String=TaskMissionCfgData.substitute(data.describe,MainRoleManager.actorInfo.societyName);
+			ChatManager.reqSendChat(speak,EnumChatChannelType.CHAT_CHANNEL_WORLD);
+			TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);
+			isWalking=false;
+			TaskAutoManager.getInstance().walkOver=true;
+		}
+		
 		
 		private function getJumpPos():Array
 		{

@@ -253,6 +253,8 @@ package com.game.engine3D.scene.render
 		private var _useIndependentColor : Boolean;
 		private var _useIndependentDiffuseColor : Boolean;
 		private var _independentDiffuseColor : uint;
+		private var _onlyApplyIDColorToMaterial:String;
+		
 		private var _layerTypeByName : Dictionary;
 		private var _visibleByName : Dictionary;
 		private var _zOffsetByName : Dictionary;
@@ -831,7 +833,33 @@ package com.game.engine3D.scene.render
 //						}
 //					}
 //				}
+				
 				for each (var element : ObjectContainer3D in _drawElements)
+				{
+					if (element.name == _defalutStatus)
+					{
+						_isElementStatus = true;
+					}
+					if (!(element is Mesh))
+					{
+						_graphicDis.addChild(element);
+					}
+					else
+					{
+						skeletonName = _renderResourceData.meshUseForSkeletonName();
+						parentSkeletonName = (_parentUnit && _parentUnit._renderResourceData) ? _parentUnit._renderResourceData.meshUseForSkeletonName() : null;
+						if(!skeletonName || skeletonName == parentSkeletonName)
+						{
+							_graphicDis.addChild(element);
+						}
+						else
+						{
+							//							Log.error(_renderParamData.sourcePath+":"+parentSkeletonName+":"+"蒙皮已经被骨骼引用，不能单独使用！");
+						}
+					}
+				}
+				
+				/*for each (var element : ObjectContainer3D in _drawElements)
 				{
 					if (element.name == _defalutStatus)
 					{
@@ -841,7 +869,7 @@ package com.game.engine3D.scene.render
 					{
 						_graphicDis.addChild(element);
 					}
-				}
+				}*/
 			}
 			if (_meshes)
 			{
@@ -1840,7 +1868,7 @@ package com.game.engine3D.scene.render
 			}
 			if (_useIndependentDiffuseColor)
 			{
-				_renderUnitData.setIndependentDiffuseColor(_independentDiffuseColor);
+				_renderUnitData.setIndependentDiffuseColor(_independentDiffuseColor,_onlyApplyIDColorToMaterial);
 			}
 			if (_fadeAlphaUrl)
 			{
@@ -3071,13 +3099,14 @@ package com.game.engine3D.scene.render
 			}
 		}
 		
-		public function setIndependentDiffuseColor(value : uint) : void
+		public function setIndependentDiffuseColor(value : uint,onlyApplyToMaterial:String = null) : void
 		{
 			_useIndependentDiffuseColor = true;
 			_independentDiffuseColor = value;
+			_onlyApplyIDColorToMaterial = onlyApplyToMaterial;
 			if (_renderUnitData)
 			{
-				_renderUnitData.setIndependentDiffuseColor(_independentDiffuseColor);
+				_renderUnitData.setIndependentDiffuseColor(_independentDiffuseColor,onlyApplyToMaterial);
 			}
 		}
 		
@@ -3085,6 +3114,7 @@ package com.game.engine3D.scene.render
 		{
 			_useIndependentDiffuseColor = false;
 			_independentDiffuseColor = 0;
+			_onlyApplyIDColorToMaterial = null;
 			if (_renderUnitData)
 			{
 				_renderUnitData.restoreDiffuseColor();
@@ -3172,7 +3202,34 @@ package com.game.engine3D.scene.render
 //							Log.error(_renderParamData.sourcePath+":"+parentSkeletonName+":"+"蒙皮已经被骨骼引用，不能单独使用！");
 //						}
 //					}
-					if (!_renderResourceData.isSkinMesh || !(element is Mesh))
+					
+					if (!(element is Mesh))
+					{
+						element.hookingJointName = null;
+						_graphicDis.addChild(element);
+					}
+					else
+					{
+						skeletonName = _renderResourceData.meshUseForSkeletonName();
+						parentSkeletonName = (_parentUnit && _parentUnit._renderResourceData) ? _parentUnit._renderResourceData.meshUseForSkeletonName() : null;
+						if(!skeletonName || skeletonName == parentSkeletonName)
+						{
+							element.hookingJointName = null;
+							_graphicDis.addChild(element);
+						}
+						else 
+						{
+							//							Log.error(_renderParamData.sourcePath+":"+parentSkeletonName+":"+"蒙皮已经被骨骼引用，不能单独使用！");
+						}
+					}
+					if (_compositeMesh && (element is Mesh))
+					{
+						var index : int = _compositeMesh.getUnitIndex(Mesh(element));
+						if (index > -1)
+							_compositeMesh.removeUnitByIndex(index);
+					}
+					
+					/*if (!_renderResourceData.isSkinMesh || !(element is Mesh))
 					{
 						element.hookingJointName = null;
 						_graphicDis.addChild(element);
@@ -3182,7 +3239,7 @@ package com.game.engine3D.scene.render
 						var index : int = _compositeMesh.getUnitIndex(Mesh(element));
 						if (index > -1)
 							_compositeMesh.removeUnitByIndex(index);
-					}
+					}*/
 				}
 			}
 			_compositeMesh = null;
@@ -3210,7 +3267,9 @@ package com.game.engine3D.scene.render
 						}
 					}
 					drawElement.hookingJointName = null;
-					_graphicDis.addChild(drawElement);
+//					_graphicDis.addChild(drawElement);
+					if(drawElement.parent)//只有添加到显示列表的元件在restore的时候需要重新添加到本unit里  --by chenminglai
+						_graphicDis.addChild(drawElement);
 				}
 			}
 		}
@@ -3980,6 +4039,7 @@ package com.game.engine3D.scene.render
 			_useIndependentColor = false;
 			_useIndependentDiffuseColor = false;
 			_independentDiffuseColor = 0;
+			_onlyApplyIDColorToMaterial = null;
 			_setVisibleMap = null;
 			_layerTypeByName = null;
 			_visibleByName = null;

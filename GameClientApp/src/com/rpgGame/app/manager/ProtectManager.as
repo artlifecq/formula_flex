@@ -55,7 +55,7 @@
             }
         }
 		
-		private static function onMainRoleDeathHanlder(e:MainPlayerEvent):void
+		private static function onMainRoleDeathHanlder(...arg):void
 		{
 			if(ClientSettingProtectManager.toAutoRelive)//使用复活药
 			{

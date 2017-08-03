@@ -18,13 +18,15 @@ package com.game.engine3D.scene.render.vo
 		private var _baseObj : BaseObj3D;
 		private var _childName : String;
 		private var _billboardMode : Boolean;
+		private var _recycleWithParent:Boolean;
 		
-		public function BaseObjChild(renderUnit : RenderUnit3D, baseObj : BaseObj3D, childName : String, billboardMode : Boolean)
+		public function BaseObjChild(renderUnit : RenderUnit3D, baseObj : BaseObj3D, childName : String, billboardMode : Boolean,recycleWithParent:Boolean = true)
 		{
 			_renderUnit = renderUnit;
 			_baseObj = baseObj;
 			_childName = childName;
 			_billboardMode = billboardMode;
+			_recycleWithParent = recycleWithParent;
 		}
 		
 		public function get renderUnit() : RenderUnit3D
@@ -47,12 +49,18 @@ package com.game.engine3D.scene.render.vo
 			return _billboardMode;
 		}
 		
+		public function get recycleWithParent() : Boolean
+		{
+			return _recycleWithParent;
+		}
+		
 		public function destroy() : void
 		{
 			_renderUnit = null;
 			_baseObj = null;
 			_childName = null;
 			_billboardMode = false;
+			_recycleWithParent = true;
 		}
 	}
 }

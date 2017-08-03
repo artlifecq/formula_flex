@@ -37,7 +37,7 @@ package org.mokylin.skin.app.banghui
 			super();
 			
 			this.currentState = "normal";
-			this.height = 600;
+			this.height = 601;
 			this.width = 956;
 			this.elementsContent = [__BangHui_Skill_UIAsset2_i(),__BangHui_Skill_UIAsset3_i(),btnSkill1_i(),btnSkill2_i(),skinPersonal_i(),skinTongShuai_i(),__BangHui_Skill_UIAsset4_i()];
 			
@@ -86,7 +86,9 @@ package org.mokylin.skin.app.banghui
 			temp.name = "btnSkill1";
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.groupName = "rdoTeamSkill";
+			temp.height = 42;
 			temp.styleClass = org.mokylin.skin.app.banghui.button.Button_TongShuai;
+			temp.width = 123;
 			temp.x = 34;
 			temp.y = 118;
 			return temp;
@@ -99,7 +101,9 @@ package org.mokylin.skin.app.banghui
 			temp.name = "btnSkill2";
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.groupName = "rdoTeamSkill";
+			temp.height = 42;
 			temp.styleClass = org.mokylin.skin.app.banghui.button.Button_GeRen;
+			temp.width = 123;
 			temp.x = 34;
 			temp.y = 173;
 			return temp;

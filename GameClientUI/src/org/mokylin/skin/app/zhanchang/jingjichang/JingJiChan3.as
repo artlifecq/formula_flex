@@ -1,6 +1,8 @@
 package org.mokylin.skin.app.zhanchang.jingjichang
 {
 	import feathers.controls.text.Fontter;
+	import feathers.layout.IVirtualLayout;
+	import feathers.layout.TiledRowsLayout;
 	import feathers.controls.Button;
 	import feathers.controls.Label;
 	import feathers.controls.List;
@@ -77,6 +79,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.width = 503;
 			temp.x = 34;
 			temp.y = 126;
+			temp.layout = __JingJiChan3_TileLayout1_i();
 			return temp;
 		}
 
@@ -91,6 +94,12 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.width = 350;
 			temp.x = 572;
 			temp.y = 243;
+			return temp;
+		}
+
+		private function __JingJiChan3_TileLayout1_i():feathers.layout.TiledRowsLayout
+		{
+			var temp:feathers.layout.TiledRowsLayout = new feathers.layout.TiledRowsLayout();
 			return temp;
 		}
 

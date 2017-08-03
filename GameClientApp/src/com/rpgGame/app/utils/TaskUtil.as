@@ -907,14 +907,14 @@ package com.rpgGame.app.utils
 		
 		
 		/**设置任务目标内容*/
-		public static  function setGotargetInfo(type:int,describe:String,finisstr:String,subList:Vector.<TaskSubRateInfo>,txtButList:Vector.<SkinnableContainer>):void
+		public static  function setGotargetInfo(mainType:int,missionType:int,describe:String,finisstr:String,subList:Vector.<TaskSubRateInfo>,txtButList:Vector.<SkinnableContainer>):void
 		{
 			var i:int,j:int,length:int;
 			var text:String="";
-			if(type==TaskType.SUB_CONVERSATION)
+			if(missionType==TaskType.SUB_CONVERSATION)
 			{
-				text=TaskMissionCfgData.getTaskDescribe(type,describe,TaskMissionManager.getMainTaskNpcModeId());
-				setGotargetLabelText(type,txtButList[0],text);
+				text=TaskMissionCfgData.getTaskDescribe(missionType,describe,TaskMissionManager.getTaskNpcModeId(mainType));
+				setGotargetLabelText(missionType,txtButList[0],text);
 			}
 			else
 			{
@@ -942,10 +942,10 @@ package com.rpgGame.app.utils
 								count=subList[i].num;
 								finish=subList[i].maxNum;
 							}
-							text=TaskMissionCfgData.getTaskDescribe(type,describe,modeid);
+							text=TaskMissionCfgData.getTaskDescribe(missionType,describe,modeid);
 							text+="<font color='#cfc6ae'>("+count+"/"+finish+")</font>";
 							
-							setGotargetLabelText(type,txtButList[i],text);
+							setGotargetLabelText(missionType,txtButList[i],text);
 						}
 					}
 				}

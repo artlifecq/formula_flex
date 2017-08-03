@@ -162,7 +162,7 @@ package com.game.engine3D.manager
 			_useScreenView = useScreenView;
 			_renderable = false;
 			_setupCompleted = false;
-			Log.addLogCallBack(onLogCallBack);
+
 			_stage3DProxy = Stage3DProxy.initEngine(stage, profile);
 			if (_stage3DProxy)
 			{
@@ -569,30 +569,6 @@ package com.game.engine3D.manager
 			return Vector.<Number>([min.x, min.y, min.z, max.x, max.y, max.z]);
 		}
 		
-		/**
-		 * 更新摄像机的景深
-		 *
-		 */
-		public static function updateDefaultCameraFarPlane(view : View3D) : void
-		{
-			var bounds : Vector.<Number> = getSceneBounds(view);
-			if (Math.abs(bounds[0]) == Infinity || Math.abs(bounds[1]) == Infinity || Math.abs(bounds[2]) == Infinity || Math.abs(bounds[3]) == Infinity || Math.abs(bounds[4]) == Infinity || Math.abs(bounds[5]) == Infinity)
-			{
-				view.camera.lens.far = 100000;
-			}
-			else
-			{
-				var vec : Vector3D = new Vector3D(bounds[3] - bounds[0], bounds[4] - bounds[1], bounds[5] - bounds[2]);
-				var objRadius : Number = vec.length / 2;
-				vec.x = (vec.x * 0.5) + bounds[0];
-				vec.y = (vec.y * 0.5) + bounds[1];
-				vec.z = (vec.z * 0.5) + bounds[2];
-				
-				// Far plane is distance from camera position to scene bounds center + the radius of the scene bounds
-				view.camera.lens.far = Vector3D.distance(view.camera.position, vec) + objRadius;
-			}
-		}
-		
 		public static function get isRenderable() : Boolean
 		{
 			return _renderable;
@@ -742,18 +718,6 @@ package com.game.engine3D.manager
 		public static function registerApplicationLoader(loader : Loader) : void
 		{
 			Stage3DProxy.registerApplicationLoader(loader);
-		}
-		
-		private static function onLogCallBack(item : LogItem) : void
-		{
-			if (item.type == Log.LOG_TYPE_ERROR)
-			{
-				UnCatchErrorReport.sendErroLog(item.type, item.message);
-			}
-//			else if (item.type == Log.LOG_TYPE_FATAL)
-//			{
-//				UnCatchErrorReport.sendErroLog(item.type, item.message);
-//			}
 		}
 		
 		/** ---------------------------------编辑器使用代码------------------------- */

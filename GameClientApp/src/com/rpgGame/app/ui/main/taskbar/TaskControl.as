@@ -54,7 +54,6 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				AppManager.showApp(AppConstant.TASK_LEAD_PANEL);
 			}
-			
 		}
 		public static function hideLeadPanel():void
 		{
@@ -67,6 +66,15 @@ package com.rpgGame.app.ui.main.taskbar
 		public static function hideLoopPanel():void
 		{
 			AppManager.hideApp(AppConstant.TASK_LOOP_PANEL);
+		}
+		public static function showGuildPanel():void
+		{
+			AppManager.showAppNoHide(AppConstant.TASK_GUILD_PANEL);
+		}
+		
+		public static function hideGuildPanel():void
+		{
+			AppManager.hideApp(AppConstant.TASK_GUILD_PANEL);
 		}
 		public static function showBagPanel():void
 		{
@@ -135,7 +143,7 @@ package com.rpgGame.app.ui.main.taskbar
 				return;
 			}
 			
-			if(key==1&&type==TaskType.MAINTYPE_MAINTASK&&MainRoleManager.actorInfo.totalStat.level<=TaskAutoManager.AUTOLVE)//
+			if(key==1&&type==TaskType.MAINTYPE_MAINTASK/*&&MainRoleManager.actorInfo.totalStat.level<=TaskAutoManager.AUTOLVE*/)//
 			{
 				TaskAutoManager.getInstance().startTaskAuto(type,num);
 				return;
@@ -145,28 +153,71 @@ package com.rpgGame.app.ui.main.taskbar
 				TaskAutoManager.getInstance().startTaskAuto(type,num);
 				return;
 			}
+			if(type==TaskType.MAINTYPE_DAILYTASK&&TaskMissionManager.dailyTaskData.q_emid!="")//支线打开面板任务
+			{
+				var emidArr:Array=TaskMissionManager.dailyTaskData.q_emid.split(",");
+				if(emidArr.length>num)
+				{
+					FunctionOpenManager.openAppPaneById(emidArr[num]);
+				}
+				return;
+			}
 			if(TaskUtil.getSubtypeByType(type)==TaskType.SUB_USEITEM&&!TaskUtil.getIsfinishByType(type))//是使用道具任务且没有完成
 			{
 				showBagPanel();
+				return;
 			}
-			else if(type==TaskType.MAINTYPE_MAINTASK&&TaskMissionManager.getMainTaskIsFinish())//主任务且主任务完成
+			if(key==2)
 			{
-				if(TaskMissionManager.getMainTaskHaveNpc())
+				var postPath:Array=TaskMissionManager.getTaskPathingByType(type,num);
+				if(postPath&&postPath.length>0)
 				{
-					if(key==1)
+					TaskUtil.postTaskFly(postPath,type,TaskUtil.getSubtypeByType(type));
+				}
+				return;
+			}
+			
+			if(TaskUtil.getIsfinishByType(type))//任务完成
+			{
+				if(type==TaskType.MAINTYPE_MAINTASK)//主任务且主任务完成
+				{
+					if(TaskMissionManager.getMainTaskHaveNpc())
 					{
-						TaskUtil.npcTaskWalk(TaskMissionManager.getMainTaskNpcAreaId(),finishWalk);
+						if(key==1)
+						{
+							TaskUtil.npcTaskWalk(TaskMissionManager.getMainTaskNpcAreaId(),finishWalk);
+						}
+						else
+						{
+							TaskUtil.npcTaskFly(TaskMissionManager.getMainTaskNpcAreaId(),type);
+						}
 					}
 					else
 					{
-						TaskUtil.npcTaskFly(TaskMissionManager.getMainTaskNpcAreaId(),type);
+						//showLeadPanel();主线任务没有回复npc不弹框了
+						TaskSender.sendfinishTaskMessage(TaskMissionManager.mainTaskInfo.taskId);	
 					}
 				}
-				else
+				else if(type==TaskType.MAINTYPE_GUILDDAILYTASK)
 				{
-					//showLeadPanel();主线任务没有回复npc不弹框了
-					TaskSender.sendfinishTaskMessage(TaskMissionManager.mainTaskInfo.taskId);	
+					if(TaskMissionManager.getMainTaskHaveNpc())
+					{
+						if(key==1)
+						{
+							TaskUtil.npcTaskWalk(TaskMissionManager.getMainTaskNpcAreaId(),finishWalk);
+						}
+						else
+						{
+							TaskUtil.npcTaskFly(TaskMissionManager.getMainTaskNpcAreaId(),type);
+						}
+					}
+					else
+					{
+						//showLeadPanel();主线任务没有回复npc不弹框了
+						TaskSender.sendfinishTaskMessage(TaskMissionManager.mainTaskInfo.taskId);	
+					}
 				}
+					
 			}
 			else
 			{
@@ -216,6 +267,12 @@ package com.rpgGame.app.ui.main.taskbar
 				}
 			}
 		}
+		
+		
+		
+		
+		
+		
 		/**追踪面板上寻路完成*/
 		public static function finishWalk(data :Object):void
 		{		
@@ -228,6 +285,14 @@ package com.rpgGame.app.ui.main.taskbar
 		public static function flyComplete():void
 		{		
 			HuBaoManager.instance().onHuBaoHandler();
+			
+			if(TaskMissionManager.flyTaskType>0)
+			{
+				TaskAutoManager.getInstance().startTaskAuto(TaskMissionManager.flyTaskType,TaskMissionManager.flyMissionType);
+				TaskMissionManager.flyTaskType=0;
+				TaskMissionManager.flyMissionType=0;
+				return;
+			}
 			
 			if(TaskMissionManager.flyMissionType>0)
 			{
@@ -282,7 +347,10 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);	
 			}
-			
+			if(taskType==TaskType.MAINTYPE_GUILDDAILYTASK)
+			{
+				TaskControl.showGuildPanel();
+			}
 		}
 		public static function taskFlishNot(taskType:int,missionType:int):void
 		{

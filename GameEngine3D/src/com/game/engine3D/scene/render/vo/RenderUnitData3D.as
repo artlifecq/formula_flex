@@ -79,6 +79,7 @@ package com.game.engine3D.scene.render.vo
 		private var _useIndependentColor : Boolean;
 		private var _useIndependentDiffuseColor : Boolean;
 		private var _independentDiffuseColor : uint;
+		private var _onlyApplyIDColorToMaterial:String;
 		private var _blendMaterialName : String;
 		private var _blendMaskUrl : String;
 		private var _blendUrl : String;
@@ -139,6 +140,7 @@ package com.game.engine3D.scene.render.vo
 			_useIndependentColor = false;
 			_useIndependentDiffuseColor = false;
 			_independentDiffuseColor = 0;
+			_onlyApplyIDColorToMaterial = null;
 			_blendMethodData = null;
 			_fadeAlphaMethodData = null;
 			_onFadeAlphaValidate = null;
@@ -738,6 +740,7 @@ package com.game.engine3D.scene.render.vo
 			_useIndependentColor = false;
 			_useIndependentDiffuseColor = false;
 			_independentDiffuseColor = 0;
+			_onlyApplyIDColorToMaterial = null;
 		}
 		
 		public function restore() : void
@@ -791,6 +794,7 @@ package com.game.engine3D.scene.render.vo
 //				if (GlobalConfig.use2DMap && material.blendMode == BlendMode.NORMAL)
 //				{
 //					material.blendMode = BlendMode.LAYER;
+//					material.writeDepth = WriteDepthOption.TRUE;
 //				}
 				material.blendMode = _blendMode;
 				material.colorTransform = _independentColorTransform;
@@ -1041,7 +1045,7 @@ package com.game.engine3D.scene.render.vo
 								material.texture = orgMaterial.texture;
 							}
 							
-							if (_useIndependentDiffuseColor)
+							if (_useIndependentDiffuseColor && (_onlyApplyIDColorToMaterial == null || material.name == _onlyApplyIDColorToMaterial))
 							{
 								material.diffuseColor = _independentDiffuseColor;
 							}
@@ -1273,13 +1277,14 @@ package com.game.engine3D.scene.render.vo
 			}
 		}
 		
-		public function setIndependentDiffuseColor(value : uint) : void
+		public function setIndependentDiffuseColor(value : uint,onlyApplyToMaterial:String = null) : void
 		{
 			if (!_useIndependentDiffuseColor)
 			{
 				_useIndependentDiffuseColor = true;
 			}
 			_independentDiffuseColor = value;
+			_onlyApplyIDColorToMaterial = onlyApplyToMaterial;
 			updateMaterials();
 		}
 		
@@ -1289,6 +1294,7 @@ package com.game.engine3D.scene.render.vo
 			{
 				_useIndependentDiffuseColor = false;
 				_independentDiffuseColor = 0;
+				_onlyApplyIDColorToMaterial = null;
 				updateMaterials();
 			}
 		}

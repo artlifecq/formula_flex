@@ -177,6 +177,7 @@ package com.rpgGame.appModule.skill
 			if(icon!=null)
 			{
 				icon.showUpLevel();
+				icon.checkReward();
 			}
 		}
 	}

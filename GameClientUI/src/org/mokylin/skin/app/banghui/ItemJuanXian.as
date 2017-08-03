@@ -40,7 +40,7 @@ package org.mokylin.skin.app.banghui
 			super();
 			
 			this.currentState = "normal";
-			this.height = 36;
+			this.height = 33;
 			this.width = 254;
 			this.elementsContent = [bg_i(),uiFirt_i(),numList2_i(),numList_i(),lbRolenName_i(),lbZhanli_i()];
 			
@@ -58,7 +58,7 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 36;
+			temp.height = 33;
 			var skin:StateSkin = new org.mokylin.skin.common.ItemBg()
 			temp.skin = skin
 			temp.width = 254;
@@ -73,11 +73,12 @@ package org.mokylin.skin.app.banghui
 			lbRolenName = temp;
 			temp.name = "lbRolenName";
 			temp.text = "玩家名字六字";
-			temp.color = 0x6BCC08;
+			temp.textAlign = "center";
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 95;
-			temp.x = 67;
-			temp.y = 10;
+			temp.width = 116;
+			temp.x = 49;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -91,8 +92,8 @@ package org.mokylin.skin.app.banghui
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 77;
-			temp.x = 175;
-			temp.y = 10;
+			temp.x = 176;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -104,8 +105,8 @@ package org.mokylin.skin.app.banghui
 			temp.text = "4";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 25;
-			temp.y = 11;
+			temp.x = 24;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -119,7 +120,7 @@ package org.mokylin.skin.app.banghui
 			temp.label = "1";
 			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow2;
 			temp.width = 33;
-			temp.x = 20;
+			temp.x = 16;
 			temp.y = 2;
 			return temp;
 		}
@@ -131,7 +132,7 @@ package org.mokylin.skin.app.banghui
 			temp.name = "uiFirt";
 			temp.styleName = "ui/app/banghui/huawen.png";
 			temp.x = 0;
-			temp.y = 14;
+			temp.y = 11;
 			return temp;
 		}
 

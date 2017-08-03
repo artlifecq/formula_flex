@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.battle.jjzb
 {
 	import com.game.engine3D.display.Inter3DContainer;
+	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.Mgr;
@@ -60,6 +61,9 @@ package com.rpgGame.appModule.battle.jjzb
 		private var _costArr:Array;
 		private var _lastState:int=-1;
 		private var _eff:Inter3DContainer;
+		
+		private var _effectDuiCon:Inter3DContainer;
+		private var _effectDui3d:InterObject3D;
 		public function JJBattlePanelExt()
 		{
 			_skin=new JingJiChan1_Skin();
@@ -79,9 +83,9 @@ package com.rpgGame.appModule.battle.jjzb
 			
 			_costArr=JSONUtil.decode(GlobalSheetData.getStrValue(809));
 			
-			TipTargetManager.show(_infoSkin.btnAdd1,TargetTipsMaker.makeSimpleTextTips(LanguageConfig.replaceStr("花费{0}礼金，购买1次挑战次数",[_costArr[0]])));
+			TipTargetManager.show(_infoSkin.btnAdd1,TargetTipsMaker.makeSimpleTextTips(LanguageConfig.replaceStr("花费{0}元宝，购买1次挑战次数（优先消耗礼金）",[HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,_costArr[0]+"")])));
 			var str:String=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,NotifyCfgData.getNotifyTextByID(61030));
-			var numStr:String=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,_costArr[1]+"");
+			var numStr:String=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,_costArr[1]+"");
 			str+=LanguageConfig.replaceStr(NotifyCfgData.getNotifyTextByID(61031),[numStr,numStr]);
 			TipTargetManager.show(_infoSkin.btnAdd2,TargetTipsMaker.makeSimpleTextTips(str));
 			regEvent();
@@ -167,7 +171,7 @@ package com.rpgGame.appModule.battle.jjzb
 				val=_costArr[1];
 			}
 			var str:String=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,NotifyCfgData.getNotifyTextByID(61030));
-			var numStr:String=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,val+"");
+			var numStr:String=HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,val+"");
 			str+=LanguageConfig.replaceStr(NotifyCfgData.getNotifyTextByID(61031),[numStr,numStr]);
 			GameCheckAlertExt.show(GameCheckAlertExt.T_JJB_BUY_POWER,str,Mgr.jjBattleMgr.reqBuyTimesOrPower,[2]);
 		}
@@ -180,7 +184,7 @@ package com.rpgGame.appModule.battle.jjzb
 			{
 				val=_costArr[0];
 			}
-			GameCheckAlertExt.show(GameCheckAlertExt.T_JJB_BUY_TIMES,LanguageConfig.replaceStr(NotifyCfgData.getNotifyTextByID(61032),[HtmlTextUtil.getTextColor(GameColorUtil.COLOR_GREEN,val+"")]),Mgr.jjBattleMgr.reqBuyTimesOrPower,[1]);
+			GameCheckAlertExt.show(GameCheckAlertExt.T_JJB_BUY_TIMES,LanguageConfig.replaceStr(NotifyCfgData.getNotifyTextByID(61032),[HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,val+"")]),Mgr.jjBattleMgr.reqBuyTimesOrPower,[1]);
 		}
 		
 		private function onFightTop3(eve:Event):void
@@ -227,11 +231,13 @@ package com.rpgGame.appModule.battle.jjzb
 				var cheapItem:ShopItemVo=Mgr.shopMgr.getCheapestShopItemVo(EnumShopType.SHOP_SW);
 				if (cheapItem&&cheapItem.realPrice<=value) 
 				{
-					BreatheTweenUtil.add(_infoSkin.btnDui);
+					//BreatheTweenUtil.add(_infoSkin.btnDui);
+					showDuiEffect(true);
 				}
 				else
 				{
-					BreatheTweenUtil.remove(_infoSkin.btnDui);
+					//BreatheTweenUtil.remove(_infoSkin.btnDui);
+					showDuiEffect(false);
 				}
 			}
 			
@@ -342,8 +348,34 @@ package com.rpgGame.appModule.battle.jjzb
 				MCUtil.removeSelf(_rewardPanel);
 			}
 			_showState=0;
-			BreatheTweenUtil.remove(_infoSkin.btnDui);
+			//BreatheTweenUtil.remove(_infoSkin.btnDui);
+			showDuiEffect(false);
 			showRewardEffect(false);
+		}
+		private function showDuiEffect(bool:Boolean):void
+		{
+			if (bool) 
+			{
+				if (!_effectDuiCon) 
+				{
+					_effectDuiCon=new Inter3DContainer();
+					_effectDuiCon.x=_infoSkin.btnDui.x+_infoSkin.btnDui.width/2;
+					_effectDuiCon.y=_infoSkin.btnDui.y+_infoSkin.btnDui.height/2;
+					_effectDui3d=_effectDuiCon.playInter3DAt(ClientConfig.getEffect("ui_dui"),0,0,0);
+					MCUtil.addAfter(_infoSkin.container,_effectDuiCon,_infoSkin.btnDui);
+				}
+				if (!_effectDui3d.isStarted) 
+				{
+					_effectDui3d.start();
+				}
+			}
+			else
+			{
+				if (_effectDui3d&&_effectDui3d.isStarted) 
+				{
+					_effectDui3d.stop();
+				}
+			}
 		}
 		private function addEft(render:RenderUnit3D):void
 		{
