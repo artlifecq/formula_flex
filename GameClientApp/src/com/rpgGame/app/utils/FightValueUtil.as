@@ -78,10 +78,10 @@ package com.rpgGame.app.utils
 			combat +=combat2;
 			logByType(CharAttributeType.CRIT_PER,combat);
 			//内功
-			combat2= calAttByType(list,CharAttributeType.NEI_GONG) ;
+/*			combat2= calAttByType(list,CharAttributeType.NEI_GONG) ;
 			logByType2(CharAttributeType.NEI_GONG,combat2);
 			combat +=combat2;
-			logByType(CharAttributeType.NEI_GONG,combat);
+			logByType(CharAttributeType.NEI_GONG,combat);*/
 			//防御百分比
 			combat2= calAttByType(list,CharAttributeType.DEFENSE_PER) ;
 			logByType2(CharAttributeType.DEFENSE_PER,combat2);

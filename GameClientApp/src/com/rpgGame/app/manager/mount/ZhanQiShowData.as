@@ -2,7 +2,6 @@ package com.rpgGame.app.manager.mount
 {
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.goods.BackPackManager;
-	import com.rpgGame.app.utils.FightValueUtil;
 	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
@@ -137,7 +136,7 @@ package com.rpgGame.app.manager.mount
 				type = currentatt["q_type"+i];
 				if(type==0)
 					continue;
-				value = currentatt["q_value"+i];
+				value = AttValueConfig.getDisAttValue(type,currentatt["q_value"+i]);
 				_currentProp[type] = value;
 			}
 			_disProp = new Vector.<Number>(30,0);
@@ -164,7 +163,7 @@ package com.rpgGame.app.manager.mount
 						type = currentatt["q_type"+i];
 						if(type==0)
 							continue;
-						value = currentatt["q_value"+i];
+						value =AttValueConfig.getDisAttValue(type,currentatt["q_value"+i]);
 						_disProp[type] = value-_currentProp[type];
 					}
 					_isMaxLevel = false;
@@ -187,7 +186,7 @@ package com.rpgGame.app.manager.mount
 					type = currentatt["q_type"+i];
 					if(type==0)
 						continue;
-					value = currentatt["q_value"+i];
+					value = AttValueConfig.getDisAttValue(type,currentatt["q_value"+i]);
 					_addProp[type] = value;
 				}
 			}
@@ -231,7 +230,7 @@ package com.rpgGame.app.manager.mount
 			helpProp = new Vector.<Number>(30,0);
 			var per:Number = percent;
 			helpProp[CharAttributeType.WAI_GONG]=_disProp[CharAttributeType.WAI_GONG]*addExtraPercent*per;
-			helpProp[CharAttributeType.NEI_GONG]=_disProp[CharAttributeType.NEI_GONG]*addExtraPercent*per;
+//			helpProp[CharAttributeType.NEI_GONG]=_disProp[CharAttributeType.NEI_GONG]*addExtraPercent*per;
 			if(percent>=0.3)
 				helpProp[CharAttributeType.DEFENSE_PER]=_disProp[CharAttributeType.DEFENSE_PER]*addExtraPercent*per;
 			if(percent>=0.5)

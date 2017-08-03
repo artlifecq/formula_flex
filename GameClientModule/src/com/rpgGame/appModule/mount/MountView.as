@@ -45,7 +45,7 @@ package com.rpgGame.appModule.mount
 		private var _touchState:TouchToState;
 		public function MountView():void
 		{
-			attChangeModuleId=AttChangeEnum.MOUNT_MODLE;
+			attChangeTypes=[AttChangeEnum.MOUNT_MODLE];
 			_skin = new ZuoqiCont_Skin();
 			super(_skin);
 			init();

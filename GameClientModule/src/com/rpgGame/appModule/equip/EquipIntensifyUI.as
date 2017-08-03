@@ -577,7 +577,7 @@ package com.rpgGame.appModule.equip
 						labelUpSkin.lb_num.text=AttValueConfig.getDisAttValueStr(types[i],values1[i]);
 						labelUpSkin.lb_up.text=(AttValueConfig.getDisAttValue(types[i],values2[i])-AttValueConfig.getDisAttValue(types[i],values1[i]))+CharAttributeType.getAttrUnit(types[i]);
 					}else{
-						labelUpSkin.lb_num.text=values1[i];
+						labelUpSkin.lb_num.text=AttValueConfig.getDisAttValueStr(types[i],values1[i]);
 						labelUpSkin.arrow_up.visible=labelUpSkin.lb_up.visible=false;
 					}
 					
