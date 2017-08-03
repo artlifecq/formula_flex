@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.jingmai.sub
 {
 	import com.game.engine3D.display.Inter3DContainer;
+	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.rpgGame.app.manager.MeridianMgr;
 	import com.rpgGame.app.manager.Mgr;
@@ -60,6 +61,8 @@ package com.rpgGame.appModule.jingmai.sub
 		private var _type:int;
 		private var _hasReward:Boolean;
 		private var _imgBG:UIAsset;
+		private static var eff:Inter3DContainer;
+		private static var effect3d:InterObject3D;
 		public function MerdianPoint(bg:UIAsset,point:UIAsset,lab:Label,acupoint:String,mapLine:MeridianMapLine,ptType:int)
 		{
 			this._imgBG=bg;
@@ -327,18 +330,27 @@ package com.rpgGame.appModule.jingmai.sub
 		}
 		private function addEft(render:RenderUnit3D):void
 		{
-			render.play(0);
+			//render.play(0);
+		}
+		private function playeComlete(...arg):void
+		{
+			effect3d.stop();
+			MCUtil.removeSelf(eff);
 		}
 		public function playSuccessEff():void
 		{
-			var eff:Inter3DContainer=new Inter3DContainer();
-			this.imgPoint.addChild(eff);
-			eff.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_MERIDIAN_LEVELUP),this.imgPoint.width/2,this.imgPoint.height/2,1,function():void
+			if(!eff)
 			{
-				eff.dispose();
-				MCUtil.removeSelf(eff);
+				eff=new Inter3DContainer();
+				effect3d=eff.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_MERIDIAN_LEVELUP),this.imgPoint.width/2,this.imgPoint.height/2,0,playeComlete,addEft);
 			}
-			,addEft);
+			if (effect3d.parent==null) 
+			{
+				eff.addChild(effect3d);
+			}
+			
+			this.imgPoint.addChild(eff);
+			effect3d.start();
 			
 //			if (linkLine) 
 //			{

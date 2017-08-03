@@ -62,7 +62,7 @@ package com.rpgGame.app.ui.main.taskbar
 			}
 			if(target.name!=null)
 			{
-				var nameArr:Array=target.name.split("AA");
+				var nameArr:Array=target.name.split("II");
 				if(nameArr[0]==TaskType.MAINTYPE_GUIDETASK)//引导任务先特殊处理
 				{
 					TaskControl.guideBut(int(nameArr[1]));
@@ -307,6 +307,7 @@ package com.rpgGame.app.ui.main.taskbar
 			
 			
 			showNpcMark(false);
+			TaskAutoManager.getInstance().walkOver=false;
 		}
 		/**新任务*/
 		private function newMation(type:int):void
@@ -316,7 +317,7 @@ package com.rpgGame.app.ui.main.taskbar
 				if(TaskMissionManager.haveMainTask)
 				{
 					effetCont.playNewtaskEffect();
-					TaskAutoManager.getInstance().startTaskAuto();
+					TaskAutoManager.getInstance().startTaskAuto(TaskType.MAINTYPE_MAINTASK);
 					
 					
 				}
@@ -329,7 +330,7 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				if(TaskMissionManager.haveTreasuerTask&&TaskMissionManager.treasuerCheck)
 				{
-					TaskAutoManager.getInstance().startOtherTaskAuto(TaskType.MAINTYPE_TREASUREBOX)
+					TaskAutoManager.getInstance().startTaskAuto(TaskType.MAINTYPE_TREASUREBOX)
 				}
 			}
 				
@@ -373,6 +374,15 @@ package com.rpgGame.app.ui.main.taskbar
 					}
 				}
 			}
+			else if(type==TaskType.MAINTYPE_TREASUREBOX)
+			{
+				if(TaskMissionManager.getTreasuerTaskIsFinish())
+				{
+					TaskControl.showLoopPanel();
+				}
+				
+			}
+			
 			
 		}
 		/**任务卡级*/

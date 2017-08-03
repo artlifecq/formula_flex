@@ -15,6 +15,8 @@ package com.client
 		 *	UI效果音频轨
 		 */
 		public static const UI_EFFECT_CHANNEL : String = "uiEffectChannel";
+		
+		public static const ENV2D_CHANNEL : String = "env2dChannel";
 
 		public function AudioConfigType()
 		{

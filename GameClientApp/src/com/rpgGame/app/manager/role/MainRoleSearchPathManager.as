@@ -721,7 +721,7 @@ package com.rpgGame.app.manager.role
 			{
 				RoleStateUtil.walkToPos(MainRoleManager.actor, targetPos, 100, _data, _onArrive);
 				
-				clearAutoFindPath();
+				clearJumpPath();
 			}
 			else
 			{

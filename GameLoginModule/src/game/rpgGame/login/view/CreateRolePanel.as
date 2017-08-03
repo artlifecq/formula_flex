@@ -3,23 +3,16 @@ package game.rpgGame.login.view
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.utils.DisplayUtil;
 	import com.game.mainCore.core.timer.GameTimer;
-	import com.gameClient.alert.AlertPanel;
 	
 	import flash.display.Stage;
 	import flash.events.Event;
-	import flash.events.KeyboardEvent;
-	import flash.ui.Keyboard;
 	import flash.utils.getTimer;
-	import flash.utils.setTimeout;
 	
 	import away3d.events.Event;
 	
-	import feathers.controls.Button;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.TextInput;
 	import feathers.core.ToggleGroup;
-	import feathers.themes.GuiTheme;
-	import feathers.themes.GuiThemeStyle;
 	
 	import game.rpgGame.login.ClientConfig;
 	import game.rpgGame.login.data.AvatarInfo;
@@ -33,9 +26,7 @@ package game.rpgGame.login.view
 	import gs.TweenLite;
 	import gs.easing.Bounce;
 	
-	import org.mokylin.skin.loginui.create_input_Skin;
 	import org.mokylin.skin.loginui.create_role_Skin;
-	import org.mokylin.skin.loginui.button.ButtonSkin_shaizi;
 	
 	import starling.core.Starling;
 	import starling.display.DisplayObjectContainer;

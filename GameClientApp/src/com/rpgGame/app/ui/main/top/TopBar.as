@@ -1,18 +1,11 @@
 package com.rpgGame.app.ui.main.top {
-	import com.app.media.AudioInterface;
-	import com.rpgGame.app.manager.scene.SceneManager;
-	import com.rpgGame.app.manager.sound.TSoundManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.SystemTimeEvent;
-	import com.rpgGame.core.manager.AudioConfigType;
 	import com.rpgGame.core.manager.BGMManager;
-	import com.rpgGame.core.manager.sound.SimpleMp3Player;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.netData.login.message.ResHeartMessage;
-	
-	import flash.utils.getTimer;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.mainui.top.top_Right_Skin;
@@ -51,10 +44,11 @@ package com.rpgGame.app.ui.main.top {
 						AppManager.showApp(AppConstant.MAIL_PANEL);
 						break;
 					case this._skin.btn_sound:
-						isPlay=!isPlay;
-						BGMManager.setMusicIsPlay(isPlay);
-						if(isPlay)  BGMManager.playMusic(SceneManager.clientMapData.bgSoundRes);
-						else AudioInterface.track(AudioConfigType.MUSIC_CHANNEL).stop(true);
+						BGMManager.isMuteAll = !(BGMManager.isMuteAll);
+//						isPlay=!isPlay;
+//						BGMManager.setMusicIsPlay(isPlay);
+//						if(isPlay)  BGMManager.playMusic(SceneManager.clientMapData.bgSoundRes);
+//						else AudioInterface.track(AudioConfigType.MUSIC_CHANNEL).stop(true);
 						break;
 				}
 		}
