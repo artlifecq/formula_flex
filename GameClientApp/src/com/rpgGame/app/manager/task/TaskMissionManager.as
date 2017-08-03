@@ -965,12 +965,14 @@ package com.rpgGame.app.manager.task
 		/**判定是否是任务怪*/
 		public static function isTaskMonster(mid:int,type:int):Boolean
 		{
+			//if(getTaskSubIsFinish(type,_taskTarget))
+			
 			var task:TaskInfo=TaskMissionManager.getTaskInfoByType(type);
 			if(task)
 			{
 				for(var i:int=0;i<task.taskSubRateInfolist.length;i++)
 				{
-					if(task.taskSubRateInfolist[i].modelId==mid)
+					if(task.taskSubRateInfolist[i].modelId==mid&&task.taskSubRateInfolist[i].num<task.taskSubRateInfolist[i].maxNum)
 					{
 						return true;
 					}

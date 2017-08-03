@@ -576,7 +576,7 @@ package com.rpgGame.app.ui.main.taskbar
 					break;
 				case TaskType.MAINTYPE_GUILDDAILYTASK:
 					lead="<font color='#ffea00'>【帮派】</font>";
-					end="<font color='#eaeabc'>("+TaskMissionManager.treasuerTaskInfo.loopNumber+"/"+TaskMissionManager.getTreasuerAllNum()+")</font>";
+					end="<font color='#eaeabc'>("+TaskMissionManager.getOtherTaskInfo(type).loopNumber+"/"+TaskMissionCfgData.getPartyCountByPid(TaskMissionManager.getOtherTaskData(type).q_party_id)+")</font>";
 					break;
 			}
 			nav.htmlText=lead+party+name+end;

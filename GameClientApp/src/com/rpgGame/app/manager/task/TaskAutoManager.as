@@ -142,7 +142,7 @@ package com.rpgGame.app.manager.task
 		}
 		public function stopSwitchAll() : void
 		{
-			stopAll();
+			stop();
 		}
 		public function stopAll() : void
 		{
