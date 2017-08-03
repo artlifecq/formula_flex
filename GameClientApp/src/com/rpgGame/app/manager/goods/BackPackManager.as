@@ -1,6 +1,7 @@
 package com.rpgGame.app.manager.goods
 {
 	import com.rpgGame.app.manager.ItemCDManager;
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.mount.MountEquipmentManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -34,6 +35,7 @@ package com.rpgGame.app.manager.goods
 	 */
 	public class BackPackManager extends GoodsContainerMamager
 	{
+		public var isShowShop:Boolean;
 		/****/
 		public var unlockSilver : int;
 		public var unlockBindSilver : int;
@@ -58,6 +60,19 @@ package com.rpgGame.app.manager.goods
 				return;
 			if (src.data is ClientItemInfo)
 			{
+				if (isShowShop) 
+				{
+					if ((src.data as ClientItemInfo).qItem.q_sell==1)
+					{
+						Mgr.shopMgr.sellItemCall(src.data);
+						
+					}
+					else
+					{
+						NoticeManager.mouseFollowNotify("该物品无法出售");
+					}
+					return;
+				}
 				dropItem(src.data as ClientItemInfo);
 			}
 		}
