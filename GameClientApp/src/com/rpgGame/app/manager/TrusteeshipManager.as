@@ -79,7 +79,7 @@ package com.rpgGame.app.manager
 			_autoSkillCtrl=new ControlAutoFightSelectSkill(role,(role.data as HeroData).job);
 			_tripleSkillCtrl=new ControlTripleSkill();
 			TrusteeshipFightSoulManager.getInstance().setup(role);
-			_gTimer.start();
+			
 		}
 		public  function get autoPickCtrl():ControlAutoPick
 		{
@@ -105,6 +105,7 @@ package com.rpgGame.app.manager
 							{
 								_isFightSelect=true;
 								_actorTime=SystemTimeManager.curtTm + ACTORTIME*1000;
+								_gTimer.start();
 								setRoleList();
 							}
 						}
@@ -161,6 +162,7 @@ package com.rpgGame.app.manager
 			_isFightSelect=false;
 			_targetRoles = targetRoles;
 			_stateMachine.transition(AIStateType.AI_NONE);
+			_gTimer.start();
 			onUpdate(true);
 		}
 		
@@ -183,6 +185,7 @@ package com.rpgGame.app.manager
 			_stateMachine.transition(AIStateType.AI_NONE);
 			EventManager.dispatchEvent(TaskEvent.AUTO_FIGHT_START);
 			_isAutoFhist=true;
+			_gTimer.start();
 			onUpdate(true);
 		}
 		
@@ -404,7 +407,7 @@ package com.rpgGame.app.manager
 			{
 //				_stateMachine.transition(AIStateType.USE_ITEM, null, force);
 				_stateMachine.transition(AIStateType.FIND_ATTACKABLE, null, force);
-				_stateMachine.transition(AIStateType.ATTACK_WALK, null, force);
+				//_stateMachine.transition(AIStateType.ATTACK_WALK, null, force);
 				_stateMachine.transition(AIStateType.ATTACK_TARGET, null, force);
 			}
 				

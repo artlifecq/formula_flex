@@ -140,7 +140,7 @@ package com.rpgGame.app.ui.main.taskbar
 				TaskAutoManager.getInstance().startTaskAuto(type,num);
 				return;
 			}
-			if(key==1&&type==TaskType.MAINTYPE_TREASUREBOX)//
+			if(key==1&&(type==TaskType.MAINTYPE_TREASUREBOX||type==TaskType.MAINTYPE_GUILDDAILYTASK))//
 			{
 				TaskAutoManager.getInstance().startTaskAuto(type,num);
 				return;

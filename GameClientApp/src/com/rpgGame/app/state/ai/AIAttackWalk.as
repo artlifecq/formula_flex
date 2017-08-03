@@ -51,13 +51,15 @@ package com.rpgGame.app.state.ai
 		{
 			if (nextState.type == AIStateType.AI_NONE)
 				return true;
+			if (nextState.type == AIStateType.ATTACK_TARGET)
+				return true;
 			/*if (!isWalk())
-				return true;
-			if (MainRoleManager.actor.stateMachine.isWalkMoving)
 				return true;*/
-			if(!MainRoleManager.actor.stateMachine.isRunning&&!MainRoleManager.actor.stateMachine.isWalking&&!MainRoleManager.actor.stateMachine.isWalkMoving)
-				return true;
-			return false;
+			if (MainRoleManager.actor.stateMachine.isWalkMoving)
+				return false;
+			/*if(!MainRoleManager.actor.stateMachine.isRunning&&!MainRoleManager.actor.stateMachine.isWalking&&!MainRoleManager.actor.stateMachine.isWalkMoving)
+				return true;*/
+			return true;
 		}
 		override public function enterPass(prevState : IState, force : Boolean = false) : Boolean
 		{
