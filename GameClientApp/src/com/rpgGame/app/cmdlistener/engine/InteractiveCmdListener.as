@@ -145,10 +145,18 @@ package com.rpgGame.app.cmdlistener.engine
 			{
 				SceneCursorHelper.getInstance().showCursor(position);
 				//RoleStateUtil.doWalkTo(MainRoleManager.actor, position);
-				MainRoleSearchPathManager.jumpWalkToPos(MainRoleManager.actor, position);//走路改为了可以跨跳跃点-------yt
+				
+				TweenLite.delayedCall(0.1, delayWalkToPos, [position]);
+				
 				EventManager.dispatchEvent(SkillEvent.SKILL_CANCEL);	
 			}
 		}
+		
+		private function delayWalkToPos(position : Vector3D):void
+		{
+			MainRoleSearchPathManager.jumpWalkToPos(MainRoleManager.actor, position);//走路改为了可以跨跳跃点-------yt
+		}
+		
         private function sceneMapUp(position : Vector3D) : void {
             this._isLeftDown = false;
 			TrusteeshipManager.getInstance().isLeftDown=false;
