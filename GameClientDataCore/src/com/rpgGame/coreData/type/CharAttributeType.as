@@ -413,7 +413,7 @@ package com.rpgGame.coreData.type
 		public static function getWashAttDes(att:int):String
 		{
 			var cfg:Q_equip_wash_attr=EquipWashAttCfg.getEquipWashAttr(att);
-			var title:String="属性:";
+//			var title:String="属性:";
 			var des:String="";
 			if(cfg.q_attr_id!=0){
 				des+= CharAttributeType.getCNNameAddValue(cfg.q_attr_id);
@@ -423,7 +423,7 @@ package com.rpgGame.coreData.type
 				des+= CharAttributeType.getDesBySkill(cfg.q_skill_id);
 			}
 			var color:int=ItemQualityType.getColorValue(cfg.q_quality);
-			return HtmlTextUtil.getTextColor(StaticValue.Q_WHITE,title)+HtmlTextUtil.getTextColor(color,des);
+			return HtmlTextUtil.getTextColor(color,des);
 		}
 		
 		public static function getDesBySkill(q_skill_id:int):String

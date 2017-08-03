@@ -56,7 +56,7 @@ package com.rpgGame.app.manager.task
 		public function TaskAutoManager()
 		{
 			
-			_gTimer = new GameTimer("TaskAutoManager", 500, 0, onUpdate);
+//			_gTimer = new GameTimer("TaskAutoManager", 500, 0, onUpdate);
 			_isTaskRunning = false;
 			_isOtherTaskRunning =false;
 			_isBroken = false;
@@ -67,8 +67,8 @@ package com.rpgGame.app.manager.task
 		public function setup(role : SceneRole) : void
 		{
 			_stateMachine = new AIStateMachine(role);
-			_gTimer.reset();
-			_gTimer.start();
+//			_gTimer.reset();
+//			_gTimer.start();
 			_techSta=getTimer();
 			if(GlobalSheetData.getSettingInfo(511)!=null)
 			{

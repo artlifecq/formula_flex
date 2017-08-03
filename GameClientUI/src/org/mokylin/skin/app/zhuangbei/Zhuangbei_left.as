@@ -50,9 +50,9 @@ package org.mokylin.skin.app.zhuangbei
 			super();
 			
 			this.currentState = "normal";
-			this.height = 431;
-			this.width = 340;
-			this.elementsContent = [__Zhuangbei_left_UIAsset1_i(),title1_i(),title2_i(),tab_pack_i(),__Zhuangbei_left_UIAsset2_i(),__Zhuangbei_left_UIAsset3_i(),list1_i(),list2_i(),lb_yinzi_i(),monyTips_i(),monyIcon_i()];
+			this.height = 444;
+			this.width = 338;
+			this.elementsContent = [__Zhuangbei_left_UIAsset2_i(),__Zhuangbei_left_UIAsset3_i(),title1_i(),title2_i(),tab_pack_i(),list1_i(),list2_i(),lb_yinzi_i(),monyTips_i(),monyIcon_i()];
 			
 			states = {
 			};
@@ -73,7 +73,7 @@ package org.mokylin.skin.app.zhuangbei
 		private function __Zhuangbei_left_HorizontalLayout1_i():feathers.layout.HorizontalLayout
 		{
 			var temp:feathers.layout.HorizontalLayout = new feathers.layout.HorizontalLayout();
-			temp.gap = -2;
+			temp.gap = 1;
 			return temp;
 		}
 
@@ -89,36 +89,25 @@ package org.mokylin.skin.app.zhuangbei
 			return temp;
 		}
 
-		private function __Zhuangbei_left_UIAsset1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 445;
-			temp.styleName = "ui/common/background/neikuang_2.png";
-			temp.width = 350;
-			temp.x = -4;
-			temp.y = -6;
-			return temp;
-		}
-
 		private function __Zhuangbei_left_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 185;
+			temp.height = 61;
 			temp.styleName = "ui/common/background/neikuang_2.png";
-			temp.width = 339;
-			temp.x = 1;
-			temp.y = 51;
+			temp.width = 338;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
 		private function __Zhuangbei_left_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 143;
+			temp.height = 386;
 			temp.styleName = "ui/common/background/neikuang_2.png";
-			temp.width = 339;
-			temp.x = 1;
-			temp.y = 264;
+			temp.width = 338;
+			temp.x = 0;
+			temp.y = 58;
 			return temp;
 		}
 
@@ -131,8 +120,8 @@ package org.mokylin.skin.app.zhuangbei
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 110;
-			temp.x = 7;
-			temp.y = 412;
+			temp.x = 8;
+			temp.y = 418;
 			return temp;
 		}
 
@@ -141,11 +130,11 @@ package org.mokylin.skin.app.zhuangbei
 			var temp:feathers.controls.List = new feathers.controls.List();
 			list1 = temp;
 			temp.name = "list1";
-			temp.height = 175;
+			temp.height = 183;
 			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
 			temp.width = 328;
-			temp.x = 7;
-			temp.y = 56;
+			temp.x = 4;
+			temp.y = 62;
 			temp.layout = __Zhuangbei_left_TileLayout1_i();
 			return temp;
 		}
@@ -155,11 +144,11 @@ package org.mokylin.skin.app.zhuangbei
 			var temp:feathers.controls.List = new feathers.controls.List();
 			list2 = temp;
 			temp.name = "list2";
-			temp.height = 131;
+			temp.height = 137;
 			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
 			temp.width = 328;
-			temp.x = 7;
-			temp.y = 270;
+			temp.x = 4;
+			temp.y = 277;
 			temp.layout = __Zhuangbei_left_TileLayout2_i();
 			return temp;
 		}
@@ -170,8 +159,8 @@ package org.mokylin.skin.app.zhuangbei
 			monyIcon = temp;
 			temp.name = "monyIcon";
 			temp.styleName = "ui/common/tubiao/yinzib_24.png";
-			temp.x = 117;
-			temp.y = 407;
+			temp.x = 112;
+			temp.y = 413;
 			return temp;
 		}
 
@@ -186,7 +175,7 @@ package org.mokylin.skin.app.zhuangbei
 			temp.color = 0x8B8D7B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 135;
-			temp.y = 413;
+			temp.y = 418;
 			return temp;
 		}
 
@@ -195,11 +184,11 @@ package org.mokylin.skin.app.zhuangbei
 			var temp:feathers.controls.TabBar = new feathers.controls.TabBar();
 			tab_pack = temp;
 			temp.name = "tab_pack";
-			temp.btnWidth = 67;
+			temp.btnWidth = 65;
 			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_pack;
 			temp.width = 326;
-			temp.x = 0;
-			temp.y = 24;
+			temp.x = 6;
+			temp.y = 30;
 			temp.layout = __Zhuangbei_left_HorizontalLayout1_i();
 			temp.dataProvider = __Zhuangbei_left_ArrayCollection1_i();
 			return temp;
@@ -210,12 +199,12 @@ package org.mokylin.skin.app.zhuangbei
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			title1 = temp;
 			temp.name = "title1";
-			temp.height = 23;
+			temp.height = 27;
 			var skin:StateSkin = new org.mokylin.skin.app.zhuangbei.qianghua.TitileHead()
 			temp.skin = skin
-			temp.width = 336;
+			temp.width = 333;
 			temp.x = 2;
-			temp.y = 0;
+			temp.y = 3;
 			return temp;
 		}
 
@@ -224,12 +213,12 @@ package org.mokylin.skin.app.zhuangbei
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			title2 = temp;
 			temp.name = "title2";
-			temp.height = 23;
+			temp.height = 27;
 			var skin:StateSkin = new org.mokylin.skin.app.zhuangbei.qianghua.TitileHead()
 			temp.skin = skin
-			temp.width = 336;
+			temp.width = 333;
 			temp.x = 2;
-			temp.y = 239;
+			temp.y = 249;
 			return temp;
 		}
 

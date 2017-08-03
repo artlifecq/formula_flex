@@ -63,12 +63,12 @@ package com.rpgGame.coreData.cfg
 		
 		
 		/**依据子类型获取符合条件的配置*/
-		public static function getQ_HeChengListBySonType(sonType:int):Vector.<Q_hecheng>
+		public static function getQ_HeChengListBySonType(type:int,sonType:int):Vector.<Q_hecheng>
 		{
 			var list:Vector.<Q_hecheng>=new Vector.<Q_hecheng>();
 			for each (var info:Q_hecheng in _targetMap)
 			{
-				if(info.q_sub_type==sonType)
+				if(info.q_type==type&&info.q_sub_type==sonType)
 					list.push(info);
 			}
 			return list;

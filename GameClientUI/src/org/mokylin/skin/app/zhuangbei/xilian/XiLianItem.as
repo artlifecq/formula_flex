@@ -54,7 +54,7 @@ package org.mokylin.skin.app.zhuangbei.xilian
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
 			temp.color = 0xCFC6AE;
-			temp.x = 350;
+			temp.x = 224;
 			temp.y = 0;
 			return temp;
 		}
@@ -65,8 +65,9 @@ package org.mokylin.skin.app.zhuangbei.xilian
 			lb_lock = temp;
 			temp.name = "lb_lock";
 			temp.text = "锁定";
-			temp.color = 0xCFC6AE;
-			temp.x = 377;
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 251;
 			temp.y = 2;
 			return temp;
 		}
@@ -77,11 +78,11 @@ package org.mokylin.skin.app.zhuangbei.xilian
 			lb_name0 = temp;
 			temp.name = "lb_name0";
 			temp.height = 19;
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 340;
+			temp.width = 200;
 			temp.x = 1;
-			temp.y = 1;
+			temp.y = 2;
 			return temp;
 		}
 
@@ -91,11 +92,12 @@ package org.mokylin.skin.app.zhuangbei.xilian
 			lb_name = temp;
 			temp.name = "lb_name";
 			temp.height = 19;
-			temp.color = 0xCFC6AE;
+			temp.text = "???";
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 340;
+			temp.width = 200;
 			temp.x = 1;
-			temp.y = 1;
+			temp.y = 2;
 			return temp;
 		}
 
@@ -106,9 +108,10 @@ package org.mokylin.skin.app.zhuangbei.xilian
 			temp.name = "lb_yuanbao";
 			temp.height = 19;
 			temp.text = "(10元宝/次)";
-			temp.color = 0x25931b;
+			temp.color = 0x00FF33;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 89;
-			temp.x = 412;
+			temp.x = 286;
 			temp.y = 2;
 			return temp;
 		}

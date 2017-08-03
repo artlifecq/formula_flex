@@ -1,7 +1,5 @@
-package org.mokylin.skin.app.roll
+package org.mokylin.skin.app.wuxue.jineng
 {
-	import feathers.controls.text.Fontter;
-	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 
@@ -10,22 +8,22 @@ package org.mokylin.skin.app.roll
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class Roll_Item extends feathers.controls.StateSkin
+	public class JiNeng_Head extends feathers.controls.StateSkin
 	{
-		public var labelDisplay:feathers.controls.Label;
+		public var labelDisplay:feathers.controls.UIAsset;
 
 
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function Roll_Item()
+		public function JiNeng_Head()
 		{
 			super();
 			
 			this.currentState = "normal";
-			this.height = 22;
-			this.width = 265;
-			this.elementsContent = [__Roll_Item_UIAsset1_i(),labelDisplay_i()];
+			this.height = 28;
+			this.width = 466;
+			this.elementsContent = [labelDisplay_i(),__JiNeng_Head_UIAsset1_i()];
 			
 			states = {
 			};
@@ -36,28 +34,24 @@ package org.mokylin.skin.app.roll
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __Roll_Item_UIAsset1_i():feathers.controls.UIAsset
+		private function __JiNeng_Head_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 22;
-			temp.styleName = "ui/app/roll/wenleidi.png";
-			temp.width = 265;
+			temp.styleName = "ui/app/wuxue/jineng/kuantiao.png";
+			temp.width = 466;
 			temp.x = 0;
-			temp.y = 0;
+			temp.y = 23;
 			return temp;
 		}
 
-		private function labelDisplay_i():feathers.controls.Label
+		private function labelDisplay_i():feathers.controls.UIAsset
 		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			labelDisplay = temp;
 			temp.name = "labelDisplay";
-			temp.text = "玩家名字小A：98点";
-			temp.color = 0x8B8D7B;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 244;
-			temp.x = 12;
-			temp.y = 2;
+			temp.styleName = "ui/app/wuxue/jineng/name1.png";
+			temp.x = 10;
+			temp.y = 0;
 			return temp;
 		}
 

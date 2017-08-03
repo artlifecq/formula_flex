@@ -26,6 +26,8 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.core.ui.tip.RewardTipTree;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.cfg.SpellDataManager;
+	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.lang.LangText;
 	import com.rpgGame.coreData.role.HeroData;
@@ -133,7 +135,13 @@ package com.rpgGame.app.cmdlistener
 		{
 			var roleData : HeroData = MainRoleManager.actorInfo;
 			roleData.spellList.addSkillData(msg.skillInfo);
-			UIPopManager.showAlonePopUI(SkillAddPop,msg.skillInfo);
+			var _cfg:Q_skill_model=SpellDataManager.getSpellData(msg.skillInfo.skillModelId);
+			if(_cfg.q_trigger_type==1) //判断是否要显示新增技能的提示框（主要是针对三连招的技能判断的）
+			{
+				var cfg:Q_skill_model=SpellDataManager.getSpellData(msg.skillInfo.skillModelId,msg.skillInfo.skillLevel);
+				if(cfg.q_seat!=0)
+					UIPopManager.showAlonePopUI(SkillAddPop,msg.skillInfo);
+			}
 			EventManager.dispatchEvent(SpellEvent.SPELL_ADD);
 		}
 		
@@ -166,8 +174,8 @@ package com.rpgGame.app.cmdlistener
 		
 		private function OnSCNonagePromptMessage(msg:SCNonagePromptMessage):void
 		{
-//			if(ClientConfig.isBanShu)
-				FangChenMiManager.OnSCNonagePromptMessage(msg);
+			//			if(ClientConfig.isBanShu)
+			FangChenMiManager.OnSCNonagePromptMessage(msg);
 		}
 		
 		private function RecvSCCurrencyChangeMessage(msg:SCCurrencyChangeMessage):void
@@ -243,9 +251,9 @@ package com.rpgGame.app.cmdlistener
 			
 			var beforeFight:int=MainRoleManager.actorInfo.totalStat.getStatValue(CharAttributeType.FIGHTING);
 			
-		
+			
 			//
-//			PlayerAttributeManager.showSpriteStatChg(MainRoleManager.actorInfo.totalStat, msg.attributeChangeList);
+			//			PlayerAttributeManager.showSpriteStatChg(MainRoleManager.actorInfo.totalStat, msg.attributeChangeList);
 			//
 			MainRoleManager.actorInfo.totalStat.setData(msg.attributeChangeList);
 			
@@ -388,7 +396,7 @@ package com.rpgGame.app.cmdlistener
 			}
 			else if ( msg.type == 9 )// 鼠标提示( 绿色 )
 			{
-//				FloatingText.showUp( info );
+				//				FloatingText.showUp( info );
 			} 
 		}
 		
@@ -404,8 +412,8 @@ package com.rpgGame.app.cmdlistener
 			if (role && role.usable)
 			{
 				//				HeroData.setResources(role.data as HeroData, buffer);
-//				AvatarManager.callEquipmentChange(role);
-//				AvatarManager.updateAvatar(role);
+				//				AvatarManager.callEquipmentChange(role);
+				//				AvatarManager.updateAvatar(role);
 				if (SceneRoleSelectManager.selectedRole == role)
 					SceneRoleSelectManager.updateSelectRole();
 			}

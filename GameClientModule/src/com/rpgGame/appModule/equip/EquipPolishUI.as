@@ -106,13 +106,13 @@ package com.rpgGame.appModule.equip
 		private var useMon:int;
 		private var userMon:Number;
 		private var perMon:int=20;
-
+		
 		private var currCfg:Q_equip_polish;
 		private var useListIds:Vector.<long>;
 		private var isToUp:Boolean;
-		private var _progressBar:AwdProgressBar;
+		//		private var _progressBar:AwdProgressBar;
 		private var isLockRefresh:Boolean;
-
+		
 		private var eftCon:Inter3DContainer;
 		private var zuomoEft:InterObject3D;
 		private static var noAlertUse:Boolean;
@@ -124,6 +124,7 @@ package com.rpgGame.appModule.equip
 			
 			super(_skin);
 			initView();
+			_skin.progressBar1.visible=false;
 		}
 		
 		private function initView():void
@@ -134,11 +135,11 @@ package com.rpgGame.appModule.equip
 			useListIds=new Vector.<long>();
 			_leftSkin=_skin.left.skin as Zhuangbei_left;
 			
-			(_leftSkin.title1.skin as TitileHead).labelDisplay.text=LanguageConfig.getText(LangUI.UI_TEXT9);
-			(_leftSkin.title2.skin as TitileHead).labelDisplay.text=LanguageConfig.getText(LangUI.UI_TEXT2);
+			(_leftSkin.title1.skin as TitileHead).uiLabel.styleName="ui/app/zhuangbei/daizhuomo.png";
+			(_leftSkin.title2.skin as TitileHead).uiLabel.styleName="ui/app/zhuangbei/kexiaohao.png";
 			
-			_progressBar=new AwdProgressBar(_skin.progressBar,"ui_zuomotiao");
-			_skin.grp_jiacheng.addChild(_progressBar);
+			//			_progressBar=new AwdProgressBar(_skin.progressBar2,"ui_zuomotiao");
+			//			_skin.grp_jiacheng.addChild(_progressBar);
 			_skin.grp_jiacheng.addChild(_skin.lb_pro);
 			_goodsContainerTarget=new GoodsContainerPanel(_leftSkin.list1,ItemContainerID.POLIST_LIST,createItemRender);
 			_goodsContainerUse=new GoodsContainerPanel(_leftSkin.list2,ItemContainerID.POLIST_USE,createItemRender);
@@ -157,27 +158,27 @@ package com.rpgGame.appModule.equip
 			
 			_useEquipGrids=new Vector.<DragDropItem>();
 			for(i=0;i<6;i++){
-				_useEquipGrids.push(new DragDropItem(48,i));
+				_useEquipGrids.push(new DragDropItem(IcoSizeEnum.ICON_42,i));
 				_useEquipGrids[i].gridInfo=new GridInfo(ItemContainerID.POLIST_USE,i);
 				_useEquipGrids[i].bindBg(_skin["use"+i]);
 				_skin.use_grp.addChild(_useEquipGrids[i]);
 				_useEquipGrids[i].onTouchEndCallBack=onCancelUse;
-//				_useEquipGrids[i].x=_skin["use"+i].x;
-//				_useEquipGrids[i].y=_skin["use"+i].y;
+				//				_useEquipGrids[i].x=_skin["use"+i].x;
+				//				_useEquipGrids[i].y=_skin["use"+i].y;
 				_useEquipGrids[i].dragAble = true;
 			}
 			
-			_targetEquip=new DragDropItem(64,0);
+			_targetEquip=new DragDropItem(IcoSizeEnum.ICON_64,0);
 			_targetEquip.onTouchEndCallBack=onCancelTarget;
 			_targetEquip.dragAble = true;
 			_targetEquip.checkDrag=checkDrag;
 			_skin.container.addChild(_targetEquip);
-			_targetEquip.x=624;
-			_targetEquip.y=195;
+			_targetEquip.x=614;
+			_targetEquip.y=198;
 			_targetEquip.bindBg(null);
 			
 			eftCon=new Inter3DContainer();
-			zuomoEft=eftCon.playInter3DAt(ClientConfig.getEffect("ui_zhuomo"),-45,10,0);
+			//			zuomoEft=eftCon.playInter3DAt(ClientConfig.getEffect("ui_zhuomo"),-45,10,0);
 			this._skin.grp_cilun.addChild(eftCon);
 		}
 		
@@ -515,7 +516,7 @@ package com.rpgGame.appModule.equip
 			if(tweenEquip){
 				tweenEquip.kill();
 			}
-			tweenEquip=TweenMax.to(_targetEquip,1,{x:624,y:195,ease:Expo.easeOut});
+			tweenEquip=TweenMax.to(_targetEquip,1,{x:614,y:198,ease:Expo.easeOut});
 			
 			if(isUse(targetEquipInfo)){
 				deleteItems(useEquips,targetEquipInfo);
@@ -540,13 +541,15 @@ package com.rpgGame.appModule.equip
 				currCfg=EquipPolishCfg.getPolishCfg(targetEquipInfo.polishLevel);
 				_skin.lb_name.color=ItemConfig.getItemQualityColor(targetEquipInfo.cfgId);
 				_skin.lb_name.text=targetEquipInfo.name;
-				_skin.lb_dengji.htmlText=LanguageConfig.getText(LangUI.UI_TEXT10)+":"+targetEquipInfo.polishLevel+LanguageConfig.getText(LangUI.UI_TEXT7);
+//				_skin.lb_dengji.htmlText=LanguageConfig.getText(LangUI.UI_TEXT10)+":"+targetEquipInfo.polishLevel+LanguageConfig.getText(LangUI.UI_TEXT7);
 				getUpLv();
 				_skin.lb_current.text=targetEquipInfo.polishLevel+LanguageConfig.getText(LangUI.UI_TEXT7);
 				_skin.lb_next.text=upCfg.q_equip_polish+LanguageConfig.getText(LangUI.UI_TEXT7);
 				
-				_progressBar.maximum=allExp;
-				_progressBar.value=currentExp;
+				//				_progressBar.maximum=allExp;
+				//				_progressBar.value=currentExp;
+				_skin.progressBar2.maximum=allExp;
+				_skin.progressBar2.value=currentExp;
 				_skin.lb_pro.text=currentExp+"/"+allExp;
 				useMon=addExp*perMon;
 				userMon=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
@@ -560,15 +563,17 @@ package com.rpgGame.appModule.equip
 			}else{
 				_skin.lb_current.text=_skin.lb_next.text="";
 				_skin.lb_name.text="";
-				_skin.lb_dengji.text="";
+				//				_skin.lb_dengji.text="";
 				_skin.lb_pro.text=_skin.lb_baifenbi.text="";
-				_progressBar.value=0;
+				//				_progressBar.value=0;
+				_skin.progressBar2.value=0;
+				_skin.arrow_up1.visible=_skin.lb_up1.visible=false;
 				_skin.arrow_up2.visible=_skin.lb_up2.visible=false;
 				_leftSkin.lb_yinzi.text=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT4),0);
 			}
 			
-//			_goodsContainerTarget.dataProvider.updateAll();
-//			_goodsContainerUse.dataProvider.updateAll();
+			//			_goodsContainerTarget.dataProvider.updateAll();
+			//			_goodsContainerUse.dataProvider.updateAll();
 		}
 		
 		private function updateAttShow(current:Q_equip_polish,up:Q_equip_polish=null):void
@@ -582,10 +587,11 @@ package com.rpgGame.appModule.equip
 			_skin.lb_baifenbi.text=Number((current_promote/100).toFixed(1))+"%";
 			if(up){
 				_skin.arrow_up2.visible=_skin.lb_up2.visible=true;
-				_skin.arrow_up2.visible=true;
-				_skin.lb_up2.text=Number(((up.q_promote-current_promote)/100).toFixed(1))+"%";
+				_skin.arrow_up1.visible=_skin.lb_up1.visible=true;			
+				_skin.lb_up1.text=_skin.lb_up2.text=Number(((up.q_promote-current_promote)/100).toFixed(1))+"%";
 			}else{
-				_skin.arrow_up2.visible=_skin.lb_up2.visible=false;
+				_skin.arrow_up1.visible=_skin.lb_up1.visible=false;			
+				_skin.arrow_up2.visible=_skin.lb_up2.visible=false;		
 			}
 			
 			_skin.lb_baifenbi.width=_skin.lb_baifenbi.textWidth+15;
@@ -685,7 +691,7 @@ package com.rpgGame.appModule.equip
 		{
 			initEvent();
 			refresh();
-			zuomoEft.start();
+			//			zuomoEft.start();
 		}
 		
 		override public function refresh():void
@@ -718,7 +724,7 @@ package com.rpgGame.appModule.equip
 		
 		override public function hide():void
 		{
-			zuomoEft.stop();
+			//			zuomoEft.stop();
 			cancelAllUse();
 			if(targetEquipInfo){
 				_goodsContainerTarget.setGrayForData(targetEquipInfo,false);
@@ -759,7 +765,7 @@ package com.rpgGame.appModule.equip
 			if(isLockRefresh){
 				return;
 			}
-				
+			
 			if((info.containerID==ItemContainerID.Role||info.containerID==ItemContainerID.BackPack)&&(info.type==GoodsType.EQUIPMENT||info.type==GoodsType.EQUIPMENT1||info.type==GoodsType.EQUIPMENT2)){
 				ItemManager.getBackEquip(initItem);
 			}
@@ -839,7 +845,7 @@ package com.rpgGame.appModule.equip
 			num=num>MIN_GRID?num:MIN_GRID;
 			_goodsContainerUse.setGridsCount(num,false);
 			_goodsContainerUse.refleshGridsByDatas(useEquips);
-		
+			
 			selectedUse.length=0;
 			refreshUseEquipGrid();
 			
