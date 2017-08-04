@@ -34,6 +34,7 @@ package com.rpgGame.app.ui
 		override public function hide():void
 		{
 			super.hide();
+			attChangeEft.clear();
 			EventManager.removeEvent(MainPlayerEvent.MODULE_STAT_CHANGE,statChange);
 		}
 		

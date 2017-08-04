@@ -135,6 +135,8 @@ package com.rpgGame.app.cmdlistener.engine
             CONFIG::netDebug {
                 NetDebug.LOG("MapDown");
             }
+			var sceneRole:SceneRole;
+				
 			TaskAutoManager.getInstance().stopAll();///////////////点击地面终止任务和挂机
 			
 			TrusteeshipManager.getInstance().isLeftDown=true;
@@ -144,18 +146,32 @@ package com.rpgGame.app.cmdlistener.engine
 			if (!KeyMoveManager.getInstance().keyMoving)
 			{
 				SceneCursorHelper.getInstance().showCursor(position);
+				
+				sceneRole = (MainRoleManager.actor.getCamouflageEntity() as SceneRole) || MainRoleManager.actor;
+				if (sceneRole.stateMachine.isHunLuan)
+				{
+					var srX:Number = sceneRole.x;
+					var sry:Number = sceneRole.z;
+					position.x = srX + (srX - position.x);
+					position.z = sry + (sry - position.z);
+				}
+//				if(sceneRole.stateMachine.isBlinkMoving)
+//				{
+//					return;
+//				}
 				//RoleStateUtil.doWalkTo(MainRoleManager.actor, position);
 				
-				TweenLite.delayedCall(0.1, delayWalkToPos, [position]);
+				MainRoleSearchPathManager.jumpWalkToPos(MainRoleManager.actor, position);//走路改为了可以跨跳跃点-------yt
+//				TweenLite.delayedCall(0.1, delayWalkToPos, [position]);
 				
 				EventManager.dispatchEvent(SkillEvent.SKILL_CANCEL);	
 			}
 		}
 		
-		private function delayWalkToPos(position : Vector3D):void
-		{
-			MainRoleSearchPathManager.jumpWalkToPos(MainRoleManager.actor, position);//走路改为了可以跨跳跃点-------yt
-		}
+//		private function delayWalkToPos(position : Vector3D):void
+//		{
+//			MainRoleSearchPathManager.jumpWalkToPos(MainRoleManager.actor, position);//走路改为了可以跨跳跃点-------yt
+//		}
 		
         private function sceneMapUp(position : Vector3D) : void {
             this._isLeftDown = false;
@@ -166,14 +182,18 @@ package com.rpgGame.app.cmdlistener.engine
 			
         }
         
-        private function sceneMapMove(position : Vector3D) : void {
-            if (CameraController.lockedOnPlayerController.ispanning) {
+        private function sceneMapMove(position : Vector3D) : void
+		{
+            if (CameraController.lockedOnPlayerController.ispanning)
+			{
                 return;
             }
-            if (!this._isLeftDown) {
+            if (!this._isLeftDown) 
+			{
                 return;
             }
-            if (KeyMoveManager.getInstance().keyMoving) {
+            if (KeyMoveManager.getInstance().keyMoving)
+			{
                 return;
             }
             CONFIG::netDebug {

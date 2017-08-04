@@ -3,9 +3,11 @@ package com.rpgGame.app.manager.fight
 	import com.rpgGame.app.display2D.AttackFace;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	
+	import flash.utils.getTimer;
+	
 	import gs.TimelineLite;
 	import gs.TweenLite;
-	import gs.easing.Expo;
+	import gs.easing.Back;
 	
 	import org.client.mainCore.ds.HashMap;
 	
@@ -15,15 +17,33 @@ package com.rpgGame.app.manager.fight
 	{
 		private var _newdMoveList:Vector.<AttackFace>;
 		private var tweenMap:HashMap;
+		
+		private var waitEftDatas:Vector.<AttEftData>;
+		private var playingNum:int;
+		private var maxPlayNum:int=10;
+		private var prePlayTime:int;
+		private var showTime:Number=0.3;
+		private var moveTime:Number=0.5;
+		private var missTime:Number=0.2;
+		private var showY:int=60;
+		private var showY1:int=150;
+		private var showY2:int=200;
+		private var lastPlayFace:AttackFace;
+		private var oneFaceH:int=29;
 
-		private var delaTime:Number=0.5;
 		public function AttChangePanle(x:int,y:int):void
 		{
 			super();
 			this.x = x;
 			this.y = y;
 			_newdMoveList = new Vector.<AttackFace>();
+			waitEftDatas=new Vector.<AttEftData>();
 			tweenMap=new HashMap();
+		}
+		
+		public function clear():void
+		{
+			waitEftDatas.length=0;
 		}
 		
 		public function addChangeHandler(hash:HashMap):void
@@ -33,9 +53,7 @@ package com.rpgGame.app.manager.fight
 			var len:int=keys.length;
 			var key:int=0;
 			var val:int=0;
-			var typeRes : String = "";
 			var numberColor : String = "";
-			delaTime=-0.5;
 			for (var i:int = 0; i <len; i++) 
 			{
 				key=keys[i];
@@ -47,85 +65,67 @@ package com.rpgGame.app.manager.fight
 				if(val==0){
 					continue;
 				}
-				typeRes=FightFaceHelper.getAttributeUrl(key,val>0);
-				numberColor=val>0?FightFaceHelper.ATTRIBUTE_USESFUL_NUM:FightFaceHelper.ATTRIBUTE_HARMFUL_NUM;
-				delaTime+=0.5;
-				TweenLite.delayedCall(delaTime,showAttackFaceNew,[typeRes, numberColor, val]);
+				var data:AttEftData=new AttEftData();
+				data.typeRes=FightFaceHelper.getAttributeUrl(key,val>0);
+				data.numberRes=val>0?FightFaceHelper.ATTRIBUTE_USESFUL_NUM:FightFaceHelper.ATTRIBUTE_HARMFUL_NUM;
+				data.value=val;
+				waitEftDatas.push(data);
 			}
+			playNextEft();
 		}
 		
-		private function showAttackFaceNew(typeRes : String = "", numberRes : String = "", $attackValue : * = 0):void
+		private function playNextEft():void
 		{
-			var attackFace : AttackFace= AttackFace.createAttackFace(typeRes, numberRes, $attackValue);
-			attackFace.touchAcross = true;
-			attackFace.touchable = false;
-			attackFace.touchGroup = false;
-			attackFace.visible = true;
-			TweenAttrChange(attackFace);
-		}
-		
-		private function TweenAttrChange(showobj:AttackFace):void
-		{
-			addFace(showobj);
-		}
-		
-		private function standCompleteHandler(attackFace:AttackFace):void
-		{
-			var index:int = _newdMoveList.indexOf(attackFace);
-			if(index>=0)
-				_newdMoveList.splice(index,1);
-			var myTimeline:TimelineLite=tweenMap.getValue(attackFace);
-			if(myTimeline){
-				myTimeline.kill();
-			}
-			tweenMap.remove(attackFace);
-			attackFace.recycleSub();
-			attackFace.alpha = attackFace.scaleX = attackFace.scaleY = 1;
-			attackFace.y=0;
-			attackFace.x=0;
-			//从场景中移除
-			if (attackFace != null && attackFace.parent != null)
-				attackFace.parent.removeChild(attackFace);
-			//池回收
-			AttackFace.recycleAttackFace(attackFace);
-		}
-		
-		private function addFace(attackFace:AttackFace):void
-		{
-			var height:Number = attackFace.height;
-			this.addChild(attackFace);
-			var showobj:AttackFace;
-			var myTimeline:TimelineLite;
+			var overTime:Number=getTimer()-prePlayTime;
+			overTime=overTime*0.001;
 			
-			while(_newdMoveList.length>4){
-				showobj=_newdMoveList.pop();
-				standCompleteHandler(showobj);
+			if(playingNum<maxPlayNum&&waitEftDatas.length!=0&&overTime>=showTime){
+				prePlayTime=getTimer();
+				var eftData:AttEftData=waitEftDatas.shift();
+				playingNum++;
+				var attackFace : AttackFace= AttackFace.createAttackFace(eftData.typeRes, eftData.numberRes, eftData.value);
+				attackFace.touchAcross = true;
+				attackFace.touchable = false;
+				attackFace.touchGroup = false;
+				attackFace.visible = true;
+				attackFace.alpha=0;
+				attackFace.y=0;
+				this.addChild(attackFace);
+				tweenNormalAtt(attackFace);
 			}
-			attackFace.alpha=0;
-			_newdMoveList.splice(0,0,attackFace);
-			var length:int=_newdMoveList.length;
-			for(var i:int = 0;i<length;i++)
-			{
-				showobj=_newdMoveList[i];
-				showobj.x=0;
-				var setY:int=i*height*-1;
-				if(showobj.y>=setY){
-					showobj.y = setY;
-				}
-				myTimeline=tweenMap.getValue(showobj);
-				if(!myTimeline){
-					myTimeline = new TimelineLite({onComplete:standCompleteHandler,onCompleteParams:[showobj]});
-					myTimeline.append(new TweenLite(showobj, 0.2, {alpha:1,ease:Expo.easeIn,onUpdate:onUpdateFaceY,onUpdateParams:[showobj]}));
-					myTimeline.append(new TweenLite(showobj, 0.8, {ease:Expo.easeIn,onUpdate:onUpdateFaceY,onUpdateParams:[showobj]}));
-					myTimeline.append(new TweenLite(showobj, 0.5, {alpha:0,ease:Expo.easeOut}));
-					tweenMap.add(showobj,myTimeline);
-				}
+		}		
+		
+		/**
+		 *普通属性瓢字 
+		 * @param attackFace
+		 * 
+		 */
+		private function tweenNormalAtt(attackFace:AttackFace):void
+		{
+			lastPlayFace=attackFace;
+			var myTimeline: TimelineLite= new TimelineLite({onComplete:eftTweenComplete,onCompleteParams:[attackFace]});
+			myTimeline.append(new TweenLite(attackFace, showTime, {alpha:1,y:attackFace.y-showY,onComplete:onAlphaComplete}));
+			myTimeline.append(new TweenLite(attackFace, moveTime, {y:attackFace.y-showY1}));
+			myTimeline.append(new TweenLite(attackFace, missTime, {alpha:0,y:attackFace.y-showY2}));
+		}		
+		
+		private function eftTweenComplete(attackFace:AttackFace):void
+		{
+			playingNum--;
+			if(playingNum==0){
+				lastPlayFace=null;
 			}
 		}
 		
-		private function onUpdateFaceY(attackFace:AttackFace):void
+		private function onAlphaComplete():void
 		{
-			attackFace.y=attackFace.y-5;
+			playNextEft();
 		}
 	}
+}
+
+class AttEftData{
+	public var typeRes:String;
+	public var numberRes:String;
+	public var value:int;
 }

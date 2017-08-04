@@ -187,6 +187,11 @@ package com.rpgGame.core.app
 		 */
 		public static var Battle_PANL:String = createAppInfo( "fightsoul.FightSoulPanel","zhanhun");
 		
+		/**
+		 * 战魂升级展示
+		 */
+		public static var FIGHT_SOULRISE_SHOWPANEL:String = createAppInfo( "fightsoul.FightSoulRiseShowPanel","zhanhun");
+		
 		
 		/**
 		 * 开启新功能 

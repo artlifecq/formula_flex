@@ -290,7 +290,7 @@ package com.rpgGame.app.fight.spell
 			{
 				if (!_autoAtkNearRole)
 				{
-					//NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsBlinking); //"冲锋中不能放技能"
+					NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsBlinking); //"冲锋中不能放技能"
 				}
 				return CASE_STATE_FAIL;
 			}
