@@ -13,7 +13,6 @@ package com.client.process
 	import com.rpgGame.netData.MessagePool;
 	
 	import flash.events.Event;
-	import flash.events.TimerEvent;
 	import flash.external.ExternalInterface;
 	import flash.media.Sound;
 	import flash.media.SoundChannel;
@@ -21,7 +20,6 @@ package com.client.process
 	import flash.system.ApplicationDomain;
 	import flash.system.Security;
 	import flash.utils.ByteArray;
-	import flash.utils.Timer;
 	
 	import gs.TweenLite;
 	
