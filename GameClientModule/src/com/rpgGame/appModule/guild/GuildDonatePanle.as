@@ -129,6 +129,8 @@ package com.rpgGame.appModule.guild
 			_itemPage2.updateMax(haveGold,last);
 			_skin.lbNum2.text = haveGold.toString();
 			_skin.lbLast.htmlText = LanguageConfig.replaceStr("今日还可捐献$元宝",HtmlTextUtil.getTextColor(0x5DBD37,last.toString()));
+			_skin.lbBanggong.text=GuildManager.instance().selfMemberInfo.contribution+"";
+			_skin.lbHuoyue.text=GuildManager.instance().selfMemberInfo.allActive+"";
 		}
 		private function refeashList():void
 		{

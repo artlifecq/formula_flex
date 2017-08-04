@@ -1,6 +1,9 @@
 package com.rpgGame.appModule.guild
 {
 	import com.rpgGame.app.manager.guild.GuildManager;
+	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.core.ui.tip.RTNodeID;
+	import com.rpgGame.core.ui.tip.RewardMarkTip;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.GuildSkillCfgData;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
@@ -19,12 +22,16 @@ package com.rpgGame.appModule.guild
 		private var _skin:ProSkill_Item;
 		private var _skillId:int;
 		private var _currentinfo:GuildSkillInfo;
-		private var _nextdata:Q_guildskill
+		private var _nextdata:Q_guildskill;
+		//不冒泡了
+		private var _rewardTip:RewardMarkTip;
 		public function GuildSkillCellPanel(id:int,skin:ProSkill_Item):void
 		{
 			_skin = skin;
 			_skillId = id;
 			_skin.btnUp.addEventListener(Event.TRIGGERED,triggetedHandler);
+			//SkinUI.addNode(RTNodeID.GUILD_SKILL_SELF,RTNodeID.GUILD_SKILL_SELF_BTN+_skillId,_skin.btnUp,88,null);
+			_rewardTip=new RewardMarkTip(_skin.btnUp,88);
 		}
 		
 		private function triggetedHandler(e:Event):void
@@ -106,6 +113,8 @@ package com.rpgGame.appModule.guild
 				_skin.btnUp.visible = true;
 				_skin.lbTips.visible = false;
 			}
+			
+			_rewardTip.hasReward=GuildManager.instance().hasPersonalSkill2LevelUpBySkillId(_skillId);
 		}
 	}
 }

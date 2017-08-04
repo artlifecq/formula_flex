@@ -61,6 +61,11 @@ package com.rpgGame.core.ui.tip
 		public static const GUILD_UP_BTN:String=GUILD+"-upbtn";
 		public static const GUILD_MEM:String=GUILD+"-mem";
 		public static const GUILD_MEM_APPLY:String=GUILD_MEM+"-apply";
+		public static const GUILD_SKILL:String=GUILD+"-skill";
+		public static const GUILD_SKILL_SELF:String=GUILD_SKILL+"-self";
+		public static const GUILD_SKILL_SELF_BTN:String=GUILD_SKILL+"-btn";
+		public static const GUILD_SKILL_LEADER:String=GUILD_SKILL+"-leader";
+		public static const GUILD_SKILL_SELF_LEADER_BTN:String=GUILD_SKILL_LEADER+"-btn";
 		public function RTNodeID()
 		{
 		}

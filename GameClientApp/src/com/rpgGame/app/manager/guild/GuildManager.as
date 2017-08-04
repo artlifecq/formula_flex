@@ -13,6 +13,7 @@ package com.rpgGame.app.manager.guild
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.GuildCfgData;
+	import com.rpgGame.coreData.cfg.GuildSkillCfgData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_guild;
 	import com.rpgGame.coreData.clientConfig.Q_guild_permission;
@@ -22,6 +23,7 @@ package com.rpgGame.app.manager.guild
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.enum.EnumGuildPost;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
+	import com.rpgGame.coreData.info.item.GetShowItemVo;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.coreData.lang.LangGuild;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
@@ -51,6 +53,11 @@ package com.rpgGame.app.manager.guild
 		{
 		}
 		//------------------------------data-----------------
+		/**
+		 *统帅技能id; 
+		 */		
+		public static const LEADER_SKILL_ID:int=11;
+		public static const SELF_SKILL_COUNT:int=6;
 		private static const MAX_INPUT_TEXT : int = 30;
 		private static const MIN_CREATE_LEVEL : int = 45;
 		public static const MaxPlayerListPageCount:int = 12;
@@ -646,6 +653,83 @@ package com.rpgGame.app.manager.guild
 				return false;
 			}
 			return false;
+		}
+		public function hasSkill2LevelUp():Boolean
+		{
+			if (hasLeaderSkill2LevelUp()) 
+			{
+				return true;
+			}
+			if (hasSelfSkill2LevelUp()) 
+			{
+				return true;
+			}
+			return false;
+		}
+		public function hasSelfSkill2LevelUp():Boolean
+		{
+			for (var i:int = 1; i <= SELF_SKILL_COUNT; i++) 
+			{
+				if (hasPersonalSkill2LevelUpBySkillId(i)) 
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+		public function hasLeaderSkill2LevelUp():Boolean
+		{
+			if (!haveGuild) 
+			{
+				return false;
+			}
+			if (!isLeader) 
+			{
+				return false;
+			}
+			var skillInfo:GuildSkillInfo=getSkillInfoById(LEADER_SKILL_ID);
+			if (!skillInfo) 
+			{
+				return false;
+			}
+			var qSkill:Q_guildskill=GuildSkillCfgData.getSkill(LEADER_SKILL_ID,skillInfo.level);
+			if (!qSkill) 
+			{
+				return false;
+			}
+			var next:Q_guildskill= GuildSkillCfgData.getSkill(LEADER_SKILL_ID,skillInfo.level+1);
+			//max
+			if (!next) 
+			{
+				return false;
+			}
+			//看帮贡
+			return qSkill.q_costvalue<=MainRoleManager.actorInfo.totalStat.gold;
+		}
+		public  function hasPersonalSkill2LevelUpBySkillId(skillId:int):Boolean
+		{
+			if (!haveGuild) 
+			{
+				return false;
+			}
+			var skillInfo:GuildSkillInfo=getSkillInfoById(skillId);
+			if (!skillInfo) 
+			{
+				return false;
+			}
+			var qSkill:Q_guildskill=GuildSkillCfgData.getSkill(skillId,skillInfo.level);
+			if (!qSkill) 
+			{
+				return false;
+			}
+			var next:Q_guildskill= GuildSkillCfgData.getSkill(skillId,skillInfo.level+1);
+			//max
+			if (!next) 
+			{
+				return false;
+			}
+			//看帮贡
+			return qSkill.q_costvalue<=_selfMemberInfo.contribution;
 		}
 		public function hasGuildLevelUp():Boolean
 		{

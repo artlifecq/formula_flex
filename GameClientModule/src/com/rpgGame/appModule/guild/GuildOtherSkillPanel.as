@@ -3,6 +3,8 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.events.GuildEvent;
+	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.GuildSkillCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_att_values;
@@ -45,6 +47,7 @@ package com.rpgGame.appModule.guild
 			_propList.push(new SkillPropCell(CharAttributeType.MAX_HP,_skin.skinShengming.skin as ItemTongShuaiShuXing));
 			_skin.btnUP.addEventListener(TouchEvent.TOUCH, onTouch);
 			_skin.btnUP.addEventListener(Event.TRIGGERED, triggeredHandler);
+			SkinUI.addNode(RTNodeID.GUILD_SKILL_LEADER,RTNodeID.GUILD_SKILL_SELF_LEADER_BTN,_skin.btnUP,177,GuildManager.instance().hasLeaderSkill2LevelUp);
 		}
 		
 		private function triggeredHandler(e:Event):void
@@ -115,7 +118,7 @@ package com.rpgGame.appModule.guild
 				_skin.btnUP.label = "升级到LV"+int(currentLevel+1).toString();
 				_skin.lbXiaohao.htmlText = "本次花费元宝"+HtmlTextUtil.getTextColor(0x5DBD37,_nextdata.q_costvalue.toString());
 			}
-			
+			SkinUI.notifyUpdate(RTNodeID.GUILD_SKILL_SELF_LEADER_BTN);
 		}
 		
 		
