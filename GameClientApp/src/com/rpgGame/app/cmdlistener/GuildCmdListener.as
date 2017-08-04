@@ -8,6 +8,12 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.GuildEvent;
 	import com.rpgGame.coreData.role.HeroData;
+	import com.rpgGame.netData.guild.message.ReplyGuildApplyOperationMessage;
+	import com.rpgGame.netData.guild.message.ReplyGuildAppointMessage;
+	import com.rpgGame.netData.guild.message.ReplyGuildInviteOperationMessage;
+	import com.rpgGame.netData.guild.message.ReplyGuildKillMessage;
+	import com.rpgGame.netData.guild.message.ReplyGuildLevelUpMessage;
+	import com.rpgGame.netData.guild.message.ReplyGuildSkillLevelUpMessage;
 	import com.rpgGame.netData.guild.message.ResGuildActiveMessage;
 	import com.rpgGame.netData.guild.message.ResGuildApplyListInfoMessage;
 	import com.rpgGame.netData.guild.message.ResGuildBriefnessInfoMessage;
@@ -43,9 +49,49 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(111109, getResGuildActiveMessage);
 			SocketConnection.addCmdListener(111199, getResGuildOperateResultMessage);
 			
+			SocketConnection.addCmdListener(111110, onReplyGuildAppointHandler);
+			SocketConnection.addCmdListener(111111,  onReplyGuildInviteOperationHandler);
+			SocketConnection.addCmdListener(111112,  onReplyGuildLevelUpHandler);
+			SocketConnection.addCmdListener(111113, onReplyGuildSkillLevelUpHandler);
+			SocketConnection.addCmdListener(111114, onReplyGuildKillHandler);
+			SocketConnection.addCmdListener(111115, onReplyGuildApplyOperationHandler);
+			
 			finish();
 		}
 		
+		private function onReplyGuildApplyOperationHandler(msg:ReplyGuildApplyOperationMessage):void
+		{
+			// TODO Auto Generated method stub
+			
+		}
+		
+		private function onReplyGuildKillHandler(msg:ReplyGuildKillMessage):void
+		{
+			// TODO Auto Generated method stub
+			
+		}
+		
+		private function onReplyGuildSkillLevelUpHandler(msg:ReplyGuildSkillLevelUpMessage):void
+		{
+			// TODO Auto Generated method stub
+			
+		}
+		
+		private function onReplyGuildLevelUpHandler(msg:ReplyGuildLevelUpMessage):void
+		{
+			// TODO Auto Generated method stub
+			
+		}
+		
+		private function onReplyGuildInviteOperationHandler(msg:ReplyGuildInviteOperationMessage):void
+		{
+			// TODO Auto Generated method stub
+			
+		}
+		private function onReplyGuildAppointHandler(msg:ReplyGuildAppointMessage):void
+		{
+			
+		}
 	
 		
 		private function getResGuildActiveMessage(msg:ResGuildActiveMessage):void
