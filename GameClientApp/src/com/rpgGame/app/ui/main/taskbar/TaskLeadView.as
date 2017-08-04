@@ -80,9 +80,22 @@ package com.rpgGame.app.ui.main.taskbar
 			killButList.push(_skin.pri_killbut_2);
 			killButList.push(_skin.pri_killbut_3);
 			killLabelList=new Vector.<Label>();
-			killLabelList.push(Renwu_Item(_skin.pri_killbut_1.skin).labelDisplay);
+			for(i=0;i<killButList.length;i++)
+			{
+				Renwu_Item(killButList[i].skin).labelDisplay.name="KILLII"+TaskType.MAINTYPE_MAINTASK+"II"+i+"II1";
+				Renwu_Item(killButList[i].skin).btn_send.name="KILLII"+TaskType.MAINTYPE_MAINTASK+"II"+i+"II2";
+				killLabelList.push(Renwu_Item(killButList[i].skin).labelDisplay);
+				TaskUtil.setTextEvet(killButList[i]);
+				killButList[i].visible=false;
+			}
+			/*for(i=0;i<killButList.length;i++)
+			{
+				killButList[i].visible=false;
+				TaskUtil.setTextEvet(killButList[i]);
+			}*/
+			/*killLabelList.push(Renwu_Item(_skin.pri_killbut_1.skin).labelDisplay);
 			killLabelList.push(Renwu_Item(_skin.pri_killbut_2.skin).labelDisplay);
-			killLabelList.push(Renwu_Item(_skin.pri_killbut_3.skin).labelDisplay);
+			killLabelList.push(Renwu_Item(_skin.pri_killbut_3.skin).labelDisplay);*/
 		/*	kill1Label=Renwu_Item(_skin.pri_killbut1.skin).labelDisplay;
 			kill2Label=Renwu_Item(_skin.pri_killbut2.skin).labelDisplay;
 			kill3Label=Renwu_Item(_skin.pri_killbut3.skin).labelDisplay;*/
@@ -106,11 +119,7 @@ package com.rpgGame.app.ui.main.taskbar
 			
 			
 			
-			for(i=0;i<killButList.length;i++)
-			{
-				killButList[i].visible=false;
-				TaskUtil.setTextEvet(killButList[i]);
-			}
+			
 			
 			
 			

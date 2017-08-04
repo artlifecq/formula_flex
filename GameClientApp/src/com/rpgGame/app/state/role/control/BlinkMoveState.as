@@ -57,10 +57,6 @@ package com.rpgGame.app.state.role.control
 		{
 			if (_machine && !_machine.isInPool)
 			{
-				try{if((((_machine as RoleStateMachine).owner as SceneRole).data as MonsterData).modelID==9008)
-				{
-					Lyt.a("%%%%冲锋时间:"+_stateReference.totalTime+"::"+_stateReference.throwDelayTime);
-				}}catch(e:Error){}
 				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {x: true, z: true, offsetY: true});
 				TweenLite.killDelayedCallsTo(onReleaseDelayComplete);
 				if (_stateReference.throwDelayTime > 0)
@@ -194,10 +190,6 @@ package com.rpgGame.app.state.role.control
 
 		private function onMoveComplete() : void
 		{
-			try{if((((_machine as RoleStateMachine).owner as SceneRole).data as MonsterData).modelID==9008)
-			{
-				Lyt.a("%%%%冲锋完成");
-			}}catch(e:Error){}
 			if (_machine && !_machine.isInPool)
 			{
 				var targetX : int = _stateReference.targetPos.x;

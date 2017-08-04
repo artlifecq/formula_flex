@@ -281,65 +281,7 @@ package com.rpgGame.app.ui.scene.dungeon
 			
 			setUisite();
 		}
-		/**设置任务目标内容*/
-		public function setGoalInfo(type:int,describe:String,finisstr:String,subList:Vector.<TaskSubRateInfo>,txtButList:Vector.<SkinnableContainer>):void
-		{
-			var finiStr:Array;
-			var informationList:Array=finisstr.split(";");
-			var i:int,j:int,length:int;
-			length=informationList.length;
-			for(i=0;i<length;i++)
-			{
-				if(informationList[i]&&informationList[i]!="")
-				{
-					var text:String="";
-					var modeid:int=0;
-					var count:int=0,finish:int;
-					var modeArr:Array=informationList[i].split(",");
-					if(modeArr.length==2)
-					{
-						modeid=int(modeArr[0]);
-						finish=int(modeArr[1]);
-					}
-					if(subList[i]!=null)
-					{
-						modeid=subList[i].modelId;
-						count=subList[i].num;
-						finish=subList[i].maxNum;
-					}
-					if(modeid!=0)
-					{
-						text=TaskMissionCfgData.getTaskDescribe(type,describe,modeid);
-					}
-					if(type!=TaskType.SUB_CONVERSATION)
-					{
-						text+="<font color='#cfc6ae'>("+count+"/"+finish+")</font>";
-					}
-					
-					setGotargetLabelText(txtButList[i],text);
-					
-				}
-				
-			}
-			
-			
-		}
-		public function setGotargetLabelText(but:SkinnableContainer,t:String):void
-		{
-			
-			var rItme:Renwu_Item2;
-			if(but!=null&&but.skin!=null)
-			{
-				rItme=but.skin as Renwu_Item2;
-			}
-			if(rItme!=null)
-			{
-				rItme.labelDisplay.width=300;
-				rItme.labelDisplay.htmlText=t;
-				rItme.labelDisplay.width=rItme.labelDisplay.textWidth+2;
-				but.visible=true;
-			}
-		}
+		
 		/**设置奖励物品*/
 		private function setReword():void
 		{

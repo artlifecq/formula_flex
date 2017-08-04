@@ -473,12 +473,31 @@ package com.rpgGame.app.manager.task
 		/**当前是否只有主线任务*/
 		public static function get isOnlyMainTask() :Boolean
 		{
-			if(_mainTaskInfo!=null&&_dailyTaskInfo==null&&_treasuerTaskInfo==null)
+			/*if(_mainTaskInfo!=null&&_dailyTaskInfo==null&&_treasuerTaskInfo==null)
 			{
-				return true;
+				
+			}*/
+			if(_mainTaskInfo==null)
+			{
+				return false;
 			}
-			
-			return false;
+			if(_dailyTaskInfo!=null)
+			{
+				return false;
+			}
+			if(_treasuerTaskInfo!=null)
+			{
+				return false;
+			}
+			if(getOtherTaskInfo(TaskType.MAINTYPE_GUILDDAILYTASK))
+			{
+				return false;
+			}
+			if(_guideTaskInfo&&_guideTaskInfo.length>0)
+			{
+				return false;
+			}
+			return true;
 		}
 		
 		
@@ -946,12 +965,14 @@ package com.rpgGame.app.manager.task
 		/**判定是否是任务怪*/
 		public static function isTaskMonster(mid:int,type:int):Boolean
 		{
+			//if(getTaskSubIsFinish(type,_taskTarget))
+			
 			var task:TaskInfo=TaskMissionManager.getTaskInfoByType(type);
 			if(task)
 			{
 				for(var i:int=0;i<task.taskSubRateInfolist.length;i++)
 				{
-					if(task.taskSubRateInfolist[i].modelId==mid)
+					if(task.taskSubRateInfolist[i].modelId==mid&&task.taskSubRateInfolist[i].num<task.taskSubRateInfolist[i].maxNum)
 					{
 						return true;
 					}
