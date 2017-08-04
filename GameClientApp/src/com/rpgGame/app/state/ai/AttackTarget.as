@@ -28,12 +28,12 @@ package com.rpgGame.app.state.ai
 	 */
 	public class AttackTarget extends AIState
 	{
+		private var isNormalSpell:Boolean;
+		
 		public function AttackTarget()
 		{
 			super(AIStateType.ATTACK_TARGET);
 		}
-		
-		
 		
 		override public function execute() : void
 		{
