@@ -116,7 +116,7 @@ package com.rpgGame.appModule.equip
 								lab=new Label;
 								lab.color = 0x8B8D7B;
 								lab.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-								lab.htmlText=CharAttributeType.getCNName(keys[i])+HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,values1[i])+HtmlTextUtil.getTextColor(0x5DBD37,"(+"+(values2[i]-values1[i])+")");
+								lab.htmlText=CharAttributeType.getCNName(keys[i])+HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,AttValueConfig.getDisAttValue(keys[i],values1[i]).toString())+HtmlTextUtil.getTextColor(0x5DBD37,"(+"+AttValueConfig.getDisAttValue(keys[i],(values2[i]-values1[i]))+")");
 								_labList.push(lab);
 								_labContainer.addChild(lab);
 							}
@@ -125,7 +125,7 @@ package com.rpgGame.appModule.equip
 								lab=new Label;
 								lab.color = 0x8B8D7B;
 								lab.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-								lab.htmlText=CharAttributeType.getCNName(keys[i])+HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,"0")+HtmlTextUtil.getTextColor(0x5DBD37,"(+"+values2[i]+")");
+								lab.htmlText=CharAttributeType.getCNName(keys[i])+HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,"0")+HtmlTextUtil.getTextColor(0x5DBD37,"(+"+AttValueConfig.getDisAttValue(keys[i],values2[i])+")");
 								_labList.push(lab);
 								_labContainer.addChild(lab);
 							}
@@ -199,7 +199,7 @@ package com.rpgGame.appModule.equip
 								lab=new Label;
 								lab.color = 0x8B8D7B;
 								lab.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-								lab.htmlText=CharAttributeType.getCNName(keys[i])+":"+HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,values1[i]);
+								lab.htmlText=CharAttributeType.getCNName(keys[i])+":"+HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,AttValueConfig.getDisAttValue(keys[i],values1[i])+"");
 								_labList.push(lab);
 								_labContainer.addChild(lab);
 							}
@@ -231,7 +231,7 @@ package com.rpgGame.appModule.equip
 								lab=new Label;
 								lab.color = 0x8B8D7B;
 								lab.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-								lab.htmlText=CharAttributeType.getCNName(keys[i])+":"+HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,values1[i]);
+								lab.htmlText=CharAttributeType.getCNName(keys[i])+":"+HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,AttValueConfig.getDisAttValue(keys[i],values1[i])+"");
 								_labList.push(lab);
 								_labContainer.addChild(lab);
 							}

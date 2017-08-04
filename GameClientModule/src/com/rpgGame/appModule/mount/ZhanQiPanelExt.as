@@ -4,12 +4,13 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.app.manager.mount.ZhanQiManager;
 	import com.rpgGame.app.manager.mount.ZhanQiShowData;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.ui.tab.ViewUI;
+	import com.rpgGame.app.ui.AttChangeView;
 	import com.rpgGame.appModule.shop.ItemGetAdvisePanelExt;
 	import com.rpgGame.appModule.systemset.TouchToState;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.coreData.cfg.StaticValue;
+	import com.rpgGame.coreData.enum.AttChangeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	
 	import away3d.events.Event;
@@ -24,7 +25,7 @@ package com.rpgGame.appModule.mount
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 	
-	public class ZhanQiPanelExt extends ViewUI
+	public class ZhanQiPanelExt extends AttChangeView
 	{
 		private var _skin:Zhanqi_Skin;
 		
@@ -38,6 +39,7 @@ package com.rpgGame.appModule.mount
 		
 		public function ZhanQiPanelExt()
 		{
+			attChangeTypes=[AttChangeEnum.WARFLAG];
 			_skin=new Zhanqi_Skin();
 			super(_skin);
 			initPanel();

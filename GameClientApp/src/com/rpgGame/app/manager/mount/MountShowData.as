@@ -137,7 +137,7 @@ package com.rpgGame.app.manager.mount
 				type = currentatt["q_type"+i];
 				if(type==0)
 					continue;
-				value = currentatt["q_value"+i];
+				value = AttValueConfig.getDisAttValue(type,currentatt["q_value"+i]);
 				_currentProp[type] = value;
 			}
 			_disProp = new Vector.<Number>(30,0);
@@ -165,7 +165,7 @@ package com.rpgGame.app.manager.mount
 						type = currentatt["q_type"+i];
 						if(type==0)
 							continue;
-						value = currentatt["q_value"+i];
+						value = AttValueConfig.getDisAttValue(type,currentatt["q_value"+i]);
 						_nextProp[type] = value;
 						_disProp[type] = value-_currentProp[type];
 					}
@@ -189,7 +189,7 @@ package com.rpgGame.app.manager.mount
 					type = currentatt["q_type"+i];
 					if(type==0)
 						continue;
-					value = currentatt["q_value"+i];
+					value = AttValueConfig.getDisAttValue(type,currentatt["q_value"+i]);
 					_addProp[type] = value;
 				}
 			}

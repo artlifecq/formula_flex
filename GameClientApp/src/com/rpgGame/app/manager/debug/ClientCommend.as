@@ -426,7 +426,7 @@ package   com.rpgGame.app.manager.debug
 				hash.add(12,40);
 				hash.add(13,40);
 				hash.add(16,40);
-				//EventManager.dispatchEvent(AttChangeEvent.CHANGEPROPVALUE,2,hash);
+				EventManager.dispatchEvent(MainPlayerEvent.MODULE_STAT_CHANGE,2,hash);
 			});
 			commandList.put( ".fp", function (...arg):void
 			{
