@@ -50,7 +50,7 @@ package com.rpgGame.app.ui.main.activityBar.item
 			}
 			
 			var minValue:int = Math.min(RedRewardManager.instance().redCount,count);
-//			_labSkin.lbnum.text = minValue.toString();
+			_labSkin.lbnum.text = minValue.toString();
 			_lableContent.visible = minValue>0;
 		}
 		

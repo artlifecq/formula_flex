@@ -6,7 +6,7 @@ package org.mokylin.skin.app.banghui
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import org.mokylin.skin.common.ItemBg;
-	import org.mokylin.skin.component.button.ButtonSkin_putong;
+	import org.mokylin.skin.component.button.ButtonSkin_putong3;
 
 	/**
 	 * @private
@@ -18,6 +18,8 @@ package org.mokylin.skin.app.banghui
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var bg:feathers.controls.SkinnableContainer;
+
 		public var btnCancel:feathers.controls.Button;
 
 		public var btnOk:feathers.controls.Button;
@@ -37,9 +39,9 @@ package org.mokylin.skin.app.banghui
 			super();
 			
 			this.currentState = "normal";
-			this.height = 36;
-			this.width = 549;
-			this.elementsContent = [__ItemShenqin_SkinnableContainer1_i(),lbRolenName_i(),lbZhanli_i(),lbLevel_i(),btnOk_i(),btnCancel_i()];
+			this.height = 33;
+			this.width = 547;
+			this.elementsContent = [bg_i(),lbRolenName_i(),lbZhanli_i(),lbLevel_i(),btnOk_i(),btnCancel_i()];
 			
 			states = {
 			};
@@ -50,13 +52,15 @@ package org.mokylin.skin.app.banghui
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __ItemShenqin_SkinnableContainer1_i():feathers.controls.SkinnableContainer
+		private function bg_i():feathers.controls.SkinnableContainer
 		{
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			temp.height = 36;
+			bg = temp;
+			temp.name = "bg";
+			temp.height = 33;
 			var skin:StateSkin = new org.mokylin.skin.common.ItemBg()
 			temp.skin = skin
-			temp.width = 549;
+			temp.width = 547;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -69,11 +73,11 @@ package org.mokylin.skin.app.banghui
 			temp.name = "btnCancel";
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.label = "拒绝";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong3;
 			temp.color = 0xCFC6AE;
-			temp.width = 79;
-			temp.x = 388;
-			temp.y = 0;
+			temp.width = 66;
+			temp.x = 402;
+			temp.y = 5;
 			return temp;
 		}
 
@@ -84,11 +88,11 @@ package org.mokylin.skin.app.banghui
 			temp.name = "btnOk";
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.label = "同意";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong3;
 			temp.color = 0xCFC6AE;
-			temp.width = 79;
-			temp.x = 465;
-			temp.y = 0;
+			temp.width = 66;
+			temp.x = 471;
+			temp.y = 5;
 			return temp;
 		}
 

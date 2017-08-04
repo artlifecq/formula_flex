@@ -1,5 +1,7 @@
 package com.rpgGame.appModule.hunyin
 {
+	import com.rpgGame.app.manager.Mgr;
+	import com.rpgGame.app.manager.hint.FloatingText;
 	import com.rpgGame.app.sender.HunYinSender;
 	import com.rpgGame.core.events.HunYinEvent;
 	import com.rpgGame.core.ui.SkinUI;
@@ -150,11 +152,21 @@ package com.rpgGame.appModule.hunyin
 		
 		protected function onbtnZhan1Handler():void
 		{
+			if (Mgr.hunyinMgr.marriageInfos.zoneSubNum==0) 
+			{
+				FloatingText.showUp("剩余挑战次数不足");
+				return;
+			}
 			HunYinSender.upCSChallengeZoneMessage(1,_zone_multy.q_zone_id);
 		}
 		
 		protected function onbtnZhan2Handler():void
 		{
+			if (Mgr.hunyinMgr.marriageInfos.zoneSubNum==0) 
+			{
+				FloatingText.showUp("剩余挑战次数不足");
+				return;
+			}
 			HunYinSender.upCSChallengeZoneMessage(2,_zone_multy.q_zone_id);
 		}
 	}

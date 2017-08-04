@@ -5,7 +5,8 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 	import feathers.controls.Label;
 	import feathers.controls.Radio;
 	import feathers.controls.StateSkin;
-	import org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonErji_bg;
+	import feathers.controls.UIAsset;
+	import org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonHechengErji;
 	import org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonSanjiao_right;
 
 	/**
@@ -24,6 +25,8 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 
 		public var rdo_btn:feathers.controls.Radio;
 
+		public var ui_tishi:feathers.controls.UIAsset;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -33,7 +36,7 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [rdo_btn_i(),labelDisplay_i(),btnFlag_i()];
+			this.elementsContent = [rdo_btn_i(),labelDisplay_i(),btnFlag_i(),ui_tishi_i()];
 			
 			states = {
 			};
@@ -50,8 +53,8 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			btnFlag = temp;
 			temp.name = "btnFlag";
 			temp.styleClass = org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonSanjiao_right;
-			temp.x = 37;
-			temp.y = 10;
+			temp.x = 201;
+			temp.y = 9;
 			return temp;
 		}
 
@@ -61,12 +64,12 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			labelDisplay = temp;
 			temp.name = "labelDisplay";
 			temp.htmlText = "中级鉴定图纸<font color='#bea757'>(10)</font>";
-			temp.textAlign = "center";
+			temp.textAlign = "left";
 			temp.color = 0xE1D4A9;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 238;
-			temp.x = 5;
-			temp.y = 8;
+			temp.width = 210;
+			temp.x = 25;
+			temp.y = 6;
 			return temp;
 		}
 
@@ -78,10 +81,21 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.labelOffsetY = -2;
 			temp.isSelected = false;
-			temp.styleClass = org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonErji_bg;
+			temp.styleClass = org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonHechengErji;
 			temp.color = 0xE1D4A9;
 			temp.x = 0;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function ui_tishi_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ui_tishi = temp;
+			temp.name = "ui_tishi";
+			temp.styleName = "ui/common/tubiao/tishi.png";
+			temp.x = 225;
+			temp.y = 5;
 			return temp;
 		}
 

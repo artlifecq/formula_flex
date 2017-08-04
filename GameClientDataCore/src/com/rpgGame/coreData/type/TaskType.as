@@ -33,6 +33,9 @@ package com.rpgGame.coreData.type
 		/**6副本*/
 		public static var SUB_QUIT_ZONE:int = 6;
 		
+		/**22广播*/
+		public static var SUB_SPEAK:int = 22;
+		
 		
 		/** 主线任务 */
 		public static const TASK_TYPE_MAIN_LINE : int = 1;

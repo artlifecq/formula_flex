@@ -171,6 +171,12 @@ package com.game.engine3D.display
 			super.dispose();
 		}
 
+		public function get isStarted():Boolean
+		{
+			return _isStarted;
+		}
+
+
 	}
 }
 

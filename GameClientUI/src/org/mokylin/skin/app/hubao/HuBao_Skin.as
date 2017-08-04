@@ -12,7 +12,7 @@ package org.mokylin.skin.app.hubao
 	import org.mokylin.skin.app.hubao.HuBaoItem_Skin;
 	import org.mokylin.skin.app.hubao.button.ButtonHusong;
 	import org.mokylin.skin.app.hubao.button.ButtonTisheng;
-	import org.mokylin.skin.common.yiji_panelbg2_Skin;
+	import org.mokylin.skin.common.TongYongPanelbg1;
 	import org.mokylin.skin.component.check.CheckBoxSkin_1;
 
 	/**
@@ -63,7 +63,7 @@ package org.mokylin.skin.app.hubao
 			
 			this.currentState = "normal";
 			this.height = 587;
-			this.width = 947;
+			this.width = 956;
 			this.elementsContent = [bg_i(),__HuBao_Skin_UIAsset1_i(),__HuBao_Skin_UIAsset2_i(),__HuBao_Skin_UIAsset3_i(),__HuBao_Skin_UIAsset4_i(),grp1_i(),grp2_i(),grp3_i(),grp4_i(),jiangli_1_i(),jiangli_2_i(),jiangli_3_i(),jiangli_4_i(),__HuBao_Skin_Label1_i(),__HuBao_Skin_Label2_i(),__HuBao_Skin_Label3_i(),lbCaiLiao_i(),lbCiShu_i(),__HuBao_Skin_Label4_i(),chk_ok_i(),btnTiSheng_i(),btnHuSong_i(),__HuBao_Skin_UIAsset5_i()];
 			
 			states = {
@@ -81,8 +81,8 @@ package org.mokylin.skin.app.hubao
 			temp.text = "每日双倍奖励时间：";
 			temp.color = 0xC2992B;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 32;
-			temp.y = 490;
+			temp.x = 36;
+			temp.y = 503;
 			return temp;
 		}
 
@@ -92,8 +92,8 @@ package org.mokylin.skin.app.hubao
 			temp.text = "15:30-16:00";
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 33;
-			temp.y = 508;
+			temp.x = 37;
+			temp.y = 521;
 			return temp;
 		}
 
@@ -103,8 +103,8 @@ package org.mokylin.skin.app.hubao
 			temp.text = "18:30-19:00";
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 33;
-			temp.y = 522;
+			temp.x = 37;
+			temp.y = 535;
 			return temp;
 		}
 
@@ -114,8 +114,8 @@ package org.mokylin.skin.app.hubao
 			temp.text = "自动购买";
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 341;
-			temp.y = 539;
+			temp.x = 345;
+			temp.y = 552;
 			return temp;
 		}
 
@@ -125,8 +125,8 @@ package org.mokylin.skin.app.hubao
 			temp.height = 500;
 			temp.styleName = "ui/common/background/neikuang_1.png";
 			temp.width = 922;
-			temp.x = 14;
-			temp.y = 69;
+			temp.x = 18;
+			temp.y = 82;
 			return temp;
 		}
 
@@ -134,10 +134,10 @@ package org.mokylin.skin.app.hubao
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 93;
-			temp.styleName = "ui/common/background/neikuang_1.png";
+			temp.styleName = "ui/common/background/neikuang_2.png";
 			temp.width = 913;
-			temp.x = 19;
-			temp.y = 471;
+			temp.x = 23;
+			temp.y = 484;
 			return temp;
 		}
 
@@ -145,8 +145,8 @@ package org.mokylin.skin.app.hubao
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/hubao/bg.jpg";
-			temp.x = 21;
-			temp.y = 74;
+			temp.x = 25;
+			temp.y = 87;
 			return temp;
 		}
 
@@ -154,8 +154,8 @@ package org.mokylin.skin.app.hubao
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/hubao/xinxibg.png";
-			temp.x = 24;
-			temp.y = 476;
+			temp.x = 28;
+			temp.y = 489;
 			return temp;
 		}
 
@@ -165,8 +165,8 @@ package org.mokylin.skin.app.hubao
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/app/hubao/jianghuhubao_title.png";
-			temp.x = 435;
-			temp.y = 13;
+			temp.x = 433;
+			temp.y = 17;
 			return temp;
 		}
 
@@ -176,9 +176,9 @@ package org.mokylin.skin.app.hubao
 			bg = temp;
 			temp.name = "bg";
 			temp.height = 587;
-			var skin:StateSkin = new org.mokylin.skin.common.yiji_panelbg2_Skin()
+			var skin:StateSkin = new org.mokylin.skin.common.TongYongPanelbg1()
 			temp.skin = skin
-			temp.width = 947;
+			temp.width = 956;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -190,8 +190,8 @@ package org.mokylin.skin.app.hubao
 			btnHuSong = temp;
 			temp.name = "btnHuSong";
 			temp.styleClass = org.mokylin.skin.app.hubao.button.ButtonHusong;
-			temp.x = 521;
-			temp.y = 484;
+			temp.x = 525;
+			temp.y = 497;
 			return temp;
 		}
 
@@ -201,8 +201,8 @@ package org.mokylin.skin.app.hubao
 			btnTiSheng = temp;
 			temp.name = "btnTiSheng";
 			temp.styleClass = org.mokylin.skin.app.hubao.button.ButtonTisheng;
-			temp.x = 320;
-			temp.y = 484;
+			temp.x = 324;
+			temp.y = 497;
 			return temp;
 		}
 
@@ -212,8 +212,8 @@ package org.mokylin.skin.app.hubao
 			chk_ok = temp;
 			temp.name = "chk_ok";
 			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
-			temp.x = 317;
-			temp.y = 536;
+			temp.x = 321;
+			temp.y = 549;
 			return temp;
 		}
 
@@ -224,8 +224,8 @@ package org.mokylin.skin.app.hubao
 			temp.name = "grp1";
 			temp.height = 386;
 			temp.width = 190;
-			temp.x = 51;
-			temp.y = 77;
+			temp.x = 55;
+			temp.y = 90;
 			return temp;
 		}
 
@@ -236,8 +236,8 @@ package org.mokylin.skin.app.hubao
 			temp.name = "grp2";
 			temp.height = 386;
 			temp.width = 190;
-			temp.x = 273;
-			temp.y = 77;
+			temp.x = 277;
+			temp.y = 90;
 			return temp;
 		}
 
@@ -248,8 +248,8 @@ package org.mokylin.skin.app.hubao
 			temp.name = "grp3";
 			temp.height = 386;
 			temp.width = 190;
-			temp.x = 491;
-			temp.y = 77;
+			temp.x = 495;
+			temp.y = 90;
 			return temp;
 		}
 
@@ -260,8 +260,8 @@ package org.mokylin.skin.app.hubao
 			temp.name = "grp4";
 			temp.height = 386;
 			temp.width = 190;
-			temp.x = 710;
-			temp.y = 77;
+			temp.x = 714;
+			temp.y = 90;
 			return temp;
 		}
 
@@ -274,8 +274,8 @@ package org.mokylin.skin.app.hubao
 			var skin:StateSkin = new org.mokylin.skin.app.hubao.HuBaoItem_Skin()
 			temp.skin = skin
 			temp.width = 139;
-			temp.x = 77;
-			temp.y = 398;
+			temp.x = 81;
+			temp.y = 411;
 			return temp;
 		}
 
@@ -288,8 +288,8 @@ package org.mokylin.skin.app.hubao
 			var skin:StateSkin = new org.mokylin.skin.app.hubao.HuBaoItem_Skin()
 			temp.skin = skin
 			temp.width = 139;
-			temp.x = 296;
-			temp.y = 398;
+			temp.x = 300;
+			temp.y = 411;
 			return temp;
 		}
 
@@ -302,8 +302,8 @@ package org.mokylin.skin.app.hubao
 			var skin:StateSkin = new org.mokylin.skin.app.hubao.HuBaoItem_Skin()
 			temp.skin = skin
 			temp.width = 139;
-			temp.x = 516;
-			temp.y = 398;
+			temp.x = 520;
+			temp.y = 411;
 			return temp;
 		}
 
@@ -316,8 +316,8 @@ package org.mokylin.skin.app.hubao
 			var skin:StateSkin = new org.mokylin.skin.app.hubao.HuBaoItem2_Skin()
 			temp.skin = skin
 			temp.width = 139;
-			temp.x = 735;
-			temp.y = 398;
+			temp.x = 739;
+			temp.y = 411;
 			return temp;
 		}
 
@@ -330,8 +330,8 @@ package org.mokylin.skin.app.hubao
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 134;
-			temp.x = 316;
-			temp.y = 517;
+			temp.x = 320;
+			temp.y = 530;
 			return temp;
 		}
 
@@ -344,8 +344,8 @@ package org.mokylin.skin.app.hubao
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 134;
-			temp.x = 521;
-			temp.y = 525;
+			temp.x = 525;
+			temp.y = 538;
 			return temp;
 		}
 

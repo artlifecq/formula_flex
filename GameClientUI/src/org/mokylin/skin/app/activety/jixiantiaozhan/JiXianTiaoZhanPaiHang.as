@@ -1,12 +1,11 @@
 package org.mokylin.skin.app.activety.jixiantiaozhan
 {
-	import feathers.controls.text.Fontter;
 	import feathers.controls.Group;
-	import feathers.controls.Label;
 	import feathers.controls.List;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import org.mokylin.skin.common.TongYongTanKuang_bg;
 	import org.mokylin.skin.component.list.ListSkin1;
 
 	/**
@@ -19,7 +18,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var bg:feathers.controls.UIAsset;
+		public var bg:feathers.controls.SkinnableContainer;
 
 		public var grpIcon:feathers.controls.Group;
 
@@ -33,8 +32,6 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 
 		public var listItem:feathers.controls.List;
 
-		public var title:feathers.controls.Label;
-
 		public var uiWRB:feathers.controls.UIAsset;
 
 
@@ -47,7 +44,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			
 			this.currentState = "normal";
 			this.height = 555;
-			this.elementsContent = [bg_i(),title_i(),listItem_i(),__JiXianTiaoZhanPaiHang_UIAsset1_i(),__JiXianTiaoZhanPaiHang_UIAsset2_i(),uiWRB_i(),grpIcon_i()];
+			this.width = 338;
+			this.elementsContent = [bg_i(),listItem_i(),__JiXianTiaoZhanPaiHang_UIAsset1_i(),__JiXianTiaoZhanPaiHang_UIAsset2_i(),uiWRB_i(),grpIcon_i(),__JiXianTiaoZhanPaiHang_UIAsset3_i()];
 			
 			states = {
 			};
@@ -76,13 +74,25 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			return temp;
 		}
 
-		private function bg_i():feathers.controls.UIAsset
+		private function __JiXianTiaoZhanPaiHang_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.touchable = false;
+			temp.touchGroup = true;
+			temp.styleName = "ui/app/activety/jixiantiaozhan/zphjl.png";
+			temp.x = 115;
+			temp.y = 7;
+			return temp;
+		}
+
+		private function bg_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
 			temp.height = 560;
-			temp.styleName = "ui/common/background/erji_kuang.png";
+			var skin:StateSkin = new org.mokylin.skin.common.TongYongTanKuang_bg()
+			temp.skin = skin
 			temp.width = 338;
 			temp.x = 0;
 			temp.y = 0;
@@ -154,26 +164,6 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			temp.width = 318;
 			temp.x = 12;
 			temp.y = 43;
-			return temp;
-		}
-
-		private function title_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			title = temp;
-			temp.name = "title";
-			temp.bold = true;
-			temp.touchable = false;
-			temp.touchGroup = true;
-			temp.letterSpacing = 2;
-			temp.fontSize = 16;
-			temp.text = "周排名奖励";
-			temp.textAlign = "center";
-			temp.color = 0xDDE2B1;
-			temp.nativeFilters = Fontter.filterObj[""];
-			temp.width = 240;
-			temp.x = 49;
-			temp.y = 11;
 			return temp;
 		}
 

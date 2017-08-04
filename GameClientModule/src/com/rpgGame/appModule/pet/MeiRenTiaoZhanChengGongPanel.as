@@ -5,20 +5,20 @@ package com.rpgGame.appModule.pet
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.display3D.InterAvatar3D;
 	import com.rpgGame.app.manager.Mgr;
-	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.DungeonSender;
-	import com.rpgGame.app.sender.HuBaoSender;
 	import com.rpgGame.app.sender.PetSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.appModule.pet.sub.PetZoneBall;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.PetCfg;
 	import com.rpgGame.coreData.clientConfig.Q_girl_pet;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.role.RoleData;
+	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.netData.pet.bean.PetInfo;
 	import com.rpgGame.netData.pet.message.ResPetZoneResultMessage;
@@ -46,6 +46,7 @@ package com.rpgGame.appModule.pet
 		private var _msg:ResPetZoneResultMessage;
 		private var _time:int=0;
 		private var _modContaner:Inter3DContainer;
+		private var _bgEff : InterObject3D;
 		private var _avatar : InterAvatar3D;
 		private var _avatarData : RoleData;
 		private var _q_girl_pet:Q_girl_pet;
@@ -63,10 +64,6 @@ package com.rpgGame.appModule.pet
 			_items=new Vector.<IconCDFace>();
 			_modContaner=new Inter3DContainer();
 			this._skin.container.addChildAt(_modContaner,1);
-			_avatar=new InterAvatar3D();
-			_avatar.x = 270;
-			_avatar.y =360;
-			_modContaner.addChild3D(_avatar);
 			for (var j:int = 0; j < 9; j++) 
 			{
 				_zoneBalls.push(new PetZoneBall(_skin["icon"+(j+1)]));
@@ -81,11 +78,18 @@ package com.rpgGame.appModule.pet
 				_items.push(ico);
 				ico.bindBg(uiasset);
 			}
+			
+			_bgEff=_modContaner.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_MEIREN_JIESUAN),255,250,0);
+			_bgEff.stop();
 		}
 		
 		public override function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show();		
+			if(_bgEff)
+			{
+				_bgEff.start();
+			}
 			_msg=data as ResPetZoneResultMessage;
 			_info=Mgr.petMgr.getPet(_msg.petId);
 			_q_girl_pet=PetCfg.getPet(_msg.petId);
@@ -129,6 +133,13 @@ package com.rpgGame.appModule.pet
 		
 		private function initModEff():void
 		{			
+			if(_avatar==null)
+			{
+				_avatar=new InterAvatar3D();
+				_avatar.x = 270;
+				_avatar.y =360;
+				_modContaner.addChild3D(_avatar);
+			}
 			_avatarData=new RoleData(0);
 			this._avatarData.avatarInfo.setBodyResID(_q_girl_pet.q_panel_show_id,null);
 			this._avatar.setRoleData(this._avatarData);
@@ -231,11 +242,16 @@ package com.rpgGame.appModule.pet
 		{
 			TimerServer.remove(onTimer);
 			TimerServer.remove(onExtTimer);
-			if(_avatar!=null)
+			if(_bgEff)
 			{
-				_modContaner.removeChild3D(_avatar);
-				_avatar.dispose();
+				_bgEff.stop();
 			}
+			//			if(_avatar!=null)
+			//			{
+			//				_modContaner.removeChild3D(_avatar);
+			//				_avatar.dispose();
+			//				_avatar=null;
+			//			}
 			for (var i:int = 0; i < _zoneBalls.length; i++) 
 			{
 				_zoneBalls[i].setEffect(false);

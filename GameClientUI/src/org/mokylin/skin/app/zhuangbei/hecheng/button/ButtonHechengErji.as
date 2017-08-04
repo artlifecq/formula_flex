@@ -1,4 +1,4 @@
-package org.mokylin.skin.app.zhuangbei.xilian.button
+package org.mokylin.skin.app.zhuangbei.hecheng.button
 {
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
@@ -9,7 +9,7 @@ package org.mokylin.skin.app.zhuangbei.xilian.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class ButtonXilian extends feathers.controls.StateSkin
+	public class ButtonHechengErji extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -22,18 +22,18 @@ package org.mokylin.skin.app.zhuangbei.xilian.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function ButtonXilian()
+		public function ButtonHechengErji()
 		{
 			super();
 			
-			this.currentState = "down";
+			this.currentState = "upAndSelected";
 			this.elementsContent = [];
 			
 			states = {
 				init:[
 						{target:"labelDisplay",
 							name:"textAlign",
-							value:"center"
+							value:"left"
 						}
 						,
 						{target:"labelDisplay",
@@ -47,7 +47,12 @@ package org.mokylin.skin.app.zhuangbei.xilian.button
 						}
 					]
 			};
-			skinNames={"down":"ui/app/zhuangbei/xilian/button/xilian/down.png", "hover":"ui/app/zhuangbei/xilian/button/xilian/over.png", "up":"ui/app/zhuangbei/xilian/button/xilian/up.png"};
+			skinNames={"down":"ui/app/zhuangbei/hecheng/button/hechengErji/down.png",
+			"downAndSelected":"ui/app/zhuangbei/hecheng/button/hechengErji/over.png",
+			"hover":"ui/app/zhuangbei/hecheng/button/hechengErji/over.png",
+			"hoverAndSelected":"ui/app/zhuangbei/hecheng/button/hechengErji/over.png",
+			"up":"ui/app/zhuangbei/hecheng/button/hechengErji/up.png",
+			"upAndSelected":"ui/app/zhuangbei/hecheng/button/hechengErji/over.png"};
 		}
 
 
@@ -68,13 +73,13 @@ package org.mokylin.skin.app.zhuangbei.xilian.button
 			labelDisplay = temp;
 			temp.name = "labelDisplay";
 			temp.bottom = 0;
-			temp.left = 0;
-			temp.right = 0;
+			temp.left = 20;
 			temp.text = "";
-			temp.textAlign = "center";
+			temp.textAlign = "left";
 			temp.color = 0xFFFFFF;
 			temp.top = 0;
 			temp.verticalAlign = "middle";
+			temp.width = 184;
 			return temp;
 		}
 

@@ -3,10 +3,13 @@ package com.rpgGame.app.manager.task
 	import com.adobe.serialization.json.JSON;
 	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
+	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_mission_base;
 	import com.rpgGame.coreData.clientConfig.Q_mission_section;
+	import com.rpgGame.coreData.clientConfig.Q_scene_monster_area;
 	import com.rpgGame.coreData.type.TaskType;
 	import com.rpgGame.netData.task.bean.TaskInfo;
 	import com.rpgGame.netData.task.bean.TaskSubRateInfo;
@@ -25,7 +28,9 @@ package com.rpgGame.app.manager.task
 		public static var flyMissionType:int;
 		
 		public static var treasuerCheck :Boolean=false;
+		public static var guildCheck :Boolean=false;
 		
+
 		/**最后完成主线任务id*/
 		private static var _taskModelId: int;
 		/**当天已经完成日常任务的次数*/
@@ -179,10 +184,87 @@ package com.rpgGame.app.manager.task
 			{
 				return TaskType.MAINTYPE_TREASUREBOX;
 			}
+			else if(getTaskInfoByType(TaskType.MAINTYPE_GUILDDAILYTASK)!=null&&taskid.ToGID()==getTaskInfoByType(TaskType.MAINTYPE_GUILDDAILYTASK).taskId.ToGID())
+			{
+				return TaskType.MAINTYPE_GUILDDAILYTASK;
+			}
+			
 			return 0;
 			
 		}
-		
+		/**
+		 * 根据类型获取获寻路点
+		 * 返回数组，0：地图id,1:x,2:y
+		 * */
+		public static function getTaskPathingByType(type:int,num:int):Array
+		{
+			var post:Array=new Array();
+			var pashArr:Array;
+			var task:TaskInfo=TaskMissionManager.getTaskInfoByType(type);
+			var taskData:Q_mission_base=TaskMissionManager.getTaskDataByType(type);
+			if(task!=null&&taskData!=null)
+			{
+				var isFlish:Boolean=getTaskIsFinishByType(type);
+				if(isFlish)
+				{
+					if(taskData.q_finish_npc!=0)
+					{
+						var npcData : Q_scene_monster_area = MonsterDataManager.getAreaByAreaID(taskData.q_finish_npc);
+						if (npcData)
+						{
+							post.push(npcData.q_mapid);
+							post.push(npcData.q_center_x);
+							post.push(npcData.q_center_y);
+							return post;
+						}
+					}
+					else
+					{
+						return post;
+					}
+				}
+				else
+				{
+					if(taskData.q_pathing!="")
+					{
+						var path:String=taskData.q_pathing;
+						pashArr=path.split(";");
+						if(pashArr.length>num)
+						{
+							path=pashArr[num];
+							if(path!=null&&path!="")
+							{
+								pashArr=path.split(",");
+								if(pashArr.length==3)
+								{
+									post.push(int(pashArr[0]));
+									post.push(int(pashArr[1]));
+									post.push(int(pashArr[2]));
+									return post;
+								}
+							}
+						}
+					}
+					else if(task.taskSubRateInfolist.length>num)//taskData.q_finish_information_str!=""
+					{
+						//pashArr=JSONUtil.decode(mainTaskData.q_finish_information_str);
+						var rateInfo:TaskSubRateInfo=task.taskSubRateInfolist[num];
+						var monsterData : Q_scene_monster_area = MonsterDataManager.getMonsterByModelId(rateInfo.modelId,SceneSwitchManager.currentMapId);
+						if (monsterData)
+						{
+							post.push(monsterData.q_mapid);
+							post.push(monsterData.q_center_x);
+							post.push(monsterData.q_center_y);
+							return post;
+						}
+					}
+				}
+			}
+			
+			
+			
+			return null;
+		}
 		/**
 		 * 根据类型获取获寻路点
 		 * 返回数组，0：地图id,1:x,2:y
@@ -406,11 +488,32 @@ package com.rpgGame.app.manager.task
 			}
 			return 0;
 		}
+		/**返回任务回复npc模型id*/
+		public static function getTaskNpcModeId(type:int):int
+		{
+			var taskData:Q_mission_base=TaskMissionManager.getTaskDataByType(type);
+			if(taskData!=null)
+			{
+				return MonsterDataManager.getMonsterModeidByAreaid(taskData.q_finish_npc);
+			}
+			return 0;
+		}
 		
 		/**是否是主线任务回复npc*/
 		public static function isMainTaskNpc(mid:int):Boolean
 		{
 			if(mainTaskData!=null&&mainTaskData.q_finish_npc>0&&mainTaskData.q_finish_npc==mid)
+			{
+				return true
+			}
+			return false;
+		}
+		/**是否是任务回复npc*/
+		public static function isTaskNpc(type:int,mid:int):Boolean
+		{
+			var taskData:Q_mission_base=TaskMissionManager.getTaskDataByType(type);
+			
+			if(taskData!=null&&taskData.q_finish_npc>0&&taskData.q_finish_npc==mid)
 			{
 				return true
 			}

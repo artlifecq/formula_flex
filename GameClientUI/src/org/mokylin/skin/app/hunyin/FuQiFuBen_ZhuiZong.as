@@ -8,9 +8,8 @@ package org.mokylin.skin.app.hunyin
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.app.hunyin.FuQiFuBen_Item;
-	import org.mokylin.skin.component.button.ButtonSkin_putong;
-	import org.mokylin.skin.component.button.ButtonSkin_shouhui;
-	import org.mokylin.skin.component.button.ButtonSkin_zhankai;
+	import org.mokylin.skin.component.button.ButtonSkin_hide;
+	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 
 	/**
 	 * @private
@@ -32,25 +31,21 @@ package org.mokylin.skin.app.hunyin
 
 		public var killbut_0:feathers.controls.SkinnableContainer;
 
+		public var lbHeadName:feathers.controls.Label;
+
 		public var lbMiaoshu:feathers.controls.Label;
 
 		public var sec_ico1_0:feathers.controls.UIAsset;
 
-		public var sec_ico1_1:feathers.controls.UIAsset;
-
 		public var sec_ico2_0:feathers.controls.UIAsset;
-
-		public var sec_ico2_1:feathers.controls.UIAsset;
-
-		public var sec_ico2_2:feathers.controls.UIAsset;
 
 		public var sec_info:feathers.controls.Label;
 
 		public var sec_navi1:feathers.controls.Label;
 
-		public var sec_navi2:feathers.controls.UIAsset;
+		public var sec_navi2:feathers.controls.Label;
 
-		public var sec_navi3:feathers.controls.UIAsset;
+		public var sec_navi3:feathers.controls.Label;
 
 		public var sec_subbut1:feathers.controls.Button;
 
@@ -62,8 +57,6 @@ package org.mokylin.skin.app.hunyin
 
 		public var ui_bg:feathers.controls.UIAsset;
 
-		public var ui_head:feathers.controls.UIAsset;
-
 
 		//==========================================================================
 		//                                定义构造函数
@@ -74,7 +67,7 @@ package org.mokylin.skin.app.hunyin
 			
 			this.currentState = "normal";
 			this.height = 333;
-			this.width = 253;
+			this.width = 248;
 			this.elementsContent = [task_box_i(),btn_open_i(),btn_close_i()];
 			
 			states = {
@@ -89,7 +82,7 @@ package org.mokylin.skin.app.hunyin
 		private function __FuQiFuBen_ZhuiZong_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/mainui/renwu/hengtiao.png";
+			temp.styleName = "ui/mainui/renwu/renwuzhuizongbg.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -100,9 +93,9 @@ package org.mokylin.skin.app.hunyin
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_close = temp;
 			temp.name = "btn_close";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_shouhui;
-			temp.x = 234;
-			temp.y = 0;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_hide;
+			temp.x = 221;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -111,9 +104,10 @@ package org.mokylin.skin.app.hunyin
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_open = temp;
 			temp.name = "btn_open";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_zhankai;
-			temp.x = 234;
-			temp.y = 0;
+			temp.scaleX = -1;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_hide;
+			temp.x = 243;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -126,7 +120,7 @@ package org.mokylin.skin.app.hunyin
 			temp.styleName = "ui/mainui/fubenzhuizong/zs.png";
 			temp.width = 45;
 			temp.x = 40;
-			temp.y = 12;
+			temp.y = 15;
 			return temp;
 		}
 
@@ -140,7 +134,7 @@ package org.mokylin.skin.app.hunyin
 			temp.styleName = "ui/mainui/fubenzhuizong/zs.png";
 			temp.width = 45;
 			temp.x = 213;
-			temp.y = 12;
+			temp.y = 15;
 			return temp;
 		}
 
@@ -153,8 +147,24 @@ package org.mokylin.skin.app.hunyin
 			var skin:StateSkin = new org.mokylin.skin.app.hunyin.FuQiFuBen_Item()
 			temp.skin = skin
 			temp.width = 169;
-			temp.x = 50;
-			temp.y = 79;
+			temp.x = 27;
+			temp.y = 85;
+			return temp;
+		}
+
+		private function lbHeadName_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbHeadName = temp;
+			temp.name = "lbHeadName";
+			temp.fontSize = 16;
+			temp.text = "夫妻副本";
+			temp.textAlign = "center";
+			temp.color = 0xFFF2B7;
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlue"];
+			temp.width = 205;
+			temp.x = 25;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -164,11 +174,11 @@ package org.mokylin.skin.app.hunyin
 			lbMiaoshu = temp;
 			temp.name = "lbMiaoshu";
 			temp.text = "此处为当前阶段的剧情描述文字，";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 215;
-			temp.x = 21;
-			temp.y = 58;
+			temp.x = 27;
+			temp.y = 64;
 			return temp;
 		}
 
@@ -177,20 +187,9 @@ package org.mokylin.skin.app.hunyin
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			sec_ico1_0 = temp;
 			temp.name = "sec_ico1_0";
-			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 21;
-			temp.y = 127;
-			return temp;
-		}
-
-		private function sec_ico1_1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			sec_ico1_1 = temp;
-			temp.name = "sec_ico1_1";
-			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 73;
-			temp.y = 127;
+			temp.styleName = "ui/common/grid/normal/48.png";
+			temp.x = 47;
+			temp.y = 130;
 			return temp;
 		}
 
@@ -199,31 +198,9 @@ package org.mokylin.skin.app.hunyin
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			sec_ico2_0 = temp;
 			temp.name = "sec_ico2_0";
-			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 21;
-			temp.y = 203;
-			return temp;
-		}
-
-		private function sec_ico2_1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			sec_ico2_1 = temp;
-			temp.name = "sec_ico2_1";
-			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 73;
-			temp.y = 203;
-			return temp;
-		}
-
-		private function sec_ico2_2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			sec_ico2_2 = temp;
-			temp.name = "sec_ico2_2";
-			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 125;
-			temp.y = 203;
+			temp.styleName = "ui/common/grid/normal/48.png";
+			temp.x = 47;
+			temp.y = 209;
 			return temp;
 		}
 
@@ -239,8 +216,8 @@ package org.mokylin.skin.app.hunyin
 			temp.color = 0xFF0D0D;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 209;
-			temp.x = 23;
-			temp.y = 259;
+			temp.x = 21;
+			temp.y = 268;
 			return temp;
 		}
 
@@ -249,33 +226,37 @@ package org.mokylin.skin.app.hunyin
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			sec_navi1 = temp;
 			temp.name = "sec_navi1";
-			temp.htmlText = "[阶段1]";
-			temp.color = 0xE8C958;
+			temp.text = "【阶段1】";
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 0;
-			temp.y = 33;
+			temp.x = 10;
+			temp.y = 40;
 			return temp;
 		}
 
-		private function sec_navi2_i():feathers.controls.UIAsset
+		private function sec_navi2_i():feathers.controls.Label
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			var temp:feathers.controls.Label = new feathers.controls.Label();
 			sec_navi2 = temp;
 			temp.name = "sec_navi2";
-			temp.styleName = "ui/mainui/fubenzhuizong/fuben/tgjl.png";
-			temp.x = 3;
-			temp.y = 105;
+			temp.text = "【通关奖励】";
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 10;
+			temp.y = 110;
 			return temp;
 		}
 
-		private function sec_navi3_i():feathers.controls.UIAsset
+		private function sec_navi3_i():feathers.controls.Label
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			var temp:feathers.controls.Label = new feathers.controls.Label();
 			sec_navi3 = temp;
 			temp.name = "sec_navi3";
-			temp.styleName = "ui/app/hunyin/fuqitongguanjiangli.png";
-			temp.x = 3;
-			temp.y = 181;
+			temp.text = "【夫妻共同通关奖励】";
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 10;
+			temp.y = 189;
 			return temp;
 		}
 
@@ -288,11 +269,11 @@ package org.mokylin.skin.app.hunyin
 			temp.height = 36;
 			temp.label = "邀请伴侣";
 			temp.fontSize = 16;
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xEAEABC;
 			temp.width = 88;
 			temp.x = 27;
-			temp.y = 284;
+			temp.y = 291;
 			return temp;
 		}
 
@@ -305,11 +286,11 @@ package org.mokylin.skin.app.hunyin
 			temp.height = 36;
 			temp.label = "退出副本";
 			temp.fontSize = 16;
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xEAEABC;
 			temp.width = 88;
-			temp.x = 141;
-			temp.y = 284;
+			temp.x = 137;
+			temp.y = 291;
 			return temp;
 		}
 
@@ -318,10 +299,10 @@ package org.mokylin.skin.app.hunyin
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			task_box = temp;
 			temp.name = "task_box";
-			temp.width = 253;
+			temp.width = 248;
 			temp.x = 0;
 			temp.y = 0;
-			temp.elementsContent = [ui_bg_i(),__FuQiFuBen_ZhuiZong_UIAsset1_i(),ui_head_i(),head_left_i(),head_right_i(),uiXiangxi_i(),sec_navi1_i(),killbut_0_i(),sec_ico1_0_i(),sec_ico1_1_i(),sec_ico2_0_i(),sec_ico2_1_i(),sec_ico2_2_i(),sec_subbut1_i(),sec_subbut2_i(),sec_info_i(),sec_navi2_i(),sec_navi3_i(),lbMiaoshu_i()];
+			temp.elementsContent = [ui_bg_i(),__FuQiFuBen_ZhuiZong_UIAsset1_i(),lbHeadName_i(),head_left_i(),head_right_i(),uiXiangxi_i(),sec_navi1_i(),killbut_0_i(),sec_ico1_0_i(),sec_ico2_0_i(),sec_subbut1_i(),sec_subbut2_i(),sec_info_i(),sec_navi2_i(),sec_navi3_i(),lbMiaoshu_i()];
 			return temp;
 		}
 
@@ -331,8 +312,8 @@ package org.mokylin.skin.app.hunyin
 			uiXiangxi = temp;
 			temp.name = "uiXiangxi";
 			temp.styleName = "ui/mainui/fubenzhuizong/fuben/wenhao.png";
-			temp.x = 7;
-			temp.y = 6;
+			temp.x = 10;
+			temp.y = 9;
 			return temp;
 		}
 
@@ -343,20 +324,9 @@ package org.mokylin.skin.app.hunyin
 			temp.name = "ui_bg";
 			temp.height = 333;
 			temp.styleName = "ui/mainui/renwu/bg.png";
-			temp.width = 253;
+			temp.width = 248;
 			temp.x = 0;
 			temp.y = 0;
-			return temp;
-		}
-
-		private function ui_head_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ui_head = temp;
-			temp.name = "ui_head";
-			temp.styleName = "ui/app/hunyin/fuqifuben2.png";
-			temp.x = 91;
-			temp.y = 5;
 			return temp;
 		}
 

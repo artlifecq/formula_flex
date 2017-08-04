@@ -134,29 +134,29 @@ package com.rpgGame.appModule.equip
 		{
 			_leftSkin=_skin.left.skin as Zhuangbei_left;
 			
-			(_leftSkin.title1.skin as TitileHead).labelDisplay.text=LanguageConfig.getText(LangUI.UI_TEXT1);
-			(_leftSkin.title2.skin as TitileHead).labelDisplay.text=LanguageConfig.getText(LangUI.UI_TEXT2);
+			(_leftSkin.title1.skin as TitileHead).uiLabel.styleName="ui/app/zhuangbei/daiqianghua.png";
+			(_leftSkin.title2.skin as TitileHead).uiLabel.styleName="ui/app/zhuangbei/kexiaohao.png";
 			
-			_progressBar=new AwdProgressBar(_skin.progressBar,"ui_zuomotiao");
-			_skin.grp_pro.addChild(_progressBar);
+//			_progressBar=new AwdProgressBar(_skin.progressBar,"ui_zuomotiao");
+//			_skin.grp_pro.addChild(_progressBar);
 			_skin.grp_pro.addChild(_skin.lb_pro);
 			
 			_goodsContainerTarget=new GoodsContainerPanel(_leftSkin.list1,ItemContainerID.INTENSIFY_LIST,createItemRender);
 			_goodsContainerUse=new GoodsContainerPanel(_leftSkin.list2,ItemContainerID.INTENSIFY_USE,createItemRender);
-			_goodsContainerUse1=new GoodsContainerPanel(_skin.use_list,ItemContainerID.INTENSIFY_USE1,createItemRender1);
+//			_goodsContainerUse1=new GoodsContainerPanel(_skin.use_list,ItemContainerID.INTENSIFY_USE1,createItemRender1);
 			
 			_targetEquip=new DragDropItem(IcoSizeEnum.ICON_64,0);
 //			_targetEquip.setBg(GridBGType.GRID_SIZE_64);
 //			_intensifyItem.setQualityImageIconPoint(8,8);
-			_targetEquip.x=621;
-			_targetEquip.y=150;
+			_targetEquip.x=617;
+			_targetEquip.y=209;
 			_targetEquip.onTouchEndCallBack=onCancelIntensify;
 			_targetEquip.dragAble = true;
 			_targetEquip.checkDrag=checkDrag;
 			_targetEquip.bindBg(null);
 			_skin.container.addChild(_targetEquip);
 			
-			_goodsContainerUse1.setGridsCount(6,false);
+//			_goodsContainerUse1.setGridsCount(6,false);
 			selectedUse=new Vector.<ClientItemInfo>();
 			
 			lvDatas=new Array();
@@ -297,7 +297,7 @@ package com.rpgGame.appModule.equip
 				return;
 			}
 			deleteItems(selectedUse,itemInfo);
-			_goodsContainerUse1.refleshGridsByDatas(selectedUse);
+//			_goodsContainerUse1.refleshGridsByDatas(selectedUse);
 			var targetGrid:DragDropItem;
 			_goodsContainerUse.setGrayForData(itemInfo,false);
 			if(isStren(itemInfo as EquipInfo)){
@@ -354,7 +354,7 @@ package com.rpgGame.appModule.equip
 			}
 			
 			selectedUse.push(itemInfo);
-			_goodsContainerUse1.refleshGridsByDatas(selectedUse);
+//			_goodsContainerUse1.refleshGridsByDatas(selectedUse);
 			addExp+=itemInfo.qItem.q_strengthen_num;
 			updateView();
 		}
@@ -404,7 +404,7 @@ package com.rpgGame.appModule.equip
 			if(tweenEquip){
 				tweenEquip.kill();
 			}
-			tweenEquip=TweenMax.to(_targetEquip,1,{x:621,y:150,ease:Expo.easeOut});
+			tweenEquip=TweenMax.to(_targetEquip,1,{x:617,y:209,ease:Expo.easeOut});
 			
 			if(isUse(targetEquipInfo)){
 				deleteItems(useEquips,targetEquipInfo);//在消耗列表移除掉
@@ -465,8 +465,11 @@ package com.rpgGame.appModule.equip
 				}else{
 					updateAttShow(currCfg);
 				}
-				_progressBar.value=currentExp;
-				_progressBar.maximum=allExp;
+//				_progressBar.value=currentExp;
+//				_progressBar.maximum=allExp;
+				_skin.progressBar.maximum=allExp;
+				_skin.progressBar.value=currentExp;
+				
 				_skin.lb_pro.text=currentExp+"/"+allExp;
 				useMon=addExp*perMon;
 				userMon=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
@@ -485,7 +488,8 @@ package com.rpgGame.appModule.equip
 					labelUp.visible=false;
 				}
 				_skin.lb_pro.text="";
-				_progressBar.value=0;
+//				_progressBar.value=0;
+				_skin.progressBar.value=0;
 				_skin.lb_current.text=_skin.lb_up.text="";
 				
 				if(_skin.cmb_dengjie.alpha==1&&!tween){
@@ -512,7 +516,7 @@ package com.rpgGame.appModule.equip
 			var upExp:int;
 			var nextCfg:Q_equip_strength;
 			canUpNum=0;
-			while(currentLv<=maxLv){
+			while(currentLv<maxLv){
 				currentLv++;
 				nextCfg=EquipStrengthCfg.getStrengthCfg(targetEquipInfo.qItem.q_kind,targetEquipInfo.qItem.q_job,currentLv);//下一级的配置
 				upExp=nextCfg.q_exp;//升级所需强化值
@@ -570,7 +574,7 @@ package com.rpgGame.appModule.equip
 				var labelUp:SkinnableContainer=_skin["up"+i];
 				var labelUpSkin:Shuxing2_Skin=_skin["up"+i].skin as Shuxing2_Skin;
 				if(i<values1.length){
-					labelUpSkin.lb_name.text=CharAttributeType.getCNName(types[i])+":";
+//					labelUpSkin.lb_name.text=CharAttributeType.getCNName(types[i])+":";
 					labelUpSkin.arrow_up.visible=labelUpSkin.lb_up.visible=true;
 					labelUp.visible=true;
 					if(values2){
@@ -581,7 +585,7 @@ package com.rpgGame.appModule.equip
 						labelUpSkin.arrow_up.visible=labelUpSkin.lb_up.visible=false;
 					}
 					
-					labelUpSkin.lb_num.x=labelUpSkin.lb_name.x+labelUpSkin.lb_name.textWidth;
+//					labelUpSkin.lb_num.x=labelUpSkin.lb_name.x+labelUpSkin.lb_name.textWidth;
 					labelUpSkin.arrow_up.x=labelUpSkin.lb_num.x+labelUpSkin.lb_num.textWidth+4;
 					labelUpSkin.lb_up.x=labelUpSkin.arrow_up.x+labelUpSkin.arrow_up.width+2;
 				}else{
@@ -671,6 +675,7 @@ package com.rpgGame.appModule.equip
 		
 		private function cancelAllUse():void
 		{
+			return;
 			var datas:Array=_goodsContainerUse1.dataProvider.data as Array;
 			while(datas[0].data){
 				var item:ClientItemInfo=datas[0].data as ClientItemInfo;
@@ -856,7 +861,7 @@ package com.rpgGame.appModule.equip
 			_goodsContainerUse.setGridsCount(num,false);
 			_goodsContainerUse.refleshGridsByDatas(useEquips);
 			selectedUse.length=0;
-			_goodsContainerUse1.refleshGridsByDatas(selectedUse);
+//			_goodsContainerUse1.refleshGridsByDatas(selectedUse);
 			
 			updateAll();
 		}

@@ -1,7 +1,5 @@
 package org.mokylin.skin.app.zhuangbei.qianghua
 {
-	import feathers.controls.text.Fontter;
-	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 
@@ -12,7 +10,7 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 	 */
 	public class TitileHead extends feathers.controls.StateSkin
 	{
-		public var labelDisplay:feathers.controls.Label;
+		public var uiLabel:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -23,9 +21,9 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			super();
 			
 			this.currentState = "normal";
-			this.height = 23;
-			this.width = 336;
-			this.elementsContent = [__TitileHead_UIAsset1_i(),labelDisplay_i()];
+			this.height = 27;
+			this.width = 333;
+			this.elementsContent = [__TitileHead_UIAsset1_i(),uiLabel_i()];
 			
 			states = {
 			};
@@ -39,23 +37,20 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 		private function __TitileHead_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.left = 0;
-			temp.right = 0;
-			temp.styleName = "ui/common/titilebg/head_bg.png";
+			temp.styleName = "ui/common/titilebg/headbg1.png";
+			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
 
-		private function labelDisplay_i():feathers.controls.Label
+		private function uiLabel_i():feathers.controls.UIAsset
 		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			labelDisplay = temp;
-			temp.name = "labelDisplay";
-			temp.text = "待强化装备";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 27;
-			temp.y = 3;
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiLabel = temp;
+			temp.name = "uiLabel";
+			temp.styleName = "ui/app/zhuangbei/daiqianghua.png";
+			temp.x = 30;
+			temp.y = 4;
 			return temp;
 		}
 
