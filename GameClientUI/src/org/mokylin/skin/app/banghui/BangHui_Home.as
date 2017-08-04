@@ -50,7 +50,7 @@ package org.mokylin.skin.app.banghui
 			super();
 			
 			this.currentState = "normal";
-			this.height = 600;
+			this.height = 601;
 			this.width = 956;
 			this.elementsContent = [__BangHui_Home_UIAsset2_i(),chkGuolv_i(),__BangHui_Home_Label1_i(),lbList_i(),__BangHui_Home_UIAsset3_i(),__BangHui_Home_Group1_i(),ListItem_i(),btnJoin_i(),grpFlip_i()];
 			
@@ -80,7 +80,7 @@ package org.mokylin.skin.app.banghui
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 295;
-			temp.y = 90;
+			temp.y = 87;
 			temp.elementsContent = [__BangHui_Home_UIAsset4_i(),__BangHui_Home_UIAsset5_i(),__BangHui_Home_UIAsset6_i(),__BangHui_Home_UIAsset7_i(),__BangHui_Home_UIAsset8_i(),__BangHui_Home_UIAsset9_i(),__BangHui_Home_UIAsset10_i(),__BangHui_Home_UIAsset11_i()];
 			return temp;
 		}
@@ -88,11 +88,11 @@ package org.mokylin.skin.app.banghui
 		private function __BangHui_Home_Label1_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "过滤满员帮会";
-			temp.color = 0xCFC6AE;
+			temp.text = "过滤满员帮派";
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 343;
-			temp.y = 550;
+			temp.y = 547;
 			return temp;
 		}
 
@@ -128,7 +128,7 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/banghui/dibg.png";
 			temp.x = 293;
-			temp.y = 527;
+			temp.y = 525;
 			return temp;
 		}
 
@@ -139,14 +139,14 @@ package org.mokylin.skin.app.banghui
 			temp.styleName = "ui/app/banghui/kuang1.png";
 			temp.width = 645;
 			temp.x = 290;
-			temp.y = 85;
+			temp.y = 82;
 			return temp;
 		}
 
 		private function __BangHui_Home_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/banghui/titlebg2.png";
+			temp.styleName = "ui/common/titilebg/headbg1.png";
 			temp.width = 636;
 			temp.x = 0;
 			temp.y = 0;
@@ -203,13 +203,14 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnJoin = temp;
 			temp.name = "btnJoin";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "快速加入";
+			temp.fontSize = 14;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.color = 0xCFC6AE;
-			temp.width = 112;
-			temp.x = 802;
-			temp.y = 545;
+			temp.color = 0xEAEABC;
+			temp.width = 88;
+			temp.x = 813;
+			temp.y = 539;
 			return temp;
 		}
 
@@ -243,7 +244,7 @@ package org.mokylin.skin.app.banghui
 			temp.name = "chkGuolv";
 			temp.styleClass = org.mokylin.skin.app.banghui.check.CheckBoxSkin_2;
 			temp.x = 312;
-			temp.y = 548;
+			temp.y = 545;
 			return temp;
 		}
 
@@ -264,11 +265,11 @@ package org.mokylin.skin.app.banghui
 			lbList = temp;
 			temp.name = "lbList";
 			temp.text = "邀请列表";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
 			temp.x = 725;
-			temp.y = 550;
+			temp.y = 547;
 			return temp;
 		}
 
@@ -280,7 +281,7 @@ package org.mokylin.skin.app.banghui
 			temp.height = 19;
 			temp.text = "1/99";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 50;
 			temp.x = 11;

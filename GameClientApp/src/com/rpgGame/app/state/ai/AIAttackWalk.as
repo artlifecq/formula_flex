@@ -45,7 +45,7 @@ package com.rpgGame.app.state.ai
 		private function onArrive(ref:*=null) : void
 		{
 			//walkrun=false;
-			transition(AIStateType.AI_NONE);
+			transition(AIStateType.ATTACK_TARGET);
 		}
 		override public function leavePass(nextState : IState, force : Boolean = false) : Boolean
 		{
@@ -67,7 +67,7 @@ package com.rpgGame.app.state.ai
 			{
 				return true;
 			}
-			
+			return false;
 			if(!isWalk())
 			{
 				if(!force)

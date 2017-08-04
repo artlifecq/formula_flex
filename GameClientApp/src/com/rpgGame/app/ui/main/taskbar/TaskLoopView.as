@@ -331,7 +331,7 @@ package com.rpgGame.app.ui.main.taskbar
 				}
 				else
 				{
-					TaskUtil.setGotargetInfo(taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killBut1List);
+					TaskUtil.setGotargetInfo(taskData.q_mission_mainType,taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killBut1List);
 				}
 				
 				TipTargetManager.show( _skin.sec_navi1, TargetTipsMaker.makeTips( TipType.TASK_LEAD_TIP,{name:taskData.q_party_name+taskData.q_name,rewordid:taskData.q_reword_id}));
@@ -364,7 +364,7 @@ package com.rpgGame.app.ui.main.taskbar
 			if(task!=null&&taskData!=null)
 			{
 				setNavView(TaskType.MAINTYPE_DAILYTASK,taskData.q_party_name,taskData.q_name,TaskMissionManager.getDailyTaskIsFinish(),navi2,subBut1);
-				TaskUtil.setGotargetInfo(taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killBut2List);
+				TaskUtil.setGotargetInfo(taskData.q_mission_mainType,taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killBut2List);
 				//TaskUtil.setRewordInfo(taskData.q_reword_id,ico1List,ico1BgList);
 				icoList1Group.setRewardByArray(TaskMissionCfgData.getRewordById(taskData.q_reword_id,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex));
 				icoList1Group.visible=true;
@@ -395,7 +395,7 @@ package com.rpgGame.app.ui.main.taskbar
 			if(task!=null&&taskData!=null)
 			{
 				setNavView(TaskType.MAINTYPE_DAILYTASK,taskData.q_party_name,taskData.q_name,TaskMissionManager.getDailyTaskIsFinish(),navi2,subBut1);
-				TaskUtil.setGotargetInfo(taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killBut2List);
+				TaskUtil.setGotargetInfo(taskData.q_mission_mainType,taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killBut2List);
 				setUisite();
 			}
 			
@@ -412,7 +412,7 @@ package com.rpgGame.app.ui.main.taskbar
 			if(task!=null&&taskData!=null)
 			{
 				setNavView(TaskType.MAINTYPE_TREASUREBOX,taskData.q_party_name,taskData.q_name,TaskMissionManager.getTreasuerTaskIsFinish(),navi3);
-				TaskUtil.setGotargetInfo(taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killBut3List);
+				TaskUtil.setGotargetInfo(taskData.q_mission_mainType,taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killBut3List);
 				var reward:Object=TaskMissionManager.getTreasuerTaskExtraReward();
 				if(reward!=null)
 				{
@@ -450,7 +450,7 @@ package com.rpgGame.app.ui.main.taskbar
 			if(task!=null&&taskData!=null)
 			{
 				setNavView(TaskType.MAINTYPE_TREASUREBOX,taskData.q_party_name,taskData.q_name,TaskMissionManager.getTreasuerTaskIsFinish(),navi3);
-				TaskUtil.setGotargetInfo(taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killBut3List);
+				TaskUtil.setGotargetInfo(taskData.q_mission_mainType,taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killBut3List);
 				TipTargetManager.show( _skin.sec_navi3, TargetTipsMaker.makeTips( TipType.TASK_LOOP_TIP,{name:taskData.q_party_name+taskData.q_name,rewordid:taskData.q_reword_id,loopRewardId:task.loopRewardId,loopNumber:task.loopNumber}));
 				setUisite();
 			}
@@ -467,7 +467,7 @@ package com.rpgGame.app.ui.main.taskbar
 			if(task!=null&&taskData!=null)
 			{
 				setNavView(TaskType.MAINTYPE_GUILDDAILYTASK,taskData.q_party_name,taskData.q_name,TaskMissionManager.getTreasuerTaskIsFinish(), _skin.sec_navi4);
-				TaskUtil.setGotargetInfo(taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killBut4List);
+				TaskUtil.setGotargetInfo(taskData.q_mission_mainType,taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killBut4List);
 				icoList3Group.setRewardByArray(TaskMissionCfgData.getRewordById(taskData.q_reword_id,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex));
 				icoList3Group.visible=true;
 				TipTargetManager.show( _skin.sec_navi4, TargetTipsMaker.makeTips( TipType.TASK_GUILD_TIP,{name:taskData.q_party_name+taskData.q_name,rewordid:taskData.q_reword_id}));
@@ -497,8 +497,8 @@ package com.rpgGame.app.ui.main.taskbar
 			if(task!=null&&taskData!=null)
 			{
 				setNavView(TaskType.MAINTYPE_GUILDDAILYTASK,taskData.q_party_name,taskData.q_name,TaskMissionManager.getTreasuerTaskIsFinish(),_skin.sec_navi4);
-				TaskUtil.setGotargetInfo(taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killBut4List);
-				TipTargetManager.show( _skin.sec_navi4, TargetTipsMaker.makeTips( TipType.TASK_GUILD_TIP,{name:taskData.q_party_name+taskData.q_name,rewordid:taskData.q_reword_id,loopRewardId:task.loopRewardId,loopNumber:task.loopNumber}));
+				TaskUtil.setGotargetInfo(taskData.q_mission_mainType,taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killBut4List);
+				TipTargetManager.show( _skin.sec_navi4, TargetTipsMaker.makeTips( TipType.TASK_LEAD_TIP,{name:taskData.q_party_name+taskData.q_name,rewordid:taskData.q_reword_id,loopRewardId:task.loopRewardId,loopNumber:task.loopNumber}));
 				setUisite();
 			}
 		}
@@ -660,6 +660,23 @@ package com.rpgGame.app.ui.main.taskbar
 		{
 			_skin.chkAuto.isSelected=false;
 		}
+		public function setGuildCheck(check:Boolean):void
+		{
+			TaskMissionManager.guildCheck=check;
+			TaskAutoManager.getInstance().stopTaskAuto();
+			if(check)
+			{
+				TaskAutoManager.getInstance().startTaskAuto(TaskType.MAINTYPE_GUILDDAILYTASK);
+			}
+			NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, check?"开启自动进行帮派任务":"取消自动进行帮派任务");
+		}
+		public function clearGuildCheck():void
+		{
+			_skin.chkAuto1.isSelected=false;
+		}
+		
+		
+		
 		public function hideInfo():void
 		{
 			hideMainTaskView();

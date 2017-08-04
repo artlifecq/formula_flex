@@ -2,7 +2,8 @@ package com.rpgGame.appModule.role
 {
 	import com.rpgGame.app.manager.goods.ItemManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.ui.tab.ViewUI;
+	import com.rpgGame.app.ui.AttChangeView;
+	import com.rpgGame.coreData.enum.AttChangeEnum;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.netData.player.bean.OthersInfo;
 	
@@ -10,7 +11,7 @@ package com.rpgGame.appModule.role
 	
 	import starling.display.DisplayObject;
 	
-	public class SubRolePanel extends ViewUI 
+	public class SubRolePanel extends AttChangeView 
 	{
 		private var _otherInfo:OthersInfo;
 		protected var basicView:BasicRoleView;
@@ -26,9 +27,12 @@ package com.rpgGame.appModule.role
 		
 		override public function show(data:Object=null):void
 		{
+			super.show(data);
 			if(data&&data.roleData&&data.info){
 				showCompareData(data);	
+				attChangeTypes=[];
 			}else{
+				attChangeTypes=[AttChangeEnum.EQUIP];
 				_roleData=MainRoleManager.actorInfo;
 				attConstrastView.onHide();
 				ItemManager.getBackEquip(initItem);
@@ -44,6 +48,7 @@ package com.rpgGame.appModule.role
 		
 		override  public function hide():void
 		{
+			super.hide();
 			basicView.onHide();
 			avatarView.onHide();
 			packsView.onHide();

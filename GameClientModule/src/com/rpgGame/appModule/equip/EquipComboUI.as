@@ -41,6 +41,7 @@ package com.rpgGame.appModule.equip
 	
 	import away3d.events.Event;
 	
+	import feathers.controls.Label;
 	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.controls.UIAsset;
 	import feathers.data.ListCollection;
@@ -66,7 +67,7 @@ package com.rpgGame.appModule.equip
 		
 		private var icon:IconCDFace;
 		private var _cailiao:Vector.<IconCDFace>;
-		
+		private var _cailiaoName:Vector.<Label>;
 		private var minMaxBar:MinMaxValueBar;
 		
 		//合成连接线
@@ -181,17 +182,18 @@ package com.rpgGame.appModule.equip
 		private function initView():void
 		{
 			_cailiao=new Vector.<IconCDFace>();
+			_cailiaoName=new Vector.<Label>();
 			_exisList=new Vector.<UIAsset>();
 			icon=IconCDFace.create(IcoSizeEnum.ICON_64);
 			icon.selectImgVisible=false;
-			icon.x=582;
-			icon.y=193;
+			icon.x=574;
+			icon.y=145;
 			icon.bindBg(null);
 			_exisList.push(_skin.exist1);
 			_exisList.push(_skin.exist2);
 			_exisList.push(_skin.exist3);
 			_skin.container.addChild(icon);
-			_skin.container.addChild(_skin.equip_num);
+//			_skin.container.addChild(_skin.equip_num);
 			
 			minMaxBar=new MinMaxValueBar(_skin,changeHecheng);
 			
@@ -204,6 +206,8 @@ package com.rpgGame.appModule.equip
 				ico.bindBg(uias);
 				_skin.grp_cailiao.addChild(ico);
 				_cailiao.push(ico);
+				var lb:Label=_skin.grp_cailiao.getChildByName("lbCailiao"+(i+1)) as Label;
+				_cailiaoName.push(lb);
 			}
 			
 			clearPanel();
@@ -368,9 +372,9 @@ package com.rpgGame.appModule.equip
 			icon.selectImgVisible=false;
 			icon.setIconResName(ClientConfig.getItemIcon(ItemConfig.getItemIcon(_nowSelect.q_item_id),IcoSizeEnum.ICON_64));		
 			
-			_skin.equip_name.color=ItemConfig.getItemQualityColor(_nowSelect.q_item_id);
-			_skin.equip_name.text=itemInfo.name;
-			_skin.equip_num.text=_skin.input_txt.text;
+			_skin.lbEnd.color=ItemConfig.getItemQualityColor(_nowSelect.q_item_id);
+			_skin.lbEnd.text=itemInfo.name;
+//			_skin.equip_num.text=_skin.input_txt.text;
 			setCaiLiaoData();
 		}
 		
@@ -387,7 +391,7 @@ package com.rpgGame.appModule.equip
 			minMaxBar.setMinMax(1,itemByBagNum/cailiaoNum);
 			if(itemByBagNum>=cailiaoNum)
 			{
-				_skin.existall.visible=true;
+				_skin.exist4.visible=true;
 				_skin.btn_hecheng.filter=null;
 			}
 			else
@@ -408,15 +412,17 @@ package com.rpgGame.appModule.equip
 					_cailiao[i].isGary=false
 				}else{
 					_cailiao[i].isGary=true;
-				}					
+				}			
+				_cailiaoName[i].text=ItemConfig.getItemName(cailiaoId);
+				_cailiaoName[i].color=ItemConfig.getItemQualityColor(cailiaoId);
 			}
 		}
 		
 		private function updateShowNum():void
 		{
 			_skin.input_txt.text=_hechengNum.toString();
-			_skin.lb_msg.htmlText=getTitleText("合成消耗");
-			_skin.equip_num.text=_skin.input_txt.text;
+			_skin.lb_msg.htmlText=getTitleText();
+//			_skin.equip_num.text=_skin.input_txt.text;
 		}
 		
 		private function initEvent():void
@@ -502,7 +508,7 @@ package com.rpgGame.appModule.equip
 			{
 				_exisList[i].visible=false;
 			}
-			_skin.existall.visible=false;
+			_skin.exist4.visible=false;
 			_hechengNum=1;
 			updateShowNum();
 		}
@@ -511,14 +517,15 @@ package com.rpgGame.appModule.equip
 		{
 			for(var i:int=0;i<_cailiao.length;i++)
 			{
-				_cailiao[i].clear();				
+				_cailiao[i].clear();			
+				_cailiaoName[i].text="";
 			}
 			icon.clear();
 			clearPanel();
 		}
 		
 		//显示金钱的消耗数量
-		private function getTitleText(title:String):String
+		private function getTitleText():String
 		{
 			var des:String="";
 			if(!_nowSelect){
@@ -526,11 +533,11 @@ package com.rpgGame.appModule.equip
 			}
 			var needMoney:int=_nowSelect.q_money*_hechengNum;
 			if(needMoney<=userMoney){
-				des+=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN1,needMoney+LanguageConfig.getText(LangUI.UI_TEXT17));//绿色
+				des+=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,needMoney+LanguageConfig.getText(LangUI.UI_TEXT17));//绿色
 			}else if(needMoney>userMoney){
-				des+=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,needMoney+LanguageConfig.getText(LangUI.UI_TEXT17));//红色
+				des+=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,needMoney+LanguageConfig.getText(LangUI.UI_TEXT17));//红色
 			}
-			return title+":"+des;
+			return des;
 		}
 		
 		
@@ -575,13 +582,14 @@ package com.rpgGame.appModule.equip
 				setCaiLiaoData();
 				_skin.tree.dataProvider.updateAll();
 				
-				this.playInter3DAt(ClientConfig.getEffect("ui_hechenghuiju"),0,0,1,null,addEftComple);
+				this.playInter3DAt(ClientConfig.getEffect("ui_ronglu"),613,313,1);
 				UIPopManager.showAlonePopUI(CenterEftPop,"ui_hechengchenggong");
 			}
 		}
 		
 		private function addEftComple(uint:RenderUnit3D):void
 		{
+			//,null,addEftComple
 			uint.play();
 		}
 		

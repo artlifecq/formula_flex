@@ -109,7 +109,8 @@ package org.mokylin.skin.app.banghui
 		private function __BangHui_Home_left_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/banghui/titlebg1.png";
+			temp.styleName = "ui/common/titilebg/headbg1.png";
+			temp.width = 261;
 			temp.x = 5;
 			temp.y = 5;
 			return temp;
@@ -224,7 +225,7 @@ package org.mokylin.skin.app.banghui
 			temp.name = "lbName";
 			temp.height = 18;
 			temp.text = "请输入帮派名称（3-7个字）";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xA3A594;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 188;
 			temp.x = 40;
@@ -240,7 +241,7 @@ package org.mokylin.skin.app.banghui
 			temp.bold = false;
 			temp.htmlText = "花费<font color='#e8c958'>$</font>创建<font color='#e8c958'>$级</font>帮派<br><font color='#e8c958'>$级帮派</font>可直接参加<font color='#e8c958'>皇城争霸</font>";
 			temp.leading = 4;
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 200;
 			temp.x = 50;
@@ -256,7 +257,7 @@ package org.mokylin.skin.app.banghui
 			temp.bold = false;
 			temp.htmlText = "花费<font color='#e8c958'>$</font>创建<font color='#e8c958'>$级</font>帮派";
 			temp.leading = 4;
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 200;
 			temp.x = 50;
@@ -271,7 +272,7 @@ package org.mokylin.skin.app.banghui
 			temp.name = "lbXuanYan";
 			temp.height = 114;
 			temp.text = "请输入帮派宣言（50字以内）";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xA3A594;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 189;
 			temp.x = 40;

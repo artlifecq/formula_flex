@@ -3,6 +3,7 @@ package com.rpgGame.appModule.fightsoul
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.HuBaoManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.HuBaoSender;
 	import com.rpgGame.app.ui.main.taskbar.TaskControl;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
@@ -43,6 +44,9 @@ package com.rpgGame.appModule.fightsoul
 			{
 				NoticeManager.showNotifyById(4010);
 				return ;
+			}else if(pathinfoData.isOpen()==false){
+				NoticeManager.showNotifyById(61040);
+				return ;
 			}
 			if(target==_skin.btn_send)
 			{
@@ -53,9 +57,9 @@ package com.rpgGame.appModule.fightsoul
 						break;
 					case 2:
 						if(path.q_id==1)
-							TaskControl.killWalkBut(TaskType.MAINTYPE_TREASUREBOX,0,1);
+							TaskControl.killWalkBut(TaskType.MAINTYPE_TREASUREBOX,0,2);
 						else if(path.q_id==2)
-							TaskControl.killWalkBut(TaskType.MAINTYPE_GUILDDAILYTASK,0,1);
+							TaskControl.killWalkBut(TaskType.MAINTYPE_GUILDDAILYTASK,0,2);
 						break;
 					case 3:
 						HuBaoSender.upCSGoConvoyMessage();
@@ -75,9 +79,9 @@ package com.rpgGame.appModule.fightsoul
 						break;
 					case 2:
 						if(path.q_id==1)
-							TaskControl.killWalkBut(TaskType.MAINTYPE_TREASUREBOX,0,2);
+							TaskControl.killWalkBut(TaskType.MAINTYPE_TREASUREBOX,0,1);
 						else if(path.q_id==2)
-							TaskControl.killWalkBut(TaskType.MAINTYPE_GUILDDAILYTASK,0,2);
+							TaskControl.killWalkBut(TaskType.MAINTYPE_GUILDDAILYTASK,0,1);
 						break;
 					case 3:
 						HuBaoManager.instance().onwalkToNpc(path.q_arg);
@@ -89,7 +93,7 @@ package com.rpgGame.appModule.fightsoul
 		override protected function commitData():void
 		{
 			_skin.lb_name.text = path.q_name;
-			_skin.lb_cishu.text = pathinfoData.count.toString()+"/"+path.q_total;
+			_skin.lb_cishu.text =pathinfoData.count+"/"+path.q_total;
 			_skin.lb_jinyan.text =LanguageConfig.getText(LangUI_2.FightSoulShowReward).replace("$",path.q_reward)
 			
 			if(path.q_type==1)
@@ -100,7 +104,7 @@ package com.rpgGame.appModule.fightsoul
 			}
 			_skin.btn_send.visible  = !(path.q_type==1);
 			
-			if(pathinfoData.isOver)
+			if(pathinfoData.isOver||pathinfoData.isOpen()==false)
 			{
 				_skin.lb_name.color = StaticValue.A_UI_GRAY_TEXT;
 				_skin.lb_cishu.color = StaticValue.A_UI_GRAY_TEXT;

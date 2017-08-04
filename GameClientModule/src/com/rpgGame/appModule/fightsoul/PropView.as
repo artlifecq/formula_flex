@@ -1,8 +1,7 @@
 package com.rpgGame.appModule.fightsoul
 {
+	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.clientConfig.Q_att_values;
-	import com.rpgGame.coreData.type.CharAttributeType;
-	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import org.mokylin.skin.app.zhanhun.Shuxing_Skin;
 
@@ -43,10 +42,12 @@ package com.rpgGame.appModule.fightsoul
 					nextPropValue = _nextAtt["q_value"+i];
 				}
 			}
-			_skin.lb_name.text = currentPropValue.toString();
+			
+			
+			_skin.lb_name.text =AttValueConfig.getDisAttValueStr(_typeId,currentPropValue);
 			_skin.grp_up.x = _skin.lb_name.x +_skin.lb_name.width+5;
 			_disace = nextPropValue-currentPropValue;
-			_skin.lb_Num.text = _disace.toString();
+			_skin.lb_Num.text =AttValueConfig.getDisAttValueStr(_typeId,_disace);
 		}
 		
 		public function showUpLevelView(bool:Boolean):void

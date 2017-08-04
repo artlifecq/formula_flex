@@ -11,6 +11,9 @@ package com.rpgGame.coreData.cfg
 		private static var _datas:Vector.<Q_fightsoul>;
 		private static var _modes:Dictionary;
 		private static var _maxMode:int = 0;
+		
+		public static var  FightSoulMaxLevel:int = 0;
+		
 		public static function setConfig( data:ByteArray ):void
 		{
 			_sheets=new Dictionary();
@@ -20,6 +23,7 @@ package com.rpgGame.coreData.cfg
 			for each(var info : Q_fightsoul in arr) {
 				_sheets[info.q_level] = info;
 				_datas.push(info);
+				FightSoulMaxLevel=FightSoulMaxLevel<info.q_level?info.q_level:FightSoulMaxLevel;
 				
 				if(_maxMode < info.q_mode)
 					_maxMode = info.q_mode;

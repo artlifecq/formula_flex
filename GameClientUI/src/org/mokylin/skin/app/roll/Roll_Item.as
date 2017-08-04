@@ -40,7 +40,7 @@ package org.mokylin.skin.app.roll
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 22;
-			temp.styleName = "ui/common/roll/wenleidi.png";
+			temp.styleName = "ui/app/roll/wenleidi.png";
 			temp.width = 265;
 			temp.x = 0;
 			temp.y = 0;

@@ -36,7 +36,7 @@ package com.rpgGame.appModule.skill
 		private var _skin:jinengItemsSkin;
 		private var _skillInfo:SkillInfo;
 		private var _skillCfg:Q_skill_model;
-		private var _selected:Boolean;
+		//		private var _selected:Boolean;
 		private var _icon:BgIcon;
 		
 		private var eft:InterObject3D;
@@ -44,14 +44,16 @@ package com.rpgGame.appModule.skill
 		public function SkillItem()
 		{
 			_skin=new jinengItemsSkin();
-			selected=false;
+			//			selected=false;
+			_skin.imgSelect.visible=false;
 			super(_skin);
 			_icon=new BgIcon(IcoSizeEnum.ICON_42);		
 			_skin.container.addChild(_icon);
 			_icon.bindBg(_skin.Icon);
 			_icon.touchable=false;
 			MCUtil.BringToTop(_skin.mc_dengjie);
-			MCUtil.removeSelf(_skin.rdo_select);
+			MCUtil.removeSelf(_skin.txt_Acitve);
+			MCUtil.removeSelf(_skin.txt_xianzhi);
 		}
 		
 		
@@ -89,7 +91,7 @@ package com.rpgGame.appModule.skill
 				this.touchable=true;
 				_skin.txt_level.text=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT1)+info.skillChildLv+"/"+cfg.q_max_level;
 				if(info.skillLevel==1){
-					_skin.txt_Inacitve.color=StaticValue.UI_NORMAL;
+					_skin.txt_Inacitve.color=StaticValue.A_UI_GRAY_TEXT;
 					_skin.mc_dengjie.visible=true;
 					if(info.skillLevel==cfg.q_max_grade){
 						_skin.mc_dengjie.visible=false;
@@ -100,7 +102,7 @@ package com.rpgGame.appModule.skill
 						_skin.txt_Inacitve.text=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT2);
 					}
 				}else{
-					_skin.txt_Inacitve.color=StaticValue.UI_YELLOW2;
+					_skin.txt_Inacitve.color=StaticValue.A_UI_YELLOW_TEXT;
 					_skin.txt_Inacitve.text=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT3);
 				}
 				_skin.mc_dengjie.gotoAndStop(info.skillLevel.toString());//阶数
@@ -117,7 +119,7 @@ package com.rpgGame.appModule.skill
 				this.touchable=false;
 				
 				_skin.txt_level.visible=false;
-				_skin.txt_Inacitve.color=StaticValue.UI_NORMAL;
+				_skin.txt_Inacitve.color=StaticValue.A_UI_GRAY_TEXT;
 				_skin.mc_dengjie.visible=true;
 				if(!riseCfg){
 					_skin.txt_Inacitve.text=cfg.q_show_needgrade+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT16);
@@ -135,15 +137,16 @@ package com.rpgGame.appModule.skill
 		
 		public function set selected(value:Boolean):void
 		{
-			_selected=value;
-			if(value){
-				eft=this.playInter3DAt(ClientConfig.getEffect("ui_zhuanquan"),120,30,0);
-			}else{
-				if(eft){
-					eft.stop();
-					eft.removeFromParent(true);
-				}
-			}
+			_skin.imgSelect.visible=value;
+			//			_selected=value;
+			//			if(value){
+			//				eft=this.playInter3DAt(ClientConfig.getEffect("ui_zhuanquan"),120,30,0);
+			//			}else{
+			//				if(eft){
+			//					eft.stop();
+			//					eft.removeFromParent(true);
+			//				}
+			//			}
 		}
 		
 		

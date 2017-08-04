@@ -52,19 +52,22 @@ package com.rpgGame.appModule.equip
 		{
 			_type=type;
 			TouchableUtil.gray(_skin.rdo_type);
-//			_skin.rdo_type.isEnabled=false;
+			//			_skin.rdo_type.isEnabled=false;
 			switch(_type)
 			{
 				case 0:
-					_skin.rdo_type.label=LanguageConfig.getText(LangUI.UI_TEXT18);
+//					_skin.rdo_type.label=LanguageConfig.getText(LangUI.UI_TEXT18);
+					_skin.uiHead.styleName="ui/app/zhuangbei/jicheng/qianghua.png";
 					_skin.labelDisplay.htmlText=LanguageConfig.getText(LangUI.UI_TEXT21)+HtmlTextUtil.getTextColor(0x5DBD37,"0");
 					break;
 				case 1:
-					_skin.rdo_type.label=LanguageConfig.getText(LangUI.UI_TEXT19);
+//					_skin.rdo_type.label=LanguageConfig.getText(LangUI.UI_TEXT19);
+					_skin.uiHead.styleName="ui/app/zhuangbei/jicheng/zuomo.png";
 					_skin.labelDisplay.htmlText=LanguageConfig.getText(LangUI.UI_TEXT22)+HtmlTextUtil.getTextColor(0x5DBD37,"0");
 					break;
 				case 2:
-					_skin.rdo_type.label=LanguageConfig.getText(LangUI.UI_TEXT20);
+//					_skin.rdo_type.label=LanguageConfig.getText(LangUI.UI_TEXT20);
+					_skin.uiHead.styleName="ui/app/zhuangbei/jicheng/xilian.png";
 					_skin.labelDisplay.htmlText="";
 					break;
 			}
@@ -108,42 +111,42 @@ package com.rpgGame.appModule.equip
 					{
 						changV=useInfo.strengthLevel-tragetInfo.strengthLevel;
 						changV=changV>0?"+"+changV:changV;
-						_skin.labelDisplay.htmlText=LanguageConfig.getText(LangUI.UI_TEXT22)+HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,tragetInfo.strengthLevel.toString())+HtmlTextUtil.getTextColor(0x5DBD37,"("+changV+")");
+						_skin.labelDisplay.htmlText=LanguageConfig.getText(LangUI.UI_TEXT22)+HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,tragetInfo.strengthLevel.toString())+HtmlTextUtil.getTextColor(0x5DBD37,"("+changV+")");
 						for(var i:int=0;i<values2.length;i++)
 						{
 							if(i<values1.length&&values2[i]-values1[i]>0)
 							{
 								lab=new Label;
-								lab.color = 0x8B8D7B;
+								lab.color = StaticValue.A_UI_GRAY_TEXT;
 								lab.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-								lab.htmlText=CharAttributeType.getCNName(keys[i])+HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,values1[i])+HtmlTextUtil.getTextColor(0x5DBD37,"(+"+(values2[i]-values1[i])+")");
+								lab.htmlText=CharAttributeType.getCNName(keys[i])+": "+HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,values1[i])+HtmlTextUtil.getTextColor(0x5DBD37,"(+"+(values2[i]-values1[i])+")");
 								_labList.push(lab);
 								_labContainer.addChild(lab);
 							}
 							else
 							{
 								lab=new Label;
-								lab.color = 0x8B8D7B;
+								lab.color = StaticValue.A_UI_GRAY_TEXT;
 								lab.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-								lab.htmlText=CharAttributeType.getCNName(keys[i])+HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,"0")+HtmlTextUtil.getTextColor(0x5DBD37,"(+"+values2[i]+")");
+								lab.htmlText=CharAttributeType.getCNName(keys[i])+": "+HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,"0")+HtmlTextUtil.getTextColor(0x5DBD37,"(+"+values2[i]+")");
 								_labList.push(lab);
 								_labContainer.addChild(lab);
 							}
 						}
 						TouchableUtil.ungray(_skin.rdo_type);
-//						_skin.rdo_type.isEnabled=true;
+						//						_skin.rdo_type.isEnabled=true;
 					}
 					else
 					{
-						_skin.labelDisplay.htmlText=LanguageConfig.getText(LangUI.UI_TEXT22)+HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,tragetInfo.strengthLevel.toString());
+						_skin.labelDisplay.htmlText=LanguageConfig.getText(LangUI.UI_TEXT22)+HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,tragetInfo.strengthLevel.toString());
 						lab=new Label;
-						lab.color = 0xd02525; //红色
+						lab.color = StaticValue.A_UI_RED_TEXT; //红色
 						lab.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 						lab.htmlText=LanguageConfig.getText(LangUI.UI_TEXT23);
 						_labList.push(lab);
 						_labContainer.addChild(lab);
 						TouchableUtil.gray(_skin.rdo_type);
-//						_skin.rdo_type.isEnabled=false;
+						//						_skin.rdo_type.isEnabled=false;
 					}
 					break;
 				case 1://琢磨
@@ -159,27 +162,27 @@ package com.rpgGame.appModule.equip
 					var num:int=use_Promote-traget_Promote;
 					if(num>0)
 					{
-						_skin.labelDisplay.htmlText=LanguageConfig.getText(LangUI.UI_TEXT21)+HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,tragetInfo.polishLevel.toString())+HtmlTextUtil.getTextColor(0x5DBD37,"(+"+((useInfo.polishLevel-tragetInfo.polishLevel)+")"));
+						_skin.labelDisplay.htmlText=LanguageConfig.getText(LangUI.UI_TEXT21)+HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,tragetInfo.polishLevel.toString())+HtmlTextUtil.getTextColor(0x5DBD37,"(+"+((useInfo.polishLevel-tragetInfo.polishLevel)+")"));
 						lab=new Label;
-						lab.color = 0x8B8D7B;
+						lab.color = StaticValue.A_UI_GRAY_TEXT;
 						lab.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-						lab.htmlText=LanguageConfig.getText(LangUI.UI_TEXT24)+HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,Number((traget_Promote/100).toFixed(1))+"%")+HtmlTextUtil.getTextColor(0x5DBD37,"(+"+Number((num/100).toFixed(1))+"%)");
+						lab.htmlText=LanguageConfig.getText(LangUI.UI_TEXT24)+HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,Number((traget_Promote/100).toFixed(1))+"%")+HtmlTextUtil.getTextColor(0x5DBD37,"(+"+Number((num/100).toFixed(1))+"%)");
 						_labList.push(lab);
 						_labContainer.addChild(lab);
 						TouchableUtil.ungray(_skin.rdo_type);
-//						_skin.rdo_type.isEnabled=true;
+						//						_skin.rdo_type.isEnabled=true;
 					}
 					else
 					{
-						_skin.labelDisplay.htmlText=LanguageConfig.getText(LangUI.UI_TEXT21)+HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,tragetInfo.polishLevel.toString());
+						_skin.labelDisplay.htmlText=LanguageConfig.getText(LangUI.UI_TEXT21)+HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,tragetInfo.polishLevel.toString());
 						lab=new Label;
-						lab.color = 0xd02525;
+						lab.color = StaticValue.A_UI_RED_TEXT;
 						lab.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 						lab.htmlText=LanguageConfig.getText(LangUI.UI_TEXT25);
 						_labList.push(lab);
 						_labContainer.addChild(lab);
 						TouchableUtil.gray(_skin.rdo_type);
-//						_skin.rdo_type.isEnabled=false;
+						//						_skin.rdo_type.isEnabled=false;
 					}
 					break;
 				case 2://洗炼
@@ -197,9 +200,9 @@ package com.rpgGame.appModule.equip
 							for(i=0;i<values1.length;i++)
 							{
 								lab=new Label;
-								lab.color = 0x8B8D7B;
+								lab.color = StaticValue.A_UI_GRAY_TEXT;
 								lab.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-								lab.htmlText=CharAttributeType.getCNName(keys[i])+":"+HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,values1[i]);
+								lab.htmlText=CharAttributeType.getCNName(keys[i])+":"+HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,values1[i]);
 								_labList.push(lab);
 								_labContainer.addChild(lab);
 							}
@@ -208,14 +211,14 @@ package com.rpgGame.appModule.equip
 						{
 							var q_buff:Q_buff=BuffStateDataManager.getData(q_wash_attr.q_buff_id);
 							lab=new Label;
-							lab.color = 0x8B8D7B;
+							lab.color = StaticValue.A_UI_GRAY_TEXT;
 							lab.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-							lab.htmlText=q_buff.q_buff_name+":"+HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,q_buff.q_description);
+							lab.htmlText=q_buff.q_buff_name+":"+HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,q_buff.q_description);
 							_labList.push(lab);
 							_labContainer.addChild(lab);
 						}
 						TouchableUtil.ungray(_skin.rdo_type);
-//						_skin.rdo_type.isEnabled=true;
+						//						_skin.rdo_type.isEnabled=true;
 					}
 					if(useInfo.smeltAtt2!=0)
 					{
@@ -229,9 +232,9 @@ package com.rpgGame.appModule.equip
 							for(i=0;i<values1.length;i++)
 							{
 								lab=new Label;
-								lab.color = 0x8B8D7B;
+								lab.color = StaticValue.A_UI_GRAY_TEXT;
 								lab.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-								lab.htmlText=CharAttributeType.getCNName(keys[i])+":"+HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,values1[i]);
+								lab.htmlText=CharAttributeType.getCNName(keys[i])+":"+HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,values1[i]);
 								_labList.push(lab);
 								_labContainer.addChild(lab);
 							}
@@ -240,14 +243,14 @@ package com.rpgGame.appModule.equip
 						{
 							q_buff=BuffStateDataManager.getData(q_wash_attr.q_buff_id);
 							lab=new Label;
-							lab.color = 0x8B8D7B;
+							lab.color = StaticValue.A_UI_GRAY_TEXT;
 							lab.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-							lab.htmlText=q_buff.q_buff_name+":"+HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,q_buff.q_description);
+							lab.htmlText=q_buff.q_buff_name+":"+HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,q_buff.q_description);
 							_labList.push(lab);
 							_labContainer.addChild(lab);
 						}
 						TouchableUtil.ungray(_skin.rdo_type);
-//						_skin.rdo_type.isEnabled=true;
+						//						_skin.rdo_type.isEnabled=true;
 					}
 					break;
 			}
@@ -276,7 +279,7 @@ package com.rpgGame.appModule.equip
 					break;
 			}
 			if(_skin.rdo_type.isSelected) _skin.rdo_type.isSelected=false;
-//			_skin.rdo_type.isEnabled=false;
+			//			_skin.rdo_type.isEnabled=false;
 			TouchableUtil.gray(_skin.rdo_type);
 		}
 		
@@ -288,20 +291,22 @@ package com.rpgGame.appModule.equip
 				case 0:
 					for(var i:int=0;i<_labList.length;i++)
 					{
-						_labList[i].x=(i%2)*(_labList[i].width+50);
-						_labList[i].y=int((i/2))*(_labList[i].height+5);
+						_labList[i].x=(i%2)*(_labList[i].width+120)-90;
+						_labList[i].y=int((i/2))*(_labList[i].height+10)-5;
 					}
 					break;
 				case 1:
 					for(i=0;i<_labList.length;i++)
 					{
-						_labList[i].y=i*(_labList[i].height+20);
+						_labList[i].x=(i%2)*(_labList[i].width+120)-90;
+						_labList[i].y=i*(_labList[i].height+10)-5;
 					}
 					break;
 				case 2:
 					for(i=0;i<_labList.length;i++)
 					{
-						_labList[i].y=i*(_labList[i].height+5);
+						_labList[i].x=(i%2)*(_labList[i].width+120)-90;
+						_labList[i].y=i*(_labList[i].height+10)-5;
 					}
 					break;
 			}

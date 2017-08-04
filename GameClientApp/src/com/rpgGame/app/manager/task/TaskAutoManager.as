@@ -273,8 +273,6 @@ package com.rpgGame.app.manager.task
 		
 		public function setTaskChange():void
 		{
-			if (!_isTaskRunning)
-				return;
 			var missionType:int=TaskMissionManager.getTaskMissionType(otherType);
 			if(missionType==TaskType.SUB_GATHER||missionType==TaskType.SUB_USEITEM)
 			{
@@ -287,7 +285,8 @@ package com.rpgGame.app.manager.task
 				TrusteeshipManager.getInstance().stopAll();
 				GatherAutoManager.getInstance().stopGatherAuto();
 				SceneRoleSelectManager.selectedRole=null;
-				_stateMachine.transition(AIStateType.AI_NONE);
+				TweenLite.killDelayedCallsTo(startTaskAuto);
+				TweenLite.delayedCall(1, startTaskAuto,[otherType]);
 			}
 			
 		}

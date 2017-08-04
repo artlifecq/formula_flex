@@ -47,7 +47,7 @@ package org.mokylin.skin.app.roll.button
 						}
 					]
 			};
-			skinNames={"down":"ui/common/roll/button/random/down.png", "hover":"ui/common/roll/button/random/over.png", "up":"ui/common/roll/button/random/up.png"};
+			skinNames={"down":"ui/app/roll/button/random/down.png", "hover":"ui/app/roll/button/random/over.png", "up":"ui/app/roll/button/random/up.png"};
 		}
 
 

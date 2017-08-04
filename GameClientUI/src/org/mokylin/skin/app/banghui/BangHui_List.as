@@ -43,7 +43,7 @@ package org.mokylin.skin.app.banghui
 			super();
 			
 			this.currentState = "normal";
-			this.height = 600;
+			this.height = 601;
 			this.width = 956;
 			this.elementsContent = [__BangHui_List_UIAsset2_i(),btnExit_i(),__BangHui_List_UIAsset3_i(),__BangHui_List_Group1_i(),ListItem_i(),grpFlip_i()];
 			
@@ -119,7 +119,7 @@ package org.mokylin.skin.app.banghui
 		private function __BangHui_List_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/banghui/titlebg2.png";
+			temp.styleName = "ui/common/titilebg/headbg1.png";
 			temp.width = 636;
 			temp.x = 0;
 			temp.y = 0;

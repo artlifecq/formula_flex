@@ -71,10 +71,22 @@ package com.rpgGame.appModule.activety.boss
 					_skin.uiBaoxiang.styleName="ui/app/activety/shijieboss/icon/4.png";
 				}
 				if(!info.bossDamageInfo){
-					_skin.container.visible=false;					
+					_skin.uiBaoxiang.visible=false;
+					_skin.uiNo.visible=false;
+					_skin.lbKillNum.visible=false;
+					_skin.lbName.visible=false;
+					_skin.lbNo.visible=false;
+					_skin.bg1.visible=false;
+					_skin.bg2.visible=false;
 					return;
 				}else{
-					_skin.container.visible=true;
+					_skin.uiBaoxiang.visible=true;
+					_skin.uiNo.visible=true;
+					_skin.lbKillNum.visible=true;
+					_skin.lbName.visible=true;
+					_skin.lbNo.visible=true;
+					_skin.bg1.visible=true;
+					_skin.bg2.visible=true;
 				}
 				var id:Number=info.bossDamageInfo.playerId.ToGID();
 				if(MainRoleManager.isSelf(id)){
@@ -84,6 +96,8 @@ package com.rpgGame.appModule.activety.boss
 				}
 				_skin.lbName.text=info.bossDamageInfo.playerName;
 				_skin.lbKillNum.text=info.bossDamageInfo.damage+"("+info.perDamage+"%)";
+			}else{
+				
 			}
 		}
 	}

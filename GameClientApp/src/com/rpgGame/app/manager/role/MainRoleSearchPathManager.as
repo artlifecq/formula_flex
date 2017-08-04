@@ -615,7 +615,7 @@ package com.rpgGame.app.manager.role
 		{
 			
 			var _districtWithPath : DistrictWithPath = SceneManager.getDistrict(role.sceneName);
-			if(PathFinderUtil.isPointInSide(_districtWithPath, pos))//阻挡点正常寻路
+			if(!PathFinderUtil.isPointInSide(_districtWithPath, pos))//阻挡点正常寻路
 			{
 				return RoleStateUtil.walkToPos(role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite);
 			}

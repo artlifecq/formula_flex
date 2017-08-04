@@ -67,7 +67,7 @@ package com.rpgGame.app.ui.main.taskbar
 				{
 					if(nameArr[1]==TaskType.MAINTYPE_GUIDETASK)
 					{
-						TaskControl.guideBut(int(nameArr[1]));
+						TaskControl.guideBut(int(nameArr[2]));
 					}
 					else
 					{
@@ -147,7 +147,7 @@ package com.rpgGame.app.ui.main.taskbar
 			EventManager.addEvent(MainPlayerEvent.PLAYER_DIE,playerDie);
 			EventManager.addEvent(MainPlayerEvent.LEVEL_CHANGE,levelChange);
 			_skin.chkAuto.addEventListener(Event.CHANGE,checkChangeHandler)
-			
+			_skin.chkAuto1.addEventListener(Event.CHANGE,check1ChangeHandler)
 		}
 		private function removeEvent():void
 		{
@@ -162,6 +162,7 @@ package com.rpgGame.app.ui.main.taskbar
 			EventManager.removeEvent(MainPlayerEvent.PLAYER_DIE,playerDie);
 			EventManager.removeEvent(MainPlayerEvent.LEVEL_CHANGE,levelChange);
 			_skin.chkAuto.removeEventListener(Event.CHANGE,checkChangeHandler)
+			_skin.chkAuto1.removeEventListener(Event.CHANGE,check1ChangeHandler)
 		}
 		private var panlIsopen:Boolean=false;
 		/**玩家移动*/
@@ -181,9 +182,17 @@ package com.rpgGame.app.ui.main.taskbar
 		/**点击npc寻路完成*/
 		private function taskNpc(npcId:int,serverID:long):void
 		{
-			if(TaskMissionManager.isMainTaskNpc(npcId))//如果是任务NPC就打开面板
+			if(TaskMissionManager.isTaskNpc(TaskType.MAINTYPE_MAINTASK,npcId))//如果是任务NPC就打开面板
 			{
 				TaskControl.showLeadPanel();
+			}
+			else if(TaskMissionManager.isTaskNpc(TaskType.MAINTYPE_GUILDDAILYTASK,npcId))
+			{
+				TaskControl.showGuildPanel();
+			}
+			else if(HuBaoData.isTaskNpc(npcId))
+			{
+				HuBaoSender.upCSClientDataMessage(npcId);
 			}
 			else //npc闲话
 			{
@@ -197,16 +206,8 @@ package com.rpgGame.app.ui.main.taskbar
 					}
 					
 				}
-				/*var speak:String=MonsterDataManager.getNpcSpeak(npcId);
-				if(speak!=""&&!AppManager.isAppInScene(AppConstant.NPC_SPEAK))
-				{
-					AppManager.showApp(AppConstant.NPC_SPEAK,speak);
-				}*/
 			}
-			if(HuBaoData.isTaskNpc(npcId))
-			{
-				HuBaoSender.upCSClientDataMessage(npcId);
-			}
+			
 		
 		}
 		
@@ -233,14 +234,19 @@ package com.rpgGame.app.ui.main.taskbar
 				effetCont.playFinishEffect();
 				TaskControl.hideLeadPanel();
 				loopCont.clearTreasuerCheck();
+				loopCont.clearGuildCheck();
+				showNpcMark(false);
 			}
 			else if(type==TaskType.MAINTYPE_TREASUREBOX)
 			{
 				TaskControl.hideLoopPanel();
 			}
+			else if(type==TaskType.MAINTYPE_GUILDDAILYTASK)
+			{
+				TaskControl.hideGuildPanel();
+			}
 			
 			
-			showNpcMark(false);
 			TaskAutoManager.getInstance().walkOver=false;
 		}
 		/**新任务*/
@@ -291,33 +297,10 @@ package com.rpgGame.app.ui.main.taskbar
 		{
 			leadCont.upleadTaskView();
 			loopCont.upLoopTaskView(type);
-			if(type==TaskType.MAINTYPE_MAINTASK)
+			if(type==TaskType.MAINTYPE_MAINTASK&&TaskMissionManager.getMainTaskIsFinish()&&TaskMissionManager.getMainTaskHaveNpc())
 			{
-				if(TaskMissionManager.getMainTaskIsFinish())
-				{
-					if(TaskMissionManager.getMainTaskHaveNpc())
-					{
-						showNpcMark(true);
-					}
-					else
-					{
-						
-						//TaskControl.showLeadPanel();主线任务没有回复npc不弹框了
-						TaskSender.sendfinishTaskMessage(TaskMissionManager.mainTaskInfo.taskId);	
-						
-					}
-				}
-			}
-			else if(type==TaskType.MAINTYPE_TREASUREBOX)
-			{
-				if(TaskMissionManager.getTreasuerTaskIsFinish())
-				{
-					TaskControl.showLoopPanel();
-				}
-				
-			}
-			
-			
+				showNpcMark(true);
+			}			
 		}
 		/**任务卡级*/
 		private function noMainTask(taskId: int,noInfo: Vector.<NoMainTaskInfo>):void
@@ -376,6 +359,12 @@ package com.rpgGame.app.ui.main.taskbar
 			var check:Check = e.target as Check;
 			loopCont.setTreasuerCheck(check.isSelected);
 		}
+		private function check1ChangeHandler(e:Event):void
+		{
+			var check:Check = e.target as Check;
+			loopCont.setGuildCheck(check.isSelected);
+		}
+		
 		
 		/**追踪栏开启关闭操作*/
 		private function setState(isOpen : Boolean) : void {

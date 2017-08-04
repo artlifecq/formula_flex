@@ -254,7 +254,7 @@
 						fps = minute_1_averageFps;
                         if (fps > 0)
                         {
-                            if (fps < 40)
+                            if (fps < 20)
                             {
                                 reducedDisplayPerforms();
                             }
