@@ -241,7 +241,7 @@ package com.rpgGame.app.cmdlistener.scene
 		private function onResPlayerStateChangeMessage(msg:ResPlayerStateChangeMessage):void
 		{
 			// TODO Auto Generated method stub
-			if (msg.state==1) 
+			if (msg.state==0) 
 			{
 				MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_ENTER_LEAVE_FIGHT);
 			}
