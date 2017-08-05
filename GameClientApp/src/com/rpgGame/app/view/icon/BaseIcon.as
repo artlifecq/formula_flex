@@ -42,13 +42,23 @@ package com.rpgGame.app.view.icon
 		protected var _bindImage : UIAsset;
 		/**穿戴图片**/
 		protected var _wearImage : UIAsset;
+		/**选中图片**/
+		protected var _selectImg : UIAsset;
 		
 		/**
 		 *是符合符合职业 
 		 */
 		protected var _jobImage:UIAsset;
-		
+		/**
+		 * 等阶图标
+		 * */
 		protected var _lvImage:UIAsset;
+		
+		/**
+		 * 洗炼图标
+		 * */
+		protected var _xilianImage:UIAsset;
+		
 		private var _isDestroyed:Boolean;
 		private var _isDisposed:Boolean;
 		protected var _disposing : Boolean;
@@ -72,14 +82,14 @@ package com.rpgGame.app.view.icon
 		 */		
 		protected function calIconPos():void
 		{
-		/*	switch(_iconSize){
-				case IcoSizeEnum.ICON_36:
-				case IcoSizeEnum.ICON_42:
-				case IcoSizeEnum.ICON_48:
-				case IcoSizeEnum.ICON_64:
-					_iconPositionX=_iconPositionY=(S2W[_iconSize]-_iconSize)/2;
-					break;
-				
+			/*	switch(_iconSize){
+			case IcoSizeEnum.ICON_36:
+			case IcoSizeEnum.ICON_42:
+			case IcoSizeEnum.ICON_48:
+			case IcoSizeEnum.ICON_64:
+			_iconPositionX=_iconPositionY=(S2W[_iconSize]-_iconSize)/2;
+			break;
+			
 			}*/
 		}
 		public function instanceDestroy() : void
@@ -131,7 +141,7 @@ package com.rpgGame.app.view.icon
 			this.width = _iconSize;
 			this.height = _iconSize;
 		}
-
+		
 		/**
 		 * 设置图标 
 		 * @param iconResURL url地址
@@ -234,7 +244,7 @@ package com.rpgGame.app.view.icon
 						_bindImage.styleName=AssetUrl.EQUIP_BIND_42;
 						break;
 				}
-//				this.setChildIndex(_bindImage,numChildren);
+				//				this.setChildIndex(_bindImage,numChildren);
 			}else
 			{
 				if(_bindImage && _bindImage.parent)
@@ -270,7 +280,7 @@ package com.rpgGame.app.view.icon
 		private function jobIconComplete(ass:UIAsset):void
 		{
 			_jobImage.x = _iconSize-_jobImage.width-1;
-			_jobImage.y = _iconSize-_jobImage.height-1;
+			_jobImage.y = 1;
 		}		
 		
 		public function setIsWear(v:Boolean):void
@@ -304,6 +314,53 @@ package com.rpgGame.app.view.icon
 			}
 		}
 		
+		public function setIsSelect(bool:Boolean):void
+		{
+			if(bool)
+			{
+				if(!_selectImg)
+				{
+					_selectImg = new UIAsset();
+					addChild(_selectImg);
+				}
+				_selectImg.styleName=AssetUrl.EQUIP_SELECT_64;
+				_selectImg.x = 0;
+				_selectImg.y = 0;
+				this.setChildIndex(_selectImg,numChildren);
+			}else
+			{
+				if(_selectImg && _selectImg.parent)
+					_selectImg.parent.removeChild(_selectImg);
+				_selectImg = null;
+			}
+		}
+		
+		public function setIsXilian(bool:Boolean):void
+		{
+			if(bool)
+			{
+				if(!_xilianImage)
+				{
+					_xilianImage = new UIAsset();
+					addChild(_xilianImage);
+				}
+				_xilianImage.styleName=AssetUrl.EQUIP_XILIAN;
+				_xilianImage.x = this.width-_xilianImage.width-2;
+				_xilianImage.y = this.height-_xilianImage.height-2;
+				if(_selectImg){
+					var index:int=this.getChildIndex(_selectImg);
+				}else{
+					index=numChildren;
+				}
+				this.setChildIndex(_xilianImage,index);
+			}else
+			{
+				if(_xilianImage && _xilianImage.parent)
+					_xilianImage.parent.removeChild(_xilianImage);
+				_xilianImage = null;
+			}
+		}
+		
 		/**
 		 * 清空 只是把显示数据清除 并不全部销毁
 		 * */
@@ -323,6 +380,14 @@ package com.rpgGame.app.view.icon
 				_wearImage.parent.removeChild(_wearImage);
 			_wearImage = null;
 			
+			if(_selectImg && _selectImg.parent)
+				_selectImg.parent.removeChild(_selectImg);
+			_selectImg = null;
+			
+			if(_xilianImage && _xilianImage.parent)
+				_xilianImage.parent.removeChild(_xilianImage);
+			_xilianImage = null;
+			
 			if(_jobImage && _jobImage.parent)
 				_jobImage.parent.removeChild(_jobImage);
 			_jobImage = null;
@@ -339,7 +404,7 @@ package com.rpgGame.app.view.icon
 		{
 			return _iconSize;
 		}
-
+		
 		/** ico资源的路径 */
 		public function get iconResURL():String
 		{

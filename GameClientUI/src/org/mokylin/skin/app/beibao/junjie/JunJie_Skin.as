@@ -11,7 +11,7 @@ package org.mokylin.skin.app.beibao.junjie
 	import org.mokylin.skin.app.beibao.junjie.button.ButtonJihuo;
 	import org.mokylin.skin.component.button.ButtonSkin_jiantou2;
 	import org.mokylin.skin.component.uinumber.UINumberJuese_zhanli;
-	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_lv2;
+	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_lv;
 
 	/**
 	 * @private
@@ -41,6 +41,8 @@ package org.mokylin.skin.app.beibao.junjie
 
 		public var num_lv:feathers.controls.UINumber;
 
+		public var point_eff:feathers.controls.Group;
+
 		public var roleCont:feathers.controls.SkinnableContainer;
 
 		public var uiUpOK:feathers.controls.UIAsset;
@@ -58,7 +60,7 @@ package org.mokylin.skin.app.beibao.junjie
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [__JunJie_Skin_UIAsset2_i(),roleCont_i(),__JunJie_Skin_UIAsset3_i(),btnJihuo_i(),ui_zhandou_i(),NumZhanli_i(),num_lv_i(),__JunJie_Skin_Group1_i(),__JunJie_Skin_Group2_i(),__JunJie_Skin_UIAsset10_i(),__JunJie_Skin_UIAsset11_i(),lbTiaojian_i(),contShuxing_i(),conTiaojian_i(),lb_wanchengdu_i(),uiUpOK_i(),btnPrev_i(),btnNext_i()];
+			this.elementsContent = [__JunJie_Skin_UIAsset2_i(),roleCont_i(),__JunJie_Skin_UIAsset3_i(),btnJihuo_i(),ui_zhandou_i(),NumZhanli_i(),num_lv_i(),__JunJie_Skin_Group1_i(),__JunJie_Skin_Group2_i(),__JunJie_Skin_UIAsset10_i(),__JunJie_Skin_UIAsset11_i(),lbTiaojian_i(),contShuxing_i(),conTiaojian_i(),lb_wanchengdu_i(),uiUpOK_i(),btnPrev_i(),btnNext_i(),point_eff_i()];
 			
 			states = {
 			};
@@ -283,13 +285,25 @@ package org.mokylin.skin.app.beibao.junjie
 			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
 			num_lv = temp;
 			temp.name = "num_lv";
-			temp.gap = -2;
-			temp.height = 13;
+			temp.gap = -4;
+			temp.height = 21;
 			temp.label = "x100";
-			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_lv2;
+			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_lv;
 			temp.width = 64;
-			temp.x = 889;
-			temp.y = 123;
+			temp.x = 891;
+			temp.y = 116;
+			return temp;
+		}
+
+		private function point_eff_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			point_eff = temp;
+			temp.name = "point_eff";
+			temp.height = 0;
+			temp.width = 0;
+			temp.x = 470;
+			temp.y = 220;
 			return temp;
 		}
 

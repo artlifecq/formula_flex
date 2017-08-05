@@ -8,8 +8,10 @@ package com.rpgGame.appModule.pet
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.PetSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.utils.FightValueUtil;
 	import com.rpgGame.app.view.icon.BgIcon;
+	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.appModule.common.touch.TouchCtrl;
 	import com.rpgGame.appModule.jingmai.sub.TweenScaleScrollUitlExt;
 	import com.rpgGame.appModule.pet.sub.PetAttrCon;
@@ -27,7 +29,6 @@ package com.rpgGame.appModule.pet
 	import com.rpgGame.coreData.clientConfig.Q_girl_advance;
 	import com.rpgGame.coreData.clientConfig.Q_girl_pet;
 	import com.rpgGame.coreData.clientConfig.Q_global;
-	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.CharAttributeType;
@@ -54,7 +55,7 @@ package com.rpgGame.appModule.pet
 		private var _zoneBalls:Vector.<PetZoneBall>;
 		private var _curSelectItem:PetHeadItemExt;
 		private var _attrCon:PetAttrCon;
-		private var _bgIco:BgIcon;
+		private var _bgIco:IconCDFace;
 		private var _touchCtrl:TouchCtrl;
 		private var _blessPanel:PetLevelUPPanelExt;
 		
@@ -110,8 +111,10 @@ package com.rpgGame.appModule.pet
 			_attrCon.y=257;
 			this.addChild(_attrCon);
 			
-			_bgIco=new BgIcon(IcoSizeEnum.ICON_42);
-			_skin.icon.addChild(_bgIco);
+			_bgIco=new IconCDFace(IcoSizeEnum.ICON_42);
+			_bgIco.x=784;
+			_bgIco.y=460;
+//			_bgIco.bindBg(_skin.icon);
 			//
 			this._skin.btnTiaozhan.addEventListener(Event.TRIGGERED,onFightBtnClick);
 			this._skin.btnYuanbao.addEventListener(Event.TRIGGERED,onGoldAdd);
@@ -339,6 +342,7 @@ package com.rpgGame.appModule.pet
 		private function updateRightData(data:PetInfo):void
 		{
 			var qPet:Q_girl_pet=PetCfg.getPet(data.modelId);
+			if(data.rank==0) data.rank=1;
 			if (!qPet) 
 			{
 				return;
@@ -376,6 +380,7 @@ package com.rpgGame.appModule.pet
 				}
 			}
 			_attrCon.setData(addid,nextAttrId);
+			
 			_bgIco.setIconResName(ClientConfig.getSkillIcon(qPetAdv.q_skill_id.split("_")[0].toString(),IcoSizeEnum.ICON_42));
 			if (!data.actived) 
 			{

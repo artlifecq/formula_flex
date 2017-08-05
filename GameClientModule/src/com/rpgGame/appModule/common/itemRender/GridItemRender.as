@@ -72,6 +72,7 @@ package com.rpgGame.appModule.common.itemRender
 				grid.setBg(bg);
 				grid.gridInfo = gridInfo;
 				grid.isGary=gridInfo.isGray;
+				grid.isSelect=gridInfo.isSelsce;
 			}
 			else
 			{

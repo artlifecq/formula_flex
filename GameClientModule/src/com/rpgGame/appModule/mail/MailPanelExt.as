@@ -87,7 +87,7 @@ package com.rpgGame.appModule.mail
 						NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(19));
 					}
 					else if(_selectItemList==null||_selectItemList.length<=0){
-						NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(21));
+						NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, "邮件为空,请选择要提取的邮件");
 					}
 					else{
 						MailSender.reqReceiveAllMailMessage(_selectItemList);	

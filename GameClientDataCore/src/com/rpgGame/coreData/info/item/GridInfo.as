@@ -19,6 +19,10 @@ package com.rpgGame.coreData.info.item
 		 */
 		public var isGray:Boolean;
 		
+		/**
+		 *是否选中(针对装备模块)
+		 */
+		public var isSelsce:Boolean;
 		
 		/**
 		 * 格子信息 

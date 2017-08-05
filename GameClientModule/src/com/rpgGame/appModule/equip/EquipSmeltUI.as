@@ -52,8 +52,12 @@ package com.rpgGame.appModule.equip
 	
 	import away3d.events.Event;
 	
+	import feathers.controls.ScrollBarDisplayMode;
+	import feathers.controls.Scroller;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
+	import feathers.layout.TiledRowsLayout;
+	import feathers.utils.filter.GrayFilter;
 	
 	import gs.TweenMax;
 	import gs.easing.Expo;
@@ -89,19 +93,19 @@ package com.rpgGame.appModule.equip
 		private var targetEquips:Vector.<ClientItemInfo>;//目标数据
 		private var useItems:Vector.<ClientItemInfo>;//消耗数据
 		private var tweenEquip:TweenMax;
-
+		
 		private var washCfg:Q_equip_wash;
 		
 		private var _sharedObject:SharedObject;
 		private var needMon:int;
-
+		
 		private var userMon:int;
-
+		
 		private var lock:int;
 		private var _getPanel:ItemGetPathPanel;
-
+		
 		private var oldAtt1:int;
-
+		
 		private var oldAtt2:int;
 		private var isLockRefresh:Boolean;
 		private static var noAlertWash:Boolean;
@@ -122,6 +126,24 @@ package com.rpgGame.appModule.equip
 			
 			_goodsContainerTarget=new GoodsContainerPanel(_leftSkin.list1,ItemContainerID.SMELT_LIST,createItemRender);
 			_goodsContainerUse=new GoodsContainerPanel(_leftSkin.list2,ItemContainerID.SMELT_USE,createItemRender);
+			
+			_leftSkin.list1.clipContent = true;
+			_leftSkin.list1.scrollBarDisplayMode = ScrollBarDisplayMode.ALWAYS_VISIBLE;
+			_leftSkin.list1.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
+			_leftSkin.list1.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
+			
+			_leftSkin.list1.padding=1;
+			(_leftSkin.list1.layout as TiledRowsLayout).horizontalGap=1;
+			(_leftSkin.list1.layout as TiledRowsLayout).verticalGap=2;
+			
+			_leftSkin.list2.clipContent = true;
+			_leftSkin.list2.scrollBarDisplayMode = ScrollBarDisplayMode.ALWAYS_VISIBLE;
+			_leftSkin.list2.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
+			_leftSkin.list2.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
+			
+			_leftSkin.list2.padding=1;
+			(_leftSkin.list2.layout as TiledRowsLayout).horizontalGap=1;
+			(_leftSkin.list2.layout as TiledRowsLayout).verticalGap=2;
 			
 			_targetEquip=IconCDFace.create(64);
 			_targetEquip.selectImgVisible=false;
@@ -177,7 +199,7 @@ package com.rpgGame.appModule.equip
 		private function addTargetEquip(targetGrid:DragDropItem):void
 		{
 			if(targetEquipInfo){
-				_goodsContainerTarget.setGrayForData(targetEquipInfo,false);
+				_goodsContainerTarget.setGrayIsSelect(targetEquipInfo,false);
 			}
 			
 			var gridInfo:GridInfo=targetGrid.gridInfo;
@@ -185,7 +207,7 @@ package com.rpgGame.appModule.equip
 			targetEquipInfo.setContainerId(gridInfo.containerID);
 			FaceUtil.SetItemGrid(_targetEquip,targetEquipInfo);
 			_targetEquip.selectImgVisible=false;
-			_goodsContainerTarget.setGrayForData(targetEquipInfo,true);
+			_goodsContainerTarget.setGrayIsSelect(targetEquipInfo,true);
 			
 			var p:Point=new Point(targetGrid.x,targetGrid.y);
 			p=targetGrid.parent.localToGlobal(p);
@@ -212,16 +234,30 @@ package com.rpgGame.appModule.equip
 				case _skin.btn_xilian:
 					onWash();
 					break;
+				case _skin.Item1.skin["lb_name0"]:
+					getItemSkin(_skin.Item1).chk_suoding.isSelected=!getItemSkin(_skin.Item1).chk_suoding.isSelected;
+					if(getItemSkin(_skin.Item1).chk_suoding.isSelected){
+						getItemSkin(_skin.Item2).chk_suoding.isSelected=!getItemSkin(_skin.Item1).chk_suoding.isSelected;
+					}
+					break;
 				case _skin.Item1.skin["chk_suoding"]:
+//					getItemSkin(_skin.Item1).chk_suoding.isSelected=!getItemSkin(_skin.Item1).chk_suoding.isSelected;
 					if(getItemSkin(_skin.Item1).chk_suoding.isSelected){
 						getItemSkin(_skin.Item2).chk_suoding.isSelected=!getItemSkin(_skin.Item1).chk_suoding.isSelected;
 					}
 					_leftSkin.lb_yinzi.text=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT27),needMon,userMon);
 					break;
-				case _skin.Item2.skin["chk_suoding"]:
+				case _skin.Item2.skin["lb_name0"]:
+					getItemSkin(_skin.Item2).chk_suoding.isSelected=!getItemSkin(_skin.Item2).chk_suoding.isSelected;
 					if(getItemSkin(_skin.Item2).chk_suoding.isSelected){
 						getItemSkin(_skin.Item1).chk_suoding.isSelected=!getItemSkin(_skin.Item2).chk_suoding.isSelected;
-					}
+					}	
+					break;
+				case _skin.Item2.skin["chk_suoding"]:
+//					getItemSkin(_skin.Item2).chk_suoding.isSelected=!getItemSkin(_skin.Item2).chk_suoding.isSelected;
+					if(getItemSkin(_skin.Item2).chk_suoding.isSelected){
+						getItemSkin(_skin.Item1).chk_suoding.isSelected=!getItemSkin(_skin.Item2).chk_suoding.isSelected;
+					}				
 					_leftSkin.lb_yinzi.text=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT27),needMon,userMon);
 					break;
 				case _skin.lb_cailiao:
@@ -257,7 +293,7 @@ package com.rpgGame.appModule.equip
 			isLockRefresh=true;
 			
 			if(needMon!=0&&!noAlertWash){
-				 var alertOk:AlertSetInfo=new AlertSetInfo(LangUI.UI_TEXT30);//强化成功
+				var alertOk:AlertSetInfo=new AlertSetInfo(LangUI.UI_TEXT30);//强化成功
 				alertOk.alertInfo.value=LanguageConfig.getText(LangUI.UI_TEXT30)+needMon;
 				alertOk.isShowCBox=true;
 				alertOk.alertInfo.checkText=LanguageConfig.getText(LangUI.UI_TEXT31);
@@ -305,12 +341,12 @@ package com.rpgGame.appModule.equip
 		{
 			var targetGrid:DragDropItem;
 			if(targetEquipInfo){
-				_goodsContainerTarget.setGrayForData(targetEquipInfo,false);
+				_goodsContainerTarget.setGrayIsSelect(targetEquipInfo,false);
 				targetEquipInfo=null;
 			}
 			
 			for each(var item:ClientItemInfo in useItems){
-				_goodsContainerUse.setGrayForData(item,false);
+				_goodsContainerUse.setGrayIsSelect(item,false);
 			}
 			
 			_targetEquip.clear();
@@ -321,6 +357,7 @@ package com.rpgGame.appModule.equip
 		private function updateView():void
 		{
 			if(targetEquipInfo){
+				_skin.btn_xilian.filter=null;
 				useItemInfo.count=BackPackManager.instance.getBagItemsCountById(washCfg.q_item_id);
 				changeAttState(_skin.Item1,true);
 				changeAttState(_skin.Item2,true);
@@ -369,7 +406,7 @@ package com.rpgGame.appModule.equip
 							getItemSkin(_skin.Item2).lb_name0.htmlText="";
 						}
 					}
-				/*	target=getItemSkin(_skin.Item2).lb_name;
+					/*	target=getItemSkin(_skin.Item2).lb_name;
 					TweenMax.fromTo(target,1,{x:-200,alpha:0},{x:1,alpha:1,ease:Expo.easeOut});
 					target=getItemSkin(_skin.Item2).lb_name0;
 					TweenMax.fromTo(target,1,{x:1,alpha:1},{x:200,alpha:0,ease:Expo.easeOut});*/
@@ -381,7 +418,7 @@ package com.rpgGame.appModule.equip
 					changeAttState(_skin.Item2,false);
 				}
 				
-//				_useItem.setSubString(useItemInfo.count+"/"+washCfg.q_item_num);
+				//				_useItem.setSubString(useItemInfo.count+"/"+washCfg.q_item_num);
 				_skin.lb_cailiao.text=LanguageConfig.getText(LangUI.UI_TEXT26);
 				_useItem.countText.text="";
 				_skin.lb_item1.color=ItemConfig.getItemQualityColor(targetEquipInfo.cfgId);
@@ -398,6 +435,7 @@ package com.rpgGame.appModule.equip
 				_leftSkin.lb_yinzi.text=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT27),needMon,userMon);
 				
 			}else{
+				GrayFilter.gray(_skin.btn_xilian);
 				changeAttState(_skin.Item1,false);
 				changeAttState(_skin.Item2,false);
 				_skin.lb_num.text="";
@@ -407,8 +445,8 @@ package com.rpgGame.appModule.equip
 				_leftSkin.lb_yinzi.text=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT27),0);
 			}
 			
-//			_goodsContainerTarget.dataProvider.updateAll();
-//			_goodsContainerUse.dataProvider.updateAll();
+			//			_goodsContainerTarget.dataProvider.updateAll();
+			//			_goodsContainerUse.dataProvider.updateAll();
 		}
 		
 		private function getTitleText(title:String,value:*,value1:int=-1,noSlip:Boolean=true):String
@@ -431,11 +469,11 @@ package com.rpgGame.appModule.equip
 		
 		private function changeAttState(Item:SkinnableContainer,state:Boolean):void
 		{
-				getItemSkin(Item).lb_name.text="";
-				getItemSkin(Item).chk_suoding.isSelected=state;
-				getItemSkin(Item).chk_suoding.visible=state;
-				getItemSkin(Item).lb_yuanbao.visible=state;
-				getItemSkin(Item).lb_lock.visible=state;
+			getItemSkin(Item).lb_name.text="????";
+			getItemSkin(Item).chk_suoding.isSelected=state;
+			getItemSkin(Item).chk_suoding.visible=state;
+			getItemSkin(Item).lb_yuanbao.visible=state;
+			getItemSkin(Item).lb_lock.visible=state;
 		}		
 		
 		private function getItemSkin(state:SkinnableContainer):XiLianItem
@@ -453,9 +491,9 @@ package com.rpgGame.appModule.equip
 			var targetGrid:DragDropItem;
 			for each(var item:ClientItemInfo in useItems){
 				if(item.cfgId==useItemInfo.cfgId){
-					_goodsContainerUse.setGrayForData(item,false);
+					_goodsContainerUse.setGrayIsSelect(item,false);
 				}else{
-					_goodsContainerUse.setGrayForData(item,true);
+					_goodsContainerUse.setGrayIsSelect(item,true);
 				}
 			}
 		}
@@ -463,6 +501,8 @@ package com.rpgGame.appModule.equip
 		override public function show(data:Object=null):void
 		{
 			initEvent();
+			getItemSkin(_skin.Item1).chk_suoding.isSelected=false;
+			getItemSkin(_skin.Item2).chk_suoding.isSelected=false;
 			refresh();
 		}
 		
@@ -482,6 +522,8 @@ package com.rpgGame.appModule.equip
 		
 		override public function hide():void
 		{
+			onCancelTarget();
+			
 			_leftSkin.tab_pack.removeEventListener(Event.CHANGE, onTab);
 			EventManager.removeEvent(ItemEvent.ITEM_WASH_MSG,getWashMsg);
 			
@@ -555,7 +597,7 @@ package com.rpgGame.appModule.equip
 			
 			if((info.containerID==ItemContainerID.Role||info.containerID==ItemContainerID.BackPack)&&
 				(info.type==GoodsType.EQUIPMENT||info.type==GoodsType.EQUIPMENT1||
-				info.type==GoodsType.EQUIPMENT2||isUse(info))){
+					info.type==GoodsType.EQUIPMENT2||isUse(info))){
 				ItemManager.getBackEquip(initItem);
 			}
 		}
