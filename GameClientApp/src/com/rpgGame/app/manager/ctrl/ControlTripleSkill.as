@@ -20,12 +20,12 @@ package com.rpgGame.app.manager.ctrl
 			_originSkill=skill;
 			var qSkill:Q_skill_model=SpellDataManager.getSpellData(skill,SpellManager.getSkillGrade(skill));
 			_skills=null;
-			if (qSkill.q_relate_spells!="") 
+			if (qSkill.q_relate_spells!="" /*|| qSkill.q_relate_spells!=null*/) 
 			{
 				_skills=qSkill.q_relate_spells.split(",");
 			}
 		}
-		public function isLockSkill(skillId:int):Boolean
+		public function isTripleSkill(skillId:int):Boolean
 		{
 			if (_skills==null) 
 			{
@@ -33,7 +33,7 @@ package com.rpgGame.app.manager.ctrl
 			}
 			return _skills.indexOf(skillId+"")!=-1
 		}
-		public function isLast(skillId:int):Boolean
+		public function isLastTripleSkill(skillId:int):Boolean
 		{
 			if (_skills==null||_skills.length==0) 
 			{
@@ -47,7 +47,7 @@ package com.rpgGame.app.manager.ctrl
 			return index==(_skills.length-1);
 		}
 		//不安全
-		public function getNextSkill(skill:int):int
+		public function getNextTripleSkill(skill:int):int
 		{
 			var index:int=_skills.indexOf(skill+"");
 			return _skills[index+1];

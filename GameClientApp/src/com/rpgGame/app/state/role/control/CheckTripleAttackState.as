@@ -24,13 +24,13 @@ package com.rpgGame.app.state.role.control
 					var skill:int=CheckTripleAttackStateReference(_ref).startSkill;
 					var ctrl:ControlTripleSkill=TrusteeshipManager.getInstance().tripleSkillCtrl;
 					//放完了
-					if (ctrl.isLast(skill))
+					if (ctrl.isLastTripleSkill(skill))
 					{
 						transition(RoleStateType.ACTION_PREWAR, null, false, false, [RoleStateType.CONTROL_WALK_MOVE]);
 					}
 					else
 					{
-						var nextSkill:int=ctrl.getNextSkill(skill);
+						var nextSkill:int=ctrl.getNextTripleSkill(skill);
 						CastSpellHelper.shortcutsTryCaseSpell(nextSkill);
 					}
 				}
