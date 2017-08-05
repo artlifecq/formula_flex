@@ -196,14 +196,14 @@ package com.rpgGame.coreData.info.cheats
 		}
 		public function checkEffectCheatUpdate(cheatId:int):void
 		{
-			if (_careCheats.containsKey(cheatId)) 
+			if (isActive()&&_careCheats.containsKey(cheatId)) 
 			{
 				updateEffectAttr();
 			}
 		}
 		public function isActive():Boolean
 		{
-			return _level>0
+			return _level>0;
 		}
 
 		public function get level():int

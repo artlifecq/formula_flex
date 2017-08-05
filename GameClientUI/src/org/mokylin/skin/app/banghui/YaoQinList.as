@@ -45,6 +45,8 @@ package org.mokylin.skin.app.banghui
 			super();
 			
 			this.currentState = "normal";
+			this.height = 357;
+			this.width = 578;
 			this.elementsContent = [bg_i(),__YaoQinList_UIAsset1_i(),btnClose_i(),grpFlip_i(),list_i(),__YaoQinList_Group1_i(),__YaoQinList_UIAsset10_i()];
 			
 			states = {
@@ -59,7 +61,6 @@ package org.mokylin.skin.app.banghui
 		private function __YaoQinList_Group1_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
-			temp.styleName = "ui/common/titilebg/headbg1.png";
 			temp.x = 11;
 			temp.y = 40;
 			temp.elementsContent = [__YaoQinList_UIAsset3_i(),__YaoQinList_UIAsset4_i(),__YaoQinList_UIAsset5_i(),__YaoQinList_UIAsset6_i(),__YaoQinList_UIAsset7_i(),__YaoQinList_UIAsset8_i(),__YaoQinList_UIAsset9_i()];

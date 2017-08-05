@@ -36,14 +36,15 @@ package com.rpgGame.app.ui.tips
 		}
 		private var _skin:Tips_VipSelect;
 		private var _labsArr:Array=[];
-		private var _endTime:int;
+		private var _endTime:Number;
 		private var _timer:GameTimer;
+		private var _tipDescs:Array;
 		public function VipMoTipExt()
 		{
 			_skin=new Tips_VipSelect();
 			super(_skin);
 			MCUtil.removeSelf(_skin.lbGong);
-			
+			_tipDescs=["购买钻石VIP可提升至钻石墨者令","购买至尊墨者令vip可提升至至尊墨者令","最高等级墨者令助您称霸江湖"];
 		}
 		
 		private function onTimer():void
@@ -105,6 +106,7 @@ package com.rpgGame.app.ui.tips
 			_skin.lbTime.y=startPt.y;
 			startPt.y+=_skin.lbTime.height+15;
 			bg.height=startPt.y;
+			_skin.lbDec.text=_tipDescs[vipLv-1];
 			_skin.lbDec.y=startPt.y;
 			_skin.uiDi.y=startPt.y;
 			

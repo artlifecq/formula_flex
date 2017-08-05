@@ -44,9 +44,11 @@ package com.rpgGame.appModule.guild
 		{
 			super.show(data,openTable,parentContiner);
 			EventManager.addEvent(GuildEvent.GET_INVITE_GUILD_LIST,refeashView);
+		
 			refeashView(null);
 			GuildSender.reqGuildInviteList();
 		}
+		
 		
 		override public function hide():void
 		{

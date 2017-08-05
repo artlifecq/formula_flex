@@ -211,7 +211,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			imgWin = temp;
 			temp.name = "imgWin";
-			temp.styleName = "ui/app/activety/tianzhanshengli.png";
+			temp.styleName = "ui/big_bg/activety/tianzhanshengli.png";
 			temp.x = 28;
 			temp.y = -38;
 			return temp;
