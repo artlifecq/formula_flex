@@ -4,12 +4,12 @@ package org.mokylin.skin.app.banghui
 	import feathers.controls.Button;
 	import feathers.controls.text.TextFieldTextEditor;
 	import feathers.controls.Group;
-	import feathers.controls.Label;
 	import feathers.controls.List;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.app.banghui.button.ButtonJiantou;
+	import org.mokylin.skin.common.TongYongTanKuang_bg;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
 
 	/**
@@ -22,7 +22,7 @@ package org.mokylin.skin.app.banghui
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var bg:feathers.controls.UIAsset;
+		public var bg:feathers.controls.SkinnableContainer;
 
 		public var btnClose:feathers.controls.Button;
 
@@ -36,8 +36,6 @@ package org.mokylin.skin.app.banghui
 
 		public var list:feathers.controls.List;
 
-		public var title:feathers.controls.Label;
-
 
 		//==========================================================================
 		//                                定义构造函数
@@ -47,7 +45,9 @@ package org.mokylin.skin.app.banghui
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [bg_i(),__YaoQinList_UIAsset1_i(),title_i(),btnClose_i(),grpFlip_i(),list_i(),__YaoQinList_Group1_i()];
+			this.height = 357;
+			this.width = 578;
+			this.elementsContent = [bg_i(),__YaoQinList_UIAsset1_i(),btnClose_i(),grpFlip_i(),list_i(),__YaoQinList_Group1_i(),__YaoQinList_UIAsset10_i()];
 			
 			states = {
 			};
@@ -61,20 +61,29 @@ package org.mokylin.skin.app.banghui
 		private function __YaoQinList_Group1_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
-			temp.x = 12;
-			temp.y = 43;
+			temp.x = 11;
+			temp.y = 40;
 			temp.elementsContent = [__YaoQinList_UIAsset3_i(),__YaoQinList_UIAsset4_i(),__YaoQinList_UIAsset5_i(),__YaoQinList_UIAsset6_i(),__YaoQinList_UIAsset7_i(),__YaoQinList_UIAsset8_i(),__YaoQinList_UIAsset9_i()];
+			return temp;
+		}
+
+		private function __YaoQinList_UIAsset10_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/banghui/word/yaoqingliebiao.png";
+			temp.x = 246;
+			temp.y = 8;
 			return temp;
 		}
 
 		private function __YaoQinList_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 303;
+			temp.height = 309;
 			temp.styleName = "ui/app/banghui/kuang1.png";
 			temp.width = 566;
-			temp.x = 7;
-			temp.y = 38;
+			temp.x = 6;
+			temp.y = 34;
 			return temp;
 		}
 
@@ -90,7 +99,7 @@ package org.mokylin.skin.app.banghui
 		private function __YaoQinList_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/banghui/titlebg2.png";
+			temp.styleName = "ui/common/titilebg/headbg1.png";
 			temp.width = 558;
 			temp.x = 0;
 			temp.y = 0;
@@ -151,14 +160,15 @@ package org.mokylin.skin.app.banghui
 			return temp;
 		}
 
-		private function bg_i():feathers.controls.UIAsset
+		private function bg_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 361;
-			temp.styleName = "ui/common/background/erji_kuang.png";
-			temp.width = 580;
+			temp.height = 357;
+			var skin:StateSkin = new org.mokylin.skin.common.TongYongTanKuang_bg()
+			temp.skin = skin
+			temp.width = 578;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -171,7 +181,7 @@ package org.mokylin.skin.app.banghui
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
 			temp.x = 545;
-			temp.y = 7;
+			temp.y = 5;
 			return temp;
 		}
 
@@ -204,7 +214,7 @@ package org.mokylin.skin.app.banghui
 			grpFlip = temp;
 			temp.name = "grpFlip";
 			temp.x = 253;
-			temp.y = 326;
+			temp.y = 327;
 			temp.elementsContent = [__YaoQinList_UIAsset2_i(),lbNum_i(),btnPrev_i(),btnNext_i()];
 			return temp;
 		}
@@ -231,29 +241,10 @@ package org.mokylin.skin.app.banghui
 			list = temp;
 			temp.name = "list";
 			temp.height = 250;
+			temp.visible = false;
 			temp.width = 549;
 			temp.x = 16;
 			temp.y = 72;
-			return temp;
-		}
-
-		private function title_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			title = temp;
-			temp.name = "title";
-			temp.bold = true;
-			temp.touchable = false;
-			temp.touchGroup = true;
-			temp.letterSpacing = 2;
-			temp.fontSize = 16;
-			temp.text = "邀请列表";
-			temp.textAlign = "center";
-			temp.color = 0xDDE2B1;
-			temp.nativeFilters = Fontter.filterObj[""];
-			temp.width = 240;
-			temp.x = 170;
-			temp.y = 11;
 			return temp;
 		}
 

@@ -11,7 +11,7 @@ package org.mokylin.skin.app.banghui
 	import org.mokylin.skin.app.banghui.button.ButtonBh_zhengba;
 	import org.mokylin.skin.app.banghui.button.ButtonFuli;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
-	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow2;
+	import org.mokylin.skin.component.uinumber.UINumberJuese_zhanli;
 
 	/**
 	 * @private
@@ -41,6 +41,8 @@ package org.mokylin.skin.app.banghui
 
 		public var lbDengji:feathers.controls.Label;
 
+		public var ui_zhandou:feathers.controls.UIAsset;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -50,9 +52,9 @@ package org.mokylin.skin.app.banghui
 			super();
 			
 			this.currentState = "normal";
-			this.height = 600;
+			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [__BangHui_Info_UIAsset2_i(),__BangHui_Info_UIAsset3_i(),btnJiesan_i(),btnZhaoji_i(),lbBangZhu_i(),lbDengji_i(),__BangHui_Info_UIAsset4_i(),NumZhanli_i(),btnRenwu_i(),btnJineng_i(),btnZhengba_i(),btnFuli_i()];
+			this.elementsContent = [__BangHui_Info_UIAsset2_i(),__BangHui_Info_UIAsset3_i(),btnJiesan_i(),btnZhaoji_i(),lbBangZhu_i(),lbDengji_i(),ui_zhandou_i(),NumZhanli_i(),btnRenwu_i(),btnJineng_i(),btnZhengba_i(),btnFuli_i()];
 			
 			states = {
 			};
@@ -68,13 +70,14 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
 			NumZhanli = temp;
 			temp.name = "NumZhanli";
-			temp.gap = -13;
-			temp.height = 33;
-			temp.label = "1364364";
-			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow2;
-			temp.width = 148;
-			temp.x = 767;
-			temp.y = 472;
+			temp.gap = -15;
+			temp.height = 40;
+			temp.label = "62984567";
+			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberJuese_zhanli;
+			temp.textAlign = "left";
+			temp.width = 167;
+			temp.x = 758;
+			temp.y = 468;
 			return temp;
 		}
 
@@ -96,15 +99,6 @@ package org.mokylin.skin.app.banghui
 			return temp;
 		}
 
-		private function __BangHui_Info_UIAsset4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/zdl2.png";
-			temp.x = 695;
-			temp.y = 462;
-			return temp;
-		}
-
 		private function btnFuli_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
@@ -121,10 +115,11 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnJiesan = temp;
 			temp.name = "btnJiesan";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "解散帮会";
+			temp.fontSize = 14;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.width = 112;
 			temp.x = 802;
 			temp.y = 545;
@@ -158,10 +153,11 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnZhaoji = temp;
 			temp.name = "btnZhaoji";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "召集成员";
+			temp.fontSize = 14;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.width = 112;
 			temp.x = 683;
 			temp.y = 545;
@@ -185,7 +181,7 @@ package org.mokylin.skin.app.banghui
 			lbBangZhu = temp;
 			temp.name = "lbBangZhu";
 			temp.text = "名字共六个字";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 334;
 			temp.y = 231;
@@ -199,11 +195,22 @@ package org.mokylin.skin.app.banghui
 			temp.name = "lbDengji";
 			temp.text = "Lv.68";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 61;
 			temp.x = 349;
 			temp.y = 271;
+			return temp;
+		}
+
+		private function ui_zhandou_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ui_zhandou = temp;
+			temp.name = "ui_zhandou";
+			temp.styleName = "ui/common/zhandouli1.png";
+			temp.x = 681;
+			temp.y = 465;
 			return temp;
 		}
 

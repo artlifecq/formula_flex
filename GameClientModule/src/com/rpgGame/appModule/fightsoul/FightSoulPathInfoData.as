@@ -31,7 +31,7 @@ package com.rpgGame.appModule.fightsoul
 		
 		public function refeash():void
 		{
-			_count = _path.q_total-FightSoulManager.instance().getActivityByType(_path.q_id);
+			_count = FightSoulManager.instance().getActivityByType(_path.q_id);
 		}
 		
 		public function isOpen():Boolean
@@ -59,7 +59,7 @@ package com.rpgGame.appModule.fightsoul
 		
 		public function get isOver():Boolean
 		{
-			return _count<=0;
+			return _count==_path.q_total;
 		}
 	}
 }

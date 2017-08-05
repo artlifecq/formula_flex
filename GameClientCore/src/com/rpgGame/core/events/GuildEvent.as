@@ -19,6 +19,8 @@ package com.rpgGame.core.events
 		public static const GET_JOIN_GUILD_LIST : uint = UNIQUEID.NEXT;
 		/**获取本人帮派邀请的list**/
 		public static const GET_INVITE_GUILD_LIST : uint = UNIQUEID.NEXT;
+		/**删除一条邀请**/
+		public static const DELETE_GUILD_INVAITE : uint = UNIQUEID.NEXT;
 		/**请求本国帮派列表**/
 		public static const GET_GUILD_LIST : uint = UNIQUEID.NEXT;
 		/**帮派公告改变了**/
@@ -37,6 +39,12 @@ package com.rpgGame.core.events
 		public static const GUILD_FAMILY_CHANGE : uint = UNIQUEID.NEXT;
 		/**帮派操作标识**/
 		public static const GUILD_OPERATERESULT : uint = UNIQUEID.NEXT;
+		
+		/**帮派活跃度改变**/
+		public static const GUILD_ACTIVE_CHANGE: uint = UNIQUEID.NEXT;
+		
+		/**主玩家帮会贡献改变**/
+		public static const GUILD_MAINPLAYER_VALUE_CHANGE: uint = UNIQUEID.NEXT;
 		
 		/**跟新帮派技能信息**/
 		public static const GUILD_SKILLINFO_CHAGE:uint = UNIQUEID.NEXT;

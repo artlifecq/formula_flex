@@ -57,5 +57,3 @@
 		}
 	}
 }
-import away3d.ribbon;
-

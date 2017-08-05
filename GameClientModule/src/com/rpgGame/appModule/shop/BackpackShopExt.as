@@ -1,15 +1,21 @@
 package com.rpgGame.appModule.shop
 {
+	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.appModule.common.touch.TouchCtrl;
 	import com.rpgGame.appModule.shop.backpackShop.BackpackShopRebuyView;
 	import com.rpgGame.appModule.shop.backpackShop.BackpackShopView;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.MCUtil;
 	
+	import away3d.events.Event;
+	
 	import org.mokylin.skin.app.beibao.ShangDian_Skin;
 	
 	import starling.display.DisplayObject;
-	import away3d.events.Event;
+	import starling.events.Touch;
+	import starling.events.TouchEvent;
+	import starling.events.TouchPhase;
 
 	/**
 	 *随身商店 
@@ -22,6 +28,7 @@ package com.rpgGame.appModule.shop
 		private var _shopView:BackpackShopView;
 		private var _rebuyView:BackpackShopRebuyView;
 		private var _curView:DisplayObject;
+		private var _touch:TouchCtrl;
 		public function BackpackShopExt()
 		{
 			_skin=new ShangDian_Skin();
@@ -35,6 +42,19 @@ package com.rpgGame.appModule.shop
 		private function regEvent():void
 		{
 			this._skin.tab_pack.addEventListener(Event.CHANGE,onTab);
+			_touch=new TouchCtrl(this,null,onTouchMe,onLeaveMe);
+		}
+		
+		private function onLeaveMe():void
+		{
+			// TODO Auto Generated method stub
+			BackPackManager.instance.isShowShop=false;
+		}
+		
+		private function onTouchMe():void
+		{
+			// TODO Auto Generated method stub
+			BackPackManager.instance.isShowShop=true;
 		}
 		
 		private function onTab(eve:Event):void
@@ -86,7 +106,7 @@ package com.rpgGame.appModule.shop
 			{
 				Object(_curView).onHide();
 			}
-			
+			BackPackManager.instance.isShowShop=false;
 		}
 		override protected function onStageResize(sw : int, sh : int) : void
 		{

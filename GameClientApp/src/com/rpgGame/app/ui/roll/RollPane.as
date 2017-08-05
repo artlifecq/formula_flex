@@ -51,19 +51,21 @@ package com.rpgGame.app.ui.roll
 		{
 			_roleItem = data;
 //			_roleskin = new Roll_Skin();
-			super();
 //			init();
+			super();
 			if(!_isLoad){
 				var loadUrl : String = ClientConfig.getUI("roll");
 				AppLoadManager.instace().loadByUrl(loadUrl, "", onLoadComplete, onError);
 			}
 			else{
 				onLoadComplete();
-			}			
+			}		
+			
 		}
 		
 		public function onLoadComplete(_appUrl : String = null) : void
 		{
+			trace("roll点资源加载成功！！！");
 			_isLoad = true;
 			_roleskin = new Roll_Skin();
 			_roleskin.toSprite(this);

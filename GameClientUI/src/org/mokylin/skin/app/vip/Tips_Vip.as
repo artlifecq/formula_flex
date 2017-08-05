@@ -74,7 +74,7 @@ package org.mokylin.skin.app.vip
 		private function __Tips_Vip_Label4_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "生命、攻击、防御";
+			temp.text = "气血、攻击、防御";
 			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 120;

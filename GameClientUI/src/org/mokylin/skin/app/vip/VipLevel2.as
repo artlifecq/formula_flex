@@ -97,7 +97,7 @@ package org.mokylin.skin.app.vip
 			temp.name = "icon";
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/common/grid/normal/46.png";
+			temp.styleName = "ui/common/grid/normal/48.png";
 			temp.x = 10;
 			temp.y = 34;
 			return temp;

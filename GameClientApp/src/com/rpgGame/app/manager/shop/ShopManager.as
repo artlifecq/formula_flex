@@ -256,8 +256,8 @@ package  com.rpgGame.app.manager.shop
 							return;
 						}
 					}
-					Mgr.shopMgr.ReqBuyItem(vo.data,buyNum,null,autoUse);
-					//					NoticeManager.mouseFollowNotify(ItemConfig.getItemName(priceType)+"不足");
+					//Mgr.shopMgr.ReqBuyItem(vo.data,buyNum,null,autoUse);
+					NoticeManager.mouseFollowNotify(ItemConfig.getItemName(priceType)+"不足");
 				}
 				else
 				{

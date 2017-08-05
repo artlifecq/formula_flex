@@ -66,7 +66,9 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnAdd1 = temp;
 			temp.name = "btnAdd1";
+			temp.height = 22;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jia;
+			temp.width = 22;
 			temp.x = 177;
 			temp.y = 15;
 			return temp;
@@ -77,7 +79,9 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnAdd2 = temp;
 			temp.name = "btnAdd2";
+			temp.height = 22;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jia;
+			temp.width = 22;
 			temp.x = 177;
 			temp.y = 43;
 			return temp;
@@ -88,7 +92,9 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnDui = temp;
 			temp.name = "btnDui";
+			temp.height = 22;
 			temp.styleClass = org.mokylin.skin.app.zhanchang.button.ButtonDui;
+			temp.width = 22;
 			temp.x = 177;
 			temp.y = 70;
 			return temp;
@@ -100,7 +106,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			lbCiShu = temp;
 			temp.name = "lbCiShu";
 			temp.text = "剩余次数：$";
-			temp.color = 0xBEA757;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 163;
 			temp.x = 9;
@@ -114,7 +120,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			lbShengWang = temp;
 			temp.name = "lbShengWang";
 			temp.text = "声望点数：$";
-			temp.color = 0xBEA757;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 163;
 			temp.x = 9;
@@ -128,7 +134,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			lbZhanLi = temp;
 			temp.name = "lbZhanLi";
 			temp.text = "我的战力：$";
-			temp.color = 0xBEA757;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 163;
 			temp.x = 9;

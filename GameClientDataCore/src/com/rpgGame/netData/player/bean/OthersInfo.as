@@ -63,6 +63,9 @@ package com.rpgGame.netData.player.bean{
 		//帮会职位
 		private var _guildMemberType: int;
 		
+		//结婚对象名字
+		private var _marriageName: String;
+		
 		//当前经验值
 		private var _exp: long;
 		
@@ -71,6 +74,9 @@ package com.rpgGame.netData.player.bean{
 		
 		//最大真气值
 		private var _maxZhenQi: long;
+		
+		//婚戒阶数
+		private var _advanceWedding: int;
 		
 		//角色属性信息
 		private var _attributeList: Vector.<AttributeItem> = new Vector.<AttributeItem>();
@@ -112,12 +118,16 @@ package com.rpgGame.netData.player.bean{
 			writeString(_guildName);
 			//帮会职位
 			writeInt(_guildMemberType);
+			//结婚对象名字
+			writeString(_marriageName);
 			//当前经验值
 			writeLong(_exp);
 			//最大经验值
 			writeLong(_maxExp);
 			//最大真气值
 			writeLong(_maxZhenQi);
+			//婚戒阶数
+			writeInt(_advanceWedding);
 			//角色属性信息
 			writeShort(_attributeList.length);
 			for (var i: int = 0; i < _attributeList.length; i++) {
@@ -170,12 +180,16 @@ package com.rpgGame.netData.player.bean{
 			_guildName = readString();
 			//帮会职位
 			_guildMemberType = readInt();
+			//结婚对象名字
+			_marriageName = readString();
 			//当前经验值
 			_exp = readLong();
 			//最大经验值
 			_maxExp = readLong();
 			//最大真气值
 			_maxZhenQi = readLong();
+			//婚戒阶数
+			_advanceWedding = readInt();
 			//角色属性信息
 			var attributeList_length : int = readShort();
 			for (var i: int = 0; i < attributeList_length; i++) {
@@ -420,6 +434,21 @@ package com.rpgGame.netData.player.bean{
 		}
 		
 		/**
+		 * get 结婚对象名字
+		 * @return 
+		 */
+		public function get marriageName(): String{
+			return _marriageName;
+		}
+		
+		/**
+		 * set 结婚对象名字
+		 */
+		public function set marriageName(value: String): void{
+			this._marriageName = value;
+		}
+		
+		/**
 		 * get 当前经验值
 		 * @return 
 		 */
@@ -462,6 +491,21 @@ package com.rpgGame.netData.player.bean{
 		 */
 		public function set maxZhenQi(value: long): void{
 			this._maxZhenQi = value;
+		}
+		
+		/**
+		 * get 婚戒阶数
+		 * @return 
+		 */
+		public function get advanceWedding(): int{
+			return _advanceWedding;
+		}
+		
+		/**
+		 * set 婚戒阶数
+		 */
+		public function set advanceWedding(value: int): void{
+			this._advanceWedding = value;
 		}
 		
 		/**

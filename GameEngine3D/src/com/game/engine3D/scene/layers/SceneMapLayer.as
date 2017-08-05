@@ -696,10 +696,8 @@ package com.game.engine3D.scene.layers
 		private function onResourceComplete(ev : LoaderEvent) : void
 		{
 			_isLoaded = true;
-			_cameraNear = _cameraNear > 0 ? _cameraNear : 100;
-			_cameraFar = _cameraFar > 0 ? _cameraFar : 12000;
-			_scene3D.cameraNear = _cameraNear;
-			_scene3D.cameraFar = _cameraFar;
+			_scene3D.cameraNear = _cameraNear > 0 ? _cameraNear : GameScene3D.DEFAULT_CAMERA_NEAR;
+			_scene3D.cameraFar = _cameraFar > 0 ? _cameraFar : GameScene3D.DEFAULT_CAMERA_FAR;
 			if (_quadTree)
 				_quadTree.reBuildQuadTree();
 			EventManager.dispatchEvent(MapLoadEvent.MAP_RESOURCE_COMPLETE);
@@ -1083,16 +1081,6 @@ package com.game.engine3D.scene.layers
             this._xyzMode = value;
         }
 
-		public function get cameraNear() : int
-		{
-			return _cameraNear;
-		}
-
-		public function get cameraFar() : int
-		{
-			return _cameraFar;
-		}
-		
 		public function get animatorRandom() : int
 		{
 			return _animatorRandom;

@@ -47,12 +47,12 @@ package org.mokylin.skin.app.beibao.button
 						}
 					]
 			};
-			skinNames={"down":"ui/app/beibao/button/xinfa/down.png",
-			"downAndSelected":"ui/app/beibao/button/xinfa/select.png",
-			"hover":"ui/app/beibao/button/xinfa/over.png",
-			"overAndSelected":"ui/app/beibao/button/xinfa/select.png",
-			"up":"ui/app/beibao/button/xinfa/up.png",
-			"upAndSelected":"ui/app/beibao/button/xinfa/select.png"};
+			skinNames={"down":"ui/component/button/btn_yeqian/down.png,ui/app/beibao/button/xinfa/down.png",
+			"downAndSelected":"ui/component/button/btn_yeqian/selected.png,ui/app/beibao/button/xinfa/over.png",
+			"hover":"ui/component/button/btn_yeqian/over.png,ui/app/beibao/button/xinfa/over.png",
+			"hoverAndSelected":"ui/component/button/btn_yeqian/selected.png,ui/app/beibao/button/xinfa/over.png",
+			"up":"ui/component/button/btn_yeqian/up.png,ui/app/beibao/button/xinfa/up.png",
+			"upAndSelected":"ui/component/button/btn_yeqian/selected.png,ui/app/beibao/button/xinfa/over.png"};
 		}
 
 

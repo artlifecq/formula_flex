@@ -10,7 +10,6 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.app.graphics.DropItemHeadFace;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.graphics.StallHeadFace;
-	import com.rpgGame.app.graphics.TranportHeadFace;
 	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.manager.CharAttributeManager;
 	import com.rpgGame.app.manager.ClientTriggerManager;
@@ -19,7 +18,6 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.scene.animator.FightSoulFollowAnimator;
 	import com.rpgGame.app.scene.animator.GirlPetFollowAnimator;
-	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.app.state.role.action.PlayActionStateReference;
 	import com.rpgGame.app.state.role.control.RidingStateReference;
 	import com.rpgGame.app.ui.alert.GameAlert;
@@ -31,7 +29,6 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.FightsoulModeData;
-	import com.rpgGame.coreData.cfg.PetCfg;
 	import com.rpgGame.coreData.cfg.StallCfgData;
 	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
 	import com.rpgGame.coreData.cfg.country.CountryWarCfgData;
@@ -40,7 +37,6 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.clientConfig.AvatarResConfig;
 	import com.rpgGame.coreData.clientConfig.ClientSceneEffect;
 	import com.rpgGame.coreData.clientConfig.Q_fightsoul_mode;
-	import com.rpgGame.coreData.clientConfig.Q_girl_pet;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.clientConfig.Q_warflag;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
@@ -67,18 +63,10 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import flash.geom.Point;
-	import flash.utils.getTimer;
 	
 	import app.message.StallTypeDataProto;
 	
-	import feathers.controls.UINumber;
-	
-	import gs.TweenMax;
-	import gs.easing.Sine;
-	
 	import org.client.mainCore.manager.EventManager;
-	import org.mokylin.skin.app.activety.number.UINumberDaojishi;
-	import org.mokylin.skin.mainui.zhandouli.ZhandouliTipSkin;
 	
 	/**
 	 *
@@ -623,7 +611,7 @@ package com.rpgGame.app.manager.role
 			//设置VO
 			role.data = data;
 			role.name = data.name;
-			role.headFace = TranportHeadFace.create(role);
+			role.headFace = HeadFace.create(role);
 			//			data.avatarInfo.effectResID = data.effectRes;
 			role.updateEffect(data.effectRes);
 			
@@ -635,32 +623,10 @@ package com.rpgGame.app.manager.role
 			role.setGroundXY(data.x, data.y);
 			role.rotationY = data.direction;
 			role.offsetY = data.offsetUp;
-			//createTranportName(role);
 			SceneManager.addSceneObjToScene(role, true, false, false);
 			ClientTriggerManager.addTriggerCollectEffect(role);
 			return role;
 		}
-		/**创建传送门名字*/
-		public function createTranportName(role:SceneRole):void
-		{
-			var tranportData : SceneTranportData=role.data as SceneTranportData;
-			if(!tranportData)
-				return;
-			var nameEffectRes:String=tranportData.nameEffectRes;
-			/*var rud : RenderParamData3D = new RenderParamData3D(0, RenderUnitType.BODY, ClientConfig.getEffect(nameEffectRes));
-			var effectRu : RenderUnit3D=role.avatar.addRenderUnitToChild(RenderUnitType.BODY,RenderUnitID.BODY,BoneNameEnum.c_0_body_01,rud);
-			effectRu.play();*/
-			var rud : RenderParamData3D = new RenderParamData3D(tranportData.id, SceneCharType.SCENE_TRANS_NAME, ClientConfig.getEffect(nameEffectRes));
-			var effectRu : RenderUnit3D = RenderUnit3D.create(rud,true);
-			effectRu.repeat = 0;
-			effectRu.offsetZ=210;
-			//effectRu.setGroundXY(tranportData.x, tranportData.y);
-			//effectRu.mouseEnable = true;
-			effectRu.play(0);
-			effectRu.visible = true;
-			role.addBaseObj(effectRu);
-		}
-		
 		/**
 		 * 创建跳跃点
 		 * @param data

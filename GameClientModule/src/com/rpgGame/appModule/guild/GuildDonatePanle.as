@@ -120,7 +120,7 @@ package com.rpgGame.appModule.guild
 		
 		private function refeashView():void
 		{
-			_listPage.maxPage = _skin.list.maxVerticalPageIndex;
+			
 			var count:int = BackPackManager.instance.getBagItemsCountById(_item1.cfgId)
 			_itemPage1.updateMax(count ,count);
 			_skin.lbNum1.text = count.toString();
@@ -129,6 +129,8 @@ package com.rpgGame.appModule.guild
 			_itemPage2.updateMax(haveGold,last);
 			_skin.lbNum2.text = haveGold.toString();
 			_skin.lbLast.htmlText = LanguageConfig.replaceStr("今日还可捐献$元宝",HtmlTextUtil.getTextColor(0x5DBD37,last.toString()));
+			_skin.lbBanggong.text=GuildManager.instance().selfMemberInfo.contribution+"";
+			_skin.lbHuoyue.text=GuildManager.instance().selfMemberInfo.allActive+"";
 		}
 		private function refeashList():void
 		{
@@ -140,12 +142,13 @@ package com.rpgGame.appModule.guild
 			{
 				_skin.list.dataProvider.push(info);
 			}
+			_listPage.maxPage = int(list.length/8);
 			refeashView();
 		}
 		private function requestPage(page:int,maxPage:int):void
 		{
-			_skin.list.selectedIndex = page;
-			_skin.lbNum.text = page.toString()+"/"+maxPage.toString();
+			_skin.list.scrollToPageIndex(0,page,0.1);
+			_skin.lbNum.text = (page+1).toString()+"/"+(1+maxPage).toString();
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void

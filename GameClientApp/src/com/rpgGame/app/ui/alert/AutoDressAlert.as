@@ -127,6 +127,11 @@ package com.rpgGame.app.ui.alert
 		
 		public function addEquip(equip:EquipInfo):void
 		{
+			var hex:String=equip.itemInfo.itemId.hexValue;
+			if (checkIsInBlack(hex)) 
+			{
+				return;
+			}
 			var len:int = equips.length;
 			var eq:EquipInfo;
 			for(var i:int=0; i<len; i++)
@@ -138,16 +143,15 @@ package com.rpgGame.app.ui.alert
 				{
 					continue;
 				}
-				if(equip.itemInfo.fightPower < eq.itemInfo.fightPower)
+				if(equip.itemInfo.fightPower <=eq.itemInfo.fightPower)
 				{
 					return;
 				}
-			}
-			var hex:String=equip.itemInfo.itemId.hexValue;
-			if (checkIsInBlack(hex)) 
-			{
+				//直接替换吧一个部位只保存一个
+				equips[i]=equip;
 				return;
 			}
+			
 			equips.push(equip);
 		}
 		private function checkIsInBlack(hex:String):Boolean

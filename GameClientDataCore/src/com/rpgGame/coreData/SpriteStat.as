@@ -413,5 +413,10 @@ package com.rpgGame.coreData
 		{
 			setStatValue( CharAttributeType.LV, value );
 		}
+		
+		public function get gold():int
+		{
+			return getResData( CharAttributeType.RES_GOLD);
+		}
 	}
 }

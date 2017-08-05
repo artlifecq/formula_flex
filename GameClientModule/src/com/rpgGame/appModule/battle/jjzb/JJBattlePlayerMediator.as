@@ -1,10 +1,13 @@
 package    com.rpgGame.appModule.battle.jjzb
 {
+	import com.game.engine3D.display.Inter3DContainer;
+	import com.game.engine3D.display.InterObject3D;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.appModule.common.RoleModelShow;
 	import com.rpgGame.core.utils.MCUtil;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.netData.zhengba.bean.ZhengBaBriefInfo;
@@ -12,11 +15,7 @@ package    com.rpgGame.appModule.battle.jjzb
 	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.UIAsset;
-	import feathers.controls.UIMovieClip;
 	import feathers.controls.UINumber;
-	
-	import org.mokylin.skin.app.beibao.mc.UIMovieClipBianshi_guang;
-	import org.mokylin.skin.app.zhanchang.mc.UIMovieClipTiaozhan_dao;
 	
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;
@@ -34,7 +33,8 @@ package    com.rpgGame.appModule.battle.jjzb
 		private var _labRank:Label;
 		private var _labName:Label;
 		private var _fightPower:UINumber;
-		private var _effect:UIMovieClip;
+		private var _effect:Inter3DContainer;
+		private var _effect3d:InterObject3D;
 		private var _roleModel:RoleModelShow;
 		private  var isMouseOut : Boolean = true;
 		private var scale:Number;
@@ -209,29 +209,23 @@ package    com.rpgGame.appModule.battle.jjzb
 			{
 				if (!_effect) 
 				{
-					_effect = new feathers.controls.UIMovieClip();
-					
-					_effect.name = "mc_bianshi";
-					_effect.autoPlay = false;
-				
-					_effect.styleClass = UIMovieClipTiaozhan_dao;
-		
-					_effect.x=(this._imgCon.width)/2-100;
+					_effect =new Inter3DContainer();
+					_effect.x=(this._imgCon.width)/2;
 					_effect.y=(this._imgCon.height)/2;
+					_effect3d=_effect.playInter3DAt(ClientConfig.getEffect("ui_tiaozhan2"),0,0,0);
 					
-					this._imgCon.addChild(_effect);
 				}
-				MCUtil.BringToTop(_effect);
-				_effect.play();
-				_effect.visible=true;
+				if (_effect3d.isStarted==false) 
+				{
+					_effect3d.start();
+				}
+				this._imgCon.addChild(_effect);
 			}
 			else
 			{
-				if (_effect) 
+				if (_effect3d&&_effect3d.isStarted) 
 				{
-					
-					_effect.stop();
-					_effect.visible=false;
+					_effect3d.stop();
 				}
 			}
 		}

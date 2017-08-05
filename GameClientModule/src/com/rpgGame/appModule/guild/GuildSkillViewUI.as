@@ -3,6 +3,7 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.app.ui.tab.ViewUI;
+	import com.rpgGame.core.ui.tip.RTNodeID;
 	
 	import away3d.events.Event;
 	
@@ -33,8 +34,15 @@ package com.rpgGame.appModule.guild
 			_gropu = _skin.btnSkill1.toggleGroup;
 			_gropu.addEventListener(Event.CHANGE,changeHandler);
 			changeHandler(null);
+			addNode(RTNodeID.GUILD_SKILL,RTNodeID.GUILD_SKILL_SELF,_skin.btnSkill1,123,GuildManager.instance().hasSelfSkill2LevelUp);
+			addNode(RTNodeID.GUILD_SKILL,RTNodeID.GUILD_SKILL_LEADER,_skin.btnSkill2,123,GuildManager.instance().hasLeaderSkill2LevelUp);
 		}
-		
+		override protected function onShow():void
+		{
+			super.onShow();
+			notifyUpdate(RTNodeID.GUILD_SKILL_SELF);
+			notifyUpdate(RTNodeID.GUILD_SKILL_LEADER);
+		}
 		private function changeHandler(e:Event):void
 		{
 			var index:int = _gropu.selectedIndex;
