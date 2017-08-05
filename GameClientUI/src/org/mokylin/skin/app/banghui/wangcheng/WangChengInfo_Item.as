@@ -17,9 +17,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 		//==========================================================================
 		public var bg:feathers.controls.UIAsset;
 
-		public var lbBangName:feathers.controls.Label;
-
-		public var lbZhan:feathers.controls.Label;
+		public var lbTxt:feathers.controls.Label;
 
 
 		//==========================================================================
@@ -30,7 +28,8 @@ package org.mokylin.skin.app.banghui.wangcheng
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [bg_i(),lbZhan_i(),lbBangName_i()];
+			this.width = 165;
+			this.elementsContent = [bg_i(),lbTxt_i()];
 			
 			states = {
 			};
@@ -54,29 +53,20 @@ package org.mokylin.skin.app.banghui.wangcheng
 			return temp;
 		}
 
-		private function lbBangName_i():feathers.controls.Label
+		private function lbTxt_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbBangName = temp;
-			temp.name = "lbBangName";
+			lbTxt = temp;
+			temp.name = "lbTxt";
+			temp.bottom = 3;
+			temp.leading = 2;
+			temp.left = 2;
+			temp.right = 3;
 			temp.text = "帮派名称七个字";
+			temp.textAlign = "left";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 56;
-			temp.y = 3;
-			return temp;
-		}
-
-		private function lbZhan_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbZhan = temp;
-			temp.name = "lbZhan";
-			temp.text = "[占]";
-			temp.color = 0x5CB006;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 28;
-			temp.y = 3;
+			temp.top = 3;
 			return temp;
 		}
 

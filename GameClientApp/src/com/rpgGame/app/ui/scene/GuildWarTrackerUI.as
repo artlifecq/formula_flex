@@ -1,5 +1,6 @@
 package com.rpgGame.app.ui.scene
 {
+	import com.rpgGame.app.cmdlistener.enum.EGuildMemberType;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.WalkToRoleManager;
 	import com.rpgGame.app.manager.guild.GuildManager;
@@ -72,9 +73,10 @@ package com.rpgGame.app.ui.scene
 		
 		private var weiczbItems:Array=[5088,5089,5090];
 		private var wangczbItems:Array=[5091,5092,5095];
+		private var huangczbItems:Array=[5093,5094,5096];
 		private var oreID:Array=[];
 		
-		private var maps:Array=[900,901];
+		private var maps:Array=[900,901,902];
 		private var items:Array;
 		private var toPoint:Position;
 		
@@ -95,6 +97,13 @@ package com.rpgGame.app.ui.scene
 					break;
 				case maps[1]:
 					items=wangczbItems;
+					iteminfo1=new ClientItemInfo(items[0]);
+					iteminfo2=new ClientItemInfo(items[1]);
+					iteminfo3=new ClientItemInfo(items[2]);
+					labelNum=4;
+					break;
+				case maps[2]:
+					items=huangczbItems;
 					iteminfo1=new ClientItemInfo(items[0]);
 					iteminfo2=new ClientItemInfo(items[1]);
 					iteminfo3=new ClientItemInfo(items[2]);
@@ -151,6 +160,12 @@ package com.rpgGame.app.ui.scene
 			FaceUtil.SetItemGrid(icon1,iteminfo1);
 			FaceUtil.SetItemGrid(icon2,iteminfo2);
 			FaceUtil.SetItemGrid(icon3,iteminfo3);
+			
+			
+			if(GuildManager.instance().isLeader){
+				EventManager.dispatchEvent(GuildEvent.GUILD_LEADER_SKILL_SHOW,true);
+			}
+			
 			initEvent();
 		}
 		
@@ -167,7 +182,12 @@ package com.rpgGame.app.ui.scene
 		
 		private function overWczb(msg:ResGuildWarResultMessage):void
 		{
-			AppManager.showApp(AppConstant.GUILD_WCZB_RESULT,[msg,cfg,defendCmapId]);
+			var mapId:int=MainRoleManager.actorInfo.mapID;
+			if(mapId==maps[2]){
+				AppManager.showApp(AppConstant.GUILD_HCZB_RESULT,msg);
+			}else{
+				AppManager.showApp(AppConstant.GUILD_WCZB_RESULT,[msg,cfg,defendCmapId]);
+			}
 		}
 		
 		private function getCityInfo(msg:ResGuildWarCityBriefnessInfoMessage):void
@@ -355,6 +375,7 @@ package com.rpgGame.app.ui.scene
 			icon2=null;
 			icon3=null;
 			(MainRoleManager.actor.headFace as HeadFace).updateGuildWarInfoBar(null);
+			EventManager.dispatchEvent(GuildEvent.GUILD_LEADER_SKILL_SHOW,false);
 		}
 	}
 }

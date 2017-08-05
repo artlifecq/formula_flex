@@ -395,7 +395,7 @@ package org.mokylin.skin.mainui.shortcut
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			left_xuecaoMask = temp;
 			temp.name = "left_xuecaoMask";
-			temp.styleName = "ui/mainui/shortcut/hongdizhezhao.png";
+			temp.styleName = "ui/mainui/shortcut/hongdi.png";
 			temp.x = 44;
 			temp.y = 54;
 			return temp;
@@ -453,7 +453,7 @@ package org.mokylin.skin.mainui.shortcut
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			right_nengliangMask = temp;
 			temp.name = "right_nengliangMask";
-			temp.styleName = "ui/mainui/shortcut/landizhezhao.png";
+			temp.styleName = "ui/mainui/shortcut/landi.png";
 			temp.x = 647;
 			temp.y = 54;
 			return temp;

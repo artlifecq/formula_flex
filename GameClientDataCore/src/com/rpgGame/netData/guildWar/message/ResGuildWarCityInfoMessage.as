@@ -40,6 +40,9 @@ package com.rpgGame.netData.guildWar.message{
 		//申请城市中,当前出价最高帮派名
 		private var _curMaxPriceGuildName: String;
 		
+		//城池类型:3:皇城,1:其他
+		private var _cityType: int;
+		
 		
 		/**
 		 * 写入字节缓存
@@ -70,6 +73,8 @@ package com.rpgGame.netData.guildWar.message{
 			writeLong(_curMaxPriceGuildId);
 			//申请城市中,当前出价最高帮派名
 			writeString(_curMaxPriceGuildName);
+			//城池类型:3:皇城,1:其他
+			writeByte(_cityType);
 			return true;
 		}
 		
@@ -102,6 +107,8 @@ package com.rpgGame.netData.guildWar.message{
 			_curMaxPriceGuildId = readLong();
 			//申请城市中,当前出价最高帮派名
 			_curMaxPriceGuildName = readString();
+			//城池类型:3:皇城,1:其他
+			_cityType = readByte();
 			return true;
 		}
 		
@@ -246,6 +253,21 @@ package com.rpgGame.netData.guildWar.message{
 		 */
 		public function set curMaxPriceGuildName(value: String): void{
 			this._curMaxPriceGuildName = value;
+		}
+		
+		/**
+		 * get 城池类型:3:皇城,1:其他
+		 * @return 
+		 */
+		public function get cityType(): int{
+			return _cityType;
+		}
+		
+		/**
+		 * set 城池类型:3:皇城,1:其他
+		 */
+		public function set cityType(value: int): void{
+			this._cityType = value;
 		}
 		
 	}

@@ -2,8 +2,6 @@ package com.rpgGame.appModule.mount
 {
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
-	import com.game.engine3D.scene.render.RenderUnit3D;
-	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.rpgGame.app.display3D.UIAvatar3D;
 	import com.rpgGame.app.manager.mount.ZhanQiManager;
 	import com.rpgGame.app.manager.mount.ZhanQiShowData;
@@ -18,8 +16,6 @@ package com.rpgGame.appModule.mount
 	import com.rpgGame.coreData.clientConfig.Q_warflag;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
-	import com.rpgGame.coreData.role.RoleData;
-	import com.rpgGame.coreData.type.RoleActionType;
 	
 	import org.mokylin.skin.app.zuoqi.Zuoqi_JingjieOk_Skin;
 	
@@ -49,7 +45,7 @@ package com.rpgGame.appModule.mount
 			_itemIcons = new Vector.<IconCDFace>();
 			_chengGongEftContaner=new Inter3DContainer();
 			_skin.uiGuangquan.addChild(_chengGongEftContaner);
-			_avateUI=new UIAvatar3D(_skin.roleGrp);
+			_avateUI=new UIAvatar3D(_skin.roleGrp,2);
 		}
 		
 		override protected function onShow():void
@@ -128,11 +124,7 @@ package com.rpgGame.appModule.mount
 			
 			var nextShet:Q_warflag = ZhanQiConfigData.getZhanQiDataById(zhanqiLevel);
 			var currentName:String=nextShet.q_panel_show_id;
-			
-			var roleData:RoleData=new RoleData(0);
-			roleData.avatarInfo.setBodyResID("pc/flag/"+currentName,null);
-			_avateUI.setRoleData(roleData);
-			_avateUI.setScale(2);
+			_avateUI.updateBodyWithRes("pc/flag/"+currentName);
 		}
 		
 		private function get zhanqiLevel():int

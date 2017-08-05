@@ -6,8 +6,6 @@ package com.rpgGame.app.manager
 	import flash.utils.getDefinitionByName;
 	
 	import feathers.controls.UIMovieClip;
-	
-	import org.client.mainCore.ds.HashMap;
 
 	/**
 	 * 特效资源管理器
@@ -32,6 +30,7 @@ package com.rpgGame.app.manager
 				loadEft([mc,name]);
 			}else{
 				mc.styleClass=getStyle(name);
+				mc.autoPlay=true;
 			}
 		}
 		
@@ -45,6 +44,7 @@ package com.rpgGame.app.manager
 			var mc:UIMovieClip=params[0];
 			var style:Class=getStyle(params[1]);
 			mc.styleClass=style;
+			mc.autoPlay=true;
 		}
 		
 		/**
