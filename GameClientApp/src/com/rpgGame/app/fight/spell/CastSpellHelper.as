@@ -196,7 +196,7 @@ package com.rpgGame.app.fight.spell
 					var spellData : Q_skill_model = caseInfo.spellData;
 					ref.setParams(spellData);
 					MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_CAST_SPELL_LOCK, ref);
-					if (/*spellData.q_relate_spells!=null || */spellData.q_relate_spells!="") 
+					if (spellData.q_relate_spells!="") 
 					{
 						TrusteeshipManager.getInstance().tripleSkillCtrl.setParams(spellData.q_skillID);
 					}

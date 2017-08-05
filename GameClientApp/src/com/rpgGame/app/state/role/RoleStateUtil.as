@@ -264,7 +264,8 @@ package com.rpgGame.app.state.role
 			{
 				if (walkRole.stateMachine.isWalkMoving)
 				{
-					//					_lastWalkServerTime = _local12;
+					TrusteeshipManager.getInstance().isNormalSpell = false;
+					
 					HorseManager.instance().autoRiding(role, pos);
 				}
 			}
