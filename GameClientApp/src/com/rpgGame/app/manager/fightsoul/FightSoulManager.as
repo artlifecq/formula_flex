@@ -9,6 +9,8 @@ package com.rpgGame.app.manager.fightsoul
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.scene.animator.FightSoulFollowAnimator;
 	import com.rpgGame.app.ui.alert.SomeSystemNoticePanel;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.coreData.UNIQUEID;
 	import com.rpgGame.coreData.cfg.FightsoulData;
@@ -125,6 +127,7 @@ package com.rpgGame.app.manager.fightsoul
 			updataSKill();
 			EventManager.dispatchEvent(FightSoul_Level);
 			EventManager.dispatchEvent(FightSoul_Exp);
+			AppManager.showApp(AppConstant.FIGHT_SOULRISE_SHOWPANEL);
 		}
 		
 		public function updataReward(rewardBit: int):void

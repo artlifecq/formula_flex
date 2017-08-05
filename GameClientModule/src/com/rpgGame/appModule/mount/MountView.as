@@ -142,7 +142,7 @@ package com.rpgGame.appModule.mount
 				_uplevelSuccess.y = int((_uplevelSuccess.stage.stageHeight - _uplevelSuccess.height) / 2);
 			}
 			_uplevelSuccess.updateinfo(_mountShowData);
-			
+			attChangeEft.clear();
 		}
 		private function removePropHandler(e:Event):void
 		{

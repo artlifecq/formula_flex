@@ -43,7 +43,6 @@ package com.rpgGame.appModule.fightsoul
 	import feathers.utils.filter.GrayFilter;
 	
 	import org.client.mainCore.manager.EventManager;
-	import org.mokylin.skin.app.zhanhun.Shuxing_Skin;
 	import org.mokylin.skin.app.zhanhun.Zhanhun_Skin;
 	
 	import starling.display.DisplayObject;
@@ -56,6 +55,7 @@ package com.rpgGame.appModule.fightsoul
 		private var _skin:Zhanhun_Skin;
 		private var _currentShowMode:int;
 		private var _listdatas:Vector.<FightSoulPathInfoData>;
+		private var fight_soul_atts:Array=[CharAttributeType.WAI_GONG,CharAttributeType.DEFENSE_PER,CharAttributeType.HP,CharAttributeType.SHENFA,CharAttributeType.HIT];
 		private var _propList:Vector.<PropView>;
 		protected var touchToState:TouchToState;
 		private var _skillData:Q_skill_model;
@@ -226,12 +226,15 @@ package com.rpgGame.appModule.fightsoul
 			_showAvatarData = new RoleData(0);
 			
 			_propList = new Vector.<PropView>();
-			_propList.push(new PropView(_skin.lab_prop1.skin as Shuxing_Skin,CharAttributeType.WAI_GONG));
+			for(var i:int=0;i<fight_soul_atts.length;i++){
+				_propList.push(new PropView(_skin["lab_prop"+(i+1)].skin,fight_soul_atts[i]));
+			}
+		/*	_propList.push(new PropView(_skin.lab_prop1.skin as Shuxing_Skin,CharAttributeType.WAI_GONG));
 			_propList.push(new PropView(_skin.lab_prop2.skin as Shuxing_Skin,CharAttributeType.LIDAO));
 			_propList.push(new PropView(_skin.lab_prop3.skin as Shuxing_Skin,CharAttributeType.MAX_HP));
 			_propList.push(new PropView(_skin.lab_prop4.skin as Shuxing_Skin,CharAttributeType.GENGU));
 			_propList.push(new PropView(_skin.lab_prop5.skin as Shuxing_Skin,CharAttributeType.DEFENSE_PER));
-			_propList.push(new PropView(_skin.lab_prop6.skin as Shuxing_Skin,CharAttributeType.HIT));
+			_propList.push(new PropView(_skin.lab_prop6.skin as Shuxing_Skin,CharAttributeType.HIT));*/
 			
 			
 			_skin.List.itemRendererType = FightSoulActityCell;
@@ -258,7 +261,7 @@ package com.rpgGame.appModule.fightsoul
 			iconList.push(_skin.item_icon2);
 			iconList.push(_skin.item_icon3);
 			iconList.push(_skin.item_icon4);
-			for(var i:int = 0;i<length;i++)
+			for(i = 0;i<length;i++)
 			{
 				icon= IconCDFace.create(IcoSizeEnum.ICON_42);
 				icon.bindBg(iconList[i]);
@@ -346,14 +349,18 @@ package com.rpgGame.appModule.fightsoul
 			{
 				view.updataAtt(currentatt,nextatt);
 			}
+			
+//			AppManager.showApp(AppConstant.FIGHT_SOULRISE_SHOWPANEL);
 		}
 		
 		private function refeahExp():void
 		{
 			_skin.num_current.number = fightSoulInfo.level;
 			_skin.num_next.number = fightSoulInfo.level+1;
-			_skin.num_current.width=_skin.num_current.number.toString().length*16+5;
-			_skin.num_next.width=_skin.num_next.number.toString().length*16+5;
+			_skin.num_current.width=(fightSoulInfo.level.toString().length)*16+5;
+			_skin.num_next.width=((fightSoulInfo.level+1).toString().length)*16+5;
+			_skin.num_current.validate();
+			_skin.num_next.validate();
 			
 			var parcent:Number = fightSoulInfo.exp/currentMode.q_exp;
 			if(parcent<0)
