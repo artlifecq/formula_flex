@@ -1,12 +1,15 @@
 package com.rpgGame.app.manager.role
 {
 	import com.game.mainCore.core.manager.LayerManager;
+	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.graphics.DropItemHeadFace;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.ui.roll.RollGetItemPane;
 	import com.rpgGame.app.ui.roll.RollPane;
+	import com.rpgGame.core.app.AppLoadManager;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.role.SceneDropGoodsData;
 	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.netData.drop.bean.RollItemInfo;
@@ -18,11 +21,10 @@ package com.rpgGame.app.manager.role
 	
 	import away3d.events.Event;
 	
-	import feathers.core.PopUpManager;
-	
 	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.data.long;
-
+	import org.mokylin.skin.app.roll.Roll_Skin;
+	
 	/**
 	 * 掉落物管理器 
 	 * @author Administrator
@@ -31,6 +33,9 @@ package com.rpgGame.app.manager.role
 	public class DropGoodsManager
 	{
 		private static var _instance : DropGoodsManager;
+		
+		public static var rollPanelIsLoad:Boolean=false;
+		public static var isLoading:Boolean=false;
 		public static function getInstance() : DropGoodsManager
 		{
 			if (!_instance)
@@ -55,6 +60,7 @@ package com.rpgGame.app.manager.role
 		}
 		
 		private var _allDropPane:Vector.<RollPane>;
+		private var _infos:Vector.<RollItemInfo>=new Vector.<RollItemInfo>();
 		public function addRollGoods(rollInfo: RollItemInfo):void
 		{
 			if(_allDropPane.length>=5)
@@ -63,11 +69,51 @@ package com.rpgGame.app.manager.role
 			{
 				return ;
 			}
+			if(!DropGoodsManager.rollPanelIsLoad){
+				_infos.push(rollInfo);
+				loadImg();
+			}
+			else{
+				showRollPanel(rollInfo);
+			}
+		}
+		
+		private function loadImg():void
+		{
+			if(DropGoodsManager.isLoading) return;
 			
-			var pane:RollPane = new RollPane(rollInfo);
-			_allDropPane.push(pane);
-			pane.addEventListener(Event.REMOVED_FROM_STAGE,removePaneHandler);
-			refeashRollPanePosition();
+			DropGoodsManager.isLoading=true;
+			var loadUrl : String = ClientConfig.getUI("roll");
+			AppLoadManager.instace().loadByUrl(loadUrl, "", onLoadComplete, onError);
+		}
+		
+		public function onLoadComplete(_appUrl : String = null) : void
+		{
+			trace("roll点资源加载成功！！！");
+			DropGoodsManager.rollPanelIsLoad = true;
+			DropGoodsManager.isLoading=false;
+			for(var i:int=0;i<_infos.length;i++)
+			{
+				var info:RollItemInfo=_infos.shift();
+				showRollPanel(info);
+			}
+			_infos.length=0;
+		}
+		
+		private function onError(url : String) : void
+		{
+			GameLog.add("应用模块加载出错" + url);
+		}
+		
+		public function showRollPanel(info:RollItemInfo):void
+		{
+			if(info)
+			{
+				var pane:RollPane = new RollPane(info);
+				_allDropPane.push(pane);
+				pane.addEventListener(Event.REMOVED_FROM_STAGE,removePaneHandler);
+				refeashRollPanePosition();
+			}
 		}
 		
 		public function reqRollPoint(info:RollItemInfo):void

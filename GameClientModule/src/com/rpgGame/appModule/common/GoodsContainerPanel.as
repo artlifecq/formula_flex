@@ -100,13 +100,26 @@ package com.rpgGame.appModule.common
 			initList();
 		}
 		
-		public function setGrayForData(data:IBaseFaceInfo,gray:Boolean):void
+		public function setGrayForData(data:IBaseFaceInfo,gray:Boolean,isselect:Boolean):void
 		{
 			var num:int=goodsList.dataProvider.length;
 			for(var i:int=0;i<num;i++){
 				var info:GridInfo=goodsList.dataProvider.getItemAt(i) as GridInfo;
 				if(info&&info.data==data){
-					info.isGray=gray;
+					info.isGray=gray;				
+					goodsList.dataProvider.updateItemAt(i);
+					break;
+				}
+			}
+		}
+		
+		public function setGrayIsSelect(data:IBaseFaceInfo,isselect:Boolean):void
+		{
+			var num:int=goodsList.dataProvider.length;
+			for(var i:int=0;i<num;i++){
+				var info:GridInfo=goodsList.dataProvider.getItemAt(i) as GridInfo;
+				if(info&&info.data==data){
+					info.isSelsce=isselect;
 					goodsList.dataProvider.updateItemAt(i);
 					break;
 				}

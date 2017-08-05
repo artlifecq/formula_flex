@@ -50,7 +50,7 @@ package com.rpgGame.app.ui.tips
 			_skins.lbRoleName.text=info.occupyCheifName?info.occupyCheifName:"无";
 			
 			_skins.lbVsBang.htmlText=info.occupyGuildName&&info.attackGuildName?HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,info.occupyGuildName)+"VS"+HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,info.attackGuildName):"无";
-			if(tipsInfo.nextTime!=0){
+			if(tipsInfo.nextTime>0){
 				_skins.lbTime.text=TimeUtil.changeDateToDateStr(new Date(tipsInfo.nextTime));
 			}else{
 				_skins.lbTime.text="待定";
@@ -59,27 +59,15 @@ package com.rpgGame.app.ui.tips
 			if(tipsInfo.isOwner){
 				_skins.lbJiangli.htmlText=tipsInfo.rewardState==0?HtmlTextUtil.getTextColor(StaticValue.UI_RED1,"已经领取"):HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,"点击领取");
 			}
-			_skins.lbName.text=getCityName(info.id);
-		}
-		
-		private function getCityName(city):String
-		{
-			var name:String="";
-			switch(city){
-				case EnumCity.WANG_CHENG:
-					name="【王城】";
-					break;
-				case EnumCity.XI_WEI:
-					name="【西卫】";
-					break;
-				case EnumCity.ZHONG_WEI:
-					name="【中卫】";
-					break;
-				case EnumCity.DONG_WEI:
-					name="【东卫】";
-					break;
+			if(tipsInfo.isHczb){
+				_skins.lbName.text=EnumCity.getCityHCName(info.id);
+			}else{
+				if(info.id==EnumCity.WANG_CHENG){
+					_skins.lbName.text=EnumCity.getCityName(info.areaId);
+				}else{
+					_skins.lbName.text=EnumCity.getCityName(info.id);
+				}
 			}
-			return name;
 		}
 		
 		public function hideTips():void

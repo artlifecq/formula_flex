@@ -18,6 +18,12 @@ package com.rpgGame.netData.guildWar.bean{
 		//王城Id
 		private var _id: int;
 		
+		//区服id
+		private var _areaId: int;
+		
+		//服务器key
+		private var _serverKey: int;
+		
 		//占领帮派名
 		private var _occupyGuildName: String;
 		
@@ -36,7 +42,7 @@ package com.rpgGame.netData.guildWar.bean{
 		//攻击帮派Id
 		private var _attackGuildId: long;
 		
-		//状态,2:竞标,3:准备,4:战斗,5:结束
+		//状态,0:无,2:竞标,3:准备,4:战斗,5:结束
 		private var _state: int;
 		
 		/**
@@ -45,6 +51,10 @@ package com.rpgGame.netData.guildWar.bean{
 		override protected function writing(): Boolean{
 			//王城Id
 			writeInt(_id);
+			//区服id
+			writeInt(_areaId);
+			//服务器key
+			writeInt(_serverKey);
 			//占领帮派名
 			writeString(_occupyGuildName);
 			//占领帮派Id
@@ -57,7 +67,7 @@ package com.rpgGame.netData.guildWar.bean{
 			writeString(_attackGuildName);
 			//攻击帮派Id
 			writeLong(_attackGuildId);
-			//状态,2:竞标,3:准备,4:战斗,5:结束
+			//状态,0:无,2:竞标,3:准备,4:战斗,5:结束
 			writeInt(_state);
 			return true;
 		}
@@ -68,6 +78,10 @@ package com.rpgGame.netData.guildWar.bean{
 		override protected function reading(): Boolean{
 			//王城Id
 			_id = readInt();
+			//区服id
+			_areaId = readInt();
+			//服务器key
+			_serverKey = readInt();
 			//占领帮派名
 			_occupyGuildName = readString();
 			//占领帮派Id
@@ -80,7 +94,7 @@ package com.rpgGame.netData.guildWar.bean{
 			_attackGuildName = readString();
 			//攻击帮派Id
 			_attackGuildId = readLong();
-			//状态,2:竞标,3:准备,4:战斗,5:结束
+			//状态,0:无,2:竞标,3:准备,4:战斗,5:结束
 			_state = readInt();
 			return true;
 		}
@@ -98,6 +112,36 @@ package com.rpgGame.netData.guildWar.bean{
 		 */
 		public function set id(value: int): void{
 			this._id = value;
+		}
+		
+		/**
+		 * get 区服id
+		 * @return 
+		 */
+		public function get areaId(): int{
+			return _areaId;
+		}
+		
+		/**
+		 * set 区服id
+		 */
+		public function set areaId(value: int): void{
+			this._areaId = value;
+		}
+		
+		/**
+		 * get 服务器key
+		 * @return 
+		 */
+		public function get serverKey(): int{
+			return _serverKey;
+		}
+		
+		/**
+		 * set 服务器key
+		 */
+		public function set serverKey(value: int): void{
+			this._serverKey = value;
 		}
 		
 		/**
@@ -191,7 +235,7 @@ package com.rpgGame.netData.guildWar.bean{
 		}
 		
 		/**
-		 * get 状态,2:竞标,3:准备,4:战斗,5:结束
+		 * get 状态,0:无,2:竞标,3:准备,4:战斗,5:结束
 		 * @return 
 		 */
 		public function get state(): int{
@@ -199,7 +243,7 @@ package com.rpgGame.netData.guildWar.bean{
 		}
 		
 		/**
-		 * set 状态,2:竞标,3:准备,4:战斗,5:结束
+		 * set 状态,0:无,2:竞标,3:准备,4:战斗,5:结束
 		 */
 		public function set state(value: int): void{
 			this._state = value;

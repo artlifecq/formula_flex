@@ -33,7 +33,10 @@ package com.rpgGame.coreData.type
 		public static const EQUIP_WARING_42 : String = "ui/common/grid/equip/yizhuang_xiao.png";
 		/**icon上穿戴 60 * 60**/
 		public static const EQUIP_WARING_64 : String = "ui/common/grid/equip/yizhuang_da.png";
-		
+		/**icon上选中**/
+		public static const EQUIP_SELECT_64 : String = "ui/common/grid/equip/guang.png";
+		/**icon上洗炼**/
+		public static const EQUIP_XILIAN: String = "ui/common/grid/equip/xingxing.png";
 		/**icon上职业不符合**/
 		public static const EQUIP_JOB_NO : String = "ui/common/tubiao/jz.png";
 		/**icon上战斗力提升**/

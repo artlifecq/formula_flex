@@ -6,8 +6,10 @@ package com.rpgGame.app.ui.main.shortcut {
 	import com.rpgGame.app.manager.LostSkillManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.sender.GuildWarSender;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.core.events.GuildEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.society.SocietyEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
@@ -110,8 +112,6 @@ package com.rpgGame.app.ui.main.shortcut {
 			initExp();
 			addSheHuiTab();
 			LostSkillEffect.instance().bind(_skin.btn_juexue);
-			
-			
 			refeashState();
 			//			if (!ClientConfig.isBanShu)
 			//			{				
@@ -147,9 +147,7 @@ package com.rpgGame.app.ui.main.shortcut {
 			
 			EventManager.addEvent(LostSkillManager.LostSkill_ChangeSkillId,refeashState);
 			EventManager.addEvent(LostSkillManager.LostSkill_UpLevelSkillId,refeashState);
-			
 		}
-		
 		
 		
 		private function refeashState():void

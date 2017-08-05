@@ -909,6 +909,7 @@ package com.rpgGame.app.utils
 		/**设置任务目标内容*/
 		public static  function setGotargetInfo(mainType:int,missionType:int,describe:String,finisstr:String,subList:Vector.<TaskSubRateInfo>,txtButList:Vector.<SkinnableContainer>):void
 		{
+			return;
 			var i:int,j:int,length:int;
 			var text:String="";
 			if(missionType==TaskType.SUB_CONVERSATION)

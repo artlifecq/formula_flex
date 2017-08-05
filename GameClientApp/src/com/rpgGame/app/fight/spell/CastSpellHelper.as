@@ -118,6 +118,7 @@ package com.rpgGame.app.fight.spell
 			var spKey:Boolean=tryCaseSpell(caseInfo, null, false, ignoreLock);
 			if(!spKey)
 			{
+				TrusteeshipManager.getInstance().isNormalSpell = false;
 				TrusteeshipManager.getInstance().nextSpell = getSpellData(spellID);
 			}
 		}

@@ -12,7 +12,6 @@ package com.rpgGame.app.ui.main.shortcut
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.JobEnum;
-	import com.rpgGame.coreData.info.shortcuts.ShortcutsData;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.EffectUrl;
@@ -411,7 +410,7 @@ package com.rpgGame.app.ui.main.shortcut
 		
 		
 		private var _skillData : Q_skill_model;
-		public function upData(shortData : ShortcutsData,skillData : Q_skill_model):void
+		public function upData(skillData : Q_skill_model):void
 		{
 			_skillData=skillData;
 			playerJod=skillData.q_job;
