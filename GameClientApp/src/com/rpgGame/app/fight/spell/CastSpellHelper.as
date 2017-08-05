@@ -1064,7 +1064,7 @@ package com.rpgGame.app.fight.spell
 			var districtWithPath : DistrictWithPath = SceneManager.getDistrict();
 			//var path : Vector.<Vector3D> = PathFinderUtil.findPath(districtWithPath, MainRoleManager.actor.position, tempVector3D);
 			var path : Vector.<Vector3D> = PolyUtil.findPath(districtWithPath, MainRoleManager.actor.position, tempVector3D);
-			dist = Point.distance(selfPos, releasePos);
+			dist = Point.distance(selfPos, releaseTargetPos);
 			var inRange : Boolean;
 			
 			if (spellData.q_blink_type != 0)
