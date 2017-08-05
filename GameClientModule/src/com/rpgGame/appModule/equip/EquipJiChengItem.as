@@ -52,6 +52,8 @@ package com.rpgGame.appModule.equip
 		{
 			_type=type;
 			TouchableUtil.gray(_skin.rdo_type);
+			TouchableUtil.gray(_skin.uiHead);
+			TouchableUtil.gray(_skin.labelDisplay);
 			//			_skin.rdo_type.isEnabled=false;
 			switch(_type)
 			{
@@ -134,6 +136,8 @@ package com.rpgGame.appModule.equip
 							}
 						}
 						TouchableUtil.ungray(_skin.rdo_type);
+						TouchableUtil.ungray(_skin.uiHead);
+						TouchableUtil.ungray(_skin.labelDisplay);
 						//						_skin.rdo_type.isEnabled=true;
 					}
 					else
@@ -146,6 +150,8 @@ package com.rpgGame.appModule.equip
 						_labList.push(lab);
 						_labContainer.addChild(lab);
 						TouchableUtil.gray(_skin.rdo_type);
+						TouchableUtil.gray(_skin.uiHead);
+						TouchableUtil.gray(_skin.labelDisplay);
 						//						_skin.rdo_type.isEnabled=false;
 					}
 					break;
@@ -170,6 +176,8 @@ package com.rpgGame.appModule.equip
 						_labList.push(lab);
 						_labContainer.addChild(lab);
 						TouchableUtil.ungray(_skin.rdo_type);
+						TouchableUtil.ungray(_skin.uiHead);
+						TouchableUtil.ungray(_skin.labelDisplay);
 						//						_skin.rdo_type.isEnabled=true;
 					}
 					else
@@ -182,6 +190,8 @@ package com.rpgGame.appModule.equip
 						_labList.push(lab);
 						_labContainer.addChild(lab);
 						TouchableUtil.gray(_skin.rdo_type);
+						TouchableUtil.gray(_skin.uiHead);
+						TouchableUtil.gray(_skin.labelDisplay);
 						//						_skin.rdo_type.isEnabled=false;
 					}
 					break;
@@ -218,6 +228,8 @@ package com.rpgGame.appModule.equip
 							_labContainer.addChild(lab);
 						}
 						TouchableUtil.ungray(_skin.rdo_type);
+						TouchableUtil.ungray(_skin.uiHead);
+						TouchableUtil.ungray(_skin.labelDisplay);
 						//						_skin.rdo_type.isEnabled=true;
 					}
 					if(useInfo.smeltAtt2!=0)
@@ -250,6 +262,8 @@ package com.rpgGame.appModule.equip
 							_labContainer.addChild(lab);
 						}
 						TouchableUtil.ungray(_skin.rdo_type);
+						TouchableUtil.ungray(_skin.uiHead);
+						TouchableUtil.ungray(_skin.labelDisplay);
 						//						_skin.rdo_type.isEnabled=true;
 					}
 					break;
@@ -281,6 +295,8 @@ package com.rpgGame.appModule.equip
 			if(_skin.rdo_type.isSelected) _skin.rdo_type.isSelected=false;
 			//			_skin.rdo_type.isEnabled=false;
 			TouchableUtil.gray(_skin.rdo_type);
+			TouchableUtil.gray(_skin.uiHead);
+			TouchableUtil.gray(_skin.labelDisplay);
 		}
 		
 		private function shortList():void
@@ -298,7 +314,7 @@ package com.rpgGame.appModule.equip
 				case 1:
 					for(i=0;i<_labList.length;i++)
 					{
-						_labList[i].x=(i%2)*(_labList[i].width+120)-90;
+						_labList[i].x=-90;
 						_labList[i].y=i*(_labList[i].height+10)-5;
 					}
 					break;
@@ -306,7 +322,7 @@ package com.rpgGame.appModule.equip
 					for(i=0;i<_labList.length;i++)
 					{
 						_labList[i].x=(i%2)*(_labList[i].width+120)-90;
-						_labList[i].y=i*(_labList[i].height+10)-5;
+						_labList[i].y=int((i/2))*(_labList[i].height+10)-5;
 					}
 					break;
 			}

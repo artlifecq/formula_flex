@@ -32,7 +32,8 @@ package com.rpgGame.app.ui.alert
 		private static const _showDic:Dictionary=new Dictionary();
 		private static const _functionIdList:Object = {1:EmFunctionID.EM_ZUOQI,
 			2:EmFunctionID.EM_JINENG,
-			3:EmFunctionID.EM_ZHANHUN};
+			3:EmFunctionID.EM_ZHANHUN,
+		    4:EmFunctionID.EM_ZHANQI};
 		public function SomeSystemNoticePanel()
 		{
 			_skin=new AlertUp();

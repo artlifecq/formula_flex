@@ -460,10 +460,10 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			left = temp;
 			temp.name = "left";
-			temp.height = 431;
+			temp.height = 444;
 			var skin:StateSkin = new org.mokylin.skin.app.zhuangbei.Zhuangbei_left()
 			temp.skin = skin
-			temp.width = 340;
+			temp.width = 338;
 			temp.x = 23;
 			temp.y = 87;
 			return temp;
