@@ -22,17 +22,19 @@ package com.rpgGame.coreData.clientConfig
 		public var q_next_task:int;
 		 /**  任务类型(1主线2支线3环式4帮会任务5天降元宝) */
 		public var q_mission_mainType:int;
-		 /**  任务子类型（1为对话类型，2杀怪数量，3杀怪获得道具，4采集获取道具,5使用道具完成任务,6挑战副本）2/4/6类型任务均需自动完成及接取 */
+		 /**  任务子类型（1为对话类型，2杀怪数量，3杀怪获得道具，4采集获取道具,5使用道具完成任务,6挑战副本,22广播任务）2/4/6类型任务均需自动完成及接取 */
 		public var q_mission_type:int;
 		 /**  任务完成条件 */
 		public var q_finish_information_str:String;
 		 /**  完成任务npc 没有npc为0 */
 		public var q_finish_npc:int;
+		 /**  杀怪收集道具几率万分比 */
+		public var q_item_drop_proba:int;
 		 /**  完成任务需求文字描述 */
 		public var q_finish_describe:String;
 		 /**  自动寻路信息 */
 		public var q_pathing:String;
-		 /**  经过跳跃点ID*/
+		 /**  进过跳跃点 */
 		public var q_jump_id:int;
 		 /**  支线任务对应打开面板编号 */
 		public var q_emid:String;
