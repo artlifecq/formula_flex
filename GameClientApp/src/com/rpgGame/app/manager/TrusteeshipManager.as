@@ -58,11 +58,11 @@ package com.rpgGame.app.manager
 		private var _autoSkillCtrl:ControlAutoFightSelectSkill;
 		private var _tripleSkillCtrl:ControlTripleSkill;
 		public var nextSpell:Q_skill_model;
-		public var isNormalSpell:Boolean = false;
+		private var _isNormalSpell:Boolean = false;
 		
 		public function TrusteeshipManager()
 		{
-			_gTimer = new GameTimer("TrusteeshipManager", 500, 0, onUpdate);
+			_gTimer = new GameTimer("TrusteeshipManager", 1000, 0, onUpdate);
 			_isFightActorRunning = false;
 			_isAutoFightRunning = false;
 			_isFightTargetRunning=false;
@@ -524,5 +524,21 @@ package com.rpgGame.app.manager
 		{
 			return _tripleSkillCtrl;
 		}
+
+		public function get isNormalSpell():Boolean
+		{
+			return _isNormalSpell;
+		}
+
+		public function set isNormalSpell(value:Boolean):void
+		{
+			_isNormalSpell = value;
+			
+			if(value)
+			{
+				trace("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&怎么被设置为true了呢");
+			}
+		}
+
 	}
 }

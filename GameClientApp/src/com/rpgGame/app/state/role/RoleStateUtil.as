@@ -264,8 +264,6 @@ package com.rpgGame.app.state.role
 			{
 				if (walkRole.stateMachine.isWalkMoving)
 				{
-					TrusteeshipManager.getInstance().isNormalSpell = false;
-					
 					HorseManager.instance().autoRiding(role, pos);
 				}
 			}

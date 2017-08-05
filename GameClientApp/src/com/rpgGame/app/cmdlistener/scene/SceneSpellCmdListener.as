@@ -155,9 +155,6 @@ package com.rpgGame.app.cmdlistener.scene
 			{
 				LostSkillManager.instance().checkBigSkill(msg.personId);
 			}
-			
-			
-			
 		}
 		
 		private function onResAttackVentToClientMessage(msg:ResAttackVentToClientMessage):void
