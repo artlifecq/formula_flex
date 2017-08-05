@@ -233,6 +233,7 @@ package com.rpgGame.app.ui.main.taskbar
 				setTreasuerTaskView();
 				setGuildTaskView();
 				setGuideTaskView();
+				setKajibutView();
 			}
 			else if(type==TaskType.MAINTYPE_MAINTASK)
 			{
@@ -383,8 +384,8 @@ package com.rpgGame.app.ui.main.taskbar
 				killBut2List[i].visible=false;
 			}
 			icoList1Group.visible=false;
-			
 			subBut1.visible=false;
+			setUisite();
 		}
 		
 		/**更新支线任务显示*/
@@ -396,9 +397,8 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				setNavView(TaskType.MAINTYPE_DAILYTASK,taskData.q_party_name,taskData.q_name,TaskMissionManager.getDailyTaskIsFinish(),navi2,subBut1);
 				TaskUtil.setGotargetInfo(taskData.q_mission_mainType,taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killBut2List);
-				setUisite();
 			}
-			
+			setUisite();
 		}
 		
 		
@@ -596,9 +596,15 @@ package com.rpgGame.app.ui.main.taskbar
 		}
 		
 		/**处理卡点显示*/
-		public function setKajibutView(taskId: int,noInfo: Vector.<NoMainTaskInfo>):void
+		public function setKajibutView():void
 		{
-			if(!_skin.secondary_box.visible)return;
+			if(!_skin.secondary_box.visible)
+				return;
+			var taskId: int=TaskMissionManager.noMainTaskId;
+			if(taskId==0)
+				return;
+			
+			var noInfo: Vector.<NoMainTaskInfo>=TaskMissionManager.noMainTaskInfo;
 			var i:int;
 			_skin.sec_txt.visible=false;
 			_skin.sec_navi1.visible=true;

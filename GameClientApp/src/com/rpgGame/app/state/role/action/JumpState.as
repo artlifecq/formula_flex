@@ -289,7 +289,7 @@ package com.rpgGame.app.state.role.action
 			{
 				var ref : JumpRiseStateReference = _machine.getReference(JumpRiseStateReference) as JumpRiseStateReference;
 				ref.setParams(totalTime, _isSecondJump,_destPoint,_stateReference.isEnd);
-				transition(RoleStateType.CONTROL_JUMP_RISE, ref);
+				transition(RoleStateType.CONTROL_JUMP_RISE, ref,true);
 			}
 		}
 
@@ -341,6 +341,9 @@ package com.rpgGame.app.state.role.action
 
 		override public function enterPass(prevState : IState, force : Boolean = false) : Boolean
 		{
+			if (force)
+				return true;
+			
 			if ((_machine as RoleStateMachine).isJumpRising)
 			{
 				if(!force)
@@ -378,6 +381,9 @@ package com.rpgGame.app.state.role.action
 
 		override public function leavePass(nextState : IState, force : Boolean = false) : Boolean
 		{
+			if (force)
+				return true;
+			
 			if (nextState.type == RoleStateType.ACTION_DEATH)
 			{
 				return true;

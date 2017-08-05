@@ -171,6 +171,8 @@ package com.rpgGame.app.state.role.control
 
 		override public function enterPass(prevState : IState, force : Boolean = false) : Boolean
 		{
+			if(force)
+				return true;
 			if ((_machine as RoleStateMachine).isDead)//死亡的时候，不能进入跳跃状态
 			{
 				return false;

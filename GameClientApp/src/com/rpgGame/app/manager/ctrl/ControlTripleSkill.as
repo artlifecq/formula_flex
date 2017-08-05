@@ -33,6 +33,16 @@ package com.rpgGame.app.manager.ctrl
 			}
 			return _skills.indexOf(skillId+"")!=-1
 		}
+		public function isFirstTripleSkill(skillId:int):Boolean
+		{
+			if (_skills==null||_skills.length==0) 
+			{
+				return true;
+			}
+			var index:int=_skills.indexOf(skillId+"");
+			return index==0
+		}
+		
 		public function isLastTripleSkill(skillId:int):Boolean
 		{
 			if (_skills==null||_skills.length==0) 

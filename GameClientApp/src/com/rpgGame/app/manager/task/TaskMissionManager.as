@@ -5,12 +5,15 @@ package com.rpgGame.app.manager.task
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
+	import com.rpgGame.coreData.cfg.MapJumpCfgData;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_mission_base;
 	import com.rpgGame.coreData.clientConfig.Q_mission_section;
 	import com.rpgGame.coreData.clientConfig.Q_scene_monster_area;
+	import com.rpgGame.coreData.role.SceneJumpPointData;
 	import com.rpgGame.coreData.type.TaskType;
+	import com.rpgGame.netData.task.bean.NoMainTaskInfo;
 	import com.rpgGame.netData.task.bean.TaskInfo;
 	import com.rpgGame.netData.task.bean.TaskSubRateInfo;
 	
@@ -54,7 +57,7 @@ package com.rpgGame.app.manager.task
 		private static var _otherTaskInfoList :Dictionary=new Dictionary();
 		private static var _otherTaskDataList : Dictionary = new Dictionary();
 		public static var noMainTaskId:int=0;
-		
+		public static var noMainTaskInfo:Vector.<NoMainTaskInfo>;
 		
 		/**当前环式任务客户端信息*/
 		public static function get treasuerTaskData():Q_mission_base
@@ -167,7 +170,10 @@ package com.rpgGame.app.manager.task
 				_treasuerTaskInfo=null;
 				_treasuerTaskInfo=null;
 			}
-			
+			else if(getTaskInfoByType(type)!=null)
+			{
+				_otherTaskInfoList[type]=null;
+			}
 		}
 		
 		public static function getTaskInfoType(taskid:long) : int
@@ -265,6 +271,24 @@ package com.rpgGame.app.manager.task
 			
 			return null;
 		}
+		/**
+		 * 根据类型获取获跳跃点点
+		 * */
+		public static function getJumpPos(taskType:int):Array
+		{
+			var jumpid:int=TaskMissionManager.isTaskJump(taskType);
+			var jumpData:SceneJumpPointData=MapJumpCfgData.getJumpportData(jumpid);
+			var post:Array;
+			if(jumpData!=null)
+			{
+				post=[jumpData.sceneID,jumpData.startPoint.x,jumpData.startPoint.y];
+			}
+			return post;
+		}
+		
+		
+		
+		
 		/**
 		 * 根据类型获取获寻路点
 		 * 返回数组，0：地图id,1:x,2:y
