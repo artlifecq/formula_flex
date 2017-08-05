@@ -58,6 +58,7 @@ package com.rpgGame.app.manager
 		private var _autoSkillCtrl:ControlAutoFightSelectSkill;
 		private var _tripleSkillCtrl:ControlTripleSkill;
 		public var nextSpell:Q_skill_model;
+		public var isNormalSpell:Boolean = false;
 		
 		public function TrusteeshipManager()
 		{
@@ -175,6 +176,7 @@ package com.rpgGame.app.manager
 			{
 				SceneRoleSelectManager.selectedRole = null;
 			}
+			isNormalSpell = false;
 			nextSpell = null;
 			_targetRoles=null;
 			_isAutoFightRunning = true;
@@ -239,6 +241,7 @@ package com.rpgGame.app.manager
 			_isBroken = false;
 			
 			nextSpell = null;
+			isNormalSpell = false;
 			
 			TweenLite.killDelayedCallsTo(onDelayedUnbroken);
 			TweenLite.killDelayedCallsTo(actorFight);
@@ -264,6 +267,7 @@ package com.rpgGame.app.manager
 		{
 
 			nextSpell = null;
+			isNormalSpell = false;
 			
 			_gTimer.reset();
 			_gTimer.stop();
