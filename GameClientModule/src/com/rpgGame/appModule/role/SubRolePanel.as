@@ -27,6 +27,7 @@ package com.rpgGame.appModule.role
 		
 		override public function show(data:Object=null):void
 		{
+			super.show(data);
 			if(data&&data.roleData&&data.info){
 				showCompareData(data);	
 				attChangeTypes=[];
@@ -47,6 +48,7 @@ package com.rpgGame.appModule.role
 		
 		override  public function hide():void
 		{
+			super.hide();
 			basicView.onHide();
 			avatarView.onHide();
 			packsView.onHide();

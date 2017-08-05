@@ -249,6 +249,7 @@ package com.rpgGame.appModule.mount
 				_uplevelSuccess.y = int((_uplevelSuccess.stage.stageHeight - _uplevelSuccess.height) / 2);
 			}
 			_uplevelSuccess.updateinfo(_zhanqiShowData);		
+			attChangeEft.clear();
 		}
 		
 		

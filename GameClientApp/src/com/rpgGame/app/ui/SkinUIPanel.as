@@ -68,7 +68,6 @@ package com.rpgGame.app.ui
 				escExcuteAble = dragAble = false;
 			}
 			_model = value;
-			UIModel.instence.switchModel(this,value,_blackType);
 		}
 
 		/**
@@ -338,14 +337,18 @@ package com.rpgGame.app.ui
 			if (parentContiner == null)
 			{
 				if(!_model)
+				{
 					parentContiner = StarlingLayerManager.appUILayer;
-				else
+				}else{
 					parentContiner = UIModel.PARTNER;
+				}
 			}
 			_parentContainer = parentContiner;
 			_isSHowing = true;
 			_parentContainer.addChild(this);
-			
+			if(_model){
+				UIModel.instence.switchModel(this,_model,_blackType);
+			}
 			refresh();
 		}
 

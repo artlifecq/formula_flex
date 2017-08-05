@@ -9,6 +9,8 @@ package com.rpgGame.app.manager.fightsoul
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.scene.animator.FightSoulFollowAnimator;
 	import com.rpgGame.app.ui.alert.SomeSystemNoticePanel;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.coreData.UNIQUEID;
 	import com.rpgGame.coreData.cfg.FightsoulData;
@@ -43,8 +45,6 @@ package com.rpgGame.app.manager.fightsoul
 		public static const FightSoul_TypeValue:int = UNIQUEID.NEXT;
 		public static const FightSoul_GetReward:int = UNIQUEID.NEXT;
 		
-		
-		public static const FightSoulMaxLevel:int = 130;
 		/**
 		 * 战魂数据
 		 */
@@ -62,7 +62,7 @@ package com.rpgGame.app.manager.fightsoul
 		
 		private function checkCanUpLevel():void
 		{
-			if(fightSoulInfo.level == FightSoulMaxLevel)
+			if(fightSoulInfo.level == FightsoulData.FightSoulMaxLevel)
 			{
 				return ;
 			}
@@ -127,6 +127,7 @@ package com.rpgGame.app.manager.fightsoul
 			updataSKill();
 			EventManager.dispatchEvent(FightSoul_Level);
 			EventManager.dispatchEvent(FightSoul_Exp);
+			AppManager.showApp(AppConstant.FIGHT_SOULRISE_SHOWPANEL);
 		}
 		
 		public function updataReward(rewardBit: int):void
@@ -184,7 +185,7 @@ package com.rpgGame.app.manager.fightsoul
 		
 		public function FightSoulLevelUp():Boolean
 		{
-			if(fightSoulInfo.level == FightSoulMaxLevel)
+			if(fightSoulInfo.level == FightsoulData.FightSoulMaxLevel)
 			{
 				NoticeManager.showNotifyById(4002);
 				return false;
@@ -204,7 +205,7 @@ package com.rpgGame.app.manager.fightsoul
 			{
 				return false;
 			}
-			if(fightSoulInfo.level == FightSoulMaxLevel)
+			if(fightSoulInfo.level == FightsoulData.FightSoulMaxLevel)
 			{
 				return false;
 			}
