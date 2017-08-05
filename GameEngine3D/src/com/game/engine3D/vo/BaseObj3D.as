@@ -59,6 +59,8 @@ package com.game.engine3D.vo
 		
 		protected var _disposing : Boolean;
 		protected var _usable : Boolean;
+		protected var _isJump:Boolean = false;
+		
 		/**
 		 * 是否可以移除和回收
 		 */
@@ -1784,5 +1786,16 @@ package com.game.engine3D.vo
 		{
 			_isAlpha = value;
 		}
+
+		public function get isJump():Boolean
+		{
+			return _isJump;
+		}
+
+		public function set isJump(value:Boolean):void
+		{
+			_isJump = value;
+		}
+
 	}
 }

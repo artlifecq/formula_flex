@@ -191,7 +191,7 @@ package com.rpgGame.core.app
 		/**
 		 * 开启新功能 
 		 */
-		public static var OPEN_FUNCTION:String = createAppInfo( "open.OpenPanel","xingongneng");
+		/*public static var OPEN_FUNCTION:String = createAppInfo( "open.OpenPanel","xingongneng");*/
 		
 		public static var NOTIVE_FUNCTION:String = createAppInfo( "open.NoticePanel","xingongneng");
 		
@@ -217,6 +217,9 @@ package com.rpgGame.core.app
 		public static var TASK_LEAD_PANEL:String = createAppInfo( "task.TaskLeadPanel" ); 
 		/**环线任务面板**/
 		public static var TASK_LOOP_PANEL:String = createAppInfo( "task.TaskLoopPanel" ); 
+		/**帮会任务面板**/
+		public static var TASK_GUILD_PANEL:String = createAppInfo( "task.TaskGuildPanel" ); 
+		
 		/**系统神行符**/
 		public static var TASK_FLY_PANEL:String = createAppInfo( "task.TaskFlySend" ); 
 		

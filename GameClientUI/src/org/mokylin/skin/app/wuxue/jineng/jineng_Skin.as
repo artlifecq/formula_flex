@@ -10,11 +10,12 @@ package org.mokylin.skin.app.wuxue.jineng
 	import feathers.controls.UIAsset;
 	import feathers.controls.ScrollContainer;
 	import feathers.layout.HorizontalLayout;
+	import org.mokylin.skin.app.wuxue.jineng.JiNeng_FenYeXian;
+	import org.mokylin.skin.app.wuxue.jineng.button.ButtonJinengYe;
 	import org.mokylin.skin.app.wuxue.jineng.jineng_jinjie;
 	import org.mokylin.skin.app.wuxue.jineng.jineng_shengji;
-	import org.mokylin.skin.component.progress.progress_role2_Skin;
+	import org.mokylin.skin.component.progress.progress_jindutiao3;
 	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
-	import org.mokylin.skin.component.tabbar.TabBarSkin_pack;
 
 	/**
 	 * @private
@@ -34,6 +35,8 @@ package org.mokylin.skin.app.wuxue.jineng
 
 		public var shengji:feathers.controls.SkinnableContainer;
 
+		public var skinFenye:feathers.controls.SkinnableContainer;
+
 		public var tab_zizhi:feathers.controls.TabBar;
 
 		public var vs_bar:feathers.controls.ScrollContainer;
@@ -49,7 +52,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [__jineng_Skin_UIAsset2_i(),__jineng_Skin_Label1_i(),pro_zhenqi_i(),lb_zhenqi_i(),vs_bar_i(),__jineng_Skin_UIAsset5_i(),shengji_i(),jinjie_i(),tab_zizhi_i()];
+			this.elementsContent = [__jineng_Skin_UIAsset2_i(),__jineng_Skin_UIAsset4_i(),__jineng_Skin_UIAsset5_i(),pro_zhenqi_i(),lb_zhenqi_i(),skinFenye_i(),vs_bar_i(),shengji_i(),jinjie_i(),tab_zizhi_i()];
 			
 			states = {
 			};
@@ -74,35 +77,31 @@ package org.mokylin.skin.app.wuxue.jineng
 			return temp;
 		}
 
-		private function __jineng_Skin_Label1_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "真气：";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 36;
-			temp.y = 56;
-			return temp;
-		}
-
 		private function __jineng_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 447;
-			temp.styleName = "ui/big_bg/wuxue/jineng/bg_zuo.png";
-			temp.width = 531;
-			temp.x = 24;
+			temp.styleName = "ui/big_bg/wuxue/jineng/bg.jpg";
+			temp.x = 22;
 			temp.y = 87;
+			return temp;
+		}
+
+		private function __jineng_Skin_UIAsset4_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/common/shuxing/zqz.png";
+			temp.x = 35;
+			temp.y = 54;
 			return temp;
 		}
 
 		private function __jineng_Skin_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 422;
-			temp.styleName = "ui/big_bg/wuxue/jineng/bg_you.png";
-			temp.x = 574;
-			temp.y = 114;
+			temp.styleName = "ui/component/progress/jindutiao3/jdt_bg.png";
+			temp.width = 243;
+			temp.x = 80;
+			temp.y = 57;
 			return temp;
 		}
 
@@ -111,12 +110,12 @@ package org.mokylin.skin.app.wuxue.jineng
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			jinjie = temp;
 			temp.name = "jinjie";
-			temp.height = 422;
+			temp.height = 385;
 			var skin:StateSkin = new org.mokylin.skin.app.wuxue.jineng.jineng_jinjie()
 			temp.skin = skin
-			temp.width = 356;
-			temp.x = 573;
-			temp.y = 114;
+			temp.width = 340;
+			temp.x = 572;
+			temp.y = 121;
 			return temp;
 		}
 
@@ -125,14 +124,14 @@ package org.mokylin.skin.app.wuxue.jineng
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb_zhenqi = temp;
 			temp.name = "lb_zhenqi";
-			temp.fontSize = 12;
+			temp.fontSize = 14;
 			temp.text = "1254/2544";
 			temp.textAlign = "center";
 			temp.color = 0xE3D9BF;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 130;
-			temp.x = 85;
-			temp.y = 58;
+			temp.width = 183;
+			temp.x = 106;
+			temp.y = 56;
 			return temp;
 		}
 
@@ -142,11 +141,11 @@ package org.mokylin.skin.app.wuxue.jineng
 			pro_zhenqi = temp;
 			temp.name = "pro_zhenqi";
 			temp.height = 11;
-			temp.styleClass = org.mokylin.skin.component.progress.progress_role2_Skin;
-			temp.value = 0;
-			temp.width = 131;
-			temp.x = 86;
-			temp.y = 61;
+			temp.styleClass = org.mokylin.skin.component.progress.progress_jindutiao3;
+			temp.value = 50;
+			temp.width = 228;
+			temp.x = 88;
+			temp.y = 60;
 			return temp;
 		}
 
@@ -155,12 +154,26 @@ package org.mokylin.skin.app.wuxue.jineng
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			shengji = temp;
 			temp.name = "shengji";
-			temp.height = 422;
+			temp.height = 380;
 			var skin:StateSkin = new org.mokylin.skin.app.wuxue.jineng.jineng_shengji()
 			temp.skin = skin
-			temp.width = 365;
-			temp.x = 573;
-			temp.y = 114;
+			temp.width = 340;
+			temp.x = 572;
+			temp.y = 121;
+			return temp;
+		}
+
+		private function skinFenye_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			skinFenye = temp;
+			temp.name = "skinFenye";
+			temp.height = 2;
+			var skin:StateSkin = new org.mokylin.skin.app.wuxue.jineng.JiNeng_FenYeXian()
+			temp.skin = skin
+			temp.width = 466;
+			temp.x = 56;
+			temp.y = 416;
 			return temp;
 		}
 
@@ -169,10 +182,10 @@ package org.mokylin.skin.app.wuxue.jineng
 			var temp:feathers.controls.TabBar = new feathers.controls.TabBar();
 			tab_zizhi = temp;
 			temp.name = "tab_zizhi";
-			temp.btnWidth = 78;
-			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_pack;
-			temp.x = 581;
-			temp.y = 86;
+			temp.btnWidth = 69;
+			temp.styleClass = org.mokylin.skin.app.wuxue.jineng.button.ButtonJinengYe;
+			temp.x = 574;
+			temp.y = 90;
 			temp.layout = __jineng_Skin_HorizontalLayout1_i();
 			temp.dataProvider = __jineng_Skin_ArrayCollection1_i();
 			return temp;
@@ -183,10 +196,10 @@ package org.mokylin.skin.app.wuxue.jineng
 			var temp:feathers.controls.ScrollContainer = new feathers.controls.ScrollContainer();
 			vs_bar = temp;
 			temp.name = "vs_bar";
-			temp.height = 450;
+			temp.height = 429;
 			temp.styleClass = org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
-			temp.x = 554;
-			temp.y = 86;
+			temp.x = 527;
+			temp.y = 92;
 			return temp;
 		}
 

@@ -1,5 +1,7 @@
 package com.rpgGame.appModule.common.touch
 {
+	import away3d.events.Event;
+	
 	import starling.display.DisplayObject;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
@@ -25,6 +27,13 @@ package com.rpgGame.appModule.common.touch
 			this._outCall=out;
 			_target.touchable=true;
 			_target.addEventListener(TouchEvent.TOUCH, onTouch);
+			_target.addEventListener(Event.REMOVED_FROM_STAGE,onRemoved);
+		}
+		
+		private function onRemoved(eve:Event):void
+		{
+			// TODO Auto Generated method stub
+			isMouseOut=true;
 		}
 		private function onTouch(e:TouchEvent):void
 		{

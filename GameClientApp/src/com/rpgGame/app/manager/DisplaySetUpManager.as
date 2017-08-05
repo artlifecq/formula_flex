@@ -1,11 +1,17 @@
 package com.rpgGame.app.manager
 {
+	import com.game.engine2D.Scene;
 	import com.game.engine3D.core.GameScene3D;
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	
 	import away3d.Away3D;
 	
+	/**
+	 * 根据设置的值来调整游戏的质量 
+	 * @author NEIL
+	 * 
+	 */	
 	public class DisplaySetUpManager 
 	{
 		
@@ -203,6 +209,11 @@ package com.rpgGame.app.manager
 			if (gameScene3D)
 			{
 				gameScene3D.shadowLevel = value;
+			}
+			var scene:Scene = SceneManager.scene;
+			if(scene)
+			{
+				scene.shadowLevel = value;
 			}
 			AvatarManager.updateSimpleShadow();
 		}

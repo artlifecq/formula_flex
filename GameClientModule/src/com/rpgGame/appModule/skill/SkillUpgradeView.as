@@ -22,7 +22,7 @@ package com.rpgGame.appModule.skill
 	import org.mokylin.skin.app.wuxue.jineng.jineng_shengji;
 	
 	import starling.display.DisplayObject;
-
+	
 	/**
 	 *技能升级 
 	 * @author dik
@@ -32,7 +32,7 @@ package com.rpgGame.appModule.skill
 	{
 		private var skin:jineng_shengji;
 		private var _icon:BgIcon;
-
+		
 		private var upNum:int;
 		private var cfg:Q_skill_model;
 		
@@ -43,12 +43,13 @@ package com.rpgGame.appModule.skill
 		public function SkillUpgradeView(_skin:jineng_shengji,panel:SkinUI)
 		{
 			_panel=panel;
-			_icon=new BgIcon(IcoSizeEnum.ICON_48);
+			_icon=new BgIcon(IcoSizeEnum.ICON_64);
 			_icon.touchable=false;
 			skin=_skin;
 			skin.container.addChild(_icon);
 			_icon.bindBg(_skin.Icon_jineng);
 			alertPanel=new SkillAlertPanel();
+			skin.eft1.color=skin.eft2.color=StaticValue.A_UI_BEIGE_TEXT;
 		}
 		
 		public function update(selectedCfg:Q_skill_model, selectedInfo:SkillInfo):void
@@ -70,7 +71,7 @@ package com.rpgGame.appModule.skill
 			var lvData:Q_skill_ignore=SkillLvLDataManager.getData(selectedInfo.skillModelId+"_"+selectedInfo.skillChildLv);
 			skin.ms_txt.htmlText=lvData.q_skillpanel_description;
 			
-			_icon.setIconResName(ClientConfig.getSkillIcon(selectedCfg.q_skillID.toString(),48));
+			_icon.setIconResName(ClientConfig.getSkillIcon(selectedCfg.q_skillID.toString(),IcoSizeEnum.ICON_64));
 			
 			if(selectedInfo.skillChildLv==selectedCfg.q_max_level){
 				skin.eft_name.visible=false;
@@ -83,8 +84,8 @@ package com.rpgGame.appModule.skill
 				skin.lb_renwudengji.visible=false;
 				skin.lb_zhenqi.visible=false;
 				skin.lb_yinliang.visible=false;
-				skin.line1.visible=false;
-				skin.line2.visible=false;
+				//				skin.line1.visible=false;
+				//				skin.line2.visible=false;
 				return;
 			}
 			skin.eft_name.visible=true;
@@ -97,8 +98,8 @@ package com.rpgGame.appModule.skill
 			skin.lb_renwudengji.visible=true;
 			skin.lb_zhenqi.visible=true;
 			skin.lb_yinliang.visible=true;
-			skin.line1.visible=true;
-			skin.line2.visible=true;
+			//			skin.line1.visible=true;
+			//			skin.line2.visible=true;
 			
 			//升级效果
 			var myLv:int=MainRoleManager.actorInfo.totalStat.level;
@@ -124,7 +125,7 @@ package com.rpgGame.appModule.skill
 				changeValue.push(0);
 			}
 			if(lvData){
-			/*	needMp+=lvData.q_energy;
+				/*	needMp+=lvData.q_energy;
 				needMy+=lvData.q_copper;
 				playerLv=lvData.q_playerlevel;*/
 				var endLv:int=lv+1;
@@ -164,8 +165,8 @@ package com.rpgGame.appModule.skill
 				}
 			}
 			
-			var w:int;
-			var xx:int
+			//			var w:int;
+			//			var xx:int
 			for(i=0;i<num;i++){
 				skin["eft"+(i+1)].visible=true;
 				skin["arrow"+(i+1)].visible=true;
@@ -177,33 +178,33 @@ package com.rpgGame.appModule.skill
 				skin.arrow2.visible=false;
 			}
 			
-			w=skin.eft1.textWidth+8;
-			w=w>skin.eft2.textWidth+8?w:skin.eft2.textWidth+8;
-			xx=(360-w)>>1;
-			skin.arrow1.x=skin.arrow2.x=xx;
-			skin.eft1.x=skin.eft2.x=xx+8;
+			//			w=skin.eft1.textWidth+8;
+			//			w=w>skin.eft2.textWidth+8?w:skin.eft2.textWidth+8;
+			//			xx=(360-w)>>1;
+			//			skin.arrow1.x=skin.arrow2.x=xx;
+			//			skin.eft1.x=skin.eft2.x=xx+8;
 			
 			//升级条件
 			var playerStr:String=playerLv+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT21);
 			if(playerLv>myLv){
 				GrayFilter.gray(skin.btn_shengji);
 				skin.btn_shengji.touchable=false;
-				playerStr=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,playerLv.toString()+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT21));
+				playerStr=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,playerLv.toString()+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT21));
 			}else{
-				playerStr=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN1,playerLv.toString()+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT21));
+				playerStr=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,playerLv.toString()+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT21));
 			}
 			
 			skin.lb_renwudengji.htmlText=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT10),playerStr);
 			skin.lb_zhenqi.htmlText=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT8),needMp,myMp);
 			skin.lb_yinliang.htmlText=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT7),needMy,myMon);		
-			w=skin.lb_renwudengji.textWidth;
-			w=w>skin.lb_zhenqi.textWidth?w:skin.lb_zhenqi.textWidth;
-			w=w>skin.lb_yinliang.textWidth?w:skin.lb_yinliang.textWidth;
-			
-			xx=(360-w)>>1;
-			skin.lb_renwudengji.x=xx;
-			skin.lb_zhenqi.x=xx;
-			skin.lb_yinliang.x=xx;
+			//			w=skin.lb_renwudengji.textWidth;
+			//			w=w>skin.lb_zhenqi.textWidth?w:skin.lb_zhenqi.textWidth;
+			//			w=w>skin.lb_yinliang.textWidth?w:skin.lb_yinliang.textWidth;
+			//			
+			//			xx=(360-w)>>1;
+			//			skin.lb_renwudengji.x=xx;
+			//			skin.lb_zhenqi.x=xx;
+			//			skin.lb_yinliang.x=xx;
 		}
 		
 		private function getTitleText(title:String,value:*,value1:int=-1):String
@@ -222,9 +223,9 @@ package com.rpgGame.appModule.skill
 			}
 			var des:String="";
 			if(value<=value1){
-				des=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN1,value1+"/"+value);
+				des=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,value1+"/"+value);
 			}else{
-				des=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,value1+"/"+value);
+				des=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,value1+"/"+value);
 				GrayFilter.gray(skin.btn_shengji);
 				skin.btn_shengji.touchable=false;
 			}
@@ -235,7 +236,7 @@ package com.rpgGame.appModule.skill
 		{
 			alertPanel.hide();
 		}
-			
+		
 		public function onTouchTarget(target:DisplayObject):Boolean
 		{
 			switch(target){

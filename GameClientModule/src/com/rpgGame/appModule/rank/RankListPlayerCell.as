@@ -122,6 +122,11 @@ package com.rpgGame.appModule.rank
 				{
 					MenuManager.showMenu(MenuUtil.getPlayerTargetRank(), [uise, userName], -1, -1, 80);
 				}
+			}else{
+				if(_triggeredFun!=null)
+				{
+					_triggeredFun(_topInfo);
+				}
 			}
 		}
 		private var _isSelect:Boolean;
@@ -145,13 +150,6 @@ package com.rpgGame.appModule.rank
 				_skin.uiOver.visible = !(state==ButtonState.UP);
 			}
 			
-			if(state== ButtonState.DOWN)
-			{
-				if(_triggeredFun!=null)
-				{
-					_triggeredFun(_topInfo);
-				}
-			}
 		}
 	}
 }

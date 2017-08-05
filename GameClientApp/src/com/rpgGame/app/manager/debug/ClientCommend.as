@@ -9,6 +9,7 @@ package   com.rpgGame.app.manager.debug
 	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.HashMap;
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.fight.spell.FightPowerChangePopPanelExt;
 	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
 	import com.rpgGame.app.fight.spell.SkillAddPop;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
@@ -38,6 +39,7 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.app.state.role.control.SpriteUpBuffStateReference;
 	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
+	import com.rpgGame.app.ui.OpenPanel;
 	import com.rpgGame.app.ui.main.dungeon.JiXianTiaoZhanExtPop;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
@@ -297,17 +299,16 @@ package   com.rpgGame.app.manager.debug
 			commandList.put( ".pet", function (...arg):void
 			{
 				AppManager.showApp(AppConstant.PET_PANLE);
-				//				var mod:int = arg[0];
-				//				
-				//				var petInfo:PetInfo=new PetInfo();
-				//				petInfo.petId=new long(9999);
-				//				petInfo.ownerId=(MainRoleManager.actor.data as HeroData).serverID;
-				//				petInfo.petModelId=mod;
-				//				petInfo.x=MainRoleManager.actor.pos.x;
-				//				petInfo.y=-MainRoleManager.actor.pos.y;
-				//				var data:GirlPetData=new GirlPetData();
-				//				data.setServerData(petInfo);
-				//				SceneRoleManager.getInstance().createGirlPet(data);
+//				var mod:int = arg[0];				
+//				var petInfo:PetInfo=new PetInfo();
+//				petInfo.petId=new long(9999);
+//				petInfo.ownerId=(MainRoleManager.actor.data as HeroData).serverID;
+//				petInfo.petModelId=mod;
+//				petInfo.x=MainRoleManager.actor.pos.x;
+//				petInfo.y=MainRoleManager.actor.pos.y;
+//				var data:GirlPetData=new GirlPetData();
+//				data.setServerData(petInfo);
+//				SceneRoleManager.getInstance().createGirlPet(data);
 			});
 			commandList.put( ".sset", function (...arg):void
 			{
@@ -403,6 +404,33 @@ package   com.rpgGame.app.manager.debug
 			commandList.put( ".blood", function (...arg):void
 			{
 				HeadBloodBar.isShowText=!HeadBloodBar.isShowText;
+			});
+			commandList.put( ".newfun", function (...arg):void
+			{
+				var list:Vector.<String> = new Vector.<String>();
+				list.push("2");
+				list.push("10");
+				UIPopManager.showAlonePopUI(OpenPanel,list);
+			});
+			commandList.put( ".hsort", function (...arg):void
+			{
+				HeadFace(MainRoleManager.actor.headFace).sort(); 
+			});
+			
+			commandList.put( ".fc", function (...arg):void
+			{
+				var hash:org.client.mainCore.ds.HashMap = new org.client.mainCore.ds.HashMap();
+				hash.add(14,40);
+				hash.add(17,40);
+				hash.add(11,40);
+				hash.add(12,40);
+				hash.add(13,40);
+				hash.add(16,40);
+				EventManager.dispatchEvent(MainPlayerEvent.MODULE_STAT_CHANGE,2,hash);
+			});
+			commandList.put( ".fp", function (...arg):void
+			{
+				FightPowerChangePopPanelExt.showFightPowerChange(arg[0],arg[1]);
 			});
 		}
 		

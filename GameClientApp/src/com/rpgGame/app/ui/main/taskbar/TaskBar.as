@@ -62,89 +62,23 @@ package com.rpgGame.app.ui.main.taskbar
 			}
 			if(target.name!=null)
 			{
-				var nameArr:Array=target.name.split("AA");
-				if(nameArr[0]==TaskType.MAINTYPE_GUIDETASK)//引导任务先特殊处理
+				var nameArr:Array=target.name.split("II");
+				if(nameArr[0]=="KILL")//引导任务先特殊处理
 				{
-					TaskControl.guideBut(int(nameArr[1]));
+					if(nameArr[1]==TaskType.MAINTYPE_GUIDETASK)
+					{
+						TaskControl.guideBut(int(nameArr[2]));
+					}
+					else
+					{
+						killWalkBut(nameArr[1],nameArr[2],nameArr[3]);
+					}
 					return;
 				}
+				
 			}
 			switch (target) 
 			{
-				
-				case Renwu_Item(_skin.pri_killbut_1.skin).labelDisplay:
-					killWalkBut(1,0,1);
-					break;
-				case Renwu_Item(_skin.pri_killbut_2.skin).labelDisplay:
-					killWalkBut(1,1,1);
-					break;
-				case Renwu_Item(_skin.pri_killbut_3.skin).labelDisplay:
-					killWalkBut(1,2,1);
-					break;
-				case Renwu_Item(_skin.sec_killbut1_1.skin).labelDisplay:
-					killWalkBut(1,0,1);
-					break;
-				case Renwu_Item(_skin.sec_killbut1_2.skin).labelDisplay:
-					killWalkBut(1,1,1);
-					break;
-				case Renwu_Item(_skin.sec_killbut1_3.skin).labelDisplay:
-					killWalkBut(1,2,1);
-					break;
-				case Renwu_Item(_skin.sec_killbut2_1.skin).labelDisplay:
-					killWalkBut(2,0,1);
-					break;
-				case Renwu_Item(_skin.sec_killbut2_2.skin).labelDisplay:
-					killWalkBut(2,1,1);
-					break;
-				case Renwu_Item(_skin.sec_killbut2_3.skin).labelDisplay:
-					killWalkBut(2,2,1);
-					break;
-				case Renwu_Item(_skin.sec_killbut3_1.skin).labelDisplay:
-					killWalkBut(3,0,1);
-					break;
-				case Renwu_Item(_skin.sec_killbut3_2.skin).labelDisplay:
-					killWalkBut(3,1,1);
-					break;
-				case Renwu_Item(_skin.sec_killbut3_3.skin).labelDisplay:
-					killWalkBut(3,2,1);
-					break;
-				
-				case Renwu_Item(_skin.pri_killbut_1.skin).btn_send:
-					killWalkBut(1,0,2);
-					break;
-				case Renwu_Item(_skin.pri_killbut_2.skin).btn_send:
-					killWalkBut(1,1,2);
-					break;
-				case Renwu_Item(_skin.pri_killbut_3.skin).btn_send:
-					killWalkBut(1,2,2);
-					break;
-				case Renwu_Item(_skin.sec_killbut1_1.skin).btn_send:
-					killWalkBut(1,0,2);
-					break;
-				case Renwu_Item(_skin.sec_killbut1_2.skin).btn_send:
-					killWalkBut(1,1,2);
-					break;
-				case Renwu_Item(_skin.sec_killbut1_3.skin).btn_send:
-					killWalkBut(1,2,2);
-					break;
-				case Renwu_Item(_skin.sec_killbut2_1.skin).btn_send:
-					killWalkBut(2,0,2);
-					break;
-				case Renwu_Item(_skin.sec_killbut2_2.skin).btn_send:
-					killWalkBut(2,1,2);
-					break;
-				case Renwu_Item(_skin.sec_killbut2_3.skin).btn_send:
-					killWalkBut(2,2,2);
-					break;
-				case Renwu_Item(_skin.sec_killbut3_1.skin).btn_send:
-					killWalkBut(3,0,2);
-					break;
-				case Renwu_Item(_skin.sec_killbut3_2.skin).btn_send:
-					killWalkBut(3,1,2);
-					break;
-				case Renwu_Item(_skin.sec_killbut3_3.skin).btn_send:
-					killWalkBut(3,2,2);
-					break;
 				case this._skin.btn_open:
 					// 打开
 					setState(true);
@@ -213,7 +147,7 @@ package com.rpgGame.app.ui.main.taskbar
 			EventManager.addEvent(MainPlayerEvent.PLAYER_DIE,playerDie);
 			EventManager.addEvent(MainPlayerEvent.LEVEL_CHANGE,levelChange);
 			_skin.chkAuto.addEventListener(Event.CHANGE,checkChangeHandler)
-			
+			_skin.chkAuto1.addEventListener(Event.CHANGE,check1ChangeHandler)
 		}
 		private function removeEvent():void
 		{
@@ -228,6 +162,7 @@ package com.rpgGame.app.ui.main.taskbar
 			EventManager.removeEvent(MainPlayerEvent.PLAYER_DIE,playerDie);
 			EventManager.removeEvent(MainPlayerEvent.LEVEL_CHANGE,levelChange);
 			_skin.chkAuto.removeEventListener(Event.CHANGE,checkChangeHandler)
+			_skin.chkAuto1.removeEventListener(Event.CHANGE,check1ChangeHandler)
 		}
 		private var panlIsopen:Boolean=false;
 		/**玩家移动*/
@@ -247,9 +182,17 @@ package com.rpgGame.app.ui.main.taskbar
 		/**点击npc寻路完成*/
 		private function taskNpc(npcId:int,serverID:long):void
 		{
-			if(TaskMissionManager.isMainTaskNpc(npcId))//如果是任务NPC就打开面板
+			if(TaskMissionManager.isTaskNpc(TaskType.MAINTYPE_MAINTASK,npcId))//如果是任务NPC就打开面板
 			{
 				TaskControl.showLeadPanel();
+			}
+			else if(TaskMissionManager.isTaskNpc(TaskType.MAINTYPE_GUILDDAILYTASK,npcId))
+			{
+				TaskControl.showGuildPanel();
+			}
+			else if(HuBaoData.isTaskNpc(npcId))
+			{
+				HuBaoSender.upCSClientDataMessage(npcId);
 			}
 			else //npc闲话
 			{
@@ -263,16 +206,8 @@ package com.rpgGame.app.ui.main.taskbar
 					}
 					
 				}
-				/*var speak:String=MonsterDataManager.getNpcSpeak(npcId);
-				if(speak!=""&&!AppManager.isAppInScene(AppConstant.NPC_SPEAK))
-				{
-					AppManager.showApp(AppConstant.NPC_SPEAK,speak);
-				}*/
 			}
-			if(HuBaoData.isTaskNpc(npcId))
-			{
-				HuBaoSender.upCSClientDataMessage(npcId);
-			}
+			
 		
 		}
 		
@@ -299,14 +234,20 @@ package com.rpgGame.app.ui.main.taskbar
 				effetCont.playFinishEffect();
 				TaskControl.hideLeadPanel();
 				loopCont.clearTreasuerCheck();
+				loopCont.clearGuildCheck();
+				showNpcMark(false);
 			}
 			else if(type==TaskType.MAINTYPE_TREASUREBOX)
 			{
 				TaskControl.hideLoopPanel();
 			}
+			else if(type==TaskType.MAINTYPE_GUILDDAILYTASK)
+			{
+				TaskControl.hideGuildPanel();
+			}
 			
 			
-			showNpcMark(false);
+			TaskAutoManager.getInstance().walkOver=false;
 		}
 		/**新任务*/
 		private function newMation(type:int):void
@@ -316,7 +257,7 @@ package com.rpgGame.app.ui.main.taskbar
 				if(TaskMissionManager.haveMainTask)
 				{
 					effetCont.playNewtaskEffect();
-					TaskAutoManager.getInstance().startTaskAuto();
+					TaskAutoManager.getInstance().startTaskAuto(TaskType.MAINTYPE_MAINTASK);
 					
 					
 				}
@@ -329,7 +270,7 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				if(TaskMissionManager.haveTreasuerTask&&TaskMissionManager.treasuerCheck)
 				{
-					TaskAutoManager.getInstance().startOtherTaskAuto(TaskType.MAINTYPE_TREASUREBOX)
+					TaskAutoManager.getInstance().startTaskAuto(TaskType.MAINTYPE_TREASUREBOX)
 				}
 			}
 				
@@ -356,24 +297,10 @@ package com.rpgGame.app.ui.main.taskbar
 		{
 			leadCont.upleadTaskView();
 			loopCont.upLoopTaskView(type);
-			if(type==TaskType.MAINTYPE_MAINTASK)
+			if(type==TaskType.MAINTYPE_MAINTASK&&TaskMissionManager.getMainTaskIsFinish()&&TaskMissionManager.getMainTaskHaveNpc())
 			{
-				if(TaskMissionManager.getMainTaskIsFinish())
-				{
-					if(TaskMissionManager.getMainTaskHaveNpc())
-					{
-						showNpcMark(true);
-					}
-					else
-					{
-						
-						//TaskControl.showLeadPanel();主线任务没有回复npc不弹框了
-						TaskSender.sendfinishTaskMessage(TaskMissionManager.mainTaskInfo.taskId);	
-						
-					}
-				}
-			}
-			
+				showNpcMark(true);
+			}			
 		}
 		/**任务卡级*/
 		private function noMainTask(taskId: int,noInfo: Vector.<NoMainTaskInfo>):void
@@ -432,6 +359,12 @@ package com.rpgGame.app.ui.main.taskbar
 			var check:Check = e.target as Check;
 			loopCont.setTreasuerCheck(check.isSelected);
 		}
+		private function check1ChangeHandler(e:Event):void
+		{
+			var check:Check = e.target as Check;
+			loopCont.setGuildCheck(check.isSelected);
+		}
+		
 		
 		/**追踪栏开启关闭操作*/
 		private function setState(isOpen : Boolean) : void {

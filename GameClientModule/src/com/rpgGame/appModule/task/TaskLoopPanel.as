@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.task
 {
 	import com.game.mainCore.core.timer.GameTimer;
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.reward.RewardGroup;
@@ -11,6 +12,7 @@ package com.rpgGame.appModule.task
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
+	import com.rpgGame.coreData.type.CharAttributeType;
 	
 	import feathers.controls.Label;
 	import feathers.controls.UIAsset;
@@ -119,10 +121,15 @@ package com.rpgGame.appModule.task
 		}
 		override public function hide():void 
 		{
+			
 			timer.stop();
 			currtimer=TIMERDATA;
-			subFinish();
+			if(this.visible&&this.parent!=null)
+			{
+				subFinish();
+			}
 			super.hide();
+			
 		}
 		private function onTimer() : void 
 		{
@@ -166,31 +173,64 @@ package com.rpgGame.appModule.task
 		}
 		private function subFinishBut(type:int):void
 		{
-			selectId=type;
-			hide();
+			if(TaskMissionManager.treasuerTaskInfo!=null&&TaskMissionManager.getTreasuerTaskIsFinish())
+			{
+				var golo:int= MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_GOLD);
+				var noney:int= MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
+				var noney2:int= MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY);
+				switch(type)
+				{
+					case 1:
+						selectId=type;
+						hide();
+						break;
+					case 2:
+						if(noney>=TwoData||noney2>=TwoData)
+						{
+							selectId=type;
+							hide();
+						}
+						else
+						{
+							NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP,"银两不足，无法领取二倍奖励");
+						}
+						break;
+					case 3:
+						if(golo>=ThereData)
+						{
+							selectId=type;
+							hide();
+						}
+						else
+						{
+							NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP,"元宝不足，无法领取三倍奖励");
+						}
+						
+						break;
+				}
+			}
+			
 			
 		}
 		private function subFinish():void
 		{
-			if(TaskMissionManager.treasuerTaskInfo!=null&&TaskMissionManager.getTreasuerTaskIsFinish()&&this.visible&&this.parent!=null)
-			{
-				TaskSender.sendfinishTaskMessage(TaskMissionManager.treasuerTaskInfo.taskId,selectId);
-			}
-				
+			
+			TaskSender.sendfinishTaskMessage(TaskMissionManager.treasuerTaskInfo.taskId,selectId);
+			icoList1Group.tweeRewardInBag();
 		}
 		private var loopNumber:int=-1;
 		private function setView():void
 		{
-			if(loopNumber!=TaskMissionManager.treasuerTaskInfo.loopNumber)
+			/*if(loopNumber!=TaskMissionManager.treasuerTaskInfo.loopNumber)
 			{
-				hideView();
-				loopNumber=TaskMissionManager.treasuerTaskInfo.loopNumber;
-				setPlanText();
-				setReward();
-				setkExtraReward();
-				setMoney();
-			}
-
+				
+			}*/
+			hideView();
+			loopNumber=TaskMissionManager.treasuerTaskInfo.loopNumber;
+			setPlanText();
+			setReward();
+			setkExtraReward();
+			setMoney();
 			
 		}
 		private function setPlanText():void
@@ -215,6 +255,8 @@ package com.rpgGame.appModule.task
 		{
 			money1Label.text=""+ThereData;
 			money2Label.text=""+TwoData;
+			
+			
 		}
 		
 		private function hideView():void

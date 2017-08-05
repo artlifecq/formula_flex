@@ -30,7 +30,7 @@ package org.mokylin.skin.app.banghui
 			super();
 			
 			this.currentState = "normal";
-			this.height = 600;
+			this.height = 601;
 			this.width = 956;
 			this.elementsContent = [bg_i(),__BangHui_Skin_UIAsset1_i(),__BangHui_Skin_UIAsset2_i(),tabBar_i()];
 			
@@ -57,7 +57,7 @@ package org.mokylin.skin.app.banghui
 			temp.styleName = "ui/common/background/neikuang_1.png";
 			temp.width = 922;
 			temp.x = 18;
-			temp.y = 81;
+			temp.y = 82;
 			return temp;
 		}
 
@@ -77,7 +77,7 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 600;
+			temp.height = 601;
 			var skin:StateSkin = new org.mokylin.skin.common.TongYongPanelbg1()
 			temp.skin = skin
 			temp.width = 956;

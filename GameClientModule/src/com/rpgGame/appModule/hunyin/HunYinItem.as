@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.hunyin
 {
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	
 	import org.mokylin.skin.app.hunyin.HunYin_Item;
@@ -54,11 +55,11 @@ package com.rpgGame.appModule.hunyin
 					_skin.uiName.styleName= "ui/app/hunyin/shuxing/shengmingzhi.png";
 					break;
 			}
-			_skin.lbNum.text=value.toString();
+			_skin.lbNum.text=AttValueConfig.getDisAttValueStr(type,value);
 			var num:int=nextValue-value;
 			if(num>0)
 			{
-				_skin.lbAdd.text=num.toString();
+				_skin.lbAdd.text=AttValueConfig.getDisAttValueStr(type,num);
 				_skin.lbAdd.visible=true;
 				_skin.uiUp.visible=true;
 			}

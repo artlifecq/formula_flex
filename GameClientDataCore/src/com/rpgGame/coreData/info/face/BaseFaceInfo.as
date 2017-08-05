@@ -35,7 +35,7 @@ package com.rpgGame.coreData.info.face
 		
 		public var data:*;
 		
-		
+		private var _coolID:String;
 		/**
 		 * 
 		 * @param id		id
@@ -47,6 +47,7 @@ package com.rpgGame.coreData.info.face
 			_cfgId = cfgId;
 			_type = type;
 			_faceType = faceType;
+			this._coolID=_faceType + "_" + _cfgId;
 		}
 		
 		/** 索引 **/
@@ -119,7 +120,8 @@ package com.rpgGame.coreData.info.face
 		/** 冷却id **/
 		public function get coolID():String
 		{
-			return _faceType + "_" + _cfgId;
+			//return _faceType + "_" + _cfgId;
+			return _coolID;
 		}
 
 		/**
@@ -135,6 +137,7 @@ package com.rpgGame.coreData.info.face
 		public function set cfgId(value:int):void
 		{
 			_cfgId = value;
+			this._coolID=_faceType + "_" + _cfgId;
 		}
 
 		/** 名字  */

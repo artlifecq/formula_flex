@@ -22,15 +22,12 @@ package com.rpgGame.app.cmdlistener.engine
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.controller.MouseCursorController;
 	import com.rpgGame.core.events.SkillEvent;
-	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.coreData.info.stall.StallData;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import flash.events.Event;
 	import flash.geom.Vector3D;
-	import flash.utils.clearTimeout;
 	import flash.utils.getTimer;
-	import flash.utils.setTimeout;
 	
 	import away3d.events.MouseEvent3D;
 	
@@ -148,10 +145,18 @@ package com.rpgGame.app.cmdlistener.engine
 			{
 				SceneCursorHelper.getInstance().showCursor(position);
 				//RoleStateUtil.doWalkTo(MainRoleManager.actor, position);
-				MainRoleSearchPathManager.jumpWalkToPos(MainRoleManager.actor, position);//走路改为了可以跨跳跃点-------yt
+				
+				TweenLite.delayedCall(0.1, delayWalkToPos, [position]);
+				
 				EventManager.dispatchEvent(SkillEvent.SKILL_CANCEL);	
 			}
 		}
+		
+		private function delayWalkToPos(position : Vector3D):void
+		{
+			MainRoleSearchPathManager.jumpWalkToPos(MainRoleManager.actor, position);//走路改为了可以跨跳跃点-------yt
+		}
+		
         private function sceneMapUp(position : Vector3D) : void {
             this._isLeftDown = false;
 			TrusteeshipManager.getInstance().isLeftDown=false;

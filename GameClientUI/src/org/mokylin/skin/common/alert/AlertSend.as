@@ -3,10 +3,12 @@ package org.mokylin.skin.common.alert
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
 	import feathers.controls.Label;
+	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import org.mokylin.skin.common.TongYongTanKuang_bg;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
-	import org.mokylin.skin.component.button.ButtonSkin_putong;
+	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 
 	/**
 	 * @private
@@ -18,13 +20,11 @@ package org.mokylin.skin.common.alert
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var bg:feathers.controls.UIAsset;
+		public var bg:feathers.controls.SkinnableContainer;
 
 		public var btnClose:feathers.controls.Button;
 
 		public var btn_ok:feathers.controls.Button;
-
-		public var lbl_title:feathers.controls.Label;
 
 
 		//==========================================================================
@@ -35,9 +35,9 @@ package org.mokylin.skin.common.alert
 			super();
 			
 			this.currentState = "normal";
-			this.height = 217;
-			this.width = 331;
-			this.elementsContent = [bg_i(),__AlertSend_UIAsset1_i(),lbl_title_i(),btnClose_i(),__AlertSend_Label1_i(),__AlertSend_UIAsset2_i(),btn_ok_i()];
+			this.height = 264;
+			this.width = 326;
+			this.elementsContent = [bg_i(),btnClose_i(),__AlertSend_Label1_i(),btn_ok_i(),__AlertSend_UIAsset2_i()];
 			
 			states = {
 			};
@@ -51,41 +51,35 @@ package org.mokylin.skin.common.alert
 		private function __AlertSend_Label1_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.fontSize = 16;
+			temp.fontSize = 14;
 			temp.text = "路途遥远，且让我送你一程吧";
-			temp.color = 0xE8C958;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 58;
-			temp.y = 90;
-			return temp;
-		}
-
-		private function __AlertSend_UIAsset1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/background/erji_bg.jpg";
-			temp.x = 11;
-			temp.y = 40;
+			temp.x = 72;
+			temp.y = 110;
 			return temp;
 		}
 
 		private function __AlertSend_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/xian_heng.png";
-			temp.x = 35;
-			temp.y = 147;
+			temp.touchable = false;
+			temp.touchGroup = true;
+			temp.styleName = "ui/common/background/wxts.png";
+			temp.x = 121;
+			temp.y = 9;
 			return temp;
 		}
 
-		private function bg_i():feathers.controls.UIAsset
+		private function bg_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 217;
-			temp.styleName = "ui/common/background/erji_kuang.png";
-			temp.width = 331;
+			temp.height = 264;
+			var skin:StateSkin = new org.mokylin.skin.common.TongYongTanKuang_bg()
+			temp.skin = skin
+			temp.width = 326;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -97,8 +91,8 @@ package org.mokylin.skin.common.alert
 			btnClose = temp;
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
-			temp.x = 297;
-			temp.y = 7;
+			temp.x = 293;
+			temp.y = 5;
 			return temp;
 		}
 
@@ -107,33 +101,14 @@ package org.mokylin.skin.common.alert
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_ok = temp;
 			temp.name = "btn_ok";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "立即传送";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
-			temp.color = 0xE1D4A9;
-			temp.width = 95;
-			temp.x = 119;
-			temp.y = 159;
-			return temp;
-		}
-
-		private function lbl_title_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbl_title = temp;
-			temp.name = "lbl_title";
-			temp.bold = true;
-			temp.touchable = false;
-			temp.touchGroup = true;
-			temp.letterSpacing = 2;
 			temp.fontSize = 16;
-			temp.text = "传 送";
-			temp.textAlign = "center";
-			temp.color = 0xDDE2B1;
-			temp.nativeFilters = Fontter.filterObj[""];
-			temp.width = 240;
-			temp.x = 48;
-			temp.y = 11;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
+			temp.color = 0xEAEABC;
+			temp.width = 100;
+			temp.x = 108;
+			temp.y = 216;
 			return temp;
 		}
 

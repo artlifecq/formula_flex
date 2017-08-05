@@ -227,8 +227,36 @@ package com.rpgGame.app.ui
 			var touch : Touch = event.getTouch(this);
 			if (touch && touch.phase == TouchPhase.MOVED)
 			{
-				this.x = int(touch.globalX - _touchOffX);
-				this.y = int(touch.globalY - _touchOffY);
+				var tx:int= int(touch.globalX - _touchOffX);
+				var ty:int=int(touch.globalY - _touchOffY);
+				if (tx<0) 
+				{
+					tx=0;
+				}
+				var mtx:int=_stage.stageWidth-this.width;
+				if (tx>mtx) 
+				{
+					tx=mtx;
+				}
+				if (ty<0) 
+				{
+					ty=0;
+				}
+				var mty:int=_stage.stageHeight-this.height;
+				if (ty>mty) 
+				{
+					ty=mty;
+				}
+				if (this.x!=tx) 
+				{
+					this.x=tx;
+				}
+				if (this.y!=ty) 
+				{
+					this.y=ty;
+				}
+//				this.x = int(touch.globalX - _touchOffX);
+//				this.y = int(touch.globalY - _touchOffY);
 			}
 		}
 
@@ -327,6 +355,8 @@ package com.rpgGame.app.ui
 		public function hide() : void
 		{
 			_isSHowing = false;
+			if(_model)
+				UIModel.instence.switchModel(this,false,_blackType);
 			preHide();
 			appinfo ? dispatchEventWith(Event.CLOSE) : this.removeFromParent();
 		}

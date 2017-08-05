@@ -46,7 +46,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const HintTypeSetInfo:String = "data.HintTypeSetInfo";
 		/**  区域数据库						 */
 		public static const Q_area:String = "data.map.Q_area";
-		/**  							本列取消，安全区改为刷格方式							本列取消																																															 */
+		/**本列取消，安全区改为刷格方式 */
 		public static const Q_map:String = "data.map.Q_map";
 		/**  场景特效动态生成表						 */
 		public static const Q_map_effect:String = "data.map.Q_map_effect";
@@ -82,7 +82,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const HeroModel:String = "data.model.HeroModel";
 		/**  坐骑模型表	功能名称	动画资源名称 */
 		public static const MountModel:String = "data.model.MountModel";
-		/**  3 怪物基本信息数据库																																																																			绑定器			 */
+		/**  3 怪物基本信息数据库																																																																				绑定器			 */
 		public static const Q_monster:String = "data.monster.Q_monster";
 		/**  NPC配置数据库																											 */
 		public static const Q_npc:String = "data.monster.Q_npc";
@@ -176,7 +176,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_meridian:String = "data.Q_meridian";
 		/**  战功表												 */
 		public static const Q_meritorious:String = "data.Q_meritorious";
-		/**  战功表					 */
+		/**  战功模型配置表			 */
 		public static const Q_meritorious_monster:String = "data.Q_meritorious_monster";
 		/**  秦陵秘宝刷怪配置表				 */
 		public static const Q_mibao_monster:String = "data.Q_mibao_monster";
@@ -184,7 +184,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_mibao_point:String = "data.Q_mibao_point";
 		/**  秦陵秘宝怪物配置					 */
 		public static const Q_mibao_reward:String = "data.Q_mibao_reward";
-		/**  任务表(所有任务都这里)																																												 */
+		/**  任务表(所有任务都这里) */
 		public static const Q_mission_base:String = "data.Q_mission_base";
 		/**  任务奖励配置表			 */
 		public static const Q_mission_reword:String = "data.Q_mission_reword";
@@ -206,7 +206,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_relation:String = "data.Q_relation";
 		/**  属性对应属性ID_前端			 */
 		public static const Q_shuxing:String = "data.Q_shuxing";
-		/**  城池基础表																		 */
+		/**  城池基础表																			 */
 		public static const Q_singlecitybase:String = "data.Q_singlecitybase";
 		/**  购买界面其他途径提示数据库				 */
 		public static const Q_source:String = "data.Q_source";

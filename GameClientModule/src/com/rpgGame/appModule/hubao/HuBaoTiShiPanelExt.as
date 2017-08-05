@@ -29,7 +29,7 @@ package com.rpgGame.appModule.hubao
 					HuBaoManager.instance().istishi = _skin.chk_ok.isSelected;
 					trace("是否勾选了不提示："+_skin.chk_ok.isSelected);
 					break;
-				case _skin.btnOk:
+				case _skin.btn_ok:
 					btnokHandler();
 					break;
 			}			

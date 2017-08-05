@@ -9,20 +9,18 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.fight.spell.SpellHitHelper;
 	import com.rpgGame.app.fight.spell.SpellResultInfo;
-	import com.rpgGame.app.manager.CharAttributeManager;
 	import com.rpgGame.app.manager.FightHeadEffectManager;
 	import com.rpgGame.app.manager.LostSkillManager;
 	import com.rpgGame.app.manager.SkillCDManager;
 	import com.rpgGame.app.manager.TrusteeshipFightSoulManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.manager.fight.FightManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.manager.task.TaskAutoManager;
+	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.core.events.SkillEvent;
-	import com.rpgGame.core.events.UserMoveEvent;
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
@@ -30,22 +28,22 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.clientConfig.Q_skill_warning;
 	import com.rpgGame.coreData.info.fight.FightHurtResult;
-	import com.rpgGame.coreData.lang.LangQ_NoticeInfo;
 	import com.rpgGame.coreData.role.MonsterData;
-	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RoleStateType;
+	import com.rpgGame.netData.fight.bean.AttackResultInfo;
 	import com.rpgGame.netData.fight.message.ResAttackRangeMessage;
 	import com.rpgGame.netData.fight.message.ResAttackResultMessage;
 	import com.rpgGame.netData.fight.message.ResAttackVentToClientMessage;
 	import com.rpgGame.netData.fight.message.ResFightBroadcastMessage;
 	import com.rpgGame.netData.fight.message.ResFightFailedBroadcastMessage;
-	import com.rpgGame.netData.fight.message.SCAttackerResultMessage;
 	import com.rpgGame.netData.fight.message.SCBuffSkillMessage;
 	import com.rpgGame.netData.fight.message.SCCancelSkillMessage;
 	import com.rpgGame.netData.fight.message.SCSkillWarningInfoMessage;
 	import com.rpgGame.netData.structs.Position;
 	
 	import flash.geom.Point;
+	
+	import gs.TweenLite;
 	
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
@@ -208,28 +206,16 @@ package com.rpgGame.app.cmdlistener.scene
 		private function onResAttackResultMessage(msg:ResAttackResultMessage):void
 		{
 			var info : SpellResultInfo = SpellResultInfo.setSpellResultInfo(msg);
-			SpellHitHelper.fightSpellHitEffect(info);
+			
+			if (info.hurtDelay > 0)
+				TweenLite.delayedCall(info.hurtDelay * 0.001, SpellHitHelper.fightSpellHitEffect, [info]);
+			else
+				SpellHitHelper.fightSpellHitEffect(info);
+			
+//			SpellHitHelper.fightSpellHitEffect(info);
 			effectCharAttribute(info);
-            lockAttack(info);
+            lockAttack(info,msg.state);
 			
-			var skillId:int=msg.state.skillId&0xffffff;
-			var skillData:Q_skill_model=SpellDataManager.getSpellData(skillId);
-			if(skillData!=null&&skillData.q_performType==0)//判断不是战魂的技能  ---yt
-			{
-				if(msg.state.attackerId.ToGID() == MainRoleManager.actorID)//自己攻击别人
-				{
-					EventManager.dispatchEvent(SkillEvent.SKILL_RESULT,skillData.q_skillID);
-					TrusteeshipFightSoulManager.getInstance().startFightSoulAuto(msg.state.targetId,1);//战魂帮忙打
-				}
-				else if(msg.state.targetId.ToGID() == MainRoleManager.actorID)//别人攻击自己
-				{
-					TrusteeshipFightSoulManager.getInstance().startFightSoulAuto(msg.state.attackerId,2);//战魂还击
-				}
-			}
-			
-			
-			
-		
 		}
 		
 		private function effectCharAttribute(info : SpellResultInfo) : void
@@ -247,9 +233,9 @@ package com.rpgGame.app.cmdlistener.scene
 		}
 
         // 锁定攻击源
-        private function lockAttack(info : SpellResultInfo):void
+        private function lockAttack(info : SpellResultInfo,state: AttackResultInfo):void
 		{
-            if (info.isMainCharHited)// && null == SceneRoleSelectManager.selectedRole   锁定攻击不需要选择为空
+           /* if (info.isMainCharHited)// && null == SceneRoleSelectManager.selectedRole   锁定攻击不需要选择为空
 			{
                 var hurtList : Vector.<FightHurtResult> = info.hurtList;
                 if (hurtList.length > 0)
@@ -265,7 +251,71 @@ package com.rpgGame.app.cmdlistener.scene
 						}
                     }
                 }
-            }
+            }*/
+			var hurt:FightHurtResult;
+			/**--------------------被动挂机-----------------*/
+			if (info.isMainCharHited)//主角被打
+			{
+				if (info.hurtList.length > 0)
+				{
+					var attacker : SceneRole;
+					for each(hurt in info.hurtList )
+					{
+						attacker=SceneManager.getSceneObjByID(hurt.atkorID) as SceneRole;
+						if (attacker!=null)
+						{
+							TrusteeshipManager.getInstance().killActor(attacker);
+							
+						}
+					}
+				}
+			}
+			
+			/**--------------------战魂-----------------*/
+			var skillId:int=state.skillId&0xffffff;
+			var skillData:Q_skill_model=SpellDataManager.getSpellData(skillId);
+			if(skillData!=null&&skillData.q_performType==0)//判断不是战魂的技能  ---yt
+			{
+				if(state.attackerId.ToGID() == MainRoleManager.actorID)//自己攻击别人
+				{
+					EventManager.dispatchEvent(SkillEvent.SKILL_RESULT,skillData.q_skillID);
+					TrusteeshipFightSoulManager.getInstance().startFightSoulAuto(state.targetId,1);//战魂帮忙打
+				}
+				else if(state.targetId.ToGID() == MainRoleManager.actorID)//别人攻击自己
+				{
+					TrusteeshipFightSoulManager.getInstance().startFightSoulAuto(state.attackerId,2);//战魂还击
+				}
+			}
+			/**--------------------是否攻击任务怪-----------------*/
+			
+			if(state.attackerId.ToGID() == MainRoleManager.actorID)//自己攻击
+			{
+				if (info.hurtList.length > 0)
+				{
+					var targeter : SceneRole;
+					var mdata:MonsterData;
+					TaskAutoManager.getInstance().actTaskMonster=false;
+					for each(hurt in info.hurtList )
+					{
+						targeter=SceneManager.getSceneObjByID(hurt.targetID) as SceneRole;
+						if (targeter!=null)
+						{
+							mdata=targeter.data as MonsterData;
+						}
+						if (mdata!=null)
+						{
+							if(TaskMissionManager.isWillTaskMonster(mdata.monsterData.q_id))
+							{
+								TaskAutoManager.getInstance().actTaskMonster=true;
+								break;
+							}
+						}
+						
+					}
+				}
+			}
+			
+			
         }
 		
 		private var attackAreas:Vector.<ShapeArea3D> = new Vector.<ShapeArea3D>();

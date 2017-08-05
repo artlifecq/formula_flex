@@ -79,7 +79,7 @@ package  com.rpgGame.app.ui.alert
 			_ins.skin.lbTip.text = msg;
 			_ins.okFCallBack = onOk;
 			_ins.cancelCallBack = onCancel;
-			_ins.skin.title.htmlText = title;
+//			_ins.skin.title.htmlText = title;
 			_ins.okParam=okParam;
 			Stage3DLayerManager.starlingLayer.getLayer("alert").addChild(_ins);
 			_ins.x = int((_ins.stage.stageWidth - _ins.width) / 2);

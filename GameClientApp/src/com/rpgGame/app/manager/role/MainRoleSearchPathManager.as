@@ -3,6 +3,7 @@ package com.rpgGame.app.manager.role
 	import com.game.engine3D.events.SceneEvent;
 	import com.game.engine3D.events.SceneEventAction3D;
 	import com.game.engine3D.utils.MathUtil;
+	import com.game.engine3D.utils.PathFinderUtil;
 	import com.game.engine3D.vo.BaseObj3D;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
@@ -165,7 +166,26 @@ package com.rpgGame.app.manager.role
 			}
 			
 		}
-
+		
+		/**
+		 * //任务 跨场景寻路 + 有跳跃点
+		 * */
+		public static function walkToSceneAndJump(targetSceneId : int, posx : Number = -1, posy : Number = -1, onArrive : Function = null, spacing : int = 0, data : Object = null,needSprite:Boolean=false) : void
+		{
+			walkToScene(targetSceneId,posx,posy,walkOver,spacing,data,needSprite);
+			function walkOver(_data : *):void
+			{
+				EventManager.dispatchEvent(TaskEvent.AUTO_WALK_STOP);
+				_jumpPash = null;
+				_isAutoJumping = true;
+				_onArrive=onArrive;
+				_data=data;
+			}
+			
+			
+		}
+		
+		
 		/**
 		 * 跨场景寻路
 		 * @param role
@@ -205,6 +225,7 @@ package com.rpgGame.app.manager.role
 						_isAutoFinding = true;
 						trace("auto_SearchPath_CrossScene_Start");
 						_onArrive=onArrive;
+						_data=data;
 						onNextScene(mapID);
 					}
 				}
@@ -259,7 +280,6 @@ package com.rpgGame.app.manager.role
 			{
 				return;
 			}
-
 			//取得最上一个(走到当前场景的某个传送点)
 			var searchMapData : SearchMapData = _scenePath.shift();
 			if (sceneId == searchMapData.mapId)
@@ -267,7 +287,7 @@ package com.rpgGame.app.manager.role
 				currentSceneId = sceneId;
 				if (searchMapData.posX > -1 && searchMapData.posY < 0)
 				{
-					var pos : Vector3D = new Vector3D(searchMapData.posX, searchMapData.posY, 0);
+					var pos : Vector3D = new Vector3D(searchMapData.posX, searchMapData.posY, searchMapData.posY);
 					if (_scenePath.length == 0)
 					{
 						jumpWalkToPos(MainRoleManager.actor, pos, searchMapData.spacing, _data, _onArrive,null,null,_needSprite);
@@ -276,7 +296,7 @@ package com.rpgGame.app.manager.role
 					else
 					{
 						//RoleStateUtil.walkToPos(MainRoleManager.actor, pos, searchMapData.spacing, _data);
-						jumpWalkToPos(MainRoleManager.actor, pos, 0, _data,null,null,null,_needSprite);
+						jumpWalkToPos(MainRoleManager.actor, pos, 0, _data);
 					}
 					//RoleStateUtil.walk(MainRoleManager.actor, searchMapData.posX, searchMapData.posY, searchMapData.spacing, _data);
 				}
@@ -571,6 +591,22 @@ package com.rpgGame.app.manager.role
 		private static var _jumpPash:Vector.<Vector3D>;
 		private static var _isAutoJumping : Boolean = false;
 		private static var _jumpPass:Array;
+		
+		/**
+		 *  跨跳跃点走路，不用寻路直接走，策划用于任务
+		 **/
+		public static function jumpWalkToTask(role : SceneRole, pos :Vector.<Vector3D>, spacing : int = 0, data : Object = null, 
+											 onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null,needSprite:Boolean=false) : Boolean
+		{
+			clearJumpPath();
+			_jumpPash = pos;
+			_isAutoJumping = true;
+			_onArrive=onArrive;
+			onNextJump();
+			return true;
+		}
+		
+		
 		/**
 		 *  跨跳跃点寻路
 		 **/
@@ -579,25 +615,32 @@ package com.rpgGame.app.manager.role
 		{
 			
 			var _districtWithPath : DistrictWithPath = SceneManager.getDistrict(role.sceneName);
-			if (PolyUtil.isFindPath(_districtWithPath, role.position, pos))///有寻路路径直接走
+			if(!PathFinderUtil.isPointInSide(_districtWithPath, pos))//阻挡点正常寻路
 			{
 				return RoleStateUtil.walkToPos(role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite);
 			}
-			//没有路径开有没有跳跃点
-			clearJumpPath();
-			var jumpPash : Vector.<Vector3D>=new Vector.<Vector3D>();
-			searchJumpToPonit(_districtWithPath,role.position, pos,jumpPash);
-			if (jumpPash && jumpPash.length > 0)//如果可以跳跃
+			else
 			{
-				//jumpPash.pop();
-				_jumpPash = jumpPash;
-				_isAutoJumping = true;
-				_onArrive=onArrive;
-				onNextJump();
-				return true;
+				if (PolyUtil.isFindPath(_districtWithPath, role.position, pos))///有寻路路径直接走
+				{
+					return RoleStateUtil.walkToPos(role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite);
+				}
+				//没有路径开有没有跳跃点
+				clearJumpPath();
+				var jumpPash : Vector.<Vector3D>=new Vector.<Vector3D>();
+				searchJumpToPonit(_districtWithPath,role.position, pos,jumpPash);
+				if (jumpPash && jumpPash.length > 0)//如果可以跳跃
+				{
+					_jumpPash = jumpPash;
+					_isAutoJumping = true;
+					_onArrive=onArrive;
+					onNextJump();
+					return true;
+				}
+				//如果跳跃也没有就直接按阻挡点处理
+				return RoleStateUtil.walkToPos(role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite);
 			}
-			//如果跳跃也没有就直接按阻挡点处理
-			return RoleStateUtil.walkToPos(role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite);
+			
 		}
 		private static function searchJumpToPonit(district : DistrictWithPath, position : Vector3D, target : Vector3D, crossJumpArr : Vector.<Vector3D>) : Boolean
 		{
@@ -671,6 +714,11 @@ package com.rpgGame.app.manager.role
 			}
 			if (!_jumpPash || _jumpPash.length==0)
 			{
+				if(_onArrive)
+				{
+					_onArrive(_data);
+				}
+				_onArrive=null;
 				clearJumpPath();
 				return;
 			}
@@ -680,8 +728,8 @@ package com.rpgGame.app.manager.role
 			if (_jumpPash.length == 0)
 			{
 				RoleStateUtil.walkToPos(MainRoleManager.actor, targetPos, 100, _data, _onArrive);
-				_onArrive=null;
-				clearAutoFindPath();
+				
+				clearJumpPath();
 			}
 			else
 			{

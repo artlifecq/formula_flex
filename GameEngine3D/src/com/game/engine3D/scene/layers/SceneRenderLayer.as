@@ -477,7 +477,7 @@ package com.game.engine3D.scene.layers
 					if(baseObj.enableMask && _scene3D.sceneMapLayer.district)
 					{
 						var isInMask:Boolean = _scene3D.sceneMapLayer.district.isPointInMask(baseObj.graphicDis.position);
-						if(isInMask)
+						if(isInMask && !baseObj.isJump)
 						{
 							baseObj.isAlpha = true;
 						}
@@ -485,19 +485,7 @@ package com.game.engine3D.scene.layers
 						{
 							baseObj.isAlpha = false;
 						}
-//						if(!baseObj.isHiding)
-//						{	
-//							if(isInMask)
-//							{
-//								baseObj.blendMode = BlendMode.LAYER;
-//								baseObj.alpha = 0.5;
-//							}
-//							else
-//							{
-//								baseObj.blendMode = BlendMode.NORMAL;
-//								baseObj.alpha = 1;
-//							}
-//						}
+
 					}
 				}
 				else

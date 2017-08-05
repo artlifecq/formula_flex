@@ -35,7 +35,6 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
-	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.lang.LangSpell;
 	import com.rpgGame.coreData.lang.LangUI;
 	import com.rpgGame.coreData.type.CharAttributeType;
@@ -92,12 +91,15 @@ package com.rpgGame.appModule.equip
 		
 		private var tweenEquip:TweenMax;
 		
+		private var pointY:Array;
 		
 		public function EquipInheritUI()
 		{
 			_skin=new Jicheng_Skin();
+			pointY=[257,339,398];
 			super(_skin);
 			initView();
+			
 		}
 		
 		override public function show(data:Object=null):void
@@ -168,8 +170,8 @@ package com.rpgGame.appModule.equip
 			_leftSkin=_skin.left.skin as Zhuangbei_left;
 			_leftSkin.lb_yinzi.htmlText=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT4),0);
 			//设置格子组标题
-			(_leftSkin.title1.skin as TitileHead).labelDisplay.text=LanguageConfig.getText(LangUI.UI_TEXT14);
-			(_leftSkin.title2.skin as TitileHead).labelDisplay.text=LanguageConfig.getText(LangUI.UI_TEXT15);
+			(_leftSkin.title1.skin as TitileHead).uiLabel.styleName="ui/app/zhuangbei/jichengjieguo.png";
+			(_leftSkin.title2.skin as TitileHead).uiLabel.styleName="ui/app/zhuangbei/jichengcailiao.png";
 			
 			//初始化格子
 			_goodsbyPlayer=new GoodsContainerPanel(_leftSkin.list1,ItemContainerID.IHT_LIST,createItemRender);
@@ -184,10 +186,10 @@ package com.rpgGame.appModule.equip
 			
 			_skin.container.addChild(_targetEquip);
 			_skin.container.addChild(_useEquip);
-			_targetEquip.x=753;
-			_targetEquip.y=121;
-			_useEquip.x=481;
-			_useEquip.y=121;
+			_targetEquip.x=747;
+			_targetEquip.y=141;
+			_useEquip.x=482;
+			_useEquip.y=141;
 			
 			//初始化选项
 			for(var i:int=0;i<3;i++)
@@ -195,7 +197,7 @@ package com.rpgGame.appModule.equip
 				var item:EquipJiChengItem=new EquipJiChengItem();
 				item.SetData(i);
 				item.x=388;
-				item.y=232+i*75;
+				item.y=pointY[i];
 				_skin.container.addChild(item);
 				_optionsList.push(item);
 			}
@@ -261,7 +263,7 @@ package com.rpgGame.appModule.equip
 			if(tweenEquip){
 				tweenEquip.kill();
 			}
-			tweenEquip=TweenMax.to(_targetEquip,1,{x:753,y:121,ease:Expo.easeOut});
+			tweenEquip=TweenMax.to(_targetEquip,1,{x:747,y:141,ease:Expo.easeOut});
 			
 			updateUsePanel();
 			targetGrid=_goodsbyBag.getDragDropItemByItemInfo(_targetEquipInfo);
@@ -318,7 +320,7 @@ package com.rpgGame.appModule.equip
 			if(tweenEquip){
 				tweenEquip.kill();
 			}
-			tweenEquip=TweenMax.to(_useEquip,1,{x:486,y:121,ease:Expo.easeOut});
+			tweenEquip=TweenMax.to(_useEquip,1,{x:482,y:141,ease:Expo.easeOut});
 			targetGrid=_goodsbyPlayer.getDragDropItemByItemInfo(_useEuipInfo);
 			if(targetGrid)
 			{
@@ -544,8 +546,8 @@ package com.rpgGame.appModule.equip
 			var job:int=MainRoleManager.actorInfo.job;
 			if(_targetEquipInfo!=null&&info!=_targetEquipInfo)
 			{
-				if((info.qItem.q_job==job||info.qItem.q_job==0)&&info.qItem.q_kind==_targetEquipInfo.qItem.q_kind&&((info.strengthExp!=0&&info.strengthExp<_targetEquipInfo.strengthExp)||
-					(info.polishExp!=0&&info.polishExp<_targetEquipInfo.polishExp)||info.smeltAtt1!=0||info.smeltAtt2!=0))
+				if((info.qItem.q_job==job||info.qItem.q_job==0)&&info.qItem.q_kind==_targetEquipInfo.qItem.q_kind&&info.qItem.q_level<=_targetEquipInfo.qItem.q_level&&((info.strengthExp!=0&&info.strengthExp>_targetEquipInfo.strengthExp)||
+					(info.polishExp!=0&&info.polishExp>_targetEquipInfo.polishExp)||info.smeltAtt1!=0||info.smeltAtt2!=0))
 				{
 					return true;
 				}

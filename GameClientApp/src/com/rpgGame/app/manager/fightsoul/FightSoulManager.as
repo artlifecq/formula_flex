@@ -43,8 +43,6 @@ package com.rpgGame.app.manager.fightsoul
 		public static const FightSoul_TypeValue:int = UNIQUEID.NEXT;
 		public static const FightSoul_GetReward:int = UNIQUEID.NEXT;
 		
-		
-		public static const FightSoulMaxLevel:int = 130;
 		/**
 		 * 战魂数据
 		 */
@@ -62,7 +60,7 @@ package com.rpgGame.app.manager.fightsoul
 		
 		private function checkCanUpLevel():void
 		{
-			if(fightSoulInfo.level == FightSoulMaxLevel)
+			if(fightSoulInfo.level == FightsoulData.FightSoulMaxLevel)
 			{
 				return ;
 			}
@@ -184,7 +182,7 @@ package com.rpgGame.app.manager.fightsoul
 		
 		public function FightSoulLevelUp():Boolean
 		{
-			if(fightSoulInfo.level == FightSoulMaxLevel)
+			if(fightSoulInfo.level == FightsoulData.FightSoulMaxLevel)
 			{
 				NoticeManager.showNotifyById(4002);
 				return false;
@@ -204,7 +202,7 @@ package com.rpgGame.app.manager.fightsoul
 			{
 				return false;
 			}
-			if(fightSoulInfo.level == FightSoulMaxLevel)
+			if(fightSoulInfo.level == FightsoulData.FightSoulMaxLevel)
 			{
 				return false;
 			}

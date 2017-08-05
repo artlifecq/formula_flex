@@ -38,6 +38,8 @@ package org.mokylin.skin.app.banghui.button
 			super();
 			
 			this.currentState = "upAndSelected";
+			this.height = 42;
+			this.width = 123;
 			this.elementsContent = [];
 			__Button_GeRen_UIAsset1_i();
 			__Button_GeRen_UIAsset2_i();
@@ -67,7 +69,9 @@ package org.mokylin.skin.app.banghui.button
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			__Button_GeRen_UIAsset1 = temp;
+			temp.height = 42;
 			temp.styleName = "ui/app/banghui/button/yeqian/up.png";
+			temp.width = 123;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -77,7 +81,9 @@ package org.mokylin.skin.app.banghui.button
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			__Button_GeRen_UIAsset2 = temp;
+			temp.height = 42;
 			temp.styleName = "ui/app/banghui/button/yeqian/over.png";
+			temp.width = 123;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -87,7 +93,9 @@ package org.mokylin.skin.app.banghui.button
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			__Button_GeRen_UIAsset3 = temp;
+			temp.height = 42;
 			temp.styleName = "ui/app/banghui/button/yeqian/down.png";
+			temp.width = 123;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -97,7 +105,9 @@ package org.mokylin.skin.app.banghui.button
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			__Button_GeRen_UIAsset4 = temp;
+			temp.height = 42;
 			temp.styleName = "ui/app/banghui/button/yeqian/over.png";
+			temp.width = 123;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -107,7 +117,9 @@ package org.mokylin.skin.app.banghui.button
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			__Button_GeRen_UIAsset5 = temp;
+			temp.height = 17;
 			temp.styleName = "ui/app/banghui/button/jineng1/up.png";
+			temp.width = 60;
 			temp.x = 32;
 			temp.y = 13;
 			return temp;
@@ -117,7 +129,9 @@ package org.mokylin.skin.app.banghui.button
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			__Button_GeRen_UIAsset6 = temp;
+			temp.height = 17;
 			temp.styleName = "ui/app/banghui/button/jineng1/over.png";
+			temp.width = 60;
 			temp.x = 32;
 			temp.y = 13;
 			return temp;
@@ -127,7 +141,9 @@ package org.mokylin.skin.app.banghui.button
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			__Button_GeRen_UIAsset7 = temp;
+			temp.height = 17;
 			temp.styleName = "ui/app/banghui/button/jineng1/down.png";
+			temp.width = 60;
 			temp.x = 32;
 			temp.y = 13;
 			return temp;
@@ -137,7 +153,9 @@ package org.mokylin.skin.app.banghui.button
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			__Button_GeRen_UIAsset8 = temp;
+			temp.height = 17;
 			temp.styleName = "ui/app/banghui/button/jineng1/over.png";
+			temp.width = 60;
 			temp.x = 32;
 			temp.y = 13;
 			return temp;

@@ -13,8 +13,11 @@ package com.rpgGame.app.process
     import com.rpgGame.app.SingleClientTest;
     import com.rpgGame.app.manager.BeanRegisterManager;
     import com.rpgGame.app.manager.ClientTriggerManager;
+    import com.rpgGame.app.manager.DisplaySetUpManager;
+    import com.rpgGame.app.manager.GamePerformsManager;
     import com.rpgGame.app.manager.GlobalSettingManager;
     import com.rpgGame.app.manager.SceneCameraLensEffectManager;
+    import com.rpgGame.app.manager.TabManager;
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.manager.scene.FirstEnterSceneManager;
     import com.rpgGame.app.manager.scene.SceneManager;
@@ -46,6 +49,7 @@ package com.rpgGame.app.process
     import com.rpgGame.app.ui.tips.OpenGridTip;
     import com.rpgGame.app.ui.tips.PKModeTip;
     import com.rpgGame.app.ui.tips.PassiveSpellTip;
+    import com.rpgGame.app.ui.tips.PetTiaoZhanTip;
     import com.rpgGame.app.ui.tips.PetTip;
     import com.rpgGame.app.ui.tips.ShiJieBossRewardTips;
     import com.rpgGame.app.ui.tips.SocietyBuildItemTip;
@@ -157,6 +161,10 @@ package com.rpgGame.app.process
 				//
 				MainRoleManager.initActor();
 				GlobalSettingManager.init();
+				
+				GamePerformsManager.init();
+				GamePerformsManager.autoDisplayAdjust = true;
+				TabManager.init();
 				//
 
 				Stage3DLayerManager.stage.addEventListener(KeyboardEvent.KEY_UP,onShowFrameState);
@@ -164,6 +172,7 @@ package com.rpgGame.app.process
 				showFrameState();
 			}
 
+			DisplaySetUpManager.setToHigh();
 			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE, onSwitchCmp);
 			SceneSwitchManager.changeMap();
 		}
@@ -248,6 +257,7 @@ package com.rpgGame.app.process
 			
 			TipManager.registerTipsParserClass(TipType.MEIREN_GUIZE_TIP,MeiRenGuiZeTip);
 			TipManager.registerTipsParserClass(TipType.MEIREN_TIP,PetTip);
+			TipManager.registerTipsParserClass(TipType.MEIREN_TIAOZHAN_TIP,PetTiaoZhanTip);
 			TipManager.registerTipsParserClass(TipType.TASK_LEAD_TIP,TaskLeadTips);
 			TipManager.registerTipsParserClass(TipType.TASK_LOOP_TIP,TaskloopTips);
 		}

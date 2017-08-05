@@ -36,6 +36,7 @@ package com.rpgGame.appModule.rank
 		}
 	}
 }
+import com.rpgGame.app.manager.Mgr;
 import com.rpgGame.app.utils.FaceUtil;
 import com.rpgGame.app.utils.FightValueUtil;
 import com.rpgGame.app.view.icon.IconCDFace;
@@ -104,7 +105,8 @@ class BeautyRightGroup extends RightGroupBase
 		_girlData = PetAdvanceCfg.getPet(_topInfo.playerBriefInfo.beautyModelid,_topInfo.param);
 		if(_girlData!=null)
 		{
-			var attValues1:Q_att_values=AttValueConfig.getAttInfoById(_girlData.q_attid_master);
+			var attId:int=Mgr.petMgr.getAttId(_girlData.q_attid_master);
+			var attValues1:Q_att_values=AttValueConfig.getAttInfoById(attId);
 			_power = FightValueUtil.calFightPowerByAttValue(attValues1,_topInfo.job);
 			_avatar.updateBodyWithRes(_girlData.q_skill_id);
 		}else{

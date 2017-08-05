@@ -5,10 +5,10 @@ package com.rpgGame.coreData.cfg.item
 	import com.rpgGame.coreData.type.item.ItemQualityType;
 	
 	import flash.utils.ByteArray;
-	import flash.utils.Dictionary;
 	
 	import app.message.GoodsType;
-	import app.message.NormalUsableDataProto.NormalEfficacy;
+	
+	import org.client.mainCore.ds.HashMap;
 
 	/**
 	 *物品数据配置
@@ -21,19 +21,38 @@ package com.rpgGame.coreData.cfg.item
 		{
 		}
 		
-		private static var _dataDic:Dictionary;
+		private static var _datas:HashMap;
 		
 		public static function setup( data:ByteArray ):void
 		{
-			_dataDic = new Dictionary();
+			_datas = new HashMap();
 			
 			var arr : Array = data.readObject();
 			
-			for each(var info : Q_item in arr) {
-				_dataDic[info.q_id] = info;
+			for each(var info : Q_item in arr)
+			{
+				_datas.add(info.q_id,info);
 			}
 		}
 		
+		public static function getAllItems():Array
+		{
+			return _datas.getValues();
+		}
+		
+		public static function getItemsByType(type:int):Array
+		{
+			var arr:Array = [];
+			for each (var item:Q_item in _datas.getValues())
+			{
+				if (item.q_type == type)
+				{
+					arr.push(item);
+				}
+			}
+			return arr;
+		}
+
 		
 		/**
 		 * 通过id获取物品信息
@@ -43,7 +62,7 @@ package com.rpgGame.coreData.cfg.item
 		 */
 		public static function getQItemByID(id:int):Q_item
 		{
-			return _dataDic[id];
+			return _datas.getValue(id);
 		}
 	
 		

@@ -19,6 +19,8 @@ package org.mokylin.skin.app.wuxue.jineng
 		//==========================================================================
 		public var Icon:feathers.controls.UIAsset;
 
+		public var imgSelect:feathers.controls.UIAsset;
+
 		public var mc_dengjie:feathers.controls.UIMovieClip;
 
 		public var tips:feathers.controls.UIAsset;
@@ -42,9 +44,9 @@ package org.mokylin.skin.app.wuxue.jineng
 			super();
 			
 			this.currentState = "normal";
-			this.height = 59;
-			this.width = 241;
-			this.elementsContent = [__jinengItemsSkin_UIAsset1_i(),Icon_i(),txt_Name_i(),txt_Inacitve_i(),txt_xianzhi_i(),txt_Acitve_i(),txt_level_i(),tips_i(),mc_dengjie_i()];
+			this.height = 73;
+			this.width = 239;
+			this.elementsContent = [__jinengItemsSkin_UIAsset1_i(),imgSelect_i(),Icon_i(),txt_Name_i(),txt_Inacitve_i(),txt_xianzhi_i(),txt_Acitve_i(),txt_level_i(),tips_i(),mc_dengjie_i()];
 			
 			states = {
 			};
@@ -62,9 +64,9 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.name = "Icon";
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/42.png";
-			temp.x = 4;
-			temp.y = 2;
+			temp.styleName = "ui/common/grid/normal/42.png";
+			temp.x = 11;
+			temp.y = 11;
 			return temp;
 		}
 
@@ -72,6 +74,19 @@ package org.mokylin.skin.app.wuxue.jineng
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/wuxue/jineng/jineng_di.png";
+			temp.x = 3;
+			temp.y = 3;
+			return temp;
+		}
+
+		private function imgSelect_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			imgSelect = temp;
+			temp.name = "imgSelect";
+			temp.height = 73;
+			temp.styleName = "ui/app/wuxue/jineng/xuanzhong.png";
+			temp.width = 239;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -84,10 +99,12 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.name = "mc_dengjie";
 			temp.autoPlay = false;
 			temp.height = 10;
+			temp.touchable = false;
+			temp.touchGroup = true;
 			temp.styleClass = org.mokylin.skin.app.wuxue.jineng.mc.dengjiSkin;
 			temp.width = 10;
-			temp.x = 43;
-			temp.y = 38;
+			temp.x = 50;
+			temp.y = 46;
 			return temp;
 		}
 
@@ -99,8 +116,8 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.styleName = "ui/common/tubiao/tishi.png";
-			temp.x = 211;
-			temp.y = 36;
+			temp.x = 214;
+			temp.y = 50;
 			return temp;
 		}
 
@@ -112,11 +129,10 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.text = "已激活进阶效果";
-			temp.color = 0xc9b722;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.visible = false;
-			temp.x = 63;
-			temp.y = 34;
+			temp.color = 0x00FF33;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 68;
+			temp.y = 41;
 			return temp;
 		}
 
@@ -128,10 +144,10 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.text = "未激活进阶效果";
-			temp.color = 0x8b8d7b;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 63;
-			temp.y = 34;
+			temp.color = 0xA3A594;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 68;
+			temp.y = 41;
 			return temp;
 		}
 
@@ -142,11 +158,13 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.name = "txt_Name";
 			temp.touchable = false;
 			temp.touchGroup = true;
+			temp.fontSize = 16;
 			temp.text = "侵略如火";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 63;
-			temp.y = 8;
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 91;
+			temp.x = 67;
+			temp.y = 13;
 			return temp;
 		}
 
@@ -157,11 +175,11 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.name = "txt_level";
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.text = "等级:1/200";
-			temp.color = 0x5cb006;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.x = 160;
-			temp.y = 7;
+			temp.text = "Lv.1/200";
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 169;
+			temp.y = 15;
 			return temp;
 		}
 
@@ -173,11 +191,10 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.text = "60级后自动获得";
-			temp.color = 0x8B8D7B;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.visible = false;
-			temp.x = 125;
-			temp.y = 34;
+			temp.color = 0xA3A594;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 68;
+			temp.y = 41;
 			return temp;
 		}
 

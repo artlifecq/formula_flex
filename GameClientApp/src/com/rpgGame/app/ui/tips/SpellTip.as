@@ -110,6 +110,9 @@ package com.rpgGame.app.ui.tips
 				_spellTip.lbShuoming.text=lvData.q_skillpanel_description;
 				_spellTip.lbShuoming.isHtmlText=true;
 			}
+			_spellTip.lbShuoming.text=lvData.q_skillpanel_description;
+			_spellTip.lbShuoming.wordWrap=true;
+			_spellTip.lbShuoming.isHtmlText=true;
 			
 			if(!riseCfg){
 				_spellTip.tipbg.height=_spellTip.lbShuoming.y+_spellTip.lbShuoming.textHeight+20;

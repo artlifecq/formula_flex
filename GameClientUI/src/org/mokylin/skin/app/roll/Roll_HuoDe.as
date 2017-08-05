@@ -37,7 +37,7 @@ package org.mokylin.skin.app.roll
 		private function __Roll_HuoDe_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/roll/zsd.png";
+			temp.styleName = "ui/app/roll/zsd.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -46,7 +46,7 @@ package org.mokylin.skin.app.roll
 		private function __Roll_HuoDe_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/roll/gxnhdl.png";
+			temp.styleName = "ui/app/roll/gxnhdl.png";
 			temp.x = 121;
 			temp.y = 24;
 			return temp;
@@ -57,7 +57,7 @@ package org.mokylin.skin.app.roll
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icon = temp;
 			temp.name = "icon";
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/48.png";
+			temp.styleName = "ui/common/grid/normal/48.png";
 			temp.x = 177;
 			temp.y = 66;
 			return temp;

@@ -171,7 +171,7 @@ package com.rpgGame.app.manager
 			}
 			for each(var key:int in zongMaps.keys())
 			{
-				str+=HtmlTextUtil.getTextColor(0x8B8D7B,CharAttributeType.getCNName(key))+": "+HtmlTextUtil.getTextColor(0x5cb006,"+"+zongMaps.getValue(key))+"\n";
+				str+=HtmlTextUtil.getTextColor(0x8B8D7B,CharAttributeType.getCNName(key))+": "+HtmlTextUtil.getTextColor(0x5cb006,"+"+AttValueConfig.getDisAttValue(key,zongMaps.getValue(key)))+"\n";
 			}
 			if(str==null||str=="") str="当前无属性加成";
 			return str;
@@ -204,8 +204,7 @@ package com.rpgGame.app.manager
 				attValues2=AttValueConfig.getAttInfoById(ZhanGongUtil.getAttByJob(meritorious2,MainRoleManager.actorInfo.job));
 				maps2=AttValueConfig.getTypeValueMap(attValues2);
 				keys2=maps2.keys();
-				
-				var num:String=keys1[0]+"_"+(maps2.getValue(keys2[0])-maps1.getValue(keys1[0]));
+				var num:String=keys1[0]+"_"+AttValueConfig.getDisAttValueStr(keys2[0],(maps2.getValue(keys2[0])-maps1.getValue(keys1[0])));
 				return num;
 			}
 			return "";

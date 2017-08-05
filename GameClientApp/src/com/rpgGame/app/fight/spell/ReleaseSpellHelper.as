@@ -3,7 +3,6 @@ package com.rpgGame.app.fight.spell
 	import com.game.engine3D.utils.MathUtil;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.SkillCDManager;
-	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.app.state.role.action.AttackStateReference;
@@ -11,9 +10,7 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.clientConfig.Q_skill_warning;
-	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.RoleStateType;
-	import com.rpgGame.netData.fight.message.ResFightBroadcastMessage;
 	
 	import flash.geom.Point;
 	
@@ -67,10 +64,6 @@ package com.rpgGame.app.fight.spell
 		}
 		public static function releaseSpellPlay(spellInfo : ReleaseSpellInfo) : void
 		{
-			try{if((spellInfo.atkor.data as MonsterData).modelID==9008)
-			{
-				Lyt.a("****"+spellInfo.spellData.q_skillName+"*******");
-			}}catch(e:Error){}
 			/** 施法者 **/
 			var ref : AttackStateReference = null;
 			if (spellInfo.atkor && spellInfo.atkor.usable)

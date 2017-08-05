@@ -140,18 +140,22 @@ package com.rpgGame.appModule.task
 		}
 		override public function hide():void 
 		{
-			super.hide();
 			timer.stop();
 			currtimer=TIMERDATA_1;
-			TweenLite.killDelayedCallsTo(subFinish);
-			TweenLite.delayedCall(0.5, subFinish);
+			if(this.visible&&this.parent!=null)
+			{
+				icoListGroup.tweeRewardInBag();
+				TweenLite.killDelayedCallsTo(subFinish);
+				TweenLite.delayedCall(0.5, subFinish);
+			}
+			super.hide();
 		}
 		
 		
 		
 		private function subFinishBut():void
 		{
-			if(TaskMissionManager.mainTaskInfo!=null&&TaskMissionManager.getMainTaskIsFinish()&&this.visible&&this.parent!=null)
+			if(TaskMissionManager.mainTaskInfo!=null&&TaskMissionManager.getMainTaskIsFinish())
 			{
 				hide();
 			}
@@ -159,8 +163,9 @@ package com.rpgGame.appModule.task
 		
 		private function subFinish():void
 		{
-			okBut.isEnabled=false;
-			TaskSender.sendfinishTaskMessage(TaskMissionManager.mainTaskInfo.taskId);	
+			//okBut.isEnabled=false;
+			TaskSender.sendfinishTaskMessage(TaskMissionManager.mainTaskInfo.taskId);
+			
 		}
 		
 		private function setView():void
@@ -175,14 +180,14 @@ package com.rpgGame.appModule.task
 				//TaskUtil.setRewordInfo(taskData.q_reword_id,icoList,icoBgList,true);
 				icoListGroup.setRewardByArray(TaskMissionCfgData.getRewordById(taskData.q_reword_id,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex));
 				icoListGroup.visible=true;
-				if(TaskMissionManager.getMainTaskIsFinish())
+				/*if(TaskMissionManager.getMainTaskIsFinish())
 				{
 					okBut.isEnabled=true;
 				}
 				else
 				{
 					okBut.isEnabled=false;
-				}
+				}*/
 				
 			}
 			

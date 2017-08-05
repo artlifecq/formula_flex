@@ -2,9 +2,13 @@ package com.rpgGame.appModule.pet.sub
 {
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.scene.render.RenderUnit3D;
-	import com.rpgGame.core.utils.MCUtil;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.PetAdvanceCfg;
+	import com.rpgGame.coreData.clientConfig.Q_girl_advance;
 	import com.rpgGame.coreData.type.EffectUrl;
+	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.netData.pet.bean.PetInfo;
 	
 	import feathers.controls.UIAsset;
@@ -28,11 +32,13 @@ package com.rpgGame.appModule.pet.sub
 			GrayFilter.gray(this._ball);
 		}
 		
-		public function setData(info:PetInfo,num:int):void
+		public function setData(info:PetInfo,num:int,isShowTips:Boolean=false):void
 		{
 			_info=info;
-			_rank=num;			
-			
+			_rank=num;		
+//			var q_girl:Q_girl_advance=PetAdvanceCfg.getPet(_info.modelId,_rank);
+//			if(isShowTips)
+//				TipTargetManager.show( this._ball, TargetTipsMaker.makeTips( TipType.MEIREN_TIAOZHAN_TIP, q_girl ,true) );
 		}
 		
 		private static function addEft(render:RenderUnit3D):void

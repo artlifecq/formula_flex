@@ -40,6 +40,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_map_jump:int;
 		 /**  是否可骑乘(0不可骑乘,1可骑乘) */
 		public var q_map_ride:int;
+		 /**  是否可冲锋(0不可冲锋,1可冲锋) */
+		public var q_map_charge:int;
 		 /**  是否可展示坐骑(0不允许,1允许) */
 		public var q_map_show:int;
 		 /**  被PK死亡后是否给予和平保护BUFF（0给予，1不给予） */

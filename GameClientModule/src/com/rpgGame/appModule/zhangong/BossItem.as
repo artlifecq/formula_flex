@@ -41,6 +41,7 @@ package com.rpgGame.appModule.zhangong
 	
 	import away3d.events.Event;
 	
+	import feathers.controls.UIAsset;
 	import feathers.utils.filter.GrayFilter;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -76,7 +77,7 @@ package com.rpgGame.appModule.zhangong
 			_avatarContainer.addChild3D(_avatar);
 			_avatardata=new MonsterData(RoleType.TYPE_MONSTER);
 			_skin.uiBg.addChild(_avatarContainer);
-			
+			//			_skin.uiName.imageScaleMode = UIAsset.IMAGE_SCALE_MODE_NO_SCALE;
 			_progressBar=new AwdProgressBar(_skin.pro_bar,"ui_zhangongtexiao");
 			_progressBar.x=16;
 			_progressBar.y=154;
@@ -96,7 +97,7 @@ package com.rpgGame.appModule.zhangong
 			updateShow();
 			this.addEventListener(starling.events.TouchEvent.TOUCH, onTouchItem);
 			_skin.btnUp.addEventListener(starling.events.TouchEvent.TOUCH, onTouchBtn);
-			_skin.btnUp.addEventListener(Event.TRIGGERED,toUpHandler);
+			//			_skin.btnUp.addEventListener(Event.TRIGGERED,toUpHandler);
 			EventManager.addEvent(ZhanGongEvent.BOSSITEM_CHANGE,updatePanel);
 			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,resChange);
 			TipTargetManager.remove(_skin.conver);
@@ -258,7 +259,7 @@ package com.rpgGame.appModule.zhangong
 			var keys:Array=maps.keys();
 			var values:Array=maps.values();
 			setUIType(keys[0]);
-			_skin.numZhanli.label="x"+values[0];
+			_skin.numZhanli.label="x"+AttValueConfig.getDisAttValueStr(keys[0],values[0]);
 			updateNumber();
 		}
 		
@@ -282,8 +283,9 @@ package com.rpgGame.appModule.zhangong
 			_avatardata.avatarInfo.setBodyResID(bornData ? bornData.q_body_res : "", null);
 			_avatar.setRoleData(this._avatardata);
 			var cfg:Q_meritorious_monster=ZhanGongMonsterData.getPointById(monsterId);
+			var scale:Number=parseFloat(cfg.q_scale);
 			RoleFaceMaskEffectUtil.addAvatarMask(AvatarMaskType.BOSS_ITEM,_avatar,cfg.q_pointX,
-				cfg.q_pointY,cfg.q_scale);
+				cfg.q_pointY,scale);
 		}
 		
 		private function setUIType(type:int):void
@@ -323,9 +325,9 @@ package com.rpgGame.appModule.zhangong
 				case CharAttributeType.HIT:
 					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/gzhonglv.png";
 					break;
-				case CharAttributeType.NEI_GONG:
-					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/neigong.png";
-					break;
+				/*case CharAttributeType.NEI_GONG:
+				_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/neigong.png";
+				break;*/
 				case CharAttributeType.MP:
 					_skin.uiName.styleName="ui/app/beibao/zhangong/jiacheng/nengliang.png";
 					break;

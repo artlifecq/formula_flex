@@ -4,9 +4,11 @@ package org.mokylin.skin.app.banghui
 	import feathers.controls.Button;
 	import feathers.controls.Check;
 	import feathers.controls.Label;
+	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.app.banghui.check.CheckBoxSkin_2;
+	import org.mokylin.skin.common.TongYongTanKuang_bg2;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 
@@ -20,7 +22,7 @@ package org.mokylin.skin.app.banghui
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var bg:feathers.controls.UIAsset;
+		public var bg:feathers.controls.SkinnableContainer;
 
 		public var btnClose:feathers.controls.Button;
 
@@ -116,8 +118,8 @@ package org.mokylin.skin.app.banghui
 			temp.height = 194;
 			temp.styleName = "ui/app/banghui/kuang1.png";
 			temp.width = 566;
-			temp.x = 7;
-			temp.y = 38;
+			temp.x = 6;
+			temp.y = 34;
 			return temp;
 		}
 
@@ -125,10 +127,10 @@ package org.mokylin.skin.app.banghui
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 36;
-			temp.styleName = "ui/app/banghui/list1.png";
-			temp.width = 546;
-			temp.x = 17;
-			temp.y = 79;
+			temp.styleName = "ui/common/table/list1.png";
+			temp.width = 548;
+			temp.x = 15;
+			temp.y = 75;
 			return temp;
 		}
 
@@ -136,10 +138,10 @@ package org.mokylin.skin.app.banghui
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 36;
-			temp.styleName = "ui/app/banghui/list1.png";
-			temp.width = 546;
-			temp.x = 17;
-			temp.y = 151;
+			temp.styleName = "ui/common/table/list1.png";
+			temp.width = 548;
+			temp.x = 15;
+			temp.y = 147;
 			return temp;
 		}
 
@@ -154,14 +156,15 @@ package org.mokylin.skin.app.banghui
 			return temp;
 		}
 
-		private function bg_i():feathers.controls.UIAsset
+		private function bg_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
 			temp.height = 291;
-			temp.styleName = "ui/common/background/erji_kuang.png";
-			temp.width = 580;
+			var skin:StateSkin = new org.mokylin.skin.common.TongYongTanKuang_bg2()
+			temp.skin = skin
+			temp.width = 578;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -174,7 +177,7 @@ package org.mokylin.skin.app.banghui
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
 			temp.x = 545;
-			temp.y = 7;
+			temp.y = 5;
 			return temp;
 		}
 
@@ -187,8 +190,8 @@ package org.mokylin.skin.app.banghui
 			temp.label = "确定";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xCFC6AE;
-			temp.width = 112;
-			temp.x = 234;
+			temp.width = 88;
+			temp.x = 246;
 			temp.y = 242;
 			return temp;
 		}
@@ -271,8 +274,8 @@ package org.mokylin.skin.app.banghui
 			temp.htmlText = "你想任命<font color='#5DBD37'>玩家名称六字</font>什么职位？";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 182.5;
-			temp.y = 52;
+			temp.x = 182;
+			temp.y = 48;
 			return temp;
 		}
 

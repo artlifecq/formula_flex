@@ -454,8 +454,16 @@ package com.rpgGame.appModule.role
 			EventManager.addEvent(ItemEvent.ITEM_BATCH, preBatch);
 			EventManager.addEvent(ItemEvent.ITEM_DISCARDED, preDiscard);
 			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);//金钱变化
+			EventManager.addEvent(MainPlayerEvent.LEVEL_CHANGE,levelChange);
 			
 			goodsContainer.addEvents();
+		}
+		
+		private function levelChange():void
+		{
+			var oldV:Number=(_skin.lst_pack.getVerticalScrollBar() as ScrollBar).value
+			goodsContainer.dataProvider.updateAll();
+			_skin.lst_pack.scrollToPosition(0,oldV,0);
 		}
 		
 		private function preDiscard(info:ClientItemInfo):void
@@ -666,6 +674,7 @@ package com.rpgGame.appModule.role
 			EventManager.removeEvent(ItemEvent.CHANGE_ACCESS_STATE,changeAccessState);
 			EventManager.removeEvent(ItemEvent.ITEM_PRE_SPLITE, preSplit);
 			EventManager.removeEvent(ItemEvent.ITEM_DISCARDED, preDiscard);
+			EventManager.removeEvent(MainPlayerEvent.LEVEL_CHANGE,levelChange);
 			
 			TipTargetManager.remove(_skin.txt_yingzibang);
 			

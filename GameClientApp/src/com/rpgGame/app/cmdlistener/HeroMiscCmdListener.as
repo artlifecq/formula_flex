@@ -3,13 +3,11 @@ package com.rpgGame.app.cmdlistener
 	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.fight.spell.FightChangePop;
+	import com.rpgGame.app.fight.spell.FightPowerChangePopPanelExt;
 	import com.rpgGame.app.fight.spell.SkillAddPop;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
-	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.manager.ClientSettingManager;
 	import com.rpgGame.app.manager.FangChenMiManager;
-	import com.rpgGame.app.manager.FunctionOpenManager;
-	import com.rpgGame.app.manager.PlayerAttributeManager;
 	import com.rpgGame.app.manager.ShortcutsManger;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
@@ -27,9 +25,12 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.core.events.SystemTimeEvent;
 	import com.rpgGame.core.events.role.RoleEvent;
 	import com.rpgGame.core.ui.tip.RewardTipTree;
-	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
+	import com.rpgGame.coreData.cfg.SpellDataManager;
+	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
+	import com.rpgGame.coreData.enum.AttChangeEnum;
 	import com.rpgGame.coreData.lang.LangText;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.CharAttributeType;
@@ -38,7 +39,6 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.netData.client.bean.SystemHint;
-	import com.rpgGame.netData.client.handler.SCSystemHintHandler;
 	import com.rpgGame.netData.client.message.ResClientCustomTagMessage;
 	import com.rpgGame.netData.client.message.SCSystemHintMessage;
 	import com.rpgGame.netData.player.bean.AttributeItem;
@@ -47,6 +47,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.player.message.ResPlayerAttributesChangeMessage;
 	import com.rpgGame.netData.player.message.SCCurrencyChangeMessage;
 	import com.rpgGame.netData.player.message.SCMaxValueChangeMessage;
+	import com.rpgGame.netData.player.message.SCModuleAttributesChangeMessage;
 	import com.rpgGame.netData.player.message.SCNonagePromptMessage;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
 	import com.rpgGame.netData.skill.message.ResSkillAddMessage;
@@ -56,6 +57,7 @@ package com.rpgGame.app.cmdlistener
 	import app.cmd.HeroMiscModuleMessages;
 	
 	import org.client.mainCore.bean.BaseBean;
+	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.connection.SocketConnection_protoBuffer;
@@ -80,6 +82,7 @@ package com.rpgGame.app.cmdlistener
 		override public function start() : void
 		{
 			SocketConnection.addCmdListener(103106,RecvPlayerAttributesChangeMessage);
+			SocketConnection.addCmdListener(103130,RecvSCModuleAttributesChangeMessage);
 			SocketConnection.addCmdListener(123101,RecvResSkillInfosMessage);
 			SocketConnection.addCmdListener(123102,RecvResSkillAddMessage);
 			SocketConnection.addCmdListener(123107,RecvResSkillChangeMessage);
@@ -122,7 +125,7 @@ package com.rpgGame.app.cmdlistener
 		private function SCSystemHintHandler(msg:SCSystemHintMessage):void
 		{
 			// TODO Auto Generated method stub
-			var hash:HashMap=new HashMap();
+			var hash:com.gameClient.utils.HashMap=new com.gameClient.utils.HashMap();
 			for each (var item:SystemHint in msg.systemHints) 
 			{
 				hash.put(item.key,item.value==1);
@@ -134,7 +137,13 @@ package com.rpgGame.app.cmdlistener
 		{
 			var roleData : HeroData = MainRoleManager.actorInfo;
 			roleData.spellList.addSkillData(msg.skillInfo);
-			UIPopManager.showAlonePopUI(SkillAddPop,msg.skillInfo);
+			var _cfg:Q_skill_model=SpellDataManager.getSpellData(msg.skillInfo.skillModelId);
+			if(_cfg.q_trigger_type==1) //判断是否要显示新增技能的提示框（主要是针对三连招的技能判断的）
+			{
+				var cfg:Q_skill_model=SpellDataManager.getSpellData(msg.skillInfo.skillModelId,msg.skillInfo.skillLevel);
+				if(cfg.q_seat!=0)
+					UIPopManager.showAlonePopUI(SkillAddPop,msg.skillInfo);
+			}
 			EventManager.dispatchEvent(SpellEvent.SPELL_ADD);
 		}
 		
@@ -167,8 +176,8 @@ package com.rpgGame.app.cmdlistener
 		
 		private function OnSCNonagePromptMessage(msg:SCNonagePromptMessage):void
 		{
-//			if(ClientConfig.isBanShu)
-				FangChenMiManager.OnSCNonagePromptMessage(msg);
+			//			if(ClientConfig.isBanShu)
+			FangChenMiManager.OnSCNonagePromptMessage(msg);
 		}
 		
 		private function RecvSCCurrencyChangeMessage(msg:SCCurrencyChangeMessage):void
@@ -216,7 +225,7 @@ package com.rpgGame.app.cmdlistener
 				default:
 					return;
 			}
-			NoticeManager.showNotifyById(noticeId,"",change);
+			NoticeManager.showNotifyById(noticeId,"",Math.abs(change));
 		}
 		
 		private function RecvResPlayerAddMPMessage(msg:*):void
@@ -244,9 +253,9 @@ package com.rpgGame.app.cmdlistener
 			
 			var beforeFight:int=MainRoleManager.actorInfo.totalStat.getStatValue(CharAttributeType.FIGHTING);
 			
-		
+			
 			//
-			PlayerAttributeManager.showSpriteStatChg(MainRoleManager.actorInfo.totalStat, msg.attributeChangeList);
+			//			PlayerAttributeManager.showSpriteStatChg(MainRoleManager.actorInfo.totalStat, msg.attributeChangeList);
 			//
 			MainRoleManager.actorInfo.totalStat.setData(msg.attributeChangeList);
 			
@@ -257,7 +266,8 @@ package com.rpgGame.app.cmdlistener
 			var afterFight:int=MainRoleManager.actorInfo.totalStat.getStatValue(CharAttributeType.FIGHTING);
 			var fightChange:int=afterFight-beforeFight;
 			if(fightChange!=0){
-				UIPopManager.showAlonePopUI(FightChangePop,[afterFight,beforeFight]);
+				//UIPopManager.showAlonePopUI(FightChangePop,[afterFight,beforeFight]);
+				FightPowerChangePopPanelExt.showFightPowerChange(afterFight,beforeFight);
 			}
 			//如果这个协议，改变的属性，包括hp，mp，maxhp，maxmp的话，就要在下面还要写一段逻辑，来更新角色的血条。因为现在还不确定，是不是这样的，所以，暂时先不写。等以后，真正
 			//用上的时候，检查下这里，再补上代码吧！
@@ -266,6 +276,25 @@ package com.rpgGame.app.cmdlistener
 			//			{
 			//				FightFaceHelper.showAttChange(attr.type,attr.value);
 			//			}
+			
+		}
+		
+		private function RecvSCModuleAttributesChangeMessage(msg:SCModuleAttributesChangeMessage):void
+		{
+			var change:org.client.mainCore.ds.HashMap=new org.client.mainCore.ds.HashMap();
+			var length:int=msg.attributeChangeList.length;
+			for(var i:int = 0;i<length;i++)
+			{
+				var item:AttributeItem = msg.attributeChangeList[i];
+				change.add(item.type,AttValueConfig.getDisAttValue(item.type,item.value));
+			}
+			
+			if(msg.modelId == AttChangeEnum.UPLEVEL_MODLE)
+			{
+				FightFaceHelper.showPlayerBaseAttrChange(change);
+			}else{
+				EventManager.dispatchEvent(MainPlayerEvent.MODULE_STAT_CHANGE,msg.modelId,change);
+			}
 			
 		}
 		
@@ -377,7 +406,7 @@ package com.rpgGame.app.cmdlistener
 			}
 			else if ( msg.type == 9 )// 鼠标提示( 绿色 )
 			{
-//				FloatingText.showUp( info );
+				//				FloatingText.showUp( info );
 			} 
 		}
 		
@@ -393,8 +422,8 @@ package com.rpgGame.app.cmdlistener
 			if (role && role.usable)
 			{
 				//				HeroData.setResources(role.data as HeroData, buffer);
-//				AvatarManager.callEquipmentChange(role);
-//				AvatarManager.updateAvatar(role);
+				//				AvatarManager.callEquipmentChange(role);
+				//				AvatarManager.updateAvatar(role);
 				if (SceneRoleSelectManager.selectedRole == role)
 					SceneRoleSelectManager.updateSelectRole();
 			}

@@ -20,6 +20,7 @@ package com.rpgGame.appModule.pet
 	import com.rpgGame.coreData.clientConfig.Q_girl_advance;
 	import com.rpgGame.coreData.clientConfig.Q_girl_pet;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.netData.pet.bean.PetInfo;
@@ -156,10 +157,11 @@ package com.rpgGame.appModule.pet
 		{
 			// TODO Auto Generated method stub
 			var itemNum:int=BackPackManager.instance.getItemCount(_needItem);
+			var itemName:String=ItemConfig.getItemName(_needItem);
 			if (_skin.cboxTip.isSelected==false&&itemNum<_needItemNum)
 			{
 				//				FloatingText.showUp("材料不足");
-				NoticeManager.showNotifyById(1);
+				NoticeManager.showNotifyById(9002,itemName);
 				return false;
 			}
 			PetSender.reqPetLevelUp(_data.modelId,1,_skin.cboxTip.isSelected?1:0);

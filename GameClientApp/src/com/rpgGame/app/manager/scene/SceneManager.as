@@ -11,6 +11,7 @@ package com.rpgGame.app.manager.scene
 	import com.game.mainCore.core.manager.LayerManager;
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.AreaMapManager;
+	import com.rpgGame.app.manager.GameSettingManager;
 	import com.rpgGame.app.manager.role.SceneDropGoodsManager;
 	import com.rpgGame.app.manager.role.SceneRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
@@ -82,7 +83,7 @@ package com.rpgGame.app.manager.scene
 			if(!_scene)
 			{
 				_scene = new Scene(LayerManager.stage.stageWidth,LayerManager.stage.stageHeight,
-					GameScene3DType.MAIN_SCENE,Stage3DLayerManager.getView(),_viewDistance,2);
+					GameScene3DType.MAIN_SCENE,Stage3DLayerManager.getView(),_viewDistance,2,GameSettingManager.viewFilter);
 				///
 				LayerManager.stage.addEventListener(Event.RESIZE,onStageResize);
 			}

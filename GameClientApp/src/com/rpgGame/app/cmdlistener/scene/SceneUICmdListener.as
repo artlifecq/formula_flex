@@ -55,7 +55,7 @@ package com.rpgGame.app.cmdlistener.scene
 			AppManager.hideApp(AppConstant.BOSS_HURT_RANK_PANEL);
 			AppManager.hideApp(AppConstant.COUNTRY_TAO_NI_INFO_PANEL);
 			AppManager.hideApp(AppConstant.COUNTRY_TAO_NI_TASK_BAR_PANEL);
-			AppManager.hideApp(AppConstant.OPEN_FUNCTION);
+//			AppManager.hideApp(AppConstant.OPEN_FUNCTION);
 		}
 
 		private static function onSwitchCmp() : void

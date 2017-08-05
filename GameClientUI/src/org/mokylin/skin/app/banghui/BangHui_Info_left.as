@@ -12,7 +12,7 @@ package org.mokylin.skin.app.banghui
 	import org.mokylin.skin.app.banghui.button.ButtonHuangcheng;
 	import org.mokylin.skin.app.banghui.button.ButtonWangcheng;
 	import org.mokylin.skin.app.banghui.button.ButtonWeicheng;
-	import org.mokylin.skin.component.button.ButtonSkin_putong2;
+	import org.mokylin.skin.component.button.ButtonSkin_putong3;
 
 	/**
 	 * @private
@@ -148,7 +148,8 @@ package org.mokylin.skin.app.banghui
 		private function __BangHui_Info_left_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/banghui/titlebg1.png";
+			temp.styleName = "ui/common/titilebg/headbg1.png";
+			temp.width = 261;
 			temp.x = 5;
 			temp.y = 5;
 			return temp;
@@ -242,11 +243,13 @@ package org.mokylin.skin.app.banghui
 			btnJuanxian = temp;
 			temp.name = "btnJuanxian";
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.height = 24;
 			temp.label = "捐献";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong3;
 			temp.color = 0xCFC6AE;
-			temp.x = 143;
-			temp.y = 216;
+			temp.width = 60;
+			temp.x = 151;
+			temp.y = 218;
 			return temp;
 		}
 
@@ -256,11 +259,13 @@ package org.mokylin.skin.app.banghui
 			btnUp = temp;
 			temp.name = "btnUp";
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.height = 24;
 			temp.label = "升级";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong3;
 			temp.color = 0xCFC6AE;
-			temp.x = 52;
-			temp.y = 216;
+			temp.width = 60;
+			temp.x = 59;
+			temp.y = 218;
 			return temp;
 		}
 

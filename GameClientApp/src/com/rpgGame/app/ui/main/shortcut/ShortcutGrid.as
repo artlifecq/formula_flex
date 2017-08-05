@@ -7,6 +7,7 @@ package com.rpgGame.app.ui.main.shortcut
 	import com.rpgGame.app.view.icon.DragDropGrid;
 	import com.rpgGame.core.events.BuffEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.core.utils.GameColorUtil;
 	import com.rpgGame.core.view.uiComponent.face.NumberBitmap;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
@@ -68,13 +69,17 @@ package com.rpgGame.app.ui.main.shortcut
 		public static const FENGKUANGLIANNU:int=2005;
 		public static const NUTA:int=2002;
 		private const NUTAMAX:uint=2;//最多弩塔个数
+		private static const  tf:TextFormat=new TextFormat(null, 14,0xffff00, true, null, null, null, null, TextFormatAlign.CENTER)
 		public function ShortcutGrid(shortcutBar : ShortcutBar, size : int)
 		{
 			_shortcutBar = shortcutBar;
 			super(size);
 			init();
 		}
-
+		override public function setIsShowCdTm(isShow:Boolean, txtFormat:TextFormat=null):void
+		{
+			super.setIsShowCdTm(isShow,tf);
+		}
 		private function init() : void
 		{
 			imgAutoUse = new UIAsset();
@@ -83,6 +88,7 @@ package com.rpgGame.app.ui.main.shortcut
 			imgAutoUse.y = 4;
 //			imgAutoUse.styleName = ClientConfig.getSpellAutoIco();//先注释掉不用自动释放
 			setIsShowCdTm(true);
+			
 			effectSk=new Inter3DContainer();
 			effectSk.x = _iconSize/2+4;
 			effectSk.y = _iconSize/2+4;

@@ -1,8 +1,8 @@
 package com.rpgGame.appModule.hunyin
 {
 	import com.gameClient.utils.HashMap;
+	import com.rpgGame.app.manager.HunYinManager;
 	import com.rpgGame.app.manager.Mgr;
-	import com.rpgGame.core.ui.AwdProgressBar;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.hunyin.JieHunJieZiData;
@@ -117,7 +117,7 @@ package com.rpgGame.appModule.hunyin
 			var values:Array;
 			if(info)
 			{
-				var attValues:Q_att_values= AttValueConfig.getAttInfoById(info.q_att_type);
+				var attValues:Q_att_values= AttValueConfig.getAttInfoById(HunYinManager.ins.getAttId(info));
 				has=AttValueConfig.getTypeValueMap(attValues);
 				keys=has.keys();
 				values=has.values();
@@ -128,7 +128,7 @@ package com.rpgGame.appModule.hunyin
 			var nextinfo:Q_advance_wedding=JieHunJieZiData.getModByLv(Mgr.hunyinMgr.JieZiLv+1);
 			if(nextinfo)
 			{
-				attValues= AttValueConfig.getAttInfoById(nextinfo.q_att_type);
+				attValues= AttValueConfig.getAttInfoById(HunYinManager.ins.getAttId(nextinfo));
 				nextHas=AttValueConfig.getTypeValueMap(attValues);
 			}
 			for(var i:int=0;i<_hunyinItems.length;i++)

@@ -27,8 +27,8 @@ package org.mokylin.skin.app.wuxue.jineng.button
 			super();
 			
 			this.currentState = "upAndSelected";
-			this.height = 59;
-			this.width = 241;
+			this.height = 73;
+			this.width = 237;
 			this.elementsContent = [];
 			
 			states = {
@@ -49,12 +49,12 @@ package org.mokylin.skin.app.wuxue.jineng.button
 						}
 					]
 			};
-			skinNames={"down":"ui/common/hover/xuanzhong.png",
-			"downAndSelected":"ui/common/hover/xuanzhong.png",
-			"hover":"ui/common/hover/xuanzhong.png",
-			"overAndSelected":"ui/common/hover/xuanzhong.png",
-			"up":"ui/common/hover/xuanzhong.png",
-			"upAndSelected":"ui/common/hover/xuanzhong.png"};
+			skinNames={"down":"ui/app/wuxue/jineng/xuanzhong.png",
+			"downAndSelected":"ui/app/wuxue/jineng/xuanzhong.png",
+			"hover":"ui/app/wuxue/jineng/xuanzhong.png",
+			"overAndSelected":"ui/app/wuxue/jineng/xuanzhong.png",
+			"up":"ui/app/wuxue/jineng/xuanzhong.png",
+			"upAndSelected":"ui/app/wuxue/jineng/xuanzhong.png"};
 		}
 
 

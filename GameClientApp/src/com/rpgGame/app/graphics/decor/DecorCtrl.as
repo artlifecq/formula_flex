@@ -44,7 +44,7 @@ package  com.rpgGame.app.graphics.decor
 		public static const TOP_RANKDESIGNATION1:int = SORT_VALUE--;//国士无双
 		public static const TOP_TOWER :int = 0;
 		private var topLayer :SortLayer = null;
-		private var rightBottomLayer :SortLayer = null;
+		
 		
 		private var _decorTarge :DisplayObjectContainer;
 		
@@ -55,16 +55,14 @@ package  com.rpgGame.app.graphics.decor
 			_decorTarge = decorTarge;
 			
 			topLayer = new SortLayer( _decorTarge, SortLayer.LAYOUT_U );
-			rightBottomLayer = new SortLayer( _decorTarge, SortLayer.LAYOUT_RB );
+	
 //			SortLayerContainer.LEFT_TYPE
 		}
 		
 		public function Dispose():void
 		{
 			topLayer.Dispose();
-			rightBottomLayer.Dispose();
 			topLayer = null;
-			rightBottomLayer = null;
 		}
 		
 		/**
@@ -110,40 +108,17 @@ package  com.rpgGame.app.graphics.decor
 			topLayer.remove( obj );
 		}
 		
-		/**
-		 * 添加一个组件到顶区域 
-		 * @param obj ，目标对象
-		 * @param sortLevel 排列层级， -1表示默认往上添加, 0表示最低层
-		 */		
-		public function addRB( obj :DisplayObject, sortLevel :int = -1 ):void
+
+		public function get topHeight():Number
 		{
-            if (obj == null)
-                return;
-            
-			rightBottomLayer.add( obj, sortLevel );
+			return topLayer.totalH;
 		}
-		
-		public function sortRB():void
-		{   
-			rightBottomLayer.sortLevelList();
-		}
-		
-		/**
-		 * 删除一个组件 
-		 * @param obj
-		 */		
-		public function removeRB( obj :DisplayObject ):void
-		{
-            if (obj == null || obj.parent == null)
-                return;
-            
-			rightBottomLayer.remove( obj );
-		}
+
 		
 		public function removeAll():void		
 		{
 			topLayer.removeAll();
-			rightBottomLayer.removeAll();
+			
 		}
 		
 		private var _curW :int = CONTAINER_WIDTH;
@@ -158,8 +133,7 @@ package  com.rpgGame.app.graphics.decor
 		{
 			if ( _curW != _width )
 			{
-				_curW = rightBottomLayer.x = _width;
-				rightBottomLayer.layout();
+				
 			}
 			
 			if ( _curTH != -_topOffy || _curTX != topOffx )
@@ -176,12 +150,6 @@ package  com.rpgGame.app.graphics.decor
         {
             if (topLayer.visible != b)
                 topLayer.visible = b;
-        }
-        
-        public function showRightBottom(b :Boolean):void
-        {
-            if (rightBottomLayer.visible != b)
-                rightBottomLayer.visible = b;
         }
 	}
 }

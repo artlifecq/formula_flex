@@ -33,7 +33,6 @@ package com.game.engine3D.core
 	import away3d.filters.RingDepthOfFieldFilter3D;
 	import away3d.lights.DirectionalLight;
 	import away3d.lights.LightBase;
-	import away3d.log.Log;
 	import away3d.materials.lightpickers.LightPickerBase;
 	import away3d.materials.lightpickers.StaticLightPicker;
 	import away3d.materials.methods.FogMethod;
@@ -54,6 +53,10 @@ package com.game.engine3D.core
 	 */
 	public class GameScene3D extends ObjectContainer3D
 	{
+		/**默认的近平面*/
+		public static const DEFAULT_CAMERA_NEAR:int = 100;
+		/**默认的远平面*/
+		public static const DEFAULT_CAMERA_FAR:int = 12000;
 		/**
 		 * 主角同步位置点光灯光名
 		 */
@@ -129,8 +132,9 @@ package com.game.engine3D.core
 		private var _viewDistance : Number;
 		private var _view : View3D;
 		private var _camera : Camera3D;
-		private var _cameraNear : int = 100;
-		private var _cameraFar : int = 12000;
+		private var _cameraNear : int;
+		private var _cameraFar : int;
+		private var _cameraFarMin:int;
 		private var _cameraTarget : ObjectContainer3D;
 		private var _mainChar : BaseRole;
 		private var _isLoading : Boolean;
@@ -151,7 +155,6 @@ package com.game.engine3D.core
 			_renderUnitList = new Vector.<RenderUnit3D>();
 			
 			_sceneMapLayer = new SceneMapLayer(this);
-//			_sceneMapLayer.mousePickerMovable = true;
 			addChild(_sceneMapLayer);
 			
 			_sceneRenderLayer = new SceneRenderLayer(this, viewFilter);
@@ -183,8 +186,8 @@ package com.game.engine3D.core
 				
 			}
 			
-			_camera.lens.near = _cameraNear;
-			_camera.lens.far = _cameraFar;
+			cameraNear = DEFAULT_CAMERA_NEAR;
+			cameraFar = DEFAULT_CAMERA_FAR;
 			_camera.position = new Vector3D(0, 200, -1000);
 			_camera.rotationX = 0;
 			_camera.rotationY = 0;
@@ -288,7 +291,7 @@ package com.game.engine3D.core
 		
 		private function validateShadow() : void
 		{
-			if (!_entityAreaDirectionalLight || GlobalConfig.use2DMap|| _disableShadowLevel)
+			if (!_entityAreaDirectionalLight || GlobalConfig.use2DMap || _disableShadowLevel)
 			{
 				return;
 			}
@@ -366,12 +369,6 @@ package com.game.engine3D.core
 					break;
 				}
 			}
-//			_view.virtualRender(); //预渲染，避免opengl进视野卡顿。
-		}
-		
-		public function get cameraNear() : int
-		{
-			return _cameraNear;
 		}
 		
 		public function set cameraNear(value : int) : void
@@ -380,20 +377,21 @@ package com.game.engine3D.core
 			_view.camera.lens.near = _cameraNear;
 		}
 		
-		public function get cameraFar() : int
-		{
-			return _cameraFar;
-		}
-		
 		public function set cameraFar(value : int) : void
 		{
 			if (value <= 0)
 			{
-				trace("===============远裁切需要大于零！");
 				return;
 			}
 			_cameraFar = value;
-			_view.camera.lens.far = _cameraFar;
+			_view.camera.lens.far = Math.max(_cameraFar,_cameraFarMin);
+		}
+		
+		/**最小的远平面值*/
+		public function set cameraFarMin(value:int):void
+		{
+			_cameraFarMin = value;
+			cameraFar = _cameraFar;
 		}
 		
 		public function get blur() : Boolean
@@ -568,7 +566,6 @@ package com.game.engine3D.core
 			{
 				return;
 			}
-//			validateShadow();
 			
 			_entityAreaDirectionalLight.range = _lightRange;
 			_entityAreaDirectionalLight.numSamples = _lightNumSamples;
@@ -948,7 +945,6 @@ package com.game.engine3D.core
 			{
 				_mainChar.removeSyncInfo(_cameraTarget);
 				_mainChar.removeSyncInfo(_mainCharSyncPosLight);
-//				_mainChar.removeAllSyncInfo();
 				_mainChar.avatar.lightPicker = null;
 			}
 			if (_mainCharSyncPosLight)
@@ -972,14 +968,7 @@ package com.game.engine3D.core
 				}
 				else if (baseObj is BaseEntity)
 				{
-					try
-					{
-						(baseObj as BaseEntity).avatar.lightPicker = null;
-					} 
-					catch(error:Error) 
-					{
-						Log.error((baseObj as BaseEntity).name+"上找不到avatar");
-					}
+					(baseObj as BaseEntity).avatar.lightPicker = null;
 				}
 				removeSceneObj(baseObj);
 			}
@@ -1054,7 +1043,6 @@ package com.game.engine3D.core
 				_sceneAreaDirectionalLight = _sceneMapLayer.getObj(SCENE_AREA_DIRECTIONAL_LIGHT_NAME) as DirectionalLight;
 				if (!_sceneAreaDirectionalLight)
 					_sceneAreaDirectionalLight = _entityAreaDirectionalLight;
-//				validateAreaDirectionalLight();
 				//开始渲染
 				sceneRender.startRender();
 				var baseObjList : Array = _sceneObjMap.getValues();

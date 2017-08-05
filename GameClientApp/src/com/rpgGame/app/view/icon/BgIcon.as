@@ -493,8 +493,8 @@ package com.rpgGame.app.view.icon
 				initCountText();
 			_countText.htmlText = value;
 			_countText.width=_countText.textWidth;
-			_countText.x = _iconPositionX+iconSize - _countText.textWidth-2;
-			_countText.y =_iconPositionY+ iconSize - _countText.maxHeight;			
+			_countText.x = this.width - _countText.textWidth;
+			_countText.y =  this.height - _countText.height;			
 //			_countText.x = iconSize - _countText.maxWidth;
 //			_countText.y = iconSize - _countText.maxHeight;
 			sortLayer();
@@ -635,5 +635,11 @@ package com.rpgGame.app.view.icon
 				}
 			}
 		}
+
+		public function get alwayShowCount():Boolean
+		{
+			return _alwayShowCount;
+		}
+
 	}
 }

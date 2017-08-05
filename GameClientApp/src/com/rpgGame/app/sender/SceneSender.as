@@ -12,9 +12,10 @@ package com.rpgGame.app.sender
 	import com.rpgGame.netData.login.message.ReqLoadFinishMessage;
 	import com.rpgGame.netData.map.message.CSAreaJumpMessage;
 	import com.rpgGame.netData.map.message.ReqChangeMapByMoveMessage;
-	import com.rpgGame.netData.map.message.ReqChangeMapCommonMessage;
 	import com.rpgGame.netData.map.message.ReqLoadFinishForChangeMapMessage;
 	import com.rpgGame.netData.map.message.ReqNewRunningMessage;
+	import com.rpgGame.netData.map.message.ReqPetNewRunningMessage;
+	import com.rpgGame.netData.map.message.ReqPetTransferMessage;
 	import com.rpgGame.netData.map.message.ReqPlayerStopMessage;
 	import com.rpgGame.netData.map.message.ReqSmallFlyShoesMessage;
 	import com.rpgGame.netData.map.message.SCOutMapMessage;
@@ -32,7 +33,7 @@ package com.rpgGame.app.sender
 	import org.game.netCore.connection.SocketConnection_protoBuffer;
 	import org.game.netCore.data.long;
 	import org.game.netCore.net.Message;
-
+	
 	/**
 	 * 场景消息
 	 *
@@ -115,6 +116,7 @@ package com.rpgGame.app.sender
 		/**向服务器发送触发跳跃点*/
 		public static function jumppointTrigger(jumpId : uint):void
 		{
+			Lyt.a("请求跳跃消息:"+ReqLockUtil.isReqLocked(101220));
 			if (ReqLockUtil.isReqLocked(101220))
 				return;
 			ReqLockUtil.lockReq(101220, 3000);
@@ -141,8 +143,8 @@ package com.rpgGame.app.sender
 		{
 			/*if (PathFinderUtil.isSolid(SceneManager.getDistrict(), new Vector3D(posx, posy, 0)))
 			{
-				NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL12);
-				return;
+			NoticeManager.showHint(EnumHintInfo.SCENE_TRANSPORT_FAIL12);
+			return;
 			}*/
 			
 			if (!isVipTrans)
@@ -180,8 +182,8 @@ package com.rpgGame.app.sender
 		 */
 		public static function sceneHeroJump(jumpAction : int) : void
 		{
-//			_bytes.clear();
-//			_bytes.writeVarint32(jumpAction);
+			//			_bytes.clear();
+			//			_bytes.writeVarint32(jumpAction);
 			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_SCENE_HERO_JUMP, _bytes);
 		}
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -189,68 +191,68 @@ package com.rpgGame.app.sender
 		//  以下代码为参照代码，是深圳那边后台对应的
 		//
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////
-//		public static function transportChgMap(transId : uint) : void
-//		{
-//			if (ReqLockUtil.isReqLocked(SceneModuleMessages.C2S_SCENE_REQUEST_TRANSPORT))
-//				return;
-//			ReqLockUtil.lockReq(SceneModuleMessages.C2S_SCENE_REQUEST_TRANSPORT, 5000);
-//
-//			//切换场景
-//			GameLog.add("3_9：准备换场景");
-//			var by : ByteBuffer = new ByteBuffer();
-//			by.writeVarint32(transId);
-//			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_SCENE_REQUEST_TRANSPORT, by);
-//		}
-
+		//		public static function transportChgMap(transId : uint) : void
+		//		{
+		//			if (ReqLockUtil.isReqLocked(SceneModuleMessages.C2S_SCENE_REQUEST_TRANSPORT))
+		//				return;
+		//			ReqLockUtil.lockReq(SceneModuleMessages.C2S_SCENE_REQUEST_TRANSPORT, 5000);
+		//
+		//			//切换场景
+		//			GameLog.add("3_9：准备换场景");
+		//			var by : ByteBuffer = new ByteBuffer();
+		//			by.writeVarint32(transId);
+		//			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_SCENE_REQUEST_TRANSPORT, by);
+		//		}
+		
 		/**
 		 * 客户端加载完场景数据，可进入场景时发送，发送完等待服务器消息
 		 * @param viewRange
 		 */
-//		public static function sceneLoaded(viewRange : int) : void
-//		{
-//			_bytes.clear();
-//			_bytes.writeVarint32(viewRange);
-//			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_SCENE_LOADED, _bytes);
-//		}
-
+		//		public static function sceneLoaded(viewRange : int) : void
+		//		{
+		//			_bytes.clear();
+		//			_bytes.writeVarint32(viewRange);
+		//			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_SCENE_LOADED, _bytes);
+		//		}
+		
 		/**
 		 * 改变可视范围大小. 只有已经进入场景才能发送(每次场景加载完都会附带个视野范围的)
 		 */
-//		public static function sceneChangeViewRange(viewRange : int) : void
-//		{
-//			_bytes.clear();
-//			_bytes.writeVarint32(viewRange);
-//			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_SCENE_CHANGE_VIEW_RANGE, _bytes);
-//		}
-
+		//		public static function sceneChangeViewRange(viewRange : int) : void
+		//		{
+		//			_bytes.clear();
+		//			_bytes.writeVarint32(viewRange);
+		//			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_SCENE_CHANGE_VIEW_RANGE, _bytes);
+		//		}
+		
 		/**
 		 * 角色移动
 		 * @param path
 		 *
 		 */
-//		public static function mainCharWalk(path : Vector.<Vector3D>) : void
-//		{
-//			var len : uint = path.length;
-//
-//			_bytes.clear();
-//			_bytes.writeVarint32(len); //总共的节点数
-//
-//			var pos3D : Vector3D;
-//			for (var i : int = 0; i < len; i++)
-//			{
-//				pos3D = path[i];
-//				_bytes.writeVarint32(pos3D.x);
-//				_bytes.writeVarint32(pos3D.z);
-//			}
-//			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_SCENE_HERO_MOVE, _bytes);
-//		}
-//
-//		public static function cancelWalk() : void
-//		{
-//			_bytes.clear();
-//			send(SceneModuleMessages.C2S_SCENE_STOP_MOVE, _bytes);
-//		}
-
+		//		public static function mainCharWalk(path : Vector.<Vector3D>) : void
+		//		{
+		//			var len : uint = path.length;
+		//
+		//			_bytes.clear();
+		//			_bytes.writeVarint32(len); //总共的节点数
+		//
+		//			var pos3D : Vector3D;
+		//			for (var i : int = 0; i < len; i++)
+		//			{
+		//				pos3D = path[i];
+		//				_bytes.writeVarint32(pos3D.x);
+		//				_bytes.writeVarint32(pos3D.z);
+		//			}
+		//			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_SCENE_HERO_MOVE, _bytes);
+		//		}
+		//
+		//		public static function cancelWalk() : void
+		//		{
+		//			_bytes.clear();
+		//			send(SceneModuleMessages.C2S_SCENE_STOP_MOVE, _bytes);
+		//		}
+		
 		/**
 		 * 客户端请求跳跃. 不管是一段跳还是二段跳, 都只发跳跃的目标点(鼠标所指的点, 不管当前点是否可走以及距离,
 		 * 这些全服务器根据当时服务器上角色的坐标来计算)
@@ -261,13 +263,13 @@ package com.rpgGame.app.sender
 		 *
 		 * varint32 跳跃动作
 		 */
-//		public static function sceneHeroJump(jumpAction : int) : void
-//		{
-//			_bytes.clear();
-//			_bytes.writeVarint32(jumpAction);
-//			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_SCENE_HERO_JUMP, _bytes);
-//		}
-
+		//		public static function sceneHeroJump(jumpAction : int) : void
+		//		{
+		//			_bytes.clear();
+		//			_bytes.writeVarint32(jumpAction);
+		//			SocketConnection_protoBuffer.send(SceneModuleMessages.C2S_SCENE_HERO_JUMP, _bytes);
+		//		}
+		
 		/**
 		 * 拾取地上物品，客户端判定当前英雄是否可捡（拾取保护时间），不能捡不要发消息，
 		 * 可以拾取时发送C2S_SCENE_PICK_UP_GOODS，附带拾取物品ID
@@ -278,18 +280,18 @@ package com.rpgGame.app.sender
 		 * 成功返回S2C_SCENE_PICK_UP_GOODS
 		 * 失败返回S2C_SCENE_PICK_UP_GOODS_FAIL
 		 */
-//		public static function requestPickUpGoods(sceneGoodsId : Number, index : int) : void
-//		{
-//			if (ReqLockUtil.isReqLocked(SceneModuleMessages.C2S_SCENE_PICK_UP_GOODS))
-//				return;
-//			ReqLockUtil.lockReq(SceneModuleMessages.C2S_SCENE_PICK_UP_GOODS, 5 * 1000);
-//
-//			_bytes.clear();
-//			_bytes.writeVarint64(sceneGoodsId);
-//			_bytes.writeVarint32(index);
-//			send(SceneModuleMessages.C2S_SCENE_PICK_UP_GOODS, _bytes);
-//		}
-
+		//		public static function requestPickUpGoods(sceneGoodsId : Number, index : int) : void
+		//		{
+		//			if (ReqLockUtil.isReqLocked(SceneModuleMessages.C2S_SCENE_PICK_UP_GOODS))
+		//				return;
+		//			ReqLockUtil.lockReq(SceneModuleMessages.C2S_SCENE_PICK_UP_GOODS, 5 * 1000);
+		//
+		//			_bytes.clear();
+		//			_bytes.writeVarint64(sceneGoodsId);
+		//			_bytes.writeVarint32(index);
+		//			send(SceneModuleMessages.C2S_SCENE_PICK_UP_GOODS, _bytes);
+		//		}
+		
 		/**
 		 * 场景中可以拾取的物品的数据
 		 *
@@ -342,6 +344,32 @@ package com.rpgGame.app.sender
 			msg.type=1;
 			msg.value=1;
 			msg.strJson="前端请求加速";
+			SocketConnection.send(msg);
+		}
+		
+		/**请求移动集合*/
+		public static function reqPetNewRunningMessage(path : Vector.<Vector3D>):void
+		{
+			var msg:ReqPetNewRunningMessage=new ReqPetNewRunningMessage();
+			var vec:Vector.<Position> = new Vector.<Position>();
+			var len:int = path.length;
+			
+			var pos3D : Vector3D;
+			for (var i:int = 0; i < len; ++i)
+			{
+				pos3D = path[i];
+				
+				vec.push(Position.FromPoint(new Point(pos3D.x,pos3D.z)));
+			}
+			msg.positions=vec;
+			SocketConnection.send(msg);
+		}
+		
+		/**传送请求*/
+		public static function reqPetTransferMessage(id:long):void
+		{
+			var msg:ReqPetTransferMessage=new ReqPetTransferMessage();
+			msg.playerId=id;
 			SocketConnection.send(msg);
 		}
 	}

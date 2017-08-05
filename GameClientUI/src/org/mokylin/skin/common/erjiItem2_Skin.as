@@ -103,7 +103,7 @@ package org.mokylin.skin.common
 			temp.left = 0;
 			temp.right = -1;
 			temp.styleName = "ui/common/tips/tips_di2.png";
-			temp.top = 5;
+			temp.top = 0;
 			return temp;
 		}
 

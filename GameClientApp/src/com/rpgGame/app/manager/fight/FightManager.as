@@ -120,8 +120,17 @@ package com.rpgGame.app.manager.fight
                             break;
                         case PKModeType.GUILD:
                             // 帮派
-                            // TODO 现在没有帮派故可攻击
-                            modeState = FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
+							var hd:HeroData=roleInfo as HeroData;
+							if (hd&&hd.guildId&&hd.guildId.EqualTo(heroData.guildId)) 
+							{
+								modeState=FIGHT_ROLE_STATE_CAN_NOT_FIGHT;
+							}
+							else
+							{
+								// TODO 现在没有帮派故可攻击
+								modeState = FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY;
+							}
+                          
                             break;
                         case PKModeType.GROUP:
                             // 阵营

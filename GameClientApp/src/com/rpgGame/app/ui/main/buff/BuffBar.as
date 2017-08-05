@@ -243,7 +243,7 @@ package com.rpgGame.app.ui.main.buff
 		public function resize(w : int, h : int) : void 
 		{
 			this.x=w/2;
-			this.y=h-155;
+			this.y=h-160;
 		}
 	}
 }

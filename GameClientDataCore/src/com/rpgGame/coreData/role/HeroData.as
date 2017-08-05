@@ -494,7 +494,7 @@ package com.rpgGame.coreData.role
 			}
 			data.guildName = info.guildName;
 			data.guildMemberType = info.guildMemberType;
-			
+			data.guildId=info.guildId;
 			RoleData.readGeneric(data, new Point(info.position.x,info.position.y));
 		}
 		

@@ -1,10 +1,10 @@
 package com.rpgGame.app.fight.spell
 {
 	import com.rpgGame.app.display2D.PopSkinUI;
+	import com.rpgGame.core.manager.StarlingLayerManager;
 	
 	import gs.TimelineLite;
 	import gs.TweenLite;
-	import gs.TweenMax;
 	import gs.easing.Expo;
 	
 	import org.mokylin.skin.mainui.zhandouli.ZhandouliTipSkin;
@@ -18,6 +18,7 @@ package com.rpgGame.app.fight.spell
 	 */
 	public class FightChangePop extends PopSkinUI
 	{
+		private static var _ins:FightChangePop=new FightChangePop();
 		private var beforeFight:int;
 		private var afterFight:int;
 		private var endY:int;
@@ -26,14 +27,44 @@ package com.rpgGame.app.fight.spell
 		private var addTextImage:NumberTextImage;
 		private static var _HelpW:Number = 0;
 		private static var _HelpH:Number = 0;
-		public function FightChangePop(data:*):void
+		public function FightChangePop():void
 		{
-			beforeFight=data[1];
-			afterFight=data[0];
+			
 			_skin=new ZhandouliTipSkin();
-			super(data);
+			super(_skin);
 			init();
 		}
+		public static function showFightPowerChange(newPower:int,oldPower:int):void
+		{
+			if (newPower==oldPower) 
+			{
+				return;
+			}
+			_ins.setData(newPower,oldPower);
+			StarlingLayerManager.topUILayer.addChild(_ins);
+		}
+		private function setData(newP:int,oldP:int):void
+		{
+			TweenLite.killTweensOf(this);
+			beforeFight=oldP;
+			afterFight=newP;
+			
+			var last:int = afterFight-beforeFight;
+			var isTop:Boolean = last>0;
+			fightTextImage.init(beforeFight,afterFight,isTop);
+			_HelpW = fightTextImage.x +fightTextImage.width;
+			
+			addTextImage.init(last,0,isTop);
+			addTextImage.x = _HelpW + 20;
+			_HelpW = addTextImage.x +addTextImage.width;
+			this.pivotX = _HelpW/2;
+			this.pivotY = _HelpH/2;
+			this.scaleX=3;
+			this.scaleY=1.5;
+			updateSeate();
+			TweenLite.to(this,0.1,{scaleX:1,scaleY:1,onComplete:scaleComplete});
+		}
+		
 		private function init():void
 		{
 			fightTextImage = new NumberTextImage(skin.num_yellow1,numRunCompleteHandler);
@@ -47,26 +78,12 @@ package com.rpgGame.app.fight.spell
 		{
 			return _skin as ZhandouliTipSkin;
 		}
-		
-		override  protected function onShow() : void
-		{
-			var last:int = afterFight-beforeFight;
-			var isTop:Boolean = last>0;
-			fightTextImage.init(beforeFight,afterFight,isTop);
-			_HelpW = fightTextImage.x +fightTextImage.width;
-			
-			addTextImage.init(last,0,isTop);
-			addTextImage.x = _HelpW + 20;
-			_HelpW = addTextImage.x +addTextImage.width;
-			_skin.container.pivotX = _HelpW/2;
-			_skin.container.pivotY = _HelpH/2;
-			updateSeate();
-			TweenMax.to(skin.container,0.0,{scaleX:10,alpha:1});
-			TweenMax.to(skin.container,0.6,{scale:1,alpha:1,ease:Expo.easeOut,onUpdate:updateSeate,onComplete:scaleComplete});
-		}
+
 		
 		private function scaleComplete():void
 		{
+			if(this.parent==null)
+				return ;
 			fightTextImage.startRolling();
 			addTextImage.startRolling();
 		}
@@ -77,12 +94,25 @@ package com.rpgGame.app.fight.spell
 				return ;
 			if(!addTextImage.isRollerEnd)
 				return ;
+			if(this.parent==null)
+				return ;
 			skin.container.filter = new GlowFilter(0xffff00,1,70,1);
 			var timeLine:TimelineLite = new TimelineLite();
 			timeLine.insert(TweenLite.to(skin.container,0.5,{scale:1.3,ease:Expo.easeOut}));
 			timeLine.append(TweenLite.to(skin.container,0.5,{}));
 			timeLine.append(TweenLite.to(skin.container,0.3,{alpha:0,ease:Expo.easeOut,onComplete:popComplete}));
 			
+		}
+		
+		override protected function popComplete():void
+		{
+			if(this.parent==null)
+				return ;
+			if(fightTextImage.isRollerEnd)
+				fightTextImage.stopRun(false);
+			if(addTextImage.isRollerEnd)
+				addTextImage.stopRun(false);
+			super.popComplete();
 		}
 		
 		private function updateSeate():void

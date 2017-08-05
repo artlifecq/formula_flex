@@ -1,10 +1,11 @@
 package com.client.manager
 {
-	import com.app.events.AudioEvent;
-	import com.app.media.AudioInfo;
-	import com.app.media.AudioInterface;
+	import com.app.AudioInterface;
 	import com.client.AudioConfigType;
+	import com.gameClient.utils.VersionUtils;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	
+	import flash.display.Stage;
 
 	/**
 	 * 游戏音乐管理器
@@ -15,77 +16,76 @@ package com.client.manager
 	 */
 	public class BGMManager
 	{
-		public function BGMManager()
+		private static var _disabledBgm:Boolean = false;
+		private static var _currEnv2D:String = null;
+		private static var _currMusic:String = null;
+		
+		
+		public static function setup(stage:Stage):void
 		{
+			AudioInterface.init(stage);
+			AudioInterface.baseDir = ClientConfig.baseDir;
+			AudioInterface.getVersionPathFun = VersionUtils.getVersionPath;
+			AudioInterface.debug = ClientConfig.isDebug;
+			AudioInterface.allowBackPlay = false;
+			AudioInterface.createAudioSound(AudioConfigType.MUSIC_CHANNEL);
+			AudioInterface.createAudioSound(AudioConfigType.ENV2D_CHANNEL);
+			AudioInterface.createSoundEffect(AudioConfigType.UI_EFFECT_CHANNEL);
 		}
-
-		public static function setup() : void
+		
+		public static function playEnv2D(fileName:String):void
 		{
-			AudioInterface.init();
-
-			AudioInterface.dispatcher.addEventListener(AudioEvent.SEND_MSG, onSendMsgHandler);
-			AudioInterface.dispatcher.addEventListener(AudioEvent.SUB_NODE_START, onSubStartPlayHandler);
-			AudioInterface.dispatcher.addEventListener(AudioEvent.SUB_NODE_REPEAT, onSubRepeatHandler);
-			AudioInterface.dispatcher.addEventListener(AudioEvent.SUB_NODE_COMPLETE, onSubCompleteHandler);
-			AudioInterface.dispatcher.addEventListener(AudioEvent.ALL_AUDIO_COMPLETE, onAllCompleteHandler);
-			AudioInterface.dispatcher.addEventListener(AudioEvent.SOUND_LOOP_COMPLETE, onSoundLoopCompleteHandler);
+			if (_disabledBgm)
+			{
+				return;
+			}
+			if (_currEnv2D == fileName)
+			{
+				return;
+			}
+			_currEnv2D = fileName;
+			if (!fileName)
+			{
+				AudioInterface.stopAudio(AudioConfigType.ENV2D_CHANNEL);
+				return;
+			}
+			var _local2:String = ClientConfig.getSound(fileName);
+			AudioInterface.playAudio(AudioConfigType.ENV2D_CHANNEL, _local2);
 		}
-
-		public static function playMusic(fileName : String) : void
+		
+		public static function playMusic(fileName:String):void
 		{
-			var url : String = ClientConfig.getSound(fileName);
-			var info : AudioInfo = new AudioInfo(url);
-			info.fadeInTime = 500;
-			info.fadeOutTime = 500;
-			info.loop = 0;
-			AudioInterface.track(AudioConfigType.MUSIC_CHANNEL).playAudio(info);
+			if (_disabledBgm)
+			{
+				return;
+			}
+			if (_currMusic == fileName)
+			{
+				return;
+			}
+			_currMusic = fileName;
+			if (!fileName)
+			{
+				AudioInterface.stopAudio(AudioConfigType.MUSIC_CHANNEL);
+				return;
+			}
+			var _local2:String = ClientConfig.getSound(fileName);
+			AudioInterface.playAudio(AudioConfigType.MUSIC_CHANNEL, _local2);
 		}
-
-		public static function playUIEffectSound(fileName : String) : void
+		
+		public static function playUIEffectSound(fileName:String):void
 		{
-			var url : String = ClientConfig.getSound(fileName);
-			var info : AudioInfo = new AudioInfo(url);
-			info.fadeInTime = 0;
-			info.fadeOutTime = 0;
-			info.loop = 1;
-			AudioInterface.track(AudioConfigType.UI_EFFECT_CHANNEL).playAudio(info);
+			if (_disabledBgm)
+			{
+				return;
+			}
+			if (!fileName)
+			{
+				AudioInterface.stopAudio(AudioConfigType.UI_EFFECT_CHANNEL);
+				return;
+			}
+			var _local2:String = ClientConfig.getSound(fileName);
+			AudioInterface.playSoundEffect(AudioConfigType.UI_EFFECT_CHANNEL, _local2);
 		}
-
-		//开始播放一个节点
-		private static function onSubStartPlayHandler(evt : AudioEvent) : void
-		{
-			//trace(evt.data, "play");
-		}
-
-		//重复播放一个节点时
-		private static function onSubRepeatHandler(evt : AudioEvent) : void
-		{
-			//trace(evt.data, "repeat");
-		}
-
-		//节点播放完成
-		private static function onSubCompleteHandler(evt : AudioEvent) : void
-		{
-			//trace(evt.data, "complete");
-		}
-
-		//指定节点播放完成后发送的事件消息
-		private static function onSendMsgHandler(evt : AudioEvent) : void
-		{
-			//trace(evt.data, "get msg");
-		}
-
-		//整首音乐准备重复播放
-		private static function onSoundLoopCompleteHandler(evt : AudioEvent) : void
-		{
-			//trace(evt.data, "will repeat");
-		}
-
-		//整首音乐播放完成
-		private static function onAllCompleteHandler(evt : AudioEvent) : void
-		{
-			//trace(evt.data, "play end");
-		}
-
 	}
 }

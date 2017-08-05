@@ -75,7 +75,7 @@ package  com.rpgGame.app.ui.alert
 			_ins.skin.labContent.text = msg;
 			_ins.okFCallBack = onOk;
 			_ins.cancelCallBack = onCancel;
-			_ins.skin.lbl_title.htmlText = title;
+//			_ins.skin.lbl_title.htmlText = title;
 			_ins.okParam=okParam;
 			_ins.skin.btnOK.label=okBtnText;
 			Stage3DLayerManager.starlingLayer.getLayer("alert").addChild(_ins);

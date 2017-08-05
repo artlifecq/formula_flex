@@ -15,7 +15,7 @@ package com.rpgGame.app.manager.goods
 	import com.rpgGame.coreData.info.item.EquipInfo;
 	
 	import org.client.mainCore.manager.EventManager;
-
+	
 	/**
 	 *所有的物品管理总类（以前的物品管理太分散类。。。）
 	 *@author dik
@@ -29,7 +29,7 @@ package com.rpgGame.app.manager.goods
 		public function ItemManager()
 		{
 		}
-
+		
 		/**
 		 *能否全部放入背包 
 		 * @param id
@@ -407,7 +407,29 @@ package com.rpgGame.app.manager.goods
 		}
 		public static function checkEquip2HCByType(type:int):Boolean
 		{
-			return true;
+			var arr:Array=HeChengData.getSonTypeListByType(type);
+			if(arr==null||arr.length==0) return false;
+			for(var i:int=0;i<arr.length;i++)
+			{
+				if(chackIsCanHC(type,arr[i]))
+					return true;
+			}
+			return false;
+		}
+		
+		public static function chackIsCanHC(type:int,subType:int):Boolean
+		{
+			var list:Vector.<Q_hecheng>=new Vector.<Q_hecheng>();
+			list=HeChengData.getQ_HeChengListBySonType(type,subType);
+			var arr:Array;
+			if(list==null||list.length==0) return false;
+			for(var i:int=0;i<list.length;i++)
+			{
+				arr=JSONUtil.decode(list[i].q_cost_items);
+				if(BackPackManager.instance.getBagItemsCountById(arr[0])>=arr[1])
+					return true;
+			}
+			return false;
 		}
 	}
 }

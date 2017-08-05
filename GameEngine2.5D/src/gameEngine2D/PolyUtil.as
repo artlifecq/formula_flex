@@ -1,8 +1,6 @@
 package gameEngine2D {
 	import com.game.engine3D.config.GlobalConfig;
 	import com.game.engine3D.utils.PathFinderUtil;
-	import com.rpgGame.app.manager.scene.SceneManager;
-	import com.rpgGame.app.state.role.RoleStateUtil;
 	
 	import flash.geom.Vector3D;
 	

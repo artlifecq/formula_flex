@@ -21,6 +21,7 @@ package com.rpgGame.app.ui.main.buttons
 	import org.mokylin.skin.mainui.activityBar.button.ButtonJiucengyaota;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonJixianboss;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonLunjian;
+	import org.mokylin.skin.mainui.activityBar.button.ButtonMeiren;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonQinlingmibao;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonShijieboss;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonShuangbeihubao;
@@ -63,6 +64,7 @@ package com.rpgGame.app.ui.main.buttons
 			regClass(103,ActivityButton,ButtonFubendating);
 			regClass(104,ActivityButton,ButtonZhanchangdating);
 			regClass(105,ActivityRedRewardButton,ButtonHongbao);
+			regClass(108,MainButton_MeiRen,ButtonMeiren);
 			regClass(300,MultyActivityButton,ButtonFubenduilie);
 			regClass(301,LimitTimeActivityButton,ButtonShijieboss);
 			regClass(302,LimitTimeActivityButton,ButtonDianfengduijue);

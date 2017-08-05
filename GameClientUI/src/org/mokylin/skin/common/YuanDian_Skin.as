@@ -55,12 +55,15 @@ package org.mokylin.skin.common
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbnum = temp;
 			temp.name = "lbnum";
-			temp.left = 0;
-			temp.right = 0;
-			temp.text = "99";
+			temp.height = 20;
+			temp.leading = 0;
+			temp.letterSpacing = 0;
+			temp.text = "5";
 			temp.textAlign = "center";
-			temp.color = 0xEAEABC;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 20;
+			temp.x = 0;
 			temp.y = 2;
 			return temp;
 		}

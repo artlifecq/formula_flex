@@ -53,7 +53,9 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 		private function __PaiMingItem_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.height = 74;
 			temp.styleName = "ui/app/zhanchang/jingjichang/tiaokuang.png";
+			temp.width = 483;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

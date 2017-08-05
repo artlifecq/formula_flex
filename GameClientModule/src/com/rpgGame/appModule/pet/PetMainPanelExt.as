@@ -27,6 +27,7 @@ package com.rpgGame.appModule.pet
 	import com.rpgGame.coreData.clientConfig.Q_girl_advance;
 	import com.rpgGame.coreData.clientConfig.Q_girl_pet;
 	import com.rpgGame.coreData.clientConfig.Q_global;
+	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.CharAttributeType;
@@ -74,11 +75,6 @@ package com.rpgGame.appModule.pet
 		{
 			_modContaner=new Inter3DContainer();
 			this._skin.container.addChildAt(_modContaner,4);
-			_avatar=new InterAvatar3D();
-			_avatar.x = 408;
-			_avatar.y =490;
-			_modContaner.addChild3D(_avatar);
-			_avatarData=new RoleData(0);
 			goldBuyMod=GlobalSheetData.getSettingInfo(845);
 			bindGoldBuyMod=GlobalSheetData.getSettingInfo(846);
 			var pets:Array=PetCfg.dataArr;
@@ -141,12 +137,12 @@ package com.rpgGame.appModule.pet
 		private function onShowLevelUpPanel():void
 		{
 			// TODO Auto Generated method stub
-			//			if(_curSelectItem == null) return;
-			//			if(_curSelectItem.data.actived!=1)
-			//			{
-			//				NoticeManager.showNotifyById(1);
-			//				return;
-			//			}	
+			if(_curSelectItem == null) return;
+			if(_curSelectItem.data.actived!=1)
+			{
+				NoticeManager.showNotifyById(90300);
+				return;
+			}	
 			
 			if(_blessPanel==null || _blessPanel.stage==null) 
 			{
@@ -268,7 +264,7 @@ package com.rpgGame.appModule.pet
 			for (var i:int = 0; i < len; i++) 
 			{
 				_zoneBalls[i].setEffect(i<num);
-				_zoneBalls[i].setData(_curSelectItem.data,(i+1));
+				_zoneBalls[i].setData(_curSelectItem.data,(i+1),true);
 			}
 		}
 		private function onPetClick(item:PetHeadItemExt):void
@@ -303,6 +299,14 @@ package com.rpgGame.appModule.pet
 		private function showPetModEff(data:PetInfo):void
 		{
 			var qPet:Q_girl_pet=PetCfg.getPet(data.modelId);
+			if(this._avatar==null)
+			{
+				_avatar=new InterAvatar3D();
+				_modContaner.addChild3D(_avatar);
+				_avatar.x = 408;
+				_avatar.y =490;
+			}
+			_avatarData=new RoleData(0);		
 			this._avatarData.avatarInfo.setBodyResID(qPet.q_panel_show_id, null);
 			this._avatar.setRoleData(this._avatarData);
 			this._avatar.curRole.setScale(1.7);	
@@ -351,11 +355,13 @@ package com.rpgGame.appModule.pet
 			}
 			//战斗力
 			var qPetAdv:Q_girl_advance=PetAdvanceCfg.getPet(data.modelId,data.rank);
+			var addid:int=0;
 			if (!qPetAdv) 
 			{
 				return;
 			}
-			_skin.NumZhanli.label=FightValueUtil.calFightPowerByAttValue(AttValueConfig.getAttInfoById(qPetAdv.q_attid_master),MainRoleManager.actorInfo.job)+"";
+			addid=Mgr.petMgr.getAttId(qPetAdv.q_attid_master);
+			_skin.NumZhanli.label=FightValueUtil.calFightPowerByAttValue(AttValueConfig.getAttInfoById(addid),MainRoleManager.actorInfo.job)+"";
 			var nextAttrId:int=0;
 			if(!data.actived||data.rank==qPet.q_max_grade) 
 			{
@@ -366,10 +372,10 @@ package com.rpgGame.appModule.pet
 				var qPetAdvNext:Q_girl_advance=PetAdvanceCfg.getPet(data.modelId,data.rank+1);
 				if (qPetAdvNext) 
 				{
-					nextAttrId=qPetAdvNext.q_attid_master;
+					nextAttrId=Mgr.petMgr.getAttId(qPetAdvNext.q_attid_master);
 				}
 			}
-			_attrCon.setData(qPetAdv.q_attid_master,nextAttrId);
+			_attrCon.setData(addid,nextAttrId);
 			_bgIco.setIconResName(ClientConfig.getSkillIcon(qPetAdv.q_skill_id.split("_")[0].toString(),IcoSizeEnum.ICON_42));
 			if (!data.actived) 
 			{
@@ -392,6 +398,7 @@ package com.rpgGame.appModule.pet
 				}
 			}
 		}
+		
 		private function updateBtnState(pet:PetInfo):void
 		{
 			_skin.gBuy.visible=false;
@@ -556,7 +563,11 @@ package com.rpgGame.appModule.pet
 			if(_blessPanel)
 				MCUtil.removeSelf(_blessPanel);
 			if(this._avatar)
+			{
 				this._avatar.dispose();
+				this._avatar=null;
+			}
+			_curSelectItem=null;
 			EventManager.removeEvent(PetEvent.PET_DATA_CHANGE,onPetChange);
 			EventManager.removeEvent(PetEvent.PET_BUYNUM_CHANGE,onBuyNumChange);
 			EventManager.removeEvent(PetEvent.PET_CHANGE,onUpdatePetChuZhanOrXiuzhan);
