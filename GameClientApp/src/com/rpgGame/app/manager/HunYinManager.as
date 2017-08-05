@@ -12,6 +12,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.HunYinEvent;
 	import com.rpgGame.coreData.cfg.StaticValue;
+	import com.rpgGame.coreData.cfg.VipCfg;
 	import com.rpgGame.coreData.cfg.hunyin.HunYinHuDongData;
 	import com.rpgGame.coreData.cfg.hunyin.JieHunJieZiData;
 	import com.rpgGame.coreData.cfg.hunyin.QiuHunVo;
@@ -53,7 +54,15 @@ package com.rpgGame.app.manager
 		{
 			return _marriageInfo.fihtPower;
 		}
-		
+		/**
+		 *是否结婚 
+		 * @return 
+		 * 
+		 */		
+		public function hasMarriage():Boolean
+		{
+			return _marriageInfo!=null&&_marriageInfo.marriagePlayerId!=null&&_marriageInfo.marriagePlayerId.IsZero()==false;
+		}
 		/**
 		 * 获取戒子等阶
 		 * */
@@ -62,7 +71,15 @@ package com.rpgGame.app.manager
 			if(_marriageInfo==null) return 1;
 			return _marriageInfo.levelnum;
 		}
-		
+		public function getRingUrl(ring:int):String
+		{
+			var info:Q_advance_wedding=JieHunJieZiData.getModByLv(ring);	
+			if (info) 
+			{
+				return ItemConfig.getQItemByID(info.q_mod_id).q_icon+"";
+			}
+			return "";
+		}
 		/**
 		 * 获取婚姻数据
 		 * */
@@ -203,6 +220,7 @@ package com.rpgGame.app.manager
 			var role:SceneRole=MainRoleManager.actor;
 			if (role.headFace is HeadFace)
 				(role.headFace as HeadFace).updateFuQiTitle(_marriageInfo.marriagePlayerName);
+			EventManager.dispatchEvent(HunYinEvent.HUNYIN_HUNYIN);
 		}
 		
 		/**

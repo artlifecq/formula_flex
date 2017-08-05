@@ -1,8 +1,7 @@
 package com.rpgGame.appModule.guild
 {
 	import com.rpgGame.app.manager.guild.GuildManager;
-	import com.rpgGame.core.ui.SkinUI;
-	import com.rpgGame.core.ui.tip.RTNodeID;
+	import com.rpgGame.app.manager.guild.GuildSkillVo;
 	import com.rpgGame.core.ui.tip.RewardMarkTip;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.GuildSkillCfgData;
@@ -11,7 +10,6 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.coreData.clientConfig.Q_guildskill;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
-	import com.rpgGame.netData.guild.bean.GuildSkillInfo;
 	
 	import away3d.events.Event;
 	
@@ -21,7 +19,7 @@ package com.rpgGame.appModule.guild
 	{
 		private var _skin:ProSkill_Item;
 		private var _skillId:int;
-		private var _currentinfo:GuildSkillInfo;
+		private var _currentinfo:GuildSkillVo;
 		private var _nextdata:Q_guildskill;
 		//不冒泡了
 		private var _rewardTip:RewardMarkTip;
@@ -107,7 +105,7 @@ package com.rpgGame.appModule.guild
 					_skin.lbTips.visible = false;
 				}else{
 					_skin.lbTips.visible = true;
-					_skin.lbTips.text = "提升帮会等级";
+					_skin.lbTips.text = "需帮派等级"+(GuildManager.instance().guildLevelInfo.q_level+1)+"级";
 				}
 			}else{
 				_skin.btnUp.visible = true;

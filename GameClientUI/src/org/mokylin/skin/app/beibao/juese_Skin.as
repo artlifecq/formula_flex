@@ -44,7 +44,11 @@ package org.mokylin.skin.app.beibao
 
 		public var Icbg11:feathers.controls.UIAsset;
 
+		public var Icolingpai:feathers.controls.UIAsset;
+
 		public var Icons:feathers.controls.Group;
+
+		public var Icoring:feathers.controls.UIAsset;
 
 		public var NumZhanli:feathers.controls.UINumber;
 
@@ -200,8 +204,8 @@ package org.mokylin.skin.app.beibao
 			Icbg10 = temp;
 			temp.name = "Icbg10";
 			temp.styleName = "ui/common/grid/equip/11hunjie.png";
-			temp.x = 0;
-			temp.y = 296;
+			temp.x = 7;
+			temp.y = 302;
 			return temp;
 		}
 
@@ -211,7 +215,18 @@ package org.mokylin.skin.app.beibao
 			Icbg11 = temp;
 			temp.name = "Icbg11";
 			temp.styleName = "ui/common/grid/equip/12lingpai.png";
-			temp.x = 294;
+			temp.x = 301;
+			temp.y = 302;
+			return temp;
+		}
+
+		private function Icolingpai_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			Icolingpai = temp;
+			temp.name = "Icolingpai";
+			temp.styleName = "ui/app/beibao/huijiebiankuang.png";
+			temp.x = 293;
 			temp.y = 296;
 			return temp;
 		}
@@ -224,6 +239,17 @@ package org.mokylin.skin.app.beibao
 			temp.x = 14;
 			temp.y = 393;
 			temp.elementsContent = [btn_getYuanbao_i(),btn_chushou_i(),btn_zhengli_i(),btn_cangku_i(),btn_shangdian_i()];
+			return temp;
+		}
+
+		private function Icoring_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			Icoring = temp;
+			temp.name = "Icoring";
+			temp.styleName = "ui/app/beibao/huijiebiankuang.png";
+			temp.x = -1;
+			temp.y = 296;
 			return temp;
 		}
 
@@ -1333,7 +1359,7 @@ package org.mokylin.skin.app.beibao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiSm = temp;
 			temp.name = "uiSm";
-			temp.styleName = "ui/common/shuxing/sbz.png";
+			temp.styleName = "ui/common/shuxing/qx.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -1381,7 +1407,7 @@ package org.mokylin.skin.app.beibao
 			temp.width = 368;
 			temp.x = 234;
 			temp.y = 137;
-			temp.elementsContent = [Icbg10_i(),Icbg11_i()];
+			temp.elementsContent = [Icoring_i(),Icbg10_i(),Icolingpai_i(),Icbg11_i()];
 			return temp;
 		}
 

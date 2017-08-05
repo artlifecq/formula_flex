@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.guild
 {
 	import com.rpgGame.app.manager.guild.GuildManager;
+	import com.rpgGame.app.manager.guild.GuildSkillVo;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.events.GuildEvent;
 	import com.rpgGame.core.ui.SkinUI;
@@ -11,7 +12,6 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.coreData.clientConfig.Q_guildskill;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
-	import com.rpgGame.netData.guild.bean.GuildSkillInfo;
 	
 	import away3d.events.Event;
 	
@@ -29,7 +29,7 @@ package com.rpgGame.appModule.guild
 		private static var isMouseOut : Boolean = true;
 		private var _skin:Skill_TongShuai;
 		private var _propList:Vector.<SkillPropCell>;
-		private var _currentinfo:GuildSkillInfo;
+		private var _currentinfo:GuildSkillVo;
 		private var _nextdata:Q_guildskill;
 		private var _skillId:int = 11;
 		public function GuildOtherSkillPanel(skin:Skill_TongShuai):void
@@ -175,11 +175,11 @@ class SkillPropCell
 		if(nextatt!=null)
 		{
 			if(CharAttributeType.WAI_GONG== _attid)
-				_nextValue = AttValueConfig.getDisAttValue(_attid,currentatt.q_value1);
+				_nextValue = AttValueConfig.getDisAttValue(_attid,nextatt.q_value1);
 			else if(CharAttributeType.DEFENSE_PER== _attid)
-				_nextValue = AttValueConfig.getDisAttValue(_attid,currentatt.q_value2);
+				_nextValue = AttValueConfig.getDisAttValue(_attid,nextatt.q_value2);
 			else
-				_nextValue = AttValueConfig.getDisAttValue(_attid,currentatt.q_value3);
+				_nextValue = AttValueConfig.getDisAttValue(_attid,nextatt.q_value3);
 		}else{
 			_nextValue = 0;
 		}

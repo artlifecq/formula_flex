@@ -17,7 +17,7 @@ package com.rpgGame.netData.player.bean{
 	 * 他人详细信息
 	 */
 	public class OthersInfo extends Bean {
-		
+	
 		//角色Id
 		private var _personId: long;
 		
@@ -75,6 +75,9 @@ package com.rpgGame.netData.player.bean{
 		//最大真气值
 		private var _maxZhenQi: long;
 		
+		//婚戒阶数
+		private var _advanceWedding: int;
+		
 		//角色属性信息
 		private var _attributeList: Vector.<AttributeItem> = new Vector.<AttributeItem>();
 		//资源属性项
@@ -123,6 +126,8 @@ package com.rpgGame.netData.player.bean{
 			writeLong(_maxExp);
 			//最大真气值
 			writeLong(_maxZhenQi);
+			//婚戒阶数
+			writeInt(_advanceWedding);
 			//角色属性信息
 			writeShort(_attributeList.length);
 			for (var i: int = 0; i < _attributeList.length; i++) {
@@ -183,6 +188,8 @@ package com.rpgGame.netData.player.bean{
 			_maxExp = readLong();
 			//最大真气值
 			_maxZhenQi = readLong();
+			//婚戒阶数
+			_advanceWedding = readInt();
 			//角色属性信息
 			var attributeList_length : int = readShort();
 			for (var i: int = 0; i < attributeList_length; i++) {
@@ -484,6 +491,21 @@ package com.rpgGame.netData.player.bean{
 		 */
 		public function set maxZhenQi(value: long): void{
 			this._maxZhenQi = value;
+		}
+		
+		/**
+		 * get 婚戒阶数
+		 * @return 
+		 */
+		public function get advanceWedding(): int{
+			return _advanceWedding;
+		}
+		
+		/**
+		 * set 婚戒阶数
+		 */
+		public function set advanceWedding(value: int): void{
+			this._advanceWedding = value;
 		}
 		
 		/**

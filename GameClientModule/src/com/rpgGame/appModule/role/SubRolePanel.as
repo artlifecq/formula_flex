@@ -69,6 +69,7 @@ package com.rpgGame.appModule.role
 			basicView.show(_roleData);
 			avatarView.show(_roleData,_otherInfo.equips);
 			avatarView.setVipData(_otherInfo.viplevel);
+			avatarView.setMarriageRingData(_otherInfo.advanceWedding,_otherInfo.marriageName!=null&&_otherInfo.marriageName!="");
 		}
 		override protected function onTouchTarget(target : DisplayObject) : void {
 			super.onTouchTarget(target);

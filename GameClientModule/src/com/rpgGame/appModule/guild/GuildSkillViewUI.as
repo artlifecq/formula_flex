@@ -35,7 +35,7 @@ package com.rpgGame.appModule.guild
 			_gropu.addEventListener(Event.CHANGE,changeHandler);
 			changeHandler(null);
 			addNode(RTNodeID.GUILD_SKILL,RTNodeID.GUILD_SKILL_SELF,_skin.btnSkill1,123,GuildManager.instance().hasSelfSkill2LevelUp);
-			addNode(RTNodeID.GUILD_SKILL,RTNodeID.GUILD_SKILL_LEADER,_skin.btnSkill1,123,GuildManager.instance().hasLeaderSkill2LevelUp);
+			addNode(RTNodeID.GUILD_SKILL,RTNodeID.GUILD_SKILL_LEADER,_skin.btnSkill2,123,GuildManager.instance().hasLeaderSkill2LevelUp);
 		}
 		override protected function onShow():void
 		{

@@ -1,6 +1,5 @@
 package com.rpgGame.app.ui.main.buttons
 {
-	import com.rpgGame.app.manager.fightsoul.FightSoulManager;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.ui.tip.RTNodeID;
 	
@@ -9,7 +8,7 @@ package com.rpgGame.app.ui.main.buttons
 		public function MainButton_Gang()
 		{
 			super();
-			SkinUI.addNode(null,RTNodeID.MAIN_SOCAIL,this,60,null,false,null,true);
+			SkinUI.addNode(null,RTNodeID.MAIN_SOCAIL,this,60,null,false);
 		}
 //		private var _helpPoint:Point;
 //		override protected function initialize():void
