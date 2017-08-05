@@ -26,6 +26,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_tran_dest_area_by_job:String;
 		 /**  传送点造型资源编号 */
 		public var q_tran_res:String;
+		 /**  传送点名字特效 */
+		public var q_tran_name_res:String;
 		 /**  传送点资源X坐标 */
 		public var q_tran_res_x:int;
 		 /**  传送点资源Y坐标 */
