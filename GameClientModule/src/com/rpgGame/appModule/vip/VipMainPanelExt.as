@@ -190,7 +190,7 @@ package com.rpgGame.appModule.vip
 				{
 					var retH:HashMap;
 					retH=AttValueConfig.getAttrHash(item.q_att_type);
-					_skin.NumZhanli.label=FightValueUtil.calFightPowerByHash(retH,MainRoleManager.actorInfo.job)+"";
+					_skin.NumZhanli0.label="x"+FightValueUtil.calFightPowerByHash(retH,MainRoleManager.actorInfo.job)+"";
 				}
 			}
 			_rewardBtnCtrl.hasReward=true;

@@ -213,12 +213,13 @@ package    com.rpgGame.appModule.battle.jjzb
 					_effect.x=(this._imgCon.width)/2;
 					_effect.y=(this._imgCon.height)/2;
 					_effect3d=_effect.playInter3DAt(ClientConfig.getEffect("ui_tiaozhan2"),0,0,0);
-					this._imgCon.addChild(_effect);
+					
 				}
 				if (_effect3d.isStarted==false) 
 				{
 					_effect3d.start();
 				}
+				this._imgCon.addChild(_effect);
 			}
 			else
 			{

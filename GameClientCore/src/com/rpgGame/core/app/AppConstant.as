@@ -187,6 +187,11 @@ package com.rpgGame.core.app
 		 */
 		public static var Battle_PANL:String = createAppInfo( "fightsoul.FightSoulPanel","zhanhun");
 		
+		/**
+		 * 战魂升级展示
+		 */
+		public static var FIGHT_SOULRISE_SHOWPANEL:String = createAppInfo( "fightsoul.FightSoulRiseShowPanel","zhanhun");
+		
 		
 		/**
 		 * 开启新功能 
@@ -538,5 +543,9 @@ package com.rpgGame.core.app
 		public static var RANKALLPLATFORMLISTPANLE:String = createAppInfo("rank.RankAllPlatformListPanle","paihangbang");
 		/**膜拜**/
 		public static var WORSHIP_PANLE:String = createAppInfo("rank.WorshipPanle","paihangbang");
+		
+		/**副本结算通用**/
+		public static var COMMON_ZONE_RESULT_PANLE:String = createAppInfo("zone.CommonZoneResultPanelExt");
+
 	}
 }

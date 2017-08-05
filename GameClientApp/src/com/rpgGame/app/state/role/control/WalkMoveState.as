@@ -518,16 +518,16 @@ package com.rpgGame.app.state.role.control
 			{
 				return false;
 			}
-			else if ((_machine as RoleStateMachine).isAttacking)
-			{
-				var attackState : AttackState = _machine.getCurrState(ActionState) as AttackState;
-				if (!force && !attackState.attackBroken && !attackState.canWalkRelease)
-					return false;
-			}
 			else if ((_machine as RoleStateMachine).isBlinking)
 			{
 				var blinkState : BlinkState = _machine.getCurrState(ActionState) as BlinkState;
 				if (!force && !blinkState.blinkBroken)
+					return false;
+			}
+			else if ((_machine as RoleStateMachine).isAttacking)
+			{
+				var attackState : AttackState = _machine.getCurrState(ActionState) as AttackState;
+				if (!force && !attackState.attackBroken && !attackState.canWalkRelease)
 					return false;
 			}
 			

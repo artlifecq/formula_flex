@@ -95,7 +95,7 @@ package com.client.ui.alert
 			}
 			else{
 				btnReconnectionHandler();
-				_timer.stop();
+				
 			}
 		}
 		
@@ -120,6 +120,7 @@ package com.client.ui.alert
 			}
 			finally
 			{
+				trySocket.removeEventListener(Event.CONNECT,tryConnectHandler);
 				trySocket = null;
 			}
 		}
@@ -147,6 +148,7 @@ package com.client.ui.alert
 		protected function btnReconnectionHandler():void
 		{
 			// TODO Auto-generated method stub	
+			_timer.stop();
 			if (tryCount > maxTryCount)
 			{
 				if(this.parent)
@@ -194,6 +196,11 @@ package com.client.ui.alert
 		
 		protected function tryIoErrorHandler(event:IOErrorEvent):void
 		{
+			var socket:Socket=event.target as Socket;
+			if (socket) 
+			{
+				socket.removeEventListener(IOErrorEvent.IO_ERROR,tryIoErrorHandler);
+			}
 			if (event.target == trySocket)
 			{
 				resetTime();
@@ -202,6 +209,11 @@ package com.client.ui.alert
 		
 		protected function trySecurityErrorHandler(event:SecurityErrorEvent):void
 		{
+			var socket:Socket=event.target as Socket;
+			if (socket) 
+			{
+				socket.removeEventListener(SecurityErrorEvent.SECURITY_ERROR,trySecurityErrorHandler);
+			}
 			if (event.target == trySocket)
 			{
 				resetTime();
@@ -210,6 +222,11 @@ package com.client.ui.alert
 		
 		protected function tryCloseHandler(event:Event):void
 		{
+			var socket:Socket=event.target as Socket;
+			if (socket) 
+			{
+				socket.removeEventListener(Event.CLOSE,tryCloseHandler);
+			}
 			if (event.target == trySocket)
 			{
 				resetTime();

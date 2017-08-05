@@ -37,6 +37,8 @@ package com.rpgGame.app.state.role
 	import flash.geom.Vector3D;
 	import flash.utils.getTimer;
 	
+	import gs.TweenLite;
+	
 	import org.client.mainCore.manager.EventManager;
 
 	/**
@@ -162,18 +164,24 @@ package com.rpgGame.app.state.role
 		private static function doWalkTo(role : SceneRole, pos : Vector3D, spacing : int = 0, data : Object = null, 
 										   onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null,needSprite:Boolean=false) : Boolean
 		{
+			TweenLite.killDelayedCallsTo(doWalkToPos);
 			if (!role || !role.usable)
 				return false;
 			var camouflageEntity : SceneRole = SceneRole(role.getCamouflageEntity());
 			var walkRole : SceneRole = camouflageEntity || role;
-			if (walkRole.stateMachine.isAttackHarding && (walkRole.isMainChar || walkRole.isMainCamouflage))
+			if((walkRole.isMainChar || walkRole.isMainCamouflage))
 			{
-				return doWalkToPos(role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite,true);
+				if (walkRole.stateMachine.isAttackHarding)
+				{
+					TweenLite.delayedCall(0.2, doWalkToPos, [role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite,true]);
+					return false;
+				}
+				else
+				{
+					return doWalkToPos(role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite);
+				}
 			}
-			else
-			{
-				return doWalkToPos(role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite);
-			}
+			
 			return false
 		}
 		
@@ -181,9 +189,6 @@ package com.rpgGame.app.state.role
 										   onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null,
 										   needSprite:Boolean=false,isForceMove:Boolean =false) : Boolean
 		{
-            /*CONFIG::netDebug {
-                NetDebug.LOG("[RoleStateUtil] [doWalkToPos]");
-            }*/
 			if (!role || !role.usable)
 				return false;
 			var camouflageEntity : SceneRole = SceneRole(role.getCamouflageEntity());
@@ -209,7 +214,7 @@ package com.rpgGame.app.state.role
 				}
 				else if (walkRole.stateMachine.isAttackHarding)
 				{
-					//NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsHarding); //"技能硬直中"
+					NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsHarding); //"技能硬直中"
 					return false;
 				}
 				else if (walkRole.stateMachine.isSpriteUp) 
@@ -227,6 +232,10 @@ package com.rpgGame.app.state.role
 					return false;
 				}
 				else if (walkRole.stateMachine.isJumping||walkRole.stateMachine.isJumpRising)//跳跃中不能移动
+				{
+					return false;
+				}
+				else if(walkRole.stateMachine.isBlinkMoving)
 				{
 					return false;
 				}

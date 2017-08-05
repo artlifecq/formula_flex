@@ -63,7 +63,7 @@ package com.rpgGame.coreData.cfg
 					<key funcID="11" code="74" name="J" dataID="0" type="2" funName="CountryPanel" />
 <!--					<key funcID="12" code="81" name="Q" dataID="0" type="2" funName="EquipChangePanel" />-->
 					<key funcID="17" code="72" name="H" dataID="" type="2" funName="" />
-					<key funcID="18" code="73" name="I" dataID="" type="2" funName="" />
+					<key funcID="18" code="73" name="I" dataID="" type="5" funName="" />
 <!--					<key funcID="14" code="69" name="E" dataID="2" type="2"/>-->
 <!--					<key funcID="27" code="82" name="R" dataID="3" type="2"/>-->
 					<key funcID="20" code="75" name="K" dataID="" type="2" funName="" />

@@ -415,8 +415,8 @@ package com.rpgGame.appModule.xinfa
 		{
 			_effect3dCon=new Inter3DContainer();
 			_skin.Bg.addChild(_effect3dCon);
-			_effect3dCon.x=_skin.Bg.width/2;
-			_effect3dCon.y=_skin.Bg.height/2;
+			_effect3dCon.x=912/2;
+			_effect3dCon.y=443/2;
 			//选取等级为1的数据
 			var hash:HashMap=Mgr.cheatsMgr.cheatsHash;
 			var keys:Array=hash.keys();

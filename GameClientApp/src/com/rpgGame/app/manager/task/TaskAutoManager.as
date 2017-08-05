@@ -7,7 +7,10 @@ package com.rpgGame.app.manager.task
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.sender.TaskSender;
 	import com.rpgGame.app.state.ai.AIStateMachine;
+	import com.rpgGame.app.ui.main.taskbar.TaskControl;
+	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.core.app.AppDispather;
 	import com.rpgGame.core.app.AppEvent;
 	import com.rpgGame.core.events.TaskEvent;
@@ -70,7 +73,7 @@ package com.rpgGame.app.manager.task
 			resetTechTime();
 			if(GlobalSheetData.getSettingInfo(511)!=null)
 			{
-				//AUTOLVE=GlobalSheetData.getSettingInfo(511).q_int_value;
+				AUTOLVE=GlobalSheetData.getSettingInfo(511).q_int_value;
 			}
 			if(GlobalSheetData.getSettingInfo(512)!=null)
 			{
@@ -87,13 +90,6 @@ package com.rpgGame.app.manager.task
 			{
 				stopTaskAuto();
 			}
-		}
-		/**任务进度改变*/
-		private function changeMation(type:int):void
-		{
-			if (!_isTaskRunning)
-				return;
-			setTaskChange();
 		}
 		
 		public function startSwitchTaskAuto(tar:int=0) : void
@@ -270,17 +266,30 @@ package com.rpgGame.app.manager.task
 		{
 			_taskTarget = value;
 		}
+		/**任务进度改变*/
+		private function changeMation(type:int):void
+		{
+			if(TaskMissionManager.getTaskIsFinishByType(type))
+			{
+				if(!isTaskRunning||type!=otherType)
+				{
+					taskKilled(type);
+				}
+			}
+			if(isTaskRunning)
+			{
+				setTaskChange();
+			}
+			
+			
+		}
 		
 		public function setTaskChange():void
 		{
-			var missionType:int=TaskMissionManager.getTaskMissionType(otherType);
-			if(missionType==TaskType.SUB_GATHER||missionType==TaskType.SUB_USEITEM)
-			{
-				GatherAutoManager.getInstance().setGatherChange();
-			}
-			if(TaskMissionManager.getTaskSubIsFinish(otherType,_taskTarget))
+			if(TaskMissionManager.getTaskSubIsFinish(otherType,taskTarget))
 			{
 				//taskFlishArr[_taskTarget]=true;
+				Lyt.a("setTaskChange:"+otherType+":"+taskTarget);
 				changeSub();
 				TrusteeshipManager.getInstance().stopAll();
 				GatherAutoManager.getInstance().stopGatherAuto();
@@ -288,6 +297,12 @@ package com.rpgGame.app.manager.task
 				TweenLite.killDelayedCallsTo(startTaskAuto);
 				TweenLite.delayedCall(1, startTaskAuto,[otherType]);
 			}
+			var missionType:int=TaskMissionManager.getTaskMissionType(otherType);
+			if(missionType==TaskType.SUB_GATHER||missionType==TaskType.SUB_USEITEM)
+			{
+				GatherAutoManager.getInstance().setGatherChange();
+			}
+			
 			
 		}
 		
@@ -316,8 +331,56 @@ package com.rpgGame.app.manager.task
 				}
 				
 			}
-			
-			
+		}
+		
+		public function taskFilshed(taskType:int):void
+		{
+			switch(taskType)
+			{
+				case TaskType.MAINTYPE_MAINTASK:
+					TaskMissionManager.getTaskHaveNpc(taskType)?TaskControl.showLeadPanel():TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);
+					break;
+				case TaskType.MAINTYPE_DAILYTASK:
+					TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);
+					break;
+				case TaskType.MAINTYPE_TREASUREBOX:
+					TaskControl.showLoopPanel();
+					break;
+				case TaskType.MAINTYPE_GUILDDAILYTASK:
+					TaskMissionManager.getTaskHaveNpc(taskType)?TaskControl.showGuildPanel():TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);	
+					break;
+				case TaskType.LIJIN_TASK:
+					TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);	
+					break;
+			}
+			walkOver=true;
+		}
+		public function taskKilled(taskType:int):void
+		{
+			switch(taskType)
+			{
+				case TaskType.MAINTYPE_MAINTASK:
+					if(!TaskMissionManager.getTaskHaveNpc(taskType))
+					{
+						TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);
+					}
+					break;
+				case TaskType.MAINTYPE_DAILYTASK:
+					TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);
+					break;
+				case TaskType.MAINTYPE_TREASUREBOX:
+					TaskControl.showLoopPanel();
+					break;
+				case TaskType.MAINTYPE_GUILDDAILYTASK:
+					if(!TaskMissionManager.getTaskHaveNpc(taskType))
+					{
+						TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);
+					}
+					break;
+				case TaskType.LIJIN_TASK:
+					TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);	
+					break;
+			}
 		}
 		
 		public function taskLevel(level:int):void

@@ -106,6 +106,7 @@ package com.rpgGame.app.cmdlistener.scene
 		private function onResFightFailedBroadcastMessage(msg:ResFightFailedBroadcastMessage):void
 		{
 			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
+			TrusteeshipManager.getInstance().isNormalSpell = false;
 			
 			var failID : int = msg.failType;
 			var failReason : String;
@@ -117,7 +118,7 @@ package com.rpgGame.app.cmdlistener.scene
 				GameLog.addShow(failReason);
 			}
 			
-			if(failID==1014&&TrusteeshipManager.getInstance().isAutoing)return;//---------------yt 客户端已经规避目标死亡还是出现，所有在挂机的时候不要这个提示
+			//if(failID==1014&&TrusteeshipManager.getInstance().isAutoing)return;//---------------yt 客户端已经规避目标死亡还是出现，所有在挂机的时候不要这个提示
 				
 			NoticeManager.showNotify(failReason, failID);
 			if (MainRoleManager.actor.stateMachine.isPrewarWaiting)
@@ -134,11 +135,12 @@ package com.rpgGame.app.cmdlistener.scene
 		private function onResFightBroadcastMessage(msg:ResFightBroadcastMessage):void
 		{
 			//GameLog.addShow("技能流水号为： 对目标\t" + msg.uid);
-			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
+			
 			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg, true);
 			
 			if (msg.personId.ToGID()==MainRoleManager.actorID) 
 			{
+				MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
 				GameLog.addShow("主玩家释放技能：\t" + info.spellData.q_skillID);
 			}
 			ReleaseSpellHelper.releaseSpell(info);
@@ -160,29 +162,33 @@ package com.rpgGame.app.cmdlistener.scene
 		
 		private function onResAttackVentToClientMessage(msg:ResAttackVentToClientMessage):void
 		{
+			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg, true);
 			
 			var skillId:int=msg.fightType&0xffffff;
 			var skillData:Q_skill_model=SpellDataManager.getSpellData(skillId);
-			if(skillData!=null&&skillData.q_performType==0&&msg.playerid.ToGID() == MainRoleManager.actorID)//判断是否是自己的技能但不是战魂的技能  ---yt
+			
+			if (msg.playerid.ToGID()==MainRoleManager.actorID) 
 			{
-				EventManager.dispatchEvent(SkillEvent.SKILL_ATTACK,skillId);
+				MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
+				GameLog.addShow("主玩家释放技能：\t" + info.spellData.q_skillID);
+				if(skillData!=null&&skillData.q_performType==0)//不是战魂的技能  ---yt
+				{
+					EventManager.dispatchEvent(SkillEvent.SKILL_ATTACK,skillId);
+				}
 			}
-			if(skillData!=null&&skillData.q_performType==1&&msg.playerid.ToGID() != MainRoleManager.actorID)//判断是否是战魂但是不是自己的技能  ---yt
+			else
 			{
-				return;
+				if(skillData!=null&&skillData.q_performType==1)//判断是否是战魂但是不是自己的技能  ---yt
+				{
+					return;
+				}
 			}
-			
-			
-			
-			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
-			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg, true);
+
 			GameLog.addShow("技能流水号为： 对地\t" + msg.uid  + "\n" + "服务器给的点为：\t" + msg.pos.x +"_" + msg.pos.y+"skillid:"+info.spellData.q_skillID);
 			if(skillData.q_performType==1)
 				ReleaseSpellHelper.fightSoulSpell(info);
 			else
 				ReleaseSpellHelper.releaseSpell(info);
-			
-			
 		}
 		
 		private function onResCancelSkillMessage(msg:SCCancelSkillMessage):void

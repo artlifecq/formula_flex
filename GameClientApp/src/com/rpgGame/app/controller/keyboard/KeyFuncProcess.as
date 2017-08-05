@@ -124,8 +124,9 @@ package com.rpgGame.app.controller.keyboard
 					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_BANGHUI,null,true,false);
 					break;
 				case "18": //I
+					DropGoodsManager.getInstance().showScaneName(isdown);
 //					CountryWarChengMenManager.testRemoveChengMen();
-					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_MERIDIAN,null,true,false);
+					//FunctionOpenManager.openAppPaneById(EmFunctionID.EM_MERIDIAN,null,true,false);
 					break;
 				case "27": //R 聊天框缩放
 					//resizeChatPanel();
@@ -144,7 +145,7 @@ package com.rpgGame.app.controller.keyboard
 					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_JUEXUE,null,true,false);
 					break;
 				case "50": //显示掉落物图标
-					DropGoodsManager.getInstance().showScaneName(isdown);
+					//DropGoodsManager.getInstance().showScaneName(isdown);
 					break;
 				case "51": //TAB
                     var curTime : uint = getTimer();

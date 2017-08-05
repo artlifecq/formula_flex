@@ -93,7 +93,7 @@ package com.rpgGame.app.sender
 		}
 		
 		/** 对邀请操作 **/
-		public static function reqGuildInviteOperation(guild:int,flag:int,opaque:int):void
+		public static function reqGuildInviteOperation(guild:int,flag:int,opaque:int=0):void
 		{
 			var msg:ReqGuildInviteOperationMessage = new ReqGuildInviteOperationMessage();
 			msg.inviteId = guild;
@@ -131,12 +131,12 @@ package com.rpgGame.app.sender
 		}
 		
 		/** 对申请者操作 **/
-		public static function applyOperation(flag:int,applyId:int,opaque:int):void
+		public static function applyOperation(flag:int,applyId:int):void
 		{
 			var msg:ReqGuildApplyOperationMessage = new ReqGuildApplyOperationMessage();
 			msg.flag = flag;
 			msg.applyId = applyId;
-			msg.opaque = opaque;
+			msg.opaque = 0;
 			sendMsg(msg);
 		}
 		
@@ -150,24 +150,24 @@ package com.rpgGame.app.sender
 		}
 		
 		/** 请求提出成员 **/
-		public static function guildAppoint(playerId:long,memberType:int,type:int,opaque:int):ReqGuildAppointMessage
+		public static function guildAppoint(playerId:long,memberType:int,type:int):ReqGuildAppointMessage
 		{
 			var msg:ReqGuildAppointMessage = new ReqGuildAppointMessage();
 			msg.playerId = playerId;
 			msg.memberType = memberType;
 			msg.leaderModel = type;
-			msg.opaque = opaque;
+			msg.opaque = 0;
 			sendMsg(msg);
 			return msg;
 		}
 		
 		/** 请求帮派升级 **/
-		public static function guildLevelup(opaque:int):void
+		public static function guildLevelup():void
 		{
 			if(!GuildManager.instance().canUpgrad)
 				return ;
 			var msg:ReqGuildLevelupMessage = new ReqGuildLevelupMessage();
-			msg.opaque = opaque;
+			msg.opaque = 0;
 			sendMsg(msg);
 		}
 		
@@ -212,11 +212,11 @@ package com.rpgGame.app.sender
 		}
 		
 		/** 请求帮派技能升级*/
-		public static function guildSkillLevelup(type:int,skillid:int,opaque:int):void
+		public static function guildSkillLevelup(type:int,skillid:int):void
 		{
 			var msg:ReqGuildSkillLevelupMessage = new ReqGuildSkillLevelupMessage();
 			msg.type = type;
-			msg.opaque = opaque;
+			msg.opaque = 0;
 			msg.skillId = skillid;
 			sendMsg(msg);
 		}

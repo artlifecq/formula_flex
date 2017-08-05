@@ -210,7 +210,7 @@ package org.mokylin.skin.app.zhanchang
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			imgWin = temp;
 			temp.name = "imgWin";
-			temp.styleName = "ui/app/zhanchang/jiesuan/tianzhanshengli.png";
+			temp.styleName = "ui/big_bg/activety/tianzhanshengli.png";
 			temp.x = 59;
 			temp.y = 0;
 			return temp;

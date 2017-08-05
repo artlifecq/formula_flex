@@ -1,12 +1,10 @@
 package com.rpgGame.app.manager
 {
 	import com.game.engine3D.utils.MathUtil;
-	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.graphics.StallHeadFace;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.ctrl.ControlAutoPick;
 	import com.rpgGame.app.manager.fight.FightManager;
-	import com.rpgGame.app.manager.mount.MountManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.role.SceneDropGoodsManager;
@@ -14,7 +12,6 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.manager.stall.StallManager;
 	import com.rpgGame.app.manager.task.TaskManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
-	import com.rpgGame.app.manager.task.TouZhuManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.TaskSender;
 	import com.rpgGame.app.state.role.RoleStateUtil;
@@ -24,13 +21,10 @@ package com.rpgGame.app.manager
 	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.TranportsDataManager;
-	import com.rpgGame.coreData.cfg.task.TouZhuCfgData;
-	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.info.stall.StallData;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.SceneCollectData;
 	import com.rpgGame.coreData.role.SceneDropGoodsData;
-	import com.rpgGame.coreData.type.EnumMonsterId;
 	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import flash.geom.Point;
