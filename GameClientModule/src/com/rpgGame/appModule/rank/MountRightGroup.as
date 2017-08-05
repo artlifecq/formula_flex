@@ -79,8 +79,6 @@ package com.rpgGame.appModule.rank
 			_power = FightValueUtil.calAtrributeFightPower(props,_showdata.heroJob);
 			var current:Q_horse = _showdata.housedata;
 			_avatar.updateBodyWithRes(current.q_skinResID,current.q_animatResID);
-			_roleData.avatarInfo.setBodyResID(current.q_skinResID,current.q_animatResID);
-			
 		}
 		override protected function refeashJunjie():void
 		{
