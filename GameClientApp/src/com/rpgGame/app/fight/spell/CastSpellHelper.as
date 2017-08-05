@@ -153,7 +153,7 @@ package com.rpgGame.app.fight.spell
 			else if (caseState == CASE_STATE_NOT_IN_RELEASE_RANGE)//距离过远
 			{
 				//三连击的话直接发送请求
-				if (TrusteeshipManager.getInstance().tripleSkillCtrl.isLockSkill(caseInfo.spellData.q_skillID)) 
+				if (TrusteeshipManager.getInstance().tripleSkillCtrl.isLockSkill(caseInfo.spellData.q_skillID)&&!TrusteeshipManager.getInstance().tripleSkillCtrl.isFirst(caseInfo.spellData.q_skillID)) 
 				{
 					caseInfo.targetServerID=null;//改成空放
 					caseInfo.releasePos.x=MainRoleManager.actor.x;
@@ -165,7 +165,12 @@ package com.rpgGame.app.fight.spell
 				{
 					if (caseInfo.targetID > 0)
 						targerRole = SceneManager.getSceneObjByID(caseInfo.targetID) as SceneRole;
-					RoleStateUtil.walk(MainRoleManager.actor, caseInfo.targetPos.x, caseInfo.targetPos.y, 0, caseInfo, onWalkArriveRelease, onWalkThroughCase,null,true);
+					if(targerRole)
+					{
+						var position : Vector3D = new Vector3D(targerRole.x, targerRole.z, 0);
+						RoleStateUtil.walkToPos(MainRoleManager.actor, position, 10,caseInfo, onWalkArriveRelease,onWalkThroughCase,null,true);
+					}
+					//RoleStateUtil.walk(MainRoleManager.actor, caseInfo.targetPos.x, caseInfo.targetPos.y, 0, caseInfo, onWalkArriveRelease, onWalkThroughCase,null,true);
 				}
 			}
 
@@ -1063,7 +1068,8 @@ package com.rpgGame.app.fight.spell
 			var districtWithPath : DistrictWithPath = SceneManager.getDistrict();
 			//var path : Vector.<Vector3D> = PathFinderUtil.findPath(districtWithPath, MainRoleManager.actor.position, tempVector3D);
 			var path : Vector.<Vector3D> = PolyUtil.findPath(districtWithPath, MainRoleManager.actor.position, tempVector3D);
-			dist = Point.distance(selfPos, releasePos);
+			//dist = Point.distance(selfPos, releasePos);为什么计算距离要用同一个点啦---yt
+			dist = Point.distance(selfPos, releaseTargetPos);
 			var inRange : Boolean;
 			
 			if (spellData.q_blink_type != 0)

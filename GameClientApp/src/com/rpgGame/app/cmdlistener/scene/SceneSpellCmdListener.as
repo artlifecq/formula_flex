@@ -117,7 +117,7 @@ package com.rpgGame.app.cmdlistener.scene
 				GameLog.addShow(failReason);
 			}
 			
-			if(failID==1014&&TrusteeshipManager.getInstance().isAutoing)return;//---------------yt 客户端已经规避目标死亡还是出现，所有在挂机的时候不要这个提示
+			//if(failID==1014&&TrusteeshipManager.getInstance().isAutoing)return;//---------------yt 客户端已经规避目标死亡还是出现，所有在挂机的时候不要这个提示
 				
 			NoticeManager.showNotify(failReason, failID);
 			if (MainRoleManager.actor.stateMachine.isPrewarWaiting)

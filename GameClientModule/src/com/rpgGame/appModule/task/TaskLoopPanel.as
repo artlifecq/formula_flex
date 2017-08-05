@@ -176,8 +176,7 @@ package com.rpgGame.appModule.task
 			if(TaskMissionManager.treasuerTaskInfo!=null&&TaskMissionManager.getTreasuerTaskIsFinish())
 			{
 				var golo:int= MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_GOLD);
-				var noney:int= MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
-				var noney2:int= MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY);
+				var noney:int= MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY)+MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY);
 				switch(type)
 				{
 					case 1:
@@ -185,7 +184,7 @@ package com.rpgGame.appModule.task
 						hide();
 						break;
 					case 2:
-						if(noney>=TwoData||noney2>=TwoData)
+						if(noney>=TwoData)
 						{
 							selectId=type;
 							hide();
@@ -245,9 +244,13 @@ package com.rpgGame.appModule.task
 		private function setkExtraReward():void
 		{
 			var reward:Object=TaskMissionManager.getTreasuerTaskExtraReward();
-			nav2Label.htmlText="今日完成<font color='#5DBD37'>"+reward.l+"</font>环后，额外奖励";
-			icoList2Group.setRewardByArray(TaskMissionCfgData.getRewordById(reward.r,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex));
-			icoList2Group.visible=true;
+			if(reward!=null)
+			{
+				nav2Label.htmlText="今日完成<font color='#5DBD37'>"+reward.l+"</font>环后，额外奖励";
+				icoList2Group.setRewardByArray(TaskMissionCfgData.getRewordById(reward.r,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex));
+				icoList2Group.visible=true;
+			}
+			
 		}
 		
 	

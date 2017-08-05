@@ -303,11 +303,11 @@ package com.rpgGame.app.ui.main.taskbar
 			}			
 		}
 		/**任务卡级*/
-		private function noMainTask(taskId: int,noInfo: Vector.<NoMainTaskInfo>):void
+		private function noMainTask():void
 		{
 			leadCont.show(false);
 			loopCont.show(true);
-			loopCont.setKajibutView(taskId,noInfo);
+			loopCont.setKajibutView();
 		}
 		/**任务时等级变化*/
 		private function levelChange():void
@@ -328,8 +328,9 @@ package com.rpgGame.app.ui.main.taskbar
 			if(type==1)//支线任务领取奖励
 			{
 				loopCont.hideDailyTaskView();
+				TaskSender.sendfinishTaskMessage(TaskMissionManager.dailyTaskInfo.taskId);
 			}
-			TaskControl.receiveRewordBut(type);
+			//TaskControl.receiveRewordBut(type);
 			
 		}
 		
