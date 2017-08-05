@@ -106,6 +106,7 @@ package com.rpgGame.app.cmdlistener.scene
 		private function onResFightFailedBroadcastMessage(msg:ResFightFailedBroadcastMessage):void
 		{
 			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
+			TrusteeshipManager.getInstance().isNormalSpell = false;
 			
 			var failID : int = msg.failType;
 			var failReason : String;
