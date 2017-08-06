@@ -308,15 +308,18 @@ package
 			loadingStream.addEventListener(IOErrorEvent.IO_ERROR, onClientIoError);
 			loadingStream.addEventListener(ProgressEvent.PROGRESS, onClientLoadingPrg);
 			var clientPath : String = _decodeFun != null ? _clientPathUrl.replace(".swf", ".ml") : _clientPathUrl;
-			var url : String = "";
+			var url : String = clientPath;
 			if (_loaderVersion)
 			{
 				clientPath = clientPath.replace("#", _loaderVersion);
 				url = _baseDir + clientPath;
 			}
+            if (this._clientVersion) {
+                url = url + "?" + _clientVersion;
+            }
 			else
 			{
-				url = clientPath + "?" + Math.random().toFixed(5);
+				url = url + "?" + Math.random().toFixed(5);
 			}
 			loadingStream.load(new URLRequest(url));
 		}
