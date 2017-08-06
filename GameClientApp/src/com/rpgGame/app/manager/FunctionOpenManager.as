@@ -76,9 +76,6 @@
 					case EmFunctionID.EM_BANGHUI_INFO:
 					case EmFunctionID.EM_BANGHUI_CHENGYUAN:
 					case EmFunctionID.EM_BANGHUI_UPLEVEL:
-					case EmFunctionID.EM_BANGHUI_COMBAT:
-						bool = GuildManager.instance().haveGuild;
-						break;
 					case EmFunctionID.EM_BANGHUI_SPELL:
 						if(GuildManager.instance().haveGuild)
 							bool = true;

@@ -49,7 +49,6 @@ package com.rpgGame.appModule.rank
 		protected var _topInfo:TopInfo;
 		protected var _modleContent:Inter3DContainer;
 		protected var _avatar:UIAvatar3D;
-		protected var _roleData:RoleData;
 		private var equipGrids:Vector.<DragDropItem>;
 		private var _vipIcon:DragDropItem;
 		private var _marryIcon:DragDropItem;
@@ -87,7 +86,7 @@ package com.rpgGame.appModule.rank
 			_skin.grpRight.addChildAt(_modleContent,4);
 			_skin.headName.imageScaleMode = UIAsset.IMAGE_SCALE_MODE_NO_SCALE;
 			_skin.headName.addEventListener(Event.RESIZE,sizeHandler);
-			_avatar = new UIAvatar3D(_skin.content);
+			_avatar = new UIAvatar3D(_skin.content,_scale);
 		}
 		private function sizeHandler(e:Event):void
 		{
@@ -172,25 +171,7 @@ package com.rpgGame.appModule.rank
 		
 		protected function initData():void
 		{
-			if(_roleData == null)
-			{
-				_roleData = new HeroData();
-			}
-			var info:PlayerBriefInfo = _topInfo.playerBriefInfo;
-			HeroData(_roleData).totalStat.setData(info.attributeList);
-			HeroData(_roleData).sex=info.sex;
-			HeroData(_roleData).job=info.job;
-			HeroData(_roleData).body=info.body;
-			HeroData(_roleData).hair=info.hair;
-			HeroData(_roleData).cloths=info.cloths;
-			HeroData(_roleData).weapon=info.weapon;
-			HeroData(_roleData).deputyWeapon=info.second_weapon;
-			HeroData(_roleData).name=info.playerName
-			HeroData(_roleData).societyName=info.guildName;
-			HeroData(_roleData).guildName = info.guildName;
-			HeroData(_roleData).zhanqiLv = info.warFlagModelId;
-			AvatarManager.updateHeroAvatarInfo(HeroData(_roleData));
-			_power = info.fightpower;
+			_power = _topInfo.playerBriefInfo.fightpower;
 		}
 		
 		protected function refeashName():void
@@ -202,8 +183,7 @@ package com.rpgGame.appModule.rank
 		}
 		protected function refeashModle():void
 		{
-			this._avatar.setRoleData(this._roleData);
-			this._avatar.setScale(_scale);	
+			this._avatar.updateWithPlayerBriefInfo( _topInfo.playerBriefInfo)
 		}
 		
 		protected function refeashEquip():void

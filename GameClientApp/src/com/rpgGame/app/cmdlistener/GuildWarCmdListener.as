@@ -8,6 +8,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.GuildEvent;
+	import com.rpgGame.netData.guildWar.message.G2CRespKingGuidWarAvatarInfoMessage;
 	import com.rpgGame.netData.guildWar.message.ResGuildWarCampOreMessage;
 	import com.rpgGame.netData.guildWar.message.ResGuildWarCampScoreMessage;
 	import com.rpgGame.netData.guildWar.message.ResGuildWarChangeMaxPriceMessage;
@@ -53,8 +54,14 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(253111, getResGuildWarOrePositionMessage);
 			SocketConnection.addCmdListener(253112, getResGuildWarResultMessage);
 			SocketConnection.addCmdListener(253113, getResGuildWarLeaderSkillUseMessage);
+			SocketConnection.addCmdListener(253114, getG2CRespKingGuidWarAvatarInfoMessage);
 			
 			finish();
+		}
+		
+		private function getG2CRespKingGuidWarAvatarInfoMessage(msg:G2CRespKingGuidWarAvatarInfoMessage):void
+		{
+			EventManager.dispatchEvent(GuildEvent.GUILD_HCZB_AVATAR_LIST,msg);
 		}
 		
 		private function getResGuildWarLeaderSkillUseMessage(msg:ResGuildWarLeaderSkillUseMessage):void
@@ -109,7 +116,7 @@ package com.rpgGame.app.cmdlistener
 		{
 			switch(msg.opaque){
 				case OpaqueEnum.GUILDWAR_GIFT:
-					GuildWarSender.reqGuildWarCityInfo();//领取帮会战奖励成功之后
+					GuildWarSender.reqGuildWarCityInfo(-1);//领取帮会战奖励成功之后
 					break;
 			}
 		}

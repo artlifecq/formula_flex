@@ -185,7 +185,6 @@ package com.rpgGame.app.utils
 			for each (key in keys) 
 			{
 				newValue=maps.getValue(key);
-				newValue=(newValue*curPolishValue)/calNum;
 				maps.put(key,newValue);
 			}
 			
@@ -200,12 +199,20 @@ package com.rpgGame.app.utils
 						for each (key in keys) 
 						{
 							newValue=tempMap.getValue(key);
-							newValue=maps.getValue(key)+(newValue*curPolishValue)/calNum;
+							newValue+=maps.getValue(key);
 							maps.put(key,newValue);
 						}
 					}
 				}
 			}
+			
+			for each (key in keys) 
+			{
+				newValue=maps.getValue(key);
+				newValue=(newValue*curPolishValue)/calNum;
+				maps.put(key,newValue);
+			}
+			
 			
 			var washCfg:Q_equip_wash_attr=EquipWashAttCfg.getEquipWashAttr(equip.smeltAtt1);
 			var washAtt:Q_att_values;

@@ -6,6 +6,7 @@ package com.rpgGame.app.state.role.action
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.core.state.role.action.ActionState;
+	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.RoleActionType;
@@ -23,6 +24,7 @@ package com.rpgGame.app.state.role.action
 		private var _showType:String;
 		private var _totalFrameTween:TweenLite;
 		private var _repeatNum:int;
+		private var nextShowTween:TweenLite;
 		public function ShowState()
 		{
 			super(RoleStateType.ACTION_SHOW);
@@ -72,9 +74,29 @@ package com.rpgGame.app.state.role.action
 			if (_machine && !_machine.isInPool)
 			{
 				super.execute();
-				_showType=RoleActionType.SHOW2;
-				_repeatNum=1;
+				setShowAction();
 			}
+		}
+		
+		private function setShowAction():void
+		{
+			if (_totalFrameTween)
+			{
+				_totalFrameTween.kill();
+				_totalFrameTween = null;
+			}
+			if(nextShowTween){
+				nextShowTween.kill();
+				nextShowTween=null;
+			}
+			
+			var role:SceneRole=_machine.owner as SceneRole;
+			if(role.data is MonsterData){//怪物
+				_showType=RoleActionType.ATTACK;
+			}else{
+				_showType=RoleActionType.SHOW_IDLE;
+			}
+			_repeatNum=1;			
 		}
 		
 		override public function afterExecute() : void
@@ -83,15 +105,19 @@ package com.rpgGame.app.state.role.action
 			{
 				syncAnimation();
 				super.afterExecute();
-				
-				var bodyAp : RenderUnit3D = (_machine.owner as SceneRole).avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY, true);
-				var totalFrameTm:uint = bodyAp ? bodyAp.totalDuration:200;
-				if(totalFrameTm>0){
-					_totalFrameTween = TweenLite.delayedCall(totalFrameTm * 0.001, onTotalFrameCmp);
-				}else{
-					onTotalFrameCmp();
-				}
+				showComplete();
 			}
+		}
+		
+		private function showComplete():void
+		{
+			var bodyAp : RenderUnit3D = (_machine.owner as SceneRole).avatar.getRenderUnitByID(RenderUnitType.BODY, RenderUnitID.BODY, true);
+			var totalFrameTm:uint = bodyAp ? bodyAp.totalDuration:200;
+			if(totalFrameTm>0){
+				_totalFrameTween = TweenLite.delayedCall(totalFrameTm * 0.001, onTotalFrameCmp);
+			}else{
+				onTotalFrameCmp();
+			}			
 		}
 		
 		private function onTotalFrameCmp() : void
@@ -104,10 +130,18 @@ package com.rpgGame.app.state.role.action
 					_totalFrameTween = null;
 				}
 				
-				_showType=RoleActionType.SHOW1;
+				_showType=RoleActionType.SHOW_STAND;
 				_repeatNum=0;
 				syncAnimation();
+				nextShowTween= TweenLite.delayedCall(10,onShowNext);
 			}
+		}
+		
+		private function onShowNext():void
+		{
+			setShowAction();
+			syncAnimation();
+			showComplete();
 		}
 		
 		/**
@@ -126,6 +160,10 @@ package com.rpgGame.app.state.role.action
 			{
 				_totalFrameTween.kill();
 				_totalFrameTween = null;
+			}
+			if(nextShowTween){
+				nextShowTween.kill();
+				nextShowTween=null;
 			}
 			super.dispose();
 		}

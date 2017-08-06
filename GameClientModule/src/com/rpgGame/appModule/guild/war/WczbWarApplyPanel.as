@@ -109,7 +109,7 @@ package com.rpgGame.appModule.guild.war
 					obj.info.curMaxPrice=msg.price;
 					if(msg.guildId.hexValue==myGuildId){
 						obj.applayCityId=msg.cityId;
-						GuildWarSender.reqGuildWarCityInfo();
+						GuildWarSender.reqGuildWarCityInfo(0);
 					}
 					index=i;
 					break;

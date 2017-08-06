@@ -20,7 +20,7 @@ package com.rpgGame.app.manager.ctrl
 			_originSkill=skill;
 			var qSkill:Q_skill_model=SpellDataManager.getSpellData(skill,SpellManager.getSkillGrade(skill));
 			_skills=null;
-			if (qSkill.q_relate_spells!="" /*|| qSkill.q_relate_spells!=null*/) 
+			if (qSkill.q_relate_spells!="") 
 			{
 				_skills=qSkill.q_relate_spells.split(",");
 			}

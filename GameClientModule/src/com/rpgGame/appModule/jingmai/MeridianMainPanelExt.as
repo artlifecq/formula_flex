@@ -1,8 +1,8 @@
 package com.rpgGame.appModule.jingmai
 {
-	import com.rpgGame.app.ui.tab.ViewUI;
-	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.app.ui.AttChangeView;
 	import com.rpgGame.core.ui.tip.RTNodeID;
+	import com.rpgGame.coreData.enum.AttChangeEnum;
 	
 	import org.mokylin.skin.app.beibao.jingmai.Jingmai_Skin;
 	
@@ -14,13 +14,14 @@ package com.rpgGame.appModule.jingmai
 	 * @author yfl
 	 * 
 	 */	
-	public class MeridianMainPanelExt extends ViewUI 
+	public class MeridianMainPanelExt extends AttChangeView 
 	{
 		private var _skin:Jingmai_Skin;
 		private var _view:MeridianView;
 		
 		public function MeridianMainPanelExt()
 		{
+			attChangeTypes=[AttChangeEnum.MERIDIAN];
 			_skin=new Jingmai_Skin();
 			super(_skin);
 			
@@ -83,6 +84,7 @@ package com.rpgGame.appModule.jingmai
 		}
 		override public function show(data:Object=null):void
 		{
+			super.show(data);
 			if (_view) 
 			{
 				_view.onShow();

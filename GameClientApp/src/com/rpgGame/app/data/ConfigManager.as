@@ -61,6 +61,7 @@ package com.rpgGame.app.data
 	import com.rpgGame.coreData.cfg.PetAdvanceCfg;
 	import com.rpgGame.coreData.cfg.PetCfg;
 	import com.rpgGame.coreData.cfg.QBattleRewardCfgData;
+	import com.rpgGame.coreData.cfg.QKindomnameCfgData;
 	import com.rpgGame.coreData.cfg.QSinglecitybaseCfgData;
 	import com.rpgGame.coreData.cfg.RaceCfgData;
 	import com.rpgGame.coreData.cfg.RankDesignationData;
@@ -236,6 +237,7 @@ package com.rpgGame.app.data
 			WorldBossCfgData.setup(dic[ConfigClassRegister.Q_world_boss]);
 			QSinglecitybaseCfgData.setup(dic[ConfigClassRegister.Q_singlecitybase]);
 			QBattleRewardCfgData.setup(dic[ConfigClassRegister.Q_battle_reward]);
+			QKindomnameCfgData.setup(dic[ConfigClassRegister.Q_kindomname]);
 			
 			////////////////////////////////////////////////////////////////////////
 			//

@@ -10,6 +10,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.app.graphics.DropItemHeadFace;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.graphics.StallHeadFace;
+	import com.rpgGame.app.graphics.TranportHeadFace;
 	import com.rpgGame.app.manager.AvatarManager;
 	import com.rpgGame.app.manager.CharAttributeManager;
 	import com.rpgGame.app.manager.ClientTriggerManager;
@@ -611,7 +612,7 @@ package com.rpgGame.app.manager.role
 			//设置VO
 			role.data = data;
 			role.name = data.name;
-			role.headFace = HeadFace.create(role);
+			role.headFace = TranportHeadFace.create(role);
 			//			data.avatarInfo.effectResID = data.effectRes;
 			role.updateEffect(data.effectRes);
 			

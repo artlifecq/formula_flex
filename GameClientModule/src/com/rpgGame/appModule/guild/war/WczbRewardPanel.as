@@ -8,7 +8,6 @@ package com.rpgGame.appModule.guild.war
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	
 	import gs.TweenLite;
-	import gs.TweenMax;
 	import gs.easing.Back;
 	
 	import org.mokylin.skin.app.banghui.wangcheng.WangChengJiangLi;
