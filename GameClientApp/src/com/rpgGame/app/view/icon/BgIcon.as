@@ -68,7 +68,6 @@ package com.rpgGame.app.view.icon
 		protected var isShowLockAsset : Boolean = false;
 		/**是否需要显示选中框**/
 		protected var isShow : Boolean = true;
-		
 		protected var _qualityEft:UIMovieClip;
 		
 		public function BgIcon( $iconSize:int = IcoSizeEnum.SIZE_40 )
@@ -458,6 +457,12 @@ package com.rpgGame.app.view.icon
 		public function set selectImgVisible( value:Boolean ):void
 		{
 			isShow = value;
+		}
+		
+		/**设置已装备图标显示隐藏*/
+		public function set wearIsVisble(value:Boolean):void
+		{
+			isShowIsWear=value;
 		}
 		
 		private function setSelectedImgSize(size:int):void

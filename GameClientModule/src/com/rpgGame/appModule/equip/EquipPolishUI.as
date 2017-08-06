@@ -199,6 +199,7 @@ package com.rpgGame.appModule.equip
 			}
 			
 			_targetEquip=new DragDropItem(IcoSizeEnum.ICON_64,0);
+			_targetEquip.wearIsVisble=false;
 			_targetEquip.onTouchEndCallBack=onCancelTarget;
 			_targetEquip.dragAble = true;
 			_targetEquip.checkDrag=checkDrag;

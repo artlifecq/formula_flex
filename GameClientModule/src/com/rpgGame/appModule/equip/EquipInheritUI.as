@@ -202,6 +202,7 @@ package com.rpgGame.appModule.equip
 			
 			_targetEquip=IconCDFace.create(IcoSizeEnum.ICON_64);
 			_targetEquip.selectImgVisible=false;
+			_targetEquip.wearIsVisble=false;
 			_targetEquip.bindBg(null);
 			_useEquip=IconCDFace.create(IcoSizeEnum.ICON_64);
 			_useEquip.selectImgVisible=false;

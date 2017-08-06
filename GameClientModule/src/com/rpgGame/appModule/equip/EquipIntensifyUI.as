@@ -187,6 +187,7 @@ package com.rpgGame.appModule.equip
 			_targetEquip=new DragDropItem(IcoSizeEnum.ICON_64,0);
 			//			_targetEquip.setBg(GridBGType.GRID_SIZE_64);
 			//			_intensifyItem.setQualityImageIconPoint(8,8);
+			_targetEquip.wearIsVisble=false;
 			_targetEquip.x=617;
 			_targetEquip.y=209;
 			_targetEquip.onTouchEndCallBack=onCancelIntensify;
