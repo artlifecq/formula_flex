@@ -77,6 +77,7 @@ package   com.rpgGame.app.manager.debug
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
+	import org.game.netCore.connection.SocketConnection;
 	import org.game.netCore.net.MessageMgr;
 	
 	
@@ -100,6 +101,10 @@ package   com.rpgGame.app.manager.debug
 		
 		public  function initCommend():void 
 		{
+			commandList.put( ".close", function (...arg):void
+			{
+				SocketConnection.messageMgr.testClose();
+			});
 			commandList.put( ".hidestate", function (...arg):void
 			{
 				LayerManager.showOrHideMM();

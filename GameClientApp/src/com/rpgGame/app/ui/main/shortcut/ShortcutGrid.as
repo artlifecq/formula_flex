@@ -69,7 +69,7 @@ package com.rpgGame.app.ui.main.shortcut
 		public static const FENGKUANGLIANNU:int=2005;
 		public static const NUTA:int=2002;
 		private const NUTAMAX:uint=2;//最多弩塔个数
-		private static const  tf:TextFormat=new TextFormat(null, 14,0xffff00, true, null, null, null, null, TextFormatAlign.CENTER)
+		private static const  tf:TextFormat=new TextFormat(null, 16,0xffff00, true, null, null, null, null, TextFormatAlign.CENTER)
 		public function ShortcutGrid(shortcutBar : ShortcutBar, size : int)
 		{
 			_shortcutBar = shortcutBar;

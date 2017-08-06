@@ -4,6 +4,7 @@ package com.rpgGame.app.view.icon
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
+	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.type.AssetUrl;
 	
 	import flash.geom.Point;
@@ -45,6 +46,8 @@ package com.rpgGame.app.view.icon
 		
 		/** 显示数量用的文本框 */		
 		protected var _countText:Label;
+		/** 显示强化等级或琢磨等级用的文本框 */		
+		protected var _strOrZMText:Label;
 		/** ico的品质  */
 		protected var _qualityId:int = -1;
 		/**
@@ -183,8 +186,8 @@ package com.rpgGame.app.view.icon
 			_bgImage.onImageLoaded = onBgImgComplete;
 			_bgImage.styleName = ClientConfig.getGridBg( _bgResName );
 			//因为从对象池取的，所以要设置下
-//			_bgImage.width=S2W[_iconSize];
-//			_bgImage.height=S2W[_iconSize];
+			//			_bgImage.width=S2W[_iconSize];
+			//			_bgImage.height=S2W[_iconSize];
 			_bgImage.visible=true;
 			sortLayer();
 		}
@@ -215,7 +218,7 @@ package com.rpgGame.app.view.icon
 				_qualityEft.width=this.width;
 				_qualityEft.height=this.width;
 			}
-	
+			
 			sortLayer();
 			calIconPos();
 		}
@@ -233,7 +236,7 @@ package com.rpgGame.app.view.icon
 				_iconImage.height = _iconSize;
 				addChild( _iconImage );
 			}
-//			updateIconImagePosition(_iconPositionX,_iconPositionY);
+			//			updateIconImagePosition(_iconPositionX,_iconPositionY);
 			_iconImage.onImageLoaded = onIcoComplete;
 			_iconImage.styleName = iconResURL;
 			
@@ -263,8 +266,8 @@ package com.rpgGame.app.view.icon
 			_bgImage.onImageLoaded = onBgImgComplete;
 			_bgImage.styleName =value;
 			//因为从对象池取的，所以要设置下
-//			_bgImage.width=S2W[_iconSize];
-//			_bgImage.height=S2W[_iconSize];
+			//			_bgImage.width=S2W[_iconSize];
+			//			_bgImage.height=S2W[_iconSize];
 			_bgImage.visible=true;
 			sortLayer();
 		}
@@ -489,14 +492,47 @@ package com.rpgGame.app.view.icon
 		 */		
 		public function setSubString(value:String):void
 		{
-			if( _countText == null )
-				initCountText();
-			_countText.htmlText = value;
-			_countText.width=_countText.textWidth;
-			_countText.x = this.width - _countText.textWidth;
-			_countText.y =  this.height - _countText.height;			
-//			_countText.x = iconSize - _countText.maxWidth;
-//			_countText.y = iconSize - _countText.maxHeight;
+			if(!_strOrZMText)
+			{
+				if( _countText == null )
+					initCountText();
+				_countText.htmlText = value;
+				_countText.width=_countText.textWidth;
+				_countText.x = this.width - _countText.textWidth;
+				_countText.y =  this.height - _countText.height;			
+				//			_countText.x = iconSize - _countText.maxWidth;
+				//			_countText.y = iconSize - _countText.maxHeight;				
+			}else{
+				_countText=null;
+			}
+			sortLayer();
+		}
+		
+		/**
+		 * 设置强化或者琢磨等级下标依据优先级显示
+		 * */
+		public function setStrandznString(info:EquipInfo):void
+		{
+			if(!_xilianImage){
+				if(info.polishLevel>0||info.strengthLevel>0)
+				{
+					if(_strOrZMText == null)
+						initStrText();
+					if(info.polishLevel>0){
+						_strOrZMText.htmlText = "Lv"+info.polishLevel.toString();
+						_strOrZMText.color=StaticValue.A_UI_YELLOW_TEXT;
+					}
+					else{
+						_strOrZMText.htmlText = "+"+info.strengthLevel.toString();
+						_strOrZMText.color=StaticValue.A_UI_WHITE_TEXT;
+					}
+					_strOrZMText.width=_strOrZMText.textWidth;
+					_strOrZMText.x = this.width - _strOrZMText.textWidth;
+					_strOrZMText.y =  this.height - _strOrZMText.height;
+				}		
+			}	else{
+				if(_strOrZMText) _strOrZMText==null;
+			}
 			sortLayer();
 		}
 		
@@ -518,6 +554,26 @@ package com.rpgGame.app.view.icon
 			_countText.fontSize = 10;
 			_countText.nativeFilters=Fontter.filterObj["labelFilterBlack"];
 			addChild(_countText);
+		}
+		
+		/**
+		 * 初始化强化和琢磨文本
+		 * 
+		 */		
+		protected function initStrText():void
+		{
+			_strOrZMText = new Label();
+			_strOrZMText.width = 40;
+			_strOrZMText.height = 20;
+			_strOrZMText.touchable =false;
+			_strOrZMText.autoSize = TextFieldAutoSize.HORIZONTAL;
+			_strOrZMText.verticalAlign="middle";
+			_strOrZMText.verticalCenter=-2;
+			_strOrZMText.textAlign = Align.RIGHT;
+			_strOrZMText.color = StaticValue.A_UI_BEIGE_TEXT;
+			_strOrZMText.fontSize = 10;
+			_strOrZMText.nativeFilters=Fontter.filterObj["labelFilterBlack"];
+			addChild(_strOrZMText);
 		}
 		
 		public function get countText():Label
@@ -563,6 +619,17 @@ package com.rpgGame.app.view.icon
 			if(_qualityEft){
 				addChild( _qualityEft );
 			}
+			
+			if( _strOrZMText != null )
+				addChild( _strOrZMText );
+			
+			if(_xilianImage!=null){
+				addChild( _xilianImage );
+			}		
+			if(_selectImg!=null){
+				addChild( _selectImg );
+			}
+			
 		}
 		
 		/**
@@ -579,14 +646,29 @@ package com.rpgGame.app.view.icon
 				_selectImage.removeFromParent();
 				_selectImage.visible=false;
 			}
+			
+			if( _strOrZMText != null )
+			{
+				_strOrZMText.text="";
+				_strOrZMText.removeFromParent();
+				_strOrZMText.dispose();
+				_strOrZMText=null;
+			}
+			
+			if(_xilianImage!=null){
+				_xilianImage.removeFromParent();
+			}		
+			if(_selectImg!=null){
+				_selectImg.removeFromParent();
+			}
 			//不用清理背景
-//			if(_bgImage){
-//				_bgImage.removeFromParent();
-//				_bgImage=null;
-//			}
+			//			if(_bgImage){
+			//				_bgImage.removeFromParent();
+			//				_bgImage=null;
+			//			}
 			clearLockAsset();
 			hideQuality();
-	
+			
 			
 			if(_qualityEft){
 				_qualityEft.removeFromParent();
@@ -635,11 +717,11 @@ package com.rpgGame.app.view.icon
 				}
 			}
 		}
-
+		
 		public function get alwayShowCount():Boolean
 		{
 			return _alwayShowCount;
 		}
-
+		
 	}
 }

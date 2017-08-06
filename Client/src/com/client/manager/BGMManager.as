@@ -49,8 +49,8 @@ package com.client.manager
 				AudioInterface.stopAudio(AudioConfigType.ENV2D_CHANNEL);
 				return;
 			}
-			var _local2:String = ClientConfig.getSound(fileName);
-			AudioInterface.playAudio(AudioConfigType.ENV2D_CHANNEL, _local2);
+			var soundUrl:String = ClientConfig.getSound(fileName);
+			AudioInterface.playAudio(AudioConfigType.ENV2D_CHANNEL, soundUrl);
 		}
 		
 		public static function playMusic(fileName:String):void
@@ -69,8 +69,8 @@ package com.client.manager
 				AudioInterface.stopAudio(AudioConfigType.MUSIC_CHANNEL);
 				return;
 			}
-			var _local2:String = ClientConfig.getSound(fileName);
-			AudioInterface.playAudio(AudioConfigType.MUSIC_CHANNEL, _local2);
+			var soundUrl:String = ClientConfig.getSound(fileName);
+			AudioInterface.playAudio(AudioConfigType.MUSIC_CHANNEL, soundUrl);
 		}
 		
 		public static function playUIEffectSound(fileName:String):void
@@ -84,8 +84,8 @@ package com.client.manager
 				AudioInterface.stopAudio(AudioConfigType.UI_EFFECT_CHANNEL);
 				return;
 			}
-			var _local2:String = ClientConfig.getSound(fileName);
-			AudioInterface.playSoundEffect(AudioConfigType.UI_EFFECT_CHANNEL, _local2);
+			var soundUrl:String = ClientConfig.getSound(fileName);
+			AudioInterface.playSoundEffect(AudioConfigType.UI_EFFECT_CHANNEL, soundUrl);
 		}
 	}
 }

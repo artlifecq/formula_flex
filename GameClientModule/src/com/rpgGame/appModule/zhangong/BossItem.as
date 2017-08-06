@@ -75,6 +75,7 @@ package com.rpgGame.appModule.zhangong
 			_avatarContainer=new Inter3DContainer();
 			_avatar = new InterAvatar3D();
 			_avatarContainer.addChild3D(_avatar);
+			_avatarContainer.x=-25;
 			_avatardata=new MonsterData(RoleType.TYPE_MONSTER);
 			_skin.uiBg.addChild(_avatarContainer);
 			//			_skin.uiName.imageScaleMode = UIAsset.IMAGE_SCALE_MODE_NO_SCALE;

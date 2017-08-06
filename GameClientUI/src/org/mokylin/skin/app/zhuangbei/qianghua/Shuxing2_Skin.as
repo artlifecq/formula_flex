@@ -21,6 +21,8 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 
 		public var lb_up:feathers.controls.Label;
 
+		public var ui_name:feathers.controls.UIAsset;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -31,8 +33,8 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			
 			this.currentState = "normal";
 			this.height = 20;
-			this.width = 90;
-			this.elementsContent = [lb_num_i(),lb_up_i(),arrow_up_i()];
+			this.width = 120;
+			this.elementsContent = [lb_num_i(),lb_up_i(),arrow_up_i(),ui_name_i()];
 			
 			states = {
 			};
@@ -49,7 +51,7 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			arrow_up = temp;
 			temp.name = "arrow_up";
 			temp.styleName = "ui/common/tubiao/jobup2.png";
-			temp.x = 35;
+			temp.x = 85;
 			temp.y = 2;
 			return temp;
 		}
@@ -62,7 +64,7 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			temp.text = "1000";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 0;
+			temp.x = 45;
 			temp.y = 0;
 			return temp;
 		}
@@ -75,8 +77,19 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			temp.text = "20";
 			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 51;
+			temp.x = 100;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function ui_name_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ui_name = temp;
+			temp.name = "ui_name";
+			temp.styleName = "ui/common/shuxing/ld.png";
+			temp.x = 0;
+			temp.y = -1;
 			return temp;
 		}
 

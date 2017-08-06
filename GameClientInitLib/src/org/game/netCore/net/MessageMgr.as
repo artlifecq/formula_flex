@@ -148,7 +148,11 @@ package org.game.netCore.net
 			
 			initCrossHash();
 		}
-		
+		public function testClose():void
+		{
+			_isConnected=false;
+			clearOrgSocket();
+		}
 		/**  消息序号  **/
 		public function get orgSendMsgNum():int
 		{
@@ -365,7 +369,11 @@ package org.game.netCore.net
 		 */		
 		public function flushPage():void
 		{
-			ExternalInterface.call( "setcloseunloadmsg" );
+			if (ExternalInterface.available) 
+			{
+				ExternalInterface.call( "setcloseunloadmsg" );
+			}
+			
 			//navigateToURL( new URLRequest(  WebSiteConfig.WEBSITE_URL ), "_self" );
 		}
 		
@@ -668,7 +676,7 @@ package org.game.netCore.net
 				//				Mgr.mainApp.filters = [ FilterUtil.getGrayFilter() ];
 				
 				_isConnected = false;
-				dispatchEvent( new NetEvent( CLIENT_FAILD_TO_SERVER, event.toString() ) );
+				//dispatchEvent( new NetEvent( CLIENT_FAILD_TO_SERVER, event.toString() ) );
 				if ( !_isReconnect )
 				{
 					if ( !isReplace )

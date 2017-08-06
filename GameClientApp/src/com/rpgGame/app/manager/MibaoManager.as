@@ -1,7 +1,13 @@
 package com.rpgGame.app.manager
 {
+	import com.rpgGame.coreData.cfg.AttValueConfig;
+	import com.rpgGame.coreData.cfg.DailyZoneMonsterCfgData;
 	import com.rpgGame.coreData.cfg.MibaoCfgData;
+	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
+	import com.rpgGame.coreData.clientConfig.Q_att_values;
+	import com.rpgGame.coreData.clientConfig.Q_dailyzone_monster;
 	import com.rpgGame.coreData.clientConfig.Q_mibao_monster;
+	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.netData.mibao.bean.RemainMonsterInfo;
 
 	public class MibaoManager
@@ -56,7 +62,26 @@ package com.rpgGame.app.manager
 			
 			return 0;
 		}
-		
+		/**返回boss的血量*/
+		public static function getBossHp():int
+		{
+			var bossInfo:Vector.<Q_mibao_monster>=MibaoCfgData.getMonsterListByType(2);
+			if(bossInfo&&bossInfo.length>0)
+			{
+				var zoneMonster:Q_dailyzone_monster=DailyZoneMonsterCfgData.getZoneCfg(bossInfo[0].q_id);
+				if(zoneMonster)
+				{
+					var monsterData:Q_monster=MonsterDataManager.getData(zoneMonster.q_monsterId);
+					if(monsterData)
+					{
+						var currentatt:int = AttValueConfig.getQattValueByType(monsterData.q_att_type,12);
+						return currentatt;
+					}
+				}
+			}
+			
+			return 0;
+		}
 		
 		
 		

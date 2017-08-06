@@ -241,7 +241,7 @@ package com.rpgGame.app.cmdlistener.scene
 		private function onResPlayerStateChangeMessage(msg:ResPlayerStateChangeMessage):void
 		{
 			// TODO Auto Generated method stub
-			if (msg.state==1) 
+			if (msg.state==0) 
 			{
 				MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_ENTER_LEAVE_FIGHT);
 			}
@@ -335,7 +335,7 @@ package com.rpgGame.app.cmdlistener.scene
 		
 		/**地图跳跃*///-------yt
 		private function onSCAreaJumpMessage(msg : SCAreaJumpMessage) : void 
-		{
+		{Lyt.a("跳跃点消息："+msg.jumpPos.x+":"+msg.jumpPos.y);
 			var role : SceneRole = SceneManager.getSceneObjByID(msg.playerId.ToGID()) as SceneRole;
 			if (role && role.usable)
 			{
@@ -348,6 +348,7 @@ package com.rpgGame.app.cmdlistener.scene
 					isEnd=true;
 				}
 				ref.setParams(1,msg.costTime,destPoint,isEnd);
+				role.stateMachine.removeState(RoleStateType.ACTION_JUMP);//先移除状态 避免相同状态冲突
 				role.stateMachine.transition(RoleStateType.ACTION_JUMP, ref,true);
 			}
 		}

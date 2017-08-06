@@ -8,6 +8,7 @@ package com.client.cmdlistener
 	import com.rpgGame.netData.login.message.ResErrorMessage;
 	import com.rpgGame.netData.login.message.ResHeartMessage;
 	import com.rpgGame.netData.login.message.ResLoginSuccessMessage;
+	import com.rpgGame.netData.login.message.ResSubstituteMessage;
 	import com.rpgGame.netData.player.message.ResMyPlayerInfoMessage;
 	
 	import org.game.netCore.connection.SocketConnection;
@@ -51,9 +52,17 @@ package com.client.cmdlistener
 		{
 			SocketConnection.addCmdListener(100102, RecvLoginSuccessMessage);
 			SocketConnection.addCmdListener(100101, RecvCreateCharacterMessage);
+			SocketConnection.addCmdListener(100103, RecvResSubstituteMessage);
 			SocketConnection.addCmdListener(100104, RecvErrorMessage);
 //			SocketConnection.addCmdListener(100106, RecvHeartMessage);
 			SocketConnection.addCmdListener(103101, RecvMyPlayerInfoMessage);
+		}
+		
+		private static function RecvResSubstituteMessage(msg:ResSubstituteMessage):void
+		{
+			// TODO Auto Generated method stub
+			SocketConnection.messageMgr.isReplace=true;
+			SocketConnection.messageMgr.replaceIP=msg.ip;
 		}
 		
 		public static function RecvMyPlayerInfoMessage(msg:ResMyPlayerInfoMessage):void

@@ -412,7 +412,7 @@ package com.rpgGame.app.state.role.action
 				if (_stateReference)
 					_stateReference.totalFrame();
 				stopAttack();
-				if((_ref.owner as SceneRole).isMainChar&&TrusteeshipManager.getInstance().tripleSkillCtrl.isLockSkill(AttackStateReference(_ref).spellInfo.spellData.q_skillID))
+				if((_ref.owner as SceneRole).isMainChar&&TrusteeshipManager.getInstance().tripleSkillCtrl.isTripleSkill(AttackStateReference(_ref).spellInfo.spellData.q_skillID))
 				{
 					var ref:CheckTripleAttackStateReference=_machine.getReference(CheckTripleAttackStateReference) as CheckTripleAttackStateReference;
 					ref.setParams(AttackStateReference(_ref).spellInfo.spellData.q_skillID);
@@ -444,7 +444,7 @@ package com.rpgGame.app.state.role.action
 				if (_stateReference)
 					_stateReference.breakFrame();
 				
-//				if((_machine as RoleStateMachine).isTripleLockCaseSpell&&(_machine.getReference(TripleAttackSpellLockStateReference) as TripleAttackSpellLockStateReference).isLockSkill(AttackStateReference(_ref).spellInfo.spellData.q_skillID))
+//				if((_machine as RoleStateMachine).isTripleLockCaseSpell&&(_machine.getReference(TripleAttackSpellLockStateReference) as TripleAttackSpellLockStateReference).isTripleSkill(AttackStateReference(_ref).spellInfo.spellData.q_skillID))
 //				{
 //					var ref:CheckTripleAttackStateReference=_machine.getReference(CheckTripleAttackStateReference) as CheckTripleAttackStateReference;
 //					ref.setParams(AttackStateReference(_ref).spellInfo.spellData.q_skillID);

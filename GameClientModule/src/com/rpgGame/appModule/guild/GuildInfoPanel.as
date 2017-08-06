@@ -117,7 +117,7 @@ package com.rpgGame.appModule.guild
 				case _skin.btnWeicheng:
 				case _skin.btnWangcheng:
 				case _skin.btnHuangcheng:
-					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_BANGHUI_COMBAT,null,false);
+					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_BANGHUI_WCZB2,null,false);
 					break;
 				case _skin.btnJuanxian:
 					AppManager.showApp(AppConstant.GUILD_DONATE_PANEL);

@@ -39,6 +39,8 @@ package com.rpgGame.app.cmdlistener.task
 			SocketConnection.addCmdListener(124103,onResTaskChangeMessage);//任务进度改变
 			SocketConnection.addCmdListener(124104,onResTaskSubmitedMessage);//任务完成
 			SocketConnection.addCmdListener(124108,onSCNoMainTaskMessage);//卡级任务消息
+			
+			
 			SocketConnection.addCmdListener(104102,onResStartGatherMessage);//采集开始
 			SocketConnection.addCmdListener(104103,onResStopGatherMessage);//采集打断
 			
@@ -110,7 +112,8 @@ package com.rpgGame.app.cmdlistener.task
 			if(msg!=null)
 			{
 				TaskMissionManager.noMainTaskId=msg.taskModelId;
-				EventManager.dispatchEvent(TaskEvent.TASK_NO_MAIN,msg.taskModelId,msg.noMainTaskInfo);
+				TaskMissionManager.noMainTaskInfo=msg.noMainTaskInfo;
+				EventManager.dispatchEvent(TaskEvent.TASK_NO_MAIN);
 			}
 		}
 		

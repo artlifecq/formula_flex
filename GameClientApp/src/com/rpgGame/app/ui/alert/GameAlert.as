@@ -1,6 +1,7 @@
 package com.rpgGame.app.ui.alert
 {
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
@@ -18,6 +19,8 @@ package com.rpgGame.app.ui.alert
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.mokylin.skin.common.alert.AlertOKCancel;
+	import org.mokylin.skin.common.alert.AlertOkSkin;
+	import org.mokylin.skin.component.check.CheckBoxSkin_1;
 	
 	import starling.display.DisplayObject;
 
@@ -41,7 +44,7 @@ package com.rpgGame.app.ui.alert
 			switch (type)
 			{
 				case AlertTypeEnum.ALERT_TYPE_OK:
-					//skin = new AlertOkSkin();
+					skin = new AlertOkSkin();
 					break;
 				case AlertTypeEnum.ALERT_TYPE_OK_CANCEL:
 					skin = new AlertOKCancel();
@@ -62,6 +65,7 @@ package com.rpgGame.app.ui.alert
 				return;
 			switch (target)
 			{
+				case tipLab:
 				case btnOk:
 					clickType = AlertClickTypeEnum.TYPE_SURE;
 					break;
@@ -73,6 +77,8 @@ package com.rpgGame.app.ui.alert
 					hide();
 					break;
 				default:
+					clickType = AlertClickTypeEnum.TYPE_CLOSE;
+					hide();
 					return;
 			}
 			
@@ -199,7 +205,7 @@ package com.rpgGame.app.ui.alert
 				gameAlert.btnOk.label = alertInfo.leftValue ? alertInfo.leftValue : "确认";
 			if (gameAlert.btnCancel)
 				gameAlert.btnCancel.label = alertInfo.rightValue ? alertInfo.rightValue : "取消";
-			
+			TaskUtil.addLabelEvet(gameAlert.lbTip);
 			gameAlert.callBackArgs = args;
 			StarlingLayerManager.topUILayer.addChild(gameAlert);
 			showAlertMap.add(alertSet.key, gameAlert);
@@ -283,6 +289,11 @@ package com.rpgGame.app.ui.alert
 		private function get btnClose() : Button
 		{
 			return skin.hasOwnProperty("btnClose") ? skin["btnClose"] : null;
+		}
+		
+		public function get tipLab() : Label
+		{
+			return skin.hasOwnProperty("lbTip") ? skin["lbTip"] : null;
 		}
 		
 		private function get btnCancel() : Button

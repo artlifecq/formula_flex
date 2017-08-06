@@ -36,6 +36,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.zone.message.SCMultiZoneRewardMessage;
 	import com.rpgGame.netData.zone.message.SCOutZoneMessage;
 	import com.rpgGame.netData.zone.message.SCRemainTimeMessage;
+	import com.rpgGame.netData.zone.message.SCZoneCommonResultMessage;
 	import com.rpgGame.netData.zone.message.SCZoneStageChangeMessage;
 	
 	import org.client.mainCore.bean.BaseBean;
@@ -86,8 +87,14 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(109117, onSCZoneTeamVoteResultMessage);//队伍投票
 			
 			SocketConnection.addCmdListener(155148, onSCLimitTrackInfoMessage);//极限挑战追踪
-			
+			SocketConnection.addCmdListener(155149, onSCZoneCommonResultMessage);//通用副本结算
 			finish();
+		}
+		
+		private function onSCZoneCommonResultMessage(msg:SCZoneCommonResultMessage):void
+		{
+			// TODO Auto Generated method stub
+			AppManager.showApp(AppConstant.COMMON_ZONE_RESULT_PANLE,msg);
 		}
 		/*——————————————————————————论剑消息————————————————————————————————————————————*/
 		private function onSCLunJianResultMessage(msg:SCLunJianResultMessage):void
