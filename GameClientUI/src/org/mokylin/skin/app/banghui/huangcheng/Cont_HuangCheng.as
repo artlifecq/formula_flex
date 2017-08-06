@@ -215,8 +215,8 @@ package org.mokylin.skin.app.banghui.huangcheng
 			var skin:StateSkin = new org.mokylin.skin.app.banghui.wangcheng.WangChengInfo_Item()
 			temp.skin = skin
 			temp.width = 187;
-			temp.x = -8;
-			temp.y = 137;
+			temp.x = -129;
+			temp.y = 88;
 			return temp;
 		}
 

@@ -281,19 +281,21 @@ package com.rpgGame.app.cmdlistener
 		
 		private function RecvSCModuleAttributesChangeMessage(msg:SCModuleAttributesChangeMessage):void
 		{
-			var change:org.client.mainCore.ds.HashMap=new org.client.mainCore.ds.HashMap();
+			var changeDs:org.client.mainCore.ds.HashMap=new org.client.mainCore.ds.HashMap();
+			var changeUtil:com.gameClient.utils.HashMap=new com.gameClient.utils.HashMap();
 			var length:int=msg.attributeChangeList.length;
 			for(var i:int = 0;i<length;i++)
 			{
 				var item:AttributeItem = msg.attributeChangeList[i];
-				change.add(item.type,AttValueConfig.getDisAttValue(item.type,item.value));
+				changeDs.add(item.type,AttValueConfig.getDisAttValue(item.type,item.value));
+				changeUtil.put(item.type,AttValueConfig.getDisAttValue(item.type,item.value));
 			}
 			
 			if(msg.modelId == AttChangeEnum.UPLEVEL_MODLE)
 			{
-				FightFaceHelper.showPlayerBaseAttrChange(change);
+				FightFaceHelper.showPlayerBaseAttrChange(changeDs);
 			}else{
-				EventManager.dispatchEvent(MainPlayerEvent.MODULE_STAT_CHANGE,msg.modelId,change);
+				EventManager.dispatchEvent(MainPlayerEvent.MODULE_STAT_CHANGE,msg.modelId,changeUtil);
 			}
 			
 		}

@@ -117,10 +117,11 @@ package com.rpgGame.app.sender
 		 * @param opaque
 		 * 
 		 */
-		public static function reqGuildWarEnter(opaque:int=0):void
+		public static function reqGuildWarEnter(isKing:int=0,opaque:int=0):void
 		{
 			var msg:ReqGuildWarEnterMessage=new ReqGuildWarEnterMessage();
 			msg.opaque=opaque;
+			msg.isKing=isKing;
 			sendMsg(msg);
 		}
 		

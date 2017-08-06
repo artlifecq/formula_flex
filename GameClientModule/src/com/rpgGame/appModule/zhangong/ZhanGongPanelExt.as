@@ -3,6 +3,7 @@ package com.rpgGame.appModule.zhangong
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.ZhanGongManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.ui.AttChangeView;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.FightValueUtil;
 	import com.rpgGame.appModule.zhangong.render.BossItemSelectCellRender;
@@ -11,6 +12,7 @@ package com.rpgGame.appModule.zhangong
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.cfg.ZhanGongData;
+	import com.rpgGame.coreData.enum.AttChangeEnum;
 	import com.rpgGame.netData.zhangong.message.SCMeritoriousUpgradeResultMessage;
 	
 	import away3d.events.Event;
@@ -28,7 +30,7 @@ package com.rpgGame.appModule.zhangong
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.beibao.zhangong.ZhanGong_Skin;
 	
-	public class ZhanGongPanelExt extends ViewUI
+	public class ZhanGongPanelExt extends AttChangeView
 	{
 		private var _skin:ZhanGong_Skin;
 		
@@ -44,6 +46,7 @@ package com.rpgGame.appModule.zhangong
 		private var _isFirst:Boolean=false;
 		public function ZhanGongPanelExt()
 		{
+			attChangeTypes=[AttChangeEnum.ZHANGONG];
 			_skin=new ZhanGong_Skin();
 			super(_skin);
 			
@@ -91,6 +94,7 @@ package com.rpgGame.appModule.zhangong
 		
 		override public function show(data:Object=null):void
 		{
+			super.show(data);
 			super.onShow();
 			initEvent();
 			showPower();
@@ -100,6 +104,7 @@ package com.rpgGame.appModule.zhangong
 		
 		override public function hide():void
 		{
+			super.hide();
 			clearEvent();
 		}
 		

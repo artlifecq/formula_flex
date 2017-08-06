@@ -8,6 +8,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import org.mokylin.skin.common.TongYongTanKuang_bg2;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
 	import org.mokylin.skin.component.list.ListSkin1;
 
@@ -23,11 +24,9 @@ package org.mokylin.skin.app.banghui.wangcheng
 		//==========================================================================
 		public var List:feathers.controls.List;
 
-		public var bg:feathers.controls.UIAsset;
+		public var bg:feathers.controls.SkinnableContainer;
 
 		public var btnClose1:feathers.controls.Button;
-
-		public var title:feathers.controls.Label;
 
 
 		//==========================================================================
@@ -40,7 +39,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			this.currentState = "normal";
 			this.height = 429;
 			this.width = 625;
-			this.elementsContent = [bg_i(),__ZhengBaBaoMing_UIAsset1_i(),title_i(),btnClose1_i(),__ZhengBaBaoMing_Group1_i(),List_i()];
+			this.elementsContent = [bg_i(),__ZhengBaBaoMing_UIAsset1_i(),btnClose1_i(),__ZhengBaBaoMing_Group1_i(),List_i(),__ZhengBaBaoMing_UIAsset3_i()];
 			
 			states = {
 			};
@@ -159,13 +158,25 @@ package org.mokylin.skin.app.banghui.wangcheng
 			return temp;
 		}
 
-		private function bg_i():feathers.controls.UIAsset
+		private function __ZhengBaBaoMing_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.touchable = false;
+			temp.touchGroup = true;
+			temp.styleName = "ui/app/banghui/zhenbabaoming.png";
+			temp.x = 272;
+			temp.y = 8;
+			return temp;
+		}
+
+		private function bg_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
 			temp.height = 429;
-			temp.styleName = "ui/common/background/erji_kuang.png";
+			var skin:StateSkin = new org.mokylin.skin.common.TongYongTanKuang_bg2()
+			temp.skin = skin
 			temp.width = 625;
 			temp.x = 0;
 			temp.y = 0;
@@ -180,26 +191,6 @@ package org.mokylin.skin.app.banghui.wangcheng
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
 			temp.x = 591;
 			temp.y = 7;
-			return temp;
-		}
-
-		private function title_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			title = temp;
-			temp.name = "title";
-			temp.bold = true;
-			temp.touchable = false;
-			temp.touchGroup = true;
-			temp.letterSpacing = 2;
-			temp.fontSize = 16;
-			temp.text = "争霸报名";
-			temp.textAlign = "center";
-			temp.color = 0xDDE2B1;
-			temp.nativeFilters = Fontter.filterObj[""];
-			temp.width = 240;
-			temp.x = 192.5;
-			temp.y = 11;
 			return temp;
 		}
 

@@ -18,10 +18,12 @@ package com.rpgGame.appModule.xinfa
 		}
 		override public function show(data:Object=null):void
 		{
+			super.show(data);
 			_view.onShow();
 		}
 		override public function hide():void
 		{
+			super.hide();
 			_view.onHide();
 		}
 	}

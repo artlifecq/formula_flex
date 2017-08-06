@@ -233,6 +233,15 @@ package com.rpgGame.app.display3D
 		}
 		
 		/**
+		 *更新 
+		 * 
+		 */
+		public function update():void
+		{
+			AvatarManager.updateAllPart(role);
+		}
+		
+		/**
 		 *更新主体 
 		 * @param res
 		 * 

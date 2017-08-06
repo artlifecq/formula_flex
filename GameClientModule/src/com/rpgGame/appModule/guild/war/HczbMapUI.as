@@ -15,6 +15,8 @@ package com.rpgGame.appModule.guild.war
 	import com.rpgGame.netData.guildWar.bean.GuildWarCityInfo;
 	import com.rpgGame.netData.guildWar.message.ResGuildWarCityInfoMessage;
 	
+	import flash.geom.Point;
+	
 	import org.client.mainCore.ds.HashMap;
 	import org.mokylin.skin.app.banghui.huangcheng.Cont_HuangCheng;
 	import org.mokylin.skin.app.banghui.wangcheng.WangChengInfo_Item;
@@ -36,6 +38,7 @@ package com.rpgGame.appModule.guild.war
 		private var _nameMap:HashMap;//拥有名称
 		
 		private var wczb_citys:Array=[EnumCity.WC_HD,EnumCity.WC_DL,EnumCity.WC_YD,EnumCity.WC_LZ,EnumCity.HUANG_CHENG];
+		private var _initNameSeats:HashMap;
 		
 		public function HczbMapUI()
 		{
@@ -59,6 +62,13 @@ package com.rpgGame.appModule.guild.war
 			_nameMap.add(EnumCity.WC_YD,_skin.skinName4.skin);
 			_nameMap.add(EnumCity.WC_LZ,_skin.skinName3.skin);
 			_nameMap.add(EnumCity.HUANG_CHENG,_skin.skinName.skin);
+			
+			_initNameSeats=new HashMap();
+			_initNameSeats.add(EnumCity.WC_HD,new Point(_skin.skinName2.x,_skin.skinName2.y+_skin.skinName2.height/2));
+			_initNameSeats.add(EnumCity.WC_DL,new Point(_skin.skinName1.x,_skin.skinName1.y+_skin.skinName1.height/2));
+			_initNameSeats.add(EnumCity.WC_YD,new Point(_skin.skinName4.x,_skin.skinName4.y+_skin.skinName4.height/2));
+			_initNameSeats.add(EnumCity.WC_LZ,new Point(_skin.skinName3.x,_skin.skinName3.y+_skin.skinName3.height/2));
+			_initNameSeats.add(EnumCity.HUANG_CHENG,new Point(_skin.skinName.x,_skin.skinName.y+_skin.skinName.height/2));
 			
 			_tipsDataMap=new HashMap();
 			_tipsDataMap.add(EnumCity.WC_HD,new DynamicTipData());
@@ -217,7 +227,8 @@ package com.rpgGame.appModule.guild.war
 				nm.lbTxt.htmlText=htmlStr;
 			}
 			nm.bg.height=nm.lbTxt.textHeight+5;
-			nm.container.y=_cityIcon.getValue(city).y-nm.bg.height;
+			nm.container.y=_initNameSeats.getValue(city).y-nm.container.height;
+			nm.container.x=_initNameSeats.getValue(city).x;
 		}
 	}
 }

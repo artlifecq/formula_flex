@@ -15,6 +15,8 @@ package com.rpgGame.appModule.guild.war
 	import com.rpgGame.netData.guildWar.bean.GuildWarCityInfo;
 	import com.rpgGame.netData.guildWar.message.ResGuildWarCityInfoMessage;
 	
+	import flash.geom.Point;
+	
 	import feathers.controls.UIAsset;
 	
 	import org.client.mainCore.ds.HashMap;
@@ -36,6 +38,7 @@ package com.rpgGame.appModule.guild.war
 		private var _rewardMap:HashMap;//奖励
 		private var _cityIcon:HashMap;//城池
 		private var _nameMap:HashMap;//拥有名称
+		private var _initNameSeats:HashMap;
 		private var _tipsDataMap:HashMap;//tips
 		
 		private var cityHold:UIAsset;
@@ -70,6 +73,12 @@ package com.rpgGame.appModule.guild.war
 			_nameMap.add(EnumCity.XI_WEI,_skin.skinName1.skin);
 			_nameMap.add(EnumCity.ZHONG_WEI,_skin.skinName2.skin);
 			_nameMap.add(EnumCity.DONG_WEI,_skin.skinName3.skin);
+			
+			_initNameSeats=new HashMap();
+			_initNameSeats.add(EnumCity.WANG_CHENG,new Point(_skin.skinName.x,_skin.skinName.y+_skin.skinName.height/2));
+			_initNameSeats.add(EnumCity.XI_WEI,new Point(_skin.skinName1.x,_skin.skinName1.y+_skin.skinName1.height/2));
+			_initNameSeats.add(EnumCity.ZHONG_WEI,new Point(_skin.skinName2.x,_skin.skinName2.y+_skin.skinName2.height/2));
+			_initNameSeats.add(EnumCity.DONG_WEI,new Point(_skin.skinName3.x,_skin.skinName3.y+_skin.skinName3.height/2));
 			
 			_tipsDataMap=new HashMap();
 			_tipsDataMap.add(EnumCity.WANG_CHENG,new DynamicTipData());
@@ -215,8 +224,10 @@ package com.rpgGame.appModule.guild.war
 				}
 				nm.lbTxt.htmlText=htmlStr;
 			}
-			nm.bg.height=nm.lbTxt.textHeight+5;
-			nm.container.y=_cityIcon.getValue(city).y-nm.bg.height;
+			nm.container.height=nm.lbTxt.textHeight+5;
+			nm.lbTxt.x=(nm.container.width-nm.lbTxt.textWidth)/2;
+			nm.container.y=_initNameSeats.getValue(city).y-nm.container.height;
+			nm.container.x=_initNameSeats.getValue(city).x;
 		}
 	}
 }

@@ -50,7 +50,7 @@ package com.rpgGame.app.ui.tips
 			_skins.lbRoleName.text=info.occupyCheifName?info.occupyCheifName:"无";
 			
 			_skins.lbVsBang.htmlText=info.occupyGuildName&&info.attackGuildName?HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,info.occupyGuildName)+"VS"+HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,info.attackGuildName):"无";
-			if(tipsInfo.nextTime!=0){
+			if(tipsInfo.nextTime>0){
 				_skins.lbTime.text=TimeUtil.changeDateToDateStr(new Date(tipsInfo.nextTime));
 			}else{
 				_skins.lbTime.text="待定";
@@ -62,7 +62,11 @@ package com.rpgGame.app.ui.tips
 			if(tipsInfo.isHczb){
 				_skins.lbName.text=EnumCity.getCityHCName(info.id);
 			}else{
-				_skins.lbName.text=EnumCity.getCityName(info.id);
+				if(info.id==EnumCity.WANG_CHENG){
+					_skins.lbName.text=EnumCity.getCityName(info.areaId);
+				}else{
+					_skins.lbName.text=EnumCity.getCityName(info.id);
+				}
 			}
 		}
 		

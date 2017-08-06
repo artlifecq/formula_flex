@@ -55,10 +55,10 @@ package com.rpgGame.coreData.enum
 					name="【会稽】";
 					break;
 				case EnumCity.ZHONG_WEI:
-					name="【姑苏】";
+					name="【曲阜】";
 					break;
 				case EnumCity.DONG_WEI:
-					name="【曲阜】";
+					name="【姑苏】";
 					break;
 			}
 			return name;

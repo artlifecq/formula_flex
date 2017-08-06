@@ -45,11 +45,11 @@ package org.mokylin.skin.app.banghui.wangcheng
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 24;
+			temp.bottom = 0;
+			temp.left = 0;
+			temp.right = 0;
 			temp.styleName = "ui/app/banghui/wangcheng/dianban.png";
-			temp.width = 164;
-			temp.x = 0;
-			temp.y = 0;
+			temp.top = 0;
 			return temp;
 		}
 
@@ -58,13 +58,15 @@ package org.mokylin.skin.app.banghui.wangcheng
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbTxt = temp;
 			temp.name = "lbTxt";
+			temp.bottom = 3;
 			temp.leading = 2;
+			temp.left = 2;
+			temp.right = 3;
 			temp.text = "帮派名称七个字";
+			temp.textAlign = "left";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 160;
-			temp.x = 2;
-			temp.y = 3;
+			temp.top = 3;
 			return temp;
 		}
 

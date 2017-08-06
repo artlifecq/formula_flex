@@ -8,8 +8,11 @@ package com.rpgGame.appModule.guild.war
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.GuildEvent;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.cfg.QSinglecitybaseCfgData;
 	import com.rpgGame.coreData.cfg.StaticValue;
+	import com.rpgGame.coreData.cfg.TipsCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_singlecitybase;
 	import com.rpgGame.coreData.enum.EnumCity;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
@@ -76,7 +79,7 @@ package com.rpgGame.appModule.guild.war
 			}else if(target==_skin.lbJiangli){
 				AppManager.showApp(AppConstant.GUILD_HCZB_REWARD,null,"",this._skin.container);
 			}else if(target==_skin.toZhanChang){
-				GuildWarSender.reqGuildWarEnter();
+				GuildWarSender.reqGuildWarEnter(1);
 			}
 		}
 		
@@ -89,12 +92,14 @@ package com.rpgGame.appModule.guild.war
 		private function initEvent():void
 		{
 			EventManager.addEvent(GuildEvent.GUILD_HCZB_AVATAR_LIST,onGetInfos);
+			TipTargetManager.show( _skin.btnShuoMing,TargetTipsMaker.makeSimpleTextTips( TipsCfgData.getTipsInfo(30).q_describe));
 		}
 		
 		override public function hide():void
 		{
 			super.hide();
 			EventManager.removeEvent(GuildEvent.GUILD_HCZB_AVATAR_LIST,onGetInfos);
+			TipTargetManager.remove( _skin.btnShuoMing);
 		}
 		
 		private function onGetInfos(msg:G2CRespKingGuidWarAvatarInfoMessage):void
@@ -113,6 +118,7 @@ package com.rpgGame.appModule.guild.war
 			
 			var info:GuildAvatarInfo;
 			var index:int;
+			_skin.xuwei.visible=true;
 			for(var i:int=0;i<msg.avatarInfo.length;i++){
 				info=msg.avatarInfo[i];
 				if(info.guildMemberType==EGuildMemberType.LEADER){
@@ -131,6 +137,7 @@ package com.rpgGame.appModule.guild.war
 					}
 				}else{
 					index=2;
+					_skin.xuwei.visible=false;
 				}
 				updateAvatarInfo(index,info);
 			}
@@ -140,9 +147,6 @@ package com.rpgGame.appModule.guild.war
 		{
 			headList[index].lbName.text=info.playerName+"["+info.playerLevel+"]";
 			roleList[index].updateWithPlayerAppearanceInfo(info.playerAvatarInfo);
-			if(index==2){
-				_skin.xuwei.visible=false;
-			}
 		}
 	}
 }
