@@ -18,7 +18,6 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.scene.animator.FightSoulFollowAnimator;
 	import com.rpgGame.app.scene.animator.GirlPetFollowAnimator;
-	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.app.state.role.action.PlayActionStateReference;
 	import com.rpgGame.app.state.role.control.RidingStateReference;
 	import com.rpgGame.app.ui.alert.GameAlert;
@@ -30,7 +29,6 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.cfg.AnimationDataManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.FightsoulModeData;
-	import com.rpgGame.coreData.cfg.PetCfg;
 	import com.rpgGame.coreData.cfg.StallCfgData;
 	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
 	import com.rpgGame.coreData.cfg.country.CountryWarCfgData;
@@ -39,7 +37,6 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.clientConfig.AvatarResConfig;
 	import com.rpgGame.coreData.clientConfig.ClientSceneEffect;
 	import com.rpgGame.coreData.clientConfig.Q_fightsoul_mode;
-	import com.rpgGame.coreData.clientConfig.Q_girl_pet;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
 	import com.rpgGame.coreData.clientConfig.Q_warflag;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
@@ -66,12 +63,8 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import flash.geom.Point;
-	import flash.utils.getTimer;
 	
 	import app.message.StallTypeDataProto;
-	
-	import gs.TweenMax;
-	import gs.easing.Sine;
 	
 	import org.client.mainCore.manager.EventManager;
 	

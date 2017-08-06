@@ -10,6 +10,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.coreData.cfg.TipsCfgData;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.role.HeroData;
+	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.TipType;
 	
@@ -113,6 +114,8 @@ package com.rpgGame.appModule.role
 			EventManager.addEvent(MainPlayerEvent.NOWEXP_CHANGE,updateEXPMP);//经验改变
 			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,updateEXPMP);//真气变化
 			EventManager.addEvent(MainPlayerEvent.STAT_MAX_CHANGE,updateEXPMP);//最大真气经验改变
+			EventManager.addEvent(MainPlayerEvent.MAXHP_CHANGE,HpCHangeHandler);
+			EventManager.addEvent(MainPlayerEvent.NOWHP_CHANGE,HpCHangeHandler);
 			
 			TipTargetManager.show( _skin.txt_zhenqi,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(2)));
 			TipTargetManager.show( _skin.txt_jinyan,TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(1)));
@@ -153,7 +156,7 @@ package com.rpgGame.appModule.role
 		
 		private function updateEXPMP(type:int=1):void
 		{
-			if(type!=CharAttributeType.RES_EXP&&type!=CharAttributeType.RES_ZHENQI&&type!=CharAttributeType.HP){
+			if(type!=CharAttributeType.RES_EXP&&type!=CharAttributeType.RES_ZHENQI){
 				return;
 			}
 			_skin.txt_shengmin.text=_roleData.totalStat.hp+"/"+_roleData.totalStat.life;
@@ -167,6 +170,16 @@ package com.rpgGame.appModule.role
 			
 			_skin.pro_jinyan.maximum=_roleData.maxExp;
 			_skin.pro_jinyan.value=_roleData.curExp;
+		}
+		
+		private function HpCHangeHandler(role:RoleData):void
+		{
+			if(role!=MainRoleManager.actorInfo){
+				return;
+			}
+			_skin.pro_shengmin.maximum=_roleData.totalStat.life;
+			_skin.pro_shengmin.value=_roleData.totalStat.hp;
+			_skin.txt_shengmin.text=_roleData.totalStat.hp+"/"+_roleData.totalStat.life;
 		}
 	}	
 }

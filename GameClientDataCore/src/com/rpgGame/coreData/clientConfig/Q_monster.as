@@ -56,12 +56,14 @@ package com.rpgGame.coreData.clientConfig
 		public var q_att_type:int;
 		 /**  阵营关系(0 ) */
 		public var q_relation:int;
-		 /**  怪物生命恢复方式（0不恢复，1脱离战斗恢复，2掉血后就持续恢复,3表示脱离战斗后持续恢复生命） */
+		 /**  怪物生命恢复方式（0不恢复，1脱离战斗瞬间回满，2掉血后就持续恢复,3表示脱离战斗后持续恢复生命） */
 		public var q_recover_hp_type:int;
 		 /**  怪物恢复血量的间隔(单位：毫秒） */
 		public var q_recover_hp_period:int;
 		 /**  怪物间隔时间恢复的生命值 */
 		public var q_auto_recover_hp:int;
+		 /**  怪物间隔时间回复生命十万分比 */
+		public var q_auto_recover_hp_per:int;
 		 /**  视野距离半径(单位：格子数)，-1为全地图 */
 		public var q_eyeshot:int;
 		 /**  巡逻距离半径(单位：格子数) */
