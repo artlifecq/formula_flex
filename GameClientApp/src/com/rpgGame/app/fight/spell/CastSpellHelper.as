@@ -196,7 +196,7 @@ package com.rpgGame.app.fight.spell
 					var spellData : Q_skill_model = caseInfo.spellData;
 					ref.setParams(spellData);
 					MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_CAST_SPELL_LOCK, ref);
-					if (/*spellData.q_relate_spells!=null || */spellData.q_relate_spells!="") 
+					if (spellData.q_relate_spells!="") 
 					{
 						TrusteeshipManager.getInstance().tripleSkillCtrl.setParams(spellData.q_skillID);
 					}
@@ -1065,7 +1065,7 @@ package com.rpgGame.app.fight.spell
 			var districtWithPath : DistrictWithPath = SceneManager.getDistrict();
 			//var path : Vector.<Vector3D> = PathFinderUtil.findPath(districtWithPath, MainRoleManager.actor.position, tempVector3D);
 			var path : Vector.<Vector3D> = PolyUtil.findPath(districtWithPath, MainRoleManager.actor.position, tempVector3D);
-			dist = Point.distance(selfPos, releasePos);
+			dist = Point.distance(selfPos, releaseTargetPos);
 			var inRange : Boolean;
 			
 			if (spellData.q_blink_type != 0)
