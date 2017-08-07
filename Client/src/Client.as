@@ -69,6 +69,9 @@ package
         public var loginName : String = "";
         public var loginKey : String = "";
         public var loginTime : uint = 0;
+        public var browser : String = "";
+        public var gameName : String = "";
+        public var clientIp : String = "";
         
 		/**
 		 * 微端桥接
@@ -104,6 +107,9 @@ package
             ClientConfig.loginName = loginName;
             ClientConfig.loginKey = loginKey;
             ClientConfig.loginTime = loginTime;
+            ClientConfig.browser = browser;
+            ClientConfig.gameName = gameName;
+            ClientConfig.clientIp = clientIp;
             ClientConfig.agent = agent;
 			ClientConfig.isRelease = isRelease;
 			ClientConfig.useBpgFormat = useBpgFormat;
