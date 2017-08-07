@@ -137,6 +137,7 @@ package com.rpgGame.appModule.equip
 		
 		private function initView():void
 		{
+			_skin.up_title.text="装备属性提升:";
 			alertOkTips=new AlertSetInfo(LangAlertInfo.EQUIP_USE_TIPS);
 			alertOkTips.isShowCBox=true;
 			
@@ -225,7 +226,7 @@ package com.rpgGame.appModule.equip
 			
 			_goodsContainerUse.setGrayIsSelect(itemInfo,false);
 			
-			if(isPolish(itemInfo as EquipInfo)){
+			if(itemInfo.qItem.q_type==GoodsType.STRENGTH||isPolish(itemInfo as EquipInfo)){
 				_goodsContainerTarget.setGrayIsSelect(itemInfo,false);
 			}
 			addExp=getAddExt();
@@ -399,7 +400,7 @@ package com.rpgGame.appModule.equip
 			for each(var info:GridInfo in datas){
 				if(info.data){
 					item=info.data as ClientItemInfo;
-					if(isDuanZao(item as EquipInfo)){//具有锻造属性
+					if(item is EquipInfo&&isDuanZao(item as EquipInfo)){//具有锻造属性
 						continue;
 					}
 					if(item.qItem.q_levelnum<=lv&&item.quality<=quality&&item!=targetEquipInfo){//符合阶数和品质筛选
@@ -461,7 +462,7 @@ package com.rpgGame.appModule.equip
 		private function onTouchGrid( grid:DragDropItem ):void
 		{
 			var gridInfo:GridInfo=grid.gridInfo;
-			if(gridInfo.data==null||grid.isGary){
+			if(gridInfo.data==null||grid.isSelect){
 				return;
 			}
 			if(gridInfo.containerID==ItemContainerID.POLIST_LIST){
@@ -489,7 +490,7 @@ package com.rpgGame.appModule.equip
 			
 			var itemInfo:ClientItemInfo=gridInfo.data as ClientItemInfo;
 			var equip:EquipInfo=itemInfo as EquipInfo;
-			if(isDuanZao(equip)&&!noAlertUse){
+			if(equip!=null&&isDuanZao(equip)&&!noAlertUse){
 				GameAlert.showAlert(alertOkTips,onAlert,[itemInfo]);
 			}else{
 				setUseItem(itemInfo);
@@ -513,7 +514,7 @@ package com.rpgGame.appModule.equip
 		{
 			_goodsContainerUse.setGrayIsSelect(itemInfo,true);
 			
-			if(isPolish(itemInfo as EquipInfo)){
+			if(itemInfo.qItem.q_type==GoodsType.STRENGTH||isPolish(itemInfo as EquipInfo)){
 				_goodsContainerTarget.setGrayIsSelect(itemInfo,true);
 			}
 			useListIds.length=0;
@@ -664,7 +665,7 @@ package com.rpgGame.appModule.equip
 			}else{
 				current_promote=current.q_promote;
 			}
-			_skin.lb_baifenbi.text=Number((current_promote/100).toFixed(1))+"%";
+			_skin.lb_baifenbi.text=Number((current_promote/1000).toFixed(1))+"%";
 			if(up){
 				_skin.arrow_up2.visible=_skin.lb_up2.visible=true;
 				_skin.arrow_up1.visible=_skin.lb_up1.visible=true;			
@@ -939,7 +940,7 @@ package com.rpgGame.appModule.equip
 		
 		private function initItem():void
 		{
-			var allEquips:Array=ItemManager.getAllEquipDatas();
+			var allEquips:Array=ItemManager.getusecailiao();
 			var num:int=allEquips.length;
 			targetEquips=getPolishEquips(allEquips);
 			targetEquips.sort(onSortPolishEquip);
@@ -960,56 +961,74 @@ package com.rpgGame.appModule.equip
 			updateAll();
 		}
 		
-		private function sortForUse(equipA:EquipInfo, equipB:EquipInfo):int
+		private function sortForUse(itemA:ClientItemInfo, itemB:ClientItemInfo):int
 		{
-			if(equipA.qItem.q_levelnum==equipB.qItem.q_levelnum){//阶数相同
-				if(equipA.qItem.q_default==equipB.qItem.q_default){//品质相同
-					if(equipA.polishLevel==equipB.polishLevel){//强化等级相同
-						if(isleftKind(equipA.qItem.q_kind,equipB.qItem.q_kind)){//根据部件排序
-							return -1;
-						}else{
-							if(equipA.qItem.q_kind==equipB.qItem.q_kind){
-								return 0;
+			if(itemA.qItem.q_type==GoodsType.STRENGTH&&itemB.qItem.q_type==GoodsType.STRENGTH)
+			{
+				if(itemA.qItem.q_default<itemB.qItem.q_default) return -1;
+				else if(itemA.qItem.q_default>itemB.qItem.q_default) return 1;
+				else return 0;
+			}	
+			else if(itemA.qItem.q_type==GoodsType.STRENGTH&&itemB.qItem.q_type!=GoodsType.STRENGTH)
+			{
+				return -1;
+			}
+			else if(itemA.qItem.q_type!=GoodsType.STRENGTH&&itemB.qItem.q_type==GoodsType.STRENGTH)
+			{
+				return 1;
+			}
+			else{
+				var equipA:EquipInfo=itemA as EquipInfo;
+				var equipB:EquipInfo=itemB as EquipInfo;
+				if(equipA.qItem.q_levelnum==equipB.qItem.q_levelnum){//阶数相同
+					if(equipA.qItem.q_default==equipB.qItem.q_default){//品质相同
+						if(equipA.polishLevel==equipB.polishLevel){//强化等级相同
+							if(isleftKind(equipA.qItem.q_kind,equipB.qItem.q_kind)){//根据部件排序
+								return -1;
 							}else{
-								return 1;
+								if(equipA.qItem.q_kind==equipB.qItem.q_kind){
+									return 0;
+								}else{
+									return 1;
+								}
 							}
-						}
-					}else{
-						if(equipA.polishLevel==equipB.polishLevel){
-							if(equipA.polishExp==equipB.polishExp){
-								return 0;
+						}else{
+							if(equipA.polishLevel==equipB.polishLevel){
+								if(equipA.polishExp==equipB.polishExp){
+									return 0;
+								}
+								if(equipA.polishExp<equipB.polishExp){
+									return -1;
+								}else{
+									return 1;
+								}
 							}
-							if(equipA.polishExp<equipB.polishExp){
+							
+							if(equipA.polishLevel<equipB.polishLevel){
 								return -1;
 							}else{
 								return 1;
 							}
 						}
-						
-						if(equipA.polishLevel<equipB.polishLevel){
+					}else{
+						if(equipA.qItem.q_default==equipB.qItem.q_default){
+							return 0;
+						}
+						if(equipA.qItem.q_default<equipB.qItem.q_default){
 							return -1;
 						}else{
 							return 1;
 						}
 					}
 				}else{
-					if(equipA.qItem.q_default==equipB.qItem.q_default){
+					if(equipA.qItem.q_levelnum==equipB.qItem.q_levelnum){
 						return 0;
 					}
-					if(equipA.qItem.q_default<equipB.qItem.q_default){
+					if(equipA.qItem.q_levelnum<equipB.qItem.q_levelnum){
 						return -1;
 					}else{
 						return 1;
 					}
-				}
-			}else{
-				if(equipA.qItem.q_levelnum==equipB.qItem.q_levelnum){
-					return 0;
-				}
-				if(equipA.qItem.q_levelnum<equipB.qItem.q_levelnum){
-					return -1;
-				}else{
-					return 1;
 				}
 			}
 			return 0;
@@ -1144,6 +1163,7 @@ package com.rpgGame.appModule.equip
 		
 		private function isUse(info:ClientItemInfo):Boolean
 		{
+			if(info.qItem.q_type==GoodsType.STRENGTH) return true;
 			var equip:EquipInfo=info as EquipInfo;
 			if(equip.qItem.q_polish_num!=0&&RoleEquipmentManager.equipIsWearing(equip)==false){//消耗获得的值不为0
 				return true;
@@ -1163,7 +1183,7 @@ package com.rpgGame.appModule.equip
 			var result:Vector.<ClientItemInfo>=new Vector.<ClientItemInfo>();
 			for(var i:int=0;i<num;i++){
 				var info:ClientItemInfo=datas[i];
-				if(isPolish(info as EquipInfo)){
+				if(info is EquipInfo&&isPolish(info as EquipInfo)){
 					if(targetEquipInfo&&info.itemInfo.itemId.ToGID()==targetEquipInfo.itemInfo.itemId.ToGID()){
 						targetEquipInfo=info as EquipInfo;//更新掉
 						_targetEquip.gridInfo.data=targetEquipInfo;

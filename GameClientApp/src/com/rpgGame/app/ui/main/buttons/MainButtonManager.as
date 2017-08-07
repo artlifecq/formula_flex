@@ -13,6 +13,7 @@ package com.rpgGame.app.ui.main.buttons
 	
 	import org.client.mainCore.ds.HashMap;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonDianfengduijue;
+	import org.mokylin.skin.mainui.activityBar.button.ButtonFangChenMiSkin;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonFubendating;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonFubenduilie;
 	import org.mokylin.skin.mainui.activityBar.button.ButtonHongbao;
@@ -30,6 +31,7 @@ package com.rpgGame.app.ui.main.buttons
 	import org.mokylin.skin.mainui.activityBar.button.ButtonZhanchangdating;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_bangpai;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_jinjie;
+	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_meiren;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_renwu;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_shangcheng;
 	import org.mokylin.skin.mainui.navigation.button.ButtonSkin_shejiao;
@@ -64,7 +66,8 @@ package com.rpgGame.app.ui.main.buttons
 			regClass(103,ActivityButton,ButtonFubendating);
 			regClass(104,ActivityButton,ButtonZhanchangdating);
 			regClass(105,ActivityRedRewardButton,ButtonHongbao);
-			regClass(108,MainButton_MeiRen,ButtonMeiren);
+			regClass(9,MainButton_MeiRen,ButtonSkin_meiren);
+			regClass(120,ActivityButton,ButtonFangChenMiSkin);
 			regClass(300,MultyActivityButton,ButtonFubenduilie);
 			regClass(301,LimitTimeActivityButton,ButtonShijieboss);
 			regClass(302,LimitTimeActivityButton,ButtonDianfengduijue);

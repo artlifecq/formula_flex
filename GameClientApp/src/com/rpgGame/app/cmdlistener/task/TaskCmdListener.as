@@ -1,19 +1,28 @@
 package com.rpgGame.app.cmdlistener.task
 {
 	import com.rpgGame.app.manager.collect.CollectManager;
+	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
+	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.SkillEvent;
 	import com.rpgGame.core.events.TaskEvent;
+	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_mission_base;
+	import com.rpgGame.coreData.clientConfig.Q_monster;
+	import com.rpgGame.coreData.clientConfig.Q_npc;
+	import com.rpgGame.coreData.role.MonsterData;
+	import com.rpgGame.coreData.role.SceneCollectData;
 	import com.rpgGame.netData.npc.message.ResStartGatherMessage;
 	import com.rpgGame.netData.npc.message.ResStopGatherMessage;
+	import com.rpgGame.netData.task.message.CSDropTaskMessage;
 	import com.rpgGame.netData.task.message.ResTaskAcceptedMessage;
 	import com.rpgGame.netData.task.message.ResTaskChangeMessage;
 	import com.rpgGame.netData.task.message.ResTaskInformationMessage;
 	import com.rpgGame.netData.task.message.ResTaskSubmitedMessage;
+	import com.rpgGame.netData.task.message.SCDropTaskMessage;
 	import com.rpgGame.netData.task.message.SCNoMainTaskMessage;
 	
 	import org.client.mainCore.bean.BaseBean;
@@ -39,7 +48,7 @@ package com.rpgGame.app.cmdlistener.task
 			SocketConnection.addCmdListener(124103,onResTaskChangeMessage);//任务进度改变
 			SocketConnection.addCmdListener(124104,onResTaskSubmitedMessage);//任务完成
 			SocketConnection.addCmdListener(124108,onSCNoMainTaskMessage);//卡级任务消息
-			
+			SocketConnection.addCmdListener(124209,onSCDropTaskMessage);//放弃任务消息
 			
 			SocketConnection.addCmdListener(104102,onResStartGatherMessage);//采集开始
 			SocketConnection.addCmdListener(104103,onResStopGatherMessage);//采集打断
@@ -97,13 +106,15 @@ package com.rpgGame.app.cmdlistener.task
 		/**任务完成消息	*/
 		private function onResTaskSubmitedMessage(msg:ResTaskSubmitedMessage):void
 		{
-			
 			if(msg!=null)
 			{
 				var type:int=TaskMissionManager.getTaskInfoType(msg.taskId);
-				TaskMissionManager.removeTaskInfo(type);
-				EventManager.dispatchEvent(TaskEvent.TASK_FINISH_MATION,type);
-				AppManager.hideApp(AppConstant.TASK_FLY_PANEL);
+				if(type!=0)
+				{
+					EventManager.dispatchEvent(TaskEvent.TASK_FINISH_MATION,type);
+					AppManager.hideApp(AppConstant.TASK_FLY_PANEL);
+					TaskMissionManager.removeTaskInfo(type);
+				}
 			}
 		}
 		/**任务卡级消息	*/
@@ -116,6 +127,18 @@ package com.rpgGame.app.cmdlistener.task
 				EventManager.dispatchEvent(TaskEvent.TASK_NO_MAIN);
 			}
 		}
+		/**放弃任务消息	*/
+		private function onSCDropTaskMessage(msg:SCDropTaskMessage):void
+		{
+			if(msg!=null)
+			{
+				var type:int=TaskMissionManager.getTaskInfoType(msg.taskId);
+				EventManager.dispatchEvent(TaskEvent.TASK_DROP,type);
+				TaskMissionManager.removeTaskInfo(type);
+			}
+		}
+		
+		
 		
 		
 		
@@ -124,7 +147,30 @@ package com.rpgGame.app.cmdlistener.task
 		{
 			if(msg!=null)
 			{
-				EventManager.dispatchEvent(SkillEvent.SING_START,msg.costtime,"采集中",2);
+				//msg.tatget
+				var singStr:String="采集中";
+				var role:SceneRole = SceneManager.getSceneObjByID(msg.tatget.ToGID()) as SceneRole;
+				if (role!=null && role.data!=null) {
+					var collectData : SceneCollectData = role.data as SceneCollectData;
+					if (collectData != null)
+					{
+						var monsterData:Q_monster=MonsterDataManager.getData(collectData.modelID);
+						if(monsterData)
+						{
+							var collect:Q_npc=MonsterDataManager.getCollectData(monsterData.q_npc_function);
+							if(collect&&collect.q_collect_singbar!="")
+							{
+								singStr=collect.q_collect_singbar;
+							}
+						}
+						
+					}
+					
+					
+				}
+				
+				
+				EventManager.dispatchEvent(SkillEvent.SING_START,msg.costtime,singStr,2);
 				CollectManager.show("caiji",msg.costtime,null);
 			}
 		}

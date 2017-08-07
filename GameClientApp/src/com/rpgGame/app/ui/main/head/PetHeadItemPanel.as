@@ -51,7 +51,7 @@ package com.rpgGame.app.ui.main.head
 					_itemList.push(item);
 				}
 				item.setData(list[i]);
-				item.x=i%4*(item.width+4)+4;
+				item.x=i%4*(item.width+15)+15;
 				item.y=((int)(i/4))*item.height+4;	
 			}
 			this._skin.imgBG.width = item.x+item.width+4;

@@ -2,9 +2,11 @@ package com.rpgGame.app.ui.main.head
 {
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.Mgr;
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.sender.LookSender;
 	import com.rpgGame.app.sender.PetSender;
 	import com.rpgGame.app.utils.MenuUtil;
+	import com.rpgGame.core.events.PetEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.SkinUI;
@@ -14,6 +16,9 @@ package com.rpgGame.app.ui.main.head
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.netData.pet.bean.PetInfo;
 	
+	import feathers.utils.filter.GrayFilter;
+	
+	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.meiren.MeiRen_Head;
 	
 	import starling.display.DisplayObject;
@@ -44,6 +49,7 @@ package com.rpgGame.app.ui.main.head
 		{
 			super.onShow();
 			this.addEventListener(starling.events.TouchEvent.TOUCH, onTouchItem);
+			EventManager.addEvent(PetEvent.PET_ACTIVE,updateJIhuo);
 		}
 		
 		override protected function onHide():void
@@ -71,14 +77,28 @@ package com.rpgGame.app.ui.main.head
 				case this._skin.icon:
 				case this._skin.uiName:
 				case this._skin.uiSelect:
-					PetSender.reqPetDebut(_info.modelId);
+					if(_info.actived==1)
+						PetSender.reqPetDebut(_info.modelId);
+					else
+						NoticeManager.showNotifyById(201405);
 					break;
+			}
+		}
+		
+		public function updateJIhuo(id:int):void
+		{
+			if(_info.modelId==id)
+			{
+				_info=Mgr.petMgr.getPet(_info.modelId);
+				if(_info.actived != 1) GrayFilter.gray(this);
+				else this.filter=null;
 			}
 		}
 		
 		public function setData(info:PetInfo):void
 		{
 			_info=info;
+			updateJIhuo(_info.modelId);
 			_skin.icon.styleName = "ui/mainui/meirenHead/head_icon/head"+_info.modelId+"s.png";
 			_skin.uiName.styleName =  "ui/mainui/meirenHead/head_icon/name"+_info.modelId+"s.png";
 			TipTargetManager.show(this, TargetTipsMaker.makeTips( TipType.MEIREN_TIP, _info ,true) );

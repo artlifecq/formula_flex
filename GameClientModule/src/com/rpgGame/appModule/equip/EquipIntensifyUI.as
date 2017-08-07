@@ -899,7 +899,7 @@ package com.rpgGame.appModule.equip
 			if(isLockRefresh){
 				return;
 			}
-			if((info.containerID==ItemContainerID.Role||info.containerID==ItemContainerID.BackPack)&&(info.type==GoodsType.EQUIPMENT||info.type==GoodsType.EQUIPMENT1||info.type==GoodsType.EQUIPMENT2)){
+			if((info.containerID==ItemContainerID.Role||info.containerID==ItemContainerID.BackPack)&&(info.qItem.q_type==GoodsType.STRENGTH||info.type==GoodsType.EQUIPMENT||info.type==GoodsType.EQUIPMENT1||info.type==GoodsType.EQUIPMENT2)){
 				ItemManager.getBackEquip(initItem);
 			}
 		}
@@ -1024,27 +1024,18 @@ package com.rpgGame.appModule.equip
 		
 		private function initItem():void
 		{
-			var allEquips:Array=ItemManager.getAllEquipDatas();
-			var num:int=allEquips.length;
+			var allitems:Array=ItemManager.getusecailiao();
+			var num:int=allitems.length;
 			
-			targetEquips=getUpEquips(allEquips);
+			targetEquips=getUpEquips(allitems);
 			targetEquips.sort(onSortStrenEquip);
 			num=targetEquips.length;
 			num=num>MIN_GRID?num:MIN_GRID;
 			_goodsContainerTarget.setGridsCount(num,false);
 			onTab(null);
 			
-			var cailiaos:Array=ItemManager.getusecailiao();		
-			useEquips=getUseEquips(allEquips);
+			useEquips=getUseEquips(allitems);
 			useEquips.sort(sortForUse);
-//			if(cailiaos!=null&&cailiaos.length>0)
-//			{
-//				for(var i:int = cailiaos.length-1;i>=0;i--)
-//				{
-//					var info:ClientItemInfo=cailiaos[i] as ClientItemInfo;
-//					useEquips.unshift(info);
-//				}
-//			}
 			num=useEquips.length;
 			num=num>MIN_GRID?num:MIN_GRID;
 			_goodsContainerUse.setGridsCount(num,false);
@@ -1056,55 +1047,73 @@ package com.rpgGame.appModule.equip
 			updateAll();
 		}
 		
-		private function sortForUse(equipA:EquipInfo, equipB:EquipInfo):int
+		private function sortForUse(itemA:ClientItemInfo, itemB:ClientItemInfo):int
 		{
-			if(equipA.qItem.q_levelnum==equipB.qItem.q_levelnum){//阶数相同
-				if(equipA.qItem.q_default==equipB.qItem.q_default){//品质相同
-					if(equipA.strengthLevel==equipB.strengthLevel){//强化等级相同
-						if(isleftKind(equipA.qItem.q_kind,equipB.qItem.q_kind)){//根据部件排序
-							return -1;
-						}else{
-							if(equipA.qItem.q_kind==equipB.qItem.q_kind){
-								return 0;
+			if(itemA.qItem.q_type==GoodsType.STRENGTH&&itemB.qItem.q_type==GoodsType.STRENGTH)
+			{
+				if(itemA.qItem.q_default<itemB.qItem.q_default) return -1;
+				else if(itemA.qItem.q_default>itemB.qItem.q_default) return 1;
+				else return 0;
+			}	
+			else if(itemA.qItem.q_type==GoodsType.STRENGTH&&itemB.qItem.q_type!=GoodsType.STRENGTH)
+			{
+				return -1;
+			}
+			else if(itemA.qItem.q_type!=GoodsType.STRENGTH&&itemB.qItem.q_type==GoodsType.STRENGTH)
+			{
+				return 1;
+			}
+			else{
+				var equipA:EquipInfo=itemA as EquipInfo;
+				var equipB:EquipInfo=itemB as EquipInfo;
+				if(equipA.qItem.q_levelnum==equipB.qItem.q_levelnum){//阶数相同
+					if(equipA.qItem.q_default==equipB.qItem.q_default){//品质相同
+						if(equipA.strengthLevel==equipB.strengthLevel){//强化等级相同
+							if(isleftKind(equipA.qItem.q_kind,equipB.qItem.q_kind)){//根据部件排序
+								return -1;
 							}else{
-								return 1;
+								if(equipA.qItem.q_kind==equipB.qItem.q_kind){
+									return 0;
+								}else{
+									return 1;
+								}
 							}
-						}
-					}else{
-						if(equipA.strengthLevel==equipB.strengthLevel){
-							if(equipA.strengthExp==equipA.strengthExp){
-								return 0
+						}else{
+							if(equipA.strengthLevel==equipB.strengthLevel){
+								if(equipA.strengthExp==equipA.strengthExp){
+									return 0
+								}
+								if(equipA.strengthExp<equipA.strengthExp){
+									return -1;
+								}else{
+									return 1;
+								}
 							}
-							if(equipA.strengthExp<equipA.strengthExp){
+							if(equipA.strengthLevel<equipB.strengthLevel){
 								return -1;
 							}else{
 								return 1;
 							}
 						}
-						if(equipA.strengthLevel<equipB.strengthLevel){
+					}else{
+						if(equipA.qItem.q_default==equipB.qItem.q_default){
+							return 0;
+						}
+						if(equipA.qItem.q_default<equipB.qItem.q_default){
 							return -1;
 						}else{
 							return 1;
 						}
 					}
 				}else{
-					if(equipA.qItem.q_default==equipB.qItem.q_default){
+					if(equipA.qItem.q_levelnum==equipB.qItem.q_levelnum){
 						return 0;
 					}
-					if(equipA.qItem.q_default<equipB.qItem.q_default){
+					if(equipA.qItem.q_levelnum<equipB.qItem.q_levelnum){
 						return -1;
 					}else{
 						return 1;
 					}
-				}
-			}else{
-				if(equipA.qItem.q_levelnum==equipB.qItem.q_levelnum){
-					return 0;
-				}
-				if(equipA.qItem.q_levelnum<equipB.qItem.q_levelnum){
-					return -1;
-				}else{
-					return 1;
 				}
 			}
 			return 0;
@@ -1231,7 +1240,7 @@ package com.rpgGame.appModule.equip
 			var result:Vector.<ClientItemInfo>=new Vector.<ClientItemInfo>();
 			for(var i:int=0;i<num;i++){
 				var info:ClientItemInfo=datas[i];
-				if(isStren(info as EquipInfo)){//可强化的并且不是在强化列表列
+				if(info is EquipInfo&&isStren(info as EquipInfo)){//可强化的并且不是在强化列表列
 					if(targetEquipInfo!=null&&info.itemInfo.itemId.ToGID()==targetEquipInfo.itemInfo.itemId.ToGID()){
 						if(targetEquipInfo.strengthLevel!=(info as EquipInfo).strengthLevel)
 						{
@@ -1283,6 +1292,7 @@ package com.rpgGame.appModule.equip
 		
 		private function isUse(info:ClientItemInfo):Boolean
 		{
+			if(info.qItem.q_type==GoodsType.STRENGTH) return true;
 			var equip:EquipInfo=info as EquipInfo;
 			if(equip.qItem.q_strengthen_num!=0&&RoleEquipmentManager.equipIsWearing(equip)==false){//消耗获得的值不为0
 				return true;

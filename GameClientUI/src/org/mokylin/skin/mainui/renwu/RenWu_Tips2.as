@@ -111,7 +111,7 @@ package org.mokylin.skin.mainui.renwu
 			ioc_1_0 = temp;
 			temp.name = "ioc_1_0";
 			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 14;
+			temp.x = 18;
 			temp.y = 73;
 			return temp;
 		}

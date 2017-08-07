@@ -16,6 +16,9 @@
     import com.rpgGame.coreData.clientConfig.Q_newfunc;
     import com.rpgGame.coreData.enum.EmFunctionID;
     
+    import flash.net.URLRequest;
+    import flash.net.navigateToURL;
+    
     import org.client.mainCore.ds.HashMap;
     import org.client.mainCore.manager.EventManager;
 
@@ -239,7 +242,11 @@
 					else{
 						AppManager.showApp(AppConstant.HUNYIN_JIEHUN);
 					}
-				}
+				}		
+			}
+			else if(info.clickType ==4) //超链接
+			{
+				navigateToURL(new URLRequest(info.clickarg),"_blank");
 			}
 		}
     }

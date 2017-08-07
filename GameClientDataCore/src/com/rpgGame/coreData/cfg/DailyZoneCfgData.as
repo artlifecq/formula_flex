@@ -59,5 +59,19 @@ package com.rpgGame.coreData.cfg
 		{
 			return _typeList[type];
 		}
+		
+		public static function getZoneCfgbyType(type:int,limitlevel:int):Q_daily_zone
+		{
+			var list:Array=getTypeList(type);
+			for(var i:int=0;i<list.length;i++)
+			{
+				var q_mod:Q_daily_zone=list[i] as Q_daily_zone;
+				if(q_mod.q_limit_level==limitlevel)
+				{
+					return q_mod;
+				}
+			}
+			return null;
+		}
 	}
 }

@@ -347,6 +347,7 @@ package com.rpgGame.appModule.equip
 			}
 			
 			for each(var item:ClientItemInfo in useItems){
+				_goodsContainerUse.setGrayForData(item,false);
 				_goodsContainerUse.setGrayIsSelect(item,false);
 			}
 			
@@ -492,9 +493,11 @@ package com.rpgGame.appModule.equip
 			var targetGrid:DragDropItem;
 			for each(var item:ClientItemInfo in useItems){
 				if(item.cfgId==useItemInfo.cfgId){
-					_goodsContainerUse.setGrayIsSelect(item,false);
-				}else{
+					_goodsContainerUse.setGrayForData(item,false);
 					_goodsContainerUse.setGrayIsSelect(item,true);
+				}else{
+					_goodsContainerUse.setGrayForData(item,true);
+					_goodsContainerUse.setGrayIsSelect(item,false);
 				}
 			}
 		}

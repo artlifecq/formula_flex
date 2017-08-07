@@ -1,7 +1,9 @@
 package com.rpgGame.coreData.cfg.monster
 {
 	import com.game.engine3D.utils.TemplateUtil;
+	import com.rpgGame.coreData.clientConfig.Q_convoy;
 	import com.rpgGame.coreData.clientConfig.Q_monster;
+	import com.rpgGame.coreData.clientConfig.Q_npc;
 	import com.rpgGame.coreData.clientConfig.Q_scene_monster_area;
 	import com.rpgGame.coreData.role.MonsterBornData;
 	
@@ -33,6 +35,8 @@ package com.rpgGame.coreData.cfg.monster
 		private static var SCENE_ID_UNIQ_DIC : Dictionary;
 
 		private static var _monsterArea : Dictionary=new Dictionary();
+		private static var _collectDic : Dictionary=new Dictionary();
+		
 		public static function setMonsterConfig(data : ByteArray) : void
 		{
 			var arr : Array = data.readObject();
@@ -73,6 +77,26 @@ package com.rpgGame.coreData.cfg.monster
 				trace("没有怪物刷新相关信息！！！");
 			}
 			SCENE_ID_UNIQ_DIC = TemplateUtil.createUniqIndexFromArr(arr, SCENE_ID_UNIQ_INDEX);
+		}
+		
+		
+		
+		public static function setCollectConfig(data : ByteArray):void
+		{
+			var arr : Array = data.readObject();
+			if (arr) 
+			{
+				for each(var info : Q_npc in arr)
+				{
+					_collectDic[info.q_id] = info;
+				}
+			}
+			
+		}
+		
+		public static function getCollectData(id:int):Q_npc
+		{
+			return _collectDic[id];
 		}
 
 		private static function parseMonster(monsterData : Q_scene_monster_area) : void

@@ -1,15 +1,23 @@
 package com.rpgGame.app.ui.scene.dungeon
 {
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.pop.UIPopManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.sender.DungeonSender;
+	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.utils.TimeUtil;
+	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.events.DungeonEvent;
 	import com.rpgGame.coreData.cfg.DailyZoneCfgData;
 	import com.rpgGame.coreData.cfg.DailyZoneMonsterCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_daily_zone;
 	import com.rpgGame.coreData.clientConfig.Q_dailyzone_monster;
+	import com.rpgGame.coreData.enum.JobEnum;
+	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
+	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
 	
 	import flash.utils.Dictionary;
 	
@@ -30,16 +38,52 @@ package com.rpgGame.app.ui.scene.dungeon
 		private var _waveInfo:Dictionary;
 		private var _endTime:int;
 		private var _disTime:Number;
+		private var _ico:IconCDFace;
 		public function ExpTracjerBar():void
 		{
 			_skin = new JingYan_Skin();
 			super(_skin);
+			_ico=new IconCDFace(IcoSizeEnum.ICON_42);
+			_ico.selectImgVisible=false;
+			_ico.bindBg(_skin.sec_ico1_0);
+			_skin.container.addChild(_ico);
 			/*updatedailyZoneInfo(11);
 			updatedailyZoneTime(SystemTimeManager.curtTm/1000+1800);*/
 		}
 		
-		override protected function onShow() : void
+		private function initView():void
 		{
+			var arr:Array=JSONUtil.decode(_data.q_rewards_show);
+			var exp:int=0;
+			
+			if(arr)
+			{
+				arr=arr[getJob()];
+				for(var i:int=0;i<arr.length;i++)
+				{
+					if(arr[i].mod==1)
+						exp+=arr[i].num;
+				}
+			}
+			var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(1,exp);
+			FaceUtil.SetItemGrid(_ico,itemInfo);
+		}
+		
+		private function getJob():int
+		{
+			var job:int=MainRoleManager.actorInfo.job;
+			switch(job)
+			{
+				case JobEnum.ROLE_1_TYPE: return 0;
+				case JobEnum.ROLE_2_TYPE:
+				case JobEnum.ROLE_3_TYPE: return 1;
+				case JobEnum.ROLE_4_TYPE: return 2;
+			}
+			return 0;
+		}
+		
+		override protected function onShow() : void
+		{			
 			EventManager.addEvent(DungeonEvent.UPDATE_DAILYZONE_INFO,updatedailyZoneInfo);
 			EventManager.addEvent(DungeonEvent.UPDATE_DAILYZONE_TIME,updatedailyZoneTime);
 			EventManager.addEvent(DungeonEvent.UPDATA_WAVE_INFO,updateWaveInfoHandler);
@@ -84,6 +128,7 @@ package com.rpgGame.app.ui.scene.dungeon
 		{
 			_dailyZoneId = dailyZoneId;
 			_data = DailyZoneCfgData.getZoneCfg(dailyZoneId);
+			initView();
 			var allLength:Array = DailyZoneMonsterCfgData.getTypeList(_data.q_zone_id,_data.q_id);
 			
 			for each(var md:Q_dailyzone_monster in allLength)

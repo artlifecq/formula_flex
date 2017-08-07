@@ -137,21 +137,22 @@ package com.rpgGame.app.manager.goods
 			return allDatas;
 		}
 		
-		/**获取装备强化和琢磨材料*/
+		/**获取装备强化和琢磨材料(强化和琢磨用包含特殊材料的获取方式)*/
 		public static function getusecailiao():Array
 		{
-			var cailiadate:Array=[];
+			var roleDatas:Array=RoleEquipmentManager.instance.getAllItem();
+			BackPackManager.instance.setCheckType(null);
 			var backDatas:Array=BackPackManager.instance.getAllItem();
+			var allDatas:Array=roleDatas.concat(backDatas);
 			var i:int=0
-			while(i<backDatas.length){
-				var item:ClientItemInfo=backDatas[i] as ClientItemInfo;
-				if(item!=null&&item.qItem.q_type==GoodsType.STRENGTH){
-					cailiadate.push(item);
+			while(i<allDatas.length){
+				if(!allDatas[i]||(!(allDatas[i] is EquipInfo)&&(allDatas[i] as ClientItemInfo).qItem.q_type!=GoodsType.STRENGTH)){
+					allDatas.splice(i,1);
+					continue;
 				}
 				i++;
 			}
-			if(cailiadate.length>0) cailiadate.sort(sortForUseCaiLiao);
-			return cailiadate;
+			return allDatas;
 		}
 		
 		private static function sortForUseCaiLiao(cailiaoA:ClientItemInfo, cailiaoB:ClientItemInfo):int
