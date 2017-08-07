@@ -47,7 +47,6 @@ package com.rpgGame.appModule.equip.combo
 		{
 			_skin=new HeChengMenuItemSkin();
 			_skin.toSprite(this);
-			
 			var detailskin:Cont_Item=_skin.detail_item.skin as Cont_Item;
 			detailskin.selectedBtn.defaultIcon=null;
 			var btnSkin:SelectBtn=new SelectBtn();

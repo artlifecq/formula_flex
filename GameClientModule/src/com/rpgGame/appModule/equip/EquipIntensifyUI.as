@@ -91,7 +91,7 @@ package com.rpgGame.appModule.equip
 		
 		private var _goodsContainerTarget:GoodsContainerPanel;
 		private var _goodsContainerUse:GoodsContainerPanel;
-//		private var _goodsContainerUse1:GoodsContainerPanel;
+		//		private var _goodsContainerUse1:GoodsContainerPanel;
 		private var _useEquipGrids:Vector.<DragDropItem>;
 		private var _targetEquip:DragDropItem;//强化道具
 		private var selectedUse:Vector.<ClientItemInfo>;
@@ -215,7 +215,6 @@ package com.rpgGame.appModule.equip
 			_skin.cmb_pinzhi.alpha=0;
 			
 			alertOk=new AlertSetInfo(LangAlertInfo.EQUIP_USE_TIPS);
-			alertOk.alertInfo.alertType=AlertTypeEnum.ALERT_TYPE_OK;
 			alertOk.isShowCBox=true;
 		}
 		
@@ -319,7 +318,7 @@ package com.rpgGame.appModule.equip
 		private function onTouchGrid( grid:DragDropItem ):void
 		{
 			var gridInfo:GridInfo=grid.gridInfo;
-			if(gridInfo.data==null||grid.isGary){
+			if(gridInfo.data==null||grid.isSelect){
 				return;
 			}
 			if(gridInfo.containerID==ItemContainerID.INTENSIFY_LIST){
@@ -343,7 +342,8 @@ package com.rpgGame.appModule.equip
 			refreshUseEquipGrid();
 			//			_goodsContainerUse1.refleshGridsByDatas(selectedUse);
 			_goodsContainerUse.setGrayIsSelect(itemInfo,false);
-			if(isStren(itemInfo as EquipInfo)){
+			
+			if(itemInfo.qItem.q_type==GoodsType.STRENGTH||isStren(itemInfo as EquipInfo)){
 				_goodsContainerTarget.setGrayIsSelect(itemInfo,false);
 			}
 			addExp-=itemInfo.qItem.q_strengthen_num;
@@ -387,7 +387,7 @@ package com.rpgGame.appModule.equip
 			
 			var itemInfo:ClientItemInfo=gridInfo.data as ClientItemInfo;
 			var equip:EquipInfo=itemInfo as EquipInfo;
-			if(isDuanZao(equip)&&!noAlertUse){
+			if(equip!=null&&isDuanZao(equip)&&!noAlertUse){
 				GameAlert.showAlert(alertOk,onAlert,[itemInfo]);
 			}else{
 				setUseItem(itemInfo);
@@ -410,7 +410,7 @@ package com.rpgGame.appModule.equip
 		{
 			_goodsContainerUse.setGrayIsSelect(itemInfo,true);
 			
-			if(isStren(itemInfo as EquipInfo)){
+			if(itemInfo.qItem.q_type==GoodsType.STRENGTH||isStren(itemInfo as EquipInfo)){
 				_goodsContainerTarget.setGrayIsSelect(itemInfo,true);
 			}
 			
@@ -718,17 +718,24 @@ package com.rpgGame.appModule.equip
 			
 			var attValues2:Q_att_values;
 			var maps2:HashMap;
+			var types2:Array;
 			var values2:Array;
 			attValues2=AttValueConfig.getAttInfoById(nowCfg.q_att_type);
 			maps2=AttValueConfig.getTypeValueMap(attValues2);
+			types2=maps2.keys();
 			values2=maps2.values();
 			
-			for(var i:int=0;i<4;i++){
+			for(var i:int=0;i<types2.length;i++){
 				var type:int=types[i];
-				var num:int=(AttValueConfig.getDisAttValue(types[i],values2[i])-AttValueConfig.getDisAttValue(types[i],values1[i]));		
+				if(currenCfg)
+				{
+					var num:int=(AttValueConfig.getDisAttValue(types[i],values2[i])-AttValueConfig.getDisAttValue(types[i],values1[i]));		
+				}else{
+					num=AttValueConfig.getDisAttValue(types[i],values2[i]);
+				}
 				hash.put(type,num);
 			}
-//			attChangeEft.addChangeHandler(hash);
+			attChangeEft.addChangeHandler(hash);
 		}
 		
 		private function getOneKeyUse():void
@@ -749,6 +756,8 @@ package com.rpgGame.appModule.equip
 			for each(var info:GridInfo in datas){
 				if(info.data){
 					item=info.data as ClientItemInfo;
+					if(item.qItem.q_type==GoodsType.STRENGTH)
+						continue;
 					if(isDuanZao(item as EquipInfo)){//具有锻造属性
 						continue;
 					}
@@ -899,6 +908,7 @@ package com.rpgGame.appModule.equip
 		{
 			if(msg.opaque==EquipOperateType.STRENGTH_ONEKEY&&msg.result==1){
 				var alertOk:AlertSetInfo=new AlertSetInfo(LangUI.UI_TEXT3);//强化成功
+				alertOk.alertInfo.alertType=AlertTypeEnum.ALERT_TYPE_OK;
 				alertOk.alertInfo.value=alertOk.alertInfo.value.replace("$",addExp);
 				alertOk.alertInfo.value=alertOk.alertInfo.value.replace("$",useListIds.length);
 				alertOk.alertInfo.value=alertOk.alertInfo.value.replace("$",addExp*perMon);
@@ -1024,10 +1034,17 @@ package com.rpgGame.appModule.equip
 			_goodsContainerTarget.setGridsCount(num,false);
 			onTab(null);
 			
-			
-			
+			var cailiaos:Array=ItemManager.getusecailiao();		
 			useEquips=getUseEquips(allEquips);
 			useEquips.sort(sortForUse);
+//			if(cailiaos!=null&&cailiaos.length>0)
+//			{
+//				for(var i:int = cailiaos.length-1;i>=0;i--)
+//				{
+//					var info:ClientItemInfo=cailiaos[i] as ClientItemInfo;
+//					useEquips.unshift(info);
+//				}
+//			}
 			num=useEquips.length;
 			num=num>MIN_GRID?num:MIN_GRID;
 			_goodsContainerUse.setGridsCount(num,false);
@@ -1092,6 +1109,7 @@ package com.rpgGame.appModule.equip
 			}
 			return 0;
 		}
+		
 		
 		/**
 		 *排序提升装备 

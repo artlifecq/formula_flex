@@ -328,8 +328,6 @@ package com.rpgGame.app.manager.goods
 					return;
 				case GoodsType.NAMES:
 					return;
-				case GoodsType.STRENGTH:
-					return;
 				case GoodsType.MOUNT:
 					return;
 				case GoodsType.MERIDIANSTONE:

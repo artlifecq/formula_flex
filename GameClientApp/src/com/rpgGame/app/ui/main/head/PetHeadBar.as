@@ -37,17 +37,8 @@ package com.rpgGame.app.ui.main.head
 			}
 		}
 		
-		override protected function onShow():void
-		{
-			//			EventManager.addEvent(PetEvent.PET_CHANGE,updatePetChange);
-			//			super.onShow();
-			//			toTweenMax();
-			//			updateShow();
-		}
-		
 		public function show():void
 		{
-			_skin.bg.styleName = "ui/app/meiren/kuang.png";
 			EventManager.addEvent(PetEvent.PET_CHANGE,updatePetChange);
 			toTweenMax();
 			updateShow();
@@ -91,7 +82,7 @@ package com.rpgGame.app.ui.main.head
 		}
 		
 		public function resize(w : int, h : int) : void {
-			this.x = 0;
+			this.x = 270;
 			this.y = 148;
 		}
 		
@@ -103,7 +94,7 @@ package com.rpgGame.app.ui.main.head
 			}
 			this.x=380;
 			this.alpha=0;
-			tween = TweenLite.to(this, 0.5, {x:0,alpha:1, ease:Bounce.easeOut,onComplete:onTween});
+			tween = TweenLite.to(this, 0.5, {x:270,alpha:1, ease:Bounce.easeOut,onComplete:onTween});
 		}
 		
 		private function onTween():void
@@ -122,8 +113,8 @@ package com.rpgGame.app.ui.main.head
 		{
 			if(Mgr.petMgr.curPetId==0) return;
 			_petMod=PetCfg.getPet(Mgr.petMgr.curPetId);
-			_skin.uiName.styleName = "ui/app/meiren/head_icon/name"+Mgr.petMgr.curPetId+".png";
-			_skin.icon.styleName = "ui/app/meiren/head_icon/head"+Mgr.petMgr.curPetId+".png";	
+			_skin.uiName.styleName = "ui/mainui/meirenHead/head_icon/name"+Mgr.petMgr.curPetId+"s.png";
+			_skin.icon.styleName = "ui/mainui/meirenHead/head_icon/head"+Mgr.petMgr.curPetId+"s.png";	
 		}
 	}
 }

@@ -43,9 +43,11 @@ package com.rpgGame.appModule.equip
 	
 	import feathers.controls.Label;
 	import feathers.controls.ScrollBarDisplayMode;
+	import feathers.controls.TextInput;
 	import feathers.controls.UIAsset;
 	import feathers.data.ListCollection;
 	import feathers.data.TreeNode;
+	import feathers.events.FeathersEventType;
 	import feathers.layout.VerticalLayout;
 	import feathers.themes.GuiThemeStyle;
 	import feathers.utils.filter.GrayFilter;
@@ -181,6 +183,8 @@ package com.rpgGame.appModule.equip
 		
 		private function initView():void
 		{
+			_skin.input_txt.restrict = "0-9";
+			_skin.input_txt.maxChars = 3;
 			_cailiao=new Vector.<IconCDFace>();
 			_cailiaoName=new Vector.<Label>();
 			_exisList=new Vector.<UIAsset>();
@@ -228,6 +232,7 @@ package com.rpgGame.appModule.equip
 			userMoney=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
 			
 			var node:TreeNode=_skin.tree.rootNode;
+//			node.expanded=false;
 			if(data){
 				var info:ComboItemInfo=data as ComboItemInfo;
 				if(info.targetId!=0){
@@ -338,7 +343,7 @@ package com.rpgGame.appModule.equip
 		{
 			if(!node.expanded&&node.hasChildren)
 			{
-				node.expanded=true;
+				node.expanded=false;
 			}
 			
 			var len:int= 0;
@@ -429,6 +434,12 @@ package com.rpgGame.appModule.equip
 		{
 			_skin.btn_hecheng.addEventListener(Event.TRIGGERED,btnHeChengHandler);
 			
+			_skin.input_txt.addEventListener(FeathersEventType.FOCUS_IN,forceinHandler);
+			_skin.input_txt.addEventListener(FeathersEventType.FOCUS_OUT,forceoutHandler);
+		
+//			_skin.input_txt.addEventListener(Event.CHANGE,changeHandler);
+//			_skin.input_txt.addEventListener(FeathersEventType.FOCUS_OUT,focusOutHandler);
+			
 			EventManager.addEvent(ItemEvent.ITEM_COMBO_MSG,updateHechengHandler);
 			EventManager.addEvent(ItemEvent.ITEM_HECHENG_SELECT,updateHechengHandler);
 			
@@ -498,6 +509,8 @@ package com.rpgGame.appModule.equip
 			_skin.btn_hecheng.removeEventListener(Event.TRIGGERED,btnHeChengHandler);
 			_skin.tree.removeEventListener(Event.SELECT,onSelected);
 			
+			_skin.input_txt.removeEventListener(FeathersEventType.FOCUS_IN,forceinHandler);
+			_skin.input_txt.removeEventListener(FeathersEventType.FOCUS_OUT,forceoutHandler);
 			EventManager.removeEvent(ItemEvent.ITEM_STRENGTH_MSG,updateHechengHandler);
 			TipTargetManager.remove(_skin.btn_shuoming);
 		}
@@ -540,6 +553,40 @@ package com.rpgGame.appModule.equip
 			return des;
 		}
 		
+		private function forceinHandler(evt:Event):void
+		{
+			_skin.input_txt.text="";
+		}
+		
+		private function forceoutHandler(evt:Event):void
+		{
+			if(_skin.input_txt.text == "")
+			{
+				_skin.input_txt.text = "1";
+			}
+			_hechengNum = int(_skin.input_txt.text);
+			if(_hechengNum==0) _hechengNum=1;
+			else if(_hechengNum>minMaxBar.max)
+				_hechengNum=minMaxBar.max;
+			updateShowNum();
+		}	
+		
+		private function changeHandler(e:Event):void
+		{
+			_hechengNum = int(_skin.input_txt.text);
+			if(_hechengNum==0) _hechengNum=1;
+			else if(_hechengNum>minMaxBar.max)
+				_hechengNum=minMaxBar.max;
+			updateShowNum();
+		}
+		
+		private function focusOutHandler():void
+		{
+			if(_skin.input_txt.text == "")
+			{
+				_skin.input_txt.text ="1";
+			}
+		}
 		
 		/**合成请求*/
 		private function btnHeChengHandler(e:Event):void
