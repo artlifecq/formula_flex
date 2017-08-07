@@ -25,7 +25,7 @@ package com.rpgGame.appModule.guild
 			
 			addNode(RTNodeID.MAIN_SOCAIL,RTNodeID.GUILD_INFO,_tabBar.getTabDataByTabKey(EmFunctionID.EM_BANGHUI_INFO).button,65,GuildManager.instance().hasDailyGift,false,null,true);
 			addNode(RTNodeID.MAIN_SOCAIL,RTNodeID.GUILD_UP,_tabBar.getTabDataByTabKey(EmFunctionID.EM_BANGHUI_UPLEVEL).button,65,GuildManager.instance().hasGuildLevelUp,false,null,true);
-			addNode(RTNodeID.MAIN_SOCAIL,RTNodeID.GUILD_MEM,_tabBar.getTabDataByTabKey(EmFunctionID.EM_BANGHUI_CHENGYUAN).button,65,GuildManager.instance().hasGuildLevelUp,false,null,true);
+			addNode(RTNodeID.MAIN_SOCAIL,RTNodeID.GUILD_MEM,_tabBar.getTabDataByTabKey(EmFunctionID.EM_BANGHUI_CHENGYUAN).button,65,GuildManager.instance().hasApplyList,false,null,true);
 			addNode(RTNodeID.MAIN_SOCAIL,RTNodeID.GUILD_SKILL,_tabBar.getTabDataByTabKey(EmFunctionID.EM_BANGHUI_SPELL).button,65,GuildManager.instance().hasSkill2LevelUp,false,null,true);
 		}
 		

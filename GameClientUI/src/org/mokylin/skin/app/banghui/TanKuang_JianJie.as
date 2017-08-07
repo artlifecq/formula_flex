@@ -185,7 +185,7 @@ package org.mokylin.skin.app.banghui
 			temp.text = "帮派名称七个字";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 119;
+			temp.width = 202;
 			temp.x = 97;
 			temp.y = 43;
 			return temp;

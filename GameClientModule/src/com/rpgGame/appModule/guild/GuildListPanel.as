@@ -19,7 +19,7 @@ package com.rpgGame.appModule.guild
 	{
 		private var _guildInfo:GuildInfoPanel;
 		private var _skin:BangHui_List;
-		private var _currentPage:int = 0;
+		private var _currentPageIndex:int = 0;
 		private var _maxPage:int = 0;
 		public function GuildListPanel():void
 		{
@@ -39,9 +39,9 @@ package com.rpgGame.appModule.guild
 			_skin.ListItem.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			_skin.ListItem.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			var layout:VerticalLayout = new VerticalLayout();
-			layout.gap = 10;
+			layout.gap =0;
 			_skin.ListItem.layout = layout;
-			_skin.ListItem.dataProvider = new ListCollection([0,1,2,3,4,5,6,7,8,9,10]);
+			_skin.ListItem.dataProvider = new ListCollection([0,1,2,3,4,5,6,7,8,9,10,11]);
 		}
 		
 		override protected function onShow():void
@@ -62,10 +62,10 @@ package com.rpgGame.appModule.guild
 			var msg:ResGuildListInfoMessage = GuildManager.instance().currentPageInfo;
 			if(msg==null)
 			{
-				_currentPage = 0;
+				_currentPageIndex = 0;
 				_maxPage = 1;
 			}else{
-				_currentPage = msg.curPage;
+				_currentPageIndex = msg.curPage;
 				_maxPage = msg.totalPage;
 			}
 			_skin.ListItem.dataProvider.updateAll();
@@ -74,9 +74,9 @@ package com.rpgGame.appModule.guild
 		
 		private function refeashPageGroup():void
 		{
-			_skin.lbNum.text = (1+_currentPage).toString()+"/"+_maxPage.toString();
-			_skin.btnPrev.visible = _currentPage >0;
-			_skin.btnNext.visible = _currentPage< _maxPage;
+			_skin.lbNum.text = (1+_currentPageIndex).toString()+"/"+_maxPage.toString();
+			_skin.btnPrev.visible = _currentPageIndex >0;
+			_skin.btnNext.visible = _currentPageIndex< (_maxPage-1);
 		}
 		
 		private function requestPage(page:int):void
@@ -94,10 +94,10 @@ package com.rpgGame.appModule.guild
 			switch(target)
 			{
 				case _skin.btnPrev:
-					requestPage(_currentPage-1);
+					requestPage(_currentPageIndex-1);
 					break;
 				case _skin.btnNext:
-					requestPage(_currentPage+1);
+					requestPage(_currentPageIndex+1);
 					break;
 				case _skin.btnExit:
 					if(GuildManager.instance().canDissolve)

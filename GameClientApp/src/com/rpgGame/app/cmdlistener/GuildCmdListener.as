@@ -8,8 +8,6 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.GuildEvent;
 	import com.rpgGame.coreData.role.HeroData;
-	import com.rpgGame.netData.guild.handler.G2CNotifyGuildActiveHandler;
-	import com.rpgGame.netData.guild.handler.G2CNotifyGuildMemberActiveHandler;
 	import com.rpgGame.netData.guild.message.G2CNotifyGuildActiveMessage;
 	import com.rpgGame.netData.guild.message.G2CNotifyGuildMemberActiveMessage;
 	import com.rpgGame.netData.guild.message.ReplyGuildApplyOperationMessage;
@@ -32,6 +30,7 @@ package com.rpgGame.app.cmdlistener
 	import org.client.mainCore.bean.BaseBean;
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.connection.SocketConnection;
+	import com.rpgGame.netData.prompt.message.G2CNotifyRedDotPromptMessage;
 	
 	public class GuildCmdListener extends BaseBean
 	{
@@ -62,7 +61,14 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(111116, onG2CNotifyGuildActiveHandler);
 			SocketConnection.addCmdListener(111117, onG2CNotifyGuildMemberActiveHandler);
 			
+			SocketConnection.addCmdListener(256100,G2CNotifyRedDotPromptHandler);
 			finish();
+		}
+		
+		private function G2CNotifyRedDotPromptHandler(msg:G2CNotifyRedDotPromptMessage):void
+		{
+			// TODO Auto Generated method stub
+			GuildManager.instance().G2CNotifyRedDotPromptHandler(msg);
 		}
 		
 		private function onG2CNotifyGuildMemberActiveHandler(msg:G2CNotifyGuildMemberActiveMessage):void

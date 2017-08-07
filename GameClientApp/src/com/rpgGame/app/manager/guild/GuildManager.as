@@ -14,6 +14,8 @@ package com.rpgGame.app.manager.guild
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.GuildEvent;
+	import com.rpgGame.core.ui.tip.RTNodeID;
+	import com.rpgGame.core.ui.tip.RewardTipTree;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.GuildCfgData;
@@ -53,6 +55,7 @@ package com.rpgGame.app.manager.guild
 	import com.rpgGame.netData.guild.message.ResGuildInfoMessage;
 	import com.rpgGame.netData.guild.message.ResGuildListInfoMessage;
 	import com.rpgGame.netData.guild.message.ResGuildOperateResultMessage;
+	import com.rpgGame.netData.prompt.message.G2CNotifyRedDotPromptMessage;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.data.long;
@@ -585,6 +588,7 @@ package com.rpgGame.app.manager.guild
 			{
 				return false;
 			}
+			return _hasApply;
 			return false;
 		}
 		public function hasSkill2LevelUp():Boolean
@@ -720,6 +724,7 @@ package com.rpgGame.app.manager.guild
 		
 		public function setGuildApplyListInfo(list:Vector.<GuildApplyInfo>):void
 		{
+			_hasApply=false;
 			EventManager.dispatchEvent(GuildEvent.GET_JOIN_GUILD_LIST,list);
 		}
 		
@@ -1096,6 +1101,23 @@ package com.rpgGame.app.manager.guild
 				return;
 			}
 			TaskControl.killWalkBut(TaskType.MAINTYPE_GUILDDAILYTASK,0,1);
+		}
+		public function hasSomeOneApply():Boolean
+		{
+			return _hasApply;
+		}
+		private var _hasApply:Boolean;
+		public  function G2CNotifyRedDotPromptHandler(msg:G2CNotifyRedDotPromptMessage):void
+		{
+			// TODO Auto Generated method stub
+			for each (var i:int in msg.typeList) 
+			{
+				if (i==1002) 
+				{
+					_hasApply=true;
+					RewardTipTree.ins.setState(RTNodeID.MAIN_SOCAIL,true);
+				}
+			}
 		}
 	}
 }
