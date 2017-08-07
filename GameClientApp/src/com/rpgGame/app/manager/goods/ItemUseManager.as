@@ -318,6 +318,9 @@ package com.rpgGame.app.manager.goods
 					AppManager.showAppNoHide(AppConstant.EQUIP_PANL,info,EmFunctionID.EM_HECHENG);
 					return;
 				}
+				case GoodsType.STRENGTH:
+					AppManager.showAppNoHide(AppConstant.EQUIP_PANL);
+					return;
 				case GoodsType.CHAT:
 					return;
 				case GoodsType.TRANSFER:

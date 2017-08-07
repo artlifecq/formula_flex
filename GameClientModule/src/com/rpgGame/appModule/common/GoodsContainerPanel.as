@@ -100,7 +100,7 @@ package com.rpgGame.appModule.common
 			initList();
 		}
 		
-		public function setGrayForData(data:IBaseFaceInfo,gray:Boolean,isselect:Boolean):void
+		public function setGrayForData(data:IBaseFaceInfo,gray:Boolean):void
 		{
 			var num:int=goodsList.dataProvider.length;
 			for(var i:int=0;i<num;i++){
