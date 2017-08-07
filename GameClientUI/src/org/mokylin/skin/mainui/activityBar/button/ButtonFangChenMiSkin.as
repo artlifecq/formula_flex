@@ -1,4 +1,4 @@
-package org.mokylin.skin.app.meiren.button
+package org.mokylin.skin.mainui.activityBar.button
 {
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
@@ -9,11 +9,17 @@ package org.mokylin.skin.app.meiren.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class ButtonMeirenQiehuan extends feathers.controls.StateSkin
+	public class ButtonFangChenMiSkin extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var __ButtonFangChenMiSkin_UIAsset1:feathers.controls.UIAsset;
+
+		public var __ButtonFangChenMiSkin_UIAsset2:feathers.controls.UIAsset;
+
+		public var __ButtonFangChenMiSkin_UIAsset3:feathers.controls.UIAsset;
+
 		public var iconDisplay:feathers.controls.UIAsset;
 
 		public var labelDisplay:feathers.controls.Label;
@@ -22,38 +28,50 @@ package org.mokylin.skin.app.meiren.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function ButtonMeirenQiehuan()
+		public function ButtonFangChenMiSkin()
 		{
 			super();
 			
-			this.currentState = "down";
-			this.elementsContent = [];
+			this.currentState = "normal";
+			this.elementsContent = [labelDisplay_i(),iconDisplay_i()];
+			__ButtonFangChenMiSkin_UIAsset1_i();
+			__ButtonFangChenMiSkin_UIAsset2_i();
+			__ButtonFangChenMiSkin_UIAsset3_i();
+			
 			
 			states = {
-				init:[
-						{target:"labelDisplay",
-							name:"textAlign",
-							value:"center"
-						}
-						,
-						{target:"labelDisplay",
-							name:"color",
-							value:0xFFFFFF
-						}
-						,
-						{target:"labelDisplay",
-							name:"verticalAlign",
-							value:"middle"
-						}
-					]
 			};
-			skinNames={"down":"ui/mainui/meirenHead/meirenQiehuan/down.png", "hover":"ui/mainui/meirenHead/meirenQiehuan/over.png", "up":"ui/mainui/meirenHead/meirenQiehuan/up.png"};
+			skinNames={"down":"ui/mainui/activityBar/button/fangchengmi/down.png", "hover":"ui/mainui/activityBar/button/fangchengmi/over.png", "up":"ui/mainui/activityBar/button/fangchengmi/up.png"};
 		}
 
 
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
+		private function __ButtonFangChenMiSkin_UIAsset1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			__ButtonFangChenMiSkin_UIAsset1 = temp;
+			temp.styleName = "ui/mainui/activityBar/button/fangchengmi/down.png";
+			return temp;
+		}
+
+		private function __ButtonFangChenMiSkin_UIAsset2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			__ButtonFangChenMiSkin_UIAsset2 = temp;
+			temp.styleName = "ui/mainui/activityBar/button/fangchengmi/over.png";
+			return temp;
+		}
+
+		private function __ButtonFangChenMiSkin_UIAsset3_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			__ButtonFangChenMiSkin_UIAsset3 = temp;
+			temp.styleName = "ui/mainui/activityBar/button/fangchengmi/up.png";
+			return temp;
+		}
+
 		private function iconDisplay_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();

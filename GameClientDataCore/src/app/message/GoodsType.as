@@ -56,7 +56,7 @@ package app.message {
 		 */
 		public static const BUFF:int = 15;
 		/**
-		 *强化
+		 *强化琢磨材料
 		 */
 		public static const STRENGTH:int = 16;
 		/**

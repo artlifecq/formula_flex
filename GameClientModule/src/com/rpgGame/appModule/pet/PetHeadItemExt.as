@@ -24,8 +24,8 @@ package com.rpgGame.appModule.pet
 			this._config=config;
 			_skin.uiZhan.visible=false;
 			_skin.uiSelect.visible=false;
-			_skin.icon.styleName="ui/app/meiren/head_icon/head"+_config.q_id+"s.png";
-			_skin.uiName.styleName="ui/app/meiren/head_icon/name"+_config.q_id+"s.png";
+			_skin.icon.styleName="ui/mainui/meirenHead/head_icon/head"+_config.q_id+"s.png";
+			_skin.uiName.styleName="ui/mainui/meirenHead/head_icon/name"+_config.q_id+"s.png";
 		}
 		public function setServerData(data:PetInfo):void
 		{
@@ -38,8 +38,14 @@ package com.rpgGame.appModule.pet
 			{
 				GrayFilter.gray(_skin.icon);
 			}
+			updateIsChuZhan();
+		}
+		
+		public function updateIsChuZhan():void
+		{
 			_skin.uiZhan.visible=Mgr.petMgr.curPetId==_data.modelId;
 		}
+		
 		public function setSelect(value:Boolean):void
 		{
 			_skin.uiSelect.visible=value;

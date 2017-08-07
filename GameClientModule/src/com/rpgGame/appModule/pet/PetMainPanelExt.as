@@ -114,7 +114,7 @@ package com.rpgGame.appModule.pet
 			_bgIco=new IconCDFace(IcoSizeEnum.ICON_42);
 			_bgIco.x=784;
 			_bgIco.y=460;
-//			_bgIco.bindBg(_skin.icon);
+			//			_bgIco.bindBg(_skin.icon);
 			//
 			this._skin.btnTiaozhan.addEventListener(Event.TRIGGERED,onFightBtnClick);
 			this._skin.btnYuanbao.addEventListener(Event.TRIGGERED,onGoldAdd);
@@ -351,7 +351,7 @@ package com.rpgGame.appModule.pet
 			if (data.actived) 
 			{
 				_skin.uiLevel.visible=true;
-				_skin.uiLevel.styleName="ui/app/meiren/jieshu/"+data.rank+".png";
+				_skin.uiLevel.styleName="ui/mainui/meirenHead/jieshu/"+data.rank+".png";
 			}
 			else
 			{
@@ -395,6 +395,8 @@ package com.rpgGame.appModule.pet
 			}
 			_skin.btnJinjie.visible=data.rank!=qPet.q_max_grade;
 			_skin.uiOK.visible=data.rank==qPet.q_max_grade;
+			if(_skin.uiOK.visible)
+			_skin.uiOK.y=550;
 			if (data.rank==qPet.q_max_grade) 
 			{
 				if (_blessPanel&&this.contains(_blessPanel)) 
@@ -515,9 +517,14 @@ package com.rpgGame.appModule.pet
 		}
 		
 		private function onUpdatePetChuZhanOrXiuzhan():void
-		{
+		{			
 			if(_curSelectItem!=null)
 				updateBtnState(_curSelectItem.data);
+			for(var i:int=0;i<_headItems.length;i++)
+			{
+				var item:PetHeadItemExt=_headItems[i] as PetHeadItemExt;
+				item.updateIsChuZhan();
+			}
 		}
 		
 		private function onBuyNumChange():void

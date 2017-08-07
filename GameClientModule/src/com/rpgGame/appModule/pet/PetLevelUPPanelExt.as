@@ -88,8 +88,8 @@ package com.rpgGame.appModule.pet
 				var obj:Object=JSONUtil.decode(_petAdvConfig.q_need_items);
 				if (obj) 
 				{
-					_needItem=obj.mod;
-					_needItemNum=obj.num;
+					_needItem=obj[0].mod;
+					_needItemNum=obj[0].num;
 				}
 			}
 			_skin.barJindu.maximum=_petAdvConfig.q_blessnum_limit;

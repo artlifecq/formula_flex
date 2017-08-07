@@ -1,4 +1,4 @@
-package org.mokylin.skin.app.meiren.button
+package org.mokylin.skin.app.zhuangbei.hecheng.button
 {
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
@@ -9,7 +9,7 @@ package org.mokylin.skin.app.meiren.button
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class ButtonMeirenQiehuan extends feathers.controls.StateSkin
+	public class ButtonShuye extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
@@ -22,32 +22,21 @@ package org.mokylin.skin.app.meiren.button
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function ButtonMeirenQiehuan()
+		public function ButtonShuye()
 		{
 			super();
 			
-			this.currentState = "down";
+			this.currentState = "upAndSelected";
 			this.elementsContent = [];
 			
 			states = {
-				init:[
-						{target:"labelDisplay",
-							name:"textAlign",
-							value:"center"
-						}
-						,
-						{target:"labelDisplay",
-							name:"color",
-							value:0xFFFFFF
-						}
-						,
-						{target:"labelDisplay",
-							name:"verticalAlign",
-							value:"middle"
-						}
-					]
 			};
-			skinNames={"down":"ui/mainui/meirenHead/meirenQiehuan/down.png", "hover":"ui/mainui/meirenHead/meirenQiehuan/over.png", "up":"ui/mainui/meirenHead/meirenQiehuan/up.png"};
+			skinNames={"down":"ui/app/zhuangbei/hecheng/button/hechengBase/down.png,ui/app/zhuangbei/hecheng/button/shuyehecheng/down.png",
+			"downAndSelected":"ui/app/zhuangbei/hecheng/button/hechengBase/over.png,ui/app/zhuangbei/hecheng/button/shuyehecheng/up.png",
+			"hover":"ui/app/zhuangbei/hecheng/button/hechengBase/over.png,ui/app/zhuangbei/hecheng/button/shuyehecheng/up.png",
+			"hoverAndSelected":"ui/app/zhuangbei/hecheng/button/hechengBase/over.png,ui/app/zhuangbei/hecheng/button/shuyehecheng/up.png",
+			"up":"ui/app/zhuangbei/hecheng/button/hechengBase/up.png,ui/app/zhuangbei/hecheng/button/shuyehecheng/up.png",
+			"upAndSelected":"ui/app/zhuangbei/hecheng/button/hechengBase/over.png,ui/app/zhuangbei/hecheng/button/shuyehecheng/up.png"};
 		}
 
 
@@ -70,11 +59,7 @@ package org.mokylin.skin.app.meiren.button
 			temp.bottom = 0;
 			temp.left = 0;
 			temp.right = 0;
-			temp.text = "";
-			temp.textAlign = "center";
-			temp.color = 0xFFFFFF;
 			temp.top = 0;
-			temp.verticalAlign = "middle";
 			return temp;
 		}
 

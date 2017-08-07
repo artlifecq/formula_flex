@@ -1,10 +1,10 @@
 package org.mokylin.skin.app.zhuangbei.xilian
 {
 	import feathers.controls.text.Fontter;
-	import feathers.controls.Check;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
-	import org.mokylin.skin.component.check.CheckBoxSkin_1;
+	import feathers.controls.ToggleButton;
+	import org.mokylin.skin.component.radio.RadioButtonSkin_1;
 
 	/**
 	 * @private
@@ -16,7 +16,7 @@ package org.mokylin.skin.app.zhuangbei.xilian
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var chk_suoding:feathers.controls.Check;
+		public var chk_suoding:feathers.controls.ToggleButton;
 
 		public var lb_lock:feathers.controls.Label;
 
@@ -46,16 +46,19 @@ package org.mokylin.skin.app.zhuangbei.xilian
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function chk_suoding_i():feathers.controls.Check
+		private function chk_suoding_i():feathers.controls.ToggleButton
 		{
-			var temp:feathers.controls.Check = new feathers.controls.Check();
+			var temp:feathers.controls.ToggleButton = new feathers.controls.ToggleButton();
 			chk_suoding = temp;
 			temp.name = "chk_suoding";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.styleClass = org.mokylin.skin.component.check.CheckBoxSkin_1;
+			temp.labelOffsetX = 0;
+			temp.styleClass = org.mokylin.skin.component.radio.RadioButtonSkin_1;
+			temp.textAlign = "left";
 			temp.color = 0xCFC6AE;
-			temp.x = 224;
-			temp.y = 0;
+			temp.width = 20;
+			temp.x = 226;
+			temp.y = 1;
 			return temp;
 		}
 

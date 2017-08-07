@@ -31,8 +31,8 @@ package com.rpgGame.app.ui.tips
 		public function setTipData(data : *) : void
 		{
 			_info=data as PetInfo;
-			_skin.uiName.styleName = "ui/app/meiren/head_icon/name"+_info.modelId+"s.png";
-			_skin.uiLevel.styleName = "ui/app/meiren/jieshu/"+_info.rank+".png";
+			_skin.uiName.styleName = "ui/mainui/meirenHead/head_icon/name"+_info.modelId+"s.png";
+			_skin.uiLevel.styleName = "ui/mainui/meirenHead/jieshu/"+_info.rank+".png";
 			var qPetAdv:Q_girl_advance=PetAdvanceCfg.getPet(_info.modelId,_info.rank);
 			var attrHash:HashMap=AttValueConfig.getAttrHash(qPetAdv.q_attid_self);
 			if(attrHash!=null&&attrHash.keys()!=null)

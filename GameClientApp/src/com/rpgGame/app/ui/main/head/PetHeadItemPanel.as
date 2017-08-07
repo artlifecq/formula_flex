@@ -14,8 +14,8 @@ package com.rpgGame.app.ui.main.head
 		{
 			_skin=new MeiRen_Select();
 			super(_skin);
-			MCUtil.removeSelf(_skin.btnNext);
-			MCUtil.removeSelf(_skin.btnPrev);
+//			MCUtil.removeSelf(_skin.btnNext);
+//			MCUtil.removeSelf(_skin.btnPrev);
 		}
 		
 		override protected function onShow():void
@@ -51,7 +51,7 @@ package com.rpgGame.app.ui.main.head
 					_itemList.push(item);
 				}
 				item.setData(list[i]);
-				item.x=i%4*(item.width+4)+4;
+				item.x=i%4*(item.width+15)+15;
 				item.y=((int)(i/4))*item.height+4;	
 			}
 			this._skin.imgBG.width = item.x+item.width+4;

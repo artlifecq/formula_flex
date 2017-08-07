@@ -120,7 +120,15 @@ package com.rpgGame.coreData.cfg
 					list.push(info.q_subson_type);
 				}
 			}
+			list.sort(short);
 			return list;
+		}
+		
+		private static function short(n1:int,n2:int):int
+		{
+			if(n1<n2) return -1;
+			else if(n1>n2) return 1;
+			return 0;
 		}
 		
 		/**依据类型获取配置表*/
