@@ -9,6 +9,7 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.netData.guild.message.ResGuildOperateResultMessage;
 	
 	import feathers.controls.renderers.DefaultListItemRenderer;
+	import feathers.utils.filter.GrayFilter;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.data.long;
@@ -143,6 +144,7 @@ package com.rpgGame.appModule.guild
 			_skin.lbNum.text = _guildListinfo.guildMemberNum.toString()+"/"+_levelInfo.q_max_num.toString();
 			_skin.lbZhanli.text = _guildListinfo.allBattle.toString();
 			
+			_skin.btnAdd.filter=null;
 			if(_guildListinfo.guildMemberNum >= _levelInfo.q_max_num)
 			{
 				_skin.lbFull.visible = true;
@@ -156,6 +158,7 @@ package com.rpgGame.appModule.guild
 					_skin.btnAdd.label = "已申请";
 					_skin.btnAdd.isEnabled = false;
 					_skin.btnAdd.touchable = false;
+					GrayFilter.gray(_skin.btnAdd);
 				}else if(_guildListinfo.isAutoJoin==0){
 					_skin.btnAdd.label = "申请加入";
 					_skin.btnAdd.isEnabled = true;

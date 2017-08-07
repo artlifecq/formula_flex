@@ -1,8 +1,6 @@
 package com.rpgGame.appModule.dungeon.equip
 {
 	import com.rpgGame.app.manager.DailyZoneDataManager;
-	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.ui.SkinUIModePanel;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
@@ -12,12 +10,12 @@ package com.rpgGame.appModule.dungeon.equip
 	import com.rpgGame.coreData.clientConfig.Q_global;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ItemUtil;
-	import com.rpgGame.coreData.type.item.GridBGType;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	import com.rpgGame.netData.dailyzone.bean.DailyZonePanelInfo;
 	
 	import feathers.controls.Scroller;
 	import feathers.data.ListCollection;
+	import feathers.events.FeathersEventType;
 	import feathers.layout.HorizontalLayout;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -28,7 +26,6 @@ package com.rpgGame.appModule.dungeon.equip
 	public class EquipDungeon extends ViewUI
 	{
 		private var _skin:FuBen_ZhuangBei_Skin;
-		private var _curentIndex:int;
 		private var _dailyZoneInfo:DailyZonePanelInfo;
 
 		private var gridList:Vector.<IconCDFace>;
@@ -49,11 +46,8 @@ package com.rpgGame.appModule.dungeon.equip
 			layout.gap = 15;
 			_skin.list.layout = layout;
 			var list:Array = DailyZoneCfgData.getTypeList(2);
+			_skin.list.addEventListener(FeathersEventType.CREATION_COMPLETE,onCreate);
 			_skin.list.dataProvider = new ListCollection(list);
-			_curentIndex = 0;
-			refeashList(0);
-			var q_data:Q_daily_zone = list[0] as Q_daily_zone;
-			_dailyZoneInfo = DailyZoneDataManager.instance().getInfoById(q_data.q_id);
 			
 			
 			var qglob:Q_global = GlobalSheetData.getSettingInfo(717);
@@ -81,6 +75,32 @@ package com.rpgGame.appModule.dungeon.equip
 			refeashValue();
 		}
 		
+		private function onCreate():void
+		{
+			_skin.list.removeEventListener(FeathersEventType.CREATION_COMPLETE,onCreate);
+			//			_skin.list.horizontalScrollStep=194+30;
+			
+			var list:Array=_skin.list.dataProvider.data as Array;
+			var toIndex:int=-1;
+			for(var i:int=0;i<list.length;i++){
+				var info:DailyZonePanelInfo=DailyZoneDataManager.instance().getInfoById(list[i].q_id);
+				if(info.remainCount!=0||info.canBuyCount!=0){
+					toIndex=i;
+					break;
+				}
+			}
+			if(toIndex==-1){
+				toIndex=0;
+			}
+			
+			refeashList(0);
+			var q_data:Q_daily_zone = list[toIndex] as Q_daily_zone;
+			_dailyZoneInfo = DailyZoneDataManager.instance().getInfoById(q_data.q_id);
+			
+			toIndex=Math.floor(toIndex/4);
+			refeashList(toIndex);			
+		}
+		
 		private function refeashValue():void
 		{
 			if(_dailyZoneInfo==null)
@@ -93,13 +113,14 @@ package com.rpgGame.appModule.dungeon.equip
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
 			super.onTouchTarget(target);
+			var index:int=_skin.list.horizontalPageIndex;
 			switch(target)
 			{
 				case _skin.btnNext:
-					refeashList(_skin.list.horizontalPageIndex+1);
+					refeashList(index+1);
 					break;
 				case _skin.btnPrev:
-					refeashList(_skin.list.horizontalPageIndex-1);
+					refeashList(index-1);
 					break;
 				case _skin.btnAdd:
 					DailyZoneDataManager.instance().buyCount(_dailyZoneInfo,true);
@@ -109,7 +130,7 @@ package com.rpgGame.appModule.dungeon.equip
 		
 		private function refeashList(index:int):void
 		{
-			_skin.btnNext.visible = (index <1);
+			_skin.btnNext.visible = (index <_skin.list.maxHorizontalPageIndex);
 			_skin.btnPrev.visible = (index >0);
 			_skin.list.scrollToPageIndex(index,0);
 		}

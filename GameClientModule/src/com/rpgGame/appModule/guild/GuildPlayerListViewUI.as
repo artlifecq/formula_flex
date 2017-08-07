@@ -6,6 +6,7 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.GuildEvent;
+	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.netData.guild.message.ResGuildOperateResultMessage;
 	
 	import feathers.controls.Scroller;
@@ -46,6 +47,7 @@ package com.rpgGame.appModule.guild
 			layout.gap = 0;
 			_skin.ListItem.layout = layout;
 			_skin.ListItem.dataProvider = new ListCollection();
+			addNode(RTNodeID.GUILD_MEM,RTNodeID.GUILD_MEM_APPLY,_skin.btnApply,88,GuildManager.instance().hasApplyList);
 		}
 		
 		override public function show(data:Object=null):void
@@ -54,6 +56,7 @@ package com.rpgGame.appModule.guild
 			EventManager.addEvent(GuildEvent.GUILD_DATA_INIT,refeashList);
 			EventManager.addEvent(GuildEvent.GUILD_OPERATERESULT,refeashAppoint);
 			EventManager.addEvent(GuildEvent.GUILD_FAMILY_CHANGE,refeashList);
+			EventManager.addEvent(GuildEvent.GET_JOIN_GUILD_LIST,onGetApplyList);
 			sortByType("");
 			_skin.chkAuto.isSelected = GuildManager.instance().guildData.isAutoApply==1;
 			_skin.chkAuto.visible = GuildManager.instance().canJoin;
@@ -68,6 +71,7 @@ package com.rpgGame.appModule.guild
 			}else{
 				_skin.btnJoin.label = "退出帮派";
 			}
+			notifyUpdate(RTNodeID.GUILD_MEM_APPLY);
 		}
 		private function refeashAppoint(msg:ResGuildOperateResultMessage):void
 		{
@@ -183,7 +187,14 @@ package com.rpgGame.appModule.guild
 			EventManager.removeEvent(GuildEvent.GUILD_OPERATERESULT,refeashAppoint);
 			EventManager.removeEvent(GuildEvent.GUILD_DATA_INIT,refeashList);
 			EventManager.removeEvent(GuildEvent.GUILD_FAMILY_CHANGE,refeashList);
+			EventManager.removeEvent(GuildEvent.GET_JOIN_GUILD_LIST,onGetApplyList);
 			GuildManager.instance().reqGuildSetAutoAccept(_skin.chkAuto.isSelected);
+		}
+		
+		private function onGetApplyList(...arg):void
+		{
+			// TODO Auto Generated method stub
+			notifyUpdate(RTNodeID.GUILD_MEM_APPLY);
 		}
 	}
 }

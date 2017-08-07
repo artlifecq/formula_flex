@@ -3,6 +3,7 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.manager.guild.GuildSkillVo;
 	import com.rpgGame.core.ui.tip.RewardMarkTip;
+	import com.rpgGame.core.utils.GameColorUtil;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.GuildSkillCfgData;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
@@ -65,7 +66,7 @@ package com.rpgGame.appModule.guild
 				attpropId= att.q_type1;
 				attpropValue= AttValueConfig.getDisAttValueStr(att.q_type1,att.q_value1);
 				attname= CharAttributeType.getCNName(attpropId);
-				_skin.lbXiaoguo.htmlText = attname+HtmlTextUtil.getTextColor(0xCFC6AE," +"+attpropValue);
+				_skin.lbXiaoguo.htmlText = HtmlTextUtil.getTextColor(GameColorUtil.COLOR_ATTR_NAME,attname+" +")+HtmlTextUtil.getTextColor(GameColorUtil.COLOR_ATTR_VALUE,attpropValue);
 			}
 			
 			_nextdata = GuildSkillCfgData.getSkill(_skillId,currentLevel+1);
@@ -81,7 +82,7 @@ package com.rpgGame.appModule.guild
 				attpropId= att.q_type1;
 				attpropValue= AttValueConfig.getDisAttValueStr(att.q_type1,att.q_value1);
 				attname= CharAttributeType.getCNName(attpropId);
-				_skin.lbNextXiaguo.htmlText = attname+" +"+HtmlTextUtil.getTextColor(0xCFC6AE,attpropValue);
+				_skin.lbNextXiaguo.htmlText = HtmlTextUtil.getTextColor(GameColorUtil.COLOR_ATTR_NAME,attname+" +")+HtmlTextUtil.getTextColor(GameColorUtil.COLOR_ATTR_VALUE,attpropValue);
 				
 				var contribution:int =0;
 				if(GuildManager.instance().haveGuild)

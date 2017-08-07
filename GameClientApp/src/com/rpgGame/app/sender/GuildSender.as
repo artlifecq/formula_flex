@@ -141,11 +141,11 @@ package com.rpgGame.app.sender
 		}
 		
 		/** 请求提出成员 **/
-		public static function guildKill(playerId:long,opaque:int):void
+		public static function guildKill(playerId:long):void
 		{
 			var msg:ReqGuildKillMessage = new ReqGuildKillMessage();
 			msg.playerId = playerId;
-			msg.opaque = opaque;
+			msg.opaque = 0;
 			SocketConnection.send(msg);
 		}
 		

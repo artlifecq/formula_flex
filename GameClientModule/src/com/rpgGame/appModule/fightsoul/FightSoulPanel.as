@@ -3,6 +3,7 @@ package com.rpgGame.appModule.fightsoul
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
 	import com.rpgGame.app.display3D.InterAvatar3D;
+	import com.rpgGame.app.manager.ItemActionManager;
 	import com.rpgGame.app.manager.fightsoul.FightSoulManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
@@ -133,20 +134,25 @@ package com.rpgGame.appModule.fightsoul
 			_skin.List.dataProvider.data = _listdatas;
 		}
 		
-		private function refeashRewards():void
+		private function refeashRewards(index:int=-1):void
 		{
-			for(var index:int = 0;index<_itemIconLists.length;index++)
+			for(var i:int = 0;i<_itemIconLists.length;i++)
 			{
-				if(FightSoulManager.instance().isGetReward(index))
+				if(FightSoulManager.instance().isGetReward(i))
 				{
-					GrayFilter.gray(_itemIconLists[index]);
+					GrayFilter.gray(_itemIconLists[i]);
 					
 				}
 				else
 				{
-					_itemIconLists[index].filter = null;
+					_itemIconLists[i].filter = null;
 				}
-				setRTNState(RTNodeID.ZH_REWARD+"-"+index,FightSoulManager.instance().canGetReward(index));
+				setRTNState(RTNodeID.ZH_REWARD+"-"+i,FightSoulManager.instance().canGetReward(i));
+			}
+			
+			if(index!=-1){
+				var icon:IconCDFace=_itemIconLists[index];
+				ItemActionManager.tweenItemInBag(icon);
 			}
 		}
 		private var _bigEffect:InterObject3D

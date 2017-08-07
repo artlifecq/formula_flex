@@ -21,6 +21,9 @@ package com.rpgGame.netData.guildWar.message{
 		//累计击杀数
 		private var _allKillCnt: int;
 		
+		//统帅技能冷却时间(s)
+		private var _leaderSkillCoolingTime: int;
+		
 		
 		/**
 		 * 写入字节缓存
@@ -32,6 +35,8 @@ package com.rpgGame.netData.guildWar.message{
 			writeInt(_rank);
 			//累计击杀数
 			writeInt(_allKillCnt);
+			//统帅技能冷却时间(s)
+			writeInt(_leaderSkillCoolingTime);
 			return true;
 		}
 		
@@ -45,6 +50,8 @@ package com.rpgGame.netData.guildWar.message{
 			_rank = readInt();
 			//累计击杀数
 			_allKillCnt = readInt();
+			//统帅技能冷却时间(s)
+			_leaderSkillCoolingTime = readInt();
 			return true;
 		}
 		
@@ -99,6 +106,21 @@ package com.rpgGame.netData.guildWar.message{
 		 */
 		public function set allKillCnt(value: int): void{
 			this._allKillCnt = value;
+		}
+		
+		/**
+		 * get 统帅技能冷却时间(s)
+		 * @return 
+		 */
+		public function get leaderSkillCoolingTime(): int{
+			return _leaderSkillCoolingTime;
+		}
+		
+		/**
+		 * set 统帅技能冷却时间(s)
+		 */
+		public function set leaderSkillCoolingTime(value: int): void{
+			this._leaderSkillCoolingTime = value;
 		}
 		
 	}

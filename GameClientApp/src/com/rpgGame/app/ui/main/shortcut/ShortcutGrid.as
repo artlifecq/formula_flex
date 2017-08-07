@@ -223,7 +223,7 @@ package com.rpgGame.app.ui.main.shortcut
 							
 							break;
 						case 102://能量
-							if(nengliang>=(-recoData[i].rv))
+							if(nengliang>=(-recoData[i].rv+_skillData.q_need_mp))
 							{
 								isGary=false;
 							}
@@ -276,7 +276,15 @@ package com.rpgGame.app.ui.main.shortcut
 			}
 			else
 			{
-				isGary=false;
+				//没配置
+				if (nengliang>=_skillData.q_need_mp) 
+				{
+					isGary=false;
+				}
+				else
+				{
+					isGary=true;
+				}
 			}
 			
 		}
