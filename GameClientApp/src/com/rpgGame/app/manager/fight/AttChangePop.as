@@ -9,27 +9,26 @@ package com.rpgGame.app.manager.fight
 	import gs.TimelineLite;
 	import gs.TweenLite;
 	
-	import starling.display.DisplayObject;
 	import starling.display.Sprite;
 	
 	public class AttChangePop extends Sprite
 	{
 		private var waitEftDatas:Vector.<AttEftData>;
-		
-		private var playingNum:int;
-		private var maxPlayNum:int=10;
-		private var one_cont_max:int=5;
-		
+		private var maxPlayingNum:int=5;
+		private var maxWait:int=10;
+		private var oneFaceH:int=29;
 		private var prePlayTime:int;
+		private var timeLineMap:HashMap;
 		
 		private var showTime:Number=0.2;
-		private var moveTime:Number=0.5;
+		private var moveTime:Number=0.6;
 		private var missTime:Number=0.2;
 		
-		private var showY:int=50;
-		private var oneFaceH:int=29;
+		private var showEndY:int=30;
+		private var moveEndY:int=120;
+		private var missEndY:int=180;
+		private var playList:Vector.<AttackFace>;
 		
-		private var prePlayDis:DisplayObject;
 
 		public function AttChangePop(x:int,y:int):void
 		{
@@ -37,11 +36,19 @@ package com.rpgGame.app.manager.fight
 			this.x = x;
 			this.y = y;
 			waitEftDatas=new Vector.<AttEftData>();
+			playList=new Vector.<AttackFace>();
+			timeLineMap=new HashMap();
 		}
 		
 		public function clear():void
 		{
 			waitEftDatas.length=0;
+			while(playList.length>0){
+				var attackFace : AttackFace=playList.shift();
+				var myTimeline: TimelineLite=timeLineMap.getValue(attackFace);
+				myTimeline.killTweensOf(attackFace);
+				AttackFace.recycleAttackFace(attackFace);
+			}
 		}
 		
 		public function addChangeHandler(hash:HashMap):void
@@ -52,7 +59,6 @@ package com.rpgGame.app.manager.fight
 			var key:int=0;
 			var val:int=0;
 			var numberColor : String = "";
-			clear();//直接清理还没播放的数据
 			for (var i:int = 0; i <len; i++) 
 			{
 				key=keys[i];
@@ -70,6 +76,11 @@ package com.rpgGame.app.manager.fight
 				data.value=val;
 				waitEftDatas.push(data);
 			}
+			
+			while(waitEftDatas.length>maxWait){
+				waitEftDatas.shift();
+			}
+			
 			playNextEft();
 		}
 		
@@ -81,95 +92,56 @@ package com.rpgGame.app.manager.fight
 		
 		private function playNextEft2():void
 		{
-			if(waitEftDatas.length==0){
+			if(waitEftDatas.length==0||playList.length==maxPlayingNum){
 				return;
 			}
 			
 			var overTime:Number=getTimer()-prePlayTime;
 			overTime=overTime*0.001;
 			
-			if(overTime>=showTime&&playingNum<maxPlayNum){//达到播放条件可播放下一批
-				prePlayTime=getTimer();
-				var content:AttChangeListCont=AttChangeListCont.create();
-				this.addChild(content);
-				while(content.numChildren<one_cont_max){
+			if(overTime>=showTime){//达到播放条件可播放下一批
+				var attackFace : AttackFace;
+				prePlayTime=getTimer();				
+				var createNum:int=0;
+				while(playList.length<maxPlayingNum){
 					if(waitEftDatas.length==0){
 						break;
 					}
 					var eftData:AttEftData=waitEftDatas.shift();
-					var attackFace : AttackFace= AttackFace.createAttackFace(eftData.typeRes, eftData.numberRes, eftData.value);
+					attackFace= AttackFace.createAttackFace(eftData.typeRes, eftData.numberRes, eftData.value);
 					attackFace.x=0;
-					attackFace.y=0;
-					content.addChild(attackFace);
+					attackFace.y=createNum*oneFaceH;
+					attackFace.alpha=0;
+					this.addChild(attackFace);
+					createNum++;
+					tweenContent(attackFace);
+					playList.push(attackFace);
 				}
-				for(var i:int=0;i<content.numChildren;i++){
-					content.getChildAt(i).y=i*oneFaceH;
-				}
-				content.y=0;
-				showY=content.height;
-				tweenContent(content);
-				playingNum++;
 			}
 		}
 		
-		private function tweenContent(content:AttChangeListCont):void
+		private function tweenContent(content:AttackFace):void
 		{
 			var myTimeline: TimelineLite= new TimelineLite({onComplete:contTweenComplete,onCompleteParams:[content]});
-			myTimeline.append(new TweenLite(content, showTime, {alpha:1,y:content.y-showY,onComplete:onAlphaComplete}));
-			myTimeline.append(new TweenLite(content, moveTime, {y:content.y-showY-50}));
-			myTimeline.append(new TweenLite(content, missTime, {alpha:0,y:content.y-showY-100}));
+			myTimeline.clear();
+			myTimeline.append(new TweenLite(content, showTime, {alpha:1,y:content.y-showEndY}));
+			myTimeline.append(new TweenLite(content, moveTime, {y:content.y-moveEndY}));
+			myTimeline.append(new TweenLite(content, missTime, {alpha:0,y:content.y-missEndY}));
+			timeLineMap.put(content,myTimeline);
 		}
 		
-		
-		private function contTweenComplete(attackFace:AttChangeListCont):void
-		{
-			if(prePlayDis==attackFace){
-				prePlayDis=null;
-			}
-			AttChangeListCont.recycle(attackFace);
-			playingNum--;
-		}
-		
-		private function playNextEft1():void
-		{
-			var overTime:Number=getTimer()-prePlayTime;
-			overTime=overTime*0.001;
-			if(playingNum<maxPlayNum&&waitEftDatas.length!=0&&overTime>=showTime){
-				prePlayTime=getTimer();
-				var eftData:AttEftData=waitEftDatas.shift();
-				playingNum++;
-				var attackFace : AttackFace= AttackFace.createAttackFace(eftData.typeRes, eftData.numberRes, eftData.value);
-				attackFace.touchAcross = true;
-				attackFace.touchable = false;
-				attackFace.touchGroup = false;
-				attackFace.visible = true;
-				attackFace.alpha=0;
-				attackFace.y=0;
-				this.addChild(attackFace);
-				tweenNormalAtt(attackFace);
-			}
-		}		
-		
-		/**
-		 *普通属性瓢字 
-		 * @param attackFace
-		 * 
-		 */
-		private function tweenNormalAtt(attackFace:AttackFace):void
-		{
-			var myTimeline: TimelineLite= new TimelineLite({onComplete:eftTweenComplete,onCompleteParams:[attackFace]});
-			myTimeline.append(new TweenLite(attackFace, showTime, {alpha:1,y:attackFace.y-showY,onComplete:onAlphaComplete}));
-		}		
-		
-		private function eftTweenComplete(attackFace:AttackFace):void
-		{
-			AttackFace.recycleAttackFace(attackFace);
-			playingNum--;
-		}
-		
-		private function onAlphaComplete():void
+		private function showComplete():void
 		{
 			playNextEft();
+		}
+		
+		private function contTweenComplete(attackFace:AttackFace):void
+		{
+			playList.shift();
+			AttackFace.recycleAttackFace(attackFace);
+			if(playList.length==0){
+				playNextEft();
+			}
 		}
 	}
 }
