@@ -8,7 +8,7 @@ package com.rpgGame.core.view.uiComponent.face.cd
 
 	public class CDData  implements IInstancePoolClass
 	{
-		private static var cdDataPool : InstancePool = new InstancePool("CDData", 20);
+		private static var cdDataPool : InstancePool = new InstancePool("CDData", 100);
 		
 		/**
 		 * 生成一个HeadFace
