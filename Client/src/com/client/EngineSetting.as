@@ -42,12 +42,16 @@ package com.client
 
 			//初始UI引擎
 			initFeathers();
+			
+//			ReportUtil.setup(6);
 		}
 
 		public static function initAway3D() : void
 		{
 			AwayStats.alertLogPanelOnError = ClientConfig.isDebug;
+			Away3D.throwErrorForDeveloper = ClientConfig.isDebug;
 			Away3D.LOAD_FILE_WITH_LIB = true;
+			GuiTheme.ENABLE_TEXT_BATCH = true;
 //			Away3D.USE_ASYNC_TEXTURES = true;
 //			Away3D.MIPMAP_WITH_BITMAPDATA = false;
 		
@@ -57,21 +61,16 @@ package com.client
 			Away3D.USE_ATF_FOR_TEXTURES = ClientConfig.useAtfFormat;
 			Away3D.ATF_ASYNC_UPLOAD = ClientConfig.useAtfFormat;
 			Away3D.ENABLE_SOUND_PAN = true;
-			
-			Away3D.PARSE_JPG_IN_WORKER = true;
-			Away3D.PARSE_PNG_IN_WORKER = true;
 
 			MultiUrlLoadManager.getUrlWithVersion = VersionUtils.getVersionPath;
-			Away3D.USE_TEXTURES_BPG_FORMAT = ClientConfig.useBpgFormat;
-			if (ClientConfig.uiCompressed)
-			{
-//				GuiTheme.defaultTextureFormat = TextureFormatEnum.BPG;
-			}
-			Away3D.PLANAR_STENCIL_AVAILABLE = true;
 			
 			Away3D.PURE_COLOR_PASS = false;
 			Away3D.MIN_HEAP_SIZE = 188743680;
 			MultiUrlLoadManager.maxQueueSize = 5;
+			
+			SoundUtil.volume = 1;
+			SoundUtil.SOUND_REDUCTION_ALGORITHM_MIN_VOLUMN = 0.75;
+			SoundUtil.SOUND_REDUCTION_ALGORITHM_RECUTION_SCOPE = 1100;
 			
 			LoadPriorityType.LEVEL_SOUND = 1000;
 			LoadPriorityType.LEVEL_NORMALMAP = 2000;
@@ -81,6 +80,7 @@ package com.client
 			LoadPriorityType.LEVEL_CUSTOM_0 = 5000;
 			LoadPriorityType.LEVEL_CUSTOM_1 = 4500;
 			LoadPriorityType.LEVEL_CUSTOM_2 = 4000;
+			LoadPriorityType.LEVEL_CUSTOM_3 = 5000;
 			SoundUtil.initConfig({
 				"at":{
 					"index":1,
@@ -113,9 +113,8 @@ package com.client
 		{
 			GuiTheme.RES_ROOT = ClientConfig.baseDir + ClientConfig.resURL;
 			GuiTheme.decodeURL = VersionUtils.getVersionPath;
-//			GuiTheme.useWorkerLoadTextureBytes = true;
-			GuiTheme.useCompressedTexture = false; //ClientConfig.uiCompressed;
-			GuiTheme.ENABLE_TEXT_BATCH = true;
+			GuiTheme.useCompressedTexture = false;
+			
 			GuiTheme.ATFX_ROOT_PATH = "../res/ui/big_bg";
 		}
 	}
