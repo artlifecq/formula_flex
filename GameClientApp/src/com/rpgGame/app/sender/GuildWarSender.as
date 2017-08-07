@@ -1,6 +1,7 @@
 package com.rpgGame.app.sender
 {
 	import com.rpgGame.app.cmdlistener.enum.OpaqueEnum;
+	import com.rpgGame.netData.guildWar.message.C2GReqKingGuidWarAvatarInfoMessage;
 	import com.rpgGame.netData.guildWar.message.ReqGetOrePositionMessage;
 	import com.rpgGame.netData.guildWar.message.ReqGuildWarApplyMessage;
 	import com.rpgGame.netData.guildWar.message.ReqGuildWarCityApplyInfoMessage;
@@ -32,10 +33,17 @@ package com.rpgGame.app.sender
 		 * @param opaque
 		 * 
 		 */
-		public static function reqGuildWarCityInfo(opaque:int=0):void
+		public static function reqGuildWarCityInfo(type:int,opaque:int=0):void
 		{
 			var msg:ReqGuildWarCityInfoMessage=new ReqGuildWarCityInfoMessage();
 			msg.opaque=opaque;
+			msg.type=type;
+			sendMsg(msg);
+		}
+		
+		public static function reqHCZBPlayerInfos():void
+		{
+			var msg:C2GReqKingGuidWarAvatarInfoMessage=new C2GReqKingGuidWarAvatarInfoMessage();
 			sendMsg(msg);
 		}
 		
@@ -91,14 +99,16 @@ package com.rpgGame.app.sender
 		}
 		
 		/**
-		 *获取帮会战每日奖励 
+		 * 获取帮会战每日奖励 
+		 * @param type 1皇城,0其他
 		 * @param opaque
 		 * 
 		 */
-		public static function reqGuildWarGiveDailyGift(opaque:int=0):void
+		public static function reqGuildWarGiveDailyGift(type:int=0,opaque:int=0):void
 		{
 			var msg:ReqGuildWarGiveDailyGiftMessage=new ReqGuildWarGiveDailyGiftMessage();
 			msg.opaque=OpaqueEnum.GUILDWAR_GIFT;
+			msg.type=type;
 			sendMsg(msg);
 		}
 		
@@ -107,10 +117,11 @@ package com.rpgGame.app.sender
 		 * @param opaque
 		 * 
 		 */
-		public static function reqGuildWarEnter(opaque:int=0):void
+		public static function reqGuildWarEnter(isKing:int=0,opaque:int=0):void
 		{
 			var msg:ReqGuildWarEnterMessage=new ReqGuildWarEnterMessage();
 			msg.opaque=opaque;
+			msg.isKing=isKing;
 			sendMsg(msg);
 		}
 		

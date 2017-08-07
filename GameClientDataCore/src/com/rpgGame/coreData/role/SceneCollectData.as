@@ -15,8 +15,8 @@ package com.rpgGame.coreData.role
 		public var collectType : int; //类型ID
 		public var sceneID : int; //所属场景ID
 		public var avatarRes : String;
-		public var modelID : uint;
 		
+		public var modelID : uint;
 		/**
 		 * 是否动态创建
 		 */

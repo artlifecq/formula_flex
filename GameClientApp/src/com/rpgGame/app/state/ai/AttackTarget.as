@@ -57,7 +57,7 @@ package com.rpgGame.app.state.ai
 				castSpell = CastSpellHelper.getSortCastSpell();
 			}
 			
-			if(/*castSpell.q_relate_spells != null || */castSpell.q_relate_spells != "")
+			if(castSpell.q_relate_spells != "")
 			{
 				TrusteeshipManager.getInstance().isNormalSpell = true;
 			}

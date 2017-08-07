@@ -868,11 +868,14 @@ package com.rpgGame.app.manager.guild
 		}
 
 		
+		/**
+		 *是否为统帅 
+		 * @return 
+		 * 
+		 */
 		public function get isLeader():Boolean
 		{
-			if(_selfMemberInfo == null)
-				return false;
-			return _selfMemberInfo.isLeader ==1;
+			return MainRoleManager.actorInfo.guildIsLeader==1;
 		}
 		
 		/** 通知玩家帮派Id改变 */

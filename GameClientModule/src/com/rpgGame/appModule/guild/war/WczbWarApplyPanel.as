@@ -3,7 +3,6 @@ package com.rpgGame.appModule.guild.war
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.sender.GuildWarSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
-	import com.rpgGame.app.ui.common.PageContainerUI;
 	import com.rpgGame.core.events.GuildEvent;
 	import com.rpgGame.netData.guildWar.message.ResGuildWarChangeMaxPriceMessage;
 	import com.rpgGame.netData.guildWar.message.ResGuildWarCityApplyInfoMessage;
@@ -27,7 +26,6 @@ package com.rpgGame.appModule.guild.war
 	public class WczbWarApplyPanel extends SkinUIPanel
 	{
 		private var _skin:ZhengBaBaoMing;
-		private var pageContainer:PageContainerUI;
 		private var applyCityId:int;
 		public function WczbWarApplyPanel()
 		{
@@ -109,7 +107,7 @@ package com.rpgGame.appModule.guild.war
 					obj.info.curMaxPrice=msg.price;
 					if(msg.guildId.hexValue==myGuildId){
 						obj.applayCityId=msg.cityId;
-						GuildWarSender.reqGuildWarCityInfo();
+						GuildWarSender.reqGuildWarCityInfo(0);
 					}
 					index=i;
 					break;

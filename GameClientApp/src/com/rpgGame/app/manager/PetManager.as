@@ -123,10 +123,8 @@ package com.rpgGame.app.manager
 			var list:Vector.<PetInfo>=new Vector.<PetInfo>();
 			for each(var info:PetInfo in _petHash.values())
 			{
-				if(info.actived==1&&info.modelId!=_curPetId)
-				{
+				if(info.modelId!=_curPetId)
 					list.push(info);
-				}
 			}		
 			return list;
 		}

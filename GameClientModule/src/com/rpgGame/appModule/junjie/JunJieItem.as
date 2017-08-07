@@ -137,8 +137,8 @@ package com.rpgGame.appModule.junjie
 					_skin.icons.y=25;
 					_huangQinGuoQiContaner=new Inter3DContainer();
 					_skin.container.addChild(_huangQinGuoQiContaner);
-					_huangQinGuoQiContaner.x=10;
-					_huangQinGuoQiContaner.y=82;
+					_huangQinGuoQiContaner.x=1;
+					_huangQinGuoQiContaner.y=78;
 					_huangQinGuoQiEft= _huangQinGuoQiContaner.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_HUANGQINGUOQI),0,0,0);
 					break;
 			}

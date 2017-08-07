@@ -47,7 +47,7 @@ package org.mokylin.skin.app.meiren.button
 						}
 					]
 			};
-			skinNames={"down":"ui/app/meiren/button/meirenQiehuan/down.png", "hover":"ui/app/meiren/button/meirenQiehuan/over.png", "up":"ui/app/meiren/button/meirenQiehuan/up.png"};
+			skinNames={"down":"ui/mainui/meirenHead/meirenQiehuan/down.png", "hover":"ui/mainui/meirenHead/meirenQiehuan/over.png", "up":"ui/mainui/meirenHead/meirenQiehuan/up.png"};
 		}
 
 

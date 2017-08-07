@@ -347,7 +347,9 @@ package com.rpgGame.app.cmdlistener.scene
 				{
 					isEnd=true;
 				}
+				Lyt.a("跳跃点消息："+msg.jumpPos.x+":"+msg.jumpPos.y+":end:"+isEnd);
 				ref.setParams(1,msg.costTime,destPoint,isEnd);
+				role.stateMachine.removeState(RoleStateType.ACTION_JUMP);//先移除状态 避免相同状态冲突
 				role.stateMachine.transition(RoleStateType.ACTION_JUMP, ref,true);
 			}
 		}

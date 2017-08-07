@@ -264,7 +264,6 @@ package com.rpgGame.app.state.role
 			{
 				if (walkRole.stateMachine.isWalkMoving)
 				{
-					//					_lastWalkServerTime = _local12;
 					HorseManager.instance().autoRiding(role, pos);
 				}
 			}

@@ -171,17 +171,24 @@ package com.rpgGame.appModule.dungeon.lunjian
 			var list:Vector.<Q_lunjian>=LunJianCfg.getCfgByMapId(selected.sceneData.sceneId);
 			list=list.sort(sortLunjian);
 			var num:int=list.length;
+			var firstCanFight:int=-1;
 			for(var i:int=0;i<num;i++){
 				var data:LunJianItemData=new LunJianItemData();
 				data.diff=diffMap.getValue(list[i].q_type);
 				if(data.diff<3){
 					data.cfg=LunJianCfg.getCfgByInfo(selected.sceneData.sceneId,list[i].q_type,data.diff+1);
+					if(firstCanFight==-1){
+						firstCanFight=i;
+					}
 				}else{
 					data.cfg=list[i];
 				}
 				npcDatas.addItem(data);
 			}
-			pageContainer.currentPage=1;
+			if(firstCanFight==-1){
+				firstCanFight=0;
+			}
+			pageContainer.currentPage=Math.floor(firstCanFight/3);//自动跳到第一个可挑战页面去
 		}
 		
 		override public function hide():void

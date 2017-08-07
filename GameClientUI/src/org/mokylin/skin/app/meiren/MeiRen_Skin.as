@@ -360,7 +360,7 @@ package org.mokylin.skin.app.meiren
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
 			temp.color = 0xEAEABC;
 			temp.x = 347;
-			temp.y = 553;
+			temp.y = 542;
 			return temp;
 		}
 
@@ -514,6 +514,7 @@ package org.mokylin.skin.app.meiren
 			temp.name = "lbContent";
 			temp.fontSize = 18;
 			temp.text = "礼金提升";
+			temp.textAlign = "center";
 			temp.color = 0x41FF65;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.width = 221;
@@ -553,7 +554,7 @@ package org.mokylin.skin.app.meiren
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiLevel = temp;
 			temp.name = "uiLevel";
-			temp.styleName = "ui/app/meiren/jieshu/12.png";
+			temp.styleName = "ui/mainui/meirenHead/jieshu/12.png";
 			temp.x = 874;
 			temp.y = 109;
 			return temp;
@@ -588,7 +589,7 @@ package org.mokylin.skin.app.meiren
 			temp.name = "uiOK";
 			temp.styleName = "ui/app/meiren/yidadaozuigaojie.png";
 			temp.x = 757;
-			temp.y = 610;
+			temp.y = 550;
 			return temp;
 		}
 

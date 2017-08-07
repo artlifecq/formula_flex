@@ -1,12 +1,16 @@
 package com.rpgGame.app.ui.main.shortcut
 {
 	import com.rpgGame.app.manager.ShortcutsManger;
+	import com.rpgGame.app.manager.SkillCDManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.reward.RewardGroup;
+	import com.rpgGame.app.sender.GuildWarSender;
 	import com.rpgGame.app.utils.FaceUtil;
+	import com.rpgGame.core.events.GuildEvent;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.SpellEvent;
+	import com.rpgGame.core.view.uiComponent.face.cd.CDDataManager;
+	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.ShortcutsTypeEnum;
@@ -14,7 +18,7 @@ package com.rpgGame.app.ui.main.shortcut
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
 	import com.rpgGame.coreData.info.shortcuts.ShortcutsData;
-	import com.rpgGame.coreData.type.item.GridBGType;
+	import com.rpgGame.netData.guildWar.message.ResGuildWarPersionInfoMessage;
 	
 	import flash.geom.Point;
 	
@@ -27,11 +31,14 @@ package com.rpgGame.app.ui.main.shortcut
 	{
 		private var _shortcutBar : ShortcutBar;
 		private const GRID_COUNT : int = 8;
+		private const  GUILD_LEADER_SKILL:int=8551;
 
 		private const SHORTCUTS_KEY : Array = ["1", "2", "3", "4","Q", "W", "E", "R","F1"];
 
 		private var _gridVect : Vector.<ShortcutGrid>;
-		private var _gridF1:ShortcutGrid;
+		private var _guildLeaderSkill:ShortcutGrid;
+
+		private var _skin:shortcut_Skin;
 		public function ShortcutSkillBar(shortcutBar : ShortcutBar)
 		{
 			_shortcutBar = shortcutBar;
@@ -59,6 +66,7 @@ package com.rpgGame.app.ui.main.shortcut
 			createGrid();
 			addEvent();
 			updateAllGridData();
+			showSkillBtn();
 		}
 
 		private function addEvent() : void
@@ -71,7 +79,17 @@ package com.rpgGame.app.ui.main.shortcut
 			EventManager.addEvent(SpellEvent.SPELL_UPDATE_SHORTCUTS, onClearSpell);
 			EventManager.addEvent(SpellEvent.SPELL_KEY_RELEASE, onKeySkill);
 			EventManager.addEvent(ItemEvent.ITEM_INIT,onItemInit);
+			EventManager.addEvent(GuildEvent.GUILD_LEADER_SKILL_SHOW,showSkillBtn);
 		}
+		
+		private function showSkillBtn(info:ResGuildWarPersionInfoMessage=null):void
+		{
+			_guildLeaderSkill.visible=info!=null;
+			if(info&&info.leaderSkillCoolingTime!=0){
+				_guildLeaderSkill.needCD=true;
+				CDDataManager.playCD(SkillCDManager.getSkillKey(GUILD_LEADER_SKILL),info.leaderSkillCoolingTime,0);
+			}
+		}	
 		
 		private function onItemInit(contianer:int):void
 		{
@@ -87,12 +105,6 @@ package com.rpgGame.app.ui.main.shortcut
 					itemInfo=new ClientItemInfo(shortcutData.id);
 				}
 				itemInfo.count = BackPackManager.instance.getItemCount(shortcutData.id);
-				FaceUtil.SetItemGrid(_gridF1, itemInfo);
-				_gridF1.isEnabled = itemInfo.count > 0;
-				_gridF1.playerJod=MainRoleManager.actorInfo.job;
-				_gridF1.setEffect();
-				_gridF1.setIsShowCdTm(true);
-				_gridF1.setEffect2Top();
 			}
 		}
 		
@@ -110,7 +122,7 @@ package com.rpgGame.app.ui.main.shortcut
 			_gridVect = new Vector.<ShortcutGrid>();
 			var size : int = IcoSizeEnum.ICON_48;
 			var gridInfo : GridInfo;
-			var _skin:shortcut_Skin=_shortcutBar.skin();
+			_skin=_shortcutBar.skin();
 			for (var i : int = 0; i < GRID_COUNT; i++)
 			{
 				var cd:ShortcutGrid = new ShortcutGrid(_shortcutBar, size);
@@ -132,22 +144,32 @@ package com.rpgGame.app.ui.main.shortcut
 				//
  			 //cd.showShortCutText(SHORTCUTS_KEY[i]);
 			}
-			//f1
 			
-			_gridF1=new ShortcutGrid(_shortcutBar,size);
-			_gridF1.width = _gridF1.height = size;
+			_guildLeaderSkill=new ShortcutGrid(_shortcutBar,IcoSizeEnum.ICON_48);
+			_guildLeaderSkill.selectImgVisible=false;
+			_guildLeaderSkill.dragAble=true;
+			gridInfo = new GridInfo(ItemContainerID.Shortcut, i);
+			_guildLeaderSkill.gridInfo = gridInfo;
+			_guildLeaderSkill.onTouchEndCallBack = onTouchGrid;
+			_skin.container.addChild(_guildLeaderSkill);
 			
-			_gridF1.dragAble = true;
-			gridInfo = new GridInfo(ItemContainerID.Shortcut, GRID_COUNT);
-			_gridF1.gridInfo = gridInfo;
-			_gridF1.onTouchEndCallBack = onTouchGrid;
-			_gridF1.rightMouseClickFun = onRightMouseClick;
-//			_gridF1.x = 194;
-//			_gridF1.y =-64;
-//			_gridF1.setBg(GridBGType.GRID_SIZE_48);
-//			_skin.Iconbg0.addChild(_gridF1);
-//			_skin.Iconbg0.touchGroup=false;
-			_gridVect.push(_gridF1);
+			var skillData : Q_skill_model=SpellDataManager.getSpellData(GUILD_LEADER_SKILL);
+			FaceUtil.SetSkillGrid(_guildLeaderSkill, FaceUtil.chanceSpellToFaceInfo(skillData), true);//暂时不展示tips
+			_guildLeaderSkill.upData(skillData);
+			var isAutoSpell : Boolean = MainRoleManager.actorInfo.spellList.isAutoSpellId(skillData.q_skillID);
+			if (isAutoSpell)
+			{
+				_guildLeaderSkill.showAutoImg(false);
+				_guildLeaderSkill.showAutoEff(true);
+			}
+			else
+			{
+				if (skillData.q_is_allow_auto_combat)
+					_guildLeaderSkill.showAutoImg(true);
+				else
+					_guildLeaderSkill.showAutoImg(false);
+				_guildLeaderSkill.showAutoEff(false);
+			}
 		}
 		
 		//---------------------------------------
@@ -174,6 +196,10 @@ package com.rpgGame.app.ui.main.shortcut
 		{
 			if (cd == null)
 				return;
+			if(cd==_guildLeaderSkill){
+				GuildWarSender.reqUseLeaderSkill();
+				return;
+			}
 			if(ShortcutsManger.getInstance().useShortcuts(cd.index)){
 				cd.tweenGrid();
 			}
@@ -260,7 +286,7 @@ package com.rpgGame.app.ui.main.shortcut
 					}
 
 					FaceUtil.SetSkillGrid(grid, FaceUtil.chanceSpellToFaceInfo(skillData), true);//暂时不展示tips
-					grid.upData(shortData,skillData);
+					grid.upData(skillData);
 					var isAutoSpell : Boolean = MainRoleManager.actorInfo.spellList.isAutoSpellId(skillData.q_skillID);
 					if (isAutoSpell)
 					{

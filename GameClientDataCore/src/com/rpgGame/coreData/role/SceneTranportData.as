@@ -1,7 +1,9 @@
 package com.rpgGame.coreData.role
 {
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.coreData.cfg.AreaCfgData;
 	import com.rpgGame.coreData.cfg.TranportsDataManager;
+	import com.rpgGame.coreData.cfg.TransCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_map_transfer;
 	import com.rpgGame.coreData.info.MapDataManager;
 	
@@ -20,6 +22,7 @@ package com.rpgGame.coreData.role
 	public class SceneTranportData extends RoleData
 	{
 		public var effectRes : String;
+		public var nameEffectRes : String;
 		public var polygon : Vector.<Point>;
 		//public var destCountry : int = 0;
 		public var destScene : int = 0;
@@ -36,10 +39,11 @@ package com.rpgGame.coreData.role
 			super(type);
 		}
         
-        public function setConfigData(data : Q_map_transfer) : void {
+        public function setConfigData(data : Q_map_transfer,job:int=0) : void {
             this.id = data.q_tran_id;
             this.name = data.q_name;
             this.effectRes = data.q_tran_res;
+			this.nameEffectRes=data.q_tran_dest_area_by_job==""&&job>0?data.q_tran_name_res:data.q_tran_name_res+"_"+job;
             this.x = data.q_tran_res_x;
             this.y = data.q_tran_res_y;
             this.offsetUp = 0;
@@ -47,6 +51,8 @@ package com.rpgGame.coreData.role
             this.sizeScale = 1;
             this.polygon = AreaCfgData.getAreaPointsByID(data.q_tran_source_area_id);
             this.showInSmallMapType = 0;
+			this.destScene=TransCfgData.getTransportSceneId(data,job);
+			
         }
 
 		public function setProtocData(data : SceneTransportProto) : void

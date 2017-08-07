@@ -6,9 +6,11 @@ package org.mokylin.skin.app.meiren
 	import feathers.controls.Group;
 	import feathers.controls.Label;
 	import feathers.controls.ProgressBar;
+	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.app.meiren.Pro_Meiren;
+	import org.mokylin.skin.common.TongYongTanKuang_bg;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 	import org.mokylin.skin.component.check.CheckBoxSkin_1;
@@ -25,7 +27,7 @@ package org.mokylin.skin.app.meiren
 		//==========================================================================
 		public var barJindu:feathers.controls.ProgressBar;
 
-		public var bg:feathers.controls.UIAsset;
+		public var bg:feathers.controls.SkinnableContainer;
 
 		public var btnClose:feathers.controls.Button;
 
@@ -131,13 +133,14 @@ package org.mokylin.skin.app.meiren
 			return temp;
 		}
 
-		private function bg_i():feathers.controls.UIAsset
+		private function bg_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
 			temp.height = 557;
-			temp.styleName = "ui/common/background/erji_kuang.png";
+			var skin:StateSkin = new org.mokylin.skin.common.TongYongTanKuang_bg()
+			temp.skin = skin
 			temp.width = 321;
 			temp.x = 0;
 			temp.y = 0;

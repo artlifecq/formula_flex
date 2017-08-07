@@ -2,14 +2,15 @@ package org.mokylin.skin.app.mail
 {
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
-	import feathers.controls.Group;
 	import feathers.controls.Label;
+	import feathers.controls.List;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.common.TongYongPanelbg3;
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
+	import org.mokylin.skin.component.list.ListSkin1;
 
 	/**
 	 * @private
@@ -25,8 +26,6 @@ package org.mokylin.skin.app.mail
 
 		public var btnTiqu:feathers.controls.Button;
 
-		public var fujianList:feathers.controls.Group;
-
 		public var lbName:feathers.controls.Label;
 
 		public var lbTime:feathers.controls.Label;
@@ -34,6 +33,8 @@ package org.mokylin.skin.app.mail
 		public var lbXiangqing:feathers.controls.Label;
 
 		public var lbZhuti:feathers.controls.Label;
+
+		public var skinList:feathers.controls.List;
 
 
 		//==========================================================================
@@ -46,7 +47,7 @@ package org.mokylin.skin.app.mail
 			this.currentState = "normal";
 			this.height = 586;
 			this.width = 437;
-			this.elementsContent = [__MailRead_Skin_SkinnableContainer1_i(),__MailRead_Skin_UIAsset1_i(),__MailRead_Skin_UIAsset2_i(),__MailRead_Skin_UIAsset3_i(),btnCancel_i(),btnTiqu_i(),__MailRead_Skin_UIAsset4_i(),__MailRead_Skin_UIAsset5_i(),__MailRead_Skin_UIAsset6_i(),__MailRead_Skin_UIAsset7_i(),__MailRead_Skin_UIAsset8_i(),__MailRead_Skin_UIAsset9_i(),lbName_i(),lbZhuti_i(),lbTime_i(),lbXiangqing_i(),fujianList_i(),__MailRead_Skin_UIAsset22_i()];
+			this.elementsContent = [__MailRead_Skin_SkinnableContainer1_i(),__MailRead_Skin_UIAsset1_i(),__MailRead_Skin_UIAsset2_i(),__MailRead_Skin_UIAsset3_i(),btnCancel_i(),btnTiqu_i(),__MailRead_Skin_UIAsset4_i(),__MailRead_Skin_UIAsset5_i(),__MailRead_Skin_UIAsset6_i(),__MailRead_Skin_UIAsset7_i(),__MailRead_Skin_UIAsset8_i(),__MailRead_Skin_UIAsset9_i(),lbName_i(),lbZhuti_i(),lbTime_i(),lbXiangqing_i(),__MailRead_Skin_UIAsset22_i(),skinList_i()];
 			
 			states = {
 			};
@@ -197,17 +198,6 @@ package org.mokylin.skin.app.mail
 			return temp;
 		}
 
-		private function fujianList_i():feathers.controls.Group
-		{
-			var temp:feathers.controls.Group = new feathers.controls.Group();
-			fujianList = temp;
-			temp.name = "fujianList";
-			temp.x = 48;
-			temp.y = 404;
-			temp.elementsContent = [];
-			return temp;
-		}
-
 		private function lbName_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -265,6 +255,19 @@ package org.mokylin.skin.app.mail
 			temp.width = 198;
 			temp.x = 93;
 			temp.y = 124;
+			return temp;
+		}
+
+		private function skinList_i():feathers.controls.List
+		{
+			var temp:feathers.controls.List = new feathers.controls.List();
+			skinList = temp;
+			temp.name = "skinList";
+			temp.height = 108;
+			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
+			temp.width = 377;
+			temp.x = 32;
+			temp.y = 401;
 			return temp;
 		}
 

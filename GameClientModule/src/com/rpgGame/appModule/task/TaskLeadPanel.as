@@ -164,6 +164,7 @@ package com.rpgGame.appModule.task
 		private function subFinish():void
 		{
 			//okBut.isEnabled=false;
+			TaskMissionManager.flashMainTaskId=TaskMissionManager.mainTaskInfo.taskId;
 			TaskSender.sendfinishTaskMessage(TaskMissionManager.mainTaskInfo.taskId);
 			
 		}

@@ -18,19 +18,11 @@ package org.mokylin.skin.app.banghui.huangcheng
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var getRewardBtn:feathers.controls.Button;
+
 		public var grpTitle:feathers.controls.Group;
 
 		public var icon1:feathers.controls.UIAsset;
-
-		public var icon2:feathers.controls.UIAsset;
-
-		public var icon3:feathers.controls.UIAsset;
-
-		public var icon4:feathers.controls.UIAsset;
-
-		public var icon5:feathers.controls.UIAsset;
-
-		public var icon6:feathers.controls.UIAsset;
 
 		public var lbBangName:feathers.controls.Label;
 
@@ -53,7 +45,7 @@ package org.mokylin.skin.app.banghui.huangcheng
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [__HuangChengJieSuan_UIAsset1_i(),__HuangChengJieSuan_UIAsset2_i(),grpTitle_i(),icon1_i(),icon2_i(),icon3_i(),icon4_i(),icon5_i(),icon6_i(),__HuangChengJieSuan_Button1_i(),lbTime_i()];
+			this.elementsContent = [__HuangChengJieSuan_UIAsset1_i(),__HuangChengJieSuan_UIAsset2_i(),grpTitle_i(),icon1_i(),getRewardBtn_i(),lbTime_i()];
 			
 			states = {
 			};
@@ -64,19 +56,6 @@ package org.mokylin.skin.app.banghui.huangcheng
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __HuangChengJieSuan_Button1_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.label = "领取奖励";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.color = 0xFFFFFF;
-			temp.width = 110;
-			temp.x = 210.5;
-			temp.y = 361;
-			return temp;
-		}
-
 		private function __HuangChengJieSuan_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -105,6 +84,21 @@ package org.mokylin.skin.app.banghui.huangcheng
 			return temp;
 		}
 
+		private function getRewardBtn_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			getRewardBtn = temp;
+			temp.name = "getRewardBtn";
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.label = "领取奖励";
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
+			temp.color = 0xFFFFFF;
+			temp.width = 110;
+			temp.x = 210.5;
+			temp.y = 361;
+			return temp;
+		}
+
 		private function grpTitle_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
@@ -123,61 +117,6 @@ package org.mokylin.skin.app.banghui.huangcheng
 			temp.name = "icon1";
 			temp.styleName = "ui/common/grid/normal/64.png";
 			temp.x = 33;
-			temp.y = 248;
-			return temp;
-		}
-
-		private function icon2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon2 = temp;
-			temp.name = "icon2";
-			temp.styleName = "ui/common/grid/normal/64.png";
-			temp.x = 111;
-			temp.y = 248;
-			return temp;
-		}
-
-		private function icon3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon3 = temp;
-			temp.name = "icon3";
-			temp.styleName = "ui/common/grid/normal/64.png";
-			temp.x = 189;
-			temp.y = 248;
-			return temp;
-		}
-
-		private function icon4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon4 = temp;
-			temp.name = "icon4";
-			temp.styleName = "ui/common/grid/normal/64.png";
-			temp.x = 267;
-			temp.y = 248;
-			return temp;
-		}
-
-		private function icon5_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon5 = temp;
-			temp.name = "icon5";
-			temp.styleName = "ui/common/grid/normal/64.png";
-			temp.x = 345;
-			temp.y = 248;
-			return temp;
-		}
-
-		private function icon6_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon6 = temp;
-			temp.name = "icon6";
-			temp.styleName = "ui/common/grid/normal/64.png";
-			temp.x = 422;
 			temp.y = 248;
 			return temp;
 		}

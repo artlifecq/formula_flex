@@ -12,6 +12,7 @@ package com.rpgGame.app.manager.scene
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.AreaMapManager;
 	import com.rpgGame.app.manager.GameSettingManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneDropGoodsManager;
 	import com.rpgGame.app.manager.role.SceneRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
@@ -419,7 +420,7 @@ package com.rpgGame.app.manager.scene
                         "[SceneID]:", info.q_map_id);
                 }
                 var tranportData : SceneTranportData = new SceneTranportData(RoleType.TYPE_TRANPORT_NORMAL);
-                tranportData.setConfigData(info);
+                tranportData.setConfigData(info,MainRoleManager.actorInfo.job);
                 SceneRoleManager.getInstance().createTranport(tranportData);
             }
 			//for each (var info : SceneTransportProto in transportList)

@@ -455,6 +455,13 @@ package org.game.netCore.net
 			//boss传送  跨服中不允许使用
 			sendCrossHash.put( 101210, -1 );
 			sendCrossHash.put( 101216, -1 );
+			
+			//帮会战
+			sendCrossHash.put( 253206, 1 );
+			sendCrossHash.put( 253207, 1 );
+			sendCrossHash.put( 253208, 1 );
+			sendCrossHash.put( 253209, 1 );
+			sendCrossHash.put( 155208, 1 );
 		}
 		
 		private function checkUseCrossServer( msg:Message ):int

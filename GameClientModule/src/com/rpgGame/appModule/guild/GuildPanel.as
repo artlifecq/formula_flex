@@ -4,6 +4,7 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.app.ui.TabBarPanel;
+	import com.rpgGame.appModule.guild.war.HczbPlayerViewUI;
 	import com.rpgGame.appModule.guild.war.WczbWarViewUI;
 	import com.rpgGame.core.events.GuildEvent;
 	import com.rpgGame.core.ui.tip.RTNodeID;
@@ -36,8 +37,8 @@ package com.rpgGame.appModule.guild
 			addTabDatas(TabBarSkin_pack,GuildUPViewUI,EmFunctionID.EM_BANGHUI_UPLEVEL);
 			addTabDatas(TabBarSkin_pack,GuildSkillViewUI,EmFunctionID.EM_BANGHUI_SPELL);
 			addTabDatas(TabBarSkin_pack,GuildListVewUI,EmFunctionID.EM_BANGHUI_LIEBIAO);
-			addTabDatas(TabBarSkin_pack,GuildPlayerListViewUI,EmFunctionID.EM_BANGHUI_COMBAT);
 			addTabDatas(TabBarSkin_pack,WczbWarViewUI,EmFunctionID.EM_BANGHUI_WCZB2);
+			addTabDatas(TabBarSkin_pack,HczbPlayerViewUI,EmFunctionID.EM_BANGHUI_COMBAT);
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void

@@ -9,7 +9,7 @@ package com.rpgGame.app.view.icon
 	import feathers.utils.filter.GrayFilter;
 	
 	import starling.events.TouchEvent;
-
+	
 	/**
 	 * 可拖拽格子 
 	 * @author wewell@163.com
@@ -58,7 +58,7 @@ package com.rpgGame.app.view.icon
 			
 			faceInfo =  _gridInfo.data;
 			
-//			setBg( GridBGType.CHORTCUT_2 );
+			//			setBg( GridBGType.CHORTCUT_2 );
 			
 			if( _gridInfo.data)
 			{
@@ -78,11 +78,11 @@ package com.rpgGame.app.view.icon
 		
 		private function setGridUnlock():void
 		{
-//			setBg( GridBGType.CHORTCUT_2_MASK );
-//			if(gridInfo.unlockInfo && !TipTargetManager.hasTipsEventListener(this))
-//			{
-//				TipTargetManager.addTxtTipTarget( this, TargetTipsMaker.makeTips( TipType.OPEN_GRID_TIP, gridInfo.unlockInfo ) );
-//			}
+			//			setBg( GridBGType.CHORTCUT_2_MASK );
+			//			if(gridInfo.unlockInfo && !TipTargetManager.hasTipsEventListener(this))
+			//			{
+			//				TipTargetManager.addTxtTipTarget( this, TargetTipsMaker.makeTips( TipType.OPEN_GRID_TIP, gridInfo.unlockInfo ) );
+			//			}
 		}
 		
 		
@@ -93,12 +93,26 @@ package com.rpgGame.app.view.icon
 		 */		
 		override protected function dragSourceOutChange():void
 		{
-//			super.dragSourceOutChange();
+			//			super.dragSourceOutChange();
 			
 			isGary = true;
-//			clear();
-//			TipTargetManager.removeTxtTipTarget(this);
+			//			clear();
+			//			TipTargetManager.removeTxtTipTarget(this);
 		}
+		
+		public function get isSelect() : Boolean
+		{
+			return _isSelect;
+		}
+		
+		public function set isSelect(value:Boolean):void
+		{
+			if (!_gridInfo||_gridInfo.data == null)
+				return;
+			_isSelect=value;
+			this.setIsSelect(value);
+		}
+		
 		
 		override public function set isGary(value : Boolean) : void
 		{
@@ -148,7 +162,7 @@ package com.rpgGame.app.view.icon
 				}
 			}
 		}
-
+		
 		
 		/**
 		 * 拖动完成表现
@@ -158,21 +172,21 @@ package com.rpgGame.app.view.icon
 		{
 			super.dragComplete(); 
 			onBackComplete();
-//			return;
-//			if(dropTarget != null)
-//			{
-//				if(dragSource.containerID == dropTarget.containerID && dragSource.index == dropTarget.index)
-//				{
-//					dragSourceBack();
-//				}
-//				else
-//				{
-//					hideDragSource();
-//				}
-//				return;
-//			}
-//			
-//			dragSourceBack();
+			//			return;
+			//			if(dropTarget != null)
+			//			{
+			//				if(dragSource.containerID == dropTarget.containerID && dragSource.index == dropTarget.index)
+			//				{
+			//					dragSourceBack();
+			//				}
+			//				else
+			//				{
+			//					hideDragSource();
+			//				}
+			//				return;
+			//			}
+			//			
+			//			dragSourceBack();
 		}
 		
 		override protected function onBackComplete():void
@@ -213,8 +227,8 @@ package com.rpgGame.app.view.icon
 		override protected function dragSourceBack():void
 		{
 			super.dragSourceBack();
-//			var pos:Point = this.parent.localToGlobal(new Point(this.x, this.y));
-//			TweenLite.to(dragSource,0.5,{x:pos.x, y:pos.y, onComplete:onBackComplete});
+			//			var pos:Point = this.parent.localToGlobal(new Point(this.x, this.y));
+			//			TweenLite.to(dragSource,0.5,{x:pos.x, y:pos.y, onComplete:onBackComplete});
 		}
 		
 	}

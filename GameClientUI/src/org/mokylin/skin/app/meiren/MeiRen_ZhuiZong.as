@@ -8,9 +8,8 @@ package org.mokylin.skin.app.meiren
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.app.meiren.MeiRenBoss_Item;
-	import org.mokylin.skin.component.button.ButtonSkin_putong;
-	import org.mokylin.skin.component.button.ButtonSkin_shouhui;
-	import org.mokylin.skin.component.button.ButtonSkin_zhankai;
+	import org.mokylin.skin.component.button.ButtonSkin_hide;
+	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 
 	/**
 	 * @private
@@ -40,9 +39,9 @@ package org.mokylin.skin.app.meiren
 
 		public var sec_info:feathers.controls.Label;
 
-		public var sec_navi1:feathers.controls.UIAsset;
+		public var sec_navi1:feathers.controls.Label;
 
-		public var sec_navi2:feathers.controls.UIAsset;
+		public var sec_navi2:feathers.controls.Label;
 
 		public var sec_shanghai:feathers.controls.Label;
 
@@ -66,7 +65,7 @@ package org.mokylin.skin.app.meiren
 			
 			this.currentState = "normal";
 			this.height = 287;
-			this.width = 253;
+			this.width = 248;
 			this.elementsContent = [task_box_i(),btn_open_i(),btn_close_i()];
 			
 			states = {
@@ -81,7 +80,7 @@ package org.mokylin.skin.app.meiren
 		private function __MeiRen_ZhuiZong_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/mainui/renwu/hengtiao.png";
+			temp.styleName = "ui/mainui/renwu/renwuzhuizongbg.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -92,9 +91,9 @@ package org.mokylin.skin.app.meiren
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_close = temp;
 			temp.name = "btn_close";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_shouhui;
-			temp.x = 234;
-			temp.y = 0;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_hide;
+			temp.x = 221;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -103,9 +102,10 @@ package org.mokylin.skin.app.meiren
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_open = temp;
 			temp.name = "btn_open";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_zhankai;
-			temp.x = 234;
-			temp.y = 0;
+			temp.scaleX = -1;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_hide;
+			temp.x = 243;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -118,7 +118,7 @@ package org.mokylin.skin.app.meiren
 			temp.styleName = "ui/mainui/fubenzhuizong/zs.png";
 			temp.width = 45;
 			temp.x = 40;
-			temp.y = 12;
+			temp.y = 15;
 			return temp;
 		}
 
@@ -132,7 +132,7 @@ package org.mokylin.skin.app.meiren
 			temp.styleName = "ui/mainui/fubenzhuizong/zs.png";
 			temp.width = 45;
 			temp.x = 213;
-			temp.y = 12;
+			temp.y = 15;
 			return temp;
 		}
 
@@ -145,8 +145,8 @@ package org.mokylin.skin.app.meiren
 			var skin:StateSkin = new org.mokylin.skin.app.meiren.MeiRenBoss_Item()
 			temp.skin = skin
 			temp.width = 169;
-			temp.x = 3;
-			temp.y = 59;
+			temp.x = 27;
+			temp.y = 63;
 			return temp;
 		}
 
@@ -159,8 +159,8 @@ package org.mokylin.skin.app.meiren
 			var skin:StateSkin = new org.mokylin.skin.app.meiren.MeiRenBoss_Item()
 			temp.skin = skin
 			temp.width = 169;
-			temp.x = 3;
-			temp.y = 79;
+			temp.x = 27;
+			temp.y = 85;
 			return temp;
 		}
 
@@ -170,14 +170,13 @@ package org.mokylin.skin.app.meiren
 			lbHeadName = temp;
 			temp.name = "lbHeadName";
 			temp.fontSize = 16;
-			temp.text = "夫妻副本";
+			temp.text = "美人营救";
 			temp.textAlign = "center";
 			temp.color = 0xFFF2B7;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlue"];
-			temp.visible = false;
 			temp.width = 205;
 			temp.x = 27;
-			temp.y = 6;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -193,8 +192,8 @@ package org.mokylin.skin.app.meiren
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 221;
-			temp.x = 3;
-			temp.y = 149;
+			temp.x = 27;
+			temp.y = 156;
 			return temp;
 		}
 
@@ -206,34 +205,38 @@ package org.mokylin.skin.app.meiren
 			temp.letterSpacing = -1;
 			temp.fontSize = 14;
 			temp.text = "副本剩余时间：00：22：08";
-			temp.textAlign = "left";
+			temp.textAlign = "center";
 			temp.color = 0xFF0D0D;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 209;
-			temp.x = 3;
+			temp.x = 22;
 			temp.y = 207;
 			return temp;
 		}
 
-		private function sec_navi1_i():feathers.controls.UIAsset
+		private function sec_navi1_i():feathers.controls.Label
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			var temp:feathers.controls.Label = new feathers.controls.Label();
 			sec_navi1 = temp;
 			temp.name = "sec_navi1";
-			temp.styleName = "ui/app/meiren/tiaozhanmubiao.png";
-			temp.x = 3;
-			temp.y = 36;
+			temp.text = "【挑战目标】";
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 10;
+			temp.y = 40;
 			return temp;
 		}
 
-		private function sec_navi2_i():feathers.controls.UIAsset
+		private function sec_navi2_i():feathers.controls.Label
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			var temp:feathers.controls.Label = new feathers.controls.Label();
 			sec_navi2 = temp;
 			temp.name = "sec_navi2";
-			temp.styleName = "ui/app/meiren/tishengxiaoguo.png";
-			temp.x = 3;
-			temp.y = 105;
+			temp.text = "【提升效果】";
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 10;
+			temp.y = 110;
 			return temp;
 		}
 
@@ -249,8 +252,8 @@ package org.mokylin.skin.app.meiren
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 221;
-			temp.x = 3;
-			temp.y = 129;
+			temp.x = 27;
+			temp.y = 135;
 			return temp;
 		}
 
@@ -263,7 +266,7 @@ package org.mokylin.skin.app.meiren
 			temp.height = 36;
 			temp.label = "退出副本";
 			temp.fontSize = 16;
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xEAEABC;
 			temp.width = 88;
 			temp.x = 83;
@@ -279,11 +282,11 @@ package org.mokylin.skin.app.meiren
 			temp.letterSpacing = -1;
 			temp.fontSize = 14;
 			temp.text = "提示：善用提升可提高自身战力";
-			temp.textAlign = "left";
+			temp.textAlign = "center";
 			temp.color = 0xFF0D0D;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 209;
-			temp.x = 3;
+			temp.x = 22;
 			temp.y = 187;
 			return temp;
 		}
@@ -293,7 +296,7 @@ package org.mokylin.skin.app.meiren
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			task_box = temp;
 			temp.name = "task_box";
-			temp.width = 253;
+			temp.width = 248;
 			temp.x = 0;
 			temp.y = 0;
 			temp.elementsContent = [ui_bg_i(),__MeiRen_ZhuiZong_UIAsset1_i(),lbHeadName_i(),head_left_i(),head_right_i(),uiXiangxi_i(),killbut_0_i(),killbut_1_i(),sec_subbut2_i(),sec_info_i(),sec_tishi_i(),sec_shanghai_i(),sec_fangyu_i(),sec_navi1_i(),sec_navi2_i()];
@@ -306,8 +309,8 @@ package org.mokylin.skin.app.meiren
 			uiXiangxi = temp;
 			temp.name = "uiXiangxi";
 			temp.styleName = "ui/mainui/fubenzhuizong/fuben/wenhao.png";
-			temp.x = 7;
-			temp.y = 6;
+			temp.x = 9;
+			temp.y = 9;
 			return temp;
 		}
 
@@ -318,7 +321,7 @@ package org.mokylin.skin.app.meiren
 			temp.name = "ui_bg";
 			temp.height = 287;
 			temp.styleName = "ui/mainui/renwu/bg.png";
-			temp.width = 253;
+			temp.width = 248;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

@@ -14,7 +14,7 @@ package com.rpgGame.app.ui
 	import starling.events.TouchPhase;
 	
 	import utils.TimerServer;
-
+	
 	/**
 	 * 大小值组件封装
 	 * @author dik
@@ -33,18 +33,23 @@ package com.rpgGame.app.ui
 		private var _value:int;
 		private var _maxNotify:int;
 		private var _minNotify:int;
-
+		
 		public function get value():int
 		{
 			return _value;
 		}
-
+		
 		public function set value(value:int):void
 		{
 			_value = value;
 			_changeHandler();
 		}
-
+		
+		public function get max():int
+		{
+			return _max;
+		}
+		
 		private var _changeHandler:Function;
 		
 		public function MinMaxValueBar(skin:StateSkin,changeHandler:Function,maxNotify:int=2011,minNotify:int=2012)

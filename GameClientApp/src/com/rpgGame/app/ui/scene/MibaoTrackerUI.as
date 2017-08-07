@@ -314,8 +314,14 @@ package com.rpgGame.app.ui.scene
 			hitList[3].lbNo.text=msg.rank.toString();
 			hitList[3].lbName.text=MainRoleManager.actorInfo.name;
 			hitList[3].lbNum.text=msg.damage+"("+int(msg.damage/msg.totalHp*100)+"%)";
-			
-			setShanghaiReword(int(msg.damage/msg.totalHp*100));
+			if(MibaoManager.getBossHp()>0)
+			{
+				setShanghaiReword(int(msg.damage/MibaoManager.getBossHp()*100));
+			}
+			else
+			{
+				icoList2Group.visible=false;
+			}
 			setUisite();
 		}
 		/**设置伤害奖励物品*/

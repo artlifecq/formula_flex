@@ -32,11 +32,17 @@ package com.rpgGame.appModule.guild.war
 			headItems=new Vector.<SkinnableContainer>();
 			headItems.push(_skin.leader0);
 			headItems.push(_skin.leader1);
+			for(var i:int=0;i<headItems.length;i++){
+				headItems[i].removeFromParent();
+			}
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
+			if(!_currentLeads){
+				_currentLeads=new Vector.<ResGuildWarLeaderSkillUseMessage>();
+			}
 			if(_currentLeads.length==2){
 				_currentLeads.shift();
 			}
@@ -50,9 +56,9 @@ package com.rpgGame.appModule.guild.war
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
 			super.onTouchTarget(target);
-			if(target==(_skin.leader0 as LeaderHead_Skin).headImg){
+			if(target==(_skin.leader0.skin as LeaderHead_Skin).headImg){
 				GuildWarSender.reqAcceptLeaderSkill(_currentLeads[0].leaderPlayerId);
-			}else if(target==(_skin.leader1 as LeaderHead_Skin).headImg){
+			}else if(target==(_skin.leader1.skin as LeaderHead_Skin).headImg){
 				GuildWarSender.reqAcceptLeaderSkill(_currentLeads[1].leaderPlayerId);
 			}
 		}

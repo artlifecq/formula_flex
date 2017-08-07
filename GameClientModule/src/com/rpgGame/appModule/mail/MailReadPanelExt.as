@@ -10,34 +10,34 @@ package com.rpgGame.appModule.mail
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.netData.mail.bean.MailDetailInfo;
 	
+	import feathers.controls.ScrollBarDisplayMode;
+	import feathers.controls.ScrollPolicy;
+	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.data.long;
 	import org.mokylin.skin.app.mail.MailRead_Skin;
 	
 	import starling.display.DisplayObject;
+	import starling.display.Sprite;
 	
 	public class MailReadPanelExt extends SkinUIPanel
 	{
 		private var _skin:MailRead_Skin;
-		
-		private var MAX_NUM:int=12;
 		private var _info:MailDetailInfo;
-		private var _fujianList:Vector.<IconCDFace>;
+		private var _skillContainer:Sprite;
 		public function MailReadPanelExt()
 		{
 			_skin=new MailRead_Skin();
 			super(_skin);
-			_fujianList=new Vector.<IconCDFace>();
-			for(var i:int=0;i<MAX_NUM;i++)
-			{
-				var ico:IconCDFace=IconCDFace.create(IcoSizeEnum.ICON_48);		
-				ico.selectImgVisible=false;
-				ico.x=(i%6)*58;
-				ico.y=Math.floor(i/6)*58-4;
-//				_skin.fujianList.addChild(ico);
-				_fujianList.push(ico);
-			}
+			initpanel();
 		}	
+		
+		private function initpanel():void
+		{
+			_skillContainer=new Sprite();
+			this._skin.skinList.scrollBarDisplayMode = ScrollBarDisplayMode.ALWAYS_VISIBLE;
+			this._skin.skinList.horizontalScrollPolicy=ScrollPolicy.OFF;
+		}
 		
 		override protected function onShow():void
 		{
@@ -110,16 +110,17 @@ package com.rpgGame.appModule.mail
 			}
 			else
 			{
-				for(var i:int=0;i<_fujianList.length;i++)
+				for(var i:int=0;i<_info.attachments.length;i++)
 				{
-					if(i<_info.attachments.length)
-					{
-						var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(_info.attachments[i].tempItemInfo.mod,_info.attachments[i].tempItemInfo.num);
-						FaceUtil.SetItemGrid(_fujianList[i],itemInfo);
-						_fujianList[i].selectImgVisible=false;
-						_skin.fujianList.addChild(_fujianList[i]);
-					}
+					var ico:IconCDFace=IconCDFace.create(IcoSizeEnum.ICON_48);		
+					ico.selectImgVisible=false;
+					var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(_info.attachments[i].tempItemInfo.mod,_info.attachments[i].tempItemInfo.num);
+					FaceUtil.SetItemGrid(ico,itemInfo);
+					ico.x=(i%6)*60;
+					ico.y=(int(i/6))*54;
+					_skillContainer.addChild(ico);
 				}
+				_skin.skinList.addChild(_skillContainer);
 				_skin.btnTiqu.visible=true;
 				_skin.btnCancel.x=138;
 			}
@@ -136,11 +137,8 @@ package com.rpgGame.appModule.mail
 		
 		private function clearIcoList():void
 		{
-			_skin.fujianList.removeChildren();
-			for(var i:int=0;i<_fujianList.length;i++)
-			{
-				_fujianList[i].clear();				
-			}
+			_skin.skinList.removeChildren();
+			_skillContainer.removeChildren();
 		}
 		
 		private function receivePrize():void

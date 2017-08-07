@@ -118,6 +118,7 @@ package com.rpgGame.app.fight.spell
 			var spKey:Boolean=tryCaseSpell(caseInfo, null, false, ignoreLock);
 			if(!spKey)
 			{
+				TrusteeshipManager.getInstance().isNormalSpell = false;
 				TrusteeshipManager.getInstance().nextSpell = getSpellData(spellID);
 			}
 		}
@@ -131,10 +132,10 @@ package com.rpgGame.app.fight.spell
 			//三连击释放失败
 			if (CASE_STATE_FAIL==caseState) 
 			{
-				TrusteeshipManager.getInstance().isNormalSpell = false;
 				//把动作切换为战斗待机状态
 				if (TrusteeshipManager.getInstance().tripleSkillCtrl.isTripleSkill(caseInfo.spellData.q_skillID)) 
 				{
+					TrusteeshipManager.getInstance().isNormalSpell = false;
 					MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_PREWAR, null, false, false, [RoleStateType.CONTROL_WALK_MOVE]);
 				}
 			}
@@ -151,6 +152,7 @@ package com.rpgGame.app.fight.spell
 			}
 			else if (caseState == CASE_STATE_NOT_IN_RELEASE_RANGE)//距离过远
 			{
+				TrusteeshipManager.getInstance().isNormalSpell = false;
 				//三连击的话直接发送请求
 				if (TrusteeshipManager.getInstance().tripleSkillCtrl.isTripleSkill(caseInfo.spellData.q_skillID)) 
 				{
@@ -195,11 +197,12 @@ package com.rpgGame.app.fight.spell
 					var spellData : Q_skill_model = caseInfo.spellData;
 					ref.setParams(spellData);
 					MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_CAST_SPELL_LOCK, ref);
-					if (/*spellData.q_relate_spells!=null || */spellData.q_relate_spells!="") 
+					if (spellData.q_relate_spells!="") 
 					{
 						TrusteeshipManager.getInstance().tripleSkillCtrl.setParams(spellData.q_skillID);
 					}
 					
+					GameLog.add("====================将要释放技能：" + caseInfo.caseSpellData.q_skillID);
 					SpellSender.releaseSpell(caseInfo.caseSpellData.q_skillID, caseInfo.releasePos.x, caseInfo.releasePos.y, angle, caseInfo.targetServerID);
 					
 					if(TrusteeshipManager.getInstance().tripleSkillCtrl.isLastTripleSkill(caseInfo.caseSpellData.q_skillID))
@@ -341,7 +344,7 @@ package com.rpgGame.app.fight.spell
 			var spellData : Q_skill_model = relateSelectable ? getNextRelateSpell() : _lastCaseSpell;
 			_lastCaseSpell = spellData;
 			castInfo.caseSpellData = spellData;
-			GameLog.add("====================将要释放技能：" + spellData.q_skillID);
+			
 			if (!spellData)
 			{
 				return CASE_STATE_FAIL;
@@ -1064,7 +1067,7 @@ package com.rpgGame.app.fight.spell
 			var districtWithPath : DistrictWithPath = SceneManager.getDistrict();
 			//var path : Vector.<Vector3D> = PathFinderUtil.findPath(districtWithPath, MainRoleManager.actor.position, tempVector3D);
 			var path : Vector.<Vector3D> = PolyUtil.findPath(districtWithPath, MainRoleManager.actor.position, tempVector3D);
-			dist = Point.distance(selfPos, releasePos);
+			dist = Point.distance(selfPos, releaseTargetPos);
 			var inRange : Boolean;
 			
 			if (spellData.q_blink_type != 0)

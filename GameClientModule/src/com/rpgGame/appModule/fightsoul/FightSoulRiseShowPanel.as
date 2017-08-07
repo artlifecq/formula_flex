@@ -5,13 +5,13 @@ package com.rpgGame.appModule.fightsoul
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.FightValueUtil;
+	import com.rpgGame.coreData.AvatarInfo;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.FightsoulData;
 	import com.rpgGame.coreData.cfg.FightsoulModeData;
 	import com.rpgGame.coreData.clientConfig.Q_att_values;
 	import com.rpgGame.coreData.clientConfig.Q_fightsoul;
 	import com.rpgGame.coreData.clientConfig.Q_fightsoul_mode;
-	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	
 	import org.mokylin.skin.app.zhanhun.ZhanHun_ShengJi;
@@ -29,11 +29,11 @@ package com.rpgGame.appModule.fightsoul
 		
 		private var currentShowMode:int;
 		private var level:int;
+		private var avatrInfo:AvatarInfo;
 		
 		private var fight_soul_atts:Array=[CharAttributeType.WAI_GONG,CharAttributeType.DEFENSE_PER,CharAttributeType.HP,CharAttributeType.SHENFA,CharAttributeType.HIT];
 		private var attRiseViews:Vector.<PropView>;
 		private var avatar:UIAvatar3D;
-		private var _showAvatarData : RoleData;
 		
 		public function FightSoulRiseShowPanel()
 		{
@@ -50,7 +50,6 @@ package com.rpgGame.appModule.fightsoul
 				attRiseViews.push(new PropView(_skin["lab_prop"+(i+1)].skin,fight_soul_atts[i]));
 			}
 			avatar=new UIAvatar3D(_skin.roleGrp);
-			_showAvatarData=new RoleData(0);
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
@@ -77,10 +76,10 @@ package com.rpgGame.appModule.fightsoul
 			}
 			
 			var modeinfo:Q_fightsoul_mode = FightsoulModeData.getModeInfoById(currentShowMode);
-			this._showAvatarData.avatarInfo.setBodyResID("pc/fightsoul/"+modeinfo.q_mode,null);
-			this._showAvatarData.avatarInfo.bodyEffectID =modeinfo.q_effect;
-			this._showAvatarData.avatarInfo.bodyEffectID2 =modeinfo.q_effect1;
-			avatar.setRoleData(this._showAvatarData);
+			avatar.avatarInfo.setBodyResID("pc/fightsoul/"+modeinfo.q_mode,null);
+			avatar.avatarInfo.bodyEffectID =modeinfo.q_effect;
+			avatar.avatarInfo.bodyEffectID2 =modeinfo.q_effect1;
+			avatar.update();
 			var scale:Number = modeinfo.q_panleScale/100;
 			avatar.setScale(scale);
 			avatar.y=modeinfo.q_panleY-150;

@@ -215,7 +215,7 @@ package com.rpgGame.app.manager.goods
 			{
 				case GoodsType.EQUIPMENT:
 				case GoodsType.EQUIPMENT1:
-				case GoodsType.EQUIPMENT2:
+				case GoodsType.EQUIPMENT2:			
 					var equip : EquipInfo = info as EquipInfo;
 					/*var dressEquips:Array = GoodsContainerMamager.getMrg(ItemContainerID.Role).getItemsByType(equip.equipType);
 					var i:int = dressEquips ? dressEquips.length : 0;
