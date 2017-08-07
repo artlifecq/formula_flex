@@ -25,8 +25,8 @@ package com.rpgGame.app.manager.fight
 		private var missTime:Number=0.2;
 		
 		private var showEndY:int=30;
-		private var moveEndY:int=120;
-		private var missEndY:int=180;
+		private var moveEndY:int=150;
+		private var missEndY:int=210;
 		private var playList:Vector.<AttackFace>;
 		
 
@@ -99,7 +99,7 @@ package com.rpgGame.app.manager.fight
 			var overTime:Number=getTimer()-prePlayTime;
 			overTime=overTime*0.001;
 			
-			if(overTime>=showTime){//达到播放条件可播放下一批
+			if(overTime>showTime){//达到播放条件可播放下一批
 				var attackFace : AttackFace;
 				prePlayTime=getTimer();				
 				var createNum:int=0;
