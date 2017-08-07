@@ -44,6 +44,7 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.core.view.uiComponent.face.cd.CDDataManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.cfg.StaticValue;
@@ -107,13 +108,13 @@ package   com.rpgGame.app.manager.debug
 			});
 			commandList.put( ".hidestate", function (...arg):void
 			{
-				LayerManager.showOrHideMM();
+				//LayerManager.showOrHideMM();
 				StatsUtil.hideAwayStats();
 				
 			});
 			commandList.put( ".showstate", function (...arg):void
 			{
-				LayerManager.showOrHideMM();
+				//LayerManager.showOrHideMM();
 				StatsUtil.showAwayStats(Stage3DLayerManager.stage,Stage3DLayerManager.stage3DProxy);
 			});
 			commandList.put( ".vip", function (...arg):void
@@ -436,6 +437,11 @@ package   com.rpgGame.app.manager.debug
 			commandList.put( ".fp", function (...arg):void
 			{
 				FightPowerChangePopPanelExt.showFightPowerChange(arg[0],arg[1]);
+			});
+			commandList.put( ".cd", function (...arg):void
+			{
+				//FightPowerChangePopPanelExt.showFightPowerChange(arg[0],arg[1]);
+				CDDataManager.playCD("sd",1000);
 			});
 		}
 		

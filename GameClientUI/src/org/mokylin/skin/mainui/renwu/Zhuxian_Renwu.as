@@ -47,7 +47,7 @@ package org.mokylin.skin.mainui.renwu
 			this.currentState = "normal";
 			this.height = 376;
 			this.width = 298;
-			this.elementsContent = [bg_i(),__Zhuxian_Renwu_UIAsset1_i(),__Zhuxian_Renwu_UIAsset2_i(),btnClose_i(),btn_ok_i(),__Zhuxian_Renwu_UIAsset3_i(),lb_name_i(),__Zhuxian_Renwu_UIAsset4_i(),lb_jiangli_i(),lb_speak_i(),ioc_0_i(),lb_time_i()];
+			this.elementsContent = [bg_i(),__Zhuxian_Renwu_UIAsset1_i(),__Zhuxian_Renwu_UIAsset2_i(),btnClose_i(),btn_ok_i(),lb_name_i(),lb_jiangli_i(),lb_speak_i(),ioc_0_i(),lb_time_i()];
 			
 			states = {
 			};
@@ -61,40 +61,22 @@ package org.mokylin.skin.mainui.renwu
 		private function __Zhuxian_Renwu_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.touchable = false;
-			temp.touchGroup = true;
-			temp.styleName = "ui/common/background/zhuxianrenwu.png";
-			temp.x = 106;
-			temp.y = 9;
+			temp.bottom = 59;
+			temp.left = 7;
+			temp.right = 7;
+			temp.styleName = "ui/common/background/neikuang_1.png";
+			temp.top = 34;
 			return temp;
 		}
 
 		private function __Zhuxian_Renwu_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.bottom = 61;
-			temp.styleName = "ui/common/background/neikuang_2.png";
-			temp.top = 42;
-			temp.width = 268;
-			temp.x = 16;
-			return temp;
-		}
-
-		private function __Zhuxian_Renwu_UIAsset3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/mainui/renwu/tiao2.png";
-			temp.x = 25;
-			temp.y = 49;
-			return temp;
-		}
-
-		private function __Zhuxian_Renwu_UIAsset4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/mainui/renwu/tiao2.png";
-			temp.x = 25;
-			temp.y = 160;
+			temp.touchable = false;
+			temp.touchGroup = true;
+			temp.styleName = "ui/common/background/zhuxianrenwu.png";
+			temp.x = 106;
+			temp.y = 9;
 			return temp;
 		}
 
@@ -185,7 +167,7 @@ package org.mokylin.skin.mainui.renwu
 			temp.name = "lb_speak";
 			temp.height = 80;
 			temp.text = "NPC对话框";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 246;
 			temp.x = 25;

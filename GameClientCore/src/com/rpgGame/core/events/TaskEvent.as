@@ -55,6 +55,9 @@ package com.rpgGame.core.events
 		public static const TASK_CHANGE_MATION : int = UNIQUEID.NEXT;
 		/**任务卡级*/
 		public static const TASK_NO_MAIN : int = UNIQUEID.NEXT;
+		/**放弃任务*/
+		public static const TASK_DROP : int = UNIQUEID.NEXT;
+		
 		/**任务中点击NPC*/
 		public static const TASK_CLICK_NPC : int = UNIQUEID.NEXT;
 		/**点击NPC寻路完毕*/

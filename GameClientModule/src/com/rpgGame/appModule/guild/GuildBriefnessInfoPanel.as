@@ -50,7 +50,7 @@ package com.rpgGame.appModule.guild
 		{
 			_levelInfo = GuildCfgData.getLevelInfo(info.level);
 			_skin.lbBanghuiName.text = info.name;
-			_skin.lbXuanyan.text = info.memberNum.toString()+"/"+_levelInfo.q_max_num.toString();
+			_skin.lbBanghuiNum.text = info.memberNum.toString()+"/"+_levelInfo.q_max_num.toString();
 			_skin.lbBangZhuName.text = info.chiefName;
 			_skin.lbXuanyan.text = info.note;
 			_skin.lbVip.visible = info.chiefVip == 1;

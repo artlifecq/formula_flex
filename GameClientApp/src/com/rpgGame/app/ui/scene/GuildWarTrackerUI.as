@@ -160,12 +160,6 @@ package com.rpgGame.app.ui.scene
 			FaceUtil.SetItemGrid(icon1,iteminfo1);
 			FaceUtil.SetItemGrid(icon2,iteminfo2);
 			FaceUtil.SetItemGrid(icon3,iteminfo3);
-			
-			
-			if(GuildManager.instance().isLeader){
-				EventManager.dispatchEvent(GuildEvent.GUILD_LEADER_SKILL_SHOW,true);
-			}
-			
 			initEvent();
 		}
 		
@@ -274,6 +268,10 @@ package com.rpgGame.app.ui.scene
 			_skin.lbJifen.htmlText="本人积分:"+msg.score;
 			_skin.lbPaiming.htmlText="本人排名:"+msg.rank;
 			_skin.lbJisha.htmlText="累计击杀玩家数:"+msg.allKillCnt;
+			
+			if(GuildManager.instance().isLeader){
+				EventManager.dispatchEvent(GuildEvent.GUILD_LEADER_SKILL_SHOW,msg);
+			}
 		}
 		
 		private function getRank(msg:ResGuildWarPersonRankMessage):void
@@ -375,7 +373,7 @@ package com.rpgGame.app.ui.scene
 			icon2=null;
 			icon3=null;
 			(MainRoleManager.actor.headFace as HeadFace).updateGuildWarInfoBar(null);
-			EventManager.dispatchEvent(GuildEvent.GUILD_LEADER_SKILL_SHOW,false);
+			EventManager.dispatchEvent(GuildEvent.GUILD_LEADER_SKILL_SHOW,null);
 		}
 	}
 }

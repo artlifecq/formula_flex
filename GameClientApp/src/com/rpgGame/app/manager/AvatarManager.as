@@ -93,7 +93,7 @@ package com.rpgGame.app.manager
 			//上“坐骑”
 			updateMount(role);
 			//穿“主体”
-			updateBody(role);
+//			updateBody(role);
 			//bodyEffect
 			updateBodyEft(role);
 			//穿“头发”

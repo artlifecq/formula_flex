@@ -88,7 +88,12 @@ package com.rpgGame.coreData.cfg.item
 		 */
 		public static function getItemQuality(id:int):int
 		{
-			return getQItemByID(id).q_default;
+			var item:Q_item=getQItemByID(id);
+			if(item)
+			{
+				return item.q_default;
+			}
+			return 0;
 		}
 		
 		/**
@@ -164,8 +169,12 @@ package com.rpgGame.coreData.cfg.item
 		 */
 		public static function getItemRequireLevel(id:int) : int
 		{
+			var item:Q_item=getQItemByID(id);
+			if(item)
+			{
+				return item.q_level;
+			}
 			return 0;
-			return getQItemByID(id).q_level;
 		}
 		
 		/**
@@ -236,7 +245,7 @@ package com.rpgGame.coreData.cfg.item
 		 */
 		public static function isAddHpItem(cfgId:int):Boolean
 		{
-			if (getItemType(cfgId) == GoodsType.MEDICINE && getItemLocation(cfgId) == 1)
+			if (getItemType(cfgId) == GoodsType.MEDICINE && getItemLocation(cfgId) == GoodsType.MEDICINE_SUB_3)
 			{
 				return true;
 			}

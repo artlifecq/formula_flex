@@ -265,6 +265,7 @@ package com.rpgGame.app.ui.main.taskbar
 				upDailyTaskView();
 				upTreasuerTaskView();
 				upGuildTaskView();
+				setGuideTaskView();
 			}
 			else if(type==TaskType.MAINTYPE_MAINTASK)
 			{
@@ -515,22 +516,25 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				for(var i:int=0;i<task.length;i++)
 				{
-					if(i<guideLabelList.length)
+					if(task[i].taskSubRateInfolist[0].num<task[i].taskSubRateInfolist[0].maxNum)
 					{
-						glabe=guideLabelList[i];
+						if(i<guideLabelList.length)
+						{
+							glabe=guideLabelList[i];
+						}
+						else
+						{
+							glabe=new Label();
+							guideLabelList.push(glabe);
+							skinList.push(glabe);
+							scrollBox.addChild(glabe);
+						}
+						glabe.name="KILLII"+TaskType.MAINTYPE_GUIDETASK+"II"+i;
+						glabe.x=_skin.sec_navi1.x;
+						glabe.visible=true;
+						taskData=TaskMissionCfgData.getTaskByID(task[i].taskModelId);
+						glabe.htmlText="<font color='#ffea00'>【"+taskData.q_name+"】</font>"+taskData.q_finish_describe+"("+task[i].taskSubRateInfolist[0].num+"/"+task[i].taskSubRateInfolist[0].maxNum+")";
 					}
-					else
-					{
-						glabe=new Label();
-						guideLabelList.push(glabe);
-						skinList.push(glabe);
-						scrollBox.addChild(glabe);
-					}
-					glabe.name="KILLII"+TaskType.MAINTYPE_GUIDETASK+"II"+i;
-					glabe.x=_skin.sec_navi1.x;
-					glabe.visible=true;
-					taskData=TaskMissionCfgData.getTaskByID(task[i].taskModelId);
-					glabe.htmlText="<font color='#ffea00'>【"+taskData.q_name+"】</font>"+taskData.q_finish_describe+"("+task[i].taskSubRateInfolist[0].num+"/"+task[i].taskSubRateInfolist[0].maxNum+")";
 				}
 			}
 			setUisite();
@@ -591,7 +595,7 @@ package com.rpgGame.app.ui.main.taskbar
 		private function setSubbutView(npcid:int,killButList:Vector.<SkinnableContainer>):void
 		{
 			var text:String="<font color='#eaeabc'>回复：</font><u>"+MonsterDataManager.getMonsterName(npcid)+"</u>";
-			TaskUtil.setGotargetLabelText(TaskType.SUB_CONVERSATION,killButList[0],text);
+			TaskUtil.setGotargetLabelText(true,killButList[0],text);
 			setUisite();
 		}
 		
@@ -638,11 +642,11 @@ package com.rpgGame.app.ui.main.taskbar
 			if(FunctionOpenManager.checkOpenBuyFunId(EmFunctionID.EM_ZHANHUN))
 			{
 				text="<u>战魂</u>"
-				TaskUtil.setGotargetLabelText(add,killBut1List[add],text);
+				TaskUtil.setGotargetLabelText(false,killBut1List[add],text);
 				add++;
 			}
 			text="<u>推荐挂机点</u>"
-			TaskUtil.setGotargetLabelText(10,killBut1List[add],text);
+			TaskUtil.setGotargetLabelText(true,killBut1List[add],text);
 		}
 		
 		

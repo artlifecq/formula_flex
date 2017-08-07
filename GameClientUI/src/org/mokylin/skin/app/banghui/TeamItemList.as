@@ -46,7 +46,7 @@ package org.mokylin.skin.app.banghui
 			super();
 			
 			this.currentState = "normal";
-			this.height = 36;
+			this.height = 33;
 			this.width = 627;
 			this.elementsContent = [bg_i(),uiFirt_i(),numList_i(),numList2_i(),lbTeamName_i(),lbLevel_i(),lbRolenName_i(),lbNum_i(),lbZhanli_i()];
 			
@@ -64,7 +64,7 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 36;
+			temp.height = 33;
 			var skin:StateSkin = new org.mokylin.skin.common.ItemBg()
 			temp.skin = skin
 			temp.width = 627;
@@ -183,7 +183,7 @@ package org.mokylin.skin.app.banghui
 			temp.name = "uiFirt";
 			temp.styleName = "ui/app/banghui/huawen.png";
 			temp.x = 0;
-			temp.y = 14;
+			temp.y = 11;
 			return temp;
 		}
 

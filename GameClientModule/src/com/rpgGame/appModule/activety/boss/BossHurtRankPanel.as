@@ -74,6 +74,12 @@ package com.rpgGame.appModule.activety.boss
 			_tipsSetInfo.titleRes="ui/app/activety/shijieboss/5.png";
 			_skin.myHurt.text="我的伤害:";
 			_skin.myRank.text="我的排名:";
+			for(var i:int=1;i<11;i++){
+				var info:BossHurtInfo=_skin.ListItem.dataProvider.getItemAt(i) as BossHurtInfo;
+				info.bossDamageInfo=null;
+			}
+			_skin.ListItem.dataProvider.updateAll();
+			
 			initEvent();
 		}
 		
