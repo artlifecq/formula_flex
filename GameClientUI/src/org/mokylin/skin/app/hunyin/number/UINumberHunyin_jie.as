@@ -22,16 +22,16 @@ package org.mokylin.skin.app.hunyin.number
 			
 			states = {
 			};
-			skinNames={"0":"ui/app/hunyin/number/hunyin_jie/0.png",
-			"1":"ui/app/hunyin/number/hunyin_jie/1.png",
-			"2":"ui/app/hunyin/number/hunyin_jie/2.png",
-			"3":"ui/app/hunyin/number/hunyin_jie/3.png",
-			"4":"ui/app/hunyin/number/hunyin_jie/4.png",
-			"5":"ui/app/hunyin/number/hunyin_jie/5.png",
-			"6":"ui/app/hunyin/number/hunyin_jie/6.png",
-			"7":"ui/app/hunyin/number/hunyin_jie/7.png",
-			"8":"ui/app/hunyin/number/hunyin_jie/8.png",
-			"9":"ui/app/hunyin/number/hunyin_jie/9.png"};
+			skinNames={"0":"ui/common/hunyin_jie/0.png",
+			"1":"ui/common/hunyin_jie/1.png",
+			"2":"ui/common/hunyin_jie/2.png",
+			"3":"ui/common/hunyin_jie/3.png",
+			"4":"ui/common/hunyin_jie/4.png",
+			"5":"ui/common/hunyin_jie/5.png",
+			"6":"ui/common/hunyin_jie/6.png",
+			"7":"ui/common/hunyin_jie/7.png",
+			"8":"ui/common/hunyin_jie/8.png",
+			"9":"ui/common/hunyin_jie/9.png"};
 		}
 
 

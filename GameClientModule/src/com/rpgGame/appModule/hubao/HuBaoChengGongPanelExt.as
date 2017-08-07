@@ -33,7 +33,7 @@ package com.rpgGame.appModule.hubao
 		private var _towPrizePoint:Array;
 		private var _threePrizePoint:Array;
 		
-		private var _time:int=7;
+		private var _time:int=10;
 		private var _timer:GameTimer;
 		public function HuBaoChengGongPanelExt()
 		{
@@ -115,6 +115,7 @@ package com.rpgGame.appModule.hubao
 				}
 			}
 			_skin.lbTiShi.htmlText="您还剩"+msg.remainNum.toString()+"次护送机会，是否继续?";
+			_time=10;
 			TimerServer.addLoop(onTimer,1000);
 		}
 		

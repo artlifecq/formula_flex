@@ -91,9 +91,9 @@ package org.mokylin.skin.app.hunyin
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiName = temp;
 			temp.name = "uiName";
-			temp.styleName = "ui/app/hunyin/shuxing/baojilv.png";
+			temp.styleName = "ui/common/shuxing/bjz.png";
 			temp.x = 8;
-			temp.y = 5;
+			temp.y = 2;
 			return temp;
 		}
 

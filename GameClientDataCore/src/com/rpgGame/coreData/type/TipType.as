@@ -122,5 +122,8 @@ package com.rpgGame.coreData.type
 		public static const TASK_LOOP_TIP : int = rEnum.next;
 		/** 帮会任务tips */
 		public static const TASK_GUILD_TIP : int = rEnum.next;
+		
+		/** 婚戒tips */
+		public static const HUNYIN_JIEZI_TIP : int = rEnum.next;
 	}
 }

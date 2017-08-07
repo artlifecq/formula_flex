@@ -34,6 +34,7 @@ package com.rpgGame.app.process
     import com.rpgGame.app.ui.tips.EquipTip;
     import com.rpgGame.app.ui.tips.ExtarItemTip;
     import com.rpgGame.app.ui.tips.FriendHeroTips;
+    import com.rpgGame.app.ui.tips.HunJieTip;
     import com.rpgGame.app.ui.tips.ItemTip;
     import com.rpgGame.app.ui.tips.JiXianBuffTip;
     import com.rpgGame.app.ui.tips.JiXianPanelTip;
@@ -262,6 +263,8 @@ package com.rpgGame.app.process
 			TipManager.registerTipsParserClass(TipType.MEIREN_GUANQIA_TIP,MeiRenGuanQiaTip);
 			TipManager.registerTipsParserClass(TipType.TASK_LEAD_TIP,TaskLeadTips);
 			TipManager.registerTipsParserClass(TipType.TASK_LOOP_TIP,TaskloopTips);
+			
+			TipManager.registerTipsParserClass(TipType.HUNYIN_JIEZI_TIP,HunJieTip);
 		}
 
 		private function onSwitchCmp() : void
