@@ -56,6 +56,8 @@ package com.rpgGame.app.manager.task
 		public static var AUTOLVE:int=100;
 		public static var AUTOMAIN:int=60000;//拉主线任务时间
 		public static var AUTOTREASEUER:int=120000;//拉环式任务时间
+		public static var PANLVE:int=30;//任务面板切换等级
+		
 		public function TaskAutoManager()
 		{
 			
@@ -64,25 +66,22 @@ package com.rpgGame.app.manager.task
 			_isBroken = false;
 			
 			AppDispather.instance.addEventListener( AppEvent.APP_HIDE, onApphide );
+			
+			EventManager.addEvent(TaskEvent.TASK_NEW_MATION,newMation);
 			EventManager.addEvent(TaskEvent.TASK_CHANGE_MATION,changeMation);
+			
+			
 		}
 		public function setup(role : SceneRole) : void
 		{
 			_stateMachine = new AIStateMachine(role);
 			
 			resetTechTime();
-			if(GlobalSheetData.getSettingInfo(511)!=null)
-			{
-				AUTOLVE=GlobalSheetData.getSettingInfo(511).q_int_value;
-			}
-			if(GlobalSheetData.getSettingInfo(512)!=null)
-			{
-				AUTOMAIN=GlobalSheetData.getSettingInfo(512).q_int_value*1000;
-			}
-			if(GlobalSheetData.getSettingInfo(521)!=null)
-			{
-				AUTOTREASEUER=GlobalSheetData.getSettingInfo(521).q_int_value*1000;
-			}
+			AUTOLVE=GlobalSheetData.getSettingInfo(511)!=null?GlobalSheetData.getSettingInfo(511).q_int_value:100;
+			AUTOMAIN=GlobalSheetData.getSettingInfo(512)!=null?GlobalSheetData.getSettingInfo(512).q_int_value*1000:10*1000;
+			AUTOTREASEUER=GlobalSheetData.getSettingInfo(521)!=null?GlobalSheetData.getSettingInfo(521).q_int_value*1000:20*1000;
+			PANLVE=GlobalSheetData.getSettingInfo(533)!=null?GlobalSheetData.getSettingInfo(533).q_int_value:30;
+			
 		}
 		private function onApphide( ev:AppEvent ):void
 		{
@@ -181,6 +180,7 @@ package com.rpgGame.app.manager.task
 			}
 			
 		}
+		public var jumpOver:Boolean=false;
 		public var walkOver:Boolean=false;
 		public var actTaskMonster:Boolean=false;
 		private var _techTime:int=0;
@@ -207,7 +207,7 @@ package com.rpgGame.app.manager.task
 						startTaskAuto(TaskType.MAINTYPE_TREASUREBOX);
 					}
 				}
-				else if(TaskMissionManager.haveMainTask)
+				else if(TaskMissionManager.haveMainTask&&TaskMissionManager.flashMainTaskId!=TaskMissionManager.mainTaskInfo.taskId)
 				{
 					if((getTimer()-_techTime)>=AUTOMAIN)
 					{
@@ -266,6 +266,13 @@ package com.rpgGame.app.manager.task
 		{
 			_taskTarget = value;
 		}
+		/**新任务*/
+		private function newMation(type:int):void
+		{
+			TaskAutoManager.getInstance().jumpOver=false;
+		}
+		
+		
 		/**任务进度改变*/
 		private function changeMation(type:int):void
 		{

@@ -247,14 +247,20 @@ package com.rpgGame.app.ui.main.taskbar
 		
 		private function setTaskButView(mainType,int,type:int,describe:String,information:String,sub:Vector.<TaskSubRateInfo>):void
 		{
-			if(type!=TaskType.SUB_CONVERSATION&&TaskMissionManager.getMainTaskIsFinish()&&TaskMissionManager.getMainTaskHaveNpc())
+			if(TaskMissionManager.getMainTaskIsFinish())
 			{
 				titleLable.htmlText=title+"<font color='#00ff0c'>(已完成)</font>";
-				setSubbutView(TaskMissionManager.getTaskNpcModeId(mainType));
 			}
 			else
 			{
 				titleLable.htmlText=title+"<font color='#ff0d0d'>(未完成)</font>";
+			}
+			if(TaskMissionManager.getMainTaskIsFinish()&&TaskMissionManager.getMainTaskHaveNpc())
+			{
+				setSubbutView(TaskMissionManager.getTaskNpcModeId(mainType));
+			}
+			else
+			{
 				TaskUtil.setGotargetInfo(mainType,type,describe,information,sub,killButList);
 			}
 			setUisite();
@@ -264,7 +270,7 @@ package com.rpgGame.app.ui.main.taskbar
 		{
 			hideKillBut();
 			var text:String="<font color='#eaeabc'>回复：</font><u>"+MonsterDataManager.getMonsterName(npcid)+"</u>";
-			TaskUtil.setGotargetLabelText(TaskType.SUB_CONVERSATION,killButList[0],text);
+			TaskUtil.setGotargetLabelText(true,killButList[0],text);
 			
 		}
 		

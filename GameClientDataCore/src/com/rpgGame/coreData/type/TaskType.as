@@ -32,7 +32,8 @@ package com.rpgGame.coreData.type
 		public static var SUB_USEITEM:int = 5;
 		/**6副本*/
 		public static var SUB_QUIT_ZONE:int = 6;
-		
+		/**19护宝*/
+		public static var SUB_HUBAO:int = 19;
 		/**22广播*/
 		public static var SUB_SPEAK:int = 22;
 		

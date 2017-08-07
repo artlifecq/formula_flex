@@ -41,7 +41,12 @@ package com.rpgGame.app.state.ai
 			if(taskData==null)
 				return;
 			missionType=taskData.q_mission_type;
-			var post:Array=TaskMissionManager.getJumpPos(taskType);
+			var post:Array;
+			if(!TaskAutoManager.getInstance().jumpOver)//新任务没跳才跳
+			{
+				post=TaskMissionManager.getJumpPos(taskType);
+			}
+			
 			if(TaskMissionManager.getTaskIsFinishByType(taskType))
 			{
 				if(TaskMissionManager.getTaskHaveNpc(taskType))
@@ -79,9 +84,11 @@ package com.rpgGame.app.state.ai
 		private function gotoNpc(data :Object=null):void
 		{
 			TaskUtil.npcTaskWalk(TaskMissionManager.getTaskNpcAreaId(taskType),onArrive);
+			TaskAutoManager.getInstance().jumpOver=true;
 		}
 		private function gotoTask(data :Object=null):void
 		{
+			
 			var postPath:Array=TaskMissionManager.getTaskPathingByType(taskType,taskTarget);
 			switch(missionType)
 			{
@@ -105,6 +112,7 @@ package com.rpgGame.app.state.ai
 					break;
 				
 			}
+			TaskAutoManager.getInstance().jumpOver=true;
 			/*if(missionType==TaskType.SUB_USEITEM)//是使用道具任务且没有完成
 			{
 				GatherAutoManager.getInstance().startGatherAuto(TaskUtil.getMonsterByType(taskType,taskTarget));
@@ -156,6 +164,7 @@ package com.rpgGame.app.state.ai
 			isWalking=false;
 			TaskAutoManager.getInstance().walkOver=true;
 		}
+		
 		private var isWalking:Boolean=false;
 		private var isWalkTime:int;
 		private function onArrive(data :Object) : void
