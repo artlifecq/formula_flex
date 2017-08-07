@@ -280,7 +280,7 @@ package com.rpgGame.app.view.icon
 		
 		private function jobIconComplete(ass:UIAsset):void
 		{
-			_jobImage.x = _iconSize-_jobImage.width-1;
+			_jobImage.x = this.width-_jobImage.width-1;
 			_jobImage.y = 1;
 		}		
 		

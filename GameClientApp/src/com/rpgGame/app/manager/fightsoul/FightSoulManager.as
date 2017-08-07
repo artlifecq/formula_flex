@@ -35,6 +35,7 @@ package com.rpgGame.app.manager.fightsoul
 	import com.rpgGame.netData.skill.bean.SkillInfo;
 	
 	import org.client.mainCore.manager.EventManager;
+	import org.client.mainCore.utils.BitUtil;
 	import org.game.netCore.connection.SocketConnection;
 
 	public class FightSoulManager
@@ -137,11 +138,12 @@ package com.rpgGame.app.manager.fightsoul
 			var newBit:int=rewardBit;
 			var index:int=-1;
 			for(var i:int=0;i<4;i++){
-				if((oldBit&(1<<i))>0&&(newBit&(1<<i))<0){
+				if(BitUtil.getInt(oldBit,i)==false&&BitUtil.getInt(newBit,i)==true){
 					index=i;
 					break;
 				}
 			}
+			
 			this._fightSoulInfo.rewardBit = rewardBit;
 			EventManager.dispatchEvent(FightSoul_GetReward,index);
 		}
@@ -303,7 +305,7 @@ package com.rpgGame.app.manager.fightsoul
 			if(index>3)
 				return false;
 			else
-				return (this._fightSoulInfo.rewardBit&(1<<index))>0;
+				return BitUtil.getInt(_fightSoulInfo.rewardBit,index);
 		}
 		
 		private function updataSceneMode():void
