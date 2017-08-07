@@ -79,7 +79,14 @@ package com.rpgGame.appModule.rank
 			
 			_skin.vip.visible = info.vipId>0;
 			_skin.vip.styleName = "ui/common/tubiao/vips"+info.vipId+".png";
-			_skin.lbName.text = info.playername;
+			//不要显示[]
+			var tname:String=info.playername;
+			var index:int=tname.indexOf("]");
+			if (index!=-1) 
+			{
+				tname=tname.substr(index+1);
+			}
+			_skin.lbName.text =tname;
 			_skin.lbZhiye.text = ItemUtil.getJobName(info.playerBriefInfo.job);
 			if(info.toptype == RankListType.MOUNT_TYPE)
 			{

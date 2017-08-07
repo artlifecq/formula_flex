@@ -13,6 +13,9 @@ package com.rpgGame.netData.map.message{
 	 */
 	public class ReqNewRunningMessage extends Message {
 	
+		//冲锋标志 1 可以冲锋  0 不可冲锋
+		private var _chargeFlag: int;
+		
 		//跑步坐标集合
 		private var _positions: Vector.<com.rpgGame.netData.structs.Position> = new Vector.<com.rpgGame.netData.structs.Position>();
 		
@@ -21,6 +24,8 @@ package com.rpgGame.netData.map.message{
 		 */
 		override protected function writing(): Boolean{
 			var i: int = 0;
+			//冲锋标志 1 可以冲锋  0 不可冲锋
+			writeByte(_chargeFlag);
 			//跑步坐标集合
 			writeShort(_positions.length);
 			for (i = 0; i < _positions.length; i++) {
@@ -34,6 +39,8 @@ package com.rpgGame.netData.map.message{
 		 */
 		override protected function reading(): Boolean{
 			var i: int = 0;
+			//冲锋标志 1 可以冲锋  0 不可冲锋
+			_chargeFlag = readByte();
 			//跑步坐标集合
 			var positions_length : int = readShort();
 			for (i = 0; i < positions_length; i++) {
@@ -48,6 +55,21 @@ package com.rpgGame.netData.map.message{
 		 */
 		override public function getId(): int {
 			return 101215;
+		}
+		
+		/**
+		 * get 冲锋标志 1 可以冲锋  0 不可冲锋
+		 * @return 
+		 */
+		public function get chargeFlag(): int{
+			return _chargeFlag;
+		}
+		
+		/**
+		 * set 冲锋标志 1 可以冲锋  0 不可冲锋
+		 */
+		public function set chargeFlag(value: int): void{
+			this._chargeFlag = value;
 		}
 		
 		/**

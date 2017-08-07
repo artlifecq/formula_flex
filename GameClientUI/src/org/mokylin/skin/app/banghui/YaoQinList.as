@@ -225,6 +225,7 @@ package org.mokylin.skin.app.banghui
 			lbNum = temp;
 			temp.name = "lbNum";
 			temp.height = 19;
+			temp.fontSize = 14;
 			temp.text = "1/99";
 			temp.textAlign = "center";
 			temp.color = 0xCFC6AE;
