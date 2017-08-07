@@ -529,13 +529,14 @@ package com.rpgGame.app.utils
 		 * @param id 刷新的id
 		 *
 		 */
-		public static function npcTaskFly(id : int,mainType : int) : void
+		public static function npcTaskFly(id : int,mainType : int,missionType:int=0) : void
 		{
 			
 			var monsterData : Q_scene_monster_area = MonsterDataManager.getAreaByAreaID(id);
 			if (monsterData)
 			{
 				TaskMissionManager.flyTaskType=mainType;
+				TaskMissionManager.flyMissionType=missionType;
 				SceneSender.sceneMapTransport(monsterData.q_mapid, monsterData.q_center_x, monsterData.q_center_y);
 			}
 		}
@@ -911,10 +912,12 @@ package com.rpgGame.app.utils
 		{
 			var i:int,j:int,length:int;
 			var text:String="";
+			var postPath:Array=TaskMissionManager.getTaskPathingByType(mainType,0);
+			var flyKey:Boolean=postPath&&postPath.length==3;
 			if(missionType==TaskType.SUB_CONVERSATION)
 			{
 				text=TaskMissionCfgData.getTaskDescribe(missionType,describe,TaskMissionManager.getTaskNpcModeId(mainType));
-				setGotargetLabelText(missionType,txtButList[0],text);
+				setGotargetLabelText(flyKey,txtButList[0],text);
 			}
 			else
 			{
@@ -943,15 +946,15 @@ package com.rpgGame.app.utils
 								finish=subList[i].maxNum;
 							}
 							text=TaskMissionCfgData.getTaskDescribe(missionType,describe,modeid);
-							text+="<font color='#cfc6ae'>("+count+"/"+finish+")</font>";
+							text+="<font color='#eaeabc'>("+count+"/"+finish+")</font>";
 							
-							setGotargetLabelText(missionType,txtButList[i],text);
+							setGotargetLabelText(flyKey,txtButList[i],text);
 						}
 					}
 				}
 			}
 		}
-		public static function setGotargetLabelText(type:int,but:SkinnableContainer,t:String):void
+		public static function setGotargetLabelText(flyKey:Boolean,but:SkinnableContainer,t:String):void
 		{
 			
 			var rItme:Renwu_Item;
@@ -966,12 +969,7 @@ package com.rpgGame.app.utils
 				rItme.labelDisplay.width=rItme.labelDisplay.textWidth+10;
 				but.width=rItme.labelDisplay.textWidth+15;
 				but.visible=true;
-				rItme.btn_send.visible=true;
-				if(type==0||type==5||type==6)
-				{
-					rItme.btn_send.visible=false;
-				}
-				
+				rItme.btn_send.visible=flyKey;				
 			}
 			
 			

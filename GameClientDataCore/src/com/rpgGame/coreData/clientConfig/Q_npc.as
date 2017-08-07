@@ -44,6 +44,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_viewplay:int;
 		 /**  npc视野范围 */
 		public var q_field:int;
+		 /**  采集物吟唱条上文字 */
+		public var q_collect_singbar:String;
 		 /**  采集后触发脚本编号(47默认编号） */
 		public var q_collectscript:int;
 		 /**  采集时间（毫秒） */

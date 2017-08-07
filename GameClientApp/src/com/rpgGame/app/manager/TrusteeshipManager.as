@@ -170,11 +170,23 @@ package com.rpgGame.app.manager
 		public function startAutoFight() : void
 		{
 			stopFightTarget();
-			var selectedRole : SceneRole = SceneRoleSelectManager.selectedRole;
-			var modeState : int = FightManager.getFightRoleState(selectedRole);
-			if (selectedRole && modeState != FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY)
+			var selectedRole:SceneRole=SceneRoleSelectManager.selectedRole;
+			if(selectedRole)
 			{
-				SceneRoleSelectManager.selectedRole = null;
+				var mdata:MonsterData=selectedRole.data as MonsterData;
+				if(mdata==null||(mdata.ownerId>0&&mdata.monsterData.q_owner==1))//挂机不打玩家和玩家的召唤物
+				{
+					SceneRoleSelectManager.selectedRole=null;
+				}
+			}
+			selectedRole=SceneRoleSelectManager.selectedRole;
+			if (selectedRole)
+			{
+				var modeState : int = FightManager.getFightRoleState(selectedRole);
+				if(modeState != FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY)
+				{
+					SceneRoleSelectManager.selectedRole = null;
+				}
 			}
 			isNormalSpell = false;
 			nextSpell = null;

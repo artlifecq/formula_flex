@@ -256,6 +256,7 @@ package com.rpgGame.app.data
 			//怪物//NPC
 			MonsterDataManager.setMonsterConfig(dic[ConfigClassRegister.Q_monster]);//怪物总表
 			MonsterDataManager.setSceneAreaMonsterConfig(dic[ConfigClassRegister.Q_scene_monster_area]);//怪物刷新表
+			MonsterDataManager.setCollectConfig(dic[ConfigClassRegister.Q_npc]);//采集物信息
 			
 			//技能相关
 			SpellDataManager.setConfig(dic[ConfigClassRegister.Q_skill_model]);//技能总表
