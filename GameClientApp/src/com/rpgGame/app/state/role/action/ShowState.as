@@ -32,7 +32,7 @@ package com.rpgGame.app.state.role.action
 		
 		override public function playAnimation(role : BaseRole, render : RenderUnit3D, isFreeze : Boolean = false, time : int = -1, speedRatio : Number = 1) : void
 		{
-			var statusType : String = RoleActionType.getActionType(_showType, (_machine as RoleStateMachine).isRiding);
+			var statusType : String = RoleActionType.getActionType(_showType, false);
 			switch (render.type)
 			{
 				case RenderUnitType.BODY:

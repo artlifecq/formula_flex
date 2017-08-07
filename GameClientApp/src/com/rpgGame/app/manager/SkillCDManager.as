@@ -1,14 +1,11 @@
 package com.rpgGame.app.manager
 {
 	import com.gameClient.utils.HashMap;
-	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.view.uiComponent.face.cd.CDDataManager;
 	import com.rpgGame.coreData.cfg.GCDCfgData;
-	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.face.FaceTypeEnum;
-	import com.rpgGame.coreData.info.buff.BuffData;
 	
 	/**
 	 * 技能cd管理器 
@@ -214,18 +211,7 @@ package com.rpgGame.app.manager
 			
 			var cdTime : int = 0; //已经经过的时间
 			var configCDTime :Number = spellData.q_cd; //配置的CD时间
-			/*var length:int = _bufflist.length;
-			for(var index:int = 0;index<length;index++)
-			{
-				var buffdata:BuffData = _bufflist[i];
-				var skillstr:String = buffdata._data.q_Bonus_skill;
-				var buffStatesStr:String = skillstr.substring(1,skillstr.length-1)
-				var list:Array = buffStatesStr.split(",");
-				if(list.indexOf(spellData.q_skillID.toString())>=0)
-				{
-					configCDTime -=buffdata.buffInfo.value/1000;
-				}
-			}*/
+			
 			var skillid:int = spellData.q_skillID;
 			if(_reduceCDMap.containsKey(skillid))
 				configCDTime -= _reduceCDMap.getValue(skillid) as Number;

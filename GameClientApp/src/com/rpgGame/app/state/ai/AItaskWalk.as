@@ -177,9 +177,9 @@ package com.rpgGame.app.state.ai
 		{
 			if (nextState.type == AIStateType.AI_NONE)
 				return true;
-			if(!MainRoleManager.actor.stateMachine.isRunning&&!MainRoleManager.actor.stateMachine.isWalking&&!MainRoleManager.actor.stateMachine.isWalkMoving&&!MainRoleManager.actor.stateMachine.isJumpRising)
+			/*if(!MainRoleManager.actor.stateMachine.isRunning&&!MainRoleManager.actor.stateMachine.isWalking&&!MainRoleManager.actor.stateMachine.isWalkMoving&&!MainRoleManager.actor.stateMachine.isJumpRising)
 			{
-				if(isWalking&&(getTimer()-isWalkTime)>=TaskAutoManager.AUTOMAIN)
+				if(isWalking)//&&(getTimer()-isWalkTime)>=TaskAutoManager.AUTOMAIN
 				{
 					return true;
 				}
@@ -187,7 +187,7 @@ package com.rpgGame.app.state.ai
 			else
 			{
 				isWalkTime=getTimer();
-			}
+			}*/
 			return false;
 		}
 		override public function enterPass(prevState : IState, force : Boolean = false) : Boolean

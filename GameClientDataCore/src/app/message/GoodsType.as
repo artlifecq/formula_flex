@@ -18,6 +18,23 @@ package app.message {
 		 *药品 
 		 */
 		public static const MEDICINE:int = 3;
+		
+		
+		/**
+		 *药品 子类型1
+		 */
+		public static const MEDICINE_SUB_1:int = 1;
+		
+		/**
+		 *药品 子类型2
+		 */
+		public static const MEDICINE_SUB_2:int = 2;
+		
+		/**
+		 *药品 子类型3
+		 */
+		public static const MEDICINE_SUB_3:int = 3;
+		
 		/**
 		 * 装备
 		 */
@@ -108,6 +125,10 @@ package app.message {
 		 *人物技能书
 		 */
 		public static const SKILL_BOOK_HERO:int = 31;
+		
+		
+		
+		
 		
 		
 	}

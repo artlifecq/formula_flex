@@ -3,7 +3,6 @@ package com.rpgGame.app.manager.goods
 	import com.rpgGame.app.manager.ItemCDManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.manager.mount.MountEquipmentManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.ui.alert.AutoDressAlert;
 	import com.rpgGame.app.ui.alert.GameAlert;
@@ -263,6 +262,10 @@ package com.rpgGame.app.manager.goods
 		/** 查找当前背包中最合适的药品，品质优先，品质相同的等级优先 **/
 		public function searchHPSuitDrugItem( isAutoBuy:Boolean=false ):ClientItemInfo
 		{
+			if(_goodsList==null||_goodsList.length==0)
+			{
+				return null;
+			}
 			var itemInfoList:Array = _goodsList;
 			var returnItem:ClientItemInfo;
 			var cfgId:int;
@@ -322,7 +325,8 @@ package com.rpgGame.app.manager.goods
 						cfgId= itemVo.data.item.mod;
 						requireLevel= ItemConfig.getItemRequireLevel( cfgId ) ;
 						quality= ItemConfig.getItemQuality( cfgId );
-						if(ItemConfig.isAddHpItem(cfgId) && MainRoleManager.actorInfo.totalStat.level >= requireLevel&&Mgr.shopMgr.isCanbuyShopItem(itemVo,1)&&!ItemCDManager.getInstance().getSkillHasCDTime(itemVo.getItemConfig()))
+						
+						if(ItemConfig.isAddHpItem(cfgId) && MainRoleManager.actorInfo.totalStat.level >= requireLevel)//&&!ItemCDManager.getInstance().getSkillHasCDTime(itemVo.getItemConfig())
 						{
 							if( buyItem )
 							{
@@ -347,7 +351,20 @@ package com.rpgGame.app.manager.goods
 				}
 				if(buyItem!=null)
 				{
-					Mgr.shopMgr.ReqBuyItem(buyItem.data,1,null,1);
+					var maxBuy:int;
+					var allRes:Number=Mgr.shopMgr.getCurrency(buyItem.data.priceType);
+					var maxCount:int=int(allRes/buyItem.data.price);
+					maxCount=Math.min(99,maxCount);//999
+					/*if (buyItem.data.limitType!=0) 
+					{
+						
+						maxBuy=Math.min(999,buyItem.data.limitNum-buyItem.data.todayBuyNum);
+					}
+					else
+					{
+						maxBuy=999;
+					}*/
+					Mgr.shopMgr.ReqBuyItem(buyItem.data,maxCount,null);
 				}
 				
 			}
