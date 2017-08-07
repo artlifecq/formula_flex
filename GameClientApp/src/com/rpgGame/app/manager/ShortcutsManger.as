@@ -273,12 +273,17 @@ package com.rpgGame.app.manager
 				case ShortcutsTypeEnum.SKILL_TYPE:
 					//使用这个技能，走释放技能的流程
                     var config : Q_skill_model = CastSpellHelper.getSpellData(shortData.id);
-                    if (isKeyboard && null != config && 1 == config.q_skill_state) {//技能持续状态
+                    if (isKeyboard && null != config && 1 == config.q_skill_state) 
+					{//技能持续状态
                         SpellSender.reqSkillContiState(shortData.id, this._isUsed ? 0 : 1);
 						this._isUsed = !this._isUsed;
                         return true;
                     }
-					CastSpellHelper.shortcutsTryCaseSpell(shortData.id);
+					else
+					{
+						if(_isUsed)return false;
+						CastSpellHelper.shortcutsTryCaseSpell(shortData.id);
+					}
 					return true;
 
 				case ShortcutsTypeEnum.ITEM_TYPE:
@@ -291,11 +296,14 @@ package com.rpgGame.app.manager
 			return true;
 		}
         
-        private function onRemoveBuffEventHandler(buffData:BuffData) : void {
-            if (buffData.roleId != MainRoleManager.actor.id) {
+        private function onRemoveBuffEventHandler(buffData:BuffData) : void
+		{
+            if (buffData.roleId != MainRoleManager.actor.id)
+			{
                 return;
             }
-            if (2003 == buffData.cfgId) {
+            if (2003 == buffData.cfgId)
+			{
                 // 疯狂连弩技能产生的buff
                 this._isUsed = false;
             }
