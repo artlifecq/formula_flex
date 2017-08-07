@@ -121,8 +121,8 @@ package com.rpgGame.appModule.hunyin
 			var data : RenderParamData3D = new RenderParamData3D(0, "effect_ui", ClientConfig.getEffect("ui_dongfang_xuanze"));
 			data.forceLoad=true;//ui上的3d特效强制加载
 			var unit : RenderUnit3D = _btnsonghuaeff.addRenderUnitWith(data, 0);	
-			_btnsonghuaeff.x=460;
-			_btnsonghuaeff.y=40;
+			_btnsonghuaeff.x=500;
+			_btnsonghuaeff.y=145;
 			unit.addUnitAtComposite(unit);
 			_modEftContaner.addChild3D(_btnsonghuaeff);
 			_btnsonghuaeff.stop();
@@ -131,8 +131,8 @@ package com.rpgGame.appModule.hunyin
 			data = new RenderParamData3D(0, "effect_ui", ClientConfig.getEffect("ui_dongfang_xuanze"));
 			data.forceLoad=true;//ui上的3d特效强制加载
 			unit = _btnyongbaoeff.addRenderUnitWith(data, 0);	
-			_btnyongbaoeff.x=460;
-			_btnyongbaoeff.y=111;
+			_btnyongbaoeff.x=500;
+			_btnyongbaoeff.y=216;
 			unit.addUnitAtComposite(unit);
 			_modEftContaner.addChild3D(_btnyongbaoeff);
 			_btnyongbaoeff.stop();
@@ -141,8 +141,8 @@ package com.rpgGame.appModule.hunyin
 			data = new RenderParamData3D(0, "effect_ui", ClientConfig.getEffect("ui_dongfang_xuanze"));
 			data.forceLoad=true;//ui上的3d特效强制加载
 			unit = _btnqinweneff.addRenderUnitWith(data, 0);	
-			_btnqinweneff.x=460;
-			_btnqinweneff.y=182;
+			_btnqinweneff.x=500;
+			_btnqinweneff.y=287;
 			unit.addUnitAtComposite(unit);
 			_modEftContaner.addChild3D(_btnqinweneff);
 			_btnqinweneff.stop();
@@ -151,8 +151,8 @@ package com.rpgGame.appModule.hunyin
 			data = new RenderParamData3D(0, "effect_ui", ClientConfig.getEffect("ui_dongfang_xuanze"));
 			data.forceLoad=true;//ui上的3d特效强制加载
 			unit = _btndongfangeff.addRenderUnitWith(data, 0);	
-			_btndongfangeff.x=460;
-			_btndongfangeff.y=253;
+			_btndongfangeff.x=500;
+			_btndongfangeff.y=358;
 			unit.addUnitAtComposite(unit);
 			_modEftContaner.addChild3D(_btndongfangeff);
 			_btndongfangeff.stop();

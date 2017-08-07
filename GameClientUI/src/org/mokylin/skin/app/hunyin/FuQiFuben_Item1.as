@@ -31,8 +31,6 @@ package org.mokylin.skin.app.hunyin
 
 		public var ui_bg:feathers.controls.UIAsset;
 
-		public var ui_bg_kuang:feathers.controls.UIAsset;
-
 		public var ui_lv:feathers.controls.UIAsset;
 
 
@@ -44,7 +42,9 @@ package org.mokylin.skin.app.hunyin
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [ui_bg_i(),ui_bg_kuang_i(),ui_lv_i(),skinMc_i(),selectBg_i(),grpZhan_i()];
+			this.height = 390;
+			this.width = 298;
+			this.elementsContent = [ui_bg_i(),__FuQiFuben_Item1_UIAsset1_i(),ui_lv_i(),skinMc_i(),selectBg_i(),grpZhan_i()];
 			
 			states = {
 			};
@@ -55,6 +55,16 @@ package org.mokylin.skin.app.hunyin
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
+		private function __FuQiFuben_Item1_UIAsset1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.height = 38;
+			temp.styleName = "ui/app/hunyin/bantoudi.png";
+			temp.x = 49;
+			temp.y = 237;
+			return temp;
+		}
+
 		private function btnZhan1_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
@@ -131,18 +141,6 @@ package org.mokylin.skin.app.hunyin
 			temp.styleName = "ui/app/hunyin/jiandan.png";
 			temp.x = 0;
 			temp.y = 0;
-			return temp;
-		}
-
-		private function ui_bg_kuang_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			ui_bg_kuang = temp;
-			temp.name = "ui_bg_kuang";
-			temp.height = 38;
-			temp.styleName = "ui/app/hunyin/bantoudi.png";
-			temp.x = 49;
-			temp.y = 237;
 			return temp;
 		}
 

@@ -60,6 +60,8 @@ package org.mokylin.skin.app.hunyin
 
 		public var uiShuxing:feathers.controls.UIAsset;
 
+		public var ui_kuang:feathers.controls.UIAsset;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -111,25 +113,16 @@ package org.mokylin.skin.app.hunyin
 		private function __Tips_HunJie_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/grid/normal/64.png";
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function __Tips_HunJie_UIAsset2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/common/zhandouli.png";
 			temp.x = 0;
 			temp.y = 4;
 			return temp;
 		}
 
-		private function __Tips_HunJie_UIAsset3_i():feathers.controls.UIAsset
+		private function __Tips_HunJie_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/hunyin/dengjie.png";
+			temp.styleName = "ui/common/dengjie.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -202,7 +195,7 @@ package org.mokylin.skin.app.hunyin
 			temp.name = "grpDengjie";
 			temp.x = 95;
 			temp.y = 68;
-			temp.elementsContent = [numJie_i(),__Tips_HunJie_UIAsset3_i()];
+			temp.elementsContent = [numJie_i(),__Tips_HunJie_UIAsset2_i()];
 			return temp;
 		}
 
@@ -224,7 +217,7 @@ package org.mokylin.skin.app.hunyin
 			temp.name = "grp_icon";
 			temp.x = 13;
 			temp.y = 41;
-			temp.elementsContent = [__Tips_HunJie_UIAsset1_i()];
+			temp.elementsContent = [ui_kuang_i()];
 			return temp;
 		}
 
@@ -235,7 +228,7 @@ package org.mokylin.skin.app.hunyin
 			temp.name = "grp_zhandouli";
 			temp.x = 95;
 			temp.y = 39;
-			temp.elementsContent = [numbers_i(),__Tips_HunJie_UIAsset2_i(),tip_down_i(),tip_up_i()];
+			temp.elementsContent = [numbers_i(),__Tips_HunJie_UIAsset1_i(),tip_down_i(),tip_up_i()];
 			return temp;
 		}
 
@@ -357,6 +350,17 @@ package org.mokylin.skin.app.hunyin
 			temp.styleName = "ui/common/tips/zhuangbei/jichushuxing.png";
 			temp.x = 13;
 			temp.y = 161;
+			return temp;
+		}
+
+		private function ui_kuang_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ui_kuang = temp;
+			temp.name = "ui_kuang";
+			temp.styleName = "ui/common/grid/normal/64.png";
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 

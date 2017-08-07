@@ -114,6 +114,8 @@ package com.rpgGame.appModule.equip
 		
 		private var upCfg:Q_equip_strength;
 		
+		private var actualCfg:Q_equip_strength;
+		
 		private var tween:TweenMax;
 		
 		private var tweenEquip:TweenMax;
@@ -552,7 +554,7 @@ package com.rpgGame.appModule.equip
 				_skin.lb_pro.text=currentExp+"/"+allExp;
 				
 				if(currCfg&&upCfg&&canUpNum!=0){//能升级
-					updateAttShow(currCfg,upCfg);
+					updateAttShow(currCfg,actualCfg);
 				}else{
 					updateAttShow(currCfg);
 				}
@@ -617,7 +619,7 @@ package com.rpgGame.appModule.equip
 					nextCfg=EquipStrengthCfg.getStrengthCfg(targetEquipInfo.qItem.q_kind,targetEquipInfo.qItem.q_job,currentLv);//下一级的配置
 					upExp=nextCfg.q_exp-(nowCfg!=null?nowCfg.q_exp:0);//升级所需强化值
 					upCfg=nextCfg;
-					
+					actualCfg=nowCfg;
 					if(exp-upExp<0){//不够升级不查找
 						break;
 					}else	{

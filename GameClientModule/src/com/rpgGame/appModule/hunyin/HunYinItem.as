@@ -37,29 +37,12 @@ package com.rpgGame.appModule.hunyin
 		
 		public function setData(type:int,value:int,nextValue:int):void
 		{
-			switch(type)
-			{
-				case CharAttributeType.CRIT:
-					_skin.uiName.styleName= "ui/app/hunyin/shuxing/baojijiacheng.png";
-					break;
-				case CharAttributeType.CRIT_PER:
-					_skin.uiName.styleName= "ui/app/hunyin/shuxing/baojilv.png";
-					break;
-				case CharAttributeType.DEFENSE_PER:
-					_skin.uiName.styleName= "ui/app/hunyin/shuxing/fangyuzhi.png";
-					break;
-				case CharAttributeType.WAI_GONG:
-					_skin.uiName.styleName= "ui/app/hunyin/shuxing/gongjili.png";
-					break;
-				case CharAttributeType.MAX_HP:
-					_skin.uiName.styleName= "ui/app/hunyin/shuxing/shengmingzhi.png";
-					break;
-			}
-			_skin.lbNum.text=AttValueConfig.getDisAttValueStr(type,value);
+			_skin.uiName.styleName= CharAttributeType.getAttrNameUrl(type);
+			_skin.lbNum.text=AttValueConfig.getDisAttValue(type,value).toString();
 			var num:int=nextValue-value;
 			if(num>0)
 			{
-				_skin.lbAdd.text=AttValueConfig.getDisAttValueStr(type,num);
+				_skin.lbAdd.text=AttValueConfig.getDisAttValue(type,num).toString();
 				_skin.lbAdd.visible=true;
 				_skin.uiUp.visible=true;
 			}

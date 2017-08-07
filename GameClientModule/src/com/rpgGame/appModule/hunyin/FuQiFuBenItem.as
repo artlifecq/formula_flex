@@ -9,6 +9,8 @@ package com.rpgGame.appModule.hunyin
 	import com.rpgGame.coreData.clientConfig.Q_zone;
 	import com.rpgGame.coreData.clientConfig.Q_zone_multy;
 	
+	import flash.geom.Point;
+	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.hunyin.FuQiFuben_Item1;
 	
@@ -25,7 +27,7 @@ package com.rpgGame.appModule.hunyin
 		private var _iscanChallenge:Boolean;
 		public function FuQiFuBenItem(type:int=0)
 		{
-			_skin=new FuQiFuben_Item1();			
+			_skin=new FuQiFuben_Item1();	
 			super(_skin);
 			switch(type)
 			{
@@ -89,17 +91,70 @@ package com.rpgGame.appModule.hunyin
 			}			
 		}
 		
-		public function onTouchItem(e:TouchEvent):void
+		private static const HELPER_POINT:Point = new Point();
+		protected var touchPointID:int = -1;
+		public function onTouchItem(event:TouchEvent):void
 		{
-			var t:Touch=e.getTouch(this);
-			if(!t){
-				onMouseOutHandler();
+			if(this.touchPointID >= 0)
+			{
+				var touch:Touch = event.getTouch(this, null, this.touchPointID);
+				if(!touch || !this.stage)
+				{
+					return;
+				}
+				
+				touch.getLocation(this.stage, HELPER_POINT);
+				var isInBounds:Boolean = this.contains(this.stage.hitTest(HELPER_POINT));
+				if(touch.phase === TouchPhase.MOVED)
+				{
+					if(isInBounds)
+					{
+						_skin.selectBg.visible=true;
+						updateShowState(true);
+					}
+					else
+					{
+						_skin.selectBg.visible=false;
+						updateShowState(false);
+					}
+				}else if(touch.phase === TouchPhase.ENDED){
+					this.touchPointID = -1;
+					if(isInBounds)
+					{
+						_skin.selectBg.visible=true;
+						updateShowState(true);
+					}
+					else
+					{
+						_skin.selectBg.visible=false;
+						updateShowState(false);
+					}
+				}
 				return;
 			}
-			t=e.getTouch(this,TouchPhase.HOVER);
-			if(t){
-				onMouseOverHandler();
+			else //if we get here, we don't have a saved touch ID yet
+			{
+				touch = event.getTouch(this, TouchPhase.BEGAN);
+				if(touch)
+				{
+					_skin.selectBg.visible=true;
+					updateShowState(true);
+					this.touchPointID = touch.id;
+					return;
+				}
+				touch = event.getTouch(this, TouchPhase.HOVER);
+				if(touch)
+				{
+					_skin.selectBg.visible=true;
+					updateShowState(true);
+					return;
+				}
+				
+				//end of hover
+				_skin.selectBg.visible=false;
+				updateShowState(false);
 			}
+			
 		}
 		
 		public function setdata(info:Q_zone):void

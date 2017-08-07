@@ -1,5 +1,6 @@
 package com.rpgGame.app.utils
 {
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.goods.RoleEquipmentManager;
 	import com.rpgGame.app.manager.mount.MountManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -170,23 +171,29 @@ package com.rpgGame.app.utils
 					case GoodsType.EQUIPMENT://装备
 					case GoodsType.EQUIPMENT1://装备
 					case GoodsType.EQUIPMENT2://装备
-						TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.EQUIP_TIP, itemInfo ) );
-						if(itemInfo.containerID==ItemContainerID.BackPack){
-							if((hero.job!=itemInfo.qItem.q_job&&itemInfo.qItem.q_job!=0)||(hero.sex!=itemInfo.qItem.q_sex&&itemInfo.qItem.q_sex!=0)||hero.totalStat.level<itemInfo.qItem.q_level){
-								grid.setJobState(AssetUrl.EQUIP_JOB_NO);
-							}else{
-								var equipItemInfo:ClientItemInfo=RoleEquipmentManager.instance.getEquipInfoByIndex(itemInfo.qItem.q_kind);
-								var equipFight:int;
-								if(equipItemInfo){
-									equipFight=equipItemInfo.itemInfo.fightPower;
-								}
-								var targetFight:int=itemInfo.itemInfo.fightPower;
-								if(equipFight>targetFight){
-									grid.setJobState(AssetUrl.EQUIP_JOB_DOWN);
-								}else if(equipFight<targetFight){
-									grid.setJobState(AssetUrl.EQUIP_JOB_UP);
+						if(itemInfo.qItem.q_type==GoodsType.EQUIPMENT2&&itemInfo.qItem.q_location==5)
+						{
+							TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.HUNYIN_JIEZI_TIP, Mgr.hunyinMgr.JieZiLv>0? Mgr.hunyinMgr.JieZiLv:1));
+						}
+						else{
+							TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.EQUIP_TIP, itemInfo ) );
+							if(itemInfo.containerID==ItemContainerID.BackPack){
+								if((hero.job!=itemInfo.qItem.q_job&&itemInfo.qItem.q_job!=0)||(hero.sex!=itemInfo.qItem.q_sex&&itemInfo.qItem.q_sex!=0)||hero.totalStat.level<itemInfo.qItem.q_level){
+									grid.setJobState(AssetUrl.EQUIP_JOB_NO);
 								}else{
-									grid.setJobState(null);
+									var equipItemInfo:ClientItemInfo=RoleEquipmentManager.instance.getEquipInfoByIndex(itemInfo.qItem.q_kind);
+									var equipFight:int;
+									if(equipItemInfo){
+										equipFight=equipItemInfo.itemInfo.fightPower;
+									}
+									var targetFight:int=itemInfo.itemInfo.fightPower;
+									if(equipFight>targetFight){
+										grid.setJobState(AssetUrl.EQUIP_JOB_DOWN);
+									}else if(equipFight<targetFight){
+										grid.setJobState(AssetUrl.EQUIP_JOB_UP);
+									}else{
+										grid.setJobState(null);
+									}
 								}
 							}
 						}
