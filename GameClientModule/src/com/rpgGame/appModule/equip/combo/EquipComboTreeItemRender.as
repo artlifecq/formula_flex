@@ -22,6 +22,7 @@ package com.rpgGame.appModule.equip.combo
 	import org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonJianhao;
 	import org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonSanjiao_down;
 	import org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonSanjiao_right;
+	import org.mokylin.skin.app.zhuangbei.hecheng.button.ButtonShuye;
 	import org.mokylin.skin.common.ItemBg;
 	import org.mokylin.skin.common.over.SelectBtn;
 	
@@ -36,7 +37,7 @@ package com.rpgGame.appModule.equip.combo
 	{
 		private var _skin:HeChengMenuItemSkin;
 		private var _renderHeight:Number;
-		private var _mainListStyles:Array=[ButtonJianding,ButtonBianshi];
+		private var _mainListStyles:Array=[ButtonJianding,ButtonBianshi,ButtonShuye];
 		
 		public function EquipComboTreeItemRender()
 		{
