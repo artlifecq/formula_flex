@@ -321,7 +321,7 @@ package com.rpgGame.app.manager.goods
 				case GoodsType.STRENGTH:
 					AppManager.showAppNoHide(AppConstant.EQUIP_PANL);
 					return;
-				case GoodsType.CHAT:
+			/*	case GoodsType.CHAT:
 					return;
 				case GoodsType.TRANSFER:
 					return;
@@ -334,7 +334,7 @@ package com.rpgGame.app.manager.goods
 				case GoodsType.MOUNT:
 					return;
 				case GoodsType.MERIDIANSTONE:
-					return;
+					return;*/
 			}
 			
 			/*switch(item.getNormalUsableType)
