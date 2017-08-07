@@ -18,37 +18,49 @@ package com.rpgGame.app.state.role.control
 	{
 		public function SkillCDReduceState()
 		{
-			super(RoleStateType.CONTROL_BUFF_SKILLCD2);
+			super(RoleStateType.CONTROL_BUFF_REDUCE_SKILLCD);
 		}
 		
-		override public function afterExecute():void
+		override public function execute():void
 		{
-			super.afterExecute();
-			var ref:BuffStateReference=_ref as BuffStateReference;
-			var qBuff:Q_buff=ref.buffData._data;
-			if (qBuff) 
+			super.execute();
+			if (_machine && !_machine.isInPool)
 			{
-				var resTime:Number= ref.buffData.buffInfo.value;
-				if(qBuff.q_buff_id == 6003)
+				_stateReference = null;
+				if (_ref)
 				{
-					DodgeManager.getinstance().reduceTime = resTime;
-				}else{
-					var skillArr:Array=JSONUtil.decode(qBuff.q_Bonus_skill);
-					if (skillArr==null||skillArr.length==0) 
+					if (_ref is SkillCDReduceStateReference)
 					{
-						GameLog.addError(qBuff.q_buff_name+"配置错误减少cd");
-						return;
-					}
-					var len:int=skillArr.length;
-					var tmpSkill:int;
-					for (var i:int = 0; i < len; i++) 
-					{
-						tmpSkill=skillArr[i];
-						SkillCDManager.getInstance().reduceCDTime(tmpSkill,resTime);
+						_stateReference = _ref as SkillCDReduceStateReference;
+						var qBuff:Q_buff=_stateReference.buffData._data;
+						if (qBuff) 
+						{
+							var resTime:Number= _stateReference.buffData.buffInfo.value;
+							if(qBuff.q_buff_id == 6003)
+							{
+								DodgeManager.getinstance().reduceTime = resTime;
+							}
+							else
+							{
+								var skillArr:Array=JSONUtil.decode(qBuff.q_Bonus_skill);
+								if (skillArr==null||skillArr.length==0) 
+								{
+									GameLog.addError(qBuff.q_buff_name+"配置错误减少cd");
+									return;
+								}
+								var len:int=skillArr.length;
+								var tmpSkill:int;
+								for (var i:int = 0; i < len; i++) 
+								{
+									tmpSkill=skillArr[i];
+									SkillCDManager.getInstance().reduceCDTime(tmpSkill,resTime);
+								}
+							}
+						}
 					}
 				}
-				
-				
+				else
+					throw new Error("减技能CD状态引用必须是SkillCDReduceStateReference类型！");
 			}
 		}
 		override public function enterPass(prevState:IState, force:Boolean=false):Boolean
@@ -60,10 +72,10 @@ package com.rpgGame.app.state.role.control
 			}
 			return false;
 		}
-		override public function afterLeave():void
+		override public function leave():void
 		{
-			super.afterLeave();
-			var ref:BuffStateReference=_ref as BuffStateReference;
+			super.leave();
+			var ref:SkillCDReduceStateReference=_ref as SkillCDReduceStateReference;
 			var qBuff:Q_buff=ref.buffData._data;
 			if (qBuff) 
 			{
@@ -81,7 +93,6 @@ package com.rpgGame.app.state.role.control
 					}
 				}
 			}
-			
 		}
 	}
 }
