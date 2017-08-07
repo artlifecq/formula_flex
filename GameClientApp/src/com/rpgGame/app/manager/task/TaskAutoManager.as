@@ -270,6 +270,7 @@ package com.rpgGame.app.manager.task
 		private function newMation(type:int):void
 		{
 			TaskAutoManager.getInstance().jumpOver=false;
+			_stateMachine.transition(AIStateType.AI_NONE);
 		}
 		
 		
@@ -388,6 +389,7 @@ package com.rpgGame.app.manager.task
 					TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);	
 					break;
 			}
+			
 		}
 		
 		public function taskLevel(level:int):void
