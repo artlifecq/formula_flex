@@ -138,7 +138,6 @@ package com.rpgGame.appModule.equip
 		private function initView():void
 		{
 			alertOkTips=new AlertSetInfo(LangAlertInfo.EQUIP_USE_TIPS);
-			alertOkTips.alertInfo.alertType=AlertTypeEnum.ALERT_TYPE_OK;
 			alertOkTips.isShowCBox=true;
 			
 			useListIds=new Vector.<long>();
@@ -199,6 +198,7 @@ package com.rpgGame.appModule.equip
 			}
 			
 			_targetEquip=new DragDropItem(IcoSizeEnum.ICON_64,0);
+			_targetEquip.wearIsVisble=false;
 			_targetEquip.onTouchEndCallBack=onCancelTarget;
 			_targetEquip.dragAble = true;
 			_targetEquip.checkDrag=checkDrag;
@@ -317,7 +317,7 @@ package com.rpgGame.appModule.equip
 		
 		private function createComBoxRender2():SkinItemRender
 		{
-			var skin:ListItem_Skin=new ListItem_Skin();
+			var skin:ListItem_Skin=new ListItem_Skin(); 
 			var skinItem:SkinItem=new SkinItem(_skin.cmb_pinzhi,skin);
 			var render:SkinItemRender=new SkinItemRender(skinItem);
 			return render;
@@ -644,11 +644,11 @@ package com.rpgGame.appModule.equip
 				_skin.arrow_up1.visible=_skin.lb_up1.visible=false;
 				_skin.arrow_up2.visible=_skin.lb_up2.visible=false;
 				_leftSkin.lb_yinzi.text=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT4),0);
-			}
-			if(_skin.cmb_dengjie.alpha==1&&!tween){
-				tween=TweenMax.fromTo(_skin.cmb_dengjie,0.6,{x:384,alpha:1},{x:455,alpha:0,ease:Expo.easeOut,onComplete:showComplete});
-				TweenMax.fromTo(_skin.cmb_pinzhi,0.6,{x:466,alpha:1},{x:555,alpha:0,ease:Expo.easeOut,onComplete:showComplete});
-			}
+				if(_skin.cmb_dengjie.alpha==1&&!tween){
+					tween=TweenMax.fromTo(_skin.cmb_dengjie,0.6,{x:384,alpha:1},{x:455,alpha:0,ease:Expo.easeOut,onComplete:showComplete});
+					TweenMax.fromTo(_skin.cmb_pinzhi,0.6,{x:466,alpha:1},{x:555,alpha:0,ease:Expo.easeOut,onComplete:showComplete});
+				}
+			}		
 		}
 		
 		private function showComplete():void
@@ -837,7 +837,10 @@ package com.rpgGame.appModule.equip
 				}
 				targetEquipInfo=null;
 			}
-			
+			if(_skin.cmb_dengjie.alpha==1&&!tween){
+				tween=TweenMax.fromTo(_skin.cmb_dengjie,0.6,{x:384,alpha:1},{x:455,alpha:0,ease:Expo.easeOut,onComplete:showComplete});
+				TweenMax.fromTo(_skin.cmb_pinzhi,0.6,{x:466,alpha:1},{x:555,alpha:0,ease:Expo.easeOut,onComplete:showComplete});
+			}			
 			_targetEquip.setGridEmpty();
 			
 			_leftSkin.tab_pack.removeEventListener(Event.CHANGE, onTab);
@@ -879,6 +882,7 @@ package com.rpgGame.appModule.equip
 		{
 			if(msg.opaque==EquipOperateType.POLISH_ONEKEY&&msg.result==1){
 				var alertOk:AlertSetInfo=new AlertSetInfo(LangUI.UI_TEXT11);//强化成功
+				alertOk.alertInfo.alertType=AlertTypeEnum.ALERT_TYPE_OK;
 				alertOk.alertInfo.value=alertOk.alertInfo.value.replace("$",addExp);
 				alertOk.alertInfo.value=alertOk.alertInfo.value.replace("$",useListIds.length);
 				alertOk.alertInfo.value=alertOk.alertInfo.value.replace("$",addExp*perMon);

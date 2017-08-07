@@ -62,7 +62,8 @@ package com.rpgGame.app.view.icon
 		private var _isDestroyed:Boolean;
 		private var _isDisposed:Boolean;
 		protected var _disposing : Boolean;
-		
+		/**是否需要显示已装备的图标**/
+		protected var isShowIsWear : Boolean = true;
 		/**
 		 * 格子大小 
 		 * @param $iconSize
@@ -285,7 +286,7 @@ package com.rpgGame.app.view.icon
 		
 		public function setIsWear(v:Boolean):void
 		{
-			if(v)
+			if(v&&isShowIsWear)
 			{
 				if(!_wearImage)
 				{

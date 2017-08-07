@@ -14,6 +14,8 @@ package com.rpgGame.app.manager.goods
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
 	
+	import app.message.GoodsType;
+	
 	import org.client.mainCore.manager.EventManager;
 	
 	/**
@@ -133,6 +135,32 @@ package com.rpgGame.app.manager.goods
 				i++;
 			}
 			return allDatas;
+		}
+		
+		/**获取装备强化和琢磨材料*/
+		public static function getusecailiao():Array
+		{
+			var cailiadate:Array=[];
+			var backDatas:Array=BackPackManager.instance.getAllItem();
+			var i:int=0
+			while(i<backDatas.length){
+				var item:ClientItemInfo=backDatas[i] as ClientItemInfo;
+				if(item!=null&&item.qItem.q_type==GoodsType.STRENGTH){
+					cailiadate.push(item);
+				}
+				i++;
+			}
+			if(cailiadate.length>0) cailiadate.sort(sortForUseCaiLiao);
+			return cailiadate;
+		}
+		
+		private static function sortForUseCaiLiao(cailiaoA:ClientItemInfo, cailiaoB:ClientItemInfo):int
+		{
+			if(cailiaoA.qItem.q_default<cailiaoB.qItem.q_default)
+				return -1;
+			else if(cailiaoA.qItem.q_default>cailiaoB.qItem.q_default) 
+				return 1;
+			return 0;
 		}
 		
 		/**

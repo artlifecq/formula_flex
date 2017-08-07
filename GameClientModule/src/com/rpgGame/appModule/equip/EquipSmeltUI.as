@@ -146,6 +146,7 @@ package com.rpgGame.appModule.equip
 			(_leftSkin.list2.layout as TiledRowsLayout).verticalGap=2;
 			
 			_targetEquip=IconCDFace.create(64);
+			_targetEquip.wearIsVisble=false;
 			_targetEquip.selectImgVisible=false;
 			_useItem=IconCDFace.create(64);
 			_useItem.selectImgVisible=false;

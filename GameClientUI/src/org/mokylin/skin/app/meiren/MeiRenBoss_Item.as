@@ -35,9 +35,9 @@ package org.mokylin.skin.app.meiren
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			labelDisplay = temp;
 			temp.name = "labelDisplay";
-			temp.htmlText = "击杀：<u>秦国士兵</u><font color='#cfc6ae'>(0/30)</font>";
+			temp.htmlText = "击杀：<font color='#00ff33'><u>秦国士兵</u></font>(0/30)";
 			temp.left = 0;
-			temp.color = 0xEE0699;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.top = 0;
 			return temp;

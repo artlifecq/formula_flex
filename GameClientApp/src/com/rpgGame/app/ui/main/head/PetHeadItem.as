@@ -79,8 +79,8 @@ package com.rpgGame.app.ui.main.head
 		public function setData(info:PetInfo):void
 		{
 			_info=info;
-			_skin.icon.styleName = "ui/app/meiren/head_icon/head"+_info.modelId+"s.png";
-			_skin.uiName.styleName =  "ui/app/meiren/head_icon/name"+_info.modelId+"s.png";
+			_skin.icon.styleName = "ui/mainui/meirenHead/head_icon/head"+_info.modelId+"s.png";
+			_skin.uiName.styleName =  "ui/mainui/meirenHead/head_icon/name"+_info.modelId+"s.png";
 			TipTargetManager.show(this, TargetTipsMaker.makeTips( TipType.MEIREN_TIP, _info ,true) );
 		}
 	}

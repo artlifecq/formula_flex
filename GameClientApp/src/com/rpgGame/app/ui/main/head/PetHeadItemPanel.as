@@ -14,8 +14,8 @@ package com.rpgGame.app.ui.main.head
 		{
 			_skin=new MeiRen_Select();
 			super(_skin);
-			MCUtil.removeSelf(_skin.btnNext);
-			MCUtil.removeSelf(_skin.btnPrev);
+//			MCUtil.removeSelf(_skin.btnNext);
+//			MCUtil.removeSelf(_skin.btnPrev);
 		}
 		
 		override protected function onShow():void

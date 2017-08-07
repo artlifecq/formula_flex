@@ -39,6 +39,7 @@ package com.rpgGame.app.process
     import com.rpgGame.app.ui.tips.JiXianPanelTip;
     import com.rpgGame.app.ui.tips.LostSkillTip;
     import com.rpgGame.app.ui.tips.MapAreaTip;
+    import com.rpgGame.app.ui.tips.MeiRenGuanQiaTip;
     import com.rpgGame.app.ui.tips.MeiRenGuiZeTip;
     import com.rpgGame.app.ui.tips.MeridainPointTip;
     import com.rpgGame.app.ui.tips.MountBeastCardTip;
@@ -258,6 +259,7 @@ package com.rpgGame.app.process
 			TipManager.registerTipsParserClass(TipType.MEIREN_GUIZE_TIP,MeiRenGuiZeTip);
 			TipManager.registerTipsParserClass(TipType.MEIREN_TIP,PetTip);
 			TipManager.registerTipsParserClass(TipType.MEIREN_TIAOZHAN_TIP,PetTiaoZhanTip);
+			TipManager.registerTipsParserClass(TipType.MEIREN_GUANQIA_TIP,MeiRenGuanQiaTip);
 			TipManager.registerTipsParserClass(TipType.TASK_LEAD_TIP,TaskLeadTips);
 			TipManager.registerTipsParserClass(TipType.TASK_LOOP_TIP,TaskloopTips);
 		}

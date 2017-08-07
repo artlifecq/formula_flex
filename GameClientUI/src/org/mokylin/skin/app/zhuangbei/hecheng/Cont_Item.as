@@ -75,8 +75,8 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			temp.fontSize = 16;
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 210;
-			temp.x = 20;
+			temp.width = 242;
+			temp.x = 2;
 			temp.y = 6;
 			return temp;
 		}

@@ -114,6 +114,8 @@ package com.rpgGame.coreData.type
 		public static const MEIREN_TIP : int = rEnum.next;
 		/** 美人挑战条件tips */
 		public static const MEIREN_TIAOZHAN_TIP : int = rEnum.next;
+		/** 美人挑战关卡tips */
+		public static const MEIREN_GUANQIA_TIP : int = rEnum.next;
 		/** 主线任务tips */
 		public static const TASK_LEAD_TIP : int = rEnum.next;
 		/** 环式任务tips */
