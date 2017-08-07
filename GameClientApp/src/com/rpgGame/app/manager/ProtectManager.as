@@ -2,6 +2,7 @@
 {
     import com.game.mainCore.core.timer.GameTimer;
     import com.rpgGame.app.manager.goods.BackPackManager;
+    import com.rpgGame.app.manager.goods.ItemManager;
     import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.sender.SceneSender;
     import com.rpgGame.core.events.MainPlayerEvent;
@@ -122,7 +123,8 @@
 
         private static function hpChange():void
         {
-            tryStartTimer();
+			ItemManager.getBackEquip(tryStartTimer);
+            //tryStartTimer();
         }
 
         private static function mpChange():void
