@@ -152,7 +152,7 @@ package com.rpgGame.app.state.role.control
 				}*/
 				TweenLite.killTweensOf(_machine.owner as SceneRole, false, {x:true,z:true,offsetZ: true});
 				if(_stateReference&&_stateReference.isEnd)
-				{
+				{Lyt.a("跳跃点最后一个点");
 					EventManager.dispatchEvent(MapEvent.MAP_JUMP_COMPLETE);// 用于有跳跃点的寻路 继续跑
 				}
 				
@@ -171,6 +171,8 @@ package com.rpgGame.app.state.role.control
 
 		override public function enterPass(prevState : IState, force : Boolean = false) : Boolean
 		{
+			if(force)
+				return true;
 			if ((_machine as RoleStateMachine).isDead)//死亡的时候，不能进入跳跃状态
 			{
 				return false;

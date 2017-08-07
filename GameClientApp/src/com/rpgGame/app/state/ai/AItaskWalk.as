@@ -41,7 +41,12 @@ package com.rpgGame.app.state.ai
 			if(taskData==null)
 				return;
 			missionType=taskData.q_mission_type;
-			var post:Array=getJumpPos();
+			var post:Array;
+			if(!TaskAutoManager.getInstance().jumpOver)//新任务没跳才跳
+			{
+				post=TaskMissionManager.getJumpPos(taskType);
+			}
+			
 			if(TaskMissionManager.getTaskIsFinishByType(taskType))
 			{
 				if(TaskMissionManager.getTaskHaveNpc(taskType))
@@ -59,7 +64,7 @@ package com.rpgGame.app.state.ai
 				}
 				else
 				{
-					onArrive(null);
+					TaskAutoManager.getInstance().taskFilshed(taskType);
 				}
 			}
 			else
@@ -79,150 +84,93 @@ package com.rpgGame.app.state.ai
 		private function gotoNpc(data :Object=null):void
 		{
 			TaskUtil.npcTaskWalk(TaskMissionManager.getTaskNpcAreaId(taskType),onArrive);
+			TaskAutoManager.getInstance().jumpOver=true;
 		}
 		private function gotoTask(data :Object=null):void
 		{
+			
 			var postPath:Array=TaskMissionManager.getTaskPathingByType(taskType,taskTarget);
-			if(missionType==TaskType.SUB_USEITEM)//是使用道具任务且没有完成
+			switch(missionType)
 			{
-				var modeid:int=TaskUtil.getMonsterByType(taskType,taskTarget);
-				GatherAutoManager.getInstance().startGatherAuto(modeid);
+				case TaskType.SUB_CONVERSATION:
+					TaskUtil.postTaskWalk(postPath,onArrive);
+					break;
+				case TaskType.SUB_MONSTER:
+					TaskUtil.postTaskWalk(postPath,gotoTaskonArrive,null,true);
+					break;
+				case TaskType.SUB_ITEM:
+					TaskUtil.postTaskWalk(postPath,gotoTaskonArrive,null,true);
+					break;
+				case TaskType.SUB_GATHER:
+					TaskUtil.postTaskWalk(postPath,gotoTaskonArrive);
+					break;
+				case TaskType.SUB_USEITEM:
+					GatherAutoManager.getInstance().startGatherAuto(TaskUtil.getMonsterByType(taskType,taskTarget));
+					break;
+				case TaskType.SUB_SPEAK:
+					TaskUtil.postTaskWalk(postPath,gotoTaskonArrive);
+					break;
+				
+			}
+			TaskAutoManager.getInstance().jumpOver=true;
+			/*if(missionType==TaskType.SUB_USEITEM)//是使用道具任务且没有完成
+			{
+				GatherAutoManager.getInstance().startGatherAuto(TaskUtil.getMonsterByType(taskType,taskTarget));
 			}
 			else if(missionType==TaskType.SUB_CONVERSATION)
 			{
-				if(postPath&&postPath.length>0)
-				{
-					TaskUtil.postTaskWalk(postPath,onArrive);
-				}
+				TaskUtil.postTaskWalk(postPath,onArrive);
 			}
 			else if(missionType==TaskType.SUB_MONSTER||missionType==TaskType.SUB_ITEM)
 			{
-				if(postPath&&postPath.length>0)
-				{
-					TaskUtil.postTaskWalk(postPath,subMonster,null,true);
-				}
-				
-				/*if(taskType==TaskType.MAINTYPE_TREASUREBOX)
-				{
-					var monsterId:int=TaskMissionManager.getTreasuerMonsterId(taskTarget);
-					TaskUtil.monsterTaskWalk(monsterId,subMonster);
-				}
-				else
-				{
-					var post:Array=TaskMissionManager.getPathingByType(taskType,taskTarget);
-					TaskUtil.postTaskWalk(post,subMonster,null,true);
-				}*/
+				TaskUtil.postTaskWalk(postPath,subMonster,null,true);
 			}
 			else if(missionType==TaskType.SUB_GATHER)
 			{
-				/*var post2:Array=TaskMissionManager.getPathingByType(taskType,taskTarget);
-				
-				TaskUtil.postTaskWalk(post2,walkStartGather,obj);*/
-				
-				if(postPath&&postPath.length>0)
-				{
-					var modeid2:int=TaskUtil.getMonsterByType(taskType,taskTarget);
-					var obj:Object=new Object();
-					obj.subType=TaskUtil.getSubtypeByType(taskType);
-					obj.modeid=modeid2;
-					TaskUtil.postTaskWalk(postPath,walkStartGather,obj);
-				}
-				
+				TaskUtil.postTaskWalk(postPath,walkStartGather);
 			}
 			else if(missionType==TaskType.SUB_SPEAK)
 			{
-				/*var post3:Array=TaskMissionManager.getPathingByType(taskType,taskTarget);
-				
-				TaskUtil.postTaskWalk(post3,walkStartSpeak,obj3);*/
-				if(postPath&&postPath.length>0)
-				{
-					var obj3:Object=new Object();
-					obj3.subType=TaskUtil.getSubtypeByType(taskType);
-					obj3.describe=TaskMissionManager.getOtherTaskData(taskType).q_describe;
-					TaskUtil.postTaskWalk(postPath,walkStartSpeak,obj3);
-				}
+				TaskUtil.postTaskWalk(postPath,walkStartSpeak);
+			}*/
+		}
+		private function gotoTaskonArrive(data :Object=null):void
+		{
+			switch(missionType)
+			{
+				case TaskType.SUB_CONVERSATION:
+					
+					break;
+				case TaskType.SUB_MONSTER:
+					TrusteeshipManager.getInstance().startAutoFight();
+					break;
+				case TaskType.SUB_ITEM:
+					TrusteeshipManager.getInstance().startAutoFight();
+					break;
+				case TaskType.SUB_GATHER:
+					var modeid:int=TaskUtil.getMonsterByType(taskType,taskTarget);
+					GatherAutoManager.getInstance().startGatherAuto(modeid,taskType);
+					break;
+				case TaskType.SUB_USEITEM:
+					
+					break;
+				case TaskType.SUB_SPEAK:
+					var speak:String=TaskMissionCfgData.substitute(TaskMissionManager.getOtherTaskData(taskType).q_describe,MainRoleManager.actorInfo.societyName);
+					ChatManager.reqSendChat(speak,EnumChatChannelType.CHAT_CHANNEL_WORLD);
+					TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);
+					break;
 				
 			}
+			isWalking=false;
+			TaskAutoManager.getInstance().walkOver=true;
 		}
 		
 		private var isWalking:Boolean=false;
 		private var isWalkTime:int;
 		private function onArrive(data :Object) : void
 		{
-			if(taskType==TaskType.MAINTYPE_MAINTASK)
-			{
-				if(TaskMissionManager.getTaskHaveNpc(taskType))	
-				{
-					TaskControl.showLeadPanel();
-				}
-				else//TaskControl.showLeadPanel();;主线任务没有回复npc不弹框了
-				{
-					TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);	
-				}
-			}
-			else if(taskType==TaskType.MAINTYPE_DAILYTASK)
-			{
-				TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);	
-			}
-			else if(taskType==TaskType.MAINTYPE_TREASUREBOX)
-			{
-				TaskControl.showLoopPanel();
-			}
-			else if(taskType==TaskType.LIJIN_TASK)
-			{
-				TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);	
-			}
-			else if(taskType==TaskType.MAINTYPE_GUILDDAILYTASK)
-			{
-				if(TaskMissionManager.getTaskHaveNpc(taskType))	
-				{
-					TaskControl.showGuildPanel();
-				}
-				else
-				{
-					TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);	
-				}
-			}
-			isWalking=false;
-			TaskAutoManager.getInstance().walkOver=true;
+			TaskAutoManager.getInstance().taskFilshed(taskType);
 		}
-		private function subMonster(data : Object) : void
-		{
-			TrusteeshipManager.getInstance().startAutoFight();
-			isWalking=false;
-			TaskAutoManager.getInstance().walkOver=true;
-		}
-		/**采集寻路完成开始采集了*/
-		private function walkStartGather(data :Object):void
-		{
-			
-			var modeid:int=data.modeid;
-			GatherAutoManager.getInstance().startGatherAuto(modeid,taskType);
-			isWalking=false;
-			TaskAutoManager.getInstance().walkOver=true;
-		}
-		private function walkStartSpeak(data :Object):void
-		{
-			var speak:String=TaskMissionCfgData.substitute(data.describe,MainRoleManager.actorInfo.societyName);
-			ChatManager.reqSendChat(speak,EnumChatChannelType.CHAT_CHANNEL_WORLD);
-			TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);
-			isWalking=false;
-			TaskAutoManager.getInstance().walkOver=true;
-		}
-		
-		
-		private function getJumpPos():Array
-		{
-			var jumpid:int=TaskMissionManager.isTaskJump(taskType);
-			var jumpData:SceneJumpPointData=MapJumpCfgData.getJumpportData(jumpid);
-			var post:Array;
-			if(jumpData!=null)
-			{
-				post=[jumpData.sceneID,jumpData.startPoint.x,jumpData.startPoint.y];
-			}
-			return post;
-		}
-		
 		
 		
 		override public function leavePass(nextState : IState, force : Boolean = false) : Boolean

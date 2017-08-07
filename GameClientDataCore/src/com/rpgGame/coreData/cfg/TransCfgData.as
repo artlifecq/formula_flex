@@ -62,29 +62,7 @@ package com.rpgGame.coreData.cfg {
 			{
 				if (data.q_map_id == sceneID)
 				{
-					var did:int;
-					var destareaid:int;
-					if(data.q_tran_dest_area_id==0)
-					{
-						var jobArea:Array=JSONUtil.decode(data.q_tran_dest_area_by_job);
-						var destAid:int=0;
-						if(jobArea&&jobArea.length>0)
-						{
-							for(var i:int=0;i<jobArea.length;i++)
-							{
-								if(jobArea[i][0]==job)
-								{
-									destareaid=jobArea[i][1];
-									break;
-								}
-							}
-						}
-					}
-					else
-					{
-						destareaid=data.q_tran_dest_area_id;
-					}
-					did=AreaCfgData.getAreaMapidByID(destareaid);
+					var did:int=getTransportSceneId(data,job);
 					var sourceArea:Vector.<Point>=AreaCfgData.getAreaPointsByID(data.q_tran_source_area_id);//传送区域点
 					var centerPoint:Point=AreaCfgData.getAreaPointsCenter(sourceArea);//传送区域中点
 					if(did>0&&centerPoint)
@@ -102,8 +80,37 @@ package com.rpgGame.coreData.cfg {
 			}
 			return arr;
 		}
-		
-		
+		/**返回当前地图的所有传送点列表
+		*/
+		public static function getTransportSceneId(tranportData:Q_map_transfer,job:int) : int
+		{
+			var aid:int;
+			if(tranportData.q_tran_dest_area_id==0)
+			{
+				var jobArea:Array=JSONUtil.decode(tranportData.q_tran_dest_area_by_job);
+				var destAid:int=0;
+				if(jobArea&&jobArea.length>0)
+				{
+					for(var i:int=0;i<jobArea.length;i++)
+					{
+						if(jobArea[i][0]==job)
+						{
+							aid= jobArea[i][1];
+						}
+					}
+				}
+			}
+			else
+			{
+				aid= tranportData.q_tran_dest_area_id;
+			}
+			if(aid>0)
+			{
+				return AreaCfgData.getAreaMapidByID(aid);
+			}
+			
+			return 0;
+		}
         public function TransCfgData() {
         }
     }

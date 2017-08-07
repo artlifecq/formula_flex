@@ -32,8 +32,8 @@ package org.mokylin.skin.app.meiren
 			super();
 			
 			this.currentState = "normal";
-			this.height = 122;
-			this.width = 123;
+			this.height = 99;
+			this.width = 90;
 			this.elementsContent = [bg_i(),uiName_i(),icon_i(),btnSelect_i()];
 			
 			states = {
@@ -50,7 +50,7 @@ package org.mokylin.skin.app.meiren
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg = temp;
 			temp.name = "bg";
-			temp.styleName = "ui/app/meiren/kuang.png";
+			temp.styleName = "ui/mainui/meirenHead/touxiangkuang.png";
 			temp.x = 0;
 			temp.y = 15;
 			return temp;
@@ -62,8 +62,8 @@ package org.mokylin.skin.app.meiren
 			btnSelect = temp;
 			temp.name = "btnSelect";
 			temp.styleClass = org.mokylin.skin.app.meiren.button.ButtonMeirenQiehuan;
-			temp.x = 1;
-			temp.y = 63;
+			temp.x = 2;
+			temp.y = 51;
 			return temp;
 		}
 
@@ -72,9 +72,9 @@ package org.mokylin.skin.app.meiren
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icon = temp;
 			temp.name = "icon";
-			temp.styleName = "ui/app/meiren/head_icon/head2.png";
-			temp.x = 33;
-			temp.y = 24;
+			temp.styleName = "ui/mainui/meirenHead/head_icon/head2s.png";
+			temp.x = 25;
+			temp.y = 5;
 			return temp;
 		}
 
@@ -83,9 +83,9 @@ package org.mokylin.skin.app.meiren
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiName = temp;
 			temp.name = "uiName";
-			temp.styleName = "ui/app/meiren/head_icon/xiaolvtu.png";
-			temp.x = 39;
-			temp.y = 0;
+			temp.styleName = "ui/mainui/meirenHead/head_icon/name2s.png";
+			temp.x = 23;
+			temp.y = 73;
 			return temp;
 		}
 

@@ -36,7 +36,7 @@ package com.rpgGame.app.ui.main.fight
 		{
 			var stageWidth:int = Starling.current.nativeStage.stageWidth;
 			var stageHeight:int = Starling.current.nativeStage.stageHeight;
-			this.y=stageHeight-320;
+			this.y=stageHeight-220;
 			this.x=(stageWidth-W)/2;
 		}
 		public function showState(state:Boolean):void
@@ -64,7 +64,7 @@ package com.rpgGame.app.ui.main.fight
 				this.addChild(_leaveImg);
 				tmp=_leaveImg;
 			}
-			
+			TweenLite.killTweensOf(tmp);
 			tmp.y=0;
 			tmp.alpha=0.5;
 			TweenLite.to(tmp,0.5,{y:-150,alpha:1});

@@ -606,5 +606,3 @@ package com.rpgGame.app.ui.main
 		}
 	}
 }
-
-

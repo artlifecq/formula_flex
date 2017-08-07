@@ -432,8 +432,12 @@ package com.rpgGame.core.app
 		public static var GUILD_WCZB_APPLY : String = createAppInfo("guild.war.WczbWarApplyPanel","banghui");
 		/**帮会王城争霸奖励 **/
 		public static var GUILD_WCZB_REWARD : String = createAppInfo("guild.war.WczbRewardPanel","banghui");
+		/**帮会王城争霸奖励 **/
+		public static var GUILD_HCZB_REWARD : String = createAppInfo("guild.war.HczbRewardPanel","banghui");
 		/**帮会王城争霸结果 **/
 		public static var GUILD_WCZB_RESULT : String = createAppInfo("guild.war.WczbResultPanel","banghui");
+		/**王城争霸结果 **/
+		public static var GUILD_HCZB_RESULT : String = createAppInfo("guild.war.HczbResultPanel","banghui");
 		/**帮会统帅通知 **/
 		public static var GUILD_LEADER_SKILL_NOTICE : String = createAppInfo("guild.war.GuildLeaderSkillNoticePanel","banghui");
 		
@@ -543,5 +547,9 @@ package com.rpgGame.core.app
 		public static var RANKALLPLATFORMLISTPANLE:String = createAppInfo("rank.RankAllPlatformListPanle","paihangbang");
 		/**膜拜**/
 		public static var WORSHIP_PANLE:String = createAppInfo("rank.WorshipPanle","paihangbang");
+		
+		/**副本结算通用**/
+		public static var COMMON_ZONE_RESULT_PANLE:String = createAppInfo("zone.CommonZoneResultPanelExt");
+
 	}
 }

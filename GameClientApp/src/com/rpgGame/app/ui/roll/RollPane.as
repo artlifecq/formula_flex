@@ -1,15 +1,12 @@
 package com.rpgGame.app.ui.roll
 {
 	import com.game.mainCore.core.manager.LayerManager;
-	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.role.DropGoodsManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
-	import com.rpgGame.core.app.AppLoadManager;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.ui.SkinUI;
-	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
@@ -19,13 +16,8 @@ package com.rpgGame.app.ui.roll
 	import com.rpgGame.netData.drop.bean.RollItemInfo;
 	import com.rpgGame.netData.drop.bean.RollResultInfo;
 	
-	import flash.system.ApplicationDomain;
-	import flash.utils.getDefinitionByName;
-	import flash.utils.setTimeout;
-	
 	import away3d.events.Event;
 	
-	import feathers.controls.UIMovieClip;
 	import feathers.data.ListCollection;
 	
 	import gs.TweenLite;
@@ -50,32 +42,10 @@ package com.rpgGame.app.ui.roll
 		public function RollPane(data:RollItemInfo):void
 		{
 			_roleItem = data;
-//			_roleskin = new Roll_Skin();
-//			init();
-			super();
-			if(!_isLoad){
-				var loadUrl : String = ClientConfig.getUI("roll");
-				AppLoadManager.instace().loadByUrl(loadUrl, "", onLoadComplete, onError);
-			}
-			else{
-				onLoadComplete();
-			}		
-			
-		}
-		
-		public function onLoadComplete(_appUrl : String = null) : void
-		{
-			trace("roll点资源加载成功！！！");
-			_isLoad = true;
+			trace("INIT时间："+_roleItem.tempItemInfo.ltime*1000);
 			_roleskin = new Roll_Skin();
-			_roleskin.toSprite(this);
-			init();
-		}
-		
-		private function onError(url : String) : void
-		{
-			dispose();
-			GameLog.add("应用模块加载出错" + url);
+			super(_roleskin);
+			init();	
 		}
 		
 		public function get uniqueId():long
@@ -117,6 +87,8 @@ package com.rpgGame.app.ui.roll
 			_roleskin.lbZhuangbeiName.text = _clientItem.qItem.q_name;
 			_roleskin.lbZhuangbeiName.color=ItemConfig.getItemQualityColor(_clientItem.cfgId);
 			_endRunTime = _roleItem.tempItemInfo.ltime*1000;
+			trace("时间："+_endRunTime+" 服务端时间："+SystemTimeManager.curtTm);
+			
 			_startNum = _endRunTime-DurationTime;
 			_currentFun = runProgressTime;
 			_roleskin.btnClose.addEventListener(Event.TRIGGERED,closeHander);
@@ -191,6 +163,12 @@ package com.rpgGame.app.ui.roll
 			if(SystemTimeManager.curtTm < _endRunTime)
 				return ;
 			closeHander();
+		}
+		
+		override protected function onHide():void
+		{
+			_roleItem=null;
+			_endRunTime=0;
 		}
 		
 		private function closeHander():void

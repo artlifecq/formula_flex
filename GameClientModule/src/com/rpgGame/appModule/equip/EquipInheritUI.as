@@ -21,6 +21,7 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.tip.RTNodeID;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.StaticValue;
@@ -50,7 +51,11 @@ package com.rpgGame.appModule.equip
 	
 	import away3d.events.Event;
 	
+	import feathers.controls.ScrollBarDisplayMode;
+	import feathers.controls.Scroller;
 	import feathers.controls.ToggleButton;
+	import feathers.layout.TiledRowsLayout;
+	import feathers.utils.filter.GrayFilter;
 	
 	import gs.TweenMax;
 	import gs.easing.Expo;
@@ -177,8 +182,27 @@ package com.rpgGame.appModule.equip
 			_goodsbyPlayer=new GoodsContainerPanel(_leftSkin.list1,ItemContainerID.IHT_LIST,createItemRender);
 			_goodsbyBag=new GoodsContainerPanel(_leftSkin.list2,ItemContainerID.IHT_USE,createItemRender);
 			
+			_leftSkin.list1.clipContent = true;
+			_leftSkin.list1.scrollBarDisplayMode = ScrollBarDisplayMode.ALWAYS_VISIBLE;
+			_leftSkin.list1.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
+			_leftSkin.list1.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
+			
+			_leftSkin.list1.padding=1;
+			(_leftSkin.list1.layout as TiledRowsLayout).horizontalGap=1;
+			(_leftSkin.list1.layout as TiledRowsLayout).verticalGap=2;
+			
+			_leftSkin.list2.clipContent = true;
+			_leftSkin.list2.scrollBarDisplayMode = ScrollBarDisplayMode.ALWAYS_VISIBLE;
+			_leftSkin.list2.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
+			_leftSkin.list2.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
+			
+			_leftSkin.list2.padding=1;
+			(_leftSkin.list2.layout as TiledRowsLayout).horizontalGap=1;
+			(_leftSkin.list2.layout as TiledRowsLayout).verticalGap=2;
+			
 			_targetEquip=IconCDFace.create(IcoSizeEnum.ICON_64);
 			_targetEquip.selectImgVisible=false;
+			_targetEquip.wearIsVisble=false;
 			_targetEquip.bindBg(null);
 			_useEquip=IconCDFace.create(IcoSizeEnum.ICON_64);
 			_useEquip.selectImgVisible=false;
@@ -220,7 +244,7 @@ package com.rpgGame.appModule.equip
 		private function onTouchGrid( grid:DragDropItem ):void
 		{
 			var gridInfo:GridInfo=grid.gridInfo;
-			if(gridInfo.data==null||grid.isGary){
+			if(gridInfo.data==null||grid.isSelect){
 				return;
 			}
 			if(gridInfo.containerID==ItemContainerID.IHT_LIST){
@@ -236,11 +260,11 @@ package com.rpgGame.appModule.equip
 			var targetGrid:DragDropItem;
 			if(_targetEquipInfo){
 				targetGrid=_goodsbyPlayer.getDragDropItemByItemInfo(_targetEquipInfo);
-				targetGrid.isGary=false;
+				targetGrid.isSelect=false;
 				targetGrid=_goodsbyBag.getDragDropItemByItemInfo(_targetEquipInfo);
 				if(targetGrid)
 				{
-					targetGrid.isGary=false;
+					targetGrid.isSelect=false;
 				}
 				if(_useEuipInfo)
 				{
@@ -248,13 +272,13 @@ package com.rpgGame.appModule.equip
 				}
 			}
 			
-			
+			_skin.btn_jicheng.filter=null;
 			_targetEquipInfo=gridInfo.data as EquipInfo;
 			_targetEquipInfo.setContainerId(gridInfo.containerID);
 			FaceUtil.SetItemGrid(_targetEquip,_targetEquipInfo);
 			_targetEquip.selectImgVisible=false;
 			targetGrid=_goodsbyPlayer.getDragDropItemByItemInfo(_targetEquipInfo);
-			targetGrid.isGary=true;
+			targetGrid.isSelect=true;
 			var p:Point=new Point(targetGrid.x,targetGrid.y);
 			p=targetGrid.parent.localToGlobal(p);
 			p=_targetEquip.parent.globalToLocal(p);
@@ -269,7 +293,7 @@ package com.rpgGame.appModule.equip
 			targetGrid=_goodsbyBag.getDragDropItemByItemInfo(_targetEquipInfo);
 			if(targetGrid)
 			{
-				targetGrid.isGary=true;
+				targetGrid.isSelect=true;
 			}
 			updateRightPanel();
 		}
@@ -280,16 +304,17 @@ package com.rpgGame.appModule.equip
 			var targetGrid:DragDropItem;
 			if(_targetEquipInfo){
 				targetGrid=_goodsbyPlayer.getDragDropItemByItemInfo(_targetEquipInfo);
-				targetGrid.isGary=false;
+				targetGrid.isSelect=false;
 				targetGrid=_goodsbyBag.getDragDropItemByItemInfo(_targetEquipInfo);
 				if(targetGrid)
-					targetGrid.isGary=false;
+					targetGrid.isSelect=false;
 				_targetEquipInfo=null;
 			}
 			deleteUseEquip();
 			_targetEquip.clear();
 			initPanel();
 			updateRightPanel();
+			GrayFilter.gray(_skin.btn_jicheng);
 		}
 		
 		//添加被继承装备
@@ -298,11 +323,11 @@ package com.rpgGame.appModule.equip
 			var targetGrid:DragDropItem;
 			if(_useEuipInfo){
 				targetGrid=_goodsbyBag.getDragDropItemByItemInfo(_useEuipInfo);
-				targetGrid.isGary=false;
+				targetGrid.isSelect=false;
 				targetGrid=_goodsbyPlayer.getDragDropItemByItemInfo(_useEuipInfo);
 				if(targetGrid)
 				{
-					targetGrid.isGary=false;
+					targetGrid.isSelect=false;
 				}
 			}
 			
@@ -311,7 +336,7 @@ package com.rpgGame.appModule.equip
 			FaceUtil.SetItemGrid(_useEquip,_useEuipInfo);
 			_useEquip.selectImgVisible=false;
 			targetGrid=_goodsbyBag.getDragDropItemByItemInfo(_useEuipInfo);
-			targetGrid.isGary=true;
+			targetGrid.isSelect=true;
 			var p:Point=new Point(targetGrid.x,targetGrid.y);
 			p=targetGrid.parent.localToGlobal(p);
 			p=_useEquip.parent.globalToLocal(p);
@@ -324,7 +349,7 @@ package com.rpgGame.appModule.equip
 			targetGrid=_goodsbyPlayer.getDragDropItemByItemInfo(_useEuipInfo);
 			if(targetGrid)
 			{
-				targetGrid.isGary=true;
+				targetGrid.isSelect=true;
 			}
 			updateRightPanel();
 		}
@@ -335,10 +360,10 @@ package com.rpgGame.appModule.equip
 			var targetGrid:DragDropItem;
 			if(_useEuipInfo){
 				targetGrid=_goodsbyBag.getDragDropItemByItemInfo(_useEuipInfo);
-				targetGrid.isGary=false;
+				targetGrid.isSelect=false;
 				targetGrid=_goodsbyPlayer.getDragDropItemByItemInfo(_useEuipInfo);
 				if(targetGrid)
-					targetGrid.isGary=false;
+					targetGrid.isSelect=false;
 				_useEuipInfo=null;
 			}
 			_useEquip.clear();
@@ -348,6 +373,7 @@ package com.rpgGame.appModule.equip
 		override public function refresh():void
 		{
 			ItemManager.getBackEquip(initPanel);
+			GrayFilter.gray(_skin.btn_jicheng);
 		}
 		
 		private function initPanel():void
@@ -387,19 +413,19 @@ package com.rpgGame.appModule.equip
 		{
 			var targetGrid:DragDropItem;
 			for each(targetGrid in _goodsbyPlayer.dndGrids){
-				targetGrid.isGary=false;
+				targetGrid.isSelect=false;
 			}
 			
 			for each( targetGrid in _goodsbyBag.dndGrids){
-				targetGrid.isGary=false;
+				targetGrid.isSelect=false;
 			}
 			
 			if(_targetEquipInfo){
 				targetGrid=_goodsbyPlayer.getDragDropItemByItemInfo(_targetEquipInfo);
-				targetGrid.isGary=true;
+				targetGrid.isSelect=true;
 				targetGrid=_goodsbyBag.getDragDropItemByItemInfo(_targetEquipInfo);
 				if(targetGrid)
-					targetGrid.isGary=true;
+					targetGrid.isSelect=true;
 				updateUsePanel();
 				updateRightPanel();
 			}
@@ -681,9 +707,9 @@ package com.rpgGame.appModule.equip
 					continue;
 				}
 				if(info==_targetEquipInfo){
-					targetGrid.isGary=true;
+					targetGrid.isSelect=true;
 				}else{
-					targetGrid.isGary=false;
+					targetGrid.isSelect=false;
 				}
 			}
 		}
@@ -717,14 +743,15 @@ package com.rpgGame.appModule.equip
 			var targetGrid:DragDropItem;
 			if(msg.opaque==EquipOperateType.JICHENG_NORMAL&&msg.result==1)
 			{
+				this.playInter3DAt(ClientConfig.getEffect("ui_jicheng"),(_useEquip.x+_useEquip.width/2),(_useEquip.y+_useEquip.height/2),1);
 				UIPopManager.showAlonePopUI(CenterEftPop,"ui_jichengchenggong");
 				if(_useEuipInfo){
 					targetGrid=_goodsbyBag.getDragDropItemByItemInfo(_useEuipInfo);
-					targetGrid.isGary=false;
+					targetGrid.isSelect=false;
 					targetGrid=_goodsbyPlayer.getDragDropItemByItemInfo(_useEuipInfo);
 					if(targetGrid)
 					{
-						targetGrid.isGary=false;
+						targetGrid.isSelect=false;
 					}
 				}
 				_useEquip.clear();

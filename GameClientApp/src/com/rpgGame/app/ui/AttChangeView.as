@@ -1,12 +1,12 @@
 package com.rpgGame.app.ui
 {
-	import com.rpgGame.app.manager.fight.AttChangePanle;
+	import com.gameClient.utils.HashMap;
+	import com.rpgGame.app.manager.fight.AttChangePop;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	
 	import feathers.controls.StateSkin;
 	
-	import org.client.mainCore.ds.HashMap;
 	import org.client.mainCore.manager.EventManager;
 	
 	/**
@@ -17,12 +17,12 @@ package com.rpgGame.app.ui
 	public class AttChangeView extends ViewUI
 	{
 		protected var attChangeTypes:Array;
-		protected var attChangeEft:AttChangePanle;
+		protected var attChangeEft:AttChangePop;
 		
 		public function AttChangeView(skin:StateSkin=null)
 		{
 			super(skin);
-			attChangeEft=new AttChangePanle(_stateSkin.width/2,_stateSkin.height/2);
+			attChangeEft=new AttChangePop(_stateSkin.width/2,_stateSkin.height/2);
 			_stateSkin.container.addChild(attChangeEft);
 		}
 		

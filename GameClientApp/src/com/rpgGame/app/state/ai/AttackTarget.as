@@ -2,7 +2,6 @@ package com.rpgGame.app.state.ai
 {
 	import com.game.engine3D.state.IState;
 	import com.rpgGame.app.fight.spell.CastSpellHelper;
-	import com.rpgGame.app.manager.SkillCDManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.fight.FightManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -10,7 +9,6 @@ package com.rpgGame.app.state.ai
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.core.fight.spell.CastSpellInfo;
 	import com.rpgGame.core.state.ai.AIState;
-	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.type.AIStateType;
 	import com.rpgGame.coreData.type.RoleStateType;
@@ -28,8 +26,6 @@ package com.rpgGame.app.state.ai
 	 */
 	public class AttackTarget extends AIState
 	{
-		private var isNormalSpell:Boolean;
-		
 		public function AttackTarget()
 		{
 			super(AIStateType.ATTACK_TARGET);
@@ -44,6 +40,12 @@ package com.rpgGame.app.state.ai
 		private function findUseableSpell() : Q_skill_model
 		{
 			var castSpell : Q_skill_model;
+			
+			if(TrusteeshipManager.getInstance().isNormalSpell)
+			{
+				return null;
+			}
+			
 			var nextSpell : Q_skill_model = TrusteeshipManager.getInstance().nextSpell;
 			if (nextSpell && CastSpellHelper.checkCanUseSpell(nextSpell))
 			{
@@ -55,70 +57,74 @@ package com.rpgGame.app.state.ai
 				castSpell = CastSpellHelper.getSortCastSpell();
 			}
 			
-			if (false) //旧的挂机模式，先留着。@L.L.M.Sunny 
+			if(castSpell.q_relate_spells != "")
 			{
-				if (!castSpell)
-				{
-					var randomSpells : Vector.<Q_skill_model> = TrusteeshipManager.getInstance().getActiveSpellList();
-
-					if (false) //随机需求放开这里，@L.L.M.Sunny 
-					{
-						var tmpSpell : Q_skill_model = null;
-						var randomId : int = 0;
-						var spellLen : int = randomSpells.length;
-						for (var i : int = 0; i < spellLen; i++)
-						{
-							tmpSpell = randomSpells[i];
-							randomId = Math.floor(Math.random() * spellLen);
-							randomSpells[i] = randomSpells[randomId];
-							randomSpells[randomId] = tmpSpell;
-						}
-						randomSpells.sort(onSortSpell);
-					}
-					for each (var spellData : Q_skill_model in randomSpells)
-					{
-						if (!SkillCDManager.getInstance().getSkillHasCDTime(spellData))
-						{
-							castSpell = spellData;
-							break;
-						}
-					}
-				}
-
-				if (!castSpell) //武器默认技能
-				{
-					var defaultSpell : Q_skill_model = CastSpellHelper.getDefaultSpell();
-					if (defaultSpell)
-					{
-						if (!SkillCDManager.getInstance().getSkillHasCDTime(defaultSpell))
-						{
-							castSpell = defaultSpell;
-						}
-						else
-						{
-							var relateSpells : Vector.<Q_skill_model> = SpellDataManager.getRelateSpells(defaultSpell.q_relate_spells);
-//							var relateSpells : Array = defaultSpell.q_relate_spells.split(",");
-							for each (var tmpData : Q_skill_model in relateSpells)
-							{
-								if (!SkillCDManager.getInstance().getSkillHasCDTime(tmpData))
-								{
-									castSpell = defaultSpell;
-									break;
-								}
-							}
-						}
-					}
-				}
+				TrusteeshipManager.getInstance().isNormalSpell = true;
 			}
+			else
+			{
+				TrusteeshipManager.getInstance().isNormalSpell = false;
+			}
+			
+//			if (false) //旧的挂机模式，先留着。@L.L.M.Sunny 
+//			{
+//				if (!castSpell)
+//				{
+//					var randomSpells : Vector.<Q_skill_model> = TrusteeshipManager.getInstance().getActiveSpellList();
+//
+//					if (false) //随机需求放开这里，@L.L.M.Sunny 
+//					{
+//						var tmpSpell : Q_skill_model = null;
+//						var randomId : int = 0;
+//						var spellLen : int = randomSpells.length;
+//						for (var i : int = 0; i < spellLen; i++)
+//						{
+//							tmpSpell = randomSpells[i];
+//							randomId = Math.floor(Math.random() * spellLen);
+//							randomSpells[i] = randomSpells[randomId];
+//							randomSpells[randomId] = tmpSpell;
+//						}
+//						randomSpells.sort(onSortSpell);
+//					}
+//					for each (var spellData : Q_skill_model in randomSpells)
+//					{
+//						if (!SkillCDManager.getInstance().getSkillHasCDTime(spellData))
+//						{
+//							castSpell = spellData;
+//							break;
+//						}
+//					}
+//				}
+//
+//				if (!castSpell) //武器默认技能
+//				{
+//					var defaultSpell : Q_skill_model = CastSpellHelper.getDefaultSpell();
+//					if (defaultSpell)
+//					{
+//						if (!SkillCDManager.getInstance().getSkillHasCDTime(defaultSpell))
+//						{
+//							castSpell = defaultSpell;
+//						}
+//						else
+//						{
+//							var relateSpells : Vector.<Q_skill_model> = SpellDataManager.getRelateSpells(defaultSpell.q_relate_spells);
+////							var relateSpells : Array = defaultSpell.q_relate_spells.split(",");
+//							for each (var tmpData : Q_skill_model in relateSpells)
+//							{
+//								if (!SkillCDManager.getInstance().getSkillHasCDTime(tmpData))
+//								{
+//									castSpell = defaultSpell;
+//									break;
+//								}
+//							}
+//						}
+//					}
+//				}
+//			}
 			return castSpell;
 		}
 		private function releaseSpell() : void
 		{
-//			if(TrusteeshipManager.getInstance().isClickMap)
-//			{
-//				RoleStateUtil.walkToPos();
-//				return;
-//			}
 			var spellData : Q_skill_model = findUseableSpell();
 			if (spellData)
 			{

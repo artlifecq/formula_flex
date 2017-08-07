@@ -139,7 +139,8 @@ package com.rpgGame.app.ui.main.taskbar
 			EventManager.addEvent(TaskEvent.TASK_NEW_MATION,newMation);
 			EventManager.addEvent(TaskEvent.TASK_CHANGE_MATION,changeMation);
 			EventManager.addEvent(TaskEvent.TASK_NO_MAIN,noMainTask);
-			
+			EventManager.addEvent(TaskEvent.TASK_DROP,dropTask);
+
 			
 			EventManager.addEvent(TaskEvent.TASK_CLICK_NPC,taskNpc);
 			EventManager.addEvent(UserMoveEvent.MOVE_THROUGH, moveReschange);
@@ -156,6 +157,7 @@ package com.rpgGame.app.ui.main.taskbar
 			EventManager.removeEvent(TaskEvent.TASK_NEW_MATION,newMation);
 			EventManager.removeEvent(TaskEvent.TASK_CHANGE_MATION,changeMation);
 			EventManager.removeEvent(TaskEvent.TASK_NO_MAIN,noMainTask);
+			EventManager.removeEvent(TaskEvent.TASK_DROP,dropTask);
 			EventManager.removeEvent(TaskEvent.TASK_CLICK_NPC,taskNpc);
 			EventManager.removeEvent(UserMoveEvent.MOVE_THROUGH, moveReschange);
 			EventManager.removeEvent(MapEvent.MAP_SWITCH_COMPLETE,flyComplete);
@@ -258,13 +260,12 @@ package com.rpgGame.app.ui.main.taskbar
 				{
 					effetCont.playNewtaskEffect();
 					TaskAutoManager.getInstance().startTaskAuto(TaskType.MAINTYPE_MAINTASK);
-					
-					
 				}
 				else
 				{
 					TaskAutoManager.getInstance().stopAll();
 				}
+				showNpcMark(true);
 			}
 			else if(type==TaskType.MAINTYPE_TREASUREBOX)
 			{
@@ -273,15 +274,9 @@ package com.rpgGame.app.ui.main.taskbar
 					TaskAutoManager.getInstance().startTaskAuto(TaskType.MAINTYPE_TREASUREBOX)
 				}
 			}
-				
-			
-			
 			setViewShow();
 			leadCont.leadTaskView();
 			loopCont.loopTaskView(type);
-			showNpcMark(true);
-			
-			
 		}
 		/**隐藏显示npc问号*/
 		private function showNpcMark(value:Boolean):void
@@ -303,12 +298,34 @@ package com.rpgGame.app.ui.main.taskbar
 			}			
 		}
 		/**任务卡级*/
-		private function noMainTask(taskId: int,noInfo: Vector.<NoMainTaskInfo>):void
+		private function noMainTask():void
 		{
 			leadCont.show(false);
 			loopCont.show(true);
-			loopCont.setKajibutView(taskId,noInfo);
+			loopCont.setKajibutView();
 		}
+		/**放弃任务*/
+		private function dropTask(type:int):void
+		{
+			leadCont.hideInfo();
+			loopCont.hideTaskView(type);
+			if(type==TaskType.MAINTYPE_MAINTASK)
+			{
+				TaskControl.hideLeadPanel();
+				showNpcMark(false);
+			}
+			else if(type==TaskType.MAINTYPE_TREASUREBOX)
+			{
+				TaskControl.hideLoopPanel();
+			}
+			else if(type==TaskType.MAINTYPE_GUILDDAILYTASK)
+			{
+				TaskControl.hideGuildPanel();
+			}
+		}
+		
+		
+		
 		/**任务时等级变化*/
 		private function levelChange():void
 		{
@@ -328,8 +345,9 @@ package com.rpgGame.app.ui.main.taskbar
 			if(type==1)//支线任务领取奖励
 			{
 				loopCont.hideDailyTaskView();
+				TaskSender.sendfinishTaskMessage(TaskMissionManager.dailyTaskInfo.taskId);
 			}
-			TaskControl.receiveRewordBut(type);
+			//TaskControl.receiveRewordBut(type);
 			
 		}
 		
@@ -341,7 +359,7 @@ package com.rpgGame.app.ui.main.taskbar
 		}
 		private function setViewShow():void
 		{
-			if(TaskMissionManager.isOnlyMainTask&&MainRoleManager.actorInfo.totalStat.level<=TaskAutoManager.AUTOLVE)//只有主线且等级小于新手期
+			if(TaskMissionManager.isOnlyMainTask&&MainRoleManager.actorInfo.totalStat.level<=TaskAutoManager.PANLVE)//只有主线且等级小于新手期
 			{
 				leadCont.show(true);
 				loopCont.show(false);

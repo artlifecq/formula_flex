@@ -58,10 +58,11 @@ package com.rpgGame.app.manager
 		private var _autoSkillCtrl:ControlAutoFightSelectSkill;
 		private var _tripleSkillCtrl:ControlTripleSkill;
 		public var nextSpell:Q_skill_model;
+		private var _isNormalSpell:Boolean = false;
 		
 		public function TrusteeshipManager()
 		{
-			_gTimer = new GameTimer("TrusteeshipManager", 500, 0, onUpdate);
+			_gTimer = new GameTimer("TrusteeshipManager", 1000, 0, onUpdate);
 			_isFightActorRunning = false;
 			_isAutoFightRunning = false;
 			_isFightTargetRunning=false;
@@ -169,12 +170,25 @@ package com.rpgGame.app.manager
 		public function startAutoFight() : void
 		{
 			stopFightTarget();
-			var selectedRole : SceneRole = SceneRoleSelectManager.selectedRole;
-			var modeState : int = FightManager.getFightRoleState(selectedRole);
-			if (selectedRole && modeState != FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY)
+			var selectedRole:SceneRole=SceneRoleSelectManager.selectedRole;
+			if(selectedRole)
 			{
-				SceneRoleSelectManager.selectedRole = null;
+				var mdata:MonsterData=selectedRole.data as MonsterData;
+				if(mdata==null||(mdata.ownerId>0&&mdata.monsterData.q_owner==1))//挂机不打玩家和玩家的召唤物
+				{
+					SceneRoleSelectManager.selectedRole=null;
+				}
 			}
+			selectedRole=SceneRoleSelectManager.selectedRole;
+			if (selectedRole)
+			{
+				var modeState : int = FightManager.getFightRoleState(selectedRole);
+				if(modeState != FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY)
+				{
+					SceneRoleSelectManager.selectedRole = null;
+				}
+			}
+			isNormalSpell = false;
 			nextSpell = null;
 			_targetRoles=null;
 			_isAutoFightRunning = true;
@@ -239,6 +253,7 @@ package com.rpgGame.app.manager
 			_isBroken = false;
 			
 			nextSpell = null;
+			isNormalSpell = false;
 			
 			TweenLite.killDelayedCallsTo(onDelayedUnbroken);
 			TweenLite.killDelayedCallsTo(actorFight);
@@ -264,6 +279,7 @@ package com.rpgGame.app.manager
 		{
 
 			nextSpell = null;
+			isNormalSpell = false;
 			
 			_gTimer.reset();
 			_gTimer.stop();
@@ -520,5 +536,21 @@ package com.rpgGame.app.manager
 		{
 			return _tripleSkillCtrl;
 		}
+
+		public function get isNormalSpell():Boolean
+		{
+			return _isNormalSpell;
+		}
+
+		public function set isNormalSpell(value:Boolean):void
+		{
+			_isNormalSpell = value;
+			
+			if(value)
+			{
+				trace("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&怎么被设置为true了呢");
+			}
+		}
+
 	}
 }

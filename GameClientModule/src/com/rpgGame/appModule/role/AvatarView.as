@@ -3,6 +3,7 @@ package com.rpgGame.appModule.role
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
 	import com.rpgGame.app.display3D.UIAvatar3D;
+	import com.rpgGame.app.manager.HunYinManager;
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
@@ -12,11 +13,13 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.ItemSender;
+	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.app.view.uiComponent.menu.Menu;
 	import com.rpgGame.appModule.common.itemRender.GridItemRender;
 	import com.rpgGame.core.events.AvatarEvent;
+	import com.rpgGame.core.events.HunYinEvent;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.VipEvent;
@@ -25,8 +28,10 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.VipCfg;
+	import com.rpgGame.coreData.cfg.hunyin.JieHunJieZiData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
+	import com.rpgGame.coreData.clientConfig.Q_advance_wedding;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
@@ -35,9 +40,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.coreData.lang.LangGoods;
 	import com.rpgGame.coreData.lang.LangMenu;
 	import com.rpgGame.coreData.role.HeroData;
-	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.CharAttributeType;
-	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.type.item.GridBGType;
 	import com.rpgGame.netData.backpack.bean.ItemInfo;
@@ -49,6 +52,7 @@ package com.rpgGame.appModule.role
 	import feathers.data.ListCollection;
 	import feathers.dragDrop.DragData;
 	import feathers.events.DragDropEvent;
+	import feathers.utils.filter.GrayFilter;
 	
 	import gs.TweenLite;
 	
@@ -66,7 +70,6 @@ package com.rpgGame.appModule.role
 	{
 		private var _skin : juese_Skin;
 		
-		private var _showAvatarData : RoleData;
 		private var _avatarRole:UIAvatar3D;
 		private var equipNum:int=10;
 		private var bgList:Array=[GridBGType.EQUIP_WEAPON,GridBGType.EQUIP_HELM,GridBGType.EQUIP_ARMOR,GridBGType.EQUIP_LEGHARNESS,GridBGType.EQUIP_SHOE,GridBGType.EQUIP_SCAPULA,
@@ -98,7 +101,7 @@ package com.rpgGame.appModule.role
 		{
 			acceptDropFromContainerIdArr=[ItemContainerID.BackPack];
 			_skin=skin;
-			_avatarRole=new UIAvatar3D(_skin.avatarGrp);
+			_avatarRole=new UIAvatar3D(_skin.avatarGrp,1.7);
 			_zhandouliEftContaner=new Inter3DContainer();
 			var index:int=_skin.container.getChildIndex(_skin.weapons);
 			_skin.container.addChildAt(_zhandouliEftContaner,index);
@@ -165,12 +168,6 @@ package com.rpgGame.appModule.role
 		
 		private function initAvatar():void
 		{
-		/*	_avatar = new InterAvatar3D();
-			_avatar.x = _skin.weapons.x + (_skin.weapons.width >> 1);
-			_avatar.y = _skin.weapons.y + _skin.weapons.height-20;
-			_avatarRole.addChild3D(_avatar);*/
-			_showAvatarData = new RoleData(0);
-			_showAvatarData.bodyRadius=25;
 			glowfilter=new GlowFilter(0xdfb612,1,1,1);
 			
 			_zhandouliEft= _zhandouliEftContaner.playInter3DAt(ClientConfig.getEffect("ui_zhandouli_jiemian"),_skin.footMsg.x+180,_skin.footMsg.y+42,0);
@@ -190,13 +187,13 @@ package com.rpgGame.appModule.role
 			}
 			
 			updateRole();
-			_avatarRole.transition(RoleStateType.ACTION_SHOW);
 			updateBaseInfo();
 			
 			if(isMainRole)
 			{
 				updateRoleEquip();
 				onGetVipData();
+				onGetMarrriageData();
 			}else{//获取玩家的装备列表
 				updateRoleEquip();
 			}
@@ -310,6 +307,8 @@ package com.rpgGame.appModule.role
 			EventManager.addEvent(DragDropEvent.DRAG_START,onDragStart);
 			EventManager.addEvent(DragDropEvent.DRAG_COMPLETE,onDragEnd);
 			EventManager.addEvent(VipEvent.GET_VIP_DATA,onGetVipData);
+			EventManager.addEvent(HunYinEvent.HUNYIN_HUNYIN,onGetMarrriageData);
+			EventManager.addEvent(HunYinEvent.HUNYIN_JINJIE_CHENGGONG,onGetMarrriageData);
 		}
 		
 		private function onDragEnd(data:DragData):void
@@ -387,6 +386,15 @@ package com.rpgGame.appModule.role
 			EventManager.removeEvent(DragDropEvent.DRAG_START,onDragStart);
 			EventManager.removeEvent(DragDropEvent.DRAG_COMPLETE,onDragEnd);
 			EventManager.removeEvent(VipEvent.GET_VIP_DATA,onGetVipData);
+			EventManager.removeEvent(HunYinEvent.HUNYIN_HUNYIN,onGetMarrriageData);
+			EventManager.removeEvent(HunYinEvent.HUNYIN_JINJIE_CHENGGONG,onGetMarrriageData);
+			_marryIcon.clear();
+		}
+		
+		private function onGetMarrriageData():void
+		{
+			// TODO Auto Generated method stub
+			setMarriageRingData(Mgr.hunyinMgr.JieZiLv,Mgr.hunyinMgr.hasMarriage());
 		}
 		
 		private function onGetVipData():void
@@ -408,6 +416,38 @@ package com.rpgGame.appModule.role
 			{
 				_vipIcon.clear();
 				TipTargetManager.show(_vipIcon,TargetTipsMaker.makeTips(TipType.VIP_NONE_TIP,null));
+			}
+		}
+		/**
+		 *显示戒指 
+		 * @param ring 戒指阶数
+		 * @param hasMarriage 是否结婚中，离婚置灰
+		 * 
+		 */		
+		public function setMarriageRingData(ring:int,hasMarriage:Boolean):void
+		{
+			//TipTargetManager.remove(_marryIcon);
+			if (ring>0) 
+			{
+				var info:Q_advance_wedding=JieHunJieZiData.getModByLv(ring);		
+				var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(info.q_mod_id);
+				FaceUtil.SetItemGrid(_marryIcon,itemInfo);
+				//_marryIcon.setIconResName(ClientConfig.getItemIcon(Mgr.hunyinMgr.getRingUrl(ring),IcoSizeEnum.ICON_48));
+				if (!hasMarriage) 
+				{
+					GrayFilter.gray(_marryIcon);
+				}
+				else
+				{
+					_marryIcon.filter=null;
+				}
+				//TipTargetManager.show(_vipIcon,TargetTipsMaker.makeTips(TipType.VIP_LEVEL_TIP,new DynamicTipData(vip)));
+			}
+			else
+			{
+				_marryIcon.clear();
+				_marryIcon.filter=null;
+				//TipTargetManager.show(_vipIcon,TargetTipsMaker.makeTips(TipType.VIP_NONE_TIP,null));
 			}
 		}
 		/**
@@ -512,17 +552,7 @@ package com.rpgGame.appModule.role
 			}
 			
 			if(type==-1){
-				this._showAvatarData.avatarInfo.setBodyResID(_roleData.avatarInfo.bodyResID, _roleData.avatarInfo.bodyAnimatResID);
-				this._showAvatarData.avatarInfo.hairResID = _roleData.avatarInfo.hairResID;
-				this._showAvatarData.avatarInfo.weaponResID = _roleData.avatarInfo.weaponResID;
-				this._showAvatarData.avatarInfo.weaponEffectID = _roleData.avatarInfo.weaponEffectID;
-				this._showAvatarData.avatarInfo.weaponEffectScale = _roleData.avatarInfo.weaponEffectScale;
-				this._showAvatarData.avatarInfo.deputyWeaponResID = _roleData.avatarInfo.deputyWeaponResID;
-				this._showAvatarData.avatarInfo.deputyWeaponEffectID=_roleData.avatarInfo.deputyWeaponEffectID;
-				this._showAvatarData.avatarInfo.deputyWeaponEffectScale=_roleData.avatarInfo.deputyWeaponEffectScale;
-				this._showAvatarData.avatarInfo.zhanqiResID=_roleData.avatarInfo.zhanqiResID;
-				this._avatarRole.setRoleData(this._showAvatarData);
-				this._avatarRole.setScale(1.7);	
+				_avatarRole.updateWithAvatarInfo(_roleData.avatarInfo);
 			}else{
 				this._avatarRole.updateWithRenderUnitID(type,_roleData.avatarInfo);
 			}

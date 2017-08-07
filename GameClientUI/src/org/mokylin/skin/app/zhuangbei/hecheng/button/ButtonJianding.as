@@ -27,18 +27,16 @@ package org.mokylin.skin.app.zhuangbei.hecheng.button
 			super();
 			
 			this.currentState = "upAndSelected";
-			this.height = 43;
-			this.width = 244;
 			this.elementsContent = [];
 			
 			states = {
 			};
-			skinNames={"down":"ui/app/zhuangbei/hecheng/button/hechengBase/down.png",
-			"downAndSelected":"ui/app/zhuangbei/hecheng/button/hechengBase/over.png,ui/app/zhuangbei/hecheng/button/jiandingtuzhihecheng/up.png",
-			"hover":"ui/app/zhuangbei/hecheng/button/hechengBase/over.png,ui/app/zhuangbei/hecheng/button/jiandingtuzhihecheng/up.png",
-			"hoverAndSelected":"ui/app/zhuangbei/hecheng/button/hechengBase/over.png,ui/app/zhuangbei/hecheng/button/jiandingtuzhihecheng/up.png",
-			"up":"ui/app/zhuangbei/hecheng/button/hechengBase/up.png,ui/app/zhuangbei/hecheng/button/jiandingtuzhihecheng/up.png",
-			"upAndSelected":"ui/app/zhuangbei/hecheng/button/hechengBase/over.png,ui/app/zhuangbei/hecheng/button/jiandingtuzhihecheng/up.png"};
+			skinNames={"down":"ui/app/zhuangbei/hecheng/button/hechengBase/down.png,ui/app/zhuangbei/hecheng/button/jiandingtuzhihecheng/down.png",
+			"downAndSelected":"ui/app/zhuangbei/hecheng/button/hechengBase/over.png,ui/app/zhuangbei/hecheng/button/jiandingtuzhihecheng/down.png,ui/app/zhuangbei/hecheng/button/jiandingtuzhihecheng/up.png",
+			"hover":"ui/app/zhuangbei/hecheng/button/hechengBase/over.png,ui/app/zhuangbei/hecheng/button/jiandingtuzhihecheng/up.png,ui/app/zhuangbei/hecheng/button/jiandingtuzhihecheng/down.png",
+			"hoverAndSelected":"ui/app/zhuangbei/hecheng/button/hechengBase/over.png,ui/app/zhuangbei/hecheng/button/jiandingtuzhihecheng/up.png,ui/app/zhuangbei/hecheng/button/jiandingtuzhihecheng/down.png",
+			"up":"ui/app/zhuangbei/hecheng/button/hechengBase/up.png,ui/app/zhuangbei/hecheng/button/jiandingtuzhihecheng/up.png,ui/app/zhuangbei/hecheng/button/jiandingtuzhihecheng/down.png",
+			"upAndSelected":"ui/app/zhuangbei/hecheng/button/hechengBase/over.png,ui/app/zhuangbei/hecheng/button/jiandingtuzhihecheng/down.png,ui/app/zhuangbei/hecheng/button/jiandingtuzhihecheng/up.png"};
 		}
 
 

@@ -5,7 +5,10 @@ package com.rpgGame.appModule.dungeon.lunjian
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.lang.LangUI;
 	
-	import gs.TweenLite;
+	import away3d.primitives.RegularPolygonGeometry;
+	
+	import gs.TweenMax;
+	import gs.easing.EaseLookup;
 	
 	import org.mokylin.skin.app.fuben.FuBenJieSuan2_Shibai;
 	
@@ -36,7 +39,8 @@ package com.rpgGame.appModule.dungeon.lunjian
 			_skin.container.scale=0.1;
 			_skin.container.alpha=0;
 			
-			TweenLite.to(_skin.container,1,{scale:1,alpha:1,onComplete:tweenComplete});
+			TweenMax.to(this,0.9,{scale:1,alpha:1});
+			tweenComplete();
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void

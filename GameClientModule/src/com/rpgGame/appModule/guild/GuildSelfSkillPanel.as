@@ -2,6 +2,8 @@ package com.rpgGame.appModule.guild
 {
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.core.events.GuildEvent;
+	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.core.ui.tip.RTNodeID;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.banghui.ProSkill_Item;
@@ -51,7 +53,7 @@ package com.rpgGame.appModule.guild
 				_skin.lbLevel.text = "0";
 				_skin.lbGongxian.text = "0";
 			}
-			
+			SkinUI.notifyUpdate(RTNodeID.GUILD_SKILL_SELF);
 		}
 		
 		

@@ -41,10 +41,11 @@ package com.rpgGame.app.ui.main.taskbar
 		
 		public static function showLeadPanel():void
 		{
-			if (!AppManager.isAppInScene(AppConstant.TASK_LEAD_PANEL))
+			/*if (!AppManager.isAppInScene(AppConstant.TASK_LEAD_PANEL))
 			{
 				AppManager.showApp(AppConstant.TASK_LEAD_PANEL);
-			}
+			}*/
+			AppManager.showAppNoHide(AppConstant.TASK_LEAD_PANEL);
 		}
 		public static function hideLeadPanel():void
 		{
@@ -144,6 +145,7 @@ package com.rpgGame.app.ui.main.taskbar
 				TaskAutoManager.getInstance().startTaskAuto(type,num);
 				return;
 			}
+			
 			if(type==TaskType.MAINTYPE_DAILYTASK&&TaskMissionManager.dailyTaskData.q_emid!="")//支线打开面板任务
 			{
 				var emidArr:Array=TaskMissionManager.dailyTaskData.q_emid.split(",");
@@ -153,6 +155,12 @@ package com.rpgGame.app.ui.main.taskbar
 				}
 				return;
 			}
+			if(type==TaskType.MAINTYPE_DAILYTASK&&TaskUtil.getSubtypeByType(type)==TaskType.SUB_HUBAO)//支线护宝任务
+			{
+				TaskUtil.npcTaskFly(TaskMissionManager.getTaskNpcAreaId(type),type,TaskType.SUB_HUBAO);
+				return;
+			}
+			
 			if(TaskUtil.getSubtypeByType(type)==TaskType.SUB_USEITEM&&!TaskUtil.getIsfinishByType(type))//是使用道具任务且没有完成
 			{
 				showBagPanel();
@@ -279,46 +287,24 @@ package com.rpgGame.app.ui.main.taskbar
 			
 			if(TaskMissionManager.flyTaskType>0)
 			{
-				TaskAutoManager.getInstance().startTaskAuto(TaskMissionManager.flyTaskType,TaskMissionManager.flyMissionType);
-				TaskMissionManager.flyTaskType=0;
-				TaskMissionManager.flyMissionType=0;
-				return;
-			}
-			
-			if(TaskMissionManager.flyMissionType>0)
-			{
-				taskFlishNot(0,TaskMissionManager.flyMissionType);
-				TaskMissionManager.flyMissionType=0;
-			}
-			else if(TaskMissionManager.flyTaskType>0)
-			{
-				var taskType:int=TaskMissionManager.flyTaskType;
-				var taskData:Q_mission_base=TaskMissionManager.getTaskDataByType(taskType);
-				if(taskData!=null)
+				if(TaskMissionManager.flyTaskType!=TaskType.MAINTYPE_DAILYTASK)
 				{
-					var missionType:int=taskData.q_mission_type;
-					if(TaskMissionManager.getTaskIsFinishByType(taskType))
-					{
-						/*var dist:int = TaskUtil.getDistfinishNpc();
-						if(dist>=0&&dist<100)
-						{
-						
-						}*/
-						taskFlishOk(taskType);
-					}
-					else
-					{
-						taskFlishNot(taskType,missionType);
-					}
-					
+					TaskAutoManager.getInstance().startTaskAuto(TaskMissionManager.flyTaskType,TaskMissionManager.flyMissionType);
+					TaskMissionManager.flyTaskType=0;
+					TaskMissionManager.flyMissionType=0;
 				}
 				
-				
-				
-				TaskMissionManager.flyTaskType=0;
-				
+				/*if(TaskMissionManager.flyTaskType==TaskType.MAINTYPE_DAILYTASK&&TaskMissionManager.flyMissionType==TaskType.SUB_HUBAO)
+				{
+					
+				}
+				else
+				{
+					TaskAutoManager.getInstance().startTaskAuto(TaskMissionManager.flyTaskType,TaskMissionManager.flyMissionType);
+					TaskMissionManager.flyTaskType=0;
+					TaskMissionManager.flyMissionType=0;
+				}*/
 			}
-			
 		}
 		public static function taskFlishOk(taskType:int):void
 		{

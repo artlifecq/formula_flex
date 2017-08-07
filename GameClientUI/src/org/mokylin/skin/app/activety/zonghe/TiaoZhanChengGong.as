@@ -204,7 +204,7 @@ package org.mokylin.skin.app.activety.zonghe
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			imLose = temp;
 			temp.name = "imLose";
-			temp.styleName = "ui/app/activety/tiaozhanshibai.png";
+			temp.styleName = "ui/big_bg/activety/tiaozhanshibai.png";
 			temp.visible = false;
 			temp.x = 59;
 			temp.y = 0;
@@ -216,7 +216,7 @@ package org.mokylin.skin.app.activety.zonghe
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			imgWin = temp;
 			temp.name = "imgWin";
-			temp.styleName = "ui/app/activety/tianzhanshengli.png";
+			temp.styleName = "ui/big_bg/activety/tianzhanshengli.png";
 			temp.x = 59;
 			temp.y = 0;
 			return temp;

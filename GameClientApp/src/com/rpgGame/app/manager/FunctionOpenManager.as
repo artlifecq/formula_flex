@@ -16,6 +16,9 @@
     import com.rpgGame.coreData.clientConfig.Q_newfunc;
     import com.rpgGame.coreData.enum.EmFunctionID;
     
+    import flash.net.URLRequest;
+    import flash.net.navigateToURL;
+    
     import org.client.mainCore.ds.HashMap;
     import org.client.mainCore.manager.EventManager;
 
@@ -76,9 +79,6 @@
 					case EmFunctionID.EM_BANGHUI_INFO:
 					case EmFunctionID.EM_BANGHUI_CHENGYUAN:
 					case EmFunctionID.EM_BANGHUI_UPLEVEL:
-					case EmFunctionID.EM_BANGHUI_COMBAT:
-						bool = GuildManager.instance().haveGuild;
-						break;
 					case EmFunctionID.EM_BANGHUI_SPELL:
 						if(GuildManager.instance().haveGuild)
 							bool = true;
@@ -242,7 +242,11 @@
 					else{
 						AppManager.showApp(AppConstant.HUNYIN_JIEHUN);
 					}
-				}
+				}		
+			}
+			else if(info.clickType ==4) //超链接
+			{
+				navigateToURL(new URLRequest(info.clickarg),"_blank");
 			}
 		}
     }

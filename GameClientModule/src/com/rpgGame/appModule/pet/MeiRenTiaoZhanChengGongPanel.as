@@ -55,6 +55,7 @@ package com.rpgGame.appModule.pet
 		{
 			_skin=new MeiRenTiaoZhan();
 			super(_skin);
+			this.model=true;
 			initPanel();
 		}
 		
@@ -166,6 +167,7 @@ package com.rpgGame.appModule.pet
 		
 		private function showPrize():void
 		{
+			var showNum:int=0;
 			if(_info.passlevel<_msg.level)
 			{
 				var arr:Array=JSONUtil.decode(_q_girl_pet.q_zone_reward);
@@ -179,6 +181,7 @@ package com.rpgGame.appModule.pet
 							var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(arr[i].mod,arr[i].num);
 							FaceUtil.SetItemGrid(_items[i],itemInfo);
 							_items[i].visible=true;
+							showNum++;
 						}
 						else
 						{
@@ -191,6 +194,40 @@ package com.rpgGame.appModule.pet
 			else
 			{
 				_skin.grpIcon1.visible=false;
+			}
+			shortItems(showNum);
+		}
+		
+		private function shortItems(number:int):void
+		{
+			switch(number)
+			{
+				case 1:
+				{
+					_items[0].x=136;				
+					break;
+				}
+				case 2:
+				{
+					_items[0].x=107;	
+					_items[1].x=168;	
+					break;
+				}
+				case 3:
+				{
+					_items[0].x=75;	
+					_items[1].x=136;	
+					_items[2].x=197;	
+					break;
+				}
+				case 4:
+				{
+					_items[0].x=47;	
+					_items[1].x=107;	
+					_items[2].x=168;	
+					_items[3].x=228;	
+					break;
+				}
 			}
 		}
 		

@@ -97,9 +97,8 @@ package com.rpgGame.appModule.maps
 				{
 					ioc=pathIcoVect[0];
 					length=Math.sqrt((ioc.x-px)*(ioc.x-px)+(ioc.y-py)*(ioc.y-py));
-					if(length<min)
+					if(length<10)
 					{
-						min=length;
 						pathIcoVect[0].removeMyself();
 						pathIcoVect.shift();
 					}

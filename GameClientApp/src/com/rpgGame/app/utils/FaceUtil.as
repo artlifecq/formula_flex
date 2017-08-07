@@ -8,7 +8,6 @@ package com.rpgGame.app.utils
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
-	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.core.view.ui.tip.vo.SpellDynamicTipdata;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
@@ -136,7 +135,10 @@ package com.rpgGame.app.utils
 			
 			if(itemInfo is EquipInfo)
 			{
+				var info:EquipInfo=itemInfo as EquipInfo;
 				grid.setIsWear( RoleEquipmentManager.equipIsWearing(itemInfo));
+				grid.setIsXilian((info.smeltAtt1!=0||info.smeltAtt2!=0))
+				grid.setStrandznString(info);
 			}
 			var hero:HeroData=MainRoleManager.actorInfo;
 			switch( itemInfo.type )
@@ -144,7 +146,7 @@ package com.rpgGame.app.utils
 				case GoodsType.EQUIPMENT://装备
 				case GoodsType.EQUIPMENT1://装备
 				case GoodsType.EQUIPMENT2://装备
-					grid.setLV(itemInfo.qItem.q_levelnum);
+					//					grid.setLV(itemInfo.qItem.q_levelnum);
 					break;
 				default:
 					break;
@@ -190,9 +192,9 @@ package com.rpgGame.app.utils
 						}
 						break;
 					/*case GoodsType.BEAST_CARD://兽牌
-						grid.setIsBind(itemInfo.binded);
-						TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.MOUNT_BEAST_CARD_TIP, itemInfo ) );
-						break;*/
+					grid.setIsBind(itemInfo.binded);
+					TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.MOUNT_BEAST_CARD_TIP, itemInfo ) );
+					break;*/
 					default:
 						TipTargetManager.show( grid, TargetTipsMaker.makeTips( TipType.ITEM_TIP, itemInfo ) );
 						break;
@@ -237,11 +239,11 @@ package com.rpgGame.app.utils
 			grid.clear();
 			
 			var size:int = grid.iconSize;
-//			grid.showQuality( -1 );
+			//			grid.showQuality( -1 );
 			grid.faceInfo = data;
 			grid.setIconResName( ClientConfig.getSkillIcon( data.icoName, size ) );
 			grid.setIsShowCdTm( true );
-//			grid.setQualityImageIconPoint( -2, -2 );
+			//			grid.setQualityImageIconPoint( -2, -2 );
 			grid.sortLayer();
 			
 			if( isTips )
@@ -270,17 +272,17 @@ package com.rpgGame.app.utils
 		{
 			var grid:DragDropItem = new DragDropItem( size, index);
 			var icon:String = oldGrid.styleName;
-//			grid.setBg( GridBGType.GRID_SIZE_46 );
-//			grid.bgImage.styleName = icon;
-//			grid.bgImage.width = oldGrid.width;
-//			grid.bgImage.height = oldGrid.height;
+			//			grid.setBg( GridBGType.GRID_SIZE_46 );
+			//			grid.bgImage.styleName = icon;
+			//			grid.bgImage.width = oldGrid.width;
+			//			grid.bgImage.height = oldGrid.height;
 			grid.dragAble = true;
 			grid.x = oldGrid.x;
 			grid.y = oldGrid.y;
 			grid.name = oldGrid.name;
 			grid.visible = oldGrid.visible;
-//			grid.bgImage.width = grid.width = oldGrid.width;
-//			grid.bgImage.height = grid.height = oldGrid.height;
+			//			grid.bgImage.width = grid.width = oldGrid.width;
+			//			grid.bgImage.height = grid.height = oldGrid.height;
 			grid.setIconPoint(0,0);
 			oldGrid.parent.addChild(grid);
 			oldGrid.removeFromParent();
@@ -299,15 +301,15 @@ package com.rpgGame.app.utils
 		{
 			var grid:IconCDFace = IconCDFace.create(size);
 			var icon:String = oldGrid.styleName;
-//			grid.setBg( GridBGType.GRID_SIZE_46,alpha );
-//			grid.bgImage.styleName = icon;
+			//			grid.setBg( GridBGType.GRID_SIZE_46,alpha );
+			//			grid.bgImage.styleName = icon;
 			grid.x = oldGrid.x;
 			grid.y = oldGrid.y;
 			grid.name = oldGrid.name;
 			grid.visible = oldGrid.visible;
-//			grid.bgImage.width = grid.width = oldGrid.width;
-//			grid.bgImage.height = grid.height = oldGrid.height;
-//			grid.setIconPoint(iconX,iconY);
+			//			grid.bgImage.width = grid.width = oldGrid.width;
+			//			grid.bgImage.height = grid.height = oldGrid.height;
+			//			grid.setIconPoint(iconX,iconY);
 			grid.name = oldGrid.name;
 			oldGrid.parent.addChild(grid);
 			oldGrid.removeFromParent();
@@ -399,7 +401,7 @@ package com.rpgGame.app.utils
 				var mountName:String = LanguageConfig.getText( LangMount.MOUNT_TIPS_1, mountPrefixTypeStr + mountUnitData.name );
 			}
 			
-//			info.icoName = AssetUrl.MOUNT_IMG;
+			//			info.icoName = AssetUrl.MOUNT_IMG;
 			info.name = mountName;
 			info.data = mountData;
 			return info;

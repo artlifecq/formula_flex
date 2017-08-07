@@ -2,18 +2,22 @@ package com.rpgGame.appModule.pet.sub
 {
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.scene.render.RenderUnit3D;
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.core.view.ui.tip.vo.MeiRenGuanQiaData;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.PetAdvanceCfg;
+	import com.rpgGame.coreData.cfg.PetCfg;
 	import com.rpgGame.coreData.clientConfig.Q_girl_advance;
+	import com.rpgGame.coreData.clientConfig.Q_girl_pet;
 	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.netData.pet.bean.PetInfo;
 	
 	import feathers.controls.UIAsset;
 	import feathers.utils.filter.GrayFilter;
-
+	
 	public class PetZoneBall
 	{
 		private var _ball:UIAsset;
@@ -36,9 +40,20 @@ package com.rpgGame.appModule.pet.sub
 		{
 			_info=info;
 			_rank=num;		
-//			var q_girl:Q_girl_advance=PetAdvanceCfg.getPet(_info.modelId,_rank);
-//			if(isShowTips)
-//				TipTargetManager.show( this._ball, TargetTipsMaker.makeTips( TipType.MEIREN_TIAOZHAN_TIP, q_girl ,true) );
+			if(isShowTips){
+				var q_girl_pet:Q_girl_pet=PetCfg.getPet(info.modelId);
+				var zhanli:Array=JSONUtil.decode(q_girl_pet.q_need_power);
+				var prizes:Array=JSONUtil.decode(q_girl_pet.q_zone_reward);
+				
+				var power:int=zhanli[_rank-1];
+				var prize:Array=prizes[_rank-1];
+				var isTongguan:Boolean=info.passlevel>=_rank;
+				var data:MeiRenGuanQiaData=new MeiRenGuanQiaData();
+				data.zhanli=power;
+				data.tongguanBool=isTongguan;
+				data.prize=prize;
+				TipTargetManager.show( this._ball, TargetTipsMaker.makeTips( TipType.MEIREN_GUANQIA_TIP, data ,true) );
+			}
 		}
 		
 		private static function addEft(render:RenderUnit3D):void

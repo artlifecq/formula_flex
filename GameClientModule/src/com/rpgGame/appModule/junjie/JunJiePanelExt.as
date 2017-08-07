@@ -18,6 +18,7 @@ package com.rpgGame.appModule.junjie
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.JunJieData;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.enum.AttChangeEnum;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RoleStateType;
@@ -250,8 +251,8 @@ package com.rpgGame.appModule.junjie
 			{
 				//更新掉		
 				showBtn();
-				
-				UIPopManager.showAlonePopUI(CenterEftPop,"ui_shengjichenggong");
+				this.playInter3DAt(ClientConfig.getEffect("ui_jinengjinjiechenggong"),_skin.point_eff.x,_skin.point_eff.y,1);
+//				UIPopManager.showAlonePopUI(CenterEftPop,"ui_shengjichenggong");
 				var nowFight:int=Mgr.junjieMgr.power;
 				var change:int=nowFight-_skin.NumZhanli.number;
 				changeList=getChangeList(change);		
@@ -329,7 +330,7 @@ package com.rpgGame.appModule.junjie
 					_wanchengnum++;			
 			}
 			_skin.lbTiaojian.text="("+_wanchengnum+"/"+_maxShowNum+")";
-			_skin.lb_wanchengdu.htmlText=HtmlTextUtil.getTextColor(0xcfc6ae,"进阶目标完成度")+HtmlTextUtil.getTextColor(0x55BD15,_wanchengnum+"/"+_maxShowNum);
+			_skin.lb_wanchengdu.htmlText=HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"进阶目标完成度")+HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,_wanchengnum+"/"+_maxShowNum);
 		}
 		
 		//刷新选项列表

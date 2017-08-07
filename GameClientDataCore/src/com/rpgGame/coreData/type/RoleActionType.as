@@ -15,9 +15,11 @@ package com.rpgGame.coreData.type
 		/** 个性待机状态 **/
 		public static const IDLE : String = "stand";//暂时把个性待机动作调为stand，因为现在美术还没有做这个动作
 		/** 展示状态1 **/
-		public static const SHOW1 : String = "show_stand";
+		public static const SHOW_STAND : String = "show_stand";
 		/** 展示状态2 **/
-		public static const SHOW2 : String = "show_idle";
+		public static const SHOW_IDLE : String = "show_idle";
+		/** 攻击 **/
+		public static const ATTACK : String = "attack";
 		/** 行走 **/
 		public static const WALK : String = "walk";
 		/** 跑步 **/
@@ -48,7 +50,6 @@ package com.rpgGame.coreData.type
 		public static const FLY:String = "fly";
 		public static const FLY_HIT:String = "flyhit";
 		public static const DROPOUT:String = "dropout";
-		public static const SHOW_IDLE:String = "show_idle";
 		public static function getActionType(type : String, onMount : Boolean = false) : String
 		{
 			if (!type)

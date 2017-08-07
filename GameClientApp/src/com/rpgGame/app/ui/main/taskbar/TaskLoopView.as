@@ -233,6 +233,7 @@ package com.rpgGame.app.ui.main.taskbar
 				setTreasuerTaskView();
 				setGuildTaskView();
 				setGuideTaskView();
+				setKajibutView();
 			}
 			else if(type==TaskType.MAINTYPE_MAINTASK)
 			{
@@ -264,6 +265,7 @@ package com.rpgGame.app.ui.main.taskbar
 				upDailyTaskView();
 				upTreasuerTaskView();
 				upGuildTaskView();
+				setGuideTaskView();
 			}
 			else if(type==TaskType.MAINTYPE_MAINTASK)
 			{
@@ -383,8 +385,8 @@ package com.rpgGame.app.ui.main.taskbar
 				killBut2List[i].visible=false;
 			}
 			icoList1Group.visible=false;
-			
 			subBut1.visible=false;
+			setUisite();
 		}
 		
 		/**更新支线任务显示*/
@@ -396,9 +398,8 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				setNavView(TaskType.MAINTYPE_DAILYTASK,taskData.q_party_name,taskData.q_name,TaskMissionManager.getDailyTaskIsFinish(),navi2,subBut1);
 				TaskUtil.setGotargetInfo(taskData.q_mission_mainType,taskData.q_mission_type,taskData.q_finish_describe,taskData.q_finish_information_str,task.taskSubRateInfolist,killBut2List);
-				setUisite();
 			}
-			
+			setUisite();
 		}
 		
 		
@@ -515,22 +516,25 @@ package com.rpgGame.app.ui.main.taskbar
 			{
 				for(var i:int=0;i<task.length;i++)
 				{
-					if(i<guideLabelList.length)
+					if(task[i].taskSubRateInfolist[0].num<task[i].taskSubRateInfolist[0].maxNum)
 					{
-						glabe=guideLabelList[i];
+						if(i<guideLabelList.length)
+						{
+							glabe=guideLabelList[i];
+						}
+						else
+						{
+							glabe=new Label();
+							guideLabelList.push(glabe);
+							skinList.push(glabe);
+							scrollBox.addChild(glabe);
+						}
+						glabe.name="KILLII"+TaskType.MAINTYPE_GUIDETASK+"II"+i;
+						glabe.x=_skin.sec_navi1.x;
+						glabe.visible=true;
+						taskData=TaskMissionCfgData.getTaskByID(task[i].taskModelId);
+						glabe.htmlText="<font color='#ffea00'>【"+taskData.q_name+"】</font>"+taskData.q_finish_describe+"("+task[i].taskSubRateInfolist[0].num+"/"+task[i].taskSubRateInfolist[0].maxNum+")";
 					}
-					else
-					{
-						glabe=new Label();
-						guideLabelList.push(glabe);
-						skinList.push(glabe);
-						scrollBox.addChild(glabe);
-					}
-					glabe.name="KILLII"+TaskType.MAINTYPE_GUIDETASK+"II"+i;
-					glabe.x=_skin.sec_navi1.x;
-					glabe.visible=true;
-					taskData=TaskMissionCfgData.getTaskByID(task[i].taskModelId);
-					glabe.htmlText="<font color='#ffea00'>【"+taskData.q_name+"】</font>"+taskData.q_finish_describe+"("+task[i].taskSubRateInfolist[0].num+"/"+task[i].taskSubRateInfolist[0].maxNum+")";
 				}
 			}
 			setUisite();
@@ -591,14 +595,20 @@ package com.rpgGame.app.ui.main.taskbar
 		private function setSubbutView(npcid:int,killButList:Vector.<SkinnableContainer>):void
 		{
 			var text:String="<font color='#eaeabc'>回复：</font><u>"+MonsterDataManager.getMonsterName(npcid)+"</u>";
-			TaskUtil.setGotargetLabelText(TaskType.SUB_CONVERSATION,killButList[0],text);
+			TaskUtil.setGotargetLabelText(true,killButList[0],text);
 			setUisite();
 		}
 		
 		/**处理卡点显示*/
-		public function setKajibutView(taskId: int,noInfo: Vector.<NoMainTaskInfo>):void
+		public function setKajibutView():void
 		{
-			if(!_skin.secondary_box.visible)return;
+			if(!_skin.secondary_box.visible)
+				return;
+			var taskId: int=TaskMissionManager.noMainTaskId;
+			if(taskId==0)
+				return;
+			
+			var noInfo: Vector.<NoMainTaskInfo>=TaskMissionManager.noMainTaskInfo;
 			var i:int;
 			_skin.sec_txt.visible=false;
 			_skin.sec_navi1.visible=true;
@@ -632,11 +642,11 @@ package com.rpgGame.app.ui.main.taskbar
 			if(FunctionOpenManager.checkOpenBuyFunId(EmFunctionID.EM_ZHANHUN))
 			{
 				text="<u>战魂</u>"
-				TaskUtil.setGotargetLabelText(add,killBut1List[add],text);
+				TaskUtil.setGotargetLabelText(false,killBut1List[add],text);
 				add++;
 			}
 			text="<u>推荐挂机点</u>"
-			TaskUtil.setGotargetLabelText(10,killBut1List[add],text);
+			TaskUtil.setGotargetLabelText(true,killBut1List[add],text);
 		}
 		
 		

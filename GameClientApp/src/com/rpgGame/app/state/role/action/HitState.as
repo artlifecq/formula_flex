@@ -168,14 +168,13 @@ package com.rpgGame.app.state.role.action
 		{
 			if (prevState)
 			{
-//				if (prevState.type == RoleStateType.ACTION_HIT)
-//					return false;
-//				else 
 				if (prevState.type == RoleStateType.ACTION_WALK)
 					return false;
 				else if (prevState.type == RoleStateType.ACTION_RUN)
 					return false;
 				else if (prevState.type == RoleStateType.ACTION_BEAT_BACK)
+					return false;
+				else if (prevState.type == RoleStateType.ACTION_ATTACK)
 					return false;
 			}
 			if(!force && (_machine as RoleStateMachine).isFly)
