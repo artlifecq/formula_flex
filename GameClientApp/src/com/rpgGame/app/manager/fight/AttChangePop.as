@@ -8,16 +8,11 @@ package com.rpgGame.app.manager.fight
 	
 	import gs.TimelineLite;
 	import gs.TweenLite;
-	
-	import starling.display.DisplayObject;
 	import starling.display.Sprite;
 	
 	public class AttChangePop extends Sprite
 	{
 		private var waitEftDatas:Vector.<AttEftData>;
-		
-		private var playingNum:int;
-		private var maxPlayNum:int=10;
 		private var one_cont_max:int=5;
 		
 		private var prePlayTime:int;
@@ -28,8 +23,7 @@ package com.rpgGame.app.manager.fight
 		
 		private var showY:int=50;
 		private var oneFaceH:int=29;
-		
-		private var prePlayDis:DisplayObject;
+		private var isStartPlay:Boolean;
 
 		public function AttChangePop(x:int,y:int):void
 		{
@@ -52,7 +46,6 @@ package com.rpgGame.app.manager.fight
 			var key:int=0;
 			var val:int=0;
 			var numberColor : String = "";
-			clear();//直接清理还没播放的数据
 			for (var i:int = 0; i <len; i++) 
 			{
 				key=keys[i];
@@ -70,7 +63,11 @@ package com.rpgGame.app.manager.fight
 				data.value=val;
 				waitEftDatas.push(data);
 			}
-			playNextEft();
+			
+			if(!isStartPlay){
+				isStartPlay=true;
+				playNextEft();
+			}
 		}
 		
 		private function playNextEft():void
@@ -88,7 +85,7 @@ package com.rpgGame.app.manager.fight
 			var overTime:Number=getTimer()-prePlayTime;
 			overTime=overTime*0.001;
 			
-			if(overTime>=showTime&&playingNum<maxPlayNum){//达到播放条件可播放下一批
+			if(overTime>=showTime){//达到播放条件可播放下一批
 				prePlayTime=getTimer();
 				var content:AttChangeListCont=AttChangeListCont.create();
 				this.addChild(content);
@@ -108,14 +105,14 @@ package com.rpgGame.app.manager.fight
 				content.y=0;
 				showY=content.height;
 				tweenContent(content);
-				playingNum++;
 			}
 		}
 		
 		private function tweenContent(content:AttChangeListCont):void
 		{
 			var myTimeline: TimelineLite= new TimelineLite({onComplete:contTweenComplete,onCompleteParams:[content]});
-			myTimeline.append(new TweenLite(content, showTime, {alpha:1,y:content.y-showY,onComplete:onAlphaComplete}));
+			myTimeline.clear();
+			myTimeline.append(new TweenLite(content, showTime, {alpha:1,y:content.y-showY}));
 			myTimeline.append(new TweenLite(content, moveTime, {y:content.y-showY-50}));
 			myTimeline.append(new TweenLite(content, missTime, {alpha:0,y:content.y-showY-100}));
 		}
@@ -123,48 +120,12 @@ package com.rpgGame.app.manager.fight
 		
 		private function contTweenComplete(attackFace:AttChangeListCont):void
 		{
-			if(prePlayDis==attackFace){
-				prePlayDis=null;
-			}
 			AttChangeListCont.recycle(attackFace);
-			playingNum--;
-		}
-		
-		private function playNextEft1():void
-		{
-			var overTime:Number=getTimer()-prePlayTime;
-			overTime=overTime*0.001;
-			if(playingNum<maxPlayNum&&waitEftDatas.length!=0&&overTime>=showTime){
-				prePlayTime=getTimer();
-				var eftData:AttEftData=waitEftDatas.shift();
-				playingNum++;
-				var attackFace : AttackFace= AttackFace.createAttackFace(eftData.typeRes, eftData.numberRes, eftData.value);
-				attackFace.touchAcross = true;
-				attackFace.touchable = false;
-				attackFace.touchGroup = false;
-				attackFace.visible = true;
-				attackFace.alpha=0;
-				attackFace.y=0;
-				this.addChild(attackFace);
-				tweenNormalAtt(attackFace);
+			if(waitEftDatas.length!=0){
+				playNextEft();
+			}else{
+				isStartPlay=false;
 			}
-		}		
-		
-		/**
-		 *普通属性瓢字 
-		 * @param attackFace
-		 * 
-		 */
-		private function tweenNormalAtt(attackFace:AttackFace):void
-		{
-			var myTimeline: TimelineLite= new TimelineLite({onComplete:eftTweenComplete,onCompleteParams:[attackFace]});
-			myTimeline.append(new TweenLite(attackFace, showTime, {alpha:1,y:attackFace.y-showY,onComplete:onAlphaComplete}));
-		}		
-		
-		private function eftTweenComplete(attackFace:AttackFace):void
-		{
-			AttackFace.recycleAttackFace(attackFace);
-			playingNum--;
 		}
 		
 		private function onAlphaComplete():void
