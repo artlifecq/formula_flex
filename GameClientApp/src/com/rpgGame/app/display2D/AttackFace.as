@@ -406,6 +406,68 @@ package com.rpgGame.app.display2D
 			_value = 0;
 			_specialType = null;
 			_specialOffsetPos.x = _specialOffsetPos.y = 0;
+			if(_geBmpStarling)
+			{
+				_geBmpStarling.x = _geBmpStarling.y = 0;
+				_geBmpStarling.scale=1;
+			}
+				
+			if(_shiBmpStarling)
+			{
+				_shiBmpStarling.x = _shiBmpStarling.y = 0;
+				_shiBmpStarling.scale=1;
+			}
+				
+			if(_baiBmpStarling)
+			{
+				_baiBmpStarling.x = _baiBmpStarling.y = 0;
+				_baiBmpStarling.scale=1;
+			}
+				
+			if(_qianBmpStarling)
+			{
+				_qianBmpStarling.x = _qianBmpStarling.y = 0;
+				_qianBmpStarling.scale=1;
+			}
+				
+			if(_wanBmpStarling)
+			{
+				_wanBmpStarling.x = _wanBmpStarling.y = 0;
+				_wanBmpStarling.scale=1;
+			}
+				
+			if(_shiwanBmpStarling)
+			{
+				_shiwanBmpStarling.x = _wanBmpStarling.y = 0;
+				_shiwanBmpStarling.scale=1;
+			}
+				
+			if(_baiwanBmpStarling)
+			{
+				_baiwanBmpStarling.x= _baiwanBmpStarling.y = 0;
+				_baiwanBmpStarling.scale=1;
+			}
+				
+			if(_qianwanBmpStarling)
+			{
+				_qianwanBmpStarling.x = _qianwanBmpStarling.y = 0;
+				_qianwanBmpStarling.scale=1;
+			}
+				
+			if(_yiBmpStarling)
+			{
+				_yiBmpStarling.x = _yiBmpStarling.y = 0;
+				_yiBmpStarling.scale=1;
+			}
+				
+			if(_shiyiBmpStarling)
+			{
+				_shiyiBmpStarling.x = _shiyiBmpStarling.y = 0;
+				_shiyiBmpStarling.scale=1;
+			}
+				
+			
+			
 			if( parent != null )
 				parent.removeChild(this);
 
