@@ -107,13 +107,13 @@ package   com.rpgGame.app.manager.debug
 			});
 			commandList.put( ".hidestate", function (...arg):void
 			{
-				LayerManager.showOrHideMM();
+				//LayerManager.showOrHideMM();
 				StatsUtil.hideAwayStats();
 				
 			});
 			commandList.put( ".showstate", function (...arg):void
 			{
-				LayerManager.showOrHideMM();
+				//LayerManager.showOrHideMM();
 				StatsUtil.showAwayStats(Stage3DLayerManager.stage,Stage3DLayerManager.stage3DProxy);
 			});
 			commandList.put( ".vip", function (...arg):void

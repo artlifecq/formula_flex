@@ -21,6 +21,7 @@ package com.rpgGame.app.manager
 	
 	public class NineTowerMgr
 	{
+		public static const ACTIVITY_ID:int=3;
 		public static var ins:NineTowerMgr=new NineTowerMgr();
 		public var data:SCUpdateYaoTaMessage;
 		public var flagData:SCWarChessMessage;
@@ -35,7 +36,7 @@ package com.rpgGame.app.manager
 		}
 		public function reqEnterTower():void
 		{
-			NineTowerSender.reqEnterTower()
+			NineTowerSender.reqEnterTower(ACTIVITY_ID)
 			
 		}
 		public function reqQuitTower():void

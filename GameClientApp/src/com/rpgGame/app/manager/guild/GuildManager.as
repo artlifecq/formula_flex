@@ -6,9 +6,11 @@ package com.rpgGame.app.manager.guild
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.ui.alert.GameAlertExt;
+	import com.rpgGame.app.ui.main.taskbar.TaskControl;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.GuildEvent;
@@ -29,6 +31,7 @@ package com.rpgGame.app.manager.guild
 	import com.rpgGame.coreData.info.item.GetShowItemVo;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.coreData.lang.LangGuild;
+	import com.rpgGame.coreData.type.TaskType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.guild.bean.GuildApplyInfo;
 	import com.rpgGame.netData.guild.bean.GuildInfo;
@@ -295,7 +298,7 @@ package com.rpgGame.app.manager.guild
 		/**获取是否有帮派了**/
 		public function get haveGuild():Boolean
 		{
-			return !ClientConfig.loginData.guildId.IsMax();
+			return !ClientConfig.loginData.guildId.IsZero();
 		}
 		/**创建帮会**/
 		public function createGuild(type:int,name:String,banner:String):void
@@ -553,7 +556,7 @@ package com.rpgGame.app.manager.guild
 		public function guildKill(playerId:long):void
 		{
 			var _killplayerInfo:GuildMemberInfo = this.getGuildMemberInfoById(playerId.hexValue);
-			GameAlertExt.show(LanguageConfig.replaceStr("玩家$即将被您踢出帮派，确认将其踢出？",[_killplayerInfo.name]),guildKill,[_killplayerInfo.id]);
+			GameAlertExt.show(LanguageConfig.replaceStr("玩家$即将被您踢出帮派，确认将其踢出？",[_killplayerInfo.name]),GuildSender.guildKill,[_killplayerInfo.id]);
 		
 		}
 		
@@ -1079,6 +1082,20 @@ package com.rpgGame.app.manager.guild
 				_guildData.active=msg.active;
 				EventManager.dispatchEvent(GuildEvent.GUILD_DATA_INIT);
 			}
+		}
+		
+		public function gotoTask():void
+		{
+			if (!haveGuild) 
+			{
+				return ;
+			}
+			if (!TaskMissionManager.haveGuildTask) 
+			{
+				NoticeManager.showNotifyById(60039);
+				return;
+			}
+			TaskControl.killWalkBut(TaskType.MAINTYPE_GUILDDAILYTASK,0,1);
 		}
 	}
 }

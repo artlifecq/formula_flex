@@ -351,18 +351,19 @@ package com.rpgGame.app.state.role
 //			{
 //				return;
 //			}
-			if (ref.needSpriteUp) 
-			{
-				ref.needSpriteUp=false;
-				SceneSender.reqSpriteUp();
-			}
+//			if (ref.needSpriteUp) 
+//			{
+//				ref.needSpriteUp=false;
+//				SceneSender.reqSpriteUp();
+//			}
 			if ((ref.owner as SceneRole).isMainChar || (ref.owner as SceneRole).isMainCamouflage)
 			{
 				if (ref.path.length > 1)
 				{
-					SceneSender.SendNewRunningMessage(ref.path);
+					SceneSender.SendNewRunningMessage(ref.path,ref.needSpriteUp);
 				}
 			}
+			ref.needSpriteUp=false;
 		}
 
 		private static function onWalkMove(ref : WalkMoveStateReference) : void

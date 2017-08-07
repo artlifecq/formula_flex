@@ -67,7 +67,7 @@ package com.rpgGame.app.sender
 			sendMsg(msg);
 		}
 		
-		public static function SendNewRunningMessage(path : Vector.<Vector3D>):void
+		public static function SendNewRunningMessage(path : Vector.<Vector3D>,sprint:Boolean=false):void
 		{
 			GameLog.add("send SendNewRunningMessage :" + path.join(","));
 			var msg:ReqNewRunningMessage = new ReqNewRunningMessage();
@@ -82,7 +82,7 @@ package com.rpgGame.app.sender
 				
 				vec.push(Position.FromPoint(new Point(pos3D.x,pos3D.z)));
 			}
-			
+			msg.chargeFlag=sprint?1:0;
 			msg.positions = vec;
 			SocketConnection.send(msg);
 		}

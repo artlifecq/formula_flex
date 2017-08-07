@@ -74,7 +74,7 @@ package com.rpgGame.appModule.guild
 		
 		private function refeashPageGroup():void
 		{
-			_skin.lbNum.text = _currentPage.toString()+"/"+_maxPage.toString();
+			_skin.lbNum.text = (1+_currentPage).toString()+"/"+_maxPage.toString();
 			_skin.btnPrev.visible = _currentPage >0;
 			_skin.btnNext.visible = _currentPage< _maxPage;
 		}
