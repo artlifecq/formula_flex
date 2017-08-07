@@ -68,6 +68,7 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.core.state.role.action.ActionState;
 	import com.rpgGame.core.state.role.control.MoveState;
 	import com.rpgGame.coreData.type.RoleStateType;
+	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import flash.utils.Dictionary;
 	
@@ -312,7 +313,7 @@ package com.rpgGame.app.state.role
 		 */
 		public function get canShowRiding() : Boolean
 		{
-			if (isCollecting)
+			if (isCollecting||(this.owner as SceneRole).type==SceneCharType.DUMMY)
 			{
 				return false;
 			}
