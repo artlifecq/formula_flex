@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.activety.zonghe
 {
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.type.activity.ActivityJoinStateEnum;
 	
@@ -122,8 +123,8 @@ package com.rpgGame.appModule.activety.zonghe
 			GrayFilter.gray(_skin.uiName);
 			GrayFilter.gray(_skin.uiBg);
 			GrayFilter.gray(_skin.state_icon);
-			GrayFilter.gray(_skin.lbLevel);
-			GrayFilter.gray(_skin.lbMsg);
+			_skin.lbLevel.color=StaticValue.A_UI_GRAY_TEXT;
+			_skin.lbMsg.color=StaticValue.A_UI_GRAY_TEXT;
 		}
 		
 		private function ungrayItem():void
@@ -131,8 +132,8 @@ package com.rpgGame.appModule.activety.zonghe
 			GrayFilter.unGray(_skin.uiName);
 			GrayFilter.unGray(_skin.uiBg);
 			GrayFilter.unGray(_skin.state_icon);
-			GrayFilter.unGray(_skin.lbMsg);
-			GrayFilter.unGray(_skin.lbLevel);
+			_skin.lbMsg.color=StaticValue.A_UI_YELLOW_TEXT;
+			_skin.lbLevel.color=StaticValue.Q_YELLOW;
 		}
 	}
 }
