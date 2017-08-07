@@ -62,9 +62,6 @@ package com.rpgGame.app.ui.scene.dungeon
 				TimerServer.addLoop(updateTime,1000);
 			}
 			setHead(cfg.q_difficult);
-			
-			TrusteeshipManager.getInstance().findDist=10000;
-			TrusteeshipManager.getInstance().startAutoFight();
 		}
 		
 		private function updateTime():void
