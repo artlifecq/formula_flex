@@ -1,8 +1,6 @@
 package com.rpgGame.app.ui.tips
 {
 	import com.gameClient.utils.HashMap;
-	import com.rpgGame.app.manager.HunYinManager;
-	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.goods.RoleEquipmentManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.utils.FaceUtil;
@@ -14,16 +12,13 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.StaticValue;
-	import com.rpgGame.coreData.cfg.hunyin.JieHunJieZiData;
 	import com.rpgGame.coreData.cfg.item.EquipPolishCfg;
 	import com.rpgGame.coreData.cfg.item.EquipStrengthCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
-	import com.rpgGame.coreData.clientConfig.Q_advance_wedding;
 	import com.rpgGame.coreData.clientConfig.Q_att_values;
 	import com.rpgGame.coreData.clientConfig.Q_equip_polish;
 	import com.rpgGame.coreData.clientConfig.Q_equip_strength;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
-	import com.rpgGame.coreData.enum.item.ItemTypeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
@@ -33,7 +28,6 @@ package com.rpgGame.app.ui.tips
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import app.message.EquipType;
-	import app.message.GoodsType;
 	
 	import feathers.controls.Label;
 	import feathers.controls.UIAsset;
