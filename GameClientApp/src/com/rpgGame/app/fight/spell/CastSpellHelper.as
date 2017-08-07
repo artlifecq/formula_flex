@@ -1433,7 +1433,7 @@ package com.rpgGame.app.fight.spell
 							
 							break;
 						case 102://能量
-							if(nengliang>=(-recoData[i].rv))
+							if(nengliang>=(-recoData[i].rv+spell.q_need_mp))
 							{
 								isGary=true;
 							}
@@ -1474,6 +1474,10 @@ package com.rpgGame.app.fight.spell
 							break;
 					}
 				}
+			}
+			else if (nengliang<spell.q_need_mp) 
+			{
+				isGary=false;
 			}
 			return isGary;
 		}

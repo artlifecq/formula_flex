@@ -2,8 +2,10 @@ package com.rpgGame.appModule.guild
 {
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.sender.GuildSender;
+	import com.rpgGame.app.ui.AttChangeView;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.core.ui.tip.RTNodeID;
+	import com.rpgGame.coreData.enum.AttChangeEnum;
 	
 	import away3d.events.Event;
 	
@@ -14,13 +16,14 @@ package com.rpgGame.appModule.guild
 	import org.mokylin.skin.app.banghui.Skill_Personal;
 	import org.mokylin.skin.app.banghui.Skill_TongShuai;
 	
-	public class GuildSkillViewUI extends ViewUI
+	public class GuildSkillViewUI extends AttChangeView
 	{
 		private var _skin:BangHui_Skill;
 		private var _panleList:Vector.<GuildSkillBase>;
 		private var _gropu:ToggleGroup;
 		public function GuildSkillViewUI():void
 		{
+			attChangeTypes=[AttChangeEnum.GUILD_LEADER_SKILL,AttChangeEnum.GUILD_SKILL];
 			_skin = new BangHui_Skill();
 			super(_skin);
 			initView();

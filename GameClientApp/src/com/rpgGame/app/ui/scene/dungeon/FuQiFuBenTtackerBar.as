@@ -10,6 +10,7 @@ package com.rpgGame.app.ui.scene.dungeon
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.sender.HunYinSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
+	import com.rpgGame.app.ui.main.taskbar.TaskControl;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
@@ -78,7 +79,7 @@ package com.rpgGame.app.ui.scene.dungeon
 			skinList.push(_skin.sec_ico2_0);
 			skinList.push(_skin.sec_info);
 			skinList.push(_skin.sec_subbut1);
-			
+			_skin.killbut_0.touchGroup=true;
 			var i:int;
 			killButList=new Vector.<SkinnableContainer>();
 			for(i=0;i<1;i++)
