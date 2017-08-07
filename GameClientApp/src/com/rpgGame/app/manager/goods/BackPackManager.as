@@ -347,7 +347,20 @@ package com.rpgGame.app.manager.goods
 				}
 				if(buyItem!=null)
 				{
-					Mgr.shopMgr.ReqBuyItem(buyItem.data,1,null,1);
+					var maxBuy:int;
+					var allRes:Number=Mgr.shopMgr.getCurrency(buyItem.data.priceType);
+					var maxCount:int=int(allRes/buyItem.data.price);
+					maxCount=Math.min(maxCount,buyItem.data.limitNum-buyItem.data.todayBuyNum);
+					/*if (buyItem.data.limitType!=0) 
+					{
+						
+						maxBuy=Math.min(999,buyItem.data.limitNum-buyItem.data.todayBuyNum);
+					}
+					else
+					{
+						maxBuy=999;
+					}*/
+					Mgr.shopMgr.ReqBuyItem(buyItem.data,maxCount,null,1);
 				}
 				
 			}
