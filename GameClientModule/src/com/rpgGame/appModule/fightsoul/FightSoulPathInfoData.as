@@ -36,10 +36,7 @@ package com.rpgGame.appModule.fightsoul
 		
 		public function isOpen():Boolean
 		{
-			if(path.q_type==3)
-			{
-				return true;
-			}else if(path.q_type==2){
+			if(path.q_type==2){
 				if(path.q_id==1)
 					return TaskMissionManager.haveTreasuerTask;
 				if(path.q_id==2)
@@ -49,7 +46,6 @@ package com.rpgGame.appModule.fightsoul
 			}else{
 				return FunctionOpenManager.functionIsOpen(_newFunc.q_id.toString());
 			}
-			
 		}
 		
 		public function get count():int

@@ -2,6 +2,7 @@ package com.rpgGame.app.manager.fightsoul
 {
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.AvatarManager;
+	import com.rpgGame.app.manager.ItemActionManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleManager;
@@ -132,8 +133,17 @@ package com.rpgGame.app.manager.fightsoul
 		
 		public function updataReward(rewardBit: int):void
 		{
+			var oldBit:int=this._fightSoulInfo.rewardBit;
+			var newBit:int=rewardBit;
+			var index:int=-1;
+			for(var i:int=0;i<4;i++){
+				if((oldBit&(1<<i))>0&&(newBit&(1<<i))<0){
+					index=i;
+					break;
+				}
+			}
 			this._fightSoulInfo.rewardBit = rewardBit;
-			EventManager.dispatchEvent(FightSoul_GetReward);
+			EventManager.dispatchEvent(FightSoul_GetReward,index);
 		}
 		
 		public function updataExp(exp:int,vitality: int):void

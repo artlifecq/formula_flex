@@ -28,6 +28,8 @@ package org.mokylin.skin.app.jianghu.lunjian
 
 		public var list_map:feathers.controls.List;
 
+		public var pageList:feathers.controls.List;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -39,7 +41,7 @@ package org.mokylin.skin.app.jianghu.lunjian
 			this.currentState = "normal";
 			this.height = 587;
 			this.width = 956;
-			this.elementsContent = [__LunJian_Skin_UIAsset2_i(),list_map_i(),__LunJian_Skin_UIAsset3_i(),btnP_i(),btnN_i(),btnShuoming_i()];
+			this.elementsContent = [__LunJian_Skin_UIAsset2_i(),list_map_i(),__LunJian_Skin_UIAsset3_i(),pageList_i(),btnP_i(),btnN_i(),btnShuoming_i()];
 			
 			states = {
 			};
@@ -121,6 +123,18 @@ package org.mokylin.skin.app.jianghu.lunjian
 			temp.x = 29;
 			temp.y = 93;
 			temp.layout = __LunJian_Skin_VerticalLayout1_i();
+			return temp;
+		}
+
+		private function pageList_i():feathers.controls.List
+		{
+			var temp:feathers.controls.List = new feathers.controls.List();
+			pageList = temp;
+			temp.name = "pageList";
+			temp.height = 481;
+			temp.width = 748;
+			temp.x = 183;
+			temp.y = 88;
 			return temp;
 		}
 
