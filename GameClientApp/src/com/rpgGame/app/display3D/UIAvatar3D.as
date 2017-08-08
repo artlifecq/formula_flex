@@ -248,7 +248,7 @@ package com.rpgGame.app.display3D
 		 */
 		public function updateBodyWithRes(res:String,animat:String=null):void
 		{
-			avatarInfo.setBodyResID(res,null);
+			avatarInfo.setBodyResID(res,animat);
 			AvatarManager.updateBody(role);
 		}
 		

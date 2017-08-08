@@ -86,7 +86,7 @@ package com.rpgGame.appModule.rank
 		}
 		override protected function refeashModle():void
 		{
-			super.refeashModle();
+//			super.refeashModle();
 			_avatar.transition(RoleStateType.ACTION_SHOW);
 		}
 		

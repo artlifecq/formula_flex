@@ -21,7 +21,7 @@ package org.mokylin.skin.app.hunyin
 	import org.mokylin.skin.app.hunyin.number.UINumberHunyin_jie;
 	import org.mokylin.skin.common.TongYongPanelbg1;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
-	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow2;
+	import org.mokylin.skin.component.uinumber.UINumberJuese_zhanli;
 
 	/**
 	 * @private
@@ -110,13 +110,13 @@ package org.mokylin.skin.app.hunyin
 			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
 			NumZhanli = temp;
 			temp.name = "NumZhanli";
-			temp.gap = -13;
-			temp.height = 33;
-			temp.label = "645718";
-			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_yellow2;
-			temp.width = 140;
-			temp.x = 796;
-			temp.y = 109;
+			temp.gap = -15;
+			temp.height = 40;
+			temp.label = "629845";
+			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberJuese_zhanli;
+			temp.width = 141;
+			temp.x = 789;
+			temp.y = 106;
 			return temp;
 		}
 
@@ -168,9 +168,9 @@ package org.mokylin.skin.app.hunyin
 		private function __HunYin_Skin_UIAsset13_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/hunyin/pro_bg.png";
-			temp.width = 226;
-			temp.x = 0;
+			temp.styleName = "ui/component/progress/jindutiao2/jdt_di.png";
+			temp.width = 228;
+			temp.x = -1;
 			temp.y = 0;
 			return temp;
 		}
@@ -395,10 +395,10 @@ package org.mokylin.skin.app.hunyin
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			group = temp;
 			temp.name = "group";
-			temp.height = 61;
-			temp.width = 78;
-			temp.x = 37;
-			temp.y = 106;
+			temp.height = 0;
+			temp.width = 0;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -418,9 +418,7 @@ package org.mokylin.skin.app.hunyin
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icon1 = temp;
 			temp.name = "icon1";
-			temp.height = 56;
 			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.width = 56;
 			temp.x = 280;
 			temp.y = 524;
 			return temp;
@@ -431,9 +429,7 @@ package org.mokylin.skin.app.hunyin
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icon2 = temp;
 			temp.name = "icon2";
-			temp.height = 56;
 			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.width = 56;
 			temp.x = 353;
 			temp.y = 524;
 			return temp;
@@ -444,9 +440,7 @@ package org.mokylin.skin.app.hunyin
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icon3 = temp;
 			temp.name = "icon3";
-			temp.height = 56;
 			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.width = 56;
 			temp.x = 426;
 			temp.y = 524;
 			return temp;
@@ -457,9 +451,7 @@ package org.mokylin.skin.app.hunyin
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icon4 = temp;
 			temp.name = "icon4";
-			temp.height = 50;
 			temp.styleName = "ui/common/grid/normal/42.png";
-			temp.width = 50;
 			temp.x = 714;
 			temp.y = 173;
 			return temp;
@@ -531,8 +523,8 @@ package org.mokylin.skin.app.hunyin
 			skin_container = temp;
 			temp.name = "skin_container";
 			temp.height = 220;
-			temp.width = 225;
-			temp.x = 709;
+			temp.width = 226;
+			temp.x = 705;
 			temp.y = 263;
 			return temp;
 		}
@@ -553,9 +545,9 @@ package org.mokylin.skin.app.hunyin
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ui_zhandou = temp;
 			temp.name = "ui_zhandou";
-			temp.styleName = "ui/common/zdl2.png";
-			temp.x = 719;
-			temp.y = 99;
+			temp.styleName = "ui/common/zhandouli1.png";
+			temp.x = 715;
+			temp.y = 103;
 			return temp;
 		}
 
