@@ -156,7 +156,8 @@ package com.rpgGame.appModule.skill
 			
 			
 			skin.lb_name2.text=riseData.q_skillName;
-			skin.lb_miaoshu.text=riseData.q_skillpanel_description2;
+			skin.lb_miaoshu.htmlText=riseData.q_skillpanel_description2;
+			skin.lb_miaoshu.textAlign="left";
 			if(selectedInfo&&selectedInfo.skillLevel==cfg.q_max_grade){
 				skin.lb_jihuo.visible=true;
 				skin.Icon_lock.visible=false;

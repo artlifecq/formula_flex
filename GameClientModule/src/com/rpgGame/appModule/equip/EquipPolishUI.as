@@ -669,7 +669,7 @@ package com.rpgGame.appModule.equip
 			if(up){
 				_skin.arrow_up2.visible=_skin.lb_up2.visible=true;
 				_skin.arrow_up1.visible=_skin.lb_up1.visible=true;			
-				_skin.lb_up1.text=_skin.lb_up2.text=Number(((up.q_promote-current_promote)/100).toFixed(1))+"%";
+				_skin.lb_up1.text=_skin.lb_up2.text=Number(((up.q_promote-current_promote)/1000).toFixed(1))+"%";
 			}else{
 				_skin.arrow_up1.visible=_skin.lb_up1.visible=false;			
 				_skin.arrow_up2.visible=_skin.lb_up2.visible=false;		

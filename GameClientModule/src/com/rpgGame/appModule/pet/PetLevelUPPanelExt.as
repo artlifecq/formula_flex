@@ -25,6 +25,8 @@ package com.rpgGame.appModule.pet
 	import com.rpgGame.coreData.type.RoleStateType;
 	import com.rpgGame.netData.pet.bean.PetInfo;
 	
+	import gs.TweenLite;
+	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.meiren.MeiRen_JinJie;
 	
@@ -36,12 +38,15 @@ package com.rpgGame.appModule.pet
 		private var _data:PetInfo;
 		private var _needItem:int;
 		private var _needItemNum:int;
+		private var _qPet:Q_girl_pet;
 		private var _petAdvConfig:Q_girl_advance;
 		private var _isAutoState:Boolean;
 		
 		private var _modContaner:Inter3DContainer;
 		private var _avatar : InterAvatar3D;
 		private var _avatarData : RoleData;
+		
+		private var autoReq:TweenLite;
 		
 		public function PetLevelUPPanelExt()
 		{
@@ -65,6 +70,7 @@ package com.rpgGame.appModule.pet
 		{
 			this._data=data;
 			initModEff();
+			if(data.rank>=_qPet.q_max_grade) return;
 			_skin.uiLevel.styleName="ui/app/meiren/jieshu/"+data.rank+".png";
 			updateNeedItems();
 			updateBlessData();
@@ -73,8 +79,8 @@ package com.rpgGame.appModule.pet
 		
 		private function initModEff():void
 		{
-			var qPet:Q_girl_pet=PetCfg.getPet(_data.modelId);
-			this._avatarData.avatarInfo.setBodyResID(qPet.q_panel_show_id, null);
+			_qPet=PetCfg.getPet(_data.modelId);
+			this._avatarData.avatarInfo.setBodyResID(_qPet.q_panel_show_id, null);
 			this._avatar.setRoleData(this._avatarData);
 			this._avatar.curRole.setScale(1.7);	
 			this._avatar.curRole.stateMachine.transition(RoleStateType.ACTION_IDLE);
@@ -132,6 +138,10 @@ package com.rpgGame.appModule.pet
 					}
 					else
 					{
+						if(iscanUp())
+						{
+							showBuyPanel();
+						}
 						setAutoState(false);
 					}
 					break;
@@ -226,20 +236,40 @@ package com.rpgGame.appModule.pet
 				}
 				else
 				{
-					//自动进阶
-					if (_isAutoState&&exp<_petAdvConfig.q_blessnum_limit) 
-					{
-						if (!reqBlessOnce()) 
-						{
-							setAutoState(false);
-						}
-						else
-						{
-							setAutoState(true);
-						}
-					}
+					autoReq=TweenLite.delayedCall(0.25,auToing,[exp]);
 				}
 			}
+		}
+		
+		private function auToing(...arg):void
+		{
+			//自动进阶
+			var exp:int=arg[0];
+			if (_isAutoState&&exp<_petAdvConfig.q_blessnum_limit) 
+			{
+				if (!reqBlessOnce()) 
+				{
+					if(iscanUp())
+					{
+						showBuyPanel();
+					}
+					setAutoState(false);
+				}
+				else
+				{
+					setAutoState(true);
+				}
+			}
+		}
+		
+		private function iscanUp():Boolean
+		{
+			if(_data)
+			{
+				if(_data.rank>=_qPet.q_max_grade)
+					return false;
+			}
+			return true;
 		}
 		
 		private function onItemChange(itemInfo : ClientItemInfo):void

@@ -70,7 +70,7 @@ package com.rpgGame.appModule.skill
 			
 			var lvData:Q_skill_ignore=SkillLvLDataManager.getData(selectedInfo.skillModelId+"_"+selectedInfo.skillChildLv);
 			skin.ms_txt.htmlText=lvData.q_skillpanel_description;
-			
+			skin.ms_txt.textAlign="left";
 			_icon.setIconResName(ClientConfig.getSkillIcon(selectedCfg.q_skillID.toString(),IcoSizeEnum.ICON_64));
 			
 			if(selectedInfo.skillChildLv==selectedCfg.q_max_level){

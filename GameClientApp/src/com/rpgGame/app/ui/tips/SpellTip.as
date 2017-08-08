@@ -63,6 +63,7 @@ package com.rpgGame.app.ui.tips
 			_spellTip.lbXiaohao.width=120;
 			mainIco.bindBg(_spellTip.Icon1);
 			riseIco.bindBg(_spellTip.Icon2);
+			_spellTip.lbShuoming.wordWrap=true;
 		}		
 		
 		/**

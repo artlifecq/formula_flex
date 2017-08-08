@@ -101,7 +101,7 @@ package com.rpgGame.appModule.hubao
 				{
 					var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(msg.reward[i].itemModelId,1,msg.reward[i].isbind);
 					FaceUtil.SetItemGrid(_icoList[i],itemInfo);
-					_labList[i].htmlText=itemInfo.qItem.q_name+"×"+msg.reward[i].num*msg.isdouble;
+					_labList[i].htmlText=itemInfo.qItem.q_name+"×"+msg.reward[i].num;
 					
 					_beijingkuangList[i].visible=true;		
 					_labList[i].visible=true;

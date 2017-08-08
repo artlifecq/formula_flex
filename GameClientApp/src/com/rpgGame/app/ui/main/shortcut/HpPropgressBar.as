@@ -99,7 +99,7 @@ package com.rpgGame.app.ui.main.shortcut
 			_mask = new DrawBow(82,82);
 			if(_diection==1)
 			{
-				_mask.x = 708;
+				_mask.x = 709;
 				_mask.drawAngle(Math.PI*1.15,0);
 				_diectionoff = -1;
 			}else{
@@ -180,7 +180,7 @@ package com.rpgGame.app.ui.main.shortcut
 			renderUint.scaleX=renderUint.scaleY=1;//_display.width/270;
 			if(_diection==1)
 			{
-				sr3D.x=_display.x+_display.width-82;
+				sr3D.x=_display.x+_display.width-76;
 			}else{
 				sr3D.x=130
 			}
@@ -214,9 +214,9 @@ package com.rpgGame.app.ui.main.shortcut
 			_mask.rotation = _diectionoff*Math.PI*0.9*value;
 			if(_diection==1)
 			{
-				_mask3d.baseObj3D.rotationZ =-(_diectionoff*180*0.82*value);
+				_mask3d.baseObj3D.rotationZ =-(_diectionoff*180*0.85*value);
 			}else{
-				_mask3d.baseObj3D.rotationZ =-(_diectionoff*180*0.82*value);
+				_mask3d.baseObj3D.rotationZ =-(_diectionoff*180*0.83*value);
 			}
 			if(_tipinfodata!=null)
 				_tipinfodata.refeashValue();

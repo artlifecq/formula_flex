@@ -1,6 +1,9 @@
 package com.rpgGame.app.view.icon
 {
+	import com.game.engine3D.display.Inter3DContainer;
+	import com.game.engine3D.display.InterObject3D;
 	import com.rpgGame.app.utils.FaceUtil;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
@@ -22,11 +25,33 @@ package com.rpgGame.app.view.icon
 		 */	
 		private var _realIndex:int;
 		
+		protected var _tishiEff:InterObject3D;
+		private var _tishiEffContaner:Inter3DContainer;
+		
+		
 		public function DragDropItem($iconSize:int, realIndex:int)
 		{
 			super($iconSize);
 			_realIndex = realIndex;
 			this.touchGroup = false;
+			_tishiEffContaner=new Inter3DContainer();
+			this.addChildAt(_tishiEffContaner,numChildren);
+		}
+		
+		/**设置框是否能装备 装备栏显示用*/
+		public function showTiShi(bool:Boolean):void
+		{
+			if(bool){
+				_tishiEff=_tishiEffContaner.playInter3DAt(ClientConfig.getEffect("ui_juesezhuangbeikuang"),0,0,0);
+			}
+			else{
+				if(_tishiEff){
+					_tishiEff.stop();
+					_tishiEff.removeFromParent();
+					_tishiEff.dispose();
+					_tishiEff=null;
+				}
+			}
 		}
 		
 		/**

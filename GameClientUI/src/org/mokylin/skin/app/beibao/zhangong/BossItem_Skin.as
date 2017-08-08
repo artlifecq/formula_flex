@@ -48,6 +48,8 @@ package org.mokylin.skin.app.beibao.zhangong
 
 		public var skBoss:feathers.controls.SkinnableContainer;
 
+		public var ui:feathers.controls.Group;
+
 		public var uiBg:feathers.controls.UIAsset;
 
 		public var uiDian:feathers.controls.UIAsset;
@@ -55,6 +57,8 @@ package org.mokylin.skin.app.beibao.zhangong
 		public var uiName:feathers.controls.UIAsset;
 
 		public var uiUp:feathers.controls.UIAsset;
+
+		public var ui_nameBg:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -67,7 +71,7 @@ package org.mokylin.skin.app.beibao.zhangong
 			this.currentState = "normal";
 			this.height = 199;
 			this.width = 217;
-			this.elementsContent = [uiBg_i(),skBoss_i(),__BossItem_Skin_UIAsset1_i(),__BossItem_Skin_UIAsset2_i(),pro_bar_i(),lbNum_i(),conver_i(),lbLevelNext_i(),lbLevelCurrent_i(),btnDao_i(),lbName_i(),uiName_i(),numZhanli_i(),grpUp_i(),btnUp_i(),uiDian_i()];
+			this.elementsContent = [uiBg_i(),skBoss_i(),__BossItem_Skin_UIAsset1_i(),__BossItem_Skin_UIAsset2_i(),pro_bar_i(),lbNum_i(),conver_i(),lbLevelNext_i(),lbLevelCurrent_i(),uiName_i(),numZhanli_i(),grpUp_i(),btnUp_i(),uiDian_i(),ui_i()];
 			
 			states = {
 			};
@@ -102,8 +106,8 @@ package org.mokylin.skin.app.beibao.zhangong
 			btnDao = temp;
 			temp.name = "btnDao";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_send;
-			temp.x = 59;
-			temp.y = 105;
+			temp.x = 53;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -140,7 +144,7 @@ package org.mokylin.skin.app.beibao.zhangong
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grpUp = temp;
 			temp.name = "grpUp";
-			temp.x = 67;
+			temp.x = 66;
 			temp.y = 133;
 			temp.elementsContent = [uiUp_i(),lbNumUp_i()];
 			return temp;
@@ -189,8 +193,8 @@ package org.mokylin.skin.app.beibao.zhangong
 			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 82;
-			temp.x = 6;
-			temp.y = 116;
+			temp.x = 0;
+			temp.y = 4;
 			return temp;
 		}
 
@@ -235,7 +239,7 @@ package org.mokylin.skin.app.beibao.zhangong
 			temp.label = "+12";
 			temp.styleClass = org.mokylin.skin.app.beibao.zhangong.uinumber.UINumberZhangongNo;
 			temp.width = 55;
-			temp.x = 40;
+			temp.x = 39;
 			temp.y = 137;
 			return temp;
 		}
@@ -305,6 +309,30 @@ package org.mokylin.skin.app.beibao.zhangong
 			temp.styleName = "ui/app/beibao/zhangong/min_up.png";
 			temp.x = 0;
 			temp.y = 3;
+			return temp;
+		}
+
+		private function ui_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			ui = temp;
+			temp.name = "ui";
+			temp.x = 6;
+			temp.y = 112;
+			temp.elementsContent = [ui_nameBg_i(),lbName_i(),btnDao_i()];
+			return temp;
+		}
+
+		private function ui_nameBg_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ui_nameBg = temp;
+			temp.name = "ui_nameBg";
+			temp.height = 22;
+			temp.styleName = "ui/common/hover/xuanqukuang2_alpha.png";
+			temp.width = 75;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 

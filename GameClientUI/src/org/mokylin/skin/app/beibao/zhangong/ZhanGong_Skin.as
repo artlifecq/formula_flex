@@ -9,6 +9,7 @@ package org.mokylin.skin.app.beibao.zhangong
 	import feathers.controls.UIAsset;
 	import feathers.controls.UINumber;
 	import org.mokylin.skin.component.list.ListSkin1;
+	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_lv2;
 	import org.mokylin.skin.component.uinumber.UINumberSkin_zhujuezhandouli;
 
 	/**
@@ -31,7 +32,11 @@ package org.mokylin.skin.app.beibao.zhangong
 
 		public var lb_shuxing:feathers.controls.Label;
 
+		public var num_lv0:feathers.controls.UINumber;
+
 		public var ui_zhandou:feathers.controls.UIAsset;
+
+		public var uiarrow:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -133,7 +138,7 @@ package org.mokylin.skin.app.beibao.zhangong
 			temp.name = "grp_zhandouli";
 			temp.x = 29;
 			temp.y = 95;
-			temp.elementsContent = [ui_zhandou_i(),NumZhanli_i()];
+			temp.elementsContent = [ui_zhandou_i(),NumZhanli_i(),num_lv0_i(),uiarrow_i()];
 			return temp;
 		}
 
@@ -154,6 +159,21 @@ package org.mokylin.skin.app.beibao.zhangong
 			return temp;
 		}
 
+		private function num_lv0_i():feathers.controls.UINumber
+		{
+			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
+			num_lv0 = temp;
+			temp.name = "num_lv0";
+			temp.gap = -2;
+			temp.height = 13;
+			temp.label = "x100";
+			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_lv2;
+			temp.width = 64;
+			temp.x = 153;
+			temp.y = 16;
+			return temp;
+		}
+
 		private function ui_zhandou_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -162,6 +182,17 @@ package org.mokylin.skin.app.beibao.zhangong
 			temp.styleName = "ui/common/zhandouli2.png";
 			temp.x = 0;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function uiarrow_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiarrow = temp;
+			temp.name = "uiarrow";
+			temp.styleName = "ui/common/tubiao/jobup.png";
+			temp.x = 140;
+			temp.y = 13;
 			return temp;
 		}
 

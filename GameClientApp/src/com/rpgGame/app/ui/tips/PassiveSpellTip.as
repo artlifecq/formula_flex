@@ -42,6 +42,7 @@ package com.rpgGame.app.ui.tips
 			mainIco = new BgIcon(IcoSizeEnum.ICON_64);
 			mainIco.x = _skin.Icon1.x+9;
 			mainIco.y = _skin.Icon1.y+9;
+			_skin.lbShuoming.wordWrap=true;
 			_skin.container.addChildAt(mainIco,4);
 		}
 		

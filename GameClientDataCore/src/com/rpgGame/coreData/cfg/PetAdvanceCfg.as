@@ -22,6 +22,7 @@ package  com.rpgGame.coreData.cfg
 				_dataDic[info.q_id] = info;
 			}
 		}
+		
 		public static function getPet(id:int,level:int):Q_girl_advance
 		{
 			return _dataDic[id+"_"+level];

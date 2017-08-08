@@ -12,6 +12,7 @@ package com.rpgGame.appModule.zhangong
 	import com.rpgGame.app.sender.ZhanGongSender;
 	import com.rpgGame.app.ui.common.CenterEftPop;
 	import com.rpgGame.app.utils.RoleFaceMaskEffectUtil;
+	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.ZhanGongEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
@@ -88,6 +89,7 @@ package com.rpgGame.appModule.zhangong
 			_skin.container.addChild(_skin.lbNum);
 			_skin.lbNumUp.visible=false;
 			_skin.uiUp.visible=false;
+			TaskUtil.addLabelEvet(_skin.lbName);
 			//			_skin.container.addChild(_avatarContainer);
 			
 		}
@@ -126,6 +128,7 @@ package com.rpgGame.appModule.zhangong
 					break;
 				case _skin.btnDao:
 				case _skin.lbName:
+				case _skin.ui_nameBg:
 					toWorkMonsterHandler();
 					break;
 			}

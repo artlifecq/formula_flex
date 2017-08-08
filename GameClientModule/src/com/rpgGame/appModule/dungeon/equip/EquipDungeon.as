@@ -71,7 +71,6 @@ package com.rpgGame.appModule.dungeon.equip
 			}
 			
 			EventManager.addEvent(DailyZoneDataManager.UPDATEDAILYZONEINFO,refeashValue);
-			
 			refeashValue();
 		}
 		
@@ -96,7 +95,7 @@ package com.rpgGame.appModule.dungeon.equip
 			refeashList(0);
 			var q_data:Q_daily_zone = list[toIndex] as Q_daily_zone;
 			_dailyZoneInfo = DailyZoneDataManager.instance().getInfoById(q_data.q_id);
-			
+			refeashValue();
 			toIndex=Math.floor(toIndex/4);
 			refeashList(toIndex);			
 			refeashValue();
