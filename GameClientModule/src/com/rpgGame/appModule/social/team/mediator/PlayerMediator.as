@@ -233,11 +233,16 @@ package   com.rpgGame.appModule.social.team.mediator
 			{
 				gid = member.memberId.ToGID();
 				(_headTitle.skin as Zudui_Head).lab_name.text=member.memberName+"【"+member.memberLevel+"】";
+				var mapName:String="离线";
+				if (member.memberMapModelID!=0) 
+				{
+					var map:Q_map =MapDataManager.getMapInfo( member.memberMapModelID ).getData() as Q_map; 
+					mapName=map.q_map_name;
+				}
 				
-				var map:Q_map =MapDataManager.getMapInfo( member.memberMapModelID ).getData() as Q_map; 
 				//还需要添加线路
 //				UIUtil.connectLabelHtmltext( labMap , ["Lv."+member.memberLevel+" " + ( map != null?map.q_map_name:"") ]);
-				var str:String=map.q_map_name;
+				var str:String=mapName;
 				var isOffline:Boolean=_member.isonline==0&&gid!=MainRoleManager.actorInfo.id;
 				if (isOffline) 
 				{
@@ -306,7 +311,7 @@ package   com.rpgGame.appModule.social.team.mediator
 			_toFar = value;
 			if(member != null)
 			{
-				var map:Q_map =MapDataManager.getMapInfo( member.memberMapModelID ).getData() as Q_map;
+			//	var map:Q_map =MapDataManager.getMapInfo( member.memberMapModelID ).getData() as Q_map;
 				if(_toFar)
 				{
 					//imgCon.filter = FilterUtil.getGrayFilter();
