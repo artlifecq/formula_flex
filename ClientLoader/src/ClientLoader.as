@@ -48,6 +48,8 @@ package
         private var _useBpgFormat : Boolean = false;
         
         // web params
+        /** url参数*/
+        private var _arguments : Object = {};
         /** 资源根目录*/
         private var _baseDir : String = "../";
         /** 客服端版本号*/
@@ -147,6 +149,9 @@ package
                 if (null == _urlParmar) {
                     return;
                 }
+                if (_urlParmar["arguments"]) {
+                    _arguments = _urlParmar["arguments"];
+                }
                 if (_urlParmar["baseDir"]) {
                     _baseDir = _urlParmar["baseDir"];
                 }
@@ -168,11 +173,11 @@ package
                 if (_urlParmar["isVersionDepartment"]) {
                     _isVersionDepartment = _urlParmar["isVersionDepartment"] == "true";
                 }
-                if (_urlParmar["gameName"]) {
-                    _gameName = _urlParmar["gameName"];
+                if (_arguments["gameName"]) {
+                    _gameName = _arguments["gameName"];
                 }
-                if (_urlParmar["clientIp"]) {
-                    _clientIp = _urlParmar["clientIp"];
+                if (_arguments["clientIp"]) {
+                    _clientIp = _arguments["clientIp"];
                 }
                 if (_urlParmar["serverIp"]) {
                     _server = _urlParmar["serverIp"];
