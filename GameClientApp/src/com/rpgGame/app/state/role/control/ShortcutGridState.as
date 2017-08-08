@@ -1,5 +1,6 @@
 package com.rpgGame.app.state.role.control
 {
+	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.core.events.BuffEvent;
 	import com.rpgGame.coreData.type.RoleStateType;
 	
@@ -20,7 +21,10 @@ package com.rpgGame.app.state.role.control
 				super.execute();
 				if (_stateReference)
 				{
-					EventManager.dispatchEvent(BuffEvent.CHANGE_GRID_BUFF,true);
+					if((_machine.owner as SceneRole).isMainChar)
+					{
+						EventManager.dispatchEvent(BuffEvent.CHANGE_GRID_BUFF,true);
+					}
 				}
 			}
 		}
@@ -34,7 +38,11 @@ package com.rpgGame.app.state.role.control
 		
 		override public function leave():void
 		{
-			EventManager.dispatchEvent(BuffEvent.CHANGE_GRID_BUFF,false);
+			if((_machine.owner as SceneRole).isMainChar)
+			{
+				EventManager.dispatchEvent(BuffEvent.CHANGE_GRID_BUFF,false);
+			}
+			
 			super.leave();
 			
 		}
