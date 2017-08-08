@@ -353,7 +353,7 @@ package com.rpgGame.appModule.role
 		private function equipChange(role:SceneRole,type:int):void
 		{
 			if(role== MainRoleManager.actor){
-				updateRole();
+				updateRole(type);
 			}
 		}
 		

@@ -6,12 +6,16 @@ package com.rpgGame.app.manager.guild
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.ui.alert.GameAlertExt;
+	import com.rpgGame.app.ui.main.taskbar.TaskControl;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.GuildEvent;
+	import com.rpgGame.core.ui.tip.RTNodeID;
+	import com.rpgGame.core.ui.tip.RewardTipTree;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.GuildCfgData;
@@ -29,6 +33,7 @@ package com.rpgGame.app.manager.guild
 	import com.rpgGame.coreData.info.item.GetShowItemVo;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
 	import com.rpgGame.coreData.lang.LangGuild;
+	import com.rpgGame.coreData.type.TaskType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.guild.bean.GuildApplyInfo;
 	import com.rpgGame.netData.guild.bean.GuildInfo;
@@ -50,6 +55,7 @@ package com.rpgGame.app.manager.guild
 	import com.rpgGame.netData.guild.message.ResGuildInfoMessage;
 	import com.rpgGame.netData.guild.message.ResGuildListInfoMessage;
 	import com.rpgGame.netData.guild.message.ResGuildOperateResultMessage;
+	import com.rpgGame.netData.prompt.message.G2CNotifyRedDotPromptMessage;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.data.long;
@@ -295,7 +301,7 @@ package com.rpgGame.app.manager.guild
 		/**获取是否有帮派了**/
 		public function get haveGuild():Boolean
 		{
-			return !ClientConfig.loginData.guildId.IsMax();
+			return !ClientConfig.loginData.guildId.IsZero();
 		}
 		/**创建帮会**/
 		public function createGuild(type:int,name:String,banner:String):void
@@ -553,7 +559,7 @@ package com.rpgGame.app.manager.guild
 		public function guildKill(playerId:long):void
 		{
 			var _killplayerInfo:GuildMemberInfo = this.getGuildMemberInfoById(playerId.hexValue);
-			GameAlertExt.show(LanguageConfig.replaceStr("玩家$即将被您踢出帮派，确认将其踢出？",[_killplayerInfo.name]),guildKill,[_killplayerInfo.id]);
+			GameAlertExt.show(LanguageConfig.replaceStr("玩家$即将被您踢出帮派，确认将其踢出？",[_killplayerInfo.name]),GuildSender.guildKill,[_killplayerInfo.id]);
 		
 		}
 		
@@ -582,6 +588,7 @@ package com.rpgGame.app.manager.guild
 			{
 				return false;
 			}
+			return _hasApply;
 			return false;
 		}
 		public function hasSkill2LevelUp():Boolean
@@ -717,6 +724,7 @@ package com.rpgGame.app.manager.guild
 		
 		public function setGuildApplyListInfo(list:Vector.<GuildApplyInfo>):void
 		{
+			_hasApply=false;
 			EventManager.dispatchEvent(GuildEvent.GET_JOIN_GUILD_LIST,list);
 		}
 		
@@ -1081,6 +1089,37 @@ package com.rpgGame.app.manager.guild
 			{
 				_guildData.active=msg.active;
 				EventManager.dispatchEvent(GuildEvent.GUILD_DATA_INIT);
+			}
+		}
+		
+		public function gotoTask():void
+		{
+			if (!haveGuild) 
+			{
+				return ;
+			}
+			if (!TaskMissionManager.haveGuildTask) 
+			{
+				NoticeManager.showNotifyById(60039);
+				return;
+			}
+			TaskControl.killWalkBut(TaskType.MAINTYPE_GUILDDAILYTASK,0,1);
+		}
+		public function hasSomeOneApply():Boolean
+		{
+			return _hasApply;
+		}
+		private var _hasApply:Boolean;
+		public  function G2CNotifyRedDotPromptHandler(msg:G2CNotifyRedDotPromptMessage):void
+		{
+			// TODO Auto Generated method stub
+			for each (var i:int in msg.typeList) 
+			{
+				if (i==1002) 
+				{
+					_hasApply=true;
+					RewardTipTree.ins.setState(RTNodeID.MAIN_SOCAIL,true);
+				}
 			}
 		}
 	}

@@ -1,6 +1,7 @@
 package com.rpgGame.app.ui.main.shortcut
 {
 	import com.rpgGame.app.manager.ShortcutsManger;
+	import com.rpgGame.app.manager.SkillCDManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.GuildWarSender;
@@ -8,6 +9,7 @@ package com.rpgGame.app.ui.main.shortcut
 	import com.rpgGame.core.events.GuildEvent;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.SpellEvent;
+	import com.rpgGame.core.view.uiComponent.face.cd.CDDataManager;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
@@ -16,6 +18,7 @@ package com.rpgGame.app.ui.main.shortcut
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.GridInfo;
 	import com.rpgGame.coreData.info.shortcuts.ShortcutsData;
+	import com.rpgGame.netData.guildWar.message.ResGuildWarPersionInfoMessage;
 	
 	import flash.geom.Point;
 	
@@ -63,7 +66,7 @@ package com.rpgGame.app.ui.main.shortcut
 			createGrid();
 			addEvent();
 			updateAllGridData();
-			showSkillBtn(false);
+			showSkillBtn();
 		}
 
 		private function addEvent() : void
@@ -79,9 +82,13 @@ package com.rpgGame.app.ui.main.shortcut
 			EventManager.addEvent(GuildEvent.GUILD_LEADER_SKILL_SHOW,showSkillBtn);
 		}
 		
-		private function showSkillBtn(isShow:Boolean):void
+		private function showSkillBtn(info:ResGuildWarPersionInfoMessage=null):void
 		{
-			_guildLeaderSkill.visible=isShow;
+			_guildLeaderSkill.visible=info!=null;
+			if(info&&info.leaderSkillCoolingTime!=0){
+				_guildLeaderSkill.needCD=true;
+				CDDataManager.playCD(SkillCDManager.getSkillKey(GUILD_LEADER_SKILL),info.leaderSkillCoolingTime,0);
+			}
 		}	
 		
 		private function onItemInit(contianer:int):void

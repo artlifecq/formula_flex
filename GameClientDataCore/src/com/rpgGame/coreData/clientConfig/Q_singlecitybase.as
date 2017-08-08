@@ -24,6 +24,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_rewards2:String;
 		 /**  每日服务器奖励 */
 		public var q_rewards3:String;
+		 /**  全服皇城争霸胜利奖励 */
+		public var q_rewards4:String;
 		 /**  Tips中展示官员奖励 */
 		public var q_tipsaward1:String;
 		 /**  Tips中展示帮众奖励 */

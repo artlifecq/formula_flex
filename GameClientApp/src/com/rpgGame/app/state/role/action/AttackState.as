@@ -108,10 +108,10 @@ package com.rpgGame.app.state.role.action
 				{
 					transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
 					var fixDirection : Boolean = false;
-					if ((_machine.owner as SceneRole).data is RoleData)
-					{
-						fixDirection = ((_machine.owner as SceneRole).data as RoleData).fixDirection;
-					}
+//					if ((_machine.owner as SceneRole).data is RoleData)
+//					{
+//						fixDirection = ((_machine.owner as SceneRole).data as RoleData).fixDirection;
+//					}
 					if (!fixDirection)
 					{
 						(_machine.owner as SceneRole).turnRoundTo(_stateReference.angle, 0);

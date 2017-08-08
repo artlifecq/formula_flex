@@ -45,7 +45,7 @@ package com.rpgGame.appModule.guild
 			var layout:VerticalLayout = new VerticalLayout();
 			layout.gap = 0;
 			_skin.ListItem.layout = layout;
-			_skin.ListItem.dataProvider = new ListCollection([0,1,2,3,4,5,6,7,8,9,10]);
+			_skin.ListItem.dataProvider = new ListCollection([0,1,2,3,4,5,6,7,8,9,10,11]);
 		}
 		
 		override protected function onShow():void
@@ -72,9 +72,9 @@ package com.rpgGame.appModule.guild
 		
 		private function refeashPageGroup():void
 		{
-			_skin.lbNum.text = _currentPage.toString()+"/"+_maxPage.toString();
+			_skin.lbNum.text = (1+_currentPage).toString()+"/"+_maxPage.toString();
 			_skin.btnPrev.visible = _currentPage >0;
-			_skin.btnNext.visible = _currentPage< _maxPage;
+			_skin.btnNext.visible = _currentPage< (_maxPage-1);
 		}
 		
 		private function requestPage(page:int):void

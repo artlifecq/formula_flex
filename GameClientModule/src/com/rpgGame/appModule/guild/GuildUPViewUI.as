@@ -3,6 +3,8 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.ui.tab.ViewUI;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.GuildEvent;
 	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.coreData.cfg.GuildCfgData;
@@ -51,9 +53,15 @@ package com.rpgGame.appModule.guild
 			}
 			var nextGuildInfo:Q_guild= GuildCfgData.getLevelInfo(guildInfo.level+1);
 			if(nextGuildInfo!=null)
+			{
 				_skin.lbMsg2.htmlText = nextGuildInfo.q_privilege_show;
+				_skin.gNext.visible=true;
+			}
 			else
+			{
 				_skin.lbMsg2.htmlText = "已满级";
+				_skin.gNext.visible=false;
+			}
 			
 			
 			
@@ -91,11 +99,15 @@ package com.rpgGame.appModule.guild
 			switch(target)
 			{
 				case _skin.btnRenwu:
+					GuildManager.instance().gotoTask();
+					break;
 				case _skin.btnJuanxian:
-					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_BANGHUI_INFO,null,false);
+					AppManager.showApp(AppConstant.GUILD_DONATE_PANEL);
+					//FunctionOpenManager.openAppPaneById(EmFunctionID.EM_BANGHUI_INFO,null,false);
 					break;
 				case _skin.btnZhengba:
-					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_BANGHUI_COMBAT,null,false);
+					//FunctionOpenManager.openAppPaneById(EmFunctionID.EM_BANGHUI_COMBAT,null,false);
+					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_BANGHUI_WCZB2,null,false);
 					break;
 				case _skin.btnUp:
 					GuildManager.instance().guildLevelup();

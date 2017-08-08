@@ -14,6 +14,8 @@ package com.rpgGame.app.scene
 	import com.rpgGame.app.state.role.control.NineTowerFightFlagStateReference;
 	import com.rpgGame.app.state.role.control.ShapeshiftingStateReference;
 	import com.rpgGame.app.state.role.control.ShortcutGridStateReference;
+	import com.rpgGame.app.state.role.control.SkillCDReduceStateReference;
+	import com.rpgGame.app.state.role.control.SkillCDResetStateReference;
 	import com.rpgGame.app.state.role.control.SpriteUpBuffStateReference;
 	import com.rpgGame.app.state.role.control.StiffStateReference;
 	import com.rpgGame.app.state.role.control.StunStateReference;
@@ -288,7 +290,7 @@ package com.rpgGame.app.scene
 						_role.stateMachine.removeState(RoleStateType.CONTROL_SHORTCUTGRID);
 						break;
 					case 40:// 
-						_role.stateMachine.removeState(RoleStateType.CONTROL_BUFF_SKILLCD2);
+						_role.stateMachine.removeState(RoleStateType.CONTROL_BUFF_REDUCE_SKILLCD);
 						break;
 					case 42:// 预警
 						_role.stateMachine.removeState(RoleStateType.CONTROL_SKILL_WARNING);
@@ -310,7 +312,7 @@ package com.rpgGame.app.scene
 						_role.stateMachine.removeState(RoleStateType.CONTROL_BUFF_SPRITEUP);
 						break;
 					case 7://减少技能cd
-						_role.stateMachine.removeState(RoleStateType.CONTROL_BUFF_SKILLCD);
+						_role.stateMachine.removeState(RoleStateType.CONTROL_BUFF_RESET_SKILLCD);
 						break;
 					default:
 						/*buffRef = _role.stateMachine.getReference(UnmovableStateReference) as UnmovableStateReference;
@@ -454,9 +456,9 @@ package com.rpgGame.app.scene
 						_role.stateMachine.transition(RoleStateType.CONTROL_SHORTCUTGRID, buffRef);
 						break;
 					case 40://技能cd时间减少
-						buffRef = _role.stateMachine.getReference(BuffStateReference) as BuffStateReference;
+						buffRef = _role.stateMachine.getReference(SkillCDReduceStateReference) as SkillCDReduceStateReference;
 						buffRef.setParams(buffData);
-						_role.stateMachine.transition(RoleStateType.CONTROL_BUFF_SKILLCD2,buffRef);
+						_role.stateMachine.transition(RoleStateType.CONTROL_BUFF_REDUCE_SKILLCD,buffRef);
 						break;
 					/*case 42:// 预警状态-------------------预警状态已经去掉不用了 后面如果加上的话再开启    yt
 					buffRef = _role.stateMachine.getReference(SkillWarningStateReference) as SkillWarningStateReference;
@@ -489,9 +491,9 @@ package com.rpgGame.app.scene
 						_role.stateMachine.transition(RoleStateType.CONTROL_BUFF_SPRITEUP,buffRef);
 						break;
 					case 7://减少技能cd
-						buffRef = _role.stateMachine.getReference(BuffStateReference) as BuffStateReference;
+						buffRef = _role.stateMachine.getReference(SkillCDResetStateReference) as SkillCDResetStateReference;
 						buffRef.setParams(buffData);
-						_role.stateMachine.transition(RoleStateType.CONTROL_BUFF_SKILLCD,buffRef);
+						_role.stateMachine.transition(RoleStateType.CONTROL_BUFF_RESET_SKILLCD,buffRef);
 						break;
 					default:
 						/*buffRef = _role.stateMachine.getReference(UnmovableStateReference) as UnmovableStateReference;

@@ -166,7 +166,6 @@ package com.rpgGame.app.manager.task
 
 		private function onUpdate(force : Boolean = false) : void
 		{
-			return;
 			techState();
 			if (!_isTaskRunning)
 			{
@@ -271,6 +270,7 @@ package com.rpgGame.app.manager.task
 		private function newMation(type:int):void
 		{
 			TaskAutoManager.getInstance().jumpOver=false;
+			_stateMachine.transition(AIStateType.AI_NONE);
 		}
 		
 		
@@ -389,6 +389,7 @@ package com.rpgGame.app.manager.task
 					TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);	
 					break;
 			}
+			
 		}
 		
 		public function taskLevel(level:int):void

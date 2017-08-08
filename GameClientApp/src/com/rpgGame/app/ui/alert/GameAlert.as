@@ -136,6 +136,7 @@ package com.rpgGame.app.ui.alert
 			if (!showAlertMap)
 				showAlertMap = new HashMap();
 			showAlertMap.add(msg, gameAlert);
+			gameAlert.model=true;
 			return gameAlert;
 		}
 		

@@ -312,7 +312,7 @@ package com.rpgGame.appModule.pet
 			_avatarData=new RoleData(0);		
 			this._avatarData.avatarInfo.setBodyResID(qPet.q_panel_show_id, null);
 			this._avatar.setRoleData(this._avatarData);
-			this._avatar.curRole.setScale(1.7);	
+			this._avatar.curRole.setScale(3);	
 			this._avatar.curRole.stateMachine.transition(RoleStateType.ACTION_IDLE);
 		}
 		

@@ -1,6 +1,5 @@
 package com.rpgGame.app.sender
 {
-	import com.rpgGame.netData.yaota.message.CSEnterYaoTaMessage;
 	import com.rpgGame.netData.yaota.message.CSOpenYaoTaPanelMessage;
 	import com.rpgGame.netData.yaota.message.CSQuitYaoTaMessage;
 	import com.rpgGame.netData.yaota.message.CSYaoTaIntegralMessage;
@@ -15,10 +14,11 @@ package com.rpgGame.app.sender
 			var msg:CSOpenYaoTaPanelMessage=new CSOpenYaoTaPanelMessage();
 			SocketConnection.send(msg);
 		}
-		public static function reqEnterTower():void
+		public static function reqEnterTower(act:int):void
 		{
-			var msg:CSEnterYaoTaMessage=new CSEnterYaoTaMessage();
-			SocketConnection.send(msg);
+			SpecialActivitySender.reqJoinAct(act);
+			//var msg:CSEnterYaoTaMessage=new CSEnterYaoTaMessage();
+			//SocketConnection.send(msg);
 		}
 		public static function reqQuitTower():void
 		{

@@ -141,10 +141,11 @@ package com.rpgGame.appModule.activety.boss
 		{
 			GrayFilter.gray(_skin.uiName);
 			GrayFilter.gray(_skin.uiBg);
-			GrayFilter.gray(_skin.lbLevel);
 			GrayFilter.gray(_skin.btnEnter);
-			GrayFilter.gray(_skin.lbMsg1);
-			GrayFilter.gray(_skin.lbMsg2);
+			GrayFilter.gray(_skin.lbLevel);
+			_skin.lbLevel.color=StaticValue.A_UI_GRAY_TEXT;
+			_skin.lbMsg1.color=StaticValue.A_UI_GRAY_TEXT;
+			_skin.lbMsg2.color=StaticValue.A_UI_GRAY_TEXT;
 		}
 		
 		private function ungrayItem():void
@@ -153,8 +154,9 @@ package com.rpgGame.appModule.activety.boss
 			GrayFilter.unGray(_skin.uiBg);
 			GrayFilter.unGray(_skin.lbLevel);
 			GrayFilter.unGray(_skin.btnEnter);
-			GrayFilter.unGray(_skin.lbMsg1);
-			GrayFilter.unGray(_skin.lbMsg2);
+			_skin.lbLevel.color=StaticValue.Q_YELLOW;
+			_skin.lbMsg1.color=StaticValue.A_UI_YELLOW_TEXT;
+			_skin.lbMsg2.color=StaticValue.A_UI_YELLOW_TEXT;
 		}
 	}
 }

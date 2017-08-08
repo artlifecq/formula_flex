@@ -3,6 +3,7 @@ package com.rpgGame.appModule.guild
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.display3D.InterAvatar3D;
 	import com.rpgGame.app.manager.FunctionOpenManager;
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.manager.hint.TopTipManager;
 	import com.rpgGame.app.sender.GuildSender;
@@ -147,6 +148,9 @@ package com.rpgGame.appModule.guild
 			super.onTouchTarget(target);
 			switch(target)
 			{
+				case _skin.btnRenwu:
+					GuildManager.instance().gotoTask();
+					break;
 				case _skin.btnJineng:
 					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_BANGHUI_SPELL,null,false);
 					break;

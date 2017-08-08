@@ -245,7 +245,7 @@ package com.rpgGame.coreData.cfg.item
 		 */
 		public static function isAddHpItem(cfgId:int):Boolean
 		{
-			if (getItemType(cfgId) == GoodsType.MEDICINE && getItemLocation(cfgId) == 1)
+			if (getItemType(cfgId) == GoodsType.MEDICINE && getItemLocation(cfgId) == GoodsType.MEDICINE_SUB_3)
 			{
 				return true;
 			}

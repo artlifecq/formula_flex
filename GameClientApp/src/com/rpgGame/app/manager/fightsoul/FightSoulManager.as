@@ -2,6 +2,7 @@ package com.rpgGame.app.manager.fightsoul
 {
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.AvatarManager;
+	import com.rpgGame.app.manager.ItemActionManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleManager;
@@ -34,6 +35,7 @@ package com.rpgGame.app.manager.fightsoul
 	import com.rpgGame.netData.skill.bean.SkillInfo;
 	
 	import org.client.mainCore.manager.EventManager;
+	import org.client.mainCore.utils.BitUtil;
 	import org.game.netCore.connection.SocketConnection;
 
 	public class FightSoulManager
@@ -132,8 +134,18 @@ package com.rpgGame.app.manager.fightsoul
 		
 		public function updataReward(rewardBit: int):void
 		{
+			var oldBit:int=this._fightSoulInfo.rewardBit;
+			var newBit:int=rewardBit;
+			var index:int=-1;
+			for(var i:int=0;i<4;i++){
+				if(BitUtil.getInt(oldBit,i)==false&&BitUtil.getInt(newBit,i)==true){
+					index=i;
+					break;
+				}
+			}
+			
 			this._fightSoulInfo.rewardBit = rewardBit;
-			EventManager.dispatchEvent(FightSoul_GetReward);
+			EventManager.dispatchEvent(FightSoul_GetReward,index);
 		}
 		
 		public function updataExp(exp:int,vitality: int):void
@@ -293,7 +305,7 @@ package com.rpgGame.app.manager.fightsoul
 			if(index>3)
 				return false;
 			else
-				return (this._fightSoulInfo.rewardBit&(1<<index))>0;
+				return BitUtil.getInt(_fightSoulInfo.rewardBit,index);
 		}
 		
 		private function updataSceneMode():void

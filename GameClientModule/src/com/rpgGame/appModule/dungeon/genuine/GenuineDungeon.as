@@ -15,6 +15,7 @@ package com.rpgGame.appModule.dungeon.genuine
 	
 	import feathers.controls.Scroller;
 	import feathers.data.ListCollection;
+	import feathers.events.FeathersEventType;
 	import feathers.layout.HorizontalLayout;
 	
 	import org.mokylin.skin.app.fuben.FuBen_ZhenQi_Skin;
@@ -24,8 +25,6 @@ package com.rpgGame.appModule.dungeon.genuine
 	public class GenuineDungeon extends ViewUI
 	{
 		private var _skin:FuBen_ZhenQi_Skin;
-		private var _curentIndex:int;
-		private var _dailyZoneInfo:DailyZonePanelInfo;
 		private var gridList:Vector.<IconCDFace>;
 		public function GenuineDungeon():void
 		{
@@ -52,10 +51,8 @@ package com.rpgGame.appModule.dungeon.genuine
 			layout.gap = 15;
 			_skin.list.layout = layout;
 			var list:Array = DailyZoneCfgData.getTypeList(1);
+			_skin.list.addEventListener(FeathersEventType.CREATION_COMPLETE,onCreate);
 			_skin.list.dataProvider = new ListCollection(list);
-			_curentIndex = 0;
-			refeashList(0);
-			_dailyZoneInfo = DailyZoneDataManager.instance().getInfoById(list[0].q_id);
 			
 			var qglob:Q_global = GlobalSheetData.getSettingInfo(716);
 			var itemInfos:Array = JSON.parse(qglob.q_string_value) as Array;
@@ -79,23 +76,46 @@ package com.rpgGame.appModule.dungeon.genuine
 			}
 			
 		}
+		
+		private function onCreate():void
+		{
+			_skin.list.removeEventListener(FeathersEventType.CREATION_COMPLETE,onCreate);
+//			_skin.list.horizontalScrollStep=194+30;
+			
+			var list:Array=_skin.list.dataProvider.data as Array;
+			var toIndex:int=-1;
+			for(var i:int=0;i<list.length;i++){
+				var info:DailyZonePanelInfo=DailyZoneDataManager.instance().getInfoById(list[i].q_id);
+				if(info.remainCount!=0||info.canBuyCount!=0){
+					toIndex=i;
+					break;
+				}
+			}
+			if(toIndex==-1){
+				toIndex=0;
+			}
+			toIndex=Math.floor(toIndex/4);
+			refeashList(toIndex);			
+		}
+		
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
 			super.onTouchTarget(target);
+			var index:int=_skin.list.horizontalPageIndex;
 			switch(target)
 			{
 				case _skin.btnNext:
-					refeashList(_skin.list.horizontalPageIndex+1);
+					refeashList(index+1);
 					break;
 				case _skin.btnPrev:
-					refeashList(_skin.list.horizontalPageIndex-1);
+					refeashList(index-1);
 					break;
 			}
 		}
 		
 		private function refeashList(index:int):void
 		{
-			_skin.btnNext.visible = (index <1);
+			_skin.btnNext.visible = (index <_skin.list.maxHorizontalPageIndex);
 			_skin.btnPrev.visible = (index >0);
 			_skin.list.scrollToPageIndex(index,0);
 		}

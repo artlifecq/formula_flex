@@ -68,6 +68,7 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.core.state.role.action.ActionState;
 	import com.rpgGame.core.state.role.control.MoveState;
 	import com.rpgGame.coreData.type.RoleStateType;
+	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import flash.utils.Dictionary;
 	
@@ -163,8 +164,8 @@ package com.rpgGame.app.state.role
 		stateMapping[RoleStateType.CONTROL_VIP] = VipBuffState;
 		stateMapping[RoleStateType.CONTROL_TRIPLE_ATTACK_CHECK] = CheckTripleAttackState;
 		stateMapping[RoleStateType.CONTROL_BUFF_SPRITEUP] = SpriteUpBuffState;
-		stateMapping[RoleStateType.CONTROL_BUFF_SKILLCD] = SkillCDResetState;
-		stateMapping[RoleStateType.CONTROL_BUFF_SKILLCD2] = SkillCDReduceState;
+		stateMapping[RoleStateType.CONTROL_BUFF_RESET_SKILLCD] = SkillCDResetState;
+		stateMapping[RoleStateType.CONTROL_BUFF_REDUCE_SKILLCD] = SkillCDReduceState;
 		stateMapping[RoleStateType.CONTROL_ENTER_LEAVE_FIGHT] = FightLeaveEnterBuffState;
 		private var _role : SceneRole;
 		private var _lastCanShowRiding : Boolean;
@@ -312,7 +313,7 @@ package com.rpgGame.app.state.role
 		 */
 		public function get canShowRiding() : Boolean
 		{
-			if (isCollecting)
+			if (isCollecting||(this.owner as SceneRole).type==SceneCharType.DUMMY)
 			{
 				return false;
 			}

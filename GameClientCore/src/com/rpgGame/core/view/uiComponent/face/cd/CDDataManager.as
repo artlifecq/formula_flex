@@ -53,14 +53,16 @@ package com.rpgGame.core.view.uiComponent.face.cd
 		 */		
 		public static function playCD( $cdType:* , $cd:Number, $startTm:Number = 0 ):void
 		{
+			
 			var cdData:CDData = _map.getValue( $cdType );
 			cdData = cdData  || CDData.create($cdType);
+			_map.add( $cdType, cdData );
 			cdData.startCallBack = cdStart;
 			cdData.updateCallBack = cdUpdata;
 			cdData.completeCallBack = cdComplete;
 			cdData.play( $cd, $startTm );
 			//
-			_map.add( $cdType, cdData );
+			
 		}
 		
 		private static function cdStart( $cdData:CDData ):void
