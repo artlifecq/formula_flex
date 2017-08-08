@@ -2,8 +2,12 @@ package com.gameClient.utils
 {
 	import flash.errors.IOError;
 	import flash.external.ExternalInterface;
+	import flash.net.URLLoader;
 	import flash.net.URLRequest;
+	import flash.net.URLRequestMethod;
+	import flash.net.URLVariables;
 	import flash.net.navigateToURL;
+	import flash.utils.Dictionary;
 	
 	public class HttpUtil
 	{
@@ -98,5 +102,26 @@ package com.gameClient.utils
 			var ret:Boolean = url && url.search( /^http(s?):\/\//g ) != -1;
 			return ret;
 		}
+        
+        public static function doGet(url : String, params : Object) : void {
+            var req : URLRequest = new URLRequest(url);
+            if (params is Dictionary) {
+                var str : String = "";
+                var index : int = 0;
+                for(var key : * in params) {
+                    if (0 != index) {
+                        str += "&";
+                    }
+                    str += key + "=" + params[key];
+                    ++index;
+                }
+                req.data = str;
+            } else {
+                req.data = params;
+            }
+            req.method = URLRequestMethod.GET;
+            var load : URLLoader = new URLLoader();
+            load.load(req);
+        }
 	}
 }

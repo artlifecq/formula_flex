@@ -69,6 +69,9 @@ package
         public var loginName : String = "";
         public var loginKey : String = "";
         public var loginTime : uint = 0;
+        public var browser : String = "";
+        public var gameName : String = "";
+        public var clientIp : String = "";
         
 		/**
 		 * 微端桥接
@@ -104,6 +107,9 @@ package
             ClientConfig.loginName = loginName;
             ClientConfig.loginKey = loginKey;
             ClientConfig.loginTime = loginTime;
+            ClientConfig.browser = browser;
+            ClientConfig.gameName = gameName;
+            ClientConfig.clientIp = clientIp;
             ClientConfig.agent = agent;
 			ClientConfig.isRelease = isRelease;
 			ClientConfig.useBpgFormat = useBpgFormat;
@@ -128,13 +134,16 @@ package
 			AlertPanel.initStage(this.stage);
 			//
 			//getWebParams();
-			GameLog.addShow("版本号：" + version);
-			GameLog.addShow("客户端版本：" + versionInfo);
+            GameLog.addShow("游戏名:" + ClientConfig.gameName);
+			GameLog.addShow("版本号:" + version);
+			GameLog.addShow("客户端版本:" + versionInfo);
 			GameLog.addShow("Player Version:" + (Capabilities.isDebugger ? "Debug" : "Release") + " " + Capabilities.version);
 			GameLog.addShow("OS:" + Capabilities.os);
-			GameLog.addShow("是否发行版本：" + ClientConfig.isRelease);
-			GameLog.addShow("是否使用BPG：" + ClientConfig.useBpgFormat);
-			GameLog.addShow("UI是否压缩：" + ClientConfig.uiCompressed);
+            GameLog.addShow("浏览器版本:" + ClientConfig.browser);
+            GameLog.addShow("客户端Ip:" + ClientConfig.clientIp);
+			GameLog.addShow("是否发行版本:" + ClientConfig.isRelease);
+			GameLog.addShow("是否使用BPG:" + ClientConfig.useBpgFormat);
+			GameLog.addShow("UI是否压缩:" + ClientConfig.uiCompressed);
 			//
 			ClientConfig.init(this);
 			ClientUrlManager.setup(ClientConfig.baseDir, version, ClientConfig.decodeFun);

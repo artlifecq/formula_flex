@@ -248,8 +248,6 @@ package com.rpgGame.app.ui.main.taskbar
 				TaskControl.hideGuildPanel();
 			}
 			
-			
-			TaskAutoManager.getInstance().walkOver=false;
 		}
 		/**新任务*/
 		private function newMation(type:int):void
