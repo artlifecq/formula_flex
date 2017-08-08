@@ -5,6 +5,8 @@ package com.rpgGame.statistics
     
     import flash.system.Capabilities;
     import flash.utils.Dictionary;
+    
+    import away3d.debug.Debug;
 
     public class Statistics
     {
@@ -20,6 +22,9 @@ package com.rpgGame.statistics
         }
         
         public function pushNode(nodeId : int) : void {
+            CONFIG::Debug {
+                return;
+            }
             var nodeInfo : NodeInfo = this.nodeInfoList[nodeId];
             if (null == nodeInfo) {
                 return;
