@@ -3,6 +3,7 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
+	import feathers.controls.UIAsset;
 
 	/**
 	 * @private
@@ -11,6 +12,15 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 	 */
 	public class ListItem_Skin extends feathers.controls.StateSkin
 	{
+		//==========================================================================
+		//                                定义成员变量
+		//==========================================================================
+		public var __ListItem_Skin_UIAsset1:feathers.controls.UIAsset;
+
+		public var __ListItem_Skin_UIAsset2:feathers.controls.UIAsset;
+
+		public var __ListItem_Skin_UIAsset3:feathers.controls.UIAsset;
+
 		public var labelDisplay:feathers.controls.Label;
 
 
@@ -24,34 +34,58 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			this.currentState = "down";
 			this.height = 22;
 			this.width = 68;
-			this.elementsContent = [];
+			this.elementsContent = [labelDisplay_i()];
+			__ListItem_Skin_UIAsset1_i();
+			__ListItem_Skin_UIAsset2_i();
+			__ListItem_Skin_UIAsset3_i();
+			
 			
 			states = {
-				init:[
-						{target:"labelDisplay",
-							name:"textAlign",
-							value:"left"
-						}
-						,
-						{target:"labelDisplay",
-							name:"color",
-							value:0xCFC6AE
-						}
-						,
-						{target:"labelDisplay",
-							name:"nativeFilters",
-							value:Fontter.filterObj["textFilterBlackGreen"]
-						}
-						,
-						{target:"labelDisplay",
-							name:"verticalAlign",
-							value:"middle"
-						}
-					]
 			};
 			skinNames={"down":"ui/common/hover/xuanqukuang.png", "hover":"ui/common/hover/xuanqukuang.png", "up":"ui/common/hover/xuanqukuang.png"};
 		}
 
+
+		//==========================================================================
+		//                                定义成员方法
+		//==========================================================================
+		private function __ListItem_Skin_UIAsset1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			__ListItem_Skin_UIAsset1 = temp;
+			temp.alpha = 1;
+			temp.bottom = 0;
+			temp.left = 0;
+			temp.right = 0;
+			temp.styleName = "ui/common/hover/xuanqukuang.png";
+			temp.top = 0;
+			return temp;
+		}
+
+		private function __ListItem_Skin_UIAsset2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			__ListItem_Skin_UIAsset2 = temp;
+			temp.bottom = 0;
+			temp.left = 0;
+			temp.right = 0;
+			temp.styleName = "ui/common/hover/xuanqukuang.png";
+			temp.top = 0;
+			return temp;
+		}
+
+		private function __ListItem_Skin_UIAsset3_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			__ListItem_Skin_UIAsset3 = temp;
+			temp.alpha = 0;
+			temp.bottom = 0;
+			temp.left = 0;
+			temp.right = 0;
+			temp.styleName = "ui/common/hover/xuanqukuang.png";
+			temp.top = 0;
+			return temp;
+		}
 
 		private function labelDisplay_i():feathers.controls.Label
 		{
