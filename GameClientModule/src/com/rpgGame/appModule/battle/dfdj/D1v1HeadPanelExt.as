@@ -89,7 +89,7 @@ package com.rpgGame.appModule.battle.dfdj
 			if (_rightHeadIcon==null) 
 			{
 				_rightHeadIcon=new UIAsset();
-				_rightHeadIcon.x=255;
+				_rightHeadIcon.x=318;
 				_rightHeadIcon.y=10;
 				
 				skinR.container.addChild(_rightHeadIcon);
