@@ -80,17 +80,17 @@ package com.rpgGame.appModule.battle.dfdj
 			if (_leftHeadIcon==null) 
 			{
 				_leftHeadIcon=new UIAsset();
-				_leftHeadIcon.x=19;
-				_leftHeadIcon.y=-17;
+				_leftHeadIcon.x=23;
+				_leftHeadIcon.y=10;
 				skinL.container.addChild(_leftHeadIcon);
 			}
-			_leftHeadIcon.styleName=AssetUrl.getRoleHeadUrl(MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex);
+			_leftHeadIcon.styleName=AssetUrl.getRoleHeadUrl(MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex,"middle");
 			var skinR:Head__Role_Right=_skin.skinRight.skin as Head__Role_Right;
 			if (_rightHeadIcon==null) 
 			{
 				_rightHeadIcon=new UIAsset();
-				_rightHeadIcon.x=324;
-				_rightHeadIcon.y=-17;
+				_rightHeadIcon.x=255;
+				_rightHeadIcon.y=10;
 				
 				skinR.container.addChild(_rightHeadIcon);
 			}
@@ -99,7 +99,7 @@ package com.rpgGame.appModule.battle.dfdj
 			skinR.numZhandouli.label=msg.enemyFightPower+"";
 			skinR.role_xuecao.scaleX=1;
 			skinR.role_xuecao.x=_rightHpX;
-			_rightHeadIcon.styleName=AssetUrl.getRoleHeadUrl(msg.enemyJob,msg.enemySex);
+			_rightHeadIcon.styleName=AssetUrl.getRoleHeadUrl(msg.enemyJob,msg.enemySex,"middle");
 			_rightHeadIcon.scaleX=-1;
 			_otherGid=msg.enemyPlayerId.ToGID();
 			CharAttributeManager.addEvent(MainRoleManager.actorInfo.id,CharAttributeType.HP,myHpChange);
