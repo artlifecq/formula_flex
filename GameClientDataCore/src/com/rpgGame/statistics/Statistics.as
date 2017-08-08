@@ -5,8 +5,6 @@ package com.rpgGame.statistics
     
     import flash.system.Capabilities;
     import flash.utils.Dictionary;
-    
-    import away3d.debug.Debug;
 
     public class Statistics
     {
