@@ -168,7 +168,7 @@ package com.rpgGame.app.ui.scene.dungeon
 			_endTime = SystemTimeManager.curtTm/1000+_data.q_zone_time;
 			currentStateEnd();
 			advanceTime(0);
-			TrusteeshipManager.getInstance().startAutoFight();
+//			TrusteeshipManager.getInstance().startAutoFight();
 		}
 		override protected function onHide():void
 		{

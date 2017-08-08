@@ -1,8 +1,10 @@
 package com.rpgGame.app.manager {
+    import com.rpgGame.app.manager.role.MainRoleManager;
     import com.rpgGame.app.manager.time.SystemTimeManager;
     import com.rpgGame.coreData.UNIQUEID;
     
     import org.client.mainCore.manager.EventManager;
+
 	/**
 	 * 翻滚管理器
 	 * @author jsj
@@ -28,8 +30,6 @@ package com.rpgGame.app.manager {
 			return _instance;
 		}
         public static const ROLL_STARTROLL:int =UNIQUEID.NEXT;
-		public static const ROLL_STARTRESET:int = UNIQUEID.NEXT;
-		public static const ROLL_USE:int = UNIQUEID.NEXT;
         
 		public static const RoleState_User:int = 1;
 		public static const RoleState_CD:int = 2;
@@ -48,7 +48,6 @@ package com.rpgGame.app.manager {
 		}
         public function canUseDodge() : Boolean 
 		{
-			
 			if(_currentState == RoleState_CD)
 				return false;
 			else
@@ -57,7 +56,7 @@ package com.rpgGame.app.manager {
 		
 		public function useDodge():Boolean
 		{
-			if(_currentState == RoleState_CD)
+			if(_currentState == RoleState_CD||MainRoleManager.actor.stateMachine.isBlinkMoving||MainRoleManager.actor.stateMachine.isBlinking)
 				return false;
 			else if(_currentState == RoleState_User && curCount<=0)
 				return false;
@@ -68,13 +67,12 @@ package com.rpgGame.app.manager {
 				EventManager.dispatchEvent(DodgeManager.ROLL_STARTROLL);
 			} 
 			_curCount --;
-			if(_curCount ==0)
+			if(_curCount ==0) 
 			{
 				_beginUseTime = SystemTimeManager.curtTm - USE_TIMES;
 				//
 				LostSkillManager.instance().checkRoll3Complete();
 			}
-			EventManager.dispatchEvent(DodgeManager.ROLL_USE);
 			return true;
 		}
 		
@@ -108,7 +106,6 @@ package com.rpgGame.app.manager {
 			}
 		}
 		
-		
 		public function get cdTimes():int
 		{
 			return CD_TIMES - _reduceTime;
@@ -117,7 +114,6 @@ package com.rpgGame.app.manager {
 			_currentState = RoleState_Normal;
 			_curCount = TOTAL_TIMES;
 			_beginUseTime = -1;
-			EventManager.dispatchEvent(DodgeManager.ROLL_STARTRESET);
         }
     }
 }
