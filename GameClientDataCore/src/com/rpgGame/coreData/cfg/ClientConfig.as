@@ -33,6 +33,9 @@ package com.rpgGame.coreData.cfg
 		public static var loginTime : uint = 0;
 		public static var policyPort : uint = 8002; //9374;
 		public static var agent : String = "";
+        public static var browser : String = "";
+        public static var gameName : String = "";
+        public static var clientIp : String = "";
 		
 		/**
 		 * 是否是发布版本
