@@ -16,6 +16,7 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.SpellSender;
 	import com.rpgGame.app.state.role.RoleStateUtil;
@@ -43,6 +44,8 @@ package com.rpgGame.app.fight.spell
 	import away3d.pathFinding.DistrictWithPath;
 	
 	import gameEngine2D.PolyUtil;
+	
+	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.game.netCore.data.long;
@@ -110,7 +113,7 @@ package com.rpgGame.app.fight.spell
 			
 			return relateSpells[_relateSpellIndex];
 		}
-		
+		private static var brokenTime:Number;
 		/**玩家主动放技能优先*/
 		public static function shortcutsTryCaseSpell(spellID : int, ignoreLock : Boolean = false) : void
 		{
@@ -121,6 +124,32 @@ package com.rpgGame.app.fight.spell
 				TrusteeshipManager.getInstance().isNormalSpell = false;
 				TrusteeshipManager.getInstance().nextSpell = getSpellData(spellID);
 			}
+			
+		/*	if (TrusteeshipManager.getInstance().tripleSkillCtrl.isOriginSkill(spellID)&&TrusteeshipManager.getInstance().isNormalSpell&&brokenTime>SystemTimeManager.curtTm) 
+			{
+				Lyt.a("连招锁定"+spellID);
+				return;
+			}
+			
+			var caseInfo : CastSpellInfo = new CastSpellInfo(getSpellData(spellID));
+			var spKey:Boolean=tryCaseSpell(caseInfo, null, false, ignoreLock);
+			if(!spKey)
+			{
+				TrusteeshipManager.getInstance().isNormalSpell = false;
+				TrusteeshipManager.getInstance().nextSpell = getSpellData(spellID);
+			}
+			else
+			{
+				if (TrusteeshipManager.getInstance().tripleSkillCtrl.isOriginSkill(spellID)) 
+				{
+					TrusteeshipManager.getInstance().isNormalSpell=true;//手动释放了连招技能就锁定
+					brokenTime=SystemTimeManager.curtTm+2000;//最多锁定2秒 防止三连击没放完卡住
+				}
+				else if (!TrusteeshipManager.getInstance().tripleSkillCtrl.isTripleSkill(spellID)) 
+				{
+					TrusteeshipManager.getInstance().isNormalSpell = false;
+				}
+			}*/
 		}
 		
 		public static function tryCaseSpell(caseInfo : CastSpellInfo, roleList : Vector.<SceneRole> = null, autoAtkNearRole : Boolean = false, ignoreLock : Boolean = false) : Boolean
@@ -203,15 +232,22 @@ package com.rpgGame.app.fight.spell
 					}
 					
 					GameLog.add("====================将要释放技能：" + caseInfo.caseSpellData.q_skillID);
+					
+					//Lyt.a("请求释放技能："+caseInfo.caseSpellData.q_skillName+"====");
 					SpellSender.releaseSpell(caseInfo.caseSpellData.q_skillID, caseInfo.releasePos.x, caseInfo.releasePos.y, angle, caseInfo.targetServerID);
 					
 					if(TrusteeshipManager.getInstance().tripleSkillCtrl.isLastTripleSkill(caseInfo.caseSpellData.q_skillID))
 					{
-						TrusteeshipManager.getInstance().isNormalSpell = false;
+						TweenLite.killDelayedCallsTo(tripleSkillCtrlEnd);
+						TweenLite.delayedCall(0.5, tripleSkillCtrlEnd);
+						
 					}
 				}
 			}
-
+			function tripleSkillCtrlEnd():void
+			{
+				TrusteeshipManager.getInstance().isNormalSpell = false;
+			}
 			function onWalkArriveRelease(ref : WalkMoveStateReference) : void
 			{
 //				caseState = caseSpell(caseInfo,false,true);
