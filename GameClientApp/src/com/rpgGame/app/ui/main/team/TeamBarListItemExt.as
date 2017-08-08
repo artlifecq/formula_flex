@@ -30,6 +30,7 @@ package   com.rpgGame.app.ui.main.team
 	import app.message.BoolArrayProto;
 	
 	import feathers.controls.UIAsset;
+	import feathers.core.IFeathersControl;
 	import feathers.utils.filter.GrayFilter;
 	
 	import org.mokylin.skin.mainui.head.head_min_Skin;
@@ -227,8 +228,13 @@ package   com.rpgGame.app.ui.main.team
 			var scaleX:Number=hp/_data.maxhp;
 			scaleX=scaleX>1?1:scaleX;
 			_skin.xuecao_bar.scaleX=scaleX;
-			var qMap:Q_map=MapDataManager.getMapInfo( _data.memberMapModelID ).getData() as Q_map;
-			tipData[0]=qMap.q_map_name;
+			var mapName:String="离线";
+			if (_data.memberMapModelID!=0) 
+			{
+				var qMap:Q_map=MapDataManager.getMapInfo( _data.memberMapModelID ).getData() as Q_map;
+				mapName=qMap.q_map_name;
+			}
+			tipData[0]=mapName;
 			tipData[1]=_data.memberName;
 			tipData[2]=hp;
 			tipData[3]=_data.maxhp;

@@ -141,6 +141,7 @@ package com.rpgGame.app.graphics
 				_role=$parameters[0];
 				_isMonster=$parameters[1];
 			}
+			setHpScale(1);
 		}
 		
 		
@@ -254,7 +255,8 @@ package com.rpgGame.app.graphics
 			
 			if (value < 0)
 				value = 0;
-			_hpBar.scaleX = value;
+			//_hpBar.scaleX = value;
+			setHpScale(value);
 //			if (tw) 
 //			{
 //				tw.kill();
@@ -262,6 +264,16 @@ package com.rpgGame.app.graphics
 //			tw=TweenMax.to(_hpSkinClass.bar,0.5,{scaleX:value,onComplete:onTweenComplete});
 			
 			_lastPercent = value;
+		}
+		private function setHpScale(val:Number):void
+		{
+			_hpSkinClass.barRed.scaleX = val;
+			_hpSkinClass.barBlue.scaleX = val;
+			//玩家的
+			if (!_isMonster) 
+			{
+				_hpSkinClass.barGreen.scaleX = val;
+			}
 		}
 		public function showBloodText(str:String):void
 		{

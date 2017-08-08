@@ -98,6 +98,7 @@ package com.rpgGame.appModule.dungeon.equip
 			refeashValue();
 			toIndex=Math.floor(toIndex/4);
 			refeashList(toIndex);			
+			refeashValue();
 		}
 		
 		private function refeashValue():void

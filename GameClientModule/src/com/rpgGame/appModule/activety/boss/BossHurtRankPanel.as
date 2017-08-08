@@ -75,7 +75,7 @@ package com.rpgGame.appModule.activety.boss
 			_skin.myHurt.text="我的伤害:";
 			_skin.myRank.text="我的排名:";
 			for(var i:int=1;i<11;i++){
-				var info:BossHurtInfo=_skin.ListItem.dataProvider.getItemAt(i) as BossHurtInfo;
+				var info:BossHurtInfo=_skin.ListItem.dataProvider.getItemAt(i-1) as BossHurtInfo;
 				info.bossDamageInfo=null;
 			}
 			_skin.ListItem.dataProvider.updateAll();

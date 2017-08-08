@@ -58,27 +58,9 @@ package com.rpgGame.app.manager.fightsoul
 			this._fightSoulInfo = value;
 			updataSceneMode();
 			updataSKill();
-			
-			checkCanUpLevel();
+		
 		}
 		
-		private function checkCanUpLevel():void
-		{
-			if(fightSoulInfo.level == FightsoulData.FightSoulMaxLevel)
-			{
-				return ;
-			}
-			if(fightSoulInfo.exp<currentLeveldata.q_exp)
-			{
-				return ;
-			}
-			
-			var data:Object={};
-			data.sys=SomeSystemNoticePanel.SYS_ZHANHUN;
-			data.desc="您的战魂可以升级了";
-			data.btnText="立即升级";
-			EventManager.dispatchEvent(MainPlayerEvent.SYS_CAN_LEVEL_UP,data); 
-		}
 		public static function updateRoleAvatar(owner:SceneRole):void
 		{
 			if(!owner){
@@ -130,6 +112,7 @@ package com.rpgGame.app.manager.fightsoul
 			EventManager.dispatchEvent(FightSoul_Level);
 			EventManager.dispatchEvent(FightSoul_Exp);
 			AppManager.showApp(AppConstant.FIGHT_SOULRISE_SHOWPANEL);
+				
 		}
 		
 		public function updataReward(rewardBit: int):void
@@ -225,7 +208,21 @@ package com.rpgGame.app.manager.fightsoul
 			{
 				return false;
 			}
+			showNotice();
 			return true;
+		}
+		private function showNotice():void
+		{
+			if (SomeSystemNoticePanel.isTimeLimite(SomeSystemNoticePanel.SYS_ZHANHUN)) 
+			{
+				return;
+			}
+			var data:Object={};
+			data.sys=SomeSystemNoticePanel.SYS_ZHANHUN;
+			data.desc="您的战魂可以升级了";
+			data.btnText="立即升级";
+			SomeSystemNoticePanel.onShowNotice(data);
+			//EventManager.dispatchEvent(MainPlayerEvent.SYS_CAN_LEVEL_UP,data); 
 		}
 		public function canGetReward(index:int):Boolean
 		{

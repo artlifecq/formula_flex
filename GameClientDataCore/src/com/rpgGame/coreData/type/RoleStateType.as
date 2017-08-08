@@ -23,21 +23,21 @@ package com.rpgGame.coreData.type
 		public static const ACTION_PREWAR : int = rEnum.next;//战斗预备状态9
 		public static const ACTION_ATTACK : int = rEnum.next;//攻击状态10
 		public static const ACTION_ATTACK_UI : int = rEnum.next;//攻击状态,攻击状态11
-		public static const ACTION_BLINK : int = rEnum.next;//闪烁状态
-		public static const ACTION_BEAT_BACK : int = rEnum.next;//击退状态
-		public static const ACTION_FALL : int = rEnum.next;//掉落状态
-		public static const ACTION_GETUP : int = rEnum.next;//站起来状态
-		public static const ACTION_COLLECT : int = rEnum.next;//采集状态
-		public static const ACTION_PLAY_ACTION : int = rEnum.next;//播放动作状态
-		public static const ACTION_TRAIL : int = rEnum.next;//追踪状态
+		public static const ACTION_BLINK : int = rEnum.next;//闪烁状态12
+		public static const ACTION_BEAT_BACK : int = rEnum.next;//击退状态13
+		public static const ACTION_FALL : int = rEnum.next;//掉落状态14
+		public static const ACTION_GETUP : int = rEnum.next;//站起来状态15
+		public static const ACTION_COLLECT : int = rEnum.next;//采集状态16
+		public static const ACTION_PLAY_ACTION : int = rEnum.next;//播放动作状态17
+		public static const ACTION_TRAIL : int = rEnum.next;//追踪状态18
 		
-		public static const ACTION_PLAY_SPELL:int = rEnum.next;
-		public static const ACTION_FLY_UP:int = rEnum.next;
-		public static const ACTION_FLY_HIT:int = rEnum.next;
-		public static const ACTION_FLY_FALL:int = rEnum.next;
+		public static const ACTION_PLAY_SPELL:int = rEnum.next;//19
+		public static const ACTION_FLY_UP:int = rEnum.next;//20
+		public static const ACTION_FLY_HIT:int = rEnum.next;//21
+		public static const ACTION_FLY_FALL:int = rEnum.next;//22
 
-		public static const CONTROL_WALK_MOVE : int = rEnum.next;
-		public static const CONTROL_STOP_WALK_MOVE : int = rEnum.next;
+		public static const CONTROL_WALK_MOVE : int = rEnum.next;//23
+		public static const CONTROL_STOP_WALK_MOVE : int = rEnum.next;//24
 		public static const CONTROL_JUMP_RISE : int = rEnum.next;
 		public static const CONTROL_RIDING : int = rEnum.next;
 		public static const CONTROL_ANGLE : int = rEnum.next;

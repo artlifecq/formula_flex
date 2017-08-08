@@ -27,8 +27,7 @@ package com.rpgGame.app.controller.keyboard
 				TrusteeshipManager.getInstance().stopFightTarget();//放技能就停止被动战斗
 				
 			}
-			if(ShortcutsManger.getInstance().useShortcuts(int(funcID) - 1, true))
-			{
+			if(ShortcutsManger.getInstance().useShortcuts(int(funcID) - 1, true)){
 				EventManager.dispatchEvent(SpellEvent.SPELL_KEY_RELEASE, int(funcID) - 1);
 			}
 			//使用这快捷栏上的技能或者是物品

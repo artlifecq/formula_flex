@@ -53,8 +53,8 @@ package com.rpgGame.appModule.jingmai.sub
 		private var _acupointId:String;
 	
 		private var _imgIcon:UIAsset;
-		private var _effect:UIAsset;
-
+		private var _upArrow:UIAsset;
+		private var _effect:UIMovieClip;
 		private var _careAcuId:String;
 		private var _drawLine:MeridianMapLine;
 		private var _tipsInfo:BaseTipsInfo;
@@ -309,23 +309,51 @@ package com.rpgGame.appModule.jingmai.sub
 			{
 				if (!_effect) 
 				{
-					_effect = new  UIAsset();
-					_effect.styleName="ui/common/tubiao/jobup2.png";
+					_effect = new feathers.controls.UIMovieClip();
 					
-					_effect.height =14;
-					_effect.width = 14;
-					_effect.x=(this.imgPoint.width-14);
-					_effect.y=2;
+					_effect.name = "mc_bianshi";
+					_effect.autoPlay = false;
+					_effect.height = 64;
+					_effect.styleClass = UIMovieClipBianshi_guang;
+					_effect.width = 64;
+					_effect.x=(this.imgPoint.width-64)/2;
+					_effect.y=(this.imgPoint.height-64)/2;
+					_effect.play();
+					this.imgPoint.addChild(_effect);
 				}
-				this.imgPoint.addChild(_effect);
+				if (!_upArrow) 
+				{
+					_upArrow = new  UIAsset();
+					_upArrow.styleName="ui/common/tubiao/jobup2.png";
+					
+					_upArrow.height =14;
+					_upArrow.width = 14;
+					_upArrow.x=(this.imgPoint.width-14);
+					_upArrow.y=2;
+				}
+				this.imgPoint.addChild(_upArrow);
 			}
 			else
 			{
 				if (_effect) 
 				{
 					MCUtil.removeSelf(_effect);
+					_effect.stop();
+					_effect.dispose();
+					_effect=null;
+				}
+				if (_upArrow) 
+				{
+					MCUtil.removeSelf(_upArrow);
 
 				}
+			}
+		}
+		public function resumeEffect():void
+		{
+			if (_effect) 
+			{
+				_effect.play();
 			}
 		}
 		private function addEft(render:RenderUnit3D):void

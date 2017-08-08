@@ -104,8 +104,9 @@ package com.rpgGame.app.manager.input
             var canDodge : Boolean = DodgeManager.getinstance().canUseDodge();
             if (canDodge)
 			{
-                CastSpellHelper.shortcutsTryCaseSpell(1, true);
-				DodgeManager.getinstance().useDodge();
+				if(DodgeManager.getinstance().useDodge()){
+					CastSpellHelper.shortcutsTryCaseSpell(1, true);
+				}
              } 
 			else 
 			{

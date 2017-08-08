@@ -162,7 +162,7 @@ package com.rpgGame.app.state.ai
 				
 			}
 			isWalking=false;
-			TaskAutoManager.getInstance().walkOver=true;
+			
 		}
 		
 		private var isWalking:Boolean=false;
