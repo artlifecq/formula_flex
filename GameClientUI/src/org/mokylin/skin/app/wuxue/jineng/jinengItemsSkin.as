@@ -131,6 +131,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.text = "已激活进阶效果";
 			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.visible = false;
 			temp.x = 68;
 			temp.y = 41;
 			return temp;
@@ -145,7 +146,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.touchGroup = true;
 			temp.text = "未激活进阶效果";
 			temp.color = 0xA3A594;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.x = 68;
 			temp.y = 41;
 			return temp;
@@ -175,10 +176,12 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.name = "txt_level";
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.text = "Lv.1/200";
+			temp.text = "Lv.1/2";
+			temp.textAlign = "right";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 169;
+			temp.width = 90;
+			temp.x = 136;
 			temp.y = 15;
 			return temp;
 		}
@@ -192,7 +195,8 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.touchGroup = true;
 			temp.text = "60级后自动获得";
 			temp.color = 0xA3A594;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.visible = false;
 			temp.x = 68;
 			temp.y = 41;
 			return temp;
