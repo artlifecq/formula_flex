@@ -322,11 +322,12 @@ package com.rpgGame.app.manager.fight
 							tweenFun=SpellResultTweenUtil.TweenZhanHun;
 							numberType = NUMBER_NPC_ZHANHUN;
 							break;
-						case EnumHurtType.SPELL_HURT_TYPE_ABSORB:
+						case EnumHurtType.SPELL_SHEILD_XISHOU:
+						//case EnumHurtType.SPELL_HURT_TYPE_ABSORB:
 							typeRes = ROOT+USESFUL_EFFECT+"xishou.png";
 							tweenFun=SpellResultTweenUtil.TweenXiShou;
 							numberType =NUMBER_FIGHT_XISHOU;
-							
+							break;
 						default:
 							CONFIG::Debug {
 							var loginfo:String = "未处理的伤害类型:"+type;

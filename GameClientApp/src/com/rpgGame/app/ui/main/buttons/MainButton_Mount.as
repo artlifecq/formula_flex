@@ -1,5 +1,7 @@
 package com.rpgGame.app.ui.main.buttons
 {
+	import com.rpgGame.app.manager.mount.HorseManager;
+	import com.rpgGame.app.manager.mount.ZhanQiManager;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.ui.tip.RTNodeID;
@@ -11,6 +13,8 @@ package com.rpgGame.app.ui.main.buttons
 		public function MainButton_Mount()
 		{
 			SkinUI.addNode(null,RTNodeID.MAIN_JINJIE,this,60,null,false);
+			HorseManager.instance().canHorseLevelUp();
+			ZhanQiManager.instance().canZhanqiLevelUp();
 		}
 		override protected function onShow():void
 		{

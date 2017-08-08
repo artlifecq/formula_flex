@@ -7,7 +7,6 @@ package com.rpgGame.app.manager.goods
 	import com.rpgGame.app.ui.alert.AutoDressAlert;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.ui.alert.ItemNoticePanel;
-	import com.rpgGame.app.ui.alert.SomeSystemNoticePanel;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
@@ -51,7 +50,7 @@ package com.rpgGame.app.manager.goods
 			super(ItemContainerID.BackPack)
 			//EventManager.addEvent(ItemEvent.ITEM_GETED_NEW_ITEM, onGetedNewItem);
 			EventManager.addEvent(ItemEvent.ITEM_DROPED,deleteItemByDrop);
-			SomeSystemNoticePanel.addEvent();
+			//SomeSystemNoticePanel.addEvent();
 		}
 		
 		

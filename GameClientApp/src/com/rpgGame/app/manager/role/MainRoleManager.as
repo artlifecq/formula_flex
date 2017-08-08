@@ -7,6 +7,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.app.manager.GameCameraManager;
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.ShortcutsManger;
+	import com.rpgGame.app.manager.SpellManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.scene.SceneManager;

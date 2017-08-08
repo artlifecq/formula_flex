@@ -4,7 +4,9 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.SpellSender;
+	import com.rpgGame.app.ui.alert.SomeSystemNoticePanel;
 	import com.rpgGame.app.utils.UpgradeUtil;
+	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.SpellEvent;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.SkillLvLDataManager;
@@ -449,16 +451,66 @@ package com.rpgGame.app.manager
 		public static function hasSkillCanLevelUpOrUpgrade():Boolean
 		{
 			var list:Vector.<Q_skill_model>=SpellDataManager.getBasicSkills(MainRoleManager.actorInfo.job);//基本职业技能
+			var ret:int=0;
 			for each (var qSkill:Q_skill_model in list) 
 			{
-				if (canUpOrRise(qSkill.q_skillID)>0) 
+				ret=canUpOrRise(qSkill.q_skillID)
+				if (ret>0) 
 				{
+					checkNotice(ret);
 					return true;
 				}
 			}
 			return false;
 		}
+		private static function checkNotice(val:int):void
+		{
+			if (val==0) 
+			{
+				return;
+			}
+			if (val==1) 
+			{
+				noticeSkillLevelUp();
+			}
+			else if (val==2) 
+			{
+				noticeSkillUpGrade();
+			}
+			else if (val==3) 
+			{
+				noticeSkillLevelUp();
+				noticeSkillUpGrade();
+			}
+		}
+		private static var levelUpData:Object={};
+		private static var gradeData:Object={};
+		private static function noticeSkillLevelUp():void
+		{
 		
+			if (SomeSystemNoticePanel.isTimeLimite(SomeSystemNoticePanel.SYS_SKILLL_LEVEL_UP)) 
+			{
+				return;
+			}
+			levelUpData.sys=SomeSystemNoticePanel.SYS_SKILLL_LEVEL_UP;
+			levelUpData.desc="您的技能可以升级了";
+			levelUpData.btnText="立即升级";
+			SomeSystemNoticePanel.onShowNotice(levelUpData);
+		//	EventManager.dispatchEvent(MainPlayerEvent.SYS_CAN_LEVEL_UP,levelUpData); 
+		}
+		private static function noticeSkillUpGrade():void
+		{
+			
+			if (SomeSystemNoticePanel.isTimeLimite(SomeSystemNoticePanel.SYS_SKILLL_GRADE_UP)) 
+			{
+				return;
+			}
+			gradeData.sys=SomeSystemNoticePanel.SYS_SKILLL_GRADE_UP;
+			gradeData.desc="您的技能可以升阶了";
+			gradeData.btnText="立即升阶";
+			SomeSystemNoticePanel.onShowNotice(gradeData);
+		//	EventManager.dispatchEvent(MainPlayerEvent.SYS_CAN_LEVEL_UP,gradeData); 
+		}
 		public static function getSkillGrade(skillId:int):int
 		{
 			var data:HeroData=MainRoleManager.actorInfo;

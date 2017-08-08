@@ -207,21 +207,30 @@ package com.rpgGame.app.manager.mount
 			{
 				return false;
 			}
-			return (_showdata.canUpLevel());
+			var ret:Boolean= (_showdata.canUpLevel());
+			if (ret) 
+			{
+				showZhanQiNotice();
+			}
+			return ret;
 		}
 		
 		private  function isShowSystemLevelUp(item:*):void
 		{
-			if(canZhanqiLevelUp())
-			{
-				var data:Object={};
-				data.sys=SomeSystemNoticePanel.SYS_ZHANQI;
-				data.desc="战旗可以进阶";
-				data.btnText="立即进阶";
-				EventManager.dispatchEvent(MainPlayerEvent.SYS_CAN_LEVEL_UP,data); 
-			}
+			
 		}
-		
+		private function showZhanQiNotice():void
+		{
+			if (SomeSystemNoticePanel.isTimeLimite(SomeSystemNoticePanel.SYS_ZHANQI)) 
+			{
+				return;
+			}
+			var data:Object={};
+			data.sys=SomeSystemNoticePanel.SYS_ZHANQI;
+			data.desc="战旗可以进阶";
+			data.btnText="立即进阶";
+			SomeSystemNoticePanel.onShowNotice(data);
+		}
 		private function onAddHandler(info:ClientItemInfo):void
 		{
 			isShowSystemLevelUp(null);

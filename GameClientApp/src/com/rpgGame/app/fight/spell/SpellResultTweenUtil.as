@@ -370,11 +370,12 @@
 		//护盾吸收
 		public static function TweenXiShou(showobj:DisplayObject,start:Point, end:Point,callBack:Function):void
 		{
-			if (!showobj||!start) 
+			if (!showobj||!start||!end) 
 			{
 				return;
 			}
-			
+			//吸收要在目标位置
+			start=end;
 			
 		
 	

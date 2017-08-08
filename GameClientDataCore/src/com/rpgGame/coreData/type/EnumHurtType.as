@@ -17,13 +17,13 @@ package com.rpgGame.coreData.type
 		/** 无敌 **/
 		public static const SPELL_HURT_TYPE_INVINCIBLE : uint = 0x00000010;
 		
-		/** 死亡中被打 **/
-		public static const SPELL_ATTACK_DEAD : uint = 0x00000020;
+		/** 吸收伤害,护盾 **/
+		public static const SPELL_SHEILD_XISHOU : uint = 0x00000020;
 		
 		/** 秒杀 **/
 		public static const SPELL_SEC : uint = 0x00000040;
 		
-		/** 吸收伤害 **/
+		/** 吸收伤害,服务器没用了 **/
 		public static const SPELL_HURT_TYPE_ABSORB : uint = 0x00000080;
 		
 		/** 连击 **/
@@ -38,7 +38,7 @@ package com.rpgGame.coreData.type
 		 */
 		public static const SPELL_HURT_TYPES:Array=[SPELL_HURT_TYPE_NORMAL,SPELL_HURT_TYPE_MISS,
 			SPELL_HURT_TYPE_JUMP_SHIELD,SPELL_HURT_TYPE_CRIT,SPELL_HURT_TYPE_REBOUND,SPELL_HURT_TYPE_INVINCIBLE,
-			SPELL_ATTACK_DEAD,SPELL_SEC,SPELL_HURT_TYPE_ABSORB,SPELL_COMBO,SPELL_ZHANHUN
+			SPELL_SHEILD_XISHOU,SPELL_SEC,SPELL_COMBO,SPELL_ZHANHUN
 		];
 		
 		/** 3.重击，客户端显示暴击掉血，反推需要加入计算 **/

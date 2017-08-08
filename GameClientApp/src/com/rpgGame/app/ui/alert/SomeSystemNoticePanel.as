@@ -5,7 +5,6 @@ package com.rpgGame.app.ui.alert
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.core.app.AppInfo;
 	import com.rpgGame.core.app.AppManager;
-	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.utils.UIUtil;
 	import com.rpgGame.coreData.enum.EmFunctionID;
@@ -13,27 +12,29 @@ package com.rpgGame.app.ui.alert
 	import flash.utils.Dictionary;
 	import flash.utils.getTimer;
 	
-	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.common.alert.AlertUp;
 	
 	import starling.display.DisplayObject;
 	
 	public class SomeSystemNoticePanel extends SkinUIPanel
 	{
-		public static const SYS_HORSE:int=1;
-		public static const SYS_SKILL:int=2;
-		public static const SYS_ZHANHUN:int=3;
-		public static const SYS_ZHANQI:int=4;
-		private static const TIME_OUT:int=10*60*1000;
-		private static const timeHash:HashMap=new HashMap();
+		
+		public static const SYS_HORSE:String=EmFunctionID.EM_ZUOQI+"_0";
+		public static const SYS_SKILLL_LEVEL_UP:String=EmFunctionID.EM_JINENG+"_0";
+		public static const SYS_ZHANHUN:String=EmFunctionID.EM_ZHANHUN+"_0";
+		public static const SYS_ZHANQI:String=EmFunctionID.EM_ZHANQI+"_0";
+		public static const SYS_SKILLL_GRADE_UP:String=EmFunctionID.EM_JINENG+"_1";
+		//勾选了10分钟弹一次
+		private static const TIME_OUT_BLACK:int=10*60*1000;
+		//没5分钟弹一次
+		private static const  TIME_OUT_NORMAL:int=5*60*1000;
+		private static const _normal_timeHash:HashMap=new HashMap();
+		private static const _black_timeHash:HashMap=new HashMap();
 		private static const pool:Array=[];
 		private var _skin:AlertUp;
 		private var _data:Object;
 		private static const _showDic:Dictionary=new Dictionary();
-		private static const _functionIdList:Object = {1:EmFunctionID.EM_ZUOQI,
-			2:EmFunctionID.EM_JINENG,
-			3:EmFunctionID.EM_ZHANHUN,
-		    4:EmFunctionID.EM_ZHANQI};
+		
 		public function SomeSystemNoticePanel()
 		{
 			_skin=new AlertUp();
@@ -47,10 +48,10 @@ package com.rpgGame.app.ui.alert
 		private function setData(data:Object):void
 		{
 			this._data=data;
-			var sys:int=_data.sys;
+			var sys:String=_data.sys;
 			var desc:String=_data.desc;
 			var btnLab:String=_data.btnText;
-			
+			_skin.chk_ok.isSelected=false;
 			var url:String="";
 			switch(sys)
 			{
@@ -64,9 +65,19 @@ package com.rpgGame.app.ui.alert
 					url="ui/common/icon/erjikuang/zhanqijinjie.png";
 					break;
 				}
-				default:
+				case SYS_ZHANHUN:
 				{
-					url="ui/common/icon/erjikuang/zuoqijinjie.png";
+					url="ui/common/icon/erjikuang/zhanhun.png";
+					break;
+				}
+				case SYS_SKILLL_LEVEL_UP:
+				{
+					url="ui/common/icon/erjikuang/skill1.png";
+					break;
+				}
+				case SYS_SKILLL_GRADE_UP:
+				{
+					url="ui/common/icon/erjikuang/skill2.png";
 					break;
 				}
 			}
@@ -75,6 +86,7 @@ package com.rpgGame.app.ui.alert
 			_skin.labContent.text=desc;
 			_skin.btn_ok.label=btnLab;
 			_skin.chk_ok.isSelected=false;
+			_normal_timeHash.put(sys,getTimer());
 		}
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
@@ -83,15 +95,19 @@ package com.rpgGame.app.ui.alert
 				if (_data.callBack) 
 				{
 					_data.callBack();
-				}else{
-					var id:String  = _functionIdList[_data.sys] as String;
-					FunctionOpenManager.openAppPaneById(id,null,false);
+				}
+				else
+				{
+			
 					switch(_data.sys)
 					{
 						case SYS_HORSE:
 							FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ZUOQI,null,false);
 							break;
-						case SYS_SKILL:
+						case SYS_SKILLL_LEVEL_UP:
+							FunctionOpenManager.openAppPaneById(EmFunctionID.EM_JINENG,null,false);
+							break;
+						case SYS_SKILLL_GRADE_UP:
 							FunctionOpenManager.openAppPaneById(EmFunctionID.EM_JINENG,null,false);
 							break;
 						case SYS_ZHANHUN:
@@ -111,40 +127,58 @@ package com.rpgGame.app.ui.alert
 			super.onHide();
 			if (_skin.chk_ok.isSelected) 
 			{
-				timeHash.put(_data.sys,getTimer());
+				_black_timeHash.put(_data.sys,getTimer());
+				_normal_timeHash.remove(_data.sys);
 			}
 			else
 			{
-				timeHash.remove(_data.sys);
+				_normal_timeHash.put(_data.sys,getTimer());
+				_black_timeHash.remove(_data.sys);
 			}
 			delete _showDic[_data.sys];
 			_data=null;
 			pool.push(this);
 			
 		}
-		public static function addEvent():void
+		public static  function isTimeLimite(sys:String):Boolean
 		{
-			EventManager.addEvent(MainPlayerEvent.SYS_CAN_LEVEL_UP,onShowNotice);
+			var ret:Boolean=checkInBlack(sys)||checkNormalTime(sys);
+			return ret;
 		}
-		public static function checkInBlack(sys:int):Boolean
+		private static function checkNormalTime(sys:String):Boolean
 		{
-			var time:int=timeHash.getValue(sys);
+			var time:int=_normal_timeHash.getValue(sys);
 			if (time==0) 
 			{
 				return false;
 			}
-			if (getTimer()-time<TIME_OUT) 
+			if (getTimer()-time<TIME_OUT_NORMAL) 
 			{
 				return true;
 			}
-			timeHash.remove(sys);
+			_normal_timeHash.remove(sys);
 			return false;
 		}
-		private static function onShowNotice(...arg):void
+		private static function checkInBlack(sys:String):Boolean
+		{
+			//普通
+			var time:int=_black_timeHash.getValue(sys);
+			if (time==0) 
+			{
+				return false;
+			}
+			if (getTimer()-time<TIME_OUT_BLACK) 
+			{
+				return true;
+			}
+			_black_timeHash.remove(sys);
+			return false;
+		}
+		public  static function onShowNotice(...arg):void
 		{
 			// TODO Auto Generated method stub
 			var data:Object=arg[0];
-			if (checkInBlack(data.sys)) 
+			if (isTimeLimite(data.sys)) 
 			{
 				return;
 			}
@@ -171,9 +205,9 @@ package com.rpgGame.app.ui.alert
 			panel.setData(data);
 			_showDic[data.sys]=1;
 		}
-		public static function checkPanleIsOpen(sys:int):Boolean
+		public static function checkPanleIsOpen(sys:String):Boolean
 		{
-			var id:String  = _functionIdList[sys] as String;
+			var id:String  =sys.split("_")[0];
 			var appinfo:AppInfo = FunctionOpenManager.getAppInfoByFunctionId(id);
 			if(appinfo == null)
 				return true;

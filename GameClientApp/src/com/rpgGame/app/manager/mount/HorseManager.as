@@ -207,16 +207,20 @@ package com.rpgGame.app.manager.mount
 			{
 				return;
 			}
-			if(_showdata.canUpLevel())
-			{
-				var data:Object={};
-				data.sys=SomeSystemNoticePanel.SYS_HORSE;
-				data.desc="坐骑可以进阶";
-				data.btnText="立即进阶";
-				EventManager.dispatchEvent(MainPlayerEvent.SYS_CAN_LEVEL_UP,data); 
-			}
-		}
 		
+		}
+		private function showHorseNotice():void
+		{
+			if (SomeSystemNoticePanel.isTimeLimite(SomeSystemNoticePanel.SYS_HORSE)) 
+			{
+				return;
+			}
+			var data:Object={};
+			data.sys=SomeSystemNoticePanel.SYS_HORSE;
+			data.desc="坐骑可以进阶";
+			data.btnText="立即进阶";
+			SomeSystemNoticePanel.onShowNotice(data);
+		}
 		private static var _instance:HorseManager;
 		public static function instance():HorseManager
 		{
@@ -380,7 +384,12 @@ package com.rpgGame.app.manager.mount
 			{
 				return false;
 			}
-			return (_showdata.canUpLevel());
+			var ret:Boolean=(_showdata.canUpLevel());
+			if (ret) 
+			{
+				showHorseNotice();
+			}
+			return ret;
 		}
 	}
 }
