@@ -6,6 +6,7 @@ package com.rpgGame.app.controller.keyboard
 	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
+	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.mount.HorseManager;
 	import com.rpgGame.app.manager.mount.MountManager;
 	import com.rpgGame.app.manager.role.DropGoodsManager;
@@ -22,6 +23,7 @@ package com.rpgGame.app.controller.keyboard
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.key.KeyInfo;
 	import com.rpgGame.coreData.info.map.EnumMapType;
+	import com.rpgGame.coreData.type.EnumHurtType;
 	
 	import flash.geom.Point;
 	import flash.utils.getTimer;
@@ -51,7 +53,7 @@ package com.rpgGame.app.controller.keyboard
 					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ZHANHUN,null,true,false);
 					break;
 				case "2": //Z 自动挂机   挂机改到A去了
-					
+					FightFaceHelper.showAttChange(EnumHurtType.EXP,100000000);
 					
 					break;
 				case "65": //A 自动挂机   挂机改到A去了

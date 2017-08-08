@@ -11,8 +11,10 @@ package com.rpgGame.app.manager.task
 	import com.rpgGame.app.state.ai.AIStateMachine;
 	import com.rpgGame.app.ui.main.taskbar.TaskControl;
 	import com.rpgGame.app.utils.TaskUtil;
+	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppDispather;
 	import com.rpgGame.core.app.AppEvent;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.clientConfig.Q_mission_base;
@@ -111,7 +113,6 @@ package com.rpgGame.app.manager.task
 			TrusteeshipManager.getInstance().stopAll();
 			SceneRoleSelectManager.selectedRole=null;
 			resetTechTime();
-			walkOver=false;
 			if(!_isTaskRunning)
 			{
 				_isTaskRunning = true;
@@ -149,7 +150,6 @@ package com.rpgGame.app.manager.task
 		public function stopTaskAuto() : void
 		{
 			_stateMachine.transition(AIStateType.AI_NONE);
-			walkOver=false;
 			if (!_isTaskRunning)
 				return;
 			_isBroken = false;
@@ -181,7 +181,6 @@ package com.rpgGame.app.manager.task
 			
 		}
 		public var jumpOver:Boolean=false;
-		public var walkOver:Boolean=false;
 		public var actTaskMonster:Boolean=false;
 		private var _techTime:int=0;
 		private function resetTechTime():void
@@ -235,37 +234,13 @@ package com.rpgGame.app.manager.task
 			{
 				return true;
 			}
-			if(MainRoleManager.actor.stateMachine.isIdle&&isTasking&&!walkOver)
+			if(MainRoleManager.actor.stateMachine.isIdle&&isTasking&&!isOpenPanel())
 			{
 				return true;
 			}
 			return false;
 		}
-		public function get isTasking():Boolean
-		{
-			return _isTaskRunning;
-		}
 		
-		public function get isTaskRunning():Boolean
-		{
-			return _isTaskRunning;
-		}
-		
-		public function set isTaskRunning(value:Boolean):void
-		{
-			_isTaskRunning = value;
-		}
-		
-		
-		public function get taskTarget():int
-		{
-			return _taskTarget;
-		}
-
-		public function set taskTarget(value:int):void
-		{
-			_taskTarget = value;
-		}
 		/**新任务*/
 		private function newMation(type:int):void
 		{
@@ -361,7 +336,6 @@ package com.rpgGame.app.manager.task
 					TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);	
 					break;
 			}
-			walkOver=true;
 		}
 		public function taskKilled(taskType:int):void
 		{
@@ -389,7 +363,23 @@ package com.rpgGame.app.manager.task
 					TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);	
 					break;
 			}
-			
+		}
+		
+		private function isOpenPanel():Boolean
+		{
+			if (AppManager.isAppInScene(AppConstant.TASK_LEAD_PANEL))
+			{
+				return true;
+			}
+			if (AppManager.isAppInScene(AppConstant.TASK_LOOP_PANEL))
+			{
+				return true;
+			}
+			if (AppManager.isAppInScene(AppConstant.TASK_GUILD_PANEL))
+			{
+				return true;
+			}
+			return false;
 		}
 		
 		public function taskLevel(level:int):void
@@ -410,7 +400,31 @@ package com.rpgGame.app.manager.task
 			}
 			
 		}
-
+		public function get isTasking():Boolean
+		{
+			return _isTaskRunning;
+		}
+		
+		public function get isTaskRunning():Boolean
+		{
+			return _isTaskRunning;
+		}
+		
+		public function set isTaskRunning(value:Boolean):void
+		{
+			_isTaskRunning = value;
+		}
+		
+		
+		public function get taskTarget():int
+		{
+			return _taskTarget;
+		}
+		
+		public function set taskTarget(value:int):void
+		{
+			_taskTarget = value;
+		}
 		public function get otherType():int
 		{
 			return _otherType;
