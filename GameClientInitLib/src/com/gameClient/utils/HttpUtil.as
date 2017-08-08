@@ -113,6 +113,7 @@ package com.gameClient.utils
                         str += "&";
                     }
                     str += key + "=" + params[key];
+                    ++index;
                 }
                 req.data = str;
             } else {
