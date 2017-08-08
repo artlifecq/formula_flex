@@ -95,6 +95,7 @@ package com.rpgGame.app.manager.task
 		
 		public function startSwitchTaskAuto(tar:int=0) : void
 		{
+			resetTechTime();
 			_gTimer.reset();
 			_gTimer.start();
 			/*return;
@@ -210,7 +211,7 @@ package com.rpgGame.app.manager.task
 				{
 					if((getTimer()-_techTime)>=AUTOMAIN)
 					{
-						resetTechTime();
+						resetTechTime();Lyt.a("startTaskAuto1");
 						startTaskAuto(TaskType.MAINTYPE_MAINTASK);
 					}
 					
@@ -224,20 +225,27 @@ package com.rpgGame.app.manager.task
 			
 			
 		}
+		private var traceKey:int;
 		private function istech():Boolean
 		{
+			if(isOpenPanel())
+			{//Lyt.a("istech-1");
+				//if(traceKey!=-1){Lyt.a("istech-1");traceKey=-1;}
+				return false;
+			}
 			if(TrusteeshipManager.getInstance().isAutoing&&!actTaskMonster)
-			{
+			{//if(traceKey!=1){Lyt.a("istech1");traceKey=1;}
 				return true;
 			}
 			if(MainRoleManager.actor.stateMachine.isIdle&&!isTasking)
-			{
+			{//if(traceKey!=2){Lyt.a("istech2");traceKey=2;}
 				return true;
 			}
-			if(MainRoleManager.actor.stateMachine.isIdle&&isTasking&&!isOpenPanel())
-			{
+			if(MainRoleManager.actor.stateMachine.isIdle&&isTasking)
+			{//if(traceKey!=3){Lyt.a("istech3");traceKey=3;}
 				return true;
 			}
+			//if(traceKey!=-2){Lyt.a("istech-2");traceKey=-2;}
 			return false;
 		}
 		
@@ -272,7 +280,7 @@ package com.rpgGame.app.manager.task
 			if(TaskMissionManager.getTaskSubIsFinish(otherType,taskTarget))
 			{
 				//taskFlishArr[_taskTarget]=true;
-				Lyt.a("setTaskChange:"+otherType+":"+taskTarget);
+				//Lyt.a("setTaskChange:"+otherType+":"+taskTarget);
 				changeSub();
 				TrusteeshipManager.getInstance().stopAll();
 				GatherAutoManager.getInstance().stopGatherAuto();
