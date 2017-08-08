@@ -167,7 +167,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			eft_name = temp;
 			temp.name = "eft_name";
 			temp.styleName = "ui/app/wuxue/jineng/jnjjxg.png";
-			temp.x = 3;
+			temp.x = 4;
 			temp.y = 97;
 			return temp;
 		}
@@ -179,7 +179,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.name = "grp_tiaojian";
 			temp.height = 131;
 			temp.width = 331;
-			temp.x = 3;
+			temp.x = 4;
 			temp.y = 205;
 			temp.elementsContent = [lb_jinengdengji_i(),lb_renwudengji_i(),lb_zhenqi_i(),lb_yinliang_i(),lb_daoju_i(),lb_daoju1_i(),tj_name_i()];
 			return temp;
@@ -293,14 +293,15 @@ package org.mokylin.skin.app.wuxue.jineng
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb_miaoshu = temp;
 			temp.name = "lb_miaoshu";
-			temp.height = 21;
+			temp.height = 60;
 			temp.leading = 6;
 			temp.letterSpacing = 1;
-			temp.text = "每击中一个目标额外产生3点怒气";
+			temp.text = "挥动长枪扫除一片火焰，对自身前方60度半径10米的扇形范围内的敌人造成3次伤害，每次伤害25%秒伤，每击中1个目标可产生2点怒气值";
+			temp.textAlign = "left";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 239;
-			temp.x = 89;
+			temp.width = 238;
+			temp.x = 88;
 			temp.y = 142;
 			return temp;
 		}
@@ -315,7 +316,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 100;
-			temp.x = 93;
+			temp.x = 92;
 			temp.y = 117;
 			return temp;
 		}
@@ -330,7 +331,7 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 93;
-			temp.x = 93;
+			temp.x = 92;
 			temp.y = 11;
 			return temp;
 		}

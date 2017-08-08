@@ -206,7 +206,7 @@ package com.rpgGame.app.ui.alert
 				gameAlert.btnOk.label = alertInfo.leftValue ? alertInfo.leftValue : "确认";
 			if (gameAlert.btnCancel)
 				gameAlert.btnCancel.label = alertInfo.rightValue ? alertInfo.rightValue : "取消";
-			TaskUtil.addLabelEvet(gameAlert.lbTip);
+//			TaskUtil.addLabelEvet(gameAlert
 			gameAlert.callBackArgs = args;
 			StarlingLayerManager.topUILayer.addChild(gameAlert);
 			showAlertMap.add(alertSet.key, gameAlert);

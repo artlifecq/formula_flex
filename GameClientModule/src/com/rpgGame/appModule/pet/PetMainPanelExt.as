@@ -5,12 +5,12 @@ package com.rpgGame.appModule.pet
 	import com.rpgGame.app.display3D.InterAvatar3D;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.PetSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
-	import com.rpgGame.app.utils.FaceUtil;
+	import com.rpgGame.app.ui.common.CenterEftPop;
 	import com.rpgGame.app.utils.FightValueUtil;
-	import com.rpgGame.app.view.icon.BgIcon;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.appModule.common.touch.TouchCtrl;
 	import com.rpgGame.appModule.jingmai.sub.TweenScaleScrollUitlExt;
@@ -40,6 +40,8 @@ package com.rpgGame.appModule.pet
 	import away3d.events.Event;
 	
 	import feathers.utils.filter.GrayFilter;
+	
+	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.meiren.MeiRen_Skin;
@@ -396,7 +398,7 @@ package com.rpgGame.appModule.pet
 			_skin.btnJinjie.visible=data.rank!=qPet.q_max_grade;
 			_skin.uiOK.visible=data.rank==qPet.q_max_grade;
 			if(_skin.uiOK.visible)
-			_skin.uiOK.y=550;
+				_skin.uiOK.y=550;
 			if (data.rank==qPet.q_max_grade) 
 			{
 				if (_blessPanel&&this.contains(_blessPanel)) 
@@ -447,6 +449,7 @@ package com.rpgGame.appModule.pet
 		}
 		override protected function onShow():void
 		{
+			EventManager.addEvent(PetEvent.PET_UP_RESULT,onUpdateExp);
 			EventManager.addEvent(PetEvent.PET_DATA_CHANGE,onPetChange);
 			EventManager.addEvent(PetEvent.PET_BUYNUM_CHANGE,onBuyNumChange);
 			EventManager.addEvent(PetEvent.PET_CHANGE,onUpdatePetChuZhanOrXiuzhan);
@@ -498,6 +501,24 @@ package com.rpgGame.appModule.pet
 			_tweenS.scroll2Index(_headItems.indexOf(tmp));
 		}
 		
+		private function onUpdateExp(...arg):void
+		{
+			if(_curSelectItem)
+			{
+				var petId:int=arg[0];
+				var exp:int=arg[1];
+				var isSuccess:int=arg[2];
+				if (petId==_curSelectItem.data.modelId) 
+				{
+					if (isSuccess==1) 
+					{
+						_curSelectItem.setServerData(Mgr.petMgr.getPet(petId));
+						updateRightData(_curSelectItem.data);
+					}
+				}
+			}
+		}
+		
 		private function onPetChange(pet:PetInfo):void
 		{
 			// TODO Auto Generated method stub
@@ -512,9 +533,8 @@ package com.rpgGame.appModule.pet
 					}
 					break;
 				}
-			}
-			
-		}
+			}		
+		}		
 		
 		private function onUpdatePetChuZhanOrXiuzhan():void
 		{			
@@ -580,6 +600,7 @@ package com.rpgGame.appModule.pet
 				this._avatar=null;
 			}
 			_curSelectItem=null;
+			EventManager.removeEvent(PetEvent.PET_UP_RESULT,onUpdateExp);
 			EventManager.removeEvent(PetEvent.PET_DATA_CHANGE,onPetChange);
 			EventManager.removeEvent(PetEvent.PET_BUYNUM_CHANGE,onBuyNumChange);
 			EventManager.removeEvent(PetEvent.PET_CHANGE,onUpdatePetChuZhanOrXiuzhan);

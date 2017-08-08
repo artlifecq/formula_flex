@@ -318,6 +318,8 @@ package com.rpgGame.appModule.role
 			if(info&&info.containerID==0){
 				var index:int=equipsTypes.indexOf(info.qItem.q_kind);
 				equipGrids[index].filter=null;
+//				equipGrids[index].showTiShi(false);
+//				trace("拖动结束了");
 			}
 		}
 		
@@ -333,6 +335,9 @@ package com.rpgGame.appModule.role
 				var index:int=equipsTypes.indexOf(info.qItem.q_kind);
 				equipGrids[index].filter=glowfilter;
 				onGlowTween();
+//				if((equipGrids[index].faceInfo as EquipInfo).qItem.q_level<info.qItem.q_level&&info.qItem.q_level<=MainRoleManager.actorInfo.totalStat.level)
+//				equipGrids[index].showTiShi(true);
+//				trace("开始拖动了");
 			}
 		}
 		

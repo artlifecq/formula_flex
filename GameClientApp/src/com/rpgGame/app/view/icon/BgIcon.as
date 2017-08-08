@@ -1,5 +1,7 @@
 package com.rpgGame.app.view.icon
 {
+	import com.game.engine3D.display.Inter3DContainer;
+	import com.game.engine3D.display.InterObject3D;
 	import com.rpgGame.app.manager.EftMcManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.StaticValue;
@@ -69,7 +71,7 @@ package com.rpgGame.app.view.icon
 		/**是否需要显示选中框**/
 		protected var isShow : Boolean = true;
 		protected var _qualityEft:UIMovieClip;
-		
+
 		public function BgIcon( $iconSize:int = IcoSizeEnum.SIZE_40 )
 		{
 			super( $iconSize );

@@ -75,8 +75,9 @@ package com.rpgGame.appModule.zhangong
 		private function initView():void
 		{
 			_isFirst=true;
-			_skin.NumZhanli.visible=false;
-			//			_skin.uiUp.visible=false;
+//			_skin.NumZhanli.visible=false;
+			_skin.uiarrow.visible=false;
+			_skin.num_lv0.visible=false;
 			_skin.ListMap.addEventListener(FeathersEventType.CREATION_COMPLETE,toShouShow);
 			var mapItemList:Vector.<int>=ZhanGongData.getMapItemLvList();
 			_skin.ListMap.dataProvider=new ListCollection(mapItemList);
@@ -293,15 +294,15 @@ package com.rpgGame.appModule.zhangong
 			var has:HashMap=new HashMap();
 			has.put(type,num);
 			var pow:int=FightValueUtil.calFightPowerByHash(has,MainRoleManager.actorInfo.job);
-			_skin.NumZhanli.label="x"+pow.toString();
-			_skin.NumZhanli.visible=true;
-			//			_skin.uiUp.visible=true;
+			_skin.num_lv0.label=pow.toString();
+			_skin.uiarrow.visible=true;
+			_skin.num_lv0.visible=true;
 		}
 		
 		private function closeNextAtt():void
 		{
-			_skin.NumZhanli.visible=false;
-			//			_skin.uiUp.visible=false;
+			_skin.uiarrow.visible=false;
+			_skin.num_lv0.visible=false;
 		}
 		
 		private function updatePower(msg:SCMeritoriousUpgradeResultMessage):void
