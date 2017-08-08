@@ -25,6 +25,16 @@ package com.rpgGame.app.manager.ctrl
 				_skills=qSkill.q_relate_spells.split(",");
 			}
 		}
+		/**是否连招源技能*/
+		public function isOriginSkill(skillId:int):Boolean
+		{
+			if(skillId==_originSkill)
+			{
+				return true;
+			}
+			return false;
+		}
+		
 		public function isTripleSkill(skillId:int):Boolean
 		{
 			if (_skills==null) 

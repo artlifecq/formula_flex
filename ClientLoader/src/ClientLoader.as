@@ -48,6 +48,8 @@ package
         private var _useBpgFormat : Boolean = false;
         
         // web params
+        /** url参数*/
+        private var _arguments : Object = {};
         /** 资源根目录*/
         private var _baseDir : String = "../";
         /** 客服端版本号*/
@@ -62,6 +64,10 @@ package
         private var _isStable : Boolean = false;
         /** 是否是版署版*/
         private var _isVersionDepartment : Boolean = false;
+        /** 游戏名*/
+        private var _gameName : String = "";
+        /** 客户端ip*/
+        private var _clientIp : String = "";
         /** 服务器ip*/
 		private var _server : String = "";
         /** 服务器port*/
@@ -78,6 +84,8 @@ package
         private var _loginKey : String = "";
         /** 登录时间(s)*/
         private var _loginTime : uint = 0;
+        /** 浏览器版本*/
+        private var _browser : String = "";
 		/**
 		 * 微端桥接
 		 */
@@ -141,6 +149,9 @@ package
                 if (null == _urlParmar) {
                     return;
                 }
+                if (_urlParmar["arguments"]) {
+                    _arguments = _urlParmar["arguments"];
+                }
                 if (_urlParmar["baseDir"]) {
                     _baseDir = _urlParmar["baseDir"];
                 }
@@ -161,6 +172,12 @@ package
                 }
                 if (_urlParmar["isVersionDepartment"]) {
                     _isVersionDepartment = _urlParmar["isVersionDepartment"] == "true";
+                }
+                if (_arguments["gameName"]) {
+                    _gameName = _arguments["gameName"];
+                }
+                if (_arguments["clientIp"]) {
+                    _clientIp = _arguments["clientIp"];
                 }
                 if (_urlParmar["serverIp"]) {
                     _server = _urlParmar["serverIp"];
@@ -185,6 +202,9 @@ package
                 }
                 if (_urlParmar["agent"]) {
                     _agent = _urlParmar["agent"];
+                }
+                if (_urlParmar["browser"]) {
+                    _browser = _urlParmar["browser"];
                 }
 			}
 
@@ -397,6 +417,9 @@ package
             client["loginName"] = _loginName;
             client["loginKey"] = _loginKey;
             client["loginTime"] = _loginTime;
+            client["browser"] = _browser;
+            client["gameName"] = _gameName;
+            client["clientIp"] = _clientIp;
             
 			this.stage.addChild(client);
 			//
