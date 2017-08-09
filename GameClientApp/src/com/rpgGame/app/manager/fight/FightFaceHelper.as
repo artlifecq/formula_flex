@@ -1,6 +1,5 @@
 package com.rpgGame.app.manager.fight
 {
-	import com.game.engine2D.scene.SceneCamera;
 	import com.game.engine3D.controller.CameraController;
 	import com.game.mainCore.libCore.handle.HandleThread;
 	import com.gameClient.alert.AlertPanel;
@@ -9,19 +8,15 @@ package com.rpgGame.app.manager.fight
 	import com.rpgGame.app.fight.spell.SpellResultTweenUtil;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.LostSkillManager;
-	import com.rpgGame.app.manager.hint.FloatingText;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.cfg.LostSkillData;
-	import com.rpgGame.coreData.clientConfig.Q_buff;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
-	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.EnumHurtType;
-	import com.rpgGame.netData.player.bean.AttributeItem;
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
@@ -40,7 +35,6 @@ package com.rpgGame.app.manager.fight
 	import org.game.netCore.data.long;
 	
 	import starling.display.DisplayObject;
-	import starling.display.Sprite;
 
 	/**
 	 * 飘字管理
