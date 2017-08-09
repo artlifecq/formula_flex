@@ -179,11 +179,11 @@ package com.rpgGame.appModule.battle.jjzb
 			if (_leftHeadIcon==null) 
 			{
 				_leftHeadIcon=new UIAsset();
-				_leftHeadIcon.x=19;
-				_leftHeadIcon.y=-17;
+				_leftHeadIcon.x=23;
+				_leftHeadIcon.y=10;
 				skin.container.addChild(_leftHeadIcon);
 			}
-			_leftHeadIcon.styleName=AssetUrl.getRoleHeadUrl(brief.playerAppearanceInfo.job,brief.playerAppearanceInfo.sex);
+			_leftHeadIcon.styleName=AssetUrl.getRoleHeadUrl(brief.playerAppearanceInfo.job,brief.playerAppearanceInfo.sex,"middle");
 		}
 		private function setRightHeadData(brief:ZhengBaBriefInfo,skin:Head__Role_Right):void
 		{
@@ -192,12 +192,12 @@ package com.rpgGame.appModule.battle.jjzb
 			if (_rightHeadIcon==null) 
 			{
 				_rightHeadIcon=new UIAsset();
-				_rightHeadIcon.x=324;
-				_rightHeadIcon.y=-17;
+				_rightHeadIcon.x=318;
+				_rightHeadIcon.y=10;
 				
 				skin.container.addChild(_rightHeadIcon);
 			}
-			_rightHeadIcon.styleName=AssetUrl.getRoleHeadUrl(brief.playerAppearanceInfo.job,brief.playerAppearanceInfo.sex);
+			_rightHeadIcon.styleName=AssetUrl.getRoleHeadUrl(brief.playerAppearanceInfo.job,brief.playerAppearanceInfo.sex,"middle");
 			_rightHeadIcon.scaleX=-1;
 		}
 	}

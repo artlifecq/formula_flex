@@ -19,9 +19,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 		//==========================================================================
 		public var bg1:feathers.controls.UIAsset;
 
-		public var bg2:feathers.controls.UIAsset;
-
-		public var bg3:feathers.controls.UIAsset;
+		public var icon:feathers.controls.UIAsset;
 
 		public var lbId:feathers.controls.Label;
 
@@ -46,9 +44,9 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			super();
 			
 			this.currentState = "normal";
-			this.height = 27;
-			this.width = 386;
-			this.elementsContent = [bg1_i(),bg2_i(),bg3_i(),lbId_i(),lbName_i(),lbLevel_i(),lbJifen_i(),uiVip_i(),selectBg_i(),rdoSelect_i()];
+			this.height = 30;
+			this.width = 545;
+			this.elementsContent = [bg1_i(),icon_i(),lbId_i(),lbName_i(),lbLevel_i(),lbJifen_i(),uiVip_i(),selectBg_i(),rdoSelect_i()];
 			
 			states = {
 			};
@@ -64,34 +62,21 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg1 = temp;
 			temp.name = "bg1";
-			temp.styleName = "ui/app/zhanchang/paihangbang/liebiao_hui.png";
-			temp.width = 386;
+			temp.styleName = "ui/common/titilebg/list.png";
+			temp.width = 545;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
 
-		private function bg2_i():feathers.controls.UIAsset
+		private function icon_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			bg2 = temp;
-			temp.name = "bg2";
-			temp.styleName = "ui/app/zhanchang/paihangbang/liebiao_hei.png";
-			temp.width = 386;
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function bg3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			bg3 = temp;
-			temp.name = "bg3";
-			temp.styleName = "ui/app/zhanchang/paihangbang/liebiao_zong.png";
-			temp.width = 386;
-			temp.x = 0;
-			temp.y = 0;
+			icon = temp;
+			temp.name = "icon";
+			temp.styleName = "ui/app/paihangbang/1.png";
+			temp.x = 33;
+			temp.y = 2;
 			return temp;
 		}
 
@@ -105,8 +90,8 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 40;
-			temp.x = 0;
-			temp.y = 4;
+			temp.x = 26;
+			temp.y = 7;
 			return temp;
 		}
 
@@ -119,9 +104,9 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.textAlign = "center";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 52;
-			temp.x = 328;
-			temp.y = 4;
+			temp.width = 58;
+			temp.x = 443;
+			temp.y = 6;
 			return temp;
 		}
 
@@ -134,9 +119,9 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			temp.textAlign = "center";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 74;
-			temp.x = 238;
-			temp.y = 4;
+			temp.width = 102;
+			temp.x = 300;
+			temp.y = 6;
 			return temp;
 		}
 
@@ -146,13 +131,13 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			lbName = temp;
 			temp.name = "lbName";
 			temp.height = 19;
-			temp.text = "【1000区】玩家名六个字";
+			temp.text = "[1000区]玩家名六个字";
 			temp.textAlign = "left";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 159;
-			temp.x = 47;
-			temp.y = 4;
+			temp.x = 149;
+			temp.y = 6;
 			return temp;
 		}
 
@@ -161,9 +146,9 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			rdoSelect = temp;
 			temp.name = "rdoSelect";
-			temp.height = 29;
+			temp.height = 30;
 			temp.styleClass = org.mokylin.skin.app.zhanchang.paihangbang.ZhanChangPaiHangBtn;
-			temp.width = 386;
+			temp.width = 545;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -174,10 +159,11 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			selectBg = temp;
 			temp.name = "selectBg";
+			temp.height = 30;
 			temp.styleName = "ui/app/zhanchang/paihangbang/select.png";
-			temp.width = 386;
+			temp.width = 545;
 			temp.x = 0;
-			temp.y = -1;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -186,8 +172,8 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiVip = temp;
 			temp.name = "uiVip";
-			temp.styleName = "ui/app/zhanchang/paihangbang/vip.png";
-			temp.x = 34;
+			temp.styleName = "ui/common/tubiao/vips1.png";
+			temp.x = 112;
 			temp.y = 5;
 			return temp;
 		}

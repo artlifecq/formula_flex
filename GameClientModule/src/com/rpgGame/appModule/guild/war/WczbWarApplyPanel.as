@@ -4,6 +4,7 @@ package com.rpgGame.appModule.guild.war
 	import com.rpgGame.app.sender.GuildWarSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.core.events.GuildEvent;
+	import com.rpgGame.netData.guildWar.bean.GuildWarCityApplyInfo;
 	import com.rpgGame.netData.guildWar.message.ResGuildWarChangeMaxPriceMessage;
 	import com.rpgGame.netData.guildWar.message.ResGuildWarCityApplyInfoMessage;
 	
@@ -100,13 +101,13 @@ package com.rpgGame.appModule.guild.war
 				myGuildId=GuildManager.instance().guildData.id.hexValue;
 			}
 			for(var i:int=0;i<num;i++){
-				var obj:Object=_skin.List.dataProvider.getItemAt(i);
-				if(obj.info.id==msg.cityId){
-					obj.info.curMaxPriceGuildId=msg.guildId;
-					obj.info.curMaxPriceGuildName=msg.guildName;
-					obj.info.curMaxPrice=msg.price;
+				var obj:GuildWarCityApplyInfo=_skin.List.dataProvider.getItemAt(i) as GuildWarCityApplyInfo;
+				if(obj.id==msg.cityId){
+					obj.curMaxPriceGuildId=msg.guildId;
+					obj.curMaxPriceGuildName=msg.guildName;
+					obj.curMaxPrice=msg.price;
 					if(msg.guildId.hexValue==myGuildId){
-						obj.applayCityId=msg.cityId;
+						_skin.List.customData.applayCityId=msg.cityId;
 						GuildWarSender.reqGuildWarCityInfo(0);
 					}
 					index=i;
@@ -114,7 +115,11 @@ package com.rpgGame.appModule.guild.war
 				}
 			}
 			if(index!=-1){
-				_skin.List.dataProvider.updateItemAt(index);
+				if(applyCityId!=-1){
+					_skin.List.dataProvider.updateItemAt(index);
+				}else{
+					_skin.List.dataProvider.updateAll();
+				}
 			}
 		}
 		
@@ -124,8 +129,12 @@ package com.rpgGame.appModule.guild.war
 			var i:int;
 			var num:int=msg.citys.length;
 			applyCityId=msg.applyCityId;
+			if(!_skin.List.customData){
+				_skin.List.customData=new Object();
+			}
+			_skin.List.customData.applayCityId=msg.applyCityId;
 			for(i=0;i<num;i++){
-				_skin.List.dataProvider.addItem({info:msg.citys[i],applayCityId:msg.applyCityId});
+				_skin.List.dataProvider.addItem(msg.citys[i]);
 			}
 		}
 	}

@@ -70,8 +70,8 @@ package com.rpgGame.app.ui.scene
 			toPoint.x=actInfo.actCfg.q_move_x;
 			toPoint.y=actInfo.actCfg.q_move_y;
 			//进入就自动挂机战斗
-			MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, toPoint.x, toPoint.y,finishWalk, 100);
-			
+			//MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, toPoint.x, toPoint.y,finishWalk, 100);
+			TrusteeshipManager.getInstance().startAutoFightToPos([SceneSwitchManager.currentMapId,toPoint.x,toPoint.y],1,-1);
 			rewardGrp.clear();
 			rewardGrp.setRewardByJsonStr(actInfo.actCfg.q_rewards);
 			
@@ -122,7 +122,9 @@ package com.rpgGame.app.ui.scene
 			super.onTouchTarget(target);
 			switch(target){
 				case _skin.sec_subbut1:
-					MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, toPoint.x, toPoint.y,finishWalk, 100);
+					var posta:Array=[SceneSwitchManager.currentMapId,toPoint.x,toPoint.y];
+					TrusteeshipManager.getInstance().startAutoFightToPos(posta,1,-1);
+					//MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, toPoint.x, toPoint.y,finishWalk, 100);
 					break;
 				case _skin.sec_subbut2:
 					SceneSender.reqOutMap();
@@ -130,11 +132,11 @@ package com.rpgGame.app.ui.scene
 			}
 		}
 		
-		private function finishWalk(data:Object):void
+		/*private function finishWalk(data:Object):void
 		{
 			TrusteeshipManager.getInstance().findDist=1000;
 			TrusteeshipManager.getInstance().startAutoFight();
-		}
+		}*/
 		
 		override protected function onShow() : void
 		{

@@ -259,8 +259,11 @@ package com.rpgGame.app.manager.role
 			return false;
 		}
 		
-		/**获取一个不带区的名字*/
-		public static function getPlayerName(name:String):String
+		/**获取一个不带区的名字
+		 * 
+		 * length 最大长度，如果超过长度用...代替
+		 * */
+		public static function getPlayerName(name:String,length:int=0):String
 		{
 			var arr:Array= name.split(']');
 			var newname:String="";
@@ -269,6 +272,10 @@ package com.rpgGame.app.manager.role
 				{
 					newname+=arr[i];
 				}
+			}
+			if(length>0&&newname.length>length)
+			{
+				newname=newname.slice(0,length)+"...";
 			}
 			return newname;
 		}		

@@ -32,7 +32,7 @@ package  com.rpgGame.appModule.battle.jcyt
 			super(_skin);
 			this.dragAble=false;
 			_initStr="$s后自动关闭";
-			_gReward=new RewardGroup(IcoSizeEnum.ICON_64,_skin.icon1);
+			_gReward=new RewardGroup(IcoSizeEnum.ICON_64,_skin.icon1,1);
 		}
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{

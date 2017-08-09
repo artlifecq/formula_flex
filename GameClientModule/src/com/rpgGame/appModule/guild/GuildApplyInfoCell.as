@@ -33,11 +33,15 @@ package com.rpgGame.appModule.guild
 			{
 				case _skin.btnCancel:
 					if(GuildManager.instance().applyOperation(0,info.id))
-						this.owner.dataProvider.removeItem(data);
+					{
+						//this.owner.dataProvider.removeItem(data);
+					}
 					break;
 				case _skin.btnOk:
 					if(GuildManager.instance().applyOperation(1,info.id))
-						this.owner.dataProvider.removeItem(data);
+					{
+						//this.owner.dataProvider.removeItem(data);
+					}
 					break;
 			}
 		}

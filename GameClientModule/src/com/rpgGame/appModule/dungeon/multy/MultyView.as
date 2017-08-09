@@ -129,7 +129,7 @@ package com.rpgGame.appModule.dungeon.multy
 			{
 				DungeonSender.reqEnterDungeon(zoneData.q_id);
 				
-				DungeonSender.reqTeamMatchVote(zoneData.q_id,1);
+				//DungeonSender.reqTeamMatchVote(zoneData.q_id,1);
 				
 				//_skin.btnEnter.isEnabled=false;
 				//DungeonManager.selectZid=selectZid;

@@ -13,7 +13,9 @@ package com.rpgGame.app.ui.alert
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
+	import com.rpgGame.netData.backpack.bean.ItemInfo;
 	
+	import flash.geom.Point;
 	import flash.utils.getTimer;
 	
 	import org.mokylin.skin.common.alert.AlertNewWeapon;
@@ -26,7 +28,8 @@ package com.rpgGame.app.ui.alert
 	 */	
 	public class AutoDressAlert extends SkinUI
 	{
-		private static var _ins:AutoDressAlert;;
+		
+		private static var _ins:AutoDressAlert;
 		
 		private var skin:AlertNewWeapon
 		private var okFCallBack:Function;
@@ -74,6 +77,8 @@ package com.rpgGame.app.ui.alert
 					gameTimer.stop();
 					if(okFCallBack != null)
 					{
+						var pos:Point=this.equipIcon.localToGlobal(new Point(0,0));
+						EquipAutoDressEffectPanelExt.addAutoDressEquip((equipIcon.faceInfo as EquipInfo).itemInfo.itemId,pos);
 						okFCallBack(equipIcon.faceInfo);
 					}
 					checkShowNext();

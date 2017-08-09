@@ -39,10 +39,11 @@ package feathers.utils.filter
 		{
 			if (grayFilters.length == 0)
 			{
-				var v:Number = 0.33;
-				var	data:Array = [0.3, 0.59, 0.11, 0, 0,
-					0.3, 0.59, 0.11, 0, 0,
-					0.3, 0.59, 0.11, 0, 0,
+				var v:Number = 0.3;
+				var N:Number=10;
+				var	data:Array = [v, v, v, 0, N,
+					v, v, v, 0, N,
+					v, v, v, 0, N,
 					0, 0, 0, 1, 0];
 				return new starling.filters.ColorMatrixFilter(Vector.<Number>(data));
 			}

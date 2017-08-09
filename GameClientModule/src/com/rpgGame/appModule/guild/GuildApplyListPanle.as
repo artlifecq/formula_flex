@@ -46,14 +46,34 @@ package com.rpgGame.appModule.guild
 			super.show(data,openTable,parentContiner);
 			
 			EventManager.addEvent(GuildEvent.GET_JOIN_GUILD_LIST,refeashView);
+			EventManager.addEvent(GuildEvent.DELETE_GUILD_INVAITE,onDeleteOne);
 			refeashView(null);
 			GuildSender.reqGuildApplyListInfo();
+		}
+		
+		private function onDeleteOne(id:int):void
+		{
+			// TODO Auto Generated method stub
+			var list:Vector.<GuildApplyInfo>=_skin.list.dataProvider.data as Vector.<GuildApplyInfo>;
+			var len:int=list.length;
+			for (var i:int=0;i<len;i++)
+			{
+				if (list[i].id==id) 
+				{
+					//list.removeAt(i);
+					_skin.list.dataProvider.removeItem(list[i]);
+					break;
+				}
+			}
+			//_skin.list.dataProvider.data=list;
+			requestPage(0);
 		}
 		
 		override public function hide():void
 		{
 			super.hide();
 			EventManager.removeEvent(GuildEvent.GET_JOIN_GUILD_LIST,refeashView);
+			EventManager.removeEvent(GuildEvent.DELETE_GUILD_INVAITE,onDeleteOne);
 		}
 		private function requestPage(page:int):void
 		{

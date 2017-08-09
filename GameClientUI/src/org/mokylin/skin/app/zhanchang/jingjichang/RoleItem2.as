@@ -5,7 +5,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import feathers.controls.UINumber;
-	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli;
+	import org.mokylin.skin.component.uinumber.UINumberSkin_zhujuezhandouli;
 
 	/**
 	 * @private
@@ -34,7 +34,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [__RoleItem2_UIAsset1_i(),imgCon_i(),lbLevel_i(),lbName_i(),numZhanli_i(),__RoleItem2_UIAsset2_i()];
+			this.elementsContent = [imgCon_i(),lbLevel_i(),lbName_i(),__RoleItem2_UIAsset2_i(),numZhanli_i()];
 			
 			states = {
 			};
@@ -45,21 +45,12 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __RoleItem2_UIAsset1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhanchang/jingjichang/dizuo2.png";
-			temp.x = 2;
-			temp.y = 299;
-			return temp;
-		}
-
 		private function __RoleItem2_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/zhandouli.png";
-			temp.x = 28;
-			temp.y = 373;
+			temp.styleName = "ui/common/zhandouli2.png";
+			temp.x = 18;
+			temp.y = 369;
 			return temp;
 		}
 
@@ -83,7 +74,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.fontSize = 16;
 			temp.text = "天级魁首";
 			temp.textAlign = "center";
-			temp.color = 0xBEA757;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 81;
 			temp.x = 56;
@@ -99,7 +90,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.fontSize = 14;
 			temp.text = "军安卫士";
 			temp.textAlign = "center";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 100;
 			temp.x = 47;
@@ -112,13 +103,13 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
 			numZhanli = temp;
 			temp.name = "numZhanli";
-			temp.gap = -1;
+			temp.gap = -6;
 			temp.height = 25;
-			temp.label = "65214";
-			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli;
-			temp.width = 89;
-			temp.x = 82;
-			temp.y = 373;
+			temp.label = "629845";
+			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhujuezhandouli;
+			temp.width = 142;
+			temp.x = 74;
+			temp.y = 372;
 			return temp;
 		}
 

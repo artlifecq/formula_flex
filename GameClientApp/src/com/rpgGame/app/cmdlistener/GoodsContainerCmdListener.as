@@ -7,6 +7,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.manager.role.SceneRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.ui.alert.EquipAutoDressEffectPanelExt;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.view.uiComponent.face.cd.CDDataManager;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
@@ -142,6 +143,7 @@ package com.rpgGame.app.cmdlistener
 		{
 			msg.equip.gridId=ItemConfig.getQItemByID(msg.equip.itemModelId).q_kind;
 			GoodsContainerMamager.getMrg(ItemContainerID.Role).addItem(msg.equip);
+			EquipAutoDressEffectPanelExt.checkShowDressEffect(msg.equip);
 		}
 		
 		private function onResStoreItemRemoveMessage(msg:ResStoreItemRemoveMessage):void

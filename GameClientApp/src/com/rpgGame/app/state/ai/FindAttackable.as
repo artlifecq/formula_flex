@@ -92,15 +92,7 @@ package com.rpgGame.app.state.ai
 				if (role &&heroData&& role.usable &&!role.stateMachine.isDeadState&&modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY ||modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND)//if (role && role.usable && role.isInViewDistance && !role.stateMachine.isDeadState)
 				{
 					var dist:int = Point.distance(new Point(MainRoleManager.actor.x,MainRoleManager.actor.z),new Point(role.x,role.z));
-					var max:int;
-					if(TrusteeshipManager.getInstance().findDist>0)
-					{
-						max=TrusteeshipManager.getInstance().findDist*50;
-					}
-					else
-					{
-						max=int(SystemSetManager.getinstance().getValueByIndex(SystemSetManager.SYSTEMSET_HOOK_TYPE)*50);
-					}
+					var max:int=TrusteeshipManager.getInstance().findDist;
 					if(dist<=max&&dist<currDist)
 					{
 						rerlle= role;
@@ -128,15 +120,7 @@ package com.rpgGame.app.state.ai
 					if(TaskMissionManager.isTaskMonster(monsterData.modelID,TaskAutoManager.getInstance().otherType))
 					{
 						var dist:int = Point.distance(new Point(MainRoleManager.actor.x,MainRoleManager.actor.z),new Point(role.x,role.z));
-						var max:int;
-						if(TrusteeshipManager.getInstance().findDist>0)
-						{
-							max=TrusteeshipManager.getInstance().findDist*50;
-						}
-						else
-						{
-							max=int(SystemSetManager.getinstance().getValueByIndex(SystemSetManager.SYSTEMSET_HOOK_TYPE)*50);
-						}
+						var max:int=TrusteeshipManager.getInstance().findDist;
 						if(dist<=max&&dist<currDist)
 						{
 							rerlle= role;
@@ -166,15 +150,7 @@ package com.rpgGame.app.state.ai
 				if (role &&monsterData&& role.usable && monsterData.monsterData.q_monster_type>=1&&monsterData.monsterData.q_monster_type<=3&& !role.stateMachine.isDeadState&&modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY ||modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND)//if (role && role.usable && role.isInViewDistance && !role.stateMachine.isDeadState)
 				{
 					var dist:int = Point.distance(new Point(MainRoleManager.actor.x,MainRoleManager.actor.z),new Point(role.x,role.z));
-					var max:int;
-					if(TrusteeshipManager.getInstance().findDist>0)
-					{
-						max=TrusteeshipManager.getInstance().findDist*50;
-					}
-					else
-					{
-						max=int(SystemSetManager.getinstance().getValueByIndex(SystemSetManager.SYSTEMSET_HOOK_TYPE)*50);
-					}
+					var max:int=TrusteeshipManager.getInstance().findDist;
 					if(dist<=max&&dist<currDist)
 					{
 						rerlle= role;

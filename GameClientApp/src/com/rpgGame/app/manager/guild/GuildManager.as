@@ -1066,8 +1066,9 @@ package com.rpgGame.app.manager.guild
 		
 		public function onReplyGuildApplyOperationHandler(msg:ReplyGuildApplyOperationMessage):void
 		{
+			EventManager.dispatchEvent(GuildEvent.DELETE_GUILD_INVAITE,msg.applyId);
 			// TODO Auto Generated method stub
-			AppManager.showApp(AppConstant.GUILD_APPLAYLIST_PANEL,msg.applyId);
+			//AppManager.showApp(AppConstant.GUILD_APPLAYLIST_PANEL,msg.applyId);
 		}
 		
 		public function onG2CNotifyGuildMemberActiveHandler(msg:G2CNotifyGuildMemberActiveMessage):void

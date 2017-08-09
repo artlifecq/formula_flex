@@ -80,6 +80,7 @@ package com.rpgGame.app.ui.scene.dungeon
 		
 		private function updateEndInfo(success:int,star:int):void
 		{
+			TrusteeshipManager.getInstance().stopAutoFight();
 			stopTimer();
 		}
 		private function updateWaveInfoHandler(currentWaveId:int,killerCount:int):void
@@ -128,7 +129,6 @@ package com.rpgGame.app.ui.scene.dungeon
 			refeashInfo();
 			_endTime = SystemTimeManager.curtTm/1000+_data.q_zone_time;
 			advanceTime(0);
-			TrusteeshipManager.getInstance().startAutoFight();
 		}
 		
 		private function refeashInfo():void
