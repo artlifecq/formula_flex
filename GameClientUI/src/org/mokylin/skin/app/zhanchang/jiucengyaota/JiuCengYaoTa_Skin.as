@@ -73,8 +73,8 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/common/background/neikuang.png";
 			temp.width = 88;
-			temp.x = 585;
-			temp.y = 556;
+			temp.x = 706;
+			temp.y = 555;
 			return temp;
 		}
 
@@ -82,8 +82,8 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/jiucengyaota/zhanchangjiangli.png";
-			temp.x = 216;
-			temp.y = 559;
+			temp.x = 51;
+			temp.y = 557;
 			return temp;
 		}
 
@@ -91,8 +91,8 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/zhanchang/jiucengyaota/shengwangzhi.png";
-			temp.x = 523;
-			temp.y = 559;
+			temp.x = 651;
+			temp.y = 557;
 			return temp;
 		}
 
@@ -113,8 +113,8 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			btnShengwang = temp;
 			temp.name = "btnShengwang";
 			temp.styleClass = org.mokylin.skin.app.zhanchang.button.ButtonShengwangbtn;
-			temp.x = 696;
-			temp.y = 517;
+			temp.x = 840;
+			temp.y = 524;
 			return temp;
 		}
 
@@ -123,7 +123,7 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grp_icon = temp;
 			temp.name = "grp_icon";
-			temp.x = 289;
+			temp.x = 119;
 			temp.y = 542;
 			temp.elementsContent = [icon1_i()];
 			return temp;
@@ -146,8 +146,8 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			iconSw = temp;
 			temp.name = "iconSw";
 			temp.styleName = "ui/common/tubiao/shengwang.png";
-			temp.x = 590;
-			temp.y = 554;
+			temp.x = 711;
+			temp.y = 553;
 			return temp;
 		}
 
@@ -157,11 +157,11 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			lbRank = temp;
 			temp.name = "lbRank";
 			temp.text = "战场日志";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
-			temp.x = 814;
-			temp.y = 565;
+			temp.x = 840;
+			temp.y = 502;
 			return temp;
 		}
 
@@ -174,8 +174,8 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 50;
-			temp.x = 618;
-			temp.y = 559;
+			temp.x = 739;
+			temp.y = 558;
 			return temp;
 		}
 
@@ -184,12 +184,10 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			skinTips = temp;
 			temp.name = "skinTips";
-			temp.height = 297;
 			var skin:StateSkin = new org.mokylin.skin.app.zhanchang.jiucengyaota.Tips_yaota()
 			temp.skin = skin
-			temp.width = 212;
-			temp.x = 717;
-			temp.y = 93;
+			temp.x = 550;
+			temp.y = 223;
 			return temp;
 		}
 

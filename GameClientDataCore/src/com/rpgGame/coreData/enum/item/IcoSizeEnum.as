@@ -25,31 +25,31 @@ package com.rpgGame.coreData.enum.item
 		
 		//寻秦记用以下尺寸
 		/**
-		 *16icon 
+		 *16icon 寻秦记用以下尺寸
 		 */
 		public static const ICON_16:int=16;
 		/**
-		 *19icon 
+		 *19icon 寻秦记用以下尺寸
 		 */
 		public static const ICON_19:int=19;
 		/**
-		 *24icon 
+		 *24icon 寻秦记用以下尺寸
 		 */
 		public static const ICON_24:int=24;
 		/**
-		 *36icon 
+		 *36icon 寻秦记用以下尺寸
 		 */
 		public static const ICON_36:int=36;
 		/**
-		 *42icon 
+		 *42icon 寻秦记用以下尺寸
 		 */
 		public static const ICON_42:int=42;
 		/**
-		 *48icon 
+		 *48icon 寻秦记用以下尺寸
 		 */
 		public static const ICON_48:int=48;
 		/**
-		 *64icon 
+		 *64icon 寻秦记用以下尺寸
 		 */
 		public static const ICON_64:int=64;
 		

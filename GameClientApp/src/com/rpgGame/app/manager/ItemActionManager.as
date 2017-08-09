@@ -163,7 +163,7 @@ package com.rpgGame.app.manager
 		}
 		
 		
-		private static function getBackPackBtnPos():Point
+		public static function getBackPackBtnPos():Point
 		{
 			return MainUIManager.getBtnGolbalPos(MainButtonManager.getButtonName(1));
 		}

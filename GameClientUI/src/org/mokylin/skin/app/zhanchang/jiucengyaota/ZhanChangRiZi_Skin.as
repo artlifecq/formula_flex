@@ -1,13 +1,12 @@
 package org.mokylin.skin.app.zhanchang.jiucengyaota
 {
-	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
 	import feathers.controls.Group;
-	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.common.Flip3_Skin;
+	import org.mokylin.skin.common.TongYongTanKuang_bg;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
 
 	/**
@@ -20,13 +19,13 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var bg:feathers.controls.UIAsset;
+		public var bg:feathers.controls.SkinnableContainer;
 
 		public var btnClose:feathers.controls.Button;
 
 		public var skinFlip:feathers.controls.SkinnableContainer;
 
-		public var title:feathers.controls.Label;
+		public var title:feathers.controls.UIAsset;
 
 		public var uiNo:feathers.controls.UIAsset;
 
@@ -41,7 +40,7 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			this.currentState = "normal";
 			this.height = 437;
 			this.width = 421;
-			this.elementsContent = [bg_i(),__ZhanChangRiZi_Skin_UIAsset1_i(),title_i(),btnClose_i(),__ZhanChangRiZi_Skin_Group1_i(),skinFlip_i(),uiNo_i()];
+			this.elementsContent = [bg_i(),__ZhanChangRiZi_Skin_UIAsset1_i(),btnClose_i(),__ZhanChangRiZi_Skin_Group1_i(),skinFlip_i(),uiNo_i(),title_i()];
 			
 			states = {
 			};
@@ -75,7 +74,8 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 		private function __ZhanChangRiZi_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhanchang/jiucengyaota/zhanchangrizhibg.png";
+			temp.styleName = "ui/common/titilebg/headbg1.png";
+			temp.width = 399;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -126,13 +126,14 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			return temp;
 		}
 
-		private function bg_i():feathers.controls.UIAsset
+		private function bg_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
 			temp.height = 437;
-			temp.styleName = "ui/common/background/erji_kuang.png";
+			var skin:StateSkin = new org.mokylin.skin.common.TongYongTanKuang_bg()
+			temp.skin = skin
 			temp.width = 421;
 			temp.x = 0;
 			temp.y = 0;
@@ -164,23 +165,16 @@ package org.mokylin.skin.app.zhanchang.jiucengyaota
 			return temp;
 		}
 
-		private function title_i():feathers.controls.Label
+		private function title_i():feathers.controls.UIAsset
 		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			title = temp;
 			temp.name = "title";
-			temp.bold = true;
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.letterSpacing = 2;
-			temp.fontSize = 16;
-			temp.text = "战场日志";
-			temp.textAlign = "center";
-			temp.color = 0xDDE2B1;
-			temp.nativeFilters = Fontter.filterObj[""];
-			temp.width = 240;
-			temp.x = 90.5;
-			temp.y = 11;
+			temp.styleName = "ui/app/zhanchang/jiucengyaota/zhanchangrizhi.png";
+			temp.x = 165;
+			temp.y = 6;
 			return temp;
 		}
 

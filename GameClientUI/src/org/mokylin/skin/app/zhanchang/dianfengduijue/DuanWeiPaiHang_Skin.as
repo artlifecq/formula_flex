@@ -1,14 +1,13 @@
 package org.mokylin.skin.app.zhanchang.dianfengduijue
 {
-	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
 	import feathers.controls.Group;
-	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.app.zhanchang.dianfengduijue.DuanWeiList_Head;
 	import org.mokylin.skin.app.zhanchang.dianfengduijue.DuanWeiList_Item;
+	import org.mokylin.skin.common.TongYongTanKuang_bg2;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
 
 	/**
@@ -21,7 +20,7 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var bg:feathers.controls.UIAsset;
+		public var bg:feathers.controls.SkinnableContainer;
 
 		public var btnClose:feathers.controls.Button;
 
@@ -45,7 +44,7 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 
 		public var skinItem5:feathers.controls.SkinnableContainer;
 
-		public var title:feathers.controls.Label;
+		public var title:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -58,7 +57,7 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			this.currentState = "normal";
 			this.height = 411;
 			this.width = 580;
-			this.elementsContent = [bg_i(),title_i(),btnClose_i(),skinDuan1_i(),skinDuan2_i(),skinDuan3_i(),skinDuan4_i(),skinDuan5_i(),skinItem1_i(),skinItem2_i(),skinItem3_i(),skinItem4_i(),skinItem5_i(),__DuanWeiPaiHang_Skin_Group1_i()];
+			this.elementsContent = [bg_i(),__DuanWeiPaiHang_Skin_UIAsset1_i(),btnClose_i(),skinDuan1_i(),skinDuan2_i(),skinDuan3_i(),skinDuan4_i(),skinDuan5_i(),skinItem1_i(),skinItem2_i(),skinItem3_i(),skinItem4_i(),skinItem5_i(),__DuanWeiPaiHang_Skin_Group1_i(),title_i()];
 			
 			states = {
 			};
@@ -74,59 +73,86 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			temp.x = 100;
 			temp.y = 41;
-			temp.elementsContent = [__DuanWeiPaiHang_Skin_UIAsset1_i(),__DuanWeiPaiHang_Skin_Label1_i(),__DuanWeiPaiHang_Skin_Label2_i(),__DuanWeiPaiHang_Skin_Label3_i()];
-			return temp;
-		}
-
-		private function __DuanWeiPaiHang_Skin_Label1_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "排名";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 35;
-			temp.y = 4;
-			return temp;
-		}
-
-		private function __DuanWeiPaiHang_Skin_Label2_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "段位声望奖励";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 187;
-			temp.y = 4;
-			return temp;
-		}
-
-		private function __DuanWeiPaiHang_Skin_Label3_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "升阶积分";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 379;
-			temp.y = 4;
+			temp.elementsContent = [__DuanWeiPaiHang_Skin_UIAsset2_i(),__DuanWeiPaiHang_Skin_UIAsset3_i(),__DuanWeiPaiHang_Skin_UIAsset4_i(),__DuanWeiPaiHang_Skin_UIAsset5_i(),__DuanWeiPaiHang_Skin_UIAsset6_i(),__DuanWeiPaiHang_Skin_UIAsset7_i()];
 			return temp;
 		}
 
 		private function __DuanWeiPaiHang_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhanchang/dianfengduijue/yeqianlan.png";
+			temp.height = 368;
+			temp.styleName = "ui/common/background/neikuang_2.png";
+			temp.width = 474;
+			temp.x = 98;
+			temp.y = 37;
+			return temp;
+		}
+
+		private function __DuanWeiPaiHang_Skin_UIAsset2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 103;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
 
-		private function bg_i():feathers.controls.UIAsset
+		private function __DuanWeiPaiHang_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 244;
+			temp.x = 104;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function __DuanWeiPaiHang_Skin_UIAsset4_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 121;
+			temp.x = 348;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function __DuanWeiPaiHang_Skin_UIAsset5_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/zhanchang/paiming.png";
+			temp.x = 38;
+			temp.y = 5;
+			return temp;
+		}
+
+		private function __DuanWeiPaiHang_Skin_UIAsset6_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/zhanchang/duanweishengwangjiangli.png";
+			temp.x = 170;
+			temp.y = 5;
+			return temp;
+		}
+
+		private function __DuanWeiPaiHang_Skin_UIAsset7_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/zhanchang/shengjiejifen.png";
+			temp.x = 366;
+			temp.y = 5;
+			return temp;
+		}
+
+		private function bg_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
 			temp.height = 411;
-			temp.styleName = "ui/common/background/erji_kuang.png";
+			var skin:StateSkin = new org.mokylin.skin.common.TongYongTanKuang_bg2()
+			temp.skin = skin
 			temp.width = 580;
 			temp.x = 0;
 			temp.y = 0;
@@ -153,8 +179,8 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			var skin:StateSkin = new org.mokylin.skin.app.zhanchang.dianfengduijue.DuanWeiList_Head()
 			temp.skin = skin
 			temp.width = 85;
-			temp.x = 11;
-			temp.y = 37;
+			temp.x = 12;
+			temp.y = 38;
 			return temp;
 		}
 
@@ -167,8 +193,8 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			var skin:StateSkin = new org.mokylin.skin.app.zhanchang.dianfengduijue.DuanWeiList_Head()
 			temp.skin = skin
 			temp.width = 85;
-			temp.x = 11;
-			temp.y = 110;
+			temp.x = 12;
+			temp.y = 112;
 			return temp;
 		}
 
@@ -181,8 +207,8 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			var skin:StateSkin = new org.mokylin.skin.app.zhanchang.dianfengduijue.DuanWeiList_Head()
 			temp.skin = skin
 			temp.width = 85;
-			temp.x = 11;
-			temp.y = 183;
+			temp.x = 12;
+			temp.y = 185;
 			return temp;
 		}
 
@@ -195,8 +221,8 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			var skin:StateSkin = new org.mokylin.skin.app.zhanchang.dianfengduijue.DuanWeiList_Head()
 			temp.skin = skin
 			temp.width = 85;
-			temp.x = 11;
-			temp.y = 256;
+			temp.x = 12;
+			temp.y = 259;
 			return temp;
 		}
 
@@ -209,8 +235,8 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			var skin:StateSkin = new org.mokylin.skin.app.zhanchang.dianfengduijue.DuanWeiList_Head()
 			temp.skin = skin
 			temp.width = 85;
-			temp.x = 11;
-			temp.y = 329;
+			temp.x = 12;
+			temp.y = 332;
 			return temp;
 		}
 
@@ -284,23 +310,16 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			return temp;
 		}
 
-		private function title_i():feathers.controls.Label
+		private function title_i():feathers.controls.UIAsset
 		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			title = temp;
 			temp.name = "title";
-			temp.bold = true;
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.letterSpacing = 2;
-			temp.fontSize = 16;
-			temp.text = "跨服竞技段位表";
-			temp.textAlign = "center";
-			temp.color = 0xDDE2B1;
-			temp.nativeFilters = Fontter.filterObj[""];
-			temp.width = 240;
-			temp.x = 170;
-			temp.y = 11;
+			temp.styleName = "ui/app/zhanchang/kuafujingjiduanweibiao.png";
+			temp.x = 212;
+			temp.y = 7;
 			return temp;
 		}
 

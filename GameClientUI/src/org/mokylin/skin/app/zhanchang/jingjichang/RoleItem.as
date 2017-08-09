@@ -5,7 +5,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import feathers.controls.UINumber;
-	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli;
+	import org.mokylin.skin.component.uinumber.UINumberSkin_zhujuezhandouli;
 
 	/**
 	 * @private
@@ -37,7 +37,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			
 			this.currentState = "normal";
 			this.width = 176;
-			this.elementsContent = [__RoleItem_UIAsset1_i(),imgCon_i(),uiGuan_i(),lbLevel_i(),lbName_i(),numZhanli_i(),__RoleItem_UIAsset2_i()];
+			this.elementsContent = [__RoleItem_UIAsset1_i(),imgCon_i(),uiGuan_i(),lbLevel_i(),lbName_i(),__RoleItem_UIAsset2_i(),numZhanli_i()];
 			
 			states = {
 			};
@@ -60,9 +60,9 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 		private function __RoleItem_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/zhandouli.png";
-			temp.x = 24;
-			temp.y = 358;
+			temp.styleName = "ui/common/zhandouli2.png";
+			temp.x = 17;
+			temp.y = 354;
 			return temp;
 		}
 
@@ -85,7 +85,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.name = "lbLevel";
 			temp.fontSize = 16;
 			temp.text = "第1名";
-			temp.color = 0xBEA757;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 72;
 			temp.x = 65;
@@ -101,7 +101,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.fontSize = 14;
 			temp.text = "军安卫士";
 			temp.textAlign = "center";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 100;
 			temp.x = 46;
@@ -114,13 +114,13 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
 			numZhanli = temp;
 			temp.name = "numZhanli";
-			temp.gap = -1;
+			temp.gap = -6;
 			temp.height = 25;
-			temp.label = "65214";
-			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli;
-			temp.width = 89;
-			temp.x = 78;
-			temp.y = 358;
+			temp.label = "629845";
+			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhujuezhandouli;
+			temp.width = 142;
+			temp.x = 73;
+			temp.y = 357;
 			return temp;
 		}
 

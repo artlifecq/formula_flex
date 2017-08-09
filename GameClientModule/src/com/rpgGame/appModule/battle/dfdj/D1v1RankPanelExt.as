@@ -55,8 +55,8 @@ package com.rpgGame.appModule.battle.dfdj
 			_myCell=new D1v1RankCellExt(0);
 			_myCell.isMy(true);
 			
-			_myCell.x=27;
-			_myCell.y=386;
+			_myCell.x=21;
+			_myCell.y=415;
 			_myCell.visible=false;
 			_skin.container.addChild(_myCell);
 			var tmp:D1v1RankCellExt;

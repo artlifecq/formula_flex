@@ -6,7 +6,7 @@ package org.mokylin.skin.app.zhanchang.shangdian
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.component.button.ButtonSkin_putong;
+	import org.mokylin.skin.component.button.ButtonSkin_putong4;
 
 	/**
 	 * @private
@@ -51,8 +51,8 @@ package org.mokylin.skin.app.zhanchang.shangdian
 			super();
 			
 			this.currentState = "normal";
-			this.height = 124;
-			this.width = 271;
+			this.height = 117;
+			this.width = 270;
 			this.elementsContent = [__ShengWangItem_UIAsset1_i(),icons_i(),lbName_i(),lbXiangou_i(),grpJiage_i(),grpJiage2_i(),btnBuy_i()];
 			
 			states = {
@@ -91,11 +91,11 @@ package org.mokylin.skin.app.zhanchang.shangdian
 			temp.name = "btnBuy";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "购 买";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong4;
 			temp.color = 0xFFFFFF;
 			temp.width = 110;
-			temp.x = 121;
-			temp.y = 84;
+			temp.x = 133;
+			temp.y = 82;
 			return temp;
 		}
 
@@ -104,8 +104,8 @@ package org.mokylin.skin.app.zhanchang.shangdian
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grpJiage2 = temp;
 			temp.name = "grpJiage2";
-			temp.x = 121;
-			temp.y = 40;
+			temp.x = 134;
+			temp.y = 31;
 			temp.elementsContent = [lbNowPrice_i(),uiYuanbao2_i(),lbYuanbao2_i()];
 			return temp;
 		}
@@ -115,8 +115,8 @@ package org.mokylin.skin.app.zhanchang.shangdian
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grpJiage = temp;
 			temp.name = "grpJiage";
-			temp.x = 121;
-			temp.y = 40;
+			temp.x = 134;
+			temp.y = 31;
 			temp.elementsContent = [__ShengWangItem_Label1_i(),uiYuanbao_i(),lbYuanbao_i(),uiLine_i()];
 			return temp;
 		}
@@ -127,8 +127,8 @@ package org.mokylin.skin.app.zhanchang.shangdian
 			icons = temp;
 			temp.name = "icons";
 			temp.styleName = "ui/common/grid/normal/64.png";
-			temp.x = 19;
-			temp.y = 36;
+			temp.x = 28;
+			temp.y = 35;
 			return temp;
 		}
 
@@ -138,13 +138,14 @@ package org.mokylin.skin.app.zhanchang.shangdian
 			lbName = temp;
 			temp.name = "lbName";
 			temp.bold = false;
+			temp.fontSize = 16;
 			temp.text = "装备名字六字";
 			temp.textAlign = "center";
-			temp.color = 0xBEA757;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 151;
 			temp.x = 60;
-			temp.y = 10;
+			temp.y = 4;
 			return temp;
 		}
 
@@ -154,7 +155,7 @@ package org.mokylin.skin.app.zhanchang.shangdian
 			lbNowPrice = temp;
 			temp.name = "lbNowPrice";
 			temp.text = "售价：";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 0;
 			temp.y = 4;
@@ -167,10 +168,10 @@ package org.mokylin.skin.app.zhanchang.shangdian
 			lbXiangou = temp;
 			temp.name = "lbXiangou";
 			temp.text = "每日限购： 0/10";
-			temp.color = 0x2083B9;
+			temp.color = 0x14A3F3;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 121;
-			temp.y = 66;
+			temp.x = 134;
+			temp.y = 56;
 			return temp;
 		}
 
@@ -180,7 +181,7 @@ package org.mokylin.skin.app.zhanchang.shangdian
 			lbYuanbao2 = temp;
 			temp.name = "lbYuanbao2";
 			temp.text = "750";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 46;
 			temp.x = 66;

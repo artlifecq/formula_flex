@@ -79,7 +79,7 @@ package com.rpgGame.appModule.battle.jjzb
 			_initPointStr=_infoSkin.lbShengWang.text;
 			_logSkin.uiUp.visible=false;
 			_logSkin.labTitle0.visible=false;
-			_logSkin.imgBg.height=27;
+			_logSkin.imgBg.height=22;
 			
 			_costArr=JSONUtil.decode(GlobalSheetData.getStrValue(809));
 			
@@ -152,7 +152,7 @@ package com.rpgGame.appModule.battle.jjzb
 			else
 			{
 				_logSkin.labTitle0.visible=false;
-				_logSkin.imgBg.height=27;
+				_logSkin.imgBg.height=22;
 			}
 			
 		}
