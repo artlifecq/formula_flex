@@ -443,13 +443,6 @@ package com.rpgGame.app.state.role.action
 				}
 				if (_stateReference)
 					_stateReference.breakFrame();
-				
-//				if((_machine as RoleStateMachine).isTripleLockCaseSpell&&(_machine.getReference(TripleAttackSpellLockStateReference) as TripleAttackSpellLockStateReference).isTripleSkill(AttackStateReference(_ref).spellInfo.spellData.q_skillID))
-//				{
-//					var ref:CheckTripleAttackStateReference=_machine.getReference(CheckTripleAttackStateReference) as CheckTripleAttackStateReference;
-//					ref.setParams(AttackStateReference(_ref).spellInfo.spellData.q_skillID);
-//					transition(RoleStateType.CONTROL_TRIPLE_ATTACK_CHECK,ref);
-//				}
 			}
 			
 		}
