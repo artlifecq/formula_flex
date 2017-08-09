@@ -221,7 +221,7 @@ package com.rpgGame.appModule.guild.war
 				}else{
 					htmlStr=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"[占领时间]:");
 					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,info.occupyDay+"\n");
-					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"[占]");
+//					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"[占]");
 					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,info.occupyGuildName);
 				}
 				nm.lbTxt.htmlText=htmlStr;
