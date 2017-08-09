@@ -6,6 +6,7 @@ package com.client
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	
 	import away3d.Away3D;
+	import away3d.containers.PlanarContainer3D;
 	import away3d.debug.AwayStats;
 	import away3d.enum.LoadPriorityType;
 	import away3d.loaders.multi.MultiUrlLoadManager;
@@ -33,6 +34,7 @@ package com.client
 			ClientConfig.isMapUseAtf = true;
 //			GlobalConfig.MAP_2D_CAMERA_ANGLE = 45;
 			GlobalConfig.mapCameraAngle = -40;
+			PlanarContainer3D.planarRotationX = GlobalConfig.mapCameraAngle;
 			
 			GlobalConfig.setGlobalConfig(null, VersionUtils.getVersionPath);
 			
