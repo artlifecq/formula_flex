@@ -49,9 +49,7 @@ package com.rpgGame.app.state.role.control
 		
 		override public function leavePass(nextState:IState, force:Boolean=false):Boolean
 		{
-			// TODO Auto Generated method stub
 			return super.leavePass(nextState, force);
 		}
-		
 	}
 }

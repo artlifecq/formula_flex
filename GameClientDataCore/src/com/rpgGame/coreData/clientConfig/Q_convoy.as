@@ -22,6 +22,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_nameurl:String;
 		 /**  护送奖励 */
 		public var q_reward:String;
+		 /**  等级区间[起始等级、终点等级、等级跨度] */
+		public var q_level_rank:String;
 		 /**  接任务npc */
 		public var q_accept:int;
 		 /**  交任务npc */

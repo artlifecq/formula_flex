@@ -46,7 +46,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const HintTypeSetInfo:String = "data.HintTypeSetInfo";
 		/**  区域数据库						 */
 		public static const Q_area:String = "data.map.Q_area";
-		/**本列取消，安全区改为刷格方式 */
+		/**  							本列取消，安全区改为刷格方式								本列取消																																															 */
 		public static const Q_map:String = "data.map.Q_map";
 		/**  场景特效动态生成表						 */
 		public static const Q_map_effect:String = "data.map.Q_map_effect";
@@ -84,7 +84,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const MountModel:String = "data.model.MountModel";
 		/**  3 怪物基本信息数据库																																																																					绑定器			 */
 		public static const Q_monster:String = "data.monster.Q_monster";
-		/**  NPC配置数据库																											 */
+		/**  NPC配置数据库																												 */
 		public static const Q_npc:String = "data.monster.Q_npc";
 		/**  定点刷怪数据库 -- 编辑器录入									 */
 		public static const Q_scene_monster:String = "data.monster.Q_scene_monster";
@@ -108,7 +108,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_cheats:String = "data.Q_cheats";
 		/**  经脉冲穴数据库																 */
 		public static const Q_cheats_node:String = "data.Q_cheats_node";
-		/**  押镖护宝											 */
+		/**  押镖护宝												 */
 		public static const Q_convoy:String = "data.Q_convoy";
 		/**  资源副本数据库	副本类型 （1真气,2装备,3经验）	背景图													 */
 		public static const Q_daily_zone:String = "data.Q_daily_zone";
@@ -126,7 +126,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_equip_strength:String = "data.Q_equip_strength";
 		/**  					 */
 		public static const Q_equip_wash:String = "data.Q_equip_wash";
-		/**  				 */
+		/**  					 */
 		public static const Q_equip_wash_attr:String = "data.Q_equip_wash_attr";
 		/**  战魂升级数据						 */
 		public static const Q_fightsoul:String = "data.Q_fightsoul";
@@ -184,7 +184,7 @@ package com.rpgGame.coreData.clientConfig
 		public static const Q_mibao_point:String = "data.Q_mibao_point";
 		/**  秦陵秘宝怪物配置					 */
 		public static const Q_mibao_reward:String = "data.Q_mibao_reward";
-		/**  任务表(所有任务都这里) */
+		/**  任务表(所有任务都这里)																																														 */
 		public static const Q_mission_base:String = "data.Q_mission_base";
 		/**  任务奖励配置表			 */
 		public static const Q_mission_reword:String = "data.Q_mission_reword";

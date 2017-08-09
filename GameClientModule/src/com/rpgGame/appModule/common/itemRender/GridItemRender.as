@@ -39,12 +39,12 @@ package com.rpgGame.appModule.common.itemRender
 		
 		override public function get width():Number
 		{
-			return size + (padding+1)*2;
+			return grid.width;
 		}
 		
 		override public function get height():Number
 		{
-			return size +  (padding+1)*2;
+			return grid.height;
 		}
 		
 		protected var grid:DragDropItem;
@@ -54,13 +54,8 @@ package com.rpgGame.appModule.common.itemRender
 			
 			this.grid = new DragDropItem(size,itemIndex++);
 			this.grid.setBg( bg );
-			grid.width = this.width;
-			grid.height = this.height;
 			this.grid.dragAble = true;
-			
-			this.grid.x = grid.y = padding;
 			this.addChild(this.grid);
-			this.width = this.height = size + (padding+1)*2;
 		}
 		
 		override protected function commitData():void

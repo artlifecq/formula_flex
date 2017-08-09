@@ -57,12 +57,12 @@ package com.rpgGame.app.state.ai
 				castSpell = CastSpellHelper.getSortCastSpell();
 			}
 			
-			if(castSpell.q_relate_spells != "")
+			if(castSpell && castSpell.q_relate_spells != "")
 			{
 				TrusteeshipManager.getInstance().isNormalSpell = true;
 			}
 			else
-			{Lyt.a("isNormalSpell-6");
+			{
 				TrusteeshipManager.getInstance().isNormalSpell = false;
 			}
 			

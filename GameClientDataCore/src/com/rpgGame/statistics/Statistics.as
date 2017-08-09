@@ -20,9 +20,7 @@ package com.rpgGame.statistics
         }
         
         public function pushNode(nodeId : int) : void {
-            CONFIG::Debug {
-                return;
-            }
+            if(ClientConfig.isDebug)return;
             var nodeInfo : NodeInfo = this.nodeInfoList[nodeId];
             if (null == nodeInfo) {
                 return;
