@@ -1,7 +1,7 @@
 package com.rpgGame.core.utils
 {
 	
-
+	
 	/**
 	 *
 	 * 数字工具类 
@@ -45,6 +45,25 @@ package com.rpgGame.core.utils
 		public static function combin($value0:uint, $value1:uint, $value2:uint, $value3:uint) : uint
 		{
 			return ($value0<<24) | ($value1<<16) | ($value2<<8) | ($value3);
+		}
+		
+		/**数字转汉字*/
+		public static function getNumberTo(num:Number,isshow:Boolean=false):String
+		{
+			var sub:String;
+			if(isshow){
+				if(num>10000)//&&num<1000000)
+				{
+					sub=(num/10000).toFixed(0)+"万";
+					return sub;
+				}
+//				else if(num>=1000000)
+//				{
+//					sub=(num/1000000).toFixed(0)+"百万";
+//					return sub;
+//				}
+			}
+			return num.toString();
 		}
 	}
 }
