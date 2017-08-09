@@ -35,7 +35,7 @@ package org.mokylin.skin.app.paihangbang
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [bg_i(),__PaiHangBangTotal_Skin_UIAsset1_i(),__PaiHangBangTotal_Skin_UIAsset2_i(),__PaiHangBangTotal_Skin_UIAsset3_i(),__PaiHangBangTotal_Skin_UIAsset4_i(),__PaiHangBangTotal_Skin_UIAsset5_i(),__PaiHangBangTotal_Skin_UIAsset6_i(),tabBar_i()];
+			this.elementsContent = [bg_i(),__PaiHangBangTotal_Skin_UIAsset1_i(),__PaiHangBangTotal_Skin_UIAsset2_i(),__PaiHangBangTotal_Skin_UIAsset5_i(),__PaiHangBangTotal_Skin_UIAsset6_i(),__PaiHangBangTotal_Skin_Group1_i(),tabBar_i()];
 			
 			states = {
 			};
@@ -53,10 +53,89 @@ package org.mokylin.skin.app.paihangbang
 			return temp;
 		}
 
+		private function __PaiHangBangTotal_Skin_Group1_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			temp.x = 22;
+			temp.y = 114;
+			temp.elementsContent = [__PaiHangBangTotal_Skin_UIAsset7_i(),__PaiHangBangTotal_Skin_UIAsset8_i(),__PaiHangBangTotal_Skin_UIAsset9_i(),__PaiHangBangTotal_Skin_UIAsset10_i(),__PaiHangBangTotal_Skin_UIAsset11_i(),__PaiHangBangTotal_Skin_UIAsset12_i(),__PaiHangBangTotal_Skin_UIAsset13_i(),__PaiHangBangTotal_Skin_UIAsset14_i(),__PaiHangBangTotal_Skin_UIAsset15_i(),__PaiHangBangTotal_Skin_UIAsset16_i()];
+			return temp;
+		}
+
 		private function __PaiHangBangTotal_Skin_HorizontalLayout1_i():feathers.layout.HorizontalLayout
 		{
 			var temp:feathers.layout.HorizontalLayout = new feathers.layout.HorizontalLayout();
 			temp.gap = 1;
+			return temp;
+		}
+
+		private function __PaiHangBangTotal_Skin_UIAsset10_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/paihangbang/list.png";
+			temp.width = 546;
+			temp.x = 0;
+			temp.y = 93;
+			return temp;
+		}
+
+		private function __PaiHangBangTotal_Skin_UIAsset11_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/paihangbang/list.png";
+			temp.width = 546;
+			temp.x = 0;
+			temp.y = 124;
+			return temp;
+		}
+
+		private function __PaiHangBangTotal_Skin_UIAsset12_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/paihangbang/list.png";
+			temp.width = 546;
+			temp.x = 0;
+			temp.y = 155;
+			return temp;
+		}
+
+		private function __PaiHangBangTotal_Skin_UIAsset13_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/paihangbang/list.png";
+			temp.width = 546;
+			temp.x = 0;
+			temp.y = 186;
+			return temp;
+		}
+
+		private function __PaiHangBangTotal_Skin_UIAsset14_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/paihangbang/list.png";
+			temp.width = 546;
+			temp.x = 0;
+			temp.y = 217;
+			return temp;
+		}
+
+		private function __PaiHangBangTotal_Skin_UIAsset15_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/paihangbang/list.png";
+			temp.width = 546;
+			temp.x = 0;
+			temp.y = 248;
+			return temp;
+		}
+
+		private function __PaiHangBangTotal_Skin_UIAsset16_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/paihangbang/list.png";
+			temp.width = 546;
+			temp.x = 0;
+			temp.y = 304;
 			return temp;
 		}
 
@@ -82,24 +161,6 @@ package org.mokylin.skin.app.paihangbang
 			return temp;
 		}
 
-		private function __PaiHangBangTotal_Skin_UIAsset3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/paihangbang/bg2.png";
-			temp.x = 569;
-			temp.y = 540;
-			return temp;
-		}
-
-		private function __PaiHangBangTotal_Skin_UIAsset4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/big_bg/paihangbang/bg0.png";
-			temp.x = 574;
-			temp.y = 89;
-			return temp;
-		}
-
 		private function __PaiHangBangTotal_Skin_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -117,6 +178,36 @@ package org.mokylin.skin.app.paihangbang
 			temp.styleName = "ui/app/paihangbang/bg1.png";
 			temp.x = 21;
 			temp.y = 480;
+			return temp;
+		}
+
+		private function __PaiHangBangTotal_Skin_UIAsset7_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/paihangbang/list.png";
+			temp.width = 546;
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
+		private function __PaiHangBangTotal_Skin_UIAsset8_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/paihangbang/list.png";
+			temp.width = 546;
+			temp.x = 0;
+			temp.y = 31;
+			return temp;
+		}
+
+		private function __PaiHangBangTotal_Skin_UIAsset9_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/paihangbang/list.png";
+			temp.width = 546;
+			temp.x = 0;
+			temp.y = 62;
 			return temp;
 		}
 

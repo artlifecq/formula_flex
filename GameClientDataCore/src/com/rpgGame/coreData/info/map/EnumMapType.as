@@ -21,7 +21,7 @@ package com.rpgGame.coreData.info.map
 		/**
 		 * 真气副本
 		 */
-		public static const MAP_TYPE_Genuine:int = rEnum.next;//3
+		public static const MAP_TYPE_GENUINE:int = rEnum.next;//3
 		
 		/**
 		 * 装备副本

@@ -51,8 +51,6 @@ package com.rpgGame.appModule.guild.war
 		private static const WAR_HC:int=11;
 		private static const LOSE_HC:int=12;
 		
-		private static const WC_IDS:Array=[EnumCity.WANG_CHENG];
-		
 		
 		private var _skin:WangCheng_Skin;
 		private var _currentMap:GuildWarMapUI;
@@ -315,7 +313,7 @@ package com.rpgGame.appModule.guild.war
 			if(currentCityId==EnumCity.WANG_CHENG){
 				cityName=EnumCity.getCityHCName(fightInfo.areaId);
 			}else{
-				cityName=EnumCity.getCityName(fightInfo.areaId);
+				cityName=EnumCity.getCityName(fightInfo.id);
 			}
 			_skin.lbHead.htmlText="占领"+cityName;
 			_skin.lbName1.htmlText="";
@@ -324,19 +322,19 @@ package com.rpgGame.appModule.guild.war
 			_skin.lbTime.text="";
 			
 			var cityStyleName:String="weicheng1";
-			var flagStyleName:String="xiwei";
+			var flagStyleName:String="kuaiji";
 			switch(currentCityId){
 				case EnumCity.XI_WEI:
 					cityStyleName="weicheng1";
-					flagStyleName="xiwei";
+					flagStyleName="kuaiji";
 					break;
 				case EnumCity.ZHONG_WEI:
 					cityStyleName="weicheng2";
-					flagStyleName="zhongwei";
+					flagStyleName="qufu";
 					break;
 				case EnumCity.DONG_WEI:
 					cityStyleName="weicheng3";
-					flagStyleName="dongwei";
+					flagStyleName="gusu";
 					break;
 				case EnumCity.WANG_CHENG:
 					cityStyleName="wangcheng3";
@@ -365,7 +363,7 @@ package com.rpgGame.appModule.guild.war
 			if(currentCityId==EnumCity.WANG_CHENG){
 				cityName=EnumCity.getCityHCName(fightInfo.areaId);
 			}else{
-				cityName=EnumCity.getCityName(fightInfo.areaId);
+				cityName=EnumCity.getCityName(fightInfo.id);
 			}
 			_skin.lbHead.htmlText="防守"+cityName;
 			_skin.lbName1.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,fightInfo.attackGuildName);
@@ -376,19 +374,19 @@ package com.rpgGame.appModule.guild.war
 			_gTimer.start();
 			
 			var cityStyleName:String="weicheng1";
-			var flagStyleName:String="xiwei";
+			var flagStyleName:String="kuaiji";
 			switch(currentCityId){
 				case EnumCity.XI_WEI:
 					cityStyleName="weicheng1";
-					flagStyleName="xiwei";
+					flagStyleName="kuaiji";
 					break;
 				case EnumCity.ZHONG_WEI:
 					cityStyleName="weicheng2";
-					flagStyleName="zhongwei";
+					flagStyleName="qufu";
 					break;
 				case EnumCity.DONG_WEI:
 					cityStyleName="weicheng3";
-					flagStyleName="dongwei";
+					flagStyleName="gusu";
 					break;
 			}
 			var wangChengNames:Array=["handan","daliang","chengdu","linzi"];
@@ -408,7 +406,7 @@ package com.rpgGame.appModule.guild.war
 			if(currentCityId==EnumCity.WANG_CHENG){
 				cityName=EnumCity.getCityHCName(fightInfo.areaId);
 			}else{
-				cityName=EnumCity.getCityName(fightInfo.areaId);
+				cityName=EnumCity.getCityName(fightInfo.id);
 			}
 			_skin.lbHead.htmlText="进攻"+cityName;
 			_skin.lbName1.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,fightInfo.attackGuildName);
@@ -420,19 +418,19 @@ package com.rpgGame.appModule.guild.war
 			_gTimer.start();
 			
 			var cityStyleName:String="weicheng1";
-			var flagStyleName:String="xiwei";
+			var flagStyleName:String="kuaiji";
 			switch(currentCityId){
 				case EnumCity.XI_WEI:
 					cityStyleName="weicheng1";
-					flagStyleName="xiwei";
+					flagStyleName="kuaiji";
 					break;
 				case EnumCity.ZHONG_WEI:
 					cityStyleName="weicheng2";
-					flagStyleName="zhongwei";
+					flagStyleName="qufu";
 					break;
 				case EnumCity.DONG_WEI:
 					cityStyleName="weicheng3";
-					flagStyleName="dongwei";
+					flagStyleName="gusu";
 					break;
 				case EnumCity.WANG_CHENG:
 					cityStyleName="wangcheng3";
@@ -458,7 +456,7 @@ package com.rpgGame.appModule.guild.war
 			if(currentCityId==EnumCity.WANG_CHENG){
 				cityName=EnumCity.getCityHCName(fightInfo.areaId);
 			}else{
-				cityName=EnumCity.getCityName(fightInfo.areaId);
+				cityName=EnumCity.getCityName(fightInfo.id);
 			}
 			_skin.lbHead.htmlText="竞拍"+cityName;
 			_skin.lbName1.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,"当前出价最高帮派:");
@@ -473,19 +471,19 @@ package com.rpgGame.appModule.guild.war
 			_gTimer.start();
 			
 			var cityStyleName:String="weicheng1";
-			var flagStyleName:String="xiwei";
+			var flagStyleName:String="kuaiji";
 			switch(currentCityId){
 				case EnumCity.XI_WEI:
 					cityStyleName="weicheng1";
-					flagStyleName="xiwei";
+					flagStyleName="kuaiji";
 					break;
 				case EnumCity.ZHONG_WEI:
 					cityStyleName="weicheng2";
-					flagStyleName="zhongwei";
+					flagStyleName="qufu";
 					break;
 				case EnumCity.DONG_WEI:
 					cityStyleName="weicheng3";
-					flagStyleName="dongwei";
+					flagStyleName="gusu";
 					break;
 			}
 			var wangChengNames:Array=["handan","daliang","chengdu","linzi"];
@@ -529,7 +527,7 @@ package com.rpgGame.appModule.guild.war
 			if(currentCityId==EnumCity.WANG_CHENG){
 				cityName=EnumCity.getCityHCName(fightInfo.areaId);
 			}else{
-				cityName=EnumCity.getCityName(fightInfo.areaId);
+				cityName=EnumCity.getCityName(fightInfo.id);
 			}
 			_skin.lbHead.htmlText="准备进攻"+cityName;
 			_skin.lbName1.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,fightInfo.attackGuildName);
@@ -541,19 +539,19 @@ package com.rpgGame.appModule.guild.war
 			_gTimer.start();
 			
 			var cityStyleName:String="weicheng1";
-			var flagStyleName:String="xiwei";
+			var flagStyleName:String="kuaiji";
 			switch(currentCityId){
 				case EnumCity.XI_WEI:
 					cityStyleName="weicheng1";
-					flagStyleName="xiwei";
+					flagStyleName="kuaiji";
 					break;
 				case EnumCity.ZHONG_WEI:
 					cityStyleName="weicheng2";
-					flagStyleName="zhongwei";
+					flagStyleName="qufu";
 					break;
 				case EnumCity.DONG_WEI:
 					cityStyleName="weicheng3";
-					flagStyleName="dongwei";
+					flagStyleName="gusu";
 					break;
 			}
 			var wangChengNames:Array=["handan","daliang","chengdu","linzi"];
@@ -567,11 +565,13 @@ package com.rpgGame.appModule.guild.war
 		
 		private function getCityStateForData(info:GuildWarCityInfo,myGuildId:String):int
 		{
-			if(!info.occupyGuildId&&!info.attackGuildId){//进攻方和防守方都没有那就是空城
-				return -1;
-			}
-			if(info.attackGuildId.hexValue!=myGuildId&&info.occupyGuildId.hexValue!=myGuildId){//攻方不是自己守方不是自己
-				return -1;
+			if(info.id!=EnumCity.WANG_CHENG&&info.id!=EnumCity.HUANG_CHENG){
+				if(!info.occupyGuildId&&!info.attackGuildId){
+					return -1;
+				}
+				if(info.attackGuildId&&info.attackGuildId.hexValue!=myGuildId&&info.occupyGuildId&&info.occupyGuildId.hexValue!=myGuildId){//攻方不是自己守方不是自己
+					return -1;
+				}
 			}
 			var result:int=1;
 			fightInfo=info;
@@ -592,7 +592,7 @@ package com.rpgGame.appModule.guild.war
 					break;
 				case 3://准备战斗
 					result=PRE_WAR_STATE;
-					if(WC_IDS.indexOf(info.id)!=-1){//是王城
+					if(info.id==EnumCity.WANG_CHENG){//是王城
 						result=PRE_WAR_WC;
 					}
 					if(info.id==EnumCity.HUANG_CHENG){//是皇城
@@ -605,7 +605,7 @@ package com.rpgGame.appModule.guild.war
 					}else if(info.attackGuildId.hexValue==myGuildId){//攻击
 						result=ATTACK_STATE;
 					}
-					if(WC_IDS.indexOf(info.id)){//是王城
+					if(info.id==EnumCity.WANG_CHENG){//是王城
 						result=WAR_WC;
 					}
 					if(info.id==EnumCity.HUANG_CHENG){//是皇城

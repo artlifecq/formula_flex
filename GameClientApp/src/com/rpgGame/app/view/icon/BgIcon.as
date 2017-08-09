@@ -112,7 +112,7 @@ package com.rpgGame.app.view.icon
 			_qualityImage.styleName = ClientConfig.getQualityBg( _qualityId ,iconSize);
 			_qualityImage.visible=true;	
 			_qualityImage.width=_qualityImage.height=_iconSize;
-			if(qualityID>Quality.YELLOW){
+			if(qualityID>Quality.WHITE){
 				showQualityEft();
 			}else{
 				if(_qualityEft){
@@ -131,17 +131,9 @@ package com.rpgGame.app.view.icon
 				_qualityEft.removeChildren();
 			}
 			_qualityEft.touchable=false;
-			if(_qualityId==Quality.GREEN){
-				EftMcManager.setMcStyle(_qualityEft,"UIMovieClipQ_quality_zi");
-			}else{
-				EftMcManager.setMcStyle(_qualityEft,"UIMovieClipQ_quality_huang");
-			}
-			//			var scaleV:Number=(90/64);
+			EftMcManager.setMcStyle(_qualityEft,Quality.getQualityStyleName(_qualityId));
 			_qualityEft.width=this.width;
 			_qualityEft.height=this.width;
-			//			var xy:Number=-1*(_iconSize/64)*(90-64)/2
-			//			_qualityEft.x=xy;
-			//			_qualityEft.y=xy;
 		}		
 		
 		/** 隐藏品质框 */		
