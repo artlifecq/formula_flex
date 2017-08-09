@@ -1213,20 +1213,20 @@ package com.rpgGame.app.cmdlistener.scene
 				var qmap:Q_map=cfg.getData();
 				if(qmap.q_rebirth_autofight==1&&cfg.getData().q_autofight_seat){//进入后自动战斗
 					var p:Array=JSONUtil.decode(cfg.getData().q_autofight_seat);
-					MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, p[0], p[1],finishWalk, 100);
+					//MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, p[0], p[1],finishWalk, 100);
+					var pos:Array=[SceneSwitchManager.currentMapId,p[0],p[1]];
+					TrusteeshipManager.getInstance().startAutoFightToPos(pos,1,-1);
+				}
+				else
+				{
+					TaskAutoManager.getInstance().stopAll();//死亡复活终止挂机
 				}
 			}
 			else
 			{
 				role.mouseEnable = true;
 			}
-			TaskAutoManager.getInstance().stopAll();//死亡复活终止挂机
-		}
-		
-		private static function finishWalk(data:Object):void
-		{
-			TrusteeshipManager.getInstance().findDist=1000;
-			TrusteeshipManager.getInstance().startAutoFight();
+			
 		}
 		
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

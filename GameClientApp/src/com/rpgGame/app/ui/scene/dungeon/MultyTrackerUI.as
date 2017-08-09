@@ -220,14 +220,15 @@ package com.rpgGame.app.ui.scene.dungeon
 			var pos:Point=DungeonManager.getStagePos(id);
 			if(pos)
 			{
-				MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, pos.x, pos.y,finishWalk, 100);
+				TrusteeshipManager.getInstance().startAutoFightToPos([SceneSwitchManager.currentMapId,pos.x,pos.y],1,-1);
+				//MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, pos.x, pos.y,finishWalk, 100);
 			}
 		}
-		private function finishWalk(data:Object):void
+		/*private function finishWalk(data:Object):void
 		{
 			TrusteeshipManager.getInstance().findDist=1000;
 			TrusteeshipManager.getInstance().startAutoFight();
-		}
+		}*/
 		private function setTitle():void
 		{
 			var zoneData:Q_zone=ZoneCfgData.getZoneCfg(zoneId);
