@@ -213,7 +213,7 @@ package com.rpgGame.app.manager.task
 				{
 					if((getTimer()-_techTime)>=AUTOMAIN)
 					{
-						resetTechTime();Lyt.a("startTaskAuto1");
+						resetTechTime();
 						startTaskAuto(TaskType.MAINTYPE_MAINTASK);
 					}
 					

@@ -62,7 +62,7 @@ package com.rpgGame.app.state.ai
 				TrusteeshipManager.getInstance().isNormalSpell = true;
 			}
 			else
-			{Lyt.a("isNormalSpell-6");
+			{
 				TrusteeshipManager.getInstance().isNormalSpell = false;
 			}
 			
