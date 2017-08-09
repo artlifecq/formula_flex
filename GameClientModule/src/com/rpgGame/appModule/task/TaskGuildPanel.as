@@ -116,11 +116,15 @@ package com.rpgGame.appModule.task
 		}
 		override public function hide():void 
 		{
-			super.hide();
 			timer.stop();
 			currtimer=TIMERDATA_1;
-			TweenLite.killDelayedCallsTo(subFinish);
-			TweenLite.delayedCall(0.5, subFinish);
+			if(this.visible&&this.parent!=null&&TaskMissionManager.getTaskIsFinishByType(TaskType.MAINTYPE_GUILDDAILYTASK))
+			{
+				icoListGroup.tweeRewardInBag();
+				TweenLite.killDelayedCallsTo(subFinish);
+				TweenLite.delayedCall(0.5, subFinish);
+			}
+			super.hide();
 		}
 		
 		
@@ -151,14 +155,6 @@ package com.rpgGame.appModule.task
 				//TaskUtil.setRewordInfo(taskData.q_reword_id,icoList,icoBgList,true);
 				icoListGroup.setRewardByArray(TaskMissionCfgData.getRewordById(taskData.q_reword_id,MainRoleManager.actorInfo.job,MainRoleManager.actorInfo.sex));
 				icoListGroup.visible=true;
-				if(TaskMissionManager.getTaskIsFinishByType(TaskType.MAINTYPE_GUILDDAILYTASK))
-				{
-					okBut.isEnabled=true;
-				}
-				else
-				{
-					okBut.isEnabled=false;
-				}
 				
 			}
 			

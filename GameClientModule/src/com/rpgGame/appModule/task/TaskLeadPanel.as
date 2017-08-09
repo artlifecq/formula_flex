@@ -142,7 +142,7 @@ package com.rpgGame.appModule.task
 		{
 			timer.stop();
 			currtimer=TIMERDATA_1;
-			if(this.visible&&this.parent!=null)
+			if(this.visible&&this.parent!=null&&TaskMissionManager.getMainTaskIsFinish())
 			{
 				icoListGroup.tweeRewardInBag();
 				TweenLite.killDelayedCallsTo(subFinish);

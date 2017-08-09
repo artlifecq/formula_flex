@@ -176,7 +176,7 @@ package com.rpgGame.app.state.role
 			{
 				if (walkRole.stateMachine.isAttackHarding)
 				{
-					TweenLite.delayedCall(0.2, doWalkToPos, [role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite,true]);
+					TweenLite.delayedCall(1, doWalkToPos, [role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite,true]);
 					return false;
 				}
 				else
