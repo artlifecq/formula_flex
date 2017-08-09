@@ -58,7 +58,7 @@ package com.rpgGame.app.ui.scene.dungeon
 			
 			if(arr)
 			{
-				arr=arr[getJob()];
+				arr=arr[2];
 				for(var i:int=0;i<arr.length;i++)
 				{
 					if(arr[i].mod==1)
@@ -67,19 +67,6 @@ package com.rpgGame.app.ui.scene.dungeon
 			}
 			var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(1,exp);
 			FaceUtil.SetItemGrid(_ico,itemInfo);
-		}
-		
-		private function getJob():int
-		{
-			var job:int=MainRoleManager.actorInfo.job;
-			switch(job)
-			{
-				case JobEnum.ROLE_1_TYPE: return 0;
-				case JobEnum.ROLE_2_TYPE:
-				case JobEnum.ROLE_3_TYPE: return 1;
-				case JobEnum.ROLE_4_TYPE: return 2;
-			}
-			return 0;
 		}
 		
 		override protected function onShow() : void
