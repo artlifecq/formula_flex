@@ -174,7 +174,8 @@ package com.rpgGame.app.fight.spell
 			{
 				var fightTargetMsg:ResFightBroadcastMessage = msg as ResFightBroadcastMessage;
 				_spellData = SpellDataManager.getSpellDataWithID(fightTargetMsg.skillModelId);
-				
+				if(_spellData==null)
+					return;
 				_releaseAngle = fightTargetMsg.fightDirection;
 				_releaseAngle = (_releaseAngle + 270) % 360;
 				

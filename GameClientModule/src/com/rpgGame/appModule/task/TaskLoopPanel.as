@@ -124,7 +124,7 @@ package com.rpgGame.appModule.task
 			
 			timer.stop();
 			currtimer=TIMERDATA;
-			if(this.visible&&this.parent!=null)
+			if(this.visible&&this.parent!=null&&TaskMissionManager.getTreasuerTaskIsFinish())
 			{
 				subFinish();
 			}
