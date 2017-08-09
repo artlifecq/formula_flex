@@ -184,9 +184,9 @@ package com.rpgGame.app.ui.scene
 			hidekillInfo();
 			
 			var monsterDataList:Vector.<Q_mibao_monster>;
+			var wave:int=MibaoManager.getCurrWave();
 			if(!MibaoManager.isKillAllBytype())
 			{
-				var wave:int=MibaoManager.getCurrWave();
 				monsterDataList=MibaoCfgData.getMonsterListByWaveId(MibaoManager.zoneid,wave);
 			}
 			else
@@ -219,6 +219,12 @@ package com.rpgGame.app.ui.scene
 						
 					}
 					
+				}
+				monsterBank=DailyZoneMonsterCfgData.getZoneCfg(monsterDataList[0].q_id);
+				if(monsterBank)
+				{
+					var pos:Array=[SceneSwitchManager.currentMapId,monsterBank.q_x,monsterBank.q_y];
+					TrusteeshipManager.getInstance().startAutoFightToPos(pos,1,-1);
 				}
 			}
 			/*var monsterDataList:Vector.<Q_mibao_monster>;
@@ -308,11 +314,11 @@ package com.rpgGame.app.ui.scene
 			var length:int=msg.BossDamageInfos.length<=3?msg.BossDamageInfos.length:3
 			for(i=0;i<length;i++)
 			{
-				hitList[i].lbName.text=msg.BossDamageInfos[i].playerName;
+				hitList[i].lbName.text=MainRoleManager.getPlayerName(msg.BossDamageInfos[i].playerName,6);
 				hitList[i].lbNum.text=msg.BossDamageInfos[i].damage+"("+int(msg.BossDamageInfos[i].damage/msg.totalHp*100)+"%)";
 			}
 			hitList[3].lbNo.text=msg.rank.toString();
-			hitList[3].lbName.text=MainRoleManager.actorInfo.name;
+			hitList[3].lbName.text=MainRoleManager.getPlayerName(MainRoleManager.actorInfo.name,6);
 			hitList[3].lbNum.text=msg.damage+"("+int(msg.damage/msg.totalHp*100)+"%)";
 			if(MibaoManager.getBossHp()>0)
 			{
@@ -357,7 +363,7 @@ package com.rpgGame.app.ui.scene
 				remainTime=rTime;
 				_skin.sec_info.text=TimeUtil.format3TimeType(remainTime);
 				TimerServer.remove(updateTime);
-				TimerServer.addLoop(updateTime,1000);
+				TimerServer.addLoop(updateTime,1000);	
 			}
 		}
 		
@@ -444,17 +450,18 @@ package com.rpgGame.app.ui.scene
 				monsterBank=DailyZoneMonsterCfgData.getZoneCfg(monsterData.q_id);
 				if(monsterBank)
 				{
-					MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, monsterBank.q_move_x,-Math.abs(monsterBank.q_move_y),finishWalk, 100);
+					TrusteeshipManager.getInstance().startAutoFightToPos([SceneSwitchManager.currentMapId,monsterBank.q_move_x,monsterBank.q_move_y],1,-1);
+					//MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, monsterBank.q_move_x,-Math.abs(monsterBank.q_move_y),finishWalk, 100);
 				}
 				
 			}
 			
 		}
-		private function finishWalk(data:Object):void
+		/*private function finishWalk(data:Object):void
 		{
 			TrusteeshipManager.getInstance().findDist=1000;
 			TrusteeshipManager.getInstance().startAutoFight();
-		}
+		}*/
 		/**UI刷新*/
 		private function setUiRefresh():void
 		{

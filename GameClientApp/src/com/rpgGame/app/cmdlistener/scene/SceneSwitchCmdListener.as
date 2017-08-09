@@ -190,14 +190,15 @@ package com.rpgGame.app.cmdlistener.scene
 			var qmap:Q_map=cfg.getData();
 			if(qmap.q_enter_autofight==1&&cfg.getData().q_autofight_seat){//进入后自动战斗
 				var p:Array=JSONUtil.decode(cfg.getData().q_autofight_seat);
-				MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, p[0], p[1],finishWalk, 0);
+				//MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, p[0], p[1],finishWalk, 0);
+				TrusteeshipManager.getInstance().startAutoFightToPos([SceneSwitchManager.currentMapId,p[0],p[1]],1,-1);
 			}
 		}
 		
-		private static function finishWalk(data:Object):void
+		/*private static function finishWalk(data:Object):void
 		{
 			TrusteeshipManager.getInstance().findDist=1000;
 			TrusteeshipManager.getInstance().startAutoFight();
-		}
+		}*/
 	}
 }
