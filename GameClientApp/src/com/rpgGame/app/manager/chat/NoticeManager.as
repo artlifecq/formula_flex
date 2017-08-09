@@ -7,6 +7,10 @@ package com.rpgGame.app.manager.chat
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_notify;
 	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
+	import com.rpgGame.coreData.utils.ByteUtil;
+	import com.rpgGame.netData.player.message.SCNoticeMessage;
+	
+	import flash.utils.ByteArray;
 	
 	/**
 	 *提示消息管理器
@@ -184,6 +188,36 @@ package com.rpgGame.app.manager.chat
 				}
 			}
 		}
+		
+		/**
+		 *显示一个提示 根据后台通知 
+		 * 
+		 */
+		public static function showNotifyByMsg(msg:SCNoticeMessage):void
+		{
+			var args:Array = [];
+			for(var i:int = 0;i<msg.values.length;i++)
+			{
+				args.push(msg.values[i]);
+			}
+			
+			var id:int=msg.noticeIndex&0xffffff;
+			var tp:int=(msg.noticeIndex>>24)&0xff;
+			var notiMsg:Q_notify = NotifyCfgData.getNotifyByID(id);
+			if(tp==CHAT_CHUANWEN||tp==CHAT_GONGGAO)
+			{
+				words=ChatUtil.getNoticeMessageHtml(notiMsg.q_content,"",args);
+				notify(tp, words);
+			}
+			else
+			{
+				var words : String = LanguageConfig.replaceStr1(notiMsg.q_content,args);
+				words=ChatUtil.replaceStr2(words);
+				notify(tp, words);
+			}
+		}
+		
+		
 		/**
 		 *显示一个提示 根据配置id 
 		 * 
