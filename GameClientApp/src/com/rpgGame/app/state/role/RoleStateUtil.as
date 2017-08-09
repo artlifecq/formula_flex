@@ -130,6 +130,7 @@ package com.rpgGame.app.state.role
 		public static function walkToPos(role : SceneRole, pos : Vector3D, spacing : int = 0, data : Object = null, 
 										 onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null,needSprite:Boolean=false) : Boolean
 		{
+			TweenLite.killDelayedCallsTo(doWalkTo);
 			if (!role || !role.usable)
 				return false;
 			
@@ -154,6 +155,8 @@ package com.rpgGame.app.state.role
 				var nowTime : int = getTimer();
 				if (nowTime - RoleStateUtil.lastWalkTime < RoleStateUtil.WALK_DELAY)
 				{
+					Lyt.a("寻路太频繁");
+					TweenLite.delayedCall(RoleStateUtil.WALK_DELAY*0.001, doWalkTo, [role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite]);//寻路太频繁并不是不处理了，可以延时执行
 					return false;
 				}
 			}

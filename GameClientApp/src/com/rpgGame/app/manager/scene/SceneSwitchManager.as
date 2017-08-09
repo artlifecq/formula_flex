@@ -42,6 +42,7 @@ package com.rpgGame.app.manager.scene
 	import com.rpgGame.coreData.cfg.MapPreLoadData;
 	import com.rpgGame.coreData.cfg.country.CountryNameCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_map_preload;
+	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.map.EnumMapType;
 	import com.rpgGame.coreData.info.map.SceneData;
@@ -663,6 +664,18 @@ package com.rpgGame.app.manager.scene
 			switch(sceneData.mapType){
 				case EnumMapType.MAP_TYPE_LUNJIAN://打开论剑
 					AppManager.showApp(AppConstant.SWORD_PANL);
+					break;
+				case EnumMapType.MAP_TYPE_MULTY:
+					AppManager.showApp(AppConstant.MULTY_PANL,null,EmFunctionID.EM_DUORENFUBEN);
+					break;
+				case EnumMapType.MAP_TYPE_GENUINE:
+					AppManager.showApp(AppConstant.MULTY_PANL,null,EmFunctionID.EM_ZHENGQIFUBEN);
+					break;
+				case EnumMapType.MAP_TYPE_EQUIP:
+					AppManager.showApp(AppConstant.MULTY_PANL,null,EmFunctionID.EM_ZHUANGBEIFUBEN);
+					break;
+				case EnumMapType.MAP_TYPE_EXP:
+					AppManager.showApp(AppConstant.MULTY_PANL,null,EmFunctionID.EM_JINGYANFUBEN);
 					break;
 			}
 			

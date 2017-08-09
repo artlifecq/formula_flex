@@ -127,7 +127,7 @@ package com.rpgGame.appModule.dungeon.multy
 			if(zoneData==null||multyData==null)return;
 			if(MainRoleManager.actorInfo.totalStat.level>=zoneData.q_level)
 			{
-				DungeonSender.reqEnterDungeon(zoneData.q_id);
+				//DungeonSender.reqEnterDungeon(zoneData.q_id);
 				
 				DungeonSender.reqTeamMatchVote(zoneData.q_id,1);
 				

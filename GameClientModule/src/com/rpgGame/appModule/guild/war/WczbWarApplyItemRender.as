@@ -49,7 +49,7 @@ package com.rpgGame.appModule.guild.war
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
 			super.onTouchTarget(target);
-			var info:GuildWarCityApplyInfo=_data.info as GuildWarCityApplyInfo;
+			var info:GuildWarCityApplyInfo=_data as GuildWarCityApplyInfo;
 			if(target==skin.btnPai){
 				var op:int;
 				switch(info.id){
@@ -75,14 +75,15 @@ package com.rpgGame.appModule.guild.war
 		{
 			super.commitData();
 			if(_skin){
-				var info:GuildWarCityApplyInfo=_data.info as GuildWarCityApplyInfo;
+				var info:GuildWarCityApplyInfo=_data as GuildWarCityApplyInfo;
+				var applayCityId:int=this.owner.customData.applayCityId;
 				skin.lbCityName.text=info.name;
-				skin.lbTeamName1.text=info.occupyGuildName&&info.occupyGuildName.length!=0?info.occupyGuildName:"无";
-				skin.lbTeamName2.text=info.curMaxPriceGuildName&&info.curMaxPriceGuildName.length!=0?info.curMaxPriceGuildName:"无";
+				skin.lbTeamName1.text=info.occupyGuildName&&info.occupyGuildName.length!=0?getNoZoneName(info.occupyGuildName):"无";
+				skin.lbTeamName2.text=info.curMaxPriceGuildName&&info.curMaxPriceGuildName.length!=0?getNoZoneName(info.curMaxPriceGuildName):"无";
 				skin.lbJiage.text=info.curMaxPrice.toString();
 				_leftTime=info.overTime;
 				skin.lbTime.text=TimeUtil.format3TimeType(_leftTime);
-				if(info.id==_data.applayCityId||_data.applayCityId==-1){
+				if(info.id==applayCityId||applayCityId==-1){
 					GrayFilter.unGray(skin.btnPai);
 				}else{
 					GrayFilter.gray(skin.btnPai);
@@ -90,10 +91,16 @@ package com.rpgGame.appModule.guild.war
 			}
 		}
 		
+		private function getNoZoneName(name:String):String
+		{
+			var index:int=name.indexOf("]");
+			return name.slice(index+1);
+		}
+		
 		public function updateTime():void
 		{
 			_leftTime--;
-			_data.info.overTime=_leftTime;
+			_data.overTime=_leftTime;
 			if(_leftTime<0){//竞拍结束自动关闭
 				AppManager.hideApp(AppConstant.GUILD_WCZB_APPLY);
 				return;

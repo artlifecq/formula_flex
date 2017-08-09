@@ -58,8 +58,8 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			icon1 = temp;
 			temp.name = "icon1";
 			temp.styleName = "ui/common/grid/normal/36.png";
-			temp.x = 101;
-			temp.y = 9;
+			temp.x = 145;
+			temp.y = 12;
 			return temp;
 		}
 
@@ -72,8 +72,8 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			temp.height = 25;
 			temp.label = "1168";
 			temp.styleClass = org.mokylin.skin.app.zhanchang.uinumber.UINumberNumber4;
-			temp.width = 101;
-			temp.x = 358;
+			temp.width = 87;
+			temp.x = 378;
 			temp.y = 22;
 			return temp;
 		}

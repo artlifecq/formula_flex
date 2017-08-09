@@ -15,6 +15,7 @@ package com.rpgGame.appModule.battle.dfdj
 	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.coreData.cfg.BattleRankCfg;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.TipsCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_battle_rank;
 	import com.rpgGame.coreData.type.CharAttributeType;
@@ -105,7 +106,7 @@ package com.rpgGame.appModule.battle.dfdj
 			_skin.Pro_duanwei.value=per*100;
 			_skin.icon.styleName=Mgr.d1v1Mgr.getRankIconUrl(rank,0);
 			
-			_skin.lbCiShu.text=data.currentNumber+"";
+			_skin.lbCiShu.text=data.currentNumber+"/"+GlobalSheetData.getIntValue(816);
 			_skin.lbSheng.text=data.reputation+"";
 			
 			var state:int=arg[0];

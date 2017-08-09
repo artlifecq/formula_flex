@@ -25,33 +25,11 @@ package com.rpgGame.app.view.icon
 		 */	
 		private var _realIndex:int;
 		
-		protected var _tishiEff:InterObject3D;
-		private var _tishiEffContaner:Inter3DContainer;
-		
-		
 		public function DragDropItem($iconSize:int, realIndex:int)
 		{
 			super($iconSize);
 			_realIndex = realIndex;
 			this.touchGroup = false;
-			_tishiEffContaner=new Inter3DContainer();
-			this.addChildAt(_tishiEffContaner,numChildren);
-		}
-		
-		/**设置框是否能装备 装备栏显示用*/
-		public function showTiShi(bool:Boolean):void
-		{
-			if(bool){
-				_tishiEff=_tishiEffContaner.playInter3DAt(ClientConfig.getEffect("ui_juesezhuangbeikuang"),0,0,0);
-			}
-			else{
-				if(_tishiEff){
-					_tishiEff.stop();
-					_tishiEff.removeFromParent();
-					_tishiEff.dispose();
-					_tishiEff=null;
-				}
-			}
 		}
 		
 		/**
@@ -137,7 +115,6 @@ package com.rpgGame.app.view.icon
 			_isSelect=value;
 			this.setIsSelect(value);
 		}
-		
 		
 		override public function set isGary(value : Boolean) : void
 		{

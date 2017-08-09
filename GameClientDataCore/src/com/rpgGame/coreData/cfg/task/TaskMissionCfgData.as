@@ -146,7 +146,7 @@ package com.rpgGame.coreData.cfg.task
 			}
 			return null;
 		}
-		/**根据任务ID获取奖励物品列表*/
+		/**根据职业和性别获取奖励物品列表*/
 		public static function getRewordByJobsex(reward:String,job:int,sex:int) :Array 
 		{
 			var rewordList:Array=new Array();

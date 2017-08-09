@@ -25,6 +25,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.core.events.VipEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.VipCfg;
@@ -60,7 +61,7 @@ package com.rpgGame.appModule.role
 	import org.mokylin.skin.app.beibao.juese_Skin;
 	
 	import starling.filters.GlowFilter;
-
+	
 	/**
 	 *装备部分
 	 * @author dik
@@ -74,8 +75,8 @@ package com.rpgGame.appModule.role
 		private var equipNum:int=10;
 		private var bgList:Array=[GridBGType.EQUIP_WEAPON,GridBGType.EQUIP_HELM,GridBGType.EQUIP_ARMOR,GridBGType.EQUIP_LEGHARNESS,GridBGType.EQUIP_SHOE,GridBGType.EQUIP_SCAPULA,
 			GridBGType.EQUIP_RING,GridBGType.EQUIP_NECKLACE,GridBGType.EQUIP_BRACER,GridBGType.EQUIP_JADE];
-/*		private var equipsTypes:Array=[EquipType.WEAPON,EquipType.HELM,EquipType.ARMOR,EquipType.LEGHARNESS,EquipType.SHOE,EquipType.SCAPULA,
-			EquipType.RING,EquipType.NECKLACE,EquipType.BRACER,EquipType.JADE];*/
+		/*		private var equipsTypes:Array=[EquipType.WEAPON,EquipType.HELM,EquipType.ARMOR,EquipType.LEGHARNESS,EquipType.SHOE,EquipType.SCAPULA,
+		EquipType.RING,EquipType.NECKLACE,EquipType.BRACER,EquipType.JADE];*/
 		private var equipsTypes:Array=[EquipType.WEAPON,EquipType.HELM,EquipType.ARMOR,EquipType.LEGHARNESS,EquipType.SHOE,EquipType.SCAPULA,
 			EquipType.RING,EquipType.NECKLACE,EquipType.BRACER,EquipType.JADE];
 		private var equipGrids:Vector.<DragDropItem>;
@@ -90,13 +91,16 @@ package com.rpgGame.appModule.role
 		private var _roleData:HeroData;
 		private var isMainRole:Boolean;
 		private var otherItems:Vector.<ItemInfo>;
-
+		
 		private var glowfilter:GlowFilter;
 		private var glowTween:TweenLite;
 		private var nextBlur:Number;
 		
 		private var _vipIcon:DragDropItem;
 		private var _marryIcon:DragDropItem;
+		
+		private var _tishiEff:InterObject3D;
+		private var _tishiEffContaner:Inter3DContainer;
 		public function AvatarView(skin:juese_Skin)
 		{
 			acceptDropFromContainerIdArr=[ItemContainerID.BackPack];
@@ -105,11 +109,13 @@ package com.rpgGame.appModule.role
 			_zhandouliEftContaner=new Inter3DContainer();
 			var index:int=_skin.container.getChildIndex(_skin.weapons);
 			_skin.container.addChildAt(_zhandouliEftContaner,index);
+			_tishiEffContaner=new Inter3DContainer();
+			_skin.weapons.addChild(_tishiEffContaner);
 			_mgr=RoleEquipmentManager.instance;
 			initAvatar();
 			initEquips();
 			setGridsCount(equipNum);
-//			_skin.ui_zhandou.visible=false;
+			//			_skin.ui_zhandou.visible=false;
 		}
 		
 		private function initEquips():void
@@ -128,7 +134,7 @@ package com.rpgGame.appModule.role
 			}
 			_vipIcon=new DragDropItem(IcoSizeEnum.ICON_48,-1);
 			_vipIcon.bindBg(_skin.Icbg11);
-		/*	_vipIcon.x=301;
+			/*	_vipIcon.x=301;
 			_vipIcon.y=(10-5)*59;*/
 			_skin.weapons.addChild(_vipIcon);
 			
@@ -143,7 +149,7 @@ package com.rpgGame.appModule.role
 		{
 			var render:GridItemRender = new GridItemRender(IcoSizeEnum.ICON_48,bg);
 			var grid:DragDropItem = render.getGrid();
-//			grid.onTouchEndCallBack = onTouchGrid;
+			//			grid.onTouchEndCallBack = onTouchGrid;
 			grid.doubleClickFun=onDoubleClick;
 			return grid;
 		}
@@ -180,7 +186,7 @@ package com.rpgGame.appModule.role
 			initEvent();
 			
 			isMainRole=MainRoleManager.actorInfo==data;
-		
+			
 			var gridNum:int=equipGrids.length;
 			for(var i:int=0;i<gridNum;i++){
 				equipGrids[i].dragAble=isMainRole;
@@ -318,8 +324,8 @@ package com.rpgGame.appModule.role
 			if(info&&info.containerID==0){
 				var index:int=equipsTypes.indexOf(info.qItem.q_kind);
 				equipGrids[index].filter=null;
-//				equipGrids[index].showTiShi(false);
-//				trace("拖动结束了");
+				showTiShi(equipGrids[index],false);
+				//				trace("拖动结束了");
 			}
 		}
 		
@@ -335,9 +341,34 @@ package com.rpgGame.appModule.role
 				var index:int=equipsTypes.indexOf(info.qItem.q_kind);
 				equipGrids[index].filter=glowfilter;
 				onGlowTween();
-//				if((equipGrids[index].faceInfo as EquipInfo).qItem.q_level<info.qItem.q_level&&info.qItem.q_level<=MainRoleManager.actorInfo.totalStat.level)
-//				equipGrids[index].showTiShi(true);
-//				trace("开始拖动了");
+				if((equipGrids[index].faceInfo as EquipInfo).qItem.q_level<info.qItem.q_level&&info.qItem.q_level<=MainRoleManager.actorInfo.totalStat.level&&(info.qItem.q_job==MainRoleManager.actorInfo.job||info.qItem.q_job==0))
+				{
+					showTiShi(equipGrids[index],true);
+				}
+				//				trace("开始拖动了");
+			}
+		}
+		
+		/**设置框是否能装备 装备栏显示用*/
+		public function showTiShi(item:DragDropItem,bool:Boolean):void
+		{
+			
+			if(bool){
+				if(_tishiEff==null)
+					_tishiEff=_tishiEffContaner.playInter3DAt(ClientConfig.getEffect("ui_juesezhuangbeikuang"),item.x+item.width/2+3,item.y+item.height/2+3,0);
+				else {
+					_tishiEff.start();
+					_tishiEff.x=item.x+item.width/2+3;
+					_tishiEff.y=item.y+item.height/2+3;
+					_tishiEff.visible=true;
+				}
+				MCUtil.BringToTop(_tishiEffContaner);
+			}
+			else{
+				if(_tishiEff){
+					_tishiEff.stop();
+					_tishiEff.visible=false;
+				}
 			}
 		}
 		
@@ -394,6 +425,12 @@ package com.rpgGame.appModule.role
 			EventManager.removeEvent(HunYinEvent.HUNYIN_HUNYIN,onGetMarrriageData);
 			EventManager.removeEvent(HunYinEvent.HUNYIN_JINJIE_CHENGGONG,onGetMarrriageData);
 			_marryIcon.clear();
+			if(_tishiEff){
+				_tishiEff.stop();
+				_tishiEff.removeFromParent();
+				_tishiEff.dispose();
+				_tishiEff=null;
+			}
 		}
 		
 		private function onGetMarrriageData():void
@@ -520,14 +557,14 @@ package com.rpgGame.appModule.role
 		
 		private function updateBaseInfo():void
 		{
-//			var zoneInddex:int=info.name.indexOf("]")+1;
-//			var zone:String=info.name.substr(0,zoneInddex);
-//			var roleName:String=info.name.substr(zoneInddex);
+			//			var zoneInddex:int=info.name.indexOf("]")+1;
+			//			var zone:String=info.name.substr(0,zoneInddex);
+			//			var roleName:String=info.name.substr(zoneInddex);
 			_skin.txt_roleName.text=_roleData.name;
-//			_skin.txt_qu.text=zone;
-//			_skin.txt_type.text=_roleData.jobName;//新版没有职业了
+			//			_skin.txt_qu.text=zone;
+			//			_skin.txt_type.text=_roleData.jobName;//新版没有职业了
 			_skin.txt_team.text=_roleData.societyName;
-		
+			
 			_skin.txt_roleName.width=_skin.txt_roleName.textWidth;
 			_skin.txt_roleName.x=(_skin.headMsg.width-_skin.txt_roleName.width)/2;
 			
@@ -539,14 +576,14 @@ package com.rpgGame.appModule.role
 		{
 			_skin.numLevel.label=_roleData.totalStat.level.toString();
 			
-//			_skin.txt_loveName.visible=_skin.LoveIcon.visible=false;
+			//			_skin.txt_loveName.visible=_skin.LoveIcon.visible=false;
 			
 			_skin.txt_loveName.text=_roleData.loveName.length!=0?_roleData.loveName:"";
 			_skin.NumZhanli.number=_roleData.totalStat.getStatValue(CharAttributeType.FIGHTING);
-//			_skin.NumZhanli.width=_skin.NumZhanli.bounds.width;
+			//			_skin.NumZhanli.width=_skin.NumZhanli.bounds.width;
 			_skin.NumZhanli.bounds.width=_skin.NumZhanli.width;
-//			_skin.Num_zhandouli.number=1000;
-//			_skin.NumZhanli.x=128+(135-_skin.NumZhanli.width)/2;
+			//			_skin.Num_zhandouli.number=1000;
+			//			_skin.NumZhanli.x=128+(135-_skin.NumZhanli.width)/2;
 		}
 		
 		private function updateRole(type:int=-1):void
@@ -562,7 +599,7 @@ package com.rpgGame.appModule.role
 				this._avatarRole.updateWithRenderUnitID(type,_roleData.avatarInfo);
 			}
 			
-//			RoleFaceMaskEffectUtil.addAvatarMask(AvatarMaskType.DIALOG_MASK,_avatar,144,-371,1.7);
+			//			RoleFaceMaskEffectUtil.addAvatarMask(AvatarMaskType.DIALOG_MASK,_avatar,144,-371,1.7);
 		}
 	}
 }

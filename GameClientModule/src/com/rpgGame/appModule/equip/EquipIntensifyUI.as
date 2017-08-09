@@ -343,9 +343,16 @@ package com.rpgGame.appModule.equip
 			deleteItems(selectedUse,itemInfo);
 			refreshUseEquipGrid();
 			//			_goodsContainerUse1.refleshGridsByDatas(selectedUse);
-			_goodsContainerUse.setGrayIsSelect(itemInfo,false);
-			
-			if(itemInfo.qItem.q_type==GoodsType.STRENGTH||isStren(itemInfo as EquipInfo)){
+			if(itemInfo.qItem.q_type!=GoodsType.STRENGTH){
+				_goodsContainerUse.setGrayIsSelect(itemInfo,false);
+			}else if(itemInfo.qItem.q_type==GoodsType.STRENGTH){		
+				var info:ClientItemInfo=_goodsContainerUse.getDragDropItemByLong(itemInfo.itemInfo.itemId);
+				if(info){
+					info.count = info.itemInfo.num-getItemNum(info);
+					_goodsContainerUse.setGrayIsSelect(info,false);
+				}
+			}
+			if(itemInfo.qItem.q_type!=GoodsType.STRENGTH&&isStren(itemInfo as EquipInfo)){
 				_goodsContainerTarget.setGrayIsSelect(itemInfo,false);
 			}
 			addExp-=itemInfo.qItem.q_strengthen_num;
@@ -353,6 +360,18 @@ package com.rpgGame.appModule.equip
 				addExp=0;
 			}
 			updateView();
+		}
+		
+		private function getItemNum(info:ClientItemInfo):int
+		{
+			if(selectedUse==null||selectedUse.length==0) return 0;
+			var num:int=0;
+			for(var i:int=0;i<selectedUse.length;i++)
+			{
+				if(selectedUse[i].itemInfo.itemId.EqualTo(info.itemInfo.itemId))
+					num++;
+			}
+			return num;
 		}
 		
 		private function refreshUseEquipGrid():void
@@ -410,17 +429,37 @@ package com.rpgGame.appModule.equip
 		
 		private function setUseItem(itemInfo:ClientItemInfo):void
 		{
-			_goodsContainerUse.setGrayIsSelect(itemInfo,true);
-			
-			if(itemInfo.qItem.q_type==GoodsType.STRENGTH||isStren(itemInfo as EquipInfo)){
+			if(itemInfo.qItem.q_type!=GoodsType.STRENGTH) //如果是装备直接设置为选中
+			{
+				_goodsContainerUse.setGrayIsSelect(itemInfo,true);
+				selectedUse.push(itemInfo);
+				refreshUseEquipGrid();
+				addExp+=itemInfo.qItem.q_strengthen_num;
+				updateView();
+			}
+			else if(itemInfo.qItem.q_type==GoodsType.STRENGTH){ //如果是材料 则检测是否消耗完 未消耗完则不设为选中
+				if(itemInfo.count>0)
+				{
+					var info:ClientItemInfo=ItemUtil.convertClientItemInfoById(itemInfo.qItem.q_id);
+					info.itemInfo.itemId=itemInfo.itemInfo.itemId;
+					info.count=1;
+					if(!_isMax&&selectedUse.length<6)
+					{
+						selectedUse.push(info);
+						refreshUseEquipGrid();
+						addExp+=info.qItem.q_strengthen_num;
+						updateView();
+						itemInfo.count=itemInfo.itemInfo.num-getItemNum(info);
+					}
+					if(itemInfo.count>0)
+						_goodsContainerUse.setGrayIsSelect(itemInfo,false);	
+					else
+						_goodsContainerUse.setGrayIsSelect(itemInfo,true);	
+				}
+			}
+			if(itemInfo.qItem.q_type!=GoodsType.STRENGTH&&isStren(itemInfo as EquipInfo)){
 				_goodsContainerTarget.setGrayIsSelect(itemInfo,true);
 			}
-			
-			selectedUse.push(itemInfo);
-			//			_goodsContainerUse1.refleshGridsByDatas(selectedUse);
-			refreshUseEquipGrid();
-			addExp+=itemInfo.qItem.q_strengthen_num;
-			updateView();
 		}
 		
 		private  function onAlert(gameAlert:GameAlert,datas:Array):void
@@ -827,15 +866,24 @@ package com.rpgGame.appModule.equip
 			for each(var grid:DragDropItem in _useEquipGrids){
 				var item:ClientItemInfo=grid.gridInfo?grid.gridInfo.data as ClientItemInfo:null;
 				if(item){
-					addExp-=item.qItem.q_polish_num;
-					
+					addExp-=item.qItem.q_polish_num;								
 					var info:GridInfo=getGridInfo(_goodsContainerTarget.dataProvider,grid.gridInfo.data);
 					if(info){
 						_goodsContainerTarget.setGrayIsSelect(item,false);
 					}
-					info=getGridInfo(_goodsContainerUse.dataProvider,grid.gridInfo.data);
-					if(info){
-						_goodsContainerUse.setGrayIsSelect(item,false);
+					if(item.qItem.q_type!=GoodsType.STRENGTH)
+					{
+						info=getGridInfo(_goodsContainerUse.dataProvider,grid.gridInfo.data);
+						if(info){
+							_goodsContainerUse.setGrayIsSelect(item,false);
+						}
+					}else if(item.qItem.q_type==GoodsType.STRENGTH)
+					{
+						var infoitem:ClientItemInfo=_goodsContainerUse.getDragDropItemByLong(item.itemInfo.itemId);
+						if(infoitem){
+							infoitem.count=infoitem.itemInfo.num;
+							_goodsContainerUse.setGrayIsSelect(infoitem,false);
+						}
 					}
 				}
 				grid.setGridEmpty();
@@ -1217,6 +1265,12 @@ package com.rpgGame.appModule.equip
 			for(i=0;i<num;i++){
 				info=_goodsContainerUse.dataProvider.getItemAt(i) as  GridInfo;
 				item=info.data as ClientItemInfo;
+				if(item&&item.qItem.q_type==GoodsType.STRENGTH){
+					item.count=item.itemInfo.num;
+					//					var dragItem:DragDropItem=_goodsContainerUse.getDragDropItemByItemInfo(item);
+					//					if(dragItem)
+					//						dragItem.count=item.itemInfo.num;
+				}
 				_goodsContainerUse.setGrayIsSelect(item,false);
 			}
 			

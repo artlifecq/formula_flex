@@ -1,10 +1,6 @@
 package com.rpgGame.app.cmdlistener
 {
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.coreData.cfg.NotifyCfgData;
-	import com.rpgGame.coreData.clientConfig.Q_notify;
-	import com.rpgGame.coreData.lang.LangText;
-	import com.rpgGame.netData.chat.message.ResChatMessage;
 	import com.rpgGame.netData.player.message.SCNoticeMessage;
 	
 	import org.client.mainCore.bean.BaseBean;
@@ -29,12 +25,13 @@ package com.rpgGame.app.cmdlistener
 		}
 		private function onNoticeMessage(msg:SCNoticeMessage):void
 		{
-			var arr:Array = [];
+			/*var arr:Array = [];
 			for(var i:int = 0;i<msg.values.length;i++)
 			{
 				arr.push(msg.values[i]);
-			}
-			NoticeManager.showNotifyById(msg.noticeIndex,"",arr);
+			}*/
+//			NoticeManager.showNotifyById(msg.noticeIndex,"",arr);
+			NoticeManager.showNotifyByMsg(msg);
 		}
 	}
 }

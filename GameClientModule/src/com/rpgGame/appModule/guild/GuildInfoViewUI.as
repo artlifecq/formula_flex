@@ -6,10 +6,12 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.manager.hint.TopTipManager;
+	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.appModule.common.RoleModelShow;
 	import com.rpgGame.core.events.GuildEvent;
+	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.tip.RTNodeID;
@@ -19,6 +21,7 @@ package com.rpgGame.appModule.guild
 	import com.rpgGame.coreData.enum.EmFunctionID;
 	import com.rpgGame.coreData.enum.EnumGuildPost;
 	import com.rpgGame.coreData.role.RoleData;
+	import com.rpgGame.coreData.type.TaskType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.guild.bean.GuildInfo;
 	import com.rpgGame.netData.guild.bean.GuildMemberInfo;
@@ -68,11 +71,29 @@ package com.rpgGame.appModule.guild
 		{
 			super.show(data);
 			EventManager.addEvent(GuildEvent.GUILD_DATA_INIT,refeashView);
+			//EventManager.addEvent(TaskEvent.TASK_FINISH_MATION,finishMation);
+			finishMation(TaskType.MAINTYPE_GUILDDAILYTASK);
 			refeashView();
 		}
 		
+		private function finishMation(type:int):void
+		{
+			// TODO Auto Generated method stub
+			if (TaskType.MAINTYPE_GUILDDAILYTASK==type) 
+			{
+				if (!TaskMissionManager.haveGuildTask)
+				{
+					GrayFilter.gray(_skin.btnRenwu);
+				}
+				else
+				{
+					GrayFilter.unGray(_skin.btnRenwu);
+				}
+			}
+		}
 		override protected function onHide():void
 		{
+			//EventManager.removeEvent(TaskEvent.TASK_FINISH_MATION,finishMation);
 			EventManager.removeEvent(GuildEvent.GUILD_DATA_INIT,refeashView);
 			if(_guildInfo.parent != null)
 				this.removeChild(_guildInfo);

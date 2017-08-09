@@ -1,14 +1,15 @@
 package org.mokylin.skin.app.zhanchang.paihangbang
 {
-	import feathers.controls.text.Fontter;
+	import feathers.controls.Button;
 	import feathers.controls.Group;
-	import feathers.controls.Label;
 	import feathers.controls.List;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import feathers.controls.UINumber;
 	import org.mokylin.skin.app.zhanchang.uinumber.UINumberNumber3;
+	import org.mokylin.skin.common.TongYongTanKuang_bg2;
+	import org.mokylin.skin.component.button.ButtonSkin_close;
 	import org.mokylin.skin.component.list.ListSkin1;
 
 	/**
@@ -21,7 +22,9 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var bg:feathers.controls.UIAsset;
+		public var bg:feathers.controls.SkinnableContainer;
+
+		public var btnClose:feathers.controls.Button;
 
 		public var grpPaihang:feathers.controls.Group;
 
@@ -33,7 +36,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 
 		public var numZhanli:feathers.controls.UINumber;
 
-		public var title:feathers.controls.Label;
+		public var title:feathers.controls.UIAsset;
 
 		public var uiWRB:feathers.controls.UIAsset;
 
@@ -46,8 +49,9 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			super();
 			
 			this.currentState = "normal";
-			this.height = 555;
-			this.elementsContent = [bg_i(),title_i(),listItem_i(),__PaiHangAlll_Skin_UIAsset1_i(),__PaiHangAlll_Skin_UIAsset2_i(),grpPaihang_i(),uiWRB_i()];
+			this.height = 557;
+			this.width = 321;
+			this.elementsContent = [bg_i(),listItem_i(),__PaiHangAlll_Skin_UIAsset2_i(),__PaiHangAlll_Skin_UIAsset3_i(),__PaiHangAlll_Skin_UIAsset4_i(),__PaiHangAlll_Skin_UIAsset5_i(),grpPaihang_i(),uiWRB_i(),title_i(),btnClose_i()];
 			
 			states = {
 			};
@@ -58,34 +62,64 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __PaiHangAlll_Skin_UIAsset1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhanchang/paihangbang/bg2.png";
-			temp.x = 9;
-			temp.y = 446;
-			return temp;
-		}
-
 		private function __PaiHangAlll_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/zhanchang/paihangbang/wodepaihang.png";
-			temp.x = 76;
-			temp.y = 457;
+			temp.styleName = "ui/app/zhanchang/paihangbang/bg2.png";
+			temp.x = 6;
+			temp.y = 445;
 			return temp;
 		}
 
-		private function bg_i():feathers.controls.UIAsset
+		private function __PaiHangAlll_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/zhanchang/paihangbang/wodepaihang.png";
+			temp.x = 124;
+			temp.y = 458;
+			return temp;
+		}
+
+		private function __PaiHangAlll_Skin_UIAsset4_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/common/wenshi/huawen_1.png";
+			temp.x = 51;
+			temp.y = 463;
+			return temp;
+		}
+
+		private function __PaiHangAlll_Skin_UIAsset5_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/common/wenshi/huawen_2.png";
+			temp.x = 203;
+			temp.y = 463;
+			return temp;
+		}
+
+		private function bg_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 560;
-			temp.styleName = "ui/common/background/erji_kuang.png";
-			temp.width = 338;
+			temp.height = 557;
+			var skin:StateSkin = new org.mokylin.skin.common.TongYongTanKuang_bg2()
+			temp.skin = skin
+			temp.width = 321;
 			temp.x = 0;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function btnClose_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btnClose = temp;
+			temp.name = "btnClose";
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
+			temp.top = 6;
+			temp.x = 288;
 			return temp;
 		}
 
@@ -127,11 +161,11 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			var temp:feathers.controls.List = new feathers.controls.List();
 			listItem = temp;
 			temp.name = "listItem";
-			temp.height = 403;
+			temp.height = 410;
 			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
-			temp.width = 318;
+			temp.width = 302;
 			temp.x = 12;
-			temp.y = 43;
+			temp.y = 34;
 			return temp;
 		}
 
@@ -150,23 +184,16 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			return temp;
 		}
 
-		private function title_i():feathers.controls.Label
+		private function title_i():feathers.controls.UIAsset
 		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			title = temp;
 			temp.name = "title";
-			temp.bold = true;
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.letterSpacing = 2;
-			temp.fontSize = 16;
-			temp.text = "周排名奖励";
-			temp.textAlign = "center";
-			temp.color = 0xDDE2B1;
-			temp.nativeFilters = Fontter.filterObj[""];
-			temp.width = 240;
-			temp.x = 49;
-			temp.y = 11;
+			temp.styleName = "ui/app/zhanchang/zhoupaihangjiangli.png";
+			temp.x = 107;
+			temp.y = 8;
 			return temp;
 		}
 

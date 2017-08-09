@@ -42,6 +42,10 @@ package org.mokylin.skin.app.paihangbang
 
 		public var Icbg9:feathers.controls.UIAsset;
 
+		public var Icolingpai:feathers.controls.UIAsset;
+
+		public var Icoring:feathers.controls.UIAsset;
+
 		public var NumZhanli:feathers.controls.UINumber;
 
 		public var bg_img:feathers.controls.UIAsset;
@@ -119,8 +123,8 @@ package org.mokylin.skin.app.paihangbang
 			Icbg10 = temp;
 			temp.name = "Icbg10";
 			temp.styleName = "ui/common/grid/equip/11hunjie.png";
-			temp.x = 0;
-			temp.y = 296;
+			temp.x = 7;
+			temp.y = 302;
 			return temp;
 		}
 
@@ -130,8 +134,8 @@ package org.mokylin.skin.app.paihangbang
 			Icbg11 = temp;
 			temp.name = "Icbg11";
 			temp.styleName = "ui/common/grid/equip/12lingpai.png";
-			temp.x = 294;
-			temp.y = 296;
+			temp.x = 301;
+			temp.y = 302;
 			return temp;
 		}
 
@@ -231,6 +235,28 @@ package org.mokylin.skin.app.paihangbang
 			temp.styleName = "ui/common/grid/equip/07hutui.png";
 			temp.x = 301;
 			temp.y = 237;
+			return temp;
+		}
+
+		private function Icolingpai_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			Icolingpai = temp;
+			temp.name = "Icolingpai";
+			temp.styleName = "ui/app/paihangbang/huijiebiankuang.png";
+			temp.x = 293;
+			temp.y = 296;
+			return temp;
+		}
+
+		private function Icoring_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			Icoring = temp;
+			temp.name = "Icoring";
+			temp.styleName = "ui/app/paihangbang/huijiebiankuang.png";
+			temp.x = -1;
+			temp.y = 296;
 			return temp;
 		}
 
@@ -476,8 +502,8 @@ package org.mokylin.skin.app.paihangbang
 			temp.height = 364;
 			temp.width = 368;
 			temp.x = 2;
-			temp.y = 40;
-			temp.elementsContent = [Icbg0_i(),Icbg5_i(),Icbg1_i(),Icbg6_i(),Icbg2_i(),Icbg7_i(),Icbg3_i(),Icbg8_i(),Icbg4_i(),Icbg10_i(),Icbg9_i(),Icbg11_i()];
+			temp.y = 74;
+			temp.elementsContent = [Icbg0_i(),Icbg5_i(),Icbg1_i(),Icbg6_i(),Icbg2_i(),Icbg7_i(),Icbg3_i(),Icbg8_i(),Icbg4_i(),Icbg9_i(),Icoring_i(),Icbg10_i(),Icolingpai_i(),Icbg11_i()];
 			return temp;
 		}
 

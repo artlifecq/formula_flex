@@ -36,7 +36,7 @@
 			EventManager.addEvent(ActivityEvent.OPEN_ACTIVITY, updatePositionAll);
 			EventManager.addEvent(ActivityEvent.CLOSE_ACTIVITY, updatePositionAll);
 			EventManager.addEvent(FunctionOpenEvent.FUNCTIONOPENID,updatePositionAll);
-			EventManager.addEvent(MapEvent.MAP_SWITCH_START,updatePositionAll);
+			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE,updatePositionAll);
 			updatePositionAll(0);
 		}
 		
@@ -59,12 +59,7 @@
 		private function updatePositionAll(data:*=null):void
 		{
 			this.removeChildren();
-			var scentType:int;
-			if(MapDataManager.currentScene.isNormalScene)
-				scentType = 1;
-			else
-				scentType = 2;
-			
+			var scentType:int=MapDataManager.currentScene.mapType;
 			var rows:Array = FuncionBarCfgData.getinfoRows(TYPE);
 			var length:int = rows.length;
 			var button:IOpen;

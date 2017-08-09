@@ -40,6 +40,7 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.app.state.role.control.SpriteUpBuffStateReference;
 	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
 	import com.rpgGame.app.ui.OpenPanel;
+	import com.rpgGame.app.ui.alert.EquipAutoDressEffectPanelExt;
 	import com.rpgGame.app.ui.main.dungeon.JiXianTiaoZhanExtPop;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
@@ -441,7 +442,8 @@ package   com.rpgGame.app.manager.debug
 			commandList.put( ".cd", function (...arg):void
 			{
 				//FightPowerChangePopPanelExt.showFightPowerChange(arg[0],arg[1]);
-				CDDataManager.playCD("sd",1000);
+				//CDDataManager.playCD("sd",1000);
+				EquipAutoDressEffectPanelExt.ins.test(arg[0]);
 			});
 		}
 		

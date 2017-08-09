@@ -1561,13 +1561,16 @@ package com.rpgGame.app.graphics
 				}
 				this.deCtrl.addTop(_nameBar,DecorCtrl.TOP_NAME);
 			}
+			
+			
+			addAndUpdateHP();
 			//this.addChildAt(_bloodBar,0);
 			this.deCtrl.addTop(_bloodBar,DecorCtrl.TOP_HPMP);
 			if(showBloodTween){
 				showBloodTween.kill();
 				showBloodTween=null;
 			}
-			showBloodTween=TweenLite.delayedCall(2,onHideBlood);
+//			showBloodTween=TweenLite.delayedCall(2,onHideBlood);
 			sortAttackFace();
 		}
 		

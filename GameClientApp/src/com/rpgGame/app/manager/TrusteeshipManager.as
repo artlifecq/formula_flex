@@ -6,12 +6,16 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.manager.ctrl.ControlTripleSkill;
 	import com.rpgGame.app.manager.fight.FightManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
+	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.ai.AIStateMachine;
 	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
+	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
+	import com.rpgGame.coreData.clientConfig.Q_scene_monster_area;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.MonsterData;
@@ -62,7 +66,7 @@ package com.rpgGame.app.manager
 		
 		public function TrusteeshipManager()
 		{
-			_gTimer = new GameTimer("TrusteeshipManager", 1000, 0, onUpdate);
+			_gTimer = new GameTimer("TrusteeshipManager", 500, 0, onUpdate);
 			_isFightActorRunning = false;
 			_isAutoFightRunning = false;
 			_isFightTargetRunning=false;
@@ -166,7 +170,46 @@ package com.rpgGame.app.manager
 			_gTimer.start();
 			onUpdate(true);
 		}
-		
+		/**到达某点继续战斗
+		 * @param target 根据type传不同的值 1:[场景id,x,y] 2:刷新表id 3：模型id
+		 * @param type  1目标点 2:刷新表id 3：模型id
+		 * @param dist 自动战斗寻怪距离 0：设置的距离，-1：全屏寻怪
+		 * */
+		public function startAutoFightToPos(target:*,type:int,dist:int=0) : void
+		{
+			switch(type)
+			{
+				case 1:
+					var targetPos:Array=target as Array;
+					if(targetPos&&targetPos.length==3)
+					{
+						MainRoleSearchPathManager.walkToScene(targetPos[0], targetPos[1], targetPos[2],onArrive, 100,null,true);
+					}
+					break;
+				case 2:
+					var areaId:int=int(target);
+					var monsterAreaData : Q_scene_monster_area = MonsterDataManager.getAreaByAreaID(areaId);
+					if (monsterAreaData)
+					{
+						MainRoleSearchPathManager.walkToScene(monsterAreaData.q_mapid, monsterAreaData.q_center_x, monsterAreaData.q_center_y,onArrive, 100,null,true);
+					}
+					break;
+				case 3:
+					var monsterId:int=int(target);
+					var monsterData : Q_scene_monster_area = MonsterDataManager.getMonsterByModelId(monsterId,SceneSwitchManager.currentMapId);
+					if (monsterData)
+					{
+						MainRoleSearchPathManager.walkToScene(monsterData.q_mapid, monsterData.q_center_x, monsterData.q_center_y,onArrive, 100,null,true);
+					}
+					break;
+			}
+			findDist=dist;
+			
+		}
+		private function onArrive(data :Object=null):void
+		{
+			startAutoFight();
+		}
 		public function startAutoFight() : void
 		{
 			stopFightTarget();
@@ -513,12 +556,36 @@ package com.rpgGame.app.manager
 		/**寻怪范围*/
 		public function get findDist():int
 		{
-			return _findDist;
+			if(_findDist<0)
+			{
+				return 10000;
+			}
+			else if(_findDist==0)
+			{
+				return int(SystemSetManager.getinstance().getValueByIndex(SystemSetManager.SYSTEMSET_HOOK_TYPE)*50);
+			}
+			else
+			{
+				return _findDist;
+			}
+			
 		}
 		
 		public function set findDist(value:int):void
 		{
-			_findDist = value;
+			if(value<0)
+			{
+				findDist=10000;
+			}
+			else if(value==0)
+			{
+				findDist=int(SystemSetManager.getinstance().getValueByIndex(SystemSetManager.SYSTEMSET_HOOK_TYPE)*50);
+			}
+			else
+			{
+				_findDist = value;
+			}
+			
 		}
 		
 		private var testStopKey:Boolean=false;

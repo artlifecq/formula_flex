@@ -9,6 +9,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.app.manager.goods.ItemUseManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.ItemSender;
+	import com.rpgGame.app.ui.UIModel;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.ui.alert.GameAlertExt;
 	import com.rpgGame.app.utils.BreatheTweenUtil;
@@ -28,9 +29,9 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
-	import com.rpgGame.core.utils.GameColorUtil;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.SpriteStat;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
@@ -45,6 +46,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.coreData.type.MenuType;
 	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.type.item.GridBGType;
+	import com.rpgGame.coreData.utils.FilterUtil;
 	
 	import flash.geom.Point;
 	import flash.ui.Keyboard;
@@ -55,6 +57,8 @@ package com.rpgGame.appModule.role
 	import app.message.GoodsType;
 	
 	import away3d.events.Event;
+	
+	import cmodule.PreLoader.modPreStaticInit;
 	
 	import feathers.controls.ScrollBar;
 	import feathers.controls.ScrollBarDisplayMode;
@@ -139,6 +143,7 @@ package com.rpgGame.appModule.role
 			(_skin.lst_pack.layout as TiledRowsLayout).horizontalGap=1;
 			(_skin.lst_pack.layout as TiledRowsLayout).verticalGap=2;
 			Mgr.shopMgr.sellItemCall=ItemSellAlertExtPanelExt.showAlert;
+			_skin.lst_pack.filter=FilterUtil.getHightLightFilter();
 		}
 		
 		
@@ -582,7 +587,7 @@ package com.rpgGame.appModule.role
 			if (bool) 
 			{
 				MouseCursorController.showSell();
-				BreatheTweenUtil.add(_skin.imgBg,GameColorUtil.COLOR_YELLOW,15);
+				BreatheTweenUtil.add(_skin.imgBg,StaticValue.A_UI_OEANGE_TEXT,30);
 				if (!EventManager.hasEvent(SceneEvent.INTERACTIVE,onSceneTouch)) 
 				{
 					EventManager.addEvent(SceneEvent.INTERACTIVE,onSceneTouch);

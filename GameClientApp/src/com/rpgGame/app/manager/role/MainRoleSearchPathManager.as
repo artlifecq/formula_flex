@@ -200,13 +200,8 @@ package com.rpgGame.app.manager.role
 			var mapID : int = SceneSwitchManager.currentMapId;
 			if (mapID == targetSceneId)
 			{
-				if (pos.x > -1 && (-pos.y)> -1)//if (pos.x > -1 && pos.z> -1)
-				{
-					//RoleStateUtil.walkToPos(role, pos, spacing, _data, onArrive,null,null,_needSprite);
-					jumpWalkToPos(role, pos, spacing, _data, onArrive,null,null,_needSprite);
-					
-					EventManager.dispatchEvent(WorldMapEvent.MAP_WAYS_GUILD_UPDATA_PATHS);
-				}
+				jumpWalkToPos(role, pos, spacing, _data, onArrive,null,null,_needSprite);
+				EventManager.dispatchEvent(WorldMapEvent.MAP_WAYS_GUILD_UPDATA_PATHS);
 			}
 			else
 			{

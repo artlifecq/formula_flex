@@ -107,7 +107,7 @@ package com.rpgGame.app.cmdlistener.scene
 		{
 			MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_CAST_SPELL_LOCK);
 			TrusteeshipManager.getInstance().isNormalSpell = false;
-			
+			Lyt.a("isNormalSpell-2");
 			var failID : int = msg.failType;
 			var failReason : String;
 			failReason=NotifyCfgData.getNotifyTextByID(failID);//yt修改，读取新的消息表格式

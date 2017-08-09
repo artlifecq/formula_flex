@@ -20,6 +20,8 @@ package org.mokylin.skin.app.zhanchang.shangdian
 		//==========================================================================
 		public var bg:feathers.controls.SkinnableContainer;
 
+		public var iconSw:feathers.controls.UIAsset;
+
 		public var lbNum:feathers.controls.Label;
 
 		public var skinFlip:feathers.controls.SkinnableContainer;
@@ -35,7 +37,7 @@ package org.mokylin.skin.app.zhanchang.shangdian
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [bg_i(),__ShengWang_Store_UIAsset1_i(),__ShengWang_Store_UIAsset2_i(),__ShengWang_Store_UIAsset3_i(),__ShengWang_Store_UIAsset4_i(),lbNum_i(),skinFlip_i()];
+			this.elementsContent = [bg_i(),__ShengWang_Store_UIAsset1_i(),__ShengWang_Store_UIAsset2_i(),__ShengWang_Store_UIAsset3_i(),__ShengWang_Store_UIAsset4_i(),iconSw_i(),lbNum_i(),__ShengWang_Store_UIAsset5_i(),skinFlip_i()];
 			
 			states = {
 			};
@@ -61,8 +63,8 @@ package org.mokylin.skin.app.zhanchang.shangdian
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/big_bg/zhanchang/bg3.jpg";
-			temp.x = 22;
-			temp.y = 87;
+			temp.x = 23;
+			temp.y = 88;
 			return temp;
 		}
 
@@ -80,9 +82,19 @@ package org.mokylin.skin.app.zhanchang.shangdian
 		private function __ShengWang_Store_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/tubiao/shengwang.png";
-			temp.x = 725;
-			temp.y = 557;
+			temp.styleName = "ui/common/background/neikuang.png";
+			temp.width = 88;
+			temp.x = 788;
+			temp.y = 560;
+			return temp;
+		}
+
+		private function __ShengWang_Store_UIAsset5_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/zhanchang/jiucengyaota/shengwangzhi.png";
+			temp.x = 733;
+			temp.y = 562;
 			return temp;
 		}
 
@@ -100,17 +112,28 @@ package org.mokylin.skin.app.zhanchang.shangdian
 			return temp;
 		}
 
+		private function iconSw_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			iconSw = temp;
+			temp.name = "iconSw";
+			temp.styleName = "ui/common/tubiao/shengwang.png";
+			temp.x = 793;
+			temp.y = 558;
+			return temp;
+		}
+
 		private function lbNum_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbNum = temp;
 			temp.name = "lbNum";
-			temp.text = "750";
+			temp.text = "1000";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 61;
-			temp.x = 754;
-			temp.y = 560;
+			temp.width = 50;
+			temp.x = 821;
+			temp.y = 563;
 			return temp;
 		}
 
@@ -122,9 +145,9 @@ package org.mokylin.skin.app.zhanchang.shangdian
 			temp.height = 25;
 			var skin:StateSkin = new org.mokylin.skin.common.Flip1_Skin()
 			temp.skin = skin
-			temp.width = 108;
-			temp.x = 427;
-			temp.y = 556;
+			temp.width = 122;
+			temp.x = 417;
+			temp.y = 558;
 			return temp;
 		}
 
