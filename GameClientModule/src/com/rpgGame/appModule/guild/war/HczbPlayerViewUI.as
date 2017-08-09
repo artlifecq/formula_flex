@@ -20,6 +20,8 @@ package com.rpgGame.appModule.guild.war
 	import com.rpgGame.netData.guildWar.bean.GuildAvatarInfo;
 	import com.rpgGame.netData.guildWar.message.G2CRespKingGuidWarAvatarInfoMessage;
 	
+	import feathers.controls.SkinnableContainer;
+	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.zhanchang.wangchengzhengba.WangChengHead_Item;
 	import org.mokylin.skin.app.zhanchang.wangchengzhengba.WangChengZhengBa;
@@ -39,6 +41,7 @@ package com.rpgGame.appModule.guild.war
 		
 		
 		private var headList:Vector.<WangChengHead_Item>;
+		private var xuweiList:Vector.<SkinnableContainer>;
 		private var roleList:Vector.<UIAvatar3D>;
 		private var leaderNum:int;
 		private var deputyNum:int;
@@ -56,12 +59,15 @@ package com.rpgGame.appModule.guild.war
 			headList=new Vector.<WangChengHead_Item>();
 			roleList=new Vector.<UIAvatar3D>();
 			var index:int;
+			xuweiList=new Vector.<SkinnableContainer>();
 			for(var i:int=1;i<6;i++){
 				headList.push(_skin["head"+i].skin);
 				index=i-1;
 				headList[index].uiHead.styleName="ui/app/zhanchang/weicheng/"+headIcons[index]+".png";
 				headList[index].lbName.text="";
 				roleList.push(new UIAvatar3D(_skin["playerGrp"+i],1.7));
+				xuweiList.push(_skin["xuwei"+i]);
+				xuweiList[index].visible=true;
 			}
 			
 			rewardGrp=new RewardGroup(IcoSizeEnum.ICON_48,_skin.icon1);
@@ -118,9 +124,9 @@ package com.rpgGame.appModule.guild.war
 			
 			var info:GuildAvatarInfo;
 			var index:int;
-			_skin.xuwei.visible=true;
 			for(var i:int=0;i<msg.avatarInfo.length;i++){
 				info=msg.avatarInfo[i];
+				xuweiList[i].visible=true;
 				if(info.guildMemberType==EGuildMemberType.LEADER){
 					leaderNum++;
 					if(leaderNum==1){
@@ -137,7 +143,6 @@ package com.rpgGame.appModule.guild.war
 					}
 				}else{
 					index=2;
-					_skin.xuwei.visible=false;
 				}
 				updateAvatarInfo(index,info);
 			}
@@ -147,6 +152,7 @@ package com.rpgGame.appModule.guild.war
 		{
 			headList[index].lbName.text=info.playerName+"["+info.playerLevel+"]";
 			roleList[index].updateWithPlayerAppearanceInfo(info.playerAvatarInfo);
+			xuweiList[index].visible=false;
 		}
 	}
 }
