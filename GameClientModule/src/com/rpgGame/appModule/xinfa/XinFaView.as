@@ -387,8 +387,9 @@ package com.rpgGame.appModule.xinfa
 					var strArr:Array=[];
 					for (var i:int = 0; i < len; i++) 
 					{
-						var color:uint=GameColorUtil.COLOR_GREEN;
+						
 						itemMid=arr[i];
+						var color:uint=ItemConfig.getItemQualityColor(itemMid);
 						itemNum=_curMap.cheatsVo.needItemHash.getValue(itemMid);
 						backNum=BackPackManager.instance.getItemCount(itemMid);
 						if (itemNum>backNum)

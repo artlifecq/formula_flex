@@ -233,9 +233,9 @@
 			start.x=end.x;
 			start.y=end.y;
 			
-			showobj.x=start.x-60;
-			showobj.y=start.y-10;
-			showobj.alpha=0;
+			showobj.x=start.x-60+Math.random()*100;
+			showobj.y=start.y-10+Math.random()-50;
+		//	showobj.alpha=0;
 			showobj.scaleX=showobj.scaleY=0.55;
 			
 		
@@ -245,7 +245,7 @@
 			myTimeline.addLabel("alpha1", 0);
 			myTimeline.addLabel("alpha0", 0.4);
 			myTimeline.insert(new TweenLite(showobj, 0.4, {alpha:1,y:start.y-170,scaleX:0.7,scaleY:0.7,ease:Expo.easeOut}), "alpha1");
-			myTimeline.insert(new TweenLite(showobj, 0.3, {alpha:0,x:start.x+80,y:start.y-110,scaleX:0.55,scaleY:0.55}), "alpha0");//,ease:Sine.easeIn
+			myTimeline.insert(new TweenLite(showobj, 0.3, {alpha:0,x:start.x+80+80*Math.random(),y:start.y-110-40*Math.random(),scaleX:0.55,scaleY:0.55}), "alpha0");//,ease:Sine.easeIn
 		}
 		//战魂
 		public static function TweenZhanHun(showobj:DisplayObject,start:Point, end:Point,callBack:Function):void
