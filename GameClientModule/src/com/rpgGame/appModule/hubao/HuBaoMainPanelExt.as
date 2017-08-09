@@ -7,7 +7,9 @@ package com.rpgGame.appModule.hubao
 	import com.game.mainCore.core.timer.GameTimer;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.HuBaoManager;
+	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.goods.BackPackManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.HuBaoSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.FaceUtil;
@@ -17,6 +19,7 @@ package com.rpgGame.appModule.hubao
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.utils.MCUtil;
+	import com.rpgGame.core.utils.NumberUtil;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.HuBaoData;
 	import com.rpgGame.coreData.cfg.StaticValue;
@@ -26,8 +29,6 @@ package com.rpgGame.appModule.hubao
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
-	
-	import flash.utils.getTimer;
 	
 	import away3d.events.Event;
 	
@@ -100,16 +101,17 @@ package com.rpgGame.appModule.hubao
 			{
 				var q_convoy:Q_convoy=HuBaoData.getmodByLv(i);
 				if(q_convoy){
-					var obj:Array=JSONUtil.decode(q_convoy.q_reward);
+					var obj:Array=HuBaoManager.instance().getJIangLiByLv(q_convoy);
 					setJiangLi(_jiangliList[i-1],obj);
 					showModle(q_convoy);
 				}
 			}
 			_maxnum=q_convoy.q_day_times;
-		}
+		}	
 		
 		private function setJiangLi(tar:SkinnableContainer,prize:Array):void
 		{
+			if(prize==null) return;
 			if(prize.length == 2) 
 			{
 				tar.skin=new org.mokylin.skin.app.hubao.HuBaoItem_Skin();
@@ -124,14 +126,16 @@ package com.rpgGame.appModule.hubao
 						//						ico.y=(tar.skin as HuBaoItem_Skin).icon1.y;
 						(tar.skin as HuBaoItem_Skin).container.addChild(ico);
 						(tar.skin as HuBaoItem_Skin).container.addChild((tar.skin as HuBaoItem_Skin).lb1);
-						(tar.skin as HuBaoItem_Skin).lb1.text=prize[i].num;
+						var num:String=NumberUtil.getNumberTo(prize[i].num,true);
+						(tar.skin as HuBaoItem_Skin).lb1.text=num;
 					}
 					else {
 						ico.bindBg((tar.skin as HuBaoItem_Skin).icon2);
 						//						ico.y=(tar.skin as HuBaoItem_Skin).icon2.y;
 						(tar.skin as HuBaoItem_Skin).container.addChild(ico);
 						(tar.skin as HuBaoItem_Skin).container.addChild((tar.skin as HuBaoItem_Skin).lb2);
-						(tar.skin as HuBaoItem_Skin).lb2.text=prize[i].num;
+						num=NumberUtil.getNumberTo(prize[i].num,true);
+						(tar.skin as HuBaoItem_Skin).lb2.text=num;
 					}
 				}
 			}
@@ -150,21 +154,24 @@ package com.rpgGame.appModule.hubao
 						//						ico.y=(tar.skin as HuBaoItem2_Skin).icon1.y;
 						(tar.skin as HuBaoItem2_Skin).container.addChild(ico);
 						(tar.skin as HuBaoItem2_Skin).container.addChild((tar.skin as HuBaoItem2_Skin).lb1);
-						(tar.skin as HuBaoItem2_Skin).lb1.text=prize[i].num;
+						num=NumberUtil.getNumberTo(prize[i].num,true);
+						(tar.skin as HuBaoItem2_Skin).lb1.text=num;
 					}
 					else if(i==1){
 						ico.bindBg((tar.skin as HuBaoItem2_Skin).icon2);
 						ico.y=(tar.skin as HuBaoItem2_Skin).icon2.y;
 						(tar.skin as HuBaoItem2_Skin).container.addChild(ico);
 						(tar.skin as HuBaoItem2_Skin).container.addChild((tar.skin as HuBaoItem2_Skin).lb2);
-						(tar.skin as HuBaoItem2_Skin).lb2.text=prize[i].num;
+						num=NumberUtil.getNumberTo(prize[i].num,true);
+						(tar.skin as HuBaoItem2_Skin).lb2.text=num;
 					}
 					else{
 						ico.bindBg((tar.skin as HuBaoItem2_Skin).icon3);
 						//						ico.y=(tar.skin as HuBaoItem2_Skin).icon3.y;
 						(tar.skin as HuBaoItem2_Skin).container.addChild(ico);
 						(tar.skin as HuBaoItem2_Skin).container.addChild((tar.skin as HuBaoItem2_Skin).lb3);
-						(tar.skin as HuBaoItem2_Skin).lb3.text=prize[i].num;
+						num=NumberUtil.getNumberTo(prize[i].num,true);
+						(tar.skin as HuBaoItem2_Skin).lb3.text=num;
 					}
 				}
 			}		

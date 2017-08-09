@@ -12,6 +12,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.HuBaoEvent;
 	import com.rpgGame.core.events.UserMoveEvent;
+	import com.rpgGame.core.utils.NumberUtil;
 	import com.rpgGame.coreData.cfg.HuBaoData;
 	import com.rpgGame.coreData.clientConfig.Q_convoy;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
@@ -117,11 +118,12 @@ package com.rpgGame.app.manager
 		{
 			var str:String="";
 			str=q_con.q_girl_level+"\n"+"奖励："+"\n";
-			var obj:Array=JSONUtil.decode(q_con.q_reward);
+			var obj:Array=getJIangLiByLv(q_con);
 			for(var i:int=0;i<obj.length;i++)
 			{
 				var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(obj[i].mod,1);
-				str+=itemInfo.qItem.q_name+": ×"+obj[i].num+"\n";
+				var num:String=NumberUtil.getNumberTo(obj[i].num);
+				str+=itemInfo.qItem.q_name+": ×"+num+"\n";
 			}		
 			return str;
 		}
@@ -220,6 +222,28 @@ package com.rpgGame.app.manager
 			{
 				HuBaoSender.upCSClientDataMessage(HuBaoData.acceptNpc);
 			}
+		}
+		
+		public function getJIangLiByLv(q_con:Q_convoy):Array
+		{
+			if(q_con){
+				var arr:Array,guize:Array;
+				arr=JSONUtil.decode(q_con.q_reward);
+				guize=JSONUtil.decode(q_con.q_level_rank);
+				if(arr==null||arr.length==0) return null;
+				var starLv:int=guize[0];
+				var maxLv:int=guize[1];
+				var view:int=guize[2];
+				
+				var playerLv:int=MainRoleManager.actorInfo.totalStat.level;
+				var num:int=(int(playerLv/10))*10;
+				if(num<starLv) return arr[0];
+				else if(num>=maxLv) return arr[arr.length-1];
+				else{
+					return arr[(num-starLv)/10];
+				}
+			}
+			return null;
 		}
 	}
 }

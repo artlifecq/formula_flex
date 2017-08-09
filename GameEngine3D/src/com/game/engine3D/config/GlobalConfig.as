@@ -85,11 +85,12 @@ package com.game.engine3D.config
 		public static function set mapCameraAngle(value:Number):void
 		{
 			_mapCameraAngle = value;
-			_mapCameraRadian = (_mapCameraAngle *Math.PI)/180.0;
+			_mapCameraRadian = ((_mapCameraAngle+90) *Math.PI)/180.0;
 			_map2dScaleZDir = Math.tan(Math.abs(_mapCameraRadian));
+			//_planarTransform = Math.tan(Math.abs(_planarRotationX)*(Math.PI/180.0));
 		}
 
-		public static function get mapCameraRadian():Number
+		public static function get mapCameraRadian():Number                                                                                         
 		{
 			return _mapCameraRadian;
 		}

@@ -354,6 +354,7 @@ package com.rpgGame.app.fight.spell
 				effectRu.y = offset.y;
 				effectRu.z = offset.z;
 				effectRu.rotationY = 0;
+				effectRu.castsShadows = false;
 				effectRu.setPlayCompleteCallBack(avatarRuPlayComplete, target.avatar);
 				effectRu.play(1);
                 return effectRu;
