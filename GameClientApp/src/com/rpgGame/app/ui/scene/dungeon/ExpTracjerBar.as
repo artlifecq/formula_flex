@@ -93,6 +93,7 @@ package com.rpgGame.app.ui.scene.dungeon
 		
 		private function updateEndInfo(success:int,star:int):void
 		{
+			TrusteeshipManager.getInstance().stopAutoFight();
 			stopTimer();
 		}
 		private function updateWaveInfoHandler(currentWaveId:int,killerCount:int):void

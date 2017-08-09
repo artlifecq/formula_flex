@@ -2,6 +2,7 @@ package com.rpgGame.app.manager.task
 {
 	import com.game.mainCore.core.timer.GameTimer;
 	import com.gameClient.utils.JSONUtil;
+	import com.rpgGame.app.manager.HuBaoManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
@@ -228,6 +229,10 @@ package com.rpgGame.app.manager.task
 		private var traceKey:int;
 		private function istech():Boolean
 		{
+			if(HuBaoManager.instance().ishuing)//押镖状态不拉
+			{
+				return false;
+			}
 			if(isOpenPanel())
 			{//Lyt.a("istech-1");
 				//if(traceKey!=-1){Lyt.a("istech-1");traceKey=-1;}

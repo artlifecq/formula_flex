@@ -31,7 +31,7 @@ package com.rpgGame.app.manager.role
 	import away3d.enum.LoadPriorityType;
 	
 	import org.client.mainCore.manager.EventManager;
-
+	
 	/**
 	 *
 	 * 主角管理器
@@ -48,7 +48,7 @@ package com.rpgGame.app.manager.role
 		public function MainRoleManager()
 		{
 		}
-
+		
 		/**
 		 * 获取个人用户信息
 		 * @return
@@ -60,7 +60,7 @@ package com.rpgGame.app.manager.role
 			return _actroInfo;
 		}
 		
-
+		
 		/**
 		 * 获取个人用户ID
 		 * @return
@@ -70,18 +70,18 @@ package com.rpgGame.app.manager.role
 		{
 			return actorInfo.id;
 		}
-
+		
 		public static function isSelf(id : Number) : Boolean
 		{
 			return id == actorInfo.id;
 		}
-
+		
 		/**主角*/
 		public static function get actor() : SceneRole
 		{
 			return _actor;
 		}
-
+		
 		public static function initSingleData(heroInfo : MyPlayerInfo) : void
 		{
 			var heroName : String = heroInfo.name;
@@ -89,49 +89,49 @@ package com.rpgGame.app.manager.role
 			HeroData.setUserSingleInfo(actorInfo, heroName);
 			ShortcutsManger.getInstance().replaceToTempSpells(HeroData.spellArrs);
 		}
-
+		
 		public static function setLoginData(heroInfo : MyPlayerInfo) : void
 		{
 			//角色信息
 			HeroData.setUserLoginInfo(actorInfo, heroInfo);
 			PKMamager.setPkMode(heroInfo.pkType);
-//			FunctionOpenManager.openFunctionByLevel(actorInfo.totalStat.level,false);
-//			if(heroProto.goodsContainerModuleObj)
-//			{
-//				//背包信息
-//				BackPackManager.instance.setGoodsInfo(heroProto.goodsContainerModuleObj.depot);
-//			}
-
+			//			FunctionOpenManager.openFunctionByLevel(actorInfo.totalStat.level,false);
+			//			if(heroProto.goodsContainerModuleObj)
+			//			{
+			//				//背包信息
+			//				BackPackManager.instance.setGoodsInfo(heroProto.goodsContainerModuleObj.depot);
+			//			}
+			
 			//仓库信息
-//			var hasStorage : Boolean = heroProto.hasStorage;
-//			StorageManager.instance.setHasStorage(heroProto.hasStorage);
-
-//			if(heroProto.familyModuleObj)
-//			{
-//				//家族
-//				SocietyManager.setHero(heroProto.familyModuleObj);
-//			}
-//			//任务信息
-//			TaskManager.setTaskProto(heroProto.taskModuleObj);
-//			//组队数据
-//			TeamManager.setHeroTeam(heroProto.teamModuleObj);
-//			//复活数据
-//			if (heroProto.sceneModuleObj)
-//				ReliveManager.setHeroData(heroProto.sceneModuleObj.heroRelive);
-//			//回购物品
-//			SmallShopItemManager.setBackBuyData(heroProto.shopModuleObj.buyBackGoods);
-//
-//			GuildManager.setupModuleObj(heroProto.guildModuleObj);
-//			//摆摊
-//			StallManager.setupStallModuleObj(heroProto.stallModuleObj);
-//			//邮件
-//			MailManager.setLoginData(heroProto.mailModuleObj);
-//			if (heroProto.baZhenTuModuleObj)
-//			{
-//				BaZhenTuManager.todayEnterTimes = heroProto.baZhenTuModuleObj.todayEnterTimes;
-//			}
+			//			var hasStorage : Boolean = heroProto.hasStorage;
+			//			StorageManager.instance.setHasStorage(heroProto.hasStorage);
+			
+			//			if(heroProto.familyModuleObj)
+			//			{
+			//				//家族
+			//				SocietyManager.setHero(heroProto.familyModuleObj);
+			//			}
+			//			//任务信息
+			//			TaskManager.setTaskProto(heroProto.taskModuleObj);
+			//			//组队数据
+			//			TeamManager.setHeroTeam(heroProto.teamModuleObj);
+			//			//复活数据
+			//			if (heroProto.sceneModuleObj)
+			//				ReliveManager.setHeroData(heroProto.sceneModuleObj.heroRelive);
+			//			//回购物品
+			//			SmallShopItemManager.setBackBuyData(heroProto.shopModuleObj.buyBackGoods);
+			//
+			//			GuildManager.setupModuleObj(heroProto.guildModuleObj);
+			//			//摆摊
+			//			StallManager.setupStallModuleObj(heroProto.stallModuleObj);
+			//			//邮件
+			//			MailManager.setLoginData(heroProto.mailModuleObj);
+			//			if (heroProto.baZhenTuModuleObj)
+			//			{
+			//				BaZhenTuManager.todayEnterTimes = heroProto.baZhenTuModuleObj.todayEnterTimes;
+			//			}
 		}
-
+		
 		public static function initActor() : void
 		{
 			//如果没有则创建
@@ -161,24 +161,24 @@ package com.rpgGame.app.manager.role
 				//设置主角初始状态
 				if (MiXinManager.isSubmitMiXinTask())
 				{
-//					_actor.headFace.addTaskIco(AssetUrl.JIMAOXIN);
+					//					_actor.headFace.addTaskIco(AssetUrl.JIMAOXIN);
 				}
 				
 				FunctionOpenManager.openFunctionByLevel(data.totalStat.level,false);
-                FightFaceHelper.bindTarget(_actor.graphicDis);
-                EventManager.dispatchEvent(RoleEvent.UPDATE_NEEDLE, 
-                    _actor, 
-                    data.totalStat.getResData(CharAttributeType.RES_JING_ZHENG), 
-                    0);
+				FightFaceHelper.bindTarget(_actor.graphicDis);
+				EventManager.dispatchEvent(RoleEvent.UPDATE_NEEDLE, 
+					_actor, 
+					data.totalStat.getResData(CharAttributeType.RES_JING_ZHENG), 
+					0);
 				
 			}
 		}
-
+		
 		public static function get actorGroundXYTips() : String
 		{
 			return int(actor.position.x) + "," + int(actor.position.z);
 		}
-
+		
 		public static function getActorSpellHandHight() : int
 		{
 			var position : Vector3D = actor.getChildScenePositionByName(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_body_02); //"出手挂节点"
@@ -186,7 +186,7 @@ package com.rpgGame.app.manager.role
 				return position.y;
 			return actor.y;
 		}
-
+		
 		/**
 		 * 更新主角状态，切换场景时会更新主角的生命值、buff列表、动作、影子
 		 * @param info
@@ -195,7 +195,7 @@ package com.rpgGame.app.manager.role
 		public static function updateActorStatus() : void
 		{
 			CharAttributeManager.setCharHp(MainRoleManager.actorInfo, MainRoleManager.actorInfo.totalStat.hp);
-//			MainRoleManager.actor.mapAreaType = 0;
+			//			MainRoleManager.actor.mapAreaType = 0;
 			MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
 			MainRoleManager.actor.setGroundXY(MainRoleManager.actorInfo.x, MainRoleManager.actorInfo.y);
 			if (MainRoleManager.actorInfo.totalStat.hp <= 0)
@@ -245,21 +245,39 @@ package com.rpgGame.app.manager.role
 		 */
 		public static function get isInCountryWar():Boolean
 		{
-//			var currentWarInfo:CountryWarInfoData = CountryWarManager.getCurrentWarInfo();
-//			if(currentWarInfo)
-//			{
-//				if(!CountryManager.isMyEnemyCountry(currentWarInfo.attackCountry) || !CountryManager.isMyEnemyCountry(currentWarInfo.defenceCountry))
-//				{
-//					if(MapDataManager.currentScene.isCountryWarMap && actorInfo.sceneSequence == currentWarInfo.defenceCountry)
-//					{
-//						return true;
-//					}
-//				}
-//			}
+			//			var currentWarInfo:CountryWarInfoData = CountryWarManager.getCurrentWarInfo();
+			//			if(currentWarInfo)
+			//			{
+			//				if(!CountryManager.isMyEnemyCountry(currentWarInfo.attackCountry) || !CountryManager.isMyEnemyCountry(currentWarInfo.defenceCountry))
+			//				{
+			//					if(MapDataManager.currentScene.isCountryWarMap && actorInfo.sceneSequence == currentWarInfo.defenceCountry)
+			//					{
+			//						return true;
+			//					}
+			//				}
+			//			}
 			return false;
 		}
-
-	
 		
+		/**获取一个不带区的名字
+		 * 
+		 * length 最大长度，如果超过长度用...代替
+		 * */
+		public static function getPlayerName(name:String,length:int=0):String
+		{
+			var arr:Array= name.split(']');
+			var newname:String="";
+			if(arr)	{
+				for(var i:int=1;i<arr.length;i++)
+				{
+					newname+=arr[i];
+				}
+			}
+			if(length>0&&newname.length>length)
+			{
+				newname=newname.slice(0,length)+"...";
+			}
+			return newname;
+		}		
 	}
 }
