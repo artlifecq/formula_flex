@@ -204,28 +204,38 @@ package com.rpgGame.appModule.guild.war
 			info.state=3;*/
 			
 			if(!info||!info.occupyGuildName){
+				nm.lbTxt.textAlign="center";
 				nm.lbTxt.htmlText="未占领";
-				nm.lbTxt.textAlign="center"
 			}else{
-				var htmlStr:String;
 				nm.lbTxt.textAlign="left";
+				var htmlStr:String;
 				if(info.attackGuildName&&(info.state==3||info.state==4)){
 					htmlStr=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"[占领时间]:");
-					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,info.occupyDay+"\n");
+					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,info.occupyDay+"天\n");
 					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"[守]");
 					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,info.occupyGuildName+"\n");
-					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,"[攻]");
-					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,info.attackGuildName);
+					if(info.id==EnumCity.WANG_CHENG){
+						for(var i:int=0;i<_msg.citys.length;i++){
+							var cityInfo:GuildWarCityInfo=_msg.citys[i];
+							if(cityInfo.id!=EnumCity.WANG_CHENG){
+								htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,"[攻]");
+								htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,cityInfo.occupyGuildName+"\n");
+							}
+						}
+					}else{
+						htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,"[攻]");
+						htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,info.attackGuildName);
+					}
 				}else{
 					htmlStr=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"[占领时间]:");
-					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,info.occupyDay+"\n");
+					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,info.occupyDay+"天\n");
 					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"[占]");
 					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,info.occupyGuildName);
 				}
 				nm.lbTxt.htmlText=htmlStr;
 			}
 			nm.container.height=nm.lbTxt.textHeight+5;
-			nm.lbTxt.x=(nm.container.width-nm.lbTxt.textWidth)/2;
+			nm.width=nm.lbTxt.textWidth+60;
 			nm.container.y=_initNameSeats.getValue(city).y-nm.container.height;
 			nm.container.x=_initNameSeats.getValue(city).x;
 		}
