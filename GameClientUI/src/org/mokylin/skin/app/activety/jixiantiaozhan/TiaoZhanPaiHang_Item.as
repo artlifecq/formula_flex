@@ -37,6 +37,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			super();
 			
 			this.currentState = "normal";
+			this.height = 102;
+			this.width = 304;
 			this.elementsContent = [__TiaoZhanPaiHang_Item_UIAsset1_i(),uiTitle1_i(),gRank_i(),num_i(),ico1_i()];
 			
 			states = {
