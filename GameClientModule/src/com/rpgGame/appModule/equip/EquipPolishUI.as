@@ -222,11 +222,20 @@ package com.rpgGame.appModule.equip
 			}
 			
 			deleteItems(selectedUse,itemInfo);
-			refreshUseEquipGrid();
+			refreshUseEquipGrid();			
 			
-			_goodsContainerUse.setGrayIsSelect(itemInfo,false);
-			
-			if(itemInfo.qItem.q_type==GoodsType.STRENGTH||isPolish(itemInfo as EquipInfo)){
+			if(itemInfo.qItem.q_type!=GoodsType.STRENGTH){
+				_goodsContainerUse.setGrayIsSelect(itemInfo,false);
+				_goodsContainerTarget.setGrayIsSelect(itemInfo,false);
+			}else if(itemInfo.qItem.q_type==GoodsType.STRENGTH){
+				var info:ClientItemInfo=_goodsContainerUse.getDragDropItemByLong(itemInfo.itemInfo.itemId);
+				if(info){
+					info.count = info.itemInfo.num-getItemNum(info);
+					_goodsContainerUse.setGrayIsSelect(info,false);
+				}
+			}
+			if(itemInfo.qItem.q_type!=GoodsType.STRENGTH&&isPolish(itemInfo as EquipInfo))
+			{
 				_goodsContainerTarget.setGrayIsSelect(itemInfo,false);
 			}
 			addExp=getAddExt();
@@ -234,6 +243,18 @@ package com.rpgGame.appModule.equip
 				addExp=0;
 			}
 			updateView();
+		}
+		
+		private function getItemNum(info:ClientItemInfo):int
+		{
+			if(selectedUse==null||selectedUse.length==0) return 0;
+			var num:int=0;
+			for(var i:int=0;i<selectedUse.length;i++)
+			{
+				if(selectedUse[i].itemInfo.itemId.EqualTo(info.itemInfo.itemId))
+					num++;
+			}
+			return num;
 		}
 		
 		private function getAddExt():int
@@ -400,6 +421,8 @@ package com.rpgGame.appModule.equip
 			for each(var info:GridInfo in datas){
 				if(info.data){
 					item=info.data as ClientItemInfo;
+					if(item.qItem.q_type==GoodsType.STRENGTH)
+						continue;
 					if(item is EquipInfo&&isDuanZao(item as EquipInfo)){//具有锻造属性
 						continue;
 					}
@@ -512,16 +535,38 @@ package com.rpgGame.appModule.equip
 		
 		private function setUseItem(itemInfo:ClientItemInfo):void
 		{
-			_goodsContainerUse.setGrayIsSelect(itemInfo,true);
-			
-			if(itemInfo.qItem.q_type==GoodsType.STRENGTH||isPolish(itemInfo as EquipInfo)){
-				_goodsContainerTarget.setGrayIsSelect(itemInfo,true);
+			if(itemInfo.qItem.q_type!=GoodsType.STRENGTH)
+			{
+				_goodsContainerUse.setGrayIsSelect(itemInfo,true);
+				useListIds.length=0;
+				selectedUse.push(itemInfo);
+				refreshUseEquipGrid();
+				addExp+=itemInfo.qItem.q_polish_num;
+				updateView();			
 			}
-			useListIds.length=0;
-			selectedUse.push(itemInfo);
-			refreshUseEquipGrid();
-			addExp+=itemInfo.qItem.q_polish_num;
-			updateView();			
+			else if(itemInfo.qItem.q_type==GoodsType.STRENGTH){
+				if(itemInfo.count>0){
+					var info:ClientItemInfo=ItemUtil.convertClientItemInfoById(itemInfo.qItem.q_id);
+					info.itemInfo.itemId=itemInfo.itemInfo.itemId;
+					info.count=1;
+					if(!_isMax&&selectedUse.length<6)
+					{
+						selectedUse.push(info);
+						refreshUseEquipGrid();
+						addExp+=info.qItem.q_strengthen_num;
+						updateView();
+						itemInfo.count=itemInfo.itemInfo.num-getItemNum(info);
+					}
+					if(itemInfo.count>0)
+						_goodsContainerUse.setGrayIsSelect(itemInfo,false);	
+					else
+						_goodsContainerUse.setGrayIsSelect(itemInfo,true);	
+				}
+			}
+			
+			if(itemInfo.qItem.q_type!=GoodsType.STRENGTH&&isPolish(itemInfo as EquipInfo)){
+				_goodsContainerTarget.setGrayIsSelect(itemInfo,true);
+			}	
 		}
 		
 		private function refreshUseEquipGrid():void
@@ -760,15 +805,23 @@ package com.rpgGame.appModule.equip
 			for each(var grid:DragDropItem in _useEquipGrids){
 				var item:ClientItemInfo=grid.gridInfo?grid.gridInfo.data as ClientItemInfo:null;
 				if(item){
-					addExp-=item.qItem.q_polish_num;
-					
+					addExp-=item.qItem.q_polish_num;			
 					var info:GridInfo=getGridInfo(_goodsContainerTarget.dataProvider,grid.gridInfo.data);
 					if(info){
 						_goodsContainerTarget.setGrayIsSelect(item,false);
 					}
-					info=getGridInfo(_goodsContainerUse.dataProvider,grid.gridInfo.data);
-					if(info){
-						_goodsContainerUse.setGrayIsSelect(item,false);
+					if(item.qItem.q_type!=GoodsType.STRENGTH)
+					{
+						info=getGridInfo(_goodsContainerUse.dataProvider,grid.gridInfo.data);
+						if(info){
+							_goodsContainerUse.setGrayIsSelect(item,false);
+						}
+					}else if(item.qItem.q_type==GoodsType.STRENGTH){
+						var infoitem:ClientItemInfo=_goodsContainerUse.getDragDropItemByLong(item.itemInfo.itemId);
+						if(infoitem){
+							infoitem.count=infoitem.itemInfo.num;
+							_goodsContainerUse.setGrayIsSelect(infoitem,false);
+						}
 					}
 				}
 				grid.setGridEmpty();

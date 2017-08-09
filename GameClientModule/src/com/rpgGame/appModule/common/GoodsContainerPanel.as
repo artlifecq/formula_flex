@@ -26,6 +26,7 @@ package com.rpgGame.appModule.common
 	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
+	import org.game.netCore.data.long;
 	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_chat;
 	
 	import starling.core.Starling;
@@ -48,7 +49,7 @@ package com.rpgGame.appModule.common
 		/** 拖动物品放下时 **/
 		private static var helperGridInfo:GridInfo;
 		
-//		private static const refleshGridTimer : int = 0;
+		//		private static const refleshGridTimer : int = 0;
 		protected var _dataProvider:ListCollection;
 		/** 当前页拥有的格子数据量,可以通过setGridsCount来改变 **/
 		public var gridCount:int;
@@ -68,13 +69,13 @@ package com.rpgGame.appModule.common
 		 */	
 		private var containerId:int = -1;
 		private var goodsList : List;
-
+		
 		public function set dataProvider(value:ListCollection):void
 		{
 			_dataProvider = value;
 			goodsList.dataProvider =  _dataProvider;
 		}
-
+		
 		private var createGoodsListItemRender:Function;
 		public var updateGridLen : Function;	
 		public var onDragDropEnd : Function;
@@ -136,7 +137,7 @@ package com.rpgGame.appModule.common
 			gridList.itemRendererFactory = createItemRender;
 			gridList.clipContent = true;
 			gridList.scrollBarDisplayMode = "fixed";
-//			gridList.verticalScrollBarPosition = "right";
+			//			gridList.verticalScrollBarPosition = "right";
 			gridList.horizontalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			gridList.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
 			GuiThemeStyle.setScrollerStyle(gridList, org.mokylin.skin.component.scrollbar.ScrollBarSkin_chat);
@@ -201,7 +202,7 @@ package com.rpgGame.appModule.common
 		
 		private function updateContainer():void
 		{
-		
+			
 		}
 		
 		/**
@@ -248,7 +249,6 @@ package com.rpgGame.appModule.common
 			var grid:DragDropItem = getGridByIndex(index);
 			if(!grid)return;
 			grid.gridInfo = gridInfo;
-			
 			updateGridLen && updateGridLen();
 		}
 		
@@ -265,6 +265,18 @@ package com.rpgGame.appModule.common
 			{
 				if(dragDropItem.gridInfo.data == iteminfo)
 					return dragDropItem;
+			}
+			return null;
+		}
+		
+		/**通过唯一ID获取一个格子信息*/
+		public function getDragDropItemByLong(id : long):ClientItemInfo
+		{
+			var dragDropItem : DragDropItem;
+			for each(dragDropItem in dndGrids)
+			{
+				if(dragDropItem.gridInfo.data&&(dragDropItem.gridInfo.data as ClientItemInfo).itemInfo.itemId.EqualTo(id))
+					return (dragDropItem.gridInfo.data as ClientItemInfo);
 			}
 			return null;
 		}
@@ -286,19 +298,19 @@ package com.rpgGame.appModule.common
 		
 		protected function refleshGridByItemIndex(index:int):void
 		{
-//			var itemInfo:ItemInfo = _mgr.getItemInfoByIndex(index);
-//			var refleshIndex:int = itemInfo?itemInfo.index:index;
-//			var dragDropItem : DragDropItem;
-//			var item : ItemInfo;
-//			for each(dragDropItem in dndGrids)
-//			{
-//				if(!dragDropItem || !dragDropItem.gridInfo)
-//					continue;
-//				item = dragDropItem.gridInfo.data as ItemInfo;
-//				if(item && item.index == refleshIndex)
-//					setGridInfo(dragDropItem.index,itemInfo);
-//			}
-//			TimerServer.add(refleshGrids,refleshGridTimer);
+			//			var itemInfo:ItemInfo = _mgr.getItemInfoByIndex(index);
+			//			var refleshIndex:int = itemInfo?itemInfo.index:index;
+			//			var dragDropItem : DragDropItem;
+			//			var item : ItemInfo;
+			//			for each(dragDropItem in dndGrids)
+			//			{
+			//				if(!dragDropItem || !dragDropItem.gridInfo)
+			//					continue;
+			//				item = dragDropItem.gridInfo.data as ItemInfo;
+			//				if(item && item.index == refleshIndex)
+			//					setGridInfo(dragDropItem.index,itemInfo);
+			//			}
+			//			TimerServer.add(refleshGrids,refleshGridTimer);
 			refleshGrids();
 		}
 		
@@ -357,7 +369,7 @@ package com.rpgGame.appModule.common
 		private function onRefleshGrids(containerId:int):void
 		{
 			if(containerId != this.containerId)return;
-				refleshGrids();
+			refleshGrids();
 		}
 		
 		private function refleshGrid(info:ClientItemInfo, newInfo:ClientItemInfo):void
@@ -404,7 +416,7 @@ package com.rpgGame.appModule.common
 		}
 		
 		//============================拆分===============================
-		 
+		
 		
 		
 		//============================移动===============================
@@ -422,7 +434,7 @@ package com.rpgGame.appModule.common
 				movingFace = new DragDropItem( IcoSizeEnum.ICON_42, -1);
 				movingFace.touchable = movingFace.touchGroup = false;
 			}
-//			if(helperGridInfo == null)helperGridInfo = new GridInfo(info.containerID, info.index);
+			//			if(helperGridInfo == null)helperGridInfo = new GridInfo(info.containerID, info.index);
 			movingFace.faceInfo = info;
 			movingFace.setIconResName(ClientConfig.getItemIcon(info.icoName, IcoSizeEnum.ICON_42 ));
 			
@@ -430,7 +442,7 @@ package com.rpgGame.appModule.common
 			
 			var srcFace:DragDropItem = getDragDropItemByItemInfo(info);
 			srcFace.isGary=true;//置灰
-//			setGridInfo(info.index, null);//前清空
+			//			setGridInfo(info.index, null);//前清空
 			
 			startFaceMove();
 		}
@@ -611,11 +623,11 @@ package com.rpgGame.appModule.common
 			EventManager.addEvent(ItemEvent.ITEM_ADD,onAddItem);
 			EventManager.addEvent(ItemEvent.ITEM_CHANG,onItemInfoChange);
 			EventManager.addEvent(ItemEvent.ITEM_DELETE,removeItem);
-		
+			
 			EventManager.addEvent(ItemEvent.ITEM_PRE_MOVE, preMove);
 			EventManager.addEvent(ItemEvent.ITEM_DROPED, onDropItem);
 			EventManager.addEvent(ItemEvent.ITEM_MOVE_FAIL, onServerReturnMoveFail);
-//			EventManager.addEvent(ItemEvent.ITEM_GRID_UNLOCK, onItemGridUnlock);
+			//			EventManager.addEvent(ItemEvent.ITEM_GRID_UNLOCK, onItemGridUnlock);
 			
 			EventManager.addEvent(ItemEvent.ITEM_REFLESH_BY_ITEM_INDEX,refleshGridByItemIndex);
 			EventManager.addEvent(ItemEvent.ITEM_CONTAINER_REFLESH, onRefleshGrids);
@@ -633,7 +645,7 @@ package com.rpgGame.appModule.common
 			EventManager.removeEvent(ItemEvent.ITEM_PRE_MOVE, preMove);
 			EventManager.removeEvent(ItemEvent.ITEM_DROPED, onDropItem);
 			EventManager.removeEvent(ItemEvent.ITEM_MOVE_FAIL, onServerReturnMoveFail);
-//			EventManager.removeEvent(ItemEvent.ITEM_GRID_UNLOCK, onItemGridUnlock);
+			//			EventManager.removeEvent(ItemEvent.ITEM_GRID_UNLOCK, onItemGridUnlock);
 			
 			EventManager.removeEvent(ItemEvent.ITEM_REFLESH_BY_ITEM_INDEX,refleshGridByItemIndex);
 			EventManager.removeEvent(ItemEvent.ITEM_CONTAINER_REFLESH, onRefleshGrids);
@@ -665,19 +677,19 @@ package com.rpgGame.appModule.common
 		{
 			return containerId;
 		}
-
+		
 		/** 可拖动格子,若容器为List，可通过list.itemRendererFactory生成DragDropItem,否则子类自行设置 **/
 		public function get dndGrids():Vector.<DragDropItem>
 		{
 			return _dndGrids;
 		}
-
+		
 		/** 数据<GridInfo> **/
 		public function get dataProvider():ListCollection
 		{
 			return _dataProvider;
 		}
-
-
+		
+		
 	}
 }
