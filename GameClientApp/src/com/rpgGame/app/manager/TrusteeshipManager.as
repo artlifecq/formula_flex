@@ -214,7 +214,7 @@ package com.rpgGame.app.manager
 		{
 			stopFightTarget();
 			var selectedRole:SceneRole=SceneRoleSelectManager.selectedRole;
-			if(selectedRole)
+			/*if(selectedRole)
 			{
 				var mdata:MonsterData=selectedRole.data as MonsterData;
 				if(mdata==null||(mdata.ownerId>0&&mdata.monsterData.q_owner==1))//挂机不打玩家和玩家的召唤物
@@ -222,7 +222,7 @@ package com.rpgGame.app.manager
 					SceneRoleSelectManager.selectedRole=null;
 				}
 			}
-			selectedRole=SceneRoleSelectManager.selectedRole;
+			selectedRole=SceneRoleSelectManager.selectedRole;*/
 			if (selectedRole)
 			{
 				var modeState : int = FightManager.getFightRoleState(selectedRole);
