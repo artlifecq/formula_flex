@@ -41,11 +41,11 @@ package com.rpgGame.appModule.shop
 		private function init():void
 		{
 			var cell:BattleShopItemExt;
-			var startX:int=35;
+			var startX:int=45;
 			var startY:int=102;
 			for (var i:int = 0; i < maxCount; i++) 
 			{
-				cell=new BattleShopItemExt(startX+int(i%3)*300,startY+int(i/3)*145);
+				cell=new BattleShopItemExt(startX+int(i%3)*300,startY+int(i/3)*155);
 				cellList.push(cell);
 				cell.visible=false;
 				this.addChild(cell);

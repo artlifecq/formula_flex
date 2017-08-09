@@ -38,7 +38,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			
 			this.currentState = "normal";
 			this.height = 102;
-			this.width = 304;
+			this.width = 290;
 			this.elementsContent = [__PaiHangItem_UIAsset1_i(),uiTitle1_i(),gRank_i(),num_i(),ico1_i()];
 			
 			states = {
@@ -76,8 +76,8 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 			ico1 = temp;
 			temp.name = "ico1";
 			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 26;
-			temp.y = 34;
+			temp.x = 31;
+			temp.y = 37;
 			return temp;
 		}
 

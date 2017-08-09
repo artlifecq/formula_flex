@@ -28,6 +28,10 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var bg1:feathers.controls.UIAsset;
+
+		public var bg2:feathers.controls.UIAsset;
+
 		public var btnBack:feathers.controls.Button;
 
 		public var btnJiangli:feathers.controls.Button;
@@ -39,8 +43,6 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 		public var gTop:feathers.controls.Group;
 
 		public var item_msg:feathers.controls.SkinnableContainer;
-
-		public var lbTime:feathers.controls.Label;
 
 		public var lbTime0:feathers.controls.Label;
 
@@ -66,6 +68,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 
 		public var top3:feathers.controls.SkinnableContainer;
 
+		public var uiCon:feathers.controls.UIAsset;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -77,7 +81,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [__JingJiChan1_Skin_UIAsset2_i(),gNormal_i(),gTop_i(),skinInfo_i(),lbTime0_i(),lbTime_i(),__JingJiChan1_Skin_Label1_i(),numZhanli_i(),btnTiaoZhan_i(),btnBack_i(),btnJiangli_i(),item_msg_i(),skinBattke_i()];
+			this.elementsContent = [bg1_i(),bg2_i(),gNormal_i(),gTop_i(),skinInfo_i(),lbTime0_i(),__JingJiChan1_Skin_UIAsset2_i(),__JingJiChan1_Skin_UIAsset3_i(),numZhanli_i(),__JingJiChan1_Skin_UIAsset4_i(),btnTiaoZhan_i(),btnBack_i(),uiCon_i(),btnJiangli_i(),item_msg_i(),skinBattke_i()];
 			
 			states = {
 			};
@@ -88,21 +92,51 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __JingJiChan1_Skin_Label1_i():feathers.controls.Label
+		private function __JingJiChan1_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "我的排名：";
-			temp.color = 0xBEA757;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 714;
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/zhanchang/tiaozhanshuaxinshijian.png";
+			temp.x = 115;
 			temp.y = 561;
 			return temp;
 		}
 
-		private function __JingJiChan1_Skin_UIAsset2_i():feathers.controls.UIAsset
+		private function __JingJiChan1_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/zhanchang/wodepaiming.png";
+			temp.x = 719;
+			temp.y = 561;
+			return temp;
+		}
+
+		private function __JingJiChan1_Skin_UIAsset4_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/app/zhanchang/di.png";
+			temp.x = 354;
+			temp.y = 87;
+			return temp;
+		}
+
+		private function bg1_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg1 = temp;
+			temp.name = "bg1";
 			temp.styleName = "ui/big_bg/zhanchang/bg.jpg";
+			temp.x = 22;
+			temp.y = 87;
+			return temp;
+		}
+
+		private function bg2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg2 = temp;
+			temp.name = "bg2";
+			temp.styleName = "ui/big_bg/zhanchang/bg1.jpg";
+			temp.visible = false;
 			temp.x = 22;
 			temp.y = 87;
 			return temp;
@@ -125,7 +159,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			btnJiangli = temp;
 			temp.name = "btnJiangli";
 			temp.styleClass = org.mokylin.skin.app.zhanchang.button.ButtonJiangli;
-			temp.x = 354;
+			temp.x = 396;
 			temp.y = 525;
 			return temp;
 		}
@@ -136,7 +170,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			btnTiaoZhan = temp;
 			temp.name = "btnTiaoZhan";
 			temp.styleClass = org.mokylin.skin.app.zhanchang.button.ButtonTiaozhan;
-			temp.x = 354;
+			temp.x = 397;
 			temp.y = 87;
 			return temp;
 		}
@@ -157,8 +191,9 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			gTop = temp;
 			temp.name = "gTop";
-			temp.x = 125;
-			temp.y = 122;
+			temp.visible = false;
+			temp.x = 130;
+			temp.y = 135;
 			temp.elementsContent = [top3_i(),top2_i(),top1_i()];
 			return temp;
 		}
@@ -186,21 +221,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 117;
-			temp.x = 203;
-			temp.y = 561;
-			return temp;
-		}
-
-		private function lbTime_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbTime = temp;
-			temp.name = "lbTime";
-			temp.text = "挑战刷新时间：";
-			temp.color = 0xBEA757;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 117;
-			temp.x = 104;
+			temp.x = 211;
 			temp.y = 561;
 			return temp;
 		}
@@ -215,7 +236,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.label = "1168";
 			temp.styleClass = org.mokylin.skin.app.zhanchang.uinumber.UINumberNumber;
 			temp.width = 122;
-			temp.x = 781;
+			temp.x = 783;
 			temp.y = 555;
 			return temp;
 		}
@@ -358,6 +379,17 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.width = 187;
 			temp.x = 260;
 			temp.y = -15;
+			return temp;
+		}
+
+		private function uiCon_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiCon = temp;
+			temp.name = "uiCon";
+			temp.styleName = "ui/app/zhanchang/kuang.png";
+			temp.x = 353;
+			temp.y = 525;
 			return temp;
 		}
 

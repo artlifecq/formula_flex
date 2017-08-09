@@ -46,7 +46,7 @@ package com.rpgGame.appModule.battle.dfdj
 			}
 			else
 			{
-				_timer.stop();
+				//_timer.stop();
 				if (_step==1) 
 				{
 					hide();
@@ -103,7 +103,7 @@ package com.rpgGame.appModule.battle.dfdj
 			_step=1;
 			setState(_step);
 			_endTime=getTimer()+time*1000;
-			_timer.start();
+			//_timer.start();
 			onTimer();
 		}
 		private function setState(state:int):void

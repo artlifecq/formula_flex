@@ -1,9 +1,12 @@
 package org.mokylin.skin.app.zhanchang.jingjichang
 {
 	import feathers.controls.text.Fontter;
+	import feathers.controls.Button;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import org.mokylin.skin.component.button.ButtonSkin_shang;
+	import org.mokylin.skin.component.button.ButtonSkin_xiala;
 
 	/**
 	 * @private
@@ -21,9 +24,9 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 
 		public var labTitle0:feathers.controls.Label;
 
-		public var uiDown:feathers.controls.UIAsset;
+		public var uiDown:feathers.controls.Button;
 
-		public var uiUp:feathers.controls.UIAsset;
+		public var uiUp:feathers.controls.Button;
 
 
 		//==========================================================================
@@ -52,9 +55,10 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			imgBg = temp;
 			temp.name = "imgBg";
-			temp.height = 27;
-			temp.styleName = "ui/app/zhanchang/jingjichang/kuang.png";
+			temp.styleName = "ui/component/text/flip_bg.png";
 			temp.width = 330;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -71,7 +75,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 302;
 			temp.x = 5;
-			temp.y = 19;
+			temp.y = 18;
 			return temp;
 		}
 
@@ -85,29 +89,29 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 302;
 			temp.x = 5;
-			temp.y = 3;
+			temp.y = 2;
 			return temp;
 		}
 
-		private function uiDown_i():feathers.controls.UIAsset
+		private function uiDown_i():feathers.controls.Button
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			var temp:feathers.controls.Button = new feathers.controls.Button();
 			uiDown = temp;
 			temp.name = "uiDown";
-			temp.styleName = "ui/app/zhanchang/jingjichang/xia.png";
-			temp.x = 310;
-			temp.y = 9;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_xiala;
+			temp.x = 308;
+			temp.y = 0;
 			return temp;
 		}
 
-		private function uiUp_i():feathers.controls.UIAsset
+		private function uiUp_i():feathers.controls.Button
 		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			var temp:feathers.controls.Button = new feathers.controls.Button();
 			uiUp = temp;
 			temp.name = "uiUp";
-			temp.styleName = "ui/app/zhanchang/jingjichang/shang.png";
-			temp.x = 310;
-			temp.y = 9;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_shang;
+			temp.x = 308;
+			temp.y = 0;
 			return temp;
 		}
 
