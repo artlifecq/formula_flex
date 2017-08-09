@@ -120,7 +120,7 @@ package com.rpgGame.app.fight.spell
 			var caseInfo : CastSpellInfo = new CastSpellInfo(getSpellData(spellID));
 			var spKey:Boolean=tryCaseSpell(caseInfo, null, false, ignoreLock);
 			if(!spKey)
-			{Lyt.a("isNormalSpell-3");
+			{
 				TrusteeshipManager.getInstance().isNormalSpell = false;
 				TrusteeshipManager.getInstance().nextSpell = getSpellData(spellID);
 			}
@@ -163,7 +163,7 @@ package com.rpgGame.app.fight.spell
 			{
 				//把动作切换为战斗待机状态
 				if (TrusteeshipManager.getInstance().tripleSkillCtrl.isTripleSkill(caseInfo.spellData.q_skillID)) 
-				{Lyt.a("isNormalSpell-4");
+				{
 					TrusteeshipManager.getInstance().isNormalSpell = false;
 					MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_PREWAR, null, false, false, [RoleStateType.CONTROL_WALK_MOVE]);
 				}
@@ -180,7 +180,7 @@ package com.rpgGame.app.fight.spell
 				requestReleaseSpell();
 			}
 			else if (caseState == CASE_STATE_NOT_IN_RELEASE_RANGE)//距离过远
-			{Lyt.a("isNormalSpell-5");
+			{
 				TrusteeshipManager.getInstance().isNormalSpell = false;
 				//三连击的话直接发送请求
 				if (TrusteeshipManager.getInstance().tripleSkillCtrl.isTripleSkill(caseInfo.spellData.q_skillID)) 
@@ -233,7 +233,7 @@ package com.rpgGame.app.fight.spell
 					
 					GameLog.add("====================将要释放技能：" + caseInfo.caseSpellData.q_skillID);
 					
-					Lyt.a("请求释放技能："+caseInfo.caseSpellData.q_skillName+"====");
+					//Lyt.a("请求释放技能："+caseInfo.caseSpellData.q_skillName+"====");
 					SpellSender.releaseSpell(caseInfo.caseSpellData.q_skillID, caseInfo.releasePos.x, caseInfo.releasePos.y, angle, caseInfo.targetServerID);
 					
 					if(TrusteeshipManager.getInstance().tripleSkillCtrl.isLastTripleSkill(caseInfo.caseSpellData.q_skillID))
@@ -245,7 +245,7 @@ package com.rpgGame.app.fight.spell
 				}
 			}
 			function tripleSkillCtrlEnd():void
-			{Lyt.a("isNormalSpell-1");
+			{
 				TrusteeshipManager.getInstance().isNormalSpell = false;
 			}
 			function onWalkArriveRelease(ref : WalkMoveStateReference) : void

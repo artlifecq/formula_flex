@@ -207,7 +207,7 @@ package com.rpgGame.app.state.role
 					return false;
 				var nowTime : int = getTimer();
 				if (nowTime - RoleStateUtil.lastWalkTime < RoleStateUtil.WALK_DELAY)
-				{
+				{Lyt.a("WALK-lastWalkTime");
 					return false;
 				}
 				if (walkRole.stateMachine.isDeadState)
@@ -216,7 +216,7 @@ package com.rpgGame.app.state.role
 					return false;
 				}
 				else if (walkRole.stateMachine.isAttackHarding)
-				{
+				{Lyt.a("WALK-isAttackHarding");
 					NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsHarding); //"技能硬直中"
 					return false;
 				}
