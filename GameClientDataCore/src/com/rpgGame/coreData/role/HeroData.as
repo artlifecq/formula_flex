@@ -392,6 +392,7 @@ package com.rpgGame.coreData.role
 			data.maxExp=heroInfo.maxExp.fValue;
 			data.maxZhenqi=heroInfo.maxZhenQi.fValue;
 			data.curExp=heroInfo.exp.fValue;
+			data.guildId=heroInfo.guildId;
 			data.guildMemberType = heroInfo.guildMemberType;
 			data.guildName = heroInfo.guildName;
 			data.guildIsLeader=heroInfo.guildIsLeader;

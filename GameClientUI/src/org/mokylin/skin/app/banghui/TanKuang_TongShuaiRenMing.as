@@ -206,7 +206,7 @@ package org.mokylin.skin.app.banghui
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbMember = temp;
 			temp.name = "lbMember";
-			temp.text = "普通帮众";
+			temp.text = "非统帅";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 60;
