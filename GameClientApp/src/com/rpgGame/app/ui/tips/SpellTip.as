@@ -63,6 +63,7 @@ package com.rpgGame.app.ui.tips
 			mainIco.bindBg(_spellTip.Icon1);
 			riseIco.bindBg(_spellTip.Icon2);
 			_spellTip.lbShuoming.wordWrap=true;
+			_spellTip.lbShuoming.enableTextBatch=false;
 			_spellTip.lbJinjie2.wordWrap=true;			
 		}		
 		
