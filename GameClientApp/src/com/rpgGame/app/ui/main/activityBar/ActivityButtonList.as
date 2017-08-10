@@ -59,7 +59,7 @@
 		private function updatePositionAll(data:*=null):void
 		{
 			this.removeChildren();
-			var scentType:int=MapDataManager.currentScene.mapType;
+			var q_map_zones:int=MapDataManager.currentScene.getData().q_map_zones;
 			var rows:Array = FuncionBarCfgData.getinfoRows(TYPE);
 			var length:int = rows.length;
 			var button:IOpen;
@@ -79,7 +79,7 @@
 				width = GRID_WIDTH[row];
 				for(var j:int=0;j<len;j++){
 					funinfo = list[j] as FunctionBarInfo;
-					if(funinfo.mapType!=0&&funinfo.mapType!= scentType)
+					if(q_map_zones==1&&funinfo.q_map_zones==q_map_zones)
 						continue;
 					button = MainButtonManager.getButtonBuyInfo(funinfo);
 					if(button!=null&&button.canOpen())

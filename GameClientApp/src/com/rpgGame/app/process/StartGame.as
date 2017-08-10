@@ -83,6 +83,7 @@ package com.rpgGame.app.process
     import org.client.mainCore.bean.BeanManager;
     import org.client.mainCore.manager.EventManager;
     import org.client.mainCore.utils.Tick;
+    import org.game.netCore.net.BeanConfig;
 
 	/**
 	 *
@@ -130,6 +131,7 @@ package com.rpgGame.app.process
 		private function onAllBeanComplete(e : Event) : void
 		{
 			BeanManager.removeEventListener(BeanEvent.COMPLETE, onAllBeanComplete);
+			BeanConfig.isInit=true;
 			if (ClientConfig.isSingle)
 			{
 				SingleClientTest.createRoleData();
@@ -165,7 +167,7 @@ package com.rpgGame.app.process
 				GlobalSettingManager.init();
 				
 				GamePerformsManager.init();
-				GamePerformsManager.autoDisplayAdjust = true;
+				GamePerformsManager.autoDisplayAdjust = false;
 				TabManager.init();
 				//
 

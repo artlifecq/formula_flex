@@ -188,11 +188,6 @@ package com.rpgGame.app.manager.task
 			{
 				Lyt.a(taskid.ToGID()+"-taskId-"+mainTaskInfo.taskId.ToGID());
 			}
-			
-			if(mainTaskInfo!=null&&taskid.ToGID()!=mainTaskInfo.taskId.ToGID())
-			{
-				return TaskType.MAINTYPE_MAINTASK;
-			}
 			if(mainTaskInfo!=null&&taskid.ToGID()==mainTaskInfo.taskId.ToGID())
 			{
 				return TaskType.MAINTYPE_MAINTASK;

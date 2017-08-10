@@ -406,12 +406,12 @@ package com.rpgGame.app.state.role.control
 					{
 						var distance : Number = MathUtil.getDistance((_machine.owner as SceneRole).x, (_machine.owner as SceneRole).z, _nextPos.x, _nextPos.z);
 						nextPosGapTm = (distance / _stateReference.speed * 1000);
-						trace("主角一步用的时间:  " + nextPosGapTm + "   主角一步的距离:  " + distance + "   主角一步的速度:  " + _stateReference.speed);
-						trace("主角当前位置：         " + (_machine.owner as SceneRole).x + "   " + (_machine.owner as SceneRole).z);
-						trace("主角下一步的目标点："  + _nextPos.x + "   " + _nextPos.z);
+//						trace("主角一步用的时间:  " + nextPosGapTm + "   主角一步的距离:  " + distance + "   主角一步的速度:  " + _stateReference.speed);
+//						trace("主角当前位置：         " + (_machine.owner as SceneRole).x + "   " + (_machine.owner as SceneRole).z);
+//						trace("主角下一步的目标点："  + _nextPos.x + "   " + _nextPos.z);
 						var timeDiff:int=WalkMoveStateReference(_ref).getServerClientTimeDiff((_machine.owner as SceneRole).x, (_machine.owner as SceneRole).z);
 						nextPosGapTm+=timeDiff;
-						trace("客户端服务器时间修正："+timeDiff+" 最终时间："+nextPosGapTm);
+//						trace("客户端服务器时间修正："+timeDiff+" 最终时间："+nextPosGapTm);
 					}
 					if (nextPosGapTm > 0)
 					{
@@ -471,7 +471,7 @@ package com.rpgGame.app.state.role.control
 			if (prevState)
 			{
 				if (prevState.type == RoleStateType.CONTROL_TRAIL_MOVE)
-				{
+				{Lyt.a("walk-200");
 					return false;
 				}
 			}
@@ -485,37 +485,41 @@ package com.rpgGame.app.state.role.control
 				return false;
 			}
 			else if ((_machine as RoleStateMachine).isAttackHarding)
-			{
+			{Lyt.a("walk-201");
 				if (!force)
 					return false;
 			}
-			else if ((_machine as RoleStateMachine).isSpriteUp) 
-			{
-				return false;
-			}
+//			else if ((_machine as RoleStateMachine).isSpriteUp) 
+//			{Lyt.a("walk-202");
+//				return false;
+//			}
 			else if ((_machine as RoleStateMachine).isLockCaseSpell)
 			{
 				if (!force)
+				{
+					Lyt.a("walk-203");
 					return false;
+				}
+					
 			}
 			else if ((_machine as RoleStateMachine).isStiff)
-			{
+			{Lyt.a("walk-204");
 				return false;
 			}
 			else if ((_machine as RoleStateMachine).isStun)
-			{
+			{Lyt.a("walk-205");
 				return false;
 			}
 			else if ((_machine as RoleStateMachine).isUnmovable)
-			{
+			{Lyt.a("walk-206");
 				return false;
 			}
 			else if ((_machine as RoleStateMachine).isBlinkMoving)
-			{
+			{Lyt.a("walk-207");
 				return false;
 			}
 			else if ((_machine as RoleStateMachine).isBeatMoving)
-			{
+			{Lyt.a("walk-208");
 				return false;
 			}
 			else if ((_machine as RoleStateMachine).isBlinking)
@@ -528,7 +532,11 @@ package com.rpgGame.app.state.role.control
 			{
 				var attackState : AttackState = _machine.getCurrState(ActionState) as AttackState;
 				if (!force && !attackState.attackBroken && !attackState.canWalkRelease)
+				{
+					Lyt.a("walk-209");
 					return false;
+				}
+					
 			}
 			
 			return true;

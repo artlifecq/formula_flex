@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.battle.dfdj
 {
 	import com.game.mainCore.core.timer.GameTimer;
+	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	
@@ -37,6 +38,7 @@ package com.rpgGame.appModule.battle.dfdj
 			}
 			else
 			{
+				TrusteeshipManager.getInstance().startAutoFight();
 				_timer.stop();
 				hide();
 			}

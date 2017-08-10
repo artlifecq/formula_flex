@@ -45,7 +45,7 @@ package com.rpgGame.app.view.icon
 			this.addChild(effectSk);
 			_isshowbg=isShowBG;
 			//this.alwayShowCount=true;
-			
+			_showCD=true;
 		}
 		override public function set count( value:int ):void
 		{

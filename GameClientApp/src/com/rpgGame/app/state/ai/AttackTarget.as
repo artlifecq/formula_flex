@@ -40,7 +40,6 @@ package com.rpgGame.app.state.ai
 		private function findUseableSpell() : Q_skill_model
 		{
 			var castSpell : Q_skill_model;
-			Lyt.a("isNormalSpell:"+TrusteeshipManager.getInstance().isNormalSpell);
 			if(TrusteeshipManager.getInstance().isNormalSpell)
 			{
 				return null;
@@ -62,7 +61,7 @@ package com.rpgGame.app.state.ai
 				TrusteeshipManager.getInstance().isNormalSpell = true;
 			}
 			else
-			{Lyt.a("isNormalSpell-6");
+			{
 				TrusteeshipManager.getInstance().isNormalSpell = false;
 			}
 			

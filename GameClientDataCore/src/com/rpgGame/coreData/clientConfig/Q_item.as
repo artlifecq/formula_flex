@@ -24,7 +24,7 @@ package com.rpgGame.coreData.clientConfig
 		public var q_location:int;
 		 /**  装备阶数 */
 		public var q_levelnum:int;
-		 /**  物品品质（0白色，1绿色，2蓝色，3紫色，4金色） */
+		 /**  物品品质（0白色，1绿色，2蓝色，3紫色，4金色，5红色） */
 		public var q_default:int;
 		 /**  佩戴职业需求（0通用 1兵家 2墨家4 医家） */
 		public var q_job:int;

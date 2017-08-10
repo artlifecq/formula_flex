@@ -174,7 +174,12 @@ package com.rpgGame.app.fight.spell
 			{
 				var fightTargetMsg:ResFightBroadcastMessage = msg as ResFightBroadcastMessage;
 				_spellData = SpellDataManager.getSpellDataWithID(fightTargetMsg.skillModelId);
-				
+				if(_spellData==null)
+				{
+					GameLog.addShow("技能报错了id：" + (fightTargetMsg.skillModelId&0xffffff)+":"+(fightTargetMsg.skillModelId>>24));
+					return;
+				}
+					
 				_releaseAngle = fightTargetMsg.fightDirection;
 				_releaseAngle = (_releaseAngle + 270) % 360;
 				

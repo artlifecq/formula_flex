@@ -35,6 +35,13 @@ package com.rpgGame.appModule.guild
 		{
 			super.show();
 			EventManager.addEvent(GuildEvent.GUILD_SKILLINFO_CHAGE,refeashView);
+			EventManager.addEvent(GuildEvent.GUILD_MAINPLAYER_VALUE_CHANGE,onContributionChange);	
+			refeashView();
+		}
+		
+		private function onContributionChange():void
+		{
+			// TODO Auto Generated method stub
 			refeashView();
 		}
 		
@@ -61,6 +68,7 @@ package com.rpgGame.appModule.guild
 		{
 			super.hide();
 			EventManager.removeEvent(GuildEvent.GUILD_SKILLINFO_CHAGE,refeashView);
+			EventManager.addEvent(GuildEvent.GUILD_MAINPLAYER_VALUE_CHANGE,refeashView);	
 		}
 		
 	}

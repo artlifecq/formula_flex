@@ -176,18 +176,18 @@ package com.rpgGame.app.ui.main.head
 			var gridW:int=IcoSizeEnum.ICON_19+2;
 			changW=-1*gridW;
 			
-			var startX:int=95;
+			var startX:int=151;
 			for(i=0;i<goodBuffs.length;i++){//buff
 				icon=goodBuffs[i];
 				icon.x=startX;
-				icon.y=62;
+				icon.y=56;
 				this.addChild(icon);
 				startX=icon.x+gridW;
 			}
 			for(i=0;i<badBuffs.length;i++){//debuff
 				icon=badBuffs[i];
 				icon.x=startX;
-				icon.y=62;
+				icon.y=56;
 				this.addChild(icon);
 				startX=icon.x+gridW;
 			}

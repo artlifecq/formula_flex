@@ -72,7 +72,7 @@ package com.rpgGame.app.utils
 			var size:int = grid.iconSize;
 			grid.setIconResName( ClientConfig.getItemIcon( ShopType.getMoneyIco( type ), size ) );
 			grid.count = itemInfo.count;
-			grid.showQuality( itemInfo.quality );
+			grid.showQuality(  itemInfo.qItem );
 			grid.faceInfo = itemInfo;
 			//			grid.setIsShowCdTm(true);
 			
@@ -126,7 +126,7 @@ package com.rpgGame.app.utils
 			if(!icon)icon = "";
 			grid.setIconResName( ClientConfig.getItemIcon(icon, size ) );
 			grid.count = itemInfo.count;
-			grid.showQuality( itemInfo.quality );
+			grid.showQuality( itemInfo.qItem);
 			grid.faceInfo = itemInfo;
 			grid.setIsShowCdTm(false);
 			grid.setIsShowCdCircle(true);
@@ -222,7 +222,7 @@ package com.rpgGame.app.utils
 			grid.clear();
 			
 			var size:int = grid.iconSize;
-			grid.showQuality( -1 );
+			grid.showQuality( null );
 			grid.faceInfo = data;
 			grid.setIconResName( ClientConfig.getBuffIcon( data.icoName, size ) );
 			grid.count = data.curtStackCount;
@@ -426,14 +426,14 @@ package com.rpgGame.app.utils
 			grid.clear();
 			if( data == null )
 			{
-				grid.showQuality( -1 );
+				grid.showQuality( null );
 				grid.faceInfo = null;
 				grid.setIconResName( "" );
 				TipTargetManager.remove( grid );
 				return;
 			}
 			var size:int = grid.iconSize;
-			grid.showQuality( -1 );
+			grid.showQuality( null );
 			grid.faceInfo = data;
 			
 			var mountData:MountInfoData = data.data as MountInfoData;

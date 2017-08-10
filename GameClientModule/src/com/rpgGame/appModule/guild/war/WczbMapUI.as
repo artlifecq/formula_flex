@@ -2,6 +2,7 @@ package com.rpgGame.appModule.guild.war
 {
 	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.sender.GuildWarSender;
+	import com.rpgGame.app.utils.GSUtil;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
@@ -213,13 +214,13 @@ package com.rpgGame.appModule.guild.war
 					htmlStr=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"[占领时间]:");
 					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,info.occupyDay+"天\n");
 					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"[守]");
-					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,info.occupyGuildName+"\n");
+					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,GSUtil.unAreaName(info.occupyGuildName)+"\n");
 					if(info.id==EnumCity.WANG_CHENG){
 						for(var i:int=0;i<_msg.citys.length;i++){
 							var cityInfo:GuildWarCityInfo=_msg.citys[i];
 							if(cityInfo.id!=EnumCity.WANG_CHENG){
 								htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,"[攻]");
-								htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,cityInfo.occupyGuildName+"\n");
+								htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,GSUtil.unAreaName(cityInfo.occupyGuildName)+"\n");
 							}
 						}
 					}else{
@@ -229,8 +230,8 @@ package com.rpgGame.appModule.guild.war
 				}else{
 					htmlStr=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"[占领时间]:");
 					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,info.occupyDay+"天\n");
-					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"[占]");
-					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,info.occupyGuildName);
+//					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"[占]");
+					htmlStr+=HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,GSUtil.unAreaName(info.occupyGuildName));
 				}
 				nm.lbTxt.htmlText=htmlStr;
 			}

@@ -11,6 +11,7 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.manager.scene.SceneCursorHelper;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.stall.StallManager;
+	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.SceneSender;
@@ -146,8 +147,7 @@ package com.rpgGame.app.state.role
 					ref.data = data;
 					onArrive(ref);
 				}
-				
-				return false;
+				return true;
 			}
 			
 			if (role.isMainChar || role.isMainCamouflage)
@@ -176,7 +176,8 @@ package com.rpgGame.app.state.role
 			{
 				if (walkRole.stateMachine.isAttackHarding)
 				{
-					TweenLite.delayedCall(0.2, doWalkToPos, [role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite,true]);
+					Lyt.a("walk-isAttackHarding");
+					TweenLite.delayedCall(1, doWalkToPos, [role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite,true]);
 					return false;
 				}
 				else
@@ -184,7 +185,6 @@ package com.rpgGame.app.state.role
 					return doWalkToPos(role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite);
 				}
 			}
-			
 			return false
 		}
 		
@@ -198,51 +198,55 @@ package com.rpgGame.app.state.role
 			var walkRole : SceneRole = camouflageEntity || role;
 			if (walkRole.isMainChar || walkRole.isMainCamouflage)
 			{
-				SceneCursorHelper.getInstance().hideCursor();
-				if (MainRoleManager.isTakeZhanChe) //乘坐他人战车时不能移动
-				{
-					return false;
-				}
-				if (StallManager.isOnStall) //摆摊不能移动
-					return false;
+//				SceneCursorHelper.getInstance().hideCursor();
 				var nowTime : int = getTimer();
-				if (nowTime - RoleStateUtil.lastWalkTime < RoleStateUtil.WALK_DELAY)
+				if(!TaskAutoManager.getInstance().isTasking)//自动任务中优先执行自动任务走路  ---yt
 				{
-					return false;
+					if (MainRoleManager.isTakeZhanChe) //乘坐他人战车时不能移动
+					{
+						return false;
+					}
+					if (StallManager.isOnStall) //摆摊不能移动
+						return false;
+					
+					if (nowTime - RoleStateUtil.lastWalkTime < RoleStateUtil.WALK_DELAY)
+					{
+						return false;
+					}
+					if (walkRole.stateMachine.isDeadState)
+					{
+						NoticeManager.showNotify(LangQ_NoticeInfo.WalkMoveIsDead); //"已死亡不能移动"
+						return false;
+					}
+					else if (walkRole.stateMachine.isAttackHarding)
+					{
+						NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsHarding); //"技能硬直中"
+						return false;
+					}
+					else if (walkRole.stateMachine.isSpriteUp) 
+					{
+						return false;
+					}
+					else if (walkRole.stateMachine.isStun)
+					{
+						NoticeManager.showNotify(LangQ_NoticeInfo.WalkMoveIsStun); //"眩晕中不能移动"
+						return false;
+					}
+					else if (walkRole.stateMachine.isStiff)
+					{
+						NoticeManager.showNotify(LangQ_NoticeInfo.WalkMoveIsStiff); //"定身中不能移动"
+						return false;
+					}
+					else if (walkRole.stateMachine.isJumping||walkRole.stateMachine.isJumpRising)//跳跃中不能移动
+					{
+						return false;
+					}
+					else if(walkRole.stateMachine.isBlinkMoving)
+					{
+						return false;
+					}
+					
 				}
-				if (walkRole.stateMachine.isDeadState)
-				{
-					NoticeManager.showNotify(LangQ_NoticeInfo.WalkMoveIsDead); //"已死亡不能移动"
-					return false;
-				}
-				else if (walkRole.stateMachine.isAttackHarding)
-				{
-					NoticeManager.showNotify(LangQ_NoticeInfo.CastSpellIsHarding); //"技能硬直中"
-					return false;
-				}
-				else if (walkRole.stateMachine.isSpriteUp) 
-				{
-					return false;
-				}
-				else if (walkRole.stateMachine.isStun)
-				{
-					NoticeManager.showNotify(LangQ_NoticeInfo.WalkMoveIsStun); //"眩晕中不能移动"
-					return false;
-				}
-				else if (walkRole.stateMachine.isStiff)
-				{
-					NoticeManager.showNotify(LangQ_NoticeInfo.WalkMoveIsStiff); //"定身中不能移动"
-					return false;
-				}
-				else if (walkRole.stateMachine.isJumping||walkRole.stateMachine.isJumpRising)//跳跃中不能移动
-				{
-					return false;
-				}
-				else if(walkRole.stateMachine.isBlinkMoving)
-				{
-					return false;
-				}
-				
 				RoleStateUtil.lastWalkTime = nowTime;
 			}
 			var moveSpeed : int = (walkRole.data as RoleData).totalStat.moveSpeed;
@@ -270,7 +274,10 @@ package com.rpgGame.app.state.role
 					HorseManager.instance().autoRiding(role, pos);
 				}
 			}
-			
+			if(!walkRole.stateMachine.isWalkMoving)
+			{
+				Lyt.a("walk-00000000000000000");
+			}
 			return walkRole.stateMachine.isWalkMoving;
 		}
 		

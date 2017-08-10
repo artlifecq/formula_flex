@@ -49,9 +49,9 @@
 			var angle:Number=Math.atan2(end.y-start.y,end.x-start.x);
 			var rand:Number=1-Math.random()*2;
 			angle+=rand*Math.PI/12;
-			var dis:int=Point.distance(start,end)+(len+30*rand);
-			endPos.x=start.x+Math.cos(angle)*dis;
-			endPos.y=start.y+Math.sin(angle)*dis;
+			var dis:int=(len);
+			endPos.x=end.x+Math.cos(angle)*dis;
+			endPos.y=end.y+Math.sin(angle)*dis;
 		}
 		private static function calEndPos(start:Point,end:Point,len:int=BASE_DIS,bool:Boolean=false):void
 		{
@@ -112,7 +112,7 @@
 			_timeDic[TweenCirt]=new TimeDelay("cirt");
 			_timeDic[TweenExp]=new TimeDelay("exp",0.3);
 			_timeDic[TweenHurt]=new TimeDelay("hurt");
-			_timeDic[TweenDiaoXue]=new TimeDelay("diaoxue");
+			_timeDic[TweenDiaoXue]=new TimeDelay("diaoxue",0.2,3000);
 			_timeDic[TweenZhanHun]=new TimeDelay("zhanhun");
 			_timeDic[TweenZhiLiao1]=new TimeDelay("zhiliao");
 			_timeDic[TweenHits]=new TimeDelay("hit");
@@ -130,8 +130,8 @@
 			//return;
 			
 		
-			showobj.x=start.x;
-			showobj.y=start.y;
+			showobj.x=end.x;
+			showobj.y=end.y;
 			//trace(showobj.x,showobj.y)
 			showobj.alpha=0;
 			showobj.scaleX=showobj.scaleY=0.6;
@@ -149,7 +149,7 @@
 			//trace(pmX+"60",showobj.x,endPos.x);
 			myTimeline.append(new TweenLite(showobj, 0.3, {delay:0.05,alpha:0,scaleX:0.85,scaleY:0.85,x:pmX+"60",y:pmY+"60",ease:Quart.easeIn}));
 		}
-		private  static function timeDelay(func:Function):int
+		private  static function timeDelay(func:Function):Number
 		{
 			return (_timeDic[func] as TimeDelay).timeDelay;
 		}
@@ -179,6 +179,20 @@
 			myTimeline.insert(new TweenLite(showobj, 0.3, {alpha:1,scaleX:1,scaleY:1}), "alpha1");
 			myTimeline.insert(new TweenLite(showobj, 0.2, {alpha:0,y:start.y-170,scaleX:0.65,scaleY:0.65}), "alpha0");//,scaleX:0.5,scaleY:0.5
 		}
+		
+		private static function getRand(num:Number):Number
+		{
+			return Math.random()*num;
+		}
+		private static function getRMRand(num:Number):Number
+		{
+			return num*(1-Math.random()*2);
+		}
+		private static function getRandBewtten(min:Number,max:Number):Number
+		{
+			return min+(max-min)*Math.random();
+		}
+		public static var useOther:Boolean;
 		//伤害
 		public static function TweenHurt(showobj:DisplayObject,start:Point, end:Point,callBack:Function):void
 		{
@@ -190,37 +204,46 @@
 		
 			showobj.x=end.x-60;
 			showobj.y=end.y;
-			showobj.alpha=0;
-			showobj.scaleX=showobj.scaleY=0.3;
+			showobj.alpha=1;
+			showobj.scaleX=showobj.scaleY=1.7;
+			if (useOther) 
+			{
+				TweenLiteUtil.testFunc(showobj,start,end,callBack);
+				return;
+			}
 			
 			var pmX:String=calXPM(start,end);
 			var pmY:String=calYPM(start,end);
 			//calEndPos(start,end,200,true);
-			calTargetPos(start,end,140);
+			calTargetPos(start,end,getRandBewtten(180,230));
 			var xx:String="";
 			var yy:String="";
 			if(pmX=="-")
 			{
-				xx="-40";
+				xx="-"+getRandBewtten(100,160);
 			}else
 			{
-				xx="40";
-			}
-			if(pmY=="-")
-			{
-				yy="-40";
-			}else
-			{
-				yy="40";
+				xx=""+getRandBewtten(100,160);
 			}
 			
+//			if(pmY=="-")
+//			{
+//				yy="-40";
+//			}else
+//			{
+//				yy="40";
+//			}
+			yy="-"+getRandBewtten(20,60);
+			var end2:Point=Point.interpolate(new Point(showobj.x,showobj.y),endPos,-0.4);
 			var myTimeline:TimelineLite;
 			myTimeline = new TimelineLite({delay:0,onComplete:callBack,onCompleteParams:[showobj]});
-			myTimeline.append(new TweenLite(showobj, 0.7, {x:endPos.x,y:endPos.y,ease:Expo.easeOut}));//,ease:Expo.easeOut
-			myTimeline.addLabel("alpha1", 0);
+			myTimeline.append(new TweenLite(showobj, 0.5, {x:endPos.x,y:endPos.y,ease:Expo.easeOut,scaleX:1,scaleY:1}));//,ease:Expo.easeOut
+			//myTimeline.addLabel("alpha1", 0);
 			//myTimeline.addLabel("alpha0", 0.6);
-			myTimeline.insert(new TweenLite(showobj, 0.4, {alpha:0.75,scaleX:0.75,scaleY:1}), "alpha1");
-			myTimeline.append(new TweenLite(showobj, 0.3, {alpha:0,x:xx,y:yy,ease:Sine.easeOut,scaleX:0.3,scaleY:0.3}));//,y:pSH[n].y-105,scaleX:0.82,scaleY:0.82,ease:Sine.easeOut
+			//myTimeline.insert(new TweenLite(showobj, 0.4, {alpha:0.75}), "alpha1");
+			
+			myTimeline.append(new TweenLite(showobj,0.3,{x:end2.x,y:end2.y,scale:0.8}));
+			myTimeline.append(new TweenLite(showobj, 0.4, {delay:getRand(0.15),alpha:0.2,x:xx,y:yy,ease:Sine.easeOut}));//,y:pSH[n].y-105,scaleX:0.82,scaleY:0.82,ease:Sine.easeOut
 		}
 		//掉血，应该用end
 		public static function TweenDiaoXue(showobj:DisplayObject,start:Point, end:Point,callBack:Function):void
@@ -233,19 +256,27 @@
 			start.x=end.x;
 			start.y=end.y;
 			
-			showobj.x=start.x-60+Math.random()*100;
-			showobj.y=start.y-10+Math.random()-50;
-		//	showobj.alpha=0;
+			showobj.x=start.x-60;
+			showobj.y=start.y;
+			showobj.alpha=0;
 			showobj.scaleX=showobj.scaleY=0.55;
 			
 		
 			var myTimeline:TimelineLite;
-			myTimeline = new TimelineLite({delay:timeDelay(TweenDiaoXue),onComplete:callBack,onCompleteParams:[showobj]});
-			myTimeline.append(new TweenLite(showobj, 0.7, {x:start.x+60,ease:Expo.easeOut}));
-			myTimeline.addLabel("alpha1", 0);
-			myTimeline.addLabel("alpha0", 0.4);
-			myTimeline.insert(new TweenLite(showobj, 0.4, {alpha:1,y:start.y-170,scaleX:0.7,scaleY:0.7,ease:Expo.easeOut}), "alpha1");
-			myTimeline.insert(new TweenLite(showobj, 0.3, {alpha:0,x:start.x+80+80*Math.random(),y:start.y-110-40*Math.random(),scaleX:0.55,scaleY:0.55}), "alpha0");//,ease:Sine.easeIn
+			var del:Number=timeDelay(TweenDiaoXue);
+			myTimeline = new TimelineLite({delay:del,onStart:onTweenDiaoXueStart,onStartParams:[showobj],onComplete:callBack,onCompleteParams:[showobj]});
+			myTimeline.append(new TweenLite(showobj, 1, {y:showobj.y-150,alpha:1,ease:Circ.easeOut}));
+//			myTimeline.addLabel("alpha1", 0);
+//			myTimeline.addLabel("alpha0", 0.4);
+//			myTimeline.insert(new TweenLite(showobj, 0.4, {delay:del,alpha:1,y:start.y-170,scaleX:0.7,scaleY:0.7,ease:Expo.easeOut}), "alpha1");
+//			myTimeline.insert(new TweenLite(showobj, 0.3, {delay:del,alpha:0,x:start.x+80,y:start.y-110,scaleX:0.55,scaleY:0.55}), "alpha0");//,ease:Sine.easeIn
+		}
+		public static function onTweenDiaoXueStart(obj:DisplayObject):void
+		{
+			//hurter.pos.x,hurter.pos.y-50
+			obj.alpha=1;
+			obj.x=MainRoleManager.actor.pos.x;
+			obj.y=MainRoleManager.actor.pos.y-50;
 		}
 		//战魂
 		public static function TweenZhanHun(showobj:DisplayObject,start:Point, end:Point,callBack:Function):void

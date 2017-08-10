@@ -46,7 +46,7 @@ package com.rpgGame.appModule.dungeon.exp
 //				grid.setUrlBg( "ui/common/gezikuang/tubiaodikuang/48.png");
 				_skin.container.addChild(grid);
 				grid.x = startX+60*i;
-				grid.y = 507;
+				grid.y = 507+15;
 				gridList.push(grid);
 				item = new ItemInfo();
 				item.itemModelId = itemInfos[i]["mod"];

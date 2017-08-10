@@ -44,15 +44,6 @@ package com.rpgGame.app.sender
 			var msg:ReqZoneCommonQuitMessage=new ReqZoneCommonQuitMessage();
 			SocketConnection.send(msg);
 		}
-		/**
-		 *请求退出副本 
-		 * 
-		 */
-		public static function zoneOutToGame():void
-		{
-			var msg:ReqZoneOutToGameMessage=new ReqZoneOutToGameMessage();
-			SocketConnection.send(msg);
-		}
 		
 		
 		/**

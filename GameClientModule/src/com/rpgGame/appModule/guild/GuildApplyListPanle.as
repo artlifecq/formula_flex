@@ -110,9 +110,11 @@ package com.rpgGame.appModule.guild
 			{
 				case _skin.btnOk:
 					GuildManager.instance().applyOperation(1,-1);
+					_skin.list.dataProvider.removeAll();
 					break;
 				case _skin.btnCancel:
 					GuildManager.instance().applyOperation(0,-1);
+					_skin.list.dataProvider.removeAll();
 					break;
 				case _skin.btnPrev:
 					requestPage(_currentPage-1);

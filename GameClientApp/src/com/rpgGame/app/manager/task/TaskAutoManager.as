@@ -4,6 +4,7 @@ package com.rpgGame.app.manager.task
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.HuBaoManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
@@ -106,8 +107,6 @@ package com.rpgGame.app.manager.task
 		
 		public function startTaskAuto(type:int,tar:int=0) : void
 		{
-			
-			testStopKey=false;
 			_stateMachine.transition(AIStateType.AI_NONE);
 			_otherType=type;
 			_taskTarget=tar;
@@ -213,7 +212,7 @@ package com.rpgGame.app.manager.task
 				{
 					if((getTimer()-_techTime)>=AUTOMAIN)
 					{
-						resetTechTime();Lyt.a("startTaskAuto1");
+						resetTechTime();
 						startTaskAuto(TaskType.MAINTYPE_MAINTASK);
 					}
 					
@@ -338,7 +337,7 @@ package com.rpgGame.app.manager.task
 					TaskMissionManager.getTaskHaveNpc(taskType)?TaskControl.showLeadPanel():TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);
 					break;
 				case TaskType.MAINTYPE_DAILYTASK:
-					TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);
+					//TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);
 					break;
 				case TaskType.MAINTYPE_TREASUREBOX:
 					TaskControl.showLoopPanel();
@@ -362,7 +361,7 @@ package com.rpgGame.app.manager.task
 					}
 					break;
 				case TaskType.MAINTYPE_DAILYTASK:
-					TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);
+					//TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);
 					break;
 				case TaskType.MAINTYPE_TREASUREBOX:
 					TaskControl.showLoopPanel();
@@ -401,16 +400,19 @@ package com.rpgGame.app.manager.task
 			if(level==-1)
 			{
 				testStopKey=true;
+				NoticeManager.textNotify(NoticeManager.CHAT_GONGGAO,"关闭拉自动任务");
 			}
 			else if(level==0)
 			{
 				AUTOLVE=GlobalSheetData.getSettingInfo(511).q_int_value;
 				testStopKey=false;
+				NoticeManager.textNotify(NoticeManager.CHAT_GONGGAO,"开启拉自动任务："+AUTOLVE);
 			}
 			else
 			{
 				AUTOLVE=level;
 				testStopKey=false;
+				NoticeManager.textNotify(NoticeManager.CHAT_GONGGAO,"开启拉自动任务："+AUTOLVE);
 			}
 			
 		}

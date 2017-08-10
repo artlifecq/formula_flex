@@ -84,7 +84,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.textAlign = "left";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 103;
+			temp.width = 97;
 			temp.x = 172;
 			temp.y = 6;
 			return temp;
@@ -96,7 +96,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			lbName = temp;
 			temp.name = "lbName";
 			temp.text = "【墨家】玩家名六个字";
-			temp.textAlign = "left";
+			temp.textAlign = "center";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 150;

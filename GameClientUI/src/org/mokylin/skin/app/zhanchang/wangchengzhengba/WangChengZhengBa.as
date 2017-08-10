@@ -7,8 +7,8 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.app.banghui.wangcheng.XuWeiSkin;
 	import org.mokylin.skin.app.zhanchang.wangchengzhengba.WangChengHead_Item;
+	import org.mokylin.skin.app.zhanchang.wangchengzhengba.XuWei;
 	import org.mokylin.skin.component.button.ButtonSkin_info;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 
@@ -70,7 +70,15 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 
 		public var uiLingQu:feathers.controls.UIAsset;
 
-		public var xuwei:feathers.controls.SkinnableContainer;
+		public var xuwei1:feathers.controls.SkinnableContainer;
+
+		public var xuwei2:feathers.controls.SkinnableContainer;
+
+		public var xuwei3:feathers.controls.SkinnableContainer;
+
+		public var xuwei4:feathers.controls.SkinnableContainer;
+
+		public var xuwei5:feathers.controls.SkinnableContainer;
 
 
 		//==========================================================================
@@ -83,7 +91,7 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [__WangChengZhengBa_UIAsset2_i(),__WangChengZhengBa_UIAsset3_i(),xuwei_i(),gPlayer1_i(),gPlayer2_i(),gPlayer3_i(),gPlayer4_i(),gPlayer5_i(),grpCheng0_i(),lbBangName_i(),__WangChengZhengBa_UIAsset4_i(),icon1_i(),lbJiangli_i(),toZhanChang_i(),btnShuoMing_i()];
+			this.elementsContent = [__WangChengZhengBa_UIAsset2_i(),__WangChengZhengBa_UIAsset3_i(),xuwei3_i(),xuwei2_i(),xuwei1_i(),xuwei4_i(),xuwei5_i(),gPlayer1_i(),gPlayer2_i(),gPlayer3_i(),gPlayer4_i(),gPlayer5_i(),grpCheng0_i(),lbBangName_i(),__WangChengZhengBa_UIAsset4_i(),icon1_i(),lbJiangli_i(),toZhanChang_i(),btnShuoMing_i()];
 			
 			states = {
 			};
@@ -415,17 +423,73 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 			return temp;
 		}
 
-		private function xuwei_i():feathers.controls.SkinnableContainer
+		private function xuwei1_i():feathers.controls.SkinnableContainer
 		{
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
-			xuwei = temp;
-			temp.name = "xuwei";
+			xuwei1 = temp;
+			temp.name = "xuwei1";
+			temp.height = 255;
+			var skin:StateSkin = new org.mokylin.skin.app.zhanchang.wangchengzhengba.XuWei()
+			temp.skin = skin
+			temp.width = 151;
+			temp.x = 54;
+			temp.y = 210;
+			return temp;
+		}
+
+		private function xuwei2_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			xuwei2 = temp;
+			temp.name = "xuwei2";
+			temp.height = 296;
+			var skin:StateSkin = new org.mokylin.skin.app.zhanchang.wangchengzhengba.XuWei()
+			temp.skin = skin
+			temp.width = 187;
+			temp.x = 190;
+			temp.y = 182;
+			return temp;
+		}
+
+		private function xuwei3_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			xuwei3 = temp;
+			temp.name = "xuwei3";
 			temp.height = 340;
-			var skin:StateSkin = new org.mokylin.skin.app.banghui.wangcheng.XuWeiSkin()
+			var skin:StateSkin = new org.mokylin.skin.app.zhanchang.wangchengzhengba.XuWei()
 			temp.skin = skin
 			temp.width = 216;
 			temp.x = 372;
 			temp.y = 141;
+			return temp;
+		}
+
+		private function xuwei4_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			xuwei4 = temp;
+			temp.name = "xuwei4";
+			temp.height = 296;
+			var skin:StateSkin = new org.mokylin.skin.app.zhanchang.wangchengzhengba.XuWei()
+			temp.skin = skin
+			temp.width = 187;
+			temp.x = 572;
+			temp.y = 182;
+			return temp;
+		}
+
+		private function xuwei5_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			xuwei5 = temp;
+			temp.name = "xuwei5";
+			temp.height = 255;
+			var skin:StateSkin = new org.mokylin.skin.app.zhanchang.wangchengzhengba.XuWei()
+			temp.skin = skin
+			temp.width = 151;
+			temp.x = 765;
+			temp.y = 210;
 			return temp;
 		}
 

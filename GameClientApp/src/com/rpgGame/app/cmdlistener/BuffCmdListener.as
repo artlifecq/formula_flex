@@ -3,11 +3,9 @@ package com.rpgGame.app.cmdlistener
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.BuffCdManager;
 	import com.rpgGame.app.manager.LostSkillManager;
-	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
-	import com.rpgGame.coreData.cfg.LostSkillData;
 	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.netData.buff.message.ResAddBuffMessage;
 	import com.rpgGame.netData.buff.message.ResBuffInfoMessage;
@@ -51,7 +49,7 @@ package com.rpgGame.app.cmdlistener
 			if (tarObj != null)
 			{
 				tarObj.buffSet.removeBuffByBuffID( msg.buffId.ToGID());
-				GameLog.addShow("*************************删除一条buff，buffID为： \t" + msg.buffId.ToGID() + "\t当前时间：\t" + getTimer());
+				GameLog.addShow("*************************删除一条buff，buffID为： \t" + msg.buffId.ToString() + "\t当前时间：\t" + getTimer()+ "\t");
 			}
 		}
 		
@@ -72,7 +70,7 @@ package com.rpgGame.app.cmdlistener
 					LostSkillManager.instance().checkHideSelf(msg.personId);
 				}
 				
-				GameLog.addShow("*************************改变一条buff，buffID为： \t" + msg.buff.buffId.ToGID() + "\t当前时间：\t" + getTimer());
+				GameLog.addShow("*************************改变一条buff，buffID为： \t" + msg.buff.buffId.ToGID() + "\t当前时间：\t" + getTimer() + "\t" + msg.buff.buffModelId);
 			}
 		}
 		
@@ -121,7 +119,7 @@ package com.rpgGame.app.cmdlistener
 					LostSkillManager.instance().checkHideSelf(msg.personId);
 				}
 				
-				GameLog.addShow("*************************增加一条buff，buffID为： \t" + msg.buff.buffId.ToGID() + "\t当前时间：\t" + getTimer());
+				GameLog.addShow("*************************增加一条buff，buffID为： \t" + msg.buff.buffId.ToString() + "\t当前时间：\t" + getTimer() + "\t" + msg.buff.buffModelId);
 			}
 		}
 	}

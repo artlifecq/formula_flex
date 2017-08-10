@@ -1,5 +1,7 @@
 ﻿package org.game.netCore.net
 {
+    import com.gameClient.alert.AlertPanel;
+    
     import flash.utils.Dictionary;
 
     public class GameSocketDispatcher 
@@ -7,6 +9,8 @@
 
         public static var isPrint:Boolean = false;
         private static var _funDic:Dictionary = new Dictionary();
+		
+		private static var cacheMsgs:Vector.<Message>=new Vector.<Message>();
 
 
         public static function addListener(type:int, listener:Function):void
@@ -33,8 +37,25 @@
             {
 				fun.apply(null, [data]);
 //                fun(data);
-            }
+            }else{
+				if(BeanConfig.isInit){
+//					AlertPanel.showMsg("客户端缺少对消息的处理:" + type );
+				}else{
+					if(data is Message){
+						cacheMsgs.push(data);
+					}
+				}
+			}
         }
+		
+		public static function excuteCache():void
+		{
+			while(cacheMsgs.length>0){
+				var msg:Message=cacheMsgs.shift();
+				var type:int=msg.getId();
+				excute(type,msg);
+			}
+		}
 
         public static function hasListener(type:int):Boolean
         {

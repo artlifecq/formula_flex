@@ -136,7 +136,6 @@ package com.rpgGame.app.graphics
 		public var offsetY : int = 0;
 		/**头顶鲜花显示的坐标*/
 		public var flowerY : int = 0;
-		private var showBloodTween:TweenLite;
 		private var _teamCaptainFlag:UIAsset;
 		private var _towerFlag:UIAsset;
 		private var _vipFlag:UIAsset;
@@ -281,10 +280,10 @@ package com.rpgGame.app.graphics
 				var isNormal:Boolean=monster.q_monster_type==MonsterType.NORMAL;
 				var isNPC:Boolean=monster.q_monster_type==MonsterType.NPC;
 				//普通怪在战斗状态显示血条
-				//我的召唤怪要显示
-				var isMyMonster:Boolean=PKMamager.isMyMonster(_role);
-				var isNpc:Boolean=monster.q_monster_type==MonsterType.NPC;
-				showAndHideElement(_bloodBar, isMyMonster,DecorCtrl.TOP_HPMP);
+				if(!_bloodBar.parent){//没显示的情况再判定
+					var isMyMonster:Boolean=PKMamager.isMyMonster(_role);//我的召唤怪要显示
+					showAndHideElement(_bloodBar, isMyMonster,DecorCtrl.TOP_HPMP);
+				}
 				
 				showAndHideElement(_nameBar, isMyMonster||(isNormal&&_isSelected && nameVisible)||isNPC,DecorCtrl.TOP_NAME);
 				showAndHideElement(_NPCtitle,isNPC, DecorCtrl.TOP_NPCCHENGHAO);
@@ -612,12 +611,11 @@ package com.rpgGame.app.graphics
 			if (_bloodBar&&_bloodBar.stage)
 			{
 				_bloodBar.update(_bloodPercent);
-				if(showBloodTween){
-					showBloodTween.kill();
-					showBloodTween=null;
-				}
 			}
 			
+			if(_bloodPercent==0){
+				showAndHideElement(_bloodBar, false);
+			}
 			
 			if (_isSelected)
 			{
@@ -1071,11 +1069,6 @@ package com.rpgGame.app.graphics
 		{
 			super.removeBodyRender();
 			bind(null, null);
-			if (showBloodTween) 
-			{
-				showBloodTween.kill();
-				showBloodTween=null;
-			}
 			if (_nameBar != null)
 			{
 				deCtrl.removeTop(_nameBar);
@@ -1237,8 +1230,7 @@ package com.rpgGame.app.graphics
 			showAndHideElement(_junXianBar, false);
 			showAndHideElement(_countryWarIcon, false);
 			showAndHideElement(_biaoFlagIcon, false);
-			onHideBlood();
-			//showAndHideElement(_bloodBar, false);
+			showAndHideElement(_bloodBar, false);
 			showAndHideElement(_icoImage, false);
 			showAndHideElement(_guildNameBar, false,DecorCtrl.TOP_GUILD);
 			showAndHideElement(_familNameBar, false);
@@ -1566,22 +1558,8 @@ package com.rpgGame.app.graphics
 			addAndUpdateHP();
 			//this.addChildAt(_bloodBar,0);
 			this.deCtrl.addTop(_bloodBar,DecorCtrl.TOP_HPMP);
-			if(showBloodTween){
-				showBloodTween.kill();
-				showBloodTween=null;
-			}
 //			showBloodTween=TweenLite.delayedCall(2,onHideBlood);
 			sortAttackFace();
-		}
-		
-		private function onHideBlood():void
-		{
-			if(showBloodTween){
-				showBloodTween.kill();
-				showBloodTween=null;
-			}
-			//showAndHideElement(_bloodBar,false,DecorCtrl.TOP_HPMP);
-			updateShowAndHide();
 		}
 		
 		public function updateTeamFlag(bShow:Boolean):void

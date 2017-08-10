@@ -448,10 +448,13 @@ package org.game.netCore.net
 			//侍宠坐骑攻击
 			sendCrossHash.put( 102208, 1 );
 			sendCrossHash.put( 102209, 1 );
+			sendCrossHash.put( 102210, 1 );
+			sendCrossHash.put( 102211, 1 );
 			
 			//采集请求
 			sendCrossHash.put( 104201, 1 );
 			
+			sendCrossHash.put( 101215, 1 );
 			//boss传送  跨服中不允许使用
 			sendCrossHash.put( 101210, -1 );
 			sendCrossHash.put( 101216, -1 );
@@ -461,6 +464,8 @@ package org.game.netCore.net
 			sendCrossHash.put( 253207, 1 );
 			sendCrossHash.put( 253208, 1 );
 			sendCrossHash.put( 253209, 1 );
+			
+			//退副本
 			sendCrossHash.put( 155208, 1 );
 		}
 		
