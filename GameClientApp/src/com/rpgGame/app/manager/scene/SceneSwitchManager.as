@@ -415,20 +415,10 @@ package com.rpgGame.app.manager.scene
 				MainRoleManager.actorInfo.mapID = 1001;
 			}
 			_isChangeSceneComplete = false;
-			
-			CONFIG::netDebug {
-				NetDebug.LOG("[SceneSwitchManager] [ChangeMap] sceneID:" + currentMapId + ", mapID:" + mapID);
-			}
 				
 			var currMapInfo : SceneData = MapDataManager.getMapInfo(currentMapId); //获取地图配置数据
 			var mapInfo : SceneData = MapDataManager.getMapInfo(mapID); //获取地图配置数据
-			CONFIG::netDebug {
-				if (null == mapInfo) {
-					NetDebug.LOG("[SceneSwitchManager] [ChangeMap] mapID:" + mapID + " config data not exists");
-				} else {
-					NetDebug.LOG("[SceneSwitchManager] [ChangeMap] mapID:" + mapID + " config data exists");
-				}
-			}
+			
 			MapDataManager.currentScene = mapInfo;
 			_isMapSameRes=mapInfo && currMapInfo && (mapInfo.map == currMapInfo.map);
 			clearScene(!_isMapSameRes);
@@ -468,18 +458,15 @@ package com.rpgGame.app.manager.scene
 					var mapUrl : String = ClientConfig.getMap(_mapRes);
 					var mapName : String = ClientConfig.getMapName(_mapRes);
 					var mapDataName : String = ClientConfig.getMapDataName();
-					CONFIG::netDebug {
-						NetDebug.LOG("[SceneSwitchManager] [ChangeMap] mapID:" + mapID + " mapUrl:" + mapUrl + " mapName:" + mapName + " mapDataName:" + mapDataName);
+					
+					if(isReal3D)
+					{
+						SceneManager.getScene().switchScene(mapUrl + "/" +mapName, enterSceneSuccessed);
 					}
-						
-						if(isReal3D)
-						{
-							SceneManager.getScene().switchScene(mapUrl + "/" +mapName, enterSceneSuccessed);
-						}
-						else
-						{
-							change2dMap();
-						}
+					else
+					{
+						change2dMap();
+					}
 				}
 			}
 			currentMapId = mapID;
