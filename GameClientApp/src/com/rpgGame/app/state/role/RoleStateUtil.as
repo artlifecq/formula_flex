@@ -198,7 +198,7 @@ package com.rpgGame.app.state.role
 			var walkRole : SceneRole = camouflageEntity || role;
 			if (walkRole.isMainChar || walkRole.isMainCamouflage)
 			{
-				SceneCursorHelper.getInstance().hideCursor();
+//				SceneCursorHelper.getInstance().hideCursor();
 				var nowTime : int = getTimer();
 				if(!TaskAutoManager.getInstance().isTasking)//自动任务中优先执行自动任务走路  ---yt
 				{

@@ -396,7 +396,7 @@ package com.rpgGame.appModule.xinfa
 						{
 							color=GameColorUtil.COLOR_RED;
 						}
-						strArr.push(HtmlTextUtil.getTextColor(color,backNum+"/"+itemNum)+NotifyCfgData.getNotifyTextByID(61005)+ItemConfig.getItemNameWithQualityColor(itemMid));
+						strArr.push(HtmlTextUtil.getTextColor(color,backNum+"/"+itemNum)+NotifyCfgData.getNotifyTextByID(61005)+"<u>"+ItemConfig.getItemNameWithQualityColor(itemMid)+"</u>");
 					}
 				}
 				str=str.replace("@",strArr.join("、"));

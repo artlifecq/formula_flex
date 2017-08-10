@@ -86,6 +86,7 @@ package  com.rpgGame.app.ui.alert
 			 clientItemInfo=item;
 			 currentNum=clientItemInfo.itemInfo.num;
 			 numCtrl.updateMax(currentNum,currentNum);
+			 numCtrl.maxValue();
 			 //_skin.input_txt.addEventListener(Event.CHANGE,onChangeNum);
 			 updateDisplay();
 		 }

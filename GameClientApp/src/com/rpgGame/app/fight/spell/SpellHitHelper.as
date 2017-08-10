@@ -116,7 +116,7 @@ package com.rpgGame.app.fight.spell
 						hurtRef.setParams(/*info, */hurtVo);
 						role.stateMachine.transition(RoleStateType.CONTROL_HURT, hurtRef);
 						
-						GameLog.addShow("*************************本次伤害值为： \t" + hurtVo.curLife);
+//						GameLog.addShow("*************************本次伤害值为： \t" + hurtVo.curLife);
 					}
 				}
 			}

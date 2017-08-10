@@ -185,11 +185,12 @@ package com.rpgGame.app.ui.tips
 			//冷却时间
 			if(_itemInfo.qItem.q_cooldown!=0){
 				_itemTip.lb3.text="冷却时间:";
+				_itemTip.lbXiuwei.x=165;
 				_itemTip.lbXiuwei.text=(_itemInfo.qItem.q_cooldown/1000)+"秒";
 				_itemTip.lbXiuwei.color=StaticValue.A_UI_BEIGE_TEXT;
 				_itemTip.lb3.visible=true;
 				_itemTip.lbXiuwei.visible=true;
-				_itemTip.lb3.x=168;
+				//_itemTip.lb3.x=168;
 				_itemTip.lb3.y=_itemTip.lbXiuwei.y=curY;
 				curY+=20;
 			}
