@@ -337,7 +337,7 @@ package com.rpgGame.app.manager.task
 					TaskMissionManager.getTaskHaveNpc(taskType)?TaskControl.showLeadPanel():TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);
 					break;
 				case TaskType.MAINTYPE_DAILYTASK:
-					TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);
+					//TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);
 					break;
 				case TaskType.MAINTYPE_TREASUREBOX:
 					TaskControl.showLoopPanel();
@@ -361,7 +361,7 @@ package com.rpgGame.app.manager.task
 					}
 					break;
 				case TaskType.MAINTYPE_DAILYTASK:
-					TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);
+					//TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);
 					break;
 				case TaskType.MAINTYPE_TREASUREBOX:
 					TaskControl.showLoopPanel();
