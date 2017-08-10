@@ -213,6 +213,10 @@ package com.rpgGame.app.cmdlistener
 				case CharAttributeType.RES_BIND_GOLD:
 					change=msg.value-MainRoleManager.actorInfo.totalStat.getResData(msg.curType);
 					noticeId=change>0?14:18;
+					if(change>0)
+					{
+						FightFaceHelper.showAttChange(EnumHurtType.GOLD,change);
+					}
 					break;
 				case CharAttributeType.RES_MONEY:
 					change=msg.value-MainRoleManager.actorInfo.totalStat.getResData(msg.curType);

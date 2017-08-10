@@ -329,13 +329,13 @@ package com.rpgGame.app.manager.goods
 						{
 							if( buyItem )
 							{
-								requireLevel1 = ItemConfig.getItemRequireLevel( itemVo.data.item.mod );
-								quality1 = ItemConfig.getItemQuality(itemVo.data.item.mod );
-								if( requireLevel > requireLevel1 )
+								requireLevel1 = ItemConfig.getItemRequireLevel( buyItem.data.item.mod );
+								quality1 = ItemConfig.getItemQuality(buyItem.data.item.mod );
+								if( requireLevel >= requireLevel1 )
 								{
 									buyItem = itemVo;
 								}
-								else if( (requireLevel == requireLevel1) && (quality > quality1) )
+								else if( (requireLevel == requireLevel1) && (quality >= quality1) )
 								{
 									buyItem = itemVo;
 								}
