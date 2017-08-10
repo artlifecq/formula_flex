@@ -69,7 +69,7 @@ package com.rpgGame.app.sender
 		
 		public static function SendNewRunningMessage(path : Vector.<Vector3D>,sprint:Boolean=false):void
 		{
-			GameLog.add("send SendNewRunningMessage :" + path.join(","));
+//			GameLog.add("send SendNewRunningMessage :" + path.join(","));
 			var msg:ReqNewRunningMessage = new ReqNewRunningMessage();
 			
 			var vec:Vector.<Position> = new Vector.<Position>();

@@ -22,6 +22,8 @@ package com.rpgGame.coreData.clientConfig
 		public var q_skill_id:int;
 		 /**  品质(0:白色;1:绿;2:蓝;3:橙;4:紫) */
 		public var q_quality:int;
+		 /**  锁定消耗1.初 2.中 3.高（具体消耗数量对应全局表） */
+		public var q_cost_level:int;
 
 	}
 }

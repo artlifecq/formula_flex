@@ -198,7 +198,7 @@ package com.rpgGame.app.state.role
 			var walkRole : SceneRole = camouflageEntity || role;
 			if (walkRole.isMainChar || walkRole.isMainCamouflage)
 			{
-				SceneCursorHelper.getInstance().hideCursor();
+//				SceneCursorHelper.getInstance().hideCursor();
 				if (MainRoleManager.isTakeZhanChe) //乘坐他人战车时不能移动
 				{
 					return false;
