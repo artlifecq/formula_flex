@@ -57,5 +57,7 @@ package com.rpgGame.coreData.type
 		public static const SUBHP : String = "sub_hp";
 		/** 回蓝 **/
 		public static const ADDMP : String = "fa_shu_zhi";
+		/** 礼金 **/
+		public static const GOLD : String = "res_bind_gold";
 	}
 }

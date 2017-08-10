@@ -82,7 +82,7 @@ package com.rpgGame.app.state.ai
 			}
 		}
 		private function gotoNpc(data :Object=null):void
-		{Lyt.a("WALK-gotoNpc");
+		{
 			TaskUtil.npcTaskWalk(TaskMissionManager.getTaskNpcAreaId(taskType),onArrive);
 			TaskAutoManager.getInstance().jumpOver=true;
 		}
@@ -90,7 +90,6 @@ package com.rpgGame.app.state.ai
 		{
 			
 			var postPath:Array=TaskMissionManager.getTaskPathingByType(taskType,taskTarget);
-			Lyt.a("WALK-gotoTask:"+(postPath!=null?postPath.length:0));
 			switch(missionType)
 			{
 				case TaskType.SUB_CONVERSATION:

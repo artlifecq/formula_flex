@@ -172,7 +172,7 @@ package com.rpgGame.app.ui.main.shortcut
 						setGary();
 						if(!isGary&&!nutaKey&&goEffect)
 						{
-							goEffect.playEffect();
+							goEffect.playEffect(1);
 							
 						}
 					}
@@ -358,7 +358,7 @@ package com.rpgGame.app.ui.main.shortcut
 			if(!isGary&&!nutaKey)
 			{
 				//播放cd完成动画
-				goEffect.playEffect();
+				goEffect.playEffect(1);
 			}
 			setGary();
 		}

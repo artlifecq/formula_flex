@@ -40,6 +40,7 @@ package com.rpgGame.app.ui.scene
 	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.UIAsset;
+	import feathers.utils.filter.GrayFilter;
 	
 	import gs.TweenMax;
 	
@@ -153,22 +154,22 @@ package com.rpgGame.app.ui.scene
 					gotoMonsterSite();
 					break;
 				case Renwu_Item(_skin.killbut0.skin).labelDisplay.name:// 
-					TaskControl.killWalkBut(5,0,1);
+					killWalkBut(0,1);
 					break;
 				case Renwu_Item(_skin.killbut1.skin).labelDisplay.name:// 
-					TaskControl.killWalkBut(5,1,1);
+					killWalkBut(1,1);
 					break;
 				case Renwu_Item(_skin.killbut2.skin).labelDisplay.name:// 
-					TaskControl.killWalkBut(5,2,1);
+					killWalkBut(2,1);
 					break;
 				case Renwu_Item(_skin.killbut0.skin).btn_send.name:// 
-					TaskControl.killWalkBut(5,0,2);
+					killWalkBut(0,2);
 					break;
 				case Renwu_Item(_skin.killbut1.skin).btn_send.name:// 
-					TaskControl.killWalkBut(5,1,2);
+					killWalkBut(1,2);
 					break;
 				case Renwu_Item(_skin.killbut2.skin).btn_send.name:// 
-					TaskControl.killWalkBut(5,2,2);
+					killWalkBut(2,2);
 					break;
 			}
 		}
@@ -266,7 +267,53 @@ package com.rpgGame.app.ui.scene
 			}
 		}
 		
-		
+		private function killWalkBut(num:int,key:int):void
+		{
+			if(isAllFilish())
+			{
+				var post:Array=new Array();
+				var taskData:Q_mission_base=TaskMissionManager.getOtherTaskData(TaskType.LIJIN_TASK);
+				if(taskData!=null&&taskData.q_pathing!="")
+				{
+					
+					var path:String=taskData.q_pathing;
+					var pashArr:Array=path.split(";");
+					if(pashArr.length>num)
+					{
+						path=pashArr[num];
+						if(path!=null&&path!="")
+						{
+							pashArr=path.split(",");
+							if(pashArr.length==3)
+							{
+								post.push(int(pashArr[0]));
+								post.push(int(pashArr[1]));
+								post.push(int(pashArr[2]));
+							}
+						}
+					}
+					if(post.length==3)
+					{
+						if(num==0&&key==1)
+						{
+							TrusteeshipManager.getInstance().startAutoFightToPos(post,1,-1);
+						}
+						else if(num==0&&key==2)
+						{
+							TaskUtil.postTaskFly(post,TaskType.LIJIN_TASK,TaskType.SUB_MONSTER);
+						}
+					}
+				}
+				
+				
+			}
+			else
+			{
+				TaskControl.killWalkBut(TaskType.LIJIN_TASK,num,key);
+			}
+			
+			
+		}
 		
 		
 		private var remainTime:int;
@@ -317,7 +364,7 @@ package com.rpgGame.app.ui.scene
 		/**设置奖励物品*/
 		private function setReword():void
 		{
-			
+			hideReword();
 			var task:TaskInfo=TaskMissionManager.getOtherTaskInfo(TaskType.LIJIN_TASK);
 			var taskData:Q_mission_base=TaskMissionManager.getOtherTaskData(TaskType.LIJIN_TASK);
 			
@@ -440,6 +487,7 @@ package com.rpgGame.app.ui.scene
 					{
 						mid=newIdList[i];
 						minGold=goldData;
+						currDist=dist;
 					}
 				}
 			}
@@ -544,21 +592,44 @@ package com.rpgGame.app.ui.scene
 		
 		private function allFilish():void
 		{
-			_skin.sec_subbut1.isEnabled=true;
-			var task:TaskInfo=TaskMissionManager.getTaskInfoByType(TaskType.LIJIN_TASK);
-			if(!task)
-				return;
-			var taskSection:Q_mission_section=TaskMissionCfgData.getSectionByID(task.loopRewardId);
-			if(!taskSection)
-				return;
-			var taskList:Array=JSONUtil.decode(taskSection.q_mission_randomid);
-			if(taskList&&taskList.length>0&&taskList[taskList.length-1]==task.taskModelId)
+			if(isAllFilish())
 			{
-				_skin.sec_subbut1.isEnabled=false;
+				var taskData:Q_mission_base=TaskMissionManager.getOtherTaskData(TaskType.LIJIN_TASK);
+				if(taskData!=null)
+				{
+					GrayFilter.gray(_skin.sec_subbut1);
+					_skin.sec_subbut1.isEnabled=false;
+					TaskUtil.setGotargetLabelText(true,killButList[0],taskData.q_finish_describe);
+					
+				}
+			}
+			else
+			{
+				GrayFilter.unGray(_skin.sec_subbut1);
+				_skin.sec_subbut1.isEnabled=true;
 			}
 			
+			
+			
 		}
-		
+		private function isAllFilish():Boolean
+		{
+			var task:TaskInfo=TaskMissionManager.getTaskInfoByType(TaskType.LIJIN_TASK);
+			if(task!=null)
+			{
+				
+				var taskSection:Q_mission_section=TaskMissionCfgData.getSectionByID(task.loopRewardId);
+				if(taskSection)
+				{
+					var taskList:Array=JSONUtil.decode(taskSection.q_mission_randomid);
+					if(taskList&&taskList.length>0&&taskList[taskList.length-1]==task.taskModelId)
+					{
+						return true;
+					}
+				}
+			}
+			return false
+		}
 		private function tweeReward():void
 		{
 			var i:int;
