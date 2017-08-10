@@ -642,6 +642,11 @@ package com.rpgGame.app.manager.fight
 					//showQueueAttackFace(MainRoleManager.actor, typeRes, numberColor, count, scaleAgo, scaleLater, null, null, null, null, tweenUp);
 					showQueueAttackFaceNew(MainRoleManager.actor,null,MainRoleManager.actor.headFace, typeRes, numberColor, count,  null, null,SpellResultTweenUtil.TweenExp,exdata);
 					return;
+				case EnumHurtType.GOLD: //礼金
+					numberColor = NUMBER_GOLD1;
+					//var golddata:AttackFace=LostSkillManager.instance().hasGoldAddAtf(MainRoleManager.actorInfo.serverID,count);
+					showQueueAttackFaceNew(MainRoleManager.actor,null,MainRoleManager.actor.headFace, typeRes, numberColor, count,  null, null,SpellResultTweenUtil.TweenZhiLiao2);
+					return;
 				default:
 					break;
 			}

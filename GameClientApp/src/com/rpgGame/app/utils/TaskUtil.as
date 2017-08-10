@@ -81,6 +81,8 @@ package com.rpgGame.app.utils
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.UIAsset;
 	
+	import gs.TweenLite;
+	
 	import org.mokylin.skin.mainui.renwu.Renwu_Item;
 	
 	import starling.display.DisplayObject;
@@ -477,7 +479,9 @@ package com.rpgGame.app.utils
 			var monsterData : Q_scene_monster_area = MonsterDataManager.getAreaByAreaID(id);
 			if (monsterData)
 			{
-				MainRoleSearchPathManager.walkToScene(monsterData.q_mapid, monsterData.q_center_x, monsterData.q_center_y,onArrive, 100);
+				walkAdd=0;
+				postWalk(monsterData.q_mapid, monsterData.q_center_x,monsterData.q_center_y,onArrive);
+				//MainRoleSearchPathManager.walkToScene(monsterData.q_mapid, monsterData.q_center_x, monsterData.q_center_y,onArrive, 100);
 			}
 				
 		}
@@ -494,9 +498,10 @@ package com.rpgGame.app.utils
 			var monsterData : Q_scene_monster_area = MonsterDataManager.getMonsterByModelId(modeId,SceneSwitchManager.currentMapId);
 			if (monsterData)
 			{
-				MainRoleSearchPathManager.walkToScene(monsterData.q_mapid, monsterData.q_center_x, monsterData.q_center_y,onArrive, 100,null,true);
+				postWalk(monsterData.q_mapid, monsterData.q_center_x,monsterData.q_center_y,onArrive);
 			}
 		}
+		
 		/**
 		 * 寻路任务点
 		 * @param modeId
@@ -507,7 +512,21 @@ package com.rpgGame.app.utils
 			
 			if (post!=null&&post.length==3)
 			{
-				MainRoleSearchPathManager.walkToScene(post[0], post[1], post[2],onArrive, 100,data,needSprite);
+				walkAdd=0;
+				postWalk(post[0], post[1], post[2],onArrive,data,needSprite);
+				
+			}
+		}
+		private static var walkAdd:int=0;
+		public static function postWalk(post0 : int, posx:Number,posy:Number,onArrive:Function=null,data:Object=null,needSprite:Boolean=false) : void
+		{
+//			TweenLite.killDelayedCallsTo(postWalk);
+			Lyt.a("任务开始寻路===================");
+			var walking:Boolean=MainRoleSearchPathManager.walkToScene(post0, posx, posy,onArrive, 100,data,needSprite);
+			if(!walking&&walkAdd<=4)//任务的寻路强制寻路2秒钟
+			{Lyt.a("任务寻路失败了----");
+//				walkAdd++;
+//				TweenLite.delayedCall(0.5, postWalk, [post0, posx, posy,onArrive,data,needSprite]);
 			}
 		}
 		/**
@@ -569,6 +588,7 @@ package com.rpgGame.app.utils
 			{
 				TaskMissionManager.flyTaskType=mainType;
 				TaskMissionManager.flyMissionType=missionType;
+				post[2]=-Math.abs(post[2]);
 				SceneSender.sceneMapTransport(post[0], post[1], post[2]);
 			}
 		}

@@ -60,7 +60,7 @@ package com.game.engine3D.scene.render.vo
 				if(_isAlpha)
 				{
 					_renderSet.blendMode = BlendMode.LAYER;
-					_renderSet.alpha = 0.3;
+					_renderSet.alpha = 0.5;
 				}
 				else
 				{

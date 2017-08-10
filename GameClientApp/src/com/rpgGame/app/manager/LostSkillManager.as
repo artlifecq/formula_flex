@@ -187,6 +187,18 @@ package com.rpgGame.app.manager
 			}
 			return null;
 		}
+		public function hasGoldAddAtf(heroId:long,value:int):AttackFace
+		{
+			
+			var need:Boolean=needShowNotice(6001,heroId);
+			if (need) 
+			{
+				//var tmp:int=value*getSkillValueByInfo(getSkillStateInfoById(6001));
+				var atf:AttackFace=AttackFace.createAttackFace(getEffectNameUrl(6001),FightFaceHelper.NUMBER_GOLD1,0);
+				return atf;
+			}
+			return null;
+		}
 		public function getEffectNameUrl(id:int):String
 		{
 			var qSkill:Q_lostskill_open=LostSkillData.getModeInfoById(id);

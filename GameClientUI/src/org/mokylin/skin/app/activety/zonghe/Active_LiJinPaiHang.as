@@ -1,13 +1,12 @@
 package org.mokylin.skin.app.activety.zonghe
 {
-	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
 	import feathers.controls.Group;
-	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.app.activety.zonghe.Active_LiJinPaiHang_Item;
+	import org.mokylin.skin.common.TongYongTanKuang_bg2;
 	import org.mokylin.skin.component.button.ButtonSkin_close;
 
 	/**
@@ -20,7 +19,7 @@ package org.mokylin.skin.app.activety.zonghe
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var bg:feathers.controls.UIAsset;
+		public var bg:feathers.controls.SkinnableContainer;
 
 		public var btnClose:feathers.controls.Button;
 
@@ -48,8 +47,6 @@ package org.mokylin.skin.app.activety.zonghe
 
 		public var tishi:feathers.controls.UIAsset;
 
-		public var title:feathers.controls.Label;
-
 
 		//==========================================================================
 		//                                定义构造函数
@@ -61,7 +58,7 @@ package org.mokylin.skin.app.activety.zonghe
 			this.currentState = "normal";
 			this.height = 498;
 			this.width = 421;
-			this.elementsContent = [bg_i(),__Active_LiJinPaiHang_UIAsset1_i(),title_i(),btnClose_i(),__Active_LiJinPaiHang_Group1_i(),__Active_LiJinPaiHang_Group2_i(),list0_i(),list1_i(),list2_i(),list3_i(),list4_i(),list5_i(),list6_i(),list7_i(),list8_i(),list9_i(),list10_i(),tishi_i()];
+			this.elementsContent = [bg_i(),__Active_LiJinPaiHang_UIAsset1_i(),btnClose_i(),__Active_LiJinPaiHang_Group1_i(),__Active_LiJinPaiHang_Group2_i(),list0_i(),list1_i(),list2_i(),list3_i(),list4_i(),list5_i(),list6_i(),list7_i(),list8_i(),list9_i(),list10_i(),tishi_i(),__Active_LiJinPaiHang_UIAsset9_i()];
 			
 			states = {
 			};
@@ -164,13 +161,25 @@ package org.mokylin.skin.app.activety.zonghe
 			return temp;
 		}
 
-		private function bg_i():feathers.controls.UIAsset
+		private function __Active_LiJinPaiHang_UIAsset9_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.touchable = false;
+			temp.touchGroup = true;
+			temp.styleName = "ui/app/activety/zonghe/lijingpaihang.png";
+			temp.x = 166;
+			temp.y = 6;
+			return temp;
+		}
+
+		private function bg_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
 			temp.height = 498;
-			temp.styleName = "ui/common/background/erji_kuang.png";
+			var skin:StateSkin = new org.mokylin.skin.common.TongYongTanKuang_bg2()
+			temp.skin = skin
 			temp.width = 421;
 			temp.x = 0;
 			temp.y = 0;
@@ -350,26 +359,6 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.styleName = "ui/app/activety/zonghe/tianjianglijin/henyihan.png";
 			temp.x = 72;
 			temp.y = 441;
-			return temp;
-		}
-
-		private function title_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			title = temp;
-			temp.name = "title";
-			temp.bold = true;
-			temp.touchable = false;
-			temp.touchGroup = true;
-			temp.letterSpacing = 2;
-			temp.fontSize = 16;
-			temp.text = "礼金排行";
-			temp.textAlign = "center";
-			temp.color = 0xDDE2B1;
-			temp.nativeFilters = Fontter.filterObj[""];
-			temp.width = 240;
-			temp.x = 90;
-			temp.y = 11;
 			return temp;
 		}
 
