@@ -48,6 +48,7 @@ package com.rpgGame.app.view.icon
 		{
 			super($iconSize);
 			touchGroup = false;
+			_showCD=true;
 		}
 		
 		/**

@@ -769,7 +769,7 @@ package com.rpgGame.app.manager.fight
 			var start:Point;
 			var end:Point;
 			//走场景
-			if (useScene&&(SpellResultTweenUtil.TweenCirt==$tweenFun||SpellResultTweenUtil.TweenHurt==$tweenFun)) 
+			if (useScene&&(SpellResultTweenUtil.TweenCirt==$tweenFun||SpellResultTweenUtil.TweenHurt==$tweenFun||SpellResultTweenUtil.TweenDiaoXue==$tweenFun)) 
 			{
 				layer.addChild(attackFace);
 				if (null != $tweenFun)
