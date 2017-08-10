@@ -49,7 +49,7 @@ package com.rpgGame.app.cmdlistener
 			if (tarObj != null)
 			{
 				tarObj.buffSet.removeBuffByBuffID( msg.buffId.ToGID());
-				GameLog.addShow("*************************删除一条buff，buffID为： \t" + msg.buffId.ToGID() + "\t当前时间：\t" + getTimer()+ "\t");
+				GameLog.addShow("*************************删除一条buff，buffID为： \t" + msg.buffId.ToString() + "\t当前时间：\t" + getTimer()+ "\t");
 			}
 		}
 		
@@ -119,7 +119,7 @@ package com.rpgGame.app.cmdlistener
 					LostSkillManager.instance().checkHideSelf(msg.personId);
 				}
 				
-				GameLog.addShow("*************************增加一条buff，buffID为： \t" + msg.buff.buffId.ToGID() + "\t当前时间：\t" + getTimer() + "\t" + msg.buff.buffModelId);
+				GameLog.addShow("*************************增加一条buff，buffID为： \t" + msg.buff.buffId.ToString() + "\t当前时间：\t" + getTimer() + "\t" + msg.buff.buffModelId);
 			}
 		}
 	}
