@@ -27,6 +27,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.manager.task.TaskManager;
 	import com.rpgGame.app.manager.task.TouJingManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
+	import com.rpgGame.app.process.StartGame;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.app.state.role.action.JumpStateReference;
@@ -1086,11 +1087,13 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function onResChangeMapMessage(msg : ResChangeMapMessage) : void
 		{
+			if(!StartGame.isInitMap)return;
 			ReqLockUtil.unlockReq(101206);
 			//			ReqLockUtil.unlockReq(MazeModuleMessages.C2S_TRY_TRANSPORT);
 			
 			var mapId : int = msg.mapId;
 			MainRoleManager.actorInfo.preMapID=MainRoleManager.actorInfo.mapID;
+			trace(MainRoleManager.actorInfo.mapID);
 			MainRoleManager.actorInfo.mapID = mapId;
 			SceneSwitchManager.changeMap();
 			AppManager.closeAllApp();//切换场景关闭所有面板
