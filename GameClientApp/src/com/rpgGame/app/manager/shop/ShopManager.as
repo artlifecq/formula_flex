@@ -11,6 +11,7 @@ package  com.rpgGame.app.manager.shop
 	import com.rpgGame.app.ui.alert.GameAlertYellowBtnExt;
 	import com.rpgGame.core.events.ShopEvent;
 	import com.rpgGame.coreData.SpriteStat;
+	import com.rpgGame.coreData.cfg.VipCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.enum.EnumShopType;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
@@ -218,7 +219,7 @@ package  com.rpgGame.app.manager.shop
 				//先判断是否是需要vip
 				if (vo.data.vipLevel>Mgr.vipMgr.vipLv) 
 				{
-					GameAlertYellowBtnExt.show("您不是"+vo.data.vipLevel+"级Vip玩家，不能购买此道具。是否成为"+vo.data.vipLevel+"级Vip?",Mgr.vipMgr.iWantBecomeVip);
+					GameAlertYellowBtnExt.show("您还不是"+VipCfg.getVip(vo.data.vipLevel)+"，不能购买此道具。是否成为"+VipCfg.getVip(vo.data.vipLevel)+"?",Mgr.vipMgr.iWantBecomeVip);
 					return;
 				}
 				var price:int=vo.data.price;

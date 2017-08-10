@@ -68,7 +68,7 @@ package com.rpgGame.appModule.dungeon.genuine
 //				grid.setUrlBg("ui/common/gezikuang/tubiaodikuang/48.png");
 				_skin.container.addChild(grid);
 				grid.x = startX+60*i;
-				grid.y = 507;
+				grid.y = 507+15;
 				item = new ItemInfo();
 				item.itemModelId = itemInfos[i]["mod"];
 				FaceUtil.SetItemGrid(grid,ItemUtil.convertClientItemInfo(item), true);

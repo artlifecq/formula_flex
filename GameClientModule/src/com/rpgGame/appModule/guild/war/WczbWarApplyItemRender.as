@@ -4,6 +4,7 @@ package com.rpgGame.appModule.guild.war
 	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.app.sender.GuildWarSender;
 	import com.rpgGame.app.ui.common.BgListItemRender;
+	import com.rpgGame.app.utils.GSUtil;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
@@ -78,8 +79,8 @@ package com.rpgGame.appModule.guild.war
 				var info:GuildWarCityApplyInfo=_data as GuildWarCityApplyInfo;
 				var applayCityId:int=this.owner.customData.applayCityId;
 				skin.lbCityName.text=info.name;
-				skin.lbTeamName1.text=info.occupyGuildName&&info.occupyGuildName.length!=0?getNoZoneName(info.occupyGuildName):"无";
-				skin.lbTeamName2.text=info.curMaxPriceGuildName&&info.curMaxPriceGuildName.length!=0?getNoZoneName(info.curMaxPriceGuildName):"无";
+				skin.lbTeamName1.text=info.occupyGuildName&&info.occupyGuildName.length!=0?GSUtil.unAreaName(info.occupyGuildName):"无";
+				skin.lbTeamName2.text=info.curMaxPriceGuildName&&info.curMaxPriceGuildName.length!=0?GSUtil.unAreaName(info.curMaxPriceGuildName):"无";
 				skin.lbJiage.text=info.curMaxPrice.toString();
 				_leftTime=info.overTime;
 				skin.lbTime.text=TimeUtil.format3TimeType(_leftTime);
@@ -89,12 +90,6 @@ package com.rpgGame.appModule.guild.war
 					GrayFilter.gray(skin.btnPai);
 				}
 			}
-		}
-		
-		private function getNoZoneName(name:String):String
-		{
-			var index:int=name.indexOf("]");
-			return name.slice(index+1);
 		}
 		
 		public function updateTime():void

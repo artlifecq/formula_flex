@@ -5,6 +5,7 @@ package com.rpgGame.app.view.icon
 	import com.rpgGame.app.manager.EftMcManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.StaticValue;
+	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.type.AssetUrl;
@@ -95,9 +96,9 @@ package com.rpgGame.app.view.icon
 		 * 显示品质 
 		 * @param qualityID  详情请见 EnumItemQualityType
 		 */		
-		public function showQuality( qualityID:int ):void
+		public function showQuality( cfg:Q_item):void
 		{
-			_qualityId = qualityID;
+			_qualityId = cfg?cfg.q_default:Quality.WHITE;
 			/*	if( _qualityId <= 0 )
 			{
 			hideQuality();
@@ -112,7 +113,7 @@ package com.rpgGame.app.view.icon
 			_qualityImage.styleName = ClientConfig.getQualityBg( _qualityId ,iconSize);
 			_qualityImage.visible=true;	
 			_qualityImage.width=_qualityImage.height=_iconSize;
-			if(qualityID>Quality.WHITE){
+			if(_qualityId!=Quality.WHITE&&cfg.q_isshoweffects==0){
 				showQualityEft();
 			}else{
 				if(_qualityEft){

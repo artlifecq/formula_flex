@@ -61,11 +61,19 @@ package org.mokylin.skin.mainui.head
 
 		public var lbLevel:feathers.controls.Label;
 
+		public var lbLijin:feathers.controls.Label;
+
+		public var lbYuanbao:feathers.controls.Label;
+
 		public var quanti:feathers.controls.SkinnableContainer;
 
 		public var role_name:feathers.controls.Label;
 
 		public var role_zhandouli:feathers.controls.UINumber;
+
+		public var uiLijin:feathers.controls.UIAsset;
+
+		public var uiYuanbao:feathers.controls.UIAsset;
 
 		public var ui_select_bg:feathers.controls.UIAsset;
 
@@ -80,7 +88,7 @@ package org.mokylin.skin.mainui.head
 			this.currentState = "normal";
 			this.height = 148;
 			this.width = 384;
-			this.elementsContent = [__head_main_Skin_UIAsset1_i(),icon_i(),__head_main_Skin_UIAsset2_i(),role_zhandouli_i(),role_name_i(),grp_zhiye_i(),grp_mode_i(),btnVip_i(),btnChongzhi_i(),lbLevel_i(),grp_select_i()];
+			this.elementsContent = [__head_main_Skin_UIAsset1_i(),icon_i(),__head_main_Skin_UIAsset2_i(),role_zhandouli_i(),role_name_i(),grp_zhiye_i(),grp_mode_i(),btnVip_i(),btnChongzhi_i(),lbLevel_i(),grp_select_i(),uiYuanbao_i(),uiLijin_i(),lbYuanbao_i(),lbLijin_i()];
 			
 			states = {
 			};
@@ -321,6 +329,34 @@ package org.mokylin.skin.mainui.head
 			return temp;
 		}
 
+		private function lbLijin_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbLijin = temp;
+			temp.name = "lbLijin";
+			temp.text = "1000万";
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 59;
+			temp.x = 264;
+			temp.y = 21;
+			return temp;
+		}
+
+		private function lbYuanbao_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbYuanbao = temp;
+			temp.name = "lbYuanbao";
+			temp.text = "1000万";
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 59;
+			temp.x = 181;
+			temp.y = 21;
+			return temp;
+		}
+
 		private function quanti_i():feathers.controls.SkinnableContainer
 		{
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
@@ -364,6 +400,28 @@ package org.mokylin.skin.mainui.head
 			temp.width = 142;
 			temp.x = 190;
 			temp.y = 77;
+			return temp;
+		}
+
+		private function uiLijin_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiLijin = temp;
+			temp.name = "uiLijin";
+			temp.styleName = "ui/common/tubiao/lijin_24.png";
+			temp.x = 243;
+			temp.y = 16;
+			return temp;
+		}
+
+		private function uiYuanbao_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiYuanbao = temp;
+			temp.name = "uiYuanbao";
+			temp.styleName = "ui/common/tubiao/yuanbao_24.png";
+			temp.x = 157;
+			temp.y = 16;
 			return temp;
 		}
 

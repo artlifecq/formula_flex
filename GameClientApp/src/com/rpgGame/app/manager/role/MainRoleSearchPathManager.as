@@ -147,7 +147,7 @@ package com.rpgGame.app.manager.role
 		//跨场景寻路静态方法
 		//===========================================================================================================
 
-		public static function walkToScene(targetSceneId : int, posx : Number = -1, posy : Number = -1, onArrive : Function = null, spacing : int = 0, data : Object = null,needSprite:Boolean=false) : void
+		public static function walkToScene(targetSceneId : int, posx : Number = -1, posy : Number = -1, onArrive : Function = null, spacing : int = 0, data : Object = null,needSprite:Boolean=false) : Boolean
 		{
 
 			TrusteeshipManager.getInstance().stopAll();
@@ -155,7 +155,7 @@ package com.rpgGame.app.manager.role
 			posy=-Math.abs(posy);
 			var position : Vector3D = new Vector3D(posx, posy, 0);
 			EventManager.dispatchEvent(TaskEvent.AUTO_WALK_START);
-			walkToScenePos(role, targetSceneId, position,walkOver, spacing, data,needSprite);
+			return walkToScenePos(role, targetSceneId, position,walkOver, spacing, data,needSprite);
 			function walkOver(_data : *):void
 			{
 				if(onArrive!=null)
@@ -193,14 +193,14 @@ package com.rpgGame.app.manager.role
 		 * @param pos
 		 * @param onArrive
 		 */
-		public static function walkToScenePos(role : SceneRole, targetSceneId : int, pos : Vector3D, onArrive : Function = null, spacing : int = 0, data : Object = null,needSprite:Boolean=false) : void
+		public static function walkToScenePos(role : SceneRole, targetSceneId : int, pos : Vector3D, onArrive : Function = null, spacing : int = 0, data : Object = null,needSprite:Boolean=false) : Boolean
 		{
 			_data = data;
 			_needSprite=needSprite;
 			var mapID : int = SceneSwitchManager.currentMapId;
 			if (mapID == targetSceneId)
 			{
-				jumpWalkToPos(role, pos, spacing, _data, onArrive,null,null,_needSprite);
+				return jumpWalkToPos(role, pos, spacing, _data, onArrive,null,null,_needSprite);
 				EventManager.dispatchEvent(WorldMapEvent.MAP_WAYS_GUILD_UPDATA_PATHS);
 			}
 			else
@@ -226,6 +226,7 @@ package com.rpgGame.app.manager.role
 				}
 				updateMapWaysGuild();
 			}
+			return true;
 		}
 
 		public static function walkToSceneByLink(data : String) : void

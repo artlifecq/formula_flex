@@ -225,7 +225,10 @@ package com.rpgGame.app.fight.spell
 					var ref : CastSpellLockStateReference = MainRoleManager.actor.stateMachine.getReference(CastSpellLockStateReference) as CastSpellLockStateReference;
 					var spellData : Q_skill_model = caseInfo.spellData;
 					ref.setParams(spellData);
-					MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_CAST_SPELL_LOCK, ref);
+					if(spellData.q_performType==0)//判断不是战魂的技能 战魂不要锁状态 ---yt
+					{
+						MainRoleManager.actor.stateMachine.transition(RoleStateType.CONTROL_CAST_SPELL_LOCK, ref);
+					}
 					if (spellData.q_relate_spells!="") 
 					{
 						TrusteeshipManager.getInstance().tripleSkillCtrl.setParams(spellData.q_skillID);

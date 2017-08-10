@@ -42,7 +42,7 @@ package com.rpgGame.app.view.icon
 		private var _needCD : Boolean = false;
 		protected var _isGary : Boolean = false;
 		protected var _isSelect : Boolean = false;
-		private var _showCD : Boolean = true;
+		protected var _showCD : Boolean = false;
 		private var _showCircle: Boolean = false;
 		/** 是否已经侦听cd事件*/
 		private var _isAlreadyListenerCd : Boolean;

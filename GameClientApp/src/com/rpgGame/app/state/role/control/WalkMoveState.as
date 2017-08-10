@@ -471,7 +471,7 @@ package com.rpgGame.app.state.role.control
 			if (prevState)
 			{
 				if (prevState.type == RoleStateType.CONTROL_TRAIL_MOVE)
-				{
+				{Lyt.a("walk-200");
 					return false;
 				}
 			}
@@ -485,37 +485,41 @@ package com.rpgGame.app.state.role.control
 				return false;
 			}
 			else if ((_machine as RoleStateMachine).isAttackHarding)
-			{
+			{Lyt.a("walk-201");
 				if (!force)
 					return false;
 			}
-			else if ((_machine as RoleStateMachine).isSpriteUp) 
-			{
-				return false;
-			}
+//			else if ((_machine as RoleStateMachine).isSpriteUp) 
+//			{Lyt.a("walk-202");
+//				return false;
+//			}
 			else if ((_machine as RoleStateMachine).isLockCaseSpell)
 			{
 				if (!force)
+				{
+					Lyt.a("walk-203");
 					return false;
+				}
+					
 			}
 			else if ((_machine as RoleStateMachine).isStiff)
-			{
+			{Lyt.a("walk-204");
 				return false;
 			}
 			else if ((_machine as RoleStateMachine).isStun)
-			{
+			{Lyt.a("walk-205");
 				return false;
 			}
 			else if ((_machine as RoleStateMachine).isUnmovable)
-			{
+			{Lyt.a("walk-206");
 				return false;
 			}
 			else if ((_machine as RoleStateMachine).isBlinkMoving)
-			{
+			{Lyt.a("walk-207");
 				return false;
 			}
 			else if ((_machine as RoleStateMachine).isBeatMoving)
-			{
+			{Lyt.a("walk-208");
 				return false;
 			}
 			else if ((_machine as RoleStateMachine).isBlinking)
@@ -528,7 +532,11 @@ package com.rpgGame.app.state.role.control
 			{
 				var attackState : AttackState = _machine.getCurrState(ActionState) as AttackState;
 				if (!force && !attackState.attackBroken && !attackState.canWalkRelease)
+				{
+					Lyt.a("walk-209");
 					return false;
+				}
+					
 			}
 			
 			return true;
