@@ -59,11 +59,11 @@ package com.rpgGame.app.ui.tips
 			riseIco=new BgIcon(64);
 			_spellTip.container.addChildAt(mainIco,4);
 			_spellTip.grpContent.addChild(riseIco);
-			_spellTip.lbJinjie2.wordWrap=true;
 			_spellTip.lbXiaohao.width=120;
 			mainIco.bindBg(_spellTip.Icon1);
 			riseIco.bindBg(_spellTip.Icon2);
 			_spellTip.lbShuoming.wordWrap=true;
+			_spellTip.lbJinjie2.wordWrap=true;			
 		}		
 		
 		/**
@@ -105,14 +105,13 @@ package com.rpgGame.app.ui.tips
 			_spellTip.lbXiaohao.text=cfg.q_recovers_detail.length==0?LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT12):cfg.q_recovers_detail;
 			var lvData:Q_skill_ignore=SkillLvLDataManager.getData(info.skillModelId+"_"+info.skillChildLv);
 			if(!lvData){
-				_spellTip.lbShuoming.text=cfg.q_skillpanel_description1;
-				_spellTip.lbShuoming.isHtmlText=true;
+				_spellTip.lbShuoming.htmlText=cfg.q_skillpanel_description1;
+//				_spellTip.lbShuoming.isHtmlText=true;
 			}else{
-				_spellTip.lbShuoming.text=lvData.q_skillpanel_description;
-				_spellTip.lbShuoming.isHtmlText=true;
+				_spellTip.lbShuoming.htmlText= lvData.q_skillpanel_description;
+//				_spellTip.lbShuoming.isHtmlText=true;
 			}
-			_spellTip.lbShuoming.wordWrap=true;
-			_spellTip.lbShuoming.isHtmlText=true;
+//			_spellTip.lbShuoming.isHtmlText=true;
 			
 			if(!riseCfg){
 				_spellTip.tipbg.height=_spellTip.lbShuoming.y+_spellTip.lbShuoming.textHeight+20;

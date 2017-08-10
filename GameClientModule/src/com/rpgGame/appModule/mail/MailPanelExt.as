@@ -5,12 +5,12 @@ package com.rpgGame.appModule.mail
 	import com.rpgGame.app.sender.MailSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.appModule.mail.render.MailItemSelectCellRender;
-	import com.rpgGame.core.events.FunctionMessageBarEvent;
 	import com.rpgGame.core.events.MailEvent;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
-	import com.rpgGame.coreData.info.item.GridInfo;
 	import com.rpgGame.netData.mail.bean.MailBriefInfo;
 	import com.rpgGame.netData.mail.bean.MailDetailInfo;
+	
+	import away3d.events.Event;
 	
 	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.controls.Scroller;
@@ -22,7 +22,6 @@ package com.rpgGame.appModule.mail
 	import org.mokylin.skin.app.mail.MailReceive_Skin;
 	
 	import starling.display.DisplayObject;
-	import away3d.events.Event;
 	
 	/**邮件系统*/
 	public class MailPanelExt extends SkinUIPanel
@@ -98,7 +97,7 @@ package com.rpgGame.appModule.mail
 						NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(19));
 					}
 					else if(_selectItemList==null||_selectItemList.length<=0){
-						NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(20));
+						NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP,  "请选择要删除的邮件");
 					}
 					else{
 						MailSender.reqDeletAllMailMessage(_selectItemList);
@@ -278,7 +277,8 @@ package com.rpgGame.appModule.mail
 				else
 					_selectItemList.length=0;
 			}
-			
+			else
+				_selectItemList.length=0;
 		}
 	}
 }

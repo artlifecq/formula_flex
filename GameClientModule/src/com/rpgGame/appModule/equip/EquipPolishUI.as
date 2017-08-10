@@ -138,6 +138,8 @@ package com.rpgGame.appModule.equip
 		private function initView():void
 		{
 			_skin.up_title.text="装备属性提升:";
+			_skin.lb_up1.width=_skin.lb_up2.width=90;
+			
 			alertOkTips=new AlertSetInfo(LangAlertInfo.EQUIP_USE_TIPS);
 			alertOkTips.isShowCBox=true;
 			
@@ -421,8 +423,10 @@ package com.rpgGame.appModule.equip
 			for each(var info:GridInfo in datas){
 				if(info.data){
 					item=info.data as ClientItemInfo;
-					if(item.qItem.q_type==GoodsType.STRENGTH)
+					if(item.qItem.q_type==GoodsType.STRENGTH){
+						result.push(item);
 						continue;
+					}
 					if(item is EquipInfo&&isDuanZao(item as EquipInfo)){//具有锻造属性
 						continue;
 					}
@@ -714,7 +718,11 @@ package com.rpgGame.appModule.equip
 			if(up){
 				_skin.arrow_up2.visible=_skin.lb_up2.visible=true;
 				_skin.arrow_up1.visible=_skin.lb_up1.visible=true;			
-				_skin.lb_up1.text=_skin.lb_up2.text=Number(((up.q_promote-current_promote)/1000).toFixed(1))+"%";
+				_skin.lb_up2.text=Number(((up.q_promote-current_promote)/1000).toFixed(1))+"%";
+				if(currCfg)
+					_skin.lb_up1.text=(nowCfg.q_equip_polish-currCfg.q_equip_polish).toString();
+				else
+					_skin.lb_up1.text=nowCfg.q_equip_polish.toString();
 			}else{
 				_skin.arrow_up1.visible=_skin.lb_up1.visible=false;			
 				_skin.arrow_up2.visible=_skin.lb_up2.visible=false;		
@@ -745,6 +753,7 @@ package com.rpgGame.appModule.equip
 			return title+":"+des;
 		}
 		
+		private var nowCfg:Q_equip_polish;
 		private function getUpLv():void
 		{
 			var maxLv:int=EquipPolishCfg.maxLv;
@@ -756,7 +765,7 @@ package com.rpgGame.appModule.equip
 			var currentLv:int=targetEquipInfo.polishLevel;
 			var upExp:int;
 			var nextCfg:Q_equip_polish;
-			var nowCfg:Q_equip_polish;
+			nowCfg=null;
 			canUpNum=0;
 			if(currentLv<maxLv)
 			{

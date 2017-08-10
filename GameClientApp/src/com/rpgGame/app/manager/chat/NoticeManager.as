@@ -200,20 +200,28 @@ package com.rpgGame.app.manager.chat
 			{
 				args.push(msg.values[i]);
 			}
-			
 			var id:int=msg.noticeIndex&0xffffff;
-			var tp:int=(msg.noticeIndex>>24)&0xff;
 			var notiMsg:Q_notify = NotifyCfgData.getNotifyByID(id);
-			if(tp==CHAT_CHUANWEN||tp==CHAT_GONGGAO)
-			{
-				words=ChatUtil.getNoticeMessageHtml(notiMsg.q_content,"",args);
-				notify(tp, words);
-			}
-			else
-			{
-				var words : String = LanguageConfig.replaceStr1(notiMsg.q_content,args);
-				words=ChatUtil.replaceStr2(words);
-				notify(tp, words);
+			if(notiMsg){
+				var showType:Array=notiMsg.q_show_type.split("_");		
+				//			var tp:int=(msg.noticeIndex>>24)&0xff;
+				if(showType!=null&&showType.length>0){
+					for(i=0;i<showType.length;i++)
+					{
+						var tp:int=showType[i];
+						if(tp==CHAT_CHUANWEN||tp==CHAT_GONGGAO)
+						{
+							words=ChatUtil.getNoticeMessageHtml(notiMsg.q_content,"",args);
+							notify(tp, words);
+						}
+						else
+						{
+							var words : String = LanguageConfig.replaceStr1(notiMsg.q_content,args);
+							words=ChatUtil.replaceStr2(words);
+							notify(tp, words);
+						}
+					}
+				}
 			}
 		}
 		
@@ -295,7 +303,7 @@ package com.rpgGame.app.manager.chat
 		 */
 		public static function textNotify(type : int, msg : String) : void
 		{
-						notify(type, msg);
+			notify(type, msg);
 		}
 		
 		/**
@@ -333,7 +341,7 @@ package com.rpgGame.app.manager.chat
 					//					case BATTLE_HINT:		
 					case	BATTLE_CHUANWEN:
 						ChatManager.onShowChatInChatBar($msg, EnumChatChannelType.CHAT_CHANNEL_SYSTEM);
-//						EventManager.dispatchEvent(HintEvent.BATTLE_HINT, [$type,$msg]);
+						//						EventManager.dispatchEvent(HintEvent.BATTLE_HINT, [$type,$msg]);
 						break;
 					case CHAT_CHUANWEN:
 						ChatManager.onShowChatInChatBar($msg, EnumChatChannelType.CHAT_CHANNEL_HEARSAY);

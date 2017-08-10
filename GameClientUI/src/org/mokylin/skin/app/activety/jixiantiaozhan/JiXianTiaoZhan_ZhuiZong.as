@@ -6,10 +6,9 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.component.button.ButtonSkin_putong;
+	import org.mokylin.skin.component.button.ButtonSkin_hide;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
-	import org.mokylin.skin.component.button.ButtonSkin_shouhui;
-	import org.mokylin.skin.component.button.ButtonSkin_zhankai;
+	import org.mokylin.skin.component.button.ButtonSkin_putong4;
 
 	/**
 	 * @private
@@ -24,6 +23,10 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 		public var btn_close:feathers.controls.Button;
 
 		public var btn_open:feathers.controls.Button;
+
+		public var head_left:feathers.controls.UIAsset;
+
+		public var head_right:feathers.controls.UIAsset;
 
 		public var icons:feathers.controls.UIAsset;
 
@@ -85,15 +88,37 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.height = 17;
 			temp.leading = 3;
-			temp.letterSpacing = -1;
+			temp.letterSpacing = 0;
 			temp.fontSize = 14;
 			temp.text = "推荐：同时激活2种增伤BUFF";
-			temp.textAlign = "left";
-			temp.color = 0x5CB006;
+			temp.textAlign = "center";
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 200;
-			temp.x = 39;
-			temp.y = 309;
+			temp.width = 232;
+			temp.x = 7;
+			temp.y = 304;
+			return temp;
+		}
+
+		private function __JiXianTiaoZhan_ZhuiZong_Label2_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.text = "【伤害强化】";
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 10;
+			temp.y = 91;
+			return temp;
+		}
+
+		private function __JiXianTiaoZhan_ZhuiZong_Label3_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.text = "【最后一击奖励】";
+			temp.color = 0xFFEA00;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 10;
+			temp.y = 223;
 			return temp;
 		}
 
@@ -102,7 +127,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.height = 430;
 			temp.styleName = "ui/mainui/renwu/bg.png";
-			temp.width = 253;
+			temp.width = 248;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -111,46 +136,9 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 		private function __JiXianTiaoZhan_ZhuiZong_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/mainui/renwu/hengtiao.png";
+			temp.styleName = "ui/mainui/renwu/renwuzhuizongbg.png";
 			temp.x = 0;
 			temp.y = 0;
-			return temp;
-		}
-
-		private function __JiXianTiaoZhan_ZhuiZong_UIAsset3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/mainui/fubenzhuizong/zs.png";
-			temp.x = 35;
-			temp.y = 12;
-			return temp;
-		}
-
-		private function __JiXianTiaoZhan_ZhuiZong_UIAsset4_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.scaleX = -1;
-			temp.styleName = "ui/mainui/fubenzhuizong/zs.png";
-			temp.x = 210;
-			temp.y = 12;
-			return temp;
-		}
-
-		private function __JiXianTiaoZhan_ZhuiZong_UIAsset5_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/activety/jixiantiaozhan/shanghaiqianghua.png";
-			temp.x = 4;
-			temp.y = 90;
-			return temp;
-		}
-
-		private function __JiXianTiaoZhan_ZhuiZong_UIAsset6_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/activety/jixiantiaozhan/zuihouyijijiangli.png";
-			temp.x = 4;
-			temp.y = 226;
 			return temp;
 		}
 
@@ -159,9 +147,9 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_close = temp;
 			temp.name = "btn_close";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_shouhui;
-			temp.x = 234;
-			temp.y = 0;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_hide;
+			temp.x = 221;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -170,9 +158,33 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_open = temp;
 			temp.name = "btn_open";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_zhankai;
-			temp.x = 234;
-			temp.y = 0;
+			temp.scaleX = -1;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_hide;
+			temp.x = 243;
+			temp.y = 8;
+			return temp;
+		}
+
+		private function head_left_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			head_left = temp;
+			temp.name = "head_left";
+			temp.styleName = "ui/mainui/fubenzhuizong/zs.png";
+			temp.x = 38;
+			temp.y = 15;
+			return temp;
+		}
+
+		private function head_right_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			head_right = temp;
+			temp.name = "head_right";
+			temp.scaleX = -1;
+			temp.styleName = "ui/mainui/fubenzhuizong/zs.png";
+			temp.x = 213;
+			temp.y = 15;
 			return temp;
 		}
 
@@ -182,7 +194,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			icons = temp;
 			temp.name = "icons";
 			temp.styleName = "ui/app/activety/jixiantiaozhan/icon/bosstouxiang.png";
-			temp.x = 8;
+			temp.x = 20;
 			temp.y = 11;
 			return temp;
 		}
@@ -193,7 +205,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			ionbg = temp;
 			temp.name = "ionbg";
 			temp.styleName = "ui/app/activety/jixiantiaozhan/quan.png";
-			temp.x = 0;
+			temp.x = 12;
 			temp.y = 0;
 			return temp;
 		}
@@ -208,9 +220,9 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			temp.textAlign = "center";
 			temp.color = 0xFFF2B7;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlue"];
-			temp.width = 93;
-			temp.x = 76;
-			temp.y = 6;
+			temp.width = 205;
+			temp.x = 24;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -228,8 +240,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 63;
-			temp.x = 33;
-			temp.y = 163;
+			temp.x = 44;
+			temp.y = 166;
 			return temp;
 		}
 
@@ -248,7 +260,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 74;
 			temp.x = 151;
-			temp.y = 163;
+			temp.y = 166;
 			return temp;
 		}
 
@@ -259,10 +271,10 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			temp.name = "lbName";
 			temp.fontSize = 16;
 			temp.text = "极限-秦始皇";
-			temp.color = 0x9D4AA8;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xEE0699;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 128;
-			temp.x = 101;
+			temp.x = 110;
 			temp.y = 33;
 			return temp;
 		}
@@ -274,15 +286,15 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			temp.name = "lb_time";
 			temp.height = 17;
 			temp.leading = 3;
-			temp.letterSpacing = -1;
+			temp.letterSpacing = 0;
 			temp.fontSize = 14;
 			temp.text = "活动结束倒计时：00:22:08";
 			temp.textAlign = "center";
-			temp.color = 0xD23735;
+			temp.color = 0xFF0D0D;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 182;
-			temp.x = 25;
-			temp.y = 327;
+			temp.width = 232;
+			temp.x = 7;
+			temp.y = 322;
 			return temp;
 		}
 
@@ -292,9 +304,9 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			scroll_box = temp;
 			temp.name = "scroll_box";
 			temp.width = 234;
-			temp.x = 12;
+			temp.x = 0;
 			temp.y = 37;
-			temp.elementsContent = [lbInfo1_i(),__JiXianTiaoZhan_ZhuiZong_Label1_i(),lb_time_i(),lbInfo2_i(),lbName_i(),ionbg_i(),icons_i(),sec_ico1_0_i(),sec_ico1_1_i(),sec_ico1_2_i(),__JiXianTiaoZhan_ZhuiZong_UIAsset5_i(),__JiXianTiaoZhan_ZhuiZong_UIAsset6_i(),sec_subbut1_i(),sec_Exit_i(),sec_subbut2_i(),uiJiSha_i()];
+			temp.elementsContent = [lbInfo1_i(),__JiXianTiaoZhan_ZhuiZong_Label1_i(),lb_time_i(),lbInfo2_i(),lbName_i(),ionbg_i(),icons_i(),sec_ico1_0_i(),sec_ico1_1_i(),sec_ico1_2_i(),sec_subbut1_i(),sec_Exit_i(),sec_subbut2_i(),uiJiSha_i(),__JiXianTiaoZhan_ZhuiZong_Label2_i(),__JiXianTiaoZhan_ZhuiZong_Label3_i()];
 			return temp;
 		}
 
@@ -305,11 +317,12 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			temp.name = "sec_Exit";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "退出活动";
+			temp.fontSize = 16;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xFFFFFF;
 			temp.width = 90;
-			temp.x = 70;
-			temp.y = 352;
+			temp.x = 81;
+			temp.y = 348;
 			return temp;
 		}
 
@@ -319,8 +332,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			sec_ico1_0 = temp;
 			temp.name = "sec_ico1_0";
 			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 35;
-			temp.y = 114;
+			temp.x = 46;
+			temp.y = 117;
 			return temp;
 		}
 
@@ -331,7 +344,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			temp.name = "sec_ico1_1";
 			temp.styleName = "ui/mainui/renwu/tbk.png";
 			temp.x = 151;
-			temp.y = 114;
+			temp.y = 117;
 			return temp;
 		}
 
@@ -341,8 +354,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			sec_ico1_2 = temp;
 			temp.name = "sec_ico1_2";
 			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 35;
-			temp.y = 250;
+			temp.x = 46;
+			temp.y = 247;
 			return temp;
 		}
 
@@ -353,11 +366,12 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			temp.name = "sec_subbut1";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "购买激活";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
+			temp.labelOffsetY = 1;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong4;
 			temp.color = 0xFFFFFF;
-			temp.width = 90;
-			temp.x = 18;
-			temp.y = 184;
+			temp.width = 80;
+			temp.x = 31;
+			temp.y = 187;
 			return temp;
 		}
 
@@ -368,11 +382,12 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			temp.name = "sec_subbut2";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "购买激活";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
+			temp.labelOffsetY = 1;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong4;
 			temp.color = 0xFFFFFF;
-			temp.width = 90;
-			temp.x = 137;
-			temp.y = 184;
+			temp.width = 80;
+			temp.x = 136;
+			temp.y = 187;
 			return temp;
 		}
 
@@ -384,7 +399,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			temp.width = 253;
 			temp.x = 0;
 			temp.y = 0;
-			temp.elementsContent = [lbHeadName_i(),__JiXianTiaoZhan_ZhuiZong_UIAsset3_i(),__JiXianTiaoZhan_ZhuiZong_UIAsset4_i(),scroll_box_i()];
+			temp.elementsContent = [lbHeadName_i(),head_left_i(),head_right_i(),scroll_box_i()];
 			return temp;
 		}
 

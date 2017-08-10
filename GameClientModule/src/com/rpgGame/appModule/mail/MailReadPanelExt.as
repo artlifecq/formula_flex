@@ -25,6 +25,7 @@ package com.rpgGame.appModule.mail
 		private var _skin:MailRead_Skin;
 		private var _info:MailDetailInfo;
 		private var _skillContainer:Sprite;
+		private var _lastSp:Sprite;
 		public function MailReadPanelExt()
 		{
 			_skin=new MailRead_Skin();
@@ -35,8 +36,10 @@ package com.rpgGame.appModule.mail
 		private function initpanel():void
 		{
 			_skillContainer=new Sprite();
-			this._skin.skinList.scrollBarDisplayMode = ScrollBarDisplayMode.ALWAYS_VISIBLE;
-			this._skin.skinList.horizontalScrollPolicy=ScrollPolicy.OFF;
+			this._skin.vs_bar.width=385;
+			this._skin.vs_bar.x=28;
+			this._skin.vs_bar.scrollBarDisplayMode = ScrollBarDisplayMode.FIXED;
+			this._skin.vs_bar.horizontalScrollPolicy=ScrollPolicy.OFF;
 		}
 		
 		override protected function onShow():void
@@ -120,7 +123,10 @@ package com.rpgGame.appModule.mail
 					ico.y=(int(i/6))*54;
 					_skillContainer.addChild(ico);
 				}
-				_skin.skinList.addChild(_skillContainer);
+				_lastSp=new Sprite();
+				_lastSp.y=ico.y+ico.height+2;
+				_skillContainer.addChild(_lastSp);
+				_skin.vs_bar.addChild(_skillContainer);
 				_skin.btnTiqu.visible=true;
 				_skin.btnCancel.x=138;
 			}
@@ -137,7 +143,7 @@ package com.rpgGame.appModule.mail
 		
 		private function clearIcoList():void
 		{
-			_skin.skinList.removeChildren();
+			_skin.vs_bar.removeChildren();
 			_skillContainer.removeChildren();
 		}
 		

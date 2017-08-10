@@ -12,6 +12,7 @@ package com.rpgGame.app.ui.alert
 	import feathers.controls.Button;
 	import feathers.controls.Check;
 	import feathers.controls.Label;
+	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	
@@ -23,7 +24,7 @@ package com.rpgGame.app.ui.alert
 	import org.mokylin.skin.component.check.CheckBoxSkin_1;
 	
 	import starling.display.DisplayObject;
-
+	
 	/**
 	 * 游戏弹窗提示
 	 * @author mandragora
@@ -58,14 +59,13 @@ package com.rpgGame.app.ui.alert
 			}
 			super(skin);
 		}
-
+		
 		override protected function onTouchTarget(target : DisplayObject) : void
 		{
 			if(!alertSet)
 				return;
 			switch (target)
 			{
-				case tipLab:
 				case btnOk:
 					clickType = AlertClickTypeEnum.TYPE_SURE;
 					break;
@@ -76,9 +76,11 @@ package com.rpgGame.app.ui.alert
 					clickType = AlertClickTypeEnum.TYPE_CLOSE;
 					hide();
 					break;
-				default:
+				case bgDi:
 					clickType = AlertClickTypeEnum.TYPE_CLOSE;
 					hide();
+					break;
+				case cboxTip:
 					return;
 			}
 			
@@ -89,17 +91,17 @@ package com.rpgGame.app.ui.alert
 				else
 					clickCallBack(this);
 			}
-				
+			
 			if (alertSet.isClickHide)
 				hide();
 		}
-
+		
 		public function set autoCloseTime(value : int) : void
 		{
 			TweenLite.killDelayedCallsTo(hide);
 			TweenLite.delayedCall(value * 0.001, hide);
 		}
-
+		
 		/**
 		 * 这里不是正式弹窗，做调试用的，如果不是必要千万别用这个！以后肯定会移除的！ 
 		 * @param msg
@@ -129,7 +131,7 @@ package com.rpgGame.app.ui.alert
 			{
 				gameAlert.lbTip.text=msg;
 			}
-
+			
 			if (gameAlert.title)
 				gameAlert.title.htmlText = title;
 			StarlingLayerManager.topUILayer.addChild(gameAlert);
@@ -154,7 +156,7 @@ package com.rpgGame.app.ui.alert
 			alertSet.setAlertInfo(key,args);
 			return showAlert(alertSet,clickCallBack);
 		}
-
+		
 		/**
 		 * 显示提示，alertSetInfo中设置一些gameAlert必要属性，如果不设置就是默认设置
 		 * @param alertSet
@@ -207,7 +209,7 @@ package com.rpgGame.app.ui.alert
 			if (gameAlert.btnCancel)
 				gameAlert.btnCancel.label = alertInfo.rightValue ? alertInfo.rightValue : "取消";
 			//TaskUtil.addLabelEvet(gameAlert.cboxTip.getChildIndex();
-//			var obj:*=gameAlert.cboxTip.getChildAt(6);
+			//			var obj:*=gameAlert.cboxTip.getChildAt(6);
 			gameAlert.callBackArgs = args;
 			StarlingLayerManager.topUILayer.addChild(gameAlert);
 			showAlertMap.add(alertSet.key, gameAlert);
@@ -227,13 +229,13 @@ package com.rpgGame.app.ui.alert
 			}
 			if(gameAlert.lbTip){
 				gameAlert.lbTip.y=50+(124-gameAlert.lbTip.textHeight)/2;
-//				gameAlert.lbTip.x=(330-gameAlert.lbTip.textWidth)/2
+				//				gameAlert.lbTip.x=(330-gameAlert.lbTip.textWidth)/2
 			}
 		}		
 		
 		private static var showAlertMap : HashMap = new HashMap();
 		private static var alertPools : HashMap = new HashMap();
-
+		
 		/**从池中获取指定类型的一个alert**/
 		private static function getAlertByType(type : int) : GameAlert
 		{
@@ -252,7 +254,7 @@ package com.rpgGame.app.ui.alert
 				return new GameAlert(type);
 			}
 		}
-
+		
 		override public function hide() : void
 		{
 			if (!alertPools)
@@ -268,7 +270,7 @@ package com.rpgGame.app.ui.alert
 			TweenLite.killDelayedCallsTo(hide);
 			super.hide();
 		}
-
+		
 		public static function closeAlert(key : String) : void
 		{
 			if (showAlertMap&&showAlertMap.containsKey(key))
@@ -291,6 +293,11 @@ package com.rpgGame.app.ui.alert
 		private function get btnClose() : Button
 		{
 			return skin.hasOwnProperty("btnClose") ? skin["btnClose"] : null;
+		}
+		
+		public function get bgDi():SkinnableContainer
+		{
+			return skin.hasOwnProperty("bg") ? skin["bg"] : null;
 		}
 		
 		public function get tipLab() : Label

@@ -154,7 +154,7 @@ package com.rpgGame.appModule.hunyin
 			var needNum:int=JieHunJieZiData.getModByLv(Mgr.hunyinMgr.JieZiLv).q_max_intimacy;
 			_skin.lbJindu.text=num.toString()+"/"+needNum.toString();
 			if(num>=needNum) _skin.lbJindu.color=StaticValue.A_UI_GREEN_TEXT;
-			else _skin.lbJindu.color=StaticValue.A_UI_RED_TEXT;
+			else _skin.lbJindu.color=StaticValue.A_UI_YELLOW_TEXT;
 			_skin.barJindu.maximum=needNum;
 			_skin.barJindu.value=num;
 		}
