@@ -619,15 +619,15 @@ package com.rpgGame.app.cmdlistener.scene
 		
 		private function RecvResRoundObjectsMessage(msg:ResRoundObjectsMessage):void
 		{
-			GameLog.addShow("ResRoundObjectsMessage  通知来了！ 看看通知了什么！ \t 删除对象个数：" + msg.removeObjs.length);
-			GameLog.addShow("ResRoundObjectsMessage  通知来了！ 添加对象个数：" + msg.objInfos.length);
+//			GameLog.addShow("ResRoundObjectsMessage  通知来了！ 看看通知了什么！ \t 删除对象个数：" + msg.removeObjs.length);
+//			GameLog.addShow("ResRoundObjectsMessage  通知来了！ 添加对象个数：" + msg.objInfos.length);
 			var delArr:Vector.<long> = msg.removeObjs;
 			for(var i:int=0;i<delArr.length;i++)
 			{
 				var roleID:uint = delArr[i].ToGID();
 				onSceneRemoveObject(roleID);
-				GameLog.addShow("删除对象客户端id：" + roleID);
-				GameLog.addShow("删除对象服务器id：" + delArr[i].ToString());
+//				GameLog.addShow("删除对象客户端id：" + roleID);
+//				GameLog.addShow("删除对象服务器id：" + delArr[i].ToString());
 			}
 			
 			var addArr:Vector.<SceneObjInfo> = msg.objInfos;
@@ -687,14 +687,14 @@ package com.rpgGame.app.cmdlistener.scene
 		
 		private function onResRoundMonsterDisappearMessage(msg:ResRoundMonsterDisappearMessage):void
 		{
-			GameLog.addShow("onResRoundMonsterDisappearMessage  通知来了！ 看看通知了什么！ \t 删除对象个数：" + msg.monstersIds.length);
+//			GameLog.addShow("onResRoundMonsterDisappearMessage  通知来了！ 看看通知了什么！ \t 删除对象个数：" + msg.monstersIds.length);
 			var delArr:Vector.<long> = msg.monstersIds;
 			for(var i:int=0;i<delArr.length;i++)
 			{
 				var roleID:uint = delArr[i].ToGID();
 				onSceneRemoveObject(roleID);
-				GameLog.addShow("删除对象客户端id：" + roleID);
-				GameLog.addShow("删除对象服务器id：" + delArr[i].ToString());
+//				GameLog.addShow("删除对象客户端id：" + roleID);
+//				GameLog.addShow("删除对象服务器id：" + delArr[i].ToString());
 			}
 			
 		}
@@ -947,8 +947,8 @@ package com.rpgGame.app.cmdlistener.scene
 				data.distributeId=info.distributeId;
 				RoleData.readMonster(data,info);
 				sceneRole =SceneRoleManager.getInstance().createMonster(data, SceneCharType.MONSTER);
-				GameLog.addShow("添加怪物客户端id：" + data.id);
-				GameLog.addShow("添加怪物服务器id：" + data.serverID.ToString());
+//				GameLog.addShow("添加怪物客户端id：" + data.id);
+//				GameLog.addShow("添加怪物服务器id：" + data.serverID.ToString());
 			}
 			if (sceneRole&&info.positions.length>0) 
 			{

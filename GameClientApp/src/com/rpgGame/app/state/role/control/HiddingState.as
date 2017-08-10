@@ -54,7 +54,7 @@ package com.rpgGame.app.state.role.control
 		private function eachVisible(role : BaseRole, render : RenderUnit3D) : void
 		{
 			role.isHiding = false;
-			render.castsShadows = true;
+			
 			switch(render.type)
 			{
 				case RenderUnitType.BODY:
@@ -67,6 +67,7 @@ package com.rpgGame.app.state.role.control
 				case RenderUnitType.EFFECT:
 				case RenderUnitType.HURT:
 					render.isHiding = false;
+					render.castsShadows = true;
 					break;
 			}
 		}
@@ -80,7 +81,7 @@ package com.rpgGame.app.state.role.control
 		private function eachUnVisible(role : BaseRole, render : RenderUnit3D) : void
 		{
 			role.isHiding = true;
-			render.castsShadows = false;
+			
 			switch(render.type)
 			{
 				case RenderUnitType.BODY:
@@ -93,6 +94,7 @@ package com.rpgGame.app.state.role.control
 				case RenderUnitType.EFFECT:
 				case RenderUnitType.HURT:
 					render.isHiding = true;
+					render.castsShadows = false;
 					break;
 			}
 		}
@@ -109,7 +111,7 @@ package com.rpgGame.app.state.role.control
 //					role.headFace.headVisible=true;
 				}
 			}
-			trace("time diff:"+(getTimer()-_enterTime));
+//			trace("time diff:"+(getTimer()-_enterTime));
 		}
 	}
 }
