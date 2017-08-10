@@ -8,7 +8,6 @@ package com.rpgGame.app
 	import com.rpgGame.app.cmdlistener.scene.SceneSwitchCmdListener;
 	import com.rpgGame.app.manager.ReconnectManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.manager.scene.FirstEnterSceneManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.process.LoadConfigData;
 	import com.rpgGame.app.process.LocalConfigData;
@@ -17,7 +16,6 @@ package com.rpgGame.app
 	import com.rpgGame.app.ui.ResLoadingView;
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.coreData.cfg.ClientConfig;
-	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.clientConfig.ConfigClassRegister;
 	import com.rpgGame.netData.player.bean.MyPlayerInfo;
 	
