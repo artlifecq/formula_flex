@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.activety.jixiantiaozhan
 {
+	import com.gameClient.utils.HashMap;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.utils.FaceUtil;
@@ -27,7 +28,7 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 		
 		private var _skin:JiXianTiaoZhanPaiHang;
 		private var _q_mod:Q_limitchallenge;
-		private var _reward:Array;
+		private var _reward:HashMap;
 		
 		private var _icoList:Vector.<UIAsset>;
 		private var _icoface:Vector.<IconCDFace>;
@@ -35,6 +36,7 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 		{
 			_skin=new JiXianTiaoZhanPaiHang();
 			super(_skin);
+			MCUtil.removeSelf(_skin.btnClose);
 			_skin.listItem.itemRendererFactory = creatremder;	
 			_skin.listItem.clipContent = true;
 			//			_skin.listItem.scrollBarDisplayMode = "fixed";
@@ -66,30 +68,68 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 			}
 			
 			_q_mod = ActivetyDataManager.jixianVo.qmod;
-			_reward = JSONUtil.decode(_q_mod.q_rank_rewards);
+			_reward = assemblyPrizae(_q_mod.q_rank_rewards);
+			var keys:Array=_reward.keys();
+			keys.sort(short);
 			var rank:int=0;
 			var list:Array=[];
-			for(i=0;i<_reward.length;i++)
+			for(i=0;i<keys.length;i++)
 			{
-				var info:JiXianAcInfo=new JiXianAcInfo(rank,_reward[i].paras.rank,_reward[i]);
+				var info:JiXianAcInfo=new JiXianAcInfo(rank,keys[i],_reward.getValue(keys[i]));
 				list.push(info);
-				rank=_reward[i].paras.rank;
+				rank=keys[i];
 			}
 			_skin.listItem.dataProvider=new ListCollection(list);
 			if(ActivetyDataManager.jixianVo.rank<1){
+				_skin.lbPaiming.text="暂无";
+				_skin.uiJiangli.visible=false;
 				_skin.grpIcon.visible=false;
 				_skin.uiWRB.visible=true;
 			}
 			else{
-				var reward:Array=getRankReward(ActivetyDataManager.jixianVo.rank);
-				if(reward.length==0||reward==null)
-				{
-					reward=JSONUtil.decode(_q_mod.q_join_rewards);
-				}
+				var reward:Vector.<ClientItemInfo>=getRankReward(ActivetyDataManager.jixianVo.rank);
 				setRewardShow(reward);
+				_skin.lbPaiming.text=ActivetyDataManager.jixianVo.rank.toString();
+				_skin.uiJiangli.visible=true;
 				_skin.grpIcon.visible=true;
 				_skin.uiWRB.visible=false;
 			}
+		}
+		
+		private function short(i1:int,i2:int):int
+		{
+			if(i1<i2) return -1;
+			else if(i1>i2) return 1;
+			return 0;
+		}
+		
+		/**组装奖励*/
+		private function assemblyPrizae(str:String):HashMap
+		{
+			var arr:Array = JSONUtil.decode(str);
+			if(arr)
+			{
+				var has:HashMap=new HashMap();
+				var vec:Vector.<ClientItemInfo>;
+				for(var i:int=0;i<arr.length;i++)
+				{
+					var rank:int=arr[i].paras.rank;
+					var mod:int=arr[i].mod;
+					var num:int=arr[i].num;
+					var item:ClientItemInfo=ItemUtil.convertClientItemInfoById(mod,num);
+					if(has.getValue(rank)){
+						vec=has.getValue(rank);
+						vec.push(item);						
+					}
+					else{
+						vec=new Vector.<ClientItemInfo>();
+						vec.push(item);
+						has.put(rank,vec);
+					}
+				}
+				return has;
+			}
+			return null;
 		}
 		
 		private function creatremder():TiaoZhanPaiHangItemRemder
@@ -97,13 +137,13 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 			return new TiaoZhanPaiHangItemRemder();
 		}
 		
-		private function setRewardShow(rewards:Array):void
+		private function setRewardShow(rewards:Vector.<ClientItemInfo>):void
 		{
 			for(var i:int=0;i<_icoList.length;i++)
 			{
 				if(i<rewards.length)
 				{
-					var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(rewards[i].mod,1);
+					var itemInfo:ClientItemInfo=rewards[i];//ItemUtil.convertClientItemInfoById(rewards[i].mod,1);
 					FaceUtil.SetItemGrid(_icoface[i],itemInfo);
 					_icoface[i].visible=true;
 					_icoList[i].visible=true;
@@ -122,17 +162,19 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 		 * @return 
 		 * 
 		 */
-		public function getRankReward(rank:int):Array
+		public function getRankReward(rank:int):Vector.<ClientItemInfo>
 		{
-			var result:Array=[];
-			var num:int=_reward.length;
+			var result:Vector.<ClientItemInfo>=new Vector.<ClientItemInfo>();
+			var keys:Array=_reward.keys();
+			keys.sort(short);
+			var num:int=keys.length;
 			var rankSeat:int=getRewardRank(rank);
 			if(rankSeat==-1){
 				num=0;
 			}
 			for(var i:int=0;i<num;i++){
-				if(_reward[i].paras.rank==rank){
-					result.push(_reward[i]);
+				if(keys[i]==rank){
+					result=_reward.getValue(rank);
 				}
 			}
 			return result;
@@ -146,13 +188,16 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 		 */
 		private function getRewardRank(rank:int):int
 		{
-			var num:int=_reward.length-1;
+			var keys:Array=_reward.keys();
+			keys.sort(short);
+			var num:int=keys.length;
 			var result:int=-1;
+			
 			for(var i:int=num;i>=0;i--){
-				if(_reward[i].paras.rank<rank){
+				if(keys[i]<rank){
 					break;
 				}
-				result=_reward[i].paras.rank;
+				result=keys[i];
 			}
 			return result;
 		}
@@ -161,7 +206,7 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 		{
 			if(!_ins) _ins=new JiXianTiaozhanPaiHnagPenelExt();
 			_ins.x=container.width-10;
-			_ins.y=(container.height-_ins.height)/2+12;
+			_ins.y=(container.height-_ins.height)/2+22;
 			container.addChild(_ins);
 			return _ins.width;
 		}

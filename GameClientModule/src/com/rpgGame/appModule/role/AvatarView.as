@@ -341,7 +341,7 @@ package com.rpgGame.appModule.role
 				var index:int=equipsTypes.indexOf(info.qItem.q_kind);
 				equipGrids[index].filter=glowfilter;
 				onGlowTween();
-				if((equipGrids[index].faceInfo as EquipInfo).qItem.q_level<info.qItem.q_level&&info.qItem.q_level<=MainRoleManager.actorInfo.totalStat.level&&(info.qItem.q_job==MainRoleManager.actorInfo.job||info.qItem.q_job==0))
+				if((equipGrids[index].faceInfo==null||(equipGrids[index].faceInfo as EquipInfo).qItem.q_level<info.qItem.q_level)&&info.qItem.q_level<=MainRoleManager.actorInfo.totalStat.level&&(info.qItem.q_job==MainRoleManager.actorInfo.job||info.qItem.q_job==0))
 				{
 					showTiShi(equipGrids[index],true);
 				}
@@ -436,7 +436,7 @@ package com.rpgGame.appModule.role
 		private function onGetMarrriageData():void
 		{
 			// TODO Auto Generated method stub
-			setMarriageRingData(Mgr.hunyinMgr.JieZiLv,Mgr.hunyinMgr.hasMarriage());
+			setMarriageRingData(Mgr.hunyinMgr.JieZiLv,Mgr.hunyinMgr.hunyinState());
 		}
 		
 		private function onGetVipData():void
@@ -466,16 +466,16 @@ package com.rpgGame.appModule.role
 		 * @param hasMarriage 是否结婚中，离婚置灰
 		 * 
 		 */		
-		public function setMarriageRingData(ring:int,hasMarriage:Boolean):void
+		public function setMarriageRingData(ring:int,hasMarriage:int):void
 		{
 			//TipTargetManager.remove(_marryIcon);
-			if (ring>0) 
+			if (ring>0&&hasMarriage!=5) 
 			{
 				var info:Q_advance_wedding=JieHunJieZiData.getModByLv(ring);		
 				var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(info.q_mod_id);
 				FaceUtil.SetItemGrid(_marryIcon,itemInfo);
 				//_marryIcon.setIconResName(ClientConfig.getItemIcon(Mgr.hunyinMgr.getRingUrl(ring),IcoSizeEnum.ICON_48));
-				if (!hasMarriage) 
+				if (hasMarriage==7) 
 				{
 					GrayFilter.gray(_marryIcon);
 				}

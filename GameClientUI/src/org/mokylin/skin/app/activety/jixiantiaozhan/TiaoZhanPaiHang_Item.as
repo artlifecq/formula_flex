@@ -18,7 +18,13 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 		//==========================================================================
 		public var gRank:feathers.controls.Group;
 
+		public var ico0:feathers.controls.UIAsset;
+
 		public var ico1:feathers.controls.UIAsset;
+
+		public var ico2:feathers.controls.UIAsset;
+
+		public var ico3:feathers.controls.UIAsset;
 
 		public var num:feathers.controls.UINumber;
 
@@ -38,8 +44,8 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			
 			this.currentState = "normal";
 			this.height = 102;
-			this.width = 304;
-			this.elementsContent = [__TiaoZhanPaiHang_Item_UIAsset1_i(),uiTitle1_i(),gRank_i(),num_i(),ico1_i()];
+			this.width = 290;
+			this.elementsContent = [__TiaoZhanPaiHang_Item_UIAsset1_i(),uiTitle1_i(),gRank_i(),num_i(),ico0_i(),ico1_i(),ico2_i(),ico3_i()];
 			
 			states = {
 			};
@@ -64,9 +70,22 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			gRank = temp;
 			temp.name = "gRank";
-			temp.x = 176;
+			temp.x = 196;
 			temp.y = 7;
 			temp.elementsContent = [uiTitle2_i(),uiTitle3_i()];
+			return temp;
+		}
+
+		private function ico0_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ico0 = temp;
+			temp.name = "ico0";
+			temp.height = 56;
+			temp.styleName = "ui/common/grid/normal/48.png";
+			temp.width = 56;
+			temp.x = 13;
+			temp.y = 36;
 			return temp;
 		}
 
@@ -75,9 +94,37 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			ico1 = temp;
 			temp.name = "ico1";
+			temp.height = 56;
 			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 26;
-			temp.y = 34;
+			temp.width = 56;
+			temp.x = 82;
+			temp.y = 36;
+			return temp;
+		}
+
+		private function ico2_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ico2 = temp;
+			temp.name = "ico2";
+			temp.height = 56;
+			temp.styleName = "ui/common/grid/normal/48.png";
+			temp.width = 56;
+			temp.x = 151;
+			temp.y = 36;
+			return temp;
+		}
+
+		private function ico3_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ico3 = temp;
+			temp.name = "ico3";
+			temp.height = 56;
+			temp.styleName = "ui/common/grid/normal/48.png";
+			temp.width = 56;
+			temp.x = 220;
+			temp.y = 36;
 			return temp;
 		}
 
@@ -88,10 +135,10 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			temp.name = "num";
 			temp.gap = 0;
 			temp.height = 25;
-			temp.label = "1-10";
+			temp.label = "10-10000";
 			temp.styleClass = org.mokylin.skin.app.activety.number.UINumberTiaozhanpaihang;
-			temp.width = 26;
-			temp.x = 126;
+			temp.width = 20;
+			temp.x = 104;
 			temp.y = 8;
 			return temp;
 		}
@@ -102,7 +149,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			uiTitle1 = temp;
 			temp.name = "uiTitle1";
 			temp.styleName = "ui/app/activety/jixiantiaozhan/di.png";
-			temp.x = 105;
+			temp.x = 83;
 			temp.y = 7;
 			return temp;
 		}

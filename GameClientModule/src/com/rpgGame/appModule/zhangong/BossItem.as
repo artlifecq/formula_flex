@@ -9,6 +9,7 @@ package com.rpgGame.appModule.zhangong
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
+	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.sender.ZhanGongSender;
 	import com.rpgGame.app.ui.common.CenterEftPop;
 	import com.rpgGame.app.utils.RoleFaceMaskEffectUtil;
@@ -127,6 +128,8 @@ package com.rpgGame.appModule.zhangong
 					toUpHandler(null);
 					break;
 				case _skin.btnDao:
+					flyToScene();
+					break;
 				case _skin.lbName:
 				case _skin.ui_nameBg:
 					toWorkMonsterHandler();
@@ -263,7 +266,7 @@ package com.rpgGame.appModule.zhangong
 			var keys:Array=maps.keys();
 			var values:Array=maps.values();
 			setUIType(keys[0]);
-			_skin.numZhanli.label="x"+AttValueConfig.getDisAttValueStr(keys[0],values[0]);
+			_skin.numZhanli.label="x"+AttValueConfig.getDisAttValue(keys[0],values[0]).toString();
 			updateNumber();
 		}
 		
@@ -370,6 +373,17 @@ package com.rpgGame.appModule.zhangong
 			if(_q_meritorious)
 			{
 				MainRoleSearchPathManager.walkToScene(_q_meritorious.q_mapID, _q_meritorious.q_site_x, _q_meritorious.q_site_y,null, 100);
+			}
+		}
+		
+		/**
+		 * 小飞鞋
+		 * */
+		private function flyToScene():void
+		{
+			if(_q_meritorious)
+			{
+				SceneSender.sceneMapTransport(_q_meritorious.q_mapID, _q_meritorious.q_site_x, _q_meritorious.q_site_y);
 			}
 		}
 		

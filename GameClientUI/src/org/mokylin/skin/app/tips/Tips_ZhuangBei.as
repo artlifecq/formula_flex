@@ -35,6 +35,8 @@ package org.mokylin.skin.app.tips
 
 		public var grp_zhandouli:feathers.controls.Group;
 
+		public var lb_power:feathers.controls.Label;
+
 		public var lbl_bangding:feathers.controls.Label;
 
 		public var lbl_buwei:feathers.controls.Label;
@@ -53,6 +55,8 @@ package org.mokylin.skin.app.tips
 
 		public var tip_up:feathers.controls.UIAsset;
 
+		public var uiKuang:feathers.controls.UIAsset;
+
 		public var ui_di:feathers.controls.UIAsset;
 
 		public var yizhuangbei:feathers.controls.UIAsset;
@@ -67,7 +71,7 @@ package org.mokylin.skin.app.tips
 			
 			this.currentState = "normal";
 			this.width = 280;
-			this.elementsContent = [ui_di_i(),bg_i(),lbl_titile_i(),grp_zhandouli_i(),grp_head_i(),yizhuangbei_i(),lbl_bangding_i()];
+			this.elementsContent = [ui_di_i(),bg_i(),lbl_titile_i(),grp_zhandouli_i(),grp_head_i(),yizhuangbei_i(),lbl_bangding_i(),uiKuang_i()];
 			
 			states = {
 			};
@@ -230,7 +234,20 @@ package org.mokylin.skin.app.tips
 			temp.name = "grp_zhandouli";
 			temp.x = 110;
 			temp.y = 59;
-			temp.elementsContent = [numbers_i(),__Tips_ZhuangBei_UIAsset2_i(),tip_down_i(),tip_up_i()];
+			temp.elementsContent = [numbers_i(),__Tips_ZhuangBei_UIAsset2_i(),tip_down_i(),tip_up_i(),lb_power_i()];
+			return temp;
+		}
+
+		private function lb_power_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lb_power = temp;
+			temp.name = "lb_power";
+			temp.text = "12";
+			temp.color = 0x00FF33;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 133;
+			temp.y = 6;
 			return temp;
 		}
 
@@ -357,6 +374,19 @@ package org.mokylin.skin.app.tips
 			temp.styleName = "ui/common/tubiao/jobup.png";
 			temp.x = 122;
 			temp.y = 8;
+			return temp;
+		}
+
+		private function uiKuang_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiKuang = temp;
+			temp.name = "uiKuang";
+			temp.height = 488;
+			temp.styleName = "ui/common/hover/liangkuang2.png";
+			temp.width = 280;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
