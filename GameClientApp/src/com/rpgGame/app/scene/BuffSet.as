@@ -150,8 +150,9 @@ package com.rpgGame.app.scene
 				_buffDatas.push(buffData);
 				buffList.push(buffData);
 			}
-			addBuffEffect(buffData);
+			
 			handlerRoleState(buffData);
+			addBuffEffect(buffData);
 			EventManager.dispatchEvent(BuffEvent.ADD_BUFF, buffData);
 		}
 		public function hasBuff(modelId:int):Boolean
