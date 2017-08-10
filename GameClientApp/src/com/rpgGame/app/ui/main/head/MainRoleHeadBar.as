@@ -8,6 +8,8 @@ package com.rpgGame.app.ui.main.head {
 	import com.rpgGame.core.events.BuffEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.ui.SkinUI;
+	import com.rpgGame.core.utils.NumberUtil;
+	import com.rpgGame.coreData.SpriteStat;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.enum.JobEnum;
@@ -80,6 +82,8 @@ package com.rpgGame.app.ui.main.head {
 			EventManager.addEvent(BuffEvent.REMOVE_BUFF, removeBuff);
 			EventManager.addEvent(MainPlayerEvent.STAT_CHANGE,updateFight);//基本属性改变
 			EventManager.addEvent(MainPlayerEvent.PK_MODE_CHANGE,onPKModelChange);
+			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);//金钱变化
+			updateAmount();
 		}
 		
 		override protected function onHide() : void
@@ -91,6 +95,18 @@ package com.rpgGame.app.ui.main.head {
 			EventManager.removeEvent(BuffEvent.REMOVE_BUFF, removeBuff);
 			EventManager.removeEvent(MainPlayerEvent.STAT_CHANGE,updateFight);//基本属性改变
 			EventManager.removeEvent(MainPlayerEvent.PK_MODE_CHANGE,onPKModelChange);
+			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);//金钱变化
+		}
+		
+		private function updateAmount(type:int=3):void
+		{
+			if(type!=CharAttributeType.RES_GOLD&&	type!=CharAttributeType.RES_BIND_GOLD){
+				return;
+			}
+			
+			var stat:SpriteStat=MainRoleManager.actorInfo.totalStat;
+			_skin.lbYuanbao.text =NumberUtil.getNumberTo(stat.getResData(CharAttributeType.RES_GOLD),true);
+			_skin.lbLijin.text =NumberUtil.getNumberTo(stat.getResData(CharAttributeType.RES_BIND_GOLD),true);
 		}
 		
 		private function onPKModelChange():void

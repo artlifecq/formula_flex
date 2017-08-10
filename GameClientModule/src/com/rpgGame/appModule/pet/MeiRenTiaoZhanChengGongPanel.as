@@ -161,7 +161,7 @@ package com.rpgGame.appModule.pet
 		
 		private function toOutTheZone():void
 		{
-			DungeonSender.zoneOutToGame();
+			DungeonSender.reqQuitDungeon();
 			this.hide();
 		}
 		

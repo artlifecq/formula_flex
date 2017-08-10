@@ -189,7 +189,8 @@ package com.rpgGame.app.ui.tips
 				_itemTip.lbXiuwei.color=StaticValue.A_UI_BEIGE_TEXT;
 				_itemTip.lb3.visible=true;
 				_itemTip.lbXiuwei.visible=true;
-				_itemTip.lb3.x=168;
+				_itemTip.lb3.x=96;
+				_itemTip.lbXiuwei.x=167;
 				_itemTip.lb3.y=_itemTip.lbXiuwei.y=curY;
 				curY+=20;
 			}
