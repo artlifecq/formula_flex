@@ -72,8 +72,9 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 				_jixianItemList.push(item);
 				_skin.container_list.addChild(item);
 			}
+			_skin.lbDec.leading=5;
 			_skin.lbDec.text=ActivetyDataManager.jixianVo.qmod.q_rules;
-			
+			_skin.lbDec.isHtmlText=true;
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void
@@ -105,7 +106,7 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 			super.hide();
 			removeEvent();
 			JiXianTiaozhanPaiHnagPenelExt.hidePanel();
-			_prizeItem.clear();
+//			_prizeItem.clear();
 		}
 		
 		private function initEvent():void
@@ -120,15 +121,15 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 		
 		private function updateShow():void
 		{
-			_skin.lbBossKill.text = ActivetyDataManager.jixianVo.killName;
+			_skin.lbBossKill.text = ActivetyDataManager.jixianVo.killName!=null?ActivetyDataManager.jixianVo.killName:"暂无";
 			_bossDamageInfos=ActivetyDataManager.jixianVo.bossDamageInfos;
 			_indexTAB = 1;
 			_maxTAB = Math.max(Math.ceil(ActivetyDataManager.jixianVo.bossDamageInfos.length/MAX_SHOW_NUM),1);;
 			updateshowList(getShowList(_indexTAB));
 			updateTABShow();		
 			
-			_skin.lbPaiMing.text="我的排名:"+(ActivetyDataManager.jixianVo.rank>0?ActivetyDataManager.jixianVo.rank.toString():"暂无");
-			_skin.lbShangHai.text="我的伤害:"+(ActivetyDataManager.jixianVo.damage>0?ActivetyDataManager.jixianVo.damage.toString():"暂无");
+			_skin.lbPaiMing.text=(ActivetyDataManager.jixianVo.rank>0?ActivetyDataManager.jixianVo.rank.toString():"暂无");
+			_skin.lbShangHai.text=(ActivetyDataManager.jixianVo.damage>0?ActivetyDataManager.jixianVo.damage.toString():"暂无");
 		}
 		
 		private function getShowList(tab:int):Vector.<BossDamageInfo>

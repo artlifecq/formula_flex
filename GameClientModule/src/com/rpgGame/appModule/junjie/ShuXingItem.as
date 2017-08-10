@@ -28,7 +28,7 @@ package com.rpgGame.appModule.junjie
 			_type=type;
 			_value=value;
 			_skin.uiname.styleName=CharAttributeType.getAttrNameUrl(_type);
-			_skin.lbTotal.text=AttValueConfig.getDisAttValueStr(_type,_value);
+			_skin.lbTotal.text=AttValueConfig.getDisAttValue(_type,_value).toString();
 //			contrastAttr(_lv);
 		}
 		
@@ -38,7 +38,7 @@ package com.rpgGame.appModule.junjie
 				var has:HashMap=JunJieUtil.getShuXingJiaCheng(lv);
 				var num:int=has.getValue(_type);
 				if(num-_value>0){
-					_skin.lbAdd.text="+"+AttValueConfig.getDisAttValueStr(_type,(num-_value));
+					_skin.lbAdd.text=AttValueConfig.getDisAttValue(_type,(num-_value)).toString();
 					_skin.uiUp.visible=true;
 					_skin.lbAdd.visible=true;
 				}

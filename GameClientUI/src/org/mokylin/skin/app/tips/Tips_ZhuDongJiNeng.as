@@ -229,12 +229,11 @@ package org.mokylin.skin.app.tips
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbShuoming = temp;
 			temp.name = "lbShuoming";
-			temp.height = 37;
 			temp.text = "挥动武器横扫三次，每次造成25%+1伤害，每次攻击产生2点怒气值";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 268;
-			temp.x = 10;
+			temp.x = 6;
 			temp.y = 137;
 			return temp;
 		}

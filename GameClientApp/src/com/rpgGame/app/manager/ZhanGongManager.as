@@ -204,7 +204,7 @@ package com.rpgGame.app.manager
 				attValues2=AttValueConfig.getAttInfoById(ZhanGongUtil.getAttByJob(meritorious2,MainRoleManager.actorInfo.job));
 				maps2=AttValueConfig.getTypeValueMap(attValues2);
 				keys2=maps2.keys();
-				var num:String=keys1[0]+"_"+AttValueConfig.getDisAttValueStr(keys2[0],(maps2.getValue(keys2[0])-maps1.getValue(keys1[0])));
+				var num:String=keys1[0]+"_"+AttValueConfig.getDisAttValue(keys2[0],(maps2.getValue(keys2[0])-maps1.getValue(keys1[0])));
 				return num;
 			}
 			return "";
