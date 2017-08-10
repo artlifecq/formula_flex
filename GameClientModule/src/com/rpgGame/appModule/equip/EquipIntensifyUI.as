@@ -797,8 +797,10 @@ package com.rpgGame.appModule.equip
 			for each(var info:GridInfo in datas){
 				if(info.data){
 					item=info.data as ClientItemInfo;
-					if(item.qItem.q_type==GoodsType.STRENGTH)
+					if(item.qItem.q_type==GoodsType.STRENGTH){
+						result.push(item);
 						continue;
+					}
 					if(isDuanZao(item as EquipInfo)){//具有锻造属性
 						continue;
 					}

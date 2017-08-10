@@ -3,14 +3,14 @@ package org.mokylin.skin.app.mail
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
 	import feathers.controls.Label;
-	import feathers.controls.List;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import feathers.controls.ScrollContainer;
 	import org.mokylin.skin.common.TongYongPanelbg3;
 	import org.mokylin.skin.component.button.ButtonSkin_putong;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
-	import org.mokylin.skin.component.list.ListSkin1;
+	import org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
 
 	/**
 	 * @private
@@ -34,7 +34,7 @@ package org.mokylin.skin.app.mail
 
 		public var lbZhuti:feathers.controls.Label;
 
-		public var skinList:feathers.controls.List;
+		public var vs_bar:feathers.controls.ScrollContainer;
 
 
 		//==========================================================================
@@ -47,7 +47,7 @@ package org.mokylin.skin.app.mail
 			this.currentState = "normal";
 			this.height = 586;
 			this.width = 437;
-			this.elementsContent = [__MailRead_Skin_SkinnableContainer1_i(),__MailRead_Skin_UIAsset1_i(),__MailRead_Skin_UIAsset2_i(),__MailRead_Skin_UIAsset3_i(),btnCancel_i(),btnTiqu_i(),__MailRead_Skin_UIAsset4_i(),__MailRead_Skin_UIAsset5_i(),__MailRead_Skin_UIAsset6_i(),__MailRead_Skin_UIAsset7_i(),__MailRead_Skin_UIAsset8_i(),__MailRead_Skin_UIAsset9_i(),lbName_i(),lbZhuti_i(),lbTime_i(),lbXiangqing_i(),__MailRead_Skin_UIAsset22_i(),skinList_i()];
+			this.elementsContent = [__MailRead_Skin_SkinnableContainer1_i(),__MailRead_Skin_UIAsset1_i(),__MailRead_Skin_UIAsset2_i(),__MailRead_Skin_UIAsset3_i(),btnCancel_i(),btnTiqu_i(),__MailRead_Skin_UIAsset4_i(),__MailRead_Skin_UIAsset5_i(),__MailRead_Skin_UIAsset6_i(),__MailRead_Skin_UIAsset7_i(),__MailRead_Skin_UIAsset8_i(),__MailRead_Skin_UIAsset9_i(),lbName_i(),lbZhuti_i(),lbTime_i(),lbXiangqing_i(),__MailRead_Skin_UIAsset22_i(),vs_bar_i()];
 			
 			states = {
 			};
@@ -258,16 +258,15 @@ package org.mokylin.skin.app.mail
 			return temp;
 		}
 
-		private function skinList_i():feathers.controls.List
+		private function vs_bar_i():feathers.controls.ScrollContainer
 		{
-			var temp:feathers.controls.List = new feathers.controls.List();
-			skinList = temp;
-			temp.name = "skinList";
+			var temp:feathers.controls.ScrollContainer = new feathers.controls.ScrollContainer();
+			vs_bar = temp;
+			temp.name = "vs_bar";
 			temp.height = 108;
-			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
-			temp.width = 377;
-			temp.x = 32;
-			temp.y = 401;
+			temp.styleClass = org.mokylin.skin.component.scrollbar.ScrollBarSkin_pack;
+			temp.x = 28;
+			temp.y = 403;
 			return temp;
 		}
 

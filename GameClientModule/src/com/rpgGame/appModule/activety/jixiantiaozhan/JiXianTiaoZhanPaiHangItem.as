@@ -1,31 +1,40 @@
 package com.rpgGame.appModule.activety.jixiantiaozhan
 {
 	import com.rpgGame.app.utils.FaceUtil;
-	import com.rpgGame.app.view.icon.DragDropItem;
-	import com.rpgGame.appModule.common.itemRender.GridItemRender;
+	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.ui.SkinUI;
-	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.active.JiXianAcInfo;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
-	import com.rpgGame.coreData.info.item.GridInfo;
-	import com.rpgGame.coreData.info.item.ItemUtil;
-	import com.rpgGame.coreData.type.item.GridBGType;
+	
+	import feathers.controls.UIAsset;
 	
 	import org.mokylin.skin.app.activety.jixiantiaozhan.TiaoZhanPaiHang_Item;
 	
 	public class JiXianTiaoZhanPaiHangItem extends SkinUI
 	{
 		private var _skin:TiaoZhanPaiHang_Item;
-		private var _render:GridItemRender;
-		private var _grids:Vector.<DragDropItem>=new Vector.<DragDropItem>();
+		private var _grids:Vector.<IconCDFace>=new Vector.<IconCDFace>();
 		
 		public function JiXianTiaoZhanPaiHangItem()
 		{
 			_skin=new TiaoZhanPaiHang_Item();
 			super(_skin);
-			MCUtil.removeSelf(_skin.ico1);
-			_render = new GridItemRender(IcoSizeEnum.ICON_48,GridBGType.GRID_SIZE_48);
+			initView();
+		}
+		
+		private function initView():void
+		{
+			var ico:IconCDFace;
+			for(var i:int=0;i<4;i++)
+			{
+				ico=new IconCDFace(IcoSizeEnum.ICON_48);
+				ico.selectImgVisible=false;
+				var ui:UIAsset=_skin.container.getChildByName("ico"+i) as UIAsset;
+				ico.bindBg(ui);
+				_grids.push(ico);
+				_skin.container.addChild(ico);
+			}
 		}
 		
 		public function setdate(info:JiXianAcInfo):void
@@ -34,38 +43,23 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 			var initY:int=_skin.ico1.y;
 			if(info.nowRank-info.upRank==1){
 				_skin.num.label = info.nowRank.toString();
-				_skin.gRank.x = 137;
+				_skin.gRank.x = 116;
 			}
 			else
 			{
-				_skin.num.label = info.upRank.toString()+"-"+info.nowRank.toString();
-				_skin.gRank.x = 176;
+				_skin.num.label = (info.upRank+1).toString()+"-"+info.nowRank.toString();
+				if(info.nowRank<10)
+					_skin.gRank.x = 145;
+				else if(info.nowRank>=10&&info.nowRank<1000)
+					_skin.gRank.x = 165;
+				else
+					_skin.gRank.x = 196;
 			}
-			if(info.reWard is Array)
+			var list:Vector.<ClientItemInfo>=(info.reWard as Vector.<ClientItemInfo>); 
+			for(var i:int=0;i<list.length;i++)
 			{
-				for(var i:int=0;i<info.reWard.length;i++)
-				{
-					var item:DragDropItem=_render.getGrid();
-					var clientItemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(info.reWard[i].mod,info.reWard[i].num);
-					item.gridInfo = new GridInfo(0,i);
-					item.x = initX;
-					item.y = initY;
-					FaceUtil.SetItemGrid(item, clientItemInfo);
-					_grids.push(item);
-					_skin.container.addChild(item);
-					initX+=item.width;
-				}
-			}
-			else
-			{
-				item=_render.getGrid();
-				clientItemInfo=ItemUtil.convertClientItemInfoById(info.reWard.mod,info.reWard.num);
-				item.gridInfo = new GridInfo(0,0);
-				item.x = initX;
-				item.y = initY;
-				FaceUtil.SetItemGrid(item, clientItemInfo);
-				_grids.push(item);
-				_skin.container.addChild(item);
+				var clientItemInfo:ClientItemInfo=list[i];
+				FaceUtil.SetItemGrid(_grids[i], clientItemInfo);
 			}
 		}
 		

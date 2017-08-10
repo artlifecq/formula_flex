@@ -7,11 +7,9 @@ package com.rpgGame.appModule.junjie
 	import com.rpgGame.app.display3D.InterAvatar3D;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.JunJieSender;
 	import com.rpgGame.app.ui.AttChangeView;
-	import com.rpgGame.app.ui.common.CenterEftPop;
 	import com.rpgGame.app.utils.FightValueUtil;
 	import com.rpgGame.core.events.JunJieEvent;
 	import com.rpgGame.core.ui.tip.RTNodeID;
@@ -77,7 +75,7 @@ package com.rpgGame.appModule.junjie
 			initView();
 			initAvatar();
 			_skin.conTiaojian.x=_skin.conTiaojian.x-14;
-			//			_skin.uiUp.visible=false;
+			_skin.uiUp.visible=false;
 			_skin.num_lv.visible=false;		
 			addNode(RTNodeID.JJ,RTNodeID.JJ_BTN_ACTIVE,_skin.btnJihuo,177,null);
 		}
@@ -252,7 +250,7 @@ package com.rpgGame.appModule.junjie
 				//更新掉		
 				showBtn();
 				this.playInter3DAt(ClientConfig.getEffect("ui_jinengjinjiechenggong"),_skin.point_eff.x,_skin.point_eff.y,1);
-//				UIPopManager.showAlonePopUI(CenterEftPop,"ui_shengjichenggong");
+				//				UIPopManager.showAlonePopUI(CenterEftPop,"ui_shengjichenggong");
 				var nowFight:int=Mgr.junjieMgr.power;
 				var change:int=nowFight-_skin.NumZhanli.number;
 				changeList=getChangeList(change);		
@@ -398,12 +396,12 @@ package com.rpgGame.appModule.junjie
 			var has:HashMap=JunJieUtil.getShuXingJiaCheng(_nowSelectItem.lv);
 			var pow:int=FightValueUtil.calFightPowerByHash(has,MainRoleManager.actorInfo.job);
 			if(_nowSelectItem.lv>Mgr.junjieMgr.getActivationLv()&&pow>0){
-				_skin.num_lv.label="x"+pow;
+				_skin.num_lv.label=pow.toString();
 				_skin.num_lv.visible=true;
-				//				_skin.uiUp.visible=true;
+				_skin.uiUp.visible=true;
 			}else{
 				_skin.num_lv.visible=false;
-				//				_skin.uiUp.visible=false;
+				_skin.uiUp.visible=false;
 			}
 			for(var i:int=0;i<_shuxingItemList.length;i++)
 			{

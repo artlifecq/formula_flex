@@ -63,7 +63,15 @@ package com.rpgGame.app.manager
 		{
 			return _marriageInfo!=null&&_marriageInfo.marriagePlayerId!=null&&_marriageInfo.marriagePlayerId.IsZero()==false;
 		}
+		
+		/**婚姻状态 未婚 5 已婚 6 离婚 7*/
+		public function hunyinState():int
+		{
+			if(_marriageInfo==null) return 5;
+			return _marriageInfo.state;
+		}
 		/**
+		 * 
 		 * 获取戒子等阶
 		 * */
 		public function get JieZiLv():int

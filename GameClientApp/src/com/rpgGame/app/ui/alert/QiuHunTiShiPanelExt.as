@@ -55,6 +55,11 @@ package com.rpgGame.app.ui.alert
 					hide();
 					break;
 				case _skin.btnClose:
+					if(_type==2)
+					{
+						msg=_msg as SCTargetProposalMessage;
+						HunYinSender.upCSTargetProposalResultMessage(0,msg.targetId);
+					}
 					hide();
 					break;
 			}

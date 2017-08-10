@@ -45,6 +45,8 @@ package org.mokylin.skin.app.beibao.junjie
 
 		public var roleCont:feathers.controls.SkinnableContainer;
 
+		public var uiUp:feathers.controls.UIAsset;
+
 		public var uiUpOK:feathers.controls.UIAsset;
 
 		public var ui_zhandou:feathers.controls.UIAsset;
@@ -60,7 +62,7 @@ package org.mokylin.skin.app.beibao.junjie
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [__JunJie_Skin_UIAsset2_i(),roleCont_i(),__JunJie_Skin_UIAsset3_i(),btnJihuo_i(),ui_zhandou_i(),NumZhanli_i(),num_lv_i(),__JunJie_Skin_Group1_i(),__JunJie_Skin_Group2_i(),__JunJie_Skin_UIAsset10_i(),__JunJie_Skin_UIAsset11_i(),lbTiaojian_i(),contShuxing_i(),conTiaojian_i(),lb_wanchengdu_i(),uiUpOK_i(),btnPrev_i(),btnNext_i(),point_eff_i()];
+			this.elementsContent = [__JunJie_Skin_UIAsset2_i(),roleCont_i(),__JunJie_Skin_UIAsset3_i(),btnJihuo_i(),ui_zhandou_i(),NumZhanli_i(),num_lv_i(),__JunJie_Skin_Group1_i(),__JunJie_Skin_Group2_i(),__JunJie_Skin_UIAsset10_i(),__JunJie_Skin_UIAsset11_i(),lbTiaojian_i(),contShuxing_i(),conTiaojian_i(),lb_wanchengdu_i(),uiUpOK_i(),btnPrev_i(),btnNext_i(),point_eff_i(),uiUp_i()];
 			
 			states = {
 			};
@@ -78,7 +80,7 @@ package org.mokylin.skin.app.beibao.junjie
 			temp.name = "NumZhanli";
 			temp.gap = -15;
 			temp.height = 40;
-			temp.label = "62984567";
+			temp.label = "6298456";
 			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberJuese_zhanli;
 			temp.width = 127;
 			temp.x = 749;
@@ -287,7 +289,7 @@ package org.mokylin.skin.app.beibao.junjie
 			temp.name = "num_lv";
 			temp.gap = -4;
 			temp.height = 21;
-			temp.label = "x100";
+			temp.label = "100";
 			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli_lv;
 			temp.width = 64;
 			temp.x = 891;
@@ -327,6 +329,17 @@ package org.mokylin.skin.app.beibao.junjie
 			temp.styleName = "ui/app/beibao/junjie/shengjiechenggong.png";
 			temp.x = 330;
 			temp.y = 84;
+			return temp;
+		}
+
+		private function uiUp_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiUp = temp;
+			temp.name = "uiUp";
+			temp.styleName = "ui/common/tubiao/jobup.png";
+			temp.x = 880;
+			temp.y = 119;
 			return temp;
 		}
 

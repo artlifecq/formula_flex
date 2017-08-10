@@ -3,6 +3,7 @@ package com.rpgGame.app.ui.tips
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.goods.RoleEquipmentManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.utils.BreatheTweenUtil;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.utils.FightValueUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
@@ -118,6 +119,7 @@ package com.rpgGame.app.ui.tips
 			_itemInfo = data as EquipInfo;
 			FaceUtil.SetItemGrid(_iconFace, _itemInfo, false);
 			var info:HeroData=MainRoleManager.actorInfo;
+			_itemTip.uiKuang.visible=false;
 			while(labelList.length!=0){
 				var l:Label=labelList.shift();
 				l.removeFromParent(true);
@@ -137,6 +139,7 @@ package com.rpgGame.app.ui.tips
 			_itemTip.numbers.number=equipFight;
 			_itemTip.tip_down.visible=false;
 			_itemTip.tip_up.visible=false;
+			_itemTip.lb_power.visible=false;
 			if(equipItemInfo){
 				currentFight=equipItemInfo.itemInfo.fightPower;
 			}
@@ -275,7 +278,7 @@ package com.rpgGame.app.ui.tips
 			}else{
 				var cfg:Q_equip_polish=EquipPolishCfg.getPolishCfg(_itemInfo.polishLevel);
 				name=HtmlTextUtil.getTextColor(StaticValue.A_UI_GRAY_TEXT,"装备属性提升:");
-				value=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,(cfg.q_promote/100).toFixed(1)+"%");
+				value=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,(cfg.q_promote/1000).toFixed(1)+"%");
 				label=createLabel(name,value);
 				label.x=curX;
 				label.y=curY;
@@ -343,7 +346,7 @@ package com.rpgGame.app.ui.tips
 				MCUtil.removeSelf(yinIcon);
 			}
 			
-//			_itemTip.lbl_titile.text=FightValueUtil.calFightPowerByEquip(_itemInfo).toString();
+			//			_itemTip.lbl_titile.text=FightValueUtil.calFightPowerByEquip(_itemInfo).toString();
 			
 			//装备对比
 			if(isShowDuiBi&&!_isDuibiShow){
@@ -357,8 +360,20 @@ package com.rpgGame.app.ui.tips
 				showCurrentEquipInfo(equipItemInfo);
 				if(equipFight>currentFight){//装备后战斗力提升
 					_itemTip.tip_up.visible=true;
+					_itemTip.lb_power.text=(equipFight-currentFight).toString();
+					_itemTip.lb_power.color=StaticValue.A_UI_GREEN_TEXT;
+					_itemTip.lb_power.visible=true;
+					_itemTip.uiKuang.visible=true;
+					if(_equipTip)
+						_equipTip.setkuangState(false);
 				}else if(equipFight<currentFight){
 					_itemTip.tip_down.visible=true;
+					_itemTip.lb_power.text=(currentFight-equipFight).toString();
+					_itemTip.lb_power.color=StaticValue.A_UI_RED_TEXT;
+					_itemTip.lb_power.visible=true;
+					_itemTip.uiKuang.visible=false;
+					if(_equipTip)
+						_equipTip.setkuangState(true);
 				}
 				var attValues2:Q_att_values=AttValueConfig.getAttInfoById(int(equipItemInfo.qItem.q_att_type));
 				map2=AttValueConfig.getTypeValueMap(attValues2);
@@ -397,6 +412,7 @@ package com.rpgGame.app.ui.tips
 			}else{
 				if(_equipTip){
 					_equipTip.removeFromParent();
+					_equipTip.setkuangState(false);
 				}
 				if(uijiantou)
 				{
@@ -414,9 +430,13 @@ package com.rpgGame.app.ui.tips
 			_itemTip.lbl_bangding.x=175;
 			_itemTip.lbl_bangding.y=_itemTip.ui_di.y-3;
 			_itemTip.bg.height=_itemTip.ui_di.y+_itemTip.ui_di.height;
+			_itemTip.uiKuang.height=_itemTip.ui_di.y+_itemTip.ui_di.height;
 		}
 		
-		
+		public function setkuangState(bool:Boolean):void
+		{
+			_itemTip.uiKuang.visible=bool;
+		}
 		
 		private function showCurrentEquipInfo(equipItemInfo:ClientItemInfo):void
 		{

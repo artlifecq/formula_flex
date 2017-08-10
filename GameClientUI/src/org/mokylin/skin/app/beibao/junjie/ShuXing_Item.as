@@ -59,7 +59,7 @@ package org.mokylin.skin.app.beibao.junjie
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbAdd = temp;
 			temp.name = "lbAdd";
-			temp.text = "+1024";
+			temp.text = "1024";
 			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 72;
@@ -88,9 +88,9 @@ package org.mokylin.skin.app.beibao.junjie
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiUp = temp;
 			temp.name = "uiUp";
-			temp.styleName = "ui/common/tubiao/jobup2.png";
-			temp.x = 141;
-			temp.y = 4;
+			temp.styleName = "ui/common/tubiao/jobup.png";
+			temp.x = 144;
+			temp.y = 5;
 			return temp;
 		}
 

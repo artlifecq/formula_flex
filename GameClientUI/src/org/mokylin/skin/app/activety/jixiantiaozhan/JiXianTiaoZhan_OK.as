@@ -212,7 +212,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			imgWin = temp;
 			temp.name = "imgWin";
 			temp.styleName = "ui/big_bg/activety/tianzhanshengli.png";
-			temp.x = 28;
+			temp.x = 61;
 			temp.y = -38;
 			return temp;
 		}

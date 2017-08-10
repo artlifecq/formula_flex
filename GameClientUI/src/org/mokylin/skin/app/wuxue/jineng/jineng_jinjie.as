@@ -295,12 +295,12 @@ package org.mokylin.skin.app.wuxue.jineng
 			temp.name = "lb_miaoshu";
 			temp.height = 60;
 			temp.leading = 6;
-			temp.letterSpacing = 1;
+			temp.letterSpacing = 0;
 			temp.text = "挥动长枪扫除一片火焰，对自身前方60度半径10米的扇形范围内的敌人造成3次伤害，每次伤害25%秒伤，每击中1个目标可产生2点怒气值";
 			temp.textAlign = "left";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 238;
+			temp.width = 240;
 			temp.x = 88;
 			temp.y = 142;
 			return temp;

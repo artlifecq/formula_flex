@@ -36,7 +36,7 @@ package com.rpgGame.appModule.skill
 	import org.mokylin.skin.app.wuxue.jineng.jineng_jinjie;
 	
 	import starling.display.DisplayObject;
-
+	
 	/**
 	 *技能升阶 
 	 * @author dik
@@ -156,20 +156,21 @@ package com.rpgGame.appModule.skill
 			
 			
 			skin.lb_name2.text=riseData.q_skillName;
-			skin.lb_miaoshu.htmlText=riseData.q_skillpanel_description2;
-			skin.lb_miaoshu.textAlign="left";
+			skin.lb_miaoshu.text=riseData.q_skillpanel_description2;
+			skin.lb_miaoshu.isHtmlText=true;
+			skin.lb_miaoshu.clearCacheSize();
 			if(selectedInfo&&selectedInfo.skillLevel==cfg.q_max_grade){
 				skin.lb_jihuo.visible=true;
 				skin.Icon_lock.visible=false;
 				skin.grp_tiaojian.visible=false;
 				skin.btn_jinjie.visible=false;
 				skin.lb_weijihuo.visible=!skin.lb_jihuo.visible;			
-//				skin.lb_jihuo.x=skin.lb_weijihuo.x=skin.lb_name2.x+skin.lb_name2.textWidth+5;
+				//				skin.lb_jihuo.x=skin.lb_weijihuo.x=skin.lb_name2.x+skin.lb_name2.textWidth+5;
 				return;
 			}else{
 				skin.lb_jihuo.visible=false;
 				skin.lb_weijihuo.visible=!skin.lb_jihuo.visible;			
-//				skin.lb_jihuo.x=skin.lb_weijihuo.x=skin.lb_name2.x+skin.lb_name2.textWidth+5;
+				//				skin.lb_jihuo.x=skin.lb_weijihuo.x=skin.lb_name2.x+skin.lb_name2.textWidth+5;
 			}
 			
 			var myLv:int=MainRoleManager.actorInfo.totalStat.level;
@@ -246,19 +247,19 @@ package com.rpgGame.appModule.skill
 			}
 			
 			
-//			var xx:int=(330-w)/2;
-//			if(skin.lb_renwudengji.visible){
-//				skin.lb_renwudengji.x=xx;
-//				if(skin.lb_jinengdengji.visible){
-//					skin.lb_jinengdengji.x=xx+20;
-//				}
-//			}else{
-//				skin.lb_jinengdengji.x=xx;
-//			}
-//			
-//			skin.lb_zhenqi.x=xx;
-//			skin.lb_yinliang.x=xx;
-//			skin.lb_daoju.x=xx;
+			//			var xx:int=(330-w)/2;
+			//			if(skin.lb_renwudengji.visible){
+			//				skin.lb_renwudengji.x=xx;
+			//				if(skin.lb_jinengdengji.visible){
+			//					skin.lb_jinengdengji.x=xx+20;
+			//				}
+			//			}else{
+			//				skin.lb_jinengdengji.x=xx;
+			//			}
+			//			
+			//			skin.lb_zhenqi.x=xx;
+			//			skin.lb_yinliang.x=xx;
+			//			skin.lb_daoju.x=xx;
 			for(i=0;i<itemDes.length;i++){
 				lb=labelList[i];
 				lb.x=skin.lb_daoju.x+skin.lb_daoju.width-10;
