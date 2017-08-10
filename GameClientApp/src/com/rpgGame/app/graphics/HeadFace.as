@@ -611,11 +611,10 @@ package com.rpgGame.app.graphics
 			if (_bloodBar)
 			{
 				_bloodBar.update(_bloodPercent);
-				if(_bloodPercent==0&&_bloodBar.parent){
-					showAndHideElement(_bloodBar, false);
-				}else if(!_bloodBar.parent){
-					showAndHideElement(_bloodBar, true,DecorCtrl.TOP_HPMP);
-				}
+			}
+			
+			if(_bloodPercent==0&&_bloodBar.parent){
+				showAndHideElement(_bloodBar, false);
 			}
 			
 			if (_isSelected)
