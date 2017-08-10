@@ -64,6 +64,7 @@ package com.rpgGame.appModule.guild.war
 		private var _gTimer : GameTimer;
 		private var fightInfo:GuildWarCityInfo;
 		private var cityState:int;
+		private var myGuildId:String;
 		
 		public function WczbWarViewUI()
 		{
@@ -147,7 +148,7 @@ package com.rpgGame.appModule.guild.war
 		private function showZhanshi():void
 		{
 			currentCityId=_infoMsg.applyCityId;//自己帮派参与的城池id;
-			var myGuildId:String;
+			
 			if(GuildManager.instance().haveGuild){
 				myGuildId=GuildManager.instance().guildData.id.hexValue;
 			}
@@ -366,9 +367,9 @@ package com.rpgGame.appModule.guild.war
 				cityName=EnumCity.getCityName(fightInfo.id);
 			}
 			_skin.lbHead.htmlText="防守"+cityName;
-			_skin.lbName1.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,fightInfo.attackGuildName);
+			_skin.lbName1.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,fightInfo.occupyGuildName);
 			_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW,"VS");
-			_skin.lbName2.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,fightInfo.occupyGuildName);
+			_skin.lbName2.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,fightInfo.attackGuildName);
 			_timeStr="距离战斗结束还有:"
 			_leftTime=_infoMsg.curWarTime;
 			_gTimer.start();
@@ -529,10 +530,16 @@ package com.rpgGame.appModule.guild.war
 			}else{
 				cityName=EnumCity.getCityName(fightInfo.id);
 			}
-			_skin.lbHead.htmlText="准备进攻"+cityName;
-			_skin.lbName1.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,fightInfo.attackGuildName);
-			_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW,"VS");
-			_skin.lbName2.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,fightInfo.occupyGuildName);
+			_skin.lbHead.htmlText="准备战斗"+cityName;
+			if(myGuildId==fightInfo.attackGuildId.hexValue){
+				_skin.lbName1.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,fightInfo.attackGuildName);
+				_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW,"VS");
+				_skin.lbName2.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,fightInfo.occupyGuildName);
+			}else{
+				_skin.lbName2.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,fightInfo.occupyGuildName);
+				_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW,"VS");
+				_skin.lbName1.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,fightInfo.attackGuildName);
+			}
 			
 			_timeStr="距离战斗开始还有:"
 			_leftTime=_infoMsg.curWarTime;

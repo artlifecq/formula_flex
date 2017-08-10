@@ -424,7 +424,7 @@ package com.rpgGame.app.ui.scene
 		{
 			if(gameAlert.clickType==AlertClickTypeEnum.TYPE_SURE)
 			{
-				DungeonSender.zoneOutToGame();
+				DungeonSender.reqQuitDungeon();
 			}
 			
 		}
