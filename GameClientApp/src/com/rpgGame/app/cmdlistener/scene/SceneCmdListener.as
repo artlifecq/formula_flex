@@ -5,6 +5,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
+	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.manager.CharAttributeManager;
 	import com.rpgGame.app.manager.ClientTriggerManager;
@@ -1184,7 +1185,7 @@ package com.rpgGame.app.cmdlistener.scene
 			if (!role)
 				return;
 			var roleData : RoleData = role.data as RoleData;
-			
+			(role.headFace as HeadFace).showBloodBar();
 			CharAttributeManager.setAttributeValue(roleData, CharAttributeType.HP, msg.hp);
 			role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true); //切换到“站立状态”
 			//			SceneManager.removeSceneObjFromScene(role);
