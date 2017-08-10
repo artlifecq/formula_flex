@@ -14,6 +14,8 @@ package   com.rpgGame.app.manager.debug
 	import com.rpgGame.app.fight.spell.SkillAddPop;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.fight.spell.SpellHitHelper;
+	import com.rpgGame.app.fight.spell.SpellResultTweenUtil;
+	import com.rpgGame.app.fight.spell.TweenLiteUtil;
 	import com.rpgGame.app.graphics.HeadBloodBar;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.ActivetyDataManager;
@@ -444,6 +446,29 @@ package   com.rpgGame.app.manager.debug
 				//FightPowerChangePopPanelExt.showFightPowerChange(arg[0],arg[1]);
 				//CDDataManager.playCD("sd",1000);
 				EquipAutoDressEffectPanelExt.ins.test(arg[0]);
+			});
+			commandList.put( ".next", function (...arg):void
+			{
+				//FightPowerChangePopPanelExt.showFightPowerChange(arg[0],arg[1]);
+				//CDDataManager.playCD("sd",1000);
+				TweenLiteUtil.next();
+			});
+			commandList.put( ".word", function (...arg):void
+			{
+				//FightPowerChangePopPanelExt.showFightPowerChange(arg[0],arg[1]);
+				//CDDataManager.playCD("sd",1000);
+				SpellResultTweenUtil.useOther=!SpellResultTweenUtil.useOther;
+			});
+			
+			commandList.put( ".dx", function (...arg):void
+			{
+				//FightPowerChangePopPanelExt.showFightPowerChange(arg[0],arg[1]);
+				//CDDataManager.playCD("sd",1000);
+				for (var i:int = 0; i < arg[0]; i++) 
+				{
+					FightFaceHelper.showAttackFaceNew(MainRoleManager.actor,MainRoleManager.actor,MainRoleManager.actor.headFace,"",FightFaceHelper.NUMBER_PC_HPSUB,-100-i*10,null,null,SpellResultTweenUtil.TweenDiaoXue);
+				}
+				
 			});
 		}
 		
