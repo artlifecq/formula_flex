@@ -520,14 +520,8 @@ package com.rpgGame.app.utils
 		private static var walkAdd:int=0;
 		public static function postWalk(post0 : int, posx:Number,posy:Number,onArrive:Function=null,data:Object=null,needSprite:Boolean=false) : void
 		{
-//			TweenLite.killDelayedCallsTo(postWalk);
-			Lyt.a("任务开始寻路===================");
-			var walking:Boolean=MainRoleSearchPathManager.walkToScene(post0, posx, posy,onArrive, 100,data,needSprite);
-			if(!walking&&walkAdd<=4)//任务的寻路强制寻路2秒钟
-			{Lyt.a("任务寻路失败了----");
-//				walkAdd++;
-//				TweenLite.delayedCall(0.5, postWalk, [post0, posx, posy,onArrive,data,needSprite]);
-			}
+			Lyt.a("任务开始寻路==========");
+			var walking:Boolean=MainRoleSearchPathManager.walkToScenePreAttack(post0, posx, posy,onArrive, 100,data,needSprite);
 		}
 		/**
 		 * 寻路跳跃点

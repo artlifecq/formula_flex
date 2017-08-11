@@ -5,6 +5,7 @@ package com.rpgGame.app.state.role.control
 	import com.game.engine3D.utils.PathFinderUtil;
 	import com.game.mainCore.libCore.utils.ZMath;
 	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateMachine;
@@ -531,7 +532,7 @@ package com.rpgGame.app.state.role.control
 			else if ((_machine as RoleStateMachine).isAttacking)
 			{
 				var attackState : AttackState = _machine.getCurrState(ActionState) as AttackState;
-				if (!force && !attackState.attackBroken && !attackState.canWalkRelease)
+				if (!force && !attackState.attackBroken && !attackState.canWalkRelease&&!TaskAutoManager.getInstance().isTasking)//在自动任务中寻路不应受影响
 				{
 					Lyt.a("walk-209");
 					return false;
