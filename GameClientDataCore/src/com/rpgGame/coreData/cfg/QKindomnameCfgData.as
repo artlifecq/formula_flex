@@ -24,6 +24,7 @@ package com.rpgGame.coreData.cfg
 		{
 			zonesMap=new HashMap();
 			var arr : Array = data.readObject();
+			zonesMap.add(0,new Q_kindomname());
 			for each(var info : Q_kindomname in arr){
 				zonesMap.add(info.q_zones,info);
 			}

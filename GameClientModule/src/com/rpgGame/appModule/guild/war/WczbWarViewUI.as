@@ -51,7 +51,6 @@ package com.rpgGame.appModule.guild.war
 		private static const WAR_HC:int=11;
 		private static const LOSE_HC:int=12;
 		
-		
 		private var _skin:WangCheng_Skin;
 		private var _currentMap:GuildWarMapUI;
 		private var wczbMap:WczbMapUI;
@@ -243,9 +242,6 @@ package com.rpgGame.appModule.guild.war
 			_leftTime=_infoMsg.curWarTime;
 			_gTimer.start();
 			
-			var cityStyleName:String="wangcheng3";
-			var flagStyleName:String="wangcheng";
-			
 			var cityInfo:GuildWarCityInfo;
 			for(var i:int=0;i<	_infoMsg.citys.length;i++){
 				if(_infoMsg.citys[i].id==EnumCity.WANG_CHENG){
@@ -253,11 +249,10 @@ package com.rpgGame.appModule.guild.war
 					break;
 				}
 			}
-			var wangChengNames:Array=["handan","daliang","chengdu","linzi"];
-			if(currentCityId==EnumCity.WANG_CHENG){
-				var cfg:Q_kindomname=QKindomnameCfgData.getInfoByZone(cityInfo.areaId);
-				flagStyleName="ui/app/banghui/wangcheng/"+wangChengNames[cfg.q_id-1]+".png";
-			}
+			
+			var cfg:Q_kindomname=QKindomnameCfgData.getInfoByZone(cityInfo.areaId);
+			var cityStyleName:String=EnumCity.wangchangCitys[cfg.q_id-1];
+			var flagStyleName:String=EnumCity.wangChengFlags[cfg.q_id-1];
 			
 			_skin.uiCheng.styleName="ui/app/banghui/wangcheng/xiaocheng/"+cityStyleName+".png";
 			_skin.uiMyFlag.styleName="ui/app/banghui/wangcheng/"+flagStyleName+".png";
@@ -283,13 +278,10 @@ package com.rpgGame.appModule.guild.war
 			_skin.uiCheng.x=100;
 			_skin.uiMyFlag.x=128;
 			
-			var cityStyleName:String="wangcheng3";
-			var flagStyleName:String="wangcheng";
-			var wangChengNames:Array=["handan","daliang","chengdu","linzi"];
-			if(currentCityId==EnumCity.WANG_CHENG){
-				var cfg:Q_kindomname=QKindomnameCfgData.getInfoByZone(fightInfo.areaId);
-				flagStyleName="ui/app/banghui/wangcheng/"+wangChengNames[cfg.q_id-1]+".png";
-			}
+			var cfg:Q_kindomname=QKindomnameCfgData.getInfoByZone(fightInfo.areaId);
+			var cityStyleName:String=EnumCity.wangchangCitys[cfg.q_id-1];
+			var flagStyleName:String=EnumCity.wangChengFlags[cfg.q_id-1];
+			
 			_skin.uiCheng.styleName="ui/app/banghui/wangcheng/xiaocheng/"+cityStyleName+".png";
 			_skin.uiMyFlag.styleName="ui/app/banghui/wangcheng/"+flagStyleName+".png";
 			_skin.btnBaoming.touchable=false;
@@ -310,40 +302,26 @@ package com.rpgGame.appModule.guild.war
 		{
 			_skin.grpTo.visible=false;
 			_skin.grpCheng.visible=true;
-			var cityName:String;
-			if(currentCityId==EnumCity.WANG_CHENG){
-				cityName=EnumCity.getCityHCName(fightInfo.areaId);
-			}else{
-				cityName=EnumCity.getCityName(fightInfo.id);
-			}
+			var cfg:Q_kindomname=QKindomnameCfgData.getInfoByZone(fightInfo.areaId);
+			var cityName:String=EnumCity.getCityName(fightInfo.id,cfg.q_id);
 			_skin.lbHead.htmlText="占领"+cityName;
 			_skin.lbName1.htmlText="";
 			_skin.lbName2.htmlText="";
 			_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,"本帮已占领"+cityName);
 			_skin.lbTime.text="";
 			
-			var cityStyleName:String="weicheng1";
-			var flagStyleName:String="kuaiji";
+			var cityStyleName:String;
+			var flagStyleName:String;
 			switch(currentCityId){
 				case EnumCity.XI_WEI:
-					cityStyleName="weicheng1";
-					flagStyleName="kuaiji";
-					break;
 				case EnumCity.ZHONG_WEI:
-					cityStyleName="weicheng2";
-					flagStyleName="qufu";
-					break;
 				case EnumCity.DONG_WEI:
-					cityStyleName="weicheng3";
-					flagStyleName="gusu";
+					flagStyleName=EnumCity.weichengFlags[currentCityId-1];					
+					cityStyleName=EnumCity.weichengCitys[currentCityId-1];					
 					break;
 				case EnumCity.WANG_CHENG:
-					cityStyleName="wangcheng3";
-					var wangChengNames:Array=["handan","daliang","chengdu","linzi"];
-					if(currentCityId==EnumCity.WANG_CHENG){
-						var cfg:Q_kindomname=QKindomnameCfgData.getInfoByZone(fightInfo.areaId);
-						flagStyleName="ui/app/banghui/wangcheng/"+wangChengNames[cfg.q_id-1]+".png";
-					}
+					cityStyleName=EnumCity.wangchangCitys[cfg.q_id-1];
+					flagStyleName=EnumCity.wangChengFlags[cfg.q_id-1];
 					_skin.btnJinru.filter=FilterUtil.getGrayFilter();
 					_skin.btnJinru.touchable=false;
 					break;
@@ -360,12 +338,10 @@ package com.rpgGame.appModule.guild.war
 		{
 			_skin.grpTo.visible=false;
 			_skin.grpCheng.visible=true;
-			var cityName:String;
-			if(currentCityId==EnumCity.WANG_CHENG){
-				cityName=EnumCity.getCityHCName(fightInfo.areaId);
-			}else{
-				cityName=EnumCity.getCityName(fightInfo.id);
-			}
+			
+			var cfg:Q_kindomname=QKindomnameCfgData.getInfoByZone(fightInfo.areaId);
+			var cityName:String=EnumCity.getCityName(fightInfo.id,cfg.q_id);
+	
 			_skin.lbHead.htmlText="防守"+cityName;
 			_skin.lbName1.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,fightInfo.occupyGuildName);
 			_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW,"VS");
@@ -374,27 +350,23 @@ package com.rpgGame.appModule.guild.war
 			_leftTime=_infoMsg.curWarTime;
 			_gTimer.start();
 			
-			var cityStyleName:String="weicheng1";
-			var flagStyleName:String="kuaiji";
+			var cityStyleName:String;
+			var flagStyleName:String;
 			switch(currentCityId){
 				case EnumCity.XI_WEI:
-					cityStyleName="weicheng1";
-					flagStyleName="kuaiji";
-					break;
 				case EnumCity.ZHONG_WEI:
-					cityStyleName="weicheng2";
-					flagStyleName="qufu";
-					break;
 				case EnumCity.DONG_WEI:
-					cityStyleName="weicheng3";
-					flagStyleName="gusu";
+					flagStyleName=EnumCity.weichengFlags[currentCityId-1];					
+					cityStyleName=EnumCity.weichengCitys[currentCityId-1];					
+					break;
+				case EnumCity.WANG_CHENG:
+					cityStyleName=EnumCity.wangchangCitys[cfg.q_id-1];
+					flagStyleName=EnumCity.wangChengFlags[cfg.q_id-1];
+					_skin.btnBaoming.filter=FilterUtil.getGrayFilter();
+					_skin.btnBaoming.touchable=false;
 					break;
 			}
-			var wangChengNames:Array=["handan","daliang","chengdu","linzi"];
-			if(currentCityId==EnumCity.WANG_CHENG){
-				var cfg:Q_kindomname=QKindomnameCfgData.getInfoByZone(fightInfo.areaId);
-				flagStyleName="ui/app/banghui/wangcheng/"+wangChengNames[cfg.q_id-1]+".png";
-			}
+			
 			_skin.uiCheng.styleName="ui/app/banghui/wangcheng/xiaocheng/"+cityStyleName+".png";
 			_skin.uiMyFlag.styleName="ui/app/banghui/wangcheng/"+flagStyleName+".png";
 		}
@@ -403,12 +375,9 @@ package com.rpgGame.appModule.guild.war
 		{
 			_skin.grpTo.visible=false;
 			_skin.grpCheng.visible=true;
-			var cityName:String;
-			if(currentCityId==EnumCity.WANG_CHENG){
-				cityName=EnumCity.getCityHCName(fightInfo.areaId);
-			}else{
-				cityName=EnumCity.getCityName(fightInfo.id);
-			}
+			var cfg:Q_kindomname=QKindomnameCfgData.getInfoByZone(fightInfo.areaId);
+			var cityName:String=EnumCity.getCityName(fightInfo.id,cfg.q_id);
+			
 			_skin.lbHead.htmlText="进攻"+cityName;
 			_skin.lbName1.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,fightInfo.attackGuildName);
 			_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW,"VS");
@@ -418,33 +387,23 @@ package com.rpgGame.appModule.guild.war
 			_leftTime=_infoMsg.curWarTime;
 			_gTimer.start();
 			
-			var cityStyleName:String="weicheng1";
-			var flagStyleName:String="kuaiji";
+			var cityStyleName:String;
+			var flagStyleName:String;
 			switch(currentCityId){
 				case EnumCity.XI_WEI:
-					cityStyleName="weicheng1";
-					flagStyleName="kuaiji";
-					break;
 				case EnumCity.ZHONG_WEI:
-					cityStyleName="weicheng2";
-					flagStyleName="qufu";
-					break;
 				case EnumCity.DONG_WEI:
-					cityStyleName="weicheng3";
-					flagStyleName="gusu";
+					flagStyleName=EnumCity.weichengFlags[currentCityId-1];					
+					cityStyleName=EnumCity.weichengCitys[currentCityId-1];					
 					break;
 				case EnumCity.WANG_CHENG:
-					cityStyleName="wangcheng3";
-					flagStyleName="wangcheng";
+					cityStyleName=EnumCity.wangchangCitys[cfg.q_id-1];
+					flagStyleName=EnumCity.wangChengFlags[cfg.q_id-1];
 					_skin.btnBaoming.filter=FilterUtil.getGrayFilter();
 					_skin.btnBaoming.touchable=false;
 					break;
 			}
-			var wangChengNames:Array=["handan","daliang","chengdu","linzi"];
-			if(currentCityId==EnumCity.WANG_CHENG){
-				var cfg:Q_kindomname=QKindomnameCfgData.getInfoByZone(fightInfo.areaId);
-				flagStyleName="ui/app/banghui/wangcheng/"+wangChengNames[cfg.q_id-1]+".png";
-			}
+	
 			_skin.uiCheng.styleName="ui/app/banghui/wangcheng/xiaocheng/"+cityStyleName+".png";
 			_skin.uiMyFlag.styleName="ui/app/banghui/wangcheng/"+flagStyleName+".png";
 		}
@@ -453,12 +412,9 @@ package com.rpgGame.appModule.guild.war
 		{
 			_skin.grpTo.visible=false;
 			_skin.grpCheng.visible=true;
-			var cityName:String;
-			if(currentCityId==EnumCity.WANG_CHENG){
-				cityName=EnumCity.getCityHCName(fightInfo.areaId);
-			}else{
-				cityName=EnumCity.getCityName(fightInfo.id);
-			}
+			var cfg:Q_kindomname=QKindomnameCfgData.getInfoByZone(fightInfo.areaId);
+			var cityName:String=EnumCity.getCityName(fightInfo.id,cfg.q_id);
+			
 			_skin.lbHead.htmlText="竞拍"+cityName;
 			_skin.lbName1.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,"当前出价最高帮派:");
 			if(_infoMsg.curMaxPriceGuildName){
@@ -471,27 +427,23 @@ package com.rpgGame.appModule.guild.war
 			_timeStr="距离竞拍结束还剩:";
 			_gTimer.start();
 			
-			var cityStyleName:String="weicheng1";
-			var flagStyleName:String="kuaiji";
+			var cityStyleName:String;
+			var flagStyleName:String;
 			switch(currentCityId){
 				case EnumCity.XI_WEI:
-					cityStyleName="weicheng1";
-					flagStyleName="kuaiji";
-					break;
 				case EnumCity.ZHONG_WEI:
-					cityStyleName="weicheng2";
-					flagStyleName="qufu";
-					break;
 				case EnumCity.DONG_WEI:
-					cityStyleName="weicheng3";
-					flagStyleName="gusu";
+					flagStyleName=EnumCity.weichengFlags[currentCityId-1];					
+					cityStyleName=EnumCity.weichengCitys[currentCityId-1];					
+					break;
+				case EnumCity.WANG_CHENG:
+					cityStyleName=EnumCity.wangchangCitys[cfg.q_id-1];
+					flagStyleName=EnumCity.wangChengFlags[cfg.q_id-1];
+					_skin.btnBaoming.filter=FilterUtil.getGrayFilter();
+					_skin.btnBaoming.touchable=false;
 					break;
 			}
-			var wangChengNames:Array=["handan","daliang","chengdu","linzi"];
-			if(currentCityId==EnumCity.WANG_CHENG){
-				var cfg:Q_kindomname=QKindomnameCfgData.getInfoByZone(fightInfo.areaId);
-				flagStyleName="ui/app/banghui/wangcheng/"+wangChengNames[cfg.q_id-1]+".png";
-			}
+			
 			_skin.uiCheng.styleName="ui/app/banghui/wangcheng/xiaocheng/"+cityStyleName+".png";
 			_skin.uiMyFlag.styleName="ui/app/banghui/wangcheng/"+flagStyleName+".png";
 		}
@@ -524,18 +476,16 @@ package com.rpgGame.appModule.guild.war
 		{
 			_skin.grpTo.visible=false;
 			_skin.grpCheng.visible=true;
-			var cityName:String
-			if(currentCityId==EnumCity.WANG_CHENG){
-				cityName=EnumCity.getCityHCName(fightInfo.areaId);
-			}else{
-				cityName=EnumCity.getCityName(fightInfo.id);
-			}
-			_skin.lbHead.htmlText="准备战斗"+cityName;
+			var cfg:Q_kindomname=QKindomnameCfgData.getInfoByZone(fightInfo.areaId);
+			var cityName:String=EnumCity.getCityName(fightInfo.id,cfg.q_id);
+			
 			if(myGuildId==fightInfo.attackGuildId.hexValue){
+				_skin.lbHead.htmlText="准备进攻:"+cityName;
 				_skin.lbName1.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,fightInfo.attackGuildName);
 				_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW,"VS");
 				_skin.lbName2.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,fightInfo.occupyGuildName);
 			}else{
+				_skin.lbHead.htmlText="准备防守:"+cityName;
 				_skin.lbName2.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,fightInfo.occupyGuildName);
 				_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW,"VS");
 				_skin.lbName1.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,fightInfo.attackGuildName);
@@ -545,26 +495,21 @@ package com.rpgGame.appModule.guild.war
 			_leftTime=_infoMsg.curWarTime;
 			_gTimer.start();
 			
-			var cityStyleName:String="weicheng1";
-			var flagStyleName:String="kuaiji";
+			var cityStyleName:String;
+			var flagStyleName:String;
 			switch(currentCityId){
 				case EnumCity.XI_WEI:
-					cityStyleName="weicheng1";
-					flagStyleName="kuaiji";
-					break;
 				case EnumCity.ZHONG_WEI:
-					cityStyleName="weicheng2";
-					flagStyleName="qufu";
-					break;
 				case EnumCity.DONG_WEI:
-					cityStyleName="weicheng3";
-					flagStyleName="gusu";
+					flagStyleName=EnumCity.weichengFlags[currentCityId-1];					
+					cityStyleName=EnumCity.weichengCitys[currentCityId-1];					
 					break;
-			}
-			var wangChengNames:Array=["handan","daliang","chengdu","linzi"];
-			if(currentCityId==EnumCity.WANG_CHENG){
-				var cfg:Q_kindomname=QKindomnameCfgData.getInfoByZone(fightInfo.areaId);
-				flagStyleName="ui/app/banghui/wangcheng/"+wangChengNames[cfg.q_id-1]+".png";
+				case EnumCity.WANG_CHENG:
+					cityStyleName=EnumCity.wangchangCitys[cfg.q_id-1];
+					flagStyleName=EnumCity.wangChengFlags[cfg.q_id-1];
+					_skin.btnBaoming.filter=FilterUtil.getGrayFilter();
+					_skin.btnBaoming.touchable=false;
+					break;
 			}
 			_skin.uiCheng.styleName="ui/app/banghui/wangcheng/xiaocheng/"+cityStyleName+".png";
 			_skin.uiMyFlag.styleName="ui/app/banghui/wangcheng/"+flagStyleName+".png";			

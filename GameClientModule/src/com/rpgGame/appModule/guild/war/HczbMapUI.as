@@ -92,10 +92,14 @@ package com.rpgGame.appModule.guild.war
 				tipsData=new WczbTipsData();
 				(_tipsDataMap.getValue(city) as DynamicTipData).data=tipsData;
 				var cityInfo:GuildWarCityInfo=new GuildWarCityInfo();
-				cityInfo.id=city;
+				if(city!=EnumCity.HUANG_CHENG){
+					cityInfo.id=EnumCity.WANG_CHENG;
+				}else{
+					cityInfo.id=city;
+				}
+				cityInfo.areaId=city;
 				tipsData.isOwner=false;
 				tipsData.cityInfo=cityInfo;
-				tipsData.isHczb=true;
 			}
 		}
 		
