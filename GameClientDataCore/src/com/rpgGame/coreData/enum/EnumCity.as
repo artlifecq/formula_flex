@@ -40,16 +40,21 @@ package com.rpgGame.coreData.enum
 		 */
 		public static const WC_LZ:int=4;
 		
+		public static var wangChengFlags:Array=["handan","daliang","chengdu","linzi"];
+		public static var wangchangCitys:Array=["wangcheng3","wangcheng4","wangcheng1","wangcheng2"];
+		public static var weichengCitys:Array=["weicheng3","weicheng2","weicheng1"];
+		public static var weichengFlags:Array=["gusu","qufu","kuaiji"];
+		
 		public function EnumCity()
 		{
 		}
 		
-		public static function getCityName(city):String
+		public static function getCityName(city:int,wcId:int=-1):String
 		{
 			var name:String="";
 			switch(city){
 				case EnumCity.WANG_CHENG:
-					name="【大梁】";
+					name=getCityWCName(wcId);
 					break;
 				case EnumCity.XI_WEI:
 					name="【会稽】";
@@ -60,11 +65,14 @@ package com.rpgGame.coreData.enum
 				case EnumCity.DONG_WEI:
 					name="【姑苏】";
 					break;
+				case EnumCity.HUANG_CHENG:
+					name="【咸阳】";
+					break;
 			}
 			return name;
 		}
 		
-		public static function getCityHCName(city):String
+		private static function getCityWCName(city:int):String
 		{
 			var name:String="";
 			switch(city){
@@ -79,9 +87,6 @@ package com.rpgGame.coreData.enum
 					break;
 				case EnumCity.WC_LZ:
 					name="【临淄】";
-					break;
-				case EnumCity.HUANG_CHENG:
-					name="【咸阳】";
 					break;
 			}
 			return name;

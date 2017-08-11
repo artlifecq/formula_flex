@@ -1,6 +1,10 @@
 package com.rpgGame.appModule.guild.war
 {
+	import com.rpgGame.app.cmdlistener.enum.EGuildMemberType;
 	import com.rpgGame.app.cmdlistener.enum.OpaqueEnum;
+	import com.rpgGame.app.manager.chat.NoticeManager;
+	import com.rpgGame.app.manager.guild.GuildManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.GuildSender;
 	import com.rpgGame.app.sender.GuildWarSender;
 	import com.rpgGame.app.ui.common.BgListItemRender;
@@ -64,7 +68,18 @@ package com.rpgGame.appModule.guild.war
 						op=OpaqueEnum.DONG_WEI;
 						break;
 				}
-				GuildWarSender.reqGuildWarApply(info.id,op);
+				
+				if(skin.btnPai.filter==null){
+					var myMember:int=MainRoleManager.actorInfo.guildMemberType;
+					if(myMember==EGuildMemberType.CHIEF||myMember==EGuildMemberType.PROXY_CHIEF||myMember==EGuildMemberType.DEPUTY_CHIEF){
+						GuildWarSender.reqGuildWarApply(info.id,op);
+					}else{
+						NoticeManager.showNotifyById(60049);//没权限
+					}
+				}else{
+					NoticeManager.showNotifyById(60050);//竞拍其它城池了
+				}
+				
 			}else if(target==skin.lbTeamName1&&info.occupyGuildName){
 				GuildSender.reqGuildBriefnessInfo(info.occupyGuildId);
 			}else if(target==skin.lbTeamName2&&info.curMaxPriceGuildName){

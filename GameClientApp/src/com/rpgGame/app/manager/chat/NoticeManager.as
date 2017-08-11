@@ -201,26 +201,39 @@ package com.rpgGame.app.manager.chat
 				args.push(msg.values[i]);
 			}
 			var id:int=msg.noticeIndex&0xffffff;
+			var tp:int=(msg.noticeIndex>>24)&0xff;
 			var notiMsg:Q_notify = NotifyCfgData.getNotifyByID(id);
-			if(notiMsg){
-				var showType:Array=notiMsg.q_show_type.split("_");		
-				//			var tp:int=(msg.noticeIndex>>24)&0xff;
-				if(showType!=null&&showType.length>0){
-					for(i=0;i<showType.length;i++)
-					{
-						var tp:int=showType[i];
-						if(tp==CHAT_CHUANWEN||tp==CHAT_GONGGAO)
+			var words : String;
+			if(tp==CHAT_CHUANWEN||tp==CHAT_GONGGAO)
+			{
+				words=ChatUtil.getNoticeMessageHtml(notiMsg.q_content,"",args);
+				notify(tp, words);
+			}
+			else
+			{
+				if(tp==0){//非后台手动公告
+					var showType:Array=notiMsg.q_show_type.split("_");		
+					if(showType!=null&&showType.length>0){
+						for(i=0;i<showType.length;i++)
 						{
-							words=ChatUtil.getNoticeMessageHtml(notiMsg.q_content,"",args);
-							notify(tp, words);
-						}
-						else
-						{
-							var words : String = LanguageConfig.replaceStr1(notiMsg.q_content,args);
-							words=ChatUtil.replaceStr2(words);
-							notify(tp, words);
+							tp=showType[i];
+							if(tp==CHAT_CHUANWEN||tp==CHAT_GONGGAO)
+							{
+								words=ChatUtil.getNoticeMessageHtml(notiMsg.q_content,"",args);
+								notify(tp, words);
+							}
+							else
+							{
+								words = LanguageConfig.replaceStr1(notiMsg.q_content,args);
+								words=ChatUtil.replaceStr2(words);
+								notify(tp, words);
+							}
 						}
 					}
+				}else{
+					words= LanguageConfig.replaceStr1(notiMsg.q_content,args);
+					words=ChatUtil.replaceStr2(words);
+					notify(tp, words);
 				}
 			}
 		}
