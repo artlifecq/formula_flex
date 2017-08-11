@@ -57,30 +57,28 @@ package com.game.engine3D.scene.render.vo
 			{
 				_isAlpha = value;
 				_renderSet.isAlpha = _isAlpha;
-				if(_isAlpha)
-				{
-					_renderSet.blendMode = BlendMode.LAYER;
-					_renderSet.alpha = 0.5;
-				}
-				else
-				{
-					_renderSet.blendMode = BlendMode.NORMAL;
-					_renderSet.alpha = 1;
-				}
+//				if(_isAlpha)
+//				{
+//					_renderSet.blendMode = BlendMode.LAYER;
+//				}
+//				else
+//				{
+//					_renderSet.blendMode = BlendMode.NORMAL;
+//				}
 			}
 		}
 
-		override public function set alpha(value : Number) : void
-		{
-			super.alpha = value;
-			_renderSet.alpha = value;
-			var len : int = _baseObjList.length;
-			while (len-- > 0)
-			{
-				var obj : BaseObj3D = _baseObjList[len].baseObj;
-				obj.alpha = value;
-			}
-		}
+//		override public function set alpha(value : Number) : void
+//		{
+//			super.alpha = value;
+//			_renderSet.alpha = value;
+//			var len : int = _baseObjList.length;
+//			while (len-- > 0)
+//			{
+//				var obj : BaseObj3D = _baseObjList[len].baseObj;
+//				obj.alpha = value;
+//			}
+//		}
 		
 //		override public function set blendMode(value:String):void
 //		{

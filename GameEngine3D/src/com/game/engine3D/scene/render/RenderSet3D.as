@@ -1250,23 +1250,23 @@ package com.game.engine3D.scene.render
 			}
 		}
 		
-		override public function set alpha(value:Number):void
-		{
-			super.alpha = value;
-			for (var ru : * in _renderUnitMap)
-			{
-				ru.alpha = value;
-			}
-		}
-		
-		override public function set blendMode(value:String):void
-		{
-			super.blendMode = value;
-			for (var ru : * in _renderUnitMap)
-			{
-				ru.blendMode = value;
-			}
-		}
+//		override public function set alpha(value:Number):void
+//		{
+//			super.alpha = value;
+//			for (var ru : * in _renderUnitMap)
+//			{
+//				ru.alpha = value;
+//			}
+//		}
+//		
+//		override public function set blendMode(value:String):void
+//		{
+//			super.blendMode = value;
+//			for (var ru : * in _renderUnitMap)
+//			{
+//				ru.blendMode = value;
+//			}
+//		}
 		
 		override public function set zOffset(value : int) : void
 		{
