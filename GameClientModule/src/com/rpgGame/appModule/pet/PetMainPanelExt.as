@@ -5,11 +5,10 @@ package com.rpgGame.appModule.pet
 	import com.rpgGame.app.display3D.InterAvatar3D;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.PetSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
-	import com.rpgGame.app.ui.common.CenterEftPop;
+	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.utils.FightValueUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.appModule.common.touch.TouchCtrl;
@@ -21,14 +20,15 @@ package com.rpgGame.appModule.pet
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
-	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.PetAdvanceCfg;
 	import com.rpgGame.coreData.cfg.PetCfg;
+	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.clientConfig.Q_girl_advance;
 	import com.rpgGame.coreData.clientConfig.Q_girl_pet;
 	import com.rpgGame.coreData.clientConfig.Q_global;
+	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.CharAttributeType;
@@ -40,8 +40,6 @@ package com.rpgGame.appModule.pet
 	import away3d.events.Event;
 	
 	import feathers.utils.filter.GrayFilter;
-	
-	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.meiren.MeiRen_Skin;
@@ -114,9 +112,12 @@ package com.rpgGame.appModule.pet
 			this.addChild(_attrCon);
 			
 			_bgIco=new IconCDFace(IcoSizeEnum.ICON_42);
-			_bgIco.x=784;
-			_bgIco.y=460;
-			//			_bgIco.bindBg(_skin.icon);
+			//			_bgIco.x=784;
+			//			_bgIco.y=460;
+			_bgIco.bindBg(_skin.icon);
+			_bgIco.showCD=false;
+			_bgIco.selectImgVisible=false;
+			this._skin.container.addChild(_bgIco);
 			//
 			this._skin.btnTiaozhan.addEventListener(Event.TRIGGERED,onFightBtnClick);
 			this._skin.btnYuanbao.addEventListener(Event.TRIGGERED,onGoldAdd);
@@ -383,7 +384,9 @@ package com.rpgGame.appModule.pet
 			}
 			_attrCon.setData(addid,nextAttrId);
 			
-			_bgIco.setIconResName(ClientConfig.getSkillIcon(qPetAdv.q_skill_id.split("_")[0].toString(),IcoSizeEnum.ICON_42));
+			var skill:Q_skill_model=SpellDataManager.getSpellById(qPetAdv.q_skill_id);
+			FaceUtil.SetSkillGrid(_bgIco, FaceUtil.chanceSpellToFaceInfo(skill), true);
+//			_bgIco.setIconResName(ClientConfig.getSkillIcon(qPetAdv.q_skill_id.split("_")[0].toString(),IcoSizeEnum.ICON_42));
 			if (!data.actived) 
 			{
 				GrayFilter.gray(_bgIco);

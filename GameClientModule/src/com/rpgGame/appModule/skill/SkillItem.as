@@ -75,6 +75,7 @@ package com.rpgGame.appModule.skill
 			_skin.tips.visible=SpellManager.canUpOrRise(cfg.q_skillID)>0;
 			var i:int=0;
 			_icon.setIconResName(ClientConfig.getSkillIcon(cfg.q_skillID.toString(),IcoSizeEnum.ICON_42));
+//			trace("技能ID："+cfg.q_skillID);
 			var item:DisplayObject;
 			var riseCfg:Q_skill_model=info?SpellDataManager.getSpellData(cfg.q_skillID,info.skillLevel+1):null;
 			if(info){//学习了的技能

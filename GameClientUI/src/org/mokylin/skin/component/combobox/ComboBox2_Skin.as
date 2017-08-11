@@ -3,6 +3,7 @@ package org.mokylin.skin.component.combobox
 	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
 	import feathers.controls.List;
+	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.TextInput;
 	import feathers.layout.VerticalLayout;
@@ -36,7 +37,7 @@ package org.mokylin.skin.component.combobox
 			
 			this.currentState = "disabled";
 			this.height = 24;
-			this.width = 70;
+			this.width = 123;
 			this.elementsContent = [textInput_i(),openButton_i(),dropDown_i()];
 			
 			states = {
@@ -74,10 +75,10 @@ package org.mokylin.skin.component.combobox
 			dropDown = temp;
 			temp.name = "dropDown";
 			temp.height = 105;
+			temp.left = 0;
+			temp.right = 16;
 			temp.styleClass = org.mokylin.skin.component.text.TextAreaDwonSkin;
-			temp.width = 72;
-			temp.x = 0;
-			temp.y = 23;
+			temp.y = 22;
 			temp.layout = __ComboBox2_Skin_VerticalLayout1_i();
 			return temp;
 		}
@@ -91,7 +92,7 @@ package org.mokylin.skin.component.combobox
 			temp.right = 0;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_xiala;
 			temp.width = 22;
-			temp.y = 1;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -104,6 +105,7 @@ package org.mokylin.skin.component.combobox
 			temp.left = 0;
 			temp.right = 0;
 			temp.styleClass = org.mokylin.skin.component.text.textInput1_Skin;
+			temp.textAlign = "center";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.y = 0;
