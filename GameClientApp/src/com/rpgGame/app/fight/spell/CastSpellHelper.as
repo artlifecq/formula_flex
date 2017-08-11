@@ -236,7 +236,7 @@ package com.rpgGame.app.fight.spell
 					
 					GameLog.add("====================将要释放技能：" + caseInfo.caseSpellData.q_skillID);
 					
-					Lyt.a("请求释放技能："+caseInfo.caseSpellData.q_skillName+"====");
+					//Lyt.a("请求释放技能："+caseInfo.caseSpellData.q_skillName+"====");
 					SpellSender.releaseSpell(caseInfo.caseSpellData.q_skillID, caseInfo.releasePos.x, caseInfo.releasePos.y, angle, caseInfo.targetServerID);
 					
 					if(TrusteeshipManager.getInstance().tripleSkillCtrl.isLastTripleSkill(caseInfo.caseSpellData.q_skillID))
