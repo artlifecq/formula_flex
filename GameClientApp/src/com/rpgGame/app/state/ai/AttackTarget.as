@@ -40,7 +40,7 @@ package com.rpgGame.app.state.ai
 		private function findUseableSpell() : Q_skill_model
 		{
 			var castSpell : Q_skill_model;
-			if(TrusteeshipManager.getInstance().isNormalSpell)
+			if(TrusteeshipManager.getInstance().isNormalSpell&&!MainRoleManager.actor.stateMachine.isIdle)//还是有很小的机率出现一直为true，先加个站着不动判断
 			{
 				return null;
 			}

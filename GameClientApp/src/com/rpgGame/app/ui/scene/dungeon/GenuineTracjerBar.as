@@ -22,6 +22,11 @@ package com.rpgGame.app.ui.scene.dungeon
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	
+	/**
+	 * 真气副本追踪
+	 * @author jsj
+	 * 
+	 */	
 	public class GenuineTracjerBar extends DungeonTrackerUI implements IAnimatable
 	{
 		private var _skin:ZhenQi_Skin;

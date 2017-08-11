@@ -66,6 +66,10 @@ package com.rpgGame.app.fight.spell
 		{
 			/** 施法者 **/
 			var ref : AttackStateReference = null;
+			if (spellInfo.atkor.isMainChar)
+			{
+				Lyt.a("收到释放技能："+spellInfo.spellData.q_skillName+"----");
+			}
 			if (spellInfo.atkor && spellInfo.atkor.usable)
 			{
 				var motion : String = spellInfo.atkMotion;

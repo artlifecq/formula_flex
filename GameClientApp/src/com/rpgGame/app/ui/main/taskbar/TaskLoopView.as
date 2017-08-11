@@ -388,6 +388,16 @@ package com.rpgGame.app.ui.main.taskbar
 			subBut1.visible=false;
 			setUisite();
 		}
+		/**支线任务领取奖励*/
+		public function gaveDailyTaskReward():void
+		{
+			if(icoList1Group.visible)
+			{
+				icoList1Group.tweeRewardInBag();
+			}
+		}
+		
+		
 		
 		/**更新支线任务显示*/
 		public function upDailyTaskView():void
@@ -401,6 +411,8 @@ package com.rpgGame.app.ui.main.taskbar
 			}
 			setUisite();
 		}
+		
+		
 		
 		
 		/**设置环式任务显示*/
