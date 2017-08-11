@@ -59,7 +59,10 @@ package com.rpgGame.app.ui.tips
 			if(tipsInfo.isOwner){
 				_skins.lbJiangli.htmlText=tipsInfo.rewardState==0?HtmlTextUtil.getTextColor(StaticValue.UI_RED1,"已经领取"):HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,"点击领取");
 			}
-			if(tipsInfo.isHczb){
+			
+			_skins.lbName.text=EnumCity.getCityName(info.id,info.areaId);
+			
+			/*if(tipsInfo.isHczb){
 				_skins.lbName.text=EnumCity.getCityHCName(info.id);
 			}else{
 				if(info.id==EnumCity.WANG_CHENG){
@@ -67,7 +70,7 @@ package com.rpgGame.app.ui.tips
 				}else{
 					_skins.lbName.text=EnumCity.getCityName(info.id);
 				}
-			}
+			}*/
 		}
 		
 		public function hideTips():void
