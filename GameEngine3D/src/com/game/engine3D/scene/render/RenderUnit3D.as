@@ -294,7 +294,7 @@ package com.game.engine3D.scene.render
 			_independentColorTransform.alphaMultiplier = alpha;
 			if (_renderUnitData)
 			{
-				trace("alpha   被半透的unit 的类型：\t" + this.type);
+//				trace("alpha   被半透的unit 的类型：\t" + this.type);
 				_renderUnitData.setIndependentColorTransform(_independentColorTransform);
 			}
 		}
@@ -305,7 +305,7 @@ package com.game.engine3D.scene.render
 			super.blendMode = value;
 			if (_renderUnitData)
 			{
-				trace("blendMode   被半透的unit 的类型：\t" + this.type);
+//				trace("blendMode   被半透的unit 的类型：\t" + this.type);
 				_renderUnitData.blendMode = value;
 			}
 		}
@@ -3730,19 +3730,13 @@ package com.game.engine3D.scene.render
 				}
 				if(_isAlpha)
 				{
-					if(_alpha == 1)
-						_alpha = 0.3;
-					if(blendMode != BlendMode.LAYER)
-					{
-						blendMode = BlendMode.LAYER;
-					}
+					blendMode = BlendMode.LAYER;
+					alpha = 0.3;
 				}
 				else
 				{
-					if(blendMode != BlendMode.NORMAL)
-					{
-						blendMode = BlendMode.NORMAL;
-					}
+					blendMode = BlendMode.NORMAL;
+					alpha = 1;
 				}
 			}
 		}

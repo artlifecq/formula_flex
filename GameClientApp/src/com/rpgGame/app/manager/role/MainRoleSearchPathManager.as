@@ -146,7 +146,21 @@ package com.rpgGame.app.manager.role
 		//========================跨场景寻路========================================
 		//跨场景寻路静态方法
 		//===========================================================================================================
-
+		/**打完怪后再寻路，统一延时0.5秒处理*/		
+		public static function walkToScenePreAttack(targetSceneId : int, posx : Number = -1, posy : Number = -1, onArrive : Function = null, spacing : int = 0, data : Object = null,needSprite:Boolean=false) : void
+		{
+			TweenLite.killDelayedCallsTo(walkToSceneTween);
+			TweenLite.delayedCall(0.5, walkToSceneTween, [targetSceneId, posx, posy, onArrive, spacing,data,needSprite]);
+			
+		}
+		private static function walkToSceneTween(targetSceneId : int, posx : Number = -1, posy : Number = -1, onArrive : Function = null, spacing : int = 0, data : Object = null,needSprite:Boolean=false) : void
+		{
+			var walking:Boolean=walkToScene(targetSceneId, posx,posy,onArrive,spacing,data,needSprite);
+			if(!walking)
+			{
+				Lyt.a("寻路失败了----");
+			}
+		}
 		public static function walkToScene(targetSceneId : int, posx : Number = -1, posy : Number = -1, onArrive : Function = null, spacing : int = 0, data : Object = null,needSprite:Boolean=false) : Boolean
 		{
 

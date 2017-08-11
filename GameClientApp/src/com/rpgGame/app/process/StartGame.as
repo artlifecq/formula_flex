@@ -94,6 +94,8 @@ package com.rpgGame.app.process
 	 */
 	public class StartGame extends BaseProcess
 	{
+		public static var isInitMap:Boolean = false;
+		
 		public function StartGame()
 		{
 			super();
@@ -179,6 +181,7 @@ package com.rpgGame.app.process
 			DisplaySetUpManager.setToHigh();
 			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE, onSwitchCmp);
 			SceneSwitchManager.changeMap();
+			isInitMap = true;
 		}
 		
 		private var isShow:Boolean = true;

@@ -5,6 +5,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
+	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.manager.CharAttributeManager;
 	import com.rpgGame.app.manager.ClientTriggerManager;
@@ -27,6 +28,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.manager.task.TaskManager;
 	import com.rpgGame.app.manager.task.TouJingManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
+	import com.rpgGame.app.process.StartGame;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.app.state.role.action.JumpStateReference;
@@ -1086,11 +1088,13 @@ package com.rpgGame.app.cmdlistener.scene
 		 */
 		private function onResChangeMapMessage(msg : ResChangeMapMessage) : void
 		{
+			if(!StartGame.isInitMap)return;
 			ReqLockUtil.unlockReq(101206);
 			//			ReqLockUtil.unlockReq(MazeModuleMessages.C2S_TRY_TRANSPORT);
 			
 			var mapId : int = msg.mapId;
 			MainRoleManager.actorInfo.preMapID=MainRoleManager.actorInfo.mapID;
+			trace(MainRoleManager.actorInfo.mapID);
 			MainRoleManager.actorInfo.mapID = mapId;
 			SceneSwitchManager.changeMap();
 			AppManager.closeAllApp();//切换场景关闭所有面板
@@ -1184,9 +1188,8 @@ package com.rpgGame.app.cmdlistener.scene
 			if (!role)
 				return;
 			var roleData : RoleData = role.data as RoleData;
-			
+			(role.headFace as HeadFace).showBloodBar();
 			CharAttributeManager.setAttributeValue(roleData, CharAttributeType.HP, msg.hp);
-			
 			role.stateMachine.transition(RoleStateType.ACTION_IDLE, null, true); //切换到“站立状态”
 			//			SceneManager.removeSceneObjFromScene(role);
 			//			role = SceneRoleManager.getInstance().createHero(roleData as HeroData);

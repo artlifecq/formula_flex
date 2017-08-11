@@ -342,8 +342,9 @@ package com.rpgGame.app.ui.main.taskbar
 		{
 			if(type==1)//支线任务领取奖励
 			{
-				loopCont.hideDailyTaskView();
 				TaskSender.sendfinishTaskMessage(TaskMissionManager.dailyTaskInfo.taskId);
+				loopCont.gaveDailyTaskReward();
+				loopCont.hideDailyTaskView();
 			}
 			//TaskControl.receiveRewordBut(type);
 			

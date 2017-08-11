@@ -608,12 +608,12 @@ package com.rpgGame.app.graphics
 				return;
 			
 			_bloodPercent = value;
-			if (_bloodBar&&_bloodBar.stage)
+			if (_bloodBar)
 			{
 				_bloodBar.update(_bloodPercent);
 			}
 			
-			if(_bloodPercent==0){
+			if(_bloodPercent==0&&_bloodBar.parent){
 				showAndHideElement(_bloodBar, false);
 			}
 			

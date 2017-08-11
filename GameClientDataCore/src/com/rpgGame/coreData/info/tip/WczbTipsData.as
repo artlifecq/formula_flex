@@ -13,7 +13,6 @@ package com.rpgGame.coreData.info.tip
 		public var rewardState:int;
 		public var nextTime:int;
 		public var isOwner:Boolean;
-		public var isHczb:Boolean;
 		public function WczbTipsData()
 		{
 		}

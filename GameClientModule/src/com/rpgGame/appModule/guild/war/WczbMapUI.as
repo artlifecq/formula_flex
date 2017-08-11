@@ -6,6 +6,7 @@ package com.rpgGame.appModule.guild.war
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.QKindomnameCfgData;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.clientConfig.Q_kindomname;
@@ -68,6 +69,8 @@ package com.rpgGame.appModule.guild.war
 			_cityIcon.add(EnumCity.XI_WEI,_skin.uiCh1);
 			_cityIcon.add(EnumCity.ZHONG_WEI,_skin.uiCh2);
 			_cityIcon.add(EnumCity.DONG_WEI,_skin.uiCh3);
+			var cfg:Q_kindomname=QKindomnameCfgData.getInfoByZone(ClientConfig.loginAreaId);
+			_skin.uiWangCheng.styleName="ui/app/banghui/wangcheng/xiaocheng/"+EnumCity.wangchangCitys[cfg.q_id]+".png";
 			
 			_nameMap=new HashMap();
 			_nameMap.add(EnumCity.WANG_CHENG,_skin.skinName.skin);
