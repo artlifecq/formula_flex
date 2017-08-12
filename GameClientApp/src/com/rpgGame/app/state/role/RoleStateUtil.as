@@ -174,7 +174,7 @@ package com.rpgGame.app.state.role
 			var walkRole : SceneRole = camouflageEntity || role;
 			if((walkRole.isMainChar || walkRole.isMainCamouflage))
 			{
-				if (walkRole.stateMachine.isAttackHarding)
+				if (walkRole.stateMachine.isAttackHarding||walkRole.stateMachine.isLockCaseSpell)
 				{
 					Lyt.a("walk-isAttackHarding");
 					TweenLite.delayedCall(1, doWalkToPos, [role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite,true]);

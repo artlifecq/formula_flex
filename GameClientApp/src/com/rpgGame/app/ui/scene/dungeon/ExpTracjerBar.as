@@ -4,6 +4,7 @@ package com.rpgGame.app.ui.scene.dungeon
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.sender.DungeonSender;
 	import com.rpgGame.app.utils.FaceUtil;
@@ -19,10 +20,12 @@ package com.rpgGame.app.ui.scene.dungeon
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	
+	import flash.geom.Point;
 	import flash.utils.Dictionary;
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.mainui.fubenzhuizong.JingYan_Skin;
+	import org.mokylin.skin.mainui.renwu.Renwu_Item2;
 	
 	import starling.animation.IAnimatable;
 	import starling.core.Starling;
@@ -83,8 +86,30 @@ package com.rpgGame.app.ui.scene.dungeon
 			TrusteeshipManager.getInstance().stopAutoFight();
 			stopTimer();
 		}
+		
+		private var waveId:int=0;
 		private function updateWaveInfoHandler(currentWaveId:int,killerCount:int):void
 		{
+			if(waveId!=0&&killerCount==0)
+			{
+				var killList:Array = DailyZoneMonsterCfgData.getTypeList(_data.q_zone_id,_data.q_id);
+				var qzm:Q_dailyzone_monster;
+				for(var i:int=0;i<killList.length;i++)
+				{
+					qzm=killList[i];
+					if(qzm.q_id==currentWaveId)
+					{
+						var pos:Point=new Point(qzm.q_move_x,qzm.q_move_y);
+						if(pos!=null)
+						{
+							TrusteeshipManager.getInstance().startAutoFightToPos([SceneSwitchManager.currentMapId,pos.x,pos.y],1,-1);
+						}
+						break;
+					}
+					
+				}
+			}
+			waveId=currentWaveId;
 			_waveInfo[currentWaveId] = killerCount;
 			refeashInfo();
 		}
@@ -94,8 +119,8 @@ package com.rpgGame.app.ui.scene.dungeon
 			_endTime = lastTime/1000;
 			
 			Starling.juggler.add(this);
-			TrusteeshipManager.getInstance().findDist=1000;
-			TrusteeshipManager.getInstance().startAutoFight();		
+			//TrusteeshipManager.getInstance().findDist=1000;
+			//TrusteeshipManager.getInstance().startAutoFight();		
 		}
 		
 		public function advanceTime(time:Number):void
