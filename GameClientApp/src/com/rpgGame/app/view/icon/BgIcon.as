@@ -551,7 +551,7 @@ package com.rpgGame.app.view.icon
 			_countText.verticalCenter=-2;
 			_countText.textAlign = Align.RIGHT;
 			_countText.color = StaticValue.A_UI_BEIGE_TEXT;
-			_countText.fontSize = 10;
+			_countText.fontSize = 12;
 			_countText.nativeFilters=Fontter.filterObj["labelFilterBlack"];
 			addChild(_countText);
 		}
