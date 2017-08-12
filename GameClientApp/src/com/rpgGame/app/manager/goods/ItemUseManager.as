@@ -1,5 +1,6 @@
 package com.rpgGame.app.manager.goods
 {
+	import com.rpgGame.app.manager.FunctionOpenManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.mount.MountEquipmentManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -308,18 +309,50 @@ package com.rpgGame.app.manager.goods
 					return;
 				case GoodsType.MATERIAL_ADVANCE://进阶材料
 				{
-					AppManager.showApp(AppConstant.MOUNT_PANEL);
-					break;
+					switch(item.qItem.q_location)
+					{
+						case 1: //坐骑
+						{
+							FunctionOpenManager.openAppPaneById("10",null,false);
+							return;
+						}
+						case 2: //战旗
+						{
+							FunctionOpenManager.openAppPaneById("11",null,false);
+							return;
+						}
+						case 3: //婚姻
+						{
+							FunctionOpenManager.openAppPaneById("370",null,false);
+							return;
+						}
+						case 4://美人
+						{
+							FunctionOpenManager.openAppPaneById("371",null,false);
+							return;
+						}
+						default: //默认坐骑
+						{
+							FunctionOpenManager.openAppPaneById("10",null,false);
+							return;
+						}
+					}
+					
+//					AppManager.showApp(AppConstant.MOUNT_PANEL);
+					return;
 				}
 				case GoodsType.MATERIAL_COMBO://合成材料
 				{
 					var info:ComboItemInfo=new ComboItemInfo();
 					info.sourceId=item.cfgId;
-					AppManager.showAppNoHide(AppConstant.EQUIP_PANL,info,EmFunctionID.EM_HECHENG);
+					FunctionOpenManager.openAppPaneById("24",info,false);
 					return;
 				}
 				case GoodsType.STRENGTH:
-					AppManager.showAppNoHide(AppConstant.EQUIP_PANL);
+					FunctionOpenManager.openAppPaneById("20",null,false);
+					return;
+				case GoodsType.MERIDIANSTONE:
+					FunctionOpenManager.openAppPaneById("2",null,false);
 					return;
 			/*	case GoodsType.CHAT:
 					return;

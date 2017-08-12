@@ -321,8 +321,8 @@ package com.rpgGame.appModule.equip
 				case 2:
 					for(i=0;i<_labList.length;i++)
 					{
-						_labList[i].x=(i%2)*(_labList[i].width+120)-90;
-						_labList[i].y=int((i/2))*(_labList[i].height+10)-5;
+						_labList[i].x=-90;
+						_labList[i].y=i*(_labList[i].height+10)-5;
 					}
 					break;
 			}

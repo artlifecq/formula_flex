@@ -475,7 +475,7 @@ package com.rpgGame.appModule.role
 				var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(info.q_mod_id);
 				FaceUtil.SetItemGrid(_marryIcon,itemInfo);
 				//_marryIcon.setIconResName(ClientConfig.getItemIcon(Mgr.hunyinMgr.getRingUrl(ring),IcoSizeEnum.ICON_48));
-				if (hasMarriage==7) 
+				if (hasMarriage==10) 
 				{
 					GrayFilter.gray(_marryIcon);
 				}

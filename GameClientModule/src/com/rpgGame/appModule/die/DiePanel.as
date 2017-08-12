@@ -1,6 +1,5 @@
 package com.rpgGame.appModule.die
 {
-	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.SceneSender;
@@ -8,8 +7,6 @@ package com.rpgGame.appModule.die
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.appModule.shop.ItemBuyPanelExt;
-	import com.rpgGame.core.app.AppConstant;
-	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.coreData.cfg.DieCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_map;
@@ -32,7 +29,6 @@ package com.rpgGame.appModule.die
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
-	import com.rpgGame.coreData.info.shop.ShopItemVo;
 	
 	/**
 	 *死亡面板 
