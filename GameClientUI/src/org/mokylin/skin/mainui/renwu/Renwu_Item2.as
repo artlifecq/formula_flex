@@ -35,9 +35,9 @@ package org.mokylin.skin.mainui.renwu
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			labelDisplay = temp;
 			temp.name = "labelDisplay";
-			temp.htmlText = "击杀：<u><font color='#ff0d0d'>秦国士兵(0/30)</font></u>";
+			temp.htmlText = "击杀：<u><font color='#00ff33'>秦国士兵</font></u>(0/30)";
 			temp.left = 0;
-			temp.color = 0xEAEABC;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.top = 0;
 			return temp;
