@@ -42,6 +42,7 @@ package org.mokylin.skin.app.siwangfuhuo
 			
 			this.currentState = "normal";
 			this.height = 415;
+			this.width = 675;
 			this.elementsContent = [bg_i(),__fuhuo_Skin_UIAsset1_i(),__fuhuo_Skin_UIAsset2_i(),__fuhuo_Skin_UIAsset3_i(),lbl_msg_i(),lbl_time_i(),btn_fuhuodian_i(),btn_yuandi_i(),btn_goumai_i()];
 			
 			states = {

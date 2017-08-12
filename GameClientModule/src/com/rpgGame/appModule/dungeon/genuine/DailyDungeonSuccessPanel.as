@@ -58,9 +58,10 @@ package com.rpgGame.appModule.dungeon.genuine
 			_skin.lbTime.visible = false;
 			playEffect(msg.star);
 			_skin.lbJingyan.text =msg.exp.toString();
-			_skin.lbTongqian.text = msg.money.toString();
+			_skin.lbTongqian.text = msg.money.toString();			
 			_skin.lbzhenqi.text = msg.zhenqi.toString();
-
+			_skin.lbzhenqi.visible=_skin.lb_zhenqiName.visible=msg.zhenqi>0;
+			
 			var itemlist:Vector.<ItemInfo> = msg.itemInfoList;
 			var length:int = itemlist.length;
 			var startX:Number = (_skin.width-70*length)/2-12;
@@ -68,7 +69,7 @@ package com.rpgGame.appModule.dungeon.genuine
 			for(var i:int = 0;i<length;i++)
 			{
 				var grid:IconCDFace = IconCDFace.create(IcoSizeEnum.ICON_64);
-//				grid.setUrlBg( "ui/common/gezikuang/tubiaodikuang/64.png");
+				//				grid.setUrlBg( "ui/common/gezikuang/tubiaodikuang/64.png");
 				this.addChild(grid);
 				grid.x = startX+70*i;
 				grid.y = 347;

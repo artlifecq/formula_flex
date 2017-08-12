@@ -91,7 +91,7 @@ package com.rpgGame.appModule.mount
 						}
 						_mountupContent.isAutoing = false;
 					}
-//					showUplevel();
+					//					showUplevel();
 					break;
 				case "btn_zidong":
 					onMouseOut();
@@ -175,6 +175,7 @@ package com.rpgGame.appModule.mount
 			var spellList:Vector.<BaseFaceInfo> = HorseManager.instance().spellList; 
 			var partner:DisplayObjectContainer = _skin.kuang_1.parent;
 			var icon:IconCDFace = IconCDFace.create(IcoSizeEnum.ICON_42);
+			icon.showCD=false;
 			icon.bindBg(_skin.kuang_1);
 			FaceUtil.SetSkillGrid(icon, spellList[0], true);
 			partner.addChild(icon);
@@ -200,7 +201,7 @@ package com.rpgGame.appModule.mount
 			_touchState = new TouchToState(_skin.lab_xuyaowupin,labTouchHandler);
 			
 			addNode(RTNodeID.HORSE,RTNodeID.HORSE_UP,_skin.btn_kaishi,110,null);
-		
+			
 		}
 		private function labTouchHandler(touch:Touch):void
 		{

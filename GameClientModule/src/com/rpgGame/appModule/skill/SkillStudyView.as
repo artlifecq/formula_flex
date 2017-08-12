@@ -9,12 +9,10 @@ package com.rpgGame.appModule.skill
 	import com.rpgGame.core.events.SpellEvent;
 	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.core.ui.tip.RewardMarkTip;
-	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
-	import com.rpgGame.coreData.lang.LangSpell;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
@@ -30,7 +28,6 @@ package com.rpgGame.appModule.skill
 	import org.mokylin.skin.app.wuxue.jineng.jineng_Skin;
 	import org.mokylin.skin.app.wuxue.jineng.jineng_jinjie;
 	import org.mokylin.skin.app.wuxue.jineng.jineng_shengji;
-	import org.mokylin.skin.common.Title_Skin;
 	
 	import starling.display.DisplayObject;
 	import starling.display.Sprite;

@@ -63,9 +63,9 @@ package org.mokylin.skin.component.text
 			temp.left = 5;
 			temp.right = 15;
 			temp.text = "标签";
-			temp.color = 0x5cb006;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.y = 3;
+			temp.color = 0xA3A594;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.y = 2;
 			return temp;
 		}
 

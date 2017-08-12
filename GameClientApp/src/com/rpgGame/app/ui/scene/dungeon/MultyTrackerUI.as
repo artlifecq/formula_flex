@@ -273,7 +273,7 @@ package com.rpgGame.app.ui.scene.dungeon
 					if(qzm&&i<killButList.length)
 					{
 						rItme=killButList[i].skin as Renwu_Item2;
-						rItme.labelDisplay.htmlText="击杀：<u>"+MonsterDataManager.getMonsterName(qzm.q_monsterId)+"</u><font color='#cfc6ae'>("+killList[i].count+"/"+qzm.q_monsterNum+")</font>";
+						rItme.labelDisplay.htmlText="<font color='#eaeabc'>击杀：</font><u><u>"+MonsterDataManager.getMonsterName(qzm.q_monsterId)+"</u><font color='#eaeabc'>("+killList[i].count+"/"+qzm.q_monsterNum+")</font>";
 						killButList[i].visible=true;
 					}
 					

@@ -181,7 +181,7 @@ package com.rpgGame.app.ui.alert
 		override protected function onHide():void
 		{
 			super.onHide();
-			if(Mgr.hunyinMgr.marriageInfos==null||Mgr.hunyinMgr.marriageInfos.state==5)
+			if(Mgr.hunyinMgr.marriageInfos==null||Mgr.hunyinMgr.marriageInfos.state==5||Mgr.hunyinMgr.marriageInfos.state==10)
 				Mgr.hunyinMgr.chakeNextQiuHunMsg();
 		}
 	}

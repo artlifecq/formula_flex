@@ -61,7 +61,7 @@ package com.rpgGame.app.manager
 		 */		
 		public function hasMarriage():Boolean
 		{
-			return _marriageInfo!=null&&_marriageInfo.marriagePlayerId!=null&&_marriageInfo.marriagePlayerId.IsZero()==false;
+			return _marriageInfo!=null&&_marriageInfo.marriagePlayerId!=null&&_marriageInfo.marriagePlayerId.IsZero()==false&&_marriageInfo.state==6;
 		}
 		
 		/**婚姻状态 未婚 5 已婚 6 离婚 7*/
