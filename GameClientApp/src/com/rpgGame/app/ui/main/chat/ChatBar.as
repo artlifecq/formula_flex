@@ -19,7 +19,6 @@ package com.rpgGame.app.ui.main.chat {
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.SkinUI;
-	import com.rpgGame.coreData.cfg.ChatCfgData;
 	import com.rpgGame.coreData.clientConfig.FaceInfo;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
@@ -154,7 +153,7 @@ package com.rpgGame.app.ui.main.chat {
 			defaultFormat.leading = 0
 			
 			this._inputText = new RichTextArea3D(this._skin.inputbg.width-50, this._skin.inputbg.height, ColorUtils.getDefaultStrokeFilter());
-			this._inputText.maxChars = ChatCfgData.MAX_CHAR_LENGTH;
+//			this._inputText.maxChars = ChatCfgData.MAX_CHAR_LENGTH;
 			this._inputText.isEditable = true;
 			this._inputText.x = this._skin.inputbg.x;
 			this._inputText.y = this._skin.inputbg.y+3;

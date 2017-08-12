@@ -102,6 +102,7 @@ package com.client.cmdlistener
 			// 这里启动心跳吧
 			StartHeart();*/
 			GameLog.addShow("收到登录成功消息 ");
+//			ClientConfig.loginData.mapModelId=msg.mapModelId;
 			ClientConfig.hasHero = true;
 			onCreateHeroSuccess();
 		}
