@@ -3,6 +3,7 @@ package com.rpgGame.app.view.icon
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
 	import com.rpgGame.app.manager.EftMcManager;
+	import com.rpgGame.core.utils.NumberUtil;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.clientConfig.Q_item;
@@ -477,14 +478,15 @@ package com.rpgGame.app.view.icon
 				return;
 			}
 			
-			if( value > 10000 )
+			setSubString(NumberUtil.getNumberTo(value,true));
+/*			if( value > 10000 )
 			{
 				setSubString(int( value / 10000 ) + "万");
 			}
 			else
 			{
 				setSubString( value + "");
-			}
+			}*/
 		}
 		/**
 		 * 设置文字下标 
