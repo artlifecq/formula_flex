@@ -6,7 +6,8 @@ package org.mokylin.skin.loading
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	import org.mokylin.skin.loading.LoadingUpSkin;
+	import org.mokylin.skin.loading.Bg_Foot;
+	import org.mokylin.skin.loading.Bg_head;
 	import org.mokylin.skin.loading.loadingBarSkin;
 
 	/**
@@ -57,11 +58,24 @@ package org.mokylin.skin.loading
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
+		private function __ResLoadingViewSkin_SkinnableContainer1_i():feathers.controls.SkinnableContainer
+		{
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			temp.height = 187;
+			var skin:StateSkin = new org.mokylin.skin.loading.Bg_Foot()
+			temp.skin = skin
+			temp.width = 1920;
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
 		private function __ResLoadingViewSkin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 188;
+			temp.height = 187;
 			temp.styleName = "ui/big_bg/bg_2.png";
+			temp.width = 1920;
 			temp.x = 0;
 			temp.y = 2;
 			return temp;
@@ -98,7 +112,7 @@ package org.mokylin.skin.loading
 			temp.name = "grpBottom";
 			temp.x = 0;
 			temp.y = 743;
-			temp.elementsContent = [__ResLoadingViewSkin_UIAsset1_i(),__ResLoadingViewSkin_UIAsset2_i(),loadingBar_i(),progressTxt_i(),infoTxt_i(),infoTxt2_i(),inSuaxin_i()];
+			temp.elementsContent = [__ResLoadingViewSkin_SkinnableContainer1_i(),__ResLoadingViewSkin_UIAsset1_i(),__ResLoadingViewSkin_UIAsset2_i(),loadingBar_i(),progressTxt_i(),infoTxt_i(),infoTxt2_i(),inSuaxin_i()];
 			return temp;
 		}
 
@@ -187,7 +201,7 @@ package org.mokylin.skin.loading
 			skinUp = temp;
 			temp.name = "skinUp";
 			temp.height = 162;
-			var skin:StateSkin = new org.mokylin.skin.loading.LoadingUpSkin()
+			var skin:StateSkin = new org.mokylin.skin.loading.Bg_head()
 			temp.skin = skin
 			temp.width = 1920;
 			temp.x = 0;
