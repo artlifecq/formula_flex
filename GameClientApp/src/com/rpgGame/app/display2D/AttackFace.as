@@ -144,7 +144,8 @@ package com.rpgGame.app.display2D
 			
 			addTitle();
 			addNumber();
-			
+			this.pivotX=this.width/2;
+			this.pivotY=this.height/2;
 		}
 		/**
 		 * 文字
@@ -155,9 +156,9 @@ package com.rpgGame.app.display2D
 			startX=0;
 			if (_extendsData) 
 			{
-				startX=_extendsData.width+2;
+				startX=_extendsData.width/2+2;
 				_extendsData.x=0;
-				_extendsData.y=0;
+				_extendsData.y=_extendsData.height/2;
 				this.addChild(_extendsData);
 			}
 			if( _typeRes == "" )

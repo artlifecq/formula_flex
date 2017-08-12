@@ -491,6 +491,7 @@ package com.rpgGame.app.manager.role
 			role.name = data.name;
 			role.headFace = HeadFace.create(role);
 			role.headFace.show();
+			role.ownerIsMainChar = (data.ownerId == MainRoleManager.actorID);
 			if(role.headFace is HeadFace)
 			{
 				(role.headFace as HeadFace).addAndUpdateGuiShu();
@@ -506,9 +507,13 @@ package com.rpgGame.app.manager.role
 			role.setGroundXY(p.x, p.y);
 			role.rotationY = (270 + data.direction) % 360;
 			SceneManager.addSceneObjToScene(role, true, false, false);
-			var girlPet:GirlPetFollowAnimator=new GirlPetFollowAnimator();
-			girlPet.setOwner(role);
-			role.setRenderAnimator(girlPet);
+			//主角的才执行
+			if (role.ownerIsMainChar) 
+			{
+				var girlPet:GirlPetFollowAnimator=new GirlPetFollowAnimator();
+				girlPet.setOwner(role);
+				role.setRenderAnimator(girlPet);
+			}
 //			trace("美人创建成功_美人位子："+p.x+"_"+p.y);
 			//			EventManager.dispatchEvent(MapEvent.UPDATE_MAP_ROLE_ADD, role);
 		}

@@ -113,6 +113,10 @@ package com.rpgGame.app.view.icon
 					readyEffect=effectSk.addInter3D(ClientConfig.getEffect(EffectUrl.BUFF_JIANYI));
 			}
 			//			this.setIconResName(ClientConfig.getItemIcon("101", IcoSizeEnum.ICON_36 ));
+			if (readyEffect&&readyEffect.baseObj3D) 
+			{
+				readyEffect.baseObj3D.setScale(0.5);
+			}
 			this.count=buffData.curtStackCount;
 			sortLayer();
 			this.faceInfo=buffData;

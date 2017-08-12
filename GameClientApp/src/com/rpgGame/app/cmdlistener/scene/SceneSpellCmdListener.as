@@ -7,6 +7,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.fight.spell.ReleaseSpellHelper;
 	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
+	import com.rpgGame.app.fight.spell.SpellEffectRecordCtrl;
 	import com.rpgGame.app.fight.spell.SpellHitHelper;
 	import com.rpgGame.app.fight.spell.SpellResultInfo;
 	import com.rpgGame.app.manager.FightHeadEffectManager;
@@ -136,6 +137,10 @@ package com.rpgGame.app.cmdlistener.scene
 			//GameLog.addShow("技能流水号为： 对目标\t" + msg.uid);
 			
 			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg, true);
+			if (info.atkor.isPlayer) 
+			{
+				SpellEffectRecordCtrl.clear(msg.personId.ToGID());
+			}
 			
 			if (msg.personId.ToGID()==MainRoleManager.actorID) 
 			{
@@ -154,11 +159,16 @@ package com.rpgGame.app.cmdlistener.scene
 			{
 				LostSkillManager.instance().checkBigSkill(msg.personId);
 			}
+			TrusteeshipManager.getInstance().myFighterCtrl.update(msg);
 		}
 		
 		private function onResAttackVentToClientMessage(msg:ResAttackVentToClientMessage):void
 		{
 			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg, true);
+			if (info.atkor.isPlayer)
+			{
+				SpellEffectRecordCtrl.clear(msg.playerid.ToGID());
+			}
 			
 			var skillId:int=msg.fightType&0xffffff;
 			var skillData:Q_skill_model=SpellDataManager.getSpellData(skillId);
@@ -370,6 +380,10 @@ package com.rpgGame.app.cmdlistener.scene
 					MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_PREWAR,null,true);
 				else
 					MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE,null,true);
+			}
+			if (role.isPlayer)
+			{
+				SpellEffectRecordCtrl.testCancelEffect(msg.playerId.ToGID(),msg.skillId);
 			}
         }
         

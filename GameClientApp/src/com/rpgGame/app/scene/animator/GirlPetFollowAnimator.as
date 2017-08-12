@@ -53,6 +53,7 @@ package com.rpgGame.app.scene.animator
 			{
 				var dis:int=MathUtil.getDistanceNoSqrt(_scenePet.pos.x,_scenePet.pos.y,_petOwner.pos.x,_petOwner.pos.y);
 				_aiMachine.transition(AIStateType.AI_GIRL_FOLLOW,null,dis>=MIN_TRANS_DIS);
+				_aiMachine.transition(AIStateType.AI_GIRL_ATTACK);
 				_aiMachine.transition(AIStateType.AI_NONE);//AI_GIRL_ATTACK);
 			}
 		}

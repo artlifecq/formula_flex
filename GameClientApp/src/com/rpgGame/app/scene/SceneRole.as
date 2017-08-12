@@ -521,5 +521,9 @@ package com.rpgGame.app.scene
 			roleData.avatarInfo.effectResID=effectResID;
 			AvatarManager.updateEffect(this);
 		}
+		public function get isPlayer():Boolean
+		{
+			return SceneCharType.PLAYER==type;
+		}
 	}
 }

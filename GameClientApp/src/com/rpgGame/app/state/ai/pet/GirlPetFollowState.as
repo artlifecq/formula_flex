@@ -2,6 +2,8 @@ package com.rpgGame.app.state.ai.pet
 {
 	import com.game.engine3D.state.IState;
 	import com.game.engine3D.utils.MathUtil;
+	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.role.SceneRoleManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
@@ -9,6 +11,7 @@ package com.rpgGame.app.state.ai.pet
 	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.state.ai.AIStateMachine;
 	import com.rpgGame.app.state.role.RoleStateMachine;
+	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.core.state.ai.AIState;
 	import com.rpgGame.coreData.role.GirlPetData;
 	import com.rpgGame.coreData.type.AIStateType;
@@ -27,18 +30,16 @@ package com.rpgGame.app.state.ai.pet
 		{
 			super(AIStateType.AI_GIRL_FOLLOW);
 			_isMoving=false;
+			
+			//_pet=_machine.owner as SceneRole;
 		}
 		
-		override public function enter() : void
-		{
-			super.enter();
-			_petOwner=SceneManager.getSceneObjByID(GirlPetData((_machine.owner as SceneRole).data).ownerId) as SceneRole;
-			_pet=_machine.owner as SceneRole;
-		}
+	
 		
 		override public function execute() : void
 		{
 			super.execute();
+			_petOwner=SceneManager.getSceneObjByID(GirlPetData((_machine.owner as SceneRole).data).ownerId) as SceneRole;
 			if(_petOwner)
 			{
 				var dis:int=MathUtil.getDistanceNoSqrt(_pet.pos.x,_pet.pos.y,_petOwner.pos.x,_petOwner.pos.y);
@@ -52,13 +53,14 @@ package com.rpgGame.app.state.ai.pet
 				{
 					_isMoving=true;
 					//给服务器发送同步坐标
-					var targetPos3D : Vector3D =  new Vector3D(_pet.pos.x,0,_pet.pos.y, _pet.position.w);
+					//var targetPos3D : Vector3D =  new Vector3D(_pet.pos.x,0,_pet.pos.y, _pet.position.w);
 					var p:Point=SceneRoleManager.getInstance().getPetPoint(_petOwner.pos.x,_petOwner.pos.y,_petOwner.rotationY);
-					var position : Vector3D = new Vector3D(p.x,0,p.y, _petOwner.position.w);
-					var list:Vector.<Vector3D>=new Vector.<Vector3D>();
-					list.push(targetPos3D);
-					list.push(position);
-					SceneSender.reqPetNewRunningMessage(list);
+					var position : Vector3D = new Vector3D(p.x,-p.y,0, 0);
+					//var list:Vector.<Vector3D>=new Vector.<Vector3D>();
+					//list.push(targetPos3D);
+					//list.push(position);
+					//SceneSender.reqPetNewRunningMessage(list);
+					MainRoleSearchPathManager.jumpWalkToPos(_pet,position);
 				}
 				else
 				{
@@ -88,17 +90,23 @@ package com.rpgGame.app.state.ai.pet
 		
 		override public function enterPass(prevState:IState, force:Boolean=false):Boolean
 		{
+			_pet=_machine.owner as SceneRole;
 			if (force&&!(_machine as AIStateMachine).isGrilPetTransLock) 
 			{
 				return true;
 			}
-			var role:SceneRole=SceneManager.getSceneObjByID(GirlPetData((_machine.owner as SceneRole).data).ownerId) as SceneRole;
-			var machine:RoleStateMachine=role.stateMachine;
-			if (machine.isRunning||machine.isWalking||machine.isWalkMoving) 
+			
+			if (!force&&_pet.stateMachine.isAttackHarding) 
 			{
-				return true;
+				return false;
 			}
-			if (machine.isAttacking) 
+//			var role:SceneRole=SceneManager.getSceneObjByID(GirlPetData((_machine.owner as SceneRole).data).ownerId) as SceneRole;
+//			var machine:RoleStateMachine=role.stateMachine;
+//			if (machine.isRunning||machine.isWalking||machine.isWalkMoving) 
+//			{
+//				return true;
+//			}
+			if (!force&&_pet.stateMachine.isWalkMoving) 
 			{
 				return false;
 			}

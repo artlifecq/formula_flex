@@ -355,7 +355,7 @@ package com.rpgGame.app.graphics
 					//选中显示
 					//showAndHideElement( _bloodBar, _isSelected );
 					showAndHideElement(_bloodBar, true,DecorCtrl.TOP_HPMP);
-					showAndHideElement(_guildNameBar, true,DecorCtrl.TOP_GUILD);
+					showAndHideElement(_guildNameBar, !isMysteryMan&&true,DecorCtrl.TOP_GUILD);
 					showAndHideElement(_familNameBar, !isMysteryMan&&_isSelected && !_isCamouflage);
 				}
 				
@@ -369,6 +369,7 @@ package com.rpgGame.app.graphics
 					showAndHideElement(_guildWarInfoBar,true,DecorCtrl.TOP_TOWER);//帮会战信息条
 				}
 			}
+			showAndHideElement(_fuqititle, !isMysteryMan);
 			showAndHideElement(_junXianBar, !isMysteryMan&&_nameBar && _nameBar.parent && _nameBar.visible);
 			//			showAndHideElement(_countryNameBar, _nameBar && _nameBar.parent && _nameBar.visible);
 			showAndHideElement(_biaoFlagIcon, !isMysteryMan&&_nameBar && _nameBar.parent && _nameBar.visible);

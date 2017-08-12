@@ -200,7 +200,7 @@ package org.mokylin.skin.app.fuben
 			temp.text = "7800000";
 			temp.color = 0xDFB01F;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 65;
+			temp.width = 119;
 			temp.x = 221;
 			temp.y = 249;
 			return temp;
@@ -229,7 +229,7 @@ package org.mokylin.skin.app.fuben
 			temp.text = "7800000";
 			temp.color = 0xDFB01F;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 65;
+			temp.width = 119;
 			temp.x = 221;
 			temp.y = 270;
 			return temp;
@@ -243,7 +243,7 @@ package org.mokylin.skin.app.fuben
 			temp.text = "7800000";
 			temp.color = 0xDFB01F;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 65;
+			temp.width = 117;
 			temp.x = 221;
 			temp.y = 290;
 			return temp;

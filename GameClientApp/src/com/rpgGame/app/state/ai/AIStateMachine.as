@@ -4,6 +4,7 @@ package com.rpgGame.app.state.ai
 	import com.game.engine3D.state.StateMachine;
 	import com.game.engine3D.state.StateReference;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.state.ai.pet.GirlPetAttackState;
 	import com.rpgGame.app.state.ai.pet.GirlPetFollowState;
 	import com.rpgGame.app.state.ai.pet.GirlPetTransLockState;
 	import com.rpgGame.core.state.ai.AINone;
@@ -91,6 +92,9 @@ package com.rpgGame.app.state.ai
 				case AIStateType.AI_GIRL_FOLLOW:
 					state = new GirlPetFollowState();
 					break;
+				case AIStateType.AI_GIRL_ATTACK:
+					state=new GirlPetAttackState();
+					break; 
 			}
 			if (!state)
 			{

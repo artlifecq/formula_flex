@@ -73,7 +73,7 @@ package com.client.process
 			{
 				GameLog.addShow("还未创建角色，进入创建角色");
 
-				_needShowPkTipsView = ClientConfig.isBanShu;
+				//_needShowPkTipsView = ClientConfig.isBanShu;
 				ResLoadingView.instance.show();
 				ResLoadingView.instance.title = "加载创建角色资源...";
 

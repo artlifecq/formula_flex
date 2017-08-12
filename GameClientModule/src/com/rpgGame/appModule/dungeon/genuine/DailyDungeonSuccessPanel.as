@@ -71,7 +71,7 @@ package com.rpgGame.appModule.dungeon.genuine
 //				grid.setUrlBg( "ui/common/gezikuang/tubiaodikuang/64.png");
 				this.addChild(grid);
 				grid.x = startX+70*i;
-				grid.y = 347;
+				grid.y = 360;
 				FaceUtil.SetItemGrid(grid,ItemUtil.convertClientItemInfo(itemlist[i]), true);
 				_rewardIcons.push(grid);
 			}

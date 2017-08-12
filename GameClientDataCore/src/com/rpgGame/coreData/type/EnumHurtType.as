@@ -58,6 +58,6 @@ package com.rpgGame.coreData.type
 		/** 回蓝 **/
 		public static const ADDMP : String = "fa_shu_zhi";
 		/** 礼金 **/
-		public static const GOLD : String = "res_bind_gold";
+		public static const BIND_GOLD : String = "lijin";
 	}
 }

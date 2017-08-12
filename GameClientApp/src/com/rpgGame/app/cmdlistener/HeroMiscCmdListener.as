@@ -215,7 +215,7 @@ package com.rpgGame.app.cmdlistener
 					noticeId=change>0?14:18;
 					if(change>0)
 					{
-						FightFaceHelper.showAttChange(EnumHurtType.GOLD,change);
+						FightFaceHelper.showAttChange(EnumHurtType.BIND_GOLD,change);
 					}
 					break;
 				case CharAttributeType.RES_MONEY:

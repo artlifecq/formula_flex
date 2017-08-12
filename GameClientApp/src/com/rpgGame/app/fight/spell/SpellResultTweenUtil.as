@@ -110,7 +110,7 @@
 			_timeDic=new Dictionary();
 			_timeDic[TweenAttrChange]=new TimeDelay("attr");
 			_timeDic[TweenCirt]=new TimeDelay("cirt");
-			_timeDic[TweenExp]=new TimeDelay("exp",0.3);
+			_timeDic[TweenExp]=new TimeDelay("exp",0.2,3000);
 			_timeDic[TweenHurt]=new TimeDelay("hurt");
 			_timeDic[TweenDiaoXue]=new TimeDelay("diaoxue",0.2,3000);
 			_timeDic[TweenZhanHun]=new TimeDelay("zhanhun");
@@ -176,8 +176,10 @@
 			myTimeline.append(new TweenLite(showobj, 0.7, {y:start.y-150,ease:Quart.easeOut}));//,ease:Expo.easeOut
 			myTimeline.addLabel("alpha1", 0);
 			myTimeline.addLabel("alpha0", 0.5);
+			myTimeline.addLabel("step3", 0.7);
 			myTimeline.insert(new TweenLite(showobj, 0.3, {alpha:1,scaleX:1,scaleY:1}), "alpha1");
-			myTimeline.insert(new TweenLite(showobj, 0.2, {alpha:0,y:start.y-170,scaleX:0.65,scaleY:0.65}), "alpha0");//,scaleX:0.5,scaleY:0.5
+			myTimeline.insert(new TweenLite(showobj, 0.2, {y:start.y-170,scaleX:0.8,scaleY:0.8}), "alpha0");//,scaleX:0.5,scaleY:0.5
+			myTimeline.insert(new TweenLite(showobj, 0.5, {alpha:0.6,y:"-80"}),"step3");//,ease:Expo.easeOut
 		}
 		
 		private static function getRand(num:Number):Number
@@ -202,7 +204,7 @@
 			}
 			
 		
-			showobj.x=end.x-60;
+			showobj.x=end.x;
 			showobj.y=end.y;
 			showobj.alpha=1;
 			showobj.scaleX=showobj.scaleY=1.7;
@@ -215,7 +217,7 @@
 			var pmX:String=calXPM(start,end);
 			var pmY:String=calYPM(start,end);
 			//calEndPos(start,end,200,true);
-			calTargetPos(start,end,getRandBewtten(180,230));
+			calTargetPos(start,end,getRandBewtten(230,270));
 			var xx:String="";
 			var yy:String="";
 			if(pmX=="-")
@@ -234,7 +236,7 @@
 //				yy="40";
 //			}
 			yy="-"+getRandBewtten(20,60);
-			var end2:Point=Point.interpolate(new Point(showobj.x,showobj.y),endPos,-0.4);
+			var end2:Point=Point.interpolate(new Point(showobj.x,showobj.y),endPos,-getRandBewtten(0.1,0.3));
 			var myTimeline:TimelineLite;
 			myTimeline = new TimelineLite({delay:0,onComplete:callBack,onCompleteParams:[showobj]});
 			myTimeline.append(new TweenLite(showobj, 0.5, {x:endPos.x,y:endPos.y,ease:Expo.easeOut,scaleX:1,scaleY:1}));//,ease:Expo.easeOut
@@ -265,7 +267,7 @@
 			var myTimeline:TimelineLite;
 			var del:Number=timeDelay(TweenDiaoXue);
 			myTimeline = new TimelineLite({delay:del,onStart:onTweenDiaoXueStart,onStartParams:[showobj],onComplete:callBack,onCompleteParams:[showobj]});
-			myTimeline.append(new TweenLite(showobj, 1, {y:showobj.y-150,alpha:1,ease:Circ.easeOut}));
+			myTimeline.append(new TweenLite(showobj, 1, {y:"-150",alpha:1,ease:Circ.easeOut}));
 //			myTimeline.addLabel("alpha1", 0);
 //			myTimeline.addLabel("alpha0", 0.4);
 //			myTimeline.insert(new TweenLite(showobj, 0.4, {delay:del,alpha:1,y:start.y-170,scaleX:0.7,scaleY:0.7,ease:Expo.easeOut}), "alpha1");
