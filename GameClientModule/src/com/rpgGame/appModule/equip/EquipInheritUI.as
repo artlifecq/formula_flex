@@ -422,7 +422,8 @@ package com.rpgGame.appModule.equip
 			
 			if(_targetEquipInfo){
 				targetGrid=_goodsbyPlayer.getDragDropItemByItemInfo(_targetEquipInfo);
-				targetGrid.isSelect=true;
+				if(targetGrid)
+					targetGrid.isSelect=true;
 				targetGrid=_goodsbyBag.getDragDropItemByItemInfo(_targetEquipInfo);
 				if(targetGrid)
 					targetGrid.isSelect=true;

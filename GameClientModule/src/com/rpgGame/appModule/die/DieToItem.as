@@ -70,5 +70,12 @@ package com.rpgGame.appModule.die
 				}
 			}
 		}
+		
+		public function clear():void
+		{
+			_skin.lbl_name.text="";
+			_icon.styleName="";
+			starNum(0);
+		}
 	}
 }

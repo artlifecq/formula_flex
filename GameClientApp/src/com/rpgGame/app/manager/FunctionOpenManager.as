@@ -235,7 +235,7 @@
 						AppManager.showAppNoHide(AppConstant.REDREWARD_PANLE);
 					}
 				}else if(info.id == 20){
-					if(Mgr.hunyinMgr.marriageInfos==null||Mgr.hunyinMgr.marriageInfos.state==5)
+					if(Mgr.hunyinMgr.marriageInfos==null||Mgr.hunyinMgr.marriageInfos.state==5||Mgr.hunyinMgr.marriageInfos.state==10)
 					{
 						AppManager.showApp(AppConstant.HUNYIN_QIUHUN);
 					}
