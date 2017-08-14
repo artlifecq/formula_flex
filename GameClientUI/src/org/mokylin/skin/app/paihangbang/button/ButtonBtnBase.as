@@ -59,7 +59,7 @@ package org.mokylin.skin.app.paihangbang.button
 						}
 					]
 				,
-				hhoverAndSelected:[
+				hoverAndSelected:[
 						{target:"labelDisplay",
 							name:"color",
 							value:0xe3d9bf
