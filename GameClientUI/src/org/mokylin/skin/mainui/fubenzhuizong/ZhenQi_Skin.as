@@ -373,9 +373,9 @@ package org.mokylin.skin.mainui.fubenzhuizong
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiKill = temp;
 			temp.name = "uiKill";
-			temp.styleName = "ui/common/yijisha.png";
-			temp.x = 67;
-			temp.y = 79;
+			temp.styleName = "ui/common/yijibai3.png";
+			temp.x = 141;
+			temp.y = 159;
 			return temp;
 		}
 

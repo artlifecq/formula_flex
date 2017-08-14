@@ -46,7 +46,7 @@ package com.rpgGame.appModule.task
 		private var TIMERDATA_1:int=15//倒计时时间
 		private var TIMERDATA_2:int=5//倒计时时间
 		private var initKey:Boolean=false;
-		private var currtTaskId:long;
+		private var currtTaskId:long=new long();
 		public function TaskLeadPanel()
 		{
 			_skin=new Zhuxian_Renwu();

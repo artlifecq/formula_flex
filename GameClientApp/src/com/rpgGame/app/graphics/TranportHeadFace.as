@@ -90,8 +90,8 @@ package com.rpgGame.app.graphics
 		
 		override protected function addAllBar() : void
 		{
-			addElement(_level);//,DecorCtrl.TOP_NAME
-			addElement(_mapName);
+			addElement(_level);//,
+			addElement(_mapName,DecorCtrl.TOP_NAME);
 			_mapName.y=-300;
 			_level.x = -50;
 			_level.y = -180;

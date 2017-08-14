@@ -138,7 +138,7 @@ package com.rpgGame.app.cmdlistener.engine
 			var sceneRole:SceneRole;
 				
 			TaskAutoManager.getInstance().stopAll();///////////////点击地面终止任务和挂机
-			
+			TrusteeshipManager.getInstance().isAutoWalking=false;
 			TrusteeshipManager.getInstance().isLeftDown=true;
 			this._isLeftDown = true;
 			if (CameraController.lockedOnPlayerController.ispanning)
@@ -206,6 +206,7 @@ package com.rpgGame.app.cmdlistener.engine
 		private function sceneEntityUp(position : Vector3D, currTarget : BaseObj3D, target : BaseObj3D) : void
 		{
 			this._isLeftDown = false;
+			TrusteeshipManager.getInstance().isAutoWalking=false;
 			TrusteeshipManager.getInstance().isLeftDown=false;
 			CONFIG::netDebug {
 				NetDebug.LOG("sceneEntityUp");

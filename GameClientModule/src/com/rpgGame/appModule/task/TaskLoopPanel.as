@@ -41,7 +41,7 @@ package com.rpgGame.appModule.task
 		private var ThereData:int;
 		private var selectId:int=1;
 		private var initKey:Boolean=false;
-		private var currtTaskId:long;
+		private var currtTaskId:long=new long();
 		public function TaskLoopPanel()
 		{
 			_skin=new Huanshi_Renwu();

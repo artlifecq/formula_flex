@@ -63,7 +63,7 @@ package com.rpgGame.app.manager
 		private var _tripleSkillCtrl:ControlTripleSkill;
 		public var nextSpell:Q_skill_model;
 		private var _isNormalSpell:Boolean = false;
-		
+		public var isAutoWalking:Boolean=false;
 		public function TrusteeshipManager()
 		{
 			_gTimer = new GameTimer("TrusteeshipManager", 500, 0, onUpdate);
