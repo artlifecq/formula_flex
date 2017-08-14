@@ -3,7 +3,6 @@ package com.rpgGame.appModule.role
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
 	import com.rpgGame.app.display3D.UIAvatar3D;
-	import com.rpgGame.app.manager.HunYinManager;
 	import com.rpgGame.app.manager.MenuManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
@@ -358,8 +357,8 @@ package com.rpgGame.appModule.role
 					_tishiEff=_tishiEffContaner.playInter3DAt(ClientConfig.getEffect("ui_juesezhuangbeikuang"),item.x+item.width/2+3,item.y+item.height/2+3,0);
 				else {
 					_tishiEff.start();
-					_tishiEff.x=item.x+item.width/2+3;
-					_tishiEff.y=item.y+item.height/2+3;
+					_tishiEff.x=item.x+item.width/2;
+					_tishiEff.y=item.y+item.height/2;
 					_tishiEff.visible=true;
 				}
 				MCUtil.BringToTop(_tishiEffContaner);
