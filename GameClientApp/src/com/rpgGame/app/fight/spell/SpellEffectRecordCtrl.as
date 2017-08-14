@@ -1,6 +1,7 @@
 package com.rpgGame.app.fight.spell
 {
 	import com.game.engine3D.scene.render.RenderUnit3D;
+	import com.rpgGame.coreData.cfg.SpellDataManager;
 	
 	import flash.utils.Dictionary;
 
@@ -33,19 +34,27 @@ package com.rpgGame.app.fight.spell
 			{
 				return;
 			}
-		
-			for each (var obj:Object in arr) 
+			//删除这个技能的所有特效,做个容错有可能特效还没播放
+			var len:int=arr.length;
+			for (var i:int = 0; i < len; i++) 
 			{
+				var obj:Object=arr[i];
 				if (obj.id==skill&&obj) 
 				{
-					obj.eff.visible=false;
+					delete _effectPlayerMap[obj.eff];
+					obj.eff.dispose();
+					obj.eff=null;
 				}
 			}
-		
+			delete _playeredEffectMap[player];
 		}
 		/**先播放特效，再收到失败的消息，先记录下特效，**/
 		public  static function addEffectRecord(player:Number,skill:int,effect:RenderUnit3D):void
 		{
+			if (SpellDataManager.getSpellData(skill).q_cancel==0) 
+			{
+				return;
+			}
 			var arr:*=_playeredEffectMap[player];
 			if (undefined==arr) 
 			{
@@ -73,8 +82,13 @@ package com.rpgGame.app.fight.spell
 					if (arr[i].eff==effect) 
 					{
 						arr.splice(i,1);
+						effect.isHiding=false;
 						break;
 					}
+				}
+				if (arr.length==0) 
+				{
+					delete _playeredEffectMap[player];
 				}
 			}
 		}

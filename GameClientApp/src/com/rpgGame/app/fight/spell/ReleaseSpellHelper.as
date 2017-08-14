@@ -11,6 +11,7 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.clientConfig.Q_skill_warning;
 	import com.rpgGame.coreData.type.RoleStateType;
+	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import flash.geom.Point;
 	
@@ -140,6 +141,11 @@ package com.rpgGame.app.fight.spell
 				var hardRef : AttackHardStateReference = spellInfo.atkor.stateMachine.getReference(AttackHardStateReference) as AttackHardStateReference;
 				hardRef.setParams(spellInfo.castTime);
 				spellInfo.atkor.stateMachine.transition(RoleStateType.CONTROL_ATTACK_HARD, hardRef, true);
+				SkillCDManager.getInstance().addSkillCDTime(spellInfo.spellData);
+			}
+			//主玩家的美人
+			if (spellInfo.atkor && spellInfo.atkor.usable && spellInfo.atkor.type==SceneCharType.GIRL_PET&&spellInfo.atkor.ownerIsMainChar)
+			{
 				SkillCDManager.getInstance().addSkillCDTime(spellInfo.spellData);
 			}
 			if(spellInfo.atkor == MainRoleManager.actor)

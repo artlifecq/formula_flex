@@ -43,13 +43,14 @@ package com.rpgGame.app.state.ai.pet
 			if(_petOwner)
 			{
 				var dis:int=MathUtil.getDistanceNoSqrt(_pet.pos.x,_pet.pos.y,_petOwner.pos.x,_petOwner.pos.y);
-				if(dis>GirlPetFollowAnimator.MIN_TRANS_DIS)
-				{
-					//超出视野了  执行待机
-//					onArrive();
-					SceneSender.reqPetTransferMessage((_pet.data as GirlPetData).ownerLongId);
-				}
-				else if(dis> 25000)
+//				if(dis>=GirlPetFollowAnimator.MIN_TRANS_DIS)
+//				{
+//					//超出视野了  执行待机
+////					onArrive();
+//					//SceneSender.reqPetTransferMessage((_pet.data as GirlPetData).ownerLongId);
+//				}
+//				else 
+				if(dis>GirlPetFollowAnimator.MIN_NEAR)
 				{
 					_isMoving=true;
 					//给服务器发送同步坐标

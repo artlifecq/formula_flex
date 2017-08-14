@@ -1,6 +1,12 @@
 package com.rpgGame.app.manager.ctrl
 {
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.coreData.role.GirlPetData;
+	import com.rpgGame.coreData.role.MonsterData;
+	import com.rpgGame.coreData.role.RoleData;
+	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.netData.fight.message.ResFightBroadcastMessage;
 	
 	import org.game.netCore.data.long;
@@ -63,8 +69,25 @@ package com.rpgGame.app.manager.ctrl
 		}
 		private function updateFightMe(tar:long):void
 		{
+			var role:SceneRole=SceneManager.getSceneObjByID(tar.ToGID()) as SceneRole;
+			if (!role) 
+			{
+				return;
+			}
 			_targetAttackMe.length=0;
-			_targetAttackMe.push(tar);
+			if (SceneCharType.GIRL_PET==role.type&&role.ownerIsMainChar==false) 
+			{
+				_targetAttackMe.push((role.data as GirlPetData).ownerLongId);
+			}
+			else if (SceneCharType.MONSTER==role.type&&MonsterData(role.data).ownerId!=0&&role.ownerIsMainChar==false) 
+			{
+				_targetAttackMe.push(new long((role.data as RoleData).ownerId));
+			}
+			else
+			{
+				_targetAttackMe.push(tar);
+			}
+			
 		}
 		public function get targets():Vector.<long>
 		{

@@ -4,6 +4,7 @@ package com.rpgGame.app.state.ai.pet
 	import com.game.engine3D.state.IState;
 	import com.game.engine3D.utils.MathUtil;
 	import com.rpgGame.app.manager.Mgr;
+	import com.rpgGame.app.manager.SkillCDManager;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.fight.FightManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -12,7 +13,9 @@ package com.rpgGame.app.state.ai.pet
 	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.sender.SpellSender;
 	import com.rpgGame.app.state.role.RoleStateUtil;
+	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
 	import com.rpgGame.core.state.ai.AIState;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.role.MonsterData;
@@ -96,14 +99,21 @@ package com.rpgGame.app.state.ai.pet
 						//	RoleStateUtil.walkToPos(MainRoleManager.actor, targerPos, 200, null, onArrive);
 						//walkrun=true;
 						var position : Vector3D = new Vector3D(targerPos.x, targerPos.z, 0, 0);
-						RoleStateUtil.walkToPos(MainRoleManager.actor, position, skill.q_range_limit*SceneConfig.TILE_HEIGHT,null, onArrive,null,null,true);
+						RoleStateUtil.walkToPos(MainRoleManager.actor, position, skill.q_range_limit*SceneConfig.TILE_HEIGHT,[_curTarget,skill], onArrive2Target,null,null,true);
 					}
 				}
 			}
 		}
-		private function onArrive():void
+		private function onArrive2Target(wref:WalkMoveStateReference):void
 		{
-			
+			var arr:Array=wref.data as Array;
+			var tar:long=arr[0];
+			var skill:Q_skill_model=arr[1];
+			if (!SkillCDManager.getInstance().getSkillHasCDTime(skill)) 
+			{
+				var pet:SceneRole=_machine.owner as SceneRole;
+				SpellSender.releaseSpellAtTarget(skill.q_skillID,0,tar);
+			}
 		}
 		private function selectTargetWithNone():void
 		{	

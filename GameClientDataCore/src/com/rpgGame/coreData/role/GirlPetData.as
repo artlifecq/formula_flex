@@ -33,6 +33,7 @@ package com.rpgGame.coreData.role
 			//			this.avatarInfo.setBodyResID("monster/pt_shiwei_006/pt_shiwei_006",null);
 			var q_pet:Q_girl_advance=PetAdvanceCfg.getPet(info.petModelId,info.rank);
 			this.avatarInfo.setBodyResID(q_pet.q_skinResID,null);
+			this.totalStat.moveSpeed=info.speed;
 		}
 		
 		public function get modId():int

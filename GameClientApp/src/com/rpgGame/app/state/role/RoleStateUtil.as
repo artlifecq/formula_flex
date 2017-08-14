@@ -173,7 +173,7 @@ package com.rpgGame.app.state.role
 				return false;
 			var camouflageEntity : SceneRole = SceneRole(role.getCamouflageEntity());
 			var walkRole : SceneRole = camouflageEntity || role;
-			if((walkRole.isMainChar || walkRole.isMainCamouflage||walkRole.ownerIsMainChar))
+			if((walkRole.isMainChar || walkRole.isMainCamouflage||(walkRole.type==SceneCharType.GIRL_PET&&walkRole.ownerIsMainChar)))
 			{
 				if (walkRole.stateMachine.isAttackHarding)
 				{
