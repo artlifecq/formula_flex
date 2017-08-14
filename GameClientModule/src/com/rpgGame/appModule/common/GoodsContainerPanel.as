@@ -441,7 +441,8 @@ package com.rpgGame.appModule.common
 			//拖出后仅在显示层清空此格子
 			
 			var srcFace:DragDropItem = getDragDropItemByItemInfo(info);
-			srcFace.isGary=true;//置灰
+			if(srcFace)
+				srcFace.isGary=true;//置灰
 			//			setGridInfo(info.index, null);//前清空
 			
 			startFaceMove();

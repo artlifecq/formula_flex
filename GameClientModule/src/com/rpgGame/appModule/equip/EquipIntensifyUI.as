@@ -809,7 +809,7 @@ package com.rpgGame.appModule.equip
 					}
 				}
 			}
-			result.sort(ItemManager.onSortUseEquip);
+			result.sort(sortForUse);
 			addExp=0;
 			useListIds=new Vector.<long>();
 			isToUp=false;
