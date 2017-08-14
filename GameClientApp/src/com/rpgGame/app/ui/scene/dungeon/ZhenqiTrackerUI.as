@@ -31,6 +31,7 @@ package com.rpgGame.app.ui.scene.dungeon
 	import flash.geom.Point;
 	
 	import feathers.controls.SkinnableContainer;
+	import feathers.utils.filter.GrayFilter;
 	
 	import gs.TweenLite;
 	
@@ -116,11 +117,7 @@ package com.rpgGame.app.ui.scene.dungeon
 			}
 			if(qzm!=null)
 			{
-				pos=new Point(qzm.q_move_x,qzm.q_move_y);
-			}
-			if(pos!=null)
-			{
-				TrusteeshipManager.getInstance().startAutoFightToPos([SceneSwitchManager.currentMapId,pos.x,pos.y],1,-1);
+				TrusteeshipManager.getInstance().startAutoFightToPos([SceneSwitchManager.currentMapId,qzm.q_move_x,qzm.q_move_y],1,-1);
 			}
 		}
 		/**寻下一波未完成的怪*/
@@ -262,7 +259,16 @@ package com.rpgGame.app.ui.scene.dungeon
 			var rItme:Renwu_Item2;
 			killNumList.add(qid,countNum);
 			rItme=killBut.skin as Renwu_Item2;
-			rItme.labelDisplay.htmlText="<font color='#eaeabc'>击杀：</font><u>"+MonsterDataManager.getMonsterName(monsterId)+"</u><font color='#eaeabc'>("+killNumList.getValue(qid)+"/"+allNum+")</font>";
+			if(countNum>=allNum)
+			{
+				//GrayFilter.gray(killBut);
+				rItme.labelDisplay.htmlText="<font color='#8b8d7b'>击杀：<u>"+MonsterDataManager.getMonsterName(monsterId)+"</u>("+killNumList.getValue(qid)+"/"+allNum+")</font>";
+			}
+			else
+			{
+				//GrayFilter.unGray(killBut);
+				rItme.labelDisplay.htmlText="<font color='#eaeabc'>击杀：</font><u>"+MonsterDataManager.getMonsterName(monsterId)+"</u><font color='#eaeabc'>("+killNumList.getValue(qid)+"/"+allNum+")</font>";
+			}
 			killBut.visible=true;
 		}
 		private var remainTime:int;
@@ -417,7 +423,7 @@ package com.rpgGame.app.ui.scene.dungeon
 					count=i;
 				}
 			}
-			
+			_skin.uiKill.y=_skin.navi1.y-30;
 			_skin.ui_bg.height=skinList[count].y+skinList[count].height+7;
 			
 		}

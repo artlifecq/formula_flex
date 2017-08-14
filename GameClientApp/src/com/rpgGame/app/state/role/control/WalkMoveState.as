@@ -4,6 +4,7 @@ package com.rpgGame.app.state.role.control
 	import com.game.engine3D.utils.MathUtil;
 	import com.game.engine3D.utils.PathFinderUtil;
 	import com.game.mainCore.libCore.utils.ZMath;
+	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
@@ -66,6 +67,7 @@ package com.rpgGame.app.state.role.control
 		{
 			super.execute();
 			_stateReference = null;
+			TrusteeshipManager.getInstance().isAutoWalking=false;
 			if (_ref is WalkMoveStateReference)
 			{
 				_stateReference = _ref as WalkMoveStateReference;
@@ -469,6 +471,7 @@ package com.rpgGame.app.state.role.control
 
 		override public function enterPass(prevState : IState, force : Boolean = false) : Boolean
 		{
+			
 			if (prevState)
 			{
 				if (prevState.type == RoleStateType.CONTROL_TRAIL_MOVE)
@@ -532,7 +535,7 @@ package com.rpgGame.app.state.role.control
 			else if ((_machine as RoleStateMachine).isAttacking)
 			{
 				var attackState : AttackState = _machine.getCurrState(ActionState) as AttackState;
-				if (!force && !attackState.attackBroken && !attackState.canWalkRelease&&!TaskAutoManager.getInstance().isTasking)//在自动任务中寻路不应受影响
+				if (!force && !attackState.attackBroken && !attackState.canWalkRelease&&!TrusteeshipManager.getInstance().isAutoWalking)//在自动走路中寻路不应受影响
 				{
 					Lyt.a("walk-209");
 					return false;

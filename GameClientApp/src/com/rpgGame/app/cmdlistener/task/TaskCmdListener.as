@@ -2,8 +2,10 @@ package com.rpgGame.app.cmdlistener.task
 {
 	import com.rpgGame.app.manager.collect.CollectManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.SkillEvent;
@@ -15,6 +17,7 @@ package com.rpgGame.app.cmdlistener.task
 	import com.rpgGame.coreData.clientConfig.Q_npc;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.SceneCollectData;
+	import com.rpgGame.coreData.type.TaskType;
 	import com.rpgGame.netData.npc.message.ResStartGatherMessage;
 	import com.rpgGame.netData.npc.message.ResStopGatherMessage;
 	import com.rpgGame.netData.task.message.CSDropTaskMessage;
@@ -82,7 +85,16 @@ package com.rpgGame.app.cmdlistener.task
 					EventManager.dispatchEvent(TaskEvent.TASK_NEW_MATION,taskData.q_mission_mainType);
 					if(taskData.q_fly==1&&taskData.q_pathing!="")//系统神行符
 					{
-						AppManager.showAppNoHide(AppConstant.TASK_FLY_PANEL,msg.taskInfo.taskModelId);
+						if(TaskAutoManager.FLYTIME>0)
+						{
+							AppManager.showAppNoHide(AppConstant.TASK_FLY_PANEL,msg.taskInfo.taskModelId);
+						}
+						else
+						{
+							var postPath:Array=TaskMissionManager.getTaskPathingByType(taskData.q_mission_mainType,0);
+							TaskUtil.postTaskFly(postPath,taskData.q_mission_mainType);
+						}
+						
 					}
 				}
 			}

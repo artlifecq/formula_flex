@@ -22,6 +22,7 @@ package com.rpgGame.appModule.task
 	
 	import gs.TweenLite;
 	
+	import org.game.netCore.data.long;
 	import org.mokylin.skin.mainui.renwu.BangPai_RenWu;
 	import org.mokylin.skin.mainui.renwu.Zhuxian_Renwu;
 	
@@ -49,6 +50,7 @@ package com.rpgGame.appModule.task
 		private var TIMERDATA_1:int=15//倒计时时间
 		private var TIMERDATA_2:int=5//倒计时时间
 		private var initKey:Boolean=false;
+		private var currtTaskId:long=new long();
 		public function TaskGuildPanel()
 		{
 			_skin=new BangPai_RenWu();
@@ -105,8 +107,17 @@ package com.rpgGame.appModule.task
 				initKey=true;
 				init();
 			}
-			setView();
-			timeInit()		
+			if(currtTaskId.ToGID()!=TaskMissionManager.mainTaskInfo.taskId.ToGID())
+			{
+				if(currtimer>0)
+				{
+					subFinish(currtTaskId);
+				}
+				
+				currtTaskId=TaskMissionManager.getTaskInfoByType(TaskType.MAINTYPE_GUILDDAILYTASK).taskId;
+				setView();
+				timeInit();
+			}	
 		}
 		override protected function onStageResize(sw : int, sh : int) : void
 		{
@@ -137,10 +148,9 @@ package com.rpgGame.appModule.task
 			}
 		}
 		
-		private function subFinish():void
+		private function subFinish(taskId:long):void
 		{
-			okBut.isEnabled=false;
-			TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(TaskType.MAINTYPE_GUILDDAILYTASK).taskId);	
+			TaskSender.sendfinishTaskMessage(taskId);	
 		}
 		
 		private function setView():void

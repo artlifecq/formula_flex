@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.task
 {
+	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
@@ -27,6 +28,7 @@ package com.rpgGame.appModule.task
 	public class TaskFlySend extends SkinUIPanel
 	{
 		private var _skin :AlertSend;
+		private var taskId:int;
 		public function TaskFlySend()
 		{
 			_skin=new AlertSend();
@@ -35,7 +37,9 @@ package com.rpgGame.appModule.task
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
 		{
 			super.show(data,openTable,parentContiner);
-			setTime(5);
+			
+			taskId=int(data);
+			setTime(TaskAutoManager.FLYTIME);
 		}
 		override public function hide():void
 		{
@@ -80,15 +84,23 @@ package com.rpgGame.appModule.task
 		private function send():void
 		{
 			hide();
-			if(TaskMissionManager.getMainTaskIsFinish()&&TaskMissionManager.getMainTaskHaveNpc())
+			var taskData:Q_mission_base=TaskMissionCfgData.getTaskByID(taskId);
+			if(taskData)
 			{
-				TaskUtil.npcTaskFly(TaskMissionManager.getMainTaskNpcAreaId(),TaskType.MAINTYPE_MAINTASK);
+				var postPath:Array=TaskMissionManager.getTaskPathingByType(taskData.q_mission_mainType,0);
+				TaskUtil.postTaskFly(postPath,taskData.q_mission_mainType);
 			}
-			else
-			{
-				var postPath:Array=TaskMissionManager.getPathingByType(TaskType.MAINTYPE_MAINTASK,0);
-				TaskUtil.postTaskFly(postPath,TaskType.MAINTYPE_MAINTASK);
-			}
+			
+//			
+//			if(TaskMissionManager.getMainTaskIsFinish()&&TaskMissionManager.getMainTaskHaveNpc())
+//			{
+//				TaskUtil.npcTaskFly(TaskMissionManager.getMainTaskNpcAreaId(),TaskType.MAINTYPE_MAINTASK);
+//			}
+//			else
+//			{
+//				var postPath:Array=TaskMissionManager.getPathingByType(TaskType.MAINTYPE_MAINTASK,0);
+//				TaskUtil.postTaskFly(postPath,TaskType.MAINTYPE_MAINTASK);
+//			}
 			
 		}
 	}

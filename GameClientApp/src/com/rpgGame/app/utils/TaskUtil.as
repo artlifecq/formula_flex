@@ -520,7 +520,7 @@ package com.rpgGame.app.utils
 		private static var walkAdd:int=0;
 		public static function postWalk(post0 : int, posx:Number,posy:Number,onArrive:Function=null,data:Object=null,needSprite:Boolean=false) : void
 		{
-			Lyt.a("任务开始寻路==========");
+			Lyt.a("任务开始寻路=====");
 			var walking:Boolean=MainRoleSearchPathManager.walkToScenePreAttack(post0, posx, posy,onArrive, 100,data,needSprite);
 		}
 		/**
