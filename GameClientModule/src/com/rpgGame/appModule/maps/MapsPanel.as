@@ -93,7 +93,7 @@ package com.rpgGame.appModule.maps
 			EventManager.addEvent(UserMoveEvent.MOVE_THROUGH, onDrawPath);
 			EventManager.addEvent(UserMoveEvent.MOVE_RESCHANGE, onDrawPath);
 			EventManager.addEvent(MapEvent.MAP_JUMP_COMPLETE, onDrawPath);
-			
+			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE,onDrawPath);
 		}
 		private function removeEvent() : void
 		{
@@ -102,6 +102,7 @@ package com.rpgGame.appModule.maps
 			EventManager.removeEvent(UserMoveEvent.MOVE_THROUGH, onDrawPath);
 			EventManager.removeEvent(UserMoveEvent.MOVE_RESCHANGE, onDrawPath);
 			EventManager.removeEvent(MapEvent.MAP_JUMP_COMPLETE, onDrawPath);
+			EventManager.removeEvent(MapEvent.MAP_SWITCH_COMPLETE,onDrawPath);
 		}
 		private function onMapChangeCompleteHandler() : void 
 		{

@@ -61,6 +61,7 @@ package com.rpgGame.app.manager.task
 		public static var AUTOMAIN:int=60000;//拉主线任务时间
 		public static var AUTOTREASEUER:int=120000;//拉环式任务时间
 		public static var PANLVE:int=30;//任务面板切换等级
+		public static var FLYTIME:int=5;//任务面板切换等级
 		
 		public function TaskAutoManager()
 		{
@@ -85,7 +86,7 @@ package com.rpgGame.app.manager.task
 			AUTOMAIN=GlobalSheetData.getSettingInfo(512)!=null?GlobalSheetData.getSettingInfo(512).q_int_value*1000:10*1000;
 			AUTOTREASEUER=GlobalSheetData.getSettingInfo(521)!=null?GlobalSheetData.getSettingInfo(521).q_int_value*1000:20*1000;
 			PANLVE=GlobalSheetData.getSettingInfo(533)!=null?GlobalSheetData.getSettingInfo(533).q_int_value:30;
-			
+			FLYTIME=GlobalSheetData.getSettingInfo(534)!=null?GlobalSheetData.getSettingInfo(534).q_int_value:5;
 		}
 		private function onApphide( ev:AppEvent ):void
 		{
@@ -290,8 +291,9 @@ package com.rpgGame.app.manager.task
 				TrusteeshipManager.getInstance().stopAll();
 				GatherAutoManager.getInstance().stopGatherAuto();
 				SceneRoleSelectManager.selectedRole=null;
-				TweenLite.killDelayedCallsTo(startTaskAuto);
-				TweenLite.delayedCall(1, startTaskAuto,[otherType]);
+				//TweenLite.killDelayedCallsTo(startTaskAuto);
+				//TweenLite.delayedCall(1, startTaskAuto,[otherType]);
+				startTaskAuto(otherType);
 			}
 			var missionType:int=TaskMissionManager.getTaskMissionType(otherType);
 			if(missionType==TaskType.SUB_GATHER||missionType==TaskType.SUB_USEITEM)

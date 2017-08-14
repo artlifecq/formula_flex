@@ -22,6 +22,7 @@ package com.rpgGame.appModule.task
 	
 	import gs.TweenLite;
 	
+	import org.game.netCore.data.long;
 	import org.mokylin.skin.mainui.renwu.Zhuxian_Renwu;
 	
 	import starling.display.DisplayObject;
@@ -45,6 +46,7 @@ package com.rpgGame.appModule.task
 		private var TIMERDATA_1:int=15//倒计时时间
 		private var TIMERDATA_2:int=5//倒计时时间
 		private var initKey:Boolean=false;
+		private var currtTaskId:long=new long();
 		public function TaskLeadPanel()
 		{
 			_skin=new Zhuxian_Renwu();
@@ -61,31 +63,6 @@ package com.rpgGame.appModule.task
 			timerLabel=_skin.lb_time;
 			okBut=_skin.btn_ok;
 			icoListGroup=new RewardGroup(IcoSizeEnum.ICON_42,_skin.ioc_0,RewardGroup.ALIN_LEFT,4,6,6);
-			
-			
-			/*icoBgList=new Vector.<UIAsset>();
-			icoBgList.push(_skin.ioc_0);
-
-			icoList=new Vector.<IconCDFace>();
-			var i:int;
-			for(i=0;i<icoBgList.length;i++)
-			{
-				var ico:IconCDFace=IconCDFace.create(IcoSizeEnum.ICON_42);
-				ico.showCD=false;
-				ico.x=icoBgList[i].x+3;
-				ico.y=icoBgList[i].y+3;
-				ico.visible=false;
-				icoBgList[i].visible=false;
-				icoList.push(ico);
-				this.addChild(ico);
-			}*/
-			
-			//titleLabel.htmlText="主线任务";
-			//nameLabel.htmlText="第一章:新手村";
-			//navLabel.htmlText="任务奖励";
-			//speakLabel.htmlText="狗贼宇文拓在会稽郡释放万灵血阵，会稽镇一夜之间只剩血光一片，他们聚集在此欲找官府讨要说法，却遭官兵残杀。";
-			//timerLabel.htmlText="10秒后自动领取奖励";
-			//titleLabel.htmlText="主线任务";
 			nameLabel.htmlText="";
 			navLabel.htmlText="任务奖励";
 			speakLabel.htmlText="";
@@ -129,8 +106,18 @@ package com.rpgGame.appModule.task
 				initKey=true;
 				init();
 			}
-			setView();
-			timeInit()		
+			if(currtTaskId.ToGID()!=TaskMissionManager.mainTaskInfo.taskId.ToGID())
+			{
+				if(currtimer>0)
+				{
+					subFinish(currtTaskId);
+				}
+				
+				currtTaskId=TaskMissionManager.mainTaskInfo.taskId;
+				setView();
+				timeInit();
+			}
+					
 		}
 		override protected function onStageResize(sw : int, sh : int) : void
 		{
@@ -141,12 +128,12 @@ package com.rpgGame.appModule.task
 		override public function hide():void 
 		{
 			timer.stop();
-			currtimer=TIMERDATA_1;
+			currtimer=0;
 			if(this.visible&&this.parent!=null&&TaskMissionManager.getMainTaskIsFinish())
 			{
 				icoListGroup.tweeRewardInBag();
 				TweenLite.killDelayedCallsTo(subFinish);
-				TweenLite.delayedCall(0.5, subFinish);
+				TweenLite.delayedCall(0.5, subFinish,[TaskMissionManager.mainTaskInfo.taskId]);
 			}
 			super.hide();
 		}
@@ -161,11 +148,11 @@ package com.rpgGame.appModule.task
 			}
 		}
 		
-		private function subFinish():void
+		private function subFinish(taskId:long):void
 		{
 			//okBut.isEnabled=false;
-			TaskMissionManager.flashMainTaskId=TaskMissionManager.mainTaskInfo.taskId;
-			TaskSender.sendfinishTaskMessage(TaskMissionManager.mainTaskInfo.taskId);
+			TaskMissionManager.flashMainTaskId=taskId;
+			TaskSender.sendfinishTaskMessage(taskId);
 			
 		}
 		
