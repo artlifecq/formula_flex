@@ -12,7 +12,6 @@ package com.game.engine3D.scene.render.vo
 	import com.game.engine3D.vo.BaseObj3D;
 	import com.game.engine3D.vo.BaseObjSyncInfo;
 	
-	import flash.display.BlendMode;
 	import flash.geom.Matrix3D;
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
