@@ -6,6 +6,7 @@ package com.rpgGame.app.state.ai
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.ai.pet.GirlPetAttackState;
 	import com.rpgGame.app.state.ai.pet.GirlPetFollowState;
+	import com.rpgGame.app.state.ai.pet.GirlPetSpeakState;
 	import com.rpgGame.app.state.ai.pet.GirlPetTransLockState;
 	import com.rpgGame.core.state.ai.AINone;
 	import com.rpgGame.core.state.ai.AIState;
@@ -94,6 +95,9 @@ package com.rpgGame.app.state.ai
 					break;
 				case AIStateType.AI_GIRL_ATTACK:
 					state=new GirlPetAttackState();
+					break; 
+				case AIStateType.AI_GIRL_SPEAK:
+					state=new GirlPetSpeakState();
 					break; 
 			}
 			if (!state)
