@@ -188,7 +188,7 @@ package com.rpgGame.app.ui.scene
 		private function getCityInfo(msg:ResGuildWarCityBriefnessInfoMessage):void
 		{
 			var name:String=EnumCity.getCityName(msg.cityId,ClientConfig.loginAreaId)
-			_skin.lbHeadName.text=name.substr(1,name.length-1)+"争霸战";
+			_skin.lbHeadName.text=name.substr(1,name.length-2)+"争霸战";
 			
 			cfg=QSinglecitybaseCfgData.getCityCfg(msg.cityId);
 			defendCmapId=msg.defendCmapId;
