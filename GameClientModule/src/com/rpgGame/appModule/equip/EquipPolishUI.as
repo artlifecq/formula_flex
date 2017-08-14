@@ -443,16 +443,35 @@ package com.rpgGame.appModule.equip
 			userMon=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)+ MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY);
 			for(var i:int=0;i<result.length;i++){
 				item=result[i];
-				addExp+=item.qItem.q_strengthen_num;
-				useMon=addExp*perMon;
-				if(userMon<useMon){//钱不够
-					addExp-=item.qItem.q_strengthen_num;
-					break;
+				
+				if(item.type==GoodsType.STRENGTH){
+					for(var j:int=0;j<item.itemInfo.num;j++)
+					{
+						addExp+=item.qItem.q_strengthen_num;
+						useMon=addExp*perMon;
+						if(userMon<useMon){//钱不够
+							addExp-=item.qItem.q_strengthen_num;
+							break;
+						}
+						useListIds.push(item.itemInfo.itemId);
+						if(addExp>EquipPolishCfg.maxCfg.q_exp){
+							isToUp=true;//到顶级了
+							break;
+						}
+					}
 				}
-				useListIds.push(item.itemInfo.itemId);
-				if(addExp>EquipPolishCfg.maxCfg.q_exp){//到顶级了
-					isToUp=true;
-					break;
+				else{
+					addExp+=item.qItem.q_strengthen_num;
+					useMon=addExp*perMon;
+					if(userMon<useMon){//钱不够
+						addExp-=item.qItem.q_strengthen_num;
+						break;
+					}
+					useListIds.push(item.itemInfo.itemId);
+					if(addExp>EquipPolishCfg.maxCfg.q_exp){//到顶级了
+						isToUp=true;
+						break;
+					}
 				}
 			}
 			

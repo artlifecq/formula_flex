@@ -816,16 +816,34 @@ package com.rpgGame.appModule.equip
 			var maxCfg:Q_equip_strength=EquipStrengthCfg.getStrengthCfg(targetEquipInfo.qItem.q_kind,targetEquipInfo.qItem.q_job,targetEquipInfo.qItem.q_max_strengthen);
 			for(var i:int=0;i<result.length;i++){
 				item=result[i];
-				addExp+=item.qItem.q_strengthen_num;
-				useMon=addExp*perMon;
-				if(userMon<useMon){//钱不够
-					addExp-=item.qItem.q_strengthen_num;
-					break;
+				if(item.type==GoodsType.STRENGTH){
+					for(var j:int=0;j<item.itemInfo.num;j++)
+					{
+						addExp+=item.qItem.q_strengthen_num;
+						useMon=addExp*perMon;
+						if(userMon<useMon){//钱不够
+							addExp-=item.qItem.q_strengthen_num;
+							break;
+						}
+						useListIds.push(item.itemInfo.itemId);
+						if(addExp>maxCfg.q_exp){
+							isToUp=true;//到顶级了
+							break;
+						}
+					}
 				}
-				useListIds.push(item.itemInfo.itemId);
-				if(addExp>maxCfg.q_exp){
-					isToUp=true;//到顶级了
-					break;
+				else{
+					addExp+=item.qItem.q_strengthen_num;
+					useMon=addExp*perMon;
+					if(userMon<useMon){//钱不够
+						addExp-=item.qItem.q_strengthen_num;
+						break;
+					}
+					useListIds.push(item.itemInfo.itemId);
+					if(addExp>maxCfg.q_exp){
+						isToUp=true;//到顶级了
+						break;
+					}
 				}
 			}
 			
