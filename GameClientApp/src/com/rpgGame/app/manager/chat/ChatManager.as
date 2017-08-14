@@ -524,6 +524,9 @@ package com.rpgGame.app.manager.chat
 			hyperInfos=assemblyHyperInfo();
 			var sendMsgStr : String = newContent;
 			sendMsgStr = StringFilter.match(sendMsgStr, "*"); //发送前就把敏感字去掉
+			if(sendMsgStr.length>ChatCfgData.MAX_CHAR_LENGTH){
+				sendMsgStr=sendMsgStr.substr(0,ChatCfgData.MAX_CHAR_LENGTH);
+			}
 			ChatSender.cs_sendChat(sendMsgStr, channel, targetName, hyperInfos);	
 		}
 		

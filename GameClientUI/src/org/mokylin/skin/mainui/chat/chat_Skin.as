@@ -284,6 +284,7 @@ package org.mokylin.skin.mainui.chat
 			temp.name = "btn_send";
 			temp.height = 26;
 			temp.styleClass = org.mokylin.skin.mainui.chat.button.ButtonChat_fasong;
+			temp.width = 45;
 			temp.x = 320;
 			temp.y = 1;
 			return temp;

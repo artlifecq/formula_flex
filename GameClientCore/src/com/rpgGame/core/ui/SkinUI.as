@@ -51,6 +51,11 @@ package com.rpgGame.core.ui
 
 		}
 
+		public function get stateSkin():StateSkin
+		{
+			return _stateSkin;
+		}
+
 		private function __onStageResize(e : *) : void
 		{
 			if (_stage != null)

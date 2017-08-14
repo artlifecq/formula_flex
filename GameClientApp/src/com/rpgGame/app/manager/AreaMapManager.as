@@ -4,6 +4,7 @@ package com.rpgGame.app.manager
 	import com.game.engine3D.vo.AreaMapData;
 	import com.game.engine3D.vo.MapPointSet;
 	import com.game.engine3D.vo.map.ClientMapAreaData;
+	import com.game.engine3D.vo.map.ClientMapData;
 	import com.game.engine3D.vo.map.MapAreaTypeEnum;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
@@ -229,7 +230,11 @@ package com.rpgGame.app.manager
 		public static function updateMapDataAreaMap() : void
 		{
 			var otherAreaMap : AreaMap = SceneManager.getScene().getAreaMap(EnumAreaMapType.OTHER_AREA);
-			var areaDatas : Array = SceneManager.clientMapData.areaDatas;
+			var mapData:ClientMapData=SceneManager.clientMapData;
+			if(!mapData){
+				return;
+			}
+			var areaDatas : Array = mapData.areaDatas;
 			trace(areaDatas);
 			for each (var areaData : ClientMapAreaData in areaDatas)
 			{
