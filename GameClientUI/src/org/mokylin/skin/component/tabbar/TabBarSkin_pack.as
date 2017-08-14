@@ -26,17 +26,38 @@ package org.mokylin.skin.component.tabbar
 			this.elementsContent = [];
 			
 			states = {
+				upAndSelected:[
+						{target:"labelDisplay",
+							name:"color",
+							value:0xeaeabc
+						}
+					]
+				,
 				hover:[
 						{target:"labelDisplay",
 							name:"color",
-							value:0xe1d4a9
+							value:0xeaeabc
 						}
 					]
 				,
 				up:[
 						{target:"labelDisplay",
 							name:"color",
-							value:0xaea790
+							value:0xa3a594
+						}
+					]
+				,
+				hoverAndSelected:[
+						{target:"labelDisplay",
+							name:"color",
+							value:0xeaeabc
+						}
+					]
+				,
+				downAndSelected:[
+						{target:"labelDisplay",
+							name:"color",
+							value:0xeaeabc
 						}
 					]
 				,
@@ -48,12 +69,12 @@ package org.mokylin.skin.component.tabbar
 						,
 						{target:"labelDisplay",
 							name:"color",
-							value:0xaea790
+							value:0xa3a594
 						}
 						,
 						{target:"labelDisplay",
 							name:"nativeFilters",
-							value:Fontter.filterObj["labelFilterBlack"]
+							value:Fontter.filterObj["textFilterBlackGreen"]
 						}
 						,
 						{target:"labelDisplay",
@@ -81,8 +102,8 @@ package org.mokylin.skin.component.tabbar
 			temp.right = 0;
 			temp.text = "活动大厅";
 			temp.textAlign = "center";
-			temp.color = 0xaea790;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xa3a594;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.verticalAlign = "middle";
 			temp.y = 3;
 			return temp;

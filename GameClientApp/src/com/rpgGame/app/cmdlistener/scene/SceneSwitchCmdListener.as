@@ -12,11 +12,13 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppInfo;
 	import com.rpgGame.core.app.AppLoadManager;
+	import com.rpgGame.core.events.ActivityEvent;
 	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.clientConfig.Q_map;
 	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
+	import com.rpgGame.coreData.info.map.EnumMapZones;
 	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
 	
@@ -188,6 +190,11 @@ package com.rpgGame.app.cmdlistener.scene
 			var mapID : int = SceneSwitchManager.currentMapId;
 			var cfg : SceneData = MapDataManager.getMapInfo(mapID);
 			var qmap:Q_map=cfg.getData();
+			if(qmap.q_map_zones==EnumMapZones.MAP_COPY){
+				EventManager.dispatchEvent(ActivityEvent.SHOW_HIDE_ALL,false);
+			}else{
+				EventManager.dispatchEvent(ActivityEvent.SHOW_HIDE_ALL,true);
+			}
 			if(qmap.q_enter_autofight==1&&cfg.getData().q_autofight_seat){//进入后自动战斗
 				var p:Array=JSONUtil.decode(cfg.getData().q_autofight_seat);
 				//MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, p[0], p[1],finishWalk, 0);

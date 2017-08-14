@@ -521,7 +521,7 @@ package com.rpgGame.appModule.guild.war
 				if(!info.occupyGuildId&&!info.attackGuildId){
 					return -1;
 				}
-				if(info.attackGuildId&&info.attackGuildId.hexValue!=myGuildId&&info.occupyGuildId&&info.occupyGuildId.hexValue!=myGuildId){//攻方不是自己守方不是自己
+				if(info.state!=2&&info.attackGuildId&&info.attackGuildId.hexValue!=myGuildId&&info.occupyGuildId&&info.occupyGuildId.hexValue!=myGuildId){//攻方不是自己守方不是自己
 					return -1;
 				}
 			}
