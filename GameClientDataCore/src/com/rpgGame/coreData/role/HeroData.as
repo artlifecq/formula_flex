@@ -22,6 +22,7 @@ package com.rpgGame.coreData.role
 	import com.rpgGame.coreData.type.SpellTargetType;
 	import com.rpgGame.netData.map.bean.PlayerInfo;
 	import com.rpgGame.netData.player.bean.MyPlayerInfo;
+	import com.rpgGame.netData.structs.IntKeyValue;
 	
 	import flash.geom.Point;
 	import flash.geom.Vector3D;
@@ -97,6 +98,11 @@ package com.rpgGame.coreData.role
 		public var loveName : String = "";
 		/**今天接了几次镖车任务**/
 		public var biaoTimes : int;
+		
+		/**
+		 *额外需要显示的参数 
+		 */
+		public var keyValueList:Vector.<IntKeyValue>;
 		
 		/**
 		 * 角色阶段---每个阶段对应的骨骼不一样，动作有所升级 
@@ -497,6 +503,8 @@ package com.rpgGame.coreData.role
 			data.guildMemberType = info.guildMemberType;
 			data.guildId=info.guildId;
 			RoleData.readGeneric(data, new Point(info.position.x,info.position.y));
+			
+			data.keyValueList=info.keyValueList;
 		}
 		
 		//		/**

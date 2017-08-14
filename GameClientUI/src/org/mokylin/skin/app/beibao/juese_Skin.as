@@ -88,6 +88,14 @@ package org.mokylin.skin.app.beibao
 
 		public var msName:feathers.controls.UIAsset;
 
+		public var name_by:feathers.controls.UIAsset;
+
+		public var name_lj:feathers.controls.UIAsset;
+
+		public var name_yb:feathers.controls.UIAsset;
+
+		public var name_yz:feathers.controls.UIAsset;
+
 		public var numLevel:feathers.controls.UINumber;
 
 		public var num_miaoshang:feathers.controls.UINumber;
@@ -488,42 +496,6 @@ package org.mokylin.skin.app.beibao
 			return temp;
 		}
 
-		private function __juese_Skin_UIAsset26_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/shuxing/yl.png";
-			temp.x = 25;
-			temp.y = 2;
-			return temp;
-		}
-
-		private function __juese_Skin_UIAsset27_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/shuxing/yb.png";
-			temp.x = 25;
-			temp.y = 27;
-			return temp;
-		}
-
-		private function __juese_Skin_UIAsset28_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/shuxing/lj.png";
-			temp.x = 185;
-			temp.y = 27;
-			return temp;
-		}
-
-		private function __juese_Skin_UIAsset29_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/shuxing/by.png";
-			temp.x = 185;
-			temp.y = 2;
-			return temp;
-		}
-
 		private function __juese_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -799,7 +771,7 @@ package org.mokylin.skin.app.beibao
 			temp.name = "money";
 			temp.x = 17;
 			temp.y = 345;
-			temp.elementsContent = [__juese_Skin_UIAsset22_i(),__juese_Skin_UIAsset23_i(),__juese_Skin_UIAsset24_i(),__juese_Skin_UIAsset25_i(),__juese_Skin_UIAsset26_i(),__juese_Skin_UIAsset27_i(),__juese_Skin_UIAsset28_i(),__juese_Skin_UIAsset29_i(),txt_yingzi_i(),txt_yuanbao_i(),txt_yingzibang_i(),txt_lijin_i(),icon_yingzi_i(),icon_yuanbao_i(),icon_yingzibang_i(),icon_lijin_i()];
+			temp.elementsContent = [__juese_Skin_UIAsset22_i(),__juese_Skin_UIAsset23_i(),__juese_Skin_UIAsset24_i(),__juese_Skin_UIAsset25_i(),name_yz_i(),name_yb_i(),name_lj_i(),name_by_i(),txt_yingzi_i(),txt_yuanbao_i(),txt_yingzibang_i(),txt_lijin_i(),icon_yingzi_i(),icon_yuanbao_i(),icon_yingzibang_i(),icon_lijin_i()];
 			return temp;
 		}
 
@@ -811,6 +783,50 @@ package org.mokylin.skin.app.beibao
 			temp.styleName = "ui/app/beibao/shuxing/ms.png";
 			temp.x = 16;
 			temp.y = 12;
+			return temp;
+		}
+
+		private function name_by_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			name_by = temp;
+			temp.name = "name_by";
+			temp.styleName = "ui/common/shuxing/by.png";
+			temp.x = 185;
+			temp.y = 2;
+			return temp;
+		}
+
+		private function name_lj_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			name_lj = temp;
+			temp.name = "name_lj";
+			temp.styleName = "ui/common/shuxing/lj.png";
+			temp.x = 185;
+			temp.y = 27;
+			return temp;
+		}
+
+		private function name_yb_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			name_yb = temp;
+			temp.name = "name_yb";
+			temp.styleName = "ui/common/shuxing/yb.png";
+			temp.x = 25;
+			temp.y = 27;
+			return temp;
+		}
+
+		private function name_yz_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			name_yz = temp;
+			temp.name = "name_yz";
+			temp.styleName = "ui/common/shuxing/yl.png";
+			temp.x = 25;
+			temp.y = 2;
 			return temp;
 		}
 

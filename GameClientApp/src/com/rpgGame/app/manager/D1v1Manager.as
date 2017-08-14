@@ -102,7 +102,6 @@ package com.rpgGame.app.manager
 			// TODO Auto Generated method stub
 			AppManager.showApp(AppConstant.BATTLE_D1V1_READY_PANEL,msg.delayTime);
 			AppManager.showApp(AppConstant.BATTLE_D1V1_HEAD_PANEL,msg);
-			EventManager.dispatchEvent(ActivityEvent.SHOW_HIDE_ALL,false);
 		}
 		public function SCStartRaceHandler(msg:SCStartRaceMessage):void
 		{
@@ -147,7 +146,6 @@ package com.rpgGame.app.manager
 			if (msg.result==1) 
 			{
 				EventManager.dispatchEvent(D1v1Event.QUIT_FB_RESULT);
-				EventManager.dispatchEvent(ActivityEvent.SHOW_HIDE_ALL,true);
 			}
 			
 		}

@@ -253,7 +253,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiCh1 = temp;
 			temp.name = "uiCh1";
-			temp.styleName = "ui/app/banghui/wangcheng/weicheng4.png";
+			temp.styleName = "ui/app/banghui/wangcheng/weicheng2.png";
 			temp.x = 42;
 			temp.y = 72;
 			return temp;
