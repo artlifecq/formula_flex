@@ -4,14 +4,19 @@ package com.rpgGame.app.ui.main.head {
 	import com.rpgGame.app.manager.PKMamager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
+	import com.rpgGame.app.ui.tips.data.AmountTipData;
 	import com.rpgGame.app.view.icon.BuffIcon;
 	import com.rpgGame.core.events.BuffEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.NumberUtil;
+	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.coreData.SpriteStat;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.StaticValue;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.buff.BuffData;
@@ -21,6 +26,7 @@ package com.rpgGame.app.ui.main.head {
 	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.EffectUrl;
 	import com.rpgGame.coreData.type.PKModeType;
+	import com.rpgGame.coreData.type.TipType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import feathers.controls.Button;
@@ -51,6 +57,11 @@ package com.rpgGame.app.ui.main.head {
 		private var _timenum:int=5;
 		private const MAX_SHOW_NUM:int=4;
 		
+		private var ybTips:DynamicTipData;
+		private var ljTips:DynamicTipData;
+		private var ybData:AmountTipData;
+		private var ljData:AmountTipData;
+		
 		public function MainRoleHeadBar() {
 			this._skin = new head_main_Skin();
 			super(this._skin);
@@ -72,6 +83,14 @@ package com.rpgGame.app.ui.main.head {
 			updateAll();
 			initPK();
 			initBuff();
+			
+			ybTips=new DynamicTipData();
+			ljTips=new DynamicTipData();
+			ybData=new AmountTipData();
+			ljData=new AmountTipData();
+			
+			ybTips.data=ybData;
+			ljTips.data=ljData;
 		}
 		
 		override protected function onShow():void
@@ -83,6 +102,18 @@ package com.rpgGame.app.ui.main.head {
 			EventManager.addEvent(MainPlayerEvent.STAT_CHANGE,updateFight);//基本属性改变
 			EventManager.addEvent(MainPlayerEvent.PK_MODE_CHANGE,onPKModelChange);
 			EventManager.addEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);//金钱变化
+			
+			
+			ybData.name="元宝:";
+			ybData.des=ItemConfig.getQItemByID(3).q_describe;
+			ljData.name="礼金:";
+			ljData.des=ItemConfig.getQItemByID(5).q_describe;
+			
+			TipTargetManager.show( _skin.uiYuanbao, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP, ybTips ));
+			TipTargetManager.show( _skin.lbYuanbao, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP,  ybTips));
+			TipTargetManager.show( _skin.uiLijin, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP,ljTips ));
+			TipTargetManager.show( _skin.lbLijin, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP, ljTips));
+			
 			updateAmount();
 		}
 		
@@ -96,6 +127,11 @@ package com.rpgGame.app.ui.main.head {
 			EventManager.removeEvent(MainPlayerEvent.STAT_CHANGE,updateFight);//基本属性改变
 			EventManager.removeEvent(MainPlayerEvent.PK_MODE_CHANGE,onPKModelChange);
 			EventManager.removeEvent(MainPlayerEvent.STAT_RES_CHANGE,updateAmount);//金钱变化
+			
+			TipTargetManager.remove( _skin.uiYuanbao);
+			TipTargetManager.remove( _skin.lbYuanbao);
+			TipTargetManager.remove( _skin.uiLijin);
+			TipTargetManager.remove( _skin.lbLijin);
 		}
 		
 		private function updateAmount(type:int=3):void
@@ -107,6 +143,9 @@ package com.rpgGame.app.ui.main.head {
 			var stat:SpriteStat=MainRoleManager.actorInfo.totalStat;
 			_skin.lbYuanbao.text =NumberUtil.getNumberTo(stat.getResData(CharAttributeType.RES_GOLD),true);
 			_skin.lbLijin.text =NumberUtil.getNumberTo(stat.getResData(CharAttributeType.RES_BIND_GOLD),true);
+			
+			ybData.value=_skin.lbYuanbao.text;
+			ljData.value=_skin.lbLijin.text;
 		}
 		
 		private function onPKModelChange():void
