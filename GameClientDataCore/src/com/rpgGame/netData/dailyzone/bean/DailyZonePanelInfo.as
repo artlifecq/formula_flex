@@ -13,7 +13,7 @@ package com.rpgGame.netData.dailyzone.bean{
 	 * 通用日常副本面板信息
 	 */
 	public class DailyZonePanelInfo extends Bean {
-	
+		
 		//日常副本ID编号
 		private var _dailyzoneId: int;
 		
@@ -28,6 +28,9 @@ package com.rpgGame.netData.dailyzone.bean{
 		
 		//可购买剩余次数
 		private var _canBuyCount: int;
+		
+		//今日通关 0未通,1通
+		private var _todayPassed: int;
 		
 		//次数购买单价
 		private var _price: int;
@@ -46,6 +49,8 @@ package com.rpgGame.netData.dailyzone.bean{
 			writeByte(_remainCount);
 			//可购买剩余次数
 			writeByte(_canBuyCount);
+			//今日通关 0未通,1通
+			writeByte(_todayPassed);
 			//次数购买单价
 			writeInt(_price);
 			return true;
@@ -65,6 +70,8 @@ package com.rpgGame.netData.dailyzone.bean{
 			_remainCount = readByte();
 			//可购买剩余次数
 			_canBuyCount = readByte();
+			//今日通关 0未通,1通
+			_todayPassed = readByte();
 			//次数购买单价
 			_price = readInt();
 			return true;
@@ -143,6 +150,21 @@ package com.rpgGame.netData.dailyzone.bean{
 		 */
 		public function set canBuyCount(value: int): void{
 			this._canBuyCount = value;
+		}
+		
+		/**
+		 * get 今日通关 0未通,1通
+		 * @return 
+		 */
+		public function get todayPassed(): int{
+			return _todayPassed;
+		}
+		
+		/**
+		 * set 今日通关 0未通,1通
+		 */
+		public function set todayPassed(value: int): void{
+			this._todayPassed = value;
 		}
 		
 		/**
