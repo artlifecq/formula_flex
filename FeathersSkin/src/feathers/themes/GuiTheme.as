@@ -1620,6 +1620,22 @@ package feathers.themes{
 			return scale9Rect;
 		}
 		
+		/**
+		 *自定义九宫格数据 
+		 * @param key
+		 * @param str9
+		 * 
+		 */
+		public function customScale9GridRect(key:String,str9:String):void
+		{
+			if(themeInfo[key]){
+				return;
+			}
+			var sub:Object={};
+			sub[SCALE9_GRID]=str9;
+			themeInfo[key]=sub;
+		}
+		
 		public function copyScale9GridRect(name:String, target:Rectangle = null):Rectangle
 		{
 			var rect:Rectangle = getScale9GridRect(name);

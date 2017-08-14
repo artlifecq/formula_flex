@@ -410,6 +410,9 @@ package com.rpgGame.app.manager.scene
 		{
 			GameLog.addShow("开始切换场景...");
 			var mapID : int = MainRoleManager.actorInfo.mapID;
+			if(mapID==1000000){//登录在跨服状态,不做任何处理
+				return;
+			}
 			if (1 == mapID) {
 				mapID = 1001;
 				MainRoleManager.actorInfo.mapID = 1001;

@@ -1,9 +1,11 @@
 package com.rpgGame.appModule.dungeon.equip
 {
+	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.DailyZoneDataManager;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
+	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.coreData.cfg.DailyZoneCfgData;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.clientConfig.Q_daily_zone;
@@ -27,7 +29,7 @@ package com.rpgGame.appModule.dungeon.equip
 	{
 		private var _skin:FuBen_ZhuangBei_Skin;
 		private var _dailyZoneInfo:DailyZonePanelInfo;
-
+		
 		private var gridList:Vector.<IconCDFace>;
 		public function EquipDungeon():void
 		{
@@ -60,7 +62,7 @@ package com.rpgGame.appModule.dungeon.equip
 			for(var i:int = 0;i<length;i++)
 			{
 				var grid:IconCDFace = IconCDFace.create(IcoSizeEnum.ICON_48);
-//				grid.setUrlBg("ui/common/gezikuang/tubiaodikuang/48.png");
+				//				grid.setUrlBg("ui/common/gezikuang/tubiaodikuang/48.png");
 				_skin.container.addChild(grid);
 				grid.x = startX+60*i;
 				grid.y = 507+15;
@@ -71,6 +73,7 @@ package com.rpgGame.appModule.dungeon.equip
 			}
 			
 			EventManager.addEvent(DailyZoneDataManager.UPDATEDAILYZONEINFO,refeashValue);
+			EventManager.addEvent(MainPlayerEvent.STAT_CHANGE,updatePlayerLvUp);
 			refeashValue();
 		}
 		
@@ -110,6 +113,12 @@ package com.rpgGame.appModule.dungeon.equip
 			_skin.lbGoumai.text = "剩余购买次数："+_dailyZoneInfo.canBuyCount;
 		}
 		
+		private function updatePlayerLvUp():void
+		{
+			if(_skin.list)
+				_skin.list.dataProvider.updateAll();
+		}
+		
 		override protected function onTouchTarget(target:DisplayObject):void
 		{
 			super.onTouchTarget(target);
@@ -138,6 +147,7 @@ package com.rpgGame.appModule.dungeon.equip
 		override public function hide():void
 		{
 			EventManager.removeEvent(DailyZoneDataManager.UPDATEDAILYZONEINFO,refeashValue);
+			EventManager.removeEvent(MainPlayerEvent.STAT_CHANGE,updatePlayerLvUp);
 			while(gridList.length>0){
 				var icon:IconCDFace=gridList.pop();
 				icon.destroy();

@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.die
 {
 	import com.rpgGame.app.manager.FunctionOpenManager;
+	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.clientConfig.Q_die;
 	
@@ -18,47 +19,33 @@ package com.rpgGame.appModule.die
 		{
 			super();
 		}
-		private var _skin:tuijianItems_Skin;
-		private var _icon:UIAsset;
-		private var _item:Q_die;
+		private var _skin:DieToItem;
 		override protected function initialize():void
 		{
 			super.initialize();
-			_skin=new tuijianItems_Skin();
-			_skin.toSprite(this);
-			_icon=new UIAsset();
-			_icon.touchable=false;
-			_icon.x=20;
-			_icon.y=48;
-			this.addChild(_icon);
+			_skin=new DieToItem();
+			this.addChild(_skin);
+			this.width=_skin.width;
+			this.height=_skin.height;
 		}
 		override protected function commitData():void
 		{
-			_item= this.data as Q_die;
-			if(_item){
-				_skin.lbl_name.text=_item.q_name;
-				_icon.styleName=ClientConfig.getPanelIcon("die/"+_item.q_icon.toString());
-				starNum(_item.q_starsnum);
-			}else{
-				_skin.lbl_name.text="";
-				_icon.styleName="";
-				starNum(0);
+			if(this._data && this._owner)
+			{
+				_skin.update(this._data as Q_die);
+			}
+			else
+			{
+				_skin.clear();
 			}
 		}
 		
-		private function starNum(num:int):void
+		override public function dispose():void
 		{
-			if(num>5){
-				num=5
-			}
-			for(var i:int=1;i<6;i++){
-				var mc:UIMovieClip=_skin["mc_star"+i] as UIMovieClip;
-				if(i<=num){
-					mc.gotoAndStop("xx2");
-				}else{
-					mc.gotoAndStop("xx1");
-				}
-			}
+			super.dispose();
+			_skin.clear();
+			MCUtil.removeSelf(_skin);
+			_skin=null;
 		}
 		
 		override public function get width():Number
