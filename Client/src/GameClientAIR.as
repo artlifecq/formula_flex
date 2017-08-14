@@ -54,7 +54,7 @@ package
 		public var versionInfo : String = "V1.5.39";
 		public var version : String = null;
 		public var urlParmar : Object = null;
-		public var baseDir : String = "../";
+		public var baseDir : String = "http://res.xqj.37wan.com/xqjres/";
 		public var isRelease : Boolean = false;
 		public var useVersion : Boolean = false;
 		public var useBpgFormat : Boolean = false;
