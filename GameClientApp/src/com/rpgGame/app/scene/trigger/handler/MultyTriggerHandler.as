@@ -133,7 +133,7 @@ package com.rpgGame.app.scene.trigger.handler
 							{
 								if(triggerData.obstacleAreaRemove[j]==trAreaList[k])
 								{
-									trAreaList[k]==0;
+									trAreaList[k]=0;
 								}
 							}
 						}
@@ -146,7 +146,7 @@ package com.rpgGame.app.scene.trigger.handler
 							{
 								if(triggerData.sceneEffectRemove[j]==trEffectList[k])
 								{
-									trEffectList[k]==0;
+									trEffectList[k]=0;
 								}
 							}
 						}

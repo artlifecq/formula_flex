@@ -165,9 +165,9 @@ package com.rpgGame.app.state.role
 		}
 
 		private static function doWalkTo(role : SceneRole, pos : Vector3D, spacing : int = 0, data : Object = null, 
-										   onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null,needSprite:Boolean=false) : Boolean
+										   onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null,needSprite:Boolean=false,isForceMove:Boolean =false) : Boolean
 		{
-			TweenLite.killDelayedCallsTo(doWalkToPos);
+			TweenLite.killDelayedCallsTo(doWalkTo);
 			if (!role || !role.usable)
 				return false;
 			var camouflageEntity : SceneRole = SceneRole(role.getCamouflageEntity());
@@ -176,13 +176,14 @@ package com.rpgGame.app.state.role
 			{
 				if (walkRole.stateMachine.isAttackHarding||walkRole.stateMachine.isLockCaseSpell)
 				{
-					Lyt.a("walk-isAttackHarding");
-					TweenLite.delayedCall(1, doWalkToPos, [role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite,true]);
+					Lyt.a("walk-isAttackHarding:"+walkRole.stateMachine.isAttackHarding+"="+walkRole.stateMachine.isLockCaseSpell);
+					TrusteeshipManager.getInstance().stopAll();
+					TweenLite.delayedCall(1, doWalkTo, [role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite,true]);
 					return false;
 				}
 				else
 				{
-					return doWalkToPos(role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite);
+					return doWalkToPos(role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite,isForceMove);
 				}
 			}
 			return false
@@ -200,7 +201,7 @@ package com.rpgGame.app.state.role
 			{
 //				SceneCursorHelper.getInstance().hideCursor();
 				var nowTime : int = getTimer();
-				if(!TaskAutoManager.getInstance().isTasking)//自动任务中优先执行自动任务走路  ---yt
+				if(!TrusteeshipManager.getInstance().isAutoWalking)//自动走路中优先执行自动走路  ---yt
 				{
 					if (MainRoleManager.isTakeZhanChe) //乘坐他人战车时不能移动
 					{

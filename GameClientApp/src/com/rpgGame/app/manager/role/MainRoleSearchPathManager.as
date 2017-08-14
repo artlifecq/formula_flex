@@ -149,6 +149,7 @@ package com.rpgGame.app.manager.role
 		/**打完怪后再寻路，统一延时0.5秒处理*/		
 		public static function walkToScenePreAttack(targetSceneId : int, posx : Number = -1, posy : Number = -1, onArrive : Function = null, spacing : int = 0, data : Object = null,needSprite:Boolean=false) : void
 		{
+			TrusteeshipManager.getInstance().isAutoWalking=true;
 			TweenLite.killDelayedCallsTo(walkToSceneTween);
 			TweenLite.delayedCall(0.5, walkToSceneTween, [targetSceneId, posx, posy, onArrive, spacing,data,needSprite]);
 			
