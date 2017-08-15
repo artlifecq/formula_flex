@@ -198,7 +198,7 @@ package com.rpgGame.app.cmdlistener.scene
 			if(qmap.q_enter_autofight==1&&cfg.getData().q_autofight_seat){//进入后自动战斗
 				var p:Array=JSONUtil.decode(cfg.getData().q_autofight_seat);
 				//MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, p[0], p[1],finishWalk, 0);
-				TrusteeshipManager.getInstance().startAutoFightToPos([SceneSwitchManager.currentMapId,p[0],p[1]],1,-1);
+				TrusteeshipManager.getInstance().startAutoFightToPos([SceneSwitchManager.currentMapId,p[0],p[1]]);
 			}
 		}
 		

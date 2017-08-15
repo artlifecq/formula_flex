@@ -409,6 +409,7 @@ package com.rpgGame.app.manager.scene
 		public static function changeMap(isReal3D:Boolean = false) : void
 		{
 			GameLog.addShow("开始切换场景...");
+			AppManager.closeAllApp();//切换场景关闭所有面板
 			var mapID : int = MainRoleManager.actorInfo.mapID;
 			if(mapID==1000000){//登录在跨服状态,不做任何处理
 				return;
