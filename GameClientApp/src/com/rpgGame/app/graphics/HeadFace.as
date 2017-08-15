@@ -257,10 +257,6 @@ package com.rpgGame.app.graphics
 			{
 				return;
 			}
-			if(_role.type==SceneCharType.PLAYER)
-			{
-				trace("人物头上的位置："+_role.headFace.x+"+"+_role.headFace.y);
-			}
 			var nameVisible : Boolean = _role.getAttachVisible(AttachDisplayType.ROLE_HEAD_NAME);
 			if (_role.type==SceneCharType.GIRL_PET) 
 			{
