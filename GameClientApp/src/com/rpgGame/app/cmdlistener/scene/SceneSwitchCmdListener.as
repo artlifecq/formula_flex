@@ -190,11 +190,11 @@ package com.rpgGame.app.cmdlistener.scene
 			var mapID : int = SceneSwitchManager.currentMapId;
 			var cfg : SceneData = MapDataManager.getMapInfo(mapID);
 			var qmap:Q_map=cfg.getData();
-			if(qmap.q_map_zones==EnumMapZones.MAP_COPY){
+		/*	if(qmap.q_map_zones==EnumMapZones.MAP_COPY){
 				EventManager.dispatchEvent(ActivityEvent.SHOW_HIDE_ALL,false);
 			}else{
 				EventManager.dispatchEvent(ActivityEvent.SHOW_HIDE_ALL,true);
-			}
+			}*/
 			if(qmap.q_enter_autofight==1&&cfg.getData().q_autofight_seat){//进入后自动战斗
 				var p:Array=JSONUtil.decode(cfg.getData().q_autofight_seat);
 				//MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, p[0], p[1],finishWalk, 0);
