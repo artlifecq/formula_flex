@@ -102,7 +102,7 @@ package com.rpgGame.app.ui.scene.dungeon
 						var pos:Point=new Point(qzm.q_move_x,qzm.q_move_y);
 						if(pos!=null)
 						{
-							TrusteeshipManager.getInstance().startAutoFightToPos([SceneSwitchManager.currentMapId,pos.x,pos.y],1,-1);
+							TrusteeshipManager.getInstance().startAutoFightToPos([SceneSwitchManager.currentMapId,pos.x,pos.y]);
 						}
 						break;
 					}

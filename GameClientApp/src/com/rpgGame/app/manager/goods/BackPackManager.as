@@ -4,6 +4,7 @@ package com.rpgGame.app.manager.goods
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.ui.alert.AutoDressAlert;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.ui.alert.ItemNoticePanel;
@@ -354,23 +355,22 @@ package com.rpgGame.app.manager.goods
 					var allRes:Number=Mgr.shopMgr.getCurrency(buyItem.data.priceType);
 					var maxCount:int=int(allRes/buyItem.data.price);
 					maxCount=Math.min(99,maxCount);//999
-					/*if (buyItem.data.limitType!=0) 
+					if(maxCount>0)
 					{
-						
-						maxBuy=Math.min(999,buyItem.data.limitNum-buyItem.data.todayBuyNum);
+						Mgr.shopMgr.ReqBuyItem(buyItem.data,maxCount,null);
 					}
-					else
+					else if(SystemTimeManager.curtTm>=timeNum)
 					{
-						maxBuy=999;
-					}*/
-					Mgr.shopMgr.ReqBuyItem(buyItem.data,maxCount,null);
+						timeNum=SystemTimeManager.curtTm+5000;
+						NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP,"银两不足，无法购买药水!");
+					}
 				}
 				
 			}
 			
 			return null;
 		}
-		
+		private var timeNum:Number=0;
 		
 		
 		/**返回复活丹*/
