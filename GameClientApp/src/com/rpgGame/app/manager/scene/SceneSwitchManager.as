@@ -391,13 +391,13 @@ package com.rpgGame.app.manager.scene
 			InputManger.getInstance().closeOperate();
 			
 			SceneTimeOfTheDayManager.clear();
+			SceneManager.getScene().removeAllSceneObj();
 			if (clearScene) 
 			{
 				SceneManager.getScene().clear();
 				SceneManager.getScene().clearAreaMap(1);
 				
 			}
-			SceneManager.getScene().removeAllSceneObj();
 			TaskAutoManager.getInstance().stopSwitchAll();
 			TrusteeshipManager.getInstance().stopAll();
 			UIModel.instence.clear();

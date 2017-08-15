@@ -74,15 +74,16 @@ package com.client
 			SoundUtil.SOUND_REDUCTION_ALGORITHM_MIN_VOLUMN = 0.75;
 			SoundUtil.SOUND_REDUCTION_ALGORITHM_RECUTION_SCOPE = 1100;
 			
+			LoadPriorityType.LEVEL_CUSTOM_0 = 0;
 			LoadPriorityType.LEVEL_SOUND = 1000;
-			LoadPriorityType.LEVEL_NORMALMAP = 2000;
-			LoadPriorityType.LEVEL_TEXTURE = 3000;
 			LoadPriorityType.LEVEL_BUNDLE = 1500;
-			LoadPriorityType.LEVEL_GEOMETRY = 3500;
-			LoadPriorityType.LEVEL_CUSTOM_0 = 5000;
-			LoadPriorityType.LEVEL_CUSTOM_1 = 4500;
-			LoadPriorityType.LEVEL_CUSTOM_2 = 4000;
+			LoadPriorityType.LEVEL_NORMALMAP = 2000;
+			LoadPriorityType.LEVEL_TEXTURE = 2500;
+			LoadPriorityType.LEVEL_GEOMETRY = 3000;
+			LoadPriorityType.LEVEL_CUSTOM_1 = 4000;
+			LoadPriorityType.LEVEL_CUSTOM_2 = 4500;
 			LoadPriorityType.LEVEL_CUSTOM_3 = 5000;
+			LoadPriorityType.LEVEL_CUSTOM_4 = 10000;
 			SoundUtil.initConfig({
 				"at":{
 					"index":1,

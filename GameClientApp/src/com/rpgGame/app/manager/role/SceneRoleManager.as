@@ -784,7 +784,9 @@ package com.rpgGame.app.manager.role
 		public function removeSceneRoleById(roleID : Number) : void
 		{
 			var role : SceneRole = SceneManager.getSceneObjByID(roleID) as SceneRole;
-			removeSceneRole(role);
+			if(roleID!=MainRoleManager.actorID){//不是主角自己
+				removeSceneRole(role);
+			}
 		}
 		
 		public function removeSceneRoleByIdAndType(id : Number, type : String) : void
