@@ -6,9 +6,11 @@ package com.rpgGame.appModule.skill
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.core.events.ItemEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.core.events.SkillEvent;
 	import com.rpgGame.core.events.SpellEvent;
 	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.core.ui.tip.RewardMarkTip;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.JobEnum;
@@ -233,6 +235,7 @@ package com.rpgGame.appModule.skill
 			EventManager.removeEvent(MainPlayerEvent.STAT_CHANGE,updateChange);
 			EventManager.removeEvent(SpellEvent.SPELL_UPGRADE,spellUpgrade);
 			EventManager.removeEvent(SpellEvent.SPELL_RISE,spellRise);
+			EventManager.removeEvent(SkillEvent.SKILL_ORDER_UP,skillOrderUp);
 			skillUpgrade.onHide();
 			skillRise.onHide();
 		}
@@ -249,6 +252,7 @@ package com.rpgGame.appModule.skill
 			EventManager.addEvent(MainPlayerEvent.STAT_CHANGE,updateChange);
 			EventManager.addEvent(SpellEvent.SPELL_UPGRADE,spellUpgrade);
 			EventManager.addEvent(SpellEvent.SPELL_RISE,spellRise);
+			EventManager.addEvent(SkillEvent.SKILL_ORDER_UP,skillOrderUp);
 		}
 		
 		private function addItem(itemInfo : ClientItemInfo) : void
@@ -263,6 +267,11 @@ package com.rpgGame.appModule.skill
 			UIPopManager.showAlonePopUI(SkillRisePop);
 			skillRise.unlock();
 			updateSkillList();
+		}
+		
+		private function skillOrderUp():void
+		{
+			this.playInter3DAt(ClientConfig.getEffect("ui_jinjiechenggongchenggong_01"),474,270,1);
 		}
 		
 		private function spellUpgrade(lv:int):void

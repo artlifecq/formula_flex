@@ -27,6 +27,7 @@ package com.rpgGame.app.utils
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.manager.tips.TipManager;
+	import com.rpgGame.core.utils.NumberUtil;
 	import com.rpgGame.core.view.ui.tip.implement.IBaseTipsInfo;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.HuBaoData;
@@ -1070,7 +1071,7 @@ package com.rpgGame.app.utils
 					if(item&&i<icoList.length)
 					{
 						icoList[idd].setIconResName(ClientConfig.getItemIcon(""+item.q_icon,IcoSizeEnum.ICON_42));
-						icoList[idd].setSubString(rewordList[i].num);
+						icoList[idd].setSubString(NumberUtil.getNumberTo(rewordList[i].num));
 						icoList[idd].visible=true;
 						icoBgList[idd].visible=true;
 						setItemTips(icoList[idd],item,int(rewordList[i].num));

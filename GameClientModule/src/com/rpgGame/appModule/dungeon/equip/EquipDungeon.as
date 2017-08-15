@@ -46,7 +46,7 @@ package com.rpgGame.appModule.dungeon.equip
 			_skin.list.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			_skin.list.snapToPages = true;
 			var layout:HorizontalLayout = new HorizontalLayout();
-			layout.gap = 15;
+			layout.gap = 4;
 			_skin.list.layout = layout;
 			var list:Array = DailyZoneCfgData.getTypeList(2);
 			
@@ -56,17 +56,17 @@ package com.rpgGame.appModule.dungeon.equip
 			var qglob:Q_global = GlobalSheetData.getSettingInfo(717);
 			var itemInfos:Array = JSON.parse(qglob.q_string_value) as Array;
 			var length:int = itemInfos.length;
-			var startX:Number = 475 - (60*length)/2;
+			var startX:Number = 742;
 			var item:ItemInfo;
 			var icon:IconCDFace;
 			gridList=new Vector.<IconCDFace>();
 			for(var i:int = 0;i<length;i++)
 			{
-				var grid:IconCDFace = IconCDFace.create(IcoSizeEnum.ICON_48);
+				var grid:IconCDFace = IconCDFace.create(IcoSizeEnum.ICON_42);
 				//				grid.setUrlBg("ui/common/gezikuang/tubiaodikuang/48.png");
 				_skin.container.addChild(grid);
 				grid.x = startX+60*i;
-				grid.y = 507+15;
+				grid.y = 532;
 				gridList.push(grid);
 				item = new ItemInfo();
 				item.itemModelId = itemInfos[i]["mod"];

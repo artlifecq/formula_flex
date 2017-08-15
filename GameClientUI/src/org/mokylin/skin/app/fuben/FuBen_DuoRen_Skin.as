@@ -210,7 +210,7 @@ package org.mokylin.skin.app.fuben
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xCFC6AE;
 			temp.visible = false;
-			temp.x = 130;
+			temp.x = 126;
 			temp.y = 374;
 			return temp;
 		}

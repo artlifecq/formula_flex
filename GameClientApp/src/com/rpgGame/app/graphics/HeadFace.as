@@ -232,7 +232,7 @@ package com.rpgGame.app.graphics
 			addElement(_nameBar);
 			//			addElement(_countryNameBar);
 			addElement(_junXianBar);
-		
+			
 			addElement(_guildNameBar);
 			addElement(_familNameBar);
 			addElement(_icoImage);
@@ -1559,7 +1559,7 @@ package com.rpgGame.app.graphics
 			addAndUpdateHP();
 			//this.addChildAt(_bloodBar,0);
 			this.deCtrl.addTop(_bloodBar,DecorCtrl.TOP_HPMP);
-//			showBloodTween=TweenLite.delayedCall(2,onHideBlood);
+			//			showBloodTween=TweenLite.delayedCall(2,onHideBlood);
 			sortAttackFace();
 		}
 		

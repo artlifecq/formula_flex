@@ -559,7 +559,7 @@ package com.rpgGame.app.cmdlistener.scene
 			//chongci
 			if(msg.objId.ToGID() == MainRoleManager.actorID&&msg.type!=1)
 			{
-				trace("这里不应该有主角自己的呀！主角自己的移动不需要同步到自己吧！！！");
+//				trace("这里不应该有主角自己的呀！主角自己的移动不需要同步到自己吧！！！");
 				return;
 			}
 			var role : SceneRole = SceneManager.getSceneObjByID(msg.objId.ToGID()) as SceneRole;
@@ -1107,7 +1107,7 @@ package com.rpgGame.app.cmdlistener.scene
 			trace(MainRoleManager.actorInfo.mapID);
 			MainRoleManager.actorInfo.mapID = mapId;
 			SceneSwitchManager.changeMap();
-			AppManager.closeAllApp();//切换场景关闭所有面板
+			
 		}
 		
 		/**
@@ -1226,7 +1226,7 @@ package com.rpgGame.app.cmdlistener.scene
 					var p:Array=JSONUtil.decode(cfg.getData().q_autofight_seat);
 					//MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, p[0], p[1],finishWalk, 100);
 					var pos:Array=[SceneSwitchManager.currentMapId,p[0],p[1]];
-					TrusteeshipManager.getInstance().startAutoFightToPos(pos,1,-1);
+					TrusteeshipManager.getInstance().startAutoFightToPos(pos);
 				}
 				else
 				{

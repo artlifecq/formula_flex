@@ -24,6 +24,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.core.events.SkillEvent;
 	import com.rpgGame.core.events.SpellEvent;
 	import com.rpgGame.core.events.SystemTimeEvent;
 	import com.rpgGame.core.events.role.RoleEvent;
@@ -56,6 +57,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.netData.skill.message.ResSkillAddMessage;
 	import com.rpgGame.netData.skill.message.ResSkillChangeMessage;
 	import com.rpgGame.netData.skill.message.ResSkillInfosMessage;
+	import com.rpgGame.netData.skill.message.SCSkillLevelUpResultMessage;
 	
 	import app.cmd.HeroMiscModuleMessages;
 	
@@ -95,6 +97,7 @@ package com.rpgGame.app.cmdlistener
 			SocketConnection.addCmdListener(103127,RecvSCCurrencyChangeMessage);
 			SocketConnection.addCmdListener(103128,RecvSCMaxValueChangeMessage);
 			SocketConnection.addCmdListener(103117,OnSCNonagePromptMessage);
+			SocketConnection.addCmdListener(123108,OnSCSkillLevelUpResultMessage);
 			SocketConnection.addCmdListener(301134,SCSystemHintHandler);
 			
 			
@@ -181,6 +184,13 @@ package com.rpgGame.app.cmdlistener
 		{
 			//			if(ClientConfig.isBanShu)
 			FangChenMiManager.OnSCNonagePromptMessage(msg);
+		}
+		
+		private function OnSCSkillLevelUpResultMessage(msg:SCSkillLevelUpResultMessage):void
+		{
+			if(msg.skilltype==1&&msg.result==1){
+				EventManager.dispatchEvent(SkillEvent.SKILL_ORDER_UP); 
+			}
 		}
 		
 		private function RecvSCCurrencyChangeMessage(msg:SCCurrencyChangeMessage):void

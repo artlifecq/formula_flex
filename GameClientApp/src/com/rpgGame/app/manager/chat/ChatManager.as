@@ -513,6 +513,9 @@ package com.rpgGame.app.manager.chat
 			{
 				content=parsingRrivateText(content);
 				targetName=ChatManager.currentSiLiaoTargetName;
+				if(!targetName){
+					NoticeManager.textNotify(NoticeManager.MOUSE_FOLLOW_TIP, NotifyCfgData.getNotifyTextByID(22006));
+				}
 			}
 			
 			if (!checkChatLevelEnable(channel))

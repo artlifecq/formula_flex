@@ -8,7 +8,6 @@ package com.rpgGame.app.state.role.action
 	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.app.state.role.control.CheckTripleAttackStateReference;
 	import com.rpgGame.core.state.role.action.ActionState;
-	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
@@ -341,7 +340,6 @@ package com.rpgGame.app.state.role.action
 //			}}catch(e:Error){}
 			_attackBroken = true;
 			_attackFinished = true;
-			_canWalkRelease = false;
 			if(_startSelfFrameTween)
 			{
 				_startSelfFrameTween.kill();
@@ -420,18 +418,20 @@ package com.rpgGame.app.state.role.action
 				}
 				else
 				{
-					transition(RoleStateType.ACTION_PREWAR, null, false, false, [RoleStateType.CONTROL_WALK_MOVE]);
+					if (!_canWalkRelease)//不可边走边放技能
+					{
+						transition(RoleStateType.ACTION_PREWAR, null, false, false, [RoleStateType.CONTROL_WALK_MOVE]);
+					}
 				}
-				
 			}
 		}
 
 		private function onBreakFrameCmp() : void
 		{
-			try{if((((_machine as RoleStateMachine).owner as SceneRole).data as MonsterData).modelID==9008)
-			{
-				Lyt.a("@@@@@解除锁定：-----"+AttackStateReference(_ref).spellInfo.spellData.q_skillName);
-			}}catch(e:Error){}
+//			try{if((((_machine as RoleStateMachine).owner as SceneRole).data as MonsterData).modelID==9008)
+//			{
+//				Lyt.a("@@@@@解除锁定：-----"+AttackStateReference(_ref).spellInfo.spellData.q_skillName);
+//			}}catch(e:Error){}
 			_attackBroken = true;
 			_attackFinished = true;
 			if (_machine && !_machine.isInPool)

@@ -299,7 +299,6 @@ package com.rpgGame.app.richText
 						return;
 					}
 					var lng:long=new long();
-					
 					//					var poswr:Point = unit.displayObj.parent.localToGlobal(new Point(unit.displayObj.x+2,unit.displayObj.y));
 					var userName : String = unitData.label;
 					var menus : Array = MenuUtil.getPlayerTargetMenu(uise, true);
@@ -385,7 +384,8 @@ package com.rpgGame.app.richText
 				case RichTextCustomLinkType.QIUHUN:
 					var name:Array=unitData.linkData.split(',');
 					var gid:Number=parseInt(name[1]);
-					if (MainRoleManager.isSelf(gid))
+					
+					if (MainRoleManager.actorInfo.serverID.fValue==gid)
 					{
 						return;
 					}

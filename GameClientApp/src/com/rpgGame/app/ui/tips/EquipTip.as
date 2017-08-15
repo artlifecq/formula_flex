@@ -3,7 +3,6 @@ package com.rpgGame.app.ui.tips
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.goods.RoleEquipmentManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.utils.BreatheTweenUtil;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.utils.FightValueUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
@@ -35,6 +34,8 @@ package com.rpgGame.app.ui.tips
 	
 	import org.mokylin.skin.app.tips.Tips_ZhuangBei;
 	
+	import starling.display.DisplayObject;
+	
 	/**
 	 * 装备tips 
 	 * @author Mandragora
@@ -55,6 +56,7 @@ package com.rpgGame.app.ui.tips
 		private var labelList:Vector.<Label>;
 		private var lines:Vector.<UIAsset>;
 		private var titles:Vector.<UIAsset>;
+		private var pors:Vector.<ZhuangbeiTipPro>;
 		
 		private var uijiantou:UIAsset;
 		
@@ -89,6 +91,7 @@ package com.rpgGame.app.ui.tips
 			labelList=new Vector.<Label>();
 			lines=new Vector.<UIAsset>();
 			titles=new Vector.<UIAsset>();
+			pors=new Vector.<ZhuangbeiTipPro>();
 			yinIcon=new UIAsset();
 			yinIcon.styleName="ui/common/tubiao/yinzi_24.png";
 			_itemTip.lbl_bangding.width=120;
@@ -134,6 +137,12 @@ package com.rpgGame.app.ui.tips
 				title.removeFromParent(true);
 			}
 			
+			while(pors.length!=0)
+			{
+				var por:ZhuangbeiTipPro=pors.shift();
+				por.removeFromParent(true);
+			}
+			
 			var equipItemInfo:ClientItemInfo=RoleEquipmentManager.instance.getEquipInfoByIndex(_itemInfo.qItem.q_kind);//根据佩戴部位获取已经装备的装备信息
 			var equipFight:Number=_itemInfo.itemInfo.fightPower;
 			var currentFight:int=0;
@@ -143,19 +152,6 @@ package com.rpgGame.app.ui.tips
 			_itemTip.lb_power.visible=false;
 			if(equipItemInfo){
 				currentFight=equipItemInfo.itemInfo.fightPower;
-			}
-			
-			_itemTip.lbl_bangding.visible=true;
-			if(_itemInfo.binded){
-				_itemTip.lbl_bangding.text="【已绑定】"
-			}else{
-				if(_itemInfo.qItem.q_bind==0){
-					_itemTip.lbl_bangding.visible=false;
-				}else if(_itemInfo.qItem.q_bind==1){
-					_itemTip.lbl_bangding.text="【获得时绑定】";
-				}else{
-					_itemTip.lbl_bangding.text="【使用后绑定】";
-				}
 			}
 			
 			_itemTip.yizhuangbei.visible=false;
@@ -227,6 +223,30 @@ package com.rpgGame.app.ui.tips
 				
 			}
 			curY+=17;
+			//强化进度条
+			if(_itemInfo.strengthExp>0&&_itemInfo.strengthLevel<_itemInfo.qItem.q_max_strengthen)
+			{			
+				var nowCfg:Q_equip_strength=EquipStrengthCfg.getStrengthCfg(_itemInfo.qItem.q_kind,_itemInfo.qItem.q_job,_itemInfo.strengthLevel);
+				var nextCfg:Q_equip_strength=EquipStrengthCfg.getStrengthCfg(_itemInfo.qItem.q_kind,_itemInfo.qItem.q_job,_itemInfo.strengthLevel+1);
+				name=HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,"强化进度");
+				label=createLabel(name,"");
+				label.x=curX;
+				label.y=curY;
+				var maxView:int=0;
+				var view:int=0;
+				if(nowCfg){
+					maxView=nextCfg.q_exp-nowCfg.q_exp;
+					view=_itemInfo.strengthExp-nowCfg.q_exp;
+				}else{
+					maxView=nextCfg.q_exp;
+					view=_itemInfo.strengthExp;
+				}
+				var por_qianghua:ZhuangbeiTipPro=creatPor(view,maxView);
+				por_qianghua.x=curX+label.textWidth+10;
+				por_qianghua.y=curY;
+				curY+=20;
+			}
+			
 			var type:int;
 			var per:String="";
 			for each(type in ids){
@@ -264,12 +284,35 @@ package com.rpgGame.app.ui.tips
 			titleui.y=curY;
 			curY+=17;
 			
+			//琢磨进度条
+			if(_itemInfo.polishExp>0&&_itemInfo.polishLevel<EquipPolishCfg.maxLv)
+			{			
+				var nowpolishCfg:Q_equip_polish=EquipPolishCfg.getPolishCfg(_itemInfo.polishLevel);
+				var nextpolishCfg:Q_equip_polish=EquipPolishCfg.getPolishCfg(_itemInfo.polishLevel+1);
+				name=HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,"琢磨进度");
+				label=createLabel(name,"");
+				label.x=curX;
+				label.y=curY;
+				if(nowpolishCfg){
+					maxView=nextpolishCfg.q_exp-nowpolishCfg.q_exp;
+					view=_itemInfo.polishExp-nowpolishCfg.q_exp;
+				}else{
+					maxView=nextpolishCfg.q_exp;
+					view=_itemInfo.polishExp;
+				}
+				por_qianghua=creatPor(view,maxView);
+				por_qianghua.x=curX+label.textWidth+10;
+				por_qianghua.y=curY;
+				curY+=20;
+			}
+			
 			name=HtmlTextUtil.getTextColor(StaticValue.A_UI_GRAY_TEXT,"琢磨等级:");
 			value=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,_itemInfo.polishLevel+"");
 			label=createLabel(name,value);
 			label.x=curX;
 			label.y=curY;
 			curY+=20;
+			
 			if(_itemInfo.polishLevel==0){
 				name=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,"未激活");
 				label=createLabel(name,"");
@@ -342,8 +385,25 @@ package com.rpgGame.app.ui.tips
 				label.y=curY;
 				yinIcon.x=52;
 				yinIcon.y=curY-4;
+				
+				_itemTip.lbl_bangding.x=label.x+label.textWidth+10;
+				_itemTip.lbl_bangding.y=label.y;
+				_itemTip.lbl_bangding.visible=true;
+				if(_itemInfo.binded){
+					_itemTip.lbl_bangding.text="【已绑定】"
+				}else{
+					if(_itemInfo.qItem.q_bind==0){
+						_itemTip.lbl_bangding.visible=false;
+					}else if(_itemInfo.qItem.q_bind==1){
+						_itemTip.lbl_bangding.text="【获得时绑定】";
+					}else{
+						_itemTip.lbl_bangding.text="【使用后绑定】";
+					}
+				}
+				
 			}else{
 				MCUtil.removeSelf(yinIcon);
+				_itemTip.lbl_bangding.visible=false;
 			}
 			
 			//			_itemTip.lbl_titile.text=FightValueUtil.calFightPowerByEquip(_itemInfo).toString();
@@ -422,13 +482,14 @@ package com.rpgGame.app.ui.tips
 			for(var i:int=0;i<_itemTip.bg.numChildren;i++){
 				_itemTip.bg.getChildAt(i).visible=false;
 			}
-			var ui_bg:UIAsset=_itemTip.bg.getChildAt(_itemInfo.qItem.q_default) as UIAsset;
+			var obj:DisplayObject=_itemTip.bg.getChildAt(_itemInfo.qItem.q_default);
+			if(!obj) obj=_itemTip.bg.getChildAt(0);
+			var ui_bg:UIAsset=obj as UIAsset;
 			ui_bg.visible=true;
 			ui_bg.height=curY;
 			_itemTip.ui_di.y=ui_bg.height;
-			_itemTip.ui_di.visible=true;
-			_itemTip.lbl_bangding.x=175;
-			_itemTip.lbl_bangding.y=_itemTip.ui_di.y-18;
+			_itemTip.ui_di.visible=true;			
+			
 			_itemTip.bg.height=_itemTip.ui_di.y+_itemTip.ui_di.height;
 			_itemTip.uiKuang.height=_itemTip.ui_di.y+_itemTip.ui_di.height;
 		}
@@ -489,6 +550,15 @@ package com.rpgGame.app.ui.tips
 			temp.width=30;
 			temp.height=45;
 			return temp;
+		}
+		
+		private function creatPor(view:int,max:int):ZhuangbeiTipPro
+		{
+			var por:ZhuangbeiTipPro=new ZhuangbeiTipPro();
+			por.setDate(view,max);
+			pors.push(por);
+			_itemTip.container.addChild(por);
+			return por;
 		}
 		
 		/**

@@ -186,6 +186,8 @@ package com.rpgGame.coreData.cfg
 		public static const Q_PURPLE:uint = 0xff00ff;
 		/**品质橙色  */		
 		public static const Q_YELLOW:uint = 0xffea00;
+		/**品质红色  */		
+		public static const Q_RED:uint = 0xff0036;
 		
 		//////////////////////////////聊天文字颜色///////////////////////////////////////////
 		/**公告*/

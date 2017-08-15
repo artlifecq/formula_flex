@@ -19,6 +19,9 @@ package com.rpgGame.core.events
 		/**技能成功事件*/		
 		public static const SKILL_RESULT:String = "Skill_Result";
 		
+		/**技能升阶成功*/		
+		public static const SKILL_ORDER_UP:String = "Skill_Order_Up";
+		
 		/**吟唱条开始*/		
 		public static const SING_START:String = "Sing_Start";
 		/**吟唱条停止*/		

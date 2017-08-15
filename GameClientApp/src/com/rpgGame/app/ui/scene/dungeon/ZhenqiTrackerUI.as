@@ -117,7 +117,7 @@ package com.rpgGame.app.ui.scene.dungeon
 			}
 			if(qzm!=null)
 			{
-				TrusteeshipManager.getInstance().startAutoFightToPos([SceneSwitchManager.currentMapId,qzm.q_move_x,qzm.q_move_y],1,-1);
+				TrusteeshipManager.getInstance().startAutoFightToPos([SceneSwitchManager.currentMapId,qzm.q_move_x,qzm.q_move_y]);
 			}
 		}
 		/**寻下一波未完成的怪*/

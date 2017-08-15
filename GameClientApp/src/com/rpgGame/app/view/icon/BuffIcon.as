@@ -5,6 +5,7 @@ package com.rpgGame.app.view.icon
 	import com.rpgGame.app.manager.LostSkillManager;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.core.utils.NumberUtil;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LostSkillData;
 	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
@@ -54,7 +55,7 @@ package com.rpgGame.app.view.icon
 				setSubString("");
 				return;
 			}
-			setSubString("x"+value);
+			setSubString("x"+NumberUtil.getNumberTo(value));
 		}
 		override protected function calIconPos():void
 		{

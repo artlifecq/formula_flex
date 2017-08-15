@@ -107,7 +107,7 @@ package com.rpgGame.appModule.task
 				initKey=true;
 				init();
 			}
-			if(currtTaskId.ToGID()!=TaskMissionManager.mainTaskInfo.taskId.ToGID())
+			if(currtTaskId.ToGID()!=TaskMissionManager.getTaskInfoByType(TaskType.MAINTYPE_GUILDDAILYTASK).taskId.ToGID())
 			{
 				if(currtimer>0)
 				{
@@ -133,7 +133,7 @@ package com.rpgGame.appModule.task
 			{
 				icoListGroup.tweeRewardInBag();
 				TweenLite.killDelayedCallsTo(subFinish);
-				TweenLite.delayedCall(0.5, subFinish);
+				TweenLite.delayedCall(0.5, subFinish,[TaskMissionManager.getTaskInfoByType(TaskType.MAINTYPE_GUILDDAILYTASK).taskId]);
 			}
 			super.hide();
 		}

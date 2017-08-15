@@ -1,6 +1,6 @@
 package com.rpgGame.app.ui.alert
 {
-
+	
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.ItemActionManager;
 	import com.rpgGame.app.manager.goods.RoleEquipmentManager;
@@ -64,7 +64,7 @@ package com.rpgGame.app.ui.alert
 		override protected function onStageResize(sw:int, sh:int):void
 		{
 			this.x=sw/2;
-			this.y=sh-140-_skin.height;
+			this.y=sh-180-_skin.height;
 		}
 		public static function addAutoDressEquip(equ:long,pos:Point):void
 		{
@@ -80,7 +80,7 @@ package com.rpgGame.app.ui.alert
 				{
 					_lastEquips.put(tequ.qItem.q_kind,tequ.qItem.q_id);
 				}
-			
+				
 			}
 			
 		}
@@ -88,7 +88,7 @@ package com.rpgGame.app.ui.alert
 		private var endPos:Point=new Point();
 		private var startPos:Point=new Point();
 		private var stepShowTime:Number=0.6;
-		private var holdShowTime:Number=1.2;
+		private var holdShowTime:Number=2;
 		private var _equipGrid:HashMap;
 		private const NUM:int=10;
 		private var _flyIcon:UIAsset=new UIAsset();
@@ -115,9 +115,6 @@ package com.rpgGame.app.ui.alert
 			createGrid(EquipType.NECKLACE,_skin.Icbg4);
 			createGrid(EquipType.RING,_skin.Icbg2);
 			createGrid(EquipType.JADE,_skin.Icbg8);
-			
-			
-		
 		}
 		private function createGrid(kind:int,con:UIAsset):void
 		{
@@ -163,7 +160,7 @@ package com.rpgGame.app.ui.alert
 			
 			_flyIcon.x=startPos.x;
 			_flyIcon.y=startPos.y;
-	
+			
 			var ico:IconCDFace=_equipGrid.getValue(qItem.q_kind);
 			this.alpha=1;
 			this.scale=1;
@@ -183,6 +180,10 @@ package com.rpgGame.app.ui.alert
 		private function stepShowComplete(...arg):void
 		{
 			MCUtil.removeSelf(_flyIcon);
+			var p:Point=new Point(arg[1].x+arg[1].width/2,arg[1].y+arg[1].height/2);
+			p=arg[1].parent.localToGlobal(p);
+			p=this._skin.container.globalToLocal(p);
+			this.playInter3DAt(ClientConfig.getEffect("ui_baoyixia"),p.x,p.y,0);
 			TweenLite.to(this,holdShowTime,{onComplete:stepHide});
 			FaceUtil.setGridData(arg[1],ItemUtil.convertClientItemInfoById(arg[0]));
 		}
@@ -222,6 +223,6 @@ package com.rpgGame.app.ui.alert
 			}
 			return _ins;
 		}
-
+		
 	}
 }
