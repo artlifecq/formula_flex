@@ -1,4 +1,4 @@
-epackage com.rpgGame.app.manager
+package com.rpgGame.app.manager
 {
 	import com.game.mainCore.core.timer.GameTimer;
 	import com.rpgGame.app.manager.ctrl.ControlAutoFightSelectSkill;
