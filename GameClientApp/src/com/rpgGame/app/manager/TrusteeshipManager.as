@@ -228,7 +228,7 @@ package com.rpgGame.app.manager
 						startAutoFightfromFlyKey[0]=targetPos[0];
 						startAutoFightfromFlyKey[1]=targetPos[1];
 						startAutoFightfromFlyKey[2]=targetPos[2];
-						SceneSender.sceneMapTransport(targetPos[0], targetPos[1], targetPos[2]);
+						SceneSender.sceneMapTransport(targetPos[0], targetPos[1],-Math.abs(targetPos[2]));
 					}
 					break;
 				case 2:
