@@ -20,6 +20,7 @@ package com.rpgGame.appModule.activety.boss
 	import com.rpgGame.coreData.enum.ActivityEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
+	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleType;
 	import com.rpgGame.coreData.type.RenderUnitID;
@@ -198,9 +199,7 @@ package com.rpgGame.appModule.activety.boss
 			var num:int=arr.length;
 			for(var i:int=0;i<4;i++){
 				if(i<num){
-					var itemInfo:ClientItemInfo=new ClientItemInfo(arr[0].mod);
-					itemInfo.itemInfo=new ItemInfo();
-					itemInfo.itemInfo.isbind=arr[0].bind;
+					var itemInfo:ClientItemInfo=ItemUtil.convertClientItemInfoById(arr[i].mod,arr[i].num,arr[i].bind);
 					FaceUtil.SetItemGrid(rewardIcon[i],itemInfo);
 				}else{
 					rewardIcon[i].clear();
