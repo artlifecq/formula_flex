@@ -11,6 +11,7 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.manager.ShortcutsManger;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
+	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
@@ -20,6 +21,8 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.app.ui.alert.FangChenMiPanelExt;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.utils.TimeUtil;
+	import com.rpgGame.core.app.AppConstant;
+	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.MainPlayerEvent;
 	import com.rpgGame.core.events.SpellEvent;
 	import com.rpgGame.core.events.SystemTimeEvent;
@@ -294,7 +297,15 @@ package com.rpgGame.app.cmdlistener
 				changeDs.add(item.type,AttValueConfig.getDisAttValue(item.type,item.value));
 				changeUtil.put(item.type,AttValueConfig.getDisAttValue(item.type,item.value));
 			}
-			
+			//没打开自己的面板的时候
+			if (AttChangeEnum.EQUIP==msg.modelId) 
+			{
+				if (BackPackManager.instance.isShowRole==false) 
+				{
+					FightFaceHelper.showPlayerBaseAttrChange(changeDs);
+					return;
+				}
+			}
 			if(msg.modelId == AttChangeEnum.UPLEVEL_MODLE)
 			{
 				FightFaceHelper.showPlayerBaseAttrChange(changeDs);
