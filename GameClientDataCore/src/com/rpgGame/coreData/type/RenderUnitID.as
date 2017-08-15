@@ -99,6 +99,8 @@ package com.rpgGame.coreData.type
 		
 		/**排行榜称号*/
 		public static const RANKTITLE:int = rEnum.next;
+		
+		public static const DROP_ITEM_EFFECT : int = rEnum.next;
 //	/**角色光环特效ID*/
 //		public static const MAGIC_RING:int = rEnum.next;
 //		/**怪物光环*/

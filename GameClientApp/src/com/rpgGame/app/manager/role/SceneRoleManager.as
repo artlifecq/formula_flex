@@ -33,6 +33,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.coreData.cfg.StallCfgData;
 	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
 	import com.rpgGame.coreData.cfg.country.CountryWarCfgData;
+	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.res.AvatarResConfigSetData;
 	import com.rpgGame.coreData.clientConfig.AvatarResConfig;
@@ -564,6 +565,25 @@ package com.rpgGame.app.manager.role
 			role.setGroundXY(data.x, data.y);
 			role.rotationY = data.direction;
 			SceneManager.addSceneObjToScene(role, true,true, true);
+			var qua:int=ItemConfig.getItemQuality(data.goodsDatas.itemModelId);
+			if (qua>0) 
+			{
+				var rud:RenderParamData3D = new RenderParamData3D(RenderUnitID.DROP_ITEM_EFFECT, RenderUnitType.DROP_ITEM_EFFECT, ClientConfig.getDropItemQuatityEffect(qua));
+				rud.clearSameType = true;
+				var effectRu : RenderUnit3D=role.avatar.addRenderUnit(rud);
+				effectRu.allowCameraAnimator =false;
+				effectRu.repeat = 0;
+				effectRu.x = 0;
+				effectRu.y = 0;
+				effectRu.z = 0;
+				effectRu.scaleX=1;
+				effectRu.scaleY=1;
+				effectRu.scaleZ=1;
+				effectRu.rotationY = 0;
+				effectRu.completeWhenInvisible = true;
+				effectRu.play(0);
+			}
+			
 			DropGoodsManager.getInstance().addDropGoods(role);
 		}
 		
