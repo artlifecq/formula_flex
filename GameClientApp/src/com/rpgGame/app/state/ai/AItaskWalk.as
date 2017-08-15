@@ -3,6 +3,7 @@ package com.rpgGame.app.state.ai
 	import com.game.engine3D.state.IState;
 	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.chat.ChatManager;
+	import com.rpgGame.app.manager.guild.GuildManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.task.GatherAutoManager;
 	import com.rpgGame.app.manager.task.TaskAutoManager;
@@ -84,7 +85,7 @@ package com.rpgGame.app.state.ai
 		private function gotoNpc(data :Object=null):void
 		{
 			TaskUtil.npcTaskWalk(TaskMissionManager.getTaskNpcAreaId(taskType),onArrive);
-			TaskAutoManager.getInstance().jumpOver=true;
+			
 		}
 		private function gotoTask(data :Object=null):void
 		{
@@ -155,7 +156,7 @@ package com.rpgGame.app.state.ai
 					
 					break;
 				case TaskType.SUB_SPEAK:
-					var speak:String=TaskMissionCfgData.substitute(TaskMissionManager.getOtherTaskData(taskType).q_describe,MainRoleManager.actorInfo.societyName);
+					var speak:String=TaskMissionCfgData.substitute(TaskMissionManager.getOtherTaskData(taskType).q_describe,MainRoleManager.actorInfo.guildName);
 					ChatManager.reqSendChat(speak,EnumChatChannelType.CHAT_CHANNEL_WORLD);
 					TaskSender.sendfinishTaskMessage(TaskMissionManager.getTaskInfoByType(taskType).taskId);
 					break;

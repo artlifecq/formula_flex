@@ -71,7 +71,7 @@ package com.rpgGame.app.ui.scene
 			toPoint.y=actInfo.actCfg.q_move_y;
 			//进入就自动挂机战斗
 			//MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, toPoint.x, toPoint.y,finishWalk, 100);
-			TrusteeshipManager.getInstance().startAutoFightToPos([SceneSwitchManager.currentMapId,toPoint.x,toPoint.y],1,-1);
+			TrusteeshipManager.getInstance().startAutoFightToPos([SceneSwitchManager.currentMapId,toPoint.x,toPoint.y]);
 			rewardGrp.clear();
 			rewardGrp.setRewardByJsonStr(actInfo.actCfg.q_rewards);
 			
@@ -123,7 +123,7 @@ package com.rpgGame.app.ui.scene
 			switch(target){
 				case _skin.sec_subbut1:
 					var posta:Array=[SceneSwitchManager.currentMapId,toPoint.x,toPoint.y];
-					TrusteeshipManager.getInstance().startAutoFightToPos(posta,1,-1);
+					TrusteeshipManager.getInstance().startAutoFightToPos(posta);
 					//MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, toPoint.x, toPoint.y,finishWalk, 100);
 					break;
 				case _skin.sec_subbut2:

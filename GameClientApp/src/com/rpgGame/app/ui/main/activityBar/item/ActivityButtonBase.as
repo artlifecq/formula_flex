@@ -286,7 +286,7 @@
 
         public function updateTime():void
         {
-			if (_openTime > 0)
+			if (_openTime >= 0)
 			{
 				_TimeFun();
 			}else {//一直开启

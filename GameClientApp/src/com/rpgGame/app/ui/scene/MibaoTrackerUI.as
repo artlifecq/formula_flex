@@ -224,7 +224,7 @@ package com.rpgGame.app.ui.scene
 				if(monsterBank)
 				{
 					var pos:Array=[SceneSwitchManager.currentMapId,monsterBank.q_x,monsterBank.q_y];
-					TrusteeshipManager.getInstance().startAutoFightToPos(pos,1,-1);
+					TrusteeshipManager.getInstance().startAutoFightToPos(pos);
 				}
 			}
 			/*var monsterDataList:Vector.<Q_mibao_monster>;
@@ -450,7 +450,7 @@ package com.rpgGame.app.ui.scene
 				monsterBank=DailyZoneMonsterCfgData.getZoneCfg(monsterData.q_id);
 				if(monsterBank)
 				{
-					TrusteeshipManager.getInstance().startAutoFightToPos([SceneSwitchManager.currentMapId,monsterBank.q_move_x,monsterBank.q_move_y],1,-1);
+					TrusteeshipManager.getInstance().startAutoFightToPos([SceneSwitchManager.currentMapId,monsterBank.q_move_x,monsterBank.q_move_y]);
 					//MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, monsterBank.q_move_x,-Math.abs(monsterBank.q_move_y),finishWalk, 100);
 				}
 				

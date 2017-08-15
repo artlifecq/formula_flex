@@ -220,7 +220,7 @@ package com.rpgGame.app.ui.scene.dungeon
 			var pos:Point=DungeonManager.getStagePos(id);
 			if(pos)
 			{
-				TrusteeshipManager.getInstance().startAutoFightToPos([SceneSwitchManager.currentMapId,pos.x,pos.y],1,-1);
+				TrusteeshipManager.getInstance().startAutoFightToPos([SceneSwitchManager.currentMapId,pos.x,pos.y]);
 				//MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, pos.x, pos.y,finishWalk, 100);
 			}
 		}

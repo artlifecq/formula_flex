@@ -296,7 +296,7 @@ package com.rpgGame.app.ui.scene
 					{
 						if(num==0&&key==1)
 						{
-							TrusteeshipManager.getInstance().startAutoFightToPos(post,1,-1);
+							TrusteeshipManager.getInstance().startAutoFightToPos(post);
 						}
 						else if(num==0&&key==2)
 						{

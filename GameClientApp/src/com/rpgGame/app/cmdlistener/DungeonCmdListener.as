@@ -237,7 +237,7 @@ package com.rpgGame.app.cmdlistener
 			DungeonManager.setPanelInfos(msg.zoneId,msg.count,msg.rewardCount);
 			
 		}
-		private const ACTIBUTID:int=105;
+		private const ACTIBUTID:int=300;
 		private function onSCCancelTeamMatchMessage(msg:SCCancelTeamMatchMessage):void
 		{
 			DungeonManager.teamZid=0;
