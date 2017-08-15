@@ -8,8 +8,7 @@ package org.mokylin.skin.app.activety.zonghe
 	import feathers.controls.UIAsset;
 	import feathers.controls.UINumber;
 	import org.mokylin.skin.app.activety.number.UINumberNum;
-	import org.mokylin.skin.component.button.ButtonSkin_shouhui;
-	import org.mokylin.skin.component.button.ButtonSkin_zhankai;
+	import org.mokylin.skin.component.button.ButtonSkin_hide;
 
 	/**
 	 * @private
@@ -67,7 +66,7 @@ package org.mokylin.skin.app.activety.zonghe
 			
 			this.currentState = "normal";
 			this.height = 212;
-			this.width = 253;
+			this.width = 248;
 			this.elementsContent = [task_box_i(),btn_open_i(),btn_close_i()];
 			
 			states = {
@@ -99,7 +98,7 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 140;
-			temp.x = 21;
+			temp.x = 17;
 			temp.y = 85;
 			return temp;
 		}
@@ -107,7 +106,7 @@ package org.mokylin.skin.app.activety.zonghe
 		private function __Active_LiJinQiangDuo_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/mainui/renwu/hengtiao.png";
+			temp.styleName = "ui/mainui/renwu/renwuzhuizongbg.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -127,9 +126,9 @@ package org.mokylin.skin.app.activety.zonghe
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_close = temp;
 			temp.name = "btn_close";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_shouhui;
-			temp.x = 234;
-			temp.y = 0;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_hide;
+			temp.x = 221;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -138,10 +137,10 @@ package org.mokylin.skin.app.activety.zonghe
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_open = temp;
 			temp.name = "btn_open";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_zhankai;
-			temp.visible = false;
-			temp.x = 234;
-			temp.y = 0;
+			temp.scaleX = -1;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_hide;
+			temp.x = 243;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -150,7 +149,7 @@ package org.mokylin.skin.app.activety.zonghe
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grpshuaxin = temp;
 			temp.name = "grpshuaxin";
-			temp.x = 21;
+			temp.x = 17;
 			temp.y = 42;
 			temp.elementsContent = [lbName2_i(),__Active_LiJinQiangDuo_Label1_i(),lbTime_i()];
 			return temp;
@@ -162,7 +161,7 @@ package org.mokylin.skin.app.activety.zonghe
 			grpto = temp;
 			temp.name = "grpto";
 			temp.visible = false;
-			temp.x = 21;
+			temp.x = 17;
 			temp.y = 50;
 			temp.elementsContent = [lbName_i(),lbTo_i(),lbOk_i()];
 			return temp;
@@ -177,7 +176,7 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.styleName = "ui/mainui/fubenzhuizong/zs.png";
 			temp.width = 45;
 			temp.x = 40;
-			temp.y = 12;
+			temp.y = 15;
 			return temp;
 		}
 
@@ -191,7 +190,7 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.styleName = "ui/mainui/fubenzhuizong/zs.png";
 			temp.width = 45;
 			temp.x = 213;
-			temp.y = 12;
+			temp.y = 15;
 			return temp;
 		}
 
@@ -217,8 +216,8 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.color = 0xFFF2B7;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlue"];
 			temp.width = 205;
-			temp.x = 27;
-			temp.y = 6;
+			temp.x = 25;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -254,7 +253,7 @@ package org.mokylin.skin.app.activety.zonghe
 			lbOk = temp;
 			temp.name = "lbOk";
 			temp.text = "已抢夺完毕";
-			temp.color = 0xE8C958;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = false;
 			temp.width = 79;
@@ -273,7 +272,7 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
 			temp.width = 70;
-			temp.x = 21;
+			temp.x = 17;
 			temp.y = 180;
 			return temp;
 		}
@@ -328,7 +327,7 @@ package org.mokylin.skin.app.activety.zonghe
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			task_box = temp;
 			temp.name = "task_box";
-			temp.width = 253;
+			temp.width = 248;
 			temp.x = 0;
 			temp.y = 0;
 			temp.elementsContent = [ui_bg_i(),__Active_LiJinQiangDuo_UIAsset1_i(),lbHeadName_i(),head_left_i(),head_right_i(),grpto_i(),grpshuaxin_i(),__Active_LiJinQiangDuo_Label2_i(),lbPaiHang_i(),__Active_LiJinQiangDuo_UIAsset2_i(),icon_i(),uiJia_i(),numLiJin_i()];
@@ -353,7 +352,7 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.name = "ui_bg";
 			temp.height = 212;
 			temp.styleName = "ui/mainui/renwu/bg.png";
-			temp.width = 253;
+			temp.width = 248;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

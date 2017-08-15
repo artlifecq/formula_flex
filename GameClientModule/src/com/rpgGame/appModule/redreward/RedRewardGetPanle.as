@@ -8,6 +8,7 @@ package com.rpgGame.appModule.redreward
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.RedRewardEvent;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.type.AssetUrl;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
@@ -105,12 +106,12 @@ package com.rpgGame.appModule.redreward
 			
 			if(redmgr.haveRewardCount>0)
 			{
-				_skin.lbItem.htmlText = HtmlTextUtil.getTextColor(0xff0d0d,"发了一个红包");
+				_skin.lbItem.htmlText = HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,"发了一个红包");
 				_skin.lbVip.visible = false;
 				_skin.grpYiJian.visible = !_redRewardInfo.sendPlayerId.IsZero();
 				_skin.faBg.height = 33;
 			}else{
-				_skin.lbItem.htmlText = HtmlTextUtil.getTextColor(0xff0d0d,"发了一个红包")+"\n"+redmgr.vipInfo.q_desc;
+				_skin.lbItem.htmlText = HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,"发了一个红包")+redmgr.vipInfo.q_desc;
 				_skin.grpYiJian.visible = false;
 				_skin.lbVip.visible =!redmgr.isMaxVipLevel;
 				_skin.faBg.height = 70;
