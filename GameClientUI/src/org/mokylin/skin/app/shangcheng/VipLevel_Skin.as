@@ -10,7 +10,7 @@ package org.mokylin.skin.app.shangcheng
 	 */
 	public class VipLevel_Skin extends feathers.controls.StateSkin
 	{
-		public var uiLevel:feathers.controls.UIAsset;
+		public var uiVIP:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -21,7 +21,7 @@ package org.mokylin.skin.app.shangcheng
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [__VipLevel_Skin_UIAsset1_i(),uiLevel_i()];
+			this.elementsContent = [uiVIP_i()];
 			
 			states = {
 			};
@@ -29,26 +29,14 @@ package org.mokylin.skin.app.shangcheng
 		}
 
 
-		//==========================================================================
-		//                                定义成员方法
-		//==========================================================================
-		private function __VipLevel_Skin_UIAsset1_i():feathers.controls.UIAsset
+		private function uiVIP_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/shangcheng/vip.png";
-			temp.x = 0;
-			temp.y = 0;
-			return temp;
-		}
-
-		private function uiLevel_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			uiLevel = temp;
-			temp.name = "uiLevel";
-			temp.styleName = "ui/app/shangcheng/number/sz/0.png";
-			temp.x = 23;
-			temp.y = 0;
+			uiVIP = temp;
+			temp.name = "uiVIP";
+			temp.styleName = "ui/app/shangcheng/1.png";
+			temp.x = -6;
+			temp.y = -7;
 			return temp;
 		}
 

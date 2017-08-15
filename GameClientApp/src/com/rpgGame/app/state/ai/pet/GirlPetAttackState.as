@@ -255,7 +255,7 @@ package com.rpgGame.app.state.ai.pet
 			{
 				return false;
 			}
-			return mainDis<(GirlPetFollowAnimator.MIN_NEAR_2+skill.q_range_limit*SceneConfig.TILE_HEIGHT-30);
+			return true;
 		}
 		private function isRoleAvalible(role:SceneRole):Boolean
 		{

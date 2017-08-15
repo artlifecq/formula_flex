@@ -37,7 +37,10 @@ package com.rpgGame.coreData.role
 			this.avatarInfo.setBodyResID(q_pet.q_skinResID,null);
 			this.totalStat.moveSpeed=info.speed;
 			var qPet:Q_girl_pet=PetCfg.getPet(info.petModelId);
-			_speakWords=qPet.q_talkwords.split(";");
+			if (qPet.q_talkwords) 
+			{
+				_speakWords=qPet.q_talkwords.split(";");
+			}
 		}
 		
 		public function get modId():int

@@ -233,7 +233,7 @@ package com.rpgGame.app.ui.main.head
 					break;
 				case this._skin.btn_more:
 					var menus : Array = MenuUtil.getPlayerTargetMenu(_roleData.serverID.ToGID(), true,false);
-					MenuManager.showMenu(menus, [_roleData.serverID, _roleData.name], -1, -1, 80);
+					MenuManager.showMenu(menus, [_roleData.serverID, getPlayerName()], -1, -1, 80);
 					break;
 			}
 		}
@@ -274,7 +274,19 @@ package com.rpgGame.app.ui.main.head
 			_skin.role_xuecao.scaleX=scaleX;
 			this._skin.lbl_num.text=hp+"/"+maxHp;
 		}
-		
+		private function getPlayerName():String
+		{
+			var role:SceneRole=SceneRoleSelectManager.selectedRole;
+			if (!role) 
+			{
+				return "";
+			}
+			if (role.stateMachine.isMysteryMan) 
+			{
+				return "神秘人";
+			}
+			return (role.data as HeroData).name;
+		}
 		/**
 		 *更新普通信息 
 		 * 
@@ -282,10 +294,11 @@ package com.rpgGame.app.ui.main.head
 		private function updateNormal():void
 		{
 			this._skin.lbLevel.text = _roleData.totalStat.level.toString();
-			var arr:Array= _roleData.name.split(']');
+			var tName:String=getPlayerName();
+			var arr:Array=tName.split(']');
 			if(arr.length>1)	
 				this._skin.role_name.text = arr[1];
-			else this._skin.role_name.text = _roleData.name;
+			else this._skin.role_name.text =tName;
 			//			this._skin.UI_bingjia.visible = JobEnum.ROLE_1_TYPE==_roleData.job;
 			//			this._skin.UI_mojia.visible = JobEnum.ROLE_2_TYPE==_roleData.job||JobEnum.ROLE_3_TYPE==_roleData.job;
 			//			this._skin.UI_yijia.visible = JobEnum.ROLE_4_TYPE==_roleData.job;

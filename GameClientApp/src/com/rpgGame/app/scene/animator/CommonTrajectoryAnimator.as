@@ -218,7 +218,7 @@ package com.rpgGame.app.scene.animator
 				_renderSet.y = 0;
 				_renderSet.offsetY = _destHeightOffset;
 			}
-			updateMove();
+			updateMove(_isFlyCross);
 			_isMoving = true;
 		}
 		

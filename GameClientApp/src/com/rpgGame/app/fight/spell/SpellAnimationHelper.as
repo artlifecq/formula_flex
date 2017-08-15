@@ -78,7 +78,7 @@ package com.rpgGame.app.fight.spell
 				var effectRu : RenderUnit3D;
 				var rud : RenderParamData3D;
 				var speed:Number=animatData.speed>0?animatData.speed*0.01:1;
-				
+				var func:Function;
 				if (animatData.role_res)
 				{
 					rud = new RenderParamData3D(RenderUnitID.KNIFE_LIGHT, RenderUnitType.KNIFE_LIGHT, ClientConfig.getEffect(animatData.role_res));
@@ -100,6 +100,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.completeWhenInvisible = true;
 					effectRu.setPlayCompleteCallBack(avatarRuPlayComplete, atkor.avatar);
 					effectRu.play(0,speed);
+					func=atkor.avatar.removeRenderUnit;
 				}
 				else if (animatData.scene_res)
 				{
@@ -127,10 +128,11 @@ package com.rpgGame.app.fight.spell
 					SceneManager.addSceneObjToScene(effectRu);
 					effectRu.setPlayCompleteCallBack(removeSceneObjUnitFromScene);
 					effectRu.play(0,speed);
+					func=removeSceneObjUnitFromScene;
 				}
 				if (SceneCharType.PLAYER==atkor.type) 
 				{
-					SpellEffectRecordCtrl.addEffectRecord((atkor.data as HeroData).id,info.spellData.q_skillID,effectRu);
+					SpellEffectRecordCtrl.addEffectRecord((atkor.data as HeroData).id,info.spellData.q_skillID,effectRu,func);
 				}
 				
 				knifeLightObjID++;
@@ -167,7 +169,7 @@ package com.rpgGame.app.fight.spell
 				var rud : RenderParamData3D;
 				
 				var speed:Number=animatData.speed>0?animatData.speed*0.01:1;
-				
+				var func:Function;
 				if (animatData.role_res)
 				{
 					rud = new RenderParamData3D(RenderUnitID.SPELL_SELF_EFFECT, RenderUnitType.SPELL_SELF_EFFECT, ClientConfig.getEffect(animatData.role_res));
@@ -189,6 +191,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.completeWhenInvisible = true;
 					effectRu.setPlayCompleteCallBack(avatarRuPlayComplete, atkor.avatar);
 					effectRu.play(0,speed);
+					func=atkor.avatar.removeRenderUnit;
 				}
 				else if (animatData.scene_res)
 				{
@@ -216,10 +219,11 @@ package com.rpgGame.app.fight.spell
 					SceneManager.addSceneObjToScene(effectRu);
 					effectRu.setPlayCompleteCallBack(removeSceneObjUnitFromScene);
 					effectRu.play(0,speed);
+					func=removeSceneObjUnitFromScene;
 				}
 				if (SceneCharType.PLAYER==atkor.type) 
 				{
-					SpellEffectRecordCtrl.addEffectRecord((atkor.data as HeroData).id,info.spellData.q_skillID,effectRu);
+					SpellEffectRecordCtrl.addEffectRecord((atkor.data as HeroData).id,info.spellData.q_skillID,effectRu,func);
 				}
 				selfEffectObjID++;
 			}
@@ -672,9 +676,10 @@ package com.rpgGame.app.fight.spell
 						effectRu.setPlayCompleteCallBack(removeSceneObjUnitFromScene);
 //					}
 					effectRu.play(0,speed);
+					
 					if (SceneCharType.PLAYER==info.atkor.type) 
 					{
-						SpellEffectRecordCtrl.addEffectRecord((info.atkor.data as HeroData).id,info.spellData.q_skillID,effectRu);
+						SpellEffectRecordCtrl.addEffectRecord((info.atkor.data as HeroData).id,info.spellData.q_skillID,effectRu,removeSceneObjUnitFromScene);
 					}
 				}
 			}

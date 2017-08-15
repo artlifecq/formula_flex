@@ -42,14 +42,16 @@ package com.rpgGame.app.fight.spell
 				if (obj.id==skill&&obj) 
 				{
 					delete _effectPlayerMap[obj.eff];
-					obj.eff.dispose();
+					obj.func(obj.eff);
+					//obj.eff.dispose();
 					obj.eff=null;
+					obj.func=null;
 				}
 			}
 			delete _playeredEffectMap[player];
 		}
 		/**先播放特效，再收到失败的消息，先记录下特效，**/
-		public  static function addEffectRecord(player:Number,skill:int,effect:RenderUnit3D):void
+		public  static function addEffectRecord(player:Number,skill:int,effect:RenderUnit3D,disposeFun:Function):void
 		{
 			if (SpellDataManager.getSpellData(skill).q_cancel==0) 
 			{
@@ -61,7 +63,7 @@ package com.rpgGame.app.fight.spell
 				arr=[];
 				_playeredEffectMap[player]=arr;
 			}
-			arr.push({id:skill,eff:effect});
+			arr.push({id:skill,eff:effect,func:disposeFun});
 			_effectPlayerMap[effect]=player;
 		}
 		//这个正常播放完的动画
@@ -112,6 +114,7 @@ package com.rpgGame.app.fight.spell
 				for each (var obj:Object in arr) 
 				{
 					obj.eff=null;
+					obj.func=null;
 				}
 				delete _playeredEffectMap[player];
 			}

@@ -22,7 +22,7 @@ package com.rpgGame.app.manager.ctrl
 	public class ControlMainPlayerFight
 	{
 		/**5s超时**/
-		public static const TIME_OUT:int=5000*100;
+		public static const TIME_OUT:int=5000;
 		/**
 		 *我打的角色 
 		 */		
@@ -82,6 +82,11 @@ package com.rpgGame.app.manager.ctrl
 		 */		
 		public function addFightInfo(info:AttackResultInfo):void
 		{
+			//加血
+			if (info.damage<=0) 
+			{
+				return;
+			}
 			//我打的
 			if (info.attackerId.EqualTo(_mainRole)) 
 			{
@@ -91,6 +96,7 @@ package com.rpgGame.app.manager.ctrl
 					//已经有了
 					if (vo.targetGid==hgid) 
 					{
+						vo.updateTime=getTimer();
 						return;
 					}
 				}
@@ -105,6 +111,7 @@ package com.rpgGame.app.manager.ctrl
 					//已经有了
 					if (vo2.targetGid==attackGid) 
 					{
+						vo2.updateTime=getTimer();
 						return;
 					}
 				}
@@ -112,7 +119,7 @@ package com.rpgGame.app.manager.ctrl
 			}
 		}
 		/**
-		 *更新数据 
+		 *更新数据 ,没用了这个方法，应该根据战斗结果来
 		 * @param personId 打人者
 		 * @param fightTarget 挨打者
 		 * @param targets 挨打列表

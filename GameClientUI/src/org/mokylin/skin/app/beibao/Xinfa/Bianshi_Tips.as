@@ -23,6 +23,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 
 		public var btnClose:feathers.controls.Button;
 
+		public var labItem:feathers.controls.Label;
+
 		public var lbBoss:feathers.controls.Label;
 
 		public var lbCailiao:feathers.controls.Label;
@@ -30,6 +32,8 @@ package org.mokylin.skin.app.beibao.Xinfa
 		public var lbFuben:feathers.controls.Label;
 
 		public var lbJixian:feathers.controls.Label;
+
+		public var uiTitle:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -42,7 +46,7 @@ package org.mokylin.skin.app.beibao.Xinfa
 			this.currentState = "normal";
 			this.height = 217;
 			this.width = 331;
-			this.elementsContent = [bg_i(),__Bianshi_Tips_UIAsset1_i(),btnClose_i(),__Bianshi_Tips_Label1_i(),lbFuben_i(),lbJixian_i(),lbBoss_i(),__Bianshi_Tips_UIAsset2_i(),__Bianshi_Tips_UIAsset3_i(),lbCailiao_i()];
+			this.elementsContent = [bg_i(),__Bianshi_Tips_UIAsset1_i(),btnClose_i(),labItem_i(),lbFuben_i(),lbJixian_i(),lbBoss_i(),uiTitle_i(),__Bianshi_Tips_UIAsset2_i(),lbCailiao_i()];
 			
 			states = {
 			};
@@ -53,40 +57,18 @@ package org.mokylin.skin.app.beibao.Xinfa
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function __Bianshi_Tips_Label1_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "砭石获得途径：";
-			temp.color = 0xEAEABC;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 30;
-			temp.y = 83;
-			return temp;
-		}
-
 		private function __Bianshi_Tips_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 169;
+			temp.bottom = 13;
 			temp.styleName = "ui/common/background/neikuang_1.png";
+			temp.top = 35;
 			temp.width = 316;
 			temp.x = 7;
-			temp.y = 35;
 			return temp;
 		}
 
 		private function __Bianshi_Tips_UIAsset2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.touchable = false;
-			temp.touchGroup = true;
-			temp.styleName = "ui/common/background/bianshiliebiao.png";
-			temp.x = 119;
-			temp.y = 7;
-			return temp;
-		}
-
-		private function __Bianshi_Tips_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/beibao/xinfa/pomo2.png";
@@ -100,12 +82,12 @@ package org.mokylin.skin.app.beibao.Xinfa
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 217;
+			temp.bottom = 0;
 			var skin:StateSkin = new org.mokylin.skin.common.TongYongTanKuang_bg2()
 			temp.skin = skin
+			temp.top = 0;
 			temp.width = 331;
 			temp.x = 0;
-			temp.y = 0;
 			return temp;
 		}
 
@@ -117,6 +99,19 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close;
 			temp.x = 297;
 			temp.y = 7;
+			return temp;
+		}
+
+		private function labItem_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			labItem = temp;
+			temp.name = "labItem";
+			temp.text = "砭石获得途径：";
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 30;
+			temp.y = 83;
 			return temp;
 		}
 
@@ -174,6 +169,19 @@ package org.mokylin.skin.app.beibao.Xinfa
 			temp.underline = true;
 			temp.x = 47;
 			temp.y = 132;
+			return temp;
+		}
+
+		private function uiTitle_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiTitle = temp;
+			temp.name = "uiTitle";
+			temp.touchable = false;
+			temp.touchGroup = true;
+			temp.styleName = "ui/common/background/bianshiliebiao.png";
+			temp.x = 119;
+			temp.y = 7;
 			return temp;
 		}
 

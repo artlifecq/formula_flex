@@ -98,13 +98,14 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbName = temp;
 			temp.name = "lbName";
+			temp.height = 20;
 			temp.fontSize = 14;
-			temp.text = "军安卫士";
+			temp.text = "[9999区]军安卫士为为";
 			temp.textAlign = "center";
 			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 100;
-			temp.x = 46;
+			temp.width = 174;
+			temp.x = 1;
 			temp.y = 337;
 			return temp;
 		}
@@ -118,7 +119,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.height = 25;
 			temp.label = "629845";
 			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhujuezhandouli;
-			temp.width = 142;
+			temp.width = 138;
 			temp.x = 73;
 			temp.y = 357;
 			return temp;

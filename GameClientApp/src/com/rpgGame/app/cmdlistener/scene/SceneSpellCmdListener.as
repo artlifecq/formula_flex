@@ -159,7 +159,7 @@ package com.rpgGame.app.cmdlistener.scene
 			{
 				LostSkillManager.instance().checkBigSkill(msg.personId);
 			}
-			TrusteeshipManager.getInstance().myFighterCtrl.update(msg.personId,msg.fightTarget,msg.targets);
+			//TrusteeshipManager.getInstance().myFighterCtrl.update(msg.personId,msg.fightTarget,msg.targets);
 		}
 		
 		private function onResAttackVentToClientMessage(msg:ResAttackVentToClientMessage):void
@@ -195,7 +195,7 @@ package com.rpgGame.app.cmdlistener.scene
 				ReleaseSpellHelper.fightSoulSpell(info);
 			else
 				ReleaseSpellHelper.releaseSpell(info);
-			TrusteeshipManager.getInstance().myFighterCtrl.update(msg.playerid,null,msg.targets);
+			//TrusteeshipManager.getInstance().myFighterCtrl.update(msg.playerid,null,msg.targets);
 		}
 		
 		private function onResCancelSkillMessage(msg:SCCancelSkillMessage):void
