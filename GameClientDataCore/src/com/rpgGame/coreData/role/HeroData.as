@@ -1,18 +1,8 @@
 package com.rpgGame.coreData.role
 {
 	import com.gameClient.log.GameLog;
-	import com.rpgGame.coreData.cfg.HorseConfigData;
-	import com.rpgGame.coreData.cfg.ZhanQiConfigData;
-	import com.rpgGame.coreData.cfg.model.AvatarClothesResCfgData;
 	import com.rpgGame.coreData.cfg.model.AvatarDeputyWeaponResCfgData;
-	import com.rpgGame.coreData.cfg.model.AvatarHairResCfgData;
-	import com.rpgGame.coreData.cfg.model.AvatarWeapontResCfgData;
-	import com.rpgGame.coreData.clientConfig.AvatarClothesRes;
 	import com.rpgGame.coreData.clientConfig.AvatarDeputyWeaponRes;
-	import com.rpgGame.coreData.clientConfig.AvatarHairRes;
-	import com.rpgGame.coreData.clientConfig.AvatarWeaponRes;
-	import com.rpgGame.coreData.clientConfig.Q_horse;
-	import com.rpgGame.coreData.clientConfig.Q_warflag;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.coreData.info.buff.BuffData;
 	import com.rpgGame.coreData.info.fight.skill.ActiveSpellList;
@@ -33,6 +23,8 @@ package com.rpgGame.coreData.role
 	import app.message.MountModuleObjClientProto;
 	import app.message.OtherHeroProto;
 	import app.message.SpellProto;
+	
+	import away3d.enum.LoadPriorityType;
 	
 	import org.game.netCore.data.long;
 	
@@ -146,7 +138,7 @@ package com.rpgGame.coreData.role
 		 *夫妻名字 
 		 */		
 		public var coupleName:String;
-		public function HeroData(priority:int=100)
+		public function HeroData(priority:int=3000)
 		{
 			super(RoleType.TYPE_HERO,priority);
 			spellList = new ActiveSpellList();
