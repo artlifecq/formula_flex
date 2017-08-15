@@ -38,7 +38,7 @@ package com.rpgGame.app.ui.tips
 			if(attrHash!=null&&attrHash.keys()!=null)
 			{
 				var type:int=attrHash.keys()[0];
-				_skin.lb_type.text = CharAttributeType.getCNName(type);
+//				_skin.lb_type.styleName = CharAttributeType.getAttrNameUrl(type);
 				_skin.lbl_gongj1.text=attrHash.getValue(type);
 			}
 			else

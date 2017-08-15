@@ -17,7 +17,7 @@ package org.mokylin.skin.app.meiren
 		//==========================================================================
 		public var bg:feathers.controls.UIAsset;
 
-		public var lb_type:feathers.controls.Label;
+		public var lb_type:feathers.controls.UIAsset;
 
 		public var lbl_gongj1:feathers.controls.Label;
 
@@ -34,7 +34,9 @@ package org.mokylin.skin.app.meiren
 			super();
 			
 			this.currentState = "normal";
-			this.elementsContent = [bg_i(),lb_type_i(),lbl_gongj1_i(),uiName_i(),uiLevel_i()];
+			this.height = 63;
+			this.width = 151;
+			this.elementsContent = [bg_i(),lbl_gongj1_i(),uiName_i(),uiLevel_i(),lb_type_i()];
 			
 			states = {
 			};
@@ -50,24 +52,22 @@ package org.mokylin.skin.app.meiren
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 112;
+			temp.height = 63;
 			temp.styleName = "ui/common/tips/tips_2.png";
-			temp.width = 280;
+			temp.width = 151;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
 
-		private function lb_type_i():feathers.controls.Label
+		private function lb_type_i():feathers.controls.UIAsset
 		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			lb_type = temp;
 			temp.name = "lb_type";
-			temp.text = "攻  击：";
-			temp.color = 0xA3A594;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 20;
-			temp.y = 57;
+			temp.styleName = "ui/common/shuxing/gjl.png";
+			temp.x = 12;
+			temp.y = 39;
 			return temp;
 		}
 
@@ -77,11 +77,11 @@ package org.mokylin.skin.app.meiren
 			lbl_gongj1 = temp;
 			temp.name = "lbl_gongj1";
 			temp.text = "100";
-			temp.color = 0x00FF33;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 76;
-			temp.x = 83;
-			temp.y = 57;
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 55;
+			temp.x = 60;
+			temp.y = 40;
 			return temp;
 		}
 
@@ -91,8 +91,8 @@ package org.mokylin.skin.app.meiren
 			uiLevel = temp;
 			temp.name = "uiLevel";
 			temp.styleName = "ui/mainui/meirenHead/jieshu/12.png";
-			temp.x = 244;
-			temp.y = 9;
+			temp.x = 119;
+			temp.y = 4;
 			return temp;
 		}
 
@@ -102,8 +102,8 @@ package org.mokylin.skin.app.meiren
 			uiName = temp;
 			temp.name = "uiName";
 			temp.styleName = "ui/mainui/meirenHead/head_icon/name2s.png";
-			temp.x = 19;
-			temp.y = 19;
+			temp.x = 8;
+			temp.y = 10;
 			return temp;
 		}
 

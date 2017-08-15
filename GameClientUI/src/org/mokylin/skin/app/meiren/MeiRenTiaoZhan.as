@@ -66,8 +66,8 @@ package org.mokylin.skin.app.meiren
 			super();
 			
 			this.currentState = "normal";
-			this.height = 577;
-			this.width = 529;
+			this.height = 641;
+			this.width = 574;
 			this.elementsContent = [bgQuan_i(),grpIcon1_i(),grpIcon2_i(),btn_next_i(),skinJihuo_i(),lb_time_i()];
 			
 			states = {
@@ -94,7 +94,7 @@ package org.mokylin.skin.app.meiren
 			bgQuan = temp;
 			temp.name = "bgQuan";
 			temp.styleName = "ui/app/meiren/tiaozhan/xiaoguodi.png";
-			temp.x = 18;
+			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
@@ -108,8 +108,8 @@ package org.mokylin.skin.app.meiren
 			var skin:StateSkin = new org.mokylin.skin.app.meiren.BtnTiaoZhan()
 			temp.skin = skin
 			temp.width = 176;
-			temp.x = 176;
-			temp.y = 494;
+			temp.x = 202;
+			temp.y = 558;
 			return temp;
 		}
 
@@ -118,8 +118,8 @@ package org.mokylin.skin.app.meiren
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grpIcon1 = temp;
 			temp.name = "grpIcon1";
-			temp.x = 102;
-			temp.y = 323;
+			temp.x = 128;
+			temp.y = 305;
 			temp.elementsContent = [__MeiRenTiaoZhan_UIAsset1_i(),ic1_i(),ic2_i(),ic3_i(),ic4_i()];
 			return temp;
 		}
@@ -129,8 +129,8 @@ package org.mokylin.skin.app.meiren
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grpIcon2 = temp;
 			temp.name = "grpIcon2";
-			temp.x = 0;
-			temp.y = 106;
+			temp.x = 3;
+			temp.y = 42;
 			temp.elementsContent = [icon1_i(),icon2_i(),icon3_i(),icon4_i(),icon5_i(),icon6_i(),icon7_i(),icon8_i(),icon9_i()];
 			return temp;
 		}
@@ -185,8 +185,8 @@ package org.mokylin.skin.app.meiren
 			icon1 = temp;
 			temp.name = "icon1";
 			temp.styleName = "ui/app/meiren/icon/guangqiu.png";
-			temp.x = 231;
-			temp.y = 315;
+			temp.x = 258;
+			temp.y = 449;
 			return temp;
 		}
 
@@ -196,8 +196,8 @@ package org.mokylin.skin.app.meiren
 			icon2 = temp;
 			temp.name = "icon2";
 			temp.styleName = "ui/app/meiren/icon/guangqiuxiao.png";
-			temp.x = 92;
-			temp.y = 305;
+			temp.x = 109;
+			temp.y = 399;
 			return temp;
 		}
 
@@ -208,7 +208,7 @@ package org.mokylin.skin.app.meiren
 			temp.name = "icon3";
 			temp.styleName = "ui/app/meiren/icon/guangqiuxiao.png";
 			temp.x = 15;
-			temp.y = 216;
+			temp.y = 284;
 			return temp;
 		}
 
@@ -219,7 +219,7 @@ package org.mokylin.skin.app.meiren
 			temp.name = "icon4";
 			temp.styleName = "ui/app/meiren/icon/guangqiuxiao.png";
 			temp.x = 0;
-			temp.y = 104;
+			temp.y = 135;
 			return temp;
 		}
 
@@ -240,8 +240,8 @@ package org.mokylin.skin.app.meiren
 			icon6 = temp;
 			temp.name = "icon6";
 			temp.styleName = "ui/app/meiren/icon/guangqiuxiao.png";
-			temp.x = 431;
-			temp.y = 0;
+			temp.x = 443;
+			temp.y = 1;
 			return temp;
 		}
 
@@ -251,8 +251,8 @@ package org.mokylin.skin.app.meiren
 			icon7 = temp;
 			temp.name = "icon7";
 			temp.styleName = "ui/app/meiren/icon/guangqiuxiao.png";
-			temp.x = 499;
-			temp.y = 104;
+			temp.x = 515;
+			temp.y = 135;
 			return temp;
 		}
 
@@ -262,8 +262,8 @@ package org.mokylin.skin.app.meiren
 			icon8 = temp;
 			temp.name = "icon8";
 			temp.styleName = "ui/app/meiren/icon/guangqiuxiao.png";
-			temp.x = 483;
-			temp.y = 216;
+			temp.x = 502;
+			temp.y = 284;
 			return temp;
 		}
 
@@ -273,8 +273,8 @@ package org.mokylin.skin.app.meiren
 			icon9 = temp;
 			temp.name = "icon9";
 			temp.styleName = "ui/app/meiren/icon/guangqiuxiao.png";
-			temp.x = 417;
-			temp.y = 304;
+			temp.x = 407;
+			temp.y = 400;
 			return temp;
 		}
 
@@ -288,8 +288,8 @@ package org.mokylin.skin.app.meiren
 			temp.color = 0xFF0D0D;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 230;
-			temp.x = 149;
-			temp.y = 559;
+			temp.x = 175;
+			temp.y = 623;
 			return temp;
 		}
 
@@ -302,8 +302,8 @@ package org.mokylin.skin.app.meiren
 			var skin:StateSkin = new org.mokylin.skin.app.meiren.BtnTiaoZhan2()
 			temp.skin = skin
 			temp.width = 176;
-			temp.x = 176;
-			temp.y = 494;
+			temp.x = 202;
+			temp.y = 558;
 			return temp;
 		}
 

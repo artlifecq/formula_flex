@@ -5,7 +5,7 @@ package org.mokylin.skin.app.tips
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
-	
+
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
@@ -17,42 +17,44 @@ package org.mokylin.skin.app.tips
 		//                                定义成员变量
 		//==========================================================================
 		public var bg:feathers.controls.Group;
-		
+
 		public var bg_bai:feathers.controls.UIAsset;
-		
+
+		public var bg_hong:feathers.controls.UIAsset;
+
 		public var bg_huang:feathers.controls.UIAsset;
-		
+
 		public var bg_lan:feathers.controls.UIAsset;
-		
+
 		public var bg_lv:feathers.controls.UIAsset;
-		
+
 		public var bg_zi:feathers.controls.UIAsset;
-		
+
 		public var grp_foot:feathers.controls.Group;
-		
+
 		public var grp_type:feathers.controls.Group;
-		
+
 		public var lbCurrentNum:feathers.controls.Label;
-		
+
 		public var lbFangYu:feathers.controls.Label;
-		
+
 		public var lbGongJi:feathers.controls.Label;
-		
+
 		public var lbLuJing:feathers.controls.Label;
-		
+
 		public var lbName:feathers.controls.Label;
-		
+
 		public var lbNextName:feathers.controls.Label;
-		
+
 		public var lbShengMing:feathers.controls.Label;
-		
+
 		public var lbShuxing:feathers.controls.Label;
-		
+
 		public var ui_di:feathers.controls.UIAsset;
-		
+
 		public var ui_xian3:feathers.controls.UIAsset;
-		
-		
+
+
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
@@ -69,8 +71,8 @@ package org.mokylin.skin.app.tips
 			};
 			skinNames={};
 		}
-		
-		
+
+
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
@@ -84,7 +86,7 @@ package org.mokylin.skin.app.tips
 			temp.y = 48;
 			return temp;
 		}
-		
+
 		private function __Tips_DaoJu2_Label2_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -95,7 +97,7 @@ package org.mokylin.skin.app.tips
 			temp.y = 135;
 			return temp;
 		}
-		
+
 		private function __Tips_DaoJu2_Label3_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -106,7 +108,7 @@ package org.mokylin.skin.app.tips
 			temp.y = 0;
 			return temp;
 		}
-		
+
 		private function __Tips_DaoJu2_Label4_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -117,7 +119,7 @@ package org.mokylin.skin.app.tips
 			temp.y = 20;
 			return temp;
 		}
-		
+
 		private function __Tips_DaoJu2_Label5_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -128,7 +130,7 @@ package org.mokylin.skin.app.tips
 			temp.y = 40;
 			return temp;
 		}
-		
+
 		private function __Tips_DaoJu2_Label6_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -141,7 +143,7 @@ package org.mokylin.skin.app.tips
 			temp.y = 0;
 			return temp;
 		}
-		
+
 		private function __Tips_DaoJu2_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -150,7 +152,7 @@ package org.mokylin.skin.app.tips
 			temp.y = 124;
 			return temp;
 		}
-		
+
 		private function __Tips_DaoJu2_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -159,7 +161,7 @@ package org.mokylin.skin.app.tips
 			temp.y = 162;
 			return temp;
 		}
-		
+
 		private function bg_bai_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -171,7 +173,20 @@ package org.mokylin.skin.app.tips
 			temp.y = 0;
 			return temp;
 		}
-		
+
+		private function bg_hong_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg_hong = temp;
+			temp.name = "bg_hong";
+			temp.height = 293;
+			temp.styleName = "ui/common/tips/zhuangbei/bg_hong.png";
+			temp.visible = false;
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
 		private function bg_huang_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -184,7 +199,7 @@ package org.mokylin.skin.app.tips
 			temp.y = 0;
 			return temp;
 		}
-		
+
 		private function bg_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
@@ -192,10 +207,10 @@ package org.mokylin.skin.app.tips
 			temp.name = "bg";
 			temp.x = 0;
 			temp.y = 0;
-			temp.elementsContent = [ui_di_i(),bg_lv_i(),bg_lan_i(),bg_zi_i(),bg_huang_i(),bg_bai_i()];
+			temp.elementsContent = [ui_di_i(),bg_lv_i(),bg_lan_i(),bg_zi_i(),bg_huang_i(),bg_bai_i(),bg_hong_i()];
 			return temp;
 		}
-		
+
 		private function bg_lan_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -208,7 +223,7 @@ package org.mokylin.skin.app.tips
 			temp.y = 0;
 			return temp;
 		}
-		
+
 		private function bg_lv_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -221,7 +236,7 @@ package org.mokylin.skin.app.tips
 			temp.y = 0;
 			return temp;
 		}
-		
+
 		private function bg_zi_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -234,7 +249,7 @@ package org.mokylin.skin.app.tips
 			temp.y = 0;
 			return temp;
 		}
-		
+
 		private function grp_foot_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
@@ -245,7 +260,7 @@ package org.mokylin.skin.app.tips
 			temp.elementsContent = [lbLuJing_i(),__Tips_DaoJu2_Label6_i()];
 			return temp;
 		}
-		
+
 		private function grp_type_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
@@ -256,7 +271,7 @@ package org.mokylin.skin.app.tips
 			temp.elementsContent = [__Tips_DaoJu2_Label3_i(),__Tips_DaoJu2_Label4_i(),__Tips_DaoJu2_Label5_i(),lbGongJi_i(),lbFangYu_i(),lbShengMing_i()];
 			return temp;
 		}
-		
+
 		private function lbCurrentNum_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -270,7 +285,7 @@ package org.mokylin.skin.app.tips
 			temp.y = 48;
 			return temp;
 		}
-		
+
 		private function lbFangYu_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -284,7 +299,7 @@ package org.mokylin.skin.app.tips
 			temp.y = 20;
 			return temp;
 		}
-		
+
 		private function lbGongJi_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -298,7 +313,7 @@ package org.mokylin.skin.app.tips
 			temp.y = 0;
 			return temp;
 		}
-		
+
 		private function lbLuJing_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -313,7 +328,7 @@ package org.mokylin.skin.app.tips
 			temp.y = 20;
 			return temp;
 		}
-		
+
 		private function lbName_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -329,7 +344,7 @@ package org.mokylin.skin.app.tips
 			temp.y = 11;
 			return temp;
 		}
-		
+
 		private function lbNextName_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -343,7 +358,7 @@ package org.mokylin.skin.app.tips
 			temp.y = 136;
 			return temp;
 		}
-		
+
 		private function lbShengMing_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -357,7 +372,7 @@ package org.mokylin.skin.app.tips
 			temp.y = 40;
 			return temp;
 		}
-		
+
 		private function lbShuxing_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -370,7 +385,7 @@ package org.mokylin.skin.app.tips
 			temp.y = 173;
 			return temp;
 		}
-		
+
 		private function ui_di_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -381,7 +396,7 @@ package org.mokylin.skin.app.tips
 			temp.y = 293;
 			return temp;
 		}
-		
+
 		private function ui_xian3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -392,6 +407,6 @@ package org.mokylin.skin.app.tips
 			temp.y = 259;
 			return temp;
 		}
-		
+
 	}
 }

@@ -32,8 +32,8 @@ package org.mokylin.skin.app.meiren
 			super();
 			
 			this.currentState = "normal";
-			this.height = 99;
-			this.width = 109;
+			this.height = 106;
+			this.width = 125;
 			this.elementsContent = [uiNormal_i(),uiSelect_i(),uiName_i(),icon_i(),uiZhan_i()];
 			
 			states = {
@@ -51,8 +51,8 @@ package org.mokylin.skin.app.meiren
 			icon = temp;
 			temp.name = "icon";
 			temp.styleName = "ui/mainui/meirenHead/head_icon/head2s.png";
-			temp.x = 25;
-			temp.y = 0;
+			temp.x = 31;
+			temp.y = -1;
 			return temp;
 		}
 
@@ -62,8 +62,8 @@ package org.mokylin.skin.app.meiren
 			uiName = temp;
 			temp.name = "uiName";
 			temp.styleName = "ui/mainui/meirenHead/head_icon/name2s.png";
-			temp.x = 20;
-			temp.y = 69;
+			temp.x = 27;
+			temp.y = 72;
 			return temp;
 		}
 
@@ -74,7 +74,7 @@ package org.mokylin.skin.app.meiren
 			temp.name = "uiNormal";
 			temp.styleName = "ui/mainui/meirenHead/meirenSelect/up.png";
 			temp.x = 0;
-			temp.y = 14;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -85,7 +85,7 @@ package org.mokylin.skin.app.meiren
 			temp.name = "uiSelect";
 			temp.styleName = "ui/mainui/meirenHead/meirenSelect/select.png";
 			temp.x = 0;
-			temp.y = 14;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -95,8 +95,8 @@ package org.mokylin.skin.app.meiren
 			uiZhan = temp;
 			temp.name = "uiZhan";
 			temp.styleName = "ui/app/meiren/chuzhan.png";
-			temp.x = 81;
-			temp.y = 2;
+			temp.x = 90;
+			temp.y = 13;
 			return temp;
 		}
 

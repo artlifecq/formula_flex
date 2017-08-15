@@ -4,6 +4,7 @@ package com.rpgGame.appModule.zhangong
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.display3D.InterAvatar3D;
+	import com.rpgGame.app.manager.TrusteeshipManager;
 	import com.rpgGame.app.manager.ZhanGongManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.pop.UIPopManager;
@@ -43,7 +44,6 @@ package com.rpgGame.appModule.zhangong
 	
 	import away3d.events.Event;
 	
-	import feathers.controls.UIAsset;
 	import feathers.utils.filter.GrayFilter;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -383,7 +383,8 @@ package com.rpgGame.appModule.zhangong
 		{
 			if(_q_meritorious)
 			{
-				SceneSender.sceneMapTransport(_q_meritorious.q_mapID, _q_meritorious.q_site_x, _q_meritorious.q_site_y);
+				TrusteeshipManager.getInstance().startAutoFightfromFly([_q_meritorious.q_mapID, _q_meritorious.q_site_x, _q_meritorious.q_site_y],1);
+//				SceneSender.sceneMapTransport(_q_meritorious.q_mapID, _q_meritorious.q_site_x, _q_meritorious.q_site_y);
 			}
 		}
 		

@@ -39,7 +39,7 @@ package org.mokylin.skin.app.fuben
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [__FuBen_JingYan_Skin_UIAsset2_i(),__FuBen_JingYan_Skin_UIAsset3_i(),lbTips_i(),lbShengyu_i(),lbGoumai_i(),btnEnter_i(),btnAdd_i()];
+			this.elementsContent = [__FuBen_JingYan_Skin_UIAsset2_i(),__FuBen_JingYan_Skin_UIAsset3_i(),lbShengyu_i(),lbGoumai_i(),btnEnter_i(),btnAdd_i(),lbTips_i()];
 			
 			states = {
 			};
@@ -54,17 +54,17 @@ package org.mokylin.skin.app.fuben
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/big_bg/fuben/bg.jpg";
-			temp.x = 22;
-			temp.y = 87;
+			temp.x = 23;
+			temp.y = 88;
 			return temp;
 		}
 
 		private function __FuBen_JingYan_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/fuben/shoutongjiangli.png";
-			temp.x = 392;
-			temp.y = 496;
+			temp.styleName = "ui/app/fuben/tongguanjiangli.png";
+			temp.x = 379;
+			temp.y = 523;
 			return temp;
 		}
 
@@ -74,8 +74,8 @@ package org.mokylin.skin.app.fuben
 			btnAdd = temp;
 			temp.name = "btnAdd";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_jia;
-			temp.x = 150;
-			temp.y = 510;
+			temp.x = 149;
+			temp.y = 532;
 			return temp;
 		}
 
@@ -86,11 +86,12 @@ package org.mokylin.skin.app.fuben
 			temp.name = "btnEnter";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "挑 战";
+			temp.fontSize = 16;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
 			temp.color = 0xFFFFFF;
-			temp.width = 90;
-			temp.x = 817;
-			temp.y = 526;
+			temp.width = 110;
+			temp.x = 811;
+			temp.y = 539;
 			return temp;
 		}
 
@@ -104,7 +105,7 @@ package org.mokylin.skin.app.fuben
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 130;
 			temp.x = 33;
-			temp.y = 543;
+			temp.y = 561;
 			return temp;
 		}
 
@@ -118,7 +119,7 @@ package org.mokylin.skin.app.fuben
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 130;
 			temp.x = 33;
-			temp.y = 512;
+			temp.y = 534;
 			return temp;
 		}
 
@@ -127,14 +128,14 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbTips = temp;
 			temp.name = "lbTips";
-			temp.height = 86;
-			temp.htmlText = "副本提示：<br>1. 当前一波敌人全部死亡后会刷新出下一波怪物，请在限定时间内迅速击杀，杀敌越多，奖励越丰厚。<br>2. 副本会根据您的等级和杀敌数量给予银两奖励。<br>3. 您可购买额外的挑战次数，购买次数与VIP等级相关。";
-			temp.leading = 8;
-			temp.color = 0xCFC6AE;
+			temp.height = 88;
+			temp.htmlText = "副本提示<br>1. 当前一波敌人全部死亡后会刷新出下一波怪物，请在限时内击杀，杀敌越多奖励越多。<br>2. 副本会根据您的等级和杀敌数量给予银两奖励。<br>3. 您可购买额外的挑战次数，购买次数与VIP等级相关。";
+			temp.leading = 7;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 889;
-			temp.x = 33;
-			temp.y = 387;
+			temp.width = 875;
+			temp.x = 32;
+			temp.y = 424;
 			return temp;
 		}
 

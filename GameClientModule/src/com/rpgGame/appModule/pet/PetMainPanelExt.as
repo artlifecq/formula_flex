@@ -309,7 +309,7 @@ package com.rpgGame.appModule.pet
 			{
 				_avatar=new InterAvatar3D();
 				_modContaner.addChild3D(_avatar);
-				_avatar.x = 408;
+				_avatar.x = 448;
 				_avatar.y =490;
 			}
 			_avatarData=new RoleData(0);		

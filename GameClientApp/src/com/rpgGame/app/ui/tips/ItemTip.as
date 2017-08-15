@@ -21,6 +21,8 @@ package com.rpgGame.app.ui.tips
 	
 	import org.mokylin.skin.app.tips.Tips_DaoJu1;
 	
+	import starling.display.DisplayObject;
+	
 	/**
 	 * 物品TIPS
 	 * @author luguozheng
@@ -60,7 +62,7 @@ package com.rpgGame.app.ui.tips
 			_iconFace.gridInfo=new GridInfo(ItemContainerID.BackPack,0);
 			addChild(_iconFace);
 			_iconFace.bindBg(_itemTip.Icon);//x=16;
-//			_iconFace.y=43;
+			//			_iconFace.y=43;
 			labelList=new Vector.<Label>();
 			lines=new Vector.<UIAsset>();
 			uititles=new Vector.<UIAsset>();
@@ -306,7 +308,9 @@ package com.rpgGame.app.ui.tips
 			for(var i:int=0;i<_itemTip.bg.numChildren;i++){
 				_itemTip.bg.getChildAt(i).visible=false;
 			}
-			var ui_bg:UIAsset=_itemTip.bg.getChildAt(_itemInfo.qItem.q_default) as UIAsset;
+			var obj:DisplayObject=_itemTip.bg.getChildAt(_itemInfo.qItem.q_default);
+			if(!obj) obj=_itemTip.bg.getChildAt(0);
+			var ui_bg:UIAsset=obj as UIAsset;
 			ui_bg.visible=true;
 			ui_bg.height=curY;
 			_itemTip.bg_di.y=ui_bg.height;
