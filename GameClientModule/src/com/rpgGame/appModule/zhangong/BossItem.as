@@ -43,7 +43,6 @@ package com.rpgGame.appModule.zhangong
 	
 	import away3d.events.Event;
 	
-	import feathers.controls.UIAsset;
 	import feathers.utils.filter.GrayFilter;
 	
 	import org.client.mainCore.manager.EventManager;

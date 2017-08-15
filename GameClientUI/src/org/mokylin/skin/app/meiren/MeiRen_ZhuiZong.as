@@ -8,6 +8,8 @@ package org.mokylin.skin.app.meiren
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.app.meiren.MeiRenBoss_Item;
+	import org.mokylin.skin.app.meiren.button.ButtonLijintisheng;
+	import org.mokylin.skin.app.meiren.button.ButtonYuanbaotisheng;
 	import org.mokylin.skin.component.button.ButtonSkin_hide;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 
@@ -21,6 +23,10 @@ package org.mokylin.skin.app.meiren
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
+		public var btnLijin:feathers.controls.Button;
+
+		public var btnYuanbao:feathers.controls.Button;
+
 		public var btn_close:feathers.controls.Button;
 
 		public var btn_open:feathers.controls.Button;
@@ -66,7 +72,7 @@ package org.mokylin.skin.app.meiren
 			this.currentState = "normal";
 			this.height = 287;
 			this.width = 248;
-			this.elementsContent = [task_box_i(),btn_open_i(),btn_close_i()];
+			this.elementsContent = [task_box_i(),btn_open_i(),btn_close_i(),btnYuanbao_i(),btnLijin_i()];
 			
 			states = {
 			};
@@ -83,6 +89,28 @@ package org.mokylin.skin.app.meiren
 			temp.styleName = "ui/mainui/renwu/renwuzhuizongbg.png";
 			temp.x = 0;
 			temp.y = 0;
+			return temp;
+		}
+
+		private function btnLijin_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btnLijin = temp;
+			temp.name = "btnLijin";
+			temp.styleClass = org.mokylin.skin.app.meiren.button.ButtonLijintisheng;
+			temp.x = 175;
+			temp.y = -61;
+			return temp;
+		}
+
+		private function btnYuanbao_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			btnYuanbao = temp;
+			temp.name = "btnYuanbao";
+			temp.styleClass = org.mokylin.skin.app.meiren.button.ButtonYuanbaotisheng;
+			temp.x = 104;
+			temp.y = -61;
 			return temp;
 		}
 

@@ -4,6 +4,7 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.ui.alert.FangChenMiPanelExt;
 	import com.rpgGame.app.ui.alert.GameAlert;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.enum.FangChenMiEnum;
@@ -76,13 +77,16 @@ package com.rpgGame.app.manager
 		
 		private static function showChenMi(msg : String) : void
 		{
-			if(_fangchenmiPanel&&_fangchenmiPanel.stage!=null)
+			if(ClientConfig.isBanShu)
 			{
-				_fangchenmiPanel.updateText(msg);
+				if(_fangchenmiPanel&&_fangchenmiPanel.stage!=null)
+				{
+					_fangchenmiPanel.updateText(msg);
+				}
+				else
+					_fangchenmiPanel = FangChenMiPanelExt.showFangChenMiUtil(msg);
 			}
-			else
-				_fangchenmiPanel = FangChenMiPanelExt.showFangChenMiUtil(msg);
-//			NoticeManager.chatSystemNotify(msg);
+			//			NoticeManager.chatSystemNotify(msg);
 		}
 		
 		private function showChenMiClick(gameAlert:GameAlert):void

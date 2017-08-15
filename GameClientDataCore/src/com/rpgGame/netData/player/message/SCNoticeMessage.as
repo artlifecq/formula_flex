@@ -17,6 +17,9 @@ package com.rpgGame.netData.player.message{
 		
 		//参数列表
 		private var _values: Vector.<String> = new Vector.<String>();
+		//子参数
+		private var _parameters: String;
+		
 		
 		/**
 		 * 写入字节缓存
@@ -30,6 +33,8 @@ package com.rpgGame.netData.player.message{
 			for (i = 0; i < _values.length; i++) {
 				writeString(_values[i]);
 			}
+			//子参数
+			writeString(_parameters);
 			return true;
 		}
 		
@@ -45,6 +50,8 @@ package com.rpgGame.netData.player.message{
 			for (i = 0; i < values_length; i++) {
 				_values[i] = readString();
 			}
+			//子参数
+			_parameters = readString();
 			return true;
 		}
 		
@@ -84,6 +91,21 @@ package com.rpgGame.netData.player.message{
 		 */
 		public function set values(value: Vector.<String>): void{
 			this._values = value;
+		}
+		
+		/**
+		 * get 子参数
+		 * @return 
+		 */
+		public function get parameters(): String{
+			return _parameters;
+		}
+		
+		/**
+		 * set 子参数
+		 */
+		public function set parameters(value: String): void{
+			this._parameters = value;
 		}
 		
 	}

@@ -6,6 +6,7 @@ package com.rpgGame.app.sender
 	import com.rpgGame.netData.marriage.message.CSInviteMessage;
 	import com.rpgGame.netData.marriage.message.CSMarriageInfoMessage;
 	import com.rpgGame.netData.marriage.message.CSMarriageLogMessage;
+	import com.rpgGame.netData.marriage.message.CSMarriageSeekingMessage;
 	import com.rpgGame.netData.marriage.message.CSNoticeZoneMessage;
 	import com.rpgGame.netData.marriage.message.CSProposalMessage;
 	import com.rpgGame.netData.marriage.message.CSTargetProposalResultMessage;
@@ -98,6 +99,13 @@ package com.rpgGame.app.sender
 			var msg:CSUpGradeMessage=new CSUpGradeMessage();
 			msg.type=type;
 			msg.autoBuy=autoBuy;
+			SocketConnection.send(msg);
+		}
+		
+		/**征婚*/
+		public static function upCSMarriageSeekingMessage():void
+		{
+			var msg:CSMarriageSeekingMessage=new CSMarriageSeekingMessage();
 			SocketConnection.send(msg);
 		}
 	}

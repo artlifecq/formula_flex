@@ -232,7 +232,7 @@ package com.rpgGame.app.graphics
 			addElement(_nameBar);
 			//			addElement(_countryNameBar);
 			addElement(_junXianBar);
-		
+			
 			addElement(_guildNameBar);
 			addElement(_familNameBar);
 			addElement(_icoImage);
@@ -256,6 +256,10 @@ package com.rpgGame.app.graphics
 			if (!_role) 
 			{
 				return;
+			}
+			if(_role.type==SceneCharType.PLAYER)
+			{
+				trace("人物头上的位置："+_role.headFace.x+"+"+_role.headFace.y);
 			}
 			var nameVisible : Boolean = _role.getAttachVisible(AttachDisplayType.ROLE_HEAD_NAME);
 			if (_role.type==SceneCharType.GIRL_PET) 
@@ -1558,7 +1562,7 @@ package com.rpgGame.app.graphics
 			addAndUpdateHP();
 			//this.addChildAt(_bloodBar,0);
 			this.deCtrl.addTop(_bloodBar,DecorCtrl.TOP_HPMP);
-//			showBloodTween=TweenLite.delayedCall(2,onHideBlood);
+			//			showBloodTween=TweenLite.delayedCall(2,onHideBlood);
 			sortAttackFace();
 		}
 		

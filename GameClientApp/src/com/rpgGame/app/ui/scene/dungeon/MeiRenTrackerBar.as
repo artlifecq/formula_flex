@@ -1,23 +1,35 @@
 package com.rpgGame.app.ui.scene.dungeon
 {
+	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.DungeonManager;
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.manager.TrusteeshipManager;
+	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.pop.UIPopManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.MainRoleSearchPathManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.sender.DungeonSender;
+	import com.rpgGame.app.sender.PetSender;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.events.DungeonEvent;
+	import com.rpgGame.core.events.PetEvent;
+	import com.rpgGame.core.manager.tips.TargetTipsMaker;
+	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.cfg.DailyZoneMonsterCfgData;
+	import com.rpgGame.coreData.cfg.GlobalSheetData;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_dailyzone_monster;
+	import com.rpgGame.coreData.clientConfig.Q_global;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.info.alert.AlertSetInfo;
 	import com.rpgGame.coreData.lang.LangAlertInfo;
+	import com.rpgGame.coreData.type.CharAttributeType;
+	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.zone.bean.KillMonsterInfo;
 	
 	import flash.geom.Point;
@@ -45,6 +57,10 @@ package com.rpgGame.app.ui.scene.dungeon
 		private var remainTime:int;
 		private var alertOk:AlertSetInfo;
 		
+		private var goldBuyText:String="";
+		private var goldBuyMod:Q_global;
+		private var bindGoldBuyMod:Q_global;
+		
 		public function MeiRenTrackerBar()
 		{
 			_skin=new MeiRen_ZhuiZong();
@@ -54,6 +70,9 @@ package com.rpgGame.app.ui.scene.dungeon
 		
 		private function initPanel():void
 		{
+			goldBuyMod=GlobalSheetData.getSettingInfo(845);
+			bindGoldBuyMod=GlobalSheetData.getSettingInfo(846);
+			
 			skinList=new Array();
 			skinList.push(_skin.sec_navi1);
 			skinList.push(_skin.killbut_0);
@@ -80,6 +99,7 @@ package com.rpgGame.app.ui.scene.dungeon
 			addEvent();
 			enterZone();
 			finishWalk(null);
+			onBuyNumChange();
 		}
 		
 		override protected function onHide():void
@@ -102,11 +122,18 @@ package com.rpgGame.app.ui.scene.dungeon
 				case _skin.sec_subbut2:				
 					zoneOutToGame();
 					break;
+				case _skin.btnYuanbao:
+					onGoldAdd();
+					break;
+				case _skin.btnLijin:
+					onBindGoldAdd();
+					break;
 			}		
 		}
 		
 		private function addEvent():void
 		{
+			EventManager.addEvent(PetEvent.PET_BUYNUM_CHANGE,onBuyNumChange);
 			EventManager.addEvent(DungeonEvent.ENTER_ZONE,enterZone);//进入副本
 			EventManager.addEvent(DungeonEvent.OUT_ZONE,outZone);//退出
 			EventManager.addEvent(DungeonEvent.ZONE_STAGE_CHANGE,setTageChange);//副本状态
@@ -116,6 +143,7 @@ package com.rpgGame.app.ui.scene.dungeon
 		}
 		private function removeEvent():void
 		{
+			EventManager.removeEvent(PetEvent.PET_BUYNUM_CHANGE,onBuyNumChange);
 			EventManager.removeEvent(DungeonEvent.ENTER_ZONE,enterZone);//进入副本
 			EventManager.removeEvent(DungeonEvent.OUT_ZONE,outZone);//退出
 			EventManager.removeEvent(DungeonEvent.ZONE_STAGE_CHANGE,setTageChange);//副本状态
@@ -128,6 +156,43 @@ package com.rpgGame.app.ui.scene.dungeon
 			{
 				TaskUtil.removeLabelEvet(_skin["killbut_"+i].skin.labelDisplay);
 			}
+		}
+		
+		private function isCanChangeNum(type:int):Boolean
+		{
+			if(type==1)
+			{
+				var arr:Array=JSONUtil.decode(goldBuyMod.q_string_value);
+				var nowNum:int=Mgr.petMgr.glodNum;
+				var maxNum:int=arr.length;
+				if(nowNum>=maxNum)
+				{
+					NoticeManager.showNotifyById(21000);
+					return false;
+				}
+				else if(arr[nowNum]>MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_GOLD))
+				{
+					NoticeManager.showNotifyById(21005);
+					return false;
+				}
+			}
+			else
+			{
+				arr=JSONUtil.decode(bindGoldBuyMod.q_string_value);
+				nowNum=Mgr.petMgr.bindGlodNum;
+				maxNum=arr.length;
+				if(nowNum>=maxNum)
+				{
+					NoticeManager.showNotifyById(21000);
+					return false;
+				}
+				else if(arr[nowNum]>MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_GOLD))
+				{
+					NoticeManager.showNotifyById(2013);
+					return false;
+				}
+			}
+			return true;
 		}
 		
 		private function touchBut(id:int):void
@@ -171,6 +236,67 @@ package com.rpgGame.app.ui.scene.dungeon
 			{
 				UIPopManager.showAlonePopUI(DungeonFightPop);
 			}		
+		}
+		
+		private function onBindGoldAdd():void
+		{
+			// TODO Auto Generated method stub
+			if(isCanChangeNum(2))
+			{
+				PetSender.reqExaBuyMessage(2);
+			}
+		}
+		
+		private function onGoldAdd():void
+		{
+			// TODO Auto Generated method stub
+			if(isCanChangeNum(1))
+			{
+				PetSender.reqExaBuyMessage(1);
+			}
+		}
+		
+		private function onBuyNumChange():void
+		{
+			// TODO Auto Generated method stub
+			var price:int;
+			var nowNum:int;
+			var maxNum:int;
+			var arr:Array;
+			arr=JSONUtil.decode(goldBuyMod.q_string_value);
+			nowNum=Mgr.petMgr.glodNum;
+			maxNum=arr.length;
+			if(nowNum<maxNum)
+			{
+				price=arr[nowNum];
+				goldBuyText=HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"消耗")+HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,price.toString())+
+					HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"元宝临时提高实力")+HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"（已使用"+nowNum+"/"+maxNum+"次）\n")+
+					HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"可获得伤害加深")+HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"+3%")+
+					HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"或防御提升")+HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"+3%");
+			}
+			else
+			{
+				goldBuyText=HtmlTextUtil.getTextColor(StaticValue.A_UI_GRAY_TEXT,"已达上限");					
+			}
+			TipTargetManager.show( _skin.btnYuanbao, TargetTipsMaker.makeSimpleTextTips(goldBuyText));
+			
+			arr=JSONUtil.decode(bindGoldBuyMod.q_string_value);
+			nowNum=Mgr.petMgr.bindGlodNum;
+			maxNum=arr.length;
+			if(nowNum<maxNum)
+			{
+				price=arr[nowNum];
+				goldBuyText=HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"消耗")+HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,price.toString())+
+					HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"礼金临时提高实力")+HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"（已使用"+nowNum+"/"+maxNum+"次）\n")+
+					HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"可获得伤害加深")+HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"+3%")+
+					HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"或防御提升")+HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"+3%");
+			}
+			else
+			{
+				goldBuyText=HtmlTextUtil.getTextColor(StaticValue.A_UI_GRAY_TEXT,"已达上限");					
+			}
+			updateAtt();
+			TipTargetManager.show( _skin.btnLijin, TargetTipsMaker.makeSimpleTextTips(goldBuyText));
 		}
 		
 		private function updateAtt():void

@@ -44,6 +44,8 @@ package org.mokylin.skin.app.hunyin
 			super();
 			
 			this.currentState = "normal";
+			this.height = 264;
+			this.width = 326;
 			this.elementsContent = [bg_i(),btnClose_i(),btn_ok_i(),__AlertJieHun_UIAsset1_i(),lbInfo1_i(),lbInfo2_i(),btn_jieshou_i(),btn_jujue_i()];
 			
 			states = {
@@ -96,11 +98,10 @@ package org.mokylin.skin.app.hunyin
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_jieshou = temp;
 			temp.name = "btn_jieshou";
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.label = "接 受";
 			temp.fontSize = 16;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.color = 0xEAEABC;
 			temp.width = 88;
 			temp.x = 57;
 			temp.y = 216;
@@ -112,11 +113,10 @@ package org.mokylin.skin.app.hunyin
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_jujue = temp;
 			temp.name = "btn_jujue";
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.label = "拒 绝";
 			temp.fontSize = 16;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
-			temp.color = 0xEAEABC;
 			temp.width = 88;
 			temp.x = 181;
 			temp.y = 216;
@@ -129,7 +129,7 @@ package org.mokylin.skin.app.hunyin
 			btn_ok = temp;
 			temp.name = "btn_ok";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.label = "确 定";
+			temp.label = "立即传送";
 			temp.fontSize = 16;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xEAEABC;

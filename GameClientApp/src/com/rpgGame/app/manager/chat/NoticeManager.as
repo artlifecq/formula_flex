@@ -206,7 +206,7 @@ package com.rpgGame.app.manager.chat
 			var words : String;
 			if(tp==CHAT_CHUANWEN||tp==CHAT_GONGGAO)
 			{
-				words=ChatUtil.getNoticeMessageHtml(notiMsg.q_content,"",args);
+				words=ChatUtil.getNoticeMessageHtml(notiMsg.q_content,msg.parameters,args);
 				notify(tp, words);
 			}
 			else
@@ -219,7 +219,7 @@ package com.rpgGame.app.manager.chat
 							tp=showType[i];
 							if(tp==CHAT_CHUANWEN||tp==CHAT_GONGGAO)
 							{
-								words=ChatUtil.getNoticeMessageHtml(notiMsg.q_content,"",args);
+								words=ChatUtil.getNoticeMessageHtml(notiMsg.q_content,msg.parameters,args);
 								notify(tp, words);
 							}
 							else
