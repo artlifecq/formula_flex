@@ -59,7 +59,7 @@
 	</filters>
 	<textFormats>
 			
-		<textFormat id="101" name="1号 灰色文字(普通文本)" textColor="0xa3a594" textFilter="textFilterBlackGreen"/>
+		<textFormat id="101" name="1号 灰色文字(普通文本)" textColor="0xb2b4a2" textFilter="textFilterBlackGreen"/>
 		<textFormat id="102" name="2号 米黄文字(文本)" textColor="0xeaeabc" textFilter="textFilterBlackGreen"/>
 		<textFormat id="103" name="3号 黄色文字(文本)" textColor="0xffea00" textFilter="textFilterBlackGreen"/>
 		<textFormat id="104" name="4号 蓝色文字（特殊）" textColor="0x14a3f3" textFilter="textFilterBlackGreen"/>
@@ -88,7 +88,7 @@
 		
 		<textFormat id="201" name="1号 灰色文字(按钮)" textColor="0xcfc6ae" textFilter="labelFilterBlack"/>
 		<textFormat id="202" name="2号 普通文字(按钮)" textColor="0xeaeabc" textFilter="textFilterBlackGreen"/>
-		<textFormat id="203" name="3号 灰色文字(按钮)" textColor="0xa3a594" textFilter="labelFilterBlack"/>
+		<textFormat id="203" name="3号 灰色文字(按钮)" textColor="0xb2b4a2" textFilter="labelFilterBlack"/>
 		<textFormat id="204" name="4号 米黄文字" textColor="0xe3d9bf" textFilter="textFilterBlackGreeni"/>
 		<textFormat id="205" name="5号 tips字体" textColor="0xffea00" textFilter="textFilterBlackGreen"/>
 		<textFormat id="206" name="6号 tips字体" textColor="0xeaeabc" textFilter="textFilterBlackGreen"/>
@@ -101,7 +101,7 @@
 		<textFormat id="213" name="13号 装备属性普通蓝" textColor="0x00dfff" textFilter="labelFilterBlack"/>
 		<textFormat id="214" name="14号 装备属性普通紫" textColor="0xff00ff" textFilter="labelFilterBlack"/>
 		<textFormat id="215" name="15号 装备属性普通金" textColor="0xffea00" textFilter="labelFilterBlack"/>
-		<textFormat id="216" name="16号 灰色文字" textColor="0xcfc6ae" textFilter="labelFilterBlack"/>
+		<textFormat id="216" name="16号 装备属性普通金" textColor="0xff0036" textFilter="labelFilterBlack"/>
 		<textFormat id="217" name="17号 普通文字" textColor="0xeaeabc" textFilter="labelFilterBlack"/>
 		<textFormat id="218" name="18号 红色文字（特殊）" textColor="0xff0d0d" textFilter="labelFilterBlack"/>
 		

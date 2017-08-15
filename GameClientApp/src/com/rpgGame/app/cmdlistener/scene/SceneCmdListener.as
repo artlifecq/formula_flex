@@ -563,6 +563,10 @@ package com.rpgGame.app.cmdlistener.scene
 				return;
 			}
 			var role : SceneRole = SceneManager.getSceneObjByID(msg.objId.ToGID()) as SceneRole;
+			if(!role){
+				trace("居然同步了一个不存在的角色啊!!");
+				return;
+			}
 			if (SceneCharType.GIRL_PET==role.type&&role.ownerIsMainChar) 
 			{
 				return;

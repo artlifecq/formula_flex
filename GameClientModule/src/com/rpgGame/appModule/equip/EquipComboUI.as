@@ -611,7 +611,7 @@ package com.rpgGame.appModule.equip
 				return;
 			}
 			
-			if(ItemManager.isCanPushPack(_nowSelect.q_id,_hechengNum)==false){
+			if(ItemManager.isCanPushPack(_nowSelect.q_item_id,_hechengNum)==false){
 				NoticeManager.showNotifyById(5004);
 				return;
 			}

@@ -40,7 +40,7 @@ package com.rpgGame.coreData.lang
 		public static const UI_TEXT13:String = "UI_TEXT13";
 		 /**  继承结果装备 */
 		public static const UI_TEXT14:String = "UI_TEXT14";
-		 /**  继承消耗装备 */
+		 /**   继承后材料装备$将会消失,是否继续? */
 		public static const UI_TEXT15:String = "UI_TEXT15";
 		 /**  继承需要消耗该装备，该装备无法恢复 */
 		public static const UI_TEXT16:String = "UI_TEXT16";
@@ -72,7 +72,7 @@ package com.rpgGame.coreData.lang
 		public static const UI_TEXT29:String = "UI_TEXT29";
 		 /**  本次洗炼消耗元宝: */
 		public static const UI_TEXT30:String = "UI_TEXT30";
-		 /**  不再提示! */
+		 /**  本次登陆操作不再提示! */
 		public static const UI_TEXT31:String = "UI_TEXT31";
 		 /**  属性: */
 		public static const UI_TEXT32:String = "UI_TEXT32";
@@ -82,6 +82,10 @@ package com.rpgGame.coreData.lang
 		public static const UI_TEXT34:String = "UI_TEXT34";
 		 /**  鉴定图纸 */
 		public static const UI_TEXT35:String = "UI_TEXT35";
+		 /**  收起 */
+		public static const UI_TEXT36:String = "UI_TEXT36";
+		 /**  展开 */
+		public static const UI_TEXT37:String = "UI_TEXT37";
 
 	}
 }

@@ -80,11 +80,12 @@ package org.mokylin.skin.app.activety.shijieboss
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbKillNum = temp;
 			temp.name = "lbKillNum";
-			temp.text = "250024(52%)";
+			temp.height = 17;
+			temp.text = "52.5万(98.55%)";
 			temp.textAlign = "left";
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 97;
+			temp.width = 107;
 			temp.x = 172;
 			temp.y = 6;
 			return temp;
@@ -126,7 +127,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			uiBaoxiang = temp;
 			temp.name = "uiBaoxiang";
 			temp.styleName = "ui/app/activety/shijieboss/icon/1.png";
-			temp.x = 267;
+			temp.x = 274;
 			temp.y = 1;
 			return temp;
 		}
