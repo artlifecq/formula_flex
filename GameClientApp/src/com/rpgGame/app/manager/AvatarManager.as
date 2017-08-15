@@ -41,6 +41,8 @@ package com.rpgGame.app.manager
 	
 	import flash.geom.Vector3D;
 	
+	import away3d.enum.LoadPriorityType;
+	
 	import org.client.mainCore.manager.EventManager;
 
 	/**
@@ -69,6 +71,7 @@ package com.rpgGame.app.manager
 			if (!role || !role.usable)
 				return;
 			var roleData : HeroData = role.data as HeroData;
+			roleData.avatarInfo.priority=LoadPriorityType.LEVEL_CUSTOM_4;
 			updateHeroAvatarInfo(roleData,isUseforAvatar,isMountBlank,updateBuff);
 			updateAllPart(role, updateBuff);
 		}
