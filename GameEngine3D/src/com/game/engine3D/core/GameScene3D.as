@@ -968,9 +968,7 @@ package com.game.engine3D.core
 				}
 				else if (baseObj is BaseEntity)
 				{
-					if((baseObj as BaseEntity).avatar){
-						(baseObj as BaseEntity).avatar.lightPicker = null;
-					}
+					(baseObj as BaseEntity).avatar.lightPicker = null;
 				}
 				removeSceneObj(baseObj);
 			}
