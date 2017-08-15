@@ -1,11 +1,10 @@
 package com.rpgGame.appModule.dungeon.equip
 {
-	import com.game.engine3D.display.Inter3DContainer;
 	import com.rpgGame.app.manager.DailyZoneDataManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
-	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.clientConfig.Q_daily_zone;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
@@ -20,7 +19,6 @@ package com.rpgGame.appModule.dungeon.equip
 	
 	import org.client.mainCore.manager.EventManager;
 	import org.mokylin.skin.app.fuben.FuBenItem_Zhenqi;
-	import org.mokylin.skin.app.fuben.mc.UIMovieClipKetiaozhan;
 	import org.mokylin.skin.app.fuben.mc.UIMovieClipTiaozhan_dao;
 	
 	import starling.display.DisplayObject;
@@ -41,18 +39,21 @@ package com.rpgGame.appModule.dungeon.equip
 			_skin = new FuBenItem_Zhenqi();
 			_skin.toSprite(this);
 			this.setSize(_skin.width,_skin.height);
-			_skin.uiJiangli.styleName = "ui/app/fuben/gailvdiaoluo.png"
+			//			_skin.uiJiangli.styleName = "ui/app/fuben/gailvdiaoluo.png"
 			_fistIcon = FaceUtil.creatIconCDFaceByUIAsset(_skin.iconFirst,IcoSizeEnum.ICON_64,1,5,5);
 			_rewardIcons = new Vector.<IconCDFace>();
-			_rewardIcons.push(FaceUtil.creatIconCDFaceByUIAsset(_skin.icon_1,IcoSizeEnum.ICON_48,1,5,5));
-			_rewardIcons.push(FaceUtil.creatIconCDFaceByUIAsset(_skin.icon_2,IcoSizeEnum.ICON_48,1,5,5));
-			_rewardIcons.push(FaceUtil.creatIconCDFaceByUIAsset(_skin.icon_3,IcoSizeEnum.ICON_48,1,5,5));
+			_rewardIcons.push(FaceUtil.creatIconCDFaceByUIAsset(_skin.icon_1,IcoSizeEnum.ICON_42,1,5,5));
+			_rewardIcons.push(FaceUtil.creatIconCDFaceByUIAsset(_skin.icon_2,IcoSizeEnum.ICON_42,1,5,5));
+			_rewardIcons.push(FaceUtil.creatIconCDFaceByUIAsset(_skin.icon_3,IcoSizeEnum.ICON_42,1,5,5));
 			_skin.btnEnter.addEventListener(Event.TRIGGERED,triggeredHandler);
 			_skin.btnReset.addEventListener(Event.TRIGGERED,resetHandler);
 			EventManager.addEvent(DailyZoneDataManager.UPDATEDAILYZONEINFO,commitData);
 			
 			_skin.resetgroup.visible = false;
 			_skin.combatgroup.visible = false;
+			MCUtil.removeSelf(_skin.uiOk);
+			MCUtil.removeSelf(_skin.lbshenyuName);
+			MCUtil.removeSelf(_skin.lbNum);
 		}
 		
 		override protected function draw():void
@@ -76,13 +77,13 @@ package com.rpgGame.appModule.dungeon.equip
 			if(this._currentState== ButtonState.HOVER)
 			{
 				_skin.combatgroup.visible = true;
-				if(_dailyZoneInfo.havePassed>0)
+				if(_dailyZoneInfo.todayPassed>0)
 					_skin.uiTishi.visible=false;
 				if(display)
 					display.visible = false;
 			}else if(this._currentState == ButtonState.UP){
 				_skin.combatgroup.visible = false;
-				if(_dailyZoneInfo.havePassed>0)
+				if(_dailyZoneInfo.todayPassed>0)
 					_skin.uiTishi.visible=true;
 				if(display){
 					display.visible = true;
@@ -114,10 +115,9 @@ package com.rpgGame.appModule.dungeon.equip
 			_data = this.data as Q_daily_zone;
 			_dailyZoneInfo = DailyZoneDataManager.instance().getInfoById(_data.q_id);
 			_skin.uiName.styleName = "ui/app/fuben/mc/zhuangbei/"+_data.q_limit_level+".png";
-			_skin.uiBg.styleName = "ui/big_bg/fuben/zhenqi/"+_data.q_bgicon+".jpg";
+			_skin.uiBg.styleName = "ui/big_bg/fuben/zhuangbei/"+_data.q_bgicon+".jpg";
 			_skin.numZhanli.number = _data.q_combat;
-			_skin.uiOk.visible = _dailyZoneInfo.havePassed>0;
-			_skin.uiTishi.visible=_dailyZoneInfo.havePassed>0; //加了参数再改
+			_skin.uiTishi.visible=_dailyZoneInfo.todayPassed>0;
 			var itemInfos:Array = ItemUtil.jsonParseItemClientList(_data.q_special_rewards_show);
 			FaceUtil.SetItemGrid(_fistIcon,itemInfos[0], true);
 			
@@ -128,7 +128,8 @@ package com.rpgGame.appModule.dungeon.equip
 				FaceUtil.SetItemGrid(_rewardIcons[i],itemInfos[i], true);
 			}
 			
-			_skin.uiOk.visible = _dailyZoneInfo.havePassed!=0;
+			_skin.grpFirst.visible =_dailyZoneInfo.havePassed==0;
+			
 			_skin.lxin1.visible = (1<=_dailyZoneInfo.star);
 			_skin.lxin2.visible = (2<=_dailyZoneInfo.star);
 			_skin.lxin3.visible = (3<=_dailyZoneInfo.star);			
@@ -150,7 +151,7 @@ package com.rpgGame.appModule.dungeon.equip
 				}
 			}
 			else{
-				if(_data.q_limit_level>MainRoleManager.actorInfo.totalStat.level||_dailyZoneInfo.havePassed>0)
+				if(_data.q_limit_level>MainRoleManager.actorInfo.totalStat.level||_dailyZoneInfo.havePassed>0||_dailyZoneInfo.remainCount<=0)
 				{
 					if(_effect!=null)
 					{
@@ -164,7 +165,7 @@ package com.rpgGame.appModule.dungeon.equip
 					_effect.autoPlay = true;
 					_effect.styleClass = UIMovieClipTiaozhan_dao;
 					_effect.x = 0;
-					_effect.y = 280;
+					_effect.y = 300;
 					this.addChild(_effect);
 				}
 			}		
@@ -175,19 +176,19 @@ package com.rpgGame.appModule.dungeon.equip
 			if(_dailyZoneInfo==null||_dailyZoneInfo.remainCount>0)
 			{
 				_skin.resetgroup.visible = false;
-			}else{
+			}else if(_data.q_limit_level<=MainRoleManager.actorInfo.totalStat.level){
 				_skin.resetgroup.visible = true;
 				_skin.lbYuanbao.text = _dailyZoneInfo.price.toString();
 			}
-			
+			else{
+				_skin.resetgroup.visible = false;
+			}
 		}
 		private function refeashCombatState():void
 		{
 			if(_dailyZoneInfo==null||_dailyZoneInfo.remainCount==0)
 			{
 				_skin.combatgroup.visible = false;
-			}else{
-				_skin.lbNum.text = _dailyZoneInfo.remainCount.toString();
 			}
 		}
 		
@@ -199,7 +200,12 @@ package com.rpgGame.appModule.dungeon.equip
 				_skin.grpXin.visible=false;
 				_skin.grpXinL.visible=false;
 				_skin.uiLevel.styleName = "ui/app/fuben/mc/kaiqidengji/kaiqi_"+_data.q_limit_level+".png";
+				_skin.ui_tuijianZhanliName.visible= _skin.numZhanli.visible=false;
 			}else{
+				if(_dailyZoneInfo.havePassed==0)
+					_skin.ui_tuijianZhanliName.visible= _skin.numZhanli.visible=true;
+				else
+					_skin.ui_tuijianZhanliName.visible= _skin.numZhanli.visible=false;
 				_skin.uiLevel.visible = false;
 				_skin.grpXin.visible=true;
 				_skin.grpXinL.visible=true;

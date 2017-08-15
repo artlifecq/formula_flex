@@ -9,7 +9,6 @@ package com.rpgGame.app.ui.alert
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	import com.rpgGame.netData.marriage.message.SCNoticeByDivorceMessage;
 	import com.rpgGame.netData.marriage.message.SCProposalResultMessage;
-	import com.rpgGame.netData.marriage.message.SCRefuseNtoiceMessage;
 	import com.rpgGame.netData.marriage.message.SCTargetProposalMessage;
 	
 	import org.mokylin.skin.app.hunyin.AlertJieHun;

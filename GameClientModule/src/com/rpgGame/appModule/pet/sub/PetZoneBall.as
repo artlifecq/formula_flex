@@ -33,7 +33,7 @@ package com.rpgGame.appModule.pet.sub
 		
 		private function init():void
 		{
-			GrayFilter.gray(this._ball);
+			this._ball.styleName= "ui/app/meiren/icon/guangqiuxiao.png";
 		}
 		
 		public function setData(info:PetInfo,num:int,isShowTips:Boolean=false):void
@@ -77,7 +77,7 @@ package com.rpgGame.appModule.pet.sub
 					this._ball.addChild(_effCon);
 					_effCon.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_PET_BALL),0,0,0,null,addEft);
 				}
-				this._ball.filter=null;
+				this._ball..styleName=this._ball.styleName= "ui/app/meiren/icon/guangqiu.png";
 			}
 			else
 			{
@@ -86,7 +86,7 @@ package com.rpgGame.appModule.pet.sub
 					_effCon.dispose();
 					_effCon=null;
 				}
-				GrayFilter.gray(this._ball);
+				this._ball.styleName=this._ball.styleName= "ui/app/meiren/icon/guangqiuxiao.png";;
 			}
 		}
 	}

@@ -402,7 +402,7 @@ package org.mokylin.skin.app.meiren
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icon1 = temp;
 			temp.name = "icon1";
-			temp.styleName = "ui/app/meiren/icon/guangqiuxiao.png";
+			temp.styleName = "ui/app/meiren/icon/guangqiu.png";
 			temp.x = 48;
 			temp.y = 309;
 			return temp;

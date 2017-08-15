@@ -65,7 +65,7 @@ package com.rpgGame.core.utils
 					
 				else if(num>=100000000)
 				{
-					sub=(num/100000000).toFixed(0)+"亿";
+					sub=(num/100000000).toFixed(1)+"亿";
 					return sub;
 				}
 			}

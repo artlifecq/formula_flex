@@ -151,9 +151,16 @@ package com.rpgGame.app.sender
 			var msg:*;
 			switch(fromItem.containerID){
 				case ItemContainerID.BackPack:
-					msg=new ReqMoveItemMessage();
-					msg.itemId=(fromItem.data as ClientItemInfo).itemInfo.itemId;
-					msg.toGridId=toItem.index;
+					if(toItem.containerID==ItemContainerID.BackPack){
+						msg=new ReqMoveItemMessage();
+						msg.itemId=(fromItem.data as ClientItemInfo).itemInfo.itemId;
+						msg.toGridId=toItem.index;
+					}
+					else if(toItem.containerID==ItemContainerID.Storage){
+						var info:ClientItemInfo=fromItem.data as ClientItemInfo;
+						ItemSender.bagToStore(info.itemInfo.itemId,toItem.index);
+						return;
+					}
 					break;
 				case ItemContainerID.Storage:
 					msg=new ReqStoreMoveItemMessage();

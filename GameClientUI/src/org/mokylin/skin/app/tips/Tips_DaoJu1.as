@@ -24,6 +24,8 @@ package org.mokylin.skin.app.tips
 
 		public var bg_di:feathers.controls.UIAsset;
 
+		public var bg_hong:feathers.controls.UIAsset;
+
 		public var bg_huang:feathers.controls.UIAsset;
 
 		public var bg_lan:feathers.controls.UIAsset;
@@ -112,6 +114,19 @@ package org.mokylin.skin.app.tips
 			return temp;
 		}
 
+		private function bg_hong_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			bg_hong = temp;
+			temp.name = "bg_hong";
+			temp.height = 238;
+			temp.styleName = "ui/common/tips/zhuangbei/bg_hong.png";
+			temp.visible = false;
+			temp.x = 0;
+			temp.y = 0;
+			return temp;
+		}
+
 		private function bg_huang_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -132,7 +147,7 @@ package org.mokylin.skin.app.tips
 			temp.name = "bg";
 			temp.x = 0;
 			temp.y = 0;
-			temp.elementsContent = [bg_bai_i(),bg_lv_i(),bg_lan_i(),bg_zi_i(),bg_huang_i()];
+			temp.elementsContent = [bg_bai_i(),bg_lv_i(),bg_lan_i(),bg_zi_i(),bg_huang_i(),bg_hong_i()];
 			return temp;
 		}
 

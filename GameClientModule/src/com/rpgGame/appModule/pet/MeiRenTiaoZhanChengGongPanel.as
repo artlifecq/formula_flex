@@ -137,14 +137,14 @@ package com.rpgGame.appModule.pet
 			if(_avatar==null)
 			{
 				_avatar=new InterAvatar3D();
-				_avatar.x = 270;
-				_avatar.y =360;
+				_avatar.x = 310;
+				_avatar.y =460;
 				_modContaner.addChild3D(_avatar);
 			}
 			_avatarData=new RoleData(0);
 			this._avatarData.avatarInfo.setBodyResID(_q_girl_pet.q_panel_show_id,null);
 			this._avatar.setRoleData(this._avatarData);
-			this._avatar.curRole.setScale(1.5);	
+			this._avatar.curRole.setScale(3);	
 			this._avatar.curRole.stateMachine.transition(RoleStateType.ACTION_IDLE);
 		}
 		

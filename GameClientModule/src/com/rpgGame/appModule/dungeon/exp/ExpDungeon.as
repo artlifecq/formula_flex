@@ -42,11 +42,11 @@ package com.rpgGame.appModule.dungeon.exp
 			gridList=new Vector.<IconCDFace>();
 			for(var i:int = 0;i<length;i++)
 			{
-				var grid:IconCDFace = IconCDFace.create(IcoSizeEnum.ICON_48);
+				var grid:IconCDFace = IconCDFace.create(IcoSizeEnum.ICON_42);
 //				grid.setUrlBg( "ui/common/gezikuang/tubiaodikuang/48.png");
 				_skin.container.addChild(grid);
 				grid.x = startX+60*i;
-				grid.y = 507+15;
+				grid.y = 542;
 				gridList.push(grid);
 				item = new ItemInfo();
 				item.itemModelId = itemInfos[i]["mod"];

@@ -37,6 +37,8 @@ package org.mokylin.skin.app.hunyin
 			super();
 			
 			this.currentState = "normal";
+			this.height = 264;
+			this.width = 326;
 			this.elementsContent = [bg_i(),btnClose_i(),btn_ok_i(),__AlertFuQiTips_UIAsset1_i(),lbInfo_i()];
 			
 			states = {

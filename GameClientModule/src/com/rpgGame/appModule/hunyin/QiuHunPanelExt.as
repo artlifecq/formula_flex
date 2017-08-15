@@ -11,6 +11,7 @@ package com.rpgGame.appModule.hunyin
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.richText.RichTextCustomLinkType;
 	import com.rpgGame.app.richText.RichTextCustomUtil;
+	import com.rpgGame.app.sender.HunYinSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
@@ -49,8 +50,8 @@ package com.rpgGame.appModule.hunyin
 		
 		private var _playerName:String = "";
 		private static const DEFAULT_CHAT_TEXT:String = "输入选择求婚对象";
-		private const boyText:String="求美女老婆一枚。";
-		private const grilText:String="求帅哥老公一枚。";
+		private const boyText:String="求美女老婆一枚";
+		private const grilText:String="求帅哥老公一枚";
 		
 		public function QiuHunPanelExt()
 		{
@@ -161,11 +162,12 @@ package com.rpgGame.appModule.hunyin
 		
 		private function onlbZhenHunHandler():void
 		{		
-			var str:String=ItemUtil.getJobName(MainRoleManager.actorInfo.job)+" "+MainRoleManager.actorInfo.totalStat.getStatValue(CharAttributeType.LV)+"级,"
-			if(MainRoleManager.actorInfo.sex==1) str+=boyText;
-			else str+=grilText;
-			var link:String=RichTextCustomUtil.getTextLinkCode("点击向我求婚",StaticValue.A_UI_GREEN_TEXT,RichTextCustomLinkType.QIUHUN,MainRoleManager.actorInfo.name+","+MainRoleManager.actorInfo.id);		
-			ChatManager.reqSendChat( str+link, EnumChatChannelType.CHAT_CHANNEL_WORLD,  ChatManager.currentSiLiaoTargetName );
+			HunYinSender.upCSMarriageSeekingMessage();
+			//			var str:String=ItemUtil.getJobName(MainRoleManager.actorInfo.job)+" "+MainRoleManager.actorInfo.totalStat.getStatValue(CharAttributeType.LV)+"级,"
+			//			if(MainRoleManager.actorInfo.sex==1) str+=boyText;
+			//			else str+=grilText;
+//						var link:String=RichTextCustomUtil.getTextLinkCode("点击向我求婚",StaticValue.A_UI_GREEN_TEXT,RichTextCustomLinkType.QIUHUN,MainRoleManager.actorInfo.name+","+MainRoleManager.actorInfo.id);		
+			//			ChatManager.reqSendChat( str+link, EnumChatChannelType.CHAT_CHANNEL_WORLD,  ChatManager.currentSiLiaoTargetName );
 		}
 		
 		private function onBtnQiuHunHandler():void

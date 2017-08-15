@@ -15,6 +15,7 @@ package com.rpgGame.app.ui.main.chat
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.lang.LangChat;
 	import com.rpgGame.coreData.lang.LangHyperlinksMenu;
+	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
 	import com.rpgGame.coreData.type.chat.EnumChatTabsType;
 	import com.rpgGame.coreData.utils.HtmlTextUtil;
@@ -22,6 +23,8 @@ package com.rpgGame.app.ui.main.chat
 	import com.rpgGame.netData.chat.message.ResChatMessage;
 	
 	import flash.utils.ByteArray;
+	
+	import org.game.netCore.data.long;
 	
 	public class ChatUtil
 	{
@@ -335,6 +338,13 @@ package com.rpgGame.app.ui.main.chat
 			return str;
 		}
 		
+		public static function replaceShowByType(name:String,color:*,tragetName:String):String
+		{
+			var str:String=name;
+			str = RichTextCustomUtil.getTextLinkCode(name,color,RichTextCustomLinkType.QIUHUN,tragetName);
+			return str;
+		}
+		
 		/**通过MODid得到一个物品*/
 		public static function replaceItemShowByMod(id:int):String
 		{
@@ -411,7 +421,7 @@ package com.rpgGame.app.ui.main.chat
 			var str:String=replaceHyperShow(msgInfo);
 			if(msgInfo.extraResInfo!=null)
 				var vip:int=msgInfo.extraResInfo.viplevel;
-//			var maohao:String=HtmlTextUtil.getTextColor(StaticValue.A_UI_WHITE_TEXT,": ");
+			//			var maohao:String=HtmlTextUtil.getTextColor(StaticValue.A_UI_WHITE_TEXT,": ");
 			switch(msgInfo.type)
 			{
 				case EnumChatChannelType.CHAT_CHANNEL_SYSTEM://系统				
@@ -474,31 +484,53 @@ package com.rpgGame.app.ui.main.chat
 		/**
 		 * 组装通知消息富文本
 		 * */
-		public static function getNoticeMessageHtml(text:String,attribute:String,... args):String
+		public static function getNoticeMessageHtml(text:String,attribute:String,arrq:Array):String
 		{
 			var arr:Array;
 			var txt:String;
 			if(attribute==""||attribute==null)
 			{
-				txt = LanguageConfig.replaceStr1(text,args);
+				txt = LanguageConfig.replaceStr1(text,arrq);
 				txt = replaceStr2(txt);
 			}
 			else{
 				arr = JSONUtil.decode(attribute);
 				for(var i:int=0;i<arr.length;i++)
 				{
-					var str:String=args[arr[i].i];
+					var str:String=arrq[arr[i].i];
 					switch(arr[i].t)
 					{
 						case 1: //人物
-							args[arr[i].i]=replacePlayerShow(str,0xFFFFFF,arr[i].p.id);
+							arrq[arr[i].i]=replacePlayerShow(str,0xFFFFFF,arr[i].p.id);
 							break;
 						case 2: //物品
-							args[arr[i].i]=replaceItemShowByMod(arr[i].p.mod);
+							arrq[arr[i].i]=replaceItemShowByMod(arr[i].p.mod);
+							break;
+						case 3: //强化
+							arrq[arr[i].i]=replaceItemShowByMod(arr[i].p.mod);
+							break;
+						case 4: //进阶
+							arrq[arr[i].i]=replaceItemShowByMod(arr[i].p.mod);
+							break;
+						case 5: //招募
+							arrq[arr[i].i]=replaceItemShowByMod(arr[i].p.mod);
+							break;
+						case 6: //暂定
+							arrq[arr[i].i]=replaceItemShowByMod(arr[i].p.mod);
+							break;
+						case 7: //挑战
+							arrq[arr[i].i]=replaceItemShowByMod(arr[i].p.mod);
+							break;
+						case 8: //求婚
+							var jobType:int=arrq[2];
+							arrq[2]=ItemUtil.getJobName(jobType);
+							var id:Number=arr[i].p.id;
+							var name:String=MainRoleManager.getPlayerName(arr[i].p.name);
+							arrq[arr[i].i]=replaceShowByType(str,StaticValue.A_UI_GREEN_TEXT,name+","+id);
 							break;
 					}
 				}
-				txt = LanguageConfig.replaceStr1(text,args);
+				txt = LanguageConfig.replaceStr1(text,arrq);
 				txt = replaceStr2(txt);
 			}
 			return txt;
