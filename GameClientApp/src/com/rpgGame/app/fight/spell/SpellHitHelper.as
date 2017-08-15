@@ -5,6 +5,7 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.app.manager.RoleHpStatusManager;
 	import com.rpgGame.app.manager.fight.FightFaceHelper;
 	import com.rpgGame.app.manager.scene.SceneManager;
+	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.manager.yunBiao.YunBiaoManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateUtil;
@@ -13,7 +14,10 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.app.state.role.control.HurtStateReference;
 	import com.rpgGame.core.events.SceneCharacterEvent;
 	import com.rpgGame.coreData.clientConfig.Q_SpellAnimation;
+	import com.rpgGame.coreData.clientConfig.Q_map;
+	import com.rpgGame.coreData.info.MapDataManager;
 	import com.rpgGame.coreData.info.fight.FightHurtResult;
+	import com.rpgGame.coreData.info.map.SceneData;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RoleStateType;
@@ -151,7 +155,14 @@ package com.rpgGame.app.fight.spell
 			SpellAnimationHelper.removeTrapEffectsByAtkorID(target.id);
 			EventManager.dispatchEvent(SceneCharacterEvent.SCENE_CHAR_DEATH, target);
 			if(!target.isMainChar && target.type== SceneCharType.PLAYER){
-				target.mouseEnable = true;
+				var mapID : int = SceneSwitchManager.currentMapId;
+				var cfg : SceneData = MapDataManager.getMapInfo(mapID);
+				var qmap:Q_map=cfg.getData();
+				if(qmap.q_select_corpse==1){
+					target.mouseEnable=true;
+				}else{
+					target.mouseEnable=false;
+				}
 			}else{
 				target.mouseEnable = false;
 			}

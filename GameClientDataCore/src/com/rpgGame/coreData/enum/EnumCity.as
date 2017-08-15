@@ -42,7 +42,7 @@ package com.rpgGame.coreData.enum
 		
 		public static var wangChengFlags:Array=["handan","daliang","chengdu","linzi"];
 		public static var wangchangCitys:Array=["wangcheng3","wangcheng4","wangcheng1","wangcheng2"];
-		public static var weichengCitys:Array=["weicheng3","weicheng2","weicheng1"];
+		public static var weichengCitys:Array=["weicheng1","weicheng2","weicheng3"];
 		public static var weichengFlags:Array=["gusu","qufu","kuaiji"];
 		
 		public function EnumCity()

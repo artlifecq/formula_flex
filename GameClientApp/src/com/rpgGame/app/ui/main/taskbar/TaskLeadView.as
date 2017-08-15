@@ -1,11 +1,14 @@
 package com.rpgGame.app.ui.main.taskbar
 {
+	import com.game.engine3D.display.Inter3DContainer;
+	import com.game.engine3D.display.InterObject3D;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.reward.RewardGroup;
 	import com.rpgGame.app.utils.TaskUtil;
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
 	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
@@ -45,6 +48,9 @@ package com.rpgGame.app.ui.main.taskbar
 		private var icoBgList:Vector.<UIAsset>;
 		//private var icoList:Vector.<IconCDFace>;
 		private var icoListGroup:RewardGroup;
+		private var jixuEftContaner:Inter3DContainer;
+		private var jixuEft:InterObject3D;
+		
 		public function TaskLeadView(skin:RenWuZhuiZong_Skin)
 		{
 			_skin=skin;
@@ -102,6 +108,7 @@ package com.rpgGame.app.ui.main.taskbar
 			priLabel=_skin.pri_txt;
 			icoBgList=new Vector.<UIAsset>();
 			icoBgList.push(_skin.pri_ico0);
+			
 			var i:int;
 			/*icoList=new Vector.<IconCDFace>();
 			
@@ -149,6 +156,19 @@ package com.rpgGame.app.ui.main.taskbar
 		public function show(key:Boolean):void
 		{
 			_skin.primary_box.visible=key;
+			if(key&&jixuEftContaner==null)
+			{
+				jixuEftContaner=new Inter3DContainer();
+				jixuEft= jixuEftContaner.playInter3DAt(ClientConfig.getEffect("ui_jixurenwu"),_skin.btnContinue.x+86,_skin.btnContinue.y+24,0);
+				_skin.primary_box.addChild(jixuEftContaner);
+			}
+			else if(!key&&jixuEftContaner!=null)
+			{
+				jixuEftContaner.dispose();
+				jixuEft.dispose();
+				jixuEftContaner=null;
+				jixuEft=null;
+			}
 		}
 		
 		
@@ -291,6 +311,11 @@ package com.rpgGame.app.ui.main.taskbar
 			}
 			
 			_skin.btnContinue.y=skinList[count].y+skinList[count].height+15;
+			if(jixuEft!=null)
+			{
+				jixuEft.y=_skin.btnContinue.y+24;
+				//_skin.primary_box.addChild(jixuEftContaner);
+			}
 			_skin.uibg.height=_skin.btnContinue.y+_skin.btnContinue.height+15;
 			
 			

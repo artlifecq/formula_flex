@@ -100,7 +100,7 @@ package com.game.engine2D
 		private var _cameraOffsetY:Number = 0;
 		
 		private var _direction:DirectionalLight;
-//		private var _directionModel:DirectionalLight;
+		private var _directionModel:DirectionalLight;
 		
 		private var _planarShadowAlpha:Number = 0.3;
 		private var _filter3ds:Vector.<Filter3DBase> = new Vector.<Filter3DBase>();
@@ -209,20 +209,20 @@ package com.game.engine2D
 			return _direction;
 		}
 		
-//		public function get directionalModelLight():DirectionalLight
-//		{
-//			if (!_directionModel)
-//				initLight();
-//			return _directionModel;
-//		}
+		public function get directionalModelLight():DirectionalLight
+		{
+			if (!_directionModel)
+				initLight();
+			return _directionModel;
+		}
 		
 		public function set planarShadowAlpha(value:Number):void
 		{
 			_planarShadowAlpha = value;
 			if (_direction)
 				_direction.planarShadowAlpha = value;
-//			if (_directionModel)
-//				_directionModel.planarShadowAlpha = value;
+			if (_directionModel)
+				_directionModel.planarShadowAlpha = value;
 		}
 		
 		public function localToGlobal(p:Point, result:Point = null):Point
@@ -504,10 +504,10 @@ package com.game.engine2D
 			
 			if (_direction && _direction.parent)
 				_direction.parent.removeChild(_direction);
-//			if (_directionModel && _directionModel.parent)
-//				_directionModel.parent.removeChild(_directionModel);
+			if (_directionModel && _directionModel.parent)
+				_directionModel.parent.removeChild(_directionModel);
 			_direction = _scene3d.sceneMapLayer.getObj(SCENE_SHADOW_DIRECTIONAL_NAME) as DirectionalLight;
-//			_directionModel = _scene3d.sceneMapLayer.getObj(SCENE_SHADOW_MODEL_DIRECTIONAL_NAME) as DirectionalLight;
+			_directionModel = _scene3d.sceneMapLayer.getObj(SCENE_SHADOW_MODEL_DIRECTIONAL_NAME) as DirectionalLight;
 			
 			if (!_direction)
 			{
@@ -530,10 +530,10 @@ package com.game.engine2D
 					_direction.castsPlanarShadows = true;
 			}
 			
-//			if (_directionModel == null)
-//			{
-//				_directionModel = _direction;
-//			}
+			if (_directionModel == null)
+			{
+				_directionModel = _direction;
+			}
 			
 			GlobalConfig.use2DMap = _viewAsset.cameraMode2D;
 			if (_viewAsset.cameraMode2D)
@@ -546,8 +546,8 @@ package com.game.engine2D
 				_direction.planarShadowPlane = plane;
 				_direction.planarShadowAlpha = _planarShadowAlpha;
 				_direction.castsPlanarShadows = _castsPlanarShadows;
-//				_directionModel.planarShadowPlane = plane;
-//				_directionModel.planarShadowAlpha = _planarShadowAlpha;
+				_directionModel.planarShadowPlane = plane;
+				_directionModel.planarShadowAlpha = _planarShadowAlpha;
 			}
 		}
 		
@@ -572,12 +572,12 @@ package com.game.engine2D
 				_direction.planarShadowAlpha = 0.3;
 				_direction.name = "you are shot!";
 			}
-//			if (!_directionModel)
-//			{
-//				_directionModel = _direction;
-//			}
+			if (!_directionModel)
+			{
+				_directionModel = _direction;
+			}
 			_view.scene.addChild(_direction);
-//			_view.scene.addChild(_directionModel);
+			_view.scene.addChild(_directionModel);
 		}
 		
 		public function drawSmallMap():void

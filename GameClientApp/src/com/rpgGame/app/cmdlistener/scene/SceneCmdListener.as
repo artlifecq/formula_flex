@@ -872,6 +872,9 @@ package com.rpgGame.app.cmdlistener.scene
 				mInfo.setValues(data.id,data.totalStat.getStatValue(CharAttributeType.SPEED), SystemTimeManager.curtTm,info.position,info.positions);
 				RoleStateUtil.walkByInfos(mInfo);
 			}
+			
+			(sceneRole.headFace as HeadFace).updateGuildWarInfoBar(info.keyValueList);
+			
 			//			var otherHeroBiaoMap:HashMap = YunBiaoManager._otherBiaoCheHashMap;
 			//			if( otherHeroBiaoMap.getValue( data.id ) != null )
 			//				data.biaoCheData = otherHeroBiaoMap.getValue( data.id );
@@ -1097,7 +1100,7 @@ package com.rpgGame.app.cmdlistener.scene
 			trace(MainRoleManager.actorInfo.mapID);
 			MainRoleManager.actorInfo.mapID = mapId;
 			SceneSwitchManager.changeMap();
-			AppManager.closeAllApp();//切换场景关闭所有面板
+			
 		}
 		
 		/**
@@ -1216,7 +1219,7 @@ package com.rpgGame.app.cmdlistener.scene
 					var p:Array=JSONUtil.decode(cfg.getData().q_autofight_seat);
 					//MainRoleSearchPathManager.walkToScene(SceneSwitchManager.currentMapId, p[0], p[1],finishWalk, 100);
 					var pos:Array=[SceneSwitchManager.currentMapId,p[0],p[1]];
-					TrusteeshipManager.getInstance().startAutoFightToPos(pos,1,-1);
+					TrusteeshipManager.getInstance().startAutoFightToPos(pos);
 				}
 				else
 				{

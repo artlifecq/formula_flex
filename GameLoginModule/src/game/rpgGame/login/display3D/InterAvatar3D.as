@@ -1,5 +1,6 @@
 package game.rpgGame.login.display3D
 {
+	import com.game.engine3D.config.GlobalConfig;
 	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.manager.Stage3DLayerManager;
 	
@@ -29,7 +30,7 @@ package game.rpgGame.login.display3D
 			if (this._role == null)
 			{
 				this._role = SceneRole.create("0",data.id);
-				_role.rotationX = -25;
+				_role.rotationX = GlobalConfig.mapCameraAngle + 20;
 			}
 			this._role.data = data;
 			

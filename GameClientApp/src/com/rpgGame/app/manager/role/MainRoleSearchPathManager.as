@@ -9,6 +9,7 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
+	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
@@ -68,6 +69,7 @@ package com.rpgGame.app.manager.role
 		private static var currentSceneId : int;
 		private static var _data : Object;
 		private static var _onArrive:Function;
+		private static var _onJumpArrive:Function;
 		private static var _needSprite:Boolean
 		/**当前要去的目标地图编号，只为跨地图寻路引导面板使用*/
 		public static var gotoTargetData : GotoTargetData = new GotoTargetData();
@@ -149,6 +151,7 @@ package com.rpgGame.app.manager.role
 		/**打完怪后再寻路，统一延时0.5秒处理*/		
 		public static function walkToScenePreAttack(targetSceneId : int, posx : Number = -1, posy : Number = -1, onArrive : Function = null, spacing : int = 0, data : Object = null,needSprite:Boolean=false) : void
 		{
+			TrusteeshipManager.getInstance().isAutoWalking=true;
 			TweenLite.killDelayedCallsTo(walkToSceneTween);
 			TweenLite.delayedCall(0.5, walkToSceneTween, [targetSceneId, posx, posy, onArrive, spacing,data,needSprite]);
 			
@@ -192,7 +195,7 @@ package com.rpgGame.app.manager.role
 				EventManager.dispatchEvent(TaskEvent.AUTO_WALK_STOP);
 				_jumpPash = null;
 				_isAutoJumping = true;
-				_onArrive=onArrive;
+				_onJumpArrive=onArrive;
 				_data=data;
 			}
 			
@@ -301,7 +304,7 @@ package com.rpgGame.app.manager.role
 					if (_scenePath.length == 0)
 					{
 						jumpWalkToPos(MainRoleManager.actor, pos, searchMapData.spacing, _data, _onArrive,null,null,_needSprite);
-						_onArrive=null;
+						//_onArrive=null;
 					}
 					else
 					{
@@ -611,7 +614,7 @@ package com.rpgGame.app.manager.role
 			clearJumpPath();
 			_jumpPash = pos;
 			_isAutoJumping = true;
-			_onArrive=onArrive;
+			_onJumpArrive=onArrive;
 			onNextJump();
 			return true;
 		}
@@ -643,7 +646,7 @@ package com.rpgGame.app.manager.role
 				{
 					_jumpPash = jumpPash;
 					_isAutoJumping = true;
-					_onArrive=onArrive;
+					_onJumpArrive=onArrive;
 					onNextJump();
 					return true;
 				}
@@ -722,13 +725,12 @@ package com.rpgGame.app.manager.role
 			{
 				return;
 			}
-			if (!_jumpPash || _jumpPash.length==0)
+			if (_jumpPash==null || _jumpPash.length==0)
 			{
-				if(_onArrive)
+				if(_onJumpArrive)
 				{
-					_onArrive(_data);
+					_onJumpArrive(_data);
 				}
-				_onArrive=null;
 				clearJumpPath();
 				return;
 			}
@@ -737,7 +739,7 @@ package com.rpgGame.app.manager.role
 			var targetPos : Vector3D = _jumpPash.pop();
 			if (_jumpPash.length == 0)
 			{
-				RoleStateUtil.walkToPos(MainRoleManager.actor, targetPos, 100, _data, _onArrive);
+				RoleStateUtil.walkToPos(MainRoleManager.actor, targetPos, 100, _data, _onJumpArrive);
 				
 				clearJumpPath();
 			}
@@ -749,10 +751,11 @@ package com.rpgGame.app.manager.role
 		}
 		private static function onWalktojump() : void
 		{
+			TaskAutoManager.getInstance().jumpOver=true;
 			TweenLite.killDelayedCallsTo(onNextJump);
 			if (_isAutoJumping)
 			{
-				TweenLite.delayedCall(0.5, onNextJump);
+				TweenLite.delayedCall(0.1, onNextJump);
 			}
 		}
 		/**
@@ -760,7 +763,7 @@ package com.rpgGame.app.manager.role
 		 */
 		public static function clearJumpPath() : void
 		{
-			TweenLite.killDelayedCallsTo(onNextJump);
+			//TweenLite.killDelayedCallsTo(onNextJump);
 			_isAutoJumping = false;
 			_jumpPash = null;
 			_jumpPass=new Array();

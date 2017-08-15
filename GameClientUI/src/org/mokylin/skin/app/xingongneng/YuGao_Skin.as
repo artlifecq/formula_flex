@@ -58,9 +58,9 @@ package org.mokylin.skin.app.xingongneng
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			Icons = temp;
 			temp.name = "Icons";
-			temp.styleName = "ui/app/xingongneng/icon/jingyanfuben/95.png";
+			temp.styleName = "ui/app/xingongneng/icon/zuomo/95.png";
 			temp.x = 29;
-			temp.y = 10;
+			temp.y = 1;
 			return temp;
 		}
 
@@ -154,7 +154,7 @@ package org.mokylin.skin.app.xingongneng
 			temp.name = "uiTouxian";
 			temp.styleName = "ui/app/xingongneng/icon/duorenfuben/word.png";
 			temp.x = 44;
-			temp.y = 90;
+			temp.y = 91;
 			return temp;
 		}
 

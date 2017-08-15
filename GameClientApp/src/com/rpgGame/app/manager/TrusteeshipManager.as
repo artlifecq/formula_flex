@@ -11,7 +11,10 @@ package com.rpgGame.app.manager
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.state.ai.AIStateMachine;
+	import com.rpgGame.app.ui.main.taskbar.TaskControl;
+	import com.rpgGame.core.events.MapEvent;
 	import com.rpgGame.core.events.TaskEvent;
 	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
@@ -22,6 +25,8 @@ package com.rpgGame.app.manager
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.AIStateType;
 	import com.rpgGame.coreData.type.RoleStateType;
+	
+	import flash.geom.Point;
 	
 	import gs.TweenLite;
 	
@@ -63,7 +68,7 @@ package com.rpgGame.app.manager
 		private var _tripleSkillCtrl:ControlTripleSkill;
 		public var nextSpell:Q_skill_model;
 		private var _isNormalSpell:Boolean = false;
-		
+		public var isAutoWalking:Boolean=false;
 		public function TrusteeshipManager()
 		{
 			_gTimer = new GameTimer("TrusteeshipManager", 500, 0, onUpdate);
@@ -71,10 +76,8 @@ package com.rpgGame.app.manager
 			_isAutoFightRunning = false;
 			_isFightTargetRunning=false;
 			_isBroken = false;
-			if(GlobalSheetData.getSettingInfo(514)!=null)
-			{
-				ACTORTIME=GlobalSheetData.getSettingInfo(514).q_int_value;
-			}
+			ACTORTIME=GlobalSheetData.getSettingInfo(514)!=null?GlobalSheetData.getSettingInfo(514).q_int_value:4;
+			EventManager.addEvent(MapEvent.MAP_SWITCH_COMPLETE,flyComplete);
 		}
 		
 		public function setup(role : SceneRole) : void
@@ -163,7 +166,6 @@ package com.rpgGame.app.manager
 			
 			_isBroken = false;
 			TweenLite.killDelayedCallsTo(onDelayedUnbroken);
-			TweenLite.killDelayedCallsTo(actorFight);
 			_isFightSelect=false;
 			_targetRoles = targetRoles;
 			_stateMachine.transition(AIStateType.AI_NONE);
@@ -175,7 +177,7 @@ package com.rpgGame.app.manager
 		 * @param type  1目标点 2:刷新表id 3：模型id
 		 * @param dist 自动战斗寻怪距离 0：设置的距离，-1：全屏寻怪
 		 * */
-		public function startAutoFightToPos(target:*,type:int,dist:int=0) : void
+		public function startAutoFightToPos(target:*,type:int=1,dist:int=-1) : void
 		{
 			switch(type)
 			{
@@ -210,6 +212,69 @@ package com.rpgGame.app.manager
 		{
 			startAutoFight();
 		}
+		private var startAutoFightfromFlyKey:Array=[0,0,0];
+		/**飞鞋到达某点继续战斗
+		 * @param target 根据type传不同的值 1:[场景id,x,y] 2:刷新表id 3：模型id
+		 * @param type  1目标点 2:刷新表id 3：模型id
+		 * */
+		public function startAutoFightfromFly(target:*,type:int=1) : void
+		{
+			switch(type)
+			{
+				case 1:
+					var targetPos:Array=target as Array;
+					if(targetPos&&targetPos.length==3)
+					{
+						startAutoFightfromFlyKey[0]=targetPos[0];
+						startAutoFightfromFlyKey[1]=targetPos[1];
+						startAutoFightfromFlyKey[2]=targetPos[2];
+						SceneSender.sceneMapTransport(targetPos[0], targetPos[1], targetPos[2]);
+					}
+					break;
+				case 2:
+					var areaId:int=int(target);
+					var monsterAreaData : Q_scene_monster_area = MonsterDataManager.getAreaByAreaID(areaId);
+					if (monsterAreaData)
+					{
+						startAutoFightfromFlyKey[0]=monsterAreaData.q_mapid;
+						startAutoFightfromFlyKey[1]=monsterAreaData.q_center_x;
+						startAutoFightfromFlyKey[2]=monsterAreaData.q_center_y;
+						SceneSender.sceneMapTransport(monsterAreaData.q_mapid, monsterAreaData.q_center_x, monsterAreaData.q_center_y);
+					}
+					break;
+				case 3:
+					var monsterId:int=int(target);
+					var monsterData : Q_scene_monster_area = MonsterDataManager.getMonsterByModelId(monsterId,SceneSwitchManager.currentMapId);
+					if (monsterData)
+					{
+						startAutoFightfromFlyKey[0]=monsterData.q_mapid;
+						startAutoFightfromFlyKey[1]=monsterData.q_center_x;
+						startAutoFightfromFlyKey[2]=monsterData.q_center_y;
+						SceneSender.sceneMapTransport(monsterData.q_mapid, monsterData.q_center_x, monsterData.q_center_y);
+					}
+					break;
+			}
+		}
+		/**飞鞋完成*/
+		private function flyComplete():void
+		{
+			TweenLite.killDelayedCallsTo(flyTostartAutoFight);
+			TweenLite.delayedCall(0.5, flyTostartAutoFight);//位置坐标还未同步过来
+		}
+		
+		private function flyTostartAutoFight():void
+		{
+			if(startAutoFightfromFlyKey[0]==SceneSwitchManager.currentMapId)
+			{
+				var dist:int = Point.distance(new Point(MainRoleManager.actor.x,MainRoleManager.actor.z),new Point(startAutoFightfromFlyKey[1],startAutoFightfromFlyKey[2]));
+				if(dist<50)
+				{
+					startAutoFight();
+				}
+				startAutoFightfromFlyKey[0]=0;
+			}
+		}
+		
 		public function startAutoFight() : void
 		{
 			stopFightTarget();
@@ -237,7 +302,6 @@ package com.rpgGame.app.manager
 			_isAutoFightRunning = true;
 			_isBroken = false;
 			TweenLite.killDelayedCallsTo(onDelayedUnbroken);
-			TweenLite.killDelayedCallsTo(actorFight);
 			_isFightSelect=false;
 			_stateMachine.transition(AIStateType.AI_NONE);
 			EventManager.dispatchEvent(TaskEvent.AUTO_FIGHT_START);
@@ -264,7 +328,6 @@ package com.rpgGame.app.manager
 		{
 			if(_isFightSelect)
 			{
-				TweenLite.killDelayedCallsTo(actorFight);
 				_isFightSelect=false;
 			}
 			if (!_isFightActorRunning&&!_isFightTargetRunning)
@@ -288,7 +351,6 @@ package com.rpgGame.app.manager
 		{
 			if(_isFightSelect)
 			{
-				TweenLite.killDelayedCallsTo(actorFight);
 				_isFightSelect=false;
 			}
 			if (!_isAutoFightRunning)
@@ -299,7 +361,6 @@ package com.rpgGame.app.manager
 			isNormalSpell = false;
 			
 			TweenLite.killDelayedCallsTo(onDelayedUnbroken);
-			TweenLite.killDelayedCallsTo(actorFight);
 			EventManager.dispatchEvent(TaskEvent.AUTO_FIGHT_STOP);
 			_isAutoFightRunning = false;
 			_stateMachine.transition(AIStateType.AI_NONE);

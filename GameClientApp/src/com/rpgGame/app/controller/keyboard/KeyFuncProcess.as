@@ -43,18 +43,9 @@ package com.rpgGame.app.controller.keyboard
 			switch (funcID)
 			{
 				case "1": //G GM命令面板
-					/*if (!ClientConfig.isRelease)
-					{
-						if (AppManager.isAppInScene(AppConstant.GM_PANEL))
-							AppManager.hideApp(AppConstant.GM_PANEL);
-						else
-							AppManager.showApp(AppConstant.GM_PANEL);
-					}*/
-					FunctionOpenManager.openAppPaneById(EmFunctionID.EM_ZHANHUN,null,true,false);
+					
 					break;
 				case "2": //Z 自动挂机   挂机改到A去了
-					FightFaceHelper.showAttChange(EnumHurtType.EXP,100000000);
-					
 					break;
 				case "65": //A 自动挂机   挂机改到A去了
 					if (TrusteeshipManager.getInstance().isAutoFightRunning)

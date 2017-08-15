@@ -166,7 +166,7 @@ package com.rpgGame.app.sender
 			msg.mapModel = sceneID;
 			msg.position = new Position();
 			msg.position.x = posx;
-			msg.position.y = posy;
+			msg.position.y =-Math.abs(posy);
 			SocketConnection.send(msg);
 		}
 		

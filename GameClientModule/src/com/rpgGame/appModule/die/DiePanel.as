@@ -132,6 +132,7 @@ package com.rpgGame.appModule.die
 					break;
 				}
 			}
+			this.escExcuteAble=false;
 		}
 		
 		protected function onTimer(event:TimerEvent):void

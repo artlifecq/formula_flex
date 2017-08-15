@@ -13,7 +13,7 @@ package com.rpgGame.netData.dailyzone.bean{
 	 * 通用日常副本面板信息
 	 */
 	public class DailyZonePanelInfo extends Bean {
-	
+		
 		//日常副本ID编号
 		private var _dailyzoneId: int;
 		
