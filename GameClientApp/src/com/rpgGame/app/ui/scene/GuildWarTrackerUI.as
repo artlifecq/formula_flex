@@ -18,6 +18,7 @@ package com.rpgGame.app.ui.scene
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.GuildEvent;
 	import com.rpgGame.core.events.SpellEvent;
+	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.QSinglecitybaseCfgData;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.clientConfig.Q_singlecitybase;
@@ -186,7 +187,9 @@ package com.rpgGame.app.ui.scene
 		
 		private function getCityInfo(msg:ResGuildWarCityBriefnessInfoMessage):void
 		{
-			_skin.lbHeadName.text=getCityName(msg.cityId)+"争霸战";
+			var name:String=EnumCity.getCityName(msg.cityId,ClientConfig.loginAreaId)
+			_skin.lbHeadName.text=name.substr(1,name.length-2)+"争霸战";
+			
 			cfg=QSinglecitybaseCfgData.getCityCfg(msg.cityId);
 			defendCmapId=msg.defendCmapId;
 			leftTime=msg.endTime;
@@ -208,26 +211,6 @@ package com.rpgGame.app.ui.scene
 			testMsg.myRank=1;
 			testMsg.mySource=10;
 			AppManager.showApp(AppConstant.GUILD_WCZB_RESULT,[testMsg,cfg,defendCmapId]);*/
-		}
-		
-		private function getCityName(city:int):String
-		{
-			var name:String="";
-			switch(city){
-				case EnumCity.XI_WEI:
-					name="西卫";
-					break;
-				case EnumCity.ZHONG_WEI:
-					name="中卫";
-					break;
-				case EnumCity.DONG_WEI:
-					name="东卫";
-					break;
-				case EnumCity.WANG_CHENG:
-					name="王城";
-					break;
-			}
-			return name;
 		}
 		
 		private function toOre(msg:ResGuildWarOrePositionMessage):void

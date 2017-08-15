@@ -21,7 +21,6 @@ package com.rpgGame.app.manager.shell
     import com.game.engine3D.vo.BaseRole;
     import com.game.mainCore.core.manager.LayerManager;
     import com.gameClient.log.GameLog;
-    import com.rpgGame.app.cmdlistener.GMCmdListener;
     import com.rpgGame.app.fight.spell.ReleaseSpellHelper;
     import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
     import com.rpgGame.app.fight.spell.SpellAnimationHelper;
@@ -41,7 +40,6 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.app.scene.SceneRole;
     import com.rpgGame.app.scene.animator.RibbonAnimator;
     import com.rpgGame.app.sender.SceneSender;
-    import com.rpgGame.app.state.role.RoleStateUtil;
     import com.rpgGame.app.state.role.control.HiddingStateReference;
     import com.rpgGame.app.state.role.control.RidingStateReference;
     import com.rpgGame.app.state.role.control.ShapeshiftingStateReference;
@@ -66,7 +64,6 @@ package com.rpgGame.app.manager.shell
     import com.rpgGame.coreData.type.RenderUnitType;
     import com.rpgGame.coreData.type.RoleStateType;
     import com.rpgGame.coreData.type.SceneCharType;
-    import com.rpgGame.netData.cross.message.ReqEnterCrossClientToGameMessage;
     
     import flash.display.BitmapData;
     import flash.geom.Point;
@@ -76,46 +73,19 @@ package com.rpgGame.app.manager.shell
     import flash.utils.getTimer;
     import flash.utils.setTimeout;
     
-    import away3d.Away3D;
-    import away3d.animators.IAnimator;
-    import away3d.animators.IAnimatorOwner;
-    import away3d.audio.SoundBox;
-    import away3d.cameras.lenses.PerspectiveLens;
-    import away3d.containers.ObjectContainer3D;
-    import away3d.containers.PlanarContainer3D;
-    import away3d.containers.View3DAsset;
-    import away3d.core.base.Geometry;
-    import away3d.core.base.SubGeometryBase;
     import away3d.core.math.Plane3D;
-    import away3d.core.partition.PlanarPartition3D;
-    import away3d.entities.SparticleMesh;
     import away3d.events.AssetEvent;
     import away3d.events.LoaderEvent;
-    import away3d.filters.Filter3DBase;
     import away3d.library.assets.AssetType;
     import away3d.library.assets.IAsset;
-    import away3d.lights.LightBase;
-    import away3d.lights.PointLight;
     import away3d.loaders.AssetLoader;
-    import away3d.loaders.ResourceBundleInstance;
     import away3d.loaders.parsers.AWD2Parser;
-    import away3d.materials.SinglePassMaterialBase;
-    import away3d.materials.lightpickers.LightPickerBase;
     import away3d.materials.methods.CorrodeMethod;
-    import away3d.materials.methods.FogByHeightMethod;
-    import away3d.materials.methods.FogMethod;
-    import away3d.materials.methods.RimLightMethod;
     import away3d.pathFinding.DistrictWithPath;
-    import away3d.plant.PlantGroup;
-    import away3d.primitives.SkyBox;
-    import away3d.weather.Weather;
-    
-    import gameEngine2D.PolyUtil;
     
     import gs.TweenLite;
     import gs.easing.Linear;
     
-    import org.game.netCore.connection.SocketConnection;
     import org.game.netCore.data.long;
     import org.game.netCore.net_protobuff.ByteBuffer;
 

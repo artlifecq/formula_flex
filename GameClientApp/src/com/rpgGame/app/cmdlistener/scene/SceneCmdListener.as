@@ -879,6 +879,9 @@ package com.rpgGame.app.cmdlistener.scene
 				mInfo.setValues(data.id,data.totalStat.getStatValue(CharAttributeType.SPEED), SystemTimeManager.curtTm,info.position,info.positions);
 				RoleStateUtil.walkByInfos(mInfo);
 			}
+			
+			(sceneRole.headFace as HeadFace).updateGuildWarInfoBar(info.keyValueList);
+			
 			//			var otherHeroBiaoMap:HashMap = YunBiaoManager._otherBiaoCheHashMap;
 			//			if( otherHeroBiaoMap.getValue( data.id ) != null )
 			//				data.biaoCheData = otherHeroBiaoMap.getValue( data.id );

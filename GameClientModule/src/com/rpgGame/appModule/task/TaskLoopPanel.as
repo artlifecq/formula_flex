@@ -17,6 +17,7 @@ package com.rpgGame.appModule.task
 	import feathers.controls.Label;
 	import feathers.controls.UIAsset;
 	
+	import org.game.netCore.data.long;
 	import org.mokylin.skin.mainui.renwu.Huanshi_Renwu;
 	
 	import starling.display.DisplayObject;
@@ -40,6 +41,7 @@ package com.rpgGame.appModule.task
 		private var ThereData:int;
 		private var selectId:int=1;
 		private var initKey:Boolean=false;
+		private var currtTaskId:long=new long();
 		public function TaskLoopPanel()
 		{
 			_skin=new Huanshi_Renwu();
@@ -108,9 +110,19 @@ package com.rpgGame.appModule.task
 				initKey=true;
 				init();
 			}
-			selectId=1;
-			setView();
-			timeInit()	
+			if(currtTaskId.ToGID()!=TaskMissionManager.treasuerTaskInfo.taskId.ToGID())
+			{
+				if(currtimer>0)
+				{
+					subFinish(currtTaskId);
+				}
+				
+				currtTaskId=TaskMissionManager.treasuerTaskInfo.taskId;
+				selectId=1;
+				setView();
+				timeInit();
+			}
+			
 			
 		}
 		override protected function onStageResize(sw : int, sh : int) : void
@@ -126,7 +138,7 @@ package com.rpgGame.appModule.task
 			currtimer=TIMERDATA;
 			if(this.visible&&this.parent!=null&&TaskMissionManager.getTreasuerTaskIsFinish())
 			{
-				subFinish();
+				subFinish(TaskMissionManager.treasuerTaskInfo.taskId);
 			}
 			super.hide();
 			
@@ -211,10 +223,10 @@ package com.rpgGame.appModule.task
 			
 			
 		}
-		private function subFinish():void
+		private function subFinish(taskId:long):void
 		{
 			
-			TaskSender.sendfinishTaskMessage(TaskMissionManager.treasuerTaskInfo.taskId,selectId);
+			TaskSender.sendfinishTaskMessage(taskId,selectId);
 			icoList1Group.tweeRewardInBag();
 		}
 		private var loopNumber:int=-1;

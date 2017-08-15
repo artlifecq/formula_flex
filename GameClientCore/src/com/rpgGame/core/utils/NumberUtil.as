@@ -52,11 +52,17 @@ package com.rpgGame.core.utils
 		{
 			var sub:String;
 			if(isshow){
-				if(num>10000&&num<100000000)//&&num<1000000)
+				if(num>=10000&&num<100000000)//&&num<1000000)
 				{
-					sub=(num/10000).toFixed(0)+"万";
+					if(num<1000000)
+					{
+						sub=Number((num/10000).toFixed(1))+"万";
+					}
+					else
+						sub=(num/10000).toFixed(0)+"万";
 					return sub;
 				}
+					
 				else if(num>=100000000)
 				{
 					sub=(num/100000000).toFixed(0)+"亿";

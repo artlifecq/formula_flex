@@ -12,6 +12,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.app.ui.UIModel;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.ui.alert.GameAlertExt;
+	import com.rpgGame.app.ui.tips.data.AmountTipData;
 	import com.rpgGame.app.utils.BreatheTweenUtil;
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.app.view.icon.IconCDFace;
@@ -30,6 +31,7 @@ package com.rpgGame.appModule.role
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.utils.MCUtil;
+	import com.rpgGame.core.view.ui.tip.vo.DynamicTipData;
 	import com.rpgGame.coreData.SpriteStat;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
@@ -98,6 +100,17 @@ package com.rpgGame.appModule.role
 		private var cdTime:uint;
 		private var leftCD:int;
 		private var _shopPanel:BackpackShopExt;
+		
+		private var ylTip:DynamicTipData;
+		private var byTip:DynamicTipData;
+		private var ybTip:DynamicTipData;
+		private var ljTip:DynamicTipData;
+		
+		private var ylData:AmountTipData;
+		private var byData:AmountTipData;
+		private var ybData:AmountTipData;
+		private var ljData:AmountTipData;
+		
 		public function PacksView(skin:juese_Skin)
 		{
 			_skin=skin;
@@ -120,6 +133,31 @@ package com.rpgGame.appModule.role
 			];
 			
 			toStorageGridInfo=new GridInfo(ItemContainerID.Storage,-1);
+			
+			ylTip=new DynamicTipData();
+			byTip=new DynamicTipData();
+			ybTip=new DynamicTipData();
+			ljTip=new DynamicTipData();
+			
+			ylData=new AmountTipData();
+			byData=new AmountTipData();
+			ybData=new AmountTipData();
+			ljData=new AmountTipData();
+			
+			
+			ylTip.data=ylData;
+			byTip.data=byData;
+			ybTip.data=ybData;
+			ljTip.data=ljData;
+			
+			ylData.name="银两:";
+			ylData.des=ItemConfig.getQItemByID(4).q_describe;
+			byData.name="绑银:";
+			byData.des=ItemConfig.getQItemByID(6).q_describe;
+			ybData.name="元宝:";
+			ybData.des=ItemConfig.getQItemByID(3).q_describe;
+			ljData.name="礼金:";
+			ljData.des=ItemConfig.getQItemByID(5).q_describe;
 		}
 		
 		private function initPacks():void
@@ -167,24 +205,12 @@ package com.rpgGame.appModule.role
 			_skin.txt_yingzi.text = stat.getResData(CharAttributeType.RES_MONEY) +"";//银子
 			_skin.txt_yuanbao.text = stat.getResData(CharAttributeType.RES_GOLD)+"";//金子
 			_skin.txt_yingzibang.text = stat.getResData(CharAttributeType.RES_BIND_MONEY)+"";//绑银
-			TipTargetManager.remove(_skin.txt_lijin);
-			TipTargetManager.remove(_skin.txt_yingzi);
-			TipTargetManager.remove(_skin.txt_yuanbao);
-			TipTargetManager.remove(_skin.txt_yingzibang);
-			TipTargetManager.remove(_skin.icon_lijin);
-			TipTargetManager.remove(_skin.icon_yingzi);
-			TipTargetManager.remove(_skin.icon_yuanbao);
-			TipTargetManager.remove(_skin.icon_yingzibang);
 			
-			TipTargetManager.show( _skin.txt_lijin, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP,{name:"礼金:",value:_skin.txt_lijin.text  ,des:ItemConfig.getQItemByID(5).q_describe} ));
-			TipTargetManager.show( _skin.txt_yingzi, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP, {name:"银两:",value:_skin.txt_yingzi.text  ,des:ItemConfig.getQItemByID(4).q_describe}));
-			TipTargetManager.show( _skin.txt_yuanbao, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP,  {name:"元宝:",value:_skin.txt_yuanbao.text  ,des:ItemConfig.getQItemByID(3).q_describe}));
-			TipTargetManager.show( _skin.txt_yingzibang, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP,	{name:"绑银:",value:_skin.txt_yingzibang.text  ,des:ItemConfig.getQItemByID(6).q_describe}));
 			
-			TipTargetManager.show( _skin.icon_lijin, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP,{name:"礼金:",value:_skin.txt_lijin.text  ,des:ItemConfig.getQItemByID(5).q_describe} ));
-			TipTargetManager.show( _skin.icon_yingzi, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP, {name:"银两:",value:_skin.txt_yingzi.text  ,des:ItemConfig.getQItemByID(4).q_describe}));
-			TipTargetManager.show( _skin.icon_yuanbao, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP,  {name:"元宝:",value:_skin.txt_yuanbao.text  ,des:ItemConfig.getQItemByID(3).q_describe}));
-			TipTargetManager.show( _skin.icon_yingzibang, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP,	{name:"绑银:",value:_skin.txt_yingzibang.text  ,des:ItemConfig.getQItemByID(6).q_describe}));
+			ylData.value=_skin.txt_yingzi.text;
+			byData.value=_skin.txt_yingzibang.text;
+			ybData.value=_skin.txt_yuanbao.text;
+			ljData.value=_skin.txt_lijin.text;			
 		}
 		
 		private function setGridsCount(count:int, refleshNow:Boolean):void
@@ -462,6 +488,22 @@ package com.rpgGame.appModule.role
 			EventManager.addEvent(MainPlayerEvent.LEVEL_CHANGE,levelChange);
 			
 			goodsContainer.addEvents();
+			
+			TipTargetManager.show( _skin.icon_yingzi, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP, ylTip ));
+			TipTargetManager.show( _skin.name_yz, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP, ylTip ));
+			TipTargetManager.show( _skin.txt_yingzi, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP, ylTip ));
+			
+			TipTargetManager.show( _skin.icon_yingzibang, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP,  byTip));
+			TipTargetManager.show( _skin.name_by, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP,  byTip));
+			TipTargetManager.show( _skin.txt_yingzibang, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP,  byTip));
+			
+			TipTargetManager.show( _skin.icon_yuanbao, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP,ybTip ));
+			TipTargetManager.show( _skin.name_yb, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP,ybTip ));
+			TipTargetManager.show( _skin.txt_yuanbao, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP,ybTip ));
+			
+			TipTargetManager.show( _skin.icon_lijin, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP, ljTip));
+			TipTargetManager.show( _skin.name_lj, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP, ljTip));
+			TipTargetManager.show( _skin.txt_lijin, TargetTipsMaker.makeTips( TipType.AMOUNT_TIP, ljTip));
 		}
 		
 		private function levelChange():void
@@ -681,7 +723,21 @@ package com.rpgGame.appModule.role
 			EventManager.removeEvent(ItemEvent.ITEM_DISCARDED, preDiscard);
 			EventManager.removeEvent(MainPlayerEvent.LEVEL_CHANGE,levelChange);
 			
-			TipTargetManager.remove(_skin.txt_yingzibang);
+			TipTargetManager.remove( _skin.icon_yingzi);
+			TipTargetManager.remove( _skin.name_yz);
+			TipTargetManager.remove( _skin.txt_yingzi);
+			
+			TipTargetManager.remove( _skin.icon_yingzibang);
+			TipTargetManager.remove( _skin.name_by);
+			TipTargetManager.remove( _skin.txt_yingzibang);
+			
+			TipTargetManager.remove( _skin.icon_yuanbao);
+			TipTargetManager.remove( _skin.name_yb);
+			TipTargetManager.remove( _skin.txt_yuanbao);
+			
+			TipTargetManager.remove( _skin.icon_lijin);
+			TipTargetManager.remove( _skin.name_lj);
+			TipTargetManager.remove( _skin.txt_lijin);
 			
 			storagePanel.hide();
 			itemSplitPanel.hide();

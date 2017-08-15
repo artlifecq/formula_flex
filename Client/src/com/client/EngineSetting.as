@@ -68,7 +68,7 @@ package com.client
 			
 			Away3D.PURE_COLOR_PASS = false;
 			Away3D.MIN_HEAP_SIZE = 188743680;
-			MultiUrlLoadManager.maxQueueSize = 5;
+			MultiUrlLoadManager.maxQueueSize = 3;
 			
 			SoundUtil.volume = 1;
 			SoundUtil.SOUND_REDUCTION_ALGORITHM_MIN_VOLUMN = 0.75;

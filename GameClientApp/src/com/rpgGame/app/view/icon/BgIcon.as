@@ -3,6 +3,7 @@ package com.rpgGame.app.view.icon
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
 	import com.rpgGame.app.manager.EftMcManager;
+	import com.rpgGame.core.utils.NumberUtil;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.clientConfig.Q_item;
@@ -477,14 +478,15 @@ package com.rpgGame.app.view.icon
 				return;
 			}
 			
-			if( value > 10000 )
+			setSubString(NumberUtil.getNumberTo(value,true));
+/*			if( value > 10000 )
 			{
 				setSubString(int( value / 10000 ) + "万");
 			}
 			else
 			{
 				setSubString( value + "");
-			}
+			}*/
 		}
 		/**
 		 * 设置文字下标 
@@ -551,7 +553,7 @@ package com.rpgGame.app.view.icon
 			_countText.verticalCenter=-2;
 			_countText.textAlign = Align.RIGHT;
 			_countText.color = StaticValue.A_UI_BEIGE_TEXT;
-			_countText.fontSize = 10;
+			_countText.fontSize = 12;
 			_countText.nativeFilters=Fontter.filterObj["labelFilterBlack"];
 			addChild(_countText);
 		}

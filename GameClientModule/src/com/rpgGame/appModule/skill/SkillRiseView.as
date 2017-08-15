@@ -97,7 +97,7 @@ package com.rpgGame.appModule.skill
 		{
 			cfg=selectedCfg;
 			skin.lb_name.text=selectedCfg.q_skillName;
-			skin.lb_dengji.text=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT1),selectedInfo.skillLevel+"/"+cfg.q_max_grade);
+			skin.lb_dengji.text=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT1),selectedInfo?selectedInfo.skillLevel:0+"/"+cfg.q_max_grade);
 			skin.lb_leixing.text=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT6),selectedCfg.q_type_description);
 			skin.lb_xiaohao.text=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT5),cfg.q_recovers_detail.length==0?LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT12):cfg.q_recovers_detail);
 			skin.lb_lengque.text=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT4),selectedCfg.q_cd/1000);
@@ -197,7 +197,7 @@ package com.rpgGame.appModule.skill
 				skin.lb_renwudengji.visible=true;
 				if(needSkill!=0){
 					skin.lb_jinengdengji.visible=true;
-					if(needSkill>selectedInfo.skillChildLv){
+					if(selectedInfo&&needSkill>selectedInfo.skillChildLv){
 						GrayFilter.gray(skin.btn_jinjie);
 						skin.btn_jinjie.touchable=false;
 						playerStr=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,needSkill.toString()+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT21));
@@ -208,7 +208,7 @@ package com.rpgGame.appModule.skill
 				}
 			}else{
 				skin.lb_jinengdengji.visible=true;
-				if(needSkill>selectedInfo.skillChildLv){
+				if(selectedInfo&&needSkill>selectedInfo.skillChildLv){
 					GrayFilter.gray(skin.btn_jinjie);
 					skin.btn_jinjie.touchable=false;
 					playerStr=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,needSkill.toString()+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT21));

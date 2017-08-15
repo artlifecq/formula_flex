@@ -56,11 +56,11 @@ package com.rpgGame.appModule.battle.jjzb
 			_skin.uiTip.visible=!isWin;
 			if (isWin) 
 			{
-				_skin.imgWin.styleName="ui/app/zhanchang/jiesuan/tianzhanshengli.png";
+				_skin.imgWin.styleName="ui/big_bg/activety/tianzhanshengli.png";
 			}
 			else
 			{
-				_skin.imgWin.styleName="ui/app/zhanchang/jiesuan/tiaozhanshibai.png";
+				_skin.imgWin.styleName="ui/big_bg/activety/tiaozhanshibai.png";
 			}
 			_skin.numPaiming.label=arr[1]+"";
 			_hash.eachValue(function(num:UINumber):void

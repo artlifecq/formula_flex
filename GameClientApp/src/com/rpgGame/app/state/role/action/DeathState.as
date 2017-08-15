@@ -56,15 +56,6 @@ package com.rpgGame.app.state.role.action
 			if (_machine && !_machine.isInPool)
 			{
 				super.execute();
-				var role : SceneRole = _machine.owner as SceneRole;
-				var mapID : int = SceneSwitchManager.currentMapId;
-				var cfg : SceneData = MapDataManager.getMapInfo(mapID);
-				var qmap:Q_map=cfg.getData();
-				if(qmap.q_select_corpse==1){
-					role.mouseEnable=true;
-				}else{
-					role.mouseEnable=false;
-				}
 				transition(RoleStateType.CONTROL_STOP_WALK_MOVE, null, true);
 				if (_corrodeTween)
 				{
@@ -327,7 +318,6 @@ package com.rpgGame.app.state.role.action
 			{
 				stopCorrode();
 				var role : SceneRole = _machine.owner as SceneRole;
-				role.mouseEnable=true;
 				if (role.type != SceneCharType.PLAYER)
 				{
 					roleDied();

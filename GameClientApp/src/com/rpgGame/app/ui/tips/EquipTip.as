@@ -91,6 +91,7 @@ package com.rpgGame.app.ui.tips
 			titles=new Vector.<UIAsset>();
 			yinIcon=new UIAsset();
 			yinIcon.styleName="ui/common/tubiao/yinzi_24.png";
+			_itemTip.lbl_bangding.width=120;
 		}
 		
 		
@@ -145,7 +146,6 @@ package com.rpgGame.app.ui.tips
 			}
 			
 			_itemTip.lbl_bangding.visible=true;
-			_itemTip.lbl_bangding.width=120;
 			if(_itemInfo.binded){
 				_itemTip.lbl_bangding.text="【已绑定】"
 			}else{
@@ -428,7 +428,7 @@ package com.rpgGame.app.ui.tips
 			_itemTip.ui_di.y=ui_bg.height;
 			_itemTip.ui_di.visible=true;
 			_itemTip.lbl_bangding.x=175;
-			_itemTip.lbl_bangding.y=_itemTip.ui_di.y-3;
+			_itemTip.lbl_bangding.y=_itemTip.ui_di.y-18;
 			_itemTip.bg.height=_itemTip.ui_di.y+_itemTip.ui_di.height;
 			_itemTip.uiKuang.height=_itemTip.ui_di.y+_itemTip.ui_di.height;
 		}

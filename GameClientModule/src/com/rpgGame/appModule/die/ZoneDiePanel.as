@@ -22,6 +22,7 @@ package com.rpgGame.appModule.die
 		private var _endTime:int;
 		public function ZoneDiePanel():void
 		{
+			this.escExcuteAble=false;
 			_skin = new TiaoZhanShiBai_Skin();
 			super(_skin);
 			initView();

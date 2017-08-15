@@ -11,7 +11,6 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.app.manager.scene.SceneCursorHelper;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.stall.StallManager;
-	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.SceneSender;
@@ -168,17 +167,18 @@ package com.rpgGame.app.state.role
 		private static function doWalkTo(role : SceneRole, pos : Vector3D, spacing : int = 0, data : Object = null, 
 										   onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null,needSprite:Boolean=false) : Boolean
 		{
-			TweenLite.killDelayedCallsTo(doWalkToPos);
+			TweenLite.killDelayedCallsTo(doWalkTo);
 			if (!role || !role.usable)
 				return false;
 			var camouflageEntity : SceneRole = SceneRole(role.getCamouflageEntity());
 			var walkRole : SceneRole = camouflageEntity || role;
 			if((walkRole.isMainChar || walkRole.isMainCamouflage||(walkRole.type==SceneCharType.GIRL_PET&&walkRole.ownerIsMainChar)))
 			{
-				if (walkRole.stateMachine.isAttackHarding)
+				if (walkRole.stateMachine.isAttackHarding||walkRole.stateMachine.isLockCaseSpell)
 				{
-					Lyt.a("walk-isAttackHarding");
-					TweenLite.delayedCall(1, doWalkToPos, [role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite,true]);
+					Lyt.a("walk-isAttackHarding:"+walkRole.stateMachine.isAttackHarding+"="+walkRole.stateMachine.isLockCaseSpell);
+					TrusteeshipManager.getInstance().stopAll();
+					TweenLite.delayedCall(1, doWalkTo, [role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite]);
 					return false;
 				}
 				else
@@ -192,7 +192,7 @@ package com.rpgGame.app.state.role
 		
 		public static function doWalkToPos(role : SceneRole, pos : Vector3D, spacing : int = 0, data : Object = null, 
 										   onArrive : Function = null, onThrough : Function = null, onUpdate : Function = null,
-										   needSprite:Boolean=false,isForceMove:Boolean =false) : Boolean
+										   needSprite:Boolean=false) : Boolean
 		{
 			if (!role || !role.usable)
 				return false;
@@ -202,7 +202,7 @@ package com.rpgGame.app.state.role
 			{
 //				SceneCursorHelper.getInstance().hideCursor();
 				var nowTime : int = getTimer();
-				if(!TaskAutoManager.getInstance().isTasking)//自动任务中优先执行自动任务走路  ---yt
+				if(!TrusteeshipManager.getInstance().isAutoWalking)//自动走路中优先执行自动走路  ---yt
 				{
 					if (MainRoleManager.isTakeZhanChe) //乘坐他人战车时不能移动
 					{
@@ -267,8 +267,7 @@ package com.rpgGame.app.state.role
 			ref.onStop(onWalkStop);
 			ref.onEnd(onWalkEnd);
 			ref.onSync(onWalkSync);
-//			walkRole.stateMachine.transition(RoleStateType.CONTROL_WALK_MOVE, ref);
-			walkRole.stateMachine.transition(RoleStateType.CONTROL_WALK_MOVE, ref,isForceMove);
+			walkRole.stateMachine.transition(RoleStateType.CONTROL_WALK_MOVE, ref);
 			if (role.isMainChar || role.isMainCamouflage)
 			{
 				if (walkRole.stateMachine.isWalkMoving)

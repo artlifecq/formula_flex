@@ -106,7 +106,7 @@ package com.rpgGame.appModule.guild.war
 					obj.curMaxPriceGuildId=msg.guildId;
 					obj.curMaxPriceGuildName=msg.guildName;
 					obj.curMaxPrice=msg.price;
-					if(msg.guildId.hexValue==myGuildId){
+					if(msg.guildId.hexValue==myGuildId){//是自己帮派申请了,那就请求一次城池信息,更新面板
 						_skin.List.customData.applayCityId=msg.cityId;
 						GuildWarSender.reqGuildWarCityInfo(0);
 					}

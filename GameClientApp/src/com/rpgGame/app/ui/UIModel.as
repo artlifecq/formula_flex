@@ -7,10 +7,12 @@ package com.rpgGame.app.ui
 	
 	import away3d.events.Event;
 	
-	import feathers.controls.UIAsset;
+	import feathers.themes.GuiTheme;
+	
+	import org.mokylin.skin.loading.Bg_Foot;
+	import org.mokylin.skin.loading.Bg_head;
 	
 	import starling.core.Starling;
-	import starling.display.DisplayObject;
 	import starling.display.Shape;
 	import starling.display.Sprite;
 
@@ -33,6 +35,8 @@ package com.rpgGame.app.ui
 		{
 			showModelArray = new Vector.<SkinUI>();
 			_stage = Starling.current.nativeStage;
+			GuiTheme.ins.customScale9GridRect("ui/big_bg/bg_1.png","1,0,1,147");
+			GuiTheme.ins.customScale9GridRect("ui/big_bg/bg_2.png","1,0,1,185");
 			drawBlack();
 			
 		}
@@ -41,8 +45,17 @@ package com.rpgGame.app.ui
 		{
 			_blackShape.width = _stage.stageWidth;
 			_blackShape.height = _stage.stageHeight;
-			_bottonPng.y = _stage.stageHeight-_bottonPng.height;
-			_bottonPng.x = _topPng.x = (_stage.stageWidth - _topPng.width)/2;
+			_bgFoot.y = _stage.stageHeight-_bgFoot.height;
+//			_bgFoot.x = _bgHead.x = (_stage.stageWidth - _bgHead.width)/2;
+			var halfW:int=Math.ceil(_stage.stageWidth/2);
+			(_bgHead.stateSkin as Bg_head).left.x=0;
+			(_bgHead.stateSkin as Bg_head).left.width=halfW;
+			(_bgHead.stateSkin as Bg_head).right.x=_stage.stageWidth;
+			(_bgHead.stateSkin as Bg_head).right.width=halfW;
+			(_bgFoot.stateSkin as Bg_Foot).left.x=0;
+			(_bgFoot.stateSkin as Bg_Foot).left.width=halfW;
+			(_bgFoot.stateSkin as Bg_Foot).right.x=_stage.stageWidth;
+			(_bgFoot.stateSkin as Bg_Foot).right.width=halfW;
 		}
 		
 		private var showModelArray :Vector.<SkinUI>;
@@ -58,8 +71,8 @@ package com.rpgGame.app.ui
 		}
 		
 		private var _blackShape:Shape;
-		private var _topPng:UIAsset;
-		private var _bottonPng:UIAsset;
+		private var _bgHead:SkinUI;
+		private var _bgFoot:SkinUI;
 		private function drawBlack():void
 		{
 			_blackShape = new Shape();
@@ -68,19 +81,11 @@ package com.rpgGame.app.ui
 			_blackShape.graphics.endFill();
 			addChildAt( _blackShape , 0 );
 			
-			_topPng = new feathers.controls.UIAsset();
-			_topPng.height = 187;
-			_topPng.width = 1920;
-			_topPng.y = _topPng.height;
-			_topPng.styleName = "ui/big_bg/bg_2.png";
-			_topPng.scaleY = -1;
-			this.addChild(_topPng);
-			
-			_bottonPng = new feathers.controls.UIAsset();
-			_bottonPng.height = 187;
-			_bottonPng.width = 1920;
-			_bottonPng.styleName = "ui/big_bg/bg_2.png";
-			this.addChild(_bottonPng);
+			_bgHead = new SkinUI(new Bg_head());
+			_bgFoot=new SkinUI(new Bg_Foot());
+			addChild(_bgHead);
+			addChild(_bgFoot);
+			onStageResize(null);
 		}
 		
 		public function switchModel(panel:SkinUI,isadd:Boolean,type:int):void
@@ -108,12 +113,12 @@ package com.rpgGame.app.ui
 			if(type==1)
 			{
 				_blackShape.alpha = 0.8;
-				_topPng.visible = false;
-				_bottonPng.visible = false;
+				_bgHead.visible = false;
+				_bgFoot.visible = false;
 			}else{
 				_blackShape.alpha = 0.5;
-				_topPng.visible = true;
-				_bottonPng.visible = true;
+				_bgHead.visible = true;
+				_bgFoot.visible = true;
 			}
 		}
 		
