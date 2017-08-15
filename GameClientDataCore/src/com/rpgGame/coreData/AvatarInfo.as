@@ -70,6 +70,11 @@ package com.rpgGame.coreData
 		}
 		
 
+		public function set priority(value:int):void
+		{
+			_priority = value;
+		}
+
 		public function get fightsoulResID():String
 		{
 			return _fightsoulResID;
