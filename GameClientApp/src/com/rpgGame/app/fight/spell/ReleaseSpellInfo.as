@@ -197,6 +197,12 @@ package com.rpgGame.app.fight.spell
 					if (_atkor && !_atkor.usable)
 						_atkor = null;
 				}
+				if (_atkorID > 0&&EnumSkillPerformType.T_GIRLPET==_spellData.q_performType) 
+				{
+					_atkor = SceneManager.getScene().getSceneObjByID(_atkorID, SceneCharType.GIRL_PET) as SceneRole;
+					if (_atkor && !_atkor.usable)
+						_atkor = null;
+				}
 				if(_atkor == null)
 				{
 					GameLog.addShow("攻击者为空!攻击者服务器ID为：\t" + fightTargetMsg.personId.ToString());

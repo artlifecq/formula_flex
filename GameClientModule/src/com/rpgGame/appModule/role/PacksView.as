@@ -191,6 +191,7 @@ package com.rpgGame.appModule.role
 			initEvent();
 			setGridsCount(BackPackManager.instance.hasOpenCount,true);
 			updateAmount();
+			BackPackManager.instance.isShowRole=true;
 		}
 		
 		private function updateAmount(type:int=3):void
@@ -708,6 +709,7 @@ package com.rpgGame.appModule.role
 		
 		internal function onHide():void
 		{
+			BackPackManager.instance.isShowRole=false;
 			_skin.packs.visible=false;
 			goodsContainer.hide();
 			

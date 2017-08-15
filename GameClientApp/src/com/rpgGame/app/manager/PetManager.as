@@ -6,6 +6,10 @@ package com.rpgGame.app.manager
 	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.PetEvent;
+	import com.rpgGame.coreData.cfg.PetAdvanceCfg;
+	import com.rpgGame.coreData.cfg.SpellDataManager;
+	import com.rpgGame.coreData.clientConfig.Q_girl_advance;
+	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.JobEnum;
 	import com.rpgGame.netData.pet.bean.PetInfo;
 	import com.rpgGame.netData.pet.message.ResExtraBuyMessage;
@@ -32,7 +36,19 @@ package com.rpgGame.app.manager
 		{
 			return _petHash.getValue(pet) as PetInfo;
 		}
-		
+		public function getCurPetSkill():Q_skill_model
+		{
+			var pet:PetInfo=getPet(_curPetId);
+			if (pet) 
+			{
+				var qPet:Q_girl_advance=PetAdvanceCfg.getPet(pet.modelId,pet.rank);
+				if (qPet&&qPet.q_skill_id) 
+				{
+					return SpellDataManager.getSpellById(qPet.q_skill_id);
+				}
+			}
+			return null;
+		}
 		public function get bindGlodNum():int
 		{
 			return _bindGlodNum;

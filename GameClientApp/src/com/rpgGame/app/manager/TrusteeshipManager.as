@@ -3,6 +3,7 @@ package com.rpgGame.app.manager
 	import com.game.mainCore.core.timer.GameTimer;
 	import com.rpgGame.app.manager.ctrl.ControlAutoFightSelectSkill;
 	import com.rpgGame.app.manager.ctrl.ControlAutoPick;
+	import com.rpgGame.app.manager.ctrl.ControlMainPlayerFight;
 	import com.rpgGame.app.manager.ctrl.ControlTripleSkill;
 	import com.rpgGame.app.manager.fight.FightManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -31,6 +32,7 @@ package com.rpgGame.app.manager
 	import gs.TweenLite;
 	
 	import org.client.mainCore.manager.EventManager;
+	import org.game.netCore.data.long;
 	
 	/**
 	 *
@@ -69,6 +71,7 @@ package com.rpgGame.app.manager
 		public var nextSpell:Q_skill_model;
 		private var _isNormalSpell:Boolean = false;
 		public var isAutoWalking:Boolean=false;
+		private var _myFighterCtrl:ControlMainPlayerFight;
 		public function TrusteeshipManager()
 		{
 			_gTimer = new GameTimer("TrusteeshipManager", 500, 0, onUpdate);
@@ -86,6 +89,7 @@ package com.rpgGame.app.manager
 			_autoPickCtrl=new ControlAutoPick(role);
 			_autoSkillCtrl=new ControlAutoFightSelectSkill(role,(role.data as HeroData).job);
 			_tripleSkillCtrl=new ControlTripleSkill();
+			_myFighterCtrl=new ControlMainPlayerFight();
 			TrusteeshipFightSoulManager.getInstance().setup(role);
 			
 		}
@@ -680,5 +684,15 @@ package com.rpgGame.app.manager
 			}
 		}
 
+		public function get myFighterCtrl():ControlMainPlayerFight
+		{
+			return _myFighterCtrl;
+		}
+
+		//以下是美人ai需求的===========================================================
+		/**
+		 * 和主人打架的角色
+		 */		
+		public var playerFightTarget:long;
 	}
 }

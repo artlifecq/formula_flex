@@ -34,6 +34,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			super();
 			
 			this.currentState = "normal";
+			this.width = 176;
 			this.elementsContent = [imgCon_i(),lbLevel_i(),lbName_i(),__RoleItem2_UIAsset2_i(),numZhanli_i()];
 			
 			states = {
@@ -49,7 +50,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/common/zhandouli2.png";
-			temp.x = 18;
+			temp.x = 5;
 			temp.y = 369;
 			return temp;
 		}
@@ -76,8 +77,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.textAlign = "center";
 			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 81;
-			temp.x = 56;
+			temp.width = 172;
+			temp.x = 3;
 			temp.y = 333;
 			return temp;
 		}
@@ -92,8 +93,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.textAlign = "center";
 			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 100;
-			temp.x = 47;
+			temp.width = 174;
+			temp.x = 2;
 			temp.y = 352;
 			return temp;
 		}
@@ -107,8 +108,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.height = 25;
 			temp.label = "629845";
 			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhujuezhandouli;
-			temp.width = 142;
-			temp.x = 74;
+			temp.width = 151;
+			temp.x = 61;
 			temp.y = 372;
 			return temp;
 		}

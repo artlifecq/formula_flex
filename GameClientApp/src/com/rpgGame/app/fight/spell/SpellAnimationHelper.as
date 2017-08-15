@@ -1,10 +1,12 @@
 package com.rpgGame.app.fight.spell
 {
+	import com.game.engine3D.core.GameScene3D;
 	import com.game.engine3D.scene.render.RenderSet3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
 	import com.game.engine3D.scene.render.vo.IRenderAnimator;
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.game.engine3D.vo.BaseObj3D;
+	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.scene.animator.AnimatorLocusPoint;
@@ -22,7 +24,9 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.coreData.clientConfig.Q_SpellEffect;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.info.fight.FightHurtResult;
+	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.RoleData;
+	import com.rpgGame.coreData.type.GameScene3DType;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
 	import com.rpgGame.coreData.type.SceneCharType;
@@ -41,6 +45,7 @@ package com.rpgGame.app.fight.spell
 	 */
 	public class SpellAnimationHelper
 	{
+		
 		public function SpellAnimationHelper()
 		{
 		}
@@ -56,10 +61,15 @@ package com.rpgGame.app.fight.spell
 		{
 			if (SceneManager.isSceneOtherRenderLimit)
 				return;
+		
 			/** 施法者 **/
 			var atkor : SceneRole = info.atkor;
 			if (atkor == null || !atkor.usable || !atkor.isInViewDistance)
 				return;
+			if (atkor.isPlayer&&!SpellEffectRecordCtrl.testEffectShow((atkor.data as HeroData).id,info.spellData.q_skillID)) 
+			{
+				return;
+			}
 			atkor.avatar.removeRenderUnitsByType(RenderUnitType.KNIFE_LIGHT);
 			var animatData : Q_SpellAnimation = info.fromAni;
 			/** 特效 **/
@@ -68,7 +78,7 @@ package com.rpgGame.app.fight.spell
 				var effectRu : RenderUnit3D;
 				var rud : RenderParamData3D;
 				var speed:Number=animatData.speed>0?animatData.speed*0.01:1;
-				
+				var func:Function;
 				if (animatData.role_res)
 				{
 					rud = new RenderParamData3D(RenderUnitID.KNIFE_LIGHT, RenderUnitType.KNIFE_LIGHT, ClientConfig.getEffect(animatData.role_res));
@@ -90,6 +100,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.completeWhenInvisible = true;
 					effectRu.setPlayCompleteCallBack(avatarRuPlayComplete, atkor.avatar);
 					effectRu.play(0,speed);
+					func=atkor.avatar.removeRenderUnit;
 				}
 				else if (animatData.scene_res)
 				{
@@ -115,13 +126,23 @@ package com.rpgGame.app.fight.spell
 					effectRu.rotationY = atkor.rotationY;
 					effectRu.completeWhenInvisible = true;
 					SceneManager.addSceneObjToScene(effectRu);
-					effectRu.setPlayCompleteCallBack(SceneManager.removeSceneObjFromScene);
+					effectRu.setPlayCompleteCallBack(removeSceneObjUnitFromScene);
 					effectRu.play(0,speed);
+					func=removeSceneObjUnitFromScene;
 				}
+				if (SceneCharType.PLAYER==atkor.type) 
+				{
+					SpellEffectRecordCtrl.addEffectRecord((atkor.data as HeroData).id,info.spellData.q_skillID,effectRu,func);
+				}
+				
 				knifeLightObjID++;
 			}
 		}
-		
+		public static function removeSceneObjUnitFromScene(obj : BaseObj3D) : void
+		{
+			SceneManager.removeSceneObjFromScene(obj);
+			SpellEffectRecordCtrl.removeRecord(obj as RenderUnit3D);
+		}
 		private static var selfEffectObjID : int = 1;
 		/**
 		 * 在角色身上加特效 
@@ -136,6 +157,10 @@ package com.rpgGame.app.fight.spell
 			var atkor : SceneRole = info.atkor;
 			if (atkor == null || !atkor.usable || !atkor.isInViewDistance)
 				return;
+			if (atkor.isPlayer&&!SpellEffectRecordCtrl.testEffectShow((atkor.data as HeroData).id,info.spellData.q_skillID)) 
+			{
+				return;
+			}
 			var animatData : Q_SpellAnimation = info.selfAni;
 			/** 特效 **/
 			if (animatData)
@@ -144,7 +169,7 @@ package com.rpgGame.app.fight.spell
 				var rud : RenderParamData3D;
 				
 				var speed:Number=animatData.speed>0?animatData.speed*0.01:1;
-				
+				var func:Function;
 				if (animatData.role_res)
 				{
 					rud = new RenderParamData3D(RenderUnitID.SPELL_SELF_EFFECT, RenderUnitType.SPELL_SELF_EFFECT, ClientConfig.getEffect(animatData.role_res));
@@ -166,6 +191,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.completeWhenInvisible = true;
 					effectRu.setPlayCompleteCallBack(avatarRuPlayComplete, atkor.avatar);
 					effectRu.play(0,speed);
+					func=atkor.avatar.removeRenderUnit;
 				}
 				else if (animatData.scene_res)
 				{
@@ -191,8 +217,13 @@ package com.rpgGame.app.fight.spell
 					effectRu.rotationY = atkor.rotationY;
 					effectRu.completeWhenInvisible = true;
 					SceneManager.addSceneObjToScene(effectRu);
-					effectRu.setPlayCompleteCallBack(SceneManager.removeSceneObjFromScene);
+					effectRu.setPlayCompleteCallBack(removeSceneObjUnitFromScene);
 					effectRu.play(0,speed);
+					func=removeSceneObjUnitFromScene;
+				}
+				if (SceneCharType.PLAYER==atkor.type) 
+				{
+					SpellEffectRecordCtrl.addEffectRecord((atkor.data as HeroData).id,info.spellData.q_skillID,effectRu,func);
 				}
 				selfEffectObjID++;
 			}
@@ -206,6 +237,7 @@ package com.rpgGame.app.fight.spell
 		 */		
 		public static function addSelfDestEffect(role : SceneRole, animatData : Q_SpellAnimation) : void
 		{
+			
 			/** 特效 **/
 			if (animatData)
 			{
@@ -258,7 +290,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.rotationY = role.rotationY;
 					effectRu.completeWhenInvisible = true;
 					SceneManager.addSceneObjToScene(effectRu);
-					effectRu.setPlayCompleteCallBack(SceneManager.removeSceneObjFromScene);
+					effectRu.setPlayCompleteCallBack(removeSceneObjUnitFromScene);
 					effectRu.play(0,speed);
 				}
 				selfEffectObjID++;
@@ -283,6 +315,7 @@ package com.rpgGame.app.fight.spell
 		{
 			if (target == null || !target.usable || (needInView && !target.isInViewDistance))
 				return null;
+			
 			if (effectRes)
 			{
 				if (!offset)
@@ -435,7 +468,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.rotationY = targetRole.rotationY;
 					effectRu.completeWhenInvisible = true;
 					SceneManager.addSceneObjToScene(effectRu);
-					effectRu.setPlayCompleteCallBack(SceneManager.removeSceneObjFromScene);
+					effectRu.setPlayCompleteCallBack(removeSceneObjUnitFromScene);
 					effectRu.play(0,speed);
 				}
 				hurtEffectObjID++;
@@ -471,7 +504,7 @@ package com.rpgGame.app.fight.spell
 					if(finishFunc!=null)
 						effectRu.setPlayCompleteCallBack(finishFunc, role,mountResID);
 					else
-						effectRu.setPlayCompleteCallBack(SceneManager.removeSceneObjFromScene);
+						effectRu.setPlayCompleteCallBack(removeSceneObjUnitFromScene);
 					effectRu.play(0,speed);
 				}
 			}
@@ -562,7 +595,7 @@ package com.rpgGame.app.fight.spell
 					//					}
 					//					else
 					//					{
-					effectRu.setPlayCompleteCallBack(SceneManager.removeSceneObjFromScene);
+					effectRu.setPlayCompleteCallBack(removeSceneObjUnitFromScene);
 					//					}
 					effectRu.play(0,speed);
 				}
@@ -585,6 +618,11 @@ package com.rpgGame.app.fight.spell
 		{
 			if (SceneManager.isSceneOtherRenderLimit)
 				return;
+			
+			if (info.atkor.isPlayer&&!SpellEffectRecordCtrl.testEffectShow(info.atkorID,info.spellData.q_skillID)) 
+			{
+				return;
+			}
 			var animatData : Q_SpellAnimation = info.posAni;
 			
 			/** 特效 **/
@@ -635,9 +673,14 @@ package com.rpgGame.app.fight.spell
 //					}
 //					else
 //					{
-						effectRu.setPlayCompleteCallBack(SceneManager.removeSceneObjFromScene);
+						effectRu.setPlayCompleteCallBack(removeSceneObjUnitFromScene);
 //					}
 					effectRu.play(0,speed);
+					
+					if (SceneCharType.PLAYER==info.atkor.type) 
+					{
+						SpellEffectRecordCtrl.addEffectRecord((info.atkor.data as HeroData).id,info.spellData.q_skillID,effectRu,removeSceneObjUnitFromScene);
+					}
 				}
 			}
 		}
@@ -651,7 +694,7 @@ package com.rpgGame.app.fight.spell
 		private static function removeTrapFromScene(atkorID : Number, obj : BaseObj3D) : void
 		{
 			var objId : Number = obj.id;
-			SceneManager.removeSceneObjFromScene(obj);
+			removeSceneObjUnitFromScene(obj);
 			var traps : Dictionary = _sceneTrapsByAtkorID[atkorID];
 			if (traps)
 			{
@@ -674,7 +717,7 @@ package com.rpgGame.app.fight.spell
 				var effectRu : RenderUnit3D = traps[objId];
 				if (effectRu)
 				{
-					SceneManager.removeSceneObjFromScene(effectRu);
+					removeSceneObjUnitFromScene(effectRu);
 					traps[objId] = null;
 					delete traps[objId];
 				}
@@ -694,7 +737,7 @@ package com.rpgGame.app.fight.spell
 				for (var objId : * in traps)
 				{
 					var effectRu : RenderUnit3D = traps[objId];
-					SceneManager.removeSceneObjFromScene(effectRu);
+					removeSceneObjUnitFromScene(effectRu);
 					traps[objId] = null;
 					delete traps[objId];
 				}
@@ -907,6 +950,7 @@ package com.rpgGame.app.fight.spell
 		private static function avatarRuPlayComplete(avatar : RenderSet3D, ru : RenderUnit3D) : void
 		{
 			avatar.removeRenderUnit(ru);
+			SpellEffectRecordCtrl.removeRecord(ru);
 		}
 		
 		/**
@@ -979,7 +1023,7 @@ package com.rpgGame.app.fight.spell
 					effectRu.rotationY = atkor.rotationY;
 					effectRu.completeWhenInvisible = true;
 					SceneManager.addSceneObjToScene(effectRu);
-					effectRu.setPlayCompleteCallBack(SceneManager.removeSceneObjFromScene);
+					effectRu.setPlayCompleteCallBack(removeSceneObjUnitFromScene);
 					effectRu.play(time,speed);
 				}
 				selfEffectObjID++;
@@ -1036,7 +1080,7 @@ package com.rpgGame.app.fight.spell
 //					}
 //					else
 //					{
-//						effectRu.setPlayCompleteCallBack(SceneManager.removeSceneObjFromScene);
+//						effectRu.setPlayCompleteCallBack(removeSceneObjUnitFromScene);
 //					}
 //					effectRu.play(1);
 //				}
@@ -1052,7 +1096,7 @@ package com.rpgGame.app.fight.spell
 			effectRu.play(0);
 			effectRu.visible = true;
 			effectRu.setGroundXY(x, y);
-			effectRu.setPlayCompleteCallBack(SceneManager.removeSceneObjFromScene);
+			effectRu.setPlayCompleteCallBack(removeSceneObjUnitFromScene);
 			SceneManager.addSceneObjToScene(effectRu, true, false, false);
 			return effectRu;
 		}

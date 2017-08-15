@@ -97,6 +97,8 @@ package com.rpgGame.coreData.type
 		
 		public static const RANKTITLE:String = "rankTitle";
 		
+		/**掉落物特效*/
+		public static const DROP_ITEM_EFFECT : String = "drop_item_effect";
 //		/**打坐特效*/
 //		public static const SIT:String = "sit";
 //		/**怪物光环*/

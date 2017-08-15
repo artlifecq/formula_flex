@@ -34,7 +34,7 @@ package  com.rpgGame.app.manager.ctrl
 	 * 智能拾取 
 	 * @author yfl
 	 */
-	public class ControlAutoPick extends SceneObjectControlBase
+	public class ControlAutoPick 
 	{
 		private static const JOBARR:Array=[JobEnum.ROLE_0_TYPE,JobEnum.ROLE_1_TYPE,JobEnum.ROLE_2_TYPE,JobEnum.ROLE_4_TYPE];
 		/**最大搜寻距离**/
@@ -94,15 +94,14 @@ package  com.rpgGame.app.manager.ctrl
 		}
 		public function ControlAutoPick( tar :SceneRole )
 		{
-			super( tar );
+			
 			_mainplayer = tar as SceneRole;
 		}
 		
-		override public function dispose():void
+		 public function dispose():void
 		{
 			_mainplayer = null;
 			
-			super.dispose();
 		}
 		
 		/**

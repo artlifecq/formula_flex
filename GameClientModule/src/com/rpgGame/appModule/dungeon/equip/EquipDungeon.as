@@ -35,6 +35,7 @@ package com.rpgGame.appModule.dungeon.equip
 		{
 			_skin = new FuBen_ZhuangBei_Skin();
 			super(_skin);
+			_skin.list.addEventListener(FeathersEventType.CREATION_COMPLETE,onCreate);
 		}
 		
 		override public function show(data:Object=null):void
@@ -48,7 +49,7 @@ package com.rpgGame.appModule.dungeon.equip
 			layout.gap = 4;
 			_skin.list.layout = layout;
 			var list:Array = DailyZoneCfgData.getTypeList(2);
-			_skin.list.addEventListener(FeathersEventType.CREATION_COMPLETE,onCreate);
+			
 			_skin.list.dataProvider = new ListCollection(list);
 			
 			
@@ -75,6 +76,11 @@ package com.rpgGame.appModule.dungeon.equip
 			EventManager.addEvent(DailyZoneDataManager.UPDATEDAILYZONEINFO,refeashValue);
 			EventManager.addEvent(MainPlayerEvent.STAT_CHANGE,updatePlayerLvUp);
 			refeashValue();
+			if (!_skin.list.hasEventListener(FeathersEventType.CREATION_COMPLETE)) 
+			{
+				onCreate();
+			}
+			
 		}
 		
 		private function onCreate():void

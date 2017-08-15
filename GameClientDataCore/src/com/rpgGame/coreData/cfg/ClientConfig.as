@@ -549,7 +549,18 @@ package com.rpgGame.coreData.cfg
 			var url : String = "effect/" + effectName + eName_AWD;
 			return baseDir + resURL + url;
 		}
-
+		
+		/**
+		 * 获取effect资源路径
+		 * @return
+		 *
+		 */
+		public static function getDropItemQuatityEffect(quatity:int) : String
+		{
+			
+			var url : String = "avatar/drop/q" + quatity + eName_AWD;
+			return baseDir + resURL + url;
+		}
 		public static function getQualityBg(type : int, size : int) : String
 		{
 			var url : String = "ui/common/grid/quality/" + size + "_" + type + eName_PNG;

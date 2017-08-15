@@ -37,6 +37,7 @@ package com.rpgGame.app.manager.goods
 	public class BackPackManager extends GoodsContainerMamager
 	{
 		public var isShowShop:Boolean;
+		public var isShowRole:Boolean;
 		/****/
 		public var unlockSilver : int;
 		public var unlockBindSilver : int;

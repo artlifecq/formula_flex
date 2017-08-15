@@ -36,6 +36,8 @@ package com.rpgGame.appModule.battle.jcyt
 		{
 			_skin=new JiuCengYaoTa_Skin();
 			super(_skin);
+			//_skin.gBtn.touchGroup=true;
+			_skin.btnOpen.touchable=false;
 			_gReward=new RewardGroup(IcoSizeEnum.ICON_36,_skin.icon1,0);
 			TipTargetManager.show(_skin.iconSw, TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(29)));
 		}
@@ -44,7 +46,7 @@ package com.rpgGame.appModule.battle.jcyt
 			super.onTouchTarget(target)
 			switch(target)
 			{
-				case _skin.btnOpen:
+				case _skin.uiCon:
 				{
 					onMate();
 					break;
@@ -111,7 +113,7 @@ package com.rpgGame.appModule.battle.jcyt
 				if (!_eff) 
 				{
 					_eff=new Inter3DContainer();
-					_skin.btnOpen.addChild(_eff);
+					_skin.uiCon.addChild(_eff);
 					_eff.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JJBREWARD),232/2,60,0,null,addEft);
 				}
 			}

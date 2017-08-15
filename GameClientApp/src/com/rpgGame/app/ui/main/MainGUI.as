@@ -363,10 +363,10 @@ package com.rpgGame.app.ui.main
 					{
 						return;
 					}
-					else if (EnumMapType.MAP_TYPE_TOWERS==MapDataManager.currentScene.mapType) 
-					{
-						return;
-					}
+//					else if (EnumMapType.MAP_TYPE_TOWERS==MapDataManager.currentScene.mapType) 
+//					{
+//						return;
+//					}
 					this.addChild(_playerHead);
 					break;
 				case SceneCharType.MONSTER:

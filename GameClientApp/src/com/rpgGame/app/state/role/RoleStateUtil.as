@@ -30,6 +30,7 @@ package com.rpgGame.app.state.role
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RoleStateType;
+	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.coreData.type.SpellBlinkType;
 	import com.rpgGame.netData.structs.Position;
 	
@@ -171,7 +172,7 @@ package com.rpgGame.app.state.role
 				return false;
 			var camouflageEntity : SceneRole = SceneRole(role.getCamouflageEntity());
 			var walkRole : SceneRole = camouflageEntity || role;
-			if((walkRole.isMainChar || walkRole.isMainCamouflage))
+			if((walkRole.isMainChar || walkRole.isMainCamouflage||(walkRole.type==SceneCharType.GIRL_PET&&walkRole.ownerIsMainChar)))
 			{
 				if (walkRole.stateMachine.isAttackHarding||walkRole.stateMachine.isLockCaseSpell)
 				{
@@ -182,6 +183,7 @@ package com.rpgGame.app.state.role
 				}
 				else
 				{
+					
 					return doWalkToPos(role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite);
 				}
 			}
@@ -370,6 +372,10 @@ package com.rpgGame.app.state.role
 				{
 					SceneSender.SendNewRunningMessage(ref.path,ref.needSpriteUp);
 				}
+			}
+			else if ((ref.owner as SceneRole).type=SceneCharType.GIRL_PET) 
+			{
+				SceneSender.reqPetNewRunningMessage(ref.path);
 			}
 			ref.needSpriteUp=false;
 		}

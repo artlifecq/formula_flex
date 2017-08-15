@@ -84,6 +84,7 @@ package game.rpgGame.login.view
 			//不晓得为啥textinput设置不了，皮肤不起效果
 //			_skin.text_input.textAlign="center";
 			_skin.text_input.fontSize=16;
+			_skin.text_input.maxChars=6;
 //			_skin.text_input.color=0xcfc6ae;
 			
 			sexGroupInitX=_skin.grp_sex.x;

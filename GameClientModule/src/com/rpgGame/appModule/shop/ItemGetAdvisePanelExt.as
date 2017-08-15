@@ -9,6 +9,7 @@ package com.rpgGame.appModule.shop
 	import com.rpgGame.app.utils.TouchableUtil;
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.ui.SkinUI;
 	import com.rpgGame.core.utils.GameColorUtil;
 	import com.rpgGame.core.utils.MCUtil;
@@ -33,6 +34,7 @@ package com.rpgGame.appModule.shop
 	import org.mokylin.skin.app.zuoqi.huoquSkin;
 	import org.mokylin.skin.common.alert.Alert_WuPinHuoQu;
 	
+	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 	import starling.events.Touch;
@@ -322,9 +324,18 @@ package com.rpgGame.appModule.shop
 			{
 				_ins=new ItemGetAdvisePanelExt();
 			}
-			_ins.x=container.width;
-			_ins.y=(container.height-_ins.height)/2;
-			container.addChild(_ins);
+			if (container) 
+			{
+				_ins.x=container.width;
+				_ins.y=(container.height-_ins.height)/2;
+				container.addChild(_ins);
+			}
+			else
+			{
+				StarlingLayerManager.topUILayer.addChild(_ins);
+				_ins.x=(Starling.current.nativeStage.width-_ins.width)/2;
+				_ins.y=(Starling.current.nativeStage.height-_ins.height)/2;
+			}
 			_ins.setData(shopItems,qSource,forceBuyNum);
 			return _ins.width;
 		}
@@ -396,7 +407,7 @@ package com.rpgGame.appModule.shop
 		{
 			MCUtil.removeAllChild(this._skin.gGetPath);
 			var labStrArr:Array=qSource.q_accessdeclist.split(",");
-			var menuArr:Array=qSource.q_accesslist.split(",");
+			var menuArr:Array=JSONUtil.decode(qSource.q_accesslist);
 			var min:int=Math.min(labStrArr.length,menuArr.length);
 			for (var i:int = 0; i < min; i++) 
 			{

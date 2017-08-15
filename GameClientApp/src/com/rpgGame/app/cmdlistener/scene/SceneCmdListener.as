@@ -5,6 +5,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.gameClient.log.GameLog;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
+	import com.rpgGame.app.fight.spell.SpellEffectRecordCtrl;
 	import com.rpgGame.app.graphics.HeadFace;
 	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.manager.CharAttributeManager;
@@ -561,9 +562,14 @@ package com.rpgGame.app.cmdlistener.scene
 //				trace("这里不应该有主角自己的呀！主角自己的移动不需要同步到自己吧！！！");
 				return;
 			}
+			var role : SceneRole = SceneManager.getSceneObjByID(msg.objId.ToGID()) as SceneRole;
+			if (SceneCharType.GIRL_PET==role.type&&role.ownerIsMainChar) 
+			{
+				return;
+			}
 			var mInfo : RoleMoveInfo = new RoleMoveInfo();
 			mInfo.setValue(msg);
-			var role : SceneRole = SceneManager.getSceneObjByID(mInfo.roleID) as SceneRole;
+			
 			if (role && role.usable && !role.getCamouflageEntity()) //有伪装则跟随伪装，防止服务器发伪装者移动。
 			{
 				var elapseTm : int = SystemTimeManager.curtTm - mInfo.startTm;
@@ -628,6 +634,7 @@ package com.rpgGame.app.cmdlistener.scene
 			{
 				var roleID:uint = delArr[i].ToGID();
 				onSceneRemoveObject(roleID);
+				SpellEffectRecordCtrl.clear(roleID);
 //				GameLog.addShow("删除对象客户端id：" + roleID);
 //				GameLog.addShow("删除对象服务器id：" + delArr[i].ToString());
 			}
