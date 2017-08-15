@@ -56,6 +56,7 @@ package com.rpgGame.appModule.redreward
 			_onecellList = new Vector.<RedRewardOneCell>();
 			_moreList = new Vector.<RedRewardMoreCell>();
 			_skin.lbItem.leading = 5;
+			_skin.lbItem.wordWrap=false;
 		}
 		
 		override public function show(data:*=null, openTable:String="", parentContiner:DisplayObjectContainer=null):void
@@ -111,7 +112,7 @@ package com.rpgGame.appModule.redreward
 				_skin.grpYiJian.visible = !_redRewardInfo.sendPlayerId.IsZero();
 				_skin.faBg.height = 33;
 			}else{
-				_skin.lbItem.htmlText = HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,"发了一个红包")+redmgr.vipInfo.q_desc;
+				_skin.lbItem.htmlText = HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,"发了一个红包")+"<br/>"+redmgr.vipInfo.q_desc;
 				_skin.grpYiJian.visible = false;
 				_skin.lbVip.visible =!redmgr.isMaxVipLevel;
 				_skin.faBg.height = 70;
