@@ -68,10 +68,10 @@
 
         private function onShowHide(flag:Boolean):void
         {
-            if (!_isShowPanel)
+           /* if (!_isShowPanel)
             {
                 return;
-            }
+            }*/
             if (flag)
             {
                 _isFlag = true;

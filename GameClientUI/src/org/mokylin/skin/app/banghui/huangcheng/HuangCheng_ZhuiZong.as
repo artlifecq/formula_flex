@@ -9,9 +9,8 @@ package org.mokylin.skin.app.banghui.huangcheng
 	import feathers.controls.UIAsset;
 	import feathers.layout.VerticalLayout;
 	import org.mokylin.skin.app.banghui.huangcheng.HuangChengJiFen_Item;
+	import org.mokylin.skin.component.button.ButtonSkin_hide;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
-	import org.mokylin.skin.component.button.ButtonSkin_shouhui;
-	import org.mokylin.skin.component.button.ButtonSkin_zhankai;
 
 	/**
 	 * @private
@@ -88,8 +87,8 @@ package org.mokylin.skin.app.banghui.huangcheng
 			super();
 			
 			this.currentState = "normal";
-			this.height = 541;
-			this.width = 253;
+			this.height = 527;
+			this.width = 248;
 			this.elementsContent = [task_box_i(),btn_open_i(),btn_close_i()];
 			
 			states = {
@@ -113,7 +112,7 @@ package org.mokylin.skin.app.banghui.huangcheng
 		private function __HuangCheng_ZhuiZong_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/mainui/renwu/hengtiao.png";
+			temp.styleName = "ui/mainui/renwu/renwuzhuizongbg.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -124,7 +123,7 @@ package org.mokylin.skin.app.banghui.huangcheng
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/mainui/fubenzhuizong/zs.png";
 			temp.x = 35;
-			temp.y = 12;
+			temp.y = 15;
 			return temp;
 		}
 
@@ -134,7 +133,7 @@ package org.mokylin.skin.app.banghui.huangcheng
 			temp.scaleX = -1;
 			temp.styleName = "ui/mainui/fubenzhuizong/zs.png";
 			temp.x = 210;
-			temp.y = 12;
+			temp.y = 15;
 			return temp;
 		}
 
@@ -210,9 +209,9 @@ package org.mokylin.skin.app.banghui.huangcheng
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 541;
+			temp.height = 527;
 			temp.styleName = "ui/mainui/renwu/bg.png";
-			temp.width = 253;
+			temp.width = 248;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -223,9 +222,9 @@ package org.mokylin.skin.app.banghui.huangcheng
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_close = temp;
 			temp.name = "btn_close";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_shouhui;
-			temp.x = 234;
-			temp.y = 0;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_hide;
+			temp.x = 221;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -234,9 +233,10 @@ package org.mokylin.skin.app.banghui.huangcheng
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_open = temp;
 			temp.name = "btn_open";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_zhankai;
-			temp.x = 234;
-			temp.y = 0;
+			temp.scaleX = -1;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_hide;
+			temp.x = 243;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -247,7 +247,7 @@ package org.mokylin.skin.app.banghui.huangcheng
 			temp.name = "grpFoot";
 			temp.height = 450;
 			temp.width = 248;
-			temp.x = 3;
+			temp.x = 0;
 			temp.y = 80;
 			temp.elementsContent = [lbInfo1_i(),lbInfo3_i(),lbInfo2_i(),lbInfo5_i(),lbInfo0_i(),lbInfo4_i(),sec_ico1_0_i(),sec_ico1_1_i(),sec_ico1_2_i(),sec_Exit_i(),line1_i(),grpList_i(),lbTime_i(),lbJifen_i(),lbPaiming_i(),lbJisha_i(),lbShangjiao_i()];
 			return temp;
@@ -318,7 +318,7 @@ package org.mokylin.skin.app.banghui.huangcheng
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlue"];
 			temp.width = 93;
 			temp.x = 76;
-			temp.y = 6;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -335,7 +335,7 @@ package org.mokylin.skin.app.banghui.huangcheng
 			temp.textAlign = "left";
 			temp.color = 0xCFC6AE;
 			temp.width = 92;
-			temp.x = 75;
+			temp.x = 85;
 			temp.y = 15;
 			return temp;
 		}
@@ -355,7 +355,7 @@ package org.mokylin.skin.app.banghui.huangcheng
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
 			temp.width = 105;
-			temp.x = 75;
+			temp.x = 85;
 			temp.y = 41;
 			return temp;
 		}
@@ -374,7 +374,7 @@ package org.mokylin.skin.app.banghui.huangcheng
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 92;
-			temp.x = 75;
+			temp.x = 85;
 			temp.y = 70;
 			return temp;
 		}
@@ -394,7 +394,7 @@ package org.mokylin.skin.app.banghui.huangcheng
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
 			temp.width = 105;
-			temp.x = 75;
+			temp.x = 85;
 			temp.y = 95;
 			return temp;
 		}
@@ -410,10 +410,10 @@ package org.mokylin.skin.app.banghui.huangcheng
 			temp.fontSize = 14;
 			temp.text = "00:15秒后刷出";
 			temp.textAlign = "left";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 104;
-			temp.x = 75;
+			temp.x = 85;
 			temp.y = 150;
 			return temp;
 		}
@@ -431,7 +431,7 @@ package org.mokylin.skin.app.banghui.huangcheng
 			temp.textAlign = "left";
 			temp.color = 0xCFC6AE;
 			temp.width = 92;
-			temp.x = 75;
+			temp.x = 85;
 			temp.y = 120;
 			return temp;
 		}
@@ -450,8 +450,8 @@ package org.mokylin.skin.app.banghui.huangcheng
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 182;
-			temp.x = 19;
-			temp.y = 313;
+			temp.x = 17;
+			temp.y = 310;
 			return temp;
 		}
 
@@ -469,8 +469,8 @@ package org.mokylin.skin.app.banghui.huangcheng
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 182;
-			temp.x = 19;
-			temp.y = 361;
+			temp.x = 17;
+			temp.y = 350;
 			return temp;
 		}
 
@@ -488,8 +488,8 @@ package org.mokylin.skin.app.banghui.huangcheng
 			temp.color = 0xCFC6AE;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 182;
-			temp.x = 19;
-			temp.y = 337;
+			temp.x = 17;
+			temp.y = 330;
 			return temp;
 		}
 
@@ -508,7 +508,7 @@ package org.mokylin.skin.app.banghui.huangcheng
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
 			temp.width = 182;
-			temp.x = 34;
+			temp.x = 36;
 			temp.y = 177;
 			return temp;
 		}
@@ -528,7 +528,7 @@ package org.mokylin.skin.app.banghui.huangcheng
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 182;
 			temp.x = 34;
-			temp.y = 387;
+			temp.y = 375;
 			return temp;
 		}
 
@@ -550,7 +550,7 @@ package org.mokylin.skin.app.banghui.huangcheng
 			scroll_box = temp;
 			temp.name = "scroll_box";
 			temp.x = 3;
-			temp.y = 32;
+			temp.y = 40;
 			temp.layout = __HuangCheng_ZhuiZong_VerticalLayout1_i();
 			temp.elementsContent = [];
 			return temp;
@@ -567,7 +567,7 @@ package org.mokylin.skin.app.banghui.huangcheng
 			temp.color = 0xE1D4A9;
 			temp.width = 86;
 			temp.x = 81;
-			temp.y = 413;
+			temp.y = 399;
 			return temp;
 		}
 
@@ -577,7 +577,7 @@ package org.mokylin.skin.app.banghui.huangcheng
 			sec_ico1_0 = temp;
 			temp.name = "sec_ico1_0";
 			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 15;
+			temp.x = 25;
 			temp.y = 11;
 			return temp;
 		}
@@ -588,7 +588,7 @@ package org.mokylin.skin.app.banghui.huangcheng
 			sec_ico1_1 = temp;
 			temp.name = "sec_ico1_1";
 			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 15;
+			temp.x = 25;
 			temp.y = 65;
 			return temp;
 		}
@@ -599,7 +599,7 @@ package org.mokylin.skin.app.banghui.huangcheng
 			sec_ico1_2 = temp;
 			temp.name = "sec_ico1_2";
 			temp.styleName = "ui/mainui/renwu/tbk.png";
-			temp.x = 15;
+			temp.x = 25;
 			temp.y = 119;
 			return temp;
 		}
@@ -609,7 +609,7 @@ package org.mokylin.skin.app.banghui.huangcheng
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			secondary_box = temp;
 			temp.name = "secondary_box";
-			temp.width = 253;
+			temp.width = 248;
 			temp.x = 0;
 			temp.y = 0;
 			temp.elementsContent = [lbHeadName_i(),__HuangCheng_ZhuiZong_UIAsset2_i(),__HuangCheng_ZhuiZong_UIAsset3_i()];
@@ -621,7 +621,7 @@ package org.mokylin.skin.app.banghui.huangcheng
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			task_box = temp;
 			temp.name = "task_box";
-			temp.width = 253;
+			temp.width = 248;
 			temp.x = 0;
 			temp.y = 0;
 			temp.elementsContent = [bg_i(),__HuangCheng_ZhuiZong_UIAsset1_i(),secondary_box_i(),scroll_box_i(),grpFoot_i()];

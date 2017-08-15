@@ -52,6 +52,7 @@ package com.rpgGame.appModule.die
 			_endTime=getTimer()+10000;
 			onTimer();
 			_timer.start();
+			this.escExcuteAble=false;
 		}
 		override protected function onHide():void
 		{

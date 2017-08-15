@@ -25,6 +25,8 @@ package com.rpgGame.coreData.type.item
 					return StaticValue.Q_GREEN;
 				case Quality.PURPLE:
 					return StaticValue.Q_PURPLE;
+				case Quality.RED:
+					return StaticValue.Q_RED;
 				default:
 					return 0;
 			}
