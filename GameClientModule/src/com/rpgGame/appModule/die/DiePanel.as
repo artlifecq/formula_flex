@@ -60,7 +60,6 @@ package com.rpgGame.appModule.die
 		 
 		public function DiePanel()
 		{
-			this.escExcuteAble=false;
 			_skin=new fuhuo_Skin();
 			timer=new Timer(1000);
 			super(_skin);
@@ -133,6 +132,7 @@ package com.rpgGame.appModule.die
 					break;
 				}
 			}
+			this.escExcuteAble=false;
 		}
 		
 		protected function onTimer(event:TimerEvent):void
