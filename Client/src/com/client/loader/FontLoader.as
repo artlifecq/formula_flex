@@ -1,15 +1,17 @@
 package com.client.loader
 {
-	import flash.events.EventDispatcher;
 	import flash.display.Loader;
+	import flash.events.Event;
+	import flash.events.EventDispatcher;
+	import flash.events.IOErrorEvent;
+	import flash.events.ProgressEvent;
+	import flash.system.ApplicationDomain;
+	import flash.system.LoaderContext;
+	import flash.utils.ByteArray;
+	
+	import away3d.enum.LoadPriorityType;
 	import away3d.loaders.multi.MultiLoadData;
 	import away3d.loaders.multi.MultiUrlLoadManager;
-	import flash.events.IOErrorEvent;
-	import flash.utils.ByteArray;
-	import flash.system.LoaderContext;
-	import flash.system.ApplicationDomain;
-	import flash.events.Event;
-	import flash.events.ProgressEvent;
 	
 	public class FontLoader extends EventDispatcher 
 	{
@@ -29,7 +31,7 @@ package com.client.loader
 		
 		public function load(url:String):void
 		{
-			var loadData:MultiLoadData = new MultiLoadData(url, onLoadCmp, onLoaderUpdate, onErrorFunc, "", "", 0, "binary", null, null, 3);
+			var loadData:MultiLoadData = new MultiLoadData(url, onLoadCmp, onLoaderUpdate, onErrorFunc, "", "", LoadPriorityType.LEVEL_CUSTOM_0, "binary", null, null, 3);
 			MultiUrlLoadManager.load(loadData);
 		}
 		

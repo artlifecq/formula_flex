@@ -10,6 +10,7 @@ package com.game.engine3D.vo
 	import flash.geom.Rectangle;
 	import flash.utils.ByteArray;
 	
+	import away3d.enum.LoadPriorityType;
 	import away3d.events.Event;
 	import away3d.loaders.multi.MultiLoadData;
 	import away3d.loaders.multi.MultiUrlLoadManager;
@@ -57,7 +58,7 @@ package com.game.engine3D.vo
 			_textureRect = rect;
 			if (_useBitmapData)
 			{
-				var ld : MultiLoadData = new MultiLoadData(_url, onComplete, null, onError, "", "", int.MAX_VALUE, MultiLoadData.URLLOADER_BINARY, GlobalConfig.decode);
+				var ld : MultiLoadData = new MultiLoadData(_url, onComplete, null, onError, "", "", LoadPriorityType.LEVEL_NORMALMAP, MultiLoadData.URLLOADER_BINARY, GlobalConfig.decode);
 				MultiUrlLoadManager.load(ld);
 			}
 			else
