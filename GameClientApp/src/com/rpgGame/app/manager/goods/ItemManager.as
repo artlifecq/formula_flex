@@ -13,6 +13,7 @@ package com.rpgGame.app.manager.goods
 	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.EquipInfo;
+	import com.rpgGame.coreData.type.CharAttributeType;
 	
 	import app.message.GoodsType;
 	
@@ -412,22 +413,27 @@ package com.rpgGame.app.manager.goods
 			var itemInfo:ClientItemInfo;
 			var targetHeCheng:Q_hecheng;
 			var caiList:Array;
+			var pice:int;
 			for(var i:int=0;i<num;i++){
 				itemInfo=backDatas[i];
 				if(!itemInfo){
 					continue;
 				}
-				targetHeCheng=HeChengData.getHeChengTargetByTragetId(itemInfo.qItem.q_id); 
+				targetHeCheng=HeChengData.getHeChengTargetByTragetId(itemInfo.qItem.q_id); 				
 				if(targetHeCheng){
+					pice=targetHeCheng.q_money;
 					caiList=JSONUtil.decode(targetHeCheng.q_cost_items);
-					if(BackPackManager.instance.getBagItemsCountById(itemInfo.qItem.q_id)>=caiList[1]){
+					if(BackPackManager.instance.getBagItemsCountById(itemInfo.qItem.q_id)>=caiList[1]&&(pice<=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)||
+						pice<=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY))){
 						return true;
 					}
 				}
 				targetHeCheng=HeChengData.getHeChengTargetByCaiLiao(itemInfo.qItem.q_id);
 				if(targetHeCheng){
+					pice=targetHeCheng.q_money;
 					caiList=JSONUtil.decode(targetHeCheng.q_cost_items);
-					if(BackPackManager.instance.getBagItemsCountById(itemInfo.qItem.q_id)>=caiList[1]){
+					if(BackPackManager.instance.getBagItemsCountById(itemInfo.qItem.q_id)>=caiList[1]&&(pice<=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)||
+						pice<=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY))){
 						return true;
 					}
 				}
@@ -451,11 +457,14 @@ package com.rpgGame.app.manager.goods
 			var list:Vector.<Q_hecheng>=new Vector.<Q_hecheng>();
 			list=HeChengData.getQ_HeChengListBySonType(type,subType);
 			var arr:Array;
+			var pice:int;
 			if(list==null||list.length==0) return false;
 			for(var i:int=0;i<list.length;i++)
 			{
 				arr=JSONUtil.decode(list[i].q_cost_items);
-				if(BackPackManager.instance.getBagItemsCountById(arr[0])>=arr[1])
+				pice=list[i].q_money;
+				if(BackPackManager.instance.getBagItemsCountById(arr[0])>=arr[1]&&(pice<=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)||
+					pice<=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY)))
 					return true;
 			}
 			return false;
