@@ -370,6 +370,9 @@ package com.rpgGame.app.richText
 					MainRoleSearchPathManager.walkToSceneByLink(unitData.linkData);
 					break;
 				case RichTextCustomLinkType.SEE_OTHER_NAME:
+					if(!unitData.linkData){
+						return;
+					}
 					var ids:Array=unitData.linkData.split(",");
 					var ret:long = new long();
 					var _lValue:int=ids[0];
