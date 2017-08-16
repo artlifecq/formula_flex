@@ -92,11 +92,6 @@ package com.rpgGame.app.ui.scene
 			super.onShow();
 			addEvent();
 			setUiRefresh();
-			//setStep(2);
-			//setJifenReword();
-			//setShanghaiReword();
-			//setShanghaiRank();
-			//setTime(500);
 			setUisite();
 		}
 		override protected function onHide():void
@@ -207,12 +202,12 @@ package com.rpgGame.app.ui.scene
 					{
 						if(monsterInfo)
 						{
-							killButList[i].htmlText="击杀：<u>"+MonsterDataManager.getMonsterName(monsterBank.q_monsterId)+"</u><font color='#cfc6ae'>("+(monsterBank.q_monsterNum-monsterInfo.remainingNum)+"/"+monsterBank.q_monsterNum+")</font>";
+							killButList[i].htmlText="<font color='#eaeabc'>击杀：</font><u>"+MonsterDataManager.getMonsterName(monsterBank.q_monsterId)+"</u><font color='#eaeabc'>("+(monsterBank.q_monsterNum-monsterInfo.remainingNum)+"/"+monsterBank.q_monsterNum+")</font>";
 							killOkList[i].visible=MibaoManager.isKillAllByid(monsterData.q_id);
 						}
 						else
 						{
-							killButList[i].htmlText="击杀：<u>"+MonsterDataManager.getMonsterName(monsterBank.q_monsterId);
+							killButList[i].htmlText="<font color='#eaeabc'>击杀：</font><u>"+MonsterDataManager.getMonsterName(monsterBank.q_monsterId);
 							
 						}
 						killButList[i].visible=true;
@@ -227,51 +222,6 @@ package com.rpgGame.app.ui.scene
 					TrusteeshipManager.getInstance().startAutoFightToPos(pos);
 				}
 			}
-			/*var monsterDataList:Vector.<Q_mibao_monster>;
-			var monsterData:Q_mibao_monster;
-			var monsterInfo:RemainMonsterInfo;
-			var monsterBank:Q_dailyzone_monster;
-			if(!MibaoManager.isKillAllBytype())
-			{
-			var wave:int=MibaoManager.getCurrWave();
-			monsterDataList=MibaoCfgData.getMonsterListByWaveId(MibaoManager.zoneid,wave);
-			
-			if(monsterDataList&&monsterDataList.length>0)
-			{
-			for(i=0;i<monsterDataList.length;i++)
-			{
-			monsterData=monsterDataList[i];
-			monsterInfo=MibaoManager.getMonsterInfo(monsterData.q_id);
-			monsterBank=DailyZoneMonsterCfgData.getZoneCfg(monsterData.q_id);
-			if(monsterInfo&&monsterBank&&i<killButList.length)
-			{
-			killButList[i].htmlText="击杀：<u>"+MonsterDataManager.getMonsterName(monsterBank.q_monsterId)+"</u><font color='#cfc6ae'>("+(monsterBank.q_monsterNum-monsterInfo.remainingNum)+"/"+monsterBank.q_monsterNum+")</font>";
-			killButList[i].visible=true;
-			killOkList[i].visible=MibaoManager.isKillAllByid(monsterData.q_id);
-			}
-			
-			}
-			}
-			}
-			else
-			{
-			monsterDataList=MibaoCfgData.getMonsterListByType(2);
-			if(monsterDataList&&monsterDataList.length>0)
-			{
-			for(i=0;i<monsterDataList.length;i++)
-			{
-			monsterData=monsterDataList[i];
-			monsterBank=DailyZoneMonsterCfgData.getZoneCfg(monsterData.q_id);
-			if(monsterBank&&i<killButList.length)
-			{
-			killButList[i].htmlText="击杀：<u>"+MonsterDataManager.getMonsterName(monsterBank.q_monsterId);
-			killButList[i].visible=true;
-			}
-			
-			}
-			}
-			}*/
-			
 		}
 		private function hidekillInfo():void
 		{
@@ -339,19 +289,6 @@ package com.rpgGame.app.ui.scene
 			icoList2Group.setRewardByJsonStr(rewardData.q_reward_item);
 			icoList2Group.visible=true;
 		}
-		/**设置伤害排行*/
-		private function setShanghaiRank():void
-		{
-			var i:int;
-			for(i=0;i<3;i++)
-			{
-				hitList[i].lbName.text="玩家名称"+i;
-				hitList[i].lbNum.text=""+(i*100);
-			}
-			hitList[3].lbNo.text="33";
-			hitList[3].lbName.text="我的名称";
-			hitList[3].lbNum.text="500";
-		}
 		
 		private var remainTime:int;
 		private function setTime(time:int):void
@@ -402,6 +339,7 @@ package com.rpgGame.app.ui.scene
 			{
 				killButList.push(_skin["lbItem"+i]);
 				killOkList.push(_skin["jisha"+i]);
+				TaskUtil.addLabelEvet(_skin["lbItem"+i]);
 			}
 			
 			hitList=new Vector.<PaiMing_Item>();
@@ -482,7 +420,7 @@ package com.rpgGame.app.ui.scene
 			{
 				hitList[i].lbNo.text=(i+1).toString();
 				hitList[i].lbName.text="";
-				hitList[i].lbNum.text="0";
+				hitList[i].lbNum.text="";
 			}
 			_skin.sec_info.text="00:00:00";
 			_skin.sec_navi0.text="";
@@ -491,9 +429,9 @@ package com.rpgGame.app.ui.scene
 				hitList[i].lbName.text="";
 				hitList[i].lbNum.text="";
 			}
-			hitList[3].lbNo.text="0";
-			hitList[3].lbName.text=MainRoleManager.actorInfo.name;
-			hitList[3].lbNum.text="0";
+			hitList[3].lbNo.text="";
+			hitList[3].lbName.text="";
+			hitList[3].lbNum.text="";
 			
 		}
 		/**设置UI位置*/

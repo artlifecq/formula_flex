@@ -43,8 +43,6 @@ package com.rpgGame.appModule.task
 		private var icoListGroup:RewardGroup;
 		private var timer:GameTimer;
 		private var currtimer:int;
-		private var TIMERDATA_1:int=15//倒计时时间
-		private var TIMERDATA_2:int=5//倒计时时间
 		private var initKey:Boolean=false;
 		private var currtTaskId:long=new long();
 		public function TaskLeadPanel()
@@ -67,15 +65,6 @@ package com.rpgGame.appModule.task
 			navLabel.htmlText="任务奖励";
 			speakLabel.htmlText="";
 			timerLabel.htmlText="";
-			if(GlobalSheetData.getSettingInfo(509)!=null)
-			{
-				TIMERDATA_1=GlobalSheetData.getSettingInfo(509).q_int_value;
-			}
-			if(GlobalSheetData.getSettingInfo(513)!=null)
-			{
-				TIMERDATA_2=GlobalSheetData.getSettingInfo(513).q_int_value;
-			}
-			
 			timer = new GameTimer("TaskLeadPanel", 1000, 0, onTimer);
 			timer.stop();
 		}
@@ -192,11 +181,11 @@ package com.rpgGame.appModule.task
 		{
 			if(TaskAutoManager.getInstance().isTaskRunning)
 			{
-				currtimer=TIMERDATA_2;
+				currtimer=GlobalSheetData.getSettingInfo(513)!=null?GlobalSheetData.getSettingInfo(513).q_int_value:5;
 			}
 			else
 			{
-				currtimer=TIMERDATA_1;
+				currtimer=GlobalSheetData.getSettingInfo(509)!=null?GlobalSheetData.getSettingInfo(509).q_int_value:10;
 			}
 			
 			if(TaskMissionManager.getMainTaskIsFinish())

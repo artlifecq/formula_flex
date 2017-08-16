@@ -174,9 +174,9 @@ package com.rpgGame.app.state.role
 			var walkRole : SceneRole = camouflageEntity || role;
 			if((walkRole.isMainChar || walkRole.isMainCamouflage||(walkRole.type==SceneCharType.GIRL_PET&&walkRole.ownerIsMainChar)))
 			{
-				if (walkRole.stateMachine.isAttackHarding||walkRole.stateMachine.isLockCaseSpell)
+				if (walkRole.stateMachine.isAttacking||walkRole.stateMachine.isAttackHarding||walkRole.stateMachine.isLockCaseSpell)
 				{
-					Lyt.a("walk-isAttackHarding:"+walkRole.stateMachine.isAttackHarding+"="+walkRole.stateMachine.isLockCaseSpell);
+					Lyt.a("walk-isAttacking:"+walkRole.stateMachine.isAttacking+"="+walkRole.stateMachine.isAttackHarding+"="+walkRole.stateMachine.isLockCaseSpell);
 					TrusteeshipManager.getInstance().stopAll();
 					TweenLite.delayedCall(1, doWalkTo, [role, pos, spacing, data,onArrive, onThrough, onUpdate,needSprite]);
 					return false;
