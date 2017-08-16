@@ -104,7 +104,7 @@ package org.mokylin.skin.app.activety.zonghe.qinlinmibao
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "名次";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 5;
 			temp.y = 8;
@@ -115,7 +115,7 @@ package org.mokylin.skin.app.activety.zonghe.qinlinmibao
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "玩家名称";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 51;
 			temp.y = 8;
@@ -126,7 +126,7 @@ package org.mokylin.skin.app.activety.zonghe.qinlinmibao
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "伤害输出";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 145;
 			temp.y = 8;
@@ -156,8 +156,29 @@ package org.mokylin.skin.app.activety.zonghe.qinlinmibao
 		private function __Act_MiBao_ZhuiZong_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/activety/zonghe/yeqian.png";
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 36;
 			temp.x = 4;
+			temp.y = 4;
+			return temp;
+		}
+
+		private function __Act_MiBao_ZhuiZong_UIAsset4_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 92;
+			temp.x = 40;
+			temp.y = 4;
+			return temp;
+		}
+
+		private function __Act_MiBao_ZhuiZong_UIAsset5_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			temp.styleName = "ui/component/tabbar/fenye/erjibiaoqian.png";
+			temp.width = 89;
+			temp.x = 132;
 			temp.y = 4;
 			return temp;
 		}
@@ -509,7 +530,7 @@ package org.mokylin.skin.app.activety.zonghe.qinlinmibao
 			temp.height = 141;
 			temp.x = 13;
 			temp.y = 233;
-			temp.elementsContent = [__Act_MiBao_ZhuiZong_UIAsset2_i(),__Act_MiBao_ZhuiZong_UIAsset3_i(),__Act_MiBao_ZhuiZong_Label1_i(),__Act_MiBao_ZhuiZong_Label2_i(),__Act_MiBao_ZhuiZong_Label3_i(),pmItem0_i(),pmItem1_i(),pmItem2_i(),pmItem3_i()];
+			temp.elementsContent = [__Act_MiBao_ZhuiZong_UIAsset2_i(),__Act_MiBao_ZhuiZong_UIAsset3_i(),__Act_MiBao_ZhuiZong_UIAsset4_i(),__Act_MiBao_ZhuiZong_UIAsset5_i(),__Act_MiBao_ZhuiZong_Label1_i(),__Act_MiBao_ZhuiZong_Label2_i(),__Act_MiBao_ZhuiZong_Label3_i(),pmItem0_i(),pmItem1_i(),pmItem2_i(),pmItem3_i()];
 			return temp;
 		}
 

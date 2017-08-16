@@ -120,7 +120,7 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			lbCurrent = temp;
 			temp.name = "lbCurrent";
 			temp.text = "青铜一阶";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 111;
 			temp.x = 39;
@@ -134,8 +134,8 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			lbDangqian1 = temp;
 			temp.name = "lbDangqian1";
 			temp.text = "每日段位奖励：";
-			temp.color = 0x8B8D7B;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 12;
 			temp.y = 61;
 			return temp;
@@ -160,8 +160,8 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			lbNext2 = temp;
 			temp.name = "lbNext2";
 			temp.text = "每日段位奖励：";
-			temp.color = 0x8B8D7B;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 0;
 			temp.y = 27;
 			return temp;
@@ -173,8 +173,9 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			lbNext = temp;
 			temp.name = "lbNext";
 			temp.text = "青铜二阶";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.width = 85;
 			temp.x = 30;
 			temp.y = 3;
 			return temp;

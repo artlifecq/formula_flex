@@ -419,7 +419,7 @@ package org.mokylin.skin.app.banghui
 			lbLast = temp;
 			temp.name = "lbLast";
 			temp.text = "今日还可捐献999元宝";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 228;
 			temp.x = 288;

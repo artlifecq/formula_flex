@@ -9,7 +9,7 @@ package org.mokylin.skin.app.fuben
 	import feathers.controls.UINumber;
 	import org.mokylin.skin.app.fuben.uinumber.UINumberFubenzhanli;
 	import org.mokylin.skin.component.button.ButtonSkin_putong4;
-
+	
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
@@ -21,64 +21,64 @@ package org.mokylin.skin.app.fuben
 		//                                定义成员变量
 		//==========================================================================
 		public var btnEnter:feathers.controls.Button;
-
+		
 		public var btnReset:feathers.controls.Button;
-
+		
 		public var combatgroup:feathers.controls.Group;
-
+		
 		public var grpFirst:feathers.controls.Group;
-
+		
 		public var grpXin:feathers.controls.Group;
-
+		
 		public var grpXinL:feathers.controls.Group;
-
+		
 		public var iconFirst:feathers.controls.UIAsset;
-
+		
 		public var icon_1:feathers.controls.UIAsset;
-
+		
 		public var icon_2:feathers.controls.UIAsset;
-
+		
 		public var icon_3:feathers.controls.UIAsset;
-
+		
 		public var lbNum:feathers.controls.Label;
-
+		
 		public var lbYuanbao:feathers.controls.Label;
-
+		
 		public var lbshenyuName:feathers.controls.Label;
-
+		
 		public var lxin1:feathers.controls.UIAsset;
-
+		
 		public var lxin2:feathers.controls.UIAsset;
-
+		
 		public var lxin3:feathers.controls.UIAsset;
-
+		
 		public var numZhanli:feathers.controls.UINumber;
-
+		
 		public var resetgroup:feathers.controls.Group;
-
+		
 		public var uiBg:feathers.controls.UIAsset;
-
+		
 		public var uiFirst:feathers.controls.UIAsset;
-
+		
 		public var uiJiangli:feathers.controls.UIAsset;
-
+		
 		public var uiLevel:feathers.controls.UIAsset;
-
+		
 		public var uiName:feathers.controls.UIAsset;
-
+		
 		public var uiOk:feathers.controls.UIAsset;
-
+		
 		public var uiTishi:feathers.controls.UIAsset;
-
+		
 		public var ui_tuijianZhanliName:feathers.controls.UIAsset;
-
+		
 		public var xin1:feathers.controls.UIAsset;
-
+		
 		public var xin2:feathers.controls.UIAsset;
-
+		
 		public var xin3:feathers.controls.UIAsset;
-
-
+		
+		
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
@@ -95,8 +95,8 @@ package org.mokylin.skin.app.fuben
 			};
 			skinNames={};
 		}
-
-
+		
+		
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
@@ -111,7 +111,7 @@ package org.mokylin.skin.app.fuben
 			temp.y = 34;
 			return temp;
 		}
-
+		
 		private function __FuBenItem_Zhenqi_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -120,7 +120,7 @@ package org.mokylin.skin.app.fuben
 			temp.y = 2;
 			return temp;
 		}
-
+		
 		private function __FuBenItem_Zhenqi_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -129,7 +129,7 @@ package org.mokylin.skin.app.fuben
 			temp.y = 31;
 			return temp;
 		}
-
+		
 		private function btnEnter_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
@@ -145,7 +145,7 @@ package org.mokylin.skin.app.fuben
 			temp.y = 0;
 			return temp;
 		}
-
+		
 		private function btnReset_i():feathers.controls.Button
 		{
 			var temp:feathers.controls.Button = new feathers.controls.Button();
@@ -161,7 +161,7 @@ package org.mokylin.skin.app.fuben
 			temp.y = 0;
 			return temp;
 		}
-
+		
 		private function combatgroup_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
@@ -173,7 +173,7 @@ package org.mokylin.skin.app.fuben
 			temp.elementsContent = [lbshenyuName_i(),lbNum_i(),btnEnter_i()];
 			return temp;
 		}
-
+		
 		private function grpFirst_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
@@ -184,7 +184,7 @@ package org.mokylin.skin.app.fuben
 			temp.elementsContent = [uiFirst_i(),iconFirst_i()];
 			return temp;
 		}
-
+		
 		private function grpXinL_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
@@ -195,7 +195,7 @@ package org.mokylin.skin.app.fuben
 			temp.elementsContent = [lxin1_i(),lxin2_i(),lxin3_i()];
 			return temp;
 		}
-
+		
 		private function grpXin_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
@@ -206,7 +206,7 @@ package org.mokylin.skin.app.fuben
 			temp.elementsContent = [xin1_i(),xin2_i(),xin3_i()];
 			return temp;
 		}
-
+		
 		private function iconFirst_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -217,7 +217,7 @@ package org.mokylin.skin.app.fuben
 			temp.y = 28;
 			return temp;
 		}
-
+		
 		private function icon_1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -228,7 +228,7 @@ package org.mokylin.skin.app.fuben
 			temp.y = 205;
 			return temp;
 		}
-
+		
 		private function icon_2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -239,7 +239,7 @@ package org.mokylin.skin.app.fuben
 			temp.y = 205;
 			return temp;
 		}
-
+		
 		private function icon_3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -250,7 +250,7 @@ package org.mokylin.skin.app.fuben
 			temp.y = 205;
 			return temp;
 		}
-
+		
 		private function lbNum_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -264,7 +264,7 @@ package org.mokylin.skin.app.fuben
 			temp.y = 34;
 			return temp;
 		}
-
+		
 		private function lbYuanbao_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -278,7 +278,7 @@ package org.mokylin.skin.app.fuben
 			temp.y = 34;
 			return temp;
 		}
-
+		
 		private function lbshenyuName_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
@@ -292,7 +292,7 @@ package org.mokylin.skin.app.fuben
 			temp.y = 34;
 			return temp;
 		}
-
+		
 		private function lxin1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -303,7 +303,7 @@ package org.mokylin.skin.app.fuben
 			temp.y = 0;
 			return temp;
 		}
-
+		
 		private function lxin2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -314,7 +314,7 @@ package org.mokylin.skin.app.fuben
 			temp.y = 0;
 			return temp;
 		}
-
+		
 		private function lxin3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -325,7 +325,7 @@ package org.mokylin.skin.app.fuben
 			temp.y = 0;
 			return temp;
 		}
-
+		
 		private function numZhanli_i():feathers.controls.UINumber
 		{
 			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
@@ -340,7 +340,7 @@ package org.mokylin.skin.app.fuben
 			temp.y = 324;
 			return temp;
 		}
-
+		
 		private function resetgroup_i():feathers.controls.Group
 		{
 			var temp:feathers.controls.Group = new feathers.controls.Group();
@@ -351,7 +351,7 @@ package org.mokylin.skin.app.fuben
 			temp.elementsContent = [__FuBenItem_Zhenqi_Label1_i(),lbYuanbao_i(),__FuBenItem_Zhenqi_UIAsset2_i(),btnReset_i()];
 			return temp;
 		}
-
+		
 		private function uiBg_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -360,7 +360,7 @@ package org.mokylin.skin.app.fuben
 			temp.styleName = "ui/big_bg/fuben/zhenqi/bg1.jpg";
 			return temp;
 		}
-
+		
 		private function uiFirst_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -371,7 +371,7 @@ package org.mokylin.skin.app.fuben
 			temp.y = 2;
 			return temp;
 		}
-
+		
 		private function uiJiangli_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -382,7 +382,7 @@ package org.mokylin.skin.app.fuben
 			temp.y = 182;
 			return temp;
 		}
-
+		
 		private function uiLevel_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -393,7 +393,7 @@ package org.mokylin.skin.app.fuben
 			temp.y = 315;
 			return temp;
 		}
-
+		
 		private function uiName_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -404,7 +404,7 @@ package org.mokylin.skin.app.fuben
 			temp.y = 5;
 			return temp;
 		}
-
+		
 		private function uiOk_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -415,7 +415,7 @@ package org.mokylin.skin.app.fuben
 			temp.y = 85;
 			return temp;
 		}
-
+		
 		private function uiTishi_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -427,7 +427,7 @@ package org.mokylin.skin.app.fuben
 			temp.y = 316;
 			return temp;
 		}
-
+		
 		private function ui_tuijianZhanliName_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -438,7 +438,7 @@ package org.mokylin.skin.app.fuben
 			temp.y = 324;
 			return temp;
 		}
-
+		
 		private function xin1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -449,7 +449,7 @@ package org.mokylin.skin.app.fuben
 			temp.y = 0;
 			return temp;
 		}
-
+		
 		private function xin2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -460,7 +460,7 @@ package org.mokylin.skin.app.fuben
 			temp.y = 0;
 			return temp;
 		}
-
+		
 		private function xin3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -471,6 +471,6 @@ package org.mokylin.skin.app.fuben
 			temp.y = 0;
 			return temp;
 		}
-
+		
 	}
 }

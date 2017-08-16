@@ -61,7 +61,7 @@ package org.mokylin.skin.app.zhanhun
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grp_up = temp;
 			temp.name = "grp_up";
-			temp.x = 49;
+			temp.x = 40;
 			temp.y = 0;
 			temp.elementsContent = [arrow_up_i(),lb_Num_i()];
 			return temp;
@@ -87,7 +87,7 @@ package org.mokylin.skin.app.zhanhun
 			lb_name = temp;
 			temp.name = "lb_name";
 			temp.text = "32157";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 81;
 			temp.x = 0;

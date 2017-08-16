@@ -1,36 +1,36 @@
-package org.mokylin.skin.app.tips
+package org.mokylin.skin.app.zhanchang.jiucengyaota
 {
-	import feathers.controls.text.Fontter;
-	import feathers.controls.Label;
+	import feathers.controls.SkinnableContainer;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
+	import org.mokylin.skin.app.zhanchang.jiucengyaota.Tips_yaota;
 
 	/**
 	 * @private
 	 * 此类由编译器自动生成，您应修改对应的DXML文件内容，然后重新编译，而不应直接修改其代码。
 	 * @author DXMLCompilerForFeathers
 	 */
-	public class Tips_MouseHand extends feathers.controls.StateSkin
+	public class Tips_yata2 extends feathers.controls.StateSkin
 	{
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var bg:feathers.controls.UIAsset;
+		public var imgBG:feathers.controls.UIAsset;
 
-		public var lbl_miaoshu:feathers.controls.Label;
+		public var skinTips:feathers.controls.SkinnableContainer;
 
 
 		//==========================================================================
 		//                                定义构造函数
 		//==========================================================================
-		public function Tips_MouseHand()
+		public function Tips_yata2()
 		{
 			super();
 			
 			this.currentState = "normal";
-			this.height = 38;
-			this.width = 280;
-			this.elementsContent = [bg_i(),lbl_miaoshu_i()];
+			this.height = 150;
+			this.width = 380;
+			this.elementsContent = [imgBG_i(),skinTips_i()];
 			
 			states = {
 			};
@@ -41,28 +41,26 @@ package org.mokylin.skin.app.tips
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
-		private function bg_i():feathers.controls.UIAsset
+		private function imgBG_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			bg = temp;
-			temp.name = "bg";
-			temp.height = 38;
+			imgBG = temp;
+			temp.name = "imgBG";
+			temp.height = 150;
 			temp.styleName = "ui/common/tips/tips_2.png";
-			temp.width = 280;
+			temp.width = 380;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
 
-		private function lbl_miaoshu_i():feathers.controls.Label
+		private function skinTips_i():feathers.controls.SkinnableContainer
 		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbl_miaoshu = temp;
-			temp.name = "lbl_miaoshu";
-			temp.htmlText = "<font color='#a3a594'>当前经验：</font><font color='#eaeabc'>9999/10000000</font><font color='#00ff33'>(75%)</font>";
-			temp.color = 0xBBBDAA;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 256;
+			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
+			skinTips = temp;
+			temp.name = "skinTips";
+			var skin:StateSkin = new org.mokylin.skin.app.zhanchang.jiucengyaota.Tips_yaota()
+			temp.skin = skin
 			temp.x = 10;
 			temp.y = 10;
 			return temp;

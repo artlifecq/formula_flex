@@ -89,7 +89,7 @@ package org.mokylin.skin.app.banghui
 			temp.name = "lbZhanli";
 			temp.text = "999999999";
 			temp.textAlign = "left";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 77;
 			temp.x = 176;

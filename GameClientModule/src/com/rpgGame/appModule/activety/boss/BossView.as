@@ -5,6 +5,9 @@ package com.rpgGame.appModule.activety.boss
 	import com.rpgGame.app.display3D.InterAvatar3D;
 	import com.rpgGame.app.manager.ActivetyDataManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.richText.RichTextCustomLinkType;
+	import com.rpgGame.app.richText.RichTextCustomUtil;
+	import com.rpgGame.app.richText.component.RichTextArea3D;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.FaceUtil;
@@ -12,6 +15,7 @@ package com.rpgGame.appModule.activety.boss
 	import com.rpgGame.app.view.icon.IconCDFace;
 	import com.rpgGame.core.events.AvatarEvent;
 	import com.rpgGame.core.events.MainPlayerEvent;
+	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.active.ActivetyCfgData;
 	import com.rpgGame.coreData.cfg.active.ActivetyInfo;
 	import com.rpgGame.coreData.cfg.active.BossActInfo;
@@ -25,11 +29,15 @@ package com.rpgGame.appModule.activety.boss
 	import com.rpgGame.coreData.role.RoleType;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.activity.ActivityJoinStateEnum;
-	import com.rpgGame.netData.backpack.bean.ItemInfo;
+	import com.rpgGame.coreData.utils.HtmlTextUtil;
+	
+	import flash.text.TextFieldAutoSize;
+	import flash.text.TextFormat;
 	
 	import away3d.events.Event;
 	
 	import feathers.controls.ScrollBarDisplayMode;
+	import feathers.controls.text.Fontter;
 	import feathers.data.ListCollection;
 	
 	import org.client.mainCore.manager.EventManager;
@@ -52,6 +60,8 @@ package com.rpgGame.appModule.activety.boss
 		private var selectedInfo:BossActInfo;
 
 		private var actList:Vector.<ActivetyInfo>;
+		private var _richText:RichTextArea3D;
+		private var _defaultFormat:TextFormat;
 		
 		public function BossView()
 		{
@@ -82,6 +92,24 @@ package com.rpgGame.appModule.activety.boss
 			_skin.modeCont.addChild(_avatarContainer);
 			
 			rewardIcon=new Vector.<IconCDFace>();
+			
+			_richText= RichTextArea3D.getFromPool();
+			_richText.setSize(180);
+			_richText.breakLineManual = true;
+			_richText.setConfig(RichTextCustomUtil.getChatUnitConfigVec());
+			_richText.wordWrap = false;
+			_richText.multiline = false;
+			
+			_defaultFormat = new TextFormat(Fontter.FONT_Hei);
+			_defaultFormat.color = StaticValue.GREEN_TEXT;
+			_defaultFormat.size = 14;
+			_defaultFormat.align = TextFieldAutoSize.LEFT;
+			_defaultFormat.letterSpacing = 1;
+			_defaultFormat.leading = 4;
+			_richText.defaultTextFormat = _defaultFormat;
+			this.addChild(_richText);
+			_richText.x=692;
+			_richText.y=390;
 		}
 		
 		
@@ -218,11 +246,18 @@ package com.rpgGame.appModule.activety.boss
 					_skin.lbTime.text+=TimeUtil.changeIntHM2Str(timeList[i])+" ";
 				}
 			}
+			
+			var text:String="最后一击:";
+			_richText.text="";
 			if(selectedInfo.killerName&&selectedInfo.killerName.length!=0){
-				_skin.lastSkiller.htmlText="最后一击:"+selectedInfo.killerName;
+				var linkData:String=selectedInfo.killerId.lValue+","+selectedInfo.killerId.hValue+","+selectedInfo.killerId.hexValue;
+				var linkName:String=RichTextCustomUtil.getTextLinkCode(selectedInfo.killerName,StaticValue.GREEN_TEXT,
+					RichTextCustomLinkType.WALK_TO_SCENE_POS_TYPE,linkData);
+				text+=linkName;
 			}else{
-				_skin.lastSkiller.htmlText="最后一击:拭目以待";
+				text+="拭目以待";
 			}
+			_richText.appendRichText(text);
 		}
 		
 		override public function hide():void

@@ -56,7 +56,7 @@ package org.mokylin.skin.app.wuxue.juexue
 			labelDisplay = temp;
 			temp.name = "labelDisplay";
 			temp.text = "对怪物攻击伤害提升20%";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 227;
 			temp.x = 9;
@@ -70,7 +70,7 @@ package org.mokylin.skin.app.wuxue.juexue
 			lb_name = temp;
 			temp.name = "lb_name";
 			temp.text = "当前效果：";
-			temp.color = 0xBEA757;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 10;
 			temp.y = 0;

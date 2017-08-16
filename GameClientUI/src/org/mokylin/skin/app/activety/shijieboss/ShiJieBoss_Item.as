@@ -96,7 +96,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.leading = 7;
 			temp.letterSpacing = 0;
 			temp.text = "【16-20级】 马贼首领";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 155;
 			temp.y = 18;
@@ -113,7 +113,7 @@ package org.mokylin.skin.app.activety.shijieboss
 			temp.leading = 7;
 			temp.letterSpacing = 0;
 			temp.text = "21:00-21:30";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 155;
 			temp.y = 39;

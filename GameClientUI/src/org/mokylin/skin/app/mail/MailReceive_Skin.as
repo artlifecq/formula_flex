@@ -102,7 +102,7 @@ package org.mokylin.skin.app.mail
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/mail/quanxuan.png";
 			temp.x = 67;
-			temp.y = 554;
+			temp.y = 553;
 			return temp;
 		}
 
@@ -122,11 +122,12 @@ package org.mokylin.skin.app.mail
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnCancel = temp;
 			temp.name = "btnCancel";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "删除";
+			temp.fontSize = 16;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
-			temp.color = 0xCFC6AE;
-			temp.width = 90;
+			temp.color = 0xEAEABC;
+			temp.width = 88;
 			temp.x = 230;
 			temp.y = 533;
 			return temp;
@@ -137,11 +138,12 @@ package org.mokylin.skin.app.mail
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnTiqu = temp;
 			temp.name = "btnTiqu";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "提取附件";
+			temp.fontSize = 16;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.color = 0xCFC6AE;
-			temp.width = 90;
+			temp.color = 0xEAEABC;
+			temp.width = 88;
 			temp.x = 327;
 			temp.y = 533;
 			return temp;
@@ -187,7 +189,7 @@ package org.mokylin.skin.app.mail
 			var temp:feathers.controls.TabBar = new feathers.controls.TabBar();
 			tab_nv = temp;
 			temp.name = "tab_nv";
-			temp.btnWidth = 67;
+			temp.btnWidth = 70;
 			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_pack;
 			temp.width = 71;
 			temp.x = 24;

@@ -11,7 +11,7 @@ package org.mokylin.skin.app.shejiao.zudui
 	import feathers.controls.UINumber;
 	import org.mokylin.skin.app.shejiao.zudui.Zudui_Head;
 	import org.mokylin.skin.app.shejiao.zudui.number.UINumberJiacheng;
-	import org.mokylin.skin.component.button.ButtonSkin_putong;
+	import org.mokylin.skin.component.button.ButtonSkin_putong4;
 	import org.mokylin.skin.component.check.CheckBoxSkin_1;
 
 	/**
@@ -135,11 +135,11 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.name = "btn_add";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "添加队员";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong4;
 			temp.color = 0xFFFFFF;
 			temp.width = 90;
 			temp.x = 808;
-			temp.y = 409;
+			temp.y = 412;
 			return temp;
 		}
 
@@ -150,11 +150,11 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.name = "btn_create";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "创建队伍";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong4;
 			temp.color = 0xFFFFFF;
 			temp.width = 90;
 			temp.x = 808;
-			temp.y = 394;
+			temp.y = 397;
 			return temp;
 		}
 
@@ -165,11 +165,11 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.name = "btn_exit";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "退出队伍";
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
+			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong4;
 			temp.color = 0xFFFFFF;
 			temp.width = 90;
 			temp.x = 808;
-			temp.y = 376;
+			temp.y = 382;
 			return temp;
 		}
 
@@ -461,8 +461,8 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.fontSize = 12;
 			temp.text = "玩家名六个字【69级】";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 139;
 			temp.x = 0;
 			temp.y = 289;
@@ -477,8 +477,8 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.fontSize = 12;
 			temp.text = "玩家名六个字【69级】";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 139;
 			temp.x = 2;
 			temp.y = 314;
@@ -493,8 +493,8 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.fontSize = 12;
 			temp.text = "玩家名六个字【69级】";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 139;
 			temp.x = 19;
 			temp.y = 334;
@@ -509,8 +509,8 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.fontSize = 12;
 			temp.text = "玩家名六个字【69级】";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 139;
 			temp.x = 6;
 			temp.y = 315;
@@ -525,8 +525,8 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.fontSize = 12;
 			temp.text = "马贼营寨";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 139;
 			temp.x = 2;
 			temp.y = 291;

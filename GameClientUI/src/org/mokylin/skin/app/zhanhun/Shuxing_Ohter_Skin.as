@@ -44,7 +44,7 @@ package org.mokylin.skin.app.zhanhun
 			lb_name = temp;
 			temp.name = "lb_name";
 			temp.text = "坐骑属性+100%";
-			temp.color = 0xE8C958;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
 			temp.x = 0;
@@ -58,7 +58,7 @@ package org.mokylin.skin.app.zhanhun
 			lb_up = temp;
 			temp.name = "lb_up";
 			temp.text = "→100%（100级时可获取）";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 185;
 			temp.x = 108;

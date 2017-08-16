@@ -48,7 +48,7 @@ package org.mokylin.skin.app.zuoqi
 			temp.letterSpacing = 1;
 			temp.fontSize = 16;
 			temp.text = "当前祝福值：";
-			temp.color = 0xDFB01F;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 11;
 			temp.y = 11;
@@ -60,7 +60,7 @@ package org.mokylin.skin.app.zuoqi
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.letterSpacing = 0;
 			temp.text = "祝福值清空时间：";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 12;
 			temp.y = 38;
@@ -72,7 +72,7 @@ package org.mokylin.skin.app.zuoqi
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.letterSpacing = 1;
 			temp.text = "祝福值可以增加人物临时属性";
-			temp.color = 0x6BCC08;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 11;
 			temp.y = 77;
@@ -84,7 +84,7 @@ package org.mokylin.skin.app.zuoqi
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.letterSpacing = 1;
 			temp.text = "祝福值清零时，临时属性也将消失";
-			temp.color = 0x6BCC08;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 11;
 			temp.y = 95;
@@ -95,7 +95,7 @@ package org.mokylin.skin.app.zuoqi
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "什么是祝福值：";
-			temp.color = 0xDFB01F;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 11;
 			temp.y = 121;
@@ -109,7 +109,7 @@ package org.mokylin.skin.app.zuoqi
 			temp.leading = 5;
 			temp.letterSpacing = 0;
 			temp.text = "进阶失败后获得祝福值，祝福值越高成功几率越大";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 259;
 			temp.x = 11;
@@ -121,7 +121,7 @@ package org.mokylin.skin.app.zuoqi
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "祝福值清空时间：";
-			temp.color = 0xDFB01F;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 11;
 			temp.y = 183;
@@ -135,7 +135,7 @@ package org.mokylin.skin.app.zuoqi
 			temp.leading = 5;
 			temp.letterSpacing = 0;
 			temp.text = "每日0点祝福值将被清空，一次性完成进阶可避免祝福值损失";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 264;
 			temp.x = 11;
@@ -185,7 +185,7 @@ package org.mokylin.skin.app.zuoqi
 			lab_time = temp;
 			temp.name = "lab_time";
 			temp.text = "不限时";
-			temp.color = 0x6BCC08;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 90;
 			temp.x = 122;

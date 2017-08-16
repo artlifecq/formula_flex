@@ -99,7 +99,7 @@ package org.mokylin.skin.app.fuben
 			temp.fontSize = 14;
 			temp.text = "浪里小白还没有准备就绪";
 			temp.textAlign = "center";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 257;
 			temp.x = 34;

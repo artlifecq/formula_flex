@@ -1,5 +1,6 @@
 package org.mokylin.skin.app.siwangfuhuo
 {
+	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
@@ -73,7 +74,8 @@ package org.mokylin.skin.app.siwangfuhuo
 			temp.letterSpacing = 1;
 			temp.text = "获取神器";
 			temp.textAlign = "center";
-			temp.color = 0xcfc6ae;
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 136;
 			temp.x = 2;
 			temp.y = 8;

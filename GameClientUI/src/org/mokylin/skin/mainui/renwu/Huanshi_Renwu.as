@@ -91,7 +91,7 @@ package org.mokylin.skin.mainui.renwu
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "花费";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 31;
 			temp.y = 236;
@@ -103,7 +103,7 @@ package org.mokylin.skin.mainui.renwu
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "免费领取";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 115;
 			temp.x = 4;
@@ -304,7 +304,7 @@ package org.mokylin.skin.mainui.renwu
 			lb_yinliang = temp;
 			temp.name = "lb_yinliang";
 			temp.text = "100";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 83;
 			temp.x = 36;
@@ -318,7 +318,7 @@ package org.mokylin.skin.mainui.renwu
 			lb_yuanbao = temp;
 			temp.name = "lb_yuanbao";
 			temp.text = "100";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 83;
 			temp.x = 36;

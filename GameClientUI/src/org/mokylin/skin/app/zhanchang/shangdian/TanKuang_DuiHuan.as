@@ -81,7 +81,7 @@ package org.mokylin.skin.app.zhanchang.shangdian
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.height = 24;
 			temp.text = "兑换数量：";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 76;
 			temp.x = 15;
@@ -94,7 +94,7 @@ package org.mokylin.skin.app.zhanchang.shangdian
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.height = 24;
 			temp.text = "总价：";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 50;
 			temp.x = 42;
@@ -107,7 +107,7 @@ package org.mokylin.skin.app.zhanchang.shangdian
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.height = 24;
 			temp.text = "售价：";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 47;
 			temp.x = 82;
