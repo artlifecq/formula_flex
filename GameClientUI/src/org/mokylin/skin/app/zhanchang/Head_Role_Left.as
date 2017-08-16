@@ -5,7 +5,7 @@ package org.mokylin.skin.app.zhanchang
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import feathers.controls.UINumber;
-	import org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli;
+	import org.mokylin.skin.component.uinumber.UINumberSkin_zhujuezhandouli;
 
 	/**
 	 * @private
@@ -34,7 +34,7 @@ package org.mokylin.skin.app.zhanchang
 			this.currentState = "normal";
 			this.height = 88;
 			this.width = 341;
-			this.elementsContent = [__Head_Role_Left_UIAsset1_i(),role_xuecao_i(),lbName_i(),numZhandouli_i(),__Head_Role_Left_UIAsset2_i()];
+			this.elementsContent = [__Head_Role_Left_UIAsset1_i(),role_xuecao_i(),lbName_i(),__Head_Role_Left_UIAsset2_i(),numZhandouli_i()];
 			
 			states = {
 			};
@@ -57,9 +57,9 @@ package org.mokylin.skin.app.zhanchang
 		private function __Head_Role_Left_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/zhandouli.png";
-			temp.x = 99;
-			temp.y = 8;
+			temp.styleName = "ui/common/zhandouli2.png";
+			temp.x = 97;
+			temp.y = 0;
 			return temp;
 		}
 
@@ -82,13 +82,13 @@ package org.mokylin.skin.app.zhanchang
 			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
 			numZhandouli = temp;
 			temp.name = "numZhandouli";
-			temp.gap = -1;
+			temp.gap = -6;
 			temp.height = 25;
-			temp.label = "65214";
-			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhandouli;
-			temp.width = 89;
+			temp.label = "629845";
+			temp.styleClass = org.mokylin.skin.component.uinumber.UINumberSkin_zhujuezhandouli;
+			temp.width = 142;
 			temp.x = 153;
-			temp.y = 8;
+			temp.y = 3;
 			return temp;
 		}
 

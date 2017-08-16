@@ -467,6 +467,8 @@ package org.game.netCore.net
 			
 			//退副本
 			sendCrossHash.put( 155208, 1 );
+			
+			
 		}
 		
 		private function checkUseCrossServer( msg:Message ):int

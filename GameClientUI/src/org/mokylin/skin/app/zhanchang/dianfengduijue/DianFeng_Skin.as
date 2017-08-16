@@ -259,7 +259,7 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			temp.name = "lbDuanwei";
 			temp.text = "135/160";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 101;
 			temp.x = 160;
@@ -275,7 +275,7 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			temp.height = 49;
 			temp.htmlText = "战场规则：1.每日前十场可获得<font color='#00ff33'>声望奖励</font><br>          2.每日获得积分决定段位，每日24点刷新段位奖励";
 			temp.leading = 7;
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 380;
 			temp.x = 7;
@@ -289,7 +289,7 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			lbLevel = temp;
 			temp.name = "lbLevel";
 			temp.htmlText = "等级需求：<font color='#00ff33'>50级</font>";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 7;
 			temp.y = 15;
@@ -316,7 +316,7 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			lbShengwang = temp;
 			temp.name = "lbShengwang";
 			temp.text = "1000";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 50;
 			temp.x = 745;

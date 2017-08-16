@@ -37,8 +37,8 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 		private function __Tips_Msg_Label1_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.htmlText = "等级需求：<font color='#5DBD37'>50级</font>";
-			temp.color = 0xCFC6AE;
+			temp.htmlText = "等级需求：<font color='#00ff33'>50级</font>";
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 11;
 			temp.y = 11;
@@ -48,8 +48,8 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 		private function __Tips_Msg_Label2_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.htmlText = "开启时间：周一、三、四、六、日<font color='#5DBD37'>21:00-21:30</font>";
-			temp.color = 0xCFC6AE;
+			temp.htmlText = "开启时间：周一、三、四、六、日<font color='#00ff33'>21:00-21:30</font>";
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 321;
 			temp.x = 11;
@@ -61,9 +61,9 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.height = 43;
-			temp.htmlText = "战场规则：1.每日前十场可获得<font color='#5DBD37'>声望奖励</font><br>          2.每日获取积分决定段位，每日24点刷新段位奖励";
+			temp.htmlText = "战场规则：1.每日前十场可获得<font color='#00ff33'>声望奖励</font><br>          2.每日获取积分决定段位，每日24点刷新段位奖励";
 			temp.leading = 7;
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 384;
 			temp.x = 11;
