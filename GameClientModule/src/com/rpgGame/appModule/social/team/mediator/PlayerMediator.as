@@ -158,14 +158,14 @@ package   com.rpgGame.appModule.social.team.mediator
 			SceneRoleSelectManager.mouseOverRole=_roleModel.avatar.curRole;
 			if(!_member.memberId.EqualTo( MainRoleManager.actorInfo.serverID))
 			{
-				var showArr:Array=[LangMenu.LOOK_HERO,LangMenu.ADD_FRIEND];
+				var showArr:Array=[LangMenu.LOOK_HERO];
 				if (Mgr.teamMgr.isCaptain) 
 				{
 					showArr.push(LangMenu.TRANSFER_THE_CAPTAIN);
 					showArr.push(LangMenu.PLEASE_FROM_THE_TEAM);
 				}
 				showArr.push(LangMenu.MOVE_TO_HERO);
-				showArr.push(LangMenu.COPY_THE_NAME);
+			//	showArr.push(LangMenu.COPY_THE_NAME);
 				var y : Number = Stage3DLayerManager.stage.mouseY;
 				var x : Number = Stage3DLayerManager.stage.mouseX;
 				MenuManager.showMenu(showArr,[_member.memberId,_member.memberName],x,y,70,this._player);

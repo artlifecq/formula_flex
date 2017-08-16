@@ -537,7 +537,7 @@ package com.rpgGame.app.state.role.control
 			else if ((_machine as RoleStateMachine).isAttacking)
 			{
 				var attackState : AttackState = _machine.getCurrState(ActionState) as AttackState;
-				if (!force && !attackState.attackBroken && !attackState.canWalkRelease)//在自动走路中寻路不应受影响
+				if (!force && !attackState.attackBroken && !attackState.canWalkRelease&&!attackState.canWalkBreak)//在自动走路中寻路不应受影响
 				{
 					Lyt.a("walk-209");
 					return false;

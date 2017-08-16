@@ -196,9 +196,9 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnBack = temp;
 			temp.name = "btnBack";
-			temp.height = 21;
+			temp.height = 13;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close2;
-			temp.width = 21;
+			temp.width = 14;
 			temp.x = 910;
 			temp.y = 98;
 			return temp;
