@@ -219,7 +219,7 @@ package  com.rpgGame.app.manager.shop
 				//先判断是否是需要vip
 				if (vo.data.vipLevel>Mgr.vipMgr.vipLv) 
 				{
-					GameAlertYellowBtnExt.show("您还不是"+VipCfg.getVip(vo.data.vipLevel)+"，不能购买此道具。是否成为"+VipCfg.getVip(vo.data.vipLevel)+"?",Mgr.vipMgr.iWantBecomeVip);
+					GameAlertYellowBtnExt.show("您还不是"+VipCfg.getVip(vo.data.vipLevel).q_vip_name+"，不能购买此道具。是否成为"+VipCfg.getVip(vo.data.vipLevel).q_vip_name+"?",Mgr.vipMgr.iWantBecomeVip);
 					return;
 				}
 				var price:int=vo.data.price;

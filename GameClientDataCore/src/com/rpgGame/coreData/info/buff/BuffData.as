@@ -146,6 +146,7 @@ package com.rpgGame.coreData.info.buff
 			_serverID = _buffInfo.buffId.ToString();
 			_buffId = _buffInfo.buffId.ToGID();
 			cfgId = _buffInfo.buffModelId;
+			_data=BuffStateDataManager.getData(cfgId);
 			_disappearTime = _buffInfo.remainTime.fValue;
 			_totalTime = _buffInfo.totalTime.fValue;
 			_curtStackCount = _buffInfo.overlay;

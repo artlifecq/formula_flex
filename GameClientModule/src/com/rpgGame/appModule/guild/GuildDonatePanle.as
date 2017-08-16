@@ -96,6 +96,11 @@ package com.rpgGame.appModule.guild
 			_itemPage1 = new NumSelectUICtrl(skincontet.btnAdd,skincontet.btnDec,null,null,skincontet.lbBuyNum,1,int.MAX_VALUE,null);
 			skincontet= _skin.skinSelect2.skin as Flip_Skin;
 			_itemPage2 = new NumSelectUICtrl(skincontet.btnAdd,skincontet.btnDec,null,null,skincontet.lbBuyNum,1,int.MAX_VALUE,null);
+			var tmpStr:String="1{0}={1}帮派活跃+{2}帮贡";
+			var obj:Object=JSONUtil.decode(GlobalSheetData.getStrValue(822));
+			_skin.labToken.text=LanguageConfig.replaceStr(tmpStr,[ItemConfig.getItemName(obj.itemid),obj.num1,obj.num2]);
+			obj=JSONUtil.decode(GlobalSheetData.getStrValue(823));
+			_skin.labGold.text=LanguageConfig.replaceStr(tmpStr,[ItemConfig.getItemName(obj.itemid),obj.num1,obj.num2]);
 		}
 		
 		

@@ -376,11 +376,19 @@ package com.rpgGame.app.cmdlistener.scene
 					EventManager.dispatchEvent(SkillEvent.SKILL_CANCEL);
 				}
 				MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_ATTACK_HARD);
-				
-				if (MainRoleManager.actor.stateMachine.isPrewarWaiting)
-					MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_PREWAR,null,true);
+				//主玩家自己走路打断
+				if (qSkill.q_cancel==1||qSkill.q_cancel==3&&MainRoleManager.actor.stateMachine.isWalkMoving) 
+				{
+					
+				}
 				else
-					MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE,null,true);
+				{
+					if (MainRoleManager.actor.stateMachine.isPrewarWaiting)
+						MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_PREWAR,null,true);
+					else
+						MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE,null,true);
+				}
+				
 			}
 			if (role.isPlayer)
 			{
