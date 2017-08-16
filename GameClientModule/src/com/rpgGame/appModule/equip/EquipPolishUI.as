@@ -26,6 +26,7 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.core.ui.AwdProgressBar;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.StaticValue;
@@ -215,6 +216,8 @@ package com.rpgGame.appModule.equip
 			eftCon=new Inter3DContainer();
 			//			zuomoEft=eftCon.playInter3DAt(ClientConfig.getEffect("ui_zhuomo"),-45,10,0);
 			this._skin.grp_cilun.addChild(eftCon);
+			
+			perMon=GlobalSheetData.getSettingInfo(503).q_int_value;
 		}
 		
 		private function onCancelUse(grid:DragDropItem):void

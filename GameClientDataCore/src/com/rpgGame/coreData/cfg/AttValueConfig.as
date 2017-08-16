@@ -101,8 +101,7 @@ package com.rpgGame.coreData.cfg
 		{
 			var per:int=CharAttributeType.getAttrPer(type);
 			if(per!=1){
-				var str:String=(value/per).toFixed(2);
-				return Number(str);
+				return Math.round(value/per);
 			}
 			return value;
 		}

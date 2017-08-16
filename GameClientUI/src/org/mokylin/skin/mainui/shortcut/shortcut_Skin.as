@@ -109,7 +109,7 @@ package org.mokylin.skin.mainui.shortcut
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			Iconbg1 = temp;
 			temp.name = "Iconbg1";
-			temp.styleName = "ui/common/grid/normal/kuang.png";
+			temp.styleName = "ui/mainui/shortcut/kuang.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
@@ -120,7 +120,7 @@ package org.mokylin.skin.mainui.shortcut
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			Iconbg2 = temp;
 			temp.name = "Iconbg2";
-			temp.styleName = "ui/common/grid/normal/kuang.png";
+			temp.styleName = "ui/mainui/shortcut/kuang.png";
 			temp.x = 56;
 			temp.y = 0;
 			return temp;
@@ -131,7 +131,7 @@ package org.mokylin.skin.mainui.shortcut
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			Iconbg3 = temp;
 			temp.name = "Iconbg3";
-			temp.styleName = "ui/common/grid/normal/kuang.png";
+			temp.styleName = "ui/mainui/shortcut/kuang.png";
 			temp.x = 112;
 			temp.y = 0;
 			return temp;
@@ -142,7 +142,7 @@ package org.mokylin.skin.mainui.shortcut
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			Iconbg4 = temp;
 			temp.name = "Iconbg4";
-			temp.styleName = "ui/common/grid/normal/kuang.png";
+			temp.styleName = "ui/mainui/shortcut/kuang.png";
 			temp.x = 168;
 			temp.y = 0;
 			return temp;
@@ -153,7 +153,7 @@ package org.mokylin.skin.mainui.shortcut
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			Iconbg5 = temp;
 			temp.name = "Iconbg5";
-			temp.styleName = "ui/common/grid/normal/kuang.png";
+			temp.styleName = "ui/mainui/shortcut/kuang.png";
 			temp.x = 224;
 			temp.y = 0;
 			return temp;
@@ -164,7 +164,7 @@ package org.mokylin.skin.mainui.shortcut
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			Iconbg6 = temp;
 			temp.name = "Iconbg6";
-			temp.styleName = "ui/common/grid/normal/kuang.png";
+			temp.styleName = "ui/mainui/shortcut/kuang.png";
 			temp.x = 280;
 			temp.y = 0;
 			return temp;
@@ -175,7 +175,7 @@ package org.mokylin.skin.mainui.shortcut
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			Iconbg7 = temp;
 			temp.name = "Iconbg7";
-			temp.styleName = "ui/common/grid/normal/kuang.png";
+			temp.styleName = "ui/mainui/shortcut/kuang.png";
 			temp.x = 336;
 			temp.y = 0;
 			return temp;
@@ -186,7 +186,7 @@ package org.mokylin.skin.mainui.shortcut
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			Iconbg8 = temp;
 			temp.name = "Iconbg8";
-			temp.styleName = "ui/common/grid/normal/kuang.png";
+			temp.styleName = "ui/mainui/shortcut/kuang.png";
 			temp.x = 392;
 			temp.y = 0;
 			return temp;

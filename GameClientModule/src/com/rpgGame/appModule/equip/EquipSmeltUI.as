@@ -24,17 +24,20 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.ClientConfig;
+	import com.rpgGame.coreData.cfg.GlobalSheetData;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
 	import com.rpgGame.coreData.cfg.StaticValue;
 	import com.rpgGame.coreData.cfg.TipsCfgData;
 	import com.rpgGame.coreData.cfg.item.EquipStrengthCfg;
+	import com.rpgGame.coreData.cfg.item.EquipWashAttCfg;
 	import com.rpgGame.coreData.cfg.item.EquipWashCfg;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.item.ItemContainerID;
 	import com.rpgGame.coreData.clientConfig.Q_att_values;
 	import com.rpgGame.coreData.clientConfig.Q_equip_strength;
 	import com.rpgGame.coreData.clientConfig.Q_equip_wash;
+	import com.rpgGame.coreData.clientConfig.Q_equip_wash_attr;
 	import com.rpgGame.coreData.enum.AlertClickTypeEnum;
 	import com.rpgGame.coreData.enum.SharedObjectEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
@@ -103,6 +106,7 @@ package com.rpgGame.appModule.equip
 		
 		private var _sharedObject:SharedObject;
 		private var needMon:int;
+		private var perMon:int;
 		
 		private var userMon:int;
 		
@@ -173,6 +177,8 @@ package com.rpgGame.appModule.equip
 			_getPanel=new ItemGetPathPanel();
 			(_skin.left.skin as Zhuangbei_left).monyIcon.removeFromParent(true);
 			(_skin.left.skin as Zhuangbei_left).monyTips.removeFromParent(true);
+			
+			perMon=GlobalSheetData.getSettingInfo(504).q_int_value;
 		}
 		
 		private function createItemRender():GridItemRender
@@ -328,18 +334,19 @@ package com.rpgGame.appModule.equip
 		{
 			var lock:int=0;
 			needMon=0;
+			var cfg:Q_equip_wash_attr
 			if(getItemSkin(_skin.Item1).chk_suoding.isSelected){
 				lock=1;
-				needMon+=10;
+				cfg=EquipWashAttCfg.getEquipWashAttr(targetEquipInfo.smeltAtt1);
+				needMon=cfg.q_quality*perMon;
 			}
+			
 			if(getItemSkin(_skin.Item2).chk_suoding.isSelected){
-				if(lock==1){
-					lock=3;
-				}else{
-					lock=2;
-				}
-				needMon+=10;
+				lock=2;
+				cfg=EquipWashAttCfg.getEquipWashAttr(targetEquipInfo.smeltAtt2);
+				needMon=cfg.q_quality*perMon;
 			}
+			
 			return lock;
 		}
 		

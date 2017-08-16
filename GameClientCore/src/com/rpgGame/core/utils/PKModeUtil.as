@@ -132,19 +132,19 @@ package com.rpgGame.core.utils
 
 		public static function getPKAmountColor(pkAmountType : int) : uint
 		{
-			/*switch (pkAmountType)
+			switch (pkAmountType)
 			{
 				case PKModeType.AMOUNT_WITHE:
-					return StaticValue.COLOR_CODE_1;
+					return StaticValue.BEIGE_TEXT;
 				case PKModeType.AMOUNT_GREEN:
-					return StaticValue.COLOR_CODE_16;
+					return StaticValue.GREEN_TEXT;
 				case PKModeType.AMOUNT_YELLOW:
-					return StaticValue.COLOR_CODE_4;
+					return StaticValue.YELLOW_TEXT;
 				case PKModeType.AMOUNT_GRAY:
-					return StaticValue.COLOR_CODE_23;
+					return StaticValue.GRAY_TEXT;
 				case PKModeType.AMOUNT_RED:
-					return StaticValue.COLOR_CODE_13;
-			}*/
+					return StaticValue.RED_TEXT;
+			}
 			return StaticValue.RED_TEXT;//注:请到时候重新根据设计在StaticValue里配置颜色
 		}
 	}
