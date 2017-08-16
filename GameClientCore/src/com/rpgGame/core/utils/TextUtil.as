@@ -724,7 +724,7 @@ package  com.rpgGame.core.utils
 
 		
 		/**
-		 * 秒转成时间（5天1小时46分10秒）
+		 * 转成时间（5天1小时46分10秒）
 		 * @param ms 时间（秒）
 		 * @param showZero 显示0
 		 * @return 
@@ -735,7 +735,7 @@ package  com.rpgGame.core.utils
 		}
 		
 		/**
-		 * 毫秒转成时间（5天1小时46分）
+		 * 秒转成时间（5天1小时46分）
 		 * @param ms 时间（秒）
 		 * @param showZero 显示0
 		 * @return 
@@ -746,7 +746,7 @@ package  com.rpgGame.core.utils
 		}
 		
 		/**
-		 * 毫秒转成时间（1小时46分）
+		 * 秒转成时间（1小时46分）
 		 * @param ms 时间（秒）
 		 * @param showZero 显示0
 		 * @return 

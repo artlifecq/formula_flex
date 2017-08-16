@@ -19,6 +19,9 @@ package com.rpgGame.netData.fight.message{
 		//技能ID
 		private var _skillId: int;
 		
+		//是否是自己取消(0否，1是)
+		private var _selfCancel: int;
+		
 		
 		/**
 		 * 写入字节缓存
@@ -28,6 +31,8 @@ package com.rpgGame.netData.fight.message{
 			writeLong(_playerId);
 			//技能ID
 			writeInt(_skillId);
+			//是否是自己取消(0否，1是)
+			writeByte(_selfCancel);
 			return true;
 		}
 		
@@ -39,6 +44,8 @@ package com.rpgGame.netData.fight.message{
 			_playerId = readLong();
 			//技能ID
 			_skillId = readInt();
+			//是否是自己取消(0否，1是)
+			_selfCancel = readByte();
 			return true;
 		}
 		
@@ -78,6 +85,21 @@ package com.rpgGame.netData.fight.message{
 		 */
 		public function set skillId(value: int): void{
 			this._skillId = value;
+		}
+		
+		/**
+		 * get 是否是自己取消(0否，1是)
+		 * @return 
+		 */
+		public function get selfCancel(): int{
+			return _selfCancel;
+		}
+		
+		/**
+		 * set 是否是自己取消(0否，1是)
+		 */
+		public function set selfCancel(value: int): void{
+			this._selfCancel = value;
 		}
 		
 	}

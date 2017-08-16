@@ -17,12 +17,13 @@ package org.mokylin.skin.app.zhanchang.uinumber
 		{
 			super();
 			
-			this.currentState = "6";
+			this.currentState = "5";
 			this.elementsContent = [];
 			
 			states = {
 			};
-			skinNames={"0":"ui/app/zhanchang/uinumber/number2_2/0.png",
+			skinNames={"-":"ui/app/zhanchang/uinumber/number2_2/-.png",
+			"0":"ui/app/zhanchang/uinumber/number2_2/0.png",
 			"1":"ui/app/zhanchang/uinumber/number2_2/1.png",
 			"2":"ui/app/zhanchang/uinumber/number2_2/2.png",
 			"3":"ui/app/zhanchang/uinumber/number2_2/3.png",
@@ -31,9 +32,7 @@ package org.mokylin.skin.app.zhanchang.uinumber
 			"6":"ui/app/zhanchang/uinumber/number2_2/6.png",
 			"7":"ui/app/zhanchang/uinumber/number2_2/7.png",
 			"8":"ui/app/zhanchang/uinumber/number2_2/8.png",
-			"9":"ui/app/zhanchang/uinumber/number2_2/9.png",
-			"di":"ui/app/zhanchang/uinumber/number2_2/di.png",
-			"ming":"ui/app/zhanchang/uinumber/number2_2/ming.png"};
+			"9":"ui/app/zhanchang/uinumber/number2_2/9.png"};
 		}
 
 

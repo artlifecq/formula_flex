@@ -43,6 +43,10 @@ package org.mokylin.skin.app.banghui
 
 		public var icon2:feathers.controls.UIAsset;
 
+		public var labGold:feathers.controls.Label;
+
+		public var labToken:feathers.controls.Label;
+
 		public var lbBanggong:feathers.controls.Label;
 
 		public var lbHuoyue:feathers.controls.Label;
@@ -72,7 +76,7 @@ package org.mokylin.skin.app.banghui
 			this.currentState = "normal";
 			this.height = 384;
 			this.width = 552;
-			this.elementsContent = [bg_i(),__TanKuang_JuanXian_UIAsset1_i(),__TanKuang_JuanXian_UIAsset2_i(),btnClose_i(),__TanKuang_JuanXian_Group1_i(),__TanKuang_JuanXian_Group2_i(),list_i(),grpFlip_i(),icon1_i(),skinSelect1_i(),btnJuan1_i(),__TanKuang_JuanXian_Label1_i(),lbNum1_i(),icon2_i(),skinSelect2_i(),btnJuan2_i(),__TanKuang_JuanXian_Label2_i(),lbNum2_i(),__TanKuang_JuanXian_Label3_i(),lbHuoyue_i(),__TanKuang_JuanXian_Label4_i(),lbBanggong_i(),lbLast_i(),__TanKuang_JuanXian_UIAsset10_i(),__TanKuang_JuanXian_Label5_i(),__TanKuang_JuanXian_Label6_i(),__TanKuang_JuanXian_UIAsset11_i()];
+			this.elementsContent = [bg_i(),__TanKuang_JuanXian_UIAsset1_i(),__TanKuang_JuanXian_UIAsset2_i(),btnClose_i(),__TanKuang_JuanXian_Group1_i(),__TanKuang_JuanXian_Group2_i(),list_i(),grpFlip_i(),icon1_i(),skinSelect1_i(),btnJuan1_i(),__TanKuang_JuanXian_Label1_i(),lbNum1_i(),icon2_i(),skinSelect2_i(),btnJuan2_i(),__TanKuang_JuanXian_Label2_i(),lbNum2_i(),__TanKuang_JuanXian_Label3_i(),lbHuoyue_i(),__TanKuang_JuanXian_Label4_i(),lbBanggong_i(),lbLast_i(),__TanKuang_JuanXian_UIAsset10_i(),labToken_i(),labGold_i(),__TanKuang_JuanXian_UIAsset11_i()];
 			
 			states = {
 			};
@@ -142,28 +146,6 @@ package org.mokylin.skin.app.banghui
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 391;
 			temp.y = 347;
-			return temp;
-		}
-
-		private function __TanKuang_JuanXian_Label5_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "1令牌=100帮派活跃+100帮贡";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 293;
-			temp.y = 272;
-			return temp;
-		}
-
-		private function __TanKuang_JuanXian_Label6_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.text = "1元宝=1帮派活跃+10帮贡";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 293;
-			temp.y = 292;
 			return temp;
 		}
 
@@ -382,6 +364,32 @@ package org.mokylin.skin.app.banghui
 			temp.styleName = "ui/common/grid/normal/48.png";
 			temp.x = 288;
 			temp.y = 156;
+			return temp;
+		}
+
+		private function labGold_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			labGold = temp;
+			temp.name = "labGold";
+			temp.text = "1元宝=1帮派活跃+10帮贡";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 293;
+			temp.y = 292;
+			return temp;
+		}
+
+		private function labToken_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			labToken = temp;
+			temp.name = "labToken";
+			temp.text = "1令牌=100帮派活跃+100帮贡";
+			temp.color = 0xCFC6AE;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 293;
+			temp.y = 272;
 			return temp;
 		}
 

@@ -7,6 +7,8 @@ package com.rpgGame.appModule.battle.jjzb
 	
 	import away3d.events.Event;
 	
+	import feathers.controls.UINumber;
+	
 	import org.mokylin.skin.app.zhanchang.jingjichang.PaiMingItem;
 	
 	public class JJBattleRewardCellExt extends SkinUI
@@ -30,35 +32,52 @@ package com.rpgGame.appModule.battle.jjzb
 		{
 			var obj:Object=data;
 			var minW:int=0;
+			_skin.numLeve2.visible=false;
+			_skin.numLevel.visible=false;
+			var uiNum:UINumber;
 			if (obj) 
 			{
 				var rankArr:Array=obj[0].rank;
 				var rewards:Array=obj[0].reward;
 				var rankStr:String="";
-				minW=22;
+				minW=28;
+				if (rankArr[0]==1||rankArr[0]==2) 
+				{
+					uiNum=_skin.numLevel;
+				}
+				else
+				{
+					uiNum=_skin.numLeve2;
+				}
 				if (rankArr[0]==rankArr[1]) 
 				{
 					rankStr=rankArr[0]+"";
+				
 				}
 				else
 				{
 					if (rankArr[1]==int.MAX_VALUE) 
 					{
-						rankStr=rankArr[0]+"x";
+						rankStr=rankArr[0]+"";
 						_skin.uiL2.styleName="ui/app/zhanchang/jingjichang/yiwai.png";
-						_skin.uiL2.width=34;
-						minW=34;
+						_skin.uiL2.width=41;
+						_skin.uiL2.height=24;
+						minW=41;
+						
 					}
 					else
 					{
 						rankStr=rankArr[0]+"-"+rankArr[1];
 						_skin.uiL2.styleName="ui/app/zhanchang/jingjichang/ming.png";
-						
+						_skin.uiL2.width=28;
+						_skin.uiL2.height=28;
+						minW=28;
 					}
 				}
-				this._skin.numLevel.label=rankStr;
-				this._skin.uiL2.x=_skin.numLevel.x+rankStr.length*10;
-				this._skin.gRank.x=_skin.imgHat.x+(_skin.imgHat.width-(rankStr.length*10+minW+22))/2;
+				uiNum.label=rankStr;
+				uiNum.visible=true;
+				this._skin.uiL2.x=_skin.numLevel.x+rankStr.length*(uiNum==_skin.numLevel?19:14);
+				this._skin.gRank.x=_skin.imgHat.x+(_skin.imgHat.width-(rankStr.length*(uiNum==_skin.numLevel?19:14)+minW+22))/2;
 				var minRank:int=Math.min(4,rankArr[0]);
 				this._skin.imgHat.styleName="ui/app/zhanchang/jingjichang/pai"+minRank+".png";
 				var items:Vector.<ClientItemInfo>=new Vector.<ClientItemInfo>();

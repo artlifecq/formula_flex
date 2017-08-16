@@ -309,6 +309,10 @@ package com.rpgGame.app.cmdlistener.scene
 		private function onResChangePositionMessage(msg:ResChangePositionMessage):void
 		{
 			var role : SceneRole = SceneManager.getSceneObjByID(msg.personId.ToGID()) as SceneRole;
+			if (!role) 
+			{
+				return;
+			}
 			var posX : uint = msg.position.x;
 			var posY : uint = msg.position.y;
 			var stopWalkRef : StopWalkMoveStateReference = MainRoleManager.actor.stateMachine.getReference(StopWalkMoveStateReference) as StopWalkMoveStateReference;
@@ -567,7 +571,7 @@ package com.rpgGame.app.cmdlistener.scene
 				trace("居然同步了一个不存在的角色啊!!");
 				return;
 			}
-			if (SceneCharType.GIRL_PET==role.type&&role.ownerIsMainChar) 
+			if (role && role.usable &&SceneCharType.GIRL_PET==role.type&&role.ownerIsMainChar) 
 			{
 				return;
 			}
