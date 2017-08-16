@@ -49,8 +49,8 @@ package org.mokylin.skin.app.hubao
 			super();
 			
 			this.currentState = "normal";
-			this.height = 353;
-			this.width = 654;
+			this.height = 344;
+			this.width = 714;
 			this.elementsContent = [__HuBaoChengGong_Skin_UIAsset1_i(),__HuBaoChengGong_Skin_UIAsset2_i(),bg_shuangbei_i(),icon1_i(),icon2_i(),icon3_i(),lbCaiLiao_i(),lbjingyan_i(),lbjiangli_i(),lbTiShi_i(),lbTime_i(),btnCancel_i(),btnOk_i()];
 			
 			states = {
@@ -75,8 +75,8 @@ package org.mokylin.skin.app.hubao
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/hubao/hubaochenggong.png";
-			temp.x = 159;
-			temp.y = 0;
+			temp.x = 234;
+			temp.y = -10;
 			return temp;
 		}
 
@@ -86,8 +86,8 @@ package org.mokylin.skin.app.hubao
 			bg_shuangbei = temp;
 			temp.name = "bg_shuangbei";
 			temp.styleName = "ui/app/hubao/shuangbei.png";
-			temp.x = 193;
-			temp.y = 125;
+			temp.x = 251;
+			temp.y = 116;
 			return temp;
 		}
 
@@ -96,13 +96,13 @@ package org.mokylin.skin.app.hubao
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnCancel = temp;
 			temp.name = "btnCancel";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "取消";
+			temp.fontSize = 16;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
-			temp.color = 0xCFC6AE;
-			temp.width = 95;
-			temp.x = 192;
-			temp.y = 298;
+			temp.color = 0xEAEABC;
+			temp.x = 260;
+			temp.y = 290;
 			return temp;
 		}
 
@@ -111,13 +111,13 @@ package org.mokylin.skin.app.hubao
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnOk = temp;
 			temp.name = "btnOk";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "确定";
+			temp.fontSize = 16;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.color = 0xCFC6AE;
-			temp.width = 89;
-			temp.x = 330;
-			temp.y = 300;
+			temp.color = 0xEAEABC;
+			temp.x = 390;
+			temp.y = 290;
 			return temp;
 		}
 
@@ -126,9 +126,9 @@ package org.mokylin.skin.app.hubao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icon1 = temp;
 			temp.name = "icon1";
-			temp.styleName = "ui/common/iconkuang_64.jpg";
-			temp.x = 169;
-			temp.y = 169;
+			temp.styleName = "ui/common/grid/normal/64.png";
+			temp.x = 211;
+			temp.y = 156;
 			return temp;
 		}
 
@@ -137,9 +137,9 @@ package org.mokylin.skin.app.hubao
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			icon2 = temp;
 			temp.name = "icon2";
-			temp.styleName = "ui/common/iconkuang_64.jpg";
-			temp.x = 292;
-			temp.y = 169;
+			temp.styleName = "ui/common/grid/normal/64.png";
+			temp.x = 334;
+			temp.y = 156;
 			return temp;
 		}
 
@@ -149,10 +149,10 @@ package org.mokylin.skin.app.hubao
 			icon3 = temp;
 			temp.name = "icon3";
 			temp.height = 70;
-			temp.styleName = "ui/common/iconkuang_64.jpg";
+			temp.styleName = "ui/common/grid/normal/64.png";
 			temp.width = 70;
-			temp.x = 415;
-			temp.y = 169;
+			temp.x = 457;
+			temp.y = 156;
 			return temp;
 		}
 
@@ -161,14 +161,13 @@ package org.mokylin.skin.app.hubao
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbCaiLiao = temp;
 			temp.name = "lbCaiLiao";
-			temp.htmlText = "护宝旗<font color='#5DBD37'>x2</font>";
-			temp.text = "标签";
+			temp.text = "护宝旗x2";
 			temp.textAlign = "left";
-			temp.color = 0x9D4AA8;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xEE0699;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 103;
-			temp.x = 169;
-			temp.y = 242;
+			temp.x = 211;
+			temp.y = 229;
 			return temp;
 		}
 
@@ -177,13 +176,13 @@ package org.mokylin.skin.app.hubao
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbTiShi = temp;
 			temp.name = "lbTiShi";
-			temp.htmlText = "您还剩<font color='#5DBD37'>2</font>次护送机会，是否继续？";
-			temp.text = "你还有";
-			temp.color = 0xCFC6AE;
+			temp.text = "您还剩2次护送机会，是否继续？";
+			temp.textAlign = "center";
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 220;
-			temp.x = 206;
-			temp.y = 273;
+			temp.width = 293;
+			temp.x = 224;
+			temp.y = 260;
 			return temp;
 		}
 
@@ -193,11 +192,11 @@ package org.mokylin.skin.app.hubao
 			lbTime = temp;
 			temp.name = "lbTime";
 			temp.text = "7秒后自动关闭";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 109;
-			temp.x = 425;
-			temp.y = 300;
+			temp.x = 486;
+			temp.y = 301;
 			return temp;
 		}
 
@@ -206,14 +205,13 @@ package org.mokylin.skin.app.hubao
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbjiangli = temp;
 			temp.name = "lbjiangli";
-			temp.htmlText = "护宝旗<font color='#5DBD37'>x2</font>";
-			temp.text = "标签";
+			temp.text = "护宝旗x2";
 			temp.textAlign = "left";
-			temp.color = 0x9D4AA8;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xEE0699;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 103;
-			temp.x = 415;
-			temp.y = 242;
+			temp.x = 457;
+			temp.y = 229;
 			return temp;
 		}
 
@@ -222,14 +220,13 @@ package org.mokylin.skin.app.hubao
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbjingyan = temp;
 			temp.name = "lbjingyan";
-			temp.htmlText = "护宝旗<font color='#5DBD37'>x2</font>";
-			temp.text = "标签";
+			temp.text = "护宝旗x2";
 			temp.textAlign = "left";
-			temp.color = 0x9D4AA8;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xEE0699;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 103;
-			temp.x = 292;
-			temp.y = 242;
+			temp.x = 334;
+			temp.y = 229;
 			return temp;
 		}
 

@@ -26,7 +26,7 @@ package com.rpgGame.app.ui.tips
 		/** 文本 **/
 		private var _txtTipTxt : Label;
 		/** 米黄文字 1 (默认) **/
-		private var _defaultColor : uint = StaticValue.COLOR_CODE_1;
+		private var _defaultColor : uint = StaticValue.BEIGE_TEXT;
 
 		public function TxtTip()
 		{

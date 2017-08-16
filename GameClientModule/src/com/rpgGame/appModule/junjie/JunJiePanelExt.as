@@ -328,7 +328,7 @@ package com.rpgGame.appModule.junjie
 					_wanchengnum++;			
 			}
 			_skin.lbTiaojian.text="("+_wanchengnum+"/"+_maxShowNum+")";
-			_skin.lb_wanchengdu.htmlText=HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"进阶目标完成度")+HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,_wanchengnum+"/"+_maxShowNum);
+			_skin.lb_wanchengdu.htmlText=HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"进阶目标完成度")+HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,_wanchengnum+"/"+_maxShowNum);
 		}
 		
 		//刷新选项列表

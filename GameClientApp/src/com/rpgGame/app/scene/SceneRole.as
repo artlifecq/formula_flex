@@ -1,7 +1,6 @@
 package com.rpgGame.app.scene
 {
 	import com.game.engine3D.core.poolObject.InstancePool;
-	import com.game.engine3D.vo.BaseObj3D;
 	import com.game.engine3D.vo.BaseRole;
 	import com.rpgGame.app.graphics.BaseHeadFace;
 	import com.rpgGame.app.graphics.BubbleDialogFace;
@@ -520,6 +519,10 @@ package com.rpgGame.app.scene
 			}
 			roleData.avatarInfo.effectResID=effectResID;
 			AvatarManager.updateEffect(this);
+		}
+		public function get isPlayer():Boolean
+		{
+			return SceneCharType.PLAYER==type;
 		}
 	}
 }

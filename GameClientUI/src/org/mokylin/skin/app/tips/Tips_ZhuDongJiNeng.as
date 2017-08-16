@@ -90,7 +90,7 @@ package org.mokylin.skin.app.tips
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "技能类型：";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 102;
 			temp.y = 35;
@@ -101,7 +101,7 @@ package org.mokylin.skin.app.tips
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "消耗：";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 102;
 			temp.y = 54;
@@ -112,7 +112,7 @@ package org.mokylin.skin.app.tips
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "冷却时间：";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 102;
 			temp.y = 73;

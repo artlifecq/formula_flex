@@ -1,7 +1,6 @@
 package com.rpgGame.appModule
 {
-	import com.rpgGame.core.app.AppConstant;
-	import com.rpgGame.core.app.AppManager;
+	import com.rpgGame.app.manager.FunctionOpenManager;
 
 	public class LinkUtil
 	{
@@ -11,16 +10,7 @@ package com.rpgGame.appModule
 		/** 点击执行*/
 		public static function LinkDo( key :String ):void
 		{
-			if ( key == "" || key == null )
-				return;
-			if (key=="ShowMall") 
-			{
-				AppManager.showApp(AppConstant.MALL_PANEL);
-			}
-			else if (key=="ShowBoss") 
-			{
-				
-			}
+			FunctionOpenManager.openAppPaneById(key);
 		}
 	}
 }

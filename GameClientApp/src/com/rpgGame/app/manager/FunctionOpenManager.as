@@ -79,11 +79,21 @@
 					case EmFunctionID.EM_BANGHUI_INFO:
 					case EmFunctionID.EM_BANGHUI_CHENGYUAN:
 					case EmFunctionID.EM_BANGHUI_UPLEVEL:
-					case EmFunctionID.EM_BANGHUI_SPELL:
 						if(GuildManager.instance().haveGuild)
-							bool = true;
-						else
-							bool = GuildManager.instance().havePersonSkill;
+						{
+							return true;
+						}
+						else 
+						{
+							return false;
+						}
+						break;
+					case EmFunctionID.EM_BANGHUI_SPELL:
+						if(GuildManager.instance().haveGuild||GuildManager.instance().havePersonSkill)
+						{
+							return true;
+						}
+						return false;
 						break;
 				}
 			}

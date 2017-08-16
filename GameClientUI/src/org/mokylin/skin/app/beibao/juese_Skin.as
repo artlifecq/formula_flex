@@ -279,7 +279,7 @@ package org.mokylin.skin.app.beibao
 		private function __juese_Skin_ArrayCollection1_i():feathers.data.ListCollection
 		{
 			var temp:feathers.data.ListCollection = new feathers.data.ListCollection();
-			temp.data = ['全部','装备','药品','材料','其他'];
+			temp.data = ['全 部','装 备','药 品','材 料','其 他'];
 			return temp;
 		}
 

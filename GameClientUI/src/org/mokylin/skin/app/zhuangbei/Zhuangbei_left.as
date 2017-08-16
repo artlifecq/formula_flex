@@ -117,7 +117,7 @@ package org.mokylin.skin.app.zhuangbei
 			lb_yinzi = temp;
 			temp.name = "lb_yinzi";
 			temp.htmlText = "消耗绑银：<font color='#CFC6AE'>9999</font>";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 110;
 			temp.x = 8;
@@ -172,7 +172,7 @@ package org.mokylin.skin.app.zhuangbei
 			temp.leading = 0;
 			temp.letterSpacing = 0;
 			temp.text = "（绑银不足将消耗非绑定银两）";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 135;
 			temp.y = 418;

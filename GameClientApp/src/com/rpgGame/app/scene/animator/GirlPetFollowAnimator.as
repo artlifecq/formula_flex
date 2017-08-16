@@ -9,6 +9,8 @@ package com.rpgGame.app.scene.animator
 	import com.rpgGame.app.state.ai.AIStateMachine;
 	import com.rpgGame.coreData.role.GirlPetData;
 	import com.rpgGame.coreData.type.AIStateType;
+	
+	import flash.utils.getTimer;
 
 	/**
 	 *主玩家美人管理 
@@ -18,9 +20,10 @@ package com.rpgGame.app.scene.animator
 	public class GirlPetFollowAnimator implements IRenderAnimator
 	{
 		/**最小传送距离，超过此距离传送到主角身边**/
-		public static const MIN_TRANS_DIS:int=250000;
-		/**传送到玩家附近**/
-		public static const MIN_NEAR:int=180*180;
+		public static const MIN_TRANS_DIS:int=700*700;
+		/**大于这个值，就要寻路到玩家身边**/
+		public static const MIN_NEAR:int=300*300;
+		public static const MIN_NEAR_2:int=300;
 		private var _scenePet:SceneRole;
 		private var _petOwner:SceneRole;
 		private var _aiMachine:AIStateMachine;
@@ -38,12 +41,12 @@ package com.rpgGame.app.scene.animator
 				_petOwner=SceneManager.getSceneObjByID(GirlPetData(_scenePet.data).ownerId) as SceneRole;
 			}
 			_aiMachine=new AIStateMachine(this._scenePet);
-			_preTime = SystemTimeManager.curtTm;
+			_preTime = 0;
 		}
 		
 		public function update(gapTm:uint):void
 		{
-			var curTime:Number = SystemTimeManager.curtTm;
+			var curTime:Number =getTimer();
 			if ((curTime - _preTime) < 200)
 			{
 				return;
@@ -53,6 +56,8 @@ package com.rpgGame.app.scene.animator
 			{
 				var dis:int=MathUtil.getDistanceNoSqrt(_scenePet.pos.x,_scenePet.pos.y,_petOwner.pos.x,_petOwner.pos.y);
 				_aiMachine.transition(AIStateType.AI_GIRL_FOLLOW,null,dis>=MIN_TRANS_DIS);
+				_aiMachine.transition(AIStateType.AI_GIRL_ATTACK);
+				_aiMachine.transition(AIStateType.AI_GIRL_SPEAK);
 				_aiMachine.transition(AIStateType.AI_NONE);//AI_GIRL_ATTACK);
 			}
 		}

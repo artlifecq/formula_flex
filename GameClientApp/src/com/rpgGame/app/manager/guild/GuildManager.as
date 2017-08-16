@@ -994,6 +994,11 @@ package com.rpgGame.app.manager.guild
 				info.isLeader=result.isLeader;
 				info.isProxyChief=result.isProxyChief;
 			}
+			//主玩家
+			if (result.playerId.ToGID()==MainRoleManager.actorID) 
+			{
+				MainRoleManager.actorInfo.guildIsLeader=result.isLeader;
+			}
 			EventManager.dispatchEvent(GuildEvent.GUILD_DATA_INIT);
 		}
 		

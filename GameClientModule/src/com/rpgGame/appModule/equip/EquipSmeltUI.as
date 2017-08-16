@@ -434,9 +434,9 @@ package com.rpgGame.appModule.equip
 				_skin.lb_item2.text=useItemInfo.name;
 				_skin.lb_num.text=useItemInfo.count+"/"+washCfg.q_item_num;
 				if(useItemInfo.count<washCfg.q_item_num){
-					_skin.lb_num.color=StaticValue.A_UI_RED_TEXT;
+					_skin.lb_num.color=StaticValue.RED_TEXT;
 				}else{
-					_skin.lb_num.color=StaticValue.A_UI_GREEN_TEXT;
+					_skin.lb_num.color=StaticValue.GREEN_TEXT;
 				}
 				
 				_leftSkin.lb_yinzi.text=getTitleText(LanguageConfig.getText(LangUI.UI_TEXT27),needMon,userMon);
@@ -467,9 +467,9 @@ package com.rpgGame.appModule.equip
 			}
 			var des:String="";
 			if(value<=value1){
-				des=noSlip?HtmlTextUtil.getTextColor(StaticValue.UI_GREEN1,value):HtmlTextUtil.getTextColor(StaticValue.UI_GREEN1,value+"/"+value1);//绿色
+				des=noSlip?HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,value):HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,value+"/"+value1);//绿色
 			}else{
-				des=noSlip?HtmlTextUtil.getTextColor(StaticValue.UI_RED1,value):HtmlTextUtil.getTextColor(StaticValue.UI_RED1,value+"/"+value1);//红色
+				des=noSlip?HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,value):HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,value+"/"+value1);//红色
 			}
 			return title+":"+des;
 		}

@@ -317,7 +317,7 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 			lbJiangli = temp;
 			temp.name = "lbJiangli";
 			temp.text = "奖励一览";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
 			temp.x = 323;

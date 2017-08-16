@@ -79,7 +79,7 @@ package org.mokylin.skin.app.banghui
 			lbOnLine = temp;
 			temp.name = "lbOnLine";
 			temp.text = "在线";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 827;
 			temp.y = 8;
@@ -126,7 +126,7 @@ package org.mokylin.skin.app.banghui
 			temp.name = "lbZhanli";
 			temp.text = "9999999999";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 133;
 			temp.x = 278;
@@ -141,7 +141,7 @@ package org.mokylin.skin.app.banghui
 			temp.name = "lbZhouHuoYue";
 			temp.text = "999/999";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 75;
 			temp.x = 558;
@@ -156,7 +156,7 @@ package org.mokylin.skin.app.banghui
 			temp.name = "lbZongHuoYue";
 			temp.text = "999999999";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 88;
 			temp.x = 677;

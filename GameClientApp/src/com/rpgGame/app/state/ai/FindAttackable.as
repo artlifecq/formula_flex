@@ -66,7 +66,7 @@ package com.rpgGame.app.state.ai
 		private function findAttackableTarget() : SceneRole
 		{
 			var role:SceneRole;
-			if(role==null&&TaskAutoManager.getInstance().isTasking)//任务中先搜寻任务怪
+			if(role==null&&TaskAutoManager.getInstance().isTaskRunning)//任务中先搜寻任务怪
 			{
 				role=findNearestTaskMonster();
 			}
@@ -120,7 +120,7 @@ package com.rpgGame.app.state.ai
 				var modeState : int = FightManager.getFightRoleState(role);
 				if (role &&monsterData&& role.usable && monsterData.monsterData.q_monster_type>=1&&monsterData.monsterData.q_monster_type<=3&& !role.stateMachine.isDeadState&&(modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_ENEMY ||modeState == FightManager.FIGHT_ROLE_STATE_CAN_FIGHT_FRIEND))//if (role && role.usable && role.isInViewDistance && !role.stateMachine.isDeadState)
 				{
-					if(TaskMissionManager.isTaskMonster(monsterData.modelID,TaskAutoManager.getInstance().otherType))
+					if(TaskMissionManager.isTaskMonster(monsterData.modelID,TaskAutoManager.getInstance().taskType))
 					{
 						var dist:int = Point.distance(new Point(MainRoleManager.actor.x,MainRoleManager.actor.z),new Point(role.x,role.z));
 						var max:int=TrusteeshipManager.getInstance().findDist;

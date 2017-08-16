@@ -13,6 +13,7 @@ package com.rpgGame.coreData.info
 	import flash.utils.ByteArray;
 	import flash.utils.Endian;
 	
+	import away3d.enum.LoadPriorityType;
 	import away3d.events.Event;
 	import away3d.loaders.multi.MultiLoadData;
 	import away3d.loaders.multi.MultiUrlLoadManager;
@@ -132,10 +133,15 @@ package com.rpgGame.coreData.info
 			
 			if(!isLoading)
 			{
-				var ld : MultiLoadData = new MultiLoadData(mapDataUrl, onMapConfigLoaded, null, null, "", "", uint.MAX_VALUE, MultiLoadData.URLLOADER_BINARY);
+				var ld : MultiLoadData = new MultiLoadData(mapDataUrl, onMapConfigLoaded, null,onMapError, "", "", LoadPriorityType.LEVEL_CUSTOM_4, MultiLoadData.URLLOADER_BINARY);
 				ld.userData = {mapID:mapID};
 				MultiUrlLoadManager.load(ld);
 			}
+		}
+		
+		private static function onMapError(ld : MultiLoadData, e : flash.events.Event):void
+		{
+			trace("加载异常了************************************");
 		}
 		
 		/** 解析map.cfg文件[合成data.dat及area.json文件 ] */

@@ -64,7 +64,7 @@ package org.mokylin.skin.app.banghui
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "皇城争霸中拥有统帅技能，独挡一面，万夫莫敌的关键成员";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 146;
 			temp.y = 84;
@@ -75,7 +75,7 @@ package org.mokylin.skin.app.banghui
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "帮派奋战中的一员";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 146;
 			temp.y = 120;
@@ -220,7 +220,7 @@ package org.mokylin.skin.app.banghui
 			lbMsg = temp;
 			temp.name = "lbMsg";
 			temp.text = "你要任命玩家名称六字为统帅？";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 190;
 			temp.y = 48;

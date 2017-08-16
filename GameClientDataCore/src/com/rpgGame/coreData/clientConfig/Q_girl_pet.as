@@ -34,6 +34,10 @@ package com.rpgGame.coreData.clientConfig
 		public var q_need_first_pay:int;
 		 /**  公告内容 */
 		public var q_notice:String;
+		 /**    */
+		public var q_talktimes:int;
+		 /**    */
+		public var q_talkwords:String;
 
 	}
 }

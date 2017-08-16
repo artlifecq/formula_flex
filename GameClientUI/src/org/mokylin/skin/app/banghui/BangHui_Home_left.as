@@ -225,7 +225,7 @@ package org.mokylin.skin.app.banghui
 			temp.name = "lbName";
 			temp.height = 18;
 			temp.text = "请输入帮派名称（3-7个字）";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 188;
 			temp.x = 40;
@@ -272,7 +272,7 @@ package org.mokylin.skin.app.banghui
 			temp.name = "lbXuanYan";
 			temp.height = 114;
 			temp.text = "请输入帮派宣言（50字以内）";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 189;
 			temp.x = 40;

@@ -50,9 +50,9 @@ package org.mokylin.skin.app.roll
 			super();
 			
 			this.currentState = "normal";
-			this.height = 279;
-			this.width = 299;
-			this.elementsContent = [__Roll_Skin_UIAsset1_i(),__Roll_Skin_UIAsset2_i(),__Roll_Skin_UIAsset3_i(),__Roll_Skin_UIAsset4_i(),__Roll_Skin_UIAsset5_i(),__Roll_Skin_UIAsset6_i(),__Roll_Skin_UIAsset7_i(),lbName_i(),Icon_i(),__Roll_Skin_UIAsset8_i(),lbZhuangbeiName_i(),btnRandom_i(),btnClose_i(),__Roll_Skin_UIAsset9_i(),Pro_bar_i(),listItem_i(),lbMost_i(),lbSelf_i()];
+			this.height = 283;
+			this.width = 309;
+			this.elementsContent = [__Roll_Skin_UIAsset1_i(),__Roll_Skin_UIAsset2_i(),__Roll_Skin_UIAsset3_i(),__Roll_Skin_UIAsset4_i(),__Roll_Skin_UIAsset5_i(),lbName_i(),Icon_i(),__Roll_Skin_UIAsset6_i(),lbZhuangbeiName_i(),btnRandom_i(),btnClose_i(),__Roll_Skin_UIAsset7_i(),Pro_bar_i(),listItem_i(),lbMost_i(),lbSelf_i()];
 			
 			states = {
 			};
@@ -68,9 +68,9 @@ package org.mokylin.skin.app.roll
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			Icon = temp;
 			temp.name = "Icon";
-			temp.styleName = "ui/common/grid/normal/42.png";
-			temp.x = 18;
-			temp.y = 14;
+			temp.styleName = "ui/common/grid/normal/64.png";
+			temp.x = 13;
+			temp.y = 18;
 			return temp;
 		}
 
@@ -81,98 +81,75 @@ package org.mokylin.skin.app.roll
 			temp.name = "Pro_bar";
 			temp.styleClass = org.mokylin.skin.app.roll.Roll_Progress;
 			temp.value = 100;
-			temp.x = 24;
-			temp.y = 73;
+			temp.x = 95;
+			temp.y = 72;
 			return temp;
 		}
 
 		private function __Roll_Skin_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 279;
-			temp.styleName = "ui/common/background/sanji_kuang.png";
-			temp.width = 299;
-			temp.x = 0;
-			temp.y = 0;
+			temp.height = 185;
+			temp.styleName = "ui/app/roll/toumingdi.png";
+			temp.x = 4;
+			temp.y = 98;
 			return temp;
 		}
 
 		private function __Roll_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/roll/jianbiandi.png";
-			temp.width = 285;
-			temp.x = 7;
-			temp.y = 93;
+			temp.styleName = "ui/app/roll/bg.png";
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 
 		private function __Roll_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/fenyexian.png";
-			temp.width = 288;
-			temp.x = 5;
-			temp.y = 88;
+			temp.styleName = "ui/app/roll/fenyexian.png";
+			temp.x = 18;
+			temp.y = 157;
 			return temp;
 		}
 
 		private function __Roll_Skin_UIAsset4_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/fenyexian.png";
-			temp.width = 288;
-			temp.x = 5;
-			temp.y = 139;
+			temp.styleName = "ui/app/roll/fenyexian.png";
+			temp.x = 18;
+			temp.y = 251;
 			return temp;
 		}
 
 		private function __Roll_Skin_UIAsset5_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/fenyexian.png";
-			temp.width = 288;
-			temp.x = 5;
-			temp.y = 238;
+			temp.styleName = "ui/app/roll/wphdz.png";
+			temp.x = 21;
+			temp.y = 258;
 			return temp;
 		}
 
 		private function __Roll_Skin_UIAsset6_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/roll/jbd.png";
-			temp.x = 2;
-			temp.y = 243;
+			temp.height = 44;
+			temp.styleName = "ui/app/roll/mingzidi.png";
+			temp.width = 164;
+			temp.x = 89;
+			temp.y = 19;
 			return temp;
 		}
 
 		private function __Roll_Skin_UIAsset7_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/app/roll/wphdz.png";
-			temp.x = 67;
-			temp.y = 249;
-			return temp;
-		}
-
-		private function __Roll_Skin_UIAsset8_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 44;
-			temp.styleName = "ui/app/roll/mingzidi.png";
-			temp.width = 167;
-			temp.x = 73;
-			temp.y = 18;
-			return temp;
-		}
-
-		private function __Roll_Skin_UIAsset9_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/roll/jdt_di.png";
-			temp.width = 265;
-			temp.x = 17;
-			temp.y = 70;
+			temp.width = 200;
+			temp.x = 88;
+			temp.y = 69;
 			return temp;
 		}
 
@@ -182,8 +159,8 @@ package org.mokylin.skin.app.roll
 			btnClose = temp;
 			temp.name = "btnClose";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_close2;
-			temp.x = 281;
-			temp.y = 5;
+			temp.x = 284;
+			temp.y = 11;
 			return temp;
 		}
 
@@ -193,8 +170,8 @@ package org.mokylin.skin.app.roll
 			btnRandom = temp;
 			temp.name = "btnRandom";
 			temp.styleClass = org.mokylin.skin.app.roll.button.ButtonRandom;
-			temp.x = 248;
-			temp.y = 23;
+			temp.x = 261;
+			temp.y = 29;
 			return temp;
 		}
 
@@ -205,11 +182,11 @@ package org.mokylin.skin.app.roll
 			temp.name = "lbMost";
 			temp.fontSize = 16;
 			temp.text = "最高点数：98点";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 141;
-			temp.x = 19;
-			temp.y = 95;
+			temp.x = 20;
+			temp.y = 109;
 			return temp;
 		}
 
@@ -222,8 +199,8 @@ package org.mokylin.skin.app.roll
 			temp.color = 0xE8C958;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 120;
-			temp.x = 151;
-			temp.y = 248;
+			temp.x = 105;
+			temp.y = 257;
 			return temp;
 		}
 
@@ -237,8 +214,8 @@ package org.mokylin.skin.app.roll
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 141;
-			temp.x = 19;
-			temp.y = 119;
+			temp.x = 20;
+			temp.y = 133;
 			return temp;
 		}
 
@@ -250,11 +227,12 @@ package org.mokylin.skin.app.roll
 			temp.bold = false;
 			temp.fontSize = 16;
 			temp.text = "80级武神套装";
-			temp.color = 0x2C87B0;
+			temp.textAlign = "center";
+			temp.color = 0x14A3F3;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 151;
-			temp.x = 82;
-			temp.y = 30;
+			temp.x = 97;
+			temp.y = 31;
 			return temp;
 		}
 
@@ -263,11 +241,11 @@ package org.mokylin.skin.app.roll
 			var temp:feathers.controls.List = new feathers.controls.List();
 			listItem = temp;
 			temp.name = "listItem";
-			temp.height = 98;
+			temp.height = 93;
 			temp.styleClass = org.mokylin.skin.component.list.ListSkin1;
-			temp.width = 283;
-			temp.x = 8;
-			temp.y = 143;
+			temp.width = 290;
+			temp.x = 7;
+			temp.y = 158;
 			return temp;
 		}
 

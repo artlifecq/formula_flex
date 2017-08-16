@@ -58,7 +58,7 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 			lbBangName = temp;
 			temp.name = "lbBangName";
 			temp.text = "帮派名称七个字";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 56;
 			temp.y = 3;

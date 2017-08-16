@@ -177,7 +177,7 @@ package org.mokylin.skin.app.shangcheng
 			temp.name = "lbName";
 			temp.text = "该物品价值";
 			temp.textAlign = "center";
-			temp.color = 0xD02525;
+			temp.color = 0xFF0D0D;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 101;
 			temp.x = 118;

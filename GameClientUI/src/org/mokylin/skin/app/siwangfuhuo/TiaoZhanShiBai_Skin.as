@@ -114,7 +114,7 @@ package org.mokylin.skin.app.siwangfuhuo
 			lbXiaoshi = temp;
 			temp.name = "lbXiaoshi";
 			temp.text = "10秒后消失";
-			temp.color = 0xD02525;
+			temp.color = 0xFF0D0D;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 163;
 			temp.x = 391;

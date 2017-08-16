@@ -21,8 +21,6 @@ package org.mokylin.skin.common
 
 		public var __erjiItem2_Skin_UIAsset3:feathers.controls.UIAsset;
 
-		public var iconDisplay:feathers.controls.UIAsset;
-
 		public var labelDisplay:feathers.controls.Label;
 
 
@@ -34,7 +32,7 @@ package org.mokylin.skin.common
 			super();
 			
 			this.currentState = "down";
-			this.elementsContent = [labelDisplay_i(),iconDisplay_i()];
+			this.elementsContent = [labelDisplay_i()];
 			__erjiItem2_Skin_UIAsset1_i();
 			__erjiItem2_Skin_UIAsset2_i();
 			__erjiItem2_Skin_UIAsset3_i();
@@ -104,14 +102,6 @@ package org.mokylin.skin.common
 			temp.right = -1;
 			temp.styleName = "ui/common/tips/tips_di2.png";
 			temp.top = 0;
-			return temp;
-		}
-
-		private function iconDisplay_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			iconDisplay = temp;
-			temp.name = "iconDisplay";
 			return temp;
 		}
 

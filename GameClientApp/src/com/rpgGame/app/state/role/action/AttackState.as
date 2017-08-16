@@ -8,7 +8,6 @@ package com.rpgGame.app.state.role.action
 	import com.rpgGame.app.state.role.RoleStateMachine;
 	import com.rpgGame.app.state.role.control.CheckTripleAttackStateReference;
 	import com.rpgGame.core.state.role.action.ActionState;
-	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.role.RoleData;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
@@ -44,7 +43,7 @@ package com.rpgGame.app.state.role.action
 		private var _attackFinished : Boolean;
 		private var _attackBroken : Boolean;
 		private var _canWalkRelease : Boolean;
-		
+		private var _canWalkBreak:Boolean;
 		private var _startSelfFrameTime:int;
 		private var _startFrameTime : int;
 		private var _hitFrameTime : int;
@@ -66,7 +65,7 @@ package com.rpgGame.app.state.role.action
 				_attackFinished = false;
 				_canWalkRelease = false;
 				_stateReference = null;
-
+				_canWalkBreak=false;
 				if (_ref is AttackStateReference)
 				{
 					_stateReference = _ref as AttackStateReference;
@@ -79,6 +78,7 @@ package com.rpgGame.app.state.role.action
 						_speed = ((_machine.owner as SceneRole).data as RoleData).totalStat.attackSpeed;
 					}
 					_canWalkRelease = _stateReference.spellInfo.canWalkRelease;
+					_canWalkBreak=(_stateReference.spellInfo.spellData.q_cancel==1||_stateReference.spellInfo.spellData.q_cancel==3);
 				}
 				else
 					throw new Error("攻击状态引用必须是AttackStateReference类型！");
@@ -341,7 +341,6 @@ package com.rpgGame.app.state.role.action
 //			}}catch(e:Error){}
 			_attackBroken = true;
 			_attackFinished = true;
-			_canWalkRelease = false;
 			if(_startSelfFrameTween)
 			{
 				_startSelfFrameTween.kill();
@@ -371,6 +370,7 @@ package com.rpgGame.app.state.role.action
 			_attackBroken = false;
 			_attackFinished = false;
 			_canWalkRelease = false;
+			_canWalkBreak=false;
 		}
 		
 		private function onStartFrameCmp() : void
@@ -420,18 +420,28 @@ package com.rpgGame.app.state.role.action
 				}
 				else
 				{
-					transition(RoleStateType.ACTION_PREWAR, null, false, false, [RoleStateType.CONTROL_WALK_MOVE]);
+					if (!_canWalkRelease)//不可边走边放技能
+					{
+						transition(RoleStateType.ACTION_PREWAR, null, false, false, [RoleStateType.CONTROL_WALK_MOVE]);
+					}
+					else
+					{
+						if((_machine as RoleStateMachine).isWalkMoving)
+							transition(RoleStateType.ACTION_RUN,null,false,false,[RoleStateType.CONTROL_WALK_MOVE]);
+						else
+							transition(RoleStateType.ACTION_PREWAR, null, false, false, [RoleStateType.CONTROL_WALK_MOVE]);
+//						removeSelf();
+					}
 				}
-				
 			}
 		}
 
 		private function onBreakFrameCmp() : void
 		{
-			try{if((((_machine as RoleStateMachine).owner as SceneRole).data as MonsterData).modelID==9008)
-			{
-				Lyt.a("@@@@@解除锁定：-----"+AttackStateReference(_ref).spellInfo.spellData.q_skillName);
-			}}catch(e:Error){}
+//			try{if((((_machine as RoleStateMachine).owner as SceneRole).data as MonsterData).modelID==9008)
+//			{
+//				Lyt.a("@@@@@解除锁定：-----"+AttackStateReference(_ref).spellInfo.spellData.q_skillName);
+//			}}catch(e:Error){}
 			_attackBroken = true;
 			_attackFinished = true;
 			if (_machine && !_machine.isInPool)
@@ -567,6 +577,7 @@ package com.rpgGame.app.state.role.action
 			_attackBroken = false;
 			_attackFinished = false;
 			_canWalkRelease = false;
+			_canWalkBreak=false;
 			if(_startSelfFrameTween)
 			{
 				_startSelfFrameTween.kill();
@@ -589,5 +600,12 @@ package com.rpgGame.app.state.role.action
 			}
 			super.dispose();
 		}
+
+		/**是否可以主动打断**/
+		public function get canWalkBreak():Boolean
+		{
+			return _canWalkBreak;
+		}
+
 	}
 }

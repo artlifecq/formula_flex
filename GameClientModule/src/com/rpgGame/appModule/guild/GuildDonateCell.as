@@ -1,5 +1,6 @@
 package com.rpgGame.appModule.guild
 {
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.coreData.clientConfig.Q_guild_permission;
 	import com.rpgGame.netData.guild.bean.GuildMemberInfo;
 	
@@ -51,7 +52,7 @@ package com.rpgGame.appModule.guild
 				_skin.numList2.text = rank.toString();
 			}
 			_skin.lbZhanli.text = info.battle.toString();
-			_skin.lbRolenName.text = info.name;
+			_skin.lbRolenName.text =MainRoleManager.getPlayerName( info.name);
 			_skin.lbZhanli.text = info.curActive.toString();
 		}
 		private function get info():GuildMemberInfo

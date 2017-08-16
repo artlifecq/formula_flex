@@ -4,15 +4,21 @@ package com.rpgGame.app.fight.spell
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.app.manager.SkillCDManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
+	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.state.role.RoleStateUtil;
 	import com.rpgGame.app.state.role.action.AttackStateReference;
 	import com.rpgGame.app.state.role.control.AttackHardStateReference;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.clientConfig.Q_skill_warning;
+	import com.rpgGame.coreData.role.MonsterData;
+	import com.rpgGame.coreData.type.EnumMonsterType;
 	import com.rpgGame.coreData.type.RoleStateType;
+	import com.rpgGame.coreData.type.SceneCharType;
 	
 	import flash.geom.Point;
+	
+	import away3d.log.Log;
 	
 	import gs.TweenLite;
 
@@ -28,7 +34,17 @@ package com.rpgGame.app.fight.spell
 		public function ReleaseSpellHelper()
 		{
 		}
-		
+		public static function logBossSkill(monster:SceneRole,skill:int):void
+		{
+			if (monster&&monster.type==SceneCharType.MONSTER) 
+			{
+				var type:int=(monster.data as MonsterData).monsterData.q_monster_type;
+				if (EnumMonsterType.ELITE==type||EnumMonsterType.BOSS==type) 
+				{
+					GameLog.addShow("===boss "+(monster.data as MonsterData).monsterData.q_name+" 释放技能：" +SpellDataManager.getSpellData(skill).q_skillName+" skillId:"+skill+"===");
+				}
+			}
+		}
 		public static function fightSoulSpell(spellInfo : ReleaseSpellInfo) : void
 		{
 			if(spellInfo.ribbonImg)
@@ -38,7 +54,7 @@ package com.rpgGame.app.fight.spell
 		}
 		public static function releaseSpell(spellInfo : ReleaseSpellInfo) : void
 		{
-			
+			logBossSkill(spellInfo.atkor,spellInfo.spellData.q_skillID);
 			var warningData:Q_skill_warning=SpellDataManager.getWarningData(spellInfo.spellData.q_skillID);//获取预警技能关联
 			if(warningData&&warningData.q_time>0)//有预警技能先放预警技能，没有预警技能走正常流程
 			{
@@ -140,6 +156,11 @@ package com.rpgGame.app.fight.spell
 				var hardRef : AttackHardStateReference = spellInfo.atkor.stateMachine.getReference(AttackHardStateReference) as AttackHardStateReference;
 				hardRef.setParams(spellInfo.castTime);
 				spellInfo.atkor.stateMachine.transition(RoleStateType.CONTROL_ATTACK_HARD, hardRef, true);
+				SkillCDManager.getInstance().addSkillCDTime(spellInfo.spellData);
+			}
+			//主玩家的美人
+			if (spellInfo.atkor && spellInfo.atkor.usable && spellInfo.atkor.type==SceneCharType.GIRL_PET&&spellInfo.atkor.ownerIsMainChar)
+			{
 				SkillCDManager.getInstance().addSkillCDTime(spellInfo.spellData);
 			}
 			if(spellInfo.atkor == MainRoleManager.actor)

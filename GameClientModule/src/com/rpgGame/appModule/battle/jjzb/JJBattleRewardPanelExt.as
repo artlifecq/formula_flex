@@ -23,11 +23,11 @@ package com.rpgGame.appModule.battle.jjzb
 	import feathers.data.ListCollection;
 	
 	import org.client.mainCore.manager.EventManager;
-	import org.mokylin.skin.app.zhanchang.jingjichang.JingJiChan3;
+	import org.mokylin.skin.app.zhanchang.jingjichang.JingJiChang3;
 	
 	public class JJBattleRewardPanelExt extends SkinUI
 	{
-		private var _skin:JingJiChan3;
+		private var _skin:JingJiChang3;
 		private var rewards:Array;
 		private var _gReward:RewardGroup;
 		private var _initWinStr:String;
@@ -35,7 +35,7 @@ package com.rpgGame.appModule.battle.jjzb
 		private var _initPointStr:String;
 		public function JJBattleRewardPanelExt()
 		{
-			_skin=new JingJiChan3();
+			_skin=new JingJiChang3();
 			super(_skin);
 			init();
 		}

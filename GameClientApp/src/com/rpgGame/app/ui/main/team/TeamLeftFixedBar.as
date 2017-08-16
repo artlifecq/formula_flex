@@ -104,7 +104,7 @@ package  com.rpgGame.app.ui.main.team
 			}
 			this.visible=true;
 			var teamInfo:TeamInfo=event.data as TeamInfo;
-			if (teamInfo) 
+			if (teamInfo&&teamInfo.memberinfo.length>0) 
 			{
 			
 				var len:int=teamInfo.memberinfo.length;
@@ -128,7 +128,10 @@ package  com.rpgGame.app.ui.main.team
 //				this._skin.lbNum.text=teamInfo.memberinfo.length+"/"+TeamManager.MAXMEMBER;
 				//只有自己
 			}
-			
+			else
+			{
+				this.visible=false;
+			}
 		}
 		
 		private function setCellData(cell:TeamBarListItemExt,data:TeamMemberInfo):void

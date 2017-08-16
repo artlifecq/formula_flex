@@ -860,19 +860,19 @@ package com.rpgGame.app.manager.stall
 		{
 			var stallData : StallData = getStallDataByPlayerId(id);
 			if(!stallData)
-				return StaticValue.COLOR_CODE_1;
+				return StaticValue.YELLOW_TEXT;
 			if(seeStallArray.indexOf(id)!=-1)
-				return StaticValue.COLOR_CODE_27;
+				return StaticValue.GRAY_TEXT;
 			switch(stallData.stallType)
 			{
 				case 0:
-					return StaticValue.COLOR_CODE_16;
+					return StaticValue.GREEN_TEXT;
 				case 1:
-					return StaticValue.COLOR_CODE_17;
+					return StaticValue.SKYBLUE_TEXT;
 				case 2:
-					return StaticValue.COLOR_CODE_4;
+					return StaticValue.YELLOW_TEXT;
 			}
-			return StaticValue.COLOR_CODE_1;
+			return StaticValue.YELLOW_TEXT;
 			
 		}
 

@@ -744,23 +744,23 @@ package com.rpgGame.app.manager.yunBiao
 			else
 			{
 				//破损镖车 亮红色
-				ownerNameColor = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_12, biaoData.ownerName + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_9) + "<br/>");
+				ownerNameColor = HtmlTextUtil.getTextColor(StaticValue.RED_TEXT, biaoData.ownerName + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_9) + "<br/>");
 				switch (biaoData.quality)
 				{
 					case EmQuality.QUALITY_WHITE: //白色
-						biaoNameColor = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_12, biaoData.totalStat.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_1_1));
+						biaoNameColor = HtmlTextUtil.getTextColor(StaticValue.RED_TEXT, biaoData.totalStat.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_1_1));
 						break;
 					case EmQuality.QUALITY_GREEN: //绿色
-						biaoNameColor = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_12, biaoData.totalStat.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_2_1));
+						biaoNameColor = HtmlTextUtil.getTextColor(StaticValue.RED_TEXT, biaoData.totalStat.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_2_1));
 						break;
 					case EmQuality.QUALITY_BLUE: //蓝色
-						biaoNameColor = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_12, biaoData.totalStat.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_3_1));
+						biaoNameColor = HtmlTextUtil.getTextColor(StaticValue.RED_TEXT, biaoData.totalStat.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_3_1));
 						break;
 					case EmQuality.QUALITY_PURPLE: //紫色
-						biaoNameColor = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_12, biaoData.totalStat.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_4_1));
+						biaoNameColor = HtmlTextUtil.getTextColor(StaticValue.RED_TEXT, biaoData.totalStat.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_4_1));
 						break;
 					case EmQuality.QUALITY_ORANGE: //橙色
-						biaoNameColor = HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_12, biaoData.totalStat.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_5_1));
+						biaoNameColor = HtmlTextUtil.getTextColor(StaticValue.RED_TEXT, biaoData.totalStat.level + LanguageConfig.getText(LangYunBiao.YUN_BIAO_NAME_5_1));
 						break;
 				}
 			}

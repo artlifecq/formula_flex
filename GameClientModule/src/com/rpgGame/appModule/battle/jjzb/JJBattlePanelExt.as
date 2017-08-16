@@ -69,7 +69,7 @@ package com.rpgGame.appModule.battle.jjzb
 			_skin=new JingJiChan1_Skin();
 			super(_skin);
 			
-			_normalView=new SubNormalView(_skin.gNormal,[_skin.skinRole3,_skin.skinRole2,_skin.skinRole4,_skin.skinRole1,_skin.skinRole5],_skin.btnTiaoZhan);
+			_normalView=new SubNormalView(_skin.gNormal,[_skin.skinRole3,_skin.skinRole2,_skin.skinRole4,_skin.skinRole1,_skin.skinRole5],_skin.btnTiaoZhanbg);
 			_top3View=new SubTop3View(_skin.gTop,[_skin.top3,_skin.top1,_skin.top2],_skin.btnBack);
 			_fightView=new JJBattleSceneView(_skin.skinBattke);
 			_infoSkin=_skin.skinInfo.skin as JingJi_Info;
@@ -80,7 +80,8 @@ package com.rpgGame.appModule.battle.jjzb
 			_logSkin.uiUp.visible=false;
 			_logSkin.labTitle0.visible=false;
 			_logSkin.imgBg.height=22;
-			
+			_skin.btnJiangli.touchable=false;
+			_skin.btnTiaoZhan.touchable=false;
 			_costArr=JSONUtil.decode(GlobalSheetData.getStrValue(809));
 			
 			TipTargetManager.show(_infoSkin.btnAdd1,TargetTipsMaker.makeSimpleTextTips(LanguageConfig.replaceStr("花费{0}元宝，购买1次挑战次数（优先消耗礼金）",[HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,_costArr[0]+"")])));
@@ -93,8 +94,8 @@ package com.rpgGame.appModule.battle.jjzb
 		private function regEvent():void
 		{
 			this._skin.btnBack.addEventListener(Event.TRIGGERED,onBack);
-			this._skin.btnTiaoZhan.addEventListener(Event.TRIGGERED,onFightTop3);
-			this._skin.btnJiangli.addEventListener(Event.TRIGGERED,onShowReward);
+			//this._skin.btnTiaoZhan.addEventListener(Event.TRIGGERED,onFightTop3);
+			//this._skin.btnJiangli.addEventListener(Event.TRIGGERED,onShowReward);
 			
 			_infoSkin.btnAdd1.addEventListener(Event.TRIGGERED,onBuyTimes);
 			_infoSkin.btnAdd2.addEventListener(Event.TRIGGERED,onBuyFightPwoer);
@@ -102,8 +103,8 @@ package com.rpgGame.appModule.battle.jjzb
 			
 			TipTargetManager.show(_infoSkin.btnDui,TargetTipsMaker.makeSimpleTextTips(NotifyCfgData.getNotifyTextByID(61029)));
 		}
-		
-		private function onShowReward(eve:Event):void
+	
+		private function onShowReward():void
 		{
 			// TODO Auto Generated method stub
 			if (!_rewardPanel) 
@@ -126,7 +127,22 @@ package com.rpgGame.appModule.battle.jjzb
 			{
 				showHideBattleLog();
 			}
-			
+			switch(target)
+			{
+				case _skin.uiCon:
+				{
+					onShowReward();
+					break;
+				}
+				case _skin.btnTiaoZhanbg:
+				{
+					onFightTop3();
+				}
+				default:
+				{
+					break;
+				}
+			}
 		}
 		
 		private function showHideBattleLog():void
@@ -187,7 +203,7 @@ package com.rpgGame.appModule.battle.jjzb
 			GameCheckAlertExt.show(GameCheckAlertExt.T_JJB_BUY_TIMES,LanguageConfig.replaceStr(NotifyCfgData.getNotifyTextByID(61032),[HtmlTextUtil.getTextColor(GameColorUtil.COLOR_RED,val+"")]),Mgr.jjBattleMgr.reqBuyTimesOrPower,[1]);
 		}
 		
-		private function onFightTop3(eve:Event):void
+		private function onFightTop3():void
 		{
 			// TODO Auto Generated method stub
 			_showState=1;
@@ -388,8 +404,8 @@ package com.rpgGame.appModule.battle.jjzb
 				if (!_eff) 
 				{
 					_eff=new Inter3DContainer();
-					_skin.btnJiangli.addChild(_eff);
-					_eff.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JJBREWARD),this._skin.btnJiangli.width/2,_skin.btnJiangli.height,0,null,addEft);
+					_skin.uiCon.addChild(_eff);
+					_eff.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JJBREWARD),232/2,60,0,null,addEft);
 				}
 			}
 			else

@@ -30,6 +30,7 @@ package com.rpgGame.appModule.dungeon.genuine
 		{
 			_skin = new FuBen_ZhenQi_Skin();
 			super(_skin);
+			_skin.list.addEventListener(FeathersEventType.CREATION_COMPLETE,onCreate);
 		}
 		
 		override public function hide():void
@@ -51,7 +52,7 @@ package com.rpgGame.appModule.dungeon.genuine
 			layout.gap = 4;
 			_skin.list.layout = layout;
 			var list:Array = DailyZoneCfgData.getTypeList(1);
-			_skin.list.addEventListener(FeathersEventType.CREATION_COMPLETE,onCreate);
+		
 			_skin.list.dataProvider = new ListCollection(list);
 			
 			var qglob:Q_global = GlobalSheetData.getSettingInfo(716);
@@ -73,6 +74,10 @@ package com.rpgGame.appModule.dungeon.genuine
 				item.itemModelId = itemInfos[i]["mod"];
 				FaceUtil.SetItemGrid(grid,ItemUtil.convertClientItemInfo(item), true);
 				gridList.push(grid);
+			}
+			if (!_skin.list.hasEventListener(FeathersEventType.CREATION_COMPLETE)) 
+			{
+				onCreate();
 			}
 			
 		}

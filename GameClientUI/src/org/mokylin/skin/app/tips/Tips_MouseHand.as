@@ -60,7 +60,7 @@ package org.mokylin.skin.app.tips
 			lbl_miaoshu = temp;
 			temp.name = "lbl_miaoshu";
 			temp.htmlText = "<font color='#a3a594'>当前经验：</font><font color='#eaeabc'>9999/10000000</font><font color='#00ff33'>(75%)</font>";
-			temp.color = 0xEAEABC;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 256;
 			temp.x = 10;

@@ -111,7 +111,7 @@ package com.rpgGame.appModule.guild.war
 		private function onGetInfos(msg:G2CRespKingGuidWarAvatarInfoMessage):void
 		{
 			if(msg.guildName){
-				_skin.lbBangName.htmlText=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"[占]")+msg.guildName;
+				_skin.lbBangName.htmlText=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"[占]")+msg.guildName;
 			}else{
 				_skin.lbBangName.text="";
 			}

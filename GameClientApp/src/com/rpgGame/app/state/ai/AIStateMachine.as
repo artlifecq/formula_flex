@@ -4,7 +4,9 @@ package com.rpgGame.app.state.ai
 	import com.game.engine3D.state.StateMachine;
 	import com.game.engine3D.state.StateReference;
 	import com.rpgGame.app.scene.SceneRole;
+	import com.rpgGame.app.state.ai.pet.GirlPetAttackState;
 	import com.rpgGame.app.state.ai.pet.GirlPetFollowState;
+	import com.rpgGame.app.state.ai.pet.GirlPetSpeakState;
 	import com.rpgGame.app.state.ai.pet.GirlPetTransLockState;
 	import com.rpgGame.core.state.ai.AINone;
 	import com.rpgGame.core.state.ai.AIState;
@@ -76,12 +78,12 @@ package com.rpgGame.app.state.ai
 //					state = new AIUseItem();
 //					break;
 				
-				case AIStateType.TASK_WALK:
-					state = new AItaskWalk();
-					break;
-				case AIStateType.TASK_OTHER_WALK:
-					state = new AItaskOtherWalk();
-					break;
+//				case AIStateType.TASK_WALK:
+//					state = new AItaskWalk();
+//					break;
+//				case AIStateType.TASK_OTHER_WALK:
+//					state = new AItaskOtherWalk();
+//					break;
 				case AIStateType.TASK_GATHER:
 					state = new AItaskGather();
 					break;
@@ -91,6 +93,12 @@ package com.rpgGame.app.state.ai
 				case AIStateType.AI_GIRL_FOLLOW:
 					state = new GirlPetFollowState();
 					break;
+				case AIStateType.AI_GIRL_ATTACK:
+					state=new GirlPetAttackState();
+					break; 
+				case AIStateType.AI_GIRL_SPEAK:
+					state=new GirlPetSpeakState();
+					break; 
 			}
 			if (!state)
 			{

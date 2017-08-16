@@ -12,7 +12,9 @@ package com.rpgGame.appModule.xinfa
 	import com.rpgGame.app.sender.CheatsSender;
 	import com.rpgGame.app.utils.FightValueUtil;
 	import com.rpgGame.app.view.icon.BgIcon;
+	import com.rpgGame.appModule.common.touch.TouchCtrl;
 	import com.rpgGame.appModule.jingmai.sub.TweenScaleScrollUitlExt;
+	import com.rpgGame.appModule.shop.ItemGetNoticeShowPanelExt;
 	import com.rpgGame.appModule.xinfa.sub.CheatsIcon;
 	import com.rpgGame.appModule.xinfa.sub.CheatsMap;
 	import com.rpgGame.appModule.xinfa.sub.XinFaBtnExt;
@@ -145,8 +147,19 @@ package com.rpgGame.appModule.xinfa
 			
 			var rew:RewardMarkTip=new RewardMarkTip(_skin.btn_jihuo,110);
 			rew.hasReward=true;
+			var ctrl:TouchCtrl=new TouchCtrl(_skin.lbCailiao,onClickCailiao);
 		}
 		
+		private function onClickCailiao():void
+		{
+			// TODO Auto Generated method stub
+			if (_curMap.cheatsVo.needItemHash.size()>0) 
+			{
+				var item:int=_curMap.cheatsVo.needItemHash.keys()[0];
+				ItemGetNoticeShowPanelExt.showItem(item);
+			}
+			
+		}		
 		
 		private function onCloseAttr(eve:Event):void
 		{

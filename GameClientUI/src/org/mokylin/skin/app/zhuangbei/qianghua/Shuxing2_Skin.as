@@ -62,7 +62,7 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			lb_num = temp;
 			temp.name = "lb_num";
 			temp.text = "1000";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 45;
 			temp.y = 0;

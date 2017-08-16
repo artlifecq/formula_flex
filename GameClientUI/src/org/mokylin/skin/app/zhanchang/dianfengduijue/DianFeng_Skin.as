@@ -8,6 +8,7 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.app.zhanchang.button.ButtonKaiqi;
+	import org.mokylin.skin.app.zhanchang.button.ButtonKaiqibg;
 	import org.mokylin.skin.app.zhanchang.button.ButtonShengwangbtn;
 	import org.mokylin.skin.app.zhanchang.dianfengduijue.Pro_duanwei;
 	import org.mokylin.skin.component.button.ButtonSkin_putong3;
@@ -30,6 +31,8 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 
 		public var btnShengwang:feathers.controls.Button;
 
+		public var gBtn:feathers.controls.Group;
+
 		public var grpTips:feathers.controls.Group;
 
 		public var icoSw:feathers.controls.UIAsset;
@@ -50,6 +53,8 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 
 		public var lbShengwang:feathers.controls.Label;
 
+		public var uiCon:feathers.controls.Button;
+
 
 		//==========================================================================
 		//                                定义构造函数
@@ -61,7 +66,7 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			this.currentState = "normal";
 			this.height = 601;
 			this.width = 956;
-			this.elementsContent = [__DianFeng_Skin_UIAsset2_i(),__DianFeng_Skin_UIAsset3_i(),icon_i(),iconName_i(),Pro_duanwei_i(),lbDuanwei_i(),btnChakan_i(),btnOpen_i(),__DianFeng_Skin_UIAsset4_i(),__DianFeng_Skin_UIAsset5_i(),lbCiShu_i(),lbSheng_i(),__DianFeng_Skin_UIAsset6_i(),icoSw_i(),lbShengwang_i(),__DianFeng_Skin_UIAsset7_i(),btnShengwang_i(),grpTips_i()];
+			this.elementsContent = [__DianFeng_Skin_UIAsset2_i(),__DianFeng_Skin_UIAsset3_i(),icon_i(),iconName_i(),Pro_duanwei_i(),lbDuanwei_i(),btnChakan_i(),gBtn_i(),__DianFeng_Skin_UIAsset4_i(),__DianFeng_Skin_UIAsset5_i(),lbCiShu_i(),lbSheng_i(),__DianFeng_Skin_UIAsset6_i(),icoSw_i(),lbShengwang_i(),__DianFeng_Skin_UIAsset7_i(),btnShengwang_i(),grpTips_i()];
 			
 			states = {
 			};
@@ -162,8 +167,8 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			btnOpen = temp;
 			temp.name = "btnOpen";
 			temp.styleClass = org.mokylin.skin.app.zhanchang.button.ButtonKaiqi;
-			temp.x = 363;
-			temp.y = 477;
+			temp.x = 49;
+			temp.y = 23;
 			return temp;
 		}
 
@@ -175,6 +180,17 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			temp.styleClass = org.mokylin.skin.app.zhanchang.button.ButtonShengwangbtn;
 			temp.x = 845;
 			temp.y = 523;
+			return temp;
+		}
+
+		private function gBtn_i():feathers.controls.Group
+		{
+			var temp:feathers.controls.Group = new feathers.controls.Group();
+			gBtn = temp;
+			temp.name = "gBtn";
+			temp.x = 363;
+			temp.y = 479;
+			temp.elementsContent = [uiCon_i(),btnOpen_i()];
 			return temp;
 		}
 
@@ -243,7 +259,7 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			temp.name = "lbDuanwei";
 			temp.text = "135/160";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 101;
 			temp.x = 160;
@@ -259,7 +275,7 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			temp.height = 49;
 			temp.htmlText = "战场规则：1.每日前十场可获得<font color='#00ff33'>声望奖励</font><br>          2.每日获得积分决定段位，每日24点刷新段位奖励";
 			temp.leading = 7;
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 380;
 			temp.x = 7;
@@ -273,7 +289,7 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			lbLevel = temp;
 			temp.name = "lbLevel";
 			temp.htmlText = "等级需求：<font color='#00ff33'>50级</font>";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 7;
 			temp.y = 15;
@@ -300,11 +316,22 @@ package org.mokylin.skin.app.zhanchang.dianfengduijue
 			lbShengwang = temp;
 			temp.name = "lbShengwang";
 			temp.text = "1000";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 50;
 			temp.x = 745;
 			temp.y = 557;
+			return temp;
+		}
+
+		private function uiCon_i():feathers.controls.Button
+		{
+			var temp:feathers.controls.Button = new feathers.controls.Button();
+			uiCon = temp;
+			temp.name = "uiCon";
+			temp.styleClass = org.mokylin.skin.app.zhanchang.button.ButtonKaiqibg;
+			temp.x = 0;
+			temp.y = 0;
 			return temp;
 		}
 

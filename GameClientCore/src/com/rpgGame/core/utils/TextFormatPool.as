@@ -28,42 +28,42 @@ package com.rpgGame.core.utils
 		
 		public static function getRed(size:int = 12,isBlod:Boolean = false):TextFormat
 		{
-			return getTextFormat(StaticValue.COLOR_CODE_13,size,isBlod);
+			return getTextFormat(StaticValue.RED_TEXT,size,isBlod);
 		}
 		
 		public static function getWhite(size:int = 12,isBlod:Boolean = false):TextFormat
 		{
-			return getTextFormat(StaticValue.COLOR_CODE_1,size,isBlod);
+			return getTextFormat(StaticValue.WHITE_TEXT,size,isBlod);
 		}
 		
 		public static function getGreen(size:int = 12,isBlod:Boolean = false):TextFormat
 		{
-			return getTextFormat(StaticValue.COLOR_CODE_16,size,isBlod);
+			return getTextFormat(StaticValue.GREEN_TEXT,size,isBlod);
 		}
 		
 		public static function getPurple(size:int = 12,isBlod:Boolean = false):TextFormat
 		{
-			return getTextFormat(StaticValue.COLOR_CODE_20,size,isBlod);
+			return getTextFormat(StaticValue.PURPLE_TEXT,size,isBlod);
 		}
 		
 		public static function getOrange(size:int = 12,isBlod:Boolean = false):TextFormat
 		{
-			return getTextFormat(StaticValue.COLOR_CODE_25,size,isBlod);
+			return getTextFormat(StaticValue.OEANGE_TEXT,size,isBlod);
 		}
 		
 		public static function getYellow(size:int = 12,isBlod:Boolean = false):TextFormat
 		{
-			return getTextFormat(StaticValue.COLOR_CODE_4,size,isBlod);
+			return getTextFormat(StaticValue.YELLOW_TEXT,size,isBlod);
 		}
 		
 		public static function getBlue(size:int = 12,isBlod:Boolean = false):TextFormat
 		{
-			return getTextFormat(StaticValue.COLOR_CODE_19,size,isBlod);
+			return getTextFormat(StaticValue.BLUE_TEXT,size,isBlod);
 		}
 		
 		public static function getBlack(size:int = 12,isBlod:Boolean = false):TextFormat
 		{
-			return getTextFormat(StaticValue.COLOR_CODE_24,size,isBlod);
+			return getTextFormat(StaticValue.GRAY_TEXT,size,isBlod);
 		}
 	}
 }

@@ -50,7 +50,7 @@ package com.rpgGame.app.manager.fight
 		{
 			layer.x=0;
 			layer.y=0;
-			StarlingLayerManager.headFaceLayer.addChildAt(layer,0);
+			StarlingLayerManager.sceneEffectLayer.addChildAt(layer,0);
 			layer.bind(mainPlayer);
 		}
 		/** 根路径 **/
@@ -87,7 +87,8 @@ package com.rpgGame.app.manager.fight
 		/** 战斗-目标飘字 战魂**/
 		public static const NUMBER_FIGHT_XISHOU : String = "skin_xishou/";
 		
-	
+		/** 战斗-目标飘字 战魂**/
+		public static const NUMBER_BIND_GOLD : String = "skin_lijin/"
 
 		/** 战斗-自身飘字 回蓝（深蓝色） **/
 		public static const NUMBER_PC_MPREC : String = NUMBER_BULE;
@@ -642,8 +643,8 @@ package com.rpgGame.app.manager.fight
 					//showQueueAttackFace(MainRoleManager.actor, typeRes, numberColor, count, scaleAgo, scaleLater, null, null, null, null, tweenUp);
 					showQueueAttackFaceNew(MainRoleManager.actor,null,MainRoleManager.actor.headFace, typeRes, numberColor, count,  null, null,SpellResultTweenUtil.TweenExp,exdata);
 					return;
-				case EnumHurtType.GOLD: //礼金
-					numberColor = NUMBER_GOLD1;
+				case EnumHurtType.BIND_GOLD: //礼金
+					numberColor = NUMBER_BIND_GOLD;
 					//var golddata:AttackFace=LostSkillManager.instance().hasGoldAddAtf(MainRoleManager.actorInfo.serverID,count);
 					showQueueAttackFaceNew(MainRoleManager.actor,null,MainRoleManager.actor.headFace, typeRes, numberColor, count,  null, null,SpellResultTweenUtil.TweenZhiLiao2);
 					return;
@@ -797,7 +798,7 @@ package com.rpgGame.app.manager.fight
 				}
 				else
 				{*/
-				StarlingLayerManager.headFaceLayer.addChild(attackFace);
+				StarlingLayerManager.sceneEffectLayer.addChild(attackFace);
 //				}
 				if (null != $tweenFun)
 				{

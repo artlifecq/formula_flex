@@ -168,9 +168,9 @@ package com.rpgGame.app.ui.tips
 				_itemTip.lb1.text="等级要求:";
 				_itemTip.lbDengji.text=_itemInfo.qItem.q_level.toString();
 				if(info.totalStat.level<_itemInfo.qItem.q_level){
-					_itemTip.lbDengji.color=StaticValue.A_UI_RED_TEXT;
+					_itemTip.lbDengji.color=StaticValue.RED_TEXT;
 				}else{
-					_itemTip.lbDengji.color=StaticValue.A_UI_BEIGE_TEXT;
+					_itemTip.lbDengji.color=StaticValue.BEIGE_TEXT;
 				}
 			}
 			
@@ -178,7 +178,7 @@ package com.rpgGame.app.ui.tips
 			curY=67;
 			_itemTip.lb2.text="叠加上限:";
 			_itemTip.lbXiaohao.text=_itemInfo.qItem.q_max>0?_itemInfo.qItem.q_max.toString():"1";
-			_itemTip.lbXiaohao.color=StaticValue.A_UI_BEIGE_TEXT;
+			_itemTip.lbXiaohao.color=StaticValue.BEIGE_TEXT;
 			_itemTip.lb2.visible=true;
 			_itemTip.lbXiaohao.visible=true;
 			_itemTip.lb2.y=_itemTip.lbXiaohao.y=curY;
@@ -188,7 +188,7 @@ package com.rpgGame.app.ui.tips
 			if(_itemInfo.qItem.q_cooldown!=0){
 				_itemTip.lb3.text="冷却时间:";
 				_itemTip.lbXiuwei.text=(_itemInfo.qItem.q_cooldown/1000)+"秒";
-				_itemTip.lbXiuwei.color=StaticValue.A_UI_BEIGE_TEXT;
+				_itemTip.lbXiuwei.color=StaticValue.BEIGE_TEXT;
 				_itemTip.lb3.visible=true;
 				_itemTip.lbXiuwei.visible=true;
 				_itemTip.lb3.x=96;
@@ -222,7 +222,7 @@ package com.rpgGame.app.ui.tips
 							break;
 					}
 					_itemTip.lbCishu.text=_itemInfo.itemInfo.limitValue+"/"+_itemInfo.itemInfo.limitNum;
-					_itemTip.lbCishu.color=StaticValue.A_UI_BEIGE_TEXT;
+					_itemTip.lbCishu.color=StaticValue.BEIGE_TEXT;
 					_itemTip.lb4.y=_itemTip.lbCishu.y=curY;
 					_itemTip.lb4.visible=_itemTip.lbCishu.visible=true;
 					curY+=27;
@@ -236,7 +236,7 @@ package com.rpgGame.app.ui.tips
 				curX=13;
 				createUiAsset("wupinshuoming");
 				curY+=17;
-				name=HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,_itemInfo.qItem.q_describe);
+				name=HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,_itemInfo.qItem.q_describe);
 				label=createLabel(name,"");
 				label.width=250;
 				label.leading=5;
@@ -249,11 +249,11 @@ package com.rpgGame.app.ui.tips
 				createUiAsset("shixiaoxing");
 				curY+=17;
 				if(_itemInfo.itemInfo.lostTime==0){
-					name=HtmlTextUtil.getTextColor(StaticValue.A_UI_GRAY_TEXT,"类别:");
-					value=HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"永久");
+					name=HtmlTextUtil.getTextColor(StaticValue.GRAY_TEXT,"类别:");
+					value=HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"永久");
 				}else{
-					name=HtmlTextUtil.getTextColor(StaticValue.A_UI_GRAY_TEXT,"时效:");
-					value=HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,_itemInfo.itemInfo.lostTime.toString());
+					name=HtmlTextUtil.getTextColor(StaticValue.GRAY_TEXT,"时效:");
+					value=HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,_itemInfo.itemInfo.lostTime.toString());
 				}
 				createLabel(name,value);
 				curY+=27;
@@ -276,8 +276,8 @@ package com.rpgGame.app.ui.tips
 				//时效
 				createUiAsset("shixiaoxing");
 				curY+=17;
-				name=HtmlTextUtil.getTextColor(StaticValue.A_UI_GRAY_TEXT,"类别:");
-				value=HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"永久");
+				name=HtmlTextUtil.getTextColor(StaticValue.GRAY_TEXT,"类别:");
+				value=HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"永久");
 				createLabel(name,value);
 				curY+=27;
 				_itemTip.lb3.visible=_itemTip.lbXiuwei.visible=false;
@@ -292,8 +292,8 @@ package com.rpgGame.app.ui.tips
 				createUiAsset("zhuangbeijiazhi");
 				curY+=17;
 				
-				name=HtmlTextUtil.getTextColor(StaticValue.A_UI_GRAY_TEXT,"售价:");
-				value=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"    "+_itemInfo.qItem.q_sell_price.toString());
+				name=HtmlTextUtil.getTextColor(StaticValue.GRAY_TEXT,"售价:");
+				value=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"    "+_itemInfo.qItem.q_sell_price.toString());
 				_itemTip.container.addChild(yinIcon);			
 				label=createLabel(name,value);
 				yinIcon.x=52;

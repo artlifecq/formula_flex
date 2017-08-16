@@ -58,8 +58,8 @@ package org.mokylin.skin.app.zhanchang.wangchengzhengba
 			temp.fontSize = 12;
 			temp.text = "玩家名六个字【69级】";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 139;
 			temp.x = 2;
 			temp.y = 34;

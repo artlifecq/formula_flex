@@ -92,6 +92,7 @@ package org.mokylin.skin.mainui.tishi
 			temp.name = "lbl_progress";
 			temp.text = "72%...";
 			temp.textAlign = "center";
+			temp.color = 0xf2f2f2;
 			temp.width = 64;
 			temp.x = 106;
 			temp.y = 24;
@@ -105,7 +106,7 @@ package org.mokylin.skin.mainui.tishi
 			temp.name = "lbl_title";
 			temp.fontSize = 16;
 			temp.text = "采集中...";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 101;
 			temp.y = 0;

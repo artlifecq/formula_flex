@@ -36,7 +36,7 @@ package com.rpgGame.appModule.battle.dfdj
 		{
 			_skin=new DianFeng_Skin();
 			super(_skin);
-		
+			_skin.btnOpen.touchable=false;
 		
 			TipTargetManager.show(_skin.icon,TargetTipsMaker.makeTips(TipType.D1V1_RANK_TIP,new DynamicTipData()));
 			TipTargetManager.show(_skin.icoSw, TargetTipsMaker.makeTips( TipType.NORMAL_TIP,TipsCfgData.getTipsInfo(29)));
@@ -46,7 +46,7 @@ package com.rpgGame.appModule.battle.dfdj
 			super.onTouchTarget(target)
 			switch(target)
 			{
-				case _skin.btnOpen:
+				case _skin.uiCon:
 				{
 					onMate();
 					break;
@@ -123,7 +123,7 @@ package com.rpgGame.appModule.battle.dfdj
 				if (!_eff) 
 				{
 					_eff=new Inter3DContainer();
-					_skin.btnOpen.addChild(_eff);
+					_skin.uiCon.addChild(_eff);
 					_eff.playInter3DAt(ClientConfig.getEffect(EffectUrl.UI_JJBREWARD),232/2,60,0,null,addEft);
 				}
 			}

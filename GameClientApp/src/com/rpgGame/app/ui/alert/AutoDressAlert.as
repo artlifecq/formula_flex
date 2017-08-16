@@ -53,6 +53,8 @@ package com.rpgGame.app.ui.alert
 			skin.icons.touchable=true;
 			equips = [];
 			gameTimer=new GameTimer("AutoDressAlert",1000,0,onTimer);
+			equipIcon=IconCDFace.create(IcoSizeEnum.ICON_64);
+			skin.icons.addChild(equipIcon);
 		}
 		
 		private function onTimer():void
@@ -75,7 +77,7 @@ package com.rpgGame.app.ui.alert
 			switch(target){
 				case skin.btn_ok:
 					gameTimer.stop();
-					if(okFCallBack != null)
+					if(okFCallBack != null&&equipIcon&&equipIcon.faceInfo)
 					{
 						var pos:Point=this.equipIcon.localToGlobal(new Point(0,0));
 						EquipAutoDressEffectPanelExt.addAutoDressEquip((equipIcon.faceInfo as EquipInfo).itemInfo.itemId,pos);
@@ -210,16 +212,14 @@ package com.rpgGame.app.ui.alert
 		override protected function onShow():void
 		{
 			super.onShow();
-			equipIcon=IconCDFace.create(IcoSizeEnum.ICON_64);
-			skin.icons.addChild(equipIcon);
+			
 		}
 		
 		override protected function onHide():void
 		{
 			super.onHide();
 			gameTimer.stop();
-			equipIcon.destroy();
-			equipIcon=null;
+			equipIcon.clear();
 		}
 	}
 }

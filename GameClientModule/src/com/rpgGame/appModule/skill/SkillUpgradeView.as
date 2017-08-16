@@ -49,7 +49,7 @@ package com.rpgGame.appModule.skill
 			skin.container.addChild(_icon);
 			_icon.bindBg(_skin.Icon_jineng);
 			alertPanel=new SkillAlertPanel();
-			skin.eft1.color=skin.eft2.color=StaticValue.A_UI_BEIGE_TEXT;
+			skin.eft1.color=skin.eft2.color=StaticValue.BEIGE_TEXT;
 		}
 		
 		public function update(selectedCfg:Q_skill_model, selectedInfo:SkillInfo):void
@@ -189,9 +189,9 @@ package com.rpgGame.appModule.skill
 			if(playerLv>myLv){
 				GrayFilter.gray(skin.btn_shengji);
 				skin.btn_shengji.touchable=false;
-				playerStr=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,playerLv.toString()+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT21));
+				playerStr=HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,playerLv.toString()+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT21));
 			}else{
-				playerStr=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,playerLv.toString()+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT21));
+				playerStr=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,playerLv.toString()+LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT21));
 			}
 			
 			skin.lb_renwudengji.htmlText=getTitleText(LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT10),playerStr);
@@ -223,9 +223,9 @@ package com.rpgGame.appModule.skill
 			}
 			var des:String="";
 			if(value<=value1){
-				des=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,value1+"/"+value);
+				des=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,value1+"/"+value);
 			}else{
-				des=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,value1+"/"+value);
+				des=HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,value1+"/"+value);
 				GrayFilter.gray(skin.btn_shengji);
 				skin.btn_shengji.touchable=false;
 			}

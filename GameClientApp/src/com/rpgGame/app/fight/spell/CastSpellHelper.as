@@ -16,7 +16,6 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
-	import com.rpgGame.app.manager.time.SystemTimeManager;
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.SpellSender;
 	import com.rpgGame.app.state.role.RoleStateUtil;
@@ -481,8 +480,10 @@ package com.rpgGame.app.fight.spell
 			var angle : int = 0;
 			var selfPos : Point = new Point(MainRoleManager.actor.x, MainRoleManager.actor.z);
             var lockTarget : SceneRole = null;
-            do {
-                if (SpellTargetType.SELF == spellData.q_target) {
+            do
+			{
+                if (SpellTargetType.SELF == spellData.q_target) 
+				{
                     //对自己施放的技能
                     targetServerID = MainRoleManager.actorInfo.serverID;
                     targetID = MainRoleManager.actorID;
@@ -504,22 +505,29 @@ package com.rpgGame.app.fight.spell
                 var enemy_list : Vector.<SceneRole> = _roleList ? _roleList : SceneManager.getSceneRoleList();
                 enemy_list.sort(onSortNearestRole);
                 
-                if (4 == spellData.q_skill_type) {
+                if (4 == spellData.q_skill_type)
+				{
                     // 位移类忽略锁定目标
                     ignoreLock = true;
                 }
-                if (2 == spellData.q_is_locking_spell) {
+                if (2 == spellData.q_is_locking_spell)
+				{
                    // 锁定死亡
                    lockTarget = getCanAtkRole(enemy_list, spellData, true, distance);
-                   if (null == lockTarget) {
+                   if (null == lockTarget)
+				   {
                        NoticeManager.showNotify(LangQ_NoticeInfo.SkillError_24);
                        return CASE_STATE_FAIL;
                    }
-                } else if (1 == spellData.q_is_locking_spell) {
+                } 
+				else if (1 == spellData.q_is_locking_spell)
+				{
                     // 必须锁定目标
                     lockTarget = getCanAtkRole(enemy_list, spellData, false, distance);
-                    if (null == lockTarget) {
-                        switch (spellData.q_target) {
+                    if (null == lockTarget)
+					{
+                        switch (spellData.q_target)
+						{
                             case SpellTargetType.FRIEND:
                             case SpellTargetType.TEAM:
                                 NoticeManager.showNotify(LangQ_NoticeInfo.SkillError_23);
@@ -532,14 +540,17 @@ package com.rpgGame.app.fight.spell
                         return CASE_STATE_FAIL;
                     }
                     break;
-                } else if (0 == spellData.q_is_locking_spell) {
-                    if (ignoreLock) {
+                } else if (0 == spellData.q_is_locking_spell)
+				{
+                    if (ignoreLock)
+					{
                         break;
                     }
                     lockTarget = getCanAtkRole(enemy_list, spellData, false, distance);
                 }
             } while (false);
-            if (null != lockTarget) {
+            if (null != lockTarget) 
+			{
                 SceneRoleSelectManager.selectedRole = lockTarget;
                 targetRole = lockTarget;
                 var targetRadius : int = (targetRole.data as RoleData).bodyRadius; //处理半径
@@ -549,69 +560,83 @@ package com.rpgGame.app.fight.spell
                 targetID = targetRole.id;
                 releaseTargetPos = new Point(targetRole.x, targetRole.z);
                 releasePos = new Point(selfPos.x, selfPos.y);
+//                MainRoleManager.actor.faceToGround(releaseTargetPos.x, releaseTargetPos.y);
                 
-                MainRoleManager.actor.faceToGround(releaseTargetPos.x, releaseTargetPos.y);
-                
-                if (targetRole.isMainChar) {
-                    angle = 270 - MainRoleManager.actor.rotationY;
-                } else {
-                    angle = MathUtil.getAngle(selfPos.x, selfPos.y, releaseTargetPos.x, releaseTargetPos.y);
-                }
+//                if (targetRole.isMainChar) 
+//				{
+//                    angle = 270 - MainRoleManager.actor.rotationY;
+//                } 
+//				else
+//				{
+                angle = MathUtil.getAngle(selfPos.x, selfPos.y, releaseTargetPos.x, releaseTargetPos.y);
+//                }
                 radian = angle * Math.PI / 180;
                 var dx : Number = Math.cos(radian);
                 var dy : Number = Math.sin(radian);
                 
-                if (0 == spellData.q_blink_type) {
+                if (0 == spellData.q_blink_type) 
+				{
                     //angle = MathUtil.getAngle(selfPos.x, selfPos.y, releaseTargetPos.x, releaseTargetPos.y);
-                    radian = angle * Math.PI / 180;
+//                    radian = angle * Math.PI / 180;
                     var temp : Number = Point.distance(selfPos, releaseTargetPos);
                     dist = temp;
-                    if (0 != releaseRange && dist > releaseRange) {
+                    if (0 != releaseRange && dist > releaseRange)
+					{
                         dist = dist - releaseRange;
                         // 距离大于最大释放距离
-                        while (dist < temp) {
+                        while (dist < temp)
+						{
                             dist = dist < 0 ? 0 : dist;
                             releasePos.x = selfPos.x + dist * Math.cos(radian);
                             releasePos.y = selfPos.y + dist * Math.sin(radian);
-                            if (PathFinderUtil.isPointInSide(SceneManager.getDistrict(), new Vector3D(releasePos.x, releasePos.y, 0))) {
+                            if (PathFinderUtil.isPointInSide(SceneManager.getDistrict(), new Vector3D(releasePos.x, releasePos.y, 0)))
+							{
                                 break;
                             }
                             dist += SceneConfig.TILE_HEIGHT;
                         }
                     }
-                } else {
-                    angle = 270 - MainRoleManager.actor.rotationY;
-                    radian = angle * Math.PI / 180;
+                }
+				else 
+				{
+//                    angle = 270 - MainRoleManager.actor.rotationY;
+//                    radian = angle * Math.PI / 180;
                     releaseTargetPos = new Point();
                     releaseTargetPos.x = selfPos.x + releaseRange * Math.cos(radian);
                     releaseTargetPos.y = selfPos.y + releaseRange * Math.sin(radian);
                     releasePos = new Point(selfPos.x, selfPos.y);
                 }
-            } else {
+            } 
+			else
+			{
                 // 对鼠标点释放
                 var scenePosition : Vector3D = Stage3DLayerManager.getPickPositonByMousePositon(SceneManager.getScene().view, Stage3DLayerManager.stage.mouseX, Stage3DLayerManager.stage.mouseY/*, MainRoleManager.getActorSpellHandHight()*/);
-                if (null == scenePosition) {
+                if (null == scenePosition) 
+				{
                     // 无效释放点
                     NoticeManager.showNotify(LangQ_NoticeInfo.TargetInvalid);
                     return CASE_STATE_FAIL;
                 }
-                MainRoleManager.actor.faceToGround(scenePosition.x, scenePosition.y);
-                if (0 == spellData.q_blink_type) {
-                    var mousePos : Point = new Point(scenePosition.x, scenePosition.y);
-                    angle = MathUtil.getAngle(selfPos.x, selfPos.y, mousePos.x, mousePos.y);
-                    radian = angle * Math.PI / 180;
+//                MainRoleManager.actor.faceToGround(scenePosition.x, scenePosition.y);
+				var mousePos : Point = new Point(scenePosition.x, scenePosition.y);
+				angle = MathUtil.getAngle(selfPos.x, selfPos.y, mousePos.x, mousePos.y);
+				radian = angle * Math.PI / 180;
+                if (0 == spellData.q_blink_type) 
+				{
                     dist = Point.distance(selfPos, mousePos);
                     releaseTargetPos = new Point();
-                    if (dist > releaseRange) {
+                    if (dist > releaseRange)
+					{
                         // 距离大于最大释放距离
                         mousePos.x = selfPos.x + releaseRange * Math.cos(radian);
                         mousePos.y = selfPos.y + releaseRange * Math.sin(radian);
                     }
                     releaseTargetPos = new Point(mousePos.x, mousePos.y);
                     releasePos = new Point(selfPos.x, selfPos.y);
-                } else {
-                    angle = 270 - MainRoleManager.actor.rotationY;
-                    radian = angle * Math.PI / 180;
+                }
+				else
+				{
+//                    angle = 270 - MainRoleManager.actor.rotationY;
                     releaseTargetPos = new Point();
                     releaseTargetPos.x = selfPos.x + releaseRange * Math.cos(radian);
                     releaseTargetPos.y = selfPos.y + releaseRange * Math.sin(radian);

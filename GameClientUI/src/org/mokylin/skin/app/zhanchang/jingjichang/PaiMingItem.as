@@ -5,6 +5,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 	import feathers.controls.UIAsset;
 	import feathers.controls.UINumber;
 	import org.mokylin.skin.app.zhanchang.uinumber.UINumberNumber2;
+	import org.mokylin.skin.app.zhanchang.uinumber.UINumberNumber2_2;
 
 	/**
 	 * @private
@@ -21,6 +22,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 		public var icon1:feathers.controls.UIAsset;
 
 		public var imgHat:feathers.controls.UIAsset;
+
+		public var numLeve2:feathers.controls.UINumber;
 
 		public var numLevel:feathers.controls.UINumber;
 
@@ -64,9 +67,9 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			gRank = temp;
 			temp.name = "gRank";
-			temp.x = 25;
-			temp.y = 49;
-			temp.elementsContent = [uiL1_i(),uiL2_i(),numLevel_i()];
+			temp.x = 36;
+			temp.y = 27;
+			temp.elementsContent = [uiL1_i(),uiL2_i(),numLevel_i(),numLeve2_i()];
 			return temp;
 		}
 
@@ -76,8 +79,8 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			icon1 = temp;
 			temp.name = "icon1";
 			temp.styleName = "ui/common/grid/normal/48.png";
-			temp.x = 102;
-			temp.y = 7;
+			temp.x = 156;
+			temp.y = 8;
 			return temp;
 		}
 
@@ -87,8 +90,22 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			imgHat = temp;
 			temp.name = "imgHat";
 			temp.styleName = "ui/app/zhanchang/jingjichang/pai1.png";
-			temp.x = 21;
-			temp.y = 11;
+			temp.x = 37;
+			temp.y = 2;
+			return temp;
+		}
+
+		private function numLeve2_i():feathers.controls.UINumber
+		{
+			var temp:feathers.controls.UINumber = new feathers.controls.UINumber();
+			numLeve2 = temp;
+			temp.name = "numLeve2";
+			temp.height = 25;
+			temp.label = "5";
+			temp.styleClass = org.mokylin.skin.app.zhanchang.uinumber.UINumberNumber2;
+			temp.width = 14;
+			temp.x = 27;
+			temp.y = 4;
 			return temp;
 		}
 
@@ -98,11 +115,11 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			numLevel = temp;
 			temp.name = "numLevel";
 			temp.height = 25;
-			temp.label = "1";
-			temp.styleClass = org.mokylin.skin.app.zhanchang.uinumber.UINumberNumber2;
-			temp.width = 27;
-			temp.x = 18;
-			temp.y = 0;
+			temp.label = "5";
+			temp.styleClass = org.mokylin.skin.app.zhanchang.uinumber.UINumberNumber2_2;
+			temp.width = 19;
+			temp.x = 25;
+			temp.y = 2;
 			return temp;
 		}
 
@@ -123,7 +140,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			uiL2 = temp;
 			temp.name = "uiL2";
 			temp.styleName = "ui/app/zhanchang/jingjichang/ming.png";
-			temp.x = 25;
+			temp.x = 39;
 			temp.y = 0;
 			return temp;
 		}

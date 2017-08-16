@@ -68,7 +68,7 @@ package org.mokylin.skin.app.fuben
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "获得经验：";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 137;
 			temp.y = 293;
@@ -79,7 +79,7 @@ package org.mokylin.skin.app.fuben
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "获得铜钱：";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 137;
 			temp.y = 325;
@@ -169,7 +169,7 @@ package org.mokylin.skin.app.fuben
 			temp.text = "7800000";
 			temp.color = 0xDFB01F;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 65;
+			temp.width = 117;
 			temp.x = 216;
 			temp.y = 293;
 			return temp;
@@ -182,7 +182,7 @@ package org.mokylin.skin.app.fuben
 			temp.name = "lbTime";
 			temp.text = "10秒自动领取奖励";
 			temp.textAlign = "center";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 140;
 			temp.x = 134;
@@ -198,7 +198,7 @@ package org.mokylin.skin.app.fuben
 			temp.text = "7800000";
 			temp.color = 0xDFB01F;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 65;
+			temp.width = 121;
 			temp.x = 216;
 			temp.y = 325;
 			return temp;

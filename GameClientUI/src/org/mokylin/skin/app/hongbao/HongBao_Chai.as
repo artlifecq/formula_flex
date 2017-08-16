@@ -97,7 +97,7 @@ package org.mokylin.skin.app.hongbao
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "只有角色在线的情况下才能收到红包";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.x = 5;
 			temp.y = 7;
@@ -287,7 +287,7 @@ package org.mokylin.skin.app.hongbao
 			temp.name = "lbItem";
 			temp.text = "发了一个图标";
 			temp.textAlign = "center";
-			temp.color = 0xE8C958;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 260;
 			temp.x = 0;
@@ -306,7 +306,7 @@ package org.mokylin.skin.app.hongbao
 			temp.text = "项少龙红包";
 			temp.textAlign = "center";
 			temp.color = 0xEAEABC;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 271;
 			temp.x = 0;
 			temp.y = 15;
@@ -320,8 +320,8 @@ package org.mokylin.skin.app.hongbao
 			temp.name = "lbVip";
 			temp.text = "提升VIP";
 			temp.textAlign = "center";
-			temp.color = 0x00FF33;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
 			temp.width = 141;
 			temp.x = 55;

@@ -9,6 +9,7 @@ package com.game.engine3D.vo
 	import flash.geom.Rectangle;
 	import flash.utils.ByteArray;
 	
+	import away3d.enum.LoadPriorityType;
 	import away3d.loaders.multi.MultiLoadData;
 	import away3d.loaders.multi.MultiUrlLoadManager;
 	import away3d.loaders.multi.MultiUrlLoader;
@@ -53,7 +54,7 @@ package com.game.engine3D.vo
 				url = GlobalConfig.version(url);
 			}
 			_mapDataUrl = url;
-			var ld : MultiLoadData = new MultiLoadData(_mapDataUrl, onMapDataComplete, null, onMapDataError, "", "", 10000, MultiLoadData.URLLOADER_BINARY);
+			var ld : MultiLoadData = new MultiLoadData(_mapDataUrl, onMapDataComplete, null, onMapDataError, "", "", LoadPriorityType.LEVEL_CUSTOM_4, MultiLoadData.URLLOADER_BINARY);
 			MultiUrlLoadManager.load(ld);
 		}
 		

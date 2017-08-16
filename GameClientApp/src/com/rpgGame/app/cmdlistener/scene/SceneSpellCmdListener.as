@@ -7,6 +7,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.app.fight.spell.ReleaseSpellHelper;
 	import com.rpgGame.app.fight.spell.ReleaseSpellInfo;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
+	import com.rpgGame.app.fight.spell.SpellEffectRecordCtrl;
 	import com.rpgGame.app.fight.spell.SpellHitHelper;
 	import com.rpgGame.app.fight.spell.SpellResultInfo;
 	import com.rpgGame.app.manager.FightHeadEffectManager;
@@ -30,6 +31,7 @@ package com.rpgGame.app.cmdlistener.scene
 	import com.rpgGame.coreData.info.fight.FightHurtResult;
 	import com.rpgGame.coreData.role.MonsterData;
 	import com.rpgGame.coreData.type.RoleStateType;
+	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.netData.fight.bean.AttackResultInfo;
 	import com.rpgGame.netData.fight.message.ResAttackRangeMessage;
 	import com.rpgGame.netData.fight.message.ResAttackResultMessage;
@@ -136,6 +138,10 @@ package com.rpgGame.app.cmdlistener.scene
 			//GameLog.addShow("技能流水号为： 对目标\t" + msg.uid);
 			
 			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg, true);
+			if (info.atkor.isPlayer) 
+			{
+				SpellEffectRecordCtrl.clear(msg.personId.ToGID());
+			}
 			
 			if (msg.personId.ToGID()==MainRoleManager.actorID) 
 			{
@@ -154,11 +160,17 @@ package com.rpgGame.app.cmdlistener.scene
 			{
 				LostSkillManager.instance().checkBigSkill(msg.personId);
 			}
+		
+			//TrusteeshipManager.getInstance().myFighterCtrl.update(msg.personId,msg.fightTarget,msg.targets);
 		}
 		
 		private function onResAttackVentToClientMessage(msg:ResAttackVentToClientMessage):void
 		{
 			var info : ReleaseSpellInfo = ReleaseSpellInfo.setReleaseInfo(msg, true);
+			if (info.atkor.isPlayer)
+			{
+				SpellEffectRecordCtrl.clear(msg.playerid.ToGID());
+			}
 			
 			var skillId:int=msg.fightType&0xffffff;
 			var skillData:Q_skill_model=SpellDataManager.getSpellData(skillId);
@@ -185,6 +197,7 @@ package com.rpgGame.app.cmdlistener.scene
 				ReleaseSpellHelper.fightSoulSpell(info);
 			else
 				ReleaseSpellHelper.releaseSpell(info);
+			//TrusteeshipManager.getInstance().myFighterCtrl.update(msg.playerid,null,msg.targets);
 		}
 		
 		private function onResCancelSkillMessage(msg:SCCancelSkillMessage):void
@@ -217,7 +230,7 @@ package com.rpgGame.app.cmdlistener.scene
 //			SpellHitHelper.fightSpellHitEffect(info);
 			effectCharAttribute(info);
             lockAttack(info,msg.state);
-			
+			TrusteeshipManager.getInstance().myFighterCtrl.addFightInfo(msg.state);
 		}
 		
 		private function effectCharAttribute(info : SpellResultInfo) : void
@@ -365,11 +378,23 @@ package com.rpgGame.app.cmdlistener.scene
 					EventManager.dispatchEvent(SkillEvent.SKILL_CANCEL);
 				}
 				MainRoleManager.actor.stateMachine.removeState(RoleStateType.CONTROL_ATTACK_HARD);
-				
-				if (MainRoleManager.actor.stateMachine.isPrewarWaiting)
-					MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_PREWAR,null,true);
+				//主玩家自己走路打断
+				if (qSkill.q_cancel==1||qSkill.q_cancel==3&&MainRoleManager.actor.stateMachine.isWalkMoving&&msg.selfCancel==1) 
+				{
+					//自己取消
+				}
 				else
-					MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE,null,true);
+				{
+					if (MainRoleManager.actor.stateMachine.isPrewarWaiting)
+						MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_PREWAR,null,true);
+					else
+						MainRoleManager.actor.stateMachine.transition(RoleStateType.ACTION_IDLE,null,true);
+				}
+				
+			}
+			if (role.isPlayer)
+			{
+				SpellEffectRecordCtrl.testCancelEffect(msg.playerId.ToGID(),msg.skillId);
 			}
         }
         

@@ -79,7 +79,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "占领福利（官员）：";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 140;
 			temp.x = 10;
@@ -91,7 +91,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "占领福利（帮众）：";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 140;
 			temp.x = 10;

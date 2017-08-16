@@ -77,7 +77,7 @@ package org.mokylin.skin.app.activety.shijieboss
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "(几率掉落)";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 83;
 			temp.x = 705;

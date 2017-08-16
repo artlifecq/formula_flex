@@ -22,7 +22,7 @@ package com.rpgGame.appModule.shop
 				return;
 			}
 			_lv=lv;
-			_skin.uiLevel.styleName="ui/app/shangcheng/number/sz/"+lv+".png"
+			_skin.uiVIP.styleName="ui/app/shangcheng/"+lv+".png"
 		}
 	}
 }

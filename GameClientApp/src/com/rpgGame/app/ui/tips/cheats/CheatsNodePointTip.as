@@ -139,7 +139,7 @@ package  com.rpgGame.app.ui.tips.cheats
 				this.addChild(lb);
 				lb.y=startY;
 				startY+=lb.height+2;
-				lb.htmlText=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,"已达到最高层");
+				lb.htmlText=HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,"已达到最高层");
 				lb.width=lb.textWidth;
 				//
 			}
@@ -222,7 +222,7 @@ package  com.rpgGame.app.ui.tips.cheats
 				lb.y=startY;
 				startY+=lb.height+2;
 				isOk=nextLevel<=Mgr.cheatsMgr.getCheatVo(qMer.cheatsId).level;
-				lb.htmlText=HtmlTextUtil.getTextColor(isOk?StaticValue.A_UI_GREEN_TEXT:StaticValue.A_UI_RED_TEXT,Mgr.cheatsMgr.getCheatVo(qMer.cheatsId).cheatsConfig.q_name+"等级:"+nextLevel+"重");
+				lb.htmlText=HtmlTextUtil.getTextColor(isOk?StaticValue.GREEN_TEXT:StaticValue.RED_TEXT,Mgr.cheatsMgr.getCheatVo(qMer.cheatsId).cheatsConfig.q_name+"等级:"+nextLevel+"重");
 				lb.width=lb.textWidth;
 			}
 			var needLv:int=qMer.levelUpNeedPlayerLevel;
@@ -233,7 +233,7 @@ package  com.rpgGame.app.ui.tips.cheats
 				lb.y=startY;
 				startY+=lb.height+2;
 				isOk=needLv<=MainRoleManager.actorInfo.totalStat.level;
-				lb.htmlText=HtmlTextUtil.getTextColor(isOk?StaticValue.A_UI_GREEN_TEXT:StaticValue.A_UI_RED_TEXT,"角色等级:"+needLv+"级");
+				lb.htmlText=HtmlTextUtil.getTextColor(isOk?StaticValue.GREEN_TEXT:StaticValue.RED_TEXT,"角色等级:"+needLv+"级");
 				lb.width=lb.textWidth;
 			}
 			var preLv:int=qMer.levelUpNeedPreLv;
@@ -274,7 +274,7 @@ package  com.rpgGame.app.ui.tips.cheats
 						}
 					}
 					
-					lb.htmlText=HtmlTextUtil.getTextColor(isOk?StaticValue.A_UI_GREEN_TEXT:StaticValue.A_UI_RED_TEXT,str);
+					lb.htmlText=HtmlTextUtil.getTextColor(isOk?StaticValue.GREEN_TEXT:StaticValue.RED_TEXT,str);
 					lb.width=lb.textWidth;
 				}
 			}
@@ -287,7 +287,7 @@ package  com.rpgGame.app.ui.tips.cheats
 				lb.y=startY;
 				startY+=lb.height+2;
 				isOk=needSprit<=MainRoleManager.actorInfo.curZhenqi;
-				lb.htmlText=HtmlTextUtil.getTextColor(isOk?StaticValue.A_UI_GREEN_TEXT:StaticValue.A_UI_RED_TEXT,"真气消耗:"+needSprit);
+				lb.htmlText=HtmlTextUtil.getTextColor(isOk?StaticValue.GREEN_TEXT:StaticValue.RED_TEXT,"真气消耗:"+needSprit);
 				lb.width=lb.textWidth;
 			}
 			return startY;
@@ -377,7 +377,7 @@ package  com.rpgGame.app.ui.tips.cheats
 			_skin.imgStone.y=startY;
 			
 			_skin.lb_Stone.y=startY;
-			_skin.lb_Stone.htmlText=_initStr.replace("$",HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,EnumMStoneType.getStoneTypeName(qAcu.q_stone_type)));
+			_skin.lb_Stone.htmlText=_initStr.replace("$",HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,EnumMStoneType.getStoneTypeName(qAcu.q_stone_type)));
 			startY+=_skin.lb_Stone.height;
 			_skin.imgBg.height=startY+10;
 		}

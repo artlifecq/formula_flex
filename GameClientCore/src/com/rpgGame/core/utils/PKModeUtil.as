@@ -83,7 +83,7 @@ package com.rpgGame.core.utils
 					return StaticValue.DIFFERENT_SEVER;
 			}
 
-			return StaticValue.COLOR_CODE_1;
+			return StaticValue.RED_TEXT;//注:请到时候重新根据设计在StaticValue里配置颜色
 		}
 
 		public static function getPKModeDesc(type : int) : String
@@ -132,7 +132,7 @@ package com.rpgGame.core.utils
 
 		public static function getPKAmountColor(pkAmountType : int) : uint
 		{
-			switch (pkAmountType)
+			/*switch (pkAmountType)
 			{
 				case PKModeType.AMOUNT_WITHE:
 					return StaticValue.COLOR_CODE_1;
@@ -144,8 +144,8 @@ package com.rpgGame.core.utils
 					return StaticValue.COLOR_CODE_23;
 				case PKModeType.AMOUNT_RED:
 					return StaticValue.COLOR_CODE_13;
-			}
-			return StaticValue.COLOR_CODE_1;
+			}*/
+			return StaticValue.RED_TEXT;//注:请到时候重新根据设计在StaticValue里配置颜色
 		}
 	}
 }

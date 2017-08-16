@@ -1,5 +1,6 @@
 package org.mokylin.skin.app.npc
 {
+	import feathers.controls.text.Fontter;
 	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
@@ -38,7 +39,8 @@ package org.mokylin.skin.app.npc
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "走一走来，看一看来";
 			temp.textAlign = "center";
-			temp.color = 0xd6d2bd;
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 187;
 			temp.x = 6;
 			temp.y = 12;

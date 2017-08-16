@@ -46,7 +46,7 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			lb_name = temp;
 			temp.name = "lb_name";
 			temp.text = "力道：";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 0;
 			temp.y = 0;
@@ -59,7 +59,7 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			lb_num = temp;
 			temp.name = "lb_num";
 			temp.text = "20";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 38;
 			temp.y = 0;
