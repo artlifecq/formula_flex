@@ -250,9 +250,12 @@ package com.rpgGame.appModule.activety.boss
 			var text:String="最后一击:";
 			_richText.text="";
 			if(selectedInfo.killerName&&selectedInfo.killerName.length!=0){
-				var linkData:String=selectedInfo.killerId.lValue+","+selectedInfo.killerId.hValue+","+selectedInfo.killerId.hexValue;
+				var linkData:String;
+				if(selectedInfo.killerId){
+					linkData=selectedInfo.killerId.lValue+","+selectedInfo.killerId.hValue+","+selectedInfo.killerId.hexValue;
+				}
 				var linkName:String=RichTextCustomUtil.getTextLinkCode(selectedInfo.killerName,StaticValue.GREEN_TEXT,
-					RichTextCustomLinkType.WALK_TO_SCENE_POS_TYPE,linkData);
+					RichTextCustomLinkType.SEE_OTHER_NAME,linkData);
 				text+=linkName;
 			}else{
 				text+="拭目以待";
