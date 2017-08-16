@@ -45,8 +45,8 @@ package com.rpgGame.app.fight.spell
 			skillInfo=data as SkillInfo;
 			_skin=new huode_Jineng();
 			icon=new BgIcon(IcoSizeEnum.ICON_64);
-			icon.x=21;
-			icon.y=13;
+			icon.x=26;
+			icon.y=30;
 			icon.touchable=false;
 			super(data);
 			_skin.container.addChild(icon);

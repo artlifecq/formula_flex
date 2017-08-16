@@ -182,7 +182,7 @@ package com.rpgGame.app.utils
 //			if (CountryManager.isMyEnemyCountry(heroData.countryId))
 //				return StaticValue.RED_TEXT; //不是我国与盟国的都是红名
 
-			return PKModeUtil.getPKAmountColor(heroData.nameColor);
+			return heroData.nameColor;
 		}
 
 
