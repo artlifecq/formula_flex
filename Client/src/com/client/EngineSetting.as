@@ -32,6 +32,8 @@ package com.client
 			GlobalConfig.radiusForEntity = 32;
 			GlobalConfig.use2DMap = true;
 			ClientConfig.isMapUseAtf = true;
+			ClientConfig.useBpgFormat = false;
+			ClientConfig.useAtfFormat = true;
 			GlobalConfig.mapCameraAngle = -40;
 			PlanarContainer3D.planarRotationX = GlobalConfig.mapCameraAngle;
 			
