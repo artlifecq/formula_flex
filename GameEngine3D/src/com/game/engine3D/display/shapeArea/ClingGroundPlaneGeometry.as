@@ -149,8 +149,8 @@ package com.game.engine3D.display.shapeArea
 
 			if (target.vertexData && (numVertices * stride << 2) == target.vertexData.length)
 			{
-				data = target.vertexData;
-				indices = target.indexData;
+				//data = target.vertexData;
+				//indices = target.indexData;
 				data.position = 0;
 				indices.position = 0;
 			}
@@ -328,8 +328,8 @@ package com.game.engine3D.display.shapeArea
 				}
 			}
 
-			target.updateData(data);
-			target.updateIndexData(indices);
+			//target.updateData(data);
+			//target.updateIndexData(indices);
 		}
 
 		override protected function buildUVs(target : CompactSubGeometry) : void
@@ -343,7 +343,9 @@ package com.game.engine3D.display.shapeArea
 				numUvs *= 2;
 
 			if (target.UVData && (numUvs << 2) == target.UVData.length)
-				data = target.UVData;
+			{
+				//data = target.UVData;
+			}
 			else
 			{
 				data = new ByteArray;
@@ -377,7 +379,7 @@ package com.game.engine3D.display.shapeArea
 				}
 			}
 
-			target.updateData(data);
+			//target.updateData(data);
 		}
 
 		public function get flatNormal() : Boolean
