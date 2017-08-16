@@ -71,7 +71,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.leading = 2;
 			temp.letterSpacing = 0;
 			temp.text = "您成功击败羽林校尉，排名升至1460";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 302;
 			temp.x = 5;

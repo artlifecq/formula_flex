@@ -8,12 +8,10 @@ package com.rpgGame.app.fight.spell
 	import com.rpgGame.core.manager.StarlingLayerManager;
 	import com.rpgGame.core.utils.MCUtil;
 	import com.rpgGame.coreData.cfg.ClientConfig;
-	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.SpellDataManager;
 	import com.rpgGame.coreData.clientConfig.Q_skill_model;
 	import com.rpgGame.coreData.enum.ShortcutsTypeEnum;
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
-	import com.rpgGame.coreData.lang.LangSpell;
 	import com.rpgGame.netData.skill.bean.SkillInfo;
 	
 	import flash.geom.Point;
@@ -52,7 +50,7 @@ package com.rpgGame.app.fight.spell
 			icon.touchable=false;
 			super(data);
 			_skin.container.addChild(icon);
-			MCUtil.removeSelf(skin.lbl_time as DisplayObject);
+//			MCUtil.removeSelf(skin.lbl_time as DisplayObject);
 			this.touchable=true;
 		}
 		
@@ -64,7 +62,7 @@ package com.rpgGame.app.fight.spell
 		override  protected function onShow() : void
 		{
 			_cfg=SpellDataManager.getSpellData(skillInfo.skillModelId);
-			skin.lbl_zhuangbei.text=_cfg.q_skillName;
+			skin.lbName.text=_cfg.q_skillName;
 			icon.setIconResName(ClientConfig.getSkillIcon(_cfg.q_skillID.toString(),64));
 //			time=5;
 //			skin.lbl_time.text=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT20).replace("$",time);
@@ -81,7 +79,7 @@ package com.rpgGame.app.fight.spell
 		private function updateTime():void
 		{
 			time--;
-			skin.lbl_time.text=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT20).replace("$",time);
+//			skin.lbl_time.text=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT20).replace("$",time);
 			if(time==0){
 				toMis();
 			}

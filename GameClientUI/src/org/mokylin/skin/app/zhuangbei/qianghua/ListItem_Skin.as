@@ -97,7 +97,7 @@ package org.mokylin.skin.app.zhuangbei.qianghua
 			temp.right = 0;
 			temp.text = "二阶";
 			temp.textAlign = "left";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.top = 0;
 			temp.verticalAlign = "middle";

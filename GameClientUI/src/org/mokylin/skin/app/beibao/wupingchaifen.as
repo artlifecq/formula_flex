@@ -64,7 +64,7 @@ package org.mokylin.skin.app.beibao
 			temp.bold = false;
 			temp.height = 18;
 			temp.htmlText = "需要将这组物品<font color='#00ff33'>拆分</font>成两堆吗?";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 200;
 			temp.x = 64;
@@ -76,7 +76,7 @@ package org.mokylin.skin.app.beibao
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "请点击调节栏输入要拆分的数量";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 58;
 			temp.y = 127;

@@ -234,7 +234,7 @@ package org.mokylin.skin.app.meiren
 			temp.text = "仙露*1(10)";
 			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.width = 91;
+			temp.width = 119;
 			temp.x = 85;
 			temp.y = 478;
 			return temp;

@@ -49,7 +49,7 @@ package org.mokylin.skin.app.maps
 			temp.bottom = 0;
 			temp.left = 0;
 			temp.right = 0;
-			temp.styleName = "ui/app/maps/ItemBghei.png";
+			temp.styleName = "ui/common/titilebg/ItemBghei.png";
 			temp.top = 0;
 			return temp;
 		}
@@ -73,7 +73,7 @@ package org.mokylin.skin.app.maps
 			lbl_name = temp;
 			temp.name = "lbl_name";
 			temp.text = "标签";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 236;
 			temp.x = 3;

@@ -245,7 +245,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			temp.name = "lbBang1";
 			temp.fontSize = 16;
 			temp.text = "帮派名称七个字";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 126;
 			temp.x = 214;
@@ -260,7 +260,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			temp.name = "lbBang2";
 			temp.fontSize = 16;
 			temp.text = "帮派名称七个字";
-			temp.color = 0xD02525;
+			temp.color = 0xFF0D0D;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 126;
 			temp.x = 598;
@@ -289,7 +289,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			lbTime = temp;
 			temp.name = "lbTime";
 			temp.text = "15秒后自动领取并退出";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 182;
 			temp.x = 549;

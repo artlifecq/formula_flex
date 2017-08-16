@@ -134,7 +134,7 @@ package org.mokylin.skin.app.maps
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "当前地图：";
-			temp.color = 0xAEA790;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 2;
 			temp.y = 10;
@@ -211,10 +211,10 @@ package org.mokylin.skin.app.maps
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btn_go = temp;
 			temp.name = "btn_go";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
-			temp.label = "前往";
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.label = "前 往";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
-			temp.color = 0xE1D4A9;
+			temp.color = 0xEAEABC;
 			temp.width = 90;
 			temp.x = 813;
 			temp.y = 0;
@@ -250,7 +250,7 @@ package org.mokylin.skin.app.maps
 			lbl_mapName = temp;
 			temp.name = "lbl_mapName";
 			temp.text = "马贼大本营";
-			temp.color = 0xE8C958;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 75;
 			temp.y = 10;

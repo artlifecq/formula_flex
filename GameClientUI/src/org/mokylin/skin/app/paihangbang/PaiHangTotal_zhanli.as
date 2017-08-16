@@ -278,7 +278,7 @@ package org.mokylin.skin.app.paihangbang
 			temp.name = "lbMiaosu";
 			temp.htmlText = "在提升<font color='#00ff33'>400000</font>战力即可上榜，一览纵英雄风采！";
 			temp.textAlign = "center";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 408;
 			temp.x = 72;

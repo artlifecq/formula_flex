@@ -90,7 +90,7 @@ package org.mokylin.skin.app.beibao
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.text = "一级补心丹";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 90;
 			temp.x = 65;
@@ -106,7 +106,7 @@ package org.mokylin.skin.app.beibao
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.text = "x100";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 73;
 			temp.x = 85;

@@ -110,7 +110,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			lbT1 = temp;
 			temp.name = "lbT1";
 			temp.text = "效果增强：$";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 170;
 			temp.x = 90;
@@ -124,7 +124,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			lbT2 = temp;
 			temp.name = "lbT2";
 			temp.text = "当前层数：$";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 170;
 			temp.x = 90;

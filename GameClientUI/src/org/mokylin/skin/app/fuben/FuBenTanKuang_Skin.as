@@ -252,7 +252,7 @@ package org.mokylin.skin.app.fuben
 			temp.name = "teaminfo";
 			temp.fontSize = 16;
 			temp.text = "队长正在申请进入跨服副本";
-			temp.color = 0xBEA757;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 61;
 			temp.y = 55;

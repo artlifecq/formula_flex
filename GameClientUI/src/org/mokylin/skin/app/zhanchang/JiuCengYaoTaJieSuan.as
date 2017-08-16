@@ -53,7 +53,7 @@ package org.mokylin.skin.app.zhanchang
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "我的积分：";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 79;
 			temp.y = 152;
@@ -64,7 +64,7 @@ package org.mokylin.skin.app.zhanchang
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "积分排名：";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 258;
 			temp.y = 152;
@@ -115,8 +115,9 @@ package org.mokylin.skin.app.zhanchang
 			temp.name = "btnOk";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "确 认";
+			temp.fontSize = 16;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.color = 0xFFFFFF;
+			temp.color = 0xEAEABC;
 			temp.width = 110;
 			temp.x = 175;
 			temp.y = 295;
@@ -154,11 +155,11 @@ package org.mokylin.skin.app.zhanchang
 			lbTime = temp;
 			temp.name = "lbTime";
 			temp.text = "7秒后自动关闭";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 104;
-			temp.x = 286;
-			temp.y = 310;
+			temp.x = 287;
+			temp.y = 306;
 			return temp;
 		}
 

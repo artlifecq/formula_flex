@@ -75,7 +75,7 @@ package org.mokylin.skin.app.beibao.junjie
 			temp.name = "lbTotal";
 			temp.text = "110";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 61;
 			temp.x = 64;

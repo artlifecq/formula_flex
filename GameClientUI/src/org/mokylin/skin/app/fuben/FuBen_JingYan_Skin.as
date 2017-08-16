@@ -101,7 +101,7 @@ package org.mokylin.skin.app.fuben
 			lbGoumai = temp;
 			temp.name = "lbGoumai";
 			temp.text = "剩余购买次数：99";
-			temp.color = 0xBEA757;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 130;
 			temp.x = 33;
@@ -115,7 +115,7 @@ package org.mokylin.skin.app.fuben
 			lbShengyu = temp;
 			temp.name = "lbShengyu";
 			temp.text = "今日剩余次数：99";
-			temp.color = 0xBEA757;
+			temp.color = 0xFFEA00;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 130;
 			temp.x = 33;
@@ -131,6 +131,7 @@ package org.mokylin.skin.app.fuben
 			temp.height = 88;
 			temp.htmlText = "副本提示<br>1. 当前一波敌人全部死亡后会刷新出下一波怪物，请在限时内击杀，杀敌越多奖励越多。<br>2. 副本会根据您的等级和杀敌数量给予银两奖励。<br>3. 您可购买额外的挑战次数，购买次数与VIP等级相关。";
 			temp.leading = 7;
+			temp.text = "标签";
 			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 875;

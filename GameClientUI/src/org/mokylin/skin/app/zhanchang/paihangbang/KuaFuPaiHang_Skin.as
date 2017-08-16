@@ -105,7 +105,7 @@ package org.mokylin.skin.app.zhanchang.paihangbang
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "(今日可领取昨日的段位奖励)";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 255;
 			temp.y = 511;

@@ -366,7 +366,7 @@ package org.mokylin.skin.mainui.chat
 			lb_pindao = temp;
 			temp.name = "lb_pindao";
 			temp.text = "世界";
-			temp.color = 0xBCA78A;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 39;
 			temp.x = 27;

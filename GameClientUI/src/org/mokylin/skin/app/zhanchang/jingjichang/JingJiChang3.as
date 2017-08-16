@@ -84,7 +84,7 @@ package org.mokylin.skin.app.zhanchang.jingjichang
 			temp.height = 53;
 			temp.htmlText = "    领奖排名是指每天<font color='#00ff33'>24:00</font>刷新奖励是您的排名，可能与您的当前排名不同，排行榜奖励<font color='#00ff33'>每天只能领取一次</font>";
 			temp.leading = 6;
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 350;
 			temp.x = 572;
