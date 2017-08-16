@@ -127,7 +127,7 @@ package org.mokylin.skin.app.banghui.huangcheng
 			lbBangName = temp;
 			temp.name = "lbBangName";
 			temp.text = "帮派名称七个字";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 115;
 			temp.x = 83;
@@ -155,7 +155,7 @@ package org.mokylin.skin.app.banghui.huangcheng
 			lbTime = temp;
 			temp.name = "lbTime";
 			temp.text = "10秒后自动获取";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 106;
 			temp.x = 212.5;

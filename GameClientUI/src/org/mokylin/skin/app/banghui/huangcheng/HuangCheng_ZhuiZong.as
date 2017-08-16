@@ -447,7 +447,7 @@ package org.mokylin.skin.app.banghui.huangcheng
 			temp.fontSize = 14;
 			temp.text = "本人积分：$";
 			temp.textAlign = "left";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 182;
 			temp.x = 17;
@@ -466,7 +466,7 @@ package org.mokylin.skin.app.banghui.huangcheng
 			temp.fontSize = 14;
 			temp.text = "累计击杀玩家数：$";
 			temp.textAlign = "left";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 182;
 			temp.x = 17;
@@ -485,7 +485,7 @@ package org.mokylin.skin.app.banghui.huangcheng
 			temp.fontSize = 14;
 			temp.text = "本人排名：$";
 			temp.textAlign = "left";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 182;
 			temp.x = 17;

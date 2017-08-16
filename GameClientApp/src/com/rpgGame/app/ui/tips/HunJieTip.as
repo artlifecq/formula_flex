@@ -78,8 +78,8 @@ package com.rpgGame.app.ui.tips
 			//需求等级
 			_skin.lbl_xuqiu.text=itemInfo.qItem.q_level+"级";
 			if(MainRoleManager.actorInfo.totalStat.level>=itemInfo.qItem.q_level)
-				_skin.lbl_xuqiu.color=StaticValue.A_UI_GREEN_TEXT;
-			else _skin.lbl_xuqiu.color=StaticValue.A_UI_RED_TEXT;
+				_skin.lbl_xuqiu.color=StaticValue.GREEN_TEXT;
+			else _skin.lbl_xuqiu.color=StaticValue.RED_TEXT;
 			//品质等级
 			_skin.lbl_pingzhi.text=info.q_strength.toString()+"阶";
 			
@@ -102,8 +102,8 @@ package com.rpgGame.app.ui.tips
 				for(var i:int=0;i<keys.length;i++)
 				{
 					name=CharAttributeType.getCNName(keys[i]);				
-					name=HtmlTextUtil.getTextColor(StaticValue.A_UI_GRAY_TEXT,name+":");
-					value=HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,AttValueConfig.getDisAttValue(keys[i],values[i]).toString());
+					name=HtmlTextUtil.getTextColor(StaticValue.GRAY_TEXT,name+":");
+					value=HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,AttValueConfig.getDisAttValue(keys[i],values[i]).toString());
 					label=createLabel(name,value);
 					label.x=initX;
 					label.y=initY;

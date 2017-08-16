@@ -23,9 +23,9 @@ package com.rpgGame.app.ui.tips
 		{
 			var str : String;
 			if(baseStat.percent)
-				str = baseStat.percent + "%" + HtmlTextUtil.getTextColor( StaticValue.COLOR_CODE_26, addValue!=0?"+"+addValue+"%":"");
+				str = baseStat.percent + "%" + HtmlTextUtil.getTextColor( StaticValue.BROWN_TEXT, addValue!=0?"+"+addValue+"%":"");
 			else
-				str = baseStat.value+HtmlTextUtil.getTextColor( StaticValue.COLOR_CODE_26, addValue!=0?"+"+addValue:"");
+				str = baseStat.value+HtmlTextUtil.getTextColor( StaticValue.BROWN_TEXT, addValue!=0?"+"+addValue:"");
 			skin.statLbl.text = str;
 			
 			if(!contrastStat)
@@ -39,22 +39,22 @@ package com.rpgGame.app.ui.tips
 				if(contrastStat.percent>baseStat.percent)
 				{
 					value = contrastStat.percent-baseStat.percent;
-					str = HtmlTextUtil.getTextColor( StaticValue.COLOR_CODE_16, "↑" + value + "%" );
+					str = HtmlTextUtil.getTextColor( StaticValue.GREEN_TEXT, "↑" + value + "%" );
 				}else
 				{
 					value = baseStat.percent - contrastStat.percent;
-					str = HtmlTextUtil.getTextColor( StaticValue.COLOR_CODE_13, "↓" + value + "%" );
+					str = HtmlTextUtil.getTextColor( StaticValue.RED_TEXT, "↓" + value + "%" );
 				}
 			}else
 			{
 				if(contrastStat.value>baseStat.value)
 				{
 					value = contrastStat.value-baseStat.value;
-					str = HtmlTextUtil.getTextColor( StaticValue.COLOR_CODE_16, "↑" + value );
+					str = HtmlTextUtil.getTextColor( StaticValue.GREEN_TEXT, "↑" + value );
 				}else
 				{
 					value = baseStat.value - contrastStat.value;
-					str = HtmlTextUtil.getTextColor( StaticValue.COLOR_CODE_13, "↓" + value );
+					str = HtmlTextUtil.getTextColor( StaticValue.RED_TEXT, "↓" + value );
 				}
 			}
 		}

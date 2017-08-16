@@ -152,15 +152,15 @@ package com.rpgGame.appModule.dungeon.lunjian
 				var roleData:HeroData=MainRoleManager.actorInfo;
 				_skin.uiOK.visible=itemData.diff==3;
 				if(roleData.totalStat.level>=itemData.cfg.q_level){
-					_skin.lbLevel.color=StaticValue.UI_GREEN;
+					_skin.lbLevel.color=StaticValue.GREEN_TEXT;
 				}else{
-					_skin.lbLevel.color=StaticValue.UI_SPECIAL_RED;
+					_skin.lbLevel.color=StaticValue.RED_TEXT;
 				}
 				var fight:int=roleData.totalStat.getStatValue(CharAttributeType.FIGHTING);
 				if(fight>=itemData.cfg.q_attack_power){
-					_skin.lbZhanli.color=StaticValue.UI_GREEN;
+					_skin.lbZhanli.color=StaticValue.GREEN_TEXT;
 				}else{
-					_skin.lbZhanli.color=StaticValue.UI_SPECIAL_RED;
+					_skin.lbZhanli.color=StaticValue.RED_TEXT;
 				}
 				_skin.lbName.text=npcCfg.q_name;
 				_skin.lbLevel.text=itemData.cfg.q_level+"";
@@ -190,11 +190,11 @@ package com.rpgGame.appModule.dungeon.lunjian
 				_skin.mc_nandu.visible=true;
 				_skin.mc_nandu.gotoAndStop(String(itemData.diff+1));
 				if(itemData.diff==0){
-					_skin.lbName.color=StaticValue.UI_GREEN;
+					_skin.lbName.color=StaticValue.GREEN_TEXT;
 				}else if(itemData.diff==1){
-					_skin.lbName.color=StaticValue.UI_SPECIAL_BLUE;
+					_skin.lbName.color=StaticValue.BLUE_TEXT;
 				}else if(itemData.diff==2){
-					_skin.lbName.color=StaticValue.UI_SPECIAL_RED;
+					_skin.lbName.color=StaticValue.RED_TEXT;
 				}
 				
 				if(itemData.diff!=3){

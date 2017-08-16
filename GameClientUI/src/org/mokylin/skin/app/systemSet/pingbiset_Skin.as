@@ -74,8 +74,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "隐藏所有的技能特效";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 247;
 			temp.y = 113;
 			return temp;
@@ -97,8 +97,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "屏蔽场景特效";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 29;
 			temp.y = 43;
 			return temp;
@@ -108,8 +108,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "屏蔽天气特效";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 29;
 			temp.y = 78;
 			return temp;
@@ -119,8 +119,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "屏蔽血量过低时的闪屏";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 29;
 			temp.y = 113;
 			return temp;
@@ -130,8 +130,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "隐藏阴影效果";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 247;
 			temp.y = 43;
 			return temp;
@@ -141,8 +141,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "屏蔽屏幕震动";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 247;
 			temp.y = 78;
 			return temp;
@@ -163,8 +163,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "开启自动优化机制";
-			temp.color = 0xcfc6ae;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 28;
 			temp.y = 41;
 			return temp;
@@ -174,8 +174,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "（自动优化游戏流畅度）";
-			temp.color = 0x8b8d7b;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 140;
 			temp.y = 41;
 			return temp;
@@ -197,8 +197,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "隐藏其他玩家";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 29;
 			temp.y = 43;
 			return temp;
@@ -208,8 +208,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "隐藏同帮玩家";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 29;
 			temp.y = 78;
 			return temp;
@@ -219,8 +219,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "隐藏其他玩家技能特效";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 29;
 			temp.y = 113;
 			return temp;
@@ -230,8 +230,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "隐藏怪物";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 247;
 			temp.y = 43;
 			return temp;
@@ -241,8 +241,8 @@ package org.mokylin.skin.app.systemSet
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "隐藏伤害数字";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 247;
 			temp.y = 78;
 			return temp;

@@ -15,9 +15,9 @@ package org.mokylin.skin.mainui.tishi
 		//==========================================================================
 		//                                定义成员变量
 		//==========================================================================
-		public var lbl_time:feathers.controls.Label;
+		public var Icons:feathers.controls.UIAsset;
 
-		public var lbl_zhuangbei:feathers.controls.Label;
+		public var lbName:feathers.controls.Label;
 
 
 		//==========================================================================
@@ -28,9 +28,9 @@ package org.mokylin.skin.mainui.tishi
 			super();
 			
 			this.currentState = "normal";
-			this.height = 102;
-			this.width = 331;
-			this.elementsContent = [__huode_Jineng_UIAsset1_i(),__huode_Jineng_UIAsset2_i(),__huode_Jineng_UIAsset3_i(),lbl_zhuangbei_i(),lbl_time_i()];
+			this.height = 123;
+			this.width = 306;
+			this.elementsContent = [__huode_Jineng_UIAsset1_i(),__huode_Jineng_Label1_i(),lbName_i(),Icons_i()];
 			
 			states = {
 			};
@@ -41,60 +41,49 @@ package org.mokylin.skin.mainui.tishi
 		//==========================================================================
 		//                                定义成员方法
 		//==========================================================================
+		private function Icons_i():feathers.controls.UIAsset
+		{
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			Icons = temp;
+			temp.name = "Icons";
+			temp.x = 21;
+			temp.y = 24;
+			return temp;
+		}
+
+		private function __huode_Jineng_Label1_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			temp.text = "恭喜你获得了新技能！";
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 140;
+			temp.y = 31;
+			return temp;
+		}
+
 		private function __huode_Jineng_UIAsset1_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 102;
-			temp.styleName = "ui/mainui/tishi/kuangzi.png";
-			temp.width = 331;
+			temp.styleName = "ui/app/xingongneng/xinjinnenghuode.png";
 			temp.x = 0;
 			temp.y = 0;
 			return temp;
 		}
 
-		private function __huode_Jineng_UIAsset2_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/common/gezikuang/tubiaodikuang/64.png";
-			temp.x = 21;
-			temp.y = 13;
-			return temp;
-		}
-
-		private function __huode_Jineng_UIAsset3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.styleName = "ui/mainui/tishi/gxnhdxjn.png";
-			temp.x = 106;
-			temp.y = 13;
-			return temp;
-		}
-
-		private function lbl_time_i():feathers.controls.Label
+		private function lbName_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbl_time = temp;
-			temp.name = "lbl_time";
-			temp.text = "1s秒后自动关闭";
-			temp.color = 0x6BCC08;
+			lbName = temp;
+			temp.name = "lbName";
+			temp.fontSize = 18;
+			temp.text = "[掏你心心]";
+			temp.textAlign = "center";
+			temp.color = 0xDFB01F;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 151;
-			temp.y = 69;
-			return temp;
-		}
-
-		private function lbl_zhuangbei_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbl_zhuangbei = temp;
-			temp.name = "lbl_zhuangbei";
-			temp.letterSpacing = 0;
-			temp.fontSize = 16;
-			temp.text = "装备名称";
-			temp.color = 0xF9E7B7;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlue"];
-			temp.x = 171;
-			temp.y = 41;
+			temp.width = 164;
+			temp.x = 124;
+			temp.y = 72;
 			return temp;
 		}
 

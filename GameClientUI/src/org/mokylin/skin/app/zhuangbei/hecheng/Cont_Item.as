@@ -68,12 +68,12 @@ package org.mokylin.skin.app.zhuangbei.hecheng
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lb_Dispaly = temp;
 			temp.name = "lb_Dispaly";
-			temp.htmlText = "中级鉴定图纸<font color='#bea757'>(10)</font>";
+			temp.htmlText = "中级鉴定图纸<font color='#ffea00'>(10)</font>";
 			temp.touchable = false;
 			temp.touchGroup = true;
 			temp.letterSpacing = -1;
 			temp.fontSize = 16;
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 242;
 			temp.x = 2;

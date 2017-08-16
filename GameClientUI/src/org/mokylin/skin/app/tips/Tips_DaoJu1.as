@@ -207,7 +207,7 @@ package org.mokylin.skin.app.tips
 			lb1 = temp;
 			temp.name = "lb1";
 			temp.text = "等级要求：";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 96;
 			temp.y = 48;
@@ -220,7 +220,7 @@ package org.mokylin.skin.app.tips
 			lb2 = temp;
 			temp.name = "lb2";
 			temp.text = "消    耗：";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 96;
 			temp.y = 67;
@@ -233,7 +233,7 @@ package org.mokylin.skin.app.tips
 			lb3 = temp;
 			temp.name = "lb3";
 			temp.text = "今日修为上线：";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 97;
 			temp.y = 87;
@@ -246,7 +246,7 @@ package org.mokylin.skin.app.tips
 			lb4 = temp;
 			temp.name = "lb4";
 			temp.text = "今日使用次数：";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 10;
 			temp.y = 120;

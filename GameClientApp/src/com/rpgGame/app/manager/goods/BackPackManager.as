@@ -355,7 +355,8 @@ package com.rpgGame.app.manager.goods
 					var maxBuy:int;
 					var allRes:Number=Mgr.shopMgr.getCurrency(buyItem.data.priceType);
 					var maxCount:int=int(allRes/buyItem.data.price);
-					maxCount=Math.min(99,maxCount);//999
+					var qmax:int=buyItem.getItemConfig()!=null&&buyItem.getItemConfig().q_max>0?buyItem.getItemConfig().q_max:99;
+					maxCount=Math.min(qmax,maxCount);//999
 					if(maxCount>0)
 					{
 						Mgr.shopMgr.ReqBuyItem(buyItem.data,maxCount,null);

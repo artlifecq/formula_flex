@@ -227,20 +227,20 @@ package com.rpgGame.appModule.hubao
 			var name:String = ItemConfig.getItemName(_useItemId);
 			var num:int = BackPackManager.instance.getItemCount(_useItemId);
 			if(num >= _useNum)
-				_skin.lbCaiLiao.htmlText = "消耗"+HtmlTextUtil.getTextColor(StaticValue.UI_PURPLE,name+"*"+_useNum)+
-					HtmlTextUtil.getTextColor(StaticValue.UI_GREEN1,"("+num+")");
+				_skin.lbCaiLiao.htmlText = "消耗"+HtmlTextUtil.getTextColor(StaticValue.PURPLE_TEXT,name+"*"+_useNum)+
+					HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"("+num+")");
 			else
-				_skin.lbCaiLiao.htmlText = "消耗"+HtmlTextUtil.getTextColor(StaticValue.UI_PURPLE,name+"*"+_useNum)+
-					HtmlTextUtil.getTextColor(StaticValue.UI_RED1,"("+num+")");
+				_skin.lbCaiLiao.htmlText = "消耗"+HtmlTextUtil.getTextColor(StaticValue.PURPLE_TEXT,name+"*"+_useNum)+
+					HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,"("+num+")");
 		}
 		
 		/**更新护送次数*/
 		private function updateHuSongNum(num:int):void
 		{
 			if(num > 0)
-				_skin.lbCiShu.htmlText = "剩余次数"+HtmlTextUtil.getTextColor(StaticValue.UI_GREEN1,"("+num+"/"+_maxnum+")");
+				_skin.lbCiShu.htmlText = "剩余次数"+HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"("+num+"/"+_maxnum+")");
 			else
-				_skin.lbCiShu.htmlText = "剩余次数"+HtmlTextUtil.getTextColor(StaticValue.UI_RED1,"("+num+"/"+_maxnum+")");
+				_skin.lbCiShu.htmlText = "剩余次数"+HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,"("+num+"/"+_maxnum+")");
 		}
 		
 		/**显示模型*/

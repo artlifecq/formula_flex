@@ -102,12 +102,12 @@ package com.rpgGame.appModule.hunyin
 		{
 			var bagNum:int=BackPackManager.instance.getBagItemsCountById(_cailiaoMod);
 			_skin.lbDanyao.text=ItemConfig.getItemName(_cailiaoMod)+"*"+_needcailiaoNum+"("+bagNum+")";
-			if(_needcailiaoNum>bagNum) _skin.lbDanyao.color=StaticValue.A_UI_RED_TEXT;
-			else _skin.lbDanyao.color=StaticValue.A_UI_GREEN_TEXT;
+			if(_needcailiaoNum>bagNum) _skin.lbDanyao.color=StaticValue.RED_TEXT;
+			else _skin.lbDanyao.color=StaticValue.GREEN_TEXT;
 			
 			_skin.lbJindu.text=Mgr.hunyinMgr.marriageInfos.wishValue.toString()+"/"+_needNum;
-			if(Mgr.hunyinMgr.marriageInfos.wishValue>_needNum) _skin.lbJindu.color=StaticValue.A_UI_RED_TEXT;
-			else _skin.lbJindu.color=StaticValue.A_UI_GREEN_TEXT;
+			if(Mgr.hunyinMgr.marriageInfos.wishValue>_needNum) _skin.lbJindu.color=StaticValue.RED_TEXT;
+			else _skin.lbJindu.color=StaticValue.GREEN_TEXT;
 			
 			_skin.barJindu.maximum=_needNum;
 			_skin.barJindu.value=Mgr.hunyinMgr.marriageInfos.wishValue;

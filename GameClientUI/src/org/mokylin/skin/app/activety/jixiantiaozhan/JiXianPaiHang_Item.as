@@ -82,7 +82,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			temp.name = "lbKillNum";
 			temp.text = "250024(52%)";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 95;
 			temp.x = 179;
@@ -97,7 +97,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			temp.name = "lbName";
 			temp.text = "【墨家】玩家名六个字";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 150;
 			temp.x = 27;
@@ -112,7 +112,7 @@ package org.mokylin.skin.app.activety.jixiantiaozhan
 			temp.name = "lbNo";
 			temp.text = "10";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 22;
 			temp.x = 6;

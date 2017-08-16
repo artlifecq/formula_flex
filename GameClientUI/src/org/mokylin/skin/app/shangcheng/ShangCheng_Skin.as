@@ -234,7 +234,7 @@ package org.mokylin.skin.app.shangcheng
 			lbLijing = temp;
 			temp.name = "lbLijing";
 			temp.text = "100";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 106;
 			temp.x = 63;
@@ -263,7 +263,7 @@ package org.mokylin.skin.app.shangcheng
 			lbYuanbao = temp;
 			temp.name = "lbYuanbao";
 			temp.text = "100";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 106;
 			temp.x = 63;
@@ -276,7 +276,7 @@ package org.mokylin.skin.app.shangcheng
 			var temp:feathers.controls.TabBar = new feathers.controls.TabBar();
 			tab_nv = temp;
 			temp.name = "tab_nv";
-			temp.btnWidth = 74;
+			temp.btnWidth = 75;
 			temp.styleClass = org.mokylin.skin.component.tabbar.TabBarSkin_pack;
 			temp.width = 326;
 			temp.x = 266;

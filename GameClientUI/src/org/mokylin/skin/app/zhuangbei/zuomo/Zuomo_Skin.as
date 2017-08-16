@@ -132,7 +132,7 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.fontSize = 14;
 			temp.text = "请放入消耗材料";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 449;
 			temp.y = 370;
@@ -248,7 +248,7 @@ package org.mokylin.skin.app.zhuangbei.zuomo
 			temp.name = "btn_shuoming";
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_info;
 			temp.x = 903;
-			temp.y = 98;
+			temp.y = 94;
 			return temp;
 		}
 

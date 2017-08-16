@@ -546,9 +546,9 @@ package com.rpgGame.appModule.equip
 			}
 			var needMoney:int=_nowSelect.q_money*_hechengNum;
 			if(needMoney<=userMoney){
-				des+=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,needMoney+LanguageConfig.getText(LangUI.UI_TEXT17));//绿色
+				des+=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,needMoney+LanguageConfig.getText(LangUI.UI_TEXT17));//绿色
 			}else if(needMoney>userMoney){
-				des+=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,needMoney+LanguageConfig.getText(LangUI.UI_TEXT17));//红色
+				des+=HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,needMoney+LanguageConfig.getText(LangUI.UI_TEXT17));//红色
 			}
 			return des;
 		}

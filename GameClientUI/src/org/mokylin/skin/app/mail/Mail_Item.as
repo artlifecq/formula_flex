@@ -99,7 +99,7 @@ package org.mokylin.skin.app.mail
 			temp.name = "lbName";
 			temp.letterSpacing = 0;
 			temp.text = "手机验证奖励";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 91;
 			temp.y = 17;

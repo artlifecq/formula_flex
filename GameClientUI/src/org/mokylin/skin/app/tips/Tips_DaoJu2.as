@@ -80,7 +80,7 @@ package org.mokylin.skin.app.tips
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "当前使用：";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 96;
 			temp.y = 48;
@@ -91,7 +91,7 @@ package org.mokylin.skin.app.tips
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "下一阶数可使用个数：";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 10;
 			temp.y = 135;
@@ -102,7 +102,7 @@ package org.mokylin.skin.app.tips
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "攻  击";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 0;
 			temp.y = 0;
@@ -113,7 +113,7 @@ package org.mokylin.skin.app.tips
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "防  御";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 0;
 			temp.y = 20;
@@ -124,7 +124,7 @@ package org.mokylin.skin.app.tips
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			temp.text = "气  血";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 0;
 			temp.y = 40;
@@ -379,7 +379,7 @@ package org.mokylin.skin.app.tips
 			lbShuxing = temp;
 			temp.name = "lbShuxing";
 			temp.text = "每颗资质丹永久增加战骑属性：";
-			temp.color = 0xA3A594;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 10;
 			temp.y = 173;

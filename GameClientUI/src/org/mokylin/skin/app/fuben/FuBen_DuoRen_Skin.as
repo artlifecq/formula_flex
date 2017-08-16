@@ -58,7 +58,6 @@ package org.mokylin.skin.app.fuben
 			super();
 			
 			this.currentState = "normal";
-			this.width = 956;
 			this.elementsContent = [__FuBen_DuoRen_Skin_UIAsset2_i(),__FuBen_DuoRen_Skin_UIAsset3_i(),__FuBen_DuoRen_Skin_UIAsset4_i(),grpShuoming_i(),scroll_Bar_i(),lbTiaozhan_i(),reward_ico_list_i()];
 			
 			states = {
@@ -73,70 +72,70 @@ package org.mokylin.skin.app.fuben
 		private function __FuBen_DuoRen_Skin_Label1_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.fontSize = 12;
+			temp.fontSize = 14;
 			temp.text = "要求人数：";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 17;
-			temp.y = 267;
+			temp.x = 20;
+			temp.y = 223;
 			return temp;
 		}
 
 		private function __FuBen_DuoRen_Skin_Label2_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.fontSize = 12;
+			temp.fontSize = 14;
 			temp.text = "要求等级：";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 17;
-			temp.y = 289;
+			temp.x = 20;
+			temp.y = 245;
 			return temp;
 		}
 
 		private function __FuBen_DuoRen_Skin_Label3_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.fontSize = 12;
+			temp.fontSize = 14;
 			temp.text = "要求战力：";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 17;
-			temp.y = 310;
+			temp.x = 20;
+			temp.y = 266;
 			return temp;
 		}
 
 		private function __FuBen_DuoRen_Skin_Label4_i():feathers.controls.Label
 		{
 			var temp:feathers.controls.Label = new feathers.controls.Label();
-			temp.fontSize = 12;
+			temp.fontSize = 14;
 			temp.text = "剩余次数：";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.x = 17;
-			temp.y = 332;
+			temp.x = 20;
+			temp.y = 287;
 			return temp;
 		}
 
 		private function __FuBen_DuoRen_Skin_UIAsset2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 431;
+			temp.height = 433;
 			temp.styleName = "ui/common/background/neikuang_2.png";
 			temp.width = 567;
 			temp.x = 23;
-			temp.y = 87;
+			temp.y = 86;
 			return temp;
 		}
 
 		private function __FuBen_DuoRen_Skin_UIAsset3_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			temp.height = 431;
+			temp.height = 433;
 			temp.styleName = "ui/common/background/neikuang_2.png";
-			temp.width = 343;
-			temp.x = 591;
-			temp.y = 87;
+			temp.width = 346;
+			temp.x = 590;
+			temp.y = 86;
 			return temp;
 		}
 
@@ -144,8 +143,8 @@ package org.mokylin.skin.app.fuben
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/fuben/tiao.jpg";
-			temp.x = 23;
-			temp.y = 519;
+			temp.x = 22;
+			temp.y = 518;
 			return temp;
 		}
 
@@ -162,8 +161,8 @@ package org.mokylin.skin.app.fuben
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			temp.styleName = "ui/app/fuben/wenzidi1.png";
-			temp.x = 82;
-			temp.y = 35;
+			temp.x = 84;
+			temp.y = 20;
 			return temp;
 		}
 
@@ -173,15 +172,15 @@ package org.mokylin.skin.app.fuben
 			_info_text = temp;
 			temp.name = "_info_text";
 			temp.height = 171;
-			temp.htmlText = "1.该副本为跨服副本，可重复进入，单个副本每天前10次通关均可获得通关奖励；<br>2.点击进入匹配按钮后进入匹配队列，匹配到副本开启最少人数后自动开启副本；<br>3.每天通关10次跨服副本后可获取每日挑战奖励。";
+			temp.htmlText = "1.该副本为跨服副本，可重复进入，单个副本每天前<font color='#00ff33'>10</font>次通关均可获得通关奖励；<br>2.点击进入匹配按钮后进入匹配队列，匹配到副本开启<font color='#00ff33'>最少人数</font>后自动开启副本；<br>3.每天通关<font color='#00ff33'>10</font>次跨服副本后可获取每日挑战奖励。";
 			temp.leading = 12;
 			temp.letterSpacing = 0;
 			temp.fontSize = 14;
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 292;
-			temp.x = 17;
-			temp.y = 91;
+			temp.width = 312;
+			temp.x = 20;
+			temp.y = 63;
 			return temp;
 		}
 
@@ -192,11 +191,12 @@ package org.mokylin.skin.app.fuben
 			temp.name = "btnEnter";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "进入匹配";
+			temp.fontSize = 16;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xFFFFFF;
-			temp.width = 90;
-			temp.x = 126;
-			temp.y = 374;
+			temp.width = 110;
+			temp.x = 116;
+			temp.y = 380;
 			return temp;
 		}
 
@@ -205,13 +205,15 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.Button = new feathers.controls.Button();
 			btnExit = temp;
 			temp.name = "btnExit";
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.label = "退出匹配";
+			temp.fontSize = 16;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.visible = false;
-			temp.x = 126;
-			temp.y = 374;
+			temp.width = 110;
+			temp.x = 116;
+			temp.y = 380;
 			return temp;
 		}
 
@@ -220,8 +222,8 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			grpShuoming = temp;
 			temp.name = "grpShuoming";
-			temp.x = 596;
-			temp.y = 92;
+			temp.x = 593;
+			temp.y = 89;
 			temp.elementsContent = [__FuBen_DuoRen_Skin_UIAsset5_i(),__FuBen_DuoRen_Skin_UIAsset6_i(),uiName_i(),_info_text_i(),__FuBen_DuoRen_Skin_Label1_i(),__FuBen_DuoRen_Skin_Label2_i(),__FuBen_DuoRen_Skin_Label3_i(),__FuBen_DuoRen_Skin_Label4_i(),lbRenshu_i(),lbDengji_i(),lbZhanli_i(),lbCishu_i(),btnEnter_i(),btnExit_i(),lbTime_i()];
 			return temp;
 		}
@@ -231,13 +233,13 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbCishu = temp;
 			temp.name = "lbCishu";
-			temp.fontSize = 12;
+			temp.fontSize = 14;
 			temp.text = "2";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 69;
-			temp.x = 80;
-			temp.y = 332;
+			temp.x = 91;
+			temp.y = 287;
 			return temp;
 		}
 
@@ -246,13 +248,13 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbDengji = temp;
 			temp.name = "lbDengji";
-			temp.fontSize = 12;
+			temp.fontSize = 14;
 			temp.text = "50";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 69;
-			temp.x = 80;
-			temp.y = 290;
+			temp.x = 91;
+			temp.y = 245;
 			return temp;
 		}
 
@@ -261,13 +263,13 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbRenshu = temp;
 			temp.name = "lbRenshu";
-			temp.fontSize = 12;
+			temp.fontSize = 14;
 			temp.text = "2";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 69;
-			temp.x = 80;
-			temp.y = 268;
+			temp.x = 91;
+			temp.y = 223;
 			return temp;
 		}
 
@@ -276,13 +278,13 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbTiaozhan = temp;
 			temp.name = "lbTiaozhan";
-			temp.text = "每日挑战10次可领取（0/10）：";
+			temp.text = "每日挑战10次可领取(0/10)：";
 			temp.textAlign = "right";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 229;
-			temp.x = 21;
-			temp.y = 545;
+			temp.width = 204;
+			temp.x = 20;
+			temp.y = 551;
 			return temp;
 		}
 
@@ -292,12 +294,11 @@ package org.mokylin.skin.app.fuben
 			lbTime = temp;
 			temp.name = "lbTime";
 			temp.text = "00：59";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.visible = false;
 			temp.width = 75;
-			temp.x = 215;
-			temp.y = 380;
+			temp.x = 232;
+			temp.y = 391;
 			return temp;
 		}
 
@@ -306,13 +307,13 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbZhanli = temp;
 			temp.name = "lbZhanli";
-			temp.fontSize = 12;
+			temp.fontSize = 14;
 			temp.text = "85520";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 69;
-			temp.x = 80;
-			temp.y = 311;
+			temp.x = 91;
+			temp.y = 266;
 			return temp;
 		}
 
@@ -332,8 +333,8 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.Group = new feathers.controls.Group();
 			reward_ico_list = temp;
 			temp.name = "reward_ico_list";
-			temp.x = 251;
-			temp.y = 529;
+			temp.x = 225;
+			temp.y = 535;
 			temp.elementsContent = [reward_ico_0_i()];
 			return temp;
 		}
@@ -356,8 +357,9 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
 			uiName = temp;
 			temp.name = "uiName";
-			temp.x = 101;
-			temp.y = 29;
+			temp.styleName = "ui/app/fuben/duorenfuben/fuben_name/changpinjiucheng/name.png";
+			temp.x = 103;
+			temp.y = 12;
 			return temp;
 		}
 

@@ -48,7 +48,7 @@ package com.rpgGame.app.ui.tips
 				//TimerServer.remove(updateCdTime);
 				return;
 			}
-			skin.labTime.htmlText = "解锁格子需要时间::"+HtmlTextUtil.getTextColor( StaticValue.COLOR_CODE_13, TimeUtil.timeFormatCH(cdTime--) );
+			skin.labTime.htmlText = "解锁格子需要时间::"+HtmlTextUtil.getTextColor( StaticValue.RED_TEXT, TimeUtil.timeFormatCH(cdTime--) );
 		}
 		
 		private function updateBgSize():void

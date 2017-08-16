@@ -307,7 +307,7 @@ package com.rpgGame.appModule.guild.war
 			_skin.lbHead.htmlText="占领"+cityName;
 			_skin.lbName1.htmlText="";
 			_skin.lbName2.htmlText="";
-			_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,"本帮已占领"+cityName);
+			_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"本帮已占领"+cityName);
 			_skin.lbTime.text="";
 			
 			var cityStyleName:String;
@@ -343,9 +343,9 @@ package com.rpgGame.appModule.guild.war
 			var cityName:String=EnumCity.getCityName(fightInfo.id,cfg.q_id);
 	
 			_skin.lbHead.htmlText="防守"+cityName;
-			_skin.lbName1.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,fightInfo.occupyGuildName);
-			_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW,"VS");
-			_skin.lbName2.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,fightInfo.attackGuildName);
+			_skin.lbName1.htmlText=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,fightInfo.occupyGuildName);
+			_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,"VS");
+			_skin.lbName2.htmlText=HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,fightInfo.attackGuildName);
 			_timeStr="距离战斗结束还有:"
 			_leftTime=_infoMsg.curWarTime;
 			_gTimer.start();
@@ -379,9 +379,9 @@ package com.rpgGame.appModule.guild.war
 			var cityName:String=EnumCity.getCityName(fightInfo.id,cfg.q_id);
 			
 			_skin.lbHead.htmlText="进攻"+cityName;
-			_skin.lbName1.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,fightInfo.attackGuildName);
-			_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW,"VS");
-			_skin.lbName2.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,fightInfo.occupyGuildName);
+			_skin.lbName1.htmlText=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,fightInfo.attackGuildName);
+			_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,"VS");
+			_skin.lbName2.htmlText=HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,fightInfo.occupyGuildName);
 			
 			_timeStr="距离战斗结束还有:"
 			_leftTime=_infoMsg.curWarTime;
@@ -416,11 +416,11 @@ package com.rpgGame.appModule.guild.war
 			var cityName:String=EnumCity.getCityName(fightInfo.id,cfg.q_id);
 			
 			_skin.lbHead.htmlText="竞拍"+cityName;
-			_skin.lbName1.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW1,"当前出价最高帮派:");
+			_skin.lbName1.htmlText=HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT1,"当前出价最高帮派:");
 			if(_infoMsg.curMaxPriceGuildName){
-				_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,_infoMsg.curMaxPriceGuildName);
+				_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,_infoMsg.curMaxPriceGuildName);
 			}else{
-				_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,"暂无");
+				_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,"暂无");
 			}
 			_skin.lbName2.htmlText="";
 			_leftTime=_infoMsg.curWarTime;
@@ -481,14 +481,14 @@ package com.rpgGame.appModule.guild.war
 			
 			if(myGuildId==fightInfo.attackGuildId.hexValue){
 				_skin.lbHead.htmlText="准备进攻:"+cityName;
-				_skin.lbName1.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,fightInfo.attackGuildName);
-				_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW,"VS");
-				_skin.lbName2.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,fightInfo.occupyGuildName);
+				_skin.lbName1.htmlText=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,fightInfo.attackGuildName);
+				_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,"VS");
+				_skin.lbName2.htmlText=HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,fightInfo.occupyGuildName);
 			}else{
 				_skin.lbHead.htmlText="准备防守:"+cityName;
-				_skin.lbName2.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,fightInfo.occupyGuildName);
-				_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_YELLOW,"VS");
-				_skin.lbName1.htmlText=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,fightInfo.attackGuildName);
+				_skin.lbName2.htmlText=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,fightInfo.occupyGuildName);
+				_skin.lbVs.htmlText=HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,"VS");
+				_skin.lbName1.htmlText=HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,fightInfo.attackGuildName);
 			}
 			
 			_timeStr="距离战斗开始还有:"

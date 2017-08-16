@@ -175,31 +175,31 @@ package com.rpgGame.app.ui.main.head {
 				case PKModeType.PEACE:
 				{
 					str="ui/mainui/head/mode/he.png";
-					text=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"【和平】")+HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"您的攻击不会对任何玩家造成伤害");
+					text=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"【和平】")+HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"您的攻击不会对任何玩家造成伤害");
 					break;
 				}
 				case PKModeType.TEAM:
 				{
 					str="ui/mainui/head/mode/dui.png";
-					text=HtmlTextUtil.getTextColor(StaticValue.A_UI_BLUE_TEXT,"【组队】")+HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"您的攻击不会误伤同队伍玩家");
+					text=HtmlTextUtil.getTextColor(StaticValue.BLUE_TEXT,"【组队】")+HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"您的攻击不会误伤同队伍玩家");
 					break;		
 				}
 				case PKModeType.GUILD:
 				{
 					str="ui/mainui/head/mode/bang.png";
-					text=HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,"【帮会】")+HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"您的攻击不会误伤同帮会玩家");
+					text=HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,"【帮会】")+HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"您的攻击不会误伤同帮会玩家");
 					break;
 				}
 				case PKModeType.ALL:
 				{
 					str="ui/mainui/head/mode/quan.png";
-					text=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,"【全体】")+HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"您的攻击会对任何玩家造成伤害");
+					text=HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,"【全体】")+HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"您的攻击会对任何玩家造成伤害");
 					break;
 				}
 				default:
 				{				
 					str="ui/mainui/head/mode/he.png";
-					text=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"【和平模式】")+HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"您的攻击不会对任何玩家造成伤害");
+					text=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"【和平模式】")+HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"您的攻击不会对任何玩家造成伤害");
 					break;
 				}
 			}

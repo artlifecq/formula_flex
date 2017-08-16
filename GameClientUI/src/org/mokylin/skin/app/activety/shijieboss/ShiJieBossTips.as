@@ -66,8 +66,8 @@ package org.mokylin.skin.app.activety.shijieboss
 			lbXiaJie = temp;
 			temp.name = "lbXiaJie";
 			temp.text = "【奖励】";
-			temp.color = 0xCFC6AE;
-			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 103;
 			temp.x = 59;
 			temp.y = 69;

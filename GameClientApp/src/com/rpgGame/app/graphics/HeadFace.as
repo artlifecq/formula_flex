@@ -745,7 +745,7 @@ package com.rpgGame.app.graphics
 				_guildNameBar = HeadNameBar.create();
 				//				this.addChild(_guildNameBar); //更新一下容器，从临时的到模型真正容器
 				_guildNameBar.setName(guildName);
-				_guildNameBar.setColor(StaticValue.COLOR_CODE_15);
+				_guildNameBar.setColor(StaticValue.GREEN_TEXT);
 				updateAllBarPosition();
 				return;
 			}
@@ -766,7 +766,7 @@ package com.rpgGame.app.graphics
 					_meirenTitle = HeadNameBar.create();
 				}
 				_meirenTitle.setName(guishu);
-				_meirenTitle.setColor(StaticValue.A_UI_GREEN_TEXT);
+				_meirenTitle.setColor(StaticValue.GREEN_TEXT);
 				updateAllBarPosition();
 			}
 				
@@ -813,7 +813,7 @@ package com.rpgGame.app.graphics
 				_familNameBar = HeadNameBar.create();
 				this.addChild(_familNameBar); //更新一下容器，从临时的到模型真正容器
 				_familNameBar.setName(familyName);
-				_familNameBar.setColor(StaticValue.COLOR_CODE_1);
+				_familNameBar.setColor(StaticValue.YELLOW_TEXT);
 				updateAllBarPosition();
 				return;
 			}
@@ -1312,7 +1312,7 @@ package com.rpgGame.app.graphics
 				
 				var fuqiName:String=otherName+"的"+((_role.data as HeroData).sex==1?"老公":"老婆");
 				_fuqititle.setName(fuqiName);
-				_fuqititle.setColor(StaticValue.A_UI_BEIGE_TEXT);
+				_fuqititle.setColor(StaticValue.BEIGE_TEXT);
 				deCtrl.addTop(_fuqititle,DecorCtrl.TOP_FUQI);
 			}
 			else

@@ -313,7 +313,7 @@ package com.rpgGame.app.view.icon
 				var tf:starling.text.TextFormat=new starling.text.TextFormat();
 				tf.horizontalAlign="left";
 				_shortcutKeyLab.format=tf;
-				_shortcutKeyLab.color = StaticValue.COLOR_CODE_4;
+				_shortcutKeyLab.color = StaticValue.YELLOW_TEXT;
 			}
 			_shortcutKeyLab.x=5;
 			_shortcutKeyLab.y=5;

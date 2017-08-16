@@ -86,7 +86,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			temp.name = "lbCityName";
 			temp.text = "中卫";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 52;
 			temp.x = 7;
@@ -101,7 +101,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			temp.name = "lbJiage";
 			temp.text = "100000";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = false;
 			temp.width = 88;
@@ -117,7 +117,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			temp.name = "lbTeamName1";
 			temp.text = "帮派名称七个字";
 			temp.textAlign = "center";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
 			temp.width = 109;
@@ -133,7 +133,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			temp.name = "lbTeamName2";
 			temp.text = "帮派名称七个字";
 			temp.textAlign = "center";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = true;
 			temp.width = 109;
@@ -149,7 +149,7 @@ package org.mokylin.skin.app.banghui.wangcheng
 			temp.name = "lbTime";
 			temp.text = "00：30：00";
 			temp.textAlign = "center";
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.underline = false;
 			temp.width = 88;

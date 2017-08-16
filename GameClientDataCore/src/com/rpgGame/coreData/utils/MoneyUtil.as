@@ -109,13 +109,13 @@ package com.rpgGame.coreData.utils
 		public static function getHtmlMoneyString( //
 			money : Number, //
 			onlyValid : Boolean = true, //
-			moneyDingColor : uint = StaticValue.COLOR_CODE_1, //
-			moneyLiangColor : uint = StaticValue.COLOR_CODE_1, //
-			moneyWenColor : uint = StaticValue.COLOR_CODE_1, //
-			textDingColor : uint = StaticValue.COLOR_CODE_1, //
-			textLiangColor : uint = StaticValue.COLOR_CODE_1, //
-			textWenColor : uint = StaticValue.COLOR_CODE_1, //
-			maxMoneyColor : uint = StaticValue.COLOR_CODE_16, //
+			moneyDingColor : uint = 0 ,//StaticValue.COLOR_CODE_1,
+			moneyLiangColor : uint = 0 ,//StaticValue.COLOR_CODE_1, //
+			moneyWenColor : uint = 0, //StaticValue.COLOR_CODE_1, //
+			textDingColor : uint =  0,//StaticValue.COLOR_CODE_1, //
+			textLiangColor : uint =0, // StaticValue.COLOR_CODE_1, //
+			textWenColor : uint =  0,//StaticValue.COLOR_CODE_1, //
+			maxMoneyColor : uint = 0, //StaticValue.COLOR_CODE_16, //
 			useWen : Boolean = true) : String //
 		{
 			var isCost : Boolean = money < 0;
@@ -159,7 +159,7 @@ package com.rpgGame.coreData.utils
 		/**不使用文**/
 		public static function getHtmlMoneyStringRemoveWen(money:Number):String
 		{
-			return getHtmlMoneyString(money,true,
+			/*return getHtmlMoneyString(money,true,
 				StaticValue.COLOR_CODE_1,
 				StaticValue.COLOR_CODE_1,
 				StaticValue.COLOR_CODE_1,
@@ -167,14 +167,16 @@ package com.rpgGame.coreData.utils
 				StaticValue.COLOR_CODE_1,
 				StaticValue.COLOR_CODE_1,
 				StaticValue.COLOR_CODE_16,
-				false);
+				false);*/
+			return "";
 		}
 		
 		public static function getAutoHtmlMoneyString(money:Number):String
 		{
-			if(money>=100000000)
+			/*if(money>=100000000)
 				return getHtmlMoneyStringRemoveWen(money);
-			return getHtmlMoneyString(money);
+			return getHtmlMoneyString(money);*/
+			return "";
 		}
 
 		/**

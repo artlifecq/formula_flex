@@ -83,7 +83,7 @@ package org.mokylin.skin.app.activety.zonghe
 			temp.height = 77;
 			temp.htmlText = "1.活动开启则出现第一波盗宝小怪，<br>第<font color='#5DBD37'>5、10、15</font>分钟刷新<br>2.冬季盗宝下怪必掉礼金<br>3.攻击盗宝小怪额外获得<font color='#5DBD37'>5-10礼金</font>";
 			temp.leading = 4;
-			temp.color = 0xCFC6AE;
+			temp.color = 0xEAEABC;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.x = 12;
 			temp.y = 31;

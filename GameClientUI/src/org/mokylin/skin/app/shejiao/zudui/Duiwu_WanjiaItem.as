@@ -92,7 +92,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.name = "lbBanghui";
 			temp.text = "【32000】雷神打飞机";
 			temp.textAlign = "center";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 190;
 			temp.x = 531;
@@ -107,7 +107,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.name = "lbLevel";
 			temp.text = "90级";
 			temp.textAlign = "center";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 86;
 			temp.x = 189;
@@ -122,7 +122,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.name = "lbMap";
 			temp.text = "马贼营寨";
 			temp.textAlign = "center";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 148;
 			temp.x = 740;
@@ -137,7 +137,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.name = "lbName";
 			temp.text = "【320000】角色名六个字";
 			temp.textAlign = "center";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 172;
 			temp.x = 11;
@@ -152,7 +152,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.name = "lbNum";
 			temp.text = "未组队";
 			temp.textAlign = "center";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 100;
 			temp.x = 435;
@@ -167,7 +167,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.name = "lbZhanli";
 			temp.text = "11114228527752";
 			temp.textAlign = "center";
-			temp.color = 0x8B8D7B;
+			temp.color = 0xBBBDAA;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 154;
 			temp.x = 277;
@@ -182,6 +182,7 @@ package org.mokylin.skin.app.shejiao.zudui
 			temp.name = "rdoSelect";
 			temp.height = 32;
 			temp.styleClass = org.mokylin.skin.app.shejiao.zudui.BtnSelect_Skin;
+			temp.visible = false;
 			temp.width = 894;
 			temp.x = 0;
 			temp.y = -4;
