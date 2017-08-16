@@ -17,6 +17,8 @@ package com.rpgGame.app.manager.role
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.core.events.BuffEvent;
 	import com.rpgGame.core.events.role.RoleEvent;
+	import com.rpgGame.core.utils.NumberUtil;
+	import com.rpgGame.core.utils.TextUtil;
 	import com.rpgGame.coreData.enum.BoneNameEnum;
 	import com.rpgGame.coreData.role.HeroData;
 	import com.rpgGame.coreData.type.CharAttributeType;
@@ -273,11 +275,15 @@ package com.rpgGame.app.manager.role
 					newname+=arr[i];
 				}
 			}
-			if(length>0&&newname.length>length)
+			if(length>0)
 			{
-				newname=newname.slice(0,length)+"...";
+				length=length*2;
+				newname=TextUtil.getByteLen(newname)<=length?newname:TextUtil.sliceToBytelen(newname,length-3)+"...";
 			}
 			return newname;
-		}		
+		}
+		
+		
+		
 	}
 }

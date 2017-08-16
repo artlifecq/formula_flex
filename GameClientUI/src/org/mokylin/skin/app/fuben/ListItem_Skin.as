@@ -45,11 +45,12 @@ package org.mokylin.skin.app.fuben
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbName = temp;
 			temp.name = "lbName";
+			temp.height = 21;
 			temp.fontSize = 14;
-			temp.text = "三百只猴子";
+			temp.text = " [1000区]一二三四五六";
 			temp.color = 0x5CB006;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 130;
+			temp.width = 165;
 			temp.x = 0;
 			temp.y = 0;
 			return temp;

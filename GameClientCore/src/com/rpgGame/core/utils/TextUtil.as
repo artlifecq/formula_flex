@@ -1129,6 +1129,34 @@ package  com.rpgGame.core.utils
 			
 			return html;
 		}
-	
+		/**获取指定字节长度的字符串：英文字符一个字节，中文字符两个字节 */
+		public static function sliceToBytelen(name:String,length:int):String
+		{
+			var str:String="";
+			var sliceStr:String="";
+			if(name!=""&&length>0)
+			{
+				for(var i:int=1;i<=name.length;i++)
+				{
+					sliceStr=name.slice(0,i);
+					if(getByteLen(sliceStr)>length)
+					{
+						return str;
+					}
+					str=sliceStr;
+				}
+			}
+			return str
+		}
+		public static function getByteLen(str:String ):int
+		{
+			var len:int=0;
+			if(str!=null&&str!=""){
+				var ba:ByteArray =new ByteArray;
+				ba.writeMultiByte (str,"");
+				len = ba.length;
+			}
+			return len;
+		}
     }
 }
