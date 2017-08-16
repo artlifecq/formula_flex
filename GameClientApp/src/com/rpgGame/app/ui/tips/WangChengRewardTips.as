@@ -49,7 +49,7 @@ package com.rpgGame.app.ui.tips
 			_skins.lbTeamName.text=info.occupyGuildName?info.occupyGuildName:"无";
 			_skins.lbRoleName.text=info.occupyCheifName?info.occupyCheifName:"无";
 			
-			_skins.lbVsBang.htmlText=info.occupyGuildName&&info.attackGuildName?HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,info.occupyGuildName)+"VS"+HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,info.attackGuildName):"无";
+			_skins.lbVsBang.htmlText=info.occupyGuildName&&info.attackGuildName?HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,info.occupyGuildName)+"VS"+HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,info.attackGuildName):"无";
 			if(tipsInfo.nextTime>0){
 				_skins.lbTime.text=TimeUtil.changeDateToDateStr(new Date(tipsInfo.nextTime));
 			}else{
@@ -57,7 +57,7 @@ package com.rpgGame.app.ui.tips
 			}
 			_skins.lbJiangli.visible=tipsInfo.isOwner;
 			if(tipsInfo.isOwner){
-				_skins.lbJiangli.htmlText=tipsInfo.rewardState==0?HtmlTextUtil.getTextColor(StaticValue.UI_RED1,"已经领取"):HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,"点击领取");
+				_skins.lbJiangli.htmlText=tipsInfo.rewardState==0?HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,"已经领取"):HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"点击领取");
 			}
 			
 			_skins.lbName.text=EnumCity.getCityName(info.id,info.areaId);

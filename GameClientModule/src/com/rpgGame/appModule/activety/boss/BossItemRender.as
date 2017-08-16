@@ -127,10 +127,10 @@ package com.rpgGame.appModule.activety.boss
 						}
 					}
 					timeStr="下次刷新时间:"+TimeUtil.changeIntHM2Str(next);
-					timeStr=HtmlTextUtil.getTextColor(StaticValue.UI_RED1,timeStr);
+					timeStr=HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,timeStr);
 				}else{
 					timeStr="已刷新(未击杀)";
-					timeStr=HtmlTextUtil.getTextColor(StaticValue.UI_GREEN,timeStr);
+					timeStr=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,timeStr);
 				}
 				
 				_skin.lbMsg2.htmlText=timeStr;
@@ -143,9 +143,9 @@ package com.rpgGame.appModule.activety.boss
 			GrayFilter.gray(_skin.uiBg);
 			GrayFilter.gray(_skin.btnEnter);
 			GrayFilter.gray(_skin.lbLevel);
-			_skin.lbLevel.color=StaticValue.A_UI_GRAY_TEXT;
-			_skin.lbMsg1.color=StaticValue.A_UI_GRAY_TEXT;
-			_skin.lbMsg2.color=StaticValue.A_UI_GRAY_TEXT;
+			_skin.lbLevel.color=StaticValue.GRAY_TEXT;
+			_skin.lbMsg1.color=StaticValue.GRAY_TEXT;
+			_skin.lbMsg2.color=StaticValue.GRAY_TEXT;
 		}
 		
 		private function ungrayItem():void
@@ -155,8 +155,8 @@ package com.rpgGame.appModule.activety.boss
 			GrayFilter.unGray(_skin.lbLevel);
 			GrayFilter.unGray(_skin.btnEnter);
 			_skin.lbLevel.color=StaticValue.Q_YELLOW;
-			_skin.lbMsg1.color=StaticValue.A_UI_YELLOW_TEXT;
-			_skin.lbMsg2.color=StaticValue.A_UI_YELLOW_TEXT;
+			_skin.lbMsg1.color=StaticValue.YELLOW_TEXT;
+			_skin.lbMsg2.color=StaticValue.YELLOW_TEXT;
 		}
 	}
 }

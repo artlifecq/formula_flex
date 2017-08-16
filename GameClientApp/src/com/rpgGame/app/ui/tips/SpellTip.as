@@ -140,7 +140,7 @@ package com.rpgGame.app.ui.tips
 				GrayFilter.unGray(riseIco);
 				_spellTip.lbJinjie.text=LanguageConfig.getText(LangSpell.SPELL_PANEL_TEXT3).substr(0,3);
 			}
-			_spellTip.lbJinjie.color=StaticValue.A_UI_YELLOW_TEXT;
+			_spellTip.lbJinjie.color=StaticValue.YELLOW_TEXT;
 			_spellTip.lbJinjie2.y=_spellTip.lbJinjie.y+_spellTip.lbJinjie.textHeight+3;
 			_spellTip.lbJinjie2.htmlText=cfg.q_skillpanel_description2;		
 			_spellTip.grpContent.height=_spellTip.lbJinjie2.y+_spellTip.lbJinjie2.textHeight+18;

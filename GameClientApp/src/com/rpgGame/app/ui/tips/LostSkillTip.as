@@ -44,11 +44,11 @@ package com.rpgGame.app.ui.tips
 			{
 				level = state.level;
 				_skin.lb_jihuo.text = "Lv:"+level;
-				_skin.lb_jihuo.color = StaticValue.A_UI_GREEN_TEXT;
+				_skin.lb_jihuo.color = StaticValue.GREEN_TEXT;
 			}else{
 				level = 1;
 				_skin.lb_jihuo.text = NotifyCfgData.getNotifyTextByID(7012);
-				_skin.lb_jihuo.color = StaticValue.A_UI_RED_TEXT;
+				_skin.lb_jihuo.color = StaticValue.RED_TEXT;
 			}
 			var currentupdate:Q_lostskill_up = LostSkillUpData.getDatabyIdAndLevel(skillId,level);
 			_skin.lb_shengming.text = skillOpenData.q_desc.replace("$",LostSkillManager.instance().getSkillValue(skillOpenData,currentupdate))

@@ -69,7 +69,7 @@ package com.rpgGame.app.ui.main.smallmap
 			text.maxWidth = text.width = 100;
 			text.textAlign = "center";
 			text.bold = false;
-			text.color = StaticValue.COLOR_CODE_4;
+			text.color = StaticValue.YELLOW_TEXT;
 			text.fontName = Fontter.DEFAULT_FONT_NAME;
 			text.fontSize = Fontter.DEFAULT_FONT_SIZE;
 			text.nativeFilters = ColorUtils.getDefaultStrokeFilter();

@@ -43,7 +43,7 @@ package com.rpgGame.app.ui.tips
 			tipsData=(data as DynamicTipData).data;
 			
 			_itemTip.lbl_name.text=tipsData.name;
-			_itemTip.lbl_name.htmlText=HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,tipsData.name)+HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT, tipsData.value);
+			_itemTip.lbl_name.htmlText=HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,tipsData.name)+HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT, tipsData.value);
 			_itemTip.lbl_miaoshu.htmlText=tipsData.des;
 			var bgheight:int=int(_itemTip.lbl_miaoshu.y+_itemTip.lbl_miaoshu.textHeight+10);
 			_itemTip.imgBG.height=bgheight;

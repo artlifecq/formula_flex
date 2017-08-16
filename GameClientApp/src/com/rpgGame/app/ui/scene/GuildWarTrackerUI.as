@@ -239,9 +239,9 @@ package com.rpgGame.app.ui.scene
 			for(var i:int=0;i<msg.infos.length;i++){
 				var info:CampScoreInfo=msg.infos[i];
 				if(info.campId==myCamp){
-					(_skin.scroll_box.getChildAt(i) as Label).htmlText=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,info.name)+"总积分:"+info.score+"/"+max;
+					(_skin.scroll_box.getChildAt(i) as Label).htmlText=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,info.name)+"总积分:"+info.score+"/"+max;
 				}else{
-					(_skin.scroll_box.getChildAt(i) as Label).htmlText=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,info.name)+"总积分:"+info.score+"/"+max;
+					(_skin.scroll_box.getChildAt(i) as Label).htmlText=HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,info.name)+"总积分:"+info.score+"/"+max;
 				}
 			}
 		}
@@ -312,19 +312,19 @@ package com.rpgGame.app.ui.scene
 		{
 			if(leftTime1>0){
 				leftTime1--;
-				_skin.lbInfo1.htmlText=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,TimeUtil.formatTimeToTimeString(leftTime1))+"秒后刷出";
+				_skin.lbInfo1.htmlText=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,TimeUtil.formatTimeToTimeString(leftTime1))+"秒后刷出";
 			}else{
 				_skin.lbInfo1.htmlText=HtmlTextUtil.underLine("前往采集");
 			}
 			if(leftTime2>0){
 				leftTime2--;
-				_skin.lbInfo3.htmlText=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,TimeUtil.formatTimeToTimeString(leftTime2))+"秒后刷出";
+				_skin.lbInfo3.htmlText=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,TimeUtil.formatTimeToTimeString(leftTime2))+"秒后刷出";
 			}else{
 				_skin.lbInfo3.htmlText=HtmlTextUtil.underLine("前往采集");
 			}
 			if(leftTime3>0){
 				leftTime3--;
-				_skin.lbInfo4.htmlText=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,TimeUtil.formatTimeToTimeString(leftTime3))+"秒后刷出";
+				_skin.lbInfo4.htmlText=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,TimeUtil.formatTimeToTimeString(leftTime3))+"秒后刷出";
 			}else{
 				_skin.lbInfo4.htmlText=HtmlTextUtil.underLine("前往采集");
 			}

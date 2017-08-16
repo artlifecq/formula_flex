@@ -113,24 +113,24 @@ package com.rpgGame.appModule.equip
 					{
 						changV=useInfo.strengthLevel-tragetInfo.strengthLevel;
 						changV=changV>0?"+"+changV:changV;
-						_skin.labelDisplay.htmlText=LanguageConfig.getText(LangUI.UI_TEXT22)+HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,tragetInfo.strengthLevel.toString())+HtmlTextUtil.getTextColor(0x5DBD37,"("+changV+")");
+						_skin.labelDisplay.htmlText=LanguageConfig.getText(LangUI.UI_TEXT22)+HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,tragetInfo.strengthLevel.toString())+HtmlTextUtil.getTextColor(0x5DBD37,"("+changV+")");
 						for(var i:int=0;i<values2.length;i++)
 						{
 							if(i<values1.length&&values2[i]-values1[i]>0)
 							{
 								lab=new Label;
-								lab.color = StaticValue.A_UI_GRAY_TEXT;
+								lab.color = StaticValue.GRAY_TEXT;
 								lab.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-								lab.htmlText=CharAttributeType.getCNName(keys[i])+": "+HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,values1[i])+HtmlTextUtil.getTextColor(0x5DBD37,"(+"+(values2[i]-values1[i])+")");
+								lab.htmlText=CharAttributeType.getCNName(keys[i])+": "+HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,values1[i])+HtmlTextUtil.getTextColor(0x5DBD37,"(+"+(values2[i]-values1[i])+")");
 								_labList.push(lab);
 								_labContainer.addChild(lab);
 							}
 							else
 							{
 								lab=new Label;
-								lab.color = StaticValue.A_UI_GRAY_TEXT;
+								lab.color = StaticValue.GRAY_TEXT;
 								lab.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-								lab.htmlText=CharAttributeType.getCNName(keys[i])+": "+HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,"0")+HtmlTextUtil.getTextColor(0x5DBD37,"(+"+values2[i]+")");
+								lab.htmlText=CharAttributeType.getCNName(keys[i])+": "+HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,"0")+HtmlTextUtil.getTextColor(0x5DBD37,"(+"+values2[i]+")");
 								_labList.push(lab);
 								_labContainer.addChild(lab);
 							}
@@ -142,9 +142,9 @@ package com.rpgGame.appModule.equip
 					}
 					else
 					{
-						_skin.labelDisplay.htmlText=LanguageConfig.getText(LangUI.UI_TEXT22)+HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,tragetInfo.strengthLevel.toString());
+						_skin.labelDisplay.htmlText=LanguageConfig.getText(LangUI.UI_TEXT22)+HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,tragetInfo.strengthLevel.toString());
 						lab=new Label;
-						lab.color = StaticValue.A_UI_RED_TEXT; //红色
+						lab.color = StaticValue.RED_TEXT; //红色
 						lab.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 						lab.htmlText=LanguageConfig.getText(LangUI.UI_TEXT23);
 						_labList.push(lab);
@@ -168,11 +168,11 @@ package com.rpgGame.appModule.equip
 					var num:int=use_Promote-traget_Promote;
 					if(num>0)
 					{
-						_skin.labelDisplay.htmlText=LanguageConfig.getText(LangUI.UI_TEXT21)+HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,tragetInfo.polishLevel.toString())+HtmlTextUtil.getTextColor(0x5DBD37,"(+"+((useInfo.polishLevel-tragetInfo.polishLevel)+")"));
+						_skin.labelDisplay.htmlText=LanguageConfig.getText(LangUI.UI_TEXT21)+HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,tragetInfo.polishLevel.toString())+HtmlTextUtil.getTextColor(0x5DBD37,"(+"+((useInfo.polishLevel-tragetInfo.polishLevel)+")"));
 						lab=new Label;
-						lab.color = StaticValue.A_UI_GRAY_TEXT;
+						lab.color = StaticValue.GRAY_TEXT;
 						lab.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-						lab.htmlText=LanguageConfig.getText(LangUI.UI_TEXT24)+HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,Number((traget_Promote/100).toFixed(1))+"%")+HtmlTextUtil.getTextColor(0x5DBD37,"(+"+Number((num/100).toFixed(1))+"%)");
+						lab.htmlText=LanguageConfig.getText(LangUI.UI_TEXT24)+HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,Number((traget_Promote/100).toFixed(1))+"%")+HtmlTextUtil.getTextColor(0x5DBD37,"(+"+Number((num/100).toFixed(1))+"%)");
 						_labList.push(lab);
 						_labContainer.addChild(lab);
 						TouchableUtil.ungray(_skin.rdo_type);
@@ -182,9 +182,9 @@ package com.rpgGame.appModule.equip
 					}
 					else
 					{
-						_skin.labelDisplay.htmlText=LanguageConfig.getText(LangUI.UI_TEXT21)+HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,tragetInfo.polishLevel.toString());
+						_skin.labelDisplay.htmlText=LanguageConfig.getText(LangUI.UI_TEXT21)+HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,tragetInfo.polishLevel.toString());
 						lab=new Label;
-						lab.color = StaticValue.A_UI_RED_TEXT;
+						lab.color = StaticValue.RED_TEXT;
 						lab.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 						lab.htmlText=LanguageConfig.getText(LangUI.UI_TEXT25);
 						_labList.push(lab);
@@ -210,9 +210,9 @@ package com.rpgGame.appModule.equip
 							for(i=0;i<values1.length;i++)
 							{
 								lab=new Label;
-								lab.color = StaticValue.A_UI_GRAY_TEXT;
+								lab.color = StaticValue.GRAY_TEXT;
 								lab.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-								lab.htmlText=CharAttributeType.getCNName(keys[i])+":"+HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,values1[i]);
+								lab.htmlText=CharAttributeType.getCNName(keys[i])+":"+HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,values1[i]);
 								_labList.push(lab);
 								_labContainer.addChild(lab);
 							}
@@ -221,9 +221,9 @@ package com.rpgGame.appModule.equip
 						{
 							var q_buff:Q_buff=BuffStateDataManager.getData(q_wash_attr.q_buff_id);
 							lab=new Label;
-							lab.color = StaticValue.A_UI_GRAY_TEXT;
+							lab.color = StaticValue.GRAY_TEXT;
 							lab.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-							lab.htmlText=q_buff.q_buff_name+":"+HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,q_buff.q_description);
+							lab.htmlText=q_buff.q_buff_name+":"+HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,q_buff.q_description);
 							_labList.push(lab);
 							_labContainer.addChild(lab);
 						}
@@ -244,9 +244,9 @@ package com.rpgGame.appModule.equip
 							for(i=0;i<values1.length;i++)
 							{
 								lab=new Label;
-								lab.color = StaticValue.A_UI_GRAY_TEXT;
+								lab.color = StaticValue.GRAY_TEXT;
 								lab.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-								lab.htmlText=CharAttributeType.getCNName(keys[i])+":"+HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,values1[i]);
+								lab.htmlText=CharAttributeType.getCNName(keys[i])+":"+HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,values1[i]);
 								_labList.push(lab);
 								_labContainer.addChild(lab);
 							}
@@ -255,9 +255,9 @@ package com.rpgGame.appModule.equip
 						{
 							q_buff=BuffStateDataManager.getData(q_wash_attr.q_buff_id);
 							lab=new Label;
-							lab.color = StaticValue.A_UI_GRAY_TEXT;
+							lab.color = StaticValue.GRAY_TEXT;
 							lab.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-							lab.htmlText=q_buff.q_buff_name+":"+HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,q_buff.q_description);
+							lab.htmlText=q_buff.q_buff_name+":"+HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,q_buff.q_description);
 							_labList.push(lab);
 							_labContainer.addChild(lab);
 						}

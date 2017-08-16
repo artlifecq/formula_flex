@@ -33,7 +33,7 @@ package com.rpgGame.core.view.ui.hint.roll
 				textfiled = new TextField( 300, 22, "" );
 				textfiled.touchable = false;
 				textfiled.autoSize = TextFieldAutoSize.HORIZONTAL;
-				textfiled.color = StaticValue.COLOR_CODE_19;
+				textfiled.color = StaticValue.BLUE_TEXT;
 				textfiled.fontSize = 18;
 				textfiled.fontName = Fontter.DEFAULT_FONT_NAME;
 				textfiled.isHtmlText = true;

@@ -194,7 +194,7 @@ package com.rpgGame.app.ui.alert
 				gameAlert.cboxTip.visible = alertSet.isShowCBox;
 				gameAlert.cboxTip.isSelected = false;
 				gameAlert.cboxTip.label=alertInfo.checkText?alertInfo.checkText:"下次不再确认";
-				gameAlert.cboxTip.color=StaticValue.UI_GREEN;
+				gameAlert.cboxTip.color=StaticValue.GREEN_TEXT;
 			}
 			if (gameAlert.lbTip)
 			{

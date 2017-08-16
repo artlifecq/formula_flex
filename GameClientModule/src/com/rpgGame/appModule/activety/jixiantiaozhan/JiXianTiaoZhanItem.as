@@ -86,16 +86,16 @@ package com.rpgGame.appModule.activety.jixiantiaozhan
 				_skin.lbName.text=info.playerName;
 				_skin.lbNum.text=info.damage.toString();
 				if(num==1) {
-					_skin.lbName.color = _skin.lbNum.color = StaticValue.RANK_RED;
+					_skin.lbName.color = _skin.lbNum.color = StaticValue.RED_TEXT;
 				}
 				else if(num==2) {
-					_skin.lbName.color = _skin.lbNum.color = StaticValue.COLOR_CODE_19;
+					_skin.lbName.color = _skin.lbNum.color = StaticValue.BLUE_TEXT;
 				}
 				else if(num == 3) {
-					_skin.lbName.color = _skin.lbNum.color = StaticValue.UI_YELLOW;
+					_skin.lbName.color = _skin.lbNum.color = StaticValue.YELLOW_TEXT;
 				}
 				else {
-					_skin.lbName.color = _skin.lbNum.color = StaticValue.UI_YELLOW1;
+					_skin.lbName.color = _skin.lbNum.color = StaticValue.YELLOW_TEXT1;
 				}
 			}
 			else ceshi();

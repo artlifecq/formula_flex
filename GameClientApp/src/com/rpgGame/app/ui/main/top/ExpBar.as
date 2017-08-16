@@ -60,8 +60,8 @@ package com.rpgGame.app.ui.main.top
 			TipTargetManager.remove(this);
 			var percentage:Number=MainRoleManager.actorInfo.curExp/MainRoleManager.actorInfo.maxExp;
 			var num:String="    ("+(percentage*100).toFixed(2)+"%)";
-			var text:String=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"经验值   "+MainRoleManager.actorInfo.curExp+"/"+MainRoleManager.actorInfo.maxExp)+
-				HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,num)+"\n"+DESCRIBE;
+			var text:String=HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,"经验值   "+MainRoleManager.actorInfo.curExp+"/"+MainRoleManager.actorInfo.maxExp)+
+				HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,num)+"\n"+DESCRIBE;
 			TipTargetManager.show(this, TargetTipsMaker.makeSimpleTextTips(text));
 		}		
 			

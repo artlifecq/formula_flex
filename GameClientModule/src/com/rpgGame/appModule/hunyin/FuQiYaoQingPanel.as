@@ -26,7 +26,7 @@ package com.rpgGame.appModule.hunyin
 		{
 			super.show();
 			_msg=data as SCNoticeZoneMessage;
-			_skin.lbInfo.htmlText=HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,"你的伴侣正在挑战")+HunYinUtil.getzoneText(_msg.zoneModelId)+HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,"夫妻副本\n是否传送进副本");
+			_skin.lbInfo.htmlText=HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,"你的伴侣正在挑战")+HunYinUtil.getzoneText(_msg.zoneModelId)+HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,"夫妻副本\n是否传送进副本");
 		}
 		
 		override protected function onTouchTarget(target:DisplayObject):void

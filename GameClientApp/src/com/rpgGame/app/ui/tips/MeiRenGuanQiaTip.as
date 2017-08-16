@@ -53,10 +53,10 @@ package com.rpgGame.app.ui.tips
 			_skin.lbZhanli.text=_info.zhanli.toString();
 			if(_info.tongguanBool){
 				_skin.lbZhuangtai.text="已通关";
-				_skin.lbZhuangtai.color=StaticValue.A_UI_GREEN_TEXT;
+				_skin.lbZhuangtai.color=StaticValue.GREEN_TEXT;
 			}else{
 				_skin.lbZhuangtai.text="未通关";
-				_skin.lbZhuangtai.color=StaticValue.A_UI_RED_TEXT;
+				_skin.lbZhuangtai.color=StaticValue.RED_TEXT;
 			}
 			var arr:Array=_info.prize;
 			if(arr){

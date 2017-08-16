@@ -34,25 +34,25 @@ package com.rpgGame.app.utils
 			if (data != null)
 				return data;
 
-			var color : uint = StaticValue.COLOR_CODE_13;
+			var color : uint = StaticValue.RED_TEXT;
 			var info : String = "";
 			switch (state)
 			{
 				case HeadBloodStateType.MAIN_CHAR:
-					color = StaticValue.COLOR_CODE_14;
+					color = StaticValue.GREEN_TEXT;
 					break;
 				case HeadBloodStateType.ENEMY:
-					color = StaticValue.COLOR_CODE_13;
+					color = StaticValue.RED_TEXT;
 					break;
 				case HeadBloodStateType.TEAM:
-					color = StaticValue.COLOR_CODE_19;
+					color = StaticValue.BLUE_TEXT;
 					break;
 				case HeadBloodStateType.COUNTRY_WAR_ATTACK_MONSTER:
-					color = StaticValue.COLOR_CODE_13;
+					color = StaticValue.RED_TEXT;
 					info = "攻方占领中";
 					break;
 				case HeadBloodStateType.COUNTRY_WAR_DEFENSE_MONSTER:
-					color = StaticValue.COLOR_CODE_19;
+					color = StaticValue.BLUE_TEXT;
 					info = "守方占领中";
 					break;
 			}
@@ -134,24 +134,24 @@ package com.rpgGame.app.utils
 		public static function getRoleNameColor(_role : SceneRole) : uint
 		{
 			if (_role == null)
-				return StaticValue.COLOR_CODE_13;
+				return StaticValue.RED_TEXT;
 
 			if (_role.type == SceneCharType.NPC)
-				return StaticValue.COLOR_CODE_4;
+				return StaticValue.YELLOW_TEXT;
 			if (_role.type == SceneCharType.GIRL_PET)
-				return StaticValue.A_UI_BLUE_TEXT;
+				return StaticValue.BLUE_TEXT;
 			if (_role.type == SceneCharType.PROTECT_NPC)
-				return StaticValue.COLOR_CODE_4;
+				return StaticValue.YELLOW_TEXT;
 
 			if (_role.type == SceneCharType.MONSTER)
 			{
 				if(FightManager.getFightRoleState(_role) == FightManager.FIGHT_ROLE_STATE_CAN_NOT_FIGHT)
 				{
-					return StaticValue.COLOR_CODE_1;
+					return StaticValue.BEIGE_TEXT;
 				}
 				else
 				{
-					return StaticValue.COLOR_CODE_13;
+					return StaticValue.RED_TEXT;
 				}
 			}
 			if (_role.type == SceneCharType.LIANG_CANG)
@@ -161,11 +161,11 @@ package com.rpgGame.app.utils
 			{
 				if(FightManager.getFightRoleState(_role) == FightManager.FIGHT_ROLE_STATE_CAN_NOT_FIGHT)
 				{
-					return StaticValue.COLOR_CODE_1;
+					return StaticValue.BEIGE_TEXT;
 				}
 				else
 				{
-					return StaticValue.COLOR_CODE_13;
+					return StaticValue.RED_TEXT;
 				}
 			}
 			if (SceneCharType.DROP_GOODS==_role.type) 
@@ -173,14 +173,14 @@ package com.rpgGame.app.utils
 				return ItemConfig.getItemQualityColor(int(_role.data.qitem.q_id));
 			}
 			if (_role.type != SceneCharType.PLAYER)
-				return StaticValue.COLOR_CODE_1;
+				return StaticValue.BEIGE_TEXT;
 
 			var heroData : HeroData = _role.data as HeroData;
 			if (heroData == null)
-				return StaticValue.COLOR_CODE_13;
+				return StaticValue.RED_TEXT;
 
 //			if (CountryManager.isMyEnemyCountry(heroData.countryId))
-//				return StaticValue.COLOR_CODE_13; //不是我国与盟国的都是红名
+//				return StaticValue.RED_TEXT; //不是我国与盟国的都是红名
 
 			return PKModeUtil.getPKAmountColor(heroData.nameColor);
 		}
@@ -202,7 +202,7 @@ package com.rpgGame.app.utils
 				var myRe:int=MainRoleManager.actorInfo.faction;
 				var roleFac:int=(_role.data as SceneCollectData).faction;
 				if(roleFac!=myRe&&roleFac!=0){//不是自己阵营
-					return HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,"敌方矿物");
+					return HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,"敌方矿物");
 				}
 				return _role.name;
 			}
@@ -225,7 +225,7 @@ package com.rpgGame.app.utils
 		
 		public static function getStallNameColor(_role : SceneRole):uint
 		{
-			return StaticValue.COLOR_CODE_16;
+			return StaticValue.BEIGE_TEXT;
 		}
 	}
 }
