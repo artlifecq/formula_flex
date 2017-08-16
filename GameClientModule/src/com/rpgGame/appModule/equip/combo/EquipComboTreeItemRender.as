@@ -3,11 +3,13 @@ package com.rpgGame.appModule.equip.combo
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.goods.ItemManager;
+	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.core.ui.tip.RTNodeID;
 	import com.rpgGame.core.ui.tip.RewardTipTree;
 	import com.rpgGame.coreData.cfg.HeChengData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.clientConfig.Q_hecheng;
+	import com.rpgGame.coreData.type.CharAttributeType;
 	
 	import feathers.controls.renderers.DefaultTreeItemRender;
 	import feathers.data.TreeNode;
@@ -134,11 +136,13 @@ package com.rpgGame.appModule.equip.combo
 				var cailiaoNum:int=parseInt(cailiao[1]);//合成材料数;
 				var itemByBagNum:int=BackPackManager.instance.getBagItemsCountById(cailiaoId);
 				var max:int=Math.floor(itemByBagNum/cailiaoNum);//能合成的数量
+				var pice:int=hechengData.q_money; //一个的单价
 				var itemId:int=hechengData.q_item_id;
 				var qianSkin:Cont_Item=_skin.detail_item.skin as Cont_Item;
 				qianSkin.lb_Dispaly.color=ItemConfig.getItemQualityColor(itemId);
 				qianSkin.lb_Dispaly.text=ItemConfig.getItemName(itemId)+"("+max+")";
-				qianSkin.ui_tishi.visible=max>0;
+				qianSkin.ui_tishi.visible=max>0&&(pice<=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_BIND_MONEY)||
+					pice<=MainRoleManager.actorInfo.totalStat.getResData(CharAttributeType.RES_MONEY));
 				(qianSkin.bg.skin as ItemBg).bg1.visible=detailInfo.data.q_subson_type%2==0;
 				(qianSkin.bg.skin as ItemBg).bg2.visible=!(qianSkin.bg.skin as ItemBg).bg1.visible;
 				var isSelected:Boolean

@@ -1,11 +1,18 @@
 package com.rpgGame.app.ui.tips
 {
-	import com.rpgGame.app.manager.time.SystemTimeManager;
+	import com.game.mainCore.core.timer.GameTimer;
+	import com.rpgGame.app.manager.LostSkillManager;
 	import com.rpgGame.app.utils.TimeUtil;
 	import com.rpgGame.core.ui.SkinUI;
-	import com.rpgGame.core.utils.TextSizeUtil;
+	import com.rpgGame.core.utils.TextUtil;
 	import com.rpgGame.core.view.ui.tip.implement.ITip;
+	import com.rpgGame.coreData.cfg.LostSkillData;
+	import com.rpgGame.coreData.clientConfig.Q_lostskill_open;
 	import com.rpgGame.coreData.info.buff.BuffData;
+	
+	import flash.utils.getTimer;
+	
+	import org.mokylin.skin.app.tips.Tips_BuffsSkin;
 
 	/**
 	 *
@@ -27,42 +34,79 @@ package com.rpgGame.app.ui.tips
 			return _instance;
 		}
 
-		private var _tipSkin : Object;//BuffTipsSkin;
+		private var _tipSkin : Tips_BuffsSkin;//BuffTipsSkin;
 		private var _posy : int = 0;
-
+		private var _timer:GameTimer;
+		private var _endTime:int;
 		public function BuffTip()
 		{
-//			_tipSkin = new BuffTipsSkin();
+			_tipSkin = new Tips_BuffsSkin();
 			super(_tipSkin);
 			initTip();
 		}
 
 		private function initTip() : void
 		{
-
+			_timer=new GameTimer("BuffTip");
+			_timer.onUpdate=onTimer;
 		}
-
+		
+		private function onTimer():void
+		{
+			// TODO Auto Generated method stub
+			var left:int=(_endTime-getTimer())/1000;
+			if (left>0) 
+			{
+				_tipSkin.lbl_miaoshu2.text="剩余时间："+TextUtil.SecondToDHMS(left);;
+			}
+			else
+			{
+				_timer.stop();
+			}
+		}
+		
 		public function setTipData(data : *) : void
 		{
-			var buffData : BuffData = data as BuffData;
-			var description : String = buffData.description;
-			var isBuff : Boolean = buffData.isBuff;
-			var timeStr : String = buffData.disappearTime > 0 ? TimeUtil.timeFormatCH((buffData.disappearTime) * 0.001) : "永久";
-			var tipsStr : String = "<font color='#ffe258'>" + buffData.name + "</font><br><font color='#f9f0cc'>" + description + "</font><br>" + //
-				"<font color='#f9f0cc'>剩余时间：</font>" + //
-				(isBuff ? ("<font color='#4efd6f'>" + timeStr + "</font>") : ("<font color='#ff0000'>" + timeStr + "</font>"));
-			_tipSkin.labDesc.htmlText = tipsStr;
-
-			_posy = 0;
-			_posy = _tipSkin.labDesc.y + TextSizeUtil.getTextHeght(tipsStr, _tipSkin.labDesc.width, 14) + 20;
-
-			_tipSkin.imgBG.height = _posy + 10;
+			var buffData : BuffData = data.data;			
+			_tipSkin.lbl_title.text=buffData.buffData.q_buff_name;
+			var lostSkiLL:Q_lostskill_open = LostSkillData.getModeInfoById(buffData.buffData.q_buff_id);
+			var desc:String="";
+			if(lostSkiLL==null)
+			{
+				desc=buffData.buffData.q_description;
+			}
+			else
+			{
+				var value1:int = 0;
+				if(buffData.buffInfo.percent>0)
+					value1 = buffData.buffInfo.percent;
+				else
+					value1 = buffData.buffInfo.value;
+				desc=lostSkiLL.q_desc.replace("$",LostSkillManager.instance().getValueByType(lostSkiLL.q_type,value1))
+			}
+			_tipSkin.lbl_miaoshu1.text=desc;
+			_tipSkin.lbl_miaoshu2.y=_tipSkin.lbl_miaoshu1.y+_tipSkin.lbl_miaoshu1.textHeight+2;
+			//var timeStr : String = buffData.disappearTime > 0 ? TimeUtil.timeFormatCH((buffData.disappearTime) * 0.001) : "永久";
+			_tipSkin.lbl_miaoshu2.text="剩余时间：永久";
+			_tipSkin.bg.height=_tipSkin.lbl_miaoshu2.y+_tipSkin.lbl_miaoshu2.height+10;
+			if (buffData.disappearTime>0) 
+			{
+				_endTime=buffData.endTime;
+				//_tipSkin.lbl_miaoshu2.text="剩余时间："+TextUtil.SecondToDHMS(buffData.disappearTime* 0.001);
+				if (_timer.running==false) 
+				{
+					_timer.start();
+				}
+				onTimer();
+			}
 		}
 
 		public function hideTips() : void
 		{
-			_tipSkin.labDesc.htmlText = "";
-			_tipSkin.imgBG.height = 60;
+			if (_timer&&_timer.running) 
+			{
+				_timer.stop();
+			}
 		}
 	}
 }

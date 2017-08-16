@@ -78,6 +78,11 @@ package com.rpgGame.app.ui.roll
 		private function init():void
 		{
 			var item:ItemInfo = new ItemInfo();
+			if(_roleItem.tempItemInfo.mod==0)
+			{
+				trace("ROLL点数据有误······道具MODID不应该为0啊");
+				return;
+			}
 			item.itemModelId = _roleItem.tempItemInfo.mod;
 			item.num = _roleItem.tempItemInfo.num;
 			item.itemId = new long("0");

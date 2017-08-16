@@ -10,11 +10,11 @@ package com.rpgGame.coreData.type
 	public class EnumMonsterType
 	{
 		/** 普通怪*/		
-		public static const NORMAL:int = 0;
+		public static const NORMAL:int = 1;
 		/** 精英怪*/	
-		public static const ELITE:int = 1;
+		public static const ELITE:int = 2;
 		/** boss*/	
-		public static const BOSS:int = 2;
+		public static const BOSS:int = 3;
 		
 	}
 }

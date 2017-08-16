@@ -1,4 +1,4 @@
-﻿package com.rpgGame.netData.buff.bean{
+package com.rpgGame.netData.buff.bean{
 	import com.rpgGame.netData.buff.bean.BuffParameter;
 	
 	import org.game.netCore.data.long;
@@ -26,10 +26,10 @@
 		private var _overlay: int;
 		
 		//持续时间
-		private var _totalTime: long;
+		private var _totalTime: int;
 		
 		//持续剩余时间
-		private var _remainTime: long;
+		private var _remainTime: int;
 		
 		//值加成
 		private var _value: int;
@@ -50,9 +50,9 @@
 			//叠加层数
 			writeInt(_overlay);
 			//持续时间
-			writeLong(_totalTime);
+			writeInt(_totalTime);
 			//持续剩余时间
-			writeLong(_remainTime);
+			writeInt(_remainTime);
 			//值加成
 			writeInt(_value);
 			//比例加成
@@ -76,9 +76,9 @@
 			//叠加层数
 			_overlay = readInt();
 			//持续时间
-			_totalTime = readLong();
+			_totalTime = readInt();
 			//持续剩余时间
-			_remainTime = readLong();
+			_remainTime = readInt();
 			//值加成
 			_value = readInt();
 			//比例加成
@@ -140,14 +140,14 @@
 		 * get 持续时间
 		 * @return 
 		 */
-		public function get totalTime(): long{
+		public function get totalTime(): int{
 			return _totalTime;
 		}
 		
 		/**
 		 * set 持续时间
 		 */
-		public function set totalTime(value: long): void{
+		public function set totalTime(value: int): void{
 			this._totalTime = value;
 		}
 		
@@ -155,14 +155,14 @@
 		 * get 持续剩余时间
 		 * @return 
 		 */
-		public function get remainTime(): long{
+		public function get remainTime(): int{
 			return _remainTime;
 		}
 		
 		/**
 		 * set 持续剩余时间
 		 */
-		public function set remainTime(value: long): void{
+		public function set remainTime(value: int): void{
 			this._remainTime = value;
 		}
 		

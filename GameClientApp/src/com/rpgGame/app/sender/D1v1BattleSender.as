@@ -7,9 +7,9 @@ package com.rpgGame.app.sender
 	import com.rpgGame.netData.dianfeng.message.CSOpenDianFengPanelMessage;
 	import com.rpgGame.netData.dianfeng.message.CSOpenDianFengRankMessage;
 	import com.rpgGame.netData.dianfeng.message.CSQuitRaceMessage;
+	import com.rpgGame.netData.dianfeng.message.CSQuitZoneMessage;
 	
 	import org.game.netCore.connection.SocketConnection;
-	import com.rpgGame.netData.dianfeng.message.CSQuitZoneMessage;
 
 
 	public class D1v1BattleSender extends BaseSender
@@ -20,9 +20,10 @@ package com.rpgGame.app.sender
 		}
 		public static function reqQuitFB():void
 		{
-			var msg:CSQuitZoneMessage=new CSQuitZoneMessage();
-			
-			SocketConnection.send(msg);
+//			var msg:CSQuitZoneMessage=new CSQuitZoneMessage();
+//			
+//			SocketConnection.send(msg);
+			CrossSender.reqQuitCrossFight();
 		}
 		public static function reqDFMatch():void
 		{
