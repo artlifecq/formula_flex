@@ -150,7 +150,7 @@ package com.rpgGame.app.scene.animator
 			
 			var startX:Number = 0;
 			var startY:Number = 0;
-			var scenePos:Vector3D = _owner.getChildScenePositionByName(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_head_01);
+			var scenePos:Vector3D = _owner.getChildScenePositionByName(RenderUnitType.BODY, RenderUnitID.BODY, BoneNameEnum.c_0_name_01);
 			if (scenePos)
 			{
 				startX = MathUtil.getDxByAngle(_radius, (_owner.rotationY + 180));

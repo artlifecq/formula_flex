@@ -422,6 +422,11 @@ package com.rpgGame.app.state.role.action
 					{
 						transition(RoleStateType.ACTION_PREWAR, null, false, false, [RoleStateType.CONTROL_WALK_MOVE]);
 					}
+					else
+					{
+//						transition(RoleStateType.ACTION_RUN,null,false,false,[RoleStateType.CONTROL_WALK_MOVE]);
+						removeSelf();
+					}
 				}
 			}
 		}

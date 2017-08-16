@@ -285,15 +285,15 @@ package org.mokylin.skin.app.activety.zonghe.qinlinmibao
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbHeadName = temp;
 			temp.name = "lbHeadName";
-			temp.height = 23;
+			temp.height = 29;
 			temp.fontSize = 16;
 			temp.text = "秦陵密宝";
 			temp.textAlign = "center";
 			temp.color = 0xFFF2B7;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlue"];
-			temp.width = 205;
-			temp.x = 27;
-			temp.y = 6;
+			temp.width = 188;
+			temp.x = 34;
+			temp.y = 9;
 			return temp;
 		}
 
@@ -304,7 +304,7 @@ package org.mokylin.skin.app.activety.zonghe.qinlinmibao
 			temp.name = "lbItem0";
 			temp.height = 20;
 			temp.text = "击杀：秦国守卫（99/99）";
-			temp.color = 0x5CB006;
+			temp.color = 0x00FF33;
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
 			temp.width = 203;
 			temp.x = 26;
