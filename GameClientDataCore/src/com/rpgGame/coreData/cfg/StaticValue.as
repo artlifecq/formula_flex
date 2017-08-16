@@ -137,7 +137,7 @@ package com.rpgGame.coreData.cfg
 		 *@param 普通文本使用此色值
 		 * @return  
 		 * */
-		public static const A_UI_GRAY_TEXT:uint = 0xa3a594;
+		public static const A_UI_GRAY_TEXT:uint = 0xb2b4a2;
 		/**
 		 *蓝色(面板UI蓝色系都用此色值)
 		 *@param 特殊使用此色值

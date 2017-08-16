@@ -11,6 +11,7 @@ package com.rpgGame.appModule.activety.boss
 	import com.rpgGame.coreData.cfg.active.BossActInfo;
 	import com.rpgGame.coreData.info.tip.BossHurtTipsData;
 	import com.rpgGame.coreData.type.TipType;
+	import com.rpgGame.netData.monster.bean.BossDamageInfo;
 	import com.rpgGame.netData.monster.message.ResBossDamageInfosToClientMessage;
 	
 	import feathers.controls.ScrollBarDisplayMode;
@@ -19,6 +20,7 @@ package com.rpgGame.appModule.activety.boss
 	import gs.TweenMax;
 	
 	import org.client.mainCore.manager.EventManager;
+	import org.game.netCore.data.long;
 	import org.mokylin.skin.app.activety.shijieboss.ShangHaiPaiHang;
 	
 	import starling.display.DisplayObject;
@@ -77,6 +79,9 @@ package com.rpgGame.appModule.activety.boss
 			for(var i:int=1;i<11;i++){
 				var info:BossHurtInfo=_skin.ListItem.dataProvider.getItemAt(i-1) as BossHurtInfo;
 				info.bossDamageInfo=null;
+			/*	info.bossDamageInfo.damage=10000;
+				info.bossDamageInfo.playerName="123";
+				info.bossDamageInfo.playerId=new long();*/
 			}
 			_skin.ListItem.dataProvider.updateAll();
 			

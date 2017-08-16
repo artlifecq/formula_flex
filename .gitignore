@@ -5,6 +5,14 @@ bin-release/
 
 # Other files and folders
 .settings/
+3DEngine/
+Evil3DFeathersSkin/
+Evil3DStarling/
+Game3DEngine/
+GameClientInitCore/
+GameLibrary/
+GameNetLibrary/
+libs/
 src_old
 
 # ctage
