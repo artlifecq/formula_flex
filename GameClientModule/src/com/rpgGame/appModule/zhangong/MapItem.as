@@ -180,7 +180,7 @@ package com.rpgGame.appModule.zhangong
 			else
 			{
 				_skin.lbMsg.text=ZhanGongManager.getProgressByLv(_lv);
-				_skin.lbMsg.color=StaticValue.A_UI_GREEN_TEXT;
+				_skin.lbMsg.color=StaticValue.GREEN_TEXT;
 				_skin.lbMsg.visible=true;
 				_skin.lbBuzu.visible=false;
 			}

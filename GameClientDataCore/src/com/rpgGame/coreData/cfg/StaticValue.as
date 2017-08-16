@@ -11,169 +11,63 @@ package com.rpgGame.coreData.cfg
 	public class StaticValue
 	{
 		
-		//-------------------------请使用以下的色值，以下都是UI正式的色，以下没有的请让UI补
-		/**米黄文字 1 (默认)**/		
-		public static const COLOR_CODE_1:uint = 0xF9F0CC;
-		/**米黄色文字 2 **/		
-		public static const COLOR_CODE_2:uint = 0xe9c099;
-		/**米黄色 3**/ 
-		public static const COLOR_CODE_3:uint = 0xd4c996;
-		/**黄色 4**/		
-		public static const COLOR_CODE_4:uint = 0xffe258;
-		/**黄色 5**/		
-		public static const COLOR_CODE_5:uint = 0xf4bd63;
-		/**暗黄色 6**/		
-		public static const COLOR_CODE_6:uint = 0x9c8049;
-		/**暗黄色 7**/		
-		public static const COLOR_CODE_7:uint = 0xbd9736;
-		/**暗黄色文字标题 8**/		
-		public static const COLOR_CODE_8:uint = 0xd69e66;
-		/**暗黄色文字9**/
-		public static const COLOR_CODE_9:uint = 0x98692d;
-		/**橘色文字 10**/
-		public static const COLOR_CODE_10:uint = 0xf17733;
-		/**橘红色文字 11**/
-		public static const COLOR_CODE_11:uint = 0xff4500;
-		/**红色文字 12**/
-		public static const COLOR_CODE_12 : uint = 0xff0000;
-		/**红色文字 13**/		
-		public static const COLOR_CODE_13:uint = 0xC21515;
-		/**草绿色 14*/		
-		public static const COLOR_CODE_14:uint = 0x808101;
-		/**绿色 15*/		
-		public static const COLOR_CODE_15:uint = 0x4efd6f;
-		/**绿色 16*/		
-		public static const COLOR_CODE_16:uint = 0x239D02;
-		/**天蓝色 17*/		
-		public static const COLOR_CODE_17:uint = 0x00e3fe;
-		/**天蓝色 18*/		
-		public static const COLOR_CODE_18:uint = 0x9fdced;
-		/**蓝色 19*/		
-		public static const COLOR_CODE_19:uint = 0x0066ff;
-		/**粉色文字 20*/		
-		public static const COLOR_CODE_20:uint = 0xcc99bb;
-		/**粉色文字 21*/		
-		public static const COLOR_CODE_21:uint = 0xe530ec;
-		/**粉色文字 22*/		
-		public static const COLOR_CODE_22:uint = 0xea63a6;
-		/**灰色文字 23*/	
-		public static const COLOR_CODE_23:uint = 0x4A4744; 
-		/**灰色文字 24*/	
-		public static const COLOR_CODE_24:uint = 0x453a2f; 
-		/**橙色文字 25*/		
-		public static const COLOR_CODE_25:uint =0xf09e01;
-		/**棕色文字 26*/		
-		public static const COLOR_CODE_26:uint = 0x6e3117;
-		/**灰色文字 27 */		
-		public static const COLOR_CODE_27:uint = 0x76726d;
-		//上面是老的现在暂时保留
-		
+		//////////////////////////////文本色///////////////////////////////////////////
 		/**
-		 * 绿色
+		 *白色文本 
 		 */
-		public static const UI_GREEN:uint=0x55bd15;
-		public static const UI_GREEN1:uint=0x6BCC08;
+		public static const WHITE_TEXT:uint = 0xeeeeee;
 		/**
-		 *黄 
+		 * 绿色文本
 		 */
-		public static const UI_YELLOW:uint=0xe8c958;
+		public static const GREEN_TEXT:uint = 0x00ff0c;
 		/**
-		 *浅黄
+		 *黄色文本 
 		 */
-		public static const UI_YELLOW1:uint=0xcfc6ae;
+		public static const YELLOW_TEXT:uint = 0xffea00;
 		/**
-		 *黄色2
+		 *黄色文本 2
 		 */
-		public static const UI_YELLOW2:uint=0xc9b722;
+		public static const YELLOW_TEXT1:uint = 0xeaeabc;
 		/**
-		 *普通文本
+		 *米色文本 
 		 */
-		public static const UI_NORMAL:uint=0x8b8d7b;
-		
+		public static const BEIGE_TEXT:uint = 0xeaeabc;
 		/**
-		 *特殊文本蓝
+		 *灰色文本 
 		 */
-		public static const UI_SPECIAL_BLUE:uint=0x2482b4;
+		public static const GRAY_TEXT:uint = 0xb2b4a2;
 		/**
-		 *红1
+		 * 特殊蓝
 		 */
-		public static const UI_RED1:uint=0xD23735;
+		public static const BLUE_TEXT:uint = 0x14a3f3;
 		/**
-		 *特殊文本红
+		 *特殊红 
 		 */
-		public static const UI_SPECIAL_RED:uint=0xe1201c;
-		
+		public static const RED_TEXT:uint = 0xff0d0d;
 		/**
-		 *紫色文本
+		 *橙色 
 		 */
-		public static const UI_PURPLE:uint=0x9d4aa8;
-		////////////////////////////////////上面的跟UI统一的色值不符，用下面的//////////////////////////////////////
+		public static const OEANGE_TEXT:uint = 0xff9000;
 		/**
-		 * 白色 (面板UI白色系都用此色值)
-		 *@param 描述内容使用此色值
-		 * @return  
-		 * */
-		public static const A_UI_WHITE_TEXT:uint = 0xeeeeee;
+		 * 玫瑰粉色
+		 */
+		public static const ROSEPOWDER_TEXT:uint = 0xe58bff;
 		/**
-		 * 绿(面板UI绿色系都用此色值)
-		 *@param 连接文字、属性加成、特殊提示、安全状态、在线等使用此色值
-		 * @return  
-		 * */
-		public static const A_UI_GREEN_TEXT:uint = 0x00ff0c;
+		 * 浅蓝色
+		 */
+		public static const LIGHTBLUE_TEXT:uint = 0x00ecc8;
 		/**
-		 * 黄(面板UI黄色系都用此色值)
-		 *@param 提示用此色值
-		 * @return  
-		 * */
-		public static const A_UI_YELLOW_TEXT:uint = 0xffea00;
+		 * 天蓝色
+		 */
+		public static const SKYBLUE_TEXT:uint = 0x27bbff;
 		/**
-		 * 米色(面板UI米色系都用此色值)
-		 *@param 提示用此色值
-		 * @return  
-		 * */
-		public static const A_UI_BEIGE_TEXT:uint = 0xeaeabc;
+		 * 紫色字体
+		 */
+		public static const PURPLE_TEXT:uint = 0xee0699;
 		/**
-		 * 灰色(面板UI灰色系都用此色值)
-		 *@param 普通文本使用此色值
-		 * @return  
-		 * */
-		public static const A_UI_GRAY_TEXT:uint = 0xb2b4a2;
-		/**
-		 *蓝色(面板UI蓝色系都用此色值)
-		 *@param 特殊使用此色值
-		 * @return  
-		 * */
-		public static const A_UI_BLUE_TEXT:uint = 0x14a3f3;
-		/**
-		 * 红色(面板UI红色系都用此色值)
-		 *@param 特殊使用此色值
-		 * @return  
-		 * */
-		public static const A_UI_RED_TEXT:uint = 0xff0d0d;
-		/**
-		 * 橙色(面板UI橙色系都用此色值)
-		 *@param 聊天等使用此色值
-		 * @return  
-		 * */
-		public static const A_UI_OEANGE_TEXT:uint = 0xff9000;
-		/**
-		 * 玫瑰粉色(面板UI玫瑰粉色系都用此色值)
-		 *@param 聊天等使用此色值
-		 * @return  
-		 * */
-		public static const A_UI_ROSEPOWDER_TEXT:uint = 0xe58bff;
-		/**
-		 * 浅蓝色(面板UI浅蓝色系都用此色值)
-		 *@param 聊天等使用此色值
-		 * @return  
-		 * */
-		public static const A_UI_LIGHTBLUE_TEXT:uint = 0x00ecc8;
-		/**
-		 * 天蓝色(面板UI天蓝色系都用此色值)
-		 *@param 聊天等使用此色值
-		 * @return  
-		 * */
-		public static const A_UI_SKYBLUE_TEXT:uint = 0x27bbff;
+		 * 紫色字体
+		 */
+		public static const BROWN_TEXT:uint = 0xCFC6AE;
 		
 		//////////////////////////////品质色///////////////////////////////////////////
 		/**品质白*/		
@@ -232,12 +126,6 @@ package com.rpgGame.coreData.cfg
 		/** 跨服模式 **/
 		public static const DIFFERENT_SEVER:uint = 0x4EFD6F;
 		
-		/**纯白色*/		
-		public static const WHITE_PURE_COLOR:uint = 0xFFFFFF;
-		
-		//排行榜色值
-		/**18号 红色文字*/
-		public static const RANK_RED:uint = 0xd02525;
 		/**
 		 * 字符串颜色 转 16进制颜色
 		 */	

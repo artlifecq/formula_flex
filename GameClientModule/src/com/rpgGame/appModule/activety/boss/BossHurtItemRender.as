@@ -91,9 +91,9 @@ package com.rpgGame.appModule.activety.boss
 				}
 				var id:Number=info.bossDamageInfo.playerId.ToGID();
 				if(MainRoleManager.isSelf(id)){
-					_skin.lbNo.color=_skin.lbName.color=_skin.lbKillNum.color=StaticValue.UI_YELLOW;
+					_skin.lbNo.color=_skin.lbName.color=_skin.lbKillNum.color=StaticValue.RED_TEXT;
 				}else{
-					_skin.lbNo.color=_skin.lbName.color=_skin.lbKillNum.color=StaticValue.UI_YELLOW1;
+					_skin.lbNo.color=_skin.lbName.color=_skin.lbKillNum.color=StaticValue.YELLOW_TEXT;
 				}
 				_skin.lbName.text=info.bossDamageInfo.playerName;
 				_skin.lbKillNum.text=NumberUtil.getNumberTo(info.bossDamageInfo.damage,true)+"("+Number(info.perDamage)+"%)";

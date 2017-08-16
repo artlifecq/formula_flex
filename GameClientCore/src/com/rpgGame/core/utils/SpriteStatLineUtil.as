@@ -69,10 +69,10 @@ package com.rpgGame.core.utils
 				{
 					if(addStat.getStatValue(stat.type))
 					{
-						statValue+=HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_4,"+"+addStat.getStatValue(stat.type));
+						statValue+=HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,"+"+addStat.getStatValue(stat.type));
 					}else if(addStat.getStatPercent(stat.type))
 					{
-						statValue+=HtmlTextUtil.getTextColor(StaticValue.COLOR_CODE_4,"+"+addStat.getStatPercent(stat.type)+"%");
+						statValue+=HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,"+"+addStat.getStatPercent(stat.type)+"%");
 					}
 				}
 				if(isNeedShowOther && other)

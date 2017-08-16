@@ -116,7 +116,7 @@ package com.rpgGame.app.ui.main.chat
 				case EnumChatChannelType.CHAT_CHANNEL_SILIAO:
 					return StaticValue.CHAT_SI_LIAO_COLOR;
 			}
-			return StaticValue.COLOR_CODE_1;
+			return StaticValue.YELLOW_TEXT;
 		}
 		
 		/**
@@ -320,7 +320,7 @@ package com.rpgGame.app.ui.main.chat
 					var listD:Array=hyperInfo.params.split(",");
 					var mapCfg:Q_map=MapDataManager.getMapInfo(int(listD[0])).getData();
 					var mapName:String=mapCfg.q_map_name+"("+listD[1]+","+listD[2]+")";
-					var linkStr:String= RichTextCustomUtil.getTextLinkCode(mapName,StaticValue.A_UI_GREEN_TEXT,RichTextCustomLinkType.WALK_TO_SCENE_POS_TYPE,hyperInfo.params);
+					var linkStr:String= RichTextCustomUtil.getTextLinkCode(mapName,StaticValue.GREEN_TEXT,RichTextCustomLinkType.WALK_TO_SCENE_POS_TYPE,hyperInfo.params);
 					newCode=linkStr+RichTextCustomUtil.getButtonLinkCode("org.mokylin.skin.component.button.ButtonSkin_send",RichTextCustomLinkType.FLY_TO_SCENE_POS_TYPE,hyperInfo.params);
 					str=str.replace(ChatManager.MSG_POSITION_CODE,newCode);
 				}
@@ -421,26 +421,26 @@ package com.rpgGame.app.ui.main.chat
 			var str:String=replaceHyperShow(msgInfo);
 			if(msgInfo.extraResInfo!=null)
 				var vip:int=msgInfo.extraResInfo.viplevel;
-			//			var maohao:String=HtmlTextUtil.getTextColor(StaticValue.A_UI_WHITE_TEXT,": ");
+			//			var maohao:String=HtmlTextUtil.getTextColor(StaticValue.WHITE_TEXT,": ");
 			switch(msgInfo.type)
 			{
 				case EnumChatChannelType.CHAT_CHANNEL_SYSTEM://系统				
-					return getPinDaoShow(msgInfo.type)+" "+HtmlTextUtil.getTextColor(StaticValue.A_UI_WHITE_TEXT,str);
+					return getPinDaoShow(msgInfo.type)+" "+HtmlTextUtil.getTextColor(StaticValue.WHITE_TEXT,str);
 					
 				case EnumChatChannelType.CHAT_CHANNEL_WORLD:	//世界
-					return getPinDaoShow(msgInfo.type)+" "+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,StaticValue.A_UI_GREEN_TEXT,msgInfo.playerId.hexValue))+HtmlTextUtil.getTextColor(StaticValue.A_UI_WHITE_TEXT,": ")+HtmlTextUtil.getTextColor(StaticValue.A_UI_OEANGE_TEXT,str);
+					return getPinDaoShow(msgInfo.type)+" "+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,StaticValue.GREEN_TEXT,msgInfo.playerId.hexValue))+HtmlTextUtil.getTextColor(StaticValue.WHITE_TEXT,": ")+HtmlTextUtil.getTextColor(StaticValue.OEANGE_TEXT,str);
 					
 				case EnumChatChannelType.CHAT_CHANNEL_NORMAL://当前	
-					return getPinDaoShow(msgInfo.type)+" "+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,StaticValue.A_UI_YELLOW_TEXT,msgInfo.playerId.hexValue))+HtmlTextUtil.getTextColor(StaticValue.A_UI_WHITE_TEXT,": ")+HtmlTextUtil.getTextColor(StaticValue.A_UI_WHITE_TEXT,str);
+					return getPinDaoShow(msgInfo.type)+" "+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,StaticValue.YELLOW_TEXT,msgInfo.playerId.hexValue))+HtmlTextUtil.getTextColor(StaticValue.WHITE_TEXT,": ")+HtmlTextUtil.getTextColor(StaticValue.WHITE_TEXT,str);
 					
 				case EnumChatChannelType.CHAT_CHANNEL_PARTY://帮会	
-					return getPinDaoShow(msgInfo.type)+" "+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,StaticValue.A_UI_GREEN_TEXT,msgInfo.playerId.hexValue))+HtmlTextUtil.getTextColor(StaticValue.A_UI_WHITE_TEXT,": ")+HtmlTextUtil.getTextColor(StaticValue.A_UI_SKYBLUE_TEXT,str);
+					return getPinDaoShow(msgInfo.type)+" "+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,StaticValue.GREEN_TEXT,msgInfo.playerId.hexValue))+HtmlTextUtil.getTextColor(StaticValue.WHITE_TEXT,": ")+HtmlTextUtil.getTextColor(StaticValue.SKYBLUE_TEXT,str);
 					
 				case EnumChatChannelType.CHAT_CHANNEL_TEAM://队伍		
-					return getPinDaoShow(msgInfo.type)+" "+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,StaticValue.A_UI_GREEN_TEXT,msgInfo.playerId.hexValue))+HtmlTextUtil.getTextColor(StaticValue.A_UI_WHITE_TEXT,": ")+HtmlTextUtil.getTextColor(StaticValue.A_UI_LIGHTBLUE_TEXT,str);
+					return getPinDaoShow(msgInfo.type)+" "+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,StaticValue.GREEN_TEXT,msgInfo.playerId.hexValue))+HtmlTextUtil.getTextColor(StaticValue.WHITE_TEXT,": ")+HtmlTextUtil.getTextColor(StaticValue.LIGHTBLUE_TEXT,str);
 					
 				case EnumChatChannelType.CHAT_CHANNEL_LABA://喇叭		
-					return getPinDaoShow(msgInfo.type)+" "+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,StaticValue.A_UI_GREEN_TEXT,msgInfo.playerId.hexValue))+HtmlTextUtil.getTextColor(StaticValue.A_UI_WHITE_TEXT,": ")+HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,str);
+					return getPinDaoShow(msgInfo.type)+" "+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,StaticValue.GREEN_TEXT,msgInfo.playerId.hexValue))+HtmlTextUtil.getTextColor(StaticValue.WHITE_TEXT,": ")+HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,str);
 					
 				case EnumChatChannelType.CHAT_CHANNEL_KUA_FU://跨服		
 					return getPinDaoShow(msgInfo.type)+" "+getPlayerVipShow(vip)+HtmlTextUtil.getTextColor(0xFFFFFF,(replacePlayerShow(msgInfo.name,0xFFFFFF,msgInfo.playerId.hexValue))+": ")+HtmlTextUtil.getTextColor(0xd7d7d7,str);
@@ -449,19 +449,19 @@ package com.rpgGame.app.ui.main.chat
 				{
 					if(msgInfo.playerId.ToGID()==MainRoleManager.actorID)
 					{
-						return getPinDaoShow(msgInfo.type)+" "+HtmlTextUtil.getTextColor(StaticValue.A_UI_WHITE_TEXT,"你对")+getPlayerVipShow(vip)+
-							(replacePlayerShow(ChatManager.currentSiLiaoTargetName,StaticValue.A_UI_ROSEPOWDER_TEXT,msgInfo.playerId.hexValue))+HtmlTextUtil.getTextColor(StaticValue.A_UI_WHITE_TEXT,"说 : ")+
-							HtmlTextUtil.getTextColor(StaticValue.A_UI_ROSEPOWDER_TEXT,str);
+						return getPinDaoShow(msgInfo.type)+" "+HtmlTextUtil.getTextColor(StaticValue.WHITE_TEXT,"你对")+getPlayerVipShow(vip)+
+							(replacePlayerShow(ChatManager.currentSiLiaoTargetName,StaticValue.ROSEPOWDER_TEXT,msgInfo.playerId.hexValue))+HtmlTextUtil.getTextColor(StaticValue.WHITE_TEXT,"说 : ")+
+							HtmlTextUtil.getTextColor(StaticValue.ROSEPOWDER_TEXT,str);
 					}
 					else
-						return getPinDaoShow(msgInfo.type)+" "+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,StaticValue.A_UI_ROSEPOWDER_TEXT,msgInfo.playerId.hexValue))+HtmlTextUtil.getTextColor(StaticValue.A_UI_WHITE_TEXT,"对你说 : ")+HtmlTextUtil.getTextColor(StaticValue.A_UI_ROSEPOWDER_TEXT,str);
+						return getPinDaoShow(msgInfo.type)+" "+getPlayerVipShow(vip)+(replacePlayerShow(msgInfo.name,StaticValue.ROSEPOWDER_TEXT,msgInfo.playerId.hexValue))+HtmlTextUtil.getTextColor(StaticValue.WHITE_TEXT,"对你说 : ")+HtmlTextUtil.getTextColor(StaticValue.ROSEPOWDER_TEXT,str);
 				}
 					
 				case EnumChatChannelType.CHAT_CHANNEL_NOTICE://公告	
-					return getPinDaoShow(msgInfo.type)+" "+HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,str);
+					return getPinDaoShow(msgInfo.type)+" "+HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,str);
 					
 				case EnumChatChannelType.CHAT_CHANNEL_HEARSAY://传闻	
-					return getPinDaoShow(msgInfo.type)+" "+HtmlTextUtil.getTextColor(StaticValue.A_UI_WHITE_TEXT,str);
+					return getPinDaoShow(msgInfo.type)+" "+HtmlTextUtil.getTextColor(StaticValue.WHITE_TEXT,str);
 			}
 			return "";
 		}
@@ -475,7 +475,7 @@ package com.rpgGame.app.ui.main.chat
 			for(var i:int=0;i<arr.length;i++)
 			{
 				var name:String=LanguageConfig.getText( arr[i]);
-				var linkname:String=RichTextCustomUtil.getTextLinkCode(name,StaticValue.A_UI_GREEN_TEXT,RichTextCustomLinkType.JINJIE_SHOW_TYPE,arr[i]);
+				var linkname:String=RichTextCustomUtil.getTextLinkCode(name,StaticValue.GREEN_TEXT,RichTextCustomLinkType.JINJIE_SHOW_TYPE,arr[i]);
 				str = str.replace("{"+arr[i]+"}",linkname);
 			}
 			return str;
@@ -526,7 +526,7 @@ package com.rpgGame.app.ui.main.chat
 							arrq[2]=ItemUtil.getJobName(jobType);
 							var id:Number=arr[i].p.id;
 							var name:String=MainRoleManager.getPlayerName(arr[i].p.name);
-							arrq[arr[i].i]=replaceShowByType(str,StaticValue.A_UI_GREEN_TEXT,name+","+id);
+							arrq[arr[i].i]=replaceShowByType(str,StaticValue.GREEN_TEXT,name+","+id);
 							break;
 					}
 				}

@@ -117,7 +117,7 @@ package com.rpgGame.app.ui.tips
 				mountTypeStr = "??????";
 				//头部icon
 				titleIconFace.styleName = ClientConfig.getMountIconByMountSpeciesId( 0 );
-				tipsStr = HtmlTextUtil.getTextColor( StaticValue.COLOR_CODE_13, LanguageConfig.getText( LangMount.MOUNT_TIP_58 ) );
+				tipsStr = HtmlTextUtil.getTextColor( StaticValue.RED_TEXT, LanguageConfig.getText( LangMount.MOUNT_TIP_58 ) );
 				tipsHeight = _mountTip.labDesc.y + TextSizeUtil.getTextHeght( tipsStr, _mountTip.labDesc.width ) + 15;
 				_mountTip.imgBG.height = tipsHeight;
 			}
@@ -150,9 +150,9 @@ package com.rpgGame.app.ui.tips
 				//携带等级
 				var requiredLevelColor:uint;
 				if( MainRoleManager.actorInfo.totalStat.level < mountSpeciesData.requiredLevel )
-					requiredLevelColor = StaticValue.COLOR_CODE_13;
+					requiredLevelColor = StaticValue.RED_TEXT;
 				else
-					requiredLevelColor = StaticValue.COLOR_CODE_15;
+					requiredLevelColor = StaticValue.GREEN_TEXT;
 				var requiredLevel:String = HtmlTextUtil.getTextColor( requiredLevelColor, LanguageConfig.getText( LangMount.MOUNT_TIPS_6, mountSpeciesData.requiredLevel ) );
 				//物种
 				var speciesStr:String = LanguageConfig.getText( LangMount.MOUNT_TIPS_7, mountUnitData.name );

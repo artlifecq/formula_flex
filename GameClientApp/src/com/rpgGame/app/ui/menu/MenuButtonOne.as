@@ -87,7 +87,7 @@ package com.rpgGame.app.ui.menu
 			_buttonBg.visible = false;
 			_text = new TextField(_uiWidth,23,"");
 			_text.autoSize = TextFieldAutoSize.VERTICAL;
-			_text.color = StaticValue.COLOR_CODE_6;
+			_text.color = StaticValue.YELLOW_TEXT;
 			addChild(_text);
 			_text.y = 2;
 		}

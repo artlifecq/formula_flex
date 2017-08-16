@@ -96,18 +96,18 @@ package com.rpgGame.app.ui.alert
 					_skin.btn_ok.visible=true;
 					_skin.btn_jieshou.visible=false;
 					_skin.btn_jujue.visible=false;
-					str=HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"是否向")+HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,_name)+HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"玩家求婚");
+					str=HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"是否向")+HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,_name)+HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"玩家求婚");
 					_skin.lbInfo1.htmlText=str;
-					str=HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,"求婚消耗")+HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,"100")+HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,"元宝，求婚失败不予退还");
+					str=HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,"求婚消耗")+HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"100")+HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,"元宝，求婚失败不予退还");
 					_skin.lbInfo2.htmlText=str;
 					break;
 				case 2:
 					_skin.btn_ok.visible=false;
 					_skin.btn_jieshou.visible=true;
 					_skin.btn_jujue.visible=true;
-					str=HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"是否接受")+HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,(_msg as SCTargetProposalMessage).targetName)+HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"的求婚");
+					str=HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"是否接受")+HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,(_msg as SCTargetProposalMessage).targetName)+HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"的求婚");
 					_skin.lbInfo1.htmlText=str;
-					str=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,"被求婚不会消耗元宝");
+					str=HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,"被求婚不会消耗元宝");
 					_skin.lbInfo2.htmlText=str;
 					break;
 				case 4:
@@ -115,7 +115,7 @@ package com.rpgGame.app.ui.alert
 					_skin.btn_jieshou.visible=false;
 					_skin.btn_jujue.visible=false;
 					var ms1:SCNoticeByDivorceMessage =_msg as SCNoticeByDivorceMessage;
-					str=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,ms1.name)+HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"和你离婚了");
+					str=HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,ms1.name)+HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"和你离婚了");
 					_skin.lbInfo1.htmlText=str;
 					_skin.lbInfo2.visible=false;
 					break;
@@ -123,8 +123,8 @@ package com.rpgGame.app.ui.alert
 					_skin.btn_ok.visible=true;
 					_skin.btn_jieshou.visible=false;
 					_skin.btn_jujue.visible=false;
-					str=HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"百年修得同船渡，千年修得共枕眠\n是否与")+HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,_name)+
-					HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"玩家离婚");
+					str=HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"百年修得同船渡，千年修得共枕眠\n是否与")+HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,_name)+
+					HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"玩家离婚");
 					_skin.lbInfo1.htmlText=str;
 					_skin.lbInfo2.visible=false;
 					break;
@@ -134,7 +134,7 @@ package com.rpgGame.app.ui.alert
 					_skin.btn_jujue.visible=false;
 					var ms:SCProposalResultMessage=_msg as SCProposalResultMessage;
 					istsr=ms.result==0?"拒绝":"接受";
-					str=HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,ms.targetName)+HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,istsr+"了你的求婚");
+					str=HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,ms.targetName)+HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,istsr+"了你的求婚");
 					_skin.lbInfo1.htmlText=str;
 					_skin.lbInfo2.visible=false;
 					break;
@@ -142,7 +142,7 @@ package com.rpgGame.app.ui.alert
 					_skin.btn_ok.visible=true;
 					_skin.btn_jieshou.visible=false;
 					_skin.btn_jujue.visible=false;
-					str=HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,istsr+"您的伴侣正忙，请稍后再邀请");
+					str=HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,istsr+"您的伴侣正忙，请稍后再邀请");
 					_skin.lbInfo1.htmlText=str;
 					_skin.lbInfo2.visible=false;
 					break;
@@ -150,7 +150,7 @@ package com.rpgGame.app.ui.alert
 					_skin.btn_ok.visible=true;
 					_skin.btn_jieshou.visible=false;
 					_skin.btn_jujue.visible=false;
-					str=HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,istsr+"您已离婚");
+					str=HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,istsr+"您已离婚");
 					_skin.lbInfo1.htmlText=str;
 					_skin.lbInfo2.visible=false;
 					break;

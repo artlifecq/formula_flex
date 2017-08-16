@@ -126,7 +126,7 @@ package com.rpgGame.app.utils
 					content = LanguageConfig.replaceStr("升级推荐:$", [upgradeInfo.upgradeLvl]);
 					
 					var index : int = Math.floor(upgradeInfo.upgradeRecommendMonsterIDArr.length * Math.random());
-					var monsterInfo : String = LanguageConfig.replaceStr("<br/>推荐打怪:$", [RichTextCustomUtil.getTextLinkCode(MonsterDataManager.getMonsterName(upgradeInfo.upgradeRecommendMonsterIDArr[index]), StaticValue.COLOR_CODE_16, RichTextCustomLinkType.TASK_KILL_MONSTER_TYPE, upgradeInfo.upgradeRecommendMonsterIDArr[index] + "")]);
+					var monsterInfo : String = LanguageConfig.replaceStr("<br/>推荐打怪:$", [RichTextCustomUtil.getTextLinkCode(MonsterDataManager.getMonsterName(upgradeInfo.upgradeRecommendMonsterIDArr[index]), StaticValue.GREEN_TEXT, RichTextCustomLinkType.TASK_KILL_MONSTER_TYPE, upgradeInfo.upgradeRecommendMonsterIDArr[index] + "")]);
 					
 					content += monsterInfo;
 					break;
@@ -135,19 +135,19 @@ package com.rpgGame.app.utils
 					var replyInfo : TaskTargetReplyInfo = _targetInfo as TaskTargetReplyInfo;
 					
 					npcData = MonsterDataManager.getData(replyInfo.npcId);
-					content = LanguageConfig.replaceStr("任务回复:$", [RichTextCustomUtil.getTextLinkCode(npcData ? npcData.q_name : "未知", StaticValue.COLOR_CODE_16, RichTextCustomLinkType.TASK_NPC_NAME_TYPE, replyInfo.npcId + "")]);
+					content = LanguageConfig.replaceStr("任务回复:$", [RichTextCustomUtil.getTextLinkCode(npcData ? npcData.q_name : "未知", StaticValue.GREEN_TEXT, RichTextCustomLinkType.TASK_NPC_NAME_TYPE, replyInfo.npcId + "")]);
 					
 					break;
 				
 				case TaskTargetType.TASK_TARGET_KILL_MONSTER:
 					var monsterTargetInfo : TaskTargetMonsterInfo = _targetInfo as TaskTargetMonsterInfo;
-					content = RichTextCustomUtil.getTextLinkCode(MonsterDataManager.getMonsterName(monsterTargetInfo.killMonsterId) + getProgress(progressNum, monsterTargetInfo.killMonsterCount), StaticValue.COLOR_CODE_16, RichTextCustomLinkType.TASK_KILL_MONSTER_TYPE, monsterTargetInfo.killMonsterId + "");
+					content = RichTextCustomUtil.getTextLinkCode(MonsterDataManager.getMonsterName(monsterTargetInfo.killMonsterId) + getProgress(progressNum, monsterTargetInfo.killMonsterCount), StaticValue.GREEN_TEXT, RichTextCustomLinkType.TASK_KILL_MONSTER_TYPE, monsterTargetInfo.killMonsterId + "");
 					content = LanguageConfig.replaceStr("击败:$", [content]);
 					break;
 				
 				case TaskTargetType.TASK_TARGET_KILL_MONSTER_AND_COLLECT:
 					var monsterCollectTargetInfo : TaskTargetMonsterGoodsInfo = _targetInfo as TaskTargetMonsterGoodsInfo;
-					content = RichTextCustomUtil.getTextLinkCode(MonsterDataManager.getMonsterName(monsterCollectTargetInfo.dropGoodsMonsterId), StaticValue.COLOR_CODE_16, RichTextCustomLinkType.TASK_COLLECT_KILL_MONSTER_TYPE, monsterCollectTargetInfo.dropGoodsMonsterId + "");
+					content = RichTextCustomUtil.getTextLinkCode(MonsterDataManager.getMonsterName(monsterCollectTargetInfo.dropGoodsMonsterId), StaticValue.GREEN_TEXT, RichTextCustomLinkType.TASK_COLLECT_KILL_MONSTER_TYPE, monsterCollectTargetInfo.dropGoodsMonsterId + "");
 					content = LanguageConfig.replaceStr("击败 $ 收集:$", [content, monsterCollectTargetInfo.dropGoodsName + getProgress(progressNum, monsterCollectTargetInfo.dropGoodsCount)]);
 					break;
 				
@@ -155,7 +155,7 @@ package com.rpgGame.app.utils
 					var gatherTargetInfo : TaskTargetGatherGoodsInfo = _targetInfo as TaskTargetGatherGoodsInfo;
 					var collectInfo : CollectObjcetInfo = CollectCfgData.getRandomColloct(gatherTargetInfo.collectGoodsType);
 					content = collectInfo.name + getProgress(progressNum, gatherTargetInfo.collectGoodsCount);
-					content = RichTextCustomUtil.getTextLinkCode(content, StaticValue.COLOR_CODE_16, RichTextCustomLinkType.TASK_COLLECT_TYPE, taskId + "," + collectInfo.objectID + "," + gatherTargetInfo.collectGoodsType + "," + collectInfo.sceneID + "," + collectInfo.tileX + "," + collectInfo.tileY);
+					content = RichTextCustomUtil.getTextLinkCode(content, StaticValue.GREEN_TEXT, RichTextCustomLinkType.TASK_COLLECT_TYPE, taskId + "," + collectInfo.objectID + "," + gatherTargetInfo.collectGoodsType + "," + collectInfo.sceneID + "," + collectInfo.tileX + "," + collectInfo.tileY);
 					content = LanguageConfig.replaceStr("采集:$", [content]);
 					break;
 				
@@ -164,31 +164,31 @@ package com.rpgGame.app.utils
 					if (escortInfo.roleId > 0)
 					{
 						centerInfo = escortInfo.targetArea.centerX + "=" + escortInfo.targetArea.centerY;
-						scenePos = RichTextCustomUtil.getTextLinkCode(escortInfo.targetArea.areaName, StaticValue.COLOR_CODE_16, RichTextCustomLinkType.TASK_TO_SCENE_POS_TYPE, escortInfo.targetArea.sceneId + "," + centerInfo);
-						content = "护送" + RichTextCustomUtil.getTextLinkCode(NpcCfgData.getNpcName(escortInfo.npcId), StaticValue.COLOR_CODE_16, RichTextCustomLinkType.TASK_FOLLOW_ESCORT_TYPE, escortInfo.npcId + "") + "到" + scenePos;
+						scenePos = RichTextCustomUtil.getTextLinkCode(escortInfo.targetArea.areaName, StaticValue.GREEN_TEXT, RichTextCustomLinkType.TASK_TO_SCENE_POS_TYPE, escortInfo.targetArea.sceneId + "," + centerInfo);
+						content = "护送" + RichTextCustomUtil.getTextLinkCode(NpcCfgData.getNpcName(escortInfo.npcId), StaticValue.GREEN_TEXT, RichTextCustomLinkType.TASK_FOLLOW_ESCORT_TYPE, escortInfo.npcId + "") + "到" + scenePos;
 						isFlyBtn = false;
 					}
 					else
 					{
-						content = "与" + RichTextCustomUtil.getTextLinkCode(NpcCfgData.getNpcName(escortInfo.npcId), StaticValue.COLOR_CODE_16, RichTextCustomLinkType.TASK_TO_NPC_DIAILOG_TYPE, escortInfo.npcId + "") + "对话，开始护送";
+						content = "与" + RichTextCustomUtil.getTextLinkCode(NpcCfgData.getNpcName(escortInfo.npcId), StaticValue.GREEN_TEXT, RichTextCustomLinkType.TASK_TO_NPC_DIAILOG_TYPE, escortInfo.npcId + "") + "对话，开始护送";
 					}
 					break;
 				case TaskTargetType.TASK_AREA_EXPLORATION:
 					var explorationInfo : TaskAreaExplorationInfo = _targetInfo as TaskAreaExplorationInfo;
 					centerInfo = explorationInfo.targetArea.centerX + "=" + explorationInfo.targetArea.centerY;
-					scenePos = RichTextCustomUtil.getTextLinkCode(explorationInfo.targetArea.areaName, StaticValue.COLOR_CODE_16, RichTextCustomLinkType.TASK_TO_SCENE_POS_TYPE, explorationInfo.targetArea.sceneId + "," + centerInfo);
+					scenePos = RichTextCustomUtil.getTextLinkCode(explorationInfo.targetArea.areaName, StaticValue.GREEN_TEXT, RichTextCustomLinkType.TASK_TO_SCENE_POS_TYPE, explorationInfo.targetArea.sceneId + "," + centerInfo);
 					content = scenePos; //"探索"
 					isFlyBtn = false;
 					break;
 				case TaskTargetType.TASK_VEHICLE_PLAYER:
 					var vehiclePlayerInfo : TaskVehiclePlayerInfo = _targetInfo as TaskVehiclePlayerInfo;
 					npcData = MonsterDataManager.getData(vehiclePlayerInfo.npcId);
-					content = LanguageConfig.replaceStr("找到$搭乘载具", [RichTextCustomUtil.getTextLinkCode(npcData ? npcData.q_name : "未知", StaticValue.COLOR_CODE_16, RichTextCustomLinkType.TASK_TO_NPC_DIAILOG_TYPE, vehiclePlayerInfo.npcId + "")]);
+					content = LanguageConfig.replaceStr("找到$搭乘载具", [RichTextCustomUtil.getTextLinkCode(npcData ? npcData.q_name : "未知", StaticValue.GREEN_TEXT, RichTextCustomLinkType.TASK_TO_NPC_DIAILOG_TYPE, vehiclePlayerInfo.npcId + "")]);
 					break;
 				case TaskTargetType.TASK_FINISH_STORY_DUNGEON:
 					var storyDungeonInfo : TaskStoryDungeonInfo = _targetInfo as TaskStoryDungeonInfo;
 					npcData = MonsterDataManager.getData(storyDungeonInfo.npcId);
-					content = LanguageConfig.replaceStr("找到$通关副本", [RichTextCustomUtil.getTextLinkCode(npcData ? npcData.q_name : "未知", StaticValue.COLOR_CODE_16, RichTextCustomLinkType.TASK_TO_NPC_DIAILOG_TYPE, storyDungeonInfo.npcId + "")]);
+					content = LanguageConfig.replaceStr("找到$通关副本", [RichTextCustomUtil.getTextLinkCode(npcData ? npcData.q_name : "未知", StaticValue.GREEN_TEXT, RichTextCustomLinkType.TASK_TO_NPC_DIAILOG_TYPE, storyDungeonInfo.npcId + "")]);
 					break;
 				case TaskTargetType.TASK_CLIENT_TASK:
 					var clientTaskInfo : TaskClientTaskInfo = _targetInfo as TaskClientTaskInfo;
@@ -196,7 +196,7 @@ package com.rpgGame.app.utils
 					switch (clientTaskInfo.clientTaskType)
 					{
 						case ClientTaskType.TASK_DIALOG_LEAVE_DUNGEON: //与$对话离开副本
-							content = LanguageConfig.replaceStr("与$对话离开副本", [RichTextCustomUtil.getTextLinkCode(npcData ? npcData.q_name : "未知", StaticValue.COLOR_CODE_16, RichTextCustomLinkType.TASK_TO_NPC_DIAILOG_TYPE, clientTaskInfo.npcId + "")]);
+							content = LanguageConfig.replaceStr("与$对话离开副本", [RichTextCustomUtil.getTextLinkCode(npcData ? npcData.q_name : "未知", StaticValue.GREEN_TEXT, RichTextCustomLinkType.TASK_TO_NPC_DIAILOG_TYPE, clientTaskInfo.npcId + "")]);
 							break;
 					}
 					break;

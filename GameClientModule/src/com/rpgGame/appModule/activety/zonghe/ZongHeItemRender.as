@@ -123,8 +123,8 @@ package com.rpgGame.appModule.activety.zonghe
 			GrayFilter.gray(_skin.uiName);
 			GrayFilter.gray(_skin.uiBg);
 			GrayFilter.gray(_skin.state_icon);
-			_skin.lbLevel.color=StaticValue.A_UI_GRAY_TEXT;
-			_skin.lbMsg.color=StaticValue.A_UI_GRAY_TEXT;
+			_skin.lbLevel.color=StaticValue.GRAY_TEXT;
+			_skin.lbMsg.color=StaticValue.GRAY_TEXT;
 		}
 		
 		private function ungrayItem():void
@@ -132,7 +132,7 @@ package com.rpgGame.appModule.activety.zonghe
 			GrayFilter.unGray(_skin.uiName);
 			GrayFilter.unGray(_skin.uiBg);
 			GrayFilter.unGray(_skin.state_icon);
-			_skin.lbMsg.color=StaticValue.A_UI_YELLOW_TEXT;
+			_skin.lbMsg.color=StaticValue.YELLOW_TEXT;
 			_skin.lbLevel.color=StaticValue.Q_YELLOW;
 		}
 	}

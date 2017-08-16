@@ -330,18 +330,18 @@ package com.rpgGame.app.manager
 					break;		
 			}
 			
-			text=HtmlTextUtil.getTextColor(StaticValue.A_UI_YELLOW_TEXT,title)+"\n";
+			text=HtmlTextUtil.getTextColor(StaticValue.YELLOW_TEXT,title)+"\n";
 			if(!q_interaction) 
 			{
-				text+=HtmlTextUtil.getTextColor(StaticValue.A_UI_RED_TEXT,"今日已达上限")+"\n";
+				text+=HtmlTextUtil.getTextColor(StaticValue.RED_TEXT,"今日已达上限")+"\n";
 				return text;
 			}
 			var arr:Array=JSONUtil.decode(q_interaction.q_money);
 			var money:String=ItemConfig.getItemName(arr[0].mod);
-			text+=title+HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"需要消耗")+HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,arr[0].num)+
-				HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,money)+"\n";
-			text+=title+HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"可增加夫妻双方")+HtmlTextUtil.getTextColor(StaticValue.A_UI_GREEN_TEXT,q_interaction.q_intimacy_value.toString())+
-				HtmlTextUtil.getTextColor(StaticValue.A_UI_BEIGE_TEXT,"点亲密度")+"\n";
+			text+=title+HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"需要消耗")+HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,arr[0].num)+
+				HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,money)+"\n";
+			text+=title+HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"可增加夫妻双方")+HtmlTextUtil.getTextColor(StaticValue.GREEN_TEXT,q_interaction.q_intimacy_value.toString())+
+				HtmlTextUtil.getTextColor(StaticValue.BEIGE_TEXT,"点亲密度")+"\n";
 			
 			return text;
 		}
