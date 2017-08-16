@@ -1,14 +1,27 @@
 package com.rpgGame.coreData.cfg
 {
 	import com.gameClient.utils.HashMap;
+	import com.rpgGame.app.utils.TouchableUtil;
+	import com.rpgGame.coreData.cfg.item.EquipPolishCfg;
+	import com.rpgGame.coreData.cfg.item.EquipStrengthCfg;
+	import com.rpgGame.coreData.cfg.item.EquipWashAttCfg;
 	import com.rpgGame.coreData.clientConfig.Q_att_values;
+	import com.rpgGame.coreData.clientConfig.Q_buff;
+	import com.rpgGame.coreData.clientConfig.Q_equip_polish;
+	import com.rpgGame.coreData.clientConfig.Q_equip_strength;
+	import com.rpgGame.coreData.clientConfig.Q_equip_wash_attr;
+	import com.rpgGame.coreData.info.item.EquipInfo;
 	import com.rpgGame.coreData.type.CharAttributeType;
+	import com.rpgGame.coreData.utils.HtmlTextUtil;
 	
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 	
-
-
+	import feathers.controls.Label;
+	import feathers.controls.text.Fontter;
+	
+	
+	
 	/**
 	 *属性配置表 
 	 * @author dik
@@ -145,7 +158,102 @@ package com.rpgGame.coreData.cfg
 					}
 				}
 			}
+		}
+		
+		//获取强化、琢磨后的总属性
+		public static function getHashByEquip(info:EquipInfo):HashMap
+		{
+			var hash:HashMap=new HashMap();
+			var currenCfg:Q_equip_polish=EquipPolishCfg.getPolishCfg(info.polishLevel);
+			var attValues1:Q_att_values;
+			var maps1:HashMap;
+			var types:Array;
+			var values1:Array;
+			attValues1=AttValueConfig.getAttInfoById(info.qItem.q_att_type); //基础属性
+			maps1=AttValueConfig.getTypeValueMap(attValues1);
+			types=maps1.keys();
+			values1=maps1.values();
 			
+			var stren:Q_equip_strength=EquipStrengthCfg.getStrengthCfg(info.qItem.q_kind,info.qItem.q_job,info.strengthLevel);
+			var attValues2:Q_att_values=AttValueConfig.getAttInfoById(stren.q_att_type);//强化属性
+			var maps2:HashMap;
+			var types2:Array;
+			var values2:Array;
+			maps2=AttValueConfig.getTypeValueMap(attValues2);
+			types2=maps2.keys();
+			values2=maps2.values();
+			
+			//琢磨属性
+			var poli:Q_equip_polish=EquipPolishCfg.getPolishCfg(info.polishLevel);
+			var jc:Number=1;
+			if(poli){
+				jc=jc+Number(poli.q_promote/100000);
+			}
+			
+			for(var i:int=0;i<types2.length;i++){
+				var type:int=types[i];
+				if(currenCfg)
+				{
+					var num:int=Math.floor((values2[i]+values1[i])*jc);		
+				}else{
+					num=Math.floor(values2[i]*jc);
+				}
+				hash.put(type,num);
+			}
+			return hash;
+		}
+		
+		//获取装备属性总值
+		public static function getAllAttByEquip(info:EquipInfo):HashMap
+		{
+			var has_1:HashMap=getHashByEquip(info);
+			var attValues1:Q_att_values;
+			var maps1:HashMap;
+			var keys:Array;
+			var values1:Array;
+			if(info.smeltAtt1!=0)
+			{
+				var q_wash_attr:Q_equip_wash_attr=EquipWashAttCfg.getEquipWashAttr(info.smeltAtt1);
+				if(q_wash_attr.q_attr_id!=0)
+				{
+					attValues1=AttValueConfig.getAttInfoById(q_wash_attr.q_attr_id);
+					maps1=AttValueConfig.getTypeValueMap(attValues1);
+					keys=maps1.keys();
+					values1=maps1.values();
+					for(var i:int=0;i<values1.length;i++)
+					{
+						if(has_1.getValue(keys[i])){
+							var view:int=has_1.getValue(keys[i]);
+							view=has_1.getValue(keys[i])+values1[i];
+						}
+						else{
+							has_1.put(keys[i],values1[i]);
+						}
+					}
+				}
+			}
+			if(info.smeltAtt2!=0)
+			{
+				q_wash_attr=EquipWashAttCfg.getEquipWashAttr(info.smeltAtt2);
+				if(q_wash_attr.q_attr_id!=0)
+				{
+					attValues1=AttValueConfig.getAttInfoById(q_wash_attr.q_attr_id);
+					maps1=AttValueConfig.getTypeValueMap(attValues1);
+					keys=maps1.keys();
+					values1=maps1.values();
+					for(i=0;i<values1.length;i++)
+					{
+						if(has_1.getValue(keys[i])){
+							view=has_1.getValue(keys[i]);
+							view=has_1.getValue(keys[i])+values1[i];
+						}
+						else{
+							has_1.put(keys[i],values1[i]);
+						}
+					}
+				}
+			}		
+			return has_1;
 		}
 	}
 }

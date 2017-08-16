@@ -246,7 +246,7 @@ package com.rpgGame.app.ui.tips
 				curY+=13;
 				
 				//时效
-				createUiAsset("wupinshuoming");
+				createUiAsset("shixiaoxing");
 				curY+=17;
 				if(_itemInfo.itemInfo.lostTime==0){
 					name=HtmlTextUtil.getTextColor(StaticValue.A_UI_GRAY_TEXT,"类别:");

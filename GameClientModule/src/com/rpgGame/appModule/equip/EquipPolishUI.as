@@ -3,15 +3,16 @@ package com.rpgGame.appModule.equip
 	import com.game.engine3D.display.Inter3DContainer;
 	import com.game.engine3D.display.InterObject3D;
 	import com.game.engine3D.scene.render.RenderUnit3D;
+	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.ItemManager;
 	import com.rpgGame.app.manager.goods.RoleEquipmentManager;
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.ItemSender;
+	import com.rpgGame.app.ui.AttChangeView;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.ui.common.CenterEftPop;
-	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.appModule.common.GoodsContainerPanel;
@@ -23,6 +24,7 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.AwdProgressBar;
+	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
@@ -81,7 +83,7 @@ package com.rpgGame.appModule.equip
 	 *@author dik
 	 *2017-4-11下午5:55:11
 	 */
-	public class EquipPolishUI extends ViewUI
+	public class EquipPolishUI extends AttChangeView
 	{
 		private const MIN_GRID:int=28;
 		private var _skin:Zuomo_Skin;
@@ -474,6 +476,8 @@ package com.rpgGame.appModule.equip
 					}
 				}
 			}
+			
+			trace("本次消耗的钱："+useMon);
 			
 			if(addExp<0){
 				addExp=0;
@@ -1251,6 +1255,23 @@ package com.rpgGame.appModule.equip
 			}
 			return false;
 		}
+		/**获取提升的属性值（这个是前端自己算的）*/
+		private function getupdateAtt(currentLv:EquipInfo,upLv:EquipInfo=null):void
+		{
+			var has_curr:HashMap=AttValueConfig.getHashByEquip(currentLv);
+			var key_curr:Array=has_curr.keys();
+			var map_curr:Array=has_curr.values();
+			var has_up:HashMap=AttValueConfig.getHashByEquip(upLv);
+			var key_up:Array=has_up.keys();
+			var map_up:Array=has_up.values();
+			var has:HashMap=new HashMap();
+			for(var i:int=0;i<key_up.length;i++)
+			{
+				var num:int=AttValueConfig.getDisAttValue(key_up[i],(map_up[i]-map_curr[i]));
+				has.put(key_up[i],num);
+			}
+			attChangeEft.addChangeHandler(has);
+		}
 		
 		/**
 		 *获取琢磨列表 
@@ -1266,6 +1287,10 @@ package com.rpgGame.appModule.equip
 				var info:ClientItemInfo=datas[i];
 				if(info is EquipInfo&&isPolish(info as EquipInfo)){
 					if(targetEquipInfo&&info.itemInfo.itemId.ToGID()==targetEquipInfo.itemInfo.itemId.ToGID()){
+						if(targetEquipInfo.polishLevel!=(info as EquipInfo).polishLevel)
+						{
+							getupdateAtt(targetEquipInfo,(info as EquipInfo));
+						}
 						targetEquipInfo=info as EquipInfo;//更新掉
 						_targetEquip.gridInfo.data=targetEquipInfo;
 						_targetEquip.gridInfo=_targetEquip.gridInfo;//只能这样调用更新才能触发更新tips函数。。。

@@ -1,6 +1,7 @@
 package com.rpgGame.appModule.equip
 {
 	import com.game.engine3D.scene.render.RenderUnit3D;
+	import com.gameClient.utils.HashMap;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.goods.BackPackManager;
 	import com.rpgGame.app.manager.goods.ItemManager;
@@ -8,9 +9,9 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.app.manager.pop.UIPopManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
 	import com.rpgGame.app.sender.ItemSender;
+	import com.rpgGame.app.ui.AttChangeView;
 	import com.rpgGame.app.ui.alert.GameAlert;
 	import com.rpgGame.app.ui.common.CenterEftPop;
-	import com.rpgGame.app.ui.tab.ViewUI;
 	import com.rpgGame.app.utils.FaceUtil;
 	import com.rpgGame.app.view.icon.DragDropItem;
 	import com.rpgGame.app.view.icon.IconCDFace;
@@ -21,6 +22,7 @@ package com.rpgGame.appModule.equip
 	import com.rpgGame.core.manager.tips.TargetTipsMaker;
 	import com.rpgGame.core.manager.tips.TipTargetManager;
 	import com.rpgGame.core.ui.tip.RTNodeID;
+	import com.rpgGame.coreData.cfg.AttValueConfig;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
 	import com.rpgGame.coreData.cfg.NotifyCfgData;
@@ -73,7 +75,7 @@ package com.rpgGame.appModule.equip
 	 *@author dik
 	 *2017-4-11下午7:56:56
 	 */
-	public class EquipInheritUI extends ViewUI
+	public class EquipInheritUI extends AttChangeView
 	{
 		private const MIN_GRID:int=28;
 		private var _skin:Jicheng_Skin;
@@ -503,6 +505,15 @@ package com.rpgGame.appModule.equip
 				var info:ClientItemInfo=datas[i];
 				if(isCanInheritance(info as EquipInfo)){
 					if(_targetEquipInfo&&info.itemInfo.itemId.ToGID()==_targetEquipInfo.itemInfo.itemId.ToGID()){
+//						trace("当前的强化等级对比："+_targetEquipInfo.strengthLevel+"__"+(info as EquipInfo).strengthLevel);
+//						trace("当前的琢磨等级对比："+_targetEquipInfo.polishLevel+"__"+(info as EquipInfo).polishLevel);
+//						trace("当前的洗炼1对比："+_targetEquipInfo.smeltAtt1+"__"+(info as EquipInfo).smeltAtt1);
+//						trace("当前的洗炼2对比："+_targetEquipInfo.smeltAtt2+"__"+(info as EquipInfo).smeltAtt2);					
+						if(_targetEquipInfo.strengthLevel!=(info as EquipInfo).strengthLevel||_targetEquipInfo.polishLevel!=(info as EquipInfo).polishLevel||
+							_targetEquipInfo.smeltAtt1!=(info as EquipInfo).smeltAtt1||_targetEquipInfo.smeltAtt2!=(info as EquipInfo).smeltAtt2)
+						{
+							getupdateAtt(_targetEquipInfo,info as EquipInfo);
+						}
 						_targetEquipInfo=info as EquipInfo;//更新掉
 						_targetEquipInfo.setContainerId(info.containerID);
 						FaceUtil.SetItemGrid(_targetEquip, _targetEquipInfo, true);
@@ -516,6 +527,53 @@ package com.rpgGame.appModule.equip
 				}
 			}
 			return result;
+		}
+		
+		/**获取提升的属性值（这个是前端自己算的）*/
+		private function getupdateAtt(currentLv:EquipInfo,upLv:EquipInfo=null):void
+		{
+			var has_curr:HashMap=AttValueConfig.getAllAttByEquip(currentLv);
+			var has_up:HashMap=AttValueConfig.getAllAttByEquip(upLv);
+			var has:HashMap=new HashMap();
+			var v1:int;
+			var v2:int;
+			var keys_curr:Array=has_curr.keys();
+			var keys_up:Array=has_up.keys();
+			var keys:Array=mergeType(keys_up,keys_curr);
+			for(var i:int=0;i<keys.length;i++)
+			{
+				var type:int=keys[i];
+				if(has_curr.getValue(type)) v1=has_curr.getValue(type);
+				else v1=0;
+				if(has_up.getValue(type)) v2=has_up.getValue(type);
+				else v2=0;
+				var num:int=AttValueConfig.getDisAttValue(type,(v2-v1));
+				//				trace("属性类型："+type+"值1：——"+v1+"值2:——"+v2);
+				if(num!=0)
+					has.put(type,num);
+			}
+			attChangeEft.addChangeHandler(has);
+		}
+		
+		//合并类型
+		private function mergeType(arr1:Array,arr2:Array):Array
+		{
+			var list:Array;
+			for(var i:int=0;i<arr2.length;i++)
+			{
+				if(!hasType(arr1,arr2[i]))
+					arr1.push(arr2[i]);
+			}
+			return arr1;
+		}
+		
+		private function hasType(arr1:Array,type:int):Boolean
+		{
+			for(var i:int=0;i<arr1.length;i++)
+			{
+				if(arr1[i]==type) return true;
+			}
+			return false;
 		}
 		
 		/**获取背包中可被继承的装备*/
@@ -551,8 +609,7 @@ package com.rpgGame.appModule.equip
 			if(_useEuipInfo!=null)
 			{
 				if(info.qItem.q_kind==_useEuipInfo.qItem.q_kind&&(info.strengthLevel<_useEuipInfo.strengthLevel
-					||info.polishLevel<_useEuipInfo.polishLevel)&&info.qItem.q_max_strengthen>0&&!EquipStrengthCfg.isMax
-					
+					||info.polishLevel<_useEuipInfo.polishLevel)&&info.qItem.q_max_strengthen>0&&!EquipStrengthCfg.isMax	
 					(info.strengthLevel))
 				{
 					return true;
@@ -561,10 +618,11 @@ package com.rpgGame.appModule.equip
 			}
 			else
 			{
-				if(info.qItem.q_max_strengthen>0&&!EquipStrengthCfg.isMax(info.strengthLevel))
-					return true;
+				if(info.qItem.q_max_strengthen<=0) return false;
+				//				else if(EquipStrengthCfg.isMax(info.strengthLevel)) return false;
+				//				else if(info.polishLevel>=EquipPolishCfg.maxLv) return false;
 			}
-			return false;
+			return true;
 		}
 		
 		//判断是否可以被继承

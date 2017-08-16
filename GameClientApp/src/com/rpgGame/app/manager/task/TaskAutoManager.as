@@ -168,7 +168,7 @@ package com.rpgGame.app.manager.task
 
 		private function onUpdate(force : Boolean = false) : void
 		{
-//			return;
+			return;
 			techState();
 			if (!_isTaskRunning)
 			{
