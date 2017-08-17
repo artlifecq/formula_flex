@@ -139,9 +139,12 @@ package com.rpgGame.app.manager
 			instance()._prize=msg.reward;
 			instance()._time=msg.remainTime;
 			var role:SceneRole=MainRoleManager.actor;
-			(role.data as HeroData).baowuLv=msg.girlId;
-			if (role.headFace is HeadFace)
-				(role.headFace as HeadFace).updateHuBaoTitle((role.data as HeroData).baowuLv);
+			if(role)
+			{
+				(role.data as HeroData).baowuLv=msg.girlId;
+				if (role.headFace is HeadFace)
+					(role.headFace as HeadFace).updateHuBaoTitle((role.data as HeroData).baowuLv);
+			}
 			AppManager.showApp(AppConstant.HUBAO_ZHUIZONG);	
 			EventManager.dispatchEvent(HuBaoEvent.HUBAO_ZHUIZONG,msg);
 		}
@@ -165,9 +168,11 @@ package com.rpgGame.app.manager
 		{
 			instance()._ishuing=false;
 			var role:SceneRole=MainRoleManager.actor;
-			(role.data as HeroData).baowuLv=0;
-			if (role.headFace is HeadFace)
-				(role.headFace as HeadFace).updateHuBaoTitle((role.data as HeroData).baowuLv);
+			if(role){
+				(role.data as HeroData).baowuLv=0;
+				if (role.headFace is HeadFace)
+					(role.headFace as HeadFace).updateHuBaoTitle((role.data as HeroData).baowuLv);
+			}
 			AppManager.showAppNoHide(AppConstant.HUBAO_CHENGGONG);
 			EventManager.dispatchEvent(HuBaoEvent.HUBAO_HUSONGCHENGGONG,msg);
 		}
@@ -185,9 +190,11 @@ package com.rpgGame.app.manager
 		{
 			instance()._ishuing=false;
 			var role:SceneRole=MainRoleManager.actor;
-			(role.data as HeroData).baowuLv=0;
-			if (role.headFace is HeadFace)
-				(role.headFace as HeadFace).updateHuBaoTitle((role.data as HeroData).baowuLv);
+			if(role){
+				(role.data as HeroData).baowuLv=0;
+				if (role.headFace is HeadFace)
+					(role.headFace as HeadFace).updateHuBaoTitle((role.data as HeroData).baowuLv);
+			}
 			EventManager.dispatchEvent(HuBaoEvent.HUBAO_HUSONGSHIBAI,msg);
 		}
 		

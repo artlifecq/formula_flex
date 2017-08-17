@@ -4,7 +4,6 @@ package com.rpgGame.app.utils
 	import com.game.engine3D.utils.MathUtil;
 	import com.game.engine3D.vo.AreaMapData;
 	import com.gameClient.utils.JSONUtil;
-	import com.rpgGame.app.fight.spell.CastSpellHelper;
 	import com.rpgGame.app.fight.spell.SpellAnimationHelper;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.role.MainRoleManager;
@@ -12,7 +11,6 @@ package com.rpgGame.app.utils
 	import com.rpgGame.app.manager.role.SceneRoleSelectManager;
 	import com.rpgGame.app.manager.scene.SceneManager;
 	import com.rpgGame.app.manager.scene.SceneSwitchManager;
-	import com.rpgGame.app.manager.task.TaskAutoManager;
 	import com.rpgGame.app.manager.task.TaskManager;
 	import com.rpgGame.app.manager.task.TaskMissionManager;
 	import com.rpgGame.app.richText.RichTextCustomLinkType;
@@ -20,15 +18,9 @@ package com.rpgGame.app.utils
 	import com.rpgGame.app.scene.SceneRole;
 	import com.rpgGame.app.sender.SceneSender;
 	import com.rpgGame.app.sender.TaskSender;
-	import com.rpgGame.app.state.role.RoleStateUtil;
-	import com.rpgGame.app.state.role.control.WalkMoveStateReference;
 	import com.rpgGame.app.task.TaskInfoDecoder;
 	import com.rpgGame.app.view.icon.IconCDFace;
-	import com.rpgGame.core.app.AppConstant;
-	import com.rpgGame.core.app.AppManager;
-	import com.rpgGame.core.manager.tips.TipManager;
 	import com.rpgGame.core.utils.NumberUtil;
-	import com.rpgGame.core.view.ui.tip.implement.IBaseTipsInfo;
 	import com.rpgGame.coreData.cfg.ClientConfig;
 	import com.rpgGame.coreData.cfg.HuBaoData;
 	import com.rpgGame.coreData.cfg.LanguageConfig;
@@ -36,7 +28,6 @@ package com.rpgGame.app.utils
 	import com.rpgGame.coreData.cfg.collect.CollectCfgData;
 	import com.rpgGame.coreData.cfg.item.ItemConfig;
 	import com.rpgGame.coreData.cfg.monster.MonsterDataManager;
-	import com.rpgGame.coreData.cfg.npc.NpcCfgData;
 	import com.rpgGame.coreData.cfg.task.TaskMissionCfgData;
 	import com.rpgGame.coreData.clientConfig.Q_item;
 	import com.rpgGame.coreData.clientConfig.Q_mission_base;
@@ -50,7 +41,6 @@ package com.rpgGame.app.utils
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
 	import com.rpgGame.coreData.info.task.target.BaseTaskTargetInfo;
-	import com.rpgGame.coreData.info.task.target.TaskAreaExplorationInfo;
 	import com.rpgGame.coreData.info.task.target.TaskClientTaskInfo;
 	import com.rpgGame.coreData.info.task.target.TaskFollowEscortInfo;
 	import com.rpgGame.coreData.info.task.target.TaskStoryDungeonInfo;
@@ -74,19 +64,13 @@ package com.rpgGame.app.utils
 	import com.rpgGame.netData.task.bean.TaskSubRateInfo;
 	
 	import flash.geom.Point;
-	import flash.geom.Vector3D;
-	
-	import app.message.MonsterDataProto;
 	
 	import feathers.controls.Label;
 	import feathers.controls.SkinnableContainer;
 	import feathers.controls.UIAsset;
 	
-	import gs.TweenLite;
-	
 	import org.mokylin.skin.mainui.renwu.Renwu_Item;
 	
-	import starling.display.DisplayObject;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -159,27 +143,27 @@ package com.rpgGame.app.utils
 					content = LanguageConfig.replaceStr("采集:$", [content]);
 					break;
 				
-				case TaskTargetType.TASK_FOLLOW_ESCORT:
-					var escortInfo : TaskFollowEscortInfo = _targetInfo as TaskFollowEscortInfo;
-					if (escortInfo.roleId > 0)
-					{
-						centerInfo = escortInfo.targetArea.centerX + "=" + escortInfo.targetArea.centerY;
-						scenePos = RichTextCustomUtil.getTextLinkCode(escortInfo.targetArea.areaName, StaticValue.GREEN_TEXT, RichTextCustomLinkType.TASK_TO_SCENE_POS_TYPE, escortInfo.targetArea.sceneId + "," + centerInfo);
-						content = "护送" + RichTextCustomUtil.getTextLinkCode(NpcCfgData.getNpcName(escortInfo.npcId), StaticValue.GREEN_TEXT, RichTextCustomLinkType.TASK_FOLLOW_ESCORT_TYPE, escortInfo.npcId + "") + "到" + scenePos;
-						isFlyBtn = false;
-					}
-					else
-					{
-						content = "与" + RichTextCustomUtil.getTextLinkCode(NpcCfgData.getNpcName(escortInfo.npcId), StaticValue.GREEN_TEXT, RichTextCustomLinkType.TASK_TO_NPC_DIAILOG_TYPE, escortInfo.npcId + "") + "对话，开始护送";
-					}
-					break;
-				case TaskTargetType.TASK_AREA_EXPLORATION:
-					var explorationInfo : TaskAreaExplorationInfo = _targetInfo as TaskAreaExplorationInfo;
-					centerInfo = explorationInfo.targetArea.centerX + "=" + explorationInfo.targetArea.centerY;
-					scenePos = RichTextCustomUtil.getTextLinkCode(explorationInfo.targetArea.areaName, StaticValue.GREEN_TEXT, RichTextCustomLinkType.TASK_TO_SCENE_POS_TYPE, explorationInfo.targetArea.sceneId + "," + centerInfo);
-					content = scenePos; //"探索"
-					isFlyBtn = false;
-					break;
+//				case TaskTargetType.TASK_FOLLOW_ESCORT:
+//					var escortInfo : TaskFollowEscortInfo = _targetInfo as TaskFollowEscortInfo;
+//					if (escortInfo.roleId > 0)
+//					{
+//						centerInfo = escortInfo.targetArea.centerX + "=" + escortInfo.targetArea.centerY;
+//						scenePos = RichTextCustomUtil.getTextLinkCode(escortInfo.targetArea.areaName, StaticValue.GREEN_TEXT, RichTextCustomLinkType.TASK_TO_SCENE_POS_TYPE, escortInfo.targetArea.sceneId + "," + centerInfo);
+//						content = "护送" + RichTextCustomUtil.getTextLinkCode(NpcCfgData.getNpcName(escortInfo.npcId), StaticValue.GREEN_TEXT, RichTextCustomLinkType.TASK_FOLLOW_ESCORT_TYPE, escortInfo.npcId + "") + "到" + scenePos;
+//						isFlyBtn = false;
+//					}
+//					else
+//					{
+//						content = "与" + RichTextCustomUtil.getTextLinkCode(NpcCfgData.getNpcName(escortInfo.npcId), StaticValue.GREEN_TEXT, RichTextCustomLinkType.TASK_TO_NPC_DIAILOG_TYPE, escortInfo.npcId + "") + "对话，开始护送";
+//					}
+//					break;
+//				case TaskTargetType.TASK_AREA_EXPLORATION:
+//					var explorationInfo : TaskAreaExplorationInfo = _targetInfo as TaskAreaExplorationInfo;
+//					centerInfo = explorationInfo.targetArea.centerX + "=" + explorationInfo.targetArea.centerY;
+//					scenePos = RichTextCustomUtil.getTextLinkCode(explorationInfo.targetArea.areaName, StaticValue.GREEN_TEXT, RichTextCustomLinkType.TASK_TO_SCENE_POS_TYPE, explorationInfo.targetArea.sceneId + "," + centerInfo);
+//					content = scenePos; //"探索"
+//					isFlyBtn = false;
+//					break;
 				case TaskTargetType.TASK_VEHICLE_PLAYER:
 					var vehiclePlayerInfo : TaskVehiclePlayerInfo = _targetInfo as TaskVehiclePlayerInfo;
 					npcData = MonsterDataManager.getData(vehiclePlayerInfo.npcId);
@@ -923,12 +907,12 @@ package com.rpgGame.app.utils
 		
 		
 		/**设置任务目标内容*/
-		public static  function setGotargetInfo(mainType:int,missionType:int,describe:String,finisstr:String,subList:Vector.<TaskSubRateInfo>,txtButList:Vector.<SkinnableContainer>):void
+		public static  function setGotargetInfo(mainType:int,missionType:int,describe:String,finisstr:String,subList:Vector.<TaskSubRateInfo>,txtButList:Vector.<SkinnableContainer>,fly:Boolean=true):void
 		{
 			var i:int,j:int,length:int;
 			var text:String="";
 			var postPath:Array=TaskMissionManager.getTaskPathingByType(mainType,0);
-			var flyKey:Boolean=postPath&&postPath.length==3;
+			var flyKey:Boolean=fly&&postPath&&postPath.length==3;
 			if(missionType==TaskType.SUB_CONVERSATION)
 			{
 				text=TaskMissionCfgData.getTaskDescribe(missionType,describe,TaskMissionManager.getTaskNpcModeId(mainType));
@@ -937,7 +921,7 @@ package com.rpgGame.app.utils
 			else
 			{
 				var finiStr:Array;
-				var informationList:Array=JSONUtil.decode(finisstr);;
+				var informationList:Array=JSONUtil.decode(finisstr);
 				if(informationList&&informationList.length>0)
 				{
 					length=informationList.length;
@@ -954,7 +938,7 @@ package com.rpgGame.app.utils
 								modeid=int(modeArr[0]);
 								finish=int(modeArr[1]);
 							}
-							if(subList[i]!=null)
+							if(subList!=null&&subList.length>i)
 							{
 								modeid=subList[i].modelId;
 								count=subList[i].num;
@@ -1071,7 +1055,7 @@ package com.rpgGame.app.utils
 					if(item&&i<icoList.length)
 					{
 						icoList[idd].setIconResName(ClientConfig.getItemIcon(""+item.q_icon,IcoSizeEnum.ICON_42));
-						icoList[idd].setSubString(NumberUtil.getNumberTo(rewordList[i].num));
+						icoList[idd].setSubString(NumberUtil.getNumberTo(rewordList[i].num,true));
 						icoList[idd].visible=true;
 						icoBgList[idd].visible=true;
 						setItemTips(icoList[idd],item,int(rewordList[i].num));

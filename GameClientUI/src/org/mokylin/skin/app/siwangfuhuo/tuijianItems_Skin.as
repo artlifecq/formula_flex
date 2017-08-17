@@ -1,12 +1,10 @@
 package org.mokylin.skin.app.siwangfuhuo
 {
-	import feathers.controls.text.Fontter;
 	import feathers.controls.Button;
-	import feathers.controls.Label;
 	import feathers.controls.StateSkin;
+	import feathers.controls.UIAsset;
 	import feathers.controls.UIMovieClip;
 	import org.mokylin.skin.app.siwangfuhuo.Itemkuang_Skin;
-	import org.mokylin.skin.app.siwangfuhuo.mc.xingxing_Skin;
 
 	/**
 	 * @private
@@ -20,17 +18,9 @@ package org.mokylin.skin.app.siwangfuhuo
 		//==========================================================================
 		public var btn:feathers.controls.Button;
 
-		public var lbl_name:feathers.controls.Label;
+		public var uiName:feathers.controls.UIAsset;
 
-		public var mc_star1:feathers.controls.UIMovieClip;
-
-		public var mc_star2:feathers.controls.UIMovieClip;
-
-		public var mc_star3:feathers.controls.UIMovieClip;
-
-		public var mc_star4:feathers.controls.UIMovieClip;
-
-		public var mc_star5:feathers.controls.UIMovieClip;
+		public var ui_ico:feathers.controls.UIAsset;
 
 
 		//==========================================================================
@@ -43,7 +33,7 @@ package org.mokylin.skin.app.siwangfuhuo
 			this.currentState = "normal";
 			this.height = 190;
 			this.width = 141;
-			this.elementsContent = [btn_i(),lbl_name_i(),mc_star1_i(),mc_star2_i(),mc_star3_i(),mc_star4_i(),mc_star5_i()];
+			this.elementsContent = [btn_i(),uiName_i(),ui_ico_i()];
 			
 			states = {
 			};
@@ -63,102 +53,29 @@ package org.mokylin.skin.app.siwangfuhuo
 			return temp;
 		}
 
-		private function lbl_name_i():feathers.controls.Label
+		private function uiName_i():feathers.controls.UIAsset
 		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbl_name = temp;
-			temp.name = "lbl_name";
-			temp.bold = true;
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			uiName = temp;
+			temp.name = "uiName";
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.letterSpacing = 1;
-			temp.text = "获取神器";
-			temp.textAlign = "center";
-			temp.color = 0xEAEABC;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 136;
-			temp.x = 2;
-			temp.y = 8;
+			temp.styleName = "ui/app/siwangfuhuo/name/1.png";
+			temp.x = 40;
+			temp.y = 11;
 			return temp;
 		}
 
-		private function mc_star1_i():feathers.controls.UIMovieClip
+		private function ui_ico_i():feathers.controls.UIAsset
 		{
-			var temp:feathers.controls.UIMovieClip = new feathers.controls.UIMovieClip();
-			mc_star1 = temp;
-			temp.name = "mc_star1";
-			temp.autoPlay = false;
-			temp.height = 20;
+			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
+			ui_ico = temp;
+			temp.name = "ui_ico";
 			temp.touchable = false;
 			temp.touchGroup = true;
-			temp.styleClass = org.mokylin.skin.app.siwangfuhuo.mc.xingxing_Skin;
-			temp.width = 20;
-			temp.x = 13;
-			temp.y = 151;
-			return temp;
-		}
-
-		private function mc_star2_i():feathers.controls.UIMovieClip
-		{
-			var temp:feathers.controls.UIMovieClip = new feathers.controls.UIMovieClip();
-			mc_star2 = temp;
-			temp.name = "mc_star2";
-			temp.autoPlay = false;
-			temp.height = 20;
-			temp.touchable = false;
-			temp.touchGroup = true;
-			temp.styleClass = org.mokylin.skin.app.siwangfuhuo.mc.xingxing_Skin;
-			temp.width = 20;
-			temp.x = 38;
-			temp.y = 151;
-			return temp;
-		}
-
-		private function mc_star3_i():feathers.controls.UIMovieClip
-		{
-			var temp:feathers.controls.UIMovieClip = new feathers.controls.UIMovieClip();
-			mc_star3 = temp;
-			temp.name = "mc_star3";
-			temp.autoPlay = false;
-			temp.height = 20;
-			temp.touchable = false;
-			temp.touchGroup = true;
-			temp.styleClass = org.mokylin.skin.app.siwangfuhuo.mc.xingxing_Skin;
-			temp.width = 20;
-			temp.x = 63;
-			temp.y = 151;
-			return temp;
-		}
-
-		private function mc_star4_i():feathers.controls.UIMovieClip
-		{
-			var temp:feathers.controls.UIMovieClip = new feathers.controls.UIMovieClip();
-			mc_star4 = temp;
-			temp.name = "mc_star4";
-			temp.autoPlay = false;
-			temp.height = 20;
-			temp.touchable = false;
-			temp.touchGroup = true;
-			temp.styleClass = org.mokylin.skin.app.siwangfuhuo.mc.xingxing_Skin;
-			temp.width = 20;
-			temp.x = 87;
-			temp.y = 151;
-			return temp;
-		}
-
-		private function mc_star5_i():feathers.controls.UIMovieClip
-		{
-			var temp:feathers.controls.UIMovieClip = new feathers.controls.UIMovieClip();
-			mc_star5 = temp;
-			temp.name = "mc_star5";
-			temp.autoPlay = false;
-			temp.height = 20;
-			temp.touchable = false;
-			temp.touchGroup = true;
-			temp.styleClass = org.mokylin.skin.app.siwangfuhuo.mc.xingxing_Skin;
-			temp.width = 20;
-			temp.x = 112;
-			temp.y = 151;
+			temp.styleName = "ui/app/siwangfuhuo/icon/1.png";
+			temp.x = 19;
+			temp.y = 56;
 			return temp;
 		}
 

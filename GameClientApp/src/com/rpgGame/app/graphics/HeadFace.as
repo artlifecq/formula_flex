@@ -38,7 +38,7 @@ package com.rpgGame.app.graphics
 	import com.rpgGame.coreData.type.SceneCharType;
 	import com.rpgGame.netData.structs.IntKeyValue;
 	
-	import app.message.MonsterDataProto.MonsterType;
+	import app.message.MonsterType;
 	
 	import feathers.controls.UIAsset;
 	import feathers.controls.UIMovieClip;

@@ -37,8 +37,7 @@ package com.rpgGame.app.manager.task
 	
 	import flash.geom.Point;
 	
-	import app.message.TouJingTaskProto;
-	import app.message.NpcDialogProto.NpcType;
+	import app.message.NpcType;
 	
 	import org.client.mainCore.manager.EventManager;
 
@@ -74,16 +73,16 @@ package com.rpgGame.app.manager.task
 		 * @param Count	已经完成过的偷经任务次数
 		 *
 		 */
-		public static function setHero(touJingTask : TouJingTaskProto, Count : int) : void
-		{
-			touJingCount = Count;
-			//偷经
-			if (touJingTask == null)
-				return;
-
-			touJingData = new TouJingTaskData();
-			touJingData.setData(touJingTask);
-		}
+//		public static function setHero(touJingTask : TouJingTaskProto, Count : int) : void
+//		{
+//			touJingCount = Count;
+//			//偷经
+//			if (touJingTask == null)
+//				return;
+//
+//			touJingData = new TouJingTaskData();
+//			touJingData.setData(touJingTask);
+//		}
 
 		/**
 		 * 零点重置

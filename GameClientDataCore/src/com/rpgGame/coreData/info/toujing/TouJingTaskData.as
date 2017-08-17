@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.info.toujing
 {
-	import app.message.TouJingTaskProto;
+	
 
 	/**
 	 * 偷经任务data 
@@ -29,16 +29,16 @@ package com.rpgGame.coreData.info.toujing
 		 * @param touJingTask
 		 * 
 		 */		
-		public function setData( touJingTask:TouJingTaskProto ):void
-		{
-			if( touJingTask == null )
-				return;
-			
-			level = touJingTask.level;
-			quality = touJingTask.quality;
-			isTouSuccess = touJingTask.isTouSuccess;
-			countryID = touJingTask.countrySequence;
-			isInTouJingActivityTime = touJingTask.isInTouJing;
-		}
+//		public function setData( touJingTask:TouJingTaskProto ):void
+//		{
+//			if( touJingTask == null )
+//				return;
+//			
+//			level = touJingTask.level;
+//			quality = touJingTask.quality;
+//			isTouSuccess = touJingTask.isTouSuccess;
+//			countryID = touJingTask.countrySequence;
+//			isInTouJingActivityTime = touJingTask.isInTouJing;
+//		}
 	}
 }

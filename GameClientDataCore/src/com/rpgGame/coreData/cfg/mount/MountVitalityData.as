@@ -2,8 +2,6 @@ package com.rpgGame.coreData.cfg.mount
 {
 	import com.rpgGame.coreData.SpriteStat;
 	import com.rpgGame.netData.player.bean.AttributeItem;
-	
-	import app.message.MountVitalityDatasProto.MountVitalityDataProto;
 
 	/**
 	 * 坐骑根骨 单元数据
@@ -29,15 +27,15 @@ package com.rpgGame.coreData.cfg.mount
 		 * @param data
 		 * 
 		 */		
-		public function setData( data:MountVitalityDataProto ):void
-		{
-			if( data == null )
-				return;
-			
-			vitality = data.vitality;
-//			baseSpriteStat = data.stat;
-			_stat.setData( baseSpriteStat );
-		}
+//		public function setData( data:MountVitalityDataProto ):void
+//		{
+//			if( data == null )
+//				return;
+//			
+//			vitality = data.vitality;
+////			baseSpriteStat = data.stat;
+//			_stat.setData( baseSpriteStat );
+//		}
 
 		/** 基础属性Proto **/
 		public function get stat():SpriteStat

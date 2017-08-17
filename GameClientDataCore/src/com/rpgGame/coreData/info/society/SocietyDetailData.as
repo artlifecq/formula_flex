@@ -4,11 +4,6 @@ package com.rpgGame.coreData.info.society
 	
 	import flash.utils.Dictionary;
 	
-	import app.message.FamilyMemberProto;
-	import app.message.FamilyOfficerPos;
-	import app.message.FamilySharedProto;
-	import app.message.FamilyOfficeProto.FamilyPosOfficersProto;
-	
 	import org.game.netCore.net_protobuff.BytesUtil;
 
 	/**
@@ -60,47 +55,47 @@ package com.rpgGame.coreData.info.society
 			super();
 		}
 
-		public function setConfig(cfg : FamilySharedProto) : void
-		{
-			country = cfg.country;
-			createTime = cfg.createTime ? cfg.createTime.toNumber() : 0;
-			societyName = BytesUtil.bytes2UTF(cfg.familyName);
-			level = cfg.hallLevel;
-			announcement = cfg.announcement ? cfg.announcement.content : "";
-			buildMoneyCount = (cfg.storageStat && cfg.storageStat.money) ? cfg.storageStat.money.toNumber() : 0;
-			buildTokenCount = (cfg.storageStat && cfg.storageStat.familyBuildToken) ? cfg.storageStat.familyBuildToken.toNumber() : 0;
-			isAutoAcceptJoinRequest = cfg.isAutoAcceptJoinRequest;
-			hallLevel = cfg.hallLevel;
-			collageLevel = cfg.collageLevel;
-			biaoLevel = cfg.biaoLevel;
-			animalBarLevel = cfg.animalBarLevel;
-			animalBarStartTime = (cfg.animalBarStat && cfg.animalBarStat.startTime) ? cfg.animalBarStat.startTime.toNumber() : 0;
-			animalBarEndTime = (cfg.animalBarStat && cfg.animalBarStat.endTime) ? cfg.animalBarStat.endTime.toNumber() : 0;
-			animalBarBossLevel = cfg.animalBarStat ? cfg.animalBarStat.animalBarLevel : animalBarLevel; //没有兽栏信息，即第一次没打过。
-			guildName = cfg.guildName;
-			var posById : Dictionary = new Dictionary();
-			if (cfg.office)
-			{
-				for each (var familyOfficersProto : FamilyPosOfficersProto in cfg.office.officers)
-				{
-					for each (var memberId : Int64 in familyOfficersProto.leaderId)
-					{
-						posById[memberId.toNumber()] = familyOfficersProto.pos;
-					}
-				}
-			}
-
-			_members = [];
-			for each (var memberProto : FamilyMemberProto in cfg.members)
-			{
-				var posValue : * = posById[memberProto.id.toNumber()];
-				var pos : int = posValue == null ? int.MAX_VALUE : int(posValue);
-				var memberData : SocietyMemberData = new SocietyMemberData();
-				memberData.setConfig(pos, memberProto);
-				_members.push(memberData);
-			}
-			_members.sort(onSortMemberDatas);
-		}
+//		public function setConfig(cfg : FamilySharedProto) : void
+//		{
+//			country = cfg.country;
+//			createTime = cfg.createTime ? cfg.createTime.toNumber() : 0;
+//			societyName = BytesUtil.bytes2UTF(cfg.familyName);
+//			level = cfg.hallLevel;
+//			announcement = cfg.announcement ? cfg.announcement.content : "";
+//			buildMoneyCount = (cfg.storageStat && cfg.storageStat.money) ? cfg.storageStat.money.toNumber() : 0;
+//			buildTokenCount = (cfg.storageStat && cfg.storageStat.familyBuildToken) ? cfg.storageStat.familyBuildToken.toNumber() : 0;
+//			isAutoAcceptJoinRequest = cfg.isAutoAcceptJoinRequest;
+//			hallLevel = cfg.hallLevel;
+//			collageLevel = cfg.collageLevel;
+//			biaoLevel = cfg.biaoLevel;
+//			animalBarLevel = cfg.animalBarLevel;
+//			animalBarStartTime = (cfg.animalBarStat && cfg.animalBarStat.startTime) ? cfg.animalBarStat.startTime.toNumber() : 0;
+//			animalBarEndTime = (cfg.animalBarStat && cfg.animalBarStat.endTime) ? cfg.animalBarStat.endTime.toNumber() : 0;
+//			animalBarBossLevel = cfg.animalBarStat ? cfg.animalBarStat.animalBarLevel : animalBarLevel; //没有兽栏信息，即第一次没打过。
+//			guildName = cfg.guildName;
+//			var posById : Dictionary = new Dictionary();
+//			if (cfg.office)
+//			{
+//				for each (var familyOfficersProto : FamilyPosOfficersProto in cfg.office.officers)
+//				{
+//					for each (var memberId : Int64 in familyOfficersProto.leaderId)
+//					{
+//						posById[memberId.toNumber()] = familyOfficersProto.pos;
+//					}
+//				}
+//			}
+//
+//			_members = [];
+//			for each (var memberProto : FamilyMemberProto in cfg.members)
+//			{
+//				var posValue : * = posById[memberProto.id.toNumber()];
+//				var pos : int = posValue == null ? int.MAX_VALUE : int(posValue);
+//				var memberData : SocietyMemberData = new SocietyMemberData();
+//				memberData.setConfig(pos, memberProto);
+//				_members.push(memberData);
+//			}
+//			_members.sort(onSortMemberDatas);
+//		}
 
 		private static function onSortMemberDatas(memberDataA : SocietyMemberData, memberDataB : SocietyMemberData) : int
 		{
@@ -172,17 +167,17 @@ package com.rpgGame.coreData.info.society
 		 * @return
 		 *
 		 */
-		public function getLeaderName() : String
-		{
-			for each (var memberData : SocietyMemberData in _members)
-			{
-				if (FamilyOfficerPos.LEADER == memberData.societyPos)
-				{
-					return memberData.name;
-				}
-			}
-			return "";
-		}
+//		public function getLeaderName() : String
+//		{
+//			for each (var memberData : SocietyMemberData in _members)
+//			{
+//				if (FamilyOfficerPos.LEADER == memberData.societyPos)
+//				{
+//					return memberData.name;
+//				}
+//			}
+//			return "";
+//		}
 
 		public function getMemberDataById(id : Number) : SocietyMemberData
 		{

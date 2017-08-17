@@ -79,8 +79,10 @@ package org.mokylin.skin.app.roll
 			var temp:feathers.controls.ProgressBar = new feathers.controls.ProgressBar();
 			Pro_bar = temp;
 			temp.name = "Pro_bar";
+			temp.maximum = 30000;
+			temp.minimum = 0;
 			temp.styleClass = org.mokylin.skin.app.roll.Roll_Progress;
-			temp.value = 100;
+			temp.value = 3000;
 			temp.x = 95;
 			temp.y = 72;
 			return temp;

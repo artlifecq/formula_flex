@@ -1,7 +1,5 @@
 package com.rpgGame.coreData.cfg.mount
 {
-	import app.message.MountSpeciesDatasProto.MountSpeciesDataProto;
-
 	/**
 	 * 坐骑物种  单元数据
 	 * @author 陈鹉光
@@ -29,16 +27,16 @@ package com.rpgGame.coreData.cfg.mount
 		 * @param data
 		 * 
 		 */		
-		public function setData( data:MountSpeciesDataProto ):void
-		{
-			if( data == null )
-				return;
-			
-			id = data.id;
-			name = data.name;
-			requiredLevel = data.requiredLevel;
-			maxLifeTime = data.maxLifeTime;
-			indentifyMoneyCost = data.indentifyMoneyCost;
-		}
+//		public function setData( data:MountSpeciesDataProto ):void
+//		{
+//			if( data == null )
+//				return;
+//			
+//			id = data.id;
+//			name = data.name;
+//			requiredLevel = data.requiredLevel;
+//			maxLifeTime = data.maxLifeTime;
+//			indentifyMoneyCost = data.indentifyMoneyCost;
+//		}
 	}
 }

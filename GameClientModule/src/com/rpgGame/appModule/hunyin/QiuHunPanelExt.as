@@ -6,11 +6,7 @@ package com.rpgGame.appModule.hunyin
 	import com.game.engine3D.scene.render.vo.RenderParamData3D;
 	import com.gameClient.utils.JSONUtil;
 	import com.rpgGame.app.manager.Mgr;
-	import com.rpgGame.app.manager.chat.ChatManager;
 	import com.rpgGame.app.manager.chat.NoticeManager;
-	import com.rpgGame.app.manager.role.MainRoleManager;
-	import com.rpgGame.app.richText.RichTextCustomLinkType;
-	import com.rpgGame.app.richText.RichTextCustomUtil;
 	import com.rpgGame.app.sender.HunYinSender;
 	import com.rpgGame.app.ui.SkinUIPanel;
 	import com.rpgGame.app.utils.FaceUtil;
@@ -23,10 +19,8 @@ package com.rpgGame.appModule.hunyin
 	import com.rpgGame.coreData.enum.item.IcoSizeEnum;
 	import com.rpgGame.coreData.info.item.ClientItemInfo;
 	import com.rpgGame.coreData.info.item.ItemUtil;
-	import com.rpgGame.coreData.type.CharAttributeType;
 	import com.rpgGame.coreData.type.RenderUnitID;
 	import com.rpgGame.coreData.type.RenderUnitType;
-	import com.rpgGame.coreData.type.chat.EnumChatChannelType;
 	
 	import away3d.events.Event;
 	

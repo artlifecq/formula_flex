@@ -3,9 +3,6 @@ package com.rpgGame.coreData.cfg.npc
 	import com.gameClient.log.GameLog;
 	import com.rpgGame.coreData.info.move.TrailPathPoint;
 	
-	import app.message.VehiclePathDataProto;
-	import app.message.VehiclePathPointDataProto;
-	
 	import org.client.mainCore.ds.HashMap;
 
 	/**
@@ -22,32 +19,32 @@ package com.rpgGame.coreData.cfg.npc
 		}
 		private static var _map : HashMap = new HashMap();
 
-		public static function setConfig(data : VehiclePathDataProto) : void
-		{
-			if(data)
-				_map.add(data.id, data);
-			else
-				GameLog.addShow("找不到VehiclePathCfgData配置");
-		}
-
-		public static function getData(id : uint) : VehiclePathDataProto
-		{
-			var data : VehiclePathDataProto = _map.getValue(id);
-			return data;
-		}
-
-		public static function createPaths(data : VehiclePathDataProto) : Vector.<TrailPathPoint>
-		{
-			var paths : Vector.<TrailPathPoint> = new Vector.<TrailPathPoint>();
-			if (data)
-			{
-				for each (var pointData : VehiclePathPointDataProto in data.points)
-				{
-					var pathPoint : TrailPathPoint = new TrailPathPoint(pointData.x, pointData.y, pointData.z, pointData.speed, pointData.tiltAngle, pointData.baseActionSpeed, String(pointData.statusType));
-					paths.push(pathPoint);
-				}
-			}
-			return paths;
-		}
+//		public static function setConfig(data : VehiclePathDataProto) : void
+//		{
+//			if(data)
+//				_map.add(data.id, data);
+//			else
+//				GameLog.addShow("找不到VehiclePathCfgData配置");
+//		}
+//
+//		public static function getData(id : uint) : VehiclePathDataProto
+//		{
+//			var data : VehiclePathDataProto = _map.getValue(id);
+//			return data;
+//		}
+//
+//		public static function createPaths(data : VehiclePathDataProto) : Vector.<TrailPathPoint>
+//		{
+//			var paths : Vector.<TrailPathPoint> = new Vector.<TrailPathPoint>();
+//			if (data)
+//			{
+//				for each (var pointData : VehiclePathPointDataProto in data.points)
+//				{
+//					var pathPoint : TrailPathPoint = new TrailPathPoint(pointData.x, pointData.y, pointData.z, pointData.speed, pointData.tiltAngle, pointData.baseActionSpeed, String(pointData.statusType));
+//					paths.push(pathPoint);
+//				}
+//			}
+//			return paths;
+//		}
 	}
 }

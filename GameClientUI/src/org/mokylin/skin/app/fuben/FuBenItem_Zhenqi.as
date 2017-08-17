@@ -37,11 +37,7 @@ package org.mokylin.skin.app.fuben
 
 		public var iconFirst:feathers.controls.UIAsset;
 
-		public var icon_1:feathers.controls.UIAsset;
-
 		public var icon_2:feathers.controls.UIAsset;
-
-		public var icon_3:feathers.controls.UIAsset;
 
 		public var lbNum:feathers.controls.Label;
 
@@ -69,8 +65,6 @@ package org.mokylin.skin.app.fuben
 
 		public var uiName:feathers.controls.UIAsset;
 
-		public var uiOk:feathers.controls.UIAsset;
-
 		public var uiTishi:feathers.controls.UIAsset;
 
 		public var xin1:feathers.controls.UIAsset;
@@ -90,7 +84,7 @@ package org.mokylin.skin.app.fuben
 			this.currentState = "normal";
 			this.height = 418;
 			this.width = 221;
-			this.elementsContent = [uiBg_i(),__FuBenItem_Zhenqi_UIAsset1_i(),uiName_i(),uiLevel_i(),grpFirst_i(),uiJiangli_i(),icon_1_i(),icon_2_i(),icon_3_i(),grpXin_i(),grpXinL_i(),grp_Tuijian_i(),combatgroup_i(),resetgroup_i(),uiOk_i(),uiTishi_i()];
+			this.elementsContent = [uiBg_i(),__FuBenItem_Zhenqi_UIAsset1_i(),uiName_i(),uiLevel_i(),grpFirst_i(),uiJiangli_i(),icon_2_i(),grpXin_i(),grpXinL_i(),grp_Tuijian_i(),combatgroup_i(),resetgroup_i(),uiTishi_i()];
 			
 			states = {
 			};
@@ -249,17 +243,6 @@ package org.mokylin.skin.app.fuben
 			return temp;
 		}
 
-		private function icon_1_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon_1 = temp;
-			temp.name = "icon_1";
-			temp.styleName = "ui/common/grid/normal/36.png";
-			temp.x = 32;
-			temp.y = 205;
-			return temp;
-		}
-
 		private function icon_2_i():feathers.controls.UIAsset
 		{
 			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
@@ -267,17 +250,6 @@ package org.mokylin.skin.app.fuben
 			temp.name = "icon_2";
 			temp.styleName = "ui/common/grid/normal/36.png";
 			temp.x = 89;
-			temp.y = 205;
-			return temp;
-		}
-
-		private function icon_3_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			icon_3 = temp;
-			temp.name = "icon_3";
-			temp.styleName = "ui/common/grid/normal/36.png";
-			temp.x = 145;
 			temp.y = 205;
 			return temp;
 		}
@@ -434,17 +406,6 @@ package org.mokylin.skin.app.fuben
 			temp.styleName = "ui/app/fuben/mc/zhenqi/50.png";
 			temp.x = 53;
 			temp.y = 5;
-			return temp;
-		}
-
-		private function uiOk_i():feathers.controls.UIAsset
-		{
-			var temp:feathers.controls.UIAsset = new feathers.controls.UIAsset();
-			uiOk = temp;
-			temp.name = "uiOk";
-			temp.styleName = "ui/common/yilingqu.png";
-			temp.x = 60;
-			temp.y = 85;
 			return temp;
 		}
 

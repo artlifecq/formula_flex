@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.info.friend
 {
-	import app.message.SingleRelation;
+	
 
 	public class FriendBaseInfo
 	{
@@ -59,24 +59,24 @@ package com.rpgGame.coreData.info.friend
 		public var time : Number;
 		
 		/**设置详细数据**/
-		public function setupSingleRelation(detail:SingleRelation):void
-		{
-			if(!detail.id)
-			{
-				trace("发了个没有id的好友过来");
-				return;
-			}
-			id = detail.id.toNumber();
-			name = detail.name;
-			level = detail.level;
-			country = detail.country;
-//			hasSell = detail.hasSell;
-			isMale = detail.isMale;
-			head = detail.head;
-//			familyName = detail.familyName?BytesUtil.bytes2UTF(detail.familyName):"";
-//			guildName =  detail.guildName?BytesUtil.bytes2UTF(detail.guildName):"";
-			_mood =  detail.mood;
-		}
+//		public function setupSingleRelation(detail:SingleRelation):void
+//		{
+//			if(!detail.id)
+//			{
+//				trace("发了个没有id的好友过来");
+//				return;
+//			}
+//			id = detail.id.toNumber();
+//			name = detail.name;
+//			level = detail.level;
+//			country = detail.country;
+////			hasSell = detail.hasSell;
+//			isMale = detail.isMale;
+//			head = detail.head;
+////			familyName = detail.familyName?BytesUtil.bytes2UTF(detail.familyName):"";
+////			guildName =  detail.guildName?BytesUtil.bytes2UTF(detail.guildName):"";
+//			_mood =  detail.mood;
+//		}
 		
 		public function get mood():String
 		{

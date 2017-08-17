@@ -7,7 +7,6 @@ package org.mokylin.skin.app.siwangfuhuo
 	import feathers.controls.StateSkin;
 	import feathers.controls.UIAsset;
 	import org.mokylin.skin.common.TongYongPanelbg2;
-	import org.mokylin.skin.component.button.ButtonSkin_putong;
 	import org.mokylin.skin.component.button.ButtonSkin_putong2;
 
 	/**
@@ -24,13 +23,15 @@ package org.mokylin.skin.app.siwangfuhuo
 
 		public var btn_fuhuodian:feathers.controls.Button;
 
-		public var btn_goumai:feathers.controls.Button;
-
 		public var btn_yuandi:feathers.controls.Button;
 
-		public var lbl_msg:feathers.controls.Label;
+		public var lbDanyao:feathers.controls.Label;
 
-		public var lbl_time:feathers.controls.Label;
+		public var lbGoumai:feathers.controls.Label;
+
+		public var lbMianfei:feathers.controls.Label;
+
+		public var lbl_msg:feathers.controls.Label;
 
 
 		//==========================================================================
@@ -41,8 +42,9 @@ package org.mokylin.skin.app.siwangfuhuo
 			super();
 			
 			this.currentState = "normal";
-			this.height = 415;
-			this.elementsContent = [bg_i(),__fuhuo_Skin_UIAsset1_i(),__fuhuo_Skin_UIAsset2_i(),__fuhuo_Skin_UIAsset3_i(),lbl_msg_i(),lbl_time_i(),btn_fuhuodian_i(),btn_yuandi_i(),btn_goumai_i()];
+			this.height = 429;
+			this.width = 675;
+			this.elementsContent = [bg_i(),__fuhuo_Skin_UIAsset1_i(),__fuhuo_Skin_UIAsset2_i(),__fuhuo_Skin_UIAsset3_i(),lbl_msg_i(),btn_fuhuodian_i(),btn_yuandi_i(),lbDanyao_i(),lbGoumai_i(),lbMianfei_i()];
 			
 			states = {
 			};
@@ -89,7 +91,7 @@ package org.mokylin.skin.app.siwangfuhuo
 			var temp:feathers.controls.SkinnableContainer = new feathers.controls.SkinnableContainer();
 			bg = temp;
 			temp.name = "bg";
-			temp.height = 415;
+			temp.height = 429;
 			var skin:StateSkin = new org.mokylin.skin.common.TongYongPanelbg2()
 			temp.skin = skin
 			temp.x = 0;
@@ -103,29 +105,13 @@ package org.mokylin.skin.app.siwangfuhuo
 			btn_fuhuodian = temp;
 			temp.name = "btn_fuhuodian";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.label = "返回复活点复活";
-			temp.fontSize = 16;
-			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong;
-			temp.color = 0xFFFFFF;
-			temp.width = 129;
-			temp.x = 400;
-			temp.y = 362;
-			return temp;
-		}
-
-		private function btn_goumai_i():feathers.controls.Button
-		{
-			var temp:feathers.controls.Button = new feathers.controls.Button();
-			btn_goumai = temp;
-			temp.name = "btn_goumai";
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.label = "购买还魂丹";
+			temp.label = "复活点(30s)";
 			temp.fontSize = 16;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xFFFFFF;
-			temp.width = 101;
-			temp.x = 213;
-			temp.y = 362;
+			temp.width = 125;
+			temp.x = 386;
+			temp.y = 374;
 			return temp;
 		}
 
@@ -135,13 +121,53 @@ package org.mokylin.skin.app.siwangfuhuo
 			btn_yuandi = temp;
 			temp.name = "btn_yuandi";
 			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.label = "使用还魂丹原地复活";
+			temp.label = "原地复活";
 			temp.fontSize = 16;
 			temp.styleClass = org.mokylin.skin.component.button.ButtonSkin_putong2;
 			temp.color = 0xFFFFFF;
-			temp.width = 151;
-			temp.x = 53;
-			temp.y = 362;
+			temp.width = 125;
+			temp.x = 166;
+			temp.y = 374;
+			return temp;
+		}
+
+		private function lbDanyao_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbDanyao = temp;
+			temp.name = "lbDanyao";
+			temp.text = "还魂丹 0/1";
+			temp.color = 0xEAEABC;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 173;
+			temp.y = 353;
+			return temp;
+		}
+
+		private function lbGoumai_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbGoumai = temp;
+			temp.name = "lbGoumai";
+			temp.text = "购买";
+			temp.color = 0x00FF33;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.underline = true;
+			temp.x = 251;
+			temp.y = 353;
+			return temp;
+		}
+
+		private function lbMianfei_i():feathers.controls.Label
+		{
+			var temp:feathers.controls.Label = new feathers.controls.Label();
+			lbMianfei = temp;
+			temp.name = "lbMianfei";
+			temp.text = "免费";
+			temp.color = 0xBBBDAA;
+			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
+			temp.x = 431;
+			temp.y = 353;
 			return temp;
 		}
 
@@ -150,25 +176,11 @@ package org.mokylin.skin.app.siwangfuhuo
 			var temp:feathers.controls.Label = new feathers.controls.Label();
 			lbl_msg = temp;
 			temp.name = "lbl_msg";
-			temp.htmlText = "你被<font color='#5DBD37'>【贪婪的食尸鬼】</font>杀死了（2016年11月10日 15：50：30）";
-			temp.color = 0xe1201c;
+			temp.htmlText = "你被<font color='#00ff33'>【贪婪的食尸鬼】</font>杀死了（2016年11月10日 15：50：30）";
+			temp.color = 0xE1201C;
 			temp.nativeFilters = Fontter.filterObj["labelFilterBlack"];
 			temp.x = 25;
 			temp.y = 119;
-			return temp;
-		}
-
-		private function lbl_time_i():feathers.controls.Label
-		{
-			var temp:feathers.controls.Label = new feathers.controls.Label();
-			lbl_time = temp;
-			temp.name = "lbl_time";
-			temp.text = "剩余：28秒";
-			temp.color = 0x00FF33;
-			temp.nativeFilters = Fontter.filterObj["textFilterBlackGreen"];
-			temp.width = 96;
-			temp.x = 537;
-			temp.y = 371;
 			return temp;
 		}
 

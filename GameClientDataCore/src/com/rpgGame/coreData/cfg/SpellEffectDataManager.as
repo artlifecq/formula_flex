@@ -1,12 +1,8 @@
 package com.rpgGame.coreData.cfg
 {
-	import com.netease.protobuf.ReadUtils;
 	import com.rpgGame.coreData.clientConfig.Q_SpellEffect;
 	
 	import flash.utils.ByteArray;
-	
-	import app.message.SpellEffectConfig;
-	import app.message.SpellEffectProto;
 	
 	import org.client.mainCore.ds.HashMap;
 

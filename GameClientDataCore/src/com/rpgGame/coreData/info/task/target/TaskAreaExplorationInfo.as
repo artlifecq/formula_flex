@@ -1,6 +1,6 @@
 package com.rpgGame.coreData.info.task.target
 {
-	import app.message.AreaDataProto;
+	
 
 	/**
 	 *
@@ -12,7 +12,7 @@ package com.rpgGame.coreData.info.task.target
 	public class TaskAreaExplorationInfo extends BaseTaskTargetInfo
 	{
 		/**探索 区域*/
-		public var targetArea : AreaDataProto;
+		public var targetArea : Object;
 
 		public function TaskAreaExplorationInfo()
 		{

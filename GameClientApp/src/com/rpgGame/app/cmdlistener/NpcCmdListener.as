@@ -8,12 +8,8 @@ package com.rpgGame.app.cmdlistener
 	import com.rpgGame.coreData.cfg.npc.VehiclePathCfgData;
 	import com.rpgGame.coreData.info.move.TrailPathPoint;
 	import com.rpgGame.coreData.lang.LangTask;
-
-	import app.cmd.NpcModuleMessages;
-	import app.message.VehiclePathDataProto;
-
+	
 	import org.client.mainCore.bean.BaseBean;
-	import org.game.netCore.connection.SocketConnection_protoBuffer;
 	import org.game.netCore.net_protobuff.ByteBuffer;
 
 	/**
@@ -32,10 +28,10 @@ package com.rpgGame.app.cmdlistener
 
 		override public function start() : void
 		{
-			SocketConnection_protoBuffer.addCmdListener(NpcModuleMessages.S2C_ON_CLICK_NPC, onClickNpc);
-			SocketConnection_protoBuffer.addCmdListener(NpcModuleMessages.S2C_ON_CLICK_NPC_FAIL, onClickNpcFail);
-			SocketConnection_protoBuffer.addCmdListener(NpcModuleMessages.S2C_VEHICLE_PLAYER, onVehiclePlayer);
-			SocketConnection_protoBuffer.addCmdListener(NpcModuleMessages.S2C_VEHICLE_PLAYER_FAIL, onVehiclePlayerFail);
+//			SocketConnection_protoBuffer.addCmdListener(NpcModuleMessages.S2C_ON_CLICK_NPC, onClickNpc);
+//			SocketConnection_protoBuffer.addCmdListener(NpcModuleMessages.S2C_ON_CLICK_NPC_FAIL, onClickNpcFail);
+//			SocketConnection_protoBuffer.addCmdListener(NpcModuleMessages.S2C_VEHICLE_PLAYER, onVehiclePlayer);
+//			SocketConnection_protoBuffer.addCmdListener(NpcModuleMessages.S2C_VEHICLE_PLAYER_FAIL, onVehiclePlayerFail);
 
 			finish();
 		}
@@ -86,21 +82,21 @@ package com.rpgGame.app.cmdlistener
 		 */
 		private function onVehiclePlayer(buffer : ByteBuffer) : void
 		{
-			var objId : Number = buffer.readVarint64();
-			var vehicleId : int = buffer.readVarint32();
-			var startTime : Number = buffer.readVarint64();
-			var role : SceneRole = SceneManager.getSceneObjByID(objId) as SceneRole;
-			if (role)
-			{
-				var data : VehiclePathDataProto = VehiclePathCfgData.getData(vehicleId);
-				if (data)
-				{
-					var mountRes : String = data.mountRes;
-					var mountModelId : int = data.mountModelId;
-					var paths : Vector.<TrailPathPoint> = VehiclePathCfgData.createPaths(data);
-					TrailManager.getInstance().play(role, paths, data.isClingGround, startTime, mountRes, mountModelId);
-				}
-			}
+//			var objId : Number = buffer.readVarint64();
+//			var vehicleId : int = buffer.readVarint32();
+//			var startTime : Number = buffer.readVarint64();
+//			var role : SceneRole = SceneManager.getSceneObjByID(objId) as SceneRole;
+//			if (role)
+//			{
+//				var data : VehiclePathDataProto = VehiclePathCfgData.getData(vehicleId);
+//				if (data)
+//				{
+//					var mountRes : String = data.mountRes;
+//					var mountModelId : int = data.mountModelId;
+//					var paths : Vector.<TrailPathPoint> = VehiclePathCfgData.createPaths(data);
+//					TrailManager.getInstance().play(role, paths, data.isClingGround, startTime, mountRes, mountModelId);
+//				}
+//			}
 		}
 
 		/**
