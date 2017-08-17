@@ -1,6 +1,8 @@
 package com.rpgGame.app.manager
 {
 	import com.game.engine3D.utils.MathUtil;
+	import com.rpgGame.app.cmdlistener.enum.EnumItemlId;
+	import com.rpgGame.app.cmdlistener.enum.EnumfFaction;
 	import com.rpgGame.app.graphics.StallHeadFace;
 	import com.rpgGame.app.manager.chat.NoticeManager;
 	import com.rpgGame.app.manager.ctrl.ControlAutoPick;
@@ -233,7 +235,7 @@ package com.rpgGame.app.manager
 				}
 				else
 				{
-					if(collectData.faction==MainRoleManager.actorInfo.faction||collectData.faction==0||collectData.modelID==2263)//祝福石特殊处理
+					if(collectData.faction==MainRoleManager.actorInfo.faction||collectData.faction==EnumfFaction.COMMON||collectData.modelID==EnumItemlId.ZHUFUSHI)//祝福石特殊处理
 					{
 						TaskSender.sendStartGatherMessage(collectData.serverID);
 					}else{
