@@ -514,8 +514,9 @@ package com.rpgGame.app.ui.main
 			}
 			else if(mapCfg.q_map_zones==1||mapCfg.q_map_type!=EnumMapType.MAP_TYPE_NORMAL){//副本或者不是普通的基本地图
 				this.removeChild(_taskBar);
-				this.addChild(_trackerBar);
+				this.removeChild(_trackerBar);
 				this.removeChild(_hubaoTrackerBar);
+				this.addChild(_trackerBar);
 			}else{
 				this.addChild(_taskBar);
 				this.removeChild(_trackerBar);
