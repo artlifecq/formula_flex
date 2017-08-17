@@ -65,7 +65,7 @@ package com.rpgGame.app.scene.trigger.handler
 			DungeonSender.reqTrigger(triggerData.id);///通知服务器 触发消息
 		}
 		/**收到服务器触发消息*/
-		public static function serverTrigger(triggerId : int):void
+		public function serverTrigger(triggerId : int):void
 		{
 			var triggerData : ClientTrigger = TriggerCfgData.getClientTrigger(triggerId);
 			if (triggerData)
@@ -98,7 +98,7 @@ package com.rpgGame.app.scene.trigger.handler
 			
 		}
 		/**玩家进入触发信息初始化*/
-		public static function triggerInit(tidLis:Vector.<int>):void
+		public function triggerInit(tidLis:Vector.<int>):void
 		{
 			var trAreaList:Array=new Array();
 			var trEffectList:Array=new Array();
@@ -183,7 +183,7 @@ package com.rpgGame.app.scene.trigger.handler
 		
 		
 		
-		public static function clearTigerByZone(zid : int) : void
+		public function clearTigerByZone(zid : int) : void
 		{
 			var triggerList:Vector.<ClientTrigger>=TriggerCfgData.getTriggerInZone(zid);
 			for each(var triger:ClientTrigger in triggerList)
@@ -191,7 +191,7 @@ package com.rpgGame.app.scene.trigger.handler
 				triger.isTrigging=false;
 			}
 		}
-		private static function clearTigerList(triggers:Array) : void
+		private function clearTigerList(triggers:Array) : void
 		{
 			var triger:ClientTrigger;
 			for(var i:int=0;i<triggers.length;i++)
