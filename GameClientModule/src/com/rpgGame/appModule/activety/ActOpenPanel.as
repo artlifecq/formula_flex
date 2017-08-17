@@ -4,6 +4,7 @@ package com.rpgGame.appModule.activety
 	import com.rpgGame.app.manager.Mgr;
 	import com.rpgGame.app.sender.SpecialActivitySender;
 	import com.rpgGame.app.ui.SkinUIPanel;
+	import com.rpgGame.core.app.AppConstant;
 	import com.rpgGame.core.app.AppManager;
 	import com.rpgGame.core.events.ActivityEvent;
 	import com.rpgGame.coreData.cfg.StaticValue;
@@ -46,7 +47,7 @@ package com.rpgGame.appModule.activety
 		private function closeAct(data:*=null):void
 		{
 			if(actInfo.actCfg.q_activity_id==data){
-				this.hide();
+				AppManager.hideApp(AppConstant.ACTIVETY_OPEN);
 			}
 		}
 		
