@@ -200,7 +200,7 @@ package com.rpgGame.coreData
 			if (_bodyEffectID2)
 			{
 				_bodyEffectID2=_bodyEffectID2.indexOf(ClientConfig.eName_AWD)!=-1?_bodyEffectID2:ClientConfig.getEffect(_bodyEffectID2);//带awd就使用原来的
-				_rpd_body_effect2 = new RenderParamData3D(RenderUnitID.BODY_EFFECT2, RenderUnitType.BODY_EFFECT2, ClientConfig.getEffect(_bodyEffectID2));
+				_rpd_body_effect2 = new RenderParamData3D(RenderUnitID.BODY_EFFECT2, RenderUnitType.BODY_EFFECT2, _bodyEffectID2);
 				_rpd_body_effect2.mouseEnable = false;
 				_rpd_body_effect2.clearSameType = false;
 				_rpd_body_effect2.priority = _priority;
