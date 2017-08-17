@@ -162,7 +162,7 @@ package
 			
 			try
 			{
-				if (ClientConfig.isDebug)
+				if (!ClientConfig.isRelease)
 				{
 					Away3D.REQUEST_HIGHEST_PROFILE = false;
 					Stage3DLayerManager.setup(this.stage, this.stage, stage3DLayerSetupComplete, stage3DLayerSetupError, stage3DLayerUserDisabledError, 1, 10, CameraController.forceStopPanning, onMemoryTooHighed, true,"standardConstrained");
@@ -220,7 +220,7 @@ package
 					Stage3DLayerManager.starlingLayer.setLayer("alert", 9);
 					Stage3DLayerManager.starlingLayer.setLayer("loading", 8);
 					Stage3DLayerManager.starlingLayer.setLayer("login", 7);
-					if (ClientConfig.isDebug)
+					if (!ClientConfig.isRelease)
 					{
 						StatsUtil.showAwayStats(Stage3DLayerManager.stage, Stage3DLayerManager.stage3DProxy);
 					}
@@ -273,7 +273,7 @@ package
 		
 		private function showPlayerInfo():Boolean
 		{
-			if (ClientConfig.isRelease && !ClientConfig.isDebug && Capabilities.isDebugger)
+			if (ClientConfig.isRelease && Capabilities.isDebugger)
 			{
 				TipsInfoView2D.showAlert2D("您当前的Flash插件是debug版本，游戏性能较低，为了您能有更好的游戏体验，请安装release版本的插件。", onShowPlayerOkFunc);
 				return true;
