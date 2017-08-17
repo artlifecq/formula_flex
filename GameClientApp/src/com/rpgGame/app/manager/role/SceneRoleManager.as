@@ -566,22 +566,10 @@ package com.rpgGame.app.manager.role
 			role.rotationY = data.direction;
 			SceneManager.addSceneObjToScene(role, true,true, true);
 			var qua:int=ItemConfig.getItemQuality(data.goodsDatas.itemModelId);
+			qua=1;
 			if (qua>0) 
 			{
-				var rud:RenderParamData3D = new RenderParamData3D(RenderUnitID.DROP_ITEM_EFFECT, RenderUnitType.DROP_ITEM_EFFECT, ClientConfig.getDropItemQuatityEffect(qua));
-				rud.clearSameType = true;
-				var effectRu : RenderUnit3D=role.avatar.addRenderUnit(rud);
-				effectRu.allowCameraAnimator =false;
-				effectRu.repeat = 0;
-				effectRu.x = 0;
-				effectRu.y = 0;
-				effectRu.z = 0;
-				effectRu.scaleX=1;
-				effectRu.scaleY=1;
-				effectRu.scaleZ=1;
-				effectRu.rotationY = 0;
-				effectRu.completeWhenInvisible = true;
-				effectRu.play(0);
+				role.updateBodyEft(ClientConfig.getDropItemQuatityEffect(qua));
 			}
 			
 			DropGoodsManager.getInstance().addDropGoods(role);

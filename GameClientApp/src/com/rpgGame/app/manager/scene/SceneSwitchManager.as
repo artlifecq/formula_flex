@@ -84,7 +84,7 @@ package com.rpgGame.app.manager.scene
 		 */
 		public static var isToCrossMap:Boolean;
 		
-		private static var _isChangeSceneComplete : Boolean = false;
+		private static var _isChangeSceneComplete : Boolean = true;
 		private static var _mapRes : String = null;
 		public static var needOpenNewFuncId:int;
 		setup();
